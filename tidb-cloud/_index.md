@@ -10,7 +10,7 @@ hide_commit: true
 
 [TiDB Cloudを選ぶ理由](https://docs.pingcap.com/tidbcloud/tidb-cloud-intro)
 
-[建築](https://docs.pingcap.com/tidbcloud/tidb-cloud-intro#architecture)
+[アーキテクチャ](https://docs.pingcap.com/tidbcloud/tidb-cloud-intro#architecture)
 
 [FAQ](https://docs.pingcap.com/tidbcloud/tidb-cloud-faq)
 
@@ -38,17 +38,17 @@ hide_commit: true
 
 <LearningPath label="Use" icon="cloud7">
 
-[クラスターを作成する](https://docs.pingcap.com/tidbcloud/create-tidb-cluster)
+[クラスタを作成する](https://docs.pingcap.com/tidbcloud/create-tidb-cluster)
 
-[クラスターに接続する](https://docs.pingcap.com/tidbcloud/connect-to-tidb-cluster)
+[クラスタに接続する](https://docs.pingcap.com/tidbcloud/connect-to-tidb-cluster)
 
-[HTAP クラスターを使用する](https://docs.pingcap.com/tidbcloud/tiflash-overview)
+[HTAPクラスタを使用する](https://docs.pingcap.com/tidbcloud/tiflash-overview)
 
-[クラスターのスケーリング](https://docs.pingcap.com/tidbcloud/scale-tidb-cluster)
+[クラスタのスケーリング](https://docs.pingcap.com/tidbcloud/scale-tidb-cluster)
 
-[クラスターをアップグレードする](https://docs.pingcap.com/tidbcloud/upgrade-tidb-cluster)
+[クラスタをアップグレードする](https://docs.pingcap.com/tidbcloud/upgrade-tidb-cluster)
 
-[クラスターを削除する](https://docs.pingcap.com/tidbcloud/delete-tidb-cluster)
+[クラスタを削除する](https://docs.pingcap.com/tidbcloud/delete-tidb-cluster)
 
 </LearningPath>
 

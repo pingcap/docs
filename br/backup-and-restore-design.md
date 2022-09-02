@@ -29,15 +29,56 @@ BR は、次の種類のバックアップ ファイルを生成できます。
 
 ### SST ファイルの命名形式 {#naming-format-of-sst-files}
 
-SST ファイルは`storeID_regionID_regionEpoch_keyHash_cf`の形式で名前が付けられます。フォーマットのフィールドは次のように説明されています。
+データが Google Cloud Storage または Azure Blob Storage にバックアップされる場合、SST ファイルは`storeID_regionID_regionEpoch_keyHash_timestamp_cf`の形式で名前が付けられます。フォーマットのフィールドは次のように説明されています。
 
 -   `storeID`は TiKV ノード ID です。
 -   `regionID`はリージョンID です。
 -   `regionEpoch`はリージョンのバージョン番号です。
 -   `keyHash`は範囲の startKey のハッシュ (sha256) 値であり、キーの一意性を保証します。
+-   `timestamp`は、TiKV で生成されたときの SST ファイルの Unix タイムスタンプです。
+-   `cf`は RocksDB のカラムファミリーを示します (デフォルトでは`default`または`write` )。
+
+データが Amazon S3 またはネットワーク ディスクにバックアップされる場合、SST ファイルは`regionID_regionEpoch_keyHash_timestamp_cf`の形式で名前が付けられます。フォーマットのフィールドは次のように説明されています。
+
+-   `regionID`はリージョンID です。
+-   `regionEpoch`はリージョンのバージョン番号です。
+-   `keyHash`は範囲の startKey のハッシュ (sha256) 値であり、キーの一意性を保証します。
+-   `timestamp`は、TiKV で生成されたときの SST ファイルの Unix タイムスタンプです。
 -   `cf`は RocksDB のカラムファミリーを示します (デフォルトでは`default`または`write` )。
 
 ### SST ファイルの保存形式 {#storage-format-of-sst-files}
 
 -   SST ファイルの保存形式の詳細については、 [Rocksdb BlockBasedTable フォーマット](https://github.com/facebook/rocksdb/wiki/Rocksdb-BlockBasedTable-Format)を参照してください。
 -   SST ファイルのバックアップ データのエンコード形式の詳細については、 [テーブル データの Key-Value へのマッピング](/tidb-computing.md#mapping-of-table-data-to-key-value)を参照してください。
+
+### バックアップファイルの構造 {#backup-file-structure}
+
+データを Google Cloud Storage または Azure Blob Storage にバックアップすると、SST ファイル、backupmeta ファイル、backup.lock ファイルが次の構造の同じディレクトリに保存されます。
+
+```
+.
+└── 20220621
+    ├── backupmeta
+    |—— backup.lock
+    ├── {storeID}-{regionID}-{regionEpoch}-{keyHash}-{timestamp}-{cf}.sst
+    ├── {storeID}-{regionID}-{regionEpoch}-{keyHash}-{timestamp}-{cf}.sst
+    └── {storeID}-{regionID}-{regionEpoch}-{keyHash}-{timestamp}-{cf}.sst
+```
+
+データを Amazon S3 またはネットワーク ディスクにバックアップすると、SST ファイルは storeID に基づいてサブディレクトリに保存されます。構造は次のとおりです。
+
+```
+.
+└── 20220621
+    ├── backupmeta
+    |—— backup.lock
+    ├── store1
+    │   └── {regionID}-{regionEpoch}-{keyHash}-{timestamp}-{cf}.sst
+    ├── store100
+    │   └── {regionID}-{regionEpoch}-{keyHash}-{timestamp}-{cf}.sst
+    ├── store2
+    │   └── {regionID}-{regionEpoch}-{keyHash}-{timestamp}-{cf}.sst
+    ├── store3
+    ├── store4
+    └── store5
+```

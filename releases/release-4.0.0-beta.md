@@ -40,7 +40,7 @@ TiDB Ansible バージョン: 4.0.0-beta
 -   `Chunk`を使用して TiKV との通信のエンコード形式を最適化し、通信パフォーマンスを向上させます[#12023](https://github.com/pingcap/tidb/pull/12023) [#12536](https://github.com/pingcap/tidb/pull/12536) [#12613](https://github.com/pingcap/tidb/pull/12613) [#12621](https://github.com/pingcap/tidb/pull/12621) [#12899](https://github.com/pingcap/tidb/pull/12899) [#13060](https://github.com/pingcap/tidb/pull/13060) [#13349](https://github.com/pingcap/tidb/pull/13349)
 -   ワイド テーブル[#12634](https://github.com/pingcap/tidb/pull/12634)のパフォーマンスを向上させる新しい行ストア形式をサポートします。
 -   `Recover Binlog`インターフェースを最適化して、すべてのトランザクションがコミットされるのを待ってからクライアント[#13740](https://github.com/pingcap/tidb/pull/13740)に戻るようにする
--   HTTP `info/all`インターフェイス[#13025](https://github.com/pingcap/tidb/pull/13025)を介して、クラスタの TiDB サーバーによって有効にされた binlog ステータスのクエリをサポートします。
+-   HTTP `info/all`インターフェイス[#13025](https://github.com/pingcap/tidb/pull/13025)を介して、クラスター内の TiDB サーバーによって有効にされた binlog ステータスのクエリをサポートします。
 -   ペシミスティック トランザクション モードを使用する場合、MySQL 互換の`Read Committed`トランザクション分離レベルをサポートします[#14087](https://github.com/pingcap/tidb/pull/14087)
 -   大規模なトランザクションをサポートします。トランザクション サイズは、物理メモリのサイズによって制限されます。
     -   [#11999](https://github.com/pingcap/tidb/pull/11999) [#11986](https://github.com/pingcap/tidb/pull/11986) [#11974](https://github.com/pingcap/tidb/pull/11974) [#11817](https://github.com/pingcap/tidb/pull/11817) [#11807](https://github.com/pingcap/tidb/pull/11807)
@@ -92,12 +92,12 @@ TiDB Ansible バージョン: 4.0.0-beta
 
 -   ストレージノードの負荷情報に応じたホットスポットスケジューリングの最適化をサポート
     -   [#1870](https://github.com/pingcap/pd/pull/1870) [#1982](https://github.com/pingcap/pd/pull/1982) [#1998](https://github.com/pingcap/pd/pull/1998) [#1843](https://github.com/pingcap/pd/pull/1843) [#1750](https://github.com/pingcap/pd/pull/1750)
--   さまざまなスケジューリング ルールを組み合わせて、任意のデータ範囲のレプリカの数、ストレージの場所、ストレージ ホストの種類、および役割の制御をサポートする配置ルール機能を追加します。
+-   さまざまなスケジューリング ルールを組み合わせて、任意のデータ範囲のレプリカの数、ストレージの場所、ストレージ ホストの種類、および役割を制御できる配置ルール機能を追加します。
     -   [#2051](https://github.com/pingcap/pd/pull/2051) [#1999](https://github.com/pingcap/pd/pull/1999) [#2042](https://github.com/pingcap/pd/pull/2042) [#1917](https://github.com/pingcap/pd/pull/1917) [#1904](https://github.com/pingcap/pd/pull/1904)
     -   [#1897](https://github.com/pingcap/pd/pull/1897) [#1894](https://github.com/pingcap/pd/pull/1894) [#1865](https://github.com/pingcap/pd/pull/1865) [#1855](https://github.com/pingcap/pd/pull/1855) [#1834](https://github.com/pingcap/pd/pull/1834)
 -   プラグインを使用したサポート (実験的) [#1799](https://github.com/pingcap/pd/pull/1799)
 -   スケジューラーがカスタマイズされた構成とキー範囲をサポートする機能を追加 (実験的) [#1735](https://github.com/pingcap/pd/pull/1735) [#1783](https://github.com/pingcap/pd/pull/1783) [#1791](https://github.com/pingcap/pd/pull/1791)
--   クラスタの負荷情報に応じてスケジューリング速度を自動的に調整するサポート (実験的、デフォルトでは無効) [#1875](https://github.com/pingcap/pd/pull/1875) [#1887](https://github.com/pingcap/pd/pull/1887) [#1902](https://github.com/pingcap/pd/pull/1902)
+-   クラスターの負荷情報に応じてスケジューリング速度を自動的に調整するサポート (実験的、デフォルトでは無効) [#1875](https://github.com/pingcap/pd/pull/1875) [#1887](https://github.com/pingcap/pd/pull/1887) [#1902](https://github.com/pingcap/pd/pull/1902)
 
 ## ツール {#tools}
 

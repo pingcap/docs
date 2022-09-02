@@ -31,7 +31,7 @@ DESC cluster_hardware;
 フィールドの説明:
 
 -   `TYPE` : [`information_schema.cluster_info`](/information-schema/information-schema-cluster-info.md)テーブルの`TYPE`フィールドに対応します。オプションの値は`tidb` 、 `pd` 、および`tikv`です。
--   `INSTANCE` : [`information_schema.cluster_info`](/information-schema/information-schema-cluster-info.md)クラスタ情報テーブルの`INSTANCE`フィールドに対応します。
+-   `INSTANCE` : [`information_schema.cluster_info`](/information-schema/information-schema-cluster-info.md)クラスター情報テーブルの`INSTANCE`フィールドに対応します。
 -   `DEVICE_TYPE` : ハードウェア タイプ。現在、 `cpu` 、 `memory` 、 `disk` 、および`net`タイプを照会できます。
 -   `DEVICE_NAME` : ハードウェア名。 `DEVICE_NAME`の値は`DEVICE_TYPE`によって異なります。
     -   `cpu` : ハードウェア名は cpu です。

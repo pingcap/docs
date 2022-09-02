@@ -5,7 +5,7 @@ summary: Learn some key metrics displayed on the Grafana PD dashboard.
 
 # PD の主要な監視指標 {#key-monitoring-metrics-of-pd}
 
-TiUP を使用して TiDBクラスタをデプロイすると、監視システム (Prometheus &amp; Grafana) が同時にデプロイされます。詳細については、 [監視フレームワークの概要](/tidb-monitoring-framework.md)を参照してください。
+TiUP を使用して TiDB クラスターをデプロイすると、監視システム (Prometheus &amp; Grafana) が同時にデプロイされます。詳細については、 [監視フレームワークの概要](/tidb-monitoring-framework.md)を参照してください。
 
 Grafana ダッシュボードは、Overview、PD、TiDB、TiKV、Node_exporter、Disk Performance、Performance_overview などを含む一連のサブ ダッシュボードに分かれています。診断に役立つ多くの指標があります。
 
@@ -14,25 +14,25 @@ Grafana ダッシュボードは、Overview、PD、TiDB、TiKV、Node_exporter�
 以下は、PD ダッシュボード メトリック アイテムの説明です。
 
 -   PD ロール: 現在の PD インスタンスのロール
--   ストレージ容量: この TiDBクラスタの合計ストレージ容量
--   現在のストレージ サイズ: TiDBクラスタによって現在使用されているストレージ サイズ
+-   ストレージ容量: この TiDB クラスターの合計ストレージ容量
+-   現在のストレージ サイズ: TiDB クラスターによって現在使用されているストレージ サイズ
 -   現在のストレージ使用率: 現在のストレージ使用率
 -   通常のストア: 正常なストレージ インスタンスの数
--   Number of Regions:クラスタリージョンの合計数
+-   Number of Regions: クラスタ リージョンの合計数
 -   異常な店舗: 異常な店舗の数。通常の値は`0`です。数値が`0`より大きい場合、少なくとも 1 つのインスタンスが異常であることを意味します。
 -   リージョンの正常性: 保留中のピア、ダウンしているピア、余分なピア、オフラインのピア、欠落しているピア、学習者のピア、不適切な名前空間など、異常なリージョンの数によって示されるリージョンの正常性ステータス。通常、保留中のピアの数は`100`未満にする必要があります。不足しているピアが永続的に`0`を超えないようにする必要があります。空のリージョンが多数存在する場合は、時間内にリージョンマージを有効にします。
--   現在のピア数: すべてのクラスタピアの現在の数![PD Dashboard - Header](/media/pd-dashboard-header-v4.png)
+-   現在のピア数: すべてのクラスタ ピアの現在の数![PD Dashboard - Header](/media/pd-dashboard-header-v4.png)
 
 ## 主要指標の説明 {#key-metrics-description}
 
-## 集まる {#cluster}
+## クラスタ {#cluster}
 
 -   PD スケジューラ構成: PD スケジューラ構成のリスト
--   クラスター ID:クラスタの一意の識別子
+-   クラスタID: クラスターの一意の識別子
 -   現在の TSO: 現在割り当てられている TSO の物理部分
 -   現在の ID 割り当て: 新しいストア/ピアに割り当て可能な最大 ID
 -   リージョンラベル分離レベル: 異なるラベル レベルのリージョンの数
--   ラベルの配布:クラスタのラベルの配布ステータス
+-   ラベルの配布: クラスタ内のラベルの配布ステータス
 
 ![PD Dashboard - Cluster metrics](/media/pd-dashboard-cluster-v4.png)
 
@@ -49,7 +49,7 @@ Grafana ダッシュボードは、Overview、PD、TiDB、TiKV、Node_exporter�
 
 ![PD Dashboard - Operator metrics](/media/pd-dashboard-operator-v4.png)
 
-## 統計- 残高 {#statistics-balance}
+## 統計- バランス {#statistics-balance}
 
 -   ストア容量: TiKV インスタンスあたりの容量サイズ
 -   Store available: TiKV インスタンスあたりの利用可能な容量サイズ
@@ -121,7 +121,7 @@ Grafana ダッシュボードは、Overview、PD、TiDB、TiKV、Node_exporter�
 -   トランザクション数の処理: etcd がトランザクションを処理する割合
 -   99% 取引処理時間: 取引処理率 (P99)
 -   99% WAL fsync 期間: WAL を永続ストレージに書き込むのにかかった時間。 `1s`未満です（P99）
--   99% ピア ラウンド トリップ時間 (秒): etcd のネットワーク レイテンシ (P99) |値が`1s`未満です
+-   99% ピア ラウンド トリップ時間 (秒): etcd のネットワークレイテンシー(P99) |値が`1s`未満です
 -   etcd disk WAL fsync rate: WAL を永続ストレージに書き込む速度
 -   Raft term: Raftの現在の用語
 -   Raftコミット インデックス: Raftの最後にコミットされたインデックス
@@ -144,7 +144,7 @@ Grafana ダッシュボードは、Overview、PD、TiDB、TiKV、Node_exporter�
 -   リージョンハートビート レポート エラー: ステータスが`error`のハートビートの数
 -   リージョン heartbeat report active: ステータスが`ok`のハートビートの数
 -   リージョンスケジュール プッシュ: PD から送信された、TiKV インスタンスごとの対応するスケジュール コマンドの数
--   99%リージョンハートビート レイテンシー: TiKV インスタンスごとのハートビート レイテンシー (P99)
+-   99%リージョンハートビートレイテンシー: TiKV インスタンスごとのハートビートレイテンシー(P99)
 
 ![PD Dashboard - Heartbeat metrics](/media/pd-dashboard-heartbeat-v4.png)
 

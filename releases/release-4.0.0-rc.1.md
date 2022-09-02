@@ -105,7 +105,7 @@ TiDB バージョン: 4.0.0-rc.1
 
 -   列が符号なし[#16004](https://github.com/pingcap/tidb/pull/16004)として定義されているため、システム テーブルに負の数が正しく表示されない問題を修正します。
 -   `use_index_merge`ヒントに無効なインデックス名が含まれている場合に警告を追加します[#15960](https://github.com/pingcap/tidb/pull/15960)
--   同じ一時ディレクトリを共有する TiDB サーバーの複数のインスタンスを禁止する[#16026](https://github.com/pingcap/tidb/pull/16026)
+-   同じ一時ディレクトリを共有する TiDBサーバーの複数のインスタンスを禁止する[#16026](https://github.com/pingcap/tidb/pull/16026)
 -   プランキャッシュが有効な場合に`explain for connection`の実行中に発生するpanicを修正します[#16285](https://github.com/pingcap/tidb/pull/16285)
 -   `tidb_capture_plan_baselines`システム変数の結果が正しく表示されない問題を修正[#16048](https://github.com/pingcap/tidb/pull/16048)
 -   `prepare`ステートメントの`group by`句が正しく解析されない問題を修正します[#16377](https://github.com/pingcap/tidb/pull/16377)

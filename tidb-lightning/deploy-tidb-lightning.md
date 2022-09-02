@@ -11,7 +11,7 @@ summary: Deploy TiDB Lightning to quickly import large amounts of new data.
 
 TiDB Lightningを開始する前に、次の点に注意してください。
 
--   `tidb-lightning`がクラッシュした場合、クラスタは「インポート モード」のままになります。 「通常モード」に戻すのを忘れると、TiKVクラスタ上に圧縮されていない大量のデータが発生し、異常に高い CPU 使用率とストールが発生する可能性があります。 `tidb-lightning-ctl`ツールを使用して、クラスタを手動で「通常モード」に戻すことができます。
+-   `tidb-lightning`がクラッシュした場合、クラスターは「インポート モード」のままになります。 「通常モード」に戻すのを忘れると、TiKV クラスター上に圧縮されていない大量のデータが発生し、異常に高い CPU 使用率とストールが発生する可能性があります。 `tidb-lightning-ctl`ツールを使用して、クラスターを手動で「通常モード」に戻すことができます。
 
     ```sh
     bin/tidb-lightning-ctl --switch-mode=normal
@@ -31,7 +31,7 @@ TiDB Lightningを開始する前に、次の点に注意してください。
 >
 > -   `tidb-lightning`は CPU を集中的に使用するプログラムです。コンポーネントが混在する環境では、 `tidb-lightning`に割り当てるリソースを制限する必要があります。そうしないと、他のコンポーネントが実行できなくなる可能性があります。 CPU 論理コアの`region-concurrency` ～ 75% を設定することをお勧めします。たとえば、CPU に 32 個の論理コアがある場合、 `region-concurrency` ～ 24 を設定できます。
 
-さらに、ターゲット TiKVクラスタには、新しいデータを吸収するのに十分なスペースが必要です。 [標準要件](/hardware-and-software-requirements.md)以外に、ターゲット TiKVクラスタの合計空き容量は、**データ ソースのサイズ × <a href="/faq/manage-cluster-faq.md#is-the-number-of-replicas-in-each-region-configurable-if-yes-how-to-configure-it">レプリカの数</a>× 2**より大きくなければなりません。
+さらに、ターゲット TiKV クラスターには、新しいデータを吸収するのに十分なスペースが必要です。 [標準要件](/hardware-and-software-requirements.md)以外に、ターゲット TiKV クラスターの合計空き容量は、**データ ソースのサイズ × <a href="/faq/manage-cluster-faq.md#is-the-number-of-replicas-in-each-region-configurable-if-yes-how-to-configure-it">レプリカの数</a>× 2**より大きくなければなりません。
 
 デフォルトのレプリカ カウントが 3 の場合、これは合計空き領域がデータ ソースのサイズの少なくとも 6 倍である必要があることを意味します。
 
@@ -58,9 +58,9 @@ TiDB Lightningを開始する前に、次の点に注意してください。
 
 ### TiDB Lightningを手動でデプロイ {#deploy-tidb-lightning-manually}
 
-#### ステップ 1: TiDBクラスタをデプロイする {#step-1-deploy-a-tidb-cluster}
+#### ステップ 1: TiDB クラスターをデプロイする {#step-1-deploy-a-tidb-cluster}
 
-データをインポートする前に、TiDBクラスタをデプロイする必要があります。最新の安定版を使用することを強くお勧めします。
+データをインポートする前に、TiDB クラスターをデプロイする必要があります。最新の安定版を使用することを強くお勧めします。
 
 導入手順は[TiDB クイック スタート ガイド](/quick-start-with-tidb.md)にあります。
 

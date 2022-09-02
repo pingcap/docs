@@ -43,7 +43,7 @@ show table t next_row_id;
 1 row in set (0.00 sec)
 ```
 
-テーブルにデータが書き込まれました。データを挿入する TiDB サーバーは、一度に 30000 個の ID を割り当ててキャッシュします。したがって、NEXT_GLOBAL_ROW_ID は現在 30001 です。
+テーブルにデータが書き込まれました。データを挿入する TiDBサーバーは、一度に 30000 個の ID を割り当ててキャッシュします。したがって、NEXT_GLOBAL_ROW_ID は現在 30001 です。
 
 ```sql
 insert into t values (), (), ();

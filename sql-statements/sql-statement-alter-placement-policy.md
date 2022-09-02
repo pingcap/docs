@@ -53,7 +53,7 @@ AdvancedPlacementOption ::=
 
 > **ノート：**
 >
-> クラスタで使用可能なリージョンを確認するには、 [`SHOW PLACEMENT LABELS`](/sql-statements/sql-statement-show-placement-labels.md) . を参照してください。
+> クラスターで使用可能なリージョンを確認するには、 [`SHOW PLACEMENT LABELS`](/sql-statements/sql-statement-show-placement-labels.md)を参照してください。
 >
 > 利用可能なリージョンが表示されない場合は、TiKV インストールでラベルが正しく設定されていない可能性があります。
 

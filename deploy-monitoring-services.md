@@ -3,15 +3,15 @@ title: Deploy Monitoring Services for the TiDB Cluster
 summary: Learn how to deploy monitoring services for the TiDB cluster.
 ---
 
-# TiDB クラスターの監視サービスをデプロイ {#deploy-monitoring-services-for-the-tidb-cluster}
+# TiDBクラスタの監視サービスをデプロイ {#deploy-monitoring-services-for-the-tidb-cluster}
 
 このドキュメントは、TiDB の監視およびアラート サービスを手動で展開したいユーザーを対象としています。
 
-TiUP を使用して TiDBクラスタをデプロイすると、監視サービスとアラート サービスが自動的にデプロイされるため、手動でデプロイする必要はありません。
+TiUP を使用して TiDB クラスターをデプロイすると、監視サービスとアラート サービスが自動的にデプロイされるため、手動でデプロイする必要はありません。
 
 ## Prometheus と Grafana をデプロイ {#deploy-prometheus-and-grafana}
 
-TiDBクラスタのトポロジーが次のようになっているとします。
+TiDB クラスターのトポロジーが次のようになっているとします。
 
 | 名前    | ホスト IP          | サービス                                |
 | :---- | :-------------- | :---------------------------------- |
@@ -221,7 +221,7 @@ Grafana サービスを開始します。
 
 ### ステップ 2: Grafana ダッシュボードをインポートする {#step-2-import-a-grafana-dashboard}
 
-PD サーバー、TiKV サーバー、および TiDB サーバーの Grafana ダッシュボードをインポートするには、それぞれ次の手順を実行します。
+PDサーバー、TiKVサーバー、および TiDBサーバーの Grafana ダッシュボードをインポートするには、それぞれ次の手順を実行します。
 
 1.  Grafana ロゴをクリックして、サイドバー メニューを開きます。
 
@@ -245,16 +245,16 @@ PD サーバー、TiKV サーバー、および TiDB サーバーの Grafana ダ
 
 ![view dashboard](/media/view-dashboard.png)
 
-クラスタコンポーネントの次のメトリックを取得できます。
+クラスター コンポーネントの次のメトリックを取得できます。
 
--   **TiDB サーバー:**
+-   **TiDBサーバー:**
 
-    -   待ち時間とスループットを監視するためのクエリ処理時間
+    -   レイテンシーとスループットを監視するためのクエリ処理時間
     -   DDL プロセスの監視
     -   TiKV クライアント関連の監視
     -   PD クライアント関連のモニタリング
 
--   **PD サーバー:**
+-   **PDサーバー:**
 
     -   コマンドが実行された合計回数
     -   特定のコマンドが失敗した合計回数
@@ -262,7 +262,7 @@ PD サーバー、TiKV サーバー、および TiDB サーバーの Grafana ダ
     -   コマンドが失敗する期間
     -   コマンドが終了して結果を返す期間
 
--   **TiKV サーバー:**
+-   **TiKVサーバー:**
 
     -   ガベージ コレクション (GC) の監視
     -   TiKV コマンドが実行された合計回数

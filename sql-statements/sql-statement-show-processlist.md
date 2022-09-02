@@ -5,7 +5,7 @@ summary: An overview of the usage of SHOW [FULL] PROCESSLIST for the TiDB databa
 
 # [FULL] プロセスリストを表示 {#show-full-processlist}
 
-このステートメントは、同じ TiDB サーバーに接続されている現在のセッションを一覧表示します。 `Info`列には、オプションのキーワード`FULL`が指定されていない限り切り捨てられるクエリ テキストが含まれます。
+このステートメントは、同じ TiDBサーバーに接続されている現在のセッションを一覧表示します。 `Info`列には、オプションのキーワード`FULL`が指定されていない限り切り捨てられるクエリ テキストが含まれます。
 
 ## あらすじ {#synopsis}
 

@@ -24,7 +24,7 @@ summary: Learn about the release notes of TiDB Cloud in 2022.
 
 -   [専用層クラスター](/tidb-cloud/select-cluster-tier.md#dedicated-tier)の [**診断**] タブに[モニタリングページ](/tidb-cloud/built-in-monitoring.md)を追加します。
 
-    [監視] ページには、全体的なパフォーマンス診断のためのシステム レベルのエントリが表示されます。トップダウンのパフォーマンス分析方法に従って、監視ページは、データベース時間の内訳に基づいて TiDB パフォーマンス メトリックを整理し、これらのメトリックを異なる色で表示します。これらの色を確認することで、システム全体のパフォーマンスのボトルネックを一目で特定できるため、パフォーマンスの診断時間が大幅に短縮され、パフォーマンスの分析と診断が簡素化されます。
+    [監視] ページには、全体的なパフォーマンス診断のためのシステム レベルのエントリが表示されます。トップダウンのパフォーマンス分析方法に従って、監視ページは、データベース時間の内訳に基づいて TiDB パフォーマンス メトリックを整理し、これらのメトリックを異なる色で表示します。これらの色をチェックすることで、システム全体のパフォーマンスのボトルネックを一目で特定できるため、パフォーマンスの診断時間が大幅に短縮され、パフォーマンスの分析と診断が簡素化されます。
 
 -   CSV および Parquet ソース ファイルの [**データ インポート]**ページで<strong>カスタム パターン</strong>を有効または無効にするスイッチを追加します。
 
@@ -34,30 +34,30 @@ summary: Learn about the release notes of TiDB Cloud in 2022.
 
 -   TiDB Cloudサポート プラン (Basic、Standard、Enterprise、Premium) を追加して、お客様の組織のさまざまなサポート ニーズに対応します。詳細については、 [TiDB Cloudのサポート](/tidb-cloud/tidb-cloud-support.md)を参照してください。
 
--   [アクティブなクラスター](https://tidbcloud.com/console/clusters)ページとクラスタの詳細ページの UI を最適化します。
+-   [アクティブなクラスター](https://tidbcloud.com/console/clusters)ページとクラスターの詳細ページの UI を最適化します。
 
     -   [**接続**] ボタンと [<strong>データのインポート]</strong>ボタンを [<strong>アクティブなクラスター]</strong>ページに追加します。
-    -   [**接続**] ボタンと [<strong>データのインポート]</strong>ボタンをクラスタの詳細ページの右上隅に移動します。
+    -   [**接続**] ボタンと [<strong>データのインポート]</strong>ボタンをクラスターの詳細ページの右上隅に移動します。
 
 ## 2022 年 7 月 28 日 {#july-28-2022}
 
--   **[どこからでもアクセスを許可]**ボタンを [<strong>セキュリティ クイック スタート</strong>] ダイアログに追加します。これにより、任意の IP アドレスからクラスタにアクセスできるようになります。詳細については、 [クラスタ セキュリティ設定の構成](/tidb-cloud/configure-security-settings.md)を参照してください。
+-   **[どこからでもアクセスを許可]**ボタンを [<strong>セキュリティ クイック スタート</strong>] ダイアログに追加します。これにより、任意の IP アドレスからクラスターにアクセスできるようになります。詳細については、 [クラスタセキュリティ設定の構成](/tidb-cloud/configure-security-settings.md)を参照してください。
 
 ## 2022 年 7 月 26 日 {#july-26-2022}
 
 -   新しい[開発者層のクラスター](/tidb-cloud/select-cluster-tier.md#developer-tier)に対して[自動休止状態と再開](/tidb-cloud/select-cluster-tier.md#automatic-hibernation-and-resuming)をサポートします。
 
-    Developer Tierクラスタは、7 日間非アクティブになった後も削除されないため、1 年間の無料試用期間が終了するまでいつでも使用できます。非アクティブ状態が 24 時間続くと、Developer Tierクラスタは自動的に休止状態になります。クラスターを再開するには、クラスタに新しい接続を送信するか、 TiDB Cloudコンソールの [**再開**] ボタンをクリックしクラスタ。クラスタは 50 秒以内に再開され、自動的にサービスに戻ります。
+    Developer Tier クラスターは、7 日間非アクティブになった後も削除されないため、1 年間の無料試用期間が終了するまでいつでも使用できます。非アクティブ状態が 24 時間続くと、Developer Tier クラスターは自動的に休止状態になります。クラスターを再開するには、クラスターに新しい接続を送信するか、 TiDB Cloudコンソールの [**再開**] ボタンをクリックします。クラスターは 50 秒以内に再開され、自動的にサービスに戻ります。
 
 -   new [開発者層のクラスター](/tidb-cloud/select-cluster-tier.md#developer-tier)のユーザー名プレフィックス制限を追加します。
 
-    データベース ユーザー名を使用または設定するときは常に、クラスタのプレフィックスをユーザー名に含める必要があります。詳細については、 [ユーザー名のプレフィックス](/tidb-cloud/select-cluster-tier.md#user-name-prefix)を参照してください。
+    データベース ユーザー名を使用または設定するときは常に、クラスターのプレフィックスをユーザー名に含める必要があります。詳細については、 [ユーザー名のプレフィックス](/tidb-cloud/select-cluster-tier.md#user-name-prefix)を参照してください。
 
 -   [開発者層のクラスター](/tidb-cloud/select-cluster-tier.md#developer-tier)のバックアップおよび復元機能を無効にします。
 
     Developer Tier クラスターでは、バックアップと復元の機能 (自動バックアップと手動バックアップの両方を含む) が無効になっています。 [Dumpling](https://docs.pingcap.com/tidb/stable/dumpling-overview)を使用して、データをバックアップとしてエクスポートできます。
 
--   [開発者層](/tidb-cloud/select-cluster-tier.md#developer-tier)クラスタのストレージ サイズを 500 MiB から 1 GiB に増やします。
+-   [開発者層](/tidb-cloud/select-cluster-tier.md#developer-tier)クラスターのストレージ サイズを 500 MiB から 1 GiB に増やします。
 
 -   パンくずリストをTiDB Cloudコンソールに追加して、ナビゲーション エクスペリエンスを向上させます。
 
@@ -86,7 +86,7 @@ summary: Learn about the release notes of TiDB Cloud in 2022.
 
     TiFlash がもたらす利点を体験するには、 [TiDB CloudHTAP クイック スタート ガイド](/tidb-cloud/tidb-cloud-htap-quickstart.md)を参照してください。
 
--   Dedicated Tierクラスタの TiKV と TiFlash の[ストレージサイズの増加](/tidb-cloud/scale-tidb-cluster.md#increase-storage-size)をサポートします。
+-   Dedicated Tier クラスターの TiKV と TiFlash の[ストレージサイズの増加](/tidb-cloud/scale-tidb-cluster.md#increase-storage-size)をサポートします。
 
 -   ノード サイズ フィールドにメモリ情報を表示できるようになりました。
 
@@ -105,16 +105,16 @@ summary: Learn about the release notes of TiDB Cloud in 2022.
 
 -   GCP リージョン`Taiwan` for [専用ティア](/tidb-cloud/select-cluster-tier.md#dedicated-tier)クラスタ作成のサポートを追加します。
 -   TiDB Cloudコンソールでサポート[ユーザー プロファイルの更新](/tidb-cloud/manage-user-access.md#manage-user-profiles) (名、最終時間、会社名、国、電話番号を含む)。
--   [**TiDB に接続する**](/tidb-cloud/connect-to-tidb-cluster.md#connect-via-standard-connection)ダイアログで MySQL、MyCLI、JDBC、Python、Go、および Node.js の接続文字列を指定して、TiDBクラスタに簡単に接続できるようにします。
+-   [**TiDB に接続する**](/tidb-cloud/connect-to-tidb-cluster.md#connect-via-standard-connection)ダイアログで MySQL、MyCLI、JDBC、Python、Go、および Node.js の接続文字列を指定して、TiDB クラスターに簡単に接続できるようにします。
 -   データのインポート中にバケット URL からバケット領域を自動的に取得することをサポートして、そのような情報を入力する手間を省きます。
 
 ## 2022 年 6 月 16 日 {#june-16-2022}
 
 -   [クラスタ作成プロセス](/tidb-cloud/create-tidb-cluster.md)を単純化します。
 
-    -   クラスタを作成すると、 TiDB Cloudはデフォルトのクラスタ名を提供します。デフォルト名を使用することも、更新することもできます。
-    -   クラスタを作成する場合、[クラスターの**作成]**ページでパスワードを設定する必要はありません。
-    -   クラスタの作成中または作成後に、[**セキュリティ クイック スタート**] ダイアログ ボックスで、クラスタにアクセスするためのルート パスワードと、クラスタに接続するための IP アドレスを設定できます。
+    -   クラスターを作成すると、 TiDB Cloudはデフォルトのクラスター名を提供します。デフォルト名を使用することも、更新することもできます。
+    -   クラスターを作成する場合、[クラスターの**クラスタ]**ページでパスワードを設定する必要はありません。
+    -   クラスターの作成中または作成後に、[**セキュリティ クイック スタート**] ダイアログ ボックスで、クラスターにアクセスするためのルート パスワードと、クラスターに接続するための IP アドレスを設定できます。
 
 ## 2022 年 6 月 14 日 {#june-14-2022}
 
@@ -130,11 +130,11 @@ summary: Learn about the release notes of TiDB Cloud in 2022.
 
 ## 2022 年 5 月 24 日 {#may-24-2022}
 
--   Dedicated Tierクラスタを[作成](/tidb-cloud/create-tidb-cluster.md)または[戻す](/tidb-cloud/backup-and-restore.md#restore)使用する場合の TiDB ポート番号のカスタマイズをサポートします。
+-   Dedicated Tier クラスターを[作成](/tidb-cloud/create-tidb-cluster.md)または[戻す](/tidb-cloud/backup-and-restore.md#restore)使用する場合の TiDB ポート番号のカスタマイズをサポートします。
 
 ## 2022 年 5 月 19 日 {#may-19-2022}
 
--   AWS リージョン`Frankfurt` for [開発者層](/tidb-cloud/select-cluster-tier.md#developer-tier)クラスタ作成のサポートを追加します。
+-   AWS リージョン`Frankfurt` for [開発者層](/tidb-cloud/select-cluster-tier.md#developer-tier)クラスター作成のサポートを追加します。
 
 ## 2022 年 5 月 18 日 {#may-18-2022}
 
@@ -146,8 +146,8 @@ summary: Learn about the release notes of TiDB Cloud in 2022.
 
 ## 2022 年 5 月 1 日 {#may-1-2022}
 
--   [作成](/tidb-cloud/create-tidb-cluster.md)または[戻す](/tidb-cloud/backup-and-restore.md#restore) a [専用ティア](/tidb-cloud/select-cluster-tier.md#dedicated-tier)クラスタの場合、TiDB、TiKV、および TiFlash の vCPU サイズの構成をサポートします。
--   クラスタ作成のための AWS リージョン`Mumbai`のサポートを追加します。
+-   [作成](/tidb-cloud/create-tidb-cluster.md)または[戻す](/tidb-cloud/backup-and-restore.md#restore) a [専用ティア](/tidb-cloud/select-cluster-tier.md#dedicated-tier)クラスターの場合、TiDB、TiKV、および TiFlash の vCPU サイズの構成をサポートします。
+-   クラスター作成のための AWS リージョン`Mumbai`のサポートを追加します。
 -   [TiDB Cloud請求](/tidb-cloud/tidb-cloud-billing.md)のコンピューティング、ストレージ、およびデータ転送のコストを更新します。
 
 ## 2022 年 4 月 7 日 {#april-7-2022}
@@ -168,15 +168,15 @@ TiDB Cloudは一般提供になりました。次のいずれかのオプショ�
 
 -   サポート[TiDB Cloud組み込みアラート](/tidb-cloud/monitor-built-in-alerting.md) 。
 
-    TiDB Cloud組み込みアラート機能を使用すると、プロジェクト内のTiDB CloudクラスタがTiDB Cloud組み込みアラート条件のいずれかをトリガーするたびに、電子メールで通知を受けることができます。
+    TiDB Cloud組み込みアラート機能を使用すると、プロジェクト内のTiDB CloudクラスターがTiDB Cloud組み込みアラート条件のいずれかをトリガーするたびに、電子メールで通知を受けることができます。
 
 ## 2022 年 3 月 15 日 {#march-15-2022}
 
 一般的な変更:
 
--   クラスタサイズが固定されたクラスタ層はなくなりました。 TiDB、TiKV、TiFlashの[クラスタサイズ](/tidb-cloud/size-your-cluster.md)台を簡単にカスタマイズできます。
--   TiFlash を使用しない既存のクラスタに[ティフラッシュ](/tiflash/tiflash-overview.md)のノードを追加することをサポートします。
--   [新しいクラスタの作成](/tidb-cloud/create-tidb-cluster.md)の場合、ストレージ サイズ (500 ～ 2048 GiB) の指定をサポートします。クラスタの作成後にストレージ サイズを変更することはできません。
+-   クラスター サイズが固定されたクラスター層はなくなりました。 TiDB、TiKV、TiFlashの[クラスターサイズ](/tidb-cloud/size-your-cluster.md)台を簡単にカスタマイズできます。
+-   TiFlash を使用しない既存のクラスターに[ティフラッシュ](/tiflash/tiflash-overview.md)のノードを追加することをサポートします。
+-   [新しいクラスターの作成](/tidb-cloud/create-tidb-cluster.md)の場合、ストレージ サイズ (500 ～ 2048 GiB) の指定をサポートします。クラスターの作成後にストレージ サイズを変更することはできません。
 -   新しいパブリック リージョンを導入する: `eu-central-1` .
 -   8 vCPU TiFlash を廃止し、16 vCPU TiFlash を提供します。
 -   CPU とストレージの価格を分けます (どちらも 30% のパブリック プレビュー割引があります)。
@@ -188,9 +188,9 @@ TiDB Cloudは一般提供になりました。次のいずれかのオプショ�
 
     Prometheus と Grafana の統合により、 TiDB Cloudエンドポイントから主要なメトリックを読み取り、 [グラファナ](https://grafana.com/)を使用してメトリックを表示するように[プロメテウス](https://prometheus.io/)サービスを構成できます。
 
--   新しいクラスタの選択されたリージョンに基づくデフォルトのバックアップ時間の割り当てをサポートします。
+-   新しいクラスターの選択されたリージョンに基づくデフォルトのバックアップ時間の割り当てをサポートします。
 
-    詳細については、 [TiDB クラスター データのバックアップと復元](/tidb-cloud/backup-and-restore.md)を参照してください。
+    詳細については、 [TiDBクラスタデータのバックアップと復元](/tidb-cloud/backup-and-restore.md)を参照してください。
 
 ## 2022 年 3 月 4 日 {#march-04-2022}
 
@@ -208,7 +208,7 @@ TiDB Cloudは一般提供になりました。次のいずれかのオプショ�
 
 改善：
 
--   [CSVファイル](/tidb-cloud/import-csv-files.md)または[Apache 寄木細工のファイル](/tidb-cloud/import-parquet-files.md)をTiDB Cloudにインポートする際のカスタム ファイル名の使用をサポートします。
+-   [CSV ファイル](/tidb-cloud/import-csv-files.md)または[Apache 寄木細工のファイル](/tidb-cloud/import-parquet-files.md)をTiDB Cloudにインポートする際のカスタム ファイル名の使用をサポートします。
 
 ## 2022 年 1 月 11 日 {#january-11-2022}
 
@@ -222,5 +222,5 @@ TiDB Cloudは一般提供になりました。次のいずれかのオプショ�
 
 バグの修正：
 
--   パスワードに一重引用符が含まれていると、ユーザーがクラスタを作成できないという問題を修正します。
+-   パスワードに一重引用符が含まれていると、ユーザーがクラスターを作成できないという問題を修正します。
 -   組織に所有者が 1 人しかいない場合でも、所有者が削除されたり、別の役割に変更されたりする可能性があるという問題を修正します。

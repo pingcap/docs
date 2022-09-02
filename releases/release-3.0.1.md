@@ -14,7 +14,7 @@ TiDB アンシブル バージョン: 3.0.1
 
 -   `MAX_EXECUTION_TIME`機能[#11026](https://github.com/pingcap/tidb/pull/11026)のサポートを追加
 -   `tidb_wait_split_region_finish_backoff`セッション変数を追加して、リージョン[#11166](https://github.com/pingcap/tidb/pull/11166)の分割のバックオフ時間を制御します
--   負荷に基づいて自動インクリメント ID によって割り当てられたインクリメンタル ギャップの自動調整をサポートし、インクリメンタル ギャップの自動調整範囲は 1000 ～ [#11006](https://github.com/pingcap/tidb/pull/11006)です。
+-   負荷に基づいて自動インクリメント ID によって割り当てられたインクリメンタル ギャップの自動調整をサポートし、インクリメンタル ギャップの自動調整範囲は 1000 ～ 2000000 です[#11006](https://github.com/pingcap/tidb/pull/11006)
 -   `ADMIN PLUGINS ENABLE` / `ADMIN PLUGINS DISABLE` SQL ステートメントを追加して、プラグインを動的に有効または無効にします[#11157](https://github.com/pingcap/tidb/pull/11157)
 -   Audit プラグインにセッション接続情報を追加します[#11013](https://github.com/pingcap/tidb/pull/11013)
 -   PD がスケジューリングを終了するのを待つようにリージョンを分割する期間中のデフォルトの動作を変更します[#11166](https://github.com/pingcap/tidb/pull/11166)
@@ -44,7 +44,7 @@ TiDB アンシブル バージョン: 3.0.1
 -   文字列[#11044](https://github.com/pingcap/tidb/pull/11044)の浅いコピーのために、変数が`SetVar`によって誤って設定される問題を修正します
 -   `INSERT … ON DUPLICATE`ステートメントがテーブル パーティション[#11231](https://github.com/pingcap/tidb/pull/11231)に適用されると、実行が失敗し、エラーが報告される問題を修正します。
 -   悲観的ロック (実験的機能)
-    -   悲観的ロックを使用してポイント クエリを実行し、返されたデータが空の場合、行の無効なロックが原因で誤った結果が返される問題を修正し[#10976](https://github.com/pingcap/tidb/pull/10976) 。
+    -   悲観的ロックを使用してポイント クエリを実行し、返されたデータが空の場合、行の無効なロックが原因で誤った結果が返される問題を修正します[#10976](https://github.com/pingcap/tidb/pull/10976)
     -   クエリで悲観的ロックを使用すると、正しい TSO が使用されないため、クエリの結果が正しくない問題を修正し`SELECT … FOR UPDATE` 。 [#11015](https://github.com/pingcap/tidb/pull/11015)
     -   ロック競合の悪化を避けるために、楽観的トランザクションが悲観的ロックに遭遇したときに検出動作を即時の競合検出から待機に変更します[#11051](https://github.com/pingcap/tidb/pull/11051)
 

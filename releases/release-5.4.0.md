@@ -15,7 +15,7 @@ v5.4 の主な新機能または改善点は次のとおりです。
 -   セッション変数を使用した古いデータの読み取りをサポート
 -   統計を収集するための構成の永続化をサポート
 -   Raft Engineを TiKV のログ保存エンジンとしてサポート (実験的)
--   クラスタに対するバックアップの影響を最適化する
+-   クラスターに対するバックアップの影響を最適化する
 -   バックアップ ストレージとしての Azure Blob Storage の使用をサポート
 -   TiFlash と MPP エンジンの安定性とパフォーマンスを継続的に改善します
 -   TiDB Lightningにスイッチを追加して、データを含む既存のテーブルへのインポートを許可するかどうかを決定します
@@ -30,19 +30,19 @@ v5.4 の主な新機能または改善点は次のとおりです。
 
 ### システム変数 {#system-variables}
 
-| 変数名                                                                                                 | タイプを変更 | 説明                                                                                                                                                                                                                                                                                                                                        |
-| :-------------------------------------------------------------------------------------------------- | :----- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [`tidb_enable_column_tracking`](/system-variables.md#tidb_enable_column_tracking-new-in-v540)       | 新規追加   | TiDB が`PREDICATE COLUMNS`を収集できるようにするかどうかを制御します。デフォルト値は`OFF`です。                                                                                                                                                                                                                                                                            |
-| [`tidb_enable_paging`](/system-variables.md#tidb_enable_paging-new-in-v540)                         | 新規追加   | ページング方式を使用して`IndexLookUp`のオペレーターでコプロセッサー要求を送信するかどうかを制御します。デフォルト値は`OFF`です。<br/> `IndexLookup`と`Limit`を使用し、 `Limit`を`IndexScan`にプッシュできない読み取りクエリの場合、読み取りクエリのレイテンシが高くなり、TiKV の`unified read pool`の CPU 使用率が高くなる可能性があります。このような場合、 `Limit`演算子は小さなデータセットしか必要としないため、 `tidb_enable_paging`を`ON`に設定すると、TiDB が処理するデータが少なくなり、クエリのレイテンシとリソース消費が削減されます。 |
-| [`tidb_enable_top_sql`](/system-variables.md#tidb_enable_top_sql-new-in-v540)                       | 新規追加   | Top SQL機能を有効にするかどうかを制御します。デフォルト値は`OFF`です。                                                                                                                                                                                                                                                                                                 |
-| [`tidb_persist_analyze_options`](/system-variables.md#tidb_persist_analyze_options-new-in-v540)     | 新規追加   | [ANALYZE 構成の永続性](/statistics.md#persist-analyze-configurations)機能を有効にするかどうかを制御します。デフォルト値は`ON`です。                                                                                                                                                                                                                                          |
-| [`tidb_read_staleness`](/system-variables.md#tidb_read_staleness-new-in-v540)                       | 新規追加   | 現在のセッションで読み取ることができる履歴データの範囲を制御します。デフォルト値は`0`です。                                                                                                                                                                                                                                                                                           |
-| [`tidb_regard_null_as_point`](/system-variables.md#tidb_regard_null_as_point-new-in-v540)           | 新規追加   | オプティマイザーが NULL 等価を含むクエリ条件をインデックス アクセスのプレフィックス条件として使用できるかどうかを制御します。                                                                                                                                                                                                                                                                        |
-| [`tidb_stats_load_sync_wait`](/system-variables.md#tidb_stats_load_sync_wait-new-in-v540)           | 新規追加   | 統計の同期読み込み機能を有効にするかどうかを制御します。デフォルト値`0`は、機能が無効になっており、統計が非同期にロードされることを意味します。この機能が有効になっている場合、この変数は、SQL 最適化がタイムアウトになる前に統計を同期的にロードするのを待機できる最大時間を制御します。                                                                                                                                                                                          |
-| [`tidb_stats_load_pseudo_timeout`](/system-variables.md#tidb_stats_load_pseudo_timeout-new-in-v540) | 新規追加   | SQL が失敗する ( `OFF` ) か、疑似統計を使用するようにフォールバックする ( `ON` ) かで、統計の同期ロードがタイムアウトに達するタイミングを制御します。デフォルト値は`OFF`です。                                                                                                                                                                                                                                    |
-| [`tidb_backoff_lock_fast`](/system-variables.md#tidb_backoff_lock_fast)                             | 修正済み   | デフォルト値が`100`から`10`に変更されました。                                                                                                                                                                                                                                                                                                               |
-| [`tidb_enable_index_merge`](/system-variables.md#tidb_enable_index_merge-new-in-v40)                | 修正済み   | デフォルト値が`OFF`から`ON`に変更されました。<br/><ul><li> TiDBクラスタを v4.0.0 より前のバージョンから v5.4.0 以降にアップグレードする場合、この変数はデフォルトで`OFF`です。</li><li> TiDBクラスタを v4.0.0 以降から v5.4.0 以降にアップグレードする場合、この変数はアップグレード前と同じままです。</li><li> v5.4.0 以降の新しく作成された TiDB クラスターの場合、この変数はデフォルトで`ON`です。</li></ul>                                                                         |
-| [`tidb_store_limit`](/system-variables.md#tidb_store_limit-new-in-v304-and-v40)                     | 修正済み   | v5.4.0 より前では、この変数はインスタンス レベルでグローバルに構成できます。 v5.4.0 以降、この変数はグローバル構成のみをサポートします。                                                                                                                                                                                                                                                              |
+| 変数名                                                                                                 | タイプを変更 | 説明                                                                                                                                                                                                                                                                                                                                          |
+| :-------------------------------------------------------------------------------------------------- | :----- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| [`tidb_enable_column_tracking`](/system-variables.md#tidb_enable_column_tracking-new-in-v540)       | 新規追加   | TiDB が`PREDICATE COLUMNS`を収集できるようにするかどうかを制御します。デフォルト値は`OFF`です。                                                                                                                                                                                                                                                                              |
+| [`tidb_enable_paging`](/system-variables.md#tidb_enable_paging-new-in-v540)                         | 新規追加   | ページング方式を使用して`IndexLookUp`のオペレーターでコプロセッサー要求を送信するかどうかを制御します。デフォルト値は`OFF`です。<br/> `IndexLookup`と`Limit`を使用し、 `Limit`を`IndexScan`にプッシュできない読み取りクエリの場合、読み取りクエリのレイテンシーが高くなり、TiKV の`unified read pool`の CPU 使用率が高くなる可能性があります。このような場合、 `Limit`演算子は小さなデータセットしか必要としないため、 `tidb_enable_paging`を`ON`に設定すると、TiDB が処理するデータが少なくなり、クエリのレイテンシーとリソース消費が削減されます。 |
+| [`tidb_enable_top_sql`](/system-variables.md#tidb_enable_top_sql-new-in-v540)                       | 新規追加   | Top SQL機能を有効にするかどうかを制御します。デフォルト値は`OFF`です。                                                                                                                                                                                                                                                                                                   |
+| [`tidb_persist_analyze_options`](/system-variables.md#tidb_persist_analyze_options-new-in-v540)     | 新規追加   | [ANALYZE 構成の永続性](/statistics.md#persist-analyze-configurations)機能を有効にするかどうかを制御します。デフォルト値は`ON`です。                                                                                                                                                                                                                                            |
+| [`tidb_read_staleness`](/system-variables.md#tidb_read_staleness-new-in-v540)                       | 新規追加   | 現在のセッションで読み取ることができる履歴データの範囲を制御します。デフォルト値は`0`です。                                                                                                                                                                                                                                                                                             |
+| [`tidb_regard_null_as_point`](/system-variables.md#tidb_regard_null_as_point-new-in-v540)           | 新規追加   | オプティマイザーが NULL 等価を含むクエリ条件をインデックス アクセスのプレフィックス条件として使用できるかどうかを制御します。                                                                                                                                                                                                                                                                          |
+| [`tidb_stats_load_sync_wait`](/system-variables.md#tidb_stats_load_sync_wait-new-in-v540)           | 新規追加   | 統計の同期読み込み機能を有効にするかどうかを制御します。デフォルト値`0`は、機能が無効になっており、統計が非同期にロードされることを意味します。この機能が有効になっている場合、この変数は、SQL 最適化がタイムアウトになる前に統計を同期的にロードするのを待機できる最大時間を制御します。                                                                                                                                                                                            |
+| [`tidb_stats_load_pseudo_timeout`](/system-variables.md#tidb_stats_load_pseudo_timeout-new-in-v540) | 新規追加   | SQL が失敗する ( `OFF` ) か、疑似統計を使用するようにフォールバックする ( `ON` ) かで、統計の同期ロードがタイムアウトに達するタイミングを制御します。デフォルト値は`OFF`です。                                                                                                                                                                                                                                      |
+| [`tidb_backoff_lock_fast`](/system-variables.md#tidb_backoff_lock_fast)                             | 修正済み   | デフォルト値が`100`から`10`に変更されました。                                                                                                                                                                                                                                                                                                                 |
+| [`tidb_enable_index_merge`](/system-variables.md#tidb_enable_index_merge-new-in-v40)                | 修正済み   | デフォルト値が`OFF`から`ON`に変更されました。<br/><ul><li> TiDB クラスターを v4.0.0 より前のバージョンから v5.4.0 以降にアップグレードする場合、この変数はデフォルトで`OFF`です。</li><li> TiDB クラスターを v4.0.0 以降から v5.4.0 以降にアップグレードする場合、この変数はアップグレード前と同じままです。</li><li> v5.4.0 以降の新しく作成された TiDB クラスターの場合、この変数はデフォルトで`ON`です。</li></ul>                                                                       |
+| [`tidb_store_limit`](/system-variables.md#tidb_store_limit-new-in-v304-and-v40)                     | 修正済み   | v5.4.0 より前では、この変数はインスタンス レベルでグローバルに構成できます。 v5.4.0 以降、この変数はグローバル構成のみをサポートします。                                                                                                                                                                                                                                                                |
 
 ### Configuration / コンフィグレーションファイルのパラメーター {#configuration-file-parameters}
 
@@ -53,7 +53,7 @@ v5.4 の主な新機能または改善点は次のとおりです。
 | TiKV                           | [`snap-generator-pool-size`](/tikv-configuration-file.md#snap-generator-pool-size-new-in-v540)                  | 新規追加   | `snap-generator`スレッド プールのサイズ。デフォルト値は`2`です。                                                                                                                                                                                                                                                                                                                  |
 | TiKV                           | `log.file.max-size` 、 `log.file.max-days` 、 `log.file.max-backups`                                              | 新規追加   | 詳細については、 [TiKVConfiguration / コンフィグレーションファイル - `log.file`](/tikv-configuration-file.md#logfile-new-in-v540)を参照してください。                                                                                                                                                                                                                                       |
 | TiKV                           | `raft-engine`                                                                                                   | 新規追加   | `enable` 、 `dir` 、 `batch-compression-threshold` 、 `bytes-per-sync` 、 `target-file-size` 、 `purge-threshold` 、 `recovery-mode` 、 `recovery-read-block-size` 、 `recovery-read-block-size` 、および`recovery-threads`が含まれます。詳しくは[TiKVConfiguration / コンフィグレーションファイル - `raft-engine`](/tikv-configuration-file.md#raft-engine)をご覧ください。                             |
-| TiKV                           | [`backup.enable-auto-tune`](/tikv-configuration-file.md#enable-auto-tune-new-in-v540)                           | 新規追加   | v5.3.0 では、デフォルト値は`false`です。 v5.4.0 以降、デフォルト値は`true`に変更されました。このパラメータは、クラスタリソースの使用率が高い場合に、バックアップ タスクで使用されるリソースを制限してクラスタへの影響を軽減するかどうかを制御します。デフォルトの構成では、バックアップ タスクの速度が遅くなる場合があります。                                                                                                                                                                              |
+| TiKV                           | [`backup.enable-auto-tune`](/tikv-configuration-file.md#enable-auto-tune-new-in-v540)                           | 新規追加   | v5.3.0 では、デフォルト値は`false`です。 v5.4.0 以降、デフォルト値は`true`に変更されました。このパラメータは、クラスタ リソースの使用率が高い場合に、バックアップ タスクで使用されるリソースを制限してクラスタへの影響を軽減するかどうかを制御します。デフォルトの構成では、バックアップ タスクの速度が遅くなる場合があります。                                                                                                                                                                             |
 | TiKV                           | `log-level` 、 `log-format` 、 `log-file` 、 `log-rotation-size`                                                   | 修正済み   | TiKV ログ パラメータの名前は、TiDB ログ パラメータと一致する名前 ( `log.level` 、 `log.format` 、 `log.file.filename` 、および`log.enable-timestamp` ) に置き換えられます。古いパラメータのみを設定し、それらの値がデフォルト以外の値に設定されている場合、古いパラメータは新しいパラメータと互換性があります。古いパラメータと新しいパラメータの両方が設定されている場合、新しいパラメータが有効になります。詳細については、 [TiKVConfiguration / コンフィグレーションファイル - ログ](/tikv-configuration-file.md#log-new-in-v540)を参照してください。 |
 | TiKV                           | `log-rotation-timespan`                                                                                         | 削除しました | ログ ローテーション間の期間。この期間が経過すると、ログ ファイルがローテーションされます。つまり、現在のログ ファイルのファイル名にタイムスタンプが追加され、新しいログ ファイルが作成されます。                                                                                                                                                                                                                                                          |
 | TiKV                           | `allow-remove-leader`                                                                                           | 削除しました | メインスイッチの削除を許可するかどうかを決定します。                                                                                                                                                                                                                                                                                                                                  |
@@ -94,7 +94,7 @@ v5.4 の主な新機能または改善点は次のとおりです。
 
     v5.4.0 より前の TiDB は、 `ascii` 、 `binary` 、 `latin1` 、 `utf8` 、および`utf8mb4`文字セットをサポートしています。
 
-    中国語ユーザーのサポートを強化するために、TiDB は v5.4.0 以降、GBK 文字セットをサポートしています。初めて TiDBクラスタを初期化するときに TiDB 構成ファイルで[`new_collations_enabled_on_first_bootstrap`](/tidb-configuration-file.md#new_collations_enabled_on_first_bootstrap)オプションを有効にすると、TiDB GBK 文字セットは`gbk_bin`と`gbk_chinese_ci`の両方の照合をサポートします。
+    中国語ユーザーのサポートを強化するために、TiDB は v5.4.0 以降、GBK 文字セットをサポートしています。初めて TiDB クラスターを初期化するときに TiDB 構成ファイルで[`new_collations_enabled_on_first_bootstrap`](/tidb-configuration-file.md#new_collations_enabled_on_first_bootstrap)オプションを有効にすると、TiDB GBK 文字セットは`gbk_bin`と`gbk_chinese_ci`の両方の照合をサポートします。
 
     GBK 文字セットを使用する場合は、互換性の制限に注意する必要があります。詳細については、 [文字セットと照合 - GBK](/character-set-gbk.md)を参照してください。
 
@@ -110,7 +110,7 @@ v5.4 の主な新機能または改善点は次のとおりです。
 
 -   **TiUP は root ユーザーの初期パスワードの生成をサポートします**
 
-    クラスタを開始するためのコマンドに`--init`パラメーターが導入されました。このパラメーターを使用すると、TiUP を使用してデプロイされた TiDBクラスタで、TiUP はデータベース ルート ユーザーの強力な初期パスワードを生成します。これにより、空のパスワードで root ユーザーを使用する際のセキュリティ リスクが回避され、データベースのセキュリティが確保されます。
+    クラスターを開始するためのコマンドに`--init`パラメーターが導入されました。このパラメーターを使用すると、TiUP を使用してデプロイされた TiDB クラスターで、TiUP はデータベース ルート ユーザーの強力な初期パスワードを生成します。これにより、空のパスワードで root ユーザーを使用する際のセキュリティ リスクが回避され、データベースのセキュリティが確保されます。
 
     [ユーザー文書](/production-deployment-using-tiup.md#step-7-start-a-tidb-cluster)
 
@@ -135,9 +135,9 @@ v5.4 の主な新機能または改善点は次のとおりです。
 
     TiDB は、 Raftコンセンサス アルゴリズムに基づくマルチレプリカ分散データベースです。同時実行性とスループットの高いアプリケーション シナリオに直面した場合、TiDB はフォロワー レプリカを介して読み取りパフォーマンスをスケールアウトし、読み取り要求と書き込み要求を分離できます。
 
-    さまざまなアプリケーション シナリオに対して、TiDB はフォロワー読み取りの 2 つのモードを提供します。強整合性読み取りと弱整合性履歴読み取りです。強力な一貫性のある読み取りモードは、リアルタイム データを必要とするアプリケーション シナリオに適しています。ただし、このモードでは、リーダーとフォロワー間のデータ レプリケーションの待機時間とスループットの低下により、特に地理的に分散された展開の場合、読み取り要求の待機時間が長くなる可能性があります。
+    さまざまなアプリケーション シナリオに対して、TiDB はフォロワー読み取りの 2 つのモードを提供します。強整合性読み取りと弱整合性履歴読み取りです。強力な一貫性のある読み取りモードは、リアルタイム データを必要とするアプリケーション シナリオに適しています。ただし、このモードでは、リーダーとフォロワー間のデータ レプリケーションのレイテンシーとスループットの低下により、特に地理的に分散された展開の場合、読み取り要求のレイテンシーが長くなる可能性があります。
 
-    リアルタイム データの要件がそれほど厳しくないアプリケーション シナリオでは、履歴読み取りモードをお勧めします。このモードでは、待ち時間が短縮され、スループットが向上します。 TiDB は現在、次の方法による履歴データの読み取りをサポートしています。SQL ステートメントを使用して過去の時点からデータを読み取るか、過去の時点に基づいて読み取り専用トランザクションを開始します。どちらの方法も、特定の時点または指定された時間範囲内の履歴データの読み取りをサポートしています。詳細については、 [`AS OF TIMESTAMP`句を使用した履歴データの読み取り](/as-of-timestamp.md)を参照してください。
+    リアルタイム データの要件がそれほど厳しくないアプリケーション シナリオでは、履歴読み取りモードをお勧めします。このモードでは、レイテンシーが短縮され、スループットが向上します。 TiDB は現在、次の方法による履歴データの読み取りをサポートしています。SQL ステートメントを使用して過去の時点からデータを読み取るか、過去の時点に基づいて読み取り専用トランザクションを開始します。どちらの方法も、特定の時点または指定された時間範囲内の履歴データの読み取りをサポートしています。詳細については、 [`AS OF TIMESTAMP`句を使用した履歴データの読み取り](/as-of-timestamp.md)を参照してください。
 
     v5.4.0 以降、TiDB は、セッション変数を介して指定された時間範囲内の履歴データの読み取りをサポートすることにより、履歴読み取りモードの使いやすさを向上させます。このモードは、準リアルタイムのシナリオで低レイテンシ、高スループットの読み取り要求を処理します。変数は次のように設定できます。
 
@@ -170,9 +170,9 @@ v5.4 の主な新機能または改善点は次のとおりです。
 
 -   **Raft Engineのサポート (実験的)**
 
-    TiKV のログ ストレージ エンジンとして[Raft Engine](https://github.com/tikv/raft-engine)を使用することをサポートします。 RocksDB と比較して、 Raft Engineは TiKV I/O 書き込みトラフィックを最大 40% 削減し、CPU 使用率を 10% 削減し、フォアグラウンド スループットを約 5% 向上させ、特定の負荷の下でテール レイテンシを 20% 削減できます。さらに、 Raft Engineはログのリサイクルの効率を改善し、極端な状況でのログの蓄積の問題を修正します。
+    TiKV のログ ストレージ エンジンとして[Raft Engine](https://github.com/tikv/raft-engine)を使用することをサポートします。 RocksDB と比較して、 Raft Engineは TiKV I/O 書き込みトラフィックを最大 40% 削減し、CPU 使用率を 10% 削減し、フォアグラウンド スループットを約 5% 向上させ、特定の負荷の下でテールレイテンシーを 20% 削減できます。さらに、 Raft Engineはログのリサイクルの効率を改善し、極端な状況でのログの蓄積の問題を修正します。
 
-    Raft Engineはまだ実験的機能であり、デフォルトでは無効になっています。 v5.4.0 のRaft Engineのデータ形式は、以前のバージョンと互換性がないことに注意してください。クラスタをアップグレードする前に、すべての TiKV ノードでRaft Engineが無効になっていることを確認する必要があります。 v5.4.0 以降のバージョンでのみRaft Engineを使用することをお勧めします。
+    Raft Engineはまだ実験的機能であり、デフォルトでは無効になっています。 v5.4.0 のRaft Engineのデータ形式は、以前のバージョンと互換性がないことに注意してください。クラスターをアップグレードする前に、すべての TiKV ノードでRaft Engineが無効になっていることを確認する必要があります。 v5.4.0 以降のバージョンでのみRaft Engineを使用することをお勧めします。
 
     [ユーザー文書](/tikv-configuration-file.md#raft-engine)
 
@@ -206,15 +206,15 @@ v5.4 の主な新機能または改善点は次のとおりです。
 
 ### 高可用性と災害復旧 {#high-availability-and-disaster-recovery}
 
--   **クラスタに対するバックアップ タスクの影響を軽減する**
+-   **クラスターに対するバックアップ タスクの影響を軽減する**
 
-    バックアップと復元 (BR) には、自動調整機能 (デフォルトで有効) が導入されています。この機能は、クラスタリソースの使用状況を監視し、バックアップ タスクで使用されるスレッドの数を調整することで、クラスタに対するバックアップ タスクの影響を軽減できます。場合によっては、バックアップ用のクラスタハードウェア リソースを増やして自動調整機能を有効にすると、クラスタに対するバックアップ タスクの影響を 10% 以下に制限できます。
+    バックアップと復元 (BR) には、自動調整機能 (デフォルトで有効) が導入されています。この機能は、クラスター リソースの使用状況を監視し、バックアップ タスクで使用されるスレッドの数を調整することで、クラスターに対するバックアップ タスクの影響を軽減できます。場合によっては、バックアップ用のクラスター ハードウェア リソースを増やして自動調整機能を有効にすると、クラスターに対するバックアップ タスクの影響を 10% 以下に制限できます。
 
     [ユーザー文書](/br/br-auto-tune.md)
 
 -   **バックアップのターゲット ストレージとして Azure Blob Storage をサポートする**
 
-    バックアップと復元 (BR) は、Azure Blob Storage をリモート バックアップ ストレージとしてサポートします。 TiDB を Azure クラウドにデプロイすると、クラスタデータを Azure Blob Storage サービスにバックアップできるようになりました。
+    バックアップと復元 (BR) は、Azure Blob Storage をリモート バックアップ ストレージとしてサポートします。 TiDB を Azure クラウドにデプロイすると、クラスター データを Azure Blob Storage サービスにバックアップできるようになりました。
 
     [ユーザー文書](/br/backup-storage-azblob.md)
 
@@ -228,7 +228,7 @@ v5.4 の主な新機能または改善点は次のとおりです。
 
 -   **TiDB Lightningに並行インポート用のメタ情報を格納するスキーマ名を導入**
 
-    TiDB Lightningでは、 `meta-schema-name`の構成アイテムが導入されています。並行インポート モードでは、このパラメーターは、ターゲットクラスタの各TiDB Lightningインスタンスのメタ情報を格納するスキーマ名を指定します。デフォルトの値は「lightning_metadata」です。このパラメータに設定する値は、同じ並列インポートに参加するTiDB Lightningインスタンスごとに同じにする必要があります。そうしないと、インポートされたデータの正確性が保証されません。
+    TiDB Lightningでは、 `meta-schema-name`の構成アイテムが導入されています。並行インポート モードでは、このパラメーターは、ターゲット クラスター内の各TiDB Lightningインスタンスのメタ情報を格納するスキーマ名を指定します。デフォルトの値は「lightning_metadata」です。このパラメータに設定する値は、同じ並列インポートに参加するTiDB Lightningインスタンスごとに同じにする必要があります。そうしないと、インポートされたデータの正確性が保証されません。
 
     [ユーザー文書](/tidb-lightning/tidb-lightning-configuration.md#tidb-lightning-task)
 
@@ -339,7 +339,7 @@ v5.4 の主な新機能または改善点は次のとおりです。
     -   TiCDC
 
         -   「EventFeed retry rate limited」ログのカウントを減らします[#4006](https://github.com/pingcap/tiflow/issues/4006)
-        -   多数のテーブルをレプリケートする場合のレプリケーション レイテンシを削減する[#3900](https://github.com/pingcap/tiflow/issues/3900)
+        -   多数のテーブルをレプリケートする場合のレプリケーションレイテンシーを削減する[#3900](https://github.com/pingcap/tiflow/issues/3900)
         -   TiKV ストアがダウンしたときに KV クライアントが回復するまでの時間を短縮する[#3191](https://github.com/pingcap/tiflow/issues/3191)
 
     -   TiDB データ移行 (DM)
@@ -359,7 +359,7 @@ v5.4 の主な新機能または改善点は次のとおりです。
 
 -   TiDB
 
-    -   クラスタを[#25422](https://github.com/pingcap/tidb/issues/25422)から v5.x にアップグレードするときに発生する`tidb_analyze_version`の値の変更の問題を修正します。
+    -   クラスターを[#25422](https://github.com/pingcap/tidb/issues/25422)から v5.x にアップグレードするときに発生する`tidb_analyze_version`の値の変更の問題を修正します。
     -   サブクエリで異なる照合順序を使用した場合に発生する間違った結果の問題を修正します[#30748](https://github.com/pingcap/tidb/issues/30748)
     -   TiDB の`concat(ifnull(time(3))`の結果が MySQL [#29498](https://github.com/pingcap/tidb/issues/29498)の結果と異なる問題を修正
     -   オプティミスティック トランザクション モード[#30410](https://github.com/pingcap/tidb/issues/30410)での潜在的なデータ インデックスの不整合の問題を修正します。

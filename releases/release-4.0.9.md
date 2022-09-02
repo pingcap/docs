@@ -16,7 +16,7 @@ TiDB バージョン: 4.0.9
 
 -   TiKV
 
-    -   保存時の暗号化が有効になっている場合、I/O とミューテックスの競合を減らします。この変更は下位互換性がありません。ユーザーがクラスタを v4.0.9 より前のバージョンにダウングレードする必要がある場合は、ダウングレードの前に`security.encryption.enable-file-dictionary-log`を無効にし、TiKV を再起動する必要があります。 [#9195](https://github.com/tikv/tikv/pull/9195)
+    -   保存時の暗号化が有効になっている場合、I/O とミューテックスの競合を減らします。この変更は下位互換性がありません。ユーザーがクラスターを v4.0.9 より前のバージョンにダウングレードする必要がある場合は、ダウングレードの前に`security.encryption.enable-file-dictionary-log`を無効にし、TiKV を再起動する必要があります。 [#9195](https://github.com/tikv/tikv/pull/9195)
 
 ## 新機能 {#new-features}
 
@@ -31,7 +31,7 @@ TiDB バージョン: 4.0.9
     -   [ **SQL ステートメント**] ページと [<strong>スロー クエリ]</strong>ページでのディスク使用情報の表示のサポート[#777](https://github.com/pingcap/tidb-dashboard/pull/777)
     -   **SQL ステートメント**および<strong>スロー クエリ</strong>ページでのリスト データのエクスポートのサポート[#778](https://github.com/pingcap/tidb-dashboard/pull/778)
     -   Prometheus アドレスのカスタマイズをサポート[#808](https://github.com/pingcap/tidb-dashboard/pull/808)
-    -   クラスタ統計のページを追加する[#815](https://github.com/pingcap/tidb-dashboard/pull/815)
+    -   クラスター統計のページを追加する[#815](https://github.com/pingcap/tidb-dashboard/pull/815)
     -   **スロー クエリ**の詳細に時間関連のフィールドを追加します[#810](https://github.com/pingcap/tidb-dashboard/pull/810)
 
 ## 改良点 {#improvements}
@@ -66,7 +66,7 @@ TiDB バージョン: 4.0.9
 
 -   PD
 
-    -   TiKV ストアが`Tombstone`になったときに TiKVクラスタのバージョンを確認します。これにより、ユーザーはダウングレードまたはアップグレードのプロセス中に互換性のない機能を有効にすることができなくなります[#3213](https://github.com/pingcap/pd/pull/3213)
+    -   TiKV ストアが`Tombstone`になったときに TiKV クラスターのバージョンを確認します。これにより、ユーザーはダウングレードまたはアップグレードのプロセス中に互換性のない機能を有効にすることができなくなります[#3213](https://github.com/pingcap/pd/pull/3213)
     -   下位バージョンの TiKV ストアが`Tombstone`から`Up`に戻ることを許可しない[#3206](https://github.com/pingcap/pd/pull/3206)
 
 -   TiDB ダッシュボード
@@ -78,7 +78,7 @@ TiDB バージョン: 4.0.9
 
 -   ティフラッシュ
 
-    -   レプリカ読み取りのレイテンシを短縮する
+    -   レプリカ読み取りのレイテンシーを短縮する
     -   TiFlash のエラー メッセージを改善する
     -   データ量が膨大な場合にキャッシュ データのメモリ使用量を制限する
     -   処理中のコプロセッサー・タスク数のモニター・メトリックを追加します
@@ -203,7 +203,7 @@ TiDB バージョン: 4.0.9
         -   所有者のキャンペーン キーを削除すると複数の所有者が存在する可能性がある問題を修正します[#1104](https://github.com/pingcap/tiflow/pull/1104)
         -   TiKV ノードがクラッシュまたはクラッシュから回復したときに、TiCDC がデータの複製を続行できない可能性があるというバグを修正します。このバグは v4.0.8 にのみ存在します。 [#1198](https://github.com/pingcap/tiflow/pull/1198)
         -   テーブルが初期化される前に、メタデータが etcd に繰り返しフラッシュされる問題を修正します[#1191](https://github.com/pingcap/tiflow/pull/1191)
-        -   スキーマ ストレージが TiDB テーブルをキャッシュしている場合に、初期の GC または更新の遅延`TableInfo`によって引き起こされるレプリケーションの中断の問題を修正します[#1114](https://github.com/pingcap/tiflow/pull/1114)
+        -   スキーマ ストレージが TiDB テーブルをキャッシュしている場合に、初期の GC または更新のレイテンシー`TableInfo`によって引き起こされるレプリケーションの中断の問題を修正します[#1114](https://github.com/pingcap/tiflow/pull/1114)
         -   DDL 操作が頻繁に行われると、スキーマ ストレージがメモリを消費しすぎる問題を修正します[#1127](https://github.com/pingcap/tiflow/pull/1127)
         -   変更フィードが一時停止または停止されたときのゴルーチン リークを修正します[#1075](https://github.com/pingcap/tiflow/pull/1075)
         -   Kafka プロデューサーで最大再試行タイムアウトを 600 秒に増やして、ダウンストリーム Kafka [#1118](https://github.com/pingcap/tiflow/pull/1118)でのサービスまたはネットワーク ジッターによって引き起こされるレプリケーションの中断を防ぎます。
@@ -215,7 +215,7 @@ TiDB バージョン: 4.0.9
 
     -   Dumpling
 
-        -   MySQL データベース サーバーへの接続が閉じられたときにDumplingがブロックされる可能性がある問題を修正し[#190](https://github.com/pingcap/dumpling/pull/190) 。
+        -   MySQL データベースサーバーへの接続が閉じられたときにDumplingがブロックされる可能性がある問題を修正し[#190](https://github.com/pingcap/dumpling/pull/190) 。
 
     -   TiDB Lightning
 

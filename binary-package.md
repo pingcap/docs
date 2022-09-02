@@ -26,7 +26,7 @@ TiDB は`TiDB-community-server`と`TiDB-community-toolkit`の 2 つのバイナ�
 | tiup-linux-amd64.tar.gz                      |             |
 | tiup-{バージョン}-linux-amd64.tar.gz              |             |
 | local_install.sh                             |             |
-| クラスタ-{バージョン}-linux-amd64.tar.gz              |             |
+| クラスター-{バージョン}-linux-amd64.tar.gz             |             |
 | インサイト-{バージョン}-linux-amd64.tar.gz             |             |
 | diag-{バージョン}-linux-amd64.tar.gz              | v6.0.0 の新機能 |
 | influxdb-{バージョン}-linux-amd64.tar.gz          |             |

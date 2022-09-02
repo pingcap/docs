@@ -7,19 +7,19 @@ summary: Learn how to replicate TiDB data to Apache Kafka and Apache Flink using
 
 このドキュメントでは、 [TiCDC](/ticdc/ticdc-overview.md)を使用して TiDB データを Apache Kafka および Apache Flink に複製する方法について説明します。このドキュメントの構成は次のとおりです。
 
-1.  TiCDC を含む TiDBクラスタをすばやくデプロイし、Kafkaクラスタと Flinkクラスタを作成します。
+1.  TiCDC を含む TiDB クラスターをすばやくデプロイし、Kafka クラスターと Flink クラスターを作成します。
 2.  TiDB から Kafka にデータをレプリケートする変更フィードを作成します。
 3.  go-tpc を使用して TiDB にデータを書き込みます。
 4.  Kafka コンソール コンシューマーでデータを観察し、データが指定された Kafka トピックにレプリケートされていることを確認します。
-5.  (オプション) Kafka データを使用するように Flinkクラスタを構成します。
+5.  (オプション) Kafka データを使用するように Flink クラスターを構成します。
 
-上記の手順は、ラボ環境で実行されます。これらの手順を参照して、本番環境にクラスタをデプロイすることもできます。
+上記の手順は、ラボ環境で実行されます。これらの手順を参照して、本番環境にクラスターをデプロイすることもできます。
 
 ## ステップ 1. 環境をセットアップする {#step-1-set-up-the-environment}
 
-1.  TiCDC を含む TiDBクラスタをデプロイします。
+1.  TiCDC を含む TiDB クラスターをデプロイします。
 
-    ラボまたはテスト環境では、TiUP Playground を使用して、TiCDC を含む TiDBクラスタをすばやくデプロイできます。
+    ラボまたはテスト環境では、TiUP Playground を使用して、TiCDC を含む TiDB クラスターをすばやくデプロイできます。
 
     ```shell
     tiup playground --host 0.0.0.0 --db 1 --pd 1 --kv 1 --tiflash 0 --ticdc 1
@@ -29,15 +29,15 @@ summary: Learn how to replicate TiDB data to Apache Kafka and Apache Flink using
 
     TiUP がインストールされていない場合は、 [TiUPをインストールする](/tiup/tiup-overview.md#install-tiup)を参照してください。実稼働環境では、 [TiCDC をデプロイ](/ticdc/deploy-ticdc.md)の指示に従って TiCDC をデプロイできます。
 
-2.  Kafkaクラスタを作成します。
+2.  Kafka クラスターを作成します。
 
-    -   ラボ環境: Kafkaクラスタを開始するには、 [Apache Kakfa クイックスタート](https://kafka.apache.org/quickstart)を参照してください。
-    -   本番環境: [本番環境での Kafka の実行](https://docs.confluent.io/platform/current/kafka/deployment.html)を参照して、Kafka 本番クラスタをデプロイします。
+    -   ラボ環境: Kafka クラスターを開始するには、 [Apache Kakfa クイックスタート](https://kafka.apache.org/quickstart)を参照してください。
+    -   本番環境: Kafka 本番クラスターをデプロイするには、 [本番環境での Kafka の実行](https://docs.confluent.io/platform/current/kafka/deployment.html)を参照してください。
 
-3.  (オプション) Flinkクラスタを作成します。
+3.  (オプション) Flink クラスターを作成します。
 
-    -   ラボ環境: [Apache Flink の最初のステップ](https://nightlies.apache.org/flink/flink-docs-release-1.15/docs/try-flink/local_installation/)を参照して、Flinkクラスタを開始します。
-    -   本番環境: [Apache Kafka のデプロイ](https://nightlies.apache.org/flink/flink-docs-release-1.15/docs/deployment/overview/)を参照して、Flink 本番クラスタをデプロイします。
+    -   ラボ環境: Flink クラスターを開始するには、 [Apache Flink の最初のステップ](https://nightlies.apache.org/flink/flink-docs-release-1.15/docs/try-flink/local_installation/)を参照してください。
+    -   本番環境: Flink 本番クラスターをデプロイするには、 [Apache Kafka のデプロイ](https://nightlies.apache.org/flink/flink-docs-release-1.15/docs/deployment/overview/)を参照してください。
 
 ## ステップ 2. Kafka チェンジフィードを作成する {#step-2-create-a-kafka-changefeed}
 
@@ -70,7 +70,7 @@ summary: Learn how to replicate TiDB data to Apache Kafka and Apache Flink using
 
     -   コマンドの実行後に結果が返されない場合は、コマンドを実行したサーバーとシンク URI で指定された Kafka マシンとの間のネットワーク接続を確認してください。
 
-    本番環境では、Kafkaクラスタに複数のブローカー ノードがあります。したがって、複数のブローカーのアドレスをシンク UIR に追加できます。これにより、Kafkaクラスタへの安定したアクセスが保証されます。 Kafkaクラスタがダウンしても、changefeed は引き続き機能します。 Kafkaクラスタに 3 つのブローカー ノードがあり、IP アドレスがそれぞれ 127.0.0.1:9092、127.0.0.2:9092、127.0.0.3:9092 であるとします。次のシンク URI を使用して、変更フィードを作成できます。
+    本番環境では、Kafka クラスターに複数のブローカー ノードがあります。したがって、複数のブローカーのアドレスをシンク UIR に追加できます。これにより、Kafka クラスターへの安定したアクセスが保証されます。 Kafka クラスターがダウンしても、changefeed は引き続き機能します。 Kafka クラスターに 3 つのブローカー ノードがあり、IP アドレスがそれぞれ 127.0.0.1:9092、127.0.0.2:9092、127.0.0.3:9092 であるとします。次のシンク URI を使用して、変更フィードを作成できます。
 
     ```shell
     tiup ctl:v6.2.0 cdc changefeed create --pd="http://127.0.0.1:2379" --sink-uri="kafka://127.0.0.1:9092,127.0.0.2:9092,127.0.0.3:9092/kafka-topic-name?protocol=canal-json&partition-num=3&replication-factor=1&max-message-bytes=1048576" --config="changefeed.conf"
@@ -82,15 +82,15 @@ summary: Learn how to replicate TiDB data to Apache Kafka and Apache Flink using
     tiup ctl:v6.2.0 cdc changefeed list --pd="http://127.0.0.1:2379"
     ```
 
-    [TiCDC クラスターとレプリケーション タスクの管理](/ticdc/manage-ticdc.md)を参照して、変更フィードを管理できます。
+    [TiCDCクラスタとレプリケーション タスクの管理](/ticdc/manage-ticdc.md)を参照して、変更フィードを管理できます。
 
 ## ステップ 3. データを書き込んで変更ログを生成する {#step-3-write-data-to-generate-change-logs}
 
-上記の手順が完了すると、TiCDC は TiDBクラスタの増分データの変更ログを Kafka に送信します。このセクションでは、TiDB にデータを書き込んで変更ログを生成する方法について説明します。
+上記の手順が完了すると、TiCDC は TiDB クラスター内の増分データの変更ログを Kafka に送信します。このセクションでは、TiDB にデータを書き込んで変更ログを生成する方法について説明します。
 
 1.  サービスのワークロードをシミュレートします。
 
-    ラボ環境で変更ログを生成するには、go-tpc を使用してデータを TiDBクラスタに書き込みます。具体的には、次のコマンドを実行して、TiUP ベンチを使用して`tpcc`データベースを作成し、この新しいデータベースにデータを書き込みます。
+    ラボ環境で変更ログを生成するには、go-tpc を使用してデータを TiDB クラスターに書き込みます。具体的には、次のコマンドを実行して、TiUP ベンチを使用して`tpcc`データベースを作成し、この新しいデータベースにデータを書き込みます。
 
     ```shell
     tiup bench tpcc -H 127.0.0.1 -P 4000 -D tpcc --warehouses 4 prepare
@@ -113,7 +113,7 @@ summary: Learn how to replicate TiDB data to Apache Kafka and Apache Flink using
 
 1.  Flink Kafka コネクタをインストールします。
 
-    Flink エコシステムでは、Flink Kafka コネクタを使用して Kafka データを消費し、データを Flink に出力します。ただし、Flink Kafka コネクタは自動的にインストールされません。これを使用するには、Flink のインストール後に、Flink Kafka コネクタとその依存関係を Flink インストール ディレクトリに追加します。具体的には、以下の jar ファイルを Flink インストール ディレクトリの`lib`ディレクトリにダウンロードします。 Flinkクラスタを既に実行している場合は、再起動して新しいプラグインをロードします。
+    Flink エコシステムでは、Flink Kafka コネクタを使用して Kafka データを消費し、データを Flink に出力します。ただし、Flink Kafka コネクタは自動的にインストールされません。これを使用するには、Flink のインストール後に、Flink Kafka コネクタとその依存関係を Flink インストール ディレクトリに追加します。具体的には、以下の jar ファイルを Flink インストール ディレクトリの`lib`ディレクトリにダウンロードします。 Flink クラスターを既に実行している場合は、再起動して新しいプラグインをロードします。
 
     -   [flink-connector-kafka-1.15.0.jar](https://repo.maven.apache.org/maven2/org/apache/flink/flink-connector-kafka/1.15.0/flink-connector-kafka-1.15.0.jar)
     -   [flink-sql-connector-kafka-1.15.0.jar](https://repo.maven.apache.org/maven2/org/apache/flink/flink-sql-connector-kafka/1.15.0/flink-sql-connector-kafka-1.15.0.jar)

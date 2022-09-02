@@ -3,9 +3,9 @@ title: Maintain a TiFlash Cluster
 summary: Learn common operations when you maintain a TiFlash cluster.
 ---
 
-# TiFlash クラスターを管理する {#maintain-a-tiflash-cluster}
+# TiFlashクラスタを管理する {#maintain-a-tiflash-cluster}
 
-このドキュメントでは、TiFlash のバージョンの確認など、 [ティフラッシュ](/tiflash/tiflash-overview.md)クラスタを維持する際の一般的な操作を実行する方法について説明します。このドキュメントでは、重要なログと TiFlash のシステム テーブルも紹介します。
+このドキュメントでは、TiFlash のバージョンを確認するなど、 [ティフラッシュ](/tiflash/tiflash-overview.md)クラスタを維持する際の一般的な操作を実行する方法について説明します。このドキュメントでは、重要なログと TiFlash のシステム テーブルも紹介します。
 
 ## TiFlashのバージョンを確認する {#check-the-tiflash-version}
 
@@ -39,7 +39,7 @@ TiFlash のバージョンを確認するには、次の 2 つの方法があり
 
 コプロセッサー要求の開始または終了を見つけ、ログの開始時に出力されたスレッド ID を使用して、コプロセッサー要求の関連ログを見つけることができます。
 
-## TiFlash システム表 {#tiflash-system-table}
+## TiFlash システム テーブル {#tiflash-system-table}
 
 `information_schema.tiflash_replica`システム テーブルの列名とその説明は次のとおりです。
 

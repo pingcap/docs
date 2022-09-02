@@ -30,7 +30,7 @@ TiDB アンシブル バージョン: 3.0.0-rc.1
 
 -   実行エンジン
     -   `TableReader` 、 `IndexReader` 、および`IndexLookupReader` [#10003](https://github.com/pingcap/tidb/pull/10003)の 3 つの演算子でのメモリ使用量の追跡と制御をサポートします。
-    -   コプロセッサー内のタスク数、平均/最長/90% の実行/待機時間、実行時間または待機時間が最も長い TiKV のアドレスなど、コプロセッサー・タスクに関する詳細情報をスロー・ログに表示するサポート[#10165](https://github.com/pingcap/tidb/pull/10165)
+    -   コプロセッサー内のタスクの数、平均/最長/90% の実行/待機時間、および最長の実行時間または待機時間を要した TiKV のアドレスなど、スローログ内のコプロセッサータスクに関する詳細情報の表示をサポート[#10165](https://github.com/pingcap/tidb/pull/10165)
     -   プレースホルダーのない準備済み DDL ステートメントのサポート[#10144](https://github.com/pingcap/tidb/pull/10144)
 
 -   サーバ
@@ -66,11 +66,11 @@ TiDB アンシブル バージョン: 3.0.0-rc.1
     -   後続のリクエストのブロックを回避するために、失敗する「提案」および「読み取り」リクエストの迅速なドロップをサポートします
     -   Lease のデッドロックの問題を修正
 -   ホット ストアでキーの統計が正しくない問題を修正します[#1487](https://github.com/pingcap/pd/pull/1487)
--   単一の PD ノードから PDクラスタを強制的に再構築するサポート[#1485](https://github.com/pingcap/pd/pull/1485)
+-   単一の PD ノードから PD クラスターを強制的に再構築するサポート[#1485](https://github.com/pingcap/pd/pull/1485)
 -   `regionScatterer`が無効な`OperatorStep` [#1482](https://github.com/pingcap/pd/pull/1482)を生成する可能性がある問題を修正
 -   `MergeRegion`オペレーター[#1495](https://github.com/pingcap/pd/pull/1495)のタイムアウトが短すぎる問題を修正
 -   ホット リージョン スケジューリングを優先するサポート[#1492](https://github.com/pingcap/pd/pull/1492)
--   PD サーバー側での TSO 要求の処理時間を記録するためのメトリックを追加します[#1502](https://github.com/pingcap/pd/pull/1502)
+-   PDサーバー側での TSO 要求の処理時間を記録するためのメトリックを追加します[#1502](https://github.com/pingcap/pd/pull/1502)
 -   対応する店舗 ID と住所を、店舗に関連するメトリクスに追加します[#1506](https://github.com/pingcap/pd/pull/1506)
 -   `GetOperator`サービス[#1477](https://github.com/pingcap/pd/pull/1477)をサポート
 -   ストアが見つからないため、Heartbeat ストリームでエラーを送信できない問題を修正します[#1521](https://github.com/pingcap/pd/pull/1521)
@@ -120,7 +120,7 @@ TiDB アンシブル バージョン: 3.0.0-rc.1
     -   行 ID またはデフォルトの列値を使用して、ダンプ ファイルに含まれていない列データを入力します[#170](https://github.com/pingcap/tidb-lightning/pull/170)
     -   SST の一部のインポートに失敗した場合でも、インポートの成功が返される可能性があるというインポーターのバグを修正します[#4566](https://github.com/tikv/tikv/pull/4566)
     -   SST を TiKV [#4412](https://github.com/tikv/tikv/pull/4412)にアップロードする際の Importer での速度制限のサポート
-    -   サイズごとのテーブルのインポートをサポートして、大きなテーブルのチェックサムと分析によってもたらされるクラスタへの影響を軽減し、チェックサムと分析[#156](https://github.com/pingcap/tidb-lightning/pull/156)の成功率を向上させます
+    -   サイズごとのテーブルのインポートをサポートして、大きなテーブルのチェックサムと分析によってもたらされるクラスターへの影響を軽減し、チェックサムと分析[#156](https://github.com/pingcap/tidb-lightning/pull/156)の成功率を向上させます
     -   データ ソース ファイルをタイプとして直接解析することで、Lightning の SQL エンコーディングのパフォーマンスを 50% 向上させ[#145](https://github.com/pingcap/tidb-lightning/pull/145) 。
     -   ログ形式を[統合ログ形式](https://github.com/tikv/rfcs/blob/master/text/0018-unified-log-format.md) [#162](https://github.com/pingcap/tidb-lightning/pull/162)に変更
     -   構成ファイルが見つからない場合に使用するコマンド ライン オプションをいくつか追加し[#157](https://github.com/pingcap/tidb-lightning/pull/157) 。
@@ -132,7 +132,7 @@ TiDB アンシブル バージョン: 3.0.0-rc.1
 ## TiDB アンシブル {#tidb-ansible}
 
 -   より多くの TiKV 監視パネルをサポートし、Ansible、Grafana、Prometheus [#727](https://github.com/pingcap/tidb-ansible/pull/727)のバージョンを更新
-    -   クラスタのステータスを表示するための概要ダッシュボード
+    -   クラスターのステータスを表示するための概要ダッシュボード
     -   問題をトラブルシューティングするための trouble_shooting ダッシュボード
     -   開発者が問題を分析するための詳細ダッシュボード
 -   Kafka バージョン[#730](https://github.com/pingcap/tidb-ansible/pull/730)の TiDB Binlogのダウンロードに失敗するバグを修正

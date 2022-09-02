@@ -457,7 +457,7 @@ Query OK, 0 rows affected (0.08 sec)
 -   処理する
 -   プロセスリスト
 -   プロフィール
--   プロフィール
+-   プロファイル
 -   ポンプ(R)
 
 <a id="Q" class="letter" href="#Q">Q</a>

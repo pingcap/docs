@@ -4,7 +4,7 @@ title: tiup cluster deploy
 
 # tiup cluster deploy {#tiup-cluster-deploy}
 
-`tiup cluster deploy`コマンドは、新しいクラスタをデプロイするために使用されます。
+`tiup cluster deploy`コマンドは、新しいクラスターをデプロイするために使用されます。
 
 ## 構文 {#syntax}
 
@@ -12,8 +12,8 @@ title: tiup cluster deploy
 tiup cluster deploy <cluster-name> <version> <topology.yaml> [flags]
 ```
 
--   `<cluster-name>` : 新しいクラスタの名前。既存のクラスタ名と同じにすることはできません。
--   `<version>` : デプロイする TiDBクラスタのバージョン番号 ( `v6.2.0`など)。
+-   `<cluster-name>` : 新しいクラスターの名前。既存のクラスター名と同じにすることはできません。
+-   `<version>` : デプロイする TiDB クラスターのバージョン番号 ( `v6.2.0`など)。
 -   `<topology.yaml>` : 準備された[トポロジ ファイル](/tiup/tiup-cluster-topology-reference.md) 。
 
 ## オプション {#options}
@@ -45,14 +45,14 @@ tiup cluster deploy <cluster-name> <version> <topology.yaml> [flags]
 ### --no-labels {#no-labels}
 
 -   このオプションは、ラベル チェックをスキップするために使用されます。
--   2 つ以上の TiKV ノードが同じ物理マシンにデプロイされている場合、リスクが存在します。PD はクラスタトポロジを学習できないため、PD はリージョンの複数のレプリカを 1 つの物理マシン上の異なる TiKV ノードにスケジュールし、この物理マシンを単一の物理マシンにする可能性があります。点。このリスクを回避するために、ラベルを使用して、同じリージョンを同じマシンにスケジュールしないように PD に指示できます。ラベルの構成については、 [トポロジ ラベルごとにレプリカをスケジュールする](/schedule-replicas-by-topology-labels.md)を参照してください。
+-   2 つ以上の TiKV ノードが同じ物理マシンにデプロイされている場合、リスクが存在します。PD はクラスター トポロジを学習できないため、PD はリージョンの複数のレプリカを 1 つの物理マシン上の異なる TiKV ノードにスケジュールし、この物理マシンを単一の物理マシンにする可能性があります。点。このリスクを回避するために、ラベルを使用して、同じリージョンを同じマシンにスケジュールしないように PD に指示できます。ラベルの構成については、 [トポロジ ラベルごとにレプリカをスケジュールする](/schedule-replicas-by-topology-labels.md)を参照してください。
 -   テスト環境では、このリスクが問題になる可能性があり、 `--no-labels`を使用してチェックをスキップできます。
 -   データ型: `BOOLEAN`
 -   このオプションはデフォルトで無効になっており、デフォルト値は`false`です。このオプションを有効にするには、このオプションをコマンドに追加して、値`true`を渡すか、値を何も渡さないようにします。
 
 ### --skip-create-user {#skip-create-user}
 
--   クラスタのデプロイ中に、tiup-cluster は、トポロジー ファイルで指定されたユーザー名が存在するかどうかをチェックします。そうでない場合は作成します。このチェックをスキップするには、 `--skip-create-user`オプションを使用できます。
+-   クラスターのデプロイ中に、 tiup-clusterは、トポロジー ファイルで指定されたユーザー名が存在するかどうかをチェックします。そうでない場合は作成します。このチェックをスキップするには、 `--skip-create-user`オプションを使用できます。
 -   データ型: `BOOLEAN`
 -   このオプションはデフォルトで無効になっており、デフォルト値は`false`です。このオプションを有効にするには、このオプションをコマンドに追加して、値`true`を渡すか、値を何も渡さないようにします。
 
@@ -66,4 +66,4 @@ tiup cluster deploy <cluster-name> <version> <topology.yaml> [flags]
 
 展開ログ。
 
-[&lt;&lt; 前のページに戻る - TiUP Clusterコマンド一覧](/tiup/tiup-component-cluster.md#command-list)
+[&lt;&lt; 前のページに戻る - TiUP クラスタコマンド一覧](/tiup/tiup-component-cluster.md#command-list)

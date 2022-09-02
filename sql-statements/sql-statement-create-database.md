@@ -25,7 +25,7 @@ DatabaseOptionListOpt ::=
 
 ## 構文 {#syntax}
 
-`CREATE DATABASE`ステートメントは、データベースを作成し、データベースの既定のプロパティ (既定の文字セットや照合順序など) を指定するために使用されます。 `CREATE SCHEMA`は`CREATE DATABASE`の同義語です。
+`CREATE DATABASE`ステートメントは、データベースを作成し、デフォルトの文字セットや照合順序など、データベースのデフォルト プロパティを指定するために使用されます。 `CREATE SCHEMA`は`CREATE DATABASE`の同義語です。
 
 ```sql
 CREATE {DATABASE | SCHEMA} [IF NOT EXISTS] db_name

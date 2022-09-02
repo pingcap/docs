@@ -23,8 +23,8 @@ TiDB は、TiDB ダッシュボードの[Top SQL](/dashboard/top-sql.md)と[継�
 -   ビジネスで使用するSQL文：合計200文、そのうち9割がSELECT文。これは典型的な読み取り負荷の高い OLTP ワークロードです。
 -   トランザクションで使用されるテーブル: 合計 60 テーブル。 12 個のテーブルには更新操作が含まれ、残りの 48 個のテーブルは読み取り専用です。
 -   アプリケーションが使用する分離レベル: `read committed` 。
--   TiDBクラスタ構成: 3 つの TiDB ノードと 3 つの TiKV ノードで、各ノードに 16 個の CPU が割り当てられます。
--   クライアント サーバー構成: 36 個の CPU。
+-   TiDB クラスター構成: 3 つの TiDB ノードと 3 つの TiKV ノードで、各ノードに 16 個の CPU が割り当てられます。
+-   クライアントサーバー構成: 36 個の CPU。
 
 ## シナリオ 1. Query インターフェイスを使用する {#scenario-1-use-the-query-interface}
 
@@ -63,10 +63,10 @@ useServerPrepStmts=false
 -   SQL 実行時間の概要: `Get` 、 `Cop` 、および`tso wait`が最も時間がかかります。
 -   タイプ別 CPS: `Query`コマンドのみが使用されます。
 -   Plan Cache を使用したクエリ OPS: no data は、実行プラン キャッシュがヒットしていないことを示します。
--   クエリ期間では、 `execute`と`compile`のレイテンシが最も高い割合を占めています。
+-   クエリ期間では、 `execute`と`compile`のレイテンシーが最も高い割合を占めています。
 -   平均 QPS = 56.8k
 
-クラスタのリソース消費を確認します。TiDB CPU の平均使用率は 925%、TiKV CPU の平均使用率は 201%、TiKV IO の平均スループットは 18.7 MB/秒です。 TiDB のリソース消費は大幅に高くなります。
+クラスターのリソース消費を確認します。TiDB CPU の平均使用率は 925%、TiKV CPU の平均使用率は 201%、TiKV IO の平均スループットは 18.7 MB/秒です。 TiDB のリソース消費は大幅に高くなります。
 
 ![performance-overview-2-for-query-interface](/media/performance/5.png)
 
@@ -118,7 +118,7 @@ useServerPrepStmts=false&useConfigs=maxPerformance
 
 ![performance-overview-2-for-maxPerformance](/media/performance/9.1.1.png)
 
-主なレイテンシ メトリックの変更点は次のとおりです。
+主なレイテンシーメトリックの変更点は次のとおりです。
 
 ![performance-overview-3-for-maxPerformance](/media/performance/9.2.2.png)
 
@@ -129,9 +129,9 @@ useServerPrepStmts=false&useConfigs=maxPerformance
 
 ### 分析の結論 {#analysis-conclusion}
 
-シナリオ 1 と比較して、シナリオ 2 の QPS は大幅に減少しています。平均クエリ期間と平均`parse` 、 `compile` 、および`execute`期間が大幅に増加しました。これは、シナリオ 1 の`select @@session.transaction_read_only`のように、実行回数が多く処理時間が速い SQL ステートメントが平均パフォーマンス データを下げるためです。シナリオ 2 がそのようなステートメントをブロックした後、ビジネス関連の SQL ステートメントのみが残るため、平均所要時間は増加します。
+シナリオ 1 と比較して、シナリオ 2 の QPS は大幅に減少しています。平均クエリ期間と平均`parse` 、 `compile` 、および`execute`期間が大幅に増加しました。これは、シナリオ 1 の`select @@session.transaction_read_only`のように、実行回数が多く処理時間が速い SQL ステートメントが平均パフォーマンス データを下げるためです。シナリオ 2 がそのようなステートメントをブロックした後、ビジネス関連の SQL ステートメントのみが残るため、平均所要時間は長くなります。
 
-アプリケーションが Query インターフェースを使用する場合、TiDB は実行計画キャッシュを使用できないため、TiDB は実行計画をコンパイルするために大量のリソースを消費します。この場合、TiDB の実行計画キャッシュを使用して、実行計画のコンパイルによる TiDB の CPU 消費を削減し、待ち時間を短縮する Prepared Statement インターフェイスを使用することをお勧めします。
+アプリケーションが Query インターフェースを使用する場合、TiDB は実行計画キャッシュを使用できないため、TiDB は実行計画をコンパイルするために大量のリソースを消費します。この場合、TiDB の実行計画キャッシュを使用して、実行計画のコンパイルによる TiDB の CPU 消費を減らし、レイテンシーを短縮する Prepared Statement インターフェイスを使用することをお勧めします。
 
 ## シナリオ 3. 実行計画のキャッシュを有効にせずに Prepared Statement インターフェイスを使用する {#scenario-3-use-the-prepared-statement-interface-with-execution-plan-caching-not-enabled}
 
@@ -162,7 +162,7 @@ useServerPrepStmts=true&useConfigs=maxPerformance"
 
 ![performance-overview-1-for-PrepStmts](/media/performance/j-3.png)
 
-QPS は 24.4k から 19.7k に低下します。データベース時間の概要から、アプリケーションが 3 種類のプリペアド コマンドを使用し、 `general`ステートメント タイプ ( `StmtPrepare`や`StmtClose`などのコマンドの実行時間を含む) が SQL タイプ別データベース時間で 2 位になっていることがわかります。これは、Prepared Statement インターフェースを使用しても、実行プランのキャッシュにヒットしないことを示しています。その理由は、 `StmtClose`コマンドが実行されると、TiDB が内部処理で SQL ステートメントの実行計画キャッシュをクリアするためです。
+QPS は 24.4k から 19.7k に低下します。データベース時間の概要から、アプリケーションが 3 種類のプリペアド コマンドを使用していることがわかります`general`ステートメント タイプ ( `StmtPrepare`や`StmtClose`などのコマンドの実行時間を含む) は、SQL タイプ別のデータベース時間で 2 位です。これは、Prepared Statement インターフェースを使用しても、実行プランのキャッシュにヒットしないことを示しています。その理由は、 `StmtClose`コマンドが実行されると、TiDB が内部処理で SQL ステートメントの実行計画キャッシュをクリアするためです。
 
 -   SQL タイプ別のデータベース時間: `Select`のステートメント タイプに最も時間がかかり、その後に`general`のステートメントが続きます。
 -   SQL フェーズごとのデータベース時間: `execute`フェーズと`compile`フェーズに最も時間がかかります。
@@ -175,7 +175,7 @@ TiDB の平均 CPU 使用率は 874% から 936% に増加します。
 
 ![performance-overview-1-for-PrepStmts](/media/performance/3-2.png)
 
-主なレイテンシ メトリックは次のとおりです。
+主なレイテンシーメトリックは次のとおりです。
 
 ![performance-overview-2-for-PrepStmts](/media/performance/3.4.png)
 
@@ -273,7 +273,7 @@ useServerPrepStmts=true&cachePrepStmts=true&prepStmtCacheSize=1000&prepStmtCache
 
 #### パフォーマンス概要ダッシュボード {#performance-overview-dashboard}
 
-Performance Overview ダッシュボードで最も注目すべき変更点は、 **CPS By Type**ペインの 3 つの Stmt コマンド タイプが 1 つのタイプにドロップされたこと、 <strong>Database Time by SQL Type</strong>ペインの`general`のステートメント タイプが消えたこと、および<strong>QPS</strong>ペインの QPS がなくなったことです。 30.9k に増加します。
+Performance Overview ダッシュボードで最も注目すべき変更点は、[ **CPS By Type** ] ペインの 3 つの Stmt コマンド タイプが 1 つのタイプにドロップされ、[ <strong>Database Time by SQL Type</strong> ] ペインの`general`のステートメント タイプが削除され、[ <strong>QPS]</strong>ペインの QPS が削除されたことです。 30.9k に増加します。
 
 ![performance-overview-for-1-command](/media/performance/j-5.png)
 
@@ -288,7 +288,7 @@ Performance Overview ダッシュボードで最も注目すべき変更点は�
 
 ![performance-overview-for-2-command](/media/performance/j-5-cpu.png)
 
-主なレイテンシ メトリックは次のとおりです。
+主なレイテンシーメトリックは次のとおりです。
 
 ![performance-overview-for-3-command](/media/performance/j-5-duration.png)
 
@@ -302,7 +302,7 @@ Performance Overview ダッシュボードで最も注目すべき変更点は�
 ### 分析の結論 {#analysis-conclusion}
 
 -   シナリオ 4 と比較すると、シナリオ 5 の**CPS By Type**ペインには`StmtExecute`コマンドしかないため、2 つのネットワーク ラウンド トリップが回避され、システム全体の QPS が向上します。
--   QPS が増加した場合、解析時間、コンパイル時間、および実行時間に関してレイテンシは減少しますが、クエリ時間は代わりに増加します。これは、TiDB が`StmtPrepare`と`StmtClose`を非常に迅速に処理するためであり、これら 2 つのコマンド タイプを排除すると、クエリの平均時間が長くなります。
+-   QPS が増加した場合、解析時間、コンパイル時間、および実行時間に関してレイテンシーは減少しますが、クエリ時間は代わりに増加します。これは、TiDB が`StmtPrepare`と`StmtClose`を非常に迅速に処理するためであり、これら 2 つのコマンド タイプを排除すると、クエリの平均時間が長くなります。
 -   SQL フェーズ別のデータベース時間では、 `execute`が最も時間がかかり、データベース時間に近くなっています。 SQL 実行時間の概要では、 `tso wait`がほとんどの時間を要し、 `execute`の 4 分の 1 以上の時間が TSO の待機に費やされています。
 -   合計`tso wait`秒あたりの時間は 5.46 秒です。平均`tso wait`回は 196us、1 秒あたりの`tso cmd`回の回数は 28k で、QPS の 30.9k に非常に近い値です。これは、TiDB での`read committed`分離レベルの実装によると、トランザクション内のすべての SQL ステートメントが PD から TSO を要求する必要があるためです。
 
@@ -345,7 +345,7 @@ RC 読み取りを使用した後、QPS は 30.9k から 34.9k に増加し、 `
 
 ![performance-overview-3-for-rc-read](/media/performance/j-6-cpu.png)
 
-主なレイテンシ メトリックは次のとおりです。
+主なレイテンシーメトリックは次のとおりです。
 
 ![performance-overview-4-for-rc-read](/media/performance/j-6-duration.png)
 
@@ -359,7 +359,7 @@ RC 読み取りを使用した後、QPS は 30.9k から 34.9k に増加し、 `
 
 RC Read by `set global tidb_rc_read_check_ts=on;`を有効にすると、RC Read によって`tso cmd`の時間が大幅に短縮されるため、 `tso wait`と平均クエリ時間が短縮され、QPS が向上します。
 
-現在のデータベース時間と待機時間の両方のボトルネックは`execute`フェーズにあり、 `Get`と`Cop`の読み取り要求の割合が最も高くなります。このワークロードのほとんどのテーブルは読み取り専用であるか、めったに変更されないため、TiDB v6.0.0 以降でサポートされている小さなテーブル キャッシュ機能を使用して、これらの小さなテーブルのデータをキャッシュし、KV 読み取り要求の待機時間とリソース消費を削減できます。 .
+現在のデータベース時間とレイテンシー時間の両方のボトルネックは`execute`フェーズにあり、 `Get`と`Cop`の読み取り要求の割合が最も高くなります。このワークロードのほとんどのテーブルは読み取り専用であるか、めったに変更されないため、TiDB v6.0.0 以降でサポートされている小さなテーブル キャッシュ機能を使用して、これらの小さなテーブルのデータをキャッシュし、KV 読み取り要求の待機時間とリソース消費を削減できます。 .
 
 ## シナリオ 7: 小さなテーブル キャッシュを使用する {#scenario-7-use-the-small-table-cache}
 
@@ -392,7 +392,7 @@ QPS は 34.9k から 40.9k に増加し、KV リクエスト タイプは`Prewri
 
 ![performance-overview-2-for-table-cache](/media/performance/j-7-cpu.png)
 
-平均クエリ レイテンシは 533 us から 313 us に減少します。平均`execute`レイテンシーは 466 us から 250 us に減少します。
+平均クエリレイテンシーは 533 us から 313 us に減少します。平均`execute`レイテンシーは 466 us から 250 us に減少します。
 
 ![performance-overview-3-for-table-cache](/media/performance/j-7-duration.png)
 
@@ -405,7 +405,7 @@ QPS は 34.9k から 40.9k に増加し、KV リクエスト タイプは`Prewri
 
 すべての読み取り専用テーブルをキャッシュした後、 `Execute Duration`は大幅に低下します。これは、すべての読み取り専用テーブルが TiDB にキャッシュされ、これらのテーブルについて TiKV でデータをクエリする必要がないため、クエリの所要時間が短縮され、QPS が増加するためです。
 
-これは楽観的な結果です。実際のビジネスでの読み取り専用テーブルのデータは、TiDB がすべてをキャッシュするには大きすぎる可能性があるためです。もう 1 つの制限は、小さなテーブル キャッシュ機能は書き込み操作をサポートしていますが、すべての TiDB ノードのキャッシュが最初に無効化されることを保証するために、書き込み操作にはデフォルトで 3 秒の待機が必要であることです。
+これは楽観的な結果です。実際のビジネスでの読み取り専用テーブルのデータは、TiDB がすべてをキャッシュするには大きすぎる可能性があるためです。もう 1 つの制限は、小さなテーブル キャッシュ機能は書き込み操作をサポートしていますが、すべてのレイテンシーノードのキャッシュが最初に無効化されることを保証するために、書き込み操作にはデフォルトで 3 秒の待機が必要であることです。
 
 ## 概要 {#summary}
 
@@ -418,8 +418,8 @@ QPS は 34.9k から 40.9k に増加し、KV リクエスト タイプは`Prewri
 
 これらのシナリオでは、シナリオ 2 はアプリケーションが Query インターフェースを使用する一般的なシナリオであり、シナリオ 5 はアプリケーションが Prepared Statement インターフェースを使用する理想的なシナリオです。
 
--   シナリオ 2 とシナリオ 5 を比較すると、Java アプリケーション開発のベスト プラクティスを使用し、Prepared Statement オブジェクトをクライアント側にキャッシュすることで、各 SQL ステートメントが実行計画キャッシュにアクセスするために必要なコマンドとデータベースの対話は 1 回だけであることがわかります。クエリのレイテンシが 38% 低下し、QPS が 28% 増加し、TiDB の平均 CPU 使用率が 936% から 577% に低下しました。
--   シナリオ 2 とシナリオ 7 を比較すると、RC 読み取りや小さなテーブル キャッシュなどの最新の TiDB 最適化機能をシナリオ 5 に加えることで、平均的な TiDB CPU が使用率は 936% から 478% に低下します。
+-   シナリオ 2 とシナリオ 5 を比較すると、Java アプリケーション開発のベスト プラクティスを使用し、Prepared Statement オブジェクトをクライアント側にキャッシュすることで、各 SQL ステートメントが実行計画キャッシュにアクセスするために必要なコマンドとデータベースの対話は 1 回だけであることがわかります。クエリのレイテンシーが 38% 低下し、QPS が 28% 増加し、TiDB の平均 CPU 使用率が 936% から 577% に低下しました。
+-   シナリオ 2 とシナリオ 7 を比較すると、RC 読み取りや小さなテーブル キャッシュなどの最新のレイテンシー最適化機能をシナリオ 5 に加えることで、平均的な TiDB CPU が使用率は 936% から 478% に低下します。
 
 各シナリオのパフォーマンスを比較すると、次の結論を導き出すことができます。
 
@@ -435,6 +435,6 @@ QPS は 34.9k から 40.9k に増加し、KV リクエスト タイプは`Prewri
 
     -   [Top SQL](/dashboard/top-sql.md)の機能を使用すると、実行中にデータベース内の各 SQL ステートメントの CPU 消費を視覚的に監視および調査して、データベースのパフォーマンスの問題をトラブルシューティングできます。
     -   [継続的なプロファイリング](/dashboard/continuous-profiling.md)を使用すると、TiDB、TiKV、および PD の各インスタンスからパフォーマンス データを継続的に収集できます。アプリケーションが異なるインターフェイスを使用して TiDB と対話する場合、TiDB の CPU 消費量の違いは非常に大きくなります。
-    -   [パフォーマンス概要ダッシュボード](/grafana-performance-overview-dashboard.md)を使用すると、データベース時間と SQL 実行時間の内訳情報の概要を取得できます。データベース時間に基づいてパフォーマンスを分析および診断し、システム全体のパフォーマンスのボトルネックが TiDB にあるかどうかを判断できます。ボトルネックが TiDB にある場合は、データベース時間と待機時間の内訳を負荷プロファイルとリソース使用量とともに使用して、TiDB 内のパフォーマンスのボトルネックを特定し、それに応じてパフォーマンスを調整できます。
+    -   [パフォーマンス概要ダッシュボード](/grafana-performance-overview-dashboard.md)を使用すると、データベース時間と SQL 実行時間の内訳情報の概要を取得できます。データベース時間に基づいてパフォーマンスを分析および診断し、システム全体のパフォーマンスのボトルネックが TiDB にあるかどうかを判断できます。ボトルネックが TiDB にある場合は、データベース時間とレイテンシー時間の内訳を負荷プロファイルとリソース使用量とともに使用して、TiDB 内のパフォーマンスのボトルネックを特定し、それに応じてパフォーマンスを調整できます。
 
 これらの機能を組み合わせて使用することで、実際のアプリケーションのパフォーマンスを効率的に分析および調整できます。

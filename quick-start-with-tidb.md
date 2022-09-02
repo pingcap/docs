@@ -7,7 +7,7 @@ summary: Learn how to quickly get started with the TiDB platform and see if TiDB
 
 このガイドでは、TiDB の使用を開始するための最も簡単な方法について説明します。非本番環境では、次のいずれかの方法で TiDB データベースをデプロイできます。
 
--   [ローカル テストクラスタをデプロイする](#deploy-a-local-test-cluster) (macOS および Linux の場合)
+-   [ローカル テスト クラスターをデプロイする](#deploy-a-local-test-cluster) (macOS および Linux の場合)
 -   [1 台のマシンで本番環境のデプロイをシミュレートする](#simulate-production-deployment-on-a-single-machine) (Linux のみ)
 
 > **ノート：**
@@ -16,18 +16,18 @@ summary: Learn how to quickly get started with the TiDB platform and see if TiDB
 >
 > -   このガイドで提供されている展開方法は、**本番**用ではなく、クイック スタート<strong>専用</strong>です。
 >
->     -   オンプレミスの本番クラスタをデプロイするには、 [プロダクション インストール ガイド](/production-deployment-using-tiup.md)を参照してください。
+>     -   オンプレミスの本番クラスターをデプロイするには、 [プロダクション インストール ガイド](/production-deployment-using-tiup.md)を参照してください。
 >     -   TiDB を Kubernetes にデプロイするには、 [Kubernetes で TiDB を使い始める](https://docs.pingcap.com/tidb-in-kubernetes/stable/get-started)を参照してください。
 >     -   クラウドで TiDB を管理するには、 [TiDB Cloudクイック スタート](https://docs.pingcap.com/tidbcloud/tidb-cloud-quickstart)を参照してください。
 
-## ローカル テストクラスタをデプロイする {#deploy-a-local-test-cluster}
+## ローカル テスト クラスターをデプロイする {#deploy-a-local-test-cluster}
 
--   シナリオ: 単一の macOS または Linux サーバーを使用して、テスト用にローカル TiDBクラスタをすばやく展開します。このようなクラスタをデプロイすることで、TiDB の基本的なアーキテクチャと、TiDB、TiKV、PD、および監視コンポーネントなどのコンポーネントの操作を学習できます。
+-   シナリオ: 単一の macOS または Linuxサーバーを使用して、テスト用にローカル TiDB クラスターをすばやく展開します。このようなクラスターをデプロイすることで、TiDB の基本的なアーキテクチャと、TiDB、TiKV、PD、および監視コンポーネントなどのコンポーネントの操作を学習できます。
 
 <SimpleTab>
 <div label="macOS">
 
-分散システムとして、基本的な TiDB テストクラスタは通常、2 つの TiDB インスタンス、3 つの TiKV インスタンス、3 つの PD インスタンス、およびオプションの TiFlash インスタンスで構成されます。 TiUP Playground を使用すると、次の手順を実行して、テストクラスタをすばやく構築できます。
+分散システムとして、基本的な TiDB テスト クラスターは通常、2 つの TiDB インスタンス、3 つの TiKV インスタンス、3 つの PD インスタンス、およびオプションの TiFlash インスタンスで構成されます。 TiUP Playground を使用すると、次の手順を実行して、テスト クラスターをすばやく構築できます。
 
 1.  TiUP をダウンロードしてインストールします。
 
@@ -65,9 +65,9 @@ summary: Learn how to quickly get started with the TiDB platform and see if TiDB
     source ${your_shell_profile}
     ```
 
-3.  現在のセッションでクラスタを開始します。
+3.  現在のセッションでクラスターを開始します。
 
-    -   1 つの TiDB インスタンス、1 つの TiKV インスタンス、1 つの PD インスタンス、および 1 つの TiFlash インスタンスで最新バージョンの TiDBクラスタを開始する場合は、次のコマンドを実行します。
+    -   1 つの TiDB インスタンス、1 つの TiKV インスタンス、1 つの PD インスタンス、および 1 つの TiFlash インスタンスで最新バージョンの TiDB クラスターを開始する場合は、次のコマンドを実行します。
 
         {{< copyable "" >}}
 
@@ -83,9 +83,9 @@ summary: Learn how to quickly get started with the TiDB platform and see if TiDB
         tiup playground v6.2.0 --db 2 --pd 3 --kv 3
         ```
 
-        このコマンドは、v6.2.0 などのバージョンクラスタをローカル マシンにダウンロードして起動します。最新バージョンを表示するには、 `tiup list tidb`を実行します。
+        このコマンドは、v6.2.0 などのバージョン クラスターをローカル マシンにダウンロードして起動します。最新バージョンを表示するには、 `tiup list tidb`を実行します。
 
-        このコマンドは、クラスタのアクセス方法を返します。
+        このコマンドは、クラスターのアクセス方法を返します。
 
         ```log
         CLUSTER START SUCCESSFULLY, Enjoy it ^-^
@@ -100,7 +100,7 @@ summary: Learn how to quickly get started with the TiDB platform and see if TiDB
         > **ノート：**
         >
         > -   v5.2.0 以降、TiDB は Apple M1 チップを使用するマシンでの`tiup playground`の実行をサポートしています。
-        > -   このように運用されているプレイグラウンドの場合、テスト デプロイが終了した後、TiUP は元のクラスタデータをクリーンアップします。コマンドを再実行すると、新しいクラスタが取得されます。
+        > -   このように運用されているプレイグラウンドの場合、テスト デプロイが終了した後、TiUP は元のクラスター データをクリーンアップします。コマンドを再実行すると、新しいクラスターが取得されます。
         > -   データをストレージに保持する場合は、 `tiup --tag <your-tag> playground ...`を実行します。詳細は[TiUPリファレンスガイド](/tiup/tiup-reference.md#-t---tag)を参照してください。
 
 4.  TiDB にアクセスするための新しいセッションを開始します。
@@ -129,7 +129,7 @@ summary: Learn how to quickly get started with the TiDB platform and see if TiDB
 
 8.  (オプション) 分析用に[データを TiFlash にロードする](/tiflash/tiflash-overview.md#use-tiflash) 。
 
-9.  テスト デプロイ後にクラスタをクリーンアップします。
+9.  テスト デプロイ後にクラスターをクリーンアップします。
 
     1.  <kbd>Control+C</kbd>を押して、上記の TiDB サービスを停止します。
 
@@ -148,7 +148,7 @@ summary: Learn how to quickly get started with the TiDB platform and see if TiDB
 </div>
 <div label="Linux">
 
-分散システムとして、基本的な TiDB テストクラスタは通常、2 つの TiDB インスタンス、3 つの TiKV インスタンス、3 つの PD インスタンス、およびオプションの TiFlash インスタンスで構成されます。 TiUP Playground を使用すると、次の手順を実行して、テストクラスタをすばやく構築できます。
+分散システムとして、基本的な TiDB テスト クラスターは通常、2 つの TiDB インスタンス、3 つの TiKV インスタンス、3 つの PD インスタンス、およびオプションの TiFlash インスタンスで構成されます。 TiUP Playground を使用すると、次の手順を実行して、テスト クラスターをすばやく構築できます。
 
 1.  TiUP をダウンロードしてインストールします。
 
@@ -186,9 +186,9 @@ summary: Learn how to quickly get started with the TiDB platform and see if TiDB
     source ${your_shell_profile}
     ```
 
-3.  現在のセッションでクラスタを開始します。
+3.  現在のセッションでクラスターを開始します。
 
-    -   1 つの TiDB インスタンス、1 つの TiKV インスタンス、1 つの PD インスタンス、および 1 つの TiFlash インスタンスで最新バージョンの TiDBクラスタを開始する場合は、次のコマンドを実行します。
+    -   1 つの TiDB インスタンス、1 つの TiKV インスタンス、1 つの PD インスタンス、および 1 つの TiFlash インスタンスで最新バージョンの TiDB クラスターを開始する場合は、次のコマンドを実行します。
 
         {{< copyable "" >}}
 
@@ -204,9 +204,9 @@ summary: Learn how to quickly get started with the TiDB platform and see if TiDB
         tiup playground v6.2.0 --db 2 --pd 3 --kv 3
         ```
 
-        このコマンドは、v6.2.0 などのバージョンクラスタをローカル マシンにダウンロードして起動します。最新バージョンを表示するには、 `tiup list tidb`を実行します。
+        このコマンドは、v6.2.0 などのバージョン クラスターをローカル マシンにダウンロードして起動します。最新バージョンを表示するには、 `tiup list tidb`を実行します。
 
-        このコマンドは、クラスタのアクセス方法を返します。
+        このコマンドは、クラスターのアクセス方法を返します。
 
         ```log
         CLUSTER START SUCCESSFULLY, Enjoy it ^-^
@@ -219,7 +219,7 @@ summary: Learn how to quickly get started with the TiDB platform and see if TiDB
 
         > **ノート：**
         >
-        > このように運用されているプレイグラウンドの場合、テスト デプロイが終了した後、TiUP は元のクラスタデータをクリーンアップします。コマンドを再実行すると、新しいクラスタが取得されます。データをストレージに保持する場合は、 `tiup --tag <your-tag> playground ...`を実行します。詳細は[TiUPリファレンスガイド](/tiup/tiup-reference.md#-t---tag)を参照してください。
+        > このように運用されているプレイグラウンドの場合、テスト デプロイが終了した後、TiUP は元のクラスター データをクリーンアップします。コマンドを再実行すると、新しいクラスターが取得されます。データをストレージに保持する場合は、 `tiup --tag <your-tag> playground ...`を実行します。詳細は[TiUPリファレンスガイド](/tiup/tiup-reference.md#-t---tag)を参照してください。
 
 4.  TiDB にアクセスするための新しいセッションを開始します。
 
@@ -247,7 +247,7 @@ summary: Learn how to quickly get started with the TiDB platform and see if TiDB
 
 8.  (オプション) 分析用に[データを TiFlash にロードする](/tiflash/tiflash-overview.md#use-tiflash) 。
 
-9.  テスト デプロイ後にクラスタをクリーンアップします。
+9.  テスト デプロイ後にクラスターをクリーンアップします。
 
     1.  <kbd>Control+C</kbd>を押してプロセスを停止します。
 
@@ -268,9 +268,9 @@ summary: Learn how to quickly get started with the TiDB platform and see if TiDB
 
 ## 1 台のマシンで本番環境のデプロイをシミュレートする {#simulate-production-deployment-on-a-single-machine}
 
--   シナリオ: 完全なトポロジーを備えた最小の TiDBクラスタを体験し、単一の Linux サーバーで運用環境の展開手順をシミュレートします。
+-   シナリオ: 完全なトポロジーを備えた最小の TiDB クラスターを体験し、単一の Linuxサーバーで運用環境の展開手順をシミュレートします。
 
-このセクションでは、TiUP で最小のトポロジの YAML ファイルを使用して TiDBクラスタをデプロイする方法について説明します。
+このセクションでは、TiUP で最小のトポロジの YAML ファイルを使用して TiDB クラスターをデプロイする方法について説明します。
 
 ### 準備 {#prepare}
 
@@ -279,7 +279,7 @@ summary: Learn how to quickly get started with the TiDB platform and see if TiDB
 -   CentOS 7.3 以降のバージョンがインストールされている
 -   Linux OS はインターネットにアクセスできます。これは、TiDB および関連するソフトウェア インストール パッケージをダウンロードするために必要です。
 
-最小の TiDBクラスタトポロジは次のとおりです。
+最小の TiDB クラスター トポロジは次のとおりです。
 
 > **ノート：**
 >
@@ -296,8 +296,8 @@ summary: Learn how to quickly get started with the TiDB platform and see if TiDB
 ターゲット マシンのその他の要件:
 
 -   `root`ユーザーとそのパスワードが必要です
--   [ターゲット マシンのファイアウォール サービスを停止します](/check-before-deployment.md#check-and-stop-the-firewall-service-of-target-machines) 、または TiDBクラスタノードが必要とするポートを開く
--   現在、TiUPクラスタは、x86_64 (AMD64) および ARM アーキテクチャーでの TiDB のデプロイをサポートしています。
+-   [ターゲット マシンのファイアウォール サービスを停止します](/check-before-deployment.md#check-and-stop-the-firewall-service-of-target-machines) 、または TiDB クラスターノードが必要とするポートを開く
+-   現在、TiUP クラスターは、x86_64 (AMD64) および ARM アーキテクチャーでの TiDB のデプロイをサポートしています。
 
     -   AMD64 では CentOS 7.3 以降のバージョンを使用することをお勧めします
     -   ARM では CentOS 7.6 1810 を使用することをお勧めします
@@ -328,7 +328,7 @@ summary: Learn how to quickly get started with the TiDB platform and see if TiDB
     source ${your_shell_profile}
     ```
 
-3.  TiUP のクラスタコンポーネントをインストールします。
+3.  TiUP のクラスター コンポーネントをインストールします。
 
     {{< copyable "" >}}
 
@@ -336,7 +336,7 @@ summary: Learn how to quickly get started with the TiDB platform and see if TiDB
     tiup cluster
     ```
 
-4.  TiUPクラスタが既にマシンにインストールされている場合は、ソフトウェア バージョンを更新します。
+4.  TiUP クラスターが既にマシンにインストールされている場合は、ソフトウェア バージョンを更新します。
 
     {{< copyable "" >}}
 
@@ -355,7 +355,7 @@ summary: Learn how to quickly get started with the TiDB platform and see if TiDB
         service sshd restart
         ```
 
-6.  クラスタを作成して開始します。
+6.  クラスターを作成して開始します。
 
     次のテンプレートに従って構成ファイルを編集し、 `topo.yaml`という名前を付けます。
 
@@ -422,11 +422,11 @@ summary: Learn how to quickly get started with the TiDB platform and see if TiDB
      - host: 10.0.1.1
     ```
 
-    -   `user: "tidb"` : `tidb`システム ユーザー (デプロイ時に自動的に作成される) を使用して、クラスタの内部管理を実行します。デフォルトでは、ポート 22 を使用して SSH 経由でターゲット マシンにログインします。
+    -   `user: "tidb"` : `tidb`システム ユーザー (デプロイ時に自動的に作成される) を使用して、クラスターの内部管理を実行します。デフォルトでは、ポート 22 を使用して SSH 経由でターゲット マシンにログインします。
     -   `replication.enable-placement-rules` : この PD パラメータは、TiFlash が正常に動作するように設定されています。
     -   `host` : ターゲット マシンの IP。
 
-7.  クラスタデプロイ コマンドを実行します。
+7.  クラスタ デプロイ コマンドを実行します。
 
     {{< copyable "" >}}
 
@@ -434,8 +434,8 @@ summary: Learn how to quickly get started with the TiDB platform and see if TiDB
     tiup cluster deploy <cluster-name> <tidb-version> ./topo.yaml --user root -p
     ```
 
-    -   `<cluster-name>` :クラスタ名を設定します
-    -   `<tidb-version>` : TiDBクラスタのバージョンを設定します。 `tiup list tidb`コマンドを実行すると、サポートされている TiDB のすべてのバージョンを確認できます。
+    -   `<cluster-name>` : クラスター名を設定します
+    -   `<tidb-version>` : TiDB クラスターのバージョンを設定します。 `tiup list tidb`コマンドを実行すると、サポートされている TiDB のすべてのバージョンを確認できます。
     -   `-p` : ターゲット マシンへの接続に使用するパスワードを指定します。
 
         > **ノート：**
@@ -449,7 +449,7 @@ summary: Learn how to quickly get started with the TiDB platform and see if TiDB
     Input SSH password:
     ```
 
-8.  クラスタを開始します。
+8.  クラスターを開始します。
 
     {{< copyable "" >}}
 
@@ -457,7 +457,7 @@ summary: Learn how to quickly get started with the TiDB platform and see if TiDB
     tiup cluster start <cluster-name>
     ```
 
-9.  クラスタにアクセスします。
+9.  クラスターにアクセスします。
 
     -   MySQL クライアントをインストールします。すでにインストールされている場合は、この手順をスキップしてください。
 
@@ -479,7 +479,7 @@ summary: Learn how to quickly get started with the TiDB platform and see if TiDB
 
     -   [TiDB ダッシュボード](/dashboard/dashboard-intro.md)の[http://{pd-ip}:2379/ダッシュボード](http://%7Bpd-ip%7D:2379/dashboard)にアクセスします。デフォルトのユーザー名は`root`で、パスワードは空です。
 
-    -   現在デプロイされているクラスタのリストを表示するには:
+    -   現在デプロイされているクラスターのリストを表示するには:
 
         {{< copyable "" >}}
 
@@ -497,12 +497,12 @@ summary: Learn how to quickly get started with the TiDB platform and see if TiDB
 
 ## 次は何ですか {#what-s-next}
 
--   ローカル テスト環境用に TiDBクラスタをデプロイしたばかりの場合:
+-   ローカル テスト環境用に TiDB クラスターをデプロイしたばかりの場合:
 
     -   学ぶ[TiDB での基本的な SQL 操作](/basic-sql-operations.md)
     -   [データを TiDB に移行する](/migration-overview.md)
 
--   本番環境用に TiDBクラスタをデプロイする準備ができている場合:
+-   本番環境用に TiDB クラスターをデプロイする準備ができている場合:
 
     -   [TiUP を使用して TiDB をデプロイ](/production-deployment-using-tiup.md)
     -   [TiDB Operatorを使用して TiDB on Cloud をデプロイ](https://docs.pingcap.com/tidb-in-kubernetes/stable)

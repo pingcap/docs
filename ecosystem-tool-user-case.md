@@ -13,7 +13,7 @@ TiDB を物理マシンまたは仮想マシンにデプロイして操作する
 
 ## TiDB を Kubernetes にデプロイして運用する {#deploy-and-operate-tidb-in-kubernetes}
 
-Kubernetes で TiDB をデプロイして操作する必要がある場合は、Kubernetesクラスタをデプロイしてからデプロイすることができます[TiDB Operator](https://docs.pingcap.com/tidb-in-kubernetes/stable) 。その後、 TiDB Operatorを使用して TiDBクラスタをデプロイおよび操作できます。
+TiDB を Kubernetes にデプロイして操作する必要がある場合は、Kubernetes クラスターをデプロイしてから[TiDB Operator](https://docs.pingcap.com/tidb-in-kubernetes/stable)をデプロイできます。その後、 TiDB Operatorを使用して TiDB クラスターをデプロイおよび操作できます。
 
 ## CSV から TiDB にデータをインポートする {#import-data-from-csv-to-tidb}
 
@@ -21,7 +21,7 @@ Kubernetes で TiDB をデプロイして操作する必要がある場合は、
 
 ## MySQL/ Auroraから完全なデータをインポートする {#import-full-data-from-mysql-aurora}
 
-MySQL/ Auroraから完全なデータをインポートする必要がある場合は、最初に[Dumpling](/dumpling-overview.md)を使用してデータを SQL ダンプ ファイルとしてエクスポートし、次に[TiDB Lightning](/tidb-lightning/tidb-lightning-overview.md)を使用してデータを TiDBクラスタにインポートします。
+MySQL/ Auroraから完全なデータをインポートする必要がある場合は、最初に[Dumpling](/dumpling-overview.md)を使用してデータを SQL ダンプ ファイルとしてエクスポートし、次に[TiDB Lightning](/tidb-lightning/tidb-lightning-overview.md)を使用してデータを TiDB クラスターにインポートします。
 
 ## MySQL/ Auroraからデータを移行する {#migrate-data-from-mysql-aurora}
 
@@ -29,15 +29,15 @@ MySQL/ Auroraからフル データと増分データの両方を移行する必
 
 完全なデータ ボリュームが (TB レベルで) 大きい場合は、最初に[Dumpling](/dumpling-overview.md)と[TiDB Lightning](/tidb-lightning/tidb-lightning-overview.md)を使用して完全なデータ移行を実行し、次に DM を使用して増分データ移行を実行できます。
 
-## TiDBクラスタのバックアップと復元 {#back-up-and-restore-tidb-cluster}
+## TiDB クラスターのバックアップと復元 {#back-up-and-restore-tidb-cluster}
 
-TiDBクラスタをバックアップするか、バックアップしたデータをクラスタに復元する必要がある場合は、 [ブラジル](/br/backup-and-restore-overview.md) (バックアップと復元) を使用します。
+TiDB クラスターをバックアップするか、バックアップしたデータをクラスターに復元する必要がある場合は、 [ブラジル](/br/backup-and-restore-overview.md) (バックアップと復元) を使用します。
 
-また、BR を使用して、TiDBクラスタデータの[増分バックアップ](/br/br-usage-backup.md#back-up-incremental-data)と[増分復元](/br/br-usage-restore.md#restore-incremental-data)を実行することもできます。
+また、BR を使用して、TiDB クラスター データの[増分バックアップ](/br/br-usage-backup.md#back-up-incremental-data)と[増分復元](/br/br-usage-restore.md#restore-incremental-data)を実行することもできます。
 
 ## データを TiDB に移行する {#migrate-data-to-tidb}
 
-TiDBクラスタから別の TiDBクラスタにデータを移行する必要がある場合は、 [Dumpling](/dumpling-overview.md)を使用して TiDB から完全なデータを SQL ダンプ ファイルとしてエクスポートし、 [TiDB Lightning](/tidb-lightning/tidb-lightning-overview.md)を使用してデータを別の TiDBクラスタにインポートします。
+TiDB クラスターから別の TiDB クラスターにデータを移行する必要がある場合は、 [Dumpling](/dumpling-overview.md)を使用して TiDB から完全なデータを SQL ダンプ ファイルとしてエクスポートし、 [TiDB Lightning](/tidb-lightning/tidb-lightning-overview.md)を使用してデータを別の TiDB クラスターにインポートします。
 
 増分データも移行する必要がある場合は、 [Binlog](/tidb-binlog/tidb-binlog-overview.md)を使用します。
 

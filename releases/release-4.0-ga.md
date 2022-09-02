@@ -32,7 +32,7 @@ TiDB バージョン: 4.0.0
 -   TiDB
     -   retry-commit フェーズ[#16849](https://github.com/pingcap/tidb/pull/16849)で`goroutines`の数を制御する`committer-concurrency`構成項目を追加します。
     -   `show table partition regions`構文[#17294](https://github.com/pingcap/tidb/pull/17294)をサポート
-    -   `tmp-storage-quota`の構成項目を追加して、TiDB サーバーが使用する一時ディスク領域を制限します[#15700](https://github.com/pingcap/tidb/pull/15700)
+    -   `tmp-storage-quota`の構成項目を追加して、TiDBサーバーが使用する一時ディスク領域を制限します[#15700](https://github.com/pingcap/tidb/pull/15700)
     -   テーブルの作成および変更時に、パーティション テーブルが一意のプレフィックス インデックスを使用するかどうかのチェックをサポートします[#17213](https://github.com/pingcap/tidb/pull/17213)
     -   `insert/replace into tbl_name partition` ( `partition_name_list` ) ステートメント[#17313](https://github.com/pingcap/tidb/pull/17313)をサポート
     -   `Distinct`関数[#17240](https://github.com/pingcap/tidb/pull/17240)使用時の`collations`の値のチェックをサポート

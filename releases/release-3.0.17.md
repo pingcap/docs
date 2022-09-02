@@ -12,9 +12,9 @@ TiDB バージョン: 3.0.17
 
 -   TiDB
 
-    -   `query-feedback-limit`構成項目のデフォルト値を 1024 から 512 に減らし、統計フィードバック メカニズムを改善してクラスタへの影響を緩和します[#18770](https://github.com/pingcap/tidb/pull/18770)
+    -   `query-feedback-limit`構成項目のデフォルト値を 1024 から 512 に減らし、統計フィードバック メカニズムを改善してクラスターへの影響を緩和します[#18770](https://github.com/pingcap/tidb/pull/18770)
     -   1 つのリクエストのバッチ分割数を制限する[#18694](https://github.com/pingcap/tidb/pull/18694)
-    -   TiDBクラスタにヒストリ DDL ジョブが多い場合の HTTP API の高速化`/tiflash/replica` [#18386](https://github.com/pingcap/tidb/pull/18386)
+    -   TiDB クラスタにヒストリ DDL ジョブが多い場合の HTTP API の高速化`/tiflash/replica` [#18386](https://github.com/pingcap/tidb/pull/18386)
     -   インデックスが等しい条件[#17609](https://github.com/pingcap/tidb/pull/17609)の行数の見積もりを改善する
     -   `kill tidb conn_id` [#18506](https://github.com/pingcap/tidb/pull/18506)の実行速度を上げる
 

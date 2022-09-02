@@ -5,7 +5,7 @@ summary: An overview of the usage of SHOW PRIVILEGES for the TiDB database.
 
 # 特権を表示 {#show-privileges}
 
-このステートメントは、TiDB で割り当て可能な特権のリストを示しています。これは静的リストであり、現在のユーザーの権限を反映していません。
+このステートメントは、TiDB で割り当て可能な権限のリストを示しています。これは静的リストであり、現在のユーザーの権限を反映していません。
 
 ## あらすじ {#synopsis}
 

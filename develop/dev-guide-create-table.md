@@ -11,13 +11,13 @@ summary: Learn the definitions, rules, and guidelines in table creation.
 
 このドキュメントを読む前に、次のタスクが完了していることを確認してください。
 
--   [TiDB Cloud(開発者層) で TiDB クラスターを構築する](/develop/dev-guide-build-cluster-in-cloud.md) .
+-   [TiDB Cloud(開発者層) で TiDBクラスタを構築する](/develop/dev-guide-build-cluster-in-cloud.md) .
 -   [スキーマ設計の概要](/develop/dev-guide-schema-design-overview.md)を読んでください。
 -   [データベースを作成する](/develop/dev-guide-create-database.md) .
 
 ## テーブルとは {#what-is-a-table}
 
-[テーブル](/develop/dev-guide-schema-design-overview.md#table)は、 [データベース](/develop/dev-guide-schema-design-overview.md#database)に従属する TiDBクラスタの論理オブジェクトです。 SQL ステートメントから送信されたデータを格納するために使用されます。テーブルは、行と列の形式でデータ レコードを保存します。テーブルには少なくとも 1 つの列があります。 `n`の列を定義した場合、データの各行には`n`の列とまったく同じフィールドがあります。
+[テーブル](/develop/dev-guide-schema-design-overview.md#table)は、 [データベース](/develop/dev-guide-schema-design-overview.md#database)に従属する TiDB クラスター内の論理オブジェクトです。 SQL ステートメントから送信されたデータを格納するために使用されます。テーブルは、行と列の形式でデータ レコードを保存します。テーブルには少なくとも 1 つの列があります。 `n`の列を定義した場合、データの各行には`n`の列とまったく同じフィールドがあります。
 
 ## テーブルに名前を付ける {#name-a-table}
 
@@ -183,7 +183,7 @@ CREATE TABLE `bookshop`.`ratings` (
 
 列にデフォルト値を設定するには、 `DEFAULT`制約を使用します。デフォルト値を使用すると、各列の値を指定せずにデータを挿入できます。
 
-`DEFAULT`と[サポートされている SQL関数](/functions-and-operators/functions-and-operators-overview.md)を一緒に使用して、デフォルトの計算をアプリケーション層の外に移動し、アプリケーション層のリソースを節約できます。計算によって消費されたリソースは消えず、TiDBクラスタに移動されます。通常、デフォルトの時間でデータを挿入できます。以下は、 `ratings`テーブルにデフォルト値を設定する例です。
+`DEFAULT`と[サポートされている SQL関数](/functions-and-operators/functions-and-operators-overview.md)を一緒に使用して、デフォルトの計算をアプリケーションレイヤーの外に移動し、アプリケーションレイヤーのリソースを節約できます。計算によって消費されたリソースは消えず、TiDB クラスターに移動されます。通常、デフォルトの時間でデータを挿入できます。以下は、 `ratings`テーブルにデフォルト値を設定する例です。
 
 {{< copyable "" >}}
 
@@ -261,7 +261,7 @@ CREATE TABLE `bookshop`.`users` (
 
 > **ノート：**
 >
-> このガイドに記載されている手順は、***クイック***スタート専用です。詳細については、 [TiFlash で HTAP クラスターを使用する](/tiflash/tiflash-overview.md)を参照してください。
+> このガイドに記載されている手順は、***クイック***スタート専用です。詳細については、 [TiFlash で HTAPクラスタを使用する](/tiflash/tiflash-overview.md)を参照してください。
 
 </CustomContent>
 
@@ -281,7 +281,7 @@ TiDB HTAP機能の詳細については、次のドキュメントを参照し�
 
 <CustomContent platform="tidb-cloud">
 
-TiDB HTAP機能の詳細については、 [TiDB CloudHTAP クイック スタート](/tidb-cloud/tidb-cloud-htap-quickstart.md)および[TiFlash で HTAP クラスターを使用する](/tiflash/tiflash-overview.md)を参照してください。
+TiDB HTAP機能の詳細については、 [TiDB CloudHTAP クイック スタート](/tidb-cloud/tidb-cloud-htap-quickstart.md)および[TiFlash で HTAPクラスタを使用する](/tiflash/tiflash-overview.md)を参照してください。
 
 </CustomContent>
 
@@ -314,7 +314,7 @@ ALTER TABLE `bookshop`.`ratings` SET TIFLASH REPLICA 1;
 
 > **ノート：**
 >
-> クラスタに**TiFlash**ノードが含まれていない場合、この SQL ステートメントはエラーを報告します: `1105 - the tiflash replica count: 1 should be less than the total tiflash server count: 0` 。 [TiDB Cloud(開発者層) で TiDB クラスターを構築する](/develop/dev-guide-build-cluster-in-cloud.md#step-1-create-a-free-cluster)を使用して、 <strong>TiFlash</strong>を含む無料のクラスタを作成できます。
+> クラスターに**TiFlash**ノードが含まれていない場合、この SQL ステートメントはエラーを報告します: `1105 - the tiflash replica count: 1 should be less than the total tiflash server count: 0` 。 [TiDB Cloud(開発者層) で TiDBクラスタを構築する](/develop/dev-guide-build-cluster-in-cloud.md#step-1-create-a-free-cluster)を使用して、 <strong>TiFlash</strong>を含む無料のクラスターを作成できます。
 
 次に、次のクエリを実行できます。
 

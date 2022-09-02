@@ -48,13 +48,13 @@ TiDB バージョン: 5.3.2
     -   TiDB Binlogを有効にして重複した値を挿入すると`data and columnID count not match`エラーが発生する問題を修正[#33608](https://github.com/pingcap/tidb/issues/33608)
     -   Plan Cache を RC 分離レベル[#34447](https://github.com/pingcap/tidb/issues/34447)で開始すると、クエリの結果が正しくない場合がある問題を修正します。
     -   MySQL バイナリ プロトコル[#33509](https://github.com/pingcap/tidb/issues/33509)でテーブル スキーマ変更後にプリペアドステートメントを実行するとセッションpanicが発生する問題を修正
-    -   新しいパーティションが追加されたときにテーブル属性がインデックス化されない問題と、パーティションが変更されたときにテーブルの範囲情報が更新されない問題を修正します[#33929](https://github.com/pingcap/tidb/issues/33929)
-    -   `INFORMATION_SCHEMA.CLUSTER_SLOW_QUERY`テーブルをクエリすると、TiDB サーバーがメモリ不足になることがある問題を修正します。この問題は、Grafana ダッシュボードでスロー クエリを確認すると発生する可能性があります[#33893](https://github.com/pingcap/tidb/issues/33893)
-    -   クラスタの PD ノードが交換された後、一部の DDL ステートメントが一定期間停止する可能性がある問題を修正し[#33908](https://github.com/pingcap/tidb/issues/33908) 。
+    -   新しいパーティションが追加されたときにテーブルの属性がインデックス化されない問題と、パーティションが変更されたときにテーブルの範囲情報が更新されない問題を修正します[#33929](https://github.com/pingcap/tidb/issues/33929)
+    -   `INFORMATION_SCHEMA.CLUSTER_SLOW_QUERY`テーブルをクエリすると、TiDBサーバーがメモリ不足になることがある問題を修正します。この問題は、Grafana ダッシュボードでスロー クエリを確認すると発生する可能性があります[#33893](https://github.com/pingcap/tidb/issues/33893)
+    -   クラスターの PD ノードが交換された後、一部の DDL ステートメントが一定期間停止する可能性がある問題を修正し[#33908](https://github.com/pingcap/tidb/issues/33908) 。
     -   v4.0 からアップグレードされたクラスターで`all`特権の付与が失敗する可能性がある問題を修正し[#33588](https://github.com/pingcap/tidb/issues/33588) 。
     -   `left join` [#31321](https://github.com/pingcap/tidb/issues/31321)を使用して複数のテーブルのデータを削除したときの誤った結果を修正
     -   TiDB が重複したタスクを TiFlash [#32814](https://github.com/pingcap/tidb/issues/32814)にディスパッチする可能性があるバグを修正
-    -   TiDB のバックグラウンド HTTP サービスが正常に終了せず、クラスタが異常な状態になることがある問題を修正します[#30571](https://github.com/pingcap/tidb/issues/30571)
+    -   TiDB のバックグラウンド HTTP サービスが正常に終了せず、クラスターが異常な状態になることがある問題を修正します[#30571](https://github.com/pingcap/tidb/issues/30571)
     -   `fatal error: concurrent map read and map write`エラー[#35340](https://github.com/pingcap/tidb/issues/35340)によって引き起こされるpanicの問題を修正します。
 
 -   TiKV

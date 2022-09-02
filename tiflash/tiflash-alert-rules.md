@@ -5,7 +5,7 @@ summary: Learn the alert rules of the TiFlash cluster.
 
 # TiFlash アラート ルール {#tiflash-alert-rules}
 
-このドキュメントでは、TiFlashクラスタのアラート ルールを紹介します。
+このドキュメントでは、TiFlash クラスターのアラート ルールを紹介します。
 
 ## <code>TiFlash_schema_error</code> {#code-tiflash-schema-error-code}
 
@@ -51,7 +51,7 @@ summary: Learn the alert rules of the TiFlash cluster.
 
 -   解決：
 
-    頻繁な再試行は、TiKVクラスタの頻繁な分割または移行が原因である可能性があります。 TiKVクラスタのステータスをチェックして、再試行の理由を特定できます。
+    頻繁な再試行は、TiKV クラスターの頻繁な分割または移行が原因である可能性があります。 TiKV クラスターのステータスをチェックして、再試行の理由を特定できます。
 
 ## <code>TiFlash_raft_wait_index_duration</code> {#code-tiflash-raft-wait-index-duration-code}
 

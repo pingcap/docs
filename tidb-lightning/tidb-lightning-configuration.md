@@ -9,7 +9,7 @@ summary: Learn about the CLI usage and sample configuration in TiDB Lightning.
 
 ## Configuration / コンフィグレーションファイル {#configuration-files}
 
-TiDB Lightningには「global」と「task」の 2 つの構成クラスがあり、それらは互換性のある構造を持っています。それらの区別は、 [サーバーモード](/tidb-lightning/tidb-lightning-web-interface.md)が有効になっている場合にのみ発生します。サーバー モードが無効になっている場合 (デフォルト)、 TiDB Lightningは 1 つのタスクのみを実行し、同じ構成ファイルがグローバル構成とタスク構成の両方に使用されます。
+TiDB Lightningには「global」と「task」の 2 つの構成クラスがあり、それらは互換性のある構造を持っています。それらの区別は、 [サーバーモード](/tidb-lightning/tidb-lightning-web-interface.md)が有効になっている場合にのみ発生します。サーバーモードが無効になっている場合 (デフォルト)、 TiDB Lightningは 1 つのタスクのみを実行し、同じ構成ファイルがグローバル構成とタスク構成の両方に使用されます。
 
 ### TiDB Lightning(グローバル) {#tidb-lightning-global}
 
@@ -348,15 +348,15 @@ log-progress = "5m"
 | --status-addr *ip:ポート*                                                     | TiDB Lightningサーバーのリッスン アドレス                                                                    | `lightning.status-port`        |
 | --インポーター*ホスト:ポート*                                                          | TiKV インポーターの住所                                                                                  | `tikv-importer.addr`           |
 | --pd-urls*ホスト:ポート*                                                         | PD エンドポイント アドレス                                                                                 | `tidb.pd-addr`                 |
-| --tidb-host*ホスト*                                                           | TiDB サーバー ホスト                                                                                   | `tidb.host`                    |
-| --tidb-port*ポート*                                                           | TiDB サーバー ポート (デフォルト = 4000)                                                                    | `tidb.port`                    |
+| --tidb-host*ホスト*                                                           | TiDBサーバーホスト                                                                                     | `tidb.host`                    |
+| --tidb-port*ポート*                                                           | TiDBサーバーポート (デフォルト = 4000)                                                                      | `tidb.port`                    |
 | --tidb-status*ポート*                                                         | TiDB ステータス ポート (デフォルト = 10080)                                                                  | `tidb.status-port`             |
 | --tidb-user*ユーザー*                                                          | TiDB に接続するためのユーザー名                                                                              | `tidb.user`                    |
 | --tidb-password*パスワード*                                                     | TiDB に接続するためのパスワード。パスワードは、プレーンテキストまたは Base64 エンコードのいずれかです。                                      | `tidb.password`                |
 | --enable-checkpoint*ブール*                                                   | チェックポイントを有効にするかどうか (デフォルト = true)                                                               | `checkpoint.enable`            |
 | --分析*レベル*                                                                  | インポート後にテーブルを分析します。使用可能な値は、「required」、「optional」(デフォルト値)、および「off」です。                             | `post-restore.analyze`         |
 | -- チェックサム*レベル*                                                             | インポート後にチェックサムを比較します。使用可能な値は、「required」(デフォルト値)、「optional」、および「off」です。                           | `post-restore.checksum`        |
-| --check-requirements*ブール*                                                  | 開始前にクラスタのバージョンの互換性を確認する (デフォルト = true)                                                          | `lightning.check-requirements` |
+| --check-requirements*ブール*                                                  | 開始前にクラスターのバージョンの互換性を確認する (デフォルト = true)                                                         | `lightning.check-requirements` |
 | --ca*ファイル*                                                                 | TLS 接続の CA 証明書パス                                                                                | `security.ca-path`             |
 | --証明書*ファイル*                                                                | TLS 接続の証明書パス                                                                                    | `security.cert-path`           |
 | --キー*ファイル*                                                                 | TLS 接続の秘密鍵パス                                                                                    | `security.key-path`            |
@@ -368,17 +368,17 @@ log-progress = "5m"
 
 このツールは、次のパラメーターのいずれかを指定して、さまざまなアクションを実行できます。
 
-| パラメータ                               | 説明                                            |
-| :---------------------------------- | :-------------------------------------------- |
-| - コンパクト                             | 完全な圧縮を実行します                                   |
-| --switch-mode*モード*                  | すべての TiKV ストアを特定のモードに切り替えます: 通常、インポート         |
-| --fetch-mode                        | すべての TiKV ストアの現在のモードを出力します                    |
-| -- インポートエンジン*uuid*                  | 閉じたエンジン ファイルを TiKV インポーターから TiKVクラスタにインポートします |
-| --cleanup-engine *uuid*             | エンジン ファイルを TiKV Importer から削除します              |
-| --checkpoint-dump*フォルダ*             | 現在のチェックポイントを CSV としてフォルダーにダンプします              |
-| *--checkpoint* -error-destroy テーブル名 | チェックポイントを削除し、エラーが発生した場合はテーブルを削除します            |
-| *--checkpoint* -error-ignore テーブル名  | 指定されたテーブルに関連するチェックポイントに記録されたエラーを無視します         |
-| *--checkpoint* -remove テーブル名        | テーブルのチェックポイントを無条件に削除します                       |
+| パラメータ                               | 説明                                              |
+| :---------------------------------- | :---------------------------------------------- |
+| - コンパクト                             | 完全な圧縮を実行します                                     |
+| --switch-mode*モード*                  | すべての TiKV ストアを特定のモードに切り替えます: 通常、インポート           |
+| --fetch-mode                        | すべての TiKV ストアの現在のモードを出力します                      |
+| -- インポートエンジン*uuid*                  | 閉じたエンジン ファイルを TiKV インポーターから TiKV クラスターにインポートします |
+| --cleanup-engine *uuid*             | エンジン ファイルを TiKV Importer から削除します                |
+| --checkpoint-dump*フォルダー*            | 現在のチェックポイントを CSV としてフォルダーにダンプします                |
+| *--checkpoint* -error-destroy テーブル名 | チェックポイントを削除し、エラーが発生した場合はテーブルを削除します              |
+| *--checkpoint* -error-ignore テーブル名  | 指定されたテーブルに関連するチェックポイントに記録されたエラーを無視します           |
+| *--checkpoint* -remove テーブル名        | テーブルのチェックポイントを無条件に削除します                         |
 
 *tablename*は、形式`` `db`.`tbl` `` (逆引用符を含む) の修飾テーブル名か、キーワード「all」のいずれかでなければなりません。
 

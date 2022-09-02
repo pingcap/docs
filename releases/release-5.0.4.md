@@ -76,13 +76,13 @@ TiDB バージョン: 5.0.4
 
 -   TiKV
 
-    -   読み取り待機時間を短縮するために、読み取り準備完了と書き込み準備完了を別々に処理する[#10475](https://github.com/tikv/tikv/issues/10475)
+    -   読み取り待機レイテンシーを短縮するために、読み取り準備完了と書き込み準備完了を別々に処理する[#10475](https://github.com/tikv/tikv/issues/10475)
     -   解決済み TS メッセージのサイズを縮小してネットワーク帯域幅を節約する[#2448](https://github.com/pingcap/tiflow/issues/2448)
     -   slogger スレッドが過負荷になり、キューがいっぱいになったときに、スレッドをブロックする代わりにログを削除します[#10841](https://github.com/tikv/tikv/issues/10841)
     -   TiKV コプロセッサーのスローログを、リクエストの処理に費やされた時間のみを考慮するようにします[#10841](https://github.com/tikv/tikv/issues/10841)
     -   事前書き込みを可能な限り冪等にして、未確定エラーの可能性を減らします[#10587](https://github.com/tikv/tikv/pull/10587)
     -   低い書き込みフロー[#10662](https://github.com/tikv/tikv/pull/10662)で誤った「GC can not work」アラートを回避する
-    -   復元するデータベースは、バックアップ中に常に元のクラスタサイズと一致するようにします。 [#10643](https://github.com/tikv/tikv/pull/10643)
+    -   復元するデータベースは、バックアップ中に常に元のクラスター サイズと一致するようにします。 [#10643](https://github.com/tikv/tikv/pull/10643)
     -   panic出力がログ[#9955](https://github.com/tikv/tikv/pull/9955)にフラッシュされることを確認します。
 
 -   PD
@@ -139,7 +139,7 @@ TiDB バージョン: 5.0.4
     -   破損したスナップショット ファイルが原因で発生する可能性のあるディスクがいっぱいになる問題を修正します[#10813](https://github.com/tikv/tikv/issues/10813)
     -   Titan を有効にして 5.0 より前のバージョンからアップグレードするときに発生する[#10843](https://github.com/tikv/tikv/pull/10843)panicの問題を修正します。
     -   新しいバージョンの TiKV が v5.0.x にロールバックできない問題を修正[#10843](https://github.com/tikv/tikv/pull/10843)
-    -   5.0 より前のバージョンから 5.0 以降のバージョンにアップグレードするときに発生する TiKVpanicの問題を修正します。アップグレード前に Titan を有効にしてクラスタを TiKV v3.x からアップグレードした場合、このクラスタで問題が発生する可能性があります。 [#10774](https://github.com/tikv/tikv/issues/10774)
+    -   5.0 より前のバージョンから 5.0 以降のバージョンにアップグレードするときに発生する TiKVpanicの問題を修正します。アップグレード前に Titan を有効にしてクラスターを TiKV v3.x からアップグレードした場合、このクラスターで問題が発生する可能性があります。 [#10774](https://github.com/tikv/tikv/issues/10774)
     -   左悲観ロックによる解析エラーを修正[#26404](https://github.com/pingcap/tidb/issues/26404)
     -   特定のプラットフォームで期間を計算するときに発生するpanicを修正します[#10571](https://github.com/tikv/tikv/pull/10571)
     -   Load Base Split の`batch_get_command`のキーがエンコードされていない問題を修正[#10542](https://github.com/tikv/tikv/issues/10542)

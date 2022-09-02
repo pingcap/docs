@@ -3,11 +3,11 @@ title: Monitor the TiFlash Cluster
 summary: Learn the monitoring items of TiFlash.
 ---
 
-# TiFlash クラスターを監視する {#monitor-the-tiflash-cluster}
+# TiFlashクラスタを監視する {#monitor-the-tiflash-cluster}
 
 このドキュメントでは、TiFlash の監視項目について説明します。
 
-TiUP を使用して TiDBクラスタをデプロイすると、監視システム (Prometheus &amp; Grafana) が同時にデプロイされます。詳細については、 [監視フレームワークの概要](/tidb-monitoring-framework.md)を参照してください。
+TiUP を使用して TiDB クラスターをデプロイすると、監視システム (Prometheus &amp; Grafana) が同時にデプロイされます。詳細については、 [監視フレームワークの概要](/tidb-monitoring-framework.md)を参照してください。
 
 Grafana ダッシュボードは、Overview、PD、TiDB、TiKV、Node_exporter などを含む一連のサブ ダッシュボードに分かれています。診断に役立つ多くの指標があります。
 
@@ -33,7 +33,7 @@ TiFlash には、TiFlash **-Summary** 、 <strong>TiFlash-Proxy-Summary</strong>
 
 > **ノート：**
 >
-> ストア サイズ、FSync OPS、File Open OPS、および Opened File Count は現在、TiFlash ストレージ レイヤーの監視情報のみをカバーし、TiFlash-Proxy ではカバーしていません。
+> ストア サイズ、FSync OPS、File Open OPS、および Opened File Count は現在、TiFlash ストレージレイヤーの監視情報のみをカバーし、TiFlash-Proxy ではカバーしていません。
 
 ## コプロセッサー {#coprocessor}
 
@@ -68,10 +68,10 @@ TiFlash には、TiFlash **-Summary** 、 <strong>TiFlash-Proxy-Summary</strong>
 
 ## 保管所 {#storage}
 
--   書き込みコマンド OPS: すべての TiFlash インスタンスのストレージ レイヤーによって受信された 1 秒あたりの書き込み要求の数。
+-   書き込みコマンド OPS: すべての TiFlash インスタンスのストレージレイヤーによって受信された 1 秒あたりの書き込み要求の数。
 -   書き込み増幅: 各 TiFlash インスタンスの書き込み増幅 (ディスク書き込みの実際のバイト数を論理データの書き込みバイト数で割ったもの)。 `total`はこの開始以降の書き込み増幅、 `5min`は過去 5 分間の書き込み増幅です。
--   Read Tasks OPS: 各 TiFlash インスタンスの 1 秒あたりのストレージ レイヤーでの読み取りタスクの数。
--   ラフ セット フィルター率: ストレージ レイヤーのラフ セット インデックスによってフィルター処理された、直前の 1 分間に各 TiFlash インスタンスによって読み取られたパケット数の割合。
+-   Read Tasks OPS: 各 TiFlash インスタンスの 1 秒あたりのストレージレイヤーでの読み取りタスクの数。
+-   ラフ セット フィルター率: ストレージレイヤーのラフ セット インデックスによってフィルター処理された、直前の 1 分間に各 TiFlash インスタンスによって読み取られたパケット数の割合。
 -   Internal Tasks OPS: すべての TiFlash インスタンスが 1 秒あたりに内部データ ソート タスクを実行する回数。
 -   内部タスクの所要時間: 内部データの並べ替えタスクのためにすべての TiFlash インスタンスによって費やされた時間。
 -   ページ GC タスク OPM: すべての TiFlash インスタンスが 1 分あたりにデルタ データの並べ替えタスクを実行する回数。
@@ -83,7 +83,7 @@ TiFlash には、TiFlash **-Summary** 、 <strong>TiFlash-Proxy-Summary</strong>
 
 > **ノート：**
 >
-> これらのメトリックは、TiFlash ストレージ レイヤーの監視情報のみをカバーし、TiFlash-Proxy の情報はカバーしません。
+> これらのメトリックは、TiFlash ストレージレイヤーの監視情報のみをカバーし、TiFlash-Proxy の情報はカバーしません。
 
 ## ストレージ書き込みストール {#storage-write-stall}
 

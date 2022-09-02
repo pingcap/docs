@@ -48,6 +48,6 @@ title: TiDB 2.1.5 Release Notes
 ## ツール {#tools}
 
 -   雷
-    -   クラスタ[#4223](https://github.com/tikv/tikv/pull/4223)に廃棄ストアが存在する場合、エラーを報告したり終了したりしません。
+    -   クラスター[#4223](https://github.com/tikv/tikv/pull/4223)に廃棄ストアが存在する場合、エラーを報告したり終了したりしません。
 -   Binlog
     -   DDL binlog レプリケーション プランを更新して、DDL イベント レプリケーションの正確性を保証します[#9304](https://github.com/pingcap/tidb/issues/9304)

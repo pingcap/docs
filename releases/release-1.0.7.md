@@ -14,7 +14,7 @@ title: TiDB 1.0.7 Release Notes
 -   [ログ クエリを制御する`session`変数を追加する](https://github.com/pingcap/tidb/pull/5659)
 -   [統計のリソース リークの問題を修正](https://github.com/pingcap/tidb/pull/5657)
 -   [ゴルーチンリークの問題を修正](https://github.com/pingcap/tidb/pull/5624)
--   [http ステータス サーバーのスキーマ情報 API を追加します。](https://github.com/pingcap/tidb/pull/5256)
+-   [http ステータスサーバーのスキーマ情報 API を追加します。](https://github.com/pingcap/tidb/pull/5256)
 -   [`IndexJoin`に関する問題を修正する](https://github.com/pingcap/tidb/pull/5623)
 -   [DDL で`RunWorker`が false の場合の動作を更新します](https://github.com/pingcap/tidb/pull/5604)
 -   [統計におけるテスト結果の安定性の向上](https://github.com/pingcap/tidb/pull/5609)

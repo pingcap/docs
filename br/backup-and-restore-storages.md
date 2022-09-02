@@ -107,7 +107,7 @@ S3、GCS、Azblob などのクラウド ストレージでは、接続のため�
 
 1.  `$GOOGLE_APPLICATION_CREDENTIALS`環境変数で指定されたパスにあるツール ノード上のファイルの内容
 2.  `~/.config/gcloud/application_default_credentials.json`のツール ノード上のファイルの内容
-3.  GCE または GAE で実行している場合、資格情報はメタデータ サーバーからフェッチされます。
+3.  GCE または GAE で実行している場合、資格情報はメタデータサーバーから取得されます。
 
 ### Azblob URL パラメーター {#azblob-url-parameters}
 

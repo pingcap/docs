@@ -5,13 +5,13 @@ summary: Learn how to read historical data using the `AS OF TIMESTAMP` statement
 
 # <code>AS OF TIMESTAMP</code>句を使用した履歴データの読み取り {#read-historical-data-using-the-code-as-of-timestamp-code-clause}
 
-このドキュメントでは、 `AS OF TIMESTAMP`句を使用して[古い読み取り](/stale-read.md)の機能を実行し、TiDB の履歴データを読み取る方法について説明します。これには、具体的な使用例と履歴データを保存するための戦略が含まれます。
+このドキュメントでは、 `AS OF TIMESTAMP`句を使用して[ステイル読み取り](/stale-read.md)の機能を実行し、TiDB の履歴データを読み取る方法について説明します。これには、具体的な使用例と履歴データを保存するための戦略が含まれます。
 
 > **警告：**
 >
-> 現在、Stale Read を TiFlash と一緒に使用することはできません。 SQL クエリに`AS OF TIMESTAMP`句が含まれており、TiDB が TiFlash レプリカからデータを読み取る可能性がある場合、 `ERROR 1105 (HY000): stale requests require tikv backend`のようなメッセージでエラーが発生する可能性があります。
+> 現在、Stale ステイル読み取りを TiFlash と一緒に使用することはできません。 SQL クエリに`AS OF TIMESTAMP`句が含まれており、TiDB が TiFlash レプリカからデータを読み取る可能性がある場合、 `ERROR 1105 (HY000): stale requests require tikv backend`のようなメッセージでエラーが発生する可能性があります。
 >
-> この問題を解決するには、Stale Read クエリの TiFlash レプリカを無効にします。これを行うには、次の操作のいずれかを実行します。
+> この問題を解決するには、Stale ステイル読み取りクエリの TiFlash レプリカを無効にします。これを行うには、次の操作のいずれかを実行します。
 >
 > -   `set session tidb_isolation_read_engines='tidb,tikv'`変数を使用します。
 > -   [ヒント](/optimizer-hints.md#read_from_storagetiflasht1_name--tl_name--tikvt2_name--tl_name-)を使用して、TiDB に TiKV からのデータの読み取りを強制します。
@@ -45,7 +45,7 @@ TiDB は、特別なクライアントやドライバーを必要とせずに、
 >
 > タイムスタンプの指定に加えて、 `AS OF TIMESTAMP`句の最も一般的な用途は、数秒前のデータを読み取ることです。このアプローチを使用する場合は、5 秒より古い履歴データを読み取ることをお勧めします。
 >
-> Stale Read を使用する場合は、TiDB ノードと PD ノードに NTP サービスをデプロイする必要があります。これにより、TiDB によって使用される指定されたタイムスタンプが、最新の TSO 割り当ての進行状況よりも進んでいる (タイムスタンプが数秒進んでいるなど)、または GC セーフ ポイントのタイムスタンプよりも遅れているという状況が回避されます。指定されたタイムスタンプがサービス範囲を超えると、TiDB はエラーを返します。
+> Stale ステイル読み取りを使用する場合は、TiDB および PD ノードに NTP サービスをデプロイする必要があります。これにより、TiDB によって使用される指定されたタイムスタンプが、最新の TSO 割り当ての進行状況よりも進んでいる (タイムスタンプが数秒進んでいるなど)、または GC セーフ ポイントのタイムスタンプよりも遅れているという状況が回避されます。指定されたタイムスタンプがサービス範囲を超えると、TiDB はエラーを返します。
 
 ## 使用例 {#usage-examples}
 

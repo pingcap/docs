@@ -26,7 +26,7 @@ TiDB HTAPを使用する前に、 [TiKV](/tikv-overview.md) 、TiDB Online Trans
 
 ### ステップ 1. ローカル テスト環境をデプロイする {#step-1-deploy-a-local-test-environment}
 
-TiDB HTAPを使用する前に、 [TiDB データベース プラットフォームのクイック スタート ガイド](/quick-start-with-tidb.md)の手順に従ってローカル テスト環境を準備し、次のコマンドを実行して TiDBクラスタをデプロイします。
+TiDB HTAPを使用する前に、 [TiDB データベース プラットフォームのクイック スタート ガイド](/quick-start-with-tidb.md)の手順に従ってローカル テスト環境を準備し、次のコマンドを実行して TiDB クラスターをデプロイします。
 
 {{< copyable "" >}}
 

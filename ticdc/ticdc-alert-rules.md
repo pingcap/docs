@@ -67,7 +67,7 @@ summary: Learn about TiCDC alert rules and how to handle the alerts.
 
 -   説明：
 
-    TiCDCクラスタには複数の所有者がいます。
+    TiCDC クラスターには複数の所有者がいます。
 
 -   解決：
 

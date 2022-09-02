@@ -5,7 +5,7 @@ summary: Learn about Statement Summary Table in TiDB.
 
 # ステートメント要約表 {#statement-summary-tables}
 
-SQL パフォーマンスの問題をより適切に処理するために、MySQL は`performance_schema`の[ステートメント要約表](https://dev.mysql.com/doc/refman/5.7/en/performance-schema-statement-summary-tables.html)を提供して、SQL を統計で監視します。これらのテーブルの中で、 `events_statements_summary_by_digest`は、待機時間、実行時間、スキャンされた行、およびフル テーブル スキャンなどの豊富なフィールドを使用して、SQL の問題を特定するのに非常に役立ちます。
+SQL パフォーマンスの問題をより適切に処理するために、MySQL は`performance_schema`の[ステートメント要約表](https://dev.mysql.com/doc/refman/5.7/en/performance-schema-statement-summary-tables.html)を提供して、SQL を統計で監視します。これらのテーブルの中で、 `events_statements_summary_by_digest`は、レイテンシー、実行時間、スキャンされた行、およびフル テーブル スキャンなどの豊富なフィールドを使用して、SQL の問題を特定するのに非常に役立ちます。
 
 したがって、v4.0.0-rc.1 から、TiDB は`events_statements_summary_by_digest`に似た機能を持つシステム テーブルを`information_schema` ( `performance_schema`では*なく*) で提供します。
 
@@ -40,7 +40,7 @@ select * from employee where id in (...) and salary between ? and ?;
 
 ここでの「プラン ダイジェスト」とは、正規化された実行プランによって計算された一意の識別子を指します。正規化プロセスでは、定数は無視されます。同じステートメントが異なる実行計画を持つ可能性があるため、同じ SQL ステートメントが異なるカテゴリーにグループ化される場合があります。同じカテゴリの SQL ステートメントには、同じ実行計画があります。
 
-`statements_summary`は、SQL モニタリング メトリックの集計結果を格納します。一般に、各監視メトリックには最大値と平均値が含まれます。たとえば、実行レイテンシ メトリックは、 `AVG_LATENCY` (平均レイテンシ) と`MAX_LATENCY` (最大レイテンシ) の 2 つのフィールドに対応します。
+`statements_summary`は、SQL モニタリング メトリックの集計結果を格納します。一般に、各監視メトリックには最大値と平均値が含まれます。たとえば、実行レイテンシーメトリックは、 `AVG_LATENCY` (平均レイテンシー) と`MAX_LATENCY` (最大レイテンシー) の 2 つのフィールドに対応します。
 
 監視メトリックが最新であることを確認するために、 `statements_summary`テーブルのデータは定期的にクリアされ、最近の集計結果のみが保持されて表示されます。定期的なデータ消去は、システム変数`tidb_stmt_summary_refresh_interval`によって制御されます。クリア直後にクエリを実行すると、表示されるデータが非常に少なくなる場合があります。
 
@@ -97,9 +97,9 @@ select * from employee where id in (...) and salary between ? and ?;
 
 ## ステートメント要約用の<code>cluster</code>表 {#the-code-cluster-code-tables-for-statement-summary}
 
-`statements_summary` 、 `statements_summary_history` 、および`statements_summary_evicted`の表は、単一の TiDB サーバーのステートメントの要約のみを示しています。クラスタ全体のデータをクエリするには、 `cluster_statements_summary` 、 `cluster_statements_summary_history` 、または`cluster_statements_summary_evicted`テーブルをクエリする必要があります。
+`statements_summary` 、および`statements_summary_history`の表は、単一の`statements_summary_evicted`サーバーのステートメントの要約のみを示しています。クラスター全体のデータをクエリするには、 `cluster_statements_summary` 、 `cluster_statements_summary_history` 、または`cluster_statements_summary_evicted`テーブルをクエリする必要があります。
 
-`cluster_statements_summary`は、各 TiDB サーバーの`statements_summary`のデータを表示します。 `cluster_statements_summary_history`は、各 TiDB サーバーの`statements_summary_history`のデータを表示します。 `cluster_statements_summary_evicted`は、各 TiDB サーバーの`statements_summary_evicted`のデータを表示します。これらのテーブルは、 `INSTANCE`フィールドを使用して TiDB サーバーのアドレスを表します。その他のフィールドは`statements_summary`と同じです。
+`cluster_statements_summary`は、各 TiDBサーバーの`statements_summary`のデータを表示します。 `cluster_statements_summary_history`は、各 TiDBサーバーの`statements_summary_history`のデータを表示します。 `cluster_statements_summary_evicted`は、各 TiDBサーバーの`statements_summary_evicted`のデータを表示します。これらのテーブルは、 `INSTANCE`フィールドを使用して TiDBサーバーのアドレスを表します。その他のフィールドは`statements_summary`と同じです。
 
 ## パラメータ構成 {#parameter-configuration}
 
@@ -182,13 +182,13 @@ select * from information_schema.statements_summary_evicted;
 
 ステートメント要約テーブルには、次の制限があります。
 
-上記のステートメント要約テーブルのすべてのデータは、TiDB サーバーを再起動すると失われます。これは、ステートメント サマリー テーブルがすべてメモリ テーブルであり、データがストレージに永続化されるのではなく、メモリにキャッシュされるためです。
+上記のステートメント要約テーブルのすべてのデータは、TiDBサーバーを再起動すると失われます。これは、ステートメント サマリー テーブルがすべてメモリ テーブルであり、データがストレージに永続化されるのではなく、メモリにキャッシュされるためです。
 
 ## トラブルシューティングの例 {#troubleshooting-examples}
 
 このセクションでは、ステートメントの要約機能を使用して SQL パフォーマンスの問題をトラブルシューティングする方法を示す 2 つの例を示します。
 
-### サーバー側が原因で SQL レイテンシーが高くなる可能性はありますか? {#could-high-sql-latency-be-caused-by-the-server-end}
+### サーバー側が原因で SQLレイテンシーが高くなる可能性はありますか? {#could-high-sql-latency-be-caused-by-the-server-end}
 
 この例では、クライアントは`employee`テーブルに対するポイント クエリでパフォーマンスが低下しています。 SQL テキストに対してあいまい検索を実行できます。
 
@@ -257,7 +257,7 @@ SELECT sum_latency, avg_latency, exec_count, query_sample_text
 -   `QUERY_SAMPLE_TEXT` : SQL カテゴリの元の SQL ステートメント。元のステートメントは 1 つだけ取得されます。
 -   `TABLE_NAMES` : SQL ステートメントに含まれるすべてのテーブル。複数のテーブルがある場合は、それぞれをカンマで区切ります。
 -   `INDEX_NAMES` : SQL ステートメントで使用されるすべての SQL インデックス。複数のインデックスがある場合は、それぞれをカンマで区切ります。
--   `SAMPLE_USER` : このカテゴリの SQL ステートメントを実行するユーザー。 1 人のユーザーのみが取得されます。
+-   `SAMPLE_USER` : このカテゴリの SQL ステートメントを実行するユーザー。 1 人のユーザーのみが使用されます。
 -   `PLAN_DIGEST` : 実行計画のダイジェスト。
 -   `PLAN` : 元の実行計画。複数のステートメントがある場合は、1 つのステートメントのみのプランが採用されます。
 -   `BINARY_PLAN` : バイナリ形式でエンコードされた元の実行計画。複数のステートメントがある場合は、1 つのステートメントのみのプランが採用されます。 `SELECT tidb_decode_binary_plan('xxx...')`ステートメントを実行して、特定の実行計画を解析します。
@@ -271,19 +271,19 @@ SELECT sum_latency, avg_latency, exec_count, query_sample_text
 -   `FIRST_SEEN` : このカテゴリの SQL ステートメントが初めて表示された時刻。
 -   `LAST_SEEN` : このカテゴリの SQL ステートメントが最後に表示された時刻。
 
-TiDB サーバーに関連するフィールド:
+TiDBサーバーに関連するフィールド:
 
 -   `EXEC_COUNT` : このカテゴリの SQL ステートメントの合計実行時間。
 -   `SUM_ERRORS` : 実行中に発生したエラーの合計。
 -   `SUM_WARNINGS` : 実行中に発生した警告の合計。
--   `SUM_LATENCY` : このカテゴリの SQL ステートメントの合計実行レイテンシ。
--   `MAX_LATENCY` : このカテゴリの SQL ステートメントの最大実行レイテンシ。
--   `MIN_LATENCY` : このカテゴリの SQL ステートメントの最小実行レイテンシ。
--   `AVG_LATENCY` : このカテゴリの SQL ステートメントの平均実行レイテンシ。
+-   `SUM_LATENCY` : このカテゴリの SQL ステートメントの合計実行レイテンシー。
+-   `MAX_LATENCY` : このカテゴリの SQL ステートメントの最大実行レイテンシー。
+-   `MIN_LATENCY` : このカテゴリの SQL ステートメントの最小実行レイテンシー。
+-   `AVG_LATENCY` : このカテゴリの SQL ステートメントの平均実行レイテンシー。
 -   `AVG_PARSE_LATENCY` : パーサーの平均レイテンシー。
--   `MAX_PARSE_LATENCY` : パーサーの最大レイテンシ。
--   `AVG_COMPILE_LATENCY` : コンパイラの平均レイテンシ。
--   `MAX_COMPILE_LATENCY` : コンパイラの最大レイテンシ。
+-   `MAX_PARSE_LATENCY` : パーサーの最大レイテンシー。
+-   `AVG_COMPILE_LATENCY` : コンパイラの平均レイテンシー。
+-   `MAX_COMPILE_LATENCY` : コンパイラの最大レイテンシー。
 -   `AVG_MEM` : 使用された平均メモリ (バイト)。
 -   `MAX_MEM` : 使用される最大メモリ (バイト)。
 -   `AVG_DISK` : 使用された平均ディスク容量 (バイト)。

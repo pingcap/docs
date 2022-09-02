@@ -17,7 +17,7 @@ TiDB は MySQL プロトコルと高い互換性がありますが、一部の�
 
 -   MySQL とは異なる機能:
 
-    -   自動インクリメント ID: 自動インクリメント列は、TiDB 内でグローバルに一意です。それらは単一の TiDB サーバー上では増分ですが***、必ずしも***複数の TiDB サーバー間で増分されたり、順次割り当てられるとは限りません。
+    -   自動インクリメント ID: 自動インクリメント列は、TiDB 内でグローバルに一意です。それらは単一の TiDBサーバー上では増分ですが***、必ずしも***複数の TiDB サーバー間で増分されたり、順次割り当てられるとは限りません。
 
 互換性の相違点の完全なリストについては、 [MySQL の互換性](/mysql-compatibility.md)を参照してください。
 
@@ -90,4 +90,4 @@ implementation 'mysql:mysql-connector-java:5.1.49'
 
 > **ノート：**
 >
-> バージョン`Hibernate`をアップグレードできない場合は、代わりにMySQL 5.7ダイアレクト`org.hibernate.dialect.MySQL57Dialect`を使用してください。ただし、この設定により、予期しない結果が発生したり、 [シーケンス](/sql-statements/sql-statement-create-sequence.md)などの TiDB 固有の機能が一部失われたりする可能性があります。
+> バージョン`Hibernate`をアップグレードできない場合は、代わりにMySQL 5.7ダイアレクト`org.hibernate.dialect.MySQL57Dialect`を使用してください。ただし、この設定により、予測できない結果が生じたり、 [シーケンス](/sql-statements/sql-statement-create-sequence.md)などの TiDB 固有の機能が一部失われたりする可能性があります。

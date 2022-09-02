@@ -393,7 +393,7 @@ plan_digest: 6afbbd21f60ca6c6fdf3d3cd94f7c7a49dd93c00fcf8774646da492e50e204ee
               └─TableScan_11    cop     1.2440069558121831      table:sbtest25, range:[472745,472844], keep order:false
 ```
 
-### クラスタの各 TiDB ノードのスロー クエリの数を照会する {#query-the-number-of-slow-queries-for-each-tidb-node-in-a-cluster}
+### クラスター内の各 TiDB ノードのスロー クエリの数を照会する {#query-the-number-of-slow-queries-for-each-tidb-node-in-a-cluster}
 
 {{< copyable "" >}}
 
@@ -519,7 +519,7 @@ pt-query-digest --report tidb-slow.log
 
 ## 問題のある SQL ステートメントを特定する {#identify-problematic-sql-statements}
 
-`SLOW_QUERY`ステートメントのすべてに問題があるわけではありません。 `process_time`が非常に大きいものだけがクラスタ全体への圧力を高めます。
+`SLOW_QUERY`ステートメントのすべてに問題があるわけではありません。 `process_time`が非常に大きいものだけが、クラスター全体への圧力を高めます。
 
 `wait_time`が非常に大きく、 `process_time`が非常に小さいステートメントは、通常は問題になりません。これは、問題のある実際のステートメントによってステートメントがブロックされ、実行キューで待機する必要があり、応答時間が大幅に長くなるためです。
 

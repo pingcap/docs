@@ -4,11 +4,11 @@ title: tiup cluster enable
 
 # tiup cluster enable {#tiup-cluster-enable}
 
-`tiup cluster enable`コマンドは、マシンの再起動後にクラスタサービスの自動有効化を設定するために使用されます。このコマンドは、指定したノードで`systemctl enable <service>`を実行することにより、サービスの自動有効化を有効にします。
+`tiup cluster enable`コマンドは、マシンの再起動後にクラスター サービスの自動有効化を設定するために使用されます。このコマンドは、指定したノードで`systemctl enable <service>`を実行することにより、サービスの自動有効化を有効にします。
 
 > **ノート：**
 >
-> すべてのクラスタがシャットダウンされて再起動されると、サービスの起動順序はノードのオペレーティング システムの起動順序によって決定されます。再起動の順序が正しくない場合、場合によっては、再起動されたクラスタがサービスを提供できないことがあります。たとえば、最初に TiKV が起動されて PD が起動されていない場合、PD が見つからない間に TiKV が複数回再起動されると、systemd は断念します)。
+> すべてのクラスタがシャットダウンされて再起動されると、サービスの起動順序はノードのオペレーティング システムの起動順序によって決定されます。再起動の順序が正しくない場合、場合によっては、再起動されたクラスターがサービスを提供できないことがあります。たとえば、最初に TiKV が起動されて PD が起動されていない場合、PD が見つからない間に TiKV が複数回再起動されると、systemd は断念します)。
 
 ## 構文 {#syntax}
 
@@ -16,13 +16,13 @@ title: tiup cluster enable
 tiup cluster enable <cluster-name> [flags]
 ```
 
-`<cluster-name>` : サービスの自動有効化を有効にするクラスタ。
+`<cluster-name>` : サービスの自動有効化を有効にするクラスター。
 
 ## オプション {#options}
 
 ### -N, --ノード {#n-node}
 
--   サービスの自動有効化を有効にするノードを指定します。このオプションの値は、ノード ID のコンマ区切りリストです。ノード ID は、 [`tiup cluster display`](/tiup/tiup-component-cluster-display.md)コマンドによって返されるクラスタステータス テーブルの最初の列から取得できます。
+-   サービスの自動有効化を有効にするノードを指定します。このオプションの値は、ノード ID のコンマ区切りリストです。ノード ID は、 [`tiup cluster display`](/tiup/tiup-component-cluster-display.md)コマンドによって返されるクラスター ステータス テーブルの最初の列から取得できます。
 -   データ型: `STRINGS`
 -   このオプションがコマンドで指定されていない場合、すべてのノードの自動有効化がデフォルトで有効になります。
 
@@ -32,7 +32,7 @@ tiup cluster enable <cluster-name> [flags]
 
 ### -R, --role {#r-role}
 
--   サービスの自動有効化を有効にするロールを指定します。このオプションの値は、ノード ロールのコンマ区切りリストです。 [`tiup cluster display`](/tiup/tiup-component-cluster-display.md)コマンドで返されるクラスタステータス テーブルの 2 列目から、ノードの役割を取得できます。
+-   サービスの自動有効化を有効にするロールを指定します。このオプションの値は、ノード ロールのコンマ区切りリストです。 [`tiup cluster display`](/tiup/tiup-component-cluster-display.md)コマンドで返されるクラスター ステータス テーブルの 2 列目から、ノードの役割を取得できます。
 -   データ型: `STRINGS`
 -   このオプションがコマンドで指定されていない場合、すべてのロールの自動有効化がデフォルトで有効になります。
 
@@ -48,6 +48,6 @@ tiup cluster enable <cluster-name> [flags]
 
 ## 出力 {#output}
 
-tiup-cluster の実行ログ。
+tiup-clusterの実行ログ。
 
-[&lt;&lt; 前のページに戻る - TiUP Clusterコマンド一覧](/tiup/tiup-component-cluster.md#command-list)
+[&lt;&lt; 前のページに戻る - TiUP クラスタコマンド一覧](/tiup/tiup-component-cluster.md#command-list)

@@ -11,7 +11,7 @@ summary: Learn steps, rules, and examples to create a database.
 
 データベースを作成する前に、次のことを行います。
 
--   [TiDB Cloud(開発者層) で TiDB クラスターを構築する](/develop/dev-guide-build-cluster-in-cloud.md) .
+-   [TiDB Cloud(開発者層) で TiDBクラスタを構築する](/develop/dev-guide-build-cluster-in-cloud.md) .
 -   [スキーマ設計の概要](/develop/dev-guide-schema-design-overview.md)を読んでください。
 
 ## データベースとは {#what-is-database}
@@ -47,7 +47,7 @@ mysql
 
 ## データベースをビュー {#view-databases}
 
-クラスタのデータベースを表示するには、 [`SHOW DATABASES`](/sql-statements/sql-statement-show-databases.md)ステートメントを使用します。
+クラスター内のデータベースを表示するには、 [`SHOW DATABASES`](/sql-statements/sql-statement-show-databases.md)ステートメントを使用します。
 
 例えば：
 

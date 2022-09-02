@@ -21,7 +21,7 @@ title: Pre-GA release notes
 
 ## プレースメントDriver(PD) {#placement-driver-pd}
 
--   PDクラスタのリーダーの手動変更をサポート
+-   PD クラスターのリーダーの手動変更をサポート
 
 ## TiKV {#tikv}
 

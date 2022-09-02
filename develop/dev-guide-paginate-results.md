@@ -24,7 +24,7 @@ SELECT * FROM table_a t ORDER BY gmt_modified DESC LIMIT offset, row_count;
 <SimpleTab groupId="language">
 <div label="SQL" value="sql">
 
-たとえば、 [書店](/develop/dev-guide-bookshop-schema-design.md)アプリケーションのユーザーが最新の出版された本をページ分割された方法で表示できるようにするには、 `LIMIT 0, 10`ステートメントを使用できます。このステートメントは、結果リストの最初のページを返します。1 ページあたり最大 10 レコードです。 2 番目のページを取得するには、ステートメントを`LIMIT 10, 10`などに変更します。
+たとえば、 [書店](/develop/dev-guide-bookshop-schema-design.md)アプリケーションのユーザーが最新の出版された書籍をページ分割された方法で表示できるようにするには、 `LIMIT 0, 10`ステートメントを使用できます。このステートメントは、結果リストの最初のページを返します。1 ページあたり最大 10 レコードです。 2 番目のページを取得するには、ステートメントを`LIMIT 10, 10`などに変更します。
 
 {{< copyable "" >}}
 

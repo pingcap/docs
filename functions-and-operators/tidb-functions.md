@@ -12,10 +12,10 @@ summary: Learn about the usage of TiDB specific functions.
 | `TIDB_BOUNDED_STALENESS()`                                                         | `TIDB_BOUNDED_STALENESS`関数は、時間範囲内で可能な限り新しいデータを読み取るように TiDB に指示します。参照: [`AS OF TIMESTAMP`句を使用した履歴データの読み取り](/as-of-timestamp.md)             |
 | [`TIDB_DECODE_KEY(str)`](#tidb_decode_key)                                         | `TIDB_DECODE_KEY`関数を使用して、TiDB でエンコードされたキー エントリを`_tidb_rowid`と`table_id`を含む JSON 構造にデコードできます。これらのエンコードされたキーは、一部のシステム テーブルとログ出力で見つけることができます。 |
 | [`TIDB_DECODE_PLAN(str)`](#tidb_decode_plan)                                       | `TIDB_DECODE_PLAN`関数を使用して、TiDB 実行計画をデコードできます。                                                                                              |
-| `TIDB_IS_DDL_OWNER()`                                                              | `TIDB_IS_DDL_OWNER`関数を使用して、接続している TiDB インスタンスが DDL 所有者であるかどうかを確認できます。 DDL 所有者は、クラスタの他のすべてのノードに代わって DDL ステートメントを実行する役割を担う TiDB インスタンスです。    |
+| `TIDB_IS_DDL_OWNER()`                                                              | `TIDB_IS_DDL_OWNER`関数を使用して、接続している TiDB インスタンスが DDL 所有者であるかどうかを確認できます。 DDL 所有者は、クラスター内の他のすべてのノードに代わって DDL ステートメントを実行する役割を担う TiDB インスタンスです。  |
 | [`TIDB_PARSE_TSO(num)`](#tidb_parse_tso)                                           | `TIDB_PARSE_TSO`関数を使用して、TiDB TSO タイムスタンプから物理タイムスタンプを抽出できます。参照: [`tidb_current_ts`](/system-variables.md#tidb_current_ts) .                 |
 | [`TIDB_VERSION()`](#tidb_version)                                                  | `TIDB_VERSION`関数は、TiDB のバージョンと追加のビルド情報を返します。                                                                                               |
-| [`TIDB_DECODE_SQL_DIGESTS(digests, stmtTruncateLength)`](#tidb_decode_sql_digests) | `TIDB_DECODE_SQL_DIGESTS()`関数は、クラスタの一連の SQL ダイジェストに対応する正規化された SQL ステートメント (形式と引数のない形式) を照会するために使用されます。                                     |
+| [`TIDB_DECODE_SQL_DIGESTS(digests, stmtTruncateLength)`](#tidb_decode_sql_digests) | `TIDB_DECODE_SQL_DIGESTS()`関数は、クラスター内の一連の SQL ダイジェストに対応する正規化された SQL ステートメント (形式と引数のないフォーム) を照会するために使用されます。                                 |
 | `VITESS_HASH(str)`                                                                 | `VITESS_HASH`関数は、Vitess の`HASH`関数と互換性のある文字列のハッシュを返します。これは、Vitess からのデータ移行を支援することを目的としています。                                                 |
 | `TIDB_SHARD()`                                                                     | `TIDB_SHARD`関数を使用してシャード インデックスを作成し、インデックス ホットスポットを分散させることができます。シャード インデックスは、プレフィックスとして`TIDB_SHARD`関数を持つ式インデックスです。                          |
 
@@ -153,7 +153,7 @@ ROLLBACK;
 
 ### TIDB_VERSION {#tidb-version}
 
-`TIDB_VERSION`関数を使用して、接続している TiDB サーバーのバージョンとビルドの詳細を取得できます。 GitHub で問題を報告するときに、この機能を使用できます。
+`TIDB_VERSION`関数を使用して、接続している TiDBサーバーのバージョンとビルドの詳細を取得できます。 GitHub で問題を報告するときに、この機能を使用できます。
 
 {{< copyable "" >}}
 
@@ -177,7 +177,7 @@ Check Table Before Drop: false
 
 ### TIDB_DECODE_SQL_DIGESTS {#tidb-decode-sql-digests}
 
-`TIDB_DECODE_SQL_DIGESTS()`関数は、クラスタの一連の SQL ダイジェストに対応する正規化された SQL ステートメント (形式と引数のない形式) を照会するために使用されます。この関数は、1 つまたは 2 つの引数を受け入れます。
+`TIDB_DECODE_SQL_DIGESTS()`関数は、クラスター内の一連の SQL ダイジェストに対応する正規化された SQL ステートメント (形式と引数のないフォーム) を照会するために使用されます。この関数は、1 つまたは 2 つの引数を受け入れます。
 
 -   `digests` : 文字列。このパラメーターは JSON 文字列配列の形式であり、配列内の各文字列は SQL ダイジェストです。
 -   `stmtTruncateLength` : 整数 (オプション)。返される結果の各 SQL ステートメントの長さを制限するために使用されます。 SQL ステートメントが指定された長さを超える場合、ステートメントは切り捨てられます。 `0`は、長さが無制限であることを意味します。
@@ -187,8 +187,8 @@ Check Table Before Drop: false
 > **ノート：**
 >
 > -   この機能を使用できるのは、 [処理する](https://dev.mysql.com/doc/refman/8.0/en/privileges-provided.html#priv_process)権限を持つユーザーのみです。
-> -   `TIDB_DECODE_SQL_DIGESTS`を実行すると、TiDB は各 SQL ダイジェストに対応するステートメントをステートメント サマリー テーブルからクエリするため、どの SQL ダイジェストでも対応するステートメントが常に見つかるという保証はありません。クラスタで実行されたステートメントのみを見つけることができ、これらの SQL ステートメントを照会できるかどうかは、ステートメント要約テーブルの関連する構成によっても影響を受けます。ステートメント要約表の詳細な説明については、 [ステートメント要約表](/statement-summary-tables.md)を参照してください。
-> -   この関数には高いオーバーヘッドがあります。多数の行を含むクエリ (たとえば、大規模でビジーなクラスタで`information_schema.cluster_tidb_trx`のテーブル全体をクエリする場合) で、この関数を使用すると、クエリの実行時間が長くなりすぎる可能性があります。注意して使用してください。
+> -   `TIDB_DECODE_SQL_DIGESTS`を実行すると、TiDB は各 SQL ダイジェストに対応するステートメントをステートメント サマリー テーブルからクエリするため、どの SQL ダイジェストでも対応するステートメントが常に見つかるという保証はありません。クラスター内で実行されたステートメントのみを見つけることができ、これらの SQL ステートメントを照会できるかどうかは、ステートメント要約テーブルの関連する構成によっても影響を受けます。ステートメント要約表の詳細な説明については、 [ステートメント要約表](/statement-summary-tables.md)を参照してください。
+> -   この関数には高いオーバーヘッドがあります。多数の行を含むクエリ (たとえば、大規模でビジーなクラスターで`information_schema.cluster_tidb_trx`のテーブル全体をクエリする場合) で、この関数を使用すると、クエリの実行時間が長くなりすぎる可能性があります。注意して使用してください。
 >     -   この関数は、呼び出されるたびに`STATEMENTS_SUMMARY` 、 `STATEMENTS_SUMMARY_HISTORY` 、 `CLUSTER_STATEMENTS_SUMMARY` 、および`CLUSTER_STATEMENTS_SUMMARY_HISTORY`テーブルを内部的にクエリし、クエリには`UNION`操作が含まれるため、オーバーヘッドが高くなります。この関数は現在、ベクトル化をサポートしていません。つまり、複数行のデータに対してこの関数を呼び出す場合、上記のクエリは行ごとに個別に実行されます。
 
 {{< copyable "" >}}
@@ -208,7 +208,7 @@ select tidb_decode_sql_digests(@digests);
 1 row in set (0.00 sec)
 ```
 
-上記の例では、パラメーターは 3 つの SQL ダイジェストを含む JSON 配列であり、対応する SQL ステートメントはクエリ結果の 3 つの項目です。しかし、2 番目の SQL ダイジェストに対応する SQL ステートメントがクラスタから見つからないため、結果の 2 番目の項目は`null`になります。
+上記の例では、パラメーターは 3 つの SQL ダイジェストを含む JSON 配列であり、対応する SQL ステートメントはクエリ結果の 3 つの項目です。しかし、2 番目の SQL ダイジェストに対応する SQL ステートメントがクラスターから見つからないため、結果の 2 番目の項目は`null`になります。
 
 {{< copyable "" >}}
 
@@ -240,7 +240,7 @@ select tidb_decode_sql_digests(@digests, 10);
 
 -   作成:
 
-    インデックス フィールド`a`のシャード インデックスを作成するには、 `uk((tidb_shard(a)), a))`を使用できます。一意のセカンダリ インデックス`uk((tidb_shard(a)), a))`のインデックス フィールド`a`のデータが単調に増加または減少することによって発生するホットスポットがある場合、インデックスのプレフィックス`tidb_shard(a)`はホットスポットを分散させてクラスタのスケーラビリティを向上させることができます。
+    インデックス フィールド`a`のシャード インデックスを作成するには、 `uk((tidb_shard(a)), a))`を使用できます。一意のセカンダリ インデックス`uk((tidb_shard(a)), a))`のインデックス フィールド`a`のデータが単調に増加または減少することによって発生するホットスポットがある場合、インデックスのプレフィックス`tidb_shard(a)`はホットスポットを分散させてクラスターのスケーラビリティを向上させることができます。
 
 -   シナリオ:
 

@@ -4,7 +4,7 @@ title: tiup cluster disable
 
 # tiup cluster disable {#tiup-cluster-disable}
 
-クラスタサービスが配置されているマシンを再起動すると、クラスタサービスが自動的に有効になります。クラスタサービスの自動有効化を無効にするには、 `tiup cluster disable`コマンドを使用できます。このコマンドは、指定したノードで`systemctl disable <service>`を実行して、サービスの自動有効化を無効にします。
+クラスタ サービスが配置されているマシンを再起動すると、クラスタ サービスが自動的に有効になります。クラスター サービスの自動有効化を無効にするには、 `tiup cluster disable`コマンドを使用できます。このコマンドは、指定したノードで`systemctl disable <service>`を実行して、サービスの自動有効化を無効にします。
 
 ## 構文 {#syntax}
 
@@ -12,13 +12,13 @@ title: tiup cluster disable
 tiup cluster disable <cluster-name> [flags]
 ```
 
-`<cluster-name>` : サービスの自動有効化を無効にするクラスタ。
+`<cluster-name>` : サービスの自動有効化を無効にするクラスター。
 
 ## オプション {#options}
 
 ### -N, --ノード {#n-node}
 
--   サービスの自動有効化を無効にするノードを指定します。このオプションの値は、ノード ID のコンマ区切りリストです。ノード ID は、 [`tiup cluster display`](/tiup/tiup-component-cluster-display.md)コマンドによって返されるクラスタステータス テーブルの最初の列から取得できます。
+-   サービスの自動有効化を無効にするノードを指定します。このオプションの値は、ノード ID のコンマ区切りリストです。ノード ID は、 [`tiup cluster display`](/tiup/tiup-component-cluster-display.md)コマンドによって返されるクラスター ステータス テーブルの最初の列から取得できます。
 -   データ型: `STRINGS`
 -   このオプションがコマンドで指定されていない場合、すべてのノードの自動有効化はデフォルトで無効になります。
 
@@ -28,7 +28,7 @@ tiup cluster disable <cluster-name> [flags]
 
 ### -R, --role {#r-role}
 
--   サービスの自動有効化を無効にするロールを指定します。このオプションの値は、ノード ロールのコンマ区切りリストです。 [`tiup cluster display`](/tiup/tiup-component-cluster-display.md)コマンドで返されるクラスタステータス テーブルの 2 列目から、ノードの役割を取得できます。
+-   サービスの自動有効化を無効にするロールを指定します。このオプションの値は、ノード ロールのコンマ区切りリストです。 [`tiup cluster display`](/tiup/tiup-component-cluster-display.md)コマンドで返されるクラスター ステータス テーブルの 2 列目から、ノードの役割を取得できます。
 -   データ型: `STRINGS`
 -   このオプションがコマンドで指定されていない場合、すべてのロールの自動有効化はデフォルトで無効になります。
 
@@ -44,6 +44,6 @@ tiup cluster disable <cluster-name> [flags]
 
 ## 出力 {#output}
 
-tiup-cluster の実行ログ。
+tiup-clusterの実行ログ。
 
-[&lt;&lt; 前のページに戻る - TiUP Clusterコマンド一覧](/tiup/tiup-component-cluster.md#command-list)
+[&lt;&lt; 前のページに戻る - TiUP クラスタコマンド一覧](/tiup/tiup-component-cluster.md#command-list)

@@ -48,7 +48,7 @@ summary: Learn how to collect performance data from TiDB, TiKV and PD continuous
 
 > **ノート：**
 >
-> 継続的プロファイリングを使用するには、TiUP (v1.9.0 以降) またはTiDB Operator (v1.3.0 以降) の最新バージョンを使用してクラスタをデプロイまたはアップグレードする必要があります。以前のバージョンの TiUP またはTiDB Operatorを使用してクラスタをアップグレードした場合は、手順について[FAQ](/dashboard/dashboard-faq.md#a-required-component-ngmonitoring-is-not-started-error-is-shown)を参照してください。
+> 継続的プロファイリングを使用するには、TiUP (v1.9.0 以降) またはTiDB Operator (v1.3.0 以降) の最新バージョンを使用してクラスターをデプロイまたはアップグレードする必要があります。以前のバージョンの TiUP またはTiDB Operatorを使用してクラスターをアップグレードした場合は、手順について[FAQ](/dashboard/dashboard-faq.md#a-required-component-ngmonitoring-is-not-started-error-is-shown)を参照してください。
 
 TiDB v6.1.0 以降、継続的なプロファイリングはデフォルトで有効になっています。これを有効にすると、Web ページを常にアクティブにしなくても、バックグラウンドで継続的にパフォーマンス データを収集できます。収集したデータは一定期間保持でき、期限切れのデータは自動的に消去されます。
 

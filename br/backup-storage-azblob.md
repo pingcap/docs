@@ -9,7 +9,7 @@ summary: Learn how to use BR to back up and restore data on Azure Blob Storage.
 
 ## ユーザーシナリオ {#user-scenario}
 
-Azure 仮想マシンは、大規模なデータを Azure Blob Storage にすばやく格納できます。 Azure 仮想マシンを使用してクラスタをデプロイしている場合は、Azure Blob Storage にデータをバックアップできます。
+Azure 仮想マシンは、大規模なデータを Azure Blob Storage にすばやく格納できます。 Azure 仮想マシンを使用してクラスターをデプロイしている場合は、Azure Blob Storage にデータをバックアップできます。
 
 ## 使用法 {#usage}
 
@@ -37,7 +37,7 @@ BR を使用すると、次の 2 つの方法で Azure Blob Storage のデータ
 
 BR と TiKV の動作環境で、環境変数`$AZURE_CLIENT_ID` 、 `$AZURE_TENANT_ID` 、および`$AZURE_CLIENT_SECRET`を設定します。
 
--   TiUP を使用してクラスタを起動すると、TiKV は「systemd」サービスを使用します。次の例では、前述の 3 つの環境変数を TiKV のパラメーターとして構成する方法を紹介します。
+-   TiUP を使用してクラスターを起動すると、TiKV は「systemd」サービスを使用します。次の例では、前述の 3 つの環境変数を TiKV のパラメーターとして構成する方法を紹介します。
 
     > **ノート：**
     >
@@ -65,7 +65,7 @@ BR と TiKV の動作環境で、環境変数`$AZURE_CLIENT_ID` 、 `$AZURE_TENA
         systemctl restart tikv-24000
         ```
 
--   コマンド ラインで開始された TiKV および BR の Azure AD 情報を構成するには、次のコマンドを実行して、環境変数`$AZURE_CLIENT_ID` 、 `$AZURE_TENANT_ID` 、および`$AZURE_CLIENT_SECRET`が動作環境で構成されているかどうかを確認するだけです。
+-   コマンド ラインで開始された TiKV および BR の Azure AD 情報を構成するには、次のコマンドを実行して、環境変数`$AZURE_CLIENT_ID` 、 `$AZURE_TENANT_ID` 、および`$AZURE_CLIENT_SECRET`が動作環境で構成されているかどうかを確認するだけで済みます。
 
     ```
     echo $AZURE_CLIENT_ID

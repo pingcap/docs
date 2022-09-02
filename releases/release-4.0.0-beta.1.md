@@ -50,7 +50,7 @@ TiDB アンシブル バージョン: 4.0.0-beta.1
     -   `json_objectagg`集計関数[#11154](https://github.com/pingcap/tidb/pull/11154)を追加します。
     -   拒否された接続試行を監査ログに記録するサポート[#14594](https://github.com/pingcap/tidb/pull/14594)
     -   `max-server-connections`の構成項目 (デフォルトでは`4096` ) を追加して、単一サーバーへの接続数を制御します[#14409](https://github.com/pingcap/tidb/pull/14409)
-    -   サーバー レベル[#14440](https://github.com/pingcap/tidb/pull/14440)で複数のストレージ エンジンを指定する分離読み取りをサポートします。
+    -   サーバーレベル[#14440](https://github.com/pingcap/tidb/pull/14440)で複数のストレージ エンジンを指定する分離読み取りをサポートします。
     -   `Apply`オペレーターと`Sort`オペレーターのコスト モデルを最適化して安定性を向上させる[#13550](https://github.com/pingcap/tidb/pull/13550) [#14708](https://github.com/pingcap/tidb/pull/14708)
 
 -   TiKV
@@ -58,8 +58,8 @@ TiDB アンシブル バージョン: 4.0.0-beta.1
     -   コプロセッサー[#6341](https://github.com/tikv/tikv/pull/6341)で`Chunk Encoder`のパフォーマンスを最適化する
 
 -   PD
-    -   ダッシュボード UI [#2086](https://github.com/pingcap/pd/pull/2086)を介したクラスタのホットスポットの分布へのアクセスのサポート
-    -   クラスタコンポーネントの`START_TIME`と`UPTIME`のキャプチャと表示をサポート[#2116](https://github.com/pingcap/pd/pull/2116)
+    -   ダッシュボード UI [#2086](https://github.com/pingcap/pd/pull/2086)を介したクラスター内のホットスポットの分布へのアクセスのサポート
+    -   クラスタ コンポーネントの`START_TIME`と`UPTIME`のキャプチャと表示をサポート[#2116](https://github.com/pingcap/pd/pull/2116)
     -   `member` API の返されるメッセージにデプロイ パスとコンポーネント バージョンの情報を追加します[#2130](https://github.com/pingcap/pd/pull/2130)
     -   pd-ctl に`component`サブコマンドを追加して、他のコンポーネントの構成を変更および確認します (実験的) [#2092](https://github.com/pingcap/pd/pull/2092)
 
@@ -69,7 +69,7 @@ TiDB アンシブル バージョン: 4.0.0-beta.1
     -   Drainer [#885](https://github.com/pingcap/tidb-binlog/pull/885)での増分バックアップ データのパージのサポート
 
 -   TiDB アンシブル
-    -   1 つのクラスタに複数の Grafana/Prometheus/Alertmanager をデプロイするサポート[#1142](https://github.com/pingcap/tidb-ansible/pull/1142)
+    -   1 つのクラスターに複数の Grafana/Prometheus/Alertmanager をデプロイするサポート[#1142](https://github.com/pingcap/tidb-ansible/pull/1142)
     -   TiFlash の構成ファイル[#1145](https://github.com/pingcap/tidb-ansible/pull/1145)に`metric_port`の構成項目 (デフォルトでは`8234` ) を追加します。
     -   TiFlash の構成ファイル[#1141](https://github.com/pingcap/tidb-ansible/pull/1141)に`flash_proxy_status_port`の構成項目 (デフォルトでは`20292` ) を追加します。
     -   TiFlash 監視ダッシュボードを追加する[#1147](https://github.com/pingcap/tidb-ansible/pull/1147) [#1151](https://github.com/pingcap/tidb-ansible/pull/1151)

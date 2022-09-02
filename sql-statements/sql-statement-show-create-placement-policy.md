@@ -5,7 +5,7 @@ summary: The usage of SHOW CREATE PLACEMENT POLICY in TiDB.
 
 # 配置ポリシーの作成を表示 {#show-create-placement-policy}
 
-`SHOW CREATE PLACEMENT POLICY`は、配置ポリシーの定義を示すために使用されます。これは、配置ポリシーの現在の定義を確認し、別の TiDBクラスタで再作成するために使用できます。
+`SHOW CREATE PLACEMENT POLICY`は、配置ポリシーの定義を示すために使用されます。これは、配置ポリシーの現在の定義を確認し、別の TiDB クラスターで再作成するために使用できます。
 
 ## あらすじ {#synopsis}
 

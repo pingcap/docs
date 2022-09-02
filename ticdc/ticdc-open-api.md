@@ -7,12 +7,12 @@ summary: Learn how to use the OpenAPI interface to manage the cluster status and
 
 <!-- markdownlint-disable MD024 -->
 
-TiCDC は、TiCDCクラスタを照会および操作するための OpenAPI 機能を提供します。これは、 [`cdc cli`ツール](/ticdc/manage-ticdc.md#use-cdc-cli-to-manage-cluster-status-and-data-replication-task)の機能に似ています。
+TiCDC は、TiCDC クラスターを照会および操作するための OpenAPI 機能を提供します。これは[`cdc cli`ツール](/ticdc/manage-ticdc.md#use-cdc-cli-to-manage-cluster-status-and-data-replication-task)の機能に似ています。
 
-API を使用して、TiCDCクラスタで次のメンテナンス操作を実行できます。
+API を使用して、TiCDC クラスターで次のメンテナンス操作を実行できます。
 
 -   [TiCDC ノードのステータス情報を取得する](#get-the-status-information-of-a-ticdc-node)
--   [TiCDCクラスタのヘルス ステータスを確認する](#check-the-health-status-of-a-ticdc-cluster)
+-   [TiCDC クラスターのヘルス ステータスを確認する](#check-the-health-status-of-a-ticdc-cluster)
 -   [レプリケーション タスクを作成する](#create-a-replication-task)
 -   [レプリケーション タスクを削除する](#remove-a-replication-task)
 -   [レプリケーション構成を更新する](#update-the-replication-configuration)
@@ -26,11 +26,11 @@ API を使用して、TiCDCクラスタで次のメンテナンス操作を実�
 -   [所有者ノードを削除する](#evict-an-owner-node)
 -   [レプリケーション タスクですべてのテーブルの負荷分散を手動でトリガーする](#manually-trigger-the-load-balancing-of-all-tables-in-a-replication-task)
 -   [テーブルを別のノードに手動でスケジュールする](#manually-schedule-a-table-to-another-node)
--   [TiCDC サーバーのログレベルを動的に調整する](#dynamically-adjust-the-log-level-of-the-ticdc-server)
+-   [TiCDCサーバーのログレベルを動的に調整する](#dynamically-adjust-the-log-level-of-the-ticdc-server)
 
 すべての API の要求本文と戻り値は JSON 形式です。以下のセクションでは、API の特定の使用法について説明します。
 
-次の例では、TiCDC サーバーのリッスン IP アドレスは`127.0.0.1`で、ポートは`8300`です。 TiCDC サーバーの起動時に、指定した IP とポートを`--addr=ip:port`経由でバインドできます。
+次の例では、TiCDCサーバーのリッスン IP アドレスは`127.0.0.1`で、ポートは`8300`です。 TiCDCサーバーの起動時に、指定した IP とポートを`--addr=ip:port`経由でバインドできます。
 
 ## API エラー メッセージ テンプレート {#api-error-message-template}
 
@@ -81,9 +81,9 @@ curl -X GET http://127.0.0.1:8300/api/v1/status
 -   pid: ノードのキャプチャ プロセス PID。
 -   is_owner: ノードが所有者かどうかを示します。
 
-## TiCDCクラスタのヘルス ステータスを確認する {#check-the-health-status-of-a-ticdc-cluster}
+## TiCDC クラスターのヘルス ステータスを確認する {#check-the-health-status-of-a-ticdc-cluster}
 
-この API は同期インターフェースです。クラスタが正常な場合、 `200 OK`が返されます。
+この API は同期インターフェースです。クラスターが正常な場合、 `200 OK`が返されます。
 
 ### リクエストURI {#request-uri}
 
@@ -113,7 +113,7 @@ curl -X GET http://127.0.0.1:8300/api/v1/health
 
 | |パラメータ名 |説明 | | | :------------------------ | : ---------------------- --------------------------- ---- | | | `changefeed_id` | `STRING`タイプ。レプリケーション タスクの ID。 (オプション) | | | `start_ts` | `UINT64`型。 changefeed の開始 TSO を指定します。 (オプション) | | | `target_ts` | `UINT64`型。 changefeed のターゲット TSO を指定します。 (オプション) | | | **`sink_uri`** | `STRING`型。レプリケーション タスクのダウンストリーム アドレス。 (<strong>必須</strong>) | | | `force_replicate` | `BOOLEAN`型。一意のインデックスを持たないテーブルを強制的にレプリケートするかどうかを決定します。 (オプション) | | | `ignore_ineligible_table` | `BOOLEAN`型。レプリケートできないテーブルを無視するかどうかを決定します。 (オプション) | | | `filter_rules` | `STRING`型配列。テーブル スキーマ フィルタリングのルール。 (オプション) | | | `ignore_txn_start_ts` | `UINT64`型配列。指定した start_ts のトランザクションを無視します。 (オプション) | | | `mounter_worker_num` | `INT`型。マウンターのスレッド番号。 (オプション) | | | `sink_config` |シンクの構成パラメーター。 (オプション) |
 
-`changefeed_id` 、 `start_ts` 、 `target_ts` 、および`sink_uri`の意味と形式は、 [`cdc cli`を使用してレプリケーション タスクを作成する](/ticdc/manage-ticdc.md#create-a-replication-task)ドキュメントで説明されているものと同じです。これらのパラメータの詳細な説明については、このドキュメントを参照してください。 `sink_uri`で証明書パスを指定するときは、対応する証明書を対応する TiCDC サーバーにアップロードしたことを確認してください。
+`changefeed_id` 、 `start_ts` 、 `target_ts` 、および`sink_uri`の意味と形式は、 [`cdc cli`を使用してレプリケーション タスクを作成する](/ticdc/manage-ticdc.md#create-a-replication-task)ドキュメントで説明されているものと同じです。これらのパラメータの詳細な説明については、このドキュメントを参照してください。 `sink_uri`で証明書パスを指定するときは、対応する証明書を対応する TiCDCサーバーにアップロードしたことを確認してください。
 
 上記の表のその他のパラメータについては、以下で詳しく説明します。
 
@@ -230,7 +230,7 @@ changefeed 構成を変更するには、 `pause the replication task -> modify 
 
 ## レプリケーション タスク リストを照会する {#query-the-replication-task-list}
 
-この API は同期インターフェースです。リクエストが成功すると、TiCDCクラスタのすべてのノードの基本情報が返されます。
+この API は同期インターフェースです。リクエストが成功すると、TiCDC クラスター内のすべてのノードの基本情報が返されます。
 
 ### リクエストURI {#request-uri}
 
@@ -566,7 +566,7 @@ curl -X POST -H "'Content-type':'application/json'" http://127.0.0.1:8300/api/v1
 
 リクエストが成功した場合、 `202 Accepted`が返されます。リクエストが失敗すると、エラー メッセージとエラー コードが返されます。
 
-## TiCDC サーバーのログレベルを動的に調整する {#dynamically-adjust-the-log-level-of-the-ticdc-server}
+## TiCDCサーバーのログレベルを動的に調整する {#dynamically-adjust-the-log-level-of-the-ticdc-server}
 
 この API は同期インターフェースです。リクエストが成功した場合、 `202 OK`が返されます。
 

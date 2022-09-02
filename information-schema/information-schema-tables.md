@@ -117,7 +117,7 @@ SHOW TABLES
 
 表のほとんどの情報は MySQL と同じです。 TiDB によって新たに定義された列は 2 つだけです。
 
--   `TIDB_TABLE_ID` : テーブルの内部 ID を示します。この ID は TiDBクラスタで一意です。
+-   `TIDB_TABLE_ID` : テーブルの内部 ID を示します。この ID は、TiDB クラスター内で一意です。
 -   `TIDDB_ROW_ID_SHARDING_INFO` : テーブルのシャーディング タイプを示します。可能な値は次のとおりです。
     -   `"NOT_SHARDED"` : テーブルはシャーディングされていません。
     -   `"NOT_SHARDED(PK_IS_HANDLE)"` : 行 ID として整数の主キーを定義するテーブルはシャーディングされません。

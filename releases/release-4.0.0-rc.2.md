@@ -12,7 +12,7 @@ TiDB バージョン: 4.0.0-rc.2
 
 -   TiDB
 
-    -   TiDB Binlogが有効な場合、単一トランザクション (100 MB) のサイズ制限を削除します。現在、トランザクションのサイズ制限は 10 GB です。ただし、TiDB Binlogが有効でダウンストリームが Kafka の場合は、Kafka [#16941](https://github.com/pingcap/tidb/pull/16941)の 1 GB のメッセージ サイズ制限に従って`txn-total-size-limit`パラメータを構成します。
+    -   TiDB Binlogが有効な場合、単一トランザクション (100 MB) のサイズ制限を削除します。現在、トランザクションのサイズ制限は 10 GB です。ただし、TiDB Binlogが有効でダウンストリームが Kafka の場合、Kafka [#16941](https://github.com/pingcap/tidb/pull/16941)の 1 GB のメッセージ サイズ制限に従って`txn-total-size-limit`パラメータを構成します。
     -   `CLUSTER_LOG`テーブルのクエリ時に時間範囲が指定されていない場合、デフォルトの時間範囲のクエリからエラーを返し、指定された時間範囲を要求するように動作を変更します[#17003](https://github.com/pingcap/tidb/pull/17003)
     -   `CREATE TABLE`ステートメントを使用して分割テーブルを作成するときに、サポートされていない`sub-partition`または`linear hash`オプションを指定すると、オプションが無視された分割テーブルではなく、通常のテーブルが作成されます[#17197](https://github.com/pingcap/tidb/pull/17197)
 
@@ -62,7 +62,7 @@ TiDB バージョン: 4.0.0-rc.2
     -   PD/TiKV ノードの構成を変更する`SET CONFIG`ステートメントを使用したサポート[#16853](https://github.com/pingcap/tidb/pull/16853)
     -   `CREATE TABLE`ステートメント[#16813](https://github.com/pingcap/tidb/pull/16813)の`auto_random`オプションをサポートする
     -   DistSQL リクエストに TaskID を割り当てて、TiKV がリクエストをより適切にスケジュールおよび処理できるようにします[#17155](https://github.com/pingcap/tidb/pull/17155)
-    -   MySQL クライアントへのログイン後の TiDB サーバーのバージョン情報の表示をサポート[#17187](https://github.com/pingcap/tidb/pull/17187)
+    -   MySQL クライアントへのログイン後の TiDBサーバーのバージョン情報の表示をサポート[#17187](https://github.com/pingcap/tidb/pull/17187)
     -   `GROUP_CONCAT`機能[#16990](https://github.com/pingcap/tidb/pull/16990)で`ORDER BY`節をサポート
     -   ステートメントがプラン キャッシュにヒットするかどうかを示すために、スロー ログに`Plan_from_cache`の情報を表示するサポート[#17121](https://github.com/pingcap/tidb/pull/17121)
     -   TiDBダッシュボードにTiFlashマルチディスク展開の容量情報を表示できる機能を追加
@@ -70,9 +70,9 @@ TiDB バージョン: 4.0.0-rc.2
 
 -   TiKV
 
-    -   tikv-ctl の暗号化デバッグをサポートし、暗号化ストレージが有効な場合にクラスタの操作と管理に tikv-ctl を使用できるようにします[#7698](https://github.com/tikv/tikv/pull/7698)
+    -   tikv-ctl の暗号化デバッグをサポートし、暗号化ストレージが有効な場合にクラスターの操作と管理に tikv-ctl を使用できるようにします[#7698](https://github.com/tikv/tikv/pull/7698)
     -   スナップショットでのロック列ファミリーの暗号化のサポート[#7712](https://github.com/tikv/tikv/pull/7712)
-    -   Grafana ダッシュボードのヒートマップを使用して Raftstore レイテンシの概要を表示し、ジッターの問題をより適切に診断します[#7717](https://github.com/tikv/tikv/pull/7717)
+    -   Grafana ダッシュボードのヒートマップを使用して Raftstoreレイテンシーの概要を表示し、ジッターの問題をより適切に診断します[#7717](https://github.com/tikv/tikv/pull/7717)
     -   gRPC メッセージ[#7824](https://github.com/tikv/tikv/pull/7824)のサイズの上限設定をサポート
     -   Grafana ダッシュボードに暗号化関連の監視メトリクスを追加します[#7827](https://github.com/tikv/tikv/pull/7827)
     -   アプリケーション層プロトコル ネゴシエーション (ALPN) [#7825](https://github.com/tikv/tikv/pull/7825)をサポート
@@ -94,7 +94,7 @@ TiDB バージョン: 4.0.0-rc.2
 
     -   TiDB Lightning
 
-        -   tidb-lightning-ctl に`fetch-mode`サブコマンドを追加して、TiKVクラスタモード[#287](https://github.com/pingcap/tidb-lightning/pull/287)を出力します。
+        -   tidb-lightning-ctl に`fetch-mode`サブコマンドを追加して、TiKV クラスター モード[#287](https://github.com/pingcap/tidb-lightning/pull/287)を出力します。
 
     -   TiCDC
 
@@ -122,7 +122,7 @@ TiDB バージョン: 4.0.0-rc.2
     -   `MergeJoin`ヒントを使用し、 `TableDual`演算子が存在する場合、物理クエリ プランを生成できない問題を修正します[#17016](https://github.com/pingcap/tidb/pull/17016)
     -   明細書の概要表の`Stmt_Type`列の値の間違った大文字化を修正します[#17018](https://github.com/pingcap/tidb/pull/17018)
     -   異なるユーザーが同じ`tmp-storage-path` [#16996](https://github.com/pingcap/tidb/pull/16996)を使用するとサービスを開始できず、 `Permission Denied`エラーが報告される問題を修正
-    -   `CASE WHEN` [#16995](https://github.com/pingcap/tidb/pull/16995)などの複数の入力列によって結果の型が決定される式に対して、 `NotNullFlag`の結果の型が誤って設定される問題を修正します。
+    -   `CASE WHEN` [#16995](https://github.com/pingcap/tidb/pull/16995)などの複数の入力列によって結果の型が決定される式に対して、 `NotNullFlag`の結果の型が正しく設定されない問題を修正します。
     -   ダーティ ストアが存在する場合、緑色の GC が未解決のロックを残す可能性がある問題を修正します[#16949](https://github.com/pingcap/tidb/pull/16949)
     -   複数の異なるロックを持つ 1 つのキーに遭遇したときに、緑色の GC が未解決のロックを残す可能性があるという問題を修正します[#16948](https://github.com/pingcap/tidb/pull/16948)
     -   サブクエリが親クエリ列を参照するため、 `INSERT VALUE`ステートメントに間違った値を挿入する問題を修正します[#16952](https://github.com/pingcap/tidb/pull/16952)
@@ -152,7 +152,7 @@ TiDB バージョン: 4.0.0-rc.2
     -   復元後に空のリージョンが多数生成される問題を修正[#7632](https://github.com/tikv/tikv/pull/7632)
     -   順不同の読み取りインデックス応答を受信したときの Raftstore のpanic問題を修正します[#7370](https://github.com/tikv/tikv/pull/7370)
     -   統合スレッド プールが有効になっている場合に、無効なストレージまたはコプロセッサの読み取りプール構成が拒否されない可能性がある問題を修正します[#7513](https://github.com/tikv/tikv/pull/7513)
-    -   `join` TiKV サーバーがシャットダウンされたときの操作のpanicの問題を修正します[#7713](https://github.com/tikv/tikv/pull/7713)
+    -   `join` TiKVサーバーがシャットダウンされたときの操作のpanicの問題を修正します[#7713](https://github.com/tikv/tikv/pull/7713)
     -   診断 API [#7776](https://github.com/tikv/tikv/pull/7776)を介して TiKV スロー ログを検索すると、結果が返されない問題を修正します。
     -   TiKV ノードを長時間実行すると、顕著なメモリの断片化が発生する問題を修正します[#7556](https://github.com/tikv/tikv/pull/7556)
     -   無効な日付が格納されている場合に SQL ステートメントの実行に失敗する問題を修正します[#7268](https://github.com/tikv/tikv/pull/7268)

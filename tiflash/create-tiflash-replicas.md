@@ -9,7 +9,7 @@ summary: Learn how to create TiFlash replicas.
 
 ## テーブルの TiFlash レプリカを作成する {#create-tiflash-replicas-for-tables}
 
-TiFlash が TiKVクラスタに接続された後、デフォルトではデータ複製は開始されません。 MySQL クライアント経由で DDL ステートメントを TiDB に送信して、特定のテーブルの TiFlash レプリカを作成できます。
+TiFlash が TiKV クラスターに接続された後、デフォルトではデータ複製は開始されません。 MySQL クライアント経由で DDL ステートメントを TiDB に送信して、特定のテーブルの TiFlash レプリカを作成できます。
 
 {{< copyable "" >}}
 
@@ -55,7 +55,7 @@ ALTER TABLE `tpch50`.`lineitem` SET TIFLASH REPLICA 0;
 
 -   PD スケジューリングのパフォーマンスが低下するため、1,000 を超えるテーブルを複製しないことをお勧めします。この制限は、以降のバージョンで削除されます。
 
--   v5.1 以降のバージョンでは、システム テーブルのレプリカの設定はサポートされなくなりました。クラスタをアップグレードする前に、関連するシステム テーブルのレプリカをクリアする必要があります。そうしないと、クラスタを新しいバージョンにアップグレードした後で、システム テーブルのレプリカ設定を変更できません。
+-   v5.1 以降のバージョンでは、システム テーブルのレプリカの設定はサポートされなくなりました。クラスタをアップグレードする前に、関連するシステム テーブルのレプリカをクリアする必要があります。そうしないと、クラスターを新しいバージョンにアップグレードした後で、システム テーブルのレプリカ設定を変更できません。
 
 ### レプリケーションの進行状況を確認する {#check-replication-progress}
 
@@ -143,7 +143,7 @@ SELECT TABLE_NAME FROM information_schema.tables where TABLE_SCHEMA = "<db_name>
 
 レプリカを構成するときに、災害復旧のために TiFlash レプリカを複数のデータ センターに配布する必要がある場合は、次の手順に従って使用可能なゾーンを構成できます。
 
-1.  クラスタ構成ファイルで TiFlash ノードのラベルを指定します。
+1.  クラスター構成ファイルで TiFlash ノードのラベルを指定します。
 
     ```
     tiflash_servers:
@@ -158,7 +158,7 @@ SELECT TABLE_NAME FROM information_schema.tables where TABLE_SCHEMA = "<db_name>
           flash.proxy.labels: zone=z2
     ```
 
-2.  クラスタを開始した後、レプリカを作成するときにラベルを指定します。
+2.  クラスターを開始した後、レプリカを作成するときにラベルを指定します。
 
     {{< copyable "" >}}
 

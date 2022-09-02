@@ -35,7 +35,7 @@ TiDB Lightningは TiDB を介さずにデータをインポートするため、
 
 <!-- C -->
 
-## C {#c}
+## ハ {#c}
 
 ### チェックポイント {#checkpoint}
 

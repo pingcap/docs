@@ -62,4 +62,4 @@ title: TiDB 2.1 RC5 Release Notes
 
 ## ツール {#tools}
 
--   古いバージョンの binlog と互換性がない TiDB-Binlogクラスタをサポートします[#8093](https://github.com/pingcap/tidb/pull/8093) 、 [ドキュメンテーション](/tidb-binlog/tidb-binlog-overview.md)
+-   古いバージョンの binlog と互換性がない TiDB-Binlog クラスターをサポートします[#8093](https://github.com/pingcap/tidb/pull/8093) 、 [ドキュメンテーション](/tidb-binlog/tidb-binlog-overview.md)

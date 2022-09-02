@@ -13,7 +13,7 @@ TiDB バージョン: 5.2.2
 -   TiDB
 
     -   コプロセッサーがロックを検出したときに、影響を受ける SQL ステートメントをデバッグ・ログに表示します。これは、問題の診断に役立ちます[#27718](https://github.com/pingcap/tidb/issues/27718)
-    -   SQL 論理層[#27247](https://github.com/pingcap/tidb/issues/27247)でデータをバックアップおよび復元する場合のバックアップおよび復元データのサイズの表示のサポート
+    -   SQL 論理レイヤー[#27247](https://github.com/pingcap/tidb/issues/27247)でデータをバックアップおよび復元する場合のバックアップおよび復元データのサイズの表示のサポート
 
 -   TiKV
 
@@ -48,7 +48,7 @@ TiDB バージョン: 5.2.2
     -   Planner が`join`の無効なプランをキャッシュする場合がある問題を修正します[#28087](https://github.com/pingcap/tidb/issues/28087)
     -   ハッシュ列のタイプが列挙型[#27893](https://github.com/pingcap/tidb/issues/27893)の場合の間違ったインデックス ハッシュ結合を修正
     -   アイドル状態の接続をリサイクルすると、まれにリクエストの送信がブロックされる可能性があるというバッチ クライアントのバグを修正します[#27688](https://github.com/pingcap/tidb/pull/27688)
-    -   ターゲットクラスタでチェックサムの実行に失敗した場合のTiDB Lightningpanicの問題を修正します[#27686](https://github.com/pingcap/tidb/pull/27686)
+    -   ターゲット クラスタでチェックサムの実行に失敗した場合のTiDB Lightningpanicの問題を修正します[#27686](https://github.com/pingcap/tidb/pull/27686)
     -   場合によっては`date_add`と`date_sub`の関数の誤った結果を修正します[#27232](https://github.com/pingcap/tidb/issues/27232)
     -   ベクトル化された式[#28643](https://github.com/pingcap/tidb/issues/28643)の`hour`関数の間違った結果を修正
     -   MySQL 5.1 またはそれ以前のクライアント バージョン[#27855](https://github.com/pingcap/tidb/issues/27855)に接続する際の認証の問題を修正します。

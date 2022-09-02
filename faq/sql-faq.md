@@ -30,6 +30,30 @@ TiDB には、コストベースのオプティマイザが含まれています
 
 さらに、 [SQL バインディング](/sql-plan-management.md#sql-binding)を使用して、特定の SQL ステートメントのクエリ プランを修正することもできます。
 
+## 特定の SQL ステートメントの実行を防止する (または SQL ステートメントをブラックリストに登録する) 方法は? {#how-to-prevent-the-execution-of-a-particular-sql-statement-or-blacklist-a-sql-statement}
+
+[`MAX_EXECUTION_TIME`](/optimizer-hints.md#max_execution_timen)ヒントを使用して[SQL バインディング](/sql-plan-management.md#sql-binding)を作成し、特定のステートメントの実行時間を小さな値 (1 ミリ秒など) に制限できます。このように、ステートメントはしきい値によって自動的に終了します。
+
+たとえば、 `SELECT * FROM t1, t2 WHERE t1.id = t2.id`の実行を防ぐには、次の SQL バインディングを使用してステートメントの実行時間を 1 ミリ秒に制限します。
+
+```sql
+CREATE GLOBAL BINDING for
+    SELECT * FROM t1, t2 WHERE t1.id = t2.id
+USING
+    SELECT /*+ MAX_EXECUTION_TIME(1) */ * FROM t1, t2 WHERE t1.id = t2.id;
+```
+
+> **ノート：**
+>
+> `MAX_EXECUTION_TIME`の精度は約 100 ミリ秒です。 TiDB が SQL ステートメントを終了する前に、TiKV のタスクが開始される場合があります。このような場合に TiKV リソースの消費を抑えるには、 [`tidb_enable_paging`](/system-variables.md#tidb_enable_paging-new-in-v540) ～ `ON`を設定することをお勧めします。
+
+この SQL バインドを削除すると、制限が削除されます。
+
+```sql
+DROP GLOBAL BINDING for
+    SELECT * FROM t1, t2 WHERE t1.id = t2.id;
+```
+
 ## TiDB と互換性のある MySQL 変数は何ですか? {#what-are-the-mysql-variables-that-tidb-is-compatible-with}
 
 [システム変数](/system-variables.md)を参照してください。
@@ -114,7 +138,7 @@ TiDB の自動インクリメント ID 機能は、自動的にインクリメ�
 
 ## <code>sql_mode</code>で sql_mode を変更するにはどうすればよいですか? {#how-do-i-modify-the-code-sql-mode-code-in-tidb}
 
-TiDB は、SESSION または GLOBAL ベースでの[`sql_mode`](/system-variables.md#sql_mode)システム変数の変更をサポートしています。 [`GLOBAL`](/sql-statements/sql-statement-set-variable.md)のスコープ変数への変更は、クラスタの残りのサーバーに伝達され、再起動後も保持されます。これは、各 TiDB サーバーで`sql_mode`の値を変更する必要がないことを意味します。
+TiDB は、SESSION または GLOBAL ベースでの[`sql_mode`](/system-variables.md#sql_mode)システム変数の変更をサポートしています。 [`GLOBAL`](/sql-statements/sql-statement-set-variable.md)のスコープ変数への変更は、クラスターの残りのサーバーに伝達され、再起動後も保持されます。これは、各 TiDBサーバーで`sql_mode`の値を変更する必要がないことを意味します。
 
 ## エラー: <code>java.sql.BatchUpdateExecption:statement count 5001 exceeds the transaction limitation</code>ます {#error-code-java-sql-batchupdateexecption-statement-count-5001-exceeds-the-transaction-limitation-code-while-using-sqoop-to-write-data-into-tidb-in-batches}
 
@@ -159,7 +183,7 @@ TiDB はマルチバージョン同時実行制御 (MVCC) を使用するため�
 
 TiDB `SHOW PROCESSLIST`の表示内容は MySQL `SHOW PROCESSLIST`とほぼ同じです。 TiDB `show processlist`はシステム プロセス ID を表示しません。表示される ID は、現在のセッション ID です。 TiDB `show processlist`と MySQL `show processlist`の違いは次のとおりです。
 
--   TiDB は分散データベースであるため、 `tidb-server`つのインスタンスは SQL ステートメントを解析および実行するためのステートレス エンジンです (詳細については、 [TiDBアーキテクチャ](/tidb-architecture.md)を参照してください)。 `show processlist`は、クラスタで実行されているすべてのセッションのリストではなく、ユーザーが MySQL クライアントからログインした`tidb-server`インスタンスで実行されたセッションのリストを表示します。しかし、MySQL はスタンドアロン データベースであり、その`show processlist`には MySQL で実行されたすべての SQL ステートメントが表示されます。
+-   TiDB は分散データベースであるため、 `tidb-server`つのインスタンスは SQL ステートメントを解析および実行するためのステートレス エンジンです (詳細については、 [TiDBアーキテクチャ](/tidb-architecture.md)を参照してください)。 `show processlist`は、クラスターで実行されているすべてのセッションのリストではなく、ユーザーが MySQL クライアントからログインする`tidb-server`インスタンスで実行されたセッションのリストを表示します。しかし、MySQL はスタンドアロン データベースであり、その`show processlist`には MySQL で実行されたすべての SQL ステートメントが表示されます。
 -   TiDB の`State`列は、クエリの実行中に継続的に更新されるわけではありません。 TiDB は並列クエリをサポートしているため、各ステートメントは一度に複数の*状態*になる可能性があるため、単一の値に単純化することは困難です。
 
 ## SQLコミットの実行優先度を制御または変更する方法は? {#how-to-control-or-change-the-execution-priority-of-sql-commits}
@@ -212,8 +236,8 @@ TiDB は、時間の`schema`を使用して SQL ステートメントを処理�
 
 -   DML 操作に含まれる一部のテーブルは、進行中の DDL 操作に含まれるテーブルと同じです。
 -   DML 操作は長時間続きます。この期間中、多くの DDL ステートメントが実行され、1024 を超えるバージョン変更が発生し`schema`た。このデフォルト値は、変数`tidb_max_delta_schema_count`を変更することで変更できます。
--   DML 要求を受け入れる TiDB サーバーは、長時間`schema information`をロードできません (TiDB と PD または TiKV 間の接続障害が原因である可能性があります)。この期間中、多くの`schema`ステートメントが実行され、100 以上のバージョン変更が発生しました。
--   TiDB の再起動後、最初の DDL 操作が実行される前に、DML 操作が実行され、最初の DDL 操作に遭遇します (つまり、最初の DDL 操作が実行される前に、DML に対応するトランザクションが開始されます。そして、最初の`schema`バージョンの後にDDL の変更が行われた場合、DML に対応するトランザクションがコミットされた場合)、この DML 操作はこのエラーを報告します。
+-   DML 要求を受け入れる TiDBサーバーは、長時間`schema information`をロードできません (TiDB と PD または TiKV 間の接続障害が原因である可能性があります)。この期間中、多くの`schema`ステートメントが実行され、100 以上のバージョン変更が発生しました。
+-   TiDB の再起動後、最初の DDL 操作が実行される前に、DML 操作が実行され、最初の DDL 操作に遭遇します (つまり、最初の DDL 操作が実行される前に、DML に対応するトランザクションが開始されます。最初の`schema`バージョンの後にDDL の変更が行われた場合、DML に対応するトランザクションがコミットされた場合)、この DML 操作はこのエラーを報告します。
 
 > **ノート：**
 >

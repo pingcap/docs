@@ -11,14 +11,14 @@ TiDB SQLユーザーを制御および管理する方法の詳細については
 
 ## 必要な権限 {#required-privileges}
 
--   接続された TiDB サーバーで[セキュリティ拡張モード (SEM)](/system-variables.md#tidb_enable_enhanced_security)が有効になっていない場合に TiDB ダッシュボードにアクセスするには、SQL ユーザーに次の**すべて**の権限が必要です。
+-   接続された TiDBサーバーで[セキュリティ拡張モード (SEM)](/system-variables.md#tidb_enable_enhanced_security)が有効になっていない場合に TiDB ダッシュボードにアクセスするには、SQL ユーザーに次の**すべて**の権限が必要です。
 
     -   処理する
     -   データベースを表示
     -   設定
     -   DASHBOARD_CLIENT
 
--   接続された TiDB サーバーで[セキュリティ拡張モード (SEM)](/system-variables.md#tidb_enable_enhanced_security)が有効になっているときに TiDB ダッシュボードにアクセスするには、SQL ユーザーに次の**すべて**の権限が必要です。
+-   接続された TiDBサーバーで[セキュリティ拡張モード (SEM)](/system-variables.md#tidb_enable_enhanced_security)が有効になっている場合に TiDB ダッシュボードにアクセスするには、SQL ユーザーに次の**すべて**の権限が必要です。
 
     -   処理する
     -   データベースを表示
@@ -42,7 +42,7 @@ TiDB SQLユーザーを制御および管理する方法の詳細については
 
 ## 例: TiDB ダッシュボードにアクセスするための最小限の権限を持つ SQL ユーザーを作成する {#example-create-a-least-privileged-sql-user-to-access-tidb-dashboard}
 
--   接続された TiDB サーバーで[セキュリティ拡張モード (SEM)](/system-variables.md#tidb_enable_enhanced_security)が有効になっていない場合、TiDB ダッシュボードにサインインできる SQL ユーザー`dashboardAdmin`を作成するには、次の SQL ステートメントを実行します。
+-   接続された TiDBサーバーで[セキュリティ拡張モード (SEM)](/system-variables.md#tidb_enable_enhanced_security)が有効になっていない場合、TiDB ダッシュボードにサインインできる SQL ユーザー`dashboardAdmin`を作成するには、次の SQL ステートメントを実行します。
 
     ```sql
     CREATE USER 'dashboardAdmin'@'%' IDENTIFIED BY '<YOUR_PASSWORD>';
@@ -54,7 +54,7 @@ TiDB SQLユーザーを制御および管理する方法の詳細については
     GRANT SYSTEM_VARIABLES_ADMIN ON *.* TO 'dashboardAdmin'@'%';
     ```
 
--   接続された TiDB サーバーで[セキュリティ拡張モード (SEM)](/system-variables.md#tidb_enable_enhanced_security)が有効になっている場合は、最初に SEM を無効にしてから、次の SQL ステートメントを実行して、TiDB ダッシュボードにサインインできる SQL ユーザー`dashboardAdmin`を作成します。ユーザーを作成したら、SEM を再度有効にします。
+-   接続された TiDBサーバーで[セキュリティ拡張モード (SEM)](/system-variables.md#tidb_enable_enhanced_security)が有効になっている場合は、最初に SEM を無効にしてから、次の SQL ステートメントを実行して、TiDB ダッシュボードにサインインできる SQL ユーザー`dashboardAdmin`を作成します。ユーザーを作成したら、SEM を再度有効にします。
 
     ```sql
     CREATE USER 'dashboardAdmin'@'%' IDENTIFIED BY '<YOUR_PASSWORD>';

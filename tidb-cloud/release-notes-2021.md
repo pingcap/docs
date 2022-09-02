@@ -31,7 +31,7 @@ summary: Learn about the release notes of TiDB Cloud in 2021.
 改良点:
 
 -   開発者層の監視能力を向上させる
--   開発者層クラスタの作成時間と同じ自動バックアップ時間の設定をサポート
+-   開発者層クラスターの作成時間と同じ自動バックアップ時間の設定をサポート
 
 バグの修正：
 
@@ -42,7 +42,7 @@ summary: Learn about the release notes of TiDB Cloud in 2021.
 
 -   Launch [開発者層](/tidb-cloud/select-cluster-tier.md#developer-tier) TiDB Cloudの 1 年間の無料トライアルを提供します。
 
-    各 Developer Tierクラスタはフル機能の TiDBクラスタであり、以下が付属しています。
+    各 Developer Tier クラスターはフル機能の TiDB クラスターであり、以下が付属しています。
 
     -   1 つの TiDB 共有ノード
     -   1 つの TiKV 共有ノード (500 MiB の OLTP ストレージを使用)
@@ -96,7 +96,7 @@ summary: Learn about the release notes of TiDB Cloud in 2021.
 ## 2021 年 6 月 24 日 {#june-24-2021}
 
 -   Auroraスナップショットを TiDB インスタンスにインポートするときの寄木細工のファイルの解析エラーを修正します。
--   PoC ユーザーがクラスターを作成し、クラスタ構成を変更するときに、推定時間が更新されない問題を修正しクラスタ。
+-   PoC ユーザーがクラスターを作成し、クラスター構成を変更するときに、推定時間が更新されない問題を修正します。
 
 ## 2021 年 6 月 16 日 {#june-16-2021}
 
@@ -121,7 +121,7 @@ summary: Learn about the release notes of TiDB Cloud in 2021.
 -   メール認証とアンチロボット reCAPTCHA がサインアップ プロセスに追加されました
 -   [TiDB Cloudサービス契約](https://pingcap.com/legal/tidb-cloud-services-agreement)と[PingCAP プライバシー ポリシー](https://pingcap.com/legal/privacy-policy/)が更新されました
 -   コンソールで申請フォームに記入して[PoC](/tidb-cloud/tidb-cloud-poc.md)に申請できます
--   UI を介してサンプル データをTiDB Cloudクラスタにインポートできます
+-   UI を介してサンプル データをTiDB Cloudクラスターにインポートできます
 -   混乱を避けるため、同じ名前のクラスターは使用できません
 -   [**サポート**] メニューの [<strong>フィードバック</strong>を送信] をクリックすると、フィードバックを送信できます。
 -   データのバックアップと復元機能は、PoC とオンデマンドの試用オプションで利用できます

@@ -17,9 +17,9 @@ summary: Learn about the FAQs related to TiDB deployment.
 |         CentOS        | 7.3 以降の 7.x リリース |
 |  オラクル エンタープライズ Linux  | 7.3 以降の 7.x リリース |
 |       アマゾン Linux      |         2        |
-|       Ubuntu LTS      |     16.04 以降     |
+|       Ubuntu LTS      |      16.04以降     |
 
-### TiDBクラスタを CentOS 7 にデプロイすることが推奨されるのはなぜですか? {#why-it-is-recommended-to-deploy-the-tidb-cluster-on-centos-7}
+### TiDB クラスターを CentOS 7 にデプロイすることが推奨されるのはなぜですか? {#why-it-is-recommended-to-deploy-the-tidb-cluster-on-centos-7}
 
 高性能のオープン ソース分散型 NewSQL データベースとして、TiDB は Intelアーキテクチャサーバーおよび主要な仮想化環境に展開でき、適切に動作します。 TiDB は、主要なハードウェア ネットワークと Linux オペレーティング システムのほとんどをサポートしています。詳細については、TiDB のデプロイに関する[正式な導入要件](/hardware-and-software-requirements.md)を参照してください。
 
@@ -27,7 +27,7 @@ CentOS 7.3 では多くの TiDB テストが実行され、多くの展開のベ
 
 ## サーバー要件 {#server-requirements}
 
-Intel x86-64アーキテクチャの 64 ビット汎用ハードウェア サーバー プラットフォームに TiDB を展開して実行できます。開発、テスト、および本番環境のサーバー ハードウェア構成に関する要件と推奨事項は次のとおりです。
+Intel x86-64アーキテクチャの 64 ビット汎用ハードウェアサーバープラットフォームに TiDB を展開して実行できます。開発、テスト、および本番環境のサーバーハードウェア構成に関する要件と推奨事項は次のとおりです。
 
 ### 開発およびテスト環境 {#development-and-testing-environments}
 
@@ -54,7 +54,7 @@ Intel x86-64アーキテクチャの 64 ビット汎用ハードウェア サー
 
 ### 10 ギガビットの 2 枚のネットワーク カードの目的は何ですか? {#what-s-the-purposes-of-2-network-cards-of-10-gigabit}
 
-PD は一意のタイムスタンプを配布する必要があるため、分散クラスタとして、TiDB は特に PD の場合、時間の要求が高くなります。 PD サーバーの時刻が一致していないと、PD サーバーの切り替え時に待ち時間が長くなります。 2 枚のネットワーク カードを結合することでデータ転送の安定性が保証され、10 ギガビットが転送速度を保証します。ギガビット ネットワーク カードはボトルネックになりやすいため、10 ギガビット ネットワーク カードを使用することを強くお勧めします。
+PD は一意のタイムスタンプを配布する必要があるため、分散クラスターとして、特に PD の場合、TiDB は時間の要求が高くなります。 PD サーバーの時刻が一致していないと、PDサーバーの切り替え時に待ち時間が長くなります。 2 枚のネットワーク カードを結合することでデータ転送の安定性が保証され、10 ギガビットが転送速度を保証します。ギガビット ネットワーク カードはボトルネックになりやすいため、10 ギガビット ネットワーク カードを使用することを強くお勧めします。
 
 ### SSD に RAID を使用しなければ実現可能ですか? {#is-it-feasible-if-we-don-t-use-raid-for-ssd}
 
@@ -63,18 +63,18 @@ PD は一意のタイムスタンプを配布する必要があるため、分�
 ### TiDB コンポーネントの推奨構成は何ですか? {#what-s-the-recommended-configuration-of-tidb-components}
 
 -   TiDB には、CPU とメモリに関する高い要件があります。 TiDB Binlogを有効にする必要がある場合は、サービス ボリュームの見積もりと GC 操作の所要時間に基づいて、ローカル ディスク領域を増やす必要があります。ただし、SSD ディスクは必須ではありません。
--   PD はクラスタメタデータを格納し、頻繁な読み取りおよび書き込み要求を行います。高 I/O ディスクが必要です。パフォーマンスの低いディスクは、クラスタ全体のパフォーマンスに影響します。 SSD ディスクの使用をお勧めします。さらに、リージョンの数が多いほど、CPU とメモリの要件が高くなります。
+-   PD はクラスター メタデータを格納し、頻繁な読み取りおよび書き込み要求を行います。高 I/O ディスクが必要です。パフォーマンスの低いディスクは、クラスター全体のパフォーマンスに影響します。 SSD ディスクの使用をお勧めします。さらに、リージョンの数が多いほど、CPU とメモリの要件が高くなります。
 -   TiKV には、CPU、メモリ、およびディスクに対する高い要件があります。 SSDを使用するために必要です。
 
 詳細については、 [ソフトウェアおよびハードウェアの推奨事項](/hardware-and-software-requirements.md)を参照してください。
 
 ## インストールと展開 {#installation-and-deployment}
 
-本番環境では、 [TiUP](/tiup/tiup-overview.md)を使用して TiDBクラスタをデプロイすることをお勧めします。 [TiUP を使用して TiDB クラスターをデプロイする](/production-deployment-using-tiup.md)を参照してください。
+本番環境では、 [TiUP](/tiup/tiup-overview.md)を使用して TiDB クラスターをデプロイすることをお勧めします。 [TiUP を使用して TiDBクラスタをデプロイする](/production-deployment-using-tiup.md)を参照してください。
 
 ### TiKV/PD の変更された<code>toml</code>構成が有効にならないのはなぜですか? {#why-the-modified-code-toml-code-configuration-for-tikv-pd-does-not-take-effect}
 
-`toml`の設定を有効にするには、TiKV/PD で`--config`のパラメータを設定する必要があります。デフォルトでは、TiKV/PD は構成を読み取りません。現在、この問題は Binary を使用してデプロイする場合にのみ発生します。 TiKV の場合は、構成を編集してサービスを再起動します。 PD の場合、構成ファイルは PD が初めて開始されたときにのみ読み取られ、その後は pd-ctl を使用して構成を変更できます。詳細については、 [PD Controlユーザー ガイド](/pd-control.md)を参照してください。
+`toml`の設定を有効にするには、TiKV/PD で`--config`のパラメータを設定する必要があります。デフォルトでは、TiKV/PD は構成を読み取りません。現在、この問題は Binary を使用してデプロイする場合にのみ発生します。 TiKV の場合は、構成を編集してサービスを再起動します。 PD の場合、設定ファイルは PD が初めて起動されたときにのみ読み込まれます。その後、pd-ctl を使用して設定を変更できます。詳細については、 [PD Controlユーザー ガイド](/pd-control.md)を参照してください。
 
 ### TiDB 監視フレームワーク (Prometheus + Grafana) をスタンドアロン マシンまたは複数のマシンにデプロイする必要がありますか?推奨CPUとメモリは？ {#should-i-deploy-the-tidb-monitoring-framework-prometheus-grafana-on-a-standalone-machine-or-on-multiple-machines-what-is-the-recommended-cpu-and-memory}
 
@@ -82,7 +82,7 @@ PD は一意のタイムスタンプを配布する必要があるため、分�
 
 ### モニターがすべてのメトリックを表示できないのはなぜですか? {#why-the-monitor-cannot-display-all-metrics}
 
-モニターのマシン時間とクラスタ内の時間との時間差を確認します。サイズが大きい場合は、時間を修正すると、モニターにすべてのメトリックが表示されます。
+モニターのマシン時刻とクラスター内時刻の時差を確認します。サイズが大きい場合は、時間を修正すると、モニターにすべてのメトリックが表示されます。
 
 ### supervise/svc/svstat サービスの機能は何ですか? {#what-is-the-function-of-supervise-svc-svstat-service}
 
@@ -94,7 +94,7 @@ PD は一意のタイムスタンプを配布する必要があるため、分�
 
 | 変数                      | 説明                                                                                                                   |
 | ----------------------- | -------------------------------------------------------------------------------------------------------------------- |
-| `cluster_name`          | クラスタの名前、調整可能                                                                                                         |
+| `cluster_name`          | クラスターの名前、調整可能                                                                                                        |
 | `tidb_version`          | TiDB のバージョン                                                                                                          |
 | `deployment_method`     | デプロイの方法、デフォルトではバイナリ、オプションの Docker                                                                                    |
 | `process_supervision`   | プロセスの監視方法、デフォルトで systemd、supervise オプション                                                                             |
@@ -105,8 +105,8 @@ PD は一意のタイムスタンプを配布する必要があるため、分�
 | `enable_ntpd`           | 管理対象ノードの NTP サービスを監視するには、デフォルトで True。閉じないでください                                                                       |
 | `machine_benchmark`     | 管理対象ノードのディスク IOPS を監視するには、デフォルトで True。閉じないでください                                                                      |
 | `set_hostname`          | IP に基づいて管理対象ノードのホスト名を編集するには、デフォルトで False                                                                             |
-| `enable_binlog`         | Pumpをデプロイして binlog を有効にするかどうか。デフォルトでは False で、Kafkaクラスタに依存します。 `zookeeper_addrs`変数を参照してください                          |
-| `zookeeper_addrs`       | binlog Kafkaクラスタの ZooKeeper アドレス                                                                                     |
+| `enable_binlog`         | Pumpをデプロイして binlog を有効にするかどうか。デフォルトでは False で、Kafka クラスターに依存します。 `zookeeper_addrs`変数を参照してください                        |
+| `zookeeper_addrs`       | binlog Kafka クラスターの ZooKeeper アドレス                                                                                   |
 | `enable_slow_query_log` | TiDB のスロー クエリ ログを 1 つのファイル ({{ deploy_dir }}/log/tidb_slow_query.log) に記録します。デフォルトでは False で、TiDB ログに記録します           |
 | `deploy_without_tidb`   | Key-Value モードでは、PD、TiKV、および監視サービスのみを展開し、TiDB は展開しません。 `inventory.ini`のファイルで tidb_servers ホスト グループの IP を null に設定します。 |
 
@@ -118,9 +118,9 @@ PD は一意のタイムスタンプを配布する必要があるため、分�
 
 3.  ログに加えて、 `admin show slow`コマンドを使用してスロー クエリを表示することもできます。詳細については、 [`admin show slow`コマンド](/identify-slow-queries.md#admin-show-slow-command)を参照してください。
 
-### 初めて TiDBクラスタをデプロイしたときに TiKV の<code>label</code>が構成されていなかった場合、 <code>label</code>構成を追加する方法を教えてください。 {#how-to-add-the-code-label-code-configuration-if-code-label-code-of-tikv-was-not-configured-when-i-deployed-the-tidb-cluster-for-the-first-time}
+### 初めて TiDB クラスターをデプロイしたときに TiKV の<code>label</code>が構成されていなかった場合、 <code>label</code>構成を追加する方法を教えてください。 {#how-to-add-the-code-label-code-configuration-if-code-label-code-of-tikv-was-not-configured-when-i-deployed-the-tidb-cluster-for-the-first-time}
 
-TiDB `label`の構成は、クラスタ展開アーキテクチャに関連しています。これは、PD がグローバルな管理とスケジューリングを実行するための重要な基盤です。以前にクラスタを展開するときに`label`を構成しなかった場合は、PD 管理ツール`pd-ctl`を使用して手動で`location-labels`の情報を追加することにより、展開構造を調整する必要があります 7 、たとえば、 `config set location-labels "zone,rack,host"` (実用的な`label`レベル名に基づいて構成する必要があります)。
+TiDB `label`の構成は、クラスター展開アーキテクチャに関連しています。これは、PD がグローバルな管理とスケジューリングを実行するための重要な基盤です。以前にクラスターを展開するときに`label`を構成しなかった場合は、PD 管理ツール`pd-ctl`を使用して手動で`location-labels`の情報を追加することにより、展開構造を調整する必要があります 7 、たとえば、 `config set location-labels "zone,rack,host"` (実用的な`label`レベル名に基づいて構成する必要があります)。
 
 `pd-ctl`の使い方は[PD Controlユーザー ガイド](/pd-control.md)を参照。
 

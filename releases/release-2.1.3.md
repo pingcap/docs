@@ -14,7 +14,7 @@ title: TiDB 2.1.3 Release Notes
     -   `SQL_MODE`が厳密でない場合、文字列が不正な`TIME`形式の場合、 `CAST(str AS TIME(N))`が null を返すようにする[#8966](https://github.com/pingcap/tidb/pull/8966)
     -   場合によっては`UPDATE`の処理中に生成されたカラムがpanicになる問題を修正します[#8980](https://github.com/pingcap/tidb/pull/8980)
     -   場合によっては統計ヒストグラムの上限オーバーフローの問題を修正します[#8989](https://github.com/pingcap/tidb/pull/8989)
-    -   フル テーブル スキャンを回避し、クラスタストレスを軽減するための`_tidb_rowid`構築クエリのサポート範囲[#9059](https://github.com/pingcap/tidb/pull/9059)
+    -   フル テーブル スキャンを回避し、クラスタ ストレスを軽減するための`_tidb_rowid`構築クエリのサポート範囲[#9059](https://github.com/pingcap/tidb/pull/9059)
     -   `CAST(AS TIME)`精度が大きすぎる場合にエラーを返す[#9058](https://github.com/pingcap/tidb/pull/9058)
     -   デカルト積[#9037](https://github.com/pingcap/tidb/pull/9037)で`Sort Merge Join`の使用を許可する
     -   場合によっては、panic後に統計ワーカーが再開できない問題を修正します[#9085](https://github.com/pingcap/tidb/pull/9085)

@@ -7,13 +7,13 @@ summary: Learn how to build a simple Python application based on TiDB and SQLAlc
 
 > **ノート：**
 >
-> このドキュメントはアーカイブされました。これは、このドキュメントがその後更新されないことを示しています。詳細は[開発者ガイドの概要](/develop/dev-guide-overview.md)を参照してください。
+> このドキュメントはアーカイブされています。これは、このドキュメントがその後更新されないことを示しています。詳細は[開発者ガイドの概要](/develop/dev-guide-overview.md)を参照してください。
 
 このチュートリアルでは、TiDB と SQLAlchemy に基づいて単純な Python アプリケーションを構築する方法を示します。ここで構築するサンプル アプリケーションは、顧客情報と注文情報を追加、クエリ、および更新できるシンプルな CRM ツールです。
 
-## ステップ 1. TiDBクラスタを開始する {#step-1-start-a-tidb-cluster}
+## ステップ 1. TiDB クラスターを開始する {#step-1-start-a-tidb-cluster}
 
-ローカル ストレージで疑似 TiDBクラスタを開始します。
+ローカル ストレージで疑似 TiDB クラスターを開始します。
 
 {{< copyable "" >}}
 
@@ -21,11 +21,11 @@ summary: Learn how to build a simple Python application based on TiDB and SQLAlc
 docker run -p 127.0.0.1:$LOCAL_PORT:4000 pingcap/tidb:v5.1.0
 ```
 
-上記のコマンドは、モック TiKV を使用して一時的な単一ノードクラスタを開始します。クラスタはポート`$LOCAL_PORT`でリッスンします。クラスタが停止すると、データベースに対して既に行われた変更は保持されません。
+上記のコマンドは、モック TiKV を使用して一時的な単一ノード クラスターを開始します。クラスタはポート`$LOCAL_PORT`でリッスンします。クラスターが停止すると、データベースに対して既に行われた変更は保持されません。
 
 > **ノート：**
 >
-> 実稼働用に「実際の」TiDBクラスタをデプロイするには、次のガイドを参照してください。
+> 実稼働用に「実際の」TiDB クラスターをデプロイするには、次のガイドを参照してください。
 >
 > -   [TiUP for On-Premises を使用して TiDB をデプロイ](https://docs.pingcap.com/tidb/v5.1/production-deployment-using-tiup)
 > -   [TiDB を Kubernetes にデプロイ](https://docs.pingcap.com/tidb-in-kubernetes/stable)

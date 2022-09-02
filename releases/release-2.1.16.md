@@ -23,11 +23,11 @@ TiDB アンシブル バージョン: 2.1.16
     -   `DATE_ADD`関数が`FLOAT` 、 `DOUBLE` 、または`DECIMAL`型の引数を受け入れると型変換が正しく行われず、誤った結果が得られる可能性がある問題を修正します[#11628](https://github.com/pingcap/tidb/pull/11628)
     -   CAST(JSON AS SIGNED) オーバーフロー時のエラーメッセージが不正確になる問題を修正[#11562](https://github.com/pingcap/tidb/pull/11562)
     -   Executor [#11598](https://github.com/pingcap/tidb/pull/11598)を閉じる処理中に 1 つの子ノードの閉じに失敗し、エラーを返すと、他の子ノードが閉じられない問題を修正します。
-    -   タイムアウト前にリージョン分散のスケジューリングが完了していない場合に、エラーではなく正常に分割されたリージョンの数と完了したパーセンテージを返す`SPLIT TABLE`ステートメントをサポートし[#11487](https://github.com/pingcap/tidb/pull/11487) 。
+    -   タイムアウト前にリージョン分散のスケジューリングが完了していない場合に、エラーではなく、正常に分割されたリージョンの数と完了したパーセンテージを返す`SPLIT TABLE`ステートメントをサポートし[#11487](https://github.com/pingcap/tidb/pull/11487) 。
     -   MySQL [#11505](https://github.com/pingcap/tidb/pull/11505)と互換性があるように、 `REGEXP BINARY`の関数で大文字と小文字を区別する
     -   `DATE_ADD` / `DATE_SUB`の結果の`YEAR`の値が 0 より小さいか 65535 より大きいとオーバーフローするため、 `NULL`が正しく返されない問題を修正[#11477](https://github.com/pingcap/tidb/pull/11477)
     -   実行が成功したかどうかを示す`Succ`フィールドをスロー クエリ テーブルに追加します[#11412](https://github.com/pingcap/tidb/pull/11421)
-    -   SQL ステートメントに現在時刻の計算が含まれる場合 ( `CURRENT_TIMESTAMP`または`NOW`など)、現在のタイムスタンプを複数回フェッチすることによって発生する MySQL の非互換性の問題を修正し[#11392](https://github.com/pingcap/tidb/pull/11392) 。
+    -   SQL ステートメントに現在時刻の計算が含まれる場合 ( `CURRENT_TIMESTAMP`または`NOW`など)、現在のタイムスタンプを複数回取得することによって発生する MySQL の非互換性の問題を修正し[#11392](https://github.com/pingcap/tidb/pull/11392) 。
     -   AUTO_INCREMENT 列が FLOAT または DOUBLE 型を処理しない問題を修正します[#11389](https://github.com/pingcap/tidb/pull/11389)
     -   `CONVERT_TZ`関数が無効な引数[#11357](https://github.com/pingcap/tidb/pull/11357)を受け入れると`NULL`が正しく返されない問題を修正
     -   `PARTITION BY LIST`ステートメントでエラーが報告される問題を修正します。 (現在、構文のみがサポートされています。TiDB がステートメントを実行すると、通常のテーブルが作成され、プロンプト メッセージが表示されます) [#11236](https://github.com/pingcap/tidb/pull/11236)

@@ -3,13 +3,13 @@ title: Migrate from one TiDB cluster to another TiDB cluster
 summary: Learn how to migrate data from one TiDB cluster to another TiDB cluster.
 ---
 
-# ある TiDB クラスターから別の TiDB クラスターに移行する {#migrate-from-one-tidb-cluster-to-another-tidb-cluster}
+# ある TiDBクラスタから別の TiDBクラスタに移行する {#migrate-from-one-tidb-cluster-to-another-tidb-cluster}
 
-このドキュメントでは、ある TiDBクラスタから別の TiDBクラスタにデータを移行する方法について説明します。この機能は、次のシナリオに適用されます。
+このドキュメントでは、ある TiDB クラスターから別の TiDB クラスターにデータを移行する方法について説明します。この機能は、次のシナリオに適用されます。
 
--   データベースの分割: TiDBクラスタが大きすぎる場合、またはクラスタのサービス間の影響を避けたい場合は、データベースを分割できます。
+-   データベースの分割: TiDB クラスターが大きすぎる場合、またはクラスターのサービス間の影響を避けたい場合は、データベースを分割できます。
 -   データベースの再配置: データ センターの変更など、データベースを物理的に再配置します。
--   新しいバージョンの TiDBクラスタにデータを移行する: データのセキュリティと精度の要件を満たすために、新しいバージョンの TiDBクラスタにデータを移行します。
+-   新しいバージョンの TiDB クラスターにデータを移行する: データのセキュリティと精度の要件を満たすために、新しいバージョンの TiDB クラスターにデータを移行します。
 
 このドキュメントでは、移行プロセス全体を例示しており、次の手順が含まれています。
 
@@ -19,13 +19,13 @@ summary: Learn how to migrate data from one TiDB cluster to another TiDB cluster
 
 3.  増分データを移行します。
 
-4.  サービスを新しい TiDBクラスタに移行します。
+4.  サービスを新しい TiDB クラスターに移行します。
 
 ## ステップ 1. 環境をセットアップする {#step-1-set-up-the-environment}
 
 1.  TiDB クラスターをデプロイします。
 
-    デプロイ Playground を使用して、2 つの TiDB クラスター (1 つはアップストリーム、もう 1 つはダウンストリーム) をデプロイします。詳細については、 [TiUP を使用してオンライン TiDB クラスターをデプロイおよび管理する](/tiup/tiup-cluster.md)を参照してください。
+    デプロイ Playground を使用して、2 つの TiDB クラスター (1 つはアップストリーム、もう 1 つはダウンストリーム) をデプロイします。詳細については、 [TiUP を使用してオンライン TiDBクラスタをデプロイおよび管理する](/tiup/tiup-cluster.md)を参照してください。
 
     ```shell
     # Create an upstream cluster
@@ -61,7 +61,7 @@ summary: Learn how to migrate data from one TiDB cluster to another TiDB cluster
 
 3.  サービスのワークロードをシミュレートします。
 
-    実際のシナリオでは、サービス データは継続的にアップストリームクラスタに書き込まれます。このドキュメントでは、sysbench を使用してこのワークロードをシミュレートします。具体的には、次のコマンドを実行して、合計 TPS が 100 を超えないように、10 人のワーカーが sbtest1、sbtest2、および sbtest3 の 3 つのテーブルに連続してデータを書き込むことができるようにします。
+    実際のシナリオでは、サービス データはアップストリーム クラスターに継続的に書き込まれます。このドキュメントでは、sysbench を使用してこのワークロードをシミュレートします。具体的には、次のコマンドを実行して、合計 TPS が 100 を超えないように、10 人のワーカーが sbtest1、sbtest2、および sbtest3 の 3 つのテーブルに連続してデータを書き込むことができるようにします。
 
     ```shell
     sysbench oltp_write_only --config-file=./tidb-config --tables=3 run
@@ -84,7 +84,7 @@ summary: Learn how to migrate data from one TiDB cluster to another TiDB cluster
     ./minio server ./data --address :6060 &
     ```
 
-    上記のコマンドは、S3 サービスをシミュレートするために、1 つのノードで minio サーバーを開始します。コマンドのパラメーターは次のように構成されます。
+    上記のコマンドは、S3 サービスをシミュレートするために、1 つのノードで minioサーバーを開始します。コマンドのパラメーターは次のように構成されます。
 
     -   エンドポイント: `http://${HOST_IP}:6060/`
     -   アクセスキー: `minio`
@@ -103,13 +103,13 @@ summary: Learn how to migrate data from one TiDB cluster to another TiDB cluster
 
 > **ノート：**
 >
-> 実稼働クラスターでは、GC を無効にしてバックアップを実行すると、クラスタのパフォーマンスに影響を与える可能性があります。オフピーク時にデータをバックアップし、パフォーマンスの低下を避けるために`RATE_LIMIT`を適切な値に設定することをお勧めします。
+> 実稼働クラスターでは、GC を無効にしてバックアップを実行すると、クラスターのパフォーマンスに影響を与える可能性があります。オフピーク時にデータをバックアップし、パフォーマンスの低下を避けるために`RATE_LIMIT`を適切な値に設定することをお勧めします。
 >
 > 上流と下流のクラスターのバージョンが異なる場合は、 [BR互換性](/br/backup-and-restore-overview.md#before-you-use-br)を確認する必要があります。このドキュメントでは、アップストリーム クラスタとダウンストリーム クラスタは同じバージョンであると想定しています。
 
 1.  GC を無効にします。
 
-    増分移行中に新しく書き込まれたデータが削除されないようにするには、バックアップの前にアップストリームクラスタの GC を無効にする必要があります。このように、履歴データは削除されません。
+    増分移行中に新しく書き込まれたデータが削除されないようにするには、バックアップの前にアップストリーム クラスターの GC を無効にする必要があります。このように、履歴データは削除されません。
 
     次のコマンドを実行して、GC を無効にします。
 
@@ -138,7 +138,7 @@ summary: Learn how to migrate data from one TiDB cluster to another TiDB cluster
 
 2.  バックアップデータ。
 
-    アップストリームクラスタで`BACKUP`ステートメントを実行して、データをバックアップします。
+    アップストリーム クラスターで`BACKUP`ステートメントを実行して、データをバックアップします。
 
     ```sql
     MySQL [(none)]> BACKUP DATABASE * TO 's3://backup?access-key=minio&secret-access-key=miniostorage&endpoint=http://${HOST_IP}:6060&force-path-style=true' RATE_LIMIT = 120 MB/SECOND;
@@ -157,7 +157,7 @@ summary: Learn how to migrate data from one TiDB cluster to another TiDB cluster
 
 3.  データを復元します。
 
-    ダウンストリームクラスタで`RESTORE`コマンドを実行して、データを復元します。
+    ダウンストリーム クラスターで`RESTORE`コマンドを実行して、データを復元します。
 
     ```sql
     mysql> RESTORE DATABASE * FROM 's3://backup?access-key=minio&secret-access-key=miniostorage&endpoint=http://${HOST_IP}:6060&force-path-style=true';
@@ -174,7 +174,7 @@ summary: Learn how to migrate data from one TiDB cluster to another TiDB cluster
 
 4.  (オプション) データを検証します。
 
-    [同期差分インスペクター](/sync-diff-inspector/sync-diff-inspector-overview.md)を使用して、特定の時点で上流と下流の間のデータの整合性を確認できます。前の`BACKUP`の出力は、上流のクラスタが`RESTORE`でバックアップを終了したことを示しています。
+    [同期差分インスペクター](/sync-diff-inspector/sync-diff-inspector-overview.md)を使用して、特定の時点で上流と下流の間のデータの整合性を確認できます。前の`BACKUP`の出力は、上流のクラスターが`RESTORE`でバックアップを終了したことを示しています。
 
     ```shell
     sync_diff_inspector -C ./config.yaml
@@ -214,7 +214,7 @@ summary: Learn how to migrate data from one TiDB cluster to another TiDB cluster
 
 2.  チェンジフィードを作成します。
 
-    アップストリームクラスタで、次のコマンドを実行して、アップストリーム クラスターからダウンストリーム クラスターへの変更フィードを作成します。
+    アップストリーム クラスターで、次のコマンドを実行して、アップストリーム クラスターからダウンストリーム クラスターへの変更フィードを作成します。
 
     {{< copyable "" >}}
 
@@ -224,8 +224,8 @@ summary: Learn how to migrate data from one TiDB cluster to another TiDB cluster
 
     このコマンドでは、パラメーターは次のとおりです。
 
-    -   `--pd` : アップストリームクラスタの PD アドレス
-    -   `--sink-uri` : ダウンストリームクラスタの URI
+    -   `--pd` : アップストリーム クラスタの PD アドレス
+    -   `--sink-uri` : ダウンストリーム クラスターの URI
     -   `--changefeed-id` : 変更フィード ID。正規表現 ^[a-zA-Z0-9]+(-[a-zA-Z0-9]+)*$ の形式にする必要があります。
     -   `--start-ts` : 変更フィードの開始タイムスタンプ。バックアップ時間 (または[ステップ 2. 完全なデータを移行する](#step-2-migrate-full-data)の「データのバックアップ」セクションの BackupTS) である必要があります。
 
@@ -260,11 +260,11 @@ summary: Learn how to migrate data from one TiDB cluster to another TiDB cluster
     1 row in set (0.00 sec)
     ```
 
-## ステップ 4. サービスを新しい TiDBクラスタに移行する {#step-4-migrate-services-to-the-new-tidb-cluster}
+## ステップ 4. サービスを新しい TiDB クラスターに移行する {#step-4-migrate-services-to-the-new-tidb-cluster}
 
-変更フィードの作成後、アップストリーム クラスターに書き込まれたデータは、低レイテンシーでダウンストリームクラスタにレプリケートされクラスタ。読み取りトラフィックをダウンストリームクラスタに段階的に移行できます。一定期間観察します。ダウンストリームクラスタが安定している場合は、次の手順を実行して書き込みトラフィックをダウンストリームクラスタに移行できます。
+変更フィードの作成後、アップストリーム クラスターに書き込まれたデータは、低レイテンシーでダウンストリーム クラスターにレプリケートされます。読み取りトラフィックをダウンストリーム クラスターに段階的に移行できます。一定期間観察します。ダウンストリーム クラスターが安定している場合は、次の手順を実行して書き込みトラフィックをダウンストリーム クラスターに移行できます。
 
-1.  アップストリームクラスタの書き込みサービスを停止します。変更フィードを停止する前に、すべてのアップストリーム データがダウンストリームに複製されていることを確認してください。
+1.  アップストリーム クラスタの書き込みサービスを停止します。変更フィードを停止する前に、すべてのアップストリーム データがダウンストリームに複製されていることを確認してください。
 
     ```shell
     # Stop the changefeed from the upstream cluster to the downstream cluster
@@ -288,10 +288,10 @@ summary: Learn how to migrate data from one TiDB cluster to another TiDB cluster
     ]
     ```
 
-2.  下流から上流への変更フィードを作成します。 `start-ts`を指定せずにデフォルト設定を使用できます。これは、アップストリーム データとダウンストリーム データに一貫性があり、クラスタに書き込まれる新しいデータがないためです。
+2.  下流から上流への変更フィードを作成します。 `start-ts`を指定せずにデフォルト設定を使用できます。これは、アップストリーム データとダウンストリーム データに一貫性があり、クラスターに書き込まれる新しいデータがないためです。
 
     ```shell
     tiup cdc cli changefeed create --pd=http://172.16.6.125:2379 --sink-uri="mysql://root:@172.16.6.122:4000" --changefeed-id="downstream -to-upstream"
     ```
 
-3.  書き込みサービスをダウンストリームクラスタに移行した後、しばらく観察します。下流のクラスタが安定している場合は、上流のクラスタを破棄できます。
+3.  書き込みサービスをダウンストリーム クラスターに移行した後、しばらく観察します。ダウンストリーム クラスターが安定している場合は、アップストリーム クラスターを破棄できます。

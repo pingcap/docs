@@ -3,9 +3,9 @@ title: Deploy a DM Cluster Using TiUP
 summary: Learn how to deploy TiDB Data Migration using TiUP DM.
 ---
 
-# TiUP を使用して DM クラスターをデプロイする {#deploy-a-dm-cluster-using-tiup}
+# TiUP を使用して DMクラスタをデプロイする {#deploy-a-dm-cluster-using-tiup}
 
-[TiUP](https://github.com/pingcap/tiup)は、TiDB 4.0 で導入されたクラスタ運用保守ツールです。 TiUP は、Golang で記述されたクラスタ管理コンポーネントである[TiUP DM](/dm/maintain-dm-using-tiup.md)を提供します。 TiUP DMを使用することで、DM クラスターのデプロイ、開始、停止、破棄、スケーリング、アップグレードなど、毎日の TiDB データ移行 (DM) 操作を簡単に実行し、DMクラスタパラメーターを管理できクラスタ。
+[TiUP](https://github.com/pingcap/tiup)は、TiDB 4.0 で導入されたクラスター運用保守ツールです。 TiUP は、Golang で記述されたクラスター管理コンポーネントである[TiUP DM](/dm/maintain-dm-using-tiup.md)を提供します。 TiUP DMを使用すると、DM クラスターのデプロイ、開始、停止、破棄、スケーリング、およびアップグレードを含む、毎日の TiDB データ マイグレーション (DM) 操作を簡単に実行し、DM クラスター パラメーターを管理できます。
 
 TiUP は、DM v2.0 以降の DM バージョンの展開をサポートしています。このドキュメントでは、さまざまなトポロジの DM クラスターをデプロイする方法を紹介します。
 
@@ -17,11 +17,11 @@ TiUP は、DM v2.0 以降の DM バージョンの展開をサポートしてい
 
 DM が完全なデータ レプリケーション タスクを実行する場合、DM-worker は 1 つのアップストリーム データベースのみにバインドされます。 DM-worker は、最初に全量のデータをローカルにエクスポートし、次にそのデータをダウンストリーム データベースにインポートします。したがって、ワーカーのホスト スペースは、エクスポートするすべてのアップストリーム テーブルを格納するのに十分な大きさである必要があります。ストレージ パスは、後でタスクを作成するときに指定します。
 
-また、DMクラスタを展開する場合は、 [ハードウェアとソフトウェアの要件](/dm/dm-hardware-and-software-requirements.md)を満たす必要があります。
+また、DM クラスターをデプロイする場合は、 [ハードウェアとソフトウェアの要件](/dm/dm-hardware-and-software-requirements.md)を満たす必要があります。
 
 ## ステップ 1: 制御マシンに TiUP をインストールする {#step-1-install-tiup-on-the-control-machine}
 
-通常のユーザー アカウントを使用して制御マシンにログインします (例として`tidb`ユーザーを取り上げます)。以下のすべての TiUP インストールおよびクラスタ管理操作は、 `tidb`ユーザーが実行できます。
+通常のユーザー アカウントを使用して制御マシンにログインします (例として`tidb`ユーザーを取り上げます)。以下のすべての TiUP インストールおよびクラスター管理操作は、 `tidb`ユーザーが実行できます。
 
 1.  次のコマンドを実行して TiUP をインストールします。
 
@@ -43,7 +43,7 @@ DM が完全なデータ レプリケーション タスクを実行する場合
 
 ## ステップ 2: 初期化構成ファイルを編集する {#step-2-edit-the-initialization-configuration-file}
 
-意図したクラスタトポロジに従って、クラスタ初期化構成ファイルを手動で作成および編集する必要があります。
+意図したクラスタ トポロジに従って、クラスタ初期化構成ファイルを手動で作成および編集する必要があります。
 
 [構成ファイル テンプレート](https://github.com/pingcap/tiup/blob/master/embed/examples/dm/topology.example.yaml)に従って、YAML 構成ファイル (たとえば`topology.yaml`という名前) を作成する必要があります。他のシナリオでは、それに応じて構成を編集します。
 
@@ -165,10 +165,10 @@ tiup dm deploy ${name} ${version} ./topology.yaml -u ${ssh_user} [-p] [-i /home/
 
 | パラメータ                    | 説明                                                                             |
 | ------------------------ | ------------------------------------------------------------------------------ |
-| `${name}`                | DMクラスタの名前。例: dm-test                                                           |
-| `${version}`             | DMクラスタのバージョン。 `tiup list dm-master`を実行すると、サポートされている他のバージョンを確認できます。             |
+| `${name}`                | DM クラスターの名前。例: dm-test                                                         |
+| `${version}`             | DM クラスターのバージョン。 `tiup list dm-master`を実行すると、サポートされている他のバージョンを確認できます。           |
 | `./topology.yaml`        | トポロジ構成ファイルのパス。                                                                 |
-| `-u`または`--user`          | root ユーザーまたは ssh および sudo 権限を持つ他のユーザー アカウントとしてターゲット マシンにログインし、クラスタのデプロイを完了します。 |
+| `-u`または`--user`          | root ユーザーまたは ssh および sudo権限を持つ他のユーザー アカウントとしてターゲット マシンにログインし、クラスターのデプロイを完了します。 |
 | `-p`または`--password`      | ターゲット ホストのパスワード。指定すると、パスワード認証が使用されます。                                          |
 | `-i`または`--identity_file` | SSH ID ファイルのパス。指定すると、公開鍵認証が使用されます (デフォルトは「/root/.ssh/id_rsa」)。                 |
 
@@ -190,7 +190,7 @@ Name  User  Version  Path                                  PrivateKey
 dm-test  tidb  ${version}  /root/.tiup/storage/dm/clusters/dm-test  /root/.tiup/storage/dm/clusters/dm-test/ssh/id_rsa
 ```
 
-## ステップ 5: デプロイされた DMクラスタのステータスを確認する {#step-5-check-the-status-of-the-deployed-dm-cluster}
+## ステップ 5: デプロイされた DM クラスターのステータスを確認する {#step-5-check-the-status-of-the-deployed-dm-cluster}
 
 `dm-test`クラスタのステータスを確認するには、次のコマンドを実行します。
 
@@ -200,9 +200,9 @@ dm-test  tidb  ${version}  /root/.tiup/storage/dm/clusters/dm-test  /root/.tiup/
 tiup dm display dm-test
 ```
 
-予想される出力には、インスタンス ID、ロール、ホスト、リスニング ポート、ステータス (クラスタがまだ開始されていないため、ステータスは`Down` / `inactive`です)、およびディレクトリ情報が含まれます。
+予想される出力には、インスタンス ID、ロール、ホスト、リスニング ポート、ステータス (クラスターがまだ開始されていないため、ステータスは`Down` / `inactive`です)、およびディレクトリ情報が含まれます。
 
-## ステップ 6: TiDBクラスタを開始する {#step-6-start-the-tidb-cluster}
+## ステップ 6: TiDB クラスターを開始する {#step-6-start-the-tidb-cluster}
 
 {{< copyable "" >}}
 
@@ -212,9 +212,9 @@ tiup dm start dm-test
 
 出力ログに``Started cluster `dm-test` successfully``が含まれていれば、開始は成功しています。
 
-## ステップ 7: TiDBクラスタの実行ステータスを確認する {#step-7-verify-the-running-status-of-the-tidb-cluster}
+## ステップ 7: TiDB クラスターの実行ステータスを確認する {#step-7-verify-the-running-status-of-the-tidb-cluster}
 
-TiUP を使用して DMクラスタのステータスを確認します。
+TiUP を使用して DM クラスタのステータスを確認します。
 
 {{< copyable "" >}}
 
@@ -222,7 +222,7 @@ TiUP を使用して DMクラスタのステータスを確認します。
 tiup dm display dm-test
 ```
 
-出力の`Status`が`Up`の場合、クラスタのステータスは正常です。
+出力の`Status`が`Up`の場合、クラスターのステータスは正常です。
 
 ## ステップ 8: dmctl を使用した移行タスクの管理 {#step-8-managing-migration-tasks-using-dmctl}
 

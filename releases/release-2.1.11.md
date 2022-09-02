@@ -33,7 +33,7 @@ TiDB アンシブル バージョン: 2.1.11
 ## TiKV {#tikv}
 
 -   リーダーが 1 人、学習者が 1 人しかいない場合、学習者が空のインデックスを読み取る問題を修正します[#4751](https://github.com/tikv/tikv/pull/4751)
--   通常の優先度[#4791](https://github.com/tikv/tikv/pull/4791)のコマンドへの影響を減らすために、優先度の高いスレッド プール内のプロセス`ScanLock`と`ResolveLock`
+-   通常の優先度[#4791](https://github.com/tikv/tikv/pull/4791)のコマンドへの影響を軽減するために、優先度の高いスレッド プール内のプロセス`ScanLock`と`ResolveLock`
 -   受信したスナップショットのすべてのファイルを同期する[#4811](https://github.com/tikv/tikv/pull/4811)
 
 ## ツール {#tools}

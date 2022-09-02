@@ -31,4 +31,4 @@ tiup cluster audit [audit-id] [flags]
     -   時間: レコードに対応するコマンドの実行時間
     -   コマンド: レコードに対応するコマンド
 
-[&lt;&lt; 前のページに戻る - TiUP Clusterコマンド一覧](/tiup/tiup-component-cluster.md#command-list)
+[&lt;&lt; 前のページに戻る - TiUP クラスタコマンド一覧](/tiup/tiup-component-cluster.md#command-list)

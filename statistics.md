@@ -9,7 +9,7 @@ TiDB は統計を使用して決定します[どのインデックスを選択�
 
 <CustomContent platform="tidb">
 
-v5.1.0 より前のバージョンでは、この変数のデフォルト値は`1`です。 v5.3.0 以降のバージョンでは、この変数のデフォルト値は`2`です。クラスタが v5.3.0 より前のバージョンから v5.3.0 以降にアップグレードされた場合、デフォルト値の`tidb_analyze_version`は変更されません。
+v5.1.0 より前のバージョンでは、この変数のデフォルト値は`1`です。 v5.3.0 以降のバージョンでは、この変数のデフォルト値は`2`です。クラスターが v5.3.0 より前のバージョンから v5.3.0 以降にアップグレードされた場合、デフォルト値の`tidb_analyze_version`は変更されません。
 
 </CustomContent>
 
@@ -343,7 +343,7 @@ ANALYZE TABLE TableName INDEX [IndexNameList] [WITH NUM BUCKETS|TOPN|CMSKETCH DE
 > **ノート：**
 >
 > -   現在、増分コレクションはインデックスに対してのみ提供されています。
-> -   増分コレクションを使用する場合は、テーブルに`INSERT`の操作のみが存在すること、およびインデックス列に新しく挿入された値が単調に非減少であることを確認する必要があります。そうしないと、統計情報が不正確になり、適切な実行計画を選択する TiDB オプティマイザに影響を与える可能性があります。
+> -   増分コレクションを使用する場合、テーブルに存在する操作が`INSERT`だけであること、およびインデックス列に新しく挿入された値が単調に減少しないことを確認する必要があります。そうしないと、統計情報が不正確になり、適切な実行計画を選択する TiDB オプティマイザに影響を与える可能性があります。
 
 次の構文を使用して増分コレクションを実行できます。
 
@@ -375,7 +375,7 @@ ANALYZE TABLE TableName INDEX [IndexNameList] [WITH NUM BUCKETS|TOPN|CMSKETCH DE
 | `tidb_auto_analyze_start_time` | `00:00 +0000` | TiDBが自動更新できる1日の開始時刻 |
 | `tidb_auto_analyze_end_time`   | `23:59 +0000` | TiDBが自動更新できる1日の終了時刻 |
 
-テーブル内の`tbl`の行の総数に対する変更された行の数の比率が`tidb_auto_analyze_ratio`よりも大きく、現在の時刻が`tidb_auto_analyze_start_time`から`tidb_auto_analyze_end_time`の間である場合、TiDB はバックグラウンドで`ANALYZE TABLE tbl`ステートメントを実行して、この統計を自動的に更新します。テーブル。
+テーブル内の`tbl`の行の総数に対する変更された行の数の比率が`tidb_auto_analyze_ratio`よりも大きく、現在の時刻が`tidb_auto_analyze_start_time`から`tidb_auto_analyze_end_time`の間にある場合、TiDB はバックグラウンドで`ANALYZE TABLE tbl`ステートメントを実行して、この統計を自動的に更新します。テーブル。
 
 > **ノート：**
 >
@@ -400,7 +400,7 @@ TiDB v6.0 以降、TiDB は`KILL`ステートメントを使用して、バッ�
     <CustomContent platform="tidb">
 
     -   [`enable-global-kill`](/tidb-configuration-file.md#enable-global-kill-new-in-v610)が`true` (デフォルトでは`true` ) の場合、 `KILL TIDB ${id};`ステートメントを直接実行できます。ここで、 `${id}`は、前の手順で取得したバックグラウンド`ANALYZE`タスクの`ID`です。
-    -   `enable-global-kill`が`false`の場合、クライアントを使用して、バックエンド`ANALYZE`タスクを実行している TiDB インスタンスに接続し、 `KILL TIDB ${id};`ステートメントを実行する必要があります。クライアントを使用して別の TiDB インスタンスに接続する場合、またはクライアントと TiDBクラスタの間にプロキシがある場合、 `KILL`ステートメントはバックグラウンドの`ANALYZE`タスクを終了できません。
+    -   `enable-global-kill`が`false`の場合、クライアントを使用して、バックエンド`ANALYZE`タスクを実行している TiDB インスタンスに接続し、 `KILL TIDB ${id};`ステートメントを実行する必要があります。クライアントを使用して別の TiDB インスタンスに接続する場合、またはクライアントと TiDB クラスターの間にプロキシがある場合、 `KILL`ステートメントはバックグラウンドの`ANALYZE`タスクを終了できません。
 
     </CustomContent>
 
@@ -479,7 +479,7 @@ v5.4.0 以降、 `ANALYZE`は一部の構成の永続化をサポートしてい
 
 TiDB v6.1.0 以降、システム変数[`tidb_mem_quota_analyze`](/system-variables.md#tidb_mem_quota_analyze-new-in-v610)を使用して、TiDB で統計を収集するためのメモリ クォータを制御できます。
 
-適切な値`tidb_mem_quota_analyze`を設定するには、クラスタのデータ サイズを考慮してください。デフォルトのサンプリング レートを使用する場合、主な考慮事項は、列の数、列の値のサイズ、および TiDB のメモリ構成です。最大値と最小値を構成するときは、次の提案を考慮してください。
+適切な値`tidb_mem_quota_analyze`を設定するには、クラスターのデータ サイズを考慮してください。デフォルトのサンプリング レートを使用する場合、主な考慮事項は、列の数、列の値のサイズ、および TiDB のメモリ構成です。最大値と最小値を構成するときは、次の提案を考慮してください。
 
 > **ノート：**
 >

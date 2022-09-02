@@ -13,7 +13,7 @@ PPD は、データ フィルタリングをできるだけ早く完了するた
 
 次のケースでは、PPD の最適化について説明します。ケース 1、2、および 3 は PPD が適用されるシナリオであり、ケース 4、5、および 6 は PPD が適用されないシナリオです。
 
-### ケース 1: 述語をストレージ層にプッシュする {#case-1-push-predicates-to-storage-layer}
+### ケース 1: 述語をストレージレイヤーにプッシュする {#case-1-push-predicates-to-storage-layer}
 
 ```sql
 create table t(id int primary key, a int);
@@ -28,9 +28,9 @@ explain select * from t where a < 1;
 3 rows in set (0.00 sec)
 ```
 
-このクエリでは、述語`a < 1`を TiKV レイヤーにプッシュ ダウンしてデータをフィルター処理することで、ネットワーク送信のオーバーヘッドを削減できます。
+このクエリでは、述語`a < 1`を TiKVレイヤーにプッシュ ダウンしてデータをフィルター処理することで、ネットワーク送信のオーバーヘッドを削減できます。
 
-### ケース 2: 述語をストレージ層にプッシュする {#case-2-push-predicates-to-storage-layer}
+### ケース 2: 述語をストレージレイヤーにプッシュする {#case-2-push-predicates-to-storage-layer}
 
 ```sql
 create table t(id int primary key, a int not null);

@@ -4,11 +4,11 @@ title: tiup cluster clean
 
 # tiup cluster clean {#tiup-cluster-clean}
 
-テスト環境では、クラスタをデプロイ直後の状態にリセットする必要がある場合があります。これは、すべてのデータを削除することを意味します。 `tiup cluster clean`コマンドで簡単にできます。実行後、クラスタを停止し、クラスタデータを削除します。クラスタを手動で再起動すると、クリーンなクラスタが得られます。
+テスト環境では、クラスターをデプロイ直後の状態にリセットする必要がある場合があります。これは、すべてのデータを削除することを意味します。 `tiup cluster clean`コマンドで簡単にできます。実行後、クラスタを停止し、クラスタ データを削除します。クラスターを手動で再起動すると、クリーンなクラスターが得られます。
 
 > **警告：**
 >
-> ログのクリーンアップのみを選択した場合でも、このコマンドは最初にクラスタを停止します。したがって、本番環境では使用しないでください。
+> ログのクリーンアップのみを選択した場合でも、このコマンドは最初にクラスターを停止します。したがって、本番環境では使用しないでください。
 
 ## 構文 {#syntax}
 
@@ -16,7 +16,7 @@ title: tiup cluster clean
 tiup cluster clean <cluster-name> [flags]
 ```
 
-`<cluster-name>`は、クリーニングするクラスタです。
+`<cluster-name>`は、クリーニングするクラスターです。
 
 ## オプション {#options}
 
@@ -61,6 +61,6 @@ tiup cluster clean <cluster-name> [flags]
 
 ## 出力 {#output}
 
-tiup-cluster の実行ログです。
+tiup-clusterの実行ログ。
 
-[&lt;&lt; 前のページに戻る - TiUP Clusterコマンド一覧](/tiup/tiup-component-cluster.md#command-list)
+[&lt;&lt; 前のページに戻る - TiUP クラスタコマンド一覧](/tiup/tiup-component-cluster.md#command-list)

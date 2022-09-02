@@ -25,7 +25,7 @@ TiDB Binlogは、増分データを複製するために広く使用されてい
 -   [TiDB Binlogトポロジの単純なテンプレート (ダウンストリーム タイプとして`file`を使用)](https://github.com/pingcap/docs/blob/master/config-templates/simple-file-binlog.yaml)
 -   [TiDB Binlogトポロジの複雑なテンプレート](https://github.com/pingcap/docs/blob/master/config-templates/complex-tidb-binlog.yaml)
 
-上記の TiDBクラスタトポロジ ファイルの構成項目の詳細な説明については、 [TiUP を使用して TiDB をデプロイするためのトポロジConfiguration / コンフィグレーションファイル](/tiup/tiup-cluster-topology-reference.md)を参照してください。
+上記の TiDB クラスター トポロジ ファイルの構成項目の詳細な説明については、 [TiUP を使用して TiDB をデプロイするためのトポロジConfiguration / コンフィグレーションファイル](/tiup/tiup-cluster-topology-reference.md)を参照してください。
 
 ### 主なパラメータ {#key-parameters}
 
@@ -53,5 +53,5 @@ TiDB Binlogは、増分データを複製するために広く使用されてい
 > **ノート：**
 >
 > -   構成ファイル テンプレートを編集するときに、カスタム ポートまたはディレクトリが必要ない場合は、IP のみを変更します。
-> -   構成ファイルで`tidb`ユーザーを手動で作成する必要はありません。 TiUPクラスタコンポーネントは、ターゲット マシンに`tidb`ユーザーを自動的に作成します。ユーザーをカスタマイズしたり、ユーザーと制御マシンとの一貫性を保つことができます。
-> -   展開ディレクトリを相対パスとして構成すると、クラスタはユーザーのホーム ディレクトリに展開されます。
+> -   構成ファイルで`tidb`ユーザーを手動で作成する必要はありません。 TiUP クラスター コンポーネントは、ターゲット マシンに`tidb`ユーザーを自動的に作成します。ユーザーをカスタマイズしたり、ユーザーと制御マシンとの一貫性を保つことができます。
+> -   展開ディレクトリを相対パスとして構成すると、クラスターはユーザーのホーム ディレクトリに展開されます。

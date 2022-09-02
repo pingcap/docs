@@ -40,7 +40,7 @@ TiDB バージョン: 4.0.5
 
     -   大きなユニオン クエリに対して`DecodePlan`のパフォーマンスを最適化する[#18941](https://github.com/pingcap/tidb/pull/18941)
     -   `Region cache miss`エラー発生時の GC ロックスキャン回数を減らす[#18876](https://github.com/pingcap/tidb/pull/18876)
-    -   クラスタのパフォーマンスに対する統計的フィードバックの影響を緩和する[#18772](https://github.com/pingcap/tidb/pull/18772)
+    -   クラスターのパフォーマンスに対する統計的フィードバックの影響を緩和する[#18772](https://github.com/pingcap/tidb/pull/18772)
     -   RPC 応答が返される前の操作のキャンセルをサポート[#18580](https://github.com/pingcap/tidb/pull/18580)
     -   HTTP API を追加して TiDB メトリクス プロファイルを生成する[#18531](https://github.com/pingcap/tidb/pull/18531)
     -   分散分割テーブルのサポート[#17863](https://github.com/pingcap/tidb/pull/17863)
@@ -51,7 +51,7 @@ TiDB バージョン: 4.0.5
     -   `StrToInt`と`StrToFloat`の動作を改良し、JSON を`date` 、 `time` 、および`timestamp`型に変換することをサポートします[#18159](https://github.com/pingcap/tidb/pull/18159)
     -   `TableReader`オペレーター[#18392](https://github.com/pingcap/tidb/pull/18392)のメモリー使用量の制限をサポート
     -   `batch cop`リクエスト[#18999](https://github.com/pingcap/tidb/pull/18999)を再試行するときにバックオフが何度も発生しないようにする
-    -   `ALTER TABLE`アルゴリズムの互換性を向上[#19270](https://github.com/pingcap/tidb/pull/19270)
+    -   `ALTER TABLE`アルゴリズムの互換性を改善[#19270](https://github.com/pingcap/tidb/pull/19270)
     -   内側にシングルパーテーションテーブルサポート`IndexJoin`を作成する[#19151](https://github.com/pingcap/tidb/pull/19151)
     -   ログに無効な行が含まれている場合でも、ログ ファイルの検索をサポート[#18579](https://github.com/pingcap/tidb/pull/18579)
 
@@ -66,7 +66,7 @@ TiDB バージョン: 4.0.5
     -   PD リーダーとフォロワー間のリージョンリーダーの変更の同期をサポートします[#2795](https://github.com/tikv/pd/pull/2795)
     -   GC safepoint サービスをクエリするコマンドを追加します[#2797](https://github.com/tikv/pd/pull/2797)
     -   フィルター内の`region.Clone`の呼び出しを置き換えて、パフォーマンスを向上させます[#2801](https://github.com/tikv/pd/pull/2801)
-    -   リージョンフロー キャッシュの更新を無効にするオプションを追加して、大規模なクラスタ[#2848](https://github.com/tikv/pd/pull/2848)のパフォーマンスを向上させます。
+    -   リージョンフロー キャッシュの更新を無効にするオプションを追加して、大規模なクラスター[#2848](https://github.com/tikv/pd/pull/2848)のパフォーマンスを向上させます。
 
 -   ティフラッシュ
 

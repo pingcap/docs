@@ -5,7 +5,7 @@ summary: An overview of the usage of SHOW DRAINER STATUS for the TiDB database.
 
 # ドレイナーのステータスを表示 {#show-drainer-status}
 
-`SHOW DRAINER STATUS`ステートメントは、クラスタのすべてのDrainerノードの状況情報を表示します。
+`SHOW DRAINER STATUS`ステートメントは、クラスター内のすべてのDrainerノードのステータス情報を表示します。
 
 ## 例 {#examples}
 

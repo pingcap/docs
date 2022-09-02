@@ -35,15 +35,15 @@ Grafana は、メトリクスを分析および視覚化するためのオープ
 -   {TiDB_Cluster_name}-Lightning: TiDB Lightningに関連するモニタリング メトリック。
 -   {TiDB_Cluster_name}-Node_exporter: オペレーティング システムに関連するモニタリング メトリック。
 -   {TiDB_Cluster_name}-概要: 重要なコンポーネントに関連する監視の概要。
--   {TiDB_Cluster_name}-PD: PD サーバーに関連するモニタリング メトリック。
+-   {TiDB_Cluster_name}-PD: PDサーバーに関連するモニタリング メトリック。
 -   {TiDB_Cluster_name}-Performance-Read: 読み取りパフォーマンスに関連するメトリックを監視します。
 -   {TiDB_Cluster_name}-Performance-Write: 書き込みパフォーマンスに関連するモニタリング メトリック。
--   {TiDB_Cluster_name}-TiDB: TiDB サーバーに関連する詳細な監視メトリック。
+-   {TiDB_Cluster_name}-TiDB: TiDBサーバーに関連する詳細な監視メトリック。
 -   {TiDB_Cluster_name}-TiDB-Summary: TiDB に関連する監視の概要。
--   {TiDB_Cluster_name}-TiFlash-Proxy-Summary: データを TiFlash に複製するために使用されるプロキシ サーバーの監視の概要。
+-   {TiDB_Cluster_name}-TiFlash-Proxy-Summary: データを TiFlash に複製するために使用されるプロキシサーバーの監視の概要。
 -   {TiDB_Cluster_name}-TiFlash-Summary: TiFlash に関連する監視の概要。
--   {TiDB_Cluster_name}-TiKV-Details: TiKV サーバーに関連する詳細な監視メトリック。
--   {TiDB_Cluster_name}-TiKV-Summary: TiKV サーバーに関連する監視の概要。
+-   {TiDB_Cluster_name}-TiKV-Details: TiKVサーバーに関連する詳細な監視メトリック。
+-   {TiDB_Cluster_name}-TiKV-Summary: TiKVサーバーに関連する監視の概要。
 -   {TiDB_Cluster_name}-TiKV-Trouble-Shooting: TiKV エラー診断に関連するモニタリング メトリック。
 -   {TiDB_Cluster_name}-TiCDC: TiCDC に関連する詳細な監視メトリック。
 

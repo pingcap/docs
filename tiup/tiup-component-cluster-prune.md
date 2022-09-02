@@ -4,7 +4,7 @@ title: tiup cluster prune
 
 # tiup cluster prune {#tiup-cluster-prune}
 
-[クラスタでのスケーリング](/tiup/tiup-component-cluster-scale-in.md)の場合、一部のコンポーネントでは、TiUP はすぐにサービスを停止したり、データを削除したりしません。データのスケジューリングが完了するまで待ってから、 `tiup cluster prune`コマンドを手動で実行してクリーンアップする必要があります。
+[クラスターでのスケーリング](/tiup/tiup-component-cluster-scale-in.md)の場合、一部のコンポーネントでは、TiUP はすぐにサービスを停止したり、データを削除したりしません。データのスケジューリングが完了するまで待ってから、 `tiup cluster prune`コマンドを手動で実行してクリーンアップする必要があります。
 
 ## 構文 {#syntax}
 
@@ -24,4 +24,4 @@ tiup cluster prune <cluster-name> [flags]
 
 クリーンアップ プロセスのログ。
 
-[&lt;&lt; 前のページに戻る - TiUP Clusterコマンド一覧](/tiup/tiup-component-cluster.md#command-list)
+[&lt;&lt; 前のページに戻る - TiUP クラスタコマンド一覧](/tiup/tiup-component-cluster.md#command-list)

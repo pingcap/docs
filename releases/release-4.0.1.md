@@ -29,7 +29,7 @@ TiDB バージョン: 4.0.1
 
     -   バックアップと復元 (BR)
 
-        -   BR と TiDBクラスタが互換性がないという問題を回避するために、BR の起動時にバージョン チェックを追加します[#311](https://github.com/pingcap/br/pull/311)
+        -   BR と TiDB クラスターが互換性がないという問題を回避するために、BR の起動時にバージョン チェックを追加します[#311](https://github.com/pingcap/br/pull/311)
 
 ## バグの修正 {#bug-fixes}
 

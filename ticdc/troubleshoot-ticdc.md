@@ -17,8 +17,8 @@ summary: Learn how to troubleshoot issues you might encounter when you use TiCDC
 
 -   Grafana ダッシュボードで、レプリケーション タスクの`changefeed checkpoint`のモニタリング メトリックを確認します (正しい`changefeed id`を選択)。メトリック値が変化しない場合、または`checkpoint lag`メトリックが増加し続ける場合、レプリケーション タスクが中断される可能性があります。
 -   `exit error count`のモニタリング メトリックを確認します。メトリック値が`0`より大きい場合、レプリケーション タスクでエラーが発生しています。
--   `cdc cli changefeed list`と`cdc cli changefeed query`を実行して、レプリケーション タスクのステータスを確認します。 `stopped`はタスクが停止したことを意味し、 `error`の項目は詳細なエラー メッセージを提供します。エラーが発生した後、TiCDC サーバー ログで`error on running processor`を検索して、トラブルシューティング用のエラー スタックを確認できます。
--   極端な場合には、TiCDC サービスが再起動されます。トラブルシューティングのために、TiCDC サーバー ログで`FATAL`レベルのログを検索できます。
+-   `cdc cli changefeed list`と`cdc cli changefeed query`を実行して、レプリケーション タスクのステータスを確認します。 `stopped`はタスクが停止したことを意味し、 `error`の項目は詳細なエラー メッセージを提供します。エラーが発生した後、TiCDCサーバーログで`error on running processor`を検索して、トラブルシューティング用のエラー スタックを確認できます。
+-   極端な場合には、TiCDC サービスが再起動されます。トラブルシューティングのために、TiCDCサーバーログで`FATAL`レベルのログを検索できます。
 
 ### レプリケーション タスクが手動で停止されたかどうかを確認するにはどうすればよいですか? {#how-do-i-know-whether-the-replication-task-is-stopped-manually}
 
@@ -64,7 +64,7 @@ cdc cli changefeed query --pd=http://10.0.10.25:2379 --changefeed-id 28c43ffc-23
 
 ### タスクの中断後に TiCDC を再起動した後に発生する OOM を処理するにはどうすればよいですか? {#what-should-i-do-to-handle-the-oom-that-occurs-after-ticdc-is-restarted-after-a-task-interruption}
 
--   TiDBクラスタと TiCDCクラスタを最新バージョンに更新します。 OOM の問題は、 **v4.0.14 以降の v4.0 バージョン、v5.0.2 以降の v5.0 バージョン、および最新バージョンで**既に解決されています。
+-   TiDB クラスターと TiCDC クラスターを最新バージョンに更新します。 OOM の問題は、 **v4.0.14 以降の v4.0 バージョン、v5.0.2 以降の v5.0 バージョン、および最新バージョンで**既に解決されています。
 
 ## <code>Error 1298: Unknown or incorrect time zone: &#39;UTC&#39;</code>エラーを処理する方法は? {#how-do-i-handle-the-code-error-1298-unknown-or-incorrect-time-zone-utc-code-error-when-creating-the-replication-task-or-replicating-data-to-mysql}
 
@@ -140,7 +140,7 @@ v4.0.9 以降、レプリケーション タスクでユニファイド ソー�
 4.  changefeed の設定を変更し、上記の`start-ts`を`ignore-txn-start-ts`の設定項目に追加します。
 5.  一時停止した変更フィードを再開します。
 
-## TiCDCクラスタを v4.0.8 にアップグレードした後、changefeed を実行する<code>[CDC:ErrKafkaInvalidConfig]Canal requires old value to be enabled</code>エラーが報告されます。 {#after-i-upgrade-the-ticdc-cluster-to-v4-0-8-the-code-cdc-errkafkainvalidconfig-canal-requires-old-value-to-be-enabled-code-error-is-reported-when-i-execute-a-changefeed}
+## TiCDC クラスターを v4.0.8 にアップグレードした後、changefeed を実行する<code>[CDC:ErrKafkaInvalidConfig]Canal requires old value to be enabled</code>エラーが報告されます。 {#after-i-upgrade-the-ticdc-cluster-to-v4-0-8-the-code-cdc-errkafkainvalidconfig-canal-requires-old-value-to-be-enabled-code-error-is-reported-when-i-execute-a-changefeed}
 
 v4.0.8 以降、変更フィードの出力に`canal-json` 、 `canal`または`maxwell`プロトコルが使用されている場合、TiCDC は古い値機能を自動的に有効にします。ただし、TiCDC を以前のバージョンから v4.0.8 以降にアップグレードした場合、changefeed が`canal-json` 、 `canal`または`maxwell`プロトコルを使用し、古い値の機能が無効になっていると、このエラーが報告されます。
 
@@ -183,7 +183,7 @@ v4.0.8 以降、変更フィードの出力に`canal-json` 、 `canal`または`
 
 ## TiCDC を使用してメッセージを Kafka にレプリケートすると、Kafka は<code>Message was too large</code>エラーを返します {#when-i-use-ticdc-to-replicate-messages-to-kafka-kafka-returns-the-code-message-was-too-large-code-error}
 
-TiCDC v4.0.8 以前のバージョンでは、Sink URI で Kafka の`max-message-bytes`設定を構成するだけでは、Kafka へのメッセージ出力のサイズを効果的に制御することはできません。メッセージ サイズを制御するには、Kafka が受信するメッセージのバイト数の制限も増やす必要があります。このような制限を追加するには、次の構成を Kafka サーバー構成に追加します。
+TiCDC v4.0.8 以前のバージョンでは、Sink URI で Kafka の`max-message-bytes`設定を構成するだけでは、Kafka へのメッセージ出力のサイズを効果的に制御することはできません。メッセージ サイズを制御するには、Kafka が受信するメッセージのバイト数の制限も増やす必要があります。このような制限を追加するには、次の構成を Kafkaサーバー構成に追加します。
 
 ```
 # The maximum byte number of a message that the broker receives

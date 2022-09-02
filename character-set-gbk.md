@@ -35,13 +35,13 @@ MySQL の GBK 文字セットのデフォルトの照合順序は`gbk_chinese_ci
 
 <CustomContent platform="tidb">
 
-TiDB を MySQL GBK 文字セットの照合と互換性を持たせるには、最初に TiDBクラスタを初期化するときに、TiDB オプション[`new_collations_enabled_on_first_bootstrap`](/tidb-configuration-file.md#new_collations_enabled_on_first_bootstrap)を`true`に設定して[照合のための新しいフレームワーク](/character-set-and-collation.md#new-framework-for-collations)を有効にする必要があります。
+TiDB を MySQL GBK 文字セットの照合と互換性を持たせるには、最初に TiDB クラスターを初期化するときに、TiDB オプション[`new_collations_enabled_on_first_bootstrap`](/tidb-configuration-file.md#new_collations_enabled_on_first_bootstrap)を`true`に設定して[照合のための新しいフレームワーク](/character-set-and-collation.md#new-framework-for-collations)を有効にする必要があります。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-TiDB を MySQL GBK 文字セットの照合と互換性を持たせるために、最初に TiDBクラスタを初期化するときに、 TiDB Cloudはデフォルトで[照合のための新しいフレームワーク](/character-set-and-collation.md#new-framework-for-collations)を有効にします。
+TiDB を MySQL GBK 文字セットの照合と互換性を持たせるために、最初に TiDB クラスターを初期化するときに、 TiDB Cloudはデフォルトで[照合のための新しいフレームワーク](/character-set-and-collation.md#new-framework-for-collations)を有効にします。
 
 </CustomContent>
 

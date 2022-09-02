@@ -25,7 +25,7 @@ mysql> explain SELECT DISTINCT a from t;
 
 ## 集約関数の<code>DISTINCT</code>オプション {#code-distinct-code-option-in-aggregate-functions}
 
-通常、オプション`DISTINCT`を指定した集約関数は、シングルスレッド実行モデルの TiDB レイヤーで実行されます。
+通常、オプション`DISTINCT`を指定した集約関数は、シングルスレッド実行モデルの TiDBレイヤーで実行されます。
 
 <CustomContent platform="tidb">
 
@@ -39,7 +39,7 @@ TiDB の[`tidb_opt_distinct_agg_push_down`](/system-variables.md#tidb_opt_distin
 
 </CustomContent>
 
-この最適化の例として、次のクエリを取り上げます。 `tidb_opt_distinct_agg_push_down`はデフォルトで無効になっています。これは、集計関数が TiDB レイヤーで実行されることを意味します。値を`1`に設定してこの最適化を有効にした後、 `count(distinct a)`の`distinct a`の部分が TiKV または TiFlash コプロセッサーにプッシュされます。TiKV コプロセッサーの列 a の重複した値を削除する HashAgg_5 があります。これにより、TiDB レイヤーで`HashAgg_8`の計算オーバーヘッドが削減される可能性があります。
+この最適化の例として、次のクエリを取り上げます。 `tidb_opt_distinct_agg_push_down`はデフォルトで無効になっています。これは、集計関数が TiDBレイヤーで実行されることを意味します。値を`1`に設定してこの最適化を有効にした後、 `count(distinct a)`の`distinct a`の部分が TiKV または TiFlash Coprocessor にプッシュされます。TiKV Coprocessor の列 a の重複した値を削除する HashAgg_5 があります。これにより、TiDBレイヤーで`HashAgg_8`の計算オーバーヘッドが削減される可能性があります。
 
 ```sql
 mysql> desc select count(distinct a) from test.t;

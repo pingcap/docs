@@ -47,7 +47,7 @@ TiDB は、 MySQL 5.7プロトコルおよびMySQL 5.7 5.7 の一般的な機能
 -   オプティマイザ トレース
 -   XML 関数
 -   X-プロトコル[#1109](https://github.com/pingcap/tidb/issues/1109)
--   列レベルの特権[#9766](https://github.com/pingcap/tidb/issues/9766)
+-   列レベルの権限[#9766](https://github.com/pingcap/tidb/issues/9766)
 -   `XA`構文 (TiDB は内部で 2 フェーズ コミットを使用しますが、これは SQL インターフェイス経由で公開されません)
 -   `CREATE TABLE tblName AS SELECT stmt`構文[#4754](https://github.com/pingcap/tidb/issues/4754)
 -   `CHECK TABLE`構文[#4673](https://github.com/pingcap/tidb/issues/4673)
@@ -61,7 +61,7 @@ TiDB は、 MySQL 5.7プロトコルおよびMySQL 5.7 5.7 の一般的な機能
 
 ### 自動インクリメント ID {#auto-increment-id}
 
--   TiDB では、自動増分列はグローバルに一意です。それらは単一の TiDB サーバー上では増分ですが*、必ずしも*複数の TiDB サーバー間で増分されたり、順次割り当てられるとは限りません。デフォルト値とカスタム値を混在させないことをお勧めします。そうしないと、 `Duplicated Error`のエラー メッセージが表示される場合があります。
+-   TiDB では、自動増分列はグローバルに一意です。それらは単一の TiDBサーバー上では増分ですが*、必ずしも*複数の TiDB サーバー間で増分されたり、順次割り当てられるとは限りません。デフォルト値とカスタム値を混在させないことをお勧めします。そうしないと、 `Duplicated Error`のエラー メッセージが表示される場合があります。
 
 -   `tidb_allow_remove_auto_inc`システム変数を使用して、 `AUTO_INCREMENT`列属性の削除を許可または禁止できます。 column 属性を削除する構文は`ALTER TABLE MODIFY`または`ALTER TABLE CHANGE`です。
 
@@ -118,11 +118,11 @@ TiDB は[プロメテウスとグラファナ](/tidb-monitoring-api.md)の組み
 
 <CustomContent platform="tidb-cloud">
 
-TiDB Cloudでパフォーマンス メトリックを確認するには、 TiDB Cloudコンソールでクラスタの概要ページを確認するか、または[サードパーティの監視統合](/tidb-cloud/monitor-tidb-cluster.md#third-party-integrations)を使用します。パフォーマンス スキーマ テーブルは、TiDB で空の結果を返します。
+TiDB Cloudでパフォーマンス メトリックを確認するには、 TiDB Cloudコンソールでクラスターの概要ページを確認するか、または[サードパーティの監視統合](/tidb-cloud/monitor-tidb-cluster.md#third-party-integrations)を使用します。パフォーマンス スキーマ テーブルは、TiDB で空の結果を返します。
 
 </CustomContent>
 
-### クエリ実行計画 {#query-execution-plan}
+### クエリ実行プラン {#query-execution-plan}
 
 `EXPLAIN FOR`の Query Execution Plan ( `EXPLAIN` ) の出力形式、出力内容、権限設定は、MySQL と大きく異なります。
 
@@ -195,7 +195,7 @@ TiDB のビューは更新できません。 `UPDATE` 、 `INSERT` 、 `DELETE`�
 
 <CustomContent platform="tidb">
 
-TiDB は MySQL と同様のストレージ エンジンの抽象化をサポートしていますが、TiDB サーバーを起動するときに[`--store`](/command-line-flags-for-tidb-configuration.md#--store)オプションを使用してストレージ エンジンを指定する必要があります。
+TiDB は MySQL と同様のストレージ エンジンの抽象化をサポートしていますが、TiDBサーバーを起動するときに[`--store`](/command-line-flags-for-tidb-configuration.md#--store)オプションを使用してストレージ エンジンを指定する必要があります。
 
 </CustomContent>
 

@@ -113,7 +113,7 @@ TiDB バージョン: 4.0.3
     -   生成された列[#17907](https://github.com/pingcap/tidb/pull/17907)を含むテーブルで`REPLACE INTO`ステートメントが機能するときに報告されるエラーを修正します。
     -   `IndexHashJoin`と`IndexMergeJoin`のワーカーがpanicに陥ったときに OOM エラーを返す[#18527](https://github.com/pingcap/tidb/pull/18527)
     -   `Index Join`で使用されるインデックスに整数の主キー[#18565](https://github.com/pingcap/tidb/pull/18565)が含まれている場合、特殊なケースで`Index Join`の実行が間違った結果を返す可能性があるというバグを修正します
-    -   クラスタで新しい照合順序が有効になっている場合、トランザクションで新しい照合順序を使用して列で更新されたデータを一意のインデックス[#18703](https://github.com/pingcap/tidb/pull/18703)から読み取ることができないという問題を修正します。
+    -   クラスターで新しい照合順序が有効になっている場合、トランザクションで新しい照合順序を使用して列で更新されたデータを一意のインデックス[#18703](https://github.com/pingcap/tidb/pull/18703)から読み取ることができないという問題を修正します。
 
 -   TiKV
 

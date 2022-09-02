@@ -4,7 +4,7 @@ title: tiup dm prune
 
 # tiup dm プルーン {#tiup-dm-prune}
 
-クラスタ(/tiup/tiup-component-dm-scale-in.md) をスケールインすると、etcd 内の少量のメタデータがクリーンアップされませんが、通常は問題は発生しません。メタデータをクリーンアップする必要がある場合は、 `tiup dm prune`コマンドを手動で実行できます。
+クラスター (/tiup/tiup-component-dm-scale-in.md) をスケールインすると、etcd 内の少量のメタデータがクリーンアップされませんが、通常は問題は発生しません。メタデータをクリーンアップする必要がある場合は、 `tiup dm prune`コマンドを手動で実行できます。
 
 ## 構文 {#syntax}
 

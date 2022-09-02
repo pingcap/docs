@@ -3,13 +3,13 @@ title: TiDB Binlog Cluster Operations
 summary: Learn how to operate the cluster version of TiDB Binlog.
 ---
 
-# TiDB Binlogクラスターの操作 {#tidb-binlog-cluster-operations}
+# TiDB Binlogクラスタの操作 {#tidb-binlog-cluster-operations}
 
-このドキュメントでは、次の TiDB Binlogクラスタ操作について説明します。
+このドキュメントでは、次の TiDB Binlogクラスター操作について説明します。
 
 -   PumpとDrainerノードの状態
 -   PumpまたはDrainerプロセスの開始または終了
--   binlogctl ツールを使用するか、TiDB で SQL 操作を直接実行して、TiDB Binlogクラスタを管理する
+-   binlogctl ツールを使用するか、TiDB で SQL 操作を直接実行して、TiDB Binlogクラスターを管理する
 
 ## PumpまたはDrainerの状態 {#pump-or-drainer-state}
 

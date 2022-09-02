@@ -22,7 +22,7 @@ TiDB は、 MySQL 5.7で利用可能な[情報関数](https://dev.mysql.com/doc/
 | [`SESSION_USER()`](https://dev.mysql.com/doc/refman/5.7/en/information-functions.html#function_session-user)                             | `USER()`の同義語                               |
 | [`SYSTEM_USER()`](https://dev.mysql.com/doc/refman/5.7/en/information-functions.html#function_system-user)                               | `USER()`の同義語                               |
 | [`USER()`](https://dev.mysql.com/doc/refman/5.7/en/information-functions.html#function_user)                                             | クライアントから提供されたユーザー名とホスト名を返す                 |
-| [`VERSION()`](https://dev.mysql.com/doc/refman/5.7/en/information-functions.html#function_version)                                       | MySQL サーバーのバージョンを示す文字列を返します                |
+| [`VERSION()`](https://dev.mysql.com/doc/refman/5.7/en/information-functions.html#function_version)                                       | MySQLサーバーのバージョンを示す文字列を返します                 |
 
 ## サポートされていない関数 {#unsupported-functions}
 

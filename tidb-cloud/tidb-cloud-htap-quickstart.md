@@ -5,19 +5,19 @@ summary: Learn how to get started with HTAP in TiDB Cloud.
 
 # TiDB CloudHTAP クイック スタート {#tidb-cloud-htap-quick-start}
 
-[HTAP](https://en.wikipedia.org/wiki/Hybrid_transactional/analytical_processing)はハイブリッド トランザクションおよび分析処理を意味します。 TiDB Cloudの HTAPクラスタは、トランザクション処理用に設計された行ベースのストレージ エンジン[TiKV](https://tikv.org)と、分析処理用に設計された列型ストレージ エンジン[ティフラッシュ](https://docs.pingcap.com/tidb/stable/tiflash-overview)で構成されます。アプリケーション データはまず TiKV に保存され、次にRaftコンセンサス アルゴリズムを介して TiFlash に複製されます。つまり、行ストレージから列ストレージへのリアルタイム レプリケーションです。
+[HTAP](https://en.wikipedia.org/wiki/Hybrid_transactional/analytical_processing)はハイブリッド トランザクションおよび分析処理を意味します。 TiDB Cloudの HTAP クラスターは、トランザクション処理用に設計された行ベースのストレージ エンジン[TiKV](https://tikv.org)と、分析処理用に設計された列型ストレージ エンジン[ティフラッシュ](https://docs.pingcap.com/tidb/stable/tiflash-overview)で構成されます。アプリケーション データはまず TiKV に保存され、次にRaftコンセンサス アルゴリズムを介して TiFlash に複製されます。つまり、行ストレージから列ストレージへのリアルタイム レプリケーションです。
 
 このチュートリアルでは、 TiDB Cloudの Hybrid Transactional and Analytical Processing (HTAP) 機能を体験する簡単な方法について説明します。このコンテンツには、テーブルを TiFlash にレプリケートする方法、TiFlash でクエリを実行する方法、およびパフォーマンスの向上を体験する方法が含まれています。
 
 ## あなたが始める前に {#before-you-begin}
 
-HTAP 機能を体験する前に、 [TiDB Cloudクイック スタート](/tidb-cloud/tidb-cloud-quickstart.md)に従って TiFlash ノードを含むクラスタを作成し、TiDBクラスタに接続し、Capital Bikeshare サンプル データをクラスタにインポートします。
+HTAP 機能を体験する前に、 [TiDB Cloudクイック スタート](/tidb-cloud/tidb-cloud-quickstart.md)に従って TiFlash ノードを含むクラスターを作成し、TiDB クラスターに接続して、Capital Bikeshare サンプル データをクラスターにインポートします。
 
 ## 手順 {#steps}
 
 ### 手順 1. サンプル データを列指向ストレージ エンジンにレプリケートする {#step-1-replicate-the-sample-data-to-the-columnar-storage-engine}
 
-TiFlash ノードを持つクラスタが作成された後、TiKV はデフォルトでデータを TiFlash に複製しません。レプリケートするテーブルを指定するには、TiDB の MySQL クライアントで DDL ステートメントを実行する必要があります。その後、TiDB はそれに応じて指定されたテーブルのレプリカを TiFlash に作成します。
+TiFlash ノードを持つクラスターが作成された後、TiKV はデフォルトでデータを TiFlash に複製しません。レプリケートするテーブルを指定するには、TiDB の MySQL クライアントで DDL ステートメントを実行する必要があります。その後、TiDB はそれに応じて指定されたテーブルのレプリカを TiFlash に作成します。
 
 たとえば、 `trips`のテーブル (Capital Bikeshare サンプル データ内) を TiFlash に複製するには、次のステートメントを実行します。
 

@@ -7,11 +7,11 @@ summary: Use TiSpark to provide an HTAP solution to serve as a one-stop solution
 
 ![TiSpark architecture](/media/tispark-architecture.png)
 
-[ティスパーク](https://github.com/pingcap/tispark)は、TiDB/TiKV 上で Apache Spark を実行して複雑な OLAP クエリに応答するために構築されたシン レイヤーです。 Spark プラットフォームと分散 TiKVクラスタの両方を利用し、分散 OLTP データベースである TiDB にシームレスに接着して、ハイブリッド トランザクション/分析処理 (HTAP) ソリューションを提供し、オンライン トランザクションと分析の両方のワンストップ ソリューションとして機能します。 .
+[ティスパーク](https://github.com/pingcap/tispark)は、TiDB/TiKV 上で Apache Spark を実行して複雑な OLAP クエリに応答するために構築されたシンレイヤーです。 Spark プラットフォームと分散 TiKV クラスターの両方を利用し、分散 OLTP データベースである TiDB にシームレスに接着して、ハイブリッド トランザクション/分析処理 (HTAP) ソリューションを提供し、オンライン トランザクションと分析の両方のワンストップ ソリューションとして機能します。 .
 
 [ティフラッシュ](/tiflash/tiflash-overview.md)は、HTAP を有効にする別のツールです。 TiFlash と TiSpark の両方で、複数のホストを使用して OLTP データに対して OLAP クエリを実行できます。 TiFlash はデータを列形式で格納するため、より効率的な分析クエリが可能になります。 TiFlash と TiSpark は併用できます。
 
-TiSpark は、TiKVクラスタと PDクラスタに依存しています。また、Sparkクラスタをセットアップする必要があります。このドキュメントでは、TiSpark のセットアップ方法と使用方法を簡単に紹介します。 Apache Spark の基本的な知識が必要です。詳細については、 [アパッチスパークのウェブサイト](https://spark.apache.org/docs/latest/index.html)を参照してください。
+TiSpark は、TiKV クラスターと PD クラスターに依存します。また、Spark クラスターをセットアップする必要があります。このドキュメントでは、TiSpark のセットアップ方法と使用方法を簡単に紹介します。 Apache Spark の基本的な知識が必要です。詳細については、 [アパッチスパークのウェブサイト](https://spark.apache.org/docs/latest/index.html)を参照してください。
 
 Spark Catalyst Engine と緊密に統合された TiSpark は、コンピューティングを正確に制御します。これにより、Spark は TiKV から効率的にデータを読み取ることができます。 TiSpark は、高速なポイント クエリを可能にするインデックス シークもサポートしています。
 
@@ -70,7 +70,7 @@ TiKV と TiSpark を個別に展開するには、次の推奨事項を参照す
 
 TiKV と TiSpark を共同展開するには、TiSpark に必要なリソースを TiKV の予約済みリソースに追加し、システムにメモリの 25% を割り当てます。
 
-## TiSparkクラスタをデプロイ {#deploy-the-tispark-cluster}
+## TiSpark クラスターをデプロイ {#deploy-the-tispark-cluster}
 
 TiSpark の jar パッケージ[ここ](https://github.com/pingcap/tispark/releases)をダウンロードし、 `$SPARKPATH/jars`フォルダーに配置します。
 
@@ -108,9 +108,9 @@ spark.sql.extensions org.apache.spark.sql.TiExtensions
 >
 > TiSpark が適切に通信できなかった場合は、ファイアウォールの構成を確認してください。ファイアウォール ルールを調整するか、必要に応じて無効にすることができます。
 
-### TiSpark を既存の Sparkクラスタにデプロイ {#deploy-tispark-on-an-existing-spark-cluster}
+### TiSpark を既存の Spark クラスターにデプロイ {#deploy-tispark-on-an-existing-spark-cluster}
 
-既存の Sparkクラスタで TiSpark を実行する場合、クラスタを再起動する必要はありません。 Spark の`--jars`パラメータを使用して、TiSpark を依存関係として導入できます。
+既存の Spark クラスターで TiSpark を実行する場合、クラスターを再起動する必要はありません。 Spark の`--jars`パラメータを使用して、TiSpark を依存関係として導入できます。
 
 {{< copyable "" >}}
 
@@ -118,15 +118,15 @@ spark.sql.extensions org.apache.spark.sql.TiExtensions
 spark-shell --jars $TISPARK_FOLDER/tispark-${name_with_version}.jar
 ```
 
-### Sparkクラスタなしで TiSpark をデプロイ {#deploy-tispark-without-a-spark-cluster}
+### Spark クラスターなしで TiSpark をデプロイ {#deploy-tispark-without-a-spark-cluster}
 
-Sparkクラスタがない場合は、スタンドアロン モードを使用することをお勧めします。詳細については、 [Spark スタンドアロン](https://spark.apache.org/docs/latest/spark-standalone.html)を参照してください。問題が発生した場合は、 [スパーク公式サイト](https://spark.apache.org/docs/latest/spark-standalone.html)を参照してください。 GitHub の[問題を提出する](https://github.com/pingcap/tispark/issues/new)へようこそ。
+Spark クラスターがない場合は、スタンドアロン モードを使用することをお勧めします。詳細については、 [Spark スタンドアロン](https://spark.apache.org/docs/latest/spark-standalone.html)を参照してください。問題が発生した場合は、 [スパーク公式サイト](https://spark.apache.org/docs/latest/spark-standalone.html)を参照してください。 GitHub の[問題を提出する](https://github.com/pingcap/tispark/issues/new)へようこそ。
 
 ## Spark Shell と Spark SQL を使用する {#use-spark-shell-and-spark-sql}
 
-上記のように TiSparkクラスタを正常に開始したと仮定します。以下では、 `tpch`データベース内の`lineitem`という名前のテーブルで OLAP 分析に Spark SQL を使用する方法について説明します。
+上記のように TiSpark クラスターを正常に開始したと仮定します。以下では、 `tpch`データベース内の`lineitem`という名前のテーブルで OLAP 分析に Spark SQL を使用する方法について説明します。
 
-`192.168.1.101`で利用可能な TiDB サーバー経由でテスト データを生成するには:
+`192.168.1.101`で利用可能な TiDBサーバー経由でテスト データを生成するには:
 
 {{< copyable "" >}}
 
@@ -196,7 +196,7 @@ Time taken: 0.673 seconds, Fetched 1 row(s)
 
 ## ThriftServer で JDBC サポートを使用する {#use-jdbc-support-with-thriftserver}
 
-JDBC サポートなしで Spark Shell または Spark SQL を使用できます。ただし、beeline などのツールには JDBC サポートが必要です。 JDBC サポートは、Thrift サーバーによって提供されます。 Spark の Thrift サーバーを使用するには、以下を実行します。
+JDBC サポートなしで Spark Shell または Spark SQL を使用できます。ただし、beeline などのツールには JDBC サポートが必要です。 JDBC サポートは、Thriftサーバーによって提供されます。 Spark の Thriftサーバーを使用するには、次を実行します。
 
 {{< copyable "" >}}
 
@@ -204,7 +204,7 @@ JDBC サポートなしで Spark Shell または Spark SQL を使用できます
 ./sbin/start-thriftserver.sh
 ```
 
-JDBC を Thrift サーバーに接続するには、beeline などの JDBC 対応ツールを使用できます。
+JDBC を Thriftサーバーに接続するには、beeline などの JDBC 対応ツールを使用できます。
 
 たとえば、ビーラインで使用するには:
 
@@ -291,7 +291,7 @@ UPDATE mysql.tidb SET VARIABLE_VALUE="6h" WHERE VARIABLE_NAME="tikv_gc_life_time
 
 ## JDBC を使用して Spark Dataframe を TiDB にロードする {#load-spark-dataframe-into-tidb-using-jdbc}
 
-TiSpark を使用して DataFrame を TiDBクラスタにバッチ書き込みするだけでなく、Spark のネイティブ JDBC サポートをデータ書き込みに使用することもできます。
+TiSpark を使用して DataFrame を TiDB クラスターにバッチ書き込みするだけでなく、Spark のネイティブ JDBC サポートをデータ書き込みに使用することもできます。
 
 ```scala
 import org.apache.spark.sql.execution.datasources.jdbc.JDBCOptions
@@ -349,7 +349,7 @@ spark.sql.tidb.user $your_tidb_server_user
 spark.sql.tidb.password $your_tidb_server_password
 ```
 
-詳細については、 [TiDB サーバーによる承認と認証](https://github.com/pingcap/tispark/blob/master/docs/authorization_userguide.md)を参照してください。
+詳細については、 [TiDBサーバーによる承認と認証](https://github.com/pingcap/tispark/blob/master/docs/authorization_userguide.md)を参照してください。
 
 > **ノート：**
 >
@@ -357,9 +357,9 @@ spark.sql.tidb.password $your_tidb_server_password
 
 ## TiSpark FAQ {#tispark-faq}
 
-Q: 既存の Spark / Hadoopクラスタとの共有リソースとは対照的に、独立したデプロイの長所と短所は何ですか?
+Q: 既存の Spark / Hadoop クラスターとの共有リソースとは対照的に、独立したデプロイの長所と短所は何ですか?
 
-A: 別のデプロイを行わなくても既存の Sparkクラスタを使用できますが、既存のクラスタがビジー状態の場合、TiSpark は目的の速度を達成できません。
+A: 別のデプロイを行わなくても既存の Spark クラスターを使用できますが、既存のクラスターがビジー状態の場合、TiSpark は目的の速度を達成できません。
 
 Q: Spark と TiKV を混在させることはできますか?
 
@@ -381,4 +381,4 @@ A: デフォルトでは、TiSpark は hive-site の Hive メタデータを読�
 
 Q: TiSpark が Spark タスクを実行しているときに`Error: java.io.InvalidClassException: com.pingcap.tikv.region.TiRegion; local class incompatible: stream classdesc serialVersionUID ...`が返された場合、どうすればよいですか?
 
-A: エラー メッセージには`serialVersionUID`の競合が表示されます。これは、異なるバージョンの`class`と`TiRegion`を使用したために発生します。 `TiRegion`は TiSpark にのみ存在するため、TiSpark パッケージの複数のバージョンが使用される場合があります。このエラーを修正するには、TiSpark 依存関係のバージョンがクラスタのすべてのノード間で一貫していることを確認する必要があります。
+A: エラー メッセージには`serialVersionUID`の競合が表示されます。これは、異なるバージョンの`class`と`TiRegion`を使用したために発生します。 `TiRegion`は TiSpark にのみ存在するため、TiSpark パッケージの複数のバージョンが使用される場合があります。このエラーを修正するには、TiSpark 依存関係のバージョンがクラスター内のすべてのノード間で一貫していることを確認する必要があります。

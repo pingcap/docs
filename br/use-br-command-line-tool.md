@@ -5,7 +5,7 @@ summary: Learn how to use the BR command line to back up and restore cluster dat
 
 # バックアップと復元に BR コマンドラインを使用する {#use-br-command-line-for-backup-and-restoration}
 
-このドキュメントでは、BR コマンド ラインを使用して TiDBクラスタデータをバックアップおよび復元する方法について説明します。
+このドキュメントでは、BR コマンド ラインを使用して TiDB クラスター データをバックアップおよび復元する方法について説明します。
 
 [BR ツールの概要](/br/backup-and-restore-overview.md) 、特に[利用制限](/br/backup-and-restore-overview.md#usage-restrictions)と[いくつかのヒント](/br/backup-and-restore-overview.md#some-tips)を読んだことを確認してください。
 
@@ -38,18 +38,18 @@ summary: Learn how to use the BR command line to back up and restore cluster dat
 
 `br`のコマンドは、サブコマンドの複数のレイヤーで構成されます。現在、BR には次のサブコマンドがあります。
 
--   `br backup` : TiDBクラスタのデータをバックアップするために使用されます。
--   `br restore` : TiDBクラスタのデータを復元するために使用されます。
+-   `br backup` : TiDB クラスターのデータをバックアップするために使用されます。
+-   `br restore` : TiDB クラスターのデータを復元するために使用されます。
 
 上記の各サブコマンドには、操作の範囲を指定する次のサブコマンドが含まれる場合があります。
 
--   `full` : すべてのクラスタデータのバックアップまたは復元に使用されます。
--   `db` :クラスタの指定されたデータベースのバックアップまたは復元に使用されます。
--   `table` :クラスタの指定されたデータベース内の単一のテーブルをバックアップまたは復元するために使用されます。
+-   `full` : すべてのクラスター データのバックアップまたは復元に使用されます。
+-   `db` : クラスターの指定されたデータベースのバックアップまたは復元に使用されます。
+-   `table` : クラスターの指定されたデータベース内の単一のテーブルをバックアップまたは復元するために使用されます。
 
 ### 共通オプション {#common-options}
 
--   `--pd` : 接続に使用され、PD サーバーのアドレスを指定します。たとえば、 `"${PDIP}:2379"`です。
+-   `--pd` : 接続に使用され、PDサーバーのアドレスを指定します。たとえば、 `"${PDIP}:2379"`です。
 -   `-h` (または`--help` ): すべてのサブコマンドのヘルプを取得するために使用されます。たとえば、 `br backup --help`です。
 -   `-V` (または`--version` ): BR のバージョンを確認するために使用されます。
 -   `--ca` : 信頼できる CA 証明書へのパスを PEM 形式で指定します。
@@ -57,11 +57,11 @@ summary: Learn how to use the BR command line to back up and restore cluster dat
 -   `--key` : SSL 証明書キーへのパスを PEM 形式で指定します。
 -   `--status-addr` : BR が Prometheus に統計情報を提供するためのリスニング アドレスを指定します。
 
-## BR コマンドラインを使用してクラスタデータをバックアップする例 {#examples-of-using-br-command-line-to-back-up-cluster-data}
+## BR コマンドラインを使用してクラスタ データをバックアップする例 {#examples-of-using-br-command-line-to-back-up-cluster-data}
 
-クラスタデータをバックアップするには、 `br backup`コマンドを実行します。 `full`または`table`サブコマンドを追加して、バックアップ操作の範囲 (クラスタ全体または単一のテーブル) を指定できます。
+クラスター データをバックアップするには、 `br backup`コマンドを実行します。 `full`または`table`サブコマンドを追加して、バックアップ操作の範囲 (クラスター全体または単一のテーブル) を指定できます。
 
--   [TiDBクラスタのスナップショットをバックアップする](/br/br-usage-backup.md#back-up-tidb-cluster-snapshots)
+-   [TiDB クラスターのスナップショットをバックアップする](/br/br-usage-backup.md#back-up-tidb-cluster-snapshots)
 -   [データベースのバックアップ](/br/br-usage-backup.md#back-up-a-database)
 -   [テーブルをバックアップする](/br/br-usage-backup.md#back-up-a-table)
 -   [テーブル フィルターを使用して複数のテーブルをバックアップする](/br/br-usage-backup.md#back-up-multiple-tables-with-table-filter)
@@ -71,11 +71,11 @@ summary: Learn how to use the BR command line to back up and restore cluster dat
 -   [増分データのバックアップ](/br/br-usage-backup.md#back-up-incremental-data)
 -   [バックアップ中にデータを暗号化する](/br/br-usage-backup.md#encrypt-backup-data-at-the-backup-end)
 
-## BR コマンドラインを使用してクラスタデータを復元する例 {#examples-of-using-br-command-line-to-restore-cluster-data}
+## BR コマンドラインを使用してクラスタ データを復元する例 {#examples-of-using-br-command-line-to-restore-cluster-data}
 
-クラスタデータを復元するには、 `br restore`コマンドを実行します。 `full` 、 `db` 、または`table`サブコマンドを追加して、復元の範囲 (クラスタ全体、データベース、または単一のテーブル) を指定できます。
+クラスター データを復元するには、 `br restore`コマンドを実行します。 `full` 、 `db`または`table`サブコマンドを追加して、復元の範囲 (クラスター全体、データベース、または単一のテーブル) を指定できます。
 
--   [TiDBクラスタのスナップショットを復元する](/br/br-usage-restore.md#restore-tidb-cluster-snapshots)
+-   [TiDB クラスターのスナップショットを復元する](/br/br-usage-restore.md#restore-tidb-cluster-snapshots)
 -   [データベースを復元する](/br/br-usage-restore.md#restore-a-database)
 -   [テーブルを復元する](/br/br-usage-restore.md#restore-a-table)
 -   [テーブル フィルターを使用して複数のテーブルを復元する](/br/br-usage-restore.md#restore-multiple-tables-with-table-filter)

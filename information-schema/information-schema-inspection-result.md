@@ -40,7 +40,7 @@ DESC inspection_result;
 -   `RULE` : 診断ルールの名前。現在、次のルールが利用可能です。
     -   `config` : 構成が一貫して適切かどうかを確認します。同じ構成が異なるインスタンスで矛盾している場合、 `warning`の診断結果が生成されます。
     -   `version` : バージョンの整合性チェック。同じバージョンが異なるインスタンスで矛盾している場合、 `warning`の診断結果が生成されます。
-    -   `node-load` : サーバーの負荷をチェックします。現在のシステム負荷が高すぎる場合、対応する`warning`の診断結果が生成されます。
+    -   `node-load` :サーバーの負荷をチェックします。現在のシステム負荷が高すぎる場合、対応する`warning`の診断結果が生成されます。
     -   `critical-error` : システムの各モジュールが重大なエラーを定義します。重大なエラーが対応する期間内にしきい値を超えると、警告の診断結果が生成されます。
     -   `threshold-check` : 診断システムは主要メトリックのしきい値をチェックします。しきい値を超えると、対応する診断情報が生成されます。
 -   `ITEM` : 各ルールは異なる項目を診断します。このフィールドは、各ルールに対応する特定の診断項目を示します。
@@ -104,7 +104,7 @@ DETAILS   | max duration of 172.16.5.40:20151 tikv rocksdb-write-duration was to
 上記の診断結果から、次の問題を検出できます。
 
 -   最初の行は、TiDB の`log.slow-threshold`値が`0`に設定されていることを示しており、パフォーマンスに影響を与える可能性があります。
--   2 行目は、クラスタに 2 つの異なる TiDB バージョンが存在することを示しています。
+-   2 行目は、クラスター内に 2 つの異なる TiDB バージョンが存在することを示しています。
 -   3 行目と 4 行目は、TiKV 書き込み遅延が長すぎることを示しています。予想される遅延は 0.1 秒以下ですが、実際の遅延は予想よりもはるかに長くなります。
 
 「2020-03-26 00:03:00」から「2020-03-26 00:08:00」など、指定した範囲内の問題も診断できます。時間範囲を指定するには、SQL Hint of `/*+ time_range() */`を使用します。次のクエリ例を参照してください。
@@ -159,7 +159,7 @@ select * from information_schema.inspection_result where rule='critical-error';
 
 ## 診断ルール {#diagnostic-rules}
 
-診断モジュールには、一連のルールが含まれています。これらのルールは、既存の監視テーブルとクラスタ情報テーブルを照会した後、結果をしきい値と比較します。結果がしきい値を超えると、 `warning`または`critical`の診断が生成され、対応する情報が`details`列に表示されます。
+診断モジュールには、一連のルールが含まれています。これらのルールは、既存の監視テーブルとクラスター情報テーブルを照会した後、結果をしきい値と比較します。結果がしきい値を超えると、 `warning`または`critical`の診断が生成され、対応する情報が`details`列に表示されます。
 
 `inspection_rules`のシステム テーブルをクエリすることで、既存の診断ルールをクエリできます。
 
@@ -253,7 +253,7 @@ DETAILS   | the cluster has 2 different tidb versions, execute the sql to see mo
 
 `critical-error`つの診断ルールで、次の 2 つの診断ルールが実行されます。
 
--   メトリクス スキーマ内の関連する監視システム テーブルをクエリして、クラスタに次のエラーがあるかどうかを検出します。
+-   メトリクス スキーマ内の関連する監視システム テーブルをクエリして、クラスターに次のエラーがあるかどうかを検出します。
 
     | 成分   | エラー名                    | 監視テーブル                               | エラーの説明                                       |
     | ---- | ----------------------- | ------------------------------------ | -------------------------------------------- |
@@ -269,7 +269,7 @@ DETAILS   | the cluster has 2 different tidb versions, execute the sql to see mo
 
 ### <code>threshold-check</code>診断ルール {#code-threshold-check-code-diagnostic-rule}
 
-`threshold-check`の診断ルールは、メトリック スキーマ内の関連する監視システム テーブルをクエリすることによって、クラスタの次のメトリックがしきい値を超えているかどうかを確認します。
+`threshold-check`の診断ルールは、メトリック スキーマ内の関連する監視システム テーブルをクエリすることによって、クラスター内の次のメトリックがしきい値を超えているかどうかを確認します。
 
 | 成分   | モニタリング指標                    | 監視テーブル                              | 期待値        | 説明                                                                                                                   |
 | :--- | :-------------------------- | :---------------------------------- | :--------- | :------------------------------------------------------------------------------------------------------------------- |
@@ -278,9 +278,9 @@ DETAILS   | the cluster has 2 different tidb versions, execute the sql to see mo
 | TiDB | ロードスキーマ期間                   | tidb_load_schema_duration           | &lt; 1 秒   | TiDB がスキーマ メタデータを更新するのにかかる時間。                                                                                        |
 | TiKV | scheduler-cmd-duration      | tikv_scheduler_command_duration     | &lt; 0.1 秒 | TiKV が KV `cmd`リクエストを実行するのにかかる時間。                                                                                    |
 | TiKV | ハンドル スナップショット期間             | tikv_handle_snapshot_duration       | 30代未満      | TiKV がスナップショットを処理するのにかかる時間。                                                                                          |
-| TiKV | ストレージ書き込み期間                 | tikv_storage_async_request_duration | &lt; 0.1 秒 | TiKV の書き込みレイテンシ。                                                                                                     |
+| TiKV | ストレージ書き込み期間                 | tikv_storage_async_request_duration | &lt; 0.1 秒 | TiKV の書き込みレイテンシー。                                                                                                    |
 | TiKV | ストレージ スナップショット期間            | tikv_storage_async_request_duration | &lt; 50ms  | TiKV がスナップショットを取得するのにかかる時間。                                                                                          |
-| TiKV | rocksdb-書き込み期間              | tikv_engine_write_duration          | &lt; 100ms | TiKV RocksDB の書き込みレイテンシ。                                                                                             |
+| TiKV | rocksdb-書き込み期間              | tikv_engine_write_duration          | &lt; 100ms | TiKV RocksDB の書き込みレイテンシー。                                                                                            |
 | TiKV | rocksdb-get-duration        | tikv_engine_max_get_duration        | &lt; 50ms  | TiKV RocksDB の読み取りレイテンシー。                                                                                            |
 | TiKV | rocksdb-シーク期間               | tikv_engine_max_seek_duration       | &lt; 50ms  | 実行する TiKV RocksDB のレイテンシー`seek` .                                                                                    |
 | TiKV | scheduler-pending-cmd-count | tikv_scheduler_pending_commands     | &lt; 1000  | TiKV で停止したコマンドの数。                                                                                                    |
@@ -291,7 +291,7 @@ DETAILS   | the cluster has 2 different tidb versions, execute the sql to see mo
 | TiKV | 地域スコアバランス                   | pd_scheduler_store_status           | &lt; 0.05  | 各 TiKV インスタンスのリージョンスコアが均衡しているかどうかを確認します。インスタンス間の予想差は 5% 未満です。                                                        |
 | TiKV | 店舗利用可能残高                    | pd_scheduler_store_status           | &lt; 0.2   | 各 TiKV インスタンスの使用可能なストレージのバランスが取れているかどうかを確認します。インスタンス間の予想差は 20% 未満です。                                                 |
 | TiKV | 地域数                         | pd_scheduler_store_status           | &lt; 20000 | 各 TiKV インスタンスのリージョン数を確認します。 1 つのインスタンスで予想されるリージョン数は 20,000 未満です。                                                     |
-| PD   | 地域の健康                       | pd_region_health                    | &lt; 100   | クラスタでスケジューリング中のリージョンの数を検出します。予想数は合計で 100 未満です。                                                                       |
+| PD   | 地域の健康                       | pd_region_health                    | &lt; 100   | クラスター内でスケジューリング中のリージョンの数を検出します。予想数は合計で 100 未満です。                                                                     |
 
 さらに、このルールは、TiKV インスタンス内の次のスレッドの CPU 使用率が高すぎるかどうかもチェックします。
 

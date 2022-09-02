@@ -18,10 +18,10 @@ title: TiDB 3.0 Beta Release Notes
     -   `NOT EXISTS`サブクエリを最適化し、アンチ セミ ジョイン[#7842](https://github.com/pingcap/tidb/pull/7842)に変換する
     -   新しい Cascades オプティマイザーをサポートするために`tidb_enable_cascades_planner`の変数を追加します。現在、Cascades オプティマイザはまだ完全には実装されておらず、デフォルトでオフになっています[#7879](https://github.com/pingcap/tidb/pull/7879)
     -   トランザクションでの Index Join の使用のサポート[#7877](https://github.com/pingcap/tidb/pull/7877)
-    -   外部結合の定数伝播を最適化し、結合結果の外部テーブルに関連するフィルタリング条件が、外部結合を介して外部テーブルにプッシュダウンできるようにし、外部結合の無駄な計算を減らし、実行パフォーマンスを向上させます[#7794](https://github.com/pingcap/tidb/pull/7794)
+    -   外部結合の定数伝播を最適化し、結合結果の外部テーブルに関連するフィルタリング条件が外部結合を介して外部テーブルにプッシュダウンできるようにし、外部結合の無駄な計算を減らし、実行パフォーマンスを向上させます[#7794](https://github.com/pingcap/tidb/pull/7794)
     -   冗長な演算子を避けるために、射影消去の最適化ルールを集計消去の後の位置に調整します。 `Project`演算子[#7909](https://github.com/pingcap/tidb/pull/7909)
     -   入力パラメーターが非 NULL 属性を持つ場合、 `IFNULL`関数を最適化し、この関数を削除します[#7924](https://github.com/pingcap/tidb/pull/7924)
-    -   フル テーブル スキャンを回避し、クラスタストレスを軽減するための`_tidb_rowid`構築クエリのサポート範囲[#8047](https://github.com/pingcap/tidb/pull/8047)
+    -   フル テーブル スキャンを回避し、クラスタ ストレスを軽減するための`_tidb_rowid`構築クエリのサポート範囲[#8047](https://github.com/pingcap/tidb/pull/8047)
     -   `IN`サブクエリを最適化して、集計後に内部結合を実行し、 `tidb_opt_insubq_to_join_and_agg`変数を追加して、この最適化ルールを有効にするかどうかを制御し、デフォルトで開く[#7531](https://github.com/pingcap/tidb/pull/7531)
     -   `DO`ステートメントでのサブクエリの使用のサポート[#8343](https://github.com/pingcap/tidb/pull/8343)
     -   外部結合除去の最適化ルールを追加して、不要なテーブル スキャンと結合操作を削減し、実行パフォーマンスを向上させます[#8021](https://github.com/pingcap/tidb/pull/8021)
@@ -43,7 +43,7 @@ title: TiDB 3.0 Beta Release Notes
     -   `tidb_init_chunk_size`変数を追加して、実行エンジンが使用する初期Chunkのサイズを制御します[#8480](https://github.com/pingcap/tidb/pull/8480)
     -   改善`shard_row_id_bits`と自動インクリメント ID のクロスチェック[#8936](https://github.com/pingcap/tidb/pull/8936)
 -   `Prepare`ステートメント
-    -   サブクエリを含む`Prepare`ステートメントをクエリ プラン キャッシュに追加することを禁止して、異なるユーザー変数が入力されたときにクエリ プランが正しいことを保証します[#8064](https://github.com/pingcap/tidb/pull/8064)
+    -   サブクエリを含む`Prepare`ステートメントをクエリ プラン キャッシュに追加することを禁止して、異なるユーザー変数が入力されたときにクエリ プランが正しいことを保証する[#8064](https://github.com/pingcap/tidb/pull/8064)
     -   クエリ プラン キャッシュを最適化して、ステートメントに非決定論関数が含まれている場合にプランを確実にキャッシュできるようにする[#8105](https://github.com/pingcap/tidb/pull/8105)
     -   クエリ プラン キャッシュを最適化して、 `DELETE` / `UPDATE` / `INSERT`のクエリ プランを確実にキャッシュできるようにする[#8107](https://github.com/pingcap/tidb/pull/8107)
     -   クエリ プラン キャッシュを最適化して、 `DEALLOCATE`ステートメントの実行時に対応するプランを削除する[#8332](https://github.com/pingcap/tidb/pull/8332)
@@ -68,7 +68,7 @@ title: TiDB 3.0 Beta Release Notes
     -   MySQL 320 ハンドシェイク プロトコルのサポート[#8812](https://github.com/pingcap/tidb/pull/8812)
     -   自動インクリメント列[#8181](https://github.com/pingcap/tidb/pull/8181)として符号なし`bigint`列を使用するサポート
     -   `SHOW CREATE DATABASE IF NOT EXISTS`構文[#8926](https://github.com/pingcap/tidb/pull/8926)をサポート
-    -   フィルタリング条件にユーザー変数が含まれている場合は、述語プッシュダウン操作を放棄して、ウィンドウ関数の動作をモックするためにユーザー変数を使用する MySQL の動作との互換性を向上させます[#8412](https://github.com/pingcap/tidb/pull/8412)
+    -   フィルタリング条件にユーザー変数が含まれている場合、述語プッシュダウン操作を放棄して、ユーザー変数を使用してウィンドウ関数の動作をモックする MySQL の動作との互換性を向上させます[#8412](https://github.com/pingcap/tidb/pull/8412)
 -   DDL
     -   誤って削除されたテーブルの高速リカバリをサポート[#7937](https://github.com/pingcap/tidb/pull/7937)
     -   `ADD INDEX`の同時実行数の動的な調整をサポート[#8295](https://github.com/pingcap/tidb/pull/8295)
@@ -87,7 +87,7 @@ title: TiDB 3.0 Beta Release Notes
 -   リージョンのメタデータを個別に保存するには`RegionStorage`を追加します[#1237](https://github.com/pingcap/pd/pull/1237)
 -   シャッフル ホットリージョンスケジューラを追加[#1361](https://github.com/pingcap/pd/pull/1361)
 -   スケジューリング パラメーター関連のメトリックを追加する[#1406](https://github.com/pingcap/pd/pull/1406)
--   クラスタラベル関連のメトリックを追加する[#1402](https://github.com/pingcap/pd/pull/1402)
+-   クラスター ラベル関連のメトリックを追加する[#1402](https://github.com/pingcap/pd/pull/1402)
 -   インポート データ シミュレーター[#1263](https://github.com/pingcap/pd/pull/1263)を追加する
 -   リーダー選挙に関する`Watch`の問題を修正[#1396](https://github.com/pingcap/pd/pull/1396)
 

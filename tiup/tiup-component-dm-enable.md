@@ -4,7 +4,7 @@ title: tiup dm enable
 
 # tiup dm を有効にする {#tiup-dm-enable}
 
-`tiup dm enable`コマンドは、マシンの再起動後にクラスタサービスの自動有効化を設定するために使用されます。このコマンドは、指定したノードで`systemctl enable <service>`を実行することにより、サービスの自動有効化を有効にします。
+`tiup dm enable`コマンドは、マシンの再起動後にクラスター サービスの自動有効化を設定するために使用されます。このコマンドは、指定したノードで`systemctl enable <service>`を実行することにより、サービスの自動有効化を有効にします。
 
 ## 構文 {#syntax}
 
@@ -12,13 +12,13 @@ title: tiup dm enable
 tiup dm enable <cluster-name> [flags]
 ```
 
-`<cluster-name>`は、サービスの自動有効化を有効にするクラスタです。
+`<cluster-name>`は、サービスの自動有効化を有効にするクラスターです。
 
 ## オプション {#options}
 
 ### -N, --ノード {#n-node}
 
--   サービスの自動有効化を有効にするノードを指定します。このオプションの値は、ノード ID のコンマ区切りリストです。ノード ID は、 [`tiup dm display`](/tiup/tiup-component-dm-display.md)コマンドによって返されるクラスタステータス テーブルの最初の列から取得できます。
+-   サービスの自動有効化を有効にするノードを指定します。このオプションの値は、ノード ID のコンマ区切りリストです。ノード ID は、 [`tiup dm display`](/tiup/tiup-component-dm-display.md)コマンドによって返されるクラスター ステータス テーブルの最初の列から取得できます。
 -   データ型: `STRINGS`
 -   このオプションがコマンドで指定されていない場合、すべてのノードの自動有効化がデフォルトで有効になります。
 
@@ -28,7 +28,7 @@ tiup dm enable <cluster-name> [flags]
 
 ### -R, --role {#r-role}
 
--   サービスの自動有効化を有効にするロールを指定します。このオプションの値は、ノード ロールのコンマ区切りリストです。 [`tiup dm display`](/tiup/tiup-component-dm-display.md)コマンドで返されるクラスタステータス テーブルの 2 列目から、ノードの役割を取得できます。
+-   サービスの自動有効化を有効にするロールを指定します。このオプションの値は、ノード ロールのコンマ区切りリストです。 [`tiup dm display`](/tiup/tiup-component-dm-display.md)コマンドで返されるクラスター ステータス テーブルの 2 列目から、ノードの役割を取得できます。
 -   データ型: `STRINGS`
 -   このオプションがコマンドで指定されていない場合、すべてのロールの自動有効化がデフォルトで有効になります。
 

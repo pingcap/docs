@@ -3,7 +3,7 @@ title: ADMIN SHOW TELEMETRY | TiDB SQL Statement Reference
 summary: An overview of the usage of ADMIN SHOW TELEMETRY for the TiDB database.
 ---
 
-# 管理者ショー テレメトリー {#admin-show-telemetry}
+# 管理者ショー テレメトリ {#admin-show-telemetry}
 
 `ADMIN SHOW TELEMETRY`ステートメントは、 [テレメトリー](/telemetry.md)機能の一部として PingCAP に報告される情報を示しています。
 

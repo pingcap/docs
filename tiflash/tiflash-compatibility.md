@@ -7,7 +7,7 @@ summary: Learn the TiDB features that are incompatible with TiFlash.
 
 次の状況では、TiFlash は TiDB と互換性がありません。
 
--   TiFlash 計算層では:
+-   TiFlash 計算レイヤーでは:
     -   オーバーフローした数値のチェックはサポートされていません。たとえば、 `BIGINT`タイプ`9223372036854775807 + 9223372036854775807`の 2 つの最大値を加算します。 TiDB でのこの計算の予想される動作は、 `ERROR 1690 (22003): BIGINT value is out of range`エラーを返すことです。ただし、この計算を TiFlash で実行すると、オーバーフロー値`-2`がエラーなしで返されます。
     -   ウィンドウ関数はサポートされていません。
     -   TiKV からのデータの読み取りはサポートされていません。

@@ -5,7 +5,7 @@ summary: An overview of the usage of CHANGE PUMP for the TiDB database.
 
 # ポンプの交換 {#change-pump}
 
-`CHANGE PUMP`ステートメントは、クラスタのPumpのステータス情報を変更します。
+`CHANGE PUMP`ステートメントは、クラスター内のPumpのステータス情報を変更します。
 
 > **ヒント：**
 >

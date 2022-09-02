@@ -5,7 +5,7 @@ summary: An overview of the usage of COMMIT for the TiDB database.
 
 # 専念 {#commit}
 
-このステートメントは、TIDB サーバー内でトランザクションをコミットします。
+このステートメントは、TIDBサーバー内でトランザクションをコミットします。
 
 `BEGIN`または`START TRANSACTION`ステートメントがない場合、TiDB のデフォルトの動作では、すべてのステートメントが独自のトランザクションになり、自動コミットされます。この動作により、MySQL の互換性が確保されます。
 

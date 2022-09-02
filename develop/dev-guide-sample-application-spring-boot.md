@@ -15,25 +15,25 @@ summary: Learn an example of how to build a TiDB application using Spring Boot.
 
 この例に基づいて独自のアプリケーションを構築できます。
 
-## ステップ 1: TiDBクラスタを起動する {#step-1-launch-your-tidb-cluster}
+## ステップ 1: TiDB クラスターを起動する {#step-1-launch-your-tidb-cluster}
 
 <CustomContent platform="tidb">
 
-以下にTiDBクラスタの起動方法を紹介します。
+以下にTiDBクラスターの起動方法を紹介します。
 
-**TiDB Cloudの無料クラスタを使用する**
+**TiDB Cloudの無料クラスターを使用する**
 
-詳細な手順については、 [無料のクラスタを作成する](/develop/dev-guide-build-cluster-in-cloud.md#step-1-create-a-free-cluster)を参照してください。
+詳細な手順については、 [無料のクラスターを作成する](/develop/dev-guide-build-cluster-in-cloud.md#step-1-create-a-free-cluster)を参照してください。
 
-**ローカルクラスタを使用する**
+**ローカル クラスターを使用する**
 
-詳細な手順については、 [ローカル テストクラスタをデプロイする](/quick-start-with-tidb.md#deploy-a-local-test-cluster)または[TiUP を使用して TiDB クラスターをデプロイする](/production-deployment-using-tiup.md)を参照してください。
+詳細な手順については、 [ローカル テスト クラスターをデプロイする](/quick-start-with-tidb.md#deploy-a-local-test-cluster)または[TiUP を使用して TiDBクラスタをデプロイする](/production-deployment-using-tiup.md)を参照してください。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-[無料のクラスタを作成する](/develop/dev-guide-build-cluster-in-cloud.md#step-1-create-a-free-cluster)を参照してください。
+[無料のクラスターを作成する](/develop/dev-guide-build-cluster-in-cloud.md#step-1-create-a-free-cluster)を参照してください。
 
 </CustomContent>
 
@@ -182,13 +182,13 @@ summary: Learn an example of how to build a TiDB application using Spring Boot.
 
 ## ステップ 5: アプリケーションを実行する {#step-5-run-the-application}
 
-このステップでは、アプリケーション コードをコンパイルして実行し、Web アプリケーションを作成します。 Hibernate は`test`データベース内に`player_jpa`テーブルを作成します。アプリケーションの RESTful API を使用してリクエストを行う場合、これらのリクエストは TiDBクラスタで実行され[データベース トランザクション](/develop/dev-guide-transaction-overview.md) 。
+このステップでは、アプリケーション コードをコンパイルして実行し、Web アプリケーションを作成します。 Hibernate は`test`データベース内に`player_jpa`テーブルを作成します。アプリケーションの RESTful API を使用してリクエストを行う場合、これらのリクエストは TiDB クラスターで実行され[データベース トランザクション](/develop/dev-guide-transaction-overview.md) 。
 
 このアプリケーションのコードについて詳しく知りたい場合は、 [実装の詳細](#implementation-details)を参照してください。
 
 ### ステップ 5.1 パラメータの変更 {#step-5-1-change-parameters}
 
-ローカル以外のデフォルトクラスタ、 TiDB Cloudクラスタ、またはリモートクラスタを使用する場合は、 `application.yml` ( `src/main/resources`にあります) の`spring.datasource.url` 、 `spring.datasource.username` 、 `spring.datasource.password`パラメーターを変更します。
+ローカル以外のデフォルト クラスター、 TiDB Cloudクラスター、またはリモート クラスターを使用する場合は、 `application.yml` ( `src/main/resources`にあります) の`spring.datasource.url` 、 `spring.datasource.username` 、 `spring.datasource.password`パラメーターを変更します。
 
 {{< copyable "" >}}
 
@@ -835,7 +835,7 @@ public class PlayerBean {
 
 #### リポジトリ {#repository}
 
-データベース層を抽象化するために、Spring アプリケーションは[`Repository`](https://docs.spring.io/spring-data/jpa/docs/current/reference/html/#repositories)インターフェース、または`Repository`のサブインターフェースを使用します。このインターフェイスは、テーブルなどのデータベース オブジェクトにマップされます。 JPA は、primay キーを使用して[`INSERT`](/sql-statements/sql-statement-insert.md)や[`SELECT`](/sql-statements/sql-statement-select.md)などのいくつかの事前構築済みメソッドを実装します。
+データベースレイヤーを抽象化するために、Spring アプリケーションは[`Repository`](https://docs.spring.io/spring-data/jpa/docs/current/reference/html/#repositories)インターフェース、または`Repository`のサブインターフェースを使用します。このインターフェイスは、テーブルなどのデータベース オブジェクトにマップされます。 JPA は、primay キーを使用して[`INSERT`](/sql-statements/sql-statement-insert.md)や[`SELECT`](/sql-statements/sql-statement-select.md)などのいくつかの事前構築済みメソッドを実装します。
 
 {{< copyable "" >}}
 

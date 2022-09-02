@@ -89,7 +89,7 @@ tiup mirror clone <target-dir> [global-version] [flags]
 
     -   `tiup mirror clone <target-dir> --tidb v6.2.0`コマンドを実行して、TiDB コンポーネントの v6.2.0 バージョンを複製します。
     -   `tiup mirror clone <target-dir> --tidb v6.2.0 --tikv all`コマンドを実行して、TiDB コンポーネントの v6.2.0 バージョンと TiKV コンポーネントのすべてのバージョンを複製します。
-    -   `tiup mirror clone <target-dir> v6.2.0`コマンドを実行して、クラスタのすべてのコンポーネントの v6.2.0 バージョンを複製します。
+    -   `tiup mirror clone <target-dir> v6.2.0`コマンドを実行して、クラスター内のすべてのコンポーネントの v6.2.0 バージョンを複製します。
 
 複製後、署名鍵が自動的に設定されます。
 

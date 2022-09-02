@@ -25,7 +25,7 @@ summary: Learn the hybrid deployment topology of TiDB clusters.
 -   [ハイブリッド展開用のシンプルなテンプレート](https://github.com/pingcap/docs-cn/blob/master/config-templates/simple-multi-instance.yaml)
 -   [ハイブリッド展開の複雑なテンプレート](https://github.com/pingcap/docs/blob/master/config-templates/complex-multi-instance.yaml)
 
-上記の TiDBクラスタトポロジ ファイルの構成項目の詳細な説明については、 [TiUP を使用して TiDB をデプロイするためのトポロジConfiguration / コンフィグレーションファイル](/tiup/tiup-cluster-topology-reference.md)を参照してください。
+上記の TiDB クラスター トポロジ ファイルの構成項目の詳細な説明については、 [TiUP を使用して TiDB をデプロイするためのトポロジConfiguration / コンフィグレーションファイル](/tiup/tiup-cluster-topology-reference.md)を参照してください。
 
 ### 主なパラメータ {#key-parameters}
 
@@ -70,7 +70,7 @@ summary: Learn the hybrid deployment topology of TiDB clusters.
 
 -   ラベル スケジュール設定
 
-    TiKV の複数のインスタンスが単一のマシンにデプロイされるため、物理マシンがダウンすると、 Raftグループはデフォルトの 3 つのレプリカのうち 2 つを失い、クラスタが使用できなくなる可能性があります。この問題に対処するには、ラベルを使用して PD のスマート スケジューリングを有効にします。これにより、 Raftグループが同じマシン上の複数の TiKV インスタンスに 3 つ以上のレプリカを持つことが保証されます。
+    TiKV の複数のインスタンスが単一のマシンにデプロイされるため、物理マシンがダウンすると、 Raftグループはデフォルトの 3 つのレプリカのうち 2 つを失い、クラスターが使用できなくなる可能性があります。この問題に対処するには、ラベルを使用して PD のスマート スケジューリングを有効にします。これにより、 Raftグループが同じマシン上の複数の TiKV インスタンスに 3 つ以上のレプリカを持つことが保証されます。
 
     -   TiKV構成
 
@@ -103,5 +103,5 @@ summary: Learn the hybrid deployment topology of TiDB clusters.
 >
 > -   構成ファイル テンプレートを編集する場合、必要なパラメーター、IP、ポート、およびディレクトリを変更します。
 > -   各コンポーネントは、デフォルトでグローバル`<deploy_dir>/<components_name>-<port>`を`deploy_dir`として使用します。たとえば、TiDB が`4001`ポートを指定する場合、その`deploy_dir`はデフォルトで`/tidb-deploy/tidb-4001`です。したがって、複数インスタンスのシナリオでデフォルト以外のポートを指定する場合、ディレクトリを再度指定する必要はありません。
-> -   構成ファイルで`tidb`ユーザーを手動で作成する必要はありません。 TiUPクラスタコンポーネントは、ターゲット マシンに`tidb`ユーザーを自動的に作成します。ユーザーをカスタマイズしたり、ユーザーと制御マシンとの一貫性を保つことができます。
-> -   展開ディレクトリを相対パスとして構成すると、クラスタはユーザーのホーム ディレクトリに展開されます。
+> -   構成ファイルで`tidb`ユーザーを手動で作成する必要はありません。 TiUP クラスター コンポーネントは、ターゲット マシンに`tidb`ユーザーを自動的に作成します。ユーザーをカスタマイズしたり、ユーザーと制御マシンとの一貫性を保つことができます。
+> -   展開ディレクトリを相対パスとして構成すると、クラスターはユーザーのホーム ディレクトリに展開されます。

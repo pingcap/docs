@@ -3,15 +3,15 @@ title: TiDB Binlog Cluster Deployment
 summary: Learn how to deploy TiDB Binlog cluster.
 ---
 
-# Binlogバイナリログ クラスターの展開 {#tidb-binlog-cluster-deployment}
+# Binlogバイナリログクラスタの展開 {#tidb-binlog-cluster-deployment}
 
 このドキュメントでは、方法について説明し[Binary パッケージを使用して TiDB Binlogをデプロイする](#deploy-tidb-binlog-using-a-binary-package) 。
 
 ## ハードウェア要件 {#hardware-requirements}
 
-PumpとDrainerは、Intel x86-64アーキテクチャを備えた 64 ビット ユニバーサル ハードウェア サーバー プラットフォーム上で展開され、動作します。
+PumpとDrainerは、Intel x86-64アーキテクチャを備えた 64 ビット ユニバーサル ハードウェアサーバープラットフォーム上で展開され、動作します。
 
-開発、テスト、および本番の環境では、サーバー ハードウェアの要件は次のとおりです。
+開発、テスト、および本番の環境では、サーバーハードウェアの要件は次のとおりです。
 
 | サービス    | サーバー数 | CPU  | ディスク                                                                           | メモリー |
 | :------ | :---- | :--- | :----------------------------------------------------------------------------- | :--- |
@@ -20,7 +20,7 @@ PumpとDrainerは、Intel x86-64アーキテクチャを備えた 64 ビット �
 
 ## TiUP を使用して TiDB Binlogをデプロイ {#deploy-tidb-binlog-using-tiup}
 
-TiUP を使用して TiDB Binlogをデプロイすることをお勧めします。そのためには、TiUP を使用して TiDB をデプロイするときに、TiDB Binlogの`drainer`と`pump`のノード情報を[TiDB Binlog展開トポロジ](/tidb-binlog-deployment-topology.md)に追加する必要があります。詳細なデプロイメント情報については、 [TiUP を使用して TiDB クラスターをデプロイする](/production-deployment-using-tiup.md)を参照してください。
+TiUP を使用して TiDB Binlogをデプロイすることをお勧めします。そのためには、TiUP を使用して TiDB をデプロイするときに、TiDB Binlogの`drainer`と`pump`のノード情報を[TiDB Binlog展開トポロジ](/tidb-binlog-deployment-topology.md)に追加する必要があります。詳細なデプロイメント情報については、 [TiUP を使用して TiDBクラスタをデプロイする](/production-deployment-using-tiup.md)を参照してください。
 
 ## バイナリ パッケージを使用して TiDB Binlogをデプロイ {#deploy-tidb-binlog-using-a-binary-package}
 
@@ -364,23 +364,23 @@ PD ノードが 3 つ、TiDB ノードが 1 つ、 Pumpノードが 2 つ、 Dra
 
         コマンド ライン パラメータと構成ファイル パラメータが同じ場合、コマンド ラインのパラメータ値が使用されます。
 
-3.  TiDB サーバーを起動します。
+3.  TiDBサーバーの起動:
 
-    -   PumpとDrainer とDrainer を起動したら、TiDB サーバーの構成ファイルに次のセクションを追加して、binlog を有効にして TiDB サーバーを起動します。
+    -   PumpとDrainer とDrainer を起動したら、TiDBサーバーの構成ファイルに次のセクションを追加して、binlog を有効にして TiDBサーバーを起動します。
 
         ```
         [binlog]
         enable=true
         ```
 
-    -   TiDB サーバーは、登録されたポンプのアドレスを PD から取得し、それらすべてにデータをストリーミングします。登録されたPumpインスタンスがない場合、TiDB サーバーは起動を拒否するか、Pumpインスタンスがオンラインになるまで起動をブロックします。
+    -   TiDBサーバーは、登録されたポンプのアドレスを PD から取得し、それらすべてにデータをストリーミングします。登録されたPumpインスタンスがない場合、TiDBサーバーは起動を拒否するか、Pumpインスタンスがオンラインになるまで起動をブロックします。
 
 > **ノート：**
 >
 > -   TiDB が実行されている場合、少なくとも 1 つのPumpが正常に実行されていることを保証する必要があります。
-> -   TiDB サーバーで TiDB Binlogサービスを有効にするには、TiDB で`-enable-binlog`起動パラメーターを使用するか、TiDB サーバー構成ファイルの [binlog] セクションに enable=true を追加します。
-> -   同じクラスタのすべての TiDB インスタンスで TiDB Binlogサービスが有効になっていることを確認してください。そうしないと、データのレプリケーション中にアップストリームとダウンストリームのデータの不一致が発生する可能性があります。 TiDB Binlogサービスが有効になっていない TiDB インスタンスを一時的に実行する場合は、TiDB 構成ファイルで`run_ddl=false`を設定します。
+> -   TiDBサーバーで TiDB Binlogサービスを有効にするには、TiDB で`-enable-binlog`起動パラメーターを使用するか、TiDBサーバー構成ファイルの [binlog] セクションに enable=true を追加します。
+> -   同じクラスター内のすべての TiDB インスタンスで TiDB Binlogサービスが有効になっていることを確認してください。そうしないと、データのレプリケーション中にアップストリームとダウンストリームのデータの不整合が発生する可能性があります。 TiDB Binlogサービスが有効になっていない TiDB インスタンスを一時的に実行する場合は、TiDB 構成ファイルで`run_ddl=false`を設定します。
 > -   Drainerは、 `ignore schemas`のテーブル (フィルター リスト内のスキーマ) に対する`rename`の DDL 操作をサポートしていません。
-> -   Drainerを既存の TiDBクラスタで開始する場合は、通常、クラスタデータの完全なバックアップを作成し、**スナップショットのタイムスタンプ**を取得し、データをターゲット データベースにインポートしてから、 Drainerを開始して、対応する<strong>スナップショット</strong>から増分データを複製する必要があります。<strong>タイムスタンプ</strong>。
+> -   既存の TiDB クラスターでDrainerを開始する場合は、通常、クラスター データの完全バックアップを作成し、**スナップショット タイムスタンプ**を取得し、データをターゲット データベースにインポートしてから、 Drainerを開始して、対応する<strong>スナップショット</strong>から増分データを複製する必要があります。<strong>タイムスタンプ</strong>。
 > -   ダウンストリーム データベースが TiDB または MySQL の場合、アップストリーム データベースとダウンストリーム データベースの`sql_mode`が一致していることを確認してください。つまり、各 SQL ステートメントが上流で実行され、下流に複製される場合、 `sql_mode`は同じである必要があります。アップストリームとダウンストリームでそれぞれ`select @@sql_mode;`ステートメントを実行して、 `sql_mode`を比較できます。
 > -   DDL ステートメントがアップストリームでサポートされていても、ダウンストリームと互換性がない場合、 Drainerはデータの複製に失敗します。例として、ダウンストリーム データベース MySQL が InnoDB エンジンを使用する場合に`CREATE TABLE t1(a INT) ROW_FORMAT=FIXED;`ステートメントをレプリケートします。この場合、 Drainerで[トランザクションのスキップ](/tidb-binlog/tidb-binlog-faq.md#what-can-i-do-when-some-ddl-statements-supported-by-the-upstream-database-cause-error-when-executed-in-the-downstream-database)を構成し、下流のデータベースで互換性のあるステートメントを手動で実行できます。

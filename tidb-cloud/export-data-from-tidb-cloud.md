@@ -5,7 +5,7 @@ summary: This page has instructions for exporting data from your TiDB cluster in
 
 # TiDB からのデータのエクスポート {#export-data-from-tidb}
 
-このページでは、 TiDB Cloudのクラスタからデータをエクスポートする方法について説明します。
+このページでは、 TiDB Cloudのクラスターからデータをエクスポートする方法について説明します。
 
 TiDB はデータをロックしません。 TiDB から他のデータ プラットフォームにデータを移行できるようにしたい場合があります。 TiDB は MySQL との互換性が高いため、MySQL に適したエクスポート ツールはすべて TiDB にも使用できます。
 

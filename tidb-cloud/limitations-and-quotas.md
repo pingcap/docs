@@ -11,7 +11,7 @@ TiDB Cloudは、作成できる各種類のコンポーネントの数と、TiDB
 >
 > これらの制限またはクォータのいずれかが組織に問題をもたらす場合は、 [TiDB Cloudのサポート](/tidb-cloud/tidb-cloud-support.md)にお問い合わせください。
 
-## クラスターの制限 {#cluster-limits}
+## クラスタの制限 {#cluster-limits}
 
 | 成分                         | リミット |
 | :------------------------- | :--- |
@@ -22,7 +22,7 @@ TiDB Cloudは、作成できる各種類のコンポーネントの数と、TiDB
 >
 > TiDB の一般的な使用制限について詳しく知りたい場合は、 [TiDB の制限事項](https://docs.pingcap.com/tidb/stable/tidb-limitations)を参照してください。
 
-## クラスタ クォータ {#cluster-quotas}
+## クラスタクォータ {#cluster-quotas}
 
 | 成分                               | クォータ (デフォルト) |
 | :------------------------------- | :----------- |

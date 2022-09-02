@@ -74,7 +74,7 @@ TiDB バージョン: 5.3.1
     -   cgroup コントローラーがマウントされていない場合に発生するpanicの問題を修正します[#11569](https://github.com/tikv/tikv/issues/11569)
     -   TiKVの動作停止後、Resolved TSのレイテンシーが増加する問題を修正[#11351](https://github.com/tikv/tikv/issues/11351)
     -   TiKV が GC ワーカがビジー状態の場合、データの範囲を削除できない ( `unsafe_destroy_range`を実行できない) バグを修正[#11903](https://github.com/tikv/tikv/issues/11903)
-    -   ピアを破棄すると高レイテンシが発生する可能性がある問題を修正します[#10210](https://github.com/tikv/tikv/issues/10210)
+    -   ピアを破棄すると高レイテンシーが発生する可能性がある問題を修正します[#10210](https://github.com/tikv/tikv/issues/10210)
     -   領域が空の場合に`any_value`関数が間違った結果を返すバグを修正[#11735](https://github.com/tikv/tikv/issues/11735)
     -   初期化されていないレプリカを削除すると、古いレプリカが再作成される可能性があるという問題を修正します[#10533](https://github.com/tikv/tikv/issues/10533)
     -   新しい選択が終了した後に`Prepare Merge`がトリガーされたが、隔離されたピアに通知されていない場合のメタデータの破損の問題を修正します[#11526](https://github.com/tikv/tikv/issues/11526)
@@ -85,7 +85,7 @@ TiDB バージョン: 5.3.1
     -   TiKV がリバース テーブル スキャンを実行すると、TiKV がメモリ ロックを検出できない問題を修正します[#11440](https://github.com/tikv/tikv/issues/11440)
     -   ディスク容量がいっぱいになると、RocksDB のフラッシュまたは圧縮によってpanicが発生する問題を修正します[#11224](https://github.com/tikv/tikv/issues/11224)
     -   tikv-ctl が正しいリージョン関連の情報を返せないバグを修正[#11393](https://github.com/tikv/tikv/issues/11393)
-    -   インスタンスごとの gRPC リクエストの平均レイテンシが TiKV メトリクスで不正確である問題を修正します[#11299](https://github.com/tikv/tikv/issues/11299)
+    -   インスタンスごとの gRPC リクエストの平均レイテンシーが TiKV メトリクスで不正確である問題を修正します[#11299](https://github.com/tikv/tikv/issues/11299)
 
 -   PD
 
@@ -125,7 +125,7 @@ TiDB バージョン: 5.3.1
         -   コンテナ環境で OOM を修正する[#1798](https://github.com/pingcap/tiflow/issues/1798)
         -   ローディングタスクを停止するとタスクが予期せず転送されるバグを修正[#3771](https://github.com/pingcap/tiflow/issues/3771)
         -   ローダー[#3252](https://github.com/pingcap/tiflow/issues/3252)の`query-status`コマンドに対して間違った進行状況が返される問題を修正します。
-        -   クラスタに異なるバージョンの TiCDC ノードがある場合、HTTP API が機能しない問題を修正します[#3483](https://github.com/pingcap/tiflow/issues/3483)
+        -   クラスタ内に異なるバージョンの TiCDC ノードがある場合、HTTP API が機能しない問題を修正します[#3483](https://github.com/pingcap/tiflow/issues/3483)
         -   S3 ストレージが TiCDC Redo Log [#3523](https://github.com/pingcap/tiflow/issues/3523)で構成されている場合、TiCDC が異常終了する問題を修正します。
         -   デフォルト値をレプリケートできない問題を修正[#3793](https://github.com/pingcap/tiflow/issues/3793)
         -   `batch-replace-enable`が無効になっている場合、MySQL シンクが重複した`replace` SQL ステートメントを生成するバグを修正します[#4501](https://github.com/pingcap/tiflow/issues/4501)
@@ -139,7 +139,7 @@ TiDB バージョン: 5.3.1
         -   DDL ステートメントの特殊なコメントによってレプリケーション タスクが停止する問題を修正します[#3755](https://github.com/pingcap/tiflow/issues/3755)
         -   `config.Metadata.Timeout` [#3352](https://github.com/pingcap/tiflow/issues/3352)の構成が正しくないために発生するレプリケーション停止の問題を修正します。
         -   一部の RHEL リリースでタイムゾーンの問題が原因でサービスを開始できない問題を修正します[#3584](https://github.com/pingcap/tiflow/issues/3584)
-        -   `stopped`クラスタのアップグレード後に変更フィードが自動的に再開される問題を修正します[#3473](https://github.com/pingcap/tiflow/issues/3473)
+        -   `stopped`クラスターのアップグレード後に変更フィードが自動的に再開される問題を修正します[#3473](https://github.com/pingcap/tiflow/issues/3473)
         -   デフォルト値をレプリケートできない問題を修正[#3793](https://github.com/pingcap/tiflow/issues/3793)
         -   MySQL シンクのデッドロック[#2706](https://github.com/pingcap/tiflow/issues/2706)が原因で頻繁に警告が表示される問題を修正
         -   Canal および Maxwell プロトコル[#3676](https://github.com/pingcap/tiflow/issues/3676)で`enable-old-value`構成項目が自動的に`true`に設定されないバグを修正

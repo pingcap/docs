@@ -9,7 +9,7 @@ summary: Learn how to use BR to back up data to and restore data from Amazon S3 
 
 ## アプリケーション シナリオ {#application-scenarios}
 
-Amazon S3 を使用すると、Amazon EC2 にデプロイされた TiDBクラスタのデータを Amazon S3 にすばやくバックアップしたり、Amazon S3 のバックアップ データから TiDBクラスタをすばやく復元したりできます。
+Amazon S3 を使用すると、Amazon EC2 にデプロイされた TiDB クラスターのデータを Amazon S3 にすばやくバックアップしたり、Amazon S3 のバックアップ データから TiDB クラスターをすばやく復元したりできます。
 
 ## S3 にアクセスする権限を設定する {#configure-privileges-to-access-s3}
 

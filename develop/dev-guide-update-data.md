@@ -14,7 +14,7 @@ summary: Learn about how to update data and batch update data.
 
 このドキュメントを読む前に、次の準備が必要です。
 
--   [TiDB Cloud(開発者層) で TiDB クラスターを構築する](/develop/dev-guide-build-cluster-in-cloud.md) .
+-   [TiDB Cloud(開発者層) で TiDBクラスタを構築する](/develop/dev-guide-build-cluster-in-cloud.md) .
 -   [スキーマ設計の概要](/develop/dev-guide-schema-design-overview.md) 、 [データベースを作成する](/develop/dev-guide-create-database.md) 、 [テーブルを作成する](/develop/dev-guide-create-table.md) 、および[セカンダリ インデックスの作成](/develop/dev-guide-create-secondary-indexes.md)を読んでください。
 -   データを`UPDATE`つにしたい場合は、まず[データを挿入する](/develop/dev-guide-insert-data.md)にする必要があります。
 
@@ -194,7 +194,7 @@ VALUES (?, ?, ?, NOW()) ON DUPLICATE KEY UPDATE `score` = ?, `rated_at` = NOW()"
 
 ### 例 {#example}
 
-過去 1 年間に`bookshop`の Web サイトで多くのユーザーから本の評価があったとしますが、元のデザインの 5 段階スケールでは、本の評価に違いがありませんでした。ほとんどの本の評価は`3`です。評価を差別化するために、5 点満点から 10 点満点に切り替えることにしました。
+過去 1 年間に`bookshop`の Web サイトで多くのユーザーから本の評価があったとしますが、元のデザインの 5 段階評価では、本の評価に違いがありませんでした。ほとんどの本の評価は`3`です。評価を差別化するために、5 点満点から 10 点満点に切り替えることにしました。
 
 前の 5 ポイント スケールの`ratings`テーブルのデータに`2`を掛け、評価テーブルに新しい列を追加して、行が更新されたかどうかを示す必要があります。この列を使用すると、 `SELECT`で更新された行をフィルターで除外できます。これにより、スクリプトがクラッシュして複数回行を更新し、不合理なデータが生成されるのを防ぐことができます。
 

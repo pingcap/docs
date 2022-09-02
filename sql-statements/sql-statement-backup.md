@@ -5,15 +5,15 @@ summary: An overview of the usage of BACKUP for the TiDB database.
 
 # バックアップ {#backup}
 
-このステートメントは、TiDBクラスタの分散バックアップを実行するために使用されます。
+このステートメントは、TiDB クラスターの分散バックアップを実行するために使用されます。
 
 `BACKUP`ステートメントは[BRツール](/br/backup-and-restore-overview.md)ステートメントと同じエンジンを使用しますが、バックアップ プロセスが別の BR ツールではなく TiDB 自体によって駆動される点が異なります。 BR のすべての利点と警告は、このステートメントにも適用されます。
 
-`BACKUP`を実行するには、 `BACKUP_ADMIN`または`SUPER`のいずれかの特権が必要です。さらに、バックアップを実行する TiDB ノードとクラスタのすべての TiKV ノードの両方に、宛先への読み取りまたは書き込み権限が必要です。 [セキュリティ強化モード](/system-variables.md#tidb_enable_enhanced_security)が有効になっている場合、ローカル ストレージ ( `local://`で始まるストレージ パス) は許可されません。
+`BACKUP`を実行するには、 `BACKUP_ADMIN`または`SUPER`のいずれかの特権が必要です。さらに、バックアップを実行する TiDB ノードとクラスター内のすべての TiKV ノードの両方に、宛先への読み取りまたは書き込み権限が必要です。 [セキュリティ強化モード](/system-variables.md#tidb_enable_enhanced_security)が有効になっている場合、ローカル ストレージ ( `local://`で始まるストレージ パス) は許可されません。
 
 `BACKUP`ステートメントは、バックアップ タスク全体が終了、失敗、またはキャンセルされるまでブロックされます。 `BACKUP`を実行するには、持続的な接続を準備する必要があります。タスクは[`KILL TIDB QUERY`](/sql-statements/sql-statement-kill.md)ステートメントを使用してキャンセルできます。
 
-一度に実行できるタスクは`BACKUP`と[`RESTORE`](/sql-statements/sql-statement-restore.md)の 1 つだけです。 `BACKUP`または`RESTORE`のステートメントが同じ TiDB サーバーで既に実行されている場合、新しい`BACKUP`の実行は、前のすべてのタスクが完了するまで待機します。
+一度に実行できるタスクは`BACKUP`と[`RESTORE`](/sql-statements/sql-statement-restore.md)の 1 つだけです。 `BACKUP`または`RESTORE`のステートメントが同じ TiDBサーバーで既に実行されている場合、新しい`BACKUP`の実行は、前のすべてのタスクが完了するまで待機します。
 
 `BACKUP`は「tikv」ストレージ エンジンでのみ使用できます。 「unistore」エンジンで`BACKUP`を使用すると失敗します。
 
@@ -87,7 +87,7 @@ BACKUP TABLE `test`.`sbtest01` TO 'local:///mnt/backup/sbtest01/';
 BACKUP TABLE sbtest02, sbtest03, sbtest04 TO 'local:///mnt/backup/sbtest/';
 ```
 
-### クラスタ全体をバックアップする {#back-up-the-entire-cluster}
+### クラスター全体をバックアップする {#back-up-the-entire-cluster}
 
 {{< copyable "" >}}
 

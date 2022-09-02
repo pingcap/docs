@@ -13,11 +13,11 @@ summary: Learn the telemetry feature, how to disable the feature and view its st
 
 > **ノート：**
 >
-> **すべて**の場合において、TiDBクラスタに保存されているユーザー データは共有され<strong>ません</strong>。 [PingCAP プライバシー ポリシー](https://pingcap.com/privacy-policy)も参照できます。
+> **すべて**の場合において、TiDB クラスターに保存されているユーザー データは共有され<strong>ません</strong>。 [PingCAP プライバシー ポリシー](https://pingcap.com/privacy-policy)も参照できます。
 
 ### TiDB {#tidb}
 
-TiDB でテレメトリ収集機能が有効になっている場合、TiDBクラスタは使用状況の詳細を 6 時間ごとに収集します。これらの使用の詳細には、次のものが含まれますが、これらに限定されません。
+TiDB でテレメトリ収集機能が有効になっている場合、TiDB クラスターは使用状況の詳細を 6 時間ごとに収集します。これらの使用の詳細には、次のものが含まれますが、これらに限定されません。
 
 -   ランダムに生成されたテレメトリ ID。
 -   ハードウェア (CPU、メモリ、ディスク) のサイズ、TiDB コンポーネントのバージョン、OS 名などの展開の特性。
@@ -63,7 +63,7 @@ TIUP_CLUSTER_DEBUG=enable tiup cluster list
 
 ### デプロイ時に TiDB テレメトリを無効にする {#disable-tidb-telemetry-at-deployment}
 
-TiDB クラスターをデプロイするときは、 [`enable-telemetry = false`](/tidb-configuration-file.md#enable-telemetry-new-in-v402)を構成して、すべての TiDB インスタンスで TiDB テレメトリ コレクションを無効にします。この設定を使用して、既存の TiDBクラスタでテレメトリを無効にすることもできます。これは、クラスタを再起動するまで有効になりません。
+TiDB クラスターをデプロイするときは、 [`enable-telemetry = false`](/tidb-configuration-file.md#enable-telemetry-new-in-v402)を構成して、すべての TiDB インスタンスで TiDB テレメトリ コレクションを無効にします。この設定を使用して、既存の TiDB クラスターでテレメトリを無効にすることもできます。これは、クラスターを再起動するまで有効になりません。
 
 さまざまな展開ツールでテレメトリを無効にする詳細な手順を以下に示します。
 
@@ -101,11 +101,11 @@ TiUP Playground を起動するときに、上記の構成ファイルに`--db.c
 tiup playground --db.config tidb_config.toml
 ```
 
-詳細は[ローカル TiDB クラスターをすばやくデプロイする](/tiup/tiup-playground.md)を参照してください。
+詳細は[ローカル TiDBクラスタをすばやくデプロイする](/tiup/tiup-playground.md)を参照してください。
 
 </details>
 
-<details><summary>TiUP クラスターを使用したデプロイ</summary>
+<details><summary>TiUPクラスタを使用したデプロイ</summary>
 
 展開トポロジ ファイル`topology.yaml`を変更して、次の内容を追加します。
 
@@ -187,11 +187,11 @@ TiUP Playground を起動するときに、 `--pd.config pd_config.toml`コマ�
 tiup playground --pd.config pd_config.toml
 ```
 
-詳細は[ローカル TiDB クラスターをすばやくデプロイする](/tiup/tiup-playground.md)を参照してください。
+詳細は[ローカル TiDBクラスタをすばやくデプロイする](/tiup/tiup-playground.md)を参照してください。
 
 </details>
 
-<details><summary>TiUP クラスターを使用したデプロイ</summary>
+<details><summary>TiUPクラスタを使用したデプロイ</summary>
 
 展開トポロジ ファイル`topology.yaml`を変更して、次の内容を追加します。
 

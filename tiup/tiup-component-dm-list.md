@@ -28,10 +28,10 @@ tiup dm list [flags]
 
 次のフィールドで構成されるテーブル:
 
--   `Name` :クラスタ名。
--   `User` :クラスタをデプロイしたユーザー。
--   `Version` :クラスタのバージョン。
--   `Path` : コントロール マシン上のクラスタ展開データのパス。
--   `PrivateKey` :クラスタへの秘密鍵のパス。
+-   `Name` : クラスター名。
+-   `User` : クラスターをデプロイしたユーザー。
+-   `Version` : クラスターのバージョン。
+-   `Path` : コントロール マシン上のクラスター展開データのパス。
+-   `PrivateKey` : クラスターへの秘密鍵のパス。
 
 [&lt;&lt; 前のページに戻る - TiUP DMコマンド一覧](/tiup/tiup-component-dm.md#command-list)

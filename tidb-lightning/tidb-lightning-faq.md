@@ -5,9 +5,9 @@ summary: Learn about the frequently asked questions (FAQs) and answers about TiD
 
 # TiDB LightningFAQ {#tidb-lightning-faqs}
 
-## TiDB Lightningでサポートされている TiDB/TiKV/PDクラスタの最小バージョンは何ですか? {#what-is-the-minimum-tidb-tikv-pd-cluster-version-supported-by-tidb-lightning}
+## TiDB Lightningでサポートされている TiDB/TiKV/PD クラスタの最小バージョンは何ですか? {#what-is-the-minimum-tidb-tikv-pd-cluster-version-supported-by-tidb-lightning}
 
-TiDB Lightningのバージョンは、クラスタと同じである必要があります。 Local-backend モードを使用する場合、利用可能な最も古いバージョンは 4.0.0 です。 Importer-backend モードまたは TiDB-backend モードを使用する場合、利用可能な最も古いバージョンは 2.0.9 ですが、3.0 安定バージョンを使用することをお勧めします。
+TiDB Lightningのバージョンは、クラスターと同じである必要があります。 Local-backend モードを使用する場合、利用可能な最も古いバージョンは 4.0.0 です。 Importer-backend モードまたは TiDB-backend モードを使用する場合、利用可能な最も古いバージョンは 2.0.9 ですが、3.0 安定バージョンを使用することをお勧めします。
 
 ## TiDB Lightningは複数のスキーマ (データベース) のインポートをサポートしていますか? {#does-tidb-lightning-support-importing-multiple-schemas-databases}
 
@@ -114,9 +114,9 @@ sql-mode = ""
 
 また、 TiDB Lightningの最後のログでエラーが「コンテキストがキャンセルされました」と表示された場合は、最初の「ERROR」レベルのログを検索する必要があります。通常、この「エラー」レベルのログの後には「終了するシグナルがありました」が続きます。これは、 TiDB Lightningが割り込みシグナルを受信して終了したことを示します。
 
-## TiDB Lightningを使用した後、私の TiDBクラスタが大量の CPU リソースを使用し、実行速度が非常に遅いのはなぜですか? {#why-my-tidb-cluster-is-using-lots-of-cpu-resources-and-running-very-slowly-after-using-tidb-lightning}
+## TiDB Lightningを使用した後、私の TiDB クラスターが大量の CPU リソースを使用し、実行速度が非常に遅いのはなぜですか? {#why-my-tidb-cluster-is-using-lots-of-cpu-resources-and-running-very-slowly-after-using-tidb-lightning}
 
-`tidb-lightning`が異常終了した場合、クラスタは本番環境に適していない「インポート モード」でスタックしている可能性があります。現在のモードは、次のコマンドを使用して取得できます。
+`tidb-lightning`が異常終了した場合、クラスターは本番環境に適していない「インポート モード」でスタックしている可能性があります。現在のモードは、次のコマンドを使用して取得できます。
 
 {{< copyable "" >}}
 
@@ -124,7 +124,7 @@ sql-mode = ""
 tidb-lightning-ctl --config tidb-lightning.toml --fetch-mode
 ```
 
-次のコマンドを使用して、クラスタを強制的に「通常モード」に戻すことができます。
+次のコマンドを使用して、クラスターを強制的に「通常モード」に戻すことができます。
 
 {{< copyable "" >}}
 
@@ -136,11 +136,11 @@ tidb-lightning-ctl --config tidb-lightning.toml --fetch-mode
 
 TiDB Lightningツールセットは、10 ギガビット ネットワーク カードでの使用に最適です。特に`tikv-importer`の場合、1 ギガビット ネットワーク カードは*推奨されません*。
 
-1 ギガビット ネットワーク カードは、合計 120 MB/秒の帯域幅しか提供できず、これをすべてのターゲット TiKV ストアで共有する必要があります。 TiDB Lightningは、1 ギガビット ネットワークのすべての帯域幅を簡単に飽和させ、PD に接続できなくなるため、クラスタをダウンさせる可能性があります。
+1 ギガビット ネットワーク カードは、合計 120 MB/秒の帯域幅しか提供できず、これをすべてのターゲット TiKV ストアで共有する必要があります。 TiDB Lightningは、1 ギガビット ネットワークのすべての帯域幅を簡単に飽和させ、PD に接続できなくなるため、クラスターをダウンさせる可能性があります。
 
-## TiDB Lightningが対象の TiKVクラスタに大量の空き容量を必要とするのはなぜですか? {#why-tidb-lightning-requires-so-much-free-space-in-the-target-tikv-cluster}
+## TiDB Lightningが対象の TiKV クラスタに大量の空き容量を必要とするのはなぜですか? {#why-tidb-lightning-requires-so-much-free-space-in-the-target-tikv-cluster}
 
-3 つのレプリカのデフォルト設定では、ターゲット TiKVクラスタのスペース要件は、データ ソースのサイズの 6 倍です。次の要因がデータ ソースに反映されていないため、余分な &quot;2&quot; の倍数は保守的な見積もりです。
+3 つのレプリカのデフォルト設定では、ターゲット TiKV クラスターのスペース要件は、データ ソースのサイズの 6 倍です。次の要因がデータ ソースに反映されていないため、余分な &quot;2&quot; の倍数は保守的な見積もりです。
 
 -   インデックスが占めるスペース
 -   RocksDB での空間増幅
@@ -165,11 +165,11 @@ TiDB Lightningツールセットは、10 ギガビット ネットワーク カ�
 
 2.  Local-backend を使用している場合は、構成で`sorted-kv-dir`のディレクトリを削除します。 Importer-backend を使用している場合は、 `tikv-importer`をホストしているマシンの`import`ディレクトリ全体を削除します。
 
-3.  必要に応じて、TiDBクラスタ上に作成されたすべてのテーブルとデータベースを削除します。
+3.  必要に応じて、TiDB クラスターで作成されたすべてのテーブルとデータベースを削除します。
 
 4.  残りのメタデータをクリーンアップします。次のいずれかの条件が存在する場合は、メタデータ スキーマを手動でクリーンアップする必要があります。
 
-    -   TiDB Lightning v5.1.x および v5.2.x バージョンの場合、 `tidb-lightning-ctl`コマンドはターゲットクラスタのメタデータ スキーマをクリーンアップしません。手動でクリーンアップする必要があります。
+    -   TiDB Lightning v5.1.x および v5.2.x バージョンの場合、 `tidb-lightning-ctl`コマンドはターゲット クラスターのメタデータ スキーマをクリーンアップしません。手動でクリーンアップする必要があります。
     -   チェックポイント ファイルを手動で削除した場合は、ダウンストリーム メタデータ スキーマを手動でクリーンアップする必要があります。そうしないと、後続のインポートの正確性が影響を受ける可能性があります。
 
     次のコマンドを使用して、メタデータをクリーンアップします。
@@ -204,7 +204,7 @@ TiDB Lightningが遅くなる理由はいくつかあります。
 
 TiDB Lightningは、データ ソースが約 256 MB のサイズの複数のファイルに分割され、データを並列処理できる場合に最適に機能します。各ファイルが大きすぎると、 TiDB Lightningが応答しない場合があります。
 
-データ ソースが CSV で、すべての CSV ファイルに改行制御文字 (U+000A および U+000D) を含むフィールドがない場合は、「厳格な形式」をオンにして、 TiDB Lightningが大きなファイルを自動的に分割できるようにすることができます。
+データ ソースが CSV で、すべての CSV ファイルに改行制御文字 (U+000A および U+000D) を含むフィールドがない場合は、「厳密な形式」をオンにして、 TiDB Lightningが大きなファイルを自動的に分割できるようにすることができます。
 
 ```toml
 [mydumper]
@@ -219,13 +219,13 @@ strict-format = true
 
 **原因**: ローカル データ ソースとリモート インポート データベースのテーブルのチェックサムが異なります。このエラーには、いくつかのより深い理由があります。 `checksum mismatched`を含むログを確認することで、理由をさらに突き止めることができます。
 
-`checksum mismatched`を含む行は、情報`total_kvs: x vs y`を提供します。ここで、 `x`は、インポートの完了後にターゲットクラスタによって計算されたキーと値のペア (KV ペア) の数を示し、 `y`は、ローカル データによって生成されたキーと値のペアの数を示します。ソース。
+`checksum mismatched`を含む行は、情報`total_kvs: x vs y`を提供します。ここで、 `x`は、インポートの完了後にターゲット クラスターによって計算されたキーと値のペア (KV ペア) の数を示し、 `y`は、ローカル データによって生成されたキーと値のペアの数を示します。ソース。
 
--   `x`が大きい場合、ターゲットクラスタに KV ペアが多いことを意味します。
+-   `x`が大きい場合、ターゲット クラスタに KV ペアが多いことを意味します。
     -   インポート前にこのテーブルが空でない可能性があるため、データ チェックサムに影響します。 TiDB Lightningが以前に失敗してシャットダウンしたが、正しく再起動しなかった可能性もあります。
 -   `y`が大きい場合、ローカル データ ソースに KV ペアが多いことを意味します。
     -   ターゲット データベースのチェックサムがすべて 0 の場合は、インポートが行われていないことを意味します。クラスタがビジー状態でデータを受信できない可能性があります。
-    -   エクスポートされたデータに、値が重複している UNIQUE および PRIMARY KEY などの重複データが含まれている可能性や、データでは大文字と小文字が区別されているのに、下流のテーブル構造では大文字と小文字が区別されない可能性があります。
+    -   エクスポートされたデータに、値が重複する UNIQUE および PRIMARY KEY などの重複データが含まれている可能性や、データでは大文字と小文字が区別されているのに、下流のテーブル構造では大文字と小文字が区別されない可能性があります。
 -   その他の考えられる理由
     -   データ ソースが機械で生成され、 Dumplingによってバックアップされていない場合は、データがテーブルの制限に準拠していることを確認してください。たとえば、AUTO_INCREMENT 列は 0 ではなく正である必要があります。
 
@@ -247,7 +247,7 @@ strict-format = true
 
 **原因**: [チェックポイント](/tidb-lightning/tidb-lightning-checkpoints.md)が有効になっていて、 TiDB Lightningまたは TiKV Importer が以前に異常終了しました。偶発的なデータ破損を防ぐために、 TiDB Lightningはエラーが解決されるまで起動しません。
 
-エラー コードは 25 より小さい整数で、可能な値は 0、3、6、9、12、14、15、17、18、20、および 21 です。整数は、インポートで予期しない終了が発生したステップを示します。処理する。整数が大きいほど、出口が発生する後のステップになります。
+エラー コードは 25 より小さい整数で、可能な値は 0、3、6、9、12、14、15、17、18、20、および 21 です。整数は、インポートで予期しない終了が発生したステップを示します。処理する。整数が大きいほど、出口が発生する後のステップです。
 
 **ソリューション**:
 
@@ -279,7 +279,7 @@ tidb-lightning-ctl --config conf/tidb-lightning.toml --checkpoint-error-destroy=
 
 ## <code>cannot guess encoding for input file, please convert to UTF-8 manually</code> {#code-cannot-guess-encoding-for-input-file-please-convert-to-utf-8-manually-code}
 
-**原因**: TiDB Lightningは、テーブル スキーマの UTF-8 および GB-18030 エンコーディングのみを認識します。このエラーは、ファイルがこれらのエンコーディングのいずれでもない場合に発生します。履歴`ALTER TABLE`の実行により、UTF-8 の文字列と GB-18030 の別の文字列が含まれているなど、ファイルにエンコーディングが混在している可能性もあります。
+**原因**: TiDB Lightningは、テーブル スキーマの UTF-8 および GB-18030 エンコーディングのみを認識します。このエラーは、ファイルがこれらのエンコーディングのいずれでもない場合に発生します。過去`ALTER TABLE`の実行により、UTF-8 の文字列と GB-18030 の別の文字列が含まれているなど、ファイルにエンコーディングが混在している可能性もあります。
 
 **ソリューション**:
 
@@ -306,7 +306,7 @@ tidb-lightning-ctl --config conf/tidb-lightning.toml --checkpoint-error-destroy=
 
 2.  Mydumper を使用してデータをエクスポートする場合は、必ず`--skip-tz-utc`フラグを含めてください。
 
-3.  クラスタ全体が同じ最新バージョンの`tzdata` (バージョン 2018i 以降) を使用していることを確認します。
+3.  クラスター全体が同じ最新バージョンの`tzdata` (バージョン 2018i 以降) を使用していることを確認します。
 
     CentOS では、 `yum info tzdata`を実行して、インストールされているバージョンと更新があるかどうかを確認します。 `yum upgrade tzdata`を実行してパッケージをアップグレードします。
 
@@ -320,16 +320,16 @@ tidb-lightning-ctl --config conf/tidb-lightning.toml --checkpoint-error-destroy=
 
 ## <code>rpc error: code = Unimplemented ...</code> TiDB Lightningがモードを切り替えたとき {#encounter-code-rpc-error-code-unimplemented-code-when-tidb-lightning-switches-the-mode}
 
-**原因**:クラスタの一部のノードが`switch-mode`をサポートしていません。たとえば、TiFlash のバージョンが`v4.0.0-rc.2`より前の場合、 [`switch-mode`はサポートされていません](https://github.com/pingcap/tidb-lightning/issues/273) .
+**原因**: クラスタ内の一部のノードが`switch-mode`をサポートしていません。たとえば、TiFlash のバージョンが`v4.0.0-rc.2`より前の場合、 [`switch-mode`はサポートされていません](https://github.com/pingcap/tidb-lightning/issues/273) .
 
 **ソリューション**:
 
--   クラスタに TiFlash ノードがある場合は、クラスタを`v4.0.0-rc.2`以上のバージョンに更新できます。
+-   クラスターに TiFlash ノードがある場合は、クラスターを`v4.0.0-rc.2`以上のバージョンに更新できます。
 -   クラスタをアップグレードしない場合は、TiFlash を一時的に無効にします。
 
 ## <code>tidb lightning encountered error: TiDB version too old, expected '>=4.0.0', found '3.0.18'</code> {#code-tidb-lightning-encountered-error-tidb-version-too-old-expected-4-0-0-found-3-0-18-code}
 
-TiDB Lightning Local-backend は、v4.0.0 以降のバージョンの TiDB クラスターへのデータのインポートのみをサポートします。 Local-backend を使用して v2.x または v3.xクラスタにデータをインポートしようとすると、上記のエラーが報告されます。この時点で、データのインポートに Importer バックエンドまたは TiDB バックエンドを使用するように構成を変更できます。
+TiDB Lightning Local-backend は、v4.0.0 以降のバージョンの TiDB クラスターへのデータのインポートのみをサポートします。 Local-backend を使用して v2.x または v3.x クラスターにデータをインポートしようとすると、上記のエラーが報告されます。この時点で、データのインポートに Importer バックエンドまたは TiDB バックエンドを使用するように構成を変更できます。
 
 一部の`nightly`バージョンは v4.0.0-beta.2 に類似している可能性があります。これら`nightly`のバージョンのTiDB Lightningは、実際には Local-backend をサポートしています。 `nightly`バージョンを使用しているときにこのエラーが発生した場合は、構成を`check-requirements = false`に設定してバージョン チェックをスキップできます。このパラメータを設定する前に、 TiDB Lightningの設定が対応するバージョンをサポートしていることを確認してください。そうしないと、インポートが失敗する可能性があります。
 

@@ -8,15 +8,15 @@ summary: Learn how to manage the privilege.
 TiDB は、 MySQL 5.7の権限管理システム (構文と権限タイプを含む) をサポートしています。 MySQL 8.0 の次の機能もサポートされています。
 
 -   TiDB 3.0 以降の SQL ロール。
--   TiDB 5.1 以降の動的特権。
+-   TiDB 5.1 以降の動的権限。
 
 このドキュメントでは、権限関連の TiDB 操作、TiDB 操作に必要な権限、および権限システムの実装について紹介します。
 
 ## 特典関連の操作 {#privilege-related-operations}
 
-### 特権の付与 {#grant-privileges}
+### 権限の付与 {#grant-privileges}
 
-`GRANT`ステートメントは、ユーザー アカウントに特権を付与します。
+`GRANT`ステートメントは、ユーザー アカウントに権限を付与します。
 
 たとえば、次のステートメントを使用して、 `xxx`ユーザーに`test`データベースを読み取る権限を付与します。
 
@@ -100,9 +100,9 @@ mysql> SELECT user,host,db FROM mysql.db WHERE user='genius';
 
 この例では、 `%` in `te%`のため、 `te`で始まるすべてのデータベースに権限が付与されます。
 
-### 特権を取り消す {#revoke-privileges}
+### 権限を取り消す {#revoke-privileges}
 
-`REVOKE`ステートメントにより、システム管理者はユーザー アカウントから特権を取り消すことができます。
+`REVOKE`ステートメントにより、システム管理者はユーザー アカウントから権限を取り消すことができます。
 
 `REVOKE`ステートメントは`REVOKE`ステートメントに対応します。
 
@@ -112,7 +112,7 @@ REVOKE ALL PRIVILEGES ON `test`.* FROM 'genius'@'localhost';
 
 > **ノート：**
 >
-> 特権を取り消すには、完全に一致する必要があります。一致する結果が見つからない場合、エラーが表示されます。
+> 権限を取り消すには、完全に一致する必要があります。一致する結果が見つからない場合、エラーが表示されます。
 
 ```sql
 mysql> REVOKE ALL PRIVILEGES ON `te%`.* FROM 'genius'@'%';
@@ -183,9 +183,9 @@ SHOW GRANTS FOR `rw_user`@`192.168.%`;
 +------------------------------------------------------------------+
 ```
 
-### 動的特権 {#dynamic-privileges}
+### 動的権限 {#dynamic-privileges}
 
-v5.1 以降、TiDB 機能は、MySQL 8.0 から借用した機能である動的権限をサポートしています。動的特権は、特定の操作へのよりきめ細かいアクセスを実装することにより、 `SUPER`特権を置き換えることを目的としています。たとえば、動的特権を使用して、システム管理者は`BACKUP`つと`RESTORE`の操作しか実行できないユーザー アカウントを作成できます。
+v5.1 以降、TiDB の機能は、MySQL 8.0 から借用した機能である動的権限をサポートしています。動的権限は、特定の操作へのよりきめ細かいアクセスを実装することにより、 `SUPER`特権を置き換えることを目的としています。たとえば、動的権限を使用して、システム管理者は`BACKUP`つと`RESTORE`の操作しか実行できないユーザー アカウントを作成できます。
 
 動的権限には次のものがあります。
 
@@ -194,9 +194,9 @@ v5.1 以降、TiDB 機能は、MySQL 8.0 から借用した機能である動的
 -   `ROLE_ADMIN`
 -   `CONNECTION_ADMIN`
 -   `SYSTEM_VARIABLES_ADMIN`
--   `RESTRICTED_REPLICA_WRITER_ADMIN`を指定すると、権限の所有者は、TiDBクラスタで読み取り専用モードが有効になっている場合に影響を受けることなく、書き込み操作または更新操作を実行できます。詳細については、 [`tidb_restricted_read_only`](/system-variables.md#tidb_restricted_read_only-new-in-v520)を参照してください。
+-   `RESTRICTED_REPLICA_WRITER_ADMIN`を指定すると、権限の所有者は、TiDB クラスターで読み取り専用モードが有効になっている場合に影響を受けることなく、書き込み操作または更新操作を実行できます。詳細については、 [`tidb_restricted_read_only`](/system-variables.md#tidb_restricted_read_only-new-in-v520)を参照してください。
 
-動的特権の完全なセットを表示するには、 `SHOW PRIVILEGES`ステートメントを実行します。プラグインは新しい権限を追加することが許可されているため、割り当て可能な権限のリストは、TiDB のインストールによって異なる場合があります。
+動的権限の完全なセットを表示するには、 `SHOW PRIVILEGES`ステートメントを実行します。プラグインは新しい権限を追加できるため、割り当て可能な権限のリストは、TiDB のインストールによって異なる場合があります。
 
 ## TiDB 操作に必要な権限 {#privileges-required-for-tidb-operations}
 
@@ -323,7 +323,7 @@ mysql> SELECT * FROM INFORMATION_SCHEMA.USER_PRIVILEGES WHERE grantee = "'root'@
 
 `CREATE USER`には`CREATE USER`の特権が必要です。
 
-### ロール/ユーザーの削除 {#drop-role-user}
+### ロール/ユーザーのドロップ {#drop-role-user}
 
 `DROP ROLE`には`DROP ROLE`の特権が必要です。
 
@@ -343,7 +343,7 @@ mysql> SELECT * FROM INFORMATION_SCHEMA.USER_PRIVILEGES WHERE grantee = "'root'@
 
 ### 取り消す {#revoke}
 
-`GRANT`の特権と、 `REVOKE`ステートメントの対象となる特権が必要です。
+`GRANT`の特権と、 `REVOKE`ステートメントの対象となる権限が必要です。
 
 `REVOKE ROLE`には`SUPER`つまたは`ROLE_ADMIN`の特権が必要です。
 
@@ -396,7 +396,7 @@ mysql> SELECT User,Host,Select_priv,Insert_priv FROM mysql.user LIMIT 1;
 
 ### 接続確認 {#connection-verification}
 
-クライアントが接続要求を送信すると、TiDB サーバーはログイン操作を検証します。 TiDB サーバーは最初に`mysql.user`テーブルをチェックします。 `User`と`Host`のレコードが接続要求と一致する場合、TiDB サーバーは`authentication_string`を検証します。
+クライアントが接続要求を送信すると、TiDBサーバーはログイン操作を検証します。 TiDBサーバーは最初に`mysql.user`テーブルをチェックします。 `User`と`Host`のレコードが接続要求と一致する場合、TiDBサーバーは`authentication_string`を検証します。
 
 ユーザー ID は、2 つの情報に基づいています`Host`は接続を開始するホスト、 `User`はユーザー名です。ユーザー名が空でない場合は、指定されたユーザーと完全に一致する必要があります。
 

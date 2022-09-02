@@ -14,12 +14,12 @@ TiDB は、展開操作、データ管理 (インポートとエクスポート�
 
 [TiUP](/tiup/tiup-overview.md)は、物理マシンまたは仮想マシン上の TiDB パッケージ マネージャーです。 TiUP は、TiDB、PD、TiKV などの複数の TiDB コンポーネントを管理できます。 TiDB エコシステムの任意のコンポーネントを開始するには、TiUP コマンドを 1 つ実行するだけです。
 
-TiUP は、Golang で記述されたクラスタ管理コンポーネントである[TiUPクラスタ](https://github.com/pingcap/tiup/tree/master/components/cluster)を提供します。 TiUPクラスタを使用すると、TiDB クラスターのデプロイ、開始、停止、破棄、スケーリング、アップグレードなどの日常的なデータベース操作を簡単に実行し、TiDBクラスタのパラメーターを管理できクラスタ。
+TiUP は、Golang で記述されたクラスター管理コンポーネントである[TiUPクラスター](https://github.com/pingcap/tiup/tree/master/components/cluster)を提供します。 TiUP クラスターを使用すると、TiDB クラスターのデプロイ、開始、停止、破棄、スケーリング、およびアップグレードを含む日常のデータベース操作を簡単に実行し、TiDB クラスターのパラメーターを管理できます。
 
 TiUP の基本は次のとおりです。
 
 -   [用語と概念](/tiup/tiup-terminology-and-concepts.md)
--   [TiUP を使用して TiDB クラスターをデプロイする](/production-deployment-using-tiup.md)
+-   [TiUP を使用して TiDBクラスタをデプロイする](/production-deployment-using-tiup.md)
 -   [TiUP コマンドで TiUP コンポーネントを管理する](/tiup/tiup-component-management.md)
 -   該当する TiDB バージョン: v4.0 以降
 
@@ -29,7 +29,7 @@ TiUP の基本は次のとおりです。
 
 TiDB Operatorの基本は次のとおりです。
 
--   [TiDB Operatorのアーキテクチャー](https://docs.pingcap.com/tidb-in-kubernetes/stable/architecture)
+-   [TiDB Operatorのアーキテクチャ](https://docs.pingcap.com/tidb-in-kubernetes/stable/architecture)
 -   [Kubernetes でTiDB Operatorを使い始める](https://docs.pingcap.com/tidb-in-kubernetes/stable/get-started/)
 -   該当する TiDB バージョン: v2.1 以降
 
@@ -43,7 +43,7 @@ TiDB は、インポートとエクスポート、バックアップと復元、
 
 Dumplingの基本は次のとおりです。
 
--   入力: MySQL/TiDBクラスタ
+-   入力: MySQL/TiDB クラスター
 -   出力: SQL/CSV ファイル
 -   サポートされている TiDB バージョン: すべてのバージョン
 -   Kubernetes のサポート: いいえ
@@ -54,12 +54,12 @@ Dumplingの基本は次のとおりです。
 
 ### 完全なデータのインポート {#full-data-import}
 
-[TiDB Lightning](/tidb-lightning/tidb-lightning-overview.md) (Lightning) は、大量のデータを TiDBクラスタに完全にインポートするために使用されるツールです。現在、 TiDB LightningはDumplingまたは CSV データ ソース経由でエクスポートされた SQL ダンプの読み取りをサポートしています。
+[TiDB Lightning](/tidb-lightning/tidb-lightning-overview.md) (Lightning) は、大量のデータを TiDB クラスターに完全にインポートするために使用されるツールです。現在、 TiDB LightningはDumplingまたは CSV データ ソース経由でエクスポートされた SQL ダンプの読み取りをサポートしています。
 
 TiDB Lightningは 3 つのモードをサポートしています。
 
--   `local` : TiDB Lightningはデータを順序付けられたキーと値のペアに解析し、TiKV に直接インポートします。このモードは通常、大量のデータ (TB レベル) を新しいクラスタにインポートするためのものです。インポート中、クラスタはサービスを提供できません。
--   `importer` : このモードは`local`モードに似ています。このモードを使用するには、追加のコンポーネント`tikv-importer`をデプロイして、キーと値のペアをインポートできるようにする必要があります。ターゲットクラスタが v4.0 以降のバージョンの場合は、 `local`モードを使用することをお勧めします。
+-   `local` : TiDB Lightningはデータを順序付けられたキーと値のペアに解析し、TiKV に直接インポートします。このモードは通常、大量のデータ (TB レベル) を新しいクラスターにインポートするためのものです。インポート中、クラスターはサービスを提供できません。
+-   `importer` : このモードは`local`モードに似ています。このモードを使用するには、追加のコンポーネント`tikv-importer`をデプロイして、キーと値のペアをインポートできるようにする必要があります。ターゲット クラスタが v4.0 以降のバージョンの場合は、 `local`モードを使用することをお勧めします。
 -   `tidb` : このモードは、TiDB/MySQL をバックエンドとして使用します。これは、 `local`モードおよび`importer`モードよりも低速ですが、オンラインで実行できます。また、MySQL へのデータのインポートもサポートしています。
 
 TiDB Lightningの基本は次のとおりです。
@@ -68,7 +68,7 @@ TiDB Lightningの基本は次のとおりです。
     -   Dumplingの出力ファイル
     -   その他の互換性のある CSV ファイル
 -   サポートされている TiDB のバージョン: v2.1 以降
--   Kubernetes のサポート: はい。詳細は[TiDB Lightningを使用して、Kubernetes の TiDBクラスタにデータをすばやく復元する](https://docs.pingcap.com/tidb-in-kubernetes/stable/restore-data-using-tidb-lightning)を参照してください。
+-   Kubernetes のサポート: はい。詳細は[TiDB Lightningを使用して、Kubernetes の TiDB クラスターにデータをすばやく復元する](https://docs.pingcap.com/tidb-in-kubernetes/stable/restore-data-using-tidb-lightning)を参照してください。
 
 > **ノート：**
 >
@@ -76,7 +76,7 @@ TiDB Lightningの基本は次のとおりです。
 
 ### バックアップと復元 {#backup-and-restore}
 
-[復元する](/br/backup-and-restore-overview.md) (BR) は、TiDBクラスタデータの分散バックアップおよび復元用のコマンド ライン ツールです。 BR は、膨大なデータ量の TiDB クラスターを効果的にバックアップおよび復元できます。
+[復元する](/br/backup-and-restore-overview.md) (BR) は、TiDB クラスター データの分散バックアップおよび復元用のコマンド ライン ツールです。 BR は、膨大なデータ量の TiDB クラスターを効果的にバックアップおよび復元できます。
 
 BR の基本は次のとおりです。
 
@@ -86,15 +86,15 @@ BR の基本は次のとおりです。
 
 ### 増分データ複製 {#incremental-data-replication}
 
-[Binlog](/tidb-binlog/tidb-binlog-overview.md)は、TiDB クラスターの binlog を収集し、ほぼリアルタイムの同期とバックアップを提供するツールです。 TiDB クラスタをプライマリ TiDBクラスタのセカンダリクラスタにするなど、TiDB クラスタ間の増分データ レプリケーションに使用できクラスタ。
+[Binlog](/tidb-binlog/tidb-binlog-overview.md)は、TiDB クラスターの binlog を収集し、ほぼリアルタイムの同期とバックアップを提供するツールです。 TiDB クラスタをプライマリ TiDB クラスタのセカンダリ クラスタにするなど、TiDB クラスタ間の増分データ レプリケーションに使用できます。
 
 TiDB Binlogの基本は次のとおりです。
 
 -   入出力：
-    -   入力: TiDBクラスタ
-    -   出力: TiDBクラスタ、MySQL、Kafka、または増分バックアップ ファイル
+    -   入力: TiDB クラスター
+    -   出力: TiDB クラスター、MySQL、Kafka、または増分バックアップ ファイル
 -   サポートされている TiDB のバージョン: v2.1 以降
--   Kubernetes のサポート: はい。詳細については、 [TiDB Binlogクラスターの操作](https://docs.pingcap.com/tidb-in-kubernetes/stable/deploy-tidb-binlog)と[Kubernetes での TiDB BinlogDrainer](https://docs.pingcap.com/tidb-in-kubernetes/stable/configure-tidb-binlog-drainer)を参照してください。
+-   Kubernetes のサポート: はい。詳細については、 [TiDB Binlogクラスタの操作](https://docs.pingcap.com/tidb-in-kubernetes/stable/deploy-tidb-binlog)と[Kubernetes での TiDB BinlogDrainer](https://docs.pingcap.com/tidb-in-kubernetes/stable/configure-tidb-binlog-drainer)を参照してください。
 
 ### データ移行 {#data-migration}
 
@@ -103,7 +103,7 @@ TiDB Binlogの基本は次のとおりです。
 DMの基本は以下の通りです。
 
 -   入力: MySQL/MariaDB
--   出力: TiDBクラスタ
+-   出力: TiDB クラスター
 -   サポートされている TiDB バージョン: すべてのバージョン
 -   Kubernetes のサポート: いいえ、開発中です
 
@@ -112,7 +112,7 @@ DMの基本は以下の通りです。
 データ ボリュームが TB レベルの場合は、次の手順を実行します。
 
 1.  [Dumpling](/dumpling-overview.md)を使用して、MySQL/MariaDB から完全なデータをエクスポートします。
-2.  [TiDB Lightning](/tidb-lightning/tidb-lightning-overview.md)を使用して、手順 1 でエクスポートしたデータを TiDBクラスタにインポートします。
+2.  [TiDB Lightning](/tidb-lightning/tidb-lightning-overview.md)を使用して、手順 1 でエクスポートしたデータを TiDB クラスターにインポートします。
 3.  DM を使用して、MySQL/MariaDB から TiDB に増分データを複製します。
 
 > **ノート：**
@@ -125,4 +125,4 @@ TiDB は OLAP クエリ ツール TiSpark を提供します。これにより�
 
 ### Spark を使用して TiKV データ ソースにクエリを実行する {#query-tikv-data-source-using-spark}
 
-[ティスパーク](/tispark-overview.md)は、TiKV 上で Apache Spark を実行して複雑な OLAP クエリに応答するために構築されたシン レイヤーです。 Spark プラットフォームと分散 TiKVクラスタの両方を利用し、TiDB にシームレスに接着し、ワンストップのハイブリッド トランザクションおよび分析処理 (HTAP) ソリューションを提供します。
+[ティスパーク](/tispark-overview.md)は、TiKV 上で Apache Spark を実行して複雑な OLAP クエリに応答するために構築されたシンレイヤーです。 Spark プラットフォームと分散 TiKV クラスターの両方を利用し、TiDB にシームレスに接着し、ワンストップのハイブリッド トランザクションおよび分析処理 (HTAP) ソリューションを提供します。

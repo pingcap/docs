@@ -83,7 +83,7 @@ TiDB バージョン: 5.2.4
     -   テーブルに仮想列[#30965](https://github.com/pingcap/tidb/issues/30965)がある場合、TiDB が間違ったデータを読み取る可能性がある問題を修正します。
     -   スロークエリログ[#30309](https://github.com/pingcap/tidb/issues/30309)でログレベルの設定が反映されない問題を修正
     -   場合によっては、分割されたテーブルがインデックスを完全に使用してデータをスキャンできないという問題を修正します[#33966](https://github.com/pingcap/tidb/issues/33966)
-    -   TiDB のバックグラウンド HTTP サービスが正常に終了せず、クラスタが異常な状態になることがある問題を修正します[#30571](https://github.com/pingcap/tidb/issues/30571)
+    -   TiDB のバックグラウンド HTTP サービスが正常に終了せず、クラスターが異常な状態になることがある問題を修正します[#30571](https://github.com/pingcap/tidb/issues/30571)
     -   TiDB が予期せず多くの認証失敗のログを出力する可能性がある問題を修正します[#29709](https://github.com/pingcap/tidb/issues/29709)
     -   システム変数`max_allowed_packet`が有効にならない問題を修正[#31422](https://github.com/pingcap/tidb/issues/31422)
     -   自動 ID が範囲外の場合に`REPLACE`ステートメントが他の行を誤って変更する問題を修正します[#29483](https://github.com/pingcap/tidb/issues/29483)
@@ -106,18 +106,18 @@ TiDB バージョン: 5.2.4
     -   cgroup コントローラーがマウントされていない場合に発生するpanicの問題を修正します[#11569](https://github.com/tikv/tikv/issues/11569)
     -   遅れているリージョンピア[#11526](https://github.com/tikv/tikv/issues/11526)でのリージョンマージによって発生する可能性のあるメタデータの破損を修正します。
     -   TiKVの動作停止後、Resolved TSのレイテンシーが増加する問題を修正[#11351](https://github.com/tikv/tikv/issues/11351)
-    -   極端な状況でリージョンのマージ、ConfChange、およびスナップショットが同時に発生した場合に発生するpanicの問題を修正します[#11475](https://github.com/tikv/tikv/issues/11475)
+    -   極端な状況でリージョンのマージ、ConfChange、およびスナップショットが同時に発生したときに発生するpanicの問題を修正します[#11475](https://github.com/tikv/tikv/issues/11475)
     -   tikv-ctl が正しいリージョン関連の情報を返せないバグを修正[#11393](https://github.com/tikv/tikv/issues/11393)
     -   10 進数の除算結果がゼロ[#29586](https://github.com/pingcap/tidb/issues/29586)の場合の負号の問題を修正
     -   ペシミスティック トランザクション モードでプリライト リクエストを再試行すると、まれにデータの不整合が発生する可能性がある問題を修正し[#11187](https://github.com/tikv/tikv/issues/11187) 。
     -   統計スレッド[#11195](https://github.com/tikv/tikv/issues/11195)のデータを監視することによって引き起こされるメモリ リークを修正します。
-    -   インスタンスごとの gRPC リクエストの平均レイテンシが TiKV メトリクスで不正確である問題を修正します[#11299](https://github.com/tikv/tikv/issues/11299)
+    -   インスタンスごとの gRPC リクエストの平均レイテンシーが TiKV メトリクスで不正確である問題を修正します[#11299](https://github.com/tikv/tikv/issues/11299)
     -   ピア ステータスが`Applying` [#11746](https://github.com/tikv/tikv/issues/11746)のときにスナップショット ファイルを削除すると発生するpanicの問題を修正します。
     -   GC ワーカーがビジー状態の場合、TiKV がデータの範囲を削除できない (つまり、内部コマンド`unsafe_destroy_range`が実行される) バグを修正します[#11903](https://github.com/tikv/tikv/issues/11903)
     -   初期化されていないレプリカを削除すると、古いレプリカが再作成される可能性があるという問題を修正します[#10533](https://github.com/tikv/tikv/issues/10533)
     -   TiKV がリバース テーブル スキャンを実行すると、TiKV がメモリ ロックを検出できない問題を修正します[#11440](https://github.com/tikv/tikv/issues/11440)
     -   コルーチンの実行速度が速すぎる場合に時々発生するデッドロックの問題を修正します[#11549](https://github.com/tikv/tikv/issues/11549)
-    -   ピアを破棄すると高レイテンシが発生する可能性がある問題を修正します[#10210](https://github.com/tikv/tikv/issues/10210)
+    -   ピアを破棄すると高レイテンシーが発生する可能性がある問題を修正します[#10210](https://github.com/tikv/tikv/issues/10210)
     -   マージする対象のリージョンが無効であるため、TiKV が予期せずパニックになり、ピアを破棄する問題を修正します[#12232](https://github.com/tikv/tikv/issues/12232)
     -   リージョン[#12048](https://github.com/tikv/tikv/issues/12048)のマージ時にターゲット ピアが初期化されずに破棄されたピアに置き換えられると発生する TiKVpanicの問題を修正します。
     -   スナップショットの適用が中止されたときに発生する TiKVpanicの問題を修正します[#11618](https://github.com/tikv/tikv/issues/11618)
@@ -179,7 +179,7 @@ TiDB バージョン: 5.2.4
         -   DDL ステートメントの特殊なコメントによってレプリケーション タスクが停止する問題を修正します[#3755](https://github.com/pingcap/tiflow/issues/3755)
         -   `config.Metadata.Timeout` [#3352](https://github.com/pingcap/tiflow/issues/3352)の構成が正しくないために発生するレプリケーション停止の問題を修正します。
         -   RHEL リリース[#3584](https://github.com/pingcap/tiflow/issues/3584)でタイムゾーンの問題が原因でサービスを開始できない問題を修正
-        -   `stopped`クラスタのアップグレード後に変更フィードが自動的に再開される問題を修正します[#3473](https://github.com/pingcap/tiflow/issues/3473)
+        -   `stopped`クラスターのアップグレード後に変更フィードが自動的に再開される問題を修正します[#3473](https://github.com/pingcap/tiflow/issues/3473)
         -   MySQL シンクのデッドロック[#2706](https://github.com/pingcap/tiflow/issues/2706)が原因で頻繁に警告が表示される問題を修正
         -   Canal および Maxwell プロトコル[#3676](https://github.com/pingcap/tiflow/issues/3676)で`enable-old-value`構成項目が自動的に`true`に設定されないバグを修正
         -   Avro シンクが JSON 型の列の解析をサポートしていない問題を修正します[#3624](https://github.com/pingcap/tiflow/issues/3624)

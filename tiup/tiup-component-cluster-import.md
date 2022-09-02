@@ -4,11 +4,11 @@ title: tiup cluster import
 
 # tiup cluster import {#tiup-cluster-import}
 
-TiDB v4.0 より前は、TiDB クラスターは主に TiDB Ansible を使用してデプロイされていました。 TiDB v4.0 以降のリリースの場合、TiUP クラスターは、管理のためにクラスターを tiup-cluster コンポーネントに転送するための`import`のコマンドを提供します。
+TiDB v4.0 より前は、TiDB クラスターは主に TiDB Ansible を使用してデプロイされていました。 TiDB v4.0 以降のリリースの場合、TiUPクラスタは、管理のためにクラスターをtiup-clusterコンポーネントに転送するための`import`のコマンドを提供します。
 
 > **ノート：**
 >
-> -   管理のために TiDB Ansible 構成を TiUP にインポートした後は、 **TiDB** Ansible をクラスタ操作に使用しないでください。そうしないと、メタ情報が一致しないために競合が発生する可能性があります。
+> -   管理のために TiDB Ansible 構成を TiUP にインポートした後は、 **TiDB** Ansible をクラスター操作に使用しないでください。そうしないと、メタ情報が一致しないために競合が発生する可能性があります。
 > -   TiDB Ansible を使用してデプロイされたクラスターが次のいずれかの状況にある場合は、 `import`コマンドを使用しないでください。
 >     -   TLS 暗号化が有効になっているクラスター
 >     -   Pure KV クラスター (TiDB インスタンスのないクラスター)
@@ -17,7 +17,7 @@ TiDB v4.0 より前は、TiDB クラスターは主に TiDB Ansible を使用し
 >     -   TiDB Lightning/TiKV Importer が有効になっているクラスター
 >     -   監視メトリクスを収集するためにまだ古い`push`モードを使用しているクラスター (デフォルト モード`pull`を変更しない場合、 `import`コマンドの使用がサポートされます)
 >     -   `node_exporter_port` / `blackbox_exporter_port`を使用して、デフォルト以外のポート ( `group_vars`のディレクトリで構成されたポートに互換性がある) が`inventory.ini`の構成ファイルで個別に構成されているクラスター
-> -   TiDB Ansible を使用して展開されたクラスタの一部のノードが監視コンポーネントなしで展開されている場合、まず TiDB Ansible を使用して対応するノード情報を`inventory.ini`ファイルの`monitored_servers`セクションに追加し、次に`deploy.yaml`プレイブックを使用して監視コンポーネントを完全に展開する必要があります。そうしないと、クラスタを TiUP にインポートした後に保守操作を実行するときに、監視コンポーネントの不足によりエラーが発生する可能性があります。
+> -   TiDB Ansible を使用してデプロイされたクラスター内の一部のノードが監視コンポーネントなしでデプロイされている場合、まず TiDB Ansible を使用して対応するノード情報を`inventory.ini`ファイルの`monitored_servers`セクションに追加し、次に`deploy.yaml`プレイブックを使用して監視コンポーネントを完全にデプロイする必要があります。そうしないと、クラスターを TiUP にインポートした後に保守操作を実行するときに、監視コンポーネントの不足によりエラーが発生する可能性があります。
 
 ## 構文 {#syntax}
 
@@ -53,9 +53,9 @@ tiup cluster import [flags]
 
 ### --rename {#rename}
 
--   インポートされたクラスタの名前を変更します。
+-   インポートされたクラスターの名前を変更します。
 -   データ型: `STRING`
--   デフォルト: NULL。このオプションがコマンドで指定されていない場合、インベントリーで指定された cluster_name がクラスタ名として使用されます。
+-   デフォルト: NULL。このオプションがコマンドで指定されていない場合、インベントリーで指定された cluster_name がクラスター名として使用されます。
 
 ### -h, --help {#h-help}
 
@@ -67,4 +67,4 @@ tiup cluster import [flags]
 
 インポート プロセスのログを表示します。
 
-[&lt;&lt; 前のページに戻る - TiUP Clusterコマンド一覧](/tiup/tiup-component-cluster.md#command-list)
+[&lt;&lt; 前のページに戻る - TiUP クラスタコマンド一覧](/tiup/tiup-component-cluster.md#command-list)

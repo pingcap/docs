@@ -3,9 +3,9 @@ title: Deploy a TiDB Cluster Using TiUP
 summary: Learn how to easily deploy a TiDB cluster using TiUP.
 ---
 
-# TiUP を使用して TiDB クラスターをデプロイする {#deploy-a-tidb-cluster-using-tiup}
+# TiUP を使用して TiDBクラスタをデプロイする {#deploy-a-tidb-cluster-using-tiup}
 
-[TiUP](https://github.com/pingcap/tiup)は、TiDB 4.0 で導入されたクラスタ運用保守ツールです。 TiUP は、Golang で記述されたクラスタ管理コンポーネントである[TiUPクラスタ](https://github.com/pingcap/tiup/tree/master/components/cluster)を提供します。 TiUPクラスタを使用すると、TiDB クラスターのデプロイ、開始、停止、破棄、スケーリング、アップグレードなどの日常的なデータベース操作を簡単に実行し、TiDBクラスタのパラメーターを管理できクラスタ。
+[TiUP](https://github.com/pingcap/tiup)は、TiDB 4.0 で導入されたクラスター運用保守ツールです。 TiUP は、Golang で記述されたクラスター管理コンポーネントである[TiUPクラスター](https://github.com/pingcap/tiup/tree/master/components/cluster)を提供します。 TiUP クラスターを使用すると、TiDB クラスターのデプロイ、開始、停止、破棄、スケーリング、およびアップグレードを含む日常のデータベース操作を簡単に実行し、TiDB クラスターのパラメーターを管理できます。
 
 TiUP は、TiDB、TiFlash、TiDB Binlog、TiCDC、および監視システムの展開をサポートしています。このドキュメントでは、さまざまなトポロジの TiDB クラスターをデプロイする方法を紹介します。
 
@@ -26,7 +26,7 @@ TiUP は、TiDB、TiFlash、TiDB Binlog、TiCDC、および監視システムの
 
 ### デプロイをオンラインで展開する {#deploy-tiup-online}
 
-通常のユーザー アカウントを使用して制御マシンにログインします (例として`tidb`ユーザーを取り上げます)。以降の TiUP のインストールとクラスタ管理は`tidb`ユーザーで実行できます。
+通常のユーザー アカウントを使用して制御マシンにログインします (例として`tidb`ユーザーを取り上げます)。以降の TiUP のインストールとクラスター管理は`tidb`ユーザーで実行できます。
 
 1.  次のコマンドを実行して TiUP をインストールします。
 
@@ -54,7 +54,7 @@ TiUP は、TiDB、TiFlash、TiDB Binlog、TiCDC、および監視システムの
         which tiup
         ```
 
-3.  TiUPクラスタコンポーネントをインストールします。
+3.  TiUP クラスター コンポーネントをインストールします。
 
     {{< copyable "" >}}
 
@@ -62,7 +62,7 @@ TiUP は、TiDB、TiFlash、TiDB Binlog、TiCDC、および監視システムの
     tiup cluster
     ```
 
-4.  TiUP が既にインストールされている場合は、TiUPクラスタコンポーネントを最新バージョンに更新します。
+4.  TiUP が既にインストールされている場合は、TiUP クラスター コンポーネントを最新バージョンに更新します。
 
     {{< copyable "" >}}
 
@@ -70,9 +70,9 @@ TiUP は、TiDB、TiFlash、TiDB Binlog、TiCDC、および監視システムの
     tiup update --self && tiup update cluster
     ```
 
-    `“Update successfully!”`が表示されれば、TiUPクラスタは正常に更新されています。
+    `“Update successfully!”`が表示されれば、TiUP クラスターは正常に更新されています。
 
-5.  TiUPクラスタの現在のバージョンを確認します。
+5.  TiUP クラスターの現在のバージョンを確認します。
 
     {{< copyable "" >}}
 
@@ -82,7 +82,7 @@ TiUP は、TiDB、TiFlash、TiDB Binlog、TiCDC、および監視システムの
 
 ### TiUP をオフラインでデプロイ {#deploy-tiup-offline}
 
-TiUP を使用して TiDBクラスタをオフラインでデプロイするには、このセクションの次の手順を実行します。
+TiUP を使用して TiDB クラスターをオフラインでデプロイするには、このセクションの次の手順を実行します。
 
 #### TiUP オフライン コンポーネント パッケージを準備する {#prepare-the-tiup-offline-component-package}
 
@@ -124,7 +124,7 @@ TiUP オフライン コンポーネント パッケージを準備するには�
         tiup mirror clone tidb-community-server-${version}-linux-amd64 ${version} --os=linux --arch=amd64
         ```
 
-        上記のコマンドは、現在のディレクトリに`tidb-community-server-${version}-linux-amd64`という名前のディレクトリを作成します。このディレクトリには、クラスタの起動に必要なコンポーネント パッケージが含まれています。
+        上記のコマンドは、現在のディレクトリに`tidb-community-server-${version}-linux-amd64`という名前のディレクトリを作成します。このディレクトリには、クラスターの起動に必要なコンポーネント パッケージが含まれています。
 
     2.  `tar`コマンドを使用してコンポーネント パッケージをパックし、隔離された環境のコントロール マシンにパッケージを送信します。
 
@@ -140,7 +140,7 @@ TiUP オフライン コンポーネント パッケージを準備するには�
 
     既存のオフライン ミラーを調整する (新しいバージョンのコンポーネントを追加するなど) 場合は、次の手順を実行します。
 
-    1.  オフライン ミラーをプルする場合、コンポーネントやバージョン情報などのパラメータを介して特定の情報を指定することで、不完全なオフライン ミラーを取得できます。たとえば、次のコマンドを実行して、TiUP v1.10.3 と TiUP Cluster v1.10.3 のオフライン ミラーのみを含むオフライン ミラーをプルできます。
+    1.  オフライン ミラーをプルする場合、コンポーネントやバージョン情報などのパラメータを介して特定の情報を指定することで、不完全なオフライン ミラーを取得できます。たとえば、次のコマンドを実行して、TiUP v1.10.3 と TiUP クラスタ v1.10.3 のオフライン ミラーのみを含むオフライン ミラーをプルできます。
 
         {{< copyable "" >}}
 
@@ -184,7 +184,7 @@ TiUP オフライン コンポーネント パッケージを準備するには�
 
 #### オフライン TiUP コンポーネントをデプロイ {#deploy-the-offline-tiup-component}
 
-パッケージをターゲットクラスタの制御マシンに送信した後、次のコマンドを実行して TiUP コンポーネントをインストールします。
+パッケージをターゲット クラスタの制御マシンに送信した後、次のコマンドを実行して TiUP コンポーネントをインストールします。
 
 {{< copyable "" >}}
 
@@ -198,9 +198,9 @@ source /home/tidb/.bash_profile
 
 ミラーを別のディレクトリに切り替えるには、 `tiup mirror set <mirror-dir>`コマンドを実行します。ミラーをオンライン環境に切り替えるには、 `tiup mirror set https://tiup-mirrors.pingcap.com`コマンドを実行します。
 
-## 手順 3.クラスタトポロジ ファイルを初期化する {#step-3-initialize-cluster-topology-file}
+## 手順 3. クラスター トポロジ ファイルを初期化する {#step-3-initialize-cluster-topology-file}
 
-次のコマンドを実行して、クラスタトポロジ ファイルを作成します。
+次のコマンドを実行して、クラスター トポロジ ファイルを作成します。
 
 {{< copyable "" >}}
 
@@ -259,15 +259,15 @@ alertmanager_servers:
 
 次の例では、7 つの一般的なシナリオについて説明します。対応するリンクのトポロジの説明とテンプレートに従って、構成ファイル (名前は`topology.yaml` ) を変更する必要があります。その他のシナリオでは、それに応じて構成テンプレートを編集します。
 
-| 応用                                                                | Configuration / コンフィグレーションタスク                                    | Configuration / コンフィグレーションファイルのテンプレート                                                                                                                                                                                                                                   | トポロジの説明                                                                                                                                                             |
-| :---------------------------------------------------------------- | :--------------------------------------------------------------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| OLTP                                                              | [最小限のトポロジをデプロイ](/minimal-deployment-topology.md)                 | [シンプルな最小限の構成テンプレート](/config-templates/simple-mini.yaml) <br/> [完全な最小構成テンプレート](/config-templates/complex-mini.yaml)                                                                                                                                                      | これは、tidb-server、tikv-server、および pd-server を含む基本的なクラスタトポロジです。                                                                                                        |
-| HTAP                                                              | [TiFlash トポロジをデプロイ](/tiflash-deployment-topology.md)             | [シンプルな TiFlash 構成テンプレート](/config-templates/simple-tiflash.yaml) <br/> [完全な TiFlash 構成テンプレート](/config-templates/complex-tiflash.yaml)                                                                                                                                    | これは、最小限のクラスタトポロジと共に TiFlash をデプロイするためのものです。 TiFlash は柱状のストレージ エンジンであり、徐々に標準のクラスタトポロジーになります。                                                                         |
-| [TiCDC](/ticdc/ticdc-overview.md)を使用して増分データをレプリケートする              | [TiCDC トポロジをデプロイ](/ticdc-deployment-topology.md)                 | [シンプルな TiCDC 構成テンプレート](/config-templates/simple-cdc.yaml) <br/> [完全な TiCDC 構成テンプレート](/config-templates/complex-cdc.yaml)                                                                                                                                                | これは、最小限のクラスタトポロジと共に TiCDC をデプロイすることです。 TiCDC は、TiDB、MySQL、MQ など、複数のダウンストリーム プラットフォームをサポートしています。                                                                     |
-| [Binlog](/tidb-binlog/tidb-binlog-overview.md)を使用して増分データをレプリケートする | [TiDB Binlogトポロジをデプロイ](/tidb-binlog-deployment-topology.md)      | [シンプルな TiDB Binlog構成テンプレート (MySQL をダウンストリームとして)](/config-templates/simple-tidb-binlog.yaml) <br/> [シンプルな TiDB Binlog構成テンプレート (ダウンストリームとしてのファイル)](/config-templates/simple-file-binlog.yaml) <br/> [完全な TiDB Binlog構成テンプレート](/config-templates/complex-tidb-binlog.yaml) | これは、最小限のクラスタトポロジと共に TiDB Binlogをデプロイするためのものです。                                                                                                                      |
-| Spark で OLAP を使用する                                                | [TiSpark トポロジをデプロイ](/tispark-deployment-topology.md)             | [シンプルな TiSpark 構成テンプレート](/config-templates/simple-tispark.yaml) <br/> [完全な TiSpark 構成テンプレート](/config-templates/complex-tispark.yaml)                                                                                                                                    | これは、最小限のクラスタトポロジと共に TiSpark をデプロイするためのものです。 TiSpark は、TiDB/TiKV 上で Apache Spark を実行して OLAP クエリに応答するために構築されたコンポーネントです。現在、TiSpark に対する TiUP クラスターのサポートはまだ**実験的**段階です。 |
-| 複数のインスタンスを 1 台のマシンにデプロイ                                           | [ハイブリッド トポロジをデプロイする](/hybrid-deployment-topology.md)             | [ハイブリッド展開用のシンプルな構成テンプレート](/config-templates/simple-multi-instance.yaml) <br/> [ハイブリッド展開用の完全な構成テンプレート](/config-templates/complex-multi-instance.yaml)                                                                                                                    | デプロイ トポロジは、ディレクトリ、ポート、リソース比率、およびラベルの構成を追加する必要がある場合にも適用されます。                                                                                                         |
-| データセンター全体に TiDB クラスターをデプロイ                                        | [地理的に分散した展開トポロジをデプロイする](/geo-distributed-deployment-topology.md) | [地理的に分散した配置のConfiguration / コンフィグレーションテンプレート](/config-templates/geo-redundancy-deployment.yaml)                                                                                                                                                                         | このトポロジは、例として 2 つの都市にある 3 つのデータ センターの典型的なアーキテクチャを取り上げています。地理的に分散したデプロイアーキテクチャと、注意が必要な主要な構成について説明します。                                                                 |
+| 応用                                                                | Configuration / コンフィグレーションタスク                                    | Configuration / コンフィグレーションファイルのテンプレート                                                                                                                                                                                                                                   | トポロジの説明                                                                                                                                                               |
+| :---------------------------------------------------------------- | :--------------------------------------------------------------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| OLTP                                                              | [最小限のトポロジをデプロイ](/minimal-deployment-topology.md)                 | [シンプルな最小限の構成テンプレート](/config-templates/simple-mini.yaml) <br/> [完全な最小構成テンプレート](/config-templates/complex-mini.yaml)                                                                                                                                                      | これは、tidb-server、tikv-server、および pd-server を含む基本的なクラスター トポロジです。                                                                                                        |
+| HTAP                                                              | [TiFlash トポロジをデプロイ](/tiflash-deployment-topology.md)             | [シンプルな TiFlash 構成テンプレート](/config-templates/simple-tiflash.yaml) <br/> [完全な TiFlash 構成テンプレート](/config-templates/complex-tiflash.yaml)                                                                                                                                    | これは、最小限のクラスター トポロジと共に TiFlash をデプロイするためのものです。 TiFlash は柱状のストレージ エンジンであり、徐々に標準のクラスター トポロジーになります。                                                                       |
+| [TiCDC](/ticdc/ticdc-overview.md)を使用して増分データをレプリケートする              | [TiCDC トポロジをデプロイ](/ticdc-deployment-topology.md)                 | [シンプルな TiCDC 構成テンプレート](/config-templates/simple-cdc.yaml) <br/> [完全な TiCDC 構成テンプレート](/config-templates/complex-cdc.yaml)                                                                                                                                                | これは、最小限のクラスター トポロジと共に TiCDC をデプロイすることです。 TiCDC は、TiDB、MySQL、MQ など、複数のダウンストリーム プラットフォームをサポートしています。                                                                     |
+| [Binlog](/tidb-binlog/tidb-binlog-overview.md)を使用して増分データをレプリケートする | [TiDB Binlogトポロジをデプロイ](/tidb-binlog-deployment-topology.md)      | [シンプルな TiDB Binlog構成テンプレート (MySQL をダウンストリームとして)](/config-templates/simple-tidb-binlog.yaml) <br/> [シンプルな TiDB Binlog構成テンプレート (ダウンストリームとしてのファイル)](/config-templates/simple-file-binlog.yaml) <br/> [完全な TiDB Binlog構成テンプレート](/config-templates/complex-tidb-binlog.yaml) | これは、最小限のクラスター トポロジと共に TiDB Binlogをデプロイするためのものです。                                                                                                                      |
+| Spark で OLAP を使用する                                                | [TiSpark トポロジをデプロイ](/tispark-deployment-topology.md)             | [シンプルな TiSpark 構成テンプレート](/config-templates/simple-tispark.yaml) <br/> [完全な TiSpark 構成テンプレート](/config-templates/complex-tispark.yaml)                                                                                                                                    | これは、最小限のクラスター トポロジと共に TiSpark をデプロイするためのものです。 TiSpark は、TiDB/TiKV 上で Apache Spark を実行して OLAP クエリに応答するために構築されたコンポーネントです。現在、TiSpark に対する TiUP クラスターのサポートはまだ**実験的**段階です。 |
+| 複数のインスタンスを 1 台のマシンにデプロイ                                           | [ハイブリッド トポロジをデプロイする](/hybrid-deployment-topology.md)             | [ハイブリッド展開用のシンプルな構成テンプレート](/config-templates/simple-multi-instance.yaml) <br/> [ハイブリッド展開用の完全な構成テンプレート](/config-templates/complex-multi-instance.yaml)                                                                                                                    | デプロイ トポロジは、ディレクトリ、ポート、リソース比率、およびラベルの構成を追加する必要がある場合にも適用されます。                                                                                                           |
+| データセンター全体に TiDB クラスターをデプロイ                                        | [地理的に分散した展開トポロジをデプロイする](/geo-distributed-deployment-topology.md) | [地理的に分散した配置のConfiguration / コンフィグレーションテンプレート](/config-templates/geo-redundancy-deployment.yaml)                                                                                                                                                                         | このトポロジは、例として 2 つの都市にある 3 つのデータ センターの典型的なアーキテクチャを取り上げています。地理的に分散したデプロイアーキテクチャと、注意が必要な主要な構成について説明します。                                                                   |
 
 > **ノート：**
 >
@@ -298,7 +298,7 @@ alertmanager_servers:
 > -   `topology.yaml`で構成されたユーザー名は、ターゲット マシンに既に存在します。
 > -   コマンド ラインで`--skip-create-user`オプションを使用して、ユーザーを作成する手順を明示的にスキップしました。
 
-`deploy`コマンドを実行する前に、 `check`および`check --apply`コマンドを使用して、クラスタの潜在的なリスクを検出し、自動的に修復します。
+`deploy`コマンドを実行する前に、 `check`および`check --apply`コマンドを使用して、クラスター内の潜在的なリスクを検出し、自動的に修復します。
 
 1.  潜在的なリスクを確認します。
 
@@ -316,7 +316,7 @@ alertmanager_servers:
     tiup cluster check ./topology.yaml --apply --user root [-p] [-i /home/root/.ssh/gcp_rsa]
     ```
 
-3.  TiDBクラスタをデプロイします。
+3.  TiDB クラスターをデプロイします。
 
     {{< copyable "" >}}
 
@@ -326,11 +326,11 @@ alertmanager_servers:
 
 上記の`tiup cluster deploy`コマンドで:
 
--   `tidb-test`は、デプロイする TiDBクラスタの名前です。
--   `v6.2.0`は、デプロイする TiDBクラスタのバージョンです。 `tiup list tidb`を実行すると、サポートされている最新のバージョンを確認できます。
+-   `tidb-test`は、デプロイする TiDB クラスターの名前です。
+-   `v6.2.0`は、デプロイする TiDB クラスターのバージョンです。 `tiup list tidb`を実行すると、サポートされている最新のバージョンを確認できます。
 -   `topology.yaml`は初期設定ファイルです。
--   `--user root`は、ターゲット マシンに`root`ユーザーとしてログインして、クラスタの展開を完了することを示します。 `root`人のユーザーは、ターゲット マシンに対して`ssh`と`sudo`の特権を持つことが期待されます。または、 `ssh`および`sudo`の権限を持つ他のユーザーを使用して展開を完了することもできます。
--   `[-i]`と`[-p]`はオプションです。パスワードなしでターゲット マシンへのログインを構成した場合、これらのパラメーターは必要ありません。そうでない場合は、2 つのパラメーターのいずれかを選択します。 `[-i]`は、ターゲット マシンにアクセスできる root ユーザー (または`--user`で指定された他のユーザー) の秘密鍵です。 `[-p]`は、対話的にユーザーパスワードを入力するために使用されます。
+-   `--user root`は、ターゲット マシンに`root`ユーザーとしてログインして、クラスターの展開を完了することを示します。 `root`人のユーザーは、ターゲット マシンに対して`ssh`と`sudo`の権限を持つことが期待されます。または、 `ssh`および`sudo`の権限を持つ他のユーザーを使用して展開を完了することもできます。
+-   `[-i]`と`[-p]`はオプションです。パスワードなしでターゲット マシンへのログインを構成した場合、これらのパラメータは必要ありません。そうでない場合は、2 つのパラメーターのいずれかを選択します。 `[-i]`は、ターゲット マシンにアクセスできる root ユーザー (または`--user`で指定された他のユーザー) の秘密鍵です。 `[-p]`は、対話的にユーザーパスワードを入力するために使用されます。
 
 出力ログの最後に、 ``Deployed cluster `tidb-test` successfully``が表示されます。これは、デプロイが成功したことを示します。
 
@@ -342,11 +342,11 @@ alertmanager_servers:
 tiup cluster list
 ```
 
-TiUP は、複数の TiDB クラスターの管理をサポートしています。上記のコマンドは、TiUP によって現在管理されているすべてのクラスターの情報を出力します。これには、クラスタ名、デプロイ ユーザー、バージョン、秘密鍵の情報が含まれます。
+TiUP は、複数の TiDB クラスターの管理をサポートしています。上記のコマンドは、TiUP によって現在管理されているすべてのクラスターの情報を出力します。これには、クラスター名、デプロイ ユーザー、バージョン、秘密鍵の情報が含まれます。
 
-## ステップ 6. デプロイされた TiDBクラスタのステータスを確認する {#step-6-check-the-status-of-the-deployed-tidb-cluster}
+## ステップ 6. デプロイされた TiDB クラスターのステータスを確認する {#step-6-check-the-status-of-the-deployed-tidb-cluster}
 
-たとえば、次のコマンドを実行して`tidb-test`クラスタのステータスを確認します。
+たとえば、次のコマンドを実行して`tidb-test`クラスターのステータスを確認します。
 
 {{< copyable "" >}}
 
@@ -354,17 +354,17 @@ TiUP は、複数の TiDB クラスターの管理をサポートしています
 tiup cluster display tidb-test
 ```
 
-予想される出力には、インスタンス ID、ロール、ホスト、リスニング ポート、ステータス (クラスタがまだ開始されていないため、ステータスは`Down` / `inactive`です)、およびディレクトリ情報が含まれます。
+予想される出力には、インスタンス ID、ロール、ホスト、リスニング ポート、ステータス (クラスターがまだ開始されていないため、ステータスは`Down` / `inactive`です)、およびディレクトリ情報が含まれます。
 
-## ステップ 7. TiDBクラスタを開始する {#step-7-start-a-tidb-cluster}
+## ステップ 7. TiDB クラスターを開始する {#step-7-start-a-tidb-cluster}
 
-TiUP クラスタ v1.9.0以降、新しい起動方法としてセーフスタートが導入されました。この方法でデータベースを起動すると、データベースのセキュリティが向上します。この方法を使用することをお勧めします。
+TiUP cluster v1.9.0以降、新しい起動方法としてセーフスタートが導入されました。この方法でデータベースを起動すると、データベースのセキュリティが向上します。この方法を使用することをお勧めします。
 
 安全な起動後、TiUP は TiDB root ユーザーのパスワードを自動的に生成し、コマンドライン インターフェイスでパスワードを返します。
 
 > **ノート：**
 >
-> -   TiDBクラスタを安全に起動した後、パスワードなしで root ユーザーを使用して TiDB にログインすることはできません。したがって、今後のログインのために、コマンド出力で返されるパスワードを記録する必要があります。
+> -   TiDB クラスターを安全に起動した後、パスワードなしで root ユーザーを使用して TiDB にログインすることはできません。したがって、今後のログインのために、コマンド出力で返されるパスワードを記録する必要があります。
 >
 > -   パスワードは一度だけ生成されます。記録していない場合や忘れてしまった場合は、 [`root`パスワードを忘れる](/user-account-management.md#forget-the-root-password)を参照してパスワードを変更してください。
 
@@ -398,7 +398,7 @@ tiup cluster start tidb-test
 
 出力ログに``Started cluster `tidb-test` successfully``が含まれていれば、開始は成功しています。標準起動後、パスワードなしで root ユーザーを使用してデータベースにログインできます。
 
-## ステップ 8. TiDBクラスタの実行ステータスを確認する {#step-8-verify-the-running-status-of-the-tidb-cluster}
+## ステップ 8. TiDB クラスターの実行ステータスを確認する {#step-8-verify-the-running-status-of-the-tidb-cluster}
 
 {{< copyable "" >}}
 
@@ -406,19 +406,19 @@ tiup cluster start tidb-test
 tiup cluster display tidb-test
 ```
 
-出力ログに`Up`ステータスが表示されている場合、クラスタは正常に動作しています。
+出力ログに`Up`ステータスが表示されている場合、クラスターは正常に動作しています。
 
 ## こちらもご覧ください {#see-also}
 
-[ティフラッシュ](/tiflash/tiflash-overview.md)を TiDBクラスタと共にデプロイした場合は、次のドキュメントを参照してください。
+[ティフラッシュ](/tiflash/tiflash-overview.md)を TiDB クラスターと共にデプロイした場合は、次のドキュメントを参照してください。
 
 -   [TiFlash を使用する](/tiflash/tiflash-overview.md#use-tiflash)
--   [TiFlash クラスターを管理する](/tiflash/maintain-tiflash.md)
+-   [TiFlashクラスタを管理する](/tiflash/maintain-tiflash.md)
 -   [TiFlash アラートのルールと解決策](/tiflash/tiflash-alert-rules.md)
 -   [TiFlash のトラブルシューティング](/tiflash/troubleshoot-tiflash.md)
 
-[TiCDC](/ticdc/ticdc-overview.md)を TiDBクラスタと共にデプロイした場合は、次のドキュメントを参照してください。
+[TiCDC](/ticdc/ticdc-overview.md)を TiDB クラスターと共にデプロイした場合は、次のドキュメントを参照してください。
 
--   [TiCDC クラスターとレプリケーション タスクの管理](/ticdc/manage-ticdc.md)
+-   [TiCDCクラスタとレプリケーション タスクの管理](/ticdc/manage-ticdc.md)
 -   [TiCDC のトラブルシューティング](/ticdc/troubleshoot-ticdc.md)
 -   [TiCDC よくある質問](/ticdc/ticdc-faq.md)

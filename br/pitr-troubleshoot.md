@@ -7,9 +7,9 @@ summary: Learn about common problems of log backup and how to fix them.
 
 このドキュメントでは、ログ バックアップ中の一般的な問題とその解決策をまとめています。
 
-## <code>br restore point</code>コマンドを使用してダウンストリームクラスタを復元した後、TiFlash からデータにアクセスできません。私は何をすべきか？ {#after-restoring-a-downstream-cluster-using-the-code-br-restore-point-code-command-data-cannot-be-accessed-from-tiflash-what-should-i-do}
+## <code>br restore point</code>コマンドを使用してダウンストリーム クラスターを復元した後、TiFlash からデータにアクセスできません。私は何をすべきか？ {#after-restoring-a-downstream-cluster-using-the-code-br-restore-point-code-command-data-cannot-be-accessed-from-tiflash-what-should-i-do}
 
-v6.2.0 では、PITR はクラスタの TiFlash レプリカの復元をサポートしていません。データを復元した後、次のステートメントを実行して、スキーマまたはテーブルの TiFlash レプリカを設定する必要があります。
+v6.2.0 では、PITR はクラスターの TiFlash レプリカの復元をサポートしていません。データを復元した後、次のステートメントを実行して、スキーマまたはテーブルの TiFlash レプリカを設定する必要があります。
 
 ```sql
 ALTER TABLE table_name SET TIFLASH REPLICA count;

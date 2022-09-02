@@ -15,11 +15,11 @@ TiDB DM では、binlog は TiDB データベースで生成されたバイナ�
 
 ### Binlogイベント {#binlog-event}
 
-Binlogイベントは、MySQL または MariaDB サーバー インスタンスに対して行われたデータ変更に関する情報です。これらの binlog イベントは binlog ファイルに保存されます。詳細は[MySQLBinlogイベント](https://dev.mysql.com/doc/internals/en/binlog-event.html)と[MariaDB Binlogイベント](https://mariadb.com/kb/en/library/1-binlog-events/)を参照してください。
+Binlogイベントは、MySQL または MariaDBサーバーインスタンスに対して行われたデータ変更に関する情報です。これらの binlog イベントは binlog ファイルに保存されます。詳細は[MySQLBinlogイベント](https://dev.mysql.com/doc/internals/en/binlog-event.html)と[MariaDB Binlogイベント](https://mariadb.com/kb/en/library/1-binlog-events/)を参照してください。
 
 ### Binlogイベント フィルター {#binlog-event-filter}
 
-[Binlogイベント フィルター](/dm/dm-key-features.md#binlog-event-filter)は、ブロックおよび許可リストのフィルタリング ルールよりもきめ細かいフィルタリング機能です。詳細は[binlog イベント フィルタ](/dm/dm-key-features.md#binlog-event-filter)を参照してください。
+[Binlogイベント フィルター](/dm/dm-key-features.md#binlog-event-filter)は、ブロックおよび許可リストのフィルタリング ルールよりもきめ細かいフィルタリング機能です。詳細は[binlog イベント フィルター](/dm/dm-key-features.md#binlog-event-filter)を参照してください。
 
 ### Binlogの位置 {#binlog-position}
 
@@ -33,7 +33,7 @@ Binlogレプリケーション処理ユニットは、上流のバイナリ ロ�
 
 ブロック &amp; 許可テーブル リストは、一部のデータベースまたは一部のテーブルのすべての操作をフィルタリングまたは移行する機能です。詳細は[ブロック &amp; 許可テーブル リスト](/dm/dm-key-features.md#block-and-allow-table-lists)を参照してください。この機能は[MySQL レプリケーション フィルタリング](https://dev.mysql.com/doc/refman/5.6/en/replication-rules.html)および[MariaDB レプリケーション フィルター](https://mariadb.com/kb/en/replication-filters/)に似ています。
 
-## C {#c}
+## ハ {#c}
 
 ### チェックポイント {#checkpoint}
 
@@ -96,7 +96,7 @@ TiDB データ移行ツールを使用して、アップストリーム デー�
 
 このモードは、次のいずれかの状況で有効になります。
 
--   タスク構成ファイルの`safe-mode`パラメーターが`true`に設定されている場合、セーフ モードは有効なままです。
+-   タスク構成ファイルの`safe-mode`パラメーターが`true`に設定されている場合、セーフ モードは有効なままになります。
 -   シャード マージのシナリオでは、DDL ステートメントがすべてのシャード テーブルで複製される前に、セーフ モードが有効なままになります。
 -   引数`--consistency none`がフル マイグレーション タスクのダンプ処理単位に設定されている場合、エクスポートの開始時の binlog の変更がエクスポートされたデータに影響するかどうかを判断できません。したがって、これらのバイナリログの変更の増分レプリケーションでは、セーフ モードが有効なままになります。
 -   タスクがエラーによって一時停止され、再開された場合、一部のデータに対する操作が 2 回実行される可能性があります。
@@ -109,7 +109,7 @@ TiDB データ移行ツールを使用して、アップストリーム デー�
 
 シャード DDL ロックは、シャード DDL の移行を調整するロック メカニズムです。詳細は[ペシミスティック モードでのシャード テーブルからのデータのマージと移行の実装原則](/dm/feature-shard-merge-pessimistic.md#principles)を参照してください。現在のドキュメントでは、シャード DDL ロックはシャーディング DDL ロックとも呼ばれます。
 
-### シャードグループ {#shard-group}
+### シャード グループ {#shard-group}
 
 シャード グループは、マージされてダウンストリームの同じテーブルに移行されるすべてのアップストリーム シャード テーブルです。 TiDB DM の実装には、2 レベルのシャード グループが使用されます。詳細は[ペシミスティック モードでのシャード テーブルからのデータのマージと移行の実装原則](/dm/feature-shard-merge-pessimistic.md#principles)を参照してください。現在のドキュメントでは、シャード グループはシャーディング グループとも呼ばれます。
 

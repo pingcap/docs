@@ -27,7 +27,7 @@ TiDB を使い始める前に、TiDB がどのように機能するかのいく�
 
 -   [TiDB トランザクションの概要](/transaction-overview.md)を読んで TiDB でのトランザクションの仕組みを理解するか、 [アプリケーション開発者向けの取引メモ](/develop/dev-guide-transaction-overview.md)を調べてアプリケーション開発に必要なトランザクションの知識を学んでください。
 -   理解する[アプリケーションが TiDB と対話する方法](#the-way-applications-interact-with-tidb) ．
--   分散データベース TiDB およびTiDB Cloudを構築するためのコア コンポーネントと概念については、無料のオンライン コース[TiDB アーキテクチャの基本](https://freeclasses.edu.pingcap.com/catalog/info/id:203/?utm_source=docs-dev-guide)を参照してください。
+-   分散データベース TiDB およびTiDB Cloudを構築するためのコア コンポーネントと概念については、無料のオンライン コース[TiDBアーキテクチャの基本](https://freeclasses.edu.pingcap.com/catalog/info/id:203/?utm_source=docs-dev-guide)を参照してください。
 
 ## TiDB トランザクション メカニズム {#tidb-transaction-mechanisms}
 

@@ -5,11 +5,11 @@ summary: Learn how to choose different import modes of TiDB Lightning.
 
 # TiDB Lightningインポート モード {#tidb-lightning-import-modes}
 
-TiDB Lightningは、2 つの[バックエンド](/tidb-lightning/tidb-lightning-glossary.md#back-end)で 2 つのインポート モードをサポートします。バックエンドは、 TiDB Lightningがターゲットクラスタにデータをインポートする方法を決定します。
+TiDB Lightningは、2 つの[バックエンド](/tidb-lightning/tidb-lightning-glossary.md#back-end)で 2 つのインポート モードをサポートします。バックエンドは、 TiDB Lightningがターゲット クラスタにデータをインポートする方法を決定します。
 
 -   **Local-backend** : TiDB Lightningは、最初にデータをキーと値のペアにエンコードし、並べ替えてローカルの一時ディレクトリに保存し、これらのキーと値のペアを各 TiKV ノードに*アップロード*します。次に、 TiDB Lightningは TiKV 取り込みインターフェイスを呼び出して、データを TiKV の RocksDB に書き込みます。初期化されたデータのインポートについては、インポート速度が速い local-backend を検討してください。
 
--   **TiDB バックエンド**: TiDB Lightningは、最初にデータを SQL ステートメントにエンコードし、次にこれらのステートメントを実行してデータをインポートします。ターゲットクラスタが実稼働環境にある場合、またはターゲット テーブルに既にデータがある場合は、TiDB バックエンドを検討してください。
+-   **TiDB バックエンド**: TiDB Lightningは、最初にデータを SQL ステートメントにエンコードし、次にこれらのステートメントを実行してデータをインポートします。ターゲット クラスターが実稼働環境にある場合、またはターゲット テーブルに既にデータがある場合は、TiDB バックエンドを検討してください。
 
 | バックエンド                   | ローカル バックエンド    | TiDB バックエンド   |
 | :----------------------- | :------------- | :------------ |
@@ -23,9 +23,9 @@ TiDB Lightningは、2 つの[バックエンド](/tidb-lightning/tidb-lightning-
 
 > **注**:
 >
-> -   ローカル バックエンド モードで運用中の TiDBクラスタにデータをインポートしないでください。これは、オンライン アプリケーションに深刻な影響を与えます。
-> -   デフォルトでは、複数のTiDB Lightningインスタンスを起動して同じ TiDBクラスタにデータをインポートすることはできません。代わりに、 [並行輸入品](/tidb-lightning/tidb-lightning-distributed-import.md)機能を使用する必要があります。
-> -   複数のTiDB Lightningインスタンスを使用して同じターゲット データベースにデータをインポートする場合は、複数のバックエンドを使用しないでください。たとえば、ローカル バックエンドと TiDB バックエンドの両方を使用して TiDBクラスタにデータをインポートしないでください。
+> -   ローカル バックエンド モードで運用中の TiDB クラスターにデータをインポートしないでください。これは、オンライン アプリケーションに深刻な影響を与えます。
+> -   デフォルトでは、複数のTiDB Lightningインスタンスを開始して、同じ TiDB クラスターにデータをインポートすることはできません。代わりに、 [並行輸入品](/tidb-lightning/tidb-lightning-distributed-import.md)機能を使用する必要があります。
+> -   複数のTiDB Lightningインスタンスを使用して同じターゲット データベースにデータをインポートする場合は、複数のバックエンドを使用しないでください。たとえば、ローカル バックエンドと TiDB バックエンドの両方を使用して TiDB クラスターにデータをインポートしないでください。
 
 ## ローカル バックエンド {#local-backend}
 

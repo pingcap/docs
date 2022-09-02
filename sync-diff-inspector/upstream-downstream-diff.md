@@ -9,7 +9,7 @@ TiDB Binlogを使用して、TiDB のアップストリームおよびダウン�
 
 ## ステップ 1: <code>ts-map</code>を取得する {#step-1-obtain-code-ts-map-code}
 
-`ts-map`を取得するには、下流の TiDBクラスタで次の SQL ステートメントを実行します。
+`ts-map`を取得するには、下流の TiDB クラスターで次の SQL ステートメントを実行します。
 
 ```sql
 mysql> select * from tidb_binlog.checkpoint;

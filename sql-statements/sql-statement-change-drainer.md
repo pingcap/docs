@@ -5,7 +5,7 @@ summary: An overview of the usage of CHANGE DRAINER for the TiDB database.
 
 # ドレイナーの交換 {#change-drainer}
 
-`CHANGE DRAINER`ステートメントは、クラスタのDrainerの状況情報を変更します。
+`CHANGE DRAINER`ステートメントは、クラスター内のDrainerのステータス情報を変更します。
 
 > **ヒント：**
 >

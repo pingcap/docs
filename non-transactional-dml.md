@@ -240,7 +240,7 @@ BATCH ON id LIMIT 2 DELETE /*+ USE_INDEX(t)*/ FROM t WHERE v < 6;
 
 非トランザクション DML `BATCH ON $C$ LIMIT $N$ DELETE FROM ... WHERE $P$`の場合、$C$ は分割に使用される列、$N$ はバッチ サイズ、$P$ はフィルター条件です。
 
-1.  元のステートメントのフィルター条件 $P$ と指定された分割用の列 $C$ に従って、TiDB は $P$ を満たすすべての $C$ を照会します。 TiDB はこれらの $C$ を $N$ に従ってグループ $B_1 \dots B_k$ に分類します。すべての $B_i$ のそれぞれについて、TiDB はその最初と最後の $C$ を $S_i$ と $E_i$ として保持します。このステップで実行されたクエリ ステートメントは、 [`DRY RUN QUERY`](/non-transactional-dml.md#query-the-batch-dividing-statement)で表示できます。
+1.  元のステートメントのフィルター条件 $P$ と指定された分割列 $C$ に従って、TiDB は $P$ を満たすすべての $C$ をクエリします。 TiDB はこれらの $C$ を $N$ に従ってグループ $B_1 \dots B_k$ に分類します。すべての $B_i$ のそれぞれについて、TiDB はその最初と最後の $C$ を $S_i$ と $E_i$ として保持します。このステップで実行されたクエリ ステートメントは、 [`DRY RUN QUERY`](/non-transactional-dml.md#query-the-batch-dividing-statement)で表示できます。
 2.  $B_i$ に含まれるデータは、$P_i$: $C$ BETWEEN $S_i$ AND $E_i$ を満たすサブセットです。 $P_i$ を使用して、各バッチで処理する必要があるデータの範囲を絞り込むことができます。
 3.  $B_i$ の場合、TiDB は上記の条件を元のステートメントの`WHERE`条件に埋め込み、WHERE ($P_i$) AND ($P$) を作成します。このステップの実行結果は[`DRY RUN`](/non-transactional-dml.md#query-the-statements-corresponding-to-the-first-and-the-last-batches)で確認できます。
 4.  すべてのバッチについて、新しいステートメントを順番に実行します。各グループ化のエラーが収集および結合され、すべてのグループ化が完了した後、非トランザクション DML ステートメント全体の結果として返されます。

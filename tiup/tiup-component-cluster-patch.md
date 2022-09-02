@@ -4,7 +4,7 @@ title: tiup cluster patch
 
 # tiup cluster patch {#tiup-cluster-patch}
 
-クラスタの実行中にサービスのバイナリを動的に置き換える必要がある場合 (つまり、置き換えプロセス中にクラスタを利用できるようにしておく必要がある場合)、 `tiup cluster patch`コマンドを使用できます。コマンドの実行後、TiUP は次のことを行います。
+クラスターの実行中にサービスのバイナリを動的に置き換える必要がある場合 (つまり、置き換えプロセス中にクラスターを利用できるようにしておく必要がある場合)、 `tiup cluster patch`コマンドを使用できます。コマンドの実行後、TiUP は次のことを行います。
 
 -   置換用のバイナリ パッケージをターゲット マシンにアップロードします。
 -   ターゲット サービスが TiKV、TiFlash、TiDB Binlogなどのストレージ サービスである場合、TiUP はまず API を介して関連するノードをオフラインにします。
@@ -18,7 +18,7 @@ title: tiup cluster patch
 tiup cluster patch <cluster-name> <package-path> [flags]
 ```
 
--   `<cluster-name>` : 操作するクラスタの名前。
+-   `<cluster-name>` : 操作するクラスターの名前。
 -   `<package-path>` : 置換に使用されるバイナリ パッケージへのパス。
 
 ### 準備 {#preparation}
@@ -28,7 +28,7 @@ tiup cluster patch <cluster-name> <package-path> [flags]
 -   置き換えるコンポーネントの名前`${component}` (tidb、tikv、pd...)、コンポーネントの`${version}` (v4.0.0、v4.0.1 ...)、およびオペレーティング システム`${os}` ( `linux` ) とプラットフォーム`${arch}`を特定します。コンポーネントが実行される場所。
 -   コマンド`wget https://tiup-mirrors.pingcap.com/${component}-${version}-${os}-${arch}.tar.gz -O /tmp/${component}-${version}-${os}-${arch}.tar.gz`を使用して、現在のコンポーネント パッケージをダウンロードします。
 -   `mkdir -p /tmp/package && cd /tmp/package`を実行して、ファイルをパックするための一時ディレクトリを作成します。
--   `tar xf /tmp/${component}-${version}-${os}-${arch}.tar.gz`を実行して、元のバイナリ パッケージを展開します。
+-   `tar xf /tmp/${component}-${version}-${os}-${arch}.tar.gz`を実行して、元のバイナリ パッケージを解凍します。
 -   `find .`を実行して、一時パッケージ ディレクトリのファイル構造を表示します。
 -   バイナリ ファイルまたは構成ファイルを、一時ディレクトリ内の対応する場所にコピーします。
 -   `tar czf /tmp/${component}-hotfix-${os}-${arch}.tar.gz *`を実行して、ファイルを一時ディレクトリにパックします。
@@ -38,7 +38,7 @@ tiup cluster patch <cluster-name> <package-path> [flags]
 
 ### --overwrite {#overwrite}
 
--   特定のコンポーネント (TiDB や TiKV など) にパッチを適用した後、tiupクラスタがコンポーネントをスケールアウトすると、TiUP はデフォルトで元のコンポーネント バージョンを使用します。将来クラスタがスケールアウトするときにパッチを適用するバージョンを使用するには、コマンドでオプション`--overwrite`を指定する必要があります。
+-   特定のコンポーネント (TiDB や TiKV など) にパッチを適用した後、tiup クラスターがコンポーネントをスケールアウトすると、TiUP はデフォルトで元のコンポーネント バージョンを使用します。将来クラスターがスケールアウトするときにパッチを適用するバージョンを使用するには、コマンドでオプション`--overwrite`を指定する必要があります。
 -   データ型: `BOOLEAN`
 -   このオプションはデフォルトで無効になっており、値は`false`です。このオプションを有効にするには、このオプションをコマンドに追加し、値`true`を渡すか、値を何も渡さないでください。
 
@@ -54,7 +54,7 @@ tiup cluster patch <cluster-name> <package-path> [flags]
 
 ### -N, --ノード {#n-node}
 
--   置き換えるノードを指定します。このオプションの値は、ノード ID のコンマ区切りリストです。 `tiup cluster display`コマンドで返される[クラスタステータス テーブル](/tiup/tiup-component-cluster-display.md)の最初の列からノード ID を取得できます。
+-   置き換えるノードを指定します。このオプションの値は、ノード ID のコンマ区切りリストです。 `tiup cluster display`コマンドで返される[クラスタ ステータス テーブル](/tiup/tiup-component-cluster-display.md)の最初の列からノード ID を取得できます。
 -   データ型: `STRINGS`
 -   このオプションが指定されていない場合、TiUP はデフォルトで置き換えるノードを選択しません。
 
@@ -64,7 +64,7 @@ tiup cluster patch <cluster-name> <package-path> [flags]
 
 ### -R, --role {#r-role}
 
--   置き換える役割を指定します。このオプションの値は、ノードの役割のコンマ区切りリストです。 `tiup cluster display`コマンドで返される[クラスタステータス テーブル](/tiup/tiup-component-cluster-display.md)の 2 列目から、ノードにデプロイされているロールを取得できます。
+-   置き換えるロールを指定します。このオプションの値は、ノードの役割のコンマ区切りリストです。 `tiup cluster display`コマンドで返される[クラスタ ステータス テーブル](/tiup/tiup-component-cluster-display.md)の 2 列目から、ノードにデプロイされているロールを取得できます。
 -   データ型: `STRINGS`
 -   このオプションが指定されていない場合、TiUP はデフォルトで置き換えるロールを選択しません。
 
@@ -74,7 +74,7 @@ tiup cluster patch <cluster-name> <package-path> [flags]
 
 ### &#x20;--offline {#offline}
 
--   現在のクラスタが実行されていないことを宣言します。このオプションが指定されている場合、TiUP はサービス リーダーを別のノードに追い出したり、サービスを再起動したりせず、クラスタコンポーネントのバイナリ ファイルのみを置き換えます。
+-   現在のクラスターが実行されていないことを宣言します。このオプションが指定されている場合、TiUP はサービス リーダーを別のノードに追い出したり、サービスを再起動したりせず、クラスター コンポーネントのバイナリ ファイルのみを置き換えます。
 -   データ型: `BOOLEAN`
 -   このオプションはデフォルトで無効になっており、値は`false`です。このオプションを有効にするには、このオプションをコマンドに追加し、値`true`を渡すか、値を何も渡さないでください。
 
@@ -86,6 +86,6 @@ tiup cluster patch <cluster-name> <package-path> [flags]
 
 ## 出力 {#outputs}
 
-tiup-cluster の実行ログ。
+tiup-clusterの実行ログ。
 
-[&lt;&lt; 前のページに戻る - TiUP Clusterコマンド一覧](/tiup/tiup-component-cluster.md#command-list)
+[&lt;&lt; 前のページに戻る - TiUP クラスタコマンド一覧](/tiup/tiup-component-cluster.md#command-list)

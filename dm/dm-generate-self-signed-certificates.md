@@ -7,7 +7,7 @@ summary: Use `openssl` to generate self-signed certificates.
 
 このドキュメントでは、 `openssl`を使用して自己署名証明書を生成する例を示します。また、要求に応じて要件を満たす証明書と鍵を生成することもできます。
 
-インスタンスクラスタのトポロジが次のようになっているとします。
+インスタンス クラスタのトポロジが次のようになっているとします。
 
 | 名前   | ホスト IP       | サービス    |
 | ---- | ------------ | ------- |
@@ -68,7 +68,7 @@ summary: Use `openssl` to generate self-signed certificates.
 
 ## 個々のコンポーネントの証明書を発行する {#issue-certificates-for-individual-components}
 
-### クラスタで使用される可能性のある証明書 {#certificates-that-might-be-used-in-the-cluster}
+### クラスターで使用される可能性のある証明書 {#certificates-that-might-be-used-in-the-cluster}
 
 -   DM-master が他のコンポーネントの DM-master を認証するために使用する`master`の証明書。
 -   DM-worker が他のコンポーネントに対して DM-worker を認証するために使用する`worker`の証明書。
@@ -100,7 +100,7 @@ DM-master インスタンスに証明書を発行するには、次の手順を�
     find / -name openssl.cnf
     ```
 
-3.  `openssl.cnf`を編集し、 `[ req ]`フィールドの下に`req_extensions = v3_req`を追加し、 `[ v3_req ]`フィールドの下に`subjectAltName = @alt_names`を追加します。最後に、新しいフィールドを作成し、上記のクラスタトポロジの説明に従って`Subject Alternative Name` (SAN) の情報を編集します。
+3.  `openssl.cnf`を編集し、 `[ req ]`フィールドの下に`req_extensions = v3_req`を追加し、 `[ v3_req ]`フィールドの下に`subjectAltName = @alt_names`を追加します。最後に、新しいフィールドを作成し、上記のクラスター トポロジの説明に従って`Subject Alternative Name` (SAN) の情報を編集します。
 
     ```
     [ alt_names ]
@@ -170,7 +170,7 @@ DM-master インスタンスに証明書を発行するには、次の手順を�
     openssl genrsa -out client-key.pem 2048
     ```
 
-2.  証明書要求ファイルを生成します (この手順では、証明書に Common Name を割り当てることもできます。これは、サーバーがクライアントの ID を検証できるようにするために使用されます。各コンポーネントは既定では検証を有効にしません。有効にすることができます。それは構成ファイルにあります):
+2.  証明書要求ファイルを生成します (この手順では、証明書に Common Name を割り当てることもできます。これは、サーバーがクライアントの ID を検証できるようにするために使用されます。各コンポーネントは、既定では検証を有効にしておらず、有効にすることができます。それは構成ファイルにあります):
 
     {{< copyable "" >}}
 

@@ -109,7 +109,7 @@ set SESSION tidb_isolation_read_engines = "engine list separated by commas";
 
 </CustomContent>
 
-クエリ対象のテーブルに指定されたエンジンのレプリカがない場合 (たとえば、エンジンが「tiflash」として構成されているが、テーブルに TiFlash レプリカがない場合)、クエリはエラーを返します。
+照会されたテーブルに指定されたエンジンのレプリカがない場合 (たとえば、エンジンが「tiflash」として構成されているが、テーブルに TiFlash レプリカがない場合)、クエリはエラーを返します。
 
 ## 手動ヒント {#manual-hint}
 

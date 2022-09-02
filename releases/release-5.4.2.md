@@ -93,8 +93,8 @@ TiDB バージョン: 5.4.2
         -   ファイル名の競合によりデータが失われる可能性がある問題を修正します[#5486](https://github.com/pingcap/tiflow/issues/5486)
         -   リージョンリーダーが見つからず、再試行が制限[#5230](https://github.com/pingcap/tiflow/issues/5230)を超えた場合に発生するレプリケーションの中断を修正します。
         -   MySQL Sink が誤ったチェックポイントを保存する可能性があるバグを修正Ts [#5107](https://github.com/pingcap/tiflow/issues/5107)
-        -   HTTP サーバーでゴルーチン リークが発生する可能性があるバグを修正します[#5303](https://github.com/pingcap/tiflow/issues/5303)
-        -   メタリージョンの変更によりレイテンシが増加する可能性がある問題を修正します[#4756](https://github.com/pingcap/tiflow/issues/4756) [#4762](https://github.com/pingcap/tiflow/issues/4762)
+        -   HTTPサーバーでゴルーチン リークが発生する可能性があるバグを修正します[#5303](https://github.com/pingcap/tiflow/issues/5303)
+        -   メタリージョンの変更によりレイテンシーが増加する可能性がある問題を修正します[#4756](https://github.com/pingcap/tiflow/issues/4756) [#4762](https://github.com/pingcap/tiflow/issues/4762)
 
     -   TiDB データ移行 (DM)
 

@@ -5,7 +5,7 @@ summary: Learn how to schedule placement of tables and partitions using SQL stat
 
 # SQL の配置規則 {#placement-rules-in-sql}
 
-SQL の配置ルールは、SQL インターフェイスを使用して TiKVクラスタのデータの保存場所を指定できるようにする機能です。この機能を使用すると、テーブルとパーティションが特定の地域、データ センター、ラック、またはホストにスケジュールされます。これは、低コストで高可用性戦略を最適化したり、データのローカル レプリカをローカルの古い読み取りに使用できるようにしたり、データの局所性要件を順守したりするなどのシナリオに役立ちます。
+SQL の配置ルールは、SQL インターフェイスを使用して TiKV クラスター内のデータの保存場所を指定できるようにする機能です。この機能を使用すると、テーブルとパーティションが特定の地域、データ センター、ラック、またはホストにスケジュールされます。これは、低コストで高可用性戦略を最適化したり、データのローカル レプリカをローカルの古い読み取りに使用できるようにしたり、データの局所性要件を順守したりするなどのシナリオに役立ちます。
 
 > **ノート：**
 >
@@ -51,7 +51,7 @@ DROP PLACEMENT POLICY myplacementpolicy;
 
 ## 現在の配置ルールをビュー {#view-current-placement-rules}
 
-テーブルに配置ルールがアタッチされている場合、 [`SHOW CREATE TABLE`](/sql-statements/sql-statement-show-create-table.md)の出力で配置ルールを表示できます。利用可能なポリシーの定義を表示するには、 [`SHOW CREATE PLACEMENT POLICY`](/sql-statements/sql-statement-show-create-placement-policy.md)を実行します。
+テーブルに配置ルールがアタッチされている場合、 [`SHOW CREATE TABLE`](/sql-statements/sql-statement-show-create-table.md)の出力で配置ルールを確認できます。利用可能なポリシーの定義を表示するには、 [`SHOW CREATE PLACEMENT POLICY`](/sql-statements/sql-statement-show-create-placement-policy.md)を実行します。
 
 ```sql
 tidb> SHOW CREATE TABLE t1\G
@@ -102,7 +102,7 @@ SELECT * FROM information_schema.partitions WHERE tidb_placement_policy_name IS 
 
 > **ノート：**
 >
-> -   配置オプションは、各 TiKV ノードの構成で正しく指定されたラベルに依存します。たとえば、 `PRIMARY_REGION`オプションは TiKV の`region`ラベルに依存します。 TiKVクラスタで使用可能なすべてのラベルの概要を表示するには、ステートメント[`SHOW PLACEMENT LABELS`](/sql-statements/sql-statement-show-placement-labels.md)を使用します。
+> -   配置オプションは、各 TiKV ノードの構成で正しく指定されたラベルに依存します。たとえば、 `PRIMARY_REGION`オプションは TiKV の`region`ラベルに依存します。 TiKV クラスターで使用可能なすべてのラベルの概要を表示するには、ステートメント[`SHOW PLACEMENT LABELS`](/sql-statements/sql-statement-show-placement-labels.md)を使用します。
 >
 >     ```sql
 >     mysql> show placement labels;

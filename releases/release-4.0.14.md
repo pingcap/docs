@@ -30,7 +30,7 @@ TiDB バージョン: 4.0.14
 -   TiDB ダッシュボード
 
     -   OIDC SSO をサポートします。 OIDC 互換の SSO サービス (Okta や Auth0 など) を設定することで、ユーザーは SQL パスワードを入力せずに TiDB ダッシュボードにログインできます。 [#960](https://github.com/pingcap/tidb-dashboard/pull/960)
-    -   **デバッグ API** UI を追加します。これは、高度なデバッグのためにいくつかの一般的な TiDB および PD 内部 API を呼び出すコマンド ラインの代替方法です[#927](https://github.com/pingcap/tidb-dashboard/pull/927)
+    -   **デバッグ API** UI を追加します。これは、高度なデバッグのためにいくつかの一般的な TiDB および PD 内部 API を呼び出すためのコマンド ラインの代替方法です[#927](https://github.com/pingcap/tidb-dashboard/pull/927)
 
 ## 改良点 {#improvements}
 
@@ -44,7 +44,7 @@ TiDB バージョン: 4.0.14
 
 -   TiKV
 
-    -   最初にステータス サーバーをシャットダウンして、クライアントがシャットダウン ステータスを正しく確認できることを確認します[#10504](https://github.com/tikv/tikv/pull/10504)
+    -   最初にステータスサーバーをシャットダウンして、クライアントがシャットダウン ステータスを正しく確認できることを確認します[#10504](https://github.com/tikv/tikv/pull/10504)
     -   古いピアに常に応答して、これらのピアがより迅速にクリアされるようにします[#10400](https://github.com/tikv/tikv/pull/10400)
     -   TiCDC シンクのメモリ消費を制限する[#10147](https://github.com/tikv/tikv/pull/10147)
     -   リージョンが大きすぎる場合は、偶数分割を使用して分割プロセスを高速化します[#10275](https://github.com/tikv/tikv/pull/10275)
@@ -66,7 +66,7 @@ TiDB バージョン: 4.0.14
 
     -   Dumpling
 
-        -   アップストリームが TiDB v3.xクラスタの場合は、常に`_tidb_rowid`を使用してテーブルを分割します。これにより、TiDB のメモリ使用量を削減できます[#306](https://github.com/pingcap/dumpling/pull/306)
+        -   アップストリームが TiDB v3.x クラスターである場合は、常に`_tidb_rowid`を使用してテーブルを分割します。これにより、TiDB のメモリ使用量を削減できます[#306](https://github.com/pingcap/dumpling/pull/306)
 
     -   TiCDC
 
@@ -74,7 +74,7 @@ TiDB バージョン: 4.0.14
         -   ソーターの I/O エラーをより使いやすくする[#1976](https://github.com/pingcap/tiflow/pull/1976)
         -   KV クライアントのリージョン増分スキャンに同時実行制限を追加して、TiKV [#1926](https://github.com/pingcap/tiflow/pull/1926)のプレッシャーを軽減します
         -   テーブル メモリ消費量のメトリックを追加します[#1884](https://github.com/pingcap/tiflow/pull/1884)
-        -   TiCDC サーバー構成に`capture-session-ttl`を追加します[#2169](https://github.com/pingcap/tiflow/pull/2169)
+        -   TiCDCサーバー構成に`capture-session-ttl`を追加します[#2169](https://github.com/pingcap/tiflow/pull/2169)
 
 ## バグの修正 {#bug-fixes}
 
@@ -124,7 +124,7 @@ TiDB バージョン: 4.0.14
 
     -   **プロファイリング**UI がすべての TiDB インスタンスをプロファイリングできないという問題を修正します[#944](https://github.com/pingcap/tidb-dashboard/pull/944)
     -   **ステートメント**UI に「計画数」が表示されない問題を修正します[#939](https://github.com/pingcap/tidb-dashboard/pull/939)
-    -   クラスタのアップグレード後に**スロー クエリ**UI に「不明なフィールド」エラーが表示されることがある問題を修正します[#902](https://github.com/pingcap/tidb-dashboard/issues/902)
+    -   クラスターのアップグレード後に**スロー クエリ**UI に「不明なフィールド」エラーが表示されることがある問題を修正します[#902](https://github.com/pingcap/tidb-dashboard/issues/902)
 
 -   ティフラッシュ
 

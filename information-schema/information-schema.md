@@ -43,7 +43,7 @@ summary: TiDB implements the ANSI-standard information_schema for viewing system
 | [`TABLE_CONSTRAINTS`](/information-schema/information-schema-table-constraints.md)                                         | 主キー、一意のインデックス、および外部キーに関する情報を提供します。                                                |
 | `TABLE_PRIVILEGES`                                                                                                         | TiDB では実装されていません。ゼロ行を返します。                                                        |
 | `TRIGGERS`                                                                                                                 | TiDB では実装されていません。ゼロ行を返します。                                                        |
-| [`USER_PRIVILEGES`](/information-schema/information-schema-user-privileges.md)                                             | 現在のユーザーに関連付けられている特権を要約します。                                                        |
+| [`USER_PRIVILEGES`](/information-schema/information-schema-user-privileges.md)                                             | 現在のユーザーに関連付けられている権限を要約します。                                                        |
 | [`VARIABLES_INFO`](/information-schema/information-schema-variables-info.md)                                               | TiDB システム変数に関する情報を提供します。                                                          |
 | [`VIEWS`](/information-schema/information-schema-views.md)                                                                 | 現在のユーザーが表示できるビューのリストを提供します。ランニング`SHOW FULL TABLES WHERE table_type = 'VIEW'`に似ている |
 
@@ -55,19 +55,19 @@ summary: TiDB implements the ANSI-standard information_schema for viewing system
 | [`CLIENT_ERRORS_SUMMARY_BY_HOST`](/information-schema/client-errors-summary-by-host.md)            | クライアント要求によって生成され、クライアントに返されたエラーと警告の概要を提供します。                        |
 | [`CLIENT_ERRORS_SUMMARY_BY_USER`](/information-schema/client-errors-summary-by-user.md)            | クライアントによって生成されたエラーと警告の概要を提供します。                                     |
 | [`CLIENT_ERRORS_SUMMARY_GLOBAL`](/information-schema/client-errors-summary-global.md)              | クライアントによって生成されたエラーと警告の概要を提供します。                                     |
-| [`CLUSTER_CONFIG`](https://docs.pingcap.com/tidb/stable/information-schema-cluster-config)         | TiDBクラスタ全体の構成設定に関する詳細を提供します。この表はTiDB Cloudには適用されません。                |
+| [`CLUSTER_CONFIG`](https://docs.pingcap.com/tidb/stable/information-schema-cluster-config)         | TiDB クラスター全体の構成設定に関する詳細を提供します。この表はTiDB Cloudには適用されません。              |
 | `CLUSTER_DEADLOCKS`                                                                                | `DEADLOCKS`テーブルのクラスター レベルのビューを提供します。                                |
 | [`CLUSTER_HARDWARE`](https://docs.pingcap.com/tidb/stable/information-schema-cluster-hardware)     | 各 TiDB コンポーネントで検出された基盤となる物理ハードウェアの詳細を提供します。この表はTiDB Cloudには適用されません。 |
-| [`CLUSTER_INFO`](/information-schema/information-schema-cluster-info.md)                           | 現在のクラスタトポロジの詳細を提供します。                                               |
-| [`CLUSTER_LOAD`](https://docs.pingcap.com/tidb/stable/information-schema-cluster-load)             | クラスタの TiDB サーバーの現在の負荷情報を提供します。この表はTiDB Cloudには適用されません。              |
-| [`CLUSTER_LOG`](https://docs.pingcap.com/tidb/stable/information-schema-cluster-log)               | TiDBクラスタ全体のログを提供します。この表はTiDB Cloudには適用されません。                        |
+| [`CLUSTER_INFO`](/information-schema/information-schema-cluster-info.md)                           | 現在のクラスタ トポロジの詳細を提供します。                                              |
+| [`CLUSTER_LOAD`](https://docs.pingcap.com/tidb/stable/information-schema-cluster-load)             | クラスター内の TiDB サーバーの現在の負荷情報を提供します。この表はTiDB Cloudには適用されません。            |
+| [`CLUSTER_LOG`](https://docs.pingcap.com/tidb/stable/information-schema-cluster-log)               | TiDB クラスター全体のログを提供します。この表はTiDB Cloudには適用されません。                      |
 | `CLUSTER_PROCESSLIST`                                                                              | `PROCESSLIST`テーブルのクラスター レベルのビューを提供します。                              |
 | `CLUSTER_SLOW_QUERY`                                                                               | `SLOW_QUERY`テーブルのクラスター レベルのビューを提供します。                               |
 | `CLUSTER_STATEMENTS_SUMMARY`                                                                       | `STATEMENTS_SUMMARY`テーブルのクラスター レベルのビューを提供します。                       |
 | `CLUSTER_STATEMENTS_SUMMARY_HISTORY`                                                               | `STATEMENTS_SUMMARY_HISTORY`テーブルのクラスター レベルのビューを提供します。               |
 | `CLUSTER_TIDB_TRX`                                                                                 | `TIDB_TRX`テーブルのクラスター レベルのビューを提供します。                                 |
-| [`CLUSTER_SYSTEMINFO`](https://docs.pingcap.com/tidb/stable/information-schema-cluster-systeminfo) | クラスタのサーバーのカーネル パラメータ構成に関する詳細を提供します。この表はTiDB Cloudには適用されません。         |
-| [`DATA_LOCK_WAITS`](/information-schema/information-schema-data-lock-waits.md)                     | TiKV サーバーのロック待機情報を提供します。                                            |
+| [`CLUSTER_SYSTEMINFO`](https://docs.pingcap.com/tidb/stable/information-schema-cluster-systeminfo) | クラスター内のサーバーのカーネル パラメーター構成に関する詳細を提供します。この表はTiDB Cloudには適用されません。      |
+| [`DATA_LOCK_WAITS`](/information-schema/information-schema-data-lock-waits.md)                     | TiKVサーバーのロック待機情報を提供します。                                             |
 | [`DDL_JOBS`](/information-schema/information-schema-ddl-jobs.md)                                   | `ADMIN SHOW DDL JOBS`と同様の出力を提供します                                   |
 | [`DEADLOCKS`](/information-schema/information-schema-deadlocks.md)                                 | 最近発生したいくつかのデッドロック エラーの情報を提供します。                                     |
 | [`INSPECTION_RESULT`](https://docs.pingcap.com/tidb/stable/information-schema-inspection-result)   | 内部診断チェックをトリガーします。この表はTiDB Cloudには適用されません。                           |
@@ -78,7 +78,7 @@ summary: TiDB implements the ANSI-standard information_schema for viewing system
 | [`METRICS_TABLES`](https://docs.pingcap.com/tidb/stable/information-schema-metrics-tables)         | `METRICS_SCHEMA`のテーブルの PromQL 定義を提供します。この表はTiDB Cloudには適用されません。     |
 | [`PLACEMENT_POLICIES`](https://docs.pingcap.com/tidb/stable/information-schema-placement-policies) | すべての配置ポリシーに関する情報を提供します。この表はTiDB Cloudには適用されません。                     |
 | [`SEQUENCES`](/information-schema/information-schema-sequences.md)                                 | シーケンスの TiDB 実装は、MariaDB に基づいています。                                   |
-| [`SLOW_QUERY`](/information-schema/information-schema-slow-query.md)                               | 現在の TiDB サーバーでのスロー クエリに関する情報を提供します。                                 |
+| [`SLOW_QUERY`](/information-schema/information-schema-slow-query.md)                               | 現在の TiDBサーバーでのスロー クエリに関する情報を提供します。                                  |
 | [`STATEMENTS_SUMMARY`](/statement-summary-tables.md)                                               | MySQL の performance_schema ステートメントの概要に似ています。                        |
 | [`STATEMENTS_SUMMARY_HISTORY`](/statement-summary-tables.md)                                       | MySQL の performance_schema ステートメントの要約履歴に似ています。                      |
 | [`TABLE_STORAGE_STATS`](/information-schema/information-schema-table-storage-stats.md)             | ストレージ内のテーブル サイズに関する詳細を提供します。                                        |

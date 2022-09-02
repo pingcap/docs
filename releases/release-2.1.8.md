@@ -39,7 +39,7 @@ TiDB アンシブル バージョン: 2.1.8
 -   `regionScatterer`が無効な`OperatorStep` [#1482](https://github.com/pingcap/pd/pull/1482)を生成する可能性がある問題を修正
 -   ホット ストアでキーの統計が正しくない問題を修正します[#1487](https://github.com/pingcap/pd/pull/1487)
 -   `MergeRegion`オペレーター[#1495](https://github.com/pingcap/pd/pull/1495)のタイムアウトが短すぎる問題を修正
--   TSO 要求を処理する PD サーバーの経過時間メトリックを追加します[#1502](https://github.com/pingcap/pd/pull/1502)
+-   TSO 要求を処理する PDサーバーの経過時間メトリックを追加します[#1502](https://github.com/pingcap/pd/pull/1502)
 
 ## TiKV {#tikv}
 
@@ -49,7 +49,7 @@ TiDB アンシブル バージョン: 2.1.8
 
 ## ツール {#tools}
 
--   Lightning 用にテーブルをインポートする順序を最適化して、インポート プロセス中にクラスタで`Checksum`と`Analyze`を実行する大きなテーブルの影響を減らし、 `Checksum`と`Analyze`の成功率を向上させます[#156](https://github.com/pingcap/tidb-lightning/pull/156)
+-   Lightning 用にテーブルをインポートする順序を最適化して、インポート プロセス中にクラスターで`Checksum`と`Analyze`を実行する大きなテーブルの影響を減らし、 `Checksum`と`Analyze`の成功率を向上させます[#156](https://github.com/pingcap/tidb-lightning/pull/156)
 -   KV エンコーダーの追加の解析作業を回避するために、データ ソース ファイルのコンテンツを TiDB の`types.Datum`に直接解析することにより、Lightning のエンコーディング SQL パフォーマンスを 50% 向上させ[#145](https://github.com/pingcap/tidb-lightning/pull/145) 。
 -   TiDB Binlog Pumpに`storage.sync-log`の構成項目を追加して、 Pump [#529](https://github.com/pingcap/tidb-binlog/pull/529)で非同期にローカル ストレージのディスクをフラッシュすることをサポートします。
 -   TiDB Binlog PumpとDrainer とDrainer [#530](https://github.com/pingcap/tidb-binlog/pull/530)間の通信のトラフィック圧縮をサポート

@@ -155,7 +155,7 @@ TiCDC は DML イベントを Kafka イベントに変換し、イベントの�
 
 -   `{{ColumnName}}`は列名を示します。
 -   `{{TIDB_TYPE}}`は、TiDB の型を示します。これは、SQL 型との 1 対 1 のマッピングではありません。
--   `{{AVRO_TYPE}}`は[アブロ仕様](https://avro.apache.org/docs/current/spec.html)のタイプを示します。
+-   `{{AVRO_TYPE}}`は[アブロスペック](https://avro.apache.org/docs/current/spec.html)のタイプを示します。
 
 | SQL タイプ   | TIDB_TYPE | AVRO_TYPE | 説明                                                                                                       |
 | --------- | --------- | --------- | -------------------------------------------------------------------------------------------------------- |

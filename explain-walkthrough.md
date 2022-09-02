@@ -43,7 +43,7 @@ EXPLAIN SELECT count(*) FROM trips WHERE start_date BETWEEN '2017-07-01 00:00:00
 1.  コプロセッサー (TiKV) は、 `trips`テーブル全体を`TableFullScan`操作として読み取ります。次に、読み取った行をまだ TiKV 内にある`Selection_19`オペレーターに渡します。
 2.  次に、述語`WHERE start_date BETWEEN ..`が`Selection_19`演算子でフィルター処理されます。この選択を満たすには、約`250`行が推定されます。この数は、統計とオペレーターのロジックに従って推定されることに注意してください。 `└─TableFullScan_18`演算子は`stats:pseudo`を示します。これは、テーブルに実際の統計情報がないことを意味します。 `ANALYZE TABLE trips`を実行して統計情報を収集すると、統計はより正確になることが期待されます。
 3.  選択基準を満たす行には、 `count`関数が適用されます。これは、まだ TiKV ( `cop[tikv]` ) 内にある`StreamAgg_9`オペレーター内でも完了します。 TiKV コプロセッサは多数の MySQL 組み込み関数を実行できます。そのうちの`count`つはその 1 つです。
-4.  `StreamAgg_9`からの結果は、現在 TiDB サーバー内にある`TableReader_21`オペレーターに送信されます ( `root`のタスク)。このオペレーターの`estRows`列の値は`1`です。これは、オペレーターが、アクセスする各 TiKV リージョンから 1 行を受け取ることを意味します。これらのリクエストの詳細については、 [`EXPLAIN ANALYZE`](/sql-statements/sql-statement-explain-analyze.md)を参照してください。
+4.  `StreamAgg_9`からの結果は、現在 TiDBサーバー内にある`TableReader_21`オペレーターに送信されます ( `root`のタスク)。このオペレーターの`estRows`列の値は`1`です。これは、オペレーターが、アクセスする各 TiKV リージョンから 1 行を受け取ることを意味します。これらのリクエストの詳細については、 [`EXPLAIN ANALYZE`](/sql-statements/sql-statement-explain-analyze.md)を参照してください。
 5.  `StreamAgg_20`演算子は、 `└─TableReader_21`演算子の各行に`count`関数を適用します。これは[`SHOW TABLE REGIONS`](/sql-statements/sql-statement-show-table-regions.md)からわかるように、約 56 行になります。これはルート オペレータであるため、クライアントに結果を返します。
 
 > **ノート：**
@@ -75,7 +75,7 @@ EXPLAIN ANALYZE SELECT count(*) FROM trips WHERE start_date BETWEEN '2017-07-01 
 
 上記のクエリの例では、実行に`1.03`秒かかります。これは理想的なパフォーマンスです。
 
-上記の`EXPLAIN ANALYZE`の結果から、 `actRows`は推定値 ( `estRows` ) の一部が不正確であることを示します (10,000 行を期待しているが、1900 万行を検出)。これは、 `└─TableFullScan_18`の`operator info` ( `stats:pseudo` ) で既に示されています。最初に[`ANALYZE TABLE`](/sql-statements/sql-statement-analyze-table.md)を実行してからもう一度`EXPLAIN ANALYZE`を実行すると、推定値がはるかに近いことがわかります。
+上記の`EXPLAIN ANALYZE`の結果から、 `actRows`は推定値 ( `estRows` ) の一部が不正確であることを示します (10,000 行を期待しているが、1,900 万行を検出)。これは、 `└─TableFullScan_18`の`operator info` ( `stats:pseudo` ) で既に示されています。最初に[`ANALYZE TABLE`](/sql-statements/sql-statement-analyze-table.md)を実行してからもう一度`EXPLAIN ANALYZE`を実行すると、推定値がはるかに近いことがわかります。
 
 {{< copyable "" >}}
 
@@ -122,7 +122,7 @@ SHOW STATS_HEALTHY;
 
 現在の実行計画は、次の点で効率的です。
 
--   ほとんどの作業は、TiKV コプロセッサー内で処理されます。処理のためにネットワークを介して TiDB に送り返す必要があるのは 56 行のみです。これらの各行は短く、選択に一致するカウントのみが含まれます。
+-   ほとんどの作業は、TiKV コプロセッサー内で処理されます。処理のためにネットワークを介して TiDB に送り返す必要があるのは 56 行だけです。これらの各行は短く、選択に一致するカウントのみが含まれます。
 
 -   TiDB ( `StreamAgg_20` ) と TiKV ( `└─StreamAgg_9` ) の両方で行数を集計するには、メモリ使用量が非常に効率的なストリーム集計を使用します。
 

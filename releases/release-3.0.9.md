@@ -37,7 +37,7 @@ TiDB アンシブル バージョン: 3.0.9
     -   構成変更を高速化して、リージョン分散を高速化します[#6421](https://github.com/tikv/tikv/pull/6421)
 -   取引
     -   `tikv_lock_manager_waiter_lifetime_duration` 、 `tikv_lock_manager_detect_duration` 、および`tikv_lock_manager_detect_duration`のモニタリング メトリックを追加して、 `waiter`の有効期間、デッドロックを検出するための時間コスト、および`Wait`表[#6392](https://github.com/tikv/tikv/pull/6392)のステータスをモニタリングします。
-    -   以下の構成項目を最適化して、極端な状況でリージョンリーダーまたはデッドロック検出器のリーダーを変更することによって引き起こされるトランザクション実行レイテンシを削減します[#6429](https://github.com/tikv/tikv/pull/6429)
+    -   次の構成項目を最適化して、極端な状況でリージョンリーダーまたはデッドロック ディテクターのリーダーを変更することによって引き起こされるトランザクション実行レイテンシーを削減します[#6429](https://github.com/tikv/tikv/pull/6429)
         -   デフォルト値の`wait-for-lock-time`を`3s`から`1s`に変更します
         -   デフォルト値の`wake-up-delay-duration`を`100ms`から`20ms`に変更します
     -   リージョン Merge プロセス中にデッドロック検出器のリーダーが正しくない可能性がある問題を修正します[#6431](https://github.com/tikv/tikv/pull/6431)

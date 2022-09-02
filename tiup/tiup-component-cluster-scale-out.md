@@ -4,9 +4,9 @@ title: tiup cluster scale-out
 
 # tiup cluster scale-out {#tiup-cluster-scale-out}
 
-`tiup cluster scale-out`コマンドは、クラスタのスケールアウトに使用されます。クラスタをスケールアウトする内部ロジックは、クラスタのデプロイに似ています。 tiup-cluster コンポーネントは、最初に新しいノードへの SSH 接続を確立し、ターゲット ノードに必要なディレクトリを作成してから、デプロイを実行し、サービスを開始します。
+`tiup cluster scale-out`コマンドは、クラスターをスケールアウトするために使用されます。クラスターをスケールアウトする内部ロジックは、クラスターのデプロイに似ています。 tiup-clusterコンポーネントは、最初に新しいノードへの SSH 接続を確立し、ターゲット ノードに必要なディレクトリを作成してから、デプロイを実行し、サービスを開始します。
 
-PD がスケールアウトされると、結合操作によって新しい PD ノードがクラスタに追加され、PD に関連付けられたサービスの構成が更新されます。他のサービスは直接開始され、クラスタに追加されます。
+PD がスケールアウトされると、結合操作によって新しい PD ノードがクラスターに追加され、PD に関連付けられたサービスの構成が更新されます。他のサービスは直接開始され、クラスターに追加されます。
 
 ## 構文 {#syntax}
 
@@ -14,9 +14,9 @@ PD がスケールアウトされると、結合操作によって新しい PD �
 tiup cluster scale-out <cluster-name> <topology.yaml> [flags]
 ```
 
-`<cluster-name>` : 操作するクラスタの名前。クラスタ名を忘れた場合は、 [`cluster list`](/tiup/tiup-component-dm-list.md)コマンドで確認できます。
+`<cluster-name>` : 操作するクラスターの名前。クラスター名を忘れた場合は、 [`cluster list`](/tiup/tiup-component-dm-list.md)コマンドで確認できます。
 
-`<topology.yaml>` : 準備された[トポロジ ファイル](/tiup/tiup-dm-topology-reference.md) 。このトポロジ ファイルには、現在のクラスタに追加される新しいノードのみを含める必要があります。
+`<topology.yaml>` : 準備された[トポロジ ファイル](/tiup/tiup-dm-topology-reference.md) 。このトポロジ ファイルには、現在のクラスタに追加される新しいノードのみが含まれている必要があります。
 
 ## オプション {#options}
 
@@ -41,14 +41,14 @@ tiup cluster scale-out <cluster-name> <topology.yaml> [flags]
 ### --no-labels {#no-labels}
 
 -   このオプションは、ラベル チェックをスキップするために使用されます。
--   2 つ以上の TiKV ノードが同じ物理マシンにデプロイされている場合、リスクが存在します。PD はクラスタトポロジを認識しないため、リージョンの複数のレプリカを 1 つの物理マシン上の異なる TiKV ノードにスケジュールする可能性があります。単一障害点。このリスクを回避するために、ラベルを使用して、同じリージョンを同じマシンにスケジュールしないように PD に指示できます。ラベルの構成については、 [トポロジ ラベルごとにレプリカをスケジュールする](/schedule-replicas-by-topology-labels.md)を参照してください。
+-   2 つ以上の TiKV ノードが同じ物理マシンにデプロイされている場合、リスクが存在します。PD はクラスター トポロジを認識しないため、リージョンの複数のレプリカを 1 つの物理マシン上の異なる TiKV ノードにスケジュールする可能性があります。単一障害点。このリスクを回避するために、ラベルを使用して、同じリージョンを同じマシンにスケジュールしないように PD に指示できます。ラベルの構成については、 [トポロジ ラベルごとにレプリカをスケジュールする](/schedule-replicas-by-topology-labels.md)を参照してください。
 -   テスト環境では、このリスクは問題にならない可能性があり、 `--no-labels`を使用してチェックをスキップできます。
 -   データ型: `BOOLEAN`
 -   デフォルト: false
 
 ### --skip-create-user {#skip-create-user}
 
--   クラスタのデプロイ中に、tiup-cluster は、トポロジー ファイルで指定されたユーザー名が存在するかどうかをチェックします。そうでない場合は作成します。このチェックをスキップするには、 `--skip-create-user`オプションを使用できます。
+-   クラスターのデプロイ中に、 tiup-clusterは、トポロジー ファイルで指定されたユーザー名が存在するかどうかをチェックします。そうでない場合は作成します。このチェックをスキップするには、 `--skip-create-user`オプションを使用できます。
 -   データ型: `BOOLEAN`
 -   デフォルト: false
 
@@ -62,4 +62,4 @@ tiup cluster scale-out <cluster-name> <topology.yaml> [flags]
 
 スケールアウトのログ。
 
-[&lt;&lt; 前のページに戻る - TiUP Clusterコマンド一覧](/tiup/tiup-component-cluster.md#command-list)
+[&lt;&lt; 前のページに戻る - TiUP クラスタコマンド一覧](/tiup/tiup-component-cluster.md#command-list)

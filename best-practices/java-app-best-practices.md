@@ -11,7 +11,7 @@ summary: Learn the best practices for developing Java applications with TiDB.
 
 Java アプリケーションで TiDB データベースと対話する一般的なコンポーネントには、次のものがあります。
 
--   ネットワーク プロトコル: クライアントは、標準[MySQL プロトコル](https://dev.mysql.com/doc/internals/en/client-server-protocol.html)を介して TiDB サーバーと対話します。
+-   ネットワーク プロトコル: クライアントは、標準[MySQL プロトコル](https://dev.mysql.com/doc/internals/en/client-server-protocol.html)を介して TiDBサーバーと対話します。
 -   JDBC API および JDBC ドライバー: Java アプリケーションは通常、標準[JDBC (Java データベース接続)](https://docs.oracle.com/javase/8/docs/technotes/guides/jdbc/) API を使用してデータベースにアクセスします。 TiDB に接続するには、JDBC API を介して MySQL プロトコルを実装する JDBC ドライバーを使用できます。このような MySQL 用の一般的な JDBC ドライバーには、 [MySQL コネクタ/J](https://github.com/mysql/mysql-connector-j)および[MariaDB コネクタ/J](https://mariadb.com/kb/en/library/about-mariadb-connector-j/#about-mariadb-connectorj)が含まれます。
 -   データベース接続プール: 要求されるたびに接続を作成するオーバーヘッドを削減するために、アプリケーションは通常、接続プールを使用して接続をキャッシュし、再利用します。 JDBC [情報源](https://docs.oracle.com/javase/8/docs/api/javax/sql/DataSource.html)は接続プール API を定義します。必要に応じて、さまざまなオープンソース接続プールの実装から選択できます。
 -   データ アクセス フレームワーク: 通常、アプリケーションは[マイバティス](https://mybatis.org/mybatis-3/index.html)や[休止状態](https://hibernate.org/)などのデータ アクセス フレームワークを使用して、データベース アクセス操作をさらに簡素化し、管理します。
@@ -21,7 +21,7 @@ Java アプリケーションで TiDB データベースと対話する一般的
 
 上の図から、Java アプリケーションが次のことを行う可能性があることがわかります。
 
--   JDBC API を介して MySQL プロトコルを実装し、TiDB と対話します。
+-   JDBC API を介して MySQL プロトコルを実装し、TiDB とやり取りします。
 -   接続プールから永続的な接続を取得します。
 -   MyBatis などのデータ アクセス フレームワークを使用して、SQL ステートメントを生成および実行します。
 -   Spring Transaction を使用して、トランザクションを自動的に開始または停止します。
@@ -30,7 +30,7 @@ Java アプリケーションで TiDB データベースと対話する一般的
 
 ## JDBC {#jdbc}
 
-Java アプリケーションは、さまざまなフレームワークでカプセル化できます。ほとんどのフレームワークでは、JDBC API が最下位レベルで呼び出され、データベース サーバーと対話します。 JDBC の場合、次の点に注目することをお勧めします。
+Java アプリケーションは、さまざまなフレームワークでカプセル化できます。ほとんどのフレームワークでは、JDBC API が最下位レベルで呼び出され、データベースサーバーと対話します。 JDBC の場合、次の点に注目することをお勧めします。
 
 -   JDBC API の使用方法の選択
 -   API 実装者のパラメーター構成
@@ -45,21 +45,21 @@ OLTP (オンライン トランザクション処理) シナリオの場合、�
 
 現在、ほとんどの上位レベルのフレームワークは、SQL 実行のために Prepare API を呼び出します。開発に JDBC API を直接使用する場合は、Prepare API の選択に注意してください。
 
-さらに、MySQL Connector/J のデフォルトの実装では、クライアント側のステートメントのみが前処理され、ステートメントはクライアントで`?`が置き換えられた後、テキスト ファイルでサーバーに送信されます。したがって、Prepare API の使用に加えて、TiDB サーバーでステートメントの前処理を実行する前に、JDBC 接続パラメーターで`useServerPrepStmts = true`も構成する必要があります。詳細なパラメータ設定については、 [MySQL JDBC パラメータ](#mysql-jdbc-parameters)を参照してください。
+さらに、MySQL Connector/J のデフォルトの実装では、クライアント側のステートメントのみが前処理され、ステートメントはクライアントで`?`が置き換えられた後、テキスト ファイルでサーバーに送信されます。したがって、Prepare API の使用に加えて、TiDBサーバーでステートメントの前処理を実行する前に、JDBC 接続パラメーターで`useServerPrepStmts = true`も構成する必要があります。詳細なパラメータ設定については、 [MySQL JDBC パラメータ](#mysql-jdbc-parameters)を参照してください。
 
 #### バッチ API を使用する {#use-batch-api}
 
-バッチ挿入の場合は、 [`addBatch` / <code>executeBatch</code> API](https://www.tutorialspoint.com/jdbc/jdbc-batch-processing)を使用できます。メソッド`addBatch()`は、最初に複数の SQL ステートメントをクライアントにキャッシュし、次にメソッド`executeBatch`を呼び出すときにそれらを一緒にデータベース サーバーに送信するために使用されます。
+バッチ挿入の場合は、 [`addBatch` / <code>executeBatch</code> API](https://www.tutorialspoint.com/jdbc/jdbc-batch-processing)を使用できます。メソッド`addBatch()`は、最初に複数の SQL ステートメントをクライアントにキャッシュし、次にメソッド`executeBatch`を呼び出すときにそれらを一緒にデータベースサーバーに送信するために使用されます。
 
 > **ノート：**
 >
-> デフォルトの MySQL Connector/J 実装では、 `addBatch()`でバッチに追加された SQL ステートメントの送信時刻は`executeBatch()`が呼び出される時刻まで遅れますが、実際のネットワーク転送中にステートメントは 1 つずつ送信されます。したがって、この方法では通常、通信オーバーヘッドの量は減少しません。
+> デフォルトの MySQL Connector/J 実装では、 `addBatch()`でバッチに追加された SQL ステートメントの送信時刻は`executeBatch()`が呼び出される時刻まで遅延しますが、実際のネットワーク転送中にステートメントは 1 つずつ送信されます。したがって、この方法では通常、通信オーバーヘッドの量は減少しません。
 >
 > ネットワーク転送をバッチ処理する場合は、JDBC 接続パラメーターで`rewriteBatchedStatements = true`を構成する必要があります。詳細なパラメータ設定については、 [バッチ関連のパラメーター](#batch-related-parameters)を参照してください。
 
 #### <code>StreamingResult</code>を使用して実行結果を取得する {#use-code-streamingresult-code-to-get-the-execution-result}
 
-ほとんどのシナリオでは、実行効率を向上させるために、JDBC はクエリ結果を事前に取得し、デフォルトでクライアント メモリに保存します。しかし、クエリが非常に大きな結果セットを返す場合、クライアントはデータベース サーバーに一度に返されるレコードの数を減らすように要求し、クライアントのメモリの準備が整い、次のバッチを要求するまで待ちます。
+ほとんどのシナリオでは、実行効率を向上させるために、JDBC はクエリ結果を事前に取得し、デフォルトでクライアント メモリに保存します。しかし、クエリが非常に大きな結果セットを返す場合、クライアントはデータベースサーバーに一度に返されるレコードの数を減らすことを要求し、クライアントのメモリの準備が整い、次のバッチを要求するまで待ちます。
 
 通常、JDBC には 2 種類の処理方法があります。
 
@@ -83,7 +83,7 @@ JDBC は通常、JDBC URL パラメータの形式で実装関連の構成を提
 
 ##### <code>useServerPrepStmts</code> {#code-useserverprepstmts-code}
 
-`useServerPrepStmts`はデフォルトで`false`に設定されています。つまり、Prepare API を使用しても、「準備」操作はクライアントでのみ行われます。サーバーの解析オーバーヘッドを回避するために、同じ SQL ステートメントが Prepare API を複数回使用する場合は、この構成を`true`に設定することをお勧めします。
+`useServerPrepStmts`はデフォルトで`false`に設定されています。つまり、Prepare API を使用しても、「準備」操作はクライアントでのみ行われます。サーバーの解析オーバーヘッドを回避するために、同じ SQL ステートメントで Prepare API を複数回使用する場合は、この構成を`true`に設定することをお勧めします。
 
 この設定が既に有効になっていることを確認するには、次のようにします。
 
@@ -195,7 +195,7 @@ update t set a = 10 where id = 1; update t set a = 11 where id = 2; update t set
 
 #### パラメータを統合する {#integrate-parameters}
 
-監視を通じて、アプリケーションが TiDBクラスタに対して`INSERT`の操作しか実行しないにもかかわらず、冗長な`SELECT`のステートメントが多数あることに気付く場合があります。通常、これは、JDBC が`select @@session.transaction_read_only`などの設定をクエリするためにいくつかの SQL ステートメントを送信するために発生します。これらの SQL ステートメントは TiDB には役に立たないため、余分なオーバーヘッドを避けるために`useConfigs=maxPerformance`を構成することをお勧めします。
+監視を通じて、アプリケーションが TiDB クラスターに対して`INSERT`の操作しか実行しないにもかかわらず、冗長な`SELECT`のステートメントが多数あることに気付く場合があります。通常、これは、JDBC が`select @@session.transaction_read_only`などの設定をクエリするためにいくつかの SQL ステートメントを送信するために発生します。これらの SQL ステートメントは TiDB には役に立たないため、余分なオーバーヘッドを避けるために`useConfigs=maxPerformance`を構成することをお勧めします。
 
 `useConfigs=maxPerformance`構成には、構成のグループが含まれます。
 
@@ -321,7 +321,7 @@ Cursor<Post> queryAllPost();
 
 -   シンプル: 実行ごとにプリペアド ステートメントが JDBC に呼び出されます (JDBC 構成アイテム`cachePrepStmts`が有効になっている場合、繰り返されるプリペアド ステートメントが再利用されます)。
 -   再利用: 準備済みステートメントは`executor`にキャッシュされるため、JDBC を使用せずに準備済みステートメントの重複呼び出しを減らすことができます`cachePrepStmts`
--   バッチ: 各更新操作 ( `INSERT` / `DELETE` / `UPDATE` ) は最初にバッチに追加され、トランザクションがコミットされるか`SELECT`クエリが実行されるまで実行されます。 JDBC レイヤーで`rewriteBatchStatements`が有効になっている場合は、ステートメントを書き換えようとします。そうでない場合、ステートメントは 1 つずつ送信されます。
+-   バッチ: 各更新操作 ( `INSERT` / `DELETE` / `UPDATE` ) は最初にバッチに追加され、トランザクションがコミットされるか`SELECT`クエリが実行されるまで実行されます。 JDBCレイヤーで`rewriteBatchStatements`が有効になっている場合、ステートメントを書き換えようとします。そうでない場合、ステートメントは 1 つずつ送信されます。
 
 通常、デフォルト値の`ExecutorType`は`Simple`です。 `openSession`を呼び出すときに`ExecutorType`を変更する必要があります。バッチ実行の場合、トランザクションで`UPDATE` ～ `INSERT`個のステートメントがかなり高速に実行されることに気付くかもしれませんが、データの読み取り時またはトランザクションのコミット時は遅くなります。これは実際には正常な動作であるため、遅い SQL クエリのトラブルシューティングを行う際には、この点に注意する必要があります。
 

@@ -25,7 +25,7 @@ tiup [flags] <component> [args...]      # Runs a component
 -   このオプションを有効にすると、指定したバイナリ ファイル パスが出力されます。
 
     -   `tiup -B/--binary <component>`を実行すると、インストールされた最新の安定した`<component>`コンポーネントのパスが表示されます。 `<component>`がインストールされていない場合は、エラーが返されます。
-    -   `tiup -B/--binary <component>:<version>`を実行すると、インストールされた`<component>`コンポーネントの`<version>`のパスが表示されます。この`<version>`が出力されない場合、エラーが返されます。
+    -   `tiup -B/--binary <component>:<version>`を実行すると、インストールされた`<component>`コンポーネントの`<version>`のパスが出力されます。この`<version>`が出力されない場合、エラーが返されます。
 
 -   データ型: `BOOLEAN`
 
@@ -56,7 +56,7 @@ tiup [flags] <component> [args...]      # Runs a component
 
 ### -T, --タグ {#t-tag}
 
--   開始するコンポーネントのタグを指定します。一部のコンポーネントは実行中にディスク ストレージを使用する必要があり、TiUP はこの実行のために一時的なストレージ ディレクトリを割り当てます。 TiUP で固定ディレクトリを割り当てたい場合は、 `-T/--tag`を使用してディレクトリの名前を指定できます。これにより、同じファイルのバッチを同じタグで複数の実行で読み書きできるようになります。
+-   開始するコンポーネントのタグを指定します。一部のコンポーネントは実行中にディスク ストレージを使用する必要があり、TiUP はこの実行のために一時的なストレージ ディレクトリを割り当てます。 TiUP に固定ディレクトリを割り当てる場合は、 `-T/--tag`を使用してディレクトリの名前を指定できます。これにより、同じファイルのバッチを同じタグで複数の実行で読み書きできるようになります。
 -   データ型: `STRING`
 
 ### -v, --version {#v-version}
@@ -85,5 +85,5 @@ TiUP には複数のコマンドがあり、これらのコマンドには複数
 
 ## コンポーネントリスト {#component-list}
 
--   [クラスタ](/tiup/tiup-component-cluster.md) : 本番環境で TiDBクラスタを管理します。
--   [dm](/tiup/tiup-component-dm.md) : 実稼働環境で TiDB データ移行 (DM)クラスタを管理します。
+-   [集まる](/tiup/tiup-component-cluster.md) : 本番環境で TiDB クラスターを管理します。
+-   [dm](/tiup/tiup-component-dm.md) : 実稼働環境で TiDB データ移行 (DM) クラスターを管理します。

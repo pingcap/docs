@@ -87,7 +87,7 @@ TiDB バージョン: 4.0.8
 
         -   マルチバイトの CSV 区切り文字と区切り文字をサポート[#406](https://github.com/pingcap/tidb-lightning/pull/406)
         -   一部の PD スケジューラを無効にして復元プロセスを高速化する[#408](https://github.com/pingcap/tidb-lightning/pull/408)
-        -   v4.0クラスタでチェックサム GC セーフポイントに GC-TTL API を使用して、GC エラー[#396](https://github.com/pingcap/tidb-lightning/pull/396)を回避します。
+        -   v4.0 クラスターでチェックサム GC セーフポイントに GC-TTL API を使用して、GC エラー[#396](https://github.com/pingcap/tidb-lightning/pull/396)を回避します。
 
 ## バグの修正 {#bug-fixes}
 

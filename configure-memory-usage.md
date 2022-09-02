@@ -59,7 +59,7 @@ server-memory-quota = 34359738368
 
 デフォルトの構成では、マシンのメモリ使用量が合計メモリの 80% に達すると、tidb-server インスタンスはアラーム ログを出力し、関連するステータス ファイルを記録します。 `memory-usage-alarm-ratio`を構成することで、メモリ使用率のしきい値を設定できます。詳細なアラーム ルールについては、 [`memory-usage-alarm-ratio`](/tidb-configuration-file.md#memory-usage-alarm-ratio-new-in-v409)の説明を参照してください。
 
-アラームが一度トリガーされた後、メモリ使用率が 10 秒以上しきい値を下回り、再びしきい値に達した場合にのみ、アラームが再度トリガーされることに注意してください。さらに、アラームによって生成された過剰なステータス ファイルを保存しないように、現在、TiDB は最近の 5 つのアラーム中に生成されたステータス ファイルのみを保持します。
+アラームが一度トリガーされた後、メモリ使用率が 10 秒以上しきい値を下回り、再びしきい値に達した場合にのみ、アラームが再度トリガーされることに注意してください。さらに、アラームによって生成された過剰なステータス ファイルを保存しないようにするために、現在、TiDB は最近の 5 つのアラーム中に生成されたステータス ファイルのみを保持します。
 
 次の例では、アラームをトリガーするメモリ集約型の SQL ステートメントを作成します。
 
@@ -105,7 +105,7 @@ server-memory-quota = 34359738368
 
 ### ディスクこぼれ {#disk-spill}
 
-TiDB は、実行オペレーターのディスクスピルをサポートしています。 SQL 実行のメモリ使用量がメモリ クォータを超えると、tidb-server は実行オペレータの中間データをディスクにスピルして、メモリの負荷を軽減できます。ディスク スピルをサポートする演算子には、Sort、MergeJoin、HashJoin、HashAgg などがあります。
+TiDB は、実行オペレーターのディスクスピルをサポートしています。 SQL 実行のメモリ使用量がメモリ クォータを超えると、tidb-server は実行オペレータの中間データをディスクにスピルして、メモリの負荷を軽減することができます。ディスク スピルをサポートする演算子には、Sort、MergeJoin、HashJoin、HashAgg などがあります。
 
 -   ディスク スピルの動作は、 [`tidb_mem_quota_query`](/system-variables.md#tidb_mem_quota_query) 、 [`oom-use-tmp-storage`](/tidb-configuration-file.md#oom-use-tmp-storage) 、 [`tmp-storage-path`](/tidb-configuration-file.md#tmp-storage-path) 、および[`tmp-storage-quota`](/tidb-configuration-file.md#tmp-storage-quota)パラメータによって共同で制御されます。
 -   ディスク スピルがトリガーされると、TiDB はキーワード`memory exceeds quota, spill to disk now`または`memory exceeds quota, set aggregate mode to spill-mode`を含むログを出力します。

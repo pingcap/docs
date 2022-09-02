@@ -336,7 +336,7 @@ SELECT _utf8mb4'string' COLLATE utf8mb4_general_ci;
 
 -   `SET NAMES 'charset_name' [COLLATE 'collation_name']`
 
-    `SET NAMES`は、クライアントが SQL ステートメントをサーバーに送信するために使用する文字セットを示します。 `SET NAMES utf8mb4`は、サーバーからの結果だけでなく、クライアントからのすべての要求も utf8mb4 を使用することを示します。
+    `SET NAMES`は、クライアントが SQL ステートメントをサーバーに送信するために使用する文字セットを示します。 `SET NAMES utf8mb4`は、クライアントからのすべての要求が utf8mb4 を使用し、サーバーからの結果も使用することを示します。
 
     `SET NAMES 'charset_name'`ステートメントは、次のステートメントの組み合わせと同等です。
 
@@ -377,7 +377,7 @@ SELECT _utf8mb4'string' COLLATE utf8mb4_general_ci;
 
 > **ノート：**
 >
-> 文字チェックがスキップされると、TiDB はアプリケーションによって書き込まれた不正な UTF-8 文字の検出に失敗し、 `ANALYZE`の実行時にデコード エラーが発生し、その他の不明なエンコードの問題が発生する可能性があります。アプリケーションが書き込まれた文字列の有効性を保証できない場合、文字チェックをスキップすることはお勧めしません。
+> 文字チェックがスキップされると、TiDB はアプリケーションによって書き込まれた不正な UTF-8 文字の検出に失敗し、 `ANALYZE`の実行時にデコード エラーが発生し、その他の未知のエンコーディングの問題が発生する可能性があります。アプリケーションが書き込まれた文字列の有効性を保証できない場合、文字チェックをスキップすることはお勧めしません。
 
 ## 照合サポート フレームワーク {#collation-support-framework}
 
@@ -414,7 +414,7 @@ TiDB v4.0 以降、照合のための完全なフレームワークが導入さ�
 
 <CustomContent platform="tidb">
 
-この新しいフレームワークは、照合の意味解析をサポートし、クラスタが最初に初期化されるときに新しいフレームワークを有効にするかどうかを決定する`new_collations_enabled_on_first_bootstrap`の構成項目を導入します。新しいフレームワークを有効にするには、 `new_collations_enabled_on_first_bootstrap`を`true`に設定します。詳細については、 [`new_collations_enabled_on_first_bootstrap`](/tidb-configuration-file.md#new_collations_enabled_on_first_bootstrap)を参照してください。構成アイテムを有効にした後にクラスタを初期化すると、新しい照合順序が有効になっているかどうかを`mysql`の`new_collation_enabled`変数で確認できます。 `tidb`テーブル:
+この新しいフレームワークは、照合の意味解析をサポートし、クラスターが最初に初期化されるときに新しいフレームワークを有効にするかどうかを決定する`new_collations_enabled_on_first_bootstrap`の構成項目を導入します。新しいフレームワークを有効にするには、 `new_collations_enabled_on_first_bootstrap`を`true`に設定します。詳細については、 [`new_collations_enabled_on_first_bootstrap`](/tidb-configuration-file.md#new_collations_enabled_on_first_bootstrap)を参照してください。構成アイテムを有効にした後にクラスターを初期化すると、新しい照合順序が有効になっているかどうかを`mysql`の`new_collation_enabled`変数で確認できます。 `tidb`テーブル:
 
 {{< copyable "" >}}
 
@@ -435,7 +435,7 @@ SELECT VARIABLE_VALUE FROM mysql.tidb WHERE VARIABLE_NAME='new_collation_enabled
 
 <CustomContent platform="tidb-cloud">
 
-この新しいフレームワークは、照合順序の意味解析をサポートしています。 TiDB は、クラスタが最初に初期化されるときに、デフォルトで新しいフレームワークを有効にします。
+この新しいフレームワークは、照合順序の意味解析をサポートしています。 TiDB は、クラスターが最初に初期化されるときに、デフォルトで新しいフレームワークを有効にします。
 
 </CustomContent>
 

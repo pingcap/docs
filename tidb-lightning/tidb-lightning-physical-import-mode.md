@@ -11,10 +11,10 @@ summary: Learn about the physical import mode in TiDB Lightning.
 
 ## 実装 {#implementation}
 
-1.  データをインポートする前に、 TiDB Lightningは自動的に TiKV ノードを「インポート モード」に切り替えます。これにより、書き込みパフォーマンスが向上し、自動圧縮が停止します。 TiDB Lightningは、TiDBクラスタのバージョンに応じて、グローバル スケジューリングを一時停止するかどうかを決定します。
+1.  データをインポートする前に、 TiDB Lightningは自動的に TiKV ノードを「インポート モード」に切り替えます。これにより、書き込みパフォーマンスが向上し、自動圧縮が停止します。 TiDB Lightningは、TiDB クラスターのバージョンに応じて、グローバル スケジューリングを一時停止するかどうかを決定します。
 
-    -   TiDBクラスタ&gt;= v6.1.0 およびTiDB Lightning &gt;= v6.2.0 の場合、 TiDB Lightningは、ターゲット テーブル データを格納するリージョンのスケジューリングを一時停止します。インポートが完了すると、 TiDB Lightningはスケジューリングを回復します。
-    -   TiDBクラスタ&lt; v6.1.0 またはTiDB Lightning &lt; v6.2.0 の場合、 TiDB Lightningはグローバル スケジューリングを一時停止します。
+    -   TiDB クラスター &gt;= v6.1.0 およびTiDB Lightning &gt;= v6.2.0 の場合、 TiDB Lightningは、ターゲット テーブル データを格納するリージョンのスケジューリングを一時停止します。インポートが完了すると、 TiDB Lightningはスケジューリングを回復します。
+    -   TiDB クラスター &lt; v6.1.0 またはTiDB Lightning &lt; v6.2.0 の場合、 TiDB Lightningはグローバル スケジューリングを一時停止します。
 
 2.  TiDB Lightningは、ターゲット データベースにテーブル スキーマを作成し、メタデータを取得します。
 
@@ -22,15 +22,15 @@ summary: Learn about the physical import mode in TiDB Lightning.
 
 4.  TiDB Lightningは、ブロックごとに「エンジン ファイル」を用意して、キーと値のペアを処理します。 TiDB Lightningは SQL ダンプを並行して読み取り、データ ソースを TiDB と同じエンコーディングのキーと値のペアに変換し、キーと値のペアを並べ替えて、ローカルの一時ストレージ ファイルに書き込みます。
 
-5.  エンジン ファイルが書き込まれると、 TiDB Lightningはターゲットの TiKVクラスタでデータの分割とスケジュールを開始し、TiKVクラスタにデータをインポートします。
+5.  エンジン ファイルが書き込まれると、 TiDB Lightningはターゲットの TiKV クラスターでデータの分割とスケジュールを開始し、データを TiKV クラスターにインポートします。
 
     エンジン ファイルには、**データ エンジン**と<strong>インデックス エンジン</strong>の 2 種類のエンジンが含まれています。各エンジンは、キーと値のペアのタイプ (行データとセカンダリ インデックス) に対応しています。通常、行データはデータ ソース内で完全に順序付けられており、セカンダリ インデックスは順序付けされていません。したがって、データ エンジン ファイルは、対応するブロックが書き込まれた直後にインポートされ、すべてのインデックス エンジン ファイルは、テーブル全体がエンコードされた後にのみインポートされます。
 
-6.  すべてのエンジン ファイルがインポートされた後、 TiDB Lightningはローカル データ ソースとダウンストリームクラスタの間でチェックサムを比較し、インポートされたデータが破損していないことを確認します。次に、 TiDB Lightningが新しいデータ ( `ANALYZE` ) を分析して、今後の運用を最適化します。一方、 `tidb-lightning`は将来の競合を防ぐために`AUTO_INCREMENT`の値を調整します。
+6.  すべてのエンジン ファイルがインポートされた後、 TiDB Lightningはローカル データ ソースとダウンストリーム クラスターの間でチェックサムを比較し、インポートされたデータが破損していないことを確認します。次に、 TiDB Lightningが新しいデータ ( `ANALYZE` ) を分析して、今後の運用を最適化します。一方、 `tidb-lightning`は将来の競合を防ぐために`AUTO_INCREMENT`の値を調整します。
 
     自動インクリメント ID は、行数の**上限**によって推定され、テーブル データ ファイルの合計サイズに比例します。したがって、自動インクリメント ID は通常、実際の行数より大きくなります。自動インクリメント ID [必ずしも連続しているわけではない](/mysql-compatibility.md#auto-increment-id)のため、これは正常です。
 
-7.  すべての手順が完了すると、 TiDB Lightningは自動的に TiKV ノードを「通常モード」に切り替えます。グローバル スケジューリングが一時停止されている場合、 TiDB Lightningはグローバル スケジューリングも回復します。その後、TiDBクラスタは正常にサービスを提供できます。
+7.  すべての手順が完了すると、 TiDB Lightningは自動的に TiKV ノードを「通常モード」に切り替えます。グローバル スケジューリングが一時停止されている場合、 TiDB Lightningはグローバル スケジューリングも回復します。その後、TiDB クラスターは正常にサービスを提供できます。
 
 ## 要件と制限 {#requirements-and-restrictions}
 
@@ -56,12 +56,12 @@ summary: Learn about the physical import mode in TiDB Lightning.
 
 -   TiDB Lightning&gt;= v4.0.3。
 -   TiDB &gt;= v4.0.0。
--   ターゲットの TiDBクラスタが v3.x 以前の場合は、データのインポートを完了するために Importer-backend を使用する必要があります。このモードでは、 `tidb-lightning`は解析されたキーと値のペアを gRPC 経由で`tikv-importer`に送信する必要があり、 `tikv-importer`はデータのインポートを完了します。
+-   ターゲットの TiDB クラスターが v3.x 以前の場合は、データのインポートを完了するために Importer-backend を使用する必要があります。このモードでは、 `tidb-lightning`は解析されたキーと値のペアを gRPC 経由で`tikv-importer`に送信する必要があり、 `tikv-importer`はデータのインポートを完了します。
 
 ### 制限事項 {#limitations}
 
--   物理インポート モードを使用して、本番環境の TiDB クラスターにデータを直接インポートしないでください。パフォーマンスに重大な影響があります。その必要がある場合は、 [本番環境のクラスタにデータをインポートする](/tidb-lightning/tidb-lightning-physical-import-mode-usage.md#import-data-into-a-cluster-in-production)を参照してください。
--   デフォルトでは、複数のTiDB Lightningインスタンスを使用して同じ TiDBクラスタにデータをインポートしないでください。代わりに[並行輸入品](/tidb-lightning/tidb-lightning-distributed-import.md)を使用してください。
+-   物理インポート モードを使用して、本番環境の TiDB クラスターにデータを直接インポートしないでください。パフォーマンスに重大な影響があります。その必要がある場合は、 [本番環境のクラスターにデータをインポートする](/tidb-lightning/tidb-lightning-physical-import-mode-usage.md#import-data-into-a-cluster-in-production)を参照してください。
+-   デフォルトでは、複数のTiDB Lightningインスタンスを使用して同じ TiDB クラスターにデータをインポートしないでください。代わりに[並行輸入品](/tidb-lightning/tidb-lightning-distributed-import.md)を使用してください。
 -   複数のTiDB Lightningを使用して同じターゲットにデータをインポートする場合は、バックエンドを混在させないでください。つまり、物理インポート モードと論理インポート モードを同時に使用しないでください。
 -   1 つの Lightning プロセスで、最大 10 TB の 1 つのテーブルをインポートできます。並行インポートでは、最大 10 個の Lightning インスタンスを使用できます。
 

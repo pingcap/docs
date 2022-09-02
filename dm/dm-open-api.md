@@ -5,17 +5,17 @@ summary: Learn about how to use OpenAPI interface to manage the cluster status a
 
 # OpenAPI を使用して DM クラスターを管理する {#maintain-dm-clusters-using-openapi}
 
-DM は、DMクラスタを簡単に照会および操作するための OpenAPI 機能を提供します。これは、 [dmctl ツール](/dm/dmctl-introduction.md)の機能に似ています。
+DM は、DM クラスタのクエリと操作を簡単にするための OpenAPI 機能を提供します。これは[dmctl ツール](/dm/dmctl-introduction.md)の機能に似ています。
 
 OpenAPI を有効にするには、次の操作のいずれかを実行します。
 
--   DMクラスタがバイナリを使用して直接デプロイされている場合は、次の構成を DM-master 構成ファイルに追加します。
+-   DM クラスターがバイナリを使用して直接デプロイされている場合は、次の構成を DM-master 構成ファイルに追加します。
 
     ```toml
     openapi = true
     ```
 
--   DMクラスタが TiUP を使用して展開されている場合は、次の構成をトポロジ ファイルに追加します。
+-   DM クラスターが TiUP を使用して展開されている場合は、次の構成をトポロジ ファイルに追加します。
 
     ```yaml
     server_configs:
@@ -29,7 +29,7 @@ OpenAPI を有効にするには、次の操作のいずれかを実行します
 >
 > -   DM-master ノードをデプロイした後、 `http://{master-addr}/api/v1/docs`にアクセスしてドキュメントをオンラインでプレビューできます。
 
-API を使用して、DMクラスタで次のメンテナンス操作を実行できます。
+API を使用して、DM クラスターで次のメンテナンス操作を実行できます。
 
 ## クラスターを管理するための API {#apis-for-managing-clusters}
 

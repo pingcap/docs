@@ -5,7 +5,7 @@ summary: Learn the `TIDB_SERVERS_INFO` information_schema table.
 
 # TIDB_SERVERS_INFO {#tidb-servers-info}
 
-`TIDB_SERVERS_INFO`テーブルは、TiDB クラスター内の TiDB サーバー (つまり、tidb-server プロセス) に関する情報を提供します。
+`TIDB_SERVERS_INFO`テーブルは、TiDBクラスタ内の TiDB サーバー (つまり、tidb-server プロセス) に関する情報を提供します。
 
 {{< copyable "" >}}
 

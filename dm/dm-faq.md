@@ -1,9 +1,9 @@
 ---
-title: TiDB Data Migration FAQ
+title: TiDB Data Migration FAQs
 summary: Learn about frequently asked questions (FAQs) about TiDB Data Migration (DM).
 ---
 
-# TiDB データ移行FAQ {#tidb-data-migration-faq}
+# TiDB データ移行に関するよくある質問 {#tidb-data-migration-faqs}
 
 このドキュメントでは、TiDB データ移行 (DM) に関するよくある質問 (FAQ) をまとめています。
 
@@ -11,7 +11,7 @@ summary: Learn about frequently asked questions (FAQs) about TiDB Data Migration
 
 現在、DM は MySQL または MariaDB binlog の標準バージョンのデコードのみをサポートしています。 Alibaba Cloud RDS またはその他のクラウド データベースではテストされていません。バイナリログが標準形式であることが確認された場合、サポートされています。
 
-Alibaba Cloud RDS で主キーを持たないアップストリーム テーブルの場合、バイナリログには非表示の主キー列が含まれており、元のテーブル構造と矛盾するという既知の問題があります。
+Alibaba Cloud RDS でプライマリ キーを持たないアップストリーム テーブルの場合、バイナリ ログには非表示のプライマリ キー列が含まれており、元のテーブル構造と矛盾するという既知の問題があります。
 
 互換性のない既知の問題は次のとおりです。
 
@@ -120,14 +120,14 @@ MySQL はエクスポート用のスナップショットを指定できない�
 
 以下のパラメーターをデフォルトの 67108864 (64M) より大きい値に設定します。
 
--   TiDB サーバーのグローバル変数: `max_allowed_packet` 。
+-   TiDBサーバーのグローバル変数: `max_allowed_packet` 。
 -   タスク構成ファイル内の構成項目: `target-database.max-allowed-packet` .詳細は[DM 拡張タスクConfiguration / コンフィグレーションファイル](/dm/task-configuration-file-full.md)を参照してください。
 
-## DM 1.0クラスタの既存の DM 移行タスクが DM 2.0 以降のクラスタで実行されているときに発生するエラー<code>Error 1054: Unknown column &#39;binlog_gtid&#39; in &#39;field list&#39;</code>処理方法 {#how-to-handle-the-error-code-error-1054-unknown-column-binlog-gtid-in-field-list-code-that-occurs-when-existing-dm-migration-tasks-of-an-dm-1-0-cluster-are-running-on-a-dm-2-0-or-newer-cluster}
+## DM 1.0 クラスターの既存の DM 移行タスクが DM 2.0 以降のクラスターで実行されているときに発生するエラー<code>Error 1054: Unknown column &#39;binlog_gtid&#39; in &#39;field list&#39;</code>処理方法を教えてください。 {#how-to-handle-the-error-code-error-1054-unknown-column-binlog-gtid-in-field-list-code-that-occurs-when-existing-dm-migration-tasks-of-an-dm-1-0-cluster-are-running-on-a-dm-2-0-or-newer-cluster}
 
-DM v2.0 以降、DM 1.0クラスタのタスク構成ファイルで`start-task`コマンドを直接実行して増分データ レプリケーションを続行すると、エラー`Error 1054: Unknown column 'binlog_gtid' in 'field list'`が発生します。
+DM v2.0 以降、DM 1.0 クラスターのタスク構成ファイルで`start-task`コマンドを直接実行して増分データ レプリケーションを続行すると、エラー`Error 1054: Unknown column 'binlog_gtid' in 'field list'`が発生します。
 
-このエラーは[DM 1.0クラスタの DM 移行タスクを DM 2.0クラスタに手動でインポートする](/dm/manually-upgrade-dm-1.0-to-2.0.md)で処理できます。
+このエラーは[DM 1.0 クラスターの DM 移行タスクを DM 2.0 クラスターに手動でインポートする](/dm/manually-upgrade-dm-1.0-to-2.0.md)で処理できます。
 
 ## TiUP が DM の一部のバージョン (v2.0.0-hotfix など) の展開に失敗するのはなぜですか? {#why-does-tiup-fail-to-deploy-some-versions-of-dm-for-example-v2-0-0-hotfix}
 
@@ -185,7 +185,7 @@ curl -X POST -d "tidb_general_log=0" http://{TiDBIP}:10080/settings
 if the DDL is not needed, you can use a filter rule with \"*\" schema-pattern to ignore it.\n\t : parse statement: line 1 column 11 near \"EVENT `event_del_big_table` \r\nDISABLE\" %!!(MISSING)(EXTRA string=ALTER EVENT `event_del_big_table` \r\nDISABLE
 ```
 
-このタイプのエラーの理由は、TiDB パーサーがアップストリームから送信された DDL ステートメント ( `ALTER EVENT`など) を解析できないため、 `sql-skip`が期待どおりに機能しないためです。構成ファイルに[binlog イベント フィルタ](/dm/dm-key-features.md#binlog-event-filter)を追加して、これらのステートメントをフィルタリングし、 `schema-pattern: "*"`を設定できます。 DM v2.0.1 以降、DM は`EVENT`に関連するステートメントを事前にフィルター処理します。
+このタイプのエラーの理由は、TiDB パーサーがアップストリームから送信された DDL ステートメント ( `ALTER EVENT`など) を解析できないため、 `sql-skip`が期待どおりに機能しないためです。構成ファイルに[binlog イベント フィルター](/dm/dm-key-features.md#binlog-event-filter)を追加して、これらのステートメントをフィルタリングし、 `schema-pattern: "*"`を設定できます。 DM v2.0.1 以降、DM は`EVENT`に関連するステートメントを事前にフィルター処理します。
 
 DM v6.0 以降、 `binlog`は`sql-skip`と`handle-error`を置き換えます。この問題を回避するには、代わりに`binlog`コマンドを使用できます。
 
@@ -207,7 +207,7 @@ DM v2.0.1 以前のバージョンでは、フル インポートが完了する
     2.  エクスポートされたデータのディレクトリ内のすべてのファイルを削除します。
     3.  dmctl を使用してタスクを削除し、コマンド`start-task --remove-meta`を実行して新しいタスクを作成します。
 
-    新しいタスクが開始されたら、冗長な DM ワーカー ノードがないことを確認し、フル インポート中に DMクラスタを再起動またはアップグレードしないようにすることをお勧めします。
+    新しいタスクが開始されたら、冗長な DM ワーカー ノードがないことを確認し、フル インポート中に DM クラスターを再起動またはアップグレードしないようにすることをお勧めします。
 
 -   データ ボリュームが大きい (1 TB を超える) 場合は、次の手順を実行します。
 
@@ -229,13 +229,13 @@ DM v2.0.1 以前のバージョンでは、フル インポートが完了する
 1.  アップストリームの MySQL データベースの値を`expire_logs_days`に増やして、完全な移行タスクが完了する前に必要な binlog ファイルを誤って削除しないようにします。データ量が多い場合は、dumpling と TiDB-Lightning を同時に使用してタスクを高速化することをお勧めします。
 2.  このタスクのリレー ログ機能を有効にして、binlog の位置が削除されても DM がリレー ログからデータを読み取れるようにします。
 
-## クラスタが TiUP v1.3.0 または v1.3.1 を使用してデプロイされている場合、DMクラスタ表示の Grafana ダッシュボードがダッシュボードの<code>failed to fetch dashboard</code>のはなぜですか? {#why-does-the-grafana-dashboard-of-a-dm-cluster-display-code-failed-to-fetch-dashboard-code-if-the-cluster-is-deployed-using-tiup-v1-3-0-or-v1-3-1}
+## クラスターが TiUP v1.3.0 または v1.3.1 を使用してデプロイされている場合、DM クラスター表示の Grafana ダッシュボードがダッシュボードの<code>failed to fetch dashboard</code>のはなぜですか? {#why-does-the-grafana-dashboard-of-a-dm-cluster-display-code-failed-to-fetch-dashboard-code-if-the-cluster-is-deployed-using-tiup-v1-3-0-or-v1-3-1}
 
 これは TiUP の既知のバグで、TiUP v1.3.2 で修正されています。この問題の解決策は次の 2 つです。
 
 -   解決策 1:
     1.  コマンド`tiup update --self && tiup update dm`を使用して、TiUP を新しいバージョンにアップグレードします。
-    2.  クラスタの Grafana ノードをスケール インしてからスケール アウトし、Grafana サービスを再起動します。
+    2.  クラスター内の Grafana ノードをスケールインしてからスケール アウトし、Grafana サービスを再起動します。
 -   解決策 2:
     1.  `deploy/grafana-$port/bin/public`フォルダをバックアップします。
     2.  [TiUP DMオフライン パッケージ](https://download.pingcap.org/tidb-dm-v2.0.1-linux-amd64.tar.gz)をダウンロードして解凍します。
@@ -352,7 +352,7 @@ query-status test
 
 `heartbeat`機能は、DM v2.0 以降のバージョンではデフォルトで無効になっています。タスク構成ファイルでこの機能を有効にすると、高可用性機能が妨げられます。この問題を解決するには、タスク構成ファイルで`enable-heartbeat`から`false`を設定して`heartbeat`機能を無効にしてから、タスク構成ファイルをリロードします。 DM は、以降のリリースで`heartbeat`の機能を強制的に無効にします。
 
-## DM マスターが再起動後にクラスタに参加できず、DM が「埋め込み etcd の開始に失敗しました。RawCause: メンバー xxx は既にブートストラップされています」というエラーを報告するのはなぜですか? {#why-does-a-dm-master-fail-to-join-the-cluster-after-it-restarts-and-dm-reports-the-error-fail-to-start-embed-etcd-rawcause-member-xxx-has-already-been-bootstrapped}
+## DM マスターが再起動後にクラスターに参加できず、DM が「埋め込み etcd の開始に失敗しました。RawCause: メンバー xxx は既にブートストラップされています」というエラーを報告するのはなぜですか? {#why-does-a-dm-master-fail-to-join-the-cluster-after-it-restarts-and-dm-reports-the-error-fail-to-start-embed-etcd-rawcause-member-xxx-has-already-been-bootstrapped}
 
 DM-master が起動すると、DM は現在のディレクトリに etcd 情報を記録します。 DM マスターの再始動後にディレクトリーが変更された場合、DM は etcd 情報にアクセスできないため、再始動は失敗します。
 

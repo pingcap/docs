@@ -23,11 +23,11 @@ summary: Learn about the key features and usage scenarios of TiDB.
 
 -   **リアルタイム HTAP**
 
-    TiDB は 2 つのストレージ エンジンを提供します[TiKV](/tikv-overview.md)は行ベースのストレージ エンジンで、 [ティフラッシュ](/tiflash/tiflash-overview.md)は列ベースのストレージ エンジンです。 TiFlash は、Multi-Raft Learner プロトコルを使用して TiKV からリアルタイムでデータを複製し、TiKV 行ベース ストレージ エンジンと TiFlash 列ストレージ エンジンの間のデータの一貫性を確保します。 HTAP リソースの分離の問題を解決するために、必要に応じて TiKV と TiFlash を異なるマシンに展開できます。
+    TiDB は 2 つのストレージ エンジンを提供します[TiKV](/tikv-overview.md)は行ベースのストレージ エンジンで、 [ティフラッシュ](/tiflash/tiflash-overview.md)は列ベースのストレージ エンジンです。 TiFlash は、Multi-Raft Learner プロトコルを使用して TiKV からのデータをリアルタイムで複製し、TiKV の行ベースのストレージ エンジンと TiFlash の列型ストレージ エンジンの間のデータの一貫性を確保します。 HTAP リソースの分離の問題を解決するために、必要に応じて TiKV と TiFlash を異なるマシンに展開できます。
 
 -   **クラウドネイティブの分散データベース**
 
-    TiDB は、クラウド用に設計された分散データベースであり、クラウド プラットフォーム上で柔軟なスケーラビリティ、信頼性、およびセキュリティを提供します。ユーザーは、変化するワークロードの要件を満たすように、TiDB を伸縮自在にスケーリングできます。 TiDB では、データの各部分に少なくとも 3 つのレプリカがあり、データ センター全体の停止を許容するために、異なるクラウド アベイラビリティ ゾーンでスケジュールすることができます。 [TiDB Operator](https://docs.pingcap.com/tidb-in-kubernetes/stable/tidb-operator-overview)は、Kubernetes 上の TiDB の管理を支援し、TiDBクラスタの操作に関連するタスクを自動化します。これにより、マネージド Kubernetes を提供する任意のクラウドに TiDB を簡単に展開できます。完全に管理された TiDB サービスである[TiDB Cloud](https://pingcap.com/tidb-cloud/)は、 [クラウド上の TiDB](https://docs.pingcap.com/tidbcloud/)のフルパワーを解き放つ最も簡単で経済的で回復力のある方法であり、数回クリックするだけで TiDB クラスターを展開して実行できます。
+    TiDB は、クラウド用に設計された分散データベースであり、クラウド プラットフォーム上で柔軟なスケーラビリティ、信頼性、およびセキュリティを提供します。ユーザーは、変化するワークロードの要件を満たすように、TiDB を伸縮自在にスケーリングできます。 TiDB では、データの各部分に少なくとも 3 つのレプリカがあり、データ センター全体の停止を許容するために、異なるクラウド アベイラビリティ ゾーンでスケジュールすることができます。 [TiDB Operator](https://docs.pingcap.com/tidb-in-kubernetes/stable/tidb-operator-overview)は、Kubernetes 上の TiDB の管理を支援し、TiDB クラスターの操作に関連するタスクを自動化します。これにより、マネージド Kubernetes を提供する任意のクラウドに TiDB を簡単に展開できます。完全に管理された TiDB サービスである[TiDB Cloud](https://pingcap.com/tidb-cloud/)は、 [クラウド上の TiDB](https://docs.pingcap.com/tidbcloud/)のフルパワーを解き放つ最も簡単で経済的で回復力のある方法であり、数回クリックするだけで TiDB クラスターを展開して実行できます。
 
 -   **MySQL 5.7プロトコルおよび MySQL エコシステムとの互換性**
 
@@ -41,7 +41,7 @@ summary: Learn about the key features and usage scenarios of TiDB.
 
 -   **ストレージ容量、スケーラビリティ、および同時実行性に対する高い要件を伴う大量のデータと同時実行性の高いシナリオ**
 
-    アプリケーションが急速に成長するにつれて、データが急増します。従来のスタンドアロン データベースでは、データ容量の要件を満たすことができません。解決策は、シャーディング ミドルウェアまたは NewSQL データベース (TiDB など) を使用することです。後者の方が費用対効果が高くなります。 TiDB は個別のコンピューティング アーキテクチャとストレージアーキテクチャを採用しているため、コンピューティングまたはストレージ容量を個別にスケールアウトまたはスケールインできます。コンピューティング レイヤーは最大 512 ノードをサポートし、各ノードは最大 1,000 の同時実行をサポートし、最大クラスタ容量は PB (ペタバイト) レベルです。
+    アプリケーションが急速に成長するにつれて、データが急増します。従来のスタンドアロン データベースでは、データ容量の要件を満たすことができません。解決策は、シャーディング ミドルウェアまたは NewSQL データベース (TiDB など) を使用することです。後者の方が費用対効果が高くなります。 TiDB は個別のコンピューティング アーキテクチャとストレージアーキテクチャを採用しているため、コンピューティングまたはストレージ容量を個別にスケールアウトまたはスケールインできます。コンピューティングレイヤーは最大 512 ノードをサポートし、各ノードは最大 1,000 の同時実行をサポートし、最大クラスター容量は PB (ペタバイト) レベルです。
 
 -   **リアルタイム HTAP シナリオ**
 
@@ -53,7 +53,7 @@ summary: Learn about the key features and usage scenarios of TiDB.
 
 ## こちらもご覧ください {#see-also}
 
--   [TiDB アーキテクチャ](/tidb-architecture.md)
+-   [TiDBアーキテクチャ](/tidb-architecture.md)
 -   [TiDB ストレージ](/tidb-storage.md)
 -   [TiDB コンピューティング](/tidb-computing.md)
 -   [TiDB スケジューリング](/tidb-scheduling.md)

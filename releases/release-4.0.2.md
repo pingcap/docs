@@ -74,8 +74,8 @@ TiDB バージョン: 4.0.2
 
 -   TiDB
 
-    -   CM-Sketch が大量のメモリを消費する場合に、Golang のメモリ割り当てによって引き起こされるクエリのレイテンシを削減します[#17545](https://github.com/pingcap/tidb/pull/17545)
-    -   TiKV サーバーが障害回復プロセスにある場合、クラスタの QPS 回復期間を短縮します[#17681](https://github.com/pingcap/tidb/pull/17681)
+    -   CM-Sketch が大量のメモリを消費する場合に、Golang のメモリ割り当てによって引き起こされるクエリのレイテンシーを削減します[#17545](https://github.com/pingcap/tidb/pull/17545)
+    -   TiKVサーバーが障害回復プロセスにある場合、クラスターの QPS 回復期間を短縮します[#17681](https://github.com/pingcap/tidb/pull/17681)
     -   パーティション テーブル上の TiKV/TiFlash コプロセッサへの集約関数のプッシュをサポート[#17655](https://github.com/pingcap/tidb/pull/17655)
     -   インデックスが等しい条件の行数推定の精度を向上させる[#17611](https://github.com/pingcap/tidb/pull/17611)
 
@@ -134,12 +134,12 @@ TiDB バージョン: 4.0.2
     -   古いバージョンのレンジパーティションテーブルが TiDB v4.0 で読み込めない問題を修正[#17983](https://github.com/pingcap/tidb/pull/17983)
     -   リージョン[#17585](https://github.com/pingcap/tidb/pull/17585)ごとに異なる`Backoffer`を割り当てることで、複数のリージョンリクエストが同時に失敗した場合の SQL ステートメントのタイムアウトの問題を修正します。
     -   `DateTime`区切り文字[#17501](https://github.com/pingcap/tidb/pull/17501)を解析するときの MySQL の互換性のない動作を修正します。
-    -   TiKV リクエストが時々 TiFlash サーバーに送信される問題を修正します[#18105](https://github.com/pingcap/tidb/pull/18105)
+    -   TiKV リクエストが時々 TiFlashサーバーに送信される問題を修正します[#18105](https://github.com/pingcap/tidb/pull/18105)
     -   [#18250](https://github.com/pingcap/tidb/pull/18250)つのトランザクションで書き込まれ、削除された主キーのロックが別のトランザクションによって解決されるために発生したデータの不整合の問題を修正します。
 
 -   TiKV
 
-    -   ステータス サーバー[#8101](https://github.com/tikv/tikv/pull/8101)のメモリの安全性の問題を修正します。
+    -   ステータスサーバー[#8101](https://github.com/tikv/tikv/pull/8101)のメモリの安全性の問題を修正します。
     -   JSON 数値比較[#8087](https://github.com/tikv/tikv/pull/8087)で精度が失われる問題を修正
     -   間違ったクエリの遅いログを修正する[#8050](https://github.com/tikv/tikv/pull/8050)
     -   複数のマージ プロセス中にピアのストアが分離されている場合、ピアを削除できない問題を修正します[#8048](https://github.com/tikv/tikv/pull/8048)

@@ -5,7 +5,7 @@ summary: Use PD Recover to recover a PD cluster which cannot start or provide se
 
 # PD リカバリ ユーザー ガイド {#pd-recover-user-guide}
 
-PD Recover は PD のディザスタリカバリツールであり、正常にサービスを開始または提供できない PDクラスタをリカバリするために使用されます。
+PD Recover は PD のディザスタリカバリツールであり、正常にサービスを開始または提供できない PD クラスタをリカバリするために使用されます。
 
 ## ソースコードからコンパイル {#compile-from-source-code}
 
@@ -22,15 +22,15 @@ PD Recover インストール パッケージはTiDB Toolkitに含まれてい�
 
 ## クイックスタート {#quick-start}
 
-このセクションでは、PD Recover を使用して PDクラスタを回復する方法について説明します。
+このセクションでは、PD Recover を使用して PD クラスターを回復する方法について説明します。
 
-### クラスタID を取得する {#get-cluster-id}
+### クラスター ID を取得する {#get-cluster-id}
 
-クラスタID は、PD、TiKV、または TiDB のログから取得できます。クラスタID を取得するには、サーバーで直接ログを表示できます。
+クラスタ ID は、PD、TiKV、または TiDB のログから取得できます。クラスター ID を取得するには、サーバーで直接ログを表示できます。
 
-#### PD ログからクラスタID を取得する (推奨) {#get-cluster-id-from-pd-log-recommended}
+#### PD ログからクラスター ID を取得する (推奨) {#get-cluster-id-from-pd-log-recommended}
 
-PD ログからクラスタID を取得するには、次のコマンドを実行します。
+PD ログからクラスター ID を取得するには、次のコマンドを実行します。
 
 {{< copyable "" >}}
 
@@ -43,9 +43,9 @@ cat {{/path/to}}/pd.log | grep "init cluster id"
 ...
 ```
 
-#### TiDB ログからクラスタID を取得する {#get-cluster-id-from-tidb-log}
+#### TiDB ログからクラスター ID を取得する {#get-cluster-id-from-tidb-log}
 
-TiDB ログからクラスタID を取得するには、次のコマンドを実行します。
+TiDB ログからクラスター ID を取得するには、次のコマンドを実行します。
 
 {{< copyable "" >}}
 
@@ -58,9 +58,9 @@ cat {{/path/to}}/tidb.log | grep "init cluster id"
 ...
 ```
 
-#### TiKV ログからクラスタID を取得する {#get-cluster-id-from-tikv-log}
+#### TiKV ログからクラスター ID を取得する {#get-cluster-id-from-tikv-log}
 
-TiKV ログからクラスタID を取得するには、次のコマンドを実行します。
+TiKV ログからクラスター ID を取得するには、次のコマンドを実行します。
 
 {{< copyable "" >}}
 
@@ -98,9 +98,9 @@ cat {{/path/to}}/pd*.log | grep "idAllocator allocates a new id" |  awk -F'=' '{
 
 または、すべての PD サーバーで上記のコマンドを実行して、最大の PD サーバーを見つけることもできます。
 
-### 新しい PDクラスタをデプロイする {#deploy-a-new-pd-cluster}
+### 新しい PD クラスターをデプロイする {#deploy-a-new-pd-cluster}
 
-新しい PDクラスタをデプロイする前に、既存の PDクラスタを停止してから、以前のデータ ディレクトリを削除するか、 `--data-dir`を使用して新しいデータ ディレクトリを指定する必要があります。
+新しい PD クラスターをデプロイする前に、既存の PD クラスターを停止してから、以前のデータ ディレクトリを削除するか、 `--data-dir`を使用して新しいデータ ディレクトリを指定する必要があります。
 
 ### pd-recover を使用する {#use-pd-recover}
 
@@ -118,10 +118,10 @@ cat {{/path/to}}/pd*.log | grep "idAllocator allocates a new id" |  awk -F'=' '{
 
 ## FAQ {#faq}
 
-### クラスタID の取得時に複数のクラスタID が検出される {#multiple-cluster-ids-are-found-when-getting-the-cluster-id}
+### クラスター ID の取得時に複数のクラスター ID が検出される {#multiple-cluster-ids-are-found-when-getting-the-cluster-id}
 
-PDクラスタが作成されると、新しいクラスタID が生成されます。ログを表示することで、古いクラスタのクラスタID を特定できます。
+PD クラスターが作成されると、新しいクラスター ID が生成されます。ログを表示することで、古いクラスターのクラスター ID を特定できます。
 
 ### <code>pd-recover</code>を実行すると、エラー<code>dial tcp 10.0.1.13:2379: connect: connection refused</code>されました。 {#the-error-code-dial-tcp-10-0-1-13-2379-connect-connection-refused-code-is-returned-when-executing-code-pd-recover-code}
 
-`pd-recover`を実行する場合、PD サービスが必要です。 PD Recover を使用する前に、PDクラスタをデプロイして開始します。
+`pd-recover`を実行する場合、PD サービスが必要です。 PD Recover を使用する前に、PD クラスターをデプロイして開始します。

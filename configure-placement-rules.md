@@ -37,7 +37,7 @@ v5.0 で導入された Placement Rules は、PD がさまざまなタイプの�
 | `EndKey`          | `string` 、16 進形式 | 範囲の終了キーに適用されます。                    |
 | `Role`            | `string`         | リーダー/フォロワー/学習者を含むレプリカの役割。          |
 | `Count`           | `int` 、正の整数      | レプリカの数。                            |
-| `LabelConstraint` | `[]Constraint`   | ラベルに基づく Filers ノード。                |
+| `LabelConstraint` | `[]Constraint`   | ラベルに基づいてノードをフィルタリングします。            |
 | `LocationLabels`  | `[]string`       | 物理的な分離に使用されます。                     |
 | `IsolationLevel`  | `string`         | 最小の物理的分離レベルを設定するために使用されます          |
 
@@ -48,9 +48,9 @@ v5.0 で導入された Placement Rules は、PD がさまざまなタイプの�
 -   `exists` : 指定されたラベル キーを含めます。
 -   `notExists` : 指定されたラベル キーを含めません。
 
-`LocationLabels`の意味と機能は、v4.0 より前のものと同じです。たとえば、3 層トポロジーを定義する`[zone,rack,host]`をデプロイした場合:クラスタには複数のゾーン (アベイラビリティーゾーン) があり、各ゾーンには複数のラックがあり、各ラックには複数のホストがあります。スケジュールを実行するとき、PD は最初にリージョンのピアを異なるゾーンに配置しようとします。この試行が失敗した場合 (レプリカが 3 つあるのに合計で 2 つのゾーンしかないなど)、PD はこれらのレプリカを異なるラックに配置することを保証します。ラックの数が分離を保証するのに十分でない場合、PD はホスト レベルの分離を試みます。
+`LocationLabels`の意味と機能は、v4.0 より前のものと同じです。たとえば、3 層トポロジーを定義する`[zone,rack,host]`をデプロイした場合: クラスターには複数のゾーン (アベイラビリティーゾーン) があり、各ゾーンには複数のラックがあり、各ラックには複数のホストがあります。スケジュールを実行するとき、PD は最初にリージョンのピアを異なるゾーンに配置しようとします。この試行が失敗した場合 (レプリカが 3 つあるのに合計で 2 つのゾーンしかないなど)、PD はこれらのレプリカを異なるラックに配置することを保証します。ラックの数が分離を保証するのに十分でない場合、PD はホスト レベルの分離を試みます。
 
-`IsolationLevel`の意味と機能は[クラスタ トポロジ構成](/schedule-replicas-by-topology-labels.md)で詳述されています。たとえば、 `LocationLabels`で 3 層トポロジを定義する`[zone,rack,host]`をデプロイし、 `IsolationLevel`を`zone`に設定した場合、PD は、スケジューリング中に各リージョンのすべてのピアが異なるゾーンに配置されるようにします。 `IsolationLevel`の最小分離レベル制限を満たすことができない場合 (たとえば、3 つのレプリカが構成されているが、合計で 2 つのデータ ゾーンしかない場合)、PD はこの制限を満たすために補おうとはしません。デフォルト値の`IsolationLevel`は空の文字列で、無効になっていることを意味します。
+`IsolationLevel`の意味と機能は[クラスタトポロジ構成](/schedule-replicas-by-topology-labels.md)で詳述されています。たとえば、 `LocationLabels`で 3 層トポロジを定義する`[zone,rack,host]`をデプロイし、 `IsolationLevel`を`zone`に設定した場合、PD は、スケジューリング中に各リージョンのすべてのピアが異なるゾーンに配置されるようにします。 `IsolationLevel`の最小分離レベル制限を満たすことができない場合 (たとえば、3 つのレプリカが構成されているが、合計で 2 つのデータ ゾーンしかない場合)、PD はこの制限を満たすために補おうとはしません。デフォルト値の`IsolationLevel`は空の文字列で、無効になっていることを意味します。
 
 ### ルール グループのフィールド {#fields-of-the-rule-group}
 
@@ -68,7 +68,7 @@ v5.0 で導入された Placement Rules は、PD がさまざまなタイプの�
 
 ### 配置ルールを有効にする {#enable-placement-rules}
 
-配置ルール機能は、v5.0 以降のバージョンの TiDB ではデフォルトで有効になっています。無効にするには、 [配置ルールを無効にする](#disable-placement-rules)を参照してください。この機能を無効にした後で有効にするには、クラスタを初期化する前に PD 構成ファイルを次のように変更します。
+配置ルール機能は、v5.0 以降のバージョンの TiDB ではデフォルトで有効になっています。無効にするには、 [配置ルールを無効にする](#disable-placement-rules)を参照してください。この機能を無効にした後で有効にするには、クラスターを初期化する前に PD 構成ファイルを次のように変更します。
 
 {{< copyable "" >}}
 
@@ -77,7 +77,7 @@ v5.0 で導入された Placement Rules は、PD がさまざまなタイプの�
 enable-placement-rules = true
 ```
 
-このように、クラスタが正常にブートストラップされた後、PD はこの機能を有効にし、 `max-replicas`と`location-labels`の構成に従って対応するルールを生成します。
+このように、クラスターが正常にブートストラップされた後、PD はこの機能を有効にし、 `max-replicas`と`location-labels`の構成に従って対応するルールを生成します。
 
 {{< copyable "" >}}
 
@@ -94,7 +94,7 @@ enable-placement-rules = true
 }
 ```
 
-ブートストラップされたクラスタの場合、pd-ctl を介して配置ルールをオンラインで有効にすることもできます。
+ブートストラップされたクラスターの場合、pd-ctl を使用して配置ルールをオンラインで有効にすることもできます。
 
 {{< copyable "" >}}
 
@@ -282,7 +282,7 @@ pd-ctl config placement-rules rule-bundle get pd
 pd-ctl config placement-rules rule-bundle get pd --out="group.json"
 ```
 
-変更が完了したら、 `rule-bundle set`サブコマンドを使用して、ファイル内の構成を PD サーバーに保存できます。 [pd-ctl を使用してルールを設定する](#set-rules-using-pd-ctl)で説明されている`save`コマンドとは異なり、このコマンドはサーバー側でこのグループのすべてのルールを置き換えます。
+変更が完了したら、 `rule-bundle set`サブコマンドを使用して、ファイル内の構成を PDサーバーに保存できます。 [pd-ctl を使用してルールを設定する](#set-rules-using-pd-ctl)で説明されている`save`コマンドとは異なり、このコマンドはサーバー側でこのグループのすべてのルールを置き換えます。
 
 {{< copyable "" >}}
 
@@ -292,7 +292,7 @@ pd-ctl config placement-rules rule-bundle set pd --in="group.json"
 
 ### pd-ctl を使用して、すべての構成を表示および変更します {#use-pd-ctl-to-view-and-modify-all-configurations}
 
-pd-ctl を使用して、すべての構成を表示および変更することもできます。これを行うには、すべての構成をファイルに保存し、構成ファイルを編集してから、ファイルを PD サーバーに保存して、以前の構成を上書きします。この操作も`rule-bundle`サブコマンドを使用します。
+pd-ctl を使用して、すべての構成を表示および変更することもできます。これを行うには、すべての構成をファイルに保存し、構成ファイルを編集してから、ファイルを PDサーバーに保存して、以前の構成を上書きします。この操作も`rule-bundle`サブコマンドを使用します。
 
 たとえば、すべての設定を`rules.json`のファイルに保存するには、次のコマンドを実行します。
 
@@ -302,7 +302,7 @@ pd-ctl を使用して、すべての構成を表示および変更すること�
 pd-ctl config placement-rules rule-bundle load --out="rules.json"
 ```
 
-ファイルを編集したら、次のコマンドを実行して構成を PD サーバーに保存します。
+ファイルを編集したら、次のコマンドを実行して構成を PDサーバーに保存します。
 
 {{< copyable "" >}}
 
@@ -341,7 +341,7 @@ table ttt ranges: (NOTE: key range might be changed after DDL)
 
 このセクションでは、配置ルールの一般的な使用シナリオを紹介します。
 
-### シナリオ 1: 通常のテーブルに 3 つのレプリカを使用し、メタデータに 5 つのレプリカを使用してクラスタの耐災害性を向上させる {#scenario-1-use-three-replicas-for-normal-tables-and-five-replicas-for-the-metadata-to-improve-cluster-disaster-tolerance}
+### シナリオ 1: 通常のテーブルに 3 つのレプリカを使用し、メタデータに 5 つのレプリカを使用してクラスターの耐災害性を向上させる {#scenario-1-use-three-replicas-for-normal-tables-and-five-replicas-for-the-metadata-to-improve-cluster-disaster-tolerance}
 
 キー範囲をメタデータの範囲に制限するルールを追加し、 `count`から`5`の値を設定するだけです。このルールの例を次に示します。
 
@@ -451,9 +451,9 @@ table ttt ranges: (NOTE: key range might be changed after DDL)
 }
 ```
 
-### シナリオ 5: テーブルを TiFlashクラスタに移行する {#scenario-5-migrate-a-table-to-the-tiflash-cluster}
+### シナリオ 5: テーブルを TiFlash クラスターに移行する {#scenario-5-migrate-a-table-to-the-tiflash-cluster}
 
-シナリオ 3 とは異なり、このシナリオでは、既存の構成に基づいて新しいレプリカを追加するのではなく、データ範囲の他の構成を強制的に上書きします。したがって、既存のルールをオーバーライドするには、ルール グループの設定で十分な大きさの`index`値を指定し、 `override` ～ `true`を設定する必要があります。
+シナリオ 3 とは異なり、このシナリオでは、既存の構成に基づいて新しいレプリカを追加するのではなく、データ範囲の他の構成を強制的にオーバーライドします。したがって、既存のルールをオーバーライドするには、ルール グループの設定で十分な大きさの`index`値を指定し、 `override` ～ `true`を設定する必要があります。
 
 ルール：
 

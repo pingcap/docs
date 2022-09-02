@@ -4,7 +4,7 @@ title: tiup cluster reload
 
 # tiup cluster reload {#tiup-cluster-reload}
 
-[クラスタ構成の変更](/tiup/tiup-component-cluster-edit-config.md)の後、構成を有効にするには、 `tiup cluster reload`コマンドを使用してクラスタをリロードする必要があります。このコマンドは、コントロール マシンの構成をサービスが実行されているリモート マシンに公開し、アップグレード プロセスに従って、アップグレード プロセスに従ってサービスを順番に再起動します。クラスタは、再起動プロセス中も引き続き使用できます。
+[クラスター構成の変更](/tiup/tiup-component-cluster-edit-config.md)の後、構成を有効にするには、 `tiup cluster reload`コマンドを使用してクラスターをリロードする必要があります。このコマンドは、サービスが実行されているリモート マシンにコントロール マシンの構成を発行し、アップグレード プロセスに従って、アップグレード プロセスに従ってサービスを順番に再起動します。クラスターは、再起動プロセス中も引き続き使用できます。
 
 ## 構文 {#syntax}
 
@@ -12,7 +12,7 @@ title: tiup cluster reload
 tiup cluster reload <cluster-name> [flags]
 ```
 
-`<cluster-name>` : 操作するクラスタ名。
+`<cluster-name>` : 操作するクラスター名。
 
 ## オプション {#options}
 
@@ -40,7 +40,7 @@ tiup cluster reload <cluster-name> [flags]
 
 ### -N, --ノード {#n-node}
 
--   再起動するノードを指定します。指定しない場合、すべてのノードが再起動されます。このオプションの値は、ノード ID のコンマ区切りリストです。ノード ID は、 [`tiup cluster display`](/tiup/tiup-component-cluster-display.md)コマンドによって返されるクラスタステータス テーブルの最初の列から取得できます。
+-   再起動するノードを指定します。指定しない場合、すべてのノードが再起動されます。このオプションの値は、ノード ID のコンマ区切りリストです。ノード ID は、 [`tiup cluster display`](/tiup/tiup-component-cluster-display.md)コマンドによって返されるクラスター ステータス テーブルの最初の列から取得できます。
 -   データ型: `STRINGS`
 -   このオプションがコマンドで指定されていない場合、デフォルトですべてのノードが選択されます。
 
@@ -51,7 +51,7 @@ tiup cluster reload <cluster-name> [flags]
 
 ### -R, --role {#r-role}
 
--   再開するロールを指定します。指定しない場合、すべてのロールが再起動されます。このオプションの値は、ノード ロールのコンマ区切りリストです。ロールは[クラスタの状態](/tiup/tiup-component-cluster-display.md)テーブルの 2 番目の列です。
+-   再開するロールを指定します。指定しない場合、すべてのロールが再起動されます。このオプションの値は、ノード ロールのコンマ区切りリストです。ロールは[クラスターの状態](/tiup/tiup-component-cluster-display.md)テーブルの 2 番目の列です。
 -   データ型: `STRINGS`
 -   このオプションがコマンドで指定されていない場合、デフォルトですべてのロールが選択されます。
 
@@ -80,6 +80,6 @@ tiup cluster reload <cluster-name> [flags]
 
 ## 出力 {#output}
 
-tiup-cluster の実行ログ。
+tiup-clusterの実行ログ。
 
-[&lt;&lt; 前のページに戻る - TiUP Clusterコマンド一覧](/tiup/tiup-component-cluster.md#command-list)
+[&lt;&lt; 前のページに戻る - TiUP クラスタコマンド一覧](/tiup/tiup-component-cluster.md#command-list)

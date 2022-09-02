@@ -6,17 +6,17 @@ summary: Learn how to export snapshots of Grafana Dashboard, and how to visualiz
 > **警告：**
 >
 > -   TiDB v6.0.0 以降、PingCAP は MetricsTool を維持しなくなりました。 v6.1.0 以降、PingCAP は MetricsTool ドキュメントを維持しなくなりました。
-> -   監視メトリック データをエクスポートするには、 [PingCAPクリニック診断サービス](/clinic/clinic-introduction.md)を使用して、監視メトリック、ログ、クラスタトポロジ、構成、およびパラメーターを含む、TiDBクラスタの診断に必要な情報を取得します。
+> -   監視メトリック データをエクスポートするには、 [PingCAPクリニック診断サービス](/clinic/clinic-introduction.md)を使用して、監視メトリック、ログ、クラスター トポロジ、構成、パラメーターなど、TiDB クラスターの診断に必要な情報を取得します。
 
 # Grafana スナップショットのエクスポート {#export-grafana-snapshots}
 
-メトリクス データは、トラブルシューティングにおいて重要です。リモート アシスタンスを要求すると、サポート スタッフが Grafana ダッシュボードを表示して問題を診断することが必要になる場合があります。 [メトリクスツール](https://metricstool.pingcap.com/)は、Grafana ダッシュボードのスナップショットをローカル ファイルとしてエクスポートし、これらのスナップショットを視覚化するのに役立ちます。これらのスナップショットを部外者と共有し、Grafana サーバー上の他の機密情報へのアクセスを許可することなく、部外者がグラフを正確に読み取れるようにすることができます。
+メトリクス データは、トラブルシューティングにおいて重要です。リモート アシスタンスを要求すると、サポート スタッフが Grafana ダッシュボードを表示して問題を診断することが必要になる場合があります。 [メトリクスツール](https://metricstool.pingcap.com/)は、Grafana ダッシュボードのスナップショットをローカル ファイルとしてエクスポートし、これらのスナップショットを視覚化するのに役立ちます。これらのスナップショットを部外者と共有し、Grafanaサーバー上の他の機密情報へのアクセスを許可することなく、部外者がグラフを正確に読み取れるようにすることができます。
 
 ## 使用法 {#usage}
 
 MetricsTool は[https://metricstool.pingcap.com/](https://metricstool.pingcap.com/)からアクセスできます。これは、次の 3 つのツール セットで構成されています。
 
--   **エクスポート**: ブラウザーの開発者ツールで実行されるユーザー スクリプト。Grafana v6.xx サーバーの現在のダッシュボードに表示されているすべてのパネルのスナップショットをダウンロードできます。
+-   **エクスポート**: ブラウザーの開発者ツールで実行されるユーザー スクリプト。Grafana v6.xxサーバーの現在のダッシュボードに表示されているすべてのパネルのスナップショットをダウンロードできます。
 
     ![Screenshot of MetricsTool Exporter after running the user script](/media/metricstool-export.png)
 
@@ -30,7 +30,7 @@ MetricsTool は[https://metricstool.pingcap.com/](https://metricstool.pingcap.co
 
 ### スクリーンショットや PDF 印刷と比較して、このツールの利点は何ですか? {#what-is-the-advantage-of-this-tool-compared-with-screenshot-or-pdf-printing}
 
-MetricsTool によってエクスポートされたスナップショット ファイルには、取得時の実際の値が含まれています。また、ビジュアライザーを使用すると、レンダリングされたグラフをライブの Grafana ダッシュボードであるかのように操作でき、シリーズの切り替え、より短い時間範囲へのズーム、特定の時点での正確な値の確認などの操作をサポートします。これにより、MetricsTool は画像や PDF よりもはるかに強力になります。
+MetricsTool によってエクスポートされたスナップショット ファイルには、取得時の実際の値が含まれています。また、ビジュアライザーを使用すると、レンダリングされたグラフをライブの Grafana ダッシュボードであるかのように操作でき、シリーズの切り替え、より短い時間範囲へのズーム、特定の時点での正確な値の確認などの操作がサポートされます。これにより、MetricsTool は画像や PDF よりもはるかに強力になります。
 
 ### スナップショット ファイルには何が含まれていますか? {#what-are-included-in-the-snapshot-file}
 

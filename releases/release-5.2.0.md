@@ -48,7 +48,7 @@ v5.2 の主な新機能と改善点は次のとおりです。
 | TiDB 構成ファイル                    | `stmt-summary.max-stmt-count`                                                                                                 | 修正済み   | ステートメント要約テーブルに保管できる SQL カテゴリーの最大数を示します。デフォルト値が`200`から`3000`に変更されました。                                                              |
 | TiDB 構成ファイル                    | `experimental.allow-expression-index`                                                                                         | 非推奨    | TiDB 構成ファイルの`allow-expression-index`構成は非推奨です。                                                                                     |
 | TiKV 構成ファイル                    | [`raftstore.cmd-batch`](/tikv-configuration-file.md#cmd-batch)                                                                | 新規追加   | リクエストのバッチ処理を有効にするかどうかを制御します。有効にすると、書き込みパフォーマンスが大幅に向上します。デフォルト値は`true`です。                                                          |
-| TiKV 構成ファイル                    | [`raftstore.inspect-interval`](/tikv-configuration-file.md#inspect-interval)                                                  | 新規追加   | 一定の間隔で、TiKV は Raftstore コンポーネントのレイテンシーを検査します。この構成項目は、検査の間隔を指定します。待ち時間がこの値を超えると、この検査はタイムアウトとしてマークされます。デフォルト値は`500ms`です。            |
+| TiKV 構成ファイル                    | [`raftstore.inspect-interval`](/tikv-configuration-file.md#inspect-interval)                                                  | 新規追加   | 一定の間隔で、TiKV は Raftstore コンポーネントのレイテンシーを検査します。この構成項目は、検査の間隔を指定します。レイテンシーがこの値を超えると、この検査はタイムアウトとしてマークされます。デフォルト値は`500ms`です。          |
 | TiKV 構成ファイル                    | [`raftstore.max-peer-down-duration`](/tikv-configuration-file.md#max-peer-down-duration)                                      | 修正済み   | ピアに許可される最長の非アクティブ期間を示します。タイムアウトのあるピアは`down`としてマークされ、PD は後でそれを削除しようとします。デフォルト値が`5m`から`10m`に変更されました。                                |
 | TiKV 構成ファイル                    | [`server.raft-client-queue-size`](/tikv-configuration-file.md#raft-client-queue-size)                                         | 新規追加   | TiKV のRaftメッセージのキュー サイズを指定します。デフォルト値は`8192`です。                                                                                    |
 | TiKV 構成ファイル                    | [`storage.flow-control.enable`](/tikv-configuration-file.md#enable)                                                           | 新規追加   | フロー制御メカニズムを有効にするかどうかを決定します。デフォルト値は`true`です。                                                                                       |
@@ -63,7 +63,7 @@ v5.2 の主な新機能と改善点は次のとおりです。
 -   v4.0 から v5.2 にアップグレードされた TiDB クラスターの場合、デフォルト値の[`tidb_multi_statement_mode`](/system-variables.md#tidb_multi_statement_mode-new-in-v4011)が`WARN`から`OFF`に変更されます。
 -   アップグレードの前に、TiDB 構成の値を確認してください[`feedback-probability`](https://docs.pingcap.com/tidb/v5.2/tidb-configuration-file#feedback-probability) 。値が`0`でない場合、アップグレード後に「回復可能なゴルーチンでpanic」エラーが発生しますが、このエラーはアップグレードには影響しません。
 -   TiDB は現在、 MySQL 5.7の noop 変数`innodb_default_row_format`と互換性があります。この変数を設定しても効果はありません。 [#23541](https://github.com/pingcap/tidb/issues/23541)
--   TiDB 5.2 以降では、システムのセキュリティを向上させるために、クライアントからの接続のトランスポート層を暗号化することが推奨されています (必須ではありません)。 TiDB は、TiDB での暗号化を自動的に構成して有効にする Auto TLS 機能を提供します。自動 TLS 機能を使用するには、TiDB をアップグレードする前に、TiDB 構成ファイルで[`security.auto-tls`](/tidb-configuration-file.md#auto-tls)を`true`に設定します。
+-   TiDB 5.2 以降では、システムのセキュリティを向上させるために、クライアントからの接続のトランスポートレイヤーを暗号化することが推奨されています (必須ではありません)。 TiDB は、TiDB での暗号化を自動的に構成して有効にする Auto TLS 機能を提供します。自動 TLS 機能を使用するには、TiDB をアップグレードする前に、TiDB 構成ファイルで[`security.auto-tls`](/tidb-configuration-file.md#auto-tls)を`true`に設定します。
 -   MySQL 8.0 からの移行を容易にし、セキュリティを向上させるために、 `caching_sha2_password`の認証方法をサポートします。
 
 ## 新機能 {#new-features}
@@ -84,7 +84,7 @@ v5.2 の主な新機能と改善点は次のとおりです。
 
 -   **スピル HashAgg のサポート**
 
-    ディスクへの HashAgg のスピルをサポートします。 HashAgg 演算子を含む SQL ステートメントによってメモリ不足 (OOM) が発生した場合、この演算子の同時実行数を`1`に設定して、ディスク スピルをトリガーすることを試みることができます。これにより、メモリ ストレスが軽減されます。
+    ディスクへの HashAgg のスピルをサポートします。 HashAgg 演算子を含む SQL ステートメントによってメモリ不足 (OOM) が発生した場合、この演算子の同時実行数を`1`に設定して、ディスク スピルをトリガーすることを試みることができます。これにより、メモリ ストレスが緩和されます。
 
     [ユーザー文書](/configure-memory-usage.md#other-memory-control-behaviors-of-tidb-server) 、 [#25882](https://github.com/pingcap/tidb/issues/25882)
 
@@ -111,14 +111,14 @@ v5.2 の主な新機能と改善点は次のとおりです。
     v5.2 では、Lock ビューに対して次の機能強化が行われました。
 
     -   ロック ビュー関連のテーブルの SQL ダイジェスト列に加えて、対応する正規化された SQL テキストを示す列をこれらのテーブルに追加します。 SQL ダイジェストに対応するステートメントを手動でクエリする必要はありません。
-    -   `TIDB_DECODE_SQL_DIGESTS`関数を追加して、クラスタの一連の SQL ダイジェストに対応する正規化された SQL ステートメント (形式と引数のないフォーム) を照会します。これにより、トランザクションによって過去に実行されたステートメントを照会する操作が簡素化されます。
+    -   `TIDB_DECODE_SQL_DIGESTS`関数を追加して、クラスター内の一連の SQL ダイジェストに対応する正規化された SQL ステートメント (形式と引数のないフォーム) を照会します。これにより、トランザクションによって過去に実行されたステートメントを照会する操作が簡素化されます。
     -   `DATA_LOCK_WAITS`および`DEADLOCKS`システム テーブルに列を追加して、キーから解釈されたテーブル名、行 ID、インデックス値、およびその他のキー情報を表示します。これにより、キーが属するテーブルの検索やキー情報の解釈などの操作が簡素化されます。
     -   `DEADLOCKS`のテーブルでリトライ可能なデッドロック エラーの情報を収集できるようになりました。これにより、このようなエラーによって引き起こされる問題のトラブルシューティングが容易になります。エラー収集はデフォルトで無効になっており、 `pessimistic-txn.deadlock-history-collect-retryable`構成を使用して有効にすることができます。
     -   `TIDB_TRX`システム テーブルで、クエリ実行トランザクションとアイドル トランザクションの区別をサポートします。第`Normal`状態は現在、第`Running`状態と第`Idle`状態に分割されています。
 
     ユーザー ドキュメント:
 
-    -   クラスタのすべての TiKV ノードで発生している悲観的なロック待機イベントをビューします[`DATA_LOCK_WAITS`](/information-schema/information-schema-data-lock-waits.md)
+    -   クラスター内のすべての TiKV ノードで発生している悲観的なロック待機イベントをビューします。 [`DATA_LOCK_WAITS`](/information-schema/information-schema-data-lock-waits.md)
     -   TiDB ノードで最近発生したデッドロック エラーをビューする: [`DEADLOCKS`](/information-schema/information-schema-deadlocks.md)
     -   TiDB ノードで実行中のトランザクションをビューする: [`TIDB_TRX`](/information-schema/information-schema-tidb-trx.md)
 
@@ -138,7 +138,7 @@ v5.2 の主な新機能と改善点は次のとおりです。
 
     TiKV は、以前の RocksDB 書き込みストール メカニズムに代わる新しいフロー制御メカニズムを導入しています。書き込みストール メカニズムと比較して、この新しいメカニズムは、フォアグラウンド書き込みの安定性への影響を軽減します。
 
-    具体的には、RocksDB コンパクションのストレスが蓄積されると、次の問題を回避するために、RocksDB レイヤーではなく TiKV スケジューラー レイヤーでフロー制御が実行されます。
+    具体的には、RocksDB コンパクションのストレスが蓄積されると、次の問題を回避するために、RocksDBレイヤーではなく TiKV スケジューラーレイヤーでフロー制御が実行されます。
 
     -   Raftstore がスタックします。これは、RocksDB の書き込みストールが原因です。
     -   Raft選出がタイムアウトになり、結果としてノード リーダーが転送されます。
@@ -147,9 +147,9 @@ v5.2 の主な新機能と改善点は次のとおりです。
 
     [ユーザー文書](/tikv-configuration-file.md#storageflow-control) 、 [#10137](https://github.com/tikv/tikv/issues/10137)
 
--   **クラスタの単一の遅い TiKV ノードによって引き起こされた影響を自動的に検出して回復します**
+-   **クラスター内の単一の遅い TiKV ノードによって引き起こされた影響を自動的に検出して回復します**
 
-    TiKV では、低速ノード検出メカニズムが導入されています。このメカニズムは、TiKV Raftstore のレートを検査してスコアを計算し、ストア ハートビートを介して PD にスコアを報告します。一方、PD に`evict-slow-store-scheduler`のスケジューラーを追加して、単一の低速 TiKV ノードのリーダーを自動的に削除します。このようにして、クラスタ全体への影響が軽減されます。同時に、遅いノードに関するより多くのアラート項目が導入され、問題を迅速に特定して解決するのに役立ちます。
+    TiKV では、低速ノード検出メカニズムが導入されています。このメカニズムは、TiKV Raftstore のレートを検査してスコアを計算し、ストア ハートビートを介して PD にスコアを報告します。一方、PD に`evict-slow-store-scheduler`のスケジューラーを追加して、単一の低速 TiKV ノードのリーダーを自動的に削除します。このようにして、クラスター全体への影響が軽減されます。同時に、遅いノードに関するより多くのアラート項目が導入され、問題を迅速に特定して解決するのに役立ちます。
 
     [ユーザー文書](/tikv-configuration-file.md#inspect-interval) 、 [#10539](https://github.com/tikv/tikv/issues/10539)
 
@@ -157,7 +157,7 @@ v5.2 の主な新機能と改善点は次のとおりです。
 
 -   **データ移行 (DM) の操作を簡素化**
 
-    DM v2.0.6 は、VIP を使用してデータ ソースの変更イベント (フェイルオーバーまたはプランの変更) を自動的に識別し、新しいデータ ソース インスタンスに自動的に接続して、データ レプリケーションの待ち時間を短縮し、操作手順を簡素化できます。
+    DM v2.0.6 は、VIP を使用してデータ ソースの変更イベント (フェイルオーバーまたはプランの変更) を自動的に識別し、新しいデータ ソース インスタンスに自動的に接続して、データ レプリケーションのレイテンシーを短縮し、操作手順を簡素化できます。
 
 -   TiDB Lightningは、CSV データでカスタマイズされた行末記号をサポートし、MySQL LOAD DATA CSV データ形式と互換性があります。その後、 TiDB Lightningをデータ フローアーキテクチャで直接使用できます。
 

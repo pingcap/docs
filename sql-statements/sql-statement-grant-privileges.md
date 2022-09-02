@@ -5,7 +5,7 @@ summary: An overview of the usage of GRANT <privileges> for the TiDB database.
 
 # <code>GRANT &#x3C;privileges></code> {#code-grant-x3c-privileges-code}
 
-このステートメントは、TiDB の既存のユーザーに特権を割り当てます。 TiDB の権限システムは MySQL に従い、資格情報はデータベース/テーブル パターンに基づいて割り当てられます。このステートメントを実行するには、割り当てた`GRANT OPTION`の特権とすべての特権が必要です。
+このステートメントは、TiDB の既存のユーザーに権限を割り当てます。 TiDB の権限システムは MySQL に従い、資格情報はデータベース/テーブル パターンに基づいて割り当てられます。このステートメントを実行するには、割り当てた`GRANT OPTION`の特権とすべての権限が必要です。
 
 ## あらすじ {#synopsis}
 
@@ -77,7 +77,7 @@ mysql> SHOW GRANTS FOR 'newuser';
 
 ## MySQL の互換性 {#mysql-compatibility}
 
--   MySQL と同様に、 `USAGE`特権は TiDB サーバーにログインできることを示します。
+-   MySQL と同様に、 `USAGE`特権は TiDBサーバーにログインできることを示します。
 -   カラムレベルの権限は現在サポートされていません。
 -   MySQL と同様に、 `NO_AUTO_CREATE_USER` sql モードが存在しない場合、ユーザーが存在しない場合、 `GRANT`ステートメントは空のパスワードで新しいユーザーを自動的に作成します。この sql-mode を削除すると (デフォルトで有効になっています)、セキュリティ上のリスクが生じます。
 

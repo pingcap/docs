@@ -210,7 +210,7 @@ CREATE [TEMPORARY] SEQUENCE [IF NOT EXISTS] sequence_name
     1 row in set (0.00 sec)
     ```
 
--   `setval()`関数は、シーケンス オブジェクトの現在の値を変更できますが、次の値の算術累進規則を変更することはできません。
+-   `setval()`関数はシーケンス オブジェクトの現在の値を変更できますが、次の値の算術累進規則を変更することはできません。
 
     {{< copyable "" >}}
 

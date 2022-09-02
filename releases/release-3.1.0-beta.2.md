@@ -24,14 +24,14 @@ TiDB アンシブル バージョン: 3.1.0-beta.2
 ## 新機能 {#new-features}
 
 -   TiDB
-    -   列属性に`AutoRandom`キーワードを追加して、 `AUTO_INCREMENT`がランダムな整数を主キーに自動的に割り当てられるようにすることをサポートし[#14555](https://github.com/pingcap/tidb/pull/14555) 。
+    -   列属性に`AutoRandom`キーワードを追加して、TiDB がランダムな整数を主キーに自動的に割り当てることをサポートします。これにより、主キー`AUTO_INCREMENT`によって引き起こされる書き込みホットスポットが回避され[#14555](https://github.com/pingcap/tidb/pull/14555) 。
     -   DDL ステートメントによる列ストア レプリカの作成または削除のサポート[#14537](https://github.com/pingcap/tidb/pull/14537)
     -   オプティマイザが異なるストレージ エンジンを個別に選択できる機能を追加します[#14537](https://github.com/pingcap/tidb/pull/14537)
     -   SQL ヒントが異なるストレージ エンジンをサポートする機能を追加します[#14537](https://github.com/pingcap/tidb/pull/14537)
     -   `tidb_replica_read`システム変数[#13464](https://github.com/pingcap/tidb/pull/13464)を使用して、フォロワーからのデータの読み取りをサポートします。
 -   TiKV
     -   ラフトストア
-        -   `peer_address`パラメータを追加して、他のノードを TiKV サーバーに接続します[#6491](https://github.com/tikv/tikv/pull/6491)
+        -   `peer_address`パラメータを追加して、他のノードを TiKVサーバーに接続します[#6491](https://github.com/tikv/tikv/pull/6491)
         -   `read_index`と`read_index_resp`のモニタリング メトリックを追加して、 `ReadIndex`リクエストの数をモニタリングします[#6610](https://github.com/tikv/tikv/pull/6610)
 -   PD クライアント
     -   PD [#6605](https://github.com/tikv/tikv/pull/6605)へのローカル スレッドの統計レポートのサポート
@@ -42,7 +42,7 @@ TiDB アンシブル バージョン: 3.1.0-beta.2
 -   ティフラッシュ
     -   初回リリース
 -   TiDB アンシブル
-    -   複数の Grafana/Prometheus/Alertmanager を 1 つのクラスタにデプロイするサポート[#1143](https://github.com/pingcap/tidb-ansible/pull/1143)
+    -   複数の Grafana/Prometheus/Alertmanager を 1 つのクラスターにデプロイするサポート[#1143](https://github.com/pingcap/tidb-ansible/pull/1143)
     -   TiFlash コンポーネントの展開をサポート[#1148](https://github.com/pingcap/tidb-ansible/pull/1148)
     -   TiFlash コンポーネント[#1152](https://github.com/pingcap/tidb-ansible/pull/1152)に関連するモニタリング メトリックを追加します。
 

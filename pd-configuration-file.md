@@ -26,7 +26,7 @@ PD 構成ファイルは、コマンドライン パラメーターよりも多�
 
 -   PD がリッスンするクライアント URL のリスト
 -   デフォルト値: `"http://127.0.0.1:2379"`
--   クラスタをデプロイするときは、現在のホストの IP アドレスを`client-urls` (たとえば、 `"http://192.168.100.113:2379"` ) として指定する必要があります。クラスタが Docker で実行されている場合は、Docker の IP アドレスを`"http://0.0.0.0:2379"`として指定します。
+-   クラスターをデプロイするときは、現在のホストの IP アドレスを`client-urls`として指定する必要があります (たとえば、 `"http://192.168.100.113:2379"` )。クラスターが Docker で実行されている場合は、Docker の IP アドレスを`"http://0.0.0.0:2379"`として指定します。
 
 ### <code>advertise-client-urls</code> {#code-advertise-client-urls-code}
 
@@ -39,7 +39,7 @@ PD 構成ファイルは、コマンドライン パラメーターよりも多�
 
 -   PD ノードがリッスンするピア URL のリスト
 -   デフォルト値: `"http://127.0.0.1:2380"`
--   クラスタをデプロイするときは、現在のホストの IP アドレスとして`peer-urls`を指定する必要があります (例: `"http://192.168.100.113:2380"` )。クラスタが Docker で実行されている場合は、Docker の IP アドレスを`"http://0.0.0.0:2380"`として指定します。
+-   クラスターをデプロイするときは、現在のホストの IP アドレスとして`peer-urls` ( `"http://192.168.100.113:2380"`など) を指定する必要があります。クラスターが Docker で実行されている場合は、Docker の IP アドレスを`"http://0.0.0.0:2380"`として指定します。
 
 ### <code>advertise-peer-urls</code> {#code-advertise-peer-urls-code}
 
@@ -50,7 +50,7 @@ PD 構成ファイルは、コマンドライン パラメーターよりも多�
 
 ### <code>initial-cluster</code> {#code-initial-cluster-code}
 
--   ブートストラップ用の初期クラスタ構成
+-   ブートストラップ用の初期クラスター構成
 -   デフォルト値: `"{name}=http://{advertise-peer-url}"`
 -   たとえば、 `name`が &quot;pd&quot; で`advertise-peer-urls`が`"http://192.168.100.113:2380"`の場合、 `initial-cluster`は`"pd=http://192.168.100.113:2380"`です。
 -   3 つの PD サーバーを開始する必要がある場合、 `initial-cluster`つは次のようになります。
@@ -68,7 +68,7 @@ PD 構成ファイルは、コマンドライン パラメーターよりも多�
 
 -   ブートストラップ フェーズ中にさまざまなクラスタを識別します
 -   デフォルト値: `"pd-cluster"`
--   同じ構成のノードを持つ複数のクラスターが連続してデプロイされる場合は、異なるクラスタノードを分離するために異なるトークンを指定する必要があります。
+-   同じ構成のノードを持つ複数のクラスターが連続してデプロイされる場合は、異なるクラスター ノードを分離するために異なるトークンを指定する必要があります。
 
 ### <code>lease</code> {#code-lease-code}
 
@@ -94,7 +94,7 @@ PD 構成ファイルは、コマンドライン パラメーターよりも多�
 
 ### <code>force-new-cluster</code> {#code-force-new-cluster-code}
 
--   PD を新しいクラスタとして強制的に開始し、 Raftメンバーの数を`1`に変更するかどうかを決定します。
+-   PD を新しいクラスターとして強制的に開始し、 Raftメンバーの数を`1`に変更するかどうかを決定します。
 -   デフォルト値: `false`
 
 ## 安全 {#security}
@@ -283,7 +283,7 @@ PD 構成ファイルは、コマンドライン パラメーターよりも多�
 
 > **ノート：**
 >
-> クラスタを TiDB 4.0 バージョンから現在のバージョンにアップグレードした場合、新しいフォーミュラ バージョンはデフォルトで自動的に無効になり、アップグレードの前後で一貫した PD 動作が保証されます。式のバージョンを変更する場合は、 `pd-ctl`の設定を手動で切り替える必要があります。詳細は[PD Control](/pd-control.md#config-show--set-option-value--placement-rules)を参照してください。
+> クラスターを TiDB 4.0 バージョンから現在のバージョンにアップグレードした場合、新しいフォーミュラ バージョンはデフォルトで自動的に無効になり、アップグレードの前後で一貫した PD 動作が保証されます。式のバージョンを変更する場合は、 `pd-ctl`の設定を手動で切り替える必要があります。詳細は[PD Control](/pd-control.md#config-show--set-option-value--placement-rules)を参照してください。
 
 ### <code>enable-joint-consensus</code> <span class="version-mark">v5.0 の新機能</span> {#code-enable-joint-consensus-code-span-class-version-mark-new-in-v5-0-span}
 
@@ -315,15 +315,15 @@ PD 構成ファイルは、コマンドライン パラメーターよりも多�
 
 ### <code>location-labels</code> {#code-location-labels-code}
 
--   TiKVクラスタのトポロジー情報
+-   TiKV クラスターのトポロジー情報
 -   デフォルト値: `[]`
--   [クラスタ トポロジ構成](/schedule-replicas-by-topology-labels.md)
+-   [クラスタトポロジ構成](/schedule-replicas-by-topology-labels.md)
 
 ### <code>isolation-level</code> {#code-isolation-level-code}
 
--   TiKVクラスタの最小トポロジー分離レベル
+-   TiKV クラスターの最小トポロジー分離レベル
 -   デフォルト値: `""`
--   [クラスタ トポロジ構成](/schedule-replicas-by-topology-labels.md)
+-   [クラスタトポロジ構成](/schedule-replicas-by-topology-labels.md)
 
 ### <code>strictly-match-label</code> {#code-strictly-match-label-code}
 
@@ -344,7 +344,7 @@ PD 構成ファイルは、コマンドライン パラメーターよりも多�
 
 > **ノート：**
 >
-> クラスタを TiDB 4.0 バージョンから現在のバージョンにアップグレードした場合、アップグレード後の`flow-round-by-digit`の動作とアップグレード前の`trace-region-flow`の動作はデフォルトで一貫しています。これは、アップグレード前に`trace-region-flow`の値が false の場合、アップグレード後の`flow-round-by-digit`の値は 127 であることを意味します。アップグレード前の`trace-region-flow`の値が`true`の場合、アップグレード後の`flow-round-by-digit`の値は`3`です。
+> クラスターを TiDB 4.0 バージョンから現在のバージョンにアップグレードした場合、アップグレード後の`flow-round-by-digit`の動作とアップグレード前の`trace-region-flow`の動作はデフォルトで一貫しています。これは、アップグレード前に`trace-region-flow`の値が false の場合、アップグレード後の`flow-round-by-digit`の値は 127 であることを意味します。アップグレード前の`trace-region-flow`の値が`true`の場合、アップグレード後の`flow-round-by-digit`の値は`3`です。
 
 ## <code>label-property</code> {#code-label-property-code}
 

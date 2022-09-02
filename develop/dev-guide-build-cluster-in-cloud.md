@@ -5,11 +5,11 @@ summary: Learn how to build a TiDB cluster in TiDB Cloud (Developer Tier) and co
 
 <!-- markdownlint-disable MD029 -->
 
-# TiDB Cloud(開発者層) で TiDB クラスターを構築する {#build-a-tidb-cluster-in-tidb-cloud-developer-tier}
+# TiDB Cloud(開発者層) で TiDBクラスタを構築する {#build-a-tidb-cluster-in-tidb-cloud-developer-tier}
 
 <CustomContent platform="tidb">
 
-このドキュメントでは、TiDB を使い始める最も簡単な方法について説明します。 [TiDB Cloud](https://en.pingcap.com/tidb-cloud)を使用して、無料の TiDBクラスタを作成し、それに接続して、サンプル アプリケーションを実行します。
+このドキュメントでは、TiDB を使い始める最も簡単な方法について説明します。 [TiDB Cloud](https://en.pingcap.com/tidb-cloud)を使用して、無料の TiDB クラスターを作成し、それに接続して、サンプル アプリケーションを実行します。
 
 ローカル マシンで TiDB を実行する必要がある場合は、 [TiDB をローカルで起動する](/quick-start-with-tidb.md)を参照してください。
 
@@ -17,31 +17,31 @@ summary: Learn how to build a TiDB cluster in TiDB Cloud (Developer Tier) and co
 
 <CustomContent platform="tidb-cloud">
 
-このドキュメントでは、 TiDB Cloudを開始するための最も簡単な方法について説明します。無料の TiDBクラスタを作成して接続し、サンプル アプリケーションを実行します。
+このドキュメントでは、 TiDB Cloudを開始するための最も簡単な方法について説明します。無料の TiDB クラスターを作成して接続し、サンプル アプリケーションを実行します。
 
 </CustomContent>
 
-## ステップ 1.無料のクラスタを作成する {#step-1-create-a-free-cluster}
+## ステップ 1.無料のクラスターを作成する {#step-1-create-a-free-cluster}
 
 1.  TiDB Cloudアカウントを持っていない場合は、 [TiDB Cloud](https://tidbcloud.com/free-trial)をクリックしてアカウントにサインアップします。
 
 2.  [ログイン](https://tidbcloud.com/)をTiDB Cloudアカウントで。
 
-3.  Developer Tierクラスタを 1 年間無料で作成するには、 [プランページ](https://tidbcloud.com/console/plans)ページで**Developer Tier**プランを選択するか、 [**アクティブなクラスター**](https://tidbcloud.com/console/clusters)ページで [<strong>クラスターの作成</strong>] をクリックします。
+3.  Developer Tier クラスターを 1 年間無料で作成するには、 [プランページ](https://tidbcloud.com/console/plans)ページで**Developer Tier**プランを選択するか、 [**アクティブなクラスター**](https://tidbcloud.com/console/clusters)ページで [<strong>クラスタの作成</strong>] をクリックします。
 
-4.  [**クラスターの作成]**ページで、クラスタ名、クラウド プロバイダー (現時点では、開発者層で使用できるのは AWS のみ)、およびリージョン (近くのリージョンをお勧めします) を設定します。次に、[<strong>作成</strong>] をクリックしてクラスタを作成します。
+4.  [**クラスタの作成]**ページで、クラスター名、クラウド プロバイダー (現時点では、開発者層で使用できるのは AWS のみ)、およびリージョン (近くのリージョンをお勧めします) を設定します。次に、[<strong>作成</strong>] をクリックしてクラスターを作成します。
 
-    クラスタの作成プロセスが開始され、 **[セキュリティの設定**] ダイアログ ボックスが表示されます。
+    クラスターの作成プロセスが開始され、 **[セキュリティの設定**] ダイアログ ボックスが表示されます。
 
-5.  [**セキュリティの設定**] ダイアログ ボックスで、root パスワードと許可された IP アドレスを設定してクラスタに接続し、[<strong>適用</strong>] をクリックします。
+5.  [**セキュリティ設定**] ダイアログ ボックスで、ルート パスワードと許可された IP アドレスを設定してクラスターに接続し、[<strong>適用</strong>] をクリックします。
 
-    TiDB Cloudクラスタは、約 5 ～ 15 分で作成されます。
+    TiDB Cloudクラスターは、約 5 ～ 15 分で作成されます。
 
-6.  クラスタを作成したら、右上隅にある [**接続**] をクリックします。接続ダイアログボックスが表示されます。
+6.  クラスターを作成したら、右上隅にある [**接続**] をクリックします。接続ダイアログボックスが表示されます。
 
     > **ヒント：**
     >
-    > または、新しく作成したクラスタの名前をクリックしてクラスタの詳細ページに移動し、右上隅にある [**接続**] をクリックすることもできます。
+    > または、新しく作成したクラスターの名前をクリックしてクラスターの詳細ページに移動し、右上隅にある [**接続**] をクリックすることもできます。
 
 7.  ダイアログ ボックスで、 [**ステップ 2: SQL クライアントに接続**する] を探し、文字列をコピーして SQL クライアントに接続し、後で使用できるようにします。
 
@@ -51,7 +51,7 @@ summary: Learn how to build a TiDB cluster in TiDB Cloud (Developer Tier) and co
 
     > **ノート：**
     >
-    > [開発者層のクラスター](https://docs.pingcap.com/tidbcloud/select-cluster-tier#developer-tier)の場合、クラスタに接続するときに、ユーザー名にクラスタのプレフィックスを含め、名前を引用符で囲む必要があります。詳細については、 [ユーザー名のプレフィックス](https://docs.pingcap.com/tidbcloud/select-cluster-tier#user-name-prefix)を参照してください。
+    > [開発者層のクラスター](https://docs.pingcap.com/tidbcloud/select-cluster-tier#developer-tier)の場合、クラスターに接続するときに、ユーザー名にクラスターのプレフィックスを含め、名前を引用符で囲む必要があります。詳細については、 [ユーザー名のプレフィックス](https://docs.pingcap.com/tidbcloud/select-cluster-tier#user-name-prefix)を参照してください。
 
     </CustomContent>
 
@@ -59,11 +59,11 @@ summary: Learn how to build a TiDB cluster in TiDB Cloud (Developer Tier) and co
 
     > **ノート：**
     >
-    > [開発者層のクラスター](/tidb-cloud/select-cluster-tier.md#developer-tier)の場合、クラスタに接続するときに、ユーザー名にクラスタのプレフィックスを含め、名前を引用符で囲む必要があります。詳細については、 [ユーザー名のプレフィックス](/tidb-cloud/select-cluster-tier.md#user-name-prefix)を参照してください。
+    > [開発者層のクラスター](/tidb-cloud/select-cluster-tier.md#developer-tier)の場合、クラスターに接続するときに、ユーザー名にクラスターのプレフィックスを含め、名前を引用符で囲む必要があります。詳細については、 [ユーザー名のプレフィックス](/tidb-cloud/select-cluster-tier.md#user-name-prefix)を参照してください。
 
     </CustomContent>
 
-## ステップ 2.クラスタに接続する {#step-2-connect-to-a-cluster}
+## ステップ 2. クラスターに接続する {#step-2-connect-to-a-cluster}
 
 1.  MySQL クライアントがインストールされていない場合は、オペレーティング システムを選択し、以下の手順に従ってインストールします。
 

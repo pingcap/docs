@@ -5,7 +5,7 @@ summary: Learn the `VARIABLES_INFO` information_schema table.
 
 # VARIABLES_INFO {#variables-info}
 
-表`VARIABLES_INFO`は、現在の TiDB インスタンスまたは TiDBクラスタのシステム変数のデフォルト値、現在の値、およびスコープに関する情報を提供します。
+`VARIABLES_INFO`テーブルは、現在の TiDB インスタンスまたは TiDB クラスターのシステム変数のデフォルト値、現在の値、およびスコープに関する情報を提供します。
 
 ```sql
 USE information_schema;
@@ -46,7 +46,7 @@ SELECT * FROM variables_info ORDER BY variable_name LIMIT 3;
 `VARIABLES_INFO`テーブルのフィールドは次のとおりです。
 
 -   `VARIABLE_NAME` : システム変数の名前。
--   `VARIABLE_SCOPE` : システム変数のスコープ。 `SESSION`は、システム変数が現在のセッションでのみ有効であることを意味します。 `INSTANCE`は、システム変数が TiDB インスタンスで有効であることを意味します。 `GLOBAL`は、システム変数が TiDBクラスタで有効であることを意味します。
+-   `VARIABLE_SCOPE` : システム変数のスコープ。 `SESSION`は、システム変数が現在のセッションでのみ有効であることを意味します。 `INSTANCE`は、システム変数が TiDB インスタンスで有効であることを意味します。 `GLOBAL`は、システム変数が TiDB クラスターで有効であることを意味します。
 -   `DEFAULT_VALUE` : システム変数のデフォルト値。
 -   `CURRENT_VALUE` : システム変数の現在の値。スコープに`SESSION`が含まれている場合、 `CURRENT_VALUE`は現在のセッションの値です。
 -   `MIN_VALUE` : システム変数に許可される最小値。システム変数が数値でない場合、 `MIN_VALUE`は NULL です。

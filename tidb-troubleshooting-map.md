@@ -57,7 +57,7 @@ summary: Learn how to troubleshoot common errors in TiDB.
 
     -   原因 1: 他のコンポーネント (PD/TiKV) とのネットワークの問題。
 
-    -   原因 2: TiDB の初期バージョン (v3.0.8 より前) では、同時実行性が高いゴルーチンが多数あるため、内部負荷が高くなっています。
+    -   原因 2: TiDB の初期バージョン (v3.0.8 より前) は、同時実行性が高いゴルーチンが多いため、内部負荷が高くなっています。
 
     -   原因 3: 初期のバージョン (v2.1.15 &amp; バージョン &lt; v3.0.0-rc1) では、PD インスタンスが TiDB キーの削除に失敗し、DDL のすべての変更が 2 つのリースを待機する原因になります。
 
@@ -71,8 +71,8 @@ summary: Learn how to troubleshoot common errors in TiDB.
 
     -   DDL 所有者の移行:
 
-        -   TiDB サーバーに接続できる場合は、所有者選出コマンドを再度実行します。 `curl -X POST http://{TiDBIP}:10080/ddl/owner/resign`
-        -   TiDB サーバーに接続できない場合は、 `tidb-ctl`を使用して PDクラスタの etcd から DDL 所有者を削除し、再選択をトリガーします`tidb-ctl etcd delowner [LeaseID] [flags] + ownerKey`
+        -   TiDBサーバーに接続できる場合は、所有者選出コマンドを再度実行し`curl -X POST http://{TiDBIP}:10080/ddl/owner/resign` 。
+        -   TiDBサーバーに接続できない場合は、 `tidb-ctl`を使用して PD クラスターの etcd から DDL 所有者を削除し、再選択をトリガーします: `tidb-ctl etcd delowner [LeaseID] [flags] + ownerKey`
 
 -   3.1.3 TiDB がログに`information schema is changed`のエラーを報告する
 
@@ -88,16 +88,16 @@ summary: Learn how to troubleshoot common errors in TiDB.
 
 -   3.1.4 TiDB がログに`information schema is out of date`を報告する
 
-    -   原因 1: DML ステートメントを実行している TiDB サーバーが`graceful kill`で停止され、終了の準備をしています。 DML ステートメントを含むトランザクションの実行時間が 1 DDL リースを超えています。トランザクションがコミットされると、エラーが報告されます。
+    -   原因 1: DML ステートメントを実行している TiDBサーバーが`graceful kill`で停止され、終了の準備をしています。 DML ステートメントを含むトランザクションの実行時間が 1 DDL リースを超えています。トランザクションがコミットされると、エラーが報告されます。
 
-    -   原因 2: DML ステートメントの実行中に、TiDB サーバーが PD または TiKV に接続できません。その結果、TiDB サーバーは 1 つの DDL リース (デフォルトでは`45s` ) 内で新しいスキーマをロードしなかったか、TiDB サーバーは`keep alive`の設定で PD から切断されました。
+    -   原因 2: DML ステートメントの実行中に、TiDBサーバーが PD または TiKV に接続できません。その結果、TiDBサーバーは 1 つの DDL リース (デフォルトでは`45s` ) 内で新しいスキーマをロードしなかったか、TiDBサーバーは`keep alive`の設定で PD から切断されました。
 
     -   原因 3: TiKV の負荷が高いか、ネットワークがタイムアウトになっています。 **Grafana** -&gt; <strong>TiDB</strong>および<strong>TiKV</strong>でノードの負荷を確認します。
 
     -   解決：
 
         -   原因 1 の場合は、TiDB の開始時に DML 操作を再試行してください。
-        -   原因 2 については、TiDB サーバーと PD/TiKV 間のネットワークを確認してください。
+        -   原因 2 については、TiDBサーバーと PD/TiKV 間のネットワークを確認してください。
         -   原因 3 については、TiKV がビジーである理由を調査します。 [4 TiKVの問題](#4-tikv-issues)を参照してください。
 
 ### 3.2 OOM の問題 {#3-2-oom-issues}
@@ -333,7 +333,7 @@ summary: Learn how to troubleshoot common errors in TiDB.
 
 -   5.2.1 PD スイッチ リーダー。
 
-    -   原因 1: ディスク。 PD ノードが配置されているディスクの I/O 負荷が最大になっています。 I/O 要求が高く、ディスクの状態が良好な他のコンポーネントと共に PD が展開されているかどうかを調査します。 **Grafana** -&gt; <strong>disk performance</strong> -&gt; <strong>latency</strong> / <strong>load</strong>でモニター メトリックを表示することで、原因を確認できます。必要に応じて、FIO ツールを使用してディスクのチェックを実行することもできます。中国語で[ケース-292](https://github.com/pingcap/tidb-map/blob/master/maps/diagnose-case-study/case292.md)を参照してください。
+    -   原因 1: ディスク。 PD ノードが配置されているディスクの I/O 負荷が最大になっています。 I/O 要求が高く、ディスクの状態が良好な他のコンポーネントと共に PD が展開されているかどうかを調査します。 **Grafana** -&gt; <strong>disk performance</strong> -&gt; <strong>レイテンシー</strong> / <strong>load</strong>でモニター メトリックを表示することで、原因を確認できます。必要に応じて、FIO ツールを使用してディスクのチェックを実行することもできます。中国語で[ケース-292](https://github.com/pingcap/tidb-map/blob/master/maps/diagnose-case-study/case292.md)を参照してください。
 
     -   原因 2: ネットワーク。 PD ログには`lost the TCP streaming connection`が表示されます。 PD ノード間のネットワークに問題があるかどうかを確認し、モニター**Grafana** -&gt; <strong>PD</strong> -&gt; <strong>etcd</strong>で`round trip`を表示して原因を確認する必要があります。中国語で[ケース-177](https://github.com/pingcap/tidb-map/blob/master/maps/diagnose-case-study/case177.md)を参照してください。
 
@@ -349,7 +349,7 @@ summary: Learn how to troubleshoot common errors in TiDB.
 
     -   PD にはリーダーがないか、リーダーが切り替わります。 [5.2.1](#52-pd-election)と[5.2.2](#52-pd-election)を参照してください。
 
-    -   ネットワークの問題。モニター**Grafana** -&gt; <strong>blackbox_exporter</strong> -&gt; <strong>ping latency</strong>にアクセスして、TiDB から PD リーダーへのネットワークが正常に動作しているかどうかを確認します。
+    -   ネットワークの問題。モニター**Grafana** -&gt; <strong>blackbox_exporter</strong> -&gt; <strong>ping レイテンシー</strong>にアクセスして、TiDB から PD リーダーへのネットワークが正常に動作しているかどうかを確認します。
 
     -   PDパニック。 [バグを報告](https://github.com/pingcap/pd/issues/new?labels=kind%2Fbug&#x26;template=bug-report.md) .
 
@@ -371,7 +371,7 @@ summary: Learn how to troubleshoot common errors in TiDB.
 
 ### 5.4 グラファナ表示 {#5-4-grafana-display}
 
--   5.4.1 **Grafana**のモニター -&gt; <strong>PD</strong> -&gt;<strong>クラスタ</strong>-&gt;<strong>ロール</strong>はフォロワーを表示します。 Grafana 式の問題は v3.0.8 で修正されました。
+-   5.4.1 **Grafana**のモニター -&gt; <strong>PD</strong> -&gt;<strong>クラスター</strong>-&gt;<strong>ロール</strong>はフォロワーを表示します。 Grafana 式の問題は v3.0.8 で修正されました。
 
 ## 6. 生態系ツール {#6-ecosystem-tools}
 
@@ -452,8 +452,8 @@ summary: Learn how to troubleshoot common errors in TiDB.
 -   6.2.2 `Access denied for user 'root'@'172.31.43.27' (using password: YES)`は、 `query status`を実行するか、ログを確認すると表示されます。
 
     -   すべての DM 構成ファイル内のデータベース関連のパスワードは`dmctl`で暗号化する必要があります。データベースのパスワードが空の場合、パスワードを暗号化する必要はありません。 v1.0.6以降、クリアテキストのパスワードを使用できます。
-    -   DM 操作中、アップストリーム データベースとダウンストリーム データベースのユーザーは、対応する読み取りおよび書き込み権限を持っている必要があります。データ複製タスクの開始中に、データ移行も自動的に[対応する特権を事前チェックします](/dm/dm-precheck.md)になります。
-    -   DMクラスタに異なるバージョンの DM-worker/DM-master/dmctl をデプロイするには、中国語の[AskTUGのケーススタディ](https://asktug.com/t/dm1-0-0-ga-access-denied-for-user/1049/5)を参照してください。
+    -   DM の操作中、アップストリーム データベースとダウンストリーム データベースのユーザーは、対応する読み取りおよび書き込み権限を持っている必要があります。データ複製タスクの開始中に、データ移行も自動的に[対応する権限を事前チェックします](/dm/dm-precheck.md)になります。
+    -   DM クラスターに異なるバージョンの DM-worker/DM-master/dmctl をデプロイするには、中国語の[AskTUGのケーススタディ](https://asktug.com/t/dm1-0-0-ga-access-denied-for-user/1049/5)を参照してください。
 
 -   6.2.3 `driver: bad connection`のエラーが返されてレプリケーション タスクが中断されます。
 
@@ -495,14 +495,14 @@ summary: Learn how to troubleshoot common errors in TiDB.
 
 ### 6.3 TiDB Lightning {#6-3-tidb-lightning}
 
--   6.3.1 TiDB Lightningは、大量のデータを TiDBクラスタに高速に完全にインポートするためのツールです。 [GitHubの TiDB Lightning](https://github.com/pingcap/tidb-lightning)を参照してください。
+-   6.3.1 TiDB Lightningは、大量のデータを TiDB クラスターに高速に完全にインポートするためのツールです。 [GitHubの TiDB Lightning](https://github.com/pingcap/tidb-lightning)を参照してください。
 
 -   6.3.2 インポート速度が遅すぎる。
 
     -   `region-concurrency`の設定が高すぎると、スレッドの競合が発生し、パフォーマンスが低下します。トラブルシューティングの 3 つの方法:
 
         -   設定は、ログの先頭から`region-concurrency`を検索して見つけることができます。
-        -   TiDB Lightningがサーバーを他のサービス (Importer など) と共有する場合、そのサーバーの CPU コアの総数の`region-concurrency` ～ 75% を手動で設定する必要があります。
+        -   TiDB Lightningがサーバーを他のサービス (インポーターなど) と共有する場合、そのサーバーの CPU コアの総数の`region-concurrency` ～ 75% を手動で設定する必要があります。
         -   CPU にクォータがある場合 (たとえば、Kubernetes の設定によって制限されている場合)、 TiDB Lightningはこれを読み取れない可能性があります。この場合、 `region-concurrency`も手動で減らす必要があります。
 
     -   インデックスを追加するたびに、行ごとに新しい KV ペアが導入されます。 N 個のインデックスがある場合、インポートされる実際のサイズは、 [マイダンパー](https://docs.pingcap.com/tidb/v4.0/mydumper-overview)の出力のサイズの約 (N+1) 倍になります。インデックスが無視できる場合は、最初にそれらをスキーマから削除し、インポートが完了した後に`CREATE INDEX`を介してそれらを再度追加することができます。
@@ -513,7 +513,7 @@ summary: Learn how to troubleshoot common errors in TiDB.
 
     -   原因 1: テーブルに既にデータがある可能性があります。これらの古いデータは、最終的なチェックサムに影響を与える可能性があります。
 
-    -   原因 2: ターゲット データベースのチェックサムが 0 の場合、つまり何もインポートされていない場合、クラスタが過熱してデータの取り込みに失敗している可能性があります。
+    -   原因 2: ターゲット データベースのチェックサムが 0 の場合、つまり何もインポートされていない場合、クラスターが過熱してデータの取り込みに失敗している可能性があります。
 
     -   原因 3: データ ソースがマシンによって生成され、 [マイダンパー](https://docs.pingcap.com/tidb/v4.0/mydumper-overview)によってバックアップされていない場合は、テーブルの制約に従っていることを確認してください。例えば：
 
@@ -553,7 +553,7 @@ summary: Learn how to troubleshoot common errors in TiDB.
 
     トランザクション期間が GC の有効期間 (既定では 10 分) を超えています。
 
-    [`tidb_gc_life_time`](/system-variables.md#tidb_gc_life_time-new-in-v50)システム変数を変更することで、GC の寿命を延ばすことができます。通常、このパラメーターを変更することはお勧めしません。このトランザクションに多数の`UPDATE`ステートメントと`DELETE`ステートメントがある場合、変更すると多くの古いバージョンが蓄積される可能性があるためです。
+    [`tidb_gc_life_time`](/system-variables.md#tidb_gc_life_time-new-in-v50)システム変数を変更することで、GC の寿命を延ばすことができます。通常、このパラメーターを変更することはお勧めしません。これを変更すると、このトランザクションに`UPDATE`ステートメントと`DELETE`ステートメントが多数含まれている場合、多くの古いバージョンが蓄積される可能性があるためです。
 
 -   7.1.2 `txn takes too much time` .
 

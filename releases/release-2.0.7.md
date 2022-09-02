@@ -30,6 +30,6 @@ title: TiDB 2.0.7 Release Notes
 ## TiKV {#tikv}
 
 -   改善
-    -   スペース増幅を減らすために、デフォルトで空のクラスタで`dynamic-level-bytes`つのパラメーターを開きます
+    -   スペース増幅を減らすために、デフォルトで空のクラスターで`dynamic-level-bytes`つのパラメーターを開きます
 -   バグ修正
     -   リージョンのマージ後のリージョンの更新`approximate size`と`approximate keys count`

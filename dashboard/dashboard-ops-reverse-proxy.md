@@ -10,9 +10,9 @@ title: Use TiDB Dashboard behind a Reverse Proxy
 
 ### ステップ 1: 実際の TiDB ダッシュボード アドレスを取得する {#step-1-get-the-actual-tidb-dashboard-address}
 
-複数の PD インスタンスがクラスタにデプロイされている場合、実際に TiDB ダッシュボードを実行する PD インスタンスは 1 つだけです。したがって、リバース プロキシのアップストリームが正しいアドレスを指していることを確認する必要があります。このメカニズムの詳細については、 [複数の PD インスタンスを使用した展開](/dashboard/dashboard-ops-deploy.md#deployment-with-multiple-pd-instances)を参照してください。
+複数の PD インスタンスがクラスターにデプロイされている場合、実際に TiDB ダッシュボードを実行する PD インスタンスは 1 つだけです。したがって、リバース プロキシのアップストリームが正しいアドレスを指していることを確認する必要があります。このメカニズムの詳細については、 [複数の PD インスタンスを使用した展開](/dashboard/dashboard-ops-deploy.md#deployment-with-multiple-pd-instances)を参照してください。
 
-デプロイに TiUP ツールを使用する場合は、次のコマンドを実行して、実際の TiDB ダッシュボード アドレスを取得します ( `CLUSTER_NAME`をクラスタ名に置き換えます)。
+デプロイに TiUP ツールを使用する場合は、次のコマンドを実行して、実際の TiDB ダッシュボード アドレスを取得します ( `CLUSTER_NAME`をクラスター名に置き換えます)。
 
 {{< copyable "" >}}
 
@@ -30,7 +30,7 @@ http://192.168.0.123:2379/dashboard/
 >
 > この機能は、 `tiup cluster`展開ツールの新しいバージョン (v1.0.3 以降) でのみ使用できます。
 >
-> <details><summary>TiUP クラスタのアップグレード</summary>
+> <details><summary>TiUPクラスタのアップグレード</summary>
 >
 > {{< copyable "" >}}
 >
@@ -116,7 +116,7 @@ TiDB ダッシュボードは、デフォルトで`http://example.com:8033/dashb
 
 PD 構成の`[dashboard]`カテゴリの`public-path-prefix`構成項目を変更して、TiDB ダッシュボード サービスのパス プレフィックスを指定します。この項目を変更したら、PD インスタンスを再起動して変更を有効にします。
 
-たとえば、クラスタが TiUP を使用してデプロイされ、サービスを`http://example.com:8033/foo/`で実行する場合は、次の構成を指定できます。
+たとえば、クラスターが TiUP を使用してデプロイされ、サービスを`http://example.com:8033/foo/`で実行する場合は、次の構成を指定できます。
 
 {{< copyable "" >}}
 
@@ -126,19 +126,19 @@ server_configs:
     dashboard.public-path-prefix: /foo
 ```
 
-<details><summary><strong>TiUP を使用して新しいクラスタをデプロイするときに構成を変更する</strong></summary>
+<details><summary><strong>TiUP を使用して新しいクラスターをデプロイするときに構成を変更する</strong></summary>
 
-新しいクラスタを展開する場合は、上記の構成を`topology.yaml` TiUP トポロジ ファイルに追加して、クラスタを展開できます。具体的な指示については、 [TiUP 展開ドキュメント](/production-deployment-using-tiup.md#step-3-initialize-cluster-topology-file)を参照してください。
+新しいクラスターを展開する場合は、上記の構成を`topology.yaml` TiUP トポロジ ファイルに追加して、クラスターを展開できます。具体的な指示については、 [TiUP 展開ドキュメント](/production-deployment-using-tiup.md#step-3-initialize-cluster-topology-file)を参照してください。
 
 </details>
 
 <details>
 
-<summary><strong>TiUP を使用してデプロイされたクラスタの構成を変更する</strong></summary>
+<summary><strong>TiUP を使用してデプロイされたクラスターの構成を変更する</strong></summary>
 
-デプロイされたクラスタの場合:
+デプロイされたクラスターの場合:
 
-1.  クラスタの構成ファイルを編集モードで開きます ( `CLUSTER_NAME`をクラスタ名に置き換えます)。
+1.  クラスターの構成ファイルを編集モードで開きます ( `CLUSTER_NAME`をクラスター名に置き換えます)。
 
     {{< copyable "" >}}
 
@@ -188,7 +188,7 @@ server_configs:
         dashboard.public-path-prefix: /foo
     ```
 
-3.  変更した構成を有効にするために、すべての PD インスタンスに対してローリング再起動を実行します ( `CLUSTER_NAME`をクラスタ名に置き換えます)。
+3.  変更した構成を有効にするために、すべての PD インスタンスに対してローリング再起動を実行します ( `CLUSTER_NAME`をクラスター名に置き換えます)。
 
     {{< copyable "" >}}
 

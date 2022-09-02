@@ -3,13 +3,13 @@ title: Configure TiFlash
 summary: Learn how to configure TiFlash.
 ---
 
-# TiFlash の設定 {#configure-tiflash}
+# TiFlash の構成 {#configure-tiflash}
 
 このドキュメントでは、TiFlash の展開と使用に関連する構成パラメーターを紹介します。
 
 ## PD スケジューリング パラメータ {#pd-scheduling-parameters}
 
-[pd-ctl](/pd-control.md)を使用して PD スケジューリング パラメータを調整できます。 tiup を使用してクラスタをデプロイおよび管理する場合、 `tiup ctl pd`を使用して`pd-ctl -u <pd_ip:pd_port>`を置き換えることができることに注意してください。
+[pd-ctl](/pd-control.md)を使用して PD スケジューリング パラメータを調整できます。 tiup を使用してクラスターをデプロイおよび管理する場合、 `tiup ctl pd`を使用して`pd-ctl -u <pd_ip:pd_port>`を置き換えることができることに注意してください。
 
 -   [`replica-schedule-limit`](/pd-configuration-file.md#replica-schedule-limit) : レプリカ関連のオペレーターが生成される速度を決定します。このパラメータは、ノードのオフライン化やレプリカの追加などの操作に影響します。
 
@@ -17,7 +17,7 @@ summary: Learn how to configure TiFlash.
     >
     > このパラメータの値は`region-schedule-limit`より小さい必要があります。そうしないと、TiKV ノード間の通常のリージョンスケジューリングが影響を受けます。
 
--   `store-balance-rate` : 各 TiKV/TiFlash ストアのリージョンがスケジュールされるレートを制限します。このパラメーターは、ストアがクラスタに新しく参加した場合にのみ有効になることに注意してください。既存のストアの設定を変更する場合は、次のコマンドを使用します。
+-   `store-balance-rate` : 各 TiKV/TiFlash ストアのリージョンがスケジュールされるレートを制限します。このパラメーターは、ストアがクラスターに新しく参加した場合にのみ有効になることに注意してください。既存のストアの設定を変更する場合は、次のコマンドを使用します。
 
     > **ノート：**
     >
@@ -282,4 +282,4 @@ TiFlash ノードに異なる I/O メトリックを持つ複数のディスク�
 
 > **警告：**
 >
-> `[storage]`構成は v1.2.5 以降の TiUP でサポートされています。 TiDBクラスタのバージョンが v4.0.9 以降の場合は、TiUP のバージョンが v1.2.5 以降であることを確認してください。そうしないと、 `[storage]`で定義したデータ ディレクトリが TiUP によって管理されません。
+> `[storage]`構成は v1.2.5 以降の TiUP でサポートされています。 TiDB クラスターのバージョンが v4.0.9 以降の場合は、TiUP のバージョンが v1.2.5 以降であることを確認してください。そうしないと、 `[storage]`で定義したデータ ディレクトリが TiUP によって管理されません。

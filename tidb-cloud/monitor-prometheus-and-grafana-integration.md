@@ -74,7 +74,7 @@ Prometheus は、TiDB クラスターの次のメトリック データを追跡
 | :------------------------------------ | :----- | :------------------------------------------------------------------------------------------------------------------- | :------------------------------ |
 | tidbcloud_db_queries_total            | カウント   | sql_type: `Select\|Insert\|...`<br/>クラスタ名: `<cluster name>`<br/>インスタンス: `tidb-0\|tidb-1…`<br/>コンポーネント: `tidb`        | 実行されたステートメントの総数                 |
 | tidbcloud_db_failed_queries_total     | カウント   | タイプ: `planner:xxx\|executor:2345\|...`<br/>クラスタ名: `<cluster name>`<br/>インスタンス: `tidb-0\|tidb-1…`<br/>コンポーネント: `tidb` | 実行エラーの総数                        |
-| tidbcloud_db_connections              | ゲージ    | クラスタ名: `<cluster name>`<br/>インスタンス: `tidb-0\|tidb-1…`<br/>コンポーネント: `tidb`                                            | TiDB サーバーの現在の接続数                |
+| tidbcloud_db_connections              | ゲージ    | クラスタ名: `<cluster name>`<br/>インスタンス: `tidb-0\|tidb-1…`<br/>コンポーネント: `tidb`                                            | TiDBサーバーの現在の接続数                 |
 | tidbcloud_db_query_duration_seconds   | ヒストグラム | sql_type: `Select\|Insert\|...`<br/>クラスタ名: `<cluster name>`<br/>インスタンス: `tidb-0\|tidb-1…`<br/>コンポーネント: `tidb`        | ステートメントの期間ヒストグラム                |
 | tidbcloud_node_storage_used_bytes     | ゲージ    | クラスタ名: `<cluster name>`<br/>インスタンス: `tikv-0\|tikv-1…\|tiflash-0\|tiflash-1…`<br/>コンポーネント: `tikv\|tiflash`            | TiKV/TiFlash ノードのディスク使用量バイト     |
 | tidbcloud_node_storage_capacity_bytes | ゲージ    | クラスタ名: `<cluster name>`<br/>インスタンス: `tikv-0\|tikv-1…\|tiflash-0\|tiflash-1…`<br/>コンポーネント: `tikv\|tiflash`            | TiKV/TiFlash ノードのディスク容量バイト      |

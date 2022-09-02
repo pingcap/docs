@@ -5,7 +5,7 @@ summary: Learn about the `CLIENT_ERRORS_SUMMARY_BY_HOST` information_schema tabl
 
 # CLIENT_ERRORS_SUMMARY_BY_HOST {#client-errors-summary-by-host}
 
-表`CLIENT_ERRORS_SUMMARY_BY_HOST`は、TiDB サーバーに接続するクライアントに返された SQL エラーと警告の概要を示しています。これらには以下が含まれます：
+表`CLIENT_ERRORS_SUMMARY_BY_HOST`は、TiDBサーバーに接続するクライアントに返された SQL エラーと警告の概要を示しています。これらには以下が含まれます：
 
 -   不正な SQL ステートメント。
 -   ゼロ エラーによる除算。
@@ -13,16 +13,16 @@ summary: Learn about the `CLIENT_ERRORS_SUMMARY_BY_HOST` information_schema tabl
 -   許可エラー。
 -   存在しないテーブル。
 
-これらのエラーは、MySQL サーバー プロトコルを介してクライアントに返され、そこでアプリケーションは適切なアクションを実行することが期待されます。 `information_schema` 。表`CLIENT_ERRORS_SUMMARY_BY_HOST`は、アプリケーションが TiDB サーバーから返されたエラーを正しく処理 (またはログ記録) していないシナリオで、エラーを検査するための便利な方法を提供します。
+これらのエラーは、MySQLサーバープロトコルを介してクライアントに返され、そこでアプリケーションは適切なアクションを実行することが期待されます。 `information_schema` 。表`CLIENT_ERRORS_SUMMARY_BY_HOST`は、アプリケーションが TiDBサーバーから返されたエラーを正しく処理 (またはログ記録) していないシナリオで、エラーを検査するための便利な方法を提供します。
 
-`CLIENT_ERRORS_SUMMARY_BY_HOST`はリモート ホストごとにエラーを要約しているため、1 つのアプリケーション サーバーが他のサーバーよりも多くのエラーを生成しているシナリオを診断するのに役立ちます。考えられるシナリオは次のとおりです。
+`CLIENT_ERRORS_SUMMARY_BY_HOST`はリモート ホストごとにエラーを要約しているため、1 つのアプリケーションサーバーが他のサーバーよりも多くのエラーを生成しているシナリオを診断するのに役立ちます。考えられるシナリオは次のとおりです。
 
 -   古い MySQL クライアント ライブラリ。
 -   古いアプリケーション (おそらく、このサーバーは、新しい展開をロールアウトするときに見落とされたものです)。
 -   ユーザー権限の「ホスト」部分の不適切な使用。
 -   より多くのタイムアウトまたは切断された接続を生成する信頼性の低いネットワーク接続。
 
-集計されたカウントは、ステートメント`FLUSH CLIENT_ERRORS_SUMMARY`を使用してリセットできます。要約は各 TiDB サーバーにローカルであり、メモリにのみ保持されます。 TiDB サーバーが再起動すると、サマリーは失われます。
+集計されたカウントは、ステートメント`FLUSH CLIENT_ERRORS_SUMMARY`を使用してリセットできます。要約は各 TiDBサーバーにローカルであり、メモリにのみ保持されます。 TiDBサーバーが再起動すると、サマリーは失われます。
 
 {{< copyable "" >}}
 
@@ -56,7 +56,7 @@ DESC CLIENT_ERRORS_SUMMARY_BY_HOST;
 -   `FIRST_SEEN` : このエラー (または警告) がクライアント ホストから初めて見られた時刻。
 -   `LAST_SEEN` : このエラー (または警告) がクライアント ホストで最後に確認された時刻。
 
-次の例は、クライアントがローカル TiDB サーバーに接続するときに生成される警告を示しています。サマリーは`FLUSH CLIENT_ERRORS_SUMMARY`を実行した後にリセットされます:
+次の例は、クライアントがローカル TiDBサーバーに接続するときに生成される警告を示しています。サマリーは`FLUSH CLIENT_ERRORS_SUMMARY`を実行した後にリセットされます:
 
 {{< copyable "" >}}
 

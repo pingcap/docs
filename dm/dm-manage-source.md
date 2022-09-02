@@ -23,7 +23,7 @@ MKxn0Qo3m3XOyjCnhEMtsUCm83EhGQDZ/T4=
 
 ## データ ソースの操作 {#operate-data-source}
 
-`operate-source`コマンドを使用して、データ ソース構成を DMクラスタにロード、一覧表示、または削除できます。
+`operate-source`コマンドを使用して、データ ソース構成を DM クラスターにロード、一覧表示、または削除できます。
 
 {{< copyable "" >}}
 

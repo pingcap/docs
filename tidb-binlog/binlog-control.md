@@ -16,7 +16,7 @@ summary: Learns how to use `binlogctl`.
 以下は、その使用シナリオです。
 
 -   データ複製中にエラーが発生したか、 PumpまたはDrainerの実行状態を確認する必要があります。
--   クラスタを維持するときは、 PumpまたはDrainerを一時停止または閉じる必要があります。
+-   クラスターを維持するときは、 PumpまたはDrainerを一時停止または閉じる必要があります。
 -   PumpまたはDrainerプロセスが異常終了し、ノードの状態が更新されていないか、予期しない状態です。これは、データ複製タスクに影響します。
 
 ## <code>binlogctl</code>ダウンロード {#download-code-binlogctl-code}

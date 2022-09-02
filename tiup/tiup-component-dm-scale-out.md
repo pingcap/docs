@@ -4,7 +4,7 @@ title: tiup dm scale-out
 
 # tiup dm scale-out {#tiup-dm-scale-out}
 
-`tiup dm scale-out`コマンドは、クラスタのスケールアウトに使用されます。クラスタをスケールアウトする内部ロジックは、クラスタのデプロイに似ています。 `tiup-dm`のコンポーネントは、最初に新しいノードへの SSH 接続を確立し、ターゲット ノードに必要なディレクトリを作成してから、デプロイを実行してサービスを開始します。
+`tiup dm scale-out`コマンドは、クラスターをスケールアウトするために使用されます。クラスターをスケールアウトする内部ロジックは、クラスターのデプロイに似ています。 `tiup-dm`のコンポーネントは、最初に新しいノードへの SSH 接続を確立し、ターゲット ノードに必要なディレクトリを作成してから、デプロイを実行してサービスを開始します。
 
 ## 構文 {#syntax}
 
@@ -12,9 +12,9 @@ title: tiup dm scale-out
 tiup dm scale-out <cluster-name> <topology.yaml> [flags]
 ```
 
-`<cluster-name>` : 操作するクラスタの名前。クラスタ名を忘れた場合は、 [クラスタリスト](/tiup/tiup-component-dm-list.md)コマンドで確認できます。
+`<cluster-name>` : 操作するクラスターの名前。クラスター名を忘れた場合は、 [クラスタ リスト](/tiup/tiup-component-dm-list.md)コマンドで確認できます。
 
-`<topology.yaml>` : 準備された[トポロジ ファイル](/tiup/tiup-dm-topology-reference.md) 。このトポロジ ファイルには、現在のクラスタに追加される新しいノードのみを含める必要があります。
+`<topology.yaml>` : 準備された[トポロジ ファイル](/tiup/tiup-dm-topology-reference.md) 。このトポロジ ファイルには、現在のクラスタに追加される新しいノードのみが含まれている必要があります。
 
 ## オプション {#options}
 

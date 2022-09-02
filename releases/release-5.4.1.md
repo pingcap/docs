@@ -72,7 +72,7 @@ TiDB v5.4.1 では、製品設計に互換性の変更は導入されていま�
     -   識別できないテーブル属性をスキップして`INFORMATION_SCHEMA.ATTRIBUTES`テーブルから読み取るときに発生するエラーを修正します[#33665](https://github.com/pingcap/tidb/issues/33665)
     -   `@@tidb_enable_parallel_apply`が設定されていても、 `order`プロパティが存在する場合に`Apply`演算子が並列化されないバグを修正[#34237](https://github.com/pingcap/tidb/issues/34237)
     -   `sql_mode`を`NO_ZERO_DATE` [#34099](https://github.com/pingcap/tidb/issues/34099)に設定すると`datetime`列に`'0000-00-00 00:00:00'`を挿入できるバグを修正
-    -   `INFORMATION_SCHEMA.CLUSTER_SLOW_QUERY`テーブルをクエリすると、TiDB サーバーがメモリ不足になることがある問題を修正します。この問題は、Grafana ダッシュボードでスロー クエリを確認すると発生する可能性があります[#33893](https://github.com/pingcap/tidb/issues/33893)
+    -   `INFORMATION_SCHEMA.CLUSTER_SLOW_QUERY`テーブルをクエリすると、TiDBサーバーがメモリ不足になることがある問題を修正します。この問題は、Grafana ダッシュボードでスロー クエリを確認すると発生する可能性があります[#33893](https://github.com/pingcap/tidb/issues/33893)
     -   `NOWAIT`ステートメントで、実行中のトランザクションがロックに遭遇したときにすぐに戻らないというバグを修正します[#32754](https://github.com/pingcap/tidb/issues/32754)
     -   `GBK`文字セットで`gbk_bin`照合順序[#31308](https://github.com/pingcap/tidb/issues/31308)のテーブルを作成すると失敗するバグを修正
     -   `enable-new-charset`が`on`の場合、照合順序を使用して`GBK`文字セットのテーブルを作成すると、「不明な文字セット」エラー[#31297](https://github.com/pingcap/tidb/issues/31297)で失敗するバグを修正します
@@ -88,7 +88,7 @@ TiDB v5.4.1 では、製品設計に互換性の変更は導入されていま�
     -   TiKVが2年以上稼働しているとpanicになることがあるバグを修正[#11940](https://github.com/tikv/tikv/issues/11940)
     -   ロックの解決ステップ[#11993](https://github.com/tikv/tikv/issues/11993)を必要とするリージョンの数を減らすことで、TiCDC の回復時間を短縮します。
     -   ピア ステータスが`Applying` [#11746](https://github.com/tikv/tikv/issues/11746)のときにスナップショット ファイルを削除すると発生するpanicの問題を修正します。
-    -   ピアを破棄すると高レイテンシが発生する可能性がある問題を修正します[#10210](https://github.com/tikv/tikv/issues/10210)
+    -   ピアを破棄すると高レイテンシーが発生する可能性がある問題を修正します[#10210](https://github.com/tikv/tikv/issues/10210)
     -   リソース メータリング[#12234](https://github.com/tikv/tikv/issues/12234)で無効なアサーションが原因で発生するpanicの問題を修正します。
     -   一部のまれなケースでスロースコア計算が不正確になる問題を修正します[#12254](https://github.com/tikv/tikv/issues/12254)
     -   `resolved_ts`モジュールが原因で発生した OOM の問題を修正し、メトリックを追加します[#12159](https://github.com/tikv/tikv/issues/12159)

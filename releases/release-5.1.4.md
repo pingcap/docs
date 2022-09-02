@@ -50,7 +50,7 @@ TiDB バージョン: 5.1.4
     -   TiCDC
 
         -   変更フィードを再開するための指数バックオフ メカニズムを追加します。 [#3329](https://github.com/pingcap/tiflow/issues/3329)
-        -   多数のテーブルをレプリケートする場合のレプリケーション レイテンシを削減する[#3900](https://github.com/pingcap/tiflow/issues/3900)
+        -   多数のテーブルをレプリケートする場合のレプリケーションレイテンシーを削減する[#3900](https://github.com/pingcap/tiflow/issues/3900)
         -   インクリメンタル スキャン[#2985](https://github.com/pingcap/tiflow/issues/2985)の残り時間を監視するためのメトリックを追加します。
         -   「EventFeed retry rate limited」ログのカウントを減らします[#4006](https://github.com/pingcap/tiflow/issues/4006)
         -   `no owner alert` 、 `mounter row` 、 `table sink total row` 、および`buffer sink total row` [#4054](https://github.com/pingcap/tiflow/issues/4054) [#1606](https://github.com/pingcap/tiflow/issues/1606)を含む、Prometheus および Grafana のモニタリング メトリックとアラートをさらに追加します。
@@ -83,7 +83,7 @@ TiDB バージョン: 5.1.4
 -   TiKV
 
     -   TiKV が GC ワーカがビジー状態の場合、データの範囲を削除できない ( `unsafe_destroy_range`を実行できない) バグを修正[#11903](https://github.com/tikv/tikv/issues/11903)
-    -   ピアを破棄すると高レイテンシが発生する可能性がある問題を修正します[#10210](https://github.com/tikv/tikv/issues/10210)
+    -   ピアを破棄すると高レイテンシーが発生する可能性がある問題を修正します[#10210](https://github.com/tikv/tikv/issues/10210)
     -   領域が空の場合に`any_value`関数が間違った結果を返すバグを修正[#11735](https://github.com/tikv/tikv/issues/11735)
     -   初期化されていないレプリカを削除すると、古いレプリカが再作成される可能性があるという問題を修正します[#10533](https://github.com/tikv/tikv/issues/10533)
     -   新しい選択が終了した後に`Prepare Merge`がトリガーされたが、隔離されたピアに通知されていない場合のメタデータの破損の問題を修正します[#11526](https://github.com/tikv/tikv/issues/11526)
@@ -144,7 +144,7 @@ TiDB バージョン: 5.1.4
         -   デッドロックが原因でレプリケーション タスクがスタックする潜在的な問題を修正します[#4055](https://github.com/pingcap/tiflow/issues/4055)
         -   DDL ステートメントの特殊なコメントによってレプリケーション タスクが停止する問題を修正します[#3755](https://github.com/pingcap/tiflow/issues/3755)
         -   EtcdWorker が所有者とプロセッサをハングさせる可能性があるバグを修正します[#3750](https://github.com/pingcap/tiflow/issues/3750)
-        -   `stopped`クラスタのアップグレード後に変更フィードが自動的に再開される問題を修正します[#3473](https://github.com/pingcap/tiflow/issues/3473)
+        -   `stopped`クラスターのアップグレード後に変更フィードが自動的に再開される問題を修正します[#3473](https://github.com/pingcap/tiflow/issues/3473)
         -   デフォルト値をレプリケートできない問題を修正[#3793](https://github.com/pingcap/tiflow/issues/3793)
         -   TiCDC のデフォルト値のパディング例外によって引き起こされるデータの不一致を修正します[#3918](https://github.com/pingcap/tiflow/issues/3918) [#3929](https://github.com/pingcap/tiflow/issues/3929)
         -   PD リーダーがシャットダウンして新しいノードに転送すると、所有者がスタックするバグを修正します[#3615](https://github.com/pingcap/tiflow/issues/3615)

@@ -28,7 +28,7 @@ TiDB アンシブル バージョン: 3.1.1
 
 -   TiDB
 
-    -   インスタンス レベルでの分離読み取り設定が有効にならず、TiDB のアップグレード後に分離読み取り設定が誤って保持される問題を修正します。 [#16482](https://github.com/pingcap/tidb/pull/16482) [#16802](https://github.com/pingcap/tidb/pull/16802)
+    -   インスタンス レベルでの分離読み取り設定が有効にならず、TiDB のアップグレード後に分離読み取り設定が誤って保持される問題を修正します[#16482](https://github.com/pingcap/tidb/pull/16482) [#16802](https://github.com/pingcap/tidb/pull/16802)
     -   `partition (P0)` [#16076](https://github.com/pingcap/tidb/pull/16076)などの構文でエラーが報告されないように、ハッシュ パーティション テーブルのパーティション選択構文を修正します。
     -   `UPDATE` SQL ステートメントがビューからのみクエリを実行し、ビューを更新しない場合、更新ステートメントが引き続きエラー[#16789](https://github.com/pingcap/tidb/pull/16789)を報告する問題を修正します。
     -   ネストされたクエリ[#16423](https://github.com/pingcap/tidb/pull/16423)から`not not`を削除することによって引き起こされる誤った結果の問題を修正します。

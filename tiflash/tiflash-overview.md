@@ -11,11 +11,11 @@ TiFlash では、カラムナー レプリカはRaft Learner コンセンサス 
 
 <CustomContent platform="tidb-cloud">
 
-TiDB Cloudを使用すると、HTAP ワークロードに応じて 1 つ以上の TiFlash ノードを指定することで、HTAPクラスタを簡単に作成できます。クラスタの作成時に TiFlash ノード数が指定されていない場合、またはさらに TiFlash ノードを追加する場合は、ノード数を[クラスタのスケーリング](/tidb-cloud/scale-tidb-cluster.md)ずつ変更できます。
+TiDB Cloudを使用すると、HTAP ワークロードに応じて 1 つ以上の TiFlash ノードを指定することで、HTAP クラスターを簡単に作成できます。クラスターの作成時に TiFlash ノード数が指定されていない場合、またはさらに TiFlash ノードを追加する場合は、ノード数を[クラスターのスケーリング](/tidb-cloud/scale-tidb-cluster.md)ずつ変更できます。
 
 </CustomContent>
 
-## 建築 {#architecture}
+## アーキテクチャ {#architecture}
 
 ![TiFlash Architecture](/media/tidb-storage-architecture.png)
 
@@ -27,9 +27,9 @@ TiFlash は、TiKV での書き込みをブロックしない低コストで、T
 
 TiFlash は TiDB と TiSpark の両方と互換性があるため、これら 2 つのコンピューティング エンジンを自由に選択できます。
 
-ワークロードの分離を確実にするために、TiKV とは異なるノードに TiFlash を展開することをお勧めします。ビジネスの分離が必要ない場合は、TiFlash と TiKV を同じノードに展開することもできます。
+ワークロードの分離を確実にするために、TiKV とは異なるノードに TiFlash をデプロイすることをお勧めします。ビジネスの分離が必要ない場合は、TiFlash と TiKV を同じノードに展開することもできます。
 
-現在、データを直接 TiFlash に書き込むことはできません。学習者ロールとして TiDBクラスタに接続するため、TiKV にデータを書き込んでから TiFlash に複製する必要があります。 TiFlash はテーブル単位でのデータ レプリケーションをサポートしますが、デプロイ後のデフォルトではデータはレプリケートされません。指定したテーブルのデータをレプリケートするには、 [テーブルの TiFlash レプリカを作成する](/tiflash/create-tiflash-replicas.md#create-tiflash-replicas-for-tables)を参照してください。
+現在、データを直接 TiFlash に書き込むことはできません。学習者ロールとして TiDB クラスターに接続するため、TiKV にデータを書き込んでから TiFlash に複製する必要があります。 TiFlash はテーブル単位でのデータ レプリケーションをサポートしますが、デプロイ後のデフォルトではデータはレプリケートされません。指定したテーブルのデータをレプリケートするには、 [テーブルの TiFlash レプリカを作成する](/tiflash/create-tiflash-replicas.md#create-tiflash-replicas-for-tables)を参照してください。
 
 TiFlash には、カラムナ ストレージ モジュール`tiflash proxy`と`pd buddy`の 3 つのコンポーネントがあります。 `tiflash proxy`は、Multi-Raft コンセンサス アルゴリズムを使用した通信を担当します。 `pd buddy`は PD と連携して、テーブル単位で TiKV から TiFlash にデータを複製します。
 
@@ -46,7 +46,7 @@ TiFlash には次の主要な機能があります。
 
 ### 非同期レプリケーション {#asynchronous-replication}
 
-TiFlash のレプリカは、 Raft Learner という特別な役割として非同期に複製されます。これは、TiFlash ノードがダウンしたり、ネットワーク遅延が発生したりした場合でも、TiKV のアプリケーションは正常に続行できることを意味します。
+TiFlash のレプリカは、 Raft Learner という特別な役割として非同期に複製されます。これは、TiFlash ノードがダウンしたり、ネットワークレイテンシーが発生したりした場合でも、TiKV のアプリケーションは正常に続行できることを意味します。
 
 このレプリケーション メカニズムは、自動負荷分散と高可用性という TiKV の 2 つの利点を継承しています。
 
@@ -72,7 +72,7 @@ TiFlash は、次の 2 つの方法で TiDB のコンピューティングを高
 -   カラムナ ストレージ エンジンは、読み取り操作の実行においてより効率的です。
 -   TiFlash は、TiDB のコンピューティング ワークロードの一部を共有します。
 
-TiFlash は、TiKV コプロセッサと同じ方法でコンピューティング ワークロードを共有します。TiDB は、ストレージ レイヤーで完了できるコンピューティングをプッシュ ダウンします。コンピューティングを押し下げることができるかどうかは、TiFlash のサポートに依存します。詳細については、 [サポートされているプッシュダウン計算](/tiflash/tiflash-supported-pushdown-calculations.md)を参照してください。
+TiFlash は、TiKV コプロセッサと同じ方法でコンピューティング ワークロードを共有します。TiDB は、ストレージレイヤーで完了できるコンピューティングをプッシュ ダウンします。コンピューティングを押し下げることができるかどうかは、TiFlash のサポートに依存します。詳細については、 [サポートされているプッシュダウン計算](/tiflash/tiflash-supported-pushdown-calculations.md)を参照してください。
 
 ## TiFlash を使用する {#use-tiflash}
 
@@ -101,14 +101,14 @@ TiDB を使用して中規模の分析処理用の TiFlash レプリカを読み
 
 <CustomContent platform="tidb">
 
--   TiFlash ノードを使用して新しいクラスタをデプロイするには、 [TiUP を使用して TiDBクラスタをデプロイする](/production-deployment-using-tiup.md)を参照してください。
--   デプロイされたクラスタに TiFlash ノードを追加するには、 [TiFlashクラスタをスケールアウトする](/scale-tidb-using-tiup.md#scale-out-a-tiflash-cluster)を参照してください。
--   [TiFlashクラスタを管理する](/tiflash/maintain-tiflash.md) .
+-   TiFlash ノードを使用して新しいクラスターをデプロイするには、 [TiUP を使用して TiDB クラスターをデプロイする](/production-deployment-using-tiup.md)を参照してください。
+-   デプロイされたクラスターに TiFlash ノードを追加するには、 [TiFlash クラスターをスケールアウトする](/scale-tidb-using-tiup.md#scale-out-a-tiflash-cluster)を参照してください。
+-   [TiFlash クラスターを管理する](/tiflash/maintain-tiflash.md) .
 -   [TiFlash のパフォーマンスを調整する](/tiflash/tune-tiflash-performance.md) .
 -   [TiFlash の設定](/tiflash/tiflash-configuration.md) .
--   [TiFlashクラスタを監視する](/tiflash/monitor-tiflash.md) .
+-   [TiFlash クラスターを監視する](/tiflash/monitor-tiflash.md) .
 -   学ぶ[TiFlash アラート ルール](/tiflash/tiflash-alert-rules.md) 。
--   [TiFlashクラスタのトラブルシューティング](/tiflash/troubleshoot-tiflash.md) .
+-   [TiFlash クラスターのトラブルシューティング](/tiflash/troubleshoot-tiflash.md) .
 -   [TiFlash でサポートされているプッシュダウン計算](/tiflash/tiflash-supported-pushdown-calculations.md)
 -   [TiFlash でのデータ検証](/tiflash/tiflash-data-validation.md)
 -   [TiFlash の互換性](/tiflash/tiflash-compatibility.md)

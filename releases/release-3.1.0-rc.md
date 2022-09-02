@@ -27,7 +27,7 @@ TiDB アンシブル バージョン: 3.1.0-rc
     -   負荷分散ポリシーに従って異なるロールからデータを自動的に読み取る機能を追加し、この機能を有効にする`leader-and-follower`システム変数を追加します[#15721](https://github.com/pingcap/tidb/pull/15721)
     -   RPC クライアント側を再起動せずに期限切れのクライアント証明書を更新するために TiDB が新しい接続を確立するたびに TLS 証明書を動的に更新するサポート[#15163](https://github.com/pingcap/tidb/pull/15163)
     -   PD クライアントをアップグレードして、TiDB が新しい接続を確立するたびに最新の証明書のロードをサポートするようにします[#15425](https://github.com/pingcap/tidb/pull/15425)
-    -   TiDB サーバーと PD サーバー間、または`cluster-ssl-*`が構成されている場合は 2 つの TiDB サーバー間で、構成済みの TLS 証明書を使用して HTTPS プロトコルを強制的に使用します[#15430](https://github.com/pingcap/tidb/pull/15430)
+    -   TiDBサーバーと PDサーバー間、または`cluster-ssl-*`が構成されている場合は 2 つの TiDB サーバー間で、構成済みの TLS 証明書を使用して HTTPS プロトコルを強制的に使用します[#15430](https://github.com/pingcap/tidb/pull/15430)
     -   MySQL 互換`--require-secure-transport`起動オプションを追加して、構成中にクライアントに TLS 認証を強制的に有効にします[#15442](https://github.com/pingcap/tidb/pull/15442)
     -   `cluster-verify-cn`構成アイテムを追加します。構成後、ステータス サービスは、対応する CN 証明書[#15137](https://github.com/pingcap/tidb/pull/15137)がある場合にのみ使用できます。
 
@@ -35,7 +35,7 @@ TiDB アンシブル バージョン: 3.1.0-rc
 
     -   Raw KV API [#7051](https://github.com/tikv/tikv/pull/7051)を使用したデータのバックアップのサポート
     -   ステータスサーバー[#7142](https://github.com/tikv/tikv/pull/7142)のTLS認証をサポート
-    -   KV サーバー[#7305](https://github.com/tikv/tikv/pull/7305)の TLS 認証をサポート
+    -   KVサーバー[#7305](https://github.com/tikv/tikv/pull/7305)の TLS 認証をサポート
     -   バックアップ[#7202](https://github.com/tikv/tikv/pull/7202)のパフォーマンスを向上させるためにロックを保持する時間を最適化する
 
 -   PD
@@ -80,13 +80,13 @@ TiDB アンシブル バージョン: 3.1.0-rc
     -   `view`とパーティション化されたテーブルの両方にアクセスするとpanicが発生する問題を修正しました[#15560](https://github.com/pingcap/tidb/pull/15560)
     -   `bit(n)`データ型[#15487](https://github.com/pingcap/tidb/pull/15487)を含む`update duplicate key`ステートメントで`VALUES`関数を実行したときに発生したエラーを修正します。
     -   一部のシナリオで指定された最大実行時間が有効にならない問題を修正します[#15616](https://github.com/pingcap/tidb/pull/15616)
-    -   `Index Scan` [#15773](https://github.com/pingcap/tidb/pull/15773)を使用して実行計画を生成するときに、現在の`ReadEngine`に TiKV サーバーが含まれているかどうかがチェックされない問題を修正します。
+    -   `Index Scan` [#15773](https://github.com/pingcap/tidb/pull/15773)を使用して実行計画を生成するときに、現在の`ReadEngine`に TiKVサーバーが含まれているかどうかがチェックされない問題を修正します。
 
 -   TiKV
 
     -   整合性チェック パラメーター[#7112](https://github.com/tikv/tikv/pull/7112)を無効にするときに、既存のキーをトランザクションに挿入し、すぐに削除することによって発生する、競合チェックの失敗またはデータ インデックスの不整合の問題を修正します。
     -   `TopN`が符号なし整数を比較するときの計算エラーを修正します[#7199](https://github.com/tikv/tikv/pull/7199)
-    -   Raftstore にフロー制御メカニズムを導入して、フロー制御がないとログの追跡が遅くなり、クラスタがスタックする可能性があるという問題を解決します。トランザクションサイズが大きいと、TiKV サーバー間の再接続が頻繁に発生する可能性があるという問題[#7087](https://github.com/tikv/tikv/pull/7087) [#7078](https://github.com/tikv/tikv/pull/7078)
+    -   Raftstore にフロー制御メカニズムを導入して、フロー制御がないとログの追跡が遅くなり、クラスターがスタックする可能性があるという問題を解決します。トランザクションサイズが大きいと、TiKV サーバー間の再接続が頻繁に発生する可能性があるという問題[#7087](https://github.com/tikv/tikv/pull/7087) [#7078](https://github.com/tikv/tikv/pull/7078)
     -   レプリカに送信された保留中の読み取り要求が永久にブロックされる可能性がある問題を修正します[#6543](https://github.com/tikv/tikv/pull/6543)
     -   スナップショットを適用するとレプリカの読み取りがブロックされる可能性がある問題を修正します[#7249](https://github.com/tikv/tikv/pull/7249)
     -   リーダーを転送すると TiKV がpanicになる可能性がある問題を修正します[#7240](https://github.com/tikv/tikv/pull/7240)
@@ -99,7 +99,7 @@ TiDB アンシブル バージョン: 3.1.0-rc
     -   PD がリージョンハートビートを処理するときのデータ競合によって発生する誤ったリージョン情報の問題を修正します[#2234](https://github.com/pingcap/pd/pull/2234)
     -   `random-merge-scheduler`場所のラベルと配置ルールに従わない問題を修正[#2212](https://github.com/pingcap/pd/pull/2221)
     -   配置ルールが同じ`startKey`と`endKey` [#2222](https://github.com/pingcap/pd/pull/2222)を持つ別の配置ルールによって上書きされる問題を修正します
-    -   API のバージョン番号が PD サーバー[#2192](https://github.com/pingcap/pd/pull/2192)のバージョン番号と一致しない問題を修正
+    -   API のバージョン番号が PDサーバー[#2192](https://github.com/pingcap/pd/pull/2192)のバージョン番号と一致しない問題を修正
 
 -   ツール
 
@@ -109,4 +109,4 @@ TiDB アンシブル バージョン: 3.1.0-rc
 
     -   バックアップと復元 (BR)
 
-        -   BR が TiFlashクラスタデータを復元できない問題を修正します[#194](https://github.com/pingcap/br/pull/194)
+        -   BR が TiFlash クラスタ データを復元できない問題を修正します[#194](https://github.com/pingcap/br/pull/194)

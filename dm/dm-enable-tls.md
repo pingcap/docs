@@ -49,7 +49,7 @@ summary: Learn how to enable TLS for DM connections.
 
     -   dmctl
 
-        DMクラスタで暗号化送信を有効にした後、dmctl を使用してクラスタに接続する必要がある場合は、クライアント証明書を指定します。例えば：
+        DM クラスターで暗号化送信を有効にした後、dmctl を使用してクラスターに接続する必要がある場合は、クライアント証明書を指定します。例えば：
 
         {{< copyable "" >}}
 
@@ -81,7 +81,7 @@ Common Name は発信者の確認に使用されます。一般に、呼び出�
 
 ### 証明書のリロード {#reload-certificates}
 
-証明書とキーを再ロードするために、DM-master、DM-worker、および dmctl は、新しい接続が作成されるたびに現在の証明書とキー ファイルを再読み込みします。
+証明書とキーを再ロードするために、DM-master、DM-worker、および dmctl は、新しい接続が作成されるたびに現在の証明書とキー ファイルを再読み取りします。
 
 `ssl-ca` 、または`ssl-cert`で指定されたファイルが更新されたら、DM コンポーネントを再起動して、証明書とキー ファイルを再読み込みし、相互に再接続し`ssl-key` 。
 
@@ -89,7 +89,7 @@ Common Name は発信者の確認に使用されます。一般に、呼び出�
 
 このセクションでは、DM コンポーネントとアップストリームまたはダウンストリーム データベース間の暗号化されたデータ転送を有効にする方法を紹介します。
 
-### アップストリーム データベースの暗号化データ転送を有効にする {#enable-encrypted-data-transmission-for-upstream-database}
+### アップストリーム データベースの暗号化されたデータ転送を有効にする {#enable-encrypted-data-transmission-for-upstream-database}
 
 1.  アップストリーム データベースを構成し、暗号化サポートを有効にして、サーバー証明書を設定します。詳細な操作については、 [暗号化された接続の使用](https://dev.mysql.com/doc/refman/5.7/en/using-encrypted-connections.html)を参照してください。
 
@@ -109,7 +109,7 @@ Common Name は発信者の確認に使用されます。一般に、呼び出�
 
 ### ダウンストリーム TiDB の暗号化データ転送を有効にする {#enable-encrypted-data-transmission-for-downstream-tidb}
 
-1.  暗号化された接続を使用するように下流の TiDB を構成します。詳細な操作については、 [安全な接続を使用するように TiDB サーバーを構成する](/enable-tls-between-clients-and-servers.md#configure-tidb-server-to-use-secure-connections)を参照してください。
+1.  暗号化された接続を使用するように下流の TiDB を構成します。詳細な操作については、 [安全な接続を使用するように TiDBサーバーを構成する](/enable-tls-between-clients-and-servers.md#configure-tidb-server-to-use-secure-connections)を参照してください。
 
 2.  タスク構成ファイルで TiDB クライアント証明書を設定します。
 

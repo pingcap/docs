@@ -36,7 +36,7 @@ title: TiDB 2.1 RC3 Release Notes
 -   DDL
     -   タイムスタンプ タイプ[#7724](https://github.com/pingcap/tidb/pull/7724)の新しい列に新しいインデックスを作成すると、タイム ゾーン間でインデックス値が変換されない問題を修正します。
     -   列挙型[#7767](https://github.com/pingcap/tidb/pull/7767)の新しい値の追加をサポート
-    -   etcd セッションの迅速な作成をサポートします。これにより、ネットワーク分離後のクラスタの可用性が向上します[#7774](https://github.com/pingcap/tidb/pull/7774)
+    -   etcd セッションの迅速な作成をサポートします。これにより、ネットワーク分離後のクラスターの可用性が向上します[#7774](https://github.com/pingcap/tidb/pull/7774)
 
 ## PD {#pd}
 

@@ -4,7 +4,7 @@ title: tiup dm restart
 
 # tiup dm 再起動 {#tiup-dm-restart}
 
-コマンド`tiup dm restart`は、指定されたクラスタのすべてまたは一部のサービスを再起動するために使用されます。
+コマンド`tiup dm restart`は、指定されたクラスターのすべてまたは一部のサービスを再起動するために使用されます。
 
 > **ノート：**
 >
@@ -16,13 +16,13 @@ title: tiup dm restart
 tiup dm restart <cluster-name> [flags]
 ```
 
-`<cluster-name>` : 操作するクラスタの名前。クラスタ名を忘れた場合は、 [クラスタリスト](/tiup/tiup-component-cluster-list.md)コマンドで確認できます。
+`<cluster-name>` : 操作するクラスターの名前。クラスター名を忘れた場合は、 [クラスタ リスト](/tiup/tiup-component-cluster-list.md)コマンドで確認できます。
 
 ## オプション {#options}
 
 ### -N, --ノード {#n-node}
 
--   再起動するノードを指定します。このオプションの値は、ノード ID のコンマ区切りリストです。ノード ID は、 `[tiup dm display](/tiup/tiup-component-dm-display.md)`コマンドによって返されるクラスタステータス テーブルの最初の列から取得できます。
+-   再起動するノードを指定します。このオプションの値は、ノード ID のコンマ区切りリストです。ノード ID は、 `[tiup dm display](/tiup/tiup-component-dm-display.md)`コマンドによって返されるクラスター ステータス テーブルの最初の列から取得できます。
 -   データ型: `STRING`
 -   このオプションが指定されていない場合、TiUP はデフォルトですべてのノードを再起動します。
 
@@ -32,7 +32,7 @@ tiup dm restart <cluster-name> [flags]
 
 ### -R, --role {#r-role}
 
--   再起動するノードの役割を指定します。このオプションの値は、ノードの役割のコンマ区切りリストです。ノードの役割は、 `[tiup dm display](/tiup/tiup-component-dm-display.md)`コマンドで返されるクラスタステータス テーブルの 2 番目の列から取得できます。
+-   再起動するノードの役割を指定します。このオプションの値は、ノードの役割のコンマ区切りリストです。ノードの役割は、 `[tiup dm display](/tiup/tiup-component-dm-display.md)`コマンドで返されるクラスター ステータス テーブルの 2 番目の列から取得できます。
 -   データ型: `STRING`
 -   このオプションが指定されていない場合、TiUP はデフォルトですべてのロールのノードを再起動します。
 

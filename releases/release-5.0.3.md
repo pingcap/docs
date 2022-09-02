@@ -12,7 +12,7 @@ TiDB バージョン: 5.0.3
 
 -   TiDB
 
-    -   v4.0クラスタが v5.0 以降のバージョン (dev または v5.1) にアップグレードされると、 `tidb_multi_statement_mode`変数のデフォルト値が`WARN`から`OFF`に変更されます。
+    -   v4.0 クラスターが v5.0 以降のバージョン (dev または v5.1) にアップグレードされると、 `tidb_multi_statement_mode`変数のデフォルト値が`WARN`から`OFF`に変更されます。
     -   TiDB は現在、 MySQL 5.7の noop 変数`innodb_default_row_format`と互換性があります。この変数を設定しても効果はありません。 [#23541](https://github.com/pingcap/tidb/issues/23541)
 
 ## 機能強化 {#feature-enhancements}
@@ -129,7 +129,7 @@ TiDB バージョン: 5.0.3
         -   MySQL シンクがエラーに遭遇して一時停止した後、一部の MySQL 接続がリークする可能性があるというバグを修正します[#1946](https://github.com/pingcap/tiflow/pull/1946)
         -   TiCDC が`/proc/meminfo` [#2024](https://github.com/pingcap/tiflow/pull/2024)の読み取りに失敗したときに発生するpanicの問題を修正します。
         -   TiCDC の実行時のメモリ消費を削減する[#2012](https://github.com/pingcap/tiflow/pull/2012) [#1958](https://github.com/pingcap/tiflow/pull/1958)
-        -   解決された ts [#1576](https://github.com/pingcap/tiflow/issues/1576)の計算が遅れるため、TiCDC サーバーpanicを引き起こす可能性があるバグを修正します。
+        -   解決された ts [#1576](https://github.com/pingcap/tiflow/issues/1576)の計算が遅れるため、TiCDCサーバーpanicを引き起こす可能性があるバグを修正します。
         -   プロセッサ[#2142](https://github.com/pingcap/tiflow/pull/2142)の潜在的なデッドロックの問題を修正します。
 
     -   バックアップと復元 (BR)

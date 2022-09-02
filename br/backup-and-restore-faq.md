@@ -9,9 +9,9 @@ summary: Learn about Frequently Asked Questions (FAQs) and the solutions of BR.
 
 ## TiDB v5.4.0 以降のバージョンで、ワークロードの高いクラスタでバックアップ タスクを実行すると、バックアップ タスクの速度が遅くなるのはなぜですか? {#in-tidb-v5-4-0-and-later-versions-when-backup-tasks-are-performed-on-the-cluster-under-high-workload-why-does-the-speed-of-backup-tasks-become-slow}
 
-TiDB v5.4.0 から、BR はバックアップ タスクの自動調整機能を導入します。 v5.4.0 以降のバージョンのクラスターの場合、この機能はデフォルトで有効になっています。クラスタのワークロードが重い場合、この機能はバックアップ タスクで使用されるリソースを制限して、オンラインクラスタへの影響を軽減します。詳細については、 [BR オートチューン](/br/br-auto-tune.md)を参照してください。
+TiDB v5.4.0 から、BR はバックアップ タスクの自動調整機能を導入します。 v5.4.0 以降のバージョンのクラスターの場合、この機能はデフォルトで有効になっています。クラスターのワークロードが重い場合、この機能はバックアップ タスクで使用されるリソースを制限して、オンライン クラスターへの影響を軽減します。詳細については、 [BR オートチューン](/br/br-auto-tune.md)を参照してください。
 
-TiKV は[動的構成](/tikv-control.md#modify-the-tikv-configuration-dynamically)自動調整機能をサポートしています。クラスタを再起動せずに、次の方法で機能を有効または無効にすることができます。
+TiKV は[動的構成](/tikv-control.md#modify-the-tikv-configuration-dynamically)自動調整機能をサポートしています。クラスターを再起動せずに、次の方法で機能を有効または無効にすることができます。
 
 -   自動調整を無効にする: TiKV 構成項目[`backup.enable-auto-tune`](/tikv-configuration-file.md#enable-auto-tune-new-in-v540)から`false`を設定します。
 -   自動調整を有効にする: `backup.enable-auto-tune` ～ `true`を設定します。 v5.3.x から v5.4.0 以降のバージョンにアップグレードされたクラスターの場合、自動調整機能はデフォルトで無効になっています。手動で有効にする必要があります。
@@ -20,7 +20,7 @@ TiKV は[動的構成](/tikv-control.md#modify-the-tikv-configuration-dynamicall
 
 さらに、自動調整により、バックアップ タスクで使用されるデフォルトのスレッド数が減少します。詳細については、 `backup.num-threads` ](/tikv-configuration-file.md#num-threads-1) を参照してください。そのため、Grafana ダッシュボードでは、バックアップ タスクで使用される速度、CPU 使用率、および I/O リソース使用率が、v5.4.0 より前のバージョンよりも低くなります。 v5.4.0 より前では、デフォルト値の`backup.num-threads`は`CPU * 0.75`でした。つまり、バックアップ タスクで使用されるスレッドの数は、論理 CPU コアの 75% を占めていました。その最大値は`32`でした。 v5.4.0 以降、この構成項目のデフォルト値は`CPU * 0.5`で、最大値は`8`です。
 
-オフラインクラスタでバックアップ タスクを実行する場合、バックアップを高速化するために、 `tikv-ctl`を使用して`backup.num-threads`の値をより大きな数値に変更できます。
+オフライン クラスターでバックアップ タスクを実行する場合、バックアップを高速化するために、 `tikv-ctl`を使用して`backup.num-threads`の値をより大きな数値に変更できます。
 
 ## データの復元中にエラー メッセージ<code>could not read local://...:download sst failed</code>が返された場合はどうすればよいですか? {#what-should-i-do-if-the-error-message-code-could-not-read-local-download-sst-failed-code-is-returned-during-data-restoration}
 
@@ -28,19 +28,19 @@ TiKV は[動的構成](/tikv-control.md#modify-the-tikv-configuration-dynamicall
 
 バックアップ中は、NFS ディスクをバックアップ ディスクとしてマウントすることをお勧めします。詳細については、 [1 つのテーブルをネットワーク ディスクにバックアップする](/br/backup-and-restore-use-cases.md#back-up-a-single-table-to-a-network-disk-recommended-for-production-environments)を参照してください。
 
-## バックアップ操作はクラスタにどの程度の影響を与えますか? {#how-much-impact-does-a-backup-operation-have-on-the-cluster}
+## バックアップ操作はクラスターにどの程度の影響を与えますか? {#how-much-impact-does-a-backup-operation-have-on-the-cluster}
 
-TiDB v5.4.0 以降のバージョンの場合、BR はバックアップ タスクで使用されるデフォルトの CPU 使用率を削減するだけでなく、負荷の高いクラスタのバックアップ タスクで使用されるリソースを制限する[BR オートチューン](/br/br-auto-tune.md)つの機能も導入します。したがって、負荷の高い v5.4.0クラスタでバックアップ タスクのデフォルト構成を使用すると、タスクがクラスタのパフォーマンスに与える影響は、v5.4.0 より前のクラスターよりも大幅に小さくなります。
+TiDB v5.4.0 以降のバージョンの場合、BR はバックアップ タスクで使用されるデフォルトの CPU 使用率を削減するだけでなく、負荷の高いクラスター内のバックアップ タスクで使用されるリソースを制限する[BR オートチューン](/br/br-auto-tune.md)つの機能も導入します。したがって、負荷の高い v5.4.0 クラスターでバックアップ タスクのデフォルト構成を使用すると、タスクがクラスターのパフォーマンスに与える影響は、v5.4.0 より前のクラスターよりも大幅に小さくなります。
 
-以下は、単一ノードでの内部テストです。テスト結果は、**全速バックアップ**シナリオで v5.4.0 と v5.3.0 のデフォルト構成を使用する場合、BR を使用したバックアップがクラスタパフォーマンスに与える影響がまったく異なることを示しています。詳細なテスト結果は次のとおりです。
+以下は、単一ノードでの内部テストです。テスト結果は、**全速バックアップ**シナリオで v5.4.0 と v5.3.0 のデフォルト構成を使用する場合、BR を使用したバックアップがクラスター パフォーマンスに与える影響がまったく異なることを示しています。詳細なテスト結果は次のとおりです。
 
 -   BR が v5.3.0 のデフォルト構成を使用する場合、書き込み専用ワークロードの QPS は 75% 減少します。
 -   BR が v5.4.0 のデフォルト構成を使用する場合、同じワークロードの QPS は 25% 減少します。ただし、この構成を使用すると、BR を使用したバックアップ タスクの期間がそれに応じて長くなります。所要時間は v5.3.0 構成の 1.7 倍です。
 
-次のいずれかのソリューションを使用して、クラスタのパフォーマンスに対するバックアップ タスクの影響を手動で制御できます。これらの方法は、クラスタに対するバックアップ タスクの影響を軽減しますが、バックアップ タスクの速度も低下させることに注意してください。
+次のいずれかのソリューションを使用して、クラスターのパフォーマンスに対するバックアップ タスクの影響を手動で制御できます。これらの方法は、クラスターに対するバックアップ タスクの影響を軽減しますが、バックアップ タスクの速度も低下させることに注意してください。
 
 -   `--ratelimit`パラメータを使用して、バックアップ タスクの速度を制限します。このパラメータは、**バックアップ ファイルを外部ストレージに保存**する速度を制限することに注意してください。バックアップ ファイルの合計サイズを計算するときは、バックアップ ログの`backup data size(after compressed)`をベンチマークとして使用します。
--   TiKV 構成項目[`backup.num-threads`](/tikv-configuration-file.md#num-threads-1)を調整して、バックアップ タスクで使用されるスレッドの数を制限します。 BR がバックアップ タスクに`8`以下のスレッドを使用し、クラスタの合計 CPU 使用率が 60% を超えない場合、読み取りおよび書き込みワークロードに関係なく、バックアップ タスクはクラスタにほとんど影響を与えません。
+-   TiKV 構成項目[`backup.num-threads`](/tikv-configuration-file.md#num-threads-1)を調整して、バックアップ タスクで使用されるスレッドの数を制限します。 BR がバックアップ タスクに`8`以下のスレッドを使用し、クラスターの合計 CPU 使用率が 60% を超えない場合、読み取りおよび書き込みワークロードに関係なく、バックアップ タスクはクラスターにほとんど影響を与えません。
 
 ## BR はシステム テーブルをバックアップしますか?データの復元中に競合が発生しますか? {#does-br-back-up-system-tables-during-data-restoration-do-they-raise-conflicts}
 
@@ -92,7 +92,7 @@ TiKV がバックアップ ディレクトリにアクセスできるかどう�
     tidb_ouo
     ```
 
-2.  TiUP コマンドを使用して、クラスタの起動情報を照会します。
+2.  TiUP コマンドを使用して、クラスターの起動情報を照会します。
 
     {{< copyable "" >}}
 
@@ -139,9 +139,9 @@ TiKV がバックアップ ディレクトリにアクセスできるかどう�
 
 ## <code>rpc error: code = Unavailable desc =...</code> BR でエラーが発生しましたか? {#what-should-i-do-to-handle-the-code-rpc-error-code-unavailable-desc-code-error-occurred-in-br}
 
-このエラーは、リストア (BR を使用) するクラスタの容量が不足している場合に発生する可能性があります。このクラスタの監視メトリクスまたは TiKV ログを確認することで、原因をさらに確認できます。
+このエラーは、リストア (BR を使用) するクラスターの容量が不足している場合に発生する可能性があります。このクラスターの監視メトリクスまたは TiKV ログを確認することで、原因をさらに確認できます。
 
-この問題を処理するには、クラスタリソースをスケールアウトし、復元中の同時実行数を減らして、 `RATE_LIMIT`オプションを有効にします。
+この問題を処理するには、クラスター リソースをスケールアウトし、復元中の同時実行数を減らして、 `RATE_LIMIT`オプションを有効にします。
 
 ## <code>local</code>ストレージを使用する場合、バックアップ ファイルはどこに保存されますか? {#where-are-the-backed-up-files-stored-when-i-use-code-local-code-storage}
 
@@ -153,11 +153,11 @@ TiKV がバックアップ ディレクトリにアクセスできるかどう�
 
 ただし、ローカル ストレージからデータを復元する場合は、各 TiKV がすべてのバックアップ ファイルにアクセスできる必要があるため、レプリカの数は TiKV ノードの数と同じになります。
 
-## BR が TiCDC/ Drainerの上流クラスタにデータを復元する場合、どうすればよいですか? {#what-should-i-do-when-br-restores-data-to-the-upstream-cluster-of-ticdc-drainer}
+## BR が TiCDC/ Drainerの上流クラスターにデータを復元する場合、どうすればよいですか? {#what-should-i-do-when-br-restores-data-to-the-upstream-cluster-of-ticdc-drainer}
 
--   **BR を使用して復元されたデータは、ダウンストリームに複製できません**。これは、BR は SST ファイルを直接インポートしますが、現在、ダウンストリームクラスタはこれらのファイルをアップストリームから取得できないためです。
+-   **BR を使用して復元されたデータは、ダウンストリームに複製できません**。これは、BR は SST ファイルを直接インポートしますが、現在、ダウンストリーム クラスターはこれらのファイルをアップストリームから取得できないためです。
 
--   v4.0.3 より前では、BR 復元中に生成された DDL ジョブにより、TiCDC/ Drainerで予期しない DDL が実行される場合がありました。したがって、TiCDC/ Drainer の上流クラスタで復元を実行する必要がある場合は、BR を使用して復元されたすべてのテーブルをDrainer / Drainerブロック リストに追加します。
+-   v4.0.3 より前では、BR 復元中に生成された DDL ジョブにより、TiCDC/ Drainerで予期しない DDL が実行される場合がありました。したがって、TiCDC/ Drainer の上流クラスターで復元を実行する必要がある場合は、BR を使用して復元されたすべてのテーブルをDrainer / Drainerブロック リストに追加します。
 
 [`filter.rules`](https://github.com/pingcap/tiflow/blob/7c3c2336f98153326912f3cf6ea2fbb7bcc4a20c/cmd/changefeed.toml#L16)を使用して TiCDC のブロック リストを構成し、 [`syncer.ignore-table`](/tidb-binlog/tidb-binlog-configuration-file.md#ignore-table)を使用してDrainerのブロック リストを構成できます。
 
@@ -173,7 +173,7 @@ BR を使用して [ `--ddl-batch-size` ](/br/br-batch-create-table.md#how to us
 
 ## BR を使用してバックアップ データを復元した後、SQL クエリで the <code>region is unavailable</code>エラーが報告されるのはなぜですか? {#why-is-the-code-region-is-unavailable-code-error-reported-for-a-sql-query-after-i-use-br-to-restore-the-backup-data}
 
-BR を使用してバックアップされたクラスタに TiFlash がある場合、 `TableInfo`は BR がバックアップ データを復元するときに TiFlash 情報を格納します。復元するクラスタに TiFlash がない場合、 `region is unavailable`エラーが報告されます。
+BR を使用してバックアップされたクラスターに TiFlash がある場合、 `TableInfo`は BR がバックアップ データを復元するときに TiFlash 情報を格納します。復元するクラスターに TiFlash がない場合、 `region is unavailable`エラーが報告されます。
 
 ## BR は、一部の履歴バックアップのインプレース完全復元をサポートしていますか? {#does-br-support-in-place-full-restoration-of-some-historical-backup}
 
@@ -195,12 +195,12 @@ v4.0.9 では、BR はデフォルトで統計をバックアップしますが�
 
 テーブルで`ANALYZE`を実行しない場合、TiDB は不正確な統計のために最適化された実行計画を選択できません。クエリのパフォーマンスが重要な問題でない場合は、 `ANALYZE`を無視できます。
 
-## 複数の BR プロセスを同時に使用して、1 つのクラスタのデータを復元できますか? {#can-i-use-multiple-br-processes-at-the-same-time-to-restore-the-data-of-a-single-cluster}
+## 複数の BR プロセスを同時に使用して、1 つのクラスターのデータを復元できますか? {#can-i-use-multiple-br-processes-at-the-same-time-to-restore-the-data-of-a-single-cluster}
 
-次の理由により、複数の BR プロセスを同時に使用して 1 つのクラスタのデータを復元する**ことは強くお勧め**しません。
+次の理由により、複数の BR プロセスを同時に使用して 1 つのクラスターのデータを復元する**ことは強くお勧め**しません。
 
--   BR がデータを復元すると、PD の一部のグローバル構成が変更されます。そのため、複数の BR プロセスを同時にデータ復元に使用すると、これらの構成が誤って上書きされ、クラスタ状態が異常になる可能性があります。
--   BR はデータを復元するために多くのクラスタリソースを消費するため、実際には、BR プロセスを並行して実行しても、復元速度は限られた範囲でしか改善されません。
+-   BR がデータを復元すると、PD の一部のグローバル構成が変更されます。そのため、複数の BR プロセスを同時にデータ復元に使用すると、これらの構成が誤って上書きされ、クラスター状態が異常になる可能性があります。
+-   BR はデータを復元するために多くのクラスター リソースを消費するため、実際には、BR プロセスを並行して実行しても、復元速度は限られた範囲でしか改善されません。
 -   データ復元のために複数の BR プロセスを並行して実行するテストは行われていないため、成功することは保証されていません。
 
 ## バックアップ ログで<code>key locked Error</code>が報告された場合はどうすればよいですか? {#what-should-i-do-if-the-backup-log-reports-code-key-locked-error-code}
@@ -222,15 +222,15 @@ v4.0.9 では、BR はデフォルトで統計をバックアップしますが�
 
 この不一致は、バックアップで使用されるデータ圧縮率が、復元で使用されるデフォルトの圧縮率と異なることが原因で発生します。チェックサムが成功した場合、この問題は無視できます。
 
-## 配置ルールをクラスタに復元するとエラーが発生するのはなぜですか? {#why-does-an-error-occur-when-i-restore-placement-rules-to-a-cluster}
+## 配置ルールをクラスターに復元するとエラーが発生するのはなぜですか? {#why-does-an-error-occur-when-i-restore-placement-rules-to-a-cluster}
 
 v6.0.0 より前では、BR は[配置ルール](/placement-rules-in-sql.md)をサポートしていません。 v6.0.0 以降、BR は配置ルールをサポートし、コマンドライン オプション`--with-tidb-placement-mode=strict/ignore`を導入して、配置ルールのバックアップおよび復元モードを制御します。デフォルト値`strict`では、BR は配置ルールをインポートして検証しますが、値が`ignore`の場合はすべての配置ルールを無視します。
 
 ## BR が<code>new_collations_enabled_on_first_bootstrap</code>不一致を報告するのはなぜですか? {#why-does-br-report-code-new-collations-enabled-on-first-bootstrap-code-mismatch}
 
-TiDB v6.0.0 以降、デフォルト値の[`new_collations_enabled_on_first_bootstrap`](/tidb-configuration-file.md#new_collations_enabled_on_first_bootstrap)が`false`から`true`に変更されました。 BR は上流クラスタの`new_collations_enabled_on_first_bootstrap`構成をバックアップし、この構成の値が上流クラスタと下流クラスタの間で一致しているかどうかを確認します。値が一致していれば、BR は上流のクラスタにバックアップされたデータを下流のクラスタに安全に復元します。値が一致しない場合、BR はデータの復元を実行せず、エラーを報告します。
+TiDB v6.0.0 以降、デフォルト値の[`new_collations_enabled_on_first_bootstrap`](/tidb-configuration-file.md#new_collations_enabled_on_first_bootstrap)が`false`から`true`に変更されました。 BR は上流クラスタの`new_collations_enabled_on_first_bootstrap`構成をバックアップし、この構成の値が上流クラスタと下流クラスタの間で一致しているかどうかを確認します。値が一致する場合、BR は上流のクラスターにバックアップされたデータを下流のクラスターに安全に復元します。値が一致しない場合、BR はデータの復元を実行せず、エラーを報告します。
 
-v6.0.0 の以前のバージョンの TiDBクラスタのデータをバックアップしており、このデータを v6.0.0 以降のバージョンの TiDBクラスタに復元するとします。この状況では、 `new_collations_enabled_on_first_bootstrap`の値がアップストリーム クラスターとダウンストリーム クラスター間で一貫しているかどうかを手動で確認する必要があります。
+v6.0.0 の以前のバージョンの TiDB クラスター内のデータをバックアップしており、このデータを v6.0.0 以降のバージョンの TiDB クラスターに復元するとします。この状況では、 `new_collations_enabled_on_first_bootstrap`の値がアップストリーム クラスターとダウンストリーム クラスター間で一貫しているかどうかを手動で確認する必要があります。
 
 -   値が一貫している場合は、復元コマンドに`--check-requirements=false`を追加して、この構成チェックをスキップできます。
 -   値に矛盾があり、強制的に復元を実行すると、BR はデータ検証エラーを報告します。

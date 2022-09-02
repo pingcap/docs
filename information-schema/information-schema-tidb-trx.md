@@ -98,7 +98,7 @@ CURRENT_SQL_DIGEST_TEXT: update `t` set `v` = `v` + ? where `id` = ?
 2 rows in set (0.01 sec)
 ```
 
-この例のクエリ結果から、現在のノードには 2 つの進行中のトランザクションがあることがわかります。 1 つのトランザクションはアイドル状態 ( `STATE`は`Idle`は`NULL` ) で、このトランザクションは 3 `CURRENT_SQL_DIGEST`のステートメントを実行しました ( `ALL_SQL_DIGESTS`リストには 3 つのレコードがあり、これは実行された 3 つの SQL ステートメントのダイジェストです)。別のトランザクションがステートメントを実行し、ロックを待機しています ( `STATE`は`LockWaiting`は`WAITING_START_TIME`中のロックの開始時刻を示します)。トランザクションは 2 つのステートメントを実行しました。現在実行中のステートメントは``"update `t` set `v` = `v` + ? where `id` = ?"``の形式です。
+この例のクエリ結果から、現在のノードには 2 つの進行中のトランザクションがあることがわかります。 1 つのトランザクションがアイドル状態 ( `STATE`は`Idle`は`NULL` ) で、このトランザクションは 3 `CURRENT_SQL_DIGEST`のステートメントを実行しました ( `ALL_SQL_DIGESTS`リストには、実行された 3 つの SQL ステートメントのダイジェストである 3 つのレコードがあります)。別のトランザクションがステートメントを実行し、ロックを待機しています ( `STATE`は`LockWaiting`は`WAITING_START_TIME`中のロックの開始時刻を示します)。トランザクションは 2 つのステートメントを実行しました。現在実行中のステートメントは``"update `t` set `v` = `v` + ? where `id` = ?"``の形式です。
 
 {{< copyable "" >}}
 
@@ -117,11 +117,11 @@ all_sql_digests: ["e6f07d43b5c21db0fbb9a31feac2dc599787763393dd5acbfad80e247eb02
        all_sqls: ["begin","update `t` set `v` = `v` + ? where `id` = ?"]
 ```
 
-このクエリは、 `TIDB_TRX`テーブルの`ALL_SQL_DIGESTS`列で[`TIDB_DECODE_SQL_DIGESTS`](/functions-and-operators/tidb-functions.md#tidb_decode_sql_digests)関数を呼び出し、システム内部クエリを通じて SQL ダイジェスト配列を正規化された SQL ステートメントの配列に変換します。これにより、トランザクションによって過去に実行されたステートメントの情報を視覚的に取得できます。ただし、上記のクエリは`TIDB_TRX`のテーブル全体をスキャンし、各行に対して`TIDB_DECODE_SQL_DIGESTS`関数を呼び出すことに注意してください。 `TIDB_DECODE_SQL_DIGESTS`関数を呼び出すと、オーバーヘッドが高くなります。したがって、クラスタに多数の同時トランザクションが存在する場合は、このタイプのクエリを避けるようにしてください。
+このクエリは、 `TIDB_TRX`テーブルの`ALL_SQL_DIGESTS`列で[`TIDB_DECODE_SQL_DIGESTS`](/functions-and-operators/tidb-functions.md#tidb_decode_sql_digests)関数を呼び出し、システム内部クエリを通じて SQL ダイジェスト配列を正規化された SQL ステートメントの配列に変換します。これにより、トランザクションによって過去に実行されたステートメントの情報を視覚的に取得できます。ただし、上記のクエリは`TIDB_TRX`のテーブル全体をスキャンし、各行に対して`TIDB_DECODE_SQL_DIGESTS`関数を呼び出すことに注意してください。 `TIDB_DECODE_SQL_DIGESTS`関数を呼び出すと、オーバーヘッドが高くなります。したがって、クラスタ内に多数の同時トランザクションが存在する場合は、このタイプのクエリを避けるようにしてください。
 
 ## CLUSTER_TIDB_TRX {#cluster-tidb-trx}
 
-`TIDB_TRX`テーブルは、単一の TiDB ノードで実行されているトランザクションに関する情報のみを提供します。クラスタ全体のすべての TiDB ノードで実行されているトランザクションの情報を表示する場合は、 `CLUSTER_TIDB_TRX`テーブルにクエリを実行する必要があります。 `TIDB_TRX`テーブルのクエリ結果と比較すると、 `CLUSTER_TIDB_TRX`テーブルのクエリ結果には余分な`INSTANCE`フィールドが含まれています。 `INSTANCE`フィールドには、クラスタの各ノードの IP アドレスとポートが表示されます。これは、トランザクションが配置されている TiDB ノードを区別するために使用されます。
+`TIDB_TRX`テーブルは、単一の TiDB ノードで実行されているトランザクションに関する情報のみを提供します。クラスター全体のすべての TiDB ノードで実行されているトランザクションの情報を表示する場合は、 `CLUSTER_TIDB_TRX`テーブルにクエリを実行する必要があります。 `TIDB_TRX`テーブルのクエリ結果と比較すると、 `CLUSTER_TIDB_TRX`テーブルのクエリ結果には余分な`INSTANCE`フィールドが含まれています。 `INSTANCE`フィールドには、クラスター内の各ノードの IP アドレスとポートが表示されます。これは、トランザクションが配置されている TiDB ノードを区別するために使用されます。
 
 {{< copyable "" >}}
 

@@ -35,7 +35,7 @@ fetch.message.max.bytes=1073741824
 
 ## TiDB Binlogレプリケーション中にデータ損失が発生する {#data-loss-occurs-during-the-tidb-binlog-replication}
 
-TiDB Binlogがすべての TiDB インスタンスで有効になっており、正常に動作していることを確認する必要があります。クラスタのバージョンが v3.0 以降の場合は、 `curl {TiDB_IP}:{STATUS_PORT}/info/all`コマンドを使用して、すべての TiDB インスタンスの TiDB Binlogステータスを確認します。
+TiDB Binlogがすべての TiDB インスタンスで有効になっており、正常に動作していることを確認する必要があります。クラスターのバージョンが v3.0 以降の場合は、 `curl {TiDB_IP}:{STATUS_PORT}/info/all`コマンドを使用して、すべての TiDB インスタンスの TiDB Binlogステータスを確認します。
 
 ## アップストリーム トランザクションが大きい場合、 Pumpはエラー<code>rpc error: code = ResourceExhausted desc = trying to send message larger than max (2191430008 vs. 2147483647)</code>を報告します。 {#when-the-upstream-transaction-is-large-pump-reports-an-error-code-rpc-error-code-resourceexhausted-desc-trying-to-send-message-larger-than-max-2191430008-vs-2147483647-code}
 

@@ -5,7 +5,7 @@ summary: Learn how to deploy TiDB Lightning and import full backup data to TiDB.
 
 # TiDB Lightningチュートリアル {#tidb-lightning-tutorial}
 
-[TiDB Lightning](https://github.com/pingcap/tidb-lightning)は、大量のデータを TiDBクラスタに高速で完全にインポートするために使用されるツールです。現在、 TiDB Lightningは、SQL または CSV データ ソースを介してエクスポートされた SQL ダンプの読み取りをサポートしています。次の 2 つのシナリオで使用できます。
+[TiDB Lightning](https://github.com/pingcap/tidb-lightning)は、大量のデータを TiDB クラスターに高速で完全にインポートするために使用されるツールです。現在、 TiDB Lightningは、SQL または CSV データ ソースを介してエクスポートされた SQL ダンプの読み取りをサポートしています。次の 2 つのシナリオで使用できます。
 
 -   **大量**の<strong>新しい</strong>データ<strong>をすばやく</strong>インポート
 -   すべてのデータのバックアップと復元
@@ -41,9 +41,9 @@ summary: Learn how to deploy TiDB Lightning and import full backup data to TiDB.
 
 ## TiDB Lightningをデプロイ {#deploy-tidb-lightning}
 
-### ステップ 1: TiDBクラスタをデプロイ {#step-1-deploy-tidb-cluster}
+### ステップ 1: TiDB クラスターをデプロイ {#step-1-deploy-tidb-cluster}
 
-データをインポートする前に、TiDBクラスタをデプロイする必要があります。このチュートリアルでは、TiDB v5.4.0 を例として使用します。配備方法については、 [TiUP を使用して TiDB クラスターをデプロイする](/production-deployment-using-tiup.md)を参照してください。
+データをインポートする前に、TiDB クラスターをデプロイする必要があります。このチュートリアルでは、TiDB v5.4.0 を例として使用します。配備方法については、 [TiUP を使用して TiDBクラスタをデプロイする](/production-deployment-using-tiup.md)を参照してください。
 
 ### ステップ 2: TiDB Lightningインストール パッケージをダウンロードする {#step-2-download-tidb-lightning-installation-package}
 
@@ -57,7 +57,7 @@ TiDB Lightningインストール パッケージはTiDB Toolkitに含まれて�
 
 1.  パッケージ内の`bin/tidb-lightning`と`bin/tidb-lightning-ctl`をTiDB Lightningがデプロイされているサーバーにアップロードします。
 
-2.  [準備されたデータソース](#prepare-full-backup-data)をサーバーにアップロードします。
+2.  [準備されたデータ ソース](#prepare-full-backup-data)をサーバーにアップロードします。
 
 3.  `tidb-lightning.toml`を次のように構成します。
 
@@ -110,6 +110,6 @@ TiDB Lightningインストール パッケージはTiDB Toolkitに含まれて�
 
 ## 概要 {#summary}
 
-このチュートリアルでは、 TiDB Lightningとは何か、およびTiDB Lightningクラスタをすばやく展開してフル バックアップ データを TiDBクラスタにインポートする方法を簡単に紹介します。
+このチュートリアルでは、 TiDB Lightningとは何か、およびTiDB Lightningクラスターを迅速に展開してフル バックアップ データを TiDB クラスターにインポートする方法を簡単に紹介します。
 
 TiDB Lightningの詳細な機能と使用方法については、 [TiDB Lightningの概要](/tidb-lightning/tidb-lightning-overview.md)を参照してください。

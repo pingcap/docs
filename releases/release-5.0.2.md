@@ -52,7 +52,7 @@ TiDB バージョン: 5.0.2
     -   バックアップと復元 (BR)
 
         -   いくつかのあいまいなエラー メッセージを明確にします[#1132](https://github.com/pingcap/br/pull/1132)
-        -   バックアップのクラスタバージョンの確認をサポート[#1091](https://github.com/pingcap/br/pull/1091)
+        -   バックアップのクラスタ バージョンの確認をサポート[#1091](https://github.com/pingcap/br/pull/1091)
         -   `mysql`スキーマでのシステム テーブルのバックアップと復元のサポート[#1143](https://github.com/pingcap/br/pull/1143) [#1078](https://github.com/pingcap/br/pull/1078)
 
     -   Dumpling

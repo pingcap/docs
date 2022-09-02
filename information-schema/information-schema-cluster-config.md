@@ -5,7 +5,7 @@ summary: Learn the `CLUSTER_CONFIG` information_schema table.
 
 # CLUSTER_CONFIG {#cluster-config}
 
-`CLUSTER_CONFIG`クラスタ構成テーブルを使用して、クラスタのすべてのサーバー コンポーネントの現在の構成を取得できます。これにより、同様の情報を取得するには各インスタンスの HTTP API エンドポイントにアクセスする必要があった以前のリリースの TiDB よりも使用が簡素化されます。
+`CLUSTER_CONFIG`クラスター構成テーブルを使用して、クラスター内のすべてのサーバーコンポーネントの現在の構成を取得できます。これにより、同様の情報を取得するには各インスタンスの HTTP API エンドポイントにアクセスする必要があった以前のリリースの TiDB よりも使用が簡素化されます。
 
 {{< copyable "" >}}
 

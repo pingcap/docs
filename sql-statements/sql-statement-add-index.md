@@ -9,9 +9,9 @@ summary: An overview of the usage of ADD INDEX for the TiDB database.
 
 > **警告：**
 >
-> -   DDL ステートメントがクラスタで実行されているときは、 **TiDB**クラスタをアップグレードしないでください (通常、 `ADD INDEX`のような時間のかかる DDL ステートメントや列の型の変更のため)。
-> -   アップグレードの前に、 [`ADMIN SHOW DDL`](/sql-statements/sql-statement-admin-show-ddl.md)コマンドを使用して、TiDBクラスタに進行中の DDL ジョブがあるかどうかを確認することをお勧めします。クラスタに DDL ジョブがある場合、クラスタをアップグレードするには、DDL の実行が完了するまで待つか、 [`ADMIN CANCEL DDL`](/sql-statements/sql-statement-admin-cancel-ddl.md)コマンドを使用して DDL ジョブをキャンセルしてから、クラスタをアップグレードします。
-> -   また、クラスタのアップグレード中は、DDL ステートメントを実行し**ない**でください。そうしないと、未定義の動作の問題が発生する可能性があります。
+> -   DDL ステートメントがクラスターで実行されているときは、 **TiDB**クラスターをアップグレードしないでください (通常、 `ADD INDEX`のような時間のかかる DDL ステートメントや列の型の変更のため)。
+> -   アップグレードの前に、 [`ADMIN SHOW DDL`](/sql-statements/sql-statement-admin-show-ddl.md)コマンドを使用して、TiDB クラスターに進行中の DDL ジョブがあるかどうかを確認することをお勧めします。クラスターに DDL ジョブがある場合、クラスターをアップグレードするには、DDL の実行が完了するまで待つか、 [`ADMIN CANCEL DDL`](/sql-statements/sql-statement-admin-cancel-ddl.md)コマンドを使用して DDL ジョブをキャンセルしてからクラスターをアップグレードします。
+> -   また、クラスターのアップグレード中は、DDL ステートメントを実行し**ない**でください。そうしないと、未定義の動作の問題が発生する可能性があります。
 
 ## あらすじ {#synopsis}
 

@@ -29,6 +29,6 @@ Query OK, 0 rows affected (0.00 sec)
 
 > **ノート：**
 >
-> TiDB は分散データベースであるため、TiDB でのシャットダウン操作は、TiDBクラスタ全体ではなく、クライアントに接続された TiDB インスタンスを停止します。
+> TiDB は分散データベースであるため、TiDB でのシャットダウン操作は、TiDB クラスター全体ではなく、クライアントに接続された TiDB インスタンスを停止します。
 
 `SHUTDOWN`ステートメントは MySQL と部分的に互換性があります。互換性の問題が発生した場合は、問題を報告できます[GitHubで](https://github.com/pingcap/tidb/issues/new/choose) 。

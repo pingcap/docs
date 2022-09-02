@@ -4,7 +4,7 @@ title: tiup cluster template
 
 # tiup cluster template {#tiup-cluster-template}
 
-クラスタの[トポロジ ファイル](/tiup/tiup-cluster-topology-reference.md)を準備する必要があります。 TiUP には組み込みのトポロジ ファイル テンプレートがあり、このテンプレートを変更して最終的なトポロジ ファイルを作成できます。組み込みのテンプレート コンテンツを出力するには、 `tiup cluster template`コマンドを使用できます。
+クラスターをデプロイする前に、クラスターの[トポロジ ファイル](/tiup/tiup-cluster-topology-reference.md)を準備する必要があります。 TiUP には組み込みのトポロジ ファイル テンプレートがあり、このテンプレートを変更して最終的なトポロジ ファイルを作成できます。組み込みのテンプレート コンテンツを出力するには、 `tiup cluster template`コマンドを使用できます。
 
 ## 構文 {#syntax}
 
@@ -41,4 +41,4 @@ tiup cluster template [flags]
 
 指定されたオプションに従ってトポロジ テンプレートを出力します。これは、展開のためにトポロジ ファイルにリダイレクトできます。
 
-[&lt;&lt; 前のページに戻る - TiUP Clusterコマンド一覧](/tiup/tiup-component-cluster.md#command-list)
+[&lt;&lt; 前のページに戻る - TiUP クラスタコマンド一覧](/tiup/tiup-component-cluster.md#command-list)

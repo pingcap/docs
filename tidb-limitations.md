@@ -5,7 +5,7 @@ summary: Learn the usage limitations of TiDB.
 
 # TiDB の制限事項 {#tidb-limitations}
 
-このドキュメントでは、識別子の最大長、サポートされるデータベース、テーブル、インデックス、分割テーブル、シーケンスの最大数など、TiDB の一般的な使用上の制限について説明します。
+このドキュメントでは、識別子の最大長、サポートされるデータベース、テーブル、インデックス、分割テーブル、シーケンスの最大数など、TiDB の一般的な使用制限について説明します。
 
 ## 識別子の長さの制限 {#limitations-on-identifier-length}
 
@@ -93,4 +93,4 @@ summary: Learn the usage limitations of TiDB.
 
 ## TiKV版の制限事項 {#limitations-on-tikv-version}
 
-クラスタで、TiDB コンポーネントのバージョンが v6.2.0 以降の場合、TiKV のバージョンは v6.2.0 以降である必要があります。
+クラスターで、TiDB コンポーネントのバージョンが v6.2.0 以降の場合、TiKV のバージョンは v6.2.0 以降である必要があります。

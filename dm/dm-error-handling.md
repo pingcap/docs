@@ -59,7 +59,7 @@ summary: Learn about the error system and how to handle common errors when you u
 
 -   `message` : エラーの説明。
 
-    エラーの詳細な説明。エラー コール チェーンのエラー メッセージのすべての追加レイヤーをラップして格納するには、 [エラー。ラップ](https://godoc.org/github.com/pkg/errors#hdr-Adding_context_to_an_error)モードが採用されます。最外層でラップされたメッセージの説明は DM のエラーを示し、最内層でラップされたメッセージの説明はエラーのソースを示します。
+    エラーの詳細な説明。エラー コール チェーンのエラー メッセージのすべての追加レイヤーをラップして格納するには、 [エラー。ラップ](https://godoc.org/github.com/pkg/errors#hdr-Adding_context_to_an_error)モードが採用されます。最外層でラップされたメッセージの説明は DM のエラーを示し、最レイヤーでラップされたメッセージの説明はエラーのソースを示します。
 
 -   `workaround` : エラー処理方法 (オプション)
 
@@ -186,7 +186,7 @@ DM の現在のバージョンでは、エラーが発生すると自動的に�
 
 #### 理由 {#reasons}
 
--   MySQL クライアントと MySQL/TiDB サーバーの両方に`max_allowed_packet`のクォータ制限があります。いずれかの`max_allowed_packet`が制限を超えると、クライアントはエラー メッセージを受け取ります。現在、DM および TiDB サーバーの最新バージョンでは、デフォルト値の`max_allowed_packet`は`64M`です。
+-   MySQL クライアントと MySQL/TiDBサーバーの両方に`max_allowed_packet`のクォータ制限があります。いずれかの`max_allowed_packet`が制限を超えると、クライアントはエラー メッセージを受け取ります。現在、DM および TiDBサーバーの最新バージョンでは、デフォルト値の`max_allowed_packet`は`64M`です。
 
 -   DM のフル データ インポート処理ユニットは、DM の Dump 処理ユニットによってエクスポートされた SQL ファイルの分割をサポートしていません。
 
@@ -204,6 +204,6 @@ DM の現在のバージョンでは、エラーが発生すると自動的に�
 
 -   ワイド テーブルの 1 行が`64M`を超える場合は、次の構成を変更し、構成が有効になるようにする必要があります。
 
-    -   TiDB サーバーで`set @@global.max_allowed_packet=134217728` ( `134217728` = 128 MB) を実行します。
+    -   TiDBサーバーで`set @@global.max_allowed_packet=134217728` ( `134217728` = 128 MB) を実行します。
 
     -   まず、DM タスク構成ファイルの`target-database`セクションに`max-allowed-packet: 134217728` (128 MB) を追加します。次に、 `stop-task`コマンドを実行し、 `start-task`コマンドを実行します。

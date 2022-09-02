@@ -172,7 +172,7 @@ TiDB は、 ACIDモデルでトランザクションの線形一貫性を保証�
 
 現在、クロック同期の一般的な解決策は、ネットワーク タイム プロトコル (NTP) サービスを使用することです。インターネット上の`pool.ntp.org`のタイミング サービスを使用するか、オフライン環境で独自の NTP サービスを構築できます。
 
-NTP サービスがインストールされているかどうか、および NTP サーバーと正常に同期しているかどうかを確認するには、次の手順を実行します。
+NTP サービスがインストールされているかどうか、および NTPサーバーと正常に同期しているかどうかを確認するには、次の手順を実行します。
 
 1.  次のコマンドを実行します。 `running`が返された場合、NTP サービスは実行中です。
 
@@ -206,7 +206,7 @@ NTP サービスがインストールされているかどうか、および NTP
 
         システムが`chronyd`を使用するように構成されている場合は、ステップ 3 に進みます。
 
-2.  `ntpstat`コマンドを実行して、NTP サービスが NTP サーバーと同期しているかどうかを確認します。
+2.  `ntpstat`コマンドを実行して、NTP サービスが NTPサーバーと同期しているかどうかを確認します。
 
     > **ノート：**
     >
@@ -218,7 +218,7 @@ NTP サービスがインストールされているかどうか、および NTP
     ntpstat
     ```
 
-    -   `synchronised to NTP server`が返された場合 (NTP サーバーと同期中)、同期プロセスは正常です。
+    -   `synchronised to NTP server`が返された場合 (NTPサーバーと同期中)、同期プロセスは正常です。
 
         ```
         synchronised to NTP server (85.199.214.101) at stratum 2
@@ -238,7 +238,7 @@ NTP サービスがインストールされているかどうか、および NTP
         Unable to talk to NTP daemon. Is it running?
         ```
 
-3.  `chronyc tracking`コマンドを実行して、Chrony サービスが NTP サーバーと同期しているかどうかを確認します。
+3.  `chronyc tracking`コマンドを実行して、Chrony サービスが NTPサーバーと同期しているかどうかを確認します。
 
     > **ノート：**
     >
@@ -280,7 +280,7 @@ NTP サービスがインストールされているかどうか、および NTP
         506 Cannot talk to daemon
         ```
 
-NTP サービスができるだけ早く同期を開始できるようにするには、次のコマンドを実行します。 `pool.ntp.org`を NTP サーバーに置き換えます。
+NTP サービスができるだけ早く同期を開始できるようにするには、次のコマンドを実行します。 `pool.ntp.org`を NTPサーバーに置き換えます。
 
 {{< copyable "" >}}
 
@@ -304,7 +304,7 @@ sudo systemctl enable ntpd.service
 
 本番環境の TiDB では、次の方法でオペレーティング システムの構成を最適化することをお勧めします。
 
-1.  THP (Transparent Huge Pages) を無効にします。データベースのメモリ アクセス パターンは、連続的ではなく疎になる傾向があります。高レベルのメモリ断片化が深刻な場合、THP ページが割り当てられると、より高いレイテンシが発生します。
+1.  THP (Transparent Huge Pages) を無効にします。データベースのメモリ アクセス パターンは、連続的ではなく疎になる傾向があります。高レベルのメモリ断片化が深刻な場合、THP ページが割り当てられると、より高いレイテンシーが発生します。
 2.  ストレージ メディアの I/O スケジューラを`noop`に設定します。高速 SSD ストレージ メディアの場合、カーネルの I/O スケジューリング操作によってパフォーマンスが低下する可能性があります。 Scheduler を`noop`に設定すると、カーネルが I/O 要求を他の操作なしでハードウェアに直接送信するため、パフォーマンスが向上します。また、noop スケジューラの方が適しています。
 3.  CPU 周波数を制御する cpufrequ モジュールには`performance`モードを選択します。動的な調整を行わずに、サポートされている最高の動作周波数に CPU 周波数を固定すると、パフォーマンスが最大化されます。
 
@@ -680,7 +680,7 @@ sudo systemctl enable ntpd.service
 > **ノート：**
 >
 > -   NUMA を使用したコアのバインドは、CPU リソースを分離する方法であり、高度に構成された物理マシンに複数のインスタンスをデプロイするのに適しています。
-> -   `tiup cluster deploy`を使用してデプロイを完了したら、 `exec`コマンドを使用してクラスタレベルの管理操作を実行できます。
+> -   `tiup cluster deploy`を使用してデプロイを完了したら、 `exec`コマンドを使用してクラスター レベルの管理操作を実行できます。
 
 NUMA ツールをインストールするには、次の 2 つの方法のいずれかを実行します。
 
@@ -690,15 +690,15 @@ NUMA ツールをインストールするには、次の 2 つの方法のいず
 sudo yum -y install numactl
 ```
 
-**方法 2** : `tiup cluster exec`コマンドを実行して、バッチで既存のクラスタに NUMA をインストールします。
+**方法 2** : `tiup cluster exec`コマンドを実行して、バッチで既存のクラスターに NUMA をインストールします。
 
-1.  [TiUP を使用して TiDB クラスターをデプロイする](/production-deployment-using-tiup.md)に従ってクラスタをデプロイし`tidb-test` 。 TiDBクラスタをインストールしている場合は、この手順を省略できます。
+1.  [TiUP を使用して TiDBクラスタをデプロイする](/production-deployment-using-tiup.md)に従ってクラスターをデプロイし`tidb-test` 。 TiDB クラスターをインストールしている場合は、この手順を省略できます。
 
     ```bash
     tiup cluster deploy tidb-test v6.1.0 ./topology.yaml --user root [-p] [-i /home/root/.ssh/gcp_rsa]
     ```
 
-2.  `sudo`特権を使用して`tiup cluster exec`コマンドを実行し、 `tidb-test`クラスタのすべてのターゲット マシンに NUMA をインストールします。
+2.  `sudo`特権を使用して`tiup cluster exec`コマンドを実行し、 `tidb-test`クラスター内のすべてのターゲット マシンに NUMA をインストールします。
 
     ```bash
     tiup cluster exec tidb-test --sudo --command "yum -y install numactl"

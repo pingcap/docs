@@ -4,7 +4,7 @@ title: tiup cluster restart
 
 # tiup cluster restart {#tiup-cluster-restart}
 
-コマンド`tiup cluster restart`は、指定されたクラスタのすべてまたは一部のサービスを再起動するために使用されます。
+コマンド`tiup cluster restart`は、指定されたクラスターのすべてまたは一部のサービスを再起動するために使用されます。
 
 > **ノート：**
 >
@@ -16,13 +16,13 @@ title: tiup cluster restart
 tiup cluster restart <cluster-name> [flags]
 ```
 
-`<cluster-name>` : 操作するクラスタの名前。クラスタ名を忘れた場合は、 [クラスタリスト](/tiup/tiup-component-cluster-list.md)コマンドで確認できます。
+`<cluster-name>` : 操作するクラスターの名前。クラスター名を忘れた場合は、 [クラスタ リスト](/tiup/tiup-component-cluster-list.md)コマンドで確認できます。
 
 ## オプション {#options}
 
 ### -N, --ノード {#n-node}
 
--   再起動するノードを指定します。このオプションの値は、ノード ID のコンマ区切りリストです。 `tiup cluster display`コマンドで返される[クラスタステータス テーブル](/tiup/tiup-component-cluster-display.md)の最初の列からノード ID を取得できます。
+-   再起動するノードを指定します。このオプションの値は、ノード ID のコンマ区切りリストです。 `tiup cluster display`コマンドで返される[クラスタ ステータス テーブル](/tiup/tiup-component-cluster-display.md)の最初の列からノード ID を取得できます。
 -   データ型: `STRING`
 -   このオプションが指定されていない場合、TiUP はデフォルトですべてのノードを再起動します。
 
@@ -32,7 +32,7 @@ tiup cluster restart <cluster-name> [flags]
 
 ### -R, --role {#r-role}
 
--   再起動するノードの役割を指定します。このオプションの値は、ノードの役割のコンマ区切りリストです。 `tiup cluster display`コマンドによって返される[クラスタステータス テーブル](/tiup/tiup-component-cluster-display.md)の 2 列目から、ノードの役割を取得できます。
+-   再起動するノードの役割を指定します。このオプションの値は、ノードの役割のコンマ区切りリストです。 `tiup cluster display`コマンドによって返される[クラスタ ステータス テーブル](/tiup/tiup-component-cluster-display.md)の 2 列目から、ノードの役割を取得できます。
 -   データ型: `STRING`
 -   このオプションが指定されていない場合、TiUP はデフォルトですべてのロールのノードを再起動します。
 
@@ -50,4 +50,4 @@ tiup cluster restart <cluster-name> [flags]
 
 サービスの再起動プロセスのログ。
 
-[&lt;&lt; 前のページに戻る - TiUP Clusterコマンド一覧](/tiup/tiup-component-cluster.md#command-list)
+[&lt;&lt; 前のページに戻る - TiUP クラスタコマンド一覧](/tiup/tiup-component-cluster.md#command-list)

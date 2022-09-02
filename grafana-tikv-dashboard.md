@@ -5,15 +5,15 @@ summary: Learn some key metrics displayed on the Grafana TiKV dashboard.
 
 # TiKV の主要な監視指標 {#key-monitoring-metrics-of-tikv}
 
-TiUP を使用して TiDBクラスタをデプロイすると、監視システム (Prometheus/Grafana) が同時にデプロイされます。詳細については、 [監視フレームワークの概要](/tidb-monitoring-framework.md)を参照してください。
+TiUP を使用して TiDB クラスターをデプロイすると、監視システム (Prometheus/Grafana) が同時にデプロイされます。詳細については、 [監視フレームワークの概要](/tidb-monitoring-framework.md)を参照してください。
 
 Grafana ダッシュボードは、Overview、PD、TiDB、TiKV、Node_exporter、Performance_overview などを含む一連のサブ ダッシュボードに分かれています。診断に役立つ多くの指標があります。
 
-主要なメトリックが表示される**TiKV-Details**ダッシュボードから、コンポーネントの TiKV ステータスの概要を取得できます。 [パフォーマンス マップ](https://asktug.com/_/tidb-performance-map/#/)に従って、クラスタのステータスが期待どおりであるかどうかを確認できます。
+主要なメトリックが表示される**TiKV-Details**ダッシュボードから、コンポーネントの TiKV ステータスの概要を取得できます。 [パフォーマンス マップ](https://asktug.com/_/tidb-performance-map/#/)に従って、クラスターのステータスが期待どおりであるかどうかを確認できます。
 
 このドキュメントでは、 **TiKV-Details**ダッシュボードでのこれらの主要なメトリックの詳細な説明を提供します。
 
-## 集まる {#cluster}
+## クラスタ {#cluster}
 
 -   ストア サイズ: TiKV インスタンスあたりのストレージ サイズ
 -   利用可能なサイズ: TiKV インスタンスあたりの利用可能な容量
@@ -33,8 +33,8 @@ Grafana ダッシュボードは、Overview、PD、TiDB、TiKV、Node_exporter�
 ## エラー {#errors}
 
 -   重大なエラー: 重大なエラーの数
--   サーバーがビジーです: TiKV インスタンスを一時的に使用不可にするイベントの発生を示します (書き込みストール、チャネル フルなど)。通常は`0`のはずです。
--   サーバー レポートの失敗: サーバーによって報告されたエラー メッセージの数。通常は`0`のはずです。
+-   サーバーがビジーです: 書き込み停止、チャネル フルなど、TiKV インスタンスを一時的に使用できなくするイベントの発生を示します。通常は`0`のはずです。
+-   サーバー レポートの失敗:サーバーによって報告されたエラー メッセージの数。通常は`0`のはずです。
 -   Raftstore エラー: 各 TiKV インスタンスのタイプごとの Raftstore エラーの数
 -   スケジューラ エラー: 各 TiKV インスタンスのタイプごとのスケジューラ エラーの数
 -   コプロセッサー・エラー: 各 TiKV インスタンスのタイプごとのコプロセッサー・エラーの数
@@ -90,11 +90,11 @@ Grafana ダッシュボードは、Overview、PD、TiDB、TiKV、Node_exporter�
 ## RaftIO {#raft-io}
 
 -   Apply log duration: Raftがログを適用するのにかかった時間
--   サーバーごとのログ適用期間: Raftが TiKV インスタンスごとにログを適用するのにかかった時間
+-   Apply log duration per サーバー: Raftが TiKV インスタンスごとにログを適用するのにかかった時間
 -   ログ追加期間: Raftがログを追加するのにかかった時間
--   サーバーごとにログを追加する時間: Raftが TiKV インスタンスごとにログを追加するのにかかった時間
+-   Append log duration per サーバー: Raftが TiKV インスタンスごとにログを追加するのにかかった時間
 -   コミット ログ期間: ログをコミットするためにRaftが費やした時間
--   サーバーごとのログのコミット期間: Raftが TiKV インスタンスごとにログをコミットするために費やした時間
+-   サーバーごとのコミット ログ期間 : Raftが TiKV インスタンスごとにログをコミットするために費やした時間
 
 ![TiKV Dashboard - Raft IO metrics](/media/tikv-dashboard-raftio.png)
 
@@ -110,15 +110,15 @@ Grafana ダッシュボードは、Overview、PD、TiDB、TiKV、Node_exporter�
     -   スナップショット: 1 秒あたりの準備完了操作に含まれるスナップショットの数
 -   0.99 Raftストア イベントの継続時間: Raftstore イベントにかかった時間 (P99)
 -   プロセス準備完了時間: Raftでプロセスが準備完了になるまでにかかった時間
--   サーバーごとのプロセス準備期間: TiKV インスタンスごとのRaftでピア プロセスの準備が完了するまでにかかった時間。 2 秒未満 (P99.99) である必要があります。
+-   サーバーごとのプロセス準備期間 : TiKV インスタンスごとのRaftでピア プロセスの準備が整うまでにかかった時間。 2 秒未満 (P99.99) である必要があります。
 
 ![TiKV Dashboard - Raft process metrics](/media/tikv-dashboard-raft-process.png)
 
 ## Raftメッセージ {#raft-message}
 
--   サーバーごとに送信されたメッセージ: 各 TiKV インスタンスによって 1 秒あたりに送信されたRaftメッセージの数
--   サーバーごとのメッセージのフラッシュ: 各 TiKV インスタンスでRaftクライアントによってフラッシュされた 1 秒あたりのRaftメッセージの数
--   Receive messages per server: 各 TiKV インスタンスが 1 秒あたりに受信したRaftメッセージの数
+-   Sent messages per サーバー: 各 TiKV インスタンスによって 1 秒あたりに送信されるRaftメッセージの数
+-   Flush messages per サーバー : 各 TiKV インスタンスで 1 秒あたりにRaftクライアントによってフラッシュされたRaftメッセージの数
+-   Receive messages per サーバー: 各 TiKV インスタンスが 1 秒間に受信したRaftメッセージの数
 -   メッセージ: 1 秒あたりのタイプごとに送信されたRaftメッセージの数
 -   投票: 1 秒あたりのRaftで送信された投票メッセージの数
 -   Raftがドロップしたメッセージ: 1 秒あたりのタイプごとのドロップされたRaftメッセージの数
@@ -129,12 +129,12 @@ Grafana ダッシュボードは、Overview、PD、TiDB、TiKV、Node_exporter�
 
 -   準備完了ごとのRaft適用提案: 提案の適用中に、各準備完了操作がバッチに含む提案の数のヒストグラム。
 -   Raft read/write プロポーザル: 1 秒あたりのタイプごとのプロポーザルの数
--   サーバーごとのRaft読み取り提案: 1 秒あたりの各 TiKV インスタンスによる読み取り提案の数
--   サーバーごとのRaft書き込み提案: 1 秒あたりの各 TiKV インスタンスによる書き込み提案の数
+-   サーバーごとのRaft読み取り提案 : 1 秒あたりの各 TiKV インスタンスによる読み取り提案の数
+-   サーバーごとのRaft書き込み提案 : 1 秒あたりの各 TiKV インスタンスによる書き込み提案の数
 -   提案待機時間: 各提案の待機時間のヒストグラム
--   サーバーごとの待機時間を提案: TiKV インスタンスごとの各提案の待機時間のヒストグラム
+-   サーバーごとの待機時間の提案 : TiKV インスタンスごとの各提案の待機時間のヒストグラム
 -   申請待機時間: 各提案の申請時間のヒストグラム
--   サーバーごとの待機時間の適用: TiKV インスタンスごとの各提案の適用時間のヒストグラム
+-   サーバーごとの適用待機時間 : TiKV インスタンスごとの各提案の適用時間のヒストグラム
 -   Raftログ速度: ピアがログを提案する平均レート
 
 ![TiKV Dashboard - Raft propose metrics](/media/tikv-dashboard-raft-propose.png)

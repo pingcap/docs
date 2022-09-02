@@ -11,7 +11,7 @@ summary: An overview of the usage of SHOW [FULL] COLUMNS FROM for the TiDB datab
 
 > **ノート：**
 >
-> `DESC TABLE <table_name>` 、 `DESCRIBE TABLE <table_name>` 、および`EXPLAIN TABLE <table_name>`は、上記のステートメントと同等ではありません。それらは[`DESC SELECT * FROM &#x3C;table_name>`](/sql-statements/sql-statement-explain.md)のエイリアスです。
+> `DESC TABLE <table_name>` 、 `DESCRIBE TABLE <table_name>` 、および`EXPLAIN TABLE <table_name>`は、上記のステートメントと同等ではありません。それらは[`DESC SELECT * FROM &#x3C;table_name>`](/sql-statements/sql-statement-explain.md)の別名です。
 
 ## あらすじ {#synopsis}
 

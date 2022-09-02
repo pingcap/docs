@@ -73,7 +73,7 @@ summary: Learn about the basic features of TiDB.
 | [プリペアド ステートメント キャッシュ](/sql-prepared-plan-cache.md)     |  よ  |  よ  |  よ  | よ   |  よ  | 実験的 | 実験的 | 実験的 | 実験的 |
 | [SQL 計画管理 (SPM)](/sql-plan-management.md)              |  よ  |  よ  |  よ  | よ   |  よ  |  よ  |  よ  |  よ  |  よ  |
 | [コプロセッサー・キャッシュ](/coprocessor-cache.md)                 |  よ  |  よ  |  よ  | よ   |  よ  |  よ  |  よ  |  よ  | 実験的 |
-| [古い読み取り](/stale-read.md)                               |  よ  |  よ  |  よ  | よ   |  よ  |  よ  |  よ  |  N  |  N  |
+| [ステイル読み取り](/stale-read.md)                             |  よ  |  よ  |  よ  | よ   |  よ  |  よ  |  よ  |  N  |  N  |
 | [フォロワーが読む](/follower-read.md)                          |  よ  |  よ  |  よ  | よ   |  よ  |  よ  |  よ  |  よ  |  よ  |
 | [履歴データの読み取り (tidb_snapshot)](/read-historical-data.md) |  よ  |  よ  |  よ  | よ   |  よ  |  よ  |  よ  |  よ  |  よ  |
 | [オプティマイザーのヒント](/optimizer-hints.md)                    |  よ  |  よ  |  よ  | よ   |  よ  |  よ  |  よ  |  よ  |  よ  |
@@ -135,7 +135,7 @@ summary: Learn about the basic features of TiDB.
 
 | 安全                                                                | 6.2 | 6.1 | 6.0 | 5.4 | 5.3 | 5.2 | 5.1 | 5.0 | 4.0 |
 | ----------------------------------------------------------------- | :-: | :-: | :-: | --- | :-: | :-: | :-: | :-: | :-: |
-| [透過層セキュリティ (TLS)](/enable-tls-between-clients-and-servers.md)     |  よ  |  よ  |  よ  | よ   |  よ  |  よ  |  よ  |  よ  |  よ  |
+| [透過レイヤーセキュリティ (TLS)](/enable-tls-between-clients-and-servers.md)  |  よ  |  よ  |  よ  | よ   |  よ  |  よ  |  よ  |  よ  |  よ  |
 | [保存時の暗号化 (TDE)](/encryption-at-rest.md)                           |  よ  |  よ  |  よ  | よ   |  よ  |  よ  |  よ  |  よ  |  よ  |
 | [役割ベースの認証 (RBAC)](/role-based-access-control.md)                  |  よ  |  よ  |  よ  | よ   |  よ  |  よ  |  よ  |  よ  |  よ  |
 | [証明書ベースの認証](/certificate-authentication.md)                       |  よ  |  よ  |  よ  | よ   |  よ  |  よ  |  よ  |  よ  |  よ  |

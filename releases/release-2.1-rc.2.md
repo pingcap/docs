@@ -42,10 +42,10 @@ title: TiDB 2.1 RC2 Release Notes
     -   `USER1`シグナル[#7587](https://github.com/pingcap/tidb/pull/7587)を使用したゴルーチン情報の表示をサポート
     -   TiDB の起動中に内部 SQL を高優先度に設定する[#7616](https://github.com/pingcap/tidb/pull/7616)
     -   異なるラベルを使用して、メトリックの監視で内部 SQL とユーザー SQL をフィルター処理する[#7631](https://github.com/pingcap/tidb/pull/7631)
-    -   先週の上位 30 件の遅いクエリを TiDB サーバーに保存します[#7646](https://github.com/pingcap/tidb/pull/7646)
-    -   TiDBクラスタのグローバル システム タイム ゾーンを設定する提案を提出する[#7656](https://github.com/pingcap/tidb/pull/7656)
+    -   先週の上位 30 件の遅いクエリを TiDBサーバーに保存します[#7646](https://github.com/pingcap/tidb/pull/7646)
+    -   TiDB クラスターのグローバル システム タイム ゾーンを設定する提案を提出する[#7656](https://github.com/pingcap/tidb/pull/7656)
     -   「GC ライフタイムがトランザクション期間よりも短い」というエラーメッセージを充実させる[#7658](https://github.com/pingcap/tidb/pull/7658)
-    -   TiDBクラスタの起動時にグローバル システム タイム ゾーンを設定する[#7638](https://github.com/pingcap/tidb/pull/7638)
+    -   TiDB クラスタの起動時にグローバル システム タイム ゾーンを設定する[#7638](https://github.com/pingcap/tidb/pull/7638)
 -   互換性
     -   `Year`タイプ[#7542](https://github.com/pingcap/tidb/pull/7542)の unsigned フラグを追加します
     -   `Prepare` / `Execute`モード[#7525](https://github.com/pingcap/tidb/pull/7525)で`Year`型の結果の長さを構成する問題を修正します。

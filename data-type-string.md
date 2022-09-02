@@ -11,7 +11,7 @@ TiDB は、 `CHAR` 、 `VARCHAR` 、 `BINARY` 、 `VARBINARY` 、 `BLOB` 、 `TE
 
 ### <code>CHAR</code>型 {#code-char-code-type}
 
-`CHAR`は固定長の文字列です。 M は列の長さを文字 (バイトではなく) で表します。 M の範囲は 0 ～ 255 です`VARCHAR`型とは異なり、 `CHAR`列にデータが挿入されると、末尾のスペースが切り捨てられます。
+`CHAR`は固定長の文字列です。 M は列の長さを文字 (バイトではなく) で表します。 M の範囲は 0 ～ 255 です`VARCHAR`型とは異なり、データが`CHAR`列に挿入されると、末尾のスペースが切り捨てられます。
 
 ```sql
 [NATIONAL] CHAR[(M)] [CHARACTER SET charset_name] [COLLATE collation_name]

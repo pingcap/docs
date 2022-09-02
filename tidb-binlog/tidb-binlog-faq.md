@@ -1,9 +1,9 @@
 ---
-title: TiDB Binlog FAQ
+title: TiDB Binlog FAQs
 summary: Learn about the frequently asked questions (FAQs) and answers about TiDB Binlog.
 ---
 
-# TiDB Binlog FAQ {#tidb-binlog-faq}
+# Binlogバイナリログに関するよくある質問 {#tidb-binlog-faqs}
 
 このドキュメントでは、TiDB Binlogに関するよくある質問 (FAQ) をまとめています。
 
@@ -11,15 +11,15 @@ summary: Learn about the frequently asked questions (FAQs) and answers about TiD
 
 -   クエリへの影響はありません。
 
--   `INSERT` 、 `DELETE` 、および`UPDATE`トランザクションのパフォーマンスにわずかな影響があります。レイテンシーでは、トランザクションがコミットされる前に、TiKV prewrite ステージで p-binlog が同時に書き込まれます。一般に、binlog の書き込みは TiKV prewrite よりも高速であるため、レイテンシは増加しません。ポンプの監視パネルで binlog の書き込みの応答時間を確認できます。
+-   `INSERT` 、 `DELETE` 、および`UPDATE`トランザクションのパフォーマンスにわずかな影響があります。 レイテンシーでは、トランザクションがコミットされる前に、TiKV prewrite ステージで p-binlog が同時に書き込まれます。一般に、binlog の書き込みは TiKV prewrite よりも高速であるため、レイテンシーは増加しません。ポンプの監視パネルで binlog の書き込みの応答時間を確認できます。
 
-## TiDB Binlogのレプリケーション レイテンシはどれくらいですか? {#how-high-is-the-replication-latency-of-tidb-binlog}
+## TiDB Binlogのレプリケーションレイテンシーはどれくらいですか? {#how-high-is-the-replication-latency-of-tidb-binlog}
 
 TiDB Binlogレプリケーションのレイテンシーは秒単位で測定されます。通常、オフピーク時には約 3 秒です。
 
-## Drainer が下流の MySQL またはDrainerクラスタにデータをレプリケートするために必要な権限は何ですか? {#what-privileges-does-drainer-need-to-replicate-data-to-the-downstream-mysql-or-tidb-cluster}
+## Drainer が下流の MySQL またはDrainerクラスターにデータをレプリケートするために必要な権限は何ですか? {#what-privileges-does-drainer-need-to-replicate-data-to-the-downstream-mysql-or-tidb-cluster}
 
-ダウンストリーム MySQL または TiDBクラスタにデータをレプリケートするには、 Drainerに次の権限が必要です。
+ダウンストリームの MySQL または TiDB クラスターにデータをレプリケートするには、 Drainerに次の権限が必要です。
 
 -   入れる
 -   アップデート
@@ -55,7 +55,7 @@ binlogctl -cmd pumps
 
 次に、 Drainerモニターまたはログが対応するエラーを出力するかどうかを確認します。その場合は、それに応じて解決してください。
 
-## Drainer が下流の MySQL またはDrainerクラスタにデータをレプリケートするのが遅い場合はどうすればよいですか? {#what-can-i-do-if-drainer-is-slow-to-replicate-data-to-the-downstream-mysql-or-tidb-cluster}
+## Drainer が下流の MySQL またはDrainerクラスターにデータをレプリケートするのが遅い場合はどうすればよいですか? {#what-can-i-do-if-drainer-is-slow-to-replicate-data-to-the-downstream-mysql-or-tidb-cluster}
 
 以下の監視項目を確認してください。
 
@@ -119,9 +119,9 @@ Drainerは、開始時にチェックポイントを読み取ります。 Draine
 
     2.  [古いDrainerの状態を`offline`に変更する binlogctl](/tidb-binlog/maintain-tidb-binlog-cluster.md)を使用します。
 
-## フル バックアップと binlog バックアップ ファイルを使用してクラスタのデータを復元する方法を教えてください。 {#how-to-restore-the-data-of-a-cluster-using-a-full-backup-and-a-binlog-backup-file}
+## フル バックアップと binlog バックアップ ファイルを使用してクラスターのデータを復元する方法を教えてください。 {#how-to-restore-the-data-of-a-cluster-using-a-full-backup-and-a-binlog-backup-file}
 
-1.  クラスタをクリーンアップし、完全バックアップを復元します。
+1.  クラスターをクリーンアップし、完全バックアップを復元します。
 
 2.  バックアップ ファイルの最新データを復元するには、 Reparoを使用して`start-tso` = {フル バックアップのスナップショット タイムスタンプ + 1} および`end-ts` = 0 を設定します (または、特定の時点を指定できます)。
 
@@ -143,7 +143,7 @@ Drainerは、開始時にチェックポイントを読み取ります。 Draine
 
 ## PumpまたはDrainerノードを一時停止または閉じることができるのはいつですか? {#when-can-i-pause-or-close-a-pump-or-drainer-node}
 
-PumpまたはDrainer状態の説明と、プロセスの開始方法と終了方法については、 [TiDB Binlogクラスターの操作](/tidb-binlog/maintain-tidb-binlog-cluster.md)を参照してください。
+PumpまたはDrainer状態の説明と、プロセスの開始方法と終了方法については、 [TiDB Binlogクラスタの操作](/tidb-binlog/maintain-tidb-binlog-cluster.md)を参照してください。
 
 サービスを一時的に停止する必要がある場合は、 PumpまたはDrainerノードを一時停止します。例えば：
 

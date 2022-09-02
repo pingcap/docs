@@ -132,7 +132,7 @@ group by name
 having c = 1;
 ```
 
-標準 SQL では、 `GROUP BY`句で列式のみが許可されます。したがって、「FLOOR(value/100)」は非列式であるため、次のようなステートメントは無効です。
+標準 SQL では`GROUP BY`句で列式のみが許可されるため、「FLOOR(value/100)」は非列式であるため、次のようなステートメントは無効です。
 
 ```sql
 select id, floor(value/100)

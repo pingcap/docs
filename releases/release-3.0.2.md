@@ -54,18 +54,18 @@ TiDB アンシブル バージョン: 3.0.2
     -   `Close` of `baseExecutor`がエラーを報告するとき、 `Close`が`ChildExecutor`に対して呼び出されないという問題を修正します。この問題は、 `KILL`のステートメントが有効にならず、 `ChildExecutor`が閉じられていない場合に、Goroutine リークにつながる可能性があります[#11576](https://github.com/pingcap/tidb/pull/11576)
 -   サーバ
     -   `LOAD DATA`が CSV ファイルの欠落している`TIMESTAMP`フィールドを処理すると、現在のタイムスタンプではなく、自動追加された値が 0 になる問題を修正します[#11250](https://github.com/pingcap/tidb/pull/11250)
-    -   `SHOW CREATE USER`ステートメントが関連する特権を正しくチェックしない問題を修正し、 `SHOW CREATE USER CURRENT_USER()`によって返される`USER`と`HOST`が間違っている可能性がある[#11229](https://github.com/pingcap/tidb/pull/11229)
+    -   `SHOW CREATE USER`ステートメントが関連する権限を正しくチェックしない問題を修正し、 `SHOW CREATE USER CURRENT_USER()`によって返される`USER`と`HOST`が間違っている可能性がある[#11229](https://github.com/pingcap/tidb/pull/11229)
     -   JDBC [#11290](https://github.com/pingcap/tidb/pull/11290)で`executeBatch`を使用すると返される結果が間違っている場合がある問題を修正
     -   TiKV サーバーのポート[#11370](https://github.com/pingcap/tidb/pull/11370)を変更するときのストリーミング クライアントのログ情報の出力を減らします。
-    -   ストリーミング クライアントが長時間ブロックされないように、ストリーミング クライアントを TiKV サーバーに再接続するロジックを最適化します[#11372](https://github.com/pingcap/tidb/pull/11372)
+    -   ストリーミング クライアントが長時間ブロックされないように、ストリーミング クライアントを TiKVサーバーに再接続するロジックを最適化します[#11372](https://github.com/pingcap/tidb/pull/11372)
     -   `INFORMATION_SCHEMA.TIDB_HOT_REGIONS` [#11350](https://github.com/pingcap/tidb/pull/11350)に`REGION_ID`を加える
-    -   リージョン数が多い場合に PD タイムアウトで TiDB API `http://{TiDBIP}:10080/regions/hot`を呼び出した場合に、リージョン情報の取得に失敗しないように、PD API からのリージョン情報の取得のタイムアウト時間を解除[#11383](https://github.com/pingcap/tidb/pull/11383)
+    -   リージョン数が多い場合に PD タイムアウトで TiDB API `http://{TiDBIP}:10080/regions/hot`を呼び出した際に、リージョン情報の取得に失敗しないように、PD API からのリージョン情報の取得のタイムアウト時間を解除[#11383](https://github.com/pingcap/tidb/pull/11383)
     -   HTTP API [#11466](https://github.com/pingcap/tidb/pull/11466)で、リージョン関連のリクエストが分割されたテーブル関連のリージョンを返さない問題を修正します。
     -   ユーザーがペシミスティック・ロックを手動で検証する際に、低速操作によってロック・タイムアウトが発生する可能性を減らすには、次の変更を行います[#11521](https://github.com/pingcap/tidb/pull/11521) :
         -   悲観的ロックのデフォルトの TTL を 30 秒から 40 秒に増やします
         -   最大 TTL を 60 秒から 120 秒に増やします
         -   最初の`LockKeys`のリクエストから悲観的ロック期間を計算する
-    -   TiKV クライアントの`SendRequest`関数ロジックを変更します。接続を構築できない場合に待機し続けるのではなく、すぐに別のピアに接続しようとします[#11531](https://github.com/pingcap/tidb/pull/11531)
+    -   TiKV クライアントの`SendRequest`関数ロジックを変更します。接続を確立できない場合に待機し続けるのではなく、すぐに別のピアに接続しようとします[#11531](https://github.com/pingcap/tidb/pull/11531)
     -   リージョンキャッシュの最適化: ストアが移動され、別のストアが同じアドレスでオンラインになっている場合、削除されたストアに無効のラベルを付けて、できるだけ早くキャッシュ内のストア情報を更新します[#11567](https://github.com/pingcap/tidb/pull/11567)
     -   `http://{TiDB_ADDRESS:TIDB_IP}/mvcc/key/{db}/{table}/{handle}` API によって返された結果にリージョンID を追加します[#11557](https://github.com/pingcap/tidb/pull/11557)
     -   Scatter Table API が Range キー[#11298](https://github.com/pingcap/tidb/pull/11298)をエスケープしないことが原因で、Scatter Table が機能しない問題を修正します。
@@ -132,7 +132,7 @@ TiDB Lightning
 -   生成された TiDB 構成ファイルで`pessimistic-txn`構成パラメーターが除外される問題を修正します[#850](https://github.com/pingcap/tidb-ansible/pull/850)
 -   TiDB ダッシュボードにメトリックを追加して最適化する[#853](https://github.com/pingcap/tidb-ansible/pull/853)
 -   TiDBダッシュボードに各監視項目の説明を追加[#854](https://github.com/pingcap/tidb-ansible/pull/854)
--   TiDB サマリー ダッシュボードを追加して、クラスタのステータスをより適切に表示し、問題をトラブルシューティングします[#855](https://github.com/pingcap/tidb-ansible/pull/855)
+-   TiDB サマリー ダッシュボードを追加して、クラスターのステータスをより適切に表示し、問題をトラブルシューティングします[#855](https://github.com/pingcap/tidb-ansible/pull/855)
 -   TiKV ダッシュボードの Allocator Stats 監視項目を更新します[#857](https://github.com/pingcap/tidb-ansible/pull/857)
 -   Node Exporter のアラート式[#860](https://github.com/pingcap/tidb-ansible/pull/860)の単位エラーを修正します。
 -   TiSpark jar パッケージを v2.1.2 にアップグレードする[#862](https://github.com/pingcap/tidb-ansible/pull/862)

@@ -9,7 +9,7 @@ summary: Learn the implementation of TopN and Limit operator pushdown.
 
 TiDB 実行計画ツリーでは、SQL の`LIMIT`句が Limit 演算子ノードに対応し、 `ORDER BY`句が Sort 演算子ノードに対応します。隣接する Limit 演算子と Sort 演算子は TopN 演算子ノードとして結合されます。これは、特定の並べ替え規則に従って上位 N レコードが返されることを意味します。つまり、Limit オペレーターは、NULL ソート・ルールを持つ TopN オペレーター・ノードと同等です。
 
-述語のプッシュダウンと同様に、TopN と Limit は実行計画ツリーでデータ ソースにできるだけ近い位置にプッシュ ダウンされ、必要なデータが早い段階でフィルタリングされます。このように、プッシュダウンはデータ送信と計算のオーバーヘッドを大幅に削減します。
+述語のプッシュダウンと同様に、TopN と Limit は実行計画ツリー内でできるだけデータ ソースに近い位置にプッシュ ダウンされ、必要なデータが早い段階でフィルタリングされます。このように、プッシュダウンはデータ送信と計算のオーバーヘッドを大幅に削減します。
 
 このルールを無効にするには、 [式プッシュダウンの最適化ルールとブロックリスト](/blocklist-control-plan.md)を参照してください。
 
@@ -17,7 +17,7 @@ TiDB 実行計画ツリーでは、SQL の`LIMIT`句が Limit 演算子ノード
 
 このセクションでは、いくつかの例を通じて TopN プッシュダウンを示します。
 
-### 例 1: ストレージ層のコプロセッサーにプッシュダウンする {#example-1-push-down-to-the-coprocessors-in-the-storage-layer}
+### 例 1: ストレージレイヤーのコプロセッサーにプッシュダウンする {#example-1-push-down-to-the-coprocessors-in-the-storage-layer}
 
 {{< copyable "" >}}
 
@@ -66,7 +66,7 @@ explain select * from t left join s on t.a = s.a order by t.a limit 10;
 8 rows in set (0.01 sec)
 ```
 
-このクエリでは、TopN 演算子の並べ替え規則は外部テーブル`t`の列のみに依存するため、TopN を Join にプッシュする前に計算を実行して、Join 操作の計算コストを削減できます。さらに、TiDB は TopN をストレージ レイヤーにプッシュします。
+このクエリでは、TopN 演算子の並べ替え規則は外部テーブル`t`の列のみに依存するため、TopN を Join にプッシュする前に計算を実行して、Join 操作の計算コストを削減できます。その上、TiDB はまた TopN をストレージレイヤーにプッシュします。
 
 ### 例 3: Join の前に TopN をプッシュダウンすることはできません {#example-3-topn-cannot-be-pushed-down-before-join}
 

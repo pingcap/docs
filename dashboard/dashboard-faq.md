@@ -1,9 +1,9 @@
 ---
-title: TiDB Dashboard FAQ
+title: TiDB Dashboard FAQs
 summary: Learn about the frequently asked questions (FAQs) and answers about TiDB Dashboard.
 ---
 
-# TiDB ダッシュボードFAQ {#tidb-dashboard-faq}
+# TiDB ダッシュボードに関するよくある質問 {#tidb-dashboard-faqs}
 
 このドキュメントは、TiDB ダッシュボードに関するよくある質問 (FAQ) と回答をまとめたものです。指示に従って実行しても問題が見つからない、または問題が解決しない場合は、PingCAP テクニカル サポートに連絡してください。
 
@@ -11,7 +11,7 @@ summary: Learn about the frequently asked questions (FAQs) and answers about TiD
 
 ### ファイアウォールまたはリバース プロキシが構成されている場合、TiDB ダッシュボード以外の内部アドレスにリダイレクトされます {#when-the-firewall-or-reverse-proxy-is-configured-i-am-redirected-to-an-internal-address-other-than-tidb-dashboard}
 
-複数の Placement Driver (PD) インスタンスがクラスタにデプロイされている場合、実際に TiDB ダッシュボード サービスを実行する PD インスタンスは 1 つだけです。このインスタンスの代わりに他の PD インスタンスにアクセスすると、ブラウザは別のアドレスにリダイレクトします。ファイアウォールまたはリバース プロキシが TiDB ダッシュボードにアクセスするように適切に構成されていない場合、ダッシュボードにアクセスすると、ファイアウォールまたはリバース プロキシによって保護されている内部アドレスにリダイレクトされることがあります。
+複数の Placement Driver (PD) インスタンスがクラスターにデプロイされている場合、実際に TiDB ダッシュボード サービスを実行する PD インスタンスは 1 つだけです。このインスタンスの代わりに他の PD インスタンスにアクセスすると、ブラウザは別のアドレスにリダイレクトします。ファイアウォールまたはリバース プロキシが TiDB ダッシュボードにアクセスするように適切に構成されていない場合、ダッシュボードにアクセスすると、ファイアウォールまたはリバース プロキシによって保護されている内部アドレスにリダイレクトされることがあります。
 
 -   複数の PD インスタンスを使用した TiDB ダッシュボードの動作原理については、 [TiDB ダッシュボード マルチ PD インスタンスの展開](/dashboard/dashboard-ops-deploy.md)を参照してください。
 -   リバース プロキシを正しく構成する方法については、 [リバース プロキシ経由で TiDB ダッシュボードを使用する](/dashboard/dashboard-ops-reverse-proxy.md)を参照してください。
@@ -27,13 +27,13 @@ summary: Learn about the frequently asked questions (FAQs) and answers about TiD
 
 ### [概要] ページの [ <strong>QPS</strong> ] セクションと [<strong>レイテンシ</strong>] セクションに<code>prometheus_not_found</code>エラーが表示される {#a-code-prometheus-not-found-code-error-is-shown-in-strong-qps-strong-and-strong-latency-strong-sections-on-the-overview-page}
 
-[**概要]**ページの [ <strong>QPS]</strong>および [<strong>レイテンシ]</strong>セクションには、Prometheus がデプロイされたクラスタが必要です。それ以外の場合、エラーが表示されます。 Prometheus インスタンスをクラスタにデプロイすることで、この問題を解決できます。
+[**概要]**ページの [ <strong>QPS]</strong>および [<strong>レイテンシ]</strong>セクションには、Prometheus がデプロイされたクラスターが必要です。それ以外の場合、エラーが表示されます。この問題は、Prometheus インスタンスをクラスターにデプロイすることで解決できます。
 
-Prometheus インスタンスがデプロイされたときにこの問題が引き続き発生する場合、考えられる理由は、デプロイ ツールが古くなっている (TiUP またはTiDB Operator)、およびツールがメトリック アドレスを自動的に報告しないため、TiDB ダッシュボードがクエリを実行できないことです。指標。展開ツールを最新バージョンにアップグレードして、再試行できます。
+Prometheus インスタンスがデプロイされたときにこの問題が引き続き発生する場合、考えられる理由は、デプロイ ツールが古くなっている (TiUP またはTiDB Operator) ことであり、ツールはメトリクス アドレスを自動的にレポートしないため、TiDB ダッシュボードはクエリを実行できません。指標。展開ツールを最新バージョンにアップグレードして、再試行できます。
 
 展開ツールが TiUP の場合は、次の手順に従ってこの問題を解決してください。その他の展開ツールについては、それらのツールの対応するドキュメントを参照してください。
 
-1.  TiUP と TiUP クラスターをアップグレードします。
+1.  TiUP および TiUPクラスタのアップグレード :
 
     {{< copyable "" >}}
 
@@ -42,9 +42,9 @@ Prometheus インスタンスがデプロイされたときにこの問題が引
     tiup update cluster --force
     ```
 
-2.  アップグレード後、新しいクラスタが Prometheus インスタンスでデプロイされると、メトリックは正常に表示されます。
+2.  アップグレード後、新しいクラスターが Prometheus インスタンスでデプロイされると、メトリックは正常に表示されます。
 
-3.  アップグレード後、既存のクラスタの場合、このクラスタを再起動してメトリクス アドレスを報告できます。 `CLUSTER_NAME`を実際のクラスタ名に置き換えます。
+3.  アップグレード後、既存のクラスターの場合、このクラスターを再起動してメトリクス アドレスを報告できます。 `CLUSTER_NAME`を実際のクラスター名に置き換えます。
 
     {{< copyable "" >}}
 
@@ -52,7 +52,7 @@ Prometheus インスタンスがデプロイされたときにこの問題が引
     tiup cluster start CLUSTER_NAME
     ```
 
-    クラスタが起動している場合でも、このコマンドを実行してください。このコマンドは、クラスタの通常のアプリケーションには影響しませんが、監視メトリックが TiDB ダッシュボードに正常に表示されるように、メトリック アドレスを更新して報告します。
+    クラスタが起動している場合でも、このコマンドを実行してください。このコマンドは、クラスター内の通常のアプリケーションには影響しませんが、監視メトリックが TiDB ダッシュボードに正常に表示されるように、メトリック アドレスを更新して報告します。
 
 ### [<strong>スロー クエリ]</strong>ページに<code>invalid connection</code>エラーが表示される {#an-code-invalid-connection-code-error-is-shown-on-the-strong-slow-queries-strong-page}
 
@@ -60,7 +60,7 @@ Prometheus インスタンスがデプロイされたときにこの問題が引
 
 ### <code>required component NgMonitoring is not started</code>エラーが表示される {#a-code-required-component-ngmonitoring-is-not-started-code-error-is-shown}
 
-NgMonitoring は、v5.4.0 以降のバージョンの TiDB クラスターに組み込まれた高度な監視コンポーネントであり、**継続的なプロファイリング**や<strong>Top SQL</strong>などの TiDB ダッシュボード機能をサポートします。新しいバージョンの TiUP を使用してクラスタをデプロイまたはアップグレードすると、NgMonitoring が自動的にデプロイされます。 TiDB Operatorを使用してデプロイされたクラスターの場合、 [継続的なプロファイリングを有効にする](https://docs.pingcap.com/tidb-in-kubernetes/dev/access-dashboard/#enable-continuous-profiling) . を参照して手動で NgMonitoring をデプロイできます。
+NgMonitoring は、v5.4.0 以降のバージョンの TiDB クラスターに組み込まれた高度な監視コンポーネントであり、**継続的なプロファイリング**や<strong>Top SQL</strong>などの TiDB ダッシュボード機能をサポートします。新しいバージョンの TiUP を使用してクラスターをデプロイまたはアップグレードすると、NgMonitoring が自動的にデプロイされます。 TiDB Operatorを使用してデプロイされたクラスターの場合、 [継続的なプロファイリングを有効にする](https://docs.pingcap.com/tidb-in-kubernetes/dev/access-dashboard/#enable-continuous-profiling) . を参照して手動で NgMonitoring をデプロイできます。
 
 Web ページに`required component NgMonitoring is not started`が表示されている場合は、次のように展開の問題をトラブルシューティングできます。
 
@@ -68,7 +68,7 @@ Web ページに`required component NgMonitoring is not started`が表示され�
 
 ステップ 1. バージョンを確認する
 
-1.  TiUPクラスタのバージョンを確認してください。 NgMonitoring は、TiUP が v1.9.0 以降の場合にのみデプロイされます。
+1.  TiUP クラスタのバージョンを確認してください。 NgMonitoring は、TiUP が v1.9.0 以降の場合にのみデプロイされます。
 
     {{< copyable "" >}}
 
@@ -84,7 +84,7 @@ Web ページに`required component NgMonitoring is not started`が表示され�
     Git Ref: v1.9.0
     ```
 
-2.  TiUPクラスタのバージョンが v1.9.0 より前の場合は、TiUP と TiUPクラスタを最新バージョンにアップグレードします。
+2.  TiUP クラスターのバージョンが v1.9.0 より前の場合は、TiUP と TiUP クラスターを最新バージョンにアップグレードします。
 
     {{< copyable "" >}}
 
@@ -94,7 +94,7 @@ Web ページに`required component NgMonitoring is not started`が表示され�
 
 ステップ 2. TiUP を使用して、制御マシンに ng_port 構成項目を追加します。次に、Prometheus をリロードします。
 
-1.  クラスタ構成ファイルを編集モードで開きます。
+1.  クラスター構成ファイルを編集モードで開きます。
 
     {{< copyable "" >}}
 
@@ -130,7 +130,7 @@ TiDB Operatorドキュメントの[継続的なプロファイリングを有効
 
 <details><summary>TiUP Playground を使用して開始されたクラスター</summary>
 
-クラスタを起動すると、TiUP Playground (&gt;= v1.8.0) は NgMonitoring コンポーネントを自動的に起動します。 TiUP Playground を最新バージョンに更新するには、次のコマンドを実行します。
+クラスターを起動すると、TiUP Playground (&gt;= v1.8.0) は NgMonitoring コンポーネントを自動的に起動します。 TiUP Playground を最新バージョンに更新するには、次のコマンドを実行します。
 
 {{< copyable "" >}}
 
@@ -143,7 +143,7 @@ tiup update playground
 
 ### [<strong>スロー クエリ]</strong>ページに<code>unknown field</code>エラーが表示される {#an-code-unknown-field-code-error-is-shown-on-the-strong-slow-queries-strong-page}
 
-クラスタのアップグレード後に [**スロー クエリ**] ページに`unknown field`のエラーが表示される場合、そのエラーは、TiDB ダッシュボード サーバー フィールド (更新される可能性があります) とユーザー設定フィールド (ブラウザー キャッシュにある) の違いによって引き起こされる互換性の問題に関連しています。 .この問題は修正されました。クラスタが v5.0.3 または v4.0.14 より前の場合は、次の手順を実行してブラウザーのキャッシュをクリアします。
+クラスターのアップグレード後に [**スロー クエリ**] ページに`unknown field`エラーが表示される場合、そのエラーは、TiDB ダッシュボードサーバーフィールド (更新される可能性があります) とユーザー設定フィールド (ブラウザー キャッシュにある) の違いによって引き起こされる互換性の問題に関連しています。 .この問題は修正されました。クラスターが v5.0.3 または v4.0.14 より前の場合は、次の手順を実行してブラウザーのキャッシュをクリアします。
 
 1.  TiDB ダッシュボード ページを開きます。
 

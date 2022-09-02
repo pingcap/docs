@@ -7,7 +7,7 @@ summary: Learn how to quickly deploy a DM cluster using binary packages.
 
 このドキュメントでは、 [TiDB データ移行](https://github.com/pingcap/dm) (DM) を使用して MySQL から TiDB にデータを移行する方法について説明します。このガイドは、DM 機能の簡単なデモであり、実稼働環境には推奨されません。
 
-## ステップ 1: DMクラスタをデプロイする {#step-1-deploy-a-dm-cluster}
+## ステップ 1: DM クラスターをデプロイする {#step-1-deploy-a-dm-cluster}
 
 1.  TiUP をインストールし、TiUP を使用して[`dmctl`](/dm/dmctl-introduction.md)をインストールします。
 
@@ -18,7 +18,7 @@ summary: Learn how to quickly deploy a DM cluster using binary packages.
     tiup install dm dmctl
     ```
 
-2.  DMクラスタの最小限のデプロイ トポロジ ファイルを生成します。
+2.  DM クラスターの最小限のデプロイ トポロジ ファイルを生成します。
 
     {{< copyable "" >}}
 
@@ -26,7 +26,7 @@ summary: Learn how to quickly deploy a DM cluster using binary packages.
     tiup dm template
     ```
 
-3.  出力の構成情報をコピーし、変更された IP アドレスを持つ`topology.yaml`のファイルとして保存します。 TiUP を使用して`topology.yaml`のファイルで DMクラスタをデプロイします。
+3.  出力の構成情報をコピーし、変更された IP アドレスを持つ`topology.yaml`のファイルとして保存します。 TiUP を使用して`topology.yaml`のファイルで DM クラスターをデプロイします。
 
     {{< copyable "" >}}
 
@@ -51,7 +51,7 @@ summary: Learn how to quickly deploy a DM cluster using binary packages.
       port: 3306
     ```
 
-2.  次のコマンドを実行して、ソースを DMクラスタに追加します。 `mysql-01.yaml`は、前のステップで作成された構成ファイルです。
+2.  次のコマンドを実行して、ソースを DM クラスターに追加します。 `mysql-01.yaml`は、前のステップで作成された構成ファイルです。
 
     {{< copyable "" >}}
 
@@ -104,9 +104,9 @@ summary: Learn how to quickly deploy a DM cluster using binary packages.
 
 ## ステップ 3: ダウンストリーム データベースを準備する {#step-3-prepare-a-downstream-database}
 
-データ移行のターゲットとして、既存の TiDBクラスタを選択できます。
+データ移行のターゲットとして、既存の TiDB クラスターを選択できます。
 
-テスト用の TiDBクラスタがない場合は、次のコマンドを実行してデモ環境をすばやく構築できます。
+テスト用の TiDB クラスターがない場合は、次のコマンドを実行してデモ環境をすばやく構築できます。
 
 {{< copyable "" >}}
 

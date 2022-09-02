@@ -21,8 +21,8 @@ summary: Learn how to use TiSpark to read TiFlash replicas.
     spark.tispark.isolation_read_engines tiflash
     ```
 
--   Spark シェルまたは Thrift サーバーを初期化するときに、初期化コマンドに`--conf spark.tispark.isolation_read_engines=tiflash`を追加します。
+-   Spark シェルまたは Thriftサーバーを初期化するときに、初期化コマンドに`--conf spark.tispark.isolation_read_engines=tiflash`を追加します。
 
 -   リアルタイムで Spark シェルに`spark.conf.set("spark.tispark.isolation_read_engines", "tiflash")`を設定します。
 
--   サーバーがビーライン経由で接続された後、Thrift サーバーに`set spark.tispark.isolation_read_engines=tiflash`を設定します。
+-   サーバーがビーライン経由で接続された後、Thriftサーバーに`set spark.tispark.isolation_read_engines=tiflash`を設定します。

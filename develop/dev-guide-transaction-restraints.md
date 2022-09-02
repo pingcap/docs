@@ -721,7 +721,7 @@ mysql> SELECT * FROM T2;
 
 > **ノート：**
 >
-> v6.2.0 以降、TiDB は`savepoint`の機能をサポートしています。 TiDBクラスタが v6.2.0 より前の場合、TiDBクラスタは`PROPAGATION_NESTED`の動作をサポートしていません。アプリケーションが`PROPAGATION_NESTED`の伝播動作を使用する**Java Spring**フレームワークに基づいている場合は、ネストされたトランザクションのロジックを削除するために、アプリケーション側でそれを適応させる必要があります。
+> v6.2.0 以降、TiDB は`savepoint`の機能をサポートしています。 TiDB クラスターが v6.2.0 より前の場合、TiDB クラスターは`PROPAGATION_NESTED`の動作をサポートしていません。アプリケーションが`PROPAGATION_NESTED`の伝播動作を使用する**Java Spring**フレームワークに基づいている場合は、ネストされたトランザクションのロジックを削除するために、アプリケーション側でそれを適応させる必要があります。
 
 ## 大口取引制限 {#large-transaction-restrictions}
 

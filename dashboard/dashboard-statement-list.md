@@ -5,7 +5,7 @@ summary: View the execution status of all SQL statements in the TiDB cluster.
 
 # TiDB ダッシュボードの SQL ステートメント ページ {#sql-statements-page-of-tidb-dashboard}
 
-SQL ステートメント ページには、クラスタのすべての SQL ステートメントの実行ステータスが表示されます。このページは、合計または 1 回の実行時間が長い SQL ステートメントを分析するためによく使用されます。
+SQL ステートメント ページには、クラスター内のすべての SQL ステートメントの実行ステータスが表示されます。このページは、合計または 1 回の実行時間が長い SQL ステートメントを分析するためによく使用されます。
 
 このページでは、一貫した構造を持つ SQL クエリは (クエリ パラメーターに一貫性がない場合でも)、同じ SQL ステートメントとして分類されます。たとえば、 `SELECT * FROM employee WHERE id IN (1, 2, 3)`と`select * from EMPLOYEE where ID in (4, 5)`は両方とも同じ`select * from employee where id in (...)` SQL ステートメントとして分類されます。
 

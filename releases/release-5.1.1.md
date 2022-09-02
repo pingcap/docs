@@ -37,7 +37,7 @@ TiDB バージョン: 5.1.1
 
 -   TiDB
 
-    -   Stale Read 機能の一般提供 (GA) を発表
+    -   ステイル読み取り機能の一般提供 (GA) を発表
     -   データ挿入を高速化するために`paramMarker`の割り当てを避ける[#26076](https://github.com/pingcap/tidb/pull/26076)
     -   安定した結果モードをサポートして、クエリ結果をより安定させます[#25995](https://github.com/pingcap/tidb/pull/25995)
     -   組み込み関数`json_unquote()`を TiKV [#26265](https://github.com/pingcap/tidb/pull/26265)にプッシュ ダウンするサポート
@@ -48,15 +48,15 @@ TiDB バージョン: 5.1.1
     -   MPP クエリを起動する前に、TiFlash の可用性を確認してください[#26192](https://github.com/pingcap/tidb/pull/26192)
     -   読み取りタイムスタンプを将来の時刻に設定することを許可しない[#25763](https://github.com/pingcap/tidb/pull/25763)
     -   集計関数を`EXPLAIN`ステートメントでプッシュダウンできない場合にログ警告を出力する[#25737](https://github.com/pingcap/tidb/pull/25737)
-    -   `statements_summary_evicted`テーブルを追加して、クラスタの削除されたカウント情報を記録します[#25587](https://github.com/pingcap/tidb/pull/25587)
+    -   `statements_summary_evicted`テーブルを追加して、クラスターの削除されたカウント情報を記録します[#25587](https://github.com/pingcap/tidb/pull/25587)
     -   フォーマット指定子の組み込み関数`str_to_date`の MySQL 互換性を向上させる`%b/%M/%r/%T` [#25768](https://github.com/pingcap/tidb/pull/25768)
 
 -   TiKV
 
     -   事前書き込み要求を可能な限り冪等にして、未確定エラーの可能性を減らします[#10586](https://github.com/tikv/tikv/pull/10586)
     -   期限切れのコマンドを多数処理する際のスタック オーバーフローのリスクを回避する[#10502](https://github.com/tikv/tikv/pull/10502)
-    -   Stale Read リクエストの`start_ts`から update `max_ts` [#10451](https://github.com/tikv/tikv/pull/10451)を使用しないことで、過剰な commit リクエストの再試行を回避します。
-    -   読み取り待機時間を短縮するために、読み取り準備完了と書き込み準備完了を別々に処理する[#10592](https://github.com/tikv/tikv/pull/10592)
+    -   ステイル読み取りリクエストの`start_ts`から update `max_ts` [#10451](https://github.com/tikv/tikv/pull/10451)を使用しないことで、過剰な commit リクエストの再試行を回避します。
+    -   読み取り待機レイテンシーを短縮するために、読み取り準備完了と書き込み準備完了を別々に処理する[#10592](https://github.com/tikv/tikv/pull/10592)
     -   I/O レート制限が有効になっている場合のデータ インポート速度への影響を軽減します[#10390](https://github.com/tikv/tikv/pull/10390)
     -   Raft gRPC 接続間の負荷バランスを改善する[#10495](https://github.com/tikv/tikv/pull/10495)
 
@@ -73,7 +73,7 @@ TiDB バージョン: 5.1.1
 
     -   Dumpling
 
-        -   アップストリームが TiDB v3.xクラスタの場合は、常に`_tidb_rowid`を使用してテーブルを分割します。これにより、TiDB のメモリ使用量を削減できます[#295](https://github.com/pingcap/dumpling/issues/295)
+        -   アップストリームが TiDB v3.x クラスターである場合は、常に`_tidb_rowid`を使用してテーブルを分割します。これにより、TiDB のメモリ使用量を削減できます[#295](https://github.com/pingcap/dumpling/issues/295)
         -   Dumpling のパフォーマンスと安定性を向上させるために、データベースのメタデータにアクセスする頻度を減らします[#315](https://github.com/pingcap/dumpling/pull/315)
 
 ## バグの修正 {#bug-fixes}
@@ -99,7 +99,7 @@ TiDB バージョン: 5.1.1
     -   `LOAD DATA`ステートメントが utf8 以外のデータを異常にインポートする可能性がある問題を修正します[#25979](https://github.com/pingcap/tidb/issues/25979)
     -   符号なし整数列でウィンドウ関数を使用するときに発生する可能性があるpanicの問題を修正します[#25956](https://github.com/pingcap/tidb/issues/25956)
     -   非同期コミット ロックを解決するときに TiDB がpanicになる可能性がある問題を修正します[#25778](https://github.com/pingcap/tidb/issues/25778)
-    -   Stale Read が`PREPARE`ステートメントと完全に互換性がないという問題を修正します[#25800](https://github.com/pingcap/tidb/pull/25800)
+    -   ステイル読み取りが`PREPARE`ステートメントと完全に互換性がないという問題を修正します[#25800](https://github.com/pingcap/tidb/pull/25800)
     -   ODBC スタイルの定数 (たとえば、 `{d '2020-01-01'}` ) を式[#25531](https://github.com/pingcap/tidb/issues/25531)として使用できないという問題を修正します。
     -   TiDB単体で実行した際に発生するエラーを修正[#25555](https://github.com/pingcap/tidb/pull/25555)
 

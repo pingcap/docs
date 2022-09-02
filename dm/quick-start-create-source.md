@@ -7,7 +7,7 @@ summary: Learn how to create a data source for Data Migration (DM).
 
 > **ノート：**
 >
-> データ ソースを作成する前に、次のことを行う必要があり[TiUP を使用して DM クラスターをデプロイする](/dm/deploy-a-dm-cluster-using-tiup.md) 。
+> データ ソースを作成する前に、次のことを行う必要があり[TiUP を使用して DMクラスタをデプロイする](/dm/deploy-a-dm-cluster-using-tiup.md) 。
 
 このドキュメントでは、TiDB Data Migration (DM) のデータ移行タスク用のデータ ソースを作成する方法について説明します。
 

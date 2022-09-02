@@ -3,7 +3,7 @@ title: Troubleshoot a TiFlash Cluster
 summary: Learn common operations when you troubleshoot a TiFlash cluster.
 ---
 
-# TiFlash クラスタのトラブルシューティング {#troubleshoot-a-tiflash-cluster}
+# TiFlashクラスタのトラブルシューティング {#troubleshoot-a-tiflash-cluster}
 
 このセクションでは、TiFlash の使用時によく発生する問題、その理由、および解決策について説明します。
 
@@ -29,7 +29,7 @@ summary: Learn common operations when you troubleshoot a TiFlash cluster.
     ulimit -n 1000000
     ```
 
-3.  PD Controlツールを使用して、ノード (同じ IP とポート) でオフラインにできなかった TiFlash インスタンスがあるかどうかを確認し、インスタンスを強制的にオフラインにします。詳細な手順については、 [TiFlashクラスタのスケーリング](/scale-tidb-using-tiup.md#scale-in-a-tiflash-cluster)を参照してください。
+3.  PD Controlツールを使用して、ノード (同じ IP とポート) でオフラインにできなかった TiFlash インスタンスがあるかどうかを確認し、インスタンスを強制的にオフラインにします。詳細な手順については、 [スケールインクラスターのスケーリング](/scale-tidb-using-tiup.md#scale-in-a-tiflash-cluster)を参照してください。
 
 上記の方法で問題を解決できない場合は、TiFlash ログ ファイルを保存し、詳細について[info@pingcap.com](mailto:info@pingcap.com)に電子メールを送信してください。
 
@@ -62,7 +62,7 @@ summary: Learn common operations when you troubleshoot a TiFlash cluster.
 
 4.  `pd buddy`がログを正しく出力できるかどうかを確認します (ログ パスは、[flash.flash_cluster] 構成アイテムの`log`の値です。デフォルトのログ パスは、TiFlash 構成ファイルで構成された`tmp`ディレクトリの下にあります)。
 
-5.  構成されたレプリカの数が、クラスタの TiKV ノードの数以下であるかどうかを確認します。そうでない場合、PD はデータを TiFlash に複製できません。
+5.  構成されたレプリカの数が、クラスター内の TiKV ノードの数以下であるかどうかを確認します。そうでない場合、PD はデータを TiFlash に複製できません。
 
     {{< copyable "" >}}
 
@@ -80,7 +80,7 @@ summary: Learn common operations when you troubleshoot a TiFlash cluster.
 
 ## TiFlash のクエリ時間が不安定で、エラー ログに多くの<code>Lock Exception</code>メッセージが出力される {#tiflash-query-time-is-unstable-and-the-error-log-prints-many-code-lock-exception-code-messages}
 
-これは、クラスタに大量のデータが書き込まれ、TiFlash クエリでロックが発生し、クエリの再試行が必要になるためです。
+これは、クラスターに大量のデータが書き込まれ、TiFlash クエリでロックが発生し、クエリの再試行が必要になるためです。
 
 TiDB では、クエリのタイムスタンプを 1 秒前に設定できます。たとえば、現在の時刻が「2020-04-08 20:15:01」の場合、クエリを実行する前に`set @@tidb_snapshot='2020-04-08 20:15:00';`を実行できます。これにより、TiFlash クエリがロックに遭遇することが少なくなり、不安定なクエリ時間のリスクが軽減されます。
 
@@ -96,7 +96,7 @@ TiFlash の負荷が重すぎて、TiFlash データのレプリケーション�
 
 1.  対応する TiFlash ノードを停止するには、 [TiFlash ノードをダウンさせる](/scale-tidb-using-tiup.md#scale-in-a-tiflash-cluster)を参照してください。
 2.  TiFlash ノードの関連データを削除します。
-3.  クラスタに TiFlash ノードを再デプロイします。
+3.  クラスターに TiFlash ノードを再デプロイします。
 
 ## TiFlash 解析が遅い {#tiflash-analysis-is-slow}
 
@@ -152,9 +152,9 @@ TiFlash ノードをデプロイし、(ALTER 操作を実行して) レプリケ
 
 4.  `max-replicas`の構成が正しいかどうかを確認します。
 
-    -   `max-replicas`の値がクラスタの TiKV ノードの数を超えていない場合は、次の手順に進みます。
+    -   `max-replicas`の値がクラスター内の TiKV ノードの数を超えていない場合は、次の手順に進みます。
 
-    -   `max-replicas`の値がクラスタの TiKV ノードの数より大きい場合、PD はデータを TiFlash ノードに複製しません。この問題に対処するには、 `max-replicas`をクラスタの TiKV ノードの数以下の整数に変更します。
+    -   値`max-replicas`がクラスター内の TiKV ノードの数より大きい場合、PD はデータを TiFlash ノードに複製しません。この問題に対処するには、 `max-replicas`をクラスター内の TiKV ノードの数以下の整数に変更します。
 
     > **ノート：**
     >

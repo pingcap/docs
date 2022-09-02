@@ -5,13 +5,13 @@ summary: Use PD Control to obtain the state information of a cluster and tune a 
 
 # PD Controlユーザー ガイド {#pd-control-user-guide}
 
-PD Controlは、PD のコマンド ライン ツールとして、クラスターの状態情報を取得し、クラスタをチューニングしクラスタ。
+PD Controlは、PD のコマンド ライン ツールとして、クラスターの状態情報を取得し、クラスターをチューニングします。
 
 ## PD Controlをインストールする {#install-pd-control}
 
 > **ノート：**
 >
-> 使用するコントロール ツールのバージョンは、クラスタのバージョンと一致していることが推奨されます。
+> 使用するコントロール ツールのバージョンは、クラスターのバージョンと一致していることが推奨されます。
 
 ### TiUP コマンドを使用する {#use-tiup-command}
 
@@ -19,11 +19,11 @@ PD Controlを使用するには、 `tiup ctl:<cluster-version> pd -u http://<pd_
 
 ### インストール パッケージをダウンロードする {#download-the-installation-package}
 
-最新バージョンの`pd-ctl`を入手するには、TiDB サーバーのインストール パッケージをダウンロードします。 `pd-ctl`は`ctl-{version}-linux-amd64.tar.gz`パッケージに含まれています。
+最新バージョンの`pd-ctl`を入手するには、TiDBサーバーのインストール パッケージをダウンロードします。 `pd-ctl`は`ctl-{version}-linux-amd64.tar.gz`パッケージに含まれています。
 
-| インストールパッケージ                                                                                | OS    | 建築    | SHA256 チェックサム                                                                     |
-| :----------------------------------------------------------------------------------------- | :---- | :---- | :-------------------------------------------------------------------------------- |
-| `https://download.pingcap.org/tidb-community-server-{version}-linux-amd64.tar.gz` (pd-ctl) | Linux | amd64 | `https://download.pingcap.org/tidb-community-server-{version}-linux-amd64.sha256` |
+| インストールパッケージ                                                                                | OS    | アーキテクチャ | SHA256 チェックサム                                                                     |
+| :----------------------------------------------------------------------------------------- | :---- | :------ | :-------------------------------------------------------------------------------- |
+| `https://download.pingcap.org/tidb-community-server-{version}-linux-amd64.tar.gz` (pd-ctl) | Linux | amd64   | `https://download.pingcap.org/tidb-community-server-{version}-linux-amd64.sha256` |
 
 > **ノート：**
 >
@@ -108,7 +108,7 @@ tiup ctl pd -u https://127.0.0.1:2379 --cacert="path/to/ca" --cert="path/to/cert
 
 ### <code>cluster</code> {#code-cluster-code}
 
-このコマンドを使用して、クラスタの基本情報を表示します。
+このコマンドを使用して、クラスターの基本情報を表示します。
 
 使用法：
 
@@ -215,10 +215,10 @@ tiup ctl pd -u https://127.0.0.1:2379 --cacert="path/to/ca" --cert="path/to/cert
     config set enable-cross-table-merge true  // Enable cross table merge.
     ```
 
--   `key-type`は、クラスタに使用されるキー エンコーディング タイプを指定します。サポートされているオプションは [&quot;table&quot;, &quot;raw&quot;, &quot;txn&quot;] で、デフォルト値は &quot;table&quot; です。
+-   `key-type`は、クラスターに使用されるキーのエンコード タイプを指定します。サポートされているオプションは [&quot;table&quot;, &quot;raw&quot;, &quot;txn&quot;] で、デフォルト値は &quot;table&quot; です。
 
-    -   クラスタに TiDB インスタンスが存在しない場合、 `key-type`は「raw」または「txn」になり、PD は`enable-cross-table-merge`の設定に関係なく、テーブル全体でリージョンをマージできます。
-    -   クラスタに TiDB インスタンスが存在する場合、 `key-type`は「テーブル」である必要があります。 PD がテーブル間でリージョンをマージできるかどうかは、 `enable-cross-table-merge`によって決定されます。 `key-type`が「raw」の場合、配置ルールは機能しません。
+    -   クラスターに TiDB インスタンスが存在しない場合、 `key-type`は「raw」または「txn」になり、PD は`enable-cross-table-merge`の設定に関係なく、テーブル全体でリージョンをマージできます。
+    -   クラスターに TiDB インスタンスが存在する場合、 `key-type`は「テーブル」である必要があります。 PD がテーブル間でリージョンをマージできるかどうかは、 `enable-cross-table-merge`によって決定されます。 `key-type`が「raw」の場合、配置ルールは機能しません。
 
     ```bash
     config set key-type raw  // Enable cross table merge.
@@ -304,7 +304,7 @@ tiup ctl pd -u https://127.0.0.1:2379 --cacert="path/to/ca" --cert="path/to/cert
     config set high-space-ratio 0.5             // Set the threshold value of sufficient space to 0.5
     ```
 
--   `cluster-version`はクラスタのバージョンで、一部の機能を有効または無効にしたり、互換性の問題に対処したりするために使用されます。デフォルトでは、これはクラスタで正常に実行されているすべての TiKV ノードの最小バージョンです。以前のバージョンにロールバックする必要がある場合にのみ、手動で設定できます。
+-   `cluster-version`はクラスターのバージョンで、一部の機能を有効または無効にしたり、互換性の問題に対処したりするために使用されます。デフォルトでは、これはクラスター内で正常に実行されているすべての TiKV ノードの最小バージョンです。以前のバージョンにロールバックする必要がある場合にのみ、手動で設定できます。
 
     ```bash
     config set cluster-version 1.0.8              // Set the version of the cluster to 1.0.8
@@ -348,7 +348,7 @@ tiup ctl pd -u https://127.0.0.1:2379 --cacert="path/to/ca" --cert="path/to/cert
 
 ### <code>health</code> {#code-health-code}
 
-このコマンドを使用して、クラスタのヘルス情報を表示します。
+このコマンドを使用して、クラスターのヘルス情報を表示します。
 
 使用法：
 
@@ -370,7 +370,7 @@ tiup ctl pd -u https://127.0.0.1:2379 --cacert="path/to/ca" --cert="path/to/cert
 
 ### <code>hot [read | write | store|  history &#x3C;start_time> &#x3C;end_time> [&#x3C;key> &#x3C;value>]]</code> {#code-hot-read-write-store-history-x3c-start-time-x3c-end-time-x3c-key-x3c-value-code}
 
-このコマンドを使用して、クラスタのホット スポット情報を表示します。
+このコマンドを使用して、クラスターのホット スポット情報を表示します。
 
 使用法：
 
@@ -424,7 +424,7 @@ tiup ctl pd -u https://127.0.0.1:2379 --cacert="path/to/ca" --cert="path/to/cert
 
 ### <code>label [store &#x3C;name> &#x3C;value>]</code> {#code-label-store-x3c-name-x3c-value-code}
 
-このコマンドを使用して、クラスタのラベル情報を表示します。
+このコマンドを使用して、クラスターのラベル情報を表示します。
 
 使用法：
 
@@ -488,7 +488,7 @@ Success!
 >> operator check 1                                     // Check the status of the operators related to Region 1
 ```
 
-リージョンの分割は、できるだけ中央に近い位置から開始します。この位置は、「スキャン」と「概算」という 2 つの戦略を使用して見つけることができます。それらの違いは、前者はリージョンをスキャンして中間キーを決定するのに対し、後者は SST ファイルに記録された統計をチェックしておおよその位置を取得することです。一般に、前者はより正確ですが、後者はより少ない I/O を消費し、より速く完了することができます。
+リージョンの分割は、できるだけ中央に近い位置から開始します。この位置は、「スキャン」と「概算」という 2 つの戦略を使用して見つけることができます。それらの違いは、前者はリージョンをスキャンして中間キーを決定し、後者は SST ファイルに記録された統計をチェックしておおよその位置を取得することです。一般に、前者はより正確ですが、後者はより少ない I/O を消費し、より速く完了することができます。
 
 ### <code>ping</code> {#code-ping-code}
 
@@ -873,7 +873,7 @@ scheduler config balance-leader-scheduler set batch 3 // Set the size of the ope
 
     > **ノート：**
     >
-    > クラスタコンポーネントが v5.2 より前の場合、 `query`ディメンションの構成は有効になりません。一部のコンポーネントが v5.2 以降にアップグレードされた場合でも、デフォルトでは`byte`次元と`key`次元が引き続きホットリージョンスケジューリングの優先順位を持ちます。クラスタのすべてのコンポーネントが v5.2 以降にアップグレードされた後も、そのような構成は互換性のために有効になります。 `pd-ctl`コマンドを使用して、リアルタイムの構成を表示できます。通常、これらの構成を変更する必要はありません。
+    > クラスタ コンポーネントが v5.2 より前の場合、 `query`ディメンションの構成は有効になりません。一部のコンポーネントが v5.2 以降にアップグレードされた場合でも、デフォルトでは`byte`次元と`key`次元が引き続きホットリージョンスケジューリングの優先順位を持ちます。クラスターのすべてのコンポーネントが v5.2 以降にアップグレードされた後も、そのような構成は互換性のために有効になります。 `pd-ctl`コマンドを使用して、リアルタイムの構成を表示できます。通常、これらの構成を変更する必要はありません。
 
     ```bash
     scheduler config balance-hot-region-scheduler set read-priorities query,byte

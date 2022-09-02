@@ -78,7 +78,7 @@ v6.0.0 以降、TiDB は[`tidb_rc_read_check_ts`](/system-variables.md#tidb_rc_r
     -   TiDB がまだ結果をクライアントに送信していない場合、TiDB は新しいタイムスタンプを取得して、このステートメントを再試行しようとします。
     -   TiDB がすでに部分的なデータをクライアントに送信している場合、TiDB はクライアントにエラーを報告します。毎回クライアントに送信されるデータの量は、 `tidb_init_chunk_size`と`tidb_max_chunk_size`によって制御されます。
 
-分離レベル`READ-COMMITTED`が使用され、 `SELECT`のステートメントが多く、読み取りと書き込みの競合がほとんど発生しないシナリオでは、この変数を有効にすると、グローバル タイムスタンプを取得するための待機時間とコストを回避できます。
+`READ-COMMITTED`分離レベルが使用され、 `SELECT`のステートメントが多く、読み取りと書き込みの競合がまれなシナリオでは、この変数を有効にすると、グローバル タイムスタンプを取得するためのレイテンシーとコストを回避できます。
 
 ## TiDB と MySQL Read Committed の違い {#difference-between-tidb-and-mysql-read-committed}
 

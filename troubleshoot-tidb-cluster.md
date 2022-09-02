@@ -3,7 +3,7 @@ title: TiDB Cluster Troubleshooting Guide
 summary: Learn how to diagnose and resolve issues when you use TiDB.
 ---
 
-# TiDB クラスター トラブルシューティング ガイド {#tidb-cluster-troubleshooting-guide}
+# TiDBクラスタトラブルシューティング ガイド {#tidb-cluster-troubleshooting-guide}
 
 このガイドを使用して、TiDB を使用する際の基本的な問題を診断して解決することができます。問題が解決しない場合は、次の情報と[問題を作成する](https://github.com/pingcap/tidb/issues/new/choose)を収集してください。
 
@@ -32,7 +32,7 @@ summary: Learn how to diagnose and resolve issues when you use TiDB.
 3.  データが消去され、サービスが再デプロイされた場合は、次のことを確認してください。
 
     -   `tikv-server`と`pd-server`のすべてのデータがクリアされます。特定のデータは`tikv-server`に格納され、メタデータは`pd-server`に格納されます。 2 つのサーバーのうち 1 つだけが消去されると、データの一貫性が失われます。
-    -   `pd-server`と`tikv-server`のデータがクリアされ、 `pd-server`と`tikv-server`が再起動された後、 `tidb-server`も再起動する必要があります。クラスタID は、 `pd-server`の初期化時にランダムに割り当てられます。そのため、クラスタが再デプロイされると、クラスタID が変更され、新しいクラスタID を取得するには`tidb-server`を再起動する必要があります。
+    -   `pd-server`と`tikv-server`のデータがクリアされ、 `pd-server`と`tikv-server`が再起動された後、 `tidb-server`も再起動する必要があります。クラスター ID は、 `pd-server`の初期化時にランダムに割り当てられます。そのため、クラスターが再デプロイされると、クラスター ID が変更され、新しいクラスター ID を取得するには`tidb-server`を再起動する必要があります。
 
 ## <code>tidb-server</code>を起動できません {#cannot-start-code-tidb-server-code}
 
@@ -50,7 +50,7 @@ summary: Learn how to diagnose and resolve issues when you use TiDB.
 
 -   `pd-server`に接続できません。
 
-    -   TiDB と PD の間のネットワークがスムーズに動作しているかどうかを確認します。これには、ネットワークに ping を実行できるかどうか、またはファイアウォールの構成に問題がないかどうかが含まれます。
+    -   TiDB と PD の間のネットワークがスムーズに動作しているかどうかを確認します。これには、ネットワークに ping を実行できるかどうか、またはファイアウォールの構成に問題があるかどうかが含まれます。
     -   ネットワークに問題がない場合は、 `pd-server`プロセスの状態とログを確認します。
 
 ## <code>tikv-server</code>を起動できません {#cannot-start-code-tikv-server-code}
@@ -65,7 +65,7 @@ summary: Learn how to diagnose and resolve issues when you use TiDB.
 
 -   `pd-server`に接続できません。
 
-    -   TiDB と PD の間のネットワークがスムーズに動作しているかどうかを確認します。これには、ネットワークに ping を実行できるかどうか、またはファイアウォールの構成に問題がないかどうかが含まれます。
+    -   TiDB と PD の間のネットワークがスムーズに動作しているかどうかを確認します。これには、ネットワークに ping を実行できるかどうか、またはファイアウォールの構成に問題があるかどうかが含まれます。
 
     -   ネットワークに問題がない場合は、 `pd-server`プロセスの状態とログを確認します。
 
@@ -128,7 +128,7 @@ panicログと[問題を作成する](https://github.com/pingcap/tidb/issues/new
 
 <!---->
 
--   TiDBクラスタ以外のサービスはありますか?
+-   TiDB クラスター以外のサービスはありますか?
 -   `pd-server`と`tikv-server`は別々に展開されますか?
 -   現在の運用は？
 -   `top -H`コマンドで CPU スレッド名を確認します。

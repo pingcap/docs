@@ -25,8 +25,8 @@ summary: Learn the precautions when you upgrade TiFlash to v6.2.
 > -   TiFlash を v5.3.0 より前のバージョンから v5.3.0 以降にアップグレードするには、TiFlash を停止してからアップグレードする必要があります。次の手順は、他のコンポーネントを中断することなく TiFlash をアップグレードするのに役立ちます。
 >
 >     -   TiFlash インスタンスを停止します: `tiup cluster stop <cluster-name> -R tiflash`
->     -   再起動せずに TiDBクラスタをアップグレードします (ファイルの更新のみ): `tiup cluster upgrade <cluster-name> <version> --offline`
->     -   TiDBクラスタをリロードします。 `tiup cluster reload <cluster-name>` .リロード後、TiFlash インスタンスが開始されるため、手動で開始する必要はありません。
+>     -   再起動せずに TiDB クラスターをアップグレードします (ファイルの更新のみ): `tiup cluster upgrade <cluster-name> <version> --offline`
+>     -   TiDB クラスターをリロードします。 `tiup cluster reload <cluster-name>` .リロード後、TiFlash インスタンスが開始されるため、手動で開始する必要はありません。
 
 ## 5.x または v6.0 から v6.1 へ {#from-5-x-or-v6-0-to-v6-1}
 
@@ -40,7 +40,7 @@ TiFlash Proxy は v6.1.0 でアップグレードされます (TiKV v6.0.0 に�
 
 **テストまたはその他の特別なシナリオで TiFlash をダウングレードするための回避策**
 
-ターゲットの TiFlash ノードを強制的にスケールインしてから、TiKV からデータを再度レプリケートできます。詳細な手順については、 [TiFlashクラスタのスケーリング](/scale-tidb-using-tiup.md#scale-in-a-tiflash-cluster)を参照してください。
+ターゲットの TiFlash ノードを強制的にスケールインしてから、TiKV からデータを再度レプリケートできます。詳細な手順については、 [スケールインクラスターのスケーリング](/scale-tidb-using-tiup.md#scale-in-a-tiflash-cluster)を参照してください。
 
 ### 動的剪定 {#dynamic-pruning}
 
@@ -58,7 +58,7 @@ TiDB v6.2 では、TiFlash のデータ ストレージ フォーマットが V3
 
 ### ページストレージ {#pagestorage}
 
-デフォルトでは、TiFlash v6.2.0 は PageStorage V3 バージョン[`format_version = 4`](/tiflash/tiflash-configuration.md#configure-the-tiflashtoml-file)を使用します。この新しいデータ形式により、ピーク時の書き込み I/O トラフィックが大幅に削減されます。更新トラフィックが多く、同時実行性が高い、またはクエリが重いシナリオでは、TiFlash データ GC によって引き起こされる過剰な CPU 使用率を効果的に軽減します。一方、以前のストレージ形式と比較して、V3 バージョンでは、スペースの増幅とリソースの消費が大幅に削減されます。
+デフォルトでは、TiFlash v6.2.0 は PageStorage V3 バージョン[`format_version = 4`](/tiflash/tiflash-configuration.md#configure-the-tiflashtoml-file)を使用します。この新しいデータ形式により、ピーク時の書き込み I/O トラフィックが大幅に削減されます。更新トラフィックが多く、同時実行性が高い、またはクエリが重いシナリオでは、TiFlash データ GC によって引き起こされる過度の CPU 使用を効果的に軽減します。一方、以前のストレージ形式と比較して、V3 バージョンでは、スペースの増幅とリソースの消費が大幅に削減されます。
 
 -   v6.2.0 へのアップグレード後、新しいデータが既存の TiFlash ノードに書き込まれると、以前のデータは徐々に新しい形式に変換されます。
 -   ただし、アップグレード中に以前のデータを新しい形式に完全に変換することはできません。これは、変換によって一定量のシステム オーバーヘッドが消費されるためです (サービスには影響しませんが、それでも注意が必要です)。アップグレード後、 [`Compact`コマンド](/sql-statements/sql-statement-alter-table-compact.md)を実行してデータを新しい形式に変換することをお勧めします。手順は次のとおりです。
@@ -79,7 +79,7 @@ Grafana でテーブルがまだ古いデータ形式を使用しているかど
 
 **テストまたはその他の特別なシナリオで TiFlash をダウングレードするための回避策**
 
-ターゲットの TiFlash ノードを強制的にスケールインしてから、TiKV からデータを再度レプリケートできます。詳細な手順については、 [TiFlashクラスタのスケーリング](/scale-tidb-using-tiup.md#scale-in-a-tiflash-cluster)を参照してください。
+ターゲットの TiFlash ノードを強制的にスケールインしてから、TiKV からデータを再度レプリケートできます。詳細な手順については、 [スケールインクラスターのスケーリング](/scale-tidb-using-tiup.md#scale-in-a-tiflash-cluster)を参照してください。
 
 ## v6.1 から v6.2 へ {#from-v6-1-to-v6-2}
 

@@ -11,7 +11,7 @@ summary: Learn how to configure Titan.
 
 Titan は RocksDB と互換性があるため、RocksDB を使用する既存の TiKV インスタンスで Titan を直接有効にすることができます。 Titan を有効にするには、次の 2 つの方法のいずれかを使用できます。
 
--   方法 1: TiUP を使用してクラスタをデプロイした場合は、次の例に示すように、 `tiup cluster edit-config ${cluster-name}`コマンドを実行して TiKV 構成ファイルを編集できます。
+-   方法 1: TiUP を使用してクラスターをデプロイした場合は、次の例に示すように、 `tiup cluster edit-config ${cluster-name}`コマンドを実行して TiKV 構成ファイルを編集できます。
 
     {{< copyable "" >}}
 
@@ -41,7 +41,7 @@ Titan は RocksDB と互換性があるため、RocksDB を使用する既存の
 
 Titan を有効にしても、RocksDB に保存されている既存のデータはすぐに Titan エンジンに移動されません。新しいデータが TiKV フォアグラウンドに書き込まれ、RocksDB が圧縮を実行すると、値がキーから徐々に分離され、Titan に書き込まれます。 **TiKV Details** -&gt; <strong>Titan kv</strong> -&gt; <strong>blob file size</strong>パネルを表示して、Titan に保存されているデータのサイズを確認できます。
 
-書き込みプロセスを高速化したい場合は、tikv-ctl を使用して手動で TiKVクラスタ全体のデータを圧縮します。詳細については、 [手動圧縮](/tikv-control.md#compact-data-of-the-whole-tikv-cluster-manually)を参照してください。
+書き込みプロセスを高速化したい場合は、tikv-ctl を使用して手動で TiKV クラスター全体のデータを圧縮します。詳細については、 [手動圧縮](/tikv-control.md#compact-data-of-the-whole-tikv-cluster-manually)を参照してください。
 
 > **ノート：**
 >

@@ -9,7 +9,7 @@ summary: Learn how to use BR to back up and restore data on Google Cloud Storage
 
 ## ユーザーシナリオ {#user-scenario}
 
-Google Compute Engine (GCE) にデプロイされた TiDBクラスタのデータを GCS にすばやくバックアップしたり、GCS のバックアップ データから TiDBクラスタをすばやく復元したりできます。
+Google Compute Engine (GCE) にデプロイされた TiDB クラスターのデータを GCS にすばやくバックアップしたり、GCS のバックアップ データから TiDB クラスターをすばやく復元したりできます。
 
 ## データを GCS にバックアップする {#back-up-data-to-gcs}
 

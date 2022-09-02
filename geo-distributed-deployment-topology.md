@@ -20,7 +20,7 @@ summary: Learn the geo-distributed deployment topology of TiDB.
 
 -   [地理的に分散したトポロジ テンプレート](https://github.com/pingcap/docs/blob/master/config-templates/geo-redundancy-deployment.yaml)
 
-上記の TiDBクラスタトポロジ ファイルの構成項目の詳細な説明については、 [TiUP を使用して TiDB をデプロイするためのトポロジConfiguration / コンフィグレーションファイル](/tiup/tiup-cluster-topology-reference.md)を参照してください。
+上記の TiDB クラスター トポロジ ファイルの構成項目の詳細な説明については、 [TiUP を使用して TiDB をデプロイするためのトポロジConfiguration / コンフィグレーションファイル](/tiup/tiup-cluster-topology-reference.md)を参照してください。
 
 ### 主なパラメータ {#key-parameters}
 
@@ -38,7 +38,7 @@ summary: Learn the geo-distributed deployment topology of TiDB.
 
 -   ラベル構成:
 
-    TiKV は異なるデータ センターに展開されるため、物理マシンがダウンすると、 Raftグループはデフォルトの 5 つのレプリカのうち 3 つを失い、クラスタが使用できなくなる可能性があります。この問題に対処するには、PD のスマート スケジューリングを有効にするようにラベルを構成できます。これにより、 Raftグループが、同じデータ センターの同じキャビネット内の同じマシン上の TiKV インスタンスに 3 つのレプリカを配置することを許可しなくなります。
+    TiKV は異なるデータ センターに展開されるため、物理マシンがダウンすると、 Raftグループはデフォルトの 5 つのレプリカのうち 3 つを失い、クラスターが使用できなくなる可能性があります。この問題に対処するには、PD のスマート スケジューリングを有効にするようにラベルを構成できます。これにより、 Raftグループが、同じデータ センターの同じキャビネット内の同じマシン上の TiKV インスタンスに 3 つのレプリカを配置することを許可しなくなります。
 
 -   TiKV 構成:
 
@@ -62,13 +62,13 @@ summary: Learn the geo-distributed deployment topology of TiDB.
 
 #### PD パラメータ {#pd-parameters}
 
--   PD メタデータ情報は、TiKVクラスタのトポロジーを記録します。 PD は、次の 4 つのディメンションでRaftグループのレプリカをスケジュールします。
+-   PD メタデータ情報は、TiKV クラスターのトポロジーを記録します。 PD は、次の 4 つのディメンションでRaftグループのレプリカをスケジュールします。
 
     ```yaml
     replication.location-labels: ["zone","dc","rack","host"]
     ```
 
--   クラスタの高可用性を確保するには、 Raftグループ レプリカの数を`5`に調整します。
+-   クラスターの高可用性を確保するには、 Raftグループ レプリカの数を`5`に調整します。
 
     ```yaml
     replication.max-replicas: 5
@@ -91,5 +91,5 @@ summary: Learn the geo-distributed deployment topology of TiDB.
 
 > **ノート：**
 >
-> -   構成ファイルで`tidb`ユーザーを手動で作成する必要はありません。 TiUPクラスタコンポーネントは、ターゲット マシンに`tidb`ユーザーを自動的に作成します。ユーザーをカスタマイズしたり、ユーザーと制御マシンとの一貫性を保つことができます。
-> -   展開ディレクトリを相対パスとして構成すると、クラスタはユーザーのホーム ディレクトリに展開されます。
+> -   構成ファイルで`tidb`ユーザーを手動で作成する必要はありません。 TiUP クラスター コンポーネントは、ターゲット マシンに`tidb`ユーザーを自動的に作成します。ユーザーをカスタマイズしたり、ユーザーと制御マシンとの一貫性を保つことができます。
+> -   展開ディレクトリを相対パスとして構成すると、クラスターはユーザーのホーム ディレクトリに展開されます。

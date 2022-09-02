@@ -99,7 +99,7 @@ TiDB バージョン: 5.0.6
     -   TiKV がリバース テーブル スキャンを実行すると、TiKV がメモリ ロックを検出できない問題を修正します[#11440](https://github.com/tikv/tikv/issues/11440)
     -   10 進数の除算結果がゼロ[#29586](https://github.com/pingcap/tidb/issues/29586)の場合の負号の問題を修正
     -   GC タスクの蓄積により、TiKV が OOM (メモリ不足) になる可能性がある問題を修正します[#11410](https://github.com/tikv/tikv/issues/11410)
-    -   インスタンスごとの gRPC リクエストの平均レイテンシが TiKV メトリクスで不正確である問題を修正します[#11299](https://github.com/tikv/tikv/issues/11299)
+    -   インスタンスごとの gRPC リクエストの平均レイテンシーが TiKV メトリクスで不正確である問題を修正します[#11299](https://github.com/tikv/tikv/issues/11299)
     -   統計スレッド[#11195](https://github.com/tikv/tikv/issues/11195)のデータを監視することによって引き起こされるメモリ リークを修正します。
     -   ダウンストリーム データベースが見つからない場合に発生する TiCDCpanicの問題を修正します[#11123](https://github.com/tikv/tikv/issues/11123)
     -   Congest エラー[#11082](https://github.com/tikv/tikv/issues/11082)により、TiCDC がスキャンの再試行を頻繁に追加する問題を修正します。

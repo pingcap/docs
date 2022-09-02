@@ -103,7 +103,7 @@ DESC slow_query;
 
 ## CLUSTER_SLOW_QUERY テーブル {#cluster-slow-query-table}
 
-`CLUSTER_SLOW_QUERY`番目のテーブルは、クラスタのすべてのノードのスロー クエリ情報を提供します。これは、TiDB スロー ログ ファイルの解析結果です。 `SLOW_QUERY`と同じように`CLUSTER_SLOW_QUERY`テーブルを使用できます。 `CLUSTER_SLOW_QUERY`テーブルのテーブル スキーマは、 `INSTANCE`カラムが`CLUSTER_SLOW_QUERY`に追加されているという点で、 `SLOW_QUERY`テーブルのテーブル スキーマとは異なります。 `INSTANCE`列目はスロークエリの行情報のTiDBノードアドレスを表しています。
+`CLUSTER_SLOW_QUERY`番目のテーブルは、クラスター内のすべてのノードのスロー クエリ情報を提供します。これは、TiDB スロー ログ ファイルの解析結果です。 `SLOW_QUERY`と同じように`CLUSTER_SLOW_QUERY`テーブルを使用できます。 `CLUSTER_SLOW_QUERY`テーブルのテーブル スキーマは、 `INSTANCE`カラムが`CLUSTER_SLOW_QUERY`に追加されているという点で、 `SLOW_QUERY`テーブルのテーブル スキーマとは異なります。 `INSTANCE`列目はスロークエリの行情報のTiDBノードアドレスを表しています。
 
 <CustomContent platform="tidb">
 
@@ -199,7 +199,7 @@ desc cluster_slow_query;
 74 rows in set (0.000 sec)
 ```
 
-クラスタシステム テーブルがクエリされると、TiDB はすべてのノードからデータを取得するのではなく、関連する計算を他のノードにプッシュ ダウンします。実行計画は次のとおりです。
+クラスター システム テーブルがクエリされると、TiDB はすべてのノードからデータを取得するのではなく、関連する計算を他のノードにプッシュ ダウンします。実行計画は次のとおりです。
 
 {{< copyable "" >}}
 

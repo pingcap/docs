@@ -7,7 +7,7 @@ summary: Control TiDB Lightning through the web interface.
 
 TiDB Lightningは、インポートの進行状況を表示し、いくつかの簡単なタスク管理を実行するための Web ページを提供します。これを*サーバーモード*と呼びます。
 
-サーバー モードを有効にするには、 `tidb-lightning`を`--server-mode`フラグで開始します。
+サーバーモードを有効にするには、 `tidb-lightning`を`--server-mode`フラグで開始します。
 
 ```sh
 ./tidb-lightning --server-mode --status-addr :8289
@@ -23,7 +23,7 @@ status-addr = ':8289'
 
 TiDB Lightningが起動したら、 `http://127.0.0.1:8289`にアクセスしてプログラムを制御します (実際の URL は`status-addr`の設定によって異なります)。
 
-サーバー モードでは、 TiDB Lightningはすぐに実行を開始しません。むしろ、ユーザーは Web インターフェイスを介して (複数の)*タスク*を送信し、データをインポートします。
+サーバーモードでは、 TiDB Lightningはすぐに実行を開始しません。むしろ、ユーザーは Web インターフェイスを介して (複数の)*タスク*を送信し、データをインポートします。
 
 ## 表紙 {#front-page}
 

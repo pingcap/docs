@@ -11,7 +11,7 @@ summary: Learn about the SQL syntax, best practices, and examples for deleting d
 
 このドキュメントを読む前に、次の準備が必要です。
 
--   [TiDB Cloud(開発者層) で TiDB クラスターを構築する](/develop/dev-guide-build-cluster-in-cloud.md)
+-   [TiDB Cloud(開発者層) で TiDBクラスタを構築する](/develop/dev-guide-build-cluster-in-cloud.md)
 -   [スキーマ設計の概要](/develop/dev-guide-schema-design-overview.md) 、 [データベースを作成する](/develop/dev-guide-create-database.md) 、 [テーブルを作成する](/develop/dev-guide-create-table.md) 、および[セカンダリ インデックスの作成](/develop/dev-guide-create-secondary-indexes.md)を読み取る
 -   [データの挿入](/develop/dev-guide-insert-data.md)
 
@@ -188,7 +188,7 @@ TiDB は[統計情報](/statistics.md)を使用してインデックスの選択
 
 <CustomContent platform="tidb-cloud">
 
-ただし、多数の行 (1 万行以上) を削除する必要がある場合は、データを反復的に削除することをお勧めします。つまり、削除が完了するまで、繰り返しごとにデータの一部を削除します。これは、TiDB がデフォルトで 1 つのトランザクションのサイズを 100 MB に制限しているためです。プログラムまたはスクリプトでループを使用して、このような操作を実行できます。
+ただし、多数の行 (1 万行以上) を削除する必要がある場合は、データを繰り返し削除することをお勧めします。つまり、削除が完了するまで繰り返しごとにデータの一部を削除します。これは、TiDB がデフォルトで 1 つのトランザクションのサイズを 100 MB に制限しているためです。プログラムまたはスクリプトでループを使用して、このような操作を実行できます。
 
 </CustomContent>
 

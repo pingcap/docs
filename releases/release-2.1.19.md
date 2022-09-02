@@ -54,7 +54,7 @@ TiDB アンシブル バージョン: 2.1.19
     -   `KILL CONNECTION`ゴルーチンリークが発生する可能性がある問題を修正[#13252](https://github.com/pingcap/tidb/pull/13252)
     -   HTTP API [#13188](https://github.com/pingcap/tidb/pull/13188)の`info/all`インターフェースを介してすべての TiDB ノードの binlog ステータスを取得するサポート
     -   Windows [#13650](https://github.com/pingcap/tidb/pull/13650)で TiDB プロジェクトをビルドできない問題を修正
-    -   TiDB サーバー[#13904](https://github.com/pingcap/tidb/pull/13904)のバージョンを制御および変更するための`server-version`の構成項目を追加します。
+    -   TiDBサーバー[#13904](https://github.com/pingcap/tidb/pull/13904)のバージョンを制御および変更するための`server-version`の構成項目を追加します。
     -   Go1.13でコンパイルしたバイナリ`plugin`が正常に動作しない問題を修正[#13527](https://github.com/pingcap/tidb/pull/13527)
 -   DDL
     -   テーブルが作成され、テーブルに`COLLATE` [#13190](https://github.com/pingcap/tidb/pull/13190)が含まれている場合、列のシステムのデフォルト文字セットの代わりにテーブルの`COLLATE`を使用します

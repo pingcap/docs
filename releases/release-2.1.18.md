@@ -40,7 +40,7 @@ TiDB アンシブル バージョン: 2.1.18
     -   `ORDER BY` 、 `GROUP BY` 、および`LIMIT OFFSET` [#12514](https://github.com/pingcap/tidb/pull/12514)で`?`のプレースホルダーをサポート
     -   スロー クエリ ログに`Prev_stmt`フィールドを追加して、最後のステートメントが`COMMIT` [#12724](https://github.com/pingcap/tidb/pull/12724)のときに前のステートメントを出力します。
     -   明示的にコミットされたトランザクションで`COMMIT`が失敗した場合、 `COMMIT`より前の最後のステートメントをログに記録します[#12747](https://github.com/pingcap/tidb/pull/12747)
-    -   TiDB サーバーが SQL ステートメントを実行するときの前のステートメントの保存方法を最適化して、パフォーマンスを向上させます[#12751](https://github.com/pingcap/tidb/pull/12751)
+    -   TiDBサーバーが SQL ステートメントを実行するときの前のステートメントの保存方法を最適化して、パフォーマンスを向上させます[#12751](https://github.com/pingcap/tidb/pull/12751)
     -   `skip-grant-table=true`構成[#12816](https://github.com/pingcap/tidb/pull/12816)の下の`FLUSH PRIVILEGES`ステートメントによって引き起こされるpanic問題を修正します。
     -   AutoID を適用するデフォルトの最小ステップを`1000`から`30000`に増やして、短時間に多くの書き込み要求がある場合のパフォーマンスのボトルネックを回避します[#12891](https://github.com/pingcap/tidb/pull/12891)
     -   TiDB がパニック[#12954](https://github.com/pingcap/tidb/pull/12954)のときに、失敗した`Prepared`ステートメントがエラー ログに出力されない問題を修正します。

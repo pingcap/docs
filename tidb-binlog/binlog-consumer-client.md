@@ -128,10 +128,10 @@ message Binlog {
 
 Driverを使用する場合は、次の情報を構成する必要があります。
 
--   `KafkaAddr` : Kafkaクラスタのアドレス
+-   `KafkaAddr` : Kafka クラスターのアドレス
 -   `CommitTS` : バイナリログの読み取りを開始する`commit ts`から
 -   `Offset` : Kafka `offset`がデータの読み取りを開始する場所。 `CommitTS`が設定されている場合、このパラメーターを構成する必要はありません。
--   `ClusterID` : TiDBクラスタのクラスタID
+-   `ClusterID` : TiDB クラスターのクラスター ID
 -   `Topic` : Kafka のトピック名。 Topic が空の場合は、 Drainer `<ClusterID>_obinlog`のデフォルト名を使用します。
 
 パッケージ内のDriverコードを引用してDriverを使用し、 Driverが提供するサンプル コードを参照して、 Driverの使用方法と binlog データの解析方法を学習できます。

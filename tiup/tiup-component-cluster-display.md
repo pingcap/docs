@@ -4,7 +4,7 @@ title: tiup cluster display
 
 # tiup cluster display {#tiup-cluster-display}
 
-クラスタの各コンポーネントの稼働状況を確認したい場合、1 台ずつマシンにログインするのは明らかに非効率的です。したがって、tiup-cluster は、このタスクを効率的に完了するための`tiup cluster display`のコマンドを提供します。
+クラスター内の各コンポーネントの稼働状況を確認したい場合、1 台ずつマシンにログインするのは明らかに非効率的です。したがって、 tiup-clusterは、このタスクを効率的に完了するための`tiup cluster display`のコマンドを提供します。
 
 ## 構文 {#syntax}
 
@@ -12,7 +12,7 @@ title: tiup cluster display
 tiup cluster display <cluster-name> [flags]
 ```
 
-`<cluster-name>` : 操作するクラスタの名前。クラスタ名を忘れた場合は、 [クラスタリスト](/tiup/tiup-component-cluster-list.md)コマンドで確認できます。
+`<cluster-name>` : 操作するクラスターの名前。クラスター名を忘れた場合は、 [クラスタ リスト](/tiup/tiup-component-cluster-list.md)コマンドで確認できます。
 
 ## オプション {#options}
 
@@ -34,7 +34,7 @@ tiup cluster display <cluster-name> [flags]
 
 ### -R, --role {#r-role}
 
--   表示するロールを指定します。指定しない場合は、すべてのロールが表示されます。このオプションの値は、ノード ロールのコンマ区切りリストです。ノードにデプロイされたロールが不明な場合は、コマンドでこのオプションをスキップして、すべてのノードのロールとステータスを出力に表示できます。
+-   表示する役割を指定します。指定しない場合は、すべてのロールが表示されます。このオプションの値は、ノード ロールのコンマ区切りリストです。ノードにデプロイされたロールが不明な場合は、コマンドでこのオプションをスキップして、すべてのノードのロールとステータスを出力に表示できます。
 -   データ型: `STRINGS`
 -   コマンドでこのオプションを指定しない場合、デフォルトですべてのロールが表示されます。
 
@@ -51,7 +51,7 @@ tiup cluster display <cluster-name> [flags]
 ## 出力 {#outputs}
 
 -   クラスタ名
--   クラスタのバージョン
+-   クラスターのバージョン
 -   SSH クライアント タイプ
 -   ダッシュボードのアドレス
 -   次のフィールドを含むテーブル:
@@ -64,4 +64,4 @@ tiup cluster display <cluster-name> [flags]
     -   Data Dir: サービスのデータ ディレクトリ。 `-`は、データ ディレクトリがないことを意味します。
     -   デプロイ Dir: サービスのデプロイ ディレクトリ
 
-[&lt;&lt; 前のページに戻る - TiUP Clusterコマンド一覧](/tiup/tiup-component-cluster.md#command-list)
+[&lt;&lt; 前のページに戻る - TiUP クラスタコマンド一覧](/tiup/tiup-component-cluster.md#command-list)

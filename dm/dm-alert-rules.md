@@ -5,7 +5,7 @@ summary: Introduce the alert information of DM.
 
 # DMアラート情報 {#dm-alert-information}
 
-TiUP を使用して DMクラスタをデプロイすると、デフォルトで[警報システム](/dm/migrate-data-using-dm.md#step-8-monitor-the-task-and-check-logs)がデプロイされます。
+TiUP を使用して DM クラスターをデプロイすると、デフォルトで[警報システム](/dm/migrate-data-using-dm.md#step-8-monitor-the-task-and-check-logs)がデプロイされます。
 
 DM アラート ルールとソリューションの詳細については、 [アラートを処理する](/dm/dm-handle-alerts.md)を参照してください。
 

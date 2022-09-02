@@ -20,7 +20,7 @@ TiDB Ansible バージョン: 3.1.0 GA
 
     -   バックアップと復元 (BR)
 
-        -   BR は、3.1 GA [#233](https://github.com/pingcap/br/pull/233)より前の TiKVクラスタからのデータの復元をサポートしていません
+        -   BR は、3.1 GA [#233](https://github.com/pingcap/br/pull/233)より前の TiKV クラスターからのデータの復元をサポートしていません
 
 ## 新機能 {#new-features}
 
@@ -61,7 +61,7 @@ TiDB Ansible バージョン: 3.1.0 GA
     -   `TypeNull`クラスが可変長型[#15739](https://github.com/pingcap/tidb/pull/15739)と間違えられるため、左結合の`sort`演算子のpanicの問題を修正します。
     -   監視セッションの再試行エラーの不正確なカウントの問題を修正します[#16120](https://github.com/pingcap/tidb/pull/16120)
     -   `ALLOW_INVALID_DATES`モード[#16171](https://github.com/pingcap/tidb/pull/16171)で`weekday`の結果が間違っていた問題を修正
-    -   クラスタに[#15761](https://github.com/pingcap/tidb/pull/15761)ノードがある場合、ガベージ コレクション (GC) が正常に機能しない場合がある問題を修正します。
+    -   クラスターに[#15761](https://github.com/pingcap/tidb/pull/15761)ノードがある場合、ガベージ コレクション (GC) が正常に機能しない場合がある問題を修正します。
     -   ユーザーがハッシュ パーティション テーブルを作成するときに大きなパーティション数を設定すると、TiDB がメモリ不足 (OOM) になる問題を修正します[#16219](https://github.com/pingcap/tidb/pull/16219)
     -   警告がエラーと誤認される問題を修正し、 `UNION`ステートメントを`SELECT`ステートメントと同じ動作にする[#16138](https://github.com/pingcap/tidb/pull/16138)
     -   mocktikv [#16200](https://github.com/pingcap/tidb/pull/16200)に`TopN`をpushした時の実行エラーを修正

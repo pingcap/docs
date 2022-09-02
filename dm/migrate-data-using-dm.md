@@ -7,20 +7,20 @@ summary: Use the Data Migration tool to migrate the full data and the incrementa
 
 このガイドでは、データ移行 (DM) ツールを使用してデータを移行する方法について説明します。
 
-## ステップ 1: DMクラスタをデプロイ {#step-1-deploy-the-dm-cluster}
+## ステップ 1: DM クラスターをデプロイ {#step-1-deploy-the-dm-cluster}
 
-[TiUP を使用して DMクラスタをデプロイする](/dm/deploy-a-dm-cluster-using-tiup.md)におすすめです。トライアルまたはテスト用に[バイナリを使用して DMクラスタを展開する](/dm/deploy-a-dm-cluster-using-binary.md)を使用することもできます。
+[TiUP を使用して DM クラスターをデプロイする](/dm/deploy-a-dm-cluster-using-tiup.md)におすすめです。トライアルまたはテスト用に[バイナリを使用して DM クラスターをデプロイする](/dm/deploy-a-dm-cluster-using-binary.md)を使用することもできます。
 
 > **ノート：**
 >
 > -   すべての DM 構成ファイルのデータベース パスワードについては、 `dmctl`で暗号化されたパスワードを使用することをお勧めします。データベースのパスワードが空の場合、暗号化する必要はありません。 [dmctl を使用してデータベース パスワードを暗号化する](/dm/dm-manage-source.md#encrypt-the-database-password)を参照してください。
 > -   アップストリーム データベースとダウンストリーム データベースのユーザーには、対応する読み取り権限と書き込み権限が必要です。
 
-## ステップ 2:クラスタ情報を確認する {#step-2-check-the-cluster-information}
+## ステップ 2: クラスター情報を確認する {#step-2-check-the-cluster-information}
 
-TiUP を使用して DMクラスタをデプロイすると、構成情報は以下のようになります。
+TiUP を使用して DM クラスターをデプロイすると、構成情報は以下のようになります。
 
--   DMクラスタの関連コンポーネントの構成情報:
+-   DM クラスター内の関連コンポーネントの構成情報:
 
     | 成分         | ホスト          | ポート  |
     | ---------- | ------------ | ---- |
@@ -56,7 +56,7 @@ MySQL ホストで必要な権限のリストは、 [事前チェック](/dm/dm-
       port: 3306
     ```
 
-2.  ターミナルで次のコマンドを実行し、 `tiup dmctl`を使用して MySQL-1 データ ソース構成を DMクラスタにロードします。
+2.  ターミナルで次のコマンドを実行し、 `tiup dmctl`を使用して MySQL-1 データ ソース構成を DM クラスターにロードします。
 
     {{< copyable "" >}}
 
@@ -68,7 +68,7 @@ MySQL ホストで必要な権限のリストは、 [事前チェック](/dm/dm-
 
 ## ステップ 4: データ移行タスクを構成する {#step-4-configure-the-data-migration-task}
 
-次の例では、アップストリームの MySQL-1 と MySQL-2 の両方のインスタンスの`test_db`データベースのすべての`test_table`テーブル データを、フル データと増分データで、TiDB の`test_db`データベースのダウンストリーム`test_table`テーブルに移行する必要があると想定しています。モード。
+次の例では、上流の MySQL-1 と MySQL-2 の両方のインスタンスの`test_db`データベースにあるすべての`test_table`テーブル データを、フル データと増分データで、TiDB の`test_db`データベースにある下流の`test_table`テーブルに移行する必要があると想定しています。モード。
 
 `task.yaml`のタスク構成ファイルを次のように編集します。
 
@@ -162,7 +162,7 @@ tiup dmctl --master-addr 172.16.10.71:8261 start-task ./task.yaml
 
 ## ステップ 6: データ移行タスクを確認する {#step-6-check-the-data-migration-task}
 
-タスクの状態を確認する必要がある場合、または特定のデータ移行タスクが DMクラスタで実行されているかどうかを確認する必要がある場合は、 `tiup dmctl`で次のコマンドを実行します。
+タスクの状態を確認する必要がある場合、または特定のデータ移行タスクが DM クラスターで実行されているかどうかを確認する必要がある場合は、次のコマンドを`tiup dmctl`で実行します。
 
 {{< copyable "" >}}
 
@@ -182,9 +182,9 @@ tiup dmctl --master-addr 172.16.10.71:8261 stop-task test
 
 ## ステップ 8: タスクを監視してログを確認する {#step-8-monitor-the-task-and-check-logs}
 
-Prometheus、Alertmanager、および Grafana が、TiUP を使用した DMクラスタのデプロイと共に正常にデプロイされ、Grafana アドレスが`172.16.10.71`であると仮定します。 DM に関連するアラート情報を表示するには、ブラウザーで[http://172.16.10.71:9093](http://172.16.10.71:9093)を開いて Alertmanager に入ります。モニタリング指標を確認するには、 [http://172.16.10.71:3000](http://172.16.10.71:3000)に進み、DM ダッシュボードを選択します。
+Prometheus、Alertmanager、および Grafana が、TiUP を使用した DM クラスターのデプロイと共に正常にデプロイされ、Grafana アドレスが`172.16.10.71`であると仮定します。 DM に関連するアラート情報を表示するには、ブラウザーで[http://172.16.10.71:9093](http://172.16.10.71:9093)を開いて Alertmanager に入ります。モニタリング指標を確認するには、 [http://172.16.10.71:3000](http://172.16.10.71:3000)に進み、DM ダッシュボードを選択します。
 
-DMクラスタが実行されている間、DM-master、DM-worker、および dmctl はログを介して監視メトリック情報を出力します。各コンポーネントのログ ディレクトリは次のとおりです。
+DM クラスターが実行されている間、DM-master、DM-worker、および dmctl はログを介して監視メトリック情報を出力します。各コンポーネントのログ ディレクトリは次のとおりです。
 
 -   DM-master ログ ディレクトリ: `--log-file` DM-master プロセス パラメータによって指定されます。 DM が TiUP を使用して展開されている場合、ログ ディレクトリは DM-master ノードの`{log_dir}`です。
 -   DM-worker ログ ディレクトリ: `--log-file` DM-worker プロセス パラメータで指定されます。 DM が TiUP を使用してデプロイされている場合、ログ ディレクトリは DM-worker ノードの`{log_dir}`です。

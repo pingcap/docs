@@ -10,7 +10,7 @@ PITR は、監視メトリックを収集するために[プロメテウス](htt
 ## 監視構成 {#monitoring-configuration}
 
 -   TiUP を使用してデプロイされたクラスターの場合、 [プロメテウス](https://prometheus.io/)はモニタリング メトリックを自動的に収集します。
--   手動でデプロイされたクラスターの場合、 [TiDB クラスター監視の展開](/deploy-monitoring-services.md)の手順に従って、TiKV 関連のジョブを Prometheus 構成ファイルの`scrape_configs`セクションに追加します。
+-   手動でデプロイされたクラスターの場合、 [TiDBクラスタ監視の展開](/deploy-monitoring-services.md)の手順に従って、TiKV 関連のジョブを Prometheus 構成ファイルの`scrape_configs`セクションに追加します。
 
 ## 指標のモニタリング {#monitoring-metrics}
 

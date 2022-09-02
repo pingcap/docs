@@ -19,7 +19,7 @@ TiDB アンシブル バージョン: 2.1.10
 -   `SLOW_QUERY`テーブルを使用してスロー ログ[#10412](https://github.com/pingcap/tidb/pull/10412)をクエリすると、スロー ログの 1 行が長すぎるとエラー レポートが表示される問題を修正します。
 -   `DATETIME`たす`INTERVAL`の結果が MySQL の結果と一致しない場合がある問題を修正[#10416](https://github.com/pingcap/tidb/pull/10416) 、 [#10418](https://github.com/pingcap/tidb/pull/10418)
 -   うるう年の 2 月の無効時間のチェックを追加します[#10417](https://github.com/pingcap/tidb/pull/10417)
--   内部初期化操作の制限を DDL 所有者でのみ実行して、クラスタの初期化時に大量の競合エラー レポートが発生しないようにする[#10426](https://github.com/pingcap/tidb/pull/10426)
+-   内部初期化操作の制限を DDL 所有者でのみ実行して、クラスターの初期化時に大量の競合エラー レポートが発生しないようにする[#10426](https://github.com/pingcap/tidb/pull/10426)
 -   出力タイムスタンプ列のデフォルト値が`default current_timestamp on update current_timestamp` [#10337](https://github.com/pingcap/tidb/issues/10337)の場合、 `DESC`が MySQL と互換性がない問題を修正
 -   `Update`文[#10439](https://github.com/pingcap/tidb/pull/10439)で権限チェック時にエラーが発生する問題を修正
 -   `RANGE`の計算を間違えると`CHAR`列目で間違った結果になる場合がある問題を修正[#10455](https://github.com/pingcap/tidb/pull/10455)

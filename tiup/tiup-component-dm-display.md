@@ -4,7 +4,7 @@ title: tiup dm display
 
 # tiup dm display {#tiup-dm-display}
 
-DMクラスタの各コンポーネントの稼働状況を確認したい場合、各マシンにいちいちログインするのは非効率です。したがって、tiup-dm は、このジョブを効率的に実行するための`tiup dm display`のコマンドを提供します。
+DMクラスタ内の各コンポーネントの稼働状況を確認したい場合、1台ずつマシンにログインするのは効率が悪い。したがって、tiup-dm は、このジョブを効率的に実行するための`tiup dm display`のコマンドを提供します。
 
 ## 構文 {#syntax}
 
@@ -12,7 +12,7 @@ DMクラスタの各コンポーネントの稼働状況を確認したい場合
 tiup dm display <cluster-name> [flags]
 ```
 
-`<cluster-name>`は操作対象のクラスタ名です。クラスタ名を忘れた場合は、 [`tiup dm list`](/tiup/tiup-component-dm-list.md)コマンドを使用して確認できます。
+`<cluster-name>`は操作対象のクラスタ名です。クラスター名を忘れた場合は、 [`tiup dm list`](/tiup/tiup-component-dm-list.md)コマンドを使用して確認できます。
 
 ## オプション {#options}
 
@@ -44,8 +44,8 @@ tiup dm display <cluster-name> [flags]
 
 ## 出力 {#output}
 
--   クラスター名
--   クラスターのバージョン
+-   クラスタ名
+-   クラスタのバージョン
 -   SSH クライアントの種類
 -   次のフィールドを含むテーブル:
     -   `ID` : IP:PORT で構成されるノード ID。

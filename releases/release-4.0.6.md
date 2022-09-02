@@ -18,7 +18,7 @@ TiDB バージョン: 4.0.6
 
     -   クエリ エディターと実行 UI を追加 (実験的) [#713](https://github.com/pingcap-incubator/tidb-dashboard/pull/713)
     -   店舗ロケーション トポロジの視覚化のサポート[#719](https://github.com/pingcap-incubator/tidb-dashboard/pull/719)
-    -   クラスタ構成 UI を追加 (実験的) [#733](https://github.com/pingcap-incubator/tidb-dashboard/pull/733)
+    -   クラスター構成 UI を追加 (実験的) [#733](https://github.com/pingcap-incubator/tidb-dashboard/pull/733)
     -   現在のセッションの共有をサポート[#741](https://github.com/pingcap-incubator/tidb-dashboard/pull/741)
     -   SQL ステートメント リスト[#746](https://github.com/pingcap-incubator/tidb-dashboard/pull/746)で実行プランの数を表示するサポート
 

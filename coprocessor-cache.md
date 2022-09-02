@@ -72,4 +72,4 @@ EXPLAIN ANALYZE SELECT * FROM t USE INDEX(a);
 
 ### Grafana モニタリング パネルをビューする {#view-the-grafana-monitoring-panel}
 
-Grafana では、 `tidb`名前空間の下の`distsql`サブシステムに**copr-cache**パネルが表示されます。このパネルは、クラスタ全体のコプロセッサー・キャッシュのヒット、ミス、およびキャッシュ破棄の数をモニターします。
+Grafana では、 `tidb`名前空間の下の`distsql`サブシステムに**copr-cache**パネルが表示されます。このパネルは、クラスター全体のコプロセッサー・キャッシュのヒット、ミス、およびキャッシュ破棄の数をモニターします。

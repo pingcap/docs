@@ -3,15 +3,15 @@ title: TiDB Dashboard Cluster Information Page
 summary: View the running status of TiDB, TiKV, PD, TiFlash components in the entire cluster and the running status of the host on which these components are located.
 ---
 
-# TiDB ダッシュボード クラスター情報ページ {#tidb-dashboard-cluster-information-page}
+# TiDB ダッシュボードクラスタ情報ページ {#tidb-dashboard-cluster-information-page}
 
-クラスタ情報ページでは、クラスタ全体の TiDB、TiKV、PD、TiFlash コンポーネントの実行ステータスと、これらのコンポーネントが配置されているホストの実行ステータスを表示できます。
+クラスター情報ページでは、クラスター全体の TiDB、TiKV、PD、TiFlash コンポーネントの実行ステータスと、これらのコンポーネントが配置されているホストの実行ステータスを表示できます。
 
 ## ページにアクセスする {#access-the-page}
 
-次の 2 つの方法のいずれかを使用して、クラスタ情報ページにアクセスできます。
+次の 2 つの方法のいずれかを使用して、クラスター情報ページにアクセスできます。
 
--   TiDB ダッシュボードにログインした後、左側のナビゲーション メニューで [**クラスター情報**] をクリックします。
+-   TiDB ダッシュボードにログインした後、左側のナビゲーション メニューで [**クラスタ情報**] をクリックします。
 
     ![Access cluster information page](/media/dashboard/dashboard-cluster-info-access.png)
 
@@ -23,7 +23,7 @@ summary: View the running status of TiDB, TiKV, PD, TiFlash components in the en
 
 ![Instance list](/media/dashboard/dashboard-cluster-info-instances.png)
 
-このインスタンス リストには、クラスタの TiDB、TiKV、PD、および TiFlash コンポーネントのすべてのインスタンスの概要情報が表示されます。
+このインスタンス リストには、クラスター内の TiDB、TiKV、PD、および TiFlash コンポーネントのすべてのインスタンスの概要情報が表示されます。
 
 リストには次の情報が含まれます。
 
@@ -52,7 +52,7 @@ summary: View the running status of TiDB, TiKV, PD, TiFlash components in the en
 
 ![Host list](/media/dashboard/dashboard-cluster-info-hosts.png)
 
-このホスト リストには、クラスタの TiDB、TiKV、PD、および TiFlash コンポーネントのすべてのインスタンスに対応するホストの実行ステータスが表示されます。
+このホスト リストには、クラスター内の TiDB、TiKV、PD、および TiFlash コンポーネントのすべてのインスタンスに対応するホストの実行ステータスが表示されます。
 
 リストには次の情報が含まれます。
 

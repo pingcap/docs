@@ -5,7 +5,7 @@ summary: Learn key metrics displayed on the Performance Overview dashboard.
 
 # パフォーマンスの概要に関する主要指標 {#key-metrics-on-performance-overview}
 
-TiUP を使用して TiDBクラスタをデプロイすると、監視システム (Prometheus &amp; Grafana) が同時にデプロイされます。詳細については、 [TiDB 監視フレームワークの概要](/tidb-monitoring-framework.md)を参照してください。
+TiUP を使用して TiDB クラスターをデプロイすると、監視システム (Prometheus &amp; Grafana) が同時にデプロイされます。詳細については、 [TiDB 監視フレームワークの概要](/tidb-monitoring-framework.md)を参照してください。
 
 Grafana ダッシュボードは、PD、TiDB、TiKV、Node_exporter、Overview、Performance Overview などを含む一連のサブ ダッシュボードに分かれています。診断に役立つ多くの指標があります。
 
@@ -15,9 +15,9 @@ Performance Overview ダッシュボードは、TiDB、PD、および TiKV の�
 
 -   負荷プロファイル: データベースの QPS、接続情報、アプリケーションが TiDB とやり取りする MySQL コマンドの種類、データベースの内部 TSO と KV 要求の OPS、TiKV と TiDB のリソースの使用状況など、主要なメトリックとリソースの使用状況。
 
--   トップダウン レイテンシの内訳: クエリ レイテンシと接続アイドル時間の比率、クエリ レイテンシの内訳、実行中の TSO/KV 要求レイテンシ、TiKV 内の書き込みレイテンシの内訳。
+-   トップダウンレイテンシーの内訳: クエリレイテンシーと接続アイドル時間の比率、クエリレイテンシーの内訳、実行中の TSO/KV 要求レイテンシー、TiKV 内の書き込みレイテンシーの内訳。
 
-パフォーマンス概要ダッシュボードを使用すると、パフォーマンスを効率的に分析し、ユーザー応答時間のボトルネックがデータベースにあるかどうかを確認できます。ボトルネックがデータベースにある場合は、データベース時間の概要、ワークロード プロファイル、SQL レイテンシの内訳を使用して、データベース内のボトルネックを特定できます。詳細については、 [パフォーマンス分析とチューニング](/performance-tuning-methods.md)を参照してください。
+パフォーマンス概要ダッシュボードを使用すると、パフォーマンスを効率的に分析し、ユーザー応答時間のボトルネックがデータベースにあるかどうかを確認できます。ボトルネックがデータベースにある場合は、データベース時間の概要、ワークロード プロファイル、SQLレイテンシーの内訳を使用して、データベース内のボトルネックを特定できます。詳細については、 [パフォーマンス分析とチューニング](/performance-tuning-methods.md)を参照してください。
 
 次のセクションでは、パフォーマンス概要ダッシュボードのメトリックを示します。
 
@@ -31,7 +31,7 @@ Performance Overview ダッシュボードは、TiDB、PD、および TiKV の�
 -   データベース時間: 1 秒あたりの合計データベース時間
 -   get token/parse/compile/execute: 4 つの SQL 処理フェーズで消費されるデータベース時間
 
-一般的に、SQL 実行フェーズは緑で、その他のフェーズは赤で表示されます。緑以外の領域が大きい場合は、実行フェーズ以外のフェーズで多くのデータベース時間が消費されていることを意味し、さらなる原因分析が必要です。
+一般的に、SQL 実行フェーズは緑で、その他のフェーズは赤で表示されます。緑以外の領域が大きい場合は、実行フェーズ以外のフェーズで多くのデータベース時間が費やされていることを意味し、さらなる原因分析が必要です。
 
 ## SQL 実行時間の概要 {#sql-execute-time-overview}
 
@@ -101,7 +101,7 @@ Performance Overview ダッシュボードは、TiDB、PD、および TiKV の�
 
 -   avg by type: すべての TiDB インスタンスですべてのリクエストを実行する平均時間。タイプ別に収集: `SELECT` 、 `INSERT` 、および`UPDATE`
 
-## 接続アイドル期間 {#connection-idle-duration}
+## 接続アイドル時間 {#connection-idle-duration}
 
 Connection Idle Duration は、接続がアイドル状態である期間を示します。
 

@@ -4,7 +4,7 @@ title: tiup dm upgrade
 
 # tiup dm upgrade {#tiup-dm-upgrade}
 
-`tiup dm upgrade`コマンドは、指定されたクラスタを特定のバージョンにアップグレードするために使用されます。
+`tiup dm upgrade`コマンドは、指定されたクラスターを特定のバージョンにアップグレードするために使用されます。
 
 ## 構文 {#syntax}
 
@@ -12,14 +12,14 @@ title: tiup dm upgrade
 tiup dm upgrade <cluster-name> <version> [flags]
 ```
 
--   `<cluster-name>`は操作対象のクラスタの名前です。クラスタ名を忘れた場合は、 [`tiup dm list`](/tiup/tiup-component-dm-list.md)コマンドを使用して確認できます。
+-   `<cluster-name>`は操作対象のクラスターの名前です。クラスター名を忘れた場合は、 [`tiup dm list`](/tiup/tiup-component-dm-list.md)コマンドを使用して確認できます。
 -   `<version>`はアップグレード先のターゲット バージョンです。現在、新しいバージョンへのアップグレードのみが許可されており、以前のバージョンへのアップグレードは許可されていません。つまり、ダウングレードは許可されていません。夜間バージョンへのアップグレードも許可されていません。
 
 ## オプション {#options}
 
 ### &#x20;--offline {#offline}
 
--   現在のクラスタがオフラインであることを宣言します。このオプションを指定すると、 TiUP DMはサービスを再起動せずに、クラスタコンポーネントのバイナリ ファイルのみを置き換えます。
+-   現在のクラスターがオフラインであることを宣言します。このオプションを指定すると、 TiUP DMはサービスを再起動せずに、クラスタ コンポーネントのバイナリ ファイルのみを置き換えます。
 
 ### -h, --help {#h-help}
 

@@ -200,7 +200,7 @@ select * from information_schema.deadlocks;
 
 ## CLUSTER_DEADLOCKS {#cluster-deadlocks}
 
-`CLUSTER_DEADLOCKS`テーブルは、クラスタ全体の各 TiDB ノードの最近のデッドロック エラーに関する情報を返します。これは、各ノードの`DEADLOCKS`テーブルの情報を組み合わせたものです。 `CLUSTER_DEADLOCKS`には、ノードの IP アドレスとポートを表示して異なる TiDB ノードを区別するための追加の`INSTANCE`列も含まれています。
+`CLUSTER_DEADLOCKS`テーブルは、クラスター全体の各 TiDB ノードの最近のデッドロック エラーに関する情報を返します。これは、各ノードの`DEADLOCKS`テーブルの情報を組み合わせたものです。 `CLUSTER_DEADLOCKS`には、ノードの IP アドレスとポートを表示して異なる TiDB ノードを区別するための追加の`INSTANCE`列も含まれています。
 
 `DEADLOCK_ID`はグローバルな一意性を保証しないため、 `CLUSTER_DEADLOCKS`テーブルのクエリ結果では、 `INSTANCE`と`DEADLOCK_ID`を一緒に使用して、結果セット内のさまざまなデッドロック エラーの情報を区別する必要があることに注意してください。
 

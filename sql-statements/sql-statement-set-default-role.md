@@ -105,7 +105,7 @@ mysql> SHOW TABLES IN test;
 1 row in set (0.00 sec)
 ```
 
-ステートメント`SET DEFAULT ROLE`を使用してロールを`jennifer`に関連付けることができるため、ロールに関連付けられた特権を引き受けるためにステートメント`SET ROLE`を実行する必要はありません。
+ステートメント`SET DEFAULT ROLE`を使用してロールを`jennifer`に関連付けることができるため、ロールに関連付けられた権限を引き受けるためにステートメント`SET ROLE`を実行する必要はありません。
 
 ```sql
 $ mysql -uroot

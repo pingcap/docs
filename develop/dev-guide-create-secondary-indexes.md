@@ -11,14 +11,14 @@ summary: Learn steps, rules, and examples to create a secondary index.
 
 セカンダリ インデックスを作成する前に、次の操作を行います。
 
--   [TiDB Cloud(開発者層) で TiDB クラスターを構築する](/develop/dev-guide-build-cluster-in-cloud.md) .
+-   [TiDB Cloud(開発者層) で TiDBクラスタを構築する](/develop/dev-guide-build-cluster-in-cloud.md) .
 -   [スキーマ設計の概要](/develop/dev-guide-schema-design-overview.md)を読んでください。
 -   [データベースを作成する](/develop/dev-guide-create-database.md) .
 -   [テーブルを作成する](/develop/dev-guide-create-table.md) .
 
 ## 二次索引とは {#what-is-secondary-index}
 
-セカンダリ インデックスは、TiDBクラスタの論理オブジェクトです。これは単に、TiDB がクエリのパフォーマンスを向上させるために使用するデータの並べ替えタイプと見なすことができます。 TiDB では、セカンダリ インデックスの作成はオンライン操作であり、テーブルに対するデータの読み取りおよび書き込み操作をブロックしません。インデックスごとに、TiDB はテーブル内の各行の参照を作成し、直接データではなく選択した列で参照を並べ替えます。
+セカンダリ インデックスは、TiDB クラスター内の論理オブジェクトです。これは単に、TiDB がクエリのパフォーマンスを向上させるために使用するデータの並べ替えタイプと見なすことができます。 TiDB では、セカンダリ インデックスの作成はオンライン操作であり、テーブルに対するデータの読み取りおよび書き込み操作をブロックしません。インデックスごとに、TiDB はテーブル内の各行の参照を作成し、直接データではなく選択した列で参照を並べ替えます。
 
 <CustomContent platform="tidb">
 
@@ -65,7 +65,7 @@ KEY `{index_name}` (`{column_names}`)
 -   `{index_name}` : セカンダリ インデックスの名前。
 -   `{column_names}` : セミコロンのコンマで区切られた、索引付けされる列の名前。
 
-## 副次索引作成のルール {#rules-in-secondary-index-creation}
+## 副次索引作成の規則 {#rules-in-secondary-index-creation}
 
 [インデックス作成のベスト プラクティス](/develop/dev-guide-index-best-practice.md)を参照してください。
 

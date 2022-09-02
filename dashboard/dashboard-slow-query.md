@@ -5,7 +5,7 @@ summary: Learn the Slow Queries page of TiDB Dashboard.
 
 # TiDB ダッシュボードのスロー クエリ ページ {#slow-queries-page-of-tidb-dashboard}
 
-TiDB ダッシュボードの [スロー クエリ] ページで、クラスタのすべてのスロー クエリを検索して表示できます。
+TiDB ダッシュボードの [スロー クエリ] ページで、クラスター内のすべてのスロー クエリを検索して表示できます。
 
 デフォルトでは、実行時間が 300 ミリ秒を超える SQL クエリは低速クエリと見なされます。これらのクエリは[遅いクエリ ログ](/identify-slow-queries.md)に記録され、TiDB ダッシュボードで検索できます。 [`tidb_slow_log_threshold`](/system-variables.md#tidb_slow_log_threshold)セッション変数または[`slow-threshold`](/tidb-configuration-file.md#slow-threshold) TiDB パラメータを使用して、低速クエリのしきい値を調整できます。
 

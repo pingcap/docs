@@ -5,7 +5,7 @@ summary: An overview of the usage of WITH (Common Table Expression) for the TiDB
 
 # と {#with}
 
-Common Table Expression (CTE) は、ステートメントの読みやすさと実行効率を向上させるために、SQL ステートメント内で複数回参照できる一時的な結果セットです。 `WITH`ステートメントを適用して、共通テーブル式を使用できます。
+共通テーブル式 (CTE) は、ステートメントの読みやすさと実行効率を向上させるために、SQL ステートメント内で複数回参照できる一時的な結果セットです。 `WITH`ステートメントを適用して、共通テーブル式を使用できます。
 
 ## あらすじ {#synopsis}
 

@@ -65,7 +65,7 @@ TiDB アンシブル バージョン: 3.0.3
 
 -   Binlog
     -   Drainerのデフォルト値`defaultBinlogItemCount`を 65536 から 512 に変更して、 Drainerの起動時の OOM の可能性を減らします[#721](https://github.com/pingcap/tidb-binlog/pull/721)
-    -   潜在的なオフラインの輻輳を回避するために、ポンプ サーバーのオフライン ロジックを最適化します[#701](https://github.com/pingcap/tidb-binlog/pull/701)
+    -   潜在的なオフラインの輻輳を回避するために、ポンプサーバーのオフライン ロジックを最適化します[#701](https://github.com/pingcap/tidb-binlog/pull/701)
 -   TiDB Lightning:
     -   [#225](https://github.com/pingcap/tidb-lightning/pull/225)をインポートするときに、デフォルトでシステム データベース`mysql` 、 `information_schema` 、 `performance_schema` 、および`sys`をスキップします。
 

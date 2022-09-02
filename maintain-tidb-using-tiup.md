@@ -5,18 +5,18 @@ summary: Learn the common operations to operate and maintain a TiDB cluster usin
 
 # TiUP共通操作 {#tiup-common-operations}
 
-このドキュメントでは、TiUP を使用して TiDBクラスタを運用および保守する場合の、次の一般的な操作について説明します。
+このドキュメントでは、TiUP を使用して TiDB クラスターを運用および保守する場合の、次の一般的な操作について説明します。
 
--   クラスタリストをビューする
--   クラスタを開始する
--   クラスタの状態をビューする
+-   クラスタ リストをビューする
+-   クラスターを開始する
+-   クラスターの状態をビューする
 -   構成を変更する
--   クラスタを停止する
--   クラスタを破棄する
+-   クラスターを停止する
+-   クラスターを破棄する
 
-## クラスタリストをビューする {#view-the-cluster-list}
+## クラスタ リストをビューする {#view-the-cluster-list}
 
-TiUPクラスタコンポーネントを使用して、複数の TiDB クラスターを管理できます。 TiDBクラスタがデプロイされると、そのクラスタが TiUPクラスタリストに表示されます。
+TiUP クラスター コンポーネントを使用して、複数の TiDB クラスターを管理できます。 TiDB クラスターがデプロイされると、そのクラスターが TiUP クラスター リストに表示されます。
 
 リストを表示するには、次のコマンドを実行します。
 
@@ -26,13 +26,13 @@ TiUPクラスタコンポーネントを使用して、複数の TiDB クラス�
 tiup cluster list
 ```
 
-## クラスタを開始する {#start-the-cluster}
+## クラスターを開始する {#start-the-cluster}
 
-TiDBクラスタのコンポーネントは、次の順序で開始されます。
+TiDB クラスター内のコンポーネントは、次の順序で開始されます。
 
 **PD &gt; TiKV &gt; Pump &gt; TiDB &gt; TiFlash &gt; Drainer &gt; TiCDC &gt; Prometheus &gt; Grafana &gt; Alertmanager**
 
-クラスタを開始するには、次のコマンドを実行します。
+クラスターを開始するには、次のコマンドを実行します。
 
 {{< copyable "" >}}
 
@@ -42,7 +42,7 @@ tiup cluster start ${cluster-name}
 
 > **ノート：**
 >
-> `${cluster-name}`をクラスタの名前に置き換えます。クラスタ名を忘れた場合は、 `tiup cluster list`を実行して確認してください。
+> `${cluster-name}`をクラスターの名前に置き換えます。クラスター名を忘れた場合は、 `tiup cluster list`を実行して確認してください。
 
 コマンドに`-R`つまたは`-N`のパラメーターを追加することで、一部のコンポーネントのみを開始できます。例えば：
 
@@ -66,7 +66,7 @@ tiup cluster start ${cluster-name}
 >
 > `-R`または`-N`パラメーターを使用して指定されたコンポーネントを開始する場合は、開始順序が正しいことを確認してください。たとえば、TiKV コンポーネントの前に PD コンポーネントを開始します。そうしないと、起動に失敗する可能性があります。
 
-## クラスタの状態をビューする {#view-the-cluster-status}
+## クラスターの状態をビューする {#view-the-cluster-status}
 
 クラスタを起動したら、各コンポーネントのステータスをチェックして、正常に動作していることを確認します。 TiUP は`display`のコマンドを提供するため、コンポーネントのステータスを表示するためにすべてのマシンにログインする必要はありません。
 
@@ -80,7 +80,7 @@ tiup cluster display ${cluster-name}
 
 クラスタの運用中に、コンポーネントのパラメータを変更する必要がある場合は、 `edit-config`コマンドを実行します。詳細な手順は次のとおりです。
 
-1.  編集モードでクラスタの構成ファイルを開きます。
+1.  編集モードでクラスターの構成ファイルを開きます。
 
     {{< copyable "" >}}
 
@@ -165,7 +165,7 @@ Global Flags:
   -y, --yes               Skip all confirmations and assumes 'yes'
 ```
 
-TiDB ホットフィックス パッケージが`/tmp/tidb-hotfix.tar.gz`にあり、クラスタのすべての TiDB パッケージを置き換えたい場合は、次のコマンドを実行します。
+TiDB ホットフィックス パッケージが`/tmp/tidb-hotfix.tar.gz`にあり、クラスター内のすべての TiDB パッケージを置き換えたい場合は、次のコマンドを実行します。
 
 {{< copyable "" >}}
 
@@ -173,7 +173,7 @@ TiDB ホットフィックス パッケージが`/tmp/tidb-hotfix.tar.gz`にあ�
 tiup cluster patch test-cluster /tmp/tidb-hotfix.tar.gz -R tidb
 ```
 
-クラスタの 1 つの TiDB パッケージのみを置き換えることもできます。
+クラスター内の 1 つの TiDB パッケージのみを置き換えることもできます。
 
 {{< copyable "" >}}
 
@@ -181,9 +181,9 @@ tiup cluster patch test-cluster /tmp/tidb-hotfix.tar.gz -R tidb
 tiup cluster patch test-cluster /tmp/tidb-hotfix.tar.gz -N 172.16.4.5:4000
 ```
 
-## クラスタの名前を変更する {#rename-the-cluster}
+## クラスターの名前を変更する {#rename-the-cluster}
 
-クラスタをデプロイして開始したら、次の`tiup cluster rename`コマンドを使用してクラスタの名前を変更できます。
+クラスターをデプロイして開始したら、次の`tiup cluster rename`コマンドを使用してクラスターの名前を変更できます。
 
 {{< copyable "" >}}
 
@@ -193,16 +193,16 @@ tiup cluster rename ${cluster-name} ${new-name}
 
 > **ノート：**
 >
-> -   クラスタの名前を変更する操作により、監視システム (Prometheus および Grafana) が再起動されます。
-> -   クラスタクラスタの一部のパネルが Grafana に残る場合があります。それらは手動で削除する必要があります。
+> -   クラスターの名前を変更する操作により、監視システム (Prometheus および Grafana) が再起動されます。
+> -   クラスターの名前が変更された後、古いクラスター名の一部のパネルが Grafana に残る場合があります。それらは手動で削除する必要があります。
 
-## クラスタを停止する {#stop-the-cluster}
+## クラスターを停止する {#stop-the-cluster}
 
-TiDBクラスタのコンポーネントは、次の順序で停止されます (監視コンポーネントも停止されます)。
+TiDB クラスター内のコンポーネントは、次の順序で停止されます (監視コンポーネントも停止されます)。
 
 **Alertmanager &gt; Grafana &gt; Prometheus &gt; TiCDC &gt; Drainer &gt; TiFlash &gt; TiDB &gt; Pump &gt; TiKV &gt; PD**
 
-クラスタを停止するには、次のコマンドを実行します。
+クラスターを停止するには、次のコマンドを実行します。
 
 {{< copyable "" >}}
 
@@ -228,11 +228,11 @@ tiup cluster stop ${cluster-name}
     tiup cluster stop ${cluster-name} -N 1.2.3.4:4000,1.2.3.5:4000
     ```
 
-## クラスタデータのクリーンアップ {#clean-up-cluster-data}
+## クラスタ データのクリーンアップ {#clean-up-cluster-data}
 
-クラスタデータをクリーンアップする操作は、すべてのサービスを停止し、データ ディレクトリまたはログ ディレクトリをクリーンアップします。操作を元に戻すことはできないため**、慎重に進めてください**。
+クラスタ データをクリーンアップする操作は、すべてのサービスを停止し、データ ディレクトリまたはログ ディレクトリをクリーンアップします。操作を元に戻すことはできないため**、慎重に進めてください**。
 
--   クラスタのすべてのサービスのデータをクリーンアップしますが、ログは保持します。
+-   クラスター内のすべてのサービスのデータをクリーンアップしますが、ログは保持します。
 
     {{< copyable "" >}}
 
@@ -240,7 +240,7 @@ tiup cluster stop ${cluster-name}
     tiup cluster clean ${cluster-name} --data
     ```
 
--   クラスタのすべてのサービスのログをクリーンアップしますが、データは保持します。
+-   クラスター内のすべてのサービスのログをクリーンアップしますが、データは保持します。
 
     {{< copyable "" >}}
 
@@ -248,7 +248,7 @@ tiup cluster stop ${cluster-name}
     tiup cluster clean ${cluster-name} --log
     ```
 
--   クラスタのすべてのサービスのデータとログをクリーンアップします。
+-   クラスター内のすべてのサービスのデータとログをクリーンアップします。
 
     {{< copyable "" >}}
 
@@ -280,7 +280,7 @@ tiup cluster stop ${cluster-name}
     tiup cluster clean ${cluster-name} --all --ignore-node 172.16.13.12
     ```
 
-## クラスタを破棄する {#destroy-the-cluster}
+## クラスターを破棄する {#destroy-the-cluster}
 
 破棄操作は、サービスを停止し、データ ディレクトリと展開ディレクトリをクリアします。操作を元に戻すことはできないため**、慎重に進めてください**。
 

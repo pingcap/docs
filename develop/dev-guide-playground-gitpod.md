@@ -8,7 +8,7 @@ title: Gitpod
 
 [ギットポッド](https://www.gitpod.io/)を使用すると、ボタンまたはリンクをクリックするだけで、ブラウザで完全な開発環境を取得でき、コードをすぐに記述できます。
 
-Gitpod は、コードを直接作成する開発環境向けのオープンソース Kubernetes アプリケーション (GitHub リポジトリ アドレス: [https://github.com/gitpod-io/gitpod](https://github.com/gitpod-io/gitpod) ) であり、クラウド内でタスクごとに新しい自動化された開発環境を数秒で起動します。開発環境をコードとして記述し、ブラウザまたはデスクトップ IDE から直接、リモートおよびクラウドベースのインスタント開発環境を開始できます。
+Gitpod は、コードを直接作成する開発環境向けのオープンソース Kubernetes アプリケーション (GitHub リポジトリ アドレス: [https://github.com/gitpod-io/gitpod](https://github.com/gitpod-io/gitpod) ) であり、タスクごとに新しい自動化された開発環境をクラウドで数秒で起動します。開発環境をコードとして記述し、ブラウザまたはデスクトップ IDE から直接、リモートおよびクラウドベースのインスタント開発環境を開始できます。
 
 ## クイックスタート {#quick-start}
 
@@ -26,7 +26,7 @@ Gitpod は、コードを直接作成する開発環境向けのオープンソ�
 
 [クイックスタート](#quick-start)のステップを完了した後、Gitpod がワークスペースをセットアップするのにしばらく時間がかかります。
 
-例として[スプリング ブート Web](/develop/dev-guide-sample-application-spring-boot.md)のアプリケーションを取り上げます。 `https://gitpod.io/#targetFile=spring-jpa-hibernate_Makefile,targetMode=spring-jpa-hibernate/https://github.com/pingcap-inc/tidb-example-java` URL で新しいワークスペースを作成できます。
+例として[スプリング ブート ウェブ](/develop/dev-guide-sample-application-spring-boot.md)のアプリケーションを取り上げます。 `https://gitpod.io/#targetFile=spring-jpa-hibernate_Makefile,targetMode=spring-jpa-hibernate/https://github.com/pingcap-inc/tidb-example-java` URL で新しいワークスペースを作成できます。
 
 その後、次のようなページが表示されます。
 
@@ -36,7 +36,7 @@ Gitpod は、コードを直接作成する開発環境向けのオープンソ�
 
 TiDB Playground の準備が整うと、別の`Spring JPA Hibernate`つのタスクが実行されます。ターミナルエリアの右側で進行状況を確認できます。
 
-これらのタスクがすべて完了すると、次のようなページが表示されます。このページで、左側のナビゲーション ペインの`REMOTE EXPLORER`エリアを確認し (Gitpod は URL ベースのポート転送をサポートしています)、ポート`8080`の URL を見つけます。
+これらのタスクがすべて完了すると、次のようなページが表示されます。このページで、左側のナビゲーション ペインの`REMOTE EXPLORER`領域を確認し (Gitpod は URL ベースのポート転送をサポートしています)、ポート`8080`の URL を見つけます。
 
 ![playground gitpod workspace ready](/media/develop/playground-gitpod-workspace-ready.png)
 

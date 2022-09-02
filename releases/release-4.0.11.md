@@ -87,7 +87,7 @@ TiDB バージョン: 4.0.11
     -   関数パラメータの数が無効な場合、生成された列の使用を禁止する[#22174](https://github.com/pingcap/tidb/pull/22174)
     -   実行計画を立てる前にプロセス情報を正しく設定する[#22148](https://github.com/pingcap/tidb/pull/22148)
     -   `IndexLookUp` [#22136](https://github.com/pingcap/tidb/pull/22136)の不正確なランタイム統計の問題を修正
-    -   クラスタがコンテナーにデプロイされている場合のメモリ使用量情報のキャッシュを追加します[#22116](https://github.com/pingcap/tidb/pull/22116)
+    -   クラスターがコンテナーにデプロイされている場合のメモリ使用量情報のキャッシュを追加します[#22116](https://github.com/pingcap/tidb/pull/22116)
     -   デコード プラン エラーの問題を修正します[#22022](https://github.com/pingcap/tidb/pull/22022)
     -   無効なウィンドウ仕様の使用に関するエラーを報告する[#21976](https://github.com/pingcap/tidb/pull/21976)
     -   `PREPARE`ステートメントが`EXECUTE` 、 `DEALLOCATE`または`PREPARE`でネストされている場合にエラーを報告する[#21972](https://github.com/pingcap/tidb/pull/21972)
@@ -121,7 +121,7 @@ TiDB バージョン: 4.0.11
     -   部分的な RawKV 復元範囲の終了キーが[#9583](https://github.com/tikv/tikv/pull/9583)を含む問題を修正します
     -   TiCDC のインクリメンタル スキャン中に、ロールバックされたトランザクションのキーの古い値をロードするときに発生する TiKVpanicの問題を修正します[#9569](https://github.com/tikv/tikv/pull/9569)
     -   異なる設定の変更フィードが 1 つのリージョン[#9565](https://github.com/tikv/tikv/pull/9565)に接続されている場合の古い値の構成の不具合を修正します。
-    -   MAC アドレスのないネットワーク インターフェイスを持つマシンで TiKVクラスタを実行すると発生するクラッシュの問題を修正します (v4.0.9 で導入) [#9516](https://github.com/tikv/tikv/pull/9516)
+    -   MAC アドレスのないネットワーク インターフェイスを持つマシンで TiKV クラスターを実行すると発生するクラッシュの問題を修正します (v4.0.9 で導入) [#9516](https://github.com/tikv/tikv/pull/9516)
     -   巨大なリージョン[#9448](https://github.com/tikv/tikv/pull/9448)をバックアップする際の TiKV OOM の問題を修正
     -   `region-split-check-diff`カスタマイズできない問題を修正[#9530](https://github.com/tikv/tikv/pull/9530)
     -   システム時刻が戻ると TiKVpanicが発生する問題を修正[#9542](https://github.com/tikv/tikv/pull/9542)
@@ -152,7 +152,7 @@ TiDB バージョン: 4.0.11
         -   所有者以外のノードでデバッグ情報を取得するときに発生するpanicの問題を修正します[#1349](https://github.com/pingcap/tiflow/pull/1349)
         -   テーブルの追加または削除時に`ticdc_processor_num_of_tables`および`ticdc_processor_table_resolved_ts`のメトリックが正しく更新されない問題を修正します[#1351](https://github.com/pingcap/tiflow/pull/1351)
         -   テーブルを追加するときにプロセッサがクラッシュした場合にデータが失われる可能性がある問題を修正します[#1363](https://github.com/pingcap/tiflow/pull/1363)
-        -   テーブルの移行中に、所有者が TiCDC サーバーの異常終了につながる可能性があるバグを修正します[#1352](https://github.com/pingcap/tiflow/pull/1352)
+        -   テーブルの移行中に、所有者が TiCDCサーバーの異常終了につながる可能性があるバグを修正します[#1352](https://github.com/pingcap/tiflow/pull/1352)
         -   サービス GC セーフポイントが失われた後、TiCDC が時間内に終了しないというバグを修正します[#1367](https://github.com/pingcap/tiflow/pull/1367)
         -   KV クライアントがイベント フィードの作成をスキップする可能性があるバグを修正します[#1336](https://github.com/pingcap/tiflow/pull/1336)
         -   トランザクションがダウンストリームにレプリケートされると、トランザクションのアトミック性が壊れるバグを修正[#1375](https://github.com/pingcap/tiflow/pull/1375)

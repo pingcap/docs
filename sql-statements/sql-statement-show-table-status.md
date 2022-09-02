@@ -17,7 +17,7 @@ summary: An overview of the usage of SHOW TABLE STATUS for the TiDB database.
 
 ![FromOrIn](/media/sqlgram/FromOrIn.png)
 
-**ステータス テーブル名:**
+**ステータステーブル名:**
 
 ![StatusTableName](/media/sqlgram/StatusTableName.png)
 

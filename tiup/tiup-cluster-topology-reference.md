@@ -4,9 +4,9 @@ title: Topology Configuration File for TiDB Deployment Using TiUP
 
 # TiUP を使用した TiDB 展開用のトポロジConfiguration / コンフィグレーションファイル {#topology-configuration-file-for-tidb-deployment-using-tiup}
 
-TiUP を使用して TiDB をデプロイまたはスケーリングするには、クラスタトポロジーを記述するトポロジー ファイル ( [サンプル](https://github.com/pingcap/tiup/blob/master/embed/examples/cluster/topology.example.yaml) ) を提供する必要があります。
+TiUP を使用して TiDB をデプロイまたはスケーリングするには、クラスター トポロジーを記述するトポロジー ファイル ( [サンプル](https://github.com/pingcap/tiup/blob/master/embed/examples/cluster/topology.example.yaml) ) を提供する必要があります。
 
-同様に、クラスタトポロジを変更するには、トポロジ ファイルを変更する必要があります。違いは、クラスタがデプロイされた後は、トポロジー ファイル内のフィールドの一部しか変更できないことです。このドキュメントでは、トポロジ ファイルの各セクションと、各セクションの各フィールドについて説明します。
+同様に、クラスタ トポロジを変更するには、トポロジ ファイルを変更する必要があります。違いは、クラスターがデプロイされた後は、トポロジー ファイル内のフィールドの一部しか変更できないことです。このドキュメントでは、トポロジ ファイルの各セクションと、各セクションの各フィールドについて説明します。
 
 ## ファイル構造 {#file-structure}
 
@@ -32,13 +32,13 @@ TiUP を使用した TiDB 展開のトポロジ構成ファイルには、次の
 
 `global`セクションはクラスターのグローバル構成に対応し、次のフィールドがあります。
 
--   `user` : デプロイされたクラスタの開始に使用されたユーザー。デフォルト値は`"tidb"`です。 `<user>`フィールドで指定されたユーザーがターゲット マシンに存在しない場合、このユーザーは自動的に作成されます。
+-   `user` : デプロイされたクラスターの開始に使用されたユーザー。デフォルト値は`"tidb"`です。 `<user>`フィールドで指定されたユーザーがターゲット マシンに存在しない場合、このユーザーは自動的に作成されます。
 
 -   `group` : ユーザーが属するユーザー グループ。ユーザーの作成時に指定します。値のデフォルトは`<user>`フィールドの値です。指定したグループが存在しない場合は、自動的に作成されます。
 
 -   `ssh_port` : 操作対象のマシンに接続する SSH ポートを指定します。デフォルト値は`22`です。
 
--   `enable_tls` :クラスタで TLS を有効にするかどうかを指定します。 TLS を有効にした後、生成された TLS 証明書をコンポーネント間の接続またはクライアントとコンポーネント間の接続に使用する必要があります。**一度有効にすると、無効にすることはできません**。デフォルト値は`false`です。
+-   `enable_tls` : クラスターで TLS を有効にするかどうかを指定します。 TLS を有効にした後、生成された TLS 証明書をコンポーネント間の接続またはクライアントとコンポーネント間の接続に使用する必要があります。**一度有効にすると、無効にすることはできません**。デフォルト値は`false`です。
 
 -   `deploy_dir` : 各コンポーネントの配置ディレクトリ。デフォルト値は`"deployed"`です。その適用規則は次のとおりです。
 
@@ -91,7 +91,7 @@ global:
     memory_limit: "2G"
 ```
 
-上記の構成では、 `tidb`人のユーザーがクラスタの開始に使用されます。同時に、各コンポーネントは実行時に最大 2 GB のメモリに制限されます。
+上記の構成では、 `tidb`人のユーザーを使用してクラスターを開始します。同時に、各コンポーネントは実行時に最大 2 GB のメモリに制限されます。
 
 ### <code>monitored</code> {#code-monitored-code}
 
@@ -654,13 +654,13 @@ tispark_workers:
 
 -   `storage_retention` : Prometheus モニタリング データの保持時間。デフォルト値は`"30d"`です。
 
--   `rule_dir` : 完全な`*.rules.yml`のファイルを含む必要があるローカル ディレクトリを指定します。これらのファイルは、Prometheus のルールとして、クラスタ構成の初期化フェーズ中にターゲット マシンに転送されます。
+-   `rule_dir` : 完全な`*.rules.yml`のファイルを含む必要があるローカル ディレクトリを指定します。これらのファイルは、Prometheus のルールとして、クラスター構成の初期化フェーズ中にターゲット マシンに転送されます。
 
 -   `remote_config` : リモートへの Prometheus データの書き込み、またはリモートからのデータの読み取りをサポートします。このフィールドには 2 つの構成があります。
     -   `remote_write` : Prometheus ドキュメント[`&#x3C;remote_write>`](https://prometheus.io/docs/prometheus/latest/configuration/configuration/#remote_write)を参照してください。
     -   `remote_read` : Prometheus ドキュメント[`&#x3C;remote_read>`](https://prometheus.io/docs/prometheus/latest/configuration/configuration/#remote_read)を参照してください。
 
--   `external_alertmanagers` : `external_alertmanagers`フィールドが構成されている場合、Prometheus は構成動作をクラスタ外の Alertmanager にアラートします。このフィールドは配列であり、その各要素は外部 Alertmanager であり、 `host`および`web_port`フィールドで構成されています。
+-   `external_alertmanagers` : `external_alertmanagers`フィールドが構成されている場合、Prometheus は構成動作をクラスター外の Alertmanager にアラートします。このフィールドは配列であり、その各要素は外部 Alertmanager であり、 `host`および`web_port`フィールドで構成されています。
 
 -   `os` : `host`で指定されたマシンのオペレーティング システム。このフィールドが指定されていない場合、デフォルト値は`global`の`os`の値です。
 
@@ -721,15 +721,15 @@ monitoring_servers:
 
 -   `password` : Grafana に対応するパスワード。
 
--   `dashboard_dir` : 完全な`dashboard(*.json)`のファイルを含む必要があるローカル ディレクトリを指定します。これらのファイルは、クラスタ構成の初期化フェーズ中に、Grafana のダッシュボードとしてターゲット マシンに転送されます。
+-   `dashboard_dir` : 完全な`dashboard(*.json)`のファイルを含む必要があるローカル ディレクトリを指定します。これらのファイルは、クラスター構成の初期化フェーズ中に、Grafana のダッシュボードとしてターゲット マシンに転送されます。
 
 -   `resource_control` : サービスのリソース制御。このフィールドが設定されている場合、フィールドの内容は`resource_control`の内容を`global`つにマージされます (2 つのフィールドが重複する場合、このフィールドの内容が有効になります)。次に、systemd 構成ファイルが生成され、 `host`で指定されたマシンに送信されます。 `resource_control`の構成ルールは`global`の`resource_control`の内容と同じです。
 
 > **ノート：**
 >
-> `grafana_servers`の`dashboard_dir`フィールドが構成されている場合、 `tiup cluster rename`コマンドを実行してクラスタの名前を変更した後、次の操作を実行する必要があります。
+> `grafana_servers`の`dashboard_dir`フィールドが構成されている場合、 `tiup cluster rename`コマンドを実行してクラスターの名前を変更した後、次の操作を実行する必要があります。
 >
-> 1.  ローカル ダッシュボード ディレクトリ内の`*.json`ファイルについて、 `datasource`フィールドの値を新しいクラスタ名に更新します ( `datasource`はクラスタ名にちなんで命名されているため)。
+> 1.  ローカル ダッシュボード ディレクトリ内の`*.json`ファイルについて、 `datasource`フィールドの値を新しいクラスター名に更新します ( `datasource`はクラスター名にちなんで命名されているため)。
 > 2.  `tiup cluster reload -R grafana`コマンドを実行します。
 
 上記のフィールドについては、展開後にこれらの構成済みフィールドを変更することはできません。
@@ -768,7 +768,7 @@ grafana_servers:
 
 -   `numa_node` : NUMA ポリシーをインスタンスに割り当てます。このフィールドを指定する前に、ターゲット マシンに[numactl](https://linux.die.net/man/8/numactl)がインストールされていることを確認する必要があります。このフィールドが指定されている場合、 cpubind および membind ポリシーは[numactl](https://linux.die.net/man/8/numactl)を使用して割り当てられます。このフィールドは文字列型です。フィールド値は、「0,1」などの NUMA ノードの ID です。
 
--   `config_file` : Alertmanager の構成として、クラスタ構成の初期化フェーズ中にターゲット マシンに転送されるローカル ファイルを指定します。
+-   `config_file` : Alertmanager の構成として、クラスター構成の初期化フェーズ中にターゲット マシンに転送されるローカル ファイルを指定します。
 
 -   `os` : `host`で指定されたマシンのオペレーティング システム。このフィールドが指定されていない場合、デフォルト値は`global`の`os`の値です。
 

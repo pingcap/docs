@@ -5,7 +5,7 @@ summary: Learn how to resolve type conversion and duplication errors during data
 
 # TiDB Lightningエラーの解決 {#tidb-lightning-error-resolution}
 
-v5.4.0 から、無効な型変換や一意キーの競合などのエラーをスキップし、それらの間違った行データが存在しないかのようにデータ処理を続行するようにTiDB Lightningを構成できます。後でエラーを読んで手動で修正するためのレポートが生成されます。これは、手動でエラーを見つけることが難しく、発生するたびにTiDB Lightningを再起動するのがコストがかかる、少し汚れたデータ ソースからインポートするのに理想的です。
+v5.4.0 から、無効な型変換や一意キーの競合などのエラーをスキップし、それらの間違った行データが存在しないかのようにデータ処理を続行するようにTiDB Lightningを構成できます。後でエラーを読んで手動で修正するためのレポートが生成されます。これは、手動でエラーを見つけるのが難しく、発生するたびにTiDB Lightningを再起動するのがコストがかかる、少し汚れたデータ ソースからインポートするのに理想的です。
 
 このドキュメントでは、型エラー機能 ( `lightning.max-error` ) と重複解決機能 ( `tikv-importer.duplicate-resolution` ) の使用方法を紹介します。また、これらのエラーが保存されるデータベースについても紹介します ( `lightning.task-info-schema-name` )。このドキュメントの最後に、例を示します。
 
@@ -66,7 +66,7 @@ TiDB Lightning重複解決は、データ ソース内でのみ重複データ�
 
 -   ターミナルのエラー レポートは、次の表のようになります。
 
-    |   | エラーの種類  | エラー数 | エラーデータ表                                 |
+    |   | エラーの種類  | エラー数 | エラーデータテーブル                              |
     | - | ------- | ---- | --------------------------------------- |
     | 1 | データ・タイプ | 1000 | `lightning_task_info` . `type_error_v1` |
 
@@ -76,7 +76,7 @@ TiDB Lightning重複解決は、データ ソース内でのみ重複データ�
     [2022/03/13 05:33:57.736 +08:00] [WARN] [errormanager.go:459] ["Detect 1000 data type errors in total, please refer to table `lightning_task_info`.`type_error_v1` for more details"]
     ```
 
-すべてのエラーは、下流の TiDBクラスタの`lightning_task_info`データベース内のテーブルに書き込まれます。インポートが完了した後、エラー データが収集されている場合は、データベース内のエラーを表示して手動で処理できます。
+すべてのエラーは、ダウンストリーム TiDB クラスターの`lightning_task_info`データベース内のテーブルに書き込まれます。インポートが完了した後、エラー データが収集されている場合は、データベース内のエラーを表示して手動で処理できます。
 
 `lightning.task-info-schema-name`を構成することにより、データベース名を変更できます。
 

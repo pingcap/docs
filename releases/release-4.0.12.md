@@ -19,7 +19,7 @@ TiDB バージョン: 4.0.12
 -   TiDB
 
     -   `batch cop`モード[#23164](https://github.com/pingcap/tidb/pull/23164)の`EXPLAIN`ステートメントの出力情報を絞り込む
-    -   `EXPLAIN`文の出力にストレージ層にプッシュできない式の警告情報を追加[#23020](https://github.com/pingcap/tidb/pull/23020)
+    -   `EXPLAIN`文の出力にストレージレイヤーにプッシュできない式の警告情報を追加[#23020](https://github.com/pingcap/tidb/pull/23020)
     -   DDL パッケージコードの一部を`Execute` / `ExecRestricted`から安全な API に移行する (2) [#22935](https://github.com/pingcap/tidb/pull/22935)
     -   DDL パッケージコードの一部を`Execute` / `ExecRestricted`から安全な API に移行する (1) [#22929](https://github.com/pingcap/tidb/pull/22929)
     -   スローログ[#22918](https://github.com/pingcap/tidb/pull/22918)に`optimization-time`と`wait-TS-time`を追加します。
@@ -65,7 +65,7 @@ TiDB バージョン: 4.0.12
 
     -   TiDB Lightning
 
-        -   予期しないエラーを回避するために、 TiDB Lightningを実行する前に TiDBクラスタのバージョンを確認してください[#787](https://github.com/pingcap/br/pull/787)
+        -   予期しないエラーを回避するために、 TiDB Lightningを実行する前に TiDB クラスターのバージョンを確認してください[#787](https://github.com/pingcap/br/pull/787)
         -   TiDB Lightningが`cancel`エラー[#867](https://github.com/pingcap/br/pull/867)を満たすとすぐに失敗する
         -   `tikv-importer.engine-mem-cache-size`と`tikv-importer.local-writer-mem-cache-size`の構成項目を追加して、メモリ使用量とパフォーマンスのバランスを取る[#866](https://github.com/pingcap/br/pull/866)
         -   TiDB Lightning の Local-backend に対して`batch split region`を並行して実行し、インポート速度を向上させます[#868](https://github.com/pingcap/br/pull/868)

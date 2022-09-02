@@ -5,11 +5,11 @@ summary: Learn how to determine the size of your TiDB Cloud cluster.
 
 # TiDB のサイズを決定する {#determine-your-tidb-size}
 
-このドキュメントでは、Dedicated Tierクラスタのサイズを決定する方法について説明します。
+このドキュメントでは、Dedicated Tier クラスターのサイズを決定する方法について説明します。
 
 > **ノート：**
 >
-> [開発者層クラスタ](/tidb-cloud/select-cluster-tier.md#developer-tier)にはデフォルトのクラスタサイズが付属しており、変更することはできません。
+> [開発者層クラスター](/tidb-cloud/select-cluster-tier.md#developer-tier)にはデフォルトのクラスター サイズが付属しており、変更することはできません。
 
 ## サイズ TiDB {#size-tidb}
 
@@ -35,7 +35,7 @@ TiDB のノード サイズとノード数の両方を構成できます。
 
 ### TiDB ノード数 {#tidb-node-quantity}
 
-高可用性のために、 TiDB Cloudクラスタごとに少なくとも 2 つの TiDB ノードを構成することをお勧めします。
+高可用性のために、 TiDB Cloudクラスターごとに少なくとも 2 つの TiDB ノードを構成することをお勧めします。
 
 TiDB サイズを決定する方法の詳細については、 [パフォーマンス リファレンス](#performance-reference)を参照してください。
 
@@ -70,7 +70,7 @@ TiDB Cloudは、耐久性と高可用性を実現するために、選択した�
 
 > **ノート：**
 >
-> TiDBクラスタをスケーリングすると、3 つのアベイラビリティーゾーンのノードが同時に増減します。ニーズに基づいて TiDBクラスタをスケールインまたはスケールアウトする方法については、 [TiDB クラスターをスケーリングする](/tidb-cloud/scale-tidb-cluster.md)を参照してください。
+> TiDB クラスターをスケーリングすると、3 つのアベイラビリティーゾーンのノードが同時に増減します。ニーズに基づいて TiDB クラスターをスケールインまたはスケールアウトする方法については、 [TiDBクラスタをスケーリングする](/tidb-cloud/scale-tidb-cluster.md)を参照してください。
 
 TiKV ノードの最小数: `ceil(compressed size of your data ÷ one TiKV capacity) × the number of replicas`
 
@@ -89,7 +89,7 @@ TiKV サイズを決定する方法の詳細については、 [パフォーマ�
 
 > **ノート：**
 >
-> クラスタの作成後に TiKV ストレージ サイズを減らすことはできません。
+> クラスターの作成後に TiKV ストレージ サイズを減らすことはできません。
 
 ## サイズ TiFlash {#size-tiflash}
 
@@ -108,7 +108,7 @@ TiDB または TiKV の vCPU サイズが**4 vCPU、16 GiB に**設定されて�
 
 ### TiFlash ノード数 {#tiflash-node-quantity}
 
-TiDB Cloudは、リージョン内の異なるアベイラビリティ ゾーンに TiFlash ノードを均等にデプロイします。各TiDB Cloudクラスタで少なくとも 2 つの TiFlash ノードを構成し、実稼働環境での高可用性のためにデータの少なくとも 2 つのレプリカを作成することをお勧めします。
+TiDB Cloudは、リージョン内の異なるアベイラビリティ ゾーンに TiFlash ノードを均等にデプロイします。各TiDB Cloudクラスターで少なくとも 2 つの TiFlash ノードを構成し、実稼働環境での高可用性のためにデータの少なくとも 2 つのレプリカを作成することをお勧めします。
 
 TiFlash ノードの最小数は、特定のテーブルの TiFlash レプリカ数によって異なります。
 
@@ -124,11 +124,11 @@ TiFlash は最大 2 TiB のストレージ容量をサポートします。
 
 > **ノート：**
 >
-> クラスタの作成後に TiFlash ストレージのサイズを減らすことはできません。
+> クラスターの作成後に TiFlash ストレージのサイズを減らすことはできません。
 
 ## パフォーマンス リファレンス {#performance-reference}
 
-このセクションでは、5 つの一般的な TiDBクラスタスケールの[TPC-C](https://www.tpc.org/tpcc/)と[シスベンチ](https://github.com/akopytov/sysbench)のパフォーマンス テスト結果を提供します。これは、クラスタサイズを決定する際の参考として使用できます。
+このセクションでは、5 つの一般的な TiDB クラスター スケールの[TPC-C](https://www.tpc.org/tpcc/)と[シスベンチ](https://github.com/akopytov/sysbench)のパフォーマンス テスト結果を提供します。これは、クラスター サイズを決定する際の参考として使用できます。
 
 テスト環境：
 
@@ -142,7 +142,7 @@ TiFlash は最大 2 TiB のストレージ容量をサポートします。
 
 <details><summary>TiDB: 4 vCPU * 2; TiKV: 4 vCPU * 3</summary>
 
--   低レイテンシで最適なパフォーマンス
+-   低レイテンシーで最適なパフォーマンス
 
     TPC-C パフォーマンス:
 
@@ -182,7 +182,7 @@ TiFlash は最大 2 TiB のストレージ容量をサポートします。
 
 <details><summary>TiDB: 8 vCPU * 2; TiKV: 8 vCPU * 3</summary>
 
--   低レイテンシで最適なパフォーマンス
+-   低レイテンシーで最適なパフォーマンス
 
     TPC-C パフォーマンス:
 
@@ -222,7 +222,7 @@ TiFlash は最大 2 TiB のストレージ容量をサポートします。
 
 <details><summary>TiDB: 8 vCPU * 4; TiKV: 8 vCPU * 6</summary>
 
--   低レイテンシで最適なパフォーマンス
+-   低レイテンシーで最適なパフォーマンス
 
     TPC-C パフォーマンス:
 
@@ -262,7 +262,7 @@ TiFlash は最大 2 TiB のストレージ容量をサポートします。
 
 <details><summary>TiDB: 16 vCPU * 2; TiKV: 16 vCPU * 3</summary>
 
--   低レイテンシで最適なパフォーマンス
+-   低レイテンシーで最適なパフォーマンス
 
     TPC-C パフォーマンス:
 
@@ -302,7 +302,7 @@ TiFlash は最大 2 TiB のストレージ容量をサポートします。
 
 <details><summary>TiDB: 16 vCPU * 4; TiKV: 16 vCPU * 6</summary>
 
--   低レイテンシで最適なパフォーマンス
+-   低レイテンシーで最適なパフォーマンス
 
     TPC-C パフォーマンス:
 

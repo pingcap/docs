@@ -5,7 +5,7 @@ summary: Learn about the log auditing feature for the TiDB Cloud Console.
 
 # コンソール監査ログ {#console-audit-logging}
 
-TiDB Cloudは、 TiDB Cloudコンソール操作の監査ログ機能を提供します。これは、ユーザー アクセスの詳細 (コンソールへのユーザー ログインやクラスタ作成操作など) の履歴を記録します。
+TiDB Cloudは、 TiDB Cloudコンソール操作の監査ログ機能を提供します。これは、ユーザー アクセスの詳細 (コンソールへのユーザー ログインやクラスター作成操作など) の履歴を記録します。
 
 > **ノート：**
 >
@@ -56,13 +56,13 @@ TiDB Cloud Console でのすべてのユーザー操作は、イベントとし�
 | AuditEventGetProjectCIDR             | リージョンの CIDR を一覧表示する               |
 | AuditEventGetProjectRegionCIDR       | プロジェクト内のすべての CIDR を一覧表示する         |
 | AuditEventDeleteBackupInRecycleBin   | ごみ箱にある削除済みクラスターのバックアップを削除する       |
-| AuditEventChangeClusterRootPassword  | クラスタのルート パスワードをリセットする             |
+| AuditEventChangeClusterRootPassword  | クラスターのルート パスワードをリセットする            |
 | AuditEventCreateImportTask           | インポート タスクを作成する                    |
 | AuditEventCancleImportTask           | インポート タスクをキャンセルする                 |
 | AuditEventExitImportTask             | インポート タスクを終了する                    |
-| AuditEventCreateCluster              | クラスタを作成する                         |
-| AuditEventDeleteCluster              | クラスタを削除する                         |
-| AuditEventScaleCluster               | クラスタをスケーリングする                     |
+| AuditEventCreateCluster              | クラスターを作成する                        |
+| AuditEventDeleteCluster              | クラスターを削除する                        |
+| AuditEventScaleCluster               | クラスターをスケーリングする                    |
 | AuditEventCreateBackup               | バックアップを作成する                       |
 | AuditEventDeleteBackup               | バックアップを削除する                       |
 | AuditEventRestoreBackup              | バックアップからの復元                       |
@@ -114,8 +114,8 @@ TiDB Cloud Console でのすべてのユーザー操作は、イベントとし�
 | AuditEventAddNewPaymentMethod   | カード番号                    | ストリング           | 支払いカード番号 (情報が鈍感化されています)                               |
 | AuditEventUpdatePaymentMethod   | カード番号                    | ストリング           | 支払いカード番号 (情報が鈍感化されています)<br/> (現在、完全なフィールド情報を取得していません) |
 | AuditEventDeletePaymentMethod   |                          |                 | (現在、完全なフィールド情報を取得していません)                              |
-| AuditEventCreateCluster         | クラスタ名                    | ストリング           | クラスター名                                                |
-| AuditEventDeleteCluster         | クラスター名                   | ストリング           | クラスタ名                                                 |
+| AuditEventCreateCluster         | クラスタ名                    | ストリング           | クラスタ名                                                 |
+| AuditEventDeleteCluster         | クラスタ名                    | ストリング           | クラスタ名                                                 |
 | AuditEventCreateBackup          | バックアップ名                  | ストリング           | バックアップ名                                               |
 | AuditEventRestoreBackup         | クラスター名                   | ストリング           | クラスタ名                                                 |
 | AuditEventUpdateAuditLogStatus  | enableAuditLog           | ブール             | データベース監査ログを有効または無効にする                                 |

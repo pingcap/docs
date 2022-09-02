@@ -5,7 +5,7 @@ summary: Learn the METRICS_SUMMARY system table.
 
 # METRICS_SUMMARY {#metrics-summary}
 
-TiDBクラスタには、多くの監視メトリックがあります。異常な監視メトリックを簡単に検出できるようにするために、TiDB 4.0 では次の 2 つの監視概要テーブルが導入されています。
+TiDB クラスターには、多くの監視メトリックがあります。異常な監視メトリックを簡単に検出できるようにするために、TiDB 4.0 では次の 2 つの監視概要テーブルが導入されています。
 
 -   `information_schema.metrics_summary`
 -   `information_schema.metrics_summary_by_label`
@@ -45,7 +45,7 @@ DESC metrics_summary;
 
 例えば：
 
-`'2020-03-08 13:23:00', '2020-03-08 13: 33: 00'`の時間範囲内で TiDBクラスタの平均消費時間が最も長い監視項目の 3 つのグループをクエリするには、 `information_schema.metrics_summary`テーブルを直接クエリし、 `/*+ time_range() */`ヒントを使用して時間範囲を指定します。 SQL ステートメントは次のとおりです。
+`'2020-03-08 13:23:00', '2020-03-08 13: 33: 00'`の時間範囲内で TiDB クラスターの平均消費時間が最も長い監視項目の 3 つのグループをクエリするには、 `information_schema.metrics_summary`テーブルを直接クエリし、 `/*+ time_range() */`ヒントを使用して時間範囲を指定します。 SQL ステートメントは次のとおりです。
 
 {{< copyable "" >}}
 

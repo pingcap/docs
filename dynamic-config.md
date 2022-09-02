@@ -5,9 +5,9 @@ summary: Learn how to change the cluster configuration online.
 
 # Configuration / コンフィグレーションをオンラインで変更する {#modify-configuration-online}
 
-このドキュメントでは、クラスタ構成をオンラインで変更する方法について説明します。
+このドキュメントでは、クラスター構成をオンラインで変更する方法について説明します。
 
-クラスタコンポーネントを再起動せずに、SQL ステートメントを使用してオンラインでコンポーネント (TiDB、TiKV、および PD を含む) の構成を更新できます。現在、TiDB インスタンスの構成を変更する方法は、他のコンポーネント (TiKV や PD など) の構成を変更する方法とは異なります。
+クラスター コンポーネントを再起動せずに、SQL ステートメントを使用してオンラインでコンポーネント (TiDB、TiKV、および PD を含む) の構成を更新できます。現在、TiDB インスタンスの構成を変更する方法は、他のコンポーネント (TiKV や PD など) の構成を変更する方法とは異なります。
 
 ## 共通操作 {#common-operations}
 
@@ -15,7 +15,7 @@ summary: Learn how to change the cluster configuration online.
 
 ### インスタンス構成のビュー {#view-instance-configuration}
 
-クラスタのすべてのインスタンスの構成を表示するには、 `show config`ステートメントを使用します。結果は次のとおりです。
+クラスター内のすべてのインスタンスの構成を表示するには、 `show config`ステートメントを使用します。結果は次のとおりです。
 
 {{< copyable "" >}}
 
@@ -111,7 +111,7 @@ show warnings;
 1 row in set (0.00 sec)
 ```
 
-バッチ変更は原子性を保証しません。変更は、一部のインスタンスでは成功する可能性がありますが、他のインスタンスでは失敗する可能性があります。 `set tikv key=val`を使用して TiKVクラスタ全体の構成を変更すると、一部のインスタンスで変更が失敗する可能性があります。 `show warnings`を使用して結果を確認できます。
+バッチ変更は原子性を保証しません。変更は、一部のインスタンスでは成功する可能性がありますが、他のインスタンスでは失敗する可能性があります。 `set tikv key=val`を使用して TiKV クラスター全体の構成を変更すると、一部のインスタンスで変更が失敗する可能性があります。 `show warnings`を使用して結果を確認できます。
 
 一部の変更が失敗した場合は、対応するステートメントを再実行するか、失敗した各インスタンスを変更する必要があります。ネットワークの問題やマシンの障害が原因で一部の TiKV インスタンスにアクセスできない場合は、それらのインスタンスが回復した後にこれらのインスタンスを変更します。
 
@@ -180,7 +180,7 @@ show warnings;
 | `gc.batch-keys`                                           | 1 回のバッチで処理されるキーの数                                                                                                                                        |
 | `gc.max-write-bytes-per-sec`                              | 1 秒あたりに RocksDB に書き込むことができる最大バイト数                                                                                                                        |
 | `gc.enable-compaction-filter`                             | 圧縮フィルターを有効にするかどうか                                                                                                                                        |
-| `gc.compaction-filter-skip-version-check`                 | コンパクション フィルタのクラスタバージョン チェックをスキップするかどうか (未公開)                                                                                                             |
+| `gc.compaction-filter-skip-version-check`                 | コンパクション フィルタのクラスタ バージョン チェックをスキップするかどうか (未公開)                                                                                                            |
 | `{db-name}.max-total-wal-size`                            | 合計 WAL の最大サイズ                                                                                                                                            |
 | `{db-name}.max-background-jobs`                           | RocksDB のバックグラウンド スレッドの数                                                                                                                                 |
 | `{db-name}.max-background-flushes`                        | RocksDB のフラッシュ スレッドの最大数                                                                                                                                  |
@@ -253,7 +253,7 @@ Query OK, 0 rows affected (0.01 sec)
 | Configuration / コンフィグレーション項目               | 説明                                       |
 | :----------------------------------------- | :--------------------------------------- |
 | `log.level`                                | ログレベル                                    |
-| `cluster-version`                          | クラスタのバージョン                               |
+| `cluster-version`                          | クラスターのバージョン                              |
 | `schedule.max-merge-region-size`           | `Region Merge`のサイズ制限を制御します (MiB 単位)      |
 | `schedule.max-merge-region-keys`           | `Region Merge`キーの最大数を指定します               |
 | `schedule.patrol-region-interval`          | リージョンのヘルス状態をチェックする頻度を決定し`replicaChecker` |
@@ -279,13 +279,13 @@ Query OK, 0 rows affected (0.01 sec)
 | `schedule.enable-cross-table-merge`        | クロステーブル マージを有効にするかどうかを決定します              |
 | `schedule.enable-one-way-merge`            | 次の隣接するリージョンとのマージのみを許可する、一方向のマージを有効にします   |
 | `replication.max-replicas`                 | レプリカの最大数を設定します                           |
-| `replication.location-labels`              | TiKVクラスタのトポロジー情報                         |
+| `replication.location-labels`              | TiKV クラスターのトポロジー情報                       |
 | `replication.enable-placement-rules`       | 配置ルールを有効にします                             |
 | `replication.strictly-match-label`         | ラベル チェックを有効にします                          |
 | `pd-server.use-region-storage`             | 独立したリージョンストレージを有効にします                    |
 | `pd-server.max-gap-reset-ts`               | タイムスタンプ (BR) をリセットする最大間隔を設定します。          |
-| `pd-server.key-type`                       | クラスタキーのタイプを設定します                         |
-| `pd-server.metric-storage`                 | クラスタメトリックのストレージ アドレスを設定します               |
+| `pd-server.key-type`                       | クラスタ キーのタイプを設定します                        |
+| `pd-server.metric-storage`                 | クラスタ メトリックのストレージ アドレスを設定します              |
 | `pd-server.dashboard-address`              | ダッシュボードのアドレスを設定します                       |
 | `replication-mode.replication-mode`        | バックアップモードを設定します                          |
 

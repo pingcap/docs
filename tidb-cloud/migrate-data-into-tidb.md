@@ -31,7 +31,7 @@ MySQL 互換データベースから TiDB にデータを移行する前に、�
 
 ## ステップ 1. TiUP をインストールする {#step-1-install-tiup}
 
-TiUP は TiDB エコシステムのパッケージ マネージャーであり、たった 1 行のコマンドで任意の TiDBクラスタコンポーネントを実行するのに役立ちます。このドキュメントでは、TiUP を使用してDumplingとTiDB Lightningをインストールして実行します。
+TiUP は TiDB エコシステムのパッケージ マネージャーであり、たった 1 行のコマンドで任意の TiDB クラスター コンポーネントを実行するのに役立ちます。このドキュメントでは、TiUP を使用してDumplingとTiDB Lightningをインストールして実行します。
 
 1.  TiUP をダウンロードしてインストールします。
 
@@ -92,7 +92,7 @@ TiUP は TiDB エコシステムのパッケージ マネージャーであり�
 -   ソース データが Amazon S3 クラウド ストレージにある場合は、次の手順を実行します。
 
     1.  Amazon S3 アクセスを構成して、TiDB クラウドが Amazon S3 バケット内のソース データにアクセスできるようにします。詳細については、 [Amazon S3 アクセスを構成する](/tidb-cloud/config-s3-and-gcs-access.md#configure-amazon-s3-access)を参照してください。
-    2.  TiDB Cloudコンソールから TiDB クラスター ページに移動し、ターゲットクラスタの名前をクリックして、独自の概要ページに移動します。右上隅にある [**データのインポート**] をクリックし、[<strong>データのインポート タスク</strong>] ページでインポート関連の情報を入力します。
+    2.  TiDB Cloudコンソールから TiDB クラスター ページに移動し、ターゲット クラスターの名前をクリックして、独自の概要ページに移動します。右上隅にある [**データのインポート**] をクリックし、[<strong>データのインポート タスク</strong>] ページでインポート関連の情報を入力します。
 
 -   ソース データがローカル ファイルにある場合は、次のいずれかを実行します。
 
@@ -153,7 +153,7 @@ TiUP は TiDB エコシステムのパッケージ マネージャーであり�
         no-schema = false
         ```
 
-        ターゲット TiDBクラスタで TLS を構成する場合、またはさらに構成を行う場合は、 [TiDB LightningConfiguration / コンフィグレーション](https://docs.pingcap.com/tidb/stable/tidb-lightning-configuration)を参照してください。
+        ターゲット TiDB クラスターで TLS を構成する場合、またはさらに構成を行う場合は、 [TiDB LightningConfiguration / コンフィグレーション](https://docs.pingcap.com/tidb/stable/tidb-lightning-configuration)を参照してください。
 
 3.  TiDB Lightningを使用して TiDB にデータをインポートします。
 

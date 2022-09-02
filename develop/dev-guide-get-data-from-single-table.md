@@ -17,13 +17,13 @@ summary: This document describes how to query data from a single table in a data
 
 <CustomContent platform="tidb">
 
-1.  TiDBクラスタを構築します ( [TiDB Cloud](/develop/dev-guide-build-cluster-in-cloud.md)または[TiUP](/production-deployment-using-tiup.md)を使用することをお勧めします)。
+1.  TiDB クラスターを構築します ( [TiDB Cloud](/develop/dev-guide-build-cluster-in-cloud.md)または[TiUP](/production-deployment-using-tiup.md)を使用することをお勧めします)。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-1.  [TiDB Cloud](/develop/dev-guide-build-cluster-in-cloud.md)を使用して TiDBクラスタを構築します。
+1.  [TiDB Cloud](/develop/dev-guide-build-cluster-in-cloud.md)を使用して TiDB クラスターを構築します。
 
 </CustomContent>
 

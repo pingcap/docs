@@ -42,7 +42,7 @@ TiDB クラスターに関するメトリック データを[データドッグ]
 
 1.  [データドッグ](https://app.datadoghq.com)にログインします。
 2.  Datadog の**TiDB Cloud統合**ページ ( [https://app.datadoghq.com/account/settings#integrations/tidb-cloud](https://app.datadoghq.com/account/settings#integrations/tidb-cloud) ) に移動します。
-3.  [**Configuration / コンフィグレーション**] タブで、 [<strong>統合のインストール</strong>] をクリックします。 [**TiDBCloud クラスターの概要**](https://app.datadoghq.com/dash/integration/30586/tidbcloud-cluster-overview)ダッシュボードが[**ダッシュボード一覧**](https://app.datadoghq.com/dashboard/lists)に表示されます。
+3.  [**Configuration / コンフィグレーション**] タブで、 [<strong>統合のインストール</strong>] をクリックします。 [**TiDBCloudクラスタの概要**](https://app.datadoghq.com/dash/integration/30586/tidbcloud-cluster-overview)ダッシュボードが[**ダッシュボード一覧**](https://app.datadoghq.com/dashboard/lists)に表示されます。
 
 ## 事前構築済みのダッシュボード {#pre-built-dashboard}
 
@@ -56,7 +56,7 @@ Datadog は、TiDB クラスターの次のメトリクス データを追跡し
 | :------------------------------------- | :----- | :------------------------------------------------------------------------------------------------------------------- | :------------------------------ |
 | tidb_cloud.db_queries_total            | カウント   | sql_type: `Select\|Insert\|...`<br/>クラスタ名: `<cluster name>`<br/>インスタンス: `tidb-0\|tidb-1…`<br/>コンポーネント: `tidb`        | 実行されたステートメントの総数                 |
 | tidb_cloud.db_failed_queries_total     | カウント   | タイプ: `planner:xxx\|executor:2345\|...`<br/>クラスタ名: `<cluster name>`<br/>インスタンス: `tidb-0\|tidb-1…`<br/>コンポーネント: `tidb` | 実行エラーの総数                        |
-| tidb_cloud.db_connections              | ゲージ    | クラスタ名: `<cluster name>`<br/>インスタンス: `tidb-0\|tidb-1…`<br/>コンポーネント: `tidb`                                            | TiDB サーバーの現在の接続数                |
+| tidb_cloud.db_connections              | ゲージ    | クラスタ名: `<cluster name>`<br/>インスタンス: `tidb-0\|tidb-1…`<br/>コンポーネント: `tidb`                                            | TiDBサーバーの現在の接続数                 |
 | tidb_cloud.db_query_duration_seconds   | ヒストグラム | sql_type: `Select\|Insert\|...`<br/>クラスタ名: `<cluster name>`<br/>インスタンス: `tidb-0\|tidb-1…`<br/>コンポーネント: `tidb`        | ステートメントの期間ヒストグラム                |
 | tidb_cloud.node_storage_used_bytes     | ゲージ    | クラスタ名: `<cluster name>`<br/>インスタンス: `tikv-0\|tikv-1…\|tiflash-0\|tiflash-1…`<br/>コンポーネント: `tikv\|tiflash`            | TiKV/TiFlash ノードのディスク使用量バイト     |
 | tidb_cloud.node_storage_capacity_bytes | ゲージ    | クラスタ名: `<cluster name>`<br/>インスタンス: `tikv-0\|tikv-1…\|tiflash-0\|tiflash-1…`<br/>コンポーネント: `tikv\|tiflash`            | TiKV/TiFlash ノードのディスク容量バイト      |

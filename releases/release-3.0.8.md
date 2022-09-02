@@ -39,7 +39,7 @@ TiDB アンシブル バージョン: 3.0.8
         -   `stmt-summary.refresh-interval`パラメータを追加して、古いデータを`events_statements_summary_by_digest`テーブルから`events_statements_summary_by_digest_history`テーブルに移動するかどうかを制御します (デフォルトの間隔: 30 分) [#14161](https://github.com/pingcap/tidb/pull/14161)
         -   `events_statements_summary_by_digest_history`テーブルを追加して、古いデータを`events_statements_summary_by_digest` [#14166](https://github.com/pingcap/tidb/pull/14166)に保存します
     -   RBAC関連の内部SQL文実行時にbinlogが誤って出力される問題を修正[#13890](https://github.com/pingcap/tidb/pull/13890)
-    -   TiDB サーバー バージョン[#13906](https://github.com/pingcap/tidb/pull/13906)を変更する機能を制御する`server-version`の構成項目を追加します。
+    -   TiDBサーバーバージョン[#13906](https://github.com/pingcap/tidb/pull/13906)を変更する機能を制御する`server-version`の構成項目を追加します。
     -   HTTP インターフェイスを使用して TiDB バイナリログの書き込みを回復する機能を追加します[#13892](https://github.com/pingcap/tidb/pull/13892)
     -   `GRANT roles TO user`で必要な権限を`GrantPriv`から`ROLE_ADMIN`または`SUPER`に更新して、MySQL の動作との一貫性を維持します[#13932](https://github.com/pingcap/tidb/pull/13932)
     -   MySQL の動作との互換性を維持するために、TiDB の動作を現在のデータベースの使用から`GRANT`ステートメントでデータベース名が指定されていない場合に`No database selected`エラーを報告するように変更します[#13784](https://github.com/pingcap/tidb/pull/13784)
@@ -52,7 +52,7 @@ TiDB アンシブル バージョン: 3.0.8
     -   `GRANT ALL`構文がユーザー[#14092](https://github.com/pingcap/tidb/pull/14092)にすべての権限を付与しないという問題を修正します。
     -   `Priv_create_user`権限が`CREATE ROLE`と`DROP ROLE` [#14088](https://github.com/pingcap/tidb/pull/14088)で無効になる問題を修正
     -   `ErrInvalidFieldSize`のエラー コードを`1105(Unknow Error)`から`3013` [#13737](https://github.com/pingcap/tidb/pull/13737)に変更します。
-    -   `SHUTDOWN`コマンドを追加して TiDB サーバーを停止し、 `ShutdownPriv`特権[#14104](https://github.com/pingcap/tidb/pull/14104)を追加します。
+    -   `SHUTDOWN`コマンドを追加して TiDBサーバーを停止し、 `ShutdownPriv`特権[#14104](https://github.com/pingcap/tidb/pull/14104)を追加します。
     -   `DROP ROLE`ステートメントの原子性の問題を修正して、TiDB がステートメントの実行に失敗したときに一部のロールが予期せず削除されないようにします[#14130](https://github.com/pingcap/tidb/pull/14130)
     -   TiDB のバージョンを 3.0 にアップグレードすると、 `SHOW VARIABLE`の結果の`tidb_enable_window_function`が誤って`1`を出力する問題を修正し、誤った結果を`0` [#14131](https://github.com/pingcap/tidb/pull/14131)に置き換えます。
     -   TiKV ノードがオフラインのときに`gcworker`継続的にリトライするため、ゴルーチンがリークする可能性がある問題を修正します[#14106](https://github.com/pingcap/tidb/pull/14106)
@@ -62,7 +62,7 @@ TiDB アンシブル バージョン: 3.0.8
     -   TiKVサーバーが切断されたときに`rpcClient`が閉じないため、 `CheckStreamTimeoutLoop`ゴルーチンがリークする可能性がある問題を修正[#14227](https://github.com/pingcap/tidb/pull/14227)
     -   証明書ベースの認証をサポート ( [ユーザー文書](/certificate-authentication.md) ) [#13955](https://github.com/pingcap/tidb/pull/13955)
 -   取引
-    -   新しいクラスタが作成されるときに、 `tidb_txn_mode`変数のデフォルト値を`""`から`"pessimistic"`に更新します[#14171](https://github.com/pingcap/tidb/pull/14171)
+    -   新しいクラスターが作成されるときに、 `tidb_txn_mode`変数のデフォルト値を`""`から`"pessimistic"`に更新します[#14171](https://github.com/pingcap/tidb/pull/14171)
     -   トランザクションの再試行時に単一ステートメントのロック待機時間がリセットされないため、ペシミスティック トランザクションのロック待機時間が長すぎる問題を修正し[#13990](https://github.com/pingcap/tidb/pull/13990) 。
     -   悲観的トランザクションモード[#14050](https://github.com/pingcap/tidb/pull/14050)で変更されていないデータがロック解除されているため、間違ったデータが読み取られる可能性がある問題を修正します。
     -   [#14175](https://github.com/pingcap/tidb/pull/14175)でプリライトを行うとトランザクションの種類が区別されないため、挿入値の制限チェックが繰り返される問題を修正

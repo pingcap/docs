@@ -5,7 +5,7 @@ summary: Learn how to deploy TiCDC and the hardware and software recommendations
 
 # TiCDC をデプロイ {#deploy-ticdc}
 
-このドキュメントでは、TiCDCクラスタをデプロイする方法と、それをデプロイして実行するためのハードウェアとソフトウェアの推奨事項について説明します。 TiCDC を新しい TiDBクラスタと共にデプロイするか、TiCDC コンポーネントを既存の TiDBクラスタに追加することができます。一般に、TiUP を使用して TiCDC を展開することをお勧めします。また、必要に応じてバイナリを使用してデプロイすることもできます。
+このドキュメントでは、TiCDC クラスターをデプロイする方法と、それをデプロイして実行するためのハードウェアとソフトウェアの推奨事項について説明します。 TiCDC を新しい TiDB クラスターと共にデプロイするか、TiCDC コンポーネントを既存の TiDB クラスターに追加することができます。一般に、TiUP を使用して TiCDC を展開することをお勧めします。また、必要に応じてバイナリを使用してデプロイすることもできます。
 
 ## ソフトウェアとハードウェアの推奨事項 {#software-and-hardware-recommendations}
 
@@ -16,27 +16,27 @@ summary: Learn how to deploy TiCDC and the hardware and software recommendations
 | レッドハット エンタープライズ リナックス | 7.3 以降のバージョン |
 | CentOS                | 7.3 以降のバージョン |
 
-| CPU   | メモリー   | ディスクタイプ | 通信網                    | TiCDCクラスタインスタンスの数 (本番環境の最小要件) |
-| :---- | :----- | :------ | :--------------------- | :---------------------------- |
-| 16コア+ | 64GB以上 | SSD     | 10ギガビットネットワークカード（2枚推奨） | 2                             |
+| CPU   | メモリー   | ディスクタイプ | 通信網                    | TiCDC クラスタ インスタンスの数 (本番環境の最小要件) |
+| :---- | :----- | :------ | :--------------------- | :------------------------------ |
+| 16コア+ | 64GB以上 | SSD     | 10ギガビットネットワークカード（2枚推奨） | 2                               |
 
 詳細については、 [ソフトウェアおよびハードウェアの推奨事項](/hardware-and-software-requirements.md)を参照してください。
 
-## TiUP を使用して TiCDC を含む新しい TiDBクラスタをデプロイする {#deploy-a-new-tidb-cluster-that-includes-ticdc-using-tiup}
+## TiUP を使用して TiCDC を含む新しい TiDB クラスターをデプロイする {#deploy-a-new-tidb-cluster-that-includes-ticdc-using-tiup}
 
-TiUP を使用して新しい TiDBクラスタをデプロイすると、TiCDC も同時にデプロイできます。 TiUP が TiDBクラスタを開始するために使用する初期化構成ファイルに`cdc_servers`セクションを追加するだけで済みます。詳細な操作については、 [初期設定ファイルの編集](/production-deployment-using-tiup.md#step-3-initialize-cluster-topology-file)を参照してください。構成可能なフィールドの詳細については、 [`cdc_servers`を使用して cdc_server を構成する](/tiup/tiup-cluster-topology-reference.md#cdc_servers)を参照してください。
+TiUP を使用して新しい TiDB クラスターをデプロイすると、TiCDC も同時にデプロイできます。 TiUP が TiDB クラスターを開始するために使用する初期化構成ファイルに`cdc_servers`セクションを追加するだけで済みます。詳細な操作については、 [初期設定ファイルの編集](/production-deployment-using-tiup.md#step-3-initialize-cluster-topology-file)を参照してください。構成可能なフィールドの詳細については、 [`cdc_servers`を使用して cdc_server を構成する](/tiup/tiup-cluster-topology-reference.md#cdc_servers)を参照してください。
 
-## TiUP を使用して既存の TiDBクラスタに TiCDC を追加する {#add-ticdc-to-an-existing-tidb-cluster-using-tiup}
+## TiUP を使用して既存の TiDB クラスターに TiCDC を追加する {#add-ticdc-to-an-existing-tidb-cluster-using-tiup}
 
-TiUP を使用して、TiCDC コンポーネントを既存の TiDBクラスタに追加することもできます。次の手順を実行します。
+TiUP を使用して、TiCDC コンポーネントを既存の TiDB クラスターに追加することもできます。次の手順を実行します。
 
-1.  現在の TiDB バージョンが TiCDC をサポートしていることを確認してください。それ以外の場合は、TiDBクラスタを`v4.0.0-rc.1`以降のバージョンにアップグレードする必要があります。 v4.0.6 以降、TiCDC は一般提供 (GA) の機能になりました。 v4.0.6 以降のバージョンを使用することをお勧めします。
+1.  現在の TiDB バージョンが TiCDC をサポートしていることを確認してください。それ以外の場合は、TiDB クラスターを`v4.0.0-rc.1`以降のバージョンにアップグレードする必要があります。 v4.0.6 以降、TiCDC は一般提供 (GA) の機能になりました。 v4.0.6 以降のバージョンを使用することをお勧めします。
 
-2.  TiCDC をデプロイするには、 [TiCDCクラスタをスケールアウトする](/scale-tidb-using-tiup.md#scale-out-a-ticdc-cluster)を参照してください。
+2.  TiCDC をデプロイするには、 [TiCDC クラスターをスケールアウトする](/scale-tidb-using-tiup.md#scale-out-a-ticdc-cluster)を参照してください。
 
-## バイナリを使用して TiCDC を既存の TiDBクラスタに追加する (非推奨) {#add-ticdc-to-an-existing-tidb-cluster-using-binary-not-recommended}
+## バイナリを使用して TiCDC を既存の TiDB クラスターに追加する (非推奨) {#add-ticdc-to-an-existing-tidb-cluster-using-binary-not-recommended}
 
-PDクラスタに、サービスを提供できる PD ノード (クライアント URL は`10.0.10.25:2379` ) があるとします。 3 つの TiCDC ノードをデプロイする場合は、次のコマンドを実行して TiCDCクラスタを起動します。同じ PD アドレスを指定するだけで、新しく開始されたノードが自動的に TiCDCクラスタに参加します。
+PD クラスターに、サービスを提供できる PD ノード (クライアント URL は`10.0.10.25:2379` ) があるとします。 3 つの TiCDC ノードをデプロイする場合は、次のコマンドを実行して TiCDC クラスターを起動します。同じ PD アドレスを指定するだけで、新しく開始されたノードが自動的に TiCDC クラスターに参加します。
 
 {{< copyable "" >}}
 

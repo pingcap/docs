@@ -92,7 +92,7 @@ TiDB バージョン: 4.0.13
     -   テーブルに対して`INSERT`と`DELETE`の権限を同時に持っていないユーザーが`REPLACE`の操作を実行できるというバグを修正[#23938](https://github.com/pingcap/tidb/pull/23938)
     -   照合順序が正しく処理されないため、 `concat` / `make_set` / `insert`式の結果が間違っている問題を修正します[#23878](https://github.com/pingcap/tidb/pull/23878)
     -   `RANGE`パーティション[#23689](https://github.com/pingcap/tidb/pull/23689)を持つテーブルでクエリを実行すると発生するpanicを修正します。
-    -   問題を修正: 以前のバージョンのクラスタでは、変数`tidb_enable_table_partition`が`false`に設定されている場合、パーティションを含むテーブルは非パーティション テーブルとして処理されます。このテーブルで`batch point get`のクエリを実行すると、クラスタが新しいバージョンにアップグレードされると、接続panicが発生します。 [#23682](https://github.com/pingcap/tidb/pull/23682)
+    -   問題を修正: 以前のバージョンのクラスターでは、変数`tidb_enable_table_partition`が`false`に設定されている場合、パーティションを含むテーブルは非パーティション テーブルとして処理されます。このテーブルで`batch point get`のクエリを実行すると、クラスターが新しいバージョンにアップグレードされると、接続panicが発生します。 [#23682](https://github.com/pingcap/tidb/pull/23682)
     -   TiDB が TCP および UNIX ソケットでリッスンするように構成されている場合、TCP 接続を介したリモート ホストが接続[#23513](https://github.com/pingcap/tidb/pull/23513)に対して正しく検証されないという問題を修正します。
     -   デフォルト以外の照合順序が間違ったクエリ結果を引き起こすバグを修正します[#22923](https://github.com/pingcap/tidb/pull/22923)
     -   Grafana の**Coprocessor Cache**パネルが動作しない不具合を修正[#22617](https://github.com/pingcap/tidb/pull/22617)

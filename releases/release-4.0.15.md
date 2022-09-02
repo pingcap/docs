@@ -40,7 +40,7 @@ TiDB バージョン: 4.0.15
 
 -   TiKV
 
-    -   読み取り待機時間を短縮するために、読み取り準備完了と書き込み準備完了を別々に処理する[#10475](https://github.com/tikv/tikv/issues/10475)
+    -   読み取り待機レイテンシーを短縮するために、読み取り準備完了と書き込み準備完了を別々に処理する[#10475](https://github.com/tikv/tikv/issues/10475)
     -   TiKV コプロセッサーのスローログでは、リクエストの処理に費やされた時間のみが考慮されます。 [#10841](https://github.com/tikv/tikv/issues/10841)
     -   slogger スレッドが過負荷になり、キューがいっぱいになったときに、スレッドをブロックする代わりにログを削除します[#10841](https://github.com/tikv/tikv/issues/10841)
     -   解決済み TS メッセージのサイズを縮小してネットワーク帯域幅を節約する[#2448](https://github.com/pingcap/tiflow/issues/2448)
@@ -55,7 +55,7 @@ TiDB バージョン: 4.0.15
 
         -   リージョンを同時に分割および分散して復元速度を向上させる[#1363](https://github.com/pingcap/br/pull/1363)
         -   PD 要求エラーまたは TiKV I/O タイムアウト エラー[#27787](https://github.com/pingcap/tidb/issues/27787)が発生したときに BR タスクを再試行します
-        -   復元後のクラスタ操作への影響を避けるために、多数の小さなテーブルを復元する場合は空のリージョンを減らします[#1374](https://github.com/pingcap/br/issues/1374)
+        -   復元後のクラスター操作への影響を避けるために、多数の小さなテーブルを復元する場合は空のリージョンを減らします[#1374](https://github.com/pingcap/br/issues/1374)
         -   テーブルの作成中に`rebase auto id`操作を実行します。これにより、別個の`rebase auto id` DDL 操作が節約され、復元が高速化されます[#1424](https://github.com/pingcap/br/pull/1424)
 
     -   Dumpling
