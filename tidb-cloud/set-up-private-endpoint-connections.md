@@ -56,12 +56,8 @@ To start setting up a private endpoint, open the private endpoint creation page:
 
 ### Step 1. Choose a TiDB cluster
 
-1. Click the drop-down list to choose a TiDB cluster.
+1. Click the drop-down list and choose an available TiDB cluster.
 2. Click **Next**.
-
-> **Note:**
->
-> Before a cluster is created, it is not displayed in the drop-down list.
 
 ### Step 2. Choose the service endpoint region
 
@@ -73,78 +69,74 @@ From the **Region** List, select the region in which you want to create the priv
 
 ### Step 3. Create an AWS interface endpoint
 
-At this stage, TiDB Cloud begins creating an endpoint service, which takes 3 to 4 minutes. During the creation process, perform the following operations:
+At this stage, TiDB Cloud begins creating an endpoint service, which takes 3 to 4 minutes. After the endpoint service is created, take a note of your endpoint service name from the command.
+
+![Endpoint service name](/media/tidb-cloud/private-endpoint/private-endpoint-service-name.png)
+
+Then create an AWS interface endpoint either in the AWS Management Console or using the AWS CLI.
+
+<SimpleTab>
+<div label="Use AWS Console">
+
+To use the AWS Management Console to create the VPC interface endpoint, perform the following steps:
+
+1. Go to **VPC** > **Endpoints**.
+2. Click **Create Endpoint**.
+
+    The **Create endpoint** page is displayed.
+
+    <img src="../media/tidb-cloud/private-endpoint/create-endpoint-1.png" width="70%" auto="Create endpoint" />
+
+3. Select **Other endpoint services**.
+4. Enter the endpoint service name you have obtained from the **Interface endpoint** page of the TiDB Cloud console.
+5. Click **Verify service**.
+
+    <img src="../media/tidb-cloud/private-endpoint/create-endpoint-2.png" width="70%" auto="Verify endpoint service" />
+
+6. Select your VPC in the drop-down list.
+7. Select your security group properly in the **Security groups** area.
+8. Select the availability zones where your TiDB cluster is located in the **Subnets** area.
+9. Click **Create endpoint**.
+
+    <img src="../media/tidb-cloud/private-endpoint/create-endpoint-3.png" width="70%" auto="Create endpoint service 3" />
+
+> **Tip:**
+>
+> If your service is spanning across more than three availability zones (AZs), you might not be able to select AZs in the **Subnets** area. This issue occurs when there is an extra AZ in your selected region in addition to the AZs where your TiDB cluster is located. In this case, contact [PingCAP Technical Support](https://docs.pingcap.com/tidbcloud/tidb-cloud-support).
+
+</div>
+<div label="Use AWS CLI">
+
+To use the AWS CLI to create a VPC interface endpoint, perform the following steps:
 
 1. Fill in the **VPC ID** and **Subnet IDs** fields. You can get the IDs from your AWS Management Console.
 
-2. After the endpoint service is created, take a note of your endpoint service name from the command.
+2. Install AWS Command Line Interface (AWS CLI).
 
-    ![Endpoint service name](/media/tidb-cloud/private-endpoint/private-endpoint-service-name.png)
+    ```bash
+    curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+    unzip awscliv2.zip
+    sudo ./aws/install
+    ```
 
-3. Create a VPC interface endpoint in AWS.
+3. Configure AWS CLI according to your account information. To get the information, see [AWS CLI configuration basics](https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-quickstart.html).
 
-    You can either use the AWS Management Console or the AWS CLI.
+    ```bash
+    aws configure
+    ```
 
-    <SimpleTab>
-    <div label="Use AWS Console">
+4. Copy the command in the lower area of the page and run it in your terminal. Then click **Next**.
 
-    To use the AWS Management Console to create the VPC interface endpoint, perform the following steps:
+After the endpoint service is created, the placeholders in the command are automatically replaced with the real values.
 
-    1. Go to **VPC** > **Endpoints**.
-    2. Click **Create Endpoint**.
+> **Tip:**
+>
+> - If your service is spanning across more than three availability zones (AZs), you will get an error message indicating that the VPC endpoint service does not support the AZ of the subnet. This issue occurs when there is an extra AZ in your selected region in addition to the AZs where your TiDB cluster is located. In this case, you can contact [PingCAP Technical Support](https://docs.pingcap.com/tidbcloud/tidb-cloud-support).
+>
+> - You cannot copy the command until TiDB Cloud finishes creating endpoint service in the background.
 
-        The **Create endpoint** page is displayed.
-
-        <img src="../media/tidb-cloud/private-endpoint/create-endpoint-1.png" width="70%" auto="Create endpoint" />
-
-    3. Select **Other endpoint services**.
-    4. Enter the endpoint service name you have obtained from the **Interface endpoint** page of the TiDB Cloud console.
-    5. Click **Verify service**.
-
-        <img src="../media/tidb-cloud/private-endpoint/create-endpoint-2.png" width="70%" auto="Verify endpoint service" />
-
-    6. Select your VPC in the drop-down list.
-    7. In the **Security groups** area, select up your security group properly.
-    8. In the **Subnets** area, select the availability zones where your TiDB cluster is located.
-    9. Click **Create endpoint**.
-
-        <img src="../media/tidb-cloud/private-endpoint/create-endpoint-3.png" width="70%" auto="Create endpoint service 3" />
-
-    > **Tip:**
-    >
-    > If your service is spanning across more than three availability zones (AZs), you might not be able to select AZs in the **Subnets** area. This issue occurs when there is an extra AZ in your selected region in addition to the AZs where your TiDB cluster is located. In this case, contact [PingCAP Technical Support](https://docs.pingcap.com/tidbcloud/tidb-cloud-support).
-
-    </div>
-    <div label="AWS CLI">
-
-    To use the AWS CLI to create a VPC interface endpoint, perform the following steps:
-
-    1. Install AWS Command Line Interface (AWS CLI).
-
-        ```bash
-        curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
-        unzip awscliv2.zip
-        sudo ./aws/install
-        ```
-
-    2. Configure AWS CLI according to your account information. To get the information, see [AWS CLI configuration basics](https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-quickstart.html).
-
-        ```bash
-        aws configure
-        ```
-
-    3. Copy the command in the lower area of the page and run it in your terminal. Then click **Next**.
-
-    After the endpoint service is created, the placeholders in the command are automatically replaced with the real values.
-
-    > **Tip:**
-    >
-    > - If your service is spanning across more than three availability zones (AZs), you will get an error message indicating that the VPC endpoint service does not support the AZ of the subnet. This issue occurs when there is an extra AZ in your selected region in addition to the AZs where your TiDB cluster is located. In this case, you can contact [PingCAP Technical Support](https://docs.pingcap.com/tidbcloud/tidb-cloud-support).
-    >
-    > - You cannot copy the command until TiDB Cloud finishes creating endpoint service in the background.
-
-    </div>
-    </SimpleTab>
+</div>
+</SimpleTab>
 
 ### Step 4. Accept the endpoint connection
 
@@ -185,7 +177,7 @@ When you use [private endpoint connections](/tidb-cloud/set-up-private-endpoint-
 The possible statuses of a private endpoint are explained as follows:
 
 - **Not Configured**: You have just created an endpoint service but have not yet created a private endpoint. If you click **Edit** of that row, you are directed to the **Interface Endpoint** stage of creating a private endpoint. See [Step 4. Create an endpoint service](/tidb-cloud/set-up-private-endpoint-connections.md#step-4-create-an-aws-interface-endpoint) for details.
-- **Pending**: After your VPC ID is verified at the **Interface Endpoint** stage of creating a private endpoint, you have not yet enabled the private DNS. If you click **Edit** of that row, you are directed to the **Enable Private DNS** stage of creating a private endpoint. See [Step 6. Enable Private DNS](/tidb-cloud/set-up-private-endpoint-connections.md#step-6-enable-private-dns) for details.
+- **Pending**: After your VPC ID is verified at the **Interface Endpoint** stage of creating a private endpoint, you have not yet enabled the private DNS.
 - **Active**: Your private endpoint is ready to use. You cannot edit the private endpoint of this status.
 - **Deleting**: The private endpoint is being deleted.
 - **Failed**: The private endpoint creation fails. You can click **Edit** of that row to retry the creation.
@@ -202,10 +194,8 @@ The possible statuses of a private endpoint service are explained as follows:
 
 You might need to properly set the security group for your VPC endpoint in the AWS Management Console. Go to **VPC** > **Endpoints**. Right-click your VPC endpoint and select **Manage security groups**.
 
-In the **Manage security groups** page, properly select the security group for your VPC endpoint.
-
 <img src="../media/tidb-cloud/private-endpoint/manage-security-groups.png" width="70%" auto="Manage security groups" />
 
 ### I cannot enable private DNS. An error is reported indicating that the `enableDnsSupport` and `enableDnsHostnames` VPC attributes are not enabled
 
-When you create a VPC in AWS Management Console, the DNS hostnames setting is disabled by default. Before enabling private DNS, make sure that DNS hostname and DNS resolution are both enabled in your VPC setting.
+Make sure than DNS hostname and DNS resolution are both enabled in your VPC setting. They are disabled by default when you create a VPC in the AWS Management Console.
