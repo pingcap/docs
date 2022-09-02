@@ -59,7 +59,7 @@ For example, if your Kafka cluster is in Confluent Cloud, you can see [Resources
 3. Enable the **TLS Encryption** option if your Kafka has enabled TLS encryption and you want to use TLS encryption for the Kafka connection.
 4. Select the **Authentication** option according to your Kafka authentication configuration.
 
-    - If your Kafka does not require authentication, keep the default option **Disable**.
+    - If your Kafka does not require authentication, keep the default option **DISABLE**.
     - If your Kafka requires authentication, select the corresponding authentication type, and then fill in the user name and password of your Kafka account for authentication.
 
 5. Click **Next** to check the configurations you set and go to the next page.
@@ -77,16 +77,18 @@ For example, if your Kafka cluster is in Confluent Cloud, you can see [Resources
 
 3. If you select **Avro** as your data format, you will see some Avro-specific configurations on the page. You can fill in these configurations as follows:
 
-    - In the **Handle Decimal** and **Handle Bigint Unsigned** configurations, specify how TiDB Cloud handles the decimal and Bigint data types in Kafka messages.
-    - In the **Schema Registry** area, fill in your schema registry endpoints. If you enable **HTTP Authentication**, you also need to fill in the user name and password for the schema registry.
+    - In the **Decimal** and **Unsigned BigInt** configurations, specify how TiDB Cloud handles the decimal and unsigned Bigint data types in Kafka messages.
+    - In the **Schema Registry** area, fill in your schema registry endpoint. If you enable **HTTP Authentication**, the fields for user name and password are displayed and are automatically filled in with your TiDB cluster endpoint and and password.
 
 4. In the **Topic Distribution** area, select a distribution mode, and then fill in the topic name configurations according to the mode.
 
-    The distribution mode controls how the changefeed creates Kafka topics, by tables, by databases, or creating one topic for all changelogs. If you select **Avro** as your data format, you can only choose the **Distribute changelogs by table to Kafka Topics** mode in the **Distribute Mode** drop-down list.
+    If you select **Avro** as your data format, you can only choose the **Distribute changelogs by table to Kafka Topics** mode in the **Distribute Mode** drop-down list.
+
+    The distribution mode controls how the changefeed creates Kafka topics, by tables, by databases, or creating one topic for all changelogs.
 
    - **Distribute changelogs by table to Kafka Topics**
 
-        If you want the changefeed to create a dedicated Kafka topic for each table, choose this mode. Then, all Kafka messages of a table are sent to a dedicated Kafka topic. You can define topic names for tables by setting a topic prefix, a separator between a database name and table name, and a suffix. For example, if you set the separator as `-`, the topic names are in the format of `<Prefix>_<DatabaseName>-<TableName>_<Suffix>`.
+        If you want the changefeed to create a dedicated Kafka topic for each table, choose this mode. Then, all Kafka messages of a table are sent to a dedicated Kafka topic. You can define topic names for tables by setting a topic prefix, a separator between a database name and table name, and a suffix. For example, if you set the separator as `-`, the topic names are in the format of `<Prefix><DatabaseName>-<TableName><Suffix>`.
 
         For changelogs of non-row events, such as Create Schema Event, you can specify a topic name in the **Default Topic Name** field. The changefeed will create a topic accordingly to collect such changelogs.
 
@@ -94,9 +96,11 @@ For example, if your Kafka cluster is in Confluent Cloud, you can see [Resources
 
         If you want the changefeed to create a dedicated Kafka topic for each database, choose this mode. Then, all Kafka messages of a database are sent to a dedicated Kafka topic. You can define topic names of databases by setting the topic prefix and suffix.
 
+        For changelogs of non-database events, such as Resolved Ts Event, you can specify a topic name in the **Default Topic Name** field. The changefeed will create a topic accordingly to collect such changelogs.
+
    - **Send all changelogs to one specified Kafka Topic**
 
-        If you want the changefeed to create one Kafka topic for all changelogs, choose this mode. Then, all Kafka messages in the changefeed will be sent to one Kafka topic. You can define the topic name in the **Topic Name** field.
+        If you want the changefeed to create one Kafka topic for all changelogs, choose this mode. Then, all Kafka messages in the changefeed will be sent to one Kafka topic. You can define the topic name in the **Default Topic Name** field.
 
 5. In the **Partition Distribution** area, you can decide which partition a Kafka message will be sent to:
 
@@ -104,7 +108,7 @@ For example, if your Kafka cluster is in Confluent Cloud, you can see [Resources
 
         If you want the changefeed to send Kafka messages of a table to different partitions, choose this distribution method. The index value of a row changelog will determine which partition the changelog is sent to. This distribution method provides a better partition balance and ensures row-level orderliness.
 
-   - **Distribute changelogs by table to Kafka partitions**
+   - **Distribute changelogs by table to Kafka partition**
 
         If you want the changefeed to send Kafka messages of a table to one Kafka partition, choose this distribution method. The table name of a row changelog will determine which partition the changelog is sent to. This distribution method ensures table orderliness but might cause unbalanced partitions.
 
