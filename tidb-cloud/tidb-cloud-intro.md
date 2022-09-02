@@ -14,7 +14,7 @@ TiDB Cloud allows you with little or no training to handle complex tasks such as
 
 - Developers and database administrators (DBAs) can rapidly analyze a large volume of data across multiple datasets.
 
-- Enterprises of all sizes can easily deploy and manage TiDB Cloud to adapt to your business growth all without prepayment.
+- Enterprises of all sizes can easily deploy and manage TiDB Cloud to adapt to your business growth without prepayment.
 
 With TiDB Cloud, you can get the following key features:
 
@@ -24,11 +24,11 @@ With TiDB Cloud, you can get the following key features:
 
 - **Real-Time Analytics**
 
-    Get real-time analytical query results with our Hybrid Transactional and Analytical Processing (HTAP) capabilities.
+    Get real-time analytical query results with Hybrid Transactional and Analytical Processing (HTAP) capabilities.
 
 - **Fast and Customized Scaling**
 
-    Elastically and transparently scale to hundreds of nodes for critical workloads without changing business logic. And you can scale your performance and storage nodes separately to custom tailor to your business needs.
+    Elastically and transparently scale to hundreds of nodes for critical workloads without changing business logic. And you can scale your performance and storage nodes separately according to your business needs.
 
 - **High Availability and Reliability**
 
