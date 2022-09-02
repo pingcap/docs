@@ -94,13 +94,13 @@ At this stage, TiDB Cloud begins creating an endpoint service, which takes 3 to 
     2. Under **Service category**, select **Other endpoint services**.
     3. Under **Service settings**, enter the endpoint service name you have obtained from the **Interface endpoint** page of the TiDB Cloud console, and click **Verify service**.
 
-        <img src="../media/tidb-cloud/private-endpoint/create-endpoint-2.png" height="50%" auto="Verify endpoint service" />
+        <img src="../media/tidb-cloud/private-endpoint/create-endpoint-2.png" width="70%" auto="Verify endpoint service" />
 
     4. After the service name is verified, under **VPC**, select your VPC in the drop-down list. Then the pre-populated **Subnets** area is displayed.
     5. In the **Security groups** area, select up your security group properly.
     6. In the **Subnets** area, select the availability zones where your TiDB cluster is located. Then click **Create endpoint** at the bottom of the page.
 
-        <img src="../media/tidb-cloud/private-endpoint/create-endpoint-3.png" height="40%" auto="Create endpoint service 3" />
+        <img src="../media/tidb-cloud/private-endpoint/create-endpoint-3.png" width="70%" auto="Create endpoint service 3" />
 
     > **Tip:**
     >
@@ -154,7 +154,7 @@ To enable private DNS in your AWS Management Console:
 1. Go to **VPC** > **Endpoints**. Right-click your endpoint ID and select **Modify private DNS name**.
 2. Check the **Enable for this endpoint** box and click **Save changes**.
 
-![Enable private DNS](/media/tidb-cloud/private-endpoint/enable-private-dns.png)
+<img src="../media/tidb-cloud/private-endpoint/enable-private-dns.png" width="80%" >
 
 </div>
 <div label="Use AWS CLI">
