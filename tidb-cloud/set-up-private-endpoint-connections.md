@@ -164,7 +164,7 @@ To enable private DNS in your AWS Management Console:
 3. Check the **Enable for this endpoint** box.
 4. Click **Save changes**.
 
-<img src="../media/tidb-cloud/private-endpoint/enable-private-dns.png" width="70%" />
+<img src="../media/tidb-cloud/private-endpoint/enable-private-dns.png" width="70%"  auto="Enable private DNS" />
 
 </div>
 <div label="Use AWS CLI">
