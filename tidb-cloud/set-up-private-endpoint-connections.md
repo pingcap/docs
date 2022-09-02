@@ -89,7 +89,7 @@ At this stage, TiDB Cloud begins creating an endpoint service, which takes 3 to 
 
     1. In your AWS Management Console, go to **VPC** > **Endpoints**, and click **Create Endpoint** in the upper-right corner. The **Create endpoint** page is displayed.
 
-        ![Create endpoint](/media/tidb-cloud/private-endpoint/create-endpoint-1.png)
+        <img src="../media/tidb-cloud/private-endpoint/create-endpoint-1.png" width="70%" auto="Create endpoint" />
 
     2. Under **Service category**, select **Other endpoint services**.
     3. Under **Service settings**, enter the endpoint service name you have obtained from the **Interface endpoint** page of the TiDB Cloud console, and click **Verify service**.
@@ -154,7 +154,7 @@ To enable private DNS in your AWS Management Console:
 1. Go to **VPC** > **Endpoints**. Right-click your endpoint ID and select **Modify private DNS name**.
 2. Check the **Enable for this endpoint** box and click **Save changes**.
 
-<img src="../media/tidb-cloud/private-endpoint/enable-private-dns.png" width="80%" />
+<img src="../media/tidb-cloud/private-endpoint/enable-private-dns.png" width="70%" />
 
 </div>
 <div label="Use AWS CLI">
@@ -196,7 +196,7 @@ You might need to properly set the security group for your VPC endpoint in the A
 
 In the **Manage security groups** page, properly select the security group for your VPC endpoint.
 
-![Manage security groups](/media/tidb-cloud/private-endpoint/manage-security-groups.png)
+<img src="../media/tidb-cloud/private-endpoint/manage-security-groups.png" width="70%" auto="Manage security groups" />
 
 ### I cannot enable private DNS. An error is reported indicating that the `enableDnsSupport` and `enableDnsHostnames` VPC attributes are not enabled
 
