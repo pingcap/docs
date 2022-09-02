@@ -88,13 +88,13 @@ For example, if your Kafka cluster is in Confluent Cloud, you can see [Resources
 
    - **Distribute changelogs by table to Kafka Topics**
 
-        If you want the changefeed to create a dedicated Kafka topic for each table, choose this mode. Then, all Kafka messages of a table are sent to a dedicated Kafka topic. You can define topic names for tables by setting a topic prefix, a separator between a database name and table name, and a suffix. For example, if you set the separator as `-`, the topic names are in the format of `<Prefix><DatabaseName>-<TableName><Suffix>`.
+        If you want the changefeed to create a dedicated Kafka topic for each table, choose this mode. Then, all Kafka messages of a table are sent to a dedicated Kafka topic. You can customize topic names for tables by setting a topic prefix, a separator between a database name and table name, and a suffix. For example, if you set the separator as `-`, the topic names are in the format of `<Prefix><DatabaseName>-<TableName><Suffix>`.
 
         For changelogs of non-row events, such as Create Schema Event, you can specify a topic name in the **Default Topic Name** field. The changefeed will create a topic accordingly to collect such changelogs.
 
    - **Distribute changelogs by database to Kafka Topics**
 
-        If you want the changefeed to create a dedicated Kafka topic for each database, choose this mode. Then, all Kafka messages of a database are sent to a dedicated Kafka topic. You can define topic names of databases by setting a topic prefix and a suffix.
+        If you want the changefeed to create a dedicated Kafka topic for each database, choose this mode. Then, all Kafka messages of a database are sent to a dedicated Kafka topic. You can customize topic names of databases by setting a topic prefix and a suffix.
 
         For changelogs of non-database events, such as Resolved Ts Event, you can specify a topic name in the **Default Topic Name** field. The changefeed will create a topic accordingly to collect such changelogs.
 
