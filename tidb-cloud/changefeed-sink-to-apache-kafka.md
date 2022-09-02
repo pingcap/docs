@@ -84,7 +84,7 @@ For example, if your Kafka cluster is in Confluent Cloud, you can see [Resources
 
     If you select **Avro** as your data format, you can only choose the **Distribute changelogs by table to Kafka Topics** mode in the **Distribute Mode** drop-down list.
 
-    The distribution mode controls how the changefeed creates Kafka topics, by tables, by databases, or creating one topic for all changelogs.
+    The distribution mode controls how the changefeed creates Kafka topics, by table, by database, or creating one topic for all changelogs.
 
    - **Distribute changelogs by table to Kafka Topics**
 
