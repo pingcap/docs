@@ -139,7 +139,7 @@ At this stage, TiDB Cloud begins creating an endpoint service, which takes 3 to 
 
 ### Step 4. Accept the endpoint connection
 
-Fill in the box with your VPC endpoint ID and click **Next**.
+Go back to the TiDB Cloud console, in the **Create Private Endpoint** page, fill in the box with your VPC endpoint ID and click **Next**.
 
 ### Step 5. Enable private DNS
 
