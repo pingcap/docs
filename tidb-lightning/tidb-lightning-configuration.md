@@ -5,13 +5,13 @@ summary: Learn about the CLI usage and sample configuration in TiDB Lightning.
 
 # TiDB LightningConfiguration / コンフィグレーション {#tidb-lightning-configuration}
 
-このドキュメントでは、 TiDB Lightningのグローバル構成、タスク構成、およびTiKVインポーター構成のサンプルを提供し、コマンドラインパラメーターの使用法について説明します。
+このドキュメントでは、 TiDB Lightningでのグローバル構成、タスク構成、および TiKV インポーター構成のサンプルを提供し、コマンドライン パラメーターの使用法について説明します。
 
 ## Configuration / コンフィグレーションファイル {#configuration-files}
 
-TiDB Lightningには、「グローバル」と「タスク」の2つの構成クラスがあり、互換性のある構造があります。それらの区別は、 [サーバーモード](/tidb-lightning/tidb-lightning-web-interface.md)が有効になっている場合にのみ発生します。サーバーモードが無効（デフォルト）の場合、 TiDB Lightningは1つのタスクのみを実行し、グローバル構成とタスク構成の両方に同じ構成ファイルが使用されます。
+TiDB Lightningには「global」と「task」の 2 つの構成クラスがあり、それらは互換性のある構造を持っています。それらの区別は、 [サーバーモード](/tidb-lightning/tidb-lightning-web-interface.md)が有効になっている場合にのみ発生します。サーバーモードが無効になっている場合 (デフォルト)、 TiDB Lightningは 1 つのタスクのみを実行し、同じ構成ファイルがグローバル構成とタスク構成の両方に使用されます。
 
-### TiDB Lightning （グローバル） {#tidb-lightning-global}
+### TiDB Lightning(グローバル) {#tidb-lightning-global}
 
 ```toml
 ### tidb-lightning global configuration
@@ -33,7 +33,7 @@ max-days = 28
 max-backups = 14
 ```
 
-### TiDB Lightning （タスク） {#tidb-lightning-task}
+### TiDB Lightning(タスク) {#tidb-lightning-task}
 
 ```toml
 ### tidb-lightning task configuration
@@ -326,7 +326,7 @@ switch-mode = "5m"
 log-progress = "5m"
 ```
 
-### TiKVインポーター {#tikv-importer}
+### TiKV インポーター {#tikv-importer}
 
 ```toml
 # TiKV Importer configuration file template.
@@ -405,66 +405,66 @@ max-open-engines = 8
 min-available-ratio = 0.05
 ```
 
-## コマンドラインパラメータ {#command-line-parameters}
+## コマンド ライン パラメータ {#command-line-parameters}
 
-### <code>tidb-lightning</code>の使用法 {#usage-of-code-tidb-lightning-code}
+### <code>tidb-lightning</code>の使い方 {#usage-of-code-tidb-lightning-code}
 
-| パラメータ                       | 説明                                                                                                  | 対応する設定                         |
-| :-------------------------- | :-------------------------------------------------------------------------------------------------- | :----------------------------- |
-| --config*ファイル*              | *ファイル*からグローバル構成を読み取ります。指定しない場合、デフォルトの構成が使用されます。                                                     |                                |
-| -V                          | プログラムバージョンを印刷します                                                                                    |                                |
-| -d*ディレクトリ*                  | 読み取るディレクトリまたはデータダンプの[外部ストレージURL](/br/backup-and-restore-storages.md)つ                               | `mydumper.data-source-dir`     |
-| -L*レベル*                     | ログレベル：デバッグ、情報、警告、エラー、致命的（デフォルト=情報）                                                                  | `lightning.log-level`          |
-| -f*ルール*                     | [テーブルフィルタールール](/table-filter.md) （複数回指定可能）                                                          | `mydumper.filter`              |
-| -*バックエンドバックエンド*             | [配信バックエンド](/tidb-lightning/tidb-lightning-backends.md) （ `local` 、 `tidb` `importer`                | `tikv-importer.backend`        |
-| --ログファイル*ファイル*              | ログファイルのパス。デフォルトでは`/tmp/lightning.log.{timestamp}`です。 &#39;-&#39;に設定すると、ログファイルがstdoutに出力されることを意味します。 | `lightning.log-file`           |
-| --status-addr *ip：port*     | TiDB Lightningサーバーのリスニングアドレス                                                                        | `lightning.status-port`        |
-| --importer *host：port*      | TiKVインポーターの住所                                                                                       | `tikv-importer.addr`           |
-| --pd-urls *host：port*       | PDエンドポイントアドレス                                                                                       | `tidb.pd-addr`                 |
-| --tidb-ホスト*ホスト*             | TiDBサーバーホスト                                                                                         | `tidb.host`                    |
-| --tidb-port*ポート*            | TiDBサーバーポート（デフォルト= 4000）                                                                            | `tidb.port`                    |
-| --tidb-ステータス*ポート*           | TiDBステータスポート（デフォルト= 10080）                                                                          | `tidb.status-port`             |
-| --tidb-ユーザー*ユーザー*           | TiDBに接続するためのユーザー名                                                                                   | `tidb.user`                    |
-| --tidb-パスワード*パスワード*         | TiDBに接続するためのパスワード。パスワードは、プレーンテキストまたはBase64エンコードのいずれかです。                                             | `tidb.password`                |
-| --enable-checkpoint *bool*  | チェックポイントを有効にするかどうか（デフォルト= true）                                                                     | `checkpoint.enable`            |
-| -*レベル*を分析する                 | インポート後にテーブルを分析します。使用可能な値は、「必須」、「オプション」（デフォルト値）、および「オフ」です。                                           | `post-restore.analyze`         |
-| -チェックサム*レベル*                | インポート後のチェックサムを比較します。使用可能な値は、「必須」（デフォルト値）、「オプション」、および「オフ」です。                                         | `post-restore.checksum`        |
-| --check-requirements *bool* | 開始する前にクラスタバージョンの互換性を確認してください（デフォルト= true）                                                           | `lightning.check-requirements` |
-| --ca*ファイル*                  | TLS接続用のCA証明書パス                                                                                      | `security.ca-path`             |
-| --証明書*ファイル*                 | TLS接続の証明書パス                                                                                         | `security.cert-path`           |
-| --キー*ファイル*                  | TLS接続用の秘密鍵パス                                                                                        | `security.key-path`            |
-| --サーバーモード                   | サーバーモードでTiDB Lightningを起動します                                                                        | `lightning.server-mode`        |
+| パラメータ                     | 説明                                                                                              | 対応設定                           |
+| :------------------------ | :---------------------------------------------------------------------------------------------- | :----------------------------- |
+| --config*ファイル*            | *ファイル*からグローバル構成を読み取ります。指定しない場合、デフォルトの構成が使用されます。                                                 |                                |
+| -V                        | プログラムのバージョンを出力します                                                                               |                                |
+| -d*ディレクトリ*                | 読み取るデータ ダンプのディレクトリまたは[外部ストレージ URL](/br/backup-and-restore-storages.md)つ                         | `mydumper.data-source-dir`     |
+| -L*レベル*                   | ログ レベル: debug、info、warn、error、fatal (デフォルト = info)                                              | `lightning.log-level`          |
+| -f*ルール*                   | [テーブル フィルター ルール](/table-filter.md) (複数指定可)                                                      | `mydumper.filter`              |
+| --backend*バックエンド*         | [配信バックエンド](/tidb-lightning/tidb-lightning-backends.md) ( `local` 、 `importer` 、または`tidb` )      | `tikv-importer.backend`        |
+| --log-file*ファイル*          | ログ ファイルのパス。デフォルトでは`/tmp/lightning.log.{timestamp}`です。 「-」に設定すると、ログ ファイルが stdout に出力されることを意味します。 | `lightning.log-file`           |
+| --status-addr *ip:ポート*    | TiDB Lightningサーバーのリッスン アドレス                                                                    | `lightning.status-port`        |
+| --インポーター*ホスト:ポート*         | TiKV インポーターの住所                                                                                  | `tikv-importer.addr`           |
+| --pd-urls*ホスト:ポート*        | PD エンドポイント アドレス                                                                                 | `tidb.pd-addr`                 |
+| --tidb-host*ホスト*          | TiDBサーバーホスト                                                                                     | `tidb.host`                    |
+| --tidb-port*ポート*          | TiDBサーバーポート (デフォルト = 4000)                                                                      | `tidb.port`                    |
+| --tidb-status*ポート*        | TiDB ステータス ポート (デフォルト = 10080)                                                                  | `tidb.status-port`             |
+| --tidb-user*ユーザー*         | TiDB に接続するためのユーザー名                                                                              | `tidb.user`                    |
+| --tidb-password*パスワード*    | TiDB に接続するためのパスワード。パスワードは、プレーンテキストまたは Base64 エンコードのいずれかです。                                      | `tidb.password`                |
+| --enable-checkpoint*ブール*  | チェックポイントを有効にするかどうか (デフォルト = true)                                                               | `checkpoint.enable`            |
+| --分析*レベル*                 | インポート後にテーブルを分析します。使用可能な値は、「required」、「optional」(デフォルト値)、および「off」です。                             | `post-restore.analyze`         |
+| -- チェックサム*レベル*            | インポート後にチェックサムを比較します。使用可能な値は、「required」(デフォルト値)、「optional」、および「off」です。                           | `post-restore.checksum`        |
+| --check-requirements*ブール* | 開始前にクラスターのバージョンの互換性を確認する (デフォルト = true)                                                         | `lightning.check-requirements` |
+| --ca*ファイル*                | TLS 接続の CA 証明書パス                                                                                | `security.ca-path`             |
+| --証明書*ファイル*               | TLS 接続の証明書パス                                                                                    | `security.cert-path`           |
+| --キー*ファイル*                | TLS 接続の秘密鍵パス                                                                                    | `security.key-path`            |
+| -- サーバーモード                | サーバーモードでTiDB Lightningを起動する                                                                     | `lightning.server-mode`        |
 
-コマンドラインパラメーターと構成ファイルの対応する設定の両方が指定されている場合は、コマンドラインパラメーターが使用されます。たとえば、 `./tidb-lightning -L debug --config cfg.toml`を実行すると、 `cfg.toml`の内容に関係なく、常にログレベルが「デバッグ」に設定されます。
+コマンド ライン パラメーターと構成ファイル内の対応する設定の両方が指定されている場合は、コマンド ライン パラメーターが使用されます。たとえば、 `./tidb-lightning -L debug --config cfg.toml`を実行すると、 `cfg.toml`の内容に関係なく、常にログ レベルが「debug」に設定されます。
 
-## <code>tidb-lightning-ctl</code>使用法 {#usage-of-code-tidb-lightning-ctl-code}
+## <code>tidb-lightning-ctl</code>使い方 {#usage-of-code-tidb-lightning-ctl-code}
 
-このツールは、次のいずれかのパラメータを指定してさまざまなアクションを実行できます。
+このツールは、次のパラメーターのいずれかを指定して、さまざまなアクションを実行できます。
 
-| パラメータ                                  | 説明                                        |
-| :------------------------------------- | :---------------------------------------- |
-| - コンパクト                                | 完全な圧縮を実行します                               |
-| --スイッチモード*モード*                         | すべてのTiKVストアを指定されたモードに切り替えます：通常、インポート      |
-| --fetch-mode                           | すべてのTiKVストアの現在のモードを出力します                  |
-| --import-engine *uuid*                 | 閉じたエンジンファイルをTiKVインポーターからTiKVクラスタにインポートします |
-| --cleanup-engine *uuid*                | TiKVインポーターからエンジンファイルを削除します                |
-| --checkpoint-dump*フォルダー*               | 現在のチェックポイントをCSVとしてフォルダにダンプします             |
-| --checkpoint-error-destroy *tablename* | チェックポイントを削除し、エラーが発生した場合はテーブルを削除します        |
-| --checkpoint-error-テーブル名を無視し*ます*       | 指定されたテーブルに関連するチェックポイントに記録されたエラーを無視します     |
-| --チェックポイント-テーブル名を削除し*ます*               | テーブルのチェックポイントを無条件に削除します                   |
+| パラメータ                               | 説明                                              |
+| :---------------------------------- | :---------------------------------------------- |
+| - コンパクト                             | 完全な圧縮を実行します                                     |
+| --switch-mode*モード*                  | すべての TiKV ストアを特定のモードに切り替えます: 通常、インポート           |
+| --fetch-mode                        | すべての TiKV ストアの現在のモードを出力します                      |
+| -- インポートエンジン*uuid*                  | 閉じたエンジン ファイルを TiKV インポーターから TiKV クラスターにインポートします |
+| --cleanup-engine *uuid*             | エンジン ファイルを TiKV Importer から削除します                |
+| --checkpoint-dump*フォルダ*             | 現在のチェックポイントを CSV としてフォルダーにダンプします                |
+| *--checkpoint* -error-destroy テーブル名 | チェックポイントを削除し、エラーが発生した場合はテーブルを削除します              |
+| *--checkpoint* -error-ignore テーブル名  | 指定されたテーブルに関連するチェックポイントに記録されたエラーを無視します           |
+| *--checkpoint* -remove テーブル名        | テーブルのチェックポイントを無条件に削除します                         |
 
-テーブル名は、形式`` `db`.`tbl` ``の修飾テーブル名（バック*クォート*を含む）、またはキーワード「all」のいずれかである必要があります。
+*tablename*は、形式`` `db`.`tbl` `` (逆引用符を含む) の修飾テーブル名か、キーワード「all」のいずれかでなければなりません。
 
 さらに、上記のセクションで説明した`tidb-lightning`のすべてのパラメーターは`tidb-lightning-ctl`で有効です。
 
-## <code>tikv-importer</code>使用法 {#usage-of-code-tikv-importer-code}
+## <code>tikv-importer</code>使い方 {#usage-of-code-tikv-importer-code}
 
-| パラメータ                     | 説明                                         | 対応する設定                  |
-| :------------------------ | :----------------------------------------- | :---------------------- |
-| -C、-config*ファイル*          | *ファイル*から構成を読み取ります。指定しない場合、デフォルトの構成が使用されます。 |                         |
-| -V、-version               | プログラムバージョンを印刷します                           |                         |
-| -A、-addr *ip：port*        | TiKVインポーターサーバーのリスニングアドレス                   | `server.addr`           |
-| --status-server *ip：port* | ステータスサーバーのリスニングアドレス                        | `status-server-address` |
-| --import-dir *dir*        | このディレクトリにエンジンファイルを保存します                    | `import.import-dir`     |
-| -ログレベル*レベル*               | ログレベル：トレース、デバッグ、情報、警告、エラー、オフ               | `log-level`             |
-| --ログファイル*ファイル*            | ログファイルのパス                                  | `log-file`              |
+| パラメータ                    | 説明                                         | 対応設定                    |
+| :----------------------- | :----------------------------------------- | :---------------------- |
+| -C, --config*ファイル*       | *file*から構成を読み取ります。指定しない場合、デフォルトの構成が使用されます。 |                         |
+| -V, --バージョン              | プログラムのバージョンを出力します                          |                         |
+| -A, --addr *ip:ポート*      | TiKV Importerサーバーのリッスン アドレス                | `server.addr`           |
+| --status-server *ip:ポート* | ステータスサーバーのリッスン アドレス                        | `status-server-address` |
+| --import-dir *dir*       | このディレクトリにエンジン ファイルを格納します                   | `import.import-dir`     |
+| --log-level*レベル*         | ログ レベル: trace、debug、info、warn、error、off    | `log-level`             |
+| --log-file*ファイル*         | ログ ファイルのパス                                 | `log-file`              |

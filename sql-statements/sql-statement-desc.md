@@ -3,6 +3,6 @@ title: DESC | TiDB SQL Statement Reference
 summary: An overview of the usage of `DESC` for the TiDB database.
 ---
 
-# DESC {#desc}
+# 説明 {#desc}
 
-このステートメントは[`EXPLAIN`](/sql-statements/sql-statement-explain.md)のエイリアスです。 MySQLとの互換性のために含まれています。
+このステートメントは[`EXPLAIN`](/sql-statements/sql-statement-explain.md)の別名です。 MySQL との互換性のために含まれています。

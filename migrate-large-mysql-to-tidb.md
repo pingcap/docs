@@ -22,7 +22,7 @@ summary: Learn how to migrate MySQL of large datasets to TiDB.
 
 ## リソース要件 {#resource-requirements}
 
-**オペレーティング システム**: このドキュメントの例では、新しい CentOS 7 インスタンスを使用しています。仮想マシンは、ローカル ホストまたはクラウドにデプロイできます。 TiDB Lightningはデフォルトで必要なだけ多くの CPU リソースを消費するため、専用サーバーにデプロイすることをお勧めします。これが不可能な場合は、他の TiDB コンポーネント (たとえば`tikv-server` ) と共に単一のサーバーにデプロイし、 `region-concurrency`を構成してTiDB Lightningからの CPU 使用を制限できます。通常、サイズは論理 CPU の 75% に設定できます。
+**オペレーティング システム**: このドキュメントの例では、新しい CentOS 7 インスタンスを使用しています。仮想マシンは、ローカル ホストまたはクラウドにデプロイできます。 TiDB Lightningはデフォルトで必要なだけ多くの CPU リソースを消費するため、専用サーバーにデプロイすることをお勧めします。これが不可能な場合は、他の TiDB コンポーネント (たとえば`tikv-server` ) と一緒に単一のサーバーにデプロイし、 `region-concurrency`を構成してTiDB Lightningからの CPU 使用を制限できます。通常、サイズは論理 CPU の 75% に設定できます。
 
 **メモリと CPU** : TiDB Lightningは大量のリソースを消費するため、64 GiB を超えるメモリと 32 を超える CPU コアを割り当てることをお勧めします。最高のパフォーマンスを得るには、CPU コアとメモリ (GiB) の比率が 1:2 を超えていることを確認してください。
 
@@ -44,9 +44,9 @@ SELECT table_schema,SUM(data_length)/1024/1024 AS data_length,SUM(index_length)/
 SELECT table_name,table_schema,SUM(data_length)/1024/1024 AS data_length,SUM(index_length)/1024/1024 AS index_length,SUM(data_length+index_length)/1024/1024 AS SUM from information_schema.tables WHERE table_schema = "${schema_name}" GROUP BY table_name,table_schema ORDER BY SUM DESC LIMIT 5;
 ```
 
-### ターゲット TiKVクラスタのディスク容量 {#disk-space-for-the-target-tikv-cluster}
+### ターゲット TiKV クラスターのディスク容量 {#disk-space-for-the-target-tikv-cluster}
 
-ターゲットの TiKVクラスタには、インポートされたデータを保存するのに十分なディスク容量が必要です。 [標準のハードウェア要件](/hardware-and-software-requirements.md)に加えて、ターゲット TiKVクラスタのストレージ容量は**、データ ソースのサイズ x <a href="/faq/manage-cluster-faq.md#is-the-number-of-replicas-in-each-region-configurable-if-yes-how-to-configure-it">レプリカの数</a>x 2**より大きくなければなりません。たとえば、クラスタがデフォルトで 3 つのレプリカを使用する場合、ターゲット TiKVクラスタには、データ ソースのサイズの 6 倍を超えるストレージ スペースが必要です。次の理由により、式は`x 2`になります。
+ターゲットの TiKV クラスターには、インポートされたデータを保存するのに十分なディスク容量が必要です。 [標準のハードウェア要件](/hardware-and-software-requirements.md)に加えて、ターゲット TiKV クラスターのストレージ容量は**、データ ソースのサイズ x <a href="/faq/manage-cluster-faq.md#is-the-number-of-replicas-in-each-region-configurable-if-yes-how-to-configure-it">レプリカの数</a>x 2**より大きくなければなりません。たとえば、クラスターがデフォルトで 3 つのレプリカを使用する場合、ターゲット TiKV クラスターには、データ ソースのサイズの 6 倍を超えるストレージ スペースが必要です。次の理由により、式は`x 2`になります。
 
 -   インデックスには余分なスペースが必要になる場合があります。
 -   RocksDB には空間増幅効果があります。
@@ -146,7 +146,7 @@ SELECT table_name,table_schema,SUM(data_length)/1024/1024 AS data_length,SUM(ind
 
 > **ノート：**
 >
-> インポートが成功したかどうかに関係なく、ログの最後の行に`tidb lightning exit`が表示されます。これは、 TiDB Lightningが正常に終了したことを意味しますが、必ずしもインポートが成功したことを意味するわけではありません。
+> インポートが成功したかどうかに関係なく、ログの最後の行に`tidb lightning exit`が表示されます。これは、 TiDB Lightningが正常に終了したことを意味しますが、必ずしもインポートが成功したことを意味するものではありません。
 
 インポートに失敗した場合は、トラブルシューティングについて[TiDB LightningFAQ](/tidb-lightning/tidb-lightning-faq.md)を参照してください。
 
@@ -172,7 +172,7 @@ SELECT table_name,table_schema,SUM(data_length)/1024/1024 AS data_length,SUM(ind
       port: 3306
     ```
 
-2.  次のコマンドを実行して、 `tiup dmctl`を使用してデータ ソース構成を DMクラスタに読み込みます。
+2.  次のコマンドを実行して、 `tiup dmctl`を使用してデータ ソース構成を DM クラスターに読み込みます。
 
     {{< copyable "" >}}
 
@@ -182,10 +182,10 @@ SELECT table_name,table_schema,SUM(data_length)/1024/1024 AS data_length,SUM(ind
 
     上記のコマンドで使用されるパラメーターは、次のとおりです。
 
-    | パラメータ                   | 説明                                                                   |
-    | ----------------------- | -------------------------------------------------------------------- |
-    | `--master-addr`         | `dmctl`が接続されるクラスタの任意の DM マスターの`{advertise-addr}`例: 172.16.10.71:8261 |
-    | `operate-source create` | データ ソースを DMクラスタにロードします。                                              |
+    | パラメータ                   | 説明                                                                    |
+    | ----------------------- | --------------------------------------------------------------------- |
+    | `--master-addr`         | `dmctl`が接続されるクラスタ内の任意の DM マスターの`{advertise-addr}`例: 172.16.10.71:8261 |
+    | `operate-source create` | データ ソースを DM クラスターに読み込みます。                                             |
 
 ### レプリケーション タスクを追加する {#add-a-replication-task}
 
@@ -246,10 +246,10 @@ SELECT table_name,table_schema,SUM(data_length)/1024/1024 AS data_length,SUM(ind
 
     上記のコマンドで使用されるパラメーターは、次のとおりです。
 
-    | パラメータ           | 説明                                                                   |
-    | --------------- | -------------------------------------------------------------------- |
-    | `--master-addr` | `dmctl`が接続されるクラスタの任意の DM マスターの {advertise-addr}。例: 172.16.10.71:8261 |
-    | `start-task`    | 移行タスクを開始します。                                                         |
+    | パラメータ           | 説明                                                                     |
+    | --------------- | ---------------------------------------------------------------------- |
+    | `--master-addr` | `dmctl`が接続されるクラスター内の任意の DM マスターの {advertise-addr}。例: 172.16.10.71:8261 |
+    | `start-task`    | 移行タスクを開始します。                                                           |
 
     タスクの開始に失敗した場合は、プロンプト メッセージを確認し、構成を修正します。その後、上記のコマンドを再実行してタスクを開始できます。
 
@@ -257,7 +257,7 @@ SELECT table_name,table_schema,SUM(data_length)/1024/1024 AS data_length,SUM(ind
 
 ### 移行タスクのステータスを確認する {#check-the-migration-task-status}
 
-DMクラスタに進行中の移行タスクがあるかどうかを確認し、タスクのステータスを表示するには、 `tiup dmctl`を使用して`query-status`コマンドを実行します。
+DM クラスターに進行中の移行タスクがあるかどうかを確認し、タスクのステータスを表示するには、 `tiup dmctl`を使用して`query-status`コマンドを実行します。
 
 {{< copyable "" >}}
 
@@ -271,7 +271,7 @@ tiup dmctl --master-addr ${advertise-addr} query-status ${task-name}
 
 移行タスクの履歴ステータスとその他の内部メトリックを表示するには、次の手順を実行します。
 
-TiUP を使用して DM を展開したときに Prometheus、Alertmanager、および Grafana を展開した場合は、展開中に指定された IP アドレスとポートを使用して Grafana にアクセスできます。次に、DM ダッシュボードを選択して、DM 関連のモニタリング メトリックを表示できます。
+TiUP を使用して DM をデプロイしたときに Prometheus、Alertmanager、および Grafana をデプロイした場合は、デプロイ中に指定された IP アドレスとポートを使用して Grafana にアクセスできます。次に、DM ダッシュボードを選択して、DM 関連のモニタリング メトリックを表示できます。
 
 DM が実行されている場合、DM-worker、DM-master、および dmctl は関連情報をログに出力します。これらのコンポーネントのログ ディレクトリは次のとおりです。
 

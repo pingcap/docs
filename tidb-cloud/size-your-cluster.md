@@ -5,11 +5,11 @@ summary: Learn how to determine the size of your TiDB Cloud cluster.
 
 # TiDB のサイズを決定する {#determine-your-tidb-size}
 
-このドキュメントでは、Dedicated Tierクラスタのサイズを決定する方法について説明します。
+このドキュメントでは、Dedicated Tier クラスターのサイズを決定する方法について説明します。
 
 > **ノート：**
 >
-> [開発者層クラスタ](/tidb-cloud/select-cluster-tier.md#developer-tier)にはデフォルトのクラスタサイズが付属しており、変更することはできません。
+> [開発者層クラスター](/tidb-cloud/select-cluster-tier.md#developer-tier)にはデフォルトのクラスター サイズが付属しており、変更することはできません。
 
 ## サイズ TiDB {#size-tidb}
 
@@ -17,7 +17,7 @@ TiDB はコンピューティング専用であり、データを保存しませ
 
 TiDB のノード サイズとノード数の両方を構成できます。
 
-さまざまなクラスタスケールのパフォーマンス テスト結果については、 [TiDB Cloudパフォーマンス リファレンス](/tidb-cloud/tidb-cloud-performance-reference.md)を参照してください。
+さまざまなクラスター スケールのパフォーマンス テスト結果については、 [TiDB Cloudパフォーマンス リファレンス](/tidb-cloud/tidb-cloud-performance-reference.md)を参照してください。
 
 ### TiDB ノードサイズ {#tidb-node-size}
 
@@ -38,7 +38,7 @@ TiDB のノード サイズとノード数の両方を構成できます。
 
 ### TiDB ノード数 {#tidb-node-quantity}
 
-高可用性のために、 TiDB Cloudクラスタごとに少なくとも 2 つの TiDB ノードを構成することをお勧めします。
+高可用性のために、 TiDB Cloudクラスターごとに少なくとも 2 つの TiDB ノードを構成することをお勧めします。
 
 ## サイズ TiKV {#size-tikv}
 
@@ -46,7 +46,7 @@ TiKV はデータの保存を担当します。水平方向にスケーラブル
 
 TiKV のノード サイズ、ノード数、およびノード ストレージを構成できます。
 
-さまざまなクラスタスケールのパフォーマンス テスト結果については、 [TiDB Cloudパフォーマンス リファレンス](/tidb-cloud/tidb-cloud-performance-reference.md)を参照してください。
+さまざまなクラスター スケールのパフォーマンス テスト結果については、 [TiDB Cloudパフォーマンス リファレンス](/tidb-cloud/tidb-cloud-performance-reference.md)を参照してください。
 
 ### TiKV ノードサイズ {#tikv-node-size}
 
@@ -74,7 +74,7 @@ TiDB Cloudは、耐久性と高可用性を実現するために、選択した�
 
 > **ノート：**
 >
-> TiDBクラスタをスケーリングすると、3 つのアベイラビリティーゾーンのノードが同時に増減します。ニーズに基づいて TiDBクラスタをスケールインまたはスケールアウトする方法については、 [TiDB クラスターをスケーリングする](/tidb-cloud/scale-tidb-cluster.md)を参照してください。
+> TiDB クラスターをスケーリングすると、3 つのアベイラビリティーゾーンのノードが同時に増減します。ニーズに基づいて TiDB クラスターをスケールインまたはスケールアウトする方法については、 [TiDBクラスタをスケーリングする](/tidb-cloud/scale-tidb-cluster.md)を参照してください。
 
 TiKV ノードの最小数: `ceil(compressed size of your data ÷ one TiKV capacity) × the number of replicas`
 
@@ -92,7 +92,7 @@ TiKV ノードの最小数: `ceil(3584 ÷ 1024) × 3 = 12`
 
 > **ノート：**
 >
-> クラスタの作成後に TiKV ノード ストレージを減らすことはできません。
+> クラスターの作成後に TiKV ノード ストレージを減らすことはできません。
 
 ## サイズ TiFlash {#size-tiflash}
 
@@ -111,7 +111,7 @@ TiDB または TiKV の vCPU サイズが**2 vCPU、8 GiB (ベータ)**または
 
 ### TiFlash ノード数 {#tiflash-node-quantity}
 
-TiDB Cloudは、リージョン内の異なるアベイラビリティ ゾーンに TiFlash ノードを均等にデプロイします。各TiDB Cloudクラスタで少なくとも 2 つの TiFlash ノードを構成し、実稼働環境での高可用性のためにデータの少なくとも 2 つのレプリカを作成することをお勧めします。
+TiDB Cloudは、リージョン内の異なるアベイラビリティ ゾーンに TiFlash ノードを均等にデプロイします。各TiDB Cloudクラスターで少なくとも 2 つの TiFlash ノードを構成し、実稼働環境での高可用性のためにデータの少なくとも 2 つのレプリカを作成することをお勧めします。
 
 TiFlash ノードの最小数は、特定のテーブルの TiFlash レプリカ数によって異なります。
 
@@ -127,4 +127,4 @@ TiFlash ノードの最小数: `min((800 GB * 2 + 100 GB * 1) / 1024 GB, max(2, 
 
 > **ノート：**
 >
-> クラスタの作成後に TiFlash ノード ストレージを減らすことはできません。
+> クラスターの作成後に TiFlash ノード ストレージを減らすことはできません。

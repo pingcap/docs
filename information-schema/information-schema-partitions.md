@@ -5,7 +5,7 @@ summary: Learn the `PARTITIONS` information_schema table.
 
 # パーティション {#partitions}
 
-`PARTITIONS`テーブルは、パーティションテーブルに関する情報を提供します。
+`PARTITIONS`テーブルは、分割されたテーブルに関する情報を提供します。
 
 {{< copyable "" >}}
 

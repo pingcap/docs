@@ -5,7 +5,7 @@
 -   [ドキュメント ホーム](https://docs.pingcap.com/)
 -   TiDB Cloudについて
     -   [TiDB Cloudを選ぶ理由](/tidb-cloud/tidb-cloud-intro.md)
-    -   [建築](/tidb-cloud/tidb-cloud-intro.md#architecture)
+    -   [アーキテクチャ](/tidb-cloud/tidb-cloud-intro.md#architecture)
     -   [高可用性](/tidb-cloud/high-availability-with-multi-az.md)
     -   [MySQL の互換性](/mysql-compatibility.md)
 -   始めましょう
@@ -15,7 +15,7 @@
 -   アプリケーションの開発
     -   [概要](/develop/dev-guide-overview.md)
     -   クイックスタート
-        -   [TiDB 開発者クラスターを構築する](/develop/dev-guide-build-cluster-in-cloud.md)
+        -   [TiDB 開発者クラスタを構築する](/develop/dev-guide-build-cluster-in-cloud.md)
         -   [TiDB の CRUD SQL](/develop/dev-guide-tidb-crud-sql.md)
         -   TiDB でシンプルな CRUD アプリを構築する
             -   [ジャワ](/develop/dev-guide-sample-application-java.md)
@@ -46,7 +46,7 @@
         -   [共通テーブル式](/develop/dev-guide-use-common-table-expression.md)
         -   レプリカ データの読み取り
             -   [フォロワー読み取り](/develop/dev-guide-use-follower-read.md)
-            -   [古い読み取り](/develop/dev-guide-use-stale-read.md)
+            -   [ステイル読み取り](/develop/dev-guide-use-stale-read.md)
         -   [HTAP クエリ](/develop/dev-guide-hybrid-oltp-and-olap-queries.md)
     -   取引
         -   [概要](/develop/dev-guide-transaction-overview.md)
@@ -72,29 +72,28 @@
             -   [SQL開発仕様](/develop/dev-guide-sql-development-specification.md)
     -   クラウドネイティブ開発環境
         -   [ギットポッド](/develop/dev-guide-playground-gitpod.md)
-    -   サードパーティのサポート
-        -   [ProxySQL と統合する](/develop/dev-guide-proxysql-integration.md)
--   クラスターの管理
-    -   クラスターを計画する
-        -   [クラスター層を選択する](/tidb-cloud/select-cluster-tier.md)
+-   クラスタの管理
+    -   クラスタを計画する
+        -   [クラスタ層を選択する](/tidb-cloud/select-cluster-tier.md)
         -   [TiDB のサイズを決定する](/tidb-cloud/size-your-cluster.md)
         -   [TiDB Cloudパフォーマンス リファレンス](/tidb-cloud/tidb-cloud-performance-reference.md)
-    -   [TiDB クラスターを作成する](/tidb-cloud/create-tidb-cluster.md)
-    -   TiDB クラスターに接続する
+    -   [TiDBクラスタを作成する](/tidb-cloud/create-tidb-cluster.md)
+    -   TiDBクラスタに接続する
         -   [SQL クライアント経由で接続する](/tidb-cloud/connect-to-tidb-cluster.md)
         -   [SQL シェル経由で接続](/tidb-cloud/connect-to-tidb-cluster.md#connect-via-sql-shell)
+    -   [プライベート エンドポイント接続のセットアップ](/tidb-cloud/set-up-private-endpoint-connections.md)
     -   [VPC ピアリング接続のセットアップ](/tidb-cloud/set-up-vpc-peering-connections.md)
-    -   TiFlash で HTAP クラスターを使用する
+    -   TiFlash で HTAPクラスタを使用する
         -   [TiFlash の概要](/tiflash/tiflash-overview.md)
         -   [TiFlash レプリカの作成](/tiflash/create-tiflash-replicas.md)
         -   [TiFlash からのデータの読み取り](/tiflash/use-tidb-to-read-tiflash.md)
         -   [MPP モードを使用する](/tiflash/use-tiflash-mpp-mode.md)
         -   [サポートされているプッシュダウン計算](/tiflash/tiflash-supported-pushdown-calculations.md)
         -   [互換性](/tiflash/tiflash-compatibility.md)
-    -   [TiDB クラスターのスケーリング](/tidb-cloud/scale-tidb-cluster.md)
-    -   [TiDB クラスターを一時停止または再開する](/tidb-cloud/pause-or-resume-tidb-cluster.md)
-    -   [TiDB クラスターをアップグレードする](/tidb-cloud/upgrade-tidb-cluster.md)
-    -   [TiDB クラスターを削除する](/tidb-cloud/delete-tidb-cluster.md)
+    -   [TiDBクラスタのスケーリング](/tidb-cloud/scale-tidb-cluster.md)
+    -   [TiDBクラスタを一時停止または再開する](/tidb-cloud/pause-or-resume-tidb-cluster.md)
+    -   [TiDBクラスタをアップグレードする](/tidb-cloud/upgrade-tidb-cluster.md)
+    -   [TiDBクラスタを削除する](/tidb-cloud/delete-tidb-cluster.md)
     -   [TiDB CloudAPI (ベータ) を使用する](/tidb-cloud/api-overview.md)
 -   データの移行
     -   [サンプル データのインポート](/tidb-cloud/import-sample-data.md)
@@ -169,19 +168,19 @@
     -   [TiFlash のパフォーマンスを調整する](/tiflash/tune-tiflash-performance.md)
 -   ユーザー アクセスの管理
     -   [コンソール ユーザー アクセスの管理](/tidb-cloud/manage-user-access.md)
-    -   [クラスタ セキュリティ設定の構成](/tidb-cloud/configure-security-settings.md)
+    -   [クラスタセキュリティ設定の構成](/tidb-cloud/configure-security-settings.md)
 -   請求する
     -   [請求書](/tidb-cloud/tidb-cloud-billing.md#invoices)
     -   [支払明細](/tidb-cloud/tidb-cloud-billing.md#billing-details)
     -   [クレジット](/tidb-cloud/tidb-cloud-billing.md#credits)
     -   [お支払い方法の設定](/tidb-cloud/tidb-cloud-billing.md#payment-method)
 -   参照
-    -   TiDB クラスターのアーキテクチャ
+    -   TiDBクラスタのアーキテクチャ
         -   [概要](/tidb-architecture.md)
         -   [保管所](/tidb-storage.md)
         -   [コンピューティング](/tidb-computing.md)
         -   [スケジューリング](/tidb-scheduling.md)
-    -   [TiDB Cloudクラスターの制限とクォータ](/tidb-cloud/limitations-and-quotas.md)
+    -   [TiDB Cloudクラスタの制限とクォータ](/tidb-cloud/limitations-and-quotas.md)
     -   [TiDB の制限事項](/tidb-limitations.md)
     -   SQL
         -   [TiDB で SQL を調べる](/basic-sql-operations.md)
@@ -358,10 +357,10 @@
             -   [概要](/character-set-and-collation.md)
             -   [GBK](/character-set-gbk.md)
         -   履歴データの読み取り
-            -   古い読み取りを使用する (推奨)
-                -   [Stale Read の使用シナリオ](/stale-read.md)
-                -   [`As OF TIMESTAMP`を使用して古い読み取りを実行する](/as-of-timestamp.md)
-                -   [`tidb_read_staleness`を使用して古い読み取りを実行する](/tidb-read-staleness.md)
+            -   ステイル読み取りを使用する (推奨)
+                -   [ステイル読み取りの使用シナリオ](/stale-read.md)
+                -   [`As OF TIMESTAMP`を使用してステイル読み取りを実行する](/as-of-timestamp.md)
+                -   [`tidb_read_staleness`を使用して古いステイル読み取りを実行する](/tidb-read-staleness.md)
             -   [`tidb_snapshot`システム変数を使用する](/read-historical-data.md)
         -   システム テーブル
             -   [`mysql`](/mysql-schema.md)

@@ -15,25 +15,25 @@ summary: Learn an example of how to build a TiDB application using Spring Boot.
 
 この例に基づいて独自のアプリケーションを構築できます。
 
-## ステップ 1: TiDBクラスタを起動する {#step-1-launch-your-tidb-cluster}
+## ステップ 1: TiDB クラスターを起動する {#step-1-launch-your-tidb-cluster}
 
 <CustomContent platform="tidb">
 
-以下にTiDBクラスタの起動方法を紹介します。
+以下にTiDBクラスターの起動方法を紹介します。
 
-**TiDB Cloudの無料クラスタを使用する**
+**TiDB Cloudの無料クラスターを使用する**
 
-詳細な手順については、 [無料のクラスタを作成する](/develop/dev-guide-build-cluster-in-cloud.md#step-1-create-a-free-cluster)を参照してください。
+詳細な手順については、 [無料のクラスターを作成する](/develop/dev-guide-build-cluster-in-cloud.md#step-1-create-a-free-cluster)を参照してください。
 
-**ローカルクラスタを使用する**
+**ローカル クラスターを使用する**
 
-詳細な手順については、 [ローカル テストクラスタをデプロイする](/quick-start-with-tidb.md#deploy-a-local-test-cluster)または[TiUP を使用して TiDB クラスターをデプロイする](/production-deployment-using-tiup.md)を参照してください。
+詳細な手順については、 [ローカル テスト クラスターをデプロイする](/quick-start-with-tidb.md#deploy-a-local-test-cluster)または[TiUP を使用して TiDBクラスタをデプロイする](/production-deployment-using-tiup.md)を参照してください。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-[無料のクラスタを作成する](/develop/dev-guide-build-cluster-in-cloud.md#step-1-create-a-free-cluster)を参照してください。
+[無料のクラスターを作成する](/develop/dev-guide-build-cluster-in-cloud.md#step-1-create-a-free-cluster)を参照してください。
 
 </CustomContent>
 
@@ -126,9 +126,9 @@ summary: Learn an example of how to build a TiDB application using Spring Boot.
 
 > **ノート：**
 >
-> SQL は比較的標準化されていますが、各データベース ベンダーは ANSI SQL 定義構文のサブセットとスーパーセットを使用しています。これは、データベースの方言と呼ばれます。 Hibernate は、その`org.hibernate.dialect.Dialect`のクラスと各データベース ベンダーのさまざまなサブクラスを通じて、これらのダイアレクト全体のバリエーションを処理します。
+> SQL は比較的標準化されていますが、各データベース ベンダーは ANSI SQL 定義の構文のサブセットとスーパーセットを使用しています。これは、データベースの方言と呼ばれます。 Hibernate は、その`org.hibernate.dialect.Dialect`のクラスと各データベース ベンダーのさまざまなサブクラスを通じて、これらのダイアレクト全体のバリエーションを処理します。
 >
-> ほとんどの場合、Hibernate は、ブートストラップ中に JDBC 接続について質問することで、使用する適切な方言を決定できます。使用する適切な方言を決定する Hibernate の能力 (およびその解決に影響を与える能力) については、 [方言解決](https://docs.jboss.org/hibernate/orm/6.0/userguide/html_single/Hibernate_User_Guide.html#portability-dialectresolver)を参照してください。
+> ほとんどの場合、Hibernate は、ブートストラップ中に JDBC 接続に関するいくつかの質問をすることで、使用する適切なダイアレクトを決定できます。使用する適切な方言を決定する Hibernate の機能 (およびその解決に影響を与える機能) については、 [方言解決](https://docs.jboss.org/hibernate/orm/6.0/userguide/html_single/Hibernate_User_Guide.html#portability-dialectresolver)を参照してください。
 >
 > 何らかの理由で適切な方言を決定できない場合、またはカスタム方言を使用したい場合は、 `hibernate.dialect`の設定を行う必要があります。
 >
@@ -182,13 +182,13 @@ summary: Learn an example of how to build a TiDB application using Spring Boot.
 
 ## ステップ 5: アプリケーションを実行する {#step-5-run-the-application}
 
-このステップでは、アプリケーション コードをコンパイルして実行し、Web アプリケーションを作成します。 Hibernate は`test`データベース内に`player_jpa`テーブルを作成します。アプリケーションの RESTful API を使用してリクエストを行う場合、これらのリクエストは TiDBクラスタで実行され[データベース トランザクション](/develop/dev-guide-transaction-overview.md) 。
+このステップでは、アプリケーション コードをコンパイルして実行し、Web アプリケーションを作成します。 Hibernate は`test`データベース内に`player_jpa`テーブルを作成します。アプリケーションの RESTful API を使用してリクエストを行う場合、これらのリクエストは TiDB クラスターで実行され[データベース トランザクション](/develop/dev-guide-transaction-overview.md) 。
 
 このアプリケーションのコードについて詳しく知りたい場合は、 [実装の詳細](#implementation-details)を参照してください。
 
 ### ステップ 5.1 パラメータの変更 {#step-5-1-change-parameters}
 
-ローカル以外のデフォルトクラスタ、 TiDB Cloudクラスタ、またはリモートクラスタを使用する場合は、 `application.yml` ( `src/main/resources`にあります) の`spring.datasource.url` 、 `spring.datasource.username` 、 `spring.datasource.password`パラメーターを変更します。
+ローカル以外のデフォルト クラスター、 TiDB Cloudクラスター、またはリモート クラスターを使用する場合は、 `application.yml` ( `src/main/resources`にあります) の`spring.datasource.url` 、 `spring.datasource.username` 、 `spring.datasource.password`パラメーターを変更します。
 
 {{< copyable "" >}}
 
@@ -328,7 +328,7 @@ Hibernate: create table player_jpa (id bigint not null, coins integer, goods int
 
 #### プレーヤーを作成する {#create-players}
 
-[**作成**] タブをクリックし、[<strong>送信</strong>] ボタンをクリックして、POST 要求を`http://localhost:8080/player/`に送信します。戻り値は追加されたプレーヤーの数であり、1 であると予想されます。
+[**作成**] タブをクリックし、[<strong>送信</strong>] ボタンをクリックして、POST 要求を`http://localhost:8080/player/`に送信します。戻り値は追加されたプレーヤーの数で、1 であると予想されます。
 
 ![Postman-Create a player](/media/develop/IMG_20220402-003350731.png)
 
@@ -340,7 +340,7 @@ Hibernate: create table player_jpa (id bigint not null, coins integer, goods int
 
 #### 制限付きでプレイヤー情報を一括取得 {#get-player-information-in-bulk-by-limit}
 
-[ **GetByLimit** ] タブをクリックし、[<strong>送信</strong>] ボタンをクリックして、GET 要求を`http://localhost:8080/player/limit/3`に送信します。戻り値は、最大 3 人のプレイヤーの情報のリストです。
+**GetByLimit**タブをクリックし、 <strong>Send</strong>ボタンをクリックして、GET リクエストを`http://localhost:8080/player/limit/3`に送信します。戻り値は、最大 3 人のプレイヤーの情報のリストです。
 
 ![Postman-GetByLimit](/media/develop/IMG_20220402-003505846.png)
 
@@ -358,7 +358,7 @@ Hibernate: create table player_jpa (id bigint not null, coins integer, goods int
 
 #### プレイヤーの取引 {#player-trading}
 
-[**取引**] タブをクリックし、[<strong>送信</strong>] ボタンをクリックして、PUT リクエストを`http://localhost:8080/player/trade`に送信します。要求パラメーターは、売り手の ID `sellID` 、買い手の ID `buyID` 、購入した商品の数`amount` 、購入のために消費されたコインの数`price`です。
+[**取引**] タブをクリックし、[<strong>送信</strong>] ボタンをクリックして、PUT リクエストを`http://localhost:8080/player/trade`に送信します。要求パラメータは、売り手の ID `sellID` 、買い手の ID `buyID` 、購入された商品の数`amount` 、購入のために消費されたコインの数`price`です。
 
 戻り値は、トランザクションが成功したかどうかです。売り手にとって不十分な商品、買い手にとって不十分なコイン、またはデータベース エラーがある場合、 [データベース トランザクション](/develop/dev-guide-transaction-overview.md)は取引が成功せず、プレイヤーのコインや商品が失われないことを保証します。
 
@@ -830,12 +830,12 @@ public class PlayerBean {
 -   `@Table`は、アノテーション属性`name`を使用して、このエンティティ クラスを`player_jpa`テーブルに関連付けます。
 -   `@Id`は、このプロパティがテーブルの主キー列に関連していることを宣言します。
 -   `@GeneratedValue`は、この列の値が自動的に生成され、手動で設定する必要がないことを示します。属性`generator`は、ジェネレーターの名前を`player_id`として指定するために使用されます。
--   `@SequenceGenerator`は[順序](/sql-statements/sql-statement-create-sequence.md)を使用するジェネレーターを宣言し、注釈属性`name`を使用してジェネレーターの名前を`player_id`として宣言します ( `@GeneratedValue`で指定された名前と一致します)。注釈属性`sequenceName`は、データベース内のシーケンスの名前を指定するために使用されます。最後に、注釈属性`allocationSize`を使用して、シーケンスのステップ サイズが 1 であることを宣言します。
+-   `@SequenceGenerator`は[順序](/sql-statements/sql-statement-create-sequence.md)を使用するジェネレーターを宣言し、アノテーション属性`name`を使用してジェネレーターの名前を`player_id`として宣言します ( `@GeneratedValue`で指定された名前と一致します)。注釈属性`sequenceName`は、データベース内のシーケンスの名前を指定するために使用されます。最後に、注釈属性`allocationSize`を使用して、シーケンスのステップ サイズが 1 であることを宣言します。
 -   `@Column`は、各プライベート属性を`player_jpa`テーブルの列として宣言し、注釈属性`name`を使用して、属性に対応する列の名前を決定します。
 
 #### リポジトリ {#repository}
 
-データベース層を抽象化するために、Spring アプリケーションは[`Repository`](https://docs.spring.io/spring-data/jpa/docs/current/reference/html/#repositories)インターフェース、または`Repository`のサブインターフェースを使用します。このインターフェイスは、テーブルなどのデータベース オブジェクトにマップされます。 JPA は、primay キーを使用して[`INSERT`](/sql-statements/sql-statement-insert.md)や[`SELECT`](/sql-statements/sql-statement-select.md)などのいくつかの事前構築済みメソッドを実装します。
+データベースレイヤーを抽象化するために、Spring アプリケーションは[`Repository`](https://docs.spring.io/spring-data/jpa/docs/current/reference/html/#repositories)インターフェース、または`Repository`のサブインターフェースを使用します。このインターフェイスは、テーブルなどのデータベース オブジェクトにマップされます。 JPA は、primay キーを使用して[`INSERT`](/sql-statements/sql-statement-insert.md)や[`SELECT`](/sql-statements/sql-statement-select.md)などのいくつかの事前構築済みメソッドを実装します。
 
 {{< copyable "" >}}
 

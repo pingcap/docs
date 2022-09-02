@@ -7,9 +7,9 @@ summary: Learn how to migrate and merge small datasets of shards from MySQL to T
 
 アップストリームの複数の MySQL データベース インスタンスをダウンストリームの 1 つの TiDB データベースに移行およびマージする必要があり、データ量がそれほど多くない場合は、DM を使用して MySQL シャードを移行できます。このドキュメントの「小さなデータセット」とは、通常、1 TiB 前後またはそれ未満のデータを意味します。このドキュメントの例を通じて、移行の操作手順、注意事項、およびトラブルシューティングを学習できます。
 
-このドキュメントは、合計で 1 TiB 未満の MySQL シャードの移行に適用されます。合計 1 TiB を超えるデータを含む MySQL シャードを移行する場合、DM だけで移行すると時間がかかります。この場合、 [大規模なデータセットの MySQL シャードを TiDB に移行およびマージする](/migrate-large-mysql-shards-to-tidb.md)で紹介した操作に従って移行を行うことをお勧めします。
+このドキュメントは、合計で 1 TiB 未満の MySQL シャードの移行に適用されます。合計 1 TiB を超えるデータを持つ MySQL シャードを移行する場合、DM のみを使用して移行すると、長い時間がかかります。この場合は、 [大規模なデータセットの MySQL シャードを TiDB に移行およびマージする](/migrate-large-mysql-shards-to-tidb.md)で紹介した操作で移行することをお勧めします。
 
-このドキュメントでは、移行手順を説明するために簡単な例を取り上げます。この例の 2 つのデータ ソース MySQL インスタンスの MySQL シャードは、ダウンストリームの TiDBクラスタに移行されます。
+このドキュメントでは、移行手順を説明するために簡単な例を取り上げます。この例の 2 つのデータ ソース MySQL インスタンスの MySQL シャードは、ダウンストリームの TiDB クラスターに移行されます。
 
 この例では、MySQL インスタンス 1 と MySQL インスタンス 2 の両方に次のスキーマとテーブルが含まれています。この例では、 `store_01`および`store_02`のスキーマからテーブルを移行し、両方のインスタンスで`sale`のプレフィックスを付けて、 `store`スキーマの下流の`sale`テーブルにマージします。
 
@@ -28,7 +28,7 @@ summary: Learn how to migrate and merge small datasets of shards from MySQL to T
 
 移行を開始する前に、次のタスクが完了していることを確認してください。
 
--   [TiUP を使用して DM クラスターをデプロイする](/dm/deploy-a-dm-cluster-using-tiup.md)
+-   [TiUP を使用して DMクラスタをデプロイする](/dm/deploy-a-dm-cluster-using-tiup.md)
 -   [DM-worker に必要な権限](/dm/dm-worker-intro.md)
 
 ### シャード テーブルの競合を確認する {#check-conflicts-for-the-sharded-tables}
@@ -85,7 +85,7 @@ from:
   port: ${port}             # For example: 3306
 ```
 
-ターミナルで次のコマンドを実行します。 `tiup dmctl`を使用して、データ ソース構成を DMクラスタに読み込みます。
+ターミナルで次のコマンドを実行します。 `tiup dmctl`を使用して、データ ソース構成を DM クラスターに読み込みます。
 
 {{< copyable "" >}}
 
@@ -95,12 +95,12 @@ tiup dmctl --master-addr ${advertise-addr} operate-source create source1.yaml
 
 パラメータは次のとおりです。
 
-| パラメータ                   | 説明                                                                       |
-| ----------------------- | ------------------------------------------------------------------------ |
-| `--master-addr`         | dmctl が接続するクラスタの任意の DM マスター ノードの`{advertise-addr}` 。例: 172.16.10.71:8261 |
-| `operate-source create` | データ ソースを DM クラスタにロードします。                                                 |
+| パラメータ                   | 説明                                                                         |
+| ----------------------- | -------------------------------------------------------------------------- |
+| `--master-addr`         | dmctl が接続するクラスター内の任意の DM マスター ノードの`{advertise-addr}` 。例: 172.16.10.71:8261 |
+| `operate-source create` | データ ソースを DM クラスタにロードします。                                                   |
 
-すべてのデータ ソースが DMクラスタに追加されるまで、上記の手順を繰り返します。
+すべてのデータ ソースが DM クラスターに追加されるまで、上記の手順を繰り返します。
 
 ## ステップ 2.移行タスクを構成する {#step-2-configure-the-migration-task}
 
@@ -193,10 +193,10 @@ tiup dmctl --master-addr ${advertise-addr} check-task task.yaml
 tiup dmctl --master-addr ${advertise-addr} start-task task.yaml
 ```
 
-| パラメータ           | 説明                                                                       |
-| --------------- | ------------------------------------------------------------------------ |
-| `--master-addr` | dmctl が接続するクラスタの任意の DM マスター ノードの`{advertise-addr}` 。例: 172.16.10.71:8261 |
-| `start-task`    | データ移行タスクを開始します。                                                          |
+| パラメータ           | 説明                                                                         |
+| --------------- | -------------------------------------------------------------------------- |
+| `--master-addr` | dmctl が接続するクラスター内の任意の DM マスター ノードの`{advertise-addr}` 。例: 172.16.10.71:8261 |
+| `start-task`    | データ移行タスクを開始します。                                                            |
 
 移行タスクの開始に失敗した場合は、エラー情報に従って構成情報を変更し、再度`start-task task.yaml`を実行して移行タスクを開始します。問題が発生した場合は、 [エラー処理](/dm/dm-error-handling.md)および[FAQ](/dm/dm-faq.md)を参照してください。
 
@@ -218,7 +218,7 @@ Grafana またはログを使用して、移行タスクの履歴と内部運用
 
 -   グラファナ経由
 
-    TiUP を使用して DMクラスタをデプロイするときに、Prometheus、Alertmanager、および Grafana が正しくデプロイされている場合は、Grafana で DM 監視メトリックを表示できます。具体的には、Grafana でのデプロイ時に指定した IP アドレスとポートを入力し、DM ダッシュボードを選択します。
+    TiUP を使用して DM クラスターをデプロイするときに、Prometheus、Alertmanager、および Grafana が正しくデプロイされている場合は、Grafana で DM 監視メトリックを表示できます。具体的には、Grafana でのデプロイ時に指定した IP アドレスとポートを入力し、DM ダッシュボードを選択します。
 
 -   ログ経由
 

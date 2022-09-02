@@ -3,25 +3,25 @@ title: DM Cluster Performance Test
 summary: Learn how to test the performance of DM clusters.
 ---
 
-# DMクラスターパフォーマンステスト {#dm-cluster-performance-test}
+# DMクラスタのパフォーマンス テスト {#dm-cluster-performance-test}
 
-このドキュメントでは、データ移行に関する速度テストや遅延テストなど、DMクラスタでパフォーマンステストを実行するためのテストシナリオを構築する方法について説明します。
+このドキュメントでは、DM クラスターでパフォーマンス テストを実行するためのテスト シナリオを構築する方法について説明します。これには、データ移行に関する速度テストとレイテンシーテストが含まれます。
 
-## 移行データフロー {#migration-data-flow}
+## 移行データ フロー {#migration-data-flow}
 
-単純な移行データフロー、つまりMySQL-&gt; DM-&gt; TiDBを使用して、DMクラスタのデータ移行パフォーマンスをテストできます。
+MySQL -&gt; DM -&gt; TiDB という単純な移行データ フローを使用して、DM クラスターのデータ移行パフォーマンスをテストできます。
 
 ## テスト環境をデプロイ {#deploy-test-environment}
 
--   すべてのデフォルト構成で、TiUPを使用してTiDBテストクラスタをデプロイします。
--   MySQLサービスをデプロイします。 binlogに対して`ROW`モードを有効にし、他の構成アイテムにはデフォルト構成を使用します。
--   DMワーカーとDMマスターを使用してDMクラスタをデプロイします。
+-   すべてのデフォルト構成で、TiUP を使用して TiDB テスト クラスターをデプロイします。
+-   MySQL サービスをデプロイします。 binlog の`ROW`モードを有効にし、他の構成項目には既定の構成を使用します。
+-   DM-worker と DM-master を使用して DM クラスターをデプロイします。
 
 ## 性能テスト {#performance-test}
 
-### テーブルスキーマ {#table-schema}
+### テーブル スキーマ {#table-schema}
 
-パフォーマンステストには、次のスキーマのテーブルを使用します。
+パフォーマンス テストには、次のスキーマを持つテーブルを使用します。
 
 {{< copyable "" >}}
 
@@ -36,11 +36,11 @@ CREATE TABLE `sbtest` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin
 ```
 
-### 完全なインポートベンチマークケース {#full-import-benchmark-case}
+### 全輸入ベンチマークケース {#full-import-benchmark-case}
 
-#### テストデータを生成する {#generate-test-data}
+#### テストデータの生成 {#generate-test-data}
 
-`sysbench`を使用して、アップストリームでテストテーブルを作成し、完全にインポートするためのテストデータを生成します。次の`sysbench`のコマンドを実行して、テストデータを生成します。
+アップストリームでテスト テーブルを作成し、フル インポート用のテスト データを生成するには、 `sysbench`を使用します。次の`sysbench`のコマンドを実行して、テスト データを生成します。
 
 {{< copyable "" >}}
 
@@ -50,9 +50,9 @@ sysbench --test=oltp_insert --tables=4 --mysql-host=172.16.4.40 --mysql-port=330
 
 #### データ移行タスクを作成する {#create-a-data-migration-task}
 
-1.  アップストリームのMySQLソースを作成し、 `source-id`から`source-1`に設定します。詳細については、 [データソース構成をロードする](/dm/dm-manage-source.md#operate-data-source)を参照してください。
+1.  アップストリームの MySQL ソースを作成し、 `source-id`から`source-1`を設定します。詳細については、 [データ ソース構成のロード](/dm/dm-manage-source.md#operate-data-source)を参照してください。
 
-2.  移行タスクを作成します（ `full`モードで）。以下は、タスク構成テンプレートです。
+2.  移行タスクを作成します ( `full`モード)。以下は、タスク構成テンプレートです。
 
 ```yaml
 ---
@@ -84,34 +84,34 @@ mydumpers:
     threads: 32
 ```
 
-移行タスクの作成方法の詳細については、 [データ移行タスクを作成する](/dm/dm-create-task.md)を参照してください。
+移行タスクの作成方法の詳細については、 [データ移行タスクの作成](/dm/dm-create-task.md)を参照してください。
 
 > **ノート：**
 >
-> -   マルチスレッドを使用して単一のテーブルからデータを同時にエクスポートできるようにするには、 `mydumpers`の構成項目で`rows`オプションを使用できます。これにより、データのエクスポートが高速化されます。
-> -   さまざまな構成でパフォーマンスをテストするには、 `mysql-instances`の構成で`loader-thread`を調整し、 `mydumpers`の構成項目で`rows`と`threads`を調整します。
+> -   マルチスレッドを使用して単一のテーブルから同時にデータをエクスポートできるようにするには、 `mydumpers`構成項目で`rows`オプションを使用できます。これにより、データのエクスポートが高速化されます。
+> -   異なる構成でパフォーマンスをテストするには、構成`mysql-instances`で`loader-thread`を調整し、構成`mydumpers`で`rows`と`threads`を調整します。
 
 #### テスト結果を取得する {#get-test-results}
 
-DMワーカーのログを確認します。 `all data files have been finished`が表示されている場合は、完全なデータがインポートされていることを意味します。この場合、データのインポートに費やされた時間を確認できます。サンプルログは次のとおりです。
+DM-worker ログを観察します。 `all data files have been finished`が表示された場合、完全なデータがインポートされたことを意味します。この場合、データのインポートにかかった時間を確認できます。サンプル ログは次のとおりです。
 
 ```
  [INFO] [loader.go:604] ["all data files have been finished"] [task=test] [unit=load] ["cost time"=52.439796ms]
 ```
 
-テストデータのサイズとデータのインポートにかかる時間に応じて、完全なデータの移行速度を計算できます。
+テスト データのサイズとデータのインポートにかかる時間に応じて、完全なデータの移行速度を計算できます。
 
-### インクリメンタルレプリケーションベンチマークケース {#incremental-replication-benchmark-case}
+### 増分レプリケーションのベンチマーク ケース {#incremental-replication-benchmark-case}
 
-#### テーブルを初期化します {#initialize-tables}
+#### テーブルの初期化 {#initialize-tables}
 
-`sysbench`を使用して、アップストリームにテストテーブルを作成します。
+アップストリームでテスト テーブルを作成するには、 `sysbench`を使用します。
 
 #### データ移行タスクを作成する {#create-a-data-migration-task}
 
-1.  アップストリームMySQLのソースを作成します。 `source-id`から`source-1`に設定します（ソースが[完全なインポートベンチマークケース](#full-import-benchmark-case)で作成されている場合は、再度作成する必要はありません）。詳細については、 [データソース構成をロードする](/dm/dm-manage-source.md#operate-data-source)を参照してください。
+1.  アップストリーム MySQL のソースを作成します。 `source-id` ～ `source-1`を設定します（ [全輸入ベンチマークケース](#full-import-benchmark-case)でソースを作成した場合は、再度作成する必要はありません）。詳細については、 [データ ソース構成のロード](/dm/dm-manage-source.md#operate-data-source)を参照してください。
 
-2.  DM移行タスクを作成します（ `all`モードで）。以下は、タスク構成ファイルの例です。
+2.  DM 移行タスクを作成します ( `all`モードで)。以下は、タスク構成ファイルの例です。
 
 ```yaml
 ---
@@ -142,15 +142,15 @@ syncers:
     batch: 100
 ```
 
-データ移行タスクの作成方法の詳細については、 [データ移行タスクを作成する](/dm/dm-create-task.md)を参照してください。
+データ移行タスクの作成方法の詳細については、 [データ移行タスクの作成](/dm/dm-create-task.md)を参照してください。
 
 > **ノート：**
 >
-> さまざまな構成でパフォーマンスをテストするために、 `syncers`の構成項目で`worker-count`と`batch`を調整できます。
+> 異なる構成でパフォーマンスをテストするには、構成項目`syncers`の`worker-count`と`batch`を調整します。
 
-#### 増分データを生成する {#generate-incremental-data}
+#### 増分データの生成 {#generate-incremental-data}
 
-アップストリームでインクリメンタルデータを継続的に生成するには、次の`sysbench`コマンドを実行します。
+アップストリームで増分データを継続的に生成するには、次の`sysbench`コマンドを実行します。
 
 {{< copyable "" >}}
 
@@ -164,4 +164,4 @@ sysbench --test=oltp_insert --tables=4 --num-threads=32 --mysql-host=172.17.4.40
 
 #### テスト結果を取得する {#get-test-results}
 
-DMの移行ステータスを監視するには、 `query-status`コマンドを実行します。 DMの監視メトリックを監視するには、Grafanaを使用できます。ここで、監視メトリックは`finished sqls jobs` （単位時間あたりに完了したジョブの数）などを参照します。詳細については、 [Binlog移行監視メトリック](/dm/monitor-a-dm-cluster.md#binlog-replication)を参照してください。
+DM の移行ステータスを確認するには、 `query-status`コマンドを実行します。 DM のモニタリング メトリックを観察するには、Grafana を使用できます。ここでの監視メトリックは、 `finished sqls jobs` (単位時間あたりに終了したジョブの数) などを指します。詳細については、 [Binlog移行の監視メトリクス](/dm/monitor-a-dm-cluster.md#binlog-replication)を参照してください。

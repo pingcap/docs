@@ -5,7 +5,7 @@ summary: Learn the `USER_PRIVILEGES` information_schema table.
 
 # USER_PRIVILEGES {#user-privileges}
 
-`USER_PRIVILEGES`の表は、グローバル特権に関する情報を提供します。この情報は、 `mysql.user`のシステムテーブルから取得されます。
+表`USER_PRIVILEGES`は、グローバル権限に関する情報を提供します。この情報は、 `mysql.user`システム テーブルから取得されます。
 
 {{< copyable "" >}}
 
@@ -68,9 +68,9 @@ SELECT * FROM user_privileges;
 28 rows in set (0.00 sec)
 ```
 
-`USER_PRIVILEGES`表のフィールドは次のように説明されています。
+`USER_PRIVILEGES`テーブルのフィールドは次のとおりです。
 
--   `GRANTEE` ：付与されたユーザーの名前`'user_name'@'host_name'`の形式です。
--   `TABLE_CATALOG` ：テーブルが属するカタログの名前。この値は常に`def`です。
--   `PRIVILEGE_TYPE` ：付与する特権タイプ。各行には1つの特権タイプのみが表示されます。
--   `IS_GRANTABLE` ： `GRANT OPTION`特権を持っている場合、値は`YES`です。それ以外の場合、値は`NO`です。
+-   `GRANTEE` : 付与されたユーザーの名前。形式は`'user_name'@'host_name'`です。
+-   `TABLE_CATALOG` : テーブルが属するカタログの名前。この値は常に`def`です。
+-   `PRIVILEGE_TYPE` : 付与される権限タイプ。各行には 1 つの特権タイプのみが表示されます。
+-   `IS_GRANTABLE` : `GRANT OPTION`権限を持っている場合、値は`YES`です。それ以外の場合、値は`NO`です。

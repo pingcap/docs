@@ -3,13 +3,13 @@ title: TiFlash Alert Rules
 summary: Learn the alert rules of the TiFlash cluster.
 ---
 
-# TiFlashアラートルール {#tiflash-alert-rules}
+# TiFlash アラート ルール {#tiflash-alert-rules}
 
-このドキュメントでは、TiFlashクラスタのアラートルールを紹介します。
+このドキュメントでは、TiFlash クラスターのアラート ルールを紹介します。
 
 ## <code>TiFlash_schema_error</code> {#code-tiflash-schema-error-code}
 
--   アラートルール：
+-   アラート ルール:
 
     `increase(tiflash_schema_apply_count{type="failed"}[15m]) > 0`
 
@@ -19,50 +19,50 @@ summary: Learn the alert rules of the TiFlash cluster.
 
 -   解決：
 
-    エラーは、いくつかの間違ったロジックが原因である可能性があります。サポートについては[TiFlash R＆D](mailto:support@pingcap.com)にお問い合わせください。
+    エラーは、間違ったロジックが原因である可能性があります。サポートについては、 [TiFlash 研究開発](mailto:support@pingcap.com)にお問い合わせください。
 
 ## <code>TiFlash_schema_apply_duration</code> {#code-tiflash-schema-apply-duration-code}
 
--   アラートルール：
+-   アラート ルール:
 
     `histogram_quantile(0.99, sum(rate(tiflash_schema_apply_duration_seconds_bucket[1m])) BY (le, instance)) > 20`
 
 -   説明：
 
-    適用期間が20秒を超える確率が99％を超えると、アラートがトリガーされます。
+    適用時間が 20 秒を超える確率が 99% を超えると、アラートがトリガーされます。
 
 -   解決：
 
-    TiFlashストレージエンジンの内部の問題が原因である可能性があります。サポートについては[TiFlash R＆D](mailto:support@pingcap.com)にお問い合わせください。
+    これは、TiFlash ストレージ エンジンの内部の問題が原因である可能性があります。サポートについては、 [TiFlash 研究開発](mailto:support@pingcap.com)にお問い合わせください。
 
 ## <code>TiFlash_raft_read_index_duration</code> {#code-tiflash-raft-read-index-duration-code}
 
--   アラートルール：
+-   アラート ルール:
 
     `histogram_quantile(0.99, sum(rate(tiflash_raft_read_index_duration_seconds_bucket[1m])) BY (le, instance)) > 3`
 
 -   説明：
 
-    読み取りインデックスの期間が3秒を超える確率が99％を超えると、アラートがトリガーされます。
+    読み取りインデックスの継続時間が 3 秒を超える確率が 99% を超えると、アラートがトリガーされます。
 
     > **ノート：**
     >
-    > `read index`は、TiKVリーダーに送信されるkvprotoリクエストです。 TiKVリージョンの再試行、ビジーストア、またはネットワークの問題により、要求時間が`read index`に長くなる可能性があります。
+    > `read index`は、TiKV リーダーに送信される kvproto リクエストです。 TiKV リージョンの再試行、ビジー ストア、またはネットワークの問題により、要求時間が`read index`に長くなる可能性があります。
 
 -   解決：
 
-    頻繁な再試行は、TiKVクラスタの頻繁な分割または移行が原因である可能性があります。 TiKVクラスタのステータスを確認して、再試行の理由を特定できます。
+    頻繁な再試行は、TiKV クラスターの頻繁な分割または移行が原因である可能性があります。 TiKV クラスターのステータスをチェックして、再試行の理由を特定できます。
 
 ## <code>TiFlash_raft_wait_index_duration</code> {#code-tiflash-raft-wait-index-duration-code}
 
--   アラートルール：
+-   アラート ルール:
 
     `histogram_quantile(0.99, sum(rate(tiflash_raft_wait_index_duration_seconds_bucket[1m])) BY (le, instance)) > 2`
 
 -   説明：
 
-    Raftのリージョンの待機時間が2秒を超える確率が99％を超えると、アラートがトリガーされます。
+    TiFlash のリージョン Raft Index の待ち時間が 2 秒を超える確率が 99% を超えると、アラートがトリガーされます。
 
 -   解決：
 
-    TiKVとプロキシ間の通信エラーが原因である可能性があります。サポートについては[TiFlash R＆D](mailto:support@pingcap.com)にお問い合わせください。
+    TiKV とプロキシ間の通信エラーが原因である可能性があります。サポートについては、 [TiFlash 研究開発](mailto:support@pingcap.com)にお問い合わせください。

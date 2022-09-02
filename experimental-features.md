@@ -21,7 +21,7 @@ summary: Learn the experimental features of TiDB.
 
 ## スケジューリング {#scheduling}
 
-エラスティック スケジューリング機能。これにより、TiDBクラスタは、リアルタイムのワークロードに基づいて Kubernetes で動的にスケールアウトおよびスケールインできます。これにより、アプリケーションのピーク時のストレスが効果的に軽減され、オーバーヘッドが節約されます。詳細は[TidbCluster 自動スケーリングを有効にする](https://docs.pingcap.com/tidb-in-kubernetes/stable/enable-tidb-cluster-auto-scaling)を参照してください。 (v4.0 で導入)
+エラスティック スケジューリング機能。これにより、TiDB クラスターは、リアルタイムのワークロードに基づいて Kubernetes で動的にスケールアウトおよびスケールインできます。これにより、アプリケーションのピーク時のストレスが効果的に軽減され、オーバーヘッドが節約されます。詳細は[TidbCluster 自動スケーリングを有効にする](https://docs.pingcap.com/tidb-in-kubernetes/stable/enable-tidb-cluster-auto-scaling)を参照してください。 (v4.0 で導入)
 
 ## SQL {#sql}
 
@@ -36,7 +36,7 @@ summary: Learn the experimental features of TiDB.
 ## 保管所 {#storage}
 
 -   [タイタンを無効にする](/storage-engine/titan-configuration.md#disable-titan-experimental) (v4.0 で導入)
--   [タイタンレベルマージ](/storage-engine/titan-configuration.md#level-merge-experimental) (v4.0 で導入)
+-   [タイタン レベル マージ](/storage-engine/titan-configuration.md#level-merge-experimental) (v4.0 で導入)
 -   分割 リージョンはバケットに分割されます。 [バケットは同時クエリの単位として使用されます](/tune-region-performance.md#use-bucket-to-increase-concurrency)スキャンの同時実行性を向上させます。 (v6.1.0 で導入)
 -   TiKV は[API V2](/tikv-configuration-file.md#api-version-new-in-v610)を紹介します。 (v6.1.0 で導入)
 

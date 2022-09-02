@@ -5,7 +5,7 @@ summary: Learn how to migrate data from SQL files to TiDB.
 
 # SQL ファイルから TiDB にデータを移行する {#migrate-data-from-sql-files-to-tidb}
 
-このドキュメントでは、 TiDB Lightningを使用して MySQL SQL ファイルから TiDB にデータを移行する方法について説明します。 MySQL SQL ファイルを生成する方法については、 [Dumplingを使用して SQL ファイルにエクスポートする](/dumpling-overview.md#export-to-sql-files)を参照してください。
+このドキュメントでは、 TiDB Lightningを使用して MySQL SQL ファイルから TiDB にデータを移行する方法について説明します。 MySQL SQL ファイルの生成方法については、 [Dumplingを使用して SQL ファイルにエクスポートする](/dumpling-overview.md#export-to-sql-files)を参照してください。
 
 ## 前提条件 {#prerequisites}
 

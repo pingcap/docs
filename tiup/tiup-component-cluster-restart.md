@@ -4,11 +4,11 @@ title: tiup cluster restart
 
 # tiup cluster restart {#tiup-cluster-restart}
 
-コマンド`tiup cluster restart`は、指定されたクラスタのすべてまたは一部のサービスを再始動するために使用されます。
+コマンド`tiup cluster restart`は、指定されたクラスターのすべてまたは一部のサービスを再起動するために使用されます。
 
 > **ノート：**
 >
-> 再起動プロセス中、関連するサービスは一定期間利用できません。
+> 再起動プロセス中は、関連するサービスが一定期間利用できなくなります。
 
 ## 構文 {#syntax}
 
@@ -16,38 +16,38 @@ title: tiup cluster restart
 tiup cluster restart <cluster-name> [flags]
 ```
 
-`<cluster-name>` ：操作するクラスタの名前。クラスタ名を忘れた場合は、 [クラスタリスト](/tiup/tiup-component-cluster-list.md)コマンドで確認できます。
+`<cluster-name>` : 操作するクラスターの名前。クラスター名を忘れた場合は、 [クラスタ リスト](/tiup/tiup-component-cluster-list.md)コマンドで確認できます。
 
 ## オプション {#options}
 
-### -N、-node {#n-node}
+### -N, --ノード {#n-node}
 
--   再起動するノードを指定します。このオプションの値は、ノードIDのコンマ区切りのリストです。 `tiup cluster display`コマンドによって返される[クラスタステータステーブル](/tiup/tiup-component-cluster-display.md)の最初の列からノードIDを取得できます。
--   データ型： `STRING`
--   このオプションが指定されていない場合、TiUPはデフォルトですべてのノードを再起動します。
-
-> **ノート：**
->
-> オプション`-R, --role`が同時に指定された場合、TiUPは`-N, --node`と`-R, --role`の両方の要件に一致するサービスノードを再起動します。
-
-### -R、-role {#r-role}
-
--   再起動するノードの役割を指定しました。このオプションの値は、ノードの役割のコンマ区切りのリストです。 `tiup cluster display`コマンドによって返される[クラスタステータステーブル](/tiup/tiup-component-cluster-display.md)の2番目の列からノードの役割を取得できます。
--   データ型： `STRING`
--   このオプションが指定されていない場合、TiUPはデフォルトですべての役割のノードを再起動します。
+-   再起動するノードを指定します。このオプションの値は、ノード ID のコンマ区切りリストです。 `tiup cluster display`コマンドで返される[クラスタ ステータス テーブル](/tiup/tiup-component-cluster-display.md)の最初の列からノード ID を取得できます。
+-   データ型: `STRING`
+-   このオプションが指定されていない場合、TiUP はデフォルトですべてのノードを再起動します。
 
 > **ノート：**
 >
-> オプション`-N, --node`が同時に指定された場合、TiUPは`-N, --node`と`-R, --role`の両方の要件に一致するサービスノードを再起動します。
+> オプション`-R, --role`を同時に指定すると、TiUP は`-N, --node`と`-R, --role`の両方の要件に一致するサービス ノードを再起動します。
+
+### -R, --role {#r-role}
+
+-   再起動するノードの役割を指定します。このオプションの値は、ノードの役割のコンマ区切りリストです。 `tiup cluster display`コマンドによって返される[クラスタ ステータス テーブル](/tiup/tiup-component-cluster-display.md)の 2 列目から、ノードの役割を取得できます。
+-   データ型: `STRING`
+-   このオプションが指定されていない場合、TiUP はデフォルトですべてのロールのノードを再起動します。
+
+> **ノート：**
+>
+> オプション`-N, --node`を同時に指定すると、TiUP は`-N, --node`と`-R, --role`の両方の要件に一致するサービス ノードを再起動します。
 
 ### -h, --help {#h-help}
 
--   ヘルプ情報を印刷します。
--   データ型： `BOOLEAN`
--   このオプションは、デフォルトで`false`の値で無効になっています。このオプションを有効にするには、このオプションをコマンドに追加し、 `true`の値を渡すか、値を渡さないようにします。
+-   ヘルプ情報を出力します。
+-   データ型: `BOOLEAN`
+-   このオプションはデフォルトで無効になっており、値は`false`です。このオプションを有効にするには、このオプションをコマンドに追加し、値`true`を渡すか、値を何も渡さないでください。
 
 ## 出力 {#outputs}
 
-サービス再開プロセスのログ。
+サービスの再起動プロセスのログ。
 
-[&lt;&lt;前のページに戻る-TiUPクラスターコマンドリスト](/tiup/tiup-component-cluster.md#command-list)
+[&lt;&lt; 前のページに戻る - TiUP クラスタコマンド一覧](/tiup/tiup-component-cluster.md#command-list)

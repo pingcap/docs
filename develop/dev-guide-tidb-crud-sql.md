@@ -9,7 +9,7 @@ summary: A brief introduction to TiDB's CURD SQL.
 
 ## 始める前に {#before-you-start}
 
-TiDBクラスタに接続していることを確認してください。そうでない場合は、 [TiDB Cloud(開発者層) で TiDB クラスターを構築する](/develop/dev-guide-build-cluster-in-cloud.md#step-1-create-a-free-cluster)を参照して空きクラスタを作成します。
+TiDB クラスターに接続していることを確認してください。そうでない場合は、 [TiDB Cloud(開発者層) で TiDBクラスタを構築する](/develop/dev-guide-build-cluster-in-cloud.md#step-1-create-a-free-cluster)を参照して空きクラスターを作成します。
 
 ## TiDB で SQL を調べる {#explore-sql-with-tidb}
 
@@ -19,7 +19,7 @@ TiDBクラスタに接続していることを確認してください。そう�
 
 TiDB は MySQL と互換性があり、ほとんどの場合、MySQL ステートメントを直接使用できます。サポートされていない機能については、 [MySQL との互換性](/mysql-compatibility.md#unsupported-features)を参照してください。
 
-SQL を試して、TiDB と MySQL クエリとの互換性をテストするには、次のことができ[TiDB をインストールせずに Web ブラウザーで直接実行する](https://tour.tidb.io/) 。最初に TiDBクラスタをデプロイしてから、そこで SQL ステートメントを実行することもできます。
+SQL を試して、TiDB と MySQL クエリとの互換性をテストするには、次のことができ[TiDB をインストールせずに Web ブラウザーで直接実行する](https://tour.tidb.io/) 。最初に TiDB クラスターをデプロイしてから、そこで SQL ステートメントを実行することもできます。
 
 このページでは、DDL、DML、CRUD 操作などの基本的なTiDB SQLステートメントについて説明します。 TiDB ステートメントの完全なリストについては、 [TiDB SQL構文図](https://pingcap.github.io/sqlgram/)を参照してください。
 

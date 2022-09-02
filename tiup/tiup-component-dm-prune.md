@@ -2,9 +2,9 @@
 title: tiup dm prune
 ---
 
-# tiupdmプルーン {#tiup-dm-prune}
+# tiup dm プルーン {#tiup-dm-prune}
 
-クラスタ（/tiup/tiup-component-dm-scale-in.md）でスケーリングする場合、etcd内の少量のメタデータはクリーンアップされないため、通常は問題は発生しません。メタデータをクリーンアップする必要がある場合は、 `tiup dm prune`コマンドを手動で実行できます。
+クラスター (/tiup/tiup-component-dm-scale-in.md) をスケールインすると、etcd 内の少量のメタデータがクリーンアップされませんが、通常は問題は発生しません。メタデータをクリーンアップする必要がある場合は、 `tiup dm prune`コマンドを手動で実行できます。
 
 ## 構文 {#syntax}
 
@@ -17,11 +17,11 @@ tiup dm prune <cluster-name> [flags]
 ### -h, --help {#h-help}
 
 -   ヘルプ情報を出力します。
--   データ型： `BOOLEAN`
--   デフォルト：false
+-   データ型: `BOOLEAN`
+-   デフォルト: false
 
 ## 出力 {#output}
 
-クリーンアッププロセスのログ。
+クリーンアップ プロセスのログ。
 
-[&lt;&lt;前のページに戻るTiUP DMコマンドリスト](/tiup/tiup-component-dm.md#command-list)
+[&lt;&lt; 前のページに戻る - TiUP DMコマンド一覧](/tiup/tiup-component-dm.md#command-list)

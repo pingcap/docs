@@ -3,9 +3,9 @@ title: CREATE PLACEMENT POLICY
 summary: The usage of CREATE PLACEMENT POLICY in TiDB.
 ---
 
-# プレースメントポリシーを作成する {#create-placement-policy}
+# 配置ポリシーを作成する {#create-placement-policy}
 
-`CREATE PLACEMENT POLICY`は、後でテーブル、パーティション、またはデータベーススキーマに割り当てることができる名前付き配置ポリシーを作成するために使用されます。
+`CREATE PLACEMENT POLICY`は、後でテーブル、パーティション、またはデータベース スキーマに割り当てることができる名前付きの配置ポリシーを作成するために使用されます。
 
 ## あらすじ {#synopsis}
 
@@ -46,9 +46,9 @@ AdvancedPlacementOption ::=
 
 > **ノート：**
 >
-> クラスタで使用可能なリージョンを確認するには、 [`SHOW PLACEMENT LABELS`](/sql-statements/sql-statement-show-placement-labels.md)を参照してください。
+> クラスターで使用可能なリージョンを確認するには、 [`SHOW PLACEMENT LABELS`](/sql-statements/sql-statement-show-placement-labels.md)を参照してください。
 >
-> 使用可能なリージョンが表示されない場合は、TiKVインストールでラベルが正しく設定されていない可能性があります。
+> 利用可能なリージョンが表示されない場合は、TiKV インストールでラベルが正しく設定されていない可能性があります。
 
 {{< copyable "" >}}
 
@@ -71,13 +71,13 @@ Query OK, 0 rows affected (0.10 sec)
 1 row in set (0.00 sec)
 ```
 
-## MySQLの互換性 {#mysql-compatibility}
+## MySQL の互換性 {#mysql-compatibility}
 
-このステートメントは、MySQL構文のTiDB拡張です。
+このステートメントは、MySQL 構文に対する TiDB 拡張です。
 
-## も参照してください {#see-also}
+## こちらもご覧ください {#see-also}
 
--   [SQLでの配置ルール](/placement-rules-in-sql.md)
+-   [SQL の配置規則](/placement-rules-in-sql.md)
 -   [配置を表示](/sql-statements/sql-statement-show-placement.md)
 -   [配置ポリシーの変更](/sql-statements/sql-statement-alter-placement-policy.md)
 -   [ドロップ配置ポリシー](/sql-statements/sql-statement-drop-placement-policy.md)

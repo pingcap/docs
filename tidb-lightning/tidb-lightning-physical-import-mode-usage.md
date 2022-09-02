@@ -3,13 +3,13 @@ title: Use Physical Import Mode
 summary: Learn how to use the physical import mode in TiDB Lightning.
 ---
 
-# 物理インポートモードを使用する {#use-physical-import-mode}
+# 物理インポート モードを使用する {#use-physical-import-mode}
 
-このドキュメントでは、構成ファイルの作成やパフォーマンスの調整など、 TiDB Lightningで物理インポートモードを使用する方法を紹介します。
+このドキュメントでは、設定ファイルの記述やパフォーマンスのチューニングなど、 TiDB Lightningでの物理インポート モードの使用方法を紹介します。
 
-## 物理インポートモードを構成して使用する {#configure-and-use-the-physical-import-mode}
+## 物理インポート モードの構成と使用 {#configure-and-use-the-physical-import-mode}
 
-次の構成ファイルを使用して、物理インポートモードを使用してデータインポートを実行できます。
+次の構成ファイルを使用して、物理インポート モードを使用してデータ インポートを実行できます。
 
 ```toml
 [lightning]
@@ -71,21 +71,21 @@ checksum = "required"
 analyze = "optional"
 ```
 
-完全な構成ファイルについては、 [構成ファイルとコマンドラインパラメーター](/tidb-lightning/tidb-lightning-configuration.md)を参照してください。
+完全な構成ファイルについては、 [構成ファイルとコマンド ライン パラメータ](/tidb-lightning/tidb-lightning-configuration.md)を参照してください。
 
 ### 競合の検出 {#conflict-detection}
 
-競合するデータとは、同じPK/UK列データを持つ2つ以上のレコードを指します。データソースに競合するデータが含まれている場合、テーブル内の実際の行数は、一意のインデックスを使用したクエリによって返される行の総数とは異なります。
+競合するデータとは、PK/UK 列のデータが同じである 2 つ以上のレコードを指します。データ ソースに競合するデータが含まれている場合、テーブル内の実際の行数は、一意のインデックスを使用したクエリによって返される合計行数とは異なります。
 
-TiDB Lightningは、競合するデータを検出するための3つの戦略を提供します。
+TiDB Lightningは、競合するデータを検出するための 3 つの戦略を提供します。
 
--   `record` ：ターゲットTiDBの`lightning_task_info.conflict_error_v1`テーブルに競合するレコードのみを記録します。ターゲットTiKVの必要なバージョンはv5.2.0以降のバージョンであることに注意してください。それ以外の場合は、「none」にフォールバックします。
--   `remove` （推奨）： `record`戦略のように、競合するすべてのレコードを記録します。ただし、ターゲットテーブルから競合するすべてのレコードを削除して、ターゲットTiDBの状態に一貫性を持たせます。
--   `none` ：重複レコードを検出しません。 `none`は、3つの戦略の中で最高のパフォーマンスを発揮しますが、ターゲットTiDBのデータに一貫性がなくなる可能性があります。
+-   `record` : 競合するレコードのみをターゲット TiDB の`lightning_task_info.conflict_error_v1`テーブルに記録します。ターゲット TiKV の必要なバージョンは v5.2.0 以降のバージョンであることに注意してください。それ以外の場合は、&#39;none&#39; にフォールバックします。
+-   `remove` (推奨): `record`戦略のように、競合するすべてのレコードを記録します。ただし、競合するすべてのレコードをターゲット テーブルから削除して、ターゲット TiDB で一貫した状態を確保します。
+-   `none` : 重複レコードを検出しません。 `none`は 3 つの戦略で最高のパフォーマンスを発揮しますが、ターゲット TiDB でデータの一貫性が失われる可能性があります。
 
-v5.3より前では、Lightningは競合検出をサポートしていません。競合するデータがある場合、インポートプロセスはチェックサムステップで失敗します。競合検出が有効になっている場合、 `record`または`remove`の戦略に関係なく、競合するデータがある場合、Lightningはチェックサムステップをスキップします（常に失敗するため）。
+v5.3 より前では、Lightning は競合検出をサポートしていません。競合するデータがある場合、インポート プロセスはチェックサム ステップで失敗します。競合検出が有効になっている場合、戦略`record`または`remove`に関係なく、競合するデータがある場合、Lightning はチェックサム手順をスキップします (常に失敗するため)。
 
-`order_line`のテーブルに次のスキーマがあるとします。
+`order_line`テーブルに次のスキーマがあるとします。
 
 ```sql
 CREATE TABLE IF NOT EXISTS `order_line` (
@@ -103,7 +103,7 @@ CREATE TABLE IF NOT EXISTS `order_line` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 ```
 
-インポート中にLightningが競合するデータを検出した場合は、次のように`lightning_task_info.conflict_error_v1`のテーブルにクエリを実行できます。
+インポート中に Lightning が競合するデータを検出した場合、次のように`lightning_task_info.conflict_error_v1`テーブルをクエリできます。
 
 ```sql
 mysql> select table_name,index_name,key_data,row_data from conflict_error_v1 limit 10;
@@ -124,16 +124,16 @@ mysql> select table_name,index_name,key_data,row_data from conflict_error_v1 lim
 10 rows in set (0.14 sec)
 ```
 
-保持する必要のあるレコードを手動で識別し、これらのレコードをテーブルに挿入できます。
+保持する必要があるレコードを手動で識別し、これらのレコードをテーブルに挿入できます。
 
 ## 性能調整 {#performance-tuning}
 
-**物理インポートモードのインポートパフォーマンスを改善するための最も直接的で効果的な方法は次のとおりです。**
+**物理インポート モードのインポート パフォーマンスを向上させる最も直接的で効果的な方法は、次のとおりです。**
 
--   **Lightningがデプロイされているノードのハードウェア、特にCPUと`sorted-key-dir`のストレージデバイスをアップグレードします。**
--   **<a href="/tidb-lightning/tidb-lightning-distributed-import.md">並列インポート</a>機能を使用して、水平スケーリングを実現します。**
+-   **Lightning がデプロイされているノードのハードウェア、特に CPU と`sorted-key-dir`のストレージ デバイスをアップグレードします。**
+-   **<a href="/tidb-lightning/tidb-lightning-distributed-import.md">並行インポート</a>機能を使用して、水平スケーリングを実現します。**
 
-Lightningは、物理インポートモードのインポートパフォーマンスに影響を与えるいくつかの同時実行関連の構成を提供します。ただし、長期的な経験から、次の4つの構成項目をデフォルト値のままにしておくことをお勧めします。 4つの構成項目を調整しても、パフォーマンスが大幅に向上することはありません。
+Lightning には、物理インポートモードのインポートパフォーマンスに影響を与える同時実行関連の設定がいくつか用意されています。ただし、長年の経験から、次の 4 つの構成項目はデフォルト値のままにしておくことをお勧めします。 4 つの構成項目を調整しても、パフォーマンスが大幅に向上するわけではありません。
 
 ```
 [lightning]
@@ -155,18 +155,18 @@ region-concurrency =
 io-concurrency = 5
 ```
 
-インポート中、各テーブルは、インデックスを格納するための1つの「インデックスエンジン」と、行データを格納するための複数の「データエンジン」に分割されます。
+インポート中、各テーブルは、インデックスを格納する 1 つの &quot;インデックス エンジン&quot; と、行データを格納する複数の &quot;データ エンジン&quot; に分割されます。
 
-`index-concurrency`は、インデックスエンジンの最大同時実行性を制御します。 `index-concurrency`を調整するときは、CPUが完全に使用されるように`index-concurrency * the number of source files of each table > region-concurrency`を確認してください。比率は通常1.5〜2です`index-concurrency`を高く設定しすぎたり、2以上に設定したりしないでください（デフォルト）。 `index-concurrency`が高すぎると、構築されるパイプラインが多すぎて、インデックスエンジンのインポート段階が山積みになります。
+`index-concurrency`は、インデックス エンジンの最大同時実行数を制御します。 `index-concurrency`を調整するときは、CPU が完全に使用されるように`index-concurrency * the number of source files of each table > region-concurrency`を確認してください。比率は通常 1.5 ～ 2 です`index-concurrency`を高く設定しすぎたり、2 より低く設定したりしないでください (デフォルト)。 `index-concurrency`が高すぎると、構築されるパイプラインが多すぎて、インデックス エンジンのインポート ステージが積み重なってしまいます。
 
-同じことが`table-concurrency`にも当てはまります。 CPUが完全に使用されていることを確認するには、 `table-concurrency * the number of source files of each table > region-concurrency`を確認してください。推奨値は約`region-concurrency * 4 / the number of source files of each table`で、4以上です。
+`table-concurrency`についても同様です。 CPU が完全に使用されていることを確認するために`table-concurrency * the number of source files of each table > region-concurrency`を確認してください。推奨値は約`region-concurrency * 4 / the number of source files of each table`で、4 以上です。
 
-テーブルが大きい場合、Lightningはテーブルを100GiBの複数のバッチに分割します。並行性は`table-concurrency`によって制御されます。
+テーブルが大きい場合、Lightning はテーブルを 100 GiB の複数のバッチに分割します。同時実行性は`table-concurrency`によって制御されます。
 
-`index-concurrency`と`table-concurrency`は、インポート速度にほとんど影響しません。デフォルト値のままにしておくことができます。
+`index-concurrency`と`table-concurrency`はインポート速度にほとんど影響しません。デフォルト値のままにしておくことができます。
 
-`io-concurrency`は、ファイル読み取りの同時実行性を制御します。デフォルト値は5です。常に、5つのハンドルのみが読み取り操作を実行しています。通常、ファイルの読み取り速度はボトルネックではないため、この構成をデフォルト値のままにしておくことができます。
+`io-concurrency`は、ファイル読み取りの並行性を制御します。デフォルト値は 5 です。常に、5 つのハンドルのみが読み取り操作を実行しています。通常、ファイルの読み取り速度はボトルネックにはならないため、この構成はデフォルト値のままにしておくことができます。
 
-ファイルデータが読み取られた後、Lightningは、データのローカルでのエンコードや並べ替えなど、いくつかの後処理を行う必要があります。これらの操作の並行性は`region-concurrency`によって制御されます。デフォルト値はCPUコアの数です。この構成はデフォルト値のままにしておくことができます。 Lightningを他のコンポーネントとは別のサーバーにデプロイすることをお勧めします。 Lightningを他のコンポーネントと一緒にデプロイする必要がある場合は、負荷に応じて値`region-concurrency`を下げる必要があります。
+ファイルデータが読み取られた後、Lightning はデータのエンコードやローカルでの並べ替えなどの後処理を行う必要があります。これらの操作の並行性は`region-concurrency`によって制御されます。デフォルト値は CPU コアの数です。この構成はデフォルト値のままにしておくことができます。他のコンポーネントとは別のサーバーに Lightning をデプロイすることをお勧めします。 Lightning を他のコンポーネントと一緒にデプロイする必要がある場合は、負荷に応じて`region-concurrency`の値を下げる必要があります。
 
-TiKVの[`num-threads`](/tikv-configuration-file.md#num-threads)の構成も、パフォーマンスに影響を与える可能性があります。新しいクラスターの場合、CPUコアの数に`num-threads`を設定することをお勧めします。
+TiKV の[`num-threads`](/tikv-configuration-file.md#num-threads)構成もパフォーマンスに影響を与える可能性があります。新しいクラスターの場合、CPU コアの数に`num-threads`を設定することをお勧めします。

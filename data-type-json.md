@@ -3,18 +3,18 @@ title: TiDB Data Type
 summary: Learn about the JSON data type in TiDB.
 ---
 
-# JSONタイプ {#json-type}
+# JSON タイプ {#json-type}
 
 > **警告：**
 >
-> これはまだ実験的機能です。実稼働環境で使用することはお勧めし**ません**。
+> これはまだ実験的機能です。本番環境で使用することはお勧めし**ません**。
 
-TiDBは、半構造化データの保存に役立つ`JSON` （JavaScript Object Notation）データ型をサポートしています。 `JSON`データ型には、 `JSON`形式の文字列を文字列列に格納するよりも次の利点があります。
+TiDB は、半構造化データの格納に役立つ`JSON` (JavaScript Object Notation) データ型をサポートしています。 `JSON`データ型には、文字列列に`JSON`形式の文字列を格納する場合と比較して、次の利点があります。
 
--   シリアル化にはバイナリ形式を使用します。内部フォーマットにより、 `JSON`のドキュメント要素へのクイック読み取りアクセスが可能になります。
--   `JSON`列に保存されたJSONドキュメントの自動検証。有効なドキュメントのみを保存できます。
+-   シリアル化には Binary 形式を使用します。内部フォーマットにより、 `JSON`のドキュメント要素への迅速な読み取りアクセスが可能になります。
+-   `JSON`列に格納された JSON ドキュメントの自動検証。有効なドキュメントのみを保存できます。
 
-他のバイナリタイプの列と同様に、 `JSON`列には直接インデックスが付けられませんが、生成された列の形式で`JSON`ドキュメントのフィールドにインデックスを付けることができます。
+`JSON`列は、他のバイナリ型の列と同様に直接インデックス付けされませんが、生成された列の形式で`JSON`ドキュメントのフィールドにインデックスを付けることができます。
 
 ```sql
 CREATE TABLE city (
@@ -27,4 +27,4 @@ INSERT INTO city (id,detail) VALUES (1, '{"name": "Beijing", "population": 100}'
 SELECT id FROM city WHERE population >= 100;
 ```
 
-詳細については、 [JSON関数](/functions-and-operators/json-functions.md)および[生成された列](/generated-columns.md)を参照してください。
+詳細については、 [JSON 関数](/functions-and-operators/json-functions.md)および[生成された列](/generated-columns.md)を参照してください。

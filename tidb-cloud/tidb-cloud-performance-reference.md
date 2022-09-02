@@ -5,7 +5,7 @@ summary: Learn TiDB Cloud performance test results.
 
 # TiDB Cloudパフォーマンス リファレンス {#tidb-cloud-performance-reference}
 
-このドキュメントでは、いくつかの TiDBクラスタスケールの[TPC-C](https://www.tpc.org/tpcc/)および[シスベンチ](https://github.com/akopytov/sysbench)のパフォーマンス テスト結果を提供し[クラスタサイズを決定する](/tidb-cloud/size-your-cluster.md) 。
+このドキュメントでは、いくつかの TiDB クラスター スケールの[TPC-C](https://www.tpc.org/tpcc/)と[シスベンチ](https://github.com/akopytov/sysbench)のパフォーマンス テスト結果を提供し[クラスターサイズを決定する](/tidb-cloud/size-your-cluster.md) 。
 
 ## 2 vCPU のパフォーマンス {#2-vcpu-performance}
 
@@ -21,11 +21,11 @@ summary: Learn TiDB Cloud performance test results.
 
 テスト規模:
 
--   TiDB: 2 vCPU * 2; TiKV: 2 vCPU * 3
+-   TiDB (2 vCPU、8 GiB) * 2; TiKV (2 vCPU、8 GiB) * 3
 
 試験結果：
 
--   低レイテンシで最適なパフォーマンス
+-   低レイテンシーで最適なパフォーマンス
 
     TPC-C パフォーマンス:
 
@@ -73,11 +73,11 @@ summary: Learn TiDB Cloud performance test results.
 
 テスト規模:
 
--   TiDB: 4 vCPU * 2; TiKV: 4 vCPU * 3
+-   TiDB (4 vCPU、16 GiB) * 2; TiKV (4 vCPU、16 GiB) * 3
 
 試験結果：
 
--   低レイテンシで最適なパフォーマンス
+-   低レイテンシーで最適なパフォーマンス
 
     TPC-C パフォーマンス:
 
@@ -125,14 +125,14 @@ summary: Learn TiDB Cloud performance test results.
 
 テストスケール:
 
--   TiDB: 8 vCPU * 2; TiKV: 8 vCPU * 3
--   TiDB: 8 vCPU * 4; TiKV: 8 vCPU * 6
+-   TiDB (8 vCPU、16 GiB) * 2; TiKV (8 vCPU、32 GiB) * 3
+-   TiDB (8 vCPU、16 GiB) * 4; TiKV (8 vCPU、32 GiB) * 6
 
 試験結果：
 
-**TiDB: 8 vCPU * 2; TiKV: 8 vCPU * 3**
+**TiDB (8 vCPU、16 GiB) * 2; TiKV (8 vCPU、32 GiB) * 3**
 
--   低レイテンシで最適なパフォーマンス
+-   低レイテンシーで最適なパフォーマンス
 
     TPC-C パフォーマンス:
 
@@ -168,9 +168,9 @@ summary: Learn TiDB Cloud performance test results.
     | インデックスを更新  | 2,000 | 15,146 | 15,146 | 132          |
     | 非インデックスの更新 | 2,000 | 34,505 | 34,505 | 58           |
 
-**TiDB: 8 vCPU * 4; TiKV: 8 vCPU * 6**
+**TiDB (8 vCPU、16 GiB) * 4; TiKV (8 vCPU、32 GiB) * 6**
 
--   低レイテンシで最適なパフォーマンス
+-   低レイテンシーで最適なパフォーマンス
 
     TPC-C パフォーマンス:
 
@@ -218,14 +218,14 @@ summary: Learn TiDB Cloud performance test results.
 
 テストスケール:
 
--   TiDB: 16 vCPU * 2; TiKV: 16 vCPU * 3
--   TiDB: 16 vCPU * 4; TiKV: 16 vCPU * 6
+-   TiDB (16 vCPU、32 GiB) * 2; TiKV (16 vCPU、64 GiB) * 3
+-   TiDB (16 vCPU、32 GiB) * 4; TiKV (16 vCPU、64 GiB) * 6
 
 試験結果：
 
-**TiDB: 16 vCPU * 2; TiKV: 16 vCPU * 3**
+**TiDB (16 vCPU、32 GiB) * 2; TiKV (16 vCPU、64 GiB) * 3**
 
--   低レイテンシで最適なパフォーマンス
+-   低レイテンシーで最適なパフォーマンス
 
     TPC-C パフォーマンス:
 
@@ -261,9 +261,9 @@ summary: Learn TiDB Cloud performance test results.
     | インデックスを更新  | 3,000 | 29,576  | 29,576  | 101          |
     | 非インデックスの更新 | 3,000 | 64,624  | 64,624  | 46           |
 
-**TiDB: 16 vCPU * 4; TiKV: 16 vCPU * 6**
+**TiDB (16 vCPU、32 GiB) * 4; TiKV (16 vCPU、64 GiB) * 6**
 
--   低レイテンシで最適なパフォーマンス
+-   低レイテンシーで最適なパフォーマンス
 
     TPC-C パフォーマンス:
 

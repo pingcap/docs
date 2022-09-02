@@ -5,27 +5,27 @@ summary: An overview of the usage of SHOW GRANTS for the TiDB database.
 
 # 助成金を表示 {#show-grants}
 
-このステートメントは、ユーザーに関連付けられている特権のリストを示しています。 MySQLと同様に、 `USAGE`特権はTiDBにログインする機能を示します。
+このステートメントは、ユーザーに関連付けられた権限のリストを表示します。 MySQL と同様に、 `USAGE`権限は TiDB にログインできることを示します。
 
 ## あらすじ {#synopsis}
 
-**ShowGrantsStmt：**
+**ShowGrantsStmt:**
 
 ![ShowGrantsStmt](/media/sqlgram/ShowGrantsStmt.png)
 
-**ユーザー名：**
+**ユーザー名:**
 
 ![Username](/media/sqlgram/Username.png)
 
-**UsingRoles：**
+**ロールの使用:**
 
 ![UsingRoles](/media/sqlgram/UsingRoles.png)
 
-**RolenameList：**
+**RolenameList:**
 
 ![RolenameList](/media/sqlgram/RolenameList.png)
 
-**役割名：**
+**役割名:**
 
 ![Rolename](/media/sqlgram/Rolename.png)
 
@@ -58,11 +58,11 @@ mysql> SHOW GRANTS FOR u1;
 2 rows in set (0.00 sec)
 ```
 
-## MySQLの互換性 {#mysql-compatibility}
+## MySQL の互換性 {#mysql-compatibility}
 
-このステートメントは、MySQLと完全に互換性があると理解されています。互換性の違いは、GitHubでは[問題を介して報告された](https://github.com/pingcap/tidb/issues/new/choose)である必要があります。
+このステートメントは、MySQL と完全に互換性があると理解されています。互換性の違いは、GitHub で[問題を介して報告された](https://github.com/pingcap/tidb/issues/new/choose)にする必要があります。
 
-## も参照してください {#see-also}
+## こちらもご覧ください {#see-also}
 
--   [CREATEUSERを表示する](/sql-statements/sql-statement-show-create-user.md)
+-   [ユーザーの作成を表示](/sql-statements/sql-statement-show-create-user.md)
 -   [許す](/sql-statements/sql-statement-grant-privileges.md)

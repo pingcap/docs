@@ -3,134 +3,134 @@ title: TiDB Data Migration Glossary
 summary: Learn the terms used in TiDB Data Migration.
 ---
 
-# TiDBデータ移行用語集 {#tidb-data-migration-glossary}
+# TiDB データ移行用語集 {#tidb-data-migration-glossary}
 
-このドキュメントには、TiDBデータ移行（DM）のログ、監視、構成、およびドキュメントで使用される用語がリストされています。
+このドキュメントでは、TiDB Data Migration (DM) のログ、監視、構成、およびドキュメントで使用される用語を一覧表示します。
 
 ## B {#b}
 
 ### Binlog {#binlog}
 
-TiDB DMでは、binlogはTiDBデータベースで生成されたバイナリログファイルを参照します。 MySQLまたはMariaDBと同じ表示があります。詳細については、 [MySQLバイナリログ](https://dev.mysql.com/doc/internals/en/binary-log.html)と[MariaDBバイナリログ](https://mariadb.com/kb/en/library/binary-log/)を参照してください。
+TiDB DM では、binlog は TiDB データベースで生成されたバイナリ ログ ファイルを参照します。 MySQL や MariaDB と同様の表示があります。詳細は[MySQL バイナリ ログ](https://dev.mysql.com/doc/internals/en/binary-log.html)と[MariaDB バイナリ ログ](https://mariadb.com/kb/en/library/binary-log/)を参照してください。
 
 ### Binlogイベント {#binlog-event}
 
-Binlogイベントは、MySQLまたはMariaDBサーバーインスタンスに対して行われたデータ変更に関する情報です。これらのbinlogイベントは、binlogファイルに保存されます。詳細については、 [Binlogイベント](https://dev.mysql.com/doc/internals/en/binlog-event.html)と[Binlogイベント](https://mariadb.com/kb/en/library/1-binlog-events/)を参照してください。
+Binlogイベントは、MySQL または MariaDBサーバーインスタンスに対して行われたデータ変更に関する情報です。これらの binlog イベントは binlog ファイルに保存されます。詳細は[MySQLBinlogイベント](https://dev.mysql.com/doc/internals/en/binlog-event.html)と[MariaDB Binlogイベント](https://mariadb.com/kb/en/library/1-binlog-events/)を参照してください。
 
-### Binlogイベントフィルター {#binlog-event-filter}
+### Binlogイベント フィルター {#binlog-event-filter}
 
-[Binlogイベントフィルター](/dm/dm-key-features.md#binlog-event-filter)は、ブロックよりもきめ細かいフィルタリング機能であり、リストフィルタリングルールを許可します。詳細は[binlogイベントフィルター](/dm/dm-key-features.md#binlog-event-filter)を参照してください。
+[Binlogイベント フィルター](/dm/dm-key-features.md#binlog-event-filter)は、ブロックおよび許可リストのフィルタリング ルールよりもきめ細かいフィルタリング機能です。詳細は[binlog イベント フィルタ](/dm/dm-key-features.md#binlog-event-filter)を参照してください。
 
 ### Binlogの位置 {#binlog-position}
 
-binlog位置は、binlogファイル内のbinlogイベントのオフセット情報です。詳細については、 [MySQL `SHOW BINLOG EVENTS`](https://dev.mysql.com/doc/refman/8.0/en/show-binlog-events.html)と[MariaDB `SHOW BINLOG EVENTS`](https://mariadb.com/kb/en/library/show-binlog-events/)を参照してください。
+binlog 位置は、binlog ファイル内の binlog イベントのオフセット情報です。詳細は[MySQL `SHOW BINLOG EVENTS`](https://dev.mysql.com/doc/refman/8.0/en/show-binlog-events.html)と[MariaDB `SHOW BINLOG EVENTS`](https://mariadb.com/kb/en/library/show-binlog-events/)を参照してください。
 
 ### Binlogレプリケーション処理ユニット/同期ユニット {#binlog-replication-processing-unit-sync-unit}
 
-Binlogレプリケーション処理ユニットは、DM-workerでアップストリームbinlogまたはローカルリレーログを読み取り、これらのログをダウンストリームに移行するために使用される処理ユニットです。各サブタスクは、binlogレプリケーション処理ユニットに対応します。現在のドキュメントでは、binlogレプリケーション処理ユニットは同期処理ユニットとも呼ばれます。
+Binlogレプリケーション処理ユニットは、上流のバイナリ ログまたはローカル リレー ログを読み取り、これらのログを下流に移行するために DM-worker で使用される処理ユニットです。各サブタスクは、バイナリログ レプリケーション処理ユニットに対応します。現在のドキュメントでは、バイナリログ レプリケーション処理ユニットは同期処理ユニットとも呼ばれます。
 
-### テーブルリストをブロックして許可する {#block-x26-allow-table-list}
+### ブロック &amp; 許可テーブル リスト {#block-x26-allow-table-list}
 
-テーブルリストのブロックと許可は、一部のデータベースまたは一部のテーブルのすべての操作をフィルタリングまたは移行する機能です。詳細は[テーブルリストをブロックして許可する](/dm/dm-key-features.md#block-and-allow-table-lists)を参照してください。この機能は、 [MySQLレプリケーションフィルタリング](https://dev.mysql.com/doc/refman/5.6/en/replication-rules.html)および[MariaDBレプリケーションフィルター](https://mariadb.com/kb/en/replication-filters/)に似ています。
+ブロック &amp; 許可テーブル リストは、一部のデータベースまたは一部のテーブルのすべての操作をフィルタリングまたは移行する機能です。詳細は[ブロック &amp; 許可テーブル リスト](/dm/dm-key-features.md#block-and-allow-table-lists)を参照してください。この機能は[MySQL レプリケーション フィルタリング](https://dev.mysql.com/doc/refman/5.6/en/replication-rules.html)および[MariaDB レプリケーション フィルター](https://mariadb.com/kb/en/replication-filters/)に似ています。
 
-## C {#c}
+## ハ {#c}
 
 ### チェックポイント {#checkpoint}
 
-チェックポイントは、完全なデータインポートまたは増分レプリケーションタスクが一時停止して再開する位置、または停止して再開する位置を示します。
+チェックポイントは、完全なデータ インポートまたは増分レプリケーション タスクが一時停止されてから再開されるか、または停止されてから再開される位置を示します。
 
--   完全インポートタスクでは、チェックポイントは、インポートされているファイル内の正常にインポートされたデータのオフセットおよびその他の情報に対応します。チェックポイントは、データインポートタスクと同期して更新されます。
--   インクリメンタルレプリケーションでは、チェックポイントは、正常に解析されてダウンストリームに移行された[binlogの位置](#binlog-position)および[binlogイベント](#binlog-event)のその他の情報に対応します。チェックポイントは、DDL操作が正常に移行された後、または最後の更新から30秒後に更新されます。
+-   フル インポート タスクでは、チェックポイントは、インポート中のファイル内の正常にインポートされたデータのオフセットおよびその他の情報に対応します。チェックポイントは、データ インポート タスクと同期して更新されます。
+-   増分レプリケーションでは、チェックポイントは、正常に解析されてダウンストリームに移行される[バイナリログイベント](#binlog-event)の[ビンログ位置](#binlog-position)およびその他の情報に対応します。 DDL 操作が正常に移行された後、または最後の更新から 30 秒後に、チェックポイントが更新されます。
 
-また、 [リレー処理装置](#relay-processing-unit)に対応する`relay.meta`の情報は、チェックポイントと同様に機能します。リレー処理ユニットは、アップストリームから[binlogイベント](#binlog-event)をプルして、このイベントを[リレーログ](#relay-log)に書き込み、このイベントに対応する[binlogの位置](#binlog-position)またはGTID情報を`relay.meta`に書き込みます。
+また、 [中継処理ユニット](#relay-processing-unit)に対応する`relay.meta`の情報は、チェックポイントと同様に機能します。中継処理部は上流から[バイナリログイベント](#binlog-event)を引っ張ってこのイベントを[中継ログ](#relay-log)に書き込み、 [ビンログ位置](#binlog-position)またはこのイベントに対応する GTID 情報を`relay.meta`に書き込みます。
 
 ## D {#d}
 
-### ダンプ処理ユニット/ダンプユニット {#dump-processing-unit-dump-unit}
+### ダンプ処理単位/ダンプ単位 {#dump-processing-unit-dump-unit}
 
-ダンプ処理ユニットは、DM-workerでアップストリームからすべてのデータをエクスポートするために使用される処理ユニットです。各サブタスクは、ダンプ処理ユニットに対応します。
+ダンプ処理単位は、アップストリームからすべてのデータをエクスポートするために DM-worker で使用される処理単位です。各サブタスクは、ダンプ処理単位に対応します。
 
 ## G {#g}
 
 ### GTID {#gtid}
 
-GTIDは、MySQLまたはMariaDBのグローバルトランザクションIDです。この機能を有効にすると、GTID情報がbinlogファイルに記録されます。複数のGTIDがGTIDセットを形成します。詳細については、 [MySQLGTIDフォーマットとストレージ](https://dev.mysql.com/doc/refman/5.7/en/replication-gtids-concepts.html)と[MariaDBグローバルトランザクションID](https://mariadb.com/kb/en/library/gtid/)を参照してください。
+GTID は、MySQL または MariaDB のグローバル トランザクション ID です。この機能を有効にすると、GTID 情報が binlog ファイルに記録されます。複数の GTID が GTID セットを形成します。詳細は[MySQL GTID のフォーマットとストレージ](https://dev.mysql.com/doc/refman/5.7/en/replication-gtids-concepts.html)と[MariaDB グローバル トランザクション ID](https://mariadb.com/kb/en/library/gtid/)を参照してください。
 
 ## L {#l}
 
-### 負荷処理ユニット/負荷ユニット {#load-processing-unit-load-unit}
+### 負荷処理装置/負荷装置 {#load-processing-unit-load-unit}
 
-負荷処理ユニットは、完全にエクスポートされたデータをダウンストリームにインポートするためにDM-workerで使用される処理ユニットです。各サブタスクは、負荷処理ユニットに対応します。現在のドキュメントでは、ロード処理ユニットはインポート処理ユニットとも呼ばれます。
+ロード処理単位は、完全にエクスポートされたデータをダウンストリームにインポートするために DM-worker で使用される処理単位です。各サブタスクは、負荷処理ユニットに対応します。現在のドキュメントでは、ロード処理ユニットはインポート処理ユニットとも呼ばれます。
 
 ## M {#m}
 
 ### 移行/移行 {#migrate-migration}
 
-TiDBデータ移行ツールを使用して、アップストリームデータベースの**完全なデータ**をダウンストリームデータベースにコピーするプロセス。
+TiDB データ移行ツールを使用して、アップストリーム データベースの**完全なデータ**をダウンストリーム データベースにコピーするプロセス。
 
-「フル」を明示的に言及し、「フルまたはインクリメンタル」を明示的に言及せず、「フル+インクリメンタル」を明確に言及する場合は、レプリケート/レプリケーションの代わりに移行/移行を使用してください。
+「完全」と明確に言及し、「完全または増分」と明確に言及せず、「完全 + 増分」と明確に言及する場合は、複製/複製の代わりに移行/移行を使用します。
 
 ## R {#r}
 
-### リレーログ {#relay-log}
+### 中継ログ {#relay-log}
 
-リレーログは、DM-workerがアップストリームのMySQLまたはMariaDBからプルし、ローカルディスクに保存するbinlogファイルを参照します。リレーログの形式は標準のbinlogファイルであり、互換性のあるバージョンの[mysqlbinlog](https://dev.mysql.com/doc/refman/8.0/en/mysqlbinlog.html)などのツールで解析できます。その役割は[MySQLリレーログ](https://dev.mysql.com/doc/refman/5.7/en/replica-logs-relaylog.html)と[MariaDBリレーログ](https://mariadb.com/kb/en/library/relay-log/)に似ています。
+リレー ログは、DM-worker がアップストリームの MySQL または MariaDB から取得し、ローカル ディスクに保存する binlog ファイルを参照します。リレー ログの形式は標準の binlog ファイルで、互換性のあるバージョンの[mysqlbinlog](https://dev.mysql.com/doc/refman/8.0/en/mysqlbinlog.html)などのツールで解析できます。その役割は[MySQL リレー ログ](https://dev.mysql.com/doc/refman/5.7/en/replica-logs-relaylog.html)および[MariaDB リレー ログ](https://mariadb.com/kb/en/library/relay-log/)に似ています。
 
-リレーログのディレクトリ構造、初期移行ルール、TiDB DMでのデータパージなどの詳細については、 [TiDBDMリレーログ](/dm/relay-log.md)を参照してください。
+リレー ログのディレクトリ構造、初期移行ルール、TiDB DM でのデータ パージなどの詳細については、 [TiDB DMリレーログ](/dm/relay-log.md)を参照してください。
 
-### リレー処理装置 {#relay-processing-unit}
+### 中継処理ユニット {#relay-processing-unit}
 
-リレー処理ユニットは、DM-workerでアップストリームからbinlogファイルをプルし、リレーログにデータを書き込むために使用される処理ユニットです。各DM-workerインスタンスには、リレー処理ユニットが1つだけあります。
+リレー処理ユニットは、DM-worker でバイナリログ ファイルを上流からプルし、リレー ログにデータを書き込むために使用される処理ユニットです。各 DM-worker インスタンスには、リレー処理ユニットが 1 つだけあります。
 
 ### 複製/複製 {#replicate-replication}
 
-TiDBデータ移行ツールを使用して、アップストリームデータベースの**インクリメンタルデータ**をダウンストリームデータベースにコピーするプロセス。
+TiDB データ移行ツールを使用して、アップストリーム データベースの**増分データ**をダウンストリーム データベースにコピーするプロセス。
 
-「インクリメンタル」について明確に言及する場合は、移行/移行の代わりにレプリケート/レプリケーションを使用してください。
+「増分」と明示する場合は、migrate/migration ではなく、replicate/replication を使用してください。
 
 ## S {#s}
 
 ### セーフモード {#safe-mode}
 
-セーフモードは、主キーまたは一意のインデックスがテーブルスキーマに存在する場合に、DMLステートメントを複数回インポートできるモードです。このモードでは、アップストリームからの一部のステートメントは、書き直された後にのみダウンストリームに移行されます。 `INSERT`ステートメントは`REPLACE`として書き直されます。 `UPDATE`ステートメントは`DELETE`および`REPLACE`として書き直されます。
+セーフ モードは、主キーまたは一意のインデックスがテーブル スキーマに存在する場合に、DML ステートメントを複数回インポートできるモードです。このモードでは、アップストリームからの一部のステートメントは、書き直された後にのみダウンストリームに移行されます。 `INSERT`ステートメントは`REPLACE`として書き直されます。 `UPDATE`ステートメントは`DELETE`および`REPLACE`として書き直されます。
 
 このモードは、次のいずれかの状況で有効になります。
 
--   タスク構成ファイルの`safe-mode`パラメーターが`true`に設定されている場合、セーフモードは有効なままです。
--   シャードマージシナリオでは、すべてのシャードテーブルにDDLステートメントが複製される前に、セーフモードが有効のままになります。
--   引数`--consistency none`が完全マイグレーション・タスクのダンプ処理装置用に構成されている場合、エクスポートの開始時にbinlogの変更がエクスポートされたデータに影響を与えるかどうかを判別できません。したがって、セーフモードは、これらのbinlog変更の増分レプリケーションに対して有効なままです。
--   タスクがエラーによって一時停止されてから再開された場合、一部のデータに対する操作が2回実行される可能性があります。
+-   タスク構成ファイルの`safe-mode`パラメーターが`true`に設定されている場合、セーフ モードは有効なままです。
+-   シャード マージのシナリオでは、DDL ステートメントがすべてのシャード テーブルで複製される前に、セーフ モードが有効なままになります。
+-   引数`--consistency none`がフル マイグレーション タスクのダンプ処理単位に設定されている場合、エクスポートの開始時の binlog の変更がエクスポートされたデータに影響するかどうかを判断できません。したがって、これらのバイナリログの変更の増分レプリケーションでは、セーフ モードが有効なままになります。
+-   タスクがエラーによって一時停止され、再開された場合、一部のデータに対する操作が 2 回実行される可能性があります。
 
-### シャードDDL {#shard-ddl}
+### シャード DDL {#shard-ddl}
 
-シャードDDLは、アップストリームのシャードテーブルで実行されるDDLステートメントです。シャーディングされたテーブルをマージするプロセスで、TiDBDMによって調整および移行される必要があります。現在のドキュメントでは、シャードDDLはシャーディングDDLとも呼ばれます。
+シャード DDL は、アップストリームのシャード テーブルで実行される DDL ステートメントです。シャードされたテーブルをマージするプロセスで、TiDB DM によって調整および移行される必要があります。現在のドキュメントでは、シャード DDL はシャーディング DDL とも呼ばれます。
 
-### シャードDDLロック {#shard-ddl-lock}
+### シャード DDL ロック {#shard-ddl-lock}
 
-シャードDDLロックは、シャードDDLの移行を調整するロックメカニズムです。詳細は[悲観的モードでシャーディングされたテーブルからデータをマージおよび移行する実装原則](/dm/feature-shard-merge-pessimistic.md#principles)を参照してください。現在のドキュメントでは、シャードDDLロックはシャーディングDDLロックとも呼ばれます。
+シャード DDL ロックは、シャード DDL の移行を調整するロック メカニズムです。詳細は[ペシミスティック モードでのシャード テーブルからのデータのマージと移行の実装原則](/dm/feature-shard-merge-pessimistic.md#principles)を参照してください。現在のドキュメントでは、シャード DDL ロックはシャーディング DDL ロックとも呼ばれます。
 
 ### シャードグループ {#shard-group}
 
-シャードグループは、ダウンストリームの同じテーブルにマージおよび移行されるすべてのアップストリームシャードテーブルです。 TiDB DMの実装には、2レベルのシャードグループが使用されます。詳細は[悲観的モードでシャーディングされたテーブルからデータをマージおよび移行する実装原則](/dm/feature-shard-merge-pessimistic.md#principles)を参照してください。現在のドキュメントでは、シャードグループはシャーディンググループとも呼ばれます。
+シャード グループは、マージされてダウンストリームの同じテーブルに移行されるすべてのアップストリーム シャード テーブルです。 TiDB DM の実装には、2 レベルのシャード グループが使用されます。詳細は[ペシミスティック モードでのシャード テーブルからのデータのマージと移行の実装原則](/dm/feature-shard-merge-pessimistic.md#principles)を参照してください。現在のドキュメントでは、シャード グループはシャーディング グループとも呼ばれます。
 
 ### サブタスク {#subtask}
 
-サブタスクは、各DM-workerインスタンスで実行されているデータ移行タスクの一部です。異なるタスク構成では、単一のデータ移行タスクに1つのサブタスクまたは複数のサブタスクが含まれる場合があります。
+サブタスクは、各 DM-worker インスタンスで実行されるデータ移行タスクの一部です。異なるタスク構成では、1 つのデータ移行タスクに 1 つまたは複数のサブタスクが含まれる場合があります。
 
 ### サブタスクのステータス {#subtask-status}
 
-サブタスクステータスは、データ移行サブタスクのステータスです。現在のステータスオプションには、 `New` 、および`Running`が`Stopped` `Finished` `Paused` 。データ移行タスクまたはサブタスクのステータスの詳細については、 [サブタスクステータス](/dm/dm-query-status.md#subtask-status)を参照してください。
+サブタスクのステータスは、データ移行サブタスクのステータスです。現在のステータス オプションには、 `New` 、 `Running` 、 `Paused` 、 `Stopped` 、および`Finished`が含まれます。データ移行タスクまたはサブタスクのステータスの詳細については、 [サブタスクのステータス](/dm/dm-query-status.md#subtask-status)を参照してください。
 
 ## T {#t}
 
-### テーブルルーティング {#table-routing}
+### テーブル ルーティング {#table-routing}
 
-テーブルルーティング機能を使用すると、DMはアップストリームのMySQLまたはMariaDBインスタンスの特定のテーブルをダウンストリームの指定されたテーブルに移行できます。これを使用して、シャーディングされたテーブルをマージおよび移行できます。詳細は[テーブルルーティング](/dm/dm-key-features.md#table-routing)を参照してください。
+テーブル ルーティング機能により、DM はアップストリームの MySQL または MariaDB インスタンスの特定のテーブルを、シャード テーブルのマージと移行に使用できるダウンストリームの指定されたテーブルに移行できます。詳細は[テーブル ルーティング](/dm/dm-key-features.md#table-routing)を参照してください。
 
 ### 仕事 {#task}
 
-`start-task`コマンドを正常に実行した後に開始されるデータ移行タスク。異なるタスク構成では、単一の移行タスクを単一のDM-workerインスタンスまたは複数のDM-workerインスタンスで同時に実行できます。
+`start-task`コマンドを正常に実行した後に開始されるデータ移行タスク。異なるタスク構成では、1 つの移行タスクを 1 つの DM-worker インスタンスまたは複数の DM-worker インスタンスで同時に実行できます。
 
 ### タスクのステータス {#task-status}
 
-タスクステータスは、データ移行タスクのステータスを指します。タスクのステータスは、そのすべてのサブタスクのステータスによって異なります。詳細は[サブタスクステータス](/dm/dm-query-status.md#subtask-status)を参照してください。
+タスク ステータスは、データ移行タスクのステータスを示します。タスクのステータスは、そのすべてのサブタスクのステータスによって異なります。詳細は[サブタスクのステータス](/dm/dm-query-status.md#subtask-status)を参照してください。

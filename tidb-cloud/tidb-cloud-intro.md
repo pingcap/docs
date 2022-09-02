@@ -6,7 +6,7 @@ category: intro
 
 # TiDB Cloudの紹介 {#tidb-cloud-introduction}
 
-[TiDB Cloud](https://pingcap.com/products/tidbcloud)は、完全に管理されたサービスとしてのデータベース (DBaaS) であり、TiDB のすべての優れた機能をクラウドにもたらし、データベースの複雑さではなく、アプリケーションに集中できるようにします。
+[TiDB Cloud](https://pingcap.com/products/tidbcloud)は完全に管理されたサービスとしてのデータベース (DBaaS) であり、TiDB のすべての優れた点をクラウドにもたらし、データベースの複雑さではなく、アプリケーションに集中できるようにします。
 
 TiDB Cloudの詳細については、次のビデオをご覧ください。
 
@@ -42,18 +42,18 @@ TiDB Cloudの詳細については、次のビデオをご覧ください。
 
     隠れた料金のない透明な前払い料金で、使用した分だけお支払いください。
 
-## 建築 {#architecture}
+## アーキテクチャ {#architecture}
 
 ![TiDB Cloud architecture](/media/tidb-cloud/tidb-cloud-architecture.png)
 
 -   TiDB VPC (仮想プライベート クラウド)
 
-    各TiDB Cloudクラスタでは、すべての TiDB ノードと補助ノード ( TiDB Operatorノード、ログ ノードなどを含む) が独立した VPC にデプロイされます。
+    TiDB Cloudクラスターごとに、すべての TiDB ノードと補助ノード ( TiDB Operatorノード、ログ ノードなどを含む) が独立した VPC にデプロイされます。
 
 -   TiDB Cloudセントラル サービス
 
-    課金、アラート、メタ ストレージ、ダッシュボード UI などのセントラル サービスは、個別に展開されます。ダッシュボード UI にアクセスして、インターネット経由で TiDBクラスタを操作できます。
+    請求、アラート、メタ ストレージ、ダッシュボード UI などのセントラル サービスは、個別に展開されます。ダッシュボード UI にアクセスして、インターネット経由で TiDB クラスターを操作できます。
 
 -   あなたの VPC
 
-    VPC ピアリング接続を介して TiDBクラスタに接続できます。詳細は[VPC ピアリング接続をセットアップする](/tidb-cloud/set-up-vpc-peering-connections.md)を参照してください。
+    プライベート エンドポイント接続または VPC ピアリング接続を介して TiDB クラスターに接続できます。詳細は[プライベート エンドポイント接続のセットアップ](/tidb-cloud/set-up-private-endpoint-connections.md)または[VPC ピアリング接続を設定する](/tidb-cloud/set-up-vpc-peering-connections.md)を参照してください。

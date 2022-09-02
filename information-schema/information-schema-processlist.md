@@ -5,11 +5,11 @@ summary: Learn the `PROCESSLIST` information_schema table.
 
 # プロセスリスト {#processlist}
 
-`PROCESSLIST`は、 `SHOW PROCESSLIST`と同様に、処理されている要求を表示するために使用されます。
+`PROCESSLIST`は`SHOW PROCESSLIST`と同様に、処理中のリクエストを表示するために使用されます。
 
-`PROCESSLIST`のテーブルには、 `SHOW PROCESSLIST`には存在しない追加の列があります。
+`PROCESSLIST`テーブルには、 `SHOW PROCESSLIST`には存在しない追加の列があります。
 
--   処理中のリクエストで使用されているメモリをバイト単位で表示する`MEM`列。
+-   処理中のリクエストによって使用されたメモリをバイト単位で表示する`MEM`列。
 -   トランザクションの開始時刻を示す`TxnStart`列
 
 {{< copyable "" >}}
@@ -58,22 +58,22 @@ TxnStart:
 1 row in set (0.00 sec)
 ```
 
-`PROCESSLIST`表のフィールドは次のように説明されています。
+`PROCESSLIST`テーブルのフィールドは次のとおりです。
 
--   ID：ユーザー接続のID。
--   USER： `PROCESS`を実行しているユーザーの名前。
--   HOST：ユーザーが接続しているアドレス。
--   DB：現在接続されているデフォルトデータベースの名前。
--   コマンド： `PROCESS`が実行しているコマンドタイプ。
--   時間： `PROCESS`の現在の実行時間（秒単位）。
--   STATE：現在の接続状態。
--   情報：処理中の要求されたステートメント。
--   MEM：処理中のリクエストで使用されるメモリ（バイト単位）。
--   TxnStart：トランザクションの開始時刻。
+-   ID: ユーザー接続の ID。
+-   USER: `PROCESS`を実行しているユーザーの名前。
+-   HOST: ユーザーが接続しているアドレス。
+-   DB: 現在接続されているデフォルト データベースの名前。
+-   COMMAND: `PROCESS`が実行しているコマンドの種類。
+-   TIME: `PROCESS`の現在の実行時間 (秒単位)。
+-   STATE: 現在の接続状態。
+-   情報: 要求されたステートメントが処理されています。
+-   MEM: 処理中のリクエストが使用するメモリ (バイト単位)。
+-   TxnStart: トランザクションの開始時刻。
 
 ## CLUSTER_PROCESSLIST {#cluster-processlist}
 
-`CLUSTER_PROCESSLIST`は、 `PROCESSLIST`に対応するクラスタシステムテーブルです。これは、クラスタのすべてのTiDBノードの`PROCESSLIST`の情報を照会するために使用されます。 `CLUSTER_PROCESSLIST`のテーブルスキーマには、 `PROCESSLIST`よりも1つ多い列があります`INSTANCE`列には、このデータ行の元のTiDBノードのアドレスが格納されます。
+`CLUSTER_PROCESSLIST`は`PROCESSLIST`に対応するクラスタ システム テーブルです。クラスター内のすべての TiDB ノードの`PROCESSLIST`の情報を照会するために使用されます。 `CLUSTER_PROCESSLIST`のテーブル スキーマには、 `PROCESSLIST`よりも 1 つ多い列 ( `INSTANCE`列) があり、このデータ行の元の TiDB ノードのアドレスが格納されます。
 
 {{< copyable "" >}}
 

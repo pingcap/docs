@@ -5,7 +5,7 @@ summary: Learn the `CHARACTER_SETS` information_schema table.
 
 # CHARACTER_SETS {#character-sets}
 
-`CHARACTER_SETS`の表は、 [文字セット](/character-set-and-collation.md)に関する情報を提供します。現在、TiDBは一部の文字セットのみをサポートしています。
+`CHARACTER_SETS`テーブルは[文字セット](/character-set-and-collation.md)に関する情報を提供します。現在、TiDB は一部の文字セットのみをサポートしています。
 
 {{< copyable "" >}}
 
@@ -47,7 +47,7 @@ SELECT * FROM `character_sets`;
 
 `CHARACTER_SETS`テーブルの列の説明は次のとおりです。
 
--   `CHARACTER_SET_NAME` ：文字セットの名前。
+-   `CHARACTER_SET_NAME` : 文字セットの名前。
 -   `DEFAULT_COLLATE_NAME`文字セットのデフォルトの照合順序名。
 -   `DESCRIPTION`文字セットの説明。
 -   `MAXLEN`この文字セットに文字を格納するために必要な最大長。

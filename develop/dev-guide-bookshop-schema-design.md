@@ -26,13 +26,13 @@ TiDB Cloudの場合、 [方法 1: `tiup demo`経由](#method-1-via-tiup-demo)を
 
 <CustomContent platform="tidb">
 
-TiDBクラスタが[TiUP](/tiup/tiup-reference.md#tiup-reference)を使用してデプロイされている場合、または TiDB サーバーに接続できる場合は、次のコマンドを実行して、Bookshop アプリケーションのサンプル データをすばやく生成してインポートできます。
+TiDB クラスターが[TiUP](/tiup/tiup-reference.md#tiup-reference)を使用してデプロイされている場合、または TiDBサーバーに接続できる場合は、次のコマンドを実行して、Bookshop アプリケーションのサンプル データをすばやく生成してインポートできます。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-TiDBクラスタが[TiUP](https://docs.pingcap.com/tidb/stable/tiup-reference)を使用してデプロイされている場合、または TiDB サーバーに接続できる場合は、次のコマンドを実行して、Bookshop アプリケーションのサンプル データをすばやく生成してインポートできます。
+TiDB クラスターが[TiUP](https://docs.pingcap.com/tidb/stable/tiup-reference)を使用してデプロイされている場合、または TiDBサーバーに接続できる場合は、次のコマンドを実行して、Bookshop アプリケーションのサンプル データをすばやく生成してインポートできます。
 
 </CustomContent>
 
@@ -94,7 +94,7 @@ tiup demo bookshop prepare --users=200000 --books=500000 --authors=100000 --rati
 
 ### 方法 2: TiDB Cloudインポート経由 {#method-2-via-tidb-cloud-import}
 
-TiDB Cloudのデータベースの詳細ページで、[**インポート**] ボタンをクリックして、[<strong>データのインポート タスク</strong>] ページに入ります。このページで、AWS S3 からTiDB Cloudに Bookshop サンプル データをインポートするには、次の手順を実行します。
+TiDB Cloudのデータベースの詳細ページで、[**インポート**] ボタンをクリックして、[<strong>データのインポート タスク</strong>] ページに入ります。このページで、次の手順を実行して Bookshop サンプル データを AWS S3 からTiDB Cloudにインポートします。
 
 1.  次の**バケット URL**と<strong>Role-ARN</strong>を対応する入力ボックスにコピーします。
 
@@ -136,7 +136,7 @@ TiDB Cloudのデータベースの詳細ページで、[**インポート**] ボ
 
     ![Bookshop data importing](/media/develop/importing_bookshop_data.png)
 
-    インポート プロセス中に次のエラー メッセージが表示された場合は、 `DROP DATABASE bookshop;`コマンドを実行して以前に作成したサンプル データベースをクリアし、データを再度インポートします。
+    インポート プロセス中に次のエラー メッセージが表示された場合は、 `DROP DATABASE bookshop;`コマンドを実行して、以前に作成したサンプル データベースをクリアしてから、データを再度インポートします。
 
     > テーブル [ `bookshop` . `authors` `bookshop` `book_authors` `bookshop` `books` `bookshop` `orders` `bookshop` `ratings` `bookshop` `users` ] は空ではありません。
 

@@ -3,13 +3,13 @@ title: Stale Read
 summary: Learn how to use Stale Read to accelerate queries under certain conditions.
 ---
 
-# 古い読み取り {#stale-read}
+# ステイル読み取り {#stale-read}
 
-Stale Read は、TiDB に保存されているデータの履歴バージョンを読み取るために TiDB が適用するメカニズムです。このメカニズムを使用すると、特定の時間または指定された時間範囲内で対応する履歴データを読み取ることができるため、ストレージ ノード間のデータ レプリケーションによって発生する遅延を節約できます。 Steal Read を使用している場合、TiDB はデータ読み取り用のレプリカをランダムに選択します。つまり、すべてのレプリカをデータ読み取りに使用できます。
+Stale ステイル読み取りは、TiDB に保存されているデータの履歴バージョンを読み取るために TiDB が適用するメカニズムです。このメカニズムを使用すると、特定の時間または指定された時間範囲内で対応する履歴データを読み取ることができるため、ストレージ ノード間のデータ レプリケーションによって発生するレイテンシーを節約できます。 Steal Read を使用している場合、TiDB はデータ読み取り用のレプリカをランダムに選択します。つまり、すべてのレプリカをデータ読み取りに使用できます。
 
-実際には、 [使用シナリオ](/stale-read.md#usage-scenarios-of-stale-read)に基づいて TiDB で Stale Read を有効にすることが適切かどうかを慎重に検討してください。アプリケーションが非リアルタイム データの読み取りを許容できない場合は、Stale Read を有効にしないでください。
+実際には、 [使用シナリオ](/stale-read.md#usage-scenarios-of-stale-read)に基づいて TiDB で Stale ステイル読み取りを有効にすることが適切かどうかを慎重に検討してください。アプリケーションが非リアルタイム データの読み取りを許容できない場合は、 ステイル読み取り を有効にしないでください。
 
-TiDB は、ステートメント レベル、トランザクション レベル、およびセッション レベルの 3 つのレベルの Stale Read を提供します。
+TiDB は、ステートメント レベル、トランザクション レベル、およびセッション レベルの 3 つのレベルの Stale ステイル読み取りを提供します。
 
 ## 序章 {#introduction}
 
@@ -38,7 +38,7 @@ SELECT id, title, type, price FROM books ORDER BY published_at DESC LIMIT 5;
 
 現時点 (2022-04-20 15:20:00) のリストでは、 *The Story of Droolius Caesar の*価格は 100.0 です。
 
-同時に、売り手はその本が非常に人気があることを発見し、次の SQL ステートメントを使用して本の価格を 150.0 に引き上げました。
+同時に、売り手はその本が非常に人気があることを知り、次の SQL ステートメントを使用して本の価格を 150.0 に引き上げました。
 
 {{< copyable "" >}}
 
@@ -68,9 +68,9 @@ Rows matched: 1  Changed: 1  Warnings: 0
 5 rows in set (0.01 sec)
 ```
 
-最新のデータを使用する必要がない場合は、古くなったデータを返す可能性がある Stale Read を使用してクエリを実行し、強力な整合性のある読み取り中のデータ レプリケーションによって生じる待機時間を回避できます。
+最新のデータを使用する必要がない場合は、古いデータを返す可能性があるステイル読み取り を使用してクエリを実行し、強力な整合性のある読み取り中のデータ レプリケーションによって生じるレイテンシー時間を回避できます。
 
-Bookshop アプリケーションでは、書籍のリアルタイム価格は書籍リスト ページでは必要なく、書籍の詳細ページと注文ページでのみ必要であると仮定します。 Stale Read を使用して、アプリケーション全体を改善できます。
+Bookshop アプリケーションでは、書籍のリアルタイム価格は書籍リスト ページでは必要なく、書籍の詳細ページと注文ページでのみ必要であると仮定します。 ステイル読み取りを使用して、アプリケーション全体を改善できます。
 
 ## ステートメント レベル {#statement-level}
 
@@ -102,13 +102,13 @@ SELECT id, title, type, price FROM books AS OF TIMESTAMP '2022-04-20 15:20:00' O
 
 正確な時間を指定するだけでなく、次のことも指定できます。
 
--   `AS OF TIMESTAMP NOW() - INTERVAL 10 SECOND`は 10 秒前の最新データをクエリします。
+-   `AS OF TIMESTAMP NOW() - INTERVAL 10 SECOND`は 10 秒前の最新データを問い合わせます。
 -   `AS OF TIMESTAMP TIDB_BOUNDED_STALENESS('2016-10-08 16:45:26', '2016-10-08 16:45:29')`は`2016-10-08 16:45:26` ～ `2016-10-08 16:45:29`の間の最新のデータをクエリします。
 -   `AS OF TIMESTAMP TIDB_BOUNDED_STALENESS(NOW() -INTERVAL 20 SECOND, NOW())`は 20 秒以内に最新のデータをクエリします。
 
 指定されたタイムスタンプまたは間隔は、現在の時刻より早すぎたり遅すぎたりすることはできないことに注意してください。
 
-期限切れのデータは TiDB で[ガベージ コレクション](/garbage-collection-overview.md)によってリサイクルされ、データはクリアされる前に短期間保持されます。期間は[GC ライフタイム (デフォルトは 10 分)](/system-variables.md#tidb_gc_life_time-new-in-v50)と呼ばれます。 GC が開始されると、現在の時刻から期間を引いたものが**GC セーフ ポイント**として使用されます。 GC セーフ ポイントの前にデータを読み込もうとすると、TiDB は次のエラーを報告します。
+期限切れのデータは TiDB で[ガベージ コレクション](/garbage-collection-overview.md)によってリサイクルされ、データはクリアされる前に短期間保持されます。期間は[GC ライフタイム (デフォルトは 10 分)](/system-variables.md#tidb_gc_life_time-new-in-v50)と呼ばれます。 GC が開始されると、現在の時刻から期間を引いた値が**GC セーフ ポイント**として使用されます。 GC セーフ ポイントの前にデータを読み込もうとすると、TiDB は次のエラーを報告します。
 
 ```
 ERROR 9006 (HY000): GC life time is shorter than transaction duration...
@@ -219,7 +219,7 @@ if (top5LatestBooks.size() > 0) {
 }
 ```
 
-次の結果は、Stale Read によって返された価格が更新前の値である 100.00 であることを示しています。
+次の結果は、 ステイル読み取りによって返された価格が更新前の値である 100.00 であることを示しています。
 
 ```
 The latest book price (before update): 100.00
@@ -288,7 +288,7 @@ SELECT id, title, type, price FROM books ORDER BY published_at DESC LIMIT 5;
 </div>
 <div label="Java" value="java">
 
-ヘルパー メソッドとしてトランザクション レベルで Stale Read を有効にするコマンドをカプセル化する、トランザクションのヘルパー クラスを定義できます。
+ヘルパー メソッドとしてトランザクション レベルでステイル読み取りを有効にするコマンドをカプセル化する、トランザクションのヘルパー クラスを定義できます。
 
 {{< copyable "" >}}
 
@@ -307,7 +307,7 @@ public static class StaleReadHelper {
 }
 ```
 
-次に、 `BookDAO`クラスのトランザクションを通じて Stale Read 機能を有効にするメソッドを定義します。クエリ ステートメントに`AS OF TIMESTAMP`を追加する代わりに、 メソッドを使用してクエリを実行します。
+次に、 `BookDAO`クラスのトランザクションを通じてステイル読み取り機能を有効にするメソッドを定義します。クエリ ステートメントに`AS OF TIMESTAMP`を追加する代わりに、 メソッドを使用してクエリを実行します。
 
 {{< copyable "" >}}
 
@@ -387,7 +387,7 @@ The latest book price (after the transaction commit): 150
 </div>
 </SimpleTab>
 
-`SET TRANSACTION READ ONLY AS OF TIMESTAMP`ステートメントを使用すると、開いているトランザクションまたは次のトランザクションを、指定された履歴時間に基づいて読み取り専用トランザクションに設定できます。トランザクションは、提供された履歴時間に基づいて履歴データを読み取ります。
+`SET TRANSACTION READ ONLY AS OF TIMESTAMP`ステートメントを使用すると、指定された履歴時間に基づいて、開かれたトランザクションまたは次のトランザクションを読み取り専用トランザクションに設定できます。トランザクションは、提供された履歴時間に基づいて履歴データを読み取ります。
 
 <SimpleTab groupId="language">
 <div label="SQL" value="sql">
@@ -401,7 +401,7 @@ SET TRANSACTION READ ONLY AS OF TIMESTAMP NOW() - INTERVAL 5 SECOND;
 </div>
 <div label="Java" value="java">
 
-ヘルパー メソッドとしてトランザクション レベルで Stale Read を有効にするコマンドをカプセル化する、トランザクションのヘルパー クラスを定義できます。
+ヘルパー メソッドとしてトランザクション レベルでステイル読み取りを有効にするコマンドをカプセル化する、トランザクションのヘルパー クラスを定義できます。
 
 {{< copyable "" >}}
 
@@ -419,7 +419,7 @@ public static class TxnHelper {
 }
 ```
 
-次に、 `BookDAO`クラスのトランザクションを介して Stale Read 機能を有効にするメソッドを定義します。クエリ ステートメントに`AS OF TIMESTAMP`を追加する代わりに、 メソッドを使用してクエリを実行します。
+次に、 `BookDAO`クラスのトランザクションを通じてステイル読み取り機能を有効にするメソッドを定義します。クエリ ステートメントに`AS OF TIMESTAMP`を追加する代わりに、 メソッドを使用してクエリを実行します。
 
 {{< copyable "" >}}
 
@@ -475,7 +475,7 @@ public class BookDAO {
 <SimpleTab groupId="language">
 <div label="SQL" value="sql">
 
-セッションで古い読み取りを有効にします。
+セッションでステイル読み取りを有効にします。
 
 {{< copyable "" >}}
 
@@ -485,7 +485,7 @@ SET @@tidb_read_staleness="-5";
 
 たとえば、値が`-5`に設定され、TiKV に対応する履歴データがある場合、TiDB は 5 秒の時間範囲内でできるだけ新しいタイムスタンプを選択します。
 
-セッションで古い読み取りを無効にします。
+セッションでステイル読み取りを無効にします。
 
 {{< copyable "" >}}
 
@@ -524,6 +524,6 @@ public static class StaleReadHelper{
 
 ## 続きを読む {#read-more}
 
--   [Stale Read の使用シナリオ](/stale-read.md)
+-   [ステイル読み取りの使用シナリオ](/stale-read.md)
 -   [`AS OF TIMESTAMP`句を使用した履歴データの読み取り](/as-of-timestamp.md)
 -   [`tidb_read_staleness`システム変数を使用して履歴データを読み取る](/tidb-read-staleness.md)

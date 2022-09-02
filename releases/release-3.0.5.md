@@ -2,91 +2,91 @@
 title: TiDB 3.0.5 Release Notes
 ---
 
-# TiDB3.0.5リリースノート {#tidb-3-0-5-release-notes}
+# TiDB 3.0.5 リリースノート {#tidb-3-0-5-release-notes}
 
 発売日：2019年10月25日
 
-TiDBバージョン：3.0.5
+TiDB バージョン: 3.0.5
 
-TiDB Ansibleバージョン：3.0.5
+TiDB アンシブル バージョン: 3.0.5
 
 ## TiDB {#tidb}
 
--   SQLオプティマイザー
-    -   ウィンドウ関数の境界チェックをサポート[＃12404](https://github.com/pingcap/tidb/pull/12404)
-    -   パーティションテーブルの`IndexJoin`が誤った結果を返す問題を修正します[＃12712](https://github.com/pingcap/tidb/pull/12712)
-    -   外部結合`Apply`演算子の上部にある`ifnull`関数が誤った結果を返す問題を修正します[＃12694](https://github.com/pingcap/tidb/pull/12694)
-    -   サブクエリが[＃12597](https://github.com/pingcap/tidb/pull/12597)の`where`条件に含まれている場合の更新失敗の問題を修正し`UPDATE`
-    -   `cast`の関数がクエリ条件[＃12790](https://github.com/pingcap/tidb/pull/12790)に含まれている場合に、外部結合が誤って内部結合に変換される問題を修正します。
-    -   [＃12799](https://github.com/pingcap/tidb/pull/12799)の結合条件で渡される誤った`AntiSemiJoin`を修正しました
-    -   統計を初期化するときに浅いコピーによって引き起こされる統計エラーを修正します[＃12817](https://github.com/pingcap/tidb/pull/12817)
-    -   日付文字列とフォーマット文字列が[＃12725](https://github.com/pingcap/tidb/pull/12725)と一致しない場合、TiDBの`str_to_date`関数がMySQLとは異なる結果を返す問題を修正します。
--   SQL実行エンジン
-    -   `from_unixtime`関数がnull3を処理するときのpanicの問題を修正し[＃12551](https://github.com/pingcap/tidb/pull/12551)
-    -   DDLジョブをキャンセルするときに報告される`invalid list index`のエラーを修正します[＃12671](https://github.com/pingcap/tidb/pull/12671)
-    -   ウィンドウ関数が使用されているときに配列が範囲外であった問題を修正します[＃12660](https://github.com/pingcap/tidb/pull/12660)
-    -   暗黙的に割り当てられたときの`AutoIncrement`列の動作を改善し、MySQL自動インクリメントロックのデフォルトモードとの一貫性を維持します（ [「連続」ロックモード](https://dev.mysql.com/doc/refman/5.7/en/innodb-auto-increment-handling.html) ）：単一行の`Insert`ステートメントで複数の`AutoIncrement` IDを暗黙的に割り当てる場合、TiDBは割り当てられた値の連続性。この改善により、 `getGeneratedKeys()`メソッドはどのシナリオでも正しい結果を得ることができます。 [＃12602](https://github.com/pingcap/tidb/pull/12602)
-    -   `HashAgg`が[＃12766](https://github.com/pingcap/tidb/pull/12766)の子ノードとして機能するときにクエリがハングする問題を修正し`Apply`
-    -   型変換[＃12811](https://github.com/pingcap/tidb/pull/12811)に関して、 `AND`と`OR`の論理式が誤った結果を返す問題を修正します。
+-   SQL オプティマイザー
+    -   Window 関数の境界チェックをサポート[#12404](https://github.com/pingcap/tidb/pull/12404)
+    -   パーティション テーブルの`IndexJoin`が間違った結果を返す問題を修正[#12712](https://github.com/pingcap/tidb/pull/12712)
+    -   外部結合`Apply`演算子の上部にある`ifnull`関数が間違った結果を返す問題を修正します[#12694](https://github.com/pingcap/tidb/pull/12694)
+    -   `UPDATE` [#12597](https://github.com/pingcap/tidb/pull/12597)の`where`条件にサブクエリが含まれていると更新に失敗する問題を修正
+    -   `cast`関数がクエリ条件に含まれている場合、外部結合が内部結合に誤って変換される問題を修正[#12790](https://github.com/pingcap/tidb/pull/12790)
+    -   `AntiSemiJoin` [#12799](https://github.com/pingcap/tidb/pull/12799)の結合条件で誤った式を渡す問題を修正
+    -   統計の初期化時に浅いコピーによって引き起こされる統計エラーを修正します[#12817](https://github.com/pingcap/tidb/pull/12817)
+    -   日付文字列とフォーマット文字列が一致しない場合、TiDB の`str_to_date`関数が MySQL とは異なる結果を返す問題を修正します[#12725](https://github.com/pingcap/tidb/pull/12725)
+-   SQL 実行エンジン
+    -   `from_unixtime`関数が null [#12551](https://github.com/pingcap/tidb/pull/12551)を処理するときのpanicの問題を修正
+    -   DDL ジョブのキャンセル時に報告された`invalid list index`のエラーを修正[#12671](https://github.com/pingcap/tidb/pull/12671)
+    -   ウィンドウ関数使用時に配列が範囲外になる問題を修正[#12660](https://github.com/pingcap/tidb/pull/12660)
+    -   `AutoIncrement`列が暗黙的に割り当てられた場合の動作を改善し、MySQL 自動インクリメント ロックのデフォルト モードとの一貫性を保ちます ( [「連続」ロックモード](https://dev.mysql.com/doc/refman/5.7/en/innodb-auto-increment-handling.html) ): 1 行の`Insert`ステートメントで複数の`AutoIncrement` ID を暗黙的に割り当てる場合、TiDB は割り当てられた値の連続性。この改善により、JDBC `getGeneratedKeys()`メソッドがどのシナリオでも正しい結果を得ることが保証されます。 [#12602](https://github.com/pingcap/tidb/pull/12602)
+    -   `HashAgg`が`Apply` [#12766](https://github.com/pingcap/tidb/pull/12766)の子ノードになるとクエリがハングアップする問題を修正
+    -   型変換時に`AND`と`OR`の論理式が間違った結果を返す問題を修正[#12811](https://github.com/pingcap/tidb/pull/12811)
 -   サーバ
-    -   後で大規模なトランザクションをサポートできるようにトランザクションTTLを変更するインターフェイス機能を実装する[＃12397](https://github.com/pingcap/tidb/pull/12397)
-    -   悲観的なトランザクションをサポートするために、必要に応じてトランザクションTTLの拡張をサポートします（最大10分） [＃12579](https://github.com/pingcap/tidb/pull/12579)
-    -   TiDBがスキーマの変更と対応する変更されたテーブル情報をキャッシュする回数を100から1024に調整し、 `tidb_max_delta_schema_count`のシステム変数[＃12502](https://github.com/pingcap/tidb/pull/12502)を使用して変更をサポートします。
-    -   `kvrpc.Cleanup`プロトコルの動作を更新して、時間外でないトランザクションのロックをクリーンアップしないようにします[＃12417](https://github.com/pingcap/tidb/pull/12417)
-    -   `information_schema.tables`のテーブルへのパーティションテーブル情報のログ記録のサポート[＃12631](https://github.com/pingcap/tidb/pull/12631)
-    -   `region-cache-ttl` [＃12683](https://github.com/pingcap/tidb/pull/12683)を構成することにより、リージョンキャッシュのTTLの変更をサポートします
-    -   実行プランの圧縮エンコードされた情報を低速ログに出力することをサポートします。この機能はデフォルトで有効になっており、 `slow-log-plan`構成または`tidb_record_plan_in_slow_log`変数を使用して制御できます。さらに、 `tidb_decode_plan`関数は、スローログ内の実行プラン列にエンコードされた情報を実行プラン情報にデコードできます。 [＃12808](https://github.com/pingcap/tidb/pull/12808)
-    -   `information_schema.processlist`テーブル[＃12801](https://github.com/pingcap/tidb/pull/12801)でのメモリ使用量情報の表示をサポート
-    -   TiKVクライアントがアイドル状態の接続を判断したときにエラーと予期しないアラームが発生する可能性がある問題を修正します[＃12846](https://github.com/pingcap/tidb/pull/12846)
-    -   `tikvSnapshot`が[＃12872](https://github.com/pingcap/tidb/pull/12872)のKV結果を適切にキャッシュしないため、 `INSERT IGNORE`ステートメントのパフォーマンスが低下する問題を修正し`BatchGet()` 。
-    -   一部のKVサービスへの接続が遅いためにTiDBの応答速度が比較的遅いという問題を修正します[＃12814](https://github.com/pingcap/tidb/pull/12814)
+    -   後で大規模なトランザクションをサポートできるようにトランザクション TTL を変更するインターフェイス関数を実装する[#12397](https://github.com/pingcap/tidb/pull/12397)
+    -   悲観的なトランザクションをサポートするために、必要に応じてトランザクション TTL を延長するサポート (最大 10 分) [#12579](https://github.com/pingcap/tidb/pull/12579)
+    -   TiDB がスキーマの変更とそれに対応する変更されたテーブル情報をキャッシュする回数を 100 から 1024 に調整し、 `tidb_max_delta_schema_count`システム変数[#12502](https://github.com/pingcap/tidb/pull/12502)を使用して変更をサポートします
+    -   `kvrpc.Cleanup`プロトコルの動作を更新して、残業していないトランザクションのロックを消去しないようにします[#12417](https://github.com/pingcap/tidb/pull/12417)
+    -   `information_schema.tables`テーブル[#12631](https://github.com/pingcap/tidb/pull/12631)へのパーティション テーブル情報のロギングをサポート
+    -   `region-cache-ttl` [#12683](https://github.com/pingcap/tidb/pull/12683)を構成することにより、リージョンキャッシュの TTL の変更をサポートします。
+    -   実行計画の圧縮エンコードされた情報のスロー ログへの出力をサポートします。この機能はデフォルトで有効になっており、 `slow-log-plan`構成または`tidb_record_plan_in_slow_log`変数を使用して制御できます。さらに、 `tidb_decode_plan`関数は、スロー ログ内の実行計画列のエンコードされた情報を実行計画情報にデコードできます。 [#12808](https://github.com/pingcap/tidb/pull/12808)
+    -   `information_schema.processlist`テーブルでのメモリ使用量情報の表示をサポート[#12801](https://github.com/pingcap/tidb/pull/12801)
+    -   TiKV クライアントがアイドル状態の接続を判断すると、エラーや予期しないアラームが発生する可能性がある問題を修正します[#12846](https://github.com/pingcap/tidb/pull/12846)
+    -   `tikvSnapshot`が`BatchGet()` [#12872](https://github.com/pingcap/tidb/pull/12872)の KV 結果を適切にキャッシュしないため、 `INSERT IGNORE`ステートメントのパフォーマンスが低下する問題を修正します。
+    -   一部の KV サービスへの接続が遅いため、TiDB の応答速度が比較的遅かった問題を修正しました[#12814](https://github.com/pingcap/tidb/pull/12814)
 -   DDL
-    -   `Create Table`操作でSet列[＃12267](https://github.com/pingcap/tidb/pull/12267)のIntタイプのデフォルト値が正しく設定されない問題を修正します。
-    -   `Create Table`ステートメントで一意のインデックスを作成するときに複数の`unique`をサポートする[＃12463](https://github.com/pingcap/tidb/pull/12463)
-    -   この列のデフォルト値を既存の行に入力すると、 `Alter Table`を使用してビットタイプの列を追加するときにエラーが発生する可能性がある問題を修正し[＃12489](https://github.com/pingcap/tidb/pull/12489) 。
-    -   RangeパーティションテーブルがDateまたはDatetimeタイプの列をパーティションキーとして使用する場合のパーティションの追加の失敗を修正しました[＃12815](https://github.com/pingcap/tidb/pull/12815)
-    -   テーブルの作成時またはパーティションの追加時に、パーティションキーとして[日付]または[日時タイプ]列を持つ範囲パーティションテーブルのパーティションタイプとパーティションキータイプの整合性のチェックをサポートします[＃12792](https://github.com/pingcap/tidb/pull/12792)
-    -   範囲パーティションテーブルを作成するときに、一意キー列セットがパーティション列セット以上である必要があるというチェックを追加します[＃12718](https://github.com/pingcap/tidb/pull/12718)
+    -   `Create Table`の操作で Set 列[#12267](https://github.com/pingcap/tidb/pull/12267)の Int 型のデフォルト値が正しく設定されない問題を修正
+    -   `Create Table`ステートメントで一意のインデックスを作成するときに複数の`unique`をサポートします[#12463](https://github.com/pingcap/tidb/pull/12463)
+    -   `Alter Table` [#12489](https://github.com/pingcap/tidb/pull/12489)を使用してビット タイプの列を追加するときに、既存の行にこの列の既定値を入力するとエラーが発生する可能性があるという問題を修正します。
+    -   範囲分割テーブルが日付型または日時型の列を分割キーとして使用している場合に、分割を追加できない問題を修正します[#12815](https://github.com/pingcap/tidb/pull/12815)
+    -   Date または Datetime 型の列をパーティション キーとして使用する Range パーティション テーブルについて、テーブルの作成時またはパーティションの追加時に、パーティションの種類とパーティション キーの種類の整合性チェックをサポートし[#12792](https://github.com/pingcap/tidb/pull/12792) 。
+    -   レンジ パーティション分割されたテーブル[#12718](https://github.com/pingcap/tidb/pull/12718)を作成するときに、一意のキー列セットがパーティション分割された列セット以上である必要があるというチェックを追加します。
 -   モニター
-    -   コミットおよびロールバック操作の監視メトリックを`Transaction OPS`のダッシュボードに追加します[＃12505](https://github.com/pingcap/tidb/pull/12505)
-    -   `Add Index`操作の進行状況[＃12390](https://github.com/pingcap/tidb/pull/12390)の監視メトリックを追加します
+    -   コミットおよびロールバック操作のモニタリング メトリックをダッシュボードに追加する`Transaction OPS` [#12505](https://github.com/pingcap/tidb/pull/12505)
+    -   `Add Index`操作の進行状況の監視メトリクスを追加[#12390](https://github.com/pingcap/tidb/pull/12390)
 
 ## TiKV {#tikv}
 
 -   保管所
-    -   ペシミスティックトランザクションの新機能を追加します。トランザクションクリーンアップインターフェイスは、TTLが古くなっているロックのクリーンアップのみをサポートします[＃5589](https://github.com/tikv/tikv/pull/5589)
-    -   トランザクションの主キーのロールバックが折りたたまれる問題を修正し[＃5671](https://github.com/tikv/tikv/pull/5671) [＃5646](https://github.com/tikv/tikv/pull/5646)
-    -   悲観的なロックの下で、ポイントクエリが以前のバージョンのデータを返す可能性があるという問題を修正します[＃5634](https://github.com/tikv/tikv/pull/5634)
+    -   ペシミスティック トランザクションの新機能を追加: トランザクション クリーンアップ インターフェイスは、TTL が古いロックのクリーンアップのみをサポートします[#5589](https://github.com/tikv/tikv/pull/5589)
+    -   トランザクションのロールバック主キーが崩れる問題を修正[#5646](https://github.com/tikv/tikv/pull/5646) , [#5671](https://github.com/tikv/tikv/pull/5671)
+    -   悲観的ロックの下で、ポイント クエリが以前のバージョンのデータを返す可能性があるという問題を修正します[#5634](https://github.com/tikv/tikv/pull/5634)
 -   ラフトストア
-    -   Raftstoreでのメッセージフラッシュ操作を減らして、パフォーマンスを向上させ、CPU使用率を減らします[＃5617](https://github.com/tikv/tikv/pull/5617)
-    -   リージョンサイズと推定キー数を取得するコストを最適化して、ハートビートのオーバーヘッドとCPU使用率を削減します[＃5620](https://github.com/tikv/tikv/pull/5620)
-    -   Raftstoreがエラーログを出力し、無効なデータを取得するとpanicが発生する問題を修正します[＃5643](https://github.com/tikv/tikv/pull/5643)
+    -   Raftstore でのメッセージ フラッシュ操作を減らしてパフォーマンスを改善し、CPU 使用率を削減する[#5617](https://github.com/tikv/tikv/pull/5617)
+    -   リージョンサイズとキーの推定数を取得するコストを最適化し、ハートビートのオーバーヘッドと CPU 使用率を削減します[#5620](https://github.com/tikv/tikv/pull/5620)
+    -   無効なデータを取得すると、Raftstore がエラー ログを出力してpanicが発生する問題を修正します[#5643](https://github.com/tikv/tikv/pull/5643)
 -   エンジン
-    -   `force_consistency_checks`を有効にしてデータの安全性を向上させる[＃5662](https://github.com/tikv/tikv/pull/5662)
-    -   Titanでの同時フラッシュ操作がデータ損失を引き起こす可能性がある問題を修正します[＃5672](https://github.com/tikv/tikv/pull/5672)
-    -   L0内圧縮によって引き起こされるTiKVのクラッシュと再起動の問題を回避するために、rust-rocksdbバージョンを更新します[＃5710](https://github.com/tikv/tikv/pull/5710)
+    -   RocksDB `force_consistency_checks`を有効にしてデータの安全性を向上させる[#5662](https://github.com/tikv/tikv/pull/5662)
+    -   Titan での同時フラッシュ操作がデータ損失を引き起こす可能性があるという問題を修正します[#5672](https://github.com/tikv/tikv/pull/5672)
+    -   L0 内圧縮による[#5710](https://github.com/tikv/tikv/pull/5710)のクラッシュと再起動の問題を回避するために、rust-rocksdb のバージョンを更新します。
 
 ## PD {#pd}
 
--   リージョン[＃1782](https://github.com/pingcap/pd/pull/1782)が占めるストレージの精度を向上させる
--   `--help`コマンドの出力を改善する[＃1763](https://github.com/pingcap/pd/pull/1763)
--   TLSを有効にした後にHTTPリクエストがリダイレクトに失敗する問題を修正します[＃1777](https://github.com/pingcap/pd/pull/1777)
--   pd-ctlが`store shows limit`コマンドを使用したときに発生したpanicの問題を修正します[＃1808](https://github.com/pingcap/pd/pull/1808)
--   誤ったレポートを回避するために、ラベル監視メトリックの読みやすさを改善し、リーダーが切り替わったときに元のリーダーの監視データをリセットします[＃1815](https://github.com/pingcap/pd/pull/1815)
+-   リージョン[#1782](https://github.com/pingcap/pd/pull/1782)が占有するストレージの精度を向上させる
+-   `--help`コマンド[#1763](https://github.com/pingcap/pd/pull/1763)の出力を改善する
+-   TLS が有効になった後、HTTP 要求がリダイレクトに失敗する問題を修正します[#1777](https://github.com/pingcap/pd/pull/1777)
+-   pd-ctl が`store shows limit`コマンド[#1808](https://github.com/pingcap/pd/pull/1808)を使用するときに発生したpanicの問題を修正します。
+-   ラベル監視メトリクスの読みやすさを改善し、リーダーが切り替わったときに元のリーダーの監視データをリセットして、誤ったレポートを回避します[#1815](https://github.com/pingcap/pd/pull/1815)
 
 ## ツール {#tools}
 
--   TiDB Binlog
-    -   `ALTER DATABASE`の関連するDDL操作が原因でDrainerが異常終了する問題を修正します[＃769](https://github.com/pingcap/tidb-binlog/pull/769)
-    -   レプリケーション効率を向上させるために、コミットbinlogのトランザクションステータス情報のクエリをサポートする[＃757](https://github.com/pingcap/tidb-binlog/pull/757)
-    -   [＃758](https://github.com/pingcap/tidb-binlog/pull/758)の`start_ts`がPumpの最大の35より大きい場合にPumppanicが発生する可能性がある問題を修正し`commit_ts`
+-   Binlog
+    -   `ALTER DATABASE`関連する DDL 操作によってDrainerが異常終了する問題を修正[#769](https://github.com/pingcap/tidb-binlog/pull/769)
+    -   コミット バイナリログのトランザクション ステータス情報のクエリをサポートして、レプリケーションの効率を向上させます[#757](https://github.com/pingcap/tidb-binlog/pull/757)
+    -   Drainer の`start_ts`が Pump の最大の`commit_ts` [#758](https://github.com/pingcap/tidb-binlog/pull/758)より大きい場合、 Pumppanicが発生する可能性がある問題を修正します。
 -   TiDB Lightning
-    -   ローダーの完全なロジックインポート機能を統合し、バックエンドモードの構成をサポートします[＃221](https://github.com/pingcap/tidb-lightning/pull/221)
+    -   ローダーの完全なロジック インポート機能を統合し、バックエンド モードの構成をサポートします[#221](https://github.com/pingcap/tidb-lightning/pull/221)
 
-## TiDB Ansible {#tidb-ansible}
+## TiDB アンシブル {#tidb-ansible}
 
--   インデックス速度[＃986](https://github.com/pingcap/tidb-ansible/pull/986)を追加する監視メトリックを追加します
--   構成ファイルの内容を簡素化し、ユーザーが構成する必要のないパラメーターを削除し[＃998](https://github.com/pingcap/tidb-ansible/pull/998) [＃1043c](https://github.com/pingcap/tidb-ansible/commit/1043c3df7ddb72eb234c55858960e9fdd3830a14)
--   パフォーマンス読み取りとパフォーマンス書き込みの監視式エラーを修正[＃e90e7](https://github.com/pingcap/tidb-ansible/commit/e90e79f5117bb89197e01b1391fd02e25d57a440)
--   RaftstoreCPU使用率の監視表示方法とアラームルールを更新します[＃992](https://github.com/pingcap/tidb-ansible/pull/992)
--   概要監視ダッシュボードのTiKVCPU監視項目を更新して、過剰な監視コンテンツを除外します[＃1001](https://github.com/pingcap/tidb-ansible/pull/1001)
+-   インデックス速度[#986](https://github.com/pingcap/tidb-ansible/pull/986)を追加するモニタリング メトリックを追加します。
+-   構成ファイルの内容を簡素化し、ユーザーが構成する必要のないパラメーターを削除します[#1043c](https://github.com/pingcap/tidb-ansible/commit/1043c3df7ddb72eb234c55858960e9fdd3830a14) 、 [#998](https://github.com/pingcap/tidb-ansible/pull/998)
+-   パフォーマンスリード、パフォーマンスライト[#e90e7](https://github.com/pingcap/tidb-ansible/commit/e90e79f5117bb89197e01b1391fd02e25d57a440)の監視式エラーを修正
+-   Raftstore CPU使用率[#992](https://github.com/pingcap/tidb-ansible/pull/992)の監視表示方法とアラームルールを更新
+-   オーバービュー モニタリング ダッシュボードの TiKV CPU モニタリング アイテムを更新して、余分なモニタリング コンテンツを除外します[#1001](https://github.com/pingcap/tidb-ansible/pull/1001)

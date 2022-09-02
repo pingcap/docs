@@ -2,9 +2,9 @@
 title: tiup clean
 ---
 
-# tiup clean {#tiup-clean}
+# ティアップクリーン {#tiup-clean}
 
-`tiup clean`コマンドは、コンポーネントの操作中に生成されたデータをクリアするために使用されます。
+`tiup clean`コマンドは、コンポーネント操作中に生成されたデータをクリアするために使用されます。
 
 ## 構文 {#syntax}
 
@@ -12,15 +12,15 @@ title: tiup clean
 tiup clean [name] [flags]
 ```
 
-`[name]`の値は、 [`status`コマンド](/tiup/tiup-command-status.md)によって出力される`Name`フィールドです。 `[name]`を省略した場合は、 `tiup clean`コマンドに`--all`オプションを追加する必要があります。
+`[name]`の値は[`status`コマンド](/tiup/tiup-command-status.md)によって出力される`Name`フィールドです。 `[name]`を省略した場合は、 `tiup clean`コマンドに`--all`オプションを追加する必要があります。
 
 ## オプション {#option}
 
 ### &#x20;--all {#all}
 
--   すべての操作レコードをクリアします
--   データ型：ブール
--   デフォルト：false
+-   すべての操作記録を消去します
+-   データ型: ブール値
+-   デフォルト: false
 
 ## 出力 {#output}
 
@@ -28,4 +28,4 @@ tiup clean [name] [flags]
 Clean instance of `%s`, directory: %s
 ```
 
-[&lt;&lt;前のページに戻る-TiUPリファレンスコマンドリスト](/tiup/tiup-reference.md#command-list)
+[&lt;&lt; 前のページに戻る - TiUP リファレンス コマンド一覧](/tiup/tiup-reference.md#command-list)

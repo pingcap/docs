@@ -3,21 +3,21 @@ title: TopN and Limit Operator Push Down
 summary: Learn the implementation of TopN and Limit operator pushdown.
 ---
 
-# TopNとLimitOperatorのプッシュダウン {#topn-and-limit-operator-push-down}
+# TopN および Limit オペレーターのプッシュダウン {#topn-and-limit-operator-push-down}
 
-このドキュメントでは、TopNおよびLimit演算子のプッシュダウンの実装について説明します。
+このドキュメントでは、TopN および Limit オペレーター プッシュダウンの実装について説明します。
 
-TiDB実行プランツリーでは、SQLの`LIMIT`句はLimit演算子ノードに対応し、 `ORDER BY`句はSort演算子ノードに対応します。隣接するLimit演算子とSort演算子は、TopN演算子ノードとして結合されます。つまり、特定の並べ替えルールに従って、上位N個のレコードが返されます。つまり、Limit演算子は、nullの並べ替えルールを持つTopN演算子ノードと同等です。
+TiDB 実行計画ツリーでは、SQL の`LIMIT`句が Limit 演算子ノードに対応し、 `ORDER BY`句が Sort 演算子ノードに対応します。隣接する Limit 演算子と Sort 演算子は TopN 演算子ノードとして結合されます。これは、特定の並べ替え規則に従って上位 N レコードが返されることを意味します。つまり、Limit オペレーターは、NULL ソート・ルールを持つ TopN オペレーター・ノードと同等です。
 
-述語のプッシュダウンと同様に、TopNとLimitは、実行プランツリー内でデータソースにできるだけ近い位置にプッシュダウンされるため、必要なデータが早い段階でフィルタリングされます。このように、プッシュダウンはデータ送信と計算のオーバーヘッドを大幅に削減します。
+述語のプッシュダウンと同様に、TopN と Limit は実行計画ツリー内でできるだけデータ ソースに近い位置にプッシュ ダウンされ、必要なデータが早い段階でフィルタリングされます。このように、プッシュダウンはデータ送信と計算のオーバーヘッドを大幅に削減します。
 
 このルールを無効にするには、 [式プッシュダウンの最適化ルールとブロックリスト](/blocklist-control-plan.md)を参照してください。
 
 ## 例 {#examples}
 
-このセクションでは、いくつかの例を通じてTopNプッシュダウンについて説明します。
+このセクションでは、いくつかの例を通じて TopN プッシュダウンを示します。
 
-### 例1：ストレージレイヤーのコプロセッサーにプッシュダウンする {#example-1-push-down-to-the-coprocessors-in-the-storage-layer}
+### 例 1: ストレージレイヤーのコプロセッサーにプッシュダウンする {#example-1-push-down-to-the-coprocessors-in-the-storage-layer}
 
 {{< copyable "" >}}
 
@@ -38,9 +38,9 @@ explain select * from t order by a limit 10;
 4 rows in set (0.00 sec)
 ```
 
-このクエリでは、TopNオペレーターノードがデータフィルタリングのためにTiKVにプッシュダウンされ、各コプロセッサーは10レコードのみをTiDBに返します。 TiDBがデータを集約した後、最終的なフィルタリングが実行されます。
+このクエリでは、データ フィルタリングのために TopN オペレータ ノードが TiKV にプッシュ ダウンされ、各コプロセッサは 10 レコードのみを TiDB に返します。 TiDB がデータを集約した後、最終的なフィルタリングが実行されます。
 
-### 例2：TopNをJoinにプッシュダウンできます（並べ替えルールは外部テーブルの列にのみ依存します） {#example-2-topn-can-be-pushed-down-into-join-the-sorting-rule-only-depends-on-the-columns-in-the-outer-table}
+### 例 2: TopN を Join にプッシュ ダウンできます (並べ替えルールは、外部テーブルの列にのみ依存します) {#example-2-topn-can-be-pushed-down-into-join-the-sorting-rule-only-depends-on-the-columns-in-the-outer-table}
 
 {{< copyable "" >}}
 
@@ -66,9 +66,9 @@ explain select * from t left join s on t.a = s.a order by t.a limit 10;
 8 rows in set (0.01 sec)
 ```
 
-このクエリでは、TopN演算子の並べ替えルールは外部テーブル`t`の列にのみ依存するため、TopNをJoinにプッシュダウンする前に計算を実行して、Join操作の計算コストを削減できます。さらに、TiDBはTopNをストレージレイヤーにプッシュダウンします。
+このクエリでは、TopN 演算子の並べ替え規則は外部テーブル`t`の列のみに依存するため、TopN を Join にプッシュする前に計算を実行して、Join 操作の計算コストを削減できます。その上、TiDB はまた TopN をストレージレイヤーにプッシュします。
 
-### 例3：参加する前にTopNをプッシュダウンすることはできません {#example-3-topn-cannot-be-pushed-down-before-join}
+### 例 3: Join の前に TopN をプッシュダウンすることはできません {#example-3-topn-cannot-be-pushed-down-before-join}
 
 {{< copyable "" >}}
 
@@ -92,11 +92,11 @@ explain select * from t join s on t.a = s.a order by t.id limit 10;
 6 rows in set (0.00 sec)
 ```
 
-TopNは`Inner Join`より前にプッシュダウンすることはできません。上記のクエリを例にとると、Join後に100レコードを取得した場合、TopNの後に10レコードを残すことができます。ただし、最初にTopNを実行して10レコードを取得すると、Join後に5レコードしか残りません。このような場合、プッシュダウンの結果は異なります。
+TopN を`Inner Join`より前にプッシュダウンすることはできません。上記のクエリを例にとると、Join 後に 100 レコードを取得した場合、TopN 後に 10 レコードを残すことができます。ただし、最初に TopN を実行して 10 レコードを取得すると、Join 後に 5 レコードしか残りません。このような場合、プッシュダウンの結果は異なります。
 
-同様に、TopNは、外部結合の内部テーブルにプッシュダウンすることも、ソートルールが`t.a+s.a`などの複数のテーブルの列に関連している場合にプッシュダウンすることもできません。 TopNの並べ替えルールが外部テーブルの列のみに依存している場合にのみ、TopNをプッシュダウンできます。
+同様に、TopN は Outer Join の内部テーブルにプッシュ ダウンできません。また、その並べ替えルールが`t.a+s.a`のように複数のテーブルの列に関連付けられている場合は、プッシュ ダウンできません。 TopN の並べ替え規則が外部テーブルの列に排他的に依存する場合にのみ、TopN をプッシュ ダウンできます。
 
-### 例4：TopNを制限に変換する {#example-4-convert-topn-to-limit}
+### 例 4: TopN を Limit に変換する {#example-4-convert-topn-to-limit}
 
 {{< copyable "" >}}
 
@@ -123,4 +123,4 @@ explain select * from t left join s on t.a = s.a order by t.id limit 10;
 
 ```
 
-上記のクエリでは、TopNは最初に外部テーブル`t`にプッシュされます。 TopNは、主キーである`t.id`で並べ替える必要があり、TopNで追加の並べ替えを行わなくても、順番に直接読み取ることができます（ `keep order: true` ）。したがって、TopNはLimitとして簡略化されます。
+上記のクエリでは、最初に TopN が外部テーブル`t`にプッシュされます。 TopN は、主キーである`t.id`でソートする必要があり、TopN で追加のソートを行うことなく、順序 ( `keep order: true` ) で直接読み取ることができます。したがって、TopN は Limit として単純化されます。

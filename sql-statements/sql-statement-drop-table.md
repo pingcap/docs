@@ -5,7 +5,7 @@ summary: An overview of the usage of DROP TABLE for the TiDB database.
 
 # ドロップテーブル {#drop-table}
 
-このステートメントは、現在選択されているデータベースからテーブルを削除します。 `IF EXISTS`修飾子を使用しない限り、テーブルが存在しない場合はエラーが返されます。
+このステートメントは、現在選択されているデータベースからテーブルを削除します。 `IF EXISTS`修飾子が使用されていない限り、テーブルが存在しない場合はエラーが返されます。
 
 ## あらすじ {#synopsis}
 
@@ -28,9 +28,9 @@ TableNameList ::=
 
 次の構文を使用して、通常のテーブルと一時テーブルを削除できます。
 
--   `DROP TEMPORARY TABLE`を使用して、ローカル一時テーブルを削除します。
--   `DROP GLOBAL TEMPORARY TABLE`を使用して、グローバル一時テーブルを削除します。
--   `DROP TABLE`を使用して、通常のテーブルまたは一時テーブルを削除します。
+-   ローカル一時テーブルを削除するには、 `DROP TEMPORARY TABLE`を使用します。
+-   グローバル一時テーブルを削除するには、 `DROP GLOBAL TEMPORARY TABLE`を使用します。
+-   通常のテーブルまたは一時テーブルを削除するには、 `DROP TABLE`を使用します。
 
 ## 例 {#examples}
 
@@ -53,13 +53,13 @@ mysql> DROP TABLE v1;
 Query OK, 0 rows affected (0.23 sec)
 ```
 
-## MySQLの互換性 {#mysql-compatibility}
+## MySQL の互換性 {#mysql-compatibility}
 
--   `IF EXISTS`のテーブルを削除しても、存在しないテーブルを削除しようとしても警告は返されません。 [問題＃7867](https://github.com/pingcap/tidb/issues/7867)
+-   存在しないテーブルを削除しようとしても、 `IF EXISTS`を指定してテーブルを削除しても警告は返されません。 [問題＃7867](https://github.com/pingcap/tidb/issues/7867)
 -   現在、 `RESTRICT`と`CASCADE`は構文的にのみサポートされています。
 
-## も参照してください {#see-also}
+## こちらもご覧ください {#see-also}
 
--   [CREATE TABLE](/sql-statements/sql-statement-create-table.md)
--   [CREATETABLEを表示する](/sql-statements/sql-statement-show-create-table.md)
+-   [テーブルを作成](/sql-statements/sql-statement-create-table.md)
+-   [テーブルの作成を表示](/sql-statements/sql-statement-show-create-table.md)
 -   [テーブルを表示](/sql-statements/sql-statement-show-tables.md)

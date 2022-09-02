@@ -13,4 +13,4 @@ TiDB Cloudでの変更フィードの課金については、 [変更フィー�
 
 > **ノート：**
 >
-> 変更フィードがある場合は[クラスタを一時停止します](/tidb-cloud/pause-or-resume-tidb-cluster.md)できません。クラスタを一時停止する前に、既存の変更フィード ( [Apache Kafka へのシンクの削除](/tidb-cloud/changefeed-sink-to-apache-kafka.md#delete-a-sink)または[MySQL へのシンクの削除](/tidb-cloud/changefeed-sink-to-mysql.md#delete-a-sink) ) を削除する必要があります。
+> 変更フィードがある場合は[クラスターを一時停止します](/tidb-cloud/pause-or-resume-tidb-cluster.md)できません。クラスターを一時停止する前に、既存の変更フィード ( [Apache Kafka へのシンクの削除](/tidb-cloud/changefeed-sink-to-apache-kafka.md#manage-the-changefeed)または[MySQL へのシンクの削除](/tidb-cloud/changefeed-sink-to-mysql.md#delete-a-sink) ) を削除する必要があります。

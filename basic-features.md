@@ -49,14 +49,14 @@ summary: Learn about the basic features of TiDB.
 
 | SQL ステートメント[^2]                                                                    | 6.1 | 6.0 | 5.4 | 5.3 | 5.2 | 5.1 | 5.0 | 4.0 |
 | ---------------------------------------------------------------------------------- | :-: | :-: | --- | :-: | :-: | :-: | :-: | :-: |
-| 基本`SELECT` 、 `INSERT` 、 `UPDATE` 、 `DELETE` 、 `REPLACE`                            |  よ  |  よ  | よ   |  よ  |  よ  |  よ  |  よ  |  よ  |
+| `REPLACE` `SELECT` `INSERT` `UPDATE` `DELETE`                                      |  よ  |  よ  | よ   |  よ  |  よ  |  よ  |  よ  |  よ  |
 | `INSERT ON DUPLICATE KEY UPDATE`                                                   |  よ  |  よ  | よ   |  よ  |  よ  |  よ  |  よ  |  よ  |
 | `LOAD DATA INFILE`                                                                 |  よ  |  よ  | よ   |  よ  |  よ  |  よ  |  よ  |  よ  |
 | `SELECT INTO OUTFILE`                                                              |  よ  |  よ  | よ   |  よ  |  よ  |  よ  |  よ  |  よ  |
-| `INNER JOIN` , `LEFT\|RIGHT [OUTER] JOIN`                                          |  よ  |  よ  | よ   |  よ  |  よ  |  よ  |  よ  |  よ  |
-| `UNION` , `UNION ALL`                                                              |  よ  |  よ  | よ   |  よ  |  よ  |  よ  |  よ  |  よ  |
+| `INNER JOIN` 、 `LEFT\|RIGHT [OUTER] JOIN`                                          |  よ  |  よ  | よ   |  よ  |  よ  |  よ  |  よ  |  よ  |
+| `UNION` 、 `UNION ALL`                                                              |  よ  |  よ  | よ   |  よ  |  よ  |  よ  |  よ  |  よ  |
 | [`EXCEPT`および<code>INTERSECT</code>演算子](/functions-and-operators/set-operators.md)  |  よ  |  よ  | よ   |  よ  |  よ  |  よ  |  よ  |  N  |
-| `GROUP BY` , `ORDER BY`                                                            |  よ  |  よ  | よ   |  よ  |  よ  |  よ  |  よ  |  よ  |
+| `GROUP BY` 、 `ORDER BY`                                                            |  よ  |  よ  | よ   |  よ  |  よ  |  よ  |  よ  |  よ  |
 | [ウィンドウ関数](/functions-and-operators/window-functions.md)                            |  よ  |  よ  | よ   |  よ  |  よ  |  よ  |  よ  |  よ  |
 | [共通テーブル式 (CTE)](/sql-statements/sql-statement-with.md)                             |  よ  |  よ  | よ   |  よ  |  よ  |  よ  |  N  |  N  |
 | `START TRANSACTION` 、 `COMMIT` 、 `ROLLBACK`                                        |  よ  |  よ  | よ   |  よ  |  よ  |  よ  |  よ  |  よ  |
@@ -72,7 +72,7 @@ summary: Learn about the basic features of TiDB.
 | [プリペアド ステートメント キャッシュ](/sql-prepared-plan-cache.md)     |  よ  |  よ  | よ   |  よ  | 実験的 | 実験的 | 実験的 | 実験的 |
 | [SQL 計画管理 (SPM)](/sql-plan-management.md)              |  よ  |  よ  | よ   |  よ  |  よ  |  よ  |  よ  |  よ  |
 | [コプロセッサー・キャッシュ](/coprocessor-cache.md)                 |  よ  |  よ  | よ   |  よ  |  よ  |  よ  |  よ  | 実験的 |
-| [古い読み取り](/stale-read.md)                               |  よ  |  よ  | よ   |  よ  |  よ  |  よ  |  N  |  N  |
+| [ステイル読み取り](/stale-read.md)                             |  よ  |  よ  | よ   |  よ  |  よ  |  よ  |  N  |  N  |
 | [フォロワーが読む](/follower-read.md)                          |  よ  |  よ  | よ   |  よ  |  よ  |  よ  |  よ  |  よ  |
 | [履歴データの読み取り (tidb_snapshot)](/read-historical-data.md) |  よ  |  よ  | よ   |  よ  |  よ  |  よ  |  よ  |  よ  |
 | [オプティマイザーのヒント](/optimizer-hints.md)                    |  よ  |  よ  | よ   |  よ  |  よ  |  よ  |  よ  |  よ  |
@@ -84,7 +84,7 @@ summary: Learn about the basic features of TiDB.
 
 | データ定義言語 (DDL)                                                            | 6.1 | 6.0 | 5.4 | 5.3 | 5.2 | 5.1 | 5.0 | 4.0 |
 | ------------------------------------------------------------------------ | :-: | :-: | --- | :-: | :-: | :-: | :-: | :-: |
-| 基本`CREATE` 、 `DROP` 、 `ALTER` 、 `RENAME` 、 `TRUNCATE`                    |  よ  |  よ  | よ   |  よ  |  よ  |  よ  |  よ  |  よ  |
+| `TRUNCATE` `CREATE` `DROP` `ALTER` `RENAME`                              |  よ  |  よ  | よ   |  よ  |  よ  |  よ  |  よ  |  よ  |
 | [生成された列](/generated-columns.md)                                          | 実験的 | 実験的 | 実験的 | 実験的 | 実験的 | 実験的 | 実験的 | 実験的 |
 | [ビュー](/views.md)                                                         |  よ  |  よ  | よ   |  よ  |  よ  |  よ  |  よ  |  よ  |
 | [シーケンス](/sql-statements/sql-statement-create-sequence.md)                |  よ  |  よ  | よ   |  よ  |  よ  |  よ  |  よ  |  よ  |
@@ -134,7 +134,7 @@ summary: Learn about the basic features of TiDB.
 
 | 安全                                                                | 6.1 | 6.0 | 5.4 | 5.3 | 5.2 | 5.1 | 5.0 | 4.0 |
 | ----------------------------------------------------------------- | :-: | :-: | --- | :-: | :-: | :-: | :-: | :-: |
-| [透過層セキュリティ (TLS)](/enable-tls-between-clients-and-servers.md)     |  よ  |  よ  | よ   |  よ  |  よ  |  よ  |  よ  |  よ  |
+| [透過レイヤーセキュリティ (TLS)](/enable-tls-between-clients-and-servers.md)  |  よ  |  よ  | よ   |  よ  |  よ  |  よ  |  よ  |  よ  |
 | [保存時の暗号化 (TDE)](/encryption-at-rest.md)                           |  よ  |  よ  | よ   |  よ  |  よ  |  よ  |  よ  |  よ  |
 | [役割ベースの認証 (RBAC)](/role-based-access-control.md)                  |  よ  |  よ  | よ   |  よ  |  よ  |  よ  |  よ  |  よ  |
 | [証明書ベースの認証](/certificate-authentication.md)                       |  よ  |  よ  | よ   |  よ  |  よ  |  よ  |  よ  |  よ  |

@@ -4,7 +4,7 @@ title: tiup help
 
 # tiup help {#tiup-help}
 
-TiUPコマンドラインインターフェイスは、ユーザーに豊富なヘルプ情報を提供します。 `help`コマンドまたは`--help`オプションで表示できます。
+TiUP コマンドライン インターフェイスは、豊富なヘルプ情報をユーザーに提供します。 `help`コマンドまたは`--help`オプションで表示できます。
 
 ## 構文 {#syntax}
 
@@ -12,7 +12,7 @@ TiUPコマンドラインインターフェイスは、ユーザーに豊富な�
 tiup help [command]
 ```
 
-`[command]`は、ユーザーが表示する必要のあるコマンドのヘルプ情報を指定するために使用されます。指定されていない場合は、TiUPのヘルプ情報が表示されます。
+`[command]`は、ユーザーが表示する必要があるコマンドのヘルプ情報を指定するために使用されます。指定しない場合は、TiUP のヘルプ情報が表示されます。
 
 ## オプション {#option}
 
@@ -20,6 +20,6 @@ tiup help [command]
 
 ## 出力 {#output}
 
-`[command]`またはTiUPのヘルプ情報。
+`[command]`または TiUP のヘルプ情報。
 
-[&lt;&lt;前のページに戻る-TiUPリファレンスコマンドリスト](/tiup/tiup-reference.md#command-list)
+[&lt;&lt; 前のページに戻る - TiUP リファレンス コマンド一覧](/tiup/tiup-reference.md#command-list)

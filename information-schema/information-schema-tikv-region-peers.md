@@ -5,7 +5,7 @@ summary: Learn the `TIKV_REGION_PEERS` information_schema table.
 
 # TIKV_REGION_PEERS {#tikv-region-peers}
 
-`TIKV_REGION_PEERS`の表は、TiKVの単一のリージョンノードの詳細情報（学習者かリーダーかなど）を示しています。
+`TIKV_REGION_PEERS`テーブルには、学習者かリーダーかなど、TiKV の単一のリージョンノードの詳細情報が表示されます。
 
 {{< copyable "" >}}
 
@@ -29,7 +29,7 @@ DESC tikv_region_peers;
 7 rows in set (0.01 sec)
 ```
 
-たとえば、次のSQLステートメントを使用して、最大値が`WRITTEN_BYTES`の上位3つのリージョンの特定のTiKVアドレスを照会できます。
+たとえば、次の SQL ステートメントを使用して、最大値`WRITTEN_BYTES`で上位 3 つのリージョンの特定の TiKV アドレスをクエリできます。
 
 ```sql
 SELECT
@@ -46,15 +46,15 @@ WHERE
  AND peer.store_id = tikv.store_id;
 ```
 
-`TIKV_REGION_PEERS`表のフィールドは次のように説明されています。
+`TIKV_REGION_PEERS`テーブルのフィールドは次のとおりです。
 
--   REGION_ID：リージョンID。
--   PEER_ID：リージョンピアのID。
--   STORE_ID：リージョンが配置されているTiKVストアのID。
--   IS_LEARNER：ピアが学習者であるかどうか。
--   IS_LEADER：ピアがリーダーであるかどうか。
--   ステータス：ピアのステータス：
-    -   保留中：一時的に利用できません。
-    -   DOWN：オフラインで変換されました。このピアはサービスを提供しなくなりました。
+-   REGION_ID:リージョンID。
+-   PEER_ID:リージョンピアの ID。
+-   STORE_ID:リージョンが配置されている TiKV ストアの ID。
+-   IS_LEARNER: ピアが学習者かどうか。
+-   IS_LEADER: ピアがリーダーかどうか。
+-   STATUS: ピアのステータス:
+    -   保留中: 一時的に利用できません。
+    -   DOWN: オフラインで変換済み。このピアはサービスを提供しなくなりました。
     -   NORMAL：正常に動作しています。
--   DOWN_SECONDS：オフラインの期間（秒単位）。
+-   DOWN_SECONDS: オフラインの期間 (秒単位)。

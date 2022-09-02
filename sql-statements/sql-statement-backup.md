@@ -5,17 +5,17 @@ summary: An overview of the usage of BACKUP for the TiDB database.
 
 # バックアップ {#backup}
 
-このステートメントは、TiDBクラスタの分散バックアップを実行するために使用されます。
+このステートメントは、TiDB クラスターの分散バックアップを実行するために使用されます。
 
-`BACKUP`のステートメントは[BRツール](/br/backup-and-restore-overview.md)と同じエンジンを使用しますが、バックアッププロセスが個別のBRツールではなくTiDB自体によって駆動される点が異なります。 BRのすべての利点と警告は、このステートメントにも適用されます。
+`BACKUP`ステートメントは[BRツール](/br/backup-and-restore-overview.md)ステートメントと同じエンジンを使用しますが、バックアップ プロセスが別の BR ツールではなく TiDB 自体によって駆動される点が異なります。 BR のすべての利点と警告は、このステートメントにも適用されます。
 
-`BACKUP`を実行するには、 `BACKUP_ADMIN`または`SUPER`の特権が必要です。さらに、バックアップを実行するTiDBノードとクラスタのすべてのTiKVノードの両方に、宛先への読み取りまたは書き込み権限が必要です。 [セキュリティ強化モード](/system-variables.md#tidb_enable_enhanced_security)が有効になっている場合、ローカルストレージ（ `local://`で始まるストレージパス）は許可されません。
+`BACKUP`を実行するには、 `BACKUP_ADMIN`または`SUPER`のいずれかの特権が必要です。さらに、バックアップを実行する TiDB ノードとクラスター内のすべての TiKV ノードの両方に、宛先への読み取りまたは書き込み権限が必要です。 [セキュリティ強化モード](/system-variables.md#tidb_enable_enhanced_security)が有効になっている場合、ローカル ストレージ ( `local://`で始まるストレージ パス) は許可されません。
 
-`BACKUP`ステートメントは、バックアップタスク全体が終了するか、失敗するか、キャンセルされるまでブロックされます。 `BACKUP`を実行するために、長期的な接続を準備する必要があります。タスクは、 [`KILL TIDB QUERY`](/sql-statements/sql-statement-kill.md)ステートメントを使用してキャンセルできます。
+`BACKUP`ステートメントは、バックアップ タスク全体が終了、失敗、またはキャンセルされるまでブロックされます。 `BACKUP`を実行するには、持続的な接続を準備する必要があります。タスクは[`KILL TIDB QUERY`](/sql-statements/sql-statement-kill.md)ステートメントを使用してキャンセルできます。
 
-一度に実行できるタスクは`BACKUP`つと[`RESTORE`](/sql-statements/sql-statement-restore.md)つだけです。 `BACKUP`または`RESTORE`ステートメントが同じTiDBサーバーですでに実行されている場合、新しい`BACKUP`の実行は、前のすべてのタスクが終了するまで待機します。
+一度に実行できるタスクは`BACKUP`と[`RESTORE`](/sql-statements/sql-statement-restore.md)の 1 つだけです。 `BACKUP`または`RESTORE`のステートメントが同じ TiDBサーバーで既に実行されている場合、新しい`BACKUP`の実行は、前のすべてのタスクが完了するまで待機します。
 
-`BACKUP`は、「tikv」ストレージエンジンでのみ使用できます。 「unistore」エンジンで`BACKUP`を使用すると失敗します。
+`BACKUP`は「tikv」ストレージ エンジンでのみ使用できます。 「unistore」エンジンで`BACKUP`を使用すると失敗します。
 
 ## あらすじ {#synopsis}
 
@@ -44,7 +44,7 @@ BackupTSO ::=
 
 ## 例 {#examples}
 
-### データベースをバックアップする {#back-up-databases}
+### データベースのバックアップ {#back-up-databases}
 
 {{< copyable "" >}}
 
@@ -61,19 +61,19 @@ BACKUP DATABASE `test` TO 'local:///mnt/backup/2020/04/';
 1 row in set (58.453 sec)
 ```
 
-上記の例では、 `test`のデータベースがローカルファイルシステムにバックアップされています。データは、すべてのTiDBノードとTiKVノードに分散された`/mnt/backup/2020/04/`のディレクトリにSSTファイルとして保存されます。
+上記の例では、 `test`データベースがローカル ファイルシステムにバックアップされます。データは、すべての TiDB および TiKV ノードに分散された`/mnt/backup/2020/04/`のディレクトリに SST ファイルとして保存されます。
 
-上記の結果の最初の行は次のように説明されています。
+上記の結果の最初の行は、次のように記述されます。
 
-| カラム              | 説明                                                                  |
-| :--------------- | :------------------------------------------------------------------ |
-| `Destination`    | 宛先URL                                                               |
-| `Size`           | バックアップアーカイブの合計サイズ（バイト単位）                                            |
-| `BackupTS`       | バックアップが作成されたときのスナップショットのTSO（ [増分バックアップ](#incremental-backup)に役立ちます） |
-| `Queue Time`     | `BACKUP`のタスクがキューに入れられたときのタイムスタンプ（現在のタイムゾーン）。                        |
-| `Execution Time` | `BACKUP`のタスクが実行を開始したときのタイムスタンプ（現在のタイムゾーン）。                          |
+| カラム              | 説明                                                                    |
+| :--------------- | :-------------------------------------------------------------------- |
+| `Destination`    | リンク先 URL                                                              |
+| `Size`           | バックアップ アーカイブの合計サイズ (バイト単位)                                            |
+| `BackupTS`       | バックアップが作成されたときのスナップショットの TSO ( [増分バックアップ](#incremental-backup)に役立ちます) |
+| `Queue Time`     | `BACKUP`のタスクがキューに入れられたときのタイムスタンプ (現在のタイム ゾーン)。                        |
+| `Execution Time` | `BACKUP`のタスクの実行が開始されたときの (現在のタイム ゾーンでの) タイムスタンプ。                      |
 
-### テーブルをバックアップする {#back-up-tables}
+### テーブルのバックアップ {#back-up-tables}
 
 {{< copyable "" >}}
 
@@ -87,7 +87,7 @@ BACKUP TABLE `test`.`sbtest01` TO 'local:///mnt/backup/sbtest01/';
 BACKUP TABLE sbtest02, sbtest03, sbtest04 TO 'local:///mnt/backup/sbtest/';
 ```
 
-### クラスタ全体をバックアップする {#back-up-the-entire-cluster}
+### クラスター全体をバックアップする {#back-up-the-entire-cluster}
 
 {{< copyable "" >}}
 
@@ -95,11 +95,11 @@ BACKUP TABLE sbtest02, sbtest03, sbtest04 TO 'local:///mnt/backup/sbtest/';
 BACKUP DATABASE * TO 'local:///mnt/backup/full/';
 ```
 
-システムテーブル（ `mysql.*` 、 `INFORMATION_SCHEMA.*` ）はバックアップに含まれないことに注意して`PERFORMANCE_SCHEMA.*` 。
+システム テーブル ( `mysql.*` 、 `INFORMATION_SCHEMA.*` 、 `PERFORMANCE_SCHEMA.*` 、…) はバックアップに含まれないことに注意してください。
 
 ### 外部ストレージ {#external-storages}
 
-BRは、S3またはGCSへのデータのバックアップをサポートしています。
+BR は、S3 または GCS へのデータのバックアップをサポートしています。
 
 {{< copyable "" >}}
 
@@ -107,9 +107,9 @@ BRは、S3またはGCSへのデータのバックアップをサポートして�
 BACKUP DATABASE `test` TO 's3://example-bucket-2020/backup-05/?region=us-west-2&access-key={YOUR_ACCESS_KEY}&secret-access-key={YOUR_SECRET_KEY}';
 ```
 
-URL構文については、 [外部ストレージ](/br/backup-and-restore-storages.md)で詳しく説明しています。
+URL 構文については、 [外部ストレージ](/br/backup-and-restore-storages.md)で詳しく説明しています。
 
-クレデンシャルを配布してはならないクラウド環境で実行する場合は、 `SEND_CREDENTIALS_TO_TIKV`オプションを`FALSE`に設定します。
+認証情報を配布してはならないクラウド環境で実行する場合は、 `SEND_CREDENTIALS_TO_TIKV`オプションを`FALSE`に設定します。
 
 {{< copyable "" >}}
 
@@ -120,11 +120,11 @@ BACKUP DATABASE `test` TO 's3://example-bucket-2020/backup-05/?region=us-west-2'
 
 ### パフォーマンスの微調整 {#performance-fine-tuning}
 
-`RATE_LIMIT`を使用して、TiKVノードごとの平均アップロード速度を制限し、ネットワーク帯域幅を減らします。
+`RATE_LIMIT`を使用して、TiKV ノードごとの平均アップロード速度を制限し、ネットワーク帯域幅を減らします。
 
-デフォルトでは、すべてのTiKVノードが4つのバックアップスレッドを実行します。この値は、 `CONCURRENCY`オプションで調整できます。
+デフォルトでは、すべての TiKV ノードが 4 つのバックアップ スレッドを実行します。この値は`CONCURRENCY`オプションで調整できます。
 
-バックアップが完了する前に、 `BACKUP`はクラスタ上のデータに対してチェックサムを実行して、正確性を検証します。これが不要であると確信できる場合は、 `CHECKSUM`オプションを使用してこの手順を無効にすることができます。
+バックアップが完了する前に、クラスタ`BACKUP`のデータに対してチェックサムを実行して、正確性を確認します。これが不要であることが確実な場合は、オプション`CHECKSUM`を使用してこのステップを無効にすることができます。
 
 {{< copyable "" >}}
 
@@ -137,7 +137,7 @@ BACKUP DATABASE `test` TO 's3://example-bucket-2020/backup-06/'
 
 ### スナップショット {#snapshot}
 
-履歴データをバックアップするためのタイムスタンプ、TSO、または相対時間を指定します。
+履歴データをバックアップするタイムスタンプ、TSO、または相対時間を指定します。
 
 {{< copyable "" >}}
 
@@ -155,7 +155,7 @@ BACKUP DATABASE `test` TO 'local:///mnt/backup/hist03'
     SNAPSHOT = 415685305958400;
 ```
 
-相対時間でサポートされる単位は次のとおりです。
+相対時間でサポートされている単位は次のとおりです。
 
 -   マイクロ秒
 -   2番目
@@ -164,11 +164,11 @@ BACKUP DATABASE `test` TO 'local:///mnt/backup/hist03'
 -   日
 -   週
 
-SQL標準に従って、単位は常に単数であることに注意してください。
+SQL 標準に従って、単位は常に単数であることに注意してください。
 
 ### 増分バックアップ {#incremental-backup}
 
-最後のバックアップから現在のスナップショットまでの変更のみをバックアップする`LAST_BACKUP`のオプションを指定します。
+最後のバックアップから現在のスナップショットまでの変更のみをバックアップするには、 `LAST_BACKUP`オプションを指定します。
 
 {{< copyable "" >}}
 
@@ -182,11 +182,11 @@ BACKUP DATABASE `test` TO 'local:///mnt/backup/hist03'
     LAST_BACKUP = 415685305958400;
 ```
 
-## MySQLの互換性 {#mysql-compatibility}
+## MySQL の互換性 {#mysql-compatibility}
 
-このステートメントは、MySQL構文のTiDB拡張です。
+このステートメントは、MySQL 構文に対する TiDB 拡張です。
 
-## も参照してください {#see-also}
+## こちらもご覧ください {#see-also}
 
 -   [戻す](/sql-statements/sql-statement-restore.md)
--   [バックアップを表示する](/sql-statements/sql-statement-show-backups.md)
+-   [バックアップを表示](/sql-statements/sql-statement-show-backups.md)

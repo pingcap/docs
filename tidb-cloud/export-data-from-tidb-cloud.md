@@ -3,15 +3,15 @@ title: Export Data from TiDB
 summary: This page has instructions for exporting data from your TiDB cluster in TiDB Cloud.
 ---
 
-# TiDBからデータをエクスポートする {#export-data-from-tidb}
+# TiDB からのデータのエクスポート {#export-data-from-tidb}
 
-このページでは、 TiDB Cloudのクラスタからデータをエクスポートする方法について説明します。
+このページでは、 TiDB Cloudのクラスターからデータをエクスポートする方法について説明します。
 
-TiDBはデータをロックしません。それでも、TiDBから他のデータプラットフォームにデータを移行できるようにしたい場合があります。 TiDBはMySQLとの互換性が高いため、MySQLに適した任意のエクスポートツールをTiDBにも使用できます。
+TiDB はデータをロックしません。 TiDB から他のデータ プラットフォームにデータを移行できるようにしたい場合があります。 TiDB は MySQL との互換性が高いため、MySQL に適したエクスポート ツールはすべて TiDB にも使用できます。
 
 ツール[Dumpling](https://github.com/pingcap/dumpling)を使用してデータをエクスポートできます。
 
-1.  TiUPをダウンロードしてインストールします。
+1.  TiUP をダウンロードしてインストールします。
 
     {{< copyable "" >}}
 
@@ -23,7 +23,7 @@ TiDBはデータをロックしません。それでも、TiDBから他のデー
 
     > **ノート：**
     >
-    > インストール後、TiUPは対応する`profile`ファイルの絶対パスを表示します。次のコマンドで`.bash_profile`を`profile`ファイルのパスに変更する必要があります。
+    > インストール後、TiUP は対応する`profile`ファイルの絶対パスを表示します。次のコマンドの`.bash_profile`を`profile`ファイルのパスに変更する必要があります。
 
     {{< copyable "" >}}
 
@@ -39,7 +39,7 @@ TiDBはデータをロックしません。それでも、TiDBから他のデー
     tiup install dumpling
     ```
 
-4.  TiDBからのDumplingを使用してデータをエクスポートします。
+4.  TiDB からDumplingを使用してデータをエクスポートします。
 
     {{< copyable "" >}}
 
@@ -49,11 +49,11 @@ TiDBはデータをロックしません。それでも、TiDBから他のデー
 
     指定したデータベースのみをエクスポートする場合は、 `-B`を使用してデータベース名のコンマ区切りリストを指定します。
 
-    必要な最小権限は次のとおりです。
+    最低限必要な権限は次のとおりです。
 
     -   `SELECT`
     -   `RELOAD`
     -   `LOCK TABLES`
     -   `REPLICATION CLIENT`
 
-    現在、 DumplingはMydumper形式の出力のみをサポートしており、 [TiDB Lightning](https://github.com/pingcap/tidb-lightning)を使用してMySQL互換データベースに簡単に復元できます。
+    現在、 Dumplingは Mydumper 形式の出力のみをサポートしており、これは[TiDB Lightning](https://github.com/pingcap/tidb-lightning)を使用して MySQL 互換データベースに簡単に復元できます。

@@ -3,9 +3,9 @@ title: Garbage Collection Configuration
 summary: Learn about GC configuration parameters.
 ---
 
-# ガベージコレクションのConfiguration / コンフィグレーション {#garbage-collection-configuration}
+# ガベージ コレクションのConfiguration / コンフィグレーション {#garbage-collection-configuration}
 
-ガベージコレクションは、次のシステム変数を介して構成されます。
+ガベージ コレクションは、次のシステム変数を介して構成されます。
 
 -   [`tidb_gc_enable`](/system-variables.md#tidb_gc_enable-new-in-v50)
 -   [`tidb_gc_run_interval`](/system-variables.md#tidb_gc_run_interval-new-in-v50)
@@ -14,13 +14,13 @@ summary: Learn about GC configuration parameters.
 -   [`tidb_gc_scan_lock_mode`](/system-variables.md#tidb_gc_scan_lock_mode-new-in-v50)
 -   [`tidb_gc_max_wait_time`](/system-variables.md#tidb_gc_max_wait_time-new-in-v610)
 
-## GC I/O制限 {#gc-i-o-limit}
+## GC I/O 制限 {#gc-i-o-limit}
 
-TiKVはGCI/O制限をサポートします。 `gc.max-write-bytes-per-sec`を構成して、1秒あたりのGCワーカーの書き込みを制限し、通常の要求への影響を減らすことができます。
+TiKV は GC I/O 制限をサポートしています。 `gc.max-write-bytes-per-sec`を設定して 1 秒あたりの GC ワーカーの書き込みを制限し、通常のリクエストへの影響を減らすことができます。
 
 `0`は、この機能を無効にすることを示します。
 
-tikv-ctlを使用して、この構成を動的に変更できます。
+tikv-ctl を使用して、この構成を動的に変更できます。
 
 {{< copyable "" >}}
 
@@ -28,23 +28,23 @@ tikv-ctlを使用して、この構成を動的に変更できます。
 tikv-ctl --host=ip:port modify-tikv-config -n gc.max-write-bytes-per-sec -v 10MB
 ```
 
-## TiDB5.0での変更 {#changes-in-tidb-5-0}
+## TiDB 5.0 の変更点 {#changes-in-tidb-5-0}
 
-TiDBの以前のリリースでは、ガベージコレクションは`mysql.tidb`のシステムテーブルを介して構成されていました。このテーブルへの変更は引き続きサポートされますが、提供されているシステム変数を使用することをお勧めします。これにより、構成への変更を確実に検証し、予期しない動作を防ぐことができます（ [＃20655](https://github.com/pingcap/tidb/issues/20655) ）。
+TiDB の以前のリリースでは、ガベージ コレクションは`mysql.tidb`システム テーブルを介して構成されていました。この表への変更は引き続きサポートされますが、提供されているシステム変数を使用することをお勧めします。これにより、構成への変更を検証し、予期しない動作を防ぐことができます ( [#20655](https://github.com/pingcap/tidb/issues/20655) )。
 
-`CENTRAL`ガベージコレクションモードはサポートされなくなりました。 `DISTRIBUTED` GCモード（TiDB 3.0以降のデフォルト）が代わりに自動的に使用されます。 TiDBがガベージコレクションをトリガーするために各TiKVリージョンにリクエストを送信する必要がなくなったため、このモードはより効率的です。
+`CENTRAL`ガベージ コレクション モードはサポートされなくなりました。代わりに`DISTRIBUTED` GC モード (TiDB 3.0 以降のデフォルト) が自動的に使用されます。このモードは、ガベージ コレクションをトリガーするために TiDB が各 TiKV リージョンにリクエストを送信する必要がなくなるため、より効率的です。
 
-以前のリリースでの変更点については、左側のメニューの*TIDBバージョンセレクター*を使用して、このドキュメントの以前のバージョンを参照してください。
+以前のリリースでの変更点については、左側のメニューにある*TIDB バージョン セレクタ*を使用して、このドキュメントの以前のバージョンを参照してください。
 
-## TiDB6.1.0での変更 {#changes-in-tidb-6-1-0}
+## TiDB 6.1.0 の変更点 {#changes-in-tidb-6-1-0}
 
-TiDB v6.1.0より前は、TiDBのトランザクションはGCセーフポイントに影響しません。 v6.1.0以降、TiDBは、アクセスされるデータがクリアされているという問題を解決するために、GCセーフポイントを計算するときにトランザクションのstartTSを考慮します。トランザクションが長すぎると、セーフポイントが長時間ブロックされ、アプリケーションのパフォーマンスに影響します。
+TiDB v6.1.0 より前では、TiDB のトランザクションは GC セーフ ポイントに影響しません。 v6.1.0以降、TiDBはGCセーフポイントの計算時にトランザクションのstartTSを考慮し、アクセス対象のデータがクリアされてしまう問題を解決しました。トランザクションが長すぎると、セーフ ポイントが長時間ブロックされ、アプリケーションのパフォーマンスに影響します。
 
-TiDB v6.1.0では、アクティブなトランザクションがGCセーフポイントをブロックする最大時間を制御するために、システム変数[`tidb_gc_max_wait_time`](/system-variables.md#tidb_gc_max_wait_time-new-in-v610)が導入されています。値を超えると、GCセーフポイントが強制的に転送されます。
+TiDB v6.1.0 では、システム変数[`tidb_gc_max_wait_time`](/system-variables.md#tidb_gc_max_wait_time-new-in-v610)が導入され、アクティブなトランザクションが GC セーフ ポイントをブロックする最大時間を制御します。値を超えると、強制的に GC セーフ ポイントが転送されます。
 
-### 圧縮フィルターのGC {#gc-in-compaction-filter}
+### 圧縮フィルターでの GC {#gc-in-compaction-filter}
 
-`DISTRIBUTED` GCモードに基づいて、圧縮フィルターのGCのメカニズムは、個別のGCワーカースレッドの代わりにRocksDBの圧縮プロセスを使用してGCを実行します。この新しいGCメカニズムは、GCによって引き起こされる余分なディスク読み取りを回避するのに役立ちます。また、廃止されたデータをクリアした後、シーケンシャルスキャンのパフォーマンスを低下させる多数の左のトゥームストーンマークを回避します。次の例は、TiKV構成ファイルでメカニズムを有効にする方法を示しています。
+`DISTRIBUTED` GC モードに基づいて、Compaction Filter の GC のメカニズムは、別の GC ワーカー スレッドではなく、RocksDB の圧縮プロセスを使用して GC を実行します。この新しい GC メカニズムは、GC による余分なディスク読み取りを回避するのに役立ちます。また、古いデータを消去した後、シーケンシャル スキャンのパフォーマンスを低下させる多数の廃棄マークが残されることを回避します。次の例は、TiKV 構成ファイルでメカニズムを有効にする方法を示しています。
 
 {{< copyable "" >}}
 
@@ -53,7 +53,7 @@ TiDB v6.1.0では、アクティブなトランザクションがGCセーフポ�
 enable-compaction-filter = true
 ```
 
-オンラインで構成を変更することにより、このGCメカニズムを有効にすることもできます。次の例を参照してください。
+オンラインで構成を変更して、この GC メカニズムを有効にすることもできます。次の例を参照してください。
 
 {{< copyable "" >}}
 

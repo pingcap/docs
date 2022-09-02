@@ -3,11 +3,11 @@ title: SHOW STATS_HEALTHY
 summary: An overview of the usage of SHOW STATS_HEALTHY for TiDB database.
 ---
 
-# SHOW STATS_HEALTHY {#show-stats-healthy}
+# STATS_HEALTHY を表示 {#show-stats-healthy}
 
-`SHOW STATS_HEALTHY`のステートメントは、統計がどれほど正確であると信じられているかの推定を示しています。正常性のパーセンテージが低いテーブルは、最適ではないクエリ実行プランを生成する可能性があります。
+`SHOW STATS_HEALTHY`のステートメントは、統計がどの程度正確であると考えられているかの推定を示しています。正常性のパーセンテージが低いテーブルでは、最適ではないクエリ実行プランが生成される可能性があります。
 
-`ANALYZE` tableコマンドを実行すると、テーブルの状態を改善できます。ヘルスが[`tidb_auto_analyze_ratio`](/system-variables.md#tidb_auto_analyze_ratio)のしきい値を下回ると、 `ANALYZE`が自動的に実行されます。
+`ANALYZE` table コマンドを実行すると、テーブルの状態を改善できます。 `ANALYZE`は、ヘルスが[`tidb_auto_analyze_ratio`](/system-variables.md#tidb_auto_analyze_ratio)のしきい値を下回ると自動的に実行されます。
 
 ## あらすじ {#synopsis}
 
@@ -25,7 +25,7 @@ summary: An overview of the usage of SHOW STATS_HEALTHY for TiDB database.
 
 ## 例 {#examples}
 
-サンプルデータをロードして実行`ANALYZE` ：
+サンプル データを読み込んで`ANALYZE`を実行します。
 
 {{< copyable "" >}}
 
@@ -60,7 +60,7 @@ mysql> SHOW STATS_HEALTHY;
 1 row in set (0.00 sec)
 ```
 
-一括更新を実行して、レコードの約30％を削除します。統計の状態を確認します。
+レコードの約 30% を削除する一括更新を実行します。統計の健全性を確認します。
 
 {{< copyable "" >}}
 
@@ -79,11 +79,11 @@ mysql> SHOW STATS_HEALTHY;
 1 row in set (0.00 sec)
 ```
 
-## MySQLの互換性 {#mysql-compatibility}
+## MySQL の互換性 {#mysql-compatibility}
 
-このステートメントは、MySQL構文のTiDB拡張です。
+このステートメントは、MySQL 構文に対する TiDB 拡張です。
 
-## も参照してください {#see-also}
+## こちらもご覧ください {#see-also}
 
 -   [分析する](/sql-statements/sql-statement-analyze-table.md)
 -   [統計入門](/statistics.md)

@@ -3,82 +3,82 @@ title: Prometheus and Grafana Integration (Third-Party Monitoring Service)
 summary: Learn how to monitor your TiDB cluster with the Prometheus and Grafana integration.
 ---
 
-# PrometheusとGrafanaの統合 {#prometheus-and-grafana-integration}
+# Prometheus と Grafana の統合 {#prometheus-and-grafana-integration}
 
-TiDB Cloudは[プロメテウス](https://prometheus.io/)のAPIエンドポイントを提供します。 Prometheusサービスを使用している場合は、エンドポイントからTiDB Cloudの主要なメトリックを簡単に監視できます。
+TiDB Cloudは[プロメテウス](https://prometheus.io/)の API エンドポイントを提供します。 Prometheus サービスをお持ちの場合は、エンドポイントからTiDB Cloudの主要なメトリックを簡単に監視できます。
 
-このドキュメントでは、 TiDB Cloudエンドポイントから主要なメトリックを読み取るようにPrometheusサービスを構成する方法と、 [Grafana](https://grafana.com/)を使用してメトリックを表示する方法について説明します。
+このドキュメントでは、Prometheus サービスを構成してTiDB Cloudエンドポイントから主要なメトリクスを読み取る方法と、 [グラファナ](https://grafana.com/)を使用してメトリクスを表示する方法について説明します。
 
 ## 前提条件 {#prerequisites}
 
--   TiDB CloudをPrometheusと統合するには、セルフホストまたはマネージドのPrometheusサービスが必要です。
+-   TiDB Cloudを Prometheus と統合するには、自己ホスト型または管理型の Prometheus サービスが必要です。
 
--   TiDB Cloudのサードパーティ統合設定を編集するには、組織への`Organization Owner`つのアクセス、またはTiDB Cloudのターゲットプロジェクトへの`Project Member`のアクセスが必要です。
+-   TiDB Cloudのサードパーティ統合設定を編集するには、組織への`Organization Owner`つのアクセス権またはTiDB Cloudのターゲット プロジェクトへの`Project Member`のアクセス権が必要です。
 
 ## 制限 {#limitation}
 
-PrometheusとGrafanaの統合を[開発者層](/tidb-cloud/select-cluster-tier.md#developer-tier)で使用することはできません。
+[開発者層](/tidb-cloud/select-cluster-tier.md#developer-tier)で Prometheus と Grafana の統合を使用することはできません。
 
 ## 手順 {#steps}
 
-### 手順1.Prometheusのscrape_configファイルを取得します {#step-1-get-a-scrape-config-file-for-prometheus}
+### ステップ 1. Prometheus 用の Scrape_config ファイルを取得する {#step-1-get-a-scrape-config-file-for-prometheus}
 
-TiDB Cloudのメトリックを読み取るようにPrometheusサービスを構成する前に、まずTiDBCloudでTiDB Cloudファイルを生成する必要があります。 scare_configファイルには、Prometheusサービスが現在のプロジェクト内のデータベースクラスターを監視できるようにする一意のベアラートークンが含まれています。
+Prometheus サービスを構成してTiDB CloudでScrape_config YAML ファイルを生成する必要があります。 Scrape_config ファイルには、Prometheus サービスが現在のプロジェクト内のデータベース クラスターを監視できるようにする一意のベアラー トークンが含まれています。
 
-Prometheusのscrape_configファイルを取得するには、次の手順を実行します。
+Prometheus の Scrape_config ファイルを取得するには、次の手順を実行します。
 
-1.  TiDB Cloudコンソールで、Prometheus統合のターゲットプロジェクトを選択し、[**プロジェクト設定**]タブをクリックします。
+1.  TiDB Cloudコンソールで、Prometheus 統合のターゲット プロジェクトを選択し、[**プロジェクト設定**] タブをクリックします。
 
-2.  左側のペインで、[**統合**]をクリックします。
+2.  左ペインで [**統合**] をクリックします。
 
-3.  **Prometheusへの統合を**クリックします。
+3.  **Integration to Prometheus を**クリックします。
 
-4.  [ファイルの**追加**]をクリックして、現在のプロジェクトのscrape_configファイルを生成して表示します。
+4.  [ファイルを**追加**] をクリックして、現在のプロジェクトの Scrape_config ファイルを生成して表示します。
 
-5.  後で使用するために、scrape_configファイルの内容のコピーを作成します。
+5.  後で使用するために、scrape_config ファイルの内容のコピーを作成します。
 
     > **ノート：**
     >
-    > セキュリティ上の理由から、 TiDB Cloudは新しく生成されたscrap_configファイルを1回だけ表示します。ファイルウィンドウを閉じる前に、必ずコンテンツをコピーしてください。そうするのを忘れた場合は、 TiDB Cloudのscrap_configファイルを削除して、新しいファイルを生成する必要があります。 scare_configファイルを削除するには、ファイルを選択し、[ **...** ]をクリックして、[<strong>削除</strong>]をクリックします。
+    > セキュリティ上の理由から、 TiDB Cloudは新しく生成された Scrape_config ファイルを 1 回だけ表示します。ファイル ウィンドウを閉じる前に、必ずコンテンツをコピーしてください。そうするのを忘れた場合は、 TiDB Cloudの Scrape_config ファイルを削除して、新しいファイルを生成する必要があります。 Scrape_config ファイルを削除するには、ファイルを選択して [ **...** ] をクリックし、[<strong>削除</strong>] をクリックします。
 
-### ステップ2.Prometheusと統合する {#step-2-integrate-with-prometheus}
+### ステップ 2. Prometheus と統合する {#step-2-integrate-with-prometheus}
 
-1.  Prometheusサービスによって指定された監視ディレクトリで、Prometheus構成ファイルを見つけます。
+1.  Prometheus サービスで指定された監視ディレクトリで、Prometheus 構成ファイルを見つけます。
 
-    たとえば、 `/etc/prometheus/prometheus.yml` 。
+    たとえば、 `/etc/prometheus/prometheus.yml`です。
 
-2.  Prometheus構成ファイルで`scrape_configs`セクションを見つけ、 TiDB Cloudから取得したscrape_configファイルの内容をそのセクションにコピーします。
+2.  Prometheus 構成ファイルで`scrape_configs`セクションを見つけ、 TiDB Cloudから取得した Scrape_config ファイルの内容をそのセクションにコピーします。
 
-3.  Prometheusサービスで、[**ステータス**]&gt; [<strong>ターゲット</strong>]をチェックして、新しいscrap_configファイルが読み取られたことを確認します。そうでない場合は、Prometheusサービスを再起動する必要があります。
+3.  Prometheus サービスで、[**ステータス**] &gt; [<strong>ターゲット</strong>] をチェックして、新しい Scrape_config ファイルが読み込まれたことを確認します。そうでない場合は、Prometheus サービスを再起動する必要がある場合があります。
 
-### ステップ3.GrafanaGUIダッシュボードを使用してメトリックを視覚化する {#step-3-use-grafana-gui-dashboards-to-visualize-the-metrics}
+### ステップ 3.Grafana GUI ダッシュボードを使用してメトリックを視覚化する {#step-3-use-grafana-gui-dashboards-to-visualize-the-metrics}
 
-PrometheusサービスがTiDB Cloudからメトリックを読み取った後、GrafanaGUIダッシュボードを使用してメトリックを視覚化できます。
+Prometheus サービスがTiDB Cloudからメトリックを読み取った後、Grafana GUI ダッシュボードを使用してメトリックを視覚化できます。
 
-Grafanaの使用方法の詳細については、 [Grafanaのドキュメント](https://grafana.com/docs/grafana/latest/getting-started/getting-started-prometheus/)を参照してください。
+Grafana の使用方法について詳しくは、 [グラファナのドキュメント](https://grafana.com/docs/grafana/latest/getting-started/getting-started-prometheus/)を参照してください。
 
-## 回転するscrap_configのベストプラクティス {#best-practice-of-rotating-scrape-config}
+## Scrape_config のローテーションのベスト プラクティス {#best-practice-of-rotating-scrape-config}
 
-データのセキュリティを向上させるには、scrape_configファイルベアラートークンを定期的にローテーションするのが一般的なベストプラクティスです。
+データ セキュリティを向上させるために、scrape_config ファイルのベアラー トークンを定期的にローテーションすることが一般的なベスト プラクティスです。
 
-1.  [ステップ1](#step-1-get-a-scrape_config-file-for-prometheus)に従って、Prometheusの新しいscrap_configファイルを作成します。
-2.  新しいファイルの内容をPrometheus構成ファイルに追加します。
-3.  Prometheusサービスが引き続きTiDB Cloudから読み取ることができることを確認したら、Prometheus構成ファイルから古いscrap_configファイルの内容を削除します。
-4.  プロジェクトの[**統合**]ページで、対応する古いscrap_configファイルを削除して、他のユーザーがそのファイルを使用してTiDB Cloudエンドポイントから読み取るのをブロックします。
+1.  [ステップ1](#step-1-get-a-scrape_config-file-for-prometheus)に従って、Prometheus用の新しいscrape_configファイルを作成します。
+2.  新しいファイルの内容を Prometheus 構成ファイルに追加します。
+3.  Prometheus サービスがまだTiDB Cloudから読み取ることができることを確認したら、Prometheus 構成ファイルから古い Scrape_config ファイルの内容を削除します。
+4.  プロジェクトの**統合**ページで、対応する古い Scrape_config ファイルを削除して、他のユーザーがそのファイルを使用してTiDB Cloud Prometheus エンドポイントから読み取れないようにします。
 
-## Prometheusで利用可能なメトリック {#metrics-available-to-prometheus}
+## Prometheus で利用可能なメトリクス {#metrics-available-to-prometheus}
 
-Prometheusは、TiDBクラスターの次のメトリックデータを追跡します。
+Prometheus は、TiDB クラスターの次のメトリック データを追跡します。
 
-| メトリック名                                | メトリックタイプ | ラベル                                                                                                                          | 説明                              |
-| :------------------------------------ | :------- | :--------------------------------------------------------------------------------------------------------------------------- | :------------------------------ |
-| tidbcloud_db_queries_total            | カウント     | sql_type： `Select\|Insert\|...`<br/> cluster_name： `<cluster name>`<br/>インスタンス： `tidb-0\|tidb-1…`<br/>コンポーネント： `tidb`        | 実行されたステートメントの総数                 |
-| tidbcloud_db_failed_queries_total     | カウント     | タイプ： `planner:xxx\|executor:2345\|...`<br/> cluster_name： `<cluster name>`<br/>インスタンス： `tidb-0\|tidb-1…`<br/>コンポーネント： `tidb` | 実行エラーの総数                        |
-| tidbcloud_db_connections              | ゲージ      | cluster_name： `<cluster name>`<br/>インスタンス： `tidb-0\|tidb-1…`<br/>コンポーネント： `tidb`                                             | TiDBサーバーの現在の接続数                 |
-| tidbcloud_db_query_duration_seconds   | ヒストグラム   | sql_type： `Select\|Insert\|...`<br/> cluster_name： `<cluster name>`<br/>インスタンス： `tidb-0\|tidb-1…`<br/>コンポーネント： `tidb`        | ステートメントの期間ヒストグラム                |
-| tidbcloud_node_storage_used_bytes     | ゲージ      | cluster_name： `<cluster name>`<br/>インスタンス： `tikv-0\|tikv-1…\|tiflash-0\|tiflash-1…`<br/>コンポーネント： `tikv\|tiflash`             | TiKV/TiFlashノードのディスク使用バイト       |
-| tidbcloud_node_storage_capacity_bytes | ゲージ      | cluster_name： `<cluster name>`<br/>インスタンス： `tikv-0\|tikv-1…\|tiflash-0\|tiflash-1…`<br/>コンポーネント： `tikv\|tiflash`             | TiKV/TiFlashノードのディスク容量バイト       |
-| tidbcloud_node_cpu_seconds_total      | カウント     | cluster_name： `<cluster name>`<br/>インスタンス： `tidb-0\|tidb-1…\|tikv-0…\|tiflash-0…`<br/>コンポーネント： `tidb\|tikv\|tiflash`         | TiDB / TiKV/TiFlashノードのCPU使用率   |
-| tidbcloud_node_cpu_capacity_cores     | ゲージ      | cluster_name： `<cluster name>`<br/>インスタンス： `tidb-0\|tidb-1…\|tikv-0…\|tiflash-0…`<br/>コンポーネント： `tidb\|tikv\|tiflash`         | TiDB / TiKV/TiFlashノードのCPU制限コア  |
-| tidbcloud_node_memory_used_bytes      | ゲージ      | cluster_name： `<cluster name>`<br/>インスタンス： `tidb-0\|tidb-1…\|tikv-0…\|tiflash-0…`<br/>コンポーネント： `tidb\|tikv\|tiflash`         | TiDB / TiKV/TiFlashノードの使用メモリバイト |
-| tidbcloud_node_memory_capacity_bytes  | ゲージ      | cluster_name： `<cluster name>`<br/>インスタンス： `tidb-0\|tidb-1…\|tikv-0…\|tiflash-0…`<br/>コンポーネント： `tidb\|tikv\|tiflash`         | TiDB / TiKV/TiFlashノードのメモリ容量バイト |
+| 指標名                                   | 指標タイプ  | ラベル                                                                                                                  | 説明                              |
+| :------------------------------------ | :----- | :------------------------------------------------------------------------------------------------------------------- | :------------------------------ |
+| tidbcloud_db_queries_total            | カウント   | sql_type: `Select\|Insert\|...`<br/>クラスタ名: `<cluster name>`<br/>インスタンス: `tidb-0\|tidb-1…`<br/>コンポーネント: `tidb`        | 実行されたステートメントの総数                 |
+| tidbcloud_db_failed_queries_total     | カウント   | タイプ: `planner:xxx\|executor:2345\|...`<br/>クラスタ名: `<cluster name>`<br/>インスタンス: `tidb-0\|tidb-1…`<br/>コンポーネント: `tidb` | 実行エラーの総数                        |
+| tidbcloud_db_connections              | ゲージ    | クラスタ名: `<cluster name>`<br/>インスタンス: `tidb-0\|tidb-1…`<br/>コンポーネント: `tidb`                                            | TiDBサーバーの現在の接続数                 |
+| tidbcloud_db_query_duration_seconds   | ヒストグラム | sql_type: `Select\|Insert\|...`<br/>クラスタ名: `<cluster name>`<br/>インスタンス: `tidb-0\|tidb-1…`<br/>コンポーネント: `tidb`        | ステートメントの期間ヒストグラム                |
+| tidbcloud_node_storage_used_bytes     | ゲージ    | クラスタ名: `<cluster name>`<br/>インスタンス: `tikv-0\|tikv-1…\|tiflash-0\|tiflash-1…`<br/>コンポーネント: `tikv\|tiflash`            | TiKV/TiFlash ノードのディスク使用量バイト     |
+| tidbcloud_node_storage_capacity_bytes | ゲージ    | クラスタ名: `<cluster name>`<br/>インスタンス: `tikv-0\|tikv-1…\|tiflash-0\|tiflash-1…`<br/>コンポーネント: `tikv\|tiflash`            | TiKV/TiFlash ノードのディスク容量バイト      |
+| tidbcloud_node_cpu_seconds_total      | カウント   | クラスタ名: `<cluster name>`<br/>インスタンス: `tidb-0\|tidb-1…\|tikv-0…\|tiflash-0…`<br/>コンポーネント: `tidb\|tikv\|tiflash`        | TiDB/TiKV/TiFlash ノードの CPU 使用率  |
+| tidbcloud_node_cpu_capacity_cores     | ゲージ    | クラスタ名: `<cluster name>`<br/>インスタンス: `tidb-0\|tidb-1…\|tikv-0…\|tiflash-0…`<br/>コンポーネント: `tidb\|tikv\|tiflash`        | TiDB/TiKV/TiFlash ノードの CPU 制限コア |
+| tidbcloud_node_memory_used_bytes      | ゲージ    | クラスタ名: `<cluster name>`<br/>インスタンス: `tidb-0\|tidb-1…\|tikv-0…\|tiflash-0…`<br/>コンポーネント: `tidb\|tikv\|tiflash`        | TiDB/TiKV/TiFlash ノードの使用メモリバイト数 |
+| tidbcloud_node_memory_capacity_bytes  | ゲージ    | クラスタ名: `<cluster name>`<br/>インスタンス: `tidb-0\|tidb-1…\|tikv-0…\|tiflash-0…`<br/>コンポーネント: `tidb\|tikv\|tiflash`        | TiDB/TiKV/TiFlash ノードのメモリ容量バイト  |

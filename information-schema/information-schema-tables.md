@@ -5,7 +5,7 @@ summary: Learn the `TABLES` information_schema table.
 
 # テーブル {#tables}
 
-`TABLES`のテーブルは、データベース内のテーブルに関する情報を提供します。
+`TABLES`テーブルは、データベース内のテーブルに関する情報を提供します。
 
 {{< copyable "" >}}
 
@@ -93,34 +93,34 @@ SHOW TABLES
 
 `TABLES`テーブルの列の説明は次のとおりです。
 
--   `TABLE_CATALOG` ：テーブルが属するカタログの名前。値は常に`def`です。
--   `TABLE_SCHEMA` ：テーブルが属するスキーマの名前。
--   `TABLE_NAME` ：テーブルの名前。
--   `TABLE_TYPE` ：テーブルのタイプ。
--   `ENGINE` ：ストレージエンジンのタイプ。値は現在`InnoDB`です。
--   `VERSION` ：バージョン。デフォルトの値は`10`です。
--   `ROW_FORMAT` ：行フォーマット。値は現在`Compact`です。
--   `TABLE_ROWS` ：統計のテーブルの行数。
--   `AVG_ROW_LENGTH` ：テーブルの平均行長。 `AVG_ROW_LENGTH` = `DATA_LENGTH` / `TABLE_ROWS` 。
--   `DATA_LENGTH` ：データ長。 `DATA_LENGTH` = `TABLE_ROWS` *タプル内の列のストレージ長の合計。 TiKVのレプリカは考慮されません。
--   `MAX_DATA_LENGTH` ：最大データ長。現在、値は`0`です。これは、データ長に上限がないことを意味します。
--   `INDEX_LENGTH` ：インデックスの長さ。 `INDEX_LENGTH` = `TABLE_ROWS` *インデックスタプルの列の長さの合計。 TiKVのレプリカは考慮されません。
--   `DATA_FREE` ：データフラグメント。値は現在`0`です。
--   `AUTO_INCREMENT` ：自動インクリメント主キーの現在のステップ。
--   `CREATE_TIME` ：テーブルが作成された時刻。
--   `UPDATE_TIME` ：テーブルが更新された時刻。
--   `CHECK_TIME` ：テーブルがチェックされる時刻。
--   `TABLE_COLLATION` ：テーブル内の文字列の照合順序。
--   `CHECKSUM` ：チェックサム。
--   `CREATE_OPTIONS` ：オプションを作成します。
--   `TABLE_COMMENT` ：表のコメントとメモ。
+-   `TABLE_CATALOG` : テーブルが属するカタログの名前。値は常に`def`です。
+-   `TABLE_SCHEMA` : テーブルが属するスキーマの名前。
+-   `TABLE_NAME` : テーブルの名前。
+-   `TABLE_TYPE` : テーブルのタイプ。
+-   `ENGINE` : ストレージ エンジンのタイプ。値は現在`InnoDB`です。
+-   `VERSION` : バージョン。デフォルトの値は`10`です。
+-   `ROW_FORMAT` : 行フォーマット。値は現在`Compact`です。
+-   `TABLE_ROWS` : 統計のテーブル内の行数。
+-   `AVG_ROW_LENGTH` : テーブルの平均行長。 `AVG_ROW_LENGTH` = `DATA_LENGTH` / `TABLE_ROWS` .
+-   `DATA_LENGTH` : データ長。 `DATA_LENGTH` = `TABLE_ROWS` * タプル内の列のストレージ長の合計。 TiKV のレプリカは考慮されません。
+-   `MAX_DATA_LENGTH` : 最大データ長。値は現在`0`です。これは、データ長に上限がないことを意味します。
+-   `INDEX_LENGTH` : インデックスの長さ。 `INDEX_LENGTH` = `TABLE_ROWS` * インデックス タプルの列の長さの合計。 TiKV のレプリカは考慮されません。
+-   `DATA_FREE` : データフラグメント。値は現在`0`です。
+-   `AUTO_INCREMENT` : 自動インクリメント主キーの現在のステップ。
+-   `CREATE_TIME` : テーブルが作成された時刻。
+-   `UPDATE_TIME` : テーブルが更新される時刻。
+-   `CHECK_TIME` : テーブルがチェックされる時刻。
+-   `TABLE_COLLATION` : テーブル内の文字列の照合順序。
+-   `CHECKSUM` : チェックサム。
+-   `CREATE_OPTIONS` : オプションを作成します。
+-   `TABLE_COMMENT` : テーブルのコメントとメモ。
 
-表のほとんどの情報はMySQLと同じです。 TiDBによって新しく定義された列は2つだけです。
+表のほとんどの情報は MySQL と同じです。 TiDB によって新たに定義された列は 2 つだけです。
 
--   `TIDB_TABLE_ID` ：テーブルの内部IDを示します。このIDは、TiDBクラスタで一意です。
--   `TIDDB_ROW_ID_SHARDING_INFO` ：テーブルのシャーディングタイプを示します。可能な値は次のとおりです。
-    -   `"NOT_SHARDED"` ：テーブルはシャーディングされていません。
-    -   `"NOT_SHARDED(PK_IS_HANDLE)"` ：行IDとして整数の主キーを定義するテーブルはシャーディングされません。
-    -   `"PK_AUTO_RANDOM_BITS={bit_number}"` ：主キーに`AUTO_RANDOM`属性が割り当てられているため、行IDとして整数の主キーを定義するテーブルがシャーディングされます。
-    -   `"SHARD_BITS={bit_number}"` ：テーブルは`SHARD_ROW_ID_BITS={bit_number}`を使用してシャーディングされます。
-    -   NULL：テーブルはシステムテーブルまたはビューであるため、シャーディングできません。
+-   `TIDB_TABLE_ID` : テーブルの内部 ID を示します。この ID は、TiDB クラスター内で一意です。
+-   `TIDDB_ROW_ID_SHARDING_INFO` : テーブルのシャーディング タイプを示します。可能な値は次のとおりです。
+    -   `"NOT_SHARDED"` : テーブルはシャーディングされていません。
+    -   `"NOT_SHARDED(PK_IS_HANDLE)"` : 行 ID として整数の主キーを定義するテーブルはシャーディングされません。
+    -   `"PK_AUTO_RANDOM_BITS={bit_number}"` : 行 ID として整数の主キーを定義するテーブルは、主キーに`AUTO_RANDOM`属性が割り当てられているためシャードされます。
+    -   `"SHARD_BITS={bit_number}"` : テーブルは`SHARD_ROW_ID_BITS={bit_number}`を使用してシャーディングされます。
+    -   NULL: テーブルはシステム テーブルまたはビューであるため、シャーディングできません。

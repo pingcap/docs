@@ -5,11 +5,11 @@ summary: An overview of the usage of CHANGE PUMP for the TiDB database.
 
 # ポンプの交換 {#change-pump}
 
-`CHANGE PUMP`ステートメントは、クラスタのPumpのステータス情報を変更します。
+`CHANGE PUMP`ステートメントは、クラスター内のPumpのステータス情報を変更します。
 
 > **ヒント：**
 >
-> ポンプの状態は、実行中にPDに自動的に報告されます。 Pumpが異常な状況にあり、その状態がPDに格納されている状態情報と矛盾している場合にのみ、 `CHANGE PUMP`ステートメントを使用してPDに格納されている状態情報を変更できます。
+> ポンプの状態は、運転中に自動的に PD に報告されます。Pumpが異常な状態にあり、その状態が PD に格納されている状態情報と一致しない場合にのみ、 `CHANGE PUMP`ステートメントを使用して PD に格納されている状態情報を変更できます。
 
 ## 例 {#examples}
 
@@ -30,7 +30,7 @@ SHOW PUMP STATUS;
 2 rows in set (0.00 sec)
 ```
 
-pump1の状態が1日以上更新されておらず、 Pumpが異常な状態になっていることがわかりますが、 `State`は`Online`のままです。 `CHANGE PUMP`を使用した後、ポンプの`State`は「一時停止」に変更されます。
+pump1 の状態が 1 日以上更新されていないことがわかりますPumpは異常な状態ですが、 `State`は`Online`のままです。 `CHANGE PUMP`を使用した後、ポンプの`State`は &#39;paused&#39; に変更されます。
 
 {{< copyable "" >}}
 
@@ -59,12 +59,12 @@ SHOW PUMP STATUS;
 2 rows in set (0.00 sec)
 ```
 
-## MySQLの互換性 {#mysql-compatibility}
+## MySQL の互換性 {#mysql-compatibility}
 
-このステートメントは、MySQL構文のTiDB拡張です。
+このステートメントは、MySQL 構文に対する TiDB 拡張です。
 
-## も参照してください {#see-also}
+## こちらもご覧ください {#see-also}
 
--   [ポンプステータスを表示](/sql-statements/sql-statement-show-pump-status.md)
--   [ドレイナーステータスを表示](/sql-statements/sql-statement-show-drainer-status.md)
+-   [ポンプの状態を表示](/sql-statements/sql-statement-show-pump-status.md)
+-   [ドレイナーのステータスを表示](/sql-statements/sql-statement-show-drainer-status.md)
 -   [ドレイナーステータスの変更](/sql-statements/sql-statement-change-drainer.md)

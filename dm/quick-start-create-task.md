@@ -3,18 +3,18 @@ title: Create a Data Migration Task
 summary: Learn how to create a migration task after the DM cluster is deployed.
 ---
 
-# データ移行タスクを作成する {#create-a-data-migration-task}
+# データ移行タスクの作成 {#create-a-data-migration-task}
 
-このドキュメントでは、DMクラスタが正常にデプロイされた後に簡単なデータ移行タスクを作成する方法について説明します。
+このドキュメントでは、DM クラスターが正常にデプロイされた後に簡単なデータ移行タスクを作成する方法について説明します。
 
-## サンプルシナリオ {#sample-scenario}
+## サンプル シナリオ {#sample-scenario}
 
-このサンプルシナリオに基づいてデータ移行タスクを作成するとします。
+次のサンプル シナリオに基づいてデータ移行タスクを作成するとします。
 
--   デプロイが有効になっている2つのMySQLインスタンスと1つのTiDBインスタンスをローカルにデプロイします
--   DMクラスタのDMマスターを使用して、クラスタおよびデータ移行タスクを管理します。
+-   デプロイを有効にした 2 つの MySQL インスタンスと 1 つの TiDB インスタンスをローカルにデプロイする
+-   DM クラスターの DM マスターを使用して、クラスターとデータ移行タスクを管理します。
 
-各ノードの情報は以下のとおりです。
+各ノードの情報は以下の通りです。
 
 | 実例     | サーバーアドレス  | ポート  |
 | :----- | :-------- | :--- |
@@ -23,11 +23,11 @@ summary: Learn how to create a migration task after the DM cluster is deployed.
 | TiDB   | 127.0.0.1 | 4000 |
 | DMマスター | 127.0.0.1 | 8261 |
 
-このシナリオに基づいて、次のセクションでは、データ移行タスクを作成する方法について説明します。
+このシナリオに基づいて、以下のセクションではデータ移行タスクを作成する方法について説明します。
 
-### アップストリームMySQLを起動します {#start-upstream-mysql}
+### 上流の MySQL を開始する {#start-upstream-mysql}
 
-2つの実行可能なMySQLインスタンスを準備します。 Dockerを使用してMySQLをすばやく起動することもできます。コマンドは次のとおりです。
+2 つの実行可能な MySQL インスタンスを準備します。 Docker を使用して MySQL をすばやく起動することもできます。コマンドは次のとおりです。
 
 {{< copyable "" >}}
 
@@ -36,9 +36,9 @@ docker run --rm --name mysql-3306 -p 3306:3306 -e MYSQL_ALLOW_EMPTY_PASSWORD=tru
 docker run --rm --name mysql-3307 -p 3307:3307 -e MYSQL_ALLOW_EMPTY_PASSWORD=true mysql:5.7.22 --log-bin=mysql-bin --port=3307 --bind-address=0.0.0.0 --binlog-format=ROW --server-id=1 --gtid_mode=ON --enforce-gtid-consistency=true > mysql.3307.log 2>&1 &
 ```
 
-### データを準備する {#prepare-data}
+### データの準備 {#prepare-data}
 
--   サンプルデータをmysql-3306に書き込みます。
+-   サンプル データを mysql-3306 に書き込みます。
 
     {{< copyable "" >}}
 
@@ -52,7 +52,7 @@ docker run --rm --name mysql-3307 -p 3307:3307 -e MYSQL_ALLOW_EMPTY_PASSWORD=tru
     insert into t2 (id, uid, name) values (3,20001, 'José Arcadio Buendía'), (4,20002, 'Úrsula Iguarán'), (5,20003, 'José Arcadio');
     ```
 
--   サンプルデータをmysql-3307に書き込みます。
+-   サンプル データを mysql-3307 に書き込みます。
 
     {{< copyable "" >}}
 
@@ -66,7 +66,7 @@ docker run --rm --name mysql-3307 -p 3307:3307 -e MYSQL_ALLOW_EMPTY_PASSWORD=tru
     insert into t3 (id, uid, name, info) values (7, 30001, 'Aureliano José', '{}'), (8, 30002, 'Santa Sofía de la Piedad', '{}'), (9, 30003, '17 Aurelianos', NULL);
     ```
 
-### ダウンストリームTiDBを開始します {#start-downstream-tidb}
+### ダウンストリーム TiDB を開始する {#start-downstream-tidb}
 
 TiDBサーバーを実行するには、次のコマンドを使用します。
 
@@ -81,20 +81,20 @@ mv tidb-latest-linux-amd64/bin/tidb-server ./
 
 > **警告：**
 >
-> このドキュメントのTiDBの展開方法は、実稼働環境または開発環境に**は適用されません**。
+> このドキュメントの TiDB の展開方法は、運用環境または開発環境に**は適用されません**。
 
-## MySQLデータソースを構成する {#configure-the-mysql-data-source}
+## MySQL データ ソースを構成する {#configure-the-mysql-data-source}
 
-データ移行タスクを開始する前に、MySQLデータソースを構成する必要があります。
+データ移行タスクを開始する前に、MySQL データ ソースを構成する必要があります。
 
 ### パスワードを暗号化する {#encrypt-the-password}
 
 > **ノート：**
 >
-> -   データベースにパスワードがない場合は、この手順をスキップできます。
-> -   プレーンテキストのパスワードを使用して、DMv1.0.6以降のバージョンでソース情報を構成できます。
+> -   データベースにパスワードがない場合は、この手順を省略できます。
+> -   DM v1.0.6 以降のバージョンでは、平文のパスワードを使用してソース情報を構成できます。
 
-安全上の理由から、暗号化されたパスワードを構成して使用することをお勧めします。 dmctlを使用してMySQL/TiDBパスワードを暗号化できます。パスワードが「123456」であるとします。
+安全上の理由から、暗号化されたパスワードを構成して使用することをお勧めします。 dmctl を使用して MySQL/TiDB パスワードを暗号化できます。パスワードが「123456」であるとします。
 
 {{< copyable "" >}}
 
@@ -106,9 +106,9 @@ mv tidb-latest-linux-amd64/bin/tidb-server ./
 fCxfQ9XKCezSzuCD0Wf5dUD+LsKegSg=
 ```
 
-この暗号化された値を保存し、次の手順でMySQLデータソースを作成するために使用します。
+この暗号化された値を保存し、次の手順で MySQL データ ソースを作成するために使用します。
 
-### ソース構成ファイルを編集します {#edit-the-source-configuration-file}
+### ソース構成ファイルを編集する {#edit-the-source-configuration-file}
 
 次の構成を`conf/source1.yaml`に書き込みます。
 
@@ -127,11 +127,11 @@ from:
   port: 3306
 ```
 
-MySQL2データソースで、上記の構成を`conf/source2.yaml`にコピーします。 `name`を`mysql-replica-02`に変更し、 `password`と`port`を適切な値に変更する必要があります。
+MySQL2 データ ソースで、上記の構成を`conf/source2.yaml`にコピーします。 `name`を`mysql-replica-02`に変更し、 `password`と`port`を適切な値に変更する必要があります。
 
 ### ソースを作成する {#create-a-source}
 
-dmctlを使用してMySQL1のデータソース構成をDMクラスタにロードするには、ターミナルで次のコマンドを実行します。
+dmctl を使用して MySQL1 のデータ ソース構成を DM クラスターにロードするには、ターミナルで次のコマンドを実行します。
 
 {{< copyable "" >}}
 
@@ -139,13 +139,13 @@ dmctlを使用してMySQL1のデータソース構成をDMクラスタにロー�
 ./dmctl --master-addr=127.0.0.1:8261 operate-source create conf/source1.yaml
 ```
 
-MySQL2の場合、上記のコマンドの構成ファイルをMySQL2の構成ファイルに置き換えます。
+MySQL2 の場合、上記のコマンドの構成ファイルを MySQL2 の構成ファイルに置き換えます。
 
 ## データ移行タスクを作成する {#create-a-data-migration-task}
 
-[準備されたデータ](#prepare-data)をインポートした後、MySQL1インスタンスとMySQL2インスタンスの両方にいくつかのシャードテーブルがあります。これらのテーブルの構造は同じで、テーブル名の接頭辞「t」も同じです。これらのテーブルが配置されているデータベースには、すべて「シャーディング」というプレフィックスが付いています。また、主キーまたは一意キーの間に競合はありません（各シャーディングテーブルで、主キーまたは一意キーは他のテーブルのものとは異なります）。
+[準備したデータ](#prepare-data)をインポートした後、MySQL1 と MySQL2 の両方のインスタンスにいくつかのシャード テーブルがあります。これらのテーブルは同一の構造を持ち、テーブル名に同じ接頭辞「t」が付いています。これらのテーブルが配置されているデータベースにはすべて「sharding」という接頭辞が付いています。また、主キーまたは一意のキー間に競合がありません (各シャード テーブルでは、主キーまたは一意のキーが他のテーブルのものとは異なります)。
 
-ここで、これらのシャーディングされたテーブルをTiDBの`db_target.t_target`つのテーブルに移行する必要があるとします。手順は次のとおりです。
+ここで、これらのシャード テーブルを TiDB の`db_target.t_target`テーブルに移行する必要があるとします。手順は次のとおりです。
 
 1.  タスクの構成ファイルを作成します。
 
@@ -192,7 +192,7 @@ MySQL2の場合、上記のコマンドの構成ファイルをMySQL2の構成�
         target-schema: db_target
     ```
 
-2.  dmctlを使用してタスクを作成するには、上記の構成を`conf/task.yaml`のファイルに書き込みます。
+2.  dmctl を使用してタスクを作成するには、上記の構成を`conf/task.yaml`のファイルに書き込みます。
 
     {{< copyable "" >}}
 
@@ -221,8 +221,8 @@ MySQL2の場合、上記のコマンドの構成ファイルをMySQL2の構成�
     }
     ```
 
-これで、シャーディングされたテーブルをMySQL1およびMySQL2インスタンスからTiDBに移行するタスクが正常に作成されました。
+これで、シャード テーブルを MySQL1 および MySQL2 インスタンスから TiDB に移行するタスクが正常に作成されました。
 
-## データを確認する {#verify-data}
+## データの検証 {#verify-data}
 
-アップストリームのMySQLシャードテーブルのデータを変更できます。次に、 [sync-diff-inspector](/sync-diff-inspector/shard-diff.md)を使用して、アップストリームデータとダウンストリームデータに一貫性があるかどうかを確認します。一貫性のあるデータは、移行タスクが適切に機能することを意味します。これは、クラスタが適切に機能することも示します。
+アップストリームの MySQL シャード テーブルのデータを変更できます。次に、 [同期差分インスペクター](/sync-diff-inspector/shard-diff.md)を使用して、上流と下流のデータが一致しているかどうかを確認します。一貫性のあるデータは、移行タスクがうまく機能していることを意味し、クラスターがうまく機能していることも示しています。

@@ -3,29 +3,29 @@ title: SHOW INDEXES [FROM|IN] | TiDB SQL Statement Reference
 summary: An overview of the usage of SHOW INDEXES [FROM|IN] for the TiDB database.
 ---
 
-# インデックスを表示[FROM|IN] {#show-indexes-from-in}
+# インデックスを表示 [From|IN] {#show-indexes-from-in}
 
-ステートメント`SHOW INDEXES [FROM|IN]`は、指定されたテーブルのインデックスをリストします。ステートメント`SHOW INDEX [FROM|IN]`はこのステートメントのエイリアスであり、MySQLとの互換性のために含まれて`SHOW KEYS [FROM|IN]`ます。
+ステートメント`SHOW INDEXES [FROM|IN]`は、指定されたテーブルのインデックスを一覧表示します。ステートメント`SHOW INDEX [FROM|IN]` 、 `SHOW KEYS [FROM|IN]`はこのステートメントのエイリアスであり、MySQL との互換性のために含まれています。
 
 ## あらすじ {#synopsis}
 
-**ShowIndexStmt：**
+**ShowIndexStmt:**
 
 ![ShowIndexStmt](/media/sqlgram/ShowIndexStmt.png)
 
-**ShowIndexKwd：**
+**ShowIndexKwd:**
 
 ![ShowIndexKwd](/media/sqlgram/ShowIndexKwd.png)
 
-**FromOrIn：**
+**FromOrIn:**
 
 ![FromOrIn](/media/sqlgram/FromOrIn.png)
 
-**TableName：**
+**テーブル名:**
 
 ![TableName](/media/sqlgram/TableName.png)
 
-**ShowLikeOrWhereOpt：**
+**ShowLikeOrWhereOpt:**
 
 ![ShowLikeOrWhereOpt](/media/sqlgram/ShowLikeOrWhereOpt.png)
 
@@ -69,12 +69,12 @@ mysql> SHOW KEYS FROM t1;
 2 rows in set (0.00 sec)
 ```
 
-## MySQLの互換性 {#mysql-compatibility}
+## MySQL の互換性 {#mysql-compatibility}
 
-MySQLの`Cardinality`列は、インデックスのさまざまな値の数を示しています。 TiDBでは、 `Cardinality`列には常に`0`が表示されます。
+MySQL の`Cardinality`列は、インデックスの異なる値の数を示します。 TiDB では、 `Cardinality`列には常に`0`が表示されます。
 
-## も参照してください {#see-also}
+## こちらもご覧ください {#see-also}
 
--   [CREATETABLEを表示する](/sql-statements/sql-statement-show-create-table.md)
+-   [テーブルの作成を表示](/sql-statements/sql-statement-show-create-table.md)
 -   [ドロップインデックス](/sql-statements/sql-statement-drop-index.md)
--   [インデックスの作成](/sql-statements/sql-statement-create-index.md)
+-   [インデックスを作成](/sql-statements/sql-statement-create-index.md)

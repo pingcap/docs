@@ -5,17 +5,17 @@ summary: Learn about the execution plan information returned by the `EXPLAIN` st
 
 # ビューを使用しEXPLAINステートメント {#explain-statements-using-views}
 
-`EXPLAIN`は、ビュー自体の名前ではなく、 [見る](/views.md)が参照するテーブルとインデックスを表示します。これは、ビューが仮想テーブルにすぎず、データ自体を格納しないためです。ビューの定義とステートメントの残りの部分は、SQLの最適化中に一緒にマージされます。
+`EXPLAIN`は、ビュー自体の名前ではなく、 [見る](/views.md)が参照するテーブルとインデックスを表示します。これは、ビューが単なる仮想テーブルであり、データ自体を保存しないためです。ビューの定義とステートメントの残りの部分は、SQL の最適化中にマージされます。
 
 <CustomContent platform="tidb">
 
-[バイクシェアのサンプルデータベース](/import-example-data.md)から、次の2つのクエリが同様の方法で実行されていることがわかります。
+[バイクシェア サンプル データベース](/import-example-data.md)から、次の 2 つのクエリが同様の方法で実行されることがわかります。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-[バイクシェアのサンプルデータベース](/tidb-cloud/import-sample-data.md)から、次の2つのクエリが同様の方法で実行されていることがわかります。
+[バイクシェア サンプル データベース](/tidb-cloud/import-sample-data.md)から、次の 2 つのクエリが同様の方法で実行されることがわかります。
 
 </CustomContent>
 
@@ -52,7 +52,7 @@ Query OK, 0 rows affected (0.13 sec)
 3 rows in set (0.00 sec)
 ```
 
-同様に、ビューの述語はベーステーブルにプッシュダウンされます。
+同様に、ビューからの述語はベース テーブルにプッシュ ダウンされます。
 
 {{< copyable "" >}}
 
@@ -82,9 +82,9 @@ EXPLAIN SELECT * FROM trips WHERE bike_number = 'W00950';
 3 rows in set (0.00 sec)
 ```
 
-上記の最初のステートメントでは、ビュー定義を満たすためにインデックスが使用され、TiDBがテーブル行を読み取るときに`bike_number = 'W00950'`が適用されることがわかります。 2番目のステートメントでは、ステートメントを満たすためのインデックスがなく、 `TableFullScan`が使用されています。
+上記の最初のステートメントでは、ビュー定義を満たすためにインデックスが使用され、TiDB がテーブル行を読み取るときに`bike_number = 'W00950'`が適用されることがわかります。 2 番目のステートメントでは、ステートメントを満たすインデックスがなく、 `TableFullScan`が使用されています。
 
-TiDBは、ビュー定義とステートメント自体の両方を満たすインデックスを利用します。次の複合インデックスについて考えてみます。
+TiDB は、ビュー定義とステートメント自体の両方を満たすインデックスを利用します。次の複合インデックスを検討してください。
 
 {{< copyable "" >}}
 
@@ -116,4 +116,4 @@ Query OK, 0 rows affected (2 min 31.20 sec)
 3 rows in set (0.00 sec)
 ```
 
-最初のステートメントでは、TiDBは複合インデックス`(bike_number, duration)`の両方の部分を使用できます。 2番目のステートメントでは、インデックス`(bike_number, duration)`の`bike_number`である最初の部分のみが使用されます。
+最初のステートメントでは、TiDB は複合インデックスの両方の部分を使用できます`(bike_number, duration)` 。 2 番目のステートメントでは、インデックス`(bike_number, duration)`の`bike_number`である最初の部分のみが使用されます。

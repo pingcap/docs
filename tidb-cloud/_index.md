@@ -11,7 +11,7 @@ hide_commit: true
 
 [TiDB Cloudを選ぶ理由](https://docs.pingcap.com/tidbcloud/tidb-cloud-intro)
 
-[建築](https://docs.pingcap.com/tidbcloud/tidb-cloud-intro#architecture)
+[アーキテクチャ](https://docs.pingcap.com/tidbcloud/tidb-cloud-intro#architecture)
 
 [FAQ](https://docs.pingcap.com/tidbcloud/tidb-cloud-faq)
 
@@ -39,15 +39,15 @@ hide_commit: true
 
 <LearningPath label="Use" icon="cloud7">
 
-[クラスターを作成する](https://docs.pingcap.com/tidbcloud/create-tidb-cluster)
+[クラスタを作成する](https://docs.pingcap.com/tidbcloud/create-tidb-cluster)
 
-[クラスターに接続する](https://docs.pingcap.com/tidbcloud/connect-to-tidb-cluster)
+[クラスタに接続する](https://docs.pingcap.com/tidbcloud/connect-to-tidb-cluster)
 
-[HTAP クラスターを使用する](https://docs.pingcap.com/tidbcloud/tiflash-overview)
+[HTAPクラスタを使用する](https://docs.pingcap.com/tidbcloud/tiflash-overview)
 
-[クラスターのスケーリング](https://docs.pingcap.com/tidbcloud/scale-tidb-cluster)
+[クラスタのスケーリング](https://docs.pingcap.com/tidbcloud/scale-tidb-cluster)
 
-[TiDB クラスターを一時停止または再開する](https://docs.pingcap.com/tidbcloud/pause-or-resume-tidb-cluster)
+[TiDBクラスタを一時停止または再開する](https://docs.pingcap.com/tidbcloud/pause-or-resume-tidb-cluster)
 
 [API (ベータ) を使用する](https://docs.pingcap.com/tidbcloud/api/v1beta)
 

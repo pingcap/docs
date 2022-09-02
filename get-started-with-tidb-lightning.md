@@ -5,24 +5,24 @@ summary: Learn how to deploy TiDB Lightning and import full backup data to TiDB.
 
 # TiDB Lightningチュートリアル {#tidb-lightning-tutorial}
 
-[TiDB Lightning](https://github.com/pingcap/tidb-lightning)は、TiDBクラスタへの大量のデータの高速フルインポートに使用されるツールです。現在、 TiDB Lightningは、SQLまたはCSVデータソースを介してエクスポートされたSQLダンプの読み取りをサポートしています。次の2つのシナリオで使用できます。
+[TiDB Lightning](https://github.com/pingcap/tidb-lightning)は、大量のデータを TiDB クラスターに高速で完全にインポートするために使用されるツールです。現在、 TiDB Lightningは、SQL または CSV データ ソースを介してエクスポートされた SQL ダンプの読み取りをサポートしています。次の 2 つのシナリオで使用できます。
 
--   **大量**の<strong>新しい</strong>データ<strong>をすばやく</strong>インポートする
--   すべてのデータをバックアップおよび復元します
+-   **大量**の<strong>新しい</strong>データ<strong>をすばやく</strong>インポート
+-   すべてのデータのバックアップと復元
 
 ![Architecture of TiDB Lightning tool set](/media/tidb-lightning-architecture.png)
 
 ## 前提条件 {#prerequisites}
 
-このチュートリアルでは、いくつかの新しくクリーンなCentOS7インスタンスを使用することを前提としています。 VMware、VirtualBox、またはその他のツールを使用して、仮想マシンをローカルに展開したり、ベンダー提供のプラットフォームに小さなクラウド仮想マシンを展開したりできます。 TiDB Lightningは大量のコンピュータリソースを消費するため、最高のパフォーマンスで実行するには、少なくとも16GBのメモリと32コアのCPUを割り当てることをお勧めします。
+このチュートリアルでは、いくつかの新しいクリーンな CentOS 7 インスタンスを使用することを前提としています。 VMware、VirtualBox、またはその他のツールを使用して、仮想マシンをローカルに展開するか、ベンダー提供のプラットフォームに小規模なクラウド仮想マシンを展開できます。 TiDB Lightningは大量のコンピューター リソースを消費するため、最高のパフォーマンスで実行するには、少なくとも 16 GB のメモリと 32 コアの CPU を割り当てることをお勧めします。
 
 > **警告：**
 >
-> このチュートリアルの展開方法は、テストと試行にのみ推奨されます。**本番環境または開発環境には適用しないでください。**
+> このチュートリアルのデプロイ方法は、テストと試用のみに推奨されます。**本番環境または開発環境では適用しないでください。**
 
-## 完全バックアップデータを準備する {#prepare-full-backup-data}
+## フルバックアップデータを準備する {#prepare-full-backup-data}
 
-まず、 [`dumpling`](/dumpling-overview.md)を使用してMySQLからデータをエクスポートします。
+まず、 [`dumpling`](/dumpling-overview.md)を使用して MySQL からデータをエクスポートします。
 
 {{< copyable "" >}}
 
@@ -30,32 +30,32 @@ summary: Learn how to deploy TiDB Lightning and import full backup data to TiDB.
 ./dumpling -h 127.0.0.1 -P 3306 -u root -t 16 -F 256MB -B test -f 'test.t[12]' -o /data/my_database/
 ```
 
-上記のコマンドでは：
+上記のコマンドで:
 
--   `-B test` ：データが`test`データベースからエクスポートされることを意味します。
--   `-f test.t[12]` ： `test.t1`つと`test.t2`のテーブルのみがエクスポートされることを意味します。
--   `-t 16` ：データのエクスポートに16スレッドが使用されることを意味します。
--   `-F 256MB` ：テーブルがチャンクに分割され、1つのチャンクが256MBであることを意味します。
+-   `-B test` : データが`test`データベースからエクスポートされることを意味します。
+-   `-f test.t[12]` : `test.t1`と`test.t2`のテーブルのみがエクスポートされることを意味します。
+-   `-t 16` : データのエクスポートに 16 個のスレッドが使用されることを意味します。
+-   `-F 256MB` : テーブルがチャンクに分割され、1 つのチャンクが 256 MB であることを意味します。
 
-このコマンドを実行すると、完全バックアップデータが`/data/my_database`ディレクトリにエクスポートされます。
+このコマンドを実行すると、フル バックアップ データが`/data/my_database`ディレクトリにエクスポートされます。
 
 ## TiDB Lightningをデプロイ {#deploy-tidb-lightning}
 
-### ステップ1：TiDBクラスタをデプロイ {#step-1-deploy-tidb-cluster}
+### ステップ 1: TiDB クラスターをデプロイ {#step-1-deploy-tidb-cluster}
 
-データをインポートする前に、TiDBクラスタをデプロイする必要があります。このチュートリアルでは、TiDBv5.4.0を例として使用します。展開方法については、 [TiUPを使用してTiDBクラスターをデプロイする](/production-deployment-using-tiup.md)を参照してください。
+データをインポートする前に、TiDB クラスターをデプロイする必要があります。このチュートリアルでは、TiDB v5.4.0 を例として使用します。配備方法については、 [TiUP を使用して TiDBクラスタをデプロイする](/production-deployment-using-tiup.md)を参照してください。
 
-### ステップ2： TiDB Lightningインストールパッケージをダウンロードする {#step-2-download-tidb-lightning-installation-package}
+### ステップ 2: TiDB Lightningインストール パッケージをダウンロードする {#step-2-download-tidb-lightning-installation-package}
 
-TiDB Lightningインストールパッケージは、 TiDB Toolkitに含まれています。 TiDB Toolkitをダウンロードするには、 [TiDBツールをダウンロードする](/download-ecosystem-tools.md)を参照してください。
+TiDB Lightningインストール パッケージはTiDB Toolkitに含まれています。 TiDB Toolkitをダウンロードするには、 [TiDB ツールをダウンロード](/download-ecosystem-tools.md)を参照してください。
 
 > **ノート：**
 >
-> TiDB Lightningは、以前のバージョンのTiDBクラスターと互換性があります。 TiDB Lightningインストールパッケージの最新の安定バージョンをダウンロードすることをお勧めします。
+> TiDB Lightningは、以前のバージョンの TiDB クラスターと互換性があります。 TiDB Lightningインストール パッケージの最新の安定バージョンをダウンロードすることをお勧めします。
 
-### ステップ3： <code>tidb-lightning</code>を開始します {#step-3-start-code-tidb-lightning-code}
+### ステップ 3: <code>tidb-lightning</code>を開始する {#step-3-start-code-tidb-lightning-code}
 
-1.  パッケージ内の`bin/tidb-lightning`と`bin/tidb-lightning-ctl`を、 TiDB Lightningがデプロイされているサーバーにアップロードします。
+1.  パッケージ内の`bin/tidb-lightning`と`bin/tidb-lightning-ctl`をTiDB Lightningがデプロイされているサーバーにアップロードします。
 
 2.  [準備されたデータソース](#prepare-full-backup-data)をサーバーにアップロードします。
 
@@ -93,7 +93,7 @@ TiDB Lightningインストールパッケージは、 TiDB Toolkitに含まれ�
     pd-addr = "172.16.31.3:2379"
     ```
 
-4.  パラメータを適切に設定した後、 `nohup`コマンドを使用して`tidb-lightning`プロセスを開始します。コマンドラインでコマンドを直接実行すると、SIGHUP信号を受信したためにプロセスが終了する場合があります。代わりに、 `nohup`コマンドを含むbashスクリプトを実行することをお勧めします。
+4.  パラメータを適切に設定したら、 `nohup`コマンドを使用して`tidb-lightning`プロセスを開始します。コマンドラインでコマンドを直接実行すると、SIGHUP シグナルを受信したためにプロセスが終了する場合があります。代わりに、 `nohup`コマンドを含む bash スクリプトを実行することをお勧めします。
 
     {{< copyable "" >}}
 
@@ -102,14 +102,14 @@ TiDB Lightningインストールパッケージは、 TiDB Toolkitに含まれ�
     nohup ./tidb-lightning -config tidb-lightning.toml > nohup.out &
     ```
 
-### ステップ4：データの整合性を確認する {#step-4-check-data-integrity}
+### ステップ 4: データの整合性を確認する {#step-4-check-data-integrity}
 
-インポートが完了すると、 TiDB Lightningは自動的に終了します。インポートが成功すると、ログファイルの最後の行に`tidb lightning exit`が表示されます。
+インポートが完了すると、 TiDB Lightningは自動的に終了します。インポートが成功すると、ログ ファイルの最後の行に`tidb lightning exit`が表示されます。
 
-エラーが発生した場合は、 [TiDB Lightning](/tidb-lightning/tidb-lightning-faq.md)を参照してください。
+エラーが発生した場合は、 [TiDB LightningFAQ](/tidb-lightning/tidb-lightning-faq.md)を参照してください。
 
 ## 概要 {#summary}
 
-このチュートリアルでは、 TiDB Lightningとは何か、およびTiDB Lightningクラスターをすばやく展開して完全バックアップデータをTiDBクラスタにインポートする方法を簡単に紹介しクラスタ。
+このチュートリアルでは、 TiDB Lightningとは何か、およびTiDB Lightningクラスターを迅速に展開してフル バックアップ データを TiDB クラスターにインポートする方法を簡単に紹介します。
 
-TiDB Lightningの詳細な機能と使用法については、 [TiDB Lightningの概要](/tidb-lightning/tidb-lightning-overview.md)を参照してください。
+TiDB Lightningの詳細な機能と使用方法については、 [TiDB Lightningの概要](/tidb-lightning/tidb-lightning-overview.md)を参照してください。

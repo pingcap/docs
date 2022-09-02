@@ -5,11 +5,11 @@ summary: An overview of the usage of SHOW ANALYZE STATUS for the TiDB database.
 
 # 分析ステータスを表示 {#show-analyze-status}
 
-`SHOW ANALYZE STATUS`ステートメントは、TiDBによって実行されている統計収集タスクと、限られた数の履歴タスクレコードを示しています。
+`SHOW ANALYZE STATUS`ステートメントは、TiDB によって実行されている統計収集タスクと、限られた数の履歴タスク レコードを示しています。
 
-TiDB v6.1.0以降、 `SHOW ANALYZE STATUS`ステートメントはクラスターレベルのタスクの表示をサポートします。 TiDBを再起動した後でも、このステートメントを使用して、再起動前のタスクレコードを表示できます。 TiDB v6.1.0より前では、 `SHOW ANALYZE STATUS`ステートメントはインスタンスレベルのタスクのみを表示でき、タスクレコードはTiDBの再起動後にクリアされます。
+TiDB v6.1.0 以降、 `SHOW ANALYZE STATUS`ステートメントはクラスターレベルのタスクの表示をサポートしています。 TiDB の再起動後でも、このステートメントを使用して再起動前のタスク レコードを表示できます。 TiDB v6.1.0 より前では、 `SHOW ANALYZE STATUS`ステートメントはインスタンス レベルのタスクのみを表示でき、タスク レコードは TiDB の再起動後にクリアされます。
 
-TiDB v6.1.0以降、システムテーブル`mysql.analyze_jobs`を介して過去7日間の履歴タスクを表示できます。
+TiDB v6.1.0 から、システム テーブルを介して過去 7 日間の履歴タスクを表示できます`mysql.analyze_jobs` 。
 
 ## あらすじ {#synopsis}
 
@@ -64,10 +64,10 @@ mysql> show analyze status;
 6 rows in set (0.00 sec)
 ```
 
-## MySQLの互換性 {#mysql-compatibility}
+## MySQL の互換性 {#mysql-compatibility}
 
-このステートメントは、MySQL構文のTiDB拡張です。
+このステートメントは、MySQL 構文に対する TiDB 拡張です。
 
-## も参照してください {#see-also}
+## こちらもご覧ください {#see-also}
 
--   [ANALYZE_STATUSテーブル](/information-schema/information-schema-analyze-status.md)
+-   [ANALYZE_STATUS テーブル](/information-schema/information-schema-analyze-status.md)

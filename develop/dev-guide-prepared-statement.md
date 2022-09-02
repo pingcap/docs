@@ -8,9 +8,9 @@ summary: Learn about how to use the TiDB prepared statements.
 [プリペアドステートメント](/sql-statements/sql-statement-prepare.md)は、パラメーターのみが異なる複数の SQL ステートメントをテンプレート化します。これにより、SQL ステートメントがパラメーターから分離されます。これを使用して、SQL ステートメントの次の側面を改善できます。
 
 -   **セキュリティ**: パラメータとステートメントが分離されているため、 [SQL インジェクション](https://en.wikipedia.org/wiki/SQL_injection)の攻撃のリスクが回避されます。
--   **パフォーマンス**: ステートメントは TiDB サーバーで事前に解析されるため、後続の実行ではパラメーターのみが渡され、SQL ステートメント全体の解析、SQL ステートメント文字列のスプライシング、およびネットワーク送信のコストが節約されます。
+-   **パフォーマンス**: ステートメントは TiDBサーバーで事前に解析されるため、後続の実行ではパラメーターのみが渡され、SQL ステートメント全体の解析、SQL ステートメント文字列のスプライシング、およびネットワーク送信のコストが節約されます。
 
-ほとんどのアプリケーションでは、SQL ステートメントを列挙できます。限られた数の SQL ステートメントを使用して、アプリケーション全体のデータ クエリを完了することができます。そのため、プリペアドステートメントを使用することがベスト プラクティスです。
+ほとんどのアプリケーションでは、SQL ステートメントを列挙できます。限られた数の SQL ステートメントを使用して、アプリケーション全体のデータ クエリを完了することができます。そのため、プリペアドステートメントを使用するのがベスト プラクティスです。
 
 ## SQL 構文 {#sql-syntax}
 
@@ -33,7 +33,7 @@ PREPARE {prepared_statement_name} FROM '{prepared_statement_sql}';
 
 ### プリペアドステートメントを使用する {#use-the-prepared-statement}
 
-プリペアドステートメントは**ユーザー変数**のみをパラメーターとして使用できるため、 [`SET`ステートメント](/sql-statements/sql-statement-set-variable.md)を使用して変数を設定してから、 [`EXECUTE`ステートメント](/sql-statements/sql-statement-execute.md)がプリペアドステートメントを呼び出すことができます。
+プリペアドステートメントは**ユーザー変数**のみをパラメーターとして使用できるため、 [`EXECUTE`ステートメント](/sql-statements/sql-statement-execute.md)がプリペアドステートメントを呼び出す前に、 [`SET`ステートメント](/sql-statements/sql-statement-set-variable.md)を使用して変数を設定します。
 
 {{< copyable "" >}}
 

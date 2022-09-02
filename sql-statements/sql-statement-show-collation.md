@@ -5,15 +5,15 @@ summary: An overview of the usage of SHOW COLLATION for the TiDB database.
 
 # 照合を表示 {#show-collation}
 
-このステートメントは、照合の静的リストを提供し、MySQLクライアントライブラリとの互換性を提供するために含まれています。
+このステートメントは、照合順序の静的リストを提供し、MySQL クライアント ライブラリとの互換性を提供するために含まれています。
 
 > **ノート：**
 >
-> [「新しい照合順序フレームワーク」](/character-set-and-collation.md#new-framework-for-collations)を有効にすると、 `SHOW COLLATION`の結果は異なります。新しい照合順序フレームワークの詳細については、 [文字セットと照合](/character-set-and-collation.md)を参照してください。
+> [「新しい照合順序フレームワーク」](/character-set-and-collation.md#new-framework-for-collations)が有効な場合、 `SHOW COLLATION`の結果は異なります。新しい照合順序フレームワークの詳細については、 [文字セットと照合順序](/character-set-and-collation.md)を参照してください。
 
 ## あらすじ {#synopsis}
 
-**ShowCollationStmt：**
+**ShowCollationStmt:**
 
 ![ShowCollationStmt](/media/sqlgram/ShowCollationStmt.png)
 
@@ -35,7 +35,7 @@ mysql> SHOW COLLATION;
 5 rows in set (0.02 sec)
 ```
 
-新しい照合順序フレームワークが有効になると、 `utf8_general_ci`と`utf8mb4_general_ci`が追加でサポートされます。
+新しい照合順序フレームワークが有効になっている場合、 `utf8_general_ci`と`utf8mb4_general_ci`が追加でサポートされます。
 
 ```sql
 mysql> SHOW COLLATION;
@@ -57,11 +57,11 @@ mysql> SHOW COLLATION;
 11 rows in set (0.001 sec)
 ```
 
-## MySQLの互換性 {#mysql-compatibility}
+## MySQL の互換性 {#mysql-compatibility}
 
-このステートメントの使用法は、MySQLと完全に互換性があると理解されています。ただし、TiDBの文字セットは、MySQLと比較してデフォルトの照合が異なる場合があります。詳しくは[MySQLとの互換性](/mysql-compatibility.md)をご覧ください。その他の互換性の違いは、GitHub [問題を介して報告された](https://github.com/pingcap/tidb/issues/new/choose)である必要があります。
+このステートメントの使用法は、MySQL と完全に互換性があると理解されています。ただし、TiDB の文字セットは、MySQL とは異なるデフォルトの照合を持つ場合があります。詳細については、 [MySQL との互換性](/mysql-compatibility.md)を参照してください。その他の互換性の違いは、GitHub で[問題を介して報告された](https://github.com/pingcap/tidb/issues/new/choose)にする必要があります。
 
-## も参照してください {#see-also}
+## こちらもご覧ください {#see-also}
 
--   [文字セットを表示](/sql-statements/sql-statement-show-character-set.md)
--   [文字セットと照合](/character-set-and-collation.md)
+-   [キャラクターセットを表示](/sql-statements/sql-statement-show-character-set.md)
+-   [文字セットと照合順序](/character-set-and-collation.md)

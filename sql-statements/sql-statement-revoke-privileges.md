@@ -5,7 +5,7 @@ summary: An overview of the usage of REVOKE <privileges> for the TiDB database.
 
 # <code>REVOKE &#x3C;privileges></code> {#code-revoke-x3c-privileges-code}
 
-このステートメントは、既存のユーザーから特権を削除します。このステートメントを実行するには、 `GRANT OPTION`の特権と取り消すすべての特権が必要です。
+このステートメントは、既存のユーザーから権限を削除します。このステートメントを実行するには、 `GRANT OPTION`の特権と、取り消すすべての権限が必要です。
 
 ## あらすじ {#synopsis}
 
@@ -92,11 +92,11 @@ mysql> SHOW GRANTS FOR 'newuser';
 ERROR 1141 (42000): There is no such grant defined for user 'newuser' on host '%'
 ```
 
-## MySQLの互換性 {#mysql-compatibility}
+## MySQL の互換性 {#mysql-compatibility}
 
-このステートメントは、MySQLと完全に互換性があると理解されています。互換性の違いは、GitHubでは[問題を介して報告された](https://github.com/pingcap/tidb/issues/new/choose)である必要があります。
+このステートメントは、MySQL と完全に互換性があると理解されています。互換性の違いは、GitHub で[問題を介して報告された](https://github.com/pingcap/tidb/issues/new/choose)にする必要があります。
 
-## も参照してください {#see-also}
+## こちらもご覧ください {#see-also}
 
 -   [`GRANT &#x3C;privileges>`](/sql-statements/sql-statement-grant-privileges.md)
 -   [助成金を表示](/sql-statements/sql-statement-show-grants.md)

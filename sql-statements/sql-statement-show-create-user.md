@@ -3,17 +3,17 @@ title: SHOW CREATE USER | TiDB SQL Statement Reference
 summary: An overview of the usage of SHOW CREATE USER for the TiDB database.
 ---
 
-# CREATEUSERを表示する {#show-create-user}
+# ユーザーの作成を表示 {#show-create-user}
 
 このステートメントは、 `CREATE USER`構文を使用してユーザーを再作成する方法を示しています。
 
 ## あらすじ {#synopsis}
 
-**ShowCreateUserStmt：**
+**ShowCreateUserStmt:**
 
 ![ShowCreateUserStmt](/media/sqlgram/ShowCreateUserStmt.png)
 
-**ユーザー名：**
+**ユーザー名:**
 
 ![Username](/media/sqlgram/Username.png)
 
@@ -37,12 +37,12 @@ mysql> SHOW GRANTS FOR 'root';
 1 row in set (0.00 sec)
 ```
 
-## MySQLの互換性 {#mysql-compatibility}
+## MySQL の互換性 {#mysql-compatibility}
 
--   `SHOW CREATE USER`の出力はMySQLと一致するように設計されていますが、 `CREATE`のオプションのいくつかはまだTiDBでサポートされていません。まだサポートされていないオプションは解析されますが、無視されます。詳しくは【セキュリティ互換性】をご覧ください。
+-   `SHOW CREATE USER`の出力は MySQL と一致するように設計されていますが、 `CREATE`のオプションのいくつかはまだ TiDB でサポートされていません。まだサポートされていないオプションは解析されますが無視されます。詳細については、[セキュリティの互換性] を参照してください。
 
-## も参照してください {#see-also}
+## こちらもご覧ください {#see-also}
 
 -   [ユーザーを作成](/sql-statements/sql-statement-create-user.md)
 -   [助成金を表示](/sql-statements/sql-statement-show-grants.md)
--   [ドロップユーザー](/sql-statements/sql-statement-drop-user.md)
+-   [ユーザーをドロップ](/sql-statements/sql-statement-drop-user.md)

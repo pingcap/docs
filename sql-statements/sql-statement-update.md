@@ -9,27 +9,27 @@ summary: An overview of the usage of UPDATE for the TiDB database.
 
 ## あらすじ {#synopsis}
 
-**UpdateStmt：**
+**UpdateStmt:**
 
 ![UpdateStmt](/media/sqlgram/UpdateStmt.png)
 
-**PriorityOpt：**
+**プライオリティオプト:**
 
 ![PriorityOpt](/media/sqlgram/PriorityOpt.png)
 
-**TableRef：**
+**テーブル参照:**
 
 ![TableRef](/media/sqlgram/TableRef.png)
 
-**TableRefs：**
+**テーブル参照:**
 
 ![TableRefs](/media/sqlgram/TableRefs.png)
 
-**AssignmentList：**
+**割り当てリスト:**
 
 ![AssignmentList](/media/sqlgram/AssignmentList.png)
 
-**WhereClauseOptional：**
+**Where句オプション:**
 
 ![WhereClauseOptional](/media/sqlgram/WhereClauseOptional.png)
 
@@ -68,9 +68,9 @@ mysql> SELECT * FROM t1;
 3 rows in set (0.00 sec)
 ```
 
-## MySQLの互換性 {#mysql-compatibility}
+## MySQL の互換性 {#mysql-compatibility}
 
-TiDBは、式を評価するときに常に列の元の値を使用します。例えば：
+式を評価するとき、TiDB は常に列の元の値を使用します。例えば：
 
 ```sql
 CREATE TABLE t (a int, b int);
@@ -78,11 +78,11 @@ INSERT INTO t VALUES (1,2);
 UPDATE t SET a = a+1,b=a;
 ```
 
-MySQLでは、同じステートメントで列1が値`a`に設定されているため、列`b`が2に更新され、値`a` （1）が`a+1` （2）に更新されます。
+MySQL では、列`b`は値`a`に設定されているため 2 に更新され、 `a` (1) の値は同じステートメントで`a+1` (2) に更新されます。
 
-TiDBは、より標準的なSQLの動作に従い、 `b`から1に更新します。
+TiDB はより標準的な SQL の動作に従い、 `b`対 1 で更新します。
 
-## も参照してください {#see-also}
+## こちらもご覧ください {#see-also}
 
 -   [入れる](/sql-statements/sql-statement-insert.md)
 -   [選択する](/sql-statements/sql-statement-select.md)

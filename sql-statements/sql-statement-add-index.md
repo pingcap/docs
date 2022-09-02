@@ -5,13 +5,13 @@ summary: An overview of the usage of ADD INDEX for the TiDB database.
 
 # インデックスを追加 {#add-index}
 
-`ALTER TABLE.. ADD INDEX`ステートメントは、既存のテーブルにインデックスを追加します。この操作はTiDBでオンラインです。つまり、インデックスを追加しても、テーブルへの読み取りも書き込みもブロックされません。
+`ALTER TABLE.. ADD INDEX`ステートメントは、既存のテーブルにインデックスを追加します。この操作は TiDB ではオンラインです。つまり、インデックスを追加してもテーブルへの読み取りも書き込みもブロックされません。
 
 > **警告：**
 >
-> -   DDLステートメントがクラスタで実行されているときは**TiDB**クラスタをアップグレードしないでください（通常、 `ADD INDEX`などの時間のかかるDDLステートメントや列タイプの変更の場合）。
-> -   アップグレードする前に、 [`ADMIN SHOW DDL`](/sql-statements/sql-statement-admin-show-ddl.md)コマンドを使用して、TiDBクラスタに進行中のDDLジョブがあるかどうかを確認することをお勧めします。クラスタにDDLジョブがある場合、クラスタをアップグレードするには、DDLの実行が終了するまで待つか、 [`ADMIN CANCEL DDL`](/sql-statements/sql-statement-admin-cancel-ddl.md)コマンドを使用してDDLジョブをキャンセルしてからクラスタをアップグレードします。
-> -   さらに、クラスタのアップグレード中は、DDLステートメントを実行し**ない**でください。そうしないと、未定義動作の問題が発生する可能性があります。
+> -   DDL ステートメントがクラスターで実行されているときは、 **TiDB**クラスターをアップグレードしないでください (通常、 `ADD INDEX`のような時間のかかる DDL ステートメントや列の型の変更のため)。
+> -   アップグレードの前に、 [`ADMIN SHOW DDL`](/sql-statements/sql-statement-admin-show-ddl.md)コマンドを使用して、TiDB クラスターに進行中の DDL ジョブがあるかどうかを確認することをお勧めします。クラスターに DDL ジョブがある場合、クラスターをアップグレードするには、DDL の実行が完了するまで待つか、 [`ADMIN CANCEL DDL`](/sql-statements/sql-statement-admin-cancel-ddl.md)コマンドを使用して DDL ジョブをキャンセルしてからクラスターをアップグレードします。
+> -   また、クラスターのアップグレード中は、DDL ステートメントを実行し**ない**でください。そうしないと、未定義の動作の問題が発生する可能性があります。
 
 ## あらすじ {#synopsis}
 
@@ -72,21 +72,21 @@ mysql> EXPLAIN SELECT * FROM t1 WHERE c1 = 3;
 2 rows in set (0.00 sec)
 ```
 
-## MySQLの互換性 {#mysql-compatibility}
+## MySQL の互換性 {#mysql-compatibility}
 
--   `FULLTEXT` 、および`HASH`のインデックスはサポートさ`SPATIAL`ていません。
--   降順インデックスはサポートされていません（ MySQL 5.7と同様）。
--   現在、複数のインデックスを同時に追加することはサポートされていません。
--   `CLUSTERED`タイプの主キーをテーブルに追加することはサポートされていません。 `CLUSTERED`タイプの主キーの詳細については、 [クラスター化されたインデックス](/clustered-indexes.md)を参照してください。
+-   `FULLTEXT` 、 `HASH`および`SPATIAL`のインデックスはサポートされていません。
+-   降順のインデックスはサポートされていません ( MySQL 5.7と同様)。
+-   複数のインデックスを同時に追加することは現在サポートされていません。
+-   `CLUSTERED`タイプの主キーをテーブルに追加することはサポートされていません。 `CLUSTERED`タイプの主キーの詳細については、 [クラスター化インデックス](/clustered-indexes.md)を参照してください。
 
-## も参照してください {#see-also}
+## こちらもご覧ください {#see-also}
 
 -   [インデックスの選択](/choose-index.md)
 -   [インデックス問題の解決方法](/wrong-index-solution.md)
--   [インデックスの作成](/sql-statements/sql-statement-create-index.md)
+-   [インデックスを作成](/sql-statements/sql-statement-create-index.md)
 -   [ドロップインデックス](/sql-statements/sql-statement-drop-index.md)
--   [インデックスの名前変更](/sql-statements/sql-statement-rename-index.md)
--   [ALTERINDEX](/sql-statements/sql-statement-alter-index.md)
+-   [インデックスの名前を変更](/sql-statements/sql-statement-rename-index.md)
+-   [インデックスの変更](/sql-statements/sql-statement-alter-index.md)
 -   [列を追加](/sql-statements/sql-statement-add-column.md)
--   [CREATE TABLE](/sql-statements/sql-statement-create-table.md)
+-   [テーブルを作成](/sql-statements/sql-statement-create-table.md)
 -   [EXPLAIN](/sql-statements/sql-statement-explain.md)

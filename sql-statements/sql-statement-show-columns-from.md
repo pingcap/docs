@@ -3,55 +3,55 @@ title: SHOW [FULL] COLUMNS FROM | TiDB SQL Statement Reference
 summary: An overview of the usage of SHOW [FULL] COLUMNS FROM for the TiDB database.
 ---
 
-# [フル]列を表示 {#show-full-columns-from}
+# 次の [FULL] 列を表示 {#show-full-columns-from}
 
-ステートメント`SHOW [FULL] COLUMNS FROM <table_name>`は、テーブルまたはビューの列を便利な表形式で記述します。オプションのキーワード`FULL`は、現在のユーザーがその列に対して持っている特権を表示し、 `comment`はテーブル定義から表示します。
+ステートメント`SHOW [FULL] COLUMNS FROM <table_name>`は、テーブルまたはビューの列を便利な表形式で記述します。オプションのキーワード`FULL`は、現在のユーザーがその列に対して持っている権限と、テーブル定義からの`comment`を表示します。
 
-ステートメント`SHOW [FULL] FIELDS FROM <table_name>` 、および`DESCRIBE <table_name>`は、この`EXPLAIN <table_name>`のエイリアス`DESC <table_name>` 。
+ステートメント`SHOW [FULL] FIELDS FROM <table_name>` 、 `DESC <table_name>` 、 `DESCRIBE <table_name>` 、および`EXPLAIN <table_name>`は、このステートメントのエイリアスです。
 
 > **ノート：**
 >
-> `DESC TABLE <table_name>` 、および`DESCRIBE TABLE <table_name>`は、上記のステートメントと`EXPLAIN TABLE <table_name>`ではありません。それらは[`DESC SELECT * FROM &#x3C;table_name>`](/sql-statements/sql-statement-explain.md)のエイリアスです。
+> `DESC TABLE <table_name>` 、 `DESCRIBE TABLE <table_name>` 、および`EXPLAIN TABLE <table_name>`は、上記のステートメントと同等ではありません。それらは[`DESC SELECT * FROM &#x3C;table_name>`](/sql-statements/sql-statement-explain.md)のエイリアスです。
 
 ## あらすじ {#synopsis}
 
-**ShowStmt：**
+**表示ステートメント:**
 
 ![ShowStmt](/media/sqlgram/ShowStmt.png)
 
-**ShowColumnsFilterable：**
+**ShowColumnsFilterable:**
 
 ![ShowColumnsFilterable](/media/sqlgram/ShowColumnsFilterable.png)
 
-**OptFull：**
+**OptFull:**
 
 ![OptFull](/media/sqlgram/OptFull.png)
 
-**FieldsOrColumns：**
+**フィールドまたは列:**
 
 ![FieldsOrColumns](/media/sqlgram/FieldsOrColumns.png)
 
-**ShowTableAliasOpt：**
+**ShowTableAliasOpt:**
 
 ![ShowTableAliasOpt](/media/sqlgram/ShowTableAliasOpt.png)
 
-**FromOrIn：**
+**FromOrIn:**
 
 ![FromOrIn](/media/sqlgram/FromOrIn.png)
 
-**TableName：**
+**テーブル名:**
 
 ![TableName](/media/sqlgram/TableName.png)
 
-**ShowDatabaseNameOpt：**
+**ShowDatabaseNameOpt:**
 
 ![ShowDatabaseNameOpt](/media/sqlgram/ShowDatabaseNameOpt.png)
 
-**DBName：**
+**DB名:**
 
 ![DBName](/media/sqlgram/DBName.png)
 
-**ShowLikeOrWhereOpt：**
+**ShowLikeOrWhereOpt:**
 
 ![ShowLikeOrWhereOpt](/media/sqlgram/ShowLikeOrWhereOpt.png)
 
@@ -150,10 +150,10 @@ mysql> show full columns from mysql.user;
 33 rows in set (0.01 sec)
 ```
 
-## MySQLの互換性 {#mysql-compatibility}
+## MySQL の互換性 {#mysql-compatibility}
 
-このステートメントは、MySQLと完全に互換性があると理解されています。互換性の違いは、GitHubでは[問題を介して報告された](https://github.com/pingcap/tidb/issues/new/choose)である必要があります。
+このステートメントは、MySQL と完全に互換性があると理解されています。互換性の違いは、GitHub で[問題を介して報告された](https://github.com/pingcap/tidb/issues/new/choose)にする必要があります。
 
-## も参照してください {#see-also}
+## こちらもご覧ください {#see-also}
 
--   [CREATETABLEを表示する](/sql-statements/sql-statement-show-create-table.md)
+-   [テーブルの作成を表示](/sql-statements/sql-statement-show-create-table.md)

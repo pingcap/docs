@@ -3,19 +3,19 @@ title: ALTER TABLE ... COMPACT
 summary: An overview of the usage of ALTER TABLE ... COMPACT for the TiDB database.
 ---
 
-# ALTER TABLE ... COMPACT {#alter-table-compact}
+# ALTER TABLE ... コンパクト {#alter-table-compact}
 
 > **警告：**
 >
-> このステートメントはまだ実験的機能です。実稼働環境で使用することはお勧めしません。
+> このステートメントはまだ実験的機能です。本番環境で使用することはお勧めしません。
 
-読み取りパフォーマンスを向上させ、ディスク使用量を削減するために、TiDBはバックグラウンドのストレージノードでデータ圧縮を自動的にスケジュールします。圧縮中に、ストレージノードは物理データを書き換えます。これには、削除された行のクリーンアップや、更新によって発生したデータの複数のバージョンのマージが含まれます。 `ALTER TABLE ... COMPACT`ステートメントを使用すると、バックグラウンドで圧縮がトリガーされるまで待たずに、特定のテーブルの圧縮をすぐに開始できます。
+読み取りパフォーマンスを向上させ、ディスク使用量を削減するために、TiDB はバックグラウンドでストレージ ノードのデータ圧縮を自動的にスケジュールします。圧縮中、ストレージ ノードは物理データを書き換えます。これには、削除された行のクリーンアップや、更新によって発生した複数のバージョンのデータのマージが含まれます。 `ALTER TABLE ... COMPACT`ステートメントを使用すると、圧縮がバックグラウンドでトリガーされるまで待たずに、特定のテーブルの圧縮をすぐに開始できます。
 
-このステートメントの実行は、既存のSQLステートメントをブロックしたり、トランザクション、DDL、GCなどのTiDB機能に影響を与えたりすることはありません。 SQLステートメントで選択できるデータも変更されません。ただし、このステートメントを実行すると、IOおよびCPUリソースが消費されるため、SQL実行の待ち時間が長くなる可能性があります。
+このステートメントの実行は、既存の SQL ステートメントをブロックしたり、トランザクション、DDL、GC などの TiDB 機能に影響を与えたりしません。 SQL文で選択できるデータも変更されません。ただし、このステートメントを実行すると、一部の IO および CPU リソースが消費されるため、SQL 実行のレイテンシーが長くなる可能性があります。
 
-テーブルのすべてのレプリカが圧縮されると、圧縮ステートメントが終了して返されます。実行プロセス中に、 [`KILL`](/sql-statements/sql-statement-kill.md)ステートメントを実行することにより、圧縮を安全に中断できます。圧縮を中断しても、データの一貫性が損なわれたり、データが失われたりすることはなく、その後の手動またはバックグラウンドでの圧縮にも影響しません。
+テーブルのすべてのレプリカが圧縮されると、圧縮ステートメントが終了して返されます。実行プロセス中に、 [`KILL`](/sql-statements/sql-statement-kill.md)ステートメントを実行することで圧縮を安全に中断できます。圧縮を中断しても、データの一貫性が損なわれたり、データが失われたりすることはなく、その後の手動またはバックグラウンドの圧縮にも影響しません。
 
-このデータ圧縮ステートメントは現在、TiFlashレプリカでのみサポートされており、TiKVレプリカではサポートされていません。
+このデータ圧縮ステートメントは現在、TiKV レプリカではなく、TiFlash レプリカでのみサポートされています。
 
 ## あらすじ {#synopsis}
 
@@ -26,9 +26,9 @@ AlterTableCompactStmt ::=
 
 ## 例 {#examples}
 
-### テーブル内のコンパクトなTiFlashレプリカ {#compact-tiflash-replicas-in-a-table}
+### テーブル内のコンパクトな TiFlash レプリカ {#compact-tiflash-replicas-in-a-table}
 
-以下に例として`employees`のテーブルを取り上げます。このテーブルには、2つのTiFlashレプリカを持つ4つのパーティションがあります。
+以下は、2 つの TiFlash レプリカを持つ 4 つのパーティションを持つ`employees`のテーブルを例として取り上げています。
 
 ```sql
 CREATE TABLE employees (
@@ -45,7 +45,7 @@ PARTITION BY LIST (store_id) (
 ALTER TABLE employees SET TIFLASH REPLICA 2;
 ```
 
-次のステートメントを実行して、 `employees`のテーブル内のすべてのパーティションの2つのTiFlashレプリカの圧縮をすぐに開始できます。
+次のステートメントを実行して、 `employees`のテーブル内のすべてのパーティションの 2 つの TiFlash レプリカの圧縮をすぐに開始できます。
 
 {{< copyable "" >}}
 
@@ -53,27 +53,27 @@ ALTER TABLE employees SET TIFLASH REPLICA 2;
 ALTER TABLE employees COMPACT TIFLASH REPLICA;
 ```
 
-## 並行性 {#concurrency}
+## 同時実行 {#concurrency}
 
 `ALTER TABLE ... COMPACT`ステートメントは、テーブル内のすべてのレプリカを同時に圧縮します。
 
-オンラインビジネスへの重大な影響を回避するために、各TiFlashインスタンスは、デフォルトで一度に1つのテーブルのデータのみを圧縮します（バックグラウンドでトリガーされる圧縮を除く）。つまり、 `ALTER TABLE ... COMPACT`のステートメントを複数のテーブルで同時に実行すると、それらの実行は同時に実行されるのではなく、同じTiFlashインスタンスでキューに入れられます。
+オンライン ビジネスへの重大な影響を回避するために、各 TiFlash インスタンスは、デフォルトで一度に 1 つのテーブルのデータのみを圧縮します (バックグラウンドでトリガーされる圧縮を除く)。つまり、複数のテーブルで同時に`ALTER TABLE ... COMPACT`ステートメントを実行すると、それらの実行は同時に実行されるのではなく、同じ TiFlash インスタンスでキューに入れられます。
 
 <CustomContent platform="tidb">
 
-より高いリソース使用量でより大きなテーブルレベルの同時実行性を取得するには、TiFlash構成を変更します[`manual_compact_pool_size`](/tiflash/tiflash-configuration.md) 。たとえば、 `manual_compact_pool_size`が2に設定されている場合、2つのテーブルの圧縮を同時に処理できます。
+リソース使用量を増やしてテーブル レベルの同時実行性を高めるには、TiFlash 構成を変更します[`manual_compact_pool_size`](/tiflash/tiflash-configuration.md) 。たとえば、 `manual_compact_pool_size`を 2 に設定すると、2 つのテーブルのコンパクションを同時に処理できます。
 
 </CustomContent>
 
-## MySQLの互換性 {#mysql-compatibility}
+## MySQL の互換性 {#mysql-compatibility}
 
-`ALTER TABLE ... COMPACT`構文はTiDB固有であり、標準SQL構文の拡張です。同等のMySQL構文はありませんが、MySQLクライアントまたはMySQLプロトコルに準拠するさまざまなデータベースドライバーを使用して、このステートメントを実行できます。
+`ALTER TABLE ... COMPACT`構文は TiDB 固有のもので、標準 SQL 構文の拡張です。同等の MySQL 構文はありませんが、MySQL クライアントまたは MySQL プロトコルに準拠するさまざまなデータベース ドライバーを使用して、このステートメントを実行できます。
 
-## BinlogとTiCDCの互換性 {#tidb-binlog-and-ticdc-compatibility}
+## TiDB Binlogと TiCDC の互換性 {#tidb-binlog-and-ticdc-compatibility}
 
-`ALTER TABLE ... COMPACT`ステートメントは論理データの変更をもたらさないため、 BinlogまたはTiCDCによってダウンストリームに複製されません。
+`ALTER TABLE ... COMPACT`ステートメントは論理データの変更をもたらさないため、TiDB Binlogまたは TiCDC によってダウンストリームに複製されません。
 
-## も参照してください {#see-also}
+## こちらもご覧ください {#see-also}
 
 -   [他の机](/sql-statements/sql-statement-alter-table.md)
--   [TIDBを殺す](/sql-statements/sql-statement-kill.md)
+-   [キルタイド](/sql-statements/sql-statement-kill.md)

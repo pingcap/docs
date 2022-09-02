@@ -5,7 +5,7 @@ summary: Learn the `COLLATIONS` information_schema table.
 
 # 照合 {#collations}
 
-`COLLATIONS`テーブルは、 `CHARACTER_SETS`テーブルの文字セットに対応する照合のリストを提供します。現在、このテーブルはMySQLとの互換性のためにのみ含まれています。
+表`COLLATIONS`は、表`CHARACTER_SETS`の文字セットに対応する照合順序のリストを提供します。現在、このテーブルは MySQL との互換性のためにのみ含まれています。
 
 {{< copyable "" >}}
 
@@ -47,9 +47,9 @@ SELECT * FROM collations WHERE character_set_name='utf8mb4';
 
 `COLLATIONS`テーブルの列の説明は次のとおりです。
 
--   `COLLATION_NAME` ：照合順序の名前。
--   `CHARACTER_SET_NAME` ：照合順序が属する文字セットの名前。
--   `ID` ：照合順序のID。
--   `IS_DEFAULT` ：この照合順序が、それが属する文字セットのデフォルトの照合順序であるかどうか。
--   `IS_COMPILED` ：文字セットがサーバーにコンパイルされているかどうか。
--   `SORTLEN` ：照合順序が文字をソートするときに割り当てられるメモリの最小長。
+-   `COLLATION_NAME` :照合順序の名前。
+-   `CHARACTER_SET_NAME` :照合順序が属する文字セットの名前。
+-   `ID` :照合順序の ID。
+-   `IS_DEFAULT` : この照合順序が、それが属する文字セットのデフォルトの照合順序であるかどうか。
+-   `IS_COMPILED` : 文字セットがサーバーにコンパイルされるかどうか。
+-   `SORTLEN` :照合順序で文字をソートするときに割り当てられるメモリの最小長。

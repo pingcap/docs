@@ -2,10 +2,11 @@
 title: Release Notes
 ---
 
-# TiDBリリースノート {#tidb-release-notes}
+# TiDB リリースノート {#tidb-release-notes}
 
 ## 6.1 {#6-1}
 
+-   [6.1.1](/releases/release-6.1.1.md)
 -   [6.1.0](/releases/release-6.1.0.md)
 
 ## 6.0 {#6-0}
@@ -48,7 +49,7 @@ title: Release Notes
 -   [5.0.3](/releases/release-5.0.3.md)
 -   [5.0.2](/releases/release-5.0.2.md)
 -   [5.0.1](/releases/release-5.0.1.md)
--   [5.0 GA](/releases/release-5.0.0.md)
+-   [5.0GA](/releases/release-5.0.0.md)
 -   [5.0.0-rc](/releases/release-5.0.0-rc.md)
 
 ## 4.0 {#4-0}
@@ -69,22 +70,22 @@ title: Release Notes
 -   [4.0.3](/releases/release-4.0.3.md)
 -   [4.0.2](/releases/release-4.0.2.md)
 -   [4.0.1](/releases/release-4.0.1.md)
--   [4.0 GA](/releases/release-4.0-ga.md)
+-   [4.0GA](/releases/release-4.0-ga.md)
 -   [4.0.0-rc.2](/releases/release-4.0.0-rc.2.md)
 -   [4.0.0-rc.1](/releases/release-4.0.0-rc.1.md)
 -   [4.0.0-rc](/releases/release-4.0.0-rc.md)
--   [4.0.0-beta.2](/releases/release-4.0.0-beta.2.md)
--   [4.0.0-beta.1](/releases/release-4.0.0-beta.1.md)
+-   [4.0.0-ベータ.2](/releases/release-4.0.0-beta.2.md)
+-   [4.0.0-ベータ.1](/releases/release-4.0.0-beta.1.md)
 -   [4.0.0-ベータ版](/releases/release-4.0.0-beta.md)
 
 ## 3.1 {#3-1}
 
 -   [3.1.2](/releases/release-3.1.2.md)
 -   [3.1.1](/releases/release-3.1.1.md)
--   [3.1.0 GA](/releases/release-3.1.0-ga.md)
+-   [3.1.0 一般提供](/releases/release-3.1.0-ga.md)
 -   [3.1.0-rc](/releases/release-3.1.0-rc.md)
--   [3.1.0-beta.2](/releases/release-3.1.0-beta.2.md)
--   [3.1.0-beta.1](/releases/release-3.1.0-beta.1.md)
+-   [3.1.0-ベータ.2](/releases/release-3.1.0-beta.2.md)
+-   [3.1.0-ベータ.1](/releases/release-3.1.0-beta.1.md)
 -   [3.1.0-ベータ版](/releases/release-3.1.0-beta.md)
 
 ## 3.0 {#3-0}
@@ -109,11 +110,11 @@ title: Release Notes
 -   [3.0.3](/releases/release-3.0.3.md)
 -   [3.0.2](/releases/release-3.0.2.md)
 -   [3.0.1](/releases/release-3.0.1.md)
--   [3.0 GA](/releases/release-3.0-ga.md)
+-   [3.0GA](/releases/release-3.0-ga.md)
 -   [3.0.0-rc.3](/releases/release-3.0.0-rc.3.md)
 -   [3.0.0-rc.2](/releases/release-3.0.0-rc.2.md)
 -   [3.0.0-rc.1](/releases/release-3.0.0-rc.1.md)
--   [3.0.0-beta.1](/releases/release-3.0.0-beta.1.md)
+-   [3.0.0-ベータ.1](/releases/release-3.0.0-beta.1.md)
 -   [3.0.0-ベータ版](/releases/release-3.0-beta.md)
 
 ## 2.1 {#2-1}
@@ -137,13 +138,13 @@ title: Release Notes
 -   [2.1.3](/releases/release-2.1.3.md)
 -   [2.1.2](/releases/release-2.1.2.md)
 -   [2.1.1](/releases/release-2.1.1.md)
--   [2.1 GA](/releases/release-2.1-ga.md)
+-   [2.1GA](/releases/release-2.1-ga.md)
 -   [2.1 RC5](/releases/release-2.1-rc.5.md)
 -   [2.1 RC4](/releases/release-2.1-rc.4.md)
 -   [2.1 RC3](/releases/release-2.1-rc.3.md)
 -   [2.1 RC2](/releases/release-2.1-rc.2.md)
 -   [2.1 RC1](/releases/release-2.1-rc.1.md)
--   [2.1ベータ版](/releases/release-2.1-beta.md)
+-   [2.1 ベータ版](/releases/release-2.1-beta.md)
 
 ## 2.0 {#2-0}
 
@@ -158,13 +159,13 @@ title: Release Notes
 -   [2.0.3](/releases/release-2.0.3.md)
 -   [2.0.2](/releases/release-2.0.2.md)
 -   [2.0.1](/releases/release-2.0.1.md)
--   [2.0 GA](/releases/release-2.0-ga.md)
+-   [2.0GA](/releases/release-2.0-ga.md)
 -   [2.0 RC5](/releases/release-2.0-rc.5.md)
 -   [2.0 RC4](/releases/release-2.0-rc.4.md)
--   [2.0 RC3](/releases/release-2.0-rc.3.md)
--   [2.0 RC1](/releases/release-2.0-rc.1.md)
--   [1.1ベータ版](/releases/release-1.1-beta.md)
--   [1.1アルファ](/releases/release-1.1-alpha.md)
+-   [2.0RC3](/releases/release-2.0-rc.3.md)
+-   [2.0RC1](/releases/release-2.0-rc.1.md)
+-   [1.1 ベータ版](/releases/release-1.1-beta.md)
+-   [1.1 アルファ](/releases/release-1.1-alpha.md)
 
 ## 1.0 {#1-0}
 
@@ -176,8 +177,8 @@ title: Release Notes
 -   [1.0.3](/releases/release-1.0.3.md)
 -   [1.0.2](/releases/release-1.0.2.md)
 -   [1.0.1](/releases/release-1.0.1.md)
--   [1.0 GA](/releases/release-1.0-ga.md)
--   [プレGA](/releases/release-pre-ga.md)
+-   [1.0GA](/releases/release-1.0-ga.md)
+-   [一般提供前](/releases/release-pre-ga.md)
 -   [RC4](/releases/release-rc.4.md)
 -   [RC3](/releases/release-rc.3.md)
 -   [RC2](/releases/release-rc.2.md)

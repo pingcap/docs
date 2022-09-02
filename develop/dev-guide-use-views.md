@@ -5,28 +5,28 @@ summary: Learn how to use views in TiDB.
 
 # ビュー {#views}
 
-このドキュメントでは、TiDBでビューを使用する方法について説明します。
+このドキュメントでは、TiDB でビューを使用する方法について説明します。
 
 ## 概要 {#overview}
 
-TiDBはビューをサポートします。ビューは仮想テーブルとして機能し、そのスキーマはビューを作成する`SELECT`ステートメントによって定義されます。
+TiDB はビューをサポートしています。ビューは仮想テーブルとして機能し、そのスキーマはビューを作成する`SELECT`ステートメントによって定義されます。
 
--   ビューを作成して、安全なフィールドとデータのみをユーザーに公開できます。これにより、基になるテーブル内の機密フィールドとデータのセキュリティが確保されます。
--   複雑なクエリをより簡単かつ便利にするために頻繁に使用される複雑なクエリのビューを作成できます。
+-   安全なフィールドとデータのみをユーザーに公開するビューを作成して、基になるテーブルの機密フィールドとデータのセキュリティを確保できます。
+-   複雑なクエリをより簡単かつ便利にするために、頻繁に使用される複雑なクエリのビューを作成できます。
 
 ## ビューを作成する {#create-a-view}
 
-TiDBでは、複雑なクエリを`CREATE VIEW`ステートメントのビューとして定義できます。構文は次のとおりです。
+TiDB では、複雑なクエリを`CREATE VIEW`ステートメントのビューとして定義できます。構文は次のとおりです。
 
 ```sql
 CREATE VIEW view_name AS query;
 ```
 
-既存のビューまたはテーブルと同じ名前のビューを作成することはできないことに注意してください。
+既存のビューまたはテーブルと同じ名前のビューを作成できないことに注意してください。
 
-たとえば、 [マルチテーブル結合クエリ](/develop/dev-guide-join-tables.md)は、 `JOIN`ステートメントを介して`books`テーブルと`ratings`テーブルを結合することにより、平均評価のある本のリストを取得します。
+たとえば、 [複数テーブル結合クエリ](/develop/dev-guide-join-tables.md)は、 `JOIN`ステートメントを使用して`books`テーブルと`ratings`テーブルを結合することにより、平均評価の書籍のリストを取得します。
 
-後続のクエリの便宜のために、次のステートメントを使用してクエリをビューとして定義できます。
+後続のクエリの便宜上、次のステートメントを使用してクエリをビューとして定義できます。
 
 {{< copyable "" >}}
 
@@ -38,7 +38,7 @@ LEFT JOIN ratings r ON b.id = r.book_id
 GROUP BY b.id;
 ```
 
-## クエリビュー {#query-views}
+## クエリ ビュー {#query-views}
 
 ビューが作成されると、 `SELECT`ステートメントを使用して、通常のテーブルと同じようにビューをクエリできます。
 
@@ -48,14 +48,14 @@ GROUP BY b.id;
 SELECT * FROM book_with_ratings LIMIT 10;
 ```
 
-TiDBがビューを照会するとき、ビューに関連付けられた`SELECT`のステートメントを照会します。
+TiDB がビューにクエリを実行すると、ビューに関連付けられた`SELECT`のステートメントがクエリされます。
 
-## ビューを更新する {#update-views}
+## ビューの更新 {#update-views}
 
-現在、TiDBのビューは`ALTER VIEW view_name AS query;`をサポートしていません。次の2つの方法でビューを「更新」できます。
+現在、TiDB のビューは`ALTER VIEW view_name AS query;`をサポートしていません。次の 2 つの方法でビューを「更新」できます。
 
 -   `DROP VIEW view_name;`ステートメントで古いビューを削除してから、 `CREATE VIEW view_name AS query;`ステートメントで新しいビューを作成してビューを更新します。
--   `CREATE OR REPLACE VIEW view_name AS query;`ステートメントを使用して、同じ名前の既存のビューを上書きします。
+-   `CREATE OR REPLACE VIEW view_name AS query;`ステートメントを使用して、既存のビューを同じ名前で上書きします。
 
 {{< copyable "" >}}
 
@@ -67,7 +67,7 @@ LEFT JOIN ratings r ON b.id = r.book_id
 GROUP BY b.id;
 ```
 
-## ビュー関連情報を取得する {#get-view-related-information}
+## ビュー関連の情報を取得する {#get-view-related-information}
 
 ### <code>SHOW CREATE TABLE|VIEW view_name</code>ステートメントの使用 {#using-the-code-show-create-table-view-view-name-code-statement}
 
@@ -88,7 +88,7 @@ collation_connection: utf8mb4_general_ci
 1 row in set (0.00 sec)
 ```
 
-### <code>INFORMATION_SCHEMA.VIEWS</code>テーブルをクエリします {#query-the-code-information-schema-views-code-table}
+### <code>INFORMATION_SCHEMA.VIEWS</code>テーブルをクエリします。 {#query-the-code-information-schema-views-code-table}
 
 {{< copyable "" >}}
 
@@ -113,9 +113,9 @@ COLLATION_CONNECTION: utf8mb4_general_ci
 1 row in set (0.00 sec)
 ```
 
-## ビューをドロップ {#drop-views}
+## ビューを削除 {#drop-views}
 
-ビューを削除するには、 `DROP VIEW view_name;`ステートメントを使用します。
+ビューをドロップするには、 `DROP VIEW view_name;`ステートメントを使用します。
 
 {{< copyable "" >}}
 
@@ -125,12 +125,12 @@ DROP VIEW book_with_ratings;
 
 ## 制限 {#limitation}
 
-TiDBのビューの制限については、 [ビューの制限](/views.md#limitations)を参照してください。
+TiDB でのビューの制限については、 [ビューの制限](/views.md#limitations)を参照してください。
 
 ## 続きを読む {#read-more}
 
 -   [ビュー](/views.md)
--   [CREATEVIEWステートメント](/sql-statements/sql-statement-create-view.md)
--   [DROPVIEWステートメント](/sql-statements/sql-statement-drop-view.md)
+-   [CREATE VIEW ステートメント](/sql-statements/sql-statement-create-view.md)
+-   [DROP VIEW ステートメント](/sql-statements/sql-statement-drop-view.md)
 -   [ビューを使用しEXPLAINステートメント](/explain-views.md)
--   [TiFlink：TiKVとFlinkを使用した一貫性の高いマテリアライズドビュー](https://github.com/tiflink/tiflink)
+-   [TiFlink: TiKV と Flink を使用した強整合性のマテリアライズド ビュー](https://github.com/tiflink/tiflink)

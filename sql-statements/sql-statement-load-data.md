@@ -26,7 +26,7 @@ LoadDataStmt ::=
 
 -   `FIELDS TERMINATED BY` : 各データの区切り文字を指定します。
 -   `FIELDS ENCLOSED BY` : 各データの囲み文字を指定します。
--   `LINES TERMINATED BY` : 特定の文字で行を終了する場合は、行末記号を指定します。
+-   `LINES TERMINATED BY` : 特定の文字で行を終了する場合は、行ターミネータを指定します。
 
 例として、次のデータ形式を取り上げます。
 

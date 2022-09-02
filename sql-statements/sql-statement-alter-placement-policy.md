@@ -5,9 +5,9 @@ summary: The usage of ALTER PLACEMENT POLICY in TiDB.
 
 # 配置ポリシーの変更 {#alter-placement-policy}
 
-`ALTER PLACEMENT POLICY`は、以前に作成された既存の配置ポリシーを変更するために使用されます。配置ポリシーを使用するすべてのテーブルとパーティションは自動的に更新されます。
+`ALTER PLACEMENT POLICY`は、以前に作成された既存の配置ポリシーを変更するために使用されます。配置ポリシーを使用するすべてのテーブルとパーティションが自動的に更新されます。
 
-`ALTER PLACEMENT POLICY`は、以前のポリシーを新しい定義に*置き換え*ます。古いポリシーを新しいポリシーと<em>マージ</em>しません。次の例では、 `ALTER PLACEMENT POLICY`が実行されると`FOLLOWERS=4`が失われます。
+`ALTER PLACEMENT POLICY`は、以前のポリシーを新しい定義に*置き換え*ます。古いポリシーと新しいポリシーは<em>マージ</em>されません。次の例では、 `ALTER PLACEMENT POLICY`を実行すると`FOLLOWERS=4`が失われます。
 
 ```sql
 CREATE PLACEMENT POLICY p1 FOLLOWERS=4;
@@ -53,9 +53,9 @@ AdvancedPlacementOption ::=
 
 > **ノート：**
 >
-> クラスタで使用可能なリージョンを確認するには、 [`SHOW PLACEMENT LABELS`](/sql-statements/sql-statement-show-placement-labels.md)を参照してください。
+> クラスターで使用可能なリージョンを確認するには、 [`SHOW PLACEMENT LABELS`](/sql-statements/sql-statement-show-placement-labels.md)を参照してください。
 >
-> 使用可能なリージョンが表示されない場合は、TiKVインストールでラベルが正しく設定されていない可能性があります。
+> 利用可能なリージョンが表示されない場合は、TiKV インストールでラベルが正しく設定されていない可能性があります。
 
 {{< copyable "" >}}
 
@@ -77,13 +77,13 @@ Create Policy | CREATE PLACEMENT POLICY `p1` PRIMARY_REGION="us-east-1" REGIONS=
 1 row in set (0.00 sec)
 ```
 
-## MySQLの互換性 {#mysql-compatibility}
+## MySQL の互換性 {#mysql-compatibility}
 
-このステートメントは、MySQL構文のTiDB拡張です。
+このステートメントは、MySQL 構文に対する TiDB 拡張です。
 
-## も参照してください {#see-also}
+## こちらもご覧ください {#see-also}
 
--   [SQLでの配置ルール](/placement-rules-in-sql.md)
+-   [SQL の配置規則](/placement-rules-in-sql.md)
 -   [配置を表示](/sql-statements/sql-statement-show-placement.md)
--   [プレースメントポリシーを作成する](/sql-statements/sql-statement-create-placement-policy.md)
+-   [配置ポリシーを作成する](/sql-statements/sql-statement-create-placement-policy.md)
 -   [ドロップ配置ポリシー](/sql-statements/sql-statement-drop-placement-policy.md)

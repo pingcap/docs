@@ -5,20 +5,20 @@ summary: This document describes best practices for configuration and usage of H
 
 # TiDB で HAProxy を使用するためのベスト プラクティス {#best-practices-for-using-haproxy-in-tidb}
 
-このドキュメントでは、TiDB での[HAProxy](https://github.com/haproxy/haproxy)の構成と使用に関するベスト プラクティスについて説明します。 HAProxy は、TCP ベースのアプリケーションの負荷分散を提供します。 TiDB クライアントからは、HAProxy が提供するフローティング仮想 IP アドレスに接続するだけでデータを操作できるため、TiDB サーバー層での負荷分散を実現できます。
+このドキュメントでは、TiDB での[HAProxy](https://github.com/haproxy/haproxy)の構成と使用に関するベスト プラクティスについて説明します。 HAProxy は、TCP ベースのアプリケーションの負荷分散を提供します。 TiDB クライアントからは、HAProxy が提供するフローティング仮想 IP アドレスに接続するだけでデータを操作できるため、TiDBサーバーレイヤーでの負荷分散に役立ちます。
 
 ![HAProxy Best Practices in TiDB](/media/haproxy.jpg)
 
 ## HAProxy の概要 {#haproxy-overview}
 
-HAProxy は、C 言語で記述された無料のオープンソース ソフトウェアで、TCP および HTTP ベースのアプリケーションに高可用性のロード バランサーとプロキシ サーバーを提供します。 CPU とメモリを高速かつ効率的に使用するため、HAProxy は現在、GitHub、Bitbucket、Stack Overflow、Reddit、Tumblr、Twitter、Tuenti、AWS (Amazon Web Services) など、多くの有名な Web サイトで広く使用されています。
+HAProxy は、C 言語で記述された無料のオープンソース ソフトウェアで、TCP および HTTP ベースのアプリケーションに高可用性のロード バランサーとプロキシサーバーを提供します。 CPU とメモリを高速かつ効率的に使用するため、HAProxy は現在、GitHub、Bitbucket、Stack Overflow、Reddit、Tumblr、Twitter、Tuenti、AWS (Amazon Web Services) など、多くの有名な Web サイトで広く使用されています。
 
-HAProxy は 2000 年に Linux カーネルの中心的貢献者である Willy Tarreau によって書かれました。Willy Tarreau は現在もプロジェクトの保守を担当しており、オープンソース コミュニティで無料のソフトウェア アップデートを提供しています。このガイドでは、HAProxy [2.5.0](https://www.haproxy.com/blog/announcing-haproxy-2-5/)を使用します。最新の安定版を使用することをお勧めします。詳細は[HAProxy のリリース バージョン](http://www.haproxy.org/)を参照してください。
+HAProxy は 2000 年に Linux カーネルの中心的貢献者である Willy Tarreau によって書かれました。Willy Tarreau は今でもプロジェクトの保守を担当しており、オープンソース コミュニティで無料のソフトウェア アップデートを提供しています。このガイドでは、HAProxy [2.5.0](https://www.haproxy.com/blog/announcing-haproxy-2-5/)を使用します。最新の安定版を使用することをお勧めします。詳細は[HAProxy のリリース バージョン](http://www.haproxy.org/)を参照してください。
 
 ## 基本的な機能 {#basic-features}
 
 -   [高可用性](http://cbonte.github.io/haproxy-dconv/2.5/intro.html#3.3.4) : HAProxy は、グレースフル シャットダウンとシームレスな切り替えをサポートする高可用性を提供します。
--   [負荷分散](http://cbonte.github.io/haproxy-dconv/2.5/configuration.html#4.2-balance) : レイヤー 4 とも呼ばれる TCP と、レイヤー 7 とも呼ばれる HTTP の 2 つの主要なプロキシ モードがサポートされています。
+-   [負荷分散](http://cbonte.github.io/haproxy-dconv/2.5/configuration.html#4.2-balance) : 2 つの主要なプロキシ モードがサポートされています。レイヤー4 とも呼ばれる TCP と、レイヤー7 とも呼ばれる HTTP です。roundrobin、leastconn、random など、9 つ以上の負荷分散アルゴリズムがサポートされています。
 -   [健康診断](http://cbonte.github.io/haproxy-dconv/2.5/configuration.html#5.2-check) : HAProxy はサーバーの HTTP または TCP モードのステータスを定期的にチェックします。
 -   [スティッキー セッション](http://cbonte.github.io/haproxy-dconv/2.5/intro.html#3.3.6) : HAProxy は、アプリケーションがスティッキー セッションをサポートしていない間、クライアントを特定のサーバーに固定できます。
 -   [SSL](http://cbonte.github.io/haproxy-dconv/2.5/intro.html#3.3.2) : HTTPS 通信と解決がサポートされています。
@@ -108,7 +108,7 @@ HAProxy を使用すると、負荷分散されたデータベース環境を簡
     {{< copyable "" >}}
 
     ```bash
-    echo 'export PATH=/app/haproxy:$PATH' >> /etc/profile
+    echo 'export PATH=/app/haproxy/bin:$PATH' >> /etc/profile
     ```
 
 5.  インストールが成功したかどうかを確認します。
@@ -151,7 +151,7 @@ haproxy --help
 | `-dp`                           | poll(2) の使用を無効にします。代わりに select(2) を使用できます。                                                                                                                      |
 | `-dS`                           | 古いカーネルでは機能しない splice(2) の使用を無効にします。                                                                                                                             |
 | `-dR`                           | SO_REUSEPORT の使用を無効にします。                                                                                                                                        |
-| `-dr`                           | サーバー アドレス解決の失敗を無視します。                                                                                                                                           |
+| `-dr`                           | サーバーアドレス解決の失敗を無視します。                                                                                                                                            |
 | `-dV`                           | サーバー側で SSL 検証を無効にします。                                                                                                                                           |
 | `-sf <pidlist>`                 | 始動後に pidlist 内の PID に「終了」シグナルを送信します。このシグナルを受信したプロセスは、終了する前にすべてのセッションが終了するのを待ちます。このオプションは最後に指定し、その後に任意の数の PID を指定する必要があります。技術的に言えば、SIGTTOU と SIGUSR1 が送信されます。    |
 | `-st <pidlist>`                 | 始動後に pidlist 内の PID に「終了」シグナルを送信します。このシグナルを受信したプロセスはただちに終了し、すべてのアクティブなセッションが閉じられます。このオプションは最後に指定し、その後に任意の数の PID を指定する必要があります。技術的に言えば、SIGTTOU と SIGTERM が送信されます。 |
@@ -214,7 +214,7 @@ listen tidb-cluster                        # Database load balancing.
 
 > **ノート：**
 >
-> PROXY プロトコルを使用する前に、TiDB サーバーの構成ファイルで[`proxy-protocol.networks`](/tidb-configuration-file.md#networks)を構成する必要があります。
+> PROXY プロトコルを使用する前に、TiDBサーバーの構成ファイルで[`proxy-protocol.networks`](/tidb-configuration-file.md#networks)を構成する必要があります。
 
 ### HAProxy を開始する {#start-haproxy}
 

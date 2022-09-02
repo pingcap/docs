@@ -5,13 +5,13 @@ summary: An overview of the usage of MODIFY COLUMN for the TiDB database.
 
 # 列の変更 {#modify-column}
 
-`ALTER TABLE.. MODIFY COLUMN`ステートメントは、既存のテーブルの列を変更します。変更には、データ型と属性の変更が含まれる場合があります。同時に名前を変更するには、代わりに[`CHANGE COLUMN`](/sql-statements/sql-statement-change-column.md)ステートメントを使用してください。
+`ALTER TABLE.. MODIFY COLUMN`ステートメントは、既存のテーブルの列を変更します。変更には、データ型と属性の変更が含まれる場合があります。同時に名前を変更するには、代わりに[`CHANGE COLUMN`](/sql-statements/sql-statement-change-column.md)ステートメントを使用します。
 
-v5.1.0以降、TiDBは、以下を含むがこれらに限定されないReorgデータのデータ型の変更をサポートしています。
+v5.1.0 以降、TiDB は Reorg データのデータ型の変更をサポートしてきました。
 
--   `VARCHAR`から`BIGINT`に変更
+-   `VARCHAR`から`BIGINT`への変更
 -   `DECIMAL`精度の変更
--   `VARCHAR(10)`から`VARCHAR(5)`の長さを圧縮します
+-   `VARCHAR(10)` ～ `VARCHAR(5)`の長さの圧縮
 
 ## あらすじ {#synopsis}
 
@@ -101,7 +101,7 @@ Create Table: CREATE TABLE `t1` (
 1 row in set (0.00 sec)
 ```
 
-### Reorg-データ変更 {#reorg-data-change}
+### 再編成データの変更 {#reorg-data-change}
 
 {{< copyable "" >}}
 
@@ -153,20 +153,20 @@ CREATE TABLE `t1` (
 
 > **ノート：**
 >
-> -   変更されたデータ型が既存のデータ行と競合する場合、TiDBはエラーを返します。上記の例では、TiDBは次のエラーを返します。
+> -   変更されたデータ型が既存のデータ行と競合する場合、TiDB はエラーを返します。上記の例では、TiDB は次のエラーを返します。
 >
 >     ```
 >     alter table t1 modify column col1 varchar(4);
 >     ERROR 1406 (22001): Data Too Long, field len 4, data len 5
 >     ```
 >
-> -   非同期コミット機能との互換性により、DDLステートメントはReorg Dataへの処理を開始する前に一定期間（約2.5秒）待機します。
+> -   Async Commit 機能との互換性により、DDL ステートメントは、Reorg Data への処理を開始する前に一定時間 (約 2.5 秒) 待機します。
 >
 >     ```
 >     Query OK, 0 rows affected (2.52 sec)
 >     ```
 
-## MySQLの互換性 {#mysql-compatibility}
+## MySQL の互換性 {#mysql-compatibility}
 
 -   単一の`ALTER TABLE`ステートメントを使用した複数の列の変更はサポートされていません。例えば：
 
@@ -175,7 +175,7 @@ CREATE TABLE `t1` (
     ERROR 1105 (HY000): Unsupported multi schema change
     ```
 
--   主キー列のReorg-Dataタイプの変更はサポートしていませんが、Meta-Onlyタイプの変更はサポートしています。例えば：
+-   主キー列の Reorg-Data タイプの変更はサポートしていませんが、Meta-Only タイプの変更はサポートしています。例えば：
 
     ```sql
     CREATE TABLE t (a int primary key);
@@ -203,7 +203,7 @@ CREATE TABLE `t1` (
     ERROR 8200 (HY000): Unsupported modify column: column is generated
     ```
 
--   パーティションテーブルの列タイプの変更はサポートされていません。例えば：
+-   分割されたテーブルの列の種類の変更はサポートされていません。例えば：
 
     ```sql
     CREATE TABLE t (c1 INT, c2 INT, c3 INT) partition by range columns(c1) ( partition p0 values less than (10), partition p1 values less than (maxvalue));
@@ -211,7 +211,7 @@ CREATE TABLE `t1` (
     ERROR 8200 (HY000): Unsupported modify column: table is partition table
     ```
 
--   一部のデータ型（たとえば、一部のTIME型、ビット、セット、列挙型、JSON）の変更はサポートされていません。これは、TiDBとMySQL間の`cast`関数の動作の互換性の問題のためです。
+-   TiDB と MySQL 間の`cast`関数の動作の互換性の問題により、一部のデータ型 (たとえば、一部の TIME 型、Bit、Set、Enum、JSON) の変更はサポートされていません。
 
     ```sql
     CREATE TABLE t (a DECIMAL(13, 7));
@@ -219,10 +219,10 @@ CREATE TABLE `t1` (
     ERROR 8200 (HY000): Unsupported modify column: change from original type decimal(13,7) to datetime is currently unsupported yet
     ```
 
-## も参照してください {#see-also}
+## こちらもご覧ください {#see-also}
 
--   [CREATE TABLE](/sql-statements/sql-statement-create-table.md)
--   [CREATETABLEを表示する](/sql-statements/sql-statement-show-create-table.md)
+-   [テーブルを作成](/sql-statements/sql-statement-create-table.md)
+-   [テーブルの作成を表示](/sql-statements/sql-statement-show-create-table.md)
 -   [列を追加](/sql-statements/sql-statement-add-column.md)
--   [ドロップ列](/sql-statements/sql-statement-drop-column.md)
--   [列を変更する](/sql-statements/sql-statement-change-column.md)
+-   [ドロップ カラム](/sql-statements/sql-statement-drop-column.md)
+-   [列を変更](/sql-statements/sql-statement-change-column.md)

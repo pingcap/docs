@@ -13,7 +13,7 @@ summary: Learn the basics on TiDB database schema design.
 
 いくつかの一般的な用語を区別するために、TiDB で使用される用語について簡単に説明します。
 
--   一般的な用語[データベース](https://en.wikipedia.org/wiki/Database)との混同を避けるため、このドキュメントの**データベース**は論理オブジェクトを指し、 <strong>TiDB</strong>は TiDB 自体を指し、<strong>クラスタ</strong>は TiDB のデプロイされたインスタンスを指します。
+-   一般的な用語[データベース](https://en.wikipedia.org/wiki/Database)との混同を避けるために、このドキュメントの**データベース**は論理オブジェクトを指し、 <strong>TiDB</strong>は TiDB 自体を指し、<strong>クラスター</strong>は TiDB のデプロイされたインスタンスを指します。
 
 -   TiDB は MySQL 互換の構文を使用します。この構文では、**スキーマ**はデータベース内の論理オブジェクトではなく、一般的な用語[スキーマ](https://en.wiktionary.org/wiki/schema)を意味します。詳細については、 [MySQL ドキュメント](https://dev.mysql.com/doc/refman/8.0/en/create-database.html)を参照してください。論理オブジェクトとしてスキーマを持つデータベース (たとえば、 [PostgreSQL](https://www.postgresql.org/docs/current/ddl-schemas.html) 、 [オラクル](https://docs.oracle.com/en/database/oracle/oracle-database/21/tdddg/creating-managing-schema-objects.html) 、および[マイクロソフト SQL サーバー](https://docs.microsoft.com/en-us/sql/relational-databases/security/authentication-access/create-a-database-schema?view=sql-server-ver15) ) から移行する場合は、この違いに注意してください。
 
@@ -77,13 +77,13 @@ TiDB は、 **table**と同じレベルで次の論理オブジェクトをサ�
 
 <CustomContent platform="tidb">
 
-TiDB は、ユーザーベースとロールベースの両方のアクセス制御をサポートしています。ユーザーがデータ オブジェクトとデータ スキーマを表示、変更、または削除できるようにするには、 [特権](/privilege-management.md)から[ユーザー](/user-account-management.md)を直接付与するか、 [特権](/privilege-management.md)から[役割](/role-based-access-control.md)までをユーザーに付与します。
+TiDB は、ユーザーベースとロールベースの両方のアクセス制御をサポートしています。ユーザーがデータ オブジェクトとデータ スキーマを表示、変更、または削除できるようにするには、 [権限](/privilege-management.md)から[ユーザー](/user-account-management.md)を直接付与するか、 [権限](/privilege-management.md)から[役割](/role-based-access-control.md)までをユーザーに付与します。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-TiDB は、ユーザーベースとロールベースの両方のアクセス制御をサポートしています。ユーザーがデータ オブジェクトとデータ スキーマを表示、変更、または削除できるようにするには、 [特権](https://docs.pingcap.com/tidb/stable/privilege-management)から[ユーザー](https://docs.pingcap.com/tidb/stable/user-account-management)を直接付与するか、 [特権](https://docs.pingcap.com/tidb/stable/privilege-management)から[役割](https://docs.pingcap.com/tidb/stable/role-based-access-control)までをユーザーに付与します。
+TiDB は、ユーザーベースとロールベースの両方のアクセス制御をサポートしています。ユーザーがデータ オブジェクトとデータ スキーマを表示、変更、または削除できるようにするには、 [権限](https://docs.pingcap.com/tidb/stable/privilege-management)から[ユーザー](https://docs.pingcap.com/tidb/stable/user-account-management)を直接付与するか、 [権限](https://docs.pingcap.com/tidb/stable/privilege-management)から[役割](https://docs.pingcap.com/tidb/stable/role-based-access-control)までをユーザーに付与します。
 
 </CustomContent>
 
@@ -118,7 +118,7 @@ TiDB は、ユーザーベースとロールベースの両方のアクセス制
 
 <CustomContent platform="tidb">
 
-[**txn-entry-size-limit**](/tidb-configuration-file.md#txn-entry-size-limit-new-in-v50)構成項目を使用して、1 行のサイズ制限を調整できます。
+[**txn-entry-size-limit**](/tidb-configuration-file.md#txn-entry-size-limit-new-in-v50)構成アイテムを使用して、1 行のサイズ制限を調整できます。
 
 </CustomContent>
 
@@ -137,12 +137,12 @@ TiDB は、ユーザーベースとロールベースの両方のアクセス制
 
 <CustomContent platform="tidb">
 
-TiDB は、クラスタにノードを追加することで**無制限**の数の行をサポートします。関連する原則については、 [TiDB のベスト プラクティス](/best-practices/tidb-best-practices.md)を参照してください。
+TiDB は、クラスターにノードを追加することにより、**無制限**の数の行をサポートします。関連する原則については、 [TiDB のベスト プラクティス](/best-practices/tidb-best-practices.md)を参照してください。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-TiDB は、クラスタにノードを追加することで**無制限**の数の行をサポートします。関連する原則については、 [TiDB のベスト プラクティス](https://docs.pingcap.com/tidb/stable/tidb-best-practices)を参照してください。
+TiDB は、クラスターにノードを追加することにより、**無制限**の数の行をサポートします。関連する原則については、 [TiDB のベスト プラクティス](https://docs.pingcap.com/tidb/stable/tidb-best-practices)を参照してください。
 
 </CustomContent>

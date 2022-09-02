@@ -4,17 +4,17 @@ summary: Learn how to build a simple Python application using TiDB and Django.
 aliases: ['/appdev/dev/for-django']
 ---
 
-# Djangoのアプリ開発 {#app-development-for-django}
+# Django のアプリ開発 {#app-development-for-django}
 
 > **ノート：**
 >
-> このドキュメントはアーカイブされています。これは、このドキュメントがその後更新されないことを示しています。詳細については、 [開発者ガイドの概要](/develop/dev-guide-overview.md)を参照してください。
+> このドキュメントはアーカイブされました。これは、このドキュメントがその後更新されないことを示しています。詳細は[開発者ガイドの概要](/develop/dev-guide-overview.md)を参照してください。
 
-このチュートリアルでは、TiDBとDjangoに基づいて簡単なPythonアプリケーションを構築する方法を示します。ここで構築するサンプルアプリケーションは、顧客および注文情報を追加、照会、および更新できる単純なCRMツールです。
+このチュートリアルでは、TiDB と Django に基づいて単純な Python アプリケーションを構築する方法を示します。ここで構築するサンプル アプリケーションは、顧客情報と注文情報を追加、クエリ、および更新できるシンプルな CRM ツールです。
 
-## 手順1.TiDBクラスタを開始します {#step-1-start-a-tidb-cluster}
+## ステップ 1. TiDB クラスターを開始する {#step-1-start-a-tidb-cluster}
 
-ローカルストレージで疑似TiDBクラスタを開始します。
+ローカル ストレージで疑似 TiDB クラスターを開始します。
 
 {{< copyable "" >}}
 
@@ -22,20 +22,20 @@ aliases: ['/appdev/dev/for-django']
 docker run -p 127.0.0.1:$LOCAL_PORT:4000 pingcap/tidb:v5.1.0
 ```
 
-上記のコマンドは、モックTiKVを使用して一時的な単一ノードクラスタを開始します。クラスタはポート`$LOCAL_PORT`でリッスンします。クラスタが停止した後、データベースにすでに加えられた変更は保持されません。
+上記のコマンドは、モック TiKV を使用して一時的な単一ノード クラスターを開始します。クラスタはポート`$LOCAL_PORT`でリッスンします。クラスターが停止すると、データベースに対して既に行われた変更は保持されません。
 
 > **ノート：**
 >
-> 「実際の」TiDBクラスタを実稼働環境にデプロイするには、次のガイドを参照してください。
+> 実稼働用に「実際の」TiDB クラスターをデプロイするには、次のガイドを参照してください。
 >
-> -   [オンプレミスのTiUPを使用してTiDBをデプロイ](https://docs.pingcap.com/tidb/v5.1/production-deployment-using-tiup)
-> -   [KubernetesにTiDBをデプロイ](https://docs.pingcap.com/tidb-in-kubernetes/stable)
+> -   [TiUP for On-Premises を使用して TiDB をデプロイ](https://docs.pingcap.com/tidb/v5.1/production-deployment-using-tiup)
+> -   [TiDB を Kubernetes にデプロイ](https://docs.pingcap.com/tidb-in-kubernetes/stable)
 >
-> また、無料トライアルを提供するフルマネージドのDatabase-as- [TiDB Cloudを使用する](https://pingcap.com/products/tidbcloud/) -Service（DBaaS）も可能です。
+> また、無料試用版を提供する[TiDB Cloudを使用する](https://pingcap.com/products/tidbcloud/) 、完全に管理された Database-as-a-Service (DBaaS) を使用することもできます。
 
-## ステップ2.データベースを作成します {#step-2-create-a-database}
+## ステップ 2. データベースを作成する {#step-2-create-a-database}
 
-1.  SQLシェルで、アプリケーションが使用する`django`のデータベースを作成します。
+1.  SQL シェルで、アプリケーションが使用する`django`のデータベースを作成します。
 
     {{< copyable "" >}}
 
@@ -43,7 +43,7 @@ docker run -p 127.0.0.1:$LOCAL_PORT:4000 pingcap/tidb:v5.1.0
     CREATE DATABASE django;
     ```
 
-2.  アプリケーションのSQLユーザーを作成します。
+2.  アプリケーションの SQL ユーザーを作成します。
 
     {{< copyable "" >}}
 
@@ -51,9 +51,9 @@ docker run -p 127.0.0.1:$LOCAL_PORT:4000 pingcap/tidb:v5.1.0
     CREATE USER <username> IDENTIFIED BY <password>;
     ```
 
-    ユーザー名とパスワードをメモします。プロジェクトを初期化するときに、アプリケーションコードでそれらを使用します。
+    ユーザー名とパスワードをメモします。プロジェクトを初期化するときに、アプリケーション コードでそれらを使用します。
 
-3.  作成したSQLユーザーに必要な権限を付与します。
+3.  作成した SQL ユーザーに必要な権限を付与します。
 
     {{< copyable "" >}}
 
@@ -61,11 +61,11 @@ docker run -p 127.0.0.1:$LOCAL_PORT:4000 pingcap/tidb:v5.1.0
     GRANT ALL ON django.* TO <username>;
     ```
 
-## ステップ3.仮想環境を設定し、プロジェクトを初期化します {#step-3-set-virtual-environments-and-initialize-the-project}
+## ステップ 3. 仮想環境を設定してプロジェクトを初期化する {#step-3-set-virtual-environments-and-initialize-the-project}
 
-1.  Pythonの依存関係およびパッケージマネージャーである[詩](https://python-poetry.org/docs/)を使用して、仮想環境を設定し、プロジェクトを初期化します。
+1.  Python の依存関係およびパッケージ マネージャーである[詩](https://python-poetry.org/docs/)を使用して、仮想環境を設定し、プロジェクトを初期化します。
 
-    詩は、システムの依存関係を他の依存関係から分離し、依存関係の汚染を回避できます。次のコマンドを使用して、Poetryをインストールします。
+    詩は、システムの依存関係を他の依存関係から分離し、依存関係の汚染を回避できます。次のコマンドを使用して、Poetry をインストールします。
 
     {{< copyable "" >}}
 
@@ -73,7 +73,7 @@ docker run -p 127.0.0.1:$LOCAL_PORT:4000 pingcap/tidb:v5.1.0
     pip install --user poetry
     ```
 
-2.  Poetryを使用して開発環境を初期化します。
+2.  Poetry を使用して開発環境を初期化します。
 
     {{< copyable "" >}}
 
@@ -89,7 +89,7 @@ docker run -p 127.0.0.1:$LOCAL_PORT:4000 pingcap/tidb:v5.1.0
     poetry shell
     ```
 
-3.  構成ファイルを変更します。 `tidb_example/settings.py`の構成は次のとおりです。
+3.  構成ファイルを変更します。 `tidb_example/settings.py`の構成は以下の通りです。
 
     {{< copyable "" >}}
 
@@ -106,7 +106,7 @@ docker run -p 127.0.0.1:$LOCAL_PORT:4000 pingcap/tidb:v5.1.0
     DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
     ```
 
-    上記の構成を次のように変更します。これは、TiDBへの接続に使用されます。
+    上記の構成を次のように変更します。これは TiDB への接続に使用されます。
 
     {{< copyable "" >}}
 
@@ -127,11 +127,11 @@ docker run -p 127.0.0.1:$LOCAL_PORT:4000 pingcap/tidb:v5.1.0
     DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
     ```
 
-## ステップ4.アプリケーションロジックを記述します {#step-4-write-the-application-logic}
+## ステップ 4. アプリケーション ロジックを記述する {#step-4-write-the-application-logic}
 
-アプリケーションのデータベース接続を構成した後、アプリケーションの構築を開始できます。アプリケーションロジックを作成するには、モデルを構築し、コントローラーを構築し、URLルートを定義する必要があります。
+アプリケーションのデータベース接続を構成したら、アプリケーションの構築を開始できます。アプリケーション ロジックを記述するには、モデルを構築し、コントローラーを構築し、URL ルートを定義する必要があります。
 
-1.  `models.py`というファイルで定義されているモデルをビルドします。以下のサンプルコードをコピーして、新しいファイルに貼り付けることができます。
+1.  `models.py`というファイルで定義されているモデルを構築します。以下のサンプル コードをコピーして、新しいファイルに貼り付けることができます。
 
     {{< copyable "" >}}
 
@@ -144,7 +144,7 @@ docker run -p 127.0.0.1:$LOCAL_PORT:4000 pingcap/tidb:v5.1.0
         price = models.FloatField()
     ```
 
-2.  `views.py`というファイルにクラスベースのビューを作成します。以下のサンプルコードをコピーして、新しいファイルに貼り付けることができます。
+2.  `views.py`というファイルにクラスベースのビューを作成します。以下のサンプル コードをコピーして、新しいファイルに貼り付けることができます。
 
     {{< copyable "" >}}
 
@@ -208,7 +208,7 @@ docker run -p 127.0.0.1:$LOCAL_PORT:4000 pingcap/tidb:v5.1.0
             return HttpResponse(status=200)
     ```
 
-3.  `urls.py`というファイルでURLルートを定義します。 `django-admin`コマンドラインツールはDjangoプロジェクトの作成時にこのファイルを生成したため、ファイルはすでに`tidb_example/tidb_example`に存在しているはずです。以下のサンプルコードをコピーして、既存の`urls.py`ファイルに貼り付けることができます。
+3.  `urls.py`というファイルで URL ルートを定義します。 Django プロジェクトの作成時に`django-admin`コマンドライン ツールがこのファイルを生成したため、このファイルは`tidb_example/tidb_example`に既に存在しているはずです。以下のサンプル コードをコピーして、既存の`urls.py`ファイルに貼り付けることができます。
 
     {{< copyable "" >}}
 
@@ -229,9 +229,9 @@ docker run -p 127.0.0.1:$LOCAL_PORT:4000 pingcap/tidb:v5.1.0
     ]
     ```
 
-## ステップ5.Djangoアプリケーションをセットアップして実行します {#step-5-set-up-and-run-the-django-application}
+## ステップ 5. Django アプリケーションをセットアップして実行する {#step-5-set-up-and-run-the-django-application}
 
-最上位の`tidb_example`ディレクトリで、 [`manage.py`](https://docs.djangoproject.com/en/3.1/ref/django-admin/)スクリプトを使用して、アプリケーションのデータベースを初期化する[Djangoの移行](https://docs.djangoproject.com/en/3.1/topics/migrations/)を作成します。
+`tidb_example`上のディレクトリで、 [`manage.py`](https://docs.djangoproject.com/en/3.1/ref/django-admin/)スクリプトを使用して、アプリケーションのデータベースを初期化する[Django の移行](https://docs.djangoproject.com/en/3.1/topics/migrations/)を作成します。
 
 {{< copyable "" >}}
 
@@ -241,7 +241,7 @@ python manage.py migrate tidb_example
 python manage.py migrate
 ```
 
-次に、アプリケーションを起動します。
+次に、アプリケーションを開始します。
 
 {{< copyable "" >}}
 
@@ -249,7 +249,7 @@ python manage.py migrate
 python3 manage.py runserver 0.0.0.0:8000
 ```
 
-いくつかのサンプルデータを挿入してアプリケーションをテストするには、次のコマンドを実行します。
+サンプル データを挿入してアプリケーションをテストするには、次のコマンドを実行します。
 
 {{< copyable "" >}}
 
@@ -265,7 +265,7 @@ curl --request PATCH '127.0.0.1:8000/order/' --data-raw '{ "oid": 1, "price": 31
 curl --request GET '127.0.0.1:8000/order/' --data-raw '{ "oid": 1 }'
 ```
 
-データの挿入が成功したかどうかを確認するには、SQLシェルでターミナルを開いて以下を確認します。
+データの挿入が成功したかどうかを確認するには、SQL シェルでターミナルを開いて確認します。
 
 {{< copyable "" >}}
 
@@ -280,7 +280,7 @@ MySQL root@127.0.0.1:(none)> select * from django.tidb_example_orders;
 Time: 0.008s
 ```
 
-上記の結果は、データ挿入が成功したことを示しています。次に、挿入されたデータを削除できます。
+上記の結果は、データの挿入が成功したことを示しています。次に、挿入されたデータを削除できます。
 
 {{< copyable "" >}}
 

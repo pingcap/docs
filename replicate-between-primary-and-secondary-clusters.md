@@ -6,25 +6,25 @@ aliases: ['/docs/dev/incremental-replication-between-clusters/', '/tidb/stable/r
 
 # プライマリ クラスタとセカンダリ クラスタの間でデータをレプリケートする {#replicate-data-between-primary-and-secondary-clusters}
 
-このドキュメントでは、TiDB プライマリ (アップストリーム)クラスタと TiDB または MySQL セカンダリ (ダウンストリーム)クラスタを構成し、プライマリクラスタからセカンダリクラスタに増分データをレプリケートする方法について説明します。このプロセスには、次の手順が含まれます。
+このドキュメントでは、TiDB プライマリ (アップストリーム) クラスターと TiDB または MySQL セカンダリ (ダウンストリーム) クラスターを構成し、プライマリ クラスターからセカンダリ クラスターに増分データをレプリケートする方法について説明します。このプロセスには、次の手順が含まれます。
 
-1.  TiDB プライマリクラスタと TiDB または MySQL セカンダリクラスタを構成します。
-2.  プライマリクラスタからセカンダリクラスタに増分データをレプリケートします。
-3.  プライマリクラスタがダウンしている場合は、REDO ログを使用してデータを一貫して回復します。
+1.  TiDB プライマリ クラスタと TiDB または MySQL セカンダリ クラスタを構成します。
+2.  プライマリ クラスタからセカンダリ クラスタに増分データをレプリケートします。
+3.  プライマリ クラスタがダウンしている場合は、REDO ログを使用してデータを一貫して回復します。
 
-実行中の TiDBクラスタからその二次クラスタに増分データを複製するには、バックアップと復元[ブラジル](/br/backup-and-restore-overview.md)および[TiCDC](/ticdc/ticdc-overview.md)を使用できます。
+実行中の TiDB クラスターからその二次クラスターに増分データを複製するには、バックアップと復元[ブラジル](/br/backup-and-restore-overview.md)および[TiCDC](/ticdc/ticdc-overview.md)を使用できます。
 
 ## ステップ 1. 環境をセットアップする {#step-1-set-up-the-environment}
 
 1.  TiDB クラスターをデプロイします。
 
-    デプロイ Playground を使用して、2 つの TiDB クラスター (1 つはアップストリーム、もう 1 つはダウンストリーム) をデプロイします。本番環境の場合は、 [TiUP を使用してオンライン TiDB クラスターをデプロイおよび管理する](/tiup/tiup-cluster.md)を参照してクラスターをデプロイします。
+    デプロイ Playground を使用して、2 つの TiDB クラスター (1 つはアップストリーム、もう 1 つはダウンストリーム) をデプロイします。本番環境の場合は、 [TiUP を使用してオンライン TiDBクラスタをデプロイおよび管理する](/tiup/tiup-cluster.md)を参照してクラスターをデプロイします。
 
     このドキュメントでは、2 つのクラスターを 2 台のマシンにデプロイします。
 
-    -   ノード A: 172.16.6.123、上流の TiDBクラスタをデプロイするため
+    -   ノード A: 172.16.6.123、上流の TiDB クラスターをデプロイするため
 
-    -   ノード B: 172.16.6.124、ダウンストリーム TiDBクラスタのデプロイ用
+    -   ノード B: 172.16.6.124、ダウンストリーム TiDB クラスターのデプロイ用
 
     ```shell
     # Create an upstream cluster on Node A
@@ -60,7 +60,7 @@ aliases: ['/docs/dev/incremental-replication-between-clusters/', '/tidb/stable/r
 
 3.  サービスのワークロードをシミュレートします。
 
-    実際のシナリオでは、サービス データは継続的にアップストリームクラスタに書き込まれます。このドキュメントでは、sysbench を使用してこのワークロードをシミュレートします。具体的には、次のコマンドを実行して、合計 TPS が 100 を超えないように、10 人のワーカーが sbtest1、sbtest2、および sbtest3 の 3 つのテーブルに連続してデータを書き込むことができるようにします。
+    実際のシナリオでは、サービス データはアップストリーム クラスターに継続的に書き込まれます。このドキュメントでは、sysbench を使用してこのワークロードをシミュレートします。具体的には、次のコマンドを実行して、合計 TPS が 100 を超えないように、10 人のワーカーが sbtest1、sbtest2、および sbtest3 の 3 つのテーブルに連続してデータを書き込むことができるようにします。
 
     ```shell
     sysbench oltp_write_only --config-file=./tidb-config --tables=3 run
@@ -84,7 +84,7 @@ aliases: ['/docs/dev/incremental-replication-between-clusters/', '/tidb/stable/r
     nohup ./minio server ./data --address :6060 &
     ```
 
-    上記のコマンドは、S3 サービスをシミュレートするために、1 つのノードで minio サーバーを開始します。コマンドのパラメーターは次のように構成されます。
+    上記のコマンドは、S3 サービスをシミュレートするために、1 つのノードで minioサーバーを開始します。コマンドのパラメーターは次のように構成されます。
 
     -   エンドポイント: `http://${HOST_IP}:6060/`
     -   アクセスキー: `minio`
@@ -99,17 +99,17 @@ aliases: ['/docs/dev/incremental-replication-between-clusters/', '/tidb/stable/r
 
 ## ステップ 2. 完全なデータを移行する {#step-2-migrate-full-data}
 
-環境をセットアップした後、 [ブラジル](https://github.com/pingcap/tidb/tree/master/br) ) のバックアップおよび復元関数を使用して、完全なデータを移行できます。 BRは[3 つの方法](/br/br-deployment.md#use-br)で起動できます。このドキュメントでは、SQL ステートメント`BACKUP`と`RESTORE`を使用します。
+環境をセットアップした後、 [ブラジル](https://github.com/pingcap/tidb/tree/master/br) ) のバックアップおよび復元関数を使用して、完全なデータを移行できます。 BRは[3つの方法](/br/br-deployment.md#use-br)で起動できます。このドキュメントでは、SQL ステートメント`BACKUP`と`RESTORE`を使用します。
 
 > **ノート：**
 >
-> -   実稼働クラスターでは、GC を無効にしてバックアップを実行すると、クラスタのパフォーマンスに影響を与える可能性があります。オフピーク時にデータをバックアップし、パフォーマンスの低下を避けるために RATE_LIMIT を適切な値に設定することをお勧めします。
+> -   実稼働クラスターでは、GC を無効にしてバックアップを実行すると、クラスターのパフォーマンスに影響を与える可能性があります。オフピーク時にデータをバックアップし、パフォーマンスの低下を避けるために RATE_LIMIT を適切な値に設定することをお勧めします。
 >
 > -   上流と下流のクラスターのバージョンが異なる場合は、 [BR互換性](/br/backup-and-restore-overview.md#before-you-use-br)を確認する必要があります。このドキュメントでは、アップストリーム クラスタとダウンストリーム クラスタは同じバージョンであると想定しています。
 
 1.  GC を無効にします。
 
-    増分移行中に新しく書き込まれたデータが削除されないようにするには、バックアップの前にアップストリームクラスタの GC を無効にする必要があります。このように、履歴データは削除されません。
+    増分移行中に新しく書き込まれたデータが削除されないようにするには、バックアップの前にアップストリーム クラスターの GC を無効にする必要があります。このように、履歴データは削除されません。
 
     次のコマンドを実行して、GC を無効にします。
 
@@ -138,7 +138,7 @@ aliases: ['/docs/dev/incremental-replication-between-clusters/', '/tidb/stable/r
 
 2.  バックアップデータ。
 
-    アップストリームクラスタで`BACKUP`ステートメントを実行して、データをバックアップします。
+    アップストリーム クラスターで`BACKUP`ステートメントを実行して、データをバックアップします。
 
     ```sql
     MySQL [(none)]> BACKUP DATABASE * TO 's3://backup?access-key=minio&secret-access-key=miniostorage&endpoint=http://${HOST_IP}:6060&force-path-style=true' RATE_LIMIT = 120 MB/SECOND;
@@ -157,7 +157,7 @@ aliases: ['/docs/dev/incremental-replication-between-clusters/', '/tidb/stable/r
 
 3.  データを復元します。
 
-    ダウンストリームクラスタで`RESTORE`コマンドを実行して、データを復元します。
+    ダウンストリーム クラスターで`RESTORE`コマンドを実行して、データを復元します。
 
     ```sql
     mysql> RESTORE DATABASE * FROM 's3://backup?access-key=minio&secret-access-key=miniostorage&endpoint=http://${HOST_IP}:6060&force-path-style=true';
@@ -174,7 +174,7 @@ aliases: ['/docs/dev/incremental-replication-between-clusters/', '/tidb/stable/r
 
 4.  (オプション) データを検証します。
 
-    特定の時点で上流と下流の間のデータの整合性をチェックするには、 [同期差分インスペクター](/sync-diff-inspector/sync-diff-inspector-overview.md)を使用します。前の`BACKUP`の出力は、上流のクラスタが`RESTORE`でバックアップを終了したことを示しています。
+    特定の時点で上流と下流の間のデータの整合性をチェックするには、 [同期差分インスペクター](/sync-diff-inspector/sync-diff-inspector-overview.md)を使用します。前の`BACKUP`の出力は、上流のクラスターが`RESTORE`でバックアップを終了したことを示しています。
 
     ```shell
     sync_diff_inspector -C ./config.yaml
@@ -230,7 +230,7 @@ aliases: ['/docs/dev/incremental-replication-between-clusters/', '/tidb/stable/r
     storage = "s3://redo?access-key=minio&secret-access-key=miniostorage&endpoint=http://172.16.6.125:6060&force-path-style=true"
     ```
 
-    アップストリームクラスタで、次のコマンドを実行して、アップストリーム クラスターからダウンストリーム クラスターへの変更フィードを作成します。
+    アップストリーム クラスターで、次のコマンドを実行して、アップストリーム クラスターからダウンストリーム クラスターへの変更フィードを作成します。
 
     ```shell
     tiup cdc cli changefeed create --pd=http://172.16.6.122:2379 --sink-uri="mysql://root:@172.16.6.125:4000" --changefeed-id="primary-to-secondary" --start-ts="431434047157698561"
@@ -238,8 +238,8 @@ aliases: ['/docs/dev/incremental-replication-between-clusters/', '/tidb/stable/r
 
     このコマンドでは、パラメーターは次のとおりです。
 
-    -   `--pd` : アップストリームクラスタの PD アドレス
-    -   `--sink-uri` : ダウンストリームクラスタの URI
+    -   `--pd` : アップストリーム クラスタの PD アドレス
+    -   `--sink-uri` : ダウンストリーム クラスターの URI
     -   `--start-ts` : 変更フィードの開始タイムスタンプ。バックアップ時刻 (または[ステップ 2. 完全なデータを移行する](#step-2-migrate-full-data)で説明した BackupTS) である必要があります。
 
     changefeed 構成の詳細については、 [タスク構成ファイル](/ticdc/manage-ticdc.md#task-configuration-file)を参照してください。
@@ -273,9 +273,9 @@ aliases: ['/docs/dev/incremental-replication-between-clusters/', '/tidb/stable/r
     1 row in set (0.00 sec)
     ```
 
-## ステップ 4.アップストリームクラスタで災害をシミュレートする {#step-4-simulate-a-disaster-in-the-upstream-cluster}
+## ステップ 4.アップストリーム クラスターで災害をシミュレートする {#step-4-simulate-a-disaster-in-the-upstream-cluster}
 
-実行中にアップストリームクラスタで悲惨なイベントを作成します。たとえば、Ctrl+C を押すと、tiup プレイグラウンド プロセスを終了できます。
+実行中にアップストリーム クラスタで悲惨なイベントを作成します。たとえば、Ctrl+C を押すと、tiup プレイグラウンド プロセスを終了できます。
 
 ## ステップ 5. REDO ログを使用してデータの整合性を確保する {#step-5-use-redo-log-to-ensure-data-consistency}
 
@@ -287,19 +287,19 @@ tiup cdc redo apply --storage "s3://redo?access-key=minio&secret-access-key=mini
 
 -   `--storage` : S3 の REDO ログの場所と資格情報
 -   `--tmp-dir` : S3 からダウンロードした REDO ログのキャッシュ ディレクトリ
--   `--sink-uri` : ダウンストリームクラスタの URI
+-   `--sink-uri` : ダウンストリーム クラスターの URI
 
-## ステップ 6. 主クラスタとそのサービスをリカバリーする {#step-6-recover-the-primary-cluster-and-its-services}
+## ステップ 6. 主クラスターとそのサービスをリカバリーする {#step-6-recover-the-primary-cluster-and-its-services}
 
-前のステップの後、ダウンストリーム (セカンダリ)クラスタには、特定の時点でアップストリーム (プライマリ)クラスタと一致するデータがあります。データの信頼性を確保するために、新しいプライマリ クラスタとセカンダリ クラスタをセットアップする必要があります。
+前のステップの後、ダウンストリーム (セカンダリ) クラスターには、特定の時点でアップストリーム (プライマリ) クラスターと一致するデータがあります。データの信頼性を確保するために、新しいプライマリ クラスタとセカンダリ クラスタをセットアップする必要があります。
 
-1.  ノード A に新しい TiDBクラスタを新しい主クラスタとしてデプロイします。
+1.  ノード A に新しい TiDB クラスターを新しい主クラスターとしてデプロイします。
 
     ```shell
     tiup --tag upstream playground v5.4.0 --host 0.0.0.0 --db 1 --pd 1 --kv 1 --tiflash 0 --ticdc 1
     ```
 
-2.  BR を使用して、二次クラスタから一次クラスタにデータを完全にバックアップおよび復元します。
+2.  BR を使用して、二次クラスターから一次クラスターにデータを完全にバックアップおよび復元します。
 
     ```shell
     # Back up full data of the secondary cluster
@@ -308,7 +308,7 @@ tiup cdc redo apply --storage "s3://redo?access-key=minio&secret-access-key=mini
     tiup br --pd http://172.16.6.123:2379 restore full --storage ./backup
     ```
 
-3.  プライマリクラスタからセカンダリクラスタにデータをバックアップするための新しい変更フィードを作成します。
+3.  プライマリ クラスタからセカンダリ クラスタにデータをバックアップするための新しい変更フィードを作成します。
 
     ```shell
     # Create a changefeed

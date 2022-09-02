@@ -3,15 +3,15 @@ title: Data Check in the Sharding Scenario
 summary: Learn the data check in the sharding scenario.
 ---
 
-# シャーディングシナリオでのデータチェック {#data-check-in-the-sharding-scenario}
+# シャーディング シナリオでのデータ チェック {#data-check-in-the-sharding-scenario}
 
-sync-diff-inspectorは、シャーディングシナリオでのデータチェックをサポートします。 [TiDBデータ移行](/dm/dm-overview.md)のツールを使用して複数のMySQLインスタンスからTiDBにデータを複製すると仮定すると、sync-diff-inspectorを使用してアップストリームおよびダウンストリームのデータをチェックできます。
+sync-diff-inspector は、シャーディング シナリオでのデータ チェックをサポートします。 [TiDB データ移行](/dm/dm-overview.md)ツールを使用して複数の MySQL インスタンスから TiDB にデータをレプリケートすると仮定すると、sync-diff-inspector を使用して上流および下流のデータをチェックできます。
 
-アップストリームシャードテーブルの数が少なく、シャードテーブルの命名規則に以下のようなパターンがないシナリオでは、 `Datasource config`を使用して`table-0`を構成し、対応する`rules`を設定して、アップストリーム間のマッピング関係を持つテーブルを構成できます。およびダウンストリームデータベース。この構成方法では、すべてのシャードテーブルを設定する必要があります。
+アップストリームのシャード テーブルの数が少なく、シャード テーブルの命名規則に次のようなパターンがないシナリオでは、 `Datasource config`を使用して`table-0`を構成し、対応する`rules`を設定して、アップストリーム間のマッピング関係を持つテーブルを構成できます。およびダウンストリーム データベース。この構成方法では、すべてのシャード テーブルを設定する必要があります。
 
 ![shard-table-replica-1](/media/shard-table-replica-1.png)
 
-以下は、sync-diff-inspector構成の完全な例です。
+以下は、sync-diff-inspector 構成の完全な例です。
 
 ```toml
 # Diff Configuration.
@@ -75,11 +75,11 @@ target-table = "table-0"     # The name of the target table
     target-check-tables = ["test.table-0"]
 ```
 
-以下に示すように、アップストリームのシャードテーブルが多数あり、すべてのシャードテーブルの命名規則にパターンがある場合は、構成に`table-rules`を使用できます。
+アップストリームのシャード テーブルが多数あり、以下に示すように、すべてのシャード テーブルの命名規則にパターンがある場合は、構成に`table-rules`を使用できます。
 
 ![shard-table-replica-2](/media/shard-table-replica-2.png)
 
-以下は、sync-diff-inspector構成の完全な例です。
+以下は、sync-diff-inspector 構成の完全な例です。
 
 ```toml
 # Diff Configuration.
@@ -133,4 +133,4 @@ target-table = "table-0"     # The name of the target table
 
 ## ノート {#note}
 
-アップストリームデータベースに`test.table-0`が存在する場合、ダウンストリームデータベースもこのテーブルを比較します。
+上流データベースに`test.table-0`が存在する場合、下流データベースもこのテーブルを比較します。

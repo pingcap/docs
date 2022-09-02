@@ -5,16 +5,16 @@ summary: Learn how to filter binlog events when migrating data.
 
 # Binlogイベントのフィルタリング {#filter-binlog-events}
 
-このドキュメントでは、DMを使用して継続的な増分データレプリケーションを実行するときにbinlogイベントをフィルタリングする方法について説明します。詳細なレプリケーション手順については、シナリオごとに次のドキュメントを参照してください。
+このドキュメントでは、DM を使用して継続的な増分データ レプリケーションを実行するときに、binlog イベントをフィルター処理する方法について説明します。詳細なレプリケーション手順については、シナリオごとに次のドキュメントを参照してください。
 
--   [小さなデータセットのMySQLをTiDBに移行する](/migrate-small-mysql-to-tidb.md)
--   [大規模なデータセットのMySQLをTiDBに移行する](/migrate-large-mysql-to-tidb.md)
--   [小さなデータセットのMySQLシャードをTiDBに移行およびマージする](/migrate-small-mysql-shards-to-tidb.md)
--   [大規模なデータセットのMySQLシャードをTiDBに移行およびマージする](/migrate-large-mysql-shards-to-tidb.md)
+-   [小さなデータセットの MySQL を TiDB に移行する](/migrate-small-mysql-to-tidb.md)
+-   [大規模なデータセットの MySQL を TiDB に移行する](/migrate-large-mysql-to-tidb.md)
+-   [小さなデータセットの MySQL シャードを TiDB に移行およびマージする](/migrate-small-mysql-shards-to-tidb.md)
+-   [大規模なデータセットの MySQL シャードを TiDB に移行およびマージする](/migrate-large-mysql-shards-to-tidb.md)
 
 ## Configuration / コンフィグレーション {#configuration}
 
-binlogイベントフィルターを使用するには、次に示すように、DMのタスク構成ファイルに`filter`を追加します。
+binlog イベント フィルターを使用するには、以下に示すように、DM のタスク構成ファイルに`filter`を追加します。
 
 ```yaml
 filters:
@@ -26,50 +26,50 @@ filters:
     action: Ignore
 ```
 
--   `schema-pattern` ：スキーマまたは`table-pattern`に一致するフィルター
+-   `schema-pattern` / `table-pattern` : スキーマまたはテーブルに一致するフィルター
 
--   `events` ：binlogイベントをフィルタリングします。サポートされているイベントを以下の表に示します。
+-   `events` : binlog イベントをフィルタリングします。サポートされているイベントを次の表に示します。
 
-    | イベント         | カテゴリー | 説明                |
-    | ------------ | ----- | ----------------- |
-    | 全て           |       | すべてのイベントが含まれます    |
-    | すべてのdml      |       | すべてのDMLイベントが含まれます |
-    | すべてのddl      |       | すべてのDDLイベントが含まれます |
-    | なし           |       | イベントは含まれていません     |
-    | なしddl        |       | すべてのDDLイベントを除外します |
-    | なしdml        |       | すべてのDMLイベントを除外します |
-    | 入れる          | DML   | DMLイベントを挿入します     |
-    | アップデート       | DML   | DMLイベントを更新する      |
-    | 消去           | DML   | DMLイベントを削除する      |
-    | データベースを作成する  | DDL   | データベースイベントの作成     |
-    | データベースを削除します | DDL   | データベースイベントの削除     |
-    | テーブルを作成する    | DDL   | テーブルイベントの作成       |
-    | インデックスを作成する  | DDL   | インデックスイベントを作成する   |
-    | ドロップテーブル     | DDL   | ドロップテーブルイベント      |
-    | テーブルを切り捨てます  | DDL   | テーブルイベントの切り捨て     |
-    | テーブルの名前を変更   | DDL   | テーブルイベントの名前を変更    |
-    | ドロップインデックス   | DDL   | ドロップインデックスイベント    |
-    | 他の机          | DDL   | テーブルイベントの変更       |
+    | イベント        | カテゴリー | 説明                  |
+    | ----------- | ----- | ------------------- |
+    | 全て          |       | すべてのイベントを含む         |
+    | すべてのdml     |       | すべての DML イベントを含む    |
+    | すべての ddl    |       | すべての DDL イベントを含む    |
+    | なし          |       | イベントを含まない           |
+    | なし          |       | すべての DDL イベントを除外します |
+    | dml なし      |       | すべての DML イベントを除外します |
+    | 入れる         | DML   | DML イベントの挿入         |
+    | アップデート      | DML   | DML イベントの更新         |
+    | 消去          | DML   | DML イベントの削除         |
+    | データベースを作成する | DDL   | データベース イベントの作成      |
+    | データベースをドロップ | DDL   | データベースのドロップ イベント    |
+    | テーブルを作成     | DDL   | テーブル イベントの作成        |
+    | インデックスを作成   | DDL   | インデックス イベントの作成      |
+    | ドロップテーブル    | DDL   | テーブルドロップイベント        |
+    | テーブルを切り捨てる  | DDL   | テーブル イベントの切り捨て      |
+    | テーブルの名前を変更  | DDL   | テーブルイベントの名前変更       |
+    | ドロップ インデックス | DDL   | ドロップ インデックス イベント    |
+    | 他の机         | DDL   | テーブル変更イベント          |
 
--   `sql-pattern` ：指定されたDDLSQLステートメントをフィルター処理します。マッチングルールは、正規表現の使用をサポートしています。
+-   `sql-pattern` : 指定された DDL SQL ステートメントをフィルター処理します。一致ルールは、正規表現の使用をサポートしています。
 
--   `action` ： `Do`または`Ignore`
+-   `action` : `Do`または`Ignore`
 
-    -   `Do` ：許可リスト。次の2つの条件のいずれかを満たす場合、binlogイベントが複製されます。
-
-        -   イベントはルール設定と一致します。
-        -   sql-patternが指定されており、イベントのSQLステートメントがどのsql-patternオプションとも一致します。
-
-    -   `Ignore` ：ブロックリスト。次の2つの条件のいずれかを満たす場合、binlogイベントは除外されます。
+    -   `Do` : 許可リスト。次の 2 つの条件のいずれかを満たす場合、binlog イベントはレプリケートされます。
 
         -   イベントはルール設定と一致します。
-        -   sql-patternが指定されており、イベントのSQLステートメントがどのsql-patternオプションとも一致します。
+        -   sql-pattern が指定されており、イベントの SQL ステートメントが sql-pattern オプションのいずれかに一致します。
 
-    `Do`と`Ignore`の両方が構成されている場合、 `Ignore`は`Do`よりも優先されます。つまり、 `Ignore`と`Do`の両方の条件を満たすイベントは除外されます。
+    -   `Ignore` : ブロック リスト。次の 2 つの条件のいずれかを満たす場合、binlog イベントは除外されます。
 
-## アプリケーションシナリオ {#application-scenarios}
+        -   イベントはルール設定と一致します。
+        -   sql-pattern が指定されており、イベントの SQL ステートメントが sql-pattern オプションのいずれかに一致します。
 
-このセクションでは、binlogイベントフィルターのアプリケーションシナリオについて説明します。
+    `Do`と`Ignore`の両方が構成されている場合、 `Ignore`は`Do`よりも優先度が高くなります。つまり、 `Ignore`と`Do`の両方の条件を満たすイベントが除外されます。
+
+## アプリケーション シナリオ {#application-scenarios}
+
+このセクションでは、binlog イベント フィルターのアプリケーション シナリオについて説明します。
 
 ### すべてのシャーディング削除操作を除外します {#filter-out-all-sharding-deletion-operations}
 
@@ -88,9 +88,9 @@ filters:
     action: Ignore
 ```
 
-### シャーディングされたスキーマとテーブルのDML操作のみを移行します {#migrate-only-dml-operations-of-sharded-schemas-and-tables}
+### シャードされたスキーマとテーブルの DML 操作のみを移行する {#migrate-only-dml-operations-of-sharded-schemas-and-tables}
 
-DMLステートメントのみを複製するには、以下に示すように2つの`Binlog event filter rule`を構成します。
+DML ステートメントのみをレプリケートするには、以下に示すように 2 つの`Binlog event filter rule`を構成します。
 
 ```
 filters:
@@ -105,9 +105,9 @@ filters:
     action: Do
 ```
 
-### TiDBでサポートされていないSQLステートメントを除外する {#filter-out-sql-statements-not-supported-by-tidb}
+### TiDB でサポートされていない SQL ステートメントを除外する {#filter-out-sql-statements-not-supported-by-tidb}
 
-TiDBでサポートされていないSQLステートメントを除外するには、以下に示すように`filter-procedure-rule`を構成します。
+TiDB でサポートされていない SQL ステートメントを除外するには、以下に示すように`filter-procedure-rule`を構成します。
 
 ```
 filters:
@@ -119,8 +119,8 @@ filters:
 
 > **警告：**
 >
-> 移行する必要のあるデータが除外されないようにするには、グローバルフィルタリングルールをできるだけ厳密に構成します。
+> 移行する必要のあるデータを除外しないようにするには、グローバル フィルタリング ルールをできるだけ厳密に構成します。
 
-## も参照してください {#see-also}
+## こちらもご覧ください {#see-also}
 
-[SQL式を使用してBinlogイベントをフィルタリングする](/filter-dml-event.md)
+[SQL 式を使用してBinlogイベントをフィルタリングする](/filter-dml-event.md)

@@ -3,27 +3,27 @@ title: SET ROLE | TiDB SQL Statement Reference
 summary: An overview of the usage of SET ROLE for the TiDB database.
 ---
 
-# 役割を設定する {#set-role}
+# ロールを設定 {#set-role}
 
-`SET ROLE`ステートメントは、現在のセッションでロールを有効にするために使用されます。ロールを有効にした後、ユーザーはロールの権限を使用できます。
+`SET ROLE`ステートメントは、現在のセッションでロールを有効にするために使用されます。ロールを有効にすると、ユーザーはロールの権限を使用できます。
 
 ## あらすじ {#synopsis}
 
-**SetRoleStmt：**
+**SetRoleStmt:**
 
 ![SetRoleStmt](/media/sqlgram/SetRoleStmt.png)
 
-**SetRoleOpt：**
+**SetRoleOpt:**
 
 ![SetRoleOpt](/media/sqlgram/SetRoleOpt.png)
 
-**SetDefaultRoleOpt：**
+**SetDefaultRoleOpt:**
 
 ![SetDefaultRoleOpt](/media/sqlgram/SetDefaultRoleOpt.png)
 
 ## 例 {#examples}
 
-ユーザー`'u1'@'%'`と`'r3'@'%'`つの役割（ `'r1'@'%'` ）を作成し`'r2'@'%'` 。これらの役割を`'u1'@'%'`に付与し、 `'r1'@'%'`をデフォルトの役割`'u1'@'%'`として設定します。
+ユーザー`'u1'@'%'`と 3 つのロール ( `'r1'@'%'` 、 `'r2'@'%'` 、および`'r3'@'%'` ) を作成します。これらのロールを`'u1'@'%'`に付与し、 `'r1'@'%'`をデフォルトのロール`'u1'@'%'`として設定します。
 
 {{< copyable "" >}}
 
@@ -34,7 +34,7 @@ GRANT 'r1', 'r2', 'r3' TO 'u1'@'%';
 SET DEFAULT ROLE 'r1' TO 'u1'@'%';
 ```
 
-`'u1'@'%'`としてログインし、次の`SET ROLE`のステートメントを実行して、すべての役割を有効にします。
+`'u1'@'%'`としてログインし、次の`SET ROLE`のステートメントを実行してすべてのロールを有効にします。
 
 {{< copyable "" >}}
 
@@ -52,7 +52,7 @@ SELECT CURRENT_ROLE();
 1 row in set (0.000 sec)
 ```
 
-次の`SET ROLE`のステートメントを実行して、 `'r2'`と`'r3'`を有効にします。
+`'r2'`と`'r3'`を有効にするには、次の`SET ROLE`ステートメントを実行します。
 
 {{< copyable "" >}}
 
@@ -88,7 +88,7 @@ SELECT CURRENT_ROLE();
 1 row in set (0.000 sec)
 ```
 
-次の`SET ROLE`のステートメントを実行して、有効なすべての役割をキャンセルします。
+次の`SET ROLE`のステートメントを実行して、有効なすべてのロールをキャンセルします。
 
 {{< copyable "" >}}
 
@@ -106,20 +106,20 @@ SELECT CURRENT_ROLE();
 1 row in set (0.000 sec)
 ```
 
-## MySQLの互換性 {#mysql-compatibility}
+## MySQL の互換性 {#mysql-compatibility}
 
-このステートメントは、MySQL8.0の機能であるロールと完全に互換性があると理解されています。互換性の違いは、GitHubでは[問題を介して報告された](https://github.com/pingcap/tidb/issues/new/choose)である必要があります。
+このステートメントは、MySQL 8.0 の機能であるロールと完全に互換性があると理解されています。互換性の違いは、GitHub で[問題を介して報告された](https://github.com/pingcap/tidb/issues/new/choose)にする必要があります。
 
-## も参照してください {#see-also}
+## こちらもご覧ください {#see-also}
 
--   [役割の作成](/sql-statements/sql-statement-create-role.md)
--   [ドロップロール](/sql-statements/sql-statement-drop-role.md)
+-   [役割を作成](/sql-statements/sql-statement-create-role.md)
+-   [ロールを削除](/sql-statements/sql-statement-drop-role.md)
 -   [`GRANT &#x3C;role>`](/sql-statements/sql-statement-grant-role.md)
 -   [`REVOKE &#x3C;role>`](/sql-statements/sql-statement-revoke-role.md)
 -   [デフォルトの役割を設定](/sql-statements/sql-statement-set-default-role.md)
 
 <CustomContent platform="tidb">
 
--   [ロールベースのアクセス制御](/role-based-access-control.md)
+-   [役割ベースのアクセス制御](/role-based-access-control.md)
 
 </CustomContent>

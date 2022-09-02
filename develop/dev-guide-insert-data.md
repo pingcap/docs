@@ -13,7 +13,7 @@ summary: Learn about how to insert data.
 
 このドキュメントを読む前に、次の準備が必要です。
 
--   [TiDB Cloud(開発者層) で TiDB クラスターを構築する](/develop/dev-guide-build-cluster-in-cloud.md) .
+-   [TiDB Cloud(開発者層) で TiDBクラスタを構築する](/develop/dev-guide-build-cluster-in-cloud.md) .
 -   [スキーマ設計の概要](/develop/dev-guide-schema-design-overview.md) 、 [データベースを作成する](/develop/dev-guide-create-database.md) 、 [テーブルを作成する](/develop/dev-guide-create-table.md) 、および[セカンダリ インデックスの作成](/develop/dev-guide-create-secondary-indexes.md)を読み取る
 
 ## 行を挿入する {#insert-rows}
@@ -50,7 +50,7 @@ CREATE TABLE `player` (`id` INT, `coins` INT, `goods` INT);
 INSERT INTO `player` (`id`, `coins`, `goods`) VALUES (1, 1000, 1), (2, 230, 2);
 ```
 
-この SQL の使用方法の詳細については、 [TiDB クラスターへの接続](/develop/dev-guide-build-cluster-in-cloud.md#step-2-connect-to-a-cluster)を参照し、クライアントを使用して TiDBクラスタに接続した後、手順に従って SQL ステートメントを入力します。
+この SQL の使用方法の詳細については、 [TiDBクラスタへの接続](/develop/dev-guide-build-cluster-in-cloud.md#step-2-connect-to-a-cluster)を参照し、クライアントを使用して TiDB クラスターに接続した後、手順に従って SQL ステートメントを入力します。
 
 </div>
 
@@ -84,7 +84,7 @@ try (Connection connection = ds.getConnection()) {
 }
 ```
 
-デフォルトの MySQL JDBCDriver設定のため、一括挿入のパフォーマンスを向上させるには、いくつかのパラメーターを変更する必要があります。
+デフォルトの MySQL JDBCDriver設定により、一括挿入のパフォーマンスを向上させるには、いくつかのパラメーターを変更する必要があります。
 
 |            パラメータ           |                 意味                 |                                                                   推奨シナリオ                                                                  |  推奨Configuration / コンフィグレーション |
 | :------------------------: | :--------------------------------: | :---------------------------------------------------------------------------------------------------------------------------------------: | :---------------------------: |
@@ -208,7 +208,7 @@ Golang での完全な例については、以下を参照してください。
 
 ## 一括挿入 {#bulk-insert}
 
-大量のデータを TiDBクラスタにすばやくインポートする必要がある場合は、データ移行のために**PingCAP**が提供するさまざまなツールを使用することをお勧めします。 `INSERT`ステートメントを使用することは、効率的ではなく、例外やその他の問題を自分で処理する必要があるため、最善の方法ではありません。
+大量のデータを TiDB クラスターにすばやくインポートする必要がある場合は、データ移行のために**PingCAP**が提供するさまざまなツールを使用することをお勧めします。 `INSERT`ステートメントを使用することは、効率的ではなく、例外やその他の問題を自分で処理する必要があるため、最善の方法ではありません。
 
 一括挿入に推奨されるツールは次のとおりです。
 

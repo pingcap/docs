@@ -3,32 +3,32 @@ title: Back Up and Restore Data on Amazon S3 Using BR
 summary: Learn how to use BR to back up data to and restore data from Amazon S3 storage.
 ---
 
-# BRを使用してAmazonS3でデータをバックアップおよび復元する {#back-up-and-restore-data-on-amazon-s3-using-br}
+# BR を使用して Amazon S3 でデータをバックアップおよび復元する {#back-up-and-restore-data-on-amazon-s3-using-br}
 
-Backup＆Restore（BR）ツールは、データをバックアップおよび復元するための外部ストレージとして、AmazonS3または他のAmazonS3互換のファイルストレージの使用をサポートします。
+バックアップと復元 (BR) ツールは、Amazon S3 またはその他の Amazon S3 互換ファイル ストレージを、データのバックアップと復元用の外部ストレージとして使用することをサポートしています。
 
-## アプリケーションシナリオ {#application-scenarios}
+## アプリケーション シナリオ {#application-scenarios}
 
-Amazon S3を使用すると、AmazonEC2にデプロイされたTiDBクラスタのデータをAmazonS3にすばやくバックアップしたり、AmazonS3のバックアップデータからTiDBクラスタをすばやく復元したりできます。
+Amazon S3 を使用すると、Amazon EC2 にデプロイされた TiDB クラスターのデータを Amazon S3 にすばやくバックアップしたり、Amazon S3 のバックアップ データから TiDB クラスターをすばやく復元したりできます。
 
-## S3にアクセスするための特権を設定します {#configure-privileges-to-access-s3}
+## S3 にアクセスする権限を設定する {#configure-privileges-to-access-s3}
 
-S3を使用してバックアップまたは復元を実行する前に、S3にアクセスするために必要な権限を設定する必要があります。
+S3 を使用してバックアップまたは復元を実行する前に、S3 へのアクセスに必要な権限を構成する必要があります。
 
-### S3ディレクトリへのアクセスを設定します {#configure-access-to-the-s3-directory}
+### S3 ディレクトリへのアクセスを構成する {#configure-access-to-the-s3-directory}
 
-バックアップする前に、S3のバックアップディレクトリにアクセスするために次の権限を設定します。
+バックアップの前に、S3 のバックアップ ディレクトリにアクセスするために次の権限を設定します。
 
--   バックアップ中に`s3:ListBucket` 、および`s3:PutObject`のバックアップディレクトリにアクセスするための`s3:AbortMultipartUpload`およびBRの最小特権
--   復元中にTiKVとBRが`s3:ListBucket`と`s3:GetObject`のバックアップディレクトリにアクセスするための最小権限
+-   バックアップ中に TiKV および BR が`s3:ListBucket` 、 `s3:PutObject` 、および`s3:AbortMultipartUpload`のバックアップ ディレクトリにアクセスするための最小権限
+-   TiKV と BR が復元時に`s3:ListBucket`と`s3:GetObject`のバックアップ ディレクトリにアクセスするための最小限の権限
 
-バックアップディレクトリをまだ作成していない場合は、 [AWS公式ドキュメント](https://docs.aws.amazon.com/AmazonS3/latest/userguide/create-bucket-overview.html)を参照して、指定したリージョンにS3バケットを作成します。必要に応じて、 [AWS公式ドキュメント-フォルダの作成](https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-folders.html)を参照してバケット内にフォルダを作成することもできます。
+バックアップ ディレクトリをまだ作成していない場合は、 [AWS 公式ドキュメント](https://docs.aws.amazon.com/AmazonS3/latest/userguide/create-bucket-overview.html)を参照して、指定したリージョンに S3 バケットを作成します。必要に応じて、 [AWS 公式ドキュメント - フォルダーの作成](https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-folders.html)を参照してバケットにフォルダーを作成することもできます。
 
-### S3にアクセスするようにユーザーを設定します {#configure-a-user-to-access-s3}
+### S3 にアクセスするようにユーザーを構成する {#configure-a-user-to-access-s3}
 
-次のいずれかの方法を使用して、S3へのアクセスを設定することをお勧めします。
+次のいずれかの方法を使用して、S3 へのアクセスを構成することをお勧めします。
 
--   S3にアクセスできるIAMロールを、TiKVノードとBRノードが実行されているEC2インスタンスに関連付けます。アソシエーション後、BRはS3のバックアップディレクトリにアクセスできます。
+-   S3 にアクセスできるIAMロールを、TiKV および BR ノードが実行される EC2 インスタンスに関連付けます。関連付け後、BR は S3 のバックアップ ディレクトリにアクセスできます。
 
     {{< copyable "" >}}
 
@@ -36,7 +36,7 @@ S3を使用してバックアップまたは復元を実行する前に、S3に�
     br backup full --pd "${PDIP}:2379" --storage "s3://${Bucket}/${Folder}" --s3.region "${region}"
     ```
 
--   `br` CLIでS3にアクセスするために`access-key`と`secret-access-key`を設定し、BRから各TiKVにアクセスキーを渡すように`--send-credentials-to-tikv=true`を設定します。
+-   `br` CLI で S3 にアクセスするために`access-key`と`secret-access-key`を設定し、 `--send-credentials-to-tikv=true`を設定して BR から各 TiKV にアクセス キーを渡します。
 
     {{< copyable "" >}}
 
@@ -44,9 +44,9 @@ S3を使用してバックアップまたは復元を実行する前に、S3に�
     br backup full --pd "${PDIP}:2379" --storage "s3://${Bucket}/${Folder}?access-key=${accessKey}&secret-access-key=${secretAccessKey}" --s3.region "${region}" --send-credentials-to-tikv=true
     ```
 
-コマンドのアクセスキーはリークに対して脆弱であるため、S3にアクセスするにはIAMロールをEC2インスタンスに関連付けることをお勧めします。
+コマンドのアクセス キーは漏洩しやすいため、 IAMロールを EC2 インスタンスに関連付けて S3 にアクセスすることをお勧めします。
 
-## データをS3にバックアップする {#back-up-data-to-s3}
+## データを S3 にバックアップする {#back-up-data-to-s3}
 
 {{< copyable "" >}}
 
@@ -60,12 +60,12 @@ br backup full \
     --log-file backuptable.log
 ```
 
-前のコマンドの場合：
+前述のコマンドでは:
 
--   `--s3.region` ：S3の領域を指定します。
--   `--send-credentials-to-tikv` ：アクセスキーがTiKVノードに渡されることを指定します。
+-   `--s3.region` : S3 の領域を指定します。
+-   `--send-credentials-to-tikv` : アクセス キーが TiKV ノードに渡されることを指定します。
 
-## S3からデータを復元する {#restore-data-from-s3}
+## S3 からデータを復元する {#restore-data-from-s3}
 
 ```shell
 br restore full \
@@ -77,6 +77,6 @@ br restore full \
     --log-file restorefull.log
 ```
 
-## も参照してください {#see-also}
+## こちらもご覧ください {#see-also}
 
-BRでサポートされている外部ストレージの詳細については、 [外部ストレージ](/br/backup-and-restore-storages.md)を参照してください。
+BR がサポートする外部ストレージの詳細については、 [外部ストレージ](/br/backup-and-restore-storages.md)を参照してください。

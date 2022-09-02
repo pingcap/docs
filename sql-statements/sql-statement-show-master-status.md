@@ -5,7 +5,7 @@ summary: An overview of the usage of SHOW MASTER STATUS for the TiDB database.
 
 # マスターステータスを表示 {#show-master-status}
 
-`SHOW MASTER STATUS`ステートメントは、クラスタの最新のTSOを表示します。
+`SHOW MASTER STATUS`ステートメントは、クラスター内の最新の TSO を表示します。
 
 ## 例 {#examples}
 
@@ -24,13 +24,13 @@ SHOW MASTER STATUS;
 1 row in set (0.00 sec)
 ```
 
-## MySQLの互換性 {#mysql-compatibility}
+## MySQL の互換性 {#mysql-compatibility}
 
-`SHOW MASTER STATUS`の出力は、MySQLと一致するように設計されています。ただし、実行結果は、MySQLの結果がbinlogの場所情報であり、TiDBの結果が最新のTSO情報であるという点で異なります。
+`SHOW MASTER STATUS`の出力は、MySQL と一致するように設計されています。ただし、実行結果は、MySQL の結果が binlog の場所情報であり、TiDB の結果が最新の TSO 情報であるという点で異なります。
 
-## も参照してください {#see-also}
+## こちらもご覧ください {#see-also}
 
--   [ポンプステータスを表示](/sql-statements/sql-statement-show-pump-status.md)
--   [ドレイナーステータスを表示](/sql-statements/sql-statement-show-drainer-status.md)
+-   [ポンプの状態を表示](/sql-statements/sql-statement-show-pump-status.md)
+-   [ドレイナーのステータスを表示](/sql-statements/sql-statement-show-drainer-status.md)
 -   [ポンプステータスの変更](/sql-statements/sql-statement-change-pump.md)
 -   [ドレイナーステータスの変更](/sql-statements/sql-statement-change-drainer.md)

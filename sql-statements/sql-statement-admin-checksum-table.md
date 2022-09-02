@@ -4,9 +4,9 @@ summary: An overview of the usage of ADMIN for the TiDB database.
 category: reference
 ---
 
-# 管理チェックサムテーブル {#admin-checksum-table}
+# 管理者チェックサム テーブル {#admin-checksum-table}
 
-`ADMIN CHECKSUM TABLE`ステートメントは、テーブルのデータとインデックスのCRC64チェックサムを計算します。このステートメントは、インポート操作が正常に完了したことを確認するためにTiDB Lightningなどのプログラムによって使用されます。
+`ADMIN CHECKSUM TABLE`ステートメントは、テーブルのデータとインデックスの CRC64 チェックサムを計算します。このステートメントは、インポート操作が正常に完了したことを確認するために、 TiDB Lightningなどのプログラムで使用されます。
 
 ## あらすじ {#synopsis}
 
@@ -47,6 +47,6 @@ mysql> ADMIN CHECKSUM TABLE t1;
 1 row in set (0.00 sec)
 ```
 
-## MySQLの互換性 {#mysql-compatibility}
+## MySQL の互換性 {#mysql-compatibility}
 
-このステートメントは、MySQL構文のTiDB拡張です。
+このステートメントは、MySQL 構文に対する TiDB 拡張です。

@@ -3,22 +3,22 @@ title: TiDB Limitations
 summary: Learn the usage limitations of TiDB.
 ---
 
-# TiDBの制限 {#tidb-limitations}
+# TiDB の制限事項 {#tidb-limitations}
 
-このドキュメントでは、サポートされるデータベース、テーブル、インデックス、パーティションテーブル、シーケンスの最大識別子の長さや最大数など、TiDBの一般的な使用制限について説明します。
+このドキュメントでは、識別子の最大長、サポートされるデータベース、テーブル、インデックス、分割テーブル、シーケンスの最大数など、TiDB の一般的な使用制限について説明します。
 
 ## 識別子の長さの制限 {#limitations-on-identifier-length}
 
-| 識別子の種類 | 最大長（許可される文字数） |
-| :----- | :------------ |
-| データベース | 64            |
-| テーブル   | 64            |
-| カラム    | 64            |
-| 索引     | 64            |
-| ビュー    | 64            |
-| 順序     | 64            |
+| 識別子の種類 | 最大長 (許容される文字数) |
+| :----- | :------------- |
+| データベース | 64             |
+| テーブル   | 64             |
+| カラム    | 64             |
+| 索引     | 64             |
+| ビュー    | 64             |
+| 順序     | 64             |
 
-## データベース、テーブル、ビュー、および接続の総数の制限 {#limitations-on-the-total-number-of-databases-tables-views-and-connections}
+## データベース、テーブル、ビュー、および接続の合計数に関する制限 {#limitations-on-the-total-number-of-databases-tables-views-and-connections}
 
 | 識別子の種類 | 最大数 |
 | :----- | :-- |
@@ -27,66 +27,66 @@ summary: Learn the usage limitations of TiDB.
 | ビュー    | 無制限 |
 | 接続     | 無制限 |
 
-## 単一のデータベースの制限 {#limitations-on-a-single-database}
+## 単一データベースの制限 {#limitations-on-a-single-database}
 
 | タイプ  | 上限  |
 | :--- | :-- |
 | テーブル | 無制限 |
 
-## 単一のテーブルの制限 {#limitations-on-a-single-table}
+## 単一テーブルの制限 {#limitations-on-a-single-table}
 
-| タイプ     | 上限（デフォルト値）                  |
-| :------ | :-------------------------- |
-| 列       | デフォルトは1017で、最大4096まで調整できます。 |
-| インデックス  | デフォルトは64で、最大512まで調整できます。    |
-| 行       | 無制限                         |
-| サイズ     | 無制限                         |
-| パーティション | 8192                        |
+| タイプ     | 上限（デフォルト値）                     |
+| :------ | :----------------------------- |
+| コラム     | デフォルトは 1017 で、最大 4096 まで調整できます |
+| インデックス  | デフォルトは 64 で、最大 512 まで調整できます    |
+| 行       | 無制限                            |
+| サイズ     | 無制限                            |
+| パーティション | 8192                           |
 
 <CustomContent platform="tidb">
 
--   `Columns`の上限は[`table-column-count-limit`](/tidb-configuration-file.md#table-column-count-limit-new-in-v50)を介して変更できます。
--   `Indexes`の上限は[`index-limit`](/tidb-configuration-file.md#index-limit-new-in-v50)を介して変更できます。
+-   `Columns`の上限は[`table-column-count-limit`](/tidb-configuration-file.md#table-column-count-limit-new-in-v50)で変更できます。
+-   `Indexes`の上限は[`index-limit`](/tidb-configuration-file.md#index-limit-new-in-v50)で変更できます。
 
 </CustomContent>
 
-## 単一行の制限 {#limitation-on-a-single-row}
+## 1 行の制限 {#limitation-on-a-single-row}
 
-| タイプ | 上限   |
-| :-- | :--- |
-| サイズ | 6 MB |
+| タイプ | 上限  |
+| :-- | :-- |
+| サイズ | 6MB |
 
 <CustomContent platform="tidb">
 
-サイズ制限は、 [`txn-entry-size-limit`](/tidb-configuration-file.md#txn-entry-size-limit-new-in-v50)の構成アイテムで調整できます。
+[`txn-entry-size-limit`](/tidb-configuration-file.md#txn-entry-size-limit-new-in-v50)構成項目でサイズ制限を調整できます。
 
 </CustomContent>
 
 ## 単一列の制限 {#limitation-on-a-single-column}
 
-| タイプ | 上限   |
-| :-- | :--- |
-| サイズ | 6 MB |
+| タイプ | 上限  |
+| :-- | :-- |
+| サイズ | 6MB |
 
-## 文字列タイプの制限 {#limitations-on-string-types}
+## 文字列型の制限 {#limitations-on-string-types}
 
-| タイプ       | 上限      |
-| :-------- | :------ |
-| CHAR      | 256文字   |
-| バイナリ      | 256文字   |
-| VARBINARY | 65535文字 |
-| VARCHAR   | 16383文字 |
-| 文章        | 6 MB    |
-| BLOB      | 6 MB    |
+| タイプ       | 上限       |
+| :-------- | :------- |
+| CHAR      | 256文字    |
+| バイナリ      | 256文字    |
+| VARBINARY | 65535 文字 |
+| VARCHAR   | 16383 文字 |
+| 文章        | 6MB      |
+| BLOB      | 6MB      |
 
-## SQLステートメントの制限 {#limitations-on-sql-statements}
+## SQL ステートメントの制限 {#limitations-on-sql-statements}
 
-| タイプ                         | 上限                                                  |
-| :-------------------------- | :-------------------------------------------------- |
-| 1回のトランザクションでのSQLステートメントの最大数 | 楽観的トランザクションが使用され、トランザクションの再試行が有効になっている場合、上限は5000です。 |
+| タイプ                            | 上限                                               |
+| :----------------------------- | :----------------------------------------------- |
+| 1 つのトランザクション内の SQL ステートメントの最大数 | 楽観的トランザクションを使用し、トランザクションのリトライが有効な場合、上限は 5000 です。 |
 
 <CustomContent platform="tidb">
 
-[`stmt-count-limit`](/tidb-configuration-file.md#stmt-count-limit)の構成アイテムを使用して制限を変更できます。
+[`stmt-count-limit`](/tidb-configuration-file.md#stmt-count-limit)構成アイテムで制限を変更できます。
 
 </CustomContent>

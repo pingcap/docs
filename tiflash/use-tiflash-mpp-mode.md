@@ -3,33 +3,24 @@ title: Use TiFlash MPP Mode
 summary: Learn the MPP mode of TiFlash and how to use it.
 ---
 
-# TiFlashMPPモードを使用する {#use-tiflash-mpp-mode}
+# TiFlash MPP モードを使用する {#use-tiflash-mpp-mode}
 
-このドキュメントでは、TiFlashのMPPモードとその使用方法を紹介します。
+このドキュメントでは、TiFlash の MPP モードとその使用方法を紹介します。
 
-TiFlashは、MPPモードを使用したクエリの実行をサポートします。これにより、ノード間のデータ交換（データシャッフルプロセス）が計算に導入されます。 TiDBは、オプティマイザのコスト見積もりを使用して、MPPモードを選択するかどうかを自動的に決定します。 [`tidb_allow_mpp`](/system-variables.md#tidb_allow_mpp-new-in-v50)と[`tidb_enforce_mpp`](/system-variables.md#tidb_enforce_mpp-new-in-v51)の値を変更することにより、選択戦略を変更できます。
+TiFlash は、MPP モードを使用してクエリを実行することをサポートしています。これにより、クロスノード データ交換 (データ シャッフル プロセス) が計算に導入されます。 TiDB は、オプティマイザのコスト見積もりを使用して、MPP モードを選択するかどうかを自動的に決定します。 [`tidb_allow_mpp`](/system-variables.md#tidb_allow_mpp-new-in-v50)と[`tidb_enforce_mpp`](/system-variables.md#tidb_enforce_mpp-new-in-v51)の値を変更することで、選択戦略を変更できます。
 
-## MPPモードを選択するかどうかを制御します {#control-whether-to-select-the-mpp-mode}
+## MPP モードを選択するかどうかを制御します {#control-whether-to-select-the-mpp-mode}
 
-`tidb_allow_mpp`変数は、TiDBがクエリを実行するためにMPPモードを選択できるかどうかを制御します。 `tidb_enforce_mpp`変数は、オプティマイザーのコスト見積もりを無視し、TiFlashのMPPモードを強制的に使用してクエリを実行するかどうかを制御します。
+`tidb_allow_mpp`変数は、TiDB が MPP モードを選択してクエリを実行できるかどうかを制御します。 `tidb_enforce_mpp`変数は、オプティマイザーのコスト見積もりを無視し、TiFlash の MPP モードを強制的に使用してクエリを実行するかどうかを制御します。
 
-これら2つの変数のすべての値に対応する結果は次のとおりです。
+これら 2 つの変数のすべての値に対応する結果は次のとおりです。
 
-|                               | tidb_allow_mpp = off | tidb_allow_mpp = on（デフォルト）                 |
-| ----------------------------- | -------------------- | ------------------------------------------ |
-| tidb_enforce_mpp = off（デフォルト） | MPPモードは使用されません。      | オプティマイザは、コスト見積もりに基づいてMPPモードを選択します。 （デフォルト） |
-| tidb_enforce_mpp = on         | MPPモードは使用されません。      | TiDBはコスト見積もりを無視し、MPPモードを選択します。             |
+|                              | tidb_allow_mpp=オフ | tidb_allow_mpp=on (デフォルト)                     |
+| ---------------------------- | ----------------- | --------------------------------------------- |
+| tidb_enforce_mpp=off (デフォルト) | MPP モードは使用されません。  | オプティマイザは、コストの見積もりに基づいて MPP モードを選択します。 (デフォルト) |
+| tidb_enforce_mpp=オン          | MPP モードは使用されません。  | TiDB はコスト見積もりを無視し、MPP モードを選択します。              |
 
-たとえば、MPPモードを使用したくない場合は、次のステートメントを実行できます。
-
-{{< copyable "" >}}
-
-```sql
-set @@session.tidb_allow_mpp=1;
-set @@session.tidb_enforce_mpp=0;
-```
-
-TiDBのコストベースのオプティマイザでMPPモード（デフォルト）を使用するかどうかを自動的に決定する場合は、次のステートメントを実行できます。
+たとえば、MPP モードを使用したくない場合は、次のステートメントを実行できます。
 
 {{< copyable "" >}}
 
@@ -38,7 +29,16 @@ set @@session.tidb_allow_mpp=1;
 set @@session.tidb_enforce_mpp=0;
 ```
 
-TiDBでオプティマイザのコスト見積もりを無視し、MPPモードを強制的に選択する場合は、次のステートメントを実行できます。
+TiDB のコストベースのオプティマイザに、MPP モードを使用するかどうか (デフォルトで) を自動的に決定させたい場合は、次のステートメントを実行できます。
+
+{{< copyable "" >}}
+
+```sql
+set @@session.tidb_allow_mpp=1;
+set @@session.tidb_enforce_mpp=0;
+```
+
+TiDB にオプティマイザーのコスト見積もりを無視させ、MPP モードを強制的に選択させたい場合は、次のステートメントを実行できます。
 
 {{< copyable "" >}}
 
@@ -49,15 +49,15 @@ set @@session.tidb_enforce_mpp=1;
 
 <CustomContent platform="tidb">
 
-`tidb_enforce_mpp`セッション変数の初期値は、このtidb-serverインスタンスの[`enforce-mpp`](/tidb-configuration-file.md#enforce-mpp)構成値（デフォルトでは`false` ）と同じです。 TiDBクラスタの複数のtidb-serverインスタンスが分析クエリのみを実行し、これらのインスタンスでMPPモードが使用されていることを確認する場合は、 [`enforce-mpp`](/tidb-configuration-file.md#enforce-mpp)の構成値を`true`に変更できます。
+`tidb_enforce_mpp`セッション変数の初期値は、この tidb-server インスタンスの[`enforce-mpp`](/tidb-configuration-file.md#enforce-mpp)構成値 (デフォルトでは`false` ) と同じです。 TiDB クラスター内の複数の tidb-server インスタンスが分析クエリのみを実行し、これらのインスタンスで MPP モードが使用されていることを確認したい場合は、それらの[`enforce-mpp`](/tidb-configuration-file.md#enforce-mpp)構成値を`true`に変更できます。
 
 </CustomContent>
 
 > **ノート：**
 >
-> `tidb_enforce_mpp=1`が有効になると、TiDBオプティマイザはコスト見積もりを無視してMPPモードを選択します。ただし、他の要因がMPPモードをブロックしている場合、TiDBはMPPモードを選択しません。これらの要因には、TiFlashレプリカの欠如、TiFlashレプリカの未完了の複製、およびMPPモードでサポートされていない演算子または関数を含むステートメントが含まれます。
+> `tidb_enforce_mpp=1`が有効になると、TiDB オプティマイザーはコスト見積もりを無視して MPP モードを選択します。ただし、他の要因が MPP モードをブロックする場合、TiDB は MPP モードを選択しません。これらの要因には、TiFlash レプリカの不在、TiFlash レプリカの未完成の複製、および MPP モードでサポートされていない演算子または関数を含むステートメントが含まれます。
 >
-> コスト見積もり以外の理由でTiDBオプティマイザがMPPモードを選択できない場合、 `EXPLAIN`ステートメントを使用して実行プランをチェックアウトすると、理由を説明する警告が返されます。例えば：
+> コスト見積もり以外の理由で TiDB オプティマイザーが MPP モードを選択できない場合、 `EXPLAIN`ステートメントを使用して実行計画をチェックアウトすると、その理由を説明する警告が返されます。例えば：
 >
 > {{< copyable "" >}}
 >
@@ -76,11 +76,11 @@ set @@session.tidb_enforce_mpp=1;
 > +---------+------+-----------------------------------------------------------------------------+
 > ```
 
-## MPPモードのアルゴリズムサポート {#algorithm-support-for-the-mpp-mode}
+## MPP モードのアルゴリズム サポート {#algorithm-support-for-the-mpp-mode}
 
-MPPモードは、ブロードキャストハッシュ結合、シャッフルハッシュ結合、シャッフルハッシュ集計、Union All、TopN、およびLimitの物理アルゴリズムをサポートします。オプティマイザーは、クエリで使用するアルゴリズムを自動的に決定します。特定のクエリ実行プランを確認するには、 `EXPLAIN`ステートメントを実行します。 `EXPLAIN`ステートメントの結果にExchangeSenderおよびExchangeReceiver演算子が表示されている場合は、MPPモードが有効になっていることを示しています。
+MPP モードは、ブロードキャスト ハッシュ結合、シャッフル ハッシュ結合、シャッフル ハッシュ集計、Union All、TopN、および Limit の物理アルゴリズムをサポートします。オプティマイザは、クエリで使用するアルゴリズムを自動的に決定します。特定のクエリ実行プランを確認するには、 `EXPLAIN`ステートメントを実行します。 `EXPLAIN`ステートメントの結果が ExchangeSender および ExchangeReceiver オペレーターを示している場合、MPP モードが有効になっていることを示します。
 
-次のステートメントは、例としてTPC-Hテストセットのテーブル構造を取り上げています。
+次のステートメントは、例として TPC-H テスト セットのテーブル構造を取ります。
 
 ```sql
 explain select count(*) from customer c join nation n on c.c_nationkey=n.n_nationkey;
@@ -100,16 +100,16 @@ explain select count(*) from customer c join nation n on c.c_nationkey=n.n_natio
 9 rows in set (0.00 sec)
 ```
 
-実行プランの例には、 `ExchangeReceiver`と`ExchangeSender`の演算子が含まれています。実行プランは、 `nation`テーブルが読み取られた後、 `ExchangeSender`オペレーターがテーブルを各ノードにブロードキャストし、 `HashJoin`および`HashAgg`操作が`nation`テーブルと`customer`テーブルで実行され、結果がTiDBに返されることを示しています。
+実行計画の例では、 `ExchangeReceiver`と`ExchangeSender`の演算子が含まれています。実行計画は、 `nation`テーブルが読み取られた後、 `ExchangeSender`オペレーターがテーブルを各ノードにブロードキャストし、 `nation`テーブルと`customer`テーブルに対して`HashJoin`と`HashAgg`の操作が実行され、結果が TiDB に返されることを示しています。
 
-TiFlashは、ブロードキャストハッシュ結合を使用するかどうかを制御するために、次の2つのグローバル/セッション変数を提供します。
+TiFlash は、ブロードキャスト ハッシュ結合を使用するかどうかを制御するために、次の 2 つのグローバル/セッション変数を提供します。
 
--   [`tidb_broadcast_join_threshold_size`](/system-variables.md#tidb_broadcast_join_threshold_count-new-in-v50) ：値の単位はバイトです。テーブルサイズ（バイト単位）が変数の値よりも小さい場合は、ブロードキャストハッシュ結合アルゴリズムが使用されます。それ以外の場合は、シャッフルハッシュ結合アルゴリズムが使用されます。
--   [`tidb_broadcast_join_threshold_count`](/system-variables.md#tidb_broadcast_join_threshold_count-new-in-v50) ：値の単位は行です。結合操作のオブジェクトがサブクエリに属している場合、オプティマイザはサブクエリ結果セットのサイズを見積もることができないため、サイズは結果セットの行数によって決定されます。サブクエリの推定行数がこの変数の値よりも少ない場合は、ブロードキャストハッシュ結合アルゴリズムが使用されます。それ以外の場合は、シャッフルハッシュ結合アルゴリズムが使用されます。
+-   [`tidb_broadcast_join_threshold_size`](/system-variables.md#tidb_broadcast_join_threshold_count-new-in-v50) : 値の単位はバイトです。テーブル サイズ (バイト単位) が変数の値より小さい場合は、ブロードキャスト ハッシュ結合アルゴリズムが使用されます。それ以外の場合は、Shuffled Hash Join アルゴリズムが使用されます。
+-   [`tidb_broadcast_join_threshold_count`](/system-variables.md#tidb_broadcast_join_threshold_count-new-in-v50) : 値の単位は行です。結合操作のオブジェクトがサブクエリに属している場合、オプティマイザはサブクエリの結果セットのサイズを見積もることができないため、サイズは結果セットの行数によって決定されます。サブクエリの推定行数がこの変数の値より少ない場合、ブロードキャスト ハッシュ結合アルゴリズムが使用されます。それ以外の場合は、Shuffled Hash Join アルゴリズムが使用されます。
 
-## MPPモードでパーティションテーブルにアクセスする {#access-partitioned-tables-in-the-mpp-mode}
+## MPP モードで分割されたテーブルにアクセスする {#access-partitioned-tables-in-the-mpp-mode}
 
-MPPモードでパーティションテーブルにアクセスするには、最初に[動的剪定モード](https://docs.pingcap.com/tidb/stable/partitioned-table#dynamic-pruning-mode)を有効にする必要があります。
+MPP モードで分割されたテーブルにアクセスするには、最初に[動的プルーニング モード](https://docs.pingcap.com/tidb/stable/partitioned-table#dynamic-pruning-mode)を有効にする必要があります。
 
 例：
 

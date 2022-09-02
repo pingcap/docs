@@ -3,11 +3,11 @@ title: Explain Statements That Use Subqueries
 summary: Learn about the execution plan information returned by the EXPLAIN statement in TiDB.
 ---
 
-# サブクエリを使用するステートメントを説明する {#explain-statements-that-use-subqueries}
+# サブクエリを使用するステートメントの説明 {#explain-statements-that-use-subqueries}
 
-TiDBは、サブクエリのパフォーマンスを向上させるために[いくつかの最適化](/subquery-optimization.md)を実行します。このドキュメントでは、一般的なサブクエリに対するこれらの最適化のいくつかと、 `EXPLAIN`の出力を解釈する方法について説明します。
+TiDB はサブクエリのパフォーマンスを向上させるために[いくつかの最適化](/subquery-optimization.md)を実行します。このドキュメントでは、一般的なサブクエリに対するこれらの最適化のいくつかと、 `EXPLAIN`の出力を解釈する方法について説明します。
 
-このドキュメントの例は、次のサンプルデータに基づいています。
+このドキュメントの例は、次のサンプル データに基づいています。
 
 ```sql
 CREATE TABLE t1 (id BIGINT NOT NULL PRIMARY KEY auto_increment, pad1 BLOB, pad2 BLOB, pad3 BLOB, int_col INT NOT NULL DEFAULT 0);
@@ -45,9 +45,9 @@ SELECT SLEEP(1);
 ANALYZE TABLE t1, t2, t3;
 ```
 
-## 内部結合（一意でないサブクエリ） {#inner-join-non-unique-subquery}
+## 内部結合 (一意でないサブクエリ) {#inner-join-non-unique-subquery}
 
-次の例では、 `IN`サブクエリがテーブル`t2`からIDのリストを検索します。セマンティックを正確にするために、TiDBは列`t1_id`が一意であることを保証する必要があります。 `EXPLAIN`を使用すると、重複を削除して`INNER JOIN`操作を実行するために使用される実行プランを確認できます。
+次の例では、 `IN`サブクエリがテーブル`t2`から ID のリストを検索します。セマンティックの正確性のために、TiDB は列`t1_id`が一意であることを保証する必要があります。 `EXPLAIN`を使用すると、重複を削除して`INNER JOIN`操作を実行するために使用される実行計画を確認できます。
 
 ```sql
 EXPLAIN SELECT * FROM t1 WHERE id IN (SELECT t1_id FROM t2);
@@ -69,16 +69,16 @@ EXPLAIN SELECT * FROM t1 WHERE id IN (SELECT t1_id FROM t2);
 8 rows in set (0.00 sec)
 ```
 
-上記のクエリ結果から、TiDBがインデックス結合操作`| IndexJoin_14`を使用して、サブクエリを結合および変換していることがわかります。実行プランでは、実行プロセスは次のとおりです。
+上記のクエリ結果から、TiDB がインデックス結合操作`| IndexJoin_14`を使用してサブクエリを結合および変換していることがわかります。実行計画では、実行プロセスは次のとおりです。
 
-1.  TiKV側のインデックススキャンオペレータ`└─IndexFullScan_31`は、 `t2.t1_id`列の値を読み取ります。
-2.  `└─StreamAgg_39`演算子の一部のタスクは、TiKVの`t1_id`の値を重複排除します。
-3.  `├─StreamAgg_49(Build)`演算子の一部のタスクは、TiDBの`t1_id`の値を重複排除します。重複排除は、集計関数`firstrow(test.t2.t1_id)`によって実行されます。
-4.  演算結果は、 `t1`テーブルの主キーと結合されます。結合条件は`eq(test.t1.id, test.t2.t1_id)`です。
+1.  TiKV 側のインデックススキャンオペレータ`└─IndexFullScan_31`は、 `t2.t1_id`列の値を読み取ります。
+2.  `└─StreamAgg_39`オペレーターの一部のタスクは、TiKV の`t1_id`の値を重複排除します。
+3.  `├─StreamAgg_49(Build)`オペレーターのいくつかのタスクは、TiDB で`t1_id`の値を重複排除します。重複排除は集約機能`firstrow(test.t2.t1_id)`によって行われる。
+4.  演算結果は`t1`テーブルの主キーに結合されます。結合条件は`eq(test.t1.id, test.t2.t1_id)`です。
 
-## 内部結合（一意のサブクエリ） {#inner-join-unique-subquery}
+## 内部結合 (一意のサブクエリ) {#inner-join-unique-subquery}
 
-前の例では、テーブル`t1`に対して結合する前に、 `t1_id`の値が一意であることを確認するために集計が必要です。ただし、次の例では、 `UNIQUE`の制約があるため、 `t3.t1_id`はすでに一意であることが保証されています。
+前の例では、テーブル`t1`に対して結合する前に、 `t1_id`の値が一意であることを確認するために集計が必要です。ただし、次の例では、 `UNIQUE`の制約により、 `t3.t1_id`は既に一意であることが保証されています。
 
 ```sql
 EXPLAIN SELECT * FROM t1 WHERE id IN (SELECT t1_id FROM t3);
@@ -98,13 +98,13 @@ EXPLAIN SELECT * FROM t1 WHERE id IN (SELECT t1_id FROM t3);
 6 rows in set (0.01 sec)
 ```
 
-意味的には、 `t3.t1_id`は一意であることが保証されているため、 `INNER JOIN`として直接実行できます。
+意味的に`t3.t1_id`は一意であることが保証されているため、 `INNER JOIN`として直接実行できます。
 
-## 半結合（相関サブクエリ） {#semi-join-correlated-subquery}
+## 準結合 (相関サブクエリ) {#semi-join-correlated-subquery}
 
-前の2つの例では、サブクエリ内のデータが（ `StreamAgg`を介して）一意になるか、一意であることが保証された後、TiDBは`INNER JOIN`操作を実行できます。両方の結合は、インデックス結合を使用して実行されます。
+前の 2 つの例では、TiDB は、サブクエリ内のデータが ( `StreamAgg`によって) 一意になるか、一意であることが保証された後、 `INNER JOIN`操作を実行できます。両方の結合は、Index Join を使用して実行されます。
 
-この例では、TiDBは別の実行プランを選択します。
+この例では、TiDB は別の実行計画を選択します。
 
 ```sql
 EXPLAIN SELECT * FROM t1 WHERE id IN (SELECT t1_id FROM t2 WHERE t1_id != t1.int_col);
@@ -124,13 +124,13 @@ EXPLAIN SELECT * FROM t1 WHERE id IN (SELECT t1_id FROM t2 WHERE t1_id != t1.int
 6 rows in set (0.00 sec)
 ```
 
-上記の結果から、TiDBが`Semi Join`アルゴリズムを使用していることがわかります。半結合は内部結合とは異なります。半結合では、右側のキー（ `t2.t1_id` ）の最初の値のみが許可されます。これは、結合演算子タスクの一部として重複が排除されることを意味します。結合アルゴリズムもマージ結合です。これは、オペレーターが左側と右側の両方から並べ替えられた順序でデータを読み取るため、効率的なジッパーマージのようなものです。
+上記の結果から、TiDB が`Semi Join`アルゴリズムを使用していることがわかります。半結合は内部結合とは異なります。半結合は右側のキー ( `t2.t1_id` ) の最初の値のみを許可します。つまり、重複は結合演算子タスクの一部として削除されます。結合アルゴリズムも Merge Join です。これは、演算子がソートされた順序で左側と右側の両方からデータを読み取るため、効率的なジッパー マージのようなものです。
 
-サブクエリはサブクエリの外部に存在する列（ `t1.int_col` ）を参照するため、元のステートメントは*相関サブクエリ*と見なされます。ただし、 `EXPLAIN`の出力は、 [サブクエリの無相関化の最適化](/correlated-subquery-optimization.md)が適用された後の実行プランを示しています。条件`t1_id != t1.int_col`は`t1.id != t1.int_col`に書き換えられます。 TiDBはテーブル`t1`からデータを読み取るため、 `└─Selection_21`でこれを実行できるため、この非相関化と書き換えにより、実行がはるかに効率的になります。
+サブクエリはサブクエリの外部に存在する列 ( `t1.int_col` ) を参照するため、元のステートメントは*相関サブクエリ*と見なされます。ただし、 `EXPLAIN`の出力は、 [サブクエリ非相関最適化](/correlated-subquery-optimization.md)が適用された後の実行計画を示しています。条件`t1_id != t1.int_col`を`t1.id != t1.int_col`に書き換える。 TiDB は、テーブルからデータを読み取るときに`└─Selection_21`でこれを実行できます`t1` 。
 
-## 反半結合（サブクエリで<code>NOT IN</code> ） {#anti-semi-join-code-not-in-code-subquery}
+## 反準結合 ( <code>NOT IN</code>サブクエリ) {#anti-semi-join-code-not-in-code-subquery}
 
-次の例では、サブクエリに`t3.t1_id`が含まれてい*ない限り*、クエリはテーブル`t3`のすべての行を意味的に返します。
+次の例では、サブクエリに`t3.t1_id`が*ない限り*、クエリは意味的にテーブル`t3`からすべての行を返します。
 
 ```sql
 EXPLAIN SELECT * FROM t3 WHERE t1_id NOT IN (SELECT id FROM t1 WHERE int_col < 100);
@@ -150,4 +150,4 @@ EXPLAIN SELECT * FROM t3 WHERE t1_id NOT IN (SELECT id FROM t1 WHERE int_col < 1
 6 rows in set (0.00 sec)
 ```
 
-このクエリは、テーブル`t3`を読み取ることから始まり、 `PRIMARY KEY`に基づいてテーブル`t1`をプローブします。結合タイプは*反半結合*です。この例は、値（ `NOT IN` ）が存在しないためのものであり、結合が拒否される前に最初の行のみが一致する必要があるため、半結合するためです。
+このクエリは、最初にテーブル`t3`を読み取り、次に`PRIMARY KEY`に基づいてテーブル`t1`をプローブします。結合タイプは*アンチセミ結合*です。 anti-この例は値 ( `NOT IN` ) が存在しないためであり、半結合は、結合が拒否される前に最初の行のみが一致する必要があるためです。

@@ -5,7 +5,7 @@ summary: Learn the `TIKV_REGION_STATUS` information_schema table.
 
 # TIKV_REGION_STATUS {#tikv-region-status}
 
-`TIKV_REGION_STATUS`の表は、PDのAPIを介したTiKVリージョンの基本情報（リージョンID、開始キー値と終了キー値、読み取りおよび書き込みトラフィックなど）を示しています。
+`TIKV_REGION_STATUS`の表は、PD の API を介した TiKV リージョンのいくつかの基本情報を示しています。たとえば、リージョンID、キー値の開始と終了、読み取りトラフィックと書き込みトラフィックなどです。
 
 {{< copyable "" >}}
 
@@ -39,29 +39,29 @@ DESC tikv_region_status;
 17 rows in set (0.00 sec)
 ```
 
-`TIKV_REGION_STATUS`表の列の説明は次のとおりです。
+`TIKV_REGION_STATUS`テーブルの列の説明は次のとおりです。
 
--   `REGION_ID` ：リージョンのID。
--   `START_KEY` ：リージョンの開始キーの値。
--   `END_KEY` ：リージョンの終了キーの値。
--   `TABLE_ID` ：リージョンが属するテーブルのID。
--   `DB_NAME` ： `TABLE_ID`が属するデータベースの名前。
--   `TABLE_NAME` ：リージョンが属するテーブルの名前。
--   `IS_INDEX` ：リージョンデータがインデックスかどうか。 0はインデックスではないことを意味し、1はインデックスであることを意味します。現在のリージョンにテーブルデータとインデックスデータの両方が含まれている場合、レコードの行は複数あり、 `IS_INDEX`はそれぞれ0と1です。
--   `INDEX_ID` ：リージョンが属するインデックスのID。 `IS_INDEX`が0の場合、この列の値はNULLです。
--   `INDEX_NAME` ：リージョンが属するインデックスの名前。 `IS_INDEX`が0の場合、この列の値はNULLです。
--   `EPOCH_CONF_VER` ：リージョン構成のバージョン番号。ピアが追加または削除されると、バージョン番号が増加します。
--   `EPOCH_VERSION` ：リージョンの現在のバージョン番号。リージョンが分割またはマージされると、バージョン番号が増加します。
--   `WRITTEN_BYTES` ：リージョンに書き込まれるデータの量（バイト）。
--   `READ_BYTES` ：リージョンから読み取られたデータの量（バイト）。
--   `APPROXIMATE_SIZE` ：リージョンのおおよそのデータサイズ（MB）。
--   `APPROXIMATE_KEYS` ：リージョン内のキーのおおよその数。
--   `REPLICATIONSTATUS_STATE` ：リージョンの現在のレプリケーションステータス。ステータスは`UNKNOWN` 、または`SIMPLE_MAJORITY`の場合があり`INTEGRITY_OVER_LABEL` 。
--   `REPLICATIONSTATUS_STATEID` ： `REPLICATIONSTATUS_STATE`に対応する識別子。
+-   `REGION_ID` :リージョンの ID。
+-   `START_KEY` : リージョンの開始キーの値。
+-   `END_KEY` : リージョンの終了キーの値。
+-   `TABLE_ID` : リージョンが属するテーブルの ID。
+-   `DB_NAME` : `TABLE_ID`が属するデータベースの名前。
+-   `TABLE_NAME` :リージョンが属するテーブルの名前。
+-   `IS_INDEX` : リージョンデータがインデックスかどうか。 0 はインデックスではないことを意味し、1 はインデックスであることを意味します。現在のリージョンにテーブル データとインデックス データの両方が含まれている場合、複数のレコード行があり、 `IS_INDEX`はそれぞれ 0 と 1 です。
+-   `INDEX_ID` :リージョンが属するインデックスの ID。 `IS_INDEX`が 0 の場合、この列の値は NULL です。
+-   `INDEX_NAME` :リージョンが属するインデックスの名前。 `IS_INDEX`が 0 の場合、この列の値は NULL です。
+-   `EPOCH_CONF_VER` :リージョン構成のバージョン番号。ピアが追加または削除されると、バージョン番号が増加します。
+-   `EPOCH_VERSION` : リージョンの現在のバージョン番号。リージョンが分割またはマージされると、バージョン番号が増加します。
+-   `WRITTEN_BYTES` : リージョンに書き込まれたデータ (バイト) の量。
+-   `READ_BYTES` : リージョンから読み取られたデータの量 (バイト)。
+-   `APPROXIMATE_SIZE` : リージョンのおおよそのデータ サイズ (MB)。
+-   `APPROXIMATE_KEYS` : リージョン内のキーのおおよその数。
+-   `REPLICATIONSTATUS_STATE` :リージョンの現在のレプリケーション ステータス。ステータスは`UNKNOWN` 、 `SIMPLE_MAJORITY` 、または`INTEGRITY_OVER_LABEL`の可能性があります。
+-   `REPLICATIONSTATUS_STATEID` : `REPLICATIONSTATUS_STATE`に対応する識別子。
 
-また、 `ORDER BY X LIMIT Y` `WRITTEN_BYTES` `top write` `top confver` `top read`実装`READ_BYTES` `EPOCH_CONF_VER` 。
+また、 `EPOCH_CONF_VER` 、 `WRITTEN_BYTES` 、および`READ_BYTES`列の`ORDER BY X LIMIT Y`操作を介して、 pd-ctl で`top confver` 、 `top read` 、および`top write`操作を実装できます。
 
-次のSQLステートメントを使用して、書き込みデータが最も多い上位3つのリージョンをクエリできます。
+次の SQL ステートメントを使用して、書き込みデータが最も多い上位 3 つのリージョンを照会できます。
 
 ```sql
 SELECT * FROM tikv_region_status ORDER BY written_bytes DESC LIMIT 3;

@@ -5,11 +5,11 @@ summary: An overview of the usage of SHOW WARNINGS for the TiDB database.
 
 # 警告を表示 {#show-warnings}
 
-このステートメントは、現在のクライアント接続で以前に実行されたステートメントに対して発生した警告のリストを示しています。 MySQLの場合と同様に、 `sql_mode`は、どのステートメントがエラーと警告のどちらを引き起こすかに大きく影響します。
+このステートメントは、現在のクライアント接続で以前に実行されたステートメントに対して発生した警告のリストを表示します。 MySQL と同様に、 `sql_mode`はどのステートメントがエラーと警告を引き起こすかに大きく影響します。
 
 ## あらすじ {#synopsis}
 
-**ShowWarningsStmt：**
+**ShowWarningsStmt:**
 
 ![ShowWarningsStmt](/media/sqlgram/ShowWarningsStmt.png)
 
@@ -73,10 +73,10 @@ mysql> SELECT * FROM t1;
 
 ```
 
-## MySQLの互換性 {#mysql-compatibility}
+## MySQL の互換性 {#mysql-compatibility}
 
-このステートメントは、MySQLと完全に互換性があると理解されています。互換性の違いは、GitHubでは[問題を介して報告された](https://github.com/pingcap/tidb/issues/new/choose)である必要があります。
+このステートメントは、MySQL と完全に互換性があると理解されています。互換性の違いは、GitHub で[問題を介して報告された](https://github.com/pingcap/tidb/issues/new/choose)にする必要があります。
 
-## も参照してください {#see-also}
+## こちらもご覧ください {#see-also}
 
 -   [エラーを表示](/sql-statements/sql-statement-show-errors.md)

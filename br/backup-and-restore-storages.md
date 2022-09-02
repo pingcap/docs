@@ -5,25 +5,25 @@ summary: Describes the storage URL format used in BR, TiDB Lightning, and Dumpli
 
 # 外部ストレージ {#external-storages}
 
-Backup＆Restore（BR）、 TiDB Lightning、およびDumplingは、ローカルファイルシステムとAmazonS3でのデータの読み取りと書き込みをサポートします。 BRは、 [Google Cloud Storage（GCS）](/br/backup-storage-gcs.md)と[Azure Blob Storage（Azblob）](/br/backup-storage-azblob.md)のデータの読み取りと書き込みもサポートしています。これらは、BRに渡される`--storage`パラメーター、 TiDB Lightningに渡される`-d`パラメーター、およびDumplingに渡される`--output` （ `-o` ）パラメーターのURLスキームによって区別されます。
+Backup &amp; Restore (BR)、 TiDB Lightning、およびDumplingは、ローカル ファイルシステムと Amazon S3 でのデータの読み取りと書き込みをサポートしています。 BR は、 [Google クラウド ストレージ (GCS)](/br/backup-storage-gcs.md)および[Azure ブロブ ストレージ (Azblob)](/br/backup-storage-azblob.md)でのデータの読み取りと書き込みもサポートします。これらは、BR に渡される`--storage`パラメータ、 TiDB Lightningに渡される`-d`パラメータ、およびDumplingに渡される`--output` ( `-o` ) パラメータの URL スキームによって区別されます。
 
 ## スキーム {#schemes}
 
 次のサービスがサポートされています。
 
-| サービス                      | スキーム      | URLの例                                    |
-| ------------------------- | --------- | ---------------------------------------- |
-| すべてのノードに分散されたローカルファイルシステム | ローカル      | `local:///path/to/dest/`                 |
-| AmazonS3と互換性のあるサービス       | s3        | `s3://bucket-name/prefix/of/dest/`       |
-| Google Cloud Storage（GCS） | gcs、gs    | `gcs://bucket-name/prefix/of/dest/`      |
-| Azure ブロブ ストレージ           | 紺碧、azblob | `azure://container-name/prefix/of/dest/` |
-| どこにも書きません（ベンチマークのみ）       | noop      | `noop://`                                |
+| サービス                      | スキーム     | URL の例                                   |
+| ------------------------- | -------- | ---------------------------------------- |
+| すべてのノードに分散されたローカルファイルシステム | ローカル     | `local:///path/to/dest/`                 |
+| Amazon S3 と互換性のあるサービス     | s3       | `s3://bucket-name/prefix/of/dest/`       |
+| Google クラウド ストレージ (GCS)   | gcs、gs   | `gcs://bucket-name/prefix/of/dest/`      |
+| Azure ブロブ ストレージ           | 紺碧、アズブロブ | `azure://container-name/prefix/of/dest/` |
+| どこにも書き込みません (ベンチマーク専用)    | ヌープ      | `noop://`                                |
 
-## URLパラメータ {#url-parameters}
+## URL パラメータ {#url-parameters}
 
-S3、GCS、Azblobなどのクラウドストレージでは、接続のために追加の構成が必要になる場合があります。このような構成のパラメーターを指定できます。例えば：
+S3、GCS、Azblob などのクラウド ストレージでは、接続のために追加の構成が必要になる場合があります。このような構成のパラメーターを指定できます。例えば：
 
--   Dumplingを使用してデータをS3にエクスポートします。
+-   Dumplingを使用してデータを S3 にエクスポートします。
 
     {{< copyable "" >}}
 
@@ -32,7 +32,7 @@ S3、GCS、Azblobなどのクラウドストレージでは、接続のために
         -o 's3://my-bucket/sql-backup?region=us-west-2'
     ```
 
--   TiDB Lightningを使用して、S3からデータをインポートします。
+-   TiDB Lightningを使用して S3 からデータをインポートします。
 
     {{< copyable "" >}}
 
@@ -41,7 +41,7 @@ S3、GCS、Azblobなどのクラウドストレージでは、接続のために
         -d 's3://my-bucket/sql-backup?region=us-west-2'
     ```
 
--   TiDB Lightningを使用してS3からデータをインポートします（リクエストモードでパススタイルを使用）：
+-   TiDB Lightningを使用して S3 からデータをインポートします (リクエスト モードでパス スタイルを使用)。
 
     {{< copyable "" >}}
 
@@ -50,7 +50,7 @@ S3、GCS、Azblobなどのクラウドストレージでは、接続のために
         -d 's3://my-bucket/sql-backup?force-path-style=true&endpoint=http://10.154.10.132:8088'
     ```
 
--   BRを使用してデータをGCSにバックアップします。
+-   BR を使用してデータを GCS にバックアップします。
 
     {{< copyable "" >}}
 
@@ -59,7 +59,7 @@ S3、GCS、Azblobなどのクラウドストレージでは、接続のために
         -s 'gcs://bucket-name/prefix'
     ```
 
--   BRを使用してデータをAzblobにバックアップします。
+-   BR を使用してデータを Azblob にバックアップします。
 
     {{< copyable "" >}}
 
@@ -68,70 +68,70 @@ S3、GCS、Azblobなどのクラウドストレージでは、接続のために
         -s 'azure://container-name/prefix'
     ```
 
-### S3URLパラメーター {#s3-url-parameters}
+### S3 URL パラメータ {#s3-url-parameters}
 
-| URLパラメータ                  | 説明                                                         |
-| :------------------------ | :--------------------------------------------------------- |
-| `access-key`              | アクセスキー                                                     |
-| `secret-access-key`       | 秘密のアクセスキー                                                  |
-| `region`                  | Amazon S3のサービスリージョン（デフォルトは`us-east-1` ）                    |
-| `use-accelerate-endpoint` | Amazon S3でアクセラレーションエンドポイントを使用するかどうか（デフォルトは`false` ）        |
-| `endpoint`                | S3互換サービスのカスタムエンドポイントのURL（たとえば、 `https://s3.example.com/` ） |
-| `force-path-style`        | 仮想ホストスタイルアクセスではなく、パススタイルアクセスを使用します（デフォルトは`true` ）          |
-| `storage-class`           | アップロードされたオブジェクトのストレージクラス（ `STANDARD_IA` `STANDARD`         |
-| `sse`                     | アップロードの暗号化に使用されるサーバー側の暗号化アルゴリズム（空、 `AES256`または`aws:kms` ）  |
-| `sse-kms-key-id`          | `sse`が`aws:kms`に設定されている場合、KMSIDを指定します                      |
-| `acl`                     | アップロードされたオブジェクトの`authenticated-read` `private`             |
+| URL パラメータ                 | 説明                                                             |
+| :------------------------ | :------------------------------------------------------------- |
+| `access-key`              | アクセスキー                                                         |
+| `secret-access-key`       | シークレット アクセス キー                                                 |
+| `region`                  | Amazon S3 のサービスリージョン(デフォルトは`us-east-1` )                       |
+| `use-accelerate-endpoint` | Amazon S3 で加速エンドポイントを使用するかどうか (デフォルトは`false` )                 |
+| `endpoint`                | S3 互換サービスのカスタム エンドポイントの URL (例: `https://s3.example.com/` )    |
+| `force-path-style`        | 仮想ホスト スタイル アクセスではなく、パス スタイル アクセスを使用します (デフォルトは`true` )。        |
+| `storage-class`           | アップロードされたオブジェクトのストレージ クラス (例: `STANDARD` 、 `STANDARD_IA` )     |
+| `sse`                     | アップロードの暗号化に使用されるサーバー側の暗号化アルゴリズム (空、 `AES256`または`aws:kms` )     |
+| `sse-kms-key-id`          | `sse`が`aws:kms`に設定されている場合、KMS ID を指定します                        |
+| `acl`                     | アップロードされたオブジェクトの既定の ACL (例: `private` 、 `authenticated-read` ) |
 
 > **ノート：**
 >
-> アクセスキーとシークレットアクセスキーはプレーンテキストで記録されるため、ストレージURLに直接渡すことはお勧めしません。
+> アクセス キーとシークレット アクセス キーをストレージ URL に直接渡すことはお勧めしません。これらのキーはプレーン テキストでログに記録されるためです。
 
-アクセスキーとシークレットアクセスキーが指定されていない場合、移行ツールは次の順序で環境からこれらのキーを推測しようとします。
+アクセス キーとシークレット アクセス キーが指定されていない場合、移行ツールは次の順序で環境からこれらのキーを推測しようとします。
 
 1.  `$AWS_ACCESS_KEY_ID`および`$AWS_SECRET_ACCESS_KEY`の環境変数
 2.  `$AWS_ACCESS_KEY`および`$AWS_SECRET_KEY`の環境変数
-3.  `$AWS_SHARED_CREDENTIALS_FILE`の環境変数で指定されたパスにあるツールノードの共有クレデンシャルファイル
-4.  `~/.aws/credentials`のツールノード上の共有クレデンシャルファイル
-5.  AmazonEC2コンテナの現在のIAMロール
-6.  AmazonECSタスクの現在のIAMロール
+3.  `$AWS_SHARED_CREDENTIALS_FILE`環境変数で指定されたパスにあるツール ノード上の共有資格情報ファイル
+4.  `~/.aws/credentials`のツール ノード上の共有資格情報ファイル
+5.  Amazon EC2 コンテナの現在のIAMロール
+6.  Amazon ECS タスクの現在のIAMロール
 
-### GCSURLパラメーター {#gcs-url-parameters}
+### GCS URL パラメータ {#gcs-url-parameters}
 
-| URLパラメータ           | 説明                                                 |
-| :----------------- | :------------------------------------------------- |
-| `credentials-file` | ツールノードのクレデンシャルJSONファイルへのパス                         |
-| `storage-class`    | アップロードされたオブジェクトのストレージクラス（ `COLDLINE` `STANDARD`    |
-| `predefined-acl`   | アップロードされたオブジェクトの事前定義された`project-private` `private` |
+| URL パラメータ          | 説明                                                           |
+| :----------------- | :----------------------------------------------------------- |
+| `credentials-file` | ツール ノードの資格情報 JSON ファイルへのパス                                   |
+| `storage-class`    | アップロードされたオブジェクトのストレージ クラス (例: `STANDARD` 、 `COLDLINE` )      |
+| `predefined-acl`   | アップロードされたオブジェクトの定義済み ACL (例: `private` 、 `project-private` ) |
 
 `credentials-file`が指定されていない場合、移行ツールは次の順序で環境から資格情報を推測しようとします。
 
-1.  `$GOOGLE_APPLICATION_CREDENTIALS`環境変数で指定されたパスにあるツールノード上のファイルの内容
-2.  `~/.config/gcloud/application_default_credentials.json`のツールノード上のファイルの内容
-3.  GCEまたはGAEで実行している場合、メタデータサーバーから取得した資格情報。
+1.  `$GOOGLE_APPLICATION_CREDENTIALS`環境変数で指定されたパスにあるツール ノード上のファイルの内容
+2.  `~/.config/gcloud/application_default_credentials.json`のツール ノード上のファイルの内容
+3.  GCE または GAE で実行している場合、資格情報はメタデータサーバーから取得されます。
 
-### AzblobURLパラメーター {#azblob-url-parameters}
+### Azblob URL パラメーター {#azblob-url-parameters}
 
-| URLパラメータ       | 説明                                                                                            |
-| :------------- | :-------------------------------------------------------------------------------------------- |
-| `account-name` | ストレージのアカウント名                                                                                  |
-| `account-key`  | アクセスキー                                                                                        |
-| `access-tier`  | アップロードされたオブジェクトの`Archive`層（ `Cool` 、 `Hot` ）。 `access-tier`が設定されていない（値が空の）場合、値はデフォルトで`Hot`です。 |
+| URL パラメータ      | 説明                                                                                                          |
+| :------------- | :---------------------------------------------------------------------------------------------------------- |
+| `account-name` | ストレージのアカウント名                                                                                                |
+| `account-key`  | アクセスキー                                                                                                      |
+| `access-tier`  | アップロードされたオブジェクトのアクセス層 (例: `Hot` 、 `Cool` 、 `Archive` )。 `access-tier`が設定されていない (値が空である) 場合、デフォルトの値は`Hot`です。 |
 
-TiKVとBRが同じストレージアカウントを使用することを保証するために、BRは`account-name`の値を決定します。つまり、デフォルトでは`send-credentials-to-tikv = true`が設定されています。 BRは、次の順序で環境からこれらのキーを推測します。
+TiKV と BR が同じストレージ アカウントを使用するようにするために、BR は`account-name`の値を決定します。つまり、デフォルトで`send-credentials-to-tikv = true`が設定されています。 BR は、次の順序で環境からこれらのキーを推測します。
 
-1.  `account-name`**と**`account-key`の両方が指定されている場合、このパラメーターで指定されたキーが使用されます。
-2.  `account-key`が指定されていない場合、BRはBRのノード上の環境変数から関連する資格情報を読み取ろうとします。 BRは最初に`$AZURE_CLIENT_ID` 、および`$AZURE_TENANT_ID`を読み取り`$AZURE_CLIENT_SECRET` 。同時に、BRを使用すると、TiKVはこれらの3つの環境変数をそれぞれのノードから読み取り、Azure AD（Azure Active Directory）を使用して変数にアクセスできます。
-3.  上記の3つの環境変数がBRノードで構成されていない場合、BRはアクセスキーを使用して`$AZURE_STORAGE_KEY`を読み取ろうとします。
+1.  `account-name`**と**`account-key`の両方を指定すると、このパラメーターで指定されたキーが使用されます。
+2.  `account-key`が指定されていない場合、BR は BR のノードの環境変数から関連する資格情報を読み取ろうとします。 BR は、最初に`$AZURE_CLIENT_ID` 、 `$AZURE_TENANT_ID` 、および`$AZURE_CLIENT_SECRET`を読み取ります。同時に、BR は TiKV がそれぞれのノードからこれら 3 つの環境変数を読み取り、Azure AD (Azure Active Directory) を使用して変数にアクセスできるようにします。
+3.  上記の 3 つの環境変数が BR ノードで構成されていない場合、BR はアクセス キーを使用して`$AZURE_STORAGE_KEY`を読み取ろうとします。
 
 > **ノート：**
 >
-> -   Azure Blob Storageを外部ストレージとして使用する場合は、 `send-credentials-to-tikv = true` （デフォルトで設定）を設定する必要があります。そうしないと、バックアップタスクが失敗します。
-> -   `$AZURE_CLIENT_ID` 、および`$AZURE_TENANT_ID`は、 `$AZURE_CLIENT_SECRET` AzureアプリケーションのアプリケーションID `client_id` 、テナントID `tenant_id` 、およびクライアントパスワード`client_secret`を参照します。 3つの環境変数の存在を確認する方法、または環境変数をパラメーターとして構成する方法の詳細については、 [環境変数を構成する](/br/backup-storage-azblob.md#configure-environment-variables)を参照してください。
+> -   Azure Blob Storage を外部ストレージとして使用する場合は、 `send-credentials-to-tikv = true`を設定する必要があります (既定で設定されています)。そうしないと、バックアップ タスクが失敗します。
+> -   `$AZURE_CLIENT_ID`は、 `$AZURE_CLIENT_SECRET` Azure アプリケーションのアプリケーション ID `$AZURE_TENANT_ID` 、テナント ID `client_id` 、クライアント パスワード`tenant_id`を示し`client_secret` 。 3 つの環境変数の存在を確認する方法、または環境変数をパラメータとして設定する方法については、 [環境変数の構成](/br/backup-storage-azblob.md#configure-environment-variables)を参照してください。
 
-## コマンドラインパラメータ {#command-line-parameters}
+## コマンドライン パラメータ {#command-line-parameters}
 
-URLパラメーターに加えて、BRとDumplingは、コマンドラインパラメーターを使用したこれらの構成の指定もサポートしています。例えば：
+URL パラメーターに加えて、BR とDumplingは、コマンドライン パラメーターを使用してこれらの構成を指定することもサポートしています。例えば：
 
 {{< copyable "" >}}
 
@@ -141,23 +141,23 @@ URLパラメーターに加えて、BRとDumplingは、コマンドラインパ�
     --s3.region 'us-west-2'
 ```
 
-URLパラメーターとコマンドラインパラメーターを同時に指定した場合、URLパラメーターはコマンドラインパラメーターによって上書きされます。
+URL パラメーターとコマンド ライン パラメーターを同時に指定した場合、URL パラメーターはコマンド ライン パラメーターによって上書きされます。
 
-### S3コマンドラインパラメータ {#s3-command-line-parameters}
+### S3 コマンドライン パラメータ {#s3-command-line-parameters}
 
-| コマンドラインパラメータ          | 説明                                                                   |
-| :-------------------- | :------------------------------------------------------------------- |
-| `--s3.region`         | AmazonS3のサービスリージョン。デフォルトは`us-east-1`です。                              |
-| `--s3.endpoint`       | S3互換サービスのカスタムエンドポイントのURL。たとえば、 `https://s3.example.com/` 。           |
-| `--s3.storage-class`  | アップロードオブジェクトのストレージクラス。たとえば、 `STANDARD`または`STANDARD_IA` 。             |
-| `--s3.sse`            | アップロードの暗号化に使用されるサーバー側の暗号化アルゴリズム。値のオプションは空で、 `AES256`と`aws:kms`です。    |
-| `--s3.sse-kms-key-id` | `--s3.sse`が`aws:kms`として設定されている場合、このパラメータはKMSIDを指定するために使用されます。        |
-| `--s3.acl`            | アップロードオブジェクトの固定ACL。たとえば、 `private`または`authenticated-read` 。          |
-| `--s3.provider`       | S3互換サービスのタイプ。サポートされている`other`は、 `aws` 、 `netease` `ceph` `alibaba` 。 |
+| コマンドライン パラメータ         | 説明                                                                               |
+| :-------------------- | :------------------------------------------------------------------------------- |
+| `--s3.region`         | Amazon S3 のサービス リージョン。デフォルトは`us-east-1`です。                                       |
+| `--s3.endpoint`       | S3 互換サービスのカスタム エンドポイントの URL。たとえば、 `https://s3.example.com/`です。                   |
+| `--s3.storage-class`  | アップロード オブジェクトのストレージ クラス。たとえば、 `STANDARD`または`STANDARD_IA`です。                      |
+| `--s3.sse`            | アップロードの暗号化に使用されるサーバー側の暗号化アルゴリズム。値のオプションは空で、 `AES256`と`aws:kms`です。                |
+| `--s3.sse-kms-key-id` | `--s3.sse`が`aws:kms`として構成されている場合、このパラメーターを使用して KMS ID を指定します。                    |
+| `--s3.acl`            | アップロード オブジェクトの既定の ACL。たとえば、 `private`または`authenticated-read`です。                  |
+| `--s3.provider`       | S3 互換サービスのタイプ。サポートされているタイプは`aws` 、 `alibaba` 、 `ceph` 、 `netease` 、および`other`です。 |
 
-AWS S3以外のクラウドストレージにデータをエクスポートするには、クラウドプロバイダーと`virtual-hosted style`を使用するかどうかを指定します。次の例では、データがAlibabaCloudOSSストレージにエクスポートされます。
+非 AWS S3 クラウド ストレージにデータをエクスポートするには、クラウド プロバイダーと使用するかどうかを指定します`virtual-hosted style` 。次の例では、データは Alibaba Cloud OSS ストレージにエクスポートされます。
 
--   Dumplingを使用してAlibabaCloudOSSにデータをエクスポートします：
+-   Dumplingを使用して Alibaba Cloud OSS にデータをエクスポートします。
 
     {{< copyable "" >}}
 
@@ -169,7 +169,7 @@ AWS S3以外のクラウドストレージにデータをエクスポートす�
        -r 200000 -F 256MiB
     ```
 
--   BRを使用してAlibabaCloudOSSにデータをバックアップします。
+-   BR を使用してデータを Alibaba Cloud OSS にバックアップします。
 
     {{< copyable "" >}}
 
@@ -183,7 +183,7 @@ AWS S3以外のクラウドストレージにデータをエクスポートす�
         --log-file backuptable.log
     ```
 
--   TiDB Lightningにデータをエクスポートします。 YAML形式の構成ファイルで次のコンテンツを指定する必要があります。
+-   TiDB Lightningを使用して Alibaba Cloud OSS にデータをエクスポートします。 YAML 形式の構成ファイルで次の内容を指定する必要があります。
 
     {{< copyable "" >}}
 
@@ -192,23 +192,23 @@ AWS S3以外のクラウドストレージにデータをエクスポートす�
     data-source-dir = "s3://my-bucket/dumpling/?endpoint=http://oss-cn-hangzhou-internal.aliyuncs.com&provider=alibaba"
     ```
 
-### GCSコマンドラインパラメータ {#gcs-command-line-parameters}
+### GCS コマンドライン パラメータ {#gcs-command-line-parameters}
 
-| コマンドラインパラメータ             | 説明                                                            |
-| :----------------------- | :------------------------------------------------------------ |
-| `--gcs.credentials-file` | ツールノード上のJSON形式のクレデンシャルのパス                                     |
-| `--gcs.storage-class`    | アップロードオブジェクトのストレージタイプ（たとえば、 `STANDARD`または`COLDLINE` ）         |
-| `--gcs.predefined-acl`   | アップロードオブジェクトの事前定義されたACL（たとえば、 `private`または`project-private` ） |
+| コマンドライン パラメータ            | 説明                                                         |
+| :----------------------- | :--------------------------------------------------------- |
+| `--gcs.credentials-file` | ツール ノード上の JSON 形式の資格情報のパス                                  |
+| `--gcs.storage-class`    | アップロード オブジェクトのストレージ タイプ (例: `STANDARD`または`COLDLINE` )      |
+| `--gcs.predefined-acl`   | アップロード オブジェクトの定義済み ACL (例: `private`または`project-private` ) |
 
-### Azblobコマンドラインパラメーター {#azblob-command-line-parameters}
+### Azblob コマンド ライン パラメーター {#azblob-command-line-parameters}
 
-|コマンドラインパラメータ|説明| | `--azblob.account-name` |ストレージのアカウント名| | `--azblob.account-key` |アクセスキー| | `--azblob.access-tier` |アップロードされたオブジェクトの`Archive` `Cool` `Hot` `access-tier`が設定されていない（値が空の）場合、値はデフォルトで`Hot`です。 |
+| |コマンドライン パラメータ |説明 | | | `--azblob.account-name` |ストレージのアカウント名 | | | `--azblob.account-key` |アクセスキー | | | `--azblob.access-tier` |アップロードされたオブジェクトのアクセス層 (例: `Hot` 、 `Cool` 、 `Archive` )。 `access-tier`が設定されていない (値が空である) 場合、値はデフォルトで`Hot`になります。 | |
 
-## BRがTiKVにクレデンシャルを送信 {#br-sending-credentials-to-tikv}
+## BR が資格情報を TiKV に送信 {#br-sending-credentials-to-tikv}
 
-デフォルトでは、S3、GCS、またはAzblob宛先を使用する場合、BRはセットアップの複雑さを軽減するためにすべてのTiKVノードにクレデンシャルを送信します。
+デフォルトでは、S3、GCS、または Azblob の宛先を使用する場合、BR はすべての TiKV ノードに資格情報を送信して、セットアップの複雑さを軽減します。
 
-ただし、これは、すべてのノードが独自の役割と権限を持っているクラウド環境には適していません。このような場合、 `--send-credentials-to-tikv=false` （または短縮形`-c=0` ）で送信するクレデンシャルを無効にする必要があります。
+ただし、これは、すべてのノードが独自の役割と権限を持つクラウド環境には適していません。このような場合、 `--send-credentials-to-tikv=false` (または短い形式の`-c=0` ) を使用して資格情報の送信を無効にする必要があります。
 
 {{< copyable "" >}}
 
@@ -216,7 +216,7 @@ AWS S3以外のクラウドストレージにデータをエクスポートす�
 ./br backup full -c=0 -u pd-service:2379 -s 's3://bucket-name/prefix'
 ```
 
-[バックアップ](/sql-statements/sql-statement-backup.md)および[戻す](/sql-statements/sql-statement-restore.md)データにSQLステートメントを使用する場合、 `SEND_CREDENTIALS_TO_TIKV = FALSE`のオプションを追加できます。
+[バックアップする](/sql-statements/sql-statement-backup.md)と[戻す](/sql-statements/sql-statement-restore.md)のデータに SQL ステートメントを使用する場合、 `SEND_CREDENTIALS_TO_TIKV = FALSE`オプションを追加できます。
 
 {{< copyable "" >}}
 
@@ -224,4 +224,4 @@ AWS S3以外のクラウドストレージにデータをエクスポートす�
 BACKUP DATABASE * TO 's3://bucket-name/prefix' SEND_CREDENTIALS_TO_TIKV = FALSE;
 ```
 
-2つのアプリケーションは現在スタンドアロンであるため、このオプションはTiDB LightningおよびDumplingではサポートされていません。
+このオプションは、 TiDB LightningおよびDumplingではサポートされていません。これは、2 つのアプリケーションが現在スタンドアロンであるためです。

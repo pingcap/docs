@@ -114,7 +114,7 @@ TiDB の自動インクリメント ID 機能は、自動的にインクリメ�
 
 ## <code>sql_mode</code>で sql_mode を変更するにはどうすればよいですか? {#how-do-i-modify-the-code-sql-mode-code-in-tidb}
 
-TiDB は、SESSION または GLOBAL ベースでの[`sql_mode`](/system-variables.md#sql_mode)システム変数の変更をサポートしています。 [`GLOBAL`](/sql-statements/sql-statement-set-variable.md)のスコープ変数への変更は、クラスタの残りのサーバーに伝達され、再起動後も保持されます。これは、各 TiDB サーバーで`sql_mode`の値を変更する必要がないことを意味します。
+TiDB は、SESSION または GLOBAL ベースでの[`sql_mode`](/system-variables.md#sql_mode)システム変数の変更をサポートしています。 [`GLOBAL`](/sql-statements/sql-statement-set-variable.md)のスコープ変数への変更は、クラスターの残りのサーバーに伝達され、再起動後も保持されます。これは、各 TiDBサーバーで`sql_mode`の値を変更する必要がないことを意味します。
 
 ## エラー: <code>java.sql.BatchUpdateExecption:statement count 5001 exceeds the transaction limitation</code>ます {#error-code-java-sql-batchupdateexecption-statement-count-5001-exceeds-the-transaction-limitation-code-while-using-sqoop-to-write-data-into-tidb-in-batches}
 
@@ -149,7 +149,7 @@ Sqoop では、 `--batch`は各バッチで 100 個のステートメントを�
 
 ## データが削除された後、クエリの速度が遅くなるのはなぜですか? {#why-does-the-query-speed-get-slow-after-data-is-deleted}
 
-大量のデータを削除すると、多くの役に立たないキーが残り、クエリの効率に影響します。現在、この問題を解決することが期待される[リージョンマージ](/best-practices/massive-regions-best-practices.md)つの機能が開発中です。詳細は[TiDB ベスト プラクティスのデータ セクションの削除](https://en.pingcap.com/blog/tidb-best-practice/#write)を参照してください。
+大量のデータを削除すると、多くの不要なキーが残り、クエリの効率に影響します。現在、この問題を解決することが期待される[リージョンマージ](/best-practices/massive-regions-best-practices.md)つの機能が開発中です。詳細は[TiDB ベスト プラクティスのデータ セクションの削除](https://en.pingcap.com/blog/tidb-best-practice/#write)を参照してください。
 
 ## データを削除した後、ストレージ スペースを再利用するのが遅い場合はどうすればよいですか? {#what-should-i-do-if-it-is-slow-to-reclaim-storage-space-after-deleting-data}
 
@@ -159,7 +159,7 @@ TiDB はマルチバージョン同時実行制御 (MVCC) を使用するため�
 
 TiDB `SHOW PROCESSLIST`の表示内容は MySQL `SHOW PROCESSLIST`とほぼ同じです。 TiDB `show processlist`はシステム プロセス ID を表示しません。表示される ID は、現在のセッション ID です。 TiDB `show processlist`と MySQL `show processlist`の違いは次のとおりです。
 
--   TiDB は分散データベースであるため、 `tidb-server`つのインスタンスは SQL ステートメントを解析および実行するためのステートレス エンジンです (詳細については、 [TiDBアーキテクチャ](/tidb-architecture.md)を参照してください)。 `show processlist`は、クラスタで実行されているすべてのセッションのリストではなく、ユーザーが MySQL クライアントからログインした`tidb-server`インスタンスで実行されたセッションのリストを表示します。しかし、MySQL はスタンドアロン データベースであり、その`show processlist`には MySQL で実行されたすべての SQL ステートメントが表示されます。
+-   TiDB は分散データベースであるため、 `tidb-server`つのインスタンスは SQL ステートメントを解析および実行するためのステートレス エンジンです (詳細については、 [TiDBアーキテクチャ](/tidb-architecture.md)を参照してください)。 `show processlist`は、クラスターで実行されているすべてのセッションのリストではなく、ユーザーが MySQL クライアントからログインする`tidb-server`インスタンスで実行されたセッションのリストを表示します。しかし、MySQL はスタンドアロン データベースであり、その`show processlist`には MySQL で実行されたすべての SQL ステートメントが表示されます。
 -   TiDB の`State`列は、クエリの実行中に継続的に更新されるわけではありません。 TiDB は並列クエリをサポートしているため、各ステートメントは一度に複数の*状態*になる可能性があるため、単一の値に単純化することは困難です。
 
 ## SQLコミットの実行優先度を制御または変更する方法は? {#how-to-control-or-change-the-execution-priority-of-sql-commits}
@@ -212,8 +212,8 @@ TiDB は、時間の`schema`を使用して SQL ステートメントを処理�
 
 -   DML 操作に含まれる一部のテーブルは、進行中の DDL 操作に含まれるテーブルと同じです。
 -   DML 操作は長時間続きます。この期間中、多くの DDL ステートメントが実行され、1024 を超えるバージョン変更が発生し`schema`た。このデフォルト値は、変数`tidb_max_delta_schema_count`を変更することで変更できます。
--   DML 要求を受け入れる TiDB サーバーは、長時間`schema information`をロードできません (TiDB と PD または TiKV 間の接続障害が原因である可能性があります)。この期間中、多くの`schema`ステートメントが実行され、100 以上のバージョン変更が発生しました。
--   TiDB の再起動後、最初の DDL 操作が実行される前に、DML 操作が実行され、最初の DDL 操作に遭遇します (つまり、最初の DDL 操作が実行される前に、DML に対応するトランザクションが開始されます。そして、最初の`schema`バージョンの後にDDL の変更が行われた場合、DML に対応するトランザクションがコミットされた場合)、この DML 操作はこのエラーを報告します。
+-   DML 要求を受け入れる TiDBサーバーは、長時間`schema information`をロードできません (TiDB と PD または TiKV 間の接続障害が原因である可能性があります)。この期間中、多くの`schema`ステートメントが実行され、100 以上のバージョン変更が発生しました。
+-   TiDB の再起動後、最初の DDL 操作が実行される前に、DML 操作が実行され、最初の DDL 操作に遭遇します (つまり、最初の DDL 操作が実行される前に、DML に対応するトランザクションが開始されます。最初の`schema`バージョンの後にDDL の変更が行われた場合、DML に対応するトランザクションがコミットされた場合)、この DML 操作はこのエラーを報告します。
 
 > **ノート：**
 >
@@ -226,7 +226,7 @@ TiDB は、時間の`schema`を使用して SQL ステートメントを処理�
 DML ステートメントの実行時に、TiDB が DDL リース (デフォルトでは 45 秒) 内で最新のスキーマをロードできなかった場合、 `Information schema is out of date`エラーが発生する可能性があります。考えられる原因は次のとおりです。
 
 -   この DML を実行した TiDB インスタンスが強制終了され、この DML ステートメントに対応するトランザクションの実行に DDL リースよりも時間がかかりました。トランザクションがコミットされたときに、エラーが発生しました。
--   この DML ステートメントの実行中に、TiDB は PD または TiKV に接続できませんでした。その結果、キープアライブ設定が原因で、TiDB が DDL リース内のスキーマのロードに失敗したか、PD から切断されました。
+-   TiDB は、この DML ステートメントの実行中に PD または TiKV に接続できませんでした。その結果、キープアライブ設定が原因で、TiDB が DDL リース内のスキーマのロードに失敗したか、PD から切断されました。
 
 ## 高い同時実行性の下で DDL ステートメントを実行するとエラーが報告されますか? {#error-is-reported-when-executing-ddl-statements-under-high-concurrency}
 

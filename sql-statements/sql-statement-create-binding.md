@@ -3,13 +3,13 @@ title: CREATE [GLOBAL|SESSION] BINDING
 summary: Use of CREATE BINDING in TiDB database.
 ---
 
-# [グローバル|セッション]バインディングを作成する {#create-global-session-binding}
+# [グローバル|セッション]バインディングを作成 {#create-global-session-binding}
 
-このステートメントは、TiDBに新しい実行プランバインディングを作成します。バインディングを使用すると、基になるクエリを変更せずに、ステートメントにヒントを挿入できます。
+このステートメントは、TiDB に新しい実行計画バインディングを作成します。バインドを使用すると、基になるクエリを変更することなく、ステートメントにヒントを挿入できます。
 
-`BINDING`は、 `GLOBAL`または`SESSION`のいずれかになります。デフォルトは`SESSION`です。
+`BINDING`は`GLOBAL`または`SESSION`ベースのいずれかになります。デフォルトは`SESSION`です。
 
-バインドされたSQLステートメントはパラメーター化され、システムテーブルに格納されます。 SQLクエリが処理されるとき、パラメーター化されたSQLステートメントとシステムテーブル内のバインドされたステートメントが一貫していて、システム変数`tidb_use_plan_baselines`が`ON` （デフォルト）に設定されている限り、対応するオプティマイザーヒントを使用できます。複数の実行プランが利用可能な場合、オプティマイザーは最小のコストでプランをバインドすることを選択します。
+バインドされた SQL ステートメントはパラメーター化され、システム テーブルに格納されます。 SQL クエリが処理されるとき、パラメーター化された SQL ステートメントとシステム テーブル内のバインドされた SQL ステートメントが一貫しており、システム変数`tidb_use_plan_baselines`が`ON` (既定) に設定されている限り、対応するオプティマイザー ヒントを使用できます。複数の実行計画が利用可能な場合、オプティマイザは最小コストで計画をバインドすることを選択します。
 
 ## あらすじ {#synopsis}
 
@@ -130,14 +130,14 @@ mysql> EXPLAIN ANALYZE  SELECT * FROM t1 WHERE b = 123;
 3 rows in set (0.01 sec)
 ```
 
-## MySQLの互換性 {#mysql-compatibility}
+## MySQL の互換性 {#mysql-compatibility}
 
-このステートメントは、MySQL構文のTiDB拡張です。
+このステートメントは、MySQL 構文に対する TiDB 拡張です。
 
-## も参照してください {#see-also}
+## こちらもご覧ください {#see-also}
 
--   [ドロップ[グローバル|セッション]バインディング](/sql-statements/sql-statement-drop-binding.md)
--   [[グローバル|セッション]バインディングを表示する](/sql-statements/sql-statement-show-bindings.md)
--   [テーブルの分析](/sql-statements/sql-statement-analyze-table.md)
+-   [ドロップ [グローバル|セッション] バインディング](/sql-statements/sql-statement-drop-binding.md)
+-   [[グローバル|セッション]バインディングを表示](/sql-statements/sql-statement-show-bindings.md)
+-   [テーブルを分析](/sql-statements/sql-statement-analyze-table.md)
 -   [オプティマイザーのヒント](/optimizer-hints.md)
 -   [SQL計画管理](/sql-plan-management.md)

@@ -3,9 +3,9 @@ title: Query Status
 summary: Learn how to query the status of a data replication task.
 ---
 
-# クエリステータス {#query-status}
+# クエリのステータス {#query-status}
 
-このドキュメントでは、 `query-status`コマンドを使用してタスクステータスとDMのサブタスクステータスを照会する方法を紹介します。
+このドキュメントでは、 `query-status`コマンドを使用して、DM のタスク ステータスとサブタスク ステータスをクエリする方法を紹介します。
 
 ## クエリ結果 {#query-result}
 
@@ -49,17 +49,17 @@ summary: Learn how to query the status of a data replication task.
 
 ## タスクのステータス {#task-status}
 
-DM移行タスクのステータスは、DMワーカーに割り当てられた各サブタスクのステータスによって異なります。サブタスクステータスの詳細については、 [サブタスクのステータス](#subtask-status)を参照してください。次の表は、サブタスクのステータスがタスクのステータスにどのように関連しているかを示しています。
+DM 移行タスクのステータスは、DM-worker に割り当てられた各サブタスクのステータスによって異なります。サブタスク状況の詳細な説明については、 [サブタスクのステータス](#subtask-status)を参照してください。次の表は、サブタスクのステータスとタスクのステータスの関係を示しています。
 
-| タスクのサブタスクステータス                                                                   | タスクのステータス                                      |
-| :------------------------------------------------------------------------------- | :--------------------------------------------- |
-| 1つのサブタスクが`paused`状態にあり、エラー情報が返されます。                                              | `Error - Some error occurred in subtask`       |
-| 同期フェーズの`Stopped`つのサブタスクは`Running`状態ですが、そのリレー処理ユニットは実行されて`Paused`ません（ `Error`状態）。 | `Error - Relay status is Error/Paused/Stopped` |
-| 1つのサブタスクは`Paused`状態であり、エラー情報は返されません。                                             | `Paused`                                       |
-| すべてのサブタスクは`New`状態です。                                                             | `New`                                          |
-| すべてのサブタスクは`Finished`状態です。                                                        | `Finished`                                     |
-| すべてのサブタスクは`Stopped`状態です。                                                         | `Stopped`                                      |
-| その他の状況                                                                           | `Running`                                      |
+| タスクのサブタスク ステータス                                                                             | タスクのステータス                                      |
+| :------------------------------------------------------------------------------------------ | :--------------------------------------------- |
+| 1 つのサブタスクが`paused`状態で、エラー情報が返されます。                                                          | `Error - Some error occurred in subtask`       |
+| 同期フェーズの 1 つのサブタスクは`Running`状態ですが、そのリレー処理ユニットは実行されていません ( `Error` / `Paused` / `Stopped`状態)。 | `Error - Relay status is Error/Paused/Stopped` |
+| 1 つのサブタスクが`Paused`状態にあり、エラー情報は返されません。                                                       | `Paused`                                       |
+| すべてのサブタスクは`New`状態です。                                                                        | `New`                                          |
+| すべてのサブタスクは`Finished`状態です。                                                                   | `Finished`                                     |
+| すべてのサブタスクは`Stopped`状態です。                                                                    | `Stopped`                                      |
+| その他の状況                                                                                      | `Running`                                      |
 
 ## 詳細なクエリ結果 {#detailed-query-result}
 
@@ -192,38 +192,38 @@ DM移行タスクのステータスは、DMワーカーに割り当てられた�
 
 ```
 
-「sources」の「subTaskStatus」の「stage」のステータスの説明とステータス切り替えの関係については、 [サブタスクステータス](#subtask-status)を参照してください。
+「sources」の「subTaskStatus」の「stage」のステータスの説明とステータスの切り替え関係については、 [サブタスクのステータス](#subtask-status)を参照してください。
 
-「sources」の「subTaskStatus」の「unresolvedDDLLockID」の操作内容については、 [シャーディングDDLロックを手動で処理する](/dm/manually-handling-sharding-ddl-locks.md)を参照してください。
+「sources」の「subTaskStatus」の「unresolvedDDLLockID」の動作詳細については、 [シャーディング DDL ロックを手動で処理する](/dm/manually-handling-sharding-ddl-locks.md)を参照してください。
 
 ## サブタスクのステータス {#subtask-status}
 
 ### ステータスの説明 {#status-description}
 
--   `New` ：
+-   `New` :
 
     -   初期状態。
     -   サブタスクでエラーが発生しない場合は、 `Running`に切り替えられます。それ以外の場合は`Paused`に切り替えられます。
 
--   `Running` ：通常の実行状態。
+-   `Running` : 通常の実行ステータス。
 
--   `Paused` ：
+-   `Paused` :
 
-    -   一時停止ステータス。
+    -   一時停止状態。
     -   サブタスクでエラーが発生した場合は、 `Paused`に切り替えられます。
     -   サブタスクが`Running`ステータスのときに`pause-task`を実行すると、タスクは`Paused`に切り替わります。
     -   サブタスクがこのステータスの場合、 `resume-task`コマンドを実行してタスクを再開できます。
 
--   `Stopped` ：
+-   `Stopped` :
 
-    -   停止状態。
-    -   サブタスクが`Running`または`Paused`ステータスのときに`stop-task`を実行すると、タスクは`Stopped`に切り替わります。
+    -   停止状態です。
+    -   サブタスクのステータスが`Running`または`Paused`のときに`stop-task`を実行すると、タスクは`Stopped`に切り替わります。
     -   サブタスクがこのステータスの場合、 `resume-task`を使用してタスクを再開することはできません。
 
--   `Finished` ：
+-   `Finished` :
 
     -   終了したサブタスクのステータス。
-    -   フルレプリケーションサブタスクが正常に終了した場合にのみ、タスクはこのステータスに切り替わります。
+    -   完全複製サブタスクが正常に終了した場合にのみ、タスクはこのステータスに切り替わります。
 
 ### ステータススイッチ図 {#status-switch-diagram}
 

@@ -3,24 +3,24 @@ title: SHOW STATS_META
 summary: An overview of the usage of SHOW STATS_META for TiDB database.
 ---
 
-# SHOW STATS_META {#show-stats-meta}
+# 統計_メタを表示 {#show-stats-meta}
 
-`SHOW STATS_META`を使用して、テーブル内の行数と、そのテーブル内で変更された行数を表示できます。このステートメントを使用すると、 `ShowLikeOrWhere`句で必要な情報をフィルタリングできます。
+`SHOW STATS_META`を使用して、テーブル内の行数と、そのテーブル内で変更された行数を表示できます。このステートメントを使用すると、必要な情報を`ShowLikeOrWhere`句でフィルター処理できます。
 
-現在、 `SHOW STATS_META`ステートメントは6列を出力します。
+現在、 `SHOW STATS_META`ステートメントは 6 列を出力します。
 
-| カラム名           | 説明       |
-| -------------- | -------- |
-| db_name        | データベース名  |
-| table_name     | テーブル名    |
-| partition_name | パーティション名 |
-| update_time    | 最終更新時刻   |
-| modify_count   | 変更された行数  |
-| row_count      | 合計行数     |
+| カラム名        | 説明       |
+| ----------- | -------- |
+| データベース名     | データベース名  |
+| テーブル名       | テーブル名    |
+| パーティション名    | パーティション名 |
+| update_time | 最終更新時刻   |
+| 変更回数        | 変更された行数  |
+| 行数          | 合計行数     |
 
 > **ノート：**
 >
-> `update_time`は、TiDBがDMLステートメントに従って`modify_count`フィールドと`row_count`フィールドを更新するときに更新されます。したがって、 `update_time`は`ANALYZE`ステートメントの最後の実行時間ではありません。
+> TiDB が DML ステートメントに従って`modify_count`フィールドと`row_count`フィールドを更新すると、 `update_time`が更新されます。したがって、 `update_time`は`ANALYZE`ステートメントの最後の実行時間ではありません。
 
 ## あらすじ {#synopsis}
 
@@ -72,11 +72,11 @@ show stats_meta where table_name = 't2';
 1 row in set (0.00 sec)
 ```
 
-## MySQLの互換性 {#mysql-compatibility}
+## MySQL の互換性 {#mysql-compatibility}
 
-このステートメントは、MySQL構文のTiDB拡張です。
+このステートメントは、MySQL 構文に対する TiDB 拡張です。
 
-## も参照してください {#see-also}
+## こちらもご覧ください {#see-also}
 
 -   [分析する](/sql-statements/sql-statement-analyze-table.md)
 -   [統計入門](/statistics.md)

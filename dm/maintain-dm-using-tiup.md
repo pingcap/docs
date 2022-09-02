@@ -3,20 +3,20 @@ title: Maintain a DM Cluster Using TiUP
 summary: Learn how to maintain a DM cluster using TiUP.
 ---
 
-# TiUPを使用してDMクラスターを管理する {#maintain-a-dm-cluster-using-tiup}
+# TiUP を使用して DMクラスタを管理する {#maintain-a-dm-cluster-using-tiup}
 
-このドキュメントでは、 TiUP DMコンポーネントを使用してDMクラスタを維持する方法を紹介します。
+このドキュメントでは、 TiUP DMコンポーネントを使用して DM クラスターを維持する方法を紹介します。
 
-DMクラスタをまだ展開していない場合は、 [TiUPを使用してDMクラスターをデプロイする](/dm/deploy-a-dm-cluster-using-tiup.md)を参照して手順を確認できます。
+DM クラスターをまだ展開していない場合は、手順について[TiUP を使用して DMクラスタをデプロイする](/dm/deploy-a-dm-cluster-using-tiup.md)を参照できます。
 
 > **ノート：**
 >
 > -   次のコンポーネント間のポートが相互接続されていることを確認してください
->     -   DMマスターノード間の`peer_port` （デフォルトでは`8291` ）は相互接続されています。
->     -   各DMマスターノードは、すべてのDMワーカーノードの`port`つ（デフォルトでは`8262` ）に接続できます。
->     -   各DM-workerノードは、すべてのDM-masterノードの`port`つ（デフォルトでは`8261` ）に接続できます。
->     -   TiUPノードは、すべてのDMマスターノードの`port`つ（デフォルトでは`8261` ）に接続できます。
->     -   TiUPノードは、すべてのDMワーカーノードの`port`つ（デフォルトでは`8262` ）に接続できます。
+>     -   DM-master ノードの`peer_port` (デフォルトでは`8291` ) は相互接続されています。
+>     -   各 DM-master ノードは、すべての DM-worker ノードの`port`つ (デフォルトでは`8262` ) に接続できます。
+>     -   各 DM-worker ノードは、すべての DM-master ノードの`port`つ (デフォルトでは`8261` ) に接続できます。
+>     -   TiUP ノードは、すべての DM マスター ノードの`port`つ (デフォルトでは`8261` ) に接続できます。
+>     -   TiUP ノードは、すべての DM-worker ノードの`port` (デフォルトでは`8262` ) に接続できます。
 
 TiUP DMコンポーネントのヘルプ情報については、次のコマンドを実行してください。
 
@@ -59,9 +59,9 @@ Flags:
   -y, --yes                Skip all confirmations and assumes 'yes'
 ```
 
-## クラスタリストをビューする {#view-the-cluster-list}
+## クラスタ リストをビューする {#view-the-cluster-list}
 
-クラスタが正常にデプロイされたら、次のコマンドを実行してクラスタリストを表示します。
+クラスターが正常にデプロイされたら、次のコマンドを実行してクラスター リストを表示します。
 
 {{< copyable "" >}}
 
@@ -75,9 +75,9 @@ Name  User  Version  Path                                  PrivateKey
 prod-cluster  tidb  ${version}  /root/.tiup/storage/dm/clusters/test  /root/.tiup/storage/dm/clusters/test/ssh/id_rsa
 ```
 
-## クラスタを開始します {#start-the-cluster}
+## クラスターを開始する {#start-the-cluster}
 
-クラスタが正常にデプロイされたら、次のコマンドを実行してクラスタを起動します。
+クラスターが正常にデプロイされたら、次のコマンドを実行してクラスターを開始します。
 
 {{< copyable "" >}}
 
@@ -85,11 +85,11 @@ prod-cluster  tidb  ${version}  /root/.tiup/storage/dm/clusters/test  /root/.tiu
 tiup dm start prod-cluster
 ```
 
-クラスタの名前を忘れた場合は、 `tiup dm list`を実行してクラスタリストを表示します。
+クラスターの名前を忘れた場合は、 `tiup dm list`を実行してクラスター リストを表示します。
 
-## クラスタのステータスを確認する {#check-the-cluster-status}
+## クラスターの状態を確認する {#check-the-cluster-status}
 
-TiUPは、クラスタの各コンポーネントのステータスを表示する`tiup dm display`のコマンドを提供します。このコマンドを使用すると、コンポーネントのステータスを確認するために各マシンにログインする必要はありません。コマンドの使用法は次のとおりです。
+TiUP は、クラスター内の各コンポーネントのステータスを表示するための`tiup dm display`のコマンドを提供します。このコマンドを使用すると、コンポーネントのステータスを確認するために各マシンにログインする必要がなくなります。コマンドの使用法は次のとおりです。
 
 {{< copyable "" >}}
 
@@ -113,29 +113,29 @@ ID                 Role          Host          Ports      OS/Arch       Status  
 172.19.0.101:9090  prometheus    172.19.0.101  9090       linux/x86_64  Up         /home/tidb/data/prometheus-9090    /home/tidb/deploy/prometheus-9090
 ```
 
-`Status`列は、 `Up`または`Down`を使用して、サービスが正常に実行されているかどうかを示します。
+`Status`列は、サービスが正常に実行されているかどうかを示すために`Up`または`Down`を使用します。
 
-DMマスターコンポーネントの場合、ステータスに`|L`が追加されることがあります。これは、DMマスターノードがリーダーであることを示します。 DM-workerコンポーネントの場合、 `Free`は、現在のDM-workerノードがアップストリームにバインドされていないことを示します。
+DM-master コンポーネントの場合、ステータスに`|L`が追加される場合があります。これは、DM-master ノードがリーダーであることを示します。 DM-worker コンポーネントの場合、 `Free`は現在の DM-worker ノードがアップストリームにバインドされていないことを示します。
 
-## クラスタでのスケーリング {#scale-in-a-cluster}
+## クラスターでのスケーリング {#scale-in-a-cluster}
 
-クラスタでのスケーリングとは、一部のノードをオフラインにすることを意味します。この操作により、指定されたノードがクラスタから削除され、残りのデータファイルが削除されます。
+クラスターでのスケーリングとは、一部のノードをオフラインにすることを意味します。この操作は、指定されたノードをクラスターから削除し、残りのデータ ファイルを削除します。
 
-クラスタでスケーリングする場合、DM-masterおよびDM-workerコンポーネントに対するDM操作は次の順序で実行されます。
+クラスターをスケールインすると、DM-master および DM-worker コンポーネントでの DM 操作は次の順序で実行されます。
 
-1.  コンポーネントプロセスを停止します。
-2.  DMマスターのAPIを呼び出して、 `member`を削除します。
-3.  ノードに関連するデータファイルをクリーンアップします。
+1.  コンポーネント プロセスを停止します。
+2.  DM-master の API を呼び出して`member`を削除します。
+3.  ノードに関連するデータ ファイルをクリーンアップします。
 
-scale-inコマンドの基本的な使用法：
+スケールイン コマンドの基本的な使用法:
 
 ```bash
 tiup dm scale-in <cluster-name> -N <node-id>
 ```
 
-このコマンドを使用するには、クラスタ名とノードIDの少なくとも2つの引数を指定する必要があります。ノードIDは、前のセクションの`tiup dm display`コマンドを使用して取得できます。
+このコマンドを使用するには、クラスター名とノード ID の少なくとも 2 つの引数を指定する必要があります。ノード ID は、前のセクションの`tiup dm display`コマンドを使用して取得できます。
 
-たとえば、 `172.16.5.140`のDM-workerノードでスケーリングするには（DM-masterでのスケーリングと同様）、次のコマンドを実行します。
+たとえば、 `172.16.5.140`で DM-worker ノードをスケーリングするには (DM-master でのスケーリングと同様)、次のコマンドを実行します。
 
 {{< copyable "" >}}
 
@@ -143,17 +143,17 @@ tiup dm scale-in <cluster-name> -N <node-id>
 tiup dm scale-in prod-cluster -N 172.16.5.140:8262
 ```
 
-## クラスタをスケールアウトする {#scale-out-a-cluster}
+## クラスターをスケールアウトする {#scale-out-a-cluster}
 
-スケールアウト操作には、展開と同様の内部ロジックがありますTiUP DMコンポーネントは、最初にノードのSSH接続を確認し、ターゲットノードに必要なディレクトリを作成してから、展開操作を実行し、ノードサービスを開始します。
+スケールアウト操作には、デプロイと同様の内部ロジックがありますTiUP DMコンポーネントは、まずノードの SSH 接続を確認し、ターゲット ノードに必要なディレクトリを作成してから、デプロイ操作を実行し、ノード サービスを開始します。
 
-たとえば、 `prod-cluster`のクラスタのDM-workerノードをスケールアウトするには、次の手順を実行します（DM-masterのスケールアウトにも同様の手順があります）。
+たとえば、 `prod-cluster`クラスター内の DM-worker ノードをスケールアウトするには、次の手順を実行します (DM-master のスケールアウトにも同様の手順があります)。
 
-1.  `scale.yaml`のファイルを作成し、新しいワーカーノードの情報を追加します。
+1.  `scale.yaml`ファイルを作成し、新しいワーカー ノードの情報を追加します。
 
     > **ノート：**
     >
-    > 既存のノードではなく、新しいノードの説明のみを含むトポロジファイルを作成する必要があります。その他の構成項目（デプロイメントディレクトリなど）については、この[TiUP構成パラメーターの例](https://github.com/pingcap/tiup/blob/master/embed/examples/dm/topology.example.yaml)を参照してください。
+    > 既存のノードではなく、新しいノードの説明のみを含むトポロジ ファイルを作成する必要があります。その他の構成項目 (デプロイメント・ディレクトリーなど) については、この[TiUP 構成パラメーターの例](https://github.com/pingcap/tiup/blob/master/embed/examples/dm/topology.example.yaml)を参照してください。
 
     ```yaml
     ---
@@ -163,7 +163,7 @@ tiup dm scale-in prod-cluster -N 172.16.5.140:8262
 
     ```
 
-2.  スケールアウト操作を実行します。 TiUP DMは、 `scale.yaml`で説明されているポート、ディレクトリ、およびその他の情報に従って、対応するノードをクラスタに追加します。
+2.  スケールアウト操作を実行します。 TiUP DMは、 `scale.yaml`で説明したポート、ディレクトリ、およびその他の情報に従って、対応するノードをクラスターに追加します。
 
     {{< copyable "" >}}
 
@@ -171,25 +171,25 @@ tiup dm scale-in prod-cluster -N 172.16.5.140:8262
     tiup dm scale-out prod-cluster scale.yaml
     ```
 
-    コマンドの実行後、 `tiup dm display prod-cluster`を実行することで、スケールアウトされたクラスタのステータスを確認できます。
+    コマンドの実行後、 `tiup dm display prod-cluster`を実行すると、スケールアウトされたクラスターの状態を確認できます。
 
-## ローリングアップグレード {#rolling-upgrade}
+## ローリング アップグレード {#rolling-upgrade}
 
 > **ノート：**
 >
-> v2.0.5以降、dmctlは[データソースのエクスポートとインポート、およびクラスターのタスクConfiguration / コンフィグレーション](/dm/dm-export-import-config.md)をサポートします。
+> v2.0.5 以降、dmctl サポート[データ ソースのエクスポートとインポート、およびクラスターのタスクConfiguration / コンフィグレーション](/dm/dm-export-import-config.md) 。
 >
-> アップグレードする前に、 `config export`を使用してクラスターの構成ファイルをエクスポートできます。アップグレード後、以前のバージョンにダウングレードする必要がある場合は、最初に以前のクラスタを再デプロイしてから、 `config import`を使用して以前の構成ファイルをインポートできます。
+> アップグレードする前に、 `config export`を使用してクラスターの構成ファイルをエクスポートできます。アップグレード後、以前のバージョンにダウングレードする必要がある場合は、最初に以前のクラスターを再デプロイしてから、 `config import`を使用して以前の構成ファイルをインポートできます。
 >
-> v2.0.5より前のクラスターの場合、dmctl v2.0.5以降を使用して、データソースおよびタスク構成ファイルをエクスポートおよびインポートできます。
+> v2.0.5 より前のクラスターの場合、dmctl v2.0.5 以降を使用して、データ ソースとタスク構成ファイルをエクスポートおよびインポートできます。
 >
-> v2.0.2以降のクラスターの場合、現在、リレーワーカーに関連する構成を自動的にインポートすることはサポートされていません。 `start-relay`のコマンドを使用して手動で[リレーログを開始](/dm/relay-log.md#start-and-stop-the-relay-log-feature)を実行できます。
+> v2.0.2以降のクラスタでは、現在、Relay Workerに関連する設定の自動インポートはサポートされていません。 `start-relay`のコマンドを使用して、手動で[リレーログを開始](/dm/relay-log.md#start-and-stop-the-relay-log-feature)を実行できます。
 
-ローリングアップグレードプロセスは、アプリケーションに対して可能な限り透過的に行われ、ビジネスに影響を与えません。操作はノードによって異なります。
+ローリング アップグレード プロセスは、アプリケーションに対して可能な限り透過的に行われ、ビジネスに影響を与えません。操作はノードによって異なります。
 
-### アップグレードコマンド {#upgrade-command}
+### アップグレード コマンド {#upgrade-command}
 
-`tiup dm upgrade`コマンドを実行して、DMクラスタをアップグレードできます。たとえば、次のコマンドはクラスタを`${version}`にアップグレードします。このコマンドを実行する前に、 `${version}`を必要なバージョンに変更してください。
+`tiup dm upgrade`コマンドを実行して、DM クラスターをアップグレードできます。たとえば、次のコマンドはクラスターを`${version}`にアップグレードします。このコマンドを実行する前に、 `${version}`を必要なバージョンに変更します。
 
 {{< copyable "" >}}
 
@@ -197,9 +197,9 @@ tiup dm scale-in prod-cluster -N 172.16.5.140:8262
 tiup dm upgrade prod-cluster ${version}
 ```
 
-## 構成を更新する {#update-configuration}
+## 構成の更新 {#update-configuration}
 
-コンポーネント構成を動的に更新する場合、 TiUP DMコンポーネントは各クラスタの現在の構成を保存します。この構成を編集するには、 `tiup dm edit-config <cluster-name>`コマンドを実行します。例えば：
+コンポーネント構成を動的に更新する場合、 TiUP DMコンポーネントは各クラスターの現在の構成を保存します。この構成を編集するには、 `tiup dm edit-config <cluster-name>`コマンドを実行します。例えば：
 
 {{< copyable "" >}}
 
@@ -207,7 +207,7 @@ tiup dm upgrade prod-cluster ${version}
 tiup dm edit-config prod-cluster
 ```
 
-TiUP DMは、viエディターで構成ファイルを開きます。他のエディターを使用する場合は、 `EDITOR`環境変数を使用して、 `export EDITOR=nano`などのエディターをカスタマイズします。ファイルを編集した後、変更を保存します。新しい構成をクラスタに適用するには、次のコマンドを実行します。
+TiUP DMは、vi エディターで構成ファイルを開きます。他のエディターを使用する場合は、 `EDITOR`環境変数を使用して、 `export EDITOR=nano`などのエディターをカスタマイズします。ファイルを編集したら、変更を保存します。新しい構成をクラスターに適用するには、次のコマンドを実行します。
 
 {{< copyable "" >}}
 
@@ -215,11 +215,11 @@ TiUP DMは、viエディターで構成ファイルを開きます。他のエ�
 tiup dm reload prod-cluster
 ```
 
-このコマンドは、構成をターゲットマシンに送信し、クラスタを再起動して構成を有効にします。
+このコマンドは、構成をターゲット マシンに送信し、クラスターを再起動して構成を有効にします。
 
-## コンポーネントを更新します {#update-component}
+## コンポーネントの更新 {#update-component}
 
-通常のアップグレードでは、 `upgrade`コマンドを使用できます。ただし、デバッグなどの一部のシナリオでは、現在実行中のコンポーネントを一時パッケージに置き換える必要がある場合があります。これを実現するには、次の`patch`のコマンドを使用します。
+通常のアップグレードでは、 `upgrade`コマンドを使用できます。ただし、デバッグなどの一部のシナリオでは、現在実行中のコンポーネントを一時パッケージに置き換える必要がある場合があります。これを実現するには、 `patch`コマンドを使用します。
 
 {{< copyable "" >}}
 
@@ -247,7 +247,7 @@ Global Flags:
   -y, --yes                Skip all confirmations and assumes 'yes'
 ```
 
-DM-masterホットフィックスパッケージが`/tmp/dm-master-hotfix.tar.gz`に含まれていて、クラスタのすべてのDM-masterパッケージを置き換える場合は、次のコマンドを実行します。
+DM-master ホットフィックス パッケージが`/tmp/dm-master-hotfix.tar.gz`にあり、クラスター内のすべての DM-master パッケージを置き換える場合は、次のコマンドを実行します。
 
 {{< copyable "" >}}
 
@@ -255,7 +255,7 @@ DM-masterホットフィックスパッケージが`/tmp/dm-master-hotfix.tar.gz
 tiup dm patch prod-cluster /tmp/dm-master-hotfix.tar.gz -R dm-master
 ```
 
-クラスタのDMマスターパッケージを1つだけ置き換えることもできます。
+クラスター内の 1 つの DM-master パッケージのみを置き換えることもできます。
 
 {{< copyable "" >}}
 
@@ -263,22 +263,22 @@ tiup dm patch prod-cluster /tmp/dm-master-hotfix.tar.gz -R dm-master
 tiup dm patch prod-cluster /tmp/dm--hotfix.tar.gz -N 172.16.4.5:8261
 ```
 
-## DM-Ansibleを使用してデプロイされたDM1.0クラスタをインポートしてアップグレードします {#import-and-upgrade-a-dm-1-0-cluster-deployed-using-dm-ansible}
+## DM-Ansible を使用してデプロイされた DM 1.0 クラスターをインポートしてアップグレードする {#import-and-upgrade-a-dm-1-0-cluster-deployed-using-dm-ansible}
 
 > **ノート：**
 >
-> -   TiUPは、DM1.0クラスタへのDMポータルコンポーネントのインポートをサポートしていません。
-> -   インポートする前に、元のクラスタを停止する必要があります。
-> -   2.0にアップグレードする必要があるタスクには`stop-task`を実行しないでください。
-> -   TiUPは、v2.0.0-rc.2以降のバージョンのDMクラスタへのインポートのみをサポートします。
-> -   `import`コマンドは、DM1.0クラスタから新しいDM2.0クラスターにデータをインポートするために使用されクラスタ。 DM移行タスクを既存のDM2.0クラスタにインポートする必要がある場合は、 [TiDBデータ移行をv1.0.xからv2.0+に手動でアップグレードする](/dm/manually-upgrade-dm-1.0-to-2.0.md)を参照してください。
-> -   一部のコンポーネントのデプロイメントディレクトリは、元のクラスタのデプロイメントディレクトリとは異なります。 `display`コマンドを実行して詳細を表示できます。
+> -   TiUP は、DM 1.0 クラスターでの DM ポータル コンポーネントのインポートをサポートしていません。
+> -   インポートする前に、元のクラスターを停止する必要があります。
+> -   2.0 にアップグレードする必要があるタスクに対して`stop-task`を実行しないでください。
+> -   TiUP は、v2.0.0-rc.2 以降のバージョンの DM クラスターへのインポートのみをサポートします。
+> -   `import`コマンドは、DM 1.0 クラスターから新しい DM 2.0 クラスターにデータをインポートするために使用されます。 DM 移行タスクを既存の DM 2.0 クラスターにインポートする必要がある場合は、 [TiDB データ移行を v1.0.x から v2.0+ に手動でアップグレードする](/dm/manually-upgrade-dm-1.0-to-2.0.md)を参照してください。
+> -   一部のコンポーネントのデプロイメント ディレクトリは、元のクラスタのものとは異なります。 `display`コマンドを実行して詳細を表示できます。
 > -   インポートする前に`tiup update --self && tiup update dm`を実行して、 TiUP DMコンポーネントが最新バージョンであることを確認します。
-> -   インポート後、クラスタにはDMマスターノードが1つだけ存在します。 DMマスターをスケールアウトするには、 [クラスタをスケールアウトする](#scale-out-a-cluster)を参照してください。
+> -   インポート後、クラスタには DM-master ノードが 1 つだけ存在します。 DM-master をスケールアウトするには、 [クラスターをスケールアウトする](#scale-out-a-cluster)を参照してください。
 
-TiUPがリリースされる前は、DM-Ansibleを使用してDMクラスターをデプロイすることがよくあります。 TiUPがDM-AnsibleによってデプロイされたDM1.0クラスタを引き継ぐことを有効にするには、 `import`コマンドを使用します。
+TiUP がリリースされる前は、DM-Ansible を使用して DM クラスターをデプロイすることがよくありました。 DM-Ansible によってデプロイされた DM 1.0 クラスターを TiUP が引き継ぐことができるようにするには、 `import`コマンドを使用します。
 
-たとえば、DMAnsibleを使用してデプロイされたクラスタをインポートするには：
+たとえば、DM Ansible を使用してデプロイされたクラスターをインポートするには、次のようにします。
 
 {{< copyable "" >}}
 
@@ -286,16 +286,16 @@ TiUPがリリースされる前は、DM-Ansibleを使用してDMクラスター�
 tiup dm import --dir=/path/to/dm-ansible --cluster-version ${version}
 ```
 
-`tiup list dm-master`を実行して、TiUPでサポートされている最新のクラスタバージョンを表示します。
+`tiup list dm-master`を実行して、TiUP でサポートされている最新のクラスター バージョンを表示します。
 
 `import`コマンドを使用するプロセスは次のとおりです。
 
-1.  TiUPは、DM-Ansibleを使用して以前にデプロイされたDMクラスタに基づいてトポロジファイル[`topology.yml`](https://github.com/pingcap/tiup/blob/master/embed/examples/dm/topology.example.yaml)を生成します。
-2.  トポロジー・ファイルが生成されたことを確認した後、それを使用して、v2.0以降のバージョンのDMクラスタをデプロイできます。
+1.  TiUP は、DM-Ansible を使用して以前にデプロイされた DM クラスターに基づいて、トポロジー ファイル[`topology.yml`](https://github.com/pingcap/tiup/blob/master/embed/examples/dm/topology.example.yaml)を生成します。
+2.  トポロジ ファイルが生成されていることを確認したら、それを使用して v2.0 以降のバージョンの DM クラスターをデプロイできます。
 
-展開が完了したら、 `tiup dm start`コマンドを実行してクラスタを開始し、DMカーネルのアップグレードプロセスを開始できます。
+デプロイが完了したら、 `tiup dm start`コマンドを実行してクラスターを開始し、DM カーネルのアップグレード プロセスを開始できます。
 
-## 操作ログをビューする {#view-the-operation-log}
+## 操作ログをビュー {#view-the-operation-log}
 
 操作ログを表示するには、 `audit`コマンドを使用します。 `audit`コマンドの使用法は次のとおりです。
 
@@ -331,9 +331,9 @@ ID      Time                  Command
 tiup dm audit 4D5kQY
 ```
 
-## DMクラスタのホストでコマンドを実行する {#run-commands-on-a-host-in-the-dm-cluster}
+## DM クラスター内のホストでコマンドを実行する {#run-commands-on-a-host-in-the-dm-cluster}
 
-DMクラスタのホストでコマンドを実行するには、 `exec`コマンドを使用します。 `exec`コマンドの使用法は次のとおりです。
+DM クラスター内のホストでコマンドを実行するには、 `exec`コマンドを使用します。 `exec`コマンドの使用法は次のとおりです。
 
 ```bash
 Usage:
@@ -347,7 +347,7 @@ Flags:
       --sudo             use root permissions (default false)
 ```
 
-たとえば、すべてのDMノードで`ls /tmp`を実行するには、次のコマンドを実行します。
+たとえば、すべての DM ノードで`ls /tmp`を実行するには、次のコマンドを実行します。
 
 {{< copyable "" >}}
 
@@ -357,21 +357,21 @@ tiup dm exec prod-cluster --command='ls /tmp'
 
 ## dmctl {#dmctl}
 
-TiUPはDMクラスタコントローラー`dmctl`を統合します。
+TiUP は、DM クラスタ コントローラを統合します`dmctl` 。
 
-dmctlを使用するには、次のコマンドを実行します。
+次のコマンドを実行して、dmctl を使用します。
 
 ```bash
 tiup dmctl [args]
 ```
 
-dmctlのバージョンを指定します。このコマンドを実行する前に、 `${version}`を必要なバージョンに変更してください。
+dmctl のバージョンを指定します。このコマンドを実行する前に、 `${version}`を必要なバージョンに変更します。
 
 ```
 tiup dmctl:${version} [args]
 ```
 
-ソースを追加するための前のdmctlコマンドは`dmctl --master-addr master1:8261 operate-source create /tmp/source1.yml`です。 dmctlがTiUPに統合された後、コマンドは次のようになります。
+ソースを追加する前の dmctl コマンドは`dmctl --master-addr master1:8261 operate-source create /tmp/source1.yml`です。 dmctl が TiUP に統合された後のコマンドは次のとおりです。
 
 {{< copyable "" >}}
 
@@ -379,22 +379,22 @@ tiup dmctl:${version} [args]
 tiup dmctl --master-addr master1:8261 operate-source create /tmp/source1.yml
 ```
 
-## システムのネイティブSSHクライアントを使用してクラスタに接続します {#use-the-system-s-native-ssh-client-to-connect-to-cluster}
+## システムのネイティブ SSH クライアントを使用してクラスターに接続する {#use-the-system-s-native-ssh-client-to-connect-to-cluster}
 
-クラスタマシンで実行される上記のすべての操作は、TiUPに組み込まれたSSHクライアントを使用してクラスタに接続し、コマンドを実行します。ただし、シナリオによっては、このようなクラスタ操作を実行するために、制御マシンシステムにネイティブなSSHクライアントを使用する必要がある場合もあります。例えば：
+クラスタ マシンで実行される上記のすべての操作は、TiUP に組み込まれている SSH クライアントを使用してクラスタに接続し、コマンドを実行します。ただし、シナリオによっては、制御マシン システムにネイティブな SSH クライアントを使用して、このようなクラスター操作を実行する必要がある場合もあります。例えば：
 
--   認証にSSHプラグインを使用するには
--   カスタマイズされたSSHクライアントを使用するには
+-   認証に SSH プラグインを使用するには
+-   カスタマイズされた SSH クライアントを使用するには
 
-次に、 `--native-ssh`コマンドラインフラグを使用して、システムネイティブのコマンドラインツールを有効にします。
+次に、 `--native-ssh`コマンドライン フラグを使用して、システム ネイティブのコマンドライン ツールを有効にできます。
 
--   クラスタをデプロイする： `tiup dm deploy <cluster-name> <version> <topo> --native-ssh`
--   クラスタを開始します： `tiup dm start <cluster-name> --native-ssh`
--   クラスタのアップグレード： `tiup dm upgrade ... --native-ssh`
+-   クラスターをデプロイする: `tiup dm deploy <cluster-name> <version> <topo> --native-ssh`
+-   クラスターを開始する: `tiup dm start <cluster-name> --native-ssh`
+-   クラスターのアップグレード: `tiup dm upgrade ... --native-ssh`
 
-上記のすべてのクラスタ操作コマンドに`--native-ssh`を追加して、システムのネイティブSSHクライアントを使用できます。
+上記のすべてのクラスター操作コマンドに`--native-ssh`を追加して、システムのネイティブ SSH クライアントを使用できます。
 
-すべてのコマンドにこのようなフラグが追加されないようにするには、 `TIUP_NATIVE_SSH`システム変数を使用して、ローカルSSHクライアントを使用するかどうかを指定できます。
+すべてのコマンドでこのようなフラグを追加することを避けるために、 `TIUP_NATIVE_SSH`システム変数を使用して、ローカル SSH クライアントを使用するかどうかを指定できます。
 
 ```sh
 export TIUP_NATIVE_SSH=true
@@ -404,8 +404,8 @@ export TIUP_NATIVE_SSH=1
 export TIUP_NATIVE_SSH=enable
 ```
 
-この環境変数と`--native-ssh`を同時に指定すると、 `--native-ssh`の優先度が高くなります。
+この環境変数と`--native-ssh`を同時に指定すると、 `--native-ssh`が優先されます。
 
 > **ノート：**
 >
-> クラスタ展開のプロセス中に、接続にパスワードを使用する必要がある場合、またはキーファイルに`passphrase`が設定されている場合は、 `sshpass`が制御マシンにインストールされていることを確認する必要があります。それ以外の場合は、タイムアウトエラーが報告されます。
+> クラスター展開のプロセス中に、接続にパスワードを使用する必要がある場合、またはキー ファイルで`passphrase`が構成されている場合は、制御マシンに`sshpass`がインストールされていることを確認する必要があります。それ以外の場合、タイムアウト エラーが報告されます。

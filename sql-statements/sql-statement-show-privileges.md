@@ -3,13 +3,13 @@ title: SHOW PRIVILEGES | TiDB SQL Statement Reference
 summary: An overview of the usage of SHOW PRIVILEGES for the TiDB database.
 ---
 
-# 特権を表示する {#show-privileges}
+# 特権を表示 {#show-privileges}
 
-このステートメントは、TiDBで割り当て可能な特権のリストを示しています。これは静的リストであり、現在のユーザーの権限を反映していません。
+このステートメントは、TiDB で割り当て可能な権限のリストを示しています。これは静的リストであり、現在のユーザーの権限を反映していません。
 
 ## あらすじ {#synopsis}
 
-**ShowStmt：**
+**表示ステートメント:**
 
 ![ShowStmt](/media/sqlgram/ShowStmt.png)
 
@@ -56,11 +56,11 @@ mysql> show privileges;
 32 rows in set (0.00 sec)
 ```
 
-## MySQLの互換性 {#mysql-compatibility}
+## MySQL の互換性 {#mysql-compatibility}
 
-このステートメントは、MySQLと完全に互換性があると理解されています。互換性の違いは、GitHubでは[問題を介して報告された](https://github.com/pingcap/tidb/issues/new/choose)である必要があります。
+このステートメントは、MySQL と完全に互換性があると理解されています。互換性の違いは、GitHub で[問題を介して報告された](https://github.com/pingcap/tidb/issues/new/choose)にする必要があります。
 
-## も参照してください {#see-also}
+## こちらもご覧ください {#see-also}
 
 -   [助成金を表示](/sql-statements/sql-statement-show-grants.md)
 -   [`GRANT &#x3C;privileges>`](/sql-statements/sql-statement-grant-privileges.md)

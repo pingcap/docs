@@ -5,7 +5,7 @@ summary: Learn the `CLUSTER_LOAD` information_schema table.
 
 # CLUSTER_LOAD {#cluster-load}
 
-`CLUSTER_LOAD`クラスタ負荷テーブルは、TiDBクラスタの各インスタンスが配置されているサーバーの現在の負荷情報を提供します。
+`CLUSTER_LOAD`クラスター負荷テーブルは、TiDB クラスターの各インスタンスが配置されているサーバーの現在の負荷情報を提供します。
 
 {{< copyable "" >}}
 
@@ -28,20 +28,20 @@ DESC cluster_load;
 6 rows in set (0.00 sec)
 ```
 
-フィールドの説明：
+フィールドの説明:
 
--   `TYPE` ： [`information_schema.cluster_info`](/information-schema/information-schema-cluster-info.md)テーブルの`TYPE`フィールドに対応します。オプションの値は、 `tidb` 、および`pd` `tikv` 。
--   `INSTANCE` ： [`information_schema.cluster_info`](/information-schema/information-schema-cluster-info.md)クラスタ情報テーブルの`INSTANCE`フィールドに対応します。
--   `DEVICE_TYPE` ：ハードウェアタイプ。現在、 `cpu` 、および`memory`タイプを`net`でき`disk` 。
--   `DEVICE_NAME` ：ハードウェア名。 `DEVICE_NAME`の値は`DEVICE_TYPE`によって異なります。
-    -   `cpu` ：ハードウェア名はcpuです。
-    -   `disk` ：ディスク名。
-    -   `net` ：ネットワークカード名。
-    -   `memory` ：ハードウェア名はメモリです。
--   `NAME` ：さまざまな荷重タイプ。たとえば、cpuには`load1` 、および`load15`の`load5`つの負荷タイプがあります。これらはそれぞれ1分、5分、および15分以内のcpuの平均負荷を意味します。
--   `VALUE` ：ハードウェア負荷の値。たとえば、 `1min` 、および`5min`は、それぞれ`15min`分、5分、および15分以内のハードウェアの平均負荷を意味します。
+-   `TYPE` : [`information_schema.cluster_info`](/information-schema/information-schema-cluster-info.md)テーブルの`TYPE`フィールドに対応します。オプションの値は`tidb` 、 `pd` 、および`tikv`です。
+-   `INSTANCE` : [`information_schema.cluster_info`](/information-schema/information-schema-cluster-info.md)クラスター情報テーブルの`INSTANCE`フィールドに対応します。
+-   `DEVICE_TYPE` : ハードウェア タイプ。現在、 `cpu` 、 `memory` 、 `disk` 、および`net`タイプを照会できます。
+-   `DEVICE_NAME` : ハードウェア名。 `DEVICE_NAME`の値は`DEVICE_TYPE`によって異なります。
+    -   `cpu` : ハードウェア名は cpu です。
+    -   `disk` : ディスク名。
+    -   `net` : ネットワーク カード名。
+    -   `memory` : ハードウェア名はメモリです。
+-   `NAME` : 異なる負荷タイプ。たとえば、cpu には`load1` 、 `load5` 、および`load15`の 3 つの負荷タイプがあり、それぞれ 1 分、5 分、および 15 分以内の CPU の平均負荷を意味します。
+-   `VALUE` : ハードウェア負荷の値。たとえば、 `1min` 、 `5min` 、および`15min`は、それぞれ 1 分、5 分、および 15 分以内のハードウェアの平均負荷を意味します。
 
-次の例は、 `CLUSTER_LOAD`テーブルを使用してCPUの現在の負荷情報を照会する方法を示しています。
+次の例は、 `CLUSTER_LOAD`テーブルを使用して CPU の現在の負荷情報を照会する方法を示しています。
 
 {{< copyable "" >}}
 

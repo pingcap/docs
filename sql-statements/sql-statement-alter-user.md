@@ -3,9 +3,9 @@ title: ALTER USER | TiDB SQL Statement Reference
 summary: An overview of the usage of ALTER USER for the TiDB database.
 ---
 
-# ALTER USER {#alter-user}
+# ユーザーの変更 {#alter-user}
 
-このステートメントは、TiDB特権システム内の既存のユーザーを変更します。 MySQL特権システムでは、ユーザーはユーザー名と接続元のホストの組み合わせです。したがって、IPアドレス`192.168.1.1`からのみ接続できるユーザー`'newuser2'@'192.168.1.1'`を作成することができます。 2人のユーザーが同じユーザー部分を持ち、異なるホストからログインするときに異なる権限を持つことも可能です。
+このステートメントは、TiDB 特権システム内の既存のユーザーを変更します。 MySQL 特権システムでは、ユーザーはユーザー名と接続元のホストの組み合わせです。これにより、ＩＰアドレス`192.168.1.1`からしか接続できないユーザ`'newuser2'@'192.168.1.1'`を作成することができる。 2 人のユーザーが同じユーザー部分を持ち、異なるホストからログインするときに異なる権限を持つことも可能です。
 
 ## あらすじ {#synopsis}
 
@@ -52,18 +52,18 @@ mysql> SHOW CREATE USER 'newuser';
 1 row in set (0.00 sec)
 ```
 
-## MySQLの互換性 {#mysql-compatibility}
+## MySQL の互換性 {#mysql-compatibility}
 
--   MySQLでは、このステートメントは、パスワードの有効期限が切れるなどの属性を変更するために使用されます。この機能は、TiDBではまだサポートされていません。
+-   MySQL では、このステートメントは、パスワードの期限切れなどの属性を変更するために使用されます。この機能は、TiDB ではまだサポートされていません。
 
-## も参照してください {#see-also}
+## こちらもご覧ください {#see-also}
 
 <CustomContent platform="tidb">
 
--   [MySQLとのセキュリティの互換性](/security-compatibility-with-mysql.md)
+-   [MySQL とのセキュリティの互換性](/security-compatibility-with-mysql.md)
 
 </CustomContent>
 
 -   [ユーザーを作成](/sql-statements/sql-statement-create-user.md)
--   [ドロップユーザー](/sql-statements/sql-statement-drop-user.md)
--   [CREATEUSERを表示する](/sql-statements/sql-statement-show-create-user.md)
+-   [ユーザーをドロップ](/sql-statements/sql-statement-drop-user.md)
+-   [ユーザーの作成を表示](/sql-statements/sql-statement-show-create-user.md)

@@ -98,7 +98,7 @@ public void batchInsert(Connection connection) throws SQLException {
 SELECT * FROM books WHERE title = 'Marian Yost';
 ```
 
-必要な列のみを照会する必要があります。例えば：
+必要な列のみをクエリする必要があります。例えば：
 
 {{< copyable "" >}}
 
@@ -146,12 +146,12 @@ DELETE FROM t;
 
 ### インデックスのベスト プラクティスを追加する {#add-index-best-practices}
 
-TiDB は、オンライン インデックス追加操作をサポートしています。 [インデックスを追加](/sql-statements/sql-statement-add-index.md)つまたは[インデックスを作成](/sql-statements/sql-statement-create-index.md)のステートメントを使用してインデックスを追加できます。テーブル内のデータの読み取りと書き込みはブロックされません。次のシステム変数を変更することで、インデックス追加操作の`re-organize`フェーズ中に同時実行数とバッチ サイズを調整できます。
+TiDB は、オンラインのインデックス追加操作をサポートしています。 [インデックスを追加](/sql-statements/sql-statement-add-index.md)つまたは[インデックスを作成](/sql-statements/sql-statement-create-index.md)のステートメントを使用してインデックスを追加できます。テーブルでのデータの読み取りと書き込みはブロックされません。次のシステム変数を変更することで、インデックス追加操作の`re-organize`フェーズ中に同時実行数とバッチ サイズを調整できます。
 
 -   [`tidb_ddl_reorg_worker_cnt`](/system-variables.md#tidb_ddl_reorg_worker_cnt)
 -   [`tidb_ddl_reorg_batch_size`](/system-variables.md#tidb_ddl_reorg_batch_size)
 
-オンライン アプリケーションへの影響を軽減するために、インデックスの追加操作の既定の速度は低速です。インデックスの追加操作のターゲット列が読み取り負荷のみを含む場合、またはオンライン ワークロードに直接関連しない場合、上記の変数の値を適切に増やして、インデックスの追加操作を高速化できます。
+オンライン アプリケーションへの影響を軽減するために、インデックスの追加操作の既定の速度は低速です。インデックスの追加操作のターゲット列が読み取り負荷のみを含むか、オンライン ワークロードに直接関係しない場合、上記の変数の値を適切に増やして、インデックスの追加操作を高速化できます。
 
 {{< copyable "" >}}
 

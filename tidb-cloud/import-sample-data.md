@@ -5,40 +5,40 @@ summary: Learn how to import sample data into TiDB Cloud via UI.
 
 # サンプル データのインポート {#import-sample-data}
 
-このドキュメントでは、UI を介してサンプル データをTiDB Cloudにインポートする方法について説明します。使用されるサンプル データは、Capital Bikeshare Data License Agreement に基づいてリリースされた Capital Bikeshare のシステム データです。サンプル データをインポートする前に、1 つの TiDBクラスタが必要です。
+このドキュメントでは、UI を介してサンプル データをTiDB Cloudにインポートする方法について説明します。使用されるサンプル データは、Capital Bikeshare Data License Agreement に基づいてリリースされた Capital Bikeshare のシステム データです。サンプル データをインポートする前に、1 つの TiDB クラスターが必要です。
 
 1.  [**クラスター]**ページに移動します。
 
-2.  クラスタの領域を見つけて、領域の右上隅にある [**データのインポート**] をクリックします。 [<strong>データ インポート タスク]</strong>ページが表示されます。
+2.  クラスターを見つけて、クラスター領域の右上隅にある [**データのインポート**] をクリックします。 [<strong>データ インポート タスク]</strong>ページが表示されます。
 
     > **ヒント：**
     >
-    > または、[**クラスター**] ページでクラスタの名前をクリックし、右上隅にある [<strong>データのインポート</strong>] をクリックすることもできます。
+    > または、[**クラスター**] ページでクラスターの名前をクリックし、右上隅にある [<strong>データのインポート</strong>] をクリックすることもできます。
 
 3.  インポート パラメータを入力します。
 
     <SimpleTab>
      <div label="AWS">
 
-    TiDBクラスタが AWS によってホストされている場合 (Developer Tier はデフォルトで AWS によってホストされています)、次のパラメーターを入力します。
+    TiDB クラスターが AWS によってホストされている場合 (Developer Tier はデフォルトで AWS によってホストされています)、次のパラメーターを入力します。
 
     -   **データ ソースの種類**: `AWS S3` 。
     -   **バケット URL** : サンプル データの URL を入力します。 `s3://tidbcloud-samples/data-ingestion/` .
     -   **データ形式**: <strong>TiDB Dumpling</strong>を選択します。
     -   **資格情報のセットアップ**: Role-ARN に`arn:aws:iam::385595570414:role/import-sample-access`を入力します。
-    -   **ターゲット クラスタ**: <strong>[ユーザー名]</strong>および [<strong>パスワード</strong>] フィールドに入力します。
+    -   **ターゲットクラスタ**: <strong>[ユーザー名]</strong>および [<strong>パスワード</strong>] フィールドに入力します。
     -   **DB/Tables Filter** : このフィールドは空白のままにします。
 
     </div>
 
     <div label="GCP">
 
-    TiDBクラスタが GCP によってホストされている場合は、次のパラメーターを入力します。
+    TiDB クラスターが GCP によってホストされている場合は、次のパラメーターを入力します。
 
     -   **データ ソースの種類**: `Google Cloud Stroage` 。
     -   **バケット URL** : サンプル データの URL を入力します。 `gcs://tidbcloud-samples-us-west1` .
     -   **データ形式**: <strong>TiDB Dumpling</strong>を選択します。
-    -   **ターゲット クラスタ**: <strong>[ユーザー名]</strong>および [<strong>パスワード</strong>] フィールドに入力します。
+    -   **ターゲットクラスタ**: <strong>[ユーザー名]</strong>および [<strong>パスワード</strong>] フィールドに入力します。
     -   **DB/Tables Filter** : このフィールドは空白のままにします。
 
     </div>
@@ -54,7 +54,7 @@ summary: Learn how to import sample data into TiDB Cloud via UI.
 
 データのインポート プロセスには 5 ～ 10 分かかります。データ インポート プログレス バーに**Success**と表示されたら、サンプル データとデータベース スキーマがTiDB Cloudのデータベースに正常にインポートされたことになります。
 
-クラスタがデータのインポート プロセスを完了すると、データベースにサンプル データが取得されます。
+クラスターがデータのインポート プロセスを完了すると、データベースにサンプル データが取得されます。
 
 いくつかのクエリを実行して、結果を確認できます。次に例を示します。
 

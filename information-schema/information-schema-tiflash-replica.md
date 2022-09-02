@@ -5,7 +5,7 @@ summary: Learn the `TIFLASH_REPLICA` information_schema table.
 
 # TIFLASH_REPLICA {#tiflash-replica}
 
-`TIFLASH_REPLICA`の表は、使用可能なTiFlashレプリカに関する情報を提供します。
+表`TIFLASH_REPLICA`は、利用可能な TiFlash レプリカに関する情報を提供します。
 
 {{< copyable "" >}}
 

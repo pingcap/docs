@@ -3,15 +3,15 @@ title: SHOW [BACKUPS|RESTORES] | TiDB SQL Statement Reference
 summary: An overview of the usage of SHOW [BACKUPS|RESTORES] for the TiDB database.
 ---
 
-# [バックアップ|復元]を表示する {#show-backups-restores}
+# [バックアップ|復元] を表示 {#show-backups-restores}
 
-これらのステートメントは、TiDBインスタンスで実行された、キューに入れられ、実行され、最近終了した[`BACKUP`](/sql-statements/sql-statement-backup.md)および[`RESTORE`](/sql-statements/sql-statement-restore.md)のタスクすべてのリストを示します。
+これらのステートメントは、TiDB インスタンスで実行された、キューに入れられた、実行中の、および最近終了した[`BACKUP`](/sql-statements/sql-statement-backup.md)および[`RESTORE`](/sql-statements/sql-statement-restore.md)のすべてのタスクのリストを表示します。
 
-どちらのステートメントも、実行するには`SUPER`の特権が必要です。
+両方のステートメントを実行するには、 `SUPER`の特権が必要です。
 
 `SHOW BACKUPS`を使用して`BACKUP`のタスクを照会し、 `SHOW RESTORES`を使用して`RESTORE`のタスクを照会します。
 
-`br`コマンドラインツールで開始されたバックアップと復元は表示されません。
+`br`コマンドライン ツールで開始されたバックアップと復元は表示されません。
 
 ## あらすじ {#synopsis}
 
@@ -26,7 +26,7 @@ ShowLikeOrWhere ::=
 
 ## 例 {#examples}
 
-1つの接続で、次のステートメントを実行します。
+1 つの接続で、次のステートメントを実行します。
 
 {{< copyable "" >}}
 
@@ -51,28 +51,28 @@ SHOW BACKUPS;
 1 row in set (0.00 sec)
 ```
 
-上記の結果の最初の行は次のように説明されています。
+上記の結果の最初の行は、次のように記述されます。
 
-| カラム              | 説明                                                            |
-| :--------------- | :------------------------------------------------------------ |
-| `Destination`    | 宛先URL（秘密鍵の漏洩を防ぐためにすべてのパラメーターが削除されています）                        |
-| `State`          | タスクの状態                                                        |
-| `Progress`       | 現在の状態での推定進捗状況（パーセンテージ）                                        |
-| `Queue_time`     | タスクがキューに入れられたとき                                               |
-| `Execution_time` | タスクが開始されたとき。キューイングタスクの値は`0000-00-00 00:00:00`です。              |
-| `Finish_time`    | タスクが終了したときのタイムスタンプ。タスクのキューイングおよび実行の値は`0000-00-00 00:00:00`です。 |
-| `Connection`     | このタスクを実行している接続ID                                              |
-| `Message`        | 詳細を含むメッセージ                                                    |
+| カラム              | 説明                                                                |
+| :--------------- | :---------------------------------------------------------------- |
+| `Destination`    | 宛先 URL (秘密鍵の漏洩を防ぐためにすべてのパラメーターが削除されています)                          |
+| `State`          | タスクの状態                                                            |
+| `Progress`       | パーセンテージとしての現在の状態での推定進行状況                                          |
+| `Queue_time`     | タスクがキューに入れられたとき                                                   |
+| `Execution_time` | タスクが開始されたとき。タスクをキューに入れる場合、値は`0000-00-00 00:00:00`です。              |
+| `Finish_time`    | タスクが終了したときのタイムスタンプ。キューイングおよび実行中のタスクの場合、値は`0000-00-00 00:00:00`です。 |
+| `Connection`     | このタスクを実行する接続 ID                                                   |
+| `Message`        | 詳細を含むメッセージ                                                        |
 
 可能な状態は次のとおりです。
 
 | 州      | 説明          |
 | :----- | :---------- |
-| バックアップ | バックアップを作成する |
-| 待って    | 実行を待っています   |
+| バックアップ | バックアップの作成   |
+| 待って    | 実行待ち        |
 | チェックサム | チェックサム操作の実行 |
 
-接続IDを使用して、 [`KILL TIDB QUERY`](/sql-statements/sql-statement-kill.md)ステートメントを介してバックアップ/復元タスクをキャンセルできます。
+接続 ID を使用して、 [`KILL TIDB QUERY`](/sql-statements/sql-statement-kill.md)ステートメントを介してバックアップ/復元タスクをキャンセルできます。
 
 {{< copyable "" >}}
 
@@ -86,7 +86,7 @@ Query OK, 0 rows affected (0.00 sec)
 
 ### フィルタリング {#filtering}
 
-`LIKE`句を使用して、宛先URLをワイルドカード式と照合することにより、タスクを除外します。
+`LIKE`句を使用して、宛先 URL をワイルドカード式と照合してタスクを除外します。
 
 {{< copyable "" >}}
 
@@ -102,11 +102,11 @@ SHOW BACKUPS LIKE 's3://%';
 SHOW BACKUPS WHERE `Progress` < 25.0;
 ```
 
-## MySQLの互換性 {#mysql-compatibility}
+## MySQL の互換性 {#mysql-compatibility}
 
-このステートメントは、MySQL構文のTiDB拡張です。
+このステートメントは、MySQL 構文に対する TiDB 拡張です。
 
-## も参照してください {#see-also}
+## こちらもご覧ください {#see-also}
 
 -   [バックアップ](/sql-statements/sql-statement-backup.md)
 -   [戻す](/sql-statements/sql-statement-restore.md)

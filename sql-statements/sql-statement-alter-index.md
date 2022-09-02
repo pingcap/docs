@@ -3,9 +3,9 @@ title: ALTER INDEX
 summary: An overview of the usage of ALTER INDEX for the TiDB database.
 ---
 
-# ALTERINDEX {#alter-index}
+# インデックスの変更 {#alter-index}
 
-`ALTER INDEX`ステートメントは、インデックスの可視性を`Visible`または`Invisible`に変更するために使用されます。非表示のインデックスはDMLステートメントによって維持されますが、クエリオプティマイザでは使用されません。これは、インデックスを完全に削除する前に再確認する必要があるシナリオで役立ちます。
+`ALTER INDEX`ステートメントは、インデックスの可視性を`Visible`または`Invisible`に変更するために使用されます。非表示のインデックスは DML ステートメントによって維持されますが、クエリ オプティマイザーでは使用されません。これは、インデックスを完全に削除する前に再確認する必要があるシナリオで役立ちます。
 
 ## あらすじ {#synopsis}
 
@@ -51,7 +51,7 @@ SHOW CREATE TABLE t1;
 1 row in set (0.00 sec)
 ```
 
-オプティマイザは、非表示の**インデックス**`c1`を使用できません。
+オプティマイザは`c1`の非表示**インデックス**を使用できません。
 
 {{< copyable "" >}}
 
@@ -70,7 +70,7 @@ EXPLAIN SELECT c1 FROM t1 ORDER BY c1;
 3 rows in set (0.00 sec)
 ```
 
-比較すると、 `c2`は**表示可能なインデックス**であり、オプティマイザで使用できます。
+比較すると、 `c2`は**可視インデックス**であり、オプティマイザーで使用できます。
 
 {{< copyable "" >}}
 
@@ -88,7 +88,7 @@ EXPLAIN SELECT c2 FROM t1 ORDER BY c2;
 2 rows in set (0.00 sec)
 ```
 
-`USE INDEX` SQLヒントを使用してインデックスを強制的に使用しても、オプティマイザーは非表示のインデックスを使用できません。それ以外の場合は、エラーが返されます。
+`USE INDEX` SQL ヒントを使用してインデックスを強制的に使用しても、オプティマイザは非表示のインデックスを使用できません。そうでない場合は、エラーが返されます。
 
 {{< copyable "" >}}
 
@@ -102,7 +102,7 @@ ERROR 1176 (42000): Key 'c1' doesn't exist in table 't1'
 
 > **ノート：**
 >
-> ここでの「非表示」とは、オプティマイザにのみ非表示であることを意味します。非表示のインデックスは引き続き変更または削除できます。
+> ここでの「見えない」とは、オプティマイザーだけに見えないことを意味します。非表示のインデックスを変更または削除することはできます。
 
 {{< copyable "" >}}
 
@@ -114,16 +114,16 @@ ALTER TABLE t1 DROP INDEX c1;
 Query OK, 0 rows affected (0.02 sec)
 ```
 
-## MySQLの互換性 {#mysql-compatibility}
+## MySQL の互換性 {#mysql-compatibility}
 
--   TiDBの非表示インデックスは、MySQL8.0の同等の機能をモデルにしています。
--   MySQLと同様に、TiDBでは`PRIMARY KEY`のインデックスを非表示にすることはできません。
--   MySQLには、すべての非表示のインデックスを再び*表示できるよう*にするオプティマイザスイッチ`use_invisible_indexes=on`が用意されています。この機能はTiDBでは使用できません。
+-   TiDB の不可視インデックスは、MySQL 8.0 の同等の機能をモデルにしています。
+-   MySQL と同様に、TiDB では`PRIMARY KEY`のインデックスを非表示にすることはできません。
+-   MySQL は、オプティマイザ スイッチ`use_invisible_indexes=on`を提供して、すべての非表示のインデックスを再び*表示できるよう*にします。この機能は TiDB では利用できません。
 
-## も参照してください {#see-also}
+## こちらもご覧ください {#see-also}
 
--   [CREATE TABLE](/sql-statements/sql-statement-create-table.md)
--   [インデックスの作成](/sql-statements/sql-statement-create-index.md)
+-   [テーブルを作成](/sql-statements/sql-statement-create-table.md)
+-   [インデックスを作成](/sql-statements/sql-statement-create-index.md)
 -   [インデックスを追加](/sql-statements/sql-statement-add-index.md)
 -   [ドロップインデックス](/sql-statements/sql-statement-drop-index.md)
--   [インデックスの名前変更](/sql-statements/sql-statement-rename-index.md)
+-   [インデックスの名前を変更](/sql-statements/sql-statement-rename-index.md)

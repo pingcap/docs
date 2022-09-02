@@ -3,21 +3,21 @@ title: SHOW [GLOBAL|SESSION] STATUS | TiDB SQL Statement Reference
 summary: An overview of the usage of SHOW [GLOBAL|SESSION] STATUS for the TiDB database.
 ---
 
-# [グローバル|セッション]ステータスを表示 {#show-global-session-status}
+# [グローバル|セッション] ステータスを表示 {#show-global-session-status}
 
-このステートメントは、MySQLとの互換性のために含まれています。 `SHOW STATUS`ではなくPrometheusとGrafanaを一元化されたメトリック収集に使用するTiDBには影響しません。
+このステートメントは、MySQL との互換性のために含まれています。 `SHOW STATUS`の代わりに Prometheus と Grafana を集中メトリック収集に使用する TiDB には影響しません。
 
 ## あらすじ {#synopsis}
 
-**ShowStmt：**
+**表示ステートメント:**
 
 ![ShowStmt](/media/sqlgram/ShowStmt.png)
 
-**ShowTargetFilterable：**
+**ShowTargetFilterable:**
 
 ![ShowTargetFilterable](/media/sqlgram/ShowTargetFilterable.png)
 
-**GlobalScope：**
+**グローバルスコープ:**
 
 ![GlobalScope](/media/sqlgram/GlobalScope.png)
 
@@ -51,10 +51,10 @@ mysql> show global status;
 6 rows in set (0.00 sec)
 ```
 
-## MySQLの互換性 {#mysql-compatibility}
+## MySQL の互換性 {#mysql-compatibility}
 
--   このステートメントは、MySQLとの互換性のためにのみ含まれています。
+-   このステートメントは、MySQL との互換性のためにのみ含まれています。
 
-## も参照してください {#see-also}
+## こちらもご覧ください {#see-also}
 
--   [フラッシュステータス](/sql-statements/sql-statement-flush-status.md)
+-   [フラッシュ状態](/sql-statements/sql-statement-flush-status.md)

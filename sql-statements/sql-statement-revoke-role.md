@@ -5,7 +5,7 @@ summary: An overview of the usage of REVOKE <role> for the TiDB database.
 
 # <code>REVOKE &#x3C;role></code> {#code-revoke-x3c-role-code}
 
-このステートメントは、指定されたユーザー（またはユーザーのリスト）から以前に割り当てられたロールを削除します。
+このステートメントは、指定されたユーザー (またはユーザーのリスト) から以前に割り当てられた役割を削除します。
 
 ## あらすじ {#synopsis}
 
@@ -22,7 +22,7 @@ UsernameList ::=
 
 ## 例 {#examples}
 
-分析チームの新しい役割と、 `jennifer`という名前の新しいユーザーを作成します。
+分析チーム用の新しいロールと、 `jennifer`という名前の新しいユーザーを作成します。
 
 ```sql
 $ mysql -uroot
@@ -51,7 +51,7 @@ mysql> GRANT analyticsteam TO jennifer;
 Query OK, 0 rows affected (0.01 sec)
 ```
 
-ロールに関連付けられた特権を使用できるようにするには、デフォルトで`jennifer`が`SET ROLE analyticsteam`である必要があることに注意してください。
+ロールに関連付けられた権限を使用できるようにするには、デフォルトで`jennifer` ～ `SET ROLE analyticsteam`が必要であることに注意してください。
 
 ```sql
 $ mysql -ujennifer
@@ -100,7 +100,7 @@ mysql> SHOW TABLES IN test;
 1 row in set (0.00 sec)
 ```
 
-ステートメント`SET DEFAULT ROLE`を使用してロールを`jennifer`に関連付けることができるため、ロールに関連付けられた特権を引き受けるためにステートメント`SET ROLE`を実行する必要はありません。
+ステートメント`SET DEFAULT ROLE`を使用してロールを`jennifer`に関連付けることができるため、ロールに関連付けられた権限を引き受けるためにステートメント`SET ROLE`を実行する必要はありません。
 
 ```sql
 $ mysql -uroot
@@ -153,7 +153,7 @@ mysql> SHOW TABLES IN test;
 1 row in set (0.00 sec)
 ```
 
-analyticsteamの役割を`jennifer`から取り消します：
+analyticsteam の役割を`jennifer`から取り消します。
 
 ```sql
 $ mysql -uroot
@@ -196,20 +196,20 @@ mysql> SHOW GRANTS;
 1 row in set (0.00 sec)
 ```
 
-## MySQLの互換性 {#mysql-compatibility}
+## MySQL の互換性 {#mysql-compatibility}
 
-このステートメントは、MySQL8.0の機能であるロールと完全に互換性があると理解されています。互換性の違いは、GitHubでは[問題を介して報告された](https://github.com/pingcap/tidb/issues/new/choose)である必要があります。
+このステートメントは、MySQL 8.0 の機能であるロールと完全に互換性があると理解されています。互換性の違いは、GitHub で[問題を介して報告された](https://github.com/pingcap/tidb/issues/new/choose)にする必要があります。
 
-## も参照してください {#see-also}
+## こちらもご覧ください {#see-also}
 
--   [役割の作成](/sql-statements/sql-statement-create-role.md)
--   [ドロップロール](/sql-statements/sql-statement-drop-role.md)
+-   [役割を作成](/sql-statements/sql-statement-create-role.md)
+-   [ロールを削除](/sql-statements/sql-statement-drop-role.md)
 -   [`GRANT &#x3C;role>`](/sql-statements/sql-statement-grant-role.md)
--   [役割を設定する](/sql-statements/sql-statement-set-role.md)
+-   [ロールを設定](/sql-statements/sql-statement-set-role.md)
 -   [デフォルトの役割を設定](/sql-statements/sql-statement-set-default-role.md)
 
 <CustomContent platform="tidb">
 
--   [ロールベースのアクセス制御](/role-based-access-control.md)
+-   [役割ベースのアクセス制御](/role-based-access-control.md)
 
 </CustomContent>

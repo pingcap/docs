@@ -5,7 +5,7 @@ summary: Learn the `TIKV_STORE_STATUS` information_schema table.
 
 # TIKV_STORE_STATUS {#tikv-store-status}
 
-`TIKV_STORE_STATUS`の表は、クラスタに割り当てられたID、アドレスとポート、ステータス、容量、現在のノードのリージョンリーダーの数など、PDのAPIを介したTiKVノードの基本情報を示しています。
+`TIKV_STORE_STATUS`番目のテーブルは、PD の API を介して TiKV ノードのいくつかの基本情報を示します。たとえば、クラスターに割り当てられた ID、アドレスとポート、ステータス、容量、現在のノードのリージョンリーダーの数などです。
 
 {{< copyable "" >}}
 
@@ -41,24 +41,24 @@ DESC tikv_store_status;
 19 rows in set (0.00 sec)
 ```
 
-`TIKV_STORE_STATUS`表の列の説明は次のとおりです。
+`TIKV_STORE_STATUS`テーブルの列の説明は次のとおりです。
 
--   `STORE_ID` ：ストアのID。
--   `ADDRESS` ：ストアのアドレス。
--   `STORE_STATE` ：ストア状態の識別子`STORE_STATE_NAME`に対応します。
--   `STORE_STATE_NAME` ：ストア状態の名前。名前は`Up` 、または`Offline` `Tombstone` 。
--   `LABEL` ：ストアに設定されたラベル。
--   `VERSION` ：ストアのバージョン番号。
--   `CAPACITY` ：ストアのストレージ容量。
--   `AVAILABLE` ：ストアの残りのストレージスペース。
--   `LEADER_COUNT` ：ストアのリーダーの数。
--   `LEADER_WEIGHT` ：ストアのリーダーの重み。
--   `LEADER_SCORE` ：ストアのリーダースコア。
--   `LEADER_SIZE` ：ストア上のすべてのリーダーのおおよその合計データサイズ（MB）。
--   `REGION_COUNT` ：ストア上のリージョンの数。
--   `REGION_WEIGHT` ：ストアのリージョンの重み。
--   `REGION_SCORE` ：ストアのリージョンスコア。
--   `REGION_SIZE` ：ストア上のすべてのリージョンのおおよその合計データサイズ（MB）。
--   `START_TS` ：ストアが開始されたときのタイムスタンプ。
--   `LAST_HEARTBEAT_TS` ：ストアによって送信された最後のハートビートのタイムスタンプ。
--   `UPTIME` ：ストアが開始されてからの合計時間。
+-   `STORE_ID` : ストアの ID。
+-   `ADDRESS` : ストアのアドレス。
+-   `STORE_STATE` : `STORE_STATE_NAME`に対応する Store 状態の識別子。
+-   `STORE_STATE_NAME` : Store 状態の名前。名前は`Up` 、 `Offline` 、または`Tombstone`です。
+-   `LABEL` : ストアに設定されたラベル。
+-   `VERSION` : ストアのバージョン番号。
+-   `CAPACITY` : ストアのストレージ容量。
+-   `AVAILABLE` : ストアの残りのストレージ容量。
+-   `LEADER_COUNT` : ストアのリーダーの数。
+-   `LEADER_WEIGHT` : ストアのリーダーの重み。
+-   `LEADER_SCORE` : ストアのリーダー スコア。
+-   `LEADER_SIZE` : ストアにあるすべてのリーダーのおおよその合計データ サイズ (MB)。
+-   `REGION_COUNT` : ストアのリージョン数。
+-   `REGION_WEIGHT` : ストアのリージョンの重み。
+-   `REGION_SCORE` : ストアのリージョンスコア。
+-   `REGION_SIZE` : ストアのすべてのリージョンのおおよその合計データ サイズ (MB)。
+-   `START_TS` : ストアが開始されたときのタイムスタンプ。
+-   `LAST_HEARTBEAT_TS` : ストアによって送信された最後のハートビートのタイムスタンプ。
+-   `UPTIME` : ストアが開始してからの合計時間。

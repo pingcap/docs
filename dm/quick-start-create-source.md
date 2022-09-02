@@ -3,21 +3,21 @@ title: Create a Data Source
 summary: Learn how to create a data source for Data Migration (DM).
 ---
 
-# データソースを作成する {#create-a-data-source}
+# データ ソースを作成する {#create-a-data-source}
 
 > **ノート：**
 >
-> データソースを作成する前に、 [TiUPを使用してDMクラスターをデプロイする](/dm/deploy-a-dm-cluster-using-tiup.md)を行う必要があります。
+> データ ソースを作成する前に、次のことを行う必要があり[TiUP を使用して DMクラスタをデプロイする](/dm/deploy-a-dm-cluster-using-tiup.md) 。
 
-このドキュメントでは、TiDBデータ移行（DM）のデータ移行タスク用のデータソースを作成する方法について説明します。
+このドキュメントでは、TiDB Data Migration (DM) のデータ移行タスク用のデータ ソースを作成する方法について説明します。
 
-データソースには、アップストリーム移行タスクにアクセスするための情報が含まれています。データ移行タスクでは、アクセスの構成情報を取得するために対応するデータソースを参照する必要があるため、データ移行タスクを作成する前に、タスクのデータソースを作成する必要があります。特定のデータソース管理コマンドについては、 [データソース構成の管理](/dm/dm-manage-source.md)を参照してください。
+データ ソースには、上流の移行タスクにアクセスするための情報が含まれています。データ移行タスクでは、対応するデータ ソースを参照してアクセスの構成情報を取得する必要があるため、データ移行タスクを作成する前に、タスクのデータ ソースを作成する必要があります。特定のデータ ソース管理コマンドについては、 [データ ソース構成の管理](/dm/dm-manage-source.md)を参照してください。
 
-## ステップ1：データソースを構成する {#step-1-configure-the-data-source}
+## 手順 1: データ ソースを構成する {#step-1-configure-the-data-source}
 
-1.  （オプション）データソースのパスワードを暗号化する
+1.  (オプション) データ ソースのパスワードを暗号化する
 
-    DM構成ファイルでは、dmctlで暗号化されたパスワードを使用することをお勧めします。以下の例に従って、データソースの暗号化されたパスワードを取得できます。このパスワードは、後で構成ファイルを書き込むために使用できます。
+    DM 構成ファイルでは、dmctl で暗号化されたパスワードを使用することをお勧めします。以下の例に従って、データ ソースの暗号化されたパスワードを取得できます。これは、後で構成ファイルを書き込むために使用できます。
 
     {{< copyable "" >}}
 
@@ -29,9 +29,9 @@ summary: Learn how to create a data source for Data Migration (DM).
     MKxn0Qo3m3XOyjCnhEMtsUCm83EhGQDZ/T4=
     ```
 
-2.  データソースの構成ファイルを書き込みます
+2.  データ ソースの構成ファイルを書き込む
 
-    データソースごとに、それを作成するための個別の構成ファイルが必要です。以下の例に従って、IDが「mysql-01」であるデータソースを作成できます。最初に構成ファイルを作成します`./source-mysql-01.yaml` ：
+    データ ソースごとに、それを作成するための個別の構成ファイルが必要です。以下の例に従って、ID が「mysql-01」のデータ ソースを作成できます。最初に構成ファイル`./source-mysql-01.yaml`を作成します。
 
     ```yaml
     source-id: "mysql-01"    # The ID of the data source, you can refer this source-id in the task configuration and dmctl command to associate the corresponding data source.
@@ -47,9 +47,9 @@ summary: Learn how to create a data source for Data Migration (DM).
         ssl-key: "/path/to/key.pem"
     ```
 
-## ステップ2：データソースを作成する {#step-2-create-a-data-source}
+## ステップ 2: データ ソースを作成する {#step-2-create-a-data-source}
 
-次のコマンドを使用して、データソースを作成できます。
+次のコマンドを使用して、データ ソースを作成できます。
 
 {{< copyable "" >}}
 
@@ -57,7 +57,7 @@ summary: Learn how to create a data source for Data Migration (DM).
 tiup dmctl --master-addr <master-addr> operate-source create ./source-mysql-01.yaml
 ```
 
-その他の構成パラメーターについては、 [アップストリームデータベースConfiguration / コンフィグレーションファイル](/dm/dm-source-configuration-file.md)を参照してください。
+その他の構成パラメーターについては、 [アップストリーム データベースConfiguration / コンフィグレーションファイル](/dm/dm-source-configuration-file.md)を参照してください。
 
 返される結果は次のとおりです。
 
@@ -78,11 +78,11 @@ tiup dmctl --master-addr <master-addr> operate-source create ./source-mysql-01.y
 }
 ```
 
-## ステップ3：作成したデータソースをクエリする {#step-3-query-the-data-source-you-created}
+## ステップ 3: 作成したデータ ソースに対してクエリを実行する {#step-3-query-the-data-source-you-created}
 
-データソースを作成した後、次のコマンドを使用してデータソースをクエリできます。
+データ ソースを作成したら、次のコマンドを使用してデータ ソースをクエリできます。
 
--   データソースの`source-id`を知っている場合は、 `dmctl config source <source-id>`コマンドを使用して、データソースの構成を直接確認できます。
+-   データ ソースの`source-id`がわかれば、 `dmctl config source <source-id>`コマンドを使用して、データ ソースの構成を直接確認できます。
 
     {{< copyable "" >}}
 
@@ -105,7 +105,7 @@ tiup dmctl --master-addr <master-addr> operate-source create ./source-mysql-01.y
     }
     ```
 
--   `source-id`がわからない場合は、 `dmctl operate-source show`コマンドを使用して、対応するデータソースを見つけることができるソースデータベースリストを確認できます。
+-   `source-id`がわからない場合は、 `dmctl operate-source show`コマンドを使用してソース データベース リストを確認できます。このリストから、対応するデータ ソースを見つけることができます。
 
     {{< copyable "" >}}
 

@@ -3,9 +3,9 @@ title: Metrics Schema
 summary: Learn the `METRICS_SCHEMA` schema.
 ---
 
-# メトリックスキーマ {#metrics-schema}
+# メトリクス スキーマ {#metrics-schema}
 
-`METRICS_SCHEMA`は、Prometheusに保存されているTiDBメトリックの上にある一連のビューです。各テーブルのPromQL（Prometheus Query Language）のソースは、 [`INFORMATION_SCHEMA.METRICS_TABLES`](/information-schema/information-schema-metrics-tables.md)で利用できます。
+`METRICS_SCHEMA`は、Prometheus に格納されている TiDB メトリックの上にある一連のビューです。各テーブルの PromQL (Prometheus Query Language) のソースは[`INFORMATION_SCHEMA.METRICS_TABLES`](/information-schema/information-schema-metrics-tables.md)で利用できます。
 
 {{< copyable "" >}}
 
@@ -93,13 +93,13 @@ SHOW TABLES;
 626 rows in set (0.00 sec)
 ```
 
-`METRICS_SCHEMA`は、（ [`metrics_summary`](/information-schema/information-schema-metrics-summary.md)などの監視関連の[`inspection_summary`](/information-schema/information-schema-inspection-summary.md)テーブルのデータソースとして使用され[`metrics_summary_by_label`](/information-schema/information-schema-metrics-summary.md) 。
+`METRICS_SCHEMA`は、( [`metrics_summary`](/information-schema/information-schema-metrics-summary.md) 、 [`metrics_summary_by_label`](/information-schema/information-schema-metrics-summary.md) 、および[`inspection_summary`](/information-schema/information-schema-inspection-summary.md)などの) 監視関連の要約テーブルのデータ ソースとして使用されます。
 
-## その他の例 {#additional-examples}
+## 追加の例 {#additional-examples}
 
-このセクションでは、 `metrics_schema`のうち`tidb_query_duration`の監視テーブルを例として取り上げ、この監視テーブルの使用方法とその機能について説明します。他の監視テーブルの動作原理は`tidb_query_duration`と同様です。
+例として`metrics_schema`の`tidb_query_duration`モニタリング テーブルを取り上げ、このセクションでは、このモニタリング テーブルの使用方法とその動作について説明します。他の監視テーブルの動作原理は`tidb_query_duration`に似ています。
 
-`information_schema.metrics_tables`の`tidb_query_duration`テーブルに関連する情報を照会します。
+`information_schema.metrics_tables`の`tidb_query_duration`テーブルに関連する情報をクエリします。
 
 {{< copyable "" >}}
 
@@ -115,15 +115,15 @@ SELECT * FROM information_schema.metrics_tables WHERE table_name='tidb_query_dur
 +---------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------+-------------------+----------+----------------------------------------------+
 ```
 
-フィールドの説明：
+フィールドの説明:
 
--   `TABLE_NAME` ： `metrics_schema`のテーブル名に対応します。この例では、テーブル名は`tidb_query_duration`です。
--   `PROMQL` ：監視テーブルの動作原理は、最初にSQLステートメントを`PromQL`にマップし、次にPrometheusにデータを要求し、Prometheusの結果をSQLクエリの結果に変換することです。このフィールドは`PromQL`の式テンプレートです。監視テーブルのデータをクエリする場合、クエリ条件を使用してこのテンプレートの変数を書き換え、最終的なクエリ式を生成します。
--   `LABELS` ：監視項目のラベル。 `tidb_query_duration`には、 `instance`と`sql_type`の2つのラベルがあります。
--   `QUANTILE` ：パーセンタイル。ヒストグラムタイプのデータを監視するために、デフォルトのパーセンタイルが指定されています。このフィールドの値が`0`の場合、監視テーブルに対応する監視項目がヒストグラムではないことを意味します。
--   `COMMENT` ：監視テーブルの説明。 `tidb_query_duration`テーブルは、P999 / P99 / P90のクエリ時間など、TiDBクエリ実行のパーセンタイル時間をクエリするために使用されていることがわかります。単位は2番目です。
+-   `TABLE_NAME` : `metrics_schema`のテーブル名に対応します。この例では、テーブル名は`tidb_query_duration`です。
+-   `PROMQL` : 監視テーブルの動作原理は、最初に SQL ステートメントを`PromQL`にマップし、次に Prometheus からデータを要求し、Prometheus の結果を SQL クエリの結果に変換することです。このフィールドは`PromQL`の式テンプレートです。監視テーブルのデータをクエリすると、クエリ条件を使用してこのテンプレートの変数が書き換えられ、最終的なクエリ式が生成されます。
+-   `LABELS` : 監視項目のラベル。 `tidb_query_duration`には`instance`と`sql_type`の 2 つのラベルがあります。
+-   `QUANTILE` : パーセンタイル。ヒストグラム タイプのモニタリング データの場合、デフォルトのパーセンタイルが指定されます。このフィールドの値が`0`の場合、監視テーブルに対応する監視項目がヒストグラムではないことを意味します。
+-   `COMMENT` : 監視テーブルの説明。 `tidb_query_duration`テーブルは、P999/P99/P90 のクエリ時間など、TiDB クエリ実行のパーセンタイル時間をクエリするために使用されていることがわかります。単位は秒です。
 
-`tidb_query_duration`テーブルのスキーマを照会するには、次のステートメントを実行します。
+`tidb_query_duration`テーブルのスキーマをクエリするには、次のステートメントを実行します。
 
 {{< copyable "" >}}
 
@@ -145,12 +145,12 @@ SHOW CREATE TABLE metrics_schema.tidb_query_duration;
 +---------------------+--------------------------------------------------------------------------------------------------------------------+
 ```
 
--   `time` ：監視項目の時刻。
--   `instance`および`sql_type` ： `tidb_query_duration`の監視項目のラベル。 `instance`は監視アドレスを意味します。 `sql_type`は、実行されたSQLステートメントのタイプを意味します。
--   `quantile` ：パーセンタイル。ヒストグラムタイプの監視項目には、クエリのパーセンタイル時間を示すこの列があります。たとえば、 `quantile = 0.9`はP90の時刻を照会することを意味します。
--   `value` ：監視項目の値。
+-   `time` : 監視項目の時間。
+-   `instance`と`sql_type` : `tidb_query_duration`の監視項目のラベル。 `instance`は監視アドレスを意味します。 `sql_type`は、実行された SQL ステートメントのタイプを意味します。
+-   `quantile` : パーセンタイル。ヒストグラム型の監視項目にはこの列があり、クエリのパーセンタイル時間を示します。たとえば、 `quantile = 0.9`は P90 の時刻を照会することを意味します。
+-   `value` : 監視項目の値。
 
-次のステートメントは、[ `2020-03-25 23:40:00` ]の範囲内でP99時間を照会し`2020-03-25 23:42:00` 。
+次のステートメントは、[ `2020-03-25 23:40:00` , `2020-03-25 23:42:00` ] の範囲内で P99 時刻を照会します。
 
 {{< copyable "" >}}
 
@@ -174,12 +174,12 @@ SELECT * FROM metrics_schema.tidb_query_duration WHERE value is not null AND tim
 +---------------------+-------------------+----------+----------+----------------+
 ```
 
-上記のクエリ結果の最初の行は、2020-03-25 23:40:00の時点で、TiDBインスタンス`172.16.5.40:10089`で、 `Insert`タイプステートメントのP99実行時間が0.509929485256秒であることを意味します。他の行の意味も同様です。 `sql_type`列の他の値は、次のように説明されています。
+上記のクエリ結果の最初の行は、2020-03-25 23:40:00 の時点で、TiDB インスタンス`172.16.5.40:10089`で、 `Insert`型ステートメントの P99 実行時間が 0.509929485256 秒であることを意味します。他の行の意味も同様です。 `sql_type`列のその他の値は次のとおりです。
 
--   `Select` ： `select`型ステートメントを実行します。
--   `internal` ：統計情報を更新してグローバル変数を取得するために使用されるTiDBの内部SQLステートメント。
+-   `Select` : `select`型ステートメントを実行します。
+-   `internal` : 統計情報を更新し、グローバル変数を取得するために使用される、TiDB の内部 SQL ステートメント。
 
-上記のステートメントの実行プランを表示するには、次のステートメントを実行します。
+上記のステートメントの実行計画を表示するには、次のステートメントを実行します。
 
 {{< copyable "" >}}
 
@@ -196,20 +196,20 @@ DESC SELECT * FROM metrics_schema.tidb_query_duration WHERE value is not null AN
 +------------------+----------+------+---------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 ```
 
-`end_time`の結果から、 `PromQL` 、および`start_time`が実行プランに含まれていることがわかり`step` 。実行プロセス中に、TiDBはPrometheusの`query_range` HTTP APIを呼び出して、監視データを照会します。
+上記の結果から、 `PromQL` 、 `start_time` 、 `end_time` 、および`step`が実行計画にあることがわかります。実行プロセス中に、TiDB は Prometheus の`query_range` HTTP API を呼び出して監視データを照会します。
 
-[ `2020-03-25 23:40:00` ]の範囲では、各ラベルに`2020-03-25 23:42:00`つの時間値しかないことに気付くかもしれません。実行プランでは、 `step`の値は1分です。これは、これらの値の間隔が1分であることを意味します。 `step`は、次の2つのセッション変数によって決定されます。
+[ `2020-03-25 23:40:00` , `2020-03-25 23:42:00` ] の範囲では、各ラベルに 3 つの時間値しかないことに気付くかもしれません。実行計画では、値`step`は 1 分です。これは、これらの値の間隔が 1 分であることを意味します。 `step`は、次の 2 つのセッション変数によって決定されます。
 
--   `tidb_metric_query_step` ：クエリ解決のステップ幅。 Prometheusから`query_range`のデータを取得するには、 `start_time` 、および`end_time`を指定する必要があり`step` 。 `step`はこの変数の値を使用します。
--   `tidb_metric_query_range_duration` ：監視データを照会すると、 `PROMQL`の`$ RANGE_DURATION`フィールドの値がこの変数の値に置き換えられます。デフォルト値は60秒です。
+-   `tidb_metric_query_step` : クエリ解決のステップ幅。 Prometheus から`query_range`のデータを取得するには、 `start_time` 、 `end_time` 、および`step`を指定する必要があります。 `step`は、この変数の値を使用します。
+-   `tidb_metric_query_range_duration` : 監視データが照会されると、 `PROMQL`の`$ RANGE_DURATION`フィールドの値がこの変数の値に置き換えられます。デフォルト値は 60 秒です。
 
-さまざまな粒度で監視項目の値を表示するには、監視テーブルにクエリを実行する前に、上記の2つのセッション変数を変更できます。例えば：
+粒度の異なる監視項目の値を表示するには、監視テーブルをクエリする前に、上記の 2 つのセッション変数を変更します。例えば：
 
-1.  2つのセッション変数の値を変更し、時間の粒度を30秒に設定します。
+1.  2 つのセッション変数の値を変更し、時間の粒度を 30 秒に設定します。
 
     > **ノート：**
     >
-    > Prometheusでサポートされている最小の粒度は30秒です。
+    > Prometheus でサポートされる最小粒度は 30 秒です。
 
     {{< copyable "" >}}
 
@@ -218,7 +218,7 @@ DESC SELECT * FROM metrics_schema.tidb_query_duration WHERE value is not null AN
     set @@tidb_metric_query_range_duration=30;
     ```
 
-2.  次のように`tidb_query_duration`の監視項目を照会します。結果から、3分の時間範囲内で、各ラベルには6つの時間値があり、各値の間隔は30秒であることがわかります。
+2.  以下のように`tidb_query_duration`の監視項目を問い合わせます。結果から、3 分の時間範囲内で、各ラベルに 6 つの時間値があり、各値の間隔が 30 秒であることがわかります。
 
     {{< copyable "" >}}
 
@@ -248,7 +248,7 @@ DESC SELECT * FROM metrics_schema.tidb_query_duration WHERE value is not null AN
     +---------------------+-------------------+----------+----------+-----------------+
     ```
 
-3.  実行プランをビューします。結果から、実行プランの`PromQL`と`step`の値が30秒に変更されていることもわかります。
+3.  実行計画をビューします。結果から、実行計画の`PromQL`と`step`の値が 30 秒に変更されていることもわかります。
 
     {{< copyable "" >}}
 

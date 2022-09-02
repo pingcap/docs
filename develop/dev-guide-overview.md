@@ -10,7 +10,7 @@ aliases: ['/appdev/dev/app-dev-overview','/tidb/stable/dev-guide-outdated-for-la
 
 <CustomContent platform="tidb">
 
-このチュートリアルでは、TiDB を使用してアプリケーションをすばやく構築する方法、TiDB の使用例、および一般的な問題の処理方法を示します。
+このチュートリアルでは、TiDB を使用してアプリケーションを迅速に構築する方法、TiDB の使用例、および一般的な問題の処理方法を示します。
 
 このページを読む前に、 [TiDB データベース プラットフォームのクイック スタート ガイド](/quick-start-with-tidb.md)を読むことをお勧めします。
 
@@ -18,7 +18,7 @@ aliases: ['/appdev/dev/app-dev-overview','/tidb/stable/dev-guide-outdated-for-la
 
 <CustomContent platform="tidb-cloud">
 
-このチュートリアルでは、TiDB Cloud を使用してアプリケーションを迅速に構築する方法、 TiDB Cloud TiDB Cloudの考えられる使用例、および一般的な問題を処理する方法を示します。
+このチュートリアルでは、 TiDB Cloudの使用例、および一般的な問題の処理方法を示します。
 
 </CustomContent>
 
@@ -26,9 +26,9 @@ aliases: ['/appdev/dev/app-dev-overview','/tidb/stable/dev-guide-outdated-for-la
 
 TiDB を使い始める前に、TiDB がどのように機能するかのいくつかの重要なメカニズムを理解する必要があります。
 
--   [TiDB トランザクションの概要](/transaction-overview.md)を読んで TiDB でのトランザクションの仕組みを理解するか、 [アプリケーション開発者向け取引メモ](/develop/dev-guide-transaction-overview.md)を調べてアプリケーション開発に必要なトランザクションの知識を学んでください。
+-   [TiDB トランザクションの概要](/transaction-overview.md)を読んで TiDB でのトランザクションの仕組みを理解するか、 [アプリケーション開発者向けの取引メモ](/develop/dev-guide-transaction-overview.md)を調べてアプリケーション開発に必要なトランザクションの知識を学んでください。
 -   理解する[アプリケーションが TiDB と対話する方法](#the-way-applications-interact-with-tidb) ．
--   分散データベース TiDB およびTiDB Cloudを構築するためのコア コンポーネントと概念については、無料のオンライン コース[TiDB アーキテクチャの基本](https://freeclasses.edu.pingcap.com/catalog/info/id:203/?utm_source=docs-dev-guide)を参照してください。
+-   分散データベース TiDB およびTiDB Cloudを構築するためのコア コンポーネントと概念については、無料のオンライン コース[TiDBアーキテクチャの基本](https://freeclasses.edu.pingcap.com/catalog/info/id:203/?utm_source=docs-dev-guide)を参照してください。
 
 ## TiDB トランザクション メカニズム {#tidb-transaction-mechanisms}
 

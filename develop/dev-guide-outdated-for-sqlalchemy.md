@@ -4,17 +4,17 @@ summary: Learn how to build a simple Python application based on TiDB and SQLAlc
 aliases: ['/appdev/dev/for-sqlalchemy']
 ---
 
-# SQLAlchemyのアプリ開発 {#app-development-for-sqlalchemy}
+# SQLAlchemy のアプリ開発 {#app-development-for-sqlalchemy}
 
 > **ノート：**
 >
-> このドキュメントはアーカイブされています。これは、このドキュメントがその後更新されないことを示しています。詳細については、 [開発者ガイドの概要](/develop/dev-guide-overview.md)を参照してください。
+> このドキュメントはアーカイブされました。これは、このドキュメントがその後更新されないことを示しています。詳細は[開発者ガイドの概要](/develop/dev-guide-overview.md)を参照してください。
 
-このチュートリアルでは、TiDBとSQLAlchemyに基づいて単純なPythonアプリケーションを構築する方法を示します。ここで構築するサンプルアプリケーションは、顧客および注文情報を追加、照会、および更新できる単純なCRMツールです。
+このチュートリアルでは、TiDB と SQLAlchemy に基づいて単純な Python アプリケーションを構築する方法を示します。ここで構築するサンプル アプリケーションは、顧客情報と注文情報を追加、クエリ、および更新できるシンプルな CRM ツールです。
 
-## 手順1.TiDBクラスタを開始します {#step-1-start-a-tidb-cluster}
+## ステップ 1. TiDB クラスターを開始する {#step-1-start-a-tidb-cluster}
 
-ローカルストレージで疑似TiDBクラスタを開始します。
+ローカル ストレージで疑似 TiDB クラスターを開始します。
 
 {{< copyable "" >}}
 
@@ -22,20 +22,20 @@ aliases: ['/appdev/dev/for-sqlalchemy']
 docker run -p 127.0.0.1:$LOCAL_PORT:4000 pingcap/tidb:v5.1.0
 ```
 
-上記のコマンドは、モックTiKVを使用して一時的な単一ノードクラスタを開始します。クラスタはポート`$LOCAL_PORT`でリッスンします。クラスタが停止した後、データベースにすでに加えられた変更は保持されません。
+上記のコマンドは、モック TiKV を使用して一時的な単一ノード クラスターを開始します。クラスタはポート`$LOCAL_PORT`でリッスンします。クラスターが停止すると、データベースに対して既に行われた変更は保持されません。
 
 > **ノート：**
 >
-> 「実際の」TiDBクラスタを実稼働環境にデプロイするには、次のガイドを参照してください。
+> 実稼働用に「実際の」TiDB クラスターをデプロイするには、次のガイドを参照してください。
 >
-> -   [オンプレミスのTiUPを使用してTiDBをデプロイ](https://docs.pingcap.com/tidb/v5.1/production-deployment-using-tiup)
-> -   [KubernetesにTiDBをデプロイ](https://docs.pingcap.com/tidb-in-kubernetes/stable)
+> -   [TiUP for On-Premises を使用して TiDB をデプロイ](https://docs.pingcap.com/tidb/v5.1/production-deployment-using-tiup)
+> -   [TiDB を Kubernetes にデプロイ](https://docs.pingcap.com/tidb-in-kubernetes/stable)
 >
-> また、無料トライアルを提供するフルマネージドのDatabase-as- [TiDB Cloudを使用する](https://pingcap.com/products/tidbcloud/) -Service（DBaaS）も可能です。
+> また、無料試用版を提供する[TiDB Cloudを使用する](https://pingcap.com/products/tidbcloud/) 、完全に管理された Database-as-a-Service (DBaaS) を使用することもできます。
 
-## ステップ2.データベースを作成します {#step-2-create-a-database}
+## ステップ 2. データベースを作成する {#step-2-create-a-database}
 
-1.  SQLシェルで、アプリケーションが使用する`test_sqlalchemy`のデータベースを作成します。
+1.  SQL シェルで、アプリケーションが使用する`test_sqlalchemy`のデータベースを作成します。
 
     {{< copyable "" >}}
 
@@ -43,7 +43,7 @@ docker run -p 127.0.0.1:$LOCAL_PORT:4000 pingcap/tidb:v5.1.0
     CREATE DATABASE test_sqlalchemy;
     ```
 
-2.  アプリケーションのSQLユーザーを作成します。
+2.  アプリケーションの SQL ユーザーを作成します。
 
     {{< copyable "" >}}
 
@@ -51,9 +51,9 @@ docker run -p 127.0.0.1:$LOCAL_PORT:4000 pingcap/tidb:v5.1.0
     CREATE USER <username> IDENTIFIED BY <password>;
     ```
 
-    ユーザー名とパスワードをメモします。プロジェクトを初期化するときに、アプリケーションコードでそれらを使用します。
+    ユーザー名とパスワードをメモします。プロジェクトを初期化するときに、アプリケーション コードでそれらを使用します。
 
-3.  作成したSQLユーザーに必要な権限を付与します。
+3.  作成した SQL ユーザーに必要な権限を付与します。
 
     {{< copyable "" >}}
 
@@ -61,11 +61,11 @@ docker run -p 127.0.0.1:$LOCAL_PORT:4000 pingcap/tidb:v5.1.0
     GRANT ALL ON test_sqlalchemy.* TO <username>;
     ```
 
-## ステップ3.仮想環境を設定し、プロジェクトを初期化します {#step-3-set-virtual-environments-and-initialize-the-project}
+## ステップ 3. 仮想環境を設定してプロジェクトを初期化する {#step-3-set-virtual-environments-and-initialize-the-project}
 
-1.  Pythonの依存関係およびパッケージマネージャーである[詩](https://python-poetry.org/docs/)を使用して、仮想環境を設定し、プロジェクトを初期化します。
+1.  Python の依存関係およびパッケージ マネージャーである[詩](https://python-poetry.org/docs/)を使用して、仮想環境を設定し、プロジェクトを初期化します。
 
-    詩は、システムの依存関係を他の依存関係から分離し、依存関係の汚染を回避できます。次のコマンドを使用して、Poetryをインストールします。
+    詩は、システムの依存関係を他の依存関係から分離し、依存関係の汚染を回避できます。次のコマンドを使用して、Poetry をインストールします。
 
     {{< copyable "" >}}
 
@@ -73,7 +73,7 @@ docker run -p 127.0.0.1:$LOCAL_PORT:4000 pingcap/tidb:v5.1.0
     pip install --user poetry
     ```
 
-2.  Poetryを使用して開発環境を初期化します。
+2.  Poetry を使用して開発環境を初期化します。
 
     {{< copyable "" >}}
 
@@ -83,18 +83,18 @@ docker run -p 127.0.0.1:$LOCAL_PORT:4000 pingcap/tidb:v5.1.0
     poetry add git+https://github.com/pingcap/sqlalchemy-tidb.git#main
     ```
 
-## ステップ4.アプリケーションコードを取得して実行する {#step-4-get-and-run-the-application-code}
+## ステップ 4. アプリケーション コードを取得して実行する {#step-4-get-and-run-the-application-code}
 
-このチュートリアルのサンプルアプリケーションコード（ `main.py` ）は、SQLAlchemyを使用してPythonメソッドをSQL操作にマップします。サンプルアプリケーションコードを`main.py`という名前のPythonファイルとしてローカルマシンに保存できます。
+このチュートリアルのサンプル アプリケーション コード ( `main.py` ) は、SQLAlchemy を使用して Python メソッドを SQL 操作にマップします。サンプル アプリケーション コードは、ローカル マシンに`main.py`という名前の Python ファイルとして保存できます。
 
 コードは次の操作を実行します。
 
-1.  `User`および`Order`マッピングクラスで指定されているように、 `test_sqlalchemy`データベースに`users`および`orders`テーブルを作成します。
-2.  `users`および`orders`テーブルにデータを挿入します。
-3.  注文からデータを`oid`削除します。
-4.  `orders` `oid`ずつ更新します。
+1.  `User`および`Order`マッピング クラスの指定に従って、 `test_sqlalchemy`データベースに`users`および`orders`テーブルを作成します。
+2.  `users`と`orders`のテーブルにデータを挿入します。
+3.  オーダーからデータを`oid`削除します。
+4.  `orders`つずつ`oid`更新します。
 5.  `users`と`orders`のテーブルをテーブル結合します。
-6.  同じ`uid`を使用して`users`と`orders`のテーブルを照会します。
+6.  同じ`uid`を使用して`users`および`orders`テーブルをクエリします。
 
 {{< copyable "" >}}
 
@@ -190,7 +190,7 @@ print(
 )
 ```
 
-### 手順1.接続パラメーターを更新し、TiDBに接続します {#step-1-update-the-connection-parameters-and-connect-to-tidb}
+### ステップ 1. 接続パラメーターを更新して TiDB に接続する {#step-1-update-the-connection-parameters-and-connect-to-tidb}
 
 上記の`main.py`ファイルで、 `create_engine()`に渡された文字列を、データベースの作成時に取得した接続文字列に置き換えます。
 
@@ -202,7 +202,7 @@ engine = create_engine(
     echo=False)
 ```
 
-デフォルトでは、文字列を次のように設定できます。
+デフォルトでは、次のように文字列を設定できます。
 
 {{< copyable "" >}}
 
@@ -212,9 +212,9 @@ engine = create_engine(
     echo=False)
 ```
 
-### ステップ2.アプリケーションコードを実行します {#step-2-run-the-application-code}
+### ステップ 2. アプリケーション コードを実行する {#step-2-run-the-application-code}
 
-接続文字列が正しく設定されたら、アプリケーションコードを実行します。
+接続文字列が正しく設定されたら、アプリケーション コードを実行します。
 
 {{< copyable "" >}}
 
@@ -222,7 +222,7 @@ engine = create_engine(
 python3 main.py
 ```
 
-期待される出力は次のとおりです。
+予想される出力は次のとおりです。
 
 ```
 [('Ben', 212.5), ('Ben', 8.5)]

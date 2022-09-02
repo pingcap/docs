@@ -5,13 +5,13 @@ summary: The usage of SHOW PLACEMENT in TiDB.
 
 # 配置を表示 {#show-placement}
 
-`SHOW PLACEMENT`は、配置ポリシーのすべての配置オプションを要約し、それらを標準形式で表示します。
+`SHOW PLACEMENT`は、配置ポリシーからのすべての配置オプションを要約し、標準形式で表示します。
 
-このステートメントは、配置Driver（PD）が配置のスケジューリングで行った現在の進行状況を`Scheduling_State`フィールドが示す結果セットを返します。
+このステートメントは、配置Driver(PD) が配置のスケジューリングで行った現在の進行状況を`Scheduling_State`フィールドが示す結果セットを返します。
 
--   `PENDING` ：PDはまだ配置のスケジュールを開始していません。これは、配置ルールが意味的に正しいが、現在クラスタが満たすことができないことを示している可能性があります。たとえば、フォロワーの候補となるTiKVストアが`FOLLOWERS=4`あるが、3つしかない場合です。
--   `INPROGRESS` ：PDは現在配置をスケジュールしています。
--   `SCHEDULED` ：PDは配置を正常にスケジュールしました。
+-   `PENDING` : PD はまだプレースメントのスケジューリングを開始していません。これは、配置ルールが意味的に正しいことを示している可能性がありますが、現在クラスターが満たすことができません。例えば、 `FOLLOWERS=4`つでもフォロワー候補のTiKV店舗が3つしかない場合。
+-   `INPROGRESS` : PD は現在配置をスケジュールしています。
+-   `SCHEDULED` : PD は配置を正常にスケジュールしました。
 
 ## あらすじ {#synopsis}
 
@@ -45,12 +45,12 @@ Query OK, 0 rows affected (0.00 sec)
 4 rows in set (0.00 sec)
 ```
 
-## MySQLの互換性 {#mysql-compatibility}
+## MySQL の互換性 {#mysql-compatibility}
 
-このステートメントは、MySQL構文のTiDB拡張です。
+このステートメントは、MySQL 構文に対する TiDB 拡張です。
 
-## も参照してください {#see-also}
+## こちらもご覧ください {#see-also}
 
--   [SQLでの配置ルール](/placement-rules-in-sql.md)
--   [の配置を表示](/sql-statements/sql-statement-show-placement-for.md)
--   [プレースメントポリシーを作成する](/sql-statements/sql-statement-create-placement-policy.md)
+-   [SQL の配置規則](/placement-rules-in-sql.md)
+-   [のプレースメントを表示](/sql-statements/sql-statement-show-placement-for.md)
+-   [配置ポリシーを作成する](/sql-statements/sql-statement-create-placement-policy.md)

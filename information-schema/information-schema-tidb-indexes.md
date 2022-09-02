@@ -5,7 +5,7 @@ summary: Learn the `TIDB_INDEXES` information_schema table.
 
 # TIDB_INDEXES {#tidb-indexes}
 
-`TIDB_INDEXES`テーブルは、すべてのテーブルのINDEX情報を提供します。
+`TIDB_INDEXES`テーブルは、すべてのテーブルの INDEX 情報を提供します。
 
 {{< copyable "" >}}
 
@@ -32,9 +32,9 @@ DESC tidb_indexes;
 10 rows in set (0.00 sec)
 ```
 
-`INDEX_ID`は、TiDBが各インデックスに割り当てる一意のIDです。別のテーブルまたはAPIから取得した`INDEX_ID`を使用して結合操作を実行するために使用できます。
+`INDEX_ID`は、TiDB が各インデックスに割り当てる一意の ID です。別のテーブルまたは API から取得した`INDEX_ID`との結合操作を行うために使用できます。
 
-たとえば、 [`SLOW_QUERY`テーブル](/information-schema/information-schema-slow-query.md)の遅いクエリに関係する`TABLE_ID`と`INDEX_ID`を取得してから、次のSQLステートメントを使用して特定のインデックス情報を取得できます。
+たとえば、次の SQL ステートメントを使用して、 [`SLOW_QUERY`テーブル](/information-schema/information-schema-slow-query.md)の遅いクエリに関係する`TABLE_ID`と`INDEX_ID`を取得し、特定のインデックス情報を取得できます。
 
 ```sql
 SELECT
@@ -49,14 +49,14 @@ WHERE
  AND index_id = ?
 ```
 
-`TIDB_INDEXES`表のフィールドは次のように説明されています。
+`TIDB_INDEXES`テーブルのフィールドは次のとおりです。
 
--   `TABLE_SCHEMA` ：インデックスが属するスキーマの名前。
--   `TABLE_NAME` ：インデックスが属するテーブルの名前。
--   `NON_UNIQUE` ：インデックスが一意の場合、値は`0`です。それ以外の場合、値は`1`です。
--   `KEY_NAME` ：インデックス名。インデックスが主キーの場合、名前は`PRIMARY`です。
--   `SEQ_IN_INDEX` ：インデックス内の列の連続数`1`から始まります。
--   `COLUMN_NAME` ：インデックスが配置されている列の名前。
--   `SUB_PART` ：インデックスのプレフィックス長。列が部分的に索引付けされている場合、 `SUB_PART`の値は索引付けされた文字の数です。それ以外の場合、値は`NULL`です。
--   `INDEX_COMMENT` ：インデックス作成時に作成されるインデックスのコメント。
--   `INDEX_ID` ：インデックスID。
+-   `TABLE_SCHEMA` : 索引が属するスキーマの名前。
+-   `TABLE_NAME` : インデックスが属するテーブルの名前。
+-   `NON_UNIQUE` : インデックスが一意の場合、値は`0`です。それ以外の場合、値は`1`です。
+-   `KEY_NAME` : インデックス名。インデックスが主キーの場合、名前は`PRIMARY`です。
+-   `SEQ_IN_INDEX` : `1`から始まるインデックス内の列の連続番号。
+-   `COLUMN_NAME` : インデックスが配置されている列の名前。
+-   `SUB_PART` : インデックスのプレフィックス長。列が部分的に索引付けされている場合、 `SUB_PART`の値は索引付けされた文字の数です。それ以外の場合、値は`NULL`です。
+-   `INDEX_COMMENT` : 索引の作成時に作成される索引のコメント。
+-   `INDEX_ID` : インデックス ID。

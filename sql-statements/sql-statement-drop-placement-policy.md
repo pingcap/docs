@@ -57,13 +57,13 @@ Query OK, 0 rows affected (0.08 sec)
 Query OK, 0 rows affected (0.21 sec)
 ```
 
-## MySQLの互換性 {#mysql-compatibility}
+## MySQL の互換性 {#mysql-compatibility}
 
-このステートメントは、MySQL構文のTiDB拡張です。
+このステートメントは、MySQL 構文に対する TiDB 拡張です。
 
-## も参照してください {#see-also}
+## こちらもご覧ください {#see-also}
 
--   [SQLでの配置ルール](/placement-rules-in-sql.md)
+-   [SQL の配置規則](/placement-rules-in-sql.md)
 -   [配置を表示](/sql-statements/sql-statement-show-placement.md)
--   [プレースメントポリシーを作成する](/sql-statements/sql-statement-create-placement-policy.md)
+-   [配置ポリシーを作成する](/sql-statements/sql-statement-create-placement-policy.md)
 -   [配置ポリシーの変更](/sql-statements/sql-statement-alter-placement-policy.md)

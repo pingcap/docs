@@ -13,7 +13,7 @@ summary: Learn how to migrate incremental data from MySQL-compatible databases t
 
 ## ステップ 1.DM クラスターをデプロイする {#step-1-deploy-a-dm-cluster}
 
-TiDB Cloudコンソールは、増分データ移行機能をまだ提供していません。 TiDB Cloudへの増分移行を実行するには、 [TiDB データ移行](https://docs.pingcap.com/tidb/stable/dm-overview) (DM) を手動でデプロイする必要があります。インストール手順については、 [TiUP を使用して DM クラスターをデプロイする](https://docs.pingcap.com/tidb/stable/deploy-a-dm-cluster-using-tiup)を参照してください。
+TiDB Cloudコンソールは、増分データ移行機能をまだ提供していません。 TiDB Cloudへの増分移行を実行するには、手動で[TiDB データ移行](https://docs.pingcap.com/tidb/stable/dm-overview) (DM) をデプロイする必要があります。インストール手順については、 [TiUP を使用して DMクラスタをデプロイする](https://docs.pingcap.com/tidb/stable/deploy-a-dm-cluster-using-tiup)を参照してください。
 
 ## 手順 2. データ ソース構成ファイルを作成する {#step-2-create-a-data-source-configuration-file}
 
@@ -43,7 +43,7 @@ from:
   port: 3307
 ```
 
-次のコマンドを実行して、 `tiup dmctl`を使用してデータ ソース構成を DMクラスタに読み込みます。
+次のコマンドを実行して、 `tiup dmctl`を使用してデータ ソース構成を DM クラスターに読み込みます。
 
 ```shell
 [root@localhost ~]# tiup dmctl --master-addr ${advertise-addr} operate-source create dm-source1.yaml
@@ -51,10 +51,10 @@ from:
 
 上記のコマンドで使用されるパラメーターは、次のとおりです。
 
-| パラメータ                   | 説明                                                                         |
-| ----------------------- | -------------------------------------------------------------------------- |
-| `--master-addr`         | `dmctl`が接続されるクラスタの任意の DM マスター ノードの`{advertise-addr}` 。例: 172.16.7.140:9261 |
-| `operate-source create` | データ ソースを DMクラスタにロードします。                                                    |
+| パラメータ                   | 説明                                                                           |
+| ----------------------- | ---------------------------------------------------------------------------- |
+| `--master-addr`         | `dmctl`が接続されるクラスター内の任意の DM マスター ノードの`{advertise-addr}` 。例: 172.16.7.140:9261 |
+| `operate-source create` | データ ソースを DM クラスターに読み込みます。                                                    |
 
 次に出力例を示します。
 
@@ -178,10 +178,10 @@ Starting component `dmctl`: /root/.tiup/components/dmctl/v6.0.0/dmctl/dmctl /roo
 
 上記のコマンドで使用されるパラメーターは、次のとおりです。
 
-| パラメータ           | 説明                                                                         |
-| --------------- | -------------------------------------------------------------------------- |
-| `--master-addr` | `dmctl`が接続されるクラスタの任意の DM マスター ノードの`{advertise-addr}` 。例: 172.16.7.140:9261 |
-| `start-task`    | 移行タスクを開始します。                                                               |
+| パラメータ           | 説明                                                                           |
+| --------------- | ---------------------------------------------------------------------------- |
+| `--master-addr` | `dmctl`が接続されるクラスター内の任意の DM マスター ノードの`{advertise-addr}` 。例: 172.16.7.140:9261 |
+| `start-task`    | 移行タスクを開始します。                                                                 |
 
 次に出力例を示します。
 
@@ -209,7 +209,7 @@ Starting component `dmctl`: /root/.tiup/components/dmctl/v6.0.0/dmctl/dmctl /roo
 
 ## ステップ 5. 移行タスクのステータスを確認する {#step-5-check-the-migration-task-status}
 
-DMクラスタに進行中の移行タスクがあるかどうかを確認し、タスクのステータスを表示するには、 `tiup dmctl`を使用して`query-status`コマンドを実行します。
+DM クラスターに進行中の移行タスクがあるかどうかを確認し、タスクのステータスを表示するには、 `tiup dmctl`を使用して`query-status`コマンドを実行します。
 
 ```shell
 [root@localhost ~]# tiup dmctl --master-addr ${advertise-addr} query-status ${task-name}

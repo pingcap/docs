@@ -3,9 +3,9 @@ title: Explain Statements That Use Aggregation
 summary: Learn about the execution plan information returned by the `EXPLAIN` statement in TiDB.
 ---
 
-# 集計を使用してステートメントを説明する {#explain-statements-using-aggregation}
+# 集計を使用したステートメントの説明 {#explain-statements-using-aggregation}
 
-データを集約するとき、SQLオプティマイザーはハッシュ集計またはストリーム集計オペレーターのいずれかを選択します。クエリの効率を向上させるために、コプロセッサ層とTiDB層の両方で集計が実行されます。次の例を考えてみましょう。
+データを集計するとき、SQL オプティマイザーはハッシュ集計またはストリーム集計演算子のいずれかを選択します。クエリの効率を向上させるために、コプロセッサと TiDB レイヤーの両方で集計が実行されます。次の例を検討してください。
 
 {{< copyable "" >}}
 
@@ -51,7 +51,7 @@ SHOW TABLE t1 REGIONS;
 4 rows in set (0.00 sec)
 ```
 
-次の集計ステートメントで`EXPLAIN`を使用すると、TiKV内の各リージョンで`└─StreamAgg_8`が最初に実行されることがわかります。次に、各TiKVリージョンは1行をTiDBに送り返します。これにより、各リージョンのデータが`StreamAgg_16`つに集約されます。
+次の集計ステートメントで`EXPLAIN`を使用すると、TiKV 内の各リージョンで最初に`└─StreamAgg_8`が実行されることがわかります。次に、各 TiKVリージョンは 1 行を TiDB に送り返し、TiDB は各リージョンからのデータを`StreamAgg_16`に集約します。
 
 {{< copyable "" >}}
 
@@ -71,7 +71,7 @@ EXPLAIN SELECT COUNT(*) FROM t1;
 4 rows in set (0.00 sec)
 ```
 
-これは`EXPLAIN ANALYZE`で観察するのが最も簡単です。ここで、 `TableFullScan`が使用されており、セカンダリインデックスがないため、 `actRows`は`SHOW TABLE REGIONS`からのリージョンの数と一致します。
+これは`EXPLAIN ANALYZE`で観察するのが最も簡単です。ここでは、 `TableFullScan`が使用されており、セカンダリ インデックスがないため、 `actRows`は`SHOW TABLE REGIONS`のリージョンの数と一致します。
 
 ```sql
 EXPLAIN ANALYZE SELECT COUNT(*) FROM t1;
@@ -91,7 +91,7 @@ EXPLAIN ANALYZE SELECT COUNT(*) FROM t1;
 
 ## ハッシュ集計 {#hash-aggregation}
 
-ハッシュ集計アルゴリズムは、ハッシュテーブルを使用して、集約の実行中に中間結果を格納します。複数のスレッドを使用して並行して実行されますが、 集計よりも多くのメモリを消費します。
+ハッシュ集計アルゴリズムは、ハッシュ テーブルを使用して、集計の実行中に中間結果を格納します。複数のスレッドを使用して並列に実行されますが、 Stream 集計より多くのメモリを消費します。
 
 以下は、 `HashAgg`演算子の例です。
 
@@ -117,9 +117,9 @@ EXPLAIN SELECT /*+ HASH_AGG() */ count(*) FROM t1;
 
 ## ストリーム集計 {#stream-aggregation}
 
-Stream 集計アルゴリズムは通常、 集計よりも少ないメモリを消費します。ただし、この演算子では、値が到着したときにデータを*ストリーミング*して値に集計を適用できるように、データを順序付けて送信する必要があります。
+ストリーム集計アルゴリズムは、通常、ハッシュ集計よりもメモリを消費しません。ただし、この演算子では、値が到着したときに*ストリーミング*して集計を適用できるように、データを順序付けて送信する必要があります。
 
-次の例を考えてみましょう。
+次の例を検討してください。
 
 {{< copyable "" >}}
 
@@ -147,7 +147,7 @@ Records: 5  Duplicates: 0  Warnings: 0
 5 rows in set (0.00 sec)
 ```
 
-この例では、 `col1`にインデックスを追加することで`└─Sort_13`演算子を削除できます。インデックスが追加されると、データを順番に読み取ることができ、 `└─Sort_13`演算子が削除されます。
+この例では、 `└─Sort_13`演算子は`col1`にインデックスを追加することで削除できます。インデックスが追加されると、データを順番に読み取ることができ、 `└─Sort_13`演算子は削除されます。
 
 {{< copyable "" >}}
 

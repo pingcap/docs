@@ -3,9 +3,9 @@ title: SHOW TABLE REGIONS
 summary: Learn how to use SHOW TABLE REGIONS in TiDB.
 ---
 
-# テーブルの地域を表示する {#show-table-regions}
+# テーブル領域を表示 {#show-table-regions}
 
-`SHOW TABLE REGIONS`ステートメントは、TiDB内のテーブルのリージョン情報を表示するために使用されます。
+`SHOW TABLE REGIONS`ステートメントは、TiDB 内のテーブルのリージョン情報を表示するために使用されます。
 
 ## 構文 {#syntax}
 
@@ -16,47 +16,47 @@ SHOW TABLE [table_name] INDEX [index_name] REGIONS [WhereClauseOptional];
 
 ## あらすじ {#synopsis}
 
-**ShowTableRegionStmt：**
+**ShowTableRegionStmt:**
 
 ![ShowTableRegionStmt](/media/sqlgram/ShowTableRegionStmt.png)
 
-**TableName：**
+**テーブル名:**
 
 ![TableName](/media/sqlgram/TableName.png)
 
-**PartitionNameListOpt：**
+**PartitionNameListOpt:**
 
 ![PartitionNameListOpt](/media/sqlgram/PartitionNameListOpt.png)
 
-**WhereClauseOptional：**
+**Where句オプション:**
 
 ![WhereClauseOptional](/media/sqlgram/WhereClauseOptional.png)
 
-**WhereClause：**
+**Where句:**
 
 ![WhereClause](/media/sqlgram/WhereClause.png)
 
 `SHOW TABLE REGIONS`を実行すると、次の列が返されます。
 
--   `REGION_ID` ：リージョンID。
--   `START_KEY` ：リージョンの開始キー。
--   `END_KEY` ：リージョンの終了キー。
--   `LEADER_ID` ：リージョンのリーダーID。
--   `LEADER_STORE_ID` ：リージョンリーダーが配置されているストア（TiKV）のID。
--   `PEERS` ：すべてのリージョンレプリカのID。
--   `SCATTERING` ：リージョンがスケジュールされているかどうか。 `1`は真を意味します。
--   `WRITTEN_BYTES` ：1心周期内にリージョンに書き込まれるデータの推定量。単位はバイトです。
--   `READ_BYTES` ：1心周期内にリージョンから読み取られたデータの推定量。単位はバイトです。
--   `APPROXIMATE_SIZE(MB)` ：リージョン内の推定データ量。単位はメガバイト（MB）です。
--   `APPROXIMATE_KEYS` ：リージョン内のキーの推定数。
+-   `REGION_ID` :リージョンID。
+-   `START_KEY` :リージョンの開始キー。
+-   `END_KEY` :リージョンの終了キー。
+-   `LEADER_ID` :リージョンのリーダー ID。
+-   `LEADER_STORE_ID` :リージョンリーダーが配置されているストア (TiKV) の ID。
+-   `PEERS` : すべてのリージョンレプリカの ID。
+-   `SCATTERING` :リージョンがスケジュールされているかどうか。 `1`は真を意味します。
+-   `WRITTEN_BYTES` : 1 ハートビート サイクル内でリージョンに書き込まれる推定データ量。単位はバイトです。
+-   `READ_BYTES` : 1 ハートビート サイクル内にリージョンから読み取られた推定データ量。単位はバイトです。
+-   `APPROXIMATE_SIZE(MB)` : リージョン内の推定データ量。単位はメガバイト (MB) です。
+-   `APPROXIMATE_KEYS` :リージョン内のキーの推定数。
 
 > **ノート：**
 >
-> `WRITTEN_BYTES`の`READ_BYTES`は`APPROXIMATE_KEYS`なデータではありませ`APPROXIMATE_SIZE(MB)` 。これらは、PDがリージョンから受信する心拍情報に基づいてPDから推定されたデータです。
+> `WRITTEN_BYTES` 、 `READ_BYTES` 、 `APPROXIMATE_SIZE(MB)` 、 `APPROXIMATE_KEYS`の値は正確なデータではありません。これらは、 PD がリージョンから受信したハートビート情報に基づいて PD から推定されたデータです。
 
 ## 例 {#examples}
 
-いくつかのリージョンを満たすのに十分なデータを含むサンプルテーブルを作成します。
+いくつかのリージョンを埋めるのに十分なデータを含むサンプル テーブルを作成します。
 
 {{< copyable "" >}}
 
@@ -84,7 +84,7 @@ SELECT SLEEP(5);
 SHOW TABLE t1 REGIONS;
 ```
 
-出力には、テーブルがリージョンに分割されていることが示されているはずです。 `REGION_ID` 、および`START_KEY`は正確に一致しない場合があり`END_KEY` 。
+出力は、テーブルがリージョンに分割されていることを示しているはずです。 `REGION_ID` 、 `START_KEY` 、および`END_KEY`は正確に一致しない場合があります。
 
 ```sql
 ...
@@ -99,9 +99,9 @@ mysql> SHOW TABLE t1 REGIONS;
 3 rows in set (0.00 sec)
 ```
 
-上記の`START_KEY`では、 `t_75_r_31717`および`END_KEY`は、 `63434` KEYが`31717`のデータがこのリージョンに格納されていることを示してい`t_75_r_63434` 。プレフィックス`t_75_`は、これが内部テーブルIDが`75`のテーブル（ `t` ）のリージョンであることを示します。 `START_KEY`または`END_KEY`の空のキー値は、それぞれ負の無限大または正の無限大を示します。
+上記の出力では、 `t_75_r_31717`の`START_KEY`と`t_75_r_63434`の`END_KEY`は、PRIMARY KEY が`31717` ～ `63434`のデータがこのリージョンに格納されていることを示しています。プレフィックス`t_75_`は、これが内部テーブル ID `75`を持つテーブル ( `t` ) のリージョンであることを示します。 `START_KEY`または`END_KEY`の空のキー値は、それぞれ負の無限大または正の無限大を示します。
 
-TiDBは、必要に応じてリージョンを自動的にリバランスします。手動でリバランスするには、次の`SPLIT TABLE REGION`のステートメントを使用します。
+TiDB は、必要に応じてリージョンを自動的に再調整します。手動でリバランスするには、次の`SPLIT TABLE REGION`ステートメントを使用します。
 
 ```sql
 mysql> SPLIT TABLE t1 BETWEEN (31717) AND (63434) REGIONS 2;
@@ -124,12 +124,12 @@ mysql> SHOW TABLE t1 REGIONS;
 4 rows in set (0.00 sec)
 ```
 
-上記の出力は、リージョン96が分割され、新しいリージョン98が作成されたことを示しています。テーブル内の残りのリージョンは、分割操作の影響を受けませんでした。これは、出力統計によって確認されます。
+上記の出力は、リージョン96 が分割され、新しいリージョン98 が作成されたことを示しています。テーブル内の残りのリージョンは、分割操作の影響を受けませんでした。これは、出力統計によって確認されます。
 
--   `TOTAL_SPLIT_REGION`は、新しく分割されたリージョンの数を示します。この例では、番号は1です。
--   `SCATTER_FINISH_RATIO`は、新しく分割されたリージョンが正常に分散される速度を示します。 `1.0`は、すべてのリージョンが分散していることを意味します。
+-   `TOTAL_SPLIT_REGION`は、新しく分割されたリージョンの数を示します。この例では、番号は 1 です。
+-   `SCATTER_FINISH_RATIO`は、新しく分割されたリージョンが正常に分散される割合を示します。 `1.0`は、すべてのリージョンが分散していることを意味します。
 
-より詳細な例については：
+より詳細な例:
 
 ```sql
 mysql> show table t regions;
@@ -146,14 +146,14 @@ mysql> show table t regions;
 6 rows in set
 ```
 
-上記の例では：
+上記の例では:
 
--   表tは6つの地域に対応しています。これらのリージョンでは、 `102` 、および`106`が行データを`3`し、 `114`が`98`データを格納し`110` 。
--   リージョン`102`の`START_KEY`と`END_KEY`の場合、 `t_43`はテーブルプレフィックスとIDを示します。 `_r`は、テーブルtのレコードデータのプレフィックスです。 `_i`はインデックスデータのプレフィックスです。
--   リージョン`102` 、および`START_KEY`は、 `[-inf, 20000)`の範囲のレコードデータが格納されることを意味し`END_KEY` 。同様に、 `110` （ `106` ）の`3` `114`の範囲も計算できます。
--   リージョン`98`はインデックスデータを格納します。テーブルtのインデックスデータの開始キーは`t_43_i`で、リージョン`98`の範囲内にあります。
+-   表 t は 6 つの地域に対応しています。これらのリージョンでは、 `102` 、 `106` 、 `110` 、 `114` 、および`3`に行データが格納され、 `98`にインデックス データが格納されます。
+-   リージョン `102`の`START_KEY`と`END_KEY`の場合、 `t_43`はテーブルのプレフィックスと ID を示します。 `_r`は、テーブル t のレコード データのプレフィックスです。 `_i`はインデックス データのプレフィックスです。
+-   リージョン `102`は`START_KEY`の範囲の`[-inf, 20000)`データが格納されていることを意味し`END_KEY` 。同様に、リージョン ( `106` 、 `110` 、 `114` 、 `3` ) のデータ ストレージの範囲も計算できます。
+-   リージョン`98`にはインデックス データが格納されます。テーブル t のインデックス データの開始キーは`t_43_i`で、リージョン`98`の範囲にあります。
 
-ストア1のテーブルtに対応するリージョンを確認するには、 `WHERE`句を使用します。
+ストア 1 のテーブル t に対応するリージョンを確認するには、 `WHERE`句を使用します。
 
 ```sql
 test> show table t regions where leader_store_id =1;
@@ -164,7 +164,7 @@ test> show table t regions where leader_store_id =1;
 +-----------+-----------+---------+-----------+-----------------+--------------+------------+---------------+------------+----------------------+------------------+
 ```
 
-`SPLIT TABLE REGION`を使用して、インデックスデータをリージョンに分割します。次の例では、テーブルtのインデックスデータ`name`が`[a,z]`の範囲の2つのリージョンに分割されています。
+インデックス データをリージョンに分割するには、 `SPLIT TABLE REGION`を使用します。次の例では、テーブル t のインデックス データ`name`が`[a,z]`の範囲で 2 つの Region に分割されます。
 
 ```sql
 test> split table t index name between ("a") and ("z") regions 2;
@@ -176,7 +176,7 @@ test> split table t index name between ("a") and ("z") regions 2;
 1 row in set
 ```
 
-これで、テーブルtは7つのリージョンに対応します。それらのうちの`106` `110` （ `102` ）はテーブルtのレコードデータを格納し、別の`135`つ（ `114` ）は`98`データ`3`を`name`します。
+ここで、テーブル t は 7 つの地域に対応します。そのうちの`106` `110` ( `102` ) はテーブル t のレコード データを格納し、 `135`の`114`つ ( `3` ) はインデックス データ`98`を`name`します。
 
 ```sql
 test> show table t regions;
@@ -194,11 +194,11 @@ test> show table t regions;
 7 rows in set
 ```
 
-## MySQLの互換性 {#mysql-compatibility}
+## MySQL の互換性 {#mysql-compatibility}
 
-このステートメントは、MySQL構文のTiDB拡張です。
+このステートメントは、MySQL 構文に対する TiDB 拡張です。
 
-## も参照してください {#see-also}
+## こちらもご覧ください {#see-also}
 
 -   [スプリットリージョン](/sql-statements/sql-statement-split-region.md)
--   [CREATE TABLE](/sql-statements/sql-statement-create-table.md)
+-   [テーブルを作成](/sql-statements/sql-statement-create-table.md)

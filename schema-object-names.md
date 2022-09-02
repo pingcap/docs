@@ -3,15 +3,15 @@ title: Schema Object Names
 summary: Learn about schema object names in TiDB SQL statements.
 ---
 
-# スキーマオブジェクト名 {#schema-object-names}
+# スキーマ オブジェクト名 {#schema-object-names}
 
 <!-- markdownlint-disable MD038 -->
 
-このドキュメントでは、 TiDB SQLステートメントのスキーマオブジェクト名を紹介します。
+このドキュメントでは、 TiDB SQLステートメントでのスキーマ オブジェクト名を紹介します。
 
-スキーマオブジェクト名は、データベース、テーブル、インデックス、列、エイリアスなど、TiDB内のすべてのスキーマオブジェクトに名前を付けるために使用されます。 SQLステートメントの識別子を使用してこれらのオブジェクトを引用できます。
+スキーマ オブジェクト名は、データベース、テーブル、インデックス、列、エイリアスなどを含む、TiDB 内のすべてのスキーマ オブジェクトに名前を付けるために使用されます。これらのオブジェクトは、SQL ステートメントで識別子を使用して引用できます。
 
-バックティックを使用して識別子を囲むことができます。たとえば、 `SELECT * FROM t`は`` SELECT * FROM `t` ``と書くこともできます。ただし、識別子に1つ以上の特殊文字が含まれている場合、または予約済みキーワードである場合は、識別子が表すスキーマオブジェクトを引用するために、バッククォートで囲む必要があります。
+バッククォートを使用して識別子を囲むことができます。たとえば、 `SELECT * FROM t`は`` SELECT * FROM `t` ``と書くこともできます。ただし、識別子に 1 つ以上の特殊文字が含まれているか、予約済みのキーワードである場合は、それが表すスキーマ オブジェクトを引用するためにバックティックで囲む必要があります。
 
 {{< copyable "" >}}
 
@@ -19,7 +19,7 @@ summary: Learn about schema object names in TiDB SQL statements.
 SELECT * FROM `table` WHERE `table`.id = 20;
 ```
 
-SQLモードで`ANSI_QUOTES`を設定すると、TiDBは二重引用符`"`で囲まれた文字列を識別子として認識します。
+SQL MODE に`ANSI_QUOTES`を設定すると、TiDB は二重引用符`"`で囲まれた文字列を識別子として認識します。
 
 {{< copyable "" >}}
 
@@ -51,7 +51,7 @@ CREATE TABLE "test" (a varchar(10));
 Query OK, 0 rows affected (0.012 sec)
 ```
 
-引用符で囲まれた識別子にバッククォート文字を使用する場合は、バッククォートを2回繰り返します。たとえば、テーブルa`bを作成するには：
+引用符で囲まれた識別子でバックティック文字を使用する場合は、バックティックを 2 回繰り返します。たとえば、テーブル a`b を作成するには:
 
 {{< copyable "" >}}
 
@@ -76,11 +76,11 @@ SELECT 1 AS `identifier`, 2 AS 'string';
 1 row in set (0.00 sec)
 ```
 
-詳細については、 [MySQLスキーマオブジェクト名](https://dev.mysql.com/doc/refman/5.7/en/identifiers.html)を参照してください。
+詳細については、 [MySQL スキーマ オブジェクト名](https://dev.mysql.com/doc/refman/5.7/en/identifiers.html)を参照してください。
 
 ## 識別子修飾子 {#identifier-qualifiers}
 
-オブジェクト名は、修飾されていない場合と修飾されている場合があります。たとえば、次のステートメントは、修飾名のないテーブルを作成します。
+オブジェクト名は、修飾されていない場合も修飾されている場合もあります。たとえば、次のステートメントは、修飾名なしでテーブルを作成します。
 
 {{< copyable "" >}}
 
@@ -88,7 +88,7 @@ SELECT 1 AS `identifier`, 2 AS 'string';
 CREATE TABLE t (i int);
 ```
 
-`USE`ステートメントまたは接続パラメーターを使用してデータベースを構成していない場合は、 `ERROR 1046 (3D000): No database selected`エラーが表示されます。このとき、データベース修飾名を指定できます。
+`USE`ステートメントまたは接続パラメーターを使用してデータベースを構成していない場合、 `ERROR 1046 (3D000): No database selected`エラーが表示されます。この時点で、データベース修飾名を指定できます。
 
 {{< copyable "" >}}
 
@@ -96,7 +96,7 @@ CREATE TABLE t (i int);
 CREATE TABLE test.t (i int);
 ```
 
-空白は約`.`に存在する可能性があります。 `table_name.col_name`と`table_name . col_name`は同等です。
+`.`の周りに空白が存在する可能性があります。 `table_name.col_name`と`table_name . col_name`は同等です。
 
 この識別子を引用するには、次を使用します。
 
@@ -112,4 +112,4 @@ CREATE TABLE test.t (i int);
 `table_name.col_name`
 ```
 
-詳細については、 [MySQL識別子修飾子](https://dev.mysql.com/doc/refman/5.7/en/identifier-qualifiers.html)を参照してください。
+詳細については、 [MySQL 識別子修飾子](https://dev.mysql.com/doc/refman/5.7/en/identifier-qualifiers.html)を参照してください。

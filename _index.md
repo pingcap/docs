@@ -41,9 +41,9 @@ hide_commit: true
 
 [ソフトウェアとハードウェアの要件](https://docs.pingcap.com/tidb/v6.1/hardware-and-software-requirements)
 
-[TiUP を使用して TiDB クラスターをデプロイする (推奨)](https://docs.pingcap.com/tidb/v6.1/production-deployment-using-tiup)
+[TiUP を使用して TiDBクラスタをデプロイする (推奨)](https://docs.pingcap.com/tidb/v6.1/production-deployment-using-tiup)
 
-[Kubernetes に TiDB クラスターをデプロイする](https://docs.pingcap.com/tidb/v6.1/tidb-in-kubernetes)
+[Kubernetes に TiDBクラスタをデプロイする](https://docs.pingcap.com/tidb/v6.1/tidb-in-kubernetes)
 
 </LearningPath>
 
@@ -59,13 +59,13 @@ hide_commit: true
 
 <LearningPath label="Maintain" icon="maintain">
 
-[クラスターをアップグレードする](https://docs.pingcap.com/tidb/v6.1/upgrade-tidb-using-tiup)
+[クラスタをアップグレードする](https://docs.pingcap.com/tidb/v6.1/upgrade-tidb-using-tiup)
 
-[クラスターのスケーリング](https://docs.pingcap.com/tidb/v6.1/scale-tidb-using-tiup)
+[クラスタのスケーリング](https://docs.pingcap.com/tidb/v6.1/scale-tidb-using-tiup)
 
-[クラスタ データのバックアップ](https://docs.pingcap.com/tidb/v6.1/br-usage-backup)
+[クラスタデータのバックアップ](https://docs.pingcap.com/tidb/v6.1/br-usage-backup)
 
-[クラスタ データの復元](https://docs.pingcap.com/tidb/v6.1/br-usage-restore)
+[クラスタデータの復元](https://docs.pingcap.com/tidb/v6.1/br-usage-restore)
 
 [毎日のチェック](https://docs.pingcap.com/tidb/v6.1/daily-check)
 

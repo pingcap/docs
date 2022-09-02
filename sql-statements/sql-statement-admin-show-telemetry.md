@@ -3,9 +3,9 @@ title: ADMIN SHOW TELEMETRY | TiDB SQL Statement Reference
 summary: An overview of the usage of ADMIN SHOW TELEMETRY for the TiDB database.
 ---
 
-# ADMIN SHOW TELEMETRY {#admin-show-telemetry}
+# 管理者ショー テレメトリー {#admin-show-telemetry}
 
-`ADMIN SHOW TELEMETRY`ステートメントは、 [テレメトリー](/telemetry.md)機能の一部としてPingCAPに報告される情報を示しています。
+`ADMIN SHOW TELEMETRY`ステートメントは、 [テレメトリー](/telemetry.md)機能の一部として PingCAP に報告される情報を示しています。
 
 ## あらすじ {#synopsis}
 
@@ -421,11 +421,11 @@ DATA_PREVIEW: {
 1 row in set (0.0259 sec)
 ```
 
-## MySQLの互換性 {#mysql-compatibility}
+## MySQL の互換性 {#mysql-compatibility}
 
-`ADMIN`ステートメントは、MySQL構文のTiDB拡張です。
+`ADMIN`ステートメントは、MySQL 構文に対する TiDB 拡張です。
 
-## も参照してください {#see-also}
+## こちらもご覧ください {#see-also}
 
 -   [テレメトリー](/telemetry.md)
 -   [`tidb_enable_telemetry`システム変数](/system-variables.md#tidb_enable_telemetry-new-in-v402)

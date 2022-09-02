@@ -18,25 +18,25 @@ aliases: ['/appdev/dev/for-hibernate-orm','/tidb/stable/dev-guide-outdated-for-h
 >
 > アプリケーション開発に Spring Boot を使用する場合は、 [Spring Boot を使用して TiDB アプリケーションをビルドする](/develop/dev-guide-sample-application-spring-boot.md)を参照してください。
 
-## ステップ 1. TiDBクラスタを起動する {#step-1-launch-your-tidb-cluster}
+## ステップ 1. TiDB クラスターを起動する {#step-1-launch-your-tidb-cluster}
 
 <CustomContent platform="tidb">
 
-以下にTiDBクラスタの起動方法を紹介します。
+以下にTiDBクラスターの起動方法を紹介します。
 
-**TiDB Cloudの無料クラスタを使用する**
+**TiDB Cloudの無料クラスターを使用する**
 
-詳細な手順については、 [無料のクラスタを作成する](/develop/dev-guide-build-cluster-in-cloud.md#step-1-create-a-free-cluster)を参照してください。
+詳細な手順については、 [無料のクラスターを作成する](/develop/dev-guide-build-cluster-in-cloud.md#step-1-create-a-free-cluster)を参照してください。
 
-**ローカルクラスタを使用する**
+**ローカル クラスターを使用する**
 
-詳細な手順については、 [ローカル テストクラスタをデプロイする](/quick-start-with-tidb.md#deploy-a-local-test-cluster)または[TiUP を使用して TiDB クラスターをデプロイする](/production-deployment-using-tiup.md)を参照してください。
+詳細な手順については、 [ローカル テスト クラスターをデプロイする](/quick-start-with-tidb.md#deploy-a-local-test-cluster)または[TiUP を使用して TiDBクラスタをデプロイする](/production-deployment-using-tiup.md)を参照してください。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-[無料のクラスタを作成する](/develop/dev-guide-build-cluster-in-cloud.md#step-1-create-a-free-cluster)を参照してください。
+[無料のクラスターを作成する](/develop/dev-guide-build-cluster-in-cloud.md#step-1-create-a-free-cluster)を参照してください。
 
 </CustomContent>
 
@@ -93,7 +93,7 @@ CREATE TABLE player (
 );
 ```
 
-`JDBCExample.java`は`plain-java-jdbc`の本体です。 TiDB は MySQL プロトコルとの互換性が高いため、TiDB に接続するには MySQL ソース インスタンス`MysqlDataSource`を初期化する必要があります。次に、オブジェクト管理用に`PlayerDAO`を初期化し、それを使用してデータの読み取り、編集、追加、および削除を行うことができます。
+`JDBCExample.java`は`plain-java-jdbc`の本体です。 TiDB は MySQL プロトコルとの互換性が高いため、MySQL ソース インスタンス`MysqlDataSource`を初期化して TiDB に接続する必要があります。次に、オブジェクト管理用に`PlayerDAO`を初期化し、それを使用してデータの読み取り、編集、追加、および削除を行うことができます。
 
 `PlayerDAO`はデータを管理するためのクラスで、 `DAO`は[データ アクセス オブジェクト](https://en.wikipedia.org/wiki/Data_access_object)を意味します。このクラスは、データを書き込む機能を提供する一連のデータ操作メソッドを定義します。
 
@@ -530,7 +530,7 @@ public class JDBCExample
 
 [マイバティス](https://mybatis.org/mybatis-3/index.html)と比較すると、JDBC 実装はベスト プラクティスではない可能性があります。これは、エラー処理ロジックを手動で記述する必要があり、コードを簡単に再利用できないため、コードがわずかに冗長になるためです。
 
-Mybatis は、人気のあるオープンソースの Java クラス永続化フレームワークです。以下は、 [MyBatis ジェネレーター](https://mybatis.org/generator/quickstart.html)を Maven プラグインとして使用して、永続化レイヤー コードを生成します。
+Mybatis は、人気のあるオープンソースの Java クラス永続化フレームワークです。以下は、 [MyBatis ジェネレーター](https://mybatis.org/generator/quickstart.html)を Maven プラグインとして使用して、永続化レイヤーコードを生成します。
 
 `plain-java-mybatis`ディレクトリに移動します。
 
@@ -860,7 +860,7 @@ CREATE TABLE player (
 );
 ```
 
-インターフェイス`PlayerMapperEx`をさらに分割して`PlayerMapper`から拡張し、一致する`PlayerMapperEx.xml`のファイルを書き込みます。 `PlayerMapper.java`と`PlayerMapper.xml`を直接変更しないでください。これは、Mybatis Generator による上書きを避けるためです。
+インターフェイス`PlayerMapperEx`をさらに分割して`PlayerMapper`から拡張し、一致する`PlayerMapperEx.xml`のファイルを書き込みます。 `PlayerMapper.java`と`PlayerMapper.xml`を直接変更することは避けてください。これは、Mybatis Generator による上書きを避けるためです。
 
 `PlayerMapperEx.java`で追加されたインターフェースを定義します。
 
@@ -1426,7 +1426,7 @@ public class HibernateExample
 
 <CustomContent platform="tidb">
 
-JDBC を使用する場合、データベース テーブルを手動で初期化する必要があります。ローカルクラスタを使用していて、MySQL クライアントがローカルにインストールされている場合は、 `plain-java-jdbc`ディレクトリで直接実行できます。
+JDBC を使用する場合、データベース テーブルを手動で初期化する必要があります。ローカル クラスタを使用していて、MySQL クライアントがローカルにインストールされている場合は、 `plain-java-jdbc`ディレクトリで直接実行できます。
 
 {{< copyable "" >}}
 
@@ -1442,13 +1442,13 @@ make mysql
 mysql --host 127.0.0.1 --port 4000 -u root<src/main/resources/dbinit.sql
 ```
 
-非ローカルクラスタを使用している場合、または MySQL クライアントがインストールされていない場合は、クラスタに接続し、 `src/main/resources/dbinit.sql`ファイルのステートメントを実行します。
+非ローカル クラスターを使用している場合、または MySQL クライアントがインストールされていない場合は、クラスターに接続し、 `src/main/resources/dbinit.sql`ファイルのステートメントを実行します。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-JDBC を使用する場合、クラスタに接続し、 `src/main/resources/dbinit.sql`ファイル内のステートメントを実行して、データベース テーブルを手動で初期化する必要があります。
+JDBC を使用する場合、クラスターに接続し、 `src/main/resources/dbinit.sql`のファイルでステートメントを実行して、データベース テーブルを手動で初期化する必要があります。
 
 </CustomContent>
 
@@ -1456,7 +1456,7 @@ JDBC を使用する場合、クラスタに接続し、 `src/main/resources/dbi
 
 <div label="Using Mybatis (Recommended)" value="mybatis">
 
-Mybatis を使用する場合、データベース テーブルを手動で初期化する必要があります。ローカルクラスタを使用していて、MySQL クライアントがローカルにインストールされている場合は、 `plain-java-mybatis`ディレクトリで直接実行できます。
+Mybatis を使用する場合、データベース テーブルを手動で初期化する必要があります。ローカル クラスタを使用していて、MySQL クライアントがローカルにインストールされている場合は、 `plain-java-mybatis`ディレクトリで直接実行できます。
 
 {{< copyable "" >}}
 
@@ -1472,7 +1472,7 @@ make prepare
 mysql --host 127.0.0.1 --port 4000 -u root < src/main/resources/dbinit.sql
 ```
 
-非ローカルクラスタを使用している場合、または MySQL クライアントがインストールされていない場合は、クラスタに接続し、 `src/main/resources/dbinit.sql`ファイルのステートメントを実行します。
+非ローカル クラスターを使用している場合、または MySQL クライアントがインストールされていない場合は、クラスターに接続し、 `src/main/resources/dbinit.sql`ファイルのステートメントを実行します。
 
 </div>
 
@@ -1490,7 +1490,7 @@ mysql --host 127.0.0.1 --port 4000 -u root < src/main/resources/dbinit.sql
 
 <div label="Using JDBC" value="jdbc">
 
-TiDB Cloudや他のリモート クラスターなど、ローカル以外のデフォルトクラスタを使用している場合は、 `JDBCExample.java`でホスト、ポート、ユーザー、およびパスワードのパラメーターを変更します。
+TiDB Cloudやその他のリモート クラスターなど、ローカル以外の既定のクラスターを使用している場合は、 `JDBCExample.java`でホスト、ポート、ユーザー、およびパスワードのパラメーターを変更します。
 
 {{< copyable "" >}}
 
@@ -1524,7 +1524,7 @@ mysqlDataSource.setPassword("123456");
 
 <div label="Using Mybatis (Recommended)" value="mybatis">
 
-TiDB Cloudや`mybatis-config.xml`のリモートクラスタなど、ローカル以外の既定のクラスタを使用している場合は、 `dataSource.username`の`dataSource.url`を変更し`dataSource.password` 。
+TiDB Cloudやその他のリモート クラスターなど、ローカル以外の既定のクラスターを使用している場合は、 `mybatis-config.xml`の`dataSource.url` 、 `dataSource.username` 、 `dataSource.password`を変更します。
 
 {{< copyable "" >}}
 
@@ -1605,7 +1605,7 @@ mysql --connect-timeout 15 -u root -h xxx.tidbcloud.com -P 4000 -p
 
 <div label="Using Hibernate (Recommended)" value="hibernate">
 
-TiDB Cloudや`hibernate.cfg.xml`のリモートクラスタなど、ローカル以外の既定のクラスタを使用している場合は、 `hibernate.connection.username`の`hibernate.connection.url`を変更し`hibernate.connection.password` 。
+TiDB Cloudやその他のリモート クラスターなど、ローカル以外の既定のクラスターを使用している場合は、 `hibernate.cfg.xml`の`hibernate.connection.url` 、 `hibernate.connection.username` 、 `hibernate.connection.password`を変更します。
 
 {{< copyable "" >}}
 

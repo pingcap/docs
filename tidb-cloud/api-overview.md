@@ -14,7 +14,7 @@ summary: Learn about what is TiDB Cloud API, its features, and how to use API to
 >
 > API が利用可能になると、通知用のメールが届きます。
 
-TiDB Cloud API は、 TiDB Cloud内の管理オブジェクトを管理するためのプログラムによるアクセスを提供する[REST インターフェイス](https://en.wikipedia.org/wiki/Representational_state_transfer)です。この API を通じて、リソースを自動的かつ効率的に管理できます。
+TiDB Cloud API は、 TiDB Cloud内の管理オブジェクトを管理するためのプログラムによるアクセスを提供する[REST インターフェイス](https://en.wikipedia.org/wiki/Representational_state_transfer)です。この API を使用すると、リソースを自動的かつ効率的に管理できます。
 
 -   プロジェクト
 -   クラスター

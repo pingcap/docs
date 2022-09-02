@@ -5,7 +5,7 @@ summary: Introduce the HTAP queries in TiDB.
 
 # HTAP クエリ {#htap-queries}
 
-HTAP は Hybrid Transactional and Analytical Processing の略です。従来、データベースは多くの場合、トランザクションまたは分析のシナリオ向けに設計されているため、データ プラットフォームをトランザクション処理と分析処理に分割する必要があることが多く、分析クエリに迅速に応答できるように、データをトランザクション データベースから分析データベースに複製する必要があります。 TiDB データベースはトランザクション タスクと分析タスクの両方を実行できるため、データ プラットフォームの構築が大幅に簡素化され、ユーザーはより新しいデータを分析に使用できるようになります。
+HTAP は Hybrid Transactional and Analytical Processing の略です。従来、データベースは多くの場合、トランザクションまたは分析のシナリオ向けに設計されているため、データ プラットフォームは多くの場合、トランザクション処理と分析処理に分割する必要があり、データをトランザクション データベースから分析データベースに複製して、分析クエリに迅速に応答する必要があります。 TiDB データベースはトランザクション タスクと分析タスクの両方を実行できるため、データ プラットフォームの構築が大幅に簡素化され、ユーザーはより新しいデータを分析に使用できるようになります。
 
 TiDB は、行ベースのストレージ エンジンである TiKV を Online Transactional Processing (OLTP) に使用し、列指向のストレージ エンジンである TiFlash を Online Analytical Processing (OLAP) に使用します。 HTAP では、行ベースのストレージ エンジンと列指向のストレージ エンジンが共存します。どちらのストレージ エンジンもデータを自動的にレプリケートし、強力な整合性を維持できます。行ベースのストレージ エンジンは OLTP のパフォーマンスを最適化し、列ベースのストレージ エンジンは OLAP のパフォーマンスを最適化します。
 
@@ -144,7 +144,7 @@ SELECT * FROM acc;
 
 TiDB は、より多くの分析ステートメントのために、いくつかの非集計[ウィンドウ関数](/functions-and-operators/window-functions.md)も提供します。
 
-たとえば、 [ページネーション クエリ](/develop/dev-guide-paginate-results.md)ドキュメントでは、 `row_number()`関数を使用して効率的なページネーションのバッチ処理を実現する方法を紹介しています。
+たとえば、 [ページネーション クエリ](/develop/dev-guide-paginate-results.md)ドキュメントでは、 `row_number()`関数を使用して効率的なページネーション バッチ処理を実現する方法を紹介しています。
 
 ## ハイブリッド ワークロード {#hybrid-workload}
 
@@ -152,7 +152,7 @@ TiDB は、より多くの分析ステートメントのために、いくつか
 
 ### TiFlash レプリカの作成 {#create-tiflash-replicas}
 
-TiDB は、デフォルトで行ベースのストレージ エンジン TiKV を使用します。コラム型ストレージ エンジンである TiFlash を使用するには、 [HTAP 機能を有効にする](/develop/dev-guide-create-table.md#use-htap-capabilities)を参照してください。 TiFlash を介してデータをクエリする前に、次のステートメントを使用して、 `books`および`orders`のテーブルの TiFlash レプリカを作成する必要があります。
+TiDB は、デフォルトで行ベースのストレージ エンジン TiKV を使用します。カラム型ストレージ エンジンである TiFlash を使用するには、 [HTAP 機能を有効にする](/develop/dev-guide-create-table.md#use-htap-capabilities)を参照してください。 TiFlash を介してデータのクエリを実行する前に、次のステートメントを使用して、 `books`および`orders`のテーブルの TiFlash レプリカを作成する必要があります。
 
 {{< copyable "" >}}
 

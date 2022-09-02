@@ -5,20 +5,20 @@ summary: A brief introduction to transactions in TiDB.
 
 # 取引概要 {#transaction-overview}
 
-TiDBは完全な分散トランザクションをサポートし、 [楽観的な取引](/optimistic-transaction.md)と[悲観的な取引](/pessimistic-transaction.md)を提供します（TiDB 3.0で導入）。この記事では主に、トランザクションステートメント、楽観的なトランザクションと悲観的なトランザクション、トランザクションの分離レベル、および楽観的なトランザクションでのアプリケーション側の再試行とエラー処理について説明します。
+TiDB は完全な分散トランザクションをサポートし、 [楽観的な取引](/optimistic-transaction.md)と[悲観的な取引](/pessimistic-transaction.md)を提供します (TiDB 3.0 で導入)。この記事では主に、トランザクション ステートメント、楽観的トランザクションと悲観的トランザクション、トランザクションの分離レベル、および楽観的トランザクションにおけるアプリケーション側の再試行とエラー処理について紹介します。
 
 ## 一般的なステートメント {#common-statements}
 
-この章では、TiDBでトランザクションを使用する方法を紹介します。次の例は、単純なトランザクションのプロセスを示しています。
+この章では、TiDB でトランザクションを使用する方法を紹介します。次の例は、単純なトランザクションのプロセスを示しています。
 
-ボブは$20をアリスに送金したいと考えています。このトランザクションには、次の2つの操作が含まれます。
+ボブは 20 ドルをアリスに送金したいと考えています。このトランザクションには、次の 2 つの操作が含まれます。
 
--   ボブのアカウントは$20削減されます。
--   アリスのアカウントは$20増加します。
+-   ボブの口座は $20 減額されます。
+-   Alice の口座は 20 ドル増額されます。
 
 トランザクションは、上記の操作の両方が正常に実行されるか、両方が失敗することを保証できます。
 
-[書店](/develop/dev-guide-bookshop-schema-design.md)データベースの`users`テーブルを使用して、いくつかのサンプルデータをテーブルに挿入します。
+[書店](/develop/dev-guide-bookshop-schema-design.md)データベースの`users`テーブルを使用して、いくつかのサンプル データをテーブルに挿入します。
 
 {{< copyable "" >}}
 
@@ -52,9 +52,9 @@ COMMIT;
 
 ```
 
-### トランザクションを開始します {#start-a-transaction}
+### 取引を開始する {#start-a-transaction}
 
-新しいトランザクションを明示的に開始するには、 `BEGIN`または`START TRANSACTION`のいずれかを使用できます。
+新しいトランザクションを明示的に開始するには、 `BEGIN`または`START TRANSACTION`を使用できます。
 
 {{< copyable "" >}}
 
@@ -68,7 +68,7 @@ BEGIN;
 START TRANSACTION;
 ```
 
-TiDBのデフォルトのトランザクションモードは悲観的です。 [楽観的なトランザクションモデル](/develop/dev-guide-optimistic-and-pessimistic-transaction.md)を明示的に指定することもできます：
+TiDB のデフォルトのトランザクション モードは悲観的です。 [楽観的取引モデル](/develop/dev-guide-optimistic-and-pessimistic-transaction.md)を明示的に指定することもできます。
 
 {{< copyable "" >}}
 
@@ -76,7 +76,7 @@ TiDBのデフォルトのトランザクションモードは悲観的です。 
 BEGIN OPTIMISTIC;
 ```
 
-[悲観的なトランザクションモード](/develop/dev-guide-optimistic-and-pessimistic-transaction.md)を有効にします：
+[ペシミスティック トランザクション モード](/develop/dev-guide-optimistic-and-pessimistic-transaction.md)を有効にします:
 
 {{< copyable "" >}}
 
@@ -84,11 +84,11 @@ BEGIN OPTIMISTIC;
 BEGIN PESSIMISTIC;
 ```
 
-上記のステートメントが実行されたときに現在のセッションがトランザクションの途中である場合、TiDBは最初に現在のトランザクションをコミットしてから、新しいトランザクションを開始します。
+上記のステートメントが実行されたときに現在のセッションがトランザクションの途中にある場合、TiDB は最初に現在のトランザクションをコミットしてから、新しいトランザクションを開始します。
 
 ### トランザクションをコミットする {#commit-a-transaction}
 
-`COMMIT`ステートメントを使用して、現在のトランザクションでTiDBによって行われたすべての変更をコミットできます。
+`COMMIT`ステートメントを使用して、現在のトランザクションで TiDB によって行われたすべての変更をコミットできます。
 
 {{< copyable "" >}}
 
@@ -96,7 +96,7 @@ BEGIN PESSIMISTIC;
 COMMIT;
 ```
 
-楽観的なトランザクションを有効にする前に、アプリケーションが`COMMIT`ステートメントによって返される可能性のあるエラーを適切に処理できることを確認してください。アプリケーションがそれをどのように処理するかわからない場合は、代わりにペシミスティックトランザクションモードを使用することをお勧めします。
+オプティミスティック トランザクションを有効にする前に、アプリケーションが`COMMIT`ステートメントによって返されるエラーを適切に処理できることを確認してください。アプリケーションがそれをどのように処理するかわからない場合は、代わりにペシミスティック トランザクション モードを使用することをお勧めします。
 
 ### トランザクションをロールバックする {#roll-back-a-transaction}
 
@@ -108,7 +108,7 @@ COMMIT;
 ROLLBACK;
 ```
 
-前の転送の例では、トランザクション全体をロールバックすると、アリスとボブの残高は変更されず、現在のトランザクションのすべての変更がキャンセルされます。
+前の送金の例では、トランザクション全体をロールバックすると、アリスとボブの残高は変更されず、現在のトランザクションのすべての変更がキャンセルされます。
 
 {{< copyable "" >}}
 
@@ -139,29 +139,29 @@ SELECT * FROM `users`;
 +----+--------------+---------+
 ```
 
-クライアント接続が停止または閉じられた場合も、トランザクションは自動的にロールバックされます。
+クライアント接続が停止またはクローズされた場合も、トランザクションは自動的にロールバックされます。
 
 ## トランザクション分離レベル {#transaction-isolation-levels}
 
-トランザクション分離レベルは、データベーストランザクション処理の基礎です。 **ACID**の「I」（分離）は、トランザクションの分離を指します。
+トランザクション分離レベルは、データベース トランザクション処理の基礎です。 **ACID**の「I」(Isolation) は、トランザクションの分離を意味します。
 
-SQL-92標準では、次の4つの分離レベルが定義されています。
+SQL-92 標準では、次の 4 つの分離レベルが定義されています。
 
--   コミットされていない読み取り（ `READ UNCOMMITTED` ）
--   コミット済みの読み取り（ `READ COMMITTED` ）
--   繰り返し可能な読み取り（ `REPEATABLE READ` ）
--   シリアル化可能（ `SERIALIZABLE` ）。
+-   コミットされていない読み取り ( `READ UNCOMMITTED` )
+-   コミットされた読み取り ( `READ COMMITTED` )
+-   繰り返し読み取り ( `REPEATABLE READ` )
+-   シリアライズ可能 ( `SERIALIZABLE` )。
 
-詳細については、以下の表を参照してください。
+詳細については、次の表を参照してください。
 
-| 分離レベル          | ダーティライト | ダーティリード | ファジー読み取り | ファントム |
-| -------------- | ------- | ------- | -------- | ----- |
-| コミットされていない読み取り | ありえない   | 可能      | 可能       | 可能    |
-| コミット済みを読む      | ありえない   | ありえない   | 可能       | 可能    |
-| 繰り返し読む         | ありえない   | ありえない   | ありえない    | 可能    |
-| シリアル化可能        | ありえない   | ありえない   | ありえない    | ありえない |
+| 分離レベル          | ダーティーライト | ダーティリード | あいまい読み取り | ファントム |
+| -------------- | -------- | ------- | -------- | ----- |
+| コミットされていない読み取り | ありえない    | 可能      | 可能       | 可能    |
+| コミットされた読み取り    | ありえない    | ありえない   | 可能       | 可能    |
+| 反復可能な読み取り      | ありえない    | ありえない   | ありえない    | 可能    |
+| シリアライズ可能       | ありえない    | ありえない   | ありえない    | ありえない |
 
-TiDBは、次の分離レベルをサポートしています`READ COMMITTED`および`REPEATABLE READ` ：
+TiDB は次の分離レベルをサポートしています: `READ COMMITTED`および`REPEATABLE READ` :
 
 {{< copyable "" >}}
 
@@ -178,4 +178,4 @@ mysql> SET TRANSACTION ISOLATION LEVEL SERIALIZABLE;
 ERROR 8048 (HY000): The isolation level 'SERIALIZABLE' is not supported. Set tidb_skip_isolation_level_check=1 to skip this error
 ```
 
-TiDBは、MySQLとの整合性のために「繰り返し可能な読み取り」とも呼ばれるスナップショットアイソレーション（SI）レベルの整合性を実装します。この分離レベルは、 [ANSI反復可能読み取り分離レベル](/transaction-isolation-levels.md#difference-between-tidb-and-ansi-repeatable-read)および[MySQLの繰り返し可能な読み取り分離レベル](/transaction-isolation-levels.md#difference-between-tidb-and-mysql-repeatable-read)とは異なります。詳細については、 [TiDBトランザクション分離レベル](/transaction-isolation-levels.md)を参照してください。
+TiDB は、MySQL との一貫性を保つための「反復可能読み取り」とも呼ばれるスナップショット分離 (SI) レベルの一貫性を実装しています。この分離レベルは[ANSI 反復可能読み取り分離レベル](/transaction-isolation-levels.md#difference-between-tidb-and-ansi-repeatable-read)および[MySQL 反復可能読み取り分離レベル](/transaction-isolation-levels.md#difference-between-tidb-and-mysql-repeatable-read)とは異なります。詳細については、 [TiDB トランザクション分離レベル](/transaction-isolation-levels.md)を参照してください。

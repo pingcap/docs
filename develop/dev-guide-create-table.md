@@ -11,13 +11,13 @@ summary: Learn the definitions, rules, and guidelines in table creation.
 
 このドキュメントを読む前に、次のタスクが完了していることを確認してください。
 
--   [TiDB Cloud(開発者層) で TiDB クラスターを構築する](/develop/dev-guide-build-cluster-in-cloud.md) .
+-   [TiDB Cloud(開発者層) で TiDBクラスタを構築する](/develop/dev-guide-build-cluster-in-cloud.md) .
 -   [スキーマ設計の概要](/develop/dev-guide-schema-design-overview.md)を読んでください。
 -   [データベースを作成する](/develop/dev-guide-create-database.md) .
 
 ## テーブルとは {#what-is-a-table}
 
-[テーブル](/develop/dev-guide-schema-design-overview.md#table)は、 [データベース](/develop/dev-guide-schema-design-overview.md#database)に従属する TiDBクラスタの論理オブジェクトです。 SQL ステートメントから送信されたデータを格納するために使用されます。テーブルは、行と列の形式でデータ レコードを保存します。テーブルには少なくとも 1 つの列があります。 `n`の列を定義した場合、データの各行には`n`の列とまったく同じフィールドがあります。
+[テーブル](/develop/dev-guide-schema-design-overview.md#table)は、 [データベース](/develop/dev-guide-schema-design-overview.md#database)に従属する TiDB クラスター内の論理オブジェクトです。 SQL ステートメントから送信されたデータを格納するために使用されます。テーブルは、行と列の形式でデータ レコードを保存します。テーブルには少なくとも 1 つの列があります。 `n`の列を定義した場合、データの各行には`n`の列とまったく同じフィールドがあります。
 
 ## テーブルに名前を付ける {#name-a-table}
 
@@ -83,7 +83,7 @@ CREATE TABLE `bookshop`.`users` (
 
 TiDB は、 [整数型](/data-type-numeric.md#integer-types) 、 [浮動小数点型](/data-type-numeric.md#floating-point-types) 、 [固定小数点型](/data-type-numeric.md#fixed-point-types) 、 [日付と時刻の種類](/data-type-date-and-time.md) 、および[列挙型](/data-type-string.md#enum-type)を含む、他の多くの列データ型をサポートしています。サポートされている列[データ型](/data-type-overview.md)を参照して、データベースに保存するデータに一致する**データ型**を使用できます。
 
-もう少し複雑にするために、 `bookshop`のデータのコアとなる`books`のテーブルを定義できます。 `books`テーブルには、書籍の ID、タイトル、種類 (雑誌、小説、人生、芸術など)、在庫、価格、および出版日のフィールドが含まれています。
+もう少し複雑にするために、 `bookshop`のデータのコアとなる`books`のテーブルを定義できます。 `books`テーブルには、書籍の ID、タイトル、種類 (雑誌、小説、人生、芸術など)、在庫、価格、出版日のフィールドが含まれています。
 
 {{< copyable "" >}}
 
@@ -145,7 +145,7 @@ CREATE TABLE `bookshop`.`users` (
 
 TiDB は v5.0 以降、 [クラスター化インデックス](/clustered-indexes.md)つの機能をサポートしています。この機能は、主キーを含むテーブルにデータを格納する方法を制御します。特定のクエリのパフォーマンスを向上させる方法でテーブルを編成する機能を TiDB に提供します。
 
-このコンテキストでのクラスタ化という用語は、データがどのように格納されるかの編成を指し、連携して動作するデータベース サーバーのグループを指すわけではありません。一部のデータベース管理システムでは、クラスター化インデックスをインデックス構成テーブル (IOT) と呼んでいます。
+このコンテキストでのクラスター化という用語は、データがどのように格納されるかの編成を指し、連携して動作するデータベース サーバーのグループではありません。一部のデータベース管理システムでは、クラスター化インデックスをインデックス構成テーブル (IOT) と呼んでいます。
 
 現在、TiDB の***主キーを含む***テーブルは、次の 2 つのカテゴリに分類されます。
 
@@ -161,7 +161,7 @@ TiDB は v5.0 以降、 [クラスター化インデックス](/clustered-indexe
 >
 > TiDB は、テーブルの`PRIMARY KEY`によるクラスタリングのみをサポートします。クラスター化インデックスを有効にすると*、* `PRIMARY KEY`と<em>クラスター化インデックス</em>という用語が同じ意味で使用される場合があります。 `PRIMARY KEY`は制約 (論理プロパティ) を参照し、クラスター化インデックスはデータの格納方法の物理的な実装を記述します。
 
-[クラスタ化インデックスを選択するためのガイドライン](#guidelines-to-follow-when-selecting-clustered-index)に続いて、次の例では`books`と`users`の間の関連付けを持つテーブルを作成します。これは`book` x `users`の`ratings`を表します。この例では、テーブルを作成し、 `book_id`と`user_id`を使用して複合主キーを作成し、その**主キー**に<strong>クラスター化インデックス</strong>を作成します。
+[クラスタ化インデックスを選択するためのガイドライン](#guidelines-to-follow-when-selecting-clustered-index)に続いて、次の例では、 `books`と`users`の間の関連付けを持つテーブルを作成します。これは、 `book` x `users`の`ratings`を表します。この例では、テーブルを作成し、 `book_id`と`user_id`を使用して複合主キーを作成し、その**主キー**に<strong>クラスター化インデックス</strong>を作成します。
 
 {{< copyable "" >}}
 
@@ -183,7 +183,7 @@ CREATE TABLE `bookshop`.`ratings` (
 
 列にデフォルト値を設定するには、 `DEFAULT`制約を使用します。デフォルト値を使用すると、各列の値を指定せずにデータを挿入できます。
 
-`DEFAULT`と[サポートされている SQL関数](/functions-and-operators/functions-and-operators-overview.md)を一緒に使用して、デフォルトの計算をアプリケーション層の外に移動し、アプリケーション層のリソースを節約できます。計算によって消費されたリソースは消えず、TiDBクラスタに移動されます。通常、デフォルトの時間でデータを挿入できます。以下は、 `ratings`テーブルにデフォルト値を設定する例です。
+`DEFAULT`と[サポートされている SQL関数](/functions-and-operators/functions-and-operators-overview.md)を一緒に使用して、デフォルトの計算をアプリケーションレイヤーの外に移動し、アプリケーションレイヤーのリソースを節約できます。計算によって消費されたリソースは消えず、TiDB クラスターに移動されます。通常、デフォルトの時間でデータを挿入できます。以下は、 `ratings`テーブルにデフォルト値を設定する例です。
 
 {{< copyable "" >}}
 
@@ -234,7 +234,7 @@ CREATE TABLE `bookshop`.`users` (
 
 列の null 値を防ぐ必要がある場合は、 `NOT NULL`制約を使用できます。
 
-例として、ユーザーのニックネームを取り上げます。ニックネームが固有であるだけでなく、NULL でもないことを確認するには、 `users`表を作成するための SQL ステートメントを次のように書き直すことができます。
+例として、ユーザーのニックネームを取り上げます。ニックネームが固有であるだけでなく、ヌルでもないことを確認するには、 `users`表を作成するための SQL ステートメントを次のように書き直すことができます。
 
 {{< copyable "" >}}
 
@@ -261,11 +261,11 @@ CREATE TABLE `bookshop`.`users` (
 
 > **ノート：**
 >
-> このガイドに記載されている手順は、***クイック***スタート専用です。詳細については、 [TiFlash で HTAP クラスターを使用する](/tiflash/tiflash-overview.md)を参照してください。
+> このガイドに記載されている手順は、***クイック***スタート専用です。詳細については、 [TiFlash で HTAPクラスタを使用する](/tiflash/tiflash-overview.md)を参照してください。
 
 </CustomContent>
 
-`bookshop`アプリケーションを使用して`ratings`テーブルで OLAP 分析を実行するとします。たとえば、**書籍の評価が評価の時間と有意な相関関係があるかどうか**をクエリするために、ユーザーの書籍の評価が客観的かどうか。次に、 `ratings`テーブル全体の`score`フィールドと`rated_at`フィールドをクエリする必要があります。この操作は、OLTP のみのデータベースではリソースを集中的に使用します。または、ETL またはその他のデータ同期ツールを使用して、分析のために OLTP データベースから専用の OLAP データベースにデータをエクスポートすることもできます。
+`bookshop`アプリケーションを使用して`ratings`テーブルで OLAP 分析を実行するとします。たとえば、**書籍の評価が評価の時間と有意な相関関係があるかどうか**をクエリするために、ユーザーの書籍の評価が客観的かどうか。次に、 `ratings`テーブル全体の`score`フィールドと`rated_at`フィールドを照会する必要があります。この操作は、OLTP のみのデータベースではリソースを集中的に使用します。または、ETL またはその他のデータ同期ツールを使用して、分析のために OLTP データベースから専用の OLAP データベースにデータをエクスポートすることもできます。
 
 このシナリオでは、OLTP と OLAP の両方のシナリオをサポートする**HTAP (Hybrid Transactional and Analytical Processing)**データベースである TiDB が、理想的なワンストップ データベース ソリューションです。
 
@@ -281,7 +281,7 @@ TiDB HTAP機能の詳細については、次のドキュメントを参照し�
 
 <CustomContent platform="tidb-cloud">
 
-TiDB HTAP機能の詳細については、 [TiDB CloudHTAP クイック スタート](/tidb-cloud/tidb-cloud-htap-quickstart.md)および[TiFlash で HTAP クラスターを使用する](/tiflash/tiflash-overview.md)を参照してください。
+TiDB HTAP機能の詳細については、 [TiDB CloudHTAP クイック スタート](/tidb-cloud/tidb-cloud-htap-quickstart.md)および[TiFlash で HTAPクラスタを使用する](/tiflash/tiflash-overview.md)を参照してください。
 
 </CustomContent>
 
@@ -300,7 +300,7 @@ ALTER TABLE {table_name} SET TIFLASH REPLICA {count};
 -   `{table_name}` : テーブル名。
 -   `{count}` : レプリケートされたレプリカの数。 0 の場合、複製されたレプリカは削除されます。
 
-その後、 **TiFlash**はテーブルを複製します。クエリが実行されると、TiDB はコストの最適化に基づいてクエリに対して TiKV (行ベース) または TiFlash (列ベース) を自動的に選択します。または、クエリで<strong>TiFlash</strong>レプリカを使用するかどうかを手動で指定することもできます。指定方法については、 [TiDB を使用して TiFlash レプリカを読み取る](/tiflash/use-tidb-to-read-tiflash.md)を参照してください。
+その後、 **TiFlash**はテーブルを複製します。クエリが実行されると、TiDB はコストの最適化に基づいて、クエリに対して TiKV (行ベース) または TiFlash (列ベース) を自動的に選択します。または、クエリで<strong>TiFlash</strong>レプリカを使用するかどうかを手動で指定することもできます。指定方法については、 [TiDB を使用して TiFlash レプリカを読み取る](/tiflash/use-tidb-to-read-tiflash.md)を参照してください。
 
 ### HTAP 機能の使用例 {#an-example-of-using-htap-capabilities}
 
@@ -314,7 +314,7 @@ ALTER TABLE `bookshop`.`ratings` SET TIFLASH REPLICA 1;
 
 > **ノート：**
 >
-> クラスタに**TiFlash**ノードが含まれていない場合、この SQL ステートメントはエラーを報告します: `1105 - the tiflash replica count: 1 should be less than the total tiflash server count: 0` 。 [TiDB Cloud(開発者層) で TiDB クラスターを構築する](/develop/dev-guide-build-cluster-in-cloud.md#step-1-create-a-free-cluster)を使用して、 <strong>TiFlash</strong>を含む無料のクラスタを作成できます。
+> クラスターに**TiFlash**ノードが含まれていない場合、この SQL ステートメントはエラーを報告します: `1105 - the tiflash replica count: 1 should be less than the total tiflash server count: 0` 。 [TiDB Cloud(開発者層) で TiDBクラスタを構築する](/develop/dev-guide-build-cluster-in-cloud.md#step-1-create-a-free-cluster)を使用して、 <strong>TiFlash</strong>を含む無料のクラスターを作成できます。
 
 次に、次のクエリを実行できます。
 

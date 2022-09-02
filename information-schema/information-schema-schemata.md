@@ -5,7 +5,7 @@ summary: Learn the `SCHEMATA` information_schema table.
 
 # スキーマ {#schemata}
 
-`SCHEMATA`の表は、データベースに関する情報を提供します。テーブルデータは、 `SHOW DATABASES`ステートメントの結果と同等です。
+`SCHEMATA`テーブルは、データベースに関する情報を提供します。テーブル データは、 `SHOW DATABASES`ステートメントの結果と同等です。
 
 {{< copyable "" >}}
 
@@ -46,10 +46,10 @@ SELECT * FROM SCHEMATA;
 5 rows in set (0.00 sec)
 ```
 
-`SCHEMATA`表のフィールドは次のように説明されています。
+`SCHEMATA`テーブルのフィールドは次のとおりです。
 
--   `CATALOG_NAME` ：データベースが属するカタログ。
--   `SCHEMA_NAME` ：データベース名。
--   `DEFAULT_CHARACTER_SET_NAME` ：データベースのデフォルトの文字セット。
--   `DEFAULT_COLLATION_NAME` ：データベースのデフォルトの照合順序。
--   `SQL_PATH` ：このアイテムの値は常に`NULL`です。
+-   `CATALOG_NAME` : データベースが属するカタログ。
+-   `SCHEMA_NAME` : データベース名。
+-   `DEFAULT_CHARACTER_SET_NAME` : データベースのデフォルトの文字セット。
+-   `DEFAULT_COLLATION_NAME` : データベースのデフォルトの照合順序。
+-   `SQL_PATH` : この項目の値は常に`NULL`です。

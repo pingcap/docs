@@ -2,57 +2,57 @@
 title: TiDB 3.0.9 Release Notes
 ---
 
-# TiDB3.0.9リリースノート {#tidb-3-0-9-release-notes}
+# TiDB 3.0.9 リリースノート {#tidb-3-0-9-release-notes}
 
 発売日：2020年1月14日
 
-TiDBバージョン：3.0.9
+TiDB バージョン: 3.0.9
 
-TiDB Ansibleバージョン：3.0.9
+TiDB アンシブル バージョン: 3.0.9
 
 > **警告：**
 >
-> このバージョンにはいくつかの既知の問題があり、これらの問題は新しいバージョンで修正されています。最新の3.0.xバージョンを使用することをお勧めします。
+> このバージョンにはいくつかの既知の問題があり、これらの問題は新しいバージョンで修正されています。最新の 3.0.x バージョンを使用することをお勧めします。
 
 ## TiDB {#tidb}
 
--   エグゼキュータ
-    -   集計関数が`ENUM`列とコレクション列[＃14364](https://github.com/pingcap/tidb/pull/14364)に適用されたときの誤った結果を修正します
+-   実行者
+    -   集計関数を`ENUM`列とコレクション列[#14364](https://github.com/pingcap/tidb/pull/14364)に適用したときの誤った結果を修正します。
 -   サーバ
-    -   `auto_increment_increment`と`auto_increment_offset`のシステム変数をサポートする[＃14396](https://github.com/pingcap/tidb/pull/14396)
-    -   `tidb_tikvclient_ttl_lifetime_reach_total`の監視メトリックを追加して、TTLが10分の悲観的なトランザクションの数を監視します[＃14300](https://github.com/pingcap/tidb/pull/14300)
-    -   SQLクエリの実行中にpanicが発生した場合にSQL情報をログに出力する[＃14322](https://github.com/pingcap/tidb/pull/14322)
-    -   ステートメントサマリーテーブルに`plan`フィールドと`plan_digest`フィールドを追加して、実行中の`plan`と`plan`シグニチャ[＃14285](https://github.com/pingcap/tidb/pull/14285)を記録します。
-    -   `stmt-summary.max-stmt-count`構成項目のデフォルト値を`100`から[＃14285](https://github.com/pingcap/tidb/pull/14285)に調整し`200` 。
-    -   低速クエリテーブルに`plan_digest`フィールドを追加して、 `plan`シグニチャを記録します[＃14292](https://github.com/pingcap/tidb/pull/14292)
+    -   `auto_increment_increment`および`auto_increment_offset`システム変数[#14396](https://github.com/pingcap/tidb/pull/14396)をサポート
+    -   `tidb_tikvclient_ttl_lifetime_reach_total`モニタリング メトリックを追加して、10 分の TTL で悲観的なトランザクションの数をモニタリングします[#14300](https://github.com/pingcap/tidb/pull/14300)
+    -   SQLクエリの実行中にpanicが発生した場合、ログにSQL情報を出力します[#14322](https://github.com/pingcap/tidb/pull/14322)
+    -   ステートメント要約表に`plan`および`plan_digest`フィールドを追加して、実行中の`plan`と署名`plan`を記録します[#14285](https://github.com/pingcap/tidb/pull/14285)
+    -   `stmt-summary.max-stmt-count`構成項目のデフォルト値を`100`から`200`に調整します[#14285](https://github.com/pingcap/tidb/pull/14285)
+    -   スロー クエリ テーブルに`plan_digest`フィールドを追加して、 `plan`シグネチャ[#14292](https://github.com/pingcap/tidb/pull/14292)を記録します。
 -   DDL
-    -   `primary`列に`alter table ... add index`を使用して作成された匿名インデックスの結果が[＃14310](https://github.com/pingcap/tidb/pull/14310)と矛盾する問題を修正します
-    -   `drop table`構文[＃14052](https://github.com/pingcap/tidb/pull/14052)によって`VIEW`が誤ってドロップされる問題を修正します。
+    -   `primary`列に`alter table ... add index`を使用して作成された匿名インデックスの結果が MySQL [#14310](https://github.com/pingcap/tidb/pull/14310)と一致しない問題を修正します。
+    -   `drop table`構文[#14052](https://github.com/pingcap/tidb/pull/14052)で`VIEW`が誤ってドロップされる問題を修正
 -   プランナー
-    -   `select max(a), min(a) from t`などのステートメントのパフォーマンスを最適化します。 `a`列にインデックスが存在する場合、ステートメントは`select * from (select a from t order by a desc limit 1) as t1, (select a from t order by a limit 1) as t2`に最適化され、全表スキャンを回避します[＃14410](https://github.com/pingcap/tidb/pull/14410)
+    -   `select max(a), min(a) from t`などのステートメントのパフォーマンスを最適化します。インデックスが`a`列に存在する場合、ステートメントは`select * from (select a from t order by a desc limit 1) as t1, (select a from t order by a limit 1) as t2`に最適化され、フル テーブル スキャンを回避します[#14410](https://github.com/pingcap/tidb/pull/14410)
 
 ## TiKV {#tikv}
 
 -   ラフトストア
-    -   構成変更を高速化して、リージョン散乱を高速化します[＃6421](https://github.com/tikv/tikv/pull/6421)
+    -   構成変更を高速化して、リージョン分散を高速化します[#6421](https://github.com/tikv/tikv/pull/6421)
 -   取引
-    -   `tikv_lock_manager_waiter_lifetime_duration` 、および`tikv_lock_manager_detect_duration`の監視メトリックを追加して、 `tikv_lock_manager_detect_duration`の存続期間、デッドロックの検出にかかる時間コスト、および`waiter`の[＃6392](https://github.com/tikv/tikv/pull/6392)を監視し`Wait` 。
-    -   次の構成項目を最適化して、極端な状況でリージョンリーダーまたはデッドロック検出器のリーダーを変更することによって発生するトランザクション実行の待ち時間を短縮します[＃6429](https://github.com/tikv/tikv/pull/6429)
+    -   `tikv_lock_manager_waiter_lifetime_duration` 、 `tikv_lock_manager_detect_duration` 、および`tikv_lock_manager_detect_duration`のモニタリング メトリックを追加して、 `waiter`の有効期間、デッドロックを検出するための時間コスト、および`Wait`表[#6392](https://github.com/tikv/tikv/pull/6392)のステータスをモニタリングします。
+    -   次の構成項目を最適化して、極端な状況でリージョンリーダーまたはデッドロック ディテクターのリーダーを変更することによって引き起こされるトランザクション実行レイテンシーを削減します[#6429](https://github.com/tikv/tikv/pull/6429)
         -   デフォルト値の`wait-for-lock-time`を`3s`から`1s`に変更します
         -   デフォルト値の`wake-up-delay-duration`を`100ms`から`20ms`に変更します
-    -   リージョンマージプロセス中にデッドロック検出器のリーダーが正しくない可能性がある問題を修正します[＃6431](https://github.com/tikv/tikv/pull/6431)
+    -   リージョン Merge プロセス中にデッドロック検出器のリーダーが正しくない可能性がある問題を修正します[#6431](https://github.com/tikv/tikv/pull/6431)
 
 ## PD {#pd}
 
--   ロケーションラベル名[＃2083](https://github.com/pingcap/pd/pull/2083)でのバックラッシュ`/`の使用をサポート
--   トゥームストーンストアがラベルカウンター[＃2067](https://github.com/pingcap/pd/pull/2067)に誤って含まれているため、誤った統計を修正します
+-   ロケーション ラベル名でのバックラッシュ`/`の使用のサポート[#2083](https://github.com/pingcap/pd/pull/2083)
+-   トゥームストーン ストアが誤ってラベル カウンター[#2067](https://github.com/pingcap/pd/pull/2067)に含まれているため、誤った統計を修正します。
 
 ## ツール {#tools}
 
--   TiDB Binlog
-    -   Drainer1によって出力されたDrainerプロトコルに一意のキー情報を追加し[＃862](https://github.com/pingcap/tidb-binlog/pull/862)
-    -   Drainerのデータベース接続に暗号化されたパスワードを使用することを[＃868](https://github.com/pingcap/tidb-binlog/pull/868)
+-   Binlog
+    -   Drainer [#862](https://github.com/pingcap/tidb-binlog/pull/862)が出力する binlog プロトコルに一意のキー情報を追加します
+    -   Drainer [#868](https://github.com/pingcap/tidb-binlog/pull/868)のデータベース接続に暗号化パスワードを使用するサポート
 
-## TiDB Ansible {#tidb-ansible}
+## TiDB アンシブル {#tidb-ansible}
 
--   TiDB Lightningの展開を最適化するためのディレクトリの自動作成を[＃1105](https://github.com/pingcap/tidb-ansible/pull/1105)
+-   ディレクトリの自動作成をサポートして、 TiDB Lightning [#1105](https://github.com/pingcap/tidb-ansible/pull/1105)の展開を最適化します

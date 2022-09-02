@@ -5,11 +5,11 @@ summary: Learn the `SLOW_QUERY` information_schema table.
 
 # SLOW_QUERY {#slow-query}
 
-`SLOW_QUERY`テーブルは、現在のノードの低速クエリ情報を提供します。これは、TiDB低速ログファイルの解析結果です。表の列名は、低速ログのフィールド名に対応しています。
+`SLOW_QUERY`番目のテーブルは、現在のノードのスロー クエリ情報を提供します。これは、TiDB スロー ログ ファイルの解析結果です。表の列名は、スロー ログのフィールド名に対応しています。
 
 <CustomContent platform="tidb">
 
-このテーブルを使用して問題のあるステートメントを特定し、クエリのパフォーマンスを向上させる方法については、 [遅いクエリログドキュメント](/identify-slow-queries.md)を参照してください。
+このテーブルを使用して問題のあるステートメントを特定し、クエリのパフォーマンスを向上させる方法については、 [スロー クエリ ログ ドキュメント](/identify-slow-queries.md)を参照してください。
 
 </CustomContent>
 
@@ -82,13 +82,13 @@ DESC slow_query;
 54 rows in set (0.00 sec)
 ```
 
-## CLUSTER_SLOW_QUERYテーブル {#cluster-slow-query-table}
+## CLUSTER_SLOW_QUERY テーブル {#cluster-slow-query-table}
 
-`CLUSTER_SLOW_QUERY`テーブルは、クラスタのすべてのノードの低速クエリ情報を提供します。これは、TiDB低速ログファイルの解析結果です。 `CLUSTER_SLOW_QUERY`テーブルは`SLOW_QUERY`と同じように使用できます。 `CLUSTER_SLOW_QUERY`テーブルのテーブルスキーマは、 `INSTANCE`列が`CLUSTER_SLOW_QUERY`に追加されるという点で、 `SLOW_QUERY`テーブルのテーブルスキーマとは異なります。 `INSTANCE`列は、低速クエリの行情報のTiDBノードアドレスを表します。
+`CLUSTER_SLOW_QUERY`番目のテーブルは、クラスター内のすべてのノードのスロー クエリ情報を提供します。これは、TiDB スロー ログ ファイルの解析結果です。 `SLOW_QUERY`と同じように`CLUSTER_SLOW_QUERY`テーブルを使用できます。 `CLUSTER_SLOW_QUERY`テーブルのテーブル スキーマは、 `INSTANCE`カラムが`CLUSTER_SLOW_QUERY`に追加されているという点で、 `SLOW_QUERY`テーブルのテーブル スキーマとは異なります。 `INSTANCE`列目はスロークエリの行情報のTiDBノードアドレスを表しています。
 
 <CustomContent platform="tidb">
 
-このテーブルを使用して問題のあるステートメントを特定し、クエリのパフォーマンスを向上させる方法については、 [遅いクエリログドキュメント](/identify-slow-queries.md)を参照してください。
+このテーブルを使用して問題のあるステートメントを特定し、クエリのパフォーマンスを向上させる方法については、 [スロー クエリ ログ ドキュメント](/identify-slow-queries.md)を参照してください。
 
 </CustomContent>
 
@@ -161,7 +161,7 @@ desc cluster_slow_query;
 55 rows in set (0.00 sec)
 ```
 
-クラスタシステムテーブルが照会されると、TiDBはすべてのノードからデータを取得するのではなく、関連する計算を他のノードにプッシュダウンします。実行計画は次のとおりです。
+クラスター システム テーブルがクエリされると、TiDB はすべてのノードからデータを取得するのではなく、関連する計算を他のノードにプッシュ ダウンします。実行計画は次のとおりです。
 
 {{< copyable "" >}}
 
@@ -181,9 +181,9 @@ desc SELECT count(*) FROM cluster_slow_query WHERE user = 'u1';
 +--------------------------+----------+-----------+--------------------------+------------------------------------------------------+
 ```
 
-上記の実行プランでは、 `user = u1`の条件が他の（ `cop` ）TiDBノードにプッシュダウンされ、集計演算子もプッシュダウンされます（グラフの`StreamAgg`演算子）。
+上記の実行計画では、 `user = u1`条件が他の ( `cop` ) TiDB ノードにプッシュ ダウンされ、集計演算子もプッシュ ダウンされます (グラフの`StreamAgg`演算子)。
 
-現在、システムテーブルの統計が収集されていないため、一部の集計演算子をプッシュダウンできず、実行が遅くなることがあります。この場合、SQL HINTを手動で指定して、集計演算子をプッシュダウンできます。例えば：
+現在、システム テーブルの統計が収集されていないため、一部の集計演算子をプッシュ ダウンできず、実行が遅くなることがあります。この場合、SQL HINT を手動で指定して集計演算子をプッシュダウンできます。例えば：
 
 {{< copyable "" >}}
 

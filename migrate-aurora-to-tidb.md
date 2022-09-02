@@ -49,7 +49,7 @@ binlog の位置を取得したら、5 分以内にスナップショットを�
 
 ### ステップ 2. スキーマのエクスポート {#step-2-export-schema}
 
-Auroraのスナップショット ファイルには DDL ステートメントが含まれていないため、Dumple を使用してスキーマをエクスポートし、 Dumpling TiDB Lightningを使用してターゲット データベースにスキーマを作成する必要があります。スキーマを手動で作成する場合は、この手順を省略できます。
+Auroraのスナップショット ファイルには DDL ステートメントが含まれていないため、Dumpleing を使用してスキーマをエクスポートし、 Dumpling TiDB Lightningを使用してターゲット データベースにスキーマを作成する必要があります。スキーマを手動で作成する場合は、この手順を省略できます。
 
 次のコマンドを実行して、 Dumplingを使用してスキーマをエクスポートします。このコマンドには、目的のテーブル スキーマのみをエクスポートするための`--filter`つのパラメーターが含まれています。
 
@@ -119,7 +119,7 @@ table = '$2'
 type = '$3'
 ```
 
-TiDBクラスタで TLS を有効にする必要がある場合は、 [TiDB LightningConfiguration / コンフィグレーション](/tidb-lightning/tidb-lightning-configuration.md) . を参照してください。
+TiDB クラスターで TLS を有効にする必要がある場合は、 [TiDB LightningConfiguration / コンフィグレーション](/tidb-lightning/tidb-lightning-configuration.md)を参照してください。
 
 ### ステップ 4. 完全なデータを TiDB にインポートする {#step-4-import-full-data-to-tidb}
 
@@ -183,7 +183,7 @@ TiDBクラスタで TLS を有効にする必要がある場合は、 [TiDB Ligh
       port: 3306
     ```
 
-2.  次のコマンドを実行して、 `tiup dmctl`を使用してデータ ソース構成を DMクラスタに読み込みます。
+2.  次のコマンドを実行して、 `tiup dmctl`を使用してデータ ソース構成を DM クラスターに読み込みます。
 
     {{< copyable "" >}}
 
@@ -193,10 +193,10 @@ TiDBクラスタで TLS を有効にする必要がある場合は、 [TiDB Ligh
 
     上記のコマンドで使用されるパラメーターは、次のとおりです。
 
-    | パラメータ                   | 説明                                                                   |
-    | ----------------------- | -------------------------------------------------------------------- |
-    | `--master-addr`         | `dmctl`が接続されるクラスタの任意の DM マスターの`{advertise-addr}`例: 172.16.10.71:8261 |
-    | `operate-source create` | データ ソースを DMクラスタにロードします。                                              |
+    | パラメータ                   | 説明                                                                    |
+    | ----------------------- | --------------------------------------------------------------------- |
+    | `--master-addr`         | `dmctl`が接続されるクラスタ内の任意の DM マスターの`{advertise-addr}`例: 172.16.10.71:8261 |
+    | `operate-source create` | データ ソースを DM クラスターに読み込みます。                                             |
 
 ### ステップ 2: 移行タスクを作成する {#step-2-create-the-migration-task}
 
@@ -265,10 +265,10 @@ tiup dmctl --master-addr ${advertise-addr} start-task task.yaml
 
 上記のコマンドで使用されるパラメーターは、次のとおりです。
 
-| パラメータ           | 説明                                                                   |
-| --------------- | -------------------------------------------------------------------- |
-| `--master-addr` | `dmctl`が接続されるクラスタの任意の DM マスターの`{advertise-addr}`例: 172.16.10.71:8261 |
-| `start-task`    | 移行タスクを開始します。                                                         |
+| パラメータ           | 説明                                                                    |
+| --------------- | --------------------------------------------------------------------- |
+| `--master-addr` | `dmctl`が接続されるクラスタ内の任意の DM マスターの`{advertise-addr}`例: 172.16.10.71:8261 |
+| `start-task`    | 移行タスクを開始します。                                                          |
 
 タスクの開始に失敗した場合は、プロンプト メッセージを確認し、構成を修正します。その後、上記のコマンドを再実行してタスクを開始できます。
 
@@ -276,7 +276,7 @@ tiup dmctl --master-addr ${advertise-addr} start-task task.yaml
 
 ### ステップ 4. 移行タスクのステータスを確認する {#step-4-check-the-migration-task-status}
 
-DMクラスタに進行中の移行タスクとタスクのステータスがあるかどうかを確認するには、 `tiup dmctl`を使用して`query-status`コマンドを実行します。
+DM クラスターに進行中の移行タスクとタスクのステータスがあるかどうかを確認するには、 `tiup dmctl`を使用して`query-status`コマンドを実行します。
 
 {{< copyable "" >}}
 
@@ -290,7 +290,7 @@ tiup dmctl --master-addr ${advertise-addr} query-status ${task-name}
 
 移行タスクの履歴ステータスとその他の内部メトリックを表示するには、次の手順を実行します。
 
-TiUP を使用して DM を展開したときに Prometheus、Alertmanager、および Grafana を展開した場合は、展開中に指定された IP アドレスとポートを使用して Grafana にアクセスできます。次に、DM ダッシュボードを選択して、DM 関連のモニタリング メトリックを表示できます。
+TiUP を使用して DM をデプロイしたときに Prometheus、Alertmanager、および Grafana をデプロイした場合は、デプロイ中に指定された IP アドレスとポートを使用して Grafana にアクセスできます。次に、DM ダッシュボードを選択して、DM 関連のモニタリング メトリックを表示できます。
 
 DM が実行されている場合、DM-worker、DM-master、および dmctl は関連情報をログに出力します。これらのコンポーネントのログ ディレクトリは次のとおりです。
 
@@ -302,5 +302,5 @@ DM が実行されている場合、DM-worker、DM-master、および dmctl は�
 -   [移行タスクを一時停止します](/dm/dm-pause-task.md) .
 -   [移行タスクを再開します](/dm/dm-resume-task.md) .
 -   [移行タスクを停止する](/dm/dm-stop-task.md) .
--   [クラスタデータ ソースとタスク構成のエクスポートとインポート](/dm/dm-export-import-config.md) .
+-   [クラスター データ ソースとタスク構成のエクスポートとインポート](/dm/dm-export-import-config.md) .
 -   [失敗した DDL ステートメントを処理する](/dm/handle-failed-ddl-statements.md) .

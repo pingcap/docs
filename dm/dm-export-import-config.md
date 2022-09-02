@@ -3,13 +3,13 @@ title: Export and Import Data Sources and Task Configuration of Clusters
 summary: Learn how to export and import data sources and task configuration of clusters when you use DM.
 ---
 
-# データソースのエクスポートとインポート、およびクラスターのタスクConfiguration / コンフィグレーション {#export-and-import-data-sources-and-task-configuration-of-clusters}
+# データ ソースのエクスポートとインポート、およびクラスターのタスクConfiguration / コンフィグレーション {#export-and-import-data-sources-and-task-configuration-of-clusters}
 
-`config`コマンドは、クラスターのデータソースとタスク構成をエクスポートおよびインポートするために使用されます。
+`config`コマンドは、データ ソースとクラスターのタスク構成をエクスポートおよびインポートするために使用されます。
 
 > **ノート：**
 >
-> v2.0.5より前のクラスターの場合、dmctl v2.0.5以降を使用して、データソースおよびタスク構成ファイルをエクスポートおよびインポートできます。
+> v2.0.5 より前のクラスターの場合、dmctl v2.0.5 以降を使用して、データ ソースとタスク構成ファイルをエクスポートおよびインポートできます。
 
 {{< copyable "" >}}
 
@@ -28,9 +28,9 @@ Global Flags:
 Use "dmctl config [command] --help" for more information about a command.
 ```
 
-## クラスターのデータソースとタスク構成をエクスポートします {#export-the-data-source-and-task-configuration-of-clusters}
+## クラスターのデータ ソースとタスク構成をエクスポートする {#export-the-data-source-and-task-configuration-of-clusters}
 
-`export`のコマンドを使用して、クラスターのデータソースとタスク構成を指定したファイルにエクスポートできます。
+`export`のコマンドを使用して、クラスターのデータ ソースとタスク構成を指定したファイルにエクスポートできます。
 
 {{< copyable "" >}}
 
@@ -40,9 +40,9 @@ config export [--dir directory]
 
 ### パラメータの説明 {#parameter-explanation}
 
--   `dir` ：
+-   `dir` :
     -   オプション
-    -   エクスポートするファイルパスを指定します
+    -   エクスポートするファイル パスを指定します
     -   デフォルト値は`./configs`です
 
 ### 返された結果 {#returned-results}
@@ -57,9 +57,9 @@ config export -d /tmp/configs
 export configs to directory `/tmp/configs` succeed
 ```
 
-## クラスターのデータソースとタスク構成をインポートします {#import-the-data-source-and-task-configuration-of-clusters}
+## クラスターのデータ ソースとタスク構成をインポートする {#import-the-data-source-and-task-configuration-of-clusters}
 
-`import`のコマンドを使用して、指定したファイルからクラスターのデータソースとタスク構成をインポートできます。
+`import`のコマンドを使用して、指定したファイルからクラスターのデータ ソースとタスク構成をインポートできます。
 
 {{< copyable "" >}}
 
@@ -69,13 +69,13 @@ config import [--dir directory]
 
 > **ノート：**
 >
-> v2.0.2以降のクラスターの場合、現在、リレーワーカーに関連する構成を自動的にインポートすることはサポートされていません。 `start-relay`のコマンドを使用して手動で[リレーログを開始](/dm/relay-log.md#start-and-stop-the-relay-log-feature)を実行できます。
+> v2.0.2以降のクラスタでは、現在、Relay Workerに関連する設定の自動インポートはサポートされていません。 `start-relay`のコマンドを使用して、手動で[リレーログを開始](/dm/relay-log.md#start-and-stop-the-relay-log-feature)を実行できます。
 
 ### パラメータの説明 {#parameter-explanation}
 
--   `dir` ：
+-   `dir` :
     -   オプション
-    -   インポートするファイルパスを指定します
+    -   インポートするファイル パスを指定します
     -   デフォルト値は`./configs`です
 
 ### 返された結果 {#returned-results}

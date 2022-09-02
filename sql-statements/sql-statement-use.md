@@ -5,15 +5,15 @@ summary: An overview of the usage of USE for the TiDB database.
 
 # 使用する {#use}
 
-`USE`ステートメントは、ユーザーセッションの現在のデータベースを選択します。
+`USE`ステートメントは、ユーザー セッションの現在のデータベースを選択します。
 
 ## あらすじ {#synopsis}
 
-**UseStmt：**
+**用途:**
 
 ![UseStmt](/media/sqlgram/UseStmt.png)
 
-**DBName：**
+**DB名:**
 
 ![DBName](/media/sqlgram/DBName.png)
 
@@ -72,11 +72,11 @@ mysql> SHOW TABLES;
 1 row in set (0.00 sec)
 ```
 
-## MySQLの互換性 {#mysql-compatibility}
+## MySQL の互換性 {#mysql-compatibility}
 
-このステートメントは、MySQLと完全に互換性があると理解されています。互換性の違いは、GitHubでは[問題を介して報告された](https://github.com/pingcap/tidb/issues/new/choose)である必要があります。
+このステートメントは、MySQL と完全に互換性があると理解されています。互換性の違いは、GitHub で[問題を介して報告された](https://github.com/pingcap/tidb/issues/new/choose)にする必要があります。
 
-## も参照してください {#see-also}
+## こちらもご覧ください {#see-also}
 
 -   [データベースの作成](/sql-statements/sql-statement-create-database.md)
 -   [テーブルを表示](/sql-statements/sql-statement-show-tables.md)

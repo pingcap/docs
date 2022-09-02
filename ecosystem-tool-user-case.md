@@ -3,44 +3,44 @@ title: TiDB Tools Use Cases
 summary: Learn the common use cases of TiDB tools and how to choose the tools.
 ---
 
-# TiDBツールのユースケース {#tidb-tools-use-cases}
+# TiDB ツールの使用例 {#tidb-tools-use-cases}
 
-このドキュメントでは、TiDBツールの一般的な使用例と、シナリオに適したツールを選択する方法を紹介します。
+このドキュメントでは、TiDB ツールの一般的な使用例と、シナリオに適したツールを選択する方法を紹介します。
 
-## 物理マシンまたは仮想マシンにTiDBをデプロイして運用する {#deploy-and-operate-tidb-on-physical-or-virtual-machines}
+## TiDB を物理マシンまたは仮想マシンにデプロイして操作する {#deploy-and-operate-tidb-on-physical-or-virtual-machines}
 
-物理マシンまたは仮想マシンにTiDBを展開して操作する必要がある場合は、 [TiUP](/tiup/tiup-overview.md)をインストールしてから、TiUPを使用してTiDB、PD、TiKVなどのTiDBコンポーネントを管理できます。
+TiDB を物理マシンまたは仮想マシンにデプロイして操作する必要がある場合は、 [TiUP](/tiup/tiup-overview.md)をインストールしてから、TiUP を使用して TiDB、PD、TiKV などの TiDB コンポーネントを管理できます。
 
-## KubernetesでTiDBをデプロイして運用する {#deploy-and-operate-tidb-in-kubernetes}
+## TiDB を Kubernetes にデプロイして運用する {#deploy-and-operate-tidb-in-kubernetes}
 
-KubernetesでTiDBをデプロイして運用する必要がある場合は、Kubernetesクラスタをデプロイしてから[TiDB Operator](https://docs.pingcap.com/tidb-in-kubernetes/stable)をデプロイできます。その後、 TiDB Operatorを使用して、TiDBクラスタをデプロイおよび操作できます。
+TiDB を Kubernetes にデプロイして操作する必要がある場合は、Kubernetes クラスターをデプロイしてから[TiDB Operator](https://docs.pingcap.com/tidb-in-kubernetes/stable)をデプロイできます。その後、 TiDB Operatorを使用して TiDB クラスターをデプロイおよび操作できます。
 
-## CSVからTiDBにデータをインポートする {#import-data-from-csv-to-tidb}
+## CSV から TiDB にデータをインポートする {#import-data-from-csv-to-tidb}
 
-他のツールでエクスポートされた互換性のあるCSVファイルをTiDBにインポートする必要がある場合は、 [TiDB Lightning](/tidb-lightning/migrate-from-csv-using-tidb-lightning.md)を使用します。
+他のツールによってエクスポートされた互換性のある CSV ファイルを TiDB にインポートする必要がある場合は、 [TiDB Lightning](/tidb-lightning/migrate-from-csv-using-tidb-lightning.md)を使用します。
 
 ## MySQL/ Auroraから完全なデータをインポートする {#import-full-data-from-mysql-aurora}
 
-MySQL / Auroraから完全なデータをインポートする必要がある場合は、最初に[Dumpling](/dumpling-overview.md)を使用してデータをSQLダンプファイルとしてエクスポートし、次に[TiDB Lightning](/tidb-lightning/tidb-lightning-overview.md)を使用してデータをTiDBクラスタにインポートします。
+MySQL/ Auroraから完全なデータをインポートする必要がある場合は、最初に[Dumpling](/dumpling-overview.md)を使用してデータを SQL ダンプ ファイルとしてエクスポートし、次に[TiDB Lightning](/tidb-lightning/tidb-lightning-overview.md)を使用してデータを TiDB クラスターにインポートします。
 
 ## MySQL/ Auroraからデータを移行する {#migrate-data-from-mysql-aurora}
 
-MySQL / Auroraからフルデータとインクリメンタルデータの両方を移行する必要がある場合は、 [TiDBデータ移行](/dm/dm-overview.md) （DM）を使用して[AuroraからTiDBへのデータの移行](/migrate-aurora-to-tidb.md)を実行します。
+MySQL/ Auroraからフル データと増分データの両方を移行する必要がある場合は、 [TiDB データ移行](/dm/dm-overview.md) (DM) を使用して[Amazon Auroraから TiDB にデータを移行する](/migrate-aurora-to-tidb.md)を実行します。
 
-フルデータボリュームが（TBレベルで）大きい場合は、最初に[Dumpling](/dumpling-overview.md)と[TiDB Lightning](/tidb-lightning/tidb-lightning-overview.md)を使用してフルデータ移行を実行し、次にDMを使用してインクリメンタルデータ移行を実行できます。
+完全なデータ ボリュームが (TB レベルで) 大きい場合は、最初に[Dumpling](/dumpling-overview.md)と[TiDB Lightning](/tidb-lightning/tidb-lightning-overview.md)を使用して完全なデータ移行を実行し、次に DM を使用して増分データ移行を実行できます。
 
-## TiDBクラスタのバックアップと復元 {#back-up-and-restore-tidb-cluster}
+## TiDB クラスターのバックアップと復元 {#back-up-and-restore-tidb-cluster}
 
-TiDBクラスタをバックアップするか、バックアップしたデータをクラスタに復元する必要がある場合は、 [BR](/br/backup-and-restore-overview.md) （バックアップと復元）を使用します。
+TiDB クラスターをバックアップするか、バックアップしたデータをクラスターに復元する必要がある場合は、 [ブラジル](/br/backup-and-restore-overview.md) (バックアップと復元) を使用します。
 
-さらに、BRを使用して[増分バックアップ](/br/br-usage-backup.md#back-up-incremental-data)および[インクリメンタルリストア](/br/br-usage-restore.md#restore-incremental-data)のTiDBクラスタデータを実行することもできます。
+また、BR を使用して、TiDB クラスター データの[増分バックアップ](/br/br-usage-backup.md#back-up-incremental-data)と[増分復元](/br/br-usage-restore.md#restore-incremental-data)を実行することもできます。
 
-## データをTiDBに移行する {#migrate-data-to-tidb}
+## データを TiDB に移行する {#migrate-data-to-tidb}
 
-TiDBクラスタから別のTiDBクラスタにデータを移行する必要がある場合は、 [Dumpling](/dumpling-overview.md)を使用してTiDBからSQLダンプファイルとして完全なデータをエクスポートし、次に[TiDB Lightning](/tidb-lightning/tidb-lightning-overview.md)を使用して別のTiDBクラスタにデータをインポートします。
+TiDB クラスターから別の TiDB クラスターにデータを移行する必要がある場合は、 [Dumpling](/dumpling-overview.md)を使用して TiDB から完全なデータを SQL ダンプ ファイルとしてエクスポートし、 [TiDB Lightning](/tidb-lightning/tidb-lightning-overview.md)を使用してデータを別の TiDB クラスターにインポートします。
 
-インクリメンタルデータも移行する必要がある場合は、 [TiDB Binlog](/tidb-binlog/tidb-binlog-overview.md)を使用します。
+増分データも移行する必要がある場合は、 [Binlog](/tidb-binlog/tidb-binlog-overview.md)を使用します。
 
-## TiDBインクリメンタルデータサブスクリプション {#tidb-incremental-data-subscription}
+## TiDB 増分データ サブスクリプション {#tidb-incremental-data-subscription}
 
-TiDBの増分変更をサブスクライブする必要がある場合は、 [TiDB Binlog](/tidb-binlog/binlog-consumer-client.md)を使用します。
+TiDB の増分変更を購読する必要がある場合は、 [Binlog](/tidb-binlog/binlog-consumer-client.md)を使用します。

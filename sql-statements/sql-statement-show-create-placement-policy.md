@@ -3,9 +3,9 @@ title: SHOW CREATE PLACEMENT POLICY
 summary: The usage of SHOW CREATE PLACEMENT POLICY in TiDB.
 ---
 
-# プレースメントポリシーの作成を表示する {#show-create-placement-policy}
+# 配置ポリシーの作成を表示 {#show-create-placement-policy}
 
-`SHOW CREATE PLACEMENT POLICY`は、配置ポリシーの定義を示すために使用されます。これを使用して、配置ポリシーの現在の定義を確認し、別のTiDBクラスタで再作成できます。
+`SHOW CREATE PLACEMENT POLICY`は、配置ポリシーの定義を示すために使用されます。これは、配置ポリシーの現在の定義を確認し、別の TiDB クラスターで再作成するために使用できます。
 
 ## あらすじ {#synopsis}
 
@@ -38,14 +38,14 @@ Create Policy | CREATE PLACEMENT POLICY `p1` PRIMARY_REGION="us-east-1" REGIONS=
 1 row in set (0.00 sec)
 ```
 
-## MySQLの互換性 {#mysql-compatibility}
+## MySQL の互換性 {#mysql-compatibility}
 
-このステートメントは、MySQL構文のTiDB拡張です。
+このステートメントは、MySQL 構文に対する TiDB 拡張です。
 
-## も参照してください {#see-also}
+## こちらもご覧ください {#see-also}
 
--   [SQLでの配置ルール](/placement-rules-in-sql.md)
+-   [SQL の配置規則](/placement-rules-in-sql.md)
 -   [配置を表示](/sql-statements/sql-statement-show-placement.md)
--   [プレースメントポリシーを作成する](/sql-statements/sql-statement-create-placement-policy.md)
+-   [配置ポリシーを作成する](/sql-statements/sql-statement-create-placement-policy.md)
 -   [配置ポリシーの変更](/sql-statements/sql-statement-alter-placement-policy.md)
 -   [ドロップ配置ポリシー](/sql-statements/sql-statement-drop-placement-policy.md)

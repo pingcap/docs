@@ -3,43 +3,43 @@ title: Handle Failed DDL Statements
 summary: Learn how to handle failed DDL statements when you're using the TiDB Data Migration tool to migrate data.
 ---
 
-# 失敗したDDLステートメントの処理 {#handle-failed-ddl-statements}
+# 失敗した DDL ステートメントの処理 {#handle-failed-ddl-statements}
 
-このドキュメントでは、TiDBデータ移行（DM）ツールを使用してデータを移行するときに失敗したDDLステートメントを処理する方法を紹介します。
+このドキュメントでは、TiDB データ移行 (DM) ツールを使用してデータを移行するときに、失敗した DDL ステートメントを処理する方法を紹介します。
 
-現在、TiDBはすべてのMySQL構文と完全に互換性があるわけではありません（ [TiDBでサポートされているDDLステートメント](/mysql-compatibility.md#ddl)を参照）。したがって、DMがMySQLからTiDBにデータを移行していて、TiDBが対応するDDLステートメントをサポートしていない場合、エラーが発生して移行プロセスが中断する可能性があります。この場合、DMの`binlog`コマンドを使用して移行を再開できます。
+現在、TiDB はすべての MySQL 構文と完全に互換性があるわけではありません ( [TiDB がサポートする DDL ステートメント](/mysql-compatibility.md#ddl)を参照)。したがって、DM が MySQL から TiDB にデータを移行しているときに、TiDB が対応する DDL ステートメントをサポートしていない場合、エラーが発生して移行プロセスが中断される可能性があります。この場合、DM の`binlog`コマンドを使用して移行を再開できます。
 
 ## 制限 {#restrictions}
 
 次の状況では、このコマンドを使用しないでください。
 
--   失敗したDDLステートメントがダウンストリームTiDBでスキップされることは、実際の実稼働環境では受け入れられません。
--   失敗したDDLステートメントを他のDDLステートメントで置き換えることはできません。
--   他のDDLステートメントをダウンストリームTiDBに挿入しないでください。
+-   失敗した DDL ステートメントが下流の TiDB でスキップされることは、実際の運用環境では受け入れられません。
+-   失敗した DDL ステートメントを他の DDL ステートメントに置き換えることはできません。
+-   他の DDL ステートメントを下流の TiDB に挿入してはなりません。
 
-たとえば、 `DROP PRIMARY KEY` 。このシナリオでは、（DDLステートメントの実行後に）新しいテーブルスキーマを使用してダウンストリームに新しいテーブルを作成し、すべてのデータをこの新しいテーブルに再インポートすることしかできません。
+たとえば、 `DROP PRIMARY KEY`です。このシナリオでは、ダウンストリームで新しいテーブル スキーマを使用して (DDL ステートメントの実行後に) 新しいテーブルを作成し、すべてのデータをこの新しいテーブルに再インポートすることしかできません。
 
-## サポートされているシナリオ {#supported-scenarios}
+## サポートされるシナリオ {#supported-scenarios}
 
-移行中、TiDBでサポートされていないDDLステートメントがアップストリームで実行され、ダウンストリームに移行されます。その結果、移行タスクが中断されます。
+移行中に、TiDB でサポートされていない DDL ステートメントがアップストリームで実行され、ダウンストリームに移行されるため、移行タスクが中断されます。
 
--   このDDLステートメントがダウンストリームTiDBでスキップされることが許容される場合は、 `binlog skip <task-name>`を使用して、このDDLステートメントの移行をスキップし、移行を再開できます。
--   このDDLステートメントが他のDDLステートメントに置き換えられることが許容される場合は、 `binlog replace <task-name>`を使用してこのDDLステートメントを置き換え、移行を再開できます。
--   他のDDLステートメントがダウンストリームTiDBに挿入されることが許容される場合は、 `binlog inject <task-name>`を使用して他のDDLステートメントを挿入し、移行を再開できます。
+-   ダウンストリームの TiDB でこの DDL ステートメントをスキップしても問題ない場合は、 `binlog skip <task-name>`を使用してこの DDL ステートメントの移行をスキップし、移行を再開できます。
+-   この DDL ステートメントを他の DDL ステートメントに置き換えても問題ない場合は、 `binlog replace <task-name>`を使用してこの DDL ステートメントを置き換え、移行を再開できます。
+-   他の DDL ステートメントがダウンストリームの TiDB に挿入されることが許容される場合は、 `binlog inject <task-name>`を使用して他の DDL ステートメントを挿入し、移行を再開できます。
 
 ## コマンド {#commands}
 
-dmctlを使用して失敗したDDLステートメントを手動で処理する場合、一般的に使用されるコマンドには`query-status`と`binlog`が含まれます。
+dmctl を使用して失敗した DDL ステートメントを手動で処理する場合、よく使用されるコマンドには`query-status`と`binlog`があります。
 
 ### クエリステータス {#query-status}
 
-`query-status`コマンドは、各MySQLインスタンスのサブタスクやリレーユニットなどのアイテムの現在のステータスを照会するために使用されます。詳細については、 [クエリステータス](/dm/dm-query-status.md)を参照してください。
+`query-status`コマンドは、各 MySQL インスタンスのサブタスクや中継ユニットなどのアイテムの現在のステータスを照会するために使用されます。詳細については、 [クエリ ステータス](/dm/dm-query-status.md)を参照してください。
 
-### binlog {#binlog}
+### ビンログ {#binlog}
 
-`binlog`コマンドは、binlog操作を管理および表示するために使用されます。このコマンドは、DMv6.0以降のバージョンでのみサポートされています。以前のバージョンでは、 `handle-error`コマンドを使用します。
+`binlog`コマンドは、binlog 操作を管理および表示するために使用されます。このコマンドは、DM v6.0 以降のバージョンでのみサポートされています。以前のバージョンでは、 `handle-error`コマンドを使用します。
 
-`binlog`の使用法は次のとおりです。
+`binlog`の使い方は以下の通りです。
 
 ```bash
 binlog -h
@@ -68,31 +68,31 @@ Global Flags:
 Use "dmctl binlog [command] --help" for more information about a command.
 ```
 
-`binlog`は、次のサブコマンドをサポートします。
+`binlog`は次のサブコマンドをサポートします。
 
--   `inject` ：現在のエラーイベントまたは特定のbinlog位置にDDLステートメントを挿入します。 binlogの位置を指定するには、 `-b, --binlog-pos`を参照してください。
--   `list` ：現在のビンログ位置または現在のビンログ位置の後のすべての有効な`inject` 、および`skip`操作をリストし`replace` 。 binlogの位置を指定するには、 `-b, --binlog-pos`を参照してください。
--   `replace` ：特定のbinlog位置にあるDDLステートメントを別のDDLステートメントに置き換えます。 binlogの位置を指定するには、 `-b, --binlog-pos`を参照してください。
--   `revert` ：前の操作が有効にならない場合にのみ、指定された`replace` `inject` `skip`元に戻します。 binlogの位置を指定するには、 `-b, --binlog-pos`を参照してください。
--   `skip` ：特定のbinlog位置でDDLステートメントをスキップします。 binlogの位置を指定するには、 `-b, --binlog-pos`を参照してください。
+-   `inject` : DDL ステートメントを現在のエラー イベントまたは特定の binlog 位置に挿入します。バイナリログの位置を指定するには、 `-b, --binlog-pos`を参照してください。
+-   `list` : 現在のバイナリログ位置または現在のバイナリログ位置の後にある有効な`inject` 、 `skip` 、および`replace`操作をすべてリストします。バイナリログの位置を指定するには、 `-b, --binlog-pos`を参照してください。
+-   `replace` : 特定の binlog 位置にある DDL ステートメントを別の DDL ステートメントに置き換えます。バイナリログの位置を指定するには、 `-b, --binlog-pos`を参照してください。
+-   `revert` : 前の操作が有効にならない場合にのみ、指定された binlog 操作で`inject` 、 `skip`または`replace`操作を元に戻します。バイナリログの位置を指定するには、 `-b, --binlog-pos`を参照してください。
+-   `skip` : 特定のバイナリログ位置で DDL ステートメントをスキップします。バイナリログの位置を指定するには、 `-b, --binlog-pos`を参照してください。
 
-`binlog`は、次のフラグをサポートします。
+`binlog`は次のフラグをサポートします。
 
--   `-b, --binlog-pos` ：
-    -   タイプ：文字列。
-    -   binlogの位置を指定します。 binlogイベントの位置が`binlog-pos`に一致すると、操作が実行されます。指定されていない場合、DMは現在失敗しているDDLステートメントに自動的に`binlog-pos`を設定します。
-    -   形式： `binlog-filename:binlog-pos` 、たとえば`mysql-bin|000001.000003:3270` 。
-    -   移行でエラーが返された後、binlogの位置は`query-status`で返された`startLocation`の`position`から取得できます。移行でエラーが返される前に、アップストリームのMySQLインスタンスで[`SHOW BINLOG EVENTS`](https://dev.mysql.com/doc/refman/5.7/en/show-binlog-events.html)を使用してbinlogの位置を取得できます。
+-   `-b, --binlog-pos` :
+    -   タイプ: 文字列。
+    -   バイナリログの位置を指定します。 binlog イベントの位置が`binlog-pos`に一致すると、操作が実行されます。指定されていない場合、DM は現在失敗している DDL ステートメントに`binlog-pos`を自動的に設定します。
+    -   形式: `binlog-filename:binlog-pos` 、たとえば`mysql-bin|000001.000003:3270` 。
+    -   マイグレーションがエラーを返した後、binlog の位置は`query-status`によって返された`position` in `startLocation`から取得できます。移行でエラーが返される前に、上流の MySQL インスタンスで[`SHOW BINLOG EVENTS`](https://dev.mysql.com/doc/refman/5.7/en/show-binlog-events.html)を使用して binlog の位置を取得できます。
 
--   `-s, --source` ：
-    -   タイプ：文字列。
-    -   プリセット操作を実行するMySQLインスタンスを指定します。
+-   `-s, --source` :
+    -   タイプ: 文字列。
+    -   プリセット操作を実行する MySQL インスタンスを指定します。
 
 ## 使用例 {#usage-examples}
 
-### 移行が中断された場合はDDLをスキップします {#skip-ddl-if-the-migration-gets-interrupted}
+### 移行が中断された場合に DDL をスキップする {#skip-ddl-if-the-migration-gets-interrupted}
 
-移行が中断されたときにDDLステートメントをスキップする必要がある場合は、次の`binlog skip`コマンドを実行します。
+移行が中断されたときに DDL ステートメントをスキップする必要がある場合は、次の`binlog skip`コマンドを実行します。
 
 ```bash
 binlog skip -h
@@ -112,9 +112,9 @@ Global Flags:
   -s, --source strings      MySQL Source ID.
 ```
 
-#### 非シャードマージシナリオ {#non-shard-merge-scenario}
+#### 非シャード マージ シナリオ {#non-shard-merge-scenario}
 
-アップストリームテーブル`db1.tbl1`をダウンストリームTiDBに移行する必要があると想定します。初期テーブルスキーマは次のとおりです。
+上流のテーブル`db1.tbl1`を下流の TiDB に移行する必要があるとします。初期テーブル スキーマは次のとおりです。
 
 {{< copyable "" >}}
 
@@ -134,7 +134,7 @@ SHOW CREATE TABLE db1.tbl1;
 +-------+--------------------------------------------------+
 ```
 
-ここで、次のDDLステートメントがアップストリームで実行され、テーブルスキーマが変更されます（つまり、c2のDECIMAL（11、3）がDECIMAL（10、3）に変更されます）。
+ここで、次の DDL ステートメントがアップストリームで実行され、テーブル スキーマが変更されます (つまり、c2 の DECIMAL(11, 3) が DECIMAL(10, 3) に変更されます)。
 
 {{< copyable "" >}}
 
@@ -142,15 +142,15 @@ SHOW CREATE TABLE db1.tbl1;
 ALTER TABLE db1.tbl1 CHANGE c2 c2 DECIMAL (10, 3);
 ```
 
-このDDLステートメントはTiDBでサポートされていないため、DMの移行タスクが中断されます。 `query-status <task-name>`コマンドを実行すると、次のエラーが表示されます。
+この DDL ステートメントは TiDB でサポートされていないため、DM の移行タスクは中断されます。 `query-status <task-name>`コマンドを実行すると、次のエラーが表示されます。
 
 ```
 ERROR 8200 (HY000): Unsupported modify column: can't change decimal column precision
 ```
 
-このDDLステートメントがダウンストリームTiDBで実行されない（つまり、元のテーブルスキーマが保持される）ことが実際の実稼働環境で許容できると想定します。次に、 `binlog skip <task-name>`を使用してこのDDLステートメントをスキップし、移行を再開できます。手順は次のとおりです。
+実際の運用環境では、この DDL ステートメントが下流の TiDB で実行されないこと (つまり、元のテーブル スキーマが保持されること) が許容されると仮定します。その後、 `binlog skip <task-name>`を使用してこの DDL ステートメントをスキップし、移行を再開できます。手順は次のとおりです。
 
-1.  `binlog skip <task-name>`を実行して、現在失敗しているDDLステートメントをスキップします。
+1.  `binlog skip <task-name>`を実行して、現在失敗している DDL ステートメントをスキップします。
 
     {{< copyable "" >}}
 
@@ -181,7 +181,7 @@ ERROR 8200 (HY000): Unsupported modify column: can't change decimal column preci
     » query-status test
     ```
 
-    <details><summary>実行結果をご覧ください。</summary>
+    <details><summary>実行結果を参照してください。</summary>
 
     ```
     {
@@ -228,16 +228,16 @@ ERROR 8200 (HY000): Unsupported modify column: can't change decimal column preci
 
     </details>
 
-    タスクが正常に実行され、間違ったDDLがスキップされていることがわかります。
+    タスクが正常に実行され、間違った DDL がスキップされていることがわかります。
 
-#### シャードマージシナリオ {#shard-merge-scenario}
+#### シャード マージのシナリオ {#shard-merge-scenario}
 
-アップストリームの次の4つのテーブルを、ダウンストリームの1つの同じテーブル`` `shard_db`.`shard_table` ``にマージして移行する必要があると想定します。タスクモードは「悲観的」です。
+アップストリームの次の 4 つのテーブルをマージして、ダウンストリームの 1 つの同じテーブル`` `shard_db`.`shard_table` ``に移行する必要があるとします。タスクモードは「悲観的」です。
 
--   MySQLインスタンス1には、 `shard_table_1`つと`shard_table_2`のテーブルを含む`shard_db_1`のスキーマが含まれています。
--   MySQLインスタンス2には、 `shard_table_1`つと`shard_table_2`のテーブルを含む`shard_db_2`のスキーマが含まれています。
+-   MySQL インスタンス 1 には、 `shard_table_1`と`shard_table_2`のテーブルを含む`shard_db_1`スキーマが含まれています。
+-   MySQL インスタンス 2 には、 `shard_table_1`と`shard_table_2`のテーブルを含む`shard_db_2`スキーマが含まれています。
 
-初期テーブルスキーマは次のとおりです。
+初期テーブル スキーマは次のとおりです。
 
 {{< copyable "" >}}
 
@@ -256,7 +256,7 @@ SHOW CREATE TABLE shard_db.shard_table;
 +-------+-----------------------------------------------------------------------------------------------------------+
 ```
 
-次に、すべてのアップストリームシャードテーブルに対して次のDDLステートメントを実行して、文字セットを変更します。
+ここで、次の DDL ステートメントをすべてのアップストリーム シャード テーブルに対して実行して、文字セットを変更します。
 
 {{< copyable "" >}}
 
@@ -264,7 +264,7 @@ SHOW CREATE TABLE shard_db.shard_table;
 ALTER TABLE `shard_db_*`.`shard_table_*` CHARACTER SET LATIN1 COLLATE LATIN1_DANISH_CI;
 ```
 
-このDDLステートメントはTiDBでサポートされていないため、DMの移行タスクが中断されます。 `query-status`コマンドを実行すると、 `shard_db_1`によって報告された次のエラーが表示されます。 MySQLインスタンス1および`shard_db_2`の`shard_table_1`テーブル。 MySQLインスタンス2の`shard_table_1`テーブル：
+この DDL ステートメントは TiDB でサポートされていないため、DM の移行タスクは中断されます。 `query-status`コマンドを実行すると、 `shard_db_1`によって報告された次のエラーが表示されます。 MySQL インスタンス 1 と`shard_db_2`の`shard_table_1`テーブル。 MySQL インスタンス 2 の`shard_table_1`テーブル:
 
 ```
 {
@@ -280,9 +280,9 @@ ALTER TABLE `shard_db_*`.`shard_table_*` CHARACTER SET LATIN1 COLLATE LATIN1_DAN
 }
 ```
 
-このDDLステートメントがダウンストリームTiDBで実行されない（つまり、元のテーブルスキーマが保持される）ことが実際の実稼働環境で許容できると想定します。次に、 `binlog skip <task-name>`を使用してこのDDLステートメントをスキップし、移行を再開できます。手順は次のとおりです。
+実際の運用環境では、この DDL ステートメントが下流の TiDB で実行されないこと (つまり、元のテーブル スキーマが保持されること) が許容されると仮定します。その後、 `binlog skip <task-name>`を使用してこの DDL ステートメントをスキップし、移行を再開できます。手順は次のとおりです。
 
-1.  `binlog skip <task-name>`を実行して、MySQLインスタンス1および2で現在失敗しているDDLステートメントをスキップします。
+1.  `binlog skip <task-name>`を実行して、MySQL インスタンス 1 および 2 で現在失敗している DDL ステートメントをスキップします。
 
     {{< copyable "" >}}
 
@@ -311,7 +311,7 @@ ALTER TABLE `shard_db_*`.`shard_table_*` CHARACTER SET LATIN1 COLLATE LATIN1_DAN
     }
     ```
 
-2.  `query-status`コマンドを実行すると、 `shard_db_1`によって報告されたエラーを確認できます。 MySQLインスタンス1および`shard_db_2`の`shard_table_2`テーブル。 MySQLインスタンス2の`shard_table_2`テーブル：
+2.  `query-status`コマンドを実行すると、 `shard_db_1`によって報告されたエラーを確認できます。 MySQL インスタンス 1 と`shard_db_2`の`shard_table_2`テーブル。 MySQL インスタンス 2 の`shard_table_2`テーブル:
 
     ```
     {
@@ -327,7 +327,7 @@ ALTER TABLE `shard_db_*`.`shard_table_*` CHARACTER SET LATIN1 COLLATE LATIN1_DAN
     }
     ```
 
-3.  MySQLインスタンス1および2で現在失敗しているDDLステートメントをスキップするには、もう一度`binlog skip <task-name>`を実行します。
+3.  `binlog skip <task-name>`を再度実行して、MySQL インスタンス 1 および 2 で現在失敗している DDL ステートメントをスキップします。
 
     {{< copyable "" >}}
 
@@ -356,7 +356,7 @@ ALTER TABLE `shard_db_*`.`shard_table_*` CHARACTER SET LATIN1 COLLATE LATIN1_DAN
     }
     ```
 
-4.  `query-status <task-name>`を使用して、タスクのステータスを表示します。
+4.  タスクのステータスを表示するには、 `query-status <task-name>`を使用します。
 
     {{< copyable "" >}}
 
@@ -364,7 +364,7 @@ ALTER TABLE `shard_db_*`.`shard_table_*` CHARACTER SET LATIN1 COLLATE LATIN1_DAN
     » query-status test
     ```
 
-    <details><summary>実行結果をご覧ください。</summary>
+    <details><summary>実行結果を参照してください。</summary>
 
     ```
     {
@@ -445,11 +445,11 @@ ALTER TABLE `shard_db_*`.`shard_table_*` CHARACTER SET LATIN1 COLLATE LATIN1_DAN
 
     </details>
 
-    タスクはエラーなしで正常に実行され、4つの間違ったDDLステートメントはすべてスキップされていることがわかります。
+    タスクがエラーなしで正常に実行され、4 つの間違った DDL ステートメントがすべてスキップされていることがわかります。
 
-### 移行が中断された場合は、DDLを置き換えます {#replace-ddl-if-the-migration-gets-interrupted}
+### 移行が中断された場合に DDL を置き換える {#replace-ddl-if-the-migration-gets-interrupted}
 
-移行が中断されたときにDDLステートメントを置き換える必要がある場合は、次の`binlog replace`のコマンドを実行します。
+移行が中断されたときに DDL ステートメントを置き換える必要がある場合は、次の`binlog replace`コマンドを実行します。
 
 ```bash
 binlog replace -h
@@ -469,9 +469,9 @@ Global Flags:
   -s, --source strings      MySQL Source ID.
 ```
 
-#### 非シャードマージシナリオ {#non-shard-merge-scenario}
+#### 非シャード マージ シナリオ {#non-shard-merge-scenario}
 
-アップストリームテーブル`db1.tbl1`をダウンストリームTiDBに移行する必要があると想定します。初期テーブルスキーマは次のとおりです。
+上流のテーブル`db1.tbl1`を下流の TiDB に移行する必要があるとします。初期テーブル スキーマは次のとおりです。
 
 {{< copyable "" >}}
 
@@ -490,7 +490,7 @@ SHOW CREATE TABLE db1.tbl1;
 +-------+-----------------------------------------------------------------------------------------------------------+
 ```
 
-次に、アップストリームで次のDDL操作を実行して、UNIQUE制約のある新しい列を追加します。
+次に、アップストリームで次の DDL 操作を実行して、UNIQUE 制約を持つ新しい列を追加します。
 
 {{< copyable "" >}}
 
@@ -498,7 +498,7 @@ SHOW CREATE TABLE db1.tbl1;
 ALTER TABLE `db1`.`tbl1` ADD COLUMN new_col INT UNIQUE;
 ```
 
-このDDLステートメントはTiDBでサポートされていないため、移行タスクは中断されます。 `query-status`コマンドを実行すると、次のエラーが表示されます。
+この DDL ステートメントは TiDB でサポートされていないため、移行タスクは中断されます。 `query-status`コマンドを実行すると、次のエラーが表示されます。
 
 ```
 {
@@ -507,9 +507,9 @@ ALTER TABLE `db1`.`tbl1` ADD COLUMN new_col INT UNIQUE;
 }
 ```
 
-このDDLステートメントを2つの同等のDDLステートメントに置き換えることができます。手順は次のとおりです。
+この DDL ステートメントを 2 つの同等の DDL ステートメントに置き換えることができます。手順は次のとおりです。
 
-1.  間違ったDDLステートメントを次のコマンドで置き換えます。
+1.  間違った DDL ステートメントを次のコマンドで置き換えます。
 
     {{< copyable "" >}}
 
@@ -532,7 +532,7 @@ ALTER TABLE `db1`.`tbl1` ADD COLUMN new_col INT UNIQUE;
     }
     ```
 
-2.  `query-status <task-name>`を使用して、タスクのステータスを表示します。
+2.  タスクのステータスを表示するには、 `query-status <task-name>`を使用します。
 
     {{< copyable "" >}}
 
@@ -540,7 +540,7 @@ ALTER TABLE `db1`.`tbl1` ADD COLUMN new_col INT UNIQUE;
     » query-status test
     ```
 
-    <details><summary>実行結果をご覧ください。</summary>
+    <details><summary>実行結果を参照してください。</summary>
 
     ```
     {
@@ -587,16 +587,16 @@ ALTER TABLE `db1`.`tbl1` ADD COLUMN new_col INT UNIQUE;
 
     </details>
 
-    タスクが正常に実行され、間違ったDDLステートメントが正常に実行される新しいDDLステートメントに置き換えられていることがわかります。
+    タスクが正常に実行され、間違った DDL ステートメントが正常に実行される新しい DDL ステートメントに置き換えられていることがわかります。
 
-#### シャードマージシナリオ {#shard-merge-scenario}
+#### シャード マージのシナリオ {#shard-merge-scenario}
 
-アップストリームの次の4つのテーブルを、ダウンストリームの1つの同じテーブル`` `shard_db`.`shard_table` ``にマージして移行する必要があると想定します。タスクモードは「悲観的」です。
+アップストリームの次の 4 つのテーブルをマージして、ダウンストリームの 1 つの同じテーブル`` `shard_db`.`shard_table` ``に移行する必要があるとします。タスクモードは「悲観的」です。
 
--   MySQLインスタンス1には、2つのテーブル`shard_table_1`と`shard_table_2`を持つスキーマ`shard_db_1`があります。
--   MySQLインスタンス2には、2つのテーブル`shard_table_1`と`shard_table_2`を持つスキーマ`shard_db_2`があります。
+-   MySQL インスタンス 1 には、2 つのテーブル`shard_table_1`と`shard_table_2`を持つスキーマ`shard_db_1`があります。
+-   MySQL インスタンス 2 には、2 つのテーブル`shard_table_1`と`shard_table_2`を持つスキーマ`shard_db_2`があります。
 
-初期テーブルスキーマは次のとおりです。
+初期テーブル スキーマは次のとおりです。
 
 {{< copyable "" >}}
 
@@ -615,7 +615,7 @@ SHOW CREATE TABLE shard_db.shard_table;
 +-------+-----------------------------------------------------------------------------------------------------------+
 ```
 
-次に、すべてのアップストリームシャードテーブルに対して次のDDL操作を実行して、UNIQUE制約のある新しい列を追加します。
+ここで、すべての上流のシャード テーブルに対して次の DDL 操作を実行して、UNIQUE 制約を持つ新しい列を追加します。
 
 {{< copyable "" >}}
 
@@ -623,7 +623,7 @@ SHOW CREATE TABLE shard_db.shard_table;
 ALTER TABLE `shard_db_*`.`shard_table_*` ADD COLUMN new_col INT UNIQUE;
 ```
 
-このDDLステートメントはTiDBでサポートされていないため、移行タスクは中断されます。 `query-status`コマンドを実行すると、 `shard_db_1`によって報告された次のエラーが表示されます。 MySQLインスタンス1および`shard_db_2`の`shard_table_1`テーブル。 MySQLインスタンス2の`shard_table_1`テーブル：
+この DDL ステートメントは TiDB でサポートされていないため、移行タスクは中断されます。 `query-status`コマンドを実行すると、 `shard_db_1`によって報告された次のエラーが表示されます。 MySQL インスタンス 1 と`shard_db_2`の`shard_table_1`テーブル。 MySQL インスタンス 2 の`shard_table_1`テーブル:
 
 ```
 {
@@ -639,9 +639,9 @@ ALTER TABLE `shard_db_*`.`shard_table_*` ADD COLUMN new_col INT UNIQUE;
 }
 ```
 
-このDDLステートメントを2つの同等のDDLステートメントに置き換えることができます。手順は次のとおりです。
+この DDL ステートメントを 2 つの同等の DDL ステートメントに置き換えることができます。手順は次のとおりです。
 
-1.  次のコマンドで、MySQLインスタンス1とMySQLインスタンス2のそれぞれ間違ったDDLステートメントを置き換えます。
+1.  次のコマンドで、MySQL インスタンス 1 と MySQL インスタンス 2 のそれぞれの間違った DDL ステートメントを置き換えます。
 
     {{< copyable "" >}}
 
@@ -685,7 +685,7 @@ ALTER TABLE `shard_db_*`.`shard_table_*` ADD COLUMN new_col INT UNIQUE;
     }
     ```
 
-2.  `query-status <task-name>`を使用してタスクのステータスを表示すると、 `shard_db_1`によって報告された次のエラーを確認できます。 MySQLインスタンス1および`shard_db_2`の`shard_table_2`テーブル。 MySQLインスタンス2の`shard_table_2`テーブル：
+2.  `query-status <task-name>`を使用してタスクのステータスを表示すると、 `shard_db_1`によって報告された次のエラーを確認できます。 MySQL インスタンス 1 と`shard_db_2`の`shard_table_2`テーブル。 MySQL インスタンス 2 の`shard_table_2`テーブル:
 
     ```
     {
@@ -699,7 +699,7 @@ ALTER TABLE `shard_db_*`.`shard_table_*` ADD COLUMN new_col INT UNIQUE;
     }
     ```
 
-3.  `handle-error <task-name> replace`を再度実行して、MySQLインスタンス1および2の間違ったDDLステートメントを置き換えます。
+3.  `handle-error <task-name> replace`を再度実行して、MySQL インスタンス 1 および 2 の間違った DDL ステートメントを置き換えます。
 
     {{< copyable "" >}}
 
@@ -743,7 +743,7 @@ ALTER TABLE `shard_db_*`.`shard_table_*` ADD COLUMN new_col INT UNIQUE;
     }
     ```
 
-4.  `query-status <task-name>`を使用して、タスクのステータスを表示します。
+4.  タスクのステータスを表示するには、 `query-status <task-name>`を使用します。
 
     {{< copyable "" >}}
 
@@ -751,7 +751,7 @@ ALTER TABLE `shard_db_*`.`shard_table_*` ADD COLUMN new_col INT UNIQUE;
     » query-status test
     ```
 
-    <details><summary>実行結果をご覧ください。</summary>
+    <details><summary>実行結果を参照してください。</summary>
 
     ```
     {
@@ -836,7 +836,7 @@ ALTER TABLE `shard_db_*`.`shard_table_*` ADD COLUMN new_col INT UNIQUE;
 
     </details>
 
-    タスクがエラーなしで正常に実行され、4つの間違ったDDLステートメントがすべて置き換えられていることがわかります。
+    タスクがエラーなしで正常に実行され、4 つの間違った DDL ステートメントがすべて置き換えられていることがわかります。
 
 ### その他のコマンド {#other-commands}
 

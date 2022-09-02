@@ -3,49 +3,49 @@ title: Upgrade and After Upgrade FAQs
 summary: Learn about some FAQs and the solutions during and after upgrading TiDB.
 ---
 
-# アップグレードおよびアップグレード後のFAQ {#upgrade-and-after-upgrade-faqs}
+# アップグレードおよびアップグレード後の FAQ {#upgrade-and-after-upgrade-faqs}
 
-このドキュメントでは、TiDBをアップグレードするときまたはアップグレードした後のいくつかのFAQとその解決策を紹介します。
+このドキュメントでは、TiDB のアップグレード時またはアップグレード後に、いくつかの FAQ とその解決方法を紹介します。
 
 ## アップグレードに関するよくある質問 {#upgrade-faqs}
 
-このセクションでは、TiDBをアップグレードする際のいくつかのFAQとその解決策を示します。
+このセクションでは、TiDB をアップグレードする際のいくつかの FAQ とその解決方法をリストします。
 
-### ローリングアップデートの効果は何ですか？ {#what-are-the-effects-of-rolling-updates}
+### ローリング更新の影響は何ですか? {#what-are-the-effects-of-rolling-updates}
 
-ローリング更新をTiDBサービスに適用すると、実行中のアプリケーションはさまざまな程度で影響を受けます。したがって、ビジネスのピーク時にローリング更新を実行することはお勧めしません。最小クラスタトポロジ（TiDB * 2、PD * 3、TiKV * 3）を構成する必要があります。PumpまたはDrainerサービスがクラスタに含まれている場合は、更新をローリングする前にDrainerを停止することをお勧めします。 TiDBをアップグレードすると、 Pumpもアップグレードされます。
+ローリング アップデートを TiDB サービスに適用すると、実行中のアプリケーションはさまざまな程度の影響を受けます。したがって、ビジネスのピーク時にローリング更新を実行することはお勧めしません。最小のクラスター トポロジ (TiDB * 2、PD * 3、TiKV * 3) を構成する必要があります。 PumpまたはDrainerサービスがクラスターに含まれている場合は、ローリング更新の前にDrainerを停止することをお勧めします。 TiDB をアップグレードすると、 Pumpもアップグレードされます。
 
-### DDL実行中にTiDBクラスタをアップグレードできますか？ {#can-i-upgrade-the-tidb-cluster-during-the-ddl-execution}
+### DDL の実行中に TiDB クラスターをアップグレードできますか? {#can-i-upgrade-the-tidb-cluster-during-the-ddl-execution}
 
-DDLステートメントがクラスタで実行されているときは**TiDB**クラスタをアップグレードしないでください（通常、 `ADD INDEX`などの時間のかかるDDLステートメントや列タイプの変更の場合）。
+DDL ステートメントがクラスターで実行されているときは、 **TiDB**クラスターをアップグレードしないでください (通常、 `ADD INDEX`のような時間のかかる DDL ステートメントや列の型の変更のため)。
 
-アップグレードする前に、 [`ADMIN SHOW DDL`](/sql-statements/sql-statement-admin-show-ddl.md)コマンドを使用して、TiDBクラスタに進行中のDDLジョブがあるかどうかを確認することをお勧めします。クラスタにDDLジョブがある場合、クラスタをアップグレードするには、DDLの実行が終了するまで待つか、 [`ADMIN CANCEL DDL`](/sql-statements/sql-statement-admin-cancel-ddl.md)コマンドを使用してDDLジョブをキャンセルしてからクラスタをアップグレードします。
+アップグレードの前に、 [`ADMIN SHOW DDL`](/sql-statements/sql-statement-admin-show-ddl.md)コマンドを使用して、TiDB クラスターに進行中の DDL ジョブがあるかどうかを確認することをお勧めします。クラスターに DDL ジョブがある場合、クラスターをアップグレードするには、DDL の実行が完了するまで待つか、 [`ADMIN CANCEL DDL`](/sql-statements/sql-statement-admin-cancel-ddl.md)コマンドを使用して DDL ジョブをキャンセルしてからクラスターをアップグレードします。
 
-さらに、クラスタのアップグレード中は、DDLステートメントを実行し**ない**でください。そうしないと、未定義動作の問題が発生する可能性があります。
+また、クラスターのアップグレード中は、DDL ステートメントを実行し**ない**でください。そうしないと、未定義の動作の問題が発生する可能性があります。
 
-### バイナリを使用してTiDBをアップグレードするにはどうすればよいですか？ {#how-to-upgrade-tidb-using-the-binary}
+### バイナリを使用して TiDB をアップグレードするには? {#how-to-upgrade-tidb-using-the-binary}
 
-バイナリを使用してTiDBをアップグレードすることはお勧めしません。代わりに、バージョンの一貫性と互換性の両方を保証する[TiUPを使用してTiDBをアップグレードする](/upgrade-tidb-using-tiup.md)または[KubernetesでTiDBクラスタをアップグレードする](https://docs.pingcap.com/tidb-in-kubernetes/stable/upgrade-a-tidb-cluster)にすることをお勧めします。
+バイナリを使用して TiDB をアップグレードすることはお勧めしません。代わりに、バージョンの一貫性と互換性の両方を保証する[TiUP を使用して TiDB をアップグレードする](/upgrade-tidb-using-tiup.md)または[Kubernetes で TiDB クラスターをアップグレードする](https://docs.pingcap.com/tidb-in-kubernetes/stable/upgrade-a-tidb-cluster)にすることをお勧めします。
 
 ## アップグレード後のよくある質問 {#after-upgrade-faqs}
 
-このセクションでは、TiDBをアップグレードした後のいくつかのFAQとその解決策を示します。
+このセクションでは、TiDB をアップグレードした後のいくつかの FAQ とその解決策をリストします。
 
-### DDL操作の実行時に文字セット（文字セット）エラーが発生する {#the-character-set-charset-errors-when-executing-ddl-operations}
+### DDL 操作の実行時の文字セット (charset) エラー {#the-character-set-charset-errors-when-executing-ddl-operations}
 
-v2.1.0以前のバージョン（v2.0のすべてのバージョンを含む）では、TiDBの文字セットはデフォルトでUTF-8です。ただし、v2.1.1以降、デフォルトの文字セットはUTF8MB4に変更されました。
+v2.1.0 以前のバージョン (v2.0 のすべてのバージョンを含む) では、TiDB の文字セットはデフォルトで UTF-8 です。ただし、v2.1.1 から、デフォルトの文字セットが UTF8MB4 に変更されました。
 
-新しく作成されたテーブルの文字セットをv2.1.0以前のバージョンでUTF-8として明示的に指定すると、TiDBをv2.1.1にアップグレードした後にDDL操作の実行に失敗する可能性があります。
+v2.1.0 以前のバージョンで新しく作成されたテーブルの文字セットを UTF-8 として明示的に指定すると、TiDB を v2.1.1 にアップグレードした後に DDL 操作の実行に失敗する可能性があります。
 
-この問題を回避するには、次の点に注意する必要があります。
+この問題を回避するには、次のことに注意する必要があります。
 
--   v2.1.3より前では、TiDBは列の文字セットの変更をサポートしていません。したがって、DDL操作を実行するときは、新しい列の文字セットが元の列の文字セットと一致していることを確認する必要があります。
+-   v2.1.3 より前では、TiDB は列の文字セットの変更をサポートしていません。したがって、DDL 操作を実行するときは、新しい列の文字セットが元の列の文字セットと一致していることを確認する必要があります。
 
--   v2.1.3より前では、列の文字セットがテーブルの文字セットと異なっていても、 `show create table`は列の文字セットを表示しません。ただし、次の例に示すように、HTTPAPIを介してテーブルのメタデータを取得することで表示できます。
+-   v2.1.3 より前では、列の文字セットがテーブルの文字セットと異なっていても、 `show create table`は列の文字セットを示しません。ただし、次の例に示すように、HTTP API を介してテーブルのメタデータを取得することで表示できます。
 
 #### <code>unsupported modify column charset utf8mb4 not match origin utf8</code> {#code-unsupported-modify-column-charset-utf8mb4-not-match-origin-utf8-code}
 
--   アップグレードする前に、v2.1.0以前のバージョンでは次の操作が実行されます。
+-   v2.1.0以前のバージョンでは、バージョンアップ前に以下の操作を実施しています。
 
     {{< copyable "" >}}
 
@@ -76,7 +76,7 @@ v2.1.0以前のバージョン（v2.0のすべてのバージョンを含む）�
     Time: 0.006s
     ```
 
--   アップグレード後、v2.1.1およびv2.1.2では次のエラーが報告されますが、v2.1.3以降のバージョンではそのようなエラーはありません。
+-   アップグレード後、v2.1.1 および v2.1.2 では以下のエラーが報告されていますが、v2.1.3 以降ではそのようなエラーは発生していません。
 
     {{< copyable "" >}}
 
@@ -90,7 +90,7 @@ v2.1.0以前のバージョン（v2.0のすべてのバージョンを含む）�
 
 解決：
 
-列の文字セットを元の文字セットと同じように明示的に指定できます。
+元の文字セットと同じように、列の文字セットを明示的に指定できます。
 
 {{< copyable "" >}}
 
@@ -98,9 +98,9 @@ v2.1.0以前のバージョン（v2.0のすべてのバージョンを含む）�
 alter table t change column a a varchar(22) character set utf8;
 ```
 
--   ポイント1によると、列の文字セットを指定しない場合、デフォルトでUTF8MB4が使用されるため、元の文字セットと一致するように列の文字セットを指定する必要があります。
+-   ポイント 1 によると、列の文字セットを指定しない場合、デフォルトで UTF8MB4 が使用されるため、元の列の文字セットと一致するように列の文字セットを指定する必要があります。
 
--   ポイント2によると、HTTP APIを介してテーブルのメタデータを取得し、列名とキーワード「Charset」を検索することで列の文字セットを見つけることができます。
+-   ポイント 2 に従って、HTTP API を介してテーブルのメタデータを取得し、列名とキーワード「Charset」を検索することで列の charset を見つけることができます。
 
     {{< copyable "" >}}
 
@@ -108,7 +108,7 @@ alter table t change column a a varchar(22) character set utf8;
     curl "http://$IP:10080/schema/test/t" | python -m json.tool
     ```
 
-    ここでは、Pythonツールを使用してJSONをフォーマットします。これは必須ではなく、コメントを追加するためだけに使用されます。
+    ここでは Python ツールを使用して JSON をフォーマットしますが、これは必須ではなく、コメントを追加するためだけに便利です。
 
     ```json
     {
@@ -144,7 +144,7 @@ alter table t change column a a varchar(22) character set utf8;
 
 #### <code>unsupported modify charset from utf8mb4 to utf8</code> {#code-unsupported-modify-charset-from-utf8mb4-to-utf8-code}
 
--   アップグレードする前に、v2.1.1およびv2.1.2では次の操作が実行されます。
+-   アップグレード前に、v2.1.1 と v2.1.2 で以下の操作を実行します。
 
     {{< copyable "" >}}
 
@@ -173,9 +173,9 @@ alter table t change column a a varchar(22) character set utf8;
     +-------+-------------------------------------------------------+
     ```
 
-    上記の例では、 `show create table`はテーブルの文字セットのみを示していますが、列の文字セットは実際にはUTF8MB4であり、HTTPAPIを介してスキーマを取得することで確認できます。ただし、新しいテーブルが作成されると、列の文字セットはテーブルの文字セットと一致している必要があります。このバグはv2.1.3で修正されています。
+    上記の例では、 `show create table`はテーブルの文字セットのみを示していますが、実際には列の文字セットは UTF8MB4 であり、HTTP API を介してスキーマを取得することで確認できます。ただし、新しいテーブルが作成された場合、列の文字セットはテーブルの文字セットと一致している必要があります。このバグは v2.1.3 で修正されています。
 
--   アップグレード後、v2.1.3以降のバージョンでは次の操作が実行されます。
+-   バージョンアップ後、v2.1.3以降では以下の操作を行います。
 
     {{< copyable "" >}}
 
@@ -207,7 +207,7 @@ alter table t change column a a varchar(22) character set utf8;
 
 解決：
 
--   v2.1.3以降、TiDBは列とテーブルの文字セットの変更をサポートしているため、テーブルの文字セットをUTF8MB4に変更することをお勧めします。
+-   v2.1.3 以降、TiDB は列とテーブルの文字セットの変更をサポートしているため、テーブルの文字セットを UTF8MB4 に変更することをお勧めします。
 
     {{< copyable "" >}}
 
@@ -215,7 +215,7 @@ alter table t change column a a varchar(22) character set utf8;
     alter table t convert to character set utf8mb4;
     ```
 
--   問題＃1で行ったように列文字セットを指定して、元の列文字セット（UTF8MB4）との整合性を保つこともできます。
+-   問題 1 で行ったように、列の文字セットを指定して、元の列の文字セット (UTF8MB4) との一貫性を保つこともできます。
 
     {{< copyable "" >}}
 
@@ -225,9 +225,9 @@ alter table t change column a a varchar(22) character set utf8;
 
 #### <code>ERROR 1366 (HY000): incorrect utf8 value f09f8c80(🌀) for column a</code> {#code-error-1366-hy000-incorrect-utf8-value-f09f8c80-for-column-a-code}
 
-TiDB v2.1.1以前のバージョンでは、文字セットがUTF-8の場合、挿入された4バイトデータに対するUTF-8Unicodeエンコーディングチェックはありません。ただし、v2.1.2以降のバージョンでは、このチェックが追加されています。
+TiDB v2.1.1 以前のバージョンでは、文字セットが UTF-8 の場合、挿入された 4 バイト データに対する UTF-8 Unicode エンコーディング チェックは行われません。ただし、v2.1.2 以降のバージョンでは、このチェックが追加されています。
 
--   アップグレードする前に、v2.1.1以前のバージョンでは次の操作が実行されます。
+-   v2.1.1以前のバージョンでは、バージョンアップ前に以下の操作を実施しています。
 
     {{< copyable "" >}}
 
@@ -249,7 +249,7 @@ TiDB v2.1.1以前のバージョンでは、文字セットがUTF-8の場合、�
     Query OK, 1 row affected
     ```
 
--   アップグレード後、v2.1.2以降のバージョンでは次のエラーが報告されます。
+-   アップグレード後、v2.1.2 以降のバージョンで次のエラーが報告されます。
 
     {{< copyable "" >}}
 
@@ -263,7 +263,7 @@ TiDB v2.1.1以前のバージョンでは、文字セットがUTF-8の場合、�
 
 解決：
 
--   v2.1.2の場合：このバージョンは列文字セットの変更をサポートしていないため、UTF-8チェックをスキップする必要があります。
+-   v2.1.2: このバージョンは列の文字セットの変更をサポートしていないため、UTF-8 チェックをスキップする必要があります。
 
     {{< copyable "" >}}
 
@@ -285,7 +285,7 @@ TiDB v2.1.1以前のバージョンでは、文字セットがUTF-8の場合、�
     Query OK, 1 row affected
     ```
 
--   v2.1.3以降のバージョン：列の文字セットをUTF8MB4に変更することをお勧めします。または、 `tidb_skip_utf8_check`を設定してUTF-8チェックをスキップすることもできます。ただし、チェックをスキップすると、MySQLがチェックを実行するため、TiDBからMySQLへのデータの複製に失敗する可能性があります。
+-   v2.1.3 以降のバージョンでは、列の文字セットを UTF8MB4 に変更することをお勧めします。または、 `tidb_skip_utf8_check`を設定して UTF-8 チェックをスキップすることもできます。ただし、チェックをスキップすると、MySQL がチェックを実行するため、TiDB から MySQL へのデータの複製に失敗する可能性があります。
 
     {{< copyable "" >}}
 
@@ -307,15 +307,15 @@ TiDB v2.1.1以前のバージョンでは、文字セットがUTF-8の場合、�
     Query OK, 1 row affected
     ```
 
-    具体的には、変数`tidb_skip_utf8_check`を使用して、データの正当なUTF-8およびUTF8MB4チェックをスキップできます。ただし、チェックをスキップすると、MySQLがチェックを実行するため、TiDBからMySQLへのデータの複製に失敗する可能性があります。
+    具体的には、変数`tidb_skip_utf8_check`を使用して、データに対する有効な UTF-8 および UTF8MB4 チェックをスキップできます。ただし、チェックをスキップすると、MySQL がチェックを実行するため、TiDB から MySQL へのデータの複製に失敗する可能性があります。
 
-    UTF-8チェックのみをスキップする場合は、 `tidb_check_mb4_value_in_utf8`を設定できます。この変数はv2.1.3の`config.toml`ファイルに追加され、構成ファイルの`check-mb4-value-in-utf8`を変更してから、クラスタを再起動して有効にすることができます。
+    UTF-8 チェックのみをスキップする場合は、 `tidb_check_mb4_value_in_utf8`を設定できます。この変数は v2.1.3 で`config.toml`ファイルに追加され、構成ファイルで`check-mb4-value-in-utf8`を変更してから、クラスターを再起動して有効にすることができます。
 
-    v2.1.5以降、HTTPAPIとセッション変数を介して`tidb_check_mb4_value_in_utf8`を設定できます。
+    v2.1.5 以降では、HTTP API とセッション変数を使用して`tidb_check_mb4_value_in_utf8`を設定できます。
 
-    -   HTTP API（HTTP APIは単一のサーバーでのみ有効にできます）
+    -   HTTP API（HTTP API は 1 つのサーバーでのみ有効にできます）
 
-        -   HTTP APIを有効にするには：
+        -   HTTP API を有効にするには:
 
             {{< copyable "" >}}
 
@@ -323,7 +323,7 @@ TiDB v2.1.1以前のバージョンでは、文字セットがUTF-8の場合、�
             curl -X POST -d "check_mb4_value_in_utf8=1" http://{TiDBIP}:10080/settings
             ```
 
-        -   HTTP APIを無効にするには：
+        -   HTTP API を無効にするには:
 
             {{< copyable "" >}}
 
@@ -333,7 +333,7 @@ TiDB v2.1.1以前のバージョンでは、文字セットがUTF-8の場合、�
 
     -   セッション変数
 
-        -   セッション変数を有効にするには：
+        -   セッション変数を有効にするには:
 
             {{< copyable "" >}}
 
@@ -341,7 +341,7 @@ TiDB v2.1.1以前のバージョンでは、文字セットがUTF-8の場合、�
             set @@session.tidb_check_mb4_value_in_utf8 = 1;
             ```
 
-        -   セッション変数を無効にするには：
+        -   セッション変数を無効にするには:
 
             {{< copyable "" >}}
 

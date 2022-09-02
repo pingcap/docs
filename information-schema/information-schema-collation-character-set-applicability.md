@@ -5,7 +5,7 @@ summary: Learn the `COLLATION_CHARACTER_SET_APPLICABILITY` information_schema ta
 
 # COLLATION_CHARACTER_SET_APPLICABILITY {#collation-character-set-applicability}
 
-`COLLATION_CHARACTER_SET_APPLICABILITY`のテーブルは、照合を該当する文字セット名にマップします。 `COLLATIONS`の表と同様に、MySQLとの互換性のためにのみ含まれています。
+`COLLATION_CHARACTER_SET_APPLICABILITY`テーブルは、照合順序を該当する文字セット名にマップします。 `COLLATIONS`テーブルと同様に、MySQL との互換性のためにのみ含まれています。
 
 {{< copyable "" >}}
 
@@ -41,5 +41,5 @@ SELECT * FROM collation_character_set_applicability WHERE character_set_name='ut
 
 `COLLATION_CHARACTER_SET_APPLICABILITY`テーブルの列の説明は次のとおりです。
 
--   `COLLATION_NAME` ：照合順序の名前。
--   `CHARACTER_SET_NAME` ：照合順序が属する文字セットの名前。
+-   `COLLATION_NAME` :照合順序の名前。
+-   `CHARACTER_SET_NAME` :照合順序が属する文字セットの名前。

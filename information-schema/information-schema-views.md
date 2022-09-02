@@ -5,7 +5,7 @@ summary: Learn the `VIEWS` information_schema table.
 
 # ビュー {#views}
 
-`VIEWS`の表は、SQLビューに関する情報を提供します。
+`VIEWS`テーブルは、SQL ビューに関する情報を提供します。
 
 {{< copyable "" >}}
 
@@ -54,15 +54,15 @@ COLLATION_CONNECTION: utf8mb4_0900_ai_ci
 1 row in set (0.00 sec)
 ```
 
-`VIEWS`表のフィールドは次のように説明されています。
+`VIEWS`テーブルのフィールドは次のとおりです。
 
--   `TABLE_CATALOG` ：ビューが属するカタログの名前。この値は常に`def`です。
--   `TABLE_SCHEMA` ：ビューが属するスキーマの名前。
--   `TABLE_NAME` ：ビュー名。
--   `VIEW_DEFINITION` ：ビューの定義。ビューの作成時に`SELECT`ステートメントによって作成されます。
--   `CHECK_OPTION` ： `CHECK_OPTION`の値。値のオプションは`NONE` 、および`CASCADE` `LOCAL` 。
--   `IS_UPDATABLE` ： `UPDATE`が`DELETE`に適用できるか`INSERT`か。 TiDBでは、値は常に`NO`です。
--   `DEFINER` ：ビューを作成するユーザーの名前`'user_name'@'host_name'`の形式です。
--   `SECURITY_TYPE` ： `SQL SECURITY`の値。値のオプションは`DEFINER`と`INVOKER`です。
--   `CHARACTER_SET_CLIENT` ：ビュー作成時の`character_set_client`セッション変数の値。
--   `COLLATION_CONNECTION` ：ビュー作成時の`collation_connection`セッション変数の値。
+-   `TABLE_CATALOG` : ビューが属するカタログの名前。この値は常に`def`です。
+-   `TABLE_SCHEMA` : ビューが属するスキーマの名前。
+-   `TABLE_NAME` : ビュー名。
+-   `VIEW_DEFINITION` : ビューの作成時に`SELECT`ステートメントで作成されるビューの定義。
+-   `CHECK_OPTION` : `CHECK_OPTION`の値。値のオプションは`NONE` 、 `CASCADE` 、および`LOCAL`です。
+-   `IS_UPDATABLE` : `UPDATE` / `INSERT` / `DELETE`がビューに適用されるかどうか。 TiDB では、値は常に`NO`です。
+-   `DEFINER` : ビューを作成したユーザーの名前で、形式は`'user_name'@'host_name'`です。
+-   `SECURITY_TYPE` : `SQL SECURITY`の値。値のオプションは`DEFINER`と`INVOKER`です。
+-   `CHARACTER_SET_CLIENT` : ビューが作成されたときの`character_set_client`セッション変数の値。
+-   `COLLATION_CONNECTION` : ビューが作成されたときの`collation_connection`セッション変数の値。

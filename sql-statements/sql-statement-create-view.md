@@ -3,9 +3,9 @@ title: CREATE VIEW | TiDB SQL Statement Reference
 summary: An overview of the usage of CREATE VIEW for the TiDB database.
 ---
 
-# ビューの作成 {#create-view}
+# ビューを作成 {#create-view}
 
-`CREATE VIEW`ステートメントは、テーブルと同様に、 `SELECT`ステートメントをクエリ可能なオブジェクトとして保存します。 TiDBのビューは実体化されていません。これは、ビューがクエリされると、TiDBが内部的にクエリを書き換えて、ビュー定義をSQLクエリと結合することを意味します。
+`CREATE VIEW`ステートメントは、テーブルと同様に、 `SELECT`ステートメントをクエリ可能なオブジェクトとして保存します。 TiDB のビューは具体化されていません。これは、ビューがクエリされると、TiDB がクエリを内部的に書き換えて、ビュー定義と SQL クエリを結合することを意味します。
 
 ## あらすじ {#synopsis}
 
@@ -87,15 +87,15 @@ mysql> INSERT INTO v1 (c1) VALUES (7);
 ERROR 1105 (HY000): insert into view v1 is not supported now.
 ```
 
-## MySQLの互換性 {#mysql-compatibility}
+## MySQL の互換性 {#mysql-compatibility}
 
--   現在、TiDBのビューは挿入または更新できません（つまり、 `INSERT VIEW`と`UPDATE VIEW`はサポートされていません）。 `WITH CHECK OPTION`は構文的にのみ互換性がありますが、有効にはなりません。
--   現在、TiDBのビューは`ALTER VIEW`をサポートしていませんが、代わりに`CREATE OR REPLACE`を使用できます。
--   現在、 `ALGORITHM`フィールドはTiDBで構文的にのみ互換性がありますが、有効にはなりません。 TiDBは現在、MERGEアルゴリズムのみをサポートしています。
+-   現在、TiDB のどのビューも挿入または更新できません (つまり、 `INSERT VIEW`と`UPDATE VIEW`はサポートされていません)。 `WITH CHECK OPTION`は構文的にのみ互換性がありますが、効果はありません。
+-   現在、TiDB のビューは`ALTER VIEW`をサポートしていませんが、代わりに`CREATE OR REPLACE`を使用できます。
+-   現在、 `ALGORITHM`フィールドは TiDB で構文的にのみ互換性がありますが、有効ではありません。 TiDB は現在、MERGE アルゴリズムのみをサポートしています。
 
-## も参照してください {#see-also}
+## こちらもご覧ください {#see-also}
 
 -   [ドロップビュー](/sql-statements/sql-statement-drop-view.md)
--   [CREATE TABLE](/sql-statements/sql-statement-create-table.md)
--   [CREATETABLEを表示する](/sql-statements/sql-statement-show-create-table.md)
+-   [テーブルを作成](/sql-statements/sql-statement-create-table.md)
+-   [テーブルの作成を表示](/sql-statements/sql-statement-show-create-table.md)
 -   [ドロップテーブル](/sql-statements/sql-statement-drop-table.md)

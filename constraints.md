@@ -5,11 +5,11 @@ summary: Learn how SQL Constraints apply to TiDB.
 
 # 制約 {#constraints}
 
-TiDBは、MySQLとほぼ同じ制約をサポートしています。
+TiDB は、MySQL とほぼ同じ制約をサポートしています。
 
-## NULLではありません {#not-null}
+## ヌルではない {#not-null}
 
-TiDBでサポートされているNOTNULL制約は、MySQLでサポートされている制約と同じです。
+TiDB でサポートされている NOT NULL 制約は、MySQL でサポートされているものと同じです。
 
 例えば：
 
@@ -53,13 +53,13 @@ INSERT INTO users (id,age,last_login) VALUES (NULL,123,NULL);
 Query OK, 1 row affected (0.03 sec)
 ```
 
--   `AUTO_INCREMENT`列に`NULL`を割り当てることができるため、最初の`INSERT`ステートメントは成功します。 TiDBはシーケンス番号を自動的に生成します。
--   `age`列が`NOT NULL`として定義されているため、2番目の`INSERT`ステートメントは失敗します。
--   `last_login`列が`NOT NULL`として明示的に定義されていないため、3番目の`INSERT`ステートメントは成功します。 NULL値はデフォルトで許可されています。
+-   `AUTO_INCREMENT`列に`NULL`を代入できるため、最初の`INSERT`ステートメントは成功します。 TiDB はシーケンス番号を自動的に生成します。
+-   `age`列が`NOT NULL`として定義されているため、2 番目の`INSERT`ステートメントは失敗します。
+-   `last_login`列が`NOT NULL`として明示的に定義されていないため、3 番目の`INSERT`ステートメントは成功します。デフォルトでは NULL 値が許可されています。
 
 ## 小切手 {#check}
 
-TiDBは解析しますが、 `CHECK`の制約を無視します。これはMySQL 5.7と互換性のある動作です。
+TiDB は解析しますが、 `CHECK`の制約を無視します。これはMySQL 5.7互換の動作です。
 
 例えば：
 
@@ -79,7 +79,7 @@ SELECT * FROM users;
 
 ## ユニークキー {#unique-key}
 
-トランザクションモードと`tidb_constraint_check_in_place`の値に応じて、TiDBは`UNIQUE`の制約をチェックする場合があります[怠惰に](/transaction-overview.md#lazy-check-of-constraints) 。これは、ネットワークアクセスをバッチ処理することにより、パフォーマンスの向上に役立ちます。
+トランザクション モードと`tidb_constraint_check_in_place`の値に応じて、TiDB は`UNIQUE`の制約[怠惰に](/transaction-overview.md#lazy-check-of-constraints)をチェックする場合があります。これにより、ネットワーク アクセスをバッチ処理してパフォーマンスを向上させることができます。
 
 例えば：
 
@@ -95,7 +95,7 @@ CREATE TABLE users (
 INSERT INTO users (username) VALUES ('dave'), ('sarah'), ('bill');
 ```
 
-悲観的ロックのデフォルトでは：
+悲観的ロックのデフォルトでは:
 
 {{< copyable "" >}}
 
@@ -108,7 +108,7 @@ INSERT INTO users (username) VALUES ('jane'), ('chris'), ('bill');
 ERROR 1062 (23000): Duplicate entry 'bill' for key 'username'
 ```
 
-楽観的ロックと`tidb_constraint_check_in_place=0` ：
+楽観的ロックと`tidb_constraint_check_in_place=0`の場合:
 
 {{< copyable "" >}}
 
@@ -145,9 +145,9 @@ COMMIT;
 ERROR 1062 (23000): Duplicate entry 'bill' for key 'username'
 ```
 
-楽観的な例では、トランザクションがコミットされるまで一意のチェックが遅延されました。値`bill`がすでに存在していたため、これにより重複キーエラーが発生しました。
+楽観的な例では、トランザクションがコミットされるまで一意のチェックが遅れました。値`bill`が既に存在していたため、重複キー エラーが発生しました。
 
-`tidb_constraint_check_in_place`から`1`に設定すると、この動作を無効にできます。悲観的トランザクションモードでは、ステートメントの実行時に制約が常にチェックされるため、この変数設定は悲観的トランザクションには影響しません。 `tidb_constraint_check_in_place=1`の場合、ステートメントの実行時に一意性制約がチェックされます。
+`tidb_constraint_check_in_place`から`1`を設定すると、この動作を無効にできます。ペシミスティック トランザクション モードではステートメントの実行時に制約が常にチェックされるため、この変数設定はペシミスティック トランザクションには影響しません。 `tidb_constraint_check_in_place=1`の場合、ステートメントの実行時に一意制約がチェックされます。
 
 例えば：
 
@@ -192,11 +192,11 @@ ERROR 1062 (23000): Duplicate entry 'bill' for key 'username'
 ..
 ```
 
-最初の`INSERT`のステートメントにより、重複キーエラーが発生しました。これにより、追加のネットワーク通信オーバーヘッドが発生し、挿入操作のスループットが低下する可能性があります。
+最初の`INSERT`ステートメントで重複キー エラーが発生しました。これにより、追加のネットワーク通信オーバーヘッドが発生し、挿入操作のスループットが低下する可能性があります。
 
 ## 主キー {#primary-key}
 
-MySQLと同様に、主キー制約には一意の制約が含まれます。つまり、主キー制約を作成することは、一意の制約を持つことと同じです。さらに、TiDBの他の主キー制約もMySQLの制約と同様です。
+MySQL と同様に、主キー制約には一意の制約が含まれます。つまり、主キー制約を作成することは、一意の制約を持つことと同じです。さらに、TiDB のその他の主キー制約も、MySQL のものと似ています。
 
 例えば：
 
@@ -240,11 +240,11 @@ CREATE TABLE t4 (a INT NOT NULL, b INT NOT NULL, PRIMARY KEY (a,b));
 Query OK, 0 rows affected (0.10 sec)
 ```
 
--   列`a`が主キーとして定義されており、NULL値を許可していないため、表`t2`を作成できませんでした。
--   テーブルは主キーを1つしか持つことができないため、テーブル`t3`の作成に失敗しました。
--   表`t4`は正常に作成されました。これは、主キーが1つしかない場合でも、TiDBは複数の列を複合主キーとして定義することをサポートしているためです。
+-   列`a`が主キーとして定義されており、NULL 値が許可されていないため、表`t2`を作成できませんでした。
+-   テーブルには 1 つの主キーしか持てないため、テーブル`t3`を作成できませんでした。
+-   主キーは 1 つしか存在できませんが、TiDB は複数の列を複合主キーとして定義することをサポートしているため、表`t4`は正常に作成されました。
 
-上記のルールに加えて、TiDBは現在、 `NONCLUSTERED`タイプの主キーの追加と削除のみをサポートしています。例えば：
+上記のルールに加えて、TiDB は現在、 `NONCLUSTERED`種類の主キーの追加と削除のみをサポートしています。例えば：
 
 {{< copyable "" >}}
 
@@ -268,15 +268,15 @@ ALTER TABLE t5 DROP PRIMARY KEY;
 Query OK, 0 rows affected (0.10 sec)
 ```
 
-`CLUSTERED`タイプの主キーの詳細については、 [クラスター化されたインデックス](/clustered-indexes.md)を参照してください。
+`CLUSTERED`型の主キーの詳細については、 [クラスター化インデックス](/clustered-indexes.md)を参照してください。
 
 ## 外部キー {#foreign-key}
 
 > **ノート：**
 >
-> TiDBは、外部キー制約のサポートが制限されています。
+> TiDB では、外部キー制約のサポートが制限されています。
 
-TiDBは、DDLコマンドでの`FOREIGN KEY`の制約の作成をサポートしています。
+TiDB は、DDL コマンドでの`FOREIGN KEY`制約の作成をサポートしています。
 
 例えば：
 
@@ -311,7 +311,7 @@ FROM information_schema.key_column_usage WHERE table_name IN ('users', 'orders')
 3 rows in set (0.00 sec)
 ```
 
-TiDBは、 `ALTER TABLE`コマンドを介して`DROP FOREIGN KEY`と`ADD FOREIGN KEY`の構文もサポートしています。
+TiDB は、 `ALTER TABLE`コマンドを介して`DROP FOREIGN KEY`および`ADD FOREIGN KEY`への構文もサポートします。
 
 {{< copyable "" >}}
 
@@ -322,9 +322,9 @@ ALTER TABLE orders ADD FOREIGN KEY fk_user_id (user_id) REFERENCES users(id);
 
 ### ノート {#notes}
 
--   TiDBは、他のデータベースからTiDBにデータを移行するときにこの構文によって引き起こされるエラーを回避するために、外部キーをサポートしています。
+-   TiDB は、他のデータベースから TiDB にデータを移行するときにこの構文によって引き起こされるエラーを回避するために、外部キーをサポートしています。
 
-    ただし、TiDBはDMLステートメントの外部キーに対して制約チェックを実行しません。たとえば、usersテーブルにid = 123のレコードがない場合でも、次のトランザクションを正常に送信できます。
+    ただし、TiDB は DML ステートメントの外部キーに対して制約チェックを実行しません。たとえば、users テーブルに id=123 のレコードがなくても、次のトランザクションは正常に送信できます。
 
     ```sql
     START TRANSACTION;

@@ -5,13 +5,13 @@ summary: An overview of the usage of SHOW ERRORS for the TiDB database.
 
 # エラーを表示 {#show-errors}
 
-このステートメントは、以前に実行されたステートメントからのエラーを示しています。ステートメントが正常に実行されるとすぐに、エラーバッファはクリアされます。この場合、 `SHOW ERRORS`は空のセットを返します。
+このステートメントは、以前に実行されたステートメントからのエラーを示します。エラー バッファは、ステートメントが正常に実行されるとすぐにクリアされます。その場合、 `SHOW ERRORS`は空のセットを返します。
 
-どのステートメントがエラーと警告を生成するかの動作は、現在の`sql_mode`に大きく影響されます。
+エラーと警告を生成するステートメントの動作は、現在の`sql_mode`に大きく影響されます。
 
 ## あらすじ {#synopsis}
 
-**ShowErrorsStmt：**
+**ShowErrorsStmt:**
 
 ![ShowErrorsStmt](/media/sqlgram/ShowErrorsStmt.png)
 
@@ -45,10 +45,10 @@ mysql> SHOW ERRORS;
 Empty set (0.00 sec)
 ```
 
-## MySQLの互換性 {#mysql-compatibility}
+## MySQL の互換性 {#mysql-compatibility}
 
-このステートメントは、MySQLと完全に互換性があると理解されています。互換性の違いは、GitHubでは[問題を介して報告された](https://github.com/pingcap/tidb/issues/new/choose)である必要があります。
+このステートメントは、MySQL と完全に互換性があると理解されています。互換性の違いは、GitHub で[問題を介して報告された](https://github.com/pingcap/tidb/issues/new/choose)にする必要があります。
 
-## も参照してください {#see-also}
+## こちらもご覧ください {#see-also}
 
 -   [警告を表示](/sql-statements/sql-statement-show-warnings.md)

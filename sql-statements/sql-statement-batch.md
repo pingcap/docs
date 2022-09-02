@@ -5,13 +5,13 @@ summary: An overview of the usage of BATCH for the TiDB database.
 
 # バッチ {#batch}
 
-`BATCH`構文は、DMLステートメントをTiDB内の複数のステートメントに分割して実行します。これは、トランザクションの原子性と分離**の保証がないこと**を意味します。したがって、これは「非トランザクション」ステートメントです。
+`BATCH`構文は、実行のために DML ステートメントを TiDB の複数のステートメントに分割します。これは、トランザクションの原子性と分離が**保証されないこと**を意味します。したがって、これは「非トランザクション」ステートメントです。
 
-現在、 `BATCH`でサポートされているのは`DELETE`つだけです。
+現在、 `BATCH`では`DELETE`のみがサポートされています。
 
-列に基づいて、 `BATCH`構文はDMLステートメントを実行のためにスコープの複数の範囲に分割します。各範囲で、単一のSQLステートメントが実行されます。
+`BATCH`構文は、列に基づいて、DML ステートメントを複数の実行範囲に分割します。各範囲で、単一の SQL ステートメントが実行されます。
 
-使用法と制限事項の詳細については、 [非トランザクションDMLステートメント](/non-transactional-dml.md)を参照してください。
+使用方法と制限事項については、 [非トランザクション DML ステートメント](/non-transactional-dml.md)を参照してください。
 
 ## あらすじ {#synopsis}
 
@@ -23,10 +23,10 @@ DryRunOptions ::=
     'DRY' 'RUN' 'QUERY'?
 ```
 
-## MySQLの互換性 {#mysql-compatibility}
+## MySQL の互換性 {#mysql-compatibility}
 
-`BATCH`構文はTiDB固有であり、MySQLと互換性がありません。
+`BATCH`構文は TiDB 固有であり、MySQL と互換性がありません。
 
-## も参照してください {#see-also}
+## こちらもご覧ください {#see-also}
 
--   [非トランザクションDMLステートメント](/non-transactional-dml.md)
+-   [非トランザクション DML ステートメント](/non-transactional-dml.md)

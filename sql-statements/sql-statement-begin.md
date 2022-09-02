@@ -5,9 +5,9 @@ summary: An overview of the usage of BEGIN for the TiDB database.
 
 # 始める {#begin}
 
-このステートメントは、TiDB内で新しいトランザクションを開始します。これは、ステートメント`START TRANSACTION`および`SET autocommit=0`に似ています。
+このステートメントは、TiDB 内で新しいトランザクションを開始します。これは、ステートメント`START TRANSACTION`および`SET autocommit=0`に似ています。
 
-`BEGIN`のステートメントがない場合、すべてのステートメントはデフォルトで独自のトランザクションで自動コミットされます。この動作により、MySQLの互換性が保証されます。
+`BEGIN`ステートメントがない場合、すべてのステートメントはデフォルトで独自のトランザクションで自動コミットされます。この動作により、MySQL の互換性が確保されます。
 
 ## あらすじ {#synopsis}
 
@@ -33,14 +33,14 @@ mysql> COMMIT;
 Query OK, 0 rows affected (0.01 sec)
 ```
 
-## MySQLの互換性 {#mysql-compatibility}
+## MySQL の互換性 {#mysql-compatibility}
 
-TiDBは、 `BEGIN PESSIMISTIC`または`BEGIN OPTIMISTIC`の構文拡張をサポートします。これにより、トランザクションのデフォルトのトランザクションモデルを上書きできます。
+TiDB は、 `BEGIN PESSIMISTIC`または`BEGIN OPTIMISTIC`の構文拡張をサポートします。これにより、トランザクションのデフォルトのトランザクション モデルをオーバーライドできます。
 
-## も参照してください {#see-also}
+## こちらもご覧ください {#see-also}
 
 -   [専念](/sql-statements/sql-statement-commit.md)
 -   [ロールバック](/sql-statements/sql-statement-rollback.md)
--   [トランザクションを開始します](/sql-statements/sql-statement-start-transaction.md)
--   [TiDB楽観的トランザクションモデル](/optimistic-transaction.md)
--   [TiDB悲観的トランザクションモード](/pessimistic-transaction.md)
+-   [取引開始](/sql-statements/sql-statement-start-transaction.md)
+-   [TiDB 楽観的トランザクション モデル](/optimistic-transaction.md)
+-   [TiDB ペシミスティック トランザクション モード](/pessimistic-transaction.md)

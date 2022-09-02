@@ -2,155 +2,155 @@
 title: TiDB 5.1.1 Release Notes
 ---
 
-# TiDB5.1.1リリースノート {#tidb-5-1-1-release-notes}
+# TiDB 5.1.1 リリースノート {#tidb-5-1-1-release-notes}
 
 リリース日：2021年7月30日
 
-TiDBバージョン：5.1.1
+TiDB バージョン: 5.1.1
 
 ## 互換性の変更 {#compatibility-changes}
 
 -   TiDB
 
-    -   TiDBクラスターをv4.0からv5.1にアップグレードする場合、デフォルト値の`tidb_multi_statement_mode`は`OFF`です。代わりに、クライアントライブラリのマルチステートメント機能を使用することをお勧めします。詳細については、 [`tidb_multi_statement_mode`に関するドキュメント](/system-variables.md#tidb_multi_statement_mode-new-in-v4011)を参照してください。 [＃25751](https://github.com/pingcap/tidb/pull/25751)
-    -   `tidb_stmt_summary_max_stmt_count`変数のデフォルト値を`200`から[＃25874](https://github.com/pingcap/tidb/pull/25874)に変更し`3000` 。
-    -   `table_storage_stats`のテーブルにアクセスするには`SUPER`の特権が必要です[＃26352](https://github.com/pingcap/tidb/pull/26352)
-    -   他のユーザーの特権を表示するために`information_schema.user_privileges`テーブルにアクセスするには、 `mysql.user`の`SELECT`特権が必要です[＃26311](https://github.com/pingcap/tidb/pull/26311)
-    -   `information_schema.cluster_hardware`のテーブルにアクセスするには`CONFIG`の特権が必要です[＃26297](https://github.com/pingcap/tidb/pull/26297)
-    -   `information_schema.cluster_info`のテーブルにアクセスするには`PROCESS`の特権が必要です[＃26297](https://github.com/pingcap/tidb/pull/26297)
-    -   `information_schema.cluster_load`のテーブルにアクセスするには`PROCESS`の特権が必要です[＃26297](https://github.com/pingcap/tidb/pull/26297)
-    -   `information_schema.cluster_systeminfo`のテーブルにアクセスするには`PROCESS`の特権が必要です[＃26297](https://github.com/pingcap/tidb/pull/26297)
-    -   `information_schema.cluster_log`のテーブルにアクセスするには`PROCESS`の特権が必要です[＃26297](https://github.com/pingcap/tidb/pull/26297)
-    -   `information_schema.cluster_config`のテーブルにアクセスするには`CONFIG`の特権が必要です[＃26150](https://github.com/pingcap/tidb/pull/26150)
+    -   TiDB クラスターを v4.0 から v5.1 にアップグレードする場合、デフォルト値の`tidb_multi_statement_mode`は`OFF`です。代わりに、クライアント ライブラリのマルチステートメント機能を使用することをお勧めします。詳細は[`tidb_multi_statement_mode`に関するドキュメント](/system-variables.md#tidb_multi_statement_mode-new-in-v4011)を参照してください。 [#25751](https://github.com/pingcap/tidb/pull/25751)
+    -   `tidb_stmt_summary_max_stmt_count`変数のデフォルト値を`200`から`3000` [#25874](https://github.com/pingcap/tidb/pull/25874)に変更します。
+    -   `table_storage_stats`表[#26352](https://github.com/pingcap/tidb/pull/26352)にアクセスするには`SUPER`特権が必要です
+    -   `information_schema.user_privileges`テーブルにアクセスして他のユーザーの権限を表示するには、 `mysql.user`に対する`SELECT`権限が必要です[#26311](https://github.com/pingcap/tidb/pull/26311)
+    -   `information_schema.cluster_hardware`表[#26297](https://github.com/pingcap/tidb/pull/26297)にアクセスするには`CONFIG`特権が必要です
+    -   `information_schema.cluster_info`表[#26297](https://github.com/pingcap/tidb/pull/26297)にアクセスするには`PROCESS`特権が必要です
+    -   `information_schema.cluster_load`表[#26297](https://github.com/pingcap/tidb/pull/26297)にアクセスするには`PROCESS`特権が必要です
+    -   `information_schema.cluster_systeminfo`表[#26297](https://github.com/pingcap/tidb/pull/26297)にアクセスするには`PROCESS`特権が必要です
+    -   `information_schema.cluster_log`表[#26297](https://github.com/pingcap/tidb/pull/26297)にアクセスするには`PROCESS`特権が必要です
+    -   `information_schema.cluster_config`表[#26150](https://github.com/pingcap/tidb/pull/26150)にアクセスするには`CONFIG`特権が必要です
 
-## 機能の強化 {#feature-enhancements}
+## 機能強化 {#feature-enhancements}
 
--   TiDBダッシュボード
+-   TiDB ダッシュボード
 
-    -   OIDCSSOをサポートします。 OIDC互換のSSOサービス（OktaやAuth0など）を設定することで、ユーザーはSQLパスワードを入力せずにTiDBダッシュボードにログインできます。 [＃3883](https://github.com/tikv/pd/pull/3883)
+    -   OIDC SSO をサポートします。 OIDC 互換の SSO サービス (Okta や Auth0 など) を設定することで、ユーザーは SQL パスワードを入力せずに TiDB ダッシュボードにログインできます。 [#3883](https://github.com/tikv/pd/pull/3883)
 
--   TiFlash
+-   ティフラッシュ
 
-    -   DAGリクエストで`HAVING()`の機能をサポートする
+    -   DAG リクエストで`HAVING()`の機能をサポート
 
-## 改善点 {#improvements}
+## 改良点 {#improvements}
 
 -   TiDB
 
-    -   Stale Read機能の一般提供（GA）を発表する
-    -   データ挿入を高速化するために`paramMarker`の割り当てを避けます[＃26076](https://github.com/pingcap/tidb/pull/26076)
-    -   安定した結果モードをサポートして、クエリ結果をより安定させます[＃25995](https://github.com/pingcap/tidb/pull/25995)
-    -   内蔵機能`json_unquote()`から[＃26265](https://github.com/pingcap/tidb/pull/26265)へのプッシュダウンをサポート
-    -   MPPクエリの再試行をサポート[＃26480](https://github.com/pingcap/tidb/pull/26480)
-    -   `UPDATE`の読み取りに`point get`または`batch point get`を使用して、インデックスキーの`LOCK`レコードを`PUT`レコードに変更します[＃26225](https://github.com/pingcap/tidb/pull/26225)
-    -   古いクエリからのビューの作成を禁止する[＃26200](https://github.com/pingcap/tidb/pull/26200)
-    -   MPPモード[＃26194](https://github.com/pingcap/tidb/pull/26194)で`COUNT(DISTINCT)`集計機能を徹底的に押し下げます。
-    -   MPPクエリを起動する前にTiFlashの可用性を確認してください[＃26192](https://github.com/pingcap/tidb/pull/26192)
-    -   読み取りタイムスタンプを将来の時刻に設定することを許可しない[＃25763](https://github.com/pingcap/tidb/pull/25763)
-    -   集計関数を`EXPLAIN`のステートメントでプッシュダウンできない場合のログ警告の出力[＃25737](https://github.com/pingcap/tidb/pull/25737)
-    -   `statements_summary_evicted`のテーブルを追加して、クラスタ[＃25587](https://github.com/pingcap/tidb/pull/25587)の削除されたカウント情報を記録します。
-    -   フォーマット指定子[＃25768](https://github.com/pingcap/tidb/pull/25768)の組み込み関数`str_to_date`のMySQL互換性を改善し`%b/%M/%r/%T` 。
+    -   ステイル読み取り機能の一般提供 (GA) を発表
+    -   データ挿入を高速化するために`paramMarker`の割り当てを避ける[#26076](https://github.com/pingcap/tidb/pull/26076)
+    -   安定した結果モードをサポートして、クエリ結果をより安定させます[#25995](https://github.com/pingcap/tidb/pull/25995)
+    -   組み込み関数`json_unquote()`を TiKV [#26265](https://github.com/pingcap/tidb/pull/26265)にプッシュ ダウンするサポート
+    -   MPP クエリの再試行をサポート[#26480](https://github.com/pingcap/tidb/pull/26480)
+    -   `UPDATE`の読み取り[#26225](https://github.com/pingcap/tidb/pull/26225)に対して`point get`または`batch point get`を使用して、インデックス キーの`LOCK`レコードを`PUT`レコードに変更します。
+    -   古いクエリからのビューの作成を禁止する[#26200](https://github.com/pingcap/tidb/pull/26200)
+    -   `COUNT(DISTINCT)` MPPモードの集計機能を徹底的に押し下げる[#26194](https://github.com/pingcap/tidb/pull/26194)
+    -   MPP クエリを起動する前に、TiFlash の可用性を確認してください[#26192](https://github.com/pingcap/tidb/pull/26192)
+    -   読み取りタイムスタンプを将来の時刻に設定することを許可しない[#25763](https://github.com/pingcap/tidb/pull/25763)
+    -   集計関数を`EXPLAIN`ステートメントでプッシュダウンできない場合にログ警告を出力する[#25737](https://github.com/pingcap/tidb/pull/25737)
+    -   `statements_summary_evicted`テーブルを追加して、クラスターの削除されたカウント情報を記録します[#25587](https://github.com/pingcap/tidb/pull/25587)
+    -   フォーマット指定子の組み込み関数`str_to_date`の MySQL 互換性を向上させる`%b/%M/%r/%T` [#25768](https://github.com/pingcap/tidb/pull/25768)
 
 -   TiKV
 
-    -   未確定のエラーの可能性を減らすために、事前書き込み要求を可能な限りべき等にします[＃10586](https://github.com/tikv/tikv/pull/10586)
-    -   期限切れのコマンドを多数処理するときにスタックオーバーフローのリスクを防止する[＃10502](https://github.com/tikv/tikv/pull/10502)
-    -   [＃10451](https://github.com/tikv/tikv/pull/10451)リクエストの`start_ts`を使用して35を更新しないことにより、過度のコミットリクエストの再試行を回避し`max_ts` 。
-    -   読み取りの待ち時間を短縮するために、読み取り準備完了と書き込み準備完了を別々に処理します[＃10592](https://github.com/tikv/tikv/pull/10592)
-    -   I/Oレート制限が有効になっている場合のデータインポート速度への影響を減らす[＃10390](https://github.com/tikv/tikv/pull/10390)
-    -   Raft接続間の負荷分散を改善する[＃10495](https://github.com/tikv/tikv/pull/10495)
+    -   事前書き込み要求を可能な限り冪等にして、未確定エラーの可能性を減らします[#10586](https://github.com/tikv/tikv/pull/10586)
+    -   期限切れのコマンドを多数処理する際のスタック オーバーフローのリスクを回避する[#10502](https://github.com/tikv/tikv/pull/10502)
+    -   ステイル読み取りリクエストの`start_ts`から update `max_ts` [#10451](https://github.com/tikv/tikv/pull/10451)を使用しないことで、過剰な commit リクエストの再試行を回避します。
+    -   読み取り待機レイテンシーを短縮するために、読み取り準備完了と書き込み準備完了を別々に処理する[#10592](https://github.com/tikv/tikv/pull/10592)
+    -   I/O レート制限が有効になっている場合のデータ インポート速度への影響を軽減します[#10390](https://github.com/tikv/tikv/pull/10390)
+    -   Raft gRPC 接続間の負荷バランスを改善する[#10495](https://github.com/tikv/tikv/pull/10495)
 
 -   ツール
 
     -   TiCDC
 
-        -   [＃2327](https://github.com/pingcap/tiflow/pull/2327)を削除し`file sorter`
-        -   PDエンドポイントが証明書を見逃したときに返されるエラーメッセージを改善する[＃1973](https://github.com/pingcap/tiflow/issues/1973)
+        -   削除`file sorter` [#2327](https://github.com/pingcap/tiflow/pull/2327)
+        -   PD エンドポイントで証明書が見つからない場合に返されるエラー メッセージを改善します[#1973](https://github.com/pingcap/tiflow/issues/1973)
 
     -   TiDB Lightning
 
-        -   スキーマを復元するための再試行メカニズムを追加する[＃1294](https://github.com/pingcap/br/pull/1294)
+        -   スキーマを復元するための再試行メカニズムを追加する[#1294](https://github.com/pingcap/br/pull/1294)
 
     -   Dumpling
 
-        -   アップストリームがTiDBv3.xクラスタの場合は、常に`_tidb_rowid`を使用してテーブルを分割します。これにより、TiDBのメモリ使用量が削減されます[＃295](https://github.com/pingcap/dumpling/issues/295)
-        -   データベースメタデータにアクセスする頻度を減らして、Dumplingのパフォーマンスと安定性を向上させます[＃315](https://github.com/pingcap/dumpling/pull/315)
+        -   アップストリームが TiDB v3.x クラスターである場合は、常に`_tidb_rowid`を使用してテーブルを分割します。これにより、TiDB のメモリ使用量を削減できます[#295](https://github.com/pingcap/dumpling/issues/295)
+        -   Dumpling のパフォーマンスと安定性を向上させるために、データベースのメタデータにアクセスする頻度を減らします[#315](https://github.com/pingcap/dumpling/pull/315)
 
 ## バグの修正 {#bug-fixes}
 
 -   TiDB
 
-    -   列タイプを`tidb_enable_amend_pessimistic_txn=on`で変更するときに発生する可能性のあるデータ損失の問題を修正し[＃26203](https://github.com/pingcap/tidb/issues/26203)
-    -   `last_day`関数の動作がSQLモード[＃26001](https://github.com/pingcap/tidb/pull/26001)で互換性がないという問題を修正します
-    -   `LIMIT`がウィンドウ関数[＃25344](https://github.com/pingcap/tidb/issues/25344)の上にあるときに発生する可能性のあるpanicの問題を修正します
-    -   悲観的なトランザクションをコミットすると書き込みの競合が発生する可能性があるという問題を修正します[＃25964](https://github.com/pingcap/tidb/issues/25964)
-    -   相関サブクエリでのインデックス結合の結果が間違っている問題を修正します[＃25799](https://github.com/pingcap/tidb/issues/25799)
-    -   正常にコミットされたオプティミスティックトランザクションがコミットエラーを報告する可能性があるバグを修正します[＃10468](https://github.com/tikv/tikv/issues/10468)
-    -   `SET`タイプの列[＃25669](https://github.com/pingcap/tidb/issues/25669)でマージ結合を使用すると、誤った結果が返される問題を修正します。
-    -   悲観的なトランザクションのインデックスキーが繰り返しコミットされる可能性があるバグを修正します[＃26359](https://github.com/pingcap/tidb/issues/26359)
-    -   オプティマイザがパーティションを見つけているときの整数オーバーフローのリスクを修正します[＃26227](https://github.com/pingcap/tidb/issues/26227)
-    -   `DATE`をタイムスタンプ[＃26292](https://github.com/pingcap/tidb/issues/26292)にキャストするときに無効な値が書き込まれる可能性がある問題を修正します
-    -   コプロセッサーキャッシュメトリックがGrafana1に表示されない問題を修正し[＃26338](https://github.com/pingcap/tidb/issues/26338)
-    -   テレメトリによって引き起こされる迷惑なログの問題を修正し[＃25785](https://github.com/pingcap/tidb/issues/25785) [＃25760](https://github.com/pingcap/tidb/issues/25760)
-    -   プレフィックスインデックス[＃26029](https://github.com/pingcap/tidb/issues/26029)のクエリ範囲のバグを修正
-    -   同じパーティションを同時に切り捨てるとDDL実行がハングする問題を修正します[＃26229](https://github.com/pingcap/tidb/issues/26229)
-    -   重複`ENUM`アイテムの問題を修正[＃25955](https://github.com/pingcap/tidb/issues/25955)
-    -   CTEイテレータが正しく閉じられないバグを修正します[＃26112](https://github.com/pingcap/tidb/issues/26112)
-    -   `LOAD DATA`ステートメントがutf8以外のデータを異常にインポートする可能性がある問題を修正します[＃25979](https://github.com/pingcap/tidb/issues/25979)
-    -   符号なし整数列でウィンドウ関数を使用するときに発生する可能性のあるpanicの問題を修正します[＃25956](https://github.com/pingcap/tidb/issues/25956)
-    -   非同期コミットロックを解決するときにTiDBがpanicになる可能性がある問題を修正します[＃25778](https://github.com/pingcap/tidb/issues/25778)
-    -   StaleReadが`PREPARE`ステートメントと完全に互換性がないという問題を修正します[＃25800](https://github.com/pingcap/tidb/pull/25800)
-    -   ODBCスタイルの定数（たとえば、 `{d '2020-01-01'}` ）を式[＃25531](https://github.com/pingcap/tidb/issues/25531)として使用できない問題を修正します。
-    -   TiDBを単独で実行したときに発生するエラーを修正します[＃25555](https://github.com/pingcap/tidb/pull/25555)
+    -   列タイプを`tidb_enable_amend_pessimistic_txn=on` [#26203](https://github.com/pingcap/tidb/issues/26203)に変更したときに発生する可能性があるデータ損失の問題を修正します。
+    -   `last_day`関数の動作が SQL モード[#26001](https://github.com/pingcap/tidb/pull/26001)で互換性がない問題を修正
+    -   `LIMIT`がウィンドウ関数の上にあるときに発生する可能性があるpanicの問題を修正します[#25344](https://github.com/pingcap/tidb/issues/25344)
+    -   悲観的なトランザクションをコミットすると書き込み競合が発生する可能性がある問題を修正します[#25964](https://github.com/pingcap/tidb/issues/25964)
+    -   相関サブクエリのインデックス結合の結果が間違っている問題を修正[#25799](https://github.com/pingcap/tidb/issues/25799)
+    -   正常にコミットされた楽観的トランザクションがコミット エラーを報告する可能性があるバグを修正します[#10468](https://github.com/tikv/tikv/issues/10468)
+    -   `SET`型の列[#25669](https://github.com/pingcap/tidb/issues/25669)でマージ結合を使用すると、誤った結果が返される問題を修正します。
+    -   悲観的なトランザクションのインデックス キーが繰り返しコミットされる可能性があるバグを修正します[#26359](https://github.com/pingcap/tidb/issues/26359)
+    -   オプティマイザがパーティションを検索するときの整数オーバーフローのリスクを修正します[#26227](https://github.com/pingcap/tidb/issues/26227)
+    -   タイムスタンプ[#26292](https://github.com/pingcap/tidb/issues/26292)に`DATE`をキャストすると、無効な値が書き込まれる可能性がある問題を修正します。
+    -   Coprocessor Cache メトリックが Grafana [#26338](https://github.com/pingcap/tidb/issues/26338)で表示されない問題を修正します。
+    -   テレメトリによって発生する迷惑なログの問題を修正する[#25760](https://github.com/pingcap/tidb/issues/25760) [#25785](https://github.com/pingcap/tidb/issues/25785)
+    -   プレフィックス インデックス[#26029](https://github.com/pingcap/tidb/issues/26029)のクエリ範囲のバグを修正
+    -   同じパーティションを同時に切り捨てると DDL の実行がハングする問題を修正します[#26229](https://github.com/pingcap/tidb/issues/26229)
+    -   重複の問題を修正`ENUM`アイテム[#25955](https://github.com/pingcap/tidb/issues/25955)
+    -   CTE イテレータが正しく閉じられないバグを修正[#26112](https://github.com/pingcap/tidb/issues/26112)
+    -   `LOAD DATA`ステートメントが utf8 以外のデータを異常にインポートする可能性がある問題を修正します[#25979](https://github.com/pingcap/tidb/issues/25979)
+    -   符号なし整数列でウィンドウ関数を使用するときに発生する可能性があるpanicの問題を修正します[#25956](https://github.com/pingcap/tidb/issues/25956)
+    -   非同期コミット ロックを解決するときに TiDB がpanicになる可能性がある問題を修正します[#25778](https://github.com/pingcap/tidb/issues/25778)
+    -   ステイル読み取りが`PREPARE`ステートメントと完全に互換性がないという問題を修正します[#25800](https://github.com/pingcap/tidb/pull/25800)
+    -   ODBC スタイルの定数 (たとえば、 `{d '2020-01-01'}` ) を式[#25531](https://github.com/pingcap/tidb/issues/25531)として使用できないという問題を修正します。
+    -   TiDB単体で実行した際に発生するエラーを修正[#25555](https://github.com/pingcap/tidb/pull/25555)
 
 -   TiKV
 
-    -   特定のプラットフォームで期間の計算がpanicになる可能性がある問題を修正します[＃10569](https://github.com/tikv/tikv/pull/10569)
-    -   LoadBaseSplitが`batch_get_command`のエンコードされていないキーを誤って使用する問題を修正し[＃10542](https://github.com/tikv/tikv/issues/10542)
-    -   `resolved-ts.advance-ts-interval`構成をオンラインで変更してもすぐには有効にならないという問題を修正します[＃10426](https://github.com/tikv/tikv/issues/10426)
-    -   4つ以上のレプリカがあるまれなケースでのフォロワーメタデータの破損の問題を修正します[＃10225](https://github.com/tikv/tikv/issues/10225)
-    -   暗号化が有効になっている場合にスナップショットを2回作成するときに発生するpanicの問題を修正し[＃10407](https://github.com/tikv/tikv/issues/10407) [＃9786](https://github.com/tikv/tikv/issues/9786)
-    -   間違った`tikv_raftstore_hibernated_peer_state`メトリック[＃10330](https://github.com/tikv/tikv/issues/10330)を修正します
-    -   コプロセッサー[＃10176](https://github.com/tikv/tikv/issues/10176)の`json_unquote()`関数の間違った引数タイプを修正します
-    -   悲観的なトランザクションのインデックスキーが繰り返しコミットされる可能性があるバグを修正します[＃10468](https://github.com/tikv/tikv/issues/10468#issuecomment-869491061)
-    -   リーダーが転送された直後に`ReadIndex`リクエストが古い結果を返す問題を修正します[＃9351](https://github.com/tikv/tikv/issues/9351)
+    -   特定のプラットフォームで継続時間の計算がpanicになる問題を修正[#10569](https://github.com/tikv/tikv/pull/10569)
+    -   Load Base Split が`batch_get_command` [#10542](https://github.com/tikv/tikv/issues/10542)のエンコードされていないキーを誤って使用する問題を修正します。
+    -   `resolved-ts.advance-ts-interval`構成をオンラインで変更してもすぐに有効にならない問題を修正します[#10426](https://github.com/tikv/tikv/issues/10426)
+    -   レプリカが[#10225](https://github.com/tikv/tikv/issues/10225)つを超えると、まれにフォロワーのメタデータが破損する問題を修正します。
+    -   暗号化が有効になっている場合にスナップショットを 2 回作成すると発生するpanicの問題を修正します[#9786](https://github.com/tikv/tikv/issues/9786) [#10407](https://github.com/tikv/tikv/issues/10407)
+    -   間違った`tikv_raftstore_hibernated_peer_state`メトリクスを修正する[#10330](https://github.com/tikv/tikv/issues/10330)
+    -   コプロセッサ[#10176](https://github.com/tikv/tikv/issues/10176)の`json_unquote()`関数の間違った引数タイプを修正します。
+    -   悲観的なトランザクションのインデックス キーが繰り返しコミットされる可能性があるバグを修正します[#10468](https://github.com/tikv/tikv/issues/10468#issuecomment-869491061)
+    -   リーダーが転送された直後に`ReadIndex`リクエストが古い結果を返す問題を修正[#9351](https://github.com/tikv/tikv/issues/9351)
 
 -   PD
 
-    -   複数のスケジューラーが同時に実行されているために競合が発生した場合、予期されたスケジューリングを生成できない問題を修正します[＃3807](https://github.com/tikv/pd/issues/3807) [＃3778](https://github.com/tikv/pd/issues/3778)
-    -   スケジューラーが既に削除されている場合でも、スケジューラーが再び表示される可能性がある問題を修正します[＃2572](https://github.com/tikv/pd/issues/2572)
+    -   複数のスケジューラが同時に実行されているために競合が発生した場合に、期待されるスケジューリングが生成されない問題を修正します[#3807](https://github.com/tikv/pd/issues/3807) [#3778](https://github.com/tikv/pd/issues/3778)
+    -   スケジューラーを削除しても再度スケジューラーが表示されることがある問題を修正[#2572](https://github.com/tikv/pd/issues/2572)
 
--   TiFlash
+-   ティフラッシュ
 
-    -   テーブルスキャンタスクの実行時に発生する可能性のあるpanicの問題を修正します
-    -   DAQリクエストを処理するときにTiFlashが約`duplicated region`のエラーを発生させるバグを修正します
-    -   読み取り負荷が大きいときに発生するpanicの問題を修正します
-    -   `DateFormat`関数の実行時に発生する可能性のあるpanicの問題を修正します
-    -   MPPタスクの実行時に発生する可能性のあるメモリリークの問題を修正します
-    -   集計関数`COUNT`または`COUNT DISTINCT`を実行するときに予期しない結果が発生する問題を修正しました
-    -   複数のディスクに展開したときにTiFlashがデータを復元できない潜在的なバグを修正します
-    -   TiDBダッシュボードがTiFlashのディスク情報を正しく表示できない問題を修正します
-    -   `SharedQueryBlockInputStream`を解体するときに発生する可能性のあるpanicの問題を修正します
-    -   `MPPTask`を解体するときに発生する可能性のあるpanicの問題を修正します
-    -   スナップショットを介してデータを同期した後のデータの不整合の潜在的な問題を修正します
+    -   テーブル スキャン タスクの実行時に発生する潜在的なpanicの問題を修正します。
+    -   TiFlash が DAQ リクエストの処理時に`duplicated region`程度のエラーを発生させるバグを修正
+    -   読み取り負荷が高い場合に発生するpanicの問題を修正
+    -   `DateFormat`関数の実行時に発生する潜在的なpanicの問題を修正します。
+    -   MPP タスクの実行時に発生する潜在的なメモリ リークの問題を修正します。
+    -   集計関数`COUNT`または`COUNT DISTINCT`を実行したときに予期しない結果が生じる問題を修正
+    -   複数のディスクに展開されたときに TiFlash がデータを復元できないという潜在的なバグを修正します
+    -   TiDB ダッシュボードで TiFlash のディスク情報が正しく表示されない問題を修正
+    -   分解時に発生する潜在的なpanicの問題を修正します`SharedQueryBlockInputStream`
+    -   分解時に発生する潜在的なpanicの問題を修正します`MPPTask`
+    -   スナップショットを介してデータを同期した後にデータの不整合が発生する可能性がある問題を修正
 
 -   ツール
 
     -   TiCDC
 
-        -   新しい照合順序機能のサポートを修正する[＃2301](https://github.com/pingcap/tiflow/issues/2301)
-        -   実行時に共有マップへの非同期アクセスがpanicを引き起こす可能性がある問題を修正します[＃2300](https://github.com/pingcap/tiflow/pull/2300)
-        -   DDLステートメントの実行中に所有者がクラッシュしたときに発生する可能性のあるDDL損失の問題を修正します[＃2290](https://github.com/pingcap/tiflow/pull/2290)
-        -   TiDBのロックを時期尚早に解決しようとする問題を修正します[＃2188](https://github.com/pingcap/tiflow/issues/2188)
-        -   テーブルの移行直後にTiCDCノードが強制終了された場合にデータが失われる可能性があるバグを修正します[＃2033](https://github.com/pingcap/tiflow/pull/2033)
-        -   `changefeed update`および`--start-ts`の処理[＃1921](https://github.com/pingcap/tiflow/pull/1921)を修正し`--sort-dir` 。
+        -   新しい照合順序機能のサポートを修正します[#2301](https://github.com/pingcap/tiflow/issues/2301)
+        -   実行時に共有マップへの非同期アクセスが原因でpanic[#2300](https://github.com/pingcap/tiflow/pull/2300)が発生する可能性がある問題を修正します。
+        -   DDL ステートメントの実行中に所有者がクラッシュしたときに発生する潜在的な DDL 損失の問題を修正します[#2290](https://github.com/pingcap/tiflow/pull/2290)
+        -   TiDB のロックを時期尚早に解決しようとする問題を修正します[#2188](https://github.com/pingcap/tiflow/issues/2188)
+        -   テーブルの移行直後に TiCDC ノードが強制終了された場合にデータが失われる可能性があるバグを修正します[#2033](https://github.com/pingcap/tiflow/pull/2033)
+        -   `changefeed update` on `--sort-dir`と`--start-ts` [#1921](https://github.com/pingcap/tiflow/pull/1921)の処理ロジックを修正
 
-    -   バックアップと復元（BR）
+    -   バックアップと復元 (BR)
 
-        -   復元するデータのサイズが正しく計算されない問題を修正します[＃1270](https://github.com/pingcap/br/issues/1270)
-        -   cdclog1からの復元時に発生するDDLイベントの欠落の問題を修正し[＃870](https://github.com/pingcap/br/issues/870)
+        -   復元するデータのサイズが正しく計算されない問題を修正します[#1270](https://github.com/pingcap/br/issues/1270)
+        -   cdclog [#870](https://github.com/pingcap/br/issues/870)から復元するときに発生する DDL イベントの欠落の問題を修正します。
 
     -   TiDB Lightning
 
-        -   TiDBがParquetファイル[＃1275](https://github.com/pingcap/br/pull/1275)の`DECIMAL`型データの解析に失敗する問題を修正します
-        -   キー間隔を計算するときの整数オーバーフローの問題を修正し[＃1290](https://github.com/pingcap/br/issues/1290) [＃1291](https://github.com/pingcap/br/issues/1291)
+        -   TiDB が Parquet ファイルの`DECIMAL`型データの解析に失敗する問題を修正[#1275](https://github.com/pingcap/br/pull/1275)
+        -   キー間隔を計算するときの整数オーバーフローの問題を修正します[#1291](https://github.com/pingcap/br/issues/1291) [#1290](https://github.com/pingcap/br/issues/1290)

@@ -14,9 +14,9 @@ summary: Learn about how to update data and batch update data.
 
 このドキュメントを読む前に、次の準備が必要です。
 
--   [TiDB Cloud(開発者層) で TiDB クラスターを構築する](/develop/dev-guide-build-cluster-in-cloud.md) .
+-   [TiDB Cloud(開発者層) で TiDBクラスタを構築する](/develop/dev-guide-build-cluster-in-cloud.md) .
 -   [スキーマ設計の概要](/develop/dev-guide-schema-design-overview.md) 、 [データベースを作成する](/develop/dev-guide-create-database.md) 、 [テーブルを作成する](/develop/dev-guide-create-table.md) 、および[セカンダリ インデックスの作成](/develop/dev-guide-create-secondary-indexes.md)を読んでください。
--   データを`UPDATE`にしたい場合は、最初に[データを挿入する](/develop/dev-guide-insert-data.md)にする必要があります。
+-   データを`UPDATE`つにしたい場合は、まず[データを挿入する](/develop/dev-guide-insert-data.md)にする必要があります。
 
 ## <code>UPDATE</code>を使用する {#use-code-update-code}
 
@@ -60,7 +60,7 @@ UPDATE {table} SET {update_column} = {update_value} WHERE {filter_column} = {fil
 
 <CustomContent platform="tidb-cloud">
 
--   多数の行 (たとえば、1 万行以上) を更新する必要がある場合は、 [一括更新](#bulk-update)を使用します。 TiDB はデフォルトで 1 つのトランザクションのサイズを 100 MB に制限しているため、一度に多くのデータを更新すると、ロックが長時間保持されたり ( [悲観的な取引](/pessimistic-transaction.md) )、競合が発生したりします ( [楽観的な取引](/optimistic-transaction.md) )。
+-   多数の行 (たとえば、1 万行以上) を更新する必要がある場合は、 [一括更新](#bulk-update)を使用します。 TiDB はデフォルトで 1 つのトランザクションのサイズを 100 MB に制限しているため、一度に多くのデータ更新を行うと、ロックが長時間保持されたり ( [悲観的な取引](/pessimistic-transaction.md) )、競合が発生したりします ( [楽観的な取引](/optimistic-transaction.md) )。
 
 </CustomContent>
 
@@ -123,12 +123,12 @@ INSERT INTO {table} ({columns}) VALUES ({values})
 
 ### <code>INSERT ON DUPLICATE KEY UPDATE</code>のベスト プラクティス {#code-insert-on-duplicate-key-update-code-best-practices}
 
--   一意のキーが 1 つのテーブルにのみ`INSERT ON DUPLICATE KEY UPDATE`を使用します。 ***UNIQUE KEY*** (主キーを含む) の競合が検出された場合、このステートメントはデータを更新します。複数行の競合がある場合は、1 行のみが更新されます。したがって、競合する行が 1 行だけであることを保証できない限り、複数の一意のキーを持つテーブルで`INSERT ON DUPLICATE KEY UPDATE`ステートメントを使用することはお勧めしません。
+-   一意のキーが 1 つのテーブルにのみ`INSERT ON DUPLICATE KEY UPDATE`を使用します。 ***UNIQUE KEY*** (主キーを含む) の競合が検出された場合、このステートメントはデータを更新します。複数行の競合がある場合は、1 行のみが更新されます。したがって、競合する行が 1 つだけであることを保証できない限り、複数の一意のキーを持つテーブルで`INSERT ON DUPLICATE KEY UPDATE`ステートメントを使用することはお勧めしません。
 -   データを作成または更新するときに、このステートメントを使用します。
 
 ### <code>INSERT ON DUPLICATE KEY UPDATE</code>例 {#code-insert-on-duplicate-key-update-code-example}
 
-たとえば、書籍に対するユーザーの評価を含めるように[評価](/develop/dev-guide-bookshop-schema-design.md#ratings-table)テーブルを更新する必要があります。ユーザーがまだ本を評価していない場合は、新しい評価が作成されます。ユーザーが既に評価している場合、以前の評価が更新されます。
+たとえば、書籍に対するユーザーの評価を含めるように[評価](/develop/dev-guide-bookshop-schema-design.md#ratings-table)テーブルを更新する必要があります。ユーザーがまだ書籍を評価していない場合は、新しい評価が作成されます。ユーザーが既に評価している場合、以前の評価が更新されます。
 
 次の例では、主キーは`book_id`と`user_id`の結合主キーです。ユーザ`user_id = 1`は本`book_id = 1000`に`5`の評価を与える。
 
@@ -172,7 +172,7 @@ VALUES (?, ?, ?, NOW()) ON DUPLICATE KEY UPDATE `score` = ?, `rated_at` = NOW()"
 
 ## 一括更新 {#bulk-update}
 
-テーブル内の複数行のデータを更新する必要がある場合は、 [`INSERT ON DUPLICATE KEY UPDATE`を使用する](#use-insert-on-duplicate-key-update)と`WHERE`句を使用して、更新が必要なデータをフィルター処理できます。
+テーブル内の複数行のデータを更新する必要がある場合、 [`INSERT ON DUPLICATE KEY UPDATE`を使用する](#use-insert-on-duplicate-key-update)と`WHERE`節を使用して、更新が必要なデータをフィルター処理できます。
 
 <CustomContent platform="tidb">
 
@@ -194,11 +194,11 @@ VALUES (?, ?, ?, NOW()) ON DUPLICATE KEY UPDATE `score` = ?, `rated_at` = NOW()"
 
 ### 例 {#example}
 
-過去 1 年間に`bookshop`の Web サイトで多くのユーザーから本の評価があったとしますが、元のデザインの 5 段階スケールでは、本の評価に違いがありませんでした。ほとんどの本の評価は`3`です。評価を差別化するために、5 点満点から 10 点満点に切り替えることにしました。
+過去 1 年間に`bookshop`の Web サイトで多くのユーザーから本の評価があったとしますが、元のデザインの 5 段階評価では、本の評価に違いがありませんでした。ほとんどの本の評価は`3`です。評価を差別化するために、5 点満点から 10 点満点に切り替えることにしました。
 
-前の 5 ポイント スケールの`ratings`テーブルのデータに`2`を掛け、評価テーブルに新しい列を追加して、行が更新されたかどうかを示す必要があります。この列を使用すると、 `SELECT`で更新された行を除外できます。これにより、スクリプトがクラッシュして複数回行を更新し、不合理なデータが生成されるのを防ぐことができます。
+前の 5 ポイント スケールの`ratings`テーブルのデータに`2`を掛け、評価テーブルに新しい列を追加して、行が更新されたかどうかを示す必要があります。この列を使用すると、 `SELECT`で更新された行をフィルターで除外できます。これにより、スクリプトがクラッシュして複数回行を更新し、不合理なデータが生成されるのを防ぐことができます。
 
-たとえば、10 ポイント スケールかどうかの識別子としてデータ型[ブール](/data-type-numeric.md#boolean-type)を持つ`ten_point`という名前の列を作成します。
+たとえば、10 ポイント スケールかどうかの識別子としてデータ型[ブール](/data-type-numeric.md#boolean-type)を使用して、 `ten_point`という名前の列を作成します。
 
 {{< copyable "" >}}
 

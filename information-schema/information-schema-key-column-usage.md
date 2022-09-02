@@ -5,7 +5,7 @@ summary: Learn the `KEY_COLUMN_USAGE` information_schema table.
 
 # KEY_COLUMN_USAGE {#key-column-usage}
 
-`KEY_COLUMN_USAGE`の表は、主キー制約など、列のキー制約を示しています。
+`KEY_COLUMN_USAGE`の表は、主キー制約など、列のキー制約について説明しています。
 
 {{< copyable "" >}}
 
@@ -72,15 +72,15 @@ POSITION_IN_UNIQUE_CONSTRAINT: NULL
 
 `KEY_COLUMN_USAGE`テーブルの列の説明は次のとおりです。
 
--   `CONSTRAINT_CATALOG` ：制約が属するカタログの名前。値は常に`def`です。
--   `CONSTRAINT_SCHEMA` ：制約が属するスキーマの名前。
--   `CONSTRAINT_NAME` ：制約の名前。
--   `TABLE_CATALOG` ：テーブルが属するカタログの名前。値は常に`def`です。
--   `TABLE_SCHEMA` ：テーブルが属するスキーマの名前。
--   `TABLE_NAME` ：制約のあるテーブルの名前。
--   `COLUMN_NAME` ：制約のある列の名前。
--   `ORDINAL_POSITION` ：テーブルではなく、制約内の列の位置。位置番号は`1`から始まります。
--   `POSITION_IN_UNIQUE_CONSTRAINT` ：一意性制約と主キー制約は空です。外部キー制約の場合、この列は参照されるテーブルのキーの位置です。
--   `REFERENCED_TABLE_SCHEMA` ：制約によって参照されるスキーマの名前。現在TiDBでは、外部キー制約を除いて、すべての制約におけるこの列の値は`nil`です。
--   `REFERENCED_TABLE_NAME` ：制約によって参照されるテーブルの名前。現在TiDBでは、外部キー制約を除いて、すべての制約におけるこの列の値は`nil`です。
--   `REFERENCED_COLUMN_NAME` ：制約によって参照される列の名前。現在TiDBでは、外部キー制約を除いて、すべての制約におけるこの列の値は`nil`です。
+-   `CONSTRAINT_CATALOG` : 制約が属するカタログの名前。値は常に`def`です。
+-   `CONSTRAINT_SCHEMA` : 制約が属するスキーマの名前。
+-   `CONSTRAINT_NAME` : 制約の名前。
+-   `TABLE_CATALOG` : テーブルが属するカタログの名前。値は常に`def`です。
+-   `TABLE_SCHEMA` : テーブルが属するスキーマの名前。
+-   `TABLE_NAME` : 制約のあるテーブルの名前。
+-   `COLUMN_NAME` : 制約のある列の名前。
+-   `ORDINAL_POSITION` : テーブル内ではなく、制約内の列の位置。位置番号は`1`から始まります。
+-   `POSITION_IN_UNIQUE_CONSTRAINT` : ユニーク制約と主キー制約は空です。外部キー制約の場合、この列は参照されるテーブルのキーの位置です。
+-   `REFERENCED_TABLE_SCHEMA` : 制約によって参照されるスキーマの名前。現在 TiDB では、外部キー制約を除くすべての制約でのこの列の値は`nil`です。
+-   `REFERENCED_TABLE_NAME` : 制約によって参照されるテーブルの名前。現在 TiDB では、外部キー制約を除くすべての制約でのこの列の値は`nil`です。
+-   `REFERENCED_COLUMN_NAME` : 制約によって参照される列の名前。現在 TiDB では、外部キー制約を除くすべての制約でのこの列の値は`nil`です。

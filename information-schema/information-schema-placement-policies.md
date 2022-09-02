@@ -5,7 +5,7 @@ summary: Learn the `PLACEMENT_POLICIES` information_schema table.
 
 # PLACEMENT_POLICIES {#placement-policies}
 
-`PLACEMENT_POLICIES`の表は、すべての配置ポリシーに関する情報を提供します。詳しくは[SQLでの配置ルール](/placement-rules-in-sql.md)をご覧ください。
+`PLACEMENT_POLICIES`番目の表は、すべての配置ポリシーに関する情報を提供します。詳細は[SQL の配置規則](/placement-rules-in-sql.md)を参照してください。
 
 {{< copyable "" >}}
 
@@ -36,7 +36,7 @@ DESC placement_policies;
 
 ## 例 {#examples}
 
-`PLACEMENT_POLICIES`の表には、すべての配置ポリシーのみが表示されます。配置ルールの正規バージョン（すべての配置ポリシーと配置ポリシーが割り当てられたオブジェクトを含む）を表示するには、代わりにステートメント`SHOW PLACEMENT`を使用します。
+`PLACEMENT_POLICIES`の表には、すべての配置ポリシーのみが表示されます。配置ルールの標準バージョン (配置ポリシーが割り当てられたすべての配置ポリシーとオブジェクトを含む) を表示するには、代わりにステートメント`SHOW PLACEMENT`を使用します。
 
 {{< copyable "" >}}
 

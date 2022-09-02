@@ -22,7 +22,7 @@ Java アプリケーション開発に関するその他のヒントに興味が
 
 TiDB (MySQL) 接続の構築は比較的高価です (少なくとも OLTP シナリオの場合)。 TCP 接続の構築に加えて、接続認証も必要になるためです。したがって、クライアントは通常、再利用のために TiDB (MySQL) 接続を接続プールに保存します。
 
-Java には、 [光CP](https://github.com/brettwooldridge/HikariCP) 、 [tomcat-jdbc](https://tomcat.apache.org/tomcat-7.0-doc/jdbc-pool.html) 、 [ドルイド](https://github.com/alibaba/druid) 、 [c3p0](https://www.mchange.com/projects/c3p0/) 、および[dbcp](https://commons.apache.org/proper/commons-dbcp/)などの多くの接続プールの実装があります。 TiDB は使用する接続プールを制限しないため、アプリケーションに合わせて好きなものを選択できます。
+Java には、 [光CP](https://github.com/brettwooldridge/HikariCP) 、 [tomcat-jdbc](https://tomcat.apache.org/tomcat-7.0-doc/jdbc-pool.html) 、 [ドルイド](https://github.com/alibaba/druid) 、 [c3p0](https://www.mchange.com/projects/c3p0/) 、および[dbcp](https://commons.apache.org/proper/commons-dbcp/)などの多くの接続プールの実装があります。 TiDB は、使用する接続プールを制限しないため、アプリケーションに合わせて好きなものを選択できます。
 
 ### 接続数を構成する {#configure-the-number-of-connections}
 
@@ -55,7 +55,7 @@ The last packet sent successfully to the server was 3600000 milliseconds ago. Th
 
 ### 経験に基づく公式 {#formulas-based-on-experience}
 
-HikariCP の[プールのサイジングについて](https://github.com/brettwooldridge/HikariCP/wiki/About-Pool-Sizing)の記事によると、データベース接続プールの適切なサイズを設定する方法がわからない場合は、 [経験に基づく公式](https://github.com/brettwooldridge/HikariCP/wiki/About-Pool-Sizing#connections--core_count--2--effective_spindle_count)から始めることができます。次に、式から計算されたプール サイズのパフォーマンス結果に基づいて、サイズをさらに調整して、最高のパフォーマンスを実現できます。
+HikariCP の[プールのサイジングについて](https://github.com/brettwooldridge/HikariCP/wiki/About-Pool-Sizing)の記事によると、データベース接続プールの適切なサイズを設定する方法がわからない場合は、 [経験に基づく公式](https://github.com/brettwooldridge/HikariCP/wiki/About-Pool-Sizing#connections--core_count--2--effective_spindle_count)から始めることができます。次に、式から計算されたプール サイズのパフォーマンス結果に基づいて、最適なパフォーマンスを実現するためにサイズをさらに調整できます。
 
 経験に基づいた式は次のとおりです。
 
@@ -67,7 +67,7 @@ connections = ((core_count * 2) + effective_spindle_count)
 
 -   **connections** : 取得した接続のサイズ。
 -   **core_count** : CPU コアの数。
--   **effective_spindle_count** : ハード ドライブの数 ( [SSD](https://en.wikipedia.org/wiki/Solid-state_drive)ではありません)。回転する各ハードディスクをスピンドルと呼ぶことができるからです。たとえば、16 ディスクの RAID を備えたサーバーを使用している場合、 <strong>effective_spindle_count</strong>は 16 にする必要があります。通常、 <strong>HDD</strong>は一度に 1 つの要求しか処理できないため、ここでの式は、サーバーが同時に処理できる I/O 要求の数を実際に測定しています。管理。
+-   **effective_spindle_count** : ハード ドライブの数 ( [SSD](https://en.wikipedia.org/wiki/Solid-state_drive)ではありません)。回転する各ハードディスクをスピンドルと呼ぶことができるからです。たとえば、16 ディスクの RAID を備えたサーバーを使用している場合、 <strong>effective_spindle_count</strong>は 16 にする必要があります<strong>。HDD</strong>は通常、一度に 1 つの要求しか処理できないため、ここでの式は、サーバーが同時に処理できる I/O 要求の数を実際に測定しています。管理。
 
 特に、 [方式](https://github.com/brettwooldridge/HikariCP/wiki/About-Pool-Sizing#the-formula)の下の次の注意事項に注意してください。
 
@@ -101,12 +101,12 @@ connections = (number of cores * 4)
 
 最適なサイズを得るのに役立ついくつかの基本的なルールを次に示します。
 
--   ネットワークまたはストレージの待ち時間が長い場合は、接続の最大数を増やして待ち時間を短縮します。スレッドが待機時間によってブロックされると、他のスレッドが引き継ぎ、処理を続行できます。
+-   ネットワークまたはストレージのレイテンシーが長い場合は、接続の最大数を増やしてレイテンシーを短縮します。スレッドがレイテンシーによってブロックされると、他のスレッドが引き継ぎ、処理を続行できます。
 -   サーバーに複数のサービスがデプロイされていて、各サービスに個別の接続プールがある場合は、すべての接続プールへの最大接続数の合計を考慮してください。
 
 ## 接続パラメータ {#connection-parameters}
 
-Java アプリケーションは、さまざまなフレームワークでカプセル化できます。ほとんどのフレームワークでは、JDBC API が最下位レベルで呼び出され、データベース サーバーと対話します。 JDBC の場合、次の点に注目することをお勧めします。
+Java アプリケーションは、さまざまなフレームワークでカプセル化できます。ほとんどのフレームワークでは、JDBC API が最下位レベルで呼び出され、データベースサーバーと対話します。 JDBC の場合、次の点に注目することをお勧めします。
 
 -   JDBC API の使用方法の選択
 -   API 実装者のパラメーター構成
@@ -121,21 +121,21 @@ OLTP (オンライン トランザクション処理) シナリオの場合、�
 
 現在、ほとんどの上位レベルのフレームワークは、SQL 実行のために Prepare API を呼び出します。開発に JDBC API を直接使用する場合は、Prepare API の選択に注意してください。
 
-さらに、MySQL Connector/J のデフォルトの実装では、クライアント側のステートメントのみが前処理され、ステートメントはクライアントで`?`が置き換えられた後、テキスト ファイルでサーバーに送信されます。したがって、Prepare API を使用することに加えて、TiDB サーバーでステートメントの前処理を実行する前に、JDBC 接続パラメーターで`useServerPrepStmts = true`も構成する必要があります。詳細なパラメータ設定については、 [MySQL JDBC パラメータ](#mysql-jdbc-parameters)を参照してください。
+さらに、MySQL Connector/J のデフォルトの実装では、クライアント側のステートメントのみが前処理され、ステートメントはクライアントで`?`が置き換えられた後、テキスト ファイルでサーバーに送信されます。したがって、Prepare API の使用に加えて、TiDBサーバーでステートメントの前処理を実行する前に、JDBC 接続パラメーターで`useServerPrepStmts = true`も構成する必要があります。詳細なパラメータ設定については、 [MySQL JDBC パラメータ](#mysql-jdbc-parameters)を参照してください。
 
 #### バッチ API を使用する {#use-batch-api}
 
-バッチ挿入の場合は、 [`addBatch` / <code>executeBatch</code> API](https://www.tutorialspoint.com/jdbc/jdbc-batch-processing)を使用できます。 `addBatch()`メソッドは、複数の SQL ステートメントを最初にクライアントにキャッシュし、次に`executeBatch`メソッドを呼び出すときにそれらを一緒にデータベース サーバーに送信するために使用されます。
+バッチ挿入の場合は、 [`addBatch` / <code>executeBatch</code> API](https://www.tutorialspoint.com/jdbc/jdbc-batch-processing)を使用できます。メソッド`addBatch()`は、最初に複数の SQL ステートメントをクライアントにキャッシュし、次にメソッド`executeBatch`を呼び出すときにそれらを一緒にデータベースサーバーに送信するために使用されます。
 
 > **ノート：**
 >
-> デフォルトの MySQL Connector/J 実装では、 `addBatch()`でバッチに追加された SQL ステートメントの送信時刻は`executeBatch()`が呼び出される時刻まで遅れますが、実際のネットワーク転送中にステートメントは 1 つずつ送信されます。したがって、この方法では通常、通信オーバーヘッドの量は減少しません。
+> デフォルトの MySQL Connector/J 実装では、 `addBatch()`でバッチに追加された SQL ステートメントの送信時刻は`executeBatch()`が呼び出される時刻まで遅延しますが、実際のネットワーク転送中にステートメントは 1 つずつ送信されます。したがって、この方法では通常、通信オーバーヘッドの量は減少しません。
 >
 > ネットワーク転送をバッチ処理する場合は、JDBC 接続パラメーターで`rewriteBatchedStatements = true`を構成する必要があります。詳細なパラメータ設定については、 [バッチ関連のパラメーター](#batch-related-parameters)を参照してください。
 
 #### <code>StreamingResult</code>を使用して実行結果を取得する {#use-code-streamingresult-code-to-get-the-execution-result}
 
-ほとんどのシナリオでは、実行効率を向上させるために、JDBC は事前にクエリ結果を取得し、デフォルトでクライアント メモリに保存します。しかし、クエリが非常に大きな結果セットを返す場合、クライアントは、データベース サーバーに一度に返されるレコードの数を減らして、クライアントのメモリの準備が整い、次のバッチを要求するまで待機することがよくあります。
+ほとんどのシナリオでは、実行効率を向上させるために、JDBC は事前にクエリ結果を取得し、デフォルトでクライアント メモリに保存します。しかし、クエリが非常に大きな結果セットを返す場合、クライアントはデータベースサーバーに一度に返されるレコードの数を減らすことを要求し、クライアントのメモリの準備が整い、次のバッチを要求するまで待機します。
 
 通常、JDBC には 2 種類の処理方法があります。
 
@@ -159,7 +159,7 @@ JDBC は通常、JDBC URL パラメータの形式で実装関連の構成を提
 
 -   **useServerPrepStmts**
 
-    **useServerPrepStmts**はデフォルトで`false`に設定されています。つまり、Prepare API を使用した場合でも、「準備」操作はクライアントでのみ行われます。サーバーの解析オーバーヘッドを回避するために、同じ SQL ステートメントが Prepare API を複数回使用する場合は、この構成を`true`に設定することをお勧めします。
+    **useServerPrepStmts**はデフォルトで`false`に設定されています。つまり、Prepare API を使用した場合でも、「準備」操作はクライアントでのみ行われます。サーバーの解析オーバーヘッドを回避するために、同じ SQL ステートメントで Prepare API を複数回使用する場合は、この構成を`true`に設定することをお勧めします。
 
     この設定が既に有効になっていることを確認するには、次のようにします。
 
@@ -273,7 +273,7 @@ UPDATE `t` SET `a` = 10 WHERE `id` = 1; UPDATE `t` SET `a` = 11 WHERE `id` = 2; 
 
 #### パラメータを統合する {#integrate-parameters}
 
-監視を通じて、アプリケーションが TiDBクラスタに対して`INSERT`の操作しか実行しないにもかかわらず、冗長な`SELECT`のステートメントが多数あることに気付く場合があります。通常、これは、JDBC がいくつかの SQL ステートメントを送信して設定を照会するために発生します (例: `select @@session.transaction_read_only` )。これらの SQL ステートメントは TiDB には役に立たないため、余分なオーバーヘッドを避けるために`useConfigs=maxPerformance`を構成することをお勧めします。
+監視を通じて、アプリケーションが TiDB クラスターに対して`INSERT`の操作しか実行しないにもかかわらず、冗長な`SELECT`のステートメントが多数あることに気付く場合があります。通常、これは、JDBC が`select @@session.transaction_read_only`などの設定をクエリするためにいくつかの SQL ステートメントを送信するために発生します。これらの SQL ステートメントは TiDB には役に立たないため、余分なオーバーヘッドを避けるために`useConfigs=maxPerformance`を構成することをお勧めします。
 
 `useConfigs=maxPerformance`構成には、構成のグループが含まれます。
 
@@ -289,6 +289,6 @@ enableQueryTimeouts=false
 
 #### タイムアウト関連のパラメーター {#timeout-related-parameters}
 
-TiDB は、タイムアウトを制御する 2 つの MySQL 互換パラメーターを提供します: [`wait_timeout`](/system-variables.md#wait_timeout)と[`max_execution_time`](/system-variables.md#max_execution_time) 。これらの 2 つのパラメータは、Java アプリケーションとの接続アイドル タイムアウトと、接続での SQL 実行のタイムアウトをそれぞれ制御します。つまり、これらのパラメータは、TiDB と Java アプリケーション間の接続の最長アイドル時間と最長ビジー時間を制御します。 TiDB v5.4 以降、デフォルト値の`wait_timeout`は`28800`秒、つまり 8 時間です。 v5.4 より前のバージョンの TiDB の場合、デフォルト値は`0`です。これは、タイムアウトが無制限であることを意味します。デフォルト値`max_execution_time`は`0`です。これは、SQL ステートメントの最大実行時間が無制限であることを意味します。
+TiDB は、タイムアウトを制御する 2 つの MySQL 互換パラメーターを提供します: [`wait_timeout`](/system-variables.md#wait_timeout)と[`max_execution_time`](/system-variables.md#max_execution_time) 。これら 2 つのパラメータは、Java アプリケーションとの接続アイドル タイムアウトと、接続での SQL 実行のタイムアウトをそれぞれ制御します。つまり、これらのパラメータは、TiDB と Java アプリケーション間の接続の最長アイドル時間と最長ビジー時間を制御します。 TiDB v5.4 以降、デフォルト値の`wait_timeout`は`28800`秒、つまり 8 時間です。 v5.4 より前のバージョンの TiDB の場合、デフォルト値は`0`です。これは、タイムアウトが無制限であることを意味します。デフォルト値`max_execution_time`は`0`です。これは、SQL ステートメントの最大実行時間が無制限であることを意味します。
 
-ただし、実際の運用環境では、アイドル接続や実行時間が過度に長い SQL ステートメントは、データベースやアプリケーションに悪影響を及ぼします。アイドル状態の接続と長時間実行される SQL ステートメントを回避するために、アプリケーションの接続文字列でこれら 2 つのパラメーターを構成できます。たとえば、 `sessionVariables=wait_timeout=3600` (1 時間) と`sessionVariables=max_execution_time=300000` (5 分) を設定します。
+ただし、実際の本番環境では、アイドル接続や実行時間が過度に長い SQL ステートメントは、データベースやアプリケーションに悪影響を及ぼします。アイドル状態の接続と長時間実行される SQL ステートメントを回避するために、アプリケーションの接続文字列でこれら 2 つのパラメーターを構成できます。たとえば、 `sessionVariables=wait_timeout=3600` (1 時間) と`sessionVariables=max_execution_time=300000` (5 分) を設定します。

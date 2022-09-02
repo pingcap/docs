@@ -1,9 +1,9 @@
 ---
-title: TiDB FAQ
+title: TiDB Architecture FAQs
 summary: Learn about the most frequently asked questions (FAQs) relating to TiDB.
 ---
 
-# TiDBFAQ {#tidb-faq}
+# TiDBアーキテクチャに関するよくある質問 {#tidb-architecture-faqs}
 
 <!-- markdownlint-disable MD026 -->
 
@@ -17,7 +17,7 @@ TiDB は、水平スケーラビリティ、高可用性、および一貫した
 
 ### TiDB のアーキテクチャとは? {#what-is-tidb-s-architecture}
 
-TiDBクラスタには、TiDB サーバー、PD (Placement Driver) サーバー、および TiKV サーバーの 3 つのコンポーネントがあります。詳細については、 [TiDBアーキテクチャ](/tidb-architecture.md)を参照してください。
+TiDB クラスターには、TiDBサーバー、PD (Placement Driver)サーバー、および TiKVサーバーの 3 つのコンポーネントがあります。詳細については、 [TiDBアーキテクチャ](/tidb-architecture.md)を参照してください。
 
 ### TiDB は MySQL をベースにしていますか? {#is-tidb-based-on-mysql}
 
@@ -25,13 +25,13 @@ TiDBクラスタには、TiDB サーバー、PD (Placement Driver) サーバー�
 
 ### TiDB、TiKV、PD (Placement Driver) のそれぞれの責任は何ですか? {#what-is-the-respective-responsibility-of-tidb-tikv-and-pd-placement-driver}
 
--   TiDB は SQL コンピューティング レイヤーとして機能し、主に SQL の解析、クエリ プランの指定、エグゼキューターの生成を担当します。
+-   TiDB は SQL コンピューティングレイヤーとして機能し、主に SQL の解析、クエリ プランの指定、エグゼキューターの生成を担当します。
 -   TiKV は、実際のデータを格納するために使用される分散 Key-Value ストレージ エンジンとして機能します。つまり、TiKV は TiDB のストレージ エンジンです。
--   PD は、TiKV メタデータを管理し、タイムスタンプを割り当て、データの配置と負荷分散を決定する TiDB のクラスタマネージャーとして機能します。
+-   PD は、TiKV メタデータの管理、タイムスタンプの割り当て、データの配置と負荷分散の決定を行う TiDB のクラスター マネージャーとして機能します。
 
 ### TiDB は使いやすいですか？ {#is-it-easy-to-use-tidb}
 
-はい、そうです。必要なすべてのサービスが開始されると、MySQL サーバーと同じくらい簡単に TiDB を使用できます。ほとんどの場合、コードを 1 行も変更することなく、MySQL を TiDB に置き換えてアプリケーションを強化できます。また、人気のある MySQL 管理ツールを使用して TiDB を管理することもできます。
+はい、そうです。必要なサービスがすべて開始されると、MySQLサーバーと同じくらい簡単に TiDB を使用できます。ほとんどの場合、コードを 1 行も変更することなく、MySQL を TiDB に置き換えてアプリケーションを強化できます。また、人気のある MySQL 管理ツールを使用して TiDB を管理することもできます。
 
 ### TiDB は MySQL とどのように互換性がありますか? {#how-is-tidb-compatible-with-mysql}
 
@@ -39,9 +39,9 @@ TiDBクラスタには、TiDB サーバー、PD (Placement Driver) サーバー�
 
 ### TiDB は分散トランザクションをサポートしていますか? {#does-tidb-support-distributed-transactions}
 
-はい。 TiDB は、単一の場所にある少数のノードであろうと、多数のノードであろうと、クラスタ全体にトランザクションを分散します[複数のデータセンターにまたがるノード](/multi-data-centers-in-one-city-deployment.md) 。
+はい。 TiDB は、単一の場所にある少数のノードであろうと、多数のノードであろうと、クラスター全体にトランザクションを分散します[複数のデータセンターにまたがるノード](/multi-data-centers-in-one-city-deployment.md) 。
 
-Google の Percolator に触発された TiDB のトランザクション モデルは、主に 2 フェーズ コミット プロトコルであり、いくつかの実用的な最適化が行われています。このモデルは、タイムスタンプ アロケータに依存して、トランザクションごとに単調に増加するタイムスタンプを割り当てるため、競合を検出できます。 [PD](/tidb-architecture.md#placement-driver-pd-server)は、TiDBクラスタでタイムスタンプ アロケーターとして機能します。
+Google の Percolator に触発された TiDB のトランザクション モデルは、主に 2 フェーズ コミット プロトコルであり、いくつかの実用的な最適化が行われています。このモデルは、タイムスタンプ アロケータに依存して、トランザクションごとに単調に増加するタイムスタンプを割り当てるため、競合を検出できます。 [PD](/tidb-architecture.md#placement-driver-pd-server)は、TiDB クラスターでタイムスタンプ アロケーターとして機能します。
 
 ### TiDB を操作するには、どのプログラミング言語を使用できますか? {#what-programming-language-can-i-use-to-work-with-tidb}
 
@@ -76,7 +76,7 @@ Usage of ./bin/tidb-server:
 
 ### TiDB のドキュメント以外に、TiDB の知識を得る方法はありますか? {#in-addition-to-the-tidb-documentation-are-there-any-other-ways-to-acquire-tidb-knowledge}
 
-現在、TiDB 関連の知識を得るための最も重要でタイムリーな方法は[TiDB ドキュメント](/overview.md#tidb-introduction)です。さらに、テクニカル コミュニケーション グループもいくつかあります。必要な場合は[info@pingcap.com](mailto:info@pingcap.com)までご連絡ください。
+現在、TiDB 関連の知識を得るための最も重要でタイムリーな方法は[TiDB ドキュメント](/overview.md#tidb-introduction)です。さらに、テクニカル コミュニケーション グループもいくつかあります。必要な場合は、 [info@pingcap.com](mailto:info@pingcap.com)にお問い合わせください。
 
 ### TiDB ユーザー名の長さ制限は? {#what-is-the-length-limit-for-the-tidb-user-name}
 
@@ -93,9 +93,9 @@ Usage of ./bin/tidb-server:
 
 いいえ。TiDB の JDBC ドライバーは MySQL JDBC (Connector/J) です。 Atomikos を使用する場合は、データ ソースを`type="com.mysql.jdbc.jdbc2.optional.MysqlXADataSource"`に設定します。 TiDB は、MySQL JDBC XADataSource との接続をサポートしていません。 MySQL JDBC XADataSource は MySQL でのみ機能します (たとえば、DML を使用して`redo`のログを変更します)。
 
-Atomikos の 2 つのデータ ソースを構成したら、JDBC ドライブを XA に設定します。 Atomikos が TM と RM (DB) を操作する場合、Atomikos は XA を含むコマンドを JDBC 層に送信します。 MySQL を例にとると、JDBC レイヤーで XA が有効になっている場合、JDBC は、DML を使用して`redo`のログを変更するなど、一連の XA ロジック操作を InnoDB に送信します。これが 2 フェーズ コミットの動作です。現在の TiDB バージョンは、上位アプリケーション層の JTA/XA をサポートしておらず、Atomikos から送信された XA 操作を解析していません。
+Atomikos の 2 つのデータ ソースを構成したら、JDBC ドライブを XA に設定します。 Atomikos が TM と RM (DB) を操作する場合、Atomikos は XA を含むコマンドを JDBCレイヤーに送信します。 MySQL を例にとると、JDBCレイヤーで XA が有効になっている場合、JDBC は、DML を使用して`redo`のログを変更するなど、一連の XA ロジック操作を InnoDB に送信します。これが 2 フェーズ コミットの動作です。現在の TiDB バージョンは、上位アプリケーションレイヤーの JTA/XA をサポートしておらず、Atomikos から送信された XA 操作を解析していません。
 
-スタンドアロン データベースとして、MySQL は XA を使用したデータベース間トランザクションのみを実装できます。一方、TiDB は Google Percolator トランザクション モデルを使用した分散トランザクションをサポートし、そのパフォーマンスの安定性は XA よりも高いため、TiDB は XA をサポートしておらず、TiDB が XA をサポートする必要はありません。
+スタンドアロン データベースとして、MySQL は XA を使用したデータベース間トランザクションのみを実装できます。一方、TiDB は Google Percolator トランザクション モデルを使用した分散トランザクションをサポートし、そのパフォーマンスの安定性は XA よりも高いため、TiDB は XA をサポートせず、TiDB が XA をサポートする必要はありません。
 
 ### TiDB は、パフォーマンスを損なうことなく、カラムナ ストレージ エンジン (TiFlash) への同時<code>INSERT</code>または<code>UPDATE</code>操作をどのようにサポートできるでしょうか? {#how-could-tidb-support-high-concurrent-code-insert-code-or-code-update-code-operations-to-the-columnar-storage-engine-tiflash-without-hurting-performance}
 

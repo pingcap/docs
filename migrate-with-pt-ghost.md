@@ -3,22 +3,22 @@ title: Continuous Replication from Databases that Use gh-ost or pt-osc
 summary: Learn how to use DM to replicate incremental data from databases that use online DDL tools gh-ost or pt-osc
 ---
 
-# gh-ostまたはpt-oscを使用するデータベースからの継続的なレプリケーション {#continuous-replication-from-databases-that-use-gh-ost-or-pt-osc}
+# gh-ost または pt-osc を使用するデータベースからの連続レプリケーション {#continuous-replication-from-databases-that-use-gh-ost-or-pt-osc}
 
-本番シナリオでは、DDL実行中のテーブルロックにより、データベースからの読み取りまたはデータベースへの書き込みがある程度ブロックされる可能性があります。したがって、オンラインDDLツールは、読み取りと書き込みへの影響を最小限に抑えるためにDDLを実行するためによく使用されます。一般的なDDLツールは[幽霊](https://github.com/github/gh-ost)と[pt-osc](https://www.percona.com/doc/percona-toolkit/3.0/pt-online-schema-change.html)です。
+運用シナリオでは、DDL 実行中にテーブルをロックすると、データベースからの読み取りまたはデータベースへの書き込みがある程度ブロックされる可能性があります。そのため、オンライン DDL ツールを使用して DDL を実行し、読み取りと書き込みへの影響を最小限に抑えることがよくあります。一般的な DDL ツールは[幽霊](https://github.com/github/gh-ost)と[pt-osc](https://www.percona.com/doc/percona-toolkit/3.0/pt-online-schema-change.html)です。
 
-DMを使用してMySQLからTiDBにデータを移行する場合、 `online-ddl`をエンベールして、DMとgh-ostまたはpt-oscのコラボレーションを許可できます。
+DM を使用して MySQL から TiDB にデータを移行する場合、DM と gh-ost または pt-osc のコラボレーションを許可するために`online-ddl`を有効にすることができます。
 
 詳細なレプリケーション手順については、シナリオごとに次のドキュメントを参照してください。
 
--   [小さなデータセットのMySQLをTiDBに移行する](/migrate-small-mysql-to-tidb.md)
--   [大規模なデータセットのMySQLをTiDBに移行する](/migrate-large-mysql-to-tidb.md)
--   [小さなデータセットのMySQLシャードをTiDBに移行およびマージする](/migrate-small-mysql-shards-to-tidb.md)
--   [大規模なデータセットのMySQLシャードをTiDBに移行およびマージする](/migrate-large-mysql-shards-to-tidb.md)
+-   [小さなデータセットの MySQL を TiDB に移行する](/migrate-small-mysql-to-tidb.md)
+-   [大規模なデータセットの MySQL を TiDB に移行する](/migrate-large-mysql-to-tidb.md)
+-   [小さなデータセットの MySQL シャードを TiDB に移行およびマージする](/migrate-small-mysql-shards-to-tidb.md)
+-   [大規模なデータセットの MySQL シャードを TiDB に移行およびマージする](/migrate-large-mysql-shards-to-tidb.md)
 
-## DMでonline-ddlを有効にする {#enable-online-ddl-on-dm}
+## DM で online-ddl を有効にする {#enable-online-ddl-on-dm}
 
-DMのタスク構成ファイルで、以下に示すように、グローバルパラメーター`online-ddl`を`true`に設定します。
+DM のタスク構成ファイルで、以下に示すように、グローバル パラメーター`online-ddl`から`true`を設定します。
 
 ```yaml
 # ----------- Global configuration -----------
@@ -30,38 +30,38 @@ meta-schema: "dm_meta"          # The downstream database that stores the `meta`
 online-ddl: true                # Enable online-ddl support on DM to support automatic processing of "gh-ost" and "pt-osc" for the upstream database.
 ```
 
-## online-ddlを有効にした後のワークフロー {#workflow-after-enabling-online-ddl}
+## online-ddl を有効にした後のワークフロー {#workflow-after-enabling-online-ddl}
 
-DMでonline-ddlを有効にすると、gh-ostまたはpt-oscを複製するDMによって生成されるDDLステートメントが変更されます。
+DM で online-ddl を有効にすると、DM が gh-ost または pt-osc をレプリケートすることによって生成される DDL ステートメントが変更されます。
 
-gh-ostまたはpt-oscのワークフロー：
+gh-ost または pt-osc のワークフロー:
 
--   DDL実テーブルのテーブルスキーマに従ってゴーストテーブルを作成します。
+-   DDL実表の表スキーマに従ってゴースト表を作成します。
 
--   ゴーストテーブルにDDLを適用します。
+-   ゴースト テーブルに DDL を適用します。
 
--   DDL実テーブルのデータをゴーストテーブルに複製します。
+-   DDL 実表のデータをゴースト表に複製します。
 
--   2つのテーブル間でデータの整合性が取れたら、renameステートメントを使用して、実際のテーブルをゴーストテーブルに置き換えます。
+-   2 つのテーブル間でデータの整合性が取れたら、rename ステートメントを使用して実際のテーブルをゴースト テーブルに置き換えます。
 
-DMのワークフロー：
+DMのワークフロー:
 
--   ダウンストリームのゴーストテーブルの作成をスキップします。
+-   ゴースト テーブルのダウンストリームの作成をスキップします。
 
--   ゴーストテーブルに適用されたDDLを記録します。
+-   ゴースト テーブルに適用された DDL を記録します。
 
--   ゴーストテーブルからのみデータを複製します。
+-   ゴースト テーブルからのみデータをレプリケートします。
 
--   ダウンストリームで記録されたDDLを適用します。
+-   ダウンストリームで記録された DDL を適用します。
 
 ![dm-online-ddl](/media/dm/dm-online-ddl.png)
 
 ワークフローの変更により、次の利点がもたらされます。
 
--   ダウンストリームのTiDBは、ゴーストテーブルを作成して複製する必要がないため、ストレージスペースとネットワーク伝送のオーバーヘッドを節約できます。
+-   ダウンストリームの TiDB は、ゴースト テーブルを作成して複製する必要がないため、ストレージ スペースとネットワーク転送のオーバーヘッドが節約されます。
 
--   シャードテーブルからデータを移行およびマージする場合、レプリケーションの正確性を確保するために、シャードゴーストテーブルごとにRENAME操作は無視されます。
+-   シャード テーブルからデータを移行およびマージする場合、レプリケーションの正確性を確保するために、シャード ゴースト テーブルごとに RENAME 操作が無視されます。
 
-## も参照してください {#see-also}
+## こちらもご覧ください {#see-also}
 
-[オンラインDDLツールを使用したDMの作業の詳細](/dm/feature-online-ddl.md#working-details-for-dm-with-online-ddl-tools)
+[オンライン DDL ツールを使用した DM の作業の詳細](/dm/feature-online-ddl.md#working-details-for-dm-with-online-ddl-tools)

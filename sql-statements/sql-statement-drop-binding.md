@@ -3,11 +3,11 @@ title: DROP [GLOBAL|SESSION] BINDING
 summary: Use of DROP BINDING in TiDB database.
 ---
 
-# ドロップ[グローバル|セッション]バインディング {#drop-global-session-binding}
+# ドロップ [グローバル|セッション] バインディング {#drop-global-session-binding}
 
-このステートメントは、特定のSQLステートメントからバインディングを削除します。バインディングを使用すると、基になるクエリを変更せずに、ステートメントにヒントを挿入できます。
+このステートメントは、特定の SQL ステートメントからバインディングを削除します。バインディングを使用して、基になるクエリを変更することなく、ステートメントにヒントを挿入できます。
 
-`BINDING`は、 `GLOBAL`または`SESSION`のいずれかになります。デフォルトは`SESSION`です。
+`BINDING`は`GLOBAL`または`SESSION`ベースのいずれかになります。デフォルトは`SESSION`です。
 
 ## あらすじ {#synopsis}
 
@@ -129,14 +129,14 @@ mysql> SHOW SESSION BINDINGS\G
 Empty set (0.00 sec)
 ```
 
-## MySQLの互換性 {#mysql-compatibility}
+## MySQL の互換性 {#mysql-compatibility}
 
-このステートメントは、MySQL構文のTiDB拡張です。
+このステートメントは、MySQL 構文に対する TiDB 拡張です。
 
-## も参照してください {#see-also}
+## こちらもご覧ください {#see-also}
 
--   [[グローバル|セッション]バインディングを作成する](/sql-statements/sql-statement-create-binding.md)
--   [[グローバル|セッション]バインディングを表示する](/sql-statements/sql-statement-show-bindings.md)
--   [テーブルの分析](/sql-statements/sql-statement-analyze-table.md)
+-   [[グローバル|セッション]バインディングを作成](/sql-statements/sql-statement-create-binding.md)
+-   [[グローバル|セッション]バインディングを表示](/sql-statements/sql-statement-show-bindings.md)
+-   [テーブルを分析](/sql-statements/sql-statement-analyze-table.md)
 -   [オプティマイザーのヒント](/optimizer-hints.md)
 -   [SQL計画管理](/sql-plan-management.md)

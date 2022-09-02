@@ -49,10 +49,10 @@ SELECT * FROM table_constraints WHERE constraint_type='UNIQUE';
 7 rows in set (0.01 sec)
 ```
 
-`TABLE_CONSTRAINTS`表のフィールドは次のように説明されています。
+`TABLE_CONSTRAINTS`テーブルのフィールドは次のとおりです。
 
--   `CONSTRAINT_CATALOG` ：制約が属するカタログの名前。この値は常に`def`です。
--   `CONSTRAINT_SCHEMA` ：制約が属するデータベースの名前。
--   `CONSTRAINT_NAME` ：制約の名前。
--   `TABLE_NAME` ：テーブルの名前。
--   `CONSTRAINT_TYPE` ：制約のタイプ。値は`UNIQUE` 、または`PRIMARY KEY`にすることができ`FOREIGN KEY` 。 `UNIQUE`と`PRIMARY KEY`の情報は、 `SHOW INDEX`ステートメントの実行結果に似ています。
+-   `CONSTRAINT_CATALOG` : 制約が属するカタログの名前。この値は常に`def`です。
+-   `CONSTRAINT_SCHEMA` : 制約が属するデータベースの名前。
+-   `CONSTRAINT_NAME` : 制約の名前。
+-   `TABLE_NAME` : テーブルの名前。
+-   `CONSTRAINT_TYPE` : 制約のタイプ。値は`UNIQUE` 、 `PRIMARY KEY`または`FOREIGN KEY`です。 `UNIQUE`と`PRIMARY KEY`の情報は、 `SHOW INDEX`ステートメントの実行結果と同様です。

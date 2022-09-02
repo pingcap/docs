@@ -42,7 +42,7 @@ JDBC 接続の詳細については、 [JDBC ドキュメント](https://dev.mys
 
 |    パラメータ名    |                              説明                              |
 | :----------: | :----------------------------------------------------------: |
-| `{username}` |                   TiDBクラスタに接続するための SQL ユーザー                  |
+| `{username}` |                  TiDB クラスターに接続するための SQL ユーザー                 |
 | `{password}` |                        SQL ユーザーのパスワード                        |
 |   `{host}`   | TiDB ノードの[ホスト](https://en.wikipedia.org/wiki/Host_(network)) |
 |   `{port}`   |                     TiDB ノードがリッスンしているポート                     |
@@ -102,7 +102,7 @@ Hibernate 接続パラメーターの詳細については、 [休止状態の�
 
 |    パラメータ名    |                              説明                              |
 | :----------: | :----------------------------------------------------------: |
-| `{username}` |                   TiDBクラスタに接続するための SQL ユーザー                  |
+| `{username}` |                  TiDB クラスターに接続するための SQL ユーザー                 |
 | `{password}` |                        SQL ユーザーのパスワード                        |
 |   `{host}`   | TiDB ノードの[ホスト](https://en.wikipedia.org/wiki/Host_(network)) |
 |   `{port}`   |                     TiDB ノードがリッスンしているポート                     |

@@ -16,25 +16,25 @@ aliases: ['/tidb/stable/dev-guide-outdated-for-go-sql-driver-mysql','/tidb/stabl
 >
 > Golang 1.16 以降のバージョンを使用することをお勧めします。
 
-## ステップ 1. TiDBクラスタを起動する {#step-1-launch-your-tidb-cluster}
+## ステップ 1. TiDB クラスターを起動する {#step-1-launch-your-tidb-cluster}
 
 <CustomContent platform="tidb">
 
-以下にTiDBクラスタの起動方法を紹介します。
+以下にTiDBクラスターの起動方法を紹介します。
 
-**TiDB Cloudの無料クラスタを使用する**
+**TiDB Cloudの無料クラスターを使用する**
 
-詳細な手順については、 [無料のクラスタを作成する](/develop/dev-guide-build-cluster-in-cloud.md#step-1-create-a-free-cluster)を参照してください。
+詳細な手順については、 [無料のクラスターを作成する](/develop/dev-guide-build-cluster-in-cloud.md#step-1-create-a-free-cluster)を参照してください。
 
-**ローカルクラスタを使用する**
+**ローカル クラスターを使用する**
 
-詳細な手順については、 [ローカル テストクラスタをデプロイする](/quick-start-with-tidb.md#deploy-a-local-test-cluster)または[TiUP を使用して TiDB クラスターをデプロイする](/production-deployment-using-tiup.md)を参照してください。
+詳細な手順については、 [ローカル テスト クラスターをデプロイする](/quick-start-with-tidb.md#deploy-a-local-test-cluster)または[TiUP を使用して TiDBクラスタをデプロイする](/production-deployment-using-tiup.md)を参照してください。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-[無料のクラスタを作成する](/develop/dev-guide-build-cluster-in-cloud.md#step-1-create-a-free-cluster)を参照してください。
+[無料のクラスターを作成する](/develop/dev-guide-build-cluster-in-cloud.md#step-1-create-a-free-cluster)を参照してください。
 
 </CustomContent>
 
@@ -88,7 +88,7 @@ CREATE TABLE player (
 );
 ```
 
-`sqldriver.go`は`sqldriver`の本体です。 TiDB は MySQL プロトコルとの互換性が高いため、TiDB に接続するには MySQL ソース インスタンス`db, err := sql.Open("mysql", dsn)`を初期化する必要があります。次に、 `dao.go`を使用して、データの読み取り、編集、追加、および削除を行うことができます。
+`sqldriver.go`は`sqldriver`の本体です。 TiDB は MySQL プロトコルとの互換性が高いため、MySQL ソース インスタンス`db, err := sql.Open("mysql", dsn)`を初期化して TiDB に接続する必要があります。その後、 `dao.go`を使用して、データの読み取り、編集、追加、および削除を行うことができます。
 
 {{< copyable "" >}}
 
@@ -245,7 +245,7 @@ func (tx *TiDBSqlTx) Rollback() error {
 }
 ```
 
-`dao.go`は、データを書き込む機能を提供する一連のデータ操作メソッドを定義します。これは、この例のコア部分でもあります。
+`dao.go`は、データを書き込む機能を提供する一連のデータ操作メソッドを定義します。これは、この例の核心部分でもあります。
 
 {{< copyable "" >}}
 
@@ -752,7 +752,7 @@ func buyGoods(db *gorm.DB, sellID, buyID string, amount, price int) error {
 
 <CustomContent platform="tidb">
 
-go-sql-driver/mysql を使用する場合、データベース テーブルを手動で初期化する必要があります。ローカルクラスタを使用していて、MySQL クライアントがローカルにインストールされている場合は、 `sqldriver`ディレクトリで直接実行できます。
+go-sql-driver/mysql を使用する場合、データベース テーブルを手動で初期化する必要があります。ローカル クラスタを使用していて、MySQL クライアントがローカルにインストールされている場合は、 `sqldriver`ディレクトリで直接実行できます。
 
 {{< copyable "" >}}
 
@@ -768,13 +768,13 @@ make mysql
 mysql --host 127.0.0.1 --port 4000 -u root<sql/dbinit.sql
 ```
 
-非ローカルクラスタを使用している場合、または MySQL クライアントがインストールされていない場合は、クラスタに接続し、 `sql/dbinit.sql`ファイルのステートメントを実行します。
+非ローカル クラスターを使用している場合、または MySQL クライアントがインストールされていない場合は、クラスターに接続し、 `sql/dbinit.sql`ファイルのステートメントを実行します。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-go-sql-driver/mysql を使用する場合、クラスタに接続し、 `sql/dbinit.sql`のファイルでステートメントを実行して、データベース テーブルを手動で初期化する必要があります。
+go-sql-driver/mysql を使用する場合、クラスターに接続し、 `sql/dbinit.sql`のファイルでステートメントを実行して、データベース テーブルを手動で初期化する必要があります。
 
 </CustomContent>
 
@@ -794,7 +794,7 @@ go-sql-driver/mysql を使用する場合、クラスタに接続し、 `sql/dbi
 
 <div label="Using go-sql-driver/mysql" value="sqldriver">
 
-TiDB Cloudやその他のリモート クラスターなど、ローカル以外のデフォルトクラスタを使用している場合は、 `dsn` in `sqldriver.go`の値を変更します。
+TiDB Cloudやその他のリモート クラスターなど、ローカル以外の既定のクラスターを使用している場合は、 `dsn` in `sqldriver.go`の値を変更します。
 
 {{< copyable "" >}}
 
@@ -820,7 +820,7 @@ dsn := "root:123456@tcp(xxx.tidbcloud.com:4000)/test?charset=utf8mb4"
 
 <div label="Using GORM (Recommended)" value="gorm">
 
-TiDB Cloudやその他のリモート クラスターなど、ローカル以外のデフォルトクラスタを使用している場合は、 `dsn` in `gorm.go`の値を変更します。
+TiDB Cloudやその他のリモート クラスターなど、ローカル以外の既定のクラスターを使用している場合は、 `dsn` in `gorm.go`の値を変更します。
 
 {{< copyable "" >}}
 

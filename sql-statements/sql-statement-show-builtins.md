@@ -3,13 +3,13 @@ title: SHOW BUILTINS
 summary: The usage of SHOW BUILTINS in TiDB.
 ---
 
-# ビルトインを表示 {#show-builtins}
+# 建物を表示 {#show-builtins}
 
-`SHOW BUILTINS`は、TiDBでサポートされているすべての組み込み関数を一覧表示するために使用されます。
+`SHOW BUILTINS`は、TiDB でサポートされているすべての組み込み関数を一覧表示するために使用されます。
 
 ## あらすじ {#synopsis}
 
-**ShowBuiltinsStmt：**
+**ShowBuiltinsStmt:**
 
 ![ShowBuiltinsStmt](/media/sqlgram/ShowBuiltinsStmt.png)
 
@@ -297,6 +297,6 @@ SHOW BUILTINS;
 268 rows in set (0.00 sec)
 ```
 
-## MySQLの互換性 {#mysql-compatibility}
+## MySQL の互換性 {#mysql-compatibility}
 
-このステートメントは、MySQL構文のTiDB拡張です。
+このステートメントは、MySQL 構文に対する TiDB 拡張です。

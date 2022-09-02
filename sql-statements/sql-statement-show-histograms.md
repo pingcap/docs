@@ -3,9 +3,9 @@ title: SHOW STATS_HISTOGRAMS
 summary: An overview of the usage of SHOW HISTOGRAMS for TiDB database.
 ---
 
-# STATS_HISTOGRAMSを表示する {#show-stats-histograms}
+# 統計_ヒストグラムを表示 {#show-stats-histograms}
 
-このステートメントは、 `ANALYZE`ステートメントによって収集されたヒストグラム情報を示しています。
+このステートメントは、 `ANALYZE`ステートメントによって収集されたヒストグラム情報を表示します。
 
 ## あらすじ {#synopsis}
 
@@ -56,11 +56,11 @@ show stats_histograms where table_name = 't2';
 2 rows in set (0.00 sec)
 ```
 
-## MySQLの互換性 {#mysql-compatibility}
+## MySQL の互換性 {#mysql-compatibility}
 
-このステートメントは、MySQL構文のTiDB拡張です。
+このステートメントは、MySQL 構文に対する TiDB 拡張です。
 
-## も参照してください {#see-also}
+## こちらもご覧ください {#see-also}
 
 -   [分析する](/sql-statements/sql-statement-analyze-table.md)
 -   [統計入門](/statistics.md)

@@ -17,13 +17,13 @@ summary: This document describes how to query data from a single table in a data
 
 <CustomContent platform="tidb">
 
-1.  TiDBクラスタを構築します ( [TiDB Cloud](/develop/dev-guide-build-cluster-in-cloud.md)または[TiUP](/production-deployment-using-tiup.md)を使用することをお勧めします)。
+1.  TiDB クラスターを構築します ( [TiDB Cloud](/develop/dev-guide-build-cluster-in-cloud.md)または[TiUP](/production-deployment-using-tiup.md)を使用することをお勧めします)。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-1.  [TiDB Cloud](/develop/dev-guide-build-cluster-in-cloud.md)を使用して TiDBクラスタを構築します。
+1.  [TiDB Cloud](/develop/dev-guide-build-cluster-in-cloud.md)を使用して TiDB クラスターを構築します。
 
 </CustomContent>
 
@@ -249,7 +249,7 @@ LIMIT 10;
 
 全体的なデータ状況をよりよく理解するために、 `GROUP BY`ステートメントを使用してクエリ結果を集計できます。
 
-たとえば、より多くの著者が生まれた年を知りたい場合は、 `authors`のテーブルを`birth_year`列でグループ化し、各年を数えることができます。
+たとえば、より多くの著者が生まれた年を知りたい場合は、 `authors`のテーブルを`birth_year`列でグループ化し、各年をカウントできます。
 
 {{< copyable "" >}}
 

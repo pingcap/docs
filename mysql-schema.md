@@ -5,38 +5,38 @@ summary: Learn about the TiDB system tables.
 
 # <code>mysql</code>スキーマ {#code-mysql-code-schema}
 
-`mysql`スキーマには、TiDBシステムテーブルが含まれています。設計はMySQLの`mysql`スキーマに似ており、 `mysql.user`などのテーブルを直接編集できます。また、MySQLの拡張機能であるいくつかのテーブルも含まれています。
+`mysql`スキーマには、TiDB システム テーブルが含まれています。設計は MySQL の`mysql`スキーマに似ており、 `mysql.user`などのテーブルを直接編集できます。また、MySQL の拡張機能である多数のテーブルも含まれています。
 
-## システムテーブルを付与する {#grant-system-tables}
+## システム テーブルの付与 {#grant-system-tables}
 
-これらのシステムテーブルには、ユーザーアカウントとその特権に関する付与情報が含まれています。
+これらのシステム テーブルには、ユーザー アカウントとその権限に関する付与情報が含まれています。
 
--   `user` ：ユーザーアカウント、グローバル特権、およびその他の非特権列
--   `db` ：データベースレベルの権限
--   `tables_priv` ：テーブルレベルの権限
--   `columns_priv` ：列レベルの特権
+-   `user` : ユーザー アカウント、グローバル権限、およびその他の権限以外の列
+-   `db` : データベース レベルの権限
+-   `tables_priv` : テーブルレベルの権限
+-   `columns_priv` : 列レベルの権限
 
-## サーバー側のヘルプシステムテーブル {#server-side-help-system-tables}
+## サーバー側のヘルプ システム テーブル {#server-side-help-system-tables}
 
-現在、 `help_topic`はNULLです。
+現在、 `help_topic`は NULL です。
 
-## 統計システムテーブル {#statistics-system-tables}
+## 統計システム テーブル {#statistics-system-tables}
 
--   `stats_buckets` ：統計のバケット
--   `stats_histograms` ：統計のヒストグラム
--   `stats_meta` ：行の総数や更新された行など、テーブルのメタ情報
--   `analyze_jobs` ：過去7日以内に進行中の統計収集タスクと履歴タスクレコード
+-   `stats_buckets` : 統計のバケット
+-   `stats_histograms` : 統計のヒストグラム
+-   `stats_meta` : 行の総数や更新された行など、テーブルのメタ情報
+-   `analyze_jobs` : 進行中の統計収集タスクと過去 7 日間の履歴タスク レコード
 
-## GCワーカーシステムテーブル {#gc-worker-system-tables}
+## GC ワーカー システム テーブル {#gc-worker-system-tables}
 
--   `gc_delete_range` ：削除するデータを記録します
+-   `gc_delete_range` : 削除するデータを記録する
 
-## その他のシステムテーブル {#miscellaneous-system-tables}
+## その他のシステム テーブル {#miscellaneous-system-tables}
 
--   `GLOBAL_VARIABLES` ：グローバルシステム変数テーブル
+-   `GLOBAL_VARIABLES` : グローバル システム変数テーブル
 
 <CustomContent platform="tidb">
 
--   `tidb` ：TiDB実行時のバージョン情報を記録します`bootstrap`
+-   `tidb` : TiDB 実行時のバージョン情報を記録する`bootstrap`
 
 </CustomContent>

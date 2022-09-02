@@ -5,7 +5,7 @@ summary: Learn the `TIDB_HOT_REGIONS` information_schema table.
 
 # TIDB_HOT_REGIONS {#tidb-hot-regions}
 
-`TIDB_HOT_REGIONS`の表は、現在のホットリージョンに関する情報を提供します。歴史的なホットリージョンについては、 `[TIDB_HOT_REGIONS_HISTORY](/information-schema/information-schema-tidb-hot-regions-history.md)`を参照してください。
+`TIDB_HOT_REGIONS`テーブルは、現在のホット リージョンに関する情報を提供します。ヒストリ ホット リージョンの詳細については、 `[TIDB_HOT_REGIONS_HISTORY](/information-schema/information-schema-tidb-hot-regions-history.md)`を参照してください。
 
 {{< copyable "" >}}
 
@@ -34,13 +34,13 @@ DESC tidb_hot_regions;
 
 `TIDB_HOT_REGIONS`テーブルの列の説明は次のとおりです。
 
--   `TABLE_ID` ：ホットリージョンが配置されているテーブルのID。
--   `INDEX_ID` ：ホットリージョンが配置されているインデックスのID。
--   `DB_NAME` ：ホットリージョンが配置されているオブジェクトのデータベース名。
--   `TABLE_NAME` ：ホットリージョンが配置されているテーブルの名前。
--   `INDEX_NAME` ：ホットリージョンが配置されているインデックスの名前。
--   `REGION_ID` ：ホットリージョンのID。
--   `TYPE` ：ホットリージョンのタイプ。
--   `MAX_HOT_DEGREE` ：リージョンの最大高温度。
--   `REGION_COUNT` ：インスタンス内のホットリージョンの数。
--   `FLOW_BYTES` ：リージョンで書き込まれ、読み取られたバイト数。
+-   `TABLE_ID` : ホットリージョンが配置されているテーブルの ID。
+-   `INDEX_ID` : ホットリージョンが配置されているインデックスの ID。
+-   `DB_NAME` : ホットリージョンが配置されているオブジェクトのデータベース名。
+-   `TABLE_NAME` : ホットリージョンが配置されているテーブルの名前。
+-   `INDEX_NAME` : ホットリージョンが配置されているインデックスの名前。
+-   `REGION_ID` : ホットリージョンの ID。
+-   `TYPE` : ホットリージョンのタイプ。
+-   `MAX_HOT_DEGREE` :リージョンの最大のホット度。
+-   `REGION_COUNT` : インスタンス内のホット リージョンの数。
+-   `FLOW_BYTES` : リージョンで読み書きされたバイト数。

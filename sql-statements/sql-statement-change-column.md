@@ -3,15 +3,15 @@ title: CHANGE COLUMN | TiDB SQL Statement Reference
 summary: An overview of the usage of CHANGE COLUMN for the TiDB database.
 ---
 
-# 列を変更する {#change-column}
+# 列を変更 {#change-column}
 
-`ALTER TABLE.. CHANGE COLUMN`ステートメントは、既存のテーブルの列を変更します。変更には、列の名前の変更と、データ型の互換性のある型への変更の両方が含まれる場合があります。
+`ALTER TABLE.. CHANGE COLUMN`ステートメントは、既存のテーブルの列を変更します。変更には、列の名前変更とデータ型の互換性のある型への変更の両方が含まれる場合があります。
 
-v5.1.0以降、TiDBは、以下を含むがこれらに限定されないReorgデータ型の変更をサポートしています。
+v5.1.0 以降、TiDB は Reorg データ型の変更をサポートしています。これには以下が含まれますが、これらに限定されません。
 
--   `VARCHAR`から`BIGINT`に変更
+-   `VARCHAR`から`BIGINT`への変更
 -   `DECIMAL`精度の変更
--   `VARCHAR(10)`から`VARCHAR(5)`の長さを圧縮します
+-   `VARCHAR(10)` ～ `VARCHAR(5)`の長さの圧縮
 
 ## あらすじ {#synopsis}
 
@@ -146,18 +146,18 @@ ALTER TABLE t CHANGE COLUMN a a DATETIME;
 ERROR 8200 (HY000): Unsupported modify column: change from original type decimal(13,7) to datetime is currently unsupported yet
 ```
 
-## MySQLの互換性 {#mysql-compatibility}
+## MySQL の互換性 {#mysql-compatibility}
 
--   現在、 `ALTER TABLE`のステートメントで複数の変更を行うことはサポートされていません。
--   主キー列の[Reorg-データ](/sql-statements/sql-statement-modify-column.md#reorg-data-change)タイプの変更はサポートされていません。
--   パーティション表の列タイプの変更はサポートされていません。
+-   単一の`ALTER TABLE`ステートメントで複数の変更を行うことは、現在サポートされていません。
+-   主キー列での[再編成データ](/sql-statements/sql-statement-modify-column.md#reorg-data-change)型の変更はサポートされていません。
+-   分割されたテーブルでの列の型の変更はサポートされていません。
 -   生成された列の列タイプの変更はサポートされていません。
--   一部のデータ型（たとえば、一部のTIME、Bit、Set、Enum、およびJSON型）の変更は、TiDBとMySQL間の`CAST`関数の動作の互換性の問題のため、サポートされていません。
+-   TiDB と MySQL 間の`CAST`関数の動作の互換性の問題により、一部のデータ型 (たとえば、一部の TIME、Bit、Set、Enum、および JSON 型) の変更はサポートされていません。
 
-## も参照してください {#see-also}
+## こちらもご覧ください {#see-also}
 
--   [CREATE TABLE](/sql-statements/sql-statement-create-table.md)
--   [CREATETABLEを表示する](/sql-statements/sql-statement-show-create-table.md)
+-   [テーブルを作成](/sql-statements/sql-statement-create-table.md)
+-   [テーブルの作成を表示](/sql-statements/sql-statement-show-create-table.md)
 -   [列を追加](/sql-statements/sql-statement-add-column.md)
--   [ドロップ列](/sql-statements/sql-statement-drop-column.md)
+-   [ドロップ カラム](/sql-statements/sql-statement-drop-column.md)
 -   [列の変更](/sql-statements/sql-statement-modify-column.md)

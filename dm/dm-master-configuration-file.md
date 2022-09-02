@@ -5,11 +5,11 @@ summary: Learn the configuration file of DM-master.
 
 # DMマスターConfiguration / コンフィグレーションファイル {#dm-master-configuration-file}
 
-このドキュメントでは、DMマスターの構成を紹介します。これには、構成ファイルテンプレートと、このファイルの各構成パラメーターの説明が含まれます。
+このドキュメントでは、構成ファイル テンプレートと、このファイル内の各構成パラメーターの説明を含む、DM-master の構成について説明します。
 
-## Configuration / コンフィグレーションファイルテンプレート {#configuration-file-template}
+## Configuration / コンフィグレーションファイルのテンプレート {#configuration-file-template}
 
-以下は、DM-masterの構成ファイルテンプレートです。
+以下は、DM-master の構成ファイルのテンプレートです。
 
 ```toml
 name = "dm-master"
@@ -36,24 +36,24 @@ ssl-key = "/path/to/key.pem"
 cert-allowed-cn = ["dm"]
 ```
 
-## Configuration / コンフィグレーションパラメーター {#configuration-parameters}
+## Configuration / コンフィグレーションパラメータ {#configuration-parameters}
 
-このセクションでは、DM-masterの構成パラメーターを紹介します。
+このセクションでは、DM-master の構成パラメーターを紹介します。
 
 ### グローバル構成 {#global-configuration}
 
-| パラメータ                 | 説明                                                                                                                   |
-| :-------------------- | :------------------------------------------------------------------------------------------------------------------- |
-| `name`                | DMマスターの名前。                                                                                                           |
-| `log-level`           | `debug` 、 `error` `info`の`fatal`レベルを指定し`warn` 。デフォルトのログレベルは`info`です。                                                 |
-| `log-file`            | ログファイルディレクトリを指定します。パラメータが指定されていない場合、ログは標準出力に出力されます。                                                                  |
-| `master-addr`         | サービスを提供するDMマスターのアドレスを指定します。 IPアドレスを省略して、「：8261」のようにポート番号のみを指定できます。                                                   |
-| `advertise-addr`      | DMマスターが外部にアドバタイズするアドレスを指定します。                                                                                        |
-| `peer-urls`           | DMマスターノードのピアURLを指定します。                                                                                               |
-| `advertise-peer-urls` | DMマスターが外部にアドバタイズするピアURLを指定します。デフォルトの値`advertise-peer-urls`は、 `peer-urls`の値と同じです。                                     |
-| `initial-cluster`     | 値`initial-cluster`は、初期クラスタのすべてのDMマスターノードの`advertise-peer-urls`の値の組み合わせです。                                            |
-| `join`                | 値`join`は、クラスタに存在するDMマスターノードの`advertise-peer-urls`の値の組み合わせです。 DMマスターノードが新しく追加された場合は、 `initial-cluster`を`join`に置き換えます。 |
-| `ssl-ca`              | DMマスターが他のコンポーネントと接続するための信頼できるSSLCAのリストを含むファイルのパス。                                                                    |
-| `ssl-cert`            | DMマスターが他のコンポーネントと接続するためのPEM形式のX509証明書を含むファイルのパス。                                                                     |
-| `ssl-key`             | DMマスターが他のコンポーネントと接続するためのPEM形式のX509キーを含むファイルのパス。                                                                      |
-| `cert-allowed-cn`     | 共通名リスト。                                                                                                              |
+| パラメータ                 | 説明                                                                                                                            |
+| :-------------------- | :---------------------------------------------------------------------------------------------------------------------------- |
+| `name`                | DM マスターの名前。                                                                                                                   |
+| `log-level`           | `debug` 、 `info` 、 `warn` 、 `error` 、および`fatal`からログ レベルを指定します。デフォルトのログ レベルは`info`です。                                          |
+| `log-file`            | ログ ファイル ディレクトリを指定します。パラメータが指定されていない場合、ログは標準出力に出力されます。                                                                         |
+| `master-addr`         | サービスを提供する DM マスターのアドレスを指定します。 「:8261」のように、IP アドレスを省略してポート番号のみを指定することもできます。                                                    |
+| `advertise-addr`      | DM-master が外部にアドバタイズするアドレスを指定します。                                                                                             |
+| `peer-urls`           | DM マスター ノードのピア URL を指定します。                                                                                                    |
+| `advertise-peer-urls` | DM-master が外部にアドバタイズするピア URL を指定します。 `advertise-peer-urls`の値はデフォルトで`peer-urls`の値と同じです。                                        |
+| `initial-cluster`     | `initial-cluster`の値は、初期クラスター内のすべての DM マスター ノードの`advertise-peer-urls`の値の組み合わせです。                                               |
+| `join`                | `join`の値は、クラスター内の既存の DM マスター ノードの`advertise-peer-urls`の値の組み合わせです。 DM-master ノードが新しく追加された場合は、 `initial-cluster`を`join`に置き換えます。 |
+| `ssl-ca`              | DM-master が他のコンポーネントと接続するための信頼できる SSL CA のリストを含むファイルのパス。                                                                      |
+| `ssl-cert`            | DM マスターが他のコンポーネントと接続するための PEM 形式の X509 証明書を含むファイルのパス。                                                                         |
+| `ssl-key`             | DM マスターが他のコンポーネントと接続するための PEM 形式の X509 キーを含むファイルのパス。                                                                          |
+| `cert-allowed-cn`     | 共通名リスト。                                                                                                                       |

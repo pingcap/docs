@@ -3,44 +3,44 @@ title: TiDB Transaction Isolation Levels
 summary: Learn about the transaction isolation levels in TiDB.
 ---
 
-# TiDBトランザクション分離レベル {#tidb-transaction-isolation-levels}
+# TiDB トランザクション分離レベル {#tidb-transaction-isolation-levels}
 
 <CustomContent platform="tidb">
 
-トランザクション分離は、データベーストランザクション処理の基盤の1つです。分離は、トランザクションの4つの主要なプロパティの1つです（一般に[ACID](/glossary.md#acid)と呼ばれます）。
+トランザクション分離は、データベース トランザクション処理の基盤の 1 つです。分離は、トランザクションの 4 つの主要なプロパティの 1 つです (一般に[ACID](/glossary.md#acid)と呼ばれます)。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-トランザクション分離は、データベーストランザクション処理の基盤の1つです。分離は、トランザクションの4つの主要なプロパティの1つです（一般に[ACID](/tidb-cloud/tidb-cloud-glossary.md#acid)と呼ばれます）。
+トランザクション分離は、データベース トランザクション処理の基盤の 1 つです。分離は、トランザクションの 4 つの主要なプロパティの 1 つです (一般に[ACID](/tidb-cloud/tidb-cloud-glossary.md#acid)と呼ばれます)。
 
 </CustomContent>
 
-SQL-92標準では、トランザクション分離の4つのレベル、つまり、コミットされていない読み取り、コミットされた読み取り、繰り返し可能な読み取り、およびシリアル化可能が定義されています。詳細については、次の表を参照してください。
+SQL-92 標準では、4 つのレベルのトランザクション分離が定義されています。Read Uncommitted、Read Committed、Repeatable Read、Serializable です。詳細については、次の表を参照してください。
 
-| 分離レベル          | ダーティライト | ダーティリード | ファジー読み取り | ファントム |
-| :------------- | :------ | :------ | :------- | :---- |
-| コミットされていない読み取り | ありえない   | 可能      | 可能       | 可能    |
-| コミット済みを読む      | ありえない   | ありえない   | 可能       | 可能    |
-| 繰り返し読む         | ありえない   | ありえない   | ありえない    | 可能    |
-| シリアル化可能        | ありえない   | ありえない   | ありえない    | ありえない |
+| 分離レベル          | ダーティーライト | ダーティリード | あいまい読み取り | ファントム |
+| :------------- | :------- | :------ | :------- | :---- |
+| コミットされていない読み取り | ありえない    | 可能      | 可能       | 可能    |
+| コミットされた読み取り    | ありえない    | ありえない   | 可能       | 可能    |
+| 反復可能な読み取り      | ありえない    | ありえない   | ありえない    | 可能    |
+| シリアライズ可能       | ありえない    | ありえない   | ありえない    | ありえない |
 
-TiDBは、MySQLとの互換性のために`REPEATABLE-READ`としてアドバタイズするスナップショットアイソレーション（SI）整合性を実装しています。これは、 [ANSI反復可能読み取り分離レベル](#difference-between-tidb-and-ansi-repeatable-read)および[MySQLの繰り返し可能な読み取りレベル](#difference-between-tidb-and-mysql-repeatable-read)とは異なります。
+TiDB は Snapshot Isolation (SI) 整合性を実装しており、MySQL との互換性のために`REPEATABLE-READ`として宣伝しています。これは[ANSI Repeatable Read 分離レベル](#difference-between-tidb-and-ansi-repeatable-read)および[MySQL 反復可能読み取りレベル](#difference-between-tidb-and-mysql-repeatable-read)とは異なります。
 
 > **ノート：**
 >
-> TiDB v3.0以降、トランザクションの自動再試行はデフォルトで無効になっています。自動再試行を有効にすると**、トランザクション分離レベルが壊れる**可能性があるため、お勧めしません。詳細は[トランザクションの再試行](/optimistic-transaction.md#automatic-retry)を参照してください。
+> TiDB v3.0 以降、トランザクションの自動再試行はデフォルトで無効になっています。自動再試行を有効にすることは**、トランザクション分離レベルを壊す**可能性があるためお勧めしません。詳細は[トランザクションの再試行](/optimistic-transaction.md#automatic-retry)を参照してください。
 >
-> TiDB v3.0.8以降、新しく作成されたTiDBクラスターはデフォルトで[悲観的なトランザクションモード](/pessimistic-transaction.md)を使用します。現在の読み取り（ `for update`の読み取り）は**繰り返し不可能な読み取り**です。詳細は[悲観的なトランザクションモード](/pessimistic-transaction.md)を参照してください。
+> TiDB v3.0.8 以降、新しく作成された TiDB クラスターはデフォルトで[ペシミスティック トランザクション モード](/pessimistic-transaction.md)を使用します。現在の読み取り ( `for update`の読み取り) は**繰り返し不可の読み取り**です。詳細は[ペシミスティック トランザクション モード](/pessimistic-transaction.md)を参照してください。
 
-## 繰り返し可能な読み取り分離レベル {#repeatable-read-isolation-level}
+## 反復可能読み取り分離レベル {#repeatable-read-isolation-level}
 
-反復可能読み取り分離レベルでは、トランザクションの開始前にコミットされたデータのみが表示され、コミットされていないデータや、同時トランザクションによるトランザクションの実行中にコミットされた変更は表示されません。ただし、トランザクションステートメントは、まだコミットされていなくても、自身のトランザクション内で実行された以前の更新の影響を確認します。
+Repeatable Read 分離レベルでは、トランザクションの開始前にコミットされたデータのみが表示され、コミットされていないデータや同時トランザクションによるトランザクション実行中にコミットされた変更は表示されません。ただし、トランザクション ステートメントは、まだコミットされていなくても、自身のトランザクション内で実行された以前の更新の影響を確認します。
 
-異なるノードで実行されているトランザクションの場合、開始とコミットの順序は、タイムスタンプがPDから取得される順序によって異なります。
+異なるノードで実行されているトランザクションの場合、開始およびコミットの順序は、タイムスタンプが PD から取得される順序によって異なります。
 
-反復可能読み取り分離レベルのトランザクションは、同じ行を同時に更新することはできません。コミット時に、トランザクションの開始後に別のトランザクションによって行が更新されていることがトランザクションで検出された場合、トランザクションはロールバックされます。例えば：
+Repeatable Read 分離レベルのトランザクションは、同じ行を同時に更新できません。コミット時に、トランザクションの開始後に行が別のトランザクションによって更新されたことをトランザクションが検出すると、トランザクションはロールバックします。例えば：
 
 ```sql
 create table t1(id int);
@@ -53,33 +53,33 @@ commit;                         |
                                 |               commit; -- The transaction commit fails and rolls back. Pessimistic transactions can commit successfully.
 ```
 
-### TiDBとANSIの繰り返し可能な読み取りの違い {#difference-between-tidb-and-ansi-repeatable-read}
+### TiDB と ANSI 反復可能読み取りの違い {#difference-between-tidb-and-ansi-repeatable-read}
 
-TiDBの反復可能読み取り分離レベルはANSI反復可能読み取り分離レベルとは異なりますが、同じ名前を共有しています。 [ANSISQL分離レベルの批評](https://www.microsoft.com/en-us/research/wp-content/uploads/2016/02/tr-95-51.pdf)の論文で説明されている標準に従って、TiDBはスナップショット分離レベルを実装します。この分離レベルでは、厳密なファントム（A3）は許可されませんが、広いファントム（P3）と書き込みスキューは許可されます。対照的に、ANSI反復可能読み取り分離レベルでは、ファントム読み取りは許可されますが、書き込みスキューは許可されません。
+TiDB の Repeatable Read 分離レベルは ANSI Repeatable Read 分離レベルとは異なりますが、同じ名前を共有しています。 [ANSI SQL 分離レベルの批判](https://www.microsoft.com/en-us/research/wp-content/uploads/2016/02/tr-95-51.pdf)の論文で説明されている標準に従って、TiDB はスナップショット分離レベルを実装しています。この分離レベルでは、厳密なファントム (A3) は許可されませんが、幅広いファントム (P3) と書き込みスキューは許可されます。対照的に、ANSI Repeatable Read 分離レベルでは、ファントム読み取りは許可されますが、書き込みスキューは許可されません。
 
-### TiDBとMySQLの繰り返し可能な読み取りの違い {#difference-between-tidb-and-mysql-repeatable-read}
+### TiDB と MySQL の反復可能読み取りの違い {#difference-between-tidb-and-mysql-repeatable-read}
 
-TiDBのRepeatableRead分離レベルは、MySQLのそれとは異なります。 MySQL Repeatable Read分離レベルは、更新時に現在のバージョンが表示されているかどうかをチェックしません。つまり、トランザクションの開始後に行が更新された場合でも、更新を続行できます。対照的に、トランザクションの開始後に行が更新された場合、TiDBオプティミスティックトランザクションはロールバックされて再試行されます。 TiDBの楽観的同時実行制御でのトランザクションの再試行が失敗し、トランザクションの最終的な失敗につながる可能性がありますが、TiDBの悲観的同時実行制御とMySQLでは、トランザクションの更新が成功する可能性があります。
+TiDB の Repeatable Read 分離レベルは、MySQL とは異なります。 MySQL Repeatable Read 分離レベルは、更新時に現在のバージョンが表示されるかどうかをチェックしません。つまり、トランザクションの開始後に行が更新されていても、更新を続行できます。対照的に、トランザクションの開始後に行が更新された場合、TiDB オプティミスティック トランザクションはロールバックされ、再試行されます。 TiDB の楽観的同時実行制御でのトランザクションの再試行は失敗し、トランザクションの最終的な失敗につながる可能性がありますが、TiDB の悲観的同時実行制御と MySQL では、更新トランザクションが成功する可能性があります。
 
-## コミットされた分離レベルを読み取る {#read-committed-isolation-level}
+## 読み取りコミット分離レベル {#read-committed-isolation-level}
 
-TiDB v4.0.0-beta以降、TiDBはReadCommitted分離レベルをサポートしています。
+TiDB v4.0.0-beta 以降、TiDB は Read Committed 分離レベルをサポートしています。
 
-歴史的な理由から、現在の主流データベースのReadCommitted分離レベルは基本的に[Oracleによって定義された一貫性のある読み取り分離レベル](https://docs.oracle.com/cd/B19306_01/server.102/b14220/consist.htm)です。この状況に適応するために、TiDBペシミスティックトランザクションの読み取りコミット分離レベルも、本質的に一貫した読み取り動作です。
+歴史的な理由から、現在のメインストリーム データベースの Read Committed 分離レベルは基本的に[Oracle によって定義された一貫性のある読み取り分離レベル](https://docs.oracle.com/cd/B19306_01/server.102/b14220/consist.htm)です。この状況に適応するために、TiDB 悲観的トランザクションの Read Committed 分離レベルも本質的に一貫した読み取り動作です。
 
 > **ノート：**
 >
-> 読み取りコミット分離レベルは、 [悲観的なトランザクションモード](/pessimistic-transaction.md)でのみ有効です。 [楽観的なトランザクションモード](/optimistic-transaction.md)では、トランザクション分離レベルを`Read Committed`に設定しても有効にならず、トランザクションは引き続き反復可能読み取り分離レベルを使用します。
+> Read Committed 分離レベルは[ペシミスティック トランザクション モード](/pessimistic-transaction.md)でのみ有効です。 [楽観的なトランザクション モード](/optimistic-transaction.md)では、トランザクション分離レベルを`Read Committed`に設定しても効果がなく、トランザクションは引き続き Repeatable Read 分離レベルを使用します。
 
-v6.0.0以降、TiDBは、 [`tidb_rc_read_check_ts`](/system-variables.md#tidb_rc_read_check_ts-new-in-v600)システム変数を使用して、読み取りと書き込みの競合がまれなシナリオでタイムスタンプの取得を最適化することをサポートしています。この変数を有効にした後、TiDBは、 `SELECT`が実行されると、以前の有効なタイムスタンプを使用してデータを読み取ろうとします。この変数の初期値は、トランザクションの`start_ts`です。
+v6.0.0 以降、TiDB は[`tidb_rc_read_check_ts`](/system-variables.md#tidb_rc_read_check_ts-new-in-v600)システム変数を使用して、読み取りと書き込みの競合がまれなシナリオでタイムスタンプの取得を最適化することをサポートしています。この変数を有効にした後、TiDB は`SELECT`が実行されたときに以前の有効なタイムスタンプを使用してデータを読み取ろうとします。この変数の初期値はトランザクションの`start_ts`です。
 
--   読み取りプロセス中にTiDBがデータの更新を検出しなかった場合、TiDBは結果をクライアントに返し、 `SELECT`ステートメントが正常に実行されます。
--   読み取りプロセス中にTiDBがデータ更新を検出した場合：
-    -   TiDBがまだ結果をクライアントに送信していない場合、TiDBは新しいタイムスタンプを取得して、このステートメントを再試行します。
-    -   TiDBがすでに部分的なデータをクライアントに送信している場合、TiDBはクライアントにエラーを報告します。毎回クライアントに送信されるデータの量は、 `tidb_init_chunk_size`と`tidb_max_chunk_size`によって制御されます。
+-   読み取りプロセス中に TiDB がデータ更新に遭遇しなかった場合、TiDB は結果をクライアントに返し、 `SELECT`ステートメントは正常に実行されます。
+-   TiDB が読み取りプロセス中にデータ更新を検出した場合:
+    -   TiDB がまだ結果をクライアントに送信していない場合、TiDB は新しいタイムスタンプを取得して、このステートメントを再試行しようとします。
+    -   TiDB がすでに部分的なデータをクライアントに送信している場合、TiDB はクライアントにエラーを報告します。毎回クライアントに送信されるデータの量は、 `tidb_init_chunk_size`と`tidb_max_chunk_size`によって制御されます。
 
-`READ-COMMITTED`の分離レベルが使用され、 `SELECT`のステートメントが多く、読み取りと書き込みの競合がまれであるシナリオでは、この変数を有効にすると、グローバルタイムスタンプを取得するための遅延とコストを回避できます。
+`READ-COMMITTED`分離レベルが使用され、 `SELECT`のステートメントが多く、読み取りと書き込みの競合がまれなシナリオでは、この変数を有効にすると、グローバル タイムスタンプを取得するためのレイテンシーとコストを回避できます。
 
-## TiDBとMySQLReadCommittedの違い {#difference-between-tidb-and-mysql-read-committed}
+## TiDB と MySQL Read Committed の違い {#difference-between-tidb-and-mysql-read-committed}
 
-MySQL Read Committed分離レベルは、ほとんどの場合、一貫性のある読み取り機能と一致しています。 [半一貫性のある読み取り](https://dev.mysql.com/doc/refman/8.0/en/innodb-transaction-isolation-levels.html)などの例外もあります。この特別な動作は、TiDBではサポートされていません。
+MySQL Read Committed 分離レベルは、ほとんどの場合、Consistent Read 機能と一致しています。 [半一貫性の読み取り](https://dev.mysql.com/doc/refman/8.0/en/innodb-transaction-isolation-levels.html)などの例外もあります。この特別な動作は TiDB ではサポートされていません。

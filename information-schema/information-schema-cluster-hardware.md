@@ -5,7 +5,7 @@ summary: Learn the `CLUSTER_HARDWARE` information_schema table.
 
 # CLUSTER_HARDWARE {#cluster-hardware}
 
-`CLUSTER_HARDWARE`ハードウェアシステムテーブルは、クラスタの各インスタンスが配置されているサーバーのハードウェア情報を提供します。
+`CLUSTER_HARDWARE`ハードウェア システム テーブルは、クラスタの各インスタンスが配置されているサーバーのハードウェア情報を提供します。
 
 {{< copyable "" >}}
 
@@ -28,20 +28,20 @@ DESC cluster_hardware;
 6 rows in set (0.00 sec)
 ```
 
-フィールドの説明：
+フィールドの説明:
 
--   `TYPE` ： [`information_schema.cluster_info`](/information-schema/information-schema-cluster-info.md)テーブルの`TYPE`フィールドに対応します。オプションの値は、 `tidb` 、および`pd` `tikv` 。
--   `INSTANCE` ： [`information_schema.cluster_info`](/information-schema/information-schema-cluster-info.md)クラスタ情報テーブルの`INSTANCE`フィールドに対応します。
--   `DEVICE_TYPE` ：ハードウェアタイプ。現在、 `cpu` 、および`memory`タイプを`net`でき`disk` 。
--   `DEVICE_NAME` ：ハードウェア名。 `DEVICE_NAME`の値は`DEVICE_TYPE`によって異なります。
-    -   `cpu` ：ハードウェア名はcpuです。
-    -   `memory` ：ハードウェア名はメモリです。
-    -   `disk` ：ディスク名。
-    -   `net` ：ネットワークカード名。
--   `NAME` ：ハードウェアの異なる情報名。たとえば、CPUには2つの情報名があります`cpu-logical-cores`と`cpu-physical-cores`は、それぞれ論理コア番号と物理コア番号を意味します。
--   `VALUE` ：ディスクボリュームやCPUコア番号など、対応するハードウェア情報の値。
+-   `TYPE` : [`information_schema.cluster_info`](/information-schema/information-schema-cluster-info.md)テーブルの`TYPE`フィールドに対応します。オプションの値は`tidb` 、 `pd` 、および`tikv`です。
+-   `INSTANCE` : [`information_schema.cluster_info`](/information-schema/information-schema-cluster-info.md)クラスター情報テーブルの`INSTANCE`フィールドに対応します。
+-   `DEVICE_TYPE` : ハードウェア タイプ。現在、 `cpu` 、 `memory` 、 `disk` 、および`net`タイプを照会できます。
+-   `DEVICE_NAME` : ハードウェア名。 `DEVICE_NAME`の値は`DEVICE_TYPE`によって異なります。
+    -   `cpu` : ハードウェア名は cpu です。
+    -   `memory` : ハードウェア名はメモリです。
+    -   `disk` : ディスク名。
+    -   `net` : ネットワーク カード名。
+-   `NAME` : ハードウェアの異なる情報名。たとえば、cpu には`cpu-logical-cores`と`cpu-physical-cores`という 2 つの情報名があり、それぞれ論理コア番号と物理コア番号を意味します。
+-   `VALUE` : ディスク ボリュームや CPU コア数など、対応するハードウェア情報の値。
 
-次の例は、 `CLUSTER_HARDWARE`テーブルを使用してCPU情報を照会する方法を示しています。
+次の例は、 `CLUSTER_HARDWARE`テーブルを使用して CPU 情報を照会する方法を示しています。
 
 {{< copyable "" >}}
 

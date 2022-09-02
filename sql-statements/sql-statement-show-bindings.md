@@ -3,21 +3,21 @@ title: SHOW [GLOBAL|SESSION] BINDINGS
 summary: Use of SHOW BINDINGS binding in TiDB database.
 ---
 
-# [グローバル|セッション]バインディングを表示する {#show-global-session-bindings}
+# [グローバル|セッション]バインディングを表示 {#show-global-session-bindings}
 
-`SHOW BINDINGS`ステートメントは、作成されたSQLバインディングに関する情報を表示するために使用されます。 `BINDING`は、 `GLOBAL`または`SESSION`ベースのいずれかになります。デフォルトは`SESSION`です。
+`SHOW BINDINGS`ステートメントは、作成された SQL バインディングに関する情報を表示するために使用されます。 `BINDING`は`GLOBAL`または`SESSION`ベースのいずれかになります。デフォルトは`SESSION`です。
 
 ## あらすじ {#synopsis}
 
-**ShowStmt：**
+**表示ステートメント:**
 
 ![ShowStmt](/media/sqlgram/ShowStmt.png)
 
-**ShowTargetFilterable：**
+**ShowTargetFilterable:**
 
 ![ShowTargetFilterable](/media/sqlgram/ShowTargetFilterable.png)
 
-**GlobalScope：**
+**グローバルスコープ:**
 
 ![GlobalScope](/media/sqlgram/GlobalScope.png)
 
@@ -33,19 +33,19 @@ summary: Use of SHOW BINDINGS binding in TiDB database.
 SHOW [GLOBAL | SESSION] BINDINGS [ShowLikeOrWhereOpt];
 ```
 
-このステートメントは、実行プランのバインディングをGLOBALまたはSESSIONレベルで出力します。デフォルトのスコープはSESSIONです。現在、以下に示すように、 `SHOW BINDINGS`は8つの列を出力します。
+このステートメントは、GLOBAL または SESSION レベルで実行計画バインディングを出力します。デフォルトのスコープは SESSION です。現在、以下に示すように、 `SHOW BINDINGS`は 8 つの列を出力します。
 
-| カラム名         | 説明                                                                                                                                              |
-| :----------- | :---------------------------------------------------------------------------------------------------------------------------------------------- |
-| original_sql | パラメータ化後の元のSQLステートメント                                                                                                                            |
-| bind_sql     | ヒント付きのバインドされたSQLステートメント                                                                                                                         |
-| default_db   | デフォルトのデータベース                                                                                                                                    |
-| 状態           | 「使用中」、「削除済み」、「無効」、「拒否」、「検証待ち」などのステータス                                                                                                           |
-| create_time  | 作成された時間                                                                                                                                         |
-| update_time  | 更新された時間                                                                                                                                         |
-| 文字コード        | キャラクターセット                                                                                                                                       |
-| 照合順序         | 並べ替えルール                                                                                                                                         |
-| ソース          | `manual` （ `create [global] binding` SQLステートメントによって作成される）、 `capture` （TiDBによって自動的にキャプチャされる）、および`evolve` （TiDBによって自動的に展開される）を含む、バインディングが作成される方法。 |
+| カラム名         | 説明                                                                                                                                                |
+| :----------- | :------------------------------------------------------------------------------------------------------------------------------------------------ |
+| original_sql | パラメータ化後の元の SQL ステートメント                                                                                                                            |
+| bind_sql     | ヒント付きのバインドされた SQL ステートメント                                                                                                                         |
+| default_db   | デフォルトのデータベース                                                                                                                                      |
+| 状態           | 「使用中」、「削除済み」、「無効」、「拒否済み」、「確認待ち」などのステータス                                                                                                           |
+| create_time  | 作成時間                                                                                                                                              |
+| update_time  | 更新時間                                                                                                                                              |
+| 文字コード        | キャラクターセット                                                                                                                                         |
+| 照合順序         | ソート規則                                                                                                                                             |
+| ソース          | `manual` ( `create [global] binding` SQL ステートメントによって作成される)、 `capture` (TiDB によって自動的にキャプチャされる)、および`evolve` (TiDB によって自動的に展開される) を含むバインディングが作成される方法 |
 
 ## 例 {#examples}
 
@@ -138,14 +138,14 @@ Original_sql: select * from t1 where b = ?
 1 row in set (0.00 sec)
 ```
 
-## MySQLの互換性 {#mysql-compatibility}
+## MySQL の互換性 {#mysql-compatibility}
 
-このステートメントは、MySQL構文のTiDB拡張です。
+このステートメントは、MySQL 構文に対する TiDB 拡張です。
 
-## も参照してください {#see-also}
+## こちらもご覧ください {#see-also}
 
--   [[グローバル|セッション]バインディングを作成する](/sql-statements/sql-statement-create-binding.md)
--   [ドロップ[グローバル|セッション]バインディング](/sql-statements/sql-statement-drop-binding.md)
--   [テーブルの分析](/sql-statements/sql-statement-analyze-table.md)
+-   [[グローバル|セッション]バインディングを作成](/sql-statements/sql-statement-create-binding.md)
+-   [ドロップ [グローバル|セッション] バインディング](/sql-statements/sql-statement-drop-binding.md)
+-   [テーブルを分析](/sql-statements/sql-statement-analyze-table.md)
 -   [オプティマイザーのヒント](/optimizer-hints.md)
 -   [SQL計画管理](/sql-plan-management.md)

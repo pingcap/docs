@@ -5,20 +5,20 @@ summary: Learn steps, rules, and examples to create a secondary index.
 
 # セカンダリ インデックスを作成する {#create-a-secondary-index}
 
-このドキュメントでは、SQL とさまざまなプログラミング言語を使用してセカンダリ インデックスを作成する方法について説明し、インデックス作成の規則を一覧表示します。このドキュメントでは、 [書店](/develop/dev-guide-bookshop-schema-design.md)のアプリケーションを例として、セカンダリ インデックス作成の手順を説明します。
+このドキュメントでは、SQL とさまざまなプログラミング言語を使用してセカンダリ インデックスを作成する方法について説明し、インデックス作成の規則を示します。このドキュメントでは、 [書店](/develop/dev-guide-bookshop-schema-design.md)のアプリケーションを例として、セカンダリ インデックス作成の手順を説明します。
 
 ## 始める前に {#before-you-start}
 
 セカンダリ インデックスを作成する前に、次の操作を行います。
 
--   [TiDB Cloud(開発者層) で TiDB クラスターを構築する](/develop/dev-guide-build-cluster-in-cloud.md) .
+-   [TiDB Cloud(開発者層) で TiDBクラスタを構築する](/develop/dev-guide-build-cluster-in-cloud.md) .
 -   [スキーマ設計の概要](/develop/dev-guide-schema-design-overview.md)を読んでください。
 -   [データベースを作成する](/develop/dev-guide-create-database.md) .
 -   [テーブルを作成する](/develop/dev-guide-create-table.md) .
 
 ## 二次索引とは {#what-is-secondary-index}
 
-セカンダリ インデックスは、TiDBクラスタの論理オブジェクトです。これは、TiDB がクエリのパフォーマンスを向上させるために使用するデータの並べ替えタイプと単純に見なすことができます。 TiDB では、セカンダリ インデックスの作成はオンライン操作であり、テーブルに対するデータの読み取りおよび書き込み操作をブロックしません。インデックスごとに、TiDB はテーブル内の各行の参照を作成し、直接データではなく、選択した列で参照を並べ替えます。
+セカンダリ インデックスは、TiDB クラスター内の論理オブジェクトです。これは単に、TiDB がクエリのパフォーマンスを向上させるために使用するデータの並べ替えタイプと見なすことができます。 TiDB では、セカンダリ インデックスの作成はオンライン操作であり、テーブルに対するデータの読み取りおよび書き込み操作をブロックしません。インデックスごとに、TiDB はテーブル内の各行の参照を作成し、直接データではなく選択した列で参照を並べ替えます。
 
 <CustomContent platform="tidb">
 
@@ -100,7 +100,7 @@ CREATE TABLE `bookshop`.`books` (
 ) DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 ```
 
-年による検索機能をサポートする**には、特定の年に発行されたすべての書籍を検索**する SQL ステートメントを作成する必要があります。 2022 年を例に取ると、次のように SQL ステートメントを記述します。
+年による検索機能をサポートする**には、特定の年に発行されたすべての書籍を検索**する SQL ステートメントを作成する必要があります。 2022 年を例にとると、次のように SQL ステートメントを記述します。
 
 {{< copyable "" >}}
 
@@ -154,7 +154,7 @@ CREATE INDEX `idx_book_published_at` ON `bookshop`.`books` (`bookshop`.`books`.`
 3 rows in set (0.18 sec)
 ```
 
-出力では、 **TableFullScan**の代わりに<strong>IndexRangeScan</strong>が表示されます。これは、TiDB がこのクエリを実行するためにインデックスを使用する準備ができていることを意味します。
+出力では、 **TableFullScan**の代わりに<strong>IndexRangeScan</strong>が表示されます。これは、TiDB がインデックスを使用してこのクエリを実行する準備ができていることを意味します。
 
 実行計画の**TableFullScan**や<strong>IndexRangeScan</strong>などの単語は、TiDB では[オペレーター](/explain-overview.md#operator-overview)です。実行計画と演算子の詳細については、 [TiDB クエリ実行計画の概要](/explain-overview.md)を参照してください。
 

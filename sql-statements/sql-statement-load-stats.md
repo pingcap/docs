@@ -3,9 +3,9 @@ title: LOAD STATS
 summary: An overview of the usage of LOAD STATS for the TiDB database.
 ---
 
-# 統計の読み込み {#load-stats}
+# ロード統計 {#load-stats}
 
-`LOAD STATS`ステートメントは、統計をTiDBにロードするために使用されます。
+`LOAD STATS`ステートメントは、統計を TiDB にロードするために使用されます。
 
 ## あらすじ {#synopsis}
 
@@ -16,11 +16,11 @@ LoadStatsStmt ::=
 
 ## 例 {#examples}
 
-アドレス`http://${tidb-server-ip}:${tidb-server-status-port}/stats/dump/${db_name}/${table_name}`にアクセスして、TiDBインスタンスの統計をダウンロードできます。
+アドレス`http://${tidb-server-ip}:${tidb-server-status-port}/stats/dump/${db_name}/${table_name}`にアクセスして、TiDB インスタンスの統計をダウンロードできます。
 
 `LOAD STATS ${stats_path}`を使用して、特定の統計ファイルをロードすることもできます。
 
-`${stats_path}`は、絶対パスまたは相対パスにすることができます。相対パスを使用する場合、対応するファイルは`tidb-server`が開始されたパスから始まります。次に例を示します。
+`${stats_path}`は、絶対パスまたは相対パスにすることができます。相対パスを使用する場合、対応するファイルは`tidb-server`が始まるパスから検索されます。次に例を示します。
 
 {{< copyable "" >}}
 
@@ -32,10 +32,10 @@ LOAD STATS '/tmp/stats.json';
 Query OK, 0 rows affected (0.00 sec)
 ```
 
-## MySQLの互換性 {#mysql-compatibility}
+## MySQL の互換性 {#mysql-compatibility}
 
-このステートメントは、MySQL構文のTiDB拡張です。
+このステートメントは、MySQL 構文に対する TiDB 拡張です。
 
-## も参照してください {#see-also}
+## こちらもご覧ください {#see-also}
 
 -   [統計](/statistics.md)
