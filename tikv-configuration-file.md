@@ -1499,7 +1499,7 @@ Configuration items related to Raft Engine.
 
 > **Warning:**
 >
-> - After `format-version` with `2` is set, you **cannot** downgrade the TiKV cluster to a version earlier than v6.3.0. Otherwise, data corruption might occur.
+> - After `format-version` is set to `2`, you **cannot** downgrade the TiKV cluster to a version earlier than v6.3.0. Otherwise, data corruption might occur.
 
 + Specifies the version of log files in Raft Engine.
 + Value Options:
@@ -1511,9 +1511,9 @@ Configuration items related to Raft Engine.
 
 > **Note:**
 >
-> - This configuration item is only available for [`format-version`](#format-version-new-in-v630) >= 2.
+> - This configuration item is only available when [`format-version`](#format-version-new-in-v630) >= 2.
 
-+ Determines whether to recycle stale log files in Raft Engine. When it is enabled, logically purged log files will be reserved for recycling. This feature can reduce the long tail on `write` workloads.
++ Determines whether to recycle stale log files in Raft Engine. When it is enabled, logically purged log files will be reserved for recycling. This reduces the long tail latency on `write` workloads.
 + Default value: `true`
 
 ## security
