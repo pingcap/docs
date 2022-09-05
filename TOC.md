@@ -336,7 +336,7 @@
         -   [TiDBクラスタトポロジ リファレンス](/tiup/tiup-cluster-topology-reference.md)
         -   [DMクラスタトポロジ リファレンス](/tiup/tiup-dm-topology-reference.md)
         -   [ミラー リファレンス ガイド](/tiup/tiup-mirror-reference.md)
-        -   TiUPコンポーネント
+        -   TiUP コンポーネント
             -   [tiup-playground](/tiup/tiup-playground.md)
             -   [tiup-cluster](/tiup/tiup-cluster.md)
             -   [tiup-mirror](/tiup/tiup-mirror.md)
@@ -360,7 +360,7 @@
             -   [CSV サポート](/tidb-lightning/migrate-from-csv-using-tidb-lightning.md)
             -   [バックエンド](/tidb-lightning/tidb-lightning-backends.md)
             -   [物理インポート モード](/tidb-lightning/tidb-lightning-physical-import-mode.md)
-            -   [物理インポート モードの使用](/tidb-lightning/tidb-lightning-physical-import-mode-usage.md)
+            -   [物理インポート モードの使用法](/tidb-lightning/tidb-lightning-physical-import-mode-usage.md)
             -   [並行してデータをインポートする](/tidb-lightning/tidb-lightning-distributed-import.md)
             -   [エラー解決](/tidb-lightning/tidb-lightning-error-resolution.md)
             -   [ウェブインターフェース](/tidb-lightning/tidb-lightning-web-interface.md)
@@ -386,7 +386,7 @@
             -   [タスクの構成](/dm/dm-task-configuration-guide.md)
             -   [テーブル ルーティング](/dm/dm-key-features.md)
             -   [ブロックリストと許可リスト](/dm/dm-key-features.md#block-and-allow-table-lists)
-            -   [Binlogイベント フィルター](/dm/dm-key-features.md#binlog-event-filter)
+            -   [Binlogイベント フィルタ](/dm/dm-key-features.md#binlog-event-filter)
             -   [SQL 式を使用した DML のフィルタリング](/dm/feature-expression-filter.md)
             -   データ移行タスクの管理
                 -   [タスクの事前チェック](/dm/dm-precheck.md)
@@ -442,7 +442,7 @@
                 -   [DM 接続の TLS を有効にする](/dm/dm-enable-tls.md)
                 -   [自己署名証明書の生成](/dm/dm-generate-self-signed-certificates.md)
             -   モニタリングとアラート
-                -   [指標の監視](/dm/monitor-a-dm-cluster.md)
+                -   [指標のモニタリング](/dm/monitor-a-dm-cluster.md)
                 -   [アラート ルール](/dm/dm-alert-rules.md)
             -   [エラーコード](/dm/dm-error-handling.md#handle-common-errors)
             -   [用語集](/dm/dm-glossary.md)
@@ -497,7 +497,7 @@
         -   [デプロイ](/ticdc/deploy-ticdc.md)
         -   [管理](/ticdc/manage-ticdc.md)
         -   監視と警告
-            -   [指標の監視](/ticdc/monitor-ticdc.md)
+            -   [指標のモニタリング](/ticdc/monitor-ticdc.md)
             -   [アラート ルール](/ticdc/ticdc-alert-rules.md)
         -   [トラブルシューティング](/ticdc/troubleshoot-ticdc.md)
         -   参照
@@ -507,7 +507,6 @@
             -   [TiCDC Canal- JSON プロトコル](/ticdc/ticdc-canal-json.md)
         -   [よくある質問](/ticdc/ticdc-faq.md)
         -   [用語集](/ticdc/ticdc-glossary.md)
-    -   [Dumpling](/dumpling-overview.md)
     -   同期差分インスペクター
         -   [概要](/sync-diff-inspector/sync-diff-inspector-overview.md)
         -   [異なるスキーマ/テーブル名を持つテーブルのデータ チェック](/sync-diff-inspector/route-diff.md)
