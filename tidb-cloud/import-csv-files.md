@@ -74,11 +74,11 @@ Because CSV files do not contain schema information, before importing data from 
 
 To allow TiDB Cloud to access the CSV files in the Amazon S3 or GCS bucket, do one of the following:
 
-- If your CSV files are located in Amazon S3, [configure cross-account access to Amazon S3](/tidb-cloud/config-s3-and-gcs-access.md#configure-amazon-s3-access).
+- If your CSV files are located in Amazon S3, [configure Amazon S3 access](/tidb-cloud/config-s3-and-gcs-access.md#configure-amazon-s3-access).
 
     Once finished, make a note of the Role ARN value as you will need it in [Step 4](#step-4-import-csv-files-to-tidb-cloud).
 
-- If your CSV files are located in GCS, [configure cross-account access to GCS](/tidb-cloud/config-s3-and-gcs-access.md#configure-gcs-access).
+- If your CSV files are located in GCS, [configure GCS access](/tidb-cloud/config-s3-and-gcs-access.md#configure-gcs-access).
 
 ## Step 4. Import CSV files to TiDB Cloud
 
