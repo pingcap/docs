@@ -97,13 +97,13 @@ To use the AWS Management Console to create the VPC interface endpoint, perform 
 
     <img src="../media/tidb-cloud/private-endpoint/create-endpoint-3.png" width="70%" auto="Create endpoint service 3" />
 
-7. Select your security group properly in the **Security groups** area.
-8. Select the availability zones where your TiDB cluster is located in the **Subnets** area.
+7. Select the availability zones where your TiDB cluster is located in the **Subnets** area.
 
     > **Tip:**
     >
     > If your service is spanning across more than three availability zones (AZs), you might not be able to select AZs in the **Subnets** area. This issue occurs when there is an extra AZ in your selected region in addition to the AZs where your TiDB cluster is located. In this case, contact [PingCAP Technical Support](https://docs.pingcap.com/tidbcloud/tidb-cloud-support).
 
+8. Select your security group properly in the **Security groups** area.
 9. Click **Create endpoint**.
 
 </div>
