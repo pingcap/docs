@@ -1,6 +1,6 @@
 ---
 title: Migration Overview
-summary: Learn the overview of data migration scenarios and the solutions for TiDB Cloud.
+summary: Learn an overview of data migration scenarios and the solutions for TiDB Cloud.
 ---
 
 # Migration Overview

@@ -5,9 +5,9 @@ summary: Learn how to migrate and merge MySQL shards of Large Datasets to TiDB C
 
 # Migrate and Merge MySQL Shards of Large Datasets to TiDB Cloud
 
-This document describes how to migrate and merge a large MySQL dataset (for example, more than 1 TiB) from different partitions into TiDB Cloud. After full data migration, you can use TiDB Data Migration (DM) to perform incremental migration according to your business needs.
+This document describes how to migrate and merge a large MySQL dataset (for example, more than 1 TiB) from different partitions into TiDB Cloud. After full data migration, you can use [TiDB Data Migration (DM)](https://docs.pingcap.com/tidb/stable/dm-overview) to perform incremental migration according to your business needs.
 
-The example in this document uses a complex shard migration task across multiple MySQL instances, and involves handling conflicts in auto-increment primary keys. The scenario in this example is also applicable to the scenario of merging data from different sharded tables within a single MySQL instance.
+The example in this document uses a complex shard migration task across multiple MySQL instances, and involves handling conflicts in auto-increment primary keys. The scenario in this example is also applicable to merging data from different sharded tables within a single MySQL instance.
 
 ## Environment information in the example
 
@@ -15,12 +15,13 @@ This section describes the basic information of the upstream cluster, DM, and do
 
 ### Upstream cluster
 
-The version of the upstream cluster is MySQL v5.7.18. The specific information is as follows:
+The environment information of the upstream cluster is as follows:
 
+- MySQL version: MySQL v5.7.18
 - MySQL instance1:
     - schema `store_01` and table `[sale_01, sale_02]`
     - schema `store_02` and table `[sale_01, sale_02]`
-- MySQL instance2:
+- MySQL instance 2:
     - schema `store_01`and table `[sale_01, sale_02]`
     - schema `store_02`and table `[sale_01, sale_02]`
 - Table structure:
@@ -41,7 +42,7 @@ The version of DM is v5.3.0. You need to deploy TiDB DM manually. For detailed s
 
 ### Downstream cluster
 
-The version of TiDB Cloud cluster is v6.0.0. The sharded schemas and tables are merged into the table `store.sales`.
+The sharded schemas and tables are merged into the table `store.sales`.
 
 ## Perform full data migration from MySQL to TiDB Cloud
 
@@ -74,7 +75,7 @@ When you use Dumpling to export data to Amazon S3, note the following:
 
 To export data to Amazon S3, do the following:
 
-1. Get the `AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY` on the Amazon S3 bucket.
+1. Get the `AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY` of the Amazon S3 bucket.
 
     ```shell
     [root@localhost ~]# export AWS_ACCESS_KEY_ID={your_aws_access_key_id}
@@ -108,7 +109,7 @@ mysql> use store;
 Database changed
 ```
 
-In this example, the column IDs of `sale_01` and `sale_02` are auto-increment primary keys. Conflicts might occur when you merge sharded tables in the downstream database. Execute the following SQL statement to modify the PRIMARY KEY attribute of the ID column to normal index:
+In this example, the column IDs of the upstream tables `sale_01` and `sale_02` are auto-increment primary keys. Conflicts might occur when you merge sharded tables in the downstream database. Execute the following SQL statement to set the ID column as a normal index instead of a primary key:
 
 ```sql
 mysql> CREATE TABLE `sales` (
@@ -121,7 +122,7 @@ mysql> CREATE TABLE `sales` (
 Query OK, 0 rows affected (0.17 sec)
 ```
 
-For more information about the solutions to solve such conflicts, see [Remove the PRIMARY KEY attribute from the column](https://docs.pingcap.com/tidb-data-migration/v5.3/shard-merge-best-practices#remove-the-primary-key-attribute-from-the-column).
+For more information about the solutions to solve such conflicts, see [Remove the PRIMARY KEY attribute from the column](https://docs.pingcap.com/tidb/stable/shard-merge-best-practices#remove-the-primary-key-attribute-from-the-column).
 
 ### Step 4. Configure Amazon S3 access
 
@@ -160,17 +161,17 @@ This document uses the Amazon S3 as an example. The following example only lists
 
 ### Step 5. Perform the data import task
 
-After configuring the IAM Role, you can perform the data import task on the [TiDB Cloud console](https://tidbcloud.com/console/clusters).
+After configuring the Amazon S3 access, you can perform the data import task in the [TiDB Cloud console](https://tidbcloud.com/console/clusters).
 
-1. Navigate to the **Active Clusters** page.
+1. Navigate to the **Active Clusters** page for your project.
 
-2. Find the area of your target cluster and click **Import Data** in the upper-right corner of the area. The **Data Import** page is displayed.
+2. Locate your target cluster and click **Import Data** in the upper-right corner of the cluster area. The **Data Import** page is displayed.
 
 3. On the **Data Import** page, fill in the following information:
 
     - **Data Format**: select **CSV**.
     - **Location**: `AWS`
-    - **Bucket URL**: fill in the bucket URL of your source data. You can use the second-level directory corresponding to tables, `s3://dumpling-s3/store/sales` in this example. You can import the data in all MySQL instances that will be merged into `store.sales` in one go.
+    - **Bucket URL**: fill in the bucket URL of your source data. You can use the second-level directory corresponding to tables, `s3://dumpling-s3/store/sales` in this example, so that TiDB Cloud can import and merge the data in all MySQL instances into `store.sales` in one go.
     - **Role-ARN**: enter the Role-ARN you obtained.
     - **Target Cluster**: fill in the **Username** and **Password** fields.
 
@@ -180,7 +181,7 @@ After configuring the IAM Role, you can perform the data import task on the [TiD
 
 5. Click **Next**.
 
-6. On the **Preview** page, confirm the import data and then click **Start Import**. For detailed information about modifying CSV configurations, see [Import CSV Files from Amazon S3 or GCS into TiDB Cloud](/tidb-cloud/import-csv-files.md).
+6. On the **Preview** page, confirm the import configurations and then click **Start Import**. For detailed information about modifying CSV configurations, see [Import CSV Files from Amazon S3 or GCS into TiDB Cloud](/tidb-cloud/import-csv-files.md).
 
 TiDB Cloud starts validating whether it can access your data in the specified bucket URL. After the validation is completed and successful, the import task starts automatically. If you get the `AccessDenied` error, see [Troubleshoot Access Denied Errors during Data Import from S3](/tidb-cloud/troubleshoot-import-access-denied-error.md).
 
@@ -192,7 +193,7 @@ To replicate the data changes based on binlog from a specified position in the s
 
 ### Before you begin
 
-TiDB Cloud does not provide any feature about incremental data replication yet. You need to deploy TiDB DM manually. For detailed steps, see [Deploy a DM Cluster Using TiUP](https://docs.pingcap.com/tidb/stable/deploy-a-dm-cluster-using-tiup).
+The TiDB Cloud console does not provide any feature about incremental data replication yet. You need to deploy TiDB DM to migrate incremental data. For detailed steps, see [Deploy a DM Cluster Using TiUP](https://docs.pingcap.com/tidb/stable/deploy-a-dm-cluster-using-tiup).
 
 ### Step 1. Add the data source
 
@@ -206,10 +207,10 @@ TiDB Cloud does not provide any feature about incremental data replication yet. 
     # If you have configured the upstream database service to switch master between different nodes automatically, you must enable GTID.
     enable-gtid: true
     from:
-     host: "192.168.10.101"
+     host: "${host}"           # For example: 192.168.10.101
      user: "user01"
-     password: "mZMkdjbRztSag6qEgoh8UkDY6X13H48="
-     port: 3307
+     password: "${password}"   # Plaintext passwords are supported but not recommended. It is recommended that you use dmctl encrypt to encrypt plaintext passwords.
+     port: ${port}             # For example: 3307
     ```
 
 2. Create another new data source file `dm-source2.yaml`, and add the following content:
