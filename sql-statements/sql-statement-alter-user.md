@@ -65,7 +65,7 @@ Query OK, 0 rows affected (0.02 sec)
 
 > **Note:**
 >
-> Do not use `ACCOUNT UNLOCK` to unlock a [role](/sql-statements/sql-statement-create-role.md). Otherwise, an unlocked role can be used to log in to TiDB without password.
+> Do not use `ACCOUNT UNLOCK` to unlock a [role](/sql-statements/sql-statement-create-role.md). Otherwise, the unlocked role can be used to log in to TiDB without password.
 
 ## MySQL compatibility
 
