@@ -1,5 +1,6 @@
 ---
 title: TiDB Introduction
+aliases: ['/tidb/v5.4/adopters', '/tidb/stable/adopters']
 hide_sidebar: true
 hide_commit: true
 ---
