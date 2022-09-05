@@ -40,6 +40,10 @@ The environment information of the upstream cluster is as follows:
 
 The version of DM is v5.3.0. You need to deploy TiDB DM manually. For detailed steps, see [Deploy a DM Cluster Using TiUP](https://docs.pingcap.com/tidb/stable/deploy-a-dm-cluster-using-tiup).
 
+### External storage
+
+This document uses the Amazon S3 as an example.
+
 ### Downstream cluster
 
 The sharded schemas and tables are merged into the table `store.sales`.
@@ -128,7 +132,7 @@ For more information about the solutions to solve such conflicts, see [Remove th
 
 To configure Amazon S3 access, follow the instructions in [Configure Amazon S3 access](/tidb-cloud/config-s3-and-gcs-access.md#configure-amazon-s3-access).
 
-This document uses the Amazon S3 as an example. The following example only lists key policy configurations. Replace the Amazon S3 path with your own values.
+The following example only lists key policy configurations. Replace the Amazon S3 path with your own values.
 
 ```yaml
 {
