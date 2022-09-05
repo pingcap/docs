@@ -725,23 +725,23 @@ Constraint checking is always performed in place for pessimistic transactions (d
 - Unit: Threads
 - This variable is used to set the concurrency of the DDL operation in the `re-organize` phase.
 
-### tidb_ddl_enable_fast_reorg
+### tidb_ddl_enable_fast_reorg <span class="version-mark">New in v6.3.0</span>
 
 - Scope: GLOBAL
 - Persists to cluster: Yes
 - Type: Boolean
-- Default `OFF`
-- This variable enable/disable add index DDL task to go fast reorg path in `re-organize` phase.
+- Default value: `OFF`
+- This variable enable/disable add/create index DDL task to go fast reorg solution in `re-organize` phase.
 
-### tidb_ddl_disk_quota
+### tidb_ddl_disk_quota <span class="version-mark">New in v6.3.0</span>
 
 - Scope: GLOBAL
 - Persists to cluster: Yes
 - Type: Integer
-- Default value: `107374182400` 100 GB
-- Range: `[107374182400, 1125899906842624]` [100 GB, 1 PB]
-- Unit: Threads
-- This variable is used to set the threshold of fast reorg can store index data in TiDB local storage.
+- Default value: `107374182400` 100 GiB
+- Range: `[107374182400, 1125899906842624]` [100 GiB, 1 PiB]
+- Unit: Bytes
+- This variable sets a threshold of fast reorg solution which indicates how much index data could be temp stored in TiDB local storage.
 
 ### tidb_disable_txn_auto_retry
 
@@ -1487,6 +1487,12 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 - Scope: SESSION
 - Default value: `tikv,tiflash,tidb`
 - This variable is used to set the storage engine list that TiDB can use when reading data.
+
+### tidb_last_ddl_info <span class="version-mark">New in v6.0.0</span>
+
+- Scope: SESSION
+- Default value：‘’
+- This variable is used to get the last ddl info within the current session.
 
 ### tidb_log_file_max_days <span class="version-mark">New in v5.3.0</span>
 
