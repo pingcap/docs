@@ -9,7 +9,7 @@ PD Recover is a disaster recovery tool of PD, used to recover the PD cluster whi
 
 ## Compile from source code
 
-+ [Go](https://golang.org/) Version 1.13 or later is required because the Go modules are used.
++ [Go](https://golang.org/) Version 1.16 or later is required because the Go modules are used.
 + In the root directory of the [PD project](https://github.com/pingcap/pd), use the `make pd-recover` command to compile and generate `bin/pd-recover`.
 
 > **Note:**
@@ -26,7 +26,7 @@ To download the latest version of PD Recover, directly download the TiDB package
 
 > **Note:**
 >
-> `{version}` indicates the version number of TiDB. For example, if `{version}` is `v5.2.2`, the package download link is `https://download.pingcap.org/tidb-v5.2.2-linux-amd64.tar.gz`.
+> `{version}` indicates the version number of TiDB. For example, if `{version}` is `v5.2.4`, the package download link is `https://download.pingcap.org/tidb-v5.2.4-linux-amd64.tar.gz`.
 
 ## Quick Start
 

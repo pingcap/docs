@@ -37,7 +37,7 @@ The following table shows the meaning of each field in a rule:
 | `EndKey`          | `string`, in hexadecimal form                |  Applies to the ending key of a range.                |
 | `Role`            | `string` | Replica roles, including leader/follower/learner.                           |
 | `Count`           | `int`, positive integer                     |  The number of replicas.                            |
-| `LabelConstraint` | `[]Constraint`                    |  Filers nodes based on the label.               |
+| `LabelConstraint` | `[]Constraint`                    |  Filters nodes based on the label.               |
 | `LocationLabels`  | `[]string`                        |  Used for physical isolation.                       |
 | `IsolationLevel`  | `string`                          |  Used to set the minimum physical isolation level
 
@@ -274,12 +274,12 @@ The output of the above command:
 }
 ```
 
-To write the output to a file, add the `-out` argument to the `rule-bundle get` subcommand, which is convenient for subsequent modification and saving.
+To write the output to a file, add the `--out` argument to the `rule-bundle get` subcommand, which is convenient for subsequent modification and saving.
 
 {{< copyable "shell-regular" >}}
 
 ```bash
-pd-ctl config placement-rules rule-bundle get pd -out="group.json"
+pd-ctl config placement-rules rule-bundle get pd --out="group.json"
 ```
 
 After the modification is finished, you can use the `rule-bundle set` subcommand to save the configuration in the file to the PD server. Unlike the `save` command described in [Set rules using pd-ctl](#set-rules-using-pd-ctl), this command replaces all the rules of this group on the server side.
@@ -287,7 +287,7 @@ After the modification is finished, you can use the `rule-bundle set` subcommand
 {{< copyable "shell-regular" >}}
 
 ```bash
-pd-ctl config placement-rules rule-bundle set pd -in="group.json"
+pd-ctl config placement-rules rule-bundle set pd --in="group.json"
 ```
 
 ### Use pd-ctl to view and modify all configurations
@@ -356,7 +356,7 @@ You only need to add a rule that limits the key range to the range of metadata, 
   "start_key": "6d00000000000000f8",
   "end_key": "6e00000000000000f8",
   "role": "voter",
-  "count": "5",
+  "count": 5,
   "location_labels": ["zone", "rack", "host"]
 }
 ```

@@ -6,6 +6,7 @@ title: Release Notes
 
 ## 5.2
 
+- [5.2.4](/releases/release-5.2.4.md)
 - [5.2.3](/releases/release-5.2.3.md)
 - [5.2.2](/releases/release-5.2.2.md)
 - [5.2.1](/releases/release-5.2.1.md)
@@ -13,6 +14,7 @@ title: Release Notes
 
 ## 5.1
 
+- [5.1.4](/releases/release-5.1.4.md)
 - [5.1.3](/releases/release-5.1.3.md)
 - [5.1.2](/releases/release-5.1.2.md)
 - [5.1.1](/releases/release-5.1.1.md)
@@ -20,6 +22,7 @@ title: Release Notes
 
 ## 5.0
 
+- [5.0.6](/releases/release-5.0.6.md)
 - [5.0.5](/releases/release-5.0.5.md)
 - [5.0.4](/releases/release-5.0.4.md)
 - [5.0.3](/releases/release-5.0.3.md)

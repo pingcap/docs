@@ -409,10 +409,14 @@ MPP is a distributed computing framework provided by the TiFlash engine, which a
 ### tidb_analyze_version <span class="version-mark">New in v5.1.0</span>
 
 - Scope: SESSION | GLOBAL
-- Default value: `2`
 - Range: `[1, 2]`
 - Controls how TiDB collects statistics.
-- In versions before v5.1.0, the default value of this variable is `1`. In v5.1.0, the default value of this variable is `2`, which serves as an experimental feature. For detailed introduction, see [Introduction to Statistics](/statistics.md).
+- The default value of `tidb_analyze_version` in each version of v5.2.x is as follows. For detailed information, see [Introduction to Statistics](/statistics.md).
+
+| Version | Default value |
+| :- | :- |
+| v5.2.0 - v5.2.3 | `2`, which serves as an experimental feature |
+| v5.2.4 and later v5.2.x versions | `1` |
 
 ### tidb_auto_analyze_end_time
 
@@ -643,6 +647,22 @@ Constraint checking is always performed in place for pessimistic transactions (d
 - Scope: SESSION | GLOBAL
 - Default value: `OFF`
 - This variable is used to determine whether to include the `AUTO_INCREMENT` columns when creating a generated column or an expression index.
+
+### tidb_enable_change_multi_schema
+
+> **Warning:**
+>
+> Currently, multi-schema change is an experimental feature. It is not recommended that you use it in the production environment. TiDB will support more types of multi-schema changes in the future. This system variable will be deleted in a future release of TiDB.
+
+- Scope: GLOBAL
+- Persists to cluster: Yes
+- Type: Boolean
+- Default value: `OFF`
+- This variable is used to control whether multiple columns or indexes can be altered in one `ALTER TABLE` statement. When the value of this variable is `ON`, only the following multi-schema changes are supported:
+    - Add multiple columns. For example, `ATLER TABLE t ADD COLUMN c1 INT, ADD COLUMN c2 INT;`.
+    - Drop multiple columns. For example, `ATLER TABLE t DROP COLUMN c1, DROP COLUMN c2;`.
+    - Drop multiple indexes. For example, `ATLER TABLE t DROP INDEX i1, DROP INDEX i2;`.
+    - Drop a column covered by a single-column index. For example, `ALTER TABLE t DROP COLUMN c1`, in which the schema contains `INDEX idx(c1)`.
 
 ### tidb_enable_cascades_planner
 
@@ -1341,6 +1361,25 @@ SET tidb_query_log_max_len = 20
     - leader-and-follower: Read from leader or follower node
 - See [follower reads](/follower-read.md) for additional details.
 
+### tidb_restricted_read_only <span class="version-mark">New in v5.2.0</span>
+
+> **Warning:**
+>
+> For TiDB versions earlier than v5.3.1 or v5.4.1, this variable has a defect and using it might cause unexpected results. Ensure that you use this variable ONLY in TiDB versions later than v5.3.1 or v5.4.1.
+
+- Scope: GLOBAL
+- Default value: `0`
+- Value options: `0`, `1`
+- This variable controls the read-only status of the entire cluster. If the variable is enabled (which means that the value is `1`), all TiDB servers in the entire cluster are in the read-only mode. In this case, TiDB only executes the statements that do not modify data, such as `SELECT`, `USE`, and `SHOW`. For other statements such as `INSERT` and `UPDATE`, TiDB rejects executing those statements in the read-only mode.
+- Enabling the read-only mode using this variable only ensures that the entire cluster finally enters the read-only status. If you have changed the value of this variable in a TiDB cluster but the change has not yet propagated to other TiDB servers, the un-updated TiDB servers are still **not** in the read-only mode.
+- When this variable is enabled, the SQL statements being executed are not affected. TiDB only performs the read-only check for the SQL statements **to be** executed.
+- When this variable is enabled, TiDB handles the uncommitted transactions in the following ways:
+    - For uncommitted read-only transactions, you can commit the transactions normally.
+    - For uncommitted transactions that are not read-only, SQL statements that perform write operations in these transactions are rejected.
+    - For uncommitted read-only transactions with modified data, the commit of these transactions is rejected.
+- After the read-only mode is enabled, all users (including the users with the `SUPER` privilege) cannot execute the SQL statements that might write data unless the user is explicitly granted the `RESTRICTED_REPLICA_WRITER_ADMIN` privilege.
+- Users with `RESTRICTED_VARIABLES_ADMIN` or `SUPER` privileges can modify this variable. However, if the [security enhanced mode](#tidb_enable_enhanced_security) is enabled, only the users with the `RESTRICTED_VARIABLES_ADMIN` privilege can modify this variable.
+
 ### tidb_retry_limit
 
 - Scope: SESSION | GLOBAL
@@ -1362,6 +1401,7 @@ SET tidb_query_log_max_len = 20
 - Scope: GLOBAL
 - Default value: `OFF`
 - By default, Regions are split for a new table when it is being created in TiDB. After this variable is enabled, the newly split Regions are scattered immediately during the execution of the `CREATE TABLE` statement. This applies to the scenario where data need to be written in batches right after the tables are created in batches, because the newly split Regions can be scattered in TiKV beforehand and do not have to wait to be scheduled by PD. To ensure the continuous stability of writing data in batches, the `CREATE TABLE` statement returns success only after the Regions are successfully scattered. This makes the statement's execution time multiple times longer than that when you disable this variable.
+- Note that if `SHARD_ROW_ID_BITS` and `PRE_SPLIT_REGIONS` have been set when a table is created, the specified number of Regions are evenly split after the table creation.
 
 ### tidb_skip_ascii_check <span class="version-mark">New in v5.0</span>
 

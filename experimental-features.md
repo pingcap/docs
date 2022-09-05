@@ -7,12 +7,15 @@ summary: Learn the experimental features of TiDB.
 
 This document introduces the experimental features of TiDB in different versions. It is **NOT** recommended to use these features in the production environment.
 
+## Performance
+
++ [Randomly sample about 10000 rows of data to quickly build statistics](/system-variables.md#tidb_enable_fast_analyze) (Introduced in v3.0)
+
 ## Stability
 
-+ TiFlash limits the use of I/O resources by compressing or sorting data, mitigating the contention for I/O resources between background tasks and front-end data reading and writing (Introduced in v5.0)
 + Improve the stability of the optimizer's choice of indexes (Introduced in v5.0)
     + Extend the statistics feature by collecting the multi-column order dependency information.
-    + Refactor the statistics module, including deleting the `TopN` value from `CMSKetch` and the histogram, and adding NDV information for histogram buckets of each table index.
+    + Refactor the statistics module, including deleting the `TopN` value from `CMSKetch` and the histogram, and adding NDV information for histogram buckets of each table index. For details, see descriptions about [Statistics - `tidb_analyze_version = 2`](/statistics.md).
 
 ## Scheduling
 
@@ -28,12 +31,13 @@ This document introduces the experimental features of TiDB in different versions
 + [Generated Columns](/generated-columns.md).
 + [User-Defined Variables](/user-defined-variables.md).
 + [JSON data type](/data-type-json.md) and [JSON functions](/functions-and-operators/json-functions.md).
-+ [View](/information-schema/information-schema-views.md).
++ [Prepare Plan cache](/sql-prepare-plan-cache.md). (Introduced in v4.0)
++ [Using `ALTER TABLE` to modify multiple columns or indexes](/system-variables.md#tidb_enable_change_multi_schema) (Introduced in v5.0.0)
++ [Cascades Planner](/system-variables.md#tidb_enable_cascades_planner): a cascades framework-based top-down query optimizer (Introduced in v3.0)
 
 ## Configuration management
 
 + Persistently store configuration parameters in PD, and support dynamically modifying configuration items. (Introduced in v4.0)
-+ [SHOW CONFIG](/sql-statements/sql-statement-show-config.md) (Introduced in v4.0)
 
 ## Data sharing and subscription
 
@@ -44,7 +48,6 @@ This document introduces the experimental features of TiDB in different versions
 
 + [Disable Titan](/storage-engine/titan-configuration.md#disable-titan-experimental).
 + [Titan Level Merge](/storage-engine/titan-configuration.md#level-merge-experimental).
-+ TiFlash supports distributing the new data of the storage engine on multiple hard drives to share the I/O pressure. (Introduced in v4.0)
 
 ## Backup and restoration
 

@@ -176,6 +176,13 @@ The TiDB configuration file supports more options than command-line parameters. 
 - Default value: `0`
 - When TiDB is waiting for shutdown (in the grace period), the HTTP status will indicate a failure, which allows the load balancers to reroute traffic.
 
+### `enable-forwarding` <span class="version-mark">New in v5.0.0</span>
+
++ Controls whether the PD client and TiKV client in TiDB forward requests to the leader via the followers in the case of possible network isolation.
++ Default value: `false`
++ If the environment might have isolated network, enabling this parameter can reduce the window of service unavailability.
++ If you cannot accurately determine whether isolation, network interruption, or downtime has occurred, using this mechanism has the risk of misjudgment and causes reduced availability and performance. If network failure has never occurred, it is not recommended to enable this parameter.
+
 ## Log
 
 Configuration items related to log.
@@ -195,14 +202,14 @@ Configuration items related to log.
 ### `enable-timestamp`
 
 - Determines whether to enable timestamp output in the log.
-- Default value: `true`
+- Default value: `null`
 - If you set the value to `false`, the log does not output timestamp.
 
 > **Note:**
 >
-> To be backward compatible, the initial `disable-timestamp` configuration item remains valid. But if the value of `disable-timestamp` semantically conflicts with the value of `enable-timestamp` (for example, if both `enable-timestamp` and `disable-timestamp` are set to `true`), TiDB ignores the value for `disable-timestamp`. In later versions, the `disable-timestamp` configuration will be removed.
->
-> Discard `disable-timestamp` and use `enable-timestamp` which is semantically easier to understand.
+> - To be backward compatible, the initial `disable-timestamp` configuration item remains valid. But if the value of `disable-timestamp` semantically conflicts with the value of `enable-timestamp` (for example, if both `enable-timestamp` and `disable-timestamp` are set to `true`), TiDB ignores the value for `disable-timestamp`.
+> - Currently, TiDB use `disable-timestamp` to determine whether to output timestamps in the log. In this situation, the value of `enable-timestamp` is `null`.
+> - In later versions, the `disable-timestamp` configuration will be removed. Discard `disable-timestamp` and use `enable-timestamp` which is semantically easier to understand.
 
 ### `enable-slow-log`
 
@@ -347,7 +354,7 @@ Configuration items related to performance.
 >
 > `server-memory-quota` is still an experimental feature. It is **NOT** recommended that you use it in a production environment.
 
-+ The memory usage limit of tidb-server instances. <!-- New in TiDB v5.0 --> This configuration item completely supersedes the previous [`max-memory`](https://docs.pingcap.com/tidb/stable/tidb-configuration-file#max-memory).
++ The memory usage limit of tidb-server instances.
 + Default value: `0` (in bytes), which means no memory limit.
 
 ### `memory-usage-alarm-ratio` <span class="version-mark">New in v4.0.9</span>
@@ -453,12 +460,6 @@ Configuration items related to performance.
 - Determines whether the optimizer executes the operation that pushes down the aggregation function with `Distinct` (such as `select count(distinct a) from t`) to Coprocessors.
 - Default: `false`
 - This variable is the initial value of the system variable [`tidb_opt_distinct_agg_push_down`](/system-variables.md#tidb_opt_distinct_agg_push_down).
-
-### `nested-loop-join-cache-capacity`
-
-+ The maximum memory usage for the Least Recently Used (LRU) algorithm of the nested loop join cache (in bytes).
-+ Default value: `20971520`
-+ When `nested-loop-join-cache-capacity` is set to `0`, nested loop join cache is disabled by default. When the LRU size is larger than the value of `nested-loop-join-cache-capacity`, the elements in the LRU are removed.
 
 ### `enforce-mpp`
 

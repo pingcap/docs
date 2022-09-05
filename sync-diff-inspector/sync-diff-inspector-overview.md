@@ -9,7 +9,7 @@ summary: Use sync-diff-inspector to compare data and repair inconsistent data.
 
 This guide introduces the key features of sync-diff-inspector and describes how to configure and use this tool. To download sync-diff-inspector, use one of the following methods:
 
-+ Binary package. Click [tidb-community-toolkit-v5.2.2-linux-amd64](https://download.pingcap.org/tidb-community-toolkit-v5.2.2-linux-amd64.tar.gz) to download.
++ Binary package. Click [tidb-community-toolkit-v5.2.4-linux-amd64](https://download.pingcap.org/tidb-community-toolkit-v5.2.4-linux-amd64.tar.gz) to download.
 + Docker image. Execute the following command to download:
 
     {{< copyable "shell-regular" >}}
@@ -32,7 +32,7 @@ This guide introduces the key features of sync-diff-inspector and describes how 
 
 * Online check is not supported for data migration between MySQL and TiDB. Ensure that no data is written into the upstream-downstream checklist, and that data in a certain range is not changed. You can check data in this range by setting `range`.
 
-* `JSON`, `BIT`, `BINARY`, `BLOB` and other types of data are not supported. When you perform a data check, you need to set `ignore-columns` to skip checking these types of data.
+* Data of the `JSON` type is not supported. When you perform a data check, you need to set `ignore-columns` to skip checking this type of data.
 
 * In TiDB and MySQL, `FLOAT`, `DOUBLE` and other floating-point types are implemented differently, so checksum might be calculated differently. If the data checks are inconsistent due to these data types, set `ignore-columns` to skip checking these columns.
 
