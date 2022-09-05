@@ -193,7 +193,7 @@ After the data is imported, if you want to remove the Amazon S3 access of TiDB C
 
 ## Perform incremental data replication from MySQL to TiDB Cloud
 
-To replicate the data changes based on binlog from a specified position in the source database to TiDB Cloud, you can use TiDB Data Migration (DM) to perform incremental replication.
+To replicate the data changes based on binlog from a specified position in the upstream cluster to TiDB Cloud, you can use TiDB Data Migration (DM) to perform incremental replication.
 
 ### Before you begin
 
