@@ -96,9 +96,9 @@ TiKV 構成ファイルは、コマンドライン パラメーターよりも�
 -   環境でネットワークが分離されている可能性がある場合、このパラメーターを有効にすると、サービスが利用できなくなる期間を短縮できます。
 -   分離、ネットワークの中断、またはダウンタイムが発生したかどうかを正確に判断できない場合、このメカニズムを使用すると判断を誤るリスクがあり、可用性とパフォーマンスが低下します。ネットワーク障害が発生したことがない場合は、このパラメーターを有効にすることはお勧めしません。
 
-## サーバ {#server}
+## サーバー {#server}
 
--   サーバーに関連するConfiguration / コンフィグレーションアイテム。
+-   サーバーに関連するConfiguration / コンフィグレーション項目。
 
 ### <code>status-thread-pool-size</code> {#code-status-thread-pool-size-code}
 
@@ -207,7 +207,7 @@ TiKV 構成ファイルは、コマンドライン パラメーターよりも�
 
 ### <code>forward-max-connections-per-address</code> <span class="version-mark">v5.0.0 の新機能</span> {#code-forward-max-connections-per-address-code-span-class-version-mark-new-in-v5-0-0-span}
 
--   サーバーへのサービスおよび転送リクエストの接続プールのサイズを設定します。小さすぎる値に設定すると、リクエストのレイテンシと負荷分散に影響します。
+-   サーバーへのサービスおよび転送要求の接続プールのサイズを設定します。小さすぎる値に設定すると、リクエストのレイテンシーと負荷分散に影響します。
 -   デフォルト値: `4`
 
 ## readpool.unified {#readpool-unified}
@@ -381,8 +381,8 @@ TiKV 構成ファイルは、コマンドライン パラメーターよりも�
 
 > **警告：**
 >
-> -   新しい TiKVクラスタをデプロイする場合に**のみ**、 `enable-ttl`から`true`または`false`を設定します。既存の TiKVクラスタでこの構成項目の値を変更し<strong>ない</strong>でください。異なる`enable-ttl`値を持つ TiKV クラスターは、異なるデータ形式を使用します。したがって、既存の TiKVクラスタでこの項目の値を変更すると、クラスタはデータをさまざまな形式で保存し、TiKVクラスタを再起動するときに「非 ttl で TTL を有効にできません」というエラーが発生します。
-> -   TiKVクラスタで**のみ**`enable-ttl`を使用します。 <strong>TiDB</strong>ノードを持つクラスタでは、この構成項目を使用しないでください (そのようなクラスターでは`enable-ttl`から`true`を設定することを意味します)。そうしないと、データの破損や TiDB クラスターのアップグレードの失敗などの重大な問題が発生します。
+> -   新しい TiKV クラスターをデプロイする場合に**のみ**、 `enable-ttl`から`true`または`false`を設定します。既存の TiKV クラスターでこの構成項目の値を変更し<strong>ない</strong>でください。異なる`enable-ttl`値を持つ TiKV クラスターは、異なるデータ形式を使用します。したがって、既存の TiKV クラスターでこの項目の値を変更すると、クラスターはデータをさまざまな形式で保存し、TiKV クラスターを再起動するときに「非 ttl で TTL を有効にできません」というエラーが発生します。
+> -   TiKV クラスターで**のみ**`enable-ttl`を使用します。 <strong>TiDB</strong>ノードを持つクラスターでは、この構成項目を使用しないでください (そのようなクラスターでは`enable-ttl`から`true`を設定することを意味します)。そうしないと、データの破損や TiDB クラスターのアップグレードの失敗などの重大な問題が発生します。
 
 -   TTL は「Time to live」の略です。この項目を有効にすると、TiKV は TTL に達したデータを自動的に削除します。 TTL の値を設定するには、クライアント経由でデータを書き込むときにリクエストで指定する必要があります。 TTL が指定されていない場合、TiKV は対応するデータを自動的に削除しないことを意味します。
 -   デフォルト値: `false`
@@ -410,7 +410,7 @@ TiKV 構成ファイルは、コマンドライン パラメーターよりも�
 
 ## storage.flow-control {#storage-flow-control}
 
-TiKVにおけるフロー制御機構に関するConfiguration / コンフィグレーション項目です。このメカニズムは、RocksDB の書き込みストール メカニズムに取って代わり、スケジューラ レイヤーでフローを制御します。
+TiKVにおけるフロー制御機構に関するConfiguration / コンフィグレーション項目です。このメカニズムは、RocksDB の書き込みストール メカニズムに取って代わり、スケジューラレイヤーでフローを制御します。
 
 ### <code>enable</code> {#code-enable-code}
 
@@ -731,7 +731,7 @@ Raftstore に関連するConfiguration / コンフィグレーション項目。
 
 > **警告：**
 >
-> クラスタのパフォーマンスに影響し、TiDB のガベージ コレクションと互換性がないため、運用環境で整合性チェックを有効にすることはお勧めし**ません**。
+> クラスターのパフォーマンスに影響し、TiDB のガベージ コレクションと互換性がないため、運用環境で整合性チェックを有効にすることはお勧めし**ません**。
 
 -   整合性チェックがトリガーされる時間間隔。 `0`は、この機能が無効であることを意味します。
 -   デフォルト値: `"0s"`
@@ -815,7 +815,7 @@ Raftstore に関連するConfiguration / コンフィグレーション項目。
 
 ### <code>inspect-interval</code> {#code-inspect-interval-code}
 
--   一定の間隔で、TiKV は Raftstore コンポーネントのレイテンシーを検査します。このパラメーターは、検査の間隔を指定します。待ち時間がこの値を超えると、この検査はタイムアウトとしてマークされます。
+-   一定の間隔で、TiKV は Raftstore コンポーネントのレイテンシーを検査します。このパラメーターは、検査の間隔を指定します。レイテンシーがこの値を超えると、この検査はタイムアウトとしてマークされます。
 -   タイムアウト検査の割合からTiKVノードが遅いかどうかを判断します。
 -   デフォルト値: `"500ms"`
 -   最小値: `"1ms"`
@@ -974,7 +974,7 @@ RocksDBに関するConfiguration / コンフィグレーション項目
 -   オプションの値: `"read-only"` 、 `"write-only"` 、 `"all-io"`
 -   デフォルト値: `"write-only"`
 
-### <code>rate-limiter-auto-tuned</code><span class="version-mark">新</span>機能 {#code-rate-limiter-auto-tuned-code-span-class-version-mark-new-in-v5-0-span}
+### <code>rate-limiter-auto-tuned</code> <span class="version-mark">v5.0 の新</span>機能 {#code-rate-limiter-auto-tuned-code-span-class-version-mark-new-in-v5-0-span}
 
 -   最近のワークロードに基づいて、RocksDB の圧縮レート リミッターの構成を自動的に最適化するかどうかを決定します。この構成が有効になっている場合、圧縮保留中のバイトは通常よりわずかに高くなります。
 -   デフォルト値: `true`
@@ -1126,9 +1126,9 @@ Titan関連のConfiguration / コンフィグレーション項目。
 
 ### <code>bottommost-level-compression</code> {#code-bottommost-level-compression-code}
 
--   最下層の圧縮アルゴリズムを設定します。この構成項目は`compression-per-level`の設定をオーバーライドします。
--   データが LSM ツリーに書き込まれて以来、RocksDB は最下層の`compression-per-level`配列で指定された最後の圧縮アルゴリズムを直接採用しません。 `bottommost-level-compression`の場合、最初から最下層で最も圧縮効果の高い圧縮アルゴリズムを使用できます。
--   最下層の圧縮アルゴリズムを設定したくない場合は、この構成項目の値を`disable`に設定します。
+-   最レイヤーの圧縮アルゴリズムを設定します。この構成項目は`compression-per-level`の設定をオーバーライドします。
+-   データが LSM ツリーに書き込まれて以来、RocksDB は最レイヤーの`compression-per-level`配列で指定された最後の圧縮アルゴリズムを直接採用しません。 `bottommost-level-compression`を指定すると、最初から圧縮効果が最も高い圧縮アルゴリズムを最レイヤーで使用できます。
+-   最レイヤーの圧縮アルゴリズムを設定しない場合は、この構成項目の値を`disable`に設定します。
 -   デフォルト値: `"zstd"`
 
 ### <code>write-buffer-size</code> {#code-write-buffer-size-code}
@@ -1153,7 +1153,7 @@ Titan関連のConfiguration / コンフィグレーション項目。
 
 ### <code>max-bytes-for-level-base</code> {#code-max-bytes-for-level-base-code}
 
--   ベース レベル (L1) での最大バイト数。通常、memtable の 4 倍のサイズに設定されます。
+-   ベース レベル (L1) の最大バイト数。通常、memtable の 4 倍のサイズに設定されます。
 -   `defaultcf`および`writecf`のデフォルト値: `"512MB"`
 -   `lockcf`のデフォルト値: `"128MB"`
 -   最小値: `0`
@@ -1161,7 +1161,7 @@ Titan関連のConfiguration / コンフィグレーション項目。
 
 ### <code>target-file-size-base</code> {#code-target-file-size-base-code}
 
--   ベース レベルでのターゲット ファイルのサイズ。 `enable-compaction-guard`の値が`true`の場合、この値は`compaction-guard-max-output-file-size`でオーバーライドされます。
+-   ベース レベルでのターゲット ファイルのサイズ。 `enable-compaction-guard`の値が`true`の場合、この値は`compaction-guard-max-output-file-size`で上書きされます。
 -   デフォルト値: `"8MB"`
 -   最小値: `0`
 -   単位: KB|MB|GB
@@ -1257,7 +1257,7 @@ Titan関連のConfiguration / コンフィグレーション項目。
 
 ## rocksdb.defaultcf.titan {#rocksdb-defaultcf-titan}
 
-に関連するConfiguration / コンフィグレーション項目`rocksdb.defaultcf.titan` ．
+関連するConfiguration / コンフィグレーション項目`rocksdb.defaultcf.titan` ．
 
 ### <code>min-blob-size</code> {#code-min-blob-size-code}
 
@@ -1502,7 +1502,7 @@ BRバックアップに関するConfiguration / コンフィグレーション�
 
 ### <code>enable-auto-tune</code> <span class="version-mark">v5.4.0 の新機能</span> {#code-enable-auto-tune-code-span-class-version-mark-new-in-v5-4-0-span}
 
--   クラスタリソースの使用率が高い場合に、バックアップ タスクで使用されるリソースを制限してクラスタへの影響を軽減するかどうかを制御します。詳細については、 [BR オートチューン](/br/br-auto-tune.md)を参照してください。
+-   クラスタ リソースの使用率が高い場合に、バックアップ タスクで使用されるリソースを制限してクラスタへの影響を軽減するかどうかを制御します。詳細については、 [BR オートチューン](/br/br-auto-tune.md)を参照してください。
 -   デフォルト値: `true`
 
 ## CDC {#cdc}
@@ -1542,7 +1542,7 @@ TiCDC に関連するConfiguration / コンフィグレーション項目。
 
 ## 解決済み-TS {#resolved-ts}
 
-古い読み取り要求を処理するための解決済み TS の維持に関連するConfiguration / コンフィグレーション項目。
+ステイル読み取り要求を処理するための解決済み TS の維持に関連するConfiguration / コンフィグレーション項目。
 
 ### <code>enable</code> {#code-enable-code}
 
@@ -1576,5 +1576,15 @@ TiCDC に関連するConfiguration / コンフィグレーション項目。
 
 ### <code>pipelined</code> {#code-pipelined-code}
 
--   この構成アイテムは、ペシミスティック ロックを追加するパイプライン プロセスを有効にします。この機能を有効にすると、データをロックできることを検出した後、TiKV は直ちに TiDB に通知して後続のリクエストを実行し、悲観的ロックを非同期で書き込みます。これにより、ほとんどのレイテンシが短縮され、悲観的トランザクションのパフォーマンスが大幅に向上します。しかし、悲観的ロックの非同期書き込みが失敗する可能性はまだ低く、悲観的トランザクション コミットの失敗を引き起こす可能性があります。
+-   この構成アイテムは、ペシミスティック ロックを追加するパイプライン プロセスを有効にします。この機能を有効にすると、データをロックできることを検出した後、TiKV は直ちに TiDB に通知して後続のリクエストを実行し、悲観的ロックを非同期で書き込みます。これにより、ほとんどのレイテンシーが短縮され、悲観的トランザクションのパフォーマンスが大幅に向上します。しかし、悲観的ロックの非同期書き込みが失敗する可能性はまだ低く、悲観的トランザクション コミットの失敗を引き起こす可能性があります。
 -   デフォルト値: `true`
+
+### <code>s3-multi-part-size</code> <span class="version-mark">v5.3.2 の新機能</span> {#code-s3-multi-part-size-code-span-class-version-mark-new-in-v5-3-2-span}
+
+> **ノート：**
+>
+> この構成は、S3 レート制限によって引き起こされるバックアップの失敗に対処するために導入されました。この問題は[バックアップ データ ストレージ構造の改善](https://docs.pingcap.com/tidb/stable/backup-and-restore-design#backup-file-structure)で修正されました。したがって、この構成は v6.1.1 から廃止され、推奨されなくなりました。
+
+-   バックアップ中に S3 へのマルチパート アップロードを実行するときに使用されるパート サイズ。この設定の値を調整して、S3 に送信されるリクエストの数を制御できます。
+-   データが S3 にバックアップされ、バックアップ ファイルがこの構成項目の値よりも大きい場合、 [マルチパートアップロード](https://docs.aws.amazon.com/AmazonS3/latest/API/API_UploadPart.html)が自動的に有効になります。圧縮率に基づくと、96 MiBリージョンによって生成されるバックアップ ファイルは、約 10 MiB から 30 MiB です。
+-   デフォルト値: 5MiB

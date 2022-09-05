@@ -1,6 +1,6 @@
 ---
 title: TiDB Introduction
-aliases: ["/docs/dev/", "/docs/dev/adopters/", "/tidb/dev/adopters"]
+aliases: ['/tidb/v5.4/adopters', '/tidb/stable/adopters']
 hide_sidebar: true
 hide_commit: true
 ---
@@ -31,9 +31,9 @@ hide_commit: true
 
 [ソフトウェアとハードウェアの要件](https://docs.pingcap.com/tidb/v5.4/hardware-and-software-requirements)
 
-[TiUP を使用して TiDB クラスターをデプロイする (推奨)](https://docs.pingcap.com/tidb/v5.4/production-deployment-using-tiup)
+[TiUP を使用して TiDBクラスタをデプロイする (推奨)](https://docs.pingcap.com/tidb/v5.4/production-deployment-using-tiup)
 
-[Kubernetes に TiDB クラスターをデプロイする](https://docs.pingcap.com/tidb/v5.4/tidb-in-kubernetes)
+[Kubernetes に TiDBクラスタをデプロイする](https://docs.pingcap.com/tidb/v5.4/tidb-in-kubernetes)
 
 </LearningPath>
 
@@ -49,11 +49,11 @@ hide_commit: true
 
 <LearningPath label="Maintain" icon="maintain">
 
-[クラスターをアップグレードする](https://docs.pingcap.com/tidb/v5.4/upgrade-tidb-using-tiup)
+[クラスタをアップグレードする](https://docs.pingcap.com/tidb/v5.4/upgrade-tidb-using-tiup)
 
-[クラスターのスケーリング](https://docs.pingcap.com/tidb/v5.4/scale-tidb-using-tiup)
+[クラスタのスケーリング](https://docs.pingcap.com/tidb/v5.4/scale-tidb-using-tiup)
 
-[クラスタ データのバックアップ](https://docs.pingcap.com/tidb/v5.4/use-br-command-line-tool)
+[クラスタデータのバックアップ](https://docs.pingcap.com/tidb/v5.4/use-br-command-line-tool)
 
 [毎日のチェック](https://docs.pingcap.com/tidb/v5.4/daily-check)
 
