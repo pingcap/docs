@@ -1825,9 +1825,9 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 - Persists to cluster: No
 - Default value: ""
 - Type: String
-- This is a read only variable, it is used to get the last ddl info within the current session. The DDL informaiton includes:
-    - "query": the last DDL query string.
-    - "seq_num": seq_num is the total order in all DDLs, it's used to identify the order of DDL. 
+- This is a read-only variable. It is internally used in TiDB to get the information of the last DDL operation within the current session.
+    - "query": The last DDL query string.
+    - "seq_num": The sequence number for each DDL operation. It is used to identify the order of DDL operations. 
 
 ### tidb_last_query_info <span class="version-mark">New in v4.0.14</span>
 
