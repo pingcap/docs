@@ -297,7 +297,7 @@ The TiDB Cloud console does not provide any feature about incremental data repli
 
 ### Step 2. Create a replication task
 
-1. Create a `test-task1.yaml` file for the replication task. Configure the incremental replication mode and the starting point of the data source in the file.
+1. Create a `test-task1.yaml` file for the replication task. 
 
 2. Find the starting point in the metadata file of MySQL instance1 exported by Dumpling. For example:
 
