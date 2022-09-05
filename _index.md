@@ -1,6 +1,6 @@
 ---
 title: TiDB Introduction
-aliases: ["/docs/dev/", "/docs/dev/adopters/", "/tidb/dev/adopters"]
+aliases: ['/docs/','/docs/stable/','/docs/v4.0/','/docs/stable/adopters/','/docs/adopters/', '/docs/v4.0/adopters/','tidb/v4.0/adopters']
 hide_sidebar: true
 hide_commit: true
 ---
