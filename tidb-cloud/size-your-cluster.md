@@ -19,9 +19,9 @@ You can configure both node size and node quantity for TiDB.
 
 To learn performance test results of different cluster scales, see [TiDB Cloud Performance Reference](/tidb-cloud/tidb-cloud-performance-reference.md).
 
-### TiDB node size
+### Size of TiDB node
 
-The supported node sizes include the following:
+The supported sizes of a TiDB node include the following:
 
 - 2 vCPU, 8 GiB (Beta)
 - 4 vCPU, 16 GiB
