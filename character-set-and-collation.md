@@ -25,17 +25,30 @@ SELECT 'A' = 'a';
 
 ```sql
 mysql> SELECT 'A' = 'a';
+```
+
+```sql
 +-----------+
 | 'A' = 'a' |
 +-----------+
 |         0 |
 +-----------+
 1 row in set (0.00 sec)
+```
 
+```sql
 mysql> SET NAMES utf8mb4 COLLATE utf8mb4_general_ci;
-Query OK, 0 rows affected (0.00 sec)
+```
 
+```sql
+Query OK, 0 rows affected (0.00 sec)
+```
+
+```sql
 mysql> SELECT 'A' = 'a';
+```
+
+```sql
 +-----------+
 | 'A' = 'a' |
 +-----------+
@@ -73,7 +86,10 @@ SHOW CHARACTER SET;
 TiDB supports the following collations:
 
 ```sql
-mysql> show collation;
+mysql> SHOW COLLATION;
+```
+
+```sql
 +--------------------+---------+------+---------+----------+---------+
 | Collation          | Charset | Id   | Default | Compiled | Sortlen |
 +--------------------+---------+------+---------+----------+---------+
@@ -133,22 +149,51 @@ The following demonstrates the default behavior when inserting a 4-byte emoji ch
 mysql> CREATE TABLE utf8_test (
     ->  c char(1) NOT NULL
     -> ) CHARACTER SET utf8;
-Query OK, 0 rows affected (0.09 sec)
+```
 
+```sql
+Query OK, 0 rows affected (0.09 sec)
+```
+
+```sql
 mysql> CREATE TABLE utf8m4_test (
     ->  c char(1) NOT NULL
     -> ) CHARACTER SET utf8mb4;
+```
+
+```sql
 Query OK, 0 rows affected (0.09 sec)
+```
 
+```sql
 mysql> INSERT INTO utf8_test VALUES ('😉');
+```
+
+```sql
 ERROR 1366 (HY000): incorrect utf8 value f09f9889(😉) for column c
+```
+
+```sql
 mysql> INSERT INTO utf8m4_test VALUES ('😉');
+```
+
+```sql
 Query OK, 1 row affected (0.02 sec)
+```
 
+```sql
 mysql> SELECT char_length(c), length(c), c FROM utf8_test;
-Empty set (0.01 sec)
+```
 
+```sql
+Empty set (0.01 sec)
+```
+
+```sql
 mysql> SELECT char_length(c), length(c), c FROM utf8m4_test;
+```
+
+```sql
 +----------------+-----------+------+
 | char_length(c) | length(c) | c    |
 +----------------+-----------+------+
@@ -405,12 +450,32 @@ Before v4.0, you can specify most of the MySQL collations in TiDB, and these col
 
 ```sql
 CREATE TABLE t(a varchar(20) charset utf8mb4 collate utf8mb4_general_ci PRIMARY KEY);
+```
+
+```sql
 Query OK, 0 rows affected
+```
+
+```sql
 INSERT INTO t VALUES ('A');
+```
+
+```sql
 Query OK, 1 row affected
+
+```sql
 INSERT INTO t VALUES ('a');
+```
+
+```sql
 Query OK, 1 row affected # In TiDB, it is successfully executed. In MySQL, because utf8mb4_general_ci is case-insensitive, the `Duplicate entry 'a'` error is reported.
+```
+
+```sql
 INSERT INTO t1 VALUES ('a ');
+```
+
+```sql
 Query OK, 1 row affected # In TiDB, it is successfully executed. In MySQL, because comparison is performed after the spaces are filled in, the `Duplicate entry 'a '` error is returned.
 ```
 
@@ -453,12 +518,32 @@ When one of `utf8_general_ci`, `utf8mb4_general_ci`, `utf8_unicode_ci`, `utf8mb4
 
 ```sql
 CREATE TABLE t(a varchar(20) charset utf8mb4 collate utf8mb4_general_ci PRIMARY KEY);
+
+```sql
 Query OK, 0 rows affected (0.00 sec)
+```
+
+```sql
 INSERT INTO t VALUES ('A');
+```
+
+```sql
 Query OK, 1 row affected (0.00 sec)
+```
+
+```sql
 INSERT INTO t VALUES ('a');
+```
+
+```sql
 ERROR 1062 (23000): Duplicate entry 'a' for key 'PRIMARY' # TiDB is compatible with the case-insensitive collation of MySQL.
+```
+
+```sql
 INSERT INTO t VALUES ('a ');
+```
+
+```sql
 ERROR 1062 (23000): Duplicate entry 'a ' for key 'PRIMARY' # TiDB modifies the `PADDING` behavior to be compatible with MySQL.
 ```
 
