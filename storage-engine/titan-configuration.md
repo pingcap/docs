@@ -120,7 +120,10 @@ To disable Titan, you can configure the `rocksdb.defaultcf.titan.blob-run-mode` 
 
 To fully disable Titan for all existing and future data, you can follow these steps:
 
-+ First update the configuration of the TiKV nodes you wish to disable Titan. This can be done either with `tiup cluster edit-config` followed by `tiup cluster reload`, or manually updating the configuration file and restarting TiKV.
+1. Update the configuration of the TiKV nodes you wish to disable Titan for. You can update configuration in two methods:
+
+    + Execute `tiup cluster edit-config`, edit the configuration file, and execute `tiup cluster reload -R tikv`.
+    + Manually update the configuration file and restart TiKV.
 
     ```toml
     [rocksdb.defaultcf.titan]
@@ -128,15 +131,15 @@ To fully disable Titan for all existing and future data, you can follow these st
     discardable-ratio = 1.0
     ```
 
-+ Then perform a full compaction using tikv-ctl. This process will consume large amount of I/O and CPU resources.
+2. Perform a full compaction using tikv-ctl. This process will consume large amount of I/O and CPU resources.
 
     ```bash
     tikv-ctl --pd <PD_ADDR> compact-cluster --bottommost force
     ```
 
-+ After the compaction is finished, you should wait for the "Blob file count" metrics under "TiKV-Details/Titan - kv" to decrease to `0`.
+3. After the compaction is finished, you should wait for the **Blob file count** metrics under **TiKV-Details**/**Titan - kv** to decrease to `0`.
 
-+ Finally, update the configuration of these TiKV nodes to disable Titan.
+4. Update the configuration of these TiKV nodes to disable Titan.
 
     ```toml
     [rocksdb.titan]
