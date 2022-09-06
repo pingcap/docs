@@ -12,11 +12,11 @@ This page lists the release notes of [TiDB Cloud](https://en.pingcap.com/tidb-cl
 
 **General changes**
 
-* Upgrade the default TiDB version of TiDB Cloud [Dedicated Tier](/tidb-cloud/select-cluster-tier.md#dedicated-tier) clusters from [v6.1.0](https://docs.pingcap.com/tidb/stable/release-6.1.0) to [v6.1.1](https://docs.pingcap.com/tidb/stable/release-6.1.1).
+* Upgrade the default TiDB version of new [Dedicated Tier](/tidb-cloud/select-cluster-tier.md#dedicated-tier) clusters from [v6.1.0](https://docs.pingcap.com/tidb/stable/release-6.1.0) to [v6.1.1](https://docs.pingcap.com/tidb/stable/release-6.1.1).
 
-* Provide [more metrics](https://docs.pingcap.com/tidbcloud/monitor-datadog-integration#metrics-available-to-datadog) of Dedicated Tier clusters in Datadog to help you better understand the cluster performance status.
+* Provide [more metrics](/tidb-cloud/monitor-datadog-integration.md#metrics-available-to-datadog) of Dedicated Tier clusters in Datadog to help you better understand the cluster performance status.
 
-    If you have [integrated TiDB Cloud with Datadog](https://docs.pingcap.com/tidbcloud/monitor-datadog-integration), you can view these metrics in your Datadog dashboards directly.
+    If you have [integrated TiDB Cloud with Datadog](/tidb-cloud/monitor-datadog-integration.md), you can view these metrics in your Datadog dashboards directly.
 
 **Console changes**
 
