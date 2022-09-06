@@ -6,7 +6,25 @@ aliases: ['/tidbcloud/beta/supported-tidb-versions','/tidbcloud/release-notes']
 
 # TiDB Cloud Release Notes in 2022
 
-This page lists the release notes of [TiDB Cloud](https://en.pingcap.com/tidb-cloud/) in 2022.
+This page lists the release notes of [TiDB Cloud](https://pingcap.com/tidb-cloud/?from=en) in 2022.
+
+## September 6, 2022
+
+**General changes**
+
+* Upgrade the default TiDB version of new [Dedicated Tier](/tidb-cloud/select-cluster-tier.md#dedicated-tier) clusters from [v6.1.0](https://docs.pingcap.com/tidb/stable/release-6.1.0) to [v6.1.1](https://docs.pingcap.com/tidb/stable/release-6.1.1).
+
+**Console changes**
+
+* Now you can [apply for a PoC](/tidb-cloud/tidb-cloud-poc.md) from the entry in the upper-right corner of the TiDB Cloud console.
+
+**API changes**
+
+* Support increasing the storage of a TiKV or TiFlash node through the [TiDB Cloud API](/tidb-cloud/api-overview.md). You can use the `storage_size_gib` field of the API endpoint to do the scaling.
+
+    Currently, TiDB Cloud API is still in beta and only available upon request.
+
+    For details, see [Modify a Dedicated Tier cluster](https://docs.pingcap.com/tidbcloud/api/v1beta#tag/Cluster/operation/UpdateCluster).
 
 ## August 30, 2022
 
