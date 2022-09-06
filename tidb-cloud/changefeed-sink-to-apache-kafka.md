@@ -56,13 +56,14 @@ For example, if your Kafka cluster is in Confluent Cloud, you can see [Resources
 
 1. Under **Brokers Configuration**, fill in your Kafka brokers endpoints. You can use commas `,` to separate multiple endpoints.
 2. Select your Kafka version. If you do not know that, use Kafka V2.
-3. Enable the **TLS Encryption** option if your Kafka has enabled TLS encryption and you want to use TLS encryption for the Kafka connection.
-4. Select the **Authentication** option according to your Kafka authentication configuration.
+3. Select a desired compression type for the data in this changefeed.
+4. Enable the **TLS Encryption** option if your Kafka has enabled TLS encryption and you want to use TLS encryption for the Kafka connection.
+5. Select the **Authentication** option according to your Kafka authentication configuration.
 
     - If your Kafka does not require authentication, keep the default option **DISABLE**.
     - If your Kafka requires authentication, select the corresponding authentication type, and then fill in the user name and password of your Kafka account for authentication.
 
-5. Click **Next** to check the configurations you set and go to the next page.
+6. Click **Next** to check the configurations you set and go to the next page.
 
 ## Step 3. Set the changefeed
 
@@ -96,11 +97,11 @@ For example, if your Kafka cluster is in Confluent Cloud, you can see [Resources
 
         If you want the changefeed to create a dedicated Kafka topic for each database, choose this mode. Then, all Kafka messages of a database are sent to a dedicated Kafka topic. You can customize topic names of databases by setting a topic prefix and a suffix.
 
-        For changelogs of non-database events, such as Resolved Ts Event, you can specify a topic name in the **Default Topic Name** field. The changefeed will create a topic accordingly to collect such changelogs.
+        For changelogs of non-row events, such as Resolved Ts Event, you can specify a topic name in the **Default Topic Name** field. The changefeed will create a topic accordingly to collect such changelogs.
 
    - **Send all changelogs to one specified Kafka Topic**
 
-        If you want the changefeed to create one Kafka topic for all changelogs, choose this mode. Then, all Kafka messages in the changefeed will be sent to one Kafka topic. You can define the topic name in the **Default Topic Name** field.
+        If you want the changefeed to create one Kafka topic for all changelogs, choose this mode. Then, all Kafka messages in the changefeed will be sent to one Kafka topic. You can define the topic name in the **Topic Name** field.
 
 5. In the **Partition Distribution** area, you can decide which partition a Kafka message will be sent to:
 
