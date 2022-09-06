@@ -89,7 +89,7 @@ To use the AWS Management Console to create a VPC interface endpoint, perform th
 
     The **Create endpoint** page is displayed.
 
-    <img src="../media/tidb-cloud/private-endpoint/create-endpoint-2.png" width="70%" auto="Verify endpoint service" />
+    ![Verify endpoint service](/media/tidb-cloud/private-endpoint/create-endpoint-2.png)
 
 3. Select **Other endpoint services**.
 4. Enter the endpoint service name.
@@ -143,7 +143,7 @@ To enable private DNS in your AWS Management Console:
 3. Select the **Enable for this endpoint** check box.
 4. Click **Save changes**.
 
-<img src="../media/tidb-cloud/private-endpoint/enable-private-dns.png" width="70%"  auto="Enable private DNS" />
+    ![Enable private DNS](/media/tidb-cloud/private-endpoint/enable-private-dns.png)
 
 </div>
 <div label="Use AWS CLI">
@@ -185,7 +185,7 @@ The possible statuses of a private endpoint service are explained as follows:
 
 You might need to properly set the security group for your VPC endpoint in the AWS Management Console. Go to **VPC** > **Endpoints**. Right-click your VPC endpoint and select **Manage security groups**.
 
-<img src="../media/tidb-cloud/private-endpoint/manage-security-groups.png" width="70%" auto="Manage security groups" />
+![Manage security groups](/media/tidb-cloud/private-endpoint/manage-security-groups.png)
 
 ### I cannot enable private DNS. An error is reported indicating that the `enableDnsSupport` and `enableDnsHostnames` VPC attributes are not enabled
 
