@@ -187,6 +187,6 @@ You might need to properly set the security group for your VPC endpoint in the A
 
 <img src="../media/tidb-cloud/private-endpoint/manage-security-groups.png" width="70%" auto="Manage security groups" />
 
-### I cannot enable private DNS. An error is reported indicating that the `enableDnsSupport` and `enableDnsHostnames` VPC attributes are not enabled
+### I cannot enable private DNS. An error is reported indicating that the `enableDnsSupport` and `enableDnsHostnames` VPC attributes are not enabled.
 
 Make sure that DNS hostname and DNS resolution are both enabled in your VPC setting. They are disabled by default when you create a VPC in the AWS Management Console.
