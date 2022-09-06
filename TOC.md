@@ -518,7 +518,6 @@
       - [Integrate TiDB with Confluent and Snowflake](/ticdc/integrate-confluent-using-ticdc.md)
     - [FAQs](/ticdc/ticdc-faq.md)
     - [Glossary](/ticdc/ticdc-glossary.md)
-  - [Dumpling](/dumpling-overview.md)
   - sync-diff-inspector
     - [Overview](/sync-diff-inspector/sync-diff-inspector-overview.md)
     - [Data Check for Tables with Different Schema/Table Names](/sync-diff-inspector/route-diff.md)
@@ -886,6 +885,7 @@
   - v6.2
     - [6.2.0-DMR](/releases/release-6.2.0.md)
   - v6.1
+    - [6.1.1](/releases/release-6.1.1.md)
     - [6.1.0](/releases/release-6.1.0.md)
   - v6.0
     - [6.0.0-DMR](/releases/release-6.0.0-dmr.md)
