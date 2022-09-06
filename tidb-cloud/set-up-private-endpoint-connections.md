@@ -159,7 +159,7 @@ aws ec2 modify-vpc-endpoint --vpc-endpoint-id <your_vpc_endpoint_id> --private-d
 
 Click **Create** in the TiDB Cloud console to finalize the creation of the private endpoint.
 
-Then you can connect to the endpoint service. See [Connect to TiDB cluster via private endpoint](/tidb-cloud/connect-to-tidb-cluster.md#connect-via-private-endpoint) for details.
+Then you can connect to the endpoint service. See [Connect to TiDB cluster via private endpoint](/tidb-cloud/connect-to-tidb-cluster.md#connect-via-private-endpoint-recommended) for details.
 
 ## Private endpoint status reference
 
