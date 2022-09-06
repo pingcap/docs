@@ -691,4 +691,4 @@ The `experimental` section, introduced in v3.1.0, describes the configurations r
 ### `temp-dir` <span class="version-mark">New in v6.3.0</span>
 
 + used to set a local temp storage dir for TiDB node, all features that need used TiDB temp storage should use this dir as entry path. the add/create index fast reorg solution will also follow this rule to create a sub dir under this parameter and store temporary backfill index data in TiDB local storage.
-+ Default value："/tmp/tidb"
++ Default value: "/tmp/tidb"

@@ -738,8 +738,8 @@ Constraint checking is always performed in place for pessimistic transactions (d
 - Scope: GLOBAL
 - Persists to cluster: Yes
 - Type: Integer
-- Default value: `107374182400` 100 GiB
-- Range: `[107374182400, 1125899906842624]` [100 GiB, 1 PiB]
+- Default value: `107374182400` (100 GiB)
+- Range: `[107374182400, 1125899906842624]` ([100 GiB, 1 PiB])
 - Unit: Bytes
 - This variable sets a threshold of fast reorg solution which indicates how much index data could be temp stored in TiDB local storage.
 
@@ -1491,7 +1491,7 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 ### tidb_last_ddl_info <span class="version-mark">New in v6.0.0</span>
 
 - Scope: SESSION
-- Default value：‘’
+- Default value: ‘’
 - This variable is used to get the last ddl info within the current session.
 
 ### tidb_log_file_max_days <span class="version-mark">New in v5.3.0</span>
