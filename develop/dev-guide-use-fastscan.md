@@ -13,39 +13,56 @@ This document describes how to use FastScan to speed up queries in Online Analyt
 
 By default, TiFlash guarantees the precision of query results and data consistency. With the feature FastScan, TiFlash provides more efficient query performance, but does not guarantee the accuracy of query results and data consistency.
 
-Some OLAP scenarios allow for some tolerance to the accuracy of the query results. In these cases, if you need higher query performance, you can enable FastScan for the corresponding table for querying.
+Some OLAP scenarios allow for some tolerance to the accuracy of the query results. In these cases, if you need higher query performance, you can enable the FastScan feature in the corresponding session. You can choose whether to enable the FastScan feature by modifying the value of the variable `tiflash_fastscan`.
 
-FastScan takes effect globally on tables that you enable FastScan by running [ALTER TABLE SET TIFLASH MODE](/sql-statements/sql-statement-set-tiflash-mode.md). TiFlash-related operations are not supported for temporary tables, in-memory tables, system tables, and tables with non-UTF-8 characters in column names.
+## Enable and disable FastScan
 
-For more information, see [ALTER TABLE SET TIFLASH MODE](/sql-statements/sql-statement-set-tiflash-mode.md).
+By default, the session and global level variables `tiflash_fastscan=OFF`, that is, the FastScan feature is not enabled. You can see the corresponding variable information by using the following statement.
 
-## Enable FastScan
+```
+show variables like 'tiflash_fastscan';
 
-By default, FastScan is disabled for all tables. You can use the following statement to view the FastScan status.
-
-```sql
-SELECT table_mode FROM information_schema.tiflash_replica WHERE table_name = 'table_name' AND table_schema = 'database_name'
++------------------+-------+
+| Variable_name    | Value |
++------------------+-------+
+| tiflash_fastscan | OFF   |
++------------------+-------+
 ```
 
-Use the following statement to enable FastScan for the corresponding table.
+```
+show global variables like 'tiflash_fastscan';
 
-```sql
-ALTER TABLE table_name SET TIFLASH MODE FAST
++------------------+-------+
+| Variable_name    | Value |
++------------------+-------+
+| tiflash_fastscan | OFF   |
++------------------+-------+
 ```
 
-Once enabled, subsequent queries of this table in TiFlash will use the function of FastScan.
+The variable `tiflash_fastscan` supports session-level and global-level modifications. If you need to enable the FastScan feature in the current session, you can do so with the following statement:
+
+```
+set session tiflash_fastscan=ON;
+```
+
+You can also set `tiflash_fastscan` at the global level to enable new values for the default session and global variable `tiflash_fastscan` in the new session after setting.
+
+```
+set global tiflash_fastscan=ON;
+```
 
 You can disable FastScan using the following statement.
 
-```sql
-ALTER TABLE table_name SET TIFLASH MODE NORMAL
+```
+set session tiflash_fastscan=OFF;
+set global tiflash_fastscan=OFF;
 ```
 
 ## Mechanism of FastScan
 
 Data in the storage layer of TiFlash is stored in two layers: Delta layer and Stable layer.
 
-In Normal Mode, the TableScan operator processes data in the following steps:
+In normal mode (that is, when FastScan is not enabled), the TableScan operator processes data in the following steps:
 
 1. Read data: create separate data streams in the Delta layer and Stable layer to read the respective data.
 2. Sort Merge: merge the data streams created in step 1. Then return the data after sorting in (handle, version) order.
