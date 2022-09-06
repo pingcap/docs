@@ -37,6 +37,7 @@ The support for TLS authentication is configured differently. For detailed infor
 | `sha256_password`        | No               |
 | `caching_sha2_password`  | Yes, since 5.2.0 |
 | `auth_socket`            | Yes, since 5.3.0 |
+| `tidb_sm3_password`      | Yes, since 6.3.0 |
 | [TLS Certificates]       | Yes              |
 | LDAP                     | No               |
 | PAM                      | No               |
