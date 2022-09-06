@@ -15,6 +15,10 @@ After your TiDB cluster is created on TiDB Cloud, you can use one of the followi
 
 - [Connect via SQL shell](#connect-via-sql-shell): to try TiDB SQL and test out TiDB's compatibility with MySQL quickly, or administer user privileges
 
+> **Tip:**
+>
+> It is **NOT** recommended to use public connection in a production environment. Instead, it is recommended to use the [private endpoint](#connect-via-private-endpoint) connection.
+
 ## Connect via standard connection
 
 To connect to your TiDB cluster via standard connection, perform the following steps:
