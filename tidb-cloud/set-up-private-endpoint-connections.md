@@ -125,7 +125,7 @@ To use the AWS CLI to create a VPC interface endpoint, perform the following ste
 
 ### Step 4. Accept the endpoint connection
 
-1. Go back to the TiDB Cloud console.
+1. Go back to the **TiDB Cloud console**.
 2. Fill in the box with your VPC endpoint ID in the **Create Private Endpoint** page.
 3. Click **Next**.
 
