@@ -20,7 +20,7 @@ This page lists the release notes of [TiDB Cloud](https://pingcap.com/tidb-cloud
 
 **Cloud API changes**
 
-* Support increasing the storage of TiKV or TiFlash nodes through the [TiDB Cloud API](/tidb-cloud/api-overview.md). You can use the `storage_size_gib` field of the API endpoint to do the scaling.
+* Support increasing the storage of a TiKV or TiFlash node through the [TiDB Cloud API](/tidb-cloud/api-overview.md). You can use the `storage_size_gib` field of the API endpoint to do the scaling.
 
     Currently, TiDB Cloud API is still in beta and only available upon request.
 
