@@ -65,7 +65,7 @@ To connect to your TiDB cluster via private endpoint, perform the following step
 
 > **Tip:**
 >
-> If you cannot connect to the cluster, the reason might be that the security group of your VPC endpoint in AWS is not properly set. See [this FAQ](/tidb-cloud/set-up-private-endpoint-connections.md#i-cannot-enable-private-dns-an-error-is-reported-indicating-that-the-enablednssupport-and-enablednshostnames-vpc-attributes-are-not-enabled) for solutions.
+> If you cannot connect to the cluster, the reason might be that the security group of your VPC endpoint in AWS is not properly set. See [this FAQ](/tidb-cloud/set-up-private-endpoint-connections.md#troubleshooting) for solutions.
 
 ## Connect via VPC peering
 

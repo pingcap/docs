@@ -181,7 +181,7 @@ The possible statuses of a private endpoint service are explained as follows:
 
 ## Troubleshooting
 
-### I cannot connect to TiDB cluster via private endpoint after enabling private DNS. Why?
+### I cannot connect to a TiDB cluster via a private endpoint after enabling private DNS. Why?
 
 You might need to properly set the security group for your VPC endpoint in the AWS Management Console. Go to **VPC** > **Endpoints**. Right-click your VPC endpoint and select **Manage security groups**.
 
