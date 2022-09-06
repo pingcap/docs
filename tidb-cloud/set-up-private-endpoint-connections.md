@@ -109,7 +109,7 @@ To use the AWS Management Console to create a VPC interface endpoint, perform th
 
 To use the AWS CLI to create a VPC interface endpoint, perform the following steps:
 
-1. Fill in the **VPC ID** and **Subnet IDs** fields. You can get the IDs from your AWS Management Console.
+1. Fill in the **VPC ID** and **Subnet IDs** fields on the private endpoint creation page. You can get the IDs from your AWS Management Console.
 2. Copy the command in the lower area of the page and run it in your terminal. Then click **Next**.
 
 > **Tip:**
