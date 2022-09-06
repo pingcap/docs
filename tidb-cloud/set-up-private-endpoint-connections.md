@@ -39,7 +39,7 @@ Take the following steps to set up a private endpoint. If you have multiple clus
 In addition to the [prerequisites](#prerequisites), there are 5 steps to set up a private endpoint connection with AWS PrivateLink:
 
 1. [Choose a TiDB cluster](#step-1-choose-a-tidb-cluster)
-2. [Check the service endpoint region](#step-2-choose-the-service-endpoint-region)
+2. [Check the service endpoint region](#step-2-check-the-service-endpoint-region)
 3. [Create an AWS interface endpoint](#step-3-create-an-aws-interface-endpoint)
 4. [Accept the endpoint connection](#step-4-accept-the-endpoint-connection)
 5. [Enable private DNS](#step-5-enable-private-dns)
@@ -163,7 +163,7 @@ Then you can connect to the endpoint service. See [Connect to TiDB cluster via p
 
 ## Private endpoint status reference
 
-When you use [private endpoint connections](/tidb-cloud/set-up-private-endpoint-connections.md), the statuses of private endpoints or private endpoint services are displayed on the [**Private Endpoint** page](/tidb-cloud/set-up-private-endpoint-connections.md#step-1-open-the-private-endpoint-creation-page).
+When you use [private endpoint connections](/tidb-cloud/set-up-private-endpoint-connections.md), the statuses of private endpoints or private endpoint services are displayed on the [**Private Endpoint** page](/tidb-cloud/set-up-private-endpoint-connections.md#prerequisites).
 
 The possible statuses of a private endpoint are explained as follows:
 
