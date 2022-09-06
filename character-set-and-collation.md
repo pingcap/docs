@@ -462,6 +462,7 @@ INSERT INTO t VALUES ('A');
 
 ```sql
 Query OK, 1 row affected
+```
 
 ```sql
 INSERT INTO t VALUES ('a');
@@ -518,6 +519,7 @@ When one of `utf8_general_ci`, `utf8mb4_general_ci`, `utf8_unicode_ci`, `utf8mb4
 
 ```sql
 CREATE TABLE t(a varchar(20) charset utf8mb4 collate utf8mb4_general_ci PRIMARY KEY);
+```
 
 ```sql
 Query OK, 0 rows affected (0.00 sec)
