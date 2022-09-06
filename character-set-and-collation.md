@@ -24,7 +24,7 @@ SELECT 'A' = 'a';
 ```
 
 ```sql
-mysql> SELECT 'A' = 'a';
+SELECT 'A' = 'a';
 ```
 
 ```sql
@@ -37,7 +37,7 @@ mysql> SELECT 'A' = 'a';
 ```
 
 ```sql
-mysql> SET NAMES utf8mb4 COLLATE utf8mb4_general_ci;
+SET NAMES utf8mb4 COLLATE utf8mb4_general_ci;
 ```
 
 ```sql
@@ -45,7 +45,7 @@ Query OK, 0 rows affected (0.00 sec)
 ```
 
 ```sql
-mysql> SELECT 'A' = 'a';
+SELECT 'A' = 'a';
 ```
 
 ```sql
@@ -86,7 +86,7 @@ SHOW CHARACTER SET;
 TiDB supports the following collations:
 
 ```sql
-mysql> SHOW COLLATION;
+SHOW COLLATION;
 ```
 
 ```sql
@@ -146,7 +146,7 @@ By default, TiDB provides the same 3-byte limit on `utf8` to ensure that data cr
 The following demonstrates the default behavior when inserting a 4-byte emoji character into a table. The `INSERT` statement fails for the `utf8` character set, but succeeds for `utf8mb4`:
 
 ```sql
-mysql> CREATE TABLE utf8_test (
+CREATE TABLE utf8_test (
     ->  c char(1) NOT NULL
     -> ) CHARACTER SET utf8;
 ```
@@ -156,7 +156,7 @@ Query OK, 0 rows affected (0.09 sec)
 ```
 
 ```sql
-mysql> CREATE TABLE utf8m4_test (
+CREATE TABLE utf8m4_test (
     ->  c char(1) NOT NULL
     -> ) CHARACTER SET utf8mb4;
 ```
@@ -166,7 +166,7 @@ Query OK, 0 rows affected (0.09 sec)
 ```
 
 ```sql
-mysql> INSERT INTO utf8_test VALUES ('😉');
+INSERT INTO utf8_test VALUES ('😉');
 ```
 
 ```sql
@@ -174,7 +174,7 @@ ERROR 1366 (HY000): incorrect utf8 value f09f9889(😉) for column c
 ```
 
 ```sql
-mysql> INSERT INTO utf8m4_test VALUES ('😉');
+INSERT INTO utf8m4_test VALUES ('😉');
 ```
 
 ```sql
@@ -182,7 +182,7 @@ Query OK, 1 row affected (0.02 sec)
 ```
 
 ```sql
-mysql> SELECT char_length(c), length(c), c FROM utf8_test;
+SELECT char_length(c), length(c), c FROM utf8_test;
 ```
 
 ```sql
@@ -190,7 +190,7 @@ Empty set (0.01 sec)
 ```
 
 ```sql
-mysql> SELECT char_length(c), length(c), c FROM utf8m4_test;
+SELECT char_length(c), length(c), c FROM utf8m4_test;
 ```
 
 ```sql
