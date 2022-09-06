@@ -50,7 +50,7 @@ To connect to your TiDB cluster via standard connection, perform the following s
 >
 > For [Developer Tier clusters](/tidb-cloud/select-cluster-tier.md#developer-tier), when you connect to your cluster, you must include the prefix for your cluster in the user name and wrap the name with quotation marks. For more information, see [User name prefix](/tidb-cloud/select-cluster-tier.md#user-name-prefix).
 
-## Connect via private endpoint
+## Connect via private endpoint (recommended)
 
 > **Note:**
 >
