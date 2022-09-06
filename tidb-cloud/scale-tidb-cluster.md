@@ -13,9 +13,9 @@ aliases: ['/tidbcloud/beta/scale-tidb-cluter']
 
 You can scale a TiDB cluster in the following dimensions:
 
-- Node number of TiDB, TiKV, and TiFlash
-- Node storage of TiKV and TiFlash
-- Node size (including vCPUs and memory) of TiDB, TiKV, and TiFlash
+- The number of TiDB, TiKV, and TiFlash nodes
+- The storage of TiKV and TiFlash nodes
+- The size (including vCPUs and memory) of TiDB, TiKV, and TiFlash nodes
 
 For information about how to determine the size of your TiDB cluster, see [Determine Your TiDB Size](/tidb-cloud/size-your-cluster.md).
 
@@ -28,11 +28,11 @@ For information about how to determine the size of your TiDB cluster, see [Deter
 > - 4 vCPU TiDB can only be used with 4 vCPU TiKV, and 4 vCPU TiKV can only be used with 4 vCPU TiDB.
 > - TiFlash is unavailable.
 
-## Change node number
+## Change the number of nodes
 
 You can change the number of TiDB, TiKV, or TiFlash nodes.
 
-### Increase node number
+### Increase the number of nodes
 
 To increase the number of TiDB, TiKV, or TiFlash nodes, take the following steps:
 
@@ -47,7 +47,7 @@ To increase the number of TiDB, TiKV, or TiFlash nodes, take the following steps
 4. In the **Scale** window, increase the number of TiDB, TiKV, or TiFlash nodes.
 5. Click **Confirm**.
 
-### Decrease node number
+### Decrease the number of nodes
 
 To decrease the number of TiDB nodes, take the following steps:
 
@@ -66,23 +66,23 @@ To decrease the number of TiKV or TiFlash nodes, you need to submit a support ti
 
 > **Warning:**
 >
-> Decreasing TiKV or TiFlash node number can be risky, which might lead to insufficient storage space, excessive CPU usage, or excessive memory usage on remaining nodes.
+> Decreasing the number of TiKV or TiFlash nodes can be risky, which might lead to insufficient storage space, excessive CPU usage, or excessive memory usage on remaining nodes.
 
 To submit a support ticket, perform the steps in [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md). For each node to be scaled, provide the following information in the **Description** box:
 
 - Cluster name: xxx
 - Cloud provider: GCP or AWS
 - Node type: TiKV or TiFlash
-- Current node number: xxx
-- Expected node number: xxx
+- Current number of nodes: xxx
+- Expected number of nodes: xxx
 
-## Change node storage
+## Change the storage of nodes
 
-You can change the node storage of TiKV or TiFlash.
+You can change the storage of TiKV or TiFlash nodes.
 
-### Increase node storage
+### Increase the storage of nodes
 
-To increase the node storage of TiKV or TiFlash, take the following steps:
+To increase the storage of TiKV or TiFlash nodes, take the following steps:
 
 1. In the TiDB Cloud console, navigate to the **Clusters** page for your project.
 2. Locate the cluster that you want to scale, and click **...** in the upper-right corner of the cluster area.
@@ -92,18 +92,18 @@ To increase the node storage of TiKV or TiFlash, take the following steps:
     > Alternatively, you can also click the name of the cluster that you want to scale on the **Clusters** page and click **...** in the upper-right corner.
 
 3. Click **Scale** in the drop-down menu. The **Scale** window is displayed.
-4. In the **Scale** window, increase the node storage of TiKV or TiFlash.
+4. In the **Scale** window, increase the storage of TiKV or TiFlash nodes.
 5. Click **Confirm**.
 
 > **Note:**
 >
-> AWS has a cooldown period of node storage changes. If your TiDB cluster is hosted by AWS, after changing the node storage of TiKV or TiFlash, you must wait at least six hours before you can change it again.
+> AWS has a cooldown period of node storage changes. If your TiDB cluster is hosted by AWS, after changing the storage of TiKV or TiFlash nodes, you must wait at least 6 hours before you can change it again.
 
-### Decrease node storage
+### Decrease the storage of nodes
 
 For a running cluster, AWS and Google Cloud do not allow in-place storage capacity downgrade.
 
-## Increase node size
+## Increase the size of nodes
 
 When a cluster is running, you cannot increase its node size. To make such changes, take either of the following methods:
 
@@ -123,5 +123,5 @@ When a cluster is running, you cannot increase its node size. To make such chang
     - Cluster name: xxx
     - Cloud provider: GCP or AWS
     - Node type: TiDB, TiKV, or TiFlash
-    - Current node size: xxx
-    - Expected node size: xxx
+    - Current size of nodes: xxx
+    - Expected size of nodes: xxx
