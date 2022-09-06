@@ -74,7 +74,7 @@ TiDB Cloud begins creating an endpoint service, which takes 3 to 4 minutes.
 When the endpoint service is created, take a note of your endpoint service name from the command in the lower area of the console page.
 
 ```bash
-aws ec2 create-vpc-endpoint --vpc-id <your_vpc_id> --region us-west-2 --service-name <your_endpoint_service_name> --vpc-endpoint-type Interface --subnet-ids <your_application_subnet_ids>
+aws ec2 create-vpc-endpoint --vpc-id <your_vpc_id> --region <your_region> --service-name <your_endpoint_service_name> --vpc-endpoint-type Interface --subnet-ids <your_application_subnet_ids>
 ```
 
 Then create an AWS interface endpoint either in the AWS Management Console or using the AWS CLI.
