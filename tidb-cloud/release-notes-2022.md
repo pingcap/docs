@@ -8,6 +8,20 @@ aliases: ['/tidbcloud/beta/supported-tidb-versions','/tidbcloud/release-notes']
 
 This page lists the release notes of [TiDB Cloud](https://en.pingcap.com/tidb-cloud/) in 2022.
 
+## September 6, 2022
+
+**General changes**
+
+* Upgrade the default TiDB version of TiDB Cloud [Dedicated Tier](/tidb-cloud/select-cluster-tier.md#dedicated-tier) clusters from [v6.1.0](https://docs.pingcap.com/tidb/stable/release-6.1.0) to [v6.1.1](https://docs.pingcap.com/tidb/stable/release-6.1.1).
+
+* Provide [more metrics](https://docs.pingcap.com/tidbcloud/monitor-datadog-integration#metrics-available-to-datadog) of Dedicated Tier clusters in Datadog to help you better understand the cluster performance status.
+
+    If you have [integrated TiDB Cloud with Datadog](https://docs.pingcap.com/tidbcloud/monitor-datadog-integration), you can view these metrics in your Datadog dashboards directly.
+
+**Console changes**
+
+* Now you can [apply for a PoC](/tidb-cloud/tidb-cloud-poc.md) from the entry in the upper-right corner of the TiDB Cloud console.
+
 ## August 30, 2022
 
 **General changes**
