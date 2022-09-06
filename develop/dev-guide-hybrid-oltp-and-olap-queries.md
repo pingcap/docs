@@ -13,7 +13,7 @@ The [Create a table](/develop/dev-guide-create-table.md#use-htap-capabilities) s
 
 ## Data preparation
 
-Before starting, you can import more sample data [via the `tiup demo` command](/develop/dev-guide-bookshop-schema-design.md#via-tiup-demo). For example:
+Before starting, you can import more sample data [via the `tiup demo` command](/develop/dev-guide-bookshop-schema-design.md#method-1-via-tiup-demo). For example:
 
 {{< copyable "shell-regular" >}}
 
@@ -21,7 +21,7 @@ Before starting, you can import more sample data [via the `tiup demo` command](/
 tiup demo bookshop prepare --users=200000 --books=500000 --authors=100000 --ratings=1000000 --orders=1000000 --host 127.0.0.1 --port 4000 --drop-tables
 ```
 
-Or you can [use the Import function of TiDB Cloud](/develop/dev-guide-bookshop-schema-design.md#via-tidb-cloud-import) to import the pre-prepared sample data.
+Or you can [use the Import function of TiDB Cloud](/develop/dev-guide-bookshop-schema-design.md#method-2-via-tidb-cloud-import) to import the pre-prepared sample data.
 
 ## Window functions
 
@@ -258,7 +258,18 @@ For more information about how TiDB chooses to use TiFlash, see [Use TiDB to rea
 
 ## Read more
 
+<CustomContent platform="tidb">
+
 - [Quick Start with HTAP](/quick-start-with-htap.md)
 - [Explore HTAP](/explore-htap.md)
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+- [TiDB Cloud HTAP Quick Start](/tidb-cloud/tidb-cloud-htap-quickstart.md)
+
+</CustomContent>
+
 - [Window Functions](/functions-and-operators/window-functions.md)
 - [Use TiFlash](/tiflash/tiflash-overview.md#use-tiflash)

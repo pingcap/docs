@@ -5,13 +5,9 @@ summary: An overview of the usage of ALTER TABLE ... COMPACT for the TiDB databa
 
 # ALTER TABLE ... COMPACT
 
-> **Warning:**
->
-> This statement is still an experimental feature. It is NOT recommended that you use it in the production environment.
-
 To enhance read performance and reduce disk usage, TiDB automatically schedules data compaction on storage nodes in the background. During the compaction, storage nodes rewrite physical data, including cleaning up deleted rows and merging multiple versions of data caused by updates. The `ALTER TABLE ... COMPACT` statement allows you to initiate compaction for a specific table immediately, without waiting until compaction is triggered in the background.
 
-The execution of this statement does not block existing SQL statements or affect any TiDB features, such as transactions, DDL, and GC. Data that can be selected via SQL statements will not be changed either. However, executing this statement consumes some IO and CPU resources, which might result in higher SQL execution latency.
+The execution of this statement does not block existing SQL statements or affect any TiDB features, such as transactions, DDL, and GC. Data that can be selected via SQL statements will not be changed either. Executing this statement consumes some IO and CPU resources. Be careful to choose an appropriate timing for execution, such as when resources are available, to avoid negative impact on the business.
 
 The compaction statement will be finished and returned when all replicas of a table are compacted. During the execution process, you can safely interrupt the compaction by executing the [`KILL`](/sql-statements/sql-statement-kill.md) statement. Interrupting a compaction does not break data consistency or lead to data loss, nor does it affect subsequent manual or background compactions.
 
@@ -21,8 +17,10 @@ This data compaction statement is currently supported only for TiFlash replicas,
 
 ```ebnf+diagram
 AlterTableCompactStmt ::=
-    'ALTER' 'TABLE' TableName 'COMPACT' 'TIFLASH' 'REPLICA'
+    'ALTER' 'TABLE' TableName 'COMPACT' ( 'TIFLASH' 'REPLICA' )?
 ```
+
+Since v6.2.0, the `TIFLASH REPLICA` part of the syntax can be omitted. When omitted, the semantic of the statement remains unchanged, and takes effect only for TiFlash.
 
 ## Examples
 
@@ -59,7 +57,11 @@ The `ALTER TABLE ... COMPACT` statement compacts all replicas in a table simulta
 
 To avoid a significant impact on online business, each TiFlash instance only compacts data in one table at a time by default (except for the compaction triggered in the background). This means that if you execute the `ALTER TABLE ... COMPACT` statement on multiple tables at the same time, their executions will be queued on the same TiFlash instance, rather than being executed simultaneously.
 
+<CustomContent platform="tidb">
+
 To obtain greater table-level concurrency with higher resource usage, you can modify the TiFlash configuration [`manual_compact_pool_size`](/tiflash/tiflash-configuration.md). For example, when `manual_compact_pool_size` is set to 2, compaction for 2 tables can be processed simultaneously.
+
+</CustomContent>
 
 ## MySQL compatibility
 

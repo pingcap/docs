@@ -84,12 +84,24 @@ The following Python pseudocode shows how to implement application-level retries
 Your retry logic must follow the following rules:
 
 - Throws an error if the number of failed retries reaches the `max_retries` limit.
-- Use `try ... catch ...` to catch SQL execution exceptions. Retry when encountering the following errors. Roll back when encountering other errors. For more information about error codes, see [Error Codes and Troubleshooting](/error-codes.md).
+- Use `try ... catch ...` to catch SQL execution exceptions. Retry when encountering the following errors. Roll back when encountering other errors.
     - `Error 8002: can not retry select for update statement`: SELECT FOR UPDATE write conflict error
     - `Error 8022: Error: KV error safe to retry`: transaction commit failed error.
     - `Error 8028: Information schema is changed during the execution of the statement`: Table schema has been changed by DDL operation, resulting in an error in the transaction commit.
     - `Error 9007: Write conflict`: Write conflict error, usually caused by multiple transactions modifying the same row of data when the optimistic transaction mode is used.
 - `COMMIT` the transaction at the end of the try block.
+
+<CustomContent platform="tidb">
+
+For more information about error codes, see [Error Codes and Troubleshooting](/error-codes.md).
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+For more information about error codes, see [Error Codes and Troubleshooting](https://docs.pingcap.com/tidb/stable/error-codes).
+
+</CustomContent>
 
 ```python
 while True:
@@ -104,7 +116,7 @@ while True:
         if (error.code != "9007" && error.code != "8028" && error.code != "8002" && error.code != "8022"):
             raise error
         else:
-            connnection.exec('ROLLBACK');
+            connection.exec('ROLLBACK')
 
             # Capture the error types that require application-side retry,
             # wait for a short period of time,
@@ -113,12 +125,32 @@ while True:
             sleep(sleep_ms) # make sure your sleep() takes milliseconds
 ```
 
-> Note:
+> **Note:**
 >
 > If you frequently encounter `Error 9007: Write conflict`, you may need to check your schema design and the data access patterns of your workload to find the root cause of the conflict and try to avoid conflicts by a better design.
-> For information about how to troubleshoot and resolve transaction conflicts, see [Troubleshoot Lock Conflicts](/troubleshoot-lock-conflicts.md).
+
+<CustomContent platform="tidb">
+
+For information about how to troubleshoot and resolve transaction conflicts, see [Troubleshoot Lock Conflicts](/troubleshoot-lock-conflicts.md).
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+For information about how to troubleshoot and resolve transaction conflicts, see [Troubleshoot Lock Conflicts](https://docs.pingcap.com/tidb/stable/troubleshoot-lock-conflicts).
+
+</CustomContent>
 
 ## See also
 
-- [Troubleshoot Lock Conflicts](/troubleshoot-lock-conflicts.md)
+<CustomContent platform="tidb">
+
 - [Troubleshoot Write Conflicts in Optimistic Transactions](/troubleshoot-write-conflicts.md)
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+- [Troubleshoot Write Conflicts in Optimistic Transactions](https://docs.pingcap.com/tidb/stable/troubleshoot-write-conflicts)
+
+</CustomContent>
