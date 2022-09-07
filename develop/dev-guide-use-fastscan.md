@@ -45,7 +45,7 @@ The variable `tiflash_fastscan` supports session-level and global-level modifica
 set session tiflash_fastscan=ON;
 ```
 
-You can also set `tiflash_fastscan` at the global level to enable new values for the default session and global variable `tiflash_fastscan` in the new session after setting.
+You can also set `tiflash_fastscan` at the global level. The new setting will take effect in new sessions, but will not take effect for the current and previous sessions. Besides, in new sessions, `tiflash_fastscan` at session-level and global-level will both take the new value.
 
 ```
 set global tiflash_fastscan=ON;
