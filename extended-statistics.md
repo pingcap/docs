@@ -5,79 +5,87 @@ summary: Learn how to use extended statistics to guide the optimizer.
 
 # Introduction to Extended Statistics
 
-The statistics mentioned in the [Introduction to Statistics](/statistics.md) section, including histograms and Count-Min Sketch, are common statistics. This information is collected each time statistics are collected manually or automatically. Another class of statistics, as opposed to common statistics, is extended statistics, which are only helpful for optimizer estimation in a specific scenario.
+TiDB can collect the following two types of statistics:
 
-Since they are only helpful in specific scenarios, extended statistics are not collected during the default manual or automatic `ANALYZE` to avoid the overhead of managing statistics. If you want to collect extended statistics, you need to "register" them with SQL commands first. Then TiDB will collect these registered extended statistics in addition to the common statistics the next time you manually or automatically `ANALYZE`.
+- Regular statistics: statistics such as histograms and Count-Min Sketch. See [Introduction to Statistics](/statistics.md) for details.
+- Extended statistics: statistics filtered by tables and columns.
 
-## How to enable the Extended Statistics
+Because the extended statistics are only used for optimizer estimates in specific scenarios, when the `ANALYZE` statement is executed manually or automatically, to reduce the overhead of managing statistics, TiDB only collects the regular statistics and does not collect the extended statistics by default.
 
-You can use the following command to enable the feature: 
+Extended statistics are disabled by default. To collect extended statistics, you need to enable and register the extended statistics first.
 
-{{< copyable "sql" >}}
+After the registration, the next time the `ANALYZE` statement is executed manually or automatically, TiDB collects both the regular statistics and the registered extended statistics.
+
+## Limitations
+
+Extended statistics are not collected in the following scenarios:
+
+- Statistics collection on indexes only
+- Statistics collection with the `ANALYZE INCREMENTAL` command
+- Statistics collection with the value of the `tidb_enable_fast_analyze` system variable set to `true`
+
+## Common operations
+
+### Enable extended statistics
+
+To enable extended statistics, set the system variable `tidb_enable_extended_stats` to `ON`:
 
 ```sql
-set global tidb_enable_extended_stats = on;
+SET GLOBAL tidb_enable_extended_stats = ON;
 ```
 
-The default value of `tidb_enable_extended_stats` is `off`.
+The default value of this variable is `OFF`.
 
-## SQL Grammar
+### Register extended statistics
 
-### The registration of the Extended Statistics
-
-If you want to register the extended statistics, you can use the SQL `ALTER TABLE ADD STATS_EXTENDED`. The grammar is shown below:
-
-{{< copyable "sql" >}}
+To register the extended statistics, use the SQL statement `ALTER TABLE ADD STATS_EXTENDED`. The syntax is as follows:
 
 ```sql
 ALTER TABLE table_name ADD STATS_EXTENDED IF NOT EXISTS stats_name stats_type(column_name, column_name...);
 ```
 
-This statement indicates that you want to collect the specified type of extended statistics on the specified columns of the table and name it.
+In the statement, you can specify the table name, statistics type, statistics type, and column name of the extended statistics to be collected.
 
-- `table_name` is the table that you want to collect the extended statistics.
-- `stats_name` is the name of the extended statistics. It should be unique for each table.
-- `stats_type` is the type of the extended statistics. Now it only has one possible value `correlation`.
-- `column_name` specifies the column group. It can be multiple columns. For `correlation` type, there should be and only be two columns.
+- `table_name` specifies the name of the table from which the extended statistics are collected.
+- `stats_name` specifies the name of the statistics, which must be unique for each table.
+- `stats_type` specifies the type of the statistics. Currently, only the correlation type is supported.
+- `column_name` specifies the column group, which might have multiple columns. Currently, you can only specify two column names.
 
-The extended statistics will be collected if the `mysql.stats_extended` has the corresponding record when we run the `ANALYZE` command. And the `status` column will be set to `1`, and the `version` column will be set to the new timestamp.
+Each TiDB node maintains a cache in the system table `mysql.stats_extended` for extended statistics, which improve access performance. After you register the extended statistics, if the system table `mysql.stats_extended` has the corresponding records, the next time the `ANALYZE` statement is executed, TiDB will collect the extended statistics.
 
-### The deletion of the Extended Statistics
+Each row in the `mysql.stats_extended` table records a `version` column. Once a row is updated, the value of the column `version` is increased, so that TiDB can load the table into the memory incrementally instead of fully.
 
-Each TiDB node will maintain a cache for the extended statistics to improve the efficiency of visiting the extended statistics. TiDB will load the table `mysql.stats_extended` periodically to ensure that the cache is kept the same as the data in the table. Each row in the table `mysql.stats_extended` records a column `version`. Once the row is updated, the value of the column `version` will be increased so that we can load the table into the memory incrementally instead of a full loading.
+TiDB loads `mysql.stats_extended` periodically to ensure that the cache is kept the same as the data in the table.
 
-To delete a record of the extended statistics, TiDB provides the following command:
+### Delete extended statistics
 
-{{< copyable "sql" >}}
+To delete a record of the extended statistics, use the following statement:
 
 ```sql
 ALTER TABLE table_name DROP STATS_EXTENDED stats_name;
 ```
 
-This command will mark the value of the corresponding record in the table `mysql.stats_extended`'s column `status` to `2`(meaning that the record is deleted) instead of deleting the record directly. Other TiDBs will read this change and delete the record in their memory cache. The background garbage collection will delete the record eventually.
+After you execute the statement, TiDB marks the value of the corresponding record in `mysql.stats_extended`'s column `status` to `2`, which means that the record is deleted, instead of deleting the record directly.
+
+Other TiDB nodes will read this change and delete the record in their memory cache. The background garbage collection will delete the record eventually.
 
 ### Flush the cache of one TiDB node
 
-We don't suggest you directly operate on the table `mysql.stats_extended`. The direct operation on the table would not manifest in the cache, which may cause the inconsistency of the cache on the different TiDB nodes.
+It is not recommended to directly operate on the `mysql.stats_extended` system table. The direct operation on the table causes inconsistent caches on different TiDB nodes.
 
-If you do such an operation wrongly, you can use the following command on each TiDB node to load the data of the table fully instead of incrementally:
-
-{{< copyable "sql" >}}
+If you have mistakenly operated on the table, you can use the following statement on each TiDB node. Then the current cache will be cleared and the `mysql.stats_extended` table will be fully reloaded:
 
 ```sql
 ADMIN RELOAD STATS_EXTENDED;
 ```
-### Collecting the Extended Statistics
 
-After registration, TiDB collects the extended statistic with the `ANALYZE` command manually or automatically, except below scenarios:
+## Export and import extended statistics
 
-- Statistics collection on indexes only
-- Statistics collection with `ANALYZE INCREMENTAL` command
-- Statistics collection with variable `tidb_enable_fast_analyze` is true
+The way of exporting or importing extended statistics is the same as the regular statistics. See [Introduction to Statistics - Import and export statistics](/statistics.md#import-and-export-statistics) for details.
 
-## The type of the Extended Statistics
+## Usage scenarios and examples
 
-### Correlation
+Currently, only the correlation type is supported. This type is used to estimate the number of rows in the range query. The following example shows how to use the correlation type to estimate the number of rows in the range query.
 
 The registration SQL is like the following:
 
@@ -120,6 +128,4 @@ SELECT * FROM t WHERE col1 <= 1 OR col1 IS NULL;
 The above estimation plus one will be the final estimation for the condition. This way, we don't need to use the independent assumption to get a significant estimation error.
 The optimizer will use the independent assumption if the correlation factor is less than the system variable `tidb_opt_correlation_threshold`. But it will increase the estimation heuristically. The larger the system variable `tidb_opt_correlation_exp_factor` is, the larger the estimation result is. The larger the absolute value of the correlation factor is, the larger the estimation result is.
 
-## The dump and load of the Extended Statistics
 
-The way mentioned in the chapter [Introduction to Statistics](/statistics.md) is also suitable for extended statistics. The dump result is in the same JSON file as the normal statistics.
