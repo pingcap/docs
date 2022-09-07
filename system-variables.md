@@ -2377,13 +2377,13 @@ explain select * from t where age=5;
 - Default value: `OFF`
 - This variable is used to control whether to allow `INSERT`, `REPLACE`, and `UPDATE` statements to operate on the `_tidb_rowid` column. This variable can be used only when you import data using TiDB tools.
 
-### tidb_opt_inline_cte <span class="version-mark">New in v6.4.0</span>
+### tidb_opt_force_inline_cte <span class="version-mark">New in v6.4.0</span>
 
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
 - Type: Boolean
 - Default value: `OFF`
-- This variable is mainly used to control whether all CTEs in the entire session are inlined or not. The default value is false, which means that inline cte is not enabled by default. (But if the user directly specifies the merge hint, it can still be turned on). If the variable is set to true, it means that all CTEs for this session try to enable inlining.
+- This variable is mainly used to control whether all CTEs in the entire session are force inlined or not. The default value is false, which means that inline cte is not enabled by default. (But if the user directly specifies the merge hint, it can still be turned on). If the variable is set to true, it means that all CTEs for this session force to enable inlining.
 
 ### tidb_partition_prune_mode <span class="version-mark">New in v5.1</span>
 
