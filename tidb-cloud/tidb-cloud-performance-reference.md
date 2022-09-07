@@ -35,7 +35,7 @@ Test results:
 
     Sysbench OLTP performance:
 
-    | Transaction model | Threads | TPS    | Average Latency (ms) |
+    | Transaction model | Threads | TPS    | Average latency (ms) |
     |-------------------|---------|--------|----------------------|
     | Insert            | 25      | 2,508  | 7.92                 |
     | Point Select      | 50      | 16,858 | 1.72                 |
@@ -47,13 +47,13 @@ Test results:
 
     TPC-C performance:
 
-    | Transaction model | Threads | tpmC  | Average Latency (ms) |
+    | Transaction model | Threads | tpmC  | Average latency (ms) |
     |-------------------|---------|-------|----------------------|
     | TPCC              | 100     | 7,592 | 6.68                 |
 
     Sysbench OLTP performance:
 
-    | Transaction model | Threads | TPS    | Average Latency (ms) |
+    | Transaction model | Threads | TPS    | Average latency (ms) |
     |-------------------|---------|--------|----------------------|
     | Insert            | 100     | 6,147  | 14.77                |
     | Point Select      | 100     | 19,462 | 3.21                 |
@@ -81,13 +81,13 @@ Test results:
 
     TPC-C performance:
 
-    | Transaction model | Threads | tpmC   | QPS    | Average Latency (ms) |
+    | Transaction model | Threads | tpmC   | QPS    | Average latency (ms) |
     |-------------------|---------|--------|--------|----------------------|
     | TPCC              | 300     | 14,532 | 13,137 | 608                  |
 
     Sysbench OLTP performance:
 
-    | Transaction model | Threads | TPS    | QPS    | Average Latency (ms) |
+    | Transaction model | Threads | TPS    | QPS    | Average latency (ms) |
     |-------------------|---------|--------|--------|----------------------|
     | Insert            | 300     | 8,848  | 8,848  | 36                   |
     | Point Select      | 600     | 46,224 | 46,224 | 13                   |
@@ -99,13 +99,13 @@ Test results:
 
     TPC-C performance:
 
-    | Transaction model | Threads | tpmC   | QPS    | Average Latency (ms) |
+    | Transaction model | Threads | tpmC   | QPS    | Average latency (ms) |
     |-------------------|---------|--------|--------|----------------------|
     | TPCC              | 1,200   | 15,208 | 13,748 | 2,321                |
 
     Sysbench OLTP performance:
 
-    | Transaction model | Threads | TPS    | QPS    | Average Latency (ms) |
+    | Transaction model | Threads | TPS    | QPS    | Average latency (ms) |
     |-------------------|---------|--------|--------|----------------------|
     | Insert            | 1,500   | 11,601 | 11,601 | 129                  |
     | Point Select      | 600     | 46,224 | 46,224 | 13                   |
@@ -136,13 +136,13 @@ Test results:
 
     TPC-C performance:
 
-    | Transaction model | Threads | tpmC   | QPS    | Average Latency (ms) |
+    | Transaction model | Threads | tpmC   | QPS    | Average latency (ms) |
     |-------------------|---------|--------|--------|----------------------|
     | TPCC              | 600     | 32,266 | 29,168 | 548                  |
 
     Sysbench OLTP performance:
 
-    | Transaction model | Threads | TPS    | QPS    | Average Latency (ms) |
+    | Transaction model | Threads | TPS    | QPS    | Average latency (ms) |
     |-------------------|---------|--------|--------|----------------------|
     | Insert            | 600     | 17,831 | 17,831 | 34                   |
     | Point Select      | 600     | 93,287 | 93,287 | 6                    |
@@ -154,13 +154,13 @@ Test results:
 
     TPC-C performance:
 
-    | Transaction model | Threads | tpmC   | QPS    | Average Latency (ms) |
+    | Transaction model | Threads | tpmC   | QPS    | Average latency (ms) |
     |-------------------|---------|--------|--------|----------------------|
     | TPCC              | 1,200   | 33,394 | 30,188 | 1,048                |
 
     Sysbench OLTP performance:
 
-    | Transaction model | Threads | TPS    | QPS    | Average Latency (ms) |
+    | Transaction model | Threads | TPS    | QPS    | Average latency (ms) |
     |-------------------|---------|--------|--------|----------------------|
     | Insert            | 2,000   | 23,633 | 23,633 | 84                   |
     | Point Select      | 600     | 93,287 | 93,287 | 6                    |
@@ -174,13 +174,13 @@ Test results:
 
     TPC-C performance:
 
-    | Transaction model | Threads | tpmC   | QPS    | Average Latency (ms) |
+    | Transaction model | Threads | tpmC   | QPS    | Average latency (ms) |
     |-------------------|---------|--------|--------|----------------------|
     | TPCC              | 1,200   | 62,918 | 56,878 | 310                  |
 
     Sysbench OLTP performance:
 
-    | Transaction model | Threads | TPS     | QPS     | Average Latency (ms) |
+    | Transaction model | Threads | TPS     | QPS     | Average latency (ms) |
     |-------------------|---------|---------|---------|----------------------|
     | Insert            | 1,200   | 33,892  | 33,892  | 23                   |
     | Point Select      | 1,200   | 185,574 | 181,255 | 4                    |
@@ -192,13 +192,13 @@ Test results:
 
     TPC-C performance:
 
-    | Transaction model | Threads | tpmC   | QPS    | Average Latency (ms) |
+    | Transaction model | Threads | tpmC   | QPS    | Average latency (ms) |
     |-------------------|---------|--------|--------|----------------------|
     | TPCC              | 2,400   | 65,452 | 59,169 | 570                  |
 
     Sysbench OLTP performance:
 
-    | Transaction model | Threads | TPS     | QPS     | Average Latency (ms) |
+    | Transaction model | Threads | TPS     | QPS     | Average latency (ms) |
     |-------------------|---------|---------|---------|----------------------|
     | Insert            | 4,000   | 47,029  | 47,029  | 43                   |
     | Point Select      | 1,200   | 185,574 | 181,255 | 4                    |
@@ -229,13 +229,13 @@ Test results:
 
     TPC-C performance:
 
-    | Transaction model | Threads | tpmC   | QPS    | Average Latency (ms) |
+    | Transaction model | Threads | tpmC   | QPS    | Average latency (ms) |
     |-------------------|---------|--------|--------|----------------------|
     | TPCC              | 1,200   | 67,941 | 61,419 | 540                  |
 
     Sysbench OLTP performance:
 
-    | Transaction model | Threads | TPS     | QPS     | Average Latency (ms) |
+    | Transaction model | Threads | TPS     | QPS     | Average latency (ms) |
     |-------------------|---------|---------|---------|----------------------|
     | Insert            | 1,200   | 35,096  | 35,096  | 34                   |
     | Point Select      | 1,200   | 228,600 | 228,600 | 5                    |
@@ -247,13 +247,13 @@ Test results:
 
     TPC-C performance:
 
-    | Transaction model | Threads | tpmC   | QPS    | Average Latency (ms) |
+    | Transaction model | Threads | tpmC   | QPS    | Average latency (ms) |
     |-------------------|---------|--------|--------|----------------------|
     | TPCC              | 1,200   | 67,941 | 61,419 | 540                  |
 
     Sysbench OLTP performance:
 
-    | Transaction model | Threads | TPS     | QPS     | Average Latency (ms) |
+    | Transaction model | Threads | TPS     | QPS     | Average latency (ms) |
     |-------------------|---------|---------|---------|----------------------|
     | Insert            | 2,000   | 43,338  | 43,338  | 46                   |
     | Point Select      | 1,200   | 228,600 | 228,600 | 5                    |
@@ -267,13 +267,13 @@ Test results:
 
     TPC-C performance:
 
-    | Transaction model | Threads | tpmC    | QPS     | Average Latency (ms) |
+    | Transaction model | Threads | tpmC    | QPS     | Average latency (ms) |
     |-------------------|---------|---------|---------|----------------------|
     | TPCC              | 2,400   | 133,164 | 120,380 | 305                  |
 
     Sysbench OLTP performance:
 
-    | Transaction model | Threads | TPS     | QPS     | Average Latency (ms) |
+    | Transaction model | Threads | TPS     | QPS     | Average latency (ms) |
     |-------------------|---------|---------|---------|----------------------|
     | Insert            | 2,400   | 69,139  | 69,139  | 22                   |
     | Point Select      | 2,400   | 448,056 | 448,056 | 4                    |
@@ -285,17 +285,16 @@ Test results:
 
     TPC-C performance:
 
-    | Transaction model | Threads | tpmC    | QPS     | Average Latency (ms) |
+    | Transaction model | Threads | tpmC    | QPS     | Average latency (ms) |
     |-------------------|---------|---------|---------|----------------------|
     | TPCC              | 2,400   | 133,164 | 120,380 | 305                  |
 
     Sysbench OLTP performance:
 
-    | Transaction model | Threads | TPS     | QPS     | Average Latency (ms) |
+    | Transaction model | Threads | TPS     | QPS     | Average latency (ms) |
     |-------------------|---------|---------|---------|----------------------|
     | Insert            | 4,000   | 86,242  | 86,242  | 25                   |
     | Point Select      | 2,400   | 448,056 | 448,056 | 4                    |
     | Read Write        | 2,400   | 7,326   | 146,526 | 172                  |
     | Update Index      | 6,000   | 58,856  | 58,856  | 51                   |
     | Update Non-index  | 6,000   | 128,601 | 128,601 | 24                   |
-    
