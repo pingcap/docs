@@ -471,7 +471,7 @@ INSERT INTO t VALUES ('a');
 Query OK, 1 row affected
 ```
 
-In TiDB, the preceding statement is successfully executed. In MySQL, because utf8mb4_general_ci is case-insensitive, the `Duplicate entry 'a'` error is reported.
+In TiDB, the preceding statement is successfully executed. In MySQL, because `utf8mb4_general_ci` is case-insensitive, the `Duplicate entry 'a'` error is reported.
 
 ```sql
 INSERT INTO t1 VALUES ('a ');
