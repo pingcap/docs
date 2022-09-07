@@ -3067,6 +3067,13 @@ For details, see [Identify Slow Queries](/identify-slow-queries.md).
 - This variable is used to set the concurrency degree of the window operator.
 - A value of `-1` means that the value of `tidb_executor_concurrency` will be used instead.
 
+### `tiflash_fastscan` <span class="version-mark">New in v6.3.0</span>
+
+- Scope: SESSION | GLOBAL
+- Default value: `false`
+- Range: `true | false`
+- If the FastScan feature is enabled (when set to `true`), TiFlash provides more efficient query performance, but does not guarantee the accuracy of the query results or data consistency.
+
 ### `tiflash_fine_grained_shuffle_batch_size` <span class="version-mark">New in v6.2.0</span>
 
 - Scope: SESSION | GLOBAL
