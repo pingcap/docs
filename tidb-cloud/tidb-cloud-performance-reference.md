@@ -29,7 +29,7 @@ Test results:
 
     TPC-C performance:
 
-    | Transaction model | Threads | tpmC  | Average Latency (ms) |
+    | Transaction model | Threads | tpmC  | Average latency (ms) |
     |-------------------|---------|-------|----------------------|
     | TPCC              | 25      | 4,486 | 2.24                 |
 
