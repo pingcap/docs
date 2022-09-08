@@ -97,7 +97,7 @@ Other TiDB nodes will read this change and delete the record in their memory cac
 > ADMIN RELOAD STATS_EXTENDED;
 > ```
 
-</summary>
+</details>
 
 ## Export and import extended statistics
 
