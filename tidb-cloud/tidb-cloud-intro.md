@@ -28,6 +28,10 @@ With TiDB Cloud, you can get the following key features:
 
     Deploy, scale, monitor, and manage TiDB clusters with a few clicks, through an easy-to-use web-based management platform.
 
+- **Multi-Cloud Support**
+
+    Stay flexible without cloud vendor lock-in. TiDB Cloud is currently available on AWS and GCP, with more platforms on the way.
+
 - **Real-Time Analytics**
 
     Get real-time analytical query results with Hybrid Transactional and Analytical Processing (HTAP) capabilities.
