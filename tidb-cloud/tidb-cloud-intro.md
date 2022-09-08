@@ -34,11 +34,11 @@ With TiDB Cloud, you can get the following key features:
 
 - **Fast and Customized Scaling**
 
-    Elastically and transparently scale to hundreds of nodes for critical workloads without changing business logic. And you can scale your performance and storage nodes separately according to your business needs.
+    Elastically and transparently scale to hundreds of nodes for critical workloads while maintaining ACID transactions. No need to bother with sharding or facing downtime. And you can scale your performance and storage nodes separately according to your business needs.
 
 - **High Availability and Reliability**
 
-    Data replication across multiple Availability Zones, daily backups, and auto-failover ensure business continuity, regardless of hardware failure, network partition, or data center loss.
+    Naturally high availability by design. Data replication across multiple Availability Zones, daily backups, and auto-failover ensure business continuity, regardless of hardware failure, network partition, or data center loss.
 
 - **MySQL Compatibility**
 
