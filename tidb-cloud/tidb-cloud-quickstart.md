@@ -41,6 +41,10 @@ To create a free Developer Tier cluster, take the following steps:
 
     Your TiDB Cloud cluster will be created in approximately 5 to 15 minutes.
 
+> **Tip:**
+>
+> After your TiDB Cloud cluster is created, and before importing your data or connecting to a client, you can run queries instantly on TiDB Cloud. Click **Playground** to have a try. Playground contains a pre-loaded dataset of GitHub events.
+
 </div>
 
 <div label="Dedicated Tier">
