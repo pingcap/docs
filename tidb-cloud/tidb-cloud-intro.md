@@ -30,11 +30,11 @@ With TiDB Cloud, you can get the following key features:
 
 - **Real-Time Analytics**
 
-    Get real-time analytical query results with Hybrid Transactional and Analytical Processing (HTAP) capabilities. With a built-in analytics engine, TiDB Cloud runs consistent analytical queries on current data without disturbing mission-critical applications.
+    Get real-time analytical query results with a built-in analytics engine. TiDB Cloud runs consistent analytical queries on current data without disturbing mission-critical applications.
 
 - **Fast and Customized Scaling**
 
-    Elastically and transparently scale to hundreds of nodes for critical workloads while maintaining ACID transactions. No need to bother with sharding or facing downtime. And you can scale your performance and storage nodes separately according to your business needs.
+    Elastically and transparently scale to hundreds of nodes for critical workloads while maintaining ACID transactions. No need to bother with sharding. And you can scale your performance and storage nodes separately according to your business needs.
 
 - **High Availability and Reliability**
 
