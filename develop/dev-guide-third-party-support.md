@@ -1,9 +1,9 @@
 ---
-title: Third-Party Tools Support by TiDB
-summary: Learn about third-party tools support by TiDB.
+title: Third-Party Tools Supported by TiDB
+summary: Learn about third-party tools supported by TiDB.
 ---
 
-# Third-Party Tools Support by TiDB
+# Third-Party Tools Supported by TiDB
 
 > **Note:**
 >
