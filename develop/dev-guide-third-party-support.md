@@ -7,7 +7,7 @@ summary: Learn about third-party tools support by TiDB.
 
 > **Note:**
 >
-> Only some of the supported third-party tools are listed here. However, PingCAP has no way of knowing whether all third-party tools use unsupported features and thus cannot guarantee compatibility.
+> This document only lists some common third-party tools supported by TiDB. Third-party tools that are not listed do not mean that they are not supported. PingCAP has no way of knowing whether they use features that TiDB does not support and thus compatibility cannot be guaranteed.
 
 TiDB is highly compatible with the MySQL 5.7 protocol, so most of the MySQL drivers, ORM frameworks, and other tools that adapt to MySQL are compatible with TiDB. This document focuses on these tools and their support levels for TiDB.
 
@@ -49,7 +49,7 @@ If you encounter problems when connecting to TiDB using the tools listed in this
 | Java                  | [MyBatis](https://mybatis.org/mybatis-3/)                                                                                                                                     | v3.5.10     | Full | N/A                                                    | [Build a Simple CRUD App with TiDB and Java](/develop/dev-guide-sample-application-java.md)                                                                            |
 | Java                  | [Spring Data JPA](https://spring.io/projects/spring-data-jpa/) | 2.7.2 | Full | N/A                                                    |  [Build a TiDB Application Using Spring Boot](/develop/dev-guide-sample-application-spring-boot.md)   |
 | Java                  | [jOOQ](https://github.com/jOOQ/jOOQ)                                                                                                                                     | v3.16.7 (Open Source)     | Full | N/A                                                    | N/A                                                                            |
-| Ruby | [ActiveRecord](https://guides.rubyonrails.org/active_record_basics.html) | v7.0 | Full | N/A | N/A |
+| Ruby | [Active Record](https://guides.rubyonrails.org/active_record_basics.html) | v7.0 | Full | N/A | N/A |
 | JavaScript/TypeScript | [sequelize](https://www.npmjs.com/package/sequelize)                                                                                                                          | v6.20.1     | Compatible | N/A                                                    | N/A                                                                            |
 | JavaScript/TypeScript | [Knex.js](https://knexjs.org/)                                                                                                                                                | v1.0.7      | Compatible | N/A                                                    | N/A                                                                            |
 | JavaScript/TypeScript | [Prisma Client](https://www.prisma.io/)                                                                                                                                       | 3.15.1      | Compatible | N/A                                                    | N/A                                                                            |
