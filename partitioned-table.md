@@ -242,36 +242,36 @@ PARTITION BY RANGE COLUMNS(`report_date`)
  PARTITION `P_LT_2025-01-01` VALUES LESS THAN ('2025-01-01'))
 ```
 
-The optional NULL PARTITION would create a partition where the partitioning expression evaluates to NULL would be placed. In the partitioning expression, NULL is considered to be less than any other value, see [Handling of NULL with Range partitioning](#handling-of-null-with-range-partitioning).
+The optional `NULL PARTITION` creates a partition where the partitioning expression evaluates to `NULL` is placed. In the partitioning expression, `NULL` is considered to be less than any other value. See [Handling of NULL with Range partitioning](#handling-of-null-with-range-partitioning).
 
-The optional MAXVALUE PARTITION would create a last partition as `PARTITION P_MAXVALUE VALUES LESS THAN (MAXVALUE)`
+The optional `MAXVALUE PARTITION` creates a last partition as `PARTITION P_MAXVALUE VALUES LESS THAN (MAXVALUE)`
 
 #### ALTER INTERVAL Partitioned tables
 
 INTERVAL partitioning also adds simpler syntax for adding and dropping partitions.
 
-Changing the first partition, meaning dropping partitions with lower ranges/older data.
+The following statement changes the first partition, meaning dropping partitions with lower ranges and older data.
 
 ```
 ALTER TABLE table_name FIRST PARTITION LESS THAN (<expression>)
 ```
 
-Will drop all partitions whose value is lower than the given expression, making the matched partition the new first partition. (It will not affect a NULL PARTITION)
+It will drop all partitions whose value is lower than the given expression, making the matched partition the new first partition. It does not affect a NULL PARTITION.
 
-Changing the last partition, meaning adding more partitions with higher ranges/room for new data.
+The following statement changes the last partition, meaning adding more partitions with higher ranges and room for new data.
 
 ```
 ALTER TABLE table_name LAST PARTITION LESS THAN (<expression>)
 ```
 
-Will add new partitions with the current INTERVAL up to and including the given expression. (It will not work if a MAXVALUE PARTITION exists, since that would need data reorganisation).
+It will add new partitions with the current INTERVAL up to and including the given expression. It does not work if a `MAXVALUE PARTITION` exists, because it needs data reorganisation.
 
 #### INTERVAL Partitioning details and limitations
 
-- The INTERVAL partitioning feature is CREATE/ALTER TABLE syntax only, no change in metadata, so tables created or altered with the new syntax is still MySQL compatible.
-- There are no change in output format of SHOW CREATE TABLE, to keep MySQL compatibility.
-- Also existing tables conforming to INTERVAL can use the new ALTER syntax, they do not need to be created with INTERVAL syntax.
-- For RANGE COLUMNS, only integer types, date and datetime column types are supported.
+- The INTERVAL partitioning feature is about `CREATE/ALTER TABLE` syntax only. There is no change in metadata, so tables created or altered with the new syntax is still MySQL-compatible.
+- There is no change in the output format of `SHOW CREATE TABLE` to keep MySQL compatibility.
+- Existing tables conforming to INTERVAL can use the new `ALTER` syntax. They do not need to be created with `INTERVAL` syntax.
+- For `RANGE COLUMNS`, only integer types, date and datetime column types are supported.
 
 ### List partitioning
 
