@@ -10,10 +10,6 @@ category: intro
 
 ![TiDB Cloud Overview](/media/tidb-cloud/tidb-cloud-overview.png)
 
-Watch the following video to learn more about TiDB Cloud:
-
-<iframe width="600" height="450" src="https://www.youtube.com/embed/skCV9BEmjbo" title="Why TiDB Cloud?" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-
 ## Why TiDB Cloud
 
 TiDB Cloud allows you with little or no training to handle complex tasks such as infrastructure management and cluster deployment easily.
@@ -21,6 +17,10 @@ TiDB Cloud allows you with little or no training to handle complex tasks such as
 - Developers and database administrators (DBAs) can rapidly analyze a large volume of data across multiple datasets.
 
 - Enterprises of all sizes can easily deploy and manage TiDB Cloud to adapt to your business growth without prepayment.
+
+Watch the following video to learn more about TiDB Cloud:
+
+<iframe width="600" height="450" src="https://www.youtube.com/embed/skCV9BEmjbo" title="Why TiDB Cloud?" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 With TiDB Cloud, you can get the following key features:
 
