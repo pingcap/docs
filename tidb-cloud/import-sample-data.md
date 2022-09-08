@@ -42,7 +42,7 @@ This document describes how to import sample data into TiDB Cloud via the UI. Th
     </div>
     </SimpleTab>
 
-4. Modify the file patterns and add the table filter rules if needed. Click **Next**.
+4. Modify the file patterns and add the table filter rules if needed. In this case, you can safely skip this step and click **Next**.
 
 5. On the **Preview** page, confirm the import data and then click **Start Import**.
 
