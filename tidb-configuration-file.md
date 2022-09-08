@@ -700,6 +700,12 @@ Configuration items related to the PROXY protocol.
 >
 > Use `*` with caution because it might introduce security risks by allowing a client of any IP address to report its IP address. In addition, using `*` might also cause the internal component that directly connects to TiDB (such as TiDB Dashboard) to be unavailable.
 
+### `temp-dir` <span class="version-mark">New in v6.3.0</span>
+
++ File system location used by TiDB to store temporary data. Features that require local storage in TiDB nodes will store temporary data in this location.
++ When creating an index, if [`tidb_ddl_enable_fast_reorg`](/system-variables.md#tidb_ddl_enable_fast_reorg-new-in-v630) is enabled, data that needs to be backfilled for a newly created index will be at first stored in the TiDB local temporary directory, and then imported into TiKV in batches, thus accelerating the index creation.
++ Default value: `"/tmp/tidb"`
+
 ## experimental
 
 The `experimental` section, introduced in v3.1.0, describes the configurations related to the experimental features of TiDB.
@@ -708,8 +714,3 @@ The `experimental` section, introduced in v3.1.0, describes the configurations r
 
 + Controls whether an expression index can be created. Since TiDB v5.2.0, if the function in an expression is safe, you can create an expression index directly based on this function without enabling this configuration. If you want to create an expression index based on other functions, you can enable this configuration, but correctness issues might exist. By querying the `tidb_allow_function_for_expression_index` variable, you can get the functions that are safe to be directly used for creating an expression.
 + Default value: `false`
-
-### `temp-dir` <span class="version-mark">New in v6.3.0</span>
-
-+ used to set a local temp storage dir for TiDB node, all features that need used TiDB temp storage should use this dir as entry path. the add/create index fast reorg solution will also follow this rule to create a sub dir under this parameter and store temporary backfill index data in TiDB local storage.
-+ Default value: "/tmp/tidb"

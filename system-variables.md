@@ -814,6 +814,24 @@ Constraint checking is always performed in place for pessimistic transactions (d
 - Default value: `0`
 - This variable is read-only. It is used to obtain the timestamp of the current transaction.
 
+### tidb_ddl_disk_quota <span class="version-mark">New in v6.3.0</span>
+
+- Scope: GLOBAL
+- Persists to cluster: Yes
+- Type: Integer
+- Default value: `107374182400` (100 GiB)
+- Range: `[107374182400, 1125899906842624]` ([100 GiB, 1 PiB])
+- Unit: Bytes
+- This variable only takes effect when [`tidb_ddl_enable_fast_reorg`](#tidb_ddl_enable_fast_reorg-new-in-v630) is enabled and is used to set the usage limit of local storage during backfilling when creating an index.
+
+### tidb_ddl_enable_fast_reorg <span class="version-mark">New in v6.3.0</span>
+
+- Scope: GLOBAL
+- Persists to cluster: Yes
+- Type: Boolean
+- Default value: `OFF`
+- This variable controls whether to enable the acceleration of `ADD INDEX` and `CREATE INDEX` DDl operations to improve the speed of backfilling when creating an index. If this variable is enabled, TiDB uses a more effective way to create an index.
+
 ### tidb_ddl_error_count_limit
 
 - Scope: GLOBAL
@@ -851,24 +869,6 @@ Constraint checking is always performed in place for pessimistic transactions (d
 - Range: `[1, 256]`
 - Unit: Threads
 - This variable is used to set the concurrency of the DDL operation in the `re-organize` phase.
-
-### tidb_ddl_enable_fast_reorg <span class="version-mark">New in v6.3.0</span>
-
-- Scope: GLOBAL
-- Persists to cluster: Yes
-- Type: Boolean
-- Default value: `OFF`
-- This variable enable/disable add/create index DDL task to go fast reorg solution in `re-organize` phase.
-
-### tidb_ddl_disk_quota <span class="version-mark">New in v6.3.0</span>
-
-- Scope: GLOBAL
-- Persists to cluster: Yes
-- Type: Integer
-- Default value: `107374182400` (100 GiB)
-- Range: `[107374182400, 1125899906842624]` ([100 GiB, 1 PiB])
-- Unit: Bytes
-- This variable sets a threshold of fast reorg solution which indicates how much index data could be temp stored in TiDB local storage.
 
 ### tidb_default_string_match_selectivity <span class="version-mark">New in v6.2.0</span>
 
