@@ -770,14 +770,22 @@ Usage:
 >> scheduler resume balance-region-scheduler      // Continue to run the balance-region scheduler
 >> scheduler resume all                           // Continue to run all schedulers
 >> scheduler config balance-hot-region-scheduler  // Display the configuration of the balance-hot-region scheduler
->> scheduler describe balance-region-scheduler    // Display the running status and related diagnostic info of the balance-region scheduler
+>> scheduler describe balance-region-scheduler    // Display the running status and related diagnostic information of the balance-region scheduler
 ```
 
 ### `scheduler describe balance-region-scheduler`
 
-Use this command to view the running status and related diagnostic info of the balance-region scheduler. The status of the scheduler must be one of the following: `disabled`、`paused`、`scheduling`、`pending`、`normal`. 'disabled' means the current scheduler is unavailable or removed, 'paused' means the current scheduler is paused, 'scheduling' means the current scheduler is generating or executing scheduling operator, 'pending' means the current scheduler cannot generate scheduling operator, 'normal' means that there is no need to create operators since everything is fine.
+Use this command to view the running status and related diagnostic information of the `balance-region-scheduler`.
 
-Since TiDB v6.3.0, PD providers the function of running status and brief diagnosis information for `balance-region-scheduler`, other scheduler and check are not supported yet.
+Since TiDB v6.3.0, PD providers the function of running status and brief diagnosis information for `balance-region-scheduler`. Other schedulers and checkers are not supported yet.
+
+The status of the scheduler can be one of the following:
+
+- `disabled`: the scheduler is unavailable or removed.
+- `paused`: the scheduler is paused.
+- `scheduling`: the scheduler is generating or executing scheduling operators.
+- `pending`: the scheduler cannot generate scheduling operators. For a scheduler in the `pending` status, a brief diagnosis information is returned. The brief information describes status of stores and explains why these stores cannot be selected for scheduling.
+- `normal`: there is no need to generate scheduling operators.
 
 ### `scheduler config balance-leader-scheduler`
 
