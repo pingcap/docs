@@ -9,68 +9,7 @@ summary: Learn about TiDB Cloud billing.
 >
 > [Developer Tier clusters](/tidb-cloud/select-cluster-tier.md#developer-tier) are free to use for up to one year. You will not be charged for the use of your Developer Tier cluster, and your TiDB Cloud bill will not display any Developer Tier charges.
 
-TiDB Cloud charges according to the resources that you consume, which include:
-
-- Cluster node compute
-- Primary data storage
-- Data backup storage
-- Data transfers in to, out from, and within your cluster
-
-These charges appear as separate items on your monthly TiDB Cloud bills.
-
-## Compute cost
-
-TiDB Cloud lets you pay for database cluster compute resources by hour, which is ideal for dynamic workloads.
-
-In TiDB Cloud, you can control your cluster size easily by specifying the node quantity and node size of TiDB, TiKV, and TiFlash.
-
-The specified node quantity and associated vCPUs determine your hourly compute cost.
-
-Note that the compute cost of TiDB, TiKV, and TiFlash nodes might vary depending on different cloud providers and different regions. For details, see [TiDB Cloud pricing](https://en.pingcap.com/tidb-cloud-pricing/).
-
-## Storage cost
-
-Both TiKV and TiFlash nodes save your data to persistent block storage. The storage costs are generated according to the total volume of storage that all TiKV and TiFlash nodes in your cluster consume.
-
-TiDB Cloud passes the costs onto customers as they are incurred. For details, see [TiDB Cloud pricing](https://en.pingcap.com/tidb-cloud-pricing/).
-
-## Backup storage cost
-
-TiDB Cloud provides automatic backup and ad-hoc backup, both backups consume the storage. We will charge you based on the maximum capacity of total backups per month.
-
-The storage prices for different cloud providers are as follows:
-
-- AWS
-
-    All backups will be saved in Amazon Simple Storage Service (Amazon S3). You only need to pay the S3 fee and we will not charge you an additional fee. For details, see [Amazon S3 pricing](https://aws.amazon.com/s3/pricing/).
-
-- GCP
-
-    All backups will be saved in GCP cloud storage. You only need to pay the Cloud Storage fee and we will not charge you an additional fee. For details, see [GCP Cloud Storage pricing](https://cloud.google.com/storage/pricing).
-
-## Data transfer cost
-
-Both AWS and GCP might charge for data transfer, calculated per GB, whenever data moves within or leaves its cloud. Examples of when these charges are incurred with TiDB Cloud include the following:
-
-- When data moves between the TiDB cluster load balancer and your cluster
-- When data moves across different availability zones in the same region within your cluster
-- When you perform cluster backup and recovery operations
-- When you use TiCDC to stream data to or from your cluster
-- Fixed cost of the load balancer
-
-TiDB Cloud passes these charges onto customers as they are incurred, calculated using the published [AWS](https://aws.amazon.com/ec2/pricing/on-demand/) and [GCP](https://cloud.google.com/vpc/network-pricing) price tables as applicable, and without any additional fees.
-
-This cost policy applies to all TiDB Cloud customers with [Dedicated Tier](/tidb-cloud/select-cluster-tier.md#dedicated-tier) clusters, regardless of how those clusters are licensed.
-
-To make these charges easier to view, your TiDB Cloud bills and invoices aggregate and organize all data transfer charges under the following categories:
-
-- Data transfer – Same Region
-- Data transfer – Cross Region
-- Data transfer – Internet
-
-## Support service cost
-
-If you have subscribed to one of the **Standard**, **Enterprise**, or **Premium** [support plan](/tidb-cloud/tidb-cloud-support.md), you are charged for the support service on a monthly basis. The billing information is included in your monthly bill.
+TiDB Cloud charges according to the resources that you consume. You can visit [TiDB Cloud Pricing Details](https://en.pingcap.com/tidb-cloud-pricing-details/) to get more information.
 
 ## Invoices
 
@@ -80,7 +19,7 @@ If you are the owner or billing administrator of your organization, you can mana
 >
 > If you sign up for TiDB Cloud through [AWS Marketplace](https://aws.amazon.com/marketplace), you can pay through your AWS account directly but cannot add payment methods or download invoices in the TiDB Cloud portal.
 
-After you set up the payment method, TiDB Cloud will generate the invoice for the previous month at the beginning of each month. Invoice costs include TiDB cluster usage consumption, discounts, backup storage costs, support service cost, and data transmission costs in your organization.
+After you set up the payment method, TiDB Cloud will generate the invoice for the previous month at the beginning of each month. Invoice costs include TiDB cluster usage consumption, discounts, backup storage costs, support service cost, credit consumption, and data transmission costs in your organization.
 
 - TiDB Cloud provides the invoice to you on the ninth of each month. From the first to the ninth day, you cannot view the last month's cost details, but can obtain the cluster usage information of this month via the billing console.
 - The default method for paying invoices is credit card deduction. If you want to use other payment methods, please send a ticket request to let us know.
@@ -100,7 +39,7 @@ To view the list of invoices, perform the following steps:
 
 If you are the owner or billing administrator of the organization, you can view and export the billing details of TiDB Cloud. Otherwise, skip this section.
 
-After setting the payment method, TiDB Cloud will generate the invoice and billing details of the historical months, and generate the bill details of the current month at the beginning of each month. The billing details include your organization's TiDB cluster usage consumption, discounts, backup storage costs, data transmission costs, support service cost, and project splitting information.
+After setting the payment method, TiDB Cloud will generate the invoice and billing details of the historical months, and generate the bill details of the current month at the beginning of each month. The billing details include your organization's TiDB cluster usage consumption, discounts, backup storage costs, data transmission costs, support service cost, credit consumption, and project splitting information.
 
 > **Note:**
 >
@@ -112,13 +51,33 @@ To view the billing details, perform the following steps:
 2. Click **Billing**.
 3. Click **Bills**. The billing details page is displayed.
 
-## Trial points
+## Credits
 
-During the [PoC](/tidb-cloud/tidb-cloud-poc.md) period, you can use trial points to pay the TiDB cluster fees. One point is equivalent to one U.S. dollar. All your TiDB clusters will be automatically terminated when the trial points are used up.
+TiDB Cloud offers a certain number of credits for Proof of Concept (PoC) users. One credit is equivalent to one U.S. dollar. You can use credits to pay TiDB cluster fees before the credits become expired.
+
+> **Tip:**
+>
+> To apply for a PoC, see [Perform a Proof of Concept (PoC) with TiDB Cloud](/tidb-cloud/tidb-cloud-poc.md).
+
+The detailed information of your credits is available on the **Credits** page, including your total credits, available credits, current usage, and the status.
+
+To view this page, perform the following steps:
+
+1. Click the account name in the upper-right corner of the TiDB Cloud console.
+2. Click **Billing**.
+3. Click **Credits**. The credit details page is displayed.
 
 > **Note:**
 >
-> Once you set up the payment method successfully, the unused trial points will become invalid. The cluster fees that have been deducted from trial points will not be included in your new bill.
+> - After you set up your payment method, the cluster fees are first deducted from your unused credits, then from your payment method.
+> - Credits cannot be used to pay the support plan fees.
+
+> **Warning:**
+>
+> During a PoC process:
+>
+> - If all your credits become expired before you add a payment method, you cannot create a new cluster. After 3 days, all your existing clusters will be recycled. After 7 days, all your backups will be recycled. To resume the process, you can add a payment method.
+> - If all your credits become expired after you add a payment method, your PoC process goes on, and fees are deducted from your payment method.
 
 ## Payment method
 

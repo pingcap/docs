@@ -6,7 +6,82 @@ aliases: ['/tidbcloud/beta/supported-tidb-versions','/tidbcloud/release-notes']
 
 # TiDB Cloud Release Notes in 2022
 
-This page lists the release notes of [TiDB Cloud](https://en.pingcap.com/tidb-cloud/) in 2022.
+This page lists the release notes of [TiDB Cloud](https://pingcap.com/tidb-cloud/?from=en) in 2022.
+
+## September 6, 2022
+
+**General changes**
+
+* Upgrade the default TiDB version of new [Dedicated Tier](/tidb-cloud/select-cluster-tier.md#dedicated-tier) clusters from [v6.1.0](https://docs.pingcap.com/tidb/stable/release-6.1.0) to [v6.1.1](https://docs.pingcap.com/tidb/stable/release-6.1.1).
+
+**Console changes**
+
+* Now you can [apply for a PoC](/tidb-cloud/tidb-cloud-poc.md) from the entry in the upper-right corner of the TiDB Cloud console.
+
+**API changes**
+
+* Support increasing the storage of a TiKV or TiFlash node through the [TiDB Cloud API](/tidb-cloud/api-overview.md). You can use the `storage_size_gib` field of the API endpoint to do the scaling.
+
+    Currently, TiDB Cloud API is still in beta and only available upon request.
+
+    For details, see [Modify a Dedicated Tier cluster](https://docs.pingcap.com/tidbcloud/api/v1beta#tag/Cluster/operation/UpdateCluster).
+
+## August 30, 2022
+
+**General changes**
+
+* Support AWS PrivateLink-powered endpoint connection as a new network access management option for TiDB Cloud [Dedicated Tier](/tidb-cloud/select-cluster-tier.md#dedicated-tier) clusters.
+
+    The endpoint connection is secure and private, and does not expose your data to the public internet. In addition, the endpoint connection supports CIDR overlap and is easier for network management.
+
+    For more information, see [Set Up Private Endpoint Connections](/tidb-cloud/set-up-private-endpoint-connections.md).
+
+**Console changes**
+
+* Provide sample connection strings of MySQL, MyCLI, JDBC, Python, Go, and Node.js in the **VPC Peering** tab and **Private Endpoint** tab of the [Connect](/tidb-cloud/connect-to-tidb-cluster.md) dialog for [Dedicated Tier](/tidb-cloud/select-cluster-tier.md#dedicated-tier) clusters.
+
+    You can easily connect to your Dedicated Tier cluster by simply copying and pasting the connection codes to your apps.
+
+## August 24, 2022
+
+**General changes**
+
+* Support pausing or resuming a Dedicated Tier cluster.
+
+    You can [pause or resume your Dedicated Tier cluster](/tidb-cloud/pause-or-resume-tidb-cluster.md) in TiDB Cloud. When a cluster is paused, Node Compute Cost will not be charged.
+
+## August 23, 2022
+
+**General changes**
+
+* Upgrade the default TiDB version of new [Developer Tier](/tidb-cloud/select-cluster-tier.md#developer-tier) clusters from [v6.1.0](https://docs.pingcap.com/tidb/stable/release-6.1.0) to [v6.2.0](https://docs.pingcap.com/tidb/v6.2/release-6.2.0).
+
+**API changes**
+
+* Introduce TiDB Cloud API as beta.
+
+    Through this API, you can manage TiDB Cloud resources such as clusters automatically and efficiently. For more information, see [TiDB Cloud API Documentation](https://docs.pingcap.com/tidbcloud/api/v1beta).
+
+    Currently, TiDB Cloud API is still in beta and only available upon request. You can apply for API access by submitting a request:
+
+    * Click **Help** in the lower-right corner of [TiDB Cloud console](https://tidbcloud.com/console/clusters).
+    * In the dialog, fill in "Apply for TiDB Cloud API" in the **Description** field and click **Send**.
+
+## August 16, 2022
+
+* Add `2 vCPU, 8 GiB (Beta)` node size of TiDB and TiKV as beta.
+
+    * For each `2 vCPU, 8 GiB (Beta)` TiKV node, the storage size is between 200 GiB and 500 GiB.
+
+    * Suggested usage scenarios:
+
+        * Low-workload production environments for SMB
+        * PoC and staging environments
+        * Development environments
+
+* Introduce [Credits](/tidb-cloud/tidb-cloud-billing.md#credits) (previously named as trail points) for PoC users.
+
+    You can now view information about your organization's credits on the **Credits** tab of the **Billing** page, the credits can be used to pay for TiDB Cloud fees. You can [contact us](https://en.pingcap.com/apply-for-poc/) to get credits.
 
 ## August 9, 2022
 
@@ -35,9 +110,9 @@ This page lists the release notes of [TiDB Cloud](https://en.pingcap.com/tidb-cl
 
 * Add TiDB Cloud Support Plans (Basic, Standard, Enterprise, and Premium) to meet different support needs of customers' organizations. For more information, see [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md).
 
-* Optimize the UI of the [Active Clusters](https://tidbcloud.com/console/clusters) page and the cluster details page:
+* Optimize the UI of the [Clusters](https://tidbcloud.com/console/clusters) page and the cluster details page:
 
-    * Add **Connect** and **Import data** buttons to the **Active Clusters** page.
+    * Add **Connect** and **Import data** buttons to the **Clusters** page.
     * Move **Connect** and **Import data** buttons to the upper-right corner on the cluster details page.
 
 ## July 28, 2022
@@ -84,7 +159,7 @@ This page lists the release notes of [TiDB Cloud](https://en.pingcap.com/tidb-cl
 
     To experience the benefits brought by TiFlash, see [TiDB Cloud HTAP Quick Start Guide](/tidb-cloud/tidb-cloud-htap-quickstart.md).
 
-* Support [increasing the storage size](/tidb-cloud/scale-tidb-cluster.md#increase-storage-size) of TiKV and TiFlash for a Dedicated Tier cluster.
+* Support [increasing the storage size](/tidb-cloud/scale-tidb-cluster.md#increase-node-storage) of TiKV and TiFlash for a Dedicated Tier cluster.
 * Support showing the memory information in the node size field.
 
 ## June 28, 2022
@@ -93,7 +168,7 @@ This page lists the release notes of [TiDB Cloud](https://en.pingcap.com/tidb-cl
 
 ## June 23, 2022
 
-* Increase the maximum [storage capacity of TiKV](/tidb-cloud/size-your-cluster.md#tikv-storage-size) on TiDB Cloud.
+* Increase the maximum [storage capacity of TiKV](/tidb-cloud/size-your-cluster.md#tikv-node-storage) on TiDB Cloud.
 
     * 8 vCPU or 16 vCPU TiKV: support up to 4 TiB storage capacity.
     * 4 vCPU TiKV: support up to 2 TiB storage capacity.

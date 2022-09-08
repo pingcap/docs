@@ -8,6 +8,10 @@ category: intro
 
 [TiDB Cloud](https://en.pingcap.com/tidb-cloud/) is a fully-managed Database-as-a-Service (DBaaS) that brings [TiDB](https://docs.pingcap.com/tidb/stable/overview), an open-source Hybrid Transactional and Analytical Processing (HTAP) database, to your cloud. TiDB Cloud offers an easy way to deploy and manage databases to let you focus on your applications, not the complexities of the databases. You can create TiDB Cloud clusters to quickly build mission-critical applications on Google Cloud Platform (GCP) and Amazon Web Services (AWS).
 
+Watch the following video to learn more about TiDB Cloud:
+
+<iframe width="600" height="450" src="https://www.youtube.com/embed/skCV9BEmjbo" title="Why TiDB Cloud?" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
 ## Why TiDB Cloud
 
 TiDB Cloud allows you with little or no training to handle complex tasks such as infrastructure management and cluster deployment easily.
@@ -64,4 +68,4 @@ With TiDB Cloud, you can get the following key features:
 
 - Your VPC
 
-    You can connect to your TiDB cluster via a VPC peering connection. Refer to [Set up VPC Peering Connection](/tidb-cloud/set-up-vpc-peering-connections.md) for details.
+    You can connect to your TiDB cluster via private endpoint connection or VPC peering connection. Refer to [Set Up Private Endpoint Connections](/tidb-cloud/set-up-private-endpoint-connections.md) or [Set up VPC Peering Connection](/tidb-cloud/set-up-vpc-peering-connections.md) for details.
