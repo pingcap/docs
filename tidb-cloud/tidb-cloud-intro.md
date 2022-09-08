@@ -34,19 +34,19 @@ With TiDB Cloud, you can get the following key features:
 
 - **Real-Time Analytics**
 
-    Get real-time analytical query results with Hybrid Transactional and Analytical Processing (HTAP) capabilities.
+    Get real-time analytical query results with built-in Hybrid Transactional and Analytical Processing (HTAP) capabilities.
 
 - **Fast and Customized Scaling**
 
-    Elastically and transparently scale to hundreds of nodes for critical workloads without changing business logic. And you can scale your performance and storage nodes separately according to your business needs.
+    Elastically and transparently scale to hundreds of nodes for critical workloads while maintaining ACID transactions. No need to bother with sharding or facing downtime. And you can scale your performance and storage nodes separately according to your business needs.
 
 - **High Availability and Reliability**
 
-    Data is replicated across multiple Availability Zones and backed up daily to ensure business continuity for mission-critical applications.
+    Naturally high availability by design. Data is replicated across multiple Availability Zones and backed up daily to ensure business continuity, regardless of hardware failure, network partition, or data center loss.
 
 - **MySQL Compatibility**
 
-    Increase productivity and shorten time-to-market for your applications without the need to rewrite your SQL code.
+    Increase productivity and shorten time-to-market for your applications with TiDB’s MySQL compatibility. Easily migrate data from existing MySQL instances without the need to rewrite code.
 
 - **Enterprise Grade Security**
 
