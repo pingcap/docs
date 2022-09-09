@@ -52,13 +52,13 @@ With TiDB Cloud, you can get the following key features:
 
     Stay flexible without cloud vendor lock-in. TiDB Cloud is currently available on AWS and GCP.
 
-- **World-Class Support**
-
-    Get world-class support through our support portal, <a href="mailto:tidbcloud-support@pingcap.com">email</a>, chat, or video conferencing.
-
 - **Simple Pricing Plans**
 
     Pay only for what you use, with transparent and upfront pricing with no hidden fees.
+
+- **World-Class Support**
+
+    Get world-class support through our support portal, <a href="mailto:tidbcloud-support@pingcap.com">email</a>, chat, or video conferencing.
 
 ## Architecture
 
