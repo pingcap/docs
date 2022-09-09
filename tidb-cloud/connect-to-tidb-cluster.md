@@ -31,7 +31,7 @@ To connect to your TiDB cluster via standard connection, perform the following s
     >
     > Alternatively, you can also click the name of your cluster on the **Clusters** page and click **Connect** in the upper-right corner.
 
-3. Create the traffic filter for the cluster. Traffic filter is a list of IPs and CIDR addresses that are allowed to access TiDB Cloud via a SQL client.
+3. Create a traffic filter for the cluster. Traffic filter is a list of IPs and CIDR addresses that are allowed to access TiDB Cloud via a SQL client.
 
     If the traffic filter is already set, skip the following sub-steps. If the traffic filter is empty, take the following sub-steps to add one.
 
@@ -44,11 +44,27 @@ To connect to your TiDB cluster via standard connection, perform the following s
 
     3. Click **Create Filter** to confirm the changes.
 
-4. Under **Step 2: Connect with a SQL client** in the dialog box, click the tab of your preferred connection method, and then connect to your cluster with the connection string.
+4. Connect to your TiDB cluster.
 
-> **Note:**
->
-> For [Developer Tier clusters](/tidb-cloud/select-cluster-tier.md#developer-tier), when you connect to your cluster, you must include the prefix for your cluster in the user name and wrap the name with quotation marks. For more information, see [User name prefix](/tidb-cloud/select-cluster-tier.md#user-name-prefix).
+    <SimpleTab>
+    <div label="Developer Tier">
+
+    For a [Developer Tier](/tidb-cloud/select-cluster-tier.md#developer-tier) cluster, under **Step 2: Connect with a SQL client** in the dialog, click the tab of your preferred connection method, and then connect to your cluster with the connection string.
+
+    > **Note:**
+    >
+    > When you connect to a Developer Tier cluster, you must include the prefix for your cluster in the user name and wrap the name with quotation marks. For more information, see [User name prefix](/tidb-cloud/select-cluster-tier.md#user-name-prefix).
+
+    </div>
+
+    <div label="Dedicated Tier">
+
+    For a Dedicated Tier cluster,under **Step 2: Download CA certificate** in the dialog, click Download CA certificate.
+
+    Then, under **Step 3: Connect with a SQL client** in the dialog, click the tab of your preferred connection method, and then connect to your cluster with the connection string.
+
+    </div>
+    </SimpleTab>
 
 ## Connect via private endpoint (recommended)
 
