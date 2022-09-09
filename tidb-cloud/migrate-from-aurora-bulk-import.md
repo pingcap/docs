@@ -17,7 +17,7 @@ To import data, perform the following steps:
 
 3. Prepare source data according to [Learn how to create an Amazon S3 Bucket and prepare source data files](#learn-how-to-create-an-amazon-s3-bucket-and-prepare-source-data-files). You can see the advantages and disadvantages of different **Data Format** in the preparing data part.
 
-4. Select or fill in the **Data Format**, **Location**, **Bucket URL**, and **Role-ARN** fields according to the specification of your source data. For more information about how to create the bucket policy and role for cross-account access, see[Learn how to configure cross-account access](#learn-how-to-configure-cross-account-access).
+4. Select or fill in the **Data Format**, **Location**, **Bucket URL**, and **Role-ARN** fields according to the specification of your source data. For more information about how to create the bucket policy and role for cross-account access, see [Learn how to configure cross-account access](#learn-how-to-configure-cross-account-access).
 
 5. Fill in the **Username** and **Password** fields of the **Target Cluster**.
 
@@ -51,7 +51,7 @@ To import data, perform the following steps:
 
         For more information, see [table filter snytax](/table-filter.md#syntax).
 
-7. On the **Preview** page, confirm the import data and then click **Start Import**.
+7. On the **Preview** page, confirm the data to be imported and then click **Start Import**.
 
 TiDB Cloud starts validating whether it can access your data in the specified bucket URL. After the validation is completed and successful, the import task starts automatically. When the data import progress shows **Completed**, you have successfully imported the data to your database in TiDB Cloud.
 
