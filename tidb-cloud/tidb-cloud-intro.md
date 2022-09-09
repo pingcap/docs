@@ -24,29 +24,29 @@ Watch the following video to learn more about TiDB Cloud:
 
 With TiDB Cloud, you can get the following key features:
 
-- **Fully-Managed Service**
-
-    Deploy, scale, monitor, and manage TiDB clusters with a few clicks, through an easy-to-use web-based management platform.
-
-- **Real-Time Analytics**
-
-    Get real-time analytical query results with a built-in analytics engine. TiDB Cloud runs consistent analytical queries on current data without disturbing mission-critical applications.
-
 - **Fast and Customized Scaling**
 
     Elastically and transparently scale to hundreds of nodes for critical workloads while maintaining ACID transactions. No need to bother with sharding. And you can scale your performance and storage nodes separately according to your business needs.
-
-- **High Availability and Reliability**
-
-    Naturally high availability by design. Data replication across multiple Availability Zones, daily backups, and auto-failover ensure business continuity, regardless of hardware failure, network partition, or data center loss.
 
 - **MySQL Compatibility**
 
     Increase productivity and shorten time-to-market for your applications with TiDB’s MySQL compatibility. Easily migrate data from existing MySQL instances without the need to rewrite code.
 
+- **High Availability and Reliability**
+
+    Naturally high availability by design. Data replication across multiple Availability Zones, daily backups, and auto-failover ensure business continuity, regardless of hardware failure, network partition, or data center loss.
+
+- **Real-Time Analytics**
+
+    Get real-time analytical query results with a built-in analytics engine. TiDB Cloud runs consistent analytical queries on current data without disturbing mission-critical applications.
+
 - **Enterprise Grade Security**
 
     Secure your data in dedicated networks and machines, with support for encryption both in-flight and at-rest. TiDB Cloud is certified by SOC 2 Type 2, ISO 27001:2013, ISO 27701, and fully compliant with GDPR.
+
+- **Fully-Managed Service**
+
+    Deploy, scale, monitor, and manage TiDB clusters with a few clicks, through an easy-to-use web-based management platform.
 
 - **Multi-Cloud Support**
 
