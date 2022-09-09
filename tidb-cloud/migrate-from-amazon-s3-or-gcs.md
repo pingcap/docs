@@ -71,7 +71,7 @@ For detailed steps, see [Configure Amazon S3 access](/tidb-cloud/config-s3-and-g
     - **Location**: `AWS`
     - **Bucket URL**: fill in the bucket URL of your source data.
     - **Role-ARN**: enter the Role-ARN you obtained in [Step 2](#step-2-configure-amazon-s3-access).
-    - **Target Cluster**: fill in the **Username** and **Password** fields.
+    - **Target Cluster**: shows the cluster name and the region name.
 
     Confirm the compliance of cross region. Click **Next**.
 

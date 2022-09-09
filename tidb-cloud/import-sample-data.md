@@ -22,7 +22,7 @@ This document describes how to import sample data into TiDB Cloud via the UI. Th
     - **Location**: `AWS`
     - **Bucket URL**: enter the sample data URL `s3://tidbcloud-samples/data-ingestion/`
     - **Role-ARN**: enter `arn:aws:iam::385595570414:role/import-sample-access`
-    - **Target Cluster**: fill in the **Username** and **Password** fields
+    - **Target Cluster**: shows the cluster name and the region name.
 
     Confirm the compliance of cross region. Click **Next**.
 
@@ -35,7 +35,7 @@ This document describes how to import sample data into TiDB Cloud via the UI. Th
     - **Data Format**: select **TiDB Dumpling**.
     - **Location**: `Google Cloud`
     - **Bucket URL**: enter the sample data URL `gcs://tidbcloud-samples-us-west1`.
-    - **Target Cluster**: fill in the **Username** and **Password** fields.
+    - **Target Cluster**: shows the cluster name and the region name.
 
     Confirm the compliance of cross region. Click **Next**.
 

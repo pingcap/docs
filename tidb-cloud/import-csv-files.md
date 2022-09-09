@@ -94,7 +94,7 @@ To import the CSV files to TiDB Cloud, take the following steps:
     - **Location**: select the location where your CSV files are located.
     - **Bucket URL**: select the bucket URL where your CSV files are located.
     - **Role-ARN**: (This field is visible only for AWS S3): enter the Role ARN value for **Role-ARN**.
-    - **Target Cluster**: fill in the **Username** and **Password** fields.
+    - **Target Cluster**: shows the cluster name and the region name.
 
     Confirm the compliance of cross region. Click **Next**.
 
@@ -106,7 +106,7 @@ To import the CSV files to TiDB Cloud, take the following steps:
         >
         > When you use this feature, one import task can only import data to a single table at a time. If you want to use this feature to import data into different tables, you need to import several times, each time specifying a different target table.
 
-        To modify the file pattern, specify a custom mapping rule between CSV files and a single target table in the following fields:
+        To modify the file pattern, click **Modify**, specify a custom mapping rule between CSV files and a single target table in the following fields, and then click **Scan**.
 
         - **File name**: enter a pattern that matches the names of the CSV files to be imported. If you have one CSV file only, enter the file name here directly.
 

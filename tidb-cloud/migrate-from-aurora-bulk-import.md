@@ -19,7 +19,7 @@ To import data, perform the following steps:
 
 4. Select or fill in the **Data Format**, **Location**, **Bucket URL**, and **Role-ARN** fields according to the specification of your source data. For more information about how to create the bucket policy and role for cross-account access, see [Learn how to configure cross-account access](#learn-how-to-configure-cross-account-access).
 
-5. Fill in the **Username** and **Password** fields of the **Target Cluster**.
+5. Check the cluster name and the region name in the **Target Cluster**.
 
 6. Modify the file patterns and add the table filter rules if needed. Click **Next**.
 
