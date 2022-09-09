@@ -160,7 +160,6 @@ We provide Capital Bikeshare sample data for you to easily import data and run s
 
 The data import process will take 5 to 10 minutes. When the data import progress shows **Completed**, you have successfully imported the sample data and the database schema to your database in TiDB Cloud.
 
-
 ## Step 4. Query data
 
 When the process of importing data is completed, you can start to run some queries in your Terminal:
