@@ -14,7 +14,7 @@ category: intro
 
 TiDB Cloud allows you with little or no training to handle complex tasks such as infrastructure management and cluster deployment easily.
 
-- Developers and database administrators (DBAs) can rapidly analyze a large volume of data across multiple datasets.
+- Developers and database administrators (DBAs) can handle a large amount of online traffic effortlessly and rapidly analyze a large volume of data across multiple datasets.
 
 - Enterprises of all sizes can easily deploy and manage TiDB Cloud to adapt to your business growth without prepayment.
 
