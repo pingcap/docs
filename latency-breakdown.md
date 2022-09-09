@@ -117,14 +117,12 @@ The `tidb_tikvclient_request_seconds{type="Get"}` records a duration of get requ
 
 The `tikv_grpc_msg_duration_seconds{type="kv_get"}` duration is calculated as:
 
-<!--TODO: confirm the formula here-->
-
 ```text
 tikv_grpc_msg_duration_seconds{type="kv_get"} =
     tikv_storage_engine_async_request_duration_seconds{type="snapshot"} +
     tikv_engine_seek_micro_seconds{type="seek_average"} +
     read value duration +
-    read value duration(from disk)
+    read value duration(non-short value)
 ```
 
 At this time, requests are in TiKV. TiKV process get requests by one seek and one or two read actions (short values are encoded in a write column family, and reading it once is enough). TiKV gets a snapshot before processing the read request. For more details about the TiKV snapshot duration, refer to the [TiKV snapshot](#tikv-snapshot) section.
@@ -135,8 +133,6 @@ The `read value duration(from disk)` is calculated as:
 read value duration(from disk) =
     sum(rate(tikv_storage_rocksdb_perf{metric="block_read_time",req="get/batch_get_command"})) / sum(rate(tikv_storage_rocksdb_perf{metric="block_read_count",req="get/batch_get_command"}))
 ```
-
-<!--TODO: confirm the it is TiKV or RocksDB-->
 
 TiKV uses RocksDB as its storage engine. When the required value is missing from the block cache, TiKV needs to load the value from disk. For `tikv_storage_rocksdb_perf`, the get request can be either `get` or `batch_get_command`.
 
@@ -169,8 +165,6 @@ The process of batch point get is almost the same as [Point get](#point-get) exc
 
 The `read handles duration` and `read values duration` are calculated as:
 
-<!--TODO: kv_batch_get or kv_get-->
-
 ```text
 read handles duration = read values duration =
     tidb_tikvclient_txn_cmd_duration_seconds{type="batch_get"} =
@@ -186,15 +180,13 @@ For more details about the preceding batch client duration, such as `tidb_tikvcl
 
 The `tikv_grpc_msg_duration_seconds{type="kv_batch_get"}` duration is calculated as:
 
-<!--TODO: confirm the formula here-->
-
 ```text
 tikv_grpc_msg_duration_seconds{type="kv_batch_get"} =
     tikv_storage_engine_async_request_duration_seconds{type="snapshot"} +
     n * (
         tikv_engine_seek_micro_seconds{type="seek_max"} +
         read value duration +
-        read value duration(from disk)
+        read value duration(non-short value)
     )
 
 read value duration(from disk) =
@@ -231,9 +223,7 @@ tidb_session_execute_duration_seconds{type="general"} =
     tidb_distsql_handle_query_duration_seconds{sql_type="general"} <= send request duration
 ```
 
-<!--TODO: confirm where is the `n` in the preceding formula-->
-
-Table scan and index scan are processed in the same way. `n` is the distributed task count. Because coprocessor execution and data responding to client are in different threads, `tidb_distsql_handle_query_duration_seconds{sql_type="general"}` is the wait time and it is less than the `send request duration`.
+Table scan and index scan are processed in the same way. `req_per_copr` is the distributed task count. Because coprocessor execution and data responding to client are in different threads, `tidb_distsql_handle_query_duration_seconds{sql_type="general"}` is the wait time and it is less than the `send request duration`.
 
 The `send request duration` and `req_per_copr` are calculated as:
 
@@ -400,9 +390,7 @@ lock = tidb_tikvclient_txn_cmd_duration_seconds{type="lock_keys"} =
     round * tidb_tikvclient_request_seconds{type="PessimisticLock"}
 ```
 
-<!--TODO: what is the ratio-->
-
-Locks are acquired through the 2PC structure, which has a flow control mechanism. The flow control limits concurrent on-the-fly requests by `committer-concurrency` (default value is `128`). For simplicity, the flow control can be treated as an amplification of request latency (`ratio`).
+Locks are acquired through the 2PC structure, which has a flow control mechanism. The flow control limits concurrent on-the-fly requests by `committer-concurrency` (default value is `128`). For simplicity, the flow control can be treated as an amplification of request latency (`round`).
 
 The `tidb_tikvclient_request_seconds{type="PessimisticLock"}` is calculated as:
 
@@ -427,7 +415,7 @@ tikv_grpc_msg_duration_seconds{type="kv_pessimistic_lock"} =
     lock write duration
 ```
 
-- Since TiDB v6.0, TiKV uses [in-memory pessimistic lock](/pessimistic-transaction.md#in-memory-pessimistic-lock) by default. In-memory pessimistic lock bypass the asynchronous write process.
+- Since TiDB v6.0, TiKV uses [in-memory pessimistic lock](/pessimistic-transaction.md#in-memory-pessimistic-lock) by default. In-memory pessimistic lock bypass the async write process.
 - `tikv_storage_engine_async_request_duration_seconds{type="snapshot"}` is a snapshot type duration. For more details, refer to the [TiKV Snapshot](#tikv-snapshot) section.
 - The `lock in-mem key count` and `lock on-disk key count` are calculated as:
 
@@ -448,7 +436,7 @@ tikv_grpc_msg_duration_seconds{type="kv_pessimistic_lock"} =
         sum(rate(tikv_storage_rocksdb_perf{metric="block_read_time",req="acquire_pessimistic_lock"})) / sum(rate(tikv_storage_rocksdb_perf{metric="block_read_count",req="acquire_pessimistic_lock"}))
     ```
 
-- `lock write duration` is the duration of writing on-disk lock. For more details, refer to the [Asynchronous write](#asynchronous-write) section.
+- `lock write duration` is the duration of writing on-disk lock. For more details, refer to the [Async write](#async-write) section.
 
 ### Commit
 
@@ -566,7 +554,7 @@ prewrite read duration(from disk) =
     sum(rate(tikv_storage_rocksdb_perf{metric="block_read_time",req="prewrite"})) / sum(rate(tikv_storage_rocksdb_perf{metric="block_read_count",req="prewrite"}))
 ```
 
-Like locks in TiKV, prewrite is processed in read and write phases. The read duration can be calculated from the RocksDB performance context. For more details about the write duration, refer to the [Asynchronous write](#asynchronous-write) section.
+Like locks in TiKV, prewrite is processed in read and write phases. The read duration can be calculated from the RocksDB performance context. For more details about the write duration, refer to the [Async write](#async-write) section.
 
 The `tikv_grpc_msg_duration_seconds{type="kv_commit"}` is calculated as:
 
@@ -583,7 +571,7 @@ commit read duration(from disk) =
     sum(rate(tikv_storage_rocksdb_perf{metric="block_read_time",req="commit"})) / sum(rate(tikv_storage_rocksdb_perf{metric="block_read_count",req="commit"})) (storage)
 ```
 
-The duration of `kv_commit` is almost the same as `kv_prewrite`. For more details about the write duration, refer to the [Asynchronous write](#asynchronous-write) section.
+The duration of `kv_commit` is almost the same as `kv_prewrite`. For more details about the write duration, refer to the [Async write](#async-write) section.
 
 ## Batch client
 
@@ -665,11 +653,11 @@ When leader lease is expired, TiKV proposes a read index command before getting 
 
 Since getting a snapshot from RocksDB is usually a fast operation, the `get snapshot from rocksdb duration` is ignored.
 
-## Asynchronous write
+## Async write
 
-<!--TODO: Define what is async IO =? async read and write-->
+Async write is the process that TiKV writes data into the Raft-based replicated state machine asynchronously with callback.
 
-- The following is the time cost diagram of asynchronous write operations when the asynchronous IO is disabled:
+- The following is the time cost diagram of async write operations when the asynchronous IO is disabled:
 
     ```railroad+diagram
     Diagram(
@@ -691,7 +679,7 @@ Since getting a snapshot from RocksDB is usually a fast operation, the `get snap
     )
     ```
 
-- The following is the time cost diagram of asynchronous write operations when the asynchronous IO is enabled:
+- The following is the time cost diagram of async write operations when the asynchronous IO is enabled:
 
     ```railroad+diagram
     Diagram(
@@ -710,7 +698,7 @@ Since getting a snapshot from RocksDB is usually a fast operation, the `get snap
     )
     ```
 
-The asynchronous write duration is calculated as:
+The async write duration is calculated as:
 
 ```text
 async write duration(async io disabled) =
@@ -726,7 +714,7 @@ async write duration(async io enabled) =
     tikv_raftstore_apply_log_duration_seconds
 ```
 
-Asynchronous write can be broken down into the following three phases:
+Async write can be broken down into the following three phases:
 
 - Propose
 - Commit
@@ -763,7 +751,7 @@ async io enabled commit = max(
 )
 ```
 
-Since v5.3.0, TiKV supports Async IO Raft, which only enabled when setting the [`store-io-pool-size`](/tikv-configuration-file.md#store-io-pool-size-new-in-v530) as a positive value, which changes the process of commit. The `persist log locally duration` and `wait by write worker duration` are calculated as:
+Since v5.3.0, TiKV supports Async IO Raft(write Raft log by a StoreWriter thread pool), which is only enabled when setting the [`store-io-pool-size`](/tikv-configuration-file.md#store-io-pool-size-new-in-v530) as a positive value, which changes the process of commit. The `persist log locally duration` and `wait by write worker duration` are calculated as:
 
 ```text
 persist log locally duration =
@@ -859,7 +847,7 @@ tikv_raftstore_apply_log_duration_seconds =
     tikv_raftstore_apply_perf_context_time_duration_secs{type="write_memtable_time"}
 ```
 
-In the asynchronous write process, committed logs need to be applied into the KV DB. The applying duration can be calculated from the RocksDB performance context.
+In the async write process, committed logs need to be applied into the KV DB. The applying duration can be calculated from the RocksDB performance context.
 
 ## Diagnosis use cases
 
@@ -878,6 +866,4 @@ Before investigating slow writes, you need to troubleshoot the cause of the conf
 - If this metric is high in some specific TiKV instances, there might be conflicts in hot Regions.
 - If this metric is high across all instances, there might be conflicts in the application.
 
-<!--TODO: what is a reasonable conflict-->
-
-After confirming the cause of conflicts, you can investigate slow write queries by analyzing the duration of [Lock](#lock) and [Commit](#commit).
+After confirming the cause of conflicts from application, you can investigate slow write queries by analyzing the duration of [Lock](#lock) and [Commit](#commit).
