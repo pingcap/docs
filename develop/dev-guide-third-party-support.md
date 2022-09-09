@@ -30,13 +30,13 @@ If you encounter problems when connecting to TiDB using the tools listed in this
 | - | - | - | - | - | - |
 | C | [MySQL Connector/C](https://downloads.mysql.com/archives/c-c/) | 6.1.11 | Full | N/A | N/A |
 | C | [libmysqlclient](https://dev.mysql.com/doc/c-api/8.0/en/c-api-introduction.html) | 8.0 | Compatible | N/A | N/A |
-| C#(.Net) | [MySQL Connector/NET](https://downloads.mysql.com/archives/c-net/) | 8.0.28 | Compatible | N/A | N/A |
-| C#(.Net) | [MySQL Connector/ODBC](https://downloads.mysql.com/archives/c-odbc/) | 8.0.28 | Compatible | N/A | N/A |
+| C#(.Net) | [MySQL Connector/NET](https://downloads.mysql.com/archives/c-net/) | 8.0 | Compatible | N/A | N/A |
+| C#(.Net) | [MySQL Connector/ODBC](https://downloads.mysql.com/archives/c-odbc/) | 8.0 | Compatible | N/A | N/A |
 | Go | [go-sql-driver/mysql](https://github.com/go-sql-driver/mysql) | v1.6.0 | Full | N/A | [Build a Simple CRUD App with TiDB and Golang](/develop/dev-guide-sample-application-golang.md) |
 | Java | [JDBC](https://dev.mysql.com/downloads/connector/j/) | 5.1.46; 8.0.29 | Full | 5.1.46: N/A; 8.0.29: [pingcap/mysql-connector-j](https://github.com/pingcap/mysql-connector-j/tree/release/8.0) | [Build a Simple CRUD App with TiDB and Java](/develop/dev-guide-sample-application-java.md) |
 | JavaScript | [mysql](https://github.com/mysqljs/mysql) | v2.18.1 | Compatible | N/A | N/A |
 | PHP | [mysqlnd](https://dev.mysql.com/downloads/connector/php-mysqlnd/) | PHP 5.4+ | Compatible | N/A | N/A |
-| Python | [MySQL Connector/Python](https://downloads.mysql.com/archives/c-python/) | 8.0.28 | Compatible | N/A | N/A |
+| Python | [MySQL Connector/Python](https://downloads.mysql.com/archives/c-python/) | 8.0 | Compatible | N/A | N/A |
 
 ## ORM
 
@@ -73,4 +73,4 @@ If you encounter problems when connecting to TiDB using the tools listed in this
 | [DataGrip](https://www.jetbrains.com/datagrip/) | N/A | Compatible | N/A |
 | [IntelliJ IDEA](https://www.jetbrains.com/idea/) | N/A | Compatible | N/A |
 | [Visual Studio Code](https://code.visualstudio.com/) | [TiDE](https://marketplace.visualstudio.com/items?itemName=dragonly.ticode) | Compatible | N/A |
-| Visual Studio Code | [MySQL](https://marketplace.visualstudio.com/items?itemName=formulahendry.vscode-mysql) | Compatible | N/A |
+| [Visual Studio Code](https://code.visualstudio.com/) | [MySQL](https://marketplace.visualstudio.com/items?itemName=formulahendry.vscode-mysql) | Compatible | N/A |
