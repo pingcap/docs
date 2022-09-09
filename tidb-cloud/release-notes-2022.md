@@ -14,7 +14,7 @@ This page lists the release notes of [TiDB Cloud](https://pingcap.com/tidb-cloud
 
 * Provide [more metrics](/tidb-cloud/monitor-datadog-integration.md#metrics-available-to-datadog) of Dedicated Tier clusters in Datadog to help you better understand the cluster performance status.
 
-    If you have [integrated TiDB Cloud with Datadog](/tidbcloud/monitor-datadog-integration.md), you can view these metrics in your Datadog dashboards directly.
+    If you have [integrated TiDB Cloud with Datadog](/tidb-cloud/monitor-datadog-integration.md), you can view these metrics in your Datadog dashboards directly.
 
 ## September 6, 2022
 
