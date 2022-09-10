@@ -5,7 +5,7 @@ summary: Learn about the release notes of TiDB Cloud in 2021.
 
 # TiDB Cloud Release Notes in 2021
 
-This page lists the release notes of [TiDB Cloud](https://en.pingcap.com/tidb-cloud/) in 2021.
+This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-cloud/) in 2021.
 
 ## December 28, 2021
 
