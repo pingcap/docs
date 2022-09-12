@@ -9,7 +9,7 @@ After your TiDB cluster is created on TiDB Cloud, you can use one of the followi
 
 + Connect via a SQL client
 
-    - [Connect via standard connection](#connect-via-standard-connection): The standard connection exposes a public endpoint with traffic filters, so you can connect to your TiDB cluster from your laptop.
+    - [Connect via standard connection](#connect-via-standard-connection): The standard connection exposes a public endpoint with traffic filters, so you can connect to your TiDB cluster from your laptop. For [Dedicated Tier clusters](/tidb-cloud/select-cluster-tier.md#dedicated-tier), you can encrypt the data sent via standard connection using TLS.
     - [Connect via private endpoint](#connect-via-private-endpoint-recommended): Private endpoint connection provides a private endpoint to allow clients in your VPC to securely access services over AWS PrivateLink, which provides highly secure and one-way access to database services with simplified network management. Note that you cannot connect to [Developer Tier clusters](/tidb-cloud/select-cluster-tier.md#developer-tier) using the private endpoint.
     - [Connect via VPC peering](#connect-via-vpc-peering): If you want lower latency and more security, set up VPC peering and connect via a private endpoint using a VM instance on the corresponding cloud provider in your cloud account. Note that you cannot connect to [Developer Tier clusters](/tidb-cloud/select-cluster-tier.md#developer-tier) using VPC peering.
 
@@ -21,7 +21,10 @@ After your TiDB cluster is created on TiDB Cloud, you can use one of the followi
 
 ## Connect via standard connection
 
-To connect to your TiDB cluster via standard connection, perform the following steps:
+<SimpleTab>
+<div label="Developer Tier">
+
+To connect to a Developer Tier cluster via standard connection, perform the following steps:
 
 1. Navigate to the **Clusters** page.
 
@@ -44,27 +47,45 @@ To connect to your TiDB cluster via standard connection, perform the following s
 
     3. Click **Create Filter** to confirm the changes.
 
-4. Connect to your TiDB cluster.
-
-    <SimpleTab>
-    <div label="Developer Tier">
-
-    For a [Developer Tier](/tidb-cloud/select-cluster-tier.md#developer-tier) cluster, under **Step 2: Connect with a SQL client** in the dialog, click the tab of your preferred connection method, and then connect to your cluster with the connection string.
+4. Under **Step 2: Connect with a SQL client** in the dialog, click the tab of your preferred connection method, and then connect to your cluster with the connection string.
 
     > **Note:**
     >
     > When you connect to a Developer Tier cluster, you must include the prefix for your cluster in the user name and wrap the name with quotation marks. For more information, see [User name prefix](/tidb-cloud/select-cluster-tier.md#user-name-prefix).
 
-    </div>
+</div>
 
-    <div label="Dedicated Tier">
+<div label="Dedicated Tier">
 
-    For a Dedicated Tier cluster,under **Step 2: Download CA certificate** in the dialog, click Download CA certificate.
+To connect to a Dedicated Tier cluster via standard connection, perform the following steps:
 
-    Then, under **Step 3: Connect with a SQL client** in the dialog, click the tab of your preferred connection method, and then connect to your cluster with the connection string.
+1. Navigate to the **Clusters** page.
 
-    </div>
-    </SimpleTab>
+2. Locate your cluster, and click **Connect** in the upper-right corner of the cluster area. A connection dialog box is displayed.
+
+    > **Tip:**
+    >
+    > Alternatively, you can also click the name of your cluster on the **Clusters** page and click **Connect** in the upper-right corner.
+
+3. Create a traffic filter for the cluster. Traffic filter is a list of IPs and CIDR addresses that are allowed to access TiDB Cloud via a SQL client.
+
+    If the traffic filter is already set, skip the following sub-steps. If the traffic filter is empty, take the following sub-steps to add one.
+
+    1. Click one of the buttons to add some rules quickly.
+
+        - **Add My Current IP Address**
+        - **Allow Access from Anywhere**
+
+    2. Provide an optional description for the newly added IP address or CIDR range.
+
+    3. Click **Create Filter** to confirm the changes.
+
+4. Under **Step 2: Download TiDB Cloud Server CA** in the dialog, click **Download TiDB Server CA** if you need to import the TiDB Cloud server certificate to your client for TLS connection.
+
+5. Under **Step 3: Connect with a SQL client** in the dialog, click the tab of your preferred connection method, and then connect to your cluster with the connection string.
+
+</div>
+</SimpleTab>
 
 ## Connect via private endpoint (recommended)
 

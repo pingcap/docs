@@ -92,18 +92,36 @@ To create a Dedicated Tier cluster, take the following steps:
 
 1. Navigate to the **Clusters** page.
 
-2. In the area of your newly created cluster, click **Connect** in the upper-right corner. A connection dialog box is displayed.
+2. In the area of your newly created cluster, click **Connect** in the upper-right corner. A connection dialog is displayed.
 
     > **Tip:**
     >
     > Alternatively, you can also click the name of your newly created cluster on the **Clusters** page and click **Connect** in the upper-right corner.
 
-3. Under **Step 2: Connect with a SQL client** in the dialog box, click the tab of your preferred connection method, and then connect to your cluster with the connection string.
+3. Follow the instructions in the dialog to connect to your TiDB cluster.
+
+    <SimpleTab>
+    <div label="Developer Tier">
+
+    To connect to a Developer Tier cluster, check **Step 2: Connect with a SQL client** in the dialog, click the tab of your preferred connection method, and then connect to your cluster with the connection string.
 
     > **Note:**
     >
     > - For [Developer Tier clusters](/tidb-cloud/select-cluster-tier.md#developer-tier), when you connect to your cluster, you must include the prefix for your cluster in the user name and wrap the name with quotation marks. For more information, see [User name prefix](/tidb-cloud/select-cluster-tier.md#user-name-prefix).
     > - TiDB Cloud is MySQL-compatible, so you can connect to your cluster using any MySQL client tools. We recommend using [mysql — The MySQL Command-Line Client](https://dev.mysql.com/doc/refman/8.0/en/mysql.html) or [mysql — The MySQL Command-Line Client from MariaDB](https://mariadb.com/kb/en/mysql-command-line-client/).
+
+    </div>
+
+    <div label="Dedicated Tier">
+
+    To connect to a Dedicated Tier cluster, take the following steps:
+
+    1. Under **Step 2: Download TiDB Cloud Server CA** in the dialog, click **Download TiDB Server CA** if you need to import the TiDB Cloud server certificate to your client for TLS connection.
+
+    2. Under **Step 3: Connect with a SQL client** in the dialog, click the tab of your preferred connection method, and then connect to your cluster with the connection string.
+
+    </div>
+    </SimpleTab>
 
 4. After logging into your TiDB cluster, you can use the following SQL statement to validate the connection:
 
