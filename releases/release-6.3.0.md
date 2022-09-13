@@ -23,144 +23,144 @@ In v6.3.0-DMR, the key new features and improvements are as follows:
 
 ### SQL
 
-* 新增简化 Range 分区定义的语法糖衣 [#issue]() @[mjonss](https://github.com/mjonss)
+* 新增简化 Range 分区定义的语法糖衣 [#issue]() @[mjonss](https://github.com/mjonss) **tw: hfxsd**
 
     [新的定义 Range 分区的方式](用户文档链接)，不需要枚举所有分区，可大幅度缩短现有 Range 分区表定义语句冗长的书写方式，语义与原有 Range 分区等价。
 
-* Range Columns 分区方式支持定义多列 [#issue]() @[mjonss](https://github.com/mjonss)
+* Range Columns 分区方式支持定义多列 [#issue]() @[mjonss](https://github.com/mjonss) **tw: hfxsd**
 
     支持 [PARTITION BY RANGE COLUMNS (column_list)](用户文档链接)，`column_list` 不再限定为单一列，基本功能与 MySQL 等同。
 
-* 分区表 EXCHANGE PARTITION 功能 GA [#35996](https://github.com/pingcap/tidb/issues/35996) @[ymkzpx](https://github.com/ymkzpx)
+* 分区表 EXCHANGE PARTITION 功能 GA [#35996](https://github.com/pingcap/tidb/issues/35996) @[ymkzpx](https://github.com/ymkzpx) **tw: hfxsd**
 
     [EXCHANGE PARTITION 功能](用户文档链接)通过性能和稳定性提升，由实验功能转为正式功能。
 
-* 增加支持以下[窗口分析函数](/tiflash/tiflash-supported-pushdown-calculations.md)：[#5579](https://github.com/pingcap/tiflash/issues/5579) @[SeaRise](https://github.com/SeaRise)
+* 增加支持以下[窗口分析函数](/tiflash/tiflash-supported-pushdown-calculations.md)：[#5579](https://github.com/pingcap/tiflash/issues/5579) @[SeaRise](https://github.com/SeaRise) **tw：shichun-0415**
 
     * `LEAD`
     * `LAG`
 
-* `CREATE USER` 支持 `ACCOUNT LOCK/UNLOCK` 选项 [#37051](https://github.com/pingcap/tidb/issues/37051) @[CbcWestwolf](https://github.com/CbcWestwolf)
+* `CREATE USER` 支持 `ACCOUNT LOCK/UNLOCK` 选项 [#37051](https://github.com/pingcap/tidb/issues/37051) @[CbcWestwolf](https://github.com/CbcWestwolf) **tw：ran-huang**
 
     在执行 [`CREATE USER`](/sql-statements/sql-statement-create-user.md) 创建用户时，允许使用 `ACCOUNT LOCK/UNLOCK` 选项，限定被创建的用户是否被锁定。锁定后的用户不能正常登录数据库。
 
-* `ALTER USER` 支持 `ACCOUNT LOCK/UNLOCK` 选项 [#37051](https://github.com/pingcap/tidb/issues/37051) @[CbcWestwolf](https://github.com/CbcWestwolf)
+* `ALTER USER` 支持 `ACCOUNT LOCK/UNLOCK` 选项 [#37051](https://github.com/pingcap/tidb/issues/37051) @[CbcWestwolf](https://github.com/CbcWestwolf) **tw：ran-huang**
 
     对于已存在的用户，可以通过 [`ALTER USER`](/sql-statements/sql-statement-alter-user.md) 使用 `ACCOUNT LOCK/UNLOCK` 选项，修改用户的锁定状态。
 
-* JSON 数据类型和 JSON 函数 GA [#36993](https://github.com/pingcap/tidb/issues/36993) @[xiongjiwei](https://github.com/xiongjiwei)
+* JSON 数据类型和 JSON 函数 GA [#36993](https://github.com/pingcap/tidb/issues/36993) @[xiongjiwei](https://github.com/xiongjiwei) **tw: qiancai**
 
     JSON 是一种流行的数据格式，被大量的程序设计所采用。TiDB 在早期版本就引入了 [JSON 支持](/data-type-json.md)， 兼容 MySQL 的 JSON 数据类型 和一部分 JSON 函数。在 v6.3.0 版本中，我们正式将这些功能 GA ，用户可以安全地在生产环境中使用 JSON 相关的功能。 JSON 功能的 GA，为 TiDB 提供了更丰富的数据类型支持，同时也进一步提升的 TiDB 对 MySQL 的兼容能力。
 
-* 提供轻量级元数据锁提升 DDL 变更过程 DML 的成功率 [#37275](https://github.com/pingcap/tidb/issues/37275) @[wjhuang2016](https://github.com/wjhuang2016)
+* 提供轻量级元数据锁提升 DDL 变更过程 DML 的成功率 [#37275](https://github.com/pingcap/tidb/issues/37275) @[wjhuang2016](https://github.com/wjhuang2016) **tw: Oreoxmt**
 
     TiDB 采用 F1 论文中的在线异步变更算法实现 DDL 变更：事务在执行时会获取开始时对应的元数据快照，如果事务执行过程中相关表上发生了元数据的更改，为了保证数据的一致性，TiDB 会返回 `Information schema is changed` 的异常，导致用户事务提交失败。为了解决这个问题，在 v6.3.0 版本中，TiDB 在 Online DDL 算法中引入了[元数据锁](/metadata-lock.md) 特性，通过协调表元数据变更过程中 DML 语句和 DDL 语句的优先级，让执行中的 DDL 语句等待持有旧版本元数据的 DML 语句提交，尽可能避免 DML 语句报错。
 
-* 提升添加索引的性能并减少对 DML 事务的影响 [#35983](https://github.com/pingcap/tidb/issues/35983) @[benjamin2037](https://github.com/benjamin2037)
+* 提升添加索引的性能并减少对 DML 事务的影响 [#35983](https://github.com/pingcap/tidb/issues/35983) @[benjamin2037](https://github.com/benjamin2037) **tw: Oreoxmt**
 
     开启[添加索引加速](/system-variables.md#tidb_ddl_enable_fast_reorg-从-v630-版本开始引入)后，TiDB 预期提升添加索引性能为原来的 3 倍。
 
-* TiDB 支持更多正则表达式 [#](https://github.com/pingcap/tidb/issues/) @[windtalker](https://github.com/windtalker)
+* TiDB 支持更多正则表达式 [#](https://github.com/pingcap/tidb/issues/) @[windtalker](https://github.com/windtalker) **tw: Oreoxmt**
 
     TiDB 新增支持 [`REGEXP_SUBSTR`、`REGEXP_REPLACE`、`REGEXP_LIKE` 和 `REGEXP_INSTR` 4 个正则表达式函数](/functions-and-operators/string-functions.md#支持的函数)，支持基于模式的模糊查询和正则替换等操作。
 
 ### Security
 
-* 静态加密 TiKV 支持国密算法 SM4 [#13041](https://github.com/tikv/tikv/issues/13041) @[jiayang-zheng](https://github.com/jiayang-zheng)
+* 静态加密 TiKV 支持国密算法 SM4 [#13041](https://github.com/tikv/tikv/issues/13041) @[jiayang-zheng](https://github.com/jiayang-zheng) **tw: TomShawn**
 
     TiKV 静态加密中新增[加密算法 SM4](/encryption-at-rest.md)，用户在配置静态加密时，支持配置 data-encryption-method 参数为 "sm4-ctr"，以启用基于国密算法SM4的静态加密能力。
 
-* 静态加密 TiFlash 支持国密算法 SM4 [#5714](https://github.com/pingcap/tiflash/issues/5714) @[lidezhu](https://github.com/lidezhu)
+* 静态加密 TiFlash 支持国密算法 SM4 [#5714](https://github.com/pingcap/tiflash/issues/5714) @[lidezhu](https://github.com/lidezhu) **tw: TomShawn**
 
     TiFlash 静态加密中新增[加密算法 SM4](/encryption-at-rest.md)，用户在配置静态加密时，支持配置 data-encryption-method 参数为 "sm4-ctr"，以启用基于国密算法SM4的静态加密能力。
 
-* TiDB 支持国密算法 SM3 的身份验证 [#36192](https://github.com/pingcap/tidb/issues/36192) @[CbcWestwolf](https://github.com/CbcWestwolf)
+* TiDB 支持国密算法 SM3 的身份验证 [#36192](https://github.com/pingcap/tidb/issues/36192) @[CbcWestwolf](https://github.com/CbcWestwolf) **tw：ran-huang**
 
     TiDB 身份验证新增基于国密算法 SM3 的插件 [tidb_sm3_password](/system-variables.md#default_authentication_plugin)，启用此插件后，用户密码将通过SM3进行加密存储和验证。
 
-* JDBC 支持国密算法 SM3 的身份验证 [issue]() @[lastincisor](https://github.com/lastincisor)
+* JDBC 支持国密算法 SM3 的身份验证 [issue]() @[lastincisor](https://github.com/lastincisor) **tw：ran-huang**
 
     用户密码的身份验证需要客户端的支持，现在 [JDBC 支持国密算法 SM3](/develop/dev-guide-choose-driver-or-orm.md#java-drivers) 的能力，用户可以通过 JDBC 连接到 TiDB 使用国密算法 SM3 的身份验证能力。
 
 ### Observability
 
-* 提供“执行时间”的细粒度指标 [#34106](https://github.com/pingcap/tidb/issues/34106) @[cfzjywxk](https://github.com/cfzjywxk)
+* 提供“执行时间”的细粒度指标 [#34106](https://github.com/pingcap/tidb/issues/34106) @[cfzjywxk](https://github.com/cfzjywxk) **tw: Oreoxmt**
 
     性能问题的诊断通常从时间入手。 对执行时间的细粒度观测能力，是衡量数据库可观测性的重要标准。 TiDB 在新版中正式提供了细化数据指标，用于[对执行时间进行细化观测](/latency-breakdown.md)。 通过完整而又细分的指标数据，用户可以清晰的了解数据库的主要的时间消耗，进而快速发现关键问题，节省故障诊断的时间。 “执行时间”的细粒度观测能力，使得 TiDB 的观测性迈上了一个新的台阶。
 
-* 增强的 slow log 和 trace 语句 [#34106](https://github.com/pingcap/tidb/issues/34106) @[cfzjywxk](https://github.com/cfzjywxk)
+* 增强的 slow log 和 trace 语句 [#34106](https://github.com/pingcap/tidb/issues/34106) @[cfzjywxk](https://github.com/cfzjywxk) **tw: Oreoxmt**
 
     在新版本中 TiDB [增强了 slow log 的内容和 trace 命令的输出](/latency-breakdown.md)。用户可以观测到 SQL 语句执行过程中，从 tidb parse 到 kv rocksdb 落盘全链路的延迟数据，进一步增强 TiDB 的诊断能力。
 
-* Dashboard 中显示死锁的历史记录 [#34106](https://github.com/pingcap/tidb/issues/34106) @[cfzjywxk](https://github.com/cfzjywxk)
+* Dashboard 中显示死锁的历史记录 [#34106](https://github.com/pingcap/tidb/issues/34106) @[cfzjywxk](https://github.com/cfzjywxk) **shichun-0415**
 
     新版本将死锁的历史记录加入到了 Dashboard 中。 当用户通过 Dashboard 的慢日志等手段发现某些 SQL 等待锁的时间较长的时候，Dashboard 上的死锁的历史记录有助于对问题的分析，提供了诊断的易用性。
 
 ### Performance
 
-* TiFlash 调整 FastScan 功能使用方式（实验特性） [#5252](https://github.com/pingcap/tiflash/issues/5252) @[hongyunyan](https://github.com/hongyunyan)
+* TiFlash 调整 FastScan 功能使用方式（实验特性） [#5252](https://github.com/pingcap/tiflash/issues/5252) @[hongyunyan](https://github.com/hongyunyan) **tw: hfxsd**
 
     TiFlash 从 v6.2.0 版本开始引入的快速扫描功能 (FastScan)，性能上符合预期，但是使用方式上缺乏灵活性。因此，TiFlash 在 v6.3.0 版本[调整 FastScan 功能的使用方式](/develop/dev-guide-use-fastscan.md)，停止使用对表设定是否开启 FastScan 功能的方式，改为使用系统变量 [`tiflash_fastscan`](/system-variables.md#tiflash_fastscan-从-v630-版本开始引入) 控制是否开启 FastScan 功能。
 
     从 v6.2.0 版本升级到 v6.3.0 版本时，在 v6.2.0 版本的所有 FastScan 设定将失效，需要重新使用变量方式进行 FastScan 设定，但不影响数据的正常读取。从更早版本升级到 v6.3.0 时，所有会话默认不开启 FastScan 功能，而是保持一致性的数据扫描功能。
 
-* TiFlash 优化提升多并发场景下的数据扫描性能 [#5376](https://github.com/pingcap/tiflash/issues/5376) @[JinheLin](https://github.com/JinheLin)
+* TiFlash 优化提升多并发场景下的数据扫描性能 [#5376](https://github.com/pingcap/tiflash/issues/5376) @[JinheLin](https://github.com/JinheLin) **tw: hfxsd**
 
     TiFlash 通过合并相同数据的读取操作，减少对于相同数据的重复读取，优化了多并发任务情况下的资源开销，[提升多并发下的数据扫描性能](/tiflash/tiflash-configuration.md#配置文件-tiflashtoml)。避免了以往在多并发任务下，如果涉及相同数据，同一份数据需要在每个任务中分别进行读取的情况，以及可能出现在同一时间内对相同数据进行多次读取的情况。
 
     该功能在 v6.2.0 版本以实验特性发布，并在 v6.3.0 版本作为正式功能发布。
 
-* TiFlash 副本同步性能优化 [#5237](https://github.com/pingcap/tiflash/issues/5237) @[breezewish](https://github.com/breezewish)
+* TiFlash 副本同步性能优化 [#5237](https://github.com/pingcap/tiflash/issues/5237) @[breezewish](https://github.com/breezewish) **tw: hfxsd**
 
     TiFlash 使用 Raft 协议与 TiKV 进行副本数据同步。在 v6.3.0 版本之前，同步大量副本数据时往往需要比较长的时间。v6.3.0 版本优化了 TiFlash 副本同步机制，大幅度提升了副本同步速度。因此，使用 BR 恢复数据、使用 Lightning 导入数据，或全新增加 TiFlash 副本时，副本将更迅速地完成同步，用户可以更及时地使用 TiFlash 进行查询。此外，在 TiFlash 扩缩容或修改 TiFlash 副本数时，TiFlash 副本也将更快地达到安全、均衡的状态。
 
-* TiKV 日志循环使用 [#214](https://github.com/tikv/raft-engine/issues/214) @[LykxSassinator](https://github.com/LykxSassinator)
+* TiKV 日志循环使用 [#214](https://github.com/tikv/raft-engine/issues/214) @[LykxSassinator](https://github.com/LykxSassinator) **tw：ran-huang**
 
     TiKV Raft Engine 默认开启[日志循环](/tikv-configuration-file.md#enable-log-recycle-new-in-v630)功能。该特性显著降低 Raft 日志追加过程中的长尾延迟，提升了 TiKV 写入负载下的性能。
 
-* TiDB 支持 Null Aware Anti Join [#issue]() @[Arenatlx](https://github.com/Arenatlx)
+* TiDB 支持 Null Aware Anti Join [#issue]() @[Arenatlx](https://github.com/Arenatlx) **tw: Oreoxmt**
 
     TiDB 在新版本中引入了新的连接类型 [Null Aware Anti Join (NAAJ)](/explain-subqueries.md#null-aware-semi-joinin-any-子查询)。 NAAJ 在集合操作时能够感知集合是否为空，或是否有空值，优化了一部分操作比如`IN`、`= ANY` 的执行效率，提升 SQL 性能。
 
-* 增加优化器 hint 控制哈希连接的驱动端 [#issue]() @[Reminiscent](https://github.com/Reminiscent)
+* 增加优化器 hint 控制哈希连接的驱动端 [#issue]() @[Reminiscent](https://github.com/Reminiscent) **tw: TomShawn**
 
     在新版本中，优化器引入了两个新的 [hint `HASH_JOIN_BUILD()` 和 `HASH_JOIN_PROBE()`](/optimizer-hints.md) 用来指定哈希连接，并指定其驱动端和被驱动端。 在没有选到最优执行计划的情况下，提供了更丰富的干预手段。
 
-* 会话级允许 CTE 内联展开 [#36514](https://github.com/pingcap/tidb/issues/36514) @[elsa0520](https://github.com/elsa0520)
+* 会话级允许 CTE 内联展开 [#36514](https://github.com/pingcap/tidb/issues/36514) @[elsa0520](https://github.com/elsa0520) **shichun-0415**
 
     在 v6.2.0 中， 我们引入在优化器提示 `MERGE` ， 允许对 CTE 内联进行展开，使得 CTE 查询结果的消费者能够在 TiFlash 内并行执行。 在版本 v6.3.0 中，我们添加了会话级变量 [`tidb_opt_force_inline_cte`](/system-variables.md#tidb_opt_force_inline_cte-从-v630-版本开始引入)，允许在会话级修改这个行为，提升了易用性。
 
 ### Transactions
 
-* 悲观事务可以延迟唯一性检查 [#36579](https://github.com/pingcap/tidb/issues/36579) @[ekexium](https://github.com/ekexium)
+* 悲观事务可以延迟唯一性检查 [#36579](https://github.com/pingcap/tidb/issues/36579) @[ekexium](https://github.com/ekexium) **tw: qiancai**
 
     提供系统变量 `tidb_constraint_check_in_place_pessimistic` 来控制悲观事务中[唯一约束](/constraints.md#唯一约束)检查的时间点。当变量设为 `ON` 时，TiDB 会把加锁操作和唯一约束检测推迟到必要的时候进行，以此提升批量 DML 操作的性能。
 
-* 优化 Read-Committed 隔离级别中对 TSO 的获取 [#36812](https://github.com/pingcap/tidb/issues/36812) @[TonsnakeLin](https://github.com/TonsnakeLin)
+* 优化 Read-Committed 隔离级别中对 TSO 的获取 [#36812](https://github.com/pingcap/tidb/issues/36812) @[TonsnakeLin](https://github.com/TonsnakeLin) **tw: TomShawn**
 
     在 Read-Committed 隔离级别中， 引入新的系统变量 [`tidb_rc_write_check_ts`](/system-variables.md#tidb_rc_write_check_ts-从-v630-版本开始引入) 控制语句对 TSO 的获取方式。在 Plan Cache 命中的情况下，通过降低对 TSO 的获取频率提升批量 DML 的执行效率，降低跑批类任务的执行时间。
 
 ### Stability
 
-* TiKV 后台 IO 任务限制增强 (TiKV I/O Rate Limiter) [#10867](https://github.com/tikv/tikv/issues/10867) @[tabokie](https://github.com/tabokie)
+* TiKV 后台 IO 任务限制增强 (TiKV I/O Rate Limiter) [#10867](https://github.com/tikv/tikv/issues/10867) @[tabokie](https://github.com/tabokie) **tw：ran-huang**
 
     改进算法，提供对[磁盘读 I/O 的动态限流能力](/tikv-configuration-file.md#storageio-rate-limit)。
 
-* 优化 `IN` 条件元素过多引发的大量内存消耗 [#30755](https://github.com/pingcap/tidb/issues/30755) @[xuyifangreeneyes](https://github.com/xuyifangreeneyes)
+* 优化 `IN` 条件元素过多引发的大量内存消耗 [#30755](https://github.com/pingcap/tidb/issues/30755) @[xuyifangreeneyes](https://github.com/xuyifangreeneyes) **tw: TomShawn**
 
     当 SQL 中的 `IN` 条件包含的元素过多时，TiDB 在优化器构造扫描范围时可能会消耗大量的内存。在新版中，TiDB 引入了系统变量 [`tidb_opt_range_max_size`](/system-variables.md#tidb_opt_range_max_size-从-v630-版本开始引入) 实现对扫描范围的内存控制机制，对这类操作进行了优化，减少内存消耗，提升 SQL 执行效率和系统稳定性。
 
-* 修改优化统计信息过期时的默认加载策略 [#issue]() @[xuyifangreeneyes](https://github.com/xuyifangreeneyes)
+* 修改优化统计信息过期时的默认加载策略 [#issue]() @[xuyifangreeneyes](https://github.com/xuyifangreeneyes) **tw: TomShawn**
 
     在 v5.3.0 版本时，TiDB 引入系统变量 [`tidb_enable_pseudo_for_outdated_stats`](/system-variables.md#tidb_enable_pseudo_for_outdated_stats-从-v530-版本开始引入) 控制优化器在统计信息过期时的行为，默认为 `ON`，即保持旧版本行为不变：当 SQL 涉及的对象的统计信息过期时，优化器认为该表上除总行数以外的统计信息不再可靠，转而使用 pseudo 统计信息。 经过一系列测试和用户实际场景分析，TiDB 在新版本中将  `tidb_enable_pseudo_for_outdated_stats` 的默认值改为 `OFF`，即使统计信息过期，优化器也仍会使用该表上的统计信息，这有利于执行计划的稳定性。
 
-* TiKV Titan 关闭功能正式发布 [#issue]() @[tabokie](https://github.com/tabokie)
+* TiKV Titan 关闭功能正式发布 [#issue]() @[tabokie](https://github.com/tabokie) **tw：ran-huang**
 
     正式支持对在线 TiKV 节点[关闭 Titan 引擎](/titan-configuration#disable-titan)。
 
 ### Ease of use
 
-* 优化 TiFlash 数据同步进度的准确性 [#4902](https://github.com/pingcap/tiflash/issues/4902) @[hehechen](https://github.com/hehechen)
+* 优化 TiFlash 数据同步进度的准确性 [#4902](https://github.com/pingcap/tiflash/issues/4902) @[hehechen](https://github.com/hehechen) **tw: qiancai**
 
     TiDB 的 `information_schema.tiflash_replica` 表中的 `PROGRESS` 字段表示对应表 TiFlash 副本与 TiKV 数据的同步进度。在之前的版本中，`PROCESS` 字段只显示创建 TiFlash 副本过程中的数据同步进度。当 TiFlash 副本创建完毕，进行数据导入后，该值不会更新数据同步进度。
 
@@ -168,37 +168,37 @@ In v6.3.0-DMR, the key new features and improvements are as follows:
 
 ### MySQL compatibility
 
-* 完善基于 SQL 的数据放置规则功能的兼容性 [#37171](https://github.com/pingcap/tidb/issues/37171) @[lcwangchao](https://github.com/lcwangchao)
+* 完善基于 SQL 的数据放置规则功能的兼容性 [#37171](https://github.com/pingcap/tidb/issues/37171) @[lcwangchao](https://github.com/lcwangchao) **tw: hfxsd**
 
     TiDB 在 v6.0.0 版本提供基于 SQL 的数据放置规则功能，但是由于实现机制冲突，该功能和构建 TiFlash 副本功能不兼容。v6.3.0 版本进行改进优化，[完善了这两个功能的兼容性](/placement-rules-in-sql.md#使用限制)。
 
 ### Backup and restore
 
-* PITR 支持 GCS 和 Azure Blob Storage 作为备份存储 [#issue]() @[joccau](https://github.com/joccau)
+* PITR 支持 GCS 和 Azure Blob Storage 作为备份存储 [#issue]() @[joccau](https://github.com/joccau) **tw: shichun-0415**
 
     PITR 支持[以 GCS 或 Azure Blob Storage 作为备份存储目标]()。部署在 GCP 或者 Azure 上的用户，升级 TiDB 集群到 v6.3.0 后，就可以使用 PITR 功能了。
 
-* BR 支持 AWS S3 Object Lock [#issue]() @[3pointer](https://github.com/3pointer)
+* BR 支持 AWS S3 Object Lock [#issue]() @[3pointer](https://github.com/3pointer) **tw: shichun-0415**
 
     用户在 S3 开启 [Object Lock](https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-lock.html) 后，可以防止备份数据写入后被修改或者删除。
 
 ### Data migration
 
-* TiDB Lightning 支持将 Apache Hive 导出的 Parquet 文件导入到 TiDB [#issue]() @[buchuitoudegou](https://github.com/buchuitoudegou)
+* TiDB Lightning 支持将 Apache Hive 导出的 Parquet 文件导入到 TiDB [#issue]() @[buchuitoudegou](https://github.com/buchuitoudegou) **tw：ran-huang**
 
     TiDB Lightning [支持将 Apache Hive 导出的 Parquet 文件导入到 TiDB](migrate-from-parquet-files-to-tidb.md)，从而实现 Hive 到 TiDB 之间的数据流转。
 
-* DM 支持对同步到 TiDB 的表增加字段并对该字段赋值 [#3262](https://github.com/pingcap/tiflow/pull/3262), [#3340](https://github.com/pingcap/tiflow/issues/3340) @[yufan022](https://github.com/yufan022)
+* DM 支持对同步到 TiDB 的表增加字段并对该字段赋值 [#3262](https://github.com/pingcap/tiflow/pull/3262), [#3340](https://github.com/pingcap/tiflow/issues/3340) @[yufan022](https://github.com/yufan022) **tw：ran-huang**
 
     [DM 支持对同步到 TiDB 的表增加字段并对该字段赋值](用户文档链接)。在上游分库分表合并到下游TiDB的场景，可以用于区分目标表的记录是来自于上游那个分库分表。
 
 ### TiDB data share subscription
 
-* TiCDC 支持对多个异地目标数据源进行数据复制的复杂部署形态 [#issue]() @[sdojjy](https://github.com/sdojjy)
+* TiCDC 支持对多个异地目标数据源进行数据复制的复杂部署形态 [#issue]() @[sdojjy](https://github.com/sdojjy) **tw：ran-huang**
 
     为了提供一套 TiDB 集群的数据能复制到多个不同的异地数据系统的能力，自 v6.3.0 开始，TiCDC 节点可以[部署到多个不同的异地的机房](用户文档链接)中，来分别负责对应机房的数据复制任务，以支撑各种复杂的异地数据复制使用场景和部署形态。
 
-* TiCDC 支持维护上下游数据一致性快照 (Sync point) [#issue]() @[asddongmen](https://github.com/asddongmen)
+* TiCDC 支持维护上下游数据一致性快照 (Sync point) [#issue]() @[asddongmen](https://github.com/asddongmen) **tw: TomShawn**
 
     在灾备复制场景下，[TiCDC 支持周期性的维护一个下游数据快照](用户文档链接)，使得该下游快照能保持与上游数据的快照一致性。借助此能力，TiCDC 能更好的匹配读写分离应用场景，帮助用户降本增效。
 
