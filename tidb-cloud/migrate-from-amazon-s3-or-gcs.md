@@ -63,7 +63,7 @@ For detailed steps, see [Configure Amazon S3 access](/tidb-cloud/config-s3-and-g
 
 1. Log in to the [TiDB Cloud console](https://tidbcloud.com/), and navigate to the **Clusters** page.
 
-2. Locate your target cluster, and click **Import Data** in the upper-right corner of the cluster area. The **Data Import** page is displayed.
+2. Locate your target cluster, click **...** in the upper-right corner of the cluster area, and select **Import Data**. The **Data Import** page is displayed.
 
 3. On the **Data Import** page, fill in the following information:
 
@@ -135,7 +135,7 @@ For detailed steps, see [Configure GCS access](/tidb-cloud/config-s3-and-gcs-acc
         gsutil rsync -r ./tidbcloud-samples-us-west-2/ gs://target-url-in-gcs
         ```
 
-2. From the TiDB Cloud console, navigate to the **Clusters** page, and then click the name of your target cluster to go to its own overview page. In the **Import** area, click **Import Data**, and then fill in the importing related information on the **Data Import** page.
+2. From the TiDB Cloud console, navigate to the **Clusters** page, and then click the name of your target cluster to go to its own overview page. Click **...** in the upper-right corner of the cluster area, and select **Import Data**. The **Data Import** page is displayed. Fill in the importing related information. 
 
 > **Note:**
 >
