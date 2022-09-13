@@ -105,7 +105,34 @@ The way of exporting or importing extended statistics is the same as exporting o
 
 ## Usage scenarios and examples
 
-There are multiple types of extended statistics, and currently, TiDB only supports the correlation type. This type is used to estimate the number of rows in the range query. The following example shows how to use the correlation type to estimate the number of rows in the range query.
+There are multiple types of extended statistics. Currently, TiDB only supports the correlation type. This type is used to estimate the number of rows in the range query. The following example shows how to use the correlation type to estimate the number of rows in range queries.
+
+### Define the table
+
+For a table `t` defined as follows:
+
+```sql
+CREATE TABLE t(col1 INT, col2 INT, KEY(col1), KEY(col2));
+```
+
+Suppose that the `col1` and `col2` of the table `t` both obey monotonically increasing constraints in row order, i.e., the values of `col1` and `col2` are strictly correlated in order (the value of the correlation is 1).
+
+### Make an example query
+
+{{< copyable "sql" >}}
+
+```sql
+SELECT * FROM t WHERE col1 > 1 ORDER BY col2 LIMIT 1;
+```
+
+For the above query, the optimizer has two choices to access the table `t`:
+
+- one uses the index on `col1` to access the table and then sorts the result by `col2` to calculate the `Top-1`.
+- Another is that access the table by index on `col2` to meet the first row that satisfies `col1 > 1`. The latter's cost mainly depends on how many rows are filtered out when we scan the table in `col2`'s order.
+
+Usually, the optimizer can only suppose that `col1` and `col2` are independent, leading to a significant estimation error.
+
+### Register extended statistics
 
 After setting `tidb_enable_extended_stats` to `ON`, register the extended statistics:
 
@@ -117,23 +144,7 @@ When we run the `ANALYZE` after the registration, TiDB will calculate the [Pears
 
 It's used to improve TiDB's index selection for the following scenario:
 
-For a table `t` described below：
-
-{{< copyable "sql" >}}
-
-```sql
-CREATE TABLE t(col1 INT, col2 INT, KEY(col1), KEY(col2));
-```
-
-Suppose that the `col1` and `col2` of the table `t` both obey monotonically increasing constraints in row order, i.e., the values of `col1` and `col2` are strictly correlated in order (the value of the correlation is 1):
-
-{{< copyable "sql" >}}
-
-```sql
-SELECT * FROM t WHERE col1 > 1 ORDER BY col2 LIMIT 1;
-```
-
-For the above query, the optimizer has two choices to access the table `t`: one uses the index on `col1` to access the table and then sorts the result by `col2` to calculate the `Top-1`. Another is that access the table by index on `col2` to meet the first row that satisfies `col1 > 1`. The latter's cost mainly depends on how many rows are filtered out when we scan the table in `col2`'s order. Usually, the optimizer can only suppose that `col1` and `col2` are independent, leading to a significant estimation error.
+### How extended statistics make a difference
 
 After the TiDB has the extended statistics for correlation, the optimizer can estimate how many rows we need to scan more precisely. Since the `col1` and `col2` are strictly correlated in order, the optimizer will equivalently translate the row count estimate for option two above into:
 
