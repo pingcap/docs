@@ -37,7 +37,7 @@ strict-format = true
 
 **Cause 4**: TiDB Lightning is too old.
 
-Try the latest version! Maybe there is new speed improvement.
+Try the latest version. Maybe there is new speed improvement.
 
 ## The `tidb-lightning` process suddenly quits while running in background
 
