@@ -1,10 +1,6 @@
 ---
 title: TiDB Lightning FAQs
 summary: Learn about the frequently asked questions (FAQs) and answers about TiDB Lightning.
-<<<<<<< HEAD
-=======
-aliases: ['/docs/dev/tidb-lightning/tidb-lightning-faq/','/docs/dev/faq/tidb-lightning/']
->>>>>>> 00b23c124 (lightning: split troubleshoot from faq (#10309))
 ---
 
 # TiDB Lightning FAQs
