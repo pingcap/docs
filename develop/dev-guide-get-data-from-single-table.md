@@ -108,7 +108,7 @@ public class AuthorDAO {
             ResultSet rs = stmt.executeQuery("SELECT id, name FROM authors");
             while (rs.next()) {
                 Author author = new Author();
-                author.setId( rs.getLong("id"));
+                author.setId(rs.getLong("id"));
                 author.setName(rs.getString("name"));
                 authors.add(author);
             }
@@ -164,7 +164,7 @@ public List<Author> getAuthorsByBirthYear(Short birthYear) throws SQLException {
         ResultSet rs = stmt.executeQuery();
         while (rs.next()) {
             Author author = new Author();
-            author.setId( rs.getLong("id"));
+            author.setId(rs.getLong("id"));
             author.setName(rs.getString("name"));
             authors.add(author);
         }
@@ -182,6 +182,9 @@ With the `ORDER BY` statement, you can sort query results.
 
 For example, the following SQL statement is to get a list of the youngest authors by sorting the `authors` table in descending order (`DESC`) according to the `birth_year` column.
 
+<SimpleTab groupId="language">
+<div label="SQL" value="sql">
+
 {{< copyable "sql" >}}
 
 ```sql
@@ -189,6 +192,37 @@ SELECT id, name, birth_year
 FROM authors
 ORDER BY birth_year DESC;
 ```
+
+</div>
+
+<div label="Java" value="java">
+
+{{< copyable "" >}}
+
+```java
+public List<Author> getAuthorsSortByBirthYear() throws SQLException {
+    List<Author> authors = new ArrayList<>();
+    try (Connection conn = ds.getConnection()) {
+        Statement stmt = conn.createStatement();
+        ResultSet rs = stmt.executeQuery("""
+            SELECT id, name, birth_year
+            FROM authors
+            ORDER BY birth_year DESC;
+            """);
+
+        while (rs.next()) {
+            Author author = new Author();
+            author.setId(rs.getLong("id"));
+            author.setName(rs.getString("name"));
+            authors.add(author);
+        }
+    }
+    return authors;
+}
+```
+
+</div>
+</SimpleTab>
 
 The result is as follows:
 
@@ -214,6 +248,9 @@ The result is as follows:
 
 You can use the `LIMIT` statement to limit the number of query results.
 
+<SimpleTab groupId="language">
+<div label="SQL" value="sql">
+
 {{< copyable "java" >}}
 
 ```sql
@@ -222,6 +259,38 @@ FROM authors
 ORDER BY birth_year DESC
 LIMIT 10;
 ```
+
+</div>
+
+<div label="Java" value="java">
+
+{{< copyable "" >}}
+
+```java
+public List<Author> getAuthorsWithLimit(Integer limit) throws SQLException {
+    List<Author> authors = new ArrayList<>();
+    try (Connection conn = ds.getConnection()) {
+        PreparedStatement stmt = conn.prepareStatement("""
+            SELECT id, name, birth_year
+            FROM authors
+            ORDER BY birth_year DESC
+            LIMIT ?;
+            """);
+        stmt.setInt(1, limit);
+        ResultSet rs = stmt.executeQuery();
+        while (rs.next()) {
+            Author author = new Author();
+            author.setId(rs.getLong("id"));
+            author.setName(rs.getString("name"));
+            authors.add(author);
+        }
+    }
+    return authors;
+}
+```
+
+</div>
+</SimpleTab>
 
 The result is as follows:
 
@@ -251,6 +320,9 @@ To have a better understanding of the overall data situation, you can use the `G
 
 For example, if you want to know which years there are more authors born, you can group the `authors` table by the `birth_year` column, and then count for each year:
 
+<SimpleTab groupId="language">
+<div label="SQL" value="sql">
+
 {{< copyable "java" >}}
 
 ```sql
@@ -259,6 +331,47 @@ FROM authors
 GROUP BY birth_year
 ORDER BY author_count DESC;
 ```
+
+</div>
+
+<div label="Java" value="java">
+
+{{< copyable "" >}}
+
+```java
+public class AuthorCount {
+    private Short birthYear;
+    private Integer authorCount;
+
+    public AuthorCount() {}
+
+     // Skip the getters and setters.
+}
+
+public List<AuthorCount> getAuthorCountsByBirthYear() throws SQLException {
+    List<AuthorCount> authorCounts = new ArrayList<>();
+    try (Connection conn = ds.getConnection()) {
+        Statement stmt = conn.createStatement();
+        ResultSet rs = stmt.executeQuery("""
+            SELECT birth_year, COUNT(DISTINCT id) AS author_count
+            FROM authors
+            GROUP BY birth_year
+            ORDER BY author_count DESC;
+            """);
+
+        while (rs.next()) {
+            AuthorCount authorCount = new AuthorCount();
+            authorCount.setBirthYear(rs.getShort("birth_year"));
+            authorCount.setAuthorCount(rs.getInt("author_count"));
+            authorCounts.add(authorCount);
+        }
+    }
+    return authorCount;
+}
+```
+
+</div>
+</SimpleTab>
 
 The result is as follows:
 
