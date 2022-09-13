@@ -284,7 +284,7 @@ type = '$3'
 
 Note that this configuration only shows how to match the parquet files exported by Aurora snapshot. You need to export and process the schema file separately.
 
-For more information on `mydumper.files`, refer to [Match customized file](#match-customized-file).
+For more information on `mydumper.files`, refer to [Match customized file](#match-customized-files).
 
 ## Match customized files
 

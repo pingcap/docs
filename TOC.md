@@ -370,7 +370,7 @@
       - [CSV](/tidb-lightning/tidb-lightning-data-source.md#csv)
       - [SQL](/tidb-lightning/tidb-lightning-data-source.md#sql)
       - [Parquet](/tidb-lightning/tidb-lightning-data-source.md#parquet)
-      - [Customized File](/tidb-lightning/tidb-lightning-data-source.md#match-customized-file)
+      - [Customized File](/tidb-lightning/tidb-lightning-data-source.md#match-customized-files)
     - [Tutorial](/get-started-with-tidb-lightning.md)
     - [Deploy](/tidb-lightning/deploy-tidb-lightning.md)
     - [Configure](/tidb-lightning/tidb-lightning-configuration.md)
