@@ -83,7 +83,6 @@ For detailed steps, see [Configure Amazon S3 access](/tidb-cloud/config-s3-and-g
 
 6. On the **Preview** page, confirm the data to be imported and then click **Start Import**.
 
-
 After the data is imported, if you want to remove the Amazon S3 access of TiDB Cloud, simply delete the policy that you added in [Step 2. Configure Amazon S3 access](#step-2-configure-amazon-s3-access).
 
 ## Import or migrate from GCS to TiDB Cloud
