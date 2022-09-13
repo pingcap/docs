@@ -46,7 +46,9 @@ TiDB is compatible with the error codes in MySQL, and in most cases returns the 
 
     The complete error message: `ERROR 8005 (HY000): Write Conflict, txnStartTS is stale`
 
-    Transactions in TiDB encounter write conflicts. To handle this error, check whether `tidb_disable_txn_auto_retry` is set to `on`. If so, set it to `off`; if it is already `off`, increase the value of `tidb_retry_limit` until the error no longer occurs.
+    Transactions in TiDB encounter write conflicts.
+
+    Check your application logic and retry the write operation.
 
 * Error Number: 8018
 
@@ -355,6 +357,10 @@ TiDB is compatible with the error codes in MySQL, and in most cases returns the 
 * Error Number: 8143
 
     During the execution of a non-transactional DML statement, if a batch fails, the statement is stopped. For more information, see [Non-transactional DML statements](/non-transactional-dml.md).
+
+* Error Number: 8147
+
+   When [`tidb_constraint_check_in_place_pessimistic`](/system-variables.md#tidb_constraint_check_in_place_pessimistic-new-in-v630) is set to `0`, the unique constraint check in pessimistic transactions might not pass, causing the SQL statement execution to report this error and abort the current transaction.
 
 * Error Number: 8200
 

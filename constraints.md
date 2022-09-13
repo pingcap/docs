@@ -183,7 +183,7 @@ ERROR 1062 (23000): Duplicate entry 'bill' for key 'username'
 
 To achieve better performance of pessimistic transactions, you can set the [`tidb_constraint_check_in_place_pessimistic`](/system-variables.md#tidbconstraintcheckinplacepessimistic-span- classversion-mark introduces span from version -v630-) variable to `0`, which allows TiDB to defer the unique constraint check of an unique index (to the next time when this index requires a lock or to the time when the transaction is committed) and skip the corresponding pessimistic lock. When using this variable, pay attention to the following:
 
-- Due to the deferred unique constraint check, TiDB might read results that do not meet the unique constraints and return a `Duplicate entry` error when you commit a pessimistic transaction. When this error is returned, TiDB rolls back the current transaction.
+- Due to the deferred unique constraint check, TiDB might read results that do not meet the unique constraints and return a `Duplicate entry` error when you commit a pessimistic transaction. When this error occurs, TiDB rolls back the current transaction.
 
     The following example skips the lock to `bill`, so the query results of TiDB might not satisfy the uniqueness constraints.
 
@@ -219,7 +219,7 @@ To achieve better performance of pessimistic transactions, you can set the [`tid
     ERROR 1062 (23000): Duplicate entry 'bill' for key 'username'
     ```
 
-- After this variable is disabled, committing a pessimistic transaction that needs to write data might return a `Write conflict` error. When this error is returned, TiDB rolls back the current transaction.
+- After this variable is disabled, committing a pessimistic transaction that needs to write data might return a `Write conflict` error. When this error occurs, TiDB rolls back the current transaction.
 
     As in the following example, if two concurrent transactions needs to insert data to the same table, skipping the pessimistic lock causes TiDB to return a `Write conflict` error when you commit a transaction. And the transaction will be rolled back.
 
@@ -256,9 +256,9 @@ To achieve better performance of pessimistic transactions, you can set the [`tid
 
     > **Note:**
     >
-    > When the `8147` error is returned, TiDB rolls back the current transaction.
+    > When the `8147` error occurs, TiDB rolls back the current transaction.
 
-    As in the following example, at the execution of the `INSERT` statement, TiDB skips a lock. Then, at execution of the `DELETE` statement, TiDB locks the unique index and checks the unique constraints, so you will see an error is reported at the `DELETE` statement.
+    As in the following example, at the execution of the `INSERT` statement, TiDB skips a lock. Then, at the execution of the `DELETE` statement, TiDB locks the unique index and checks the unique constraints, so you will see an error is reported at the `DELETE` statement.
 
     ```sql
     SET tidb_constraint_check_in_place_pessimistic = 0;
