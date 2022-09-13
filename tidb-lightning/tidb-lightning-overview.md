@@ -1,6 +1,10 @@
 ---
 title: TiDB Lightning Overview
 summary: Learn about Lightning and the whole architecture.
+<<<<<<< HEAD
+=======
+aliases: ['/docs/dev/tidb-lightning/tidb-lightning-overview/','/docs/dev/reference/tools/tidb-lightning/overview/','/docs/dev/tidb-lightning/tidb-lightning-tidb-backend/','/docs/dev/reference/tools/tidb-lightning/tidb-backend/','/tidb/dev/tidb-lightning-tidb-backend','/docs/dev/loader-overview/','/docs/dev/reference/tools/loader/','/docs/dev/load-misuse-handling/','/docs/dev/reference/tools/error-case-handling/load-misuse-handling/','/tidb/dev/load-misuse-handling','/tidb/dev/loader-overview/','/dev/tidb/tidb-lightning-backends']
+>>>>>>> d296cae99 (lightning: add 2 docs for logical import mode (#10220))
 ---
 
 # TiDB Lightning Overview
@@ -23,9 +27,15 @@ Currently, TiDB Lightning supports:
 
 The complete import process is as follows:
 
+<<<<<<< HEAD
 1. Before importing, `tidb-lightning` switches the TiKV cluster to "import mode", which optimizes the cluster for writing and disables automatic compaction.
 
 2. `tidb-lightning` creates the skeleton of all tables from the data source.
+=======
+- [Physical Import Mode](/tidb-lightning/tidb-lightning-physical-import-mode.md): TiDB Lightning first encodes data into key-value pairs and stores them in a local temporary directory, then uploads these key-value pairs to each TiKV node, and finally calls the TiKV Ingest interface to insert data into TiKV's RocksDB. If you need to perform initial import, consider the physical import mode, which has higher import speed.
+
+- [Logical Import Mode](/tidb-lightning/tidb-lightning-logical-import-mode.md): TiDB Lightning first encodes the data into SQL statements and then runs these SQL statements directly for data import. If the cluster to be imported is in production, or if the target table to be imported already contains data, use the logical import mode.
+>>>>>>> d296cae99 (lightning: add 2 docs for logical import mode (#10220))
 
 3. Each table is split into multiple continuous *batches*, so that data from a huge table (200 GB+) can be imported incrementally and concurrently.
 
