@@ -8,6 +8,12 @@ aliases: ['/tidbcloud/beta/supported-tidb-versions','/tidbcloud/release-notes']
 
 This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-cloud/) in 2022.
 
+## September 13, 2022
+
+**General changes**
+
+* Support a new Google Cloud region for [Dedicated Tier](/tidb-cloud/select-cluster-tier.md#dedicated-tier) clusters: `N. Virginia (us-east4)`.
+
 ## September 9, 2022
 
 **General changes**
