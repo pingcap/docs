@@ -28,10 +28,9 @@ If you encounter problems when connecting to TiDB using the tools listed in this
 
 | Language | Driver | Latest tested version | Support level | TiDB adapter | Tutorial |
 | - | - | - | - | - | - |
-| C | [MySQL Connector/C](https://downloads.mysql.com/archives/c-c/) | 6.1.11 | Full | N/A | N/A |
 | C | [libmysqlclient](https://dev.mysql.com/doc/c-api/8.0/en/c-api-introduction.html) | 8.0 | Compatible | N/A | N/A |
 | C#(.Net) | [MySQL Connector/NET](https://downloads.mysql.com/archives/c-net/) | 8.0 | Compatible | N/A | N/A |
-| C#(.Net) | [MySQL Connector/ODBC](https://downloads.mysql.com/archives/c-odbc/) | 8.0 | Compatible | N/A | N/A |
+| ODBC | [MySQL Connector/ODBC](https://downloads.mysql.com/archives/c-odbc/) | 8.0 | Compatible | N/A | N/A |
 | Go | [go-sql-driver/mysql](https://github.com/go-sql-driver/mysql) | v1.6.0 | Full | N/A | [Build a Simple CRUD App with TiDB and Golang](/develop/dev-guide-sample-application-golang.md) |
 | Java | [JDBC](https://dev.mysql.com/downloads/connector/j/) | 5.1.46; 8.0.29 | Full | 5.1.46: N/A; 8.0.29: [pingcap/mysql-connector-j](https://github.com/pingcap/mysql-connector-j/tree/release/8.0) | [Build a Simple CRUD App with TiDB and Java](/develop/dev-guide-sample-application-java.md) |
 | JavaScript | [mysql](https://github.com/mysqljs/mysql) | v2.18.1 | Compatible | N/A | N/A |
@@ -67,6 +66,7 @@ If you encounter problems when connecting to TiDB using the tools listed in this
 | - | - | - | - |
 | [DBeaver](https://dbeaver.io/) | 22.1.0 | Compatible | N/A |
 | [Navicat for MySQL](https://www.navicat.com/) | 16.0.14 | Compatible | N/A |
+| [MySQL Workbench](https://www.mysql.com/products/workbench/) | 8.0 | Compatible | N/A |
 
 | IDE | Plugin | Support level | Tutorial |
 | - | - | - | - |
