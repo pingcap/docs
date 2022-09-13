@@ -82,6 +82,11 @@ To connect to a Dedicated Tier cluster via standard connection, perform the foll
 
 4. Under **Step 2: Download TiDB Cloud Server CA** in the dialog, click **Download TiDB Server CA** if you need to import the TiDB Cloud server certificate to your client for TLS connection.
 
+    > **Note:**
+    >
+    > - The TiDB Cloud Server CA is only available for Dedicated Tier clusters.
+    > - Currently, TiDB Cloud only provides the connection strings and sample code for these connection methods: MySQL, MyCLI, JDBC, Python, Go, and Node.js.
+
 5. Under **Step 3: Connect with a SQL client** in the dialog, click the tab of your preferred connection method, and then connect to your cluster with the connection string.
 
 </div>
