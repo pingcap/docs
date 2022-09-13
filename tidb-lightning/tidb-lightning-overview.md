@@ -1,10 +1,7 @@
 ---
 title: TiDB Lightning Overview
 summary: Learn about Lightning and the whole architecture.
-<<<<<<< HEAD
-=======
-aliases: ['/docs/dev/tidb-lightning/tidb-lightning-overview/','/docs/dev/reference/tools/tidb-lightning/overview/','/docs/dev/tidb-lightning/tidb-lightning-tidb-backend/','/docs/dev/reference/tools/tidb-lightning/tidb-backend/','/tidb/dev/tidb-lightning-tidb-backend','/docs/dev/loader-overview/','/docs/dev/reference/tools/loader/','/docs/dev/load-misuse-handling/','/docs/dev/reference/tools/error-case-handling/load-misuse-handling/','/tidb/dev/load-misuse-handling','/tidb/dev/loader-overview/','/dev/tidb/tidb-lightning-backends']
->>>>>>> d296cae99 (lightning: add 2 docs for logical import mode (#10220))
+aliases: ['/tidb/v6.2/tidb-lightning-backends']
 ---
 
 # TiDB Lightning Overview
