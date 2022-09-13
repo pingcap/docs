@@ -34,7 +34,7 @@ This document describes how to import sample data into TiDB Cloud via the UI. Th
 
     - **Data Format**: select **TiDB Dumpling**.
     - **Location**: `Google Cloud`
-    - **Bucket URL**: enter the sample data URL `gcs://tidbcloud-samples-us-west1`.
+    - **Bucket URL**: enter the sample data URL `gs://tidbcloud-samples-us-west1`.
     - **Target Cluster**: shows the cluster name and the region name.
 
     If the location of the bucket is different from your cluster, confirm the compliance of cross region. Click **Next**.
