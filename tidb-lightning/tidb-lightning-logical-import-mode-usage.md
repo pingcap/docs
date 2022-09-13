@@ -1,6 +1,6 @@
 ---
 title: Use Logical Import Mode
-summary: Learn how to use logical import mode in TiDB Lightning.
+summary: Learn how to use the logical import mode in TiDB Lightning.
 ---
 
 # Use Logical Import Mode
@@ -31,7 +31,7 @@ data-source-dir = "/data/my_database"
 # Import mode. "tidb" means using the logical import mode.
 backend = "tidb"
 
-# The operation of inserting duplicate data in logical import mode.
+# The operation of inserting duplicate data in the logical import mode.
 # - replace: replace existing data with new data
 # - ignore: keep existing data and ignore new data
 # - error: pause the import and report an error
@@ -55,7 +55,7 @@ For the complete configuration file, refer to [TiDB Lightning Configuration](/ti
 
 Conflicting data refers to two or more records with the same data in the PK or UK column. When the data source contains conflicting data, the actual number of rows in the table is different from the total number of rows returned by the query using the unique index.
 
-In logical import mode, you can configure the strategy for resolving conflicting data by setting the `on-duplicate` configuration item. Based on the strategy, TiDB Lightning imports data with different SQL statements.
+In the logical import mode, you can configure the strategy for resolving conflicting data by setting the `on-duplicate` configuration item. Based on the strategy, TiDB Lightning imports data with different SQL statements.
 
 | Strategy | Default behavior of conflicting data | The corresponding SQL statement |
 | :-- | :-- | :-- |
@@ -65,9 +65,9 @@ In logical import mode, you can configure the strategy for resolving conflicting
 
 ## Performance tuning
 
-- In logical import mode, the performance of TiDB Lightning largely depends on the write performance of the target TiDB cluster. If the cluster hits a performance bottleneck, refer to [Highly Concurrent Write Best Practices](/best-practices/high-concurrency-best-practices.md).
+- In the logical import mode, the performance of TiDB Lightning largely depends on the write performance of the target TiDB cluster. If the cluster hits a performance bottleneck, refer to [Highly Concurrent Write Best Practices](/best-practices/high-concurrency-best-practices.md).
 
-- If the target TiDB cluster does not hit a write bottleneck, consider increasing the value of `region-concurrency` in TiDB Lightning configuration. The default value of `region-concurrency` is the number of CPU cores. The meaning of `region-concurrency` is different between physical import mode and logical import mode. In logical import mode, `region-concurrency` is the write concurrency.
+- If the target TiDB cluster does not hit a write bottleneck, consider increasing the value of `region-concurrency` in TiDB Lightning configuration. The default value of `region-concurrency` is the number of CPU cores. The meaning of `region-concurrency` is different between the physical import mode and the logical import mode. In the logical import mode, `region-concurrency` is the write concurrency.
 
     Example configuration:
 
