@@ -73,7 +73,9 @@ For detailed steps, see [Configure Amazon S3 access](/tidb-cloud/config-s3-and-g
     - **Role-ARN**: enter the Role-ARN you obtained in [Step 2](#step-2-configure-amazon-s3-access).
     - **Target Cluster**: shows the cluster name and the region name.
 
-    Confirm the compliance of cross region. Click **Next**.
+    If the location of the bucket is different from your cluster, confirm the compliance of cross region. Click **Next**.
+    
+    TiDB Cloud starts validating whether it can access your data in the specified bucket URL. If you get the `AccessDenied` error, see [Troubleshoot Access Denied Errors during Data Import from S3](/tidb-cloud/troubleshoot-import-access-denied-error.md).
 
 4. Modify the file patterns and add the table filter rules if needed. If necessary, you can specify a [table filter](/table-filter.md#syntax). If you want to configure multiple filter rules, use `,` to separate the rules.
 
@@ -81,7 +83,6 @@ For detailed steps, see [Configure Amazon S3 access](/tidb-cloud/config-s3-and-g
 
 6. On the **Preview** page, confirm the data to be imported and then click **Start Import**.
 
-TiDB Cloud starts validating whether it can access your data in the specified bucket URL. After the validation is completed and successful, the import task starts automatically. If you get the `AccessDenied` error, see [Troubleshoot Access Denied Errors during Data Import from S3](/tidb-cloud/troubleshoot-import-access-denied-error.md).
 
 After the data is imported, if you want to remove the Amazon S3 access of TiDB Cloud, simply delete the policy that you added in [Step 2. Configure Amazon S3 access](#step-2-configure-amazon-s3-access).
 

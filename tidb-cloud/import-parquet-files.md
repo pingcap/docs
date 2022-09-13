@@ -105,7 +105,9 @@ To import the Parquet files to TiDB Cloud, take the following steps:
     - **Role-ARN**: (This field is visible only for AWS S3): enter the Role ARN value for **Role-ARN**.
     - **Target Cluster**: shows the cluster name and the region name.
 
-    Confirm the compliance of cross region. Click **Next**.
+    If the location of the bucket is different from your cluster, confirm the compliance of cross region. Click **Next**.
+    
+    TiDB Cloud starts validating whether it can access your data in the specified bucket URL. If you get the `AccessDenied` error, see [Troubleshoot Access Denied Errors during Data Import from S3](/tidb-cloud/troubleshoot-import-access-denied-error.md).
 
 4. Modify the file patterns and add the table filter rules if needed.
 
@@ -117,14 +119,14 @@ To import the Parquet files to TiDB Cloud, take the following steps:
 
         When you use this feature, you need to specify a custom mapping rule between Parquet files and a single target table in the following fields:
 
-        - **File Name**: enter a pattern that matches the names of the Parquet files to be imported. If you have one Parquet file only, you can enter the filename here directly.
+        - **Source file name**: enter a pattern that matches the names of the Parquet files to be imported. If you have one Parquet file only, you can enter the filename here directly. Note that the names of the Parquet files must include the suffix ".parquet ".
 
             For example:
 
             - `my-data?.parquet`: all Parquet files starting with `my-data` and one character (such as `my-data1.parquet` and `my-data2.parquet`) will be imported into the same target table.
             - `my-data*.parquet`: all Parquet files starting with `my-data` will be imported into the same target table.
 
-        - **Target table**: enter the name of the target table in TiDB Cloud, which must be in the `${db_name}.${table_name}` format. For example, `mydb.mytable`. Note that this field only accepts one specific table name, so wildcards are not supported.
+        - **Target table name**: enter the name of the target table in TiDB Cloud, which must be in the `${db_name}.${table_name}` format. For example, `mydb.mytable`. Note that this field only accepts one specific table name, so wildcards are not supported.
 
     - **Tables Filter**: if you want to filter which tables to be imported, you can specify one or more table filters in this field, separated by `,`.
 
@@ -141,11 +143,10 @@ To import the Parquet files to TiDB Cloud, take the following steps:
 
 6. On the **Preview** page, confirm the import data and then click **Start Import**.
 
-    TiDB Cloud starts validating whether it can access your data in the specified bucket URL. After the validation is completed and successful, the import task starts automatically. If you get the `AccessDenied` error, see [Troubleshoot Access Denied Errors during Data Import from S3](/tidb-cloud/troubleshoot-import-access-denied-error.md).
 
-7. When the import progress shows **Completed**, check the number after **Total Files:**.
+7. When the import progress shows **Completed**, check the imported tables.
 
-    If the number is zero, it means no data files matched the value you entered in the **File name** field. In this case, check whether there are any typos in the **File name** field and try again.
+    If the number is zero, it means no data files matched the value you entered in the **Source file name** field. In this case, check whether there are any typos in the **Source file name** field and try again.
 
 When you run an import task, if any unsupported or invalid conversions are detected, TiDB Cloud terminates the import job automatically and reports an importing error.
 

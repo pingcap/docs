@@ -136,7 +136,7 @@ We provide Capital Bikeshare sample data for you to easily import data and run s
     - **Role-ARN**: enter `arn:aws:iam::385595570414:role/import-sample-access`
     - **Target Cluster**: shows the cluster name and the region name.
 
-    Confirm the compliance of cross region. Click **Next**.
+    If the location of the bucket is different from your cluster, confirm the compliance of cross region. Click **Next**.
 
     </div>
 
@@ -149,12 +149,14 @@ We provide Capital Bikeshare sample data for you to easily import data and run s
     - **Bucket URL**: enter the sample data URL `gcs://tidbcloud-samples-us-west1`.
     - **Target Cluster**: shows the cluster name and the region name.
 
-    Confirm the compliance of cross region. Click **Next**.
+    If the location of the bucket is different from your cluster, confirm the compliance of cross region. Click **Next**.
+    
+    TiDB Cloud starts validating whether it can access the sample data in the specified bucket URL. If you get the `AccessDenied` error, see [Troubleshoot Access Denied Errors during Data Import from S3](/tidb-cloud/troubleshoot-import-access-denied-error.md).
 
     </div>
     </SimpleTab>
 
-4. Modify the file patterns and add the table filter rules if needed. For the sample data, you can skip this step. Click **Next**.
+4. Add the table filter rules if needed. For the sample data, you can skip this step. Click **Next**.
 
 5. On the **Preview** page, confirm the data to be imported and then click **Start Import**.
 

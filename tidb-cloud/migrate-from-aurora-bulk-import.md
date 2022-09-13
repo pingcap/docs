@@ -19,7 +19,9 @@ To import data, perform the following steps:
 
 4. Select or fill in the **Data Format**, **Location**, **Bucket URL**, and **Role-ARN** fields according to the specification of your source data. For more information about how to create the bucket policy and role for cross-account access, see [Learn how to configure cross-account access](#learn-how-to-configure-cross-account-access).
 
-5. Check the cluster name and the region name in the **Target Cluster**.
+5. Check the cluster name and the region name in the **Target Cluster**. Click **Next**. 
+    
+    TiDB Cloud starts validating whether it can access your data in the specified bucket URL. If you get the `AccessDenied` error, see [Troubleshoot Access Denied Errors during Data Import from S3](/tidb-cloud/troubleshoot-import-access-denied-error.md).
 
 6. Modify the file patterns and add the table filter rules if needed. Click **Next**.
 
@@ -31,14 +33,14 @@ To import data, perform the following steps:
 
         To modify the file pattern, specify a custom mapping rule between CSV files and a single target table in the following fields:
 
-        - **File name**: enter a pattern that matches the names of the files to be imported. If you have one file only, enter the file name here directly.
+        - **Source file name**: enter a pattern that matches the names of the files to be imported. If you have one file only, enter the file name here directly.
 
             For example:
 
             - `my-data?.sql`: all CSV files starting with `my-data` and one character (such as `my-data1.sql` and `my-data2.sql`) will be imported into the same target table.
             - `my-data*.sql`: all CSV files starting with `my-data` will be imported into the same target table.
 
-        - **Target table**: enter the name of the target table in TiDB Cloud, which must be in the `${db_name}.${table_name}` format. For example, `mydb.mytable`. Note that this field only accepts one specific table name, so wildcards are not supported.
+        - **Target table name**: enter the name of the target table in TiDB Cloud, which must be in the `${db_name}.${table_name}` format. For example, `mydb.mytable`. Note that this field only accepts one specific table name, so wildcards are not supported.
 
     - **Table Filter**: If you want to filter which tables to be imported, you can specify one or more table filters in this field, separated by `,`.
 
@@ -53,11 +55,9 @@ To import data, perform the following steps:
 
 7. On the **Preview** page, confirm the data to be imported and then click **Start Import**.
 
-TiDB Cloud starts validating whether it can access your data in the specified bucket URL. After the validation is completed and successful, the import task starts automatically. When the data import progress shows **Completed**, you have successfully imported the data to your database in TiDB Cloud.
 
 > **Note:**
 >
-> - If you get the `AccessDenied` error, see [Troubleshoot Access Denied Errors during Data Import from S3](/tidb-cloud/troubleshoot-import-access-denied-error.md).
 > - If your task fails, refer to [Learn how to clean up incomplete data](#learn-how-to-clean-up-incomplete-data).
 
 ## Learn how to create an Amazon S3 Bucket and prepare source data files
