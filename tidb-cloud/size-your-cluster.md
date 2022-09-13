@@ -76,13 +76,15 @@ TiDB Cloud deploys TiKV nodes evenly to all availability zones (at least 3) in t
 >
 > When you scale your TiDB cluster, nodes in the 3 availability zones are increased or decreased at the same time. For how to scale in or scale out a TiDB cluster based on your needs, see [Scale Your TiDB Cluster](/tidb-cloud/scale-tidb-cluster.md).
 
-Minimum number of TiKV nodes: `ceil(compressed size of your data ÷ one TiKV capacity) × the number of replicas`
+Recommanded number of TiKV nodes: `ceil(compressed size of your data ÷ TiKV storage usage ratio ÷ one TiKV capacity) × the number of replicas`
 
-Supposing the size of your MySQL dump files is 5 TB and the TiDB compression ratio is 70%, the storage needed is 3584 GB.
+Supposing the size of your MySQL dump files is 5 TB and the TiDB compression ratio is 40%, the storage needed is 2048 GB.
+
+Generally, the usage ratio of tikv storage is not recommended to exceed 80%.
 
 For example, if you configure the node storage of each TiKV node on AWS as 1024 GB, the required number of TiKV nodes is as follows:
 
-Minimum number of TiKV nodes: `ceil(3584 ÷ 1024) × 3 = 12`
+Minimum number of TiKV nodes: `ceil(2048 ÷ 0.8 ÷ 1024) × 3 = 9`
 
 ### TiKV node storage
 
