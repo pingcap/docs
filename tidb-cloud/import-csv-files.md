@@ -140,7 +140,7 @@ To import the CSV files to TiDB Cloud, take the following steps:
 
 7. Click **Start Import**.
 
-8. When the import progress shows **Completed**, check the imported tables.
+8. When the import progress shows **Finished**, check the imported tables.
 
     If the number is zero, it means no data files matched the value you entered in the **Source file name** field. In this case, ensure that there are no typos in the **Source file name** field and try again.
 

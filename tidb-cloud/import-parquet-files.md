@@ -144,7 +144,7 @@ To import the Parquet files to TiDB Cloud, take the following steps:
 6. On the **Preview** page, confirm the import data and then click **Start Import**.
 
 
-7. When the import progress shows **Completed**, check the imported tables.
+7. When the import progress shows **Finished**, check the imported tables.
 
     If the number is zero, it means no data files matched the value you entered in the **Source file name** field. In this case, check whether there are any typos in the **Source file name** field and try again.
 
