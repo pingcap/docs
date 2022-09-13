@@ -1,10 +1,6 @@
 ---
 title: TiDB Lightning FAQs
 summary: Learn about the frequently asked questions (FAQs) and answers about TiDB Lightning.
-<<<<<<< HEAD
-=======
-aliases: ['/docs/dev/tidb-lightning/tidb-lightning-faq/','/docs/dev/faq/tidb-lightning/']
->>>>>>> 00b23c124 (lightning: split troubleshoot from faq (#10309))
 ---
 
 # TiDB Lightning FAQs
@@ -112,17 +108,7 @@ To stop the `tidb-lightning` process, you can choose the corresponding operation
 
 TiDB Lightning is best used with a 10-Gigabit network card.
 
-<<<<<<< HEAD
-1-Gigabit network cards can only provide a total bandwidth of 120 MB/s, which has to be shared among all target TiKV stores. TiDB Lightning can easily saturate all bandwidth of the 1-Gigabit network and bring down the cluster because PD is unable to be contacted anymore. To avoid this, set an *upload speed limit* in [Importer's configuration](/tidb-lightning/tidb-lightning-configuration.md#tikv-importer):
-
-```toml
-[import]
-# Restricts the total upload speed to TiKV to 100 MB/s or less
-upload-speed-limit = "100MB"
-```
-=======
 1-Gigabit network cards can only provide a total bandwidth of 120 MB/s, which has to be shared among all target TiKV stores. TiDB Lightning can easily saturate all bandwidth of the 1-Gigabit network in physical import mode and bring down the cluster because PD is unable to be contacted anymore.
->>>>>>> 00b23c124 (lightning: split troubleshoot from faq (#10309))
 
 ## Why TiDB Lightning requires so much free space in the target TiKV cluster?
 
