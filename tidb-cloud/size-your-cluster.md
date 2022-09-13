@@ -78,7 +78,7 @@ TiDB Cloud deploys TiKV nodes evenly to all availability zones (at least 3) in t
 
 Recommanded number of TiKV nodes: `ceil(compressed size of your data ÷ TiKV storage usage ratio ÷ one TiKV capacity) × the number of replicas`
 
-Supposing the size of your MySQL dump files in CSV format is 5 TB and the TiDB compression ratio is 40%, the storage needed is 2048 GB.
+Supposing the size of your MySQL dump files is 5 TB and the TiDB compression ratio is 40%, the storage needed is 2048 GB.
 
 Generally, the usage ratio of tikv storage is not recommended to exceed 80%.
 
