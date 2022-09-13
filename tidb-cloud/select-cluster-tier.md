@@ -15,7 +15,7 @@ TiDB Cloud provides the following two options of cluster tiers. Before creating 
 
 ## Developer Tier
 
-The TiDB Cloud Developer Tier is a one-year free trial of [TiDB Cloud](https://pingcap.com/products/tidbcloud), the fully managed service of TiDB. You can use Developer Tier clusters for non-production workloads such as prototype applications, hackathons, academic courses, or to provide a temporary data service for non-commercial datasets.
+The TiDB Cloud Developer Tier is a one-year free trial of [TiDB Cloud](https://www.pingcap.com/tidb-cloud/), the fully managed service of TiDB. You can use Developer Tier clusters for non-production workloads such as prototype applications, hackathons, academic courses, or to provide a temporary data service for non-commercial datasets.
 
 Each Developer Tier cluster is a full-featured TiDB cluster and comes with the following:
 
@@ -79,7 +79,7 @@ Alternatively, you can log in to the TiDB Cloud console, and then click **Resume
 - The backup and restore feature is unavailable. You can use [Dumpling](https://docs.pingcap.com/tidb/stable/dumpling-overview) to export your data as a backup.
 - The maximum number of connections to the Developer Tier cluster is 50.
 - You cannot create any changefeeds (Apache Kafka Sink and MySQL Sink) or use [TiCDC](https://docs.pingcap.com/tidb/stable/ticdc-overview) to replicate incremental data.
-- You cannot use VPC Peering to connect to clusters.
+- You cannot use VPC Peering or private endpoint to connect to Developer Tier clusters.
 - You cannot scale clusters to larger storage, standard nodes, or increase the number of nodes.
 - You cannot [pause or resume](/tidb-cloud/pause-or-resume-tidb-cluster.md) a Developer Tier cluster.
 - You cannot view the [Monitoring page](/tidb-cloud/built-in-monitoring.md).

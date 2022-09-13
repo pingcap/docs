@@ -10,10 +10,14 @@ After your TiDB cluster is created on TiDB Cloud, you can use one of the followi
 + Connect via a SQL client
 
     - [Connect via standard connection](#connect-via-standard-connection): The standard connection exposes a public endpoint with traffic filters, so you can connect to your TiDB cluster from your laptop.
-    - [Connect via private endpoint](#connect-via-private-endpoint): Private endpoint connection provides a private endpoint to allow clients in your VPC to securely access services over AWS PrivateLink, which provides highly secure and one-way access to database services with simplified network management. Note that you cannot connect to [Developer Tier clusters](/tidb-cloud/select-cluster-tier.md#developer-tier) using the private endpoint.
+    - [Connect via private endpoint](#connect-via-private-endpoint-recommended): Private endpoint connection provides a private endpoint to allow clients in your VPC to securely access services over AWS PrivateLink, which provides highly secure and one-way access to database services with simplified network management. Note that you cannot connect to [Developer Tier clusters](/tidb-cloud/select-cluster-tier.md#developer-tier) using the private endpoint.
     - [Connect via VPC peering](#connect-via-vpc-peering): If you want lower latency and more security, set up VPC peering and connect via a private endpoint using a VM instance on the corresponding cloud provider in your cloud account. Note that you cannot connect to [Developer Tier clusters](/tidb-cloud/select-cluster-tier.md#developer-tier) using VPC peering.
 
 - [Connect via SQL shell](#connect-via-sql-shell): to try TiDB SQL and test out TiDB's compatibility with MySQL quickly, or administer user privileges
+
+> **Tip:**
+>
+> It is **NOT** recommended to use public connection in a production environment. Instead, it is recommended to use the [private endpoint](#connect-via-private-endpoint-recommended) connection.
 
 ## Connect via standard connection
 
@@ -46,7 +50,7 @@ To connect to your TiDB cluster via standard connection, perform the following s
 >
 > For [Developer Tier clusters](/tidb-cloud/select-cluster-tier.md#developer-tier), when you connect to your cluster, you must include the prefix for your cluster in the user name and wrap the name with quotation marks. For more information, see [User name prefix](/tidb-cloud/select-cluster-tier.md#user-name-prefix).
 
-## Connect via private endpoint
+## Connect via private endpoint (recommended)
 
 > **Note:**
 >
@@ -62,6 +66,10 @@ To connect to your TiDB cluster via private endpoint, perform the following step
     If you have created a private endpoint, it is displayed under **Step 1: Create Private Endpoint**.
 
 5. Under **Step 2: Connect your application**, click the tab of your preferred connection method, and then connect to your cluster with the connection string. The placeholders `<cluster_endpoint_name>:<port>` in the connection string are automatically replaced with the real values.
+
+> **Tip:**
+>
+> If you cannot connect to the cluster, the reason might be that the security group of your VPC endpoint in AWS is not properly set. See [this FAQ](/tidb-cloud/set-up-private-endpoint-connections.md#troubleshooting) for solutions.
 
 ## Connect via VPC peering
 

@@ -49,7 +49,7 @@ hide_commit: true
 
 [Pause or Resume a TiDB Cluster](https://docs.pingcap.com/tidbcloud/pause-or-resume-tidb-cluster)
 
-[Use API (beta)](https://docs.pingcap.com/tidbcloud/api/v1beta)
+[Use API (beta)](https://docs.pingcap.com/tidbcloud/api-overview)
 
 </LearningPath>
 
