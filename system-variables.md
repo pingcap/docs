@@ -1012,7 +1012,7 @@ Constraint checking is always performed in place for pessimistic transactions (d
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
 - Type: Enumeration
-- Default value: `INT_ONLY`
+- Default value: `ON`
 - Possible values: `OFF`, `ON`, `INT_ONLY`
 - This variable is used to control whether to create the primary key as a [clustered index](/clustered-indexes.md) by default. "By default" here means that the statement does not explicitly specify the keyword `CLUSTERED`/`NONCLUSTERED`. Supported values are `OFF`, `ON`, and `INT_ONLY`:
     - `OFF` indicates that primary keys are created as non-clustered indexes by default.
@@ -1818,6 +1818,16 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 - Scope: SESSION
 - Default value: `tikv,tiflash,tidb`
 - This variable is used to set the storage engine list that TiDB can use when reading data.
+
+### tidb_last_ddl_info <span class="version-mark">New in v6.0.0</span>
+
+- Scope: SESSION
+- Persists to cluster: No
+- Default value: ""
+- Type: String
+- This is a read-only variable. It is internally used in TiDB to get the information of the last DDL operation within the current session.
+    - "query": The last DDL query string.
+    - "seq_num": The sequence number for each DDL operation. It is used to identify the order of DDL operations. 
 
 ### tidb_last_query_info <span class="version-mark">New in v4.0.14</span>
 
