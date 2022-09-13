@@ -702,7 +702,7 @@ Configuration items related to the PROXY protocol.
 
 ### `temp-dir` <span class="version-mark">New in v6.3.0</span>
 
-+ File system location used by TiDB to store temporary data. Features that require local storage in TiDB nodes will store temporary data in this location.
++ File system location used by TiDB to store temporary data. If a feature requires local storage in TiDB nodes, TiDB stores the corresponding temporary data in this location.
 + When creating an index, if [`tidb_ddl_enable_fast_reorg`](/system-variables.md#tidb_ddl_enable_fast_reorg-new-in-v630) is enabled, data that needs to be backfilled for a newly created index will be at first stored in the TiDB local temporary directory, and then imported into TiKV in batches, thus accelerating the index creation.
 + Default value: `"/tmp/tidb"`
 
