@@ -9,7 +9,7 @@ This document introduces how to use the logical import mode in TiDB Lightning, i
 
 ## Configure and use the logical import mode
 
-You can use the following configuration file to execute data import using logical import mode:
+You can use the logical import mode via the following configuration file to import data:
 
 ```toml
 [lightning]
@@ -53,15 +53,15 @@ For the complete configuration file, refer to [TiDB Lightning Configuration](/ti
 
 ## Conflict detection
 
-Conflicting data refers to two or more records with the same data in the PK or UK column. When the data source contains conflicting data, the actual number of rows in the table is different from the total number of rows returned by the query using unique index.
+Conflicting data refers to two or more records with the same data in the PK or UK column. When the data source contains conflicting data, the actual number of rows in the table is different from the total number of rows returned by the query using the unique index.
 
 In logical import mode, you can configure the strategy for resolving conflicting data by setting the `on-duplicate` configuration item. Based on the strategy, TiDB Lightning imports data with different SQL statements.
 
 | Strategy | Default behavior of conflicting data | The corresponding SQL statement |
 | :-- | :-- | :-- |
-| `replace` | Replace existing data with new data. | `REPLACE INTO ...` |
-| `ignore` | Keep existing data and ignore new data. | `INSERT IGNORE INTO ...` |
-| `error` | Pause the import and report an error. | `INSERT INTO ...` |
+| `replace` | Replacing existing data with new data. | `REPLACE INTO ...` |
+| `ignore` | Keeping existing data and ignoring new data. | `INSERT IGNORE INTO ...` |
+| `error` | Pausing the import and reporting an error. | `INSERT INTO ...` |
 
 ## Performance tuning
 
