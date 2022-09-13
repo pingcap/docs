@@ -5,7 +5,7 @@ summary: Learn how to use the logical import mode in TiDB Lightning.
 
 # Use Logical Import Mode
 
-This document introduces how to use the logical import mode in TiDB Lightning, including writing the configuration file and tuning performance.
+This document introduces how to use the [logical import mode](/tidb-lightning/tidb-lightning-logical-import-mode.md) in TiDB Lightning, including writing the configuration file and tuning performance.
 
 ## Configure and use the logical import mode
 
