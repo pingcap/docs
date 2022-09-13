@@ -1,10 +1,10 @@
 ---
-title: TiDB Lightning Data Source
+title: TiDB Lightning Data Sources
 summary: Learn all the data sources supported by TiDB Lightning.
 aliases: ['/docs/dev/tidb-lightning/migrate-from-csv-using-tidb-lightning/','/docs/dev/reference/tools/tidb-lightning/csv/','/tidb/dev/migrate-from-csv-using-tidb-lightning/']
 ---
 
-# TiDB Lightning Data Source
+# TiDB Lightning Data Sources
 
 TiDB Lightning supports importing data from multiple data sources to TiDB clusters, including CSV, SQL, and Parquet files.
 
@@ -23,9 +23,9 @@ When TiDB Lightning is running, it looks for all files that match the pattern of
 | Schema file | Contains the `CREATE TABLE` DDL statement | `${db_name}.${table_name}-schema.sql` |
 | Schema file | Contains the `CREATE DATABASE` DDL statement| `${db_name}-schema-create.sql` |
 | Data file | If the data file contains data for a whole table, the file is imported into a table named `${db_name}.${table_name}` | <code>\${db_name}.\${table_name}.\${csv\|sql\|parquet}</code> |
-| Data file | If the data for a table is split in multiple data files, each data file must have a number in its filename as suffix | <code>\${db_name}.\${table_name}.001.\${csv\|sql\|parquet}</code> |
+| Data file | If the data for a table is split into multiple data files, each data file must be suffixed with a number in its filename | <code>\${db_name}.\${table_name}.001.\${csv\|sql\|parquet}</code> |
 
-TiDB Lightning processes data in parallel as much as possible. Because files must be read in sequence, the data processing concurrency is at the file level (controlled by `region-concurrency`). Therefore, when the imported file is large, the import performance is poor. It is recommended to limit the size of the imported file to smaller than 256 MiB to achieve best performance.
+TiDB Lightning processes data in parallel as much as possible. Because files must be read in sequence, the data processing concurrency is at the file level (controlled by `region-concurrency`). Therefore, when the imported file is large, the import performance is poor. It is recommended to limit the size of the imported file to no greater than 256 MiB to achieve the best performance.
 
 ## CSV
 
@@ -44,7 +44,7 @@ You can configure the CSV format in the `[mydumper.csv]` section in the `tidb-li
 [mydumper.csv]
 # The field separator. Can be one or multiple characters. The default is ','.
 # If the data might contain commas, it is recommended to use '|+|' or other uncommon
-# character combinations as separator.
+# character combinations as a separator.
 separator = ','
 # Quoting delimiter. Empty value means no quoting.
 delimiter = '"'
@@ -67,7 +67,7 @@ backslash-escape = true
 trim-last-separator = false
 ```
 
-In all string fields such as `separator`, `delimiter` and `terminator`, if the input involves special characters, you can use backslash to escape the special characters. The escape sequence must be a *double-quoted* string (`"…"`). For example, `separator = "\u001f"` means using the ASCII character `0X1F` as separator.
+If the input of a string field such as `separator`, `delimiter`, or `terminator` involves special characters, you can use a backslash to escape the special characters. The escape sequence must be a *double-quoted* string (`"…"`). For example, `separator = "\u001f"` means using the ASCII character `0X1F` as the separator.
 
 You can use *single-quoted* strings (`'…'`) to suppress backslash escaping. For example, `terminator = '\n'` means using the two-character string, a backslash (`\`) followed by the letter `n`, as the terminator, rather than the LF `\n`.
 
@@ -91,26 +91,26 @@ For more details, see the [TOML v1.0.0 specification](https://toml.io/en/v1.0.0#
 - If `delimiter` is empty, all fields are unquoted.
 - Common values:
 
-    * `'"'` quote fields with double-quote. The same as [RFC 4180](https://tools.ietf.org/html/rfc4180).
-    * `''` disable quoting.
+    * `'"'` quotes fields with double-quote. The same as [RFC 4180](https://tools.ietf.org/html/rfc4180).
+    * `''` disables quoting.
 
 - Corresponds to the `FIELDS ENCLOSED BY` option in the `LOAD DATA` statement.
 
 #### `terminator`
 
 - Defines the line terminator.
-- If `terminator` is empty, both `"\r"` (`U+000D` Carriage Return) and `"\n"` (`U+000A` Line Feed) are used as line terminator.
+- If `terminator` is empty, both `"\n"` (Line Feed) and `"\r\n"` (Carriage Return + Line Feed) are used as the line terminator.
 - Corresponds to the `LINES TERMINATED BY` option in the `LOAD DATA` statement.
 
 #### `header`
 
 - Whether *all* CSV files contain a header row.
-- If `header` is true, the first row is used as the *column names*. If `header` is false, the first row is treated as an ordinary data row.
+- If `header` is `true`, the first row is used as the *column names*. If `header` is `false`, the first row is treated as an ordinary data row.
 
 #### `not-null` and `null`
 
 - The `not-null` setting controls whether all fields are non-nullable.
-- If `not-null` is false, the string specified by `null` is transformed to the SQL NULL instead of a specific value.
+- If `not-null` is `false`, the string specified by `null` is transformed to the SQL NULL instead of a specific value.
 - Quoting does not affect whether a field is null.
 
     For example, in the following CSV file:
@@ -120,11 +120,11 @@ For more details, see the [TOML v1.0.0 specification](https://toml.io/en/v1.0.0#
     \N,"\N",
     ```
 
-    In the default settings (`not-null = false; null = '\N'`), the columns `A` and `B` are both converted to NULL after importing to TiDB. The column `C` is simply the empty string `''` but not NULL.
+    In the default settings (`not-null = false; null = '\N'`), the columns `A` and `B` are both converted to NULL after being imported to TiDB. The column `C` is an empty string `''` but not NULL.
 
 #### `backslash-escape`
 
-- Whether to parse backslash inside fields as escape character.
+- Whether to parse backslash inside fields as escape characters.
 - If `backslash-escape` is true, the following sequences are recognized and converted:
 
     | Sequence | Converted to             |
@@ -136,9 +136,9 @@ For more details, see the [TOML v1.0.0 specification](https://toml.io/en/v1.0.0#
     | `\t`     | Tab (`U+0009`)             |
     | `\Z`     | Windows EOF (`U+001A`)     |
 
-    In all other cases (for example, `\"`), the backslash is simply stripped, leaving the next character (`"`) in the field. The character left has no special roles (for example, delimiters) and is just an ordinary character.
+    In all other cases (for example, `\"`), the backslash is stripped, leaving the next character (`"`) in the field. The character left has no special roles (for example, delimiters) and is just an ordinary character.
 
-- Quoting does not affect whether backslash is parsed as escape character.
+- Quoting does not affect whether backslash is parsed as an escape character.
 
 - Corresponds to the `FIELDS ESCAPED BY '\'` option in the `LOAD DATA` statement.
 
@@ -157,7 +157,7 @@ For more details, see the [TOML v1.0.0 specification](https://toml.io/en/v1.0.0#
 
 - This option is deprecated. Use the `terminator` option instead.
 
-    If your old configuration is:
+    If your existing configuration is:
 
     ```toml
     separator = ','
@@ -176,11 +176,11 @@ For more details, see the [TOML v1.0.0 specification](https://toml.io/en/v1.0.0#
 TiDB Lightning does not support every option supported by the `LOAD DATA` statement. For example:
 
 * There cannot be line prefixes (`LINES STARTING BY`).
-* The header cannot be simply skipped (`IGNORE n LINES`). The header must be valid column names.
+* The header cannot be skipped (`IGNORE n LINES`) and must be valid column names.
 
 ### Strict format
 
-TiDB Lightning works the best when the input files have a uniform size around 256 MiB. When the input is a single huge CSV file, TiDB Lightning can only process the file in one thread, which slows down import speed.
+TiDB Lightning works best when the input files have a uniform size of around 256 MiB. When the input is a single huge CSV file, TiDB Lightning can only process the file in one thread, which slows down the import speed.
 
 This can be fixed by splitting the CSV into multiple files first. For the generic CSV format, there is no way to quickly identify where a row starts or ends without reading the whole file. Therefore, TiDB Lightning by default does *not* automatically split a CSV file. However, if you are certain that the CSV input adheres to certain restrictions, you can enable the `strict-format` setting to allow TiDB Lightning to split the file into multiple 256 MiB-sized chunks for parallel processing.
 
@@ -204,7 +204,7 @@ The default setting is already tuned for CSV following RFC 4180.
 
 ```toml
 [mydumper.csv]
-separator = ',' # If the data might contain comma (','), it is recommended to use '|+|' or other uncommon character combinations as separator.
+separator = ',' # If the data might contain a comma (','), it is recommended to use '|+|' or other uncommon character combinations as the separator.
 delimiter = '"'
 header = true
 not-null = false
@@ -267,15 +267,15 @@ Example content:
 
 ## SQL
 
-When TiDB Lightning processes a SQL file, because TiDB Lightning cannot quickly split a single SQL file, it cannot improve the import speed of a single file by increasing concurrency. Therefore, when you import data from SQL files, avoid a single huge SQL file. TiDB Lightning works the best when the input files have a uniform size around 256 MiB.
+When TiDB Lightning processes a SQL file, because TiDB Lightning cannot quickly split a single SQL file, it cannot improve the import speed of a single file by increasing concurrency. Therefore, when you import data from SQL files, avoid a single huge SQL file. TiDB Lightning works best when the input files have a uniform size of around 256 MiB.
 
 ## Parquet
 
-TiDB Lightning currently only supports the Parquet file generated by Amazon Aurora. To identify its file organization in S3, use the following configuration to match all data files:
+TiDB Lightning currently only supports Parquet files generated by Amazon Aurora. To identify the file structure in S3, use the following configuration to match all data files:
 
 ```
 [[mydumper.files]]
-# The expression needed for parsing the Amazon Aurora parquet file
+# The expression needed for parsing Amazon Aurora parquet files
 pattern = '(?i)^(?:[^/]*/)*([a-z0-9_]+)\.([a-z0-9_]+)/(?:[^/]*/)*(?:[a-z0-9\-_.]+\.(parquet))$'
 schema = '$1'
 table = '$2'
@@ -286,9 +286,9 @@ Note that this configuration only shows how to match the parquet files exported 
 
 For more information on `mydumper.files`, refer to [Match customized file](#match-customized-file).
 
-## Match customized file
+## Match customized files
 
-TiDB Lightning only recognizes data files that follow the naming convention. In some cases, your data file might not follow the naming pattern, and thus data import is completed in a short time and zero file is processed.
+TiDB Lightning only recognizes data files that follow the naming pattern. In some cases, your data file might not follow the naming pattern, and thus data import is completed in a short time without importing any file.
 
 To resolve this issue, you can use `[[mydumper.files]]` to match data files in your customized expression.
 
@@ -310,15 +310,15 @@ type = '$3'
 ```
 
 - **schema**: The name of the target database. The value can be:
-    - The group index of the regular expression, such as `$1`.
+    - The group index obtained by using a regular expression, such as `$1`.
     - The name of the database that you want to import, such as `db1`. All matched files are imported into `db1`.
 - **table**: The name of the target table. The value can be:
-    - The group index of the regular expression, such as `$2`.
+    - The group index obtained by using a regular expression, such as `$2`.
     - The name of the table that you want to import, such as `table1`. All matched files are imported into `table1`.
-- **type**: The file type. Supports `sql`, `parquet`, or `csv`. The value can be:
-    - The group index of the regular expression, such as `$3`.
+- **type**: The file type. Supports `sql`, `parquet`, and `csv`. The value can be:
+    - The group index obtained by using a regular expression, such as `$3`.
 - **key**: The file number, such as `001` in `${db_name}.${table_name}.001.csv`.
-    - The group index of the regular expression, such as `$4`.
+    - The group index obtained by using a regular expression, such as `$4`.
 
 ## More resources
 
