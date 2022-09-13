@@ -13,7 +13,7 @@ To import data, perform the following steps:
 
 1. Navigate to the **Clusters** page.
 
-2. Locate your target cluster, click **...** in the upper-right corner of the cluster area, and select **Import Data**. The **Data Import** page is displayed.
+2. Locate your target cluster, click **Import Data** in the upper-right corner of the cluster area. The **Data Import** page is displayed..
 
 3. Prepare source data according to [Learn how to create an Amazon S3 Bucket and prepare source data files](#learn-how-to-create-an-amazon-s3-bucket-and-prepare-source-data-files). You can see the advantages and disadvantages of different **Data Format** in the preparing data part.
 

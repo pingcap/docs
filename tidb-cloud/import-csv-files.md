@@ -86,7 +86,7 @@ To import the CSV files to TiDB Cloud, take the following steps:
 
 1. Log in to the [TiDB Cloud](https://tidbcloud.com/signin) console, and navigate to the **Clusters** page.
 
-2. Locate your target cluster, click **...** in the upper-right corner of the cluster area, and select **Import Data**. The **Data Import** page is displayed.
+2. Locate your target cluster, click **Import Data** in the upper-right corner of the cluster area. The **Data Import** page is displayed.
 
 3. On the **Data Import** page, provide the following information.
 
