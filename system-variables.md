@@ -520,6 +520,13 @@ mysql> SHOW GLOBAL VARIABLES LIKE 'max_prepared_stmt_count';
 - Default value: (system dependent)
 - This variable shows the system time zone from when TiDB was first bootstrapped. See also [`time_zone`](#time_zone).
 
+### `tidb_adaptive_closest_read_threshold` <span class="version-mark">New in v6.3.0</span>
+
+- Scope: SESSION | GLOBAL
+- Persists to cluster: Yes
+- Default value: `4096`
+- This variable is used to control the threshold at which read requests are preferred to be sent to the replica in the Region where the TiDB server is located when enabling [Follower read](/follower-read.md) and `tidb_replica_read` is set to `closest-adaptive`. If the estimated result is higher than or equal to this threshold, TiDB prefers to send read requests to the replica in the same Region. Otherwise, TiDB sends read requests to the leader replica.
+
 ### tidb_allow_batch_cop <span class="version-mark">New in v4.0</span>
 
 - Scope: SESSION | GLOBAL
