@@ -11,7 +11,7 @@ If your source data is stored in Amazon S3 or GCS buckets, before importing or m
 
 Before you configure the bucket access, note the following: 
 
-- If the role is created without “Require external ID”, once the configuration is done for one TiDB cluster in a project, all TiDB clusters in that project can use the same Role-ARN to access your Amazon S3 bucket. 
+- If the role is created without "Require external ID", once the configuration is done for one TiDB cluster in a project, all TiDB clusters in that project can use the same Role-ARN to access your Amazon S3 bucket. 
 - If the role is created with the account ID and external ID, only the corresponding TiDB cluster can access the bucket.
 
 To allow TiDB Cloud to access the source data in your Amazon S3 bucket, take the following steps to configure the bucket access for TiDB Cloud and get the Role-ARN. 
