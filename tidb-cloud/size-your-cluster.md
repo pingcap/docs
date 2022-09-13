@@ -80,7 +80,7 @@ Recommended number of TiKV nodes: `ceil(compressed size of your data ÷ TiKV sto
 
 Supposing the size of your MySQL dump files is 5 TB and the TiDB compression ratio is 40%, the storage needed is 2048 GB.
 
-Generally, the usage ratio of tikv storage is not recommended to exceed 80%.
+Generally, the usage ratio of TiKV storage is not recommended to exceed 80%.
 
 For example, if you configure the node storage of each TiKV node on AWS as 1024 GB, the required number of TiKV nodes is as follows:
 
