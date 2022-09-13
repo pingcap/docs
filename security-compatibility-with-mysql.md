@@ -38,7 +38,7 @@ The support for TLS authentication is configured differently. For detailed infor
 | `caching_sha2_password`  | Yes, since 5.2.0 |
 | `auth_socket`            | Yes, since 5.3.0 |
 | `tidb_sm3_password`      | Yes, since 6.3.0 |
-| [TLS Certificates]       | Yes              |
+| [TLS Certificates](/enable-tls-between-clients-and-servers.md)       | Yes              |
 | LDAP                     | No               |
 | PAM                      | No               |
 | ed25519 (MariaDB)        | No               |
