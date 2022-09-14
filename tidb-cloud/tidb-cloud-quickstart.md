@@ -39,12 +39,12 @@ To create a free Developer Tier cluster, take the following steps:
 
     > **Tip:**
     >
-    > During the creation process, you can perform security settings for your cluster:
+    > - During the creation process, you can perform security settings for your cluster:
     >
-    > 1. Click **Security Settings** in the upper-right corner of the cluster area.
-    > 2. In the **Security Settings** dialog box, set the root password and allowed IP addresses to connect to your cluster, and then click **Apply**.
+    >     1. Click **Security Settings** in the upper-right corner of the cluster area.
+    >     2. In the **Security Settings** dialog box, set the root password and allowed IP addresses to connect to your cluster, and then click **Apply**.
     >
-    > After your TiDB Cloud cluster is created, and before importing your data or connecting to a client, you can run queries instantly on TiDB Cloud. Click **Playground** to have a try. Playground contains a pre-loaded dataset of GitHub events.
+    > - After your TiDB Cloud cluster is created, and before importing your data or connecting to a client, you can run queries instantly on TiDB Cloud. Click **Playground** to have a try. Playground contains a pre-loaded dataset of GitHub events.
 
 </div>
 
