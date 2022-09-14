@@ -2119,6 +2119,14 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 - When the value is set to `OFF`, the non-transactional DML statement stops immediately at the first error and returns the error. All the following batches are canceled.
 - When the value is set to `ON` and an error occurs in a batch, the following batches will continue to be executed until all batches are executed. All errors occurred during the execution process are returned together in the result.
 
+### tidb_opt_3stage_distinct_agg <span class="version-mark">New in v6.3.0</span>
+
+- Scope: SESSION | GLOBAL
+- Persists to cluster: Yes
+- Default value: `ON`
+- This variable specifies whether to rewrite a `COUNT(DISTINCT)` aggregate into 3 stages aggregation in MPP mode.
+- This variable currently applies to aggregation with only 1 `COUNT(DISTINCT)`.
+
 ### tidb_opt_agg_push_down
 
 - Scope: SESSION
