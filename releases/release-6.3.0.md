@@ -23,17 +23,17 @@ In v6.3.0-DMR, the key new features and improvements are as follows:
 
 ### SQL
 
-* 新增简化 Range 分区定义的语法糖（syntactic sugar）[#issue]() @[mjonss](https://github.com/mjonss)
+* Add a new syntactic sugar to simplify Range partition definitions [#issue]() @[mjonss](https://github.com/mjonss)
 
-    [提供了新的定义 Range 分区的方式](/partitioned-table.md#range-interval-partitioning)，不需要枚举所有分区，可大幅度缩短现有 Range 分区表定义语句冗长的书写方式。语义与原有 Range 分区等价。
+    [Provides INTERVAL partitioning as a new way of defining Range partitions](/partitioned-table.md#range-interval-partitioning). You do not need to enumerate all partitions, which drastically reduces the lengthy way of writing Range partition statements. The semantic is equivalent to the original Range partition.
 
-* Range Columns 分区方式支持定义多列 [#issue]() @[mjonss](https://github.com/mjonss)
+* Range Columns partitioning supports defining multiple columns [#issue]() @[mjonss](https://github.com/mjonss)
 
-    支持 [PARTITION BY RANGE COLUMNS (column_list)](/partitioned-table.md#range-columns-partitioning)，`column_list` 不再限定为单一列，基本功能与 MySQL 等同。
+    Support [PARTITION BY RANGE COLUMNS (column_list)](/partitioned-table.md#range-columns-partitioning). `column_list` is no longer limited to a single column. The basic feature is the same as MySQL.
 
-* 分区表 EXCHANGE PARTITION 功能 GA [#35996](https://github.com/pingcap/tidb/issues/35996) @[ymkzpx](https://github.com/ymkzpx)
+* EXCHANGE PARTITION becomes GA [#35996](https://github.com/pingcap/tidb/issues/35996) @[ymkzpx](https://github.com/ymkzpx)
 
-    [EXCHANGE PARTITION 功能]((/partitioned-table.md#partition-management)通过性能和稳定性提升，由实验功能转为正式功能。
+    [EXCHANGE PARTITION]((/partitioned-table.md#partition-management) becomes GA after performance and stability improvements.
 
 * 增加支持以下[窗口分析函数](/tiflash/tiflash-supported-pushdown-calculations.md)：[#5579](https://github.com/pingcap/tiflash/issues/5579) @[SeaRise](https://github.com/SeaRise) **tw：shichun-0415**
 
