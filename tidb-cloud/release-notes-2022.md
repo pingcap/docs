@@ -6,7 +6,21 @@ aliases: ['/tidbcloud/beta/supported-tidb-versions','/tidbcloud/release-notes']
 
 # TiDB Cloud Release Notes in 2022
 
-This page lists the release notes of [TiDB Cloud](https://pingcap.com/tidb-cloud/?from=en) in 2022.
+This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-cloud/) in 2022.
+
+## September 13, 2022
+
+**General changes**
+
+* Support a new Google Cloud region for [Dedicated Tier](/tidb-cloud/select-cluster-tier.md#dedicated-tier) clusters: `N. Virginia (us-east4)`.
+
+## September 9, 2022
+
+**General changes**
+
+* Provide [more metrics](/tidb-cloud/monitor-datadog-integration.md#metrics-available-to-datadog) of Dedicated Tier clusters in Datadog to help you better understand the cluster performance status.
+
+    If you have [integrated TiDB Cloud with Datadog](/tidb-cloud/monitor-datadog-integration.md), you can view these metrics in your Datadog dashboards directly.
 
 ## September 6, 2022
 

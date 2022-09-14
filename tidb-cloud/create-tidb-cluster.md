@@ -23,7 +23,7 @@ TiDB Cloud provides the following two cluster tier options. Before creating a Ti
 
 - Developer Tier
 
-    The TiDB Cloud Developer Tier is a one-year free trial of [TiDB Cloud](https://pingcap.com/products/tidbcloud), the fully managed service of TiDB. You can use Developer Tier clusters for non-production workloads such as prototype applications, hackathons, academic courses, or to provide a temporary data service for non-commercial datasets.
+    The TiDB Cloud Developer Tier is a one-year free trial of [TiDB Cloud](https://www.pingcap.com/tidb-cloud/), the fully managed service of TiDB. You can use Developer Tier clusters for non-production workloads such as prototype applications, hackathons, academic courses, or to provide a temporary data service for non-commercial datasets.
 
 - Dedicated Tier
 
