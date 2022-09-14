@@ -117,7 +117,7 @@ To import the Parquet files to TiDB Cloud, take the following steps:
         >
         > When you use this feature, one import task can only import data to a single table at a time. If you want to use this feature to import data into different tables, you need to import several times, each time specifying a different target table.
 
-        When you use this feature, you need to specify a custom mapping rule between Parquet files and a single target table in the following fields:
+        To modify the file pattern, click **Modify**, specify a custom mapping rule between Parquet files and a single target table in the following fields, and then click **Scan**. After that, the data source files will be re-scanned using the provided custom mapping rule.
 
         - **Source file name**: enter a pattern that matches the names of the Parquet files to be imported. If you have one Parquet file only, you can enter the filename here directly. Note that the names of the Parquet files must include the suffix `.parquet`.
 
@@ -128,7 +128,7 @@ To import the Parquet files to TiDB Cloud, take the following steps:
 
         - **Target table name**: enter the name of the target table in TiDB Cloud, which must be in the `${db_name}.${table_name}` format. For example, `mydb.mytable`. Note that this field only accepts one specific table name, so wildcards are not supported.
 
-    - **Tables Filter**: if you want to filter which tables to be imported, you can specify table filter rules in this field.
+    - **Tables Filter**: if you want to filter which tables to be imported, you can specify table filter rules in this area.
 
         For example:
 
@@ -141,7 +141,7 @@ To import the Parquet files to TiDB Cloud, take the following steps:
 
 5. Click **Next**.
 
-6. On the **Preview** page, confirm the import data and then click **Start Import**.
+6. On the **Preview** page, confirm the data to be imported and then click **Start Import**.
 
 7. When the import progress shows **Finished**, check the imported tables.
 
