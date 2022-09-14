@@ -44,7 +44,7 @@ To register extended statistics, use the SQL statement `ALTER TABLE ADD STATS_EX
 ALTER TABLE table_name ADD STATS_EXTENDED IF NOT EXISTS stats_name stats_type(column_name, column_name...);
 ```
 
-In the statement, you can specify the table name, statistics name, statistics type, and column name of the extended statistics to be collected.
+In the syntax, you can specify the table name, statistics name, statistics type, and column name of the extended statistics to be collected.
 
 - `table_name` specifies the name of the table from which the extended statistics are collected.
 - `stats_name` specifies the name of the statistics, which must be unique for each table.
@@ -103,59 +103,55 @@ Other TiDB nodes will read this change and delete the record in their memory cac
 
 The way of exporting or importing extended statistics is the same as exporting or importing regular statistics. See [Introduction to Statistics - Import and export statistics](/statistics.md#import-and-export-statistics) for details.
 
-## Usage scenarios and examples
+## Usage examples
 
-There are multiple types of extended statistics. Currently, TiDB only supports the correlation type. This type is used to estimate the number of rows in the range query. The following example shows how to use the correlation type to estimate the number of rows in range queries.
+There are multiple types of extended statistics. Currently, TiDB only supports the correlation type. This type is used to estimate the number of rows in the range query and improve index selection. The following example shows how the correlation type extended statistics to estimate the number of rows in range queries.
 
-### Define the table
+### Stage 1. Define the table
 
-For a table `t` defined as follows:
+A table `t` is defined as follows:
 
 ```sql
 CREATE TABLE t(col1 INT, col2 INT, KEY(col1), KEY(col2));
 ```
 
-Suppose that the `col1` and `col2` of the table `t` both obey monotonically increasing constraints in row order, i.e., the values of `col1` and `col2` are strictly correlated in order (the value of the correlation is 1).
+Suppose that `col1` and `col2` of table `t` both obey monotonically increasing constraints in row order. This means that the values of `col1` and `col2` are strictly correlated in order, and the correlation factor is `1`.
 
-### Make an example query
+### Stage 2. Execute an example query without extended statistics
 
-{{< copyable "sql" >}}
+Execute the following query without using extended statistics.
 
 ```sql
 SELECT * FROM t WHERE col1 > 1 ORDER BY col2 LIMIT 1;
 ```
 
-For the above query, the optimizer has two choices to access the table `t`:
+For the execution of the preceding query, the TiDB optimizer has the following options to access table `t`:
 
-- one uses the index on `col1` to access the table and then sorts the result by `col2` to calculate the `Top-1`.
-- Another is that access the table by index on `col2` to meet the first row that satisfies `col1 > 1`. The latter's cost mainly depends on how many rows are filtered out when we scan the table in `col2`'s order.
+- Uses the index on `col1` to access table `t` and then sorts the result by `col2` to calculate `Top-1`.
+- Uses the index on `col2` to meet the first row that satisfies `col1 > 1`. The cost of this access method mainly depends on how many rows are filtered out when TiDB scans the table in `col2`'s order.
 
-Usually, the optimizer can only suppose that `col1` and `col2` are independent, leading to a significant estimation error.
+Without extended statistics, the TiDB optimizer only supposes that `col1` and `col2` are independent, which **leads to a significant estimation error**.
 
-### Register extended statistics
+### Stage 3. Enable extended statistics
 
-After setting `tidb_enable_extended_stats` to `ON`, register the extended statistics:
+Set `tidb_enable_extended_stats` to `ON`, and register the extended statistics:
 
 ```sql
 ALTER TABLE t ADD STATS_EXTENDED s1 correlation(col1, col2);
 ```
 
-When we run the `ANALYZE` after the registration, TiDB will calculate the [Pearson correlation coefficient](https://en.wikipedia.org/wiki/Pearson_correlation_coefficient) of the `col` and `col2` of the table `t` and write the record into the table `mysql.stats_extended`.
+When you execute `ANALYZE` after the registration, TiDB calculates the [Pearson correlation coefficient](https://en.wikipedia.org/wiki/Pearson_correlation_coefficient) of `col` and `col2` of table `t`, and write the record into the `mysql.stats_extended` table.
 
-It's used to improve TiDB's index selection for the following scenario:
+### Stage 4. See how extended statistics make a difference
 
-### How extended statistics make a difference
+After TiDB has the extended statistics for correlation, the optimizer can estimate how many rows to be scanned more precisely.
 
-After the TiDB has the extended statistics for correlation, the optimizer can estimate how many rows we need to scan more precisely. Since the `col1` and `col2` are strictly correlated in order, the optimizer will equivalently translate the row count estimate for option two above into:
-
-{{< copyable "sql" >}}
+At this time, for the query in [Stage 2. Execute an example query without extended statistics](#stage-2-execute-an-example-query-without-extended-statistics), `col1` and `col2` are strictly correlated in order. If TiDB accesses table `t` by using the index on `col2` to meet the first row that satisfies `col1 > 1`, the TiDB optimizer will equivalently translate the row count estimation into the following query:
 
 ```sql
 SELECT * FROM t WHERE col1 <= 1 OR col1 IS NULL;
 ```
 
-The above estimation plus one will be the final estimation for the condition. This way, we don't need to use the independent assumption to get a significant estimation error.
+The preceding query result plus one will be the final estimation for the row count. In this way, you do not need to use the independent assumption and **the significant estimation error is avoided**.
 
-The optimizer will use the independent assumption if the correlation factor is less than the system variable `tidb_opt_correlation_threshold`. But it will increase the estimation heuristically. The larger the system variable `tidb_opt_correlation_exp_factor` is, the larger the estimation result is. The larger the absolute value of the correlation factor is, the larger the estimation result is.
-
-
+If the correlation factor (`1` in this example) is less than the value of the system variable `tidb_opt_correlation_threshold`, the optimizer will use the independent assumption, but it will also increase the estimation heuristically. The larger the value of `tidb_opt_correlation_exp_factor`, the larger the estimation result. The larger the absolute value of the correlation factor, the larger the estimation result.
