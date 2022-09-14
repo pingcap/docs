@@ -30,10 +30,6 @@ To connect to a Developer Tier cluster via standard connection, perform the foll
 
 2. Locate your cluster, and click **Connect** in the upper-right corner of the cluster area. A connection dialog box is displayed.
 
-    > **Tip:**
-    >
-    > Alternatively, you can also click the name of your cluster on the **Clusters** page and click **Connect** in the upper-right corner.
-
 3. Create a traffic filter for the cluster. Traffic filter is a list of IPs and CIDR addresses that are allowed to access TiDB Cloud via a SQL client.
 
     If the traffic filter is already set, skip the following sub-steps. If the traffic filter is empty, take the following sub-steps to add one.
@@ -65,7 +61,7 @@ To connect to a Dedicated Tier cluster via standard connection, perform the foll
 
     > **Tip:**
     >
-    > Alternatively, you can also click the name of your cluster on the **Clusters** page and click **Connect** in the upper-right corner.
+    > Alternatively, you can also click the name of your newly created cluster on the **Clusters** page, and then click **Setup** in the **Connection** area.
 
 3. Create a traffic filter for the cluster. Traffic filter is a list of IPs and CIDR addresses that are allowed to access TiDB Cloud via a SQL client.
 
@@ -125,10 +121,6 @@ To connect to your TiDB cluster via VPC peering, perform the following steps:
 
 2. Locate your cluster, click **Connect** in the upper-right corner of the cluster area, and select the **VPC Peering** tab in the connection dialog.
 
-    > **Tip:**
-    >
-    > Alternatively, you can also click the name of your cluster on the **Clusters** page and click **Connect** in the upper-right corner.
-
 3. Set up VPC peering. See [Set up VPC Peering](/tidb-cloud/set-up-vpc-peering-connections.md) for details.
 
 4. Click **Get Endpoint** and wait for a few minutes. Then the connection command displays in the dialog.
@@ -142,10 +134,6 @@ To connect to your TiDB cluster using SQL shell, perform the following steps:
 1. Navigate to the **Clusters** page.
 
 2. Locate your cluster, click **Connect** in the upper-right corner of the cluster area, and select the **Web SQL Shell** tab in the connection dialog.
-
-    > **Tip:**
-    >
-    > Alternatively, you can also click the name of your cluster on the **Clusters** page and click **Connect** in the upper-right corner.
 
 3. Click **Open SQL Shell**.
 
