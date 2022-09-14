@@ -25,7 +25,7 @@ To import data, perform the following steps:
 
 6. Add the table filter rules if needed. Click **Next**.
 
-    - **Table Filter**: If you want to filter which tables to be imported, you can specify one or more table filters in this field, separated by `,`.
+    - **Table Filter**: if you want to filter which tables to be imported, you can specify table filter rules in this field.
 
         For example:
 

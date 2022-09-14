@@ -128,7 +128,7 @@ To import the Parquet files to TiDB Cloud, take the following steps:
 
         - **Target table name**: enter the name of the target table in TiDB Cloud, which must be in the `${db_name}.${table_name}` format. For example, `mydb.mytable`. Note that this field only accepts one specific table name, so wildcards are not supported.
 
-    - **Tables Filter**: if you want to filter which tables to be imported, you can specify one or more table filters in this field, separated by `,`.
+    - **Tables Filter**: if you want to filter which tables to be imported, you can specify table filter rules in this field.
 
         For example:
 
