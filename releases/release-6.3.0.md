@@ -23,17 +23,17 @@ In v6.3.0-DMR, the key new features and improvements are as follows:
 
 ### SQL
 
-* 新增简化 Range 分区定义的语法糖衣 [#issue]() @[mjonss](https://github.com/mjonss) **tw: hfxsd**
+* 新增简化 Range 分区定义的语法糖（syntactic sugar）[#issue]() @[mjonss](https://github.com/mjonss)
 
-    [新的定义 Range 分区的方式](用户文档链接)，不需要枚举所有分区，可大幅度缩短现有 Range 分区表定义语句冗长的书写方式，语义与原有 Range 分区等价。
+    [提供了新的定义 Range 分区的方式](/partitioned-table.md#range-interval-partitioning)，不需要枚举所有分区，可大幅度缩短现有 Range 分区表定义语句冗长的书写方式。语义与原有 Range 分区等价。
 
-* Range Columns 分区方式支持定义多列 [#issue]() @[mjonss](https://github.com/mjonss) **tw: hfxsd**
+* Range Columns 分区方式支持定义多列 [#issue]() @[mjonss](https://github.com/mjonss)
 
-    支持 [PARTITION BY RANGE COLUMNS (column_list)](用户文档链接)，`column_list` 不再限定为单一列，基本功能与 MySQL 等同。
+    支持 [PARTITION BY RANGE COLUMNS (column_list)](/partitioned-table.md#range-columns-partitioning)，`column_list` 不再限定为单一列，基本功能与 MySQL 等同。
 
-* 分区表 EXCHANGE PARTITION 功能 GA [#35996](https://github.com/pingcap/tidb/issues/35996) @[ymkzpx](https://github.com/ymkzpx) **tw: hfxsd**
+* 分区表 EXCHANGE PARTITION 功能 GA [#35996](https://github.com/pingcap/tidb/issues/35996) @[ymkzpx](https://github.com/ymkzpx)
 
-    [EXCHANGE PARTITION 功能](用户文档链接)通过性能和稳定性提升，由实验功能转为正式功能。
+    [EXCHANGE PARTITION 功能]((/partitioned-table.md#partition-management)通过性能和稳定性提升，由实验功能转为正式功能。
 
 * 增加支持以下[窗口分析函数](/tiflash/tiflash-supported-pushdown-calculations.md)：[#5579](https://github.com/pingcap/tiflash/issues/5579) @[SeaRise](https://github.com/SeaRise) **tw：shichun-0415**
 
