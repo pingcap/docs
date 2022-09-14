@@ -2130,7 +2130,7 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 ### tidb_opt_cartesian_bcj
 
 - Scope: SESSION | GLOBAL
-- Persists to cluster: YES
+- Persists to cluster: Yes
 - Type: Integer
 - Default value: `1`
 - Range: `[0, 2]`
@@ -2141,7 +2141,7 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 ### tidb_opt_concurrency_factor
 
 - Scope: SESSION | GLOBAL
-- Persists to cluster: YES
+- Persists to cluster: Yes
 - Type: Float
 - Range: `[0, 2147483647]`
 - Default value: `3.0`
@@ -2150,7 +2150,7 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 ### tidb_opt_cop_cpu_factor
 
 - Scope: SESSION | GLOBAL
-- Persists to cluster: YES
+- Persists to cluster: Yes
 - Type: Float
 - Range: `[0, 2147483647]`
 - Default value: `3.0`
@@ -2181,7 +2181,7 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 ### tidb_opt_cpu_factor
 
 - Scope: SESSION | GLOBAL
-- Persists to cluster: YES
+- Persists to cluster: Yes
 - Type: Float
 - Range: `[0, 2147483647]`
 - Default value: `3.0`
@@ -2190,7 +2190,7 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 ### tidb_opt_desc_scan_factor
 
 - Scope: SESSION | GLOBAL
-- Persists to cluster: YES
+- Persists to cluster: Yes
 - Type: Float
 - Range: `[0, 2147483647]`
 - Default value: `3.0`
@@ -2199,7 +2199,7 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 ### tidb_opt_disk_factor
 
 - Scope: SESSION | GLOBAL
-- Persists to cluster: YES
+- Persists to cluster: Yes
 - Type: Float
 - Range: `[0, 2147483647]`
 - Default value: `1.5`
@@ -2287,7 +2287,7 @@ mysql> desc select count(distinct a) from test.t;
 ### tidb_opt_memory_factor
 
 - Scope: SESSION | GLOBAL
-- Persists to cluster: YES
+- Persists to cluster: Yes
 - Type: Float
 - Range: `[0, 2147483647]`
 - Default value: `0.001`
@@ -2304,7 +2304,7 @@ mysql> desc select count(distinct a) from test.t;
 ### tidb_opt_network_factor
 
 - Scope: SESSION | GLOBAL
-- Persists to cluster: YES
+- Persists to cluster: Yes
 - Type: Float
 - Range: `[0, 2147483647]`
 - Default value: `1.0`
@@ -2354,7 +2354,7 @@ explain select * from t where age=5;
 ### tidb_opt_scan_factor
 
 - Scope: SESSION | GLOBAL
-- Persists to cluster: YES
+- Persists to cluster: Yes
 - Type: Float
 - Range: `[0, 2147483647]`
 - Default value: `1.5`
@@ -2363,7 +2363,7 @@ explain select * from t where age=5;
 ### tidb_opt_seek_factor
 
 - Scope: SESSION | GLOBAL
-- Persists to cluster: YES
+- Persists to cluster: Yes
 - Type: Float
 - Range: `[0, 2147483647]`
 - Default value: `20`
