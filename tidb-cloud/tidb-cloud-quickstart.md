@@ -116,7 +116,7 @@ To create a Dedicated Tier cluster, take the following steps:
 
     To connect to a Dedicated Tier cluster, take the following steps:
 
-    1. Under **Step 2: Download TiDB Cloud Server CA** in the dialog, click **Download TiDB Server CA** if you need to import the TiDB Cloud server certificate to your client for TLS connection.
+    1. Under **Step 2: Download TiDB Cloud Root CA** in the dialog, click **Download TiDB Server CA** if you need to import the TiDB Cloud server certificate to your client for TLS connection.
 
     2. Under **Step 3: Connect with a SQL client** in the dialog, click the tab of your preferred connection method, and then connect to your cluster with the connection string.
 
