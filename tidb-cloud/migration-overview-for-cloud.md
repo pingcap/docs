@@ -9,7 +9,7 @@ You can migrate data from a wide variety of data sources to TiDB Cloud. This doc
 
 ## Configure Amazon S3 access and GCS access
 
-If your source data is stored in Amazon S3 or GCS buckets, before importing or migrating the data to TiDB Cloud, you need to configure cross-account access to the buckets. For more information, see [Configure Amazon S3 access and GCS access](/tidb-cloud/config-s3-and-gcs-access.md).
+If your source data is stored in Amazon S3 or Google Cloud Storage (GCS) buckets, before importing or migrating the data to TiDB Cloud, you need to configure access to the buckets. For more information, see [Configure Amazon S3 access and GCS access](/tidb-cloud/config-s3-and-gcs-access.md).
 
 ## Migrate data from MySQL-compatible databases
 

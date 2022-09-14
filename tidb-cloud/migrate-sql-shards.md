@@ -77,6 +77,15 @@ When you use Dumpling to export data to Amazon S3, note the following:
 - Choose the appropriate concurrency by configuring the `-t` option to minimize the impact on the upstream cluster, or export directly from the backup database. For more information about how to use this parameter, see [Option list of Dumpling](dumpling-overview.md#option-list-of-dumpling).
 - Set appropriate values for `--filetype csv` and `--no-schemas`. For more information about how to use these parameters, see [Option list of Dumpling](dumpling-overview.md#option-list-of-dumpling).
 
+Name the CSV files as follows:
+
+    - If a CSV file contains all data of an entire table, name the file in the `${db_name}.${table_name}.csv` format, which maps to the `${db_name}.${table_name}` table when you import the data.
+    - If the data of one table is separated into multiple CSV files, append a numeric suffix to these CSV files. For example, `${db_name}.${table_name}.000001.csv` and `${db_name}.${table_name}.000002.csv`. The numeric suffixes can be inconsecutive but must be in ascending order. You also need to add extra zeros before the number to ensure all the suffixes are in the same length.
+
+    > **Note:**
+    >
+    > If you cannot update the CSV filenames according to the preceding rules in some cases (for example, the CSV file links are also used by your other programs), you can keep the filenames unchanged and use the **File Patterns** in [Step 5](#step-5-perform-the-data-import-task) to import your source data to a single target table.
+
 To export data to Amazon S3, do the following:
 
 1. Get the `AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY` of the Amazon S3 bucket.
@@ -181,7 +190,7 @@ After configuring the Amazon S3 access, you can perform the data import task in 
 
     If the location of the bucket is different from your cluster, confirm the compliance of cross region. Click **Next**.
 
-    TiDB Cloud starts validating whether it can access your data in the specified bucket URL. If you get the `AccessDenied` error, see [Troubleshoot Access Denied Errors during Data Import from S3](/tidb-cloud/troubleshoot-import-access-denied-error.md).
+    TiDB Cloud starts validating whether it can access your data in the specified bucket URL. After validation, TiDB Cloud tries to scan all the files in the data source using the default file naming pattern, and returns a scan summary result on the left side of the next page. If you get the `AccessDenied` error, see [Troubleshoot Access Denied Errors during Data Import from S3](/tidb-cloud/troubleshoot-import-access-denied-error.md).
 
 4. Modify the file patterns and add the table filter rules if needed.
 
@@ -201,20 +210,11 @@ After configuring the Amazon S3 access, you can perform the data import task in 
 
         - **Target table name**: enter the name of the target table in TiDB Cloud, which must be in the `${db_name}.${table_name}` format. For example, `mydb.mytable`. Note that this field only accepts one specific table name, so wildcards are not supported.
 
-    - **Table Filter**: If you want to filter which tables to be imported, you can specify one or more table filters in this field, separated by `,`.
-
-        For example:
-
-        - `db01.*`: all tables in the `db01` database will be imported.
-        - `db01.table01*,db01.table02*`: all tables starting with `table01` and `table02` in the `db01` database will be imported.
-        - `!db02.*`: except the tables in the `db02` database, all other tables will be imported. `!` is used to exclude tables that do not need to be imported.
-        - `*.*` : all tables will be imported.
-
-        For more information, see [table filter snytax](/table-filter.md#syntax).
+    - **Table Filter**: If you want to filter which tables to be imported, you can specify one or more table filter rules in this field.
 
 5. Click **Next**.
 
-6. On the **Preview** page, check and update the CSV specific configurations, including separator, delimiter, header, not-null, null, backslash-escape, and trim-last-separator. You can click the **Click here to edit csv configuration** link in the upper-right corner of the preview table to change the CSV configurations.
+6. On the **Preview** page, you can have a preview of the data, and click the **Click here to edit csv configuration** link to check and update the CSV-specific configurations, including separator, delimiter, header, not-null, null, backslash-escape, and trim-last-separator.
 
     > **Note:**
     >
