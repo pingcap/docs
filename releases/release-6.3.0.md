@@ -56,13 +56,13 @@ In v6.3.0-DMR, the key new features and improvements are as follows:
 
     TiDB 采用 F1 论文中的在线异步变更算法实现 DDL 变更：事务在执行时会获取开始时对应的元数据快照，如果事务执行过程中相关表上发生了元数据的更改，为了保证数据的一致性，TiDB 会返回 `Information schema is changed` 的异常，导致用户事务提交失败。为了解决这个问题，在 v6.3.0 版本中，TiDB 在 Online DDL 算法中引入了[元数据锁](/metadata-lock.md) 特性，通过协调表元数据变更过程中 DML 语句和 DDL 语句的优先级，让执行中的 DDL 语句等待持有旧版本元数据的 DML 语句提交，尽可能避免 DML 语句报错。
 
-* 提升添加索引的性能并减少对 DML 事务的影响 [#35983](https://github.com/pingcap/tidb/issues/35983) @[benjamin2037](https://github.com/benjamin2037) **tw: Oreoxmt**
+* Improve the performance of adding indexes and reduce the impact on DML transactions [#35983](https://github.com/pingcap/tidb/issues/35983) @[benjamin2037](https://github.com/benjamin2037) **tw: Oreoxmt**
 
-    开启[添加索引加速](/system-variables.md#tidb_ddl_enable_fast_reorg-从-v630-版本开始引入)后，TiDB 预期提升添加索引性能为原来的 3 倍。
+    To improve the speed of backfilling when creating an index, TiDB v6.3.0 introduces the acceleration of `ADD INDEX` and `CREATE INDEX` DDL operations using the [`tidb_ddl_enable_fast_reorg`](/system-variables.md#tidb_ddl_enable_fast_reorg-new-in-v630) system variable. When this feature is enabled, the TiDB performance of adding indexes is about three times faster than the original.
 
-* TiDB 支持更多正则表达式 [#](https://github.com/pingcap/tidb/issues/) @[windtalker](https://github.com/windtalker) **tw: Oreoxmt**
+* TiDB supports more regular expressions [#23881](https://github.com/pingcap/tidb/issues/23881) @[windtalker](https://github.com/windtalker) **tw: Oreoxmt**
 
-    TiDB 新增支持 [`REGEXP_SUBSTR`、`REGEXP_REPLACE`、`REGEXP_LIKE` 和 `REGEXP_INSTR` 4 个正则表达式函数](/functions-and-operators/string-functions.md#支持的函数)，支持基于模式的模糊查询和正则替换等操作。
+    TiDB v6.3.0 supports four regular expression functions, `REGEXP_INSTR()`, `REGEXP_LIKE()`, `REGEXP_REPLACE()`, and `REGEXP_SUBSTR()` introduced in MySQL 8.0, which support schema-based fuzzy query and regular replacement. For more details about the compatibility with MySQL, see [Regular expression compatibility with MySQL](/functions-and-operators/string-functions.md#regular-expression-compatibility-with-mysql).
 
 ### Security
 
