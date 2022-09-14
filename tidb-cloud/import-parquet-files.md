@@ -93,7 +93,7 @@ To allow TiDB Cloud to access the Parquet files in the Amazon S3 or GCS bucket, 
 
 To import the Parquet files to TiDB Cloud, take the following steps:
 
-1. Log in to the [TiDB Cloud](https://tidbcloud.com/signin) console, and navigate to the **Clusters** page.
+1. Log in to the [TiDB Cloud console](https://tidbcloud.com/), and navigate to the **Clusters** page.
 
 2. Locate your target cluster, click **...** in the upper-right corner of the cluster area, and select **Import Data**. The **Data Import** page is displayed.
 
@@ -105,7 +105,7 @@ To import the Parquet files to TiDB Cloud, take the following steps:
     - **Role-ARN**: (This field is visible only for AWS S3): enter the Role ARN value for **Role-ARN**.
     - **Target Cluster**: shows the cluster name and the region name.
 
-    If the location of the bucket is different from your cluster, confirm the compliance of cross region. Click **Next**.
+    If the region of the bucket is different from your cluster, confirm the compliance of cross region. Click **Next**.
     
     TiDB Cloud starts validating whether it can access your data in the specified bucket URL. If you get the `AccessDenied` error, see [Troubleshoot Access Denied Errors during Data Import from S3](/tidb-cloud/troubleshoot-import-access-denied-error.md).
 
@@ -119,7 +119,7 @@ To import the Parquet files to TiDB Cloud, take the following steps:
 
         When you use this feature, you need to specify a custom mapping rule between Parquet files and a single target table in the following fields:
 
-        - **Source file name**: enter a pattern that matches the names of the Parquet files to be imported. If you have one Parquet file only, you can enter the filename here directly. Note that the names of the Parquet files must include the suffix ".parquet ".
+        - **Source file name**: enter a pattern that matches the names of the Parquet files to be imported. If you have one Parquet file only, you can enter the filename here directly. Note that the names of the Parquet files must include the suffix `.parquet`.
 
             For example:
 

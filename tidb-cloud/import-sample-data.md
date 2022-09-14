@@ -7,7 +7,7 @@ summary: Learn how to import sample data into TiDB Cloud via UI.
 
 This document describes how to import sample data into TiDB Cloud via the UI. The sample data used is the system data from Capital Bikeshare, released under the Capital Bikeshare Data License Agreement. Before importing the sample data, you need to have one TiDB cluster.
 
-1. Log in to the [TiDB Cloud](https://tidbcloud.com/signin) console, and navigate to the **Clusters** page.
+1. Log in to the [TiDB Cloud console](https://tidbcloud.com/), and navigate to the **Clusters** page.
 
 2. Locate your cluster, click **...** in the upper-right corner of the cluster area, and select **Import Data**. The **Data Import** page is displayed.
 
@@ -24,7 +24,7 @@ This document describes how to import sample data into TiDB Cloud via the UI. Th
     - **Role-ARN**: enter `arn:aws:iam::385595570414:role/import-sample-access`
     - **Target Cluster**: shows the cluster name and the region name.
 
-   If the location of the bucket is different from your cluster, confirm the compliance of cross region. Click **Next**.
+   If the region of the bucket is different from your cluster, confirm the compliance of cross region. Click **Next**.
 
     </div>
 
@@ -37,7 +37,7 @@ This document describes how to import sample data into TiDB Cloud via the UI. Th
     - **Bucket URL**: enter the sample data URL `gs://tidbcloud-samples-us-west1`.
     - **Target Cluster**: shows the cluster name and the region name.
 
-    If the location of the bucket is different from your cluster, confirm the compliance of cross region. Click **Next**.
+    If the region of the bucket is different from your cluster, confirm the compliance of cross region. Click **Next**.
 
     </div>
     </SimpleTab>

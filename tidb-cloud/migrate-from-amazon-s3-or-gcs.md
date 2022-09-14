@@ -73,7 +73,7 @@ For detailed steps, see [Configure Amazon S3 access](/tidb-cloud/config-s3-and-g
     - **Role-ARN**: enter the Role-ARN you obtained in [Step 2](#step-2-configure-amazon-s3-access).
     - **Target Cluster**: shows the cluster name and the region name.
 
-    If the location of the bucket is different from your cluster, confirm the compliance of cross region. Click **Next**.
+    If the region of the bucket is different from your cluster, confirm the compliance of cross region. Click **Next**.
     
     TiDB Cloud starts validating whether it can access your data in the specified bucket URL. If you get the `AccessDenied` error, see [Troubleshoot Access Denied Errors during Data Import from S3](/tidb-cloud/troubleshoot-import-access-denied-error.md).
 

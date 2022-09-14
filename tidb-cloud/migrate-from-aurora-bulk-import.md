@@ -40,7 +40,7 @@ To import data, perform the following steps:
 
 > **Note:**
 >
-> - If your task fails, refer to [Learn how to clean up incomplete data](#learn-how-to-clean-up-incomplete-data).
+> If your task fails, refer to [Learn how to clean up incomplete data](#learn-how-to-clean-up-incomplete-data).
 
 ## Learn how to create an Amazon S3 Bucket and prepare source data files
 

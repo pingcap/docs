@@ -121,7 +121,7 @@ We provide Capital Bikeshare sample data for you to easily import data and run s
 
 1. Navigate to the **Clusters** page.
 
-2. In the area of your newly created cluster, click **...** in the upper-right corner of the cluster area, and select **Import Data**. The **Data Import** page is displayed.
+2. In the area of your newly created cluster, click **...** in the upper-right corner, and select **Import Data**. The **Data Import** page is displayed.
 
 3. Fill in the import parameters:
 
@@ -136,7 +136,7 @@ We provide Capital Bikeshare sample data for you to easily import data and run s
     - **Role-ARN**: enter `arn:aws:iam::385595570414:role/import-sample-access`
     - **Target Cluster**: shows the cluster name and the region name.
 
-    If the location of the bucket is different from your cluster, confirm the compliance of cross region. Click **Next**.
+    If the region of the bucket is different from your cluster, confirm the compliance of cross region. Click **Next**.
 
     </div>
 
@@ -151,7 +151,7 @@ We provide Capital Bikeshare sample data for you to easily import data and run s
 
     If the location of the bucket is different from your cluster, confirm the compliance of cross region. Click **Next**.
     
-    TiDB Cloud starts validating whether it can access the sample data in the specified bucket URL. If you get the `AccessDenied` error, see [Troubleshoot Access Denied Errors during Data Import from S3](/tidb-cloud/troubleshoot-import-access-denied-error.md).
+    TiDB Cloud starts validating whether it can access the sample data in the specified bucket URL.
 
     </div>
     </SimpleTab>
