@@ -208,7 +208,7 @@ To migrate data from Aurora, you need to back up the schema of the database.
 
  10. From the task table, record the destination bucket (for example, `s3://snapshot-bucket/snapshot-samples-1`).
 
-## Learn how to configure cross-account access
+## Learn how to configure access to Amazon S3
 
 The TiDB Cloud cluster and the S3 bucket are in different AWS accounts. To allow the TiDB Cloud cluster to access the source data files in the S3 bucket, you need to configure the cross-account access to Amazon S3. For more information, see [Configure Amazon S3 access](/tidb-cloud/config-s3-and-gcs-access.md#configure-amazon-s3-access).
 
