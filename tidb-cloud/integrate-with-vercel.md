@@ -41,9 +41,9 @@ To connect to a TiDB Cloud cluster, the traffic filter of your TiDB Cloud cluste
 
 ## Connect via the TiDB Cloud Vercel Integration
 
-You can install the [TiDB Cloud integration](https://vercel.com/integrations/tidb-cloud-dev) from the [Vercel's Integrations Marketplace](https://vercel.com/integrations). You can choose which cluster you want to connect to, and we'll automatically generate all the necessary environment variables into your Vercel projects.
+You can install the [TiDB Cloud integration](https://vercel.com/integrations/tidb-cloud) from the [Vercel's Integrations Marketplace](https://vercel.com/integrations). You can choose which cluster you want to connect to, and we'll automatically generate all the necessary environment variables into your Vercel projects.
 
-1. Click **Add Integration** button on the [TiDB Cloud integration page](https://vercel.com/integrations/tidb-cloud-dev).
+1. Click **Add Integration** button on the [TiDB Cloud integration page](https://vercel.com/integrations/tidb-cloud).
 2. Choose the scope of your integration (personal or team).
 3. Select Vercel projects to connect to a TiDB Cloud cluster.
 4. Confirm the required permissions for integration.
