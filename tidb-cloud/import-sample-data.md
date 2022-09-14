@@ -8,7 +8,7 @@ summary: Learn how to import sample data into TiDB Cloud via UI.
 This document describes how to import sample data into TiDB Cloud via the UI. The sample data used is the system data from Capital Bikeshare, released under the Capital Bikeshare Data License Agreement. Before importing the sample data, you need to have one TiDB cluster.
 
 1. Navigate to the **Clusters** page.
-2. Locate your cluster, click **...** in the upper-right corner of the cluster area, and select **Import Data**. The **Data Import Task** page is displayed.
+2. Locate your cluster, click **...** in the upper-right corner of the cluster area, and select **Import Data**. The **Data Import** page is displayed.
 
     > **Tip:**
     >

@@ -12,7 +12,7 @@ This document describes how to migrate data from Amazon Aurora MySQL to TiDB Clo
 To import data, perform the following steps:
 
 1. Navigate to the **Clusters** page.
-2. Locate your target cluster, click **...** in the upper-right corner of the cluster area, and select **Import Data**. The **Data Import Task** page is displayed.
+2. Locate your target cluster, click **...** in the upper-right corner of the cluster area, and select **Import Data**. The **Data Import** page is displayed.
 
     > **Tip:**
     >
