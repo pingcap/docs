@@ -985,7 +985,7 @@ Constraint checking is always performed in place for pessimistic transactions (d
 - Scope: SESSION | GLOBAL
 - Type: Boolean
 - Default value: `OFF`
-- This variable indicates whether TiDB can collect the extended statistic to guide the optimizer. Refer to the chapter [Introduction to Extended Statistics](./extended-statistics.md) for more information.
+- This variable indicates whether TiDB can collect the extended statistic to guide the optimizer. Refer to the chapter [Introduction to Extended Statistics](/extended-statistics.md) for more information.
 
 ### tidb_enable_fast_analyze
 
