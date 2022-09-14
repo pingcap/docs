@@ -777,14 +777,14 @@ Usage:
 
 Use this command to view the running status and related diagnostic information of the `balance-region-scheduler`.
 
-Since TiDB v6.3.0, PD providers the function of running status and brief diagnosis information for `balance-region-scheduler`. Other schedulers and checkers are not supported yet.
+Since TiDB v6.3.0, PD provides the function of running status and brief diagnostic information for `balance-region-scheduler` and `balance-leader-scheduler`. Other schedulers and checkers are not supported yet. To enable this feature, you can modify the [`enable-diagnostic`](/pd-configuration-file.md#enable-diagnostic-new-in-v630) configuration item using `pd-ctl`.
 
 The status of the scheduler can be one of the following:
 
 - `disabled`: the scheduler is unavailable or removed.
 - `paused`: the scheduler is paused.
 - `scheduling`: the scheduler is generating or executing scheduling operators.
-- `pending`: the scheduler cannot generate scheduling operators. For a scheduler in the `pending` status, a brief diagnosis information is returned. The brief information describes status of stores and explains why these stores cannot be selected for scheduling.
+- `pending`: the scheduler cannot generate scheduling operators. For a scheduler in the `pending` status, brief diagnostic information is returned. The brief information describes the status of stores and explains why these stores cannot be selected for scheduling.
 - `normal`: there is no need to generate scheduling operators.
 
 ### `scheduler config balance-leader-scheduler`
