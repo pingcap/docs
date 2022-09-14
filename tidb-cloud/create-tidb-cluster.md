@@ -74,12 +74,10 @@ To create a Developer Tier cluster, take the following steps:
 
     The cluster creation process starts and your TiDB Cloud cluster will be created in approximately 5 to 15 minutes.
 
-    > **Note:**
-    >
-    > During the creation process, you can perform security settings for your cluster:
-    >
-    > 1. Click **Security Settings** in the upper-right corner of the cluster area.
-    > 2. In the **Security Settings** dialog box, set the root password and allowed IP addresses to connect to your cluster, and then click **Apply**.
+5. During the creation process, perform security settings for your cluster:
+
+    1. Click **Security Settings** in the upper-right corner of the cluster area.
+    2. In the **Security Settings** dialog box, set the root password and allowed IP addresses to connect to your cluster, and then click **Apply**.
 
 </div>
 
