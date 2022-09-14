@@ -24,7 +24,7 @@ For more information about how to handle highly concurrent write-heavy workloads
 
 `AUTO_RANDOM` is a column attribute that is used to automatically assign values to a `BIGINT` column. Values assigned automatically are **random** and **unique**.
 
-To create a table with an `AUTO_RANDOM` column, you can use the following statements. The `AUTO_RANDOM` column must be included in the primary key, and the primary key has only the `AUTO_RANDOM` column.
+To create a table with an `AUTO_RANDOM` column, you can use the following statements. The `AUTO_RANDOM` column must be included in a primary key, and the primary key has only the `AUTO_RANDOM` column.
 
 ```sql
 CREATE TABLE t (a BIGINT AUTO_RANDOM, b VARCHAR(255), PRIMARY KEY (a));
@@ -62,13 +62,13 @@ tidb> SELECT * FROM t;
 +---+--------+
 1 row in set (0.01 sec)
 
-mysql> INSERT INTO t(b) VALUES ('string2');
+tidb> INSERT INTO t(b) VALUES ('string2');
 Query OK, 1 row affected (0.00 sec)
 
-mysql> INSERT INTO t(b) VALUES ('string3');
+tidb> INSERT INTO t(b) VALUES ('string3');
 Query OK, 1 row affected (0.00 sec)
 
-mysql> SELECT * FROM t;
+tidb> SELECT * FROM t;
 +---------------------+---------+
 | a                   | b       |
 +---------------------+---------+
@@ -87,17 +87,17 @@ The `AUTO_RANDOM(S, R)` column value automatically assigned by TiDB has a total 
 The value structure of an `AUTO_RANDOM` column is as follows:
 
 | Total number of bits | Sign bit | Reserved bit | Shard bit | Auto-increment bit |
-|---------|--------|-------------|--------|--------------|
+|---------|---------|-------------|--------|--------------|
 | 64 bits | 0/1 bit | (64-R) bits | S bits | (R-1-S) bits |
 
-- The length of the sign bit is determined by whether an `UNSIGNED` attribute exists. If there is an `UNSIGNED` attribute, the sign bit is `0`. Otherwise, the sign bit is `1`.
-- The length of the reserved bit is `64-R`. The reserved bit is always `0`.
+- The sign bit is determined by whether an `UNSIGNED` attribute exists. If there is an `UNSIGNED` attribute, the length is `0`. Otherwise, the length is `1`.
+- The length of the reserved bit is `64-R`. The reserved bits are always `0`.
 - The content of the shard bit is calculated by the hash value of the starting time of the current transaction. To use a different shard bit (such as 10), you can specify `AUTO_RANDOM(10)` when creating the table.
-- The values of the auto-increment bit are stored in the storage engine and allocated sequentially. Each time a new value is allocated, the value is incremented by 1. The auto-increment bit ensures that the values of `AUTO_RANDOM` are unique globally. When the auto-increment bit is exhausted, an error "Failed to read auto-increment value from storage engine" is reported when allocated again.
+- The value of the auto-increment bits is stored in the storage engine and allocated sequentially. Each time a new value is allocated, the value is incremented by 1. The auto-increment bits ensure that the values of `AUTO_RANDOM` are unique globally. When the auto-increment bit is exhausted, an error "Failed to read auto-increment value from storage engine" is reported when allocated again.
 
 > **Note:**
 >
-> Since the total number of bits is 64 bits, the number of the shard bit affects the number of the auto-increment bit, that is, as the number of shard bit increases, the number of auto-increment bit decreases, and vice versa. Therefore, you need to balance the randomness of allocated values and available space.
+> Since the total number of bits is 64 bits, the number of the shard bit affects the number of the auto-increment bit, that is, as the shard bits number increases, the number of auto-increment bit decreases, and vice versa. Therefore, you need to balance the randomness of allocated values and available space.
 >
 > The best practice is to set the shard bit as `log(2, x)`, in which `x` is the current number of storage engines. For example, if there are 16 TiKV nodes in a TiDB cluster, you can set the shard bit as `log(2, 16)`, that is `4`. After all regions are evenly scheduled to each TiKV node, the load of bulk writes can be uniformly distributed to different TiKV nodes to maximize resource utilization.
 
