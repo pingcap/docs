@@ -80,11 +80,11 @@ To connect to a Dedicated Tier cluster via standard connection, perform the foll
 
     3. Click **Create Filter** to confirm the changes.
 
-4. Under **Step 2: Download TiDB Cloud Root CA** in the dialog, click **Download TiDB Root CA** if you need to import the TiDB Cloud server certificate to your client for TLS connection.
+4. Under **Step 2: Download TiDB cluster CA** in the dialog, click **Download TiDB cluster CA** for one-way TLS connection to TiDB clusters. The TiDB cluster CA supports TLS 1.3 version by default.
 
     > **Note:**
     >
-    > - The TiDB Cloud Root CA is only available for Dedicated Tier clusters.
+    > - The TiDB cluster CA is only available for Dedicated Tier clusters.
     > - Currently, TiDB Cloud only provides the connection strings and sample code for these connection methods: MySQL, MyCLI, JDBC, Python, Go, and Node.js.
 
 5. Under **Step 3: Connect with a SQL client** in the dialog, click the tab of your preferred connection method, and then refer to the connection string and sample code on the tab to connect to your cluster.
