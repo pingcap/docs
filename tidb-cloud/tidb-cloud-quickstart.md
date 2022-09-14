@@ -35,11 +35,16 @@ To create a free Developer Tier cluster, take the following steps:
 
 5. Click **Create**.
 
-   The cluster creation process starts and the **Security Settings** dialog box is displayed.
+    The cluster creation process starts and your TiDB Cloud cluster will be created in approximately 5 to 15 minutes.
 
-6. In the **Security Settings** dialog box, set the root password and allowed IP addresses to connect to your cluster, and then click **Apply**.
+6. During the creation process, perform security settings for your cluster:
 
-    Your TiDB Cloud cluster will be created in approximately 5 to 15 minutes.
+    1. Click **Security Settings** in the upper-right corner of the cluster area.
+    2. In the **Security Settings** dialog box, set the root password and allowed IP addresses to connect to your cluster, and then click **Apply**.
+
+> **Tip:**
+>
+> After your TiDB Cloud cluster is created, and before importing your data or connecting to a client, you can click **Playground** to run queries instantly on TiDB Cloud. Playground contains a pre-loaded dataset of GitHub events.
 
 </div>
 
@@ -79,7 +84,7 @@ To create a Dedicated Tier cluster, take the following steps:
 
 9. Click **Create**.
 
-   The cluster creation process starts and the **Security Settings** dialog box is displayed.
+    The cluster creation process starts and the **Security Settings** dialog box is displayed.
 
 10. In the **Security Settings** dialog box, set the root password and allowed IP addresses to connect to your cluster, and then click **Apply**.
 
