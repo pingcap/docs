@@ -31,7 +31,7 @@ To create a free Developer Tier cluster, take the following steps:
 
 3. On the plan selection page, click **Get Started for Free** in the **Developer Tier** plan.
 
-4. On the **Create Cluster** page, select **Developer Tier**. Update the default cluster name if necessary, and then select the region where you want to create your cluster.
+4. On the **Create Cluster** page, **Developer Tier** is selected by default. Update the default cluster name if necessary, and then select the region where you want to create your cluster.
 
 5. Click **Create**.
 
@@ -150,8 +150,6 @@ We provide Capital Bikeshare sample data for you to easily import data and run s
     - **Target Cluster**: shows the cluster name and the region name.
 
     If the region of the bucket is different from your cluster, confirm the compliance of cross region. Click **Next** to validate the data access and go to the next page.
-    
-    TiDB Cloud starts validating whether it can access the sample data in the specified bucket URL.
 
     </div>
     </SimpleTab>

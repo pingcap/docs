@@ -119,7 +119,7 @@ To import the CSV files to TiDB Cloud, take the following steps:
 
         - **Target table name**: enter the name of the target table in TiDB Cloud, which must be in the `${db_name}.${table_name}` format. For example, `mydb.mytable`. Note that this field only accepts one specific table name, so wildcards are not supported.
 
-    - **Table Filter**: If you want to filter which tables to be imported, you can specify table filter rules in this field.
+    - **Table Filter**: If you want to filter which tables to be imported, you can specify table filter rules in this area.
 
         For example:
 
@@ -128,7 +128,7 @@ To import the CSV files to TiDB Cloud, take the following steps:
         - `!db02.*`: except the tables in the `db02` database, all other tables will be imported. `!` is used to exclude tables that do not need to be imported.
         - `*.*` : all tables will be imported.
 
-        For more information, see [table filter snytax](/table-filter.md#syntax).
+        For more information, see [table filter syntax](/table-filter.md#syntax).
 
 5. Click **Next**.
 
