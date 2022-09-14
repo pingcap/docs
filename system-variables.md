@@ -3181,3 +3181,10 @@ This variable is an alias for `transaction_isolation`.
 - Type: Boolean
 - Default value: `ON`
 - This variable controls whether to use the high precision mode when computing the window functions.
+
+### `tidb_enable_unsafe_substitute` <span class="version-mark">New in v6.3.0</span>
+
+- Scope: SESSION | GLOBAL
+- Persists to cluster: Yes
+- Default value: `OFF`
+- This variable controls whether to replace expressions with generated columns in an unsafe manner. The default value is `OFF`, which means that unsafe replacement is disabled by default. For more details, see [Generated Columns](/generated-columns.md).
