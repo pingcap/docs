@@ -24,7 +24,7 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
 * Provide a new web UI for data import. The new UI provides better user experience and makes data import more efficient.
 
-    Using the new UI, you can preview the file data to be imported, view the import process, and manage all import tasks easily.
+    Using the new UI, you can preview the data to be imported, view the import process, and manage all import tasks easily.
 
 * Introduce Playground for [Developer Tier](/tidb-cloud/select-cluster-tier.md#developer-tier) clusters.
 
