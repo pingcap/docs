@@ -99,7 +99,7 @@ Other TiDB nodes will read this change and delete the record in their memory cac
 
 </details>
 
-## Export and import extended statistics
+### Export and import extended statistics
 
 The way of exporting or importing extended statistics is the same as exporting or importing regular statistics. See [Introduction to Statistics - Import and export statistics](/statistics.md#import-and-export-statistics) for details.
 
