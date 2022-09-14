@@ -116,9 +116,11 @@ To create a Dedicated Tier cluster, take the following steps:
 
     To connect to a Dedicated Tier cluster, take the following steps:
 
-    1. Under **Step 2: Download TiDB cluster CA** in the dialog, click **Download TiDB cluster CA** for one-way TLS connection to TiDB clusters. The TiDB cluster CA supports TLS 1.2 version by default.
+    1. Under **Step 1: Create traffic filter** in the dialog, specify the allowed IP addresses to connect to your cluster. If you have already configured the IP addresses in **Security Settings**, skip this step.
 
-    2. Under **Step 3: Connect with a SQL client** in the dialog, click the tab of your preferred connection method, and then refer to the connection string and sample code on the tab to connect to your cluster.
+    2. Under **Step 2: Download TiDB cluster CA** in the dialog, click **Download TiDB cluster CA** for TLS connection to TiDB clusters. The TiDB cluster CA supports TLS 1.2 version by default.
+
+    3. Under **Step 3: Connect with a SQL client** in the dialog, click the tab of your preferred connection method, and then refer to the connection string and sample code on the tab to connect to your cluster.
 
     </div>
     </SimpleTab>
