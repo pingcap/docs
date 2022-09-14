@@ -483,7 +483,7 @@ Configuration items related to the I/O rate limiter.
 
 + Determines which types of I/O operations are counted and restrained below the `max-bytes-per-sec` threshold. Currently, only the write-only mode is supported.
 + Value options: `"read-only"`, `"write-only"`, and `"all-io"`
-+ Default value: `"all-io"`
++ Default value: `"write-only"`
 
 ## raftstore
 
