@@ -124,7 +124,7 @@ You can import data in various formats to TiDB Cloud:
 > **Note:**
 >
 > - For information about character collations supported by TiDB Cloud, see [Migrate from MySQL-Compatible Databases](/tidb-cloud/migrate-data-into-tidb.md). Understanding how your data is stored originally will be very helpful.
-> - Data import on the **Data Import Task** page does not generate additional billing fees.
+> - Data import on the **Data Import** page does not generate additional billing fees.
 
 ## Step 6. Run your workload and evaluate results
 
