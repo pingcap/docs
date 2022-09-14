@@ -25,7 +25,7 @@ This document describes how to import uncompressed CSV files from Amazon Simple 
 
     > **Note:**
     >
-    > If you cannot update the CSV filenames according to the preceding rules in some cases (for example, the CSV file links are also used by your other programs), you can keep the filenames unchanged and use the **Custom Pattern** in [Step 4](#step-4-import-csv-files-to-tidb-cloud) to import your source data to a single target table.
+    > If you cannot update the CSV filenames according to the preceding rules in some cases (for example, the CSV file links are also used by your other programs), you can keep the filenames unchanged and use the **File Pattern** in [Step 4](#step-4-import-csv-files-to-tidb-cloud) to import your source data to a single target table.
 
 ## Step 2. Create the target table schemas
 
