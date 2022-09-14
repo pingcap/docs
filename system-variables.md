@@ -2119,14 +2119,6 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 - When the value is set to `OFF`, the non-transactional DML statement stops immediately at the first error and returns the error. All the following batches are canceled.
 - When the value is set to `ON` and an error occurs in a batch, the following batches will continue to be executed until all batches are executed. All errors occurred during the execution process are returned together in the result.
 
-### tidb_opt_3stage_distinct_agg <span class="version-mark">New in v6.3.0</span>
-
-- Scope: SESSION | GLOBAL
-- Persists to cluster: Yes
-- Default value: `ON`
-- This variable specifies whether to rewrite a `COUNT(DISTINCT)` aggregate into 3 stages aggregation in MPP mode.
-- This variable currently applies to aggregation with only 1 `COUNT(DISTINCT)`.
-
 ### tidb_opt_agg_push_down
 
 - Scope: SESSION
@@ -2388,6 +2380,14 @@ explain select * from t where age=5;
 - Type: Boolean
 - Default value: `OFF`
 - This variable sets whether the optimizer rewrites the aggregate functions with `DISTINCT` to the two-level aggregate functions, such as rewriting `SELECT b, COUNT(DISTINCT a) FROM t GROUP BY b` to `SELECT b, COUNT(a) FROM (SELECT b, a FROM t GROUP BY b, a) t GROUP BY b`. When the aggregation column has serious skew and the `DISTINCT` column has many different values, this rewriting can avoid the data skew in the query execution and improve the query performance.
+
+### tidb_opt_three_stage_distinct_agg <span class="version-mark">New in v6.3.0</span>
+
+- Scope: SESSION | GLOBAL
+- Persists to cluster: Yes
+- Default value: `ON`
+- This variable specifies whether to rewrite a `COUNT(DISTINCT)` aggregation into a three-stage aggregation in MPP mode.
+- This variable currently applies to aggregations with only one `COUNT(DISTINCT)`.
 
 ### tidb_opt_write_row_id
 
