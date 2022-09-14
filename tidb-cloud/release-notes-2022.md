@@ -20,7 +20,6 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
 * Optimize the UI of the cluster overview page and the [Clusters](https://tidbcloud.com/console/clusters) page, and highlight the entrances of upgrade to Dedicated Tier, cluster connection, and data import.
 
-
 * Provide a new web UI for data import. The new UI provides better user experience and makes data import more efficient.
 
     Using the new UI, you can preview the file data to be imported, view the import process, and manage all import tasks easily.
