@@ -149,7 +149,7 @@ We provide Capital Bikeshare sample data for you to easily import data and run s
     - **Bucket URL**: enter the sample data URL `gs://tidbcloud-samples-us-west1`.
     - **Target Cluster**: shows the cluster name and the region name.
 
-    If the location of the bucket is different from your cluster, confirm the compliance of cross region. Click **Next**.
+    If the region of the bucket is different from your cluster, confirm the compliance of cross region. Click **Next** to validate the data access and go to the next page.
     
     TiDB Cloud starts validating whether it can access the sample data in the specified bucket URL.
 

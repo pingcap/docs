@@ -21,7 +21,7 @@ To import data, perform the following steps:
 
 5. Check the cluster name and the region name in the **Target Cluster**. Click **Next**.
 
-    TiDB Cloud starts validating whether it can access your data in the specified bucket URL. If you get the `AccessDenied` error, see [Troubleshoot Access Denied Errors during Data Import from S3](/tidb-cloud/troubleshoot-import-access-denied-error.md).
+    TiDB Cloud starts validating whether it can access your data in the specified bucket URL. After validation, TiDB Cloud tries to scan all the files in the data source using the default file naming pattern, and returns a scan summary result on the left side of the next page. If you get the `AccessDenied` error, see [Troubleshoot Access Denied Errors during Data Import from S3](/tidb-cloud/troubleshoot-import-access-denied-error.md).
 
 6. Add the table filter rules if needed. Click **Next**.
 
