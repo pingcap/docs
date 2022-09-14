@@ -59,10 +59,6 @@ To connect to a Dedicated Tier cluster via standard connection, perform the foll
 
 2. Locate your cluster, and click **Connect** in the upper-right corner of the cluster area. A connection dialog box is displayed.
 
-    > **Tip:**
-    >
-    > Alternatively, you can also click the name of your newly created cluster on the **Clusters** page, and then click **Setup** in the **Connection** area.
-
 3. Create a traffic filter for the cluster. Traffic filter is a list of IPs and CIDR addresses that are allowed to access TiDB Cloud via a SQL client.
 
     If the traffic filter is already set, skip the following sub-steps. If the traffic filter is empty, take the following sub-steps to add one.
