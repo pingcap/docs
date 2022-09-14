@@ -124,7 +124,6 @@ To import the CSV files to TiDB Cloud, take the following steps:
         For example:
 
         - `db01.*`: all tables in the `db01` database will be imported.
-        - `db01.table01*,db01.table02*`: all tables starting with `table01` and `table02` in the `db01` database will be imported.
         - `!db02.*`: except the tables in the `db02` database, all other tables will be imported. `!` is used to exclude tables that do not need to be imported.
         - `*.*` : all tables will be imported.
 
