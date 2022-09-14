@@ -16,7 +16,7 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
     For Dedicated Tier clusters, the [Connect](/tidb-cloud/connect-to-tidb-cluster.md#connect-via-standard-connection) dialog now provides a link to download the TiDB Cloud Root CA certificate and also provides the connection string and sample code for one-way TLS connection to TiDB clusters. You can connect to your Dedicated Tier cluster via TLS using third-party MySQL clients, MyCLI, and multiple connection methods for your applications, such as JDBC, Python, Go, and Node.js. This feature ensures the security of data transmission from your applications to TiDB clusters.
 
-**General changes**
+**Console changes**
 
 * Re-design the web interface of the cluster overview page and the [Clusters](https://tidbcloud.com/console/clusters) page for better user experience.
 
