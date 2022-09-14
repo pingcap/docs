@@ -8,6 +8,26 @@ aliases: ['/tidbcloud/beta/supported-tidb-versions','/tidbcloud/release-notes']
 
 This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-cloud/) in 2022.
 
+## September 14, 2022
+
+**General changes**
+
+* Support connecting to TiDB Cloud [Dedicated Tier](/tidb-cloud/select-cluster-tier.md#dedicated-tier) clusters via TLS
+
+    For Dedicated Tier clusters, the [Connect](/tidb-cloud/connect-to-tidb-cluster.md#connect-via-standard-connection) dialog now provides a link to download the TiDB Cloud Root CA certificate and also provides the connection string and sample code for one-way TLS connection to TiDB clusters. You can connect to your Dedicated Tier cluster via TLS using third-party MySQL clients, MyCLI, and multiple connection methods for your applications, such as JDBC, Python, Go, and Node.js. This feature ensures the security of data transmission from your applications to TiDB clusters.
+
+**General changes**
+
+* Re-design the web interface of the cluster overview page and the [Clusters](https://tidbcloud.com/console/clusters) page for better user experience.
+
+* Provide a new web UI for data import. The new UI provides better user experience and makes data import more efficient.
+
+    Using the new UI, you can preview the file data to be imported, view the import process, and manage all import tasks easily.
+
+* Introduce Playground for [Developer Tier](/tidb-cloud/select-cluster-tier.md#developer-tier) clusters.
+
+    Playground contains a pre-loaded dataset of GitHub events, which allows you to get started with TiDB Cloud by running queries instantly, without importing your data or connecting to a client.
+
 ## September 13, 2022
 
 **General changes**
