@@ -1293,7 +1293,7 @@ This variable is only used in table creation. After the table is created, modify
 
 ### Dynamic pruning mode
 
-TiDB accesses partitioned tables in one of the two modes: `dynamic` mode and `static` mode. Currently, `static` mode is used by default. If you want to enable `dynamic` mode, you need to manually set the `tidb_partition_prune_mode` variable to `dynamic`.
+TiDB accesses partitioned tables in one of the two modes: `dynamic` mode and `static` mode. `dynamic` mode is used by default since 6.3. If you want to change mode, you need to manually set the `tidb_partition_prune_mode` variable to `static` or `dynamic`.
 
 {{< copyable "sql" >}}
 
