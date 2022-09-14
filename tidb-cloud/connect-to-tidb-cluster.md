@@ -9,7 +9,7 @@ After your TiDB cluster is created on TiDB Cloud, you can use one of the followi
 
 + Connect via a SQL client
 
-    - [Connect via standard connection](#connect-via-standard-connection): The standard connection exposes a public endpoint with traffic filters, so you can connect to your TiDB cluster from your laptop. For [Dedicated Tier clusters](/tidb-cloud/select-cluster-tier.md#dedicated-tier), you can encrypt the data sent via standard connection using TLS.
+    - [Connect via standard connection](#connect-via-standard-connection): The standard connection exposes a public endpoint with traffic filters, so you can connect to your TiDB cluster from your laptop. For [Dedicated Tier](/tidb-cloud/select-cluster-tier.md#dedicated-tier), you can connect to your TiDB cluster using TLS, which ensures the security of data transmission from your applications to TiDB clusters.
     - [Connect via private endpoint](#connect-via-private-endpoint-recommended): Private endpoint connection provides a private endpoint to allow clients in your VPC to securely access services over AWS PrivateLink, which provides highly secure and one-way access to database services with simplified network management. Note that you cannot connect to [Developer Tier clusters](/tidb-cloud/select-cluster-tier.md#developer-tier) using the private endpoint.
     - [Connect via VPC peering](#connect-via-vpc-peering): If you want lower latency and more security, set up VPC peering and connect via a private endpoint using a VM instance on the corresponding cloud provider in your cloud account. Note that you cannot connect to [Developer Tier clusters](/tidb-cloud/select-cluster-tier.md#developer-tier) using VPC peering.
 
@@ -17,7 +17,7 @@ After your TiDB cluster is created on TiDB Cloud, you can use one of the followi
 
 > **Tip:**
 >
-> It is **NOT** recommended to use public connection in a production environment. Instead, it is recommended to use the [private endpoint](#connect-via-private-endpoint-recommended) connection.
+> For production environments, it is recommended to use the [private endpoint](#connect-via-private-endpoint-recommended) connection.
 
 ## Connect via standard connection
 
