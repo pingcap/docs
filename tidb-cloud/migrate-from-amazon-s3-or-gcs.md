@@ -74,10 +74,38 @@ For detailed steps, see [Configure Amazon S3 access](/tidb-cloud/config-s3-and-g
     - **Target Cluster**: shows the cluster name and the region name.
 
     If the region of the bucket is different from your cluster, confirm the compliance of cross region. Click **Next**.
-    
+
     TiDB Cloud starts validating whether it can access your data in the specified bucket URL. After validation, TiDB Cloud tries to scan all the files in the data source using the default file naming pattern, and returns a scan summary result on the left side of the next page. If you get the `AccessDenied` error, see [Troubleshoot Access Denied Errors during Data Import from S3](/tidb-cloud/troubleshoot-import-access-denied-error.md).
 
 4. Modify the file patterns and add the table filter rules if needed.
+
+    - **File Pattern**: modify the file pattern if you want to import CSV files whose filenames match a certain pattern to a single target table.
+
+        > **Note:**
+        >
+        > When you use this feature, one import task can only import data to a single table at a time. If you want to use this feature to import data into different tables, you need to import several times, each time specifying a different target table.
+
+        To modify the file pattern, click **Modify**, specify a custom mapping rule between CSV files and a single target table in the following fields, and then click **Scan**. After that, the data source files will be re-scanned using the provided custom mapping rule 
+
+        - **Source file name**: enter a pattern that matches the names of the CSV files to be imported. If you have one CSV file only, enter the file name here directly. Note that the names of the CSV files must include the suffix `.csv`.
+
+            For example:
+
+            - `my-data?.csv`: all CSV files starting with `my-data` and one character (such as `my-data1.csv` and `my-data2.csv`) will be imported into the same target table.
+            - `my-data*.csv`: all CSV files starting with `my-data` will be imported into the same target table.
+
+        - **Target table name**: enter the name of the target table in TiDB Cloud, which must be in the `${db_name}.${table_name}` format. For example, `mydb.mytable`. Note that this field only accepts one specific table name, so wildcards are not supported.
+
+    - **Table Filter**: If you want to filter which tables to be imported, you can specify table filter rules in this field.
+
+        For example:
+
+        - `db01.*`: all tables in the `db01` database will be imported.
+        - `db01.table01*,db01.table02*`: all tables starting with `table01` and `table02` in the `db01` database will be imported.
+        - `!db02.*`: except the tables in the `db02` database, all other tables will be imported. `!` is used to exclude tables that do not need to be imported.
+        - `*.*` : all tables will be imported.
+
+        For more information, see [table filter snytax](/table-filter.md#syntax).
 
 5. Click **Next**.
 
