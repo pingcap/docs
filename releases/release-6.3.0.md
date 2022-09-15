@@ -23,11 +23,11 @@ In v6.3.0-DMR, the key new features and improvements are as follows:
 
 ### SQL
 
-* Add a new syntactic sugar to simplify Range partition definitions [#issue]() @[mjonss](https://github.com/mjonss)
+* Add a new syntactic sugar to simplify Range partition definitions [#35683](https://github.com/pingcap/tidb/issues/35683) @[mjonss](https://github.com/mjonss)
 
     [Provides INTERVAL partitioning as a new way of defining Range partitions](/partitioned-table.md#range-interval-partitioning). You do not need to enumerate all partitions, which drastically reduces the lengthy way of writing Range partition statements. The semantic is equivalent to the original Range partition.
 
-* Range Columns partitioning supports defining multiple columns [#issue]() @[mjonss](https://github.com/mjonss)
+* Range Columns partitioning supports defining multiple columns [#36636](https://github.com/pingcap/tidb/issues/36636) @[mjonss](https://github.com/mjonss)
 
     Support [PARTITION BY RANGE COLUMNS (column_list)](/partitioned-table.md#range-columns-partitioning). `column_list` is no longer limited to a single column. The basic feature is the same as MySQL.
 
