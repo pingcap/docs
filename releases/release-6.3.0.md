@@ -132,9 +132,9 @@ In v6.3.0-DMR, the key new features and improvements are as follows:
 
 ### Transactions
 
-* 悲观事务可以延迟唯一性检查 [#36579](https://github.com/pingcap/tidb/issues/36579) @[ekexium](https://github.com/ekexium) **tw: qiancai**
+* Support deferring unique constraints in pessimistic transactions [#36579](https://github.com/pingcap/tidb/issues/36579) @[ekexium](https://github.com/ekexium) **tw: qiancai**
 
-    提供系统变量 `tidb_constraint_check_in_place_pessimistic` 来控制悲观事务中[唯一约束](/constraints.md#唯一约束)检查的时间点。当变量设为 `ON` 时，TiDB 会把加锁操作和唯一约束检测推迟到必要的时候进行，以此提升批量 DML 操作的性能。
+    You can use the [`tidb_constraint_check_in_place_pessimistic`](/system-variables.md#tidb_constraint_check_in_place_pessimistic-new-in-v630) system variable to control when TiDB checks [unique constraints](/constraints.md#pessimistic-transactions) in pessimistic transactions. This variable is disabled by default. When the variable is set to `ON`, TiDB will defer locking operations and unique constraint checks in pessimistic transactions until necessary, thus improving the performance of bulk DML operations.
 
 * 优化 Read-Committed 隔离级别中对 TSO 的获取 [#36812](https://github.com/pingcap/tidb/issues/36812) @[TonsnakeLin](https://github.com/TonsnakeLin) **tw: TomShawn**
 
