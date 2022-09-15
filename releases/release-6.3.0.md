@@ -100,7 +100,7 @@ In v6.3.0-DMR, the key new features and improvements are as follows:
 
 * TiFlash changes the way FastScan is used (experimental) [#5252](https://github.com/pingcap/tiflash/issues/5252) @[hongyunyan](https://github.com/hongyunyan)
 
-    FastScan, introduced in TiFlash starting with v6.2.0, performed as expected, but lacked flexibility in how it was used. Therefore, in v6.3.0 [the way FastScan is used has changed](/develop/dev-guide-use-fastscan.md). TiFlash does not support using the switch to control the FastScan feature. Instead, it uses the system variable [`tiflash_fastscan`](/system-variables.md#tiflash_fastscan-new-in-v630) to control whether to turn on the FastScan function.
+    FastScan, introduced in TiFlash starting with v6.2.0, performed as expected, but lacked flexibility in how it was used. Therefore, in v6.3.0 [the way of using FastScan has changed](/develop/dev-guide-use-fastscan.md). TiFlash does not support using the switch to control the FastScan feature. Instead, it uses the system variable [`tiflash_fastscan`](/system-variables.md#tiflash_fastscan-new-in-v630) to control whether to turn on the FastScan function.
     
     When you upgrade from v6.2.0 to v6.3.0, all FastScan settings in v6.2.0 will become invalid, but will not affect the normal reading of data. You need to set the variable [`tiflash_fastscan`]. When you upgrade from an earlier version to v6.3.0, the FastScan feature is not enabled by default for all sessions to keep data consistency.
 
