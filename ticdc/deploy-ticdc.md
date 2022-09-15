@@ -59,3 +59,20 @@ The following are descriptions of options available in the `cdc server` command:
 - `cert`: The path of the certificate file used by TiCDC, in the PEM format (optional).
 - `key`: The path of the certificate key file used by TiCDC, in the PEM format (optional).
 - `config`: The address of the configuration file that TiCDC uses (optional). This option is supported since TiCDC v5.0.0. This option can be used in the TiCDC deployment since TiUP v1.4.0.
+
+## Rolling upgrade TiCDC using TiUP
+
+TiCDC support rolling upgrade functionality since v6.3.0, when using TiUP perform operations to TiCDC instances, such as rolling upgrade, scale-in / scale-out, the replication latency keeps stable. This feature requires the following:
+
+* The cluster is at least v6.3.0 before upgrade, and there are at least 2 running TiCDC instances.
+* The minimum supported TiUP version is v1.11.0.
+
+If the above condition are not met, TiUP perform operations by force and does not guarantee the replication latency won't goes up too much.
+
+Suppose that the current TiCDC cluster version is v6.3.0, upgrade the cluster to v6.4.0 by executing the following command:
+
+{{< copyable "shell-regular" >}}
+
+```shell
+tiup cluster upgrade test-cluster v6.4.0 --transfer-timeout 600 --force false
+```
