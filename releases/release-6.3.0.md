@@ -188,19 +188,23 @@ In v6.3.0-DMR, the key new features and improvements are as follows:
 
     TiDB Lightning supports importing Parquet files exported by Apache Hive into TiDB, thereby achieving data migration from Hive to TiDB.
 
-* DM 支持对同步到 TiDB 的表增加字段并对该字段赋值 [#3262](https://github.com/pingcap/tiflow/pull/3262), [#3340](https://github.com/pingcap/tiflow/issues/3340) @[yufan022](https://github.com/yufan022) **tw：ran-huang**
+* DM supports adding a field to a table migrated to TiDB and assigning values to the field [#3262](https://github.com/pingcap/tiflow/pull/3262), [#3340](https://github.com/pingcap/tiflow/issues/3340) @[yufan022](https://github.com/yufan022) **tw：ran-huang**
 
-    [DM 支持对同步到 TiDB 的表增加字段并对该字段赋值](用户文档链接)。在上游分库分表合并到下游TiDB的场景，可以用于区分目标表的记录是来自于上游那个分库分表。
+    DM supports [adding a field to a table migrated to TiDB and assigning values to the field](link). When you merge and migrate MySQL shards to TiDB, you can use the field to distinguish which shard the record is migrated from.
 
 ### TiDB data share subscription
 
-* TiCDC 支持对多个异地目标数据源进行数据复制的复杂部署形态 [#issue]() @[sdojjy](https://github.com/sdojjy) **tw：ran-huang**
+* TiCDC supports a deployment topology that can replicate data from multiple geo-distributed data sources [#issue]() @[sdojjy](https://github.com/sdojjy) **tw：ran-huang**
 
-    为了提供一套 TiDB 集群的数据能复制到多个不同的异地数据系统的能力，自 v6.3.0 开始，TiCDC 节点可以[部署到多个不同的异地的机房](用户文档链接)中，来分别负责对应机房的数据复制任务，以支撑各种复杂的异地数据复制使用场景和部署形态。
+    To support replicating data from a single TiDB cluster to multiple geo-distributed data systems, starting from v6.3.0, [TiCDC can be deployed in multiple IDCs](link) to replicate data for each IDC. This feature helps deliver the capability of geo-distributed data replication and deployment topology.
 
 * TiCDC 支持维护上下游数据一致性快照 (Sync point) [#issue]() @[asddongmen](https://github.com/asddongmen) **tw: TomShawn**
 
     在灾备复制场景下，[TiCDC 支持周期性的维护一个下游数据快照](用户文档链接)，使得该下游快照能保持与上游数据的快照一致性。借助此能力，TiCDC 能更好的匹配读写分离应用场景，帮助用户降本增效。
+
+* TiCDC supports graceful upgrade [#4757](https://github.com/pingcap/tiflow/issues/4757) @[overvenus](https://github.com/overvenus) @[3AceShowHand](https://github.com/3AceShowHand) **tw:ran-huang**
+
+    When TiCDC is deployed using TiUP (>=v1.11.0) or TiDB Operator (>=v1.3.8), you can gracefully upgrade the TiCDC cluster. During the upgrade, data replication latency is kept as low as 30 seconds. This improves stability, empowering TiCDC to better support latency-sensitive applications.
 
 ## Compatibility changes
 
