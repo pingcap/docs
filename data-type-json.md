@@ -36,7 +36,7 @@ For more information, see [JSON Functions](/functions-and-operators/json-functio
     SELECT j->'$[last]' FROM t;
     ```
 
-- Backup & Restore (BR) versions earlier than v6.3.0 do not support recovering data containing JSON columns. No version of BR supports recovering data containing JSON columns to TiDB clusters earlier than v6.3.0.
+- TiDB Backup & Restore (BR) versions earlier than v6.3.0 do not support recovering data containing JSON columns. No version of BR supports recovering data containing JSON columns to TiDB clusters earlier than v6.3.0.
 - Do not use any replication tool to replicate data containing non-standard `JSON` data types, such as `DATE`, `DATETIME`, and `TIME`.
 
 ## MySQL compatibility
@@ -87,7 +87,7 @@ For more information, see [JSON Functions](/functions-and-operators/json-functio
     +--------------+
     1 row in set (0.00 sec)
 
-    -- In TiDB, executing the following SQL statement returns the correct sorting result. In MySQL, executing the following SQL statement returns the "This version of MySQL doesn't yet support 'sorting of non-scalar JSON values'. " warning and the sorting result is inconsistent with the comparison result of `<`.
+    -- In TiDB, executing the following SQL statement returns the correct sorting result. In MySQL, executing the following SQL statement returns the "This version of MySQL doesn't yet support 'sorting of non-scalar JSON values'." warning and the sorting result is inconsistent with the comparison result of `<`.
     mysql> SELECT j FROM t ORDER BY j;
     +--------------+
     | j            |
@@ -105,7 +105,7 @@ For more information, see [JSON Functions](/functions-and-operators/json-functio
     ```sql
     CREATE TABLE t(col JSON);
 
-    -- In TiDB, the following INSERT statement is executed successfully. In MySQL, executing the following INSERT statement returns the `Invalid JSON text` error.
+    -- In TiDB, the following INSERT statement is executed successfully. In MySQL, executing the following INSERT statement returns the "Invalid JSON text" error.
     INSERT INTO t VALUES (3);
     ```
 
