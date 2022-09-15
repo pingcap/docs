@@ -7,9 +7,9 @@ summary: Learn how to run CH-benCHmark test on TiDB.
 
 This document describes how to test TiDB using CH-benCHmark.
 
-CH-benCHmark is a mixed workload containing both [TPC-C](http://www.tpc.org/tpcc/) and [TPC-H](http://www.tpc.org/tpch/) tests, and it is the most common workload to test HTAP systems. For more information, see [The mixed workload CH-benCHmark](https://research.tableau.com/sites/default/files/a8-cole.pdf).
+CH-benCHmark is a mixed workload containing both [TPC-C](http://www.tpc.org/tpcc/) and [TPC-H](http://www.tpc.org/tpch/) tests. It is the most common workload to test HTAP systems. For more information, see [The mixed workload CH-benCHmark](https://research.tableau.com/sites/default/files/a8-cole.pdf).
 
-Before running the CH-benCHmark test, you need to deploy [TiFlash](/tiflash/tiflash-overview.md) first, which is TiDB's HTAP component. After you deploy TiFlash and [create TiFlash replicas](#create-tiflash-replicas), TiKV will replicate the latest data of TPC-C online transactions to TiFlash in real time, and the TiDB optimizer will automatically push down OLAP queries from TPC-H workload to the MPP engine of TiFlash for efficient execution.
+Before running the CH-benCHmark test, you need to deploy [TiFlash](/tiflash/tiflash-overview.md) first, which is a TiDB's HTAP component. After you deploy TiFlash and [create TiFlash replicas](#create-tiflash-replicas), TiKV will replicate the latest data of TPC-C online transactions to TiFlash in real time, and the TiDB optimizer will automatically push down OLAP queries from TPC-H workload to the MPP engine of TiFlash for efficient execution.
 
 The CH-benCHmark test in this document is implemented based on [go-tpc](https://github.com/pingcap/go-tpc). You can download the test program using the following [TiUP](/tiup/tiup-overview.md) command:
 
@@ -33,7 +33,7 @@ Taking 1000 warehouses as an example, you can execute the following TiUP command
 tiup bench tpcc -H 172.16.5.140 -P 4000 -D tpcc --warehouses 1000 prepare -T 32
 ```
 
-Based on different machine configurations, this loading process might take a few hours. If the cluster size is small, you can use a smaller warehouse value for the test.
+Depending on different machine configurations, this loading process might take a few hours. If the cluster size is small, you can use a smaller warehouse value for the test.
 
 After the data is loaded, you can execute the `tiup bench tpcc -H 172.16.5.140 -P 4000 -D tpcc --warehouses 1000 check` command to validate the data correctness.
 
