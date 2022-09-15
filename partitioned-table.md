@@ -250,7 +250,7 @@ The optional parameter `MAXVALUE PARTITION` creates a last partition as `PARTITI
 
 INTERVAL partitioning also adds simpler syntaxes for adding and dropping partitions.
 
-The following statement changes the first partition, meaning dropping partitions with lower ranges and older data. It will drop all partitions whose value is lower than the given expression, making the matched partition the new first partition. It does not affect a NULL PARTITION.
+The following statement changes the first partition. It drops all partitions whose values are lower than the given expression, and makes the matched partition the new first partition. It does not affect a NULL PARTITION.
 
 ```
 ALTER TABLE table_name FIRST PARTITION LESS THAN (<expression>)
