@@ -62,7 +62,7 @@ set global tiflash_fastscan=OFF;
 
 Data in the storage layer of TiFlash is stored in two layers: Delta layer and Stable layer.
 
-In normal mode (that is, when FastScan is not enabled), the TableScan operator processes data in the following steps:
+In the default mode (that is, when FastScan is not enabled), the TableScan operator processes data in the following steps:
 
 1. Read data: create separate data streams in the Delta layer and Stable layer to read the respective data.
 2. Sort Merge: merge the data streams created in step 1. Then return the data after sorting in (handle, version) order.
