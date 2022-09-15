@@ -160,11 +160,11 @@ In v6.3.0-DMR, the key new features and improvements are as follows:
 
 ### Ease of use
 
-* 优化 TiFlash 数据同步进度的准确性 [#4902](https://github.com/pingcap/tiflash/issues/4902) @[hehechen](https://github.com/hehechen) **tw: qiancai**
+* Improve the accuracy of TiFlash data replication progress [#4902](https://github.com/pingcap/tiflash/issues/4902) @[hehechen](https://github.com/hehechen) **tw: qiancai**
 
-    TiDB 的 `information_schema.tiflash_replica` 表中的 `PROGRESS` 字段表示对应表 TiFlash 副本与 TiKV 数据的同步进度。在之前的版本中，`PROCESS` 字段只显示创建 TiFlash 副本过程中的数据同步进度。当 TiFlash 副本创建完毕，进行数据导入后，该值不会更新数据同步进度。
+    In TiDB, the `PROGRESS` field of the `information_schema.tiflash_replica` table is used to indicate the progress of data replication from the corresponding tables in TiKV to the TiFlash replicas. In earlier TiDB versions, the `PROCESS` field only provides the progress of data replication during the creation of the TiFlash replicas. After a TiFlash replica is created, if new data is imported to a corresponding table in TiKV, this field will not be updated to show the replication progress from TiKV to TiFlash for the new data. 
 
-    v6.3.0 版本改进了 TiFlash 副本数据同步进度更新机制，在创建 TiFlash 副本后，进行数据导入等操作，TiFlash 副本需要和 TiKV 数据进行同步时，[`information_schema.tiflash_replica` 表](/information-schema/information-schema-tiflash-replica.md)中的 `PROGRESS` 值将会更新，显示实际的数据同步进度。通过 TiFlash 数据同步进度的准确性优化，用户可以了解数据同步的实际进度，具有更好的使用体验。
+    In v6.3.0, TiDB improves the update mechanism of data replication progress for TiFlash replicas. After a TiFlash replica is created, if new data is imported to a corresponding table in TiKV,  the `PROGRESS` value in the [`information_schema.tiflash_replica`](/information-schema/information-schema-tiflash-replica.md) table will be updated to show the actual replication progress from TiKV to TiFlash for the new data. With this improvement, you can easily view the actual progress of TiFlash data replication.
 
 ### MySQL compatibility
 
