@@ -61,7 +61,7 @@ For detailed steps, see [Configure Amazon S3 access](/tidb-cloud/config-s3-and-g
 
 ### Step 3. Import data into TiDB Cloud
 
-1. On the **Data Import Task** page, besides the **Role ARN** field, you also need to fill in the following information:
+1. On the **Data Import** page, besides the **Role ARN** field, you also need to fill in the following information:
 
     - **Data Source Type**: `AWS S3`.
     - **Bucket URL**: fill in the bucket URL of your source data.
@@ -128,7 +128,7 @@ For detailed steps, see [Configure GCS access](/tidb-cloud/config-s3-and-gcs-acc
         gsutil rsync -r ./tidbcloud-samples-us-west-2/ gs://target-url-in-gcs
         ```
 
-2. From the TiDB Cloud console, navigate to the TiDB Clusters page, and then click the name of your target cluster to go to its own overview page. In the upper-right corner, click **Import Data**, and then fill in the importing related information on the **Data Import Task** page.
+2. From the TiDB Cloud console, navigate to the **Clusters** page, and then click the name of your target cluster to go to its own overview page. In the **Import** area, click **Import Data**, and then fill in the importing related information on the **Data Import** page.
 
 > **Note:**
 >

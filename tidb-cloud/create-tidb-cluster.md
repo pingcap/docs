@@ -23,7 +23,7 @@ TiDB Cloud provides the following two cluster tier options. Before creating a Ti
 
 - Developer Tier
 
-    The TiDB Cloud Developer Tier is a one-year free trial of [TiDB Cloud](https://pingcap.com/products/tidbcloud), the fully managed service of TiDB. You can use Developer Tier clusters for non-production workloads such as prototype applications, hackathons, academic courses, or to provide a temporary data service for non-commercial datasets.
+    The TiDB Cloud Developer Tier is a one-year free trial of [TiDB Cloud](https://www.pingcap.com/tidb-cloud/), the fully managed service of TiDB. You can use Developer Tier clusters for non-production workloads such as prototype applications, hackathons, academic courses, or to provide a temporary data service for non-commercial datasets.
 
 - Dedicated Tier
 
@@ -72,11 +72,12 @@ To create a Developer Tier cluster, take the following steps:
 
 4. View the cluster size of the Developer Tier, and then click **Create**.
 
-   The cluster creation process starts and the **Security Settings** dialog box is displayed.
+    The cluster creation process starts and your TiDB Cloud cluster will be created in approximately 5 to 15 minutes.
 
-5. In the **Security Settings** dialog box, set the root password and allowed IP addresses to connect to your cluster, and then click **Apply**.
+5. During the creation process, perform security settings for your cluster:
 
-    Your TiDB Cloud cluster will be created in approximately 5 to 15 minutes.
+    1. Click **Security Settings** in the upper-right corner of the cluster area.
+    2. In the **Security Settings** dialog box, set the root password and allowed IP addresses to connect to your cluster, and then click **Apply**.
 
 </div>
 
@@ -110,7 +111,7 @@ To create a Dedicated Tier cluster, take the following steps:
 
 7. Click **Create**.
 
-   The cluster creation process starts and the **Security Settings** dialog box is displayed.
+    The cluster creation process starts and the **Security Settings** dialog box is displayed.
 
 8. In the **Security Settings** dialog box, set the root password and allowed IP addresses to connect to your cluster, and then click **Apply**.
 
