@@ -31,7 +31,7 @@ To connect to your TiDB cluster via standard connection, perform the following s
     >
     > Alternatively, you can also click the name of your cluster on the **Clusters** page and click **Connect** in the upper-right corner.
 
-3. Create the traffic filter for the cluster. Traffic filter is a list of IPs and CIDR addresses that are allowed to access TiDB Cloud via a SQL client.
+3. Create the traffic filter for the cluster. Traffic filter is a list of IP addresses and Classless Inter-Domain Routing (CIDR) addresses that are allowed to access your TiDB cluster via standard connection.
 
     If the traffic filter is already set, skip the following sub-steps. If the traffic filter is empty, take the following sub-steps to add one.
 
