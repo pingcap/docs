@@ -8,7 +8,7 @@ aliases: ['/docs/dev/grafana-pd-dashboard/','/docs/dev/reference/key-monitoring-
 
 If you use TiUP to deploy the TiDB cluster, the monitoring system (Prometheus & Grafana) is deployed at the same time. For more information, see [Overview of the Monitoring Framework](/tidb-monitoring-framework.md).
 
-The Grafana dashboard is divided into a series of sub dashboards which include Overview, PD, TiDB, TiKV, Node\_exporter, Disk Performance, and so on. A lot of metrics are there to help you diagnose.
+The Grafana dashboard is divided into a series of sub dashboards which include Overview, PD, TiDB, TiKV, Node\_exporter, Disk Performance, Performance\_overview, and so on. A lot of metrics are there to help you diagnose.
 
 You can get an overview of the component PD status from the PD dashboard, where the key metrics are displayed. This document provides a detailed description of these key metrics.
 
@@ -77,15 +77,15 @@ The following is the description of PD Dashboard metrics items:
 - Store Write rate keys: The total written keys on each TiKV instance
 - Hot cache write entry number: The number of peers on each TiKV instance that are in the write hotspot statistics module
 - Selector events: The event count of Selector in the hotspot scheduling module
-- Direction of hotspot move leader: The direction of leader movement in the hotsport scheduling. The positive number means scheduling into the instance. The negtive number means scheduling out of the instance
+- Direction of hotspot move leader: The direction of leader movement in the hotspot scheduling. The positive number means scheduling into the instance. The negtive number means scheduling out of the instance
 - Direction of hotspot move peer: The direction of peer movement in the hotspot scheduling. The positive number means scheduling into the instance. The negative number means scheduling out of the instance
 
 ![PD Dashboard - Hot write metrics](/media/pd-dashboard-hotwrite-v4.png)
 
 ## Statistics - hot read
 
-- Hot Region's leader distribution: The total number of leader Regions that have become read hotspots on each TiKV instance
-- Total read bytes on hot leader Regions: The total read bytes of leaders that have become read hotspots on each TiKV instance
+- Hot Region's peer distribution: The total number of peer Regions that have become read hotspots on each TiKV instance
+- Total read bytes on hot peer Regions: The total read bytes of peers that have become read hotspots on each TiKV instance
 - Store read rate bytes: The total read bytes of each TiKV instance
 - Store read rate keys: The total read keys of each TiKV instance
 - Hot cache read entry number: The number of peers that are in the read hotspot statistics module on each TiKV instance

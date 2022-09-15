@@ -14,15 +14,15 @@ You can adjust the PD scheduling parameters using [pd-ctl](/pd-control.md). Note
 
 - [`replica-schedule-limit`](/pd-configuration-file.md#replica-schedule-limit): determines the rate at which the replica-related operator is generated. The parameter affects operations such as making nodes offline and add replicas.
 
-    > **Notes:**
-    >
-    > The value of this parameter should be less than that of `region-schedule-limit`. Otherwise, the normal Region scheduling among TiKV nodes is affected.
+  > **Notes:**
+  >
+  > The value of this parameter should be less than that of `region-schedule-limit`. Otherwise, the normal Region scheduling among TiKV nodes is affected.
 
-- [`store-balance-rate`](/pd-configuration-file.md#store-balance-rate): limits the rate at which Regions of each TiKV/TiFlash store are scheduled. Note that this parameter takes effect only when the stores have newly joined the cluster. If you want to change the setting for existing stores, use the following command.
+- `store-balance-rate`: limits the rate at which Regions of each TiKV/TiFlash store are scheduled. Note that this parameter takes effect only when the stores have newly joined the cluster. If you want to change the setting for existing stores, use the following command.
 
-    > **Note:**
-    >
-    > Since v4.0.2, the `store-balance-rate` parameter has been deprecated and changes have been made to the `store limit` command. See [store-limit](/configure-store-limit.md) for details.
+  > **Note:**
+  >
+  > Since v4.0.2, the `store-balance-rate` parameter has been deprecated and changes have been made to the `store limit` command. See [store-limit](/configure-store-limit.md) for details.
 
     - Execute the `pd-ctl -u <pd_ip:pd_port> store limit <store_id> <value>` command to set the scheduling rate of a specified store. (To get `store_id`, you can execute the `pd-ctl -u <pd_ip:pd_port> store` command.
     - If you do not set the scheduling rate for Regions of a specified store, this store inherits the setting of `store-balance-rate`.
@@ -51,29 +51,34 @@ minmax_index_cache_size = 5368709120
 delta_index_cache_size = 0
 
 ## The storage path of TiFlash data. If there are multiple directories, separate each directory with a comma.
-## `path` and `path_realtime_mode` are deprecated since v4.0.9. Use the configurations
-## in the `[storage]` section to get better performance in the multi-disk deployment scenarios
+## path and path_realtime_mode are deprecated since v4.0.9. Use the configurations
+## in the [storage] section to get better performance in the multi-disk deployment scenarios
+## Since TiDB v5.2.0, if you need to use the storage.io_rate_limit configuration, you need to set the storage path of TiFlash data to storage.main.dir at the same time.
+## When the [storage] configurations exist, both path and path_realtime_mode configurations are ignored.
 # path = "/tidb-data/tiflash-9000"
 ## or
 # path = "/ssd0/tidb-data/tiflash,/ssd1/tidb-data/tiflash,/ssd2/tidb-data/tiflash"
-## The default value is `false`. If you set it to `true` and multiple directories
+## The default value is false. If you set it to true and multiple directories
 ## are set in the path, the latest data is stored in the first directory and older
 ## data is stored in the rest directories.
 # path_realtime_mode = false
 
-## The path in which the TiFlash temporary files are stored. By default it is the first directory in `path`
-## or in `storage.latest.dir` appended with "/tmp".
+## The path in which the TiFlash temporary files are stored. By default it is the first directory in path
+## or in storage.latest.dir appended with "/tmp".
 # tmp_path = "/tidb-data/tiflash-9000/tmp"
 
 ## Storage paths settings take effect starting from v4.0.9
 [storage]
-    ## [Experimental] New in v5.0. This item limits the total write rate of background tasks in bytes per second. It is not recommended to use this experimental feature in a production environment.
-    ## The unit is bytes. Currently, the setting such as "10GB" is not supported.
-    ## The default value is 0, which means no limit.
-    ## This parameter is used to control the usage of machine disk bandwidth by background tasks mainly for the scenario where TiFlash is deployed on the AWS EBS (gp2/gp3) disk.
-    ## This parameter can be used to improve the stability of the TiFlash query performance. The recommended configuration in this scenario is 50% of the disk bandwidth.
-    ## It is not recommended to modify this configuration in other scenarios.
-    bg_task_io_rate_limit = 0
+    ## This configuration item is deprecated since v5.2.0. You can use the [storage.io_rate_limit] settings below instead.
+
+    # bg_task_io_rate_limit = 0
+
+    ## DTFile format
+    ## * format_version = 1, the old format, deprecated.
+    ## * format_version = 2, the default format for versions < v6.0.0.
+    ## * format_version = 3, the default format for v6.0.0 and v6.1.x, which provides more data validation features.
+    ## * format_version = 4, the default format for v6.2.0 and later versions, which reduces write amplification and background task resource consumption
+    # format_version = 4
 
     [storage.main]
     ## The list of directories to store the main data. More than 90% of the total data is stored in
@@ -82,30 +87,54 @@ delta_index_cache_size = 0
     ## or
     # dir = [ "/ssd0/tidb-data/tiflash", "/ssd1/tidb-data/tiflash" ]
 
-    ## The maximum storage capacity of each directory in `storage.main.dir`.
+    ## The maximum storage capacity of each directory in storage.main.dir.
     ## If it is not set, or is set to multiple 0, the actual disk (the disk where the directory is located) capacity is used.
     ## Note that human-readable numbers such as "10GB" are not supported yet.
     ## Numbers are specified in bytes.
-    ## The size of the `capacity` list should be the same with the `dir` size.
+    ## The size of the capacity list should be the same with the dir size.
     ## For example:
     # capacity = [ 10737418240, 10737418240 ]
 
     [storage.latest]
     ## The list of directories to store the latest data. About 10% of the total data is stored in
     ## the directory list. The directories (or directory) listed here require higher IOPS
-    ## metrics than those in `storage.main.dir`.
-    ## If it is not set (by default), the values of `storage.main.dir` are used.
+    ## metrics than those in storage.main.dir.
+    ## If it is not set (by default), the values of storage.main.dir are used.
     # dir = [ ]
-    ## The maximum storage capacity of each directory in `storage.latest.dir`.
+    ## The maximum storage capacity of each directory in storage.latest.dir.
     ## If it is not set, or is set to multiple 0, the actual disk (the disk where the directory is located) capacity is used.
     # capacity = [ 10737418240, 10737418240 ]
+
+    ## [storage.io_rate_limit] settings are new in v5.2.0.
+    [storage.io_rate_limit]
+    ## This configuration item determines whether to limit the I/O traffic, which is disabled by default. This traffic limit in TiFlash is suitable for cloud storage that has the disk bandwidth of a small and specific size.
+    ## The total I/O bandwidth for disk reads and writes. The unit is bytes and the default value is 0, which means the I/O traffic is not limited by default.
+    # max_bytes_per_sec = 0
+    ## max_read_bytes_per_sec and max_write_bytes_per_sec have similar meanings to max_bytes_per_sec. max_read_bytes_per_sec means the total I/O bandwidth for disk reads, and max_write_bytes_per_sec means the total I/O bandwidth for disk writes.
+    ## These configuration items limit I/O bandwidth for disk reads and writes separately. You can use them for cloud storage that calculates the limit of I/O bandwidth for disk reads and writes separately, such as the Persistent Disk provided by Google Cloud Platform.
+    ## When the value of max_bytes_per_sec is not 0, max_bytes_per_sec is prioritized.
+    # max_read_bytes_per_sec = 0
+    # max_write_bytes_per_sec = 0
+
+    ## The following parameters control the bandwidth weights assigned to different I/O traffic types. Generally, you do not need to adjust these parameters.
+    ## TiFlash internally divides I/O requests into four types: foreground writes, background writes, foreground reads, background reads.
+    ## When the I/O traffic limit is initialized, TiFlash assigns the bandwidth according to the following weight ratio.
+    ## The following  default configurations indicate that each type of traffic gets a weight of 25% (25 / (25 + 25 + 25 + 25) = 25%).
+    ## If the weight is configured to 0, the corresponding I/O traffic is not limited.
+    # foreground_write_weight = 25
+    # background_write_weight = 25
+    # foreground_read_weight = 25
+    # background_read_weight = 25
+    ## TiFlash supports automatically tuning the traffic limit for different I/O types according to the current I/O load. Sometimes, the tuned bandwidth might exceed the weight ratio set above.
+    ## auto_tune_sec indicates the interval of automatic tuning. The unit is seconds. If the value of auto_tune_sec is 0, the automatic tuning is disabled.
+    # auto_tune_sec = 5
 
 [flash]
     tidb_status_addr = TiDB status port and address. # Multiple addresses are separated with commas.
     service_addr = The listening address of TiFlash Raft services and coprocessor services.
 
 ## Multiple TiFlash nodes elect a master to add or delete placement rules to PD,
-## and the configurations in `flash.flash_cluster` control this process.
+## and the configurations in flash.flash_cluster control this process.
 [flash.flash_cluster]
     refresh_interval = Master regularly refreshes the valid period.
     update_rule_interval = Master regularly gets the status of TiFlash replicas and interacts with PD.
@@ -114,37 +143,44 @@ delta_index_cache_size = 0
     log = The pd buddy log path.
 
 [flash.proxy]
-    addr = The listening address of proxy.
-    advertise-addr = The external access address of addr. If it is left empty, addr is used by default.
+    addr = The listening address of proxy. If it is left empty, 127.0.0.1:20170 is used by default.
+    advertise-addr = The external access address of addr. If it is left empty, "addr" is used by default.
     data-dir = The data storage path of proxy.
-    config = The proxy configuration file path.
-    log-file = The proxy log path.
-    log-level = The proxy log level. "info" is used by default.
-    status-addr = The listening address from which the proxy metrics | status information is pulled.
-    advertise-status-addr = The external access address of status-addr. If it is left empty, status-addr is used by default.
+    config = The configuration file path of proxy.
+    log-file = The log path of proxy.
+    log-level = The log level of proxy. "info" is used by default.
+    status-addr = The listening address from which the proxy pulls metrics | status information. If it is left empty, 127.0.0.1:20292 is used by default.
+    advertise-status-addr = The external access address of status-addr. If it is left empty, "status-addr" is used by default.
 
 [logger]
-    level = log level (available options: trace, debug, information, warning, error).
-    log = The TiFlash log path.
-    errorlog = The TiFlash error log path.
-    size = The size of a single log file.
-    count = The maximum number of log files to save.
+    ## log level (available options: trace, debug, information, warning, error). The default value is `debug`.
+    level = debug
+    log = TiFlash log path
+    errorlog = TiFlash error log path
+    ## Size of a single log file. The default value is "100M".
+    size = "100M"
+    ## Maximum number of log files to save. The default value is 10.
+    count = 10
 
 [raft]
     ## PD service address. Multiple addresses are separated with commas.
     pd_addr = "10.0.1.11:2379,10.0.1.12:2379,10.0.1.13:2379"
 
 [status]
-    metrics_port = The port through which Prometheus pulls metrics information.
+    ## The port through which Prometheus pulls metrics information. The default value is 8234.
+    metrics_port = 8234
 
 [profiles]
 
 [profiles.default]
-    ## The default value is `true`. This parameter determines whether the segment
+    ## The default value is false. This parameter determines whether the segment
     ## of DeltaTree Storage Engine uses logical split.
-    ## Using the logical split can reduce the write amplification, and improve the write speed.
+    ## Using the logical split can reduce the write amplification.
     ## However, these are at the cost of disk space waste.
-    dt_enable_logical_split = true
+    ## It is strongly recommended to keep the default value `false` and
+    ## not to change it to `true` in v6.2.0 and later versions. For details,
+    ## see known issue [#5576](https://github.com/pingcap/tiflash/issues/5576).
+    # dt_enable_logical_split = false
 
     ## The memory usage limit for the generated intermediate data when a single
     ## coprocessor query is executed. The default value is 0, which means no limit.
@@ -158,26 +194,38 @@ delta_index_cache_size = 0
     cop_pool_size = 0
     ## New in v5.0. This item specifies the maximum number of batch requests that TiFlash Coprocessor executes at the same time. If the number of requests exceeds the specified value, the exceeded requests will queue. If the configuration value is set to 0 or not set, the default value is used, which is twice the number of physical cores.
     batch_cop_pool_size = 0
+    ## New in v6.1.0. This item specifies the number of requests that TiFlash can concurrently process when it receives ALTER TABLE ... COMPACT from TiDB.
+    ## If the value is set to 0, the default value 1 prevails.
+    manual_compact_pool_size = 1
+    ## New in v5.4.0. This item enables or disables the elastic thread pool feature, which significantly improves CPU utilization in high concurrency scenarios of TiFlash. The default value is true.
+    enable_elastic_threadpool = true
+    ## Compression algorithm of the TiFlash storage engine. The value can be LZ4, zstd, or LZ4HC, and is case-insensitive. By default, LZ4 is used.
+    dt_compression_method = "LZ4"
+    ## Compression level of the TiFlash storage engine. The default value is 1. It is recommended that you set this value to 1 if dt_compression_method is LZ4, -1 (smaller compression rate, but better read performance) or 1 if dt_compression_method is zstd, and 9 if dt_compression_method is LZ4HC.
+    dt_compression_level = 1
+
+    ## New in v6.2.0. This item specifies the minimum ratio of valid data in a PageStorage data file. When the ratio of valid data in a PageStorage data file is less than the value of this configuration, GC is triggered to compact data in the file. The default value is 0.5.
+    dt_page_gc_threshold = 0.5
+
+    ## New in v6.2.0. Use the thread pool to handle read requests from the storage engine. The default value is false.
+    ## Warning: This is still an experimental feature. It is NOT recommended that you use it in the production environment.
+
+    # dt_enable_read_thread = false
 
 ## Security settings take effect starting from v4.0.5.
 [security]
     ## New in v5.0. This configuration item enables or disables log redaction. If the configuration value
-    ## is set to `true`, all user data in the log will be replaced by `?`.
-    ## Note that you also need to set `security.redact-info-log` for tiflash-learner's logging in tiflash-learner.toml.
+    ## is set to true, all user data in the log will be replaced by ?.
+    ## Note that you also need to set security.redact-info-log for tiflash-learner's logging in tiflash-learner.toml.
     # redact_info_log = false
 
     ## Path of the file that contains a list of trusted SSL CAs. If set, the following settings
-    ## `cert_path` and `key_path` are also needed.
+    ## cert_path and key_path are also needed.
     # ca_path = "/path/to/ca.pem"
     ## Path of the file that contains X509 certificate in PEM format.
     # cert_path = "/path/to/tiflash-server.pem"
     ## Path of the file that contains X509 key in PEM format.
     # key_path = "/path/to/tiflash-server-key.pem"
-
-    ## New in v5.0. This configuration item enables or disables log redaction. If the configuration value
-    ## is set to `true`, all user data in the log will be replaced by `?`.
-    ## Note that you also need to set `security.redact-info-log` for tiflash-learner's logging in tiflash-learner.toml.
-    # redact_info_log = false
 ```
 
 ### Configure the `tiflash-learner.toml` file
@@ -186,12 +234,18 @@ delta_index_cache_size = 0
 [server]
     engine-addr = The external access address of the TiFlash coprocessor service.
 [raftstore]
-    ## Specifies the number of threads that handle snapshots.
+    ## The allowable number of threads in the pool that flushes Raft data to storage.
+    apply-pool-size = 4
+
+    ## The allowable number of threads that process Raft, which is the size of the Raftstore thread pool.
+    store-pool-size = 4
+
+    ## The number of threads that handle snapshots.
     ## The default number is 2.
     ## If you set it to 0, the multi-thread optimization is disabled.
     snap-handle-pool-size = 2
 
-    ## Specifies the shortest interval at which Raft store persists WAL.
+    ## The shortest interval at which Raft store persists WAL.
     ## You can properly increase the latency to reduce IOPS usage.
     ## The default value is "4ms".
     ## If you set it to 0ms, the optimization is disabled.
@@ -203,7 +257,7 @@ delta_index_cache_size = 0
     redact-info-log = false
 ```
 
-In addition to the items above, other parameters are the same with those of TiKV. Note that the configuration items in `tiflash.toml [flash.proxy]` will override the overlapping parameters in `tiflash-learner.toml`; The `label` whose key is `engine` is reserved and cannot be configured manually.
+In addition to the items above, other parameters are the same as those of TiKV. Note that the `label` whose key is `engine` is reserved and cannot be configured manually.
 
 ### Multi-disk deployment
 
@@ -229,5 +283,4 @@ If there are multiple disks with different I/O metrics on your TiFlash node, it 
 
 > **Warning:**
 >
-> * The `[storage]` configuration is supported in TiUP since v1.2.5. If your TiDB cluster version is v4.0.9 or later, make sure that your TiUP version is v1.2.5 or later. Otherwise, the data directories defined in `[storage]` will not be managed by TiUP.
-> * After using the [storage] configurations, downgrading your cluster to a version earlier than v4.0.9 might cause **data loss** on TiFlash..
+> The `[storage]` configuration is supported in TiUP since v1.2.5. If your TiDB cluster version is v4.0.9 or later, make sure that your TiUP version is v1.2.5 or later. Otherwise, the data directories defined in `[storage]` will not be managed by TiUP.

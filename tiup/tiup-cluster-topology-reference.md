@@ -4,7 +4,7 @@ title: Topology Configuration File for TiDB Deployment Using TiUP
 
 # Topology Configuration File for TiDB Deployment Using TiUP
 
-To deploy or scale TiDB using TiUP, you need to provide a topology file ([sample](https://github.com/pingcap/tiup/blob/master/embed/templates/examples/topology.example.yaml)) to describe the cluster topology.
+To deploy or scale TiDB using TiUP, you need to provide a topology file ([sample](https://github.com/pingcap/tiup/blob/master/embed/examples/cluster/topology.example.yaml)) to describe the cluster topology.
 
 Similarly, to modify the cluster topology, you need to modify the topology file. The difference is that, after the cluster is deployed, you can only modify a part of the fields in the topology file. This document introduces each section of the topology file and each field in each section.
 
@@ -24,7 +24,7 @@ A topology configuration file for TiDB deployment using TiUP might contain the f
 - [cdc_servers](#cdc_servers): The configuration of the TiCDC instance. This configuration specifies the machines to which the TiCDC component is deployed.
 - [tispark_masters](#tispark_masters): The configuration of the TiSpark master instance. This configuration specifies the machines to which the TiSpark master component is deployed. Only one node of TiSpark master can be deployed.
 - [tispark_workers](#tispark_workers): The configuration of the TiSpark worker instance. This configuration specifies the machines to which the TiSpark worker component is deployed.
-- [monitoring_servers](#monitoring_servers): Specifies the machines to which Prometheus is deployed. TiUP supports deploying multiple Prometheus instances but only the first instance is used.
+- [monitoring_servers](#monitoring_servers): Specifies the machines to which Prometheus and NGMonitoring are deployed. TiUP supports deploying multiple Prometheus instances but only the first instance is used.
 - [grafana_servers](#grafana_servers): The configuration of the Grafana instance. This configuration specifies the machines to which Grafana is deployed.
 - [alertmanager_servers](#alertmanager_servers): The configuration of the Alertmanager instance. This configuration specifies the machines to which Alertmanager is deployed.
 
@@ -58,7 +58,7 @@ The `global` section corresponds to the cluster's global configuration and has t
 
     - If `data_dir` is a relative path, the component data is placed in `<deploy_dir>/<data_dir>`. For the calculation rules of `<deploy_dir>`, see the application rules of the `deploy_dir` field.
 
-- `log_dir`: The data directory. Default value: `"log"`. Its application rules are as follows:
+- `log_dir`: The log directory. Default value: `"log"`. Its application rules are as follows:
 
     - If the absolute path `log_dir` is configured at the instance level, the actual log directory is the `log_dir` configured for the instance.
 
@@ -440,7 +440,7 @@ pump_servers:
 
 - `log_dir`: Specifies the log directory. If it is not specified or specified as a relative directory, the log is generated according to the `log_dir` directory configured in `global`.
 
-- `commit_ts`: When Drainer starts, it reads the checkpoint. If Drainer cannot read the checkpoint, it uses this field as the replication time point for the initial startup. This field defaults to `-1` (Drainer always gets the latest timestamp from the PD as the commit_ts).
+- `commit_ts` (deprecated): When Drainer starts, it reads the checkpoint. If Drainer gets no checkpoint, it uses this field as the replication time point for the initial startup. This field defaults to `-1` (Drainer always gets the latest timestamp from the PD as the commit_ts).
 
 - `numa_node`: Allocates the NUMA policy to the instance. Before specifying this field, you need to make sure that the target machine has [numactl](https://linux.die.net/man/8/numactl) installed. If this field is specified, cpubind and membind policies are allocated using [numactl](https://linux.die.net/man/8/numactl). This field is the string type. The field value is the ID of the NUMA node, such as "0,1".
 
@@ -459,9 +459,10 @@ For the above fields, you cannot modify these configured fields after the deploy
 - `deploy_dir`
 - `data_dir`
 - `log_dir`
-- `commit_ts`
 - `arch`
 - `os`
+
+The `commit_ts` field is deprecated since TiUP v1.9.2 and is not recorded in the starting script of Drainer. If you still need to use this field, refer to the following example to configure the `initial-commit-ts` field in `config`.
 
 A `drainer_servers` configuration example is as follows:
 
@@ -469,6 +470,7 @@ A `drainer_servers` configuration example is as follows:
 drainer_servers:
   - host: 10.0.1.21
     config:
+      initial-commit-ts: -1
       syncer.db-type: "mysql"
       syncer.to.host: "127.0.0.1"
       syncer.to.user: "root"
@@ -493,6 +495,8 @@ drainer_servers:
 
 - `deploy_dir`: Specifies the deployment directory. If it is not specified or specified as a relative directory, the directory is generated according to the `deploy_dir` directory configured in `global`.
 
+- `data_dir`: Specifies the data directory. If it is not specified or specified as a relative directory, the directory is generated according to the `data_dir` directory configured in `global`.
+
 - `log_dir`: Specifies the log directory. If it is not specified or specified as a relative directory, the log is generated according to the `log_dir` directory configured in `global`.
 
 - `gc-ttl`: The Time To Live (TTL) duration of the service level GC safepoint set by TiCDC in PD, in seconds. The default value is `86400`, which is 24 hours.
@@ -514,9 +518,8 @@ For the above fields, you cannot modify these configured fields after the deploy
 - `host`
 - `port`
 - `deploy_dir`
+- `data_dir`
 - `log_dir`
-- `gc-ttl`
-- `tz`
 - `arch`
 - `os`
 
@@ -526,7 +529,10 @@ A `cdc_servers` configuration example is as follows:
 cdc_servers:
   - host: 10.0.1.20
     gc-ttl: 86400
+    data_dir: "/cdc-data"
   - host: 10.0.1.21
+    gc-ttl: 86400
+    data_dir: "/cdc-data"
 ```
 
 ### `tispark_masters`
@@ -632,6 +638,8 @@ tispark_workers:
 
 - `host`: Specifies the machine to which the monitoring services are deployed. The field value is an IP address and is mandatory.
 
+- `ng_port`: Specifies the SSH port connecting to NGMonitoring. Introduced in TiUP v1.7.0, this field supports [Continuous Profiling](/dashboard/dashboard-profiling.md) and Top SQL in TiDB 5.3.0 and above.
+
 - `ssh_port`: Specifies the SSH port to connect to the target machine for operations. If it is not specified, the `ssh_port` of the `global` section is used.
 
 - `port`: The listening port of the Prometheus services. The default value is `9090`.
@@ -644,7 +652,7 @@ tispark_workers:
 
 - `numa_node`: Allocates the NUMA policy to the instance. Before specifying this field, you need to make sure that the target machine has [numactl](https://linux.die.net/man/8/numactl) installed. If this field is specified, cpubind and membind policies are allocated using [numactl](https://linux.die.net/man/8/numactl). This field is the string type. The field value is the ID of the NUMA node, such as "0,1".
 
-- `storage_retention`: The retention time of the Prometheus monitoring data. The default value is `"15d"`.
+- `storage_retention`: The retention time of the Prometheus monitoring data. The default value is `"30d"`.
 
 - `rule_dir`: Specifies a local directory that should contain complete `*.rules.yml` files. These files are transferred to the target machine during the initialization phase of the cluster configuration as the rules for Prometheus.
 - `remote_config`: Supports writing Prometheus data to the remote, or reading data from the remote. This field has two configurations:

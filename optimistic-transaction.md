@@ -12,7 +12,7 @@ Before enabling optimistic transactions, make sure that your application correct
 
 > **Note:**
 >
-> Starting from v3.0.8, TiDB uses the [pessimistic transaction model](/pessimistic-transaction.md) by default. However, this does not affect your existing cluster if you upgrade it from v3.0.7 or earlier to v3.0.8 or later. In other words, **only newly created clusters default to using the pessimistic transaction model**.
+> Starting from v3.0.8, TiDB uses the [pessimistic transaction mode](/pessimistic-transaction.md) by default. However, this does not affect your existing cluster if you upgrade it from v3.0.7 or earlier to v3.0.8 or later. In other words, **only newly created clusters default to using the pessimistic transaction mode**.
 
 ## Principles of optimistic transactions
 
@@ -65,7 +65,7 @@ However, TiDB transactions also have the following disadvantages:
 
 ## Transaction retries
 
-In the optimistic transaction model, transactions might fail to be committed because of write–write conflict in heavy contention scenarios. TiDB uses optimistic concurrency control by default, whereas MySQL applies pessimistic concurrency control. This means that MySQL adds locks during SQL execution, and its Repeatable Read isolation level allows for non-repeatable reads, so commits generally do not encounter exceptions. To lower the difficulty of adapting applications, TiDB provides an internal retry mechanism.
+In the optimistic transaction model, transactions might fail to be committed because of write–write conflict in heavy contention scenarios. TiDB uses optimistic concurrency control by default, whereas MySQL applies pessimistic concurrency control. This means that MySQL adds locks during the execution of write-type SQL statements, and its Repeatable Read isolation level allows for current reads, so commits generally do not encounter exceptions. To lower the difficulty of adapting applications, TiDB provides an internal retry mechanism.
 
 ### Automatic retry
 
@@ -75,7 +75,7 @@ If a write-write conflict occurs during the transaction commit, TiDB automatical
 # Whether to disable automatic retry. ("on" by default)
 tidb_disable_txn_auto_retry = OFF
 # Set the maximum number of the retires. ("10" by default)
-# When “tidb_retry_limit = 0”, automatic retry is completely disabled.
+# When "tidb_retry_limit = 0", automatic retry is completely disabled.
 tidb_retry_limit = 10
 ```
 

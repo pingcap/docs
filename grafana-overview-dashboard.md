@@ -8,7 +8,7 @@ aliases: ['/docs/dev/grafana-overview-dashboard/','/docs/dev/reference/key-monit
 
 If you use TiUP to deploy the TiDB cluster, the monitoring system (Prometheus & Grafana) is deployed at the same time. For more information, see [TiDB Monitoring Framework Overview](/tidb-monitoring-framework.md).
 
-The Grafana dashboard is divided into a series of sub dashboards which include Overview, PD, TiDB, TiKV, Node\_exporter, Disk Performance, and so on. A lot of metrics are there to help you diagnose.
+The Grafana dashboard is divided into a series of sub dashboards which include Overview, PD, TiDB, TiKV, Node\_exporter, Disk Performance, Performance\_overview, and so on. A lot of metrics are there to help you diagnose.
 
 For routine operations, you can get an overview of the component (PD, TiDB, TiKV) status and the entire cluster from the Overview dashboard, where the key metrics are displayed. This document provides a detailed description of these key metrics.
 
@@ -34,7 +34,7 @@ To understand the key metrics displayed on the Overview dashboard, check the fol
 | PD | 99% Region heartbeat latency | The heartbeat latency per TiKV instance (P99). |
 | TiDB | Statement OPS | The number of different types of SQL statements executed per second, which is counted according to `SELECT`, `INSERT`, `UPDATE`, and other types of statements. |
 | TiDB | Duration | The execution time.<br/>1. The duration between the time that the client's network request is sent to TiDB and the time that the request is returned to the client after TiDB has executed the request. In general, client requests are sent in the form of SQL statements; however, this duration can include the execution time of commands such as `COM_PING`, `COM_SLEEP`, `COM_STMT_FETCH`, and `COM_SEND_LONG_DATA`.<br/>2. Because TiDB supports Multi-Query, TiDB supports sending multiple SQL statements at one time, such as `select 1; select 1; select 1;`. In this case, the total execution time of this query includes the execution time of all SQL statements. |
-| TiDB | QPS By Instance | The QPS on each TiDB instance, which is classified according to the success or failure of command execution results. |
+| TiDB | CPS By Instance | CPS By Instance: the command statistics on each TiDB instance, which is classified according to the success or failure of command execution results. |
 | TiDB | Failed Query OPM | The statistics of error types (such as syntax errors and primary key conflicts) based on the errors occurred when executing SQL statements per second on each TiDB instance. The module in which the error occurs and the error code are included. |
 | TiDB | Connection Count | The connection number of each TiDB instance. |
 | TiDB | Memory Usage | The  memory usage statistics of each TiDB instance, which is divided into the memory occupied by processes and the memory applied by Golang on the heap. |

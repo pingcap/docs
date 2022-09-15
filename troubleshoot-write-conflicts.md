@@ -46,7 +46,7 @@ In the TiDB Grafana panel, check the following monitoring metrics under **KV Err
 
      ![kv-retry-duration](/media/troubleshooting-write-conflict-kv-retry-duration.png)
 
-You can also use `[kv:9007]Write conflict` as the key word to search in the TiDB log. The key word also indicates the write conflict exists in the cluster.
+You can also use `[kv:9007]Write conflict` as the keywords to search in the TiDB log. The keywords also indicate the write conflict exists in the cluster.
 
 ## Resolve write conflicts
 
@@ -59,10 +59,10 @@ If many write conflicts exist in the cluster, it is recommended to find out the 
 The explanation of the log above is as follows:
 
 * `[kv:9007]Write conflict`: indicates the write-write conflict.
-* `txnStartTS=416617006551793665`：indicates the `start_ts` of the current transaction. You can use the `pd-ctl` tool to convert `start_ts` to physical time.
+* `txnStartTS=416617006551793665`: indicates the `start_ts` of the current transaction. You can use the `pd-ctl` tool to convert `start_ts` to physical time.
 * `conflictStartTS=416617018650001409`: indicates the `start_ts` of the write conflict transaction.
 * `conflictCommitTS=416617023093080065`: indicates the `commit_ts` of the write conflict transaction.
-* `key={tableID=47, indexID=1, indexValues={string, }}`：indicates the write conflict key. `tableID` indicates the ID of the write conflict table. `indexID` indicates the ID of write conflict index. If the write conflict key is a record key, the log prints `handle=x`, indicating which record(row) has a conflict. `indexValues` indicates the value of the index that has a conflict.
+* `key={tableID=47, indexID=1, indexValues={string, }}`: indicates the write conflict key. `tableID` indicates the ID of the write conflict table. `indexID` indicates the ID of write conflict index. If the write conflict key is a record key, the log prints `handle=x`, indicating which record(row) has a conflict. `indexValues` indicates the value of the index that has a conflict.
 * `primary={tableID=47, indexID=1, indexValues={string, }}`: indicates the primary key information of the current transaction.
 
 You can use the `pd-ctl` tool to convert the timestamp to readable time:
@@ -70,7 +70,7 @@ You can use the `pd-ctl` tool to convert the timestamp to readable time:
 {{< copyable "" >}}
 
 ```shell
-./pd-ctl -u https://127.0.0.1:2379 tso {TIMESTAMP}
+tiup ctl pd -u https://127.0.0.1:2379 tso {TIMESTAMP}
 ```
 
 You can use `tableID` to find the name of the related table:
@@ -86,7 +86,7 @@ You can use `indexID` and the table name to find the name of the related index:
 {{< copyable "sql" >}}
 
 ```sql
-SELECT * FROM INFORMATION_SCHEMA.TIDB_INDEXES WHERE TABLE_SCHEMA='{table_name}' AND TABLE_NAME='{table_name}' AND INDEX_ID={indexID};
+SELECT * FROM INFORMATION_SCHEMA.TIDB_INDEXES WHERE TABLE_SCHEMA='{db_name}' AND TABLE_NAME='{table_name}' AND INDEX_ID={indexID};
 ```
 
-In addition, in TiDB v3.0.8 and later versions, the pessimistic transaction becomes the default model.  The pessimistic transaction model can avoid write conflicts during the transaction prewrite stage, so you do not need to modify the application any more. In the pessimistic transaction mode, each DML statement writes a pessimistic lock to the related keys during execution. This pessimistic lock can prevent other transactions from modifying the same keys, thus ensuring no write conflicts exist in the `prewrite` stage of the transaction 2PC.
+In addition, in TiDB v3.0.8 and later versions, the pessimistic transaction becomes the default mode.  The pessimistic transaction mode can avoid write conflicts during the transaction prewrite stage, so you do not need to modify the application any more. In the pessimistic transaction mode, each DML statement writes a pessimistic lock to the related keys during execution. This pessimistic lock can prevent other transactions from modifying the same keys, thus ensuring no write conflicts exist in the `prewrite` stage of the transaction 2PC.

@@ -8,13 +8,13 @@ aliases: ['/docs/dev/sql-statements/sql-statement-restore/']
 
 This statement performs a distributed restore from a backup archive previously produced by a [`BACKUP` statement](/sql-statements/sql-statement-backup.md).
 
-The `RESTORE` statement uses the same engine as the [BR tool](/br/backup-and-restore-use-cases.md), except that the restore process is driven by TiDB itself rather than a separate BR tool. All benefits and caveats of BR also apply here. In particular, **`RESTORE` is currently not ACID-compliant**. Before running `RESTORE`, ensure that the following requirements are met:
+The `RESTORE` statement uses the same engine as the [BR tool](/br/backup-and-restore-overview.md), except that the restore process is driven by TiDB itself rather than a separate BR tool. All benefits and caveats of BR also apply here. In particular, **`RESTORE` is currently not ACID-compliant**. Before running `RESTORE`, ensure that the following requirements are met:
 
 * The cluster is "offline", and the current TiDB session is the only active SQL connection to access all tables being restored.
 * When a full restore is being performed, the tables being restored should not already exist, because existing data might be overridden and causes inconsistency between the data and indices.
 * When an incremental restore is being performed, the tables should be at the exact same state as the `LAST_BACKUP` timestamp when the backup is created.
 
-Running `RESTORE` requires `SUPER` privilege. Additionally, both the TiDB node executing the restore and all TiKV nodes in the cluster must have read permission from the destination.
+Running `RESTORE` requires either the `RESTORE_ADMIN` or `SUPER` privilege. Additionally, both the TiDB node executing the restore and all TiKV nodes in the cluster must have read permission from the destination.
 
 The `RESTORE` statement is blocking, and will finish only after the entire restore task is finished, failed, or canceled. A long-lasting connection should be prepared for running `RESTORE`. The task can be canceled using the [`KILL TIDB QUERY`](/sql-statements/sql-statement-kill.md) statement.
 
@@ -96,7 +96,7 @@ BR supports restoring data from S3 or GCS:
 {{< copyable "sql" >}}
 
 ```sql
-RESTORE DATABASE * FROM 's3://example-bucket-2020/backup-05/?region=us-west-2';
+RESTORE DATABASE * FROM 's3://example-bucket-2020/backup-05/';
 ```
 
 The URL syntax is further explained in [External Storages](/br/backup-and-restore-storages.md).
@@ -106,7 +106,7 @@ When running on cloud environment where credentials should not be distributed, s
 {{< copyable "sql" >}}
 
 ```sql
-RESTORE DATABASE * FROM 's3://example-bucket-2020/backup-05/?region=us-west-2'
+RESTORE DATABASE * FROM 's3://example-bucket-2020/backup-05/'
     SEND_CREDENTIALS_TO_TIKV = FALSE;
 ```
 

@@ -19,42 +19,15 @@ In environments of development, testing and production, the requirements on serv
 | Pump | 3 | 8 core+    | SSD, 200 GB+ | 16G |
 | Drainer | 1 | 8 core+ | SAS, 100 GB+ (If binlogs are output as local files, the disk size depends on how long these files are retained.) | 16G |
 
-## Deploy TiDB Binlog using a Binary package
+## Deploy TiDB Binlog using TiUP
 
-### Download the official Binary package
+It is recommended to deploy TiDB Binlog using TiUP. To do that, when deploying TiDB using TiUP, you need to add the node information of `drainer` and `pump` of TiDB Binlog in [TiDB Binlog Deployment Topology](/tidb-binlog-deployment-topology.md). For detailed deployment information, refer to [Deploy a TiDB Cluster Using TiUP](/production-deployment-using-tiup.md).
 
-Run the following commands to download the packages:
+## Deploy TiDB Binlog using a binary package
 
-{{< copyable "shell-regular" >}}
+### Download the official binary package
 
-```bash
-version="latest" for nightly builds &&
-wget https://download.pingcap.org/tidb-latest-linux-amd64.{tar.gz,sha256}
-```
-
-Check the file integrity. If the result is OK, the file is correct.
-
-{{< copyable "shell-regular" >}}
-
-```bash
-sha256sum -c tidb-latest-linux-amd64.sha256
-```
-
-For TiDB v2.1.0 GA or later versions, Pump and Drainer are already included in the TiDB download package. For other TiDB versions, you need to download Pump and Drainer separately using the following command:
-
-{{< copyable "shell-regular" >}}
-
-```bash
-wget https://download.pingcap.org/tidb-binlog-$version-linux-amd64.{tar.gz,sha256}
-```
-
-Check the file integrity. If the result is OK, the file is correct.
-
-{{< copyable "shell-regular" >}}
-
-```bash
-sha256sum -c tidb-binlog-$version-linux-amd64.sha256
-```
+The binary package of TiDB Binlog is included in the TiDB Toolkit. To download the TiDB Toolkit, see [Download TiDB Tools](/download-ecosystem-tools.md).
 
 ### The usage example
 
@@ -74,7 +47,7 @@ The following part shows how to use Pump and Drainer based on the nodes above.
 
 1. Deploy Pump using the binary.
 
-    - To view the command line parameters of Pump, execute `./bin/pump -help`:
+    - To view the command line parameters of Pump, execute `./pump -help`:
 
         ```bash
         Usage of Pump:
@@ -169,14 +142,14 @@ The following part shows how to use Pump and Drainer based on the nodes above.
         {{< copyable "shell-regular" >}}
 
         ```bash
-        ./bin/pump -config pump.toml
+        ./pump -config pump.toml
         ```
 
         If the command line parameters is the same with the configuration file parameters, the values of command line parameters are used.
 
 2. Deploy Drainer using binary.
 
-    - To view the command line parameters of Drainer, execute `./bin/drainer -help`:
+    - To view the command line parameters of Drainer, execute `./drainer -help`:
 
         ```bash
         Usage of Drainer:
@@ -331,9 +304,9 @@ The following part shows how to use Pump and Drainer based on the nodes above.
         [syncer.to]
         host = "192.168.0.13"
         user = "root"
+        # If you do not want to set a cleartext `password` in the configuration file, you can create `encrypted_password` using `./binlogctl -cmd encrypt -text string`.
+        # When you have created an `encrypted_password` that is not empty, the `password` above will be ignored, because `encrypted_password` and `password` cannot take effect at the same time.
         password = ""
-        # `encrypted_password` is encrypted using `./binlogctl -cmd encrypt -text string`.
-        # When `encrypted_password` is not empty, the `password` above will be ignored.
         encrypted_password = ""
         port = 3306
 
@@ -366,9 +339,12 @@ The following part shows how to use Pump and Drainer based on the nodes above.
         # zookeeper-addrs = "127.0.0.1:2181"
         # kafka-addrs = "127.0.0.1:9092"
         # kafka-version = "0.8.2.0"
+        # The maximum number of messages (number of binlogs) in a broker request. If it is left blank or a value smaller than 0 is configured, the default value 1024 is used.
         # kafka-max-messages = 1024
+        # The maximum size of a broker request (unit: byte). The default value is 1 GiB and the maximum value is 2 GiB.
+        # kafka-max-message-size = 1073741824
 
-        # the topic name of the Kafka cluster that saves the binlog data. The default value is <cluster-id>_obinlog
+        # the topic name of the Kafka cluster that saves the binlog data. The default value is <cluster-id>_obinlog.
         # To run multiple Drainers to replicate data to the same Kafka cluster, you need to set different `topic-name`s for each Drainer.
         # topic-name = ""
         ```
@@ -384,7 +360,7 @@ The following part shows how to use Pump and Drainer based on the nodes above.
         {{< copyable "shell-regular" >}}
 
         ```bash
-        ./bin/drainer -config drainer.toml -initial-commit-ts {initial-commit-ts}
+        ./drainer -config drainer.toml -initial-commit-ts {initial-commit-ts}
         ```
 
         If the command line parameter and the configuration file parameter are the same, the parameter value in the command line is used.

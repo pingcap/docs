@@ -12,7 +12,8 @@ TiDB supports most of the [miscellaneous functions](https://dev.mysql.com/doc/re
 
 | Name | Description  |
 |:------------|:-----------------------------------------------------------------------------------------------|
-| [`ANY_VALUE()`](https://dev.mysql.com/doc/refman/5.7/en/miscellaneous-functions.html#function_any-value)              | Suppress `ONLY_FULL_GROUP_BY` value rejection       |
+| [`ANY_VALUE()`](https://dev.mysql.com/doc/refman/5.7/en/miscellaneous-functions.html#function_any-value)              | Suppress `ONLY_FULL_GROUP_BY` value rejection     |
+| [`BIN_TO_UUID()`](https://dev.mysql.com/doc/refman/8.0/en/miscellaneous-functions.html#function_bin-to-uuid)          | Convert UUID from binary format to text format    |
 | [`DEFAULT()`](https://dev.mysql.com/doc/refman/5.7/en/miscellaneous-functions.html#function_default)                  | Returns the default value for a table column      |
 | [`INET_ATON()`](https://dev.mysql.com/doc/refman/5.7/en/miscellaneous-functions.html#function_inet-aton)              | Return the numeric value of an IP address         |
 | [`INET_NTOA()`](https://dev.mysql.com/doc/refman/5.7/en/miscellaneous-functions.html#function_inet-ntoa)              | Return the IP address from a numeric value        |
@@ -25,13 +26,14 @@ TiDB supports most of the [miscellaneous functions](https://dev.mysql.com/doc/re
 | [`NAME_CONST()`](https://dev.mysql.com/doc/refman/5.7/en/miscellaneous-functions.html#function_name-const)            | Can be used to rename a column name               |
 | [`SLEEP()`](https://dev.mysql.com/doc/refman/5.7/en/miscellaneous-functions.html#function_sleep)                      | Sleep for a number of seconds                     |
 | [`UUID()`](https://dev.mysql.com/doc/refman/5.7/en/miscellaneous-functions.html#function_uuid)                        | Return a Universal Unique Identifier (UUID)       |
+| [`UUID_TO_BIN()`](https://dev.mysql.com/doc/refman/8.0/en/miscellaneous-functions.html#function_uuid-to-bin)          | Convert UUID from text format to binary format    |
 | [`VALUES()`](https://dev.mysql.com/doc/refman/5.7/en/miscellaneous-functions.html#function_values)                    | Defines the values to be used during an INSERT    |
 
 ## Unsupported functions
 
 | Name | Description  |
 |:------------|:-----------------------------------------------------------------------------------------------|
-| [`GET_LOCK()`](https://dev.mysql.com/doc/refman/5.7/en/miscellaneous-functions.html#function_get-lock)                | Get a named lock [TiDB #10929](https://github.com/pingcap/tidb/issues/10929) |
-| [`RELEASE_LOCK()`](https://dev.mysql.com/doc/refman/5.7/en/miscellaneous-functions.html#function_release-lock)        | Releases the named lock [TiDB #10929](https://github.com/pingcap/tidb/issues/10929) |
+| [`GET_LOCK()`](https://dev.mysql.com/doc/refman/5.7/en/miscellaneous-functions.html#function_get-lock)                | Get a named lock [TiDB #10929](https://github.com/pingcap/tidb/issues/14994) |
+| [`RELEASE_LOCK()`](https://dev.mysql.com/doc/refman/5.7/en/miscellaneous-functions.html#function_release-lock)        | Releases the named lock [TiDB #10929](https://github.com/pingcap/tidb/issues/14994) |
 | [`UUID_SHORT()`](https://dev.mysql.com/doc/refman/5.7/en/miscellaneous-functions.html#function_uuid-short)            | Provides a UUID that is unique given certain assumptions not present in TiDB [TiDB #4620](https://github.com/pingcap/tidb/issues/4620) |
 | [`MASTER_WAIT_POS()`](https://dev.mysql.com/doc/refman/5.7/en/miscellaneous-functions.html#function_master-pos-wait)  | Relates to MySQL replication |

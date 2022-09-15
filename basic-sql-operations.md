@@ -8,7 +8,11 @@ aliases: ['/docs/dev/basic-sql-operations/','/docs/dev/how-to/get-started/explor
 
 TiDB is compatible with MySQL, you can use MySQL statements directly in most of the cases. For unsupported features, see [Compatibility with MySQL](/mysql-compatibility.md#unsupported-features).
 
+<CustomContent platform="tidb">
+
 To experiment with SQL and test out TiDB compatibility with MySQL queries, you can [run TiDB directly in your web browser without installing it](https://tour.tidb.io/). You can also first deploy a TiDB cluster and then run SQL statements in it.
+
+</CustomContent>
 
 This page walks you through the basic TiDB SQL statements such as DDL, DML and CRUD operations. For a complete list of TiDB statements, see [TiDB SQL Syntax Diagram](https://pingcap.github.io/sqlgram/).
 
@@ -236,11 +240,15 @@ To query a specific column, add the column name after the `SELECT` keyword:
 
 ```sql
 SELECT name FROM person;
+```
+
+```sql
 +------+
 | name |
 +------+
 | tom  |
 +------+
+1 rows in set (0.00 sec)
 ```
 
 Use the `WHERE` clause to filter all records that match the conditions and then return the result:

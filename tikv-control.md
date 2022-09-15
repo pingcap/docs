@@ -44,18 +44,18 @@ FLAGS:
         --skip-paranoid-checks    Skip paranoid checks when open rocksdb
     -V, --version                 Prints version information
 OPTIONS:
-        --ca-path <ca_path>              Set the CA certificate path
-        --cert-path <cert_path>          Set the certificate path
-        --config <config>                Set the config for rocksdb
-        --db <db>                        Set the rocksdb path
+        --ca-path <ca-path>              Set the CA certificate path
+        --cert-path <cert-path>          Set the certificate path
+        --config <config>                TiKV config path, by default it's <deploy-dir>/conf/tikv.toml
+        --data-dir <data-dir>            TiKV data directory path, check <deploy-dir>/scripts/run.sh to get it
         --decode <decode>                Decode a key in escaped format
         --encode <encode>                Encode a key in escaped format
         --to-hex <escaped-to-hex>        Convert an escaped key to hex key
         --to-escaped <hex-to-escaped>    Convert a hex key to escaped key
         --host <host>                    Set the remote host
-        --key-path <key_path>            Set the private key path
+        --key-path <key-path>            Set the private key path
+        --log-level <log-level>          Set the log level [default: warn]
         --pd <pd>                        Set the address of pd
-        --raftdb <raftdb>                Set the raft rocksdb path
 SUBCOMMANDS:
     bad-regions           Get all regions with corrupt raft
     cluster               Print the cluster id
@@ -107,7 +107,12 @@ You can add corresponding parameters and subcommands after `tiup ctl tikv`.
     store:"127.0.0.1:20160" compact db:KV cf:default range:([], []) success!
     ```
 
-- Local mode: Use the `--db` option to specify the local TiKV data directory path. In this mode, you need to stop the running TiKV instance.
+- Local mode:
+
+    * Use the `--data-dir` option to specify the local TiKV data directory path.
+    * Use the `--config` option to specify the local TiKV configuration file path.
+
+  In this mode, you need to stop the running TiKV instance.
 
 Unless otherwise noted, all commands support both the remote mode and the local mode.
 
@@ -152,7 +157,7 @@ apply state: Some(applied_index: 314617 truncated_state {index: 313474 term: 151
 Use the `size` command to view the Region size:
 
 ```bash
-$ tikv-ctl --db /path/to/tikv/db size -r 2
+$ tikv-ctl --data-dir /path/to/tikv size -r 2
 region id: 2
 cf default region size: 799.703 MB
 cf write region size: 41.250 MB
@@ -164,7 +169,7 @@ cf lock region size: 27616
 The `--from` and `--to` options of the `scan` command accept two escaped forms of raw key, and use the `--show-cf` flag to specify the column families that you need to view.
 
 ```bash
-$ tikv-ctl --db /path/to/tikv/db scan --from 'zm' --limit 2 --show-cf lock,default,write
+$ tikv-ctl --data-dir /path/to/tikv scan --from 'zm' --limit 2 --show-cf lock,default,write
 key: zmBootstr\377a\377pKey\000\000\377\000\000\373\000\000\000\000\000\377\000\000s\000\000\000\000\000\372
          write cf value: start_ts: 399650102814441473 commit_ts: 399650102814441475 short_value: "20"
 key: zmDB:29\000\000\377\000\374\000\000\000\000\000\000\377\000H\000\000\000\000\000\000\371
@@ -177,7 +182,7 @@ key: zmDB:29\000\000\377\000\374\000\000\000\000\000\000\377\000H\000\000\000\00
 Similar to the `scan` command, the `mvcc` command can be used to view MVCC of a given key.
 
 ```bash
-$ tikv-ctl --db /path/to/tikv/db mvcc -k "zmDB:29\000\000\377\000\374\000\000\000\000\000\000\377\000H\000\000\000\000\000\000\371" --show-cf=lock,write,default
+$ tikv-ctl --data-dir /path/to/tikv mvcc -k "zmDB:29\000\000\377\000\374\000\000\000\000\000\000\377\000H\000\000\000\000\000\000\371" --show-cf=lock,write,default
 key: zmDB:29\000\000\377\000\374\000\000\000\000\000\000\377\000H\000\000\000\000\000\000\371
          write cf value: start_ts: 399650105239273474 commit_ts: 399650105239273475 short_value: "\000\000\000\000\000\000\000\002"
          write cf value: start_ts: 399650105199951882 commit_ts: 399650105213059076 short_value: "\000\000\000\000\000\000\000\001"
@@ -192,7 +197,7 @@ The `raw-scan` command scans directly from the RocksDB. Note that to scan data k
 Use `--from` and `--to` options to specify the range to scan (unbounded by default). Use `--limit` to limit at most how many keys to print out (30 by default). Use `--cf` to specify which cf to scan (can be `default`, `write` or `lock`).
 
 ```bash
-$ ./tikv-ctl --db /var/lib/tikv/db/ raw-scan --from 'zt' --limit 2 --cf default
+$ ./tikv-ctl --data-dir /var/lib/tikv raw-scan --from 'zt' --limit 2 --cf default
 key: "zt\200\000\000\000\000\000\000\377\005_r\200\000\000\000\000\377\000\000\001\000\000\000\000\000\372\372b2,^\033\377\364", value: "\010\002\002\002%\010\004\002\010root\010\006\002\000\010\010\t\002\010\n\t\002\010\014\t\002\010\016\t\002\010\020\t\002\010\022\t\002\010\024\t\002\010\026\t\002\010\030\t\002\010\032\t\002\010\034\t\002\010\036\t\002\010 \t\002\010\"\t\002\010s\t\002\010&\t\002\010(\t\002\010*\t\002\010,\t\002\010.\t\002\0100\t\002\0102\t\002\0104\t\002"
 key: "zt\200\000\000\000\000\000\000\377\025_r\200\000\000\000\000\377\000\000\023\000\000\000\000\000\372\372b2,^\033\377\364", value: "\010\002\002&slow_query_log_file\010\004\002P/usr/local/mysql/data/localhost-slow.log"
 
@@ -236,7 +241,7 @@ Use the `compact` command to manually compact data of each TiKV. If you specify 
     - `force` means that the bottommost files are always included when TiKV performs compaction.
 
 ```bash
-$ tikv-ctl --db /path/to/tikv/db compact -d kv
+$ tikv-ctl --data-dir /path/to/tikv compact -d kv
 success!
 ```
 
@@ -263,7 +268,7 @@ Then use the `tikv-ctl` tool to set a Region to tombstone on the corresponding T
 {{< copyable "shell-regular" >}}
 
 ```shell
-tikv-ctl --db /path/to/tikv/db tombstone -p 127.0.0.1:2379 -r <region_id>
+tikv-ctl --data-dir /path/to/tikv tombstone -p 127.0.0.1:2379 -r <region_id>
 ```
 
 ```
@@ -275,7 +280,7 @@ However, in some cases, you cannot easily remove this Peer of this Region from P
 {{< copyable "shell-regular" >}}
 
 ```shell
-tikv-ctl --db /path/to/tikv/db tombstone -p 127.0.0.1:2379 -r <region_id>,<region_id> --force
+tikv-ctl --data-dir /path/to/tikv tombstone -p 127.0.0.1:2379 -r <region_id>,<region_id> --force
 ```
 
 ```
@@ -300,6 +305,7 @@ DebugClient::check_region_consistency: RpcFailure(RpcStatus { status: Unknown, d
 
 > **Note:**
 >
+> - It is **NOT** recommended to use the `consistency-check` command, because it is incompatible with the garbage collection in TiDB and might mistakenly report an error.
 > - This command only supports the remote mode.
 > - Even if this command returns `success!`, you need to check whether TiKV panics. This is because this command is only a proposal that requests a consistency check for the leader, and you cannot know from the client whether the whole check process is successful or not.
 
@@ -312,7 +318,7 @@ This sub-command is used to parse a snapshot meta file at given path and print t
 To avoid checking the Regions while TiKV is started, you can use the `tombstone` command to set the Regions where the Raft state machine reports an error to Tombstone. Before running this command, use the `bad-regions` command to find out the Regions with errors, so as to combine multiple tools for automated processing.
 
 ```bash
-$ tikv-ctl --db /path/to/tikv/db bad-regions
+$ tikv-ctl --data-dir /path/to/tikv bad-regions
 all regions are healthy
 ```
 
@@ -323,7 +329,7 @@ If the command is successfully executed, it prints the above information. If the
 - To view in local the properties of Region 2 on the TiKV instance that is deployed in `/path/to/tikv`:
 
     ```bash
-    $ tikv-ctl --db /path/to/tikv/data/db region-properties -r 2
+    $ tikv-ctl --data-dir /path/to/tikv/data region-properties -r 2
     ```
 
 - To view online the properties of Region 2 on the TiKV instance that is running on `127.0.0.1:20160`:
@@ -405,22 +411,44 @@ tikv-ctl --host ip:port modify-tikv-config -n rocksdb.rate-bytes-per-sec -v "1GB
 success
 ```
 
-### Force Region to recover the service from failure of multiple replicas
+### Force Regions to recover services from failure of multiple replicas (deprecated)
 
-Use the `unsafe-recover remove-fail-stores` command to remove the failed machines from the peer list of Regions. Then after you restart TiKV, these Regions can continue to provide services using the other healthy replicas. This command is usually used in circumstances where multiple TiKV stores are damaged or deleted.
+> **Warning:**
+>
+> It is not recommended to use this feature. Instead, you can use Online Unsafe Recovery in `pd-ctl` which provides one-stop automatic recovery capabilities. Extra operations such as stopping services are not needed. For detailed introduction, see [Online Unsafe Recovery](/online-unsafe-recovery.md).
 
-The `-s` option accepts multiple `store_id` separated by comma and uses the `-r` flag to specify involved Regions. Otherwise, all Regions' peers located on these stores will be removed by default.
+You can use the `unsafe-recover remove-fail-stores` command to remove the failed machines from the peer list of Regions. Before running this command, you need to stop the service of the target TiKV store to release file locks.
 
-```bash
-$ tikv-ctl --db /path/to/tikv/db unsafe-recover remove-fail-stores -s 3 -r 1001,1002
+The `-s` option accepts multiple `store_id` separated by comma and uses the `-r` flag to specify involved Regions. If you need to perform this operation on all Regions in a specific store, you can simply specify `--all-regions`.
+
+> **Warning:**
+>
+> - If any misoperation is performed, it might be hard to recover the cluster. Be aware of the potential risks and avoid using this feature in a production environment.
+> - If the `--all-regions` option is used, you are expected to run this command on all the remaining stores connected to the cluster. You need to ensure that these healthy stores stop providing services before recovering the damaged stores. Otherwise, the inconsistent peer lists in Region replicas will cause errors when you run `split-region` or `remove-peer`. This further causes inconsistency between other metadata, and finally, the Regions will become unavailable.
+> - Once you have run `remove-fail-stores`, you cannot restart the removed nodes or add these nodes to the cluster. Otherwise, the metadata will be inconsistent, and finally, the Regions will be unavailable.
+
+{{< copyable "shell-regular" >}}
+
+```shell
+tikv-ctl --data-dir /path/to/tikv unsafe-recover remove-fail-stores -s 3 -r 1001,1002
+```
+
+```
 success!
 ```
 
+{{< copyable "shell-regular" >}}
+
+```shell
+tikv-ctl --data-dir /path/to/tikv unsafe-recover remove-fail-stores -s 4,5 --all-regions
+```
+
+Then, after you restart TiKV, the Regions can continue providing services with the remaining healthy replicas. This command is commonly used when multiple TiKV stores are damaged or deleted.
+
 > **Note:**
 >
+> - You are expected to run this command for all stores where the specified Regions' peers are located.
 > - This command only supports the local mode. It prints `success!` when successfully run.
-> - You must run this command for all stores where specified Regions' peers are located.
-> - If the `--all-regions` option is used, usually you need to run this command on all the remaining healthy stores in the cluster. You need to ensure that the healthy stores stop providing services before recovering the damaged stores. Otherwise, the inconsistent peer lists in Region replicas will cause errors when you execute `split-region` or `remove-peer`. This further causes inconsistency between other metadata, and finally, the Regions will become unavailable.
 
 ### Recover from MVCC data corruption
 
@@ -430,7 +458,7 @@ Use the `recover-mvcc` command in circumstances where TiKV cannot run normally c
 - Use the `-p` option to specify PD endpoints.
 
 ```bash
-$ tikv-ctl --db /path/to/tikv/db recover-mvcc -r 1001,1002 -p 127.0.0.1:2379
+$ tikv-ctl --data-dir /path/to/tikv recover-mvcc -r 1001,1002 -p 127.0.0.1:2379
 success!
 ```
 
@@ -518,3 +546,42 @@ Type "I consent" to continue, anything else to exit: I consent
 > **Note**
 >
 > The command will expose data encryption keys as plaintext. In production, DO NOT redirect the output to a file. Even deleting the output file afterward may not cleanly wipe out the content from disk.
+
+### Print information related to damaged SST files
+
+Damaged SST files in TiKV might cause TiKV processes to panic. Before TiDB v6.1.0, these files cause TiKV to panic immediately. Since TiDB v6.1.0, TiKV processes panic 1 hour after SST files are damaged.
+
+To clean up the damaged SST files, you can run the `bad-ssts` command in TiKV Control to show the needed information. The following is an example command and output.
+
+> **Note:**
+>
+> Before running this command, stop the running TiKV instance.
+
+```bash
+$ tikv-ctl bad-ssts --data-dir </path/to/tikv> --pd <endpoint>
+```
+
+```bash
+--------------------------------------------------------
+corruption info:
+data/tikv-21107/db/000014.sst: Corruption: Bad table magic number: expected 9863518390377041911, found 759105309091689679 in data/tikv-21107/db/000014.sst
+
+sst meta:
+14:552997[1 .. 5520]['0101' seq:1, type:1 .. '7A7480000000000000FF0F5F728000000000FF0002160000000000FAFA13AB33020BFFFA' seq:2032, type:1] at level 0 for Column family "default"  (ID 0)
+it isn't easy to handle local data, start key:0101
+
+overlap region:
+RegionInfo { region: id: 4 end_key: 7480000000000000FF0500000000000000F8 region_epoch { conf_ver: 1 version: 2 } peers { id: 5 store_id: 1 }, leader: Some(id: 5 store_id: 1) }
+
+suggested operations:
+tikv-ctl ldb --db=data/tikv-21107/db unsafe_remove_sst_file "data/tikv-21107/db/000014.sst"
+tikv-ctl --db=data/tikv-21107/db tombstone -r 4 --pd <endpoint>
+--------------------------------------------------------
+corruption analysis has completed
+```
+
+From the output above, you can see that the information of the damaged SST file is printed first and then the meta-information is printed.
+
++ In the `sst meta` part, `14` means the SST file number; `552997` means the file size, followed by the smallest and largest sequence numbers and other meta-information.
++ The `overlap region` part shows the information of the Region involved. This information is obtained through the PD server.
++ The `suggested operations` part provides you suggestion to clean up the damaged SST file. You can take the suggestion to clean up files and restart the TiKV instance.

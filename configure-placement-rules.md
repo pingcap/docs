@@ -6,11 +6,13 @@ aliases: ['/docs/dev/configure-placement-rules/','/docs/dev/how-to/configure/pla
 
 # Placement Rules
 
-> **Warning:**
+> **Note:**
 >
-> In the scenario of using TiFlash, the Placement Rules feature has been extensively tested and can be used in the production environment. Except for the scenario where TiFlash is used, using Placement Rules alone has not been extensively tested, so it is not recommended to enable this feature separately in the production environment.
+> This document introduces how to manually specify placement rules in Placement Driver (PD). It is now recommended to use [Placement Rules in SQL](/placement-rules-in-sql.md). This offers a more convenient way to configure the placement of tables and partitions.
 
-Placement Rules is an experimental feature of the Placement Driver (PD) introduced in v4.0. It is a replica rule system that guides PD to generate corresponding schedules for different types of data. By combining different scheduling rules, you can finely control the attributes of any continuous data range, such as the number of replicas, the storage location, the host type, whether to participate in Raft election, and whether to act as the Raft leader.
+Placement Rules, introduced in v5.0, is a replica rule system that guides PD to generate corresponding schedules for different types of data. By combining different scheduling rules, you can finely control the attributes of any continuous data range, such as the number of replicas, the storage location, the host type, whether to participate in Raft election, and whether to act as the Raft leader.
+
+The Placement Rules feature is enabled by default in v5.0 and later versions of TiDB. To disable it, refer to [Disable Placement Rules](#disable-placement-rules). 
 
 ## Rule system
 
@@ -36,7 +38,7 @@ The following table shows the meaning of each field in a rule:
 | `EndKey`          | `string`, in hexadecimal form                |  Applies to the ending key of a range.                |
 | `Role`            | `string` | Replica roles, including leader/follower/learner.                           |
 | `Count`           | `int`, positive integer                     |  The number of replicas.                            |
-| `LabelConstraint` | `[]Constraint`                    |  Filers nodes based on the label.               |
+| `LabelConstraint` | `[]Constraint`                    |  Filters nodes based on the label.               |
 | `LocationLabels`  | `[]string`                        |  Used for physical isolation.                       |
 | `IsolationLevel`  | `string`                          |  Used to set the minimum physical isolation level
 
@@ -67,7 +69,7 @@ The operations in this section are based on [pd-ctl](/pd-control.md), and the co
 
 ### Enable Placement Rules
 
-By default, the Placement Rules feature is disabled. To enable this feature, you can modify the PD configuration file as follows before initializing the cluster:
+The Placement Rules feature is enabled by default in v5.0 and later versions of TiDB. To disable it, refer to [Disable Placement Rules](#disable-placement-rules). To enable this feature after it has been disabled, you can modify the PD configuration file as follows before initializing the cluster:
 
 {{< copyable "" >}}
 
@@ -273,12 +275,12 @@ The output of the above command:
 }
 ```
 
-To write the output to a file, add the `-out` argument to the `rule-bundle get` subcommand, which is convenient for subsequent modification and saving.
+To write the output to a file, add the `--out` argument to the `rule-bundle get` subcommand, which is convenient for subsequent modification and saving.
 
 {{< copyable "shell-regular" >}}
 
 ```bash
-pd-ctl config placement-rules rule-bundle get pd -out="group.json"
+pd-ctl config placement-rules rule-bundle get pd --out="group.json"
 ```
 
 After the modification is finished, you can use the `rule-bundle set` subcommand to save the configuration in the file to the PD server. Unlike the `save` command described in [Set rules using pd-ctl](#set-rules-using-pd-ctl), this command replaces all the rules of this group on the server side.
@@ -286,7 +288,7 @@ After the modification is finished, you can use the `rule-bundle set` subcommand
 {{< copyable "shell-regular" >}}
 
 ```bash
-pd-ctl config placement-rules rule-bundle set pd -in="group.json"
+pd-ctl config placement-rules rule-bundle set pd --in="group.json"
 ```
 
 ### Use pd-ctl to view and modify all configurations
@@ -298,7 +300,7 @@ For example, to save all configuration to the `rules.json` file, execute the fol
 {{< copyable "shell-regular" >}}
 
 ```bash
-pd-ctl config placement-rules rule-bundle load -out="rules.json"
+pd-ctl config placement-rules rule-bundle load --out="rules.json"
 ```
 
 After editing the file, execute the following command to save the configuration to the PD server:
@@ -306,7 +308,7 @@ After editing the file, execute the following command to save the configuration 
 {{< copyable "shell-regular" >}}
 
 ```bash
-pd-ctl config placement-rules rule-bundle save -in="rules.json"
+pd-ctl config placement-rules rule-bundle save --in="rules.json"
 ```
 
 ### Use tidb-ctl to query the table-related key range
@@ -355,7 +357,7 @@ You only need to add a rule that limits the key range to the range of metadata, 
   "start_key": "6d00000000000000f8",
   "end_key": "6e00000000000000f8",
   "role": "voter",
-  "count": "5",
+  "count": 5,
   "location_labels": ["zone", "rack", "host"]
 }
 ```
@@ -430,7 +432,7 @@ Add a separate rule for the row key of the table and limit `count` to `2`. Use `
 
 ### Scenario 4: Add two follower replicas for a table in the Beijing node with high-performance disks
 
-The following example shows a more complicated `label_constraints` configuration. In this rule, the replicas must be placed in the `bj1` or `bj2` machine room, and the disk type must not be `hdd`.
+The following example shows a more complicated `label_constraints` configuration. In this rule, the replicas must be placed in the `bj1` or `bj2` machine room, and the disk type must not be `ssd`.
 
 {{< copyable "" >}}
 
@@ -444,7 +446,7 @@ The following example shows a more complicated `label_constraints` configuration
   "count": 2,
   "label_constraints": [
     {"key": "zone", "op": "in", "values": ["bj1", "bj2"]},
-    {"key": "disk", "op": "notIn", "values": ["hdd"]}
+    {"key": "disk", "op": "notIn", "values": ["ssd"]}
   ],
   "location_labels": ["host"]
 }

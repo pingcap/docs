@@ -5,14 +5,65 @@ aliases: ['/docs/dev/releases/release-notes/','/docs/dev/releases/rn/']
 
 # TiDB Release Notes
 
+## 6.2
+
+- [6.2.0-DMR](/releases/release-6.2.0.md)
+
+## 6.1
+
+- [6.1.1](/releases/release-6.1.1.md)
+- [6.1.0](/releases/release-6.1.0.md)
+
+## 6.0
+
+- [6.0.0-DMR](/releases/release-6.0.0-dmr.md)
+
+## 5.4
+
+- [5.4.2](/releases/release-5.4.2.md)
+- [5.4.1](/releases/release-5.4.1.md)
+- [5.4.0](/releases/release-5.4.0.md)
+
+## 5.3
+
+- [5.3.3](/releases/release-5.3.3.md)
+- [5.3.2](/releases/release-5.3.2.md)
+- [5.3.1](/releases/release-5.3.1.md)
+- [5.3.0](/releases/release-5.3.0.md)
+
+## 5.2
+
+- [5.2.4](/releases/release-5.2.4.md)
+- [5.2.3](/releases/release-5.2.3.md)
+- [5.2.2](/releases/release-5.2.2.md)
+- [5.2.1](/releases/release-5.2.1.md)
+- [5.2.0](/releases/release-5.2.0.md)
+
+## 5.1
+
+- [5.1.4](/releases/release-5.1.4.md)
+- [5.1.3](/releases/release-5.1.3.md)
+- [5.1.2](/releases/release-5.1.2.md)
+- [5.1.1](/releases/release-5.1.1.md)
+- [5.1.0](/releases/release-5.1.0.md)
+
 ## 5.0
 
+- [5.0.6](/releases/release-5.0.6.md)
+- [5.0.5](/releases/release-5.0.5.md)
+- [5.0.4](/releases/release-5.0.4.md)
+- [5.0.3](/releases/release-5.0.3.md)
+- [5.0.2](/releases/release-5.0.2.md)
 - [5.0.1](/releases/release-5.0.1.md)
 - [5.0 GA](/releases/release-5.0.0.md)
 - [5.0.0-rc](/releases/release-5.0.0-rc.md)
 
 ## 4.0
 
+- [4.0.16](/releases/release-4.0.16.md)
+- [4.0.15](/releases/release-4.0.15.md)
+- [4.0.14](/releases/release-4.0.14.md)
+- [4.0.13](/releases/release-4.0.13.md)
 - [4.0.12](/releases/release-4.0.12.md)
 - [4.0.11](/releases/release-4.0.11.md)
 - [4.0.10](/releases/release-4.0.10.md)
@@ -114,7 +165,7 @@ aliases: ['/docs/dev/releases/release-notes/','/docs/dev/releases/rn/']
 - [2.0.3](/releases/release-2.0.3.md)
 - [2.0.2](/releases/release-2.0.2.md)
 - [2.0.1](/releases/release-2.0.1.md)
-- [2.0](/releases/release-2.0-ga.md)
+- [2.0 GA](/releases/release-2.0-ga.md)
 - [2.0 RC5](/releases/release-2.0-rc.5.md)
 - [2.0 RC4](/releases/release-2.0-rc.4.md)
 - [2.0 RC3](/releases/release-2.0-rc.3.md)
@@ -132,7 +183,7 @@ aliases: ['/docs/dev/releases/release-notes/','/docs/dev/releases/rn/']
 - [1.0.3](/releases/release-1.0.3.md)
 - [1.0.2](/releases/release-1.0.2.md)
 - [1.0.1](/releases/release-1.0.1.md)
-- [1.0](/releases/release-1.0-ga.md)
+- [1.0 GA](/releases/release-1.0-ga.md)
 - [Pre-GA](/releases/release-pre-ga.md)
 - [RC4](/releases/release-rc.4.md)
 - [RC3](/releases/release-rc.3.md)

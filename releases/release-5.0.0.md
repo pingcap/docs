@@ -35,7 +35,7 @@ In v5.0, the key new features or improvements are as follows:
     >
     > The scope of the variable is changed from session to global, and the default value is changed from `20000` to `0`. If the application relies on the original default value, you need to use the `set global` statement to modify the variable to the original value after the upgrade.
 
-+ Control temporary tables’ syntax compatibility using the [`tidb_enable_noop_functions`](/system-variables.md#tidb_enable_noop_functions-new-in-v40) system variable. When this variable value is `OFF`, the `CREATE TEMPORARY TABLE` syntax returns an error.
++ Control temporary tables' syntax compatibility using the [`tidb_enable_noop_functions`](/system-variables.md#tidb_enable_noop_functions-new-in-v40) system variable. When this variable value is `OFF`, the `CREATE TEMPORARY TABLE` syntax returns an error.
 + Add the following system variables to directly control the garbage collection-related parameters:
     - [`tidb_gc_concurrency`](/system-variables.md#tidb_gc_concurrency-new-in-v50)
     - [`tidb_gc_enable`](/system-variables.md#tidb_gc_enable-new-in-v50)
@@ -56,10 +56,10 @@ In v5.0, the key new features or improvements are as follows:
 ### Configuration file parameters
 
 + Add the [`index-limit`](/tidb-configuration-file.md#index-limit-new-in-v50) configuration item for TiDB. Its value defaults to `64` and ranges between `[64,512]`. A MySQL table supports 64 indexes at most. If its value exceeds the default setting and more than 64 indexes are created for a table, when the table schema is re-imported into MySQL, an error will be reported.
-+ Add the [`enable-enum-length-limit`](/tidb-configuration-file.md#enable-enum-length-limit-new-in-v50) configuration item for TiDB to be compatible and consistent with MySQL’s ENUM/SET length (ENUM length < 255). The default value is `true`.
++ Add the [`enable-enum-length-limit`](/tidb-configuration-file.md#enable-enum-length-limit-new-in-v50) configuration item for TiDB to be compatible and consistent with MySQL's ENUM/SET length (ENUM length < 255). The default value is `true`.
 + Replace the `pessimistic-txn.enable` configuration item with the [`tidb_txn_mode`](/system-variables.md#tidb_txn_mode) environment variable.
 + Replace the `performance.max-memory` configuration item with [`performance.server-memory-quota`](/tidb-configuration-file.md#server-memory-quota-new-in-v409)
-+ Replace the `tikv-client.copr-cache.enable` configuration item with [`tikv-client.copr-cache.capacity-mb`](/tidb-configuration-file.md#capacity-mb). If the item’s value is `0.0`, this feature is disabled. If the item’s value is greater than `0.0`, this feature is enabled. Its default value is `1000.0`.
++ Replace the `tikv-client.copr-cache.enable` configuration item with [`tikv-client.copr-cache.capacity-mb`](/tidb-configuration-file.md#capacity-mb). If the item's value is `0.0`, this feature is disabled. If the item's value is greater than `0.0`, this feature is enabled. Its default value is `1000.0`.
 + Replace the `rocksdb.auto-tuned` configuration item with [`rocksdb.rate-limiter-auto-tuned`](/tikv-configuration-file.md#rate-limiter-auto-tuned-new-in-v50).
 + Delete the `raftstore.sync-log` configuration item. By default, written data is forcibly spilled to the disk. Before v5.0, you can explicitly disable `raftstore.sync-log`. Since v5.0, the configuration value is forcibly set to `true`.
 + Change the default value of the `gc.enable-compaction-filter` configuration item from `false` to `true`.
@@ -68,6 +68,7 @@ In v5.0, the key new features or improvements are as follows:
 
 ### Others
 
++ Before the upgrade, check the value of the TiDB configuration [`feedback-probability`](https://docs.pingcap.com/tidb/v5.0/tidb-configuration-file#feedback-probability). If the value is not 0, the "panic in the recoverable goroutine" error will occur after the upgrade, but this error does not affect the upgrade.
 + Forbid conversion between `VARCHAR` type and `CHAR` type during the column type change to avoid data correctness issues.
 
 ## New features
@@ -80,7 +81,7 @@ In v5.0, the key new features or improvements are as follows:
 
 With the list partitioning feature, you can effectively query and maintain tables with a large amount of data.
 
-With this feature enabled, partitions and how data is distributed among partitions are defined according to the `PARTITION BY LIST(expr) PARTITION part_name VALUES IN (...)` expression. The partitioned tables’ data set supports at most 1024 distinct integer values. You can define the values using the `PARTITION ... VALUES IN (...)` clause.
+With this feature enabled, partitions and how data is distributed among partitions are defined according to the `PARTITION BY LIST(expr) PARTITION part_name VALUES IN (...)` expression. The partitioned tables' data set supports at most 1024 distinct integer values. You can define the values using the `PARTITION ... VALUES IN (...)` clause.
 
 To enable list partitioning, set the session variable [`tidb_enable_list_partition`](/system-variables.md#tidb_enable_list_partition-new-in-v50) to `ON`.
 
@@ -122,7 +123,7 @@ This feature is disabled by default. To enable the feature, modify the value of 
 
 Currently, this feature still has the following incompatibility issues:
 
-+ Transaction’s semantics might change when there are concurrent transactions
++ Transaction's semantics might change when there are concurrent transactions
 + Known compatibility issue that occurs when using the feature together with TiDB Binlog
 + Incompatibility with `Change Column`
 
@@ -150,7 +151,7 @@ This feature is introduced in v5.0. To use the feature, enable the system variab
 
 ### MPP architecture
 
-[User document](/tiflash/use-tiflash.md)
+[User document](/tiflash/use-tiflash-mpp-mode.md)
 
 TiDB introduces the MPP architecture through TiFlash nodes. This architecture allows multiple TiFlash nodes to share the execution workload of large join queries.
 
@@ -158,7 +159,7 @@ When the MPP mode is on, TiDB determines whether to send a query to the MPP engi
 
 In the TPC-H 100 benchmark test, TiFlash MPP delivers significant processing speed over analytic engines of traditional analytic databases and SQL on Hadoop. With this architecture, you can perform large-scale analytic queries directly on the latest transaction data, with a higher performance than traditional offline analytic solutions. According to the benchmark, with the same cluster resource, TiDB 5.0 MPP shows 2 to 3 times of speedup over Greenplum 6.15.0 and Apache Spark 3.1.1, and some queries have 8 times better performance.
 
-Currently, the main features that the MPP mode does not support are as follows (For details, refer to [Use TiFlash](/tiflash/use-tiflash.md)):
+Currently, the main features that the MPP mode does not support are as follows (For details, refer to [Use TiFlash](/tiflash/use-tiflash-mpp-mode.md)):
 
 + Table partitioning
 + Window Function
@@ -260,11 +261,11 @@ In 5.0 GA, the Coprocessor cache feature is enabled by default. After this featu
 
 To disable the Coprocessor cache feature, you can modify the `capacity-mb` configuration item of `tikv-client.copr-cache` to `0.0`.
 
-### Improve the execution performance of `delete * from table where id <? Limit ?` statement
+### Improve the execution performance of `delete from table where id <? Limit ?` statement
 
 [#18028](https://github.com/pingcap/tidb/issues/18028)
 
-The p99 performance of the `delete * from table where id <? limit ?` statement is improved by 4 times.
+The p99 performance of the `delete from table where id <? limit ?` statement is improved by 4 times.
 
 ### Optimize load base split strategy to solve the performance problem that data cannot be split in some small table hotspot read scenarios
 
@@ -300,13 +301,13 @@ Before v5.0, to balance the contention for I/O resources between background task
 
 You can disable this feature by modifying the `rate-limiter-auto-tuned` configuration item.
 
-#### Enable the GC Compaction Filter feature by default to reduce GC’s consumption of CPU and I/O resources
+#### Enable the GC Compaction Filter feature by default to reduce GC's consumption of CPU and I/O resources
 
 [User document](/garbage-collection-configuration.md#gc-in-compaction-filter), [#18009](https://github.com/pingcap/tidb/issues/18009)
 
 When TiDB performs garbage collection (GC) and data compaction, partitions occupy CPU and I/O resources. Overlapping data exists during the execution of these two tasks.
 
-To reduce GC’s consumption of CPU and I/O resources, the GC Compaction Filter feature combines these two tasks into one and executes them in the same task. This feature is enabled by default. You can disable it by configuring `gc.enable-compaction-filter = false`.
+To reduce GC's consumption of CPU and I/O resources, the GC Compaction Filter feature combines these two tasks into one and executes them in the same task. This feature is enabled by default. You can disable it by configuring `gc.enable-compaction-filter = false`.
 
 #### TiFlash limits the compression and data sorting's use of I/O resources (**experimental feature**)
 
@@ -340,7 +341,7 @@ Add a system variable [`tidb_allow_fallback_to_tikv`](/system-variables.md#tidb_
 
 ### Improve TiCDC stability and alleviate the OOM issue caused by replicating too much incremental data
 
-[User document](/ticdc/manage-ticdc.md#unified-sorter), [#1150](https://github.com/pingcap/ticdc/issues/1150)
+[User document](/ticdc/manage-ticdc.md#unified-sorter), [#1150](https://github.com/pingcap/tiflow/issues/1150)
 
 In TiCDC v4.0.9 or earlier versions, replicating too much data change might cause OOM. In v5.0, the Unified Sorter feature is enabled by default to mitigate OOM issues caused by the following scenarios:
 
@@ -367,7 +368,7 @@ This feature is enabled by default. You can disable it by running the `pd-ctl co
 
 ### Optimize the memory management module to reduce system OOM risks
 
-Track the memory usage of aggregate functions. This feature is enabled by default. When SQL statements with aggregate functions are executed, if the total memory usage of the current query exceeds the threshold set by [`mem-quota-query`](/tidb-configuration-file.md#mem-quota-query), the system automatically performs operations defined by [`oom-action`](/tidb-configuration-file.md#oom-action).
+Track the memory usage of aggregate functions. This feature is enabled by default. When SQL statements with aggregate functions are executed, if the total memory usage of the current query exceeds the threshold set by `mem-quota-query`, the system automatically performs operations defined by `oom-action`.
 
 ### Improve the system availability during network partition
 
@@ -380,7 +381,7 @@ TiDB data migration tools support using Amazon S3 (and other S3-compatible stora
 To use this feature, refer to the following documents:
 
 - [Export data to Amazon S3 cloud storage](/dumpling-overview.md#export-data-to-amazon-s3-cloud-storage), [#8](https://github.com/pingcap/dumpling/issues/8)
-- [Migrate from Amazon Aurora MySQL Using TiDB Lightning](/migrate-from-aurora-using-lightning.md), [#266](https://github.com/pingcap/tidb-lightning/issues/266)
+- [Migrate from Amazon Aurora MySQL Using TiDB Lightning](/migrate-aurora-to-tidb.md), [#266](https://github.com/pingcap/tidb-lightning/issues/266)
 
 ### Optimize the data import performance of TiDB Cloud
 
@@ -390,29 +391,11 @@ TiDB Lightning optimizes its data import performance specifically for AWS T1.sta
 
 ### Integrate TiDB to Kafka Connect (Confluent Platform) using TiCDC (**experimental feature**)
 
-[User document](/ticdc/integrate-confluent-using-ticdc.md), [#660](https://github.com/pingcap/ticdc/issues/660)
+[User document](/ticdc/integrate-confluent-using-ticdc.md), [#660](https://github.com/pingcap/tiflow/issues/660)
 
 To support the business requirements of streaming TiDB data to other systems, this feature enables you to stream TiDB data to the systems such as Kafka, Hadoop, and Oracle.
 
 The Kafka connectors protocol provided by the Confluent platform is widely used in the community, and it supports transferring data to either relational or non-relational databases in different protocols. By integrating TiCDC to Kafka Connect of the Confluent platform, TiDB extends the ability to stream TiDB data to other heterogeneous databases or systems.
-
-### Support cyclic replication between TiDB clusters using TiCDC (**experimental feature**)
-
-[User document](/ticdc/manage-ticdc.md#cyclic-replication), [#471](https://github.com/pingcap/ticdc/issues/471)
-
-Because of the communication latency and other issues caused by geographical differences, this scenario exists: to support the local business, users deploy multiple TiDB clusters in different geographical areas, and then to accomplish tasks such as analytics and settlements, users replicate data across multiple TiDB clusters or aggregate the replicated data to a central TiDB hub.
-
-TiCDC supports replicating data across multiple independent TiDB clusters. For example, TiDB cluster A, cluster B, and cluster C all have a table named `test.user_data` and write data into this table respectively. With the cyclic replication feature, the data written into `test.user_data` in one cluster can be replicated to the other two clusters, so that the `test.user_data` table in the three clusters is consistent with each other.
-
-This feature can be used in the following scenarios:
-
-+ Multiple TiDB clusters back up data for each other, so the application can switch to a normal TiDB cluster in the event of a disaster.
-+ Multiple geo-distributed TiDB clusters are deployed to support the local business, and the data in the same tables needs to be replicated between TiDB clusters.
-
-This feature has the following limitations and constraints：
-
-+ Writing data to tables with auto-increment IDs in different clusters is not supported, because the data replication causes data to overwrite each other and then results in data loss.
-+ Writing the same data to the same table in different clusters is not supported, because the data replication causes data to overwrite each other and then results in data loss.
 
 ## Diagnostics
 

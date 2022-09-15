@@ -112,13 +112,7 @@ Take the `/dev/nvme0n1` data disk as an example:
 
 ## Check and disable system swap
 
-This section describes how to disable swap.
-
-TiDB requires sufficient memory space for operation. It is not recommended to use swap as a buffer for insufficient memory, which might reduce performance. Therefore, it is recommended to disable the system swap permanently.
-
-Do not disable the system swap by executing `swapoff -a`, or this setting will be invalid after the machine is restarted.
-
-To disable the system swap, execute the following command:
+TiDB needs sufficient memory space for operation. When memory is insufficient, using swap as a buffer might degrade performance. Therefore, it is recommended to disable the system swap permanently by executing the following commands:
 
 {{< copyable "shell-regular" >}}
 
@@ -127,6 +121,12 @@ echo "vm.swappiness = 0">> /etc/sysctl.conf
 swapoff -a && swapon -a
 sysctl -p
 ```
+
+> **Note:**
+>
+> - Executing `swapoff -a` and then `swapon -a` is to refresh swap by dumping data to memory and cleaning up swap. If you drop the swappiness change and execute only `swapoff -a`, swap will be enabled again after you restart the system.
+>
+> - `sysctl -p` is to make the configuration effective without restarting the system.
 
 ## Check and stop the firewall service of target machines
 
@@ -189,6 +189,24 @@ To check whether the NTP service is installed and whether it synchronizes with t
     Active: active (running) since 一 2017-12-18 13:13:19 CST; 3s ago
     ```
 
+    - If it returns `Unit ntpd.service could not be found.`, then try the following command to see whether your system is configured to use `chronyd` instead of `ntpd` to perform clock synchronization with NTP:
+
+        {{< copyable "shell-regular" >}}
+
+        ```bash
+        sudo systemctl status chronyd.service
+        ```
+
+        ```
+        chronyd.service - NTP client/server
+        Loaded: loaded (/usr/lib/systemd/system/chronyd.service; enabled; vendor preset: enabled)
+        Active: active (running) since Mon 2021-04-05 09:55:29 EDT; 3 days ago
+        ```
+
+        If the result shows that neither `chronyd` nor `ntpd` is configured, it means that neither of them is installed in your system. You should first install `chronyd` or `ntpd` and ensure that it can be automatically started. By default, `ntpd` is used.
+
+        If your system is configured to use `chronyd`, proceed to step 3.
+
 2. Run the `ntpstat` command to check whether the NTP service synchronizes with the NTP server.
 
     > **Note:**
@@ -221,6 +239,48 @@ To check whether the NTP service is installed and whether it synchronizes with t
         Unable to talk to NTP daemon. Is it running?
         ```
 
+3. Run the `chronyc tracking` command to check wheter the Chrony service synchronizes with the NTP server.
+
+    > **Note:**
+    >
+    > This only applies to systems that use Chrony instead of NTPd.
+
+    {{< copyable "shell-regular" >}}
+
+    ```bash
+    chronyc tracking
+    ```
+
+    - If the command returns `Leap status     : Normal`, the synchronization process is normal.
+
+        ```
+        Reference ID    : 5EC69F0A (ntp1.time.nl)
+        Stratum         : 2
+        Ref time (UTC)  : Thu May 20 15:19:08 2021
+        System time     : 0.000022151 seconds slow of NTP time
+        Last offset     : -0.000041040 seconds
+        RMS offset      : 0.000053422 seconds
+        Frequency       : 2.286 ppm slow
+        Residual freq   : -0.000 ppm
+        Skew            : 0.012 ppm
+        Root delay      : 0.012706812 seconds
+        Root dispersion : 0.000430042 seconds
+        Update interval : 1029.8 seconds
+        Leap status     : Normal
+        ```
+
+    - If the command returns the following result, an error occurs in the synchronization:
+
+        ```
+        Leap status    : Not synchronised
+        ```
+
+    - If the command returns the following result, the `chronyd` service is not running normally:
+
+        ```
+        506 Cannot talk to daemon
+        ```
+
 To make the NTP service start synchronizing as soon as possible, run the following command. Replace `pool.ntp.org` with your NTP server.
 
 {{< copyable "shell-regular" >}}
@@ -245,7 +305,7 @@ sudo systemctl enable ntpd.service
 
 For TiDB in the production environment, it is recommended to optimize the operating system configuration in the following ways:
 
-1. Disable THP (Transparent Huge Pages). The memory access pattern of databases tends to be sparse rather than consecutive. If the high-level memory fragmentation is serious, higher latency will occur when THP pages are allocated. 
+1. Disable THP (Transparent Huge Pages). The memory access pattern of databases tends to be sparse rather than consecutive. If the high-level memory fragmentation is serious, higher latency will occur when THP pages are allocated.
 2. Set the I/O Scheduler of the storage media to `noop`. For the high-speed SSD storage media, the kernel's I/O scheduling operations can cause performance loss. After the Scheduler is set to `noop`, the performance is better because the kernel directly sends I/O requests to the hardware without other operations. Also, the noop Scheduler is better applicable.
 3. Choose the `performance` mode for the cpufrequ module which controls the CPU frequency. The performance is maximized when the CPU frequency is fixed at its highest supported operating frequency without dynamic adjustment.
 
@@ -540,7 +600,6 @@ Take the following steps to check the current operating system configuration and
     echo "net.ipv4.tcp_tw_recycle = 0">> /etc/sysctl.conf
     echo "net.ipv4.tcp_syncookies = 0">> /etc/sysctl.conf
     echo "vm.overcommit_memory = 1">> /etc/sysctl.conf
-    echo "vm.swappiness = 0">> /etc/sysctl.conf
     sysctl -p
     ```
 
@@ -624,36 +683,26 @@ This section describes how to install the NUMA tool. In online environments, bec
 > - Binding cores using NUMA is a method to isolate CPU resources and is suitable for deploying multiple instances on highly configured physical machines.
 > - After completing deployment using `tiup cluster deploy`, you can use the `exec` command to perform cluster level management operations.
 
-1. Log in to the target node to install. Take CentOS Linux release 7.7.1908 (Core) as an example.
+To install the NUMA tool, take either of the following two methods:
 
-    {{< copyable "shell-regular" >}}
+**Method 1**: Log in to the target node to install NUMA. Take CentOS Linux release 7.7.1908 (Core) as an example.
+
+```bash
+sudo yum -y install numactl
+```
+
+**Method 2**: Install NUMA on an existing cluster in batches by running the `tiup cluster exec` command.
+
+1. Follow [Deploy a TiDB Cluster Using TiUP](/production-deployment-using-tiup.md) to deploy a cluster `tidb-test`. If you have installed a TiDB cluster, you can skip this step.
 
     ```bash
-    sudo yum -y install numactl
+    tiup cluster deploy tidb-test v6.1.0 ./topology.yaml --user root [-p] [-i /home/root/.ssh/gcp_rsa]
     ```
 
-2. Run the `exec` command using `tiup cluster` to install in batches.
-
-    {{< copyable "shell-regular" >}}
-
-    ```bash
-    tiup cluster exec --help
-    ```
-
-    ```
-    Run shell command on host in the tidb cluster
-    Usage:
-    cluster exec <cluster-name> [flags]
-    Flags:
-        --command string   the command run on cluster host (default "ls")
-    -h, --help             help for exec
-        --sudo             use root permissions (default false)
-    ```
-
-    To use the sudo privilege to execute the installation command for all the target machines in the `tidb-test` cluster, run the following command:
-
-    {{< copyable "shell-regular" >}}
+2. Run the `tiup cluster exec` command using the `sudo` privilege to install NUMA on all the target machines in the `tidb-test` cluster:
 
     ```bash
     tiup cluster exec tidb-test --sudo --command "yum -y install numactl"
     ```
+
+    To get help information of the `tiup cluster exec` command, run the `tiup cluster exec --help` command.

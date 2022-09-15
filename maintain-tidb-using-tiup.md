@@ -29,9 +29,9 @@ tiup cluster list
 
 ## Start the cluster
 
-The components in the TiDB cluster are started in the following order (The monitoring component is also started):
+The components in the TiDB cluster are started in the following order:
 
-**PD -> TiKV -> Pump -> TiDB -> TiFlash -> Drainer**
+**PD > TiKV > Pump > TiDB > TiFlash > Drainer > TiCDC > Prometheus > Grafana > Alertmanager**
 
 To start the cluster, run the following command:
 
@@ -104,12 +104,12 @@ When the cluster is in operation, if you need to modify the parameters of a comp
         ```
         tidb_servers:
         - host: 10.0.1.11
-            port: 4000
-            config:
-                log.slow-threshold: 300
+          port: 4000
+          config:
+              log.slow-threshold: 300
         ```
 
-    For the parameter format, see the [TiUP parameter template](https://github.com/pingcap/tiup/blob/master/embed/templates/examples/topology.example.yaml).
+    For the parameter format, see the [TiUP parameter template](https://github.com/pingcap/tiup/blob/master/embed/examples/cluster/topology.example.yaml).
 
     **Use `.` to represent the hierarchy of the configuration items**.
 
@@ -201,7 +201,7 @@ tiup cluster rename ${cluster-name} ${new-name}
 
 The components in the TiDB cluster are stopped in the following order (The monitoring component is also stopped):
 
-**Drainer -> TiFlash -> TiDB -> Pump -> TiKV -> PD**
+**Alertmanager > Grafana > Prometheus > TiCDC > Drainer > TiFlash > TiDB > Pump > TiKV > PD**
 
 To stop the cluster, run the following command:
 

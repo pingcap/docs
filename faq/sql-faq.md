@@ -7,6 +7,53 @@ summary: Learn about the FAQs related to TiDB SQL.
 
 This document summarizes the FAQs related to SQL operations in TiDB.
 
+## Does TiDB support the secondary key?
+
+Yes. You can have the [`NOT NULL` constraint](/constraints.md#not-null) on a non-primary key column with a unique [secondary index](/develop/dev-guide-create-secondary-indexes.md). In this case, the column works as a secondary key.
+
+## How does TiDB perform when executing DDL operations on a large table?
+
+DDL operations of TiDB on large tables are usually not an issue. TiDB supports online DDL operations, and these DDL operations do not block DML operations.
+
+For some DDL operations such as adding columns, deleting columns or dropping indexes, TiDB can perform these operations quickly.
+
+For some heavy DDL operations such as adding indexes, TiDB needs to backfill data, which takes a longer time (depending on the size of the table) and consumes additional resources. The impact on online traffic is tunable. TiDB can do the backfill with multiple threads, and the resource consumed can be set by the following system variables:
+
+- [`tidb_ddl_reorg_worker_cnt`](/system-variables.md#tidb_ddl_reorg_worker_cnt)
+- [`tidb_ddl_reorg_priority`](/system-variables.md#tidb_ddl_reorg_priority)
+- [`tidb_ddl_error_count_limit`](/system-variables.md#tidb_ddl_error_count_limit)
+- [`tidb_ddl_reorg_batch_size`](/system-variables.md#tidb_ddl_reorg_batch_size)
+
+## How to choose the right query plan? Do I need to use hints? Or can I use hints?
+
+TiDB includes a cost-based optimizer. In most cases, the optimizer chooses the optimal query plan for you. If the optimizer does not work well, you can still use [optimizer hints](/optimizer-hints.md) to intervene with the optimizer.
+
+In addition, you can also use the [SQL binding](/sql-plan-management.md#sql-binding) to fix the query plan for a particular SQL statement.
+
+## How to prevent the execution of a particular SQL statement?
+
+You can create [SQL bindings](/sql-plan-management.md#sql-binding) with the [`MAX_EXECUTION_TIME`](/optimizer-hints.md#max_execution_timen) hint to limit the execution time of a particular statement to a small value (for example, 1ms). In this way, the statement is terminated automatically by the threshold.
+
+For example, to prevent the execution of `SELECT * FROM t1, t2 WHERE t1.id = t2.id`, you can use the following SQL binding to limit the execution time of the statement to 1ms:
+
+```sql
+CREATE GLOBAL BINDING for
+    SELECT * FROM t1, t2 WHERE t1.id = t2.id
+USING
+    SELECT /*+ MAX_EXECUTION_TIME(1) */ * FROM t1, t2 WHERE t1.id = t2.id;
+```
+
+> **Note:**
+>
+> The precision of `MAX_EXECUTION_TIME` is roughly 100ms. Before TiDB terminates the SQL statement, the tasks in TiKV might be started. To reduce the TiKV resource consumption in such case, it is recommended to set [`tidb_enable_paging`](/system-variables.md#tidb_enable_paging-new-in-v540) to `ON`.
+
+Dropping this SQL binding will remove the limit.
+
+```sql
+DROP GLOBAL BINDING for
+    SELECT * FROM t1, t2 WHERE t1.id = t2.id;
+```
+
 ## What are the MySQL variables that TiDB is compatible with?
 
 See [System Variables](/system-variables.md).
@@ -91,7 +138,7 @@ The auto-increment ID feature in TiDB is only guaranteed to be automatically inc
 
 ## How do I modify the `sql_mode` in TiDB?
 
-TiDB supports modifying the [`sql_mode`](/sql-mode.md) as a [system variable](/system-variables.md#sql_mode), as in MySQL. Currently, TiDB does not permit modifying the `sql mode` in a configuration file, but system variable changes made with [`SET GLOBAL`](/sql-statements/sql-statement-set-variable.md) propagate to all TiDB servers in the cluster and persist across restarts.
+TiDB supports modifying the [`sql_mode`](/system-variables.md#sql_mode) system variables on a SESSION or GLOBAL basis. Changes to [`GLOBAL`](/sql-statements/sql-statement-set-variable.md) scoped variables propagate to the rest servers of the cluster and persist across restarts. This means that you do not need to change the `sql_mode` value on each TiDB server.
 
 ## Error: `java.sql.BatchUpdateExecption:statement count 5001 exceeds the transaction limitation` while using Sqoop to write data into TiDB in batches
 
@@ -122,15 +169,11 @@ Two solutions:
 
 ## Does TiDB release space immediately after deleting data?
 
-None of the `DELETE`, `TRUNCATE` and `DROP` operations release data immediately. For the `TRUNCATE` and `DROP` operations, after the TiDB GC (Garbage Collection) time (10 minutes by default), the data is deleted and the space is released. For the `DELETE` operation, the data is deleted but the space is not released according to TiDB GC. When subsequent data is written into RocksDB and executes `COMPACT`, the space is reused.
-
-## Does TiDB support the `REPLACE INTO` syntax?
-
-Yes. The exception being that `LOAD DATA` does not currently support the `REPLACE INTO` syntax.
+None of the `DELETE`, `TRUNCATE` and `DROP` operations release data immediately. For the `TRUNCATE` and `DROP` operations, after the TiDB GC (Garbage Collection) time (10 minutes by default), the data is deleted and the space is released. For the `DELETE` operations, the data is deleted but the space is not immediately released until the compaction is performed.
 
 ## Why does the query speed get slow after data is deleted?
 
-Deleting a large amount of data leaves a lot of useless keys, affecting the query efficiency. Currently the [Region Merge](/best-practices/massive-regions-best-practices.md) feature is in development, which is expected to solve this problem. For details, see the [deleting data section in TiDB Best Practices](https://pingcap.com/blog/2017-07-24-tidbbestpractice/#write).
+Deleting a large amount of data leaves a lot of useless keys, affecting the query efficiency. Currently the [Region Merge](/best-practices/massive-regions-best-practices.md) feature is in development, which is expected to solve this problem. For details, see the [deleting data section in TiDB Best Practices](https://en.pingcap.com/blog/tidb-best-practice/#write).
 
 ## What should I do if it is slow to reclaim storage space after deleting data?
 
@@ -169,9 +212,11 @@ You can combine the above two parameters with the DML of TiDB to use them. For e
 
 ## What's the trigger strategy for `auto analyze` in TiDB?
 
-Trigger strategy: `auto analyze` is automatically triggered when the number of pieces of data in a new table reaches 1000 and this table has no write operation within one minute.
+Trigger strategy: `auto analyze` is automatically triggered when the number of rows in a new table reaches 1000 and this table has no write operation within one minute.
 
 When the modified number or the current total row number is larger than `tidb_auto_analyze_ratio`, the `analyze` statement is automatically triggered. The default value of `tidb_auto_analyze_ratio` is 0.5, indicating that this feature is enabled by default. To ensure safety, its minimum value is 0.3 when the feature is enabled, and it must be smaller than `pseudo-estimate-ratio` whose default value is 0.8, otherwise pseudo statistics will be used for a period of time. It is recommended to set `tidb_auto_analyze_ratio` to 0.5.
+
+Auto analyze can be disabled with the system variable `tidb_enable_auto_analyze`.
 
 ## Can I use hints to override the optimizer behavior?
 
@@ -187,11 +232,12 @@ SELECT column_name FROM table_name USE INDEX（index_name）WHERE where_conditio
 
 TiDB handles the SQL statement using the `schema` of the time and supports online asynchronous DDL change. A DML statement and a DDL statement might be executed at the same time and you must ensure that each statement is executed using the same `schema`. Therefore, when the DML operation meets the ongoing DDL operation, the `Information schema is changed` error might be reported. Some improvements have been made to prevent too many error reportings during the DML operation.
 
-Now, there are still a few reasons for this error reporting (the latter two are unrelated to tables):
+Now, there are still a few reasons for this error reporting (only the first one is related to tables):
 
 + Some tables involved in the DML operation are the same tables involved in the ongoing DDL operation.
 + The DML operation goes on for a long time. During this period, many DDL statements have been executed, which causes more than 1024 `schema` version changes. You can modify this default value by modifying the `tidb_max_delta_schema_count` variable.
 + The TiDB server that accepts the DML request is not able to load `schema information` for a long time (possibly caused by the connection failure between TiDB and PD or TiKV). During this period, many DDL statements have been executed, which causes more than 100 `schema` version changes.
++ After TiDB restarts and before the first DDL operation is executed, the DML operation is executed and then encounters the first DDL operation (which means before the first DDL operation is executed, the transaction corresponding to the DML is started. And after the first `schema` version of the DDL is changed, the transaction corresponding to the DML is committed), this DML operation reports this error.
 
 > **Note:**
 >
@@ -285,6 +331,17 @@ Generally the input data of `root task` comes from `cop task`; when `root task` 
 ### Edit TiDB options
 
 See [The TiDB Command Options](/command-line-flags-for-tidb-configuration.md).
+
+### How to avoid hotspot issues and achieve load balancing? Is hot partition or range an issue in TiDB?
+
+To learn the scenarios that cause hotspots, refer to [common hotpots](/troubleshoot-hot-spot-issues.md#common-hotspots). The following TiDB features are designed to help you solve hotspot issues:
+
+- The [`SHARD_ROW_ID_BITS`](/troubleshoot-hot-spot-issues.md#use-shard_row_id_bits-to-process-hotspots) attribute. After setting this attribute, row IDs are scattered and written into multiple Regions, which can alleviate the write hotspot issue.
+- The [`AUTO_RANDOM`](/troubleshoot-hot-spot-issues.md#handle-auto-increment-primary-key-hotspot-tables-using-auto_random) attribute, which helps resolve hotspots brought by auto-increment primary keys.
+- [Coprocessor Cache](/coprocessor-cache.md), for read hotspots on small tables.
+- [Load Base Split](/configure-load-base-split.md), for hotspots caused by unbalanced access between Regions, such as full table scans for small tables.
+
+If you have a performance issue caused by hotspot, refer to [Troubleshoot Hotspot Issues](/troubleshoot-hot-spot-issues.md) to get it resolved.
 
 ### How to scatter the hotspots?
 

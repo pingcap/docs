@@ -4,7 +4,7 @@ title: Topology Configuration File for DM Cluster Deployment Using TiUP
 
 # Topology Configuration File for DM Cluster Deployment Using TiUP
 
-To deploy or scale a TiDB Data Migration (DM) cluster, you need to provide a topology file ([sample](https://github.com/pingcap/tiup/blob/master/embed/templates/examples/dm/topology.example.yaml)) to describe the cluster topology.
+To deploy or scale a TiDB Data Migration (DM) cluster, you need to provide a topology file ([sample](https://github.com/pingcap/tiup/blob/master/embed/examples/dm/topology.example.yaml)) to describe the cluster topology.
 
 Similarly, to modify the cluster topology, you need to modify the topology file. The difference is that, after the cluster is deployed, you can only modify a part of the fields in the topology file. This document introduces each section of the topology file and each field in each section.
 
@@ -64,8 +64,8 @@ In the example, the configuration specifies that the `tidb` user is used to star
 
 `server_configs` is used to configure services and to generate configuration files for each component. Similar to the `global` section, the configurations in the `server_configs` section can be overwritten by the configurations with the same keys in an instance. `server_configs` mainly contains the following fields:
 
-- `master`: the configuration related to the DM-master service. For all the supported configuration items, see [DM-master Configuration File](https://docs.pingcap.com/tidb-data-migration/stable/dm-master-configuration-file).
-- `worker`: the configuration related to the DM-worker service, For all the supported configuration items, see [DM-worker Configuration File](https://docs.pingcap.com/tidb-data-migration/stable/dm-worker-configuration-file).
+- `master`: the configuration related to the DM-master service. For all the supported configuration items, see [DM-master Configuration File](/dm/dm-master-configuration-file.md).
+- `worker`: the configuration related to the DM-worker service, For all the supported configuration items, see [DM-worker Configuration File](/dm/dm-worker-configuration-file.md).
 
 A `server_configs` configuration example is as follows:
 

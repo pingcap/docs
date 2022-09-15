@@ -11,7 +11,7 @@ The term _clustered_ in this context refers to the _organization of how data is 
 
 Currently, tables containing primary keys in TiDB are divided into the following two categories:
 
-- `NONCLUSTERD`: The primary key of the table is non-clustered index. In tables with non-clustered indexes, the keys for row data consist of internal `_tidb_rowid` implicitly assigned by TiDB. Because primary keys are essentially unique indexes, tables with non-clustered indexes need at least two key-value pairs to store a row, which are:
+- `NONCLUSTERED`: The primary key of the table is non-clustered index. In tables with non-clustered indexes, the keys for row data consist of internal `_tidb_rowid` implicitly assigned by TiDB. Because primary keys are essentially unique indexes, tables with non-clustered indexes need at least two key-value pairs to store a row, which are:
     - `_tidb_rowid` (key) - row data (value)
     - Primary key data (key) - `_tidb_rowid` (value)
 - `CLUSTERED`: The primary key of the table is clustered index. In tables with clustered indexes, the keys for row data consist of primary key data given by the user. Therefore, tables with clustered indexes need only one key-value pair to store a row, which is:
@@ -67,7 +67,7 @@ For statements that do not explicitly specify the keyword `CLUSTERED`/`NONCLUSTE
 - `ON` indicates that primary keys are created as clustered indexes by default.
 - `INT_ONLY` indicates that the behavior is controlled by the configuration item `alter-primary-key`. If `alter-primary-key` is set to `true`, primary keys are created as non-clustered indexes by default. If it is set to `false`, only the primary keys which consist of an integer column are created as clustered indexes.
 
-The default value of `@@global.tidb_enable_clustered_index` is `INT_ONLY`.
+The default value of `@@global.tidb_enable_clustered_index` is `ON`.
 
 ### Add or drop clustered indexes
 
@@ -140,14 +140,15 @@ mysql> SELECT TIDB_PK_TYPE FROM information_schema.tables WHERE table_schema = '
 
 ## Limitations
 
-Currently, there are two types of limitations for the clustered index feature. See the following:
+Currently, there are several different types of limitations for the clustered index feature. See the following:
 
 - Situations that are not supported and not in the support plan:
-    - Using the clustered index feature together with TiDB Binlog is not supported. After TiDB Binlog is enabled, TiDB only allows creating a single integer primary key as a clustered index. TiDB Binlog does not replicate data changes of existing tables with clustered indexes to the downstream. If you need to replicate tables with clustered indexes, use [TiCDC](/ticdc/ticdc-overview.md) instead.
     - Using clustered indexes together with the attribute [`SHARD_ROW_ID_BITS`](/shard-row-id-bits.md) is not supported. Also, the attribute [`PRE_SPLIT_REGIONS`](/sql-statements/sql-statement-split-region.md#pre_split_regions) does not take effect on tables with clustered indexes.
     - Downgrading tables with clustered indexes is not supported. If you need to downgrade such tables, use logical backup tools to migrate data instead.
 - Situations that are not supported yet but in the support plan:
     - Adding, dropping, and altering clustered indexes using `ALTER TABLE` statements are not supported.
+- Limitations for specific versions:    
+    - In v5.0, using the clustered index feature together with TiDB Binlog is not supported. After TiDB Binlog is enabled, TiDB only allows creating a single integer column as the clustered index of a primary key. TiDB Binlog does not replicate data changes (such as insertion, deletion, and update) on existing tables with clustered indexes to the downstream. If you need to replicate tables with clustered indexes to the downstream, upgrade your cluster to v5.1 or use [TiCDC](https://docs.pingcap.com/tidb/stable/ticdc-overview) for replication instead.
 
 After TiDB Binlog is enabled, if the clustered index you create is not a single integer primary key, TiDB returns the following error:
 
@@ -181,9 +182,9 @@ Since TiDB v5.0, the clustered index feature is fully supported for all types of
 
 TiDB specific comment syntax supports wrapping the keywords `CLUSTERED` and `NONCLUSTERED` in a comment. The result of `SHOW CREATE TABLE` also contains TiDB specific SQL comments. MySQL databases and TiDB databases of an earlier version will ignore these comments.
 
-### Compatibility with TiDB ecosystem tools
+### Compatibility with TiDB migration tools
 
-The clustered index feature is only compatible with the following ecosystem tools in v5.0 and later versions:
+The clustered index feature is only compatible with the following migration tools in v5.0 and later versions:
 
 - Backup and restore tools: BR, Dumpling, and TiDB Lightning.
 - Data migration and replication tools: DM and TiCDC.

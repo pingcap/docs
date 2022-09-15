@@ -12,7 +12,10 @@ This statement creates a new table in the currently selected database. It behave
 
 ```ebnf+diagram
 CreateTableStmt ::=
-    'CREATE' OptTemporary 'TABLE' IfNotExists TableName ( TableElementListOpt CreateTableOptionListOpt PartitionOpt DuplicateOpt AsOpt CreateTableSelectOpt | LikeTableWithOrWithoutParen )
+    'CREATE' OptTemporary 'TABLE' IfNotExists TableName ( TableElementListOpt CreateTableOptionListOpt PartitionOpt DuplicateOpt AsOpt CreateTableSelectOpt | LikeTableWithOrWithoutParen ) OnCommitOpt
+
+OptTemporary ::=
+    ( 'TEMPORARY' | ('GLOBAL' 'TEMPORARY') )?
 
 IfNotExists ::=
     ('IF' 'NOT' 'EXISTS')?
@@ -80,6 +83,9 @@ TableOption ::=
 |   'SECONDARY_ENGINE' EqOpt ( 'NULL' | StringName )
 |   'UNION' EqOpt '(' TableNameListOpt ')'
 |   'ENCRYPTION' EqOpt EncryptionOpt
+
+OnCommitOpt ::=
+    ('ON' 'COMMIT' 'DELETE' 'ROWS')?
 ```
 
 The following *table_options* are supported. Other options such as `AVG_ROW_LENGTH`, `CHECKSUM`, `COMPRESSION`, `CONNECTION`, `DELAY_KEY_WRITE`, `ENGINE`, `KEY_BLOCK_SIZE`, `MAX_ROWS`, `MIN_ROWS`, `ROW_FORMAT` and `STATS_PERSISTENT` are parsed but ignored.
@@ -94,9 +100,21 @@ The following *table_options* are supported. Other options such as `AVG_ROW_LENG
 | `CHARACTER SET` | To specify the [character set](/character-set-and-collation.md) for the table | `CHARACTER SET` =  'utf8mb4' |
 | `COMMENT` | The comment information | `COMMENT` = 'comment info' |
 
+<CustomContent platform="tidb">
+
 > **Note:**
 >
 > The `split-table` configuration option is enabled by default. When it is enabled, a separate Region is created for each newly created table. For details, see [TiDB configuration file](/tidb-configuration-file.md).
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+> **Note:**
+>
+> TiDB creates a separate Region for each newly created table.
+
+</CustomContent>
 
 ## Examples
 
@@ -182,12 +200,23 @@ mysql> DESC t1;
 
 ## MySQL compatibility
 
-* TiDB does not support temporary tables. The `CREATE TEMPORARY TABLE` syntax will raise an error if [`tidb_enable_noop_functions = 0`](/system-variables.md#tidb_enable_noop_functions-new-in-v40); TiDB simply ignores the `TEMPORARY` keyword if `tidb_enable_noop_functions = 1`.
 * All of the data types except spatial types are supported.
 * `FULLTEXT`, `HASH` and `SPATIAL` indexes are not supported.
+
+<CustomContent platform="tidb">
+
 * For compatibility, the `index_col_name` attribute supports the length option with a maximum length limit of 3072 bytes by default. The length limit can be changed through the `max-index-length` configuration option. For details, see [TiDB configuration file](/tidb-configuration-file.md#max-index-length).
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+* For compatibility, the `index_col_name` attribute supports the length option with a maximum length limit of 3072 bytes.
+
+</CustomContent>
+
 * The `[ASC | DESC]` in `index_col_name` is currently parsed but ignored (MySQL 5.7 compatible behavior).
-* The `COMMENT` attribute supports a maximum of 1024 characters and does not support the `WITH PARSER` option.
+* The `COMMENT` attribute does not support the `WITH PARSER` option.
 * TiDB supports at most 512 columns in a single table. The corresponding number limit in InnoDB is 1017, and the hard limit in MySQL is 4096. For details, see [TiDB Limitations](/tidb-limitations.md).
 * For partitioned tables, only Range, Hash and Range Columns (single column) are supported. For details, see [partitioned table](/partitioned-table.md).
 * `CHECK` constraints are parsed but ignored (MySQL 5.7 compatible behavior). For details, see [Constraints](/constraints.md).

@@ -46,6 +46,19 @@ The following sections introduce the default monitoring information of **TiFlash
 - Response Bytes/Seconds: The total bytes of the response from all TiFlash instances.
 - Cop task memory usage: The total memory usage of all TiFlash instances processing coprocessor requests.
 - Handling Request Number: The total number of all TiFlash instances processing coprocessor requests. The classification of the requests is the same as that of Request QPS.
+- Threads of RPC: The real-time number of RPC threads used in each TiFlash instance.
+- Max Threads of RPC: The maximum number of RPC threads recently used in each TiFlash instance.
+- Threads: The real-time number of threads used in each TiFlash instance.
+- Max Threads: The maximum number of threads recently used in each TiFlash instance.
+
+## Task Scheduler
+
+- Min TSO: The minimum TSO among all queries running on each TiFlash instance. This value ensures that queries with the minimum TSO can be scheduled to run. When no queries are running, this value is the maximum unsigned 64-bit integer.
+- Estimated Thread Usage and Limit: The estimated amount of threads used by all queries running on each TiFlash instance, and the soft and hard limits on the amount.
+- Active and Waiting Queries Count: The amount of running queries and that of waiting queries on each TiFlash instance.
+- Active and Waiting Tasks Count: The amount of running tasks and that of waiting tasks on each TiFlash instance.
+- Hard Limit Exceeded Count: Times that the estimated amount of threads used by queries running on each TiFlash instance exceeds the hard limit.
+- Task Waiting Duration: The duration from task initialization to task scheduling on each TiFlash instance.
 
 ## DDL
 
@@ -72,6 +85,20 @@ The following sections introduce the default monitoring information of **TiFlash
 > **Note:**
 >
 > These metrics only cover the monitoring information of the TiFlash storage layer and do not cover that in TiFlash-Proxy.
+
+## Storage Write Stall
+
+- Write & Delta Management Throughput: The throughput of write and data compaction for all instances.
+    - `throughput_write` means the throughput of data synchronization through Raft.
+    - `throughput_delta-management` means the throughput of data compaction.
+    - `total_write` means the total bytes written since the last start.
+    - `total_delta-management` means the total bytes of data compacted since the last start.
+- Write Stall Duration: The stall duration of write and removing Region data (deleting ranges) by instance.
+- Write Throughput By Instance: The throughput of write by instance. It includes the throughput by applying the Raft write commands and Raft snapshots.
+- Write Command OPS By Instance: The total count of different kinds of commands received by instance.
+    - `write block` means the data logs synchronized through Raft.
+    - `delete_range` means that some Regions are removed from or moved to this instance.
+    - `ingest` means some Region snapshots are applied to this instance.
 
 ## Raft
 

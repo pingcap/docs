@@ -40,7 +40,6 @@ TiDB uses the `IndexLookup` operator when retrieving data from a secondary index
 EXPLAIN SELECT * FROM t1 WHERE intkey = 123;
 EXPLAIN SELECT * FROM t1 WHERE intkey < 10;
 EXPLAIN SELECT * FROM t1 WHERE intkey BETWEEN 300 AND 310;
-EXPLAIN SELECT * FROM t1 WHERE intkey BETWEEN 300 AND 310;
 EXPLAIN SELECT * FROM t1 WHERE intkey IN (123,29,98);
 EXPLAIN SELECT * FROM t1 WHERE intkey >= 99 AND intkey <= 103;
 ```
@@ -146,7 +145,7 @@ EXPLAIN SELECT * FROM t1 ORDER BY intkey DESC LIMIT 10;
 
 ```
 
-In the above example, the last 20 rows are read from the index `intkey`. These `RowID` values are then retrieved from the table data.
+In the above example, the last 10 rows are read from the index `intkey`. These `RowID` values are then retrieved from the table data.
 
 ## IndexReader
 

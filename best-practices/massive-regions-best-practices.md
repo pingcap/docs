@@ -68,7 +68,7 @@ By default, `raftstore.store-pool-size` is configured to `2` in TiKV. If a bottl
 
 In the actual situation, read and write requests are not evenly distributed on every Region. Instead, they are concentrated on a few Regions. Then you can minimize the number of messages between the Raft leader and the followers for the temporarily idle Regions, which is the feature of Hibernate Region. In this feature, Raftstore does sent tick messages to the Raft state machines of idle Regions if not necessary. Then these Raft state machines will not be triggered to generate heartbeat messages, which can greatly reduce the workload of Raftstore.
 
-Hibernate Region is enabled by default in [TiKV master](https://github.com/tikv/tikv/tree/master). You can enable this feature according to your needs. For the configuration of Hibernate Region, refer to [Configure Hibernate Region](/tikv-configuration-file.md#hibernate-regions-experimental).
+Hibernate Region is enabled by default in [TiKV master](https://github.com/tikv/tikv/tree/master). You can configure this feature according to your needs. For details, refer to [Configure Hibernate Region](/tikv-configuration-file.md).
 
 ### Method 3: Enable `Region Merge`
 
@@ -83,9 +83,9 @@ Enable `Region Merge` by configuring the following parameters:
 {{< copyable "" >}}
 
 ```
->> pd-ctl config set max-merge-region-size 20
->> pd-ctl config set max-merge-region-keys 200000
->> pd-ctl config set merge-schedule-limit 8
+config set max-merge-region-size 20
+config set max-merge-region-keys 200000
+config set merge-schedule-limit 8
 ```
 
 Refer to [Region Merge](https://tikv.org/docs/4.0/tasks/configure/region-merge/) and the following three configuration parameters in the [PD configuration file](/pd-configuration-file.md#schedule) for more details:
@@ -123,6 +123,18 @@ raft-heartbeat-interval = raft-base-tick-interval * raft-heartbeat-ticks
 ```
 
 If Region followers have not received the heartbeat from the leader within the `raft-election-timeout` interval, these followers determine that the leader has failed and start a new election. `raft-heartbeat-interval` is the interval at which a leader sends a heartbeat to followers. Therefore, increasing the value of `raft-base-tick-interval` can reduce the number of network messages sent from Raft state machines but also makes it longer for Raft state machines to detect the leader failure.
+
+### Method 6: Adjust Region size
+
+The default size of a Region is 96 MiB, and you can reduce the number of Regions by setting Regions to a larger size. For more information, see [Tune Region Performance](/tune-region-performance.md).
+
+> **Warning:**
+>
+> Currently, customized Region size is an experimental feature introduced in TiDB v6.1.0. It is not recommended that you use it in production environments. The risks are as follows:
+>
+> + Performance jitter might be caused.
+> + The query performance, especially for queries that deal with a large range of data, might decrease.
+> + The Region scheduling slows down.
 
 ## Other problems and solutions
 

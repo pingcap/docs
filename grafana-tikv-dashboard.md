@@ -8,7 +8,7 @@ aliases: ['/docs/dev/grafana-tikv-dashboard/','/docs/dev/reference/key-monitorin
 
 If you use TiUP to deploy the TiDB cluster, the monitoring system (Prometheus/Grafana) is deployed at the same time. For more information, see [Overview of the Monitoring Framework](/tidb-monitoring-framework.md).
 
-The Grafana dashboard is divided into a series of sub dashboards which include Overview, PD, TiDB, TiKV, Node\_exporter, and so on. A lot of metrics are there to help you diagnose.
+The Grafana dashboard is divided into a series of sub dashboards which include Overview, PD, TiDB, TiKV, Node\_exporter, Performance\_overview, and so on. A lot of metrics are there to help you diagnose.
 
 You can get an overview of the component TiKV status from the **TiKV-Details** dashboard, where the key metrics are displayed. According to the [Performance Map](https://asktug.com/_/tidb-performance-map/#/), you can check whether the status of the cluster is as expected.
 
@@ -42,8 +42,9 @@ This document provides a detailed description of these key metrics on the **TiKV
 - gRPC message error: The number of gRPC message errors per type on each TiKV instance
 - Leader drop: The count of dropped leaders per TiKV instance
 - Leader missing: The count of missing leaders per TiKV instance
+- Log Replication Reject: The number of logappend messages rejected due to insufficient memory on each TiKV instance
 
-![TiKV Dashboard - Errors metrics](/media/tikv-dashboard-errors.png)
+![TiKV Dashboard - Errors metrics](/media/tikv-dashboard-errors-v610.png)
 
 ## Server
 
@@ -100,7 +101,14 @@ This document provides a detailed description of these key metrics on the **TiKV
 
 ## Raft process
 
-- Ready handled: The count of handled ready operations per second
+- Ready handled: The number of handled ready operations per type per second
+    - count: The number of handled ready operations per second
+    - has_ready_region: The number of Regions that have ready per second
+    - pending_region: The operations per second of the Regions being checked for whether it has ready. This metric is deprecated since v3.0.0
+    - message: The number of messages that the ready operations per second contain
+    - append: The number of Raft log entries that the ready operations per second contain
+    - commit: The number of committed Raft log entries that the ready operations per second contain
+    - snapshot: The number of snapshots that the ready operations per second contains
 - 0.99 Duration of Raft store events: The time consumed by Raftstore events (P99)
 - Process ready duration: The time consumed for processes to be ready in Raft
 - Process ready duration per server: The time consumed for peer processes to be ready in Raft per TiKV instance. It should be less than 2 seconds (P99.99).
@@ -348,15 +356,17 @@ This document provides a detailed description of these key metrics on the **TiKV
 - Blob GC output file size: The size of Titan GC output file
 - Blob GC file count: The count of blob files involved in Titan GC
 
-## Lock manager
+## Pessimistic Locking
 
-- Thread CPU: The CPU utilization of the lock manager thread
-- Handled tasks: The number of tasks handled by lock manager
+- Lock Manager Thread CPU: The CPU utilization of the lock manager thread
+- Lock Manager Handled tasks: The number of tasks handled by lock manager
 - Waiter lifetime duration: The waiting time of the transaction for the lock to be released
 - Wait table: The status information of wait table, including the number of locks and the number of transactions waiting for the lock
 - Deadlock detect duration: The time consumed for detecting deadlock
 - Detect error: The number of errors encountered when detecting deadlock, including the number of deadlocks
 - Deadlock detector leader: The information of the node where the deadlock detector leader is located
+- Total pessimistic locks memory size: The memory size occupied by the in-memory pessimistic locks
+- In-memory pessimistic locking result: The result of only saving pessimistic locks to memory. `full` means the number of times that the pessimistic lock is not saved to memory because the memory limit is exceeded.
 
 ## Memory
 

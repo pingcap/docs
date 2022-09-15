@@ -183,7 +183,29 @@ EXPLAIN DELETE FROM t1 WHERE c1=3;
 4 rows in set (0.01 sec)
 ```
 
-If you do not specify the `FORMAT`, or specify `FORMAT = "row"`, `EXPLAIN` statement will output the results in a tabular format. See [Understand the Query Execution Plan](/explain-overview.md) for more information.
+To specify the content and format of the output, you can use the `FORMAT = xxx` syntax in the `EXPLAIN` statement.
+
+If you do not specify the `FORMAT` in `EXPLAIN`, or specify `FORMAT = "row"`, `EXPLAIN` statement will output the results in a tabular format. See [Understand the Query Execution Plan](/explain-overview.md) for more information.
+
+If you specify `FORMAT = "brief"` in `EXPLAIN`, the operator IDs in the output are simplified compared with that without `FORMAT` specified.
+
+{{< copyable "sql" >}}
+
+```sql
+EXPLAIN FORMAT = "brief" DELETE FROM t1 WHERE c1 = 3;
+```
+
+```sql
++-------------------------+---------+-----------+---------------+--------------------------------+
+| id                      | estRows | task      | access object | operator info                  |
++-------------------------+---------+-----------+---------------+--------------------------------+
+| Delete                  | N/A     | root      |               | N/A                            |
+| └─TableReader           | 0.00    | root      |               | data:Selection                 |
+|   └─Selection           | 0.00    | cop[tikv] |               | eq(test.t1.c1, 3)              |
+|     └─TableFullScan     | 3.00    | cop[tikv] | table:t1      | keep order:false, stats:pseudo |
++-------------------------+---------+-----------+---------------+--------------------------------+
+4 rows in set (0.001 sec)
+```
 
 In addition to the MySQL standard result format, TiDB also supports DotGraph and you need to specify `FORMAT = "dot"` as in the following example:
 
@@ -244,10 +266,9 @@ If the `dot` program is not installed on your computer, copy the result to [this
 ## MySQL compatibility
 
 * Both the format of `EXPLAIN` and the potential execution plans in TiDB differ substaintially from MySQL.
-* TiDB does not support the `EXPLAIN FORMAT=JSON` as in MySQL.
-* TiDB does not currently support `EXPLAIN` for insert statements.
+* TiDB does not support the `FORMAT=JSON`  or `FORMAT=TREE` options.
 
-## `EXPLAIN FOR CONNECTION`
+### `EXPLAIN FOR CONNECTION`
 
 `EXPLAIN FOR CONNECTION` is used to get the execution plan of the currently executed SQL query or the last executed SQL query in a connection. The output format is the same as that of `EXPLAIN`. However, the implementation of `EXPLAIN FOR CONNECTION` in TiDB is different from that in MySQL. Their differences (apart from the output format) are listed as follows:
 

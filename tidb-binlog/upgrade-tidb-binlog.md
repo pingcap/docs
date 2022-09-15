@@ -52,7 +52,7 @@ If you want to resume replication from the original checkpoint, perform the foll
 4. Reconnect the TiDB cluster to the service.
 5. Make sure that the old version of Drainer has replicated the data in the old version of Pump to the downstream completely;
 
-    Query the `status` interface of Drainer，command as below：
+    Query the `status` interface of Drainer, command as below:
 
     {{< copyable "shell-regular" >}}
 
@@ -67,4 +67,4 @@ If you want to resume replication from the original checkpoint, perform the foll
     If the return value of `Synced` is True, it means Drainer has replicated the data in the old version of Pump to the downstream completely.
 
 6. Start the new version of Drainer.
-7. Close the Pump and Drainer of the old versions and the dependent Kafka and Zookeeper.
+7. Close the Pump and Drainer of the old versions and the dependent Kafka and ZooKeeper.

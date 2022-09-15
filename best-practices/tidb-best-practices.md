@@ -10,9 +10,9 @@ This document summarizes the best practices of using TiDB, including the use of 
 
 Before you read this document, it is recommended that you read three blog posts that introduce the technical principles of TiDB:
 
-* [TiDB Internal (I) - Data Storage](https://pingcap.com/blog/2017-07-11-tidbinternal1/)
-* [TiDB Internal (II) - Computing](https://pingcap.com/blog/2017-07-11-tidbinternal2/)
-* [TiDB Internal (III) - Scheduling](https://pingcap.com/blog/2017-07-20-tidbinternal3/)
+* [TiDB Internal (I) - Data Storage](https://en.pingcap.com/blog/tidb-internal-data-storage/)
+* [TiDB Internal (II) - Computing](https://en.pingcap.com/blog/tidb-internal-computing/)
+* [TiDB Internal (III) - Scheduling](https://en.pingcap.com/blog/tidb-internal-scheduling/)
 
 ## Preface
 
@@ -42,9 +42,9 @@ TiDB provides complete distributed transactions and the model has some optimizat
 
     Assume that the database is used as a counter. High access concurrency might lead to severe conflicts, resulting in multiple retries or even timeouts. Therefore, in the scenario of severe conflicts, it is recommended to use the pessimistic transaction mode or to solve problems at the system architecture level, such as placing counter in Redis. Nonetheless, the optimistic transaction model is efficient if the access conflict is not very severe.
 
-* Pessimistic transaction model
+* Pessimistic transaction mode
 
-    In TiDB, the pessimistic transaction model has almost the same behavior as in MySQL. The transaction applies a lock during the execution phase, which avoids retries in conflict situations and ensures a higher success rate. By applying the pessimistic locking, you can also lock data in advance using `SELECT FOR UPDATE`.
+    In TiDB, the pessimistic transaction mode has almost the same behavior as in MySQL. The transaction applies a lock during the execution phase, which avoids retries in conflict situations and ensures a higher success rate. By applying the pessimistic locking, you can also lock data in advance using `SELECT FOR UPDATE`.
 
     However, if the application scenario has fewer conflicts, the optimistic transaction model has better performance.
 
@@ -53,7 +53,7 @@ TiDB provides complete distributed transactions and the model has some optimizat
     As distributed transactions need to conduct two-phase commit and the bottom layer performs Raft replication, if a transaction is very large, the commit process would be quite slow, and the following Raft replication process is thus stuck. To avoid this problem, the transaction size is limited:
 
     - A transaction is limited to 5,000 SQL statements (by default)
-    - Each Key-Value entry is no more than 6 MB
+    - Each Key-Value entry is no more than 6 MB (by default)
     - The total size of Key-Value entries is no more than 10 GB.
 
     You can find similar limits in [Google Cloud Spanner](https://cloud.google.com/spanner/quotas).
@@ -68,7 +68,7 @@ Placement Driver (PD) balances the load of the cluster according to the status o
 
 ### SQL on KV
 
-TiDB automatically maps the SQL structure into Key-Value structure. For details, see [TiDB Internal (II) - Computing](https://pingcap.com/blog/2017-07-11-tidbinternal2/).
+TiDB automatically maps the SQL structure into Key-Value structure. For details, see [TiDB Internal (II) - Computing](https://en.pingcap.com/blog/tidb-internal-computing/).
 
 Simply put, TiDB performs the following operations:
 
@@ -87,7 +87,7 @@ Lots of MySQL experience is also applicable to TiDB. It is noted that TiDB has i
 
 * The more secondary indexes, the better?
 
-    Secondary indexes can speed up queries, but adding an index has side effects. The previous section introduces the storage model of indexes. For each additional index, there will be one more Key-Value when inserting a piece of data. Therefore, the more indexes, the slower the writing speed and the more space it takes up.
+    Secondary indexes can speed up queries, but adding an index has side effects. The previous section introduces the storage model of indexes. For each additional index, there will be one more Key-Value when inserting a row. Therefore, the more indexes, the slower the writing speed and the more space it takes up.
 
     In addition, too many indexes affects the runtime of the optimizer, and inappropriate indexes mislead the optimizer. Thus, more secondary indexes does not mean better performance.
 
@@ -160,14 +160,14 @@ As mentioned before, TiDB limits the size of a single transaction in the Key-Val
 
 It is recommended to split statements into batches or add a limit to the statements, whether they are `INSERT`, `UPDATE` or `DELETE` statements.
 
-When deleting a large amount of data, it is recommended to use `Delete * from t where xx limit 5000;`. It deletes through the loop and use `Affected Rows == 0` as a condition to end the loop.
+When deleting a large amount of data, it is recommended to use `Delete from t where xx limit 5000;`. It deletes through the loop and use `Affected Rows == 0` as a condition to end the loop.
 
 If the amount of data that needs to be deleted at a time is large, this loop method gets slower and slower because each deletion traverses backward. After deleting the previous data, lots of deleted flags remain for a short period (then all is cleared by Garbage Collection) and affect the following `DELETE` statement. If possible, it is recommended to refine the `WHERE` condition. Assume that you need to delete all data on `2017-05-26`, you can use the following statements:
 
 ```sql
 for i from 0 to 23:
     while affected_rows > 0:
-        delete * from t where insert_time >= i:00:00 and insert_time < (i+1):00:00 limit 5000;
+        delete from t where insert_time >= i:00:00 and insert_time < (i+1):00:00 limit 5000;
         affected_rows = select affected_rows()
 ```
 
@@ -203,7 +203,7 @@ The best way to learn about a system or solve the problem is to read its documen
 
 TiDB has a large number of official documents both in Chinese and English. If you have met an issue, you can start from [FAQ](/faq/tidb-faq.md) and [TiDB Cluster Troubleshooting Guide](/troubleshoot-tidb-cluster.md). You can also search the issue list or create an issue in [TiDB repository on GitHub](https://github.com/pingcap/tidb).
 
-TiDB also has many useful ecosystem tools. See [Ecosystem Tool Overview](/ecosystem-tool-user-guide.md) for details.
+TiDB also has many useful migration tools. See [Migration Tool Overview](/ecosystem-tool-user-guide.md) for details.
 
 For more articles on the technical details of TiDB, see the [PingCAP official blog site](https://pingcap.com/blog/).
 
