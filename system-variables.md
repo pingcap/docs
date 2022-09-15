@@ -1103,10 +1103,22 @@ Constraint checking is always performed in place for pessimistic transactions (d
 
 ### tidb_enable_extended_stats
 
+<CustomContent platform="tidb-cloud">
+
+> **Note:**
+>
+> This TiDB variable is not applicable to TiDB Cloud.
+
+</CustomContent>
+
+<CustomContent platform="tidb">
+
 - Scope: SESSION | GLOBAL
 - Type: Boolean
 - Default value: `OFF`
 - This variable indicates whether TiDB can collect the extended statistic to guide the optimizer. See [Introduction to Extended Statistics](/extended-statistics.md) for more information.
+
+</CustomContent>
 
 ### tidb_enable_fast_analyze
 
