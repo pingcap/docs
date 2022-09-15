@@ -242,7 +242,7 @@ PARTITION BY RANGE COLUMNS(`report_date`)
  PARTITION `P_LT_2025-01-01` VALUES LESS THAN ('2025-01-01'))
 ```
 
-The optional parameter `NULL PARTITION` creates a partition where the partitioning expression evaluates to `NULL` is placed. In the partitioning expression, `NULL` is considered to be less than any other value. See [Handling of NULL with Range partitioning].(#handling-of-null-with-range-partitioning).
+The optional parameter `NULL PARTITION` creates a partition where the partitioning expression evaluates to `NULL` is placed. In the partitioning expression, `NULL` is considered to be less than any other value. See [Handling of NULL with Range partitioning](#handling-of-null-with-range-partitioning).
 
 The optional parameter `MAXVALUE PARTITION` creates a last partition as `PARTITION P_MAXVALUE VALUES LESS THAN (MAXVALUE)`.
 
