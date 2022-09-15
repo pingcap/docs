@@ -77,7 +77,7 @@ Read queries have only a single process form.
 
 ### Point get
 
-The following is the time cost diagram of point get operations:
+The following is the time cost diagram of [point get](/glossary.md#point-get) operations:
 
 ```railroad+diagram
 Diagram(
