@@ -67,14 +67,12 @@ The following are descriptions of options available in the `cdc server` command:
 
 ## Rolling upgrade TiCDC using TiUP
 
-TiCDC support rolling upgrade functionality since v6.3.0, it is helpful to keep the TiCDC replication latency keeps stable when rolling upgrade TiCDC instances by using TiUP. This feature requires the following:
+From v6.3.0, TiCDC supports rolling upgrades using TiUP. This feature helps keep TiCDC replication latency within a stable range without drastic fluctuations. To perform a rolling upgrade, ensure that:
 
-* There are at least 2 running TiCDC instances.
-* The minimum supported TiUP version is v1.11.0.
+* At least two TiCDC instances are running in the cluster.
+* The TiUP version is v1.11.0 or later.
 
-Once the above conditions are met, execute the following command to rolling upgrade the cluster:
-
-{{< copyable "shell-regular" >}}
+If the preceding conditions are met, you can run the `tiup cluster upgrade` command to perform a rolling upgrade of the cluster:
 
 ```shell
 tiup cluster upgrade test-cluster ${target-version} --transfer-timeout 600 --force false
