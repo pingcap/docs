@@ -277,8 +277,6 @@ Like MySQL, primary key constraints contain unique constraints, that is, creatin
 
 For example:
 
-{{< copyable "sql" >}}
-
 ```sql
 CREATE TABLE t1 (a INT NOT NULL PRIMARY KEY);
 ```
@@ -286,8 +284,6 @@ CREATE TABLE t1 (a INT NOT NULL PRIMARY KEY);
 ```
 Query OK, 0 rows affected (0.12 sec)
 ```
-
-{{< copyable "sql" >}}
 
 ```sql
 CREATE TABLE t2 (a INT NULL PRIMARY KEY);
@@ -297,8 +293,6 @@ CREATE TABLE t2 (a INT NULL PRIMARY KEY);
 ERROR 1171 (42000): All parts of a PRIMARY KEY must be NOT NULL; if you need NULL in a key, use UNIQUE instead
 ```
 
-{{< copyable "sql" >}}
-
 ```sql
 CREATE TABLE t3 (a INT NOT NULL PRIMARY KEY, b INT NOT NULL PRIMARY KEY);
 ```
@@ -306,8 +300,6 @@ CREATE TABLE t3 (a INT NOT NULL PRIMARY KEY, b INT NOT NULL PRIMARY KEY);
 ```
 ERROR 1068 (42000): Multiple primary key defined
 ```
-
-{{< copyable "sql" >}}
 
 ```sql
 CREATE TABLE t4 (a INT NOT NULL, b INT NOT NULL, PRIMARY KEY (a,b));
@@ -323,8 +315,6 @@ Query OK, 0 rows affected (0.10 sec)
 
 In addition to the rules above, TiDB currently only supports adding and deleting the primary keys of the `NONCLUSTERED` type. For example:
 
-{{< copyable "sql" >}}
-
 ```sql
 CREATE TABLE t5 (a INT NOT NULL, b INT NOT NULL, PRIMARY KEY (a,b) CLUSTERED);
 ALTER TABLE t5 DROP PRIMARY KEY;
@@ -333,8 +323,6 @@ ALTER TABLE t5 DROP PRIMARY KEY;
 ```
 ERROR 8200 (HY000): Unsupported drop primary key when the table is using clustered index
 ```
-
-{{< copyable "sql" >}}
 
 ```sql
 CREATE TABLE t5 (a INT NOT NULL, b INT NOT NULL, PRIMARY KEY (a,b) NONCLUSTERED);
@@ -370,8 +358,6 @@ CREATE TABLE orders (
 );
 ```
 
-{{< copyable "sql" >}}
-
 ```sql
 SELECT table_name, column_name, constraint_name, referenced_table_name, referenced_column_name
 FROM information_schema.key_column_usage WHERE table_name IN ('users', 'orders');
@@ -389,8 +375,6 @@ FROM information_schema.key_column_usage WHERE table_name IN ('users', 'orders')
 ```
 
 TiDB also supports the syntax to `DROP FOREIGN KEY` and `ADD FOREIGN KEY` via the `ALTER TABLE` command.
-
-{{< copyable "sql" >}}
 
 ```sql
 ALTER TABLE orders DROP FOREIGN KEY fk_user_id;

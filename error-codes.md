@@ -488,11 +488,9 @@ TiDB is compatible with the error codes in MySQL, and in most cases returns the 
 
 * Error Number: 9007
 
-    The complete error message: `ERROR 9007 (HY000): Write Conflict`
+    The error message starts with `ERROR 9007 (HY000): Write conflict`.
 
-    Transactions in TiKV encounter write conflicts.
-
-    Check whether `tidb_disable_txn_auto_retry` is set to `on`. If so, set it to `off`; if it is already `off`, increase the value of `tidb_retry_limit` until the error no longer occurs.
+    If the error message contains `reason=LazyUniquenessCheck`, it means that the transaction is pessimistic, `@@tidb_constraint_check_in_place_pessimistic=0` is set, and a write conflict occurs on a unique index in the application. In this case, you can retry the transaction from the application, or set the variable to `1` to bypass the error.
 
 * Error Number: 9008
 
