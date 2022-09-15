@@ -196,11 +196,6 @@ You can also use the AWS dashboard to configure the VPC peering connection.
 
 1. Navigate to the **Clusters** page.
 2. Locate the target cluster, and click **Connect** in the upper-right corner of the cluster area. The connection dialog is displayed. You can see the **Status** of the VPC peering is **active**. If **Status** is still **system checking**, wait for about 5 minutes and open the dialog again.
-
-    > **Tip:**
-    >
-    > Alternatively, you can also click the name of your target cluster on the **Clusters** page and click **Connect** in the upper-right corner.
-
 3. Access the TiDB Cluster from the instance within the VPC. See [Connect to Your TiDB Cluster](/tidb-cloud/connect-to-tidb-cluster.md).
 
 ## On GCP

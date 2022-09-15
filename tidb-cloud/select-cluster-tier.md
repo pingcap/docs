@@ -53,12 +53,7 @@ To get the prefix for your cluster, take the following steps:
 
 1. Navigate to the **Clusters** page.
 2. Click **Connect** in the upper-right corner of the cluster area. A connection dialog box is displayed.
-
-    > **Tip:**
-    >
-    > Alternatively, you can also click the name of your cluster on the **Clusters** page and click **Connect** in the upper-right corner.
-
-3. In the dialog, locate **Step 2: Connect with a SQL client** and get the prefix.
+3. In the dialog, locate **Step 2: Connect with a SQL client** and get the prefix in the connection string.
 
 ### Automatic hibernation and resuming
 
