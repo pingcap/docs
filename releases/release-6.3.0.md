@@ -52,17 +52,17 @@ In v6.3.0-DMR, the key new features and improvements are as follows:
 
     JSON is a popular data format adopted by a large number of programs. TiDB has introduced the [JSON support](/data-type-json.md) as experimental since an earlier version, compatible with MySQL's JSON data type and some JSON functions. In v6.3.0, the JSON support becomes GA, providing TiDB with richer data types, and further improving TiDB compatibility with MySQL.
 
-* 提供轻量级元数据锁提升 DDL 变更过程 DML 的成功率 [#37275](https://github.com/pingcap/tidb/issues/37275) @[wjhuang2016](https://github.com/wjhuang2016) **tw: Oreoxmt**
+* Provide lightweight metadata lock to improve the DML success rate during DDL change [#37275](https://github.com/pingcap/tidb/issues/37275) @[wjhuang2016](https://github.com/wjhuang2016) **tw: Oreoxmt**
 
-    TiDB 采用 F1 论文中的在线异步变更算法实现 DDL 变更：事务在执行时会获取开始时对应的元数据快照，如果事务执行过程中相关表上发生了元数据的更改，为了保证数据的一致性，TiDB 会返回 `Information schema is changed` 的异常，导致用户事务提交失败。为了解决这个问题，在 v6.3.0 版本中，TiDB 在 Online DDL 算法中引入了[元数据锁](/metadata-lock.md) 特性，通过协调表元数据变更过程中 DML 语句和 DDL 语句的优先级，让执行中的 DDL 语句等待持有旧版本元数据的 DML 语句提交，尽可能避免 DML 语句报错。
+    TiDB uses the online asynchronous schema change algorithm to support changing metadata objects. When a transaction is executed, the transaction obtains the corresponding metadata snapshot at transaction start. If the metadata is changed during transaction, to ensure the data consistency, TiDB returns an `Information schema is changed` error and the transaction fails to commit. To solve the problem, TiDB v6.3.0 introduces [metadata lock](/metadata-lock.md) into the online DDL algorithm. To avoid most DML errors, TiDB coordinates the priority of DMLs and DDLs during table metadata change, and makes executing DDLs wait for the DMLs with old metadata to commit.
 
-* Improve the performance of adding indexes and reduce the impact on DML transactions [#35983](https://github.com/pingcap/tidb/issues/35983) @[benjamin2037](https://github.com/benjamin2037) **tw: Oreoxmt**
+* Improve the performance of adding indexes and reduce its impact on DML transactions [#35983](https://github.com/pingcap/tidb/issues/35983) @[benjamin2037](https://github.com/benjamin2037) **tw: Oreoxmt**
 
-    To improve the speed of backfilling when creating an index, TiDB v6.3.0 introduces the acceleration of `ADD INDEX` and `CREATE INDEX` DDL operations using the [`tidb_ddl_enable_fast_reorg`](/system-variables.md#tidb_ddl_enable_fast_reorg-new-in-v630) system variable. When this feature is enabled, the TiDB performance of adding indexes is about three times faster than the original.
+    To improve the speed of backfilling when creating an index, TiDB v6.3.0 accelerates the `ADD INDEX` and `CREATE INDEX` DDL operations when the [`tidb_ddl_enable_fast_reorg`](/system-variables.md#tidb_ddl_enable_fast_reorg-new-in-v630) system variable is enabled. The performance of adding indexes is about three times faster than the original when the feature is enabled.
 
-* TiDB supports more regular expressions [#23881](https://github.com/pingcap/tidb/issues/23881) @[windtalker](https://github.com/windtalker) **tw: Oreoxmt**
+* Add support for `REGEXP_INSTR()`, `REGEXP_LIKE()`, `REGEXP_REPLACE()`, and `REGEXP_SUBSTR()` regular expression functions [#23881](https://github.com/pingcap/tidb/issues/23881) @[windtalker](https://github.com/windtalker) **tw: Oreoxmt**
 
-    TiDB v6.3.0 supports four regular expression functions, `REGEXP_INSTR()`, `REGEXP_LIKE()`, `REGEXP_REPLACE()`, and `REGEXP_SUBSTR()` introduced in MySQL 8.0, which support schema-based fuzzy query and regular replacement. For more details about the compatibility with MySQL, see [Regular expression compatibility with MySQL](/functions-and-operators/string-functions.md#regular-expression-compatibility-with-mysql).
+    For more details about the compatibility with MySQL, see [Regular expression compatibility with MySQL](/functions-and-operators/string-functions.md#regular-expression-compatibility-with-mysql).
 
 ### Security
 
@@ -84,13 +84,13 @@ In v6.3.0-DMR, the key new features and improvements are as follows:
 
 ### Observability
 
-* 提供“执行时间”的细粒度指标 [#34106](https://github.com/pingcap/tidb/issues/34106) @[cfzjywxk](https://github.com/cfzjywxk) **tw: Oreoxmt**
+* TiDB provides fine-grained metrics of SQL query execution time [#34106](https://github.com/pingcap/tidb/issues/34106) @[cfzjywxk](https://github.com/cfzjywxk) **tw: Oreoxmt**
 
-    性能问题的诊断通常从时间入手。 对执行时间的细粒度观测能力，是衡量数据库可观测性的重要标准。 TiDB 在新版中正式提供了细化数据指标，用于[对执行时间进行细化观测](/latency-breakdown.md)。 通过完整而又细分的指标数据，用户可以清晰的了解数据库的主要的时间消耗，进而快速发现关键问题，节省故障诊断的时间。 “执行时间”的细粒度观测能力，使得 TiDB 的观测性迈上了一个新的台阶。
+    TiDB v6.3.0 provides fine-grained data metrics for [detailed observation of execution time](/latency-breakdown.md). Through the complete and segmented metrics, you can clearly understand the main time consumption of SQL queries, and then quickly find key problems and save time in troubleshooting.
 
-* 增强的 slow log 和 trace 语句 [#34106](https://github.com/pingcap/tidb/issues/34106) @[cfzjywxk](https://github.com/cfzjywxk) **tw: Oreoxmt**
+* Enhanced output for slow logs and `TRACE` statements [#34106](https://github.com/pingcap/tidb/issues/34106) @[cfzjywxk](https://github.com/cfzjywxk) **tw: Oreoxmt**
 
-    在新版本中 TiDB [增强了 slow log 的内容和 trace 命令的输出](/latency-breakdown.md)。用户可以观测到 SQL 语句执行过程中，从 tidb parse 到 kv rocksdb 落盘全链路的延迟数据，进一步增强 TiDB 的诊断能力。
+    TiDB v6.3.0 enhances the output of slow logs and `TRACE`. You can observe the [full-link duration](/latency-breakdown.md) of SQL queries from TiDB parsing to KV RocksDB writing to disk, which further enhances the diagnostic capabilities.
 
 * TiDB Dashboard provides deadlock history information [#34106](https://github.com/pingcap/tidb/issues/34106) @[cfzjywxk](https://github.com/cfzjywxk) **tw: shichun-0415**
 
