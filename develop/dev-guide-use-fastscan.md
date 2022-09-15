@@ -13,11 +13,11 @@ This document describes how to use FastScan to speed up queries in Online Analyt
 
 By default, TiFlash guarantees the precision of query results and data consistency. With the feature FastScan, TiFlash provides more efficient query performance, but does not guarantee the accuracy of query results and data consistency.
 
-Some OLAP scenarios allow for some tolerance to the accuracy of the query results. In these cases, if you need higher query performance, you can enable the FastScan feature in the corresponding session. You can choose whether to enable the FastScan feature by modifying the value of the variable `tiflash_fastscan`.
+Some OLAP scenarios allow for some tolerance to the accuracy of the query results. In these cases, if you need higher query performance, you can enable the FastScan feature in the corresponding session. You can choose whether to enable the FastScan feature by configuring the variable `tiflash_fastscan`.
 
 ## Enable and disable FastScan
 
-By default, the session and global level variables `tiflash_fastscan=OFF`, that is, the FastScan feature is not enabled. You can see the corresponding variable information by using the following statement.
+By default, the variable is `tiflash_fastscan=OFF` at the session level and global level , that is, the FastScan feature is not enabled. You can view the variable information by using the following statement.
 
 ```
 show variables like 'tiflash_fastscan';
@@ -39,13 +39,13 @@ show global variables like 'tiflash_fastscan';
 +------------------+-------+
 ```
 
-The variable `tiflash_fastscan` supports session-level and global-level modifications. If you need to enable the FastScan feature in the current session, you can do so with the following statement:
+You can configure the variable `tiflash_fastscan` at session level and global level. If you need to enable FastScan in the current session, you can do so with the following statement:
 
 ```
 set session tiflash_fastscan=ON;
 ```
 
-You can also set `tiflash_fastscan` at the global level. The new setting will take effect in new sessions, but will not take effect for the current and previous sessions. Besides, in new sessions, `tiflash_fastscan` of session level and global level will both take the new value.
+You can also set `tiflash_fastscan` at the global level. The new setting will take effect in new sessions, but will not take effect in the current and previous sessions. Besides, in new sessions, `tiflash_fastscan` of session level and global level will both take the new value.
 
 ```
 set global tiflash_fastscan=ON;
