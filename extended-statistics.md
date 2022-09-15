@@ -12,7 +12,7 @@ TiDB can collect the following two types of statistics:
 
 When the `ANALYZE` statement is executed manually or automatically, TiDB by default only collects the regular statistics and does not collect the extended statistics. This is because the extended statistics are only used for optimizer estimates in specific scenarios, and collecting them requires additional overhead.
 
-Extended statistics are disabled by default. To collect extended statistics, you need to first enable and register the extended statistics.
+Extended statistics are disabled by default. To collect extended statistics, you need to first enable the extended statistics, and then register each individual extended statistics.
 
 After the registration, the next time the `ANALYZE` statement is executed, TiDB collects both the regular statistics and the registered extended statistics.
 
@@ -34,9 +34,11 @@ To enable extended statistics, set the system variable `tidb_enable_extended_sta
 SET GLOBAL tidb_enable_extended_stats = ON;
 ```
 
-The default value of this variable is `OFF`.
+The default value of this variable is `OFF`. This setting is a one-time task.
 
 ### Register extended statistics
+
+The registration is for individual extended statistics, and you need repeat the registration for each extended statistics.
 
 To register extended statistics, use the SQL statement `ALTER TABLE ADD STATS_EXTENDED`. The syntax is as follows:
 
@@ -103,9 +105,9 @@ Other TiDB nodes will read this change and delete the record in their memory cac
 
 The way of exporting or importing extended statistics is the same as exporting or importing regular statistics. See [Introduction to Statistics - Import and export statistics](/statistics.md#import-and-export-statistics) for details.
 
-## Usage examples
+## Usage examples for correlation-type extended statistics
 
-There are multiple types of extended statistics. Currently, TiDB only supports the correlation type. This type is used to estimate the number of rows in the range query and improve index selection. The following example shows how the correlation type extended statistics to estimate the number of rows in range queries.
+Currently, TiDB only supports the correlation-type extended statistics. This type is used to estimate the number of rows in the range query and improve index selection. The following example shows how the correlation-type extended statistics are used to estimate the number of rows in a range query.
 
 ### Stage 1. Define the table
 
