@@ -72,12 +72,10 @@ TiCDC support rolling upgrade functionality since v6.3.0, when using TiUP perfor
 * The cluster is at least v6.3.0 before upgrade, and there are at least 2 running TiCDC instances.
 * The minimum supported TiUP version is v1.11.0.
 
-If the above condition are not met, TiUP perform operations by force and does not guarantee the replication latency won't goes up too much.
-
-Suppose that the current TiCDC cluster version is v6.3.0, upgrade the cluster to v6.4.0 by executing the following command:
+Once the above conditions are met, you can get the stability improvement brings by rolling upgrade the cluster by executing TiUP cluster upgrade command:
 
 {{< copyable "shell-regular" >}}
 
 ```shell
-tiup cluster upgrade test-cluster v6.4.0 --transfer-timeout 600 --force false
+tiup cluster upgrade test-cluster ${target-version} --transfer-timeout 600 --force false
 ```
