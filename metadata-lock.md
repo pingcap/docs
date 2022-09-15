@@ -9,9 +9,9 @@ This document introduces the metadata lock in TiDB.
 
 ## Concept
 
-TiDB uses the online asynchronous schema change algorithm to support changing metadata objects. When a transaction is executed, the transaction obtains the corresponding metadata snapshot on the transaction start time. If the metadata is changed during the transaction execution, to ensure the data consistency, TiDB returns an `Information schema is changed` error and the transaction fails to commit.
+TiDB uses the online asynchronous schema change algorithm to support changing metadata objects. When a transaction is executed, it obtains the corresponding metadata snapshot at the transaction start. If the metadata is changed during a transaction, to ensure data consistency, TiDB returns an `Information schema is changed` error and the transaction fails to commit.
 
-To solve the preceding problem, TiDB v6.3.0 introduces the metadata lock feature into the online DDL algorithm. To avoid DML statements errors as much as possible, TiDB coordinates the priority of DML statements and DDL statements in the process of changing table metadata and ensures that executing DDL statements wait for the DML statements with old version metadata can be committed.
+To solve the problem, TiDB v6.3.0 introduces metadata lock into the online DDL algorithm. To avoid most DML errors, TiDB coordinates the priority of DMLs and DDLs during table metadata change and makes executing DDLs wait for the DMLs with old metadata to commit.
 
 ## Scenarios
 
@@ -25,7 +25,7 @@ The metadata lock in TiDB applies to all DDL statements, such as:
 - [`EXCHANGE PARTITION`](/partitioned-table.md#partition-management)
 - [`MODIFY COLUMN`](/sql-statements/sql-statement-modify-column.md)
 
-Adding the metadata lock feature might have some performance impact on the execution of the DDL task in TiDB. To reduce the impact, the following lists some scenarios that do not require the metadata lock:
+Enabling metadata lock might have some performance impact on the execution of the DDL task in TiDB. To reduce the impact, the following lists some scenarios that do not require metadata lock:
 
 + `SELECT` queries with auto-commit enabled
 + Stale Read is enabled
@@ -33,15 +33,15 @@ Adding the metadata lock feature might have some performance impact on the execu
 
 ## Usage
 
-To control whether to enable the metadata lock feature or not, you can use the system variable [`tidb_enable_metadata_lock`](/system-variables.md#tidb_enable_metadata_lock-new-in-v630).
+To control whether to enable metadata lock or not, you can use the system variable [`tidb_enable_metadata_lock`](/system-variables.md#tidb_enable_metadata_lock-new-in-v630).
 
 ## Principles
 
 ### Background
 
-DDL operations in TiDB are the online DDL mode. During the execution of a DDL statement, the metadata version of the defined object needs to be modified and multiple minor version changes are required. The online asynchronous change of metadata algorithm only demonstrates that two adjacent minor versions are compatible, that is, between two adjacent metadata versions, operating between versions will not destroy the data consistency stored by the DDL change object.
+DDL operations in TiDB are the online DDL mode. During the execution of a DDL statement, the metadata version of the defined object needs to be modified and multiple minor version changes are required. The online asynchronous change of metadata algorithm only demonstrates that two adjacent minor versions are compatible, that is, operations between two versions do not break data consistency of the DDL changed object.
 
-When adding an index to a table, the status of the DDL statement changes as follows: None -> Delete Only, Delete Only -> Write Only, Write Only -> Write Reorg, Write Reorg -> Public.
+When adding an index to a table, the state of the DDL statement changes as follows: None -> Delete Only, Delete Only -> Write Only, Write Only -> Write Reorg, Write Reorg -> Public.
 
 The following commit process of transactions violates the preceding constraint:
 
@@ -59,40 +59,39 @@ In the preceding table, the metadata version used when `txn4` is committed is tw
 
 ### Implementation details
 
-Introducing the metadata lock can ensure that the metadata versions used by all transactions in a TiDB cluster differ by at most one version. To achieve this goal, TiDB uses the following two rules:
+Metadata lock can ensure that the metadata versions used by all transactions in a TiDB cluster differ by at most one version. To achieve this goal, TiDB uses the following two rules:
 
-- When executing a DML statement, TiDB records the metadata objects accessed by the DML statement in the transaction context, such as tables, views, and corresponding metadata versions.
-
-- When executing a DDL statement to change status, the latest version of metadata is pushed to all TiDB nodes. If the difference between the metadata version used by all transactions related to this status change on a TiDB node, and the current metadata version is less than 2, the TiDB node acquires the metadata lock of the metadata object. The next status change can only be executed when all TiDB nodes in the cluster have obtained the metadata lock of the metadata object.
+- When executing a DML, TiDB records metadata objects accessed by the DML in the transaction context, such as tables, views, and corresponding metadata versions.
+- When executing a DDL to change state, the latest version of metadata is pushed to all TiDB nodes. If the difference between the metadata version used by all transactions related to this state change on a TiDB node, and the current metadata version is less than two, the TiDB node acquires metadata lock of the metadata object. The next state change can only be executed when all TiDB nodes in the cluster have obtained metadata lock of the metadata object.
 
 ## Impact
 
-- For DML statements, metadata lock does not cause DML statements to be blocked, thus the deadlock problem will not occur.
-- After enabling the metadata lock and the metadata information of a metadata object in a transaction is determined at the first access and is not changed.
-- For DDL statements, when changing metadata status, DDL statements might be blocked by transactions with old version metadata. The following is an example:
+- For DMLs, metadata lock does not block its execution.
+- When metadata lock is enabled, the information of a metadata object in a transaction is determined on the first access and does not change after that.
+- For DDLs, when changing metadata state, DDLs might be blocked by old transactions. The following is an example:
 
-  | Session 1 | Session 2 |
-  |:---------------------------|:----------|
-  | `CREATE TABLE t (a INT);`  |           |
-  | `INSERT INTO t VALUES(1);` |           |
-  | `BEGIN;`                   |           |
-  |                            | `ALTER TABLE t ADD COLUMN b INT;` |
-  | `SELECT * FROM t;`<br/>(Use the current metadata version of table `t`. Return `(a=1，b=NULL)` and lock table `t`.)         |           |
-  |                            | `ALTER TABLE t ADD COLUMN c INT;` (blocked by Session 1) |
+    | Session 1 | Session 2 |
+    |:---------------------------|:----------|
+    | `CREATE TABLE t (a INT);`  |           |
+    | `INSERT INTO t VALUES(1);` |           |
+    | `BEGIN;`                   |           |
+    |                            | `ALTER TABLE t ADD COLUMN b INT;` |
+    | `SELECT * FROM t;`<br/>(Use the current metadata version of table `t`. Return `(a=1，b=NULL)` and lock table `t`.)         |           |
+    |                            | `ALTER TABLE t ADD COLUMN c INT;` (blocked by Session 1) |
 
-  At the repeatable read isolation level, if a DDL that requires data changes is performed during the metadata process of determining a table from the start of the transaction, such as adding an index, or changing column types. It performs as the following:
+    At the repeatable read isolation level, if a DDL that requires data changes is performed during the metadata process of determining a table from the start of the transaction, such as adding an index, or changing column types. It performs as the following:
 
-  | Session 1                  | Session 2                                 |
-  |:---------------------------|:------------------------------------------|
-  | `CREATE TABLE t (a INT);`  |                                           |
-  | `INSERT INTO t VALUES(1);` |                                           |
-  | `BEGIN;`                   |                                           |
-  |                            | `ALTER TABLE t ADD INDEX idx(a);`         |
-  | `SELECT * FROM t;` (index `idx` is not available) |                                 |
-  | `COMMIT;`                  |                                           |
-  | `BEGIN;`                   |                                           |
-  |                            | `ALTER TABLE t MODIFY COLUMN a CHAR(10);` |
-  | `SELECT * FROM t;` (return an error `Information schema is changed`) |             |
+    | Session 1                  | Session 2                                 |
+    |:---------------------------|:------------------------------------------|
+    | `CREATE TABLE t (a INT);`  |                                           |
+    | `INSERT INTO t VALUES(1);` |                                           |
+    | `BEGIN;`                   |                                           |
+    |                            | `ALTER TABLE t ADD INDEX idx(a);`         |
+    | `SELECT * FROM t;` (index `idx` is not available) |                    |
+    | `COMMIT;`                  |                                           |
+    | `BEGIN;`                   |                                           |
+    |                            | `ALTER TABLE t MODIFY COLUMN a CHAR(10);` |
+    | `SELECT * FROM t;` (return an error `Information schema is changed`) | |
 
 ## Troubleshoot blocked DDLs
 
@@ -102,7 +101,7 @@ TiDB v6.3.0 introduces the `mysql.tidb_mdl_view` view to help you obtain the inf
 >
 > To select the `mysql.tidb_mdl_view` view, [`PROCESS` privilege](https://dev.mysql.com/doc/refman/8.0/en/privileges-provided.html#priv_process) is required.
 
-The following takes adding an index for table `t` as an example. Assume a DDL statement `ALTER TABLE t ADD INDEX idx(a)`:
+The following takes adding an index for table `t` as an example. Assume that there is a DDL statement `ALTER TABLE t ADD INDEX idx(a)`:
 
 ```sql
 SELECT * FROM mysql.tidb_mdl_view\G
