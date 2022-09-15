@@ -81,7 +81,7 @@ SELECT * FROM information_schema.tiflash_replica WHERE TABLE_SCHEMA = 'tpcc';
 In the result of the above statement:
 
 - `AVAILABLE` indicates whether the TiFlash replica of a specific table is available or not. `1` means available and `0` means unavailable. Once a replica becomes available, this status does not change anymore. If you use DDL statements to modify the number of replicas, the replication progress will be recalculated.
-- `PROGRESS` means the progress of the replication. The value is between 0.0 and 1.0. 1 means at least one replica is replicated.
+- `PROGRESS` means the progress of the replication. The value is between `0.0` and `1.0`. `1.0` means at least one replica is replicated.
 
 ## Collect statistics
 
