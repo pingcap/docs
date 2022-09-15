@@ -10,6 +10,10 @@ TiDB can collect the following two types of statistics:
 - Regular statistics: statistics such as histograms and Count-Min Sketch. See [Introduction to Statistics](/statistics.md) for details.
 - Extended statistics: statistics filtered by tables and columns.
 
+> **Tip:**
+>
+> Before reading this document, it is recommended that you read [Introduction to Statistics](/statistics.md) first.
+
 When the `ANALYZE` statement is executed manually or automatically, TiDB by default only collects the regular statistics and does not collect the extended statistics. This is because the extended statistics are only used for optimizer estimates in specific scenarios, and collecting them requires additional overhead.
 
 Extended statistics are disabled by default. To collect extended statistics, you need to first enable the extended statistics, and then register each individual extended statistics.
@@ -38,7 +42,7 @@ The default value of this variable is `OFF`. This setting is a one-time task.
 
 ### Register extended statistics
 
-The registration is for individual extended statistics, and you need repeat the registration for each extended statistics.
+The registration for extended statistics is not a one-time task, and you need repeat the registration for each extended statistics.
 
 To register extended statistics, use the SQL statement `ALTER TABLE ADD STATS_EXTENDED`. The syntax is as follows:
 
