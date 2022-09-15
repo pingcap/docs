@@ -10,14 +10,14 @@ TiDB version: 6.3.0-DMR
 
 In v6.3.0-DMR, the key new features and improvements are as follows:
 
-- TiKV/TiFlash 静态加密支持国密算法 SM4
-- TiDB 支持基于国密算法 SM3 插件的身份验证
-- SQL语句CREATE USER / ALTER USER支持ACCOUNT LOCK/UNLOCK 选项
-- JSON 数据类型和 JSON 函数 GA
-- TiDB 支持 Null Aware Anti Join
-- 提供“执行时间”的细粒度指标
-- 分区表新增简化 Range 分区的语法糖衣，避免在 DDL 中枚举所有分区
-- Range Columns 分区方式在 PARTITION BY RANGE COLUMNS (column_list) 处支持定义多列
+- TiKV and TiFlash support SM4 encryption at rest.
+- TiDB supports authentication with the SM3 algorithm.
+- The `CREATE USER` and `ALTER USER` statements support the `ACCOUNT LOCK/UNLOCK` option.
+- JSON data type and functions become generally available (GA).
+- TiDB supports Null Aware Anti Join.
+- TiDB provides execution time metrics at a finer granularity.
+- A new syntactic sugar is added to simplify Range partition definitions.
+- Range Columns partitioning supports defining multiple columns.
 
 ## New features
 
@@ -35,7 +35,7 @@ In v6.3.0-DMR, the key new features and improvements are as follows:
 
     [EXCHANGE PARTITION]((/partitioned-table.md#partition-management) becomes GA after performance and stability improvements.
 
-* 增加支持以下[窗口分析函数](/tiflash/tiflash-supported-pushdown-calculations.md)：[#5579](https://github.com/pingcap/tiflash/issues/5579) @[SeaRise](https://github.com/SeaRise) **tw：shichun-0415**
+* TiDB supports two more [window functions](/tiflash/tiflash-supported-pushdown-calculations.md) [#5579](https://github.com/pingcap/tiflash/issues/5579) @[SeaRise](https://github.com/SeaRise) **tw：shichun-0415**
 
     * `LEAD`
     * `LAG`
@@ -66,13 +66,13 @@ In v6.3.0-DMR, the key new features and improvements are as follows:
 
 ### Security
 
-* 静态加密 TiKV 支持国密算法 SM4 [#13041](https://github.com/tikv/tikv/issues/13041) @[jiayang-zheng](https://github.com/jiayang-zheng) **tw: TomShawn**
+* TiKV supports the SM4 algorithm for encryption at rest. [#13041](https://github.com/tikv/tikv/issues/13041) @[jiayang-zheng](https://github.com/jiayang-zheng)
 
-    TiKV 静态加密中新增[加密算法 SM4](/encryption-at-rest.md)，用户在配置静态加密时，支持配置 data-encryption-method 参数为 "sm4-ctr"，以启用基于国密算法SM4的静态加密能力。
+    Add the [SM4 algorithm](/encryption-at-rest.md) for TiKV encryption at rest. When you configure encryption at rest, you can enable the SM4 encryption capacity by setting the value of the "data-encryption-method" configuration to "sm4-ctr".
 
-* 静态加密 TiFlash 支持国密算法 SM4 [#5714](https://github.com/pingcap/tiflash/issues/5714) @[lidezhu](https://github.com/lidezhu) **tw: TomShawn**
+* TiFlash supports the SM4 algorithm for encryption at rest. [#5714](https://github.com/pingcap/tiflash/issues/5714) @[lidezhu](https://github.com/lidezhu)
 
-    TiFlash 静态加密中新增[加密算法 SM4](/encryption-at-rest.md)，用户在配置静态加密时，支持配置 data-encryption-method 参数为 "sm4-ctr"，以启用基于国密算法SM4的静态加密能力。
+    Add the [SM4 algorithm](/encryption-at-rest.md) for TiFlash encryption at rest. When you configure encryption at rest, you can enable the SM4 encryption capacity by setting the value of the "data-encryption-method" configuration to "sm4-ctr".
 
 * TiDB supports authentication with the SM3 algorithm [#36192](https://github.com/pingcap/tidb/issues/36192) @[CbcWestwolf](https://github.com/CbcWestwolf) **tw：ran-huang**
 
@@ -92,27 +92,27 @@ In v6.3.0-DMR, the key new features and improvements are as follows:
 
     在新版本中 TiDB [增强了 slow log 的内容和 trace 命令的输出](/latency-breakdown.md)。用户可以观测到 SQL 语句执行过程中，从 tidb parse 到 kv rocksdb 落盘全链路的延迟数据，进一步增强 TiDB 的诊断能力。
 
-* Dashboard 中显示死锁的历史记录 [#34106](https://github.com/pingcap/tidb/issues/34106) @[cfzjywxk](https://github.com/cfzjywxk) **shichun-0415**
+* TiDB Dashboard provides deadlock history information [#34106](https://github.com/pingcap/tidb/issues/34106) @[cfzjywxk](https://github.com/cfzjywxk) **tw: shichun-0415**
 
-    新版本将死锁的历史记录加入到了 Dashboard 中。 当用户通过 Dashboard 的慢日志等手段发现某些 SQL 等待锁的时间较长的时候，Dashboard 上的死锁的历史记录有助于对问题的分析，提供了诊断的易用性。
+    From v6.3.0, TiDB Dashboard will provide deadlock history. If you find excessively long SQL lock waiting by analyzing slow logs or other information on TiDB Dashboard, you can turn to deadlock history for problem locating, which delivers better diagnosis experience.
 
 ### Performance
 
-* TiFlash 调整 FastScan 功能使用方式（实验特性） [#5252](https://github.com/pingcap/tiflash/issues/5252) @[hongyunyan](https://github.com/hongyunyan) **tw: hfxsd**
+* TiFlash changes the way FastScan is used (experimental) [#5252](https://github.com/pingcap/tiflash/issues/5252) @[hongyunyan](https://github.com/hongyunyan)
 
-    TiFlash 从 v6.2.0 版本开始引入的快速扫描功能 (FastScan)，性能上符合预期，但是使用方式上缺乏灵活性。因此，TiFlash 在 v6.3.0 版本[调整 FastScan 功能的使用方式](/develop/dev-guide-use-fastscan.md)，停止使用对表设定是否开启 FastScan 功能的方式，改为使用系统变量 [`tiflash_fastscan`](/system-variables.md#tiflash_fastscan-从-v630-版本开始引入) 控制是否开启 FastScan 功能。
+    FastScan, introduced in TiFlash starting with v6.2.0, performed as expected, but lacked flexibility in how it was used. Therefore, in v6.3.0 [the way FastScan is used has changed](/develop/dev-guide-use-fastscan.md). TiFlash does not support using the switch to control the FastScan feature. Instead, it uses the system variable [`tiflash_fastscan`](/system-variables.md#tiflash_fastscan-new-in-v630) to control whether to turn on the FastScan function.
+    
+    When you upgrade from v6.2.0 to v6.3.0, all FastScan settings in v6.2.0 will become invalid, but will not affect the normal reading of data. You need to set the variable [`tiflash_fastscan`]. When you upgrade from an earlier version to v6.3.0, the FastScan feature is not enabled by default for all sessions to keep data consistency.
 
-    从 v6.2.0 版本升级到 v6.3.0 版本时，在 v6.2.0 版本的所有 FastScan 设定将失效，需要重新使用变量方式进行 FastScan 设定，但不影响数据的正常读取。从更早版本升级到 v6.3.0 时，所有会话默认不开启 FastScan 功能，而是保持一致性的数据扫描功能。
+* TiFlash optimizes to improve data scanning performance in multiple concurrency scenarios [#5376](https://github.com/pingcap/tiflash/issues/5376) @[JinheLin](https://github.com/JinheLin)
 
-* TiFlash 优化提升多并发场景下的数据扫描性能 [#5376](https://github.com/pingcap/tiflash/issues/5376) @[JinheLin](https://github.com/JinheLin) **tw: hfxsd**
+    TiFlash reduces duplicate reads of the same data by combining read operations of the same data. It optimizes the resource overhead and improves the performance of data scanning in the case of concurrent tasks (/tiflash/tiflash-configuration.md#configure-the-tiflashtoml-file). It avoids the situation where the same data needs to be read separately in each task in multiple concurrent tasks, and avoids the possibility of multiple reads of the same data at the same time.
 
-    TiFlash 通过合并相同数据的读取操作，减少对于相同数据的重复读取，优化了多并发任务情况下的资源开销，[提升多并发下的数据扫描性能](/tiflash/tiflash-configuration.md#配置文件-tiflashtoml)。避免了以往在多并发任务下，如果涉及相同数据，同一份数据需要在每个任务中分别进行读取的情况，以及可能出现在同一时间内对相同数据进行多次读取的情况。
+    This feature is experimental in v6.2.0, and becomes GA in v6.3.0.
 
-    该功能在 v6.2.0 版本以实验特性发布，并在 v6.3.0 版本作为正式功能发布。
+* Improve performance of TiFlash data replication [#5237](https://github.com/pingcap/tiflash/issues/5237) @[breezewish](https://github.com/breezewish) 
 
-* TiFlash 副本同步性能优化 [#5237](https://github.com/pingcap/tiflash/issues/5237) @[breezewish](https://github.com/breezewish) **tw: hfxsd**
-
-    TiFlash 使用 Raft 协议与 TiKV 进行副本数据同步。在 v6.3.0 版本之前，同步大量副本数据时往往需要比较长的时间。v6.3.0 版本优化了 TiFlash 副本同步机制，大幅度提升了副本同步速度。因此，使用 BR 恢复数据、使用 Lightning 导入数据，或全新增加 TiFlash 副本时，副本将更迅速地完成同步，用户可以更及时地使用 TiFlash 进行查询。此外，在 TiFlash 扩缩容或修改 TiFlash 副本数时，TiFlash 副本也将更快地达到安全、均衡的状态。
+    TiFlash uses the Raft protocol for data replication with TiKV. Prior to v6.3.0, it often took long time to replicate large amounts of replica data. TiDB v6.3.0 optimizes the TiFlash data replication mechanism and significantly improves the replication speed. When you use BR to recover data, use TiDB Lightning to import data, or add new TiFlash replicas, the replicas can be replicated more quickly. You can query with TiFlash in a more timely manner. In addition, TiFlash replicas will also reach a secure and balanced state faster when you scale up, scale down, or modify the number of TiFlash replicas.
 
 * TiKV supports log recycling [#214](https://github.com/tikv/raft-engine/issues/214) @[LykxSassinator](https://github.com/LykxSassinator) **tw：ran-huang**
 
@@ -122,13 +122,13 @@ In v6.3.0-DMR, the key new features and improvements are as follows:
 
     TiDB 在新版本中引入了新的连接类型 [Null Aware Anti Join (NAAJ)](/explain-subqueries.md#null-aware-semi-joinin-any-子查询)。 NAAJ 在集合操作时能够感知集合是否为空，或是否有空值，优化了一部分操作比如`IN`、`= ANY` 的执行效率，提升 SQL 性能。
 
-* 增加优化器 hint 控制哈希连接的驱动端 [#issue]() @[Reminiscent](https://github.com/Reminiscent) **tw: TomShawn**
+* Add optimizer hints to control the build end of Hash Join [#issue]() @[Reminiscent](https://github.com/Reminiscent) **tw: TomShawn**
 
-    在新版本中，优化器引入了两个新的 [hint `HASH_JOIN_BUILD()` 和 `HASH_JOIN_PROBE()`](/optimizer-hints.md) 用来指定哈希连接，并指定其驱动端和被驱动端。 在没有选到最优执行计划的情况下，提供了更丰富的干预手段。
+    In v6.3.0, the TiDB optimizer introduces 2 hints, `HASH_JOIN_BUILD()` and `HASH_JOIN_PROBE()`, to specify the Hash Join, its probe end, and its build end. When the optimizer fails to select the optimal execution plan, you can use these hints to intervene with the plan. 
 
-* 会话级允许 CTE 内联展开 [#36514](https://github.com/pingcap/tidb/issues/36514) @[elsa0520](https://github.com/elsa0520) **shichun-0415**
+* Support session-level CTE inline [#36514](https://github.com/pingcap/tidb/issues/36514) @[elsa0520](https://github.com/elsa0520) **tw: shichun-0415**
 
-    在 v6.2.0 中， 我们引入在优化器提示 `MERGE` ， 允许对 CTE 内联进行展开，使得 CTE 查询结果的消费者能够在 TiFlash 内并行执行。 在版本 v6.3.0 中，我们添加了会话级变量 [`tidb_opt_force_inline_cte`](/system-variables.md#tidb_opt_force_inline_cte-从-v630-版本开始引入)，允许在会话级修改这个行为，提升了易用性。
+    TiDB v6.2.0 introduced the `MERGE` hint in optimizers to allow CTE inline, so that the consumers of a CTE query result can be executed in parallel in TiFlash. In v6.3.0, a session variable [`tidb_opt_force_inline_cte`](/system-variables.md#tidb_opt_force_inline_cte-new-in-v630) in introduced to allow CTE inline in sessions. This improves ease of use greatly.
 
 ### Transactions
 
@@ -136,23 +136,15 @@ In v6.3.0-DMR, the key new features and improvements are as follows:
 
     You can use the [`tidb_constraint_check_in_place_pessimistic`](/system-variables.md#tidb_constraint_check_in_place_pessimistic-new-in-v630) system variable to control when TiDB checks [unique constraints](/constraints.md#pessimistic-transactions) in pessimistic transactions. This variable is disabled by default. When the variable is set to `ON`, TiDB will defer locking operations and unique constraint checks in pessimistic transactions until necessary, thus improving the performance of bulk DML operations.
 
-* 优化 Read-Committed 隔离级别中对 TSO 的获取 [#36812](https://github.com/pingcap/tidb/issues/36812) @[TonsnakeLin](https://github.com/TonsnakeLin) **tw: TomShawn**
+* Optimize the way of fetching TSO in the Read-Committed isolation level [#36812](https://github.com/pingcap/tidb/issues/36812) @[TonsnakeLin](https://github.com/TonsnakeLin) **tw: TomShawn**
 
-    在 Read-Committed 隔离级别中， 引入新的系统变量 [`tidb_rc_write_check_ts`](/system-variables.md#tidb_rc_write_check_ts-从-v630-版本开始引入) 控制语句对 TSO 的获取方式。在 Plan Cache 命中的情况下，通过降低对 TSO 的获取频率提升批量 DML 的执行效率，降低跑批类任务的执行时间。
+    In the Read-Committed isolation level, the system variable [`tidb_rc_write_check_ts`](/system-variables.md#tidb_rc_write_check_ts-new-in-v630) is introduced to control how TSO is fetched. In the case of Plan Cache hit, TiDB improves the execution efficiency of batch DML statements by reducing the frequency of fetching TSO, and reduces the execution time of running tasks in batches.
 
 ### Stability
 
-* TiKV 后台 IO 任务限制增强 (TiKV I/O Rate Limiter) [#10867](https://github.com/tikv/tikv/issues/10867) @[tabokie](https://github.com/tabokie) **tw：ran-huang**
+* Modify the default policy of loading statistics when statistics become outdated [#issue]() @[xuyifangreeneyes](https://github.com/xuyifangreeneyes) **tw: TomShawn**
 
-    改进算法，提供对[磁盘读 I/O 的动态限流能力](/tikv-configuration-file.md#storageio-rate-limit)。
-
-* 优化 `IN` 条件元素过多引发的大量内存消耗 [#30755](https://github.com/pingcap/tidb/issues/30755) @[xuyifangreeneyes](https://github.com/xuyifangreeneyes) **tw: TomShawn**
-
-    当 SQL 中的 `IN` 条件包含的元素过多时，TiDB 在优化器构造扫描范围时可能会消耗大量的内存。在新版中，TiDB 引入了系统变量 [`tidb_opt_range_max_size`](/system-variables.md#tidb_opt_range_max_size-从-v630-版本开始引入) 实现对扫描范围的内存控制机制，对这类操作进行了优化，减少内存消耗，提升 SQL 执行效率和系统稳定性。
-
-* 修改优化统计信息过期时的默认加载策略 [#issue]() @[xuyifangreeneyes](https://github.com/xuyifangreeneyes) **tw: TomShawn**
-
-    在 v5.3.0 版本时，TiDB 引入系统变量 [`tidb_enable_pseudo_for_outdated_stats`](/system-variables.md#tidb_enable_pseudo_for_outdated_stats-从-v530-版本开始引入) 控制优化器在统计信息过期时的行为，默认为 `ON`，即保持旧版本行为不变：当 SQL 涉及的对象的统计信息过期时，优化器认为该表上除总行数以外的统计信息不再可靠，转而使用 pseudo 统计信息。 经过一系列测试和用户实际场景分析，TiDB 在新版本中将  `tidb_enable_pseudo_for_outdated_stats` 的默认值改为 `OFF`，即使统计信息过期，优化器也仍会使用该表上的统计信息，这有利于执行计划的稳定性。
+    In v5.3.0, TiDB introduces the system variable [`tidb_enable_pseudo_for_outdated_stats`](/system-variables.md#tidb_enable_pseudo_for_outdated_stats-new-in-v530) to control how the optimizer behaves when the statistics become outdated. The default value is `ON`, which means keeping the behavior of the old version: When statistics on objects involved in SQL are outdated, the optimizer considers that statistics (other than the total number of rows on the table) are no longer reliable and uses pseudo statistics instead. After tests and analyses of actual user scenarios, the default value of `tidb_enable_pseudo_for_outdated_stats` is changed to `OFF` in v6.3.0. Even if the statistics become outdated, the optimizer will still use the statistics on the table, which is good for the execution program stability.
 
 * The feature of disabling Titan becomes GA [#issue]() @[tabokie](https://github.com/tabokie) **tw：ran-huang**
 
@@ -168,19 +160,19 @@ In v6.3.0-DMR, the key new features and improvements are as follows:
 
 ### MySQL compatibility
 
-* 完善基于 SQL 的数据放置规则功能的兼容性 [#37171](https://github.com/pingcap/tidb/issues/37171) @[lcwangchao](https://github.com/lcwangchao) **tw: hfxsd**
+* Improve compatibility of SQL-based data Placement Rules [#37171](https://github.com/pingcap/tidb/issues/37171) @[lcwangchao](https://github.com/lcwangchao)
 
-    TiDB 在 v6.0.0 版本提供基于 SQL 的数据放置规则功能，但是由于实现机制冲突，该功能和构建 TiFlash 副本功能不兼容。v6.3.0 版本进行改进优化，[完善了这两个功能的兼容性](/placement-rules-in-sql.md#使用限制)。
+    TiDB v6.0.0 provides SQL-based data Placement Rules. But this feature is not compatible with TiFlash due to conflicts in implementation mechanisms. TiDB v6.3.0 optimizes this feature, and [improves compatibility of SQL-based data Placement Rules and TiFlash](/placement-rules-in-sql.md#known-limitations). 
 
 ### Backup and restore
 
-* PITR 支持 GCS 和 Azure Blob Storage 作为备份存储 [#issue]() @[joccau](https://github.com/joccau) **tw: shichun-0415**
+* PITR supports GCS and Azure Blob Storage as backup storage [#issue]() @[joccau](https://github.com/joccau) **tw: shichun-0415**
 
-    PITR 支持[以 GCS 或 Azure Blob Storage 作为备份存储目标]()。部署在 GCP 或者 Azure 上的用户，升级 TiDB 集群到 v6.3.0 后，就可以使用 PITR 功能了。
+    PITR supports [GCS and Azure Blob Storage as backup storage](). If your TiDB is deployed on GCP or Azure, you can use the PITR feature after upgrading your cluster to v6.3.0.
 
-* BR 支持 AWS S3 Object Lock [#issue]() @[3pointer](https://github.com/3pointer) **tw: shichun-0415**
+* BR supports AWS S3 Object Lock [#issue]() @[3pointer](https://github.com/3pointer) **tw: shichun-0415**
 
-    用户在 S3 开启 [Object Lock](https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-lock.html) 后，可以防止备份数据写入后被修改或者删除。
+    After enabling [Object Lock](https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-lock.html) , you can protect backup data from being tampered with or deleted.
 
 ### Data migration
 
@@ -198,9 +190,9 @@ In v6.3.0-DMR, the key new features and improvements are as follows:
 
     To support replicating data from a single TiDB cluster to multiple geo-distributed data systems, starting from v6.3.0, [TiCDC can be deployed in multiple IDCs](link) to replicate data for each IDC. This feature helps deliver the capability of geo-distributed data replication and deployment topology.
 
-* TiCDC 支持维护上下游数据一致性快照 (Sync point) [#issue]() @[asddongmen](https://github.com/asddongmen) **tw: TomShawn**
+* TiCDC supports keeping the snapshots consistent between the upstream and the downstream (sync point) [#issue]() @[asddongmen](https://github.com/asddongmen) **tw: TomShawn**
 
-    在灾备复制场景下，[TiCDC 支持周期性的维护一个下游数据快照](用户文档链接)，使得该下游快照能保持与上游数据的快照一致性。借助此能力，TiCDC 能更好的匹配读写分离应用场景，帮助用户降本增效。
+    In the scenarios of data replication for disaster recovery, TiCDC supports periodically maintaining a downstream data snapshot so that the downstream snapshot is consistent with the upstream snapshot. With this feature, TiCDC can better match the scenarios where reads and writes are separate, and help you lower the cost.
 
 * TiCDC supports graceful upgrade [#4757](https://github.com/pingcap/tiflow/issues/4757) @[overvenus](https://github.com/overvenus) @[3AceShowHand](https://github.com/3AceShowHand) **tw:ran-huang**
 
