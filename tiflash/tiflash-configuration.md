@@ -207,7 +207,6 @@ delta_index_cache_size = 0
     ## New in v6.2.0. This item specifies the minimum ratio of valid data in a PageStorage data file. When the ratio of valid data in a PageStorage data file is less than the value of this configuration, GC is triggered to compact data in the file. The default value is 0.5.
     dt_page_gc_threshold = 0.5
 
-    # dt_enable_read_thread = false
 
 ## Security settings take effect starting from v4.0.5.
 [security]
