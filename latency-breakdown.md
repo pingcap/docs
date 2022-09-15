@@ -308,10 +308,10 @@ Diagram(
 )
 ```
 
-|                 | Pessimistic Txn         | Optimistic Txn   |
-|-----------------|-------------------------|------------------|
-| Auto-commit     | execute + lock + commit | execute + commit |
-| Non-auto-commit | execute + lock          | execute          |
+|                 | Pessimistic transaction | Optimistic transaction |
+|-----------------|-------------------------|------------------------|
+| Auto-commit     | execute + lock + commit | execute + commit       |
+| Non-auto-commit | execute + lock          | execute                |
 
 A write query is divided into the following three phases:
 
@@ -823,9 +823,9 @@ raft db write duration(raft engine disabled) =
     tikv_raftstore_store_perf_context_time_duration_secs{type="write_memtable_time"}
 ```
 
-Because `commit log wait duration` is the slowest duration of quorum peers, it might be larger than `raft db write duration`.
+Because `commit log wait duration` is the longest duration of quorum peers, it might be larger than `raft db write duration`.
 
-Since v6.1.0, TiKV uses [Raft Engine](/tikv-configuration-file.md#raft-engine) as its default log storage engine, which changes the process of writing log.
+Since v6.1.0, TiKV uses [Raft Engine](/glossary.md#raft-engine) as its default log storage engine, which changes the process of writing log.
 
 ### KV DB
 
@@ -857,11 +857,11 @@ In the async write process, committed logs need to be applied to the KV DB. The 
 
 ## Diagnosis use cases
 
-The preceding sections explain the details about time cost metrics during querying. This section introduces common procedures of metrics analysis when you encounter slow read or write queries. All metrics can be checked in the DB Time panel of [Performance Overview Dashboard](/grafana-performance-overview-dashboard.md).
+The preceding sections explain the details about time cost metrics during querying. This section introduces common procedures of metrics analysis when you encounter slow read or write queries. All metrics can be checked in the Database Time panel of [Performance Overview Dashboard](/grafana-performance-overview-dashboard.md).
 
 ### Slow read queries
 
-If `SELECT` statements account for a significant portion of the DB time, you can assume that TiDB is slow at read queries.
+If `SELECT` statements account for a significant portion of the database time, you can assume that TiDB is slow at read queries.
 
 The execution plans of slow queries can be found in the [Top SQL statements](/dashboard/dashboard-overview.md#top-sql-statements) panel of TiDB Dashboard. To investigate the time costs of slow read queries, you can analyze [Point get](#point-get), [Batch point get](#batch-point-get) and some [simple coprocessor queries](#table-scan--index-scan) according to the preceding descriptions.
 
