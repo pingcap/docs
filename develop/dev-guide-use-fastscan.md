@@ -1,6 +1,7 @@
 ---
 title: FastScan
 summary: Introduces a way to speed up querying in OLAP scenarios by using FastScan.
+aliases: ['/docs/sql-statements/sql-statement-set-tiflash-mode/']
 ---
 
 # FastScan
