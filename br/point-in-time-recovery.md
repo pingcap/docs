@@ -91,3 +91,12 @@ Testing scenario 2 (on-premises):
 - During the backup process, do not exchange partition. For details, refer to [Executing the Exchange Partition DDL during PITR recovery](/br/pitr-troubleshoot.md#what-should-i-do-if-an-error-occurs-when-executing-the-exchange-partition-ddl-during-pitr-log-restoration).
 - Do not restore the log backup data of a certain time period repeatedly. If you restore the log backup data of a range `[t1=10, t2=20)` repeatedly, the restored data might be inconsistent.
 - For other known limitations, refer to [PITR Known Issues](/br/pitr-known-issues.md).
+
+### Version compatibility check
+
+In v6.3.0, backup files generated after PITR are compressed in a new manner and small files are merged before being stored (to solve problems caused by too many small files). However, this causes forward compatibility issues. See the following table:
+
+| Restore version (horizontal) \ Backup version (vertical)   | Use PITR v6.2.0 to restore TiDB v6.2.0 | Use PITR v6.3.0 to restore TiDB v6.3.0 |
+|  ----  |  ----  | ---- |
+|Use PITR v6.2.0 to back up TiDB v6.2.0 | Compatible | Compatible |
+|Use PITR v6.3.0 to back up TiDB v6.3.0 | Incompatible |Compatible |
