@@ -74,7 +74,7 @@ The `UNIQUE` constraints ensure that each non-NULL value in an indexed column is
 
 ### Optimistic transactions
 
-In optimistic transactions, TiDB checks `UNIQUE` constraints [lazily](/transaction-overview.md#lazy-check-of-constraints) by default. When an optimistic transaction is committed, TiDB performs a bulk check. This helps reduce network overhead and improve performance.
+In optimistic transactions, TiDB checks `UNIQUE` constraints [lazily](/transaction-overview.md#lazy-check-of-constraints) by default. When an optimistic transaction is committed, TiDB performs a bulk check, which helps reduce network overhead and improve performance.
 
 For example:
 
@@ -120,7 +120,7 @@ ERROR 1062 (23000): Duplicate entry 'bill' for key 'username'
 
 In the preceding optimistic example, the unique check was deferred until the transaction is committed. This resulted in a duplicate key error, because the value `bill` was already present.
 
-You can disable this behavior by setting [`tidb_constraint_check_in_place`](/system-variables.md#tidb_constraint_check_in_place) to `1`. This variable is only applicable to optimistic transactions. For pessimistic transactions, you can control this behavior using the [`tidb_constraint_check_in_place_pessimistic`](/system-variables.md#tidb_constraint_check_in_place_pessimistic) variable. When `tidb_constraint_check_in_place=1`, the unique constraint is checked when the statement is executed.
+You can disable this behavior by setting [`tidb_constraint_check_in_place`](/system-variables.md#tidb_constraint_check_in_place) to `1`. This variable is only applicable to optimistic transactions. For pessimistic transactions, you can control this behavior using the [`tidb_constraint_check_in_place_pessimistic`](/system-variables.md#tidb_constraint_check_in_place_pessimistic-new-in-v630) variable. When `tidb_constraint_check_in_place=1`, the unique constraint is checked when a statement is executed.
 
 For example:
 
@@ -162,7 +162,7 @@ The first  `INSERT` statement caused a duplicate key error. This causes addition
 
 ### Pessimistic transactions
 
-In pessimistic transactions, by default, TiDB checks `UNIQUE` constraints whenever a SQL statement that requires inserting or updating unique indexes is executed.
+In pessimistic transactions, by default, TiDB checks `UNIQUE` constraints when a SQL statement that requires inserting or updating unique indexes is executed.
 
 ```sql
 DROP TABLE IF EXISTS users;
@@ -181,11 +181,11 @@ INSERT INTO users (username) VALUES ('jane'), ('chris'), ('bill');
 ERROR 1062 (23000): Duplicate entry 'bill' for key 'username'
 ```
 
-To achieve better performance of pessimistic transactions, you can set the [`tidb_constraint_check_in_place_pessimistic`](/system-variables.md#tidbconstraintcheckinplacepessimistic-span- classversion-mark introduces span from version -v630-) variable to `0`, which allows TiDB to defer the unique constraint check of an unique index (to the next time when this index requires a lock or to the time when the transaction is committed) and skip the corresponding pessimistic lock. When using this variable, pay attention to the following:
+To achieve better performance of pessimistic transactions, you can set the [`tidb_constraint_check_in_place_pessimistic`](/system-variables.md#tidb_constraint_check_in_place_pessimistic-new-in-v630) variable to `0`, which allows TiDB to defer the unique constraint check of an unique index (to the next time when this index requires a lock or to the time when the transaction is committed) and skip the corresponding pessimistic lock. When using this variable, pay attention to the following:
 
 - Due to the deferred unique constraint check, TiDB might read results that do not meet the unique constraints and return a `Duplicate entry` error when you commit a pessimistic transaction. When this error occurs, TiDB rolls back the current transaction.
 
-    The following example skips the lock to `bill`, so the query results of TiDB might not satisfy the uniqueness constraints.
+    The following example skips the lock to `bill`, so TiDB might get results that do not satisfy the uniqueness constraints.
 
     ```sql
     SET tidb_constraint_check_in_place_pessimistic = 0;
@@ -194,7 +194,7 @@ To achieve better performance of pessimistic transactions, you can set the [`tid
     SELECT * FROM users FOR UPDATE;
     ```
 
-   As in the following example output, the query results of TiDB do not satisfy the uniqueness constraint: there are two `bills`.
+   As in the following example output, the query results of TiDB contain two `bills`, which do not satisfy the uniqueness constraints.
 
     ```sql
     +----+----------+

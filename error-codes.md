@@ -46,9 +46,7 @@ TiDB is compatible with the error codes in MySQL, and in most cases returns the 
 
     The complete error message: `ERROR 8005 (HY000): Write Conflict, txnStartTS is stale`
 
-    Transactions in TiDB encounter write conflicts.
-
-    Check your application logic and retry the write operation.
+    Transactions in TiDB encounter write conflicts. Check your application logic and retry the write operation.
 
 * Error Number: 8018
 
@@ -360,7 +358,9 @@ TiDB is compatible with the error codes in MySQL, and in most cases returns the 
 
 * Error Number: 8147
 
-   When [`tidb_constraint_check_in_place_pessimistic`](/system-variables.md#tidb_constraint_check_in_place_pessimistic-new-in-v630) is set to `0`, the unique constraint check in pessimistic transactions might not pass, causing the SQL statement execution to report this error and abort the current transaction.
+   When [`tidb_constraint_check_in_place_pessimistic`](/system-variables.md#tidb_constraint_check_in_place_pessimistic-new-in-v630) is set to `0`, the unique constraint checks in pessimistic transactions might not pass, causing the SQL statement execution to return this error and abort the current transaction.
+ 
+ When [`tidb_constraint_check_in_place_pessimistic`](/system-variables.md#tidb_constraint_check_in_place_pessimistic-new-in-v630) is set to `1`, to ensure the correctness of the transactions,  any errors in the SQL statement execution might cause TiDB to return this `8147` error and abort the current transaction. When this error occurs, you can check the error message for specific causes.
 
 * Error Number: 8200
 
