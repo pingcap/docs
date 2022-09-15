@@ -166,7 +166,7 @@ Range partitioning is particularly useful when one or more of the following cond
 
 ### Range INTERVAL partitioning
 
-INTERVAL partitioning is introduced in TiDB v6.3 as syntactic sugar:
+INTERVAL partitioning is introduced in TiDB v6.3.0 as syntactic sugar:
 
 ```
 PARTITION BY RANGE [COLUMNS] (<partitioning expression>)
