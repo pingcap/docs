@@ -783,7 +783,7 @@ The status of the scheduler can be one of the following:
 
 - `disabled`: the scheduler is unavailable or removed.
 - `paused`: the scheduler is paused.
-- `scheduling`: the scheduler is generating or executing scheduling operators.
+- `scheduling`: the scheduler is generating.
 - `pending`: the scheduler cannot generate scheduling operators. For a scheduler in the `pending` status, brief diagnostic information is returned. The brief information describes the status of stores and explains why these stores cannot be selected for scheduling.
 - `normal`: there is no need to generate scheduling operators.
 
