@@ -1131,14 +1131,6 @@ Constraint checking is always performed in place for pessimistic transactions (d
 
 ### tidb_enable_metadata_lock <span class="version-mark">New in v6.3.0</span>
 
-<CustomContent platform="tidb-cloud">
-
-> **Note:**
->
-> This TiDB variable is not applicable to TiDB Cloud.
-
-</CustomContent>
-
 - Scope: GLOBAL
 - Persists to cluster: Yes
 - Type: Boolean
