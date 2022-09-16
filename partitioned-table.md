@@ -588,7 +588,7 @@ Note that TiDB has some specific features that might affect `EXCHANGE PARTITION`
 
 * [Placement Rules in SQL](/placement-rules-in-sql.md)：Placement Policies are the same.
 * [TiFlash](/tikv-overview.md)：The numbers of TiFlash Replica are the same
-* [Clustered Indexes](/clustered-indexes.md): Both partitioned and non-partitioned tables are both clustered indexes, or neither is clustered index.
+* [Clustered Indexes](/clustered-indexes.md): Both partitioned and non-partitioned tables are both `CLUSTERED` , or both `NONCLUSTERED`.
 
 In addition, there are limitations on the compatibility of `EXCHANGE PARTITION` with other components. Both partitioned and non-partitioned tables must be consistent.
 
