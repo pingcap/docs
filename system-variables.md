@@ -801,7 +801,7 @@ MPP is a distributed computing framework provided by the TiFlash engine, which a
 - When this variable is set to `0`, TiDB defers the unique constraint check of a unique index (to the next time when executing a statement that requires a lock to the index or to the time when committing the transaction). This helps improve performance but might be an unexpected behavior for some applications. See [Constraints](/constraints.md#pessimistic-transactions) for details.
 - Disabling this variable might cause TiDB to return a `LazyUniquenessCheckFailure` error in pessimistic transactions. When this error occurs, TiDB rolls back the current transaction.
 - After this variable is disabled, you cannot use [`SAVEPOINT`](/sql-statements/sql-statement-savepoint.md) in pessimistic transactions.
-- After this variable is disabled, committing a pessimistic transaction might return a `Write conflict` or `Duplicate entry` error. When such error occurs, TiDB rolls back the current transaction.
+- After this variable is disabled, committing a pessimistic transaction might return a `Write conflict` or `Duplicate entry` error. When such an error occurs, TiDB rolls back the current transaction.
 
     - When setting `tidb_constraint_check_in_place_pessimistic` to `0` and using pessimistic transactions：
 
