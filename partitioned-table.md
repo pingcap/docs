@@ -582,7 +582,7 @@ For `HASH` partitioned tables, `COALESCE PARTITION` and `ADD PARTITION` are not 
 
 For example, `ALTER TABLE partitioned_table EXCHANGE PARTITION p1 WITH TABLE non_partitioned_table` swaps the `non_partitioned_table` table in the `p1` partition with the `partitioned_table` table.
 
-Ensure that all rows that you are exchanging into the partition match the partition definition; otherwise, exchange will fail.
+Ensure that all rows that you are exchanging into the partition match the partition definition; otherwise, the exchange will fail.
 
 Note that TiDB has some specific features that might affect `EXCHANGE PARTITION`. When the table structure contains such features, you need to ensure that `EXCHANGE PARTITION` meets the [MySQL's EXCHANGE PARTITION condition](https://dev.mysql.com/doc/refman/8.0/en/partitioning-management-exchange.html). Meanwhile, ensure that these specific features are defined the same for both partitioned and non-partitioned tables. These specific features include the following:
 
