@@ -5,13 +5,13 @@ summary: Introduces the DM safe mode, its purpose, working principles and how to
 
 # DM Safe Mode
 
-Safe mode is an operation mode for DM to perform incremental replication. In safe mode, when the DM's incremental replication component replicates binlog events, it forcibly rewrites all the `INSERT` and `UPDATE` statements before executing them in the downstream.
+Safe mode is a special operation mode for DM to perform incremental replication. During safe mode, when the DM's incremental replication component replicates binlog events, DM forcibly rewrites all the `INSERT` and `UPDATE` statements before executing them in the downstream.
 
 In safe mode, the same binlog event can be replicated repeatedly to the downstream and the result is guaranteed to be idempotent. Thus, the incremental replication is ensured to be *safe*.
 
 After resuming a data replication task from a checkpoint, DM might repeatedly execute some binlog events, which leads to the following issues:
 
-- During incremental replication, the operation of executing DML and the operation of writing checkpoint are not simultaneous. The operation of writing checkpoints and writing data into the downstream database is not atomic. Therefore, **when DM exits abnormally, checkpoints might only record a restoration point before the exit moment**.
+- During incremental replication, the operation of executing DML and the operation of writing checkpoint are not simultaneous. The operation of writing checkpoints and writing data into the downstream database is not atomic. Therefore, **when DM exits abnormally, checkpoints might only record a restoration point before the exit point**.
 - When DM restarts a replication task and resumes incremental replication from a checkpoint, some data between the checkpoint and the exit moment might already be processed before the abnormal exit. This causes **some SQL statements to be repeatedly executed**.
 - If an `INSERT` statement is executed more than once, the primary key or the unique index might encounter a conflict, resulting in replication failure. If an `UPDATE` statement is executed more than once, the filter condition might not be able to locate updated records.
 
@@ -64,12 +64,12 @@ When resuming an incremental replication task from the checkpoint, DM determines
 
 - If the checkpoint does not contain `safemode_exit_point`, there are two cases:
 
-    1. This is a new task, or this task is paused as expected.
+    1. This is a new task, or this task is exited as expected.
     2. This task is paused abnormally but DM fails to record `safemode_exit_point`, or the DM process exits abnormally.
 
     In the second case, DM does not know which binlog events after the checkpoint are executed in the downstream. To ensure that repeatedly executed binlog events do not cause any problems, DM automatically enables safe mode between the preceding two checkpoints. The default interval between two checkpoints is 30 seconds, which means when a normal incremental replication task starts, safe mode is enforced for the first 60 seconds (2 * 30 seconds).
 
-    Usually, it is not recommended to change the checkpoint interval to adjust the safe mode period at the beginning of the incremental replication task. However, if you do need a change, you can [manually enable safe mode](#manually-enable) (recommended) or set the `checkpoint-flush-interval` item in syncer configuration.
+    Usually, it is not recommended to change the checkpoint interval to adjust the safe mode period at the beginning of the incremental replication task. However, if you do need a change, you can [manually enable safe mode](#manually-enable) (recommended) or change the `checkpoint-flush-interval` item in syncer configuration.
 
 ### Manually enable
 
