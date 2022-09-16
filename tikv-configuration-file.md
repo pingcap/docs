@@ -1621,7 +1621,7 @@ Configuration items related to log backup.
 
 + The size limit on log backup data to be stored.
 + Default value: 256MiB
-+ Note: Generally, the value of `file-size-limit` is greater than the backup file size displayed in the storage system. This is because the backup files are compressed before being uploaded to the storage system.
++ Note: Generally, the value of `file-size-limit` is greater than the backup file size displayed in external storage. This is because the backup files are compressed before being uploaded to external storage.
 
 ### `initial-scan-pending-memory-quota` <span class="version-mark">New in v6.2.0</span>
 
