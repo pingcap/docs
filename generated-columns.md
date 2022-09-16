@@ -148,7 +148,7 @@ desc select a+1 from t where a+1=3;
 
 > **Note:**
 >
-> If the expression to be replaced and the generated column are both strings but with different lengths, you can still replace the expression by setting the system variable [`tidb_enable_unsafe_substitute`](/system-variables.md#tidb_enable_unsafe_substitute-new-in-v630) to `ON`. When configuring this system variable, ensure that the value calculated by the generated column absolutely satisfies the definition of the generated column. Otherwise, the data might be truncated due to the difference in length, resulting in an incorrect result. See [issue#35490](https://github.com/pingcap/tidb/issues/35490#issuecomment-1211658886).
+> If the expression to be replaced and the generated column are both the string type but with different lengths, you can still replace the expression by setting the system variable [`tidb_enable_unsafe_substitute`](/system-variables.md#tidb_enable_unsafe_substitute-new-in-v630) to `ON`. When configuring this system variable, ensure that the value calculated by the generated column absolutely satisfies the definition of the generated column. Otherwise, the data might be truncated due to the difference in length, resulting in an incorrect result. See GitHub issue [#35490](https://github.com/pingcap/tidb/issues/35490#issuecomment-1211658886).
 
 ## Limitations
 
