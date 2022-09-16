@@ -586,7 +586,12 @@ Ensure that all rows that you are exchanging into the partition match the partit
 
 Note that TiDB has some specific features that might affect `EXCHANGE PARTITION`. When the table structure contains such features, you need to ensure that `EXCHANGE PARTITION` meets the [MySQL's EXCHANGE PARTITION condition](https://dev.mysql.com/doc/refman/8.0/en/partitioning-management-exchange.html). Meanwhile, ensure that these specific features are defined the same for both partitioned and non-partitioned tables. These specific features include the following:
 
+<CustomContent platform="tidb">
+
 * [Placement Rules in SQL](/placement-rules-in-sql.md): placement policies are the same.
+
+</CustomContent>
+
 * [TiFlash](/tikv-overview.md): the numbers of TiFlash replicas are the same.
 * [Clustered Indexes](/clustered-indexes.md): partitioned and non-partitioned tables are both `CLUSTERED`, or both `NONCLUSTERED`.
 
