@@ -135,7 +135,7 @@ select /*+ HASH_JOIN(t1, t2) */ * from t1, t2 where t1.id = t2.id;
 
 ### HASH_JOIN_BUILD(t1_name [, tl_name ...])
 
-The `HASH_JOIN_BUILD(t1_name [, tl_name ...])` hint tells the optimizer to use the hash join algorithm on specified tables with these tables working as the build end. In this way, you can build hash tables using specific tables. For example:
+The `HASH_JOIN_BUILD(t1_name [, tl_name ...])` hint tells the optimizer to use the hash join algorithm on specified tables with these tables working as the build side. In this way, you can build hash tables using specific tables. For example:
 
 ```sql
 SELECT /*+ HASH_JOIN_BUILD(t1) */ * FROM t1, t2 WHERE t1.id = t2.id;
@@ -143,7 +143,7 @@ SELECT /*+ HASH_JOIN_BUILD(t1) */ * FROM t1, t2 WHERE t1.id = t2.id;
 
 ### HASH_JOIN_PROBE(t1_name [, tl_name ...])
 
-The `HASH_JOIN_PROBE(t1_name [, tl_name ...])` hint tells the optimizer to use the hash join algorithm on specified tables with these tables working as the probe end. In this way, you can execute the hash join algorithm with specific tables as the probe end. For example:
+The `HASH_JOIN_PROBE(t1_name [, tl_name ...])` hint tells the optimizer to use the hash join algorithm on specified tables with these tables working as the probe side. In this way, you can execute the hash join algorithm with specific tables as the probe side. For example:
 
 ```sql
 SELECT /*+ HASH_JOIN_PROBE(t2) */ * FROM t1, t2 WHERE t1.id = t2.id;
