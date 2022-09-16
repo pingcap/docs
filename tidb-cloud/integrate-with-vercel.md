@@ -29,7 +29,7 @@ A Vercel project can only be connected to one TiDB Cloud cluster. To change the 
 
 The integration with Vercel requires that you have an account and a cluster in TiDB Cloud. If you don't have any, refer to [create a TiDB cluster](/tidb-cloud/create-tidb-cluster.md) in TiDB Cloud.
 
-To integrate with Vercel, you must have the `Organization Owner` access to your organization or `Project Member` access to the target project in TiDB Cloud.
+To integrate with Vercel, you must have the `Organization Owner` access to your organization or `Organization Member + Project Access` to the target project in TiDB Cloud.
 
 A TiDB Cloud cluster can connect to more than one Vercel projects.
 
