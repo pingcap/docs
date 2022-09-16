@@ -41,7 +41,7 @@ For more information, see [JSON Functions](/functions-and-operators/json-functio
 
 ## MySQL compatibility
 
-- When creating JSON columns with data in the `BINARY` type, MySQL mislabels the data as the `STRING` type currently, while TiDB processes it as the `BINARY` type correctly.
+- When you create JSON columns with data in the `BINARY` type, MySQL mislabels the data as the `STRING` type currently, while TiDB processes it as the `BINARY` type correctly.
 
     ```sql
     CREATE TABLE test(a json);
