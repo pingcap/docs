@@ -9,7 +9,7 @@ The Backup & Restore (BR) tool supports using Amazon S3 or other Amazon S3-compa
 
 > **Note:**
 >
-> To back up data to an S3 bucket with object locking enabled, you need to use TiDB v6.3.0 or later.
+> To back up data to an S3 bucket with Object Lock enabled, you need to use TiDB v6.3.0 or later.
 
 ## Application scenarios
 
