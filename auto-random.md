@@ -97,7 +97,7 @@ The value structure of an `AUTO_RANDOM` column is as follows:
 
 > **Note:**
 >
-> Since the total number of bits is 64 bits, the number of the shard bit affects the number of the auto-increment bit, that is, as the shard bits number increases, the number of auto-increment bit decreases, and vice versa. Therefore, you need to balance the randomness of allocated values and available space.
+> Since there is a total of 64 available bits, the number of the shard bit affects the number of the auto-increment bit. That is, as the shard bits number increases, the number of auto-increment bit decreases, and vice versa. Therefore, you need to balance the randomness of allocated values and available space.
 >
 > The best practice is to set the shard bit as `log(2, x)`, in which `x` is the current number of storage engines. For example, if there are 16 TiKV nodes in a TiDB cluster, you can set the shard bit as `log(2, 16)`, that is `4`. After all regions are evenly scheduled to each TiKV node, the load of bulk writes can be uniformly distributed to different TiKV nodes to maximize resource utilization.
 
@@ -110,7 +110,7 @@ To view the shard bit number of the table with an `AUTO_RANDOM` column, you can 
 Pay attention to the following restrictions when you use `AUTO_RANDOM`:
 
 - To insert values explicitly, you need to set the value of the `@@allow_auto_random_explicit_insert` system variable to `1` (`0` by default). It is **not** recommended that you explicitly specify a value for the column with the `AUTO_RANDOM` attribute when you insert data. Otherwise, the numeral values that can be automatically allocated for this table might be used up in advance.
-- Specify this attribute for the primary key column **ONLY** of the `BIGINT` type. Otherwise, an error occurs. In addition, when the attribute of the primary key is `NONCLUSTERED`, `AUTO_RANDOM` is not supported even on the integer primary key. For more details about the primary key of the `CLUSTERED` type, refer to [clustered index](/clustered-indexes.md).
+- Specify this attribute for the primary key column **ONLY** as the `BIGINT` type. Otherwise, an error occurs. In addition, when the attribute of the primary key is `NONCLUSTERED`, `AUTO_RANDOM` is not supported even on the integer primary key. For more details about the primary key of the `CLUSTERED` type, refer to [clustered index](/clustered-indexes.md).
 - You cannot use `ALTER TABLE` to modify the `AUTO_RANDOM` attribute, including adding or removing this attribute.
 - You cannot use `ALTER TABLE` to change from `AUTO_INCREMENT` to `AUTO_RANDOM` if the maximum value is close to the maximum value of the column type.
 - You cannot change the column type of the primary key column that is specified with `AUTO_RANDOM` attribute.
