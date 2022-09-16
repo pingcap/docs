@@ -218,7 +218,7 @@ To achieve better performance of pessimistic transactions, you can set the [`tid
     ERROR 1062 (23000): Duplicate entry 'bill' for key 'username'
     ```
 
-- After this variable is disabled, committing a pessimistic transaction that needs to write data might return a `Write conflict` error. When this error occurs, TiDB rolls back the current transaction.
+- When this variable is disabled, committing a pessimistic transaction that needs to write data might return a `Write conflict` error. When this error occurs, TiDB rolls back the current transaction.
 
     As in the following example, if two concurrent transactions need to insert data to the same table, skipping the pessimistic lock causes TiDB to return a `Write conflict` error when you commit a transaction. And the transaction will be rolled back.
 
@@ -251,7 +251,7 @@ To achieve better performance of pessimistic transactions, you can set the [`tid
     ERROR 9007 (HY000): Write conflict, txnStartTS=435688780611190794, conflictStartTS=435688783311536129, conflictCommitTS=435688783311536130, key={tableID=74, indexID=1, indexValues={bill, }} primary={tableID=74, indexID=1, indexValues={bill, }}, reason=LazyUniquenessCheck [try again later]
     ```
 
-- After this variable is disabled, executing a DML statement in a pessimistic transaction might return an `8147: LazyUniquenessCheckFailure` error.
+- When this variable is disabled, executing a DML statement in a pessimistic transaction might return an `8147: LazyUniquenessCheckFailure` error.
 
     > **Note:**
     >
