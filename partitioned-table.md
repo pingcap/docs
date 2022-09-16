@@ -586,15 +586,15 @@ Ensure that all rows that you are exchanging into the partition match the partit
 
 Note that TiDB has some specific features that might affect `EXCHANGE PARTITION`. When the table structure contains such features, you need to ensure that `EXCHANGE PARTITION` meets the [MySQL's EXCHANGE PARTITION condition](https://dev.mysql.com/doc/refman/8.0/en/partitioning-management-exchange.html). Meanwhile, ensure that these specific features are defined the same for both partitioned and non-partitioned tables. These specific features include the following:
 
-* [Placement Rules in SQL](/placement-rules-in-sql.md)：Placement Policies are the same.
-* [TiFlash](/tikv-overview.md)：The numbers of TiFlash Replica are the same
-* [Clustered Indexes](/clustered-indexes.md): Both partitioned and non-partitioned tables are both `CLUSTERED` , or both `NONCLUSTERED`.
+* [Placement Rules in SQL](/placement-rules-in-sql.md): placement policies are the same.
+* [TiFlash](/tikv-overview.md): the numbers of TiFlash replicas are the same.
+* [Clustered Indexes](/clustered-indexes.md): partitioned and non-partitioned tables are both `CLUSTERED`, or both `NONCLUSTERED`.
 
 In addition, there are limitations on the compatibility of `EXCHANGE PARTITION` with other components. Both partitioned and non-partitioned tables must be consistent.
 
 - TiFlash: when the TiFlash replica definitions in partitioned and non-partitioned tables are different, the `EXCHANGE PARTITION` operation cannot be performed.
 - TiCDC: TiCDC replicates the `EXCHANGE PARTITION` operation when both partitioned and non-partitioned tables have primary keys or unique keys. Otherwise, TiCDC will not replicate the operation.
-- TiDB Lightning and BR: do not perform the `EXCHANGE PARTITION` operation during import and restore using TiDB Lightning and BR.
+- TiDB Lightning and BR: do not perform the `EXCHANGE PARTITION` operation during import using TiDB Lightning or during restore using BR.
 
 ### Range partition management
 
