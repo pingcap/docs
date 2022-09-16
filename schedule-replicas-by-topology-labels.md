@@ -50,9 +50,9 @@ To set labels for TiFlash, you can use the `tiflash-learner.toml` file, which is
   host = "<host>"
   ```
 
-### Configure `labels` for TiDB (Optional)
+### (Optional) Configure `labels` for TiDB
 
-If you want to prefer to select read replicas in the same Region when enabling [follower read](/follower-read.md), you need to configure `labels` for TiDB nodes.
+When [Follower read](/follower-read.md) is enabled, if you want TiDB to prefer to read data from the same region, you need to configure `labels` for TiDB nodes.
 
 TiDB supports setting `labels` using the configuration file:
 
@@ -66,7 +66,7 @@ host = "<host>"
 
 > **Note:**
 >
-> Currently, TiDB depends on the `zone` label to match and select replicas that are in the same Region. To use this feature, you need to include `zone` when [configuring `location-labels` for PD](#configure-location-labels-for-pd), and configure `zone` in configuration files of both TiDB, TiKV, and TiFlash. For more details, see [Configure `labels` for TiKV and TiFlash](#configure-labels-for-tikv-and-tiflash).
+> Currently, TiDB depends on the `zone` label to match and select replicas that are in the same region. To use this feature, you need to include `zone` when [configuring `location-labels` for PD](#configure-location-labels-for-pd), and configure `zone` in the configuration files of TiDB, TiKV, and TiFlash. For more details, see [Configure `labels` for TiKV and TiFlash](#configure-labels-for-tikv-and-tiflash).
 
 ### Configure `location-labels` for PD
 
