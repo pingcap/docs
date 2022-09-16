@@ -194,13 +194,13 @@ tidb> EXPLAIN SELECT * FROM t WHERE (a,b) IN (SELECT * FROM s);
 8 rows in set (0.01 sec)
 ```
 
-In the first query statement `EXPLAIN SELECT (a,b) IN (SELECT * FROM s) FROM t;`, since the `a` and `b` columns of table `t` and `s` are NULLABLE, the left outer semi join converted by `IN` subquery is null-aware. The implementation detail is: calculate the Cartesian product first, then put the column connected by `IN` or `= ANY` into other conditions as normal equality query for filtering.
+In the first query statement `EXPLAIN SELECT (a,b) IN (SELECT * FROM s) FROM t;`, since columns `a` and `b` of tables `t` and `s` are NULLABLE, the left outer semi join converted by the `IN` subquery is null-aware. Specifically, the Cartesian product is calculated first, then the column connected by `IN` or `= ANY` is put into other conditions as a normal equality query for filtering.
 
-In the second query statement `EXPLAIN SELECT * FROM t WHERE (a,b) IN (SELECT * FROM s);`, since the `a` and `b` columns of table `t` and `s` are NULLABLE, the `IN` subquery should be converted to a null-aware semi join. But TiDB optimizes it to convert semi join to inner join and aggregate directly. This is because `NULL` and `false` are equivalent in `IN` subqueries for non-scalar output. The `NULL` rows in the push-down filter results in the negative semantics of the `WHERE` clause. Therefore, these rows can be ignored beforehand.
+In the second query statement `EXPLAIN SELECT * FROM t WHERE (a,b) IN (SELECT * FROM s);`, since columns `a` and `b` of tables `t` and `s` are NULLABLE, the `IN` subquery should be converted to a null-aware semi join. But TiDB optimizes it by converting semi join to inner join and aggregate directly. This is because `NULL` and `false` are equivalent in `IN` subqueries for non-scalar output. The `NULL` rows in the push-down filter results in the negative semantics of the `WHERE` clause. Therefore, these rows can be ignored beforehand.
 
 > **Note:**
 >
-> The `Exists` operator is also converted to semi join, but the `Exists` operator itself is not null-aware.
+> The `Exists` operator is also converted to semi join, but it is not null-aware.
 
 ## Null-aware anti semi join (`NOT IN` and `!= ALL` subquery)
 
@@ -208,13 +208,13 @@ The value of `NOT IN` and `!= ALL` set operations is three-valued (`true`, `fals
 
 For `NOT IN` and `! = ALL` operators, subqueries are converted to anti semi join and anti left outer semi join separately. In the preceding example of [Anti semi join](#anti-semi-join-not-in-subquery), since the columns `test.t3.t1_id` and `test.t1.id` on both sides of the join key are `not NULL`, anti semi join does not need to be considered as null-aware (`NULL` is not processed specially).
 
-TiDB v6.3.0 optimizes for null-aware anti join (NAAJ):
+TiDB v6.3.0 optimizes null-aware anti join (NAAJ):
 
 - Build hash join using null-aware equality condition (NA-EQ)
 
-    Set operators introduce the equality condition, which requires a special process for the `NULL` of operators on both sides of the condition. The equality condition that requires null-aware is called NA-EQ. Different from versions before TiDB v6.3.0, TiDB v6.3.0 no longer processes NA-EQ as normal EQ, but specially places it in other conditions after join, and then determines the legitimacy of the result set after matching the Cartesian product.
+    Set operators introduce the equality condition, which requires a special process for the `NULL` of operators on both sides of the condition. The equality condition that requires null-aware is called NA-EQ. Different from earlier versions, TiDB v6.3.0 no longer processes NA-EQ as normal EQ, but specially places it in other conditions after join, and then determines the legitimacy of the result set after matching the Cartesian product.
 
-    Since TiDB v6.3.0, NA-EQ, a weakened equality condition, is still used to build hash join. This reduces the matching amount of data that needs to be traversed and speeds up the matching process. The acceleration effect is more significant when the `DISTINCT()` value of the build table is large.
+    Since TiDB v6.3.0, NA-EQ, a weakened equality condition, is still used to build hash join. This reduces the matching amount of data that needs to be traversed and speeds up the matching process. The acceleration is more significant when the `DISTINCT()` value of the build table is large.
 
 - Speed up the return of matching results using the special property of `NULL`
 
@@ -255,15 +255,15 @@ tidb> EXPLAIN SELECT * FROM t WHERE (a, b) NOT IN (select * FROM s);
 5 rows in set (0.00 sec)
 ```
 
-In the first query statement `EXPLAIN SELECT (a, b) NOT IN (SELECT * FROM s) FROM t;`, the columns `a` and `b` of table `t` and `s` are NULLABLE, the left outer semi join converted by `NOT IN` subquery is null-aware. The difference is that NAAJ optimization also uses the NA-EQ as the hash join condition, which greatly speeds up the join calculation.
+In the first query statement `EXPLAIN SELECT (a, b) NOT IN (SELECT * FROM s) FROM t;`, because columns `a` and `b` of tables `t` and `s` are NULLABLE, the left outer semi join converted by `NOT IN` subquery is null-aware. The difference is that NAAJ optimization also uses the NA-EQ as the hash join condition, which greatly speeds up the join calculation.
 
-In the second query statement `EXPLAIN SELECT * FROM t WHERE (a, b) NOT IN (SELECT * FROM s);`, the columns `a` and `b` of table `t` and `s` are NULLABLE, the anti semi join converted by `NOT IN` subquery is null-aware. The difference is that NAAJ optimization also uses the NA-EQ as the hash join condition, which greatly speeds up the join calculation.
+In the second query statement `EXPLAIN SELECT * FROM t WHERE (a, b) NOT IN (SELECT * FROM s);`, because columns `a` and `b` of tables `t` and `s` are NULLABLE, the anti semi join converted by `NOT IN` subquery is null-aware. The difference is that NAAJ optimization also uses the NA-EQ as the hash join condition, which greatly speeds up the join calculation.
 
-Currently, TiDB can only be aware of the `NULL` for anti semi join and anti left outer semi join. Only the hash join type is supported and its build table should be fixed to the right table.
+Currently, TiDB can only be null-aware of anti semi join and anti left outer semi join. Only the hash join type is supported and its build table should be fixed to the right table.
 
 > **Note:**
 >
-> The `Not Exists` operator is also converted to the anti semi join, but the `Not Exists` operator itself is not null-aware.
+> The `Not Exists` operator is also converted to the anti semi join, but it is not null-aware.
 
 ## Explain statements using other types of subqueries
 
