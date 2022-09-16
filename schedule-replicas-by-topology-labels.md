@@ -66,7 +66,7 @@ host = "<host>"
 
 > **Note:**
 >
-> Currently, TiDB depends on the `zone` label to match and select replicas that are in the same region. To use this feature, you need to include `zone` when [configuring `location-labels` for PD](#configure-location-labels-for-pd), and configure `zone` in the configuration files of TiDB, TiKV, and TiFlash. For more details, see [Configure `labels` for TiKV and TiFlash](#configure-labels-for-tikv-and-tiflash).
+> Currently, TiDB depends on the `zone` label to match and select replicas that are in the same region. To use this feature, you need to include `zone` when [configuring `location-labels` for PD](#configure-location-labels-for-pd), and configure `zone` when configuring `labels` for TiDB, TiKV, and TiFlash. For more details, see [Configure `labels` for TiKV and TiFlash](#configure-labels-for-tikv-and-tiflash).
 
 ### Configure `location-labels` for PD
 

@@ -525,7 +525,7 @@ mysql> SHOW GLOBAL VARIABLES LIKE 'max_prepared_stmt_count';
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
 - Default value: `4096`
-- This variable is used to control the threshold at which read requests are preferred to be sent to the replica in the same region as the TiDB server when `tidb_replica_read` is set to `closest-adaptive`. If the estimated result is higher than or equal to this threshold, TiDB prefers to send read requests to the replica in the same region. Otherwise, TiDB sends read requests to the leader replica.
+- This variable is used to control the threshold at which the TiDB server prefers to send read requests to the replica in the same region as the TiDB server when `tidb_replica_read` is set to `closest-adaptive`. If the estimated result is higher than or equal to this threshold, TiDB prefers to send read requests to the replica in the same region. Otherwise, TiDB sends read requests to the leader replica.
 
 ### tidb_allow_batch_cop <span class="version-mark">New in v4.0</span>
 
@@ -2581,7 +2581,7 @@ explain select * from t where age=5;
 - Type: Enumeration
 - Default value: `leader`
 - Possible values: `leader`, `follower`, `leader-and-follower`, `closest-replicas`, `closest-adaptive`
-- This variable is used to control where TiDB reads data
+- This variable is used to control where TiDB reads data.
 - For more details about usage and implementation, see [Follower read](/follower-read.md).
 
 ### tidb_restricted_read_only <span class="version-mark">New in v5.2.0</span>
