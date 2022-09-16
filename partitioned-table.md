@@ -594,7 +594,7 @@ In addition, there are limitations on the compatibility of `EXCHANGE PARTITION` 
 
 - TiFlash: when the TiFlash replica definitions in partitioned and non-partitioned tables are different, the `EXCHANGE PARTITION` operation cannot be performed.
 - TiCDC: TiCDC replicates the `EXCHANGE PARTITION` operation when both partitioned and non-partitioned tables have primary keys or unique keys. Otherwise, TiCDC will not replicate the operation.
-- Lightning and BR: do not perform the `EXCHANGE PARTITION` operation during import and restore using Lightning and BR.
+- TiDB Lightning and BR: do not perform the `EXCHANGE PARTITION` operation during import and restore using TiDB Lightning and BR.
 
 ### Range partition management
 
