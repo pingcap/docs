@@ -2383,7 +2383,7 @@ explain select * from t where age=5;
 - Persists to cluster: Yes
 - Type: Boolean
 - Default value: `OFF`
-- This variable is used to control whether CTEs in the entire session are force inlined or not. The default value is `OFF`, which means that inline cte is not enabled by default. However, you can still enable inline cte by specifying `MERGE（）hint`. If the variable is set to `ON`, all CTEs (except recursive CTE) for this session are forced to enable inlining.
+- This variable is used to control whether CTEs in the entire session are inlined or not. The default value is `OFF`, which means that inlining CTE is not enforced by default. However, you can still inline CTE by specifying `MERGE() hint`. If the variable is set to `ON`, all CTEs (except recursive CTE) for this session are forced to be inlined.
 
 ### tidb_partition_prune_mode <span class="version-mark">New in v5.1</span>
 
