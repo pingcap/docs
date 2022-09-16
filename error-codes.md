@@ -358,9 +358,7 @@ TiDB is compatible with the error codes in MySQL, and in most cases returns the 
 
 * Error Number: 8147
 
-   When [`tidb_constraint_check_in_place_pessimistic`](/system-variables.md#tidb_constraint_check_in_place_pessimistic-new-in-v630) is set to `0`, the unique constraint checks in pessimistic transactions might not pass, causing the SQL statement execution to return this error and abort the current transaction.
-
-    When [`tidb_constraint_check_in_place_pessimistic`](/system-variables.md#tidb_constraint_check_in_place_pessimistic-new-in-v630) is set to `1`, to ensure the correctness of the transactions,  any errors in the SQL statement execution might cause TiDB to return this `8147` error and abort the current transaction. When this error occurs, you can check the error message for specific causes.
+    When [`tidb_constraint_check_in_place_pessimistic`](/system-variables.md#tidb_constraint_check_in_place_pessimistic-new-in-v630) is set to `0`, to ensure the correctness of transactions, any errors in the SQL statement execution might cause TiDB to return this `8147` error and abort the current transaction. For specific causes of the error, refer to the error message. For more information, see [Constraints](/constraints.md#pessimistic-transactions).
 
 * Error Number: 8200
 

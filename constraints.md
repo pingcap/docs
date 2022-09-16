@@ -96,7 +96,6 @@ INSERT INTO users (username) VALUES ('jane'), ('chris'), ('bill');
 ```
 
 ```
-Query OK, 0 rows affected (0.00 sec)
 Query OK, 3 rows affected (0.00 sec)
 Records: 3  Duplicates: 0  Warnings: 0
 ```
