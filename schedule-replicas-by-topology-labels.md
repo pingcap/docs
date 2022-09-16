@@ -54,9 +54,9 @@ To set labels for TiFlash, you can use the `tiflash-learner.toml` file, which is
 
 When [Follower read](/follower-read.md) is enabled, if you want TiDB to prefer to read data from the same region, you need to configure `labels` for TiDB nodes.
 
-TiDB supports setting `labels` using the configuration file:
+You can set `labels` for TiDB using the configuration file:
 
-```
+```toml
 [labels]
 zone = "<zone>"
 dc = "<dc>"
