@@ -74,7 +74,7 @@ Unique constraints mean that all non-null values in a unique index and a primary
 
 ### Optimistic transactions
 
-In optimistic transactions, TiDB checks unique constraints [lazily](/transaction-overview.md#lazy-check-of-constraints) by default. When an optimistic transaction is committed, TiDB performs a bulk check, which helps reduce network overhead and improve performance.
+In optimistic transactions, TiDB checks unique constraints [lazily](/transaction-overview.md#lazy-check-of-constraints) by default. When an optimistic transaction is committed, TiDB performs a batch check on unique constraints in this transaction, which helps reduce network overhead and improve performance.
 
 For example:
 
