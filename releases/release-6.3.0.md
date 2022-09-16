@@ -23,7 +23,7 @@ In v6.3.0-DMR, the key new features and improvements are as follows:
 
 ### SQL
 
-* Add a new syntactic sugar to simplify Range partition definitions [#35683](https://github.com/pingcap/tidb/issues/35683) @[mjonss](https://github.com/mjonss)
+* Add a new syntactic sugar Range INTERVAL partitioning to simplify Range partition definitions [#35683](https://github.com/pingcap/tidb/issues/35683) @[mjonss](https://github.com/mjonss)
 
     [Provides INTERVAL partitioning as a new way of defining Range partitions](/partitioned-table.md#range-interval-partitioning). You do not need to enumerate all partitions, which drastically reduces the lengthy way of writing Range partition statements. The semantic is equivalent to the original Range partition.
 
