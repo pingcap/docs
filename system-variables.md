@@ -2385,6 +2385,7 @@ explain select * from t where age=5;
 
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
+- Type: Boolean
 - Default value: `ON`
 - This variable specifies whether to rewrite a `COUNT(DISTINCT)` aggregation into a three-stage aggregation in MPP mode.
 - This variable currently applies to aggregations with only one `COUNT(DISTINCT)`.
