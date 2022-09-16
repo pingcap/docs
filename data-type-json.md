@@ -72,7 +72,7 @@ For more information, see [JSON Functions](/functions-and-operators/json-functio
 
 - In TiDB, you can use `ORDER BY` to sort JSON arrays or JSON objects.
 
-    In MySQL, if you use `ORDER BY` to sort JSON arrays or JSON objects，MySQL returns a warning and the sorting result does not match the result of the comparison operation:
+    In MySQL, if you use `ORDER BY` to sort JSON arrays or JSON objects, MySQL returns a warning and the sorting result does not match the result of the comparison operation:
 
     ```sql
     CREATE TABLE t(j JSON);
