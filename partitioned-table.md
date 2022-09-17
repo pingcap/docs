@@ -217,7 +217,6 @@ INTERVAL partitioning also works with RANGE COLUMNS partitioning.
 
 For example: 
 
-
 ```
 CREATE TABLE monthly_report_status (
     report_id int NOT NULL,
