@@ -166,9 +166,10 @@ Range partitioning is particularly useful when one or more of the following cond
 
 ### Range COLUMNS partitioning
 
-Range COLUMNS partitioning is a variant of Range partitioning. You can use one or more columns as partitioning key and the partition columns data type can be integer, string (`char`/`varchar`), `date` and `datetime`. You cannot use any expressions, like non-COLUMNS partitioning, only the columns directly.
+Range COLUMNS partitioning is a variant of Range partitioning. You can use one or more columns as partitioning keys. The partition columns data types can be integer, string (`char`/`varchar`), `date` and `datetime`. Any expressions, such as non-COLUMNS partitioning, are not supported.
 
-Suppose you want to partition by name as well as be able to easily drop older no-longer valid data, then you can create a table like this:
+Suppose that you want to partition by name, and drop old and invalid data, then you can create a table as follows:
+
 ```sql
 CREATE TABLE t (
   valid_until datetime,
