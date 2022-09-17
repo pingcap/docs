@@ -3186,5 +3186,6 @@ This variable is an alias for `transaction_isolation`.
 
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
+- Type: Boolean
 - Default value: `OFF`
-- This variable controls whether to replace expressions with generated columns in an unsafe manner. The default value is `OFF`, which means that unsafe replacement is disabled by default. For more details, see [Generated Columns](/generated-columns.md).
+- This variable controls whether to replace expressions with generated columns in an unsafe way. The default value is `OFF`, which means that unsafe replacement is disabled by default. For more details, see [Generated Columns](/generated-columns.md).
