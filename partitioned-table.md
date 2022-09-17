@@ -190,7 +190,7 @@ PARTITION BY RANGE COLUMNS(name,valid_until)
  PARTITION `p2024-` VALUES LESS THAN (0x7f,'2025-01-01 00:00:00'))
 ```
 
-Which will split the data per year and names in the ranges [''-'G'), ['G'-'M'), ['M'-'S'), ['S',) allowing to easily drop unvalid data while still benefit from partition pruning on both name and valid_until columns.
+It will split the data by year and by name in the ranges [''-'G'), ['G'-'M'), ['M'-'S'), ['S',), allowing you to easily drop invalid data while still benefit from partition pruning on both `name` and `valid_until` columns.
 
 ### List partitioning
 
