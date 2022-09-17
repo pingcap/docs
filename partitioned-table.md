@@ -166,7 +166,7 @@ Range partitioning is particularly useful when one or more of the following cond
 
 ### Range INTERVAL partitioning
 
-INTERVAL partitioning is introduced in TiDB v6.3.0 as syntactic sugar:
+Range INTERVAL partitioning is an extension of Range partitioning, which allows you to create partitions of a specified interval easily. Starting from v6.3.0, INTERVAL partitioning is introduced in TiDB as syntactic sugar:
 
 ```
 PARTITION BY RANGE [COLUMNS] (<partitioning expression>)
@@ -177,7 +177,7 @@ LAST PARTITION LESS THAN (<expression>)
 [MAXVALUE PARTITION]
 ```
 
-Example:
+For example:
 
 ```
 CREATE TABLE employees (
@@ -213,7 +213,10 @@ PARTITION BY RANGE (`id`)
  PARTITION `P_MAXVALUE` VALUES LESS THAN (MAXVALUE))
 ```
 
-It also works with RANGE COLUMNS partitioning:
+INTERVAL partitioning also works with RANGE COLUMNS partitioning. 
+
+For example: 
+
 
 ```
 CREATE TABLE monthly_report_status (
@@ -242,15 +245,15 @@ PARTITION BY RANGE COLUMNS(`report_date`)
  PARTITION `P_LT_2025-01-01` VALUES LESS THAN ('2025-01-01'))
 ```
 
-The optional parameter `NULL PARTITION` creates a partition with the definition as `PARTITION P_NULL VALUES LESS THAN (<minimum value of the column type>)`, only matching when the partitioning expression evaluates to `NULL`.See [Handling of NULL with Range partitioning](#handling-of-null-with-range-partitioning), which explains that `NULL` is considered to be less than any other value. 
+The optional parameter `NULL PARTITION` creates a partition with the definition as `PARTITION P_NULL VALUES LESS THAN (<minimum value of the column type>)`, only matching when the partitioning expression evaluates to `NULL`. See [Handling of NULL with Range partitioning](#handling-of-null-with-range-partitioning), which explains that `NULL` is considered to be less than any other value. 
 
 The optional parameter `MAXVALUE PARTITION` creates a last partition as `PARTITION P_MAXVALUE VALUES LESS THAN (MAXVALUE)`.
 
-#### ALTER INTERVAL Partitioned tables
+#### ALTER INTERVAL partitioned tables
 
 INTERVAL partitioning also adds simpler syntaxes for adding and dropping partitions.
 
-The following statement changes the first partition. It drops all partitions whose values are lower than the given expression, and makes the matched partition the new first partition. It does not affect a NULL PARTITION.
+The following statement changes the first partition. It drops all partitions whose values are less than the given expression, and makes the matched partition the new first partition. It does not affect a NULL PARTITION.
 
 ```
 ALTER TABLE table_name FIRST PARTITION LESS THAN (<expression>)
@@ -262,12 +265,12 @@ The following statement changes the last partition, meaning adding more partitio
 ALTER TABLE table_name LAST PARTITION LESS THAN (<expression>)
 ```
 
-#### INTERVAL Partitioning details and limitations
+#### INTERVAL partitioning details and limitations
 
 - The INTERVAL partitioning feature only involves the `CREATE/ALTER TABLE` syntax. There is no change in metadata, so tables created or altered with the new syntax are still MySQL-compatible.
 - There is no change in the output format of `SHOW CREATE TABLE` to keep MySQL compatibility.
 - The new `ALTER` syntax applies to existing tables conforming to INTERVAL. You do not need to create these tables with the `INTERVAL` syntax.
-- For `RANGE COLUMNS`, only integer, date and datetime column types are supported.
+- For `RANGE COLUMNS`, only integer, date, and datetime column types are supported.
 
 ### List partitioning
 
