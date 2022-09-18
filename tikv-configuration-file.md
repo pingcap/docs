@@ -1619,7 +1619,7 @@ Configuration items related to log backup.
 
 ### `file-size-limit` <span class="version-mark">New in v6.2.0</span>
 
-+ The size limit on log backup data to be stored.
++ The size limit on backup log data to be stored.
 + Default value: 256MiB
 + Note: Generally, the value of `file-size-limit` is greater than the backup file size displayed in external storage. This is because the backup files are compressed before being uploaded to external storage.
 
