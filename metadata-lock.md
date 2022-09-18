@@ -39,7 +39,7 @@ To control whether to enable metadata lock or not, you can use the system variab
 
 ### Background
 
-DDL operations in TiDB are the online DDL mode. During the execution of a DDL statement, the metadata version of the defined object needs to be modified and multiple minor version changes are required. The online asynchronous change of metadata algorithm only demonstrates that two adjacent minor versions are compatible, that is, operations between two versions do not break data consistency of the DDL changed object.
+DDL operations in TiDB are the online DDL mode. When a DDL statement is being executed, the metadata version of the defined object to be modified might go through multiple minor version changes. The online asynchronous metadata change algorithm only establishes that two adjacent minor versions are compatible, that is, operations between two versions do not break data consistency of the object that DDL changes.
 
 When adding an index to a table, the state of the DDL statement changes as follows: None -> Delete Only, Delete Only -> Write Only, Write Only -> Write Reorg, Write Reorg -> Public.
 
@@ -59,14 +59,14 @@ In the preceding table, the metadata version used when `txn4` is committed is tw
 
 ### Implementation details
 
-Metadata lock can ensure that the metadata versions used by all transactions in a TiDB cluster differ by at most one version. To achieve this goal, TiDB uses the following two rules:
+Metadata lock can ensure that the metadata versions used by all transactions in a TiDB cluster differ by one version at most. To achieve this goal, TiDB implements the following two rules:
 
-- When executing a DML, TiDB records metadata objects accessed by the DML in the transaction context, such as tables, views, and corresponding metadata versions.
-- When executing a DDL to change state, the latest version of metadata is pushed to all TiDB nodes. If the difference between the metadata version used by all transactions related to this state change on a TiDB node, and the current metadata version is less than two, the TiDB node acquires metadata lock of the metadata object. The next state change can only be executed when all TiDB nodes in the cluster have obtained metadata lock of the metadata object.
+- When executing a DML, TiDB records metadata objects accessed by the DML in the transaction context, such as tables, views, and corresponding metadata versions. These records are cleaned up when the transaction is committed.
+- When a DDL statement changes state, the latest version of metadata is pushed to all TiDB nodes. If the difference between the metadata version used by all transactions related to this state change on a TiDB node and the current metadata version is less than two, the TiDB node is considered to acquire the metadata lock of the metadata object. The next state change can only be executed after all TiDB nodes in the cluster have obtained the metadata lock of the metadata object.
 
 ## Impact
 
-- For DMLs, metadata lock does not block its execution.
+- For DMLs, metadata lock does not block its execution, nor causes any deadlock.
 - When metadata lock is enabled, the information of a metadata object in a transaction is determined on the first access and does not change after that.
 - For DDLs, when changing metadata state, DDLs might be blocked by old transactions. The following is an example:
 
@@ -76,10 +76,10 @@ Metadata lock can ensure that the metadata versions used by all transactions in 
     | `INSERT INTO t VALUES(1);` |           |
     | `BEGIN;`                   |           |
     |                            | `ALTER TABLE t ADD COLUMN b INT;` |
-    | `SELECT * FROM t;`<br/>(Use the current metadata version of table `t`. Return `(a=1，b=NULL)` and lock table `t`.)         |           |
+    | `SELECT * FROM t;`<br/>(Uses the current metadata version of table `t`. Returns `(a=1，b=NULL)` and locks table `t`.)         |           |
     |                            | `ALTER TABLE t ADD COLUMN c INT;` (blocked by Session 1) |
 
-    At the repeatable read isolation level, if a DDL that requires data changes is performed during the metadata process of determining a table from the start of the transaction, such as adding an index, or changing column types. It performs as the following:
+    At the repeatable read isolation level, from the transaction start to the timepoint of determining the metadata of a table,  if a DDL that requires data changes is performed, such as adding an index, or changing column types, the DDL returns an error as follows:
 
     | Session 1                  | Session 2                                 |
     |:---------------------------|:------------------------------------------|
@@ -91,7 +91,7 @@ Metadata lock can ensure that the metadata versions used by all transactions in 
     | `COMMIT;`                  |                                           |
     | `BEGIN;`                   |                                           |
     |                            | `ALTER TABLE t MODIFY COLUMN a CHAR(10);` |
-    | `SELECT * FROM t;` (return an error `Information schema is changed`) | |
+    | `SELECT * FROM t;` (returns an error `Information schema is changed`) | |
 
 ## Troubleshoot blocked DDLs
 
@@ -99,7 +99,7 @@ TiDB v6.3.0 introduces the `mysql.tidb_mdl_view` view to help you obtain the inf
 
 > **Note:**
 >
-> To select the `mysql.tidb_mdl_view` view, [`PROCESS` privilege](https://dev.mysql.com/doc/refman/8.0/en/privileges-provided.html#priv_process) is required.
+> To select the `mysql.tidb_mdl_view` view, the [`PROCESS` privilege](https://dev.mysql.com/doc/refman/8.0/en/privileges-provided.html#priv_process) is required.
 
 The following takes adding an index for table `t` as an example. Assume that there is a DDL statement `ALTER TABLE t ADD INDEX idx(a)`:
 
@@ -116,7 +116,7 @@ SQL_DIGESTS: ["begin","select * from `t`"]
 1 row in set (0.02 sec)
 ```
 
-From the preceding output, you can see that the transaction whose `SESSION ID` is `2199023255957` blocks the adding index DDL. `SQL_DIGEST` shows the SQL statements executed by this transaction, which is ``["begin","select * from `t`"]``. To make the blocked DDL continue to execute, you can use the following global `KILL` statement to kill the `2199023255957` transaction:
+From the preceding output, you can see that the transaction whose `SESSION ID` is `2199023255957` blocks the `ADD INDEX` DDL. `SQL_DIGEST` shows the SQL statements executed by this transaction, which is ``["begin","select * from `t`"]``. To make the blocked DDL continue to execute, you can use the following global `KILL` statement to kill the `2199023255957` transaction:
 
 ```sql
 mysql> KILL 2199023255957;
