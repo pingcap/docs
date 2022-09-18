@@ -156,7 +156,7 @@ This query starts by reading the table `t3` and then probes the table `t1` based
 
 The value of `IN` and `= ANY` set operations is three-valued (`true`, `false`, and `NULL`). For the join type converted by these subqueries, TiDB needs to be aware of the `NULL` on both sides of the join key and process it in a special way.
 
-For `IN` and `= ANY` operators, subqueries are converted to semi join and left outer semi join separately. In the preceding example of [Semi join](#semi-join-correlated-subquery), since the columns `test.t1.id` and `test.t2.t1_id` on both sides of the join key are `not NULL`, the semi join does not need to be considered as null-aware (`NULL` is not processed specially). TiDB processes the null-aware semi join based on the Cartesian product and filter without special optimization. The following is an example:
+Subqueries containing `IN` and `= ANY` operators are converted to semi join and left outer semi join respectively. In the preceding example of [Semi join](#semi-join-correlated-subquery), since columns `test.t1.id` and `test.t2.t1_id` on both sides of the join key are `not NULL`, the semi join does not need to be considered as null-aware (`NULL` is not processed specially). TiDB processes the null-aware semi join based on the Cartesian product and filter without special optimization. The following is an example:
 
 ```sql
 CREATE TABLE t(a INT, b INT);
@@ -196,7 +196,7 @@ tidb> EXPLAIN SELECT * FROM t WHERE (a,b) IN (SELECT * FROM s);
 
 In the first query statement `EXPLAIN SELECT (a,b) IN (SELECT * FROM s) FROM t;`, since columns `a` and `b` of tables `t` and `s` are NULLABLE, the left outer semi join converted by the `IN` subquery is null-aware. Specifically, the Cartesian product is calculated first, then the column connected by `IN` or `= ANY` is put into other conditions as a normal equality query for filtering.
 
-In the second query statement `EXPLAIN SELECT * FROM t WHERE (a,b) IN (SELECT * FROM s);`, since columns `a` and `b` of tables `t` and `s` are NULLABLE, the `IN` subquery should be converted to a null-aware semi join. But TiDB optimizes it by converting semi join to inner join and aggregate directly. This is because `NULL` and `false` are equivalent in `IN` subqueries for non-scalar output. The `NULL` rows in the push-down filter results in the negative semantics of the `WHERE` clause. Therefore, these rows can be ignored beforehand.
+In the second query statement `EXPLAIN SELECT * FROM t WHERE (a,b) IN (SELECT * FROM s);`, since columns `a` and `b` of tables `t` and `s` are NULLABLE, the `IN` subquery should have been converted to a null-aware semi join. But TiDB optimizes it by converting semi join to inner join and aggregate. This is because `NULL` and `false` are equivalent in `IN` subqueries for non-scalar output. The `NULL` rows in the push-down filter results in the negative semantics of the `WHERE` clause. Therefore, these rows can be ignored beforehand.
 
 > **Note:**
 >
@@ -206,13 +206,13 @@ In the second query statement `EXPLAIN SELECT * FROM t WHERE (a,b) IN (SELECT * 
 
 The value of `NOT IN` and `!= ALL` set operations is three-valued (`true`, `false`, and `NULL`). For the join type converted by these subqueries, TiDB needs to be aware of the `NULL` on both sides of the Join key and process it in a special way.
 
-For `NOT IN` and `! = ALL` operators, subqueries are converted to anti semi join and anti left outer semi join separately. In the preceding example of [Anti semi join](#anti-semi-join-not-in-subquery), since the columns `test.t3.t1_id` and `test.t1.id` on both sides of the join key are `not NULL`, anti semi join does not need to be considered as null-aware (`NULL` is not processed specially).
+Subqueries containing `NOT IN` and `! = ALL` operators are converted to anti semi join and anti left outer semi join respectively. In the preceding example of [Anti semi join](#anti-semi-join-not-in-subquery), since columns `test.t3.t1_id` and `test.t1.id` on both sides of the join key are `not NULL`, anti semi join does not need to be considered as null-aware (`NULL` is not processed specially).
 
-TiDB v6.3.0 optimizes null-aware anti join (NAAJ):
+TiDB v6.3.0 optimizes null-aware anti join (NAAJ) as follows:
 
-- Build hash join using null-aware equality condition (NA-EQ)
+- Build hash join using the null-aware equality condition (NA-EQ)
 
-    Set operators introduce the equality condition, which requires a special process for the `NULL` of operators on both sides of the condition. The equality condition that requires null-aware is called NA-EQ. Different from earlier versions, TiDB v6.3.0 no longer processes NA-EQ as normal EQ, but specially places it in other conditions after join, and then determines the legitimacy of the result set after matching the Cartesian product.
+    Set operators introduce the equality condition, which requires a special process for the `NULL` value of operators on both sides of the condition. The equality condition that requires null-aware is called NA-EQ. Different from earlier versions, TiDB v6.3.0 no longer processes NA-EQ as before, but places it in other conditions after join, and then determines the legitimacy of the result set after matching the Cartesian product.
 
     Since TiDB v6.3.0, NA-EQ, a weakened equality condition, is still used to build hash join. This reduces the matching amount of data that needs to be traversed and speeds up the matching process. The acceleration is more significant when the `DISTINCT()` value of the build table is large.
 
