@@ -88,7 +88,7 @@ CREATE TABLE users (
 INSERT INTO users (username) VALUES ('dave'), ('sarah'), ('bill');
 ```
 
-With optimistic locking and `tidb_constraint_check_in_place=0`:
+With optimistic locking and `tidb_constraint_check_in_place=OFF`:
 
 ```sql
 BEGIN OPTIMISTIC;
@@ -119,7 +119,7 @@ ERROR 1062 (23000): Duplicate entry 'bill' for key 'username'
 
 In the preceding optimistic example, the unique check was deferred until the transaction is committed. This resulted in a duplicate key error, because the value `bill` was already present.
 
-You can disable this behavior by setting [`tidb_constraint_check_in_place`](/system-variables.md#tidb_constraint_check_in_place) to `1`. This variable is only applicable to optimistic transactions. For pessimistic transactions, you can control this behavior using the [`tidb_constraint_check_in_place_pessimistic`](/system-variables.md#tidb_constraint_check_in_place_pessimistic-new-in-v630) variable. When `tidb_constraint_check_in_place=1`, the unique constraint is checked when a statement is executed.
+You can disable this behavior by setting [`tidb_constraint_check_in_place`](/system-variables.md#tidb_constraint_check_in_place) to `ON`. This variable is only applicable to optimistic transactions. For pessimistic transactions, you can control this behavior using the [`tidb_constraint_check_in_place_pessimistic`](/system-variables.md#tidb_constraint_check_in_place_pessimistic-new-in-v630) variable. When `tidb_constraint_check_in_place=ON`, the unique constraint is checked when a statement is executed.
 
 For example:
 
@@ -134,7 +134,7 @@ INSERT INTO users (username) VALUES ('dave'), ('sarah'), ('bill');
 ```
 
 ```sql
-SET tidb_constraint_check_in_place = 1;
+SET tidb_constraint_check_in_place = ON;
 ```
 
 ```
@@ -180,14 +180,14 @@ INSERT INTO users (username) VALUES ('jane'), ('chris'), ('bill');
 ERROR 1062 (23000): Duplicate entry 'bill' for key 'username'
 ```
 
-To achieve better performance of pessimistic transactions, you can set the [`tidb_constraint_check_in_place_pessimistic`](/system-variables.md#tidb_constraint_check_in_place_pessimistic-new-in-v630) variable to `0`, which allows TiDB to defer the unique constraint check of a unique index (to the next time when this index requires a lock or to the time when the transaction is committed) and skip the corresponding pessimistic lock. When using this variable, pay attention to the following:
+To achieve better performance of pessimistic transactions, you can set the [`tidb_constraint_check_in_place_pessimistic`](/system-variables.md#tidb_constraint_check_in_place_pessimistic-new-in-v630) variable to `OFF`, which allows TiDB to defer the unique constraint check of a unique index (to the next time when this index requires a lock or to the time when the transaction is committed) and skip the corresponding pessimistic lock. When using this variable, pay attention to the following:
 
 - Due to the deferred unique constraint check, TiDB might read results that do not meet the unique constraints and return a `Duplicate entry` error when you commit a pessimistic transaction. When this error occurs, TiDB rolls back the current transaction.
 
     The following example skips the lock to `bill`, so TiDB might get results that do not satisfy the uniqueness constraints.
 
     ```sql
-    SET tidb_constraint_check_in_place_pessimistic = 0;
+    SET tidb_constraint_check_in_place_pessimistic = OFF;
     BEGIN PESSIMISTIC;
     INSERT INTO users (username) VALUES ('jane'), ('chris'), ('bill'); -- Query OK, 3 rows affected
     SELECT * FROM users FOR UPDATE;
@@ -230,7 +230,7 @@ To achieve better performance of pessimistic transactions, you can set the [`tid
     UNIQUE KEY (username)
     );
 
-    SET tidb_constraint_check_in_place_pessimistic = 0;
+    SET tidb_constraint_check_in_place_pessimistic = OFF;
     BEGIN PESSIMISTIC;
     INSERT INTO users (username) VALUES ('jane'), ('chris'), ('bill'); -- Query OK, 3 rows affected
     ```
@@ -260,7 +260,7 @@ To achieve better performance of pessimistic transactions, you can set the [`tid
     As in the following example, at the execution of the `INSERT` statement, TiDB skips a lock. Then, at the execution of the `DELETE` statement, TiDB locks the unique index and checks the unique constraints, so you will see an error is reported at the `DELETE` statement.
 
     ```sql
-    SET tidb_constraint_check_in_place_pessimistic = 0;
+    SET tidb_constraint_check_in_place_pessimistic = OFF;
     BEGIN PESSIMISTIC;
     INSERT INTO users (username) VALUES ('jane'), ('chris'), ('bill'); -- Query OK, 3 rows affected
     DELETE FROM users where username = 'bill';
