@@ -942,10 +942,16 @@ To delete the store with the store id of 1, you can use the following command:
 store delete 1
 ```
 
-To cancel the deletion of Offline state stores which are deleted using `store delete`, you can use the `store cancel-delete` command. After canceling, the state of the store changes from Offline to Up. Note that the `store cancel-delete` command cannot change a Tombstone state store to Up. The following example cancels the deletion of stores that have been deleted using `store delete` and deletes all Tombstone states stores:
+To cancel the deletion of Offline state stores which are deleted using `store delete`, you can use the `store cancel-delete` command. After canceling, the state of the store changes from Offline to Up. Note that the `store cancel-delete` command cannot change a Tombstone state store to Up.
+
+To cancel the deletion of stores that have been deleted using `store delete`, you can use the following `store cancel-delete` command:
 
 ```bash
 store cancel-delete 1                // Cancel the deletion of stores with the store id of 1
+
+To delete all Tombstone states stores, you can use the following `store remove-tombstone` command:
+
+```bash
 store remove-tombstone              // Remove stores that are in Tombstone state
 ```
 
