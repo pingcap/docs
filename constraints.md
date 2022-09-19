@@ -193,7 +193,7 @@ To achieve better performance of pessimistic transactions, you can set the [`tid
     SELECT * FROM users FOR UPDATE;
     ```
 
-   As in the following example output, the query results of TiDB contain two `bills`, which do not satisfy the uniqueness constraints.
+   As in the following example output, the query results of TiDB contain two `bills`, which does not satisfy the uniqueness constraints.
 
     ```sql
     +----+----------+
