@@ -2388,7 +2388,7 @@ explain select * from t where age=5;
 - Type: Boolean
 - Default value: `ON`
 - This variable specifies whether to rewrite a `COUNT(DISTINCT)` aggregation into a three-stage aggregation in MPP mode.
-- This variable currently applies to aggregations with only one `COUNT(DISTINCT)`.
+- This variable currently applies to an aggregation that only contains one `COUNT(DISTINCT)`.
 
 ### tidb_opt_write_row_id
 
