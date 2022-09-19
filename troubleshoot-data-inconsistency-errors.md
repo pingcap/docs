@@ -61,10 +61,10 @@ This error indicates that the table on which the `ADMIN CHECK` statement is exec
 
 `ERROR 8134 (HY000): data inconsistency in table: t, index: c2, col: c2, handle: "2", index-values:"KindInt64 13" != record-values:"KindInt64 12", compare err:<nil>`
 
-This error indicates that for index `c2` in table `t`, the following inconsistency occurs:
+This error indicates that for index `c2` in table `t`, the value of column `c2` has the following inconsistency:
 
-- The value of column `c2` is `13` according to the index key-value pair of the row whose handle is 2.
-- The value of column `c2` is `12` according to the row record key-value pair of column `c2`.
+- In the index key-value pair of the row whose handle is `2`, the value of column `c2` is `13`.
+- In the row record key-value pair, the value of column `c2` is `12`.
 
 #### Error 8223
 
