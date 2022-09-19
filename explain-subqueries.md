@@ -154,7 +154,7 @@ This query starts by reading the table `t3` and then probes the table `t1` based
 
 ## Null-aware semi join (`IN` and `= ANY` subqueries)
 
-The value of `IN` and `= ANY` set operations is three-valued (`true`, `false`, and `NULL`). For the join type converted by these subqueries, TiDB needs to be aware of the `NULL` on both sides of the join key and process it in a special way.
+The value of the `IN` or `= ANY` set operator is three-valued (`true`, `false`, and `NULL`). For the join type converted from either of the two operators, TiDB needs to be aware of the `NULL` on both sides of the join key and process it in a special way.
 
 Subqueries containing `IN` and `= ANY` operators are converted to semi join and left outer semi join respectively. In the preceding example of [Semi join](#semi-join-correlated-subquery), since columns `test.t1.id` and `test.t2.t1_id` on both sides of the join key are `not NULL`, the semi join does not need to be considered as null-aware (`NULL` is not processed specially). TiDB processes the null-aware semi join based on the Cartesian product and filter without special optimization. The following is an example:
 
