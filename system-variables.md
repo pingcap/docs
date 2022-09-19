@@ -206,7 +206,7 @@ mysql> SELECT * FROM t1;
 - Persists to cluster: Yes
 - Type: Enumeration
 - Default value: `mysql_native_password`
-- Possible values: `mysql_native_password` and `caching_sha2_password`
+- Possible values: `mysql_native_password`, `caching_sha2_password`, and `tidb_sm3_password`
 - This variable sets the authentication method that the server advertises when the server-client connection is being established.
 
 <CustomContent platform="tidb">
@@ -520,6 +520,13 @@ mysql> SHOW GLOBAL VARIABLES LIKE 'max_prepared_stmt_count';
 - Default value: (system dependent)
 - This variable shows the system time zone from when TiDB was first bootstrapped. See also [`time_zone`](#time_zone).
 
+### `tidb_adaptive_closest_read_threshold` <span class="version-mark">New in v6.3.0</span>
+
+- Scope: SESSION | GLOBAL
+- Persists to cluster: Yes
+- Default value: `4096`
+- This variable is used to control the threshold at which the TiDB server prefers to send read requests to the replica in the same region as the TiDB server when [`tidb_replica_read`](#tidb_replica_read-new-in-v40) is set to `closest-adaptive`. If the estimated result is higher than or equal to this threshold, TiDB prefers to send read requests to the replica in the same region. Otherwise, TiDB sends read requests to the leader replica.
+
 ### tidb_allow_batch_cop <span class="version-mark">New in v4.0</span>
 
 - Scope: SESSION | GLOBAL
@@ -814,6 +821,24 @@ Constraint checking is always performed in place for pessimistic transactions (d
 - Default value: `0`
 - This variable is read-only. It is used to obtain the timestamp of the current transaction.
 
+### tidb_ddl_disk_quota <span class="version-mark">New in v6.3.0</span>
+
+- Scope: GLOBAL
+- Persists to cluster: Yes
+- Type: Integer
+- Default value: `107374182400` (100 GiB)
+- Range: `[107374182400, 1125899906842624]` ([100 GiB, 1 PiB])
+- Unit: Bytes
+- This variable only takes effect when [`tidb_ddl_enable_fast_reorg`](#tidb_ddl_enable_fast_reorg-new-in-v630) is enabled. It sets the usage limit of local storage during backfilling when creating an index.
+
+### tidb_ddl_enable_fast_reorg <span class="version-mark">New in v6.3.0</span>
+
+- Scope: GLOBAL
+- Persists to cluster: Yes
+- Type: Boolean
+- Default value: `OFF`
+- This variable controls whether to enable the acceleration of `ADD INDEX` and `CREATE INDEX` DDl operations to improve the speed of backfilling when creating an index. If this variable is enabled, TiDB uses a more effective way to create an index.
+
 ### tidb_ddl_error_count_limit
 
 - Scope: GLOBAL
@@ -1012,7 +1037,7 @@ Constraint checking is always performed in place for pessimistic transactions (d
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
 - Type: Enumeration
-- Default value: `INT_ONLY`
+- Default value: `ON`
 - Possible values: `OFF`, `ON`, `INT_ONLY`
 - This variable is used to control whether to create the primary key as a [clustered index](/clustered-indexes.md) by default. "By default" here means that the statement does not explicitly specify the keyword `CLUSTERED`/`NONCLUSTERED`. Supported values are `OFF`, `ON`, and `INT_ONLY`:
     - `OFF` indicates that primary keys are created as non-clustered indexes by default.
@@ -2573,12 +2598,9 @@ explain select * from t where age=5;
 - Persists to cluster: Yes
 - Type: Enumeration
 - Default value: `leader`
-- Possible values: `leader`, `follower`, `leader-and-follower`, `closest-replicas`
-- This variable is used to control where TiDB reads data. Here are three options:
-    - leader: Read only from leader node
-    - follower: Read only from follower node
-    - leader-and-follower: Read from leader or follower node
-- See [follower reads](/follower-read.md) for additional details.
+- Possible values: `leader`, `follower`, `leader-and-follower`, `closest-replicas`, `closest-adaptive`
+- This variable is used to control where TiDB reads data.
+- For more details about usage and implementation, see [Follower read](/follower-read.md).
 
 ### tidb_restricted_read_only <span class="version-mark">New in v5.2.0</span>
 
@@ -3066,6 +3088,13 @@ For details, see [Identify Slow Queries](/identify-slow-queries.md).
 - Unit: Threads
 - This variable is used to set the concurrency degree of the window operator.
 - A value of `-1` means that the value of `tidb_executor_concurrency` will be used instead.
+
+### `tiflash_fastscan` <span class="version-mark">New in v6.3.0</span>
+
+- Scope: SESSION | GLOBAL
+- Default value: `OFF`
+- Range: `ON | OFF`
+- If [FastScan](/develop/dev-guide-use-fastscan.md) is enabled (set to `ON`), TiFlash provides more efficient query performance, but does not guarantee the accuracy of the query results or data consistency.
 
 ### `tiflash_fine_grained_shuffle_batch_size` <span class="version-mark">New in v6.2.0</span>
 
