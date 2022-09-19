@@ -264,6 +264,7 @@ public List<Author> getAuthorsWithLimit(Integer limit) throws SQLException {
             Author author = new Author();
             author.setId(rs.getLong("id"));
             author.setName(rs.getString("name"));
+            author.setBirthYear(rs.getShort("birth_year"));
             authors.add(author);
         }
     }
