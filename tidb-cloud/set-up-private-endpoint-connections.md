@@ -190,7 +190,7 @@ The possible statuses of a private endpoint service are explained as follows:
 Make sure that your service spans across the availability zones (AZs) in which the endpoint service is created. To check supported subnet IDs, use the following command and run it in your AWS CLI:
 
 ```bash
-aws ec2 describe-subnets --filter Name=<availability_zone_id>,Values=<endpoint_service_az_1>,<endpoint_service_az_2>,<endpoint_service_az_3> --output text --query 'Subnets[].SubnetId' --subnet-ids <your_application_subnet_ids>
+aws ec2 describe-subnets --filter Name=availability-zone-id,Values=<endpoint_service_az_1>,<endpoint_service_az_2>,<endpoint_service_az_3> --output text --query 'Subnets[].SubnetId' --subnet-ids <your_application_subnet_ids>
 ```
 
 Remove the unsupported subnet IDs and retry.
