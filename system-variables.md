@@ -2511,7 +2511,7 @@ explain select * from t where age=5;
 > - If your client uses a cursor, it is not recommended to enable `tidb_rc_read_check_ts` in case that the previous batch of returned data has already been used by the client and the statement eventually fails.
 > - Since v6.3.0, the scope of `tidb_rc_read_check_ts` changes from GLOBAL or SESSION to INSTANCE.
 
-- Scope: GLOBAL
+- Scope: INSTANCE
 - Persists to cluster: No, only applicable to the current TiDB instance that you are connecting to.
 - Type: Boolean
 - Default value: `OFF`
