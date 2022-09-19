@@ -118,9 +118,9 @@ In v6.3.0-DMR, the key new features and improvements are as follows:
 
     TiKV recycles log files in Raft Engine by default. This reduces the long tail latency during Raft log appending and improves performance under write workloads.
 
-* TiDB 支持 Null Aware Anti Join [#issue]() @[Arenatlx](https://github.com/Arenatlx) **tw: Oreoxmt**
+* TiDB supports Null-Aware Anti Join] [#issue]() @[Arenatlx](https://github.com/Arenatlx) **tw: Oreoxmt**
 
-    TiDB 在新版本中引入了新的连接类型 [Null Aware Anti Join (NAAJ)](/explain-subqueries.md#null-aware-semi-joinin-any-子查询)。 NAAJ 在集合操作时能够感知集合是否为空，或是否有空值，优化了一部分操作比如`IN`、`= ANY` 的执行效率，提升 SQL 性能。
+    TiDB v6.3.0 introduces a new join type [Null-Aware Anti Join (NAAJ)](/explain-subqueries.md#null-aware-semi-joinin-any). NAAJ can be aware of whether the collection is empty or `NULL` when processing collection operations. This optimizes the execution efficiency of operations such as `IN` and `= ANY` and improves SQL performance.
 
 * Add optimizer hints to control the build end of Hash Join [#issue]() @[Reminiscent](https://github.com/Reminiscent) **tw: TomShawn**
 
