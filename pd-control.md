@@ -907,24 +907,98 @@ Usage:
 
 ### `store [delete | cancel-delete | label | weight | remove-tombstone | limit ] <store_id> [--jq="<query string>"]`
 
-Use this command to view the store information or remove a specified store. For a jq formatted output, see [jq-formatted-json-output-usage](#jq-formatted-json-output-usage).
+For a jq formatted output, see [jq-formatted-json-output-usage](#jq-formatted-json-output-usage).
 
-Usage:
+#### Get a store
+
+To display information of all stores, you can use the `store` command:
 
 ```bash
->> store                               // Display information of all stores
+store
+```
+
+```
 {
   "count": 3,
   "stores": [...]
 }
->> store 1                             // Get the store with the store id of 1
+```
+
+To get the store with the store id of 1, you can use the following command:
+
+```bash
+store 1
+```
+
+```
 ......
->> store delete 1                      // Delete the store with the store id of 1
-......
->> store cancel-delete 1               // Cancel the delete operation previously performed on the store with the id of 1 which is in the offline state. After the cancellation, the store will enter the up state. Note that this command cannot make the tombstone store back to the up state. If the PD leader has been switched during the offline process, you need to manually modify the store limit.
->> store label 1 zone cn               // Set the value of the label with the "zone" key to "cn" for the store with the store id of 1
->> store weight 1 5 10                 // Set the leader weight to 5 and Region weight to 10 for the store with the store id of 1
->> store remove-tombstone              // Remove stores that are in tombstone state
+```
+
+#### Delete a store
+
+To delete the store with the store id of 1, you can use the following command:
+
+```bash
+store delete 1
+```
+
+To cancel the deletion of Offline state stores which are deleted using `store delete`, you can use the `store cancel-delete` command. After canceling, the state of the store changes from Offline to Up. Note that the `store cancel-delete` command cannot change a Tombstone state store to Up. The following example cancels the deletion of stores that have been deleted using `store delete` and deletes all Tombstone states stores:
+
+```bash
+store cancel-delete 1                // Cancel the deletion of stores with the store id of 1
+store remove-tombstone              // Remove stores that are in Tombstone state
+```
+
+> **Note:**
+>
+> If the PD leader is switched during store deletion, you need to modify the store limit manually using the [`store limit`](#store-limit-command) command.
+
+#### Manage labels of a store
+
+To manage the labels of a store, you can use the `store label` command.
+
+To set the label with the `"zone"` key to `"cn"` for the store with the store id of 1, you can use the following command:
+
+```bash
+store label 1 zone=cn
+```
+
+To update the label with the `"zone"` key from `"cn"` to `"us"` for the store with the store id of 1, you can use the following command:
+
+```bash
+store label 1 zone=us
+```
+
+To rewrite labels for all stores with the store id of 1, you can use the `--rewrite` option and all labels are overwritten:
+
+```bash
+store label 1 region=us-est-1 disk=ssd --rewrite
+```
+
+To delete the label with the `"disk"` key with the store id od 1, you can use the `--delete` option:
+
+```bash
+store label 1 disk --delete
+```
+
+> **Note:**
+>
+> - The label update of a store uses the merge strategy. If the store label in the TiKV configuration file is modified, after the process restarts, PD merges and updates the store label stored by itself, and persists the merged results.
+> - To manage labels of a store using TiUP uniformly, before the cluster restarts, you can use the `store label <id> --force` command to empty the labels stored by PD.
+
+#### `store weight` command
+
+To set the leader weight to 5 and Region weight to 10 for the store with the store id of 1, you can use the following command:
+
+```bash
+store weight 1 5 10
+```
+
+#### `store limit` command
+
+For more details about the principles and usage of `store limit`, see [`store limit`](/configure-store-limit.md).
+
+```bash
 >> store limit                         // Show the speed limit of adding-peer operations and the limit of removing-peer operations per minute in all stores
 >> store limit add-peer                // Show the speed limit of adding-peer operations per minute in all stores
 >> store limit remove-peer             // Show the limit of removing-peer operations per minute in all stores
