@@ -332,7 +332,7 @@ The TiDB Cloud console does not provide any feature about incremental data repli
 
 ### Step 2. Create a replication task
 
-1. Create a `test-task1.yaml` file for the replication task. 
+1. Create a `test-task1.yaml` file for the replication task.
 
 2. Find the starting point in the metadata file of MySQL instance1 exported by Dumpling. For example:
 
@@ -358,77 +358,77 @@ The TiDB Cloud console does not provide any feature about incremental data repli
 
 4. Edit the task configuration file `test-task1`, to configure the incremental replication mode and replication starting point for each data source.
 
-```yaml
-## ********* Task Configuration *********
-name: test-task1
-shard-mode: "pessimistic"
-# Task mode. The "incremental" mode only performs incremental data migration.
-task-mode: incremental
-# timezone: "UTC"
+    ```yaml
+    ## ********* Task Configuration *********
+    name: test-task1
+    shard-mode: "pessimistic"
+    # Task mode. The "incremental" mode only performs incremental data migration.
+    task-mode: incremental
+    # timezone: "UTC"
 
-## ******** Data Source Configuration **********
-## (Optional) If you need to incrementally replicate data that has already been migrated in the full data migration, you need to enable the safe mode to avoid the incremental data migration error.
-##  This scenario is common in the following case: the full migration data does not belong to the data source's consistency snapshot, and after that, DM starts to replicate incremental data from a position earlier than the full migration.
-syncers:           # The running configurations of the sync processing unit.
- global:           # Configuration name.
-   safe-mode: false # # If this field is set to true, DM changes INSERT of the data source to REPLACE for the target database,
-                    # # and changes UPDATE of the data source to DELETE and REPLACE for the target database.
-                    # # This is to ensure that when the table schema contains a primary key or unique index, DML statements can be imported repeatedly.
-                    # # In the first minute of starting or resuming an incremental migration task, DM automatically enables the safe mode.
-mysql-instances:
- - source-id: "mysql-replica-01"
-   block-allow-list:  "bw-rule-1"
-   route-rules: ["store-route-rule", "sale-route-rule"]
-   filter-rules: ["store-filter-rule", "sale-filter-rule"]
-   syncer-config-name: "global"
-   meta:
-     binlog-name: "mysql-bin.000002"
-     binlog-pos: 246546174
-     binlog-gtid: "b631bcad-bb10-11ec-9eee-fec83cf2b903:1-194801"
- - source-id: "mysql-replica-02"
-   block-allow-list:  "bw-rule-1"
-   route-rules: ["store-route-rule", "sale-route-rule"]
-   filter-rules: ["store-filter-rule", "sale-filter-rule"]
-   syncer-config-name: "global"
-   meta:
-     binlog-name: "mysql-bin.000001"
-     binlog-pos: 1312659
-     binlog-gtid: "cd21245e-bb10-11ec-ae16-fec83cf2b903:1-4036"
+    ## ******** Data Source Configuration **********
+    ## (Optional) If you need to incrementally replicate data that has already been migrated in the full data migration, you need to enable the safe mode to avoid the incremental data migration error.
+    ##  This scenario is common in the following case: the full migration data does not belong to the data source's consistency snapshot, and after that, DM starts to replicate incremental data from a position earlier than the full migration.
+    syncers:           # The running configurations of the sync processing unit.
+     global:           # Configuration name.
+       safe-mode: false # # If this field is set to true, DM changes INSERT of the data source to REPLACE for the target database,
+                        # # and changes UPDATE of the data source to DELETE and REPLACE for the target database.
+                        # # This is to ensure that when the table schema contains a primary key or unique index, DML statements can be imported repeatedly.
+                        # # In the first minute of starting or resuming an incremental migration task, DM automatically enables the safe mode.
+    mysql-instances:
+    - source-id: "mysql-replica-01"
+       block-allow-list:  "bw-rule-1"
+       route-rules: ["store-route-rule", "sale-route-rule"]
+       filter-rules: ["store-filter-rule", "sale-filter-rule"]
+       syncer-config-name: "global"
+       meta:
+         binlog-name: "mysql-bin.000002"
+         binlog-pos: 246546174
+         binlog-gtid: "b631bcad-bb10-11ec-9eee-fec83cf2b903:1-194801"
+    - source-id: "mysql-replica-02"
+       block-allow-list:  "bw-rule-1"
+       route-rules: ["store-route-rule", "sale-route-rule"]
+       filter-rules: ["store-filter-rule", "sale-filter-rule"]
+       syncer-config-name: "global"
+       meta:
+         binlog-name: "mysql-bin.000001"
+         binlog-pos: 1312659
+         binlog-gtid: "cd21245e-bb10-11ec-ae16-fec83cf2b903:1-4036"
 
-## ******** Configuration of the target TiDB cluster on TiDB Cloud **********
-target-database:       # The target TiDB cluster on TiDB Cloud
- host: "tidb.xxxxxxx.xxxxxxxxx.ap-northeast-1.prod.aws.tidbcloud.com"
- port: 4000
- user: "root"
- password: "oSWRLvR3F5GDIgm+l+9h3kB72VFWBUwzOw=="  # If the password is not empty, it is recommended to use a dmctl-encrypted cipher.
+    ## ******** Configuration of the target TiDB cluster on TiDB Cloud **********
+    target-database:       # The target TiDB cluster on TiDB Cloud
+     host: "tidb.xxxxxxx.xxxxxxxxx.ap-northeast-1.prod.aws.tidbcloud.com"
+     port: 4000
+     user: "root"
+     password: "oSWRLvR3F5GDIgm+l+9h3kB72VFWBUwzOw=="  # If the password is not empty, it is recommended to use a dmctl-encrypted cipher.
 
-## ******** Function Configuration **********
-routes:
- store-route-rule:
-   schema-pattern: "store_*"
-   target-schema: "store"
- sale-route-rule:
-   schema-pattern: "store_*"
-   table-pattern: "sale_*"
-   target-schema: "store"
-   target-table:  "sales"
-filters:
- sale-filter-rule:
-   schema-pattern: "store_*"
-   table-pattern: "sale_*"
-   events: ["truncate table", "drop table", "delete"]
-   action: Ignore
- store-filter-rule:
-   schema-pattern: "store_*"
-   events: ["drop database"]
-   action: Ignore
-block-allow-list:
- bw-rule-1:
-   do-dbs: ["store_*"]
+    ## ******** Function Configuration **********
+    routes:
+     store-route-rule:
+       schema-pattern: "store_*"
+       target-schema: "store"
+     sale-route-rule:
+       schema-pattern: "store_*"
+       table-pattern: "sale_*"
+       target-schema: "store"
+       target-table:  "sales"
+    filters:
+     sale-filter-rule:
+       schema-pattern: "store_*"
+       table-pattern: "sale_*"
+       events: ["truncate table", "drop table", "delete"]
+       action: Ignore
+     store-filter-rule:
+       schema-pattern: "store_*"
+       events: ["drop database"]
+       action: Ignore
+    block-allow-list:
+     bw-rule-1:
+       do-dbs: ["store_*"]
 
-## ******** Ignore check items **********
-ignore-checking-items: ["table_schema","auto_increment_ID"]
-```
+    ## ******** Ignore check items **********
+    ignore-checking-items: ["table_schema","auto_increment_ID"]
+    ```
 
 For detailed task configurations, see [DM Task Configurations](https://docs.pingcap.com/tidb/stable/task-configuration-file-full).
 
