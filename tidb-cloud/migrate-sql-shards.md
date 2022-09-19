@@ -79,12 +79,12 @@ When you use Dumpling to export data to Amazon S3, note the following:
 
 Name the CSV files as follows:
 
-    - If a CSV file contains all data of an entire table, name the file in the `${db_name}.${table_name}.csv` format, which maps to the `${db_name}.${table_name}` table when you import the data.
-    - If the data of one table is separated into multiple CSV files, append a numeric suffix to these CSV files. For example, `${db_name}.${table_name}.000001.csv` and `${db_name}.${table_name}.000002.csv`. The numeric suffixes can be inconsecutive but must be in ascending order. You also need to add extra zeros before the number to ensure all the suffixes are in the same length.
+- If a CSV file contains all data of an entire table, name the file in the `${db_name}.${table_name}.csv` format, which maps to the `${db_name}.${table_name}` table when you import the data.
+- If the data of one table is separated into multiple CSV files, append a numeric suffix to these CSV files. For example, `${db_name}.${table_name}.000001.csv` and `${db_name}.${table_name}.000002.csv`. The numeric suffixes can be inconsecutive but must be in ascending order. You also need to add extra zeros before the number to ensure all the suffixes are in the same length.
 
-    > **Note:**
-    >
-    > If you cannot update the CSV filenames according to the preceding rules in some cases (for example, the CSV file links are also used by your other programs), you can keep the filenames unchanged and use the **File Patterns** in [Step 5](#step-5-perform-the-data-import-task) to import your source data to a single target table.
+> **Note:**
+>
+> If you cannot update the CSV filenames according to the preceding rules in some cases (for example, the CSV file links are also used by your other programs), you can keep the filenames unchanged and use the **File Patterns** in [Step 5](#step-5-perform-the-data-import-task) to import your source data to a single target table.
 
 To export data to Amazon S3, do the following:
 
@@ -174,11 +174,11 @@ The following example only lists key policy configurations. Replace the Amazon S
 
 ### Step 5. Perform the data import task
 
-After configuring the Amazon S3 access, you can perform the data import task in the [TiDB Cloud console](https://tidbcloud.com/console/clusters).
+After configuring the Amazon S3 access, you can perform the data import task in the TiDB Cloud console as follows:
 
-1. Navigate to the **Active Clusters** page for your project.
+1. Log in to the [TiDB Cloud console](https://tidbcloud.com/console/clusters). Navigate to the **Clusters** page for your project.
 
-2. In the TiDB Cloud Admin console, choose a target project and a target cluster deployed on the Google Cloud Platform. Then click **...** in the upper-right corner of the cluster area and select **Import Data**.
+2. Locate your target cluster, click **...** in the upper-right corner of the cluster area, and select **Import Data**. The **Data Import** page is displayed.
 
 3. On the **Data Import** page, fill in the following information:
 
