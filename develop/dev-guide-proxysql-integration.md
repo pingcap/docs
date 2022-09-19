@@ -1,6 +1,7 @@
 ---
 title: Integrate TiDB with ProxySQL
 summary: Introduce how to integrate TiDB with ProxySQL step by step.
+aliases: ["/tidbcloud/dev-guide-proxysql-integration"]
 ---
 
 # Integrate TiDB with ProxySQL

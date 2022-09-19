@@ -62,8 +62,8 @@ To create a dedicated cluster for the PoC, take the following steps:
 
 1. Fill in the PoC application form by doing one of the following:
 
-    - If you have already [created a Developer Tier](/tidb-cloud/tidb-cloud-quickstart.md#step-1-create-a-tidb-cluster) (one-year free trial), an prompt bar about submitting your PoC application is displayed in the TiDB Cloud console. You can click the PoC application link in the bar to fill in the PoC application form.
-    - If you have not created a Developer Tier yet, go to the [Apply for PoC](https://en.pingcap.com/apply-for-poc/) page to fill in the PoC application form.
+    - On the PingCAP website, go to the [Apply for PoC](https://en.pingcap.com/apply-for-poc/) page to fill in the PoC application form.
+    - In the [TiDB Cloud console](https://tidbcloud.com/), click **Apply for PoC** in the upper-right corner to fill in the PoC application form.
 
     Once you submit the form, the TiDB Cloud support team will review your application, contact you, and transfer credits to your account once the application is approved. You can also contact a PingCAP support engineer to assist with your PoC procedures to ensure the PoC runs as smoothly as possible.
 
@@ -124,7 +124,7 @@ You can import data in various formats to TiDB Cloud:
 > **Note:**
 >
 > - For information about character collations supported by TiDB Cloud, see [Migrate from MySQL-Compatible Databases](/tidb-cloud/migrate-data-into-tidb.md). Understanding how your data is stored originally will be very helpful.
-> - Data import on the **Data Import Task** page does not generate additional billing fees.
+> - Data import on the **Data Import** page does not generate additional billing fees.
 
 ## Step 6. Run your workload and evaluate results
 

@@ -35,6 +35,10 @@ You can use any language supported by the MySQL client or driver.
 
 TiDB Cloud is currently available on Amazon Web Services and Google Cloud.
 
+### Does TiDB Cloud support VPC peering between different cloud service providers?
+
+No.
+
 ### What versions of TiDB are supported on TiDB Cloud?
 
 For the currently supported TiDB version, see [TiDB Cloud Release Notes](/tidb-cloud/release-notes-2022.md).

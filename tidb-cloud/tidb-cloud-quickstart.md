@@ -35,11 +35,16 @@ To create a free Developer Tier cluster, take the following steps:
 
 5. Click **Create**.
 
-   The cluster creation process starts and the **Security Settings** dialog box is displayed.
+    The cluster creation process starts and your TiDB Cloud cluster will be created in approximately 5 to 15 minutes.
 
-6. In the **Security Settings** dialog box, set the root password and allowed IP addresses to connect to your cluster, and then click **Apply**.
+6. During the creation process, perform security settings for your cluster:
 
-    Your TiDB Cloud cluster will be created in approximately 5 to 15 minutes.
+    1. Click **Security Settings** in the upper-right corner of the cluster area.
+    2. In the **Security Settings** dialog box, set the root password and allowed IP addresses to connect to your cluster, and then click **Apply**.
+
+> **Tip:**
+>
+> After your TiDB Cloud cluster is created, and before importing your data or connecting to a client, you can click **Playground** to run queries instantly on TiDB Cloud. Playground contains a pre-loaded dataset of GitHub events.
 
 </div>
 
@@ -79,7 +84,7 @@ To create a Dedicated Tier cluster, take the following steps:
 
 9. Click **Create**.
 
-   The cluster creation process starts and the **Security Settings** dialog box is displayed.
+    The cluster creation process starts and the **Security Settings** dialog box is displayed.
 
 10. In the **Security Settings** dialog box, set the root password and allowed IP addresses to connect to your cluster, and then click **Apply**.
 
@@ -92,18 +97,38 @@ To create a Dedicated Tier cluster, take the following steps:
 
 1. Navigate to the **Clusters** page.
 
-2. In the area of your newly created cluster, click **Connect** in the upper-right corner. A connection dialog box is displayed.
+2. In the area of your newly created cluster, click **Connect** in the upper-right corner. A connection dialog is displayed.
 
     > **Tip:**
     >
-    > Alternatively, you can also click the name of your newly created cluster on the **Clusters** page and click **Connect** in the upper-right corner.
+    > Alternatively, you can also click the name of your newly created cluster on the **Clusters** page, and then click **Setup** in the **Connection** area.
 
-3. Under **Step 2: Connect with a SQL client** in the dialog box, click the tab of your preferred connection method, and then connect to your cluster with the connection string.
+3. Follow the instructions in the dialog to connect to your TiDB cluster.
+
+    <SimpleTab>
+    <div label="Developer Tier">
+
+    To connect to a Developer Tier cluster, check **Step 2: Connect with a SQL client** in the dialog, click the tab of your preferred connection method, and then connect to your cluster with the connection string.
 
     > **Note:**
     >
     > - For [Developer Tier clusters](/tidb-cloud/select-cluster-tier.md#developer-tier), when you connect to your cluster, you must include the prefix for your cluster in the user name and wrap the name with quotation marks. For more information, see [User name prefix](/tidb-cloud/select-cluster-tier.md#user-name-prefix).
     > - TiDB Cloud is MySQL-compatible, so you can connect to your cluster using any MySQL client tools. We recommend using [mysql — The MySQL Command-Line Client](https://dev.mysql.com/doc/refman/8.0/en/mysql.html) or [mysql — The MySQL Command-Line Client from MariaDB](https://mariadb.com/kb/en/mysql-command-line-client/).
+
+    </div>
+
+    <div label="Dedicated Tier">
+
+    To connect to a Dedicated Tier cluster, take the following steps:
+
+    1. Under **Step 1: Create traffic filter** in the dialog, specify the allowed IP addresses to connect to your cluster. If you have already configured the IP addresses in **Security Settings**, skip this step.
+
+    2. Under **Step 2: Download TiDB cluster CA** in the dialog, click **Download TiDB cluster CA** for TLS connection to TiDB clusters. The TiDB cluster CA supports TLS 1.2 version by default.
+
+    3. Under **Step 3: Connect with a SQL client** in the dialog, click the tab of your preferred connection method, and then refer to the connection string and sample code on the tab to connect to your cluster.
+
+    </div>
+    </SimpleTab>
 
 4. After logging into your TiDB cluster, you can use the following SQL statement to validate the connection:
 
@@ -121,7 +146,11 @@ We provide Capital Bikeshare sample data for you to easily import data and run s
 
 1. Navigate to the **Clusters** page.
 
-2. In the area of your newly created cluster, click **...** in the upper-right corner, and select **Import Data**. The **Data Import** page is displayed.
+2. In the area of your newly created cluster, click **...** in the upper-right corner and select **Import Data**. The **Data Import** page is displayed.
+
+    > **Tip:**
+    >
+    > Alternatively, you can also click the name of your newly created cluster on the **Clusters** page and click **Import Data** in the **Import** area.
 
 3. Fill in the import parameters:
 

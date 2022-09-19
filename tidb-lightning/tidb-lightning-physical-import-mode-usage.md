@@ -9,7 +9,7 @@ This document introduces how to use the physical import mode in TiDB Lightning, 
 
 ## Configure and use the physical import mode
 
-You can use the following configuration file to execute data import using Physical Import Mode:
+You can use the following configuration file to execute data import using the physical import mode:
 
 ```toml
 [lightning]
@@ -48,7 +48,7 @@ password = ""
 status-port = 10080
 # Required. The address of any pd-server from the cluster.
 pd-addr = "172.16.31.4:2379"
-# tidb-lightning import the TiDB library, and generates some logs.
+# tidb-lightning imports the TiDB library, and generates some logs.
 # Set the log level of the TiDB library.
 log-level = "error"
 
@@ -73,7 +73,7 @@ analyze = "optional"
 
 For the complete configuration file, refer to [the configuration file and command line parameters](/tidb-lightning/tidb-lightning-configuration.md).
 
-### Conflict detection
+## Conflict detection
 
 Conflicting data refers to two or more records with the same PK/UK column data. When the data source contains conflicting data, the actual number of rows in the table is different from the total number of rows returned by the query using unique index.
 
@@ -133,7 +133,7 @@ You can manually identify the records that need to be retained and insert these 
 - **Upgrade the hardware of the node where Lightning is deployed, especially the CPU and the storage device of `sorted-key-dir`.**
 - **Use the [parallel import](/tidb-lightning/tidb-lightning-distributed-import.md) feature to achieve horizontal scaling.**
 
-Lightning provides some concurrency-related configurations to affect Physical Import Mode import performance. However, from long-term experience, it is recommended to keep the following four configuration items in the default value. Adjusting the four configuration items does not bring significant performance boost.
+TiDB Lightning provides some concurrency-related configurations to affect import performance in the physical import mode. However, from long-term experience, it is recommended to keep the following four configuration items in the default value. Adjusting the four configuration items does not bring significant performance boost.
 
 ```
 [lightning]

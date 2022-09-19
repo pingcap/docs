@@ -6,41 +6,59 @@ category: intro
 
 # TiDB Cloud Introduction
 
-[TiDB Cloud](https://pingcap.com/products/tidbcloud) is a fully-managed Database-as-a-Service (DBaaS) that brings everything great about TiDB to your cloud, and lets you focus on your applications, not the complexities of your database.
+[TiDB Cloud](https://www.pingcap.com/tidb-cloud/) is a fully-managed Database-as-a-Service (DBaaS) that brings [TiDB](https://docs.pingcap.com/tidb/stable/overview), an open-source Hybrid Transactional and Analytical Processing (HTAP) database, to your cloud. TiDB Cloud offers an easy way to deploy and manage databases to let you focus on your applications, not the complexities of the databases. You can create TiDB Cloud clusters to quickly build mission-critical applications on Google Cloud Platform (GCP) and Amazon Web Services (AWS).
+
+![TiDB Cloud Overview](/media/tidb-cloud/tidb-cloud-overview.png)
+
+## Why TiDB Cloud
+
+TiDB Cloud allows you with little or no training to handle complex tasks such as infrastructure management and cluster deployment easily.
+
+- Developers and database administrators (DBAs) can handle a large amount of online traffic effortlessly and rapidly analyze a large volume of data across multiple datasets.
+
+- Enterprises of all sizes can easily deploy and manage TiDB Cloud to adapt to your business growth without prepayment.
 
 Watch the following video to learn more about TiDB Cloud:
 
 <iframe width="600" height="450" src="https://www.youtube.com/embed/skCV9BEmjbo" title="Why TiDB Cloud?" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
-## Why TiDB Cloud
+With TiDB Cloud, you can get the following key features:
 
-- Fully-Managed TiDB Service
+- **Fast and Customized Scaling**
 
-    Deploy, scale, and manage TiDB clusters with a few clicks, through an easy-to-use web-based management platform.
+    Elastically and transparently scale to hundreds of nodes for critical workloads while maintaining ACID transactions. No need to bother with sharding. And you can scale your performance and storage nodes separately according to your business needs.
 
-- Multi-Cloud Support
+- **MySQL Compatibility**
 
-    Stay flexible without cloud vendor lock-in. TiDB Cloud is currently available on AWS and GCP, with more platforms on the way.
+    Increase productivity and shorten time-to-market for your applications with TiDB’s MySQL compatibility. Easily migrate data from existing MySQL instances without the need to rewrite code.
 
-- Highly Resilient
+- **High Availability and Reliability**
 
-    Data is replicated across multiple Availability Zones and backed up daily to ensure business continuity for mission-critical applications.
+    Naturally high availability by design. Data replication across multiple Availability Zones, daily backups, and auto-failover ensure business continuity, regardless of hardware failure, network partition, or data center loss.
 
-- Productivity Boosting
+- **Real-Time Analytics**
 
-    Boost your productivity with easy deployment, operations, and monitoring on TiDB Cloud in just a few clicks.
+    Get real-time analytical query results with a built-in analytics engine. TiDB Cloud runs consistent analytical queries on current data without disturbing mission-critical applications.
 
-- Enterprise Grade Security
+- **Enterprise Grade Security**
 
-    Secure your data in dedicated networks and machines, with support for encryption both in flight and at rest.
+    Secure your data in dedicated networks and machines, with support for encryption both in-flight and at-rest. TiDB Cloud is certified by SOC 2 Type 2, ISO 27001:2013, ISO 27701, and fully compliant with GDPR.
 
-- World-Class Support
+- **Fully-Managed Service**
 
-    Get the same world-class support through our support portal, email, chat, or video conferencing.
+    Deploy, scale, monitor, and manage TiDB clusters with a few clicks, through an easy-to-use web-based management platform.
 
-- Simple Pricing Plans
+- **Multi-Cloud Support**
+
+    Stay flexible without cloud vendor lock-in. TiDB Cloud is currently available on AWS and GCP.
+
+- **Simple Pricing Plans**
 
     Pay only for what you use, with transparent and upfront pricing with no hidden fees.
+
+- **World-Class Support**
+
+    Get world-class support through our support portal, <a href="mailto:tidbcloud-support@pingcap.com">email</a>, chat, or video conferencing.
 
 ## Architecture
 
@@ -56,4 +74,4 @@ Watch the following video to learn more about TiDB Cloud:
 
 - Your VPC
 
-    You can connect to your TiDB cluster via a VPC peering connection. Refer to [Set up VPC Peering Connection](/tidb-cloud/set-up-vpc-peering-connections.md) for details.
+    You can connect to your TiDB cluster via private endpoint connection or VPC peering connection. Refer to [Set Up Private Endpoint Connections](/tidb-cloud/set-up-private-endpoint-connections.md) or [Set up VPC Peering Connection](/tidb-cloud/set-up-vpc-peering-connections.md) for details.
