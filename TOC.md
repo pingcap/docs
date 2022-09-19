@@ -178,6 +178,7 @@
     - [Performance Tuning Overview](/performance-tuning-overview.md)
     - [Performance Analysis and Tuning](/performance-tuning-methods.md)
     - [Performance Tuning Practices for OLTP Scenarios](/performance-tuning-practices.md)
+    - [Latency Breakdown](/latency-breakdown.md)
   - Configuration Tuning
     - System Tuning
       - [Operating System Tuning](/tune-operating-system.md)
@@ -359,9 +360,6 @@
     - Key Features
       - [Checkpoints](/tidb-lightning/tidb-lightning-checkpoints.md)
       - [Table Filter](/table-filter.md)
-      - [Backends](/tidb-lightning/tidb-lightning-backends.md)
-      - [Physical Import Mode](/tidb-lightning/tidb-lightning-physical-import-mode.md)
-      - [Physical Import Mode Usage](/tidb-lightning/tidb-lightning-physical-import-mode-usage.md)
       - [Import Data in Parallel](/tidb-lightning/tidb-lightning-distributed-import.md)
       - [Error Resolution](/tidb-lightning/tidb-lightning-error-resolution.md)
       - [Web Interface](/tidb-lightning/tidb-lightning-web-interface.md)
@@ -371,6 +369,12 @@
       - [SQL](/tidb-lightning/tidb-lightning-data-source.md#sql)
       - [Parquet](/tidb-lightning/tidb-lightning-data-source.md#parquet)
       - [Customized File](/tidb-lightning/tidb-lightning-data-source.md#match-customized-files)
+    - Physical Import Mode
+      - [Requirements and Limitations](/tidb-lightning/tidb-lightning-physical-import-mode.md)
+      - [Use Physical Import Mode](/tidb-lightning/tidb-lightning-physical-import-mode-usage.md)
+    - Logical Import Mode
+      - [Requirements and Limitations](/tidb-lightning/tidb-lightning-logical-import-mode.md)
+      - [Use Logical Import Mode](/tidb-lightning/tidb-lightning-logical-import-mode-usage.md)
     - [Tutorial](/get-started-with-tidb-lightning.md)
     - [Deploy](/tidb-lightning/deploy-tidb-lightning.md)
     - [Configure](/tidb-lightning/tidb-lightning-configuration.md)
@@ -586,7 +590,6 @@
       - [`ALTER PLACEMENT POLICY`](/sql-statements/sql-statement-alter-placement-policy.md)
       - [`ALTER TABLE`](/sql-statements/sql-statement-alter-table.md)
       - [`ALTER TABLE COMPACT`](/sql-statements/sql-statement-alter-table-compact.md)
-      - [`ALTER TABLE SET TIFLASH MODE`](/sql-statements/sql-statement-set-tiflash-mode.md)
       - [`ALTER USER`](/sql-statements/sql-statement-alter-user.md)
       - [`ANALYZE TABLE`](/sql-statements/sql-statement-analyze-table.md)
       - [`BACKUP`](/sql-statements/sql-statement-backup.md)
@@ -806,6 +809,7 @@
         - [`VARIABLES_INFO`](/information-schema/information-schema-variables-info.md)
         - [`VIEWS`](/information-schema/information-schema-views.md)
       - [`METRICS_SCHEMA`](/metrics-schema.md)
+    - [Metadata Lock](/metadata-lock.md)
   - UI
     - TiDB Dashboard
       - [Overview](/dashboard/dashboard-intro.md)
@@ -902,6 +906,7 @@
     - [5.4.1](/releases/release-5.4.1.md)
     - [5.4.0](/releases/release-5.4.0.md)
   - v5.3
+    - [5.3.3](/releases/release-5.3.3.md)
     - [5.3.2](/releases/release-5.3.2.md)
     - [5.3.1](/releases/release-5.3.1.md)
     - [5.3.0](/releases/release-5.3.0.md)
