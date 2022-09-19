@@ -226,7 +226,7 @@ The following is an example:
 CREATE TABLE t(a INT, b INT);
 CREATE TABLE s(a INT, b INT);
 EXPLAIN SELECT (a, b) NOT IN (SELECT * FROM s) FROM t;
-EXPLAIN SELECT * FROM t WHERE (a, b) NOT IN (select * FROM s);
+EXPLAIN SELECT * FROM t WHERE (a, b) NOT IN (SELECT * FROM s);
 ```
 
 ```sql
@@ -242,7 +242,7 @@ tidb> EXPLAIN SELECT (a, b) NOT IN (SELECT * FROM s) FROM t;
 +-----------------------------+----------+-----------+---------------+---------------------------------------------------------------------------------------------+
 5 rows in set (0.00 sec)
 
-tidb> EXPLAIN SELECT * FROM t WHERE (a, b) NOT IN (select * FROM s);
+tidb> EXPLAIN SELECT * FROM t WHERE (a, b) NOT IN (SELECT * FROM s);
 +-----------------------------+----------+-----------+---------------+----------------------------------------------------------------------------------+
 | id                          | estRows  | task      | access object | operator info                                                                    |
 +-----------------------------+----------+-----------+---------------+----------------------------------------------------------------------------------+
