@@ -11,7 +11,7 @@ This document describes how to use SQL and various programming languages to quer
 
 ## Before you begin
 
-The following content will take the [Bookshop](/develop/dev-guide-bookshop-schema-design.md) application as an example to show how to query data from a single table in TiDB.
+The following content takes the [Bookshop](/develop/dev-guide-bookshop-schema-design.md) application as an example to show how to query data from a single table in TiDB.
 
 Before querying data, make sure that you have completed the following steps:
 
@@ -38,8 +38,6 @@ In the database of the Bookshop application, the `authors` table stores the basi
 <div label="SQL" value="sql">
 
 Execute the following SQL statement in a MySQL client:
-
-{{< copyable "sql" >}}
 
 ```sql
 SELECT id, name FROM authors;
@@ -69,15 +67,12 @@ The output is as follows:
 </div>
 <div label="Java" value="java">
 
-In Java, authors' basic information can be stored by declaring a class `Author`. You should choose appropriate Java data types according to the [type](/data-type-overview.md) and [value range](/data-type-numeric.md) in the database. For example:
+In Java, to store the basic information of authors, you can declare a class `Author`. You should choose appropriate Java data types according to the [Data types](/data-type-overview.md) and [Value range](/data-type-numeric.md) in the database. For example:
 
 - Use a variable of type `Int` to store data of type `int`.
 - Use a variable of type `Long` to store data of type `bigint`.
 - Use a variable of type `Short` to store data of type `tinyint`.
 - Use a variable of type `String` to store data of type `varchar`.
-- ...
-
-{{< copyable "java" >}}
 
 ```java
 public class Author {
@@ -93,12 +88,10 @@ public class Author {
 }
 ```
 
-{{< copyable "java" >}}
-
 ```java
 public class AuthorDAO {
 
-    // Omit initialization of instance variables...
+    // Omit initialization of instance variables.
 
     public List<Author> getAuthors() throws SQLException {
         List<Author> authors = new ArrayList<>();
@@ -120,23 +113,21 @@ public class AuthorDAO {
 
 - After [connecting to TiDB using the JDBC driver](/develop/dev-guide-connect-to-tidb.md#jdbc), you can create a `Statement` object with `conn.createStatus()`.
 - Then call `stmt.executeQuery("query_sql")` to initiate a database query request to TiDB.
-- The query results will be stored in a `ResultSet` object. By traversing `ResultSet`, the returned results can be mapped to the `Author` object.
+- The query results are stored in a `ResultSet` object. By traversing `ResultSet`, the returned results can be mapped to the `Author` object.
 
 </div>
 </SimpleTab>
 
 ## Filter results
 
-You can use the `WHERE` statement to filter query results.
+To filter query results, you can use the `WHERE` statement.
 
-For example, the following command will query authors who were born in 1998 among all authors:
+For example, the following command queries authors who were born in 1998 among all authors:
 
 <SimpleTab groupId="language">
 <div label="SQL" value="sql">
 
 Add filter conditions in the `WHERE` statement:
-
-{{< copyable "sql" >}}
 
 ```sql
 SELECT * FROM authors WHERE birth_year = 1998;
@@ -147,11 +138,9 @@ SELECT * FROM authors WHERE birth_year = 1998;
 
 In Java, you can use the same SQL to handle data query requests with dynamic parameters.
 
-This can be done by concatenating parameters into a SQL statement. However, this method will pose a potential [SQL Injection](https://en.wikipedia.org/wiki/SQL_injection) risk to the security of the application.
+This can be done by concatenating parameters into a SQL statement. However, this method poses a potential [SQL Injection](https://en.wikipedia.org/wiki/SQL_injection) risk to the security of the application.
 
-To deal with such queries, use a [prepared statement](/develop/dev-guide-prepared-statement.md) instead of a normal statement.
-
-{{< copyable "java" >}}
+To deal with such queries, use a [Prepared statement](/develop/dev-guide-prepared-statement.md) instead of a normal statement.
 
 ```java
 public List<Author> getAuthorsByBirthYear(Short birthYear) throws SQLException {
@@ -178,14 +167,12 @@ public List<Author> getAuthorsByBirthYear(Short birthYear) throws SQLException {
 
 ## Sort results
 
-With the `ORDER BY` statement, you can sort query results.
+To sort query results, you can use the `ORDER BY` statement.
 
 For example, the following SQL statement is to get a list of the youngest authors by sorting the `authors` table in descending order (`DESC`) according to the `birth_year` column.
 
 <SimpleTab groupId="language">
 <div label="SQL" value="sql">
-
-{{< copyable "sql" >}}
 
 ```sql
 SELECT id, name, birth_year
@@ -196,8 +183,6 @@ ORDER BY birth_year DESC;
 </div>
 
 <div label="Java" value="java">
-
-{{< copyable "" >}}
 
 ```java
 public List<Author> getAuthorsSortByBirthYear() throws SQLException {
@@ -247,12 +232,10 @@ The result is as follows:
 
 ## Limit the number of query results
 
-You can use the `LIMIT` statement to limit the number of query results.
+To limit the number of query results, you can use the `LIMIT` statement.
 
 <SimpleTab groupId="language">
 <div label="SQL" value="sql">
-
-{{< copyable "java" >}}
 
 ```sql
 SELECT id, name, birth_year
@@ -264,8 +247,6 @@ LIMIT 10;
 </div>
 
 <div label="Java" value="java">
-
-{{< copyable "" >}}
 
 ```java
 public List<Author> getAuthorsWithLimit(Integer limit) throws SQLException {
@@ -324,8 +305,6 @@ For example, if you want to know which years there are more authors born, you ca
 <SimpleTab groupId="language">
 <div label="SQL" value="sql">
 
-{{< copyable "java" >}}
-
 ```sql
 SELECT birth_year, COUNT (DISTINCT id) AS author_count
 FROM authors
@@ -336,8 +315,6 @@ ORDER BY author_count DESC;
 </div>
 
 <div label="Java" value="java">
-
-{{< copyable "" >}}
 
 ```java
 public class AuthorCount {
