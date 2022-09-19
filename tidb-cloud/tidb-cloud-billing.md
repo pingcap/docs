@@ -19,9 +19,9 @@ After you set up the payment method, TiDB Cloud will generate an invoice once yo
 
 > **Note:**
 >
-> If you sign up for TiDB Cloud through [AWS Marketplace](https://aws.amazon.com/marketplace), you can pay through your AWS account directly but cannot add payment methods or download invoices in the TiDB Cloud portal.
+> If you sign up for TiDB Cloud through [AWS Marketplace](https://aws.amazon.com/marketplace) or [Google Cloud Marketplace](https://cloud.google.com/marketplace), you can pay through your AWS account directly but cannot add payment methods or download invoices in the TiDB Cloud portal.
 
-After you contact our sales for receiving invoices on a monthly basis or if you signed up for TiDB Cloud through AWS Marketplace, TiDB Cloud will generate the invoice for the previous month at the beginning of each month.
+After you contact our sales for receiving invoices on a monthly basis or if you signed up for TiDB Cloud through AWS Marketplace or Google Cloud Marketplace, TiDB Cloud will generate the invoice for the previous month at the beginning of each month.
 
 Invoice costs include TiDB cluster usage consumption, discounts, backup storage costs, support service cost, credit consumption, and data transmission costs in your organization.
 
