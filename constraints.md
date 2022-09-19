@@ -119,7 +119,7 @@ ERROR 1062 (23000): Duplicate entry 'bill' for key 'username'
 
 In the preceding optimistic example, the unique check was deferred until the transaction is committed. This resulted in a duplicate key error, because the value `bill` was already present.
 
-You can disable this behavior by setting [`tidb_constraint_check_in_place`](/system-variables.md#tidb_constraint_check_in_place) to `ON`. This variable is only applicable to optimistic transactions. For pessimistic transactions, you can control this behavior using the [`tidb_constraint_check_in_place_pessimistic`](/system-variables.md#tidb_constraint_check_in_place_pessimistic-new-in-v630) variable. When `tidb_constraint_check_in_place=ON`, the unique constraint is checked when a statement is executed.
+You can disable this behavior by setting [`tidb_constraint_check_in_place`](/system-variables.md#tidb_constraint_check_in_place) to `ON`. When `tidb_constraint_check_in_place=ON`, the unique constraint is checked when a statement is executed. Note that this variable is only applicable to optimistic transactions. For pessimistic transactions, you can control this behavior using the [`tidb_constraint_check_in_place_pessimistic`](/system-variables.md#tidb_constraint_check_in_place_pessimistic-new-in-v630) variable.
 
 For example:
 
@@ -251,7 +251,7 @@ To achieve better performance of pessimistic transactions, you can set the [`tid
     ERROR 9007 (HY000): Write conflict, txnStartTS=435688780611190794, conflictStartTS=435688783311536129, conflictCommitTS=435688783311536130, key={tableID=74, indexID=1, indexValues={bill, }} primary={tableID=74, indexID=1, indexValues={bill, }}, reason=LazyUniquenessCheck [try again later]
     ```
 
-- When this variable is disabled, executing a DML statement in a pessimistic transaction might return an `8147: LazyUniquenessCheckFailure` error.
+- When this variable is disabled, executing a DML statement in a pessimistic transaction might return an error `8147: LazyUniquenessCheckFailure`.
 
     > **Note:**
     >
