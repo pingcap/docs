@@ -246,7 +246,7 @@ PARTITION BY RANGE COLUMNS(`report_date`)
 
 The optional parameter `NULL PARTITION` creates a partition with the definition as `PARTITION P_NULL VALUES LESS THAN (<minimum value of the column type>)`, only matching when the partitioning expression evaluates to `NULL`. See [Handling of NULL with Range partitioning](#handling-of-null-with-range-partitioning), which explains that `NULL` is considered to be less than any other value. 
 
-The optional parameter `MAXVALUE PARTITION` creates a last partition as `PARTITION P_MAXVALUE VALUES LESS THAN (MAXVALUE)`.
+The optional parameter `MAXVALUE PARTITION` creates the last partition as `PARTITION P_MAXVALUE VALUES LESS THAN (MAXVALUE)`.
 
 #### ALTER INTERVAL partitioned tables
 
