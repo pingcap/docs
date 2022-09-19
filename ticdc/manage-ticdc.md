@@ -619,7 +619,7 @@ enable-sync-point = true
 # The default value is "10m" and the minimum value is "30s".
 sync-point-interval = "5m"
 
-# Specifies how long the data is retended by Syncpoint in the downstream table. When this duration is exceeded, the data is cleaned up.
+# Specifies how long the data is retained by Syncpoint in the downstream table. When this duration is exceeded, the data is cleaned up.
 # The format is in h m s. For example, "24h30m30s".
 # The default value is "24h".
 sync-point-retention = "1h"

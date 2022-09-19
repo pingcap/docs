@@ -30,7 +30,7 @@ sync-point-retention = "1h"
 To obtain `ts-map`, execute the following SQL statement in the downstream TiDB cluster:
 
 ```sql
-mysql> select * from tidb_cdc.syncpoint_v1;
+select * from tidb_cdc.syncpoint_v1;
 +------------------+----------------+--------------------+--------------------+---------------------+
 | ticdc_cluster_id | changefeed     | primary_ts         | secondary_ts       | created_at          |
 +------------------+----------------+--------------------+--------------------+---------------------+
@@ -41,7 +41,7 @@ mysql> select * from tidb_cdc.syncpoint_v1;
 The fields in the preceding `syncpoint_v1` table are described as follows:
 
 - `ticdc_cluster_id`: The ID of the TiCDC cluster in this record.
-- `changefeed`: The ID of the changefeed that in this record. Because different TiCDC clusters might have changefeeds with the same name, you need to confirm the `ts-map` inserted by a changefeed with the TiCDC cluster ID and changefeed ID.
+- `changefeed`: The ID of the changefeed in this record. Because different TiCDC clusters might have changefeeds with the same name, you need to confirm the `ts-map` inserted by a changefeed with the TiCDC cluster ID and changefeed ID.
 - `primary_ts`: The timestamp of the upstream database snapshot.
 - `secondary_ts`: The timestamp of the downstream database snapshot.
 - `created_at`: The time when this record is inserted.
