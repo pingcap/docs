@@ -132,9 +132,9 @@ syncers:
     # The duration of the automatic safe mode.
     # If this value is not set or set to "", the default value is twice of `checkpoint-flush-interval` (30s by default), which is 60s.
     # If this value is set to "0s", DM reports an error when it automatically enters the safe mode.
-    # If this value is set to a normal value, such as "1m30s", when the task pauses abnormally, DM fails to
-    # record safemode_exit_point, or DM exits unexpectedly, the duration of the automatic safe mode is set
-    # to 1 minute 30 seconds. For details, see [Automatic safe mode](https://docs.pingcap.com/tidb/stable/dm-safe-mode#automatically-enable).
+    # If this value is set to a normal value, such as "1m30s", when the task pauses abnormally, when DM fails to
+    # record safemode_exit_point, or when DM exits unexpectedly, the duration of the automatic safe mode is set to
+    # 1 minute 30 seconds.
     safe-mode-duration: "60s"
 
     # If set to true, DM compacts as many upstream statements on the same rows as possible into a single statements without increasing latency.
