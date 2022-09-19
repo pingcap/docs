@@ -911,7 +911,7 @@ For a jq formatted output, see [jq-formatted-json-output-usage](#jq-formatted-js
 
 #### Get a store
 
-To display information of all stores, you can use the `store` command:
+To display information of all stores, run the following command:
 
 ```bash
 store
@@ -924,7 +924,7 @@ store
 }
 ```
 
-To get the store with the store id of 1, you can use the following command:
+To get the store with id of 1, run the following command:
 
 ```bash
 store 1
@@ -936,71 +936,72 @@ store 1
 
 #### Delete a store
 
-To delete the store with the store id of 1, you can use the following command:
+To delete the store with id of 1, run the following command:
 
 ```bash
 store delete 1
 ```
 
-To cancel the deletion of Offline state stores which are deleted using `store delete`, you can use the `store cancel-delete` command. After canceling, the state of the store changes from Offline to Up. Note that the `store cancel-delete` command cannot change a Tombstone state store to Up.
+To cancel deleting `Offline` state stores which are deleted using `store delete`, run the `store cancel-delete` command. After canceling, the state of the store changes from `Offline` to `Up`. Note that the `store cancel-delete` command cannot change a `Tombstone` state store to `Up`.
 
-To cancel the deletion of stores that have been deleted using `store delete`, you can use the following `store cancel-delete` command:
-
-```bash
-store cancel-delete 1                // Cancel the deletion of stores with the store id of 1
-
-To delete all Tombstone states stores, you can use the following `store remove-tombstone` command:
+To cancel deleting the store with id of 1, run the following command:
 
 ```bash
-store remove-tombstone              // Remove stores that are in Tombstone state
+store cancel-delete 1
+```
+
+To delete all `Tombstone` states stores, run the following command:
+
+```bash
+store remove-tombstone
 ```
 
 > **Note:**
 >
-> If the PD leader is switched during store deletion, you need to modify the store limit manually using the [`store limit`](#store-limit-command) command.
+> If the PD leader changes during store deletion, you need to modify the store limit manually using the [`store limit`](#configure-store-scheduling-speed) command.
 
-#### Manage labels of a store
+#### Manage store labels
 
-To manage the labels of a store, you can use the `store label` command.
+To manage the labels of a store, run the `store label` command.
 
-To set the label with the `"zone"` key to `"cn"` for the store with the store id of 1, you can use the following command:
+- To set a label with the key being `"zone"` and value being `"cn"` to the store with the store id of 1, run the following command:
 
-```bash
-store label 1 zone=cn
-```
+    ```bash
+    store label 1 zone=cn
+    ```
 
-To update the label with the `"zone"` key from `"cn"` to `"us"` for the store with the store id of 1, you can use the following command:
+- To update the label of a store, for example, changing the value of the key `"zone"` from `"cn"` to `"us"` for the store with id of 1, run the following command:
 
-```bash
-store label 1 zone=us
-```
+    ```bash
+    store label 1 zone=us
+    ```
 
-To rewrite labels for all stores with the store id of 1, you can use the `--rewrite` option and all labels are overwritten:
+- To rewrite all labels of a store with id of 1, use the `--rewrite` option. Note that this option overwrites all earlier setting labels:
 
 ```bash
 store label 1 region=us-est-1 disk=ssd --rewrite
 ```
 
-To delete the label with the `"disk"` key with the store id od 1, you can use the `--delete` option:
+- To delete the `"disk"` label for the store with id of 1, use the `--delete` option:
 
-```bash
-store label 1 disk --delete
-```
+    ```bash
+    store label 1 disk --delete
+    ```
 
 > **Note:**
 >
-> - The label update of a store uses the merge strategy. If the store label in the TiKV configuration file is modified, after the process restarts, PD merges and updates the store label stored by itself, and persists the merged results.
-> - To manage labels of a store using TiUP uniformly, before the cluster restarts, you can use the `store label <id> --force` command to empty the labels stored by PD.
+> - The label of a store is updated by merging the label in TiKV and that in PD. Specifically, after you modify a store label in the TiKV configuration file and restart the cluster, PD merges its own store label with the TiKV store label, updates the label, and persists the merged result.
+> - To manage labels of a store using TiUP, you can run the `store label <id> --force` command to empty the labels stored in PD before restarting the cluster.
 
-#### `store weight` command
+#### Configure store weight
 
-To set the leader weight to 5 and Region weight to 10 for the store with the store id of 1, you can use the following command:
+To set the leader weight to 5 and Region weight to 10 for the store with id of 1, run the following command:
 
 ```bash
 store weight 1 5 10
 ```
 
-#### `store limit` command
+#### Configure store scheduling speed
 
 For more details about the principles and usage of `store limit`, see [`store limit`](/configure-store-limit.md).
 
