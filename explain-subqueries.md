@@ -152,7 +152,7 @@ EXPLAIN SELECT * FROM t3 WHERE t1_id NOT IN (SELECT id FROM t1 WHERE int_col < 1
 
 This query starts by reading the table `t3` and then probes the table `t1` based on the `PRIMARY KEY`. The join type is an _anti semi join_; anti because this example is for the non-existence of the value (`NOT IN`) and semi-join because only the first row needs to match before the join is rejected.
 
-## Null-aware semi join (`IN` and `= ANY` subquery)
+## Null-aware semi join (`IN` and `= ANY` subqueries)
 
 The value of `IN` and `= ANY` set operations is three-valued (`true`, `false`, and `NULL`). For the join type converted by these subqueries, TiDB needs to be aware of the `NULL` on both sides of the join key and process it in a special way.
 
