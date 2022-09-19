@@ -1,6 +1,6 @@
 ---
 title: Migrate and Merge MySQL Shards of Large Datasets to TiDB Cloud
-summary: Learn how to migrate and merge MySQL shards of Large Datasets to TiDB Cloud.
+summary: Learn how to migrate and merge MySQL shards of large datasets to TiDB Cloud.
 ---
 
 # Migrate and Merge MySQL Shards of Large Datasets to TiDB Cloud
