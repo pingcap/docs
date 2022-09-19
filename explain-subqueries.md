@@ -255,9 +255,9 @@ tidb> EXPLAIN SELECT * FROM t WHERE (a, b) NOT IN (select * FROM s);
 5 rows in set (0.00 sec)
 ```
 
-In the first query statement `EXPLAIN SELECT (a, b) NOT IN (SELECT * FROM s) FROM t;`, because columns `a` and `b` of tables `t` and `s` are NULLABLE, the left outer semi join converted by `NOT IN` subquery is null-aware. The difference is that NAAJ optimization also uses the NA-EQ as the hash join condition, which greatly speeds up the join calculation.
+In the first query statement `EXPLAIN SELECT (a, b) NOT IN (SELECT * FROM s) FROM t;`, since columns `a` and `b` of tables `t` and `s` are NULLABLE, the left outer semi join converted by `NOT IN` subquery is null-aware. The difference is that NAAJ optimization also uses the NA-EQ as the hash join condition, which greatly speeds up the join calculation.
 
-In the second query statement `EXPLAIN SELECT * FROM t WHERE (a, b) NOT IN (SELECT * FROM s);`, because columns `a` and `b` of tables `t` and `s` are NULLABLE, the anti semi join converted by `NOT IN` subquery is null-aware. The difference is that NAAJ optimization also uses the NA-EQ as the hash join condition, which greatly speeds up the join calculation.
+In the second query statement `EXPLAIN SELECT * FROM t WHERE (a, b) NOT IN (SELECT * FROM s);`, since columns `a` and `b` of tables `t` and `s` are NULLABLE, the anti semi join converted by `NOT IN` subquery is null-aware. The difference is that NAAJ optimization also uses the NA-EQ as the hash join condition, which greatly speeds up the join calculation.
 
 Currently, TiDB can only be null-aware of anti semi join and anti left outer semi join. Only the hash join type is supported and its build table should be fixed to the right table.
 
