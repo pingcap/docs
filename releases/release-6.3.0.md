@@ -52,7 +52,7 @@ In v6.3.0-DMR, the key new features and improvements are as follows:
 
     JSON is a popular data format adopted by a large number of programs. TiDB has introduced the [JSON support](/data-type-json.md) as experimental since an earlier version, compatible with MySQL's JSON data type and some JSON functions. In v6.3.0, the JSON support becomes GA, providing TiDB with richer data types, and further improving TiDB compatibility with MySQL.
 
-* Provide lightweight metadata lock to improve the DML success rate during DDL change [#37275](https://github.com/pingcap/tidb/issues/37275) @[wjhuang2016](https://github.com/wjhuang2016) **tw: Oreoxmt**
+* Provide lightweight metadata lock to improve the DML success rate during DDL change (experimental) [#37275](https://github.com/pingcap/tidb/issues/37275) @[wjhuang2016](https://github.com/wjhuang2016) **tw: Oreoxmt**
 
     TiDB uses the online asynchronous schema change algorithm to support changing metadata objects. When a transaction is executed, the transaction obtains the corresponding metadata snapshot at transaction start. If the metadata is changed during transaction, to ensure the data consistency, TiDB returns an `Information schema is changed` error and the transaction fails to commit. To solve the problem, TiDB v6.3.0 introduces [metadata lock](/metadata-lock.md) into the online DDL algorithm. To avoid most DML errors, TiDB coordinates the priority of DMLs and DDLs during table metadata change, and makes executing DDLs wait for the DMLs with old metadata to commit.
 
