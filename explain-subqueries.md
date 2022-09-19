@@ -202,7 +202,7 @@ In the second query statement `EXPLAIN SELECT * FROM t WHERE (a,b) IN (SELECT * 
 >
 > The `Exists` operator is also converted to semi join, but it is not null-aware.
 
-## Null-aware anti semi join (`NOT IN` and `!= ALL` subquery)
+## Null-aware anti semi join (`NOT IN` and `!= ALL` subqueries)
 
 The value of `NOT IN` and `!= ALL` set operations is three-valued (`true`, `false`, and `NULL`). For the join type converted by these subqueries, TiDB needs to be aware of the `NULL` on both sides of the join key and process it in a special way.
 
