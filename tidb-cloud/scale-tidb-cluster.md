@@ -9,7 +9,7 @@ aliases: ['/tidbcloud/beta/scale-tidb-cluter']
 > **Note:**
 >
 > - Currently, you cannot scale a [Developer Tier cluster](/tidb-cloud/select-cluster-tier.md#developer-tier).
-> - When a cluster is in the scaling status, you cannot perform any new scaling operations on it.
+> - When a cluster is in the **MODIFYING** status, you cannot perform any new scaling operations on it.
 
 You can scale a TiDB cluster in the following dimensions:
 

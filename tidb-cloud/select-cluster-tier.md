@@ -61,7 +61,7 @@ Once a Developer Tier cluster remains idle for 24 hours, the cluster hibernates 
 
 The hibernation does not affect your data stored in the cluster but only stops the monitoring information collection and computing resource consumption.
 
-During the hibernation, the status of the cluster is still displayed as **Normal**, and you can see a message about hibernation in the TiDB Cloud console.
+During the hibernation, the status of the cluster is still displayed as **AVAILABLE**, and you can see a message about hibernation in the TiDB Cloud console.
 
 Anytime you want to use your Developer Tier cluster again, just [connect to your cluster](/tidb-cloud/connect-to-tidb-cluster.md) using your MySQL client driver or ORM framework as you usually do. The cluster will be resumed within 50 seconds and back to service automatically.
 
