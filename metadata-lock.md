@@ -7,6 +7,10 @@ summary: Introduce the concept, principles, and implementation details of metada
 
 This document introduces the metadata lock in TiDB.
 
+> **Warning:**
+>
+> This is still an experimental feature. It is **NOT** recommended that you use it in the production environment.
+
 ## Concept
 
 TiDB uses the online asynchronous schema change algorithm to support changing metadata objects. When a transaction is executed, it obtains the corresponding metadata snapshot at the transaction start. If the metadata is changed during a transaction, to ensure data consistency, TiDB returns an `Information schema is changed` error and the transaction fails to commit.
