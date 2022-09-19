@@ -156,7 +156,7 @@ To enable private DNS using your AWS CLI, copy the command and run it in your AW
 aws ec2 modify-vpc-endpoint --region <your_region> --vpc-endpoint-id <your_vpc_endpoint_id> --private-dns-enabled
 ```
 
-`<your_region>` parameter is the region you have selected in [Step 2. Check the service endpoint region](#step-2-check-the-service-endpoint-region).
+`<your_region>` is the region you have selected in [Step 2. Check the service endpoint region](#step-2-check-the-service-endpoint-region).
 
 </div>
 </SimpleTab>
