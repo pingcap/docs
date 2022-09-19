@@ -15,16 +15,14 @@ You can see the current status of each running cluster on the cluster page.
 
 | Cluster status | Description |
 |:--|:--|
-| **Normal** | Normal running (including data migration) |
-| **Creating** | Creating the cluster |
-| **Importing** | The cluster is importing data |
-| **Scaling** | Scaling the TiDB, TiKV, or TiFlash nodes |
-| **Upgrading** | Upgrading the TiDB version |
-| **Unavailable** | The TiDB Cloud service is not available |
-| **Unhealthy** | Part of nodes are unavailable, not enough replicas, and so on |
-| **Recovering** | Backup recovery |
-| **Paused** | The cluster is paused |
-| **Resuming** | Resuming the cluster |
+| **Available** | The cluster is healthy and available. |
+| **Creating** | The cluster is being created. The DB cluster is inaccessible while it is being created. |
+| **Importing** | Importing data into the cluster. |
+| **Modifying** | The cluster is being modified. |
+| **Unavailable** | The cluster has failed and TiDB can't recover it. |
+| **Paused** | The cluster is paused. |
+| **Resuming** | The cluster is resuming from a pause. |
+| **Restoring** | The cluster is currently being restored from a backup. |
 
 ### TiDB node status
 
