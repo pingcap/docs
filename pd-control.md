@@ -911,7 +911,7 @@ For a jq formatted output, see [jq-formatted-json-output-usage](#jq-formatted-js
 
 #### Get a store
 
-To display information of all stores, run the following command:
+To display the information of all stores, run the following command:
 
 ```bash
 store
@@ -942,7 +942,7 @@ To delete the store with id of 1, run the following command:
 store delete 1
 ```
 
-To cancel deleting `Offline` state stores which are deleted using `store delete`, run the `store cancel-delete` command. After canceling, the state of the store changes from `Offline` to `Up`. Note that the `store cancel-delete` command cannot change a `Tombstone` state store to `Up`.
+To cancel deleting `Offline` state stores which are deleted using `store delete`, run the `store cancel-delete` command. After canceling, the store changes from `Offline` to `Up`. Note that the `store cancel-delete` command cannot change a `Tombstone` state store to the `Up` state.
 
 To cancel deleting the store with id of 1, run the following command:
 
@@ -950,7 +950,7 @@ To cancel deleting the store with id of 1, run the following command:
 store cancel-delete 1
 ```
 
-To delete all `Tombstone` states stores, run the following command:
+To delete all stores in `Tombstone` state, run the following command:
 
 ```bash
 store remove-tombstone
@@ -964,7 +964,7 @@ store remove-tombstone
 
 To manage the labels of a store, run the `store label` command.
 
-- To set a label with the key being `"zone"` and value being `"cn"` to the store with the store id of 1, run the following command:
+- To set a label with the key being `"zone"` and value being `"cn"` to the store with id of 1, run the following command:
 
     ```bash
     store label 1 zone=cn
@@ -976,11 +976,11 @@ To manage the labels of a store, run the `store label` command.
     store label 1 zone=us
     ```
 
-- To rewrite all labels of a store with id of 1, use the `--rewrite` option. Note that this option overwrites all earlier setting labels:
+- To rewrite all labels of a store with id of 1, use the `--rewrite` option. Note that this option overwrites all existing labels:
 
-```bash
-store label 1 region=us-est-1 disk=ssd --rewrite
-```
+    ```bash
+    store label 1 region=us-est-1 disk=ssd --rewrite
+    ```
 
 - To delete the `"disk"` label for the store with id of 1, use the `--delete` option:
 
@@ -1003,7 +1003,7 @@ store weight 1 5 10
 
 #### Configure store scheduling speed
 
-For more details about the principles and usage of `store limit`, see [`store limit`](/configure-store-limit.md).
+You can set the scheduling speed of stores by using `store limit`. For more details about the principles and usage of `store limit`, see [`store limit`](/configure-store-limit.md).
 
 ```bash
 >> store limit                         // Show the speed limit of adding-peer operations and the limit of removing-peer operations per minute in all stores
@@ -1020,7 +1020,7 @@ For more details about the principles and usage of `store limit`, see [`store li
 > **Note:**
 >
 > - The original `region-add` and `region-remove` parameters of the `store limit` command are deprecated and are replaced with `add-peer` and `remove-peer`.
-> - You can use `pd-ctl` to check the status (Up, Disconnect, Offline, Down, or Tombstone) of a TiKV store. For the relationship between each status, refer to [Relationship between each status of a TiKV store](/tidb-scheduling.md#information-collection).
+> - You can use `pd-ctl` to check the state (`Up`, `Disconnect`, `Offline`, `Down`, or `Tombstone`) of a TiKV store. For the relationship between each state, refer to [Relationship between each state of a TiKV store](/tidb-scheduling.md#information-collection).
 
 ### `log [fatal | error | warn | info | debug]`
 
