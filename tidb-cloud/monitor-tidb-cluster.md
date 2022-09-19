@@ -16,7 +16,7 @@ You can see the current status of each running cluster on the cluster page.
 | Cluster status | Description |
 |:--|:--|
 | **AVAILABLE** | The cluster is healthy and available. |
-| ****CREATING** ** | The cluster is being created. The cluster is inaccessible while it is being created. |
+| **CREATING** | The cluster is being created. The cluster is inaccessible while it is being created. |
 | **IMPORTING** | Importing data into the cluster. |
 | **MODIFYING** | The cluster is being modified. |
 | **UNAVAILABLE** | The cluster has failed and TiDB cannot recover it. |
