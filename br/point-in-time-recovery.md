@@ -94,7 +94,7 @@ Testing scenario 2 (on-premises):
 
 ### Version compatibility check
 
-In v6.3.0, backup files generated after PITR are compressed in a new method. Small files are merged before being stored (to solve problems caused by too many small files). However, as a result, TiDB clusters of the earlier version are not compatible with backup data generated in v6.3 clusters. See the following table:
+In v6.3.0, backup files generated after PITR are compressed in a new method. Small files are merged before being stored (to solve problems caused by too many small files). However, TiDB clusters of the earlier version are not compatible with backup data generated in v6.3 clusters. See the following table:
 
 | Restore version (horizontal) \ Backup version (vertical)   | Use PITR v6.2.0 to restore TiDB v6.2.0 | Use PITR v6.3.0 to restore TiDB v6.3.0 |
 |  ----  |  ----  | ---- |
