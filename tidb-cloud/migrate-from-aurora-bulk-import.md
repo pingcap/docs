@@ -11,11 +11,16 @@ This document describes how to migrate data from Amazon Aurora MySQL to TiDB Clo
 
 To import data, perform the following steps:
 
-1. Navigate to the TiDB Clusters page and click the name of your target cluster. The overview page of your target cluster is displayed.
-2. In the cluster information pane on the left, click **Import**. The **Data Import Task** page is displayed.
+1. Navigate to the **Active Clusters** page.
+2. Find the area of your target cluster and click **Import Data** in the upper-right corner of the area. The **Data Import Task** page is displayed.
+
+    > **Tip:**
+    >
+    > Alternatively, you can also click the name of your target cluster on the **Active Clusters** page and click **Import Data** in the upper-right corner.
+
 3. Prepare source data according to [Learn how to create an Amazon S3 Bucket and prepare source data files](#learn-how-to-create-an-amazon-s3-bucket-and-prepare-source-data-files). You can see the advantages and disadvantages of different **Data Format** in the preparing data part.
 4. Fill in the **Data Source Type**, **Bucket URL**, and **Data Format** fields according to the specification of your source data.
-5. Fill in the **Username** and **Password** fields of the **Target Database** according to the connection settings of your cluster.
+5. Fill in the **Username** and **Password** fields of the **Target Cluster**.
 6. Create the bucket policy and role for cross-account access according to [Learn how to configure cross-account access](#learn-how-to-configure-cross-account-access).
 7. Click **Import**.
 
@@ -197,7 +202,7 @@ To migrate data from Aurora, you need to back up the schema of the database.
 
 ## Learn how to configure cross-account access
 
-The TiDB Cloud cluster and the S3 bucket are in different AWS accounts. To allow the TiDB Cloud cluster to access the source data files in the S3 bucket, you need to configure the cross-account access to Amazon S3. For more information, see [Configure the Amazon S3 access](/tidb-cloud/migrate-from-amazon-s3-or-gcs.md#step-2-configure-amazon-s3-access).
+The TiDB Cloud cluster and the S3 bucket are in different AWS accounts. To allow the TiDB Cloud cluster to access the source data files in the S3 bucket, you need to configure the cross-account access to Amazon S3. For more information, see [Configure Amazon S3 access](/tidb-cloud/config-s3-and-gcs-access.md#configure-amazon-s3-access).
 
 Once finished, you will have created a policy and role for cross-account. You can then continue with the configuration on the data import task panel of TiDB Cloud.
 

@@ -15,7 +15,18 @@ The following content will take the [Bookshop](/develop/dev-guide-bookshop-schem
 
 Before querying data, make sure that you have completed the following steps:
 
+<CustomContent platform="tidb">
+
 1. Build a TiDB cluster (using [TiDB Cloud](/develop/dev-guide-build-cluster-in-cloud.md) or [TiUP](/production-deployment-using-tiup.md) is recommended).
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+1. Build a TiDB cluster using [TiDB Cloud](/develop/dev-guide-build-cluster-in-cloud.md).
+
+</CustomContent>
+
 2. [Import table schema and sample data of the Bookshop application](/develop/dev-guide-bookshop-schema-design.md#import-table-structures-and-data).
 3. [Connect to TiDB](/develop/dev-guide-connect-to-tidb.md).
 
@@ -23,8 +34,8 @@ Before querying data, make sure that you have completed the following steps:
 
 In the database of the Bookshop application, the `authors` table stores the basic information of authors. You can use the `SELECT ... FROM ...` statement to query data from the database.
 
-<SimpleTab>
-<div label="SQL">
+<SimpleTab groupId="language">
+<div label="SQL" value="sql">
 
 Execute the following SQL statement in a MySQL client:
 
@@ -56,7 +67,7 @@ The output is as follows:
 ```
 
 </div>
-<div label="Java">
+<div label="Java" value="java">
 
 In Java, authors' basic information can be stored by declaring a class `Author`. You should choose appropriate Java data types according to the [type](/data-type-overview.md) and [value range](/data-type-numeric.md) in the database. For example:
 
@@ -120,8 +131,8 @@ You can use the `WHERE` statement to filter query results.
 
 For example, the following command will query authors who were born in 1998 among all authors:
 
-<SimpleTab>
-<div label="SQL">
+<SimpleTab groupId="language">
+<div label="SQL" value="sql">
 
 Add filter conditions in the `WHERE` statement:
 
@@ -132,7 +143,7 @@ SELECT * FROM authors WHERE birth_year = 1998;
 ```
 
 </div>
-<div label="Java">
+<div label="Java" value="java">
 
 In Java, you can use the same SQL to handle data query requests with dynamic parameters.
 

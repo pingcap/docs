@@ -58,7 +58,7 @@ The target TiKV cluster must have enough disk space to store the imported data. 
     {{< copyable "shell-regular" >}}
 
     ```shell
-    tiup dumpling -h ${ip} -P 3306 -u root -t 16 -r 200000 -F 256MiB -B my_db1 -f 'my_db1.table[12]' -o 's3://my-bucket/sql-backup?region=us-west-2'
+    tiup dumpling -h ${ip} -P 3306 -u root -t 16 -r 200000 -F 256MiB -B my_db1 -f 'my_db1.table[12]' -o 's3://my-bucket/sql-backup'
     ```
 
     Dumpling exports data in SQL files by default. You can specify a different file format by adding the `--filetype` option.
@@ -110,7 +110,7 @@ The target TiKV cluster must have enough disk space to store the imported data. 
 
     [mydumper]
     # The data source directory. The same directory where Dumpling exports data in "Step 1. Export all data from MySQL".
-    data-source-dir = "${data-path}" # A local path or S3 path. For example, 's3://my-bucket/sql-backup?region=us-west-2'.
+    data-source-dir = "${data-path}" # A local path or S3 path. For example, 's3://my-bucket/sql-backup'.
 
     [tidb]
     # The target TiDB cluster information.
@@ -142,7 +142,7 @@ The target TiKV cluster must have enough disk space to store the imported data. 
     - Check progress in [the monitoring dashboard](/tidb-lightning/monitor-tidb-lightning.md).
     - Check progress in [the TiDB Lightning web interface](/tidb-lightning/tidb-lightning-web-interface.md).
 
-4. After TiDB Lightning completes the import, it exits automatically. If you find the last 5 lines of its log print `the whole procedure completed`, the import is successful.
+4. After TiDB Lightning completes the import, it exits automatically. Check whether `tidb-lightning.log` contains `the whole procedure completed` in the last lines. If yes, the import is successful. If no, the import encounters an error. Address the error as instructed in the error message.
 
 > **Note:**
 >

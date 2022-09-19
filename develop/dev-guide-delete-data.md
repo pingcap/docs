@@ -37,7 +37,19 @@ This example only shows a simple use case of `DELETE`. For detailed information,
 The following are some best practices to follow when you delete data:
 
 - Always specify the `WHERE` clause in the `DELETE` statement. If the `WHERE` clause is not specified, TiDB will delete **_ALL ROWS_** in the table.
+
+<CustomContent platform="tidb">
+
 - Use [bulk-delete](#bulk-delete) when you delete a large number of rows (for example, more than ten thousand), because TiDB limits the size of a single transaction ([txn-total-size-limit](/tidb-configuration-file.md#txn-total-size-limit), 100 MB by default).
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+- Use [bulk-delete](#bulk-delete) when you delete a large number of rows (for example, more than ten thousand), because TiDB limits the size of a single transaction to 100 MB by default.
+
+</CustomContent>
+
 - If you delete all the data in a table, do not use the `DELETE` statement. Instead, use the [`TRUNCATE`](/sql-statements/sql-statement-truncate.md) statement.
 - For performance considerations, see [Performance Considerations](#performance-considerations).
 
@@ -55,8 +67,8 @@ If more than 10,000 records are returned, use [Bulk-Delete](#bulk-delete) to del
 
 If fewer than 10,000 records are returned, use the following example to delete them.
 
-<SimpleTab>
-<div label="SQL">
+<SimpleTab groupId="language">
+<div label="SQL" value="sql">
 
 In SQL, the example is as follows:
 
@@ -66,7 +78,7 @@ DELETE FROM `ratings` WHERE `rated_at` >= "2022-04-15 00:00:00" AND  `rated_at` 
 
 </div>
 
-<div label="Java">
+<div label="Java" value="java">
 
 In Java, the example is as follows:
 
@@ -93,7 +105,7 @@ try (Connection connection = ds.getConnection()) {
 
 </div>
 
-<div label="Golang">
+<div label="Golang" value="golang">
 
 In Golang, the example is as follows:
 
@@ -134,11 +146,21 @@ func main() {
 
 </SimpleTab>
 
+<CustomContent platform="tidb">
+
+The `rated_at` field is of the `DATETIME` type in [Date and Time Types](/data-type-date-and-time.md). You can assume that it is stored as a literal quantity in TiDB, independent of the time zone. On the other hand, the `TIMESTAMP` type stores a timestamp and thus displays a different time string in a different [time zone](/configure-time-zone.md).
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+The `rated_at` field is of the `DATETIME` type in [Date and Time Types](/data-type-date-and-time.md). You can assume that it is stored as a literal quantity in TiDB, independent of the time zone. On the other hand, the `TIMESTAMP` type stores a timestamp and thus displays a different time string in a different time zone.
+
+</CustomContent>
+
 > **Note:**
 >
-> Note that the `rated_at` field is of the `DATETIME` type in [Date and Time Types](/data-type-date-and-time.md). You can assume that it is stored as a literal quantity in TiDB, independent of the time zone. On the other hand, the `TIMESTAMP` type stores a timestamp and thus displays a different time string in a different [time zone](/configure-time-zone.md).
->
-> Also, like MySQL, the `TIMESTAMP` data type is affected by the [year 2038 problem](https://en.wikipedia.org/wiki/Year_2038_problem). It is recommended to use the `DATETIME` type if you store values larger than 2038.
+> Like MySQL, the `TIMESTAMP` data type is affected by the [year 2038 problem](https://en.wikipedia.org/wiki/Year_2038_problem). It is recommended to use the `DATETIME` type if you store values larger than 2038.
 
 ## Performance considerations
 
@@ -158,7 +180,17 @@ TiDB uses [statistical information](/statistics.md) to determine index selection
 
 When you need to delete multiple rows of data from a table, you can choose the [`DELETE` example](#example) and use the `WHERE` clause to filter the data that needs to be deleted.
 
+<CustomContent platform="tidb">
+
 However, if you need to delete a large number of rows (more than ten thousand), it is recommended that you delete the data in an iterative way, that is, deleting a portion of the data at each iteration until the deletion is completed. This is because TiDB limits the size of a single transaction ([`txn-total-size-limit`](/tidb-configuration-file.md#txn-total-size-limit), 100 MB by default). You can use loops in your programs or scripts to perform such operations.
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+However, if you need to delete a large number of rows (more than ten thousand), it is recommended that you delete the data in an iterative way, that is, deleting a portion of the data at each iteration until the deletion is completed. This is because TiDB limits the size of a single transaction to 100 MB by default. You can use loops in your programs or scripts to perform such operations.
+
+</CustomContent>
 
 This section provides an example of writing a script to handle an iterative delete operation that demonstrates how you should do a combination of `SELECT` and `DELETE` to complete a bulk-delete.
 
@@ -170,8 +202,8 @@ You can write a `DELETE` statement in the loop of your application or script, us
 
 Suppose you find an application error within a specific time period. You need to delete all the data for the [rating](/develop/dev-guide-bookshop-schema-design.md#ratings-table) within this period, for example, from `2022-04-15 00:00:00` to `2022-04-15 00:15:00`, and more than 10,000 records are written in 15 minutes. You can perform as follows.
 
-<SimpleTab>
-<div label="Java">
+<SimpleTab groupId="language">
+<div label="Java" value="java">
 
 In Java, the bulk-delete example is as follows:
 
@@ -233,7 +265,7 @@ In each iteration, `DELETE` deletes up to 1000 rows from `2022-04-15 00:00:00` t
 
 </div>
 
-<div label="Golang">
+<div label="Golang" value="golang">
 
 In Golang, the bulk-delete example is as follows:
 
