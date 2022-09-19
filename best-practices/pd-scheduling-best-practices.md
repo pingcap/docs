@@ -102,7 +102,7 @@ The processes of scale-down and failure recovery are basically the same. `replic
 
 Region merge refers to the process of merging adjacent small regions. It serves to avoid unnecessary resource consumption by a large number of small or even empty regions after data deletion. Region merge is performed by `mergeChecker`, which processes in a similar way to `replicaChecker`: PD continuously scans all regions in the background, and generates an operator when contiguous small regions are found.
 
-Specifically, when a newly split Region exists for more than the value of [`split-merge-interval`](/pd-configuration-file.md#split-merge-interval) (`1h` by default), if any of the following conditions occurs, this Region triggers the Region merge scheduling:
+Specifically, when a newly split Region exists for more than the value of [`split-merge-interval`](/pd-configuration-file.md#split-merge-interval) (`1h` by default), if the following conditions occur at the same time, this Region triggers the Region merge scheduling:
 
 - The size of this Region is smaller than the value of the [`max-merge-region-size`](/pd-configuration-file.md#max-merge-region-size) (20 MiB by default)
 
@@ -297,4 +297,4 @@ If a TiKV node fails, PD defaults to setting the corresponding node to the **dow
 
 Practically, if a node failure is considered unrecoverable, you can immediately take it offline. This makes PD replenish replicas soon in another node and reduces the risk of data loss. In contrast, if a node is considered recoverable, but the recovery cannot be done in 30 minutes, you can temporarily adjust `max-store-down-time` to a larger value to avoid unnecessary replenishment of the replicas and resources waste after the timeout.
 
-In TiDB v5.2.0, TiKV introduces the mechanism of slow TiKV node detection. By sampling the requests in TiKV, this mechanism works out a score ranging from 1 to 100. A TiKV node with a score higher than or equal to 80 is marked as slow. You can add [`evict-slow-store-scheduler`](/pd-control.md#scheduler-show--add--remove--pause--resume--config) to detect and schedule slow nodes. If only one TiKV is detected as slow, and the slow score reaches the upper limit (100 by default), the leader in this node will be evicted (similar to the effect of `evict-leader-scheduler`).
+In TiDB v5.2.0, TiKV introduces the mechanism of slow TiKV node detection. By sampling the requests in TiKV, this mechanism works out a score ranging from 1 to 100. A TiKV node with a score higher than or equal to 80 is marked as slow. You can add [`evict-slow-store-scheduler`](/pd-control.md#scheduler-show--add--remove--pause--resume--config--describe) to detect and schedule slow nodes. If only one TiKV is detected as slow, and the slow score reaches the upper limit (100 by default), the leader in this node will be evicted (similar to the effect of `evict-leader-scheduler`).

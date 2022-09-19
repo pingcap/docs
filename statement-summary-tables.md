@@ -133,11 +133,11 @@ The `statements_summary_evicted` table records the recent 24 periods during whic
 
 > **Note:**
 >
-> The `tidb_stmt_summary_history_size`, `tidb_stmt_summary_max_stmt_count`, and `tidb_stmt_summary_max_sql_length` configuration items affect memory usage. It is recommended that you adjust these configurations based on your needs. It is not recommended to set them too large values.
+> The `tidb_stmt_summary_history_size`, `tidb_stmt_summary_max_stmt_count`, and `tidb_stmt_summary_max_sql_length` configuration items affect memory usage. It is recommended that you adjust these configurations based on your needs, the SQL size, SQL count, and machine configuration. It is not recommended to set them too large values. You can calculate the memory usage using `tidb_stmt_summary_history_size` \* `tidb_stmt_summary_max_stmt_count` \* `tidb_stmt_summary_max_sql_length` \* `3`.
 
 ### Set a proper size for statement summary
 
-After the system has run for a period of time, you can check the `statement_summary` table to see whether SQL eviction has occurred. For example:
+After the system has run for a period of time (depending on the system load), you can check the `statement_summary` table to see whether SQL eviction has occurred. For example:
 
 ```sql
 select @@global.tidb_stmt_summary_max_stmt_count;
@@ -261,6 +261,7 @@ Basic fields:
 - `SAMPLE_USER`: The users who execute SQL statements of this category. Only one user is taken.
 - `PLAN_DIGEST`: The digest of the execution plan.
 - `PLAN`: The original execution plan. If there are multiple statements, the plan of only one statement is taken.
+- `BINARY_PLAN`: The original execution plan encoded in binary format. If there are multiple statements, the plan of only one statement is taken. Execute the `SELECT tidb_decode_binary_plan('xxx...')` statement to parse the specific execution plan.
 - `PLAN_CACHE_HITS`: The total number of times that SQL statements of this category hit the plan cache.
 - `PLAN_IN_CACHE`: Indicates whether the previous execution of SQL statements of this category hit the plan cache.
 

@@ -9,11 +9,10 @@ This document provides the types of diagnostic data that can be collected by Pin
 
 The diagnostic data collected by PingCAP Clinic is **only** used for troubleshooting cluster problems.
 
-Clinic Server is a diagnostic service deployed in the cloud. Currently, you can upload the collected diagnostic data to [Clinic Server China](https://clinic.pingcap.com.cn) only. The uploaded data is stored in the AWS S3 China (Beijing) region server set up by PingCAP. Clinic Server Global will be provided soon with a new URL and data storage location. For details, see [PingCAP Clinic components](/clinic/clinic-introduction.md).
+A diagnostic service deployed in the cloud, Clinic Server provides two independent services depending on the data storage location:
 
-PingCAP strictly controls permissions for data access and only allows authorized in-house technical support staff to access the uploaded data.
-
-After a technical support case is closed, PingCAP permanently deletes or anonymizes the corresponding data within 90 days.
+- [Clinic Server in the US](https://clinic.pingcap.com): If you upload the collected data to Clinic Server in the US, the data will be stored in the Amazon S3 service deployed by PingCAP in AWS US regions. PingCAP uses strict data access policies and only authorized technical support can access the data.
+- [Clinic Server in the Chinese mainland](https://clinic.pingcap.com.cn): If you upload the collected data to Clinic Server in the Chinese mainland, the data will be stored in the Amazon S3 service deployed by PingCAP in China (Beijing) regions. PingCAP uses strict data access policies and only authorized technical support can access the data.
 
 ## TiDB clusters
 
@@ -72,7 +71,7 @@ This section lists the types of diagnostic data that can be collected by Diag fr
 | Log | `ticdc.log` | `--include=log`|
 | Error log | `ticdc_stderr.log` | `--include=log` |
 | Configuration file | `ticdc.toml` | `--include=config` |
-| Debug data | `info.txt`, `status.txt`, `changefeeds.txt`, `captures.txt`, `processors.txt` | `--include=debug` |
+| Debug data | `info.txt`, `status.txt`, `changefeeds.txt`, `captures.txt`, `processors.txt` | `--include=debug` (Diag does not collect this data type by default) |
 
 ### Prometheus monitoring data
 
@@ -85,8 +84,8 @@ This section lists the types of diagnostic data that can be collected by Diag fr
 
 | Data type | Exported file | Parameter for data collection by PingCAP Clinic |
 | :------ | :------ |:-------- |
-| TiDB system variables (Diag does not collect this data type by default; if you need to collect this data type, database credential is required) | `mysql.tidb.csv` | `--include=db_vars` |
-| | `global_variables.csv` | `--include=db_vars` |
+| TiDB system variables | `mysql.tidb.csv` | `--include=db_vars` (Diag does not collect this data type by default; if you need to collect this data type, database credential is required) |
+| | `global_variables.csv` | `--include=db_vars` (Diag does not collect this data type by default) |
 
 ### System information of the cluster node
 

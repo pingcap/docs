@@ -64,6 +64,10 @@ Currently, the TiCDC sink component supports replicating data to the following d
     - TiCDC splits cross-table transactions in the unit of table and does **not ensure** the atomicity of cross-table transactions.
     - TiCDC **ensures** that the order of single-row updates is consistent with that in the upstream.
 
+    > **Note:**
+    >
+    > Since v6.2, you can use the sink uri parameter [`transaction-atomicity`](/ticdc/manage-ticdc.md#configure-sink-uri-with-mysqltidb) to control whether to split single-table transactions. Splitting single-table transactions can greatly reduce the latency and memory consumption of replicating large transactions.
+
 - Kafka sink
 
     - TiCDC provides different strategies for data distribution. You can distribute data to different Kafka partitions based on the table, primary key, or timestamp.
@@ -92,7 +96,7 @@ Currently, the following scenarios are not supported:
 - The TiKV cluster that uses RawKV alone.
 - The [DDL operation `CREATE SEQUENCE`](/sql-statements/sql-statement-create-sequence.md) and the [SEQUENCE function](/sql-statements/sql-statement-create-sequence.md#sequence-function) in TiDB. When the upstream TiDB uses `SEQUENCE`, TiCDC ignores `SEQUENCE` DDL operations/functions performed upstream. However, DML operations using `SEQUENCE` functions can be correctly replicated.
 
-TiCDC only provides partial support for scenarios of large transactions in the upstream. For details, refer to [FAQ: Does TiCDC support replicating large transactions? Is there any risk?](/ticdc/troubleshoot-ticdc.md#does-ticdc-support-replicating-large-transactions-is-there-any-risk).
+TiCDC only provides partial support for scenarios of large transactions in the upstream. For details, refer to [FAQ: Does TiCDC support replicating large transactions? Is there any risk?](/ticdc/ticdc-faq.md#does-ticdc-support-replicating-large-transactions-is-there-any-risk).
 
 > **Note:**
 >
@@ -149,6 +153,7 @@ Since v5.3.0, TiCDC supports [global temporary tables](/temporary-tables.md#glob
 
 If the upstream cluster contains a global temporary table, the downstream TiDB cluster is expected to be v5.3.0 or a later version. Otherwise, an error occurs during the replication process.
 
-## Troubleshoot TiCDC
+## TiCDC FAQs and troubleshooting
 
-For details, refer to [Troubleshoot TiCDC](/ticdc/troubleshoot-ticdc.md).
+- To learn the FAQs of TiCDC, see [TiCDC FAQs](/ticdc/ticdc-faq.md).
+- To learn how to troubleshoot TiCDC, see [Troubleshoot TiCDC](/ticdc/troubleshoot-ticdc.md).

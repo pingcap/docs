@@ -63,6 +63,8 @@ In addition, TiDB also provides the following aggregate functions:
     1 row in set (0.00 sec)
     ```
 
+Except for the `GROUP_CONCAT()` and `APPROX_PERCENTILE()` functions, all the preceding functions can serve as [Window functions](/functions-and-operators/window-functions.md).
+
 ## GROUP BY modifiers
 
 TiDB does not currently support `GROUP BY` modifiers such as `WITH ROLLUP`. We plan to add support in the future. See [TiDB #4250](https://github.com/pingcap/tidb/issues/4250).
@@ -148,12 +150,6 @@ select id, floor(value/100) as val
 from tbl_name
 group by id, val;
 ```
-
-## Unsupported aggregate functions
-
-The following aggregate functions are currently unsupported in TiDB. You can track our progress in [TiDB #7623](https://github.com/pingcap/tidb/issues/7623):
-
-- `JSON_ARRAYAGG`
 
 ## Related system variables
 

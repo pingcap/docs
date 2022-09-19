@@ -17,6 +17,7 @@ In 6.1.0, the key new features or improvements are as follows:
 * TiFlash supports on-demand data compaction
 * MPP introduces the window function framework
 * TiCDC supports replicating changelogs to Kafka via Avro
+* TiCDC supports splitting large transactions during replication, which significantly reduces replication latency caused by large transactions
 * The optimistic mode for merging and migrating sharded tables becomes GA
 
 ## New Features
@@ -39,7 +40,7 @@ In 6.1.0, the key new features or improvements are as follows:
     * `DENSE_RANK()`
     * `ROW_NUMBER()`
 
-  [User document](/tiflash/use-tiflash.md#supported-push-down-calculations), [#33072](https://github.com/pingcap/tidb/issues/33072)
+  [User document](/tiflash/tiflash-supported-pushdown-calculations.md), [#33072](https://github.com/pingcap/tidb/issues/33072)
 
 ### Observability
 
@@ -83,13 +84,13 @@ In 6.1.0, the key new features or improvements are as follows:
     * `TO_SECONDS`
     * `WEEKOFYEAR`
 
-    [User document](/tiflash/use-tiflash.md#supported-push-down-calculations), [#4679](https://github.com/pingcap/tiflash/issues/4679), [#4678](https://github.com/pingcap/tiflash/issues/4678), [#4677](https://github.com/pingcap/tiflash/issues/4677)
+    [User document](/tiflash/tiflash-supported-pushdown-calculations.md), [#4679](https://github.com/pingcap/tiflash/issues/4679), [#4678](https://github.com/pingcap/tiflash/issues/4678), [#4677](https://github.com/pingcap/tiflash/issues/4677)
 
 * TiFlash supports partitioned tables in dynamic pruning mode.
 
     To enhance performance in OLAP scenarios, dynamic pruning mode is supported for partitioned tables. If your TiDB is upgraded from versions earlier than v6.0.0, it is recommended that you manually update statistics of existing partitioned tables, so as to maximize the performance (not required for new installations or new partitions created after upgrade to v6.1.0).
 
-    User documents: [Access partitioned tables in the MPP mode](/tiflash/use-tiflash.md#access-partitioned-tables-in-the-mpp-mode), [Dynamic pruning mode](/partitioned-table.md#dynamic-pruning-mode), [#3873](https://github.com/pingcap/tiflash/issues/3873)
+    User documents: [Access partitioned tables in the MPP mode](/tiflash/use-tiflash-mpp-mode.md#access-partitioned-tables-in-the-mpp-mode), [Dynamic pruning mode](/partitioned-table.md#dynamic-pruning-mode), [#3873](https://github.com/pingcap/tiflash/issues/3873)
 
 ### Stability
 
@@ -97,7 +98,7 @@ In 6.1.0, the key new features or improvements are as follows:
 
     When RocksDB detects a damaged SST file in the background, TiKV will try to schedule the affected Peer and recover its data using other replicas. You can set the maximum allowable time for the recovery using the `background-error-recovery-window` parameter. If the recovery operation is not completed within the time window, TiKV will panic. This feature automatically detects and recovers recoverable damaged storage, thus improving the cluster stability.
 
-    [User document](/tikv-configuration-file.md#background-error-recovery-window-new-in-v610), [#10578](https://github.com/tikv/tikv/issues/10578`)`
+    [User document](/tikv-configuration-file.md#background-error-recovery-window-new-in-v610), [#10578](https://github.com/tikv/tikv/issues/10578)
 
 * Support non-transactional DML statement
 
@@ -227,7 +228,6 @@ In 6.1.0, the key new features or improvements are as follows:
 | [`require_secure_transport`](/system-variables.md#require_secure_transport-new-in-v610) | Newly added | This setting was previously a `tidb.toml` option (`security.require-secure-transport`), but changed to a system variable starting from TiDB v6.1.0. |
 | [`tidb_committer_concurrency`](/system-variables.md#tidb_committer_concurrency-new-in-v610) | Newly added | This setting was previously a `tidb.toml` option (`performance.committer-concurrency`), but changed to a system variable starting from TiDB v6.1.0. |
 | [`tidb_enable_auto_analyze`](/system-variables.md#tidb_enable_auto_analyze-new-in-v610) | Newly added | This setting was previously a `tidb.toml` option (`run-auto-analyze`), but changed to a system variable starting from TiDB v6.1.0. |
-| [`tidb_enable_batch_dml`](/system-variables.md#tidb_enable_batch_dml-new-in-v610) | Newly added | This setting was previously a `tidb.toml` option (`enable-batch-dml`), but changed to a system variable starting from TiDB v6.1.0. |
 | [`tidb_enable_new_only_full_group_by_check`](/system-variables.md#tidb_enable_new_only_full_group_by_check-new-in-v610) | Newly added | This variable controls the behavior when TiDB performs the `ONLY_FULL_GOUP_BY` check. |
 | [`tidb_enable_outer_join_reorder`](/system-variables.md#tidb_enable_outer_join_reorder-new-in-v610) | Newly added | Since v6.1.0, the Join Reorder algorithm of TiDB supports Outer Join. This variable controls the support behavior, and the default value is `ON`. |
 | [`tidb_enable_prepared_plan_cache`](/system-variables.md#tidb_enable_prepared_plan_cache-new-in-v610) | Newly added | This setting was previously a `tidb.toml` option (`prepared-plan-cache.enabled`), but changed to a system variable starting from TiDB v6.1.0. |
@@ -237,7 +237,7 @@ In 6.1.0, the key new features or improvements are as follows:
 | [`tidb_mem_oom_action`](/system-variables.md#tidb_mem_oom_action-new-in-v610) | Newly added | This setting was previously a `tidb.toml` option (`oom-action`), but changed to a system variable starting from TiDB v6.1.0. |
 | [`tidb_mem_quota_analyze`](/system-variables.md#tidb_mem_quota_analyze-new-in-v610) | Newly added | This variable controls the maximum memory usage when TiDB updates statistics, including manually executed [`ANALYZE TABLE`](/sql-statements/sql-statement-analyze-table.md) by users and automatic analyze tasks in the TiDB background. |
 | [`tidb_nontransactional_ignore_error`](/system-variables.md#tidb_nontransactional_ignore_error-new-in-v610) | Newly added | This variable specifies whether to return error immediately when an error occurs in a non-transactional DML statement. |
-| [`tidb_prepared_plan_cache_memory_guard_ratio`](/system-variables.md#tidb_prepared_plan_cache_memory_guard_ratio-new-in-v610) |  | This setting was previously a `tidb.toml` option (`prepared-plan-cache.memory-guard-ratio`), but changed to a system variable starting from TiDB v6.1.0. |
+| [`tidb_prepared_plan_cache_memory_guard_ratio`](/system-variables.md#tidb_prepared_plan_cache_memory_guard_ratio-new-in-v610) | Newly added | This setting was previously a `tidb.toml` option (`prepared-plan-cache.memory-guard-ratio`), but changed to a system variable starting from TiDB v6.1.0. |
 | [`tidb_prepared_plan_cache_size`](/system-variables.md#tidb_prepared_plan_cache_size-new-in-v610) | Newly added | This setting was previously a `tidb.toml` option (`prepared-plan-cache.capacity`), but changed to a system variable starting from TiDB v6.1.0. |
 | [`tidb_stats_cache_mem_quota`](/system-variables.md#tidb_stats_cache_mem_quota-new-in-v610) | Newly added | This variable sets the memory quota for the TiDB statistics cache. |
 
@@ -246,7 +246,6 @@ In 6.1.0, the key new features or improvements are as follows:
 | Configuration file | Configuration | Change type | Description |
 |---|---|---|---|
 | TiDB | `committer-concurrency` | Deleted | Replaced by the system variable `tidb_committer_concurrency`. This configuration item is no longer valid, if you want to modify the value, you need to modify the corresponding system variable. |
-| TiDB | `enable-batch-dml` | Deleted | Replaced by the system variable `tidb_enable_batch_dml`. This configuration item is no longer valid, if you want to modify the value, you need to modify the corresponding system variable. |
 | TiDB | `lower-case-table-names` | Deleted | Currently TiDB only supports `lower_case_table_name=2`. If another value is set, after the cluster is upgraded to v6.1.0, the value is lost.  |
 | TiDB | `mem-quota-query` | Deleted | Replaced by the system variable `tidb_mem_quota_query`. This configuration item is no longer valid, if you want to modify the value, you need to modify the corresponding system variable. |
 | TiDB | `oom-action` | Deleted | Replaced by the system variable `tidb_mem_oom_action`. This configuration item is no longer valid, if you want to modify the value, you need to modify the corresponding system variable. |
@@ -354,6 +353,10 @@ In 6.1.0, the key new features or improvements are as follows:
 
         - Optimize Scatter Region to batch mode to improve the stability of the Scatter Region process [#33618](https://github.com/pingcap/tidb/issues/33618)
 
+    + TiCDC
+
+        - TiCDC supports splitting large transactions during replication, which significantly reduces replication latency caused by large transactions [#5280](https://github.com/pingcap/tiflow/issues/5280)
+
 ## Bug fixes
 
 + TiDB
@@ -367,7 +370,7 @@ In 6.1.0, the key new features or improvements are as follows:
     - Fix the issue that the TiDB server might run out of memory when the `INFORMATION_SCHEMA.CLUSTER_SLOW_QUERY` table is queried. This issue can be triggered when you check slow queries on the Grafana dashboard [#33893](https://github.com/pingcap/tidb/issues/33893)
     - Fix the issue that the system variable `max_allowed_packet` does not take effect [#31422](https://github.com/pingcap/tidb/issues/31422)
     - Fix the issue of memory leak in the TopSQL module [#34525](https://github.com/pingcap/tidb/issues/34525) [#34502](https://github.com/pingcap/tidb/issues/34502)
-    - Fix the issue that the Plan Cache might be wrong on the PointGet plan [#3237](https://github.com/pingcap/tidb/issues/3237)
+    - Fix the issue that the Plan Cache might be wrong on the PointGet plan [#32371](https://github.com/pingcap/tidb/issues/32371)
     - Fix the issue that query result might be wrong when Plan Cache is started in the RC isolation level [#34447](https://github.com/pingcap/tidb/issues/34447)
 
 + TiKV
@@ -400,7 +403,6 @@ In 6.1.0, the key new features or improvements are as follows:
     + TiCDC
 
         - Fix excessive memory usage by optimizing the way DDL schemas are buffered [#1386](https://github.com/pingcap/tiflow/issues/1386)
-        - Fix OOM caused by large transactions [#5280](https://github.com/pingcap/tiflow/issues/5280)
         - Fix data loss that occurs in special incremental scanning scenarios [#5468](https://github.com/pingcap/tiflow/issues/5468)
 
     + TiDB Data Migration (DM)

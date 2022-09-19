@@ -233,7 +233,7 @@ The application needs to return the connection after finishing using it. It is a
 
 ### Probe configuration
 
-The connection pool maintains persistent connections to TiDB. TiDB does not proactively close client connections by default (unless an error is reported), but generally there will be network proxies such as LVS or HAProxy between the client and TiDB. Usually, these proxies will proactively clean up connections that are idle for a certain period of time. In addition to paying attention to the idle configuration of the proxies, the connection pool also needs to keep alive or probe connections.
+The connection pool maintains persistent connections to TiDB. TiDB does not proactively close client connections by default (unless an error is reported), but generally there will be network proxies such as LVS or HAProxy between the client and TiDB. Usually, these proxies will proactively clean up connections that are idle for a certain period of time (controlled by the proxy's idle configuration). In addition to paying attention to the idle configuration of the proxies, the connection pool also needs to keep alive or probe connections.
 
 If you often see the following error in your Java application:
 
@@ -332,7 +332,7 @@ In the real world, applications might use [Spring Transaction](https://docs.spri
 
 By adding the `@Transactional` annotation to the method definition, AOP starts the transaction before the method is called, and commits the transaction before the method returns the result. If your application has a similar need, you can find `@Transactional` in code to determine when the transaction is started and closed.
 
-Pay attention to a special case of embedding. If it occurs, Spring will behave differently based on the [Propagation](https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/transaction/annotation/Propagation.html) configuration. Because TiDB does not support savepoint, nested transactions are not supported yet.
+Pay attention to a special case of embedding. If it occurs, Spring will behave differently based on the [Propagation](https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/transaction/annotation/Propagation.html) configuration.
 
 ## Misc
 
