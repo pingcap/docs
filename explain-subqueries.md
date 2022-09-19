@@ -204,7 +204,7 @@ In the second query statement `EXPLAIN SELECT * FROM t WHERE (a,b) IN (SELECT * 
 
 ## Null-aware anti semi join (`NOT IN` and `!= ALL` subqueries)
 
-The value of `NOT IN` and `!= ALL` set operations is three-valued (`true`, `false`, and `NULL`). For the join type converted by these subqueries, TiDB needs to be aware of the `NULL` on both sides of the join key and process it in a special way.
+The value of the `NOT IN` or `!= ALL` set operator is three-valued (`true`, `false`, and `NULL`). For the join type converted from either of the two operators, TiDB needs to be aware of the `NULL` on both sides of the join key and process it in a special way.
 
 Subqueries containing `NOT IN` and `! = ALL` operators are converted to anti semi join and anti left outer semi join respectively. In the preceding example of [Anti semi join](#anti-semi-join-not-in-subquery), since columns `test.t3.t1_id` and `test.t1.id` on both sides of the join key are `not NULL`, the anti semi join does not need to be considered as null-aware (`NULL` is not processed specially).
 
