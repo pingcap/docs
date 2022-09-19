@@ -10,9 +10,9 @@ This document introduces TiDB's implementation of partitioning.
 
 ## Partitioning types
 
-This section introduces the types of partitioning in TiDB. Currently, TiDB supports [Range partitioning](#range-partitioning), [List partitioning](#list-partitioning), [List COLUMNS partitioning](#list-columns-partitioning), and [Hash partitioning](#hash-partitioning).
+This section introduces the types of partitioning in TiDB. Currently, TiDB supports [Range partitioning](#range-partitioning), [Range COLUMNS partitioning](#range-columns-partitioning), [List partitioning](#list-partitioning), [List COLUMNS partitioning](#list-columns-partitioning), and [Hash partitioning](#hash-partitioning).
 
-Range partitioning, List partitioning and List COLUMNS partitioning are used to resolve the performance issues caused by a large amount of deletions in the application, and support fast drop partition operations. Hash partitioning is used to scatter the data when there are a large amount of writes.
+Range partitioning, Range COLUMNS partitioning, List partitioning and List COLUMNS partitioning are used to resolve the performance issues caused by a large amount of deletions in the application, and support fast drop partition operations. Hash partitioning is used to scatter the data when there are a large amount of writes.
 
 ### Range partitioning
 
@@ -163,6 +163,142 @@ Range partitioning is particularly useful when one or more of the following cond
 * You want to delete the old data. If you use the `employees` table in the previous example, you can delete all records of employees who left this company before the year 1991 by simply using `ALTER TABLE employees DROP PARTITION p0;`. It is faster than executing the `DELETE FROM employees WHERE YEAR(separated) <= 1990;` operation.
 * You want to use a column that contains time or date values, or containing values arising from some other series.
 * You need to frequently run queries on the columns used for partitioning. For example, when executing a query like `EXPLAIN SELECT COUNT(*) FROM employees WHERE separated BETWEEN '2000-01-01' AND '2000-12-31' GROUP BY store_id;`, TiDB can quickly know that only the data in the `p2` partition needs to be scanned, because the other partitions do not match the `WHERE` condition.
+
+### Range COLUMNS partitioning
+
+Range COLUMNS partitioning is a variant of Range partitioning. You can use one or more columns as partitioning keys. The data types of partition columns can be integer, string (`CHAR` or `VARCHAR`), `DATE`, and `DATETIME`. Any expressions, such as non-COLUMNS partitioning, are not supported.
+
+Suppose that you want to partition by name, and drop old and invalid data, then you can create a table as follows:
+
+```sql
+CREATE TABLE t (
+  valid_until datetime,
+  name varchar(255) CHARACTER SET ascii,
+  notes text
+)
+PARTITION BY RANGE COLUMNS(name,valid_until)
+(PARTITION `p2022-g` VALUES LESS THAN ('G','2023-01-01 00:00:00'),
+ PARTITION `p2023-g` VALUES LESS THAN ('G','2024-01-01 00:00:00'),
+ PARTITION `p2024-g` VALUES LESS THAN ('G','2025-01-01 00:00:00'),
+ PARTITION `p2022-m` VALUES LESS THAN ('M','2023-01-01 00:00:00'),
+ PARTITION `p2023-m` VALUES LESS THAN ('M','2024-01-01 00:00:00'),
+ PARTITION `p2024-m` VALUES LESS THAN ('M','2025-01-01 00:00:00'),
+ PARTITION `p2022-s` VALUES LESS THAN ('S','2023-01-01 00:00:00'),
+ PARTITION `p2023-s` VALUES LESS THAN ('S','2024-01-01 00:00:00'),
+ PARTITION `p2024-s` VALUES LESS THAN ('S','2025-01-01 00:00:00'),
+ PARTITION `p2022-` VALUES LESS THAN (0x7f,'2023-01-01 00:00:00'),
+ PARTITION `p2023-` VALUES LESS THAN (0x7f,'2024-01-01 00:00:00'),
+ PARTITION `p2024-` VALUES LESS THAN (0x7f,'2025-01-01 00:00:00'))
+```
+
+It will split the data by year and by name in the ranges [''-'G'), ['G'-'M'), ['M'-'S'), ['S',), allowing you to easily drop invalid data while still benefit from partition pruning on both `name` and `valid_until` columns.
+
+### Range INTERVAL partitioning
+
+Range INTERVAL partitioning is an extension of Range partitioning, which allows you to create partitions of a specified interval easily. Starting from v6.3.0, INTERVAL partitioning is introduced in TiDB as syntactic sugar:
+
+```
+PARTITION BY RANGE [COLUMNS] (<partitioning expression>)
+INTERVAL (<interval expression>)
+FIRST PARTITION LESS THAN (<expression>)
+LAST PARTITION LESS THAN (<expression>)
+[NULL PARTITION]
+[MAXVALUE PARTITION]
+```
+
+For example:
+
+```
+CREATE TABLE employees (
+    id int unsigned NOT NULL,
+    fname varchar(30),
+    lname varchar(30),
+    hired date NOT NULL DEFAULT '1970-01-01',
+    separated date DEFAULT '9999-12-31',
+    job_code int,
+    store_id int NOT NULL
+) PARTITION BY RANGE (id)
+INTERVAL (100) FIRST PARTITION LESS THAN (100) LAST PARTITION LESS THAN (10000) MAXVALUE PARTITION
+```
+
+It creates the following table:
+
+```
+CREATE TABLE `employees` (
+  `id` int unsigned NOT NULL,
+  `fname` varchar(30) DEFAULT NULL,
+  `lname` varchar(30) DEFAULT NULL,
+  `hired` date NOT NULL DEFAULT '1970-01-01',
+  `separated` date DEFAULT '9999-12-31',
+  `job_code` int DEFAULT NULL,
+  `store_id` int NOT NULL
+)
+PARTITION BY RANGE (`id`)
+(PARTITION `P_LT_100` VALUES LESS THAN (100),
+ PARTITION `P_LT_200` VALUES LESS THAN (200),
+...
+ PARTITION `P_LT_9900` VALUES LESS THAN (9900),
+ PARTITION `P_LT_10000` VALUES LESS THAN (10000),
+ PARTITION `P_MAXVALUE` VALUES LESS THAN (MAXVALUE))
+```
+
+INTERVAL partitioning also works with RANGE COLUMNS partitioning. 
+
+For example: 
+
+```
+CREATE TABLE monthly_report_status (
+    report_id int NOT NULL,
+    report_status varchar(20) NOT NULL,
+    report_date date NOT NULL
+)
+PARTITION BY RANGE COLUMNS (report_date)
+INTERVAL (1 MONTH) FIRST PARTITION LESS THAN ('2000-01-01') LAST PARTITION LESS THAN ('2025-01-01')
+```
+
+It creates this table:
+
+```
+CREATE TABLE `monthly_report_status` (
+  `report_id` int(11) NOT NULL,
+  `report_status` varchar(20) NOT NULL,
+  `report_date` date NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin
+PARTITION BY RANGE COLUMNS(`report_date`)
+(PARTITION `P_LT_2000-01-01` VALUES LESS THAN ('2000-01-01'),
+ PARTITION `P_LT_2000-02-01` VALUES LESS THAN ('2000-02-01'),
+...
+ PARTITION `P_LT_2024-11-01` VALUES LESS THAN ('2024-11-01'),
+ PARTITION `P_LT_2024-12-01` VALUES LESS THAN ('2024-12-01'),
+ PARTITION `P_LT_2025-01-01` VALUES LESS THAN ('2025-01-01'))
+```
+
+The optional parameter `NULL PARTITION` creates a partition with the definition as `PARTITION P_NULL VALUES LESS THAN (<minimum value of the column type>)`, only matching when the partitioning expression evaluates to `NULL`. See [Handling of NULL with Range partitioning](#handling-of-null-with-range-partitioning), which explains that `NULL` is considered to be less than any other value. 
+
+The optional parameter `MAXVALUE PARTITION` creates the last partition as `PARTITION P_MAXVALUE VALUES LESS THAN (MAXVALUE)`.
+
+#### ALTER INTERVAL partitioned tables
+
+INTERVAL partitioning also adds simpler syntaxes for adding and dropping partitions.
+
+The following statement changes the first partition. It drops all partitions whose values are less than the given expression, and makes the matched partition the new first partition. It does not affect a NULL PARTITION.
+
+```
+ALTER TABLE table_name FIRST PARTITION LESS THAN (<expression>)
+```
+
+The following statement changes the last partition, meaning adding more partitions with higher ranges and room for new data. It will add new partitions with the current INTERVAL up to and including the given expression. It does not work if a `MAXVALUE PARTITION` exists, because it needs data reorganization.
+
+```
+ALTER TABLE table_name LAST PARTITION LESS THAN (<expression>)
+```
+
+#### INTERVAL partitioning details and limitations
+
+- The INTERVAL partitioning feature only involves the `CREATE/ALTER TABLE` syntax. There is no change in metadata, so tables created or altered with the new syntax are still MySQL-compatible.
+- There is no change in the output format of `SHOW CREATE TABLE` to keep MySQL compatibility.
+- The new `ALTER` syntax applies to existing tables conforming to INTERVAL. You do not need to create these tables with the `INTERVAL` syntax.
+- For `RANGE COLUMNS`, only integer, date, and datetime column types are supported.
 
 ### List partitioning
 
@@ -580,13 +716,26 @@ For `HASH` partitioned tables, `COALESCE PARTITION` and `ADD PARTITION` are not 
 
 `EXCHANGE PARTITION` works by swapping a partition and a non-partitioned table, similar to how renaming a table like `RENAME TABLE t1 TO t1_tmp, t2 TO t1, t1_tmp TO t2` works.
 
-For example, `ALTER TABLE partitioned_table EXCHANGE PARTITION p1 WITH TABLE non_partitioned_table` swaps the `non_partitioned_table` table in the `p1` partition with the `partitioned_table` table.
+For example, `ALTER TABLE partitioned_table EXCHANGE PARTITION p1 WITH TABLE non_partitioned_table` swaps the `partitioned_table` table `p1` partition with the `non_partitioned_table` table.
 
-Ensure that all rows that you are exchanging into the partition match the partition definition; otherwise, these rows will not be found and cause unexpected issues.
+Ensure that all rows that you are exchanging into the partition match the partition definition; otherwise, the statement will fail.
 
-> **Warning:**
->
-> `EXCHANGE PARTITION` is an experimental feature. It is not recommended to use it in a production environment. To enable it, set the `tidb_enable_exchange_partition` system variable to `ON`.
+Note that TiDB has some specific features that might affect `EXCHANGE PARTITION`. When the table structure contains such features, you need to ensure that `EXCHANGE PARTITION` meets the [MySQL's EXCHANGE PARTITION condition](https://dev.mysql.com/doc/refman/8.0/en/partitioning-management-exchange.html). Meanwhile, ensure that these specific features are defined the same for both partitioned and non-partitioned tables. These specific features include the following:
+
+<CustomContent platform="tidb">
+
+* [Placement Rules in SQL](/placement-rules-in-sql.md): placement policies are the same.
+
+</CustomContent>
+
+* [TiFlash](/tikv-overview.md): the numbers of TiFlash replicas are the same.
+* [Clustered Indexes](/clustered-indexes.md): partitioned and non-partitioned tables are both `CLUSTERED`, or both `NONCLUSTERED`.
+
+In addition, there are limitations on the compatibility of `EXCHANGE PARTITION` with other components. Both partitioned and non-partitioned tables must have the same definition.
+
+- TiFlash: when the TiFlash replica definitions in partitioned and non-partitioned tables are different, the `EXCHANGE PARTITION` operation cannot be performed.
+- TiCDC: TiCDC replicates the `EXCHANGE PARTITION` operation when both partitioned and non-partitioned tables have primary keys or unique keys. Otherwise, TiCDC will not replicate the operation.
+- TiDB Lightning and BR: do not perform the `EXCHANGE PARTITION` operation during import using TiDB Lightning or during restore using BR.
 
 ### Range partition management
 
@@ -1187,9 +1336,7 @@ YEARWEEK()
 
 ### Compatibility with MySQL
 
-Currently, TiDB supports Range partitioning, List partitioning, List COLUMNS partitioning, and Hash partitioning. Other partitioning types that are available in MySQL such as key partitioning are not supported yet in TiDB.
-
-For a table partitioned by `RANGE COLUMNS`, currently TiDB only supports using a single partitioning column.
+Currently, TiDB supports Range partitioning, Range COLUMNS partitioning, List partitioning, List COLUMNS partitioning, and Hash partitioning. Other partitioning types that are available in MySQL such as key partitioning are not supported yet in TiDB.
 
 With regard to partition management, any operation that requires moving data in the bottom implementation is not supported currently, including but not limited to: adjust the number of partitions in a Hash partitioned table, modify the Range of a Range partitioned table, merge partitions and exchange partitions.
 
@@ -1293,7 +1440,7 @@ This variable is only used in table creation. After the table is created, modify
 
 ### Dynamic pruning mode
 
-TiDB accesses partitioned tables in one of the two modes: `dynamic` mode and `static` mode. Currently, `static` mode is used by default. If you want to enable `dynamic` mode, you need to manually set the `tidb_partition_prune_mode` variable to `dynamic`.
+TiDB accesses partitioned tables in one of the two modes: `dynamic` mode and `static` mode. Currently, `static` mode is used by default. If you want to enable `dynamic` mode, you need to manually set the `tidb_partition_prune_mode` variable to `dynamic`and ensure that full table-level statistics, or GlobalStats, are collected. For detailed information about GlobalStats, see [Collect statistics of partitioned tables in dynamic pruning mode](/statistics.md#collect-statistics-of-partitioned-tables-in-dynamic-pruning-mode).
 
 {{< copyable "sql" >}}
 
@@ -1303,7 +1450,7 @@ set @@session.tidb_partition_prune_mode = 'dynamic'
 
 Manual ANALYZE and normal queries use the session-level `tidb_partition_prune_mode` setting. The `auto-analyze` operation in the background uses the global `tidb_partition_prune_mode` setting.
 
-In `static` mode, partitioned tables use partition-level statistics. In `dynamic` mode, partitioned tables use table-level statistics (that is, GlobalStats). For detailed information about GlobalStats, see [Collect statistics of partitioned tables in dynamic pruning mode](/statistics.md#collect-statistics-of-partitioned-tables-in-dynamic-pruning-mode).
+In `static` mode, partitioned tables use partition-level statistics. In `dynamic` mode, partitioned tables use table-level GlobalStats.
 
 When switching from `static` mode to `dynamic` mode, you need to check and collect statistics manually. This is because after the switch to `dynamic` mode, partitioned tables have only partition-level statistics but no table-level statistics. GlobalStats are collected only upon the next `auto-analyze` operation.
 
