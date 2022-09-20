@@ -99,16 +99,16 @@ The value options of `match_type` between TiDB and MySQL are:
 
 ### Data type compatibility
 
-Binary string type difference between TiDB and MySQL:
+The difference between TiDB and MySQL in binary string type:
 
-- Regexp functions don't support binary string in MySQL 8.0.22 or higher version, more specific information could be referred [here](https://dev.mysql.com/doc/refman/8.0/en/regexp.html). However, in practice, regexp functions could works well when all parameters or return type are all binary string, or it will raise error.
-- So far, TiDB forbids binary string and will raise errors in any circumstance.
+- Since MySQL 8.0.22, regular expression functions do not support binary strings. For more details, refer to [MySQL documentation](https://dev.mysql.com/doc/refman/8.0/en/regexp.html). But in practice, regular functions could work when all parameters or return types are binary strings. Otherwise, an error will be reported.
+- Currently, TiDB prohibits using binary strings and an error will be reported under any circumstances.
 
 ### Other compatibility
 
-Replacing empty string behavior difference between TiDB and MySQL:
+The difference between TiDB and MySQL in replacing empty strings:
 
-Take the `REGEXP_REPLACE("", "^$", "123")` as example:
+The following takes `REGEXP_REPLACE("", "^$", "123")` as an example:
 
-- MySQL won't replace the empty string and return `""` as the result.
-- TiDB will replace it and return `"123"` as the result.
+- MySQL does not replace the empty string and returns `""` as a result.
+- TiDB replaces the empty string and returns `"123"` as a result.
