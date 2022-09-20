@@ -43,8 +43,8 @@ To increase the number of TiDB, TiKV, or TiFlash nodes, take the following steps
     >
     > Alternatively, you can also click the name of the cluster that you want to scale on the **Clusters** page and click **...** in the upper-right corner.
 
-3. Click **Scale** in the drop-down menu. The **Scale** window is displayed.
-4. In the **Scale** window, increase the number of TiDB, TiKV, or TiFlash nodes.
+3. Click **Modify** in the drop-down menu. The **Modify Cluster** page is displayed.
+4. On the **Modify Cluster** page, increase the number of TiDB, TiKV, or TiFlash nodes.
 5. Click **Confirm**.
 
 You can also increase the number of TiDB, TiKV, or TiFlash nodes using TiDB Cloud API through the [Modify a Dedicated Tier cluster](https://docs.pingcap.com/tidbcloud/api/v1beta#tag/Cluster/operation/UpdateCluster) endpoint. Currently, TiDB Cloud API is still in beta and only available upon request. For more information, see [TiDB Cloud API Documentation](https://docs.pingcap.com/tidbcloud/api/v1beta).
@@ -60,8 +60,8 @@ To decrease the number of TiDB nodes, take the following steps:
     >
     > Alternatively, you can also click the name of the cluster that you want to scale on the **Clusters** page and click **...** in the upper-right corner.
 
-3. Click **Scale** in the drop-down menu. The **Scale** window is displayed.
-4. In the **Scale** window, decrease the number of TiDB nodes.
+3. Click **Modify** in the drop-down menu. The **Modify Cluster** page is displayed.
+4. On the **Modify Cluster** page, decrease the number of TiDB nodes.
 5. Click **Confirm**.
 
 To decrease the number of TiKV or TiFlash nodes, you need to submit a support ticket. The PingCAP support team will contact you and complete the scaling within the agreed time.
@@ -93,8 +93,8 @@ To increase the node storage of TiKV or TiFlash, take the following steps:
     >
     > Alternatively, you can also click the name of the cluster that you want to scale on the **Clusters** page and click **...** in the upper-right corner.
 
-3. Click **Scale** in the drop-down menu. The **Scale** window is displayed.
-4. In the **Scale** window, increase the node storage of TiKV or TiFlash.
+3. Click **Modify** in the drop-down menu. The **Modify Cluster** page is displayed.
+4. On the **Modify Cluster** page, increase the node storage of TiKV or TiFlash.
 5. Click **Confirm**.
 
 You can also increase the storage of a TiKV or TiFlash node using TiDB Cloud API through the [Modify a Dedicated Tier cluster](https://docs.pingcap.com/tidbcloud/api/v1beta#tag/Cluster/operation/UpdateCluster) endpoint. Currently, TiDB Cloud API is still in beta and only available upon request. For more information, see [TiDB Cloud API Documentation](https://docs.pingcap.com/tidbcloud/api/v1beta).
