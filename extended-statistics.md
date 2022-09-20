@@ -16,7 +16,7 @@ TiDB can collect the following two types of statistics:
 
 When the `ANALYZE` statement is executed manually or automatically, TiDB by default only collects the regular statistics and does not collect the extended statistics. This is because the extended statistics are only used for optimizer estimates in specific scenarios, and collecting them requires additional overhead.
 
-Extended statistics are disabled by default. To collect extended statistics, you need to first enable the extended statistics, and then register each individual extended statistics.
+Extended statistics are disabled by default. To collect extended statistics, you need to first enable the extended statistics, and then register each individual extended statistics object.
 
 After the registration, the next time the `ANALYZE` statement is executed, TiDB collects both the regular statistics and the registered extended statistics.
 
@@ -25,7 +25,7 @@ After the registration, the next time the `ANALYZE` statement is executed, TiDB 
 Extended statistics are not collected in the following scenarios:
 
 - Statistics collection on indexes only
-- Statistics collection with the `ANALYZE INCREMENTAL` command
+- Statistics collection using the `ANALYZE INCREMENTAL` command
 - Statistics collection when the value of the system variable `tidb_enable_fast_analyze` is set to `true`
 
 ## Common operations
@@ -38,11 +38,11 @@ To enable extended statistics, set the system variable `tidb_enable_extended_sta
 SET GLOBAL tidb_enable_extended_stats = ON;
 ```
 
-The default value of this variable is `OFF`. This setting is a one-time task.
+The default value of this variable is `OFF`.
 
 ### Register extended statistics
 
-The registration for extended statistics is not a one-time task, and you need repeat the registration for each extended statistics.
+The registration for extended statistics is not a one-time task, and you need repeat the registration for each extended statistics object.
 
 To register extended statistics, use the SQL statement `ALTER TABLE ADD STATS_EXTENDED`. The syntax is as follows:
 
@@ -53,14 +53,14 @@ ALTER TABLE table_name ADD STATS_EXTENDED IF NOT EXISTS stats_name stats_type(co
 In the syntax, you can specify the table name, statistics name, statistics type, and column name of the extended statistics to be collected.
 
 - `table_name` specifies the name of the table from which the extended statistics are collected.
-- `stats_name` specifies the name of the statistics, which must be unique for each table.
+- `stats_name` specifies the name of the statistics object, which must be unique for each table.
 - `stats_type` specifies the type of the statistics. Currently, only the correlation type is supported.
 - `column_name` specifies the column group, which might have multiple columns. Currently, you can only specify two column names.
 
 <details>
 <summary> How it works</summary>
 
-To improve access performance, each TiDB node maintains a cache in the system table `mysql.stats_extended` for extended statistics. After you register the extended statistics, the next time the `ANALYZE` statement is executed, TiDB will collect the extended statistics if the system table `mysql.stats_extended` has the corresponding records.
+To improve access performance, each TiDB node maintains a cache in the system table `mysql.stats_extended` for extended statistics. After you register the extended statistics, the next time the `ANALYZE` statement is executed, TiDB will collect the extended statistics if the system table `mysql.stats_extended` has the corresponding objects.
 
 Each row in the `mysql.stats_extended` table has a `version` column. Once a row is updated, the value of `version` is increased. In this way, TiDB loads the table into memory incrementally, instead of fully.
 
@@ -70,7 +70,7 @@ TiDB loads `mysql.stats_extended` periodically to ensure that the cache is kept 
 >
 > It is **NOT RECOMMENDED** to directly operate on the `mysql.stats_extended` system table. Otherwise, inconsistent caches occur on different TiDB nodes.
 >
-> If you have mistakenly operated on the table, you can use the following statement on each TiDB node. Then the current cache will be cleared and the `mysql.stats_extended` table will be fully reloaded:
+> If you have mistakenly operated on the table, you can execute the following statement on each TiDB node. Then the current cache will be cleared and the `mysql.stats_extended` table will be fully reloaded:
 >
 > ```sql
 > ADMIN RELOAD STATS_EXTENDED;
@@ -80,7 +80,7 @@ TiDB loads `mysql.stats_extended` periodically to ensure that the cache is kept 
 
 ### Delete extended statistics
 
-To delete a record of the extended statistics, use the following statement:
+To delete an extended statistics object, use the following statement:
 
 ```sql
 ALTER TABLE table_name DROP STATS_EXTENDED stats_name;
@@ -89,9 +89,9 @@ ALTER TABLE table_name DROP STATS_EXTENDED stats_name;
 <details>
 <summary>How it works</summary>
 
-After you execute the statement, TiDB marks the value of the corresponding record in `mysql.stats_extended`'s column `status` to `2`, which means that the record is deleted, instead of deleting the record directly.
+After you execute the statement, TiDB marks the value of the corresponding object in `mysql.stats_extended`'s column `status` to `2`, instead of deleting the object directly.
 
-Other TiDB nodes will read this change and delete the record in their memory cache. The background garbage collection will delete the record eventually.
+Other TiDB nodes will read this change and delete the object in their memory cache. The background garbage collection will delete the object eventually.
 
 > **Warning:**
 >
@@ -140,13 +140,13 @@ Without extended statistics, the TiDB optimizer only supposes that `col1` and `c
 
 ### Stage 3. Enable extended statistics
 
-Set `tidb_enable_extended_stats` to `ON`, and register the extended statistics:
+Set `tidb_enable_extended_stats` to `ON`, and register the extended statistics object for `col1` and `col2`:
 
 ```sql
 ALTER TABLE t ADD STATS_EXTENDED s1 correlation(col1, col2);
 ```
 
-When you execute `ANALYZE` after the registration, TiDB calculates the [Pearson correlation coefficient](https://en.wikipedia.org/wiki/Pearson_correlation_coefficient) of `col` and `col2` of table `t`, and write the record into the `mysql.stats_extended` table.
+When you execute `ANALYZE` after the registration, TiDB calculates the [Pearson correlation coefficient](https://en.wikipedia.org/wiki/Pearson_correlation_coefficient) of `col` and `col2` of table `t`, and writes the object into the `mysql.stats_extended` table.
 
 ### Stage 4. See how extended statistics make a difference
 
