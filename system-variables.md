@@ -1161,8 +1161,8 @@ MPP is a distributed computing framework provided by the TiFlash engine, which a
 - Persists to cluster: Yes
 - Type: Boolean
 - Default value: `ON`
-- This variable is used to set whether to enable the [`exchange partitions with tables`](/partitioned-table.md#partition-management) feature.
-- When `exchange partitions with tables` is disabled, if you attempt to use `exchange partitions with tables`, TiDB will return a warning.
+- This variable is used to set whether to enable the [`exchange partitions with tables`](/partitioned-table.md#partition-management) feature. The default value is `ON`, that is, `exchange partitions with tables` is enabled.
+- When this variable is set to `OFF` (that is, `exchange partitions with tables` is disabled), if you attempt to use `exchange partitions with tables`, TiDB will return a warning.
 
 ### tidb_enable_fast_analyze
 
