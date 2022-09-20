@@ -28,7 +28,7 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
 * The TiDB Cloud API (beta) is now available to all users.
 
-    You can start using the API by creating an API key on the TiDB Cloud console. For more information, refer to [API Key documentation](/tidb-cloud/api-overview.md).
+    You can start using the API by creating an API key on the TiDB Cloud console. For more information, refer to [API documentation](/tidb-cloud/api-overview.md).
 
 ## September 15, 2022
 
