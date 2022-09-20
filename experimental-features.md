@@ -49,7 +49,7 @@ Elastic scheduling feature. It enables the TiDB cluster to dynamically scale out
 + [Configure disk quota](/tidb-lightning/tidb-lightning-physical-import-mode-usage.md#configure-disk-quota-new-in-v620) for TiDB Lightning. (Introduced in v6.2.0)
 + [Continuous Data Validation in DM](/dm/dm-continuous-data-validation.md) (Introduced in v6.2.0)
 
-## 数据共享订阅
+## Data share subscription
 
 + [Cross-cluster RawKV replication](/tikv-configuration-file.md#api-version-new-in-v610) (Introduced in v6.2.0)
 
@@ -61,3 +61,4 @@ Elastic scheduling feature. It enables the TiDB cluster to dynamically scale out
 
 + [SQL diagnostics](/information-schema/information-schema-sql-diagnostics.md) (Introduced in v4.0)
 + [Cluster diagnostics](/dashboard/dashboard-diagnostics-access.md) (Introduced in v4.0)
++ [TiKV-FastTune dashboard](/grafana-tikv-dashboard.md#tikv-fasttune-dashboard) (Introduced in v4.0)
