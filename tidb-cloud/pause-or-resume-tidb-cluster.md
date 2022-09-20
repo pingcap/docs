@@ -17,7 +17,7 @@ Comparing with backup and restore, pausing and resuming a cluster takes less tim
 
 ## Limitations
 
-- You can pause your cluster only when it is in the **Normal** state. If your cluster is in other states such as **Scaling**, you must wait for the current operation to be completed before pausing the cluster.
+- You can pause your cluster only when it is in the **AVAILABLE** state. If your cluster is in other states such as **MODIFYING**, you must wait for the current operation to be completed before pausing the cluster.
 - You cannot pause your cluster when a data import task is going on. You can either wait for the import task to be completed or cancel the import task.
 - You cannot pause your cluster when a backup job is going on. You can either wait for the current backup job to be completed or [delete the running backup job](/tidb-cloud/backup-and-restore.md#delete-a-running-backup-job).
 
@@ -69,8 +69,8 @@ To resume a paused cluster, take the following steps:
 
     The **Resume your cluster** dialog is displayed.
 
-3. In the dialog, click **Resume** to confirm your choice.
+3. In the dialog, click **Resume** to confirm your choice. The cluster status becomes **RESUMING**.
 
-Depending on your cluster size, it can take several minutes to resume the cluster. After the cluster is resumed, the cluster state changes from **Resuming** to **Normal**.
+Depending on your cluster size, it can take several minutes to resume the cluster. After the cluster is resumed, the cluster state changes from **RESUMING**to **AVAILABLE**.
 
 You can also resume a cluster using TiDB Cloud API. Currently, TiDB Cloud API is still in beta and only available upon request. For more information, see [TiDB Cloud API Documentation](https://docs.pingcap.com/tidbcloud/api/v1beta).
