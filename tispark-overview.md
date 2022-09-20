@@ -32,308 +32,386 @@ Also, TiSpark supports distributed writes to TiKV. Compared with writes to TiDB 
 >
 > Because TiSpark accesses TiKV directly, the access control mechanisms used by TiDB Server are not applicable to TiSpark. Since TiSpark v2.5.0, TiSpark supports user authentication and authorization, for more information, see [Security](/tispark-overview.md#security).
 
-## Environment setup
+## Requirements
 
-The following table lists the compatibility information of the supported TiSpark versions. You can choose a TiSpark version according to your need.
++ TiSpark supports Spark >= 2.3, but does not support any Spark versions earlier than 2.3.
++ TiSpark requires JDK 1.8 and Scala 2.11/2.12.
++ TiSpark runs in any Spark mode such as `YARN`, `Mesos`, and `Standalone`.
 
-| TiSpark version | TiDB, TiKV, and PD versions | Spark version | Scala version |
-| ---------------  | -------------------- | -------------  | ------------- |
-| 2.4.x-scala_2.11 | 5.x, 4.x             | 2.3.x, 2.4.x    | 2.11          |
-| 2.4.x-scala_2.12 | 5.x, 4.x             | 2.4.x           | 2.12          |
-| 2.5.x            | 5.x, 4.x             | 3.0.x, 3.1.x    | 2.12           |
-| 3.0.x            | 5.x, 4.x             | 3.0.x, 3.1.x, 3.2.x | 2.12            |
+## Recommended deployment configurations of Spark
 
-TiSpark runs in any Spark mode such as YARN, Mesos, and Standalone.
-
-## Recommended configuration
-
-This section describes the recommended configuration of independent deployment of TiKV and TiSpark, independent deployment of Spark and TiSpark, and co-deployed TiKV and TiSpark.
-
-See also [TiSpark Deployment Topology](/tispark-deployment-topology.md) for more details about how to deploy TiSpark using TiUP.
-
-### Configuration of independent deployment of TiKV and TiSpark
-
-For independent deployment of TiKV and TiSpark, it is recommended to refer to the following recommendations:
-
-+ Hardware configuration
-    - For general purposes, refer to the TiDB and TiKV hardware configuration [recommendations](/hardware-and-software-requirements.md#development-and-test-environments).
-    - If the usage is more focused on the analysis scenarios, you can increase the memory of the TiKV nodes to at least 64G.
-
-### Configuration of independent deployment of Spark and TiSpark
-
-See the [Spark official website](https://spark.apache.org/docs/latest/hardware-provisioning.html) for the detail hardware recommendations. The following is a short overview of TiSpark configuration:
-
-- It is recommended to allocate 32G memory for Spark, and reserve at least 25% of the memory for the operating system and buffer cache.
-
-- It is recommended to provision at least 8 to 16 cores on per machine for Spark. Initially, you can assign all the CPU cores to Spark.
-
-### Configuration of co-deployed TiKV and TiSpark
-
-To co-deploy TiKV and TiSpark, add TiSpark required resources to the TiKV reserved resources, and allocate 25% of the memory for the system.
-
-## Deploy the TiSpark cluster
-
-Download TiSpark's jar package [here](https://github.com/pingcap/tispark/releases) and place it in the `$SPARKPATH/jars` folder.
-
-> **Note:**
+> **Warning:**
 >
-> TiSpark v2.1.x and older versions have file names that look like `tispark-core-2.1.9-spark_2.4-jar-with-dependencies.jar`. Please check the [releases page on GitHub](https://github.com/pingcap/tispark/releases) for the exact file name for the version you want.
+> You may find TiSpark can be deployment by TiUP in this [doc](https://docs.pingcap.com/tidb/dev/tispark-deployment-topology#tispark-deployment-topology). Note that it has been deprecated.
 
-The following is a short example of how to install TiSpark v2.4.1:
+Since TiSpark is a TiDB connector of Spark, to use it, a running Spark cluster is required.
 
-{{< copyable "shell-regular" >}}
+Here we give some basic advice for the deployment of Spark. Please Turn to the [Spark official website](https://spark.apache.org/docs/latest/hardware-provisioning.html) for detailed hardware recommendations.
 
-```shell
-wget https://github.com/pingcap/tispark/releases/download/v2.4.1/tispark-assembly-2.4.1.jar
-mv tispark-assembly-2.4.1.jar $SPARKPATH/jars/
-```
+For independent deployment of Spark cluster:
++ It is recommended to allocate 32G memory for Spark. Reserve at least 25% of the memory for the operating system and the buffer cache.
++ It is recommended to provision at least 8 to 16 cores per machine for Spark. First, you must assign all the CPU cores to Spark.
 
-Copy the `spark-defaults.conf` from the `spark-defaults.conf.template` file:
-
-{{< copyable "shell-regular" >}}
-
-```shell
-cp conf/spark-defaults.conf.template conf/spark-defaults.conf
-```
-
-In the `spark-defaults.conf` file, add the following lines:
+The following is an example based on the `spark-env.sh` configuration:
 
 ```
-spark.tispark.pd.addresses $pd_host:$pd_port
-spark.sql.extensions org.apache.spark.sql.TiExtensions
+SPARK_EXECUTOR_MEMORY = 32g
+SPARK_WORKER_MEMORY = 32g
+SPARK_WORKER_CORES = 8
 ```
 
-The `spark.tispark.pd.addresses` configuration allows you to put in multiple PD servers. Specify the port number for each of them. For example, when you have multiple PD servers on `10.16.20.1,10.16.20.2,10.16.20.3` with the port 2379, put it as `10.16.20.1:2379,10.16.20.2:2379,10.16.20.3:2379`.
+For the hybrid deployment of Spark and TiKV, add the resources required by Spark to the resources reserved in TiKV, and allocate 25% of the memory for the system.
 
-> **Note:**
->
-> If TiSpark could not communicate properly, please check your firewall configuration. You can adjust the firewall rules or disable it on your need.
+## Getting TiSpark
 
-### Deploy TiSpark on an existing Spark cluster
+TiSpark is a third-party jar package for Spark that provides the ability to read/write TiKV
 
-Running TiSpark on an existing Spark cluster does not require a reboot of the cluster. You can use Spark's `--jars` parameter to introduce TiSpark as a dependency:
+### Get mysql-connector-j
 
-{{< copyable "shell-regular" >}}
+We will not provide the `mysql-connector-java` dependency because of the limit of the GPL license.
 
-```shell
-spark-shell --jars $TISPARK_FOLDER/tispark-${name_with_version}.jar
+The following versions of TiSpark's jar will no longer include `mysql-connector-java`.
+- TiSpark > 3.0.1
+- TiSpark > 2.5.1 for TiSpark 2.5.x
+- TiSpark > 2.4.3 for TiSpark 2.4.x
+
+Now, TiSpark needs `mysql-connector-java` for writing and auth. Please import `mysql-connector-java` manually when you need to write or auth.
+
+- you can import it by putting the jar into spark jars file
+
+- you can also import it when you submit spark job like
+```
+spark-submit --jars tispark-assembly-3.0_2.12-3.1.0-SNAPSHOT.jar,mysql-connector-java-8.0.29.jar
 ```
 
-### Deploy TiSpark without a Spark cluster
+### Choose TiSpark Version
 
-If you do not have a Spark cluster, we recommend using the standalone mode. For more information, see [Spark Standalone](https://spark.apache.org/docs/latest/spark-standalone.html). If you encounter any problem, see [Spark official website](https://spark.apache.org/docs/latest/spark-standalone.html). And you are welcome to [file an issue](https://github.com/pingcap/tispark/issues/new) on our GitHub.
+You can choose TiSpark version according to your TiDB and Spark version
 
-## Use Spark Shell and Spark SQL
+| TiSpark version | TiDB、TiKV、PD version | Spark version | Scala version |
+| ---------------  | -------------------- | ------------- | ------------- |
+| 2.4.x-scala_2.11 | 5.x, 4.x             | 2.3.x, 2.4.x   | 2.11          |
+| 2.4.x-scala_2.12 | 5.x, 4.x             | 2.4.x         | 2.12          |
+| 2.5.x            | 5.x, 4.x             | 3.0.x, 3.1.x   | 2.12          |
+| 3.0.x            | 5.x, 4.x             | 3.0.x, 3.1.x, 3.2.x|2.12|
+| 3.1.x            | 6.x, 5.x, 4.x             | 3.0.x, 3.1.x, 3.2.x, 3.3.x|2.12|
+- TiSpark 2.4.3, 2.5.2, 3.0.2,3.1.0 is the latest stable version, which is highly recommended.
 
-Assume that you have successfully started the TiSpark cluster as described above. The following describes how to use Spark SQL for OLAP analysis on a table named `lineitem` in the `tpch` database.
+### Get TiSpark jar
+- get from [maven central](https://search.maven.org/) and search with GroupId [![Maven Search](https://img.shields.io/badge/com.pingcap-tikv/tispark-green.svg)](http://search.maven.org/#search%7Cga%7C1%7Cpingcap)
+- get from [TiSpark releases](https://github.com/pingcap/tispark/releases)
+- build from source with the steps below
 
-To generate the test data via a TiDB server available on `192.168.1.101`:
+Currently, java8 is the only choice to build TiSpark, run mvn -version to check.
+```
+git clone https://github.com/pingcap/tispark.git
+```
+Run the following command under the TiSpark root directory:
 
-{{< copyable "shell-regular" >}}
-
-```shell
-tiup bench tpch prepare --host 192.168.1.101 --user root
+```
+// add -Dmaven.test.skip=true to skip the tests
+mvn clean install -Dmaven.test.skip=true
+// or you can add properties to specify spark version
+mvn clean install -Dmaven.test.skip=true -Pspark3.2.1
 ```
 
-Assuming that your PD node is located at `192.168.1.100`, port `2379`, add the following command to `$SPARK_HOME/conf/spark-defaults.conf`:
+### TiSpark jar's Artifact ID
+> The Artifact ID of TiSpark is a bit different in different TiSpark version
 
-{{< copyable "" >}}
+| TiSpark version               | Artifact ID                                        |
+|-------------------------------| -------------------------------------------------- |
+| 2.4.x-${scala_version}, 2.5.0 | tispark-assembly                                   |
+| 2.5.1                         | tispark-assembly-${spark_version}                  |
+| 3.0.x, 3.1.x                  | tispark-assembly-${spark_version}_${scala_version} |
+
+## Getting Started
+
+> Take the use of spark-shell for example, make sure you have deployed Spark.
+
+### Start spark-shell
+
+To use TiSpark in spark-shell:
+
+1. Add the following configuration in `spark-defaults.conf`
+```
+spark.sql.extensions  org.apache.spark.sql.TiExtensions
+spark.tispark.pd.addresses  ${your_pd_adress}
+spark.sql.catalog.tidb_catalog  org.apache.spark.sql.catalyst.catalog.TiCatalog
+spark.sql.catalog.tidb_catalog.pd.addresses  ${your_pd_adress}
+```
+2. Start spark-shell with the --jars option
 
 ```
-spark.tispark.pd.addresses 192.168.1.100:2379
-spark.sql.extensions org.apache.spark.sql.TiExtensions
+spark-shell --jars tispark-assembly-{version}.jar
 ```
 
-Start the Spark Shell:
-
-{{< copyable "shell-regular" >}}
-
-```shell
-./bin/spark-shell
-```
-
-And then enter the following command in the Spark Shell as in native Apache Spark:
-
-{{< copyable "" >}}
+### Get TiSpark version
 
 ```scala
-spark.sql("use tpch")
-spark.sql("select count(*) from lineitem").show
+spark.sql("select ti_version()").collect
 ```
 
-The result is:
-
-```
-+-------------+
-| Count (1) |
-+-------------+
-| 2000      |
-+-------------+
+### Read with TiSpark
+You can use Spark SQL to read from TiKV
+```scala
+spark.sql("use tidb_catalog")
+spark.sql("select count(*) from ${database}.${table}").show
 ```
 
-Besides Spark Shell, there is also Spark SQL available. To use Spark SQL, run:
+### Write with TiSpark
 
-{{< copyable "shell-regular" >}}
-
-```shell
-./bin/spark-sql
-```
-
-You can run the same query:
-
-{{< copyable "" >}}
+You can use Spark DataSource API to write to TiKV and guarantees ACID
 
 ```scala
-use tpch;
-select count(*) from lineitem;
+val tidbOptions: Map[String, String] = Map(
+  "tidb.addr" -> "127.0.0.1",
+  "tidb.password" -> "",
+  "tidb.port" -> "4000",
+  "tidb.user" -> "root"
+)
+
+val customerDF = spark.sql("select * from customer limit 100000")
+
+customerDF.write
+.format("tidb")
+.option("database", "tpch_test")
+.option("table", "cust_test_select")
+.options(tidbOptions)
+.mode("append")
+.save()
 ```
+See [Data Source API User Guide](https://github.com/pingcap/tispark/blob/master/docs/features/datasource_api_userguide.md) for more details.
 
-The result is:
+You can also write with Spark SQL since TiSpark 3.1. See [insert SQL](https://github.com/pingcap/tispark/blob/master/docs/features/insert_sql_userguide.md) for more detail.
 
-```
-2000
-Time taken: 0.673 seconds, Fetched 1 row(s)
-```
+### Write With JDBC DataSource
 
-## Use JDBC support with ThriftServer
+You can also write to TiDB with Spark JDBC. You need not TiSpark when you decide to write in this way.
 
-You can use Spark Shell or Spark SQL without JDBC support. However, JDBC support is required for tools like beeline. JDBC support is provided by Thrift server. To use Spark's Thrift server, run:
-
-{{< copyable "shell-regular" >}}
-
-```shell
-./sbin/start-thriftserver.sh
-```
-
-To connect JDBC with Thrift server, you can use JDBC supported tools including beeline.
-
-For example, to use it with beeline:
-
-{{< copyable "shell-regular" >}}
-
-```shell
-./bin/beeline jdbc:hive2://localhost:10000
-```
-
-If the following message is displayed, you have enabled beeline successfully.
-
-```
-Beeline version 1.2.2 by Apache Hive
-```
-
-Then, you can run the query command:
-
-```
-1: jdbc:hive2://localhost:10000> use testdb;
-+---------+--+
-| Result  |
-+---------+--+
-+---------+--+
-No rows selected (0.013 seconds)
-
-select count(*) from account;
-+-----------+--+
-| count(1)  |
-+-----------+--+
-| 1000000   |
-+-----------+--+
-1 row selected (1.97 seconds)
-```
-
-## Use TiSpark together with Hive
-
-You can use TiSpark together with Hive. Before starting Spark, you need to set the `HADOOP_CONF_DIR` environment variable to your Hadoop configuration folder and copy `hive-site.xml` to the `spark/conf` folder.
-
-```scala
-val tisparkDF = spark.sql("select * from tispark_table").toDF
-tisparkDF.write.saveAsTable("hive_table") // save table to hive
-spark.sql("select * from hive_table a, tispark_table b where a.col1 = b.col1").show // join table across Hive and Tispark
-```
-
-## Batch write DataFrames into TiDB using TiSpark
-
-Starting from v2.3, TiSpark natively supports batch writing DataFrames into TiDB clusters. This writing mode is implemented through the two-phase commit protocol of TiKV.
-
-Compared with the writing through Spark + JDBC, the TiSpark batch writing has the following advantages:
-
-|  Aspects to compare    | TiSpark batch writes | Spark + JDBC writes|
-| ------- | --------------- | --------------- |
-| Atomicity   | The DataFrames either are all written successfully or all fail to write. | If the Spark task fails and exits during the writing process, a part of the data might be written successfully. |
-| Isolation   | During the writing process, the data being written is invisible to other transactions. | During the writing process, some successfully written data is visible to other transactions.  |
-| Error recovery | If the batch write fails, you only need to re-run Spark. | An application is required to achieve idempotence. For example, if the batch write fails, you need to clean up the part of the successfully written data and re-run Spark. You need to set `spark.task.maxFailures=1` to prevent data duplication caused by task retry. |
-| Speed    | Data is directly written into TiKV, which is faster. | Data is written to TiKV through TiDB, which affects the speed. |
-
-The following example shows how to batch write data using TiSpark via the scala API:
-
-```scala
-// select data to write
-val df = spark.sql("select * from tpch.ORDERS")
-
-// write data to tidb
-df.write.
-  format("tidb").
-  option("tidb.addr", "127.0.0.1").
-  option("tidb.port", "4000").
-  option("tidb.user", "root").
-  option("tidb.password", "").
-  option("database", "tpch").
-  option("table", "target_orders").
-  mode("append").
-  save()
-```
-
-If the amount of data to write is large and the writing time exceeds ten minutes, you need to ensure that the GC time is longer than the writing time.
-
-```sql
-UPDATE mysql.tidb SET VARIABLE_VALUE="6h" WHERE VARIABLE_NAME="tikv_gc_life_time";
-```
-
-Refer to [this document](https://github.com/pingcap/tispark/blob/master/docs/datasource_api_userguide.md) for details.
-
-## Load Spark Dataframe into TiDB using JDBC
-
-In addition to using TiSpark to batch write DataFrames into the TiDB cluster, you can also use Spark's native JDBC support for the data writing:
+This is beyond the scope of TiSpark. We just give a simple example here, you can get detailed info in [official doc](https://spark.apache.org/docs/latest/sql-data-sources-jdbc.html)
 
 ```scala
 import org.apache.spark.sql.execution.datasources.jdbc.JDBCOptions
 
 val customer = spark.sql("select * from customer limit 100000")
-// You might repartition the source to make it balance across nodes
-// and increase the concurrency.
+// you might repartition source to make it balanced across nodes
+// and increase concurrency
 val df = customer.repartition(32)
 df.write
 .mode(saveMode = "append")
 .format("jdbc")
 .option("driver", "com.mysql.jdbc.Driver")
- // Replace the host and port with that of your own and be sure to use the rewrite batch
+ // replace the host and port with yours and be sure to use rewrite batch
 .option("url", "jdbc:mysql://127.0.0.1:4000/test?rewriteBatchedStatements=true")
 .option("useSSL", "false")
-// As tested, 150 is good practice
+// as tested, setting to `150` is a good practice
 .option(JDBCOptions.JDBC_BATCH_INSERT_SIZE, 150)
 .option("dbtable", s"cust_test_select") // database name and table name here
-.option("isolationLevel", "NONE") // recommended to set isolationLevel to NONE if you have a large DF to load.
+.option("isolationLevel", "NONE") // set isolationLevel to NONE
 .option("user", "root") // TiDB user here
 .save()
 ```
 
-It is recommended to set `isolationLevel` to `NONE` to avoid large single transactions which might potentially lead to TiDB OOM.
+Set `isolationLevel` to `NONE` to avoid large single transactions which might lead to TiDB OOM and also avoid the `ISOLATION LEVEL does not support` error (TiDB currently only supports `REPEATABLE-READ`).
 
-> **Note:**
->
-> When you use JDBC, the default value of `isolationLevel` is `READ_UNCOMMITTED`, which causes the error of unsupported isolation level transactions. It is recommended to set the value of `isolationLevel` to `NONE`.
+### Delete with TiSpark
+You can use Spark SQL to delete from TiKV (Tispark master support)
 
-## Statistics information
+```
+spark.sql("use tidb_catalog")
+spark.sql("delete from ${database}.${table} where xxx")
+```
+See [here](https://github.com/pingcap/tispark/blob/master/docs/features/delete_userguide.md) for more details.
 
-TiSpark uses TiDB statistic information for the following items:
+### Use with other data source
+> you can use multiple catalogs to read from different data sources.
+```
+// read from hive
+spark.sql("select * from spark_catalog.default.t").show
 
-1. Determining which index to ues in your query plan with the estimated lowest cost.
-2. Small table broadcasting, which enables efficient broadcast join.
+// join hive and tidb
+spark.sql("select t1.id,t2.id from spark_catalog.default.t t1 left join tidb_catalog.test.t t2").show
+```
 
-If you would like TiSpark to use statistic information, first you need to make sure that concerning tables have already been analyzed. Read more about [how to analyze tables](/statistics.md).
+## Configuration
 
-Starting from TiSpark 2.0, statistics information is default to auto load.
+> The configurations in the table below can be put together with `spark-defaults.conf` or passed in the same way as other Spark configuration properties.
 
-## Security
+| Key                                             | Default Value    | Description                                                                                                                                                                                                                                                                                                                                                                                                                                         |
+|-------------------------------------------------|------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `spark.tispark.pd.addresses`                    | `127.0.0.1:2379` | The addresses of PD cluster, which are split by comma                                                                                                                                                                                                                                                                                                                                                                                               |
+| `spark.tispark.grpc.framesize`                  | `2147483647`     | The maximum frame size of gRPC response in bytes (default 2G)                                                                                                                                                                                                                                                                                                                                                                                       |
+| `spark.tispark.grpc.timeout_in_sec`             | `10`             | The gRPC timeout time in seconds                                                                                                                                                                                                                                                                                                                                                                                                                    |
+| `spark.tispark.plan.allow_agg_pushdown`         | `true`           | Whether aggregations are allowed to push down to TiKV (in case of busy TiKV nodes)                                                                                                                                                                                                                                                                                                                                                                  |
+| `spark.tispark.plan.allow_index_read`           | `true`           | Whether index is enabled in planning (which might cause heavy pressure on TiKV)                                                                                                                                                                                                                                                                                                                                                                     |
+| `spark.tispark.index.scan_batch_size`           | `20000`          | The number of row key in batch for the concurrent index scan                                                                                                                                                                                                                                                                                                                                                                                        |
+| `spark.tispark.index.scan_concurrency`          | `5`              | The maximal number of threads for index scan that retrieves row keys (shared among tasks inside each JVM)                                                                                                                                                                                                                                                                                                                                           |
+| `spark.tispark.table.scan_concurrency`          | `512`            | The maximal number of threads for table scan (shared among tasks inside each JVM)                                                                                                                                                                                                                                                                                                                                                                   |
+| `spark.tispark.request.command.priority`        | `Low`            | The value options are `Low`, `Normal`, `High`. This setting impacts the resource to get in TiKV. `Low` is recommended because the OLTP workload is not disturbed.                                                                                                                                                                                                                                                                                   |
+| `spark.tispark.coprocess.codec_format`          | `chblock`        | choose the default codec format for coprocessor, available options are `default`, `chblock`, `chunk`                                                                                                                                                                                                                                                                                                                                                |
+| `spark.tispark.coprocess.streaming`             | `false`          | Whether to use streaming for response fetching (experimental)                                                                                                                                                                                                                                                                                                                                                                                       |
+| `spark.tispark.plan.unsupported_pushdown_exprs` | ``               | A comma-separated list of expressions. In case you have a very old version of TiKV, you might disable some of the expression push-down if they are not supported.                                                                                                                                                                                                                                                                                   |
+| `spark.tispark.plan.downgrade.index_threshold`  | `1000000000`     | If the range of index scan on one Region exceeds this limit in the original request, downgrade this Region's request to table scan rather than the planned index scan. By default, the downgrade is disabled.                                                                                                                                                                                                                                       |
+| `spark.tispark.show_rowid`                      | `false`          | Whether to show the implicit row ID if the ID exists                                                                                                                                                                                                                                                                                                                                                                                                |
+| `spark.tispark.db_prefix`                       | ``               | The string that indicates the extra prefix for all databases in TiDB. This string distinguishes the databases in TiDB from the Hive databases with the same name.                                                                                                                                                                                                                                                                                   |
+| `spark.tispark.request.isolation.level`         | `SI`             | Isolation level means whether to resolve locks for the underlying TiDB clusters. When you use the "RC", you get the latest version of record smaller than your `tso` and ignore the locks. If you use "SI", you resolve the locks and get the records depending on whether the resolved lock is committed or aborted.                                                                                                                               |
+| `spark.tispark.coprocessor.chunk_batch_size`    | `1024`           | How many rows fetched from Coprocessor                                                                                                                                                                                                                                                                                                                                                                                                              |
+| `spark.tispark.isolation_read_engines`          | `tikv,tiflash`   | List of readable engines of TiSpark, comma separated, storage engines not listed will not be read                                                                                                                                                                                                                                                                                                                                                   |
+| `spark.tispark.stale_read`                      | it is optional   | The stale read timestamp(ms). see [here](features/stale_read.md) for more detail                                                                                                                                                                                                                                                                                                                                                                             |
+| `spark.tispark.tikv.tls_enable`                 | `false`          | Whether to enable TiSpark TLS. 　                                                                                                                                                                                                                                                                                                                                                                                                                    |
+| `spark.tispark.tikv.trust_cert_collection`      | ``               | Trusted certificates for TiKV Client, which is used for verifying the remote pd's certificate, e.g. `/home/tispark/config/root.pem` The file should contain an X.509 certificate collection.                                                                                                                                                                                                                                                        |
+| `spark.tispark.tikv.key_cert_chain`             | ``               | An X.509 certificate chain file for TiKV Client, e.g. `/home/tispark/config/client.pem`.                                                                                                                                                                                                                                                                                                                                                            |
+| `spark.tispark.tikv.key_file`                   | ``               | A PKCS#8 private key file for TiKV Client, e.g. `/home/tispark/client_pkcs8.key`.                                                                                                                                                                                                                                                                                                                                                                   |
+| `spark.tispark.tikv.jks_enable`                 | `false`          | Whether to use the JAVA key store instead of the X.509 certificate.                                                                                                                                                                                                                                                                                                                                                                                 |
+| `spark.tispark.tikv.jks_trust_path`             | ``               | A JKS format certificate for TiKV Client, that is generated by `keytool`, e.g. `/home/tispark/config/tikv-truststore`.                                                                                                                                                                                                                                                                                                                              |
+| `spark.tispark.tikv.jks_trust_password`         | ``               | The password of `spark.tispark.tikv.jks_trust_path`.                                                                                                                                                                                                                                                                                                                                                                                                |
+| `spark.tispark.tikv.jks_key_path`               | ``               | A JKS format key for TiKV Client generated by `keytool`, e.g. `/home/tispark/config/tikv-clientstore`.                                                                                                                                                                                                                                                                                                                                              |
+| `spark.tispark.tikv.jks_key_password`           | ``               | The password of `spark.tispark.tikv.jks_key_path`.                                                                                                                                                                                                                                                                                                                                                                                                  |
+| `spark.tispark.jdbc.tls_enable`                 | `false`          | Whether to enable TLS when using JDBC connector.                                                                                                                                                                                                                                                                                                                                                                                                    |
+| `spark.tispark.jdbc.server_cert_store`          | ``               | Trusted certificates for JDBC. This is a JKS format certificate generated by `keytool`, e.g. `/home/tispark/config/jdbc-truststore`. Default is "", which means TiSpark doesn't verify TiDB server.                                                                                                                                                                                                                                                 |
+| `spark.tispark.jdbc.server_cert_password`       | ``               | The password of `spark.tispark.jdbc.server_cert_store`.                                                                                                                                                                                                                                                                                                                                                                                             |
+| `spark.tispark.jdbc.client_cert_store`          | ``               | A PKCS#12 certificate for JDBC. It is a JKS format certificate generated by `keytool`, e.g. `/home/tispark/config/jdbc-clientstore`. Default is "", which means TiDB server doesn't verify TiSpark.                                                                                                                                                                                                                                                 |
+| `spark.tispark.jdbc.client_cert_password`       | ``               | The password of `spark.tispark.jdbc.client_cert_store`.                                                                                                                                                                                                                                                                                                                                                                                             |
+| `spark.tispark.tikv.tls_reload_interval`        | `10s`            | The interval time of checking if there is any reloading certificates. The default is `10s` (10 seconds).                                                                                                                                                                                                                                                                                                                                            |
+| `spark.tispark.tikv.conn_recycle_time`          | `60s`            | The interval time of cleaning the expired connection with TiKV. Only take effect when enabling cert reloading. The default is `60s` (60 seconds).                                                                                                                                                                                                                                                                                                   |
+| `spark.tispark.host_mapping`                    | ``               | This is route map used to configure public IP and intranet IP mapping. When the TiDB cluster is running on the intranet, you can map a set of intranet IPs to public IPs for an outside Spark cluster to access. The format is `{Intranet IP1}:{Public IP1};{Intranet IP2}:{Public IP2}`, e.g. `192.168.0.2:8.8.8.8;192.168.0.3:9.9.9.9`.                                                                                                           |
+| `spark.tispark.new_collation_enable`            | ``               | When TiDB cluster enable [new collation](https://docs.pingcap.com/tidb/stable/character-set-and-collation#new-framework-for-collations), this configuration should be `true`, otherwise it should be `false`. If this item is not configured, TiSpark will configure automatically based on the TiDB version. The configuration rule is as follows: If the TiDB version is greater than or equal to v6.0.0, it is `true`; otherwise, it is `false`. |
+
+### TLS Configuration
+
+TiSpark TLS has two parts: TiKV Client TLS and JDBC connector TLS. When you want to enable TLS in TiSpark, you need to configure two parts of configuration.
+`spark.tispark.tikv.xxx` is used for TiKV Client to create TLS connection with PD and TiKV server.
+While `spark.tispark.jdbc.xxx` is used for JDBC connect with TiDB server in TLS connection.
+
+When TiSpark TLS is enabled, either the X.509 certificate with `tikv.trust_cert_collection`, `tikv.key_cert_chain` and `tikv.key_file` configurations or the JKS certificate with `tikv.jks_enable`, `tikv.jks_trust_path` and `tikv.jks_key_path` must be configured.
+While `jdbc.server_cert_store` and `jdbc.client_cert_store` is optional.
+
+TiSpark only supports TLSv1.2 and TLSv1.3 version.
+
+* An example of opening TLS configuration with the X.509 certificate in TiKV Client.
+
+```
+spark.tispark.tikv.tls_enable                                  true
+spark.tispark.tikv.trust_cert_collection                       /home/tispark/root.pem
+spark.tispark.tikv.key_cert_chain                              /home/tispark/client.pem
+spark.tispark.tikv.key_file                                    /home/tispark/client.key
+```
+
+* An example for enabling TLS with JKS configurations in TiKV Client.
+
+```
+spark.tispark.tikv.tls_enable                                  true
+spark.tispark.tikv.jks_enable                                  true
+spark.tispark.tikv.jks_key_path                                /home/tispark/config/tikv-truststore
+spark.tispark.tikv.jks_key_password                            tikv_trustore_password
+spark.tispark.tikv.jks_trust_path                              /home/tispark/config/tikv-clientstore
+spark.tispark.tikv.jks_trust_password                          tikv_clientstore_password
+```
+
+When JKS and X.509 cert are set simultaneously, JKS would have a higher priority.
+That means TLS builder will use JKS cert first. So, do not set `spark.tispark.tikv.jks_enable=true` when you just want to use a common PEM cert.
+
+* An example for enabling TLS in JDBC connector.
+
+```
+spark.tispark.jdbc.tls_enable                                  true
+spark.tispark.jdbc.server_cert_store                           /home/tispark/jdbc-truststore
+spark.tispark.jdbc.server_cert_password                        jdbc_truststore_password
+spark.tispark.jdbc.client_cert_store                           /home/tispark/jdbc-clientstore
+spark.tispark.jdbc.client_cert_password                        jdbc_clientstore_password
+```
+
+For how to open TiDB TLS, see [here](https://docs.pingcap.com/tidb/dev/enable-tls-between-clients-and-servers).
+For how to generate a JAVA key store, see [here](https://dev.mysql.com/doc/connector-j/5.1/en/connector-j-reference-using-ssl.html).
+
+### Log4j Configuration
+
+When you start `spark-shell` or `spark-sql` and run query, you might see the following warnings:
+```
+Failed to get database ****, returning NoSuchObjectException
+Failed to get database ****, returning NoSuchObjectException
+```
+where `****` is the name of database.
+
+The warnings are benign and occurs because Spark cannot find `****` in its own catalog. You can just ignore these warnings.
+
+To mute them, append the following text to `${SPARK_HOME}/conf/log4j.properties`.
+
+```
+# tispark disable "WARN ObjectStore:568 - Failed to get database"
+log4j.logger.org.apache.hadoop.hive.metastore.ObjectStore=ERROR
+```
+
+### Time Zone Configuration
+
+Set time zone by using the `-Duser.timezone` system property (for example, `-Duser.timezone=GMT-7`), which affects the `Timestamp` type.
+
+Do not use `spark.sql.session.timeZone`.
+
+## Features
+
+> Main Features
+
+| Feature Support                 | TiSpark 2.4.x | TiSpark 2.5.x | TiSpark 3.0.x | TiSpark 3.1.x |
+|---------------------------------| ------------- | ------------- | ----------- |---------------|
+| SQL select without tidb_catalog | ✔           | ✔           |             |               |
+| SQL select with tidb_catalog    |               | ✔           | ✔         | ✔             |
+| DataFrame append                | ✔           | ✔           | ✔         | ✔             |
+| DataFrame reads                 | ✔           | ✔           | ✔         | ✔             |
+| SQL show databases              | ✔           | ✔           | ✔         | ✔             |
+| SQL show tables                 | ✔           | ✔           | ✔         | ✔             |
+| SQL auth                        |               | ✔           | ✔         | ✔             |
+| SQL delete                      |               |               | ✔         | ✔             |
+| SQL insert                      |               |               |           | ✔              |
+| TLS                             |               |               | ✔         | ✔             |
+| DataFrame auth                  |               |               |             | ✔             |
+
+### Expression Index
+
+`tidb-5.0` supports Expression Index.
+
+TiSpark currently supports retrieving data from table with `Expression Index`, but the `Expression Index` will not be used by the planner of TiSpark.
+
+### TiFlash
+
+TiSpark can read from TiFlash with the configuration `spark.tispark.isolation_read_engines`
+
+### Partition Table support
+
+**Reading partition table from TiDB**
+
+TiSpark reads the range and hash partition table from TiDB.
+
+Currently, TiSpark doesn't support a MySQL/TiDB partition table syntax `select col_name from table_name partition(partition_name)`, but you can still use `where` condition to filter the partitions.
+
+TiSpark decides whether to apply partition pruning according to the partition type and the partition expression associated with the table.
+
+Currently, TiSpark partially apply partition pruning on range partition.
+
+The partition pruning is applied when the partition expression of the range partition is one of the following:
+
++ column expression
++ `YEAR($argument)` where the argument is a column and its type is datetime or string literal
+  that can be parsed as datetime.
+
+If partition pruning is not applied, TiSpark's reading is equivalent to doing a table scan over all partitions.
+
+**Write into partition table**
+
+Currently, TiSpark only supports writing into the range and hash partition table under the following conditions:
++ the partition expression is column expression
++ the partition expression is `YEAR($argument)` where the argument is a column and its type is datetime or string literal
+  that can be parsed as datetime.
+
+There are two ways to write into partition table:
+1. Use datasource API to write into partition table which supports replace and append semantics.
+2. Use delete statement with Spark SQL.
+
+> [!NOTE]
+> Currently the charset only supported is utf8mb4 and [`new_collations_enabled_on_first_bootstrap`](https://docs.pingcap.com/tidb/dev/tidb-configuration-file#new_collations_enabled_on_first_bootstrap)
+> need to be set to `false` in TiDB.
+
+### Security
 
 If you are using TiSpark v2.5.0 or a later version, you can authenticate and authorize TiSpark users by using TiDB.
 
@@ -350,36 +428,31 @@ spark.sql.tidb.user $your_tidb_server_user
 spark.sql.tidb.password $your_tidb_server_password
 ```
 
-For more information, see [Authorization and authentication through TiDB server](https://github.com/pingcap/tispark/blob/master/docs/authorization_userguide.md).
+For more information, see [Authorization and authentication through TiDB server](https://github.com/pingcap/tispark/blob/master/docs/features/authorization_userguide.md).
 
-> **Note:**
->
-> After enabling the authentication and authorization feature, TiSpark Spark SQL can only use TiDB as the data source, so switching to other data sources (such as Hive) makes tables invisible.
 
-## TiSpark FAQ
+### Other Features
+- [Push down](https://github.com/pingcap/tispark/blob/master/docs/features/push_down.md)
+- [Delete with TiSpark](https://github.com/pingcap/tispark/blob/master/docs/features/delete_userguide.md)
+- [Stale read](https://github.com/pingcap/tispark/blob/master/docs/features/stale_read.md)
+- [TiSpark with multiple catalogs](https://github.com/pingcap/tispark/wiki/TiSpark-with-multiple-catalogs)
+- TiSpark TLS : See TLS Configuration section in this article
+- [TiSpark Telemetry](https://github.com/pingcap/tispark/blob/master/docs/features/telemetry.md)
+- [TiSpark plan](https://github.com/pingcap/tispark/blob/master/docs/features/query_execution_plan_in_TiSpark.md)
 
-Q: What are the pros/cons of independent deployment as opposed to a shared resource with an existing Spark / Hadoop cluster?
+## Statistics information
 
-A: You can use the existing Spark cluster without a separate deployment, but if the existing cluster is busy, TiSpark will not be able to achieve the desired speed.
+TiSpark uses the statistic information for:
 
-Q: Can I mix Spark with TiKV?
++ Determining which index to use in your query plan with the lowest estimated cost.
++ Small table broadcasting, which enables efficient broadcast join.
 
-A: If TiDB and TiKV are overloaded and run critical online tasks, consider deploying TiSpark separately. You also need to consider using different NICs to ensure that OLTP's network resources are not compromised and affect online business. If the online business requirements are not high or the loading is not large enough, you can consider mixing TiSpark with TiKV deployment.
+For TiSpark to use the statistic information, first make sure that relevant tables have been analyzed.
 
-Q: What can I do if `warning: WARN ObjectStore:568 - Failed to get database` is returned when executing SQL statements using TiSpark?
+See [here](https://github.com/pingcap/docs/blob/master/statistics.md) for more details about how to analyze tables.
 
-A: You can ignore this warning. It occurs because Spark tries to load two nonexistent databases (`default` and `global_temp`) in its catalog. If you want to mute this warning, modify [log4j](https://github.com/pingcap/tidb-docker-compose/blob/master/tispark/conf/log4j.properties#L43) by adding `log4j.logger.org.apache.hadoop.hive.metastore.ObjectStore=ERROR` to the `log4j` file in `tispark/conf`. You can add the parameter to the `log4j` file of the `config` under Spark. If the suffix is `template`, you can use the `mv` command to change it to `properties`.
+Since TiSpark 2.0, statistics information is default to auto-load.
 
-Q: What can I do if `java.sql.BatchUpdateException: Data Truncated` is returned when executing SQL statements using TiSpark?
+## FAQ
 
-A: This error occurs because the length of the data written exceeds the length of the data type defined by the database. You can check the field length and adjust it accordingly.
-
-Q: Does TiSpark read Hive metadata by default?
-
-A: By default, TiSpark searches for the Hive database by reading the Hive metadata in hive-site. If the search task fails, it searches for the TiDB database instead, by reading the TiDB metadata.
-
-If you do not need this default behavior, do not configure the Hive metadata in hive-site.
-
-Q: What can I do if `Error: java.io.InvalidClassException: com.pingcap.tikv.region.TiRegion; local class incompatible: stream classdesc serialVersionUID ...` is returned when TiSpark is executing a Spark task?
-
-A: The error message shows a `serialVersionUID` conflict, which occurs because you have used `class` and `TiRegion` of different versions. Because `TiRegion` only exists in TiSpark, multiple versions of TiSpark packages might be used. To fix this error, you need to make sure the version of TiSpark dependency is consistent among all nodes in the cluster.
+See our wiki [TiSpark FAQ](https://github.com/pingcap/tispark/wiki/TiSpark-FAQ)
