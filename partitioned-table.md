@@ -191,7 +191,6 @@ PARTITION BY RANGE COLUMNS(name,valid_until)
  PARTITION `p2024-` VALUES LESS THAN (0x7f,'2025-01-01 00:00:00'))
 ```
 
-
 It will partition the data by year and by name in the ranges ['', 'G'), ['G', 'M'), ['M', 'S') and ['S',). It allows you to easily drop invalid data while still benefit from partition pruning on both `name` and `valid_until` columns. In this example, `[,)` indicates a left-closed, right-open range. For example, ['G', 'M') indicates a range containing `G` and from `G` to `M`, but excluding `M`.
 
 ### Range INTERVAL partitioning
