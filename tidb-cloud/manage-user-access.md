@@ -47,7 +47,7 @@ If your password is not changed within 90 days, you will get a prompt to reset y
 
 ## Manage user profiles
 
-In TiDB Cloud, you can easily manage your profile, including your first name, last time, company name, country, and phone number.
+In TiDB Cloud, you can easily manage your profile, including your first name, last name, and phone number.
 
 1. Click the account name in the upper-right corner of the TiDB Cloud console.
 
@@ -121,7 +121,7 @@ To invite a member to a project, perform the following steps:
 5. Enter the email address of the user to be invited, select a role for the user, and then choose a project for the user.
 
     > **Tip:**
-    > 
+    >
     > If you want to invite multiple members at one time, you can enter multiple email addresses.
 
 6. Click **Confirm**. Then the new user is successfully added into the user list. At the same time, an email is sent to the invited email address with a verification link.
@@ -195,7 +195,7 @@ To remove a member from a project, perform the following steps:
 
 ## Set the local time zone
 
-If you are the organization owner, you can modify the system display time according to your time zone. 
+If you are the organization owner, you can modify the system display time according to your time zone.
 
 To change the local timezone setting, perform the following steps:
 
