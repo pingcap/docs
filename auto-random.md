@@ -74,19 +74,15 @@ tidb> SELECT * FROM t;
 3 rows in set (0.00 sec)
 ```
 
-The `AUTO_RANDOM(S, R)` column value automatically assigned by TiDB has a total of 64 bits:
-
-- `S` is the number of shard bits. The value ranges from `1` to `15`. The default value is `5`.
-- `R` is the total length of the automatic allocation range. The value ranges from `32` to `64`. The default value is `64`.
+The `AUTO_RANDOM(S)` column value automatically assigned by TiDB has a total of 64 bits. `S` is the number of shard bits. The value ranges from `1` to `15`. The default value is `5`.
 
 The structure of an `AUTO_RANDOM` value is as follows:
 
-| Total number of bits | Sign bit | Reserved bits | Shard bits | Auto-increment bits |
-|---------|---------|-------------|--------|--------------|
-| 64 bits | 0/1 bit | (64-R) bits | S bits | (R-1-S) bits |
+| Total number of bits | Sign bit | Shard bits | Auto-increment bits |
+|---------|---------|--------|---------------|
+| 64 bits | 0/1 bit | S bits | (64-1-S) bits |
 
 - The length of the sign bit is determined by the existence of an `UNSIGNED` attribute. If there is an `UNSIGNED` attribute, the length is `0`. Otherwise, the length is `1`.
-- The length of the reserved bits is `64-R`. The reserved bits are always `0`.
 - The content of the shard bits is obtained by calculating the hash value of the starting time of the current transaction. To use a different length of shard bits (such as 10), you can specify `AUTO_RANDOM(10)` when creating the table.
 - The value of the auto-increment bits is stored in the storage engine and allocated sequentially. Each time a new value is allocated, the value is incremented by 1. The auto-increment bits ensure that the values of `AUTO_RANDOM` are unique globally. When the auto-increment bits are exhausted, an error `Failed to read auto-increment value from storage engine` is reported when the value is allocated again.
 
@@ -96,11 +92,6 @@ The structure of an `AUTO_RANDOM` value is as follows:
 >
 > - Since there is a total of 64 available bits, the shard bits length affects the auto-increment bits length. That is, as the shard bits length increases, the length of auto-increment bits decreases, and vice versa. Therefore, you need to balance the randomness of allocated values and available space.
 > - The best practice is to set the shard bits as `log(2, x)`, in which `x` is the current number of storage engines. For example, if there are 16 TiKV nodes in a TiDB cluster, you can set the shard bits as `log(2, 16)`, that is `4`. After all regions are evenly scheduled to each TiKV node, the load of bulk writes can be uniformly distributed to different TiKV nodes to maximize resource utilization.
->
-> Selection of range (`R`):
->
-> - Typically, the `R` parameter needs to be set when the numeric type of the application cannot represent a full 64-bit integer.
-> - For example, the range of JSON number is `[-2^53+1, 2^53-1]`. TiDB can easily assign an integer outside this range to a column of `AUTO_RANDOM(5)`, causing unexpected behaviors when the application reads the column. In this case, you can replace `AUTO_RANDOM(5)` with `AUTO_RANDOM(5, 54)` and TiDB does not assign an integer greater than `9007199254740991` (2^53-1) to the column.
 
 Values allocated implicitly to the `AUTO_RANDOM` column affect `last_insert_id()`. To get the ID that TiDB last implicitly allocates, you can use the `SELECT last_insert_id ()` statement.
 
