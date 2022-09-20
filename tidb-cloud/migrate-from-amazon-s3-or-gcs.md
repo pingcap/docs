@@ -61,21 +61,27 @@ For detailed steps, see [Configure Amazon S3 access](/tidb-cloud/config-s3-and-g
 
 ### Step 3. Import data into TiDB Cloud
 
-1. On the **Data Import** page, besides the **Role ARN** field, you also need to fill in the following information:
+1. Log in to the [TiDB Cloud console](https://tidbcloud.com/), and navigate to the **Clusters** page.
 
-    - **Data Source Type**: `AWS S3`.
-    - **Bucket URL**: fill in the bucket URL of your source data.
+2. Locate your target cluster, click **...** in the upper-right corner of the cluster area, and select **Import Data**. The **Data Import** page is displayed.
+
+3. On the **Data Import** page, fill in the following information:
+
     - **Data Format**: choose the format of your data.
-    - **Target Cluster**: fill in the **Username** and **Password** fields.
-    - **DB/Tables Filter**: if necessary, you can specify a [table filter](/table-filter.md#syntax). If you want to configure multiple filter rules, use `,` to separate the rules.
+    - **Location**: `AWS`
+    - **Bucket URL**: fill in the bucket URL of your source data.
+    - **Role-ARN**: enter the Role-ARN you obtained in [Step 2](#step-2-configure-amazon-s3-access).
+    - **Target Cluster**: shows the cluster name and the region name.
 
-2. Click **Import**.
+    If the region of the bucket is different from your cluster, confirm the compliance of cross region. Click **Next**.
+    
+    TiDB Cloud starts validating whether it can access your data in the specified bucket URL. After validation, TiDB Cloud tries to scan all the files in the data source using the default file naming pattern, and returns a scan summary result on the left side of the next page. If you get the `AccessDenied` error, see [Troubleshoot Access Denied Errors during Data Import from S3](/tidb-cloud/troubleshoot-import-access-denied-error.md).
 
-    A warning message about the database resource consumption is displayed.
+4. Modify the file patterns and add the table filter rules if needed.
 
-3. Click **Confirm**.
+5. Click **Next**.
 
-    TiDB Cloud starts validating whether it can access your data in the specified bucket URL. After the validation is completed and successful, the import task starts automatically. If you get the `AccessDenied` error, see [Troubleshoot Access Denied Errors during Data Import from S3](/tidb-cloud/troubleshoot-import-access-denied-error.md).
+6. On the **Preview** page, confirm the data to be imported and then click **Start Import**.
 
 After the data is imported, if you want to remove the Amazon S3 access of TiDB Cloud, simply delete the policy that you added in [Step 2. Configure Amazon S3 access](#step-2-configure-amazon-s3-access).
 
@@ -92,7 +98,7 @@ Before migrating data from GCS to TiDB Cloud, ensure the following:
 
 ### Step 1. Create a GCS bucket and prepare source data files
 
-1. Create a GCS bucket in your corporate-owned GCP account. 
+1. Create a GCS bucket in your corporate-owned GCP account.
 
     For more information, see [Creating storage buckets](https://cloud.google.com/storage/docs/creating-buckets) in the Google Cloud Storage documentation.
 
@@ -101,11 +107,11 @@ Before migrating data from GCS to TiDB Cloud, ensure the following:
     For more information, see [Install TiUP](/tidb-cloud/migrate-data-into-tidb.md#step-1-install-tiup) and [Export data from MySQL compatible databases](/tidb-cloud/migrate-data-into-tidb.md#step-2-export-data-from-mysql-compatible-databases).
 
 > **Note:**
-> 
-> - Ensure that your source data can be copied to a file format supported by TiDB Cloud. The supported formats include CSV, Dumpling, and Aurora Backup Snapshot. If your source files are in the CSV format, you need to follow [the naming convention supported by TiDB](https://docs.pingcap.com/tidb/stable/migrate-from-csv-using-tidb-lightning#file-name). 
+>
+> - Ensure that your source data can be copied to a file format supported by TiDB Cloud. The supported formats include CSV, Dumpling, and Aurora Backup Snapshot. If your source files are in the CSV format, you need to follow [the naming convention supported by TiDB](https://docs.pingcap.com/tidb/stable/migrate-from-csv-using-tidb-lightning#file-name).
 > - Where possible and applicable, it is recommended that you split a large source file into smaller files of maximum size 256 MB because it can allow TiDB Cloud to read files in parallel across threads, which provides you faster importing performance.
 
-### Step 2. Configure GCS access 
+### Step 2. Configure GCS access
 
 To allow TiDB cloud to access the source data in your GCS bucket, you need to configure the GCS access for each TiDB Cloud as a service on the GCP project and GCS bucket pair. Once the configuration is done for one cluster in a project, all database clusters in that project can access the GCS bucket.
 

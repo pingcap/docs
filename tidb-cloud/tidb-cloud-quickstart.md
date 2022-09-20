@@ -145,6 +145,7 @@ To create a Dedicated Tier cluster, take the following steps:
 We provide Capital Bikeshare sample data for you to easily import data and run sample queries.
 
 1. Navigate to the **Clusters** page.
+
 2. In the area of your newly created cluster, click **...** in the upper-right corner and select **Import Data**. The **Data Import** page is displayed.
 
     > **Tip:**
@@ -158,12 +159,13 @@ We provide Capital Bikeshare sample data for you to easily import data and run s
 
     If your TiDB cluster is hosted by AWS (the Developer Tier is hosted by AWS by default), fill in the following parameters:
 
-    - **Data Source Type**: `AWS S3`.
-    - **Bucket URL**: enter the sample data URL `s3://tidbcloud-samples/data-ingestion/`.
-    - **Data Format**: select **TiDB Dumpling**.
-    - **Setup Credentials**: enter `arn:aws:iam::385595570414:role/import-sample-access` for Role-ARN.
-    - **Target Cluster**: fill in the **Username** and **Password** fields.
-    - **DB/Tables Filter**: leave this field blank.
+    - **Data Format**: select **TiDB Dumpling**
+    - **Location**: `AWS`
+    - **Bucket URL**: enter the sample data URL `s3://tidbcloud-samples/data-ingestion/`
+    - **Role-ARN**: enter `arn:aws:iam::385595570414:role/import-sample-access`
+    - **Target Cluster**: shows the cluster name and the region name.
+
+    If the region of the bucket is different from your cluster, confirm the compliance of cross region. Click **Next**.
 
     </div>
 
@@ -171,24 +173,21 @@ We provide Capital Bikeshare sample data for you to easily import data and run s
 
     If your TiDB cluster is hosted by GCP, fill in the following parameters:
 
-    - **Data Source Type**: `Google Cloud Stroage`.
-    - **Bucket URL**: enter the sample data URL `gcs://tidbcloud-samples-us-west1`.
     - **Data Format**: select **TiDB Dumpling**.
-    - **Target Cluster**: fill in the **Username** and **Password** fields.
-    - **DB/Tables Filter**: leave this field blank.
+    - **Location**: `Google Cloud`
+    - **Bucket URL**: enter the sample data URL `gs://tidbcloud-samples-us-west1`.
+    - **Target Cluster**: shows the cluster name and the region name.
+
+    If the region of the bucket is different from your cluster, confirm the compliance of cross region. Click **Next** to validate the data access and go to the next page.
 
     </div>
     </SimpleTab>
 
-4. Click **Import**.
+4. Add the table filter rules if needed. For the sample data, you can skip this step. Click **Next**.
 
-    A warning message about the database resource consumption is displayed. For a newly created cluster, you can ignore the warning message.
+5. On the **Preview** page, confirm the data to be imported and then click **Start Import**.
 
-5. Click **Confirm**.
-
-    TiDB Cloud starts validating whether it can access the sample data in the specified bucket URL. After the validation is completed and successful, the import task starts automatically.
-
-The data import process will take 5 to 10 minutes. When the data import progress bar shows **Success**, you successfully import the sample data and the database schema in your database.
+The data import process will take 5 to 10 minutes. When the data import progress shows **Finished**, you have successfully imported the sample data and the database schema to your database in TiDB Cloud.
 
 ## Step 4. Query data
 
