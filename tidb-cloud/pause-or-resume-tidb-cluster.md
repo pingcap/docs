@@ -69,7 +69,7 @@ To resume a paused cluster, take the following steps:
 
     The **Resume your cluster** dialog is displayed.
 
-3. In the dialog, click **Resume** to confirm your choice.
+3. In the dialog, click **Resume** to confirm your choice. The cluster status becomes **RESUMING**.
 
 Depending on your cluster size, it can take several minutes to resume the cluster. After the cluster is resumed, the cluster state changes from **RESUMING**to **AVAILABLE**.
 
