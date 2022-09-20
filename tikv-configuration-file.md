@@ -246,6 +246,11 @@ Configuration items related to the single thread pool serving read requests. Thi
 + Default value: `2000`
 + Minimum value: `2`
 
+### `auto-adjust-pool-size` <span class="version-mark">New in v6.3.0</span>
+
++ Controls whether to automatically adjust the thread pool size. When it is enabled, the read performance of TiKV is optimized by automatically adjusting the UnifyReadPool thread pool size based on the current CPU usage. The possible range of the thread pool is `[max-thread-count, MAX(4, CPU)]`. The maximum value is the same as the one of [`max-thread-count`](#max-thread-count).
++ Default value: `false`
+
 ## readpool.storage
 
 Configuration items related to storage thread pool.
@@ -482,7 +487,7 @@ Configuration items related to the I/O rate limiter.
 ### `mode`
 
 + Determines which types of I/O operations are counted and restrained below the `max-bytes-per-sec` threshold. Currently, only the write-only mode is supported.
-+ Optional value: `"write-only"`
++ Value options: `"read-only"`, `"write-only"`, and `"all-io"`
 + Default value: `"write-only"`
 
 ## raftstore
@@ -1514,7 +1519,7 @@ Configuration items related to Raft Engine.
 > This configuration item is only available when [`format-version`](#format-version-new-in-v630) >= 2.
 
 + Determines whether to recycle stale log files in Raft Engine. When it is enabled, logically purged log files will be reserved for recycling. This reduces the long tail latency on write workloads.
-+ Default value: `true`
++ Default value: `false`
 
 ## security
 
@@ -1615,12 +1620,13 @@ Configuration items related to log backup.
 ### `enable` <span class="version-mark">New in v6.2.0</span>
 
 + Determines whether to enable log backup.
-+ Default value: `false`
++ Default value: `true`
 
 ### `file-size-limit` <span class="version-mark">New in v6.2.0</span>
 
-+ The size limit on log backup data. Once this limit is reached, the backup data is automatically flushed to external storage.
-+ Default value: 256MB
++ The size limit on backup log data to be stored.
++ Default value: 256MiB
++ Note: Generally, the value of `file-size-limit` is greater than the backup file size displayed in external storage. This is because the backup files are compressed before being uploaded to external storage.
 
 ### `initial-scan-pending-memory-quota` <span class="version-mark">New in v6.2.0</span>
 
@@ -1635,7 +1641,7 @@ Configuration items related to log backup.
 ### `max-flush-interval` <span class="version-mark">New in v6.2.0</span>
 
 + The maximum interval for writing backup data to external storage in log backup.
-+ Default value: 5min
++ Default value: 3min
 
 ### `num-threads` <span class="version-mark">New in v6.2.0</span>
 
