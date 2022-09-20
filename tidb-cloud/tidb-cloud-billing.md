@@ -29,7 +29,6 @@ For each monthly invoice:
 
 - TiDB Cloud provides the invoice to you on the ninth of each month. From the first to the ninth day, you cannot view the last month's cost details, but can obtain the cluster usage information of this month via the billing console.
 - The default method for paying invoices is credit card deduction. If you want to use other payment methods, please send a ticket request to let us know.
-- After the invoice is generated, please finish the payment within 30 days.
 - You can view the summary and details of charges for the current month and the previous month.
 
 > **Note:**
