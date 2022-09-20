@@ -46,7 +46,7 @@ TiDB is compatible with the error codes in MySQL, and in most cases returns the 
 
     The complete error message: `ERROR 8005 (HY000): Write Conflict, txnStartTS is stale`
 
-    Transactions in TiDB encounter write conflicts. To handle this error, check whether `tidb_disable_txn_auto_retry` is set to `on`. If so, set it to `off`; if it is already `off`, increase the value of `tidb_retry_limit` until the error no longer occurs.
+    Transactions in TiDB encounter write conflicts. Check your application logic and retry the write operation.
 
 * Error Number: 8018
 
@@ -104,11 +104,9 @@ TiDB is compatible with the error codes in MySQL, and in most cases returns the 
 
 * Error Number: 8028
 
-    TiDB does not support table lock, which is called metadata lock in MySQL and might be called intention lock in other databases.
+    Since v6.3.0, TiDB introduces the [Metadata lock](/metadata-lock.md) feature. When the metadata lock is disabled and a transaction is executed, the transaction cannot recognize the table schema changes. Therefore, when the transaction is committed, TiDB checks the table schema related to the transaction. If the related table schema has been changed during the execution, the transaction commit fails with this error. At this time, the application can safely retry the whole transaction.
 
-    When a transaction is executed, the transaction cannot recognize the table schema changes. Therefore, when committing a transaction, TiDB checks the table schema related the transaction. If the related table schema has changed during the execution, the transaction commit will fail and this error is returned.
-
-    The application can safely retry the whole transaction.
+    When the metadata lock is enabled not in the Read Committed isolation level, if a lossy column type change occurs on a table (for example, changing from `INT` to `CHAR` is lossy, and changing from `TINYINT` to `INT` is not lossy because overwriting data is not required) from a transaction start to access the table for the first time, then the query fails while the transaction will not roll back automatically. You can continue to execute other statements and decide whether to roll back or commit the transaction.
 
 * Error Number: 8029
 
@@ -356,6 +354,10 @@ TiDB is compatible with the error codes in MySQL, and in most cases returns the 
 
     During the execution of a non-transactional DML statement, if a batch fails, the statement is stopped. For more information, see [Non-transactional DML statements](/non-transactional-dml.md).
 
+* Error Number: 8147
+
+    When [`tidb_constraint_check_in_place_pessimistic`](/system-variables.md#tidb_constraint_check_in_place_pessimistic-new-in-v630) is set to `OFF`, to ensure the correctness of transactions, any errors in the SQL statement execution might cause TiDB to return this `8147` error and abort the current transaction. For specific causes of the error, refer to the error message. For more information, see [Constraints](/constraints.md#pessimistic-transactions).
+
 * Error Number: 8200
 
     The DDL syntax is not yet supported.
@@ -482,11 +484,9 @@ TiDB is compatible with the error codes in MySQL, and in most cases returns the 
 
 * Error Number: 9007
 
-    The complete error message: `ERROR 9007 (HY000): Write Conflict`
+    The error message starts with `ERROR 9007 (HY000): Write conflict`.
 
-    Transactions in TiKV encounter write conflicts.
-
-    Check whether `tidb_disable_txn_auto_retry` is set to `on`. If so, set it to `off`; if it is already `off`, increase the value of `tidb_retry_limit` until the error no longer occurs.
+    If the error message contains `reason=LazyUniquenessCheck`, it means that the transaction is pessimistic, `@@tidb_constraint_check_in_place_pessimistic=OFF` is set, and a write conflict occurs on a unique index for the application. In this case, successful execution of the pessimistic transaction is not guaranteed. You can retry the transaction from the application, or set the variable to `ON` to avoid the error.
 
 * Error Number: 9008
 

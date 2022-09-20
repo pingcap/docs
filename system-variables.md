@@ -206,8 +206,9 @@ mysql> SELECT * FROM t1;
 - Persists to cluster: Yes
 - Type: Enumeration
 - Default value: `mysql_native_password`
-- Possible values: `mysql_native_password` and `caching_sha2_password`
+- Possible values: `mysql_native_password`, `caching_sha2_password`, and `tidb_sm3_password`
 - This variable sets the authentication method that the server advertises when the server-client connection is being established.
+- To authenticate using the `tidb_sm3_password` method, you can connect to TiDB using [TiDB-JDBC](https://github.com/pingcap/mysql-connector-j/tree/release/8.0-sm3).
 
 <CustomContent platform="tidb">
 
@@ -520,6 +521,13 @@ mysql> SHOW GLOBAL VARIABLES LIKE 'max_prepared_stmt_count';
 - Default value: (system dependent)
 - This variable shows the system time zone from when TiDB was first bootstrapped. See also [`time_zone`](#time_zone).
 
+### `tidb_adaptive_closest_read_threshold` <span class="version-mark">New in v6.3.0</span>
+
+- Scope: SESSION | GLOBAL
+- Persists to cluster: Yes
+- Default value: `4096`
+- This variable is used to control the threshold at which the TiDB server prefers to send read requests to the replica in the same region as the TiDB server when [`tidb_replica_read`](#tidb_replica_read-new-in-v40) is set to `closest-adaptive`. If the estimated result is higher than or equal to this threshold, TiDB prefers to send read requests to the replica in the same region. Otherwise, TiDB sends read requests to the leader replica.
+
 ### tidb_allow_batch_cop <span class="version-mark">New in v4.0</span>
 
 - Scope: SESSION | GLOBAL
@@ -768,9 +776,10 @@ MPP is a distributed computing framework provided by the TiFlash engine, which a
 - Persists to cluster: Yes
 - Type: Boolean
 - Default value: `OFF`
-- This setting only applies to optimistic transactions. When this variable is set to `OFF`, checking for duplicate values in UNIQUE indexes is deferred until the transaction commits. This helps improve performance, but might be an unexpected behavior for some applications. See [Constraints](/constraints.md) for details.
+- This variable only applies to optimistic transactions. For pessimistic transactions, use [`tidb_constraint_check_in_place_pessimistic`](#tidb_constraint_check_in_place_pessimistic-new-in-v630) instead.
+- When this variable is set to `OFF`, checking for duplicate values in unique indexes is deferred until the transaction commits. This helps improve performance but might be an unexpected behavior for some applications. See [Constraints](/constraints.md#optimistic-transactions) for details.
 
-    - When set to zero and using optimistic transactions:
+    - When setting `tidb_constraint_check_in_place` to `OFF` and using optimistic transactions：
 
         ```sql
         tidb> create table t (i int key);
@@ -782,16 +791,61 @@ MPP is a distributed computing framework provided by the TiFlash engine, which a
         ERROR 1062 : Duplicate entry '1' for key 'PRIMARY'
         ```
 
-    - When set to 1 and using optimistic transactions:
+    - When setting `tidb_constraint_check_in_place` to `ON` and using optimistic transactions:
 
         ```sql
-        tidb> set @@tidb_constraint_check_in_place=1;
+        tidb> set @@tidb_constraint_check_in_place=ON;
         tidb> begin optimistic;
         tidb> insert into t values (1);
         ERROR 1062 : Duplicate entry '1' for key 'PRIMARY'
         ```
 
-Constraint checking is always performed in place for pessimistic transactions (default).
+### `tidb_constraint_check_in_place_pessimistic` <span class="version-mark">New in v6.3.0</span>
+
+- Scope: SESSION | GLOBAL
+- Persists to cluster: Yes
+- Default value: `ON`
+- This variable only applies to pessimistic transactions. For optimistic transactions, use [`tidb_constraint_check_in_place`](#tidb_constraint_check_in_place) instead.
+- When this variable is set to `OFF`, TiDB defers the unique constraint check of a unique index (to the next time when executing a statement that requires a lock to the index or to the time when committing the transaction). This helps improve performance but might be an unexpected behavior for some applications. See [Constraints](/constraints.md#pessimistic-transactions) for details.
+- Disabling this variable might cause TiDB to return a `LazyUniquenessCheckFailure` error in pessimistic transactions. When this error occurs, TiDB rolls back the current transaction.
+- When this variable is disabled, you cannot use [`SAVEPOINT`](/sql-statements/sql-statement-savepoint.md) in pessimistic transactions.
+- When this variable is disabled, committing a pessimistic transaction might return a `Write conflict` or `Duplicate entry` error. When such an error occurs, TiDB rolls back the current transaction.
+
+    - When setting `tidb_constraint_check_in_place_pessimistic` to `OFF` and using pessimistic transactions：
+
+        {{< copyable "sql" >}}
+
+        ```sql
+        set @@tidb_constraint_check_in_place_pessimistic=OFF;
+        create table t (i int key);
+        insert into t values (1);
+        begin pessimistic;
+        insert into t values (1);
+        ```
+
+        ```
+        Query OK, 1 row affected
+        ```
+
+        ```sql
+        tidb> commit; -- Check only when a transaction is committed.
+        ```
+
+        ```
+        ERROR 1062 : Duplicate entry '1' for key 'PRIMARY'
+        ```
+
+    - When setting `tidb_constraint_check_in_place_pessimistic` to `ON` and using pessimistic transactions：
+
+        ```sql
+        set @@tidb_constraint_check_in_place_pessimistic=ON;
+        begin pessimistic;
+        insert into t values (1);
+        ```
+
+        ```
+        ERROR 1062 : Duplicate entry '1' for key 'PRIMARY'
+        ```
 
 ### tidb_cost_model_version <span class="version-mark">New in v6.2.0</span>
 
@@ -1101,6 +1155,15 @@ Constraint checking is always performed in place for pessimistic transactions (d
     - `RESTRICTED_VARIABLES_ADMIN`: The ability to see and set sensitive variables in `SHOW [GLOBAL] VARIABLES` and `SET`.
     - `RESTRICTED_USER_ADMIN`: The ability to prevent other users from making changes or dropping a user account.
 
+### tidb_enable_exchange_partition
+
+- Scope: SESSION | GLOBAL
+- Persists to cluster: Yes
+- Type: Boolean
+- Default value: `ON`
+- This variable controls whether to enable the [`exchange partitions with tables`](/partitioned-table.md#partition-management) feature. The default value is `ON`, that is, `exchange partitions with tables` is enabled by default.
+- This variable is deprecated since v6.3.0. Its value will be fixed to the default value `ON`, that is, `exchange partitions with tables` is enabled by default.
+
 ### tidb_enable_fast_analyze
 
 > **Warning:**
@@ -1146,6 +1209,23 @@ Constraint checking is always performed in place for pessimistic transactions (d
 - Type: Boolean
 - Default value: `ON`
 - This variable is used to set whether to enable the `LIST (COLUMNS) TABLE PARTITION` feature.
+
+### tidb_enable_metadata_lock <span class="version-mark">New in v6.3.0</span>
+
+> **Warning:**
+>
+> Currently, metadata lock is an experimental feature. It is **NOT** recommended that you use it in the production environment.
+
+- Scope: GLOBAL
+- Persists to cluster: Yes
+- Type: Boolean
+- Default value: `OFF`
+
+<CustomContent platform="tidb">
+
+- This variable is used to set whether to enable the [Metadata lock](/metadata-lock.md) feature. Note that when setting this variable, you need to make sure that there are no running DDL statements in the cluster. Otherwise, the data might be incorrect or inconsistent.
+
+</CustomContent>
 
 ### tidb_enable_mutation_checker <span class="version-mark">New in v6.0.0</span>
 
@@ -1254,7 +1334,7 @@ Constraint checking is always performed in place for pessimistic transactions (d
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
 - Type: Boolean
-- Default value: `ON`
+- Default value: `OFF`
 - This variable controls the behavior of the optimizer on using statistics of a table when the statistics are outdated.
 
 <CustomContent platform="tidb">
@@ -1269,8 +1349,8 @@ Constraint checking is always performed in place for pessimistic transactions (d
 
 </CustomContent>
 
-- By default (with the variable value `ON`), when the statistics of a table is outdated, the optimizer determines that the statistics of the table is no longer reliable except for the total row count. Then, the optimizer uses the pseudo statistics. If you set the variable value to `OFF`, even if the statistics of a table are outdated, the optimizer still keeps using the statistics.
-- If the data on a table is frequently modified without executing `ANALYZE` on this table in time, to keep the execution plan stable, you can set the variable value to `OFF`.
+- By default (with the variable value `OFF`), when the statistics of a table is outdated, the optimizer still keeps using the statistics of the table. If you set the variable value to `ON`, the optimizer determines that the statistics of the table is no longer reliable except for the total row count. Then, the optimizer uses the pseudo statistics.
+- If the data on a table is frequently modified without executing `ANALYZE` on this table in time, to keep the execution plan stable, it is recommended to set the variable value to `OFF`.
 
 ### tidb_enable_rate_limit_action
 
@@ -1426,6 +1506,14 @@ Query OK, 0 rows affected (0.09 sec)
 > **Note:**
 >
 > Suppose that the TSO RPC latency increases for reasons other than a CPU usage bottleneck of the PD leader (such as network issues). In this case, enabling the TSO Follower Proxy might increase the execution latency in TiDB and affect the QPS performance of the cluster.
+
+### `tidb_enable_unsafe_substitute` <span class="version-mark">New in v6.3.0</span>
+
+- Scope: SESSION | GLOBAL
+- Persists to cluster: Yes
+- Type: Boolean
+- Default value: `OFF`
+- This variable controls whether to replace expressions with generated columns in an unsafe way. The default value is `OFF`, which means that unsafe replacement is disabled by default. For more details, see [Generated Columns](/generated-columns.md).
 
 ### tidb_enable_vectorized_expression <span class="version-mark">New in v4.0</span>
 
@@ -1845,7 +1933,7 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 - Type: String
 - This is a read-only variable. It is internally used in TiDB to get the information of the last DDL operation within the current session.
     - "query": The last DDL query string.
-    - "seq_num": The sequence number for each DDL operation. It is used to identify the order of DDL operations. 
+    - "seq_num": The sequence number for each DDL operation. It is used to identify the order of DDL operations.
 
 ### tidb_last_query_info <span class="version-mark">New in v4.0.14</span>
 
@@ -2130,18 +2218,18 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 ### tidb_opt_cartesian_bcj
 
 - Scope: SESSION | GLOBAL
-- Persists to cluster: YES
+- Persists to cluster: Yes
 - Type: Integer
 - Default value: `1`
 - Range: `[0, 2]`
-- Indicates whether to allow the Broadcast Cartesian Join. 
+- Indicates whether to allow the Broadcast Cartesian Join.
 - `0` means that the Broadcast Cartesian Join is not allowed. `1` means that it is allowed based on [`tidb_broadcast_join_threshold_count`](#tidb_broadcast_join_threshold_count-new-in-v50). `2` means that it is always allowed even if the table size exceeds the threshold.
 - This variable is internally used in TiDB, and it is **NOT** recommended to modify its value.
 
 ### tidb_opt_concurrency_factor
 
 - Scope: SESSION | GLOBAL
-- Persists to cluster: YES
+- Persists to cluster: Yes
 - Type: Float
 - Range: `[0, 2147483647]`
 - Default value: `3.0`
@@ -2150,7 +2238,7 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 ### tidb_opt_cop_cpu_factor
 
 - Scope: SESSION | GLOBAL
-- Persists to cluster: YES
+- Persists to cluster: Yes
 - Type: Float
 - Range: `[0, 2147483647]`
 - Default value: `3.0`
@@ -2181,7 +2269,7 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 ### tidb_opt_cpu_factor
 
 - Scope: SESSION | GLOBAL
-- Persists to cluster: YES
+- Persists to cluster: Yes
 - Type: Float
 - Range: `[0, 2147483647]`
 - Default value: `3.0`
@@ -2190,7 +2278,7 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 ### tidb_opt_desc_scan_factor
 
 - Scope: SESSION | GLOBAL
-- Persists to cluster: YES
+- Persists to cluster: Yes
 - Type: Float
 - Range: `[0, 2147483647]`
 - Default value: `3.0`
@@ -2199,7 +2287,7 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 ### tidb_opt_disk_factor
 
 - Scope: SESSION | GLOBAL
-- Persists to cluster: YES
+- Persists to cluster: Yes
 - Type: Float
 - Range: `[0, 2147483647]`
 - Default value: `1.5`
@@ -2287,7 +2375,7 @@ mysql> desc select count(distinct a) from test.t;
 ### tidb_opt_memory_factor
 
 - Scope: SESSION | GLOBAL
-- Persists to cluster: YES
+- Persists to cluster: Yes
 - Type: Float
 - Range: `[0, 2147483647]`
 - Default value: `0.001`
@@ -2304,7 +2392,7 @@ mysql> desc select count(distinct a) from test.t;
 ### tidb_opt_network_factor
 
 - Scope: SESSION | GLOBAL
-- Persists to cluster: YES
+- Persists to cluster: Yes
 - Type: Float
 - Range: `[0, 2147483647]`
 - Default value: `1.0`
@@ -2354,7 +2442,7 @@ explain select * from t where age=5;
 ### tidb_opt_scan_factor
 
 - Scope: SESSION | GLOBAL
-- Persists to cluster: YES
+- Persists to cluster: Yes
 - Type: Float
 - Range: `[0, 2147483647]`
 - Default value: `1.5`
@@ -2363,7 +2451,7 @@ explain select * from t where age=5;
 ### tidb_opt_seek_factor
 
 - Scope: SESSION | GLOBAL
-- Persists to cluster: YES
+- Persists to cluster: Yes
 - Type: Float
 - Range: `[0, 2147483647]`
 - Default value: `20`
@@ -2381,6 +2469,15 @@ explain select * from t where age=5;
 - Default value: `OFF`
 - This variable sets whether the optimizer rewrites the aggregate functions with `DISTINCT` to the two-level aggregate functions, such as rewriting `SELECT b, COUNT(DISTINCT a) FROM t GROUP BY b` to `SELECT b, COUNT(a) FROM (SELECT b, a FROM t GROUP BY b, a) t GROUP BY b`. When the aggregation column has serious skew and the `DISTINCT` column has many different values, this rewriting can avoid the data skew in the query execution and improve the query performance.
 
+### tidb_opt_three_stage_distinct_agg <span class="version-mark">New in v6.3.0</span>
+
+- Scope: SESSION | GLOBAL
+- Persists to cluster: Yes
+- Type: Boolean
+- Default value: `ON`
+- This variable specifies whether to rewrite a `COUNT(DISTINCT)` aggregation into a three-stage aggregation in MPP mode.
+- This variable currently applies to an aggregation that only contains one `COUNT(DISTINCT)`.
+
 ### tidb_opt_write_row_id
 
 <CustomContent platform="tidb-cloud">
@@ -2394,6 +2491,14 @@ explain select * from t where age=5;
 - Scope: SESSION
 - Default value: `OFF`
 - This variable is used to control whether to allow `INSERT`, `REPLACE`, and `UPDATE` statements to operate on the `_tidb_rowid` column. This variable can be used only when you import data using TiDB tools.
+
+### tidb_opt_force_inline_cte <span class="version-mark">New in v6.3.0</span>
+
+- Scope: SESSION | GLOBAL
+- Persists to cluster: Yes
+- Type: Boolean
+- Default value: `OFF`
+- This variable is used to control whether common table expressions (CTEs) in the entire session are inlined or not. The default value is `OFF`, which means that inlining CTE is not enforced by default. However, you can still inline CTE by specifying the `MERGE()` hint. If the variable is set to `ON`, all CTEs (except recursive CTE) in this session are forced to be inlined.
 
 ### tidb_partition_prune_mode <span class="version-mark">New in v5.1</span>
 
@@ -2510,12 +2615,24 @@ explain select * from t where age=5;
 > - This feature is incompatible with [`replica-read`](#tidb_replica_read-new-in-v40). Do not enable `tidb_rc_read_check_ts` and `replica-read` at the same time.
 > - If your client uses a cursor, it is not recommended to enable `tidb_rc_read_check_ts` in case that the previous batch of returned data has already been used by the client and the statement eventually fails.
 
-- Scope: SESSION | GLOBAL
-- Persists to cluster: Yes
+- Scope: INSTANCE. Since v6.3.0, the scope changes from GLOBAL or SESSION to INSTANCE.
+- Persists to cluster: No, only applicable to the current TiDB instance that you are connecting to.
 - Type: Boolean
 - Default value: `OFF`
 - This variable is used to optimize the timestamp acquisition, which is suitable for scenarios with read-committed isolation level where read-write conflicts are rare. Enabling this variable can avoid the latency and cost of getting the global timestamp, and can optimize the transaction-level read latency.
 - If read-write conflicts are severe, enabling this feature will increase the cost and latency of getting the global timestamp, and might cause performance regression. For details, see [Read Committed isolation level](/transaction-isolation-levels.md#read-committed-isolation-level).
+
+### tidb_rc_write_check_ts <span class="version-mark">New in v6.3.0</span>
+
+> **Warning:**
+>
+> This feature is currently incompatible with [`replica-read`](#tidb_replica_read-new-in-v40). After this variable is enabled, all requests sent by the client cannot use `replica-read`. Therefore, do not enable `tidb_rc_write_check_ts` and `replica-read` at the same time.
+
+- Scope: SESSION | GLOBAL
+- Persists to cluster: Yes
+- Default value: `OFF`
+- This variable is used to optimize the acquisition of timestamps and is suitable for scenarios with few point-write conflicts in `READ-COMMITTED` isolation level of pessimistic transactions. Enabling this variable can avoid the latency and overhead brought by obtaining the global timestamps during the execution of point-write statements. Currently, this variable is applicable to three types of point-write statements: `UPDATE`, `DELETE`, and `SELECT ...... FOR UPDATE`. A point-write statement refers to a write statement that uses the primary key or unique key as a filter condition and the final execution operator contains `POINT-GET`.
+- If the point-write conflicts are severe, enabling this variable will increase extra overhead and latency, resulting in performance regression. For details, see [Read Committed isolation level](/transaction-isolation-levels.md#read-committed-isolation-level).
 
 ### tidb_read_consistency <span class="version-mark">New in v5.4.0</span>
 
@@ -2591,12 +2708,9 @@ explain select * from t where age=5;
 - Persists to cluster: Yes
 - Type: Enumeration
 - Default value: `leader`
-- Possible values: `leader`, `follower`, `leader-and-follower`, `closest-replicas`
-- This variable is used to control where TiDB reads data. Here are three options:
-    - leader: Read only from leader node
-    - follower: Read only from follower node
-    - leader-and-follower: Read from leader or follower node
-- See [follower reads](/follower-read.md) for additional details.
+- Possible values: `leader`, `follower`, `leader-and-follower`, `closest-replicas`, `closest-adaptive`
+- This variable is used to control where TiDB reads data.
+- For more details about usage and implementation, see [Follower read](/follower-read.md).
 
 ### tidb_restricted_read_only <span class="version-mark">New in v5.2.0</span>
 
@@ -3084,6 +3198,13 @@ For details, see [Identify Slow Queries](/identify-slow-queries.md).
 - Unit: Threads
 - This variable is used to set the concurrency degree of the window operator.
 - A value of `-1` means that the value of `tidb_executor_concurrency` will be used instead.
+
+### `tiflash_fastscan` <span class="version-mark">New in v6.3.0</span>
+
+- Scope: SESSION | GLOBAL
+- Default value: `OFF`
+- Range: `ON | OFF`
+- If [FastScan](/develop/dev-guide-use-fastscan.md) is enabled (set to `ON`), TiFlash provides more efficient query performance, but does not guarantee the accuracy of the query results or data consistency.
 
 ### `tiflash_fine_grained_shuffle_batch_size` <span class="version-mark">New in v6.2.0</span>
 
