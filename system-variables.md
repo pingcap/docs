@@ -1155,7 +1155,7 @@ MPP is a distributed computing framework provided by the TiFlash engine, which a
     - `RESTRICTED_VARIABLES_ADMIN`: The ability to see and set sensitive variables in `SHOW [GLOBAL] VARIABLES` and `SET`.
     - `RESTRICTED_USER_ADMIN`: The ability to prevent other users from making changes or dropping a user account.
 
-### tidb_enable_exchange_partition
+### tidb_enable_exchange_partition <span class="version-mark">New in v6.3.0</span>
 
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
