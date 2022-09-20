@@ -8,6 +8,28 @@ aliases: ['/tidbcloud/beta/supported-tidb-versions','/tidbcloud/release-notes']
 
 This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-cloud/) in 2022.
 
+## September 20, 2022
+
+**General changes**
+
+* Introduce the [cost quota-based invoice](/tidb-cloud/tidb-cloud-billing.md#invoices) for self-service users.
+
+    TiDB Cloud will generate an invoice once your cost reaches a quota. To raise the quota or to receive invoices per month, contact [our sales](https://www.pingcap.com/contact-us/).
+
+* Exempt the storage operation fee from the Data Backup Cost. See [TiDB Cloud Pricing Details](https://www.pingcap.com/tidb-cloud-pricing-details/) for the latest pricing information.
+
+**Console changes**
+
+* Provide a new web UI for data import. The new UI provides better user experience and makes data import more efficient.
+
+    Using the new UI, you can preview the data to be imported, view the import process, and manage all import tasks easily.
+
+**API changes**
+
+* The TiDB Cloud API (beta) is now available to all users.
+
+    You can start using the API by creating an API key on the TiDB Cloud console. For more information, refer to [API documentation](/tidb-cloud/api-overview.md).
+
 ## September 15, 2022
 
 **General changes**
