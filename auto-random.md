@@ -25,7 +25,6 @@ To create a table with an `AUTO_RANDOM` column, you can use the following statem
 CREATE TABLE t (a BIGINT AUTO_RANDOM, b VARCHAR(255), PRIMARY KEY (a));
 CREATE TABLE t (a BIGINT PRIMARY KEY AUTO_RANDOM, b VARCHAR(255));
 CREATE TABLE t (a BIGINT AUTO_RANDOM(6), b VARCHAR(255), PRIMARY KEY (a));
-CREATE TABLE t (a BIGINT AUTO_RANDOM(5, 54), b VARCHAR(255), PRIMARY KEY (a));
 ```
 
 You can wrap the keyword `AUTO_RANDOM` in an executable comment. For more details, refer to [TiDB specific comment syntax](/comment-syntax.md#tidb-specific-comment-syntax).
@@ -34,7 +33,6 @@ You can wrap the keyword `AUTO_RANDOM` in an executable comment. For more detail
 CREATE TABLE t (a bigint /*T![auto_rand] AUTO_RANDOM */, b VARCHAR(255), PRIMARY KEY (a));
 CREATE TABLE t (a bigint PRIMARY KEY /*T![auto_rand] AUTO_RANDOM */, b VARCHAR(255));
 CREATE TABLE t (a BIGINT /*T![auto_rand] AUTO_RANDOM(6) */, b VARCHAR(255), PRIMARY KEY (a));
-CREATE TABLE t (a BIGINT  /*T![auto_rand] AUTO_RANDOM(5, 54) */, b VARCHAR(255), PRIMARY KEY (a));
 ```
 
 When you execute an `INSERT` statement:
