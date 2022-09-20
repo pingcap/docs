@@ -96,3 +96,19 @@ The value options of `match_type` between TiDB and MySQL are:
     For example, the `SELECT REGEXP_LIKE(a, b, "n") FROM t1` in MySQL is the same as the `SELECT REGEXP_LIKE(a, b, "s") FROM t1` in TiDB.
 
 - TiDB does not support `"u"`, which means Unix-only line endings in MySQL.
+
+### Data type compatibility
+
+Binary string type difference between TiDB and MySQL:
+
+- Regexp functions don't support binary string in MySQL 8.0.22 or higher version, more specific information could be referred [here](https://dev.mysql.com/doc/refman/8.0/en/regexp.html). However, in practice, regexp functions could works well when all parameters or return type are all binary string, or it will raise error.
+- So far, TiDB forbids binary string and will raise errors in any circumstance.
+
+### Other compatibility
+
+Replacing empty string behavior difference between TiDB and MySQL:
+
+Take the `REGEXP_REPLACE("", "^$", "123")` as example:
+
+- MySQL won't replace the empty string and return `""` as the result.
+- TiDB will replace it and return `"123"` as the result.
