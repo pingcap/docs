@@ -193,7 +193,7 @@ PARTITION BY RANGE COLUMNS(name,valid_until)
 
 It will split the data by year and by name in the ranges [''-'G'), ['G'-'M'), ['M'-'S'), ['S',), allowing you to easily drop invalid data while still benefit from partition pruning on both `name` and `valid_until` columns.
 
-It will partition the data by year and by name in the ranges ['', 'G'), ['G', 'M'), ['M', 'S') and ['S',). It allows you to easily drop invalid data while still benefit from partition pruning on both `name` and `valid_until` columns. In this example, `[ , ]` is a closed range, and `[,)` is a half-open and half-closed range.
+It will partition the data by year and by name in the ranges ['', 'G'), ['G', 'M'), ['M', 'S') and ['S',). It allows you to easily drop invalid data while still benefit from partition pruning on both `name` and `valid_until` columns. In this example, `[,)` indicates a left-closed, right-open range. For example, ['G', 'M') indicates a range containing `G` and from `G` to `M`, but excluding `M`.
 
 ### Range INTERVAL partitioning
 
