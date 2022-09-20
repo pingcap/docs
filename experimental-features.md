@@ -32,13 +32,11 @@ Elastic scheduling feature. It enables the TiDB cluster to dynamically scale out
 + The expression index feature. The expression index is also called the function-based index. When you create an index, the index fields do not have to be a specific column but can be an expression calculated from one or more columns. This feature is useful for quickly accessing the calculation-based tables. See [Expression index](/sql-statements/sql-statement-create-index.md) for details. (Introduced in v4.0)
 + [Generated Columns](/generated-columns.md) (Introduced in v2.1)
 + [User-Defined Variables](/user-defined-variables.md) (Introduced in v2.1)
-+ [JSON data type](/data-type-json.md) and [JSON functions](/functions-and-operators/json-functions.md) (Introduced in v2.1)
 + [Cascades Planner](/system-variables.md#tidb_enable_cascades_planner): a cascades framework-based top-down query optimizer (Introduced in v3.0)
 + [`ALTER TABLE ... COMPACT`](/sql-statements/sql-statement-alter-table-compact.md) (Introduced in v6.1.0)
 
 ## Storage
 
-+ [Disable Titan](/storage-engine/titan-configuration.md#disable-titan-experimental) (Introduced in v4.0)
 + [Titan Level Merge](/storage-engine/titan-configuration.md#level-merge-experimental) (Introduced in v4.0)
 + Divide Regions are divided into buckets. [Buckets are used as the unit of concurrent query](/tune-region-performance.md#use-bucket-to-increase-concurrency) to improve the scan concurrency. (Introduced in v6.1.0)
 + TiKV introduces [API V2](/tikv-configuration-file.md#api-version-new-in-v610). (Introduced in v6.1.0)
@@ -49,7 +47,7 @@ Elastic scheduling feature. It enables the TiDB cluster to dynamically scale out
 + [Configure disk quota](/tidb-lightning/tidb-lightning-physical-import-mode-usage.md#configure-disk-quota-new-in-v620) for TiDB Lightning. (Introduced in v6.2.0)
 + [Continuous Data Validation in DM](/dm/dm-continuous-data-validation.md) (Introduced in v6.2.0)
 
-## 数据共享订阅
+## Data share subscription
 
 + [Cross-cluster RawKV replication](/tikv-configuration-file.md#api-version-new-in-v610) (Introduced in v6.2.0)
 

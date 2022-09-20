@@ -1,10 +1,10 @@
 <!-- markdownlint-disable MD007 -->
 <!-- markdownlint-disable MD041 -->
 
-- [Docs Home](/_docHome.md)
+- [Docs Home](https://docs.pingcap.com/)
 - About TiDB
   - [TiDB Introduction](/overview.md)
-  - [TiDB 6.1 Release Notes](/releases/release-6.1.0.md)
+  - [TiDB 6.2 Release Notes](/releases/release-6.2.0.md)
   - [Basic Features](/basic-features.md)
   - [Experimental Features](/experimental-features.md)
   - Benchmarks
@@ -86,7 +86,7 @@
   - Cloud Native Development Environment
     - [Gitpod](/develop/dev-guide-playground-gitpod.md)
   - Third-party Support
-    - [Third-Party Libraries Support](/develop/dev-guide-third-party-support.md)
+    - [Third-Party Tools Supported by TiDB](/develop/dev-guide-third-party-support.md)
     - [Integrate with ProxySQL](/develop/dev-guide-proxysql-integration.md)
 - Deploy
   - [Software and Hardware Requirements](/hardware-and-software-requirements.md)
@@ -106,6 +106,7 @@
   - Test Cluster Performance
     - [Test TiDB Using Sysbench](/benchmark/benchmark-tidb-using-sysbench.md)
     - [Test TiDB Using TPC-C](/benchmark/benchmark-tidb-using-tpcc.md)
+    - [Test TiDB Using CH-benCHmark](/benchmark/benchmark-tidb-using-ch.md)
 - Migrate
   - [Overview](/migration-overview.md)
   - [Migration Tools](/migration-tools.md)
@@ -178,6 +179,7 @@
     - [Performance Tuning Overview](/performance-tuning-overview.md)
     - [Performance Analysis and Tuning](/performance-tuning-methods.md)
     - [Performance Tuning Practices for OLTP Scenarios](/performance-tuning-practices.md)
+    - [Latency Breakdown](/latency-breakdown.md)
   - Configuration Tuning
     - System Tuning
       - [Operating System Tuning](/tune-operating-system.md)
@@ -359,18 +361,27 @@
     - Key Features
       - [Checkpoints](/tidb-lightning/tidb-lightning-checkpoints.md)
       - [Table Filter](/table-filter.md)
-      - [CSV Support](/tidb-lightning/migrate-from-csv-using-tidb-lightning.md)
-      - [Backends](/tidb-lightning/tidb-lightning-backends.md)
-      - [Physical Import Mode](/tidb-lightning/tidb-lightning-physical-import-mode.md)
-      - [Physical Import Mode Usage](/tidb-lightning/tidb-lightning-physical-import-mode-usage.md)
       - [Import Data in Parallel](/tidb-lightning/tidb-lightning-distributed-import.md)
       - [Error Resolution](/tidb-lightning/tidb-lightning-error-resolution.md)
       - [Web Interface](/tidb-lightning/tidb-lightning-web-interface.md)
+    - Data Sources
+      - [Data Match Rules](/tidb-lightning/tidb-lightning-data-source.md)
+      - [CSV](/tidb-lightning/tidb-lightning-data-source.md#csv)
+      - [SQL](/tidb-lightning/tidb-lightning-data-source.md#sql)
+      - [Parquet](/tidb-lightning/tidb-lightning-data-source.md#parquet)
+      - [Customized File](/tidb-lightning/tidb-lightning-data-source.md#match-customized-files)
+    - Physical Import Mode
+      - [Requirements and Limitations](/tidb-lightning/tidb-lightning-physical-import-mode.md)
+      - [Use Physical Import Mode](/tidb-lightning/tidb-lightning-physical-import-mode-usage.md)
+    - Logical Import Mode
+      - [Requirements and Limitations](/tidb-lightning/tidb-lightning-logical-import-mode.md)
+      - [Use Logical Import Mode](/tidb-lightning/tidb-lightning-logical-import-mode-usage.md)
     - [Tutorial](/get-started-with-tidb-lightning.md)
     - [Deploy](/tidb-lightning/deploy-tidb-lightning.md)
     - [Configure](/tidb-lightning/tidb-lightning-configuration.md)
     - [Monitor](/tidb-lightning/monitor-tidb-lightning.md)
     - [FAQ](/tidb-lightning/tidb-lightning-faq.md)
+    - [Troubleshooting](/tidb-lightning/troubleshoot-tidb-lightning.md)
     - [Glossary](/tidb-lightning/tidb-lightning-glossary.md)
   - TiDB Data Migration
     - [About TiDB Data Migration](/dm/dm-overview.md)
@@ -475,6 +486,13 @@
       - [Back Up and Restore Data on Google Cloud Storage Using BR](/br/backup-storage-gcs.md)
       - [Back Up and Restore RawKV](/br/rawkv-backup-and-restore.md)
       - [BR FAQs](/br/backup-and-restore-faq.md)
+  - Point-in-Time Recovery
+    - [PITR Overview](/br/point-in-time-recovery.md)
+    - [Use PITR via CLI](/br/br-log-command-line.md)
+    - [Usage Scenarios](/br/pitr-usage.md)
+    - [Monitoring and Alert](/br/pitr-monitoring-and-alert.md)
+    - [Troubleshooting](/br/pitr-troubleshoot.md)
+    - [Known Issues](/br/pitr-known-issues.md)
   - TiDB Binlog
     - [Overview](/tidb-binlog/tidb-binlog-overview.md)
     - [Quick Start](/tidb-binlog/get-started-with-tidb-binlog.md)
@@ -511,7 +529,6 @@
       - [Integrate TiDB with Confluent and Snowflake](/ticdc/integrate-confluent-using-ticdc.md)
     - [FAQs](/ticdc/ticdc-faq.md)
     - [Glossary](/ticdc/ticdc-glossary.md)
-  - [Dumpling](/dumpling-overview.md)
   - sync-diff-inspector
     - [Overview](/sync-diff-inspector/sync-diff-inspector-overview.md)
     - [Data Check for Tables with Different Schema/Table Names](/sync-diff-inspector/route-diff.md)
@@ -574,7 +591,6 @@
       - [`ALTER PLACEMENT POLICY`](/sql-statements/sql-statement-alter-placement-policy.md)
       - [`ALTER TABLE`](/sql-statements/sql-statement-alter-table.md)
       - [`ALTER TABLE COMPACT`](/sql-statements/sql-statement-alter-table-compact.md)
-      - [`ALTER TABLE SET TIFLASH MODE`](/sql-statements/sql-statement-set-tiflash-mode.md)
       - [`ALTER USER`](/sql-statements/sql-statement-alter-user.md)
       - [`ANALYZE TABLE`](/sql-statements/sql-statement-analyze-table.md)
       - [`BACKUP`](/sql-statements/sql-statement-backup.md)
@@ -794,6 +810,7 @@
         - [`VARIABLES_INFO`](/information-schema/information-schema-variables-info.md)
         - [`VIEWS`](/information-schema/information-schema-views.md)
       - [`METRICS_SCHEMA`](/metrics-schema.md)
+    - [Metadata Lock](/metadata-lock.md)
   - UI
     - TiDB Dashboard
       - [Overview](/dashboard/dashboard-intro.md)
@@ -861,6 +878,7 @@
   - [Table Filter](/table-filter.md)
   - [Schedule Replicas by Topology Labels](/schedule-replicas-by-topology-labels.md)
 - FAQs
+  - [FAQ Summary](/faq/faq-overview.md)
   - [TiDB FAQs](/faq/tidb-faq.md)
   - [SQL FAQs](/faq/sql-faq.md)
   - [Deployment FAQs](/faq/deploy-and-maintain-faq.md)
@@ -875,7 +893,10 @@
   - [Release Timeline](/releases/release-timeline.md)
   - [TiDB Versioning](/releases/versioning.md)
   - [TiDB Installation Packages](/binary-package.md)
+  - v6.2
+    - [6.2.0-DMR](/releases/release-6.2.0.md)
   - v6.1
+    - [6.1.1](/releases/release-6.1.1.md)
     - [6.1.0](/releases/release-6.1.0.md)
   - v6.0
     - [6.0.0-DMR](/releases/release-6.0.0-dmr.md)
@@ -884,6 +905,7 @@
     - [5.4.1](/releases/release-5.4.1.md)
     - [5.4.0](/releases/release-5.4.0.md)
   - v5.3
+    - [5.3.3](/releases/release-5.3.3.md)
     - [5.3.2](/releases/release-5.3.2.md)
     - [5.3.1](/releases/release-5.3.1.md)
     - [5.3.0](/releases/release-5.3.0.md)
