@@ -35,9 +35,7 @@ A TiDB Cloud cluster can connect to more than one Vercel projects.
 
 ### TiDB Cloud Cluster Traffic Filter
 
-Vercel deployments use [dynamic IP addresses](https://vercel.com/guides/how-to-allowlist-deployment-ip-address).
-
-To connect to a TiDB Cloud cluster, the traffic filter of your TiDB Cloud cluster must allow all IP addresses (0.0.0.0/0). If TiDB Cloud doesn't find an entry for 0.0.0.0/0 in your cluster's traffic filters, TiDB Cloud adds it on your behalf, as part of the integration workflow.
+TiDB Cloud automatically adds a 0.0.0.0/0 traffic filter to your cluster in the integration workflow if there is none because Vercel deployments use [dynamic IP addresses](https://vercel.com/guides/how-to-allowlist-deployment-ip-address). To connect to a TiDB Cloud cluster, the traffic filter of your TiDB Cloud cluster must allow all IP addresses(0.0.0.0/0).
 
 ## Connect via the TiDB Cloud Vercel Integration
 
