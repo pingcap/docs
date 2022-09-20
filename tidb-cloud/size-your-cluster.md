@@ -76,13 +76,15 @@ TiDB Cloud deploys TiKV nodes evenly to all availability zones (at least 3) in t
 >
 > When you scale your TiDB cluster, nodes in the 3 availability zones are increased or decreased at the same time. For how to scale in or scale out a TiDB cluster based on your needs, see [Scale Your TiDB Cluster](/tidb-cloud/scale-tidb-cluster.md).
 
-Minimum number of TiKV nodes: `ceil(compressed size of your data ÷ one TiKV capacity) × the number of replicas`
+Recommended number of TiKV nodes: `ceil(compressed size of your data ÷ TiKV storage usage ratio ÷ one TiKV capacity) × the number of replicas`
 
-Supposing the size of your MySQL dump files is 5 TB and the TiDB compression ratio is 70%, the storage needed is 3584 GB.
+Supposing the size of your MySQL dump files is 5 TB and the TiDB compression ratio is 40%, the storage needed is 2048 GiB.
 
-For example, if you configure the node storage of each TiKV node on AWS as 1024 GB, the required number of TiKV nodes is as follows:
+Generally, the usage ratio of TiKV storage is not recommended to exceed 80%.
 
-Minimum number of TiKV nodes: `ceil(3584 ÷ 1024) × 3 = 12`
+For example, if you configure the node storage of each TiKV node on AWS as 1024 GiB, the required number of TiKV nodes is as follows:
+
+Minimum number of TiKV nodes: `ceil(2048 ÷ 0.8 ÷ 1024) × 3 = 9`
 
 ### TiKV node storage
 
@@ -117,9 +119,9 @@ The minimum number of TiFlash nodes depends on the TiFlash replica counts for sp
 
 Minimum number of TiFlash nodes: `min((compressed size of table A * replicas for table A + compressed size of table B * replicas for table B) / size of each TiFlash capacity, max(replicas for table A, replicas for table B))`
 
-For example, if you configure the node storage of each TiFlash node on AWS as 1024 GB, and set 2 replicas for table A (the compressed size is 800 GB) and 1 replica for table B (the compressed size is 100 GB), then the required number of TiFlash nodes is as follows:
+For example, if you configure the node storage of each TiFlash node on AWS as 1024 GiB, and set 2 replicas for table A (the compressed size is 800 GiB) and 1 replica for table B (the compressed size is 100 GiB), then the required number of TiFlash nodes is as follows:
 
-Minimum number of TiFlash nodes: `min((800 GB * 2 + 100 GB * 1) / 1024 GB, max(2, 1)) ≈ 2`
+Minimum number of TiFlash nodes: `min((800 GiB * 2 + 100 GiB * 1) / 1024 GiB, max(2, 1)) ≈ 2`
 
 ### TiFlash node storage
 
