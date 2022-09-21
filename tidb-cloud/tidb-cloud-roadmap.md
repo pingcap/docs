@@ -21,7 +21,6 @@ This roadmap brings you what's coming in the near future, so you can see the new
 | Developer experience | Add SQL Editor. | Write and run SQL queries, and view the results in the TiDB console. | November 2022 |
 | Developer experience | Connect TiDB Cloud account and database account. | TiDB Cloud account can access the database without password to improve user experience. | November 2022 |
 | Enterprise-grade features | Support hierarchical user roles and permissions. | Support role-based access control (RBAC) for the TiDB Cloud console. You can manage user permissions in a fine-grained manner, such as by cluster, billing, and member. | December 2022 |
-| Developer experience | Provide Data API.  | Provide API for data read and write. A user can access the database via HTTP requests.  | December 2022 |
 
 ## TiDB kernel
 
