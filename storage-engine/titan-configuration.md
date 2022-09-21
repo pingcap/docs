@@ -126,7 +126,7 @@ To disable Titan, perform the following steps:
     [rocksdb.defaultcf.titan]
     blob-run-mode = "fallback"
     discardable-ratio = 1.0
-    merge-small-file-threshold="0KB"
+    merge-small-file-threshold = "0KB"
     ```
 
 2. Perform a full compaction using tikv-ctl. This process will consume large amount of I/O and CPU resources.
