@@ -15,7 +15,7 @@ TiDB Cloud provides the following two options of cluster tiers. Before creating 
 
 ## Developer Tier
 
-The TiDB Cloud Developer Tier is a one-year free trial of [TiDB Cloud](https://www.pingcap.com/tidb-cloud/), the fully managed service of TiDB. You can use Developer Tier clusters for non-production workloads such as prototype applications, hackathons, academic courses, or to provide a temporary data service for non-commercial datasets.
+The TiDB Cloud Developer Tier is a one-year free trial of [TiDB Cloud](https://www.pingcap.com/tidb-cloud/), the fully managed service of TiDB. You can use Developer Tier clusters for non-production workloads such as prototype applications, hackathons, academic courses, or to provide a temporary data service for your datasets.
 
 Each Developer Tier cluster is a full-featured TiDB cluster and comes with the following:
 
@@ -69,7 +69,7 @@ Alternatively, you can log in to the TiDB Cloud console, and then click **Resume
 
 ### Developer Tier special terms and conditions
 
-- No uptime SLA guarantee.
+- Developer Tier does not have uptime SLA guarantee. If you use Developer Tier to store a commercial or production dataset, any potential risk associated with the use should be taken on your own, and PingCAP shall not be liable for any damage.
 - No high availability or automatic failover.
 - Upgrades to clusters might incur significant downtimes.
 - The backup and restore feature is unavailable. You can use [Dumpling](https://docs.pingcap.com/tidb/stable/dumpling-overview) to export your data as a backup.
