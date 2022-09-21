@@ -17,7 +17,7 @@ The TiDB Cloud roadmap brings you what's coming in the near future, so you can s
 | Developer experience | Add SQL Editor. | Write and run SQL queries, and view the results in the TiDB console. | November 2022 |
 | Developer experience | Connect TiDB Cloud account and database account. | Import data via TiDB Cloud console with no password required. Use SQL Editor to improve user experience. | November 2022 |
 | Enterprise-grade features | Support hierarchical user roles and permissions. | Support role-based access control (RBAC) for the TiDB Cloud console. You can manage user permissions in a fine-grained manner, such as by cluster, billing, and member. | December 2022 |
-| Developer experience | Provide Data AP.  | Provide API for data read and write. A user can access the database via HTTP requests.  | December 2022 |
+| Developer experience | Provide Data API.  | Provide API for data read and write. A user can access the database via HTTP requests.  | December 2022 |
 
 ## Optimize TiDB kernel
 
@@ -45,11 +45,11 @@ The TiDB Cloud roadmap brings you what's coming in the near future, so you can s
   <tr>
     <td>Flashback</td>
     <td>Support cluster-level flashback.</td>
-    <td>In game rollback scenarios, the flashback can be used to achieve fast rollback of the current cluster. This solves the common problems in the gaming industry such as version errors and bugs.</td>
+    <td>In game rollback scenarios, the flashback can be used to achieve a fast rollback of the current cluster. This solves the common problems in the gaming industry such as version errors and bugs.</td>
     <td>November 2022</td>
   </tr>
   <tr>
-    <td>TiFlash result write back (supports <code>INSERT INTO SELECT)</code></td>
+    <td>TiFlash result write-back (supports <code>INSERT INTO SELECT</code>)</td>
     <td><ul><li>Easily write analysis results in TiFlash back to TiDB.</li><li>Provide complete ACID transactions, more convenient and reliable than general ETL solutions.</li><li>Set a hard limit on the threshold of intermediate result size, and report an error if the threshold is exceeded.</li><li>Support fully distributed transactions, and remove or relax the limit on the intermediate result size.</li></ul></td>
     <td>These features combined enable a way to materialize intermediate results. The analysis results can be easily reused, which reduces unnecessary ad-hoc queries, improves the performance of BI and other applications (by pulling results directly) and reduces system load (by avoiding duplicated computation), thereby improving the overall data pipeline efficiency and reducing costs. It will make TiFlash an online service.</td>
     <td>November 2022</td>
