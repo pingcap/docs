@@ -145,19 +145,14 @@ The TiDB Cloud roadmap brings you what's coming in the near future, so you can s
     <td>December 2022</td>
   </tr>
   <tr>
-    <td rowspan="2">Point-in-time recovery (PITR)</td>
+    <td>Point-in-time recovery (PITR)</td>
     <td>PITR on the cloud</td>
     <td>Support cluster-level PITR on the cloud.</td>
-    <td>September 2022</td>
-  </tr>
-  <tr>
-    <td>Fine-grained PITR on the cloud</td>
-    <td>Support table-level or database-level PITR on the cloud.</td>
     <td>October 2022</td>
   </tr>
   <tr>
     <td>Backup and restore</td>
-    <td>EBS-based snapshot backup and restore service on the cloud.</td>
+    <td>Backup and restore service on the cloud based on AWS EBS or GCP Persistent Disk snapshot.</td>
     <td></td>
     <td>December 2022</td>
   </tr>
