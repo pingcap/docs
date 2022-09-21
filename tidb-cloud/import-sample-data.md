@@ -54,14 +54,15 @@ The data import process will take 5 to 10 minutes. When the data import progress
 
 Once the cluster finishes the data importing process, you will get the sample data in your database.
 
-You can run some queries to check the result, for example:
+After connecting to the cluster, you can run some queries in your terminal to check the result, for example:
 
 1. Get the trip records starting at "12th & U St NW":
 
-    {{< copyable "sql" >}}
-
     ```sql
     use bikeshare;
+    ```
+
+    ```sql
     select * from `trips` where start_station_name='12th & U St NW' limit 10;
     ```
 
@@ -84,10 +85,11 @@ You can run some queries to check the result, for example:
 
 2. Get the trip records with electric bikes:
 
-    {{< copyable "sql" >}}
-
     ```sql
     use bikeshare;
+    ```
+
+    ```sql
     select * from `trips` where rideable_type="electric_bike" limit 10;
     ```
 

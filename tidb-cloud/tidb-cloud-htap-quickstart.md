@@ -24,6 +24,9 @@ For example, to replicate the `trips` table (in the Capital Bikeshare sample dat
 
 ```sql
 USE bikeshare;
+```
+
+```sql
 ALTER TABLE trips SET TIFLASH REPLICA 1;
 ```
 
@@ -31,6 +34,15 @@ To check the replication progress, execute the following statement:
 
 ```sql
 SELECT * FROM information_schema.tiflash_replica WHERE TABLE_SCHEMA = 'bikeshare' and TABLE_NAME = 'trips';
+```
+
+```sql
++--------------+------------+----------+---------------+-----------------+-----------+----------+------------+
+| TABLE_SCHEMA | TABLE_NAME | TABLE_ID | REPLICA_COUNT | LOCATION_LABELS | AVAILABLE | PROGRESS | TABLE_MODE |
++--------------+------------+----------+---------------+-----------------+-----------+----------+------------+
+| bikeshare    | trips      |       88 |             1 |                 |         1 |        1 | NORMAL     |
++--------------+------------+----------+---------------+-----------------+-----------+----------+------------+
+1 row in set (0.20 sec)
 ```
 
 In the result of the preceding statement:
