@@ -166,7 +166,7 @@ The TiDB Cloud roadmap brings you what's coming in the near future, so you can s
   </tr>
   <tr>
     <td>Support incremental data migration from RDS.</td>
-    <td>Full and incremental data migration from MySQL services such as RDS and Aurora to TiDB Cloud.</td>
+    <td>Full and incremental data migration from MySQL services such as Amazon RDS and Aurora to TiDB Cloud.</td>
     <td>November 2022</td>
   </tr>
 </tbody>
