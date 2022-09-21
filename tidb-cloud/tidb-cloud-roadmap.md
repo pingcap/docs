@@ -19,7 +19,6 @@ This roadmap brings you what's coming in the near future, so you can see the new
 | Enterprise-grade features | Manage multiple organizations. | Support managing multiple organizations. A user can create and join more than one organization. | October 2022 |
 | UI experience | Add left navigation. | Present the TiDB Cloud console in the structure of organizations, projects, and users to simplify the layout logic and improve user experience. | November 2022 |
 | Developer experience | Add SQL Editor. | Write and run SQL queries, and view the results in the TiDB console. | November 2022 |
-| Developer experience | Connect TiDB Cloud account and database account. | TiDB Cloud account can access the database without password to improve user experience. | November 2022 |
 | Enterprise-grade features | Support hierarchical user roles and permissions. | Support role-based access control (RBAC) for the TiDB Cloud console. You can manage user permissions in a fine-grained manner, such as by cluster, billing, and member. | December 2022 |
 
 ## TiDB kernel
