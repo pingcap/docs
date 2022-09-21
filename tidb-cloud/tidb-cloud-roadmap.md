@@ -5,17 +5,21 @@ summary: Learn about TiDB Cloud's roadmap for the next few months. See the new f
 
 # TiDB Cloud Roadmap
 
-The TiDB Cloud roadmap brings you what's coming in the near future, so you can see the new features or improvements in advance, follow the progress, learn about the key milestones on the way, and [give feedback](https://www.pingcap.com/contact-us) as the development work goes on.
+This roadmap brings you what's coming in the near future, so you can see the new features or improvements in advance, follow the progress, and learn about the key milestones on the way.
+
+> **Note:**
+>
+> In the course of development, this roadmap is subject to change based on user needs and feedback.
 
 ## Developer experience and enterprise-grade features
 
 | Scenario | Feature | Description | Estimated Time of Delivery |
 |---|---|---|---|
-| Developer experience | Provide more sample datasets for import. | Provide sample datasets with larger data volumes for TPC-H, and allow users to dive deeper when trying out TiDB Cloud. | October 2022 |
+| Developer experience | Load sample datasets manually. | Support loading sample datasets into a cluster. You can use this data to quickly get started with testing the features of TiDB Cloud. | October 2022 |
 | Enterprise-grade features | Manage multiple organizations. | Support managing multiple organizations. A user can create and join more than one organization. | October 2022 |
 | UI experience | Add left navigation. | Present the TiDB Cloud console in the structure of organizations, projects, and users to simplify the layout logic and improve user experience. | November 2022 |
 | Developer experience | Add SQL Editor. | Write and run SQL queries, and view the results in the TiDB console. | November 2022 |
-| Developer experience | Connect TiDB Cloud account and database account. | Import data via TiDB Cloud console with no password required. Use SQL Editor to improve user experience. | November 2022 |
+| Developer experience | Connect TiDB Cloud account and database account. | TiDB Cloud account can access the database without password to improve user experience. | November 2022 |
 | Enterprise-grade features | Support hierarchical user roles and permissions. | Support role-based access control (RBAC) for the TiDB Cloud console. You can manage user permissions in a fine-grained manner, such as by cluster, billing, and member. | December 2022 |
 | Developer experience | Provide Data API.  | Provide API for data read and write. A user can access the database via HTTP requests.  | December 2022 |
 
