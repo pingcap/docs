@@ -1,7 +1,7 @@
 <!-- markdownlint-disable MD007 -->
 <!-- markdownlint-disable MD041 -->
 
-- <a href="https://docs.pingcap.com/" target="_self">Docs Home</a>
+- [Docs Home](https://docs.pingcap.com/)
 - About TiDB Cloud
   - [Why TiDB Cloud](/tidb-cloud/tidb-cloud-intro.md)
   - [Architecture](/tidb-cloud/tidb-cloud-intro.md#architecture)
