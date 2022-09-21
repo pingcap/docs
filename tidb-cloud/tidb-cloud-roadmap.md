@@ -5,9 +5,9 @@ summary: Learn about TiDB Cloud's roadmap for the next few months. See the new f
 
 # TiDB Cloud Roadmap
 
-The TiDB Cloud roadmap brings you what's coming in the near future, so you can see the new features or improvements in advance, follow the progress, learn about the key milestones on the way, and give feedback as the development work goes on.
+The TiDB Cloud roadmap brings you what's coming in the near future, so you can see the new features or improvements in advance, follow the progress, learn about the key milestones on the way, and [give feedback](https://www.pingcap.com/contact-us) as the development work goes on.
 
-## Improve developer experience and enhance enterprise-grade features
+## Developer experience and enterprise-grade features
 
 | Scenario | Feature | Description | Estimated Time of Delivery |
 |---|---|---|---|
@@ -19,7 +19,7 @@ The TiDB Cloud roadmap brings you what's coming in the near future, so you can s
 | Enterprise-grade features | Support hierarchical user roles and permissions. | Support role-based access control (RBAC) for the TiDB Cloud console. You can manage user permissions in a fine-grained manner, such as by cluster, billing, and member. | December 2022 |
 | Developer experience | Provide Data API.  | Provide API for data read and write. A user can access the database via HTTP requests.  | December 2022 |
 
-## Optimize TiDB kernel
+## TiDB kernel
 
 <table>
 <thead>
