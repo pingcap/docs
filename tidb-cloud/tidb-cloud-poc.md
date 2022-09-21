@@ -224,8 +224,8 @@ If you still have unused credits after your PoC process is completed, you can co
 
 ### 4. Can I take more than 2 weeks to complete a PoC?
 
-If you want to extend the PoC trial period or are running out of credits, contact [PingCAP](https://pingcap.com/contact-us/) for help.
+If you want to extend the PoC trial period or are running out of credits, [contact PingCAP](https://www.pingcap.com/contact-us/) for help.
 
 ### 5. I'm stuck with a technical problem. How do I get help for my PoC?
 
-You can always contact [PingCAP](/tidb-cloud/tidb-cloud-support.md) for help.
+You can always [contact TiDB Cloud support](/tidb-cloud/tidb-cloud-support.md) for help.
