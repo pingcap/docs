@@ -110,5 +110,5 @@ The difference between TiDB and MySQL in replacing empty strings:
 
 The following takes `REGEXP_REPLACE("", "^$", "123")` as an example:
 
-- MySQL does not replace the empty string and returns `""` as a result.
-- TiDB replaces the empty string and returns `"123"` as a result.
+- MySQL does not replace the empty string and returns `""` as the result.
+- TiDB replaces the empty string and returns `"123"` as the result.
