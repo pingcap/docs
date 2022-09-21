@@ -16,6 +16,8 @@ The TiDB Cloud roadmap brings you what's coming in the near future, so you can s
 | Scenario | Feature | Description | Estimated Time of Delivery |
 |---|---|---|---|
 | Developer experience | Load sample datasets manually. | Support loading sample datasets into a cluster. You can use this data to quickly get started with testing the features of TiDB Cloud. | October 2022 |
+| UI experience | Provide a convenient feedback channel. | Users can quickly get help with and give feedback on the product. |
+| Cloud Provider Marketplace | Improve the user experience from AWS Marketplace and GCP Marketplace. | Improve the user journey and experience of users who sign up from AWS Marketplace and GCP Marketplace. |
 | Enterprise-grade features | Manage multiple organizations. | Support managing multiple organizations. A user can create and join more than one organization. | October 2022 |
 | UI experience | Add left navigation. | Present the TiDB Cloud console in the structure of organizations, projects, and users to simplify the layout logic and improve user experience. | November 2022 |
 | Developer experience | Add SQL Editor. | Write and run SQL queries, and view the results in the TiDB console. | November 2022 |
