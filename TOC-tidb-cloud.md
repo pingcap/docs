@@ -1,12 +1,13 @@
 <!-- markdownlint-disable MD007 -->
 <!-- markdownlint-disable MD041 -->
 
-- [Docs Home](https://docs.pingcap.com/)
+- <a href="https://docs.pingcap.com/" target="_self">Docs Home</a>
 - About TiDB Cloud
   - [Why TiDB Cloud](/tidb-cloud/tidb-cloud-intro.md)
   - [Architecture](/tidb-cloud/tidb-cloud-intro.md#architecture)
   - [High Availability](/tidb-cloud/high-availability-with-multi-az.md)
   - [MySQL Compatibility](/mysql-compatibility.md)
+  - [Roadmap](/tidb-cloud/tidb-cloud-roadmap.md)
 - Get Started
   - [Try Out TiDB Cloud](/tidb-cloud/tidb-cloud-quickstart.md)
   - [Try Out HTAP](/tidb-cloud/tidb-cloud-htap-quickstart.md)
