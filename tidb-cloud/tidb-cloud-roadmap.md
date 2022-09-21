@@ -1,15 +1,15 @@
 ---
 title: TiDB Cloud Roadmap
-summary: Learn about TiDB Cloud's roadmap for the next few months. See the new features or improvements in advance, follow the progress, learn about the key milestones on the way, and give feedback as the development work goes on.
+summary: Learn about TiDB Cloud's roadmap for the next few months. See the new features or improvements in advance, follow the progress, learn about the key milestones on the way.
 ---
 
 # TiDB Cloud Roadmap
 
-This roadmap brings you what's coming in the near future, so you can see the new features or improvements in advance, follow the progress, and learn about the key milestones on the way.
+The TiDB Cloud roadmap brings you what's coming in the near future, so you can see the new features or improvements in advance, follow the progress, and learn about the key milestones on the way.
 
 > **Note:**
 >
-> In the course of development, this roadmap is subject to change based on user needs and feedback.
+> In the course of development, this roadmap is subject to change based on user needs, feedback, and our assessment.
 
 ## Developer experience and enterprise-grade features
 
