@@ -58,11 +58,7 @@ In v6.3.0-DMR, the key new features and improvements are as follows:
 
 * Improve the performance of adding indexes and reduce its impact on DML transactions [#35983](https://github.com/pingcap/tidb/issues/35983) @[benjamin2037](https://github.com/benjamin2037) **tw: Oreoxmt**
 
-    To improve the speed of backfilling when creating an index, TiDB v6.3.0 accelerates the `ADD INDEX` and `CREATE INDEX` DDL operations when the [`tidb_ddl_enable_fast_reorg`](/system-variables.md#tidb_ddl_enable_fast_reorg-new-in-v630) system variable is enabled. The performance of adding indexes is about three times faster than the original when the feature is enabled.
-
-* Improve MySQL 8.0 compatibility by adding support for `REGEXP_INSTR()`, `REGEXP_LIKE()`, `REGEXP_REPLACE()`, and `REGEXP_SUBSTR()` regular expression functions [#23881](https://github.com/pingcap/tidb/issues/23881) @[windtalker](https://github.com/windtalker) **tw: Oreoxmt**
-
-    For more details about the compatibility with MySQL, see [Regular expression compatibility with MySQL](/functions-and-operators/string-functions.md#regular-expression-compatibility-with-mysql).
+    To improve the speed of backfilling when creating an index, TiDB v6.3.0 accelerates the `ADD INDEX` and `CREATE INDEX` DDL operations when the [`tidb_ddl_enable_fast_reorg`](/system-variables.md#tidb_ddl_enable_fast_reorg-new-in-v630) system variable is enabled. When the feature is enabled, the performance of adding indexes is about three times faster than previously.
 
 ### Security
 
@@ -118,9 +114,9 @@ In v6.3.0-DMR, the key new features and improvements are as follows:
 
     TiKV recycles log files in Raft Engine by default. This reduces the long tail latency during Raft log appending and improves performance under write workloads.
 
-* TiDB supports Null-Aware Anti Join] [#issue]() @[Arenatlx](https://github.com/Arenatlx) **tw: Oreoxmt**
+* TiDB supports Null-Aware Anti Join [#37525](https://github.com/pingcap/tidb/issues/37525) @[Arenatlx](https://github.com/Arenatlx) **tw: Oreoxmt**
 
-    TiDB v6.3.0 introduces a new join type [Null-Aware Anti Join (NAAJ)](/explain-subqueries.md#null-aware-semi-joinin-any). NAAJ can be aware of whether the collection is empty or `NULL` when processing collection operations. This optimizes the execution efficiency of operations such as `IN` and `= ANY` and improves SQL performance.
+    TiDB v6.3.0 introduces a new join type [Null-Aware Anti Join (NAAJ)](/explain-subqueries.md#null-aware-anti-semi-join-not-in-and--all-subqueries). NAAJ can be aware of whether the collection is empty or `NULL` when processing collection operations. This optimizes the execution efficiency of operations such as `IN` and `= ANY` and improves SQL performance.
 
 * Add optimizer hints to control the build end of Hash Join [#issue]() @[Reminiscent](https://github.com/Reminiscent) **tw: TomShawn**
 
@@ -153,6 +149,10 @@ In v6.3.0-DMR, the key new features and improvements are as follows:
 ### Ease of use
 
 ### MySQL compatibility
+
+* Improve MySQL 8.0 compatibility by adding support for `REGEXP_INSTR()`, `REGEXP_LIKE()`, `REGEXP_REPLACE()`, and `REGEXP_SUBSTR()` regular expression functions [#23881](https://github.com/pingcap/tidb/issues/23881) @[windtalker](https://github.com/windtalker) **tw: Oreoxmt**
+
+    For more details about the compatibility with MySQL, see [Regular expression compatibility with MySQL](/functions-and-operators/string-functions.md#regular-expression-compatibility-with-mysql).
 
 * Improve compatibility of SQL-based data Placement Rules [#37171](https://github.com/pingcap/tidb/issues/37171) @[lcwangchao](https://github.com/lcwangchao)
 
