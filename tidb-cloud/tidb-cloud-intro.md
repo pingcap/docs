@@ -30,7 +30,7 @@ With TiDB Cloud, you can get the following key features:
 
 - **MySQL Compatibility**
 
-    Increase productivity and shorten time-to-market for your applications with TiDB’s MySQL compatibility. Easily migrate data from existing MySQL instances without the need to rewrite code. Feel free to write and run your SQL in TiDB Cloud [Playground](/tidb-cloud/tidb-cloud-glossary.md#playground) instantly, which contains a pre-loaded dataset of GitHub events.
+    Increase productivity and shorten time-to-market for your applications with TiDB's MySQL compatibility. Easily migrate data from existing MySQL instances without the need to rewrite code. Feel free to write and run your SQL in TiDB Cloud [Playground](/tidb-cloud/tidb-cloud-glossary.md#playground) instantly, which contains a pre-loaded dataset of GitHub events.
 
 - **High Availability and Reliability**
 
