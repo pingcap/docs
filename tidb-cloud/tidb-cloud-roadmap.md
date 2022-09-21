@@ -148,7 +148,7 @@ The TiDB Cloud roadmap brings you what's coming in the near future, so you can s
   </tr>
   <tr>
     <td>Point-in-time recovery (PITR)</td>
-    <td>PITR on the cloud</td>
+    <td>Support PITR on the cloud.</td>
     <td>Support cluster-level PITR on the cloud.</td>
     <td>October 2022</td>
   </tr>
