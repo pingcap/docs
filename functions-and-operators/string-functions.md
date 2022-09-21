@@ -106,7 +106,7 @@ The difference between TiDB and MySQL support for the binary string type:
 
 ### Other compatibility
 
-The difference between TiDB and MySQL in replacing empty strings:
+The difference between TiDB and MySQL support in replacing empty strings:
 
 The following takes `REGEXP_REPLACE("", "^$", "123")` as an example:
 
