@@ -22,15 +22,15 @@ These charges appear as separate items on your monthly TiDB Cloud bills.
 
 TiDB Cloud lets you pay for database cluster compute resources by hour, which is ideal for dynamic workloads.
 
-In TiDB Cloud, you can control your cluster size easily by specifying the node quantity and vCPUs size of TiDB, TiKV, and TiFlash<sup>beta</sup>.
+In TiDB Cloud, you can control your cluster size easily by specifying the node quantity and node size of TiDB, TiKV, and TiFlash.
 
 The specified node quantity and associated vCPUs determine your hourly compute cost.
 
-Note that the compute cost of TiDB, TiKV, and TiFlash<sup>beta</sup> nodes might vary depending on different cloud providers and different regions. For details, see [TiDB Cloud pricing](https://en.pingcap.com/tidb-cloud-pricing/).
+Note that the compute cost of TiDB, TiKV, and TiFlash nodes might vary depending on different cloud providers and different regions. For details, see [TiDB Cloud pricing](https://en.pingcap.com/tidb-cloud-pricing/).
 
 ## Storage cost
 
-Both TiKV and TiFlash<sup>beta</sup> nodes save your data to persistent block storage. The storage costs are generated according to the total volume of storage that all TiKV and TiFlash<sup>beta</sup> nodes in your cluster consume.
+Both TiKV and TiFlash nodes save your data to persistent block storage. The storage costs are generated according to the total volume of storage that all TiKV and TiFlash nodes in your cluster consume.
 
 TiDB Cloud passes the costs onto customers as they are incurred. For details, see [TiDB Cloud pricing](https://en.pingcap.com/tidb-cloud-pricing/).
 
@@ -68,6 +68,10 @@ To make these charges easier to view, your TiDB Cloud bills and invoices aggrega
 - Data transfer – Cross Region
 - Data transfer – Internet
 
+## Support service cost
+
+If you have subscribed to one of the **Standard**, **Enterprise**, or **Premium** [support plan](/tidb-cloud/tidb-cloud-support.md), you are charged for the support service on a monthly basis. The billing information is included in your monthly bill.
+
 ## Invoices
 
 If you are the owner or billing administrator of your organization, you can manage the invoice information of TiDB Cloud. Otherwise, skip this section.
@@ -76,7 +80,7 @@ If you are the owner or billing administrator of your organization, you can mana
 >
 > If you sign up for TiDB Cloud through [AWS Marketplace](https://aws.amazon.com/marketplace), you can pay through your AWS account directly but cannot add payment methods or download invoices in the TiDB Cloud portal.
 
-After you set up the payment method, TiDB Cloud will generate the invoice for the previous month at the beginning of each month. Invoice costs include TiDB cluster usage consumption, discounts, backup storage costs, and data transmission costs in your organization.
+After you set up the payment method, TiDB Cloud will generate the invoice for the previous month at the beginning of each month. Invoice costs include TiDB cluster usage consumption, discounts, backup storage costs, support service cost, and data transmission costs in your organization.
 
 - TiDB Cloud provides the invoice to you on the ninth of each month. From the first to the ninth day, you cannot view the last month's cost details, but can obtain the cluster usage information of this month via the billing console.
 - The default method for paying invoices is credit card deduction. If you want to use other payment methods, please send a ticket request to let us know.
@@ -96,7 +100,7 @@ To view the list of invoices, perform the following steps:
 
 If you are the owner or billing administrator of the organization, you can view and export the billing details of TiDB Cloud. Otherwise, skip this section.
 
-After setting the payment method, TiDB Cloud will generate the invoice and billing details of the historical months, and generate the bill details of the current month at the beginning of each month. The billing details include your organization's TiDB cluster usage consumption, discounts, backup storage costs, data transmission costs, and project splitting information.
+After setting the payment method, TiDB Cloud will generate the invoice and billing details of the historical months, and generate the bill details of the current month at the beginning of each month. The billing details include your organization's TiDB cluster usage consumption, discounts, backup storage costs, data transmission costs, support service cost, and project splitting information.
 
 > **Note:**
 >
@@ -124,21 +128,22 @@ If you are the owner or billing administrator of your organization, you can mana
 >
 > If you sign up for TiDB Cloud through [AWS Marketplace](https://aws.amazon.com/marketplace), you can pay through your AWS account directly but cannot add payment methods or download invoices in the TiDB Cloud portal.
 
+### Add a credit card
+
 The fee is deducted from a bound credit card according to your cluster usage. To add a valid credit card, you can use either of the following methods:
 
-- When you are creating a cluster: 
+- When you are creating a cluster:
 
-    1. Before you click **Submit** on the **Create a Cluster** page, click **Add Credit Card** at the bottom of the **Billing Calculator** pane.
-    2. In the **Add a Card** dialog box, enter the cardholder's name, email, phone, country/region, card number, valid year and month, and CVC (Card Verification Code).
-    3. Click **Submit**.
+    1. Before you click **Create Cluster** on the **Create a Cluster** page, click **Add Credit Card** at the bottom of the **Billing Calculator** pane.
+    2. In the **Add a Card** dialog box, fill in the card information and billing address.
+    3. Click **Save Card**.
 
-- Anytime in the billing console: 
+- Anytime in the billing console:
 
     1. Click the account name in the upper-right corner of the TiDB Cloud console.
     2. Click **Billing**.
-    3. Click the **Payment Method** tab, and then click **Add Credit Card**.
-    4. In the **Add a Card** dialog box, enter the cardholder's name, email, phone, country/region, card number, valid year and month, and CVC (Card Verification Code).
-    5. Click **Submit**.
+    3. Under the **Payment Method** tab, click **Add a New Card**.
+    4. Fill in the billing address and card information, and then click **Save**.
 
 > **Note:**
 >
@@ -152,3 +157,14 @@ To set the default credit card, perform the following steps:
 2. Click **Billing**.
 3. Click the **Payment Method** tab.
 4. Select a credit card in the credit card list, and click **Set as default**.
+
+### Edit billing profile information
+
+The billing profile information includes the business legal address and tax registration information. By providing your tax registration number, certain taxes might be exempted from your invoice.
+
+To edit the billing profile information, perform the following steps:
+
+1. Click the account name in the upper-right corner of the TiDB Cloud console.
+2. Click **Billing**.
+3. Click the **Payment Method** tab.
+4. Edit the billing profile information, and then click **Save**.
