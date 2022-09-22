@@ -38,7 +38,7 @@ To enable extended statistics, set the system variable `tidb_enable_extended_sta
 SET GLOBAL tidb_enable_extended_stats = ON;
 ```
 
-The default value of this variable is `OFF`.
+The default value of this variable is `OFF`. The setting of this system variable applies to all extended statistics objects.
 
 ### Register extended statistics
 
@@ -115,7 +115,7 @@ Currently, TiDB only supports the correlation-type extended statistics. This typ
 
 ### Stage 1. Define the table
 
-A table `t` is defined as follows:
+Define a table `t` as follows:
 
 ```sql
 CREATE TABLE t(col1 INT, col2 INT, KEY(col1), KEY(col2));
@@ -125,7 +125,7 @@ Suppose that `col1` and `col2` of table `t` both obey monotonically increasing c
 
 ### Stage 2. Execute an example query without extended statistics
 
-Execute the following query without using extended statistics.
+Execute the following query without using extended statistics:
 
 ```sql
 SELECT * FROM t WHERE col1 > 1 ORDER BY col2 LIMIT 1;
