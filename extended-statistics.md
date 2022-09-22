@@ -113,7 +113,7 @@ The way of exporting or importing extended statistics is the same as exporting o
 
 Currently, TiDB only supports the correlation-type extended statistics. This type is used to estimate the number of rows in the range query and improve index selection. The following example shows how the correlation-type extended statistics are used to estimate the number of rows in a range query.
 
-### Stage 1. Define the table
+### Step 1. Define the table
 
 Define a table `t` as follows:
 
@@ -123,7 +123,7 @@ CREATE TABLE t(col1 INT, col2 INT, KEY(col1), KEY(col2));
 
 Suppose that `col1` and `col2` of table `t` both obey monotonically increasing constraints in row order. This means that the values of `col1` and `col2` are strictly correlated in order, and the correlation factor is `1`.
 
-### Stage 2. Execute an example query without extended statistics
+### Step 2. Execute an example query without extended statistics
 
 Execute the following query without using extended statistics:
 
@@ -138,7 +138,7 @@ For the execution of the preceding query, the TiDB optimizer has the following o
 
 Without extended statistics, the TiDB optimizer only supposes that `col1` and `col2` are independent, which **leads to a significant estimation error**.
 
-### Stage 3. Enable extended statistics
+### Step 3. Enable extended statistics
 
 Set `tidb_enable_extended_stats` to `ON`, and register the extended statistics object for `col1` and `col2`:
 
@@ -148,7 +148,7 @@ ALTER TABLE t ADD STATS_EXTENDED s1 correlation(col1, col2);
 
 When you execute `ANALYZE` after the registration, TiDB calculates the [Pearson correlation coefficient](https://en.wikipedia.org/wiki/Pearson_correlation_coefficient) of `col` and `col2` of table `t`, and writes the object into the `mysql.stats_extended` table.
 
-### Stage 4. See how extended statistics make a difference
+### Step 4. See how extended statistics make a difference
 
 After TiDB has the extended statistics for correlation, the optimizer can estimate how many rows to be scanned more precisely.
 
