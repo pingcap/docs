@@ -152,7 +152,7 @@ When you execute `ANALYZE` after the registration, TiDB calculates the [Pearson 
 
 After TiDB has the extended statistics for correlation, the optimizer can estimate how many rows to be scanned more precisely.
 
-At this time, for the query in [Stage 2. Execute an example query without extended statistics](#stage-2-execute-an-example-query-without-extended-statistics), `col1` and `col2` are strictly correlated in order. If TiDB accesses table `t` by using the index on `col2` to meet the first row that satisfies `col1 > 1`, the TiDB optimizer will equivalently translate the row count estimation into the following query:
+At this time, for the query in [Stage 2. Execute an example query without extended statistics](#step-2-execute-an-example-query-without-extended-statistics), `col1` and `col2` are strictly correlated in order. If TiDB accesses table `t` by using the index on `col2` to meet the first row that satisfies `col1 > 1`, the TiDB optimizer will equivalently translate the row count estimation into the following query:
 
 ```sql
 SELECT * FROM t WHERE col1 <= 1 OR col1 IS NULL;
