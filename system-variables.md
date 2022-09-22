@@ -223,6 +223,12 @@ For more possible values of this variable, see [Authentication plugin status](/s
 - Range: `[0, 7]`
 - Sets the week format used by the `WEEK()` function.
 
+### error_count
+
+- Scope: NONE
+- Type: Integer
+- A read-only variable that indicates the number of errors that resulted from the last statement that generated messages.
+
 ### foreign_key_checks
 
 - Scope: SESSION | GLOBAL
@@ -332,6 +338,16 @@ This variable is an alias for `last_insert_id`.
 - Range: `[1024, 1073741824]`
 - Unit: Bytes
 - The maximum size of a packet for the MySQL protocol.
+
+### max_connections
+
+- Scope: GLOBAL
+- Persists to cluster: No
+- Type: Integer
+- Default value: `0`
+- Range: `[0, 100000]`
+- The maximum number of connections for a single TiDB instance.
+- The value of `0` means no limit.
 
 ### max_execution_time
 
@@ -467,19 +483,19 @@ This variable is an alias for `last_insert_id`.
 
 - Scope: NONE
 - Default value: ""
-- The location of the certificate authority file (if there is one).
+- The location of the certificate authority file (if there is one), the value of this variable is defined by [`ssl-ca` configuration](https://docs.pingcap.com/tidb/dev/tidb-configuration-file#ssl-ca).
 
 ### ssl_cert
 
 - Scope: NONE
 - Default value: ""
-- The location of the certificate file (if there is a file) that is used for SSL/TLS connections.
+- The location of the certificate file (if there is a file) that is used for SSL/TLS connections, the value of this variable is defined by [`ssl-cert` configuration](https://docs.pingcap.com/tidb/dev/tidb-configuration-file#ssl-cert).
 
 ### ssl_key
 
 - Scope: NONE
 - Default value: ""
-- The location of the private key file (if there is one) that is used for SSL/TLS connections.
+- The location of the private key file (if there is one) that is used for SSL/TLS connections, the value of this variable is defined by [`ssl-key` configuration](https://docs.pingcap.com/tidb/dev/tidb-configuration-file#ssl-cert).
 
 ### system_time_zone
 
