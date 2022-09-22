@@ -93,7 +93,7 @@ check-struct-only = false
     user = "root"
     password = ""
 
-    # (optional) Use TLS to connect TiDB
+    # (optional) Use TLS to connect TiDB.
     # security.ca-path = ".../ca.crt"
     # security.cert-path = ".../cert.crt"
     # security.key-path = ".../key.crt"
