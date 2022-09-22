@@ -48,7 +48,9 @@ In v6.3.0-DMR, the key new features and improvements are as follows:
 
 * JSON data type and JSON functions become GA [#36993](https://github.com/pingcap/tidb/issues/36993) @[xiongjiwei](https://github.com/xiongjiwei) **tw: qiancai**
 
-    JSON is a popular data format adopted by a large number of programs. TiDB has introduced the [JSON support](/data-type-json.md) as experimental since an earlier version, compatible with MySQL's JSON data type and some JSON functions. In v6.3.0, the JSON support becomes GA, providing TiDB with richer data types, and further improving TiDB compatibility with MySQL.
+    JSON is a popular data format adopted by a large number of programs. TiDB has introduced the [JSON support](/data-type-json.md) as an experimental feature since an earlier version, compatible with MySQL's JSON data type and some JSON functions. 
+
+In v6.3.0, the JSON data type and functions become GA in TiDB, which enriches TiDB’s data types, supports using JSON functions in [expression indexes](/sql-statements/sql-statement-create-index.md#expression-index) and [generated-columns](/generated-columns.md), and further improves TiDB’s compatibility with MySQL.
 
 * Provide lightweight metadata lock to improve the DML success rate during DDL change (experimental) [#37275](https://github.com/pingcap/tidb/issues/37275) @[wjhuang2016](https://github.com/wjhuang2016) **tw: Oreoxmt**
 
