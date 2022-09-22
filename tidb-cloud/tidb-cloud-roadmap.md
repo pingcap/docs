@@ -11,9 +11,7 @@ Any unreleased features discussed or referenced in our documents, roadmaps, blog
 
 The TiDB Cloud roadmap brings you what's coming in the near future, so you can see the new features or improvements in advance, follow the progress, and learn about the key milestones on the way.
 
-> **Note:**
->
-> In the course of development, this roadmap is subject to change based on user needs, feedback, and our assessment.
+In the course of development, this roadmap is subject to change based on user needs, feedback, and our assessment.
 
 ## Developer experience and enterprise-grade features
 
