@@ -110,7 +110,7 @@ In v6.3.0-DMR, the key new features and improvements are as follows:
 
 * TiKV supports log recycling [#214](https://github.com/tikv/raft-engine/issues/214) @[LykxSassinator](https://github.com/LykxSassinator) **tw：ran-huang**
 
-    TiKV supports recycling log files in Raft Engine. This reduces the long tail latency in network disks during Raft log appending and improves performance under write workloads.
+    TiKV supports [recycling log files](/tikv-configuration-file.md#enable-log-recycle-new-in-v630) in Raft Engine. This reduces the long tail latency in network disks during Raft log appending and improves performance under write workloads.
 
 * TiDB supports null-aware anti join [#37525](https://github.com/pingcap/tidb/issues/37525) @[Arenatlx](https://github.com/Arenatlx) **tw: Oreoxmt**
 
@@ -142,7 +142,7 @@ In v6.3.0-DMR, the key new features and improvements are as follows:
 
 * The feature of disabling Titan becomes GA [#issue]() @[tabokie](https://github.com/tabokie) **tw：ran-huang**
 
-    You can [disable Titan](/titan-configuration#disable-titan) for online TiKV nodes.
+    You can [disable Titan](/titan-configuration.md#disable-titan) for online TiKV nodes.
 
 ### Ease of use
 
@@ -170,7 +170,7 @@ In v6.3.0-DMR, the key new features and improvements are as follows:
 
 * TiDB Lightning supports importing Parquet files exported by Apache Hive into TiDB [#issue]() @[buchuitoudegou](https://github.com/buchuitoudegou) **tw：ran-huang**
 
-    TiDB Lightning supports importing Parquet files exported by Apache Hive into TiDB, thereby achieving data migration from Hive to TiDB.
+    TiDB Lightning supports [importing Parquet files exported by Apache Hive into TiDB](/tidb-lightning/tidb-lightning-data-source.md#parquet), thereby achieving data migration from Hive to TiDB.
 
 * DM supports adding a field to a table migrated to TiDB and assigning values to the field [#3262](https://github.com/pingcap/tiflow/pull/3262), [#3340](https://github.com/pingcap/tiflow/issues/3340) @[yufan022](https://github.com/yufan022) **tw：ran-huang**
 
@@ -188,7 +188,7 @@ In v6.3.0-DMR, the key new features and improvements are as follows:
 
 * TiCDC supports graceful upgrade [#4757](https://github.com/pingcap/tiflow/issues/4757) @[overvenus](https://github.com/overvenus) @[3AceShowHand](https://github.com/3AceShowHand) **tw:ran-huang**
 
-    When TiCDC is deployed using TiUP (>=v1.11.0) or TiDB Operator (>=v1.3.8), you can gracefully upgrade the TiCDC cluster. During the upgrade, data replication latency is kept as low as 30 seconds. This improves stability, empowering TiCDC to better support latency-sensitive applications.
+    When TiCDC is deployed using [TiUP](/ticdc/deploy-ticdc.md#rolling-upgrade-ticdc-using-tiup) (>=v1.11.0) or [TiDB Operator](https://docs.pingcap.com/tidb-in-kubernetes/v1.3/configure-a-tidb-cluster#configure-graceful-upgrade-for-ticdc-cluster) (>=v1.3.8), you can gracefully upgrade the TiCDC cluster. During the upgrade, data replication latency is kept as low as 30 seconds. This improves stability, empowering TiCDC to better support latency-sensitive applications.
 
 ## Compatibility changes
 
