@@ -48,7 +48,7 @@ The following sections provide a detailed description of these key metrics on th
 
 ![TiKV Dashboard - Errors metrics](/media/tikv-dashboard-errors-v610.png)
 
-## Server
+### Server
 
 - CF size: The size of each column family
 - Store size: The storage size per TiKV instance
