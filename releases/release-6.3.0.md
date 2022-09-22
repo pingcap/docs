@@ -72,7 +72,7 @@ In v6.3.0-DMR, the key new features and improvements are as follows:
 
     TiDB adds an authentication plugin [`tidb_sm3_password`](/system-variables.md#default_authentication_plugin) based on the SM3 algorithm. When this plugin is enabled, the user password is encrypted and validated using the SM3 algorithm.
 
-* JDBC supports authentication with the SM3 algorithm [issue]() @[lastincisor](https://github.com/lastincisor) **tw：ran-huang**
+* TiDB JDBC supports authentication with the SM3 algorithm [#25](https://github.com/pingcap/mysql-connector-j/issues/25) @[lastincisor](https://github.com/lastincisor) **tw：ran-huang**
 
     Authenticating the user password needs client-side support. Now because [JDBC supports the SM3 algorithm](/develop/dev-guide-choose-driver-or-orm.md#java-drivers), you can connect to TiDB using SM3 authentication via JDBC.
 
