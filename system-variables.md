@@ -1177,6 +1177,7 @@ MPP is a distributed computing framework provided by the TiFlash engine, which a
 <CustomContent platform="tidb">
 
 - Scope: SESSION | GLOBAL
+- Persists to cluster: Yes
 - Type: Boolean
 - Default value: `OFF`
 - This variable indicates whether TiDB can collect the extended statistic to guide the optimizer. See [Introduction to Extended Statistics](/extended-statistics.md) for more information.
