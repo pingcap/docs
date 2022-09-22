@@ -37,7 +37,7 @@ In v6.3.0-DMR, the key new features and improvements are as follows:
 
 * TiDB supports two more [window functions](/tiflash/tiflash-supported-pushdown-calculations.md) [#5579](https://github.com/pingcap/tiflash/issues/5579) @[SeaRise](https://github.com/SeaRise) **tw：shichun-0415**
 
-    * `LEAD`
+    * `LEAD()`
     * `LAG`
 
 * The `CREATE USER` statement supports the `ACCOUNT LOCK/UNLOCK` option [#37051](https://github.com/pingcap/tidb/issues/37051) @[CbcWestwolf](https://github.com/CbcWestwolf) **tw：ran-huang**
