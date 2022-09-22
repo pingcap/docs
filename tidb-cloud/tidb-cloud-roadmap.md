@@ -5,11 +5,11 @@ summary: Learn about TiDB Cloud's roadmap for the next few months. See the new f
 
 # TiDB Cloud Roadmap
 
-The TiDB Cloud roadmap brings you what's coming in the near future, so you can see the new features or improvements in advance, follow the progress, and learn about the key milestones on the way.
+The TiDB Cloud roadmap brings you what's coming in the near future, so you can see the new features or improvements in advance, follow the progress, and learn about the key milestones on the way. In the course of development, this roadmap is subject to change based on user needs, feedback, and our assessment.
 
-> **Note:**
+> **Safe harbor statement:**
 >
-> In the course of development, this roadmap is subject to change based on user needs, feedback, and our assessment.
+> Any unreleased features discussed or referenced in our documents, roadmaps, blogs, websites, press releases, or public statements that are not currently available ("unreleased features") are subject to change at our discretion and may not be delivered as planned or at all. Customers acknowledge that purchase decisions are solely based on features and functions that are currently available, and that PingCAP is not obliged to deliver aforementioned unreleased features as part of the contractual agreement unless otherwise stated.
 
 ## Developer experience and enterprise-grade features
 
