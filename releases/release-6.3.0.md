@@ -66,7 +66,7 @@ In v6.3.0-DMR, the key new features and improvements are as follows:
 
 * TiFlash supports the SM4 algorithm for encryption at rest [#5714](https://github.com/pingcap/tiflash/issues/5714) @[lidezhu](https://github.com/lidezhu)
 
-    Add the [SM4 algorithm](/encryption-at-rest.md) for TiFlash encryption at rest. When you configure encryption at rest, you can enable the SM4 encryption capacity by setting the value of the "data-encryption-method" configuration to "sm4-ctr".
+    Add the [SM4 algorithm](/encryption-at-rest.md) for TiFlash encryption at rest. When you configure encryption at rest, you can enable the SM4 encryption capacity by setting the value of the `data-encryption-method` configuration to `sm4-ctr`.
 
 * TiDB supports authentication with the SM3 algorithm [#36192](https://github.com/pingcap/tidb/issues/36192) @[CbcWestwolf](https://github.com/CbcWestwolf) **tw：ran-huang**
 
