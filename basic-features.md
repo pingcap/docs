@@ -120,6 +120,7 @@ This document lists the features supported in each TiDB version. Note that suppo
 
 ## Statistics
 
+<<<<<<< HEAD
 | Statistics                                               | 6.1 | 6.0 | 5.4          |   5.3    |   5.2    |   5.1   |   5.0    |   4.0    |
 | ------------------------------------------------------------ | :--: | :--: | ------------ | :----------: | :----------: | :----------: | :----------: | :----------: |
 | [CMSketch](/statistics.md)                                   | Disabled by default | Disabled by default | Disabled by default | Disabled by default | Y | Y | Y |      Y       |
@@ -129,6 +130,17 @@ This document lists the features supported in each TiDB version. Note that suppo
 | [Automatically update statistics](/statistics.md#automatic-update) | Y | Y | Y | Y | Y | Y | Y | Y |
 | [Fast Analyze](/system-variables.md#tidb_enable_fast_analyze) | Experimental | Experimental | Experimental | Experimental | Experimental | Experimental | Experimental | Experimental |
 | [Dynamic pruning](/partitioned-table.md#dynamic-pruning-mode) | Y | Experimental | Experimental | Experimental | Experimental | Experimental | N | N |
+=======
+| Statistics                                               | 6.2 | 6.1 | 6.0 | 5.4          |   5.3    |   5.2    |   5.1   |   5.0    |   4.0    |
+| ------------------------------------------------------------ | :--: | :--: | :--: | ------------ | :----------: | :----------: | :----------: | :----------: | :----------: |
+| [CMSketch](/statistics.md)                                   | Disabled by default | Disabled by default | Disabled by default | Disabled by default | Disabled by default | Y | Y | Y |      Y       |
+| [Histograms](/statistics.md)                                 | Y | Y | Y | Y            |      Y       |      Y       |      Y       |      Y       |      Y       |
+| [Extended statistics](/extended-statistics.md)     | Experimental | Experimental | Experimental| Experimental | Experimental | Experimental | Experimental | Experimental |      N       |
+| [Statistics feedback](/statistics.md#automatic-update)       | Deprecated | Deprecated | Deprecated | Deprecated   | Experimental | Experimental | Experimental | Experimental | Experimental |
+| [Automatically update statistics](/statistics.md#automatic-update) | Y | Y | Y | Y | Y | Y | Y | Y | Y |
+| [Fast Analyze](/system-variables.md#tidb_enable_fast_analyze) | Experimental| Experimental | Experimental | Experimental | Experimental | Experimental | Experimental | Experimental | Experimental |
+| [Dynamic pruning](/partitioned-table.md#dynamic-pruning-mode) | Y | Y | Experimental | Experimental | Experimental | Experimental | Experimental | N | N |
+>>>>>>> fad643441 (statistics: add some doc for the exp feature (#9891))
 
 ## Security
 

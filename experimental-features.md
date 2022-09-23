@@ -12,6 +12,13 @@ This document introduces the experimental features of TiDB in different versions
 + [Support collecting statistics for `PREDICATE COLUMNS`](/statistics.md#collect-statistics-on-some-columns) (Introduced in v5.4)
 + [Support synchronously loading statistics](/statistics.md#load-statistics). (Introduced in v5.4)
 + [Control the memory quota for collecting statistics](/statistics.md#the-memory-quota-for-collecting-statistics). (Introduced in v6.1.0)
+<<<<<<< HEAD
+=======
++ [Use the thread pool to handle read requests from the storage engine](/tiflash/tiflash-configuration.md#configure-the-tiflashtoml-file). (Introduced in v6.2.0)
++ [Cost Model Version 2](/cost-model.md#cost-model-version-2). (Introduced in v6.2.0)
++ [FastScan](/develop/dev-guide-use-fastscan.md). (Introduced in v6.2.0)
++ [Extended statistics](/extended-statistics.md). (Introduced in v5.0.0)
+>>>>>>> fad643441 (statistics: add some doc for the exp feature (#9891))
 + [Randomly sample about 10000 rows of data to quickly build statistics](/system-variables.md#tidb_enable_fast_analyze) (Introduced in v3.0)
 
 ## Stability
