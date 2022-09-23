@@ -1504,9 +1504,11 @@ Configuration items related to Raft Engine.
 
 > **Note:**
 >
-> - After `format-version` is set to `2`, if you need to downgrade the TiKV cluster to a version earlier than v6.3.0, you should take following steps **before** downgrading:
->   - Disable Raft Engine by setting `enable` to `false` and restart TiKV to make the configuration take effect.
->   - Set `format-version` to `1` and enable Raft Engine by setting `enable` to `true`, then restart TiKV to make the configuration take effect.
+> After `format-version` is set to `2`, if you need to downgrade a TiKV cluster from v6.3.0 to an earlier version, take the following steps **before** the downgrade:
+>
+>   1. Disable Raft Engine by setting [`enable`](/tikv-configuration-file.md#enable-1) to `false` and restart TiKV to make the configuration take effect.
+>   2. Set `format-version` to `1`.
+>   3. Enable Raft Engine by setting `enable` to `true` and restart TiKV to make the configuration take effect.
 
 + Specifies the version of log files in Raft Engine.
 + Value Options:
@@ -1518,7 +1520,7 @@ Configuration items related to Raft Engine.
 
 > **Note:**
 >
-> - This configuration item is only available when [`format-version`](#format-version-new-in-v630) >= 2.
+> This configuration item is only available when [`format-version`](#format-version-new-in-v630) >= 2.
 
 + Determines whether to recycle stale log files in Raft Engine. When it is enabled, logically purged log files will be reserved for recycling. This reduces the long tail latency on write workloads.
 + Default value: `false`
