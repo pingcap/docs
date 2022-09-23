@@ -7,11 +7,7 @@ summary: Learn how to use extended statistics to guide the optimizer.
 
 TiDB can collect the following two types of statistics:
 
-<<<<<<< HEAD
-- Regular statistics: statistics such as histograms and Count-Min Sketch. See [Introduction to Statistics](/statistics.md) for details.
-=======
-- Basic statistics: statistics such as histograms and Count-Min Sketch. See [Introduction to Statistics](/statistics.md) for details.
->>>>>>> b270933fe (statistics: add some doc for the exp feature (#9891) (#10534))
+Basics: statistics such as histograms and Count-Min Sketch. See [Introduction to Statistics](/statistics.md) for details.
 - Extended statistics: statistics filtered by tables and columns.
 
 > **Tip:**
@@ -119,11 +115,7 @@ Other TiDB nodes will read this change and delete the object in their memory cac
 
 ### Export and import extended statistics
 
-<<<<<<< HEAD
-The way of exporting or importing extended statistics is the same as exporting or importing regular statistics. See [Introduction to Statistics - Import and export statistics](/statistics.md#import-and-export-statistics) for details.
-=======
 The way of exporting or importing extended statistics is the same as exporting or importing basic statistics. See [Introduction to Statistics - Import and export statistics](/statistics.md#import-and-export-statistics) for details.
->>>>>>> b270933fe (statistics: add some doc for the exp feature (#9891) (#10534))
 
 ## Usage examples for correlation-type extended statistics
 
