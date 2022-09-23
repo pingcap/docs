@@ -123,6 +123,7 @@
   - [Overview](/tidb-cloud/tidb-cloud-tune-performance-overview.md)
   - Analyze Performance
     - [Statement Analysis](/tidb-cloud/tune-performance.md)
+    - [Slow Queries](/tidb-cloud/tune-performance.md#slow-queries)
     - [Key Visualizer](/tidb-cloud/tune-performance.md#key-visualizer)
     - [Statement Summary Tables](/statement-summary-tables.md)
   - SQL Tuning
