@@ -2,7 +2,7 @@
 title: TiDB 6.3.0 Release Notes
 ---
 
-# TiDB v6.3.0 Release Notes
+# TiDB 6.3.0 Release Notes
 
 Release date: xx xx, 2022
 
@@ -74,7 +74,7 @@ In v6.3.0-DMR, the key new features and improvements are as follows:
 
 * TiDB Dashboard provides deadlock history information [#34106](https://github.com/pingcap/tidb/issues/34106) @[cfzjywxk](https://github.com/cfzjywxk) **tw: shichun-0415**
 
-    From v6.3.0, TiDB Dashboard will provide deadlock history. If you find excessively long SQL lock waiting by analyzing slow logs or other information on TiDB Dashboard, you can turn to deadlock history for problem locating, which delivers better diagnosis experience.
+    From v6.3.0, TiDB Dashboard provides deadlock history. If you find excessively long SQL lock waiting by analyzing slow logs or other information on TiDB Dashboard, you can check the deadlock history to locate the root cause, which delivers better diagnosis experience.
 
 ### Performance
 
@@ -82,7 +82,7 @@ In v6.3.0-DMR, the key new features and improvements are as follows:
 
     In v6.2.0, TiFlash introduces the FastScan feature, which brings expected performance improvements but lacks flexibility in use. Therefore, in v6.3.0, TiFlash changes [the way of using FastScan](/develop/dev-guide-use-fastscan.md): the `ALTER TABLE ... SET TIFLASH MODE ...` syntax to enable or disable FastScan is deprecated. Instead, you can use the system variable [`tiflash_fastscan`](/system-variables.md#tiflash_fastscan-new-in-v630) to easily control whether to enable FastScan.
 
-    When you upgrade from v6.2.0 to v6.3.0, all FastScan settings in v6.2.0 will become invalid, but will not affect the normal reading of data. You need to set the variable [`tiflash_fastscan`]. When you upgrade from an earlier version to v6.3.0, the FastScan feature is not enabled by default for all sessions to keep data consistency.
+    When you upgrade from v6.2.0 to v6.3.0, all FastScan settings in v6.2.0 will become invalid, but will not affect the normal reading of data. You need to set the variable [`tiflash_fastscan`]. When you upgrade from v6.2.0 or an earlier version to v6.3.0, the FastScan feature is not enabled by default for all sessions to keep data consistency.
 
 * TiFlash optimizes data scanning performance in scenarios of multiple concurrency tasks [#5376](https://github.com/pingcap/tiflash/issues/5376) @[JinheLin](https://github.com/JinheLin)
 
@@ -118,7 +118,7 @@ In v6.3.0-DMR, the key new features and improvements are as follows:
 
 * Optimize the way of fetching TSO in the Read-Committed isolation level [#36812](https://github.com/pingcap/tidb/issues/36812) @[TonsnakeLin](https://github.com/TonsnakeLin) **tw: TomShawn**
 
-    In the Read-Committed isolation level, the system variable [`tidb_rc_write_check_ts`](/system-variables.md#tidb_rc_write_check_ts-new-in-v630) is introduced to control how TSO is fetched. In the case of Plan Cache hit, TiDB improves the execution efficiency of batch DML statements by reducing the frequency of fetching TSO, and reduces the execution time of running tasks in batches.
+    In the Read-Committed isolation level, the system variable [`tidb_rc_write_check_ts`](/system-variables.md#tidb_rc_write_check_ts-new-in-v630) is introduced to control how TSO is fetched. In the case of Plan Cache hit, TiDB improves the execution efficiency of batch DML statements by reducing the frequency of fetching TSO, and reduces the execution time of running tasks in batch.
 
 ### Stability
 
@@ -138,7 +138,7 @@ In v6.3.0-DMR, the key new features and improvements are as follows:
 
 ### MySQL compatibility
 
-* Improve MySQL 8.0 compatibility by adding support for `REGEXP_INSTR()`, `REGEXP_LIKE()`, `REGEXP_REPLACE()`, and `REGEXP_SUBSTR()` regular expression functions [#23881](https://github.com/pingcap/tidb/issues/23881) @[windtalker](https://github.com/windtalker) **tw: Oreoxmt**
+* Improve MySQL 8.0 compatibility by adding support for four regular expression functions: `REGEXP_INSTR()`, `REGEXP_LIKE()`, `REGEXP_REPLACE()`, and `REGEXP_SUBSTR()` [#23881](https://github.com/pingcap/tidb/issues/23881) @[windtalker](https://github.com/windtalker) **tw: Oreoxmt**
 
     For more details about the compatibility with MySQL, see [Regular expression compatibility with MySQL](/functions-and-operators/string-functions.md#regular-expression-compatibility-with-mysql).
 
@@ -166,7 +166,7 @@ In v6.3.0-DMR, the key new features and improvements are as follows:
 
 * BR supports AWS S3 Object Lock [#issue]() @[3pointer](https://github.com/3pointer) **tw: shichun-0415**
 
-    After enabling [Object Lock](https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-lock.html) , you can protect backup data from being tampered with or deleted.
+    After enabling [S3 Object Lock](https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-lock.html), you can protect backup data from being tampered with or deleted.
 
 ### Data migration
 
@@ -182,7 +182,7 @@ In v6.3.0-DMR, the key new features and improvements are as follows:
 
 * TiCDC supports a deployment topology that can replicate data from multiple geo-distributed data sources [#issue]() @[sdojjy](https://github.com/sdojjy) **tw：ran-huang**
 
-    To support replicating data from a single TiDB cluster to multiple geo-distributed data systems, starting from v6.3.0, [TiCDC can be deployed in multiple IDCs](link) to replicate data for each IDC. This feature helps deliver the capability of geo-distributed data replication and deployment topology.
+    To support replicating data from a single TiDB cluster to multiple geo-distributed data systems, starting from v6.3.0, [you can deploy TiCDC in multiple IDCs](link) to replicate data for each IDC. This feature helps deliver the capability of geo-distributed data replication and deployment topology.
 
 * TiCDC supports keeping the snapshots consistent between the upstream and the downstream (sync point) [#issue]() @[asddongmen](https://github.com/asddongmen) **tw: TomShawn**
 
@@ -220,6 +220,8 @@ In v6.3.0-DMR, the key new features and improvements are as follows:
 * The SQL statement `ALTER TABLE ...SET TiFLASH MODE ...` previously used for enabling [fastscan](/develop/dev-guide-use-fastscan.md) is deprecated, and replaced by the system variable [`tiflash_fastscan`](/system-variables.md#tiflash_fastscan-new-in-v630). When you upgrade from v6.2.0 to v6.3.0, all FastScan settings in v6.2.0 will become invalid, but will not affect the normal reading of data. You need to set the variable [`tiflash_fastscan`]. When you upgrade from an earlier version to v6.3.0, the FastScan feature is not enabled by default for all sessions to keep data consistency.
 
 ## Removed feature
+
+Since v6.3.0, TiCDC no longer supports configuring Pulsar sink. [kop](https://github.com/streamnative/kop) provided by StreamNative can be used as an alternative.
 
 ## Improvements
 
