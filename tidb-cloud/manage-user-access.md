@@ -86,8 +86,7 @@ If you are a member of multiple organizations, you can switch your account betwe
 To switch organizations, perform these steps:
 
 1. Click the account name in the upper-right corner of the TiDB Cloud console.
-2. Hold the mouse over **Switch Organization**, and you can see all the organizations you belong to in the submenu.
-3. Click the organization you want to switch to.
+2. Hold the mouse over **Switch Organization**, and click the organization you want to switch to.
 
 ## Invite an organization member
 
