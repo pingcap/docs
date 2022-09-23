@@ -143,15 +143,15 @@ TiDB supports the following two isolation levels in the pessimistic transaction 
 
 ## Pessimistic transaction commit process
 
-The commit phase of the pessimistic transaction mode and the optimistic transaction mode in TiDB has the same logic, and both commits are in the 2PC mode. The important adaptation of pessimistic transactions is DML execution.
+The commits of the pessimistic transactions and the optimistic transactions in TiDB have the same logic. Both transactions adopt the two-phase commit (2PC) mode. The important adaptation of pessimistic transactions is DML execution.
 
 ![TiDB pessimistic transaction commit logic](/media/pessimistic-transaction-commit.png)
 
 The pessimistic transaction adds an `Acquire Pessimistic Lock` phase before 2PC. This phase includes the following steps:
 
-1. (Same as the optimistic transaction mode) Receive the `begin` request from the client, and the current timestamp is this transaction's start_ts.
-2. When the TiDB server receives an `update` request from the client, the TiDB server initiates a pessimistic lock request to the TiKV server, and the lock is persisted to the TiKV server.
-3. (Same as the optimistic transaction mode) When the client sends the commit request, TiDB starts to perform the 2PC similar to the optimistic transaction mode.
+1. (Same as the optimistic transaction mode) TiDB receives the `begin` request from the client, and the current timestamp is this transaction's start_ts.
+2. When the TiDB server receives a request of writing new data from the client, the TiDB server initiates a pessimistic lock request to the TiKV server, and the lock is persisted to the TiKV server.
+3. (Same as the optimistic transaction mode) When the client sends the commit request, TiDB starts to perform the two-phase commit similar to the optimistic transaction mode.
 
 ![Pessimistic transactions in TiDB](/media/pessimistic-transaction-in-tidb.png)
 
