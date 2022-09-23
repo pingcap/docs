@@ -1506,7 +1506,7 @@ Configuration items related to Raft Engine.
 >
 > - After `format-version` is set to `2`, if you need to downgrade the TiKV cluster to a version earlier than v6.3.0, you should take following steps **before** downgrading:
 >   - Disable Raft Engine by setting `enable` to `false` and restart TiKV to make the configuration take effect.
->   - Reset `format-version` to `1` and enable Raft Engine by setting `enable` to `true`, then restart TiKV to make the configuration take effect.
+>   - Set `format-version` to `1` and enable Raft Engine by setting `enable` to `true`, then restart TiKV to make the configuration take effect.
 
 + Specifies the version of log files in Raft Engine.
 + Value Options:
