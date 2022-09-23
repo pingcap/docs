@@ -37,7 +37,7 @@ The following are the basics of TiDB Operator:
 
 ## Data management tools
 
- TiDB provides multiple data management tools, such as import and export, backup and restore, incremental data replication, and data validation.
+ TiDB provides multiple data management tools, such as import and export, backup and restore, incremental data replication, and data comparison.
 
 ### Data migration - TiDB Data Migration (DM)
 
