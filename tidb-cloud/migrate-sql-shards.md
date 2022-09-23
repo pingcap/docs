@@ -139,7 +139,7 @@ For more information about the solutions to solve such conflicts, see [Remove th
 
 ### Step 4. Configure Amazon S3 access
 
-To configure Amazon S3 access, follow the instructions in [Configure Amazon S3 access](/tidb-cloud/config-s3-and-gcs-access.md#configure-amazon-s3-access).
+Follow the instructions in [Configure Amazon S3 access](/tidb-cloud/config-s3-and-gcs-access.md#configure-amazon-s3-access) to get the role ARN to access the source data.
 
 The following example only lists key policy configurations. Replace the Amazon S3 path with your own values.
 
@@ -195,6 +195,7 @@ After configuring the Amazon S3 access, you can perform the data import task in 
 4. Modify the file patterns and add the table filter rules if needed.
 
     - **File Pattern**: modify the file pattern if you want to import CSV files whose filenames match a certain pattern to a single target table.
+
         > **Note:**
         >
         > When you use this feature, one import task can only import data to a single table at a time. If you want to use this feature to import data into different tables, you need to import several times, each time specifying a different target table.
@@ -210,7 +211,7 @@ After configuring the Amazon S3 access, you can perform the data import task in 
 
         - **Target table name**: enter the name of the target table in TiDB Cloud, which must be in the `${db_name}.${table_name}` format. For example, `mydb.mytable`. Note that this field only accepts one specific table name, so wildcards are not supported.
 
-    - **Table Filter**: If you want to filter which tables to be imported, you can specify one or more table filter rules in this field.
+    - **Table Filter**: If you want to filter which tables to be imported, you can specify one or more [table filter](/table-filter.md#syntax) rules in this area.
 
 5. Click **Next**.
 
