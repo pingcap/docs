@@ -1155,7 +1155,6 @@ MPP is a distributed computing framework provided by the TiFlash engine, which a
     - `RESTRICTED_VARIABLES_ADMIN`: The ability to see and set sensitive variables in `SHOW [GLOBAL] VARIABLES` and `SET`.
     - `RESTRICTED_USER_ADMIN`: The ability to prevent other users from making changes or dropping a user account.
 
-<<<<<<< HEAD
 ### tidb_enable_exchange_partition
 
 - Scope: SESSION | GLOBAL
@@ -1165,8 +1164,6 @@ MPP is a distributed computing framework provided by the TiFlash engine, which a
 - This variable controls whether to enable the [`exchange partitions with tables`](/partitioned-table.md#partition-management) feature. The default value is `ON`, that is, `exchange partitions with tables` is enabled by default.
 - This variable is deprecated since v6.3.0. Its value will be fixed to the default value `ON`, that is, `exchange partitions with tables` is enabled by default.
 
-=======
->>>>>>> b270933fe (statistics: add some doc for the exp feature (#9891) (#10534))
 ### tidb_enable_extended_stats
 
 <CustomContent platform="tidb-cloud">
@@ -2515,7 +2512,6 @@ explain select * from t where age=5;
 - Default value: `OFF`
 - This variable is used to control whether to allow `INSERT`, `REPLACE`, and `UPDATE` statements to operate on the `_tidb_rowid` column. This variable can be used only when you import data using TiDB tools.
 
-<<<<<<< HEAD
 ### tidb_opt_force_inline_cte <span class="version-mark">New in v6.3.0</span>
 
 - Scope: SESSION | GLOBAL
@@ -2524,8 +2520,6 @@ explain select * from t where age=5;
 - Default value: `OFF`
 - This variable is used to control whether common table expressions (CTEs) in the entire session are inlined or not. The default value is `OFF`, which means that inlining CTE is not enforced by default. However, you can still inline CTE by specifying the `MERGE()` hint. If the variable is set to `ON`, all CTEs (except recursive CTE) in this session are forced to be inlined.
 
-=======
->>>>>>> b270933fe (statistics: add some doc for the exp feature (#9891) (#10534))
 ### tidb_optimizer_selectivity_level
 
 - Scope: SESSION | GLOBAL

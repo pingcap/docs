@@ -14,19 +14,11 @@ Basics: statistics such as histograms and Count-Min Sketch. See [Introduction to
 >
 > Before reading this document, it is recommended that you read [Introduction to Statistics](/statistics.md) first.
 
-<<<<<<< HEAD
-When the `ANALYZE` statement is executed manually or automatically, TiDB by default only collects the regular statistics and does not collect the extended statistics. This is because the extended statistics are only used for optimizer estimates in specific scenarios, and collecting them requires additional overhead.
-
-Extended statistics are disabled by default. To collect extended statistics, you need to first enable the extended statistics, and then register each individual extended statistics object.
-
-After the registration, the next time the `ANALYZE` statement is executed, TiDB collects both the regular statistics and the registered extended statistics.
-=======
 When the `ANALYZE` statement is executed manually or automatically, TiDB by default only collects the basic statistics and does not collect the extended statistics. This is because the extended statistics are only used for optimizer estimates in specific scenarios, and collecting them requires additional overhead.
 
 Extended statistics are disabled by default. To collect extended statistics, you need to first enable the extended statistics, and then register each individual extended statistics object.
 
 After the registration, the next time the `ANALYZE` statement is executed, TiDB collects both the basic statistics and the registered extended statistics.
->>>>>>> b270933fe (statistics: add some doc for the exp feature (#9891) (#10534))
 
 ## Limitations
 
