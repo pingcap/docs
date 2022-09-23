@@ -46,7 +46,7 @@ The following are the basics of TiDB Operator:
 The following are the basics of DM:
 
 - Source: MySQL/MariaDB
-- Target: TiDB cluster
+- Target: TiDB clusters
 - Supported TiDB versions: all versions
 - Kubernetes support: use [TiDB Operator](https://github.com/pingcap/tidb-operator) to deploy TiDB DM in Kubernetes.
 
@@ -60,7 +60,7 @@ If the data volume is greater than 1 TB , take the following steps:
 
 > **Note:**
 >
-> The Syncer tool is no longer maintained and deprecated. For scenarios related to Syncer, it is recommended that you use DM to perform incremental migration.
+> The Syncer tool is no longer maintained. For scenarios related to Syncer, it is recommended that you use DM to perform incremental migration.
 
 ### Full data export - Dumpling
 
@@ -68,7 +68,7 @@ If the data volume is greater than 1 TB , take the following steps:
 
 The following are the basics of Dumpling:
 
-- Input: MySQL/TiDB cluster
+- Source: MySQL/TiDB clusters
 - Output: SQL/CSV files
 - Supported TiDB versions: all versions
 - Kubernetes support: No
@@ -81,7 +81,7 @@ The following are the basics of Dumpling:
 
 [TiDB Lightning](/tidb-lightning/tidb-lightning-overview.md) supports full data import of a large dataset into a TiDB cluster.
 
-TiDB Lightning supports three modes:
+TiDB Lightning supports the following modes:
 
 - `Physical Import Mode`: TiDB Lightning parses data into ordered key-value pairs and directly imports them into TiKV. This mode is usually for importing a large amount of data (at the TB level) to a new cluster. During the import, the cluster cannot provide services.
 - `Logical Import Mode`: This mode uses TiDB/MySQL as the backend, which is slower than the `Physical Import Mode` but can be performed online. It also supports importing data to MySQL.
@@ -92,7 +92,7 @@ The following are the basics of TiDB Lightning:
     - The output files from Dumpling
     - Other CSV-compatible files
     - Parquet files exported from Amazon Aurora or Apache Hive
-- Supported TiDB versions: v2.1 or later versions
+- Supported TiDB versions: v2.1 and later versions
 - Kubernetes support: Yes. See [Quickly restore data into a TiDB cluster in Kubernetes using TiDB Lightning](https://docs.pingcap.com/tidb-in-kubernetes/stable/restore-data-using-tidb-lightning) for details.
 
 > **Note:**
@@ -111,7 +111,7 @@ The following are the basics of BR:
 
 ### Incremental data replication - TiCDC
 
-[TiCDC](/ticdc/ticdc-overview.md) is a tool used for replicating incremental data of TiDB by pulling change logs from TiKV. It can restore data to a state consistent with any TSO in upstream. TiCDC also provide the TiCDC Open Protocol to support other systems to subscribe to data changes.
+[TiCDC](/ticdc/ticdc-overview.md) is a tool used for replicating incremental data of TiDB by pulling change logs from TiKV. It can restore data to a state consistent with any TSO in upstream. TiCDC also provides the TiCDC Open Protocol to support other systems to subscribe to data changes.
 
 The following are the basics of TiCDC:
 
@@ -142,7 +142,7 @@ The following are the basics of sync-diff-inspector:
 
 ## OLAP Query tool
 
-TiDB provides the OLAP query tool [TiSpark](/tispark-overview.md), which allows you to query TiDB tables as if you were using native Spark.
+TiDB provides the OLAP query tool [TiSpark](/tispark-overview.md). It allows you to query TiDB tables as if you were using native Spark.
 
 ### Query TiKV data source using Spark
 
