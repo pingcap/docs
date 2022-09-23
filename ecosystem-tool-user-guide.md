@@ -12,9 +12,7 @@ TiDB provides a rich set of tools to help you deploy and maintain TiDB, manage d
 
 TiDB provides TiUP and TiDB Operator to meet your deployment and operation needs in different system environments.
 
-### Deploy and operate TiDB on physical or virtual machines
-
-#### TiUP
+### Deploy and operate TiDB on physical or virtual machines - TiUP
 
 [TiUP](/tiup/tiup-overview.md) is a TiDB package manager on physical or virtual machines. TiUP can manage multiple TiDB components such as TiDB, PD, and TiKV. To start any component in the TiDB ecosystem, you just need to execute a single line of TiUP command.
 
