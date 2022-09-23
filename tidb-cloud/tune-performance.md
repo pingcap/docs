@@ -29,6 +29,24 @@ The results are displayed in the form of a table, and you can sort the results b
 
 For details, see [Statement Execution Details in TiDB Dashboard](https://docs.pingcap.com/tidb/stable/dashboard-statement-details).
 
+## Slow Queries
+
+To use the Slow Queries, perform the following steps:
+
+1. Navigate to the **Diagnosis** tab of a cluster.
+
+2. Click the **Slow Queries** tab.
+
+3. Click any item in the list to display detailed execution information of the slow query.
+
+4. (Optional) If you care about specific time periods, databases, keywords, you can select the corresponding schema(s) to filter the results.
+
+The results are displayed in the form of a table, and you can sort the results by different columns.
+
+![Slow Queries]()
+
+For details, see [Slow Queries in TiDB Dashboard](https://docs.pingcap.com/tidb/dev/dashboard-slow-query).
+
 ## Key Visualizer
 
 To view the key analytics, perform the following steps:
