@@ -25,7 +25,7 @@ In v6.3.0-DMR, the key new features and improvements are as follows:
 
 * Add a new syntactic sugar (Range INTERVAL partitioning) to simplify Range partition definitions [#35683](https://github.com/pingcap/tidb/issues/35683) @[mjonss](https://github.com/mjonss)
 
-    [Provide INTERVAL partitioning as a new way of defining Range partitions](/partitioned-table.md#range-interval-partitioning). You do not need to enumerate all partitions, which drastically reduces the lengthy way of writing Range partition statements. The syntax is equivalent to the original Range partition.
+    TiDB provides [INTERVAL partitioning](/partitioned-table.md#range-interval-partitioning) as a new way of defining Range partitions. You do not need to enumerate all partitions, which drastically reduces the length of Range partitioning DDL statements. The syntax is equivalent to that of the original Range partitioning.
 
 * Range COLUMNS partitioning supports defining multiple columns [#36636](https://github.com/pingcap/tidb/issues/36636) @[mjonss](https://github.com/mjonss)
 
@@ -90,21 +90,21 @@ In v6.3.0-DMR, the key new features and improvements are as follows:
 
 ### Performance
 
-* TiFlash changes the way FastScan is used (experimental) [#5252](https://github.com/pingcap/tiflash/issues/5252) @[hongyunyan](https://github.com/hongyunyan)
+* TiFlash changes the way of using FastScan (experimental) [#5252](https://github.com/pingcap/tiflash/issues/5252) @[hongyunyan](https://github.com/hongyunyan)
 
-    FastScan, introduced in TiFlash starting with v6.2.0, performed as expected, but lacked flexibility. Therefore, in v6.3.0 [the way of using FastScan has changed](/develop/dev-guide-use-fastscan.md). TiFlash does not support using the switch to control the FastScan feature. Instead, it uses the system variable [`tiflash_fastscan`](/system-variables.md#tiflash_fastscan-new-in-v630) to control whether to enable the FastScan function.
+    In v6.2.0, TiFlash introduces the FastScan feature, which brings expected performance improvements but lacks flexibility in use. Therefore, in v6.3.0, TiFlash changes [the way of using FastScan](/develop/dev-guide-use-fastscan.md): the `ALTER TABLE ... SET TIFLASH MODE ...` syntax to enable or disable FastScan is deprecated. Instead, you can use the system variable [`tiflash_fastscan`](/system-variables.md#tiflash_fastscan-new-in-v630) to easily control whether to enable FastScan.
 
     When you upgrade from v6.2.0 to v6.3.0, all FastScan settings in v6.2.0 will become invalid, but will not affect the normal reading of data. You need to set the variable [`tiflash_fastscan`]. When you upgrade from an earlier version to v6.3.0, the FastScan feature is not enabled by default for all sessions to keep data consistency.
 
 * TiFlash optimizes to improve data scanning performance in multiple concurrency scenarios [#5376](https://github.com/pingcap/tiflash/issues/5376) @[JinheLin](https://github.com/JinheLin)
 
-    TiFlash reduces duplicate reads of the same data by combining read operations of the same data. It optimizes the resource overhead and [improves the performance of data scanning in the case of concurrent tasks](/tiflash/tiflash-configuration.md#configure-the-tiflashtoml-file). It avoids the situation where the same data needs to be read separately in each task in multiple concurrent tasks, and avoids the possibility of multiple reads of the same data at the same time.
+    TiFlash reduces duplicate reads of the same data by combining read operations of the same data. It optimizes the resource overhead and [improves the performance of data scanning in the case of concurrent tasks](/tiflash/tiflash-configuration.md#configure-the-tiflashtoml-file). For multiple concurrent tasks, it avoids the situation where each task needs to read the same data separately, and avoids the possibility of multiple reads of the same data at the same time.
 
     This feature is experimental in v6.2.0, and becomes GA in v6.3.0.
 
 * Improve performance of TiFlash data replication [#5237](https://github.com/pingcap/tiflash/issues/5237) @[breezewish](https://github.com/breezewish)
 
-    TiFlash uses the Raft protocol for data replication with TiKV. Prior to v6.3.0, it often took long time to replicate large amounts of replica data. TiDB v6.3.0 optimizes the TiFlash data replication mechanism and significantly improves the replication speed. When you use BR to recover data, use TiDB Lightning to import data, or add new TiFlash replicas, the replicas can be replicated more quickly. You can query with TiFlash in a more timely manner. In addition, TiFlash replicas will also reach a secure and balanced state faster when you scale up, scale down, or modify the number of TiFlash replicas.
+    TiFlash uses the Raft protocol for data replication from TiKV. Prior to v6.3.0, it often took a long time to replicate large amounts of replica data. TiDB v6.3.0 optimizes the TiFlash data replication mechanism and significantly improves the replication speed. When you use BR to recover data, use TiDB Lightning to import data, or add new TiFlash replicas, the TiFlash replicas can be replicated more quickly. You can query with TiFlash in a more timely manner. In addition, TiFlash replicas will also reach a secure and balanced state faster when you scale up, scale down, or modify the number of TiFlash replicas.
 
 * TiKV supports log recycling [#214](https://github.com/tikv/raft-engine/issues/214) @[LykxSassinator](https://github.com/LykxSassinator) **tw：ran-huang**
 
