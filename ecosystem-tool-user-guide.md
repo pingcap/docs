@@ -6,11 +6,11 @@ aliases: ['/docs/dev/ecosystem-tool-user-guide/','/docs/dev/reference/tools/user
 
 # TiDB Tools Overview
 
-TiDB provides a rich set of tools to help you deploy and maintain TiDB, manage data (such as data migration, backup & restore, and data validation), and run Spark SQL on TiKV. You can select the applicable tools according to your needs.
+TiDB provides a rich set of tools to help you deploy and maintain TiDB, manage data (such as data migration, backup & restore, and data comparison), and run Spark SQL on TiKV. You can select the applicable tools according to your needs.
 
 ## Deploy and operate tools
 
-TiDB provides TiUP, TiDB Operator and TiUniManager to meet your deployment and operation needs in different system environments.
+TiDB provides TiUP and TiDB Operator to meet your deployment and operation needs in different system environments.
 
 ### Deploy and operate TiDB on physical or virtual machines
 
@@ -27,7 +27,7 @@ The following are the basics of TiUP:
 - [Manage TiUP Components with TiUP Commands](/tiup/tiup-component-management.md)
 - Applicable TiDB versions: v4.0 and later versions
 
-### Deploy and operate TiDB in Kubernetes
+### Deploy and operate TiDB in Kubernetes - TiDB Operator
 
 [TiDB Operator](https://github.com/pingcap/tidb-operator) is an automatic operation system for managing TiDB clusters in Kubernetes. It provides full life-cycle management for TiDB including deployment, upgrades, scaling, backup, and configuration changes. With TiDB Operator, TiDB can run seamlessly in the Kubernetes clusters deployed on a public or private cloud.
 
