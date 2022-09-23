@@ -140,10 +140,6 @@ The following are the basics of sync-diff-inspector:
 - Target: MySQL/TiDB clusters
 - Supported TiDB versions: all versions
 
-## OLAP Query tool
-
-TiDB provides the OLAP query tool [TiSpark](/tispark-overview.md). It allows you to query TiDB tables as if you were using native Spark.
-
-### Query TiKV data source using Spark
+## OLAP Query tool - TiSpark
 
 [TiSpark](/tispark-overview.md) is a product developed by PingCAP to address the complexiy of OLAP queries. It combines strengths of Spark, and the features of distributed TiKV clusters and TiDB to provide a one-stop Hybrid Transactional and Analytical Processing (HTAP) solution.
