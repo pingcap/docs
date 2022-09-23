@@ -86,7 +86,7 @@ The following are the basics of Dumpling:
 TiDB Lightning supports three modes:
 
 - `Physical Import Mode`: TiDB Lightning parses data into ordered key-value pairs and directly imports them into TiKV. This mode is usually for importing a large amount of data (at the TB level) to a new cluster. During the import, the cluster cannot provide services.
-- `Logical Import Mode`: This mode uses TiDB/MySQL as the backend, which is slower than the `Physical Import Mode` mode but can be performed online. It also supports importing data to MySQL.
+- `Logical Import Mode`: This mode uses TiDB/MySQL as the backend, which is slower than the `Physical Import Mode` but can be performed online. It also supports importing data to MySQL.
 
 The following are the basics of TiDB Lightning:
 
@@ -148,4 +148,4 @@ TiDB provides the OLAP query tool [TiSpark](/tispark-overview.md), which allows 
 
 ### Query TiKV data source using Spark
 
-[TiSpark](/tispark-overview.md) is a product developed by PingCAP to address the complexy of OLAP queries. It combines strengths of Spark, and the features of distributed TiKV clusters and TiDB to provide a one-stop Hybrid Transactional and Analytical Processing (HTAP) solution.
+[TiSpark](/tispark-overview.md) is a product developed by PingCAP to address the complexiy of OLAP queries. It combines strengths of Spark, and the features of distributed TiKV clusters and TiDB to provide a one-stop Hybrid Transactional and Analytical Processing (HTAP) solution.
