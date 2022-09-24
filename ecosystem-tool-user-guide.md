@@ -60,11 +60,11 @@ If the data volume is greater than 1 TB , take the following steps:
 
 > **Note:**
 >
-> The Syncer tool is no longer maintained. For scenarios related to Syncer, it is recommended that you use DM to perform incremental migration.
+> The Syncer tool is no longer maintained. For scenarios related to Syncer, it is recommended that you use DM to perform incremental replication.
 
 ### Full data export - Dumpling
 
-[Dumpling](/dumpling-overview.md) supports logic full data export from MySQL or TiDB.
+[Dumpling](/dumpling-overview.md) supports logical full data export from MySQL or TiDB.
 
 The following are the basics of Dumpling:
 
@@ -89,7 +89,7 @@ TiDB Lightning supports the following modes:
 The following are the basics of TiDB Lightning:
 
 - Data source:
-    - The output files from Dumpling
+    - The output files of Dumpling
     - Other CSV-compatible files
     - Parquet files exported from Amazon Aurora or Apache Hive
 - Supported TiDB versions: v2.1 and later versions
@@ -121,7 +121,7 @@ The following are the basics of TiCDC:
 
 ### Incremental log replication - TiDB Binlog
 
-[TiDB Binlog](/tidb-binlog/tidb-binlog-overview.md) is a tool that collects binlog for TiDB clusters and provides nearly real-time data replication and backup. It can be used for incremental data replication between TiDB clusters, such as making a TiDB cluster the secondary cluster of the primary TiDB cluster.
+[TiDB Binlog](/tidb-binlog/tidb-binlog-overview.md) is a tool that collects binlog for TiDB clusters and provides nearly real-time data replication and backup. You can use it for incremental data replication between TiDB clusters, such as making a TiDB cluster the secondary cluster of the primary TiDB cluster.
 
 The following are the basics of TiDB Binlog:
 
@@ -132,7 +132,7 @@ The following are the basics of TiDB Binlog:
 
 ### sync-diff-inspector
 
-[sync-diff-inspector](/sync-diff-inspector/sync-diff-inspector-overview.md) is a tool used to compare data stored in the MySQL or TiDB databases. In addition, you can also use this tool to repair data in the scenario where a small amount of data is inconsistent.
+[sync-diff-inspector](/sync-diff-inspector/sync-diff-inspector-overview.md) is a tool that compares data stored in the MySQL or TiDB databases. In addition, you can also use sync-diff-inspector to repair data in the scenario where a small amount of data is inconsistent.
 
 The following are the basics of sync-diff-inspector:
 
