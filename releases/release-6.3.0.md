@@ -174,9 +174,9 @@ In v6.3.0-DMR, the key new features and improvements are as follows:
 
     TiDB Lightning supports [importing Parquet files exported by Apache Hive into TiDB](/tidb-lightning/tidb-lightning-data-source.md#parquet), thereby achieving data migration from Hive to TiDB.
 
-* DM supports adding a field to a table migrated to TiDB and assigning values to the field [#3262](https://github.com/pingcap/tiflow/pull/3262), [#3340](https://github.com/pingcap/tiflow/issues/3340) @[yufan022](https://github.com/yufan022) **tw：ran-huang**
+* DM adds a new configuration item `safe-mode-duration` in the task configuration file [#6224] (https://github.com/pingcap/tiflow/issues/6224) @[[okJiang](https://github.com/okJiang)] **tw：ran-huang**
 
-    DM supports [adding a field to a table migrated to TiDB and assigning values to the field](link). When you merge and migrate MySQL shards to TiDB, you can use the field to distinguish which shard the record is migrated from.
+    DM adds a new configuration item `safe-mode-duration` in the [task configuration file](/task-configuration-file-full.md). You can adjust the automatic safe mode duration after DM exits abnormally. The default value is 60 seconds. When `safe-mode-duration` is set to `"0s"`, DM does not automatically enter safe mode after an abnormal restart.
 
 ### TiDB data share subscription
 
@@ -198,19 +198,43 @@ In v6.3.0-DMR, the key new features and improvements are as follows:
 
 | Variable name | Change type (newly added, modified, or deleted) | Description |
 | --- | --- | --- |
-|  |  |  |
-|  |  |  |
-|  |  |  |
-|  |  |  |
+| [`default_authentication_plugin`](/system-variables.md#default_authentication_plugin) | Modified | Added a new option `tidb_sm3_password`. When this variable is set to `tidb_sm3_password`, the `tidb_sm3_password` method is used as the encryption algorithm. |
+| [`tidb_adaptive_closest_read_threshold`](/system-variables.md#tidb_adaptive_closest_read_threshold-new-in-v630) | Newly added | This variable is used to control the threshold at which the TiDB server prefers to send read requests to the replica in the same region as the TiDB server when [`tidb_replica_read`](#tidb_replica_read-new-in-v40) is set to `closest-adaptive`. |
+| [`tidb_constraint_check_in_place_pessimistic`](/system-variables.md#tidb_constraint_check_in_place_pessimistic-new-in-v630) | Newly added | This variable is used to control when TiDB checks [unique constraints](/constraints.md#pessimistic-transactions) in pessimistic transactions |
+| [`tidb_ddl_disk_quota`](/system-variables.md#tidb_ddl_disk_quota-new-in-v630) | Newly added | This variable only takes effect when [`tidb_ddl_enable_fast_reorg`](/system-variables.md#tidb_ddl_enable_fast_reorg-new-in-v630) is enabled. It sets the usage limit of local storage during backfilling when creating an index.  |
+| [`tidb_ddl_enable_fast_reorg`](/system-variables.md#tidb_ddl_enable_fast_reorg-new-in-v630) | Newly added | This variable controls whether to enable the acceleration of `ADD INDEX` and `CREATE INDEX` DDl operations to improve the speed of backfilling when creating an index. |
+| [`tidb_enable_clustered_index`](/system-variables.md#tidb_enable_clustered_index-new-in-v50) | Modified | The default value of this variable changes from `INT_ONLY` to `ON`. |
+| [`tidb_enable_exchange_partition`](/system-variables.md#tidb_enable_exchange_partition) | Deprecated | This variable controls whether to enable the [`exchange partitions with tables`](/partitioned-table.md#partition-management) feature. The default value is `ON`, that is, exchange partitions with tables is enabled by default.  |
+| [`tidb_enable_metadata_lock`](/system-variables.md#tidb_enable_metadata_lock-new-in-v630)| Newly added | This variable is used to set whether to enable the [Metadata lock](/metadata-lock.md) feature. |
+| [`tidb_enable_pseudo_for_outdated_stats`](/system-variables.md#tidb_enable_pseudo_for_outdated_stats-new-in-v530) | Modified | This variable controls the behavior of the optimizer on using statistics of a table when the statistics are outdated. The default value changes from `ON` to `OFF`, which means the optimizer still keeps using the statistics of the table even if the statistics of this table is outdated. |
+| [`tidb_enable_rate_limit_action`](/system-variables.md#tidb_enable_rate_limit_action) | Modified | This variable controls whether to enable the dynamic memory control feature for the operator that reads data. When this variable is set to `ON`, the memory usage might not be under the control of [tidb_mem_quota_query](/system-variables.md#tidb_mem_quota_query). Therefore, the default value is changed from `ON` to `OFF`. |
+| [`tidb_enable_unsafe_substitute`](/system-variables.md#tidb_enable_unsafe_substitute-new-in-v630) | Newly added | This variable controls whether to replace expressions with generated columns in an unsafe way. |
+| [`tidb_last_plan_replayer_token`](/system-variables.md#tidb_enable_unsafe_substitute-new-in-v630) | Newly added | This variable is read-only and is used to obtain the result of the last `PLAN REPLAYER DUMP` execution in the current session. |
+| [`tidb_opt_force_inline_cte`](/system-variables.md#tidb_opt_force_inline_cte-new-in-v630) | Newly added | This variable is used to control whether common table expressions (CTEs) in the entire session are inlined or not. The default value is `OFF`, which means that inlining CTE is not enforced by default. |
+| [`tidb_opt_three_stage_distinct_agg`](/system-variables.md#tidb_opt_three_stage_distinct_agg-new-in-v630) | Newly added | This variable specifies whether to rewrite a `COUNT(DISTINCT)` aggregation into a three-stage aggregation in MPP mode. The default value is `ON`. |
+| [`tidb_partition_prune_mode`](/system-variables.md#tidb_partition_prune_mode-从-v51-版本开始引入) | Modified | Specifies whether to enable dynamic pruning. Since v6.3.0, the default value changes to `dynamic`. |
+| [`tidb_rc_read_check_ts`](/system-variables.md#tidb_rc_read_check_ts-new-in-v600) | Modified | This variable is used to optimize the timestamp acquisition, which is suitable for scenarios with read-committed isolation level where read-write conflicts are rare. This feature is oriented to specific service workloads and might cause performance regression in other scenarios. For this reason, since v6.3.0, the scope of this variable changes from `GLOBAL | SESSION` to `INSTANCE`. That means you can enable this feature for specific TiDB instances. |
+| [`tidb_rc_write_check_ts`](/system-variables.md#tidb_rc_write_check_ts-new-in-v630)  | Newly added | This variable is used to optimize the acquisition of timestamps and is suitable for scenarios with few point-write conflicts in `READ-COMMITTED` isolation level of pessimistic transactions. Enabling this variable can avoid the latency and overhead brought by obtaining the global timestamps during the execution of point-write statements |
+| [`tiflash_fastscan`](/system-variables.md#tiflash_fastscan-new-in-v630) | Newly added | This variable controls whether to enable FastScan. If [FastScan](/develop/dev-guide-use-fastscan.md) is enabled (set to `ON`), TiFlash provides more efficient query performance, but does not guarantee the accuracy of the query results or data consistency. |
 
 ### Configuration file parameters
 
 | Configuration file | Configuration | Change type | Description |
 | --- | --- | --- | --- |
-|  |  |  |  |
-|  |  |  |  |
-|  |  |  |  |
-|  |  |  |  |
+| TiDB | [`temp-dir`](/tidb-configuration-file.md#temp-dir-new-in-v630) | Newly added | Specifies the file system location used by TiDB to store temporary data. If a feature requires local storage in TiDB nodes, TiDB stores the corresponding temporary data in this location. The default value is `/tmp/tidb`. |
+| TiKV | [`auto-adjust-pool-size`](/tikv-configuration-file.md#auto-adjust-pool-size-new-in-v630) | Newly added | Controls whether to automatically adjust the thread pool size. When it is enabled, the read performance of TiKV is optimized by automatically adjusting the UnifyReadPool thread pool size based on the current CPU usage.|
+| TiKV | [`data-encryption-method`](/tikv-configuration-file.md#data-encryption-method) | Modified | Introduces a new value option `sm4-ctr`. When this configuration item is set to `sm4-ctr`, data is encrypted using SM4 before being stored. |
+| TiKV | [`enable-log-recycle`](/tikv-configuration-file.md#enable-log-recycle-new-in-v630) | Newly added | Determines whether to recycle stale log files in Raft Engine. When it is enabled, logically purged log files will be reserved for recycling. This reduces the long tail latency on write workloads. This configuration item is only available when [format-version](/tikv-configuration-file.md#format-version-new-in-v630) is >= 2. |
+| TiKV | [`format-version`](/tikv-configuration-file.md#format-version-new-in-v630) | Newly added | Specifies the version of log files in Raft Engine. The default log file version is `1` for TiKV earlier than v6.3.0. The log files can be read by TiKV >= v6.1.0. The default log file version is `2` for TiKV v6.3.0 and later. TiKV v6.3.0 and later can read the log files. |
+| TiKV | [`log-backup.enable`](/tikv-configuration-file.md#enable-new-in-v620) | Modified | Since v6.3.0, the default value changes from `false` to `true`. |
+| TiKV | [`log-backup.max-flush-interval`](/tikv-configuration-file.md#max-flush-interval-new-in-v620) | Modified | Since v6.3.0, the default value changes from `5min` to `3min`. |
+| PD | [enable-diagnostic](/pd-configuration-file.md#enable-diagnostic-new-in-v630) | Newly added | Controls whether to enable the diagnostic feature. The default value is `false`. |
+| TiFlash | [`dt_enable_read_thread`](/tiflash/tiflash-configuration.md#configure-the-tiflash-learnertoml-file) | Deprecated | Since v6.3.0, this configuration item is deprecated. The thread pool is used to handle read requests from the storage engine by default and cannot be disabled. |
+| DM | [`safe-mode-duration`](/dm/task-configuration-file-full.md#task-configuration-file-template-advanced) | Newly added | Specifies the duration of the automatic safe mode. |
+| TiCDC | [`enable-sync-point`](/ticdc/manage-ticdc.md#task-configuration-file) | Newly added | Specifies whether to enable the Syncpoint feature. |
+| TiCDC | [`sync-point-interval`](/ticdc/manage-ticdc.md#task-configuration-file) | Newly added | Specifies the interval at which Syncpoint aligns the upstream and downstream snapshots. |
+| TiCDC | [`sync-point-retention`](/ticdc/manage-ticdc.md#task-configuration-file) | Newly added | Specifies how long the data is retained by Syncpoint in the downstream table. When this duration is exceeded, the data is cleaned up. |
+| TiCDC | [`sink-uri.memory`](/ticdc/manage-ticdc.md#create-a-replication-task) | Deprecated | This configuration item is deprecated. It is not recommended to use it in any situation. |
 
 ### Others
 
