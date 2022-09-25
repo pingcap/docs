@@ -1963,7 +1963,7 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 - Scope：SESSION
 - Persists to cluster: No
 - Type: String
-- This variable is used to obtain the result of the last `PLAN REPLAYER DUMP` execution in the current session. It is a read-only variable.
+- This variable is read-only and is used to obtain the result of the last `PLAN REPLAYER DUMP` execution in the current session.
 
 ### tidb_log_file_max_days <span class="version-mark">New in v5.3.0</span>
 

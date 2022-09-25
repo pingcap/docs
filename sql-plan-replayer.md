@@ -71,7 +71,7 @@ MySQL [test]> plan replayer dump explain select * from t;
 Alternatively, you can use the session variable [`tidb_last_plan_replayer_token`](/system-variables.md#tidb_last_plan_replayer_token-new-in-v630) to obtain the result of the last `PLAN REPLAYER DUMP` execution.
 
 ```sql
-select @@tidb_last_plan_replayer_token;
+SELECT @@tidb_last_plan_replayer_token;
 ```
 
 ```sql
@@ -94,7 +94,7 @@ Query OK, 0 rows affected (0.03 sec)
 ```
 
 ```sql
-select @@tidb_last_plan_replayer_token;
+SELECT @@tidb_last_plan_replayer_token;
 ```
 
 ```sql
@@ -119,7 +119,7 @@ http://${tidb-server-ip}:${tidb-server-status-port}/plan_replayer/dump/${file_to
 {{< copyable "shell-regular" >}}
 
 ```shell
-curl http://127.0.0.1:10080/plan_replayer/dump/replayer_single_JOGvpu4t7dssySqJfTtS4A==_1635750890568691080.zip > plan_replayer.zip
+curl http://127.0.0.1:10080/plan_replayer/dump/replayer_JOGvpu4t7dssySqJfTtS4A==_1635750890568691080.zip > plan_replayer.zip
 ```
 
 ## Use `PLAN REPLAYER` to import cluster information
