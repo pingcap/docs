@@ -400,7 +400,7 @@ The TiDB Cloud console does not provide any feature about incremental data repli
      host: "tidb.xxxxxxx.xxxxxxxxx.ap-northeast-1.prod.aws.tidbcloud.com"
      port: 4000
      user: "root"
-     password: "${password}"  # If the password is not empty, it is recommended to use a dmctl-encrypted cipher.
+     password: "${password}"  # If the password is not empty, it is recommended to use a dmctl-encrypted cipher. 
 
     ## ******** Function Configuration **********
     routes:
