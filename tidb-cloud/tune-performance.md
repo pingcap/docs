@@ -31,7 +31,9 @@ For details, see [Statement Execution Details in TiDB Dashboard](https://docs.pi
 
 ## Slow Queries
 
-To use the Slow Queries, perform the following steps:
+By default, SQL queries that take more than 300 milliseconds are considered as slow queries. 
+
+To view slow queries in a cluster, perform the following steps:
 
 1. Navigate to the **Diagnosis** tab of a cluster.
 
