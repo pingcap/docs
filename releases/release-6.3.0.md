@@ -74,7 +74,7 @@ In v6.3.0-DMR, the key new features and improvements are as follows:
 
 * TiDB Dashboard provides deadlock history information [#34106](https://github.com/pingcap/tidb/issues/34106) @[cfzjywxk](https://github.com/cfzjywxk) **tw: shichun-0415**
 
-    From v6.3.0, TiDB Dashboard provides deadlock history. If you find excessively long SQL lock waiting by analyzing slow logs or other information on TiDB Dashboard, you can check the deadlock history to locate the root cause, which delivers better diagnosis experience.
+    From v6.3.0, TiDB Dashboard provides deadlock history. If you check the slow log in TiDB Dashboard and find the lock waiting time of some SQL statements to be excessively long, you can check the deadlock history to locate the root cause, which makes your diagnosis easier.
 
 ### Performance
 
@@ -106,9 +106,9 @@ In v6.3.0-DMR, the key new features and improvements are as follows:
 
     In v6.3.0, the TiDB optimizer introduces 2 hints, `HASH_JOIN_BUILD()` and `HASH_JOIN_PROBE()`, to specify the Hash Join, its probe end, and its build end. When the optimizer fails to select the optimal execution plan, you can use these hints to intervene with the plan.
 
-* Support session-level CTE inline [#36514](https://github.com/pingcap/tidb/issues/36514) @[elsa0520](https://github.com/elsa0520) **tw: shichun-0415**
+* Support session-level common table expressions (CTE) inline [#36514](https://github.com/pingcap/tidb/issues/36514) @[elsa0520](https://github.com/elsa0520) **tw: shichun-0415**
 
-    TiDB v6.2.0 introduced the `MERGE` hint in optimizers to allow CTE inline, so that the consumers of a CTE query result can execute it in parallel in TiFlash. In v6.3.0, a session variable [`tidb_opt_force_inline_cte`](/system-variables.md#tidb_opt_force_inline_cte-new-in-v630) is introduced to allow CTE inline in sessions. This improves ease of use greatly.
+    TiDB v6.2.0 introduced the `MERGE` hint in optimizers to allow CTE inline, so that the consumers of a CTE query result can execute it in parallel in TiFlash. In v6.3.0, a session variable [`tidb_opt_force_inline_cte`](/system-variables.md#tidb_opt_force_inline_cte-new-in-v630) is introduced to allow CTE inline in sessions. This can greatly improve the ease of use.
 
 ### Transactions
 
@@ -124,7 +124,7 @@ In v6.3.0-DMR, the key new features and improvements are as follows:
 
 * Modify the default policy of loading statistics when statistics become outdated [#issue]() @[xuyifangreeneyes](https://github.com/xuyifangreeneyes) **tw: TomShawn**
 
-    In v5.3.0, TiDB introduces the system variable [`tidb_enable_pseudo_for_outdated_stats`](/system-variables.md#tidb_enable_pseudo_for_outdated_stats-new-in-v530) to control how the optimizer behaves when the statistics become outdated. The default value is `ON`, which means keeping the behavior of the old version: When statistics on objects involved in SQL are outdated, the optimizer considers that statistics (other than the total number of rows on the table) are no longer reliable and uses pseudo statistics instead. After tests and analyses of actual user scenarios, the default value of `tidb_enable_pseudo_for_outdated_stats` is changed to `OFF` in v6.3.0. Even if the statistics become outdated, the optimizer will still use the statistics on the table, which is good for the execution program stability.
+    In v5.3.0, TiDB introduced the system variable [`tidb_enable_pseudo_for_outdated_stats`](/system-variables.md#tidb_enable_pseudo_for_outdated_stats-new-in-v530) to control how the optimizer behaves when the statistics become outdated. The default value is `ON`, which means keeping the behavior of the old version: When the statistics on objects that are involved in a SQL statement are outdated, the optimizer considers that statistics (other than the total number of rows on the table) are no longer reliable and uses pseudo statistics instead. After tests and analyses of actual user scenarios, the default value of `tidb_enable_pseudo_for_outdated_stats` is changed to `OFF` since v6.3.0. Even if the statistics become outdated, the optimizer will still use the statistics on the table, which makes the execution plan more stable.
 
 * The feature of disabling Titan becomes GA [#issue]() @[tabokie](https://github.com/tabokie) **tw：ran-huang**
 
@@ -160,7 +160,7 @@ In v6.3.0-DMR, the key new features and improvements are as follows:
 
 ### Backup and restore
 
-* PITR supports GCS and Azure Blob Storage as backup storage [#issue]() @[joccau](https://github.com/joccau) **tw: shichun-0415**
+* PITR supports GCS and Azure Blob Storage as backup storages [#issue]() @[joccau](https://github.com/joccau) **tw: shichun-0415**
 
     PITR supports [GCS and Azure Blob Storage as backup storage](). If your TiDB is deployed on GCP or Azure, you can use the PITR feature after upgrading your cluster to v6.3.0.
 
