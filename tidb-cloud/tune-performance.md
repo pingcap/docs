@@ -41,7 +41,7 @@ To view slow queries in a cluster, perform the following steps:
 
 3. Click any slow query in the list to display its detailed execution information.
 
-4. (Optional) If you care about specific time periods, databases, keywords, you can select the corresponding schema(s) to filter the results.
+4. (Optional) You can filter slow queries based on the target time range, the related database, SQL keywords, SQL types, and limit the number of slow queries to be displayed.
 
 The results are displayed in the form of a table, and you can sort the results by different columns.
 
