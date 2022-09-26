@@ -72,7 +72,7 @@ To access a cluster in a project under an organization, a user must be both a me
 To view which organizations you belong to, perform these steps:
 
 1. Click the account name in the upper-right corner of the TiDB Cloud console.
-2. Hold the mouse over **Switch Organization**, and you can see all the organizations you belong to in the submenu.
+2. Move your cursor to **Switch Organization**, and you can see all the organizations you belong to in the submenu.
 
 To check which project you belong to, perform these steps:
 
@@ -86,7 +86,7 @@ If you are a member of multiple organizations, you can switch your account betwe
 To switch organizations, perform these steps:
 
 1. Click the account name in the upper-right corner of the TiDB Cloud console.
-2. Hold the mouse over **Switch Organization**, and click the organization you want to switch to.
+2. Move your cursor to **Switch Organization**, and click the organization you want to switch to.
 
 ## Invite an organization member
 
@@ -112,7 +112,7 @@ To invite a member to an organization, perform the following steps:
 
 7. After receiving this email, the user needs to click the link in the email to verify the identity, and a new page shows.
 
-8. If the invited email address does not have a TiDB Cloud account, the user is directed to a sign up page to create an account. If the email address already has a TiDB Cloud account, the user is directed to the sign in page, and after sign-in, the account joins the organization automatically.
+8. If the invited email address has not been signed up for a TiDB Cloud account, the user is directed to the sign-up page to create an account. If the email address has been signed up for a TiDB Cloud account, the user is directed to the sign-in page, and after sign-in, the account joins the organization automatically.
 
 > **Note:**
 >
