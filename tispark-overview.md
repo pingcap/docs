@@ -296,12 +296,9 @@ spark.sql("select t1.id,t2.id from spark_catalog.default.t t1 left join tidb_cat
 
 ### TLS Configuration
 
-TiSpark TLS has two parts: TiKV Client TLS and JDBC connector TLS. When you want to enable TLS in TiSpark, you need to configure two parts of configuration.
-`spark.tispark.tikv.xxx` is used for TiKV Client to create TLS connection with PD and TiKV server.
-While `spark.tispark.jdbc.xxx` is used for JDBC connect with TiDB server in TLS connection.
+TiSpark TLS has two parts: TiKV Client TLS and JDBC connector TLS. When you want to enable TLS in TiSpark, you need to configure two parts of configuration.`spark.tispark.tikv.xxx` is used for TiKV Client to create TLS connection with PD and TiKV server. While `spark.tispark.jdbc.xxx` is used for JDBC connect with TiDB server in TLS connection.
 
-When TiSpark TLS is enabled, either the X.509 certificate with `tikv.trust_cert_collection`, `tikv.key_cert_chain` and `tikv.key_file` configurations or the JKS certificate with `tikv.jks_enable`, `tikv.jks_trust_path` and `tikv.jks_key_path` must be configured.
-While `jdbc.server_cert_store` and `jdbc.client_cert_store` is optional.
+When TiSpark TLS is enabled, either the X.509 certificate with `tikv.trust_cert_collection`, `tikv.key_cert_chain` and `tikv.key_file` configurations or the JKS certificate with `tikv.jks_enable`, `tikv.jks_trust_path` and `tikv.jks_key_path` must be configured. While `jdbc.server_cert_store` and `jdbc.client_cert_store` is optional.
 
 TiSpark only supports TLSv1.2 and TLSv1.3 version.
 
@@ -325,8 +322,7 @@ spark.tispark.tikv.jks_trust_path                              /home/tispark/con
 spark.tispark.tikv.jks_trust_password                          tikv_clientstore_password
 ```
 
-When JKS and X.509 cert are set simultaneously, JKS would have a higher priority.
-That means TLS builder will use JKS cert first. So, do not set `spark.tispark.tikv.jks_enable=true` when you just want to use a common PEM cert.
+When JKS and X.509 cert are set simultaneously, JKS would have a higher priority. That means TLS builder will use JKS cert first. So, do not set `spark.tispark.tikv.jks_enable=true` when you just want to use a common PEM cert.
 
 * An example for enabling TLS in JDBC connector.
 
@@ -338,8 +334,8 @@ spark.tispark.jdbc.client_cert_store                           /home/tispark/jdb
 spark.tispark.jdbc.client_cert_password                        jdbc_clientstore_password
 ```
 
-For how to open TiDB TLS, see [here](https://docs.pingcap.com/tidb/dev/enable-tls-between-clients-and-servers).
-For how to generate a JAVA key store, see [here](https://dev.mysql.com/doc/connector-j/5.1/en/connector-j-reference-using-ssl.html).
+- For how to open TiDB TLS, see [here](https://docs.pingcap.com/tidb/dev/enable-tls-between-clients-and-servers).
+- For how to generate a JAVA key store, see [here](https://dev.mysql.com/doc/connector-j/5.1/en/connector-j-reference-using-ssl.html).
 
 ### Log4j Configuration
 
@@ -410,8 +406,7 @@ Currently, TiSpark partially apply partition pruning on range partition.
 The partition pruning is applied when the partition expression of the range partition is one of the following:
 
 + column expression
-+ `YEAR($argument)` where the argument is a column and its type is datetime or string literal
-  that can be parsed as datetime.
++ `YEAR($argument)` where the argument is a column and its type is datetime or string literal that can be parsed as datetime.
 
 If partition pruning is not applied, TiSpark's reading is equivalent to doing a table scan over all partitions.
 
@@ -420,8 +415,7 @@ If partition pruning is not applied, TiSpark's reading is equivalent to doing a 
 Currently, TiSpark only supports writing into the range and hash partition table under the following conditions:
 
 + the partition expression is column expression
-+ the partition expression is `YEAR($argument)` where the argument is a column and its type is datetime or string literal
-  that can be parsed as datetime.
++ the partition expression is `YEAR($argument)` where the argument is a column and its type is datetime or string literal that can be parsed as datetime.
 
 There are two ways to write into partition table:
 
