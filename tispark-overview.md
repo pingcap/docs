@@ -42,7 +42,7 @@ Also, TiSpark supports distributed writes to TiKV. Compared with writes to TiDB 
 
 > **Warning:**
 >
-> You may find TiSpark can be deployment by TiUP in this [doc](https://docs.pingcap.com/tidb/dev/tispark-deployment-topology#tispark-deployment-topology). Note that it has been deprecated.
+> You may find TiSpark can be deployment by TiUP in this [doc](./tispark-deployment-topology.md). Note that it has been deprecated.
 
 Since TiSpark is a TiDB connector of Spark, to use it, a running Spark cluster is required.
 
@@ -99,11 +99,11 @@ You can choose TiSpark version according to your TiDB and Spark version
 | 3.0.x            | 5.x, 4.x             | 3.0.x, 3.1.x, 3.2.x|2.12|
 | 3.1.x            | 6.x, 5.x, 4.x             | 3.0.x, 3.1.x, 3.2.x, 3.3.x|2.12|
 
-- TiSpark 2.4.3, 2.5.2, 3.0.2,3.1.0 is the latest stable version, which is highly recommended.
+- TiSpark 2.4.3, 2.5.2, 3.0.2, 3.1.0 is the latest stable version, which is highly recommended.
 
 ### Get TiSpark jar
 
-- get from [maven central](https://search.maven.org/) and search with GroupId [![Maven Search](https://img.shields.io/badge/com.pingcap-tikv/tispark-green.svg)](http://search.maven.org/#search%7Cga%7C1%7Cpingcap)
+- get from [maven central](https://search.maven.org/) and search with GroupId [![Maven Search](https://img.shields.io/badge/com.pingcap/tispark-green.svg)](http://search.maven.org/#search%7Cga%7C1%7Cpingcap)
 - get from [TiSpark releases](https://github.com/pingcap/tispark/releases)
 - build from source with the steps below
 
@@ -397,7 +397,7 @@ TiSpark can read from TiFlash with the configuration `spark.tispark.isolation_re
 
 ### Partition Table support
 
-**Reading partition table from TiDB**
+**Read partition table from TiDB**
 
 TiSpark reads the range and hash partition table from TiDB.
 
