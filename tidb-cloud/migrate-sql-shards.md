@@ -264,7 +264,7 @@ The TiDB Cloud console does not provide any feature about incremental data repli
     from:
      host: "192.168.10.102"
      user: "user02"
-     password: "3O8fCPEnwO87cIal32bpO0AuTsJyBJ0="
+     password: "${password}"
      port: 3308
     ```
 
@@ -400,7 +400,7 @@ The TiDB Cloud console does not provide any feature about incremental data repli
      host: "tidb.xxxxxxx.xxxxxxxxx.ap-northeast-1.prod.aws.tidbcloud.com"
      port: 4000
      user: "root"
-     password: "oSWRLvR3F5GDIgm+l+9h3kB72VFWBUwzOw=="  # If the password is not empty, it is recommended to use a dmctl-encrypted cipher.
+     password: "${password}"  # If the password is not empty, it is recommended to use a dmctl-encrypted cipher. 
 
     ## ******** Function Configuration **********
     routes:
