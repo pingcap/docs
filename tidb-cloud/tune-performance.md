@@ -45,7 +45,7 @@ To view slow queries in a cluster, perform the following steps:
 
 The results are displayed in the form of a table, and you can sort the results by different columns.
 
-![Slow Queries]()
+![Slow Queries](/media/tidb-cloud/slow-queries.png)
 
 For details, see [Slow Queries in TiDB Dashboard](https://docs.pingcap.com/tidb/dev/dashboard-slow-query).
 
