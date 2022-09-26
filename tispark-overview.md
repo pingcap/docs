@@ -199,7 +199,7 @@ You can also write with Spark SQL since TiSpark 3.1. See [insert SQL](https://gi
 
 ### Write With JDBC DataSource
 
-You can also write to TiDB with Spark JDBC. You need not TiSpark when you decide to write in this way.
+You can also write to TiDB with Spark JDBC. You don't need TiSpark when you decide to write in this way.
 
 This is beyond the scope of TiSpark. We just give a simple example here, you can get detailed info in [official doc](https://spark.apache.org/docs/latest/sql-data-sources-jdbc.html)
 
