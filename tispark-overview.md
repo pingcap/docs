@@ -288,7 +288,7 @@ If the amount of data to write is large and the writing time exceeds ten minutes
 UPDATE mysql.tidb SET VARIABLE_VALUE="6h" WHERE VARIABLE_NAME="tikv_gc_life_time";
 ```
 
-Refer to [this document](https://github.com/pingcap/tispark/blob/master/docs/datasource_api_userguide.md) for details.
+Refer to [TiDB data source API user guide](https://github.com/pingcap/tispark/blob/master/docs/features/datasource_api_userguide.md) for details.
 
 ## Load Spark Dataframe into TiDB using JDBC
 
@@ -350,7 +350,7 @@ spark.sql.tidb.user $your_tidb_server_user
 spark.sql.tidb.password $your_tidb_server_password
 ```
 
-For more information, see [Authorization and authentication through TiDB server](https://github.com/pingcap/tispark/blob/master/docs/authorization_userguide.md).
+For more information, see [Authorization and authentication through TiDB server](https://github.com/pingcap/tispark/blob/master/docs/features/authorization_userguide.md).
 
 > **Note:**
 >
