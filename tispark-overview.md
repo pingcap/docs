@@ -42,7 +42,7 @@ Also, TiSpark supports distributed writes to TiKV. Compared with writes to TiDB 
 
 > **Warning:**
 >
-> You may find TiSpark can be deployment by TiUP in this [doc](./tispark-deployment-topology.md). Note that it has been deprecated.
+> You may find TiSpark can be deployment by TiUP in this [doc](/tispark-deployment-topology.md). Note that it has been deprecated.
 
 Since TiSpark is a TiDB connector of Spark, to use it, a running Spark cluster is required.
 
