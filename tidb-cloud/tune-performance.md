@@ -39,7 +39,7 @@ To view slow queries in a cluster, perform the following steps:
 
 2. Click the **Slow Queries** tab.
 
-3. Click any item in the list to display detailed execution information of the slow query.
+3. Click any slow query in the list to display its detailed execution information.
 
 4. (Optional) If you care about specific time periods, databases, keywords, you can select the corresponding schema(s) to filter the results.
 
