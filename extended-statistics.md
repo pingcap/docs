@@ -7,7 +7,7 @@ summary: Learn how to use extended statistics to guide the optimizer.
 
 TiDB can collect the following two types of statistics:
 
-Basics: statistics such as histograms and Count-Min Sketch. See [Introduction to Statistics](/statistics.md) for details.
+- Basic statistics: statistics such as histograms and Count-Min Sketch. See [Introduction to Statistics](/statistics.md) for details.
 - Extended statistics: statistics filtered by tables and columns.
 
 > **Tip:**
