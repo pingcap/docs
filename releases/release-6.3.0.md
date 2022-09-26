@@ -251,16 +251,13 @@ Since v6.3.0, TiCDC no longer supports configuring Pulsar sink. [kop](https://gi
 
 + TiDB
 
-    - One `PLAN REPLAYER` command can export information about execution plans of multiple SQL statements, which makes troubleshooting more efficient [#37798](https://github.com/pingcap/tidb/issues/37798) @[Yisaer](https://github.com/Yisaer)
-    - improve warning log when new connection arrives [#34964](https://github.com/pingcap/tidb/issues/34964) @[xiongjiwei](https://github.com/xiongjiwei)
+    - [`PLAN REPLAYER`](/sql-plan-replayer) can be used on multiple SQL statements, which makes troubleshooting more efficient [#37798](https://github.com/pingcap/tidb/issues/37798) @[Yisaer](https://github.com/Yisaer)
+    - Improve warning log when new connection arrives [#34964](https://github.com/pingcap/tidb/issues/34964) @[xiongjiwei](https://github.com/xiongjiwei)
 
     - sql-infra
 
-        - Extend partitioning syntax with INTERVAL for easier partitioning definition [#35827](https://github.com/pingcap/tidb/issues/35827) @[ymkzpx](https://github.com/ymkzpx)
         - Grant privilege of a table to an user checks the target table exist first, in the past, the table name comparison works in a case sensitive manner, now it's changed to case insensitive [#34610](https://github.com/pingcap/tidb/issues/34610) @[tiancaiamao](https://github.com/tiancaiamao)
-        - Support AWS NLB proxy protocol [#36312](https://github.com/pingcap/tidb/issues/36312) @[hawkingrei](https://github.com/hawkingrei)
         - Previously, TiDB users can set `init_connect` without any checking. From now on, the value of `init_connect` should be checked by the sql parser [#35324](https://github.com/pingcap/tidb/issues/35324) @[CbcWestwolf](https://github.com/CbcWestwolf)
-        - Add support `flashback database` command [#37386](https://github.com/pingcap/tidb/issues/37386) @[tiancaiamao](https://github.com/tiancaiamao)
 
     - execution
 
@@ -351,26 +348,19 @@ Since v6.3.0, TiCDC no longer supports configuring Pulsar sink. [kop](https://gi
 
     - sql-infra
 
-        - fix the bug prepare will not check privilege [#35784](https://github.com/pingcap/tidb/issues/35784) @[lcwangchao](https://github.com/lcwangchao)
-        - When set `tidb_enable_noop_variable` to `WARN`, an error will be returned [#36647](https://github.com/pingcap/tidb/issues/36647) @[lcwangchao](https://github.com/lcwangchao)
+        - Fix the issue that `PREAPRE` statements do not check privileges [#35784](https://github.com/pingcap/tidb/issues/35784) @[lcwangchao](https://github.com/lcwangchao)
+        - System variable `tidb_enable_noop_variable` cannot be set to `WARN` [#36647](https://github.com/pingcap/tidb/issues/36647) @[lcwangchao](https://github.com/lcwangchao)
         - Fix the issue that when 'expression index' is defined, the value of `ORDINAL_POSITION` column of `INFORMAITON_SCHEMA`.`COLUMNS` table might be incorrect [#31200](https://github.com/pingcap/tidb/issues/31200) @[bb7133](https://github.com/bb7133)
         - Fix the issue that when setting a timestamp that is larger than `MAXINT32`, TiDB doesn't report an error like MySQL [#31585](https://github.com/pingcap/tidb/issues/31585) @[bb7133](https://github.com/bb7133)
-        - flashback cluster shouldn't support expr in timestamp [#37495](https://github.com/pingcap/tidb/issues/37495) @[Defined2014](https://github.com/Defined2014)
-        - Fix panic of enterprise plugin on 6.1 [#37319](https://github.com/pingcap/tidb/issues/37319)
-        - Fix incorrect output of `show create placement policy` with a policy of double quotes [#37526](https://github.com/pingcap/tidb/issues/37526) @[xhebox](https://github.com/xhebox)
-        - store flashback history in TiKV, avoid overlapped flashback TS range [#37585](https://github.com/pingcap/tidb/issues/37585) @[Defined2014](https://github.com/Defined2014)
-        - When exchange partition with temporary table, an error will be returned [#37201](https://github.com/pingcap/tidb/issues/37201)
-        - planner: fix partition table getting error result when select `TIKV_REGION_STATUS` with `table_id` [#37436](https://github.com/pingcap/tidb/issues/37436) @[zimulala](https://github.com/zimulala)
-        - In test_driver, parser didn't deal with RestoreStringWithoutCharset and RestoreStringWithoutDefaultCharset flags, add support for those two flags [#37175](https://github.com/pingcap/tidb/issues/37175) @[Defined2014](https://github.com/Defined2014)
-        - planner: fix show View Privilege behave for view table [#34326](https://github.com/pingcap/tidb/issues/34326) @[hawkingrei](https://github.com/hawkingrei)
-        - Support send flashback RPC [#37651](https://github.com/pingcap/tidb/issues/37651) @[Defined2014](https://github.com/Defined2014)
-        - Fix a wrong casting in building union plan [#31678](https://github.com/pingcap/tidb/issues/31678) @[bb7133](https://github.com/bb7133)
-        - support some adminStmt in read-only mode [#37631](https://github.com/pingcap/tidb/issues/37631) @[Defined2014](https://github.com/Defined2014)
-        - fix resume pd schedule and cancel for `flashback cluster` [#37584](https://github.com/pingcap/tidb/issues/37584) @[Defined2014](https://github.com/Defined2014)
-        - fix resume pd schedule and cancel for `flashback cluster` [#37580](https://github.com/pingcap/tidb/issues/37580) @[Defined2014](https://github.com/Defined2014)
-        - Fix the issue that the user cannot update from json 'null' to NULL [#37852](https://github.com/pingcap/tidb/issues/37852) @[YangKeao](https://github.com/YangKeao)
+        - Fix the panic issue of enterprise plugin on 6.1 [#37319](https://github.com/pingcap/tidb/issues/37319) @[xhebox](https://github.com/xhebox)
+        - Fix the incorrect output of `SHOW CREATE PLACEMENT POLICY` [#37526](https://github.com/pingcap/tidb/issues/37526) @[xhebox](https://github.com/xhebox)
+        - Disallow exchange partition with temporary table [#37201](https://github.com/pingcap/tidb/issues/37201) @[lcwangchao](https://github.com/lcwangchao)
+        - Fix the issue that query on `INFORMATION_SCHEMA.TIKV_REGION_STATUS` returns an incorrect result @[zimulala](https://github.com/zimulala)
+        - Fix the issue that `EXPLAIN` query on views does not check privileges [#34326](https://github.com/pingcap/tidb/issues/34326) @[hawkingrei](https://github.com/hawkingrei)
+        - Fix the issue that the user cannot update from JSON 'null' to NULL [#37852](https://github.com/pingcap/tidb/issues/37852) @[YangKeao](https://github.com/YangKeao)
         - Optimize DDL history HTTP API, and add support for 'start_job_id' parameter [#35838](https://github.com/pingcap/tidb/issues/35838) @[tiancaiamao](https://github.com/tiancaiamao)
-        - fix inaccuate row_count num [#25968](https://github.com/pingcap/tidb/issues/25968) @[Defined2014](https://github.com/Defined2014)
+        - Fix the issue that `row_count` of DDL jobs is inaccurate [#25968](https://github.com/pingcap/tidb/issues/25968) @[Defined2014](https://github.com/Defined2014)
+        - Fix the issue that `FLASHBACK TABLE` does not work properly [#37386](https://github.com/pingcap/tidb/issues/37386) @[tiancaiamao](https://github.com/tiancaiamao)
 
     - execution
 
@@ -383,6 +373,7 @@ Since v6.3.0, TiCDC no longer supports configuring Pulsar sink. [kop](https://gi
 
         - bugfix: do not acquire pessimistic lock for non-unique index keys [#36235](https://github.com/pingcap/tidb/issues/36235)
         - Fix the auto-commit mode change related transaction commit behaviours [#36581](https://github.com/pingcap/tidb/issues/36581) @[cfzjywxk](https://github.com/cfzjywxk)
+        - Fix the issue explain analyze with DML executors may respond to the client before the transaction commit has finished [#37273](https://github.com/pingcap/tidb/issues/37373) @[cfzjywxk](https://github.com/cfzjywxk)
 
     - planner
 
@@ -390,6 +381,7 @@ Since v6.3.0, TiCDC no longer supports configuring Pulsar sink. [kop](https://gi
         - planner: fix outer join reorder will push down its outer join condition [#37238](https://github.com/pingcap/tidb/issues/37238) @[AilinKid](https://github.com/AilinKid)
         - make the both side operand of NAAJ & refuse partial column substitute in projection elimination [#37032](https://github.com/pingcap/tidb/issues/37032) @[AilinKid](https://github.com/AilinKid)
         - planner: correct the redundant field meaning in join full schema when join coalesce [#36420](https://github.com/pingcap/tidb/issues/36420) @[AilinKid](https://github.com/AilinKid)
+        - Fix a wrong casting in building union plan [#31678](https://github.com/pingcap/tidb/issues/31678) @[bb7133](https://github.com/bb7133)
 
     - diagnosis
 
