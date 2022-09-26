@@ -49,6 +49,7 @@ Since TiSpark is a TiDB connector of Spark, to use it, a running Spark cluster i
 Here we give some basic advice for the deployment of Spark. Please Turn to the [Spark official website](https://spark.apache.org/docs/latest/hardware-provisioning.html) for detailed hardware recommendations.
 
 For independent deployment of Spark cluster:
+
 + It is recommended to allocate 32G memory for Spark. Reserve at least 25% of the memory for the operating system and the buffer cache.
 + It is recommended to provision at least 8 to 16 cores per machine for Spark. First, you must assign all the CPU cores to Spark.
 
@@ -71,6 +72,7 @@ TiSpark is a third-party jar package for Spark that provides the ability to read
 We will not provide the `mysql-connector-java` dependency because of the limit of the GPL license.
 
 The following versions of TiSpark's jar will no longer include `mysql-connector-java`.
+
 - TiSpark > 3.0.1
 - TiSpark > 2.5.1 for TiSpark 2.5.x
 - TiSpark > 2.4.3 for TiSpark 2.4.x
@@ -80,6 +82,7 @@ Now, TiSpark needs `mysql-connector-java` for writing and auth. Please import `m
 - you can import it by putting the jar into spark jars file
 
 - you can also import it when you submit spark job like
+
 ```
 spark-submit --jars tispark-assembly-3.0_2.12-3.1.0-SNAPSHOT.jar,mysql-connector-java-8.0.29.jar
 ```
@@ -95,17 +98,21 @@ You can choose TiSpark version according to your TiDB and Spark version
 | 2.5.x            | 5.x, 4.x             | 3.0.x, 3.1.x   | 2.12          |
 | 3.0.x            | 5.x, 4.x             | 3.0.x, 3.1.x, 3.2.x|2.12|
 | 3.1.x            | 6.x, 5.x, 4.x             | 3.0.x, 3.1.x, 3.2.x, 3.3.x|2.12|
+
 - TiSpark 2.4.3, 2.5.2, 3.0.2,3.1.0 is the latest stable version, which is highly recommended.
 
 ### Get TiSpark jar
+
 - get from [maven central](https://search.maven.org/) and search with GroupId [![Maven Search](https://img.shields.io/badge/com.pingcap-tikv/tispark-green.svg)](http://search.maven.org/#search%7Cga%7C1%7Cpingcap)
 - get from [TiSpark releases](https://github.com/pingcap/tispark/releases)
 - build from source with the steps below
 
 Currently, java8 is the only choice to build TiSpark, run mvn -version to check.
+
 ```
 git clone https://github.com/pingcap/tispark.git
 ```
+
 Run the following command under the TiSpark root directory:
 
 ```
@@ -116,6 +123,7 @@ mvn clean install -Dmaven.test.skip=true -Pspark3.2.1
 ```
 
 ### TiSpark jar's Artifact ID
+
 > The Artifact ID of TiSpark is a bit different in different TiSpark version
 
 | TiSpark version               | Artifact ID                                        |
@@ -133,12 +141,14 @@ mvn clean install -Dmaven.test.skip=true -Pspark3.2.1
 To use TiSpark in spark-shell:
 
 1. Add the following configuration in `spark-defaults.conf`
+
 ```
 spark.sql.extensions  org.apache.spark.sql.TiExtensions
 spark.tispark.pd.addresses  ${your_pd_adress}
 spark.sql.catalog.tidb_catalog  org.apache.spark.sql.catalyst.catalog.TiCatalog
 spark.sql.catalog.tidb_catalog.pd.addresses  ${your_pd_adress}
 ```
+
 2. Start spark-shell with the --jars option
 
 ```
@@ -152,7 +162,9 @@ spark.sql("select ti_version()").collect
 ```
 
 ### Read with TiSpark
+
 You can use Spark SQL to read from TiKV
+
 ```scala
 spark.sql("use tidb_catalog")
 spark.sql("select count(*) from ${database}.${table}").show
@@ -215,12 +227,14 @@ df.write
 Set `isolationLevel` to `NONE` to avoid large single transactions which might lead to TiDB OOM and also avoid the `ISOLATION LEVEL does not support` error (TiDB currently only supports `REPEATABLE-READ`).
 
 ### Delete with TiSpark
+
 You can use Spark SQL to delete from TiKV (Tispark master support)
 
 ```
 spark.sql("use tidb_catalog")
 spark.sql("delete from ${database}.${table} where xxx")
 ```
+
 See [here](https://github.com/pingcap/tispark/blob/master/docs/features/delete_userguide.md) for more details.
 
 ### Use with other data source
@@ -329,10 +343,12 @@ For how to generate a JAVA key store, see [here](https://dev.mysql.com/doc/conne
 ### Log4j Configuration
 
 When you start `spark-shell` or `spark-sql` and run query, you might see the following warnings:
+
 ```
 Failed to get database ****, returning NoSuchObjectException
 Failed to get database ****, returning NoSuchObjectException
 ```
+
 where `****` is the name of database.
 
 The warnings are benign and occurs because Spark cannot find `****` in its own catalog. You can just ignore these warnings.
@@ -401,11 +417,13 @@ If partition pruning is not applied, TiSpark's reading is equivalent to doing a 
 **Write into partition table**
 
 Currently, TiSpark only supports writing into the range and hash partition table under the following conditions:
+
 + the partition expression is column expression
 + the partition expression is `YEAR($argument)` where the argument is a column and its type is datetime or string literal
   that can be parsed as datetime.
 
 There are two ways to write into partition table:
+
 1. Use datasource API to write into partition table which supports replace and append semantics.
 2. Use delete statement with Spark SQL.
 
@@ -434,6 +452,7 @@ For more information, see [Authorization and authentication through TiDB server]
 
 
 ### Other Features
+
 - [Push down](https://github.com/pingcap/tispark/blob/master/docs/features/push_down.md)
 - [Delete with TiSpark](https://github.com/pingcap/tispark/blob/master/docs/features/delete_userguide.md)
 - [Stale read](https://github.com/pingcap/tispark/blob/master/docs/features/stale_read.md)
