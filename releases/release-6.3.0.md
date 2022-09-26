@@ -298,12 +298,6 @@ Since v6.3.0, TiCDC no longer supports configuring Pulsar sink. [kop](https://gi
 
 + Tools
 
-    + TiDB Dashboard
-
-        - Optimize the display of TiDB Dashboard [#issue]() @[Contributor GitHub ID]()
-        - Display the row count on SQL statement summary and slow query pages [#issue]() @[Contributor GitHub ID]()
-        - Optimize the display of some error messages  [#issue]() @[Contributor GitHub ID]()
-
     + Backup & Restore (BR)
 
         - note [#issue]() @[Contributor GitHub ID]()
