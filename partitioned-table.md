@@ -199,7 +199,7 @@ Range INTERVAL partitioning is an extension of Range partitioning, which allows 
 
 > **Warning:**
 >
-> This is an experimental feature, which might be changed or removed without prior notice. The syntax and implementation may change before GA status. If you find a bug, please open an issue in the [TiDB repository](https://github.com/pingcap/tidb/issues). 
+> This is an experimental feature, which might be changed or removed without prior notice. The syntax and implementation may change before GA. If you find a bug, please open an issue in the [TiDB repository](https://github.com/pingcap/tidb/issues). 
 
 The sytax is as follows:
 
