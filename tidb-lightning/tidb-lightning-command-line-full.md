@@ -17,8 +17,8 @@ You can configure the following parameters using `tidb-lightning`:
 | :---- | :---- | :---- |
 | `--config <file>` | Read the global configuration from the file. If this parameter is not specified, TiDB Lightning uses the default configuration. | |
 | `-V` | Print the program version. | |
-| `-d <directory>` | The local directory or [external storage URL](/br/backup-and-restore-storages.md) of data files. | `mydumper.data-source-dir` |
-| `-L <level>` | The log level: `debug`, `info`, `warn`, `error`, or `fatal`. `info` by default.| `lightning.level` |
+| `-d <directory>` | Local directory or [external storage URL](/br/backup-and-restore-storages.md) of data files. | `mydumper.data-source-dir` |
+| `-L <level>` | Log level: `debug`, `info`, `warn`, `error`, or `fatal`. `info` by default.| `lightning.level` |
 | `-f <rule>` | [Table filter rules](/table-filter.md). Can be specified multiple times. | `mydumper.filter` |
 | `--backend <backend>` | Select an import mode. `local` refers to [physical import mode](/tidb-lightning/tidb-lightning-physical-import-mode.md); `tidb` refers to [logical import mode](/tidb-lightning/tidb-lightning-logical-import-mode.md). | `tikv-importer.backend` |
 | `--log-file <file>` | Log file path. By default, it is `/tmp/lightning.log.{timestamp}`. If set to '-', it means that the log files will be output to stdout. | `lightning.log-file` |
@@ -29,7 +29,7 @@ You can configure the following parameters using `tidb-lightning`:
 | `--tidb-port <port>` | TiDB server port (default = 4000) | `tidb.port` |
 | `--tidb-status <port>` | TiDB status port (default = 10080) | `tidb.status-port` |
 | `--tidb-user <user>` | User name to connect to TiDB | `tidb.user` |
-| `--tidb-password <password>` | Password to connect to TiDB. The password can be either plaintext or Base64 encoded. | `tidb.password` |
+| `--tidb-password <password>` | Password to connect to TiDB. The password can either be plaintext or Base64 encoded. | `tidb.password` |
 | `--enable-checkpoint <bool>` | Whether to enable checkpoints (default = true) | `checkpoint.enable` |
 | `--analyze <level>` | Analyze tables after importing. Available values are "required", "optional" (default value), and "off". | `post-restore.analyze` |
 | `--checksum <level>` | Compare checksum after importing. Available values are "required" (default value), "optional", and "off". | `post-restore.checksum` |
@@ -47,14 +47,14 @@ All parameters of `tidb-lightning` apply to `tidb-lightning-ctl`. In addition, y
 
 | Parameter | Description |
 |:----|:----|
-| `--compact` | Perform a full compaction |
-| `--switch-mode <mode>` | Switch every TiKV store to the given mode: normal, import |
-| `--fetch-mode` | Print the current mode of every TiKV store |
-| `--import-engine <uuid>` | Import the closed engine file from TiKV Importer into the TiKV cluster |
-| `--cleanup-engine <uuid>` | Delete the engine file from TiKV Importer |
-| `--checkpoint-dump <folder>` | Dump current checkpoint as CSVs into the folder |
+| `--compact` | Perform a full compaction. |
+| `--switch-mode <mode>` | Switch every TiKV store to the given mode: normal or import. |
+| `--fetch-mode` | Print the current mode of every TiKV store. |
+| `--import-engine <uuid>` | Import the closed engine file from TiKV Importer into the TiKV cluster. |
+| `--cleanup-engine <uuid>` | Delete the engine file from TiKV Importer. |
+| `--checkpoint-dump <folder>` | Dump current checkpoint as CSVs into the folder. |
 | `--checkpoint-error-destroy <table_name>` | Remove the checkpoint. If it causes an error, drop the table. |
-| `--checkpoint-error-ignore <table_name>` | Ignore any error recorded in the checkpoint involving the given table |
+| `--checkpoint-error-ignore <table_name>` | Ignore any error recorded in the checkpoint involving the given table. |
 |`--checkpoint-remove <table_name>` | Unconditionally remove the checkpoint of the table. |
 
 The `<table_name>` must either be a qualified table name in the form `` `db`.`tbl` `` (including the backquotes), or the keyword `all`.
