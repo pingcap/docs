@@ -186,6 +186,7 @@
     - [Scheduling](/tidb-scheduling.md)
   - [TiDB Cloud Cluster Limits and Quotas](/tidb-cloud/limitations-and-quotas.md)
   - [TiDB Limitations](/tidb-limitations.md)
+  - [TiDB Cloud Terraform](/tidb-cloud/terraform-provider-tidbcloud.md)
   - SQL
     - [Explore SQL with TiDB](/basic-sql-operations.md)
     - SQL Language Structure and Syntax
