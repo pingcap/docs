@@ -6,44 +6,45 @@ aliases: ['/docs/dev/tidb-lightning/deploy-tidb-lightning/','/docs/dev/reference
 
 # Deploy TiDB Lightning
 
-This document describes the hardware requirements of TiDB Lightning using the Local-backend, and how to deploy it manually.
+This document describes the hardware requirements of using TiDB Lightning to import data, and how to deploy it manually. Different import modes have different requirements on hardware resources. For details, refer to the following docs:
 
-## Notes
+- [Physical Import Mode Requirements and Limitations](/tidb-lightning/tidb-lightning-physical-import-mode.md#requirements-and-limitations)
+- [Logical Import Mode Requirements and Limitations](/tidb-lightning/tidb-lightning-logical-import-mode.md#requirements-and-limitations)
 
-Before starting TiDB Lightning, note that:
+## Online deployment using TiUP (recommended)
 
-- If `tidb-lightning` crashes, the cluster is left in "import mode". Forgetting to switch back to "normal mode" can lead to a high amount of uncompacted data on the TiKV cluster, and cause abnormally high CPU usage and stall. You can manually switch the cluster back to "normal mode" via the `tidb-lightning-ctl` tool:
+1. Install TiUP using the following command:
 
-    ```sh
-    bin/tidb-lightning-ctl --switch-mode=normal
+    {{< copyable "shell-regular" >}}
+
+    ```shell
+    curl --proto '=https' --tlsv1.2 -sSf https://tiup-mirrors.pingcap.com/install.sh | sh
     ```
 
-## Hardware requirements
+    This command automatically adds TiUP to the `PATH` environment variable. You need to start a new terminal session or run `source ~/.bashrc` before you can use TiUP. (You may also need to run `source ~/.profile`.)
 
-`tidb-lightning` is a resource-intensive program. It is recommended to deploy it as follows.
+2. Install TiUP DM component:
 
-- 32+ logical cores CPU
-- 20GB+ memory
-- An SSD large enough to store the entire data source, preferring higher read speed
-- 10 Gigabit network card (capable of transferring at ≥1 GB/s)
-- `tidb-lightning` fully consumes all CPU cores when running, and deploying on a dedicated machine is highly recommended. If not possible, `tidb-lightning` could be deployed together with other components like `tidb-server`, and the CPU usage could be limited via the `region-concurrency` setting.
+    {{< copyable "shell-regular" >}}
 
-> **Note:**
->
-> - `tidb-lightning` is a CPU intensive program. In an environment with mixed components, the resources allocated to `tidb-lightning` must be limited. Otherwise, other components might not be able to run. It is recommended to set the `region-concurrency` to 75% of CPU logical cores. For instance, if the CPU has 32 logical cores, you can set the `region-concurrency` to 24.
+    ```shell
+    tiup install tidb-lightning
+    ```
 
-Additionally, the target TiKV cluster should have enough space to absorb the new data. Besides [the standard requirements](/hardware-and-software-requirements.md), the total free space of the target TiKV cluster should be larger than **Size of data source × [Number of replicas](/faq/manage-cluster-faq.md#is-the-number-of-replicas-in-each-region-configurable-if-yes-how-to-configure-it) × 2**.
+## Manual deployment
 
-With the default replica count of 3, this means the total free space should be at least 6 times the size of data source.
+### Download TiDB Lightning binaries
 
-## Export data
+Refer to [Download TiDB Tools](/download-ecosystem-tools.md) and download TiDB Lightning binaries. Because TiDB Lightning is completely compatible with early versions of TiDB, it is recommended to use the latest version of TiDB Lightning.
 
-Use the [`dumpling` tool](/dumpling-overview.md) to export data from MySQL by using the following command:
+Unzip the TiDB Lightning package to obtain the `tidb-lightning` executable file:
 
-```sh
-./dumpling -h 127.0.0.1 -P 3306 -u root -t 16 -F 256MB -B test -f 'test.t[12]' -o /data/my_database/
+```bash
+tar -zxvf tidb-lightning-${version}-linux-amd64.tar.gz
+chmod +x tidb-lightning
 ```
 
+<<<<<<< HEAD
 In this command,
 
 - `-B test`: means the data is exported from the `test` database.
@@ -124,7 +125,7 @@ Refer to the [Download TiDB Tools](/download-ecosystem-tools.md) document to dow
     nohup ./tidb-lightning -config tidb-lightning.toml > nohup.out &
     ```
 
-## Upgrading TiDB Lightning
+### Upgrade TiDB Lightning
 
 You can upgrade TiDB Lightning by replacing the binaries alone. No further configuration is needed. See [FAQ](/tidb-lightning/tidb-lightning-faq.md#how-to-properly-restart-tidb-lightning) for the detailed instructions of restarting TiDB Lightning.
 
