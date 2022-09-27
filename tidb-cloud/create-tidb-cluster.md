@@ -81,7 +81,7 @@ To create a Developer Tier cluster, take the following steps:
 
     <Note>
     If you do not set a password, you cannot connect to the cluster.
-    <Note>
+    </Note>
 
 </div>
 
