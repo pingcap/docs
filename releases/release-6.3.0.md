@@ -44,7 +44,7 @@ In v6.3.0-DMR, the key new features and improvements are as follows:
 
     TiDB uses the online asynchronous schema change algorithm to support changing metadata objects. When a transaction is executed, it obtains the corresponding metadata snapshot at the transaction start. If the metadata is changed during a transaction, to ensure data consistency, TiDB returns an `Information schema is changed` error and the transaction fails to commit. To solve the problem, TiDB v6.3.0 introduces [metadata lock](/metadata-lock.md) into the online DDL algorithm. To avoid DML errors whenever possible, TiDB coordinates the priority of DMLs and DDLs during table metadata change, and makes executing DDLs wait for the DMLs with old metadata to commit.
 
-* Improve the performance of adding indexes and reduce its impact on DML transactions [#35983](https://github.com/pingcap/tidb/issues/35983) @[benjamin2037](https://github.com/benjamin2037) **tw: Oreoxmt**
+* Improve the performance of adding indexes and reduce its impact on DML transactions (experimental) [#35983](https://github.com/pingcap/tidb/issues/35983) @[benjamin2037](https://github.com/benjamin2037) **tw: Oreoxmt**
 
     To improve the speed of backfilling when creating an index, TiDB v6.3.0 accelerates the `ADD INDEX` and `CREATE INDEX` DDL operations when the [`tidb_ddl_enable_fast_reorg`](/system-variables.md#tidb_ddl_enable_fast_reorg-new-in-v630) system variable is enabled. When the feature is enabled, the performance of adding indexes is about trippled.
 
@@ -176,7 +176,7 @@ In v6.3.0-DMR, the key new features and improvements are as follows:
 
 * DM adds a new configuration item `safe-mode-duration` in the task configuration file [#6224] (https://github.com/pingcap/tiflow/issues/6224) @[[okJiang](https://github.com/okJiang)] **tw：ran-huang**
 
-    DM adds a new configuration item `safe-mode-duration` in the [task configuration file](/task-configuration-file-full.md). You can adjust the automatic safe mode duration after DM exits abnormally. The default value is 60 seconds. When `safe-mode-duration` is set to `"0s"`, DM does not automatically enter safe mode after an abnormal restart.
+    DM adds a new configuration item `safe-mode-duration` in the [task configuration file](/task-configuration-file-full.md). You can adjust the automatic safe mode duration after DM exits abnormally. The default value is 60 seconds. If `safe-mode-duration` is set to `"0s"`, an error is reported when DM tries to enter safe mode after an abnormal restart.
 
 ### TiDB data share subscription
 
