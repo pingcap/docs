@@ -16,7 +16,7 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
     In the console, you can view all organizations you have joined and switch them. For more information, see [Switch organizations](/tidb-cloud/manage-user-access.md#switch-organizations).
 
-* Add the [Slow Query](/tidb-cloud/tune-performance.md#slow-queries) page for SQL diagnosis.
+* Add the [Slow Query](/tidb-cloud/tune-performance.md#slow-query) page for SQL diagnosis.
 
     On the Slow Query page, you can search and view all slow queries in your TiDB cluster, and explore the bottlenecks of each slow query by viewing its [execution plan](https://docs.pingcap.com/tidbcloud/explain-overview), SQL execution information, and other details.
 
