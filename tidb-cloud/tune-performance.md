@@ -29,7 +29,7 @@ The results are displayed in the form of a table, and you can sort the results b
 
 ![Statement Analysis](/media/tidb-cloud/statement-analysis.png)
 
-For details, see [Statement Execution Details in TiDB Dashboard](https://docs.pingcap.com/tidb/stable/dashboard-statement-details).
+For more information, see [Statement Execution Details in TiDB Dashboard](https://docs.pingcap.com/tidb/stable/dashboard-statement-details).
 
 ## Slow Query
 
