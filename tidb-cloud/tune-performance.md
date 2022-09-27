@@ -37,7 +37,7 @@ To view slow queries in a cluster, perform the following steps:
 
 1. Navigate to the **Diagnosis** tab of a cluster.
 
-2. Click the **Slow Queries** tab.
+2. Click the **Slow Query** tab.
 
 3. Click any slow query in the list to display its detailed execution information.
 
