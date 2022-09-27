@@ -79,11 +79,11 @@ To check which project you belong to, perform these steps:
 1. Click the account name in the upper-right corner of the TiDB Cloud console.
 2. Click **Organization Settings**. The **Projects** tab is displayed by default.
 
-## Switch organizations
+## Switch between organizations
 
 If you are a member of multiple organizations, you can switch your account between organizations.
 
-To switch organizations, perform these steps:
+To switch between organizations, perform these steps:
 
 1. Click the account name in the upper-right corner of the TiDB Cloud console.
 2. Select **Switch Organization** in the drop-down menu, and click the organization you want to switch to.
