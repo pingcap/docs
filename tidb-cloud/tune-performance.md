@@ -29,7 +29,7 @@ The results are displayed in the form of a table, and you can sort the results b
 
 For details, see [Statement Execution Details in TiDB Dashboard](https://docs.pingcap.com/tidb/stable/dashboard-statement-details).
 
-## Slow Queries
+## Slow Query
 
 By default, SQL queries that take more than 300 milliseconds are considered as slow queries. 
 
