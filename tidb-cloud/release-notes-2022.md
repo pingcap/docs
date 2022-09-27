@@ -20,7 +20,7 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
     On the Slow Query page, you can search and view all slow queries in your TiDB cluster, and explore the bottlenecks of each slow query by viewing its [execution plan](https://docs.pingcap.com/tidbcloud/explain-overview), SQL execution information, and other details.
 
-* When you reset the password for your account, TiDB Cloud will check your new password input against your last four passwords, and remind you to avoid using one of them. Any of the four used passwords will not be permitted.
+* When you reset the password for your account, TiDB Cloud will check your new password input against your last four passwords, and remind you to avoid using any of them. Any of the four used passwords will not be permitted.
 
     For details, see [Manage user passwords](/tidb-cloud/manage-user-access.md#manage-user-passwords).
 
