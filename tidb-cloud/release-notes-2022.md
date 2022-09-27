@@ -14,7 +14,7 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
 * Support joining multiple organizations by invitation.
 
-    In the TiDB Cloud console, you can view all organizations you have joined and switch them. For details, see [Switch organizations](/tidb-cloud/manage-user-access.md#switch-organizations).
+    In the TiDB Cloud console, you can view all organizations you have joined and switch between them. For details, see [Switch between organizations](/tidb-cloud/manage-user-access.md#switch-organizations).
 
 * Add the [Slow Query](/tidb-cloud/tune-performance.md#slow-query) page for SQL diagnosis.
 
