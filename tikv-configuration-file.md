@@ -246,6 +246,11 @@ Configuration items related to the single thread pool serving read requests. Thi
 + Default value: `2000`
 + Minimum value: `2`
 
+### `auto-adjust-pool-size` <span class="version-mark">New in v6.3.0</span>
+
++ Controls whether to automatically adjust the thread pool size. When it is enabled, the read performance of TiKV is optimized by automatically adjusting the UnifyReadPool thread pool size based on the current CPU usage. The possible range of the thread pool is `[max-thread-count, MAX(4, CPU)]`. The maximum value is the same as the one of [`max-thread-count`](#max-thread-count).
++ Default value: `false`
+
 ## readpool.storage
 
 Configuration items related to storage thread pool.
@@ -382,7 +387,7 @@ Configuration items related to storage.
 + The name of the temporary file is `space_placeholder_file`, located in the `storage.data-dir` directory. When TiKV goes offline because its disk space ran out, if you restart TiKV, the temporary file is automatically deleted and TiKV tries to reclaim the space.
 + When the remaining space is insufficient, TiKV does not create the temporary file. The effectiveness of the protection is related to the size of the reserved space. The size of the reserved space is the larger value between 5% of the disk capacity and this configuration value. When the value of this configuration item is `"0MB"`, TiKV disables this disk protection feature.
 + Default value: `"5GB"`
-+ Unite: MB|GB
++ Unit: MB|GB
 
 ### `enable-ttl`
 
@@ -482,7 +487,7 @@ Configuration items related to the I/O rate limiter.
 ### `mode`
 
 + Determines which types of I/O operations are counted and restrained below the `max-bytes-per-sec` threshold. Currently, only the write-only mode is supported.
-+ Optional value: `"write-only"`
++ Value options: `"read-only"`, `"write-only"`, and `"all-io"`
 + Default value: `"write-only"`
 
 ## raftstore
@@ -1495,6 +1500,31 @@ Configuration items related to Raft Engine.
 + When this configuration value is not set, 15% of the available system memory is used.
 + Default value: `Total machine memory * 15%`
 
+### `format-version` <span class="version-mark">New in v6.3.0</span>
+
+> **Note:**
+>
+> After `format-version` is set to `2`, if you need to downgrade a TiKV cluster from v6.3.0 to an earlier version, take the following steps **before** the downgrade:
+>
+> 1. Disable Raft Engine by setting [`enable`](/tikv-configuration-file.md#enable-1) to `false` and restart TiKV to make the configuration take effect.
+> 2. Set `format-version` to `1`.
+> 3. Enable Raft Engine by setting `enable` to `true` and restart TiKV to make the configuration take effect.
+
++ Specifies the version of log files in Raft Engine.
++ Value Options:
+    + `1`: Default log file version for TiKV earlier than v6.3.0. Can be read by TiKV >= v6.1.0.
+    + `2`: Supports log recycling. Can be read by TiKV >= v6.3.0.
++ Default value: `2`
+
+### `enable-log-recycle` <span class="version-mark">New in v6.3.0</span>
+
+> **Note:**
+>
+> This configuration item is only available when [`format-version`](#format-version-new-in-v630) >= 2.
+
++ Determines whether to recycle stale log files in Raft Engine. When it is enabled, logically purged log files will be reserved for recycling. This reduces the long tail latency on write workloads.
++ Default value: `false`
+
 ## security
 
 Configuration items related to security.
@@ -1531,7 +1561,7 @@ Configuration items related to [encryption at rest](/encryption-at-rest.md) (TDE
 ### `data-encryption-method`
 
 + The encryption method for data files
-+ Value options: "plaintext", "aes128-ctr", "aes192-ctr", and "aes256-ctr"
++ Value options: "plaintext", "aes128-ctr", "aes192-ctr", "aes256-ctr", and "sm4-ctr" (supported since v6.3.0)
 + A value other than "plaintext" means that encryption is enabled, in which case the master key must be specified.
 + Default value: `"plaintext"`
 
@@ -1594,12 +1624,13 @@ Configuration items related to log backup.
 ### `enable` <span class="version-mark">New in v6.2.0</span>
 
 + Determines whether to enable log backup.
-+ Default value: `false`
++ Default value: `true`
 
 ### `file-size-limit` <span class="version-mark">New in v6.2.0</span>
 
-+ The size limit on log backup data. Once this limit is reached, the backup data is automatically flushed to external storage.
-+ Default value: 256MB
++ The size limit on backup log data to be stored.
++ Default value: 256MiB
++ Note: Generally, the value of `file-size-limit` is greater than the backup file size displayed in external storage. This is because the backup files are compressed before being uploaded to external storage.
 
 ### `initial-scan-pending-memory-quota` <span class="version-mark">New in v6.2.0</span>
 
@@ -1614,7 +1645,7 @@ Configuration items related to log backup.
 ### `max-flush-interval` <span class="version-mark">New in v6.2.0</span>
 
 + The maximum interval for writing backup data to external storage in log backup.
-+ Default value: 5min
++ Default value: 3min
 
 ### `num-threads` <span class="version-mark">New in v6.2.0</span>
 
@@ -1815,3 +1846,13 @@ To reduce write latency and avoid frequent access to PD, TiKV periodically fetch
 + TiKV adjusts the number of cached timestamps according to the timestamp consumption in the previous period. If the usage of locally cached timestamps is low, TiKV gradually reduces the number of cached timestamps until it reaches `renew-batch-min-size`. If large bursty write traffic often occurs in your application, you can set this parameter to a larger value as appropriate. Note that this parameter is the cache size for a single tikv-server. If you set the parameter to too large a value and the cluster contains many tikv-servers, the TSO consumption will be too fast.
 + In the **TiKV-RAW** \> **Causal timestamp** panel in Grafana, **TSO batch size** is the number of locally cached timestamps that has been dynamically adjusted according to the application workload. You can refer to this metric to adjust `renew-batch-min-size`.
 + Default value: `100`
+
+### `s3-multi-part-size` <span class="version-mark">New in v5.3.2</span>
+
+> **Note:**
+>
+> This configuration is introduced to address backup failures caused by S3 rate limiting. This problem has been fixed by [refining the backup data storage structure](/br/backup-and-restore-design.md#backup-file-structure). Therefore, this configuration is deprecated from v6.1.1 and is no longer recommended.
+
++ The part size used when you perform multipart upload to S3 during backup. You can adjust the value of this configuration to control the number of requests sent to S3.
++ If data is backed up to S3 and the backup file is larger than the value of this configuration item, [multipart upload](https://docs.aws.amazon.com/AmazonS3/latest/API/API_UploadPart.html) is automatically enabled. Based on the compression ratio, the backup file generated by a 96-MiB Region is approximately 10 MiB to 30 MiB.
++ Default value: 5MiB

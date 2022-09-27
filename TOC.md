@@ -86,7 +86,7 @@
   - Cloud Native Development Environment
     - [Gitpod](/develop/dev-guide-playground-gitpod.md)
   - Third-party Support
-    - [Third-Party Libraries Support](/develop/dev-guide-third-party-support.md)
+    - [Third-Party Tools Supported by TiDB](/develop/dev-guide-third-party-support.md)
     - [Integrate with ProxySQL](/develop/dev-guide-proxysql-integration.md)
 - Deploy
   - [Software and Hardware Requirements](/hardware-and-software-requirements.md)
@@ -106,6 +106,7 @@
   - Test Cluster Performance
     - [Test TiDB Using Sysbench](/benchmark/benchmark-tidb-using-sysbench.md)
     - [Test TiDB Using TPC-C](/benchmark/benchmark-tidb-using-tpcc.md)
+    - [Test TiDB Using CH-benCHmark](/benchmark/benchmark-tidb-using-ch.md)
 - Migrate
   - [Overview](/migration-overview.md)
   - [Migration Tools](/migration-tools.md)
@@ -178,18 +179,19 @@
     - [Performance Tuning Overview](/performance-tuning-overview.md)
     - [Performance Analysis and Tuning](/performance-tuning-methods.md)
     - [Performance Tuning Practices for OLTP Scenarios](/performance-tuning-practices.md)
+    - [Latency Breakdown](/latency-breakdown.md)
   - Configuration Tuning
-    - System Tuning
-      - [Operating System Tuning](/tune-operating-system.md)
-    - Software Tuning
-      - Configuration
-        - [Tune TiDB Memory](/configure-memory-usage.md)
-        - [Tune TiKV Threads](/tune-tikv-thread-performance.md)
-        - [Tune TiKV Memory](/tune-tikv-memory-performance.md)
-        - [TiKV Follower Read](/follower-read.md)
-        - [Tune Region Performance](/tune-region-performance.md)
-        - [Tune TiFlash Performance](/tiflash/tune-tiflash-performance.md)
-      - [Coprocessor Cache](/coprocessor-cache.md)
+    - [Tune Operating System Performance](/tune-operating-system.md)
+    - [Tune TiDB Memory](/configure-memory-usage.md)
+    - [Tune TiKV Threads](/tune-tikv-thread-performance.md)
+    - [Tune TiKV Memory](/tune-tikv-memory-performance.md)
+    - [TiKV Follower Read](/follower-read.md)
+    - [Tune Region Performance](/tune-region-performance.md)
+    - [Tune TiFlash Performance](/tiflash/tune-tiflash-performance.md)
+    - [Coprocessor Cache](/coprocessor-cache.md)
+    - Garbage Collection (GC)
+      - [Overview](/garbage-collection-overview.md)
+      - [Configuration](/garbage-collection-configuration.md)
   - SQL Tuning
     - [Overview](/sql-tuning-overview.md)
     - Understanding the Query Execution Plan
@@ -218,6 +220,7 @@
         - [Overview](/sql-physical-optimization.md)
         - [Index Selection](/choose-index.md)
         - [Statistics](/statistics.md)
+        - [Extended Statistics](/extended-statistics.md)
         - [Wrong Index Solution](/wrong-index-solution.md)
         - [Distinct Optimization](/agg-distinct-optimization.md)
         - [Cost Model](/cost-model.md)
@@ -355,15 +358,22 @@
     - [Get Started](/get-started-with-tidb-lightning.md)
     - Prechecks and requirements
       - [Prechecks](/tidb-lightning/tidb-lightning-prechecks.md)
-      - [Downstream privilege requirements](/tidb-lightning/tidb-lightning-requirements.md)
-      - [Downstream storage space requirements](/tidb-lightning/tidb-lightning-requirements.md#downstream-storage-space-requirements)
+      - [Target Database Requirements](/tidb-lightning/tidb-lightning-requirements.md)
+    - Data Sources
+      - [Data Match Rules](/tidb-lightning/tidb-lightning-data-source.md)
+      - [CSV](/tidb-lightning/tidb-lightning-data-source.md#csv)
+      - [SQL](/tidb-lightning/tidb-lightning-data-source.md#sql)
+      - [Parquet](/tidb-lightning/tidb-lightning-data-source.md#parquet)
+      - [Customized File](/tidb-lightning/tidb-lightning-data-source.md#match-customized-files)
+    - Physical Import Mode
+      - [Requirements and Limitations](/tidb-lightning/tidb-lightning-physical-import-mode.md)
+      - [Use Physical Import Mode](/tidb-lightning/tidb-lightning-physical-import-mode-usage.md)
+    - Logical Import Mode
+      - [Requirements and Limitations](/tidb-lightning/tidb-lightning-logical-import-mode.md)
+      - [Use Logical Import Mode](/tidb-lightning/tidb-lightning-logical-import-mode-usage.md)
     - Key Features
       - [Checkpoints](/tidb-lightning/tidb-lightning-checkpoints.md)
       - [Table Filter](/table-filter.md)
-      - [CSV Support](/tidb-lightning/migrate-from-csv-using-tidb-lightning.md)
-      - [Backends](/tidb-lightning/tidb-lightning-backends.md)
-      - [Physical Import Mode](/tidb-lightning/tidb-lightning-physical-import-mode.md)
-      - [Physical Import Mode Usage](/tidb-lightning/tidb-lightning-physical-import-mode-usage.md)
       - [Import Data in Parallel](/tidb-lightning/tidb-lightning-distributed-import.md)
       - [Error Resolution](/tidb-lightning/tidb-lightning-error-resolution.md)
       - [Web Interface](/tidb-lightning/tidb-lightning-web-interface.md)
@@ -520,7 +530,6 @@
       - [Integrate TiDB with Confluent and Snowflake](/ticdc/integrate-confluent-using-ticdc.md)
     - [FAQs](/ticdc/ticdc-faq.md)
     - [Glossary](/ticdc/ticdc-glossary.md)
-  - [Dumpling](/dumpling-overview.md)
   - sync-diff-inspector
     - [Overview](/sync-diff-inspector/sync-diff-inspector-overview.md)
     - [Data Check for Tables with Different Schema/Table Names](/sync-diff-inspector/route-diff.md)
@@ -583,7 +592,6 @@
       - [`ALTER PLACEMENT POLICY`](/sql-statements/sql-statement-alter-placement-policy.md)
       - [`ALTER TABLE`](/sql-statements/sql-statement-alter-table.md)
       - [`ALTER TABLE COMPACT`](/sql-statements/sql-statement-alter-table-compact.md)
-      - [`ALTER TABLE SET TIFLASH MODE`](/sql-statements/sql-statement-set-tiflash-mode.md)
       - [`ALTER USER`](/sql-statements/sql-statement-alter-user.md)
       - [`ANALYZE TABLE`](/sql-statements/sql-statement-analyze-table.md)
       - [`BACKUP`](/sql-statements/sql-statement-backup.md)
@@ -739,9 +747,6 @@
       - [Optimistic Transactions](/optimistic-transaction.md)
       - [Pessimistic Transactions](/pessimistic-transaction.md)
       - [Non-Transactional DML Statements](/non-transactional-dml.md)
-    - Garbage Collection (GC)
-      - [Overview](/garbage-collection-overview.md)
-      - [Configuration](/garbage-collection-configuration.md)
     - [Views](/views.md)
     - [Partitioning](/partitioned-table.md)
     - [Temporary Tables](/temporary-tables.md)
@@ -803,6 +808,7 @@
         - [`VARIABLES_INFO`](/information-schema/information-schema-variables-info.md)
         - [`VIEWS`](/information-schema/information-schema-views.md)
       - [`METRICS_SCHEMA`](/metrics-schema.md)
+    - [Metadata Lock](/metadata-lock.md)
   - UI
     - TiDB Dashboard
       - [Overview](/dashboard/dashboard-intro.md)
@@ -870,6 +876,7 @@
   - [Table Filter](/table-filter.md)
   - [Schedule Replicas by Topology Labels](/schedule-replicas-by-topology-labels.md)
 - FAQs
+  - [FAQ Summary](/faq/faq-overview.md)
   - [TiDB FAQs](/faq/tidb-faq.md)
   - [SQL FAQs](/faq/sql-faq.md)
   - [Deployment FAQs](/faq/deploy-and-maintain-faq.md)
@@ -887,6 +894,7 @@
   - v6.2
     - [6.2.0-DMR](/releases/release-6.2.0.md)
   - v6.1
+    - [6.1.1](/releases/release-6.1.1.md)
     - [6.1.0](/releases/release-6.1.0.md)
   - v6.0
     - [6.0.0-DMR](/releases/release-6.0.0-dmr.md)
@@ -895,6 +903,7 @@
     - [5.4.1](/releases/release-5.4.1.md)
     - [5.4.0](/releases/release-5.4.0.md)
   - v5.3
+    - [5.3.3](/releases/release-5.3.3.md)
     - [5.3.2](/releases/release-5.3.2.md)
     - [5.3.1](/releases/release-5.3.1.md)
     - [5.3.0](/releases/release-5.3.0.md)
