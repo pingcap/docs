@@ -13,7 +13,7 @@ After your TiDB cluster is created on TiDB Cloud, you can use one of the followi
     - [Connect via private endpoint](#connect-via-private-endpoint-recommended): Private endpoint connection provides a private endpoint to allow clients in your VPC to securely access services over AWS PrivateLink, which provides highly secure and one-way access to database services with simplified network management. Note that you cannot connect to [Developer Tier clusters](/tidb-cloud/select-cluster-tier.md#developer-tier) using the private endpoint.
     - [Connect via VPC peering](#connect-via-vpc-peering): If you want lower latency and more security, set up VPC peering and connect via a private endpoint using a VM instance on the corresponding cloud provider in your cloud account. Note that you cannot connect to [Developer Tier clusters](/tidb-cloud/select-cluster-tier.md#developer-tier) using VPC peering.
 
-- [Connect via SQL shell](#connect-via-sql-shell): to try TiDB SQL and test out TiDB's compatibility with MySQL quickly, or administer user privileges
+- [Connect via SQL shell](#connect-via-sql-shell): to try TiDB SQL and test out TiDB's compatibility with MySQL quickly, or administer user privileges. SQL shell is available only for Dedicated Tier clusters, not for Developer Tier clusters.
 
 > **Tip:**
 >
@@ -130,6 +130,8 @@ To connect to your TiDB cluster using SQL shell, perform the following steps:
 > **Note:**
 >
 > SQL shell is only available for Dedicated Tier clusters, not for Developer Tier clusters.
+>
+> If you are a Developer Tier user, you can edit and run your SQL statements in [**Playground**](/tidb-cloud/tidb-cloud-glossary.md#playground). To access it, navigate to the **Clusters** page, locate the area of your target Developer Tier cluster, click **Playground**, and select **Edit and Run Your SQL** tab.
 
 1. Navigate to the **Clusters** page.
 
