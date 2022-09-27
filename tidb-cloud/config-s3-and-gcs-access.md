@@ -99,35 +99,44 @@ To allow TiDB Cloud to access the source data in your Amazon S3 bucket, take the
 
 ## Configure GCS access
 
-To allow TiDB cloud to access the source data in your GCS bucket, you need to configure the GCS access for each TiDB Cloud as a service on the GCP project and GCS bucket pair. Once the configuration is done for one cluster in a project, all database clusters in that project can access the GCS bucket.
+To allow TiDB Cloud to access the source data in your GCS bucket, you need to configure the GCS access for each TiDB Cloud as a service on the GCP project and GCS bucket pair. Once the configuration is done for one cluster in a project, all database clusters in that project can access the GCS bucket.
 
 1. Get the Google Cloud Service Account ID of the target TiDB cluster.
 
-    1. In the TiDB Cloud console, locate your target cluster on the **Clusters** page, click **...** in the upper-right corner of the cluster area, and select **Import Data**. The **Data Import** page is displayed.
+    1. In the TiDB Cloud console, choose your target project, and navigate to the **Clusters** page.
 
-    2. Click **Show Google Cloud Service Account ID**, and then copy the Service Account ID.
+    2. Locate your target cluster, click **...** in the upper-right corner of the cluster area, and select **Import Data**. The **Data Import** page is displayed.
 
-2. In the Google Cloud Platform (GCP) Management Console, go to **IAM & Admin** > **Roles**, and then check whether a role with the following read-only permissions of the storage container exists.
+        > **Tip:**
+        >
+        > Alternatively, you can also click the name of your cluster on the **Clusters** page and click **Import Data** in the **Import** area.
 
-    - storage.buckets.get
-    - storage.objects.get
-    - storage.objects.list
+    3. On the **Data Import** page, click **Show Google Cloud Service Account ID**, and then copy the Service Account ID for later use.
 
-    If yes, you can use the matched role for the target TiDB cluster in the following steps. If not, go to **IAM & Admin** > **Roles** > **CREATE ROLE** to define a role for the target TiDB cluster.
+2. In the Google Cloud Platform (GCP) Management Console, create an IAM role for your GCS bucket.
 
-3. Go to **Cloud Storage** > **Browser**, select the GCS bucket you want TiDB Cloud to access, and then click **SHOW INFO PANEL**.
+    1. Sign in to the [GCP Console](https://console.cloud.google.com/).
+    2. Go to the [Roles](https://console.cloud.google.com/iam-admin/roles) page, and then click **CREATE ROLE**.
+    4. Enter a name, description, ID, and role launch stage for the role. The role name cannot be changed after the role is created.
+    5. Click **ADD PERMISSIONS**.
+    6. Add the following read-only permissions to the role and click **Add**.
 
-    The panel is displayed.
+        - storage.buckets.get
+        - storage.objects.get
+        - storage.objects.list
+
+        You can copy a permission name to the **Enter property name or value** field as a filter query, and choose the name in the filter result. To add the three permissions, you can use **OR** between the permission names.
+
+3. Go to the [Bucket](https://console.cloud.google.com/storage/browser) page, select the GCS bucket you want TiDB Cloud to access, and then click **PERMISSIONS**.
+
+    The permissions panel for the bucket is displayed.
 
 4. In the panel, click **ADD PRINCIPAL**.
 
-    The dialog box for adding principals is displayed.
+5. Fill in the following information to grant principals access to your bucket, and then click **SAVE**.
 
-5. In the dialog box, perform the following steps:
-
-    1. In the **New Principals** field, paste the Google Cloud Service Account ID of the target TiDB cluster.
-    2. In the **Role** drop-down list, choose the role of the target TiDB cluster.
-    3. Click **SAVE**.
+    - In the **New Principals** field, paste the Google Cloud Service Account ID of the target TiDB cluster.
+    - In the **Select a role** drop-down list, choose the IAM role you just created.
 
 Your TiDB Cloud cluster can now access the GCS bucket.
 
