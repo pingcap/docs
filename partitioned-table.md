@@ -168,6 +168,10 @@ Range partitioning is particularly useful when one or more of the following cond
 
 Range COLUMNS partitioning is a variant of Range partitioning. You can use one or more columns as partitioning keys. The data types of partition columns can be integer, string (`CHAR` or `VARCHAR`), `DATE`, and `DATETIME`. Any expressions, such as non-COLUMNS partitioning, are not supported.
 
+> **Warning:**
+>
+> This is still an experimental feature. It is **NOT** recommended that you use it in the production environment.
+
 Suppose that you want to partition by name, and drop old and invalid data, then you can create a table as follows:
 
 ```sql
@@ -195,7 +199,13 @@ It will partition the data by year and by name in the ranges ['', 'G'), ['G', 'M
 
 ### Range INTERVAL partitioning
 
-Range INTERVAL partitioning is an extension of Range partitioning, which allows you to create partitions of a specified interval easily. Starting from v6.3.0, INTERVAL partitioning is introduced in TiDB as syntactic sugar:
+Range INTERVAL partitioning is an extension of Range partitioning, which allows you to create partitions of a specified interval easily. Starting from v6.3.0, INTERVAL partitioning is introduced in TiDB as syntactic sugar.
+
+> **Warning:**
+>
+> This is still an experimental feature. It is **NOT** recommended that you use it in the production environment.
+
+The sytax is as follows:
 
 ```sql
 PARTITION BY RANGE [COLUMNS] (<partitioning expression>)
@@ -242,9 +252,9 @@ PARTITION BY RANGE (`id`)
  PARTITION `P_MAXVALUE` VALUES LESS THAN (MAXVALUE))
 ```
 
-INTERVAL partitioning also works with RANGE COLUMNS partitioning. 
+Range INTERVAL partitioning also works with [Range COLUMNS](#range-columns-partitioning) partitioning.
 
-For example: 
+For example:
 
 ```sql
 CREATE TABLE monthly_report_status (
