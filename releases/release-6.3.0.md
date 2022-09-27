@@ -102,7 +102,7 @@ In v6.3.0-DMR, the key new features and improvements are as follows:
 
     TiDB v6.3.0 introduces a new join type [Null-aware anti join (NAAJ)](/explain-subqueries.md#null-aware-anti-semi-join-not-in-and--all-subqueries). NAAJ can be aware of whether the collection is empty or `NULL` when processing collection operations. This optimizes the execution efficiency of operations such as `IN` and `= ANY` and improves SQL performance.
 
-* Add optimizer hints to control the build end of Hash Join [#issue]() @[Reminiscent](https://github.com/Reminiscent) **tw: TomShawn**
+* Add optimizer hints to control the build end of Hash Join [#35439](https://github.com/pingcap/tidb/issues/35439) @[Reminiscent](https://github.com/Reminiscent) **tw: TomShawn**
 
     In v6.3.0, the TiDB optimizer introduces 2 hints, `HASH_JOIN_BUILD()` and `HASH_JOIN_PROBE()`, to specify the Hash Join, its probe end, and its build end. When the optimizer fails to select the optimal execution plan, you can use these hints to intervene with the plan.
 
@@ -122,7 +122,7 @@ In v6.3.0-DMR, the key new features and improvements are as follows:
 
 ### Stability
 
-* Modify the default policy of loading statistics when statistics become outdated [#issue]() @[xuyifangreeneyes](https://github.com/xuyifangreeneyes) **tw: TomShawn**
+* Modify the default policy of loading statistics when statistics become outdated [#27601](https://github.com/pingcap/tidb/issues/27601) @[xuyifangreeneyes](https://github.com/xuyifangreeneyes) **tw: TomShawn**
 
     In v5.3.0, TiDB introduced the system variable [`tidb_enable_pseudo_for_outdated_stats`](/system-variables.md#tidb_enable_pseudo_for_outdated_stats-new-in-v530) to control how the optimizer behaves when the statistics become outdated. The default value is `ON`, which means keeping the behavior of the old version: When the statistics on objects that are involved in a SQL statement are outdated, the optimizer considers that statistics (other than the total number of rows on the table) are no longer reliable and uses pseudo statistics instead. After tests and analyses of actual user scenarios, the default value of `tidb_enable_pseudo_for_outdated_stats` is changed to `OFF` since v6.3.0. Even if the statistics become outdated, the optimizer will still use the statistics on the table, which makes the execution plan more stable.
 
