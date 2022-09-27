@@ -378,9 +378,9 @@
       - [Error Resolution](/tidb-lightning/tidb-lightning-error-resolution.md)
       - [Web Interface](/tidb-lightning/tidb-lightning-web-interface.md)
     - [Deploy](/tidb-lightning/deploy-tidb-lightning.md)
-    - [Configure](/tidb-lightning/tidb-lightning-configuration.md)
     - [Troubleshooting](/tidb-lightning/troubleshoot-tidb-lightning.md)
     - Reference
+      - [Configuration File](/tidb-lightning/tidb-lightning-configuration.md)
       - [Command Line Flags](/tidb-lightning/tidb-lightning-command-line-full.md)
       - [Monitor](/tidb-lightning/monitor-tidb-lightning.md)
       - [FAQ](/tidb-lightning/tidb-lightning-faq.md)
