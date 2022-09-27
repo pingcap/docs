@@ -40,7 +40,6 @@ tar -zxvf tidb-lightning-${version}-linux-amd64.tar.gz
 chmod +x tidb-lightning
 ```
 
-<<<<<<< HEAD
 In this command,
 
 - `-B test`: means the data is exported from the `test` database.
@@ -121,7 +120,7 @@ Refer to the [Download TiDB Tools](/download-ecosystem-tools.md) document to dow
     nohup ./tidb-lightning -config tidb-lightning.toml > nohup.out &
     ```
 
-### Upgrade TiDB Lightning
+## Upgrade TiDB Lightning
 
 You can upgrade TiDB Lightning by replacing the binaries alone without further configurations. After the upgrade, you need to restart TiDB Lightning. For details, see [How to properly restart TiDB Lightning](/tidb-lightning/tidb-lightning-faq.md#how-to-properly-restart-tidb-lightning).
 
