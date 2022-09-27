@@ -1537,7 +1537,7 @@ Query OK, 0 rows affected (0.09 sec)
 
 </CustomContent>
 
-### `tidb_enable_tiflash_read_for_write_stmt` <span class="version-mark">从 v6.3.0 版本开始引入</span>
+### `tidb_enable_tiflash_read_for_write_stmt` <span class="version-mark">New in v6.3.0</span>
 
 > **Warning:**
 >
