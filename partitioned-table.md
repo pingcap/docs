@@ -168,10 +168,6 @@ Range partitioning is particularly useful when one or more of the following cond
 
 Range COLUMNS partitioning is a variant of Range partitioning. You can use one or more columns as partitioning keys. The data types of partition columns can be integer, string (`CHAR` or `VARCHAR`), `DATE`, and `DATETIME`. Any expressions, such as non-COLUMNS partitioning, are not supported.
 
-> **Warning:**
->
-> This is still an experimental feature. It is **NOT** recommended that you use it in the production environment.
-
 Suppose that you want to partition by name, and drop old and invalid data, then you can create a table as follows:
 
 ```sql
