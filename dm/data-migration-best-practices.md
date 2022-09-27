@@ -27,5 +27,15 @@ This document introduces how to use DM in an elegant and efficient way, and how 
 
 - DM 支持同时管理 1000 个同步节点（Work Node），最大同步任务数量为 600 个。为了保证同步节点的高可用，应预留一部分 Work Node 节点作为备用节点，保证数据同步的高可用。预留已开启同步任务 Work Node 数量的 20% ~ 50%。
 - 单机部署 Work Node 数量。在服务器配置较好情况下，要保证每个 Work Node 至少有 2 核 CPU 加 4G 内存的可用工作资源，并且应为主机预留 10% ~ 20% 的系统资源。
-- 单个同步节点（Work Node），理论最大同步 QPS 在 30K QPS/worker（不同 Schema 和 workload 会有所差异），处理上游 Binlog 的能力最高为 20 MB/s/worker。
+- A single Work Node 理论最大同步 QPS 是 30K QPS/worker（不同 Schema 和 workload 会有所差异），处理上游 Binlog 的能力最高为 20 MB/s/worker。
 - 如果将 DM 作为需要长期使用的数据同步中间件，需要注意 DM 组件的部署架构。请参见 [Master 与 Woker 部署实践](#master-与-woker-部署实践)。
+
+- DM supports managing 1000 work nodes simultaneously, and the maximum number of tasks is 600. To ensure the high availability of work nodes, you should reserve some work nodes as standby nodes. Reserve 20% to 50% of the number of the work nodes that have run migration task.
+- A single work node has a theoretical maximum replication QPS of 30K QPS/worker. It varies for different schemas and workloads. The ability to handle upstream binlog is up to 20 MB/s/worker.
+- If you use DM as a data replication middleware that will be used for a long time, you need to carefully design the deployment architecture of DM components. For more information, see [Deploy DM-Master and DM-Woker](#deploy-dm-master-and-dm-woker)
+
+
+
+### Best practices for deployment
+
+#### Deploy DM-Master and DM-Woker
