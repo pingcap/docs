@@ -890,7 +890,7 @@ MPP is a distributed computing framework provided by the TiFlash engine, which a
 
 > **Warning:**
 >
-> This is still an experimental feature. It is **NOT** recommended that you use it in the production environment.
+> Currently, acceleration of `ADD INDEX` and `CREATE INDEX` is an experimental feature. It is not recommended that you use it in production environments.
 >
 > Currently, this feature is not compatible with [PITR (Point-in-time recovery)](/br/point-in-time-recovery.md). When using index acceleration, you need to ensure that there are no PITR log backup tasks running in the background. Otherwise, unexpected behaviors might occur, including:
 >
