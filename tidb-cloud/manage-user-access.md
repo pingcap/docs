@@ -72,7 +72,7 @@ To access a cluster in a project under an organization, a user must be both a me
 To view which organizations you belong to, perform these steps:
 
 1. Click the account name in the upper-right corner of the TiDB Cloud console.
-2. Move your cursor to **Switch Organization**, and you can see all the organizations you belong to in the submenu.
+2. Select **Switch Organization** in the drop-down menu, and you can see all the organizations you belong to in the submenu.
 
 To check which project you belong to, perform these steps:
 
@@ -86,7 +86,7 @@ If you are a member of multiple organizations, you can switch your account betwe
 To switch organizations, perform these steps:
 
 1. Click the account name in the upper-right corner of the TiDB Cloud console.
-2. Move your cursor to **Switch Organization**, and click the organization you want to switch to.
+2. Select **Switch Organization** in the drop-down menu, and click the organization you want to switch to.
 
 ## Invite an organization member
 
