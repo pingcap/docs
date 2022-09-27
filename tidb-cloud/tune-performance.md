@@ -47,7 +47,7 @@ The results are displayed in the form of a table, and you can sort the results b
 
 ![Slow Queries](/media/tidb-cloud/slow-queries.png)
 
-For details, see [Slow Queries in TiDB Dashboard](https://docs.pingcap.com/tidb/dev/dashboard-slow-query).
+For more information, see [Slow Queries in TiDB Dashboard](https://docs.pingcap.com/tidb/dev/dashboard-slow-query).
 
 ## Key Visualizer
 
