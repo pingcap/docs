@@ -5,7 +5,7 @@ summary: Learn how to analyze and tune performance of your TiDB Cloud cluster.
 
 # Analyze and Tune Performance
 
-TiDB Cloud provides [Statement Analysis](#statement-analysis), [Slow Query](#slow-query) and [Key Visualizer](#key-visualizer) to analyze performance.
+TiDB Cloud provides [Statement Analysis](#statement-analysis), [Slow Query](#slow-query), and [Key Visualizer](#key-visualizer) to analyze performance.
 
 - Statement Analysis enables you to directly observe the SQL execution on the page, and easily locate performance problems without querying the system tables.
 
