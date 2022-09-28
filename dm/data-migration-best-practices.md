@@ -64,8 +64,6 @@ When you create a table, you can state that the primary key is either a clustere
     This solution can retain the benefits of using clustered indexes and avoid the write hotspot problem. It requires less effort for customization. You can modify the schema attribute when you switch to use TiDB as the write database. In the subsequent queries, you can sort using the ID column. You can use the [`AUTO_RANDOM`](/auto-random.md) ID column to left shift 5 bits to ensure the order of the query data. For example:
 
     ```sql
-
-    ```sql
     CREATE TABLE t (a bigint PRIMARY KEY AUTO_RANDOM, b varchar(255));
     Select  a, a<<5 ,b from t order by a <<5 desc
     ```
