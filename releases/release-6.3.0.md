@@ -35,16 +35,16 @@ In v6.3.0-DMR, the key new features and improvements are as follows:
 
     [EXCHANGE PARTITION](/partitioned-table.md#partition-management) becomes GA after performance and stability improvements.
 
-* TiDB supports two more [window functions](/tiflash/tiflash-supported-pushdown-calculations.md) [#5579](https://github.com/pingcap/tiflash/issues/5579) @[SeaRise](https://github.com/SeaRise) **tw：shichun-0415**
+* TiDB supports two more [window functions](/tiflash/tiflash-supported-pushdown-calculations.md) [#5579](https://github.com/pingcap/tiflash/issues/5579) @[SeaRise](https://github.com/SeaRise)
 
     * `LEAD()`
     * `LAG()`
 
-* Provide lightweight metadata lock to improve the DML success rate during DDL change (experimental) [#37275](https://github.com/pingcap/tidb/issues/37275) @[wjhuang2016](https://github.com/wjhuang2016) **tw: Oreoxmt**
+* Provide lightweight metadata lock to improve the DML success rate during DDL change (experimental) [#37275](https://github.com/pingcap/tidb/issues/37275) @[wjhuang2016](https://github.com/wjhuang2016)
 
     TiDB uses the online asynchronous schema change algorithm to support changing metadata objects. When a transaction is executed, it obtains the corresponding metadata snapshot at the transaction start. If the metadata is changed during a transaction, to ensure data consistency, TiDB returns an `Information schema is changed` error and the transaction fails to commit. To solve the problem, TiDB v6.3.0 introduces [metadata lock](/metadata-lock.md) into the online DDL algorithm. To avoid DML errors whenever possible, TiDB coordinates the priority of DMLs and DDLs during table metadata change, and makes executing DDLs wait for the DMLs with old metadata to commit.
 
-* Improve the performance of adding indexes and reduce its impact on DML transactions (experimental) [#35983](https://github.com/pingcap/tidb/issues/35983) @[benjamin2037](https://github.com/benjamin2037) **tw: Oreoxmt**
+* Improve the performance of adding indexes and reduce its impact on DML transactions (experimental) [#35983](https://github.com/pingcap/tidb/issues/35983) @[benjamin2037](https://github.com/benjamin2037)
 
     To improve the speed of backfilling when creating an index, TiDB v6.3.0 accelerates the `ADD INDEX` and `CREATE INDEX` DDL operations when the [`tidb_ddl_enable_fast_reorg`](/system-variables.md#tidb_ddl_enable_fast_reorg-new-in-v630) system variable is enabled. When the feature is enabled, the performance of adding indexes is about trippled.
 
@@ -54,25 +54,25 @@ In v6.3.0-DMR, the key new features and improvements are as follows:
 
     Add the [SM4 algorithm](/encryption-at-rest.md) for TiKV encryption at rest. When you configure encryption at rest, you can enable the SM4 encryption capacity by setting the value of the `data-encryption-method` configuration to `sm4-ctr`.
 
-* TiDB supports authentication with the SM3 algorithm [#36192](https://github.com/pingcap/tidb/issues/36192) @[CbcWestwolf](https://github.com/CbcWestwolf) **tw：ran-huang**
+* TiDB supports authentication with the SM3 algorithm [#36192](https://github.com/pingcap/tidb/issues/36192) @[CbcWestwolf](https://github.com/CbcWestwolf)
 
     TiDB adds an authentication plugin [`tidb_sm3_password`](/security-compatibility-with-mysql.md) based on the SM3 algorithm. When this plugin is enabled, the user password is encrypted and validated using the SM3 algorithm.
 
-* TiDB JDBC supports authentication with the SM3 algorithm [#25](https://github.com/pingcap/mysql-connector-j/issues/25) @[lastincisor](https://github.com/lastincisor) **tw：ran-huang**
+* TiDB JDBC supports authentication with the SM3 algorithm [#25](https://github.com/pingcap/mysql-connector-j/issues/25) @[lastincisor](https://github.com/lastincisor)
 
     Authenticating the user password needs client-side support. Now because [JDBC supports the SM3 algorithm](/develop/dev-guide-choose-driver-or-orm.md#java-drivers), you can connect to TiDB using SM3 authentication via TiDB-JDBC.
 
 ### Observability
 
-* TiDB provides fine-grained metrics of SQL query execution time [#34106](https://github.com/pingcap/tidb/issues/34106) @[cfzjywxk](https://github.com/cfzjywxk) **tw: Oreoxmt**
+* TiDB provides fine-grained metrics of SQL query execution time [#34106](https://github.com/pingcap/tidb/issues/34106) @[cfzjywxk](https://github.com/cfzjywxk)
 
     TiDB v6.3.0 provides fine-grained data metrics for [detailed observation of execution time](/latency-breakdown.md). Through the complete and segmented metrics, you can clearly understand the main time consumption of SQL queries, and then quickly find key problems and save time in troubleshooting.
 
-* Enhanced output for slow logs and `TRACE` statements [#34106](https://github.com/pingcap/tidb/issues/34106) @[cfzjywxk](https://github.com/cfzjywxk) **tw: Oreoxmt**
+* Enhanced output for slow logs and `TRACE` statements [#34106](https://github.com/pingcap/tidb/issues/34106) @[cfzjywxk](https://github.com/cfzjywxk)
 
     TiDB v6.3.0 enhances the output of slow logs and `TRACE`. You can observe the [full-link duration](/latency-breakdown.md) of SQL queries from TiDB parsing to KV RocksDB writing to disk, which further enhances the diagnostic capabilities.
 
-* TiDB Dashboard provides deadlock history information [#34106](https://github.com/pingcap/tidb/issues/34106) @[cfzjywxk](https://github.com/cfzjywxk) **tw: shichun-0415**
+* TiDB Dashboard provides deadlock history information [#34106](https://github.com/pingcap/tidb/issues/34106) @[cfzjywxk](https://github.com/cfzjywxk)
 
     From v6.3.0, TiDB Dashboard provides deadlock history. If you check the slow log in TiDB Dashboard and find the lock waiting time of some SQL statements to be excessively long, you can check the deadlock history to locate the root cause, which makes your diagnosis easier.
 
@@ -98,39 +98,39 @@ In v6.3.0-DMR, the key new features and improvements are as follows:
 
      TiFlash supports rewriting queries containing only one `COUNT(DISTINCT)` into a [three-stage aggregation](/system-variables.md#tidb_opt_three_stage_distinct_agg-new-in-v630). This improves concurrency and performance.
      
-* TiKV supports log recycling [#214](https://github.com/tikv/raft-engine/issues/214) @[LykxSassinator](https://github.com/LykxSassinator) **tw：ran-huang**
+* TiKV supports log recycling [#214](https://github.com/tikv/raft-engine/issues/214) @[LykxSassinator](https://github.com/LykxSassinator)
 
     TiKV supports [recycling log files](/tikv-configuration-file.md#enable-log-recycle-new-in-v630) in Raft Engine. This reduces the long tail latency in network disks during Raft log appending and improves performance under write workloads.
 
-* TiDB supports null-aware anti join [#37525](https://github.com/pingcap/tidb/issues/37525) @[Arenatlx](https://github.com/Arenatlx) **tw: Oreoxmt**
+* TiDB supports null-aware anti join [#37525](https://github.com/pingcap/tidb/issues/37525) @[Arenatlx](https://github.com/Arenatlx)
 
     TiDB v6.3.0 introduces a new join type [Null-aware anti join (NAAJ)](/explain-subqueries.md#null-aware-anti-semi-join-not-in-and--all-subqueries). NAAJ can be aware of whether the collection is empty or `NULL` when processing collection operations. This optimizes the execution efficiency of operations such as `IN` and `= ANY` and improves SQL performance.
 
-* Add optimizer hints to control the build end of Hash Join [#35439](https://github.com/pingcap/tidb/issues/35439) @[Reminiscent](https://github.com/Reminiscent) **tw: TomShawn**
+* Add optimizer hints to control the build end of Hash Join [#35439](https://github.com/pingcap/tidb/issues/35439) @[Reminiscent](https://github.com/Reminiscent)
 
     In v6.3.0, the TiDB optimizer introduces 2 hints, `HASH_JOIN_BUILD()` and `HASH_JOIN_PROBE()`, to specify the Hash Join, its probe end, and its build end. When the optimizer fails to select the optimal execution plan, you can use these hints to intervene with the plan.
 
-* Support session-level common table expressions (CTE) inline [#36514](https://github.com/pingcap/tidb/issues/36514) @[elsa0520](https://github.com/elsa0520) **tw: shichun-0415**
+* Support session-level common table expressions (CTE) inline [#36514](https://github.com/pingcap/tidb/issues/36514) @[elsa0520](https://github.com/elsa0520)
 
     TiDB v6.2.0 introduced the `MERGE` hint in optimizers to allow CTE inline, so that the consumers of a CTE query result can execute it in parallel in TiFlash. In v6.3.0, a session variable [`tidb_opt_force_inline_cte`](/system-variables.md#tidb_opt_force_inline_cte-new-in-v630) is introduced to allow CTE inline in sessions. This can greatly improve the ease of use.
 
 ### Transactions
 
-* Support deferring checks of unique constraints in pessimistic transactions [#36579](https://github.com/pingcap/tidb/issues/36579) @[ekexium](https://github.com/ekexium) **tw: qiancai**
+* Support deferring checks of unique constraints in pessimistic transactions [#36579](https://github.com/pingcap/tidb/issues/36579) @[ekexium](https://github.com/ekexium)
 
     You can use the [`tidb_constraint_check_in_place_pessimistic`](/system-variables.md#tidb_constraint_check_in_place_pessimistic-new-in-v630) system variable to control when TiDB checks [unique constraints](/constraints.md#pessimistic-transactions) in pessimistic transactions. This variable is disabled by default. When the variable is enabled (set to `ON`), TiDB will defer locking operations and unique constraint checks in pessimistic transactions until necessary, thus improving the performance of bulk DML operations.
 
-* Optimize the way of fetching TSO in the Read-Committed isolation level [#36812](https://github.com/pingcap/tidb/issues/36812) @[TonsnakeLin](https://github.com/TonsnakeLin) **tw: TomShawn**
+* Optimize the way of fetching TSO in the Read-Committed isolation level [#36812](https://github.com/pingcap/tidb/issues/36812) @[TonsnakeLin](https://github.com/TonsnakeLin)
 
     In the Read-Committed isolation level, the system variable [`tidb_rc_write_check_ts`](/system-variables.md#tidb_rc_write_check_ts-new-in-v630) is introduced to control how TSO is fetched. In the case of Plan Cache hit, TiDB improves the execution efficiency of batch DML statements by reducing the frequency of fetching TSO, and reduces the execution time of running tasks in batch.
 
 ### Stability
 
-* Modify the default policy of loading statistics when statistics become outdated [#27601](https://github.com/pingcap/tidb/issues/27601) @[xuyifangreeneyes](https://github.com/xuyifangreeneyes) **tw: TomShawn**
+* Modify the default policy of loading statistics when statistics become outdated [#27601](https://github.com/pingcap/tidb/issues/27601) @[xuyifangreeneyes](https://github.com/xuyifangreeneyes)
 
     In v5.3.0, TiDB introduced the system variable [`tidb_enable_pseudo_for_outdated_stats`](/system-variables.md#tidb_enable_pseudo_for_outdated_stats-new-in-v530) to control how the optimizer behaves when the statistics become outdated. The default value is `ON`, which means keeping the behavior of the old version: When the statistics on objects that are involved in a SQL statement are outdated, the optimizer considers that statistics (other than the total number of rows on the table) are no longer reliable and uses pseudo statistics instead. After tests and analyses of actual user scenarios, the default value of `tidb_enable_pseudo_for_outdated_stats` is changed to `OFF` since v6.3.0. Even if the statistics become outdated, the optimizer will still use the statistics on the table, which makes the execution plan more stable.
 
-* The feature of disabling Titan becomes GA [#issue]() @[tabokie](https://github.com/tabokie) **tw：ran-huang**
+* The feature of disabling Titan becomes GA @[tabokie](https://github.com/tabokie)
 
     You can [disable Titan](/titan-configuration.md#disable-titan) for online TiKV nodes.
 
@@ -142,7 +142,7 @@ In v6.3.0-DMR, the key new features and improvements are as follows:
 
 ### MySQL compatibility
 
-* Improve MySQL 8.0 compatibility by adding support for four regular expression functions: `REGEXP_INSTR()`, `REGEXP_LIKE()`, `REGEXP_REPLACE()`, and `REGEXP_SUBSTR()` [#23881](https://github.com/pingcap/tidb/issues/23881) @[windtalker](https://github.com/windtalker) **tw: Oreoxmt**
+* Improve MySQL 8.0 compatibility by adding support for four regular expression functions: `REGEXP_INSTR()`, `REGEXP_LIKE()`, `REGEXP_REPLACE()`, and `REGEXP_SUBSTR()` [#23881](https://github.com/pingcap/tidb/issues/23881) @[windtalker](https://github.com/windtalker)
 
     For more details about the compatibility with MySQL, see [Regular expression compatibility with MySQL](/functions-and-operators/string-functions.md#regular-expression-compatibility-with-mysql).
 
@@ -150,13 +150,13 @@ In v6.3.0-DMR, the key new features and improvements are as follows:
 
     TiDB v6.0.0 provides SQL-based data Placement Rules. But this feature is not compatible with TiFlash due to conflicts in implementation mechanisms. TiDB v6.3.0 optimizes this feature, and [improves compatibility of SQL-based data Placement Rules and TiFlash](/placement-rules-in-sql.md#known-limitations).
 
-* The `CREATE USER` and `ALTER USER` statements support the `ACCOUNT LOCK/UNLOCK` option [#37051](https://github.com/pingcap/tidb/issues/37051) @[CbcWestwolf](https://github.com/CbcWestwolf) **tw：ran-huang**
+* The `CREATE USER` and `ALTER USER` statements support the `ACCOUNT LOCK/UNLOCK` option [#37051](https://github.com/pingcap/tidb/issues/37051) @[CbcWestwolf](https://github.com/CbcWestwolf)
 
     When you create a user using the [`CREATE USER`](/sql-statements/sql-statement-create-user.md) statement, you can specify whether the created user is locked using the `ACCOUNT LOCK/UNLOCK` option. A locked user cannot log in to the database.
 
     You can modify the lock state of an existing user using the `ACCOUNT LOCK/UNLOCK` option in the [`ALTER USER`](/sql-statements/sql-statement-alter-user.md) statement.
 
-* JSON data type and JSON functions become GA [#36993](https://github.com/pingcap/tidb/issues/36993) @[xiongjiwei](https://github.com/xiongjiwei) **tw: qiancai**
+* JSON data type and JSON functions become GA [#36993](https://github.com/pingcap/tidb/issues/36993) @[xiongjiwei](https://github.com/xiongjiwei)
 
     JSON is a popular data format adopted by a large number of programs. TiDB has introduced the [JSON support](/data-type-json.md) as an experimental feature since an earlier version, compatible with MySQL's JSON data type and some JSON functions.
 
@@ -164,35 +164,35 @@ In v6.3.0-DMR, the key new features and improvements are as follows:
 
 ### Backup and restore
 
-* PITR supports GCS and Azure Blob Storage as backup storages [#issue]() @[joccau](https://github.com/joccau) **tw: shichun-0415**
+* PITR supports GCS and Azure Blob Storage as backup storages @[joccau](https://github.com/joccau)
 
     PITR supports [GCS](/br/backup-storage-gcs.md) and [Azure Blob Storage](/br/backup-storage-azblob.md) as backup storages. If your TiDB cluster is deployed on GCP or Azure, you can use the PITR feature after upgrading your cluster to v6.3.0.
 
-* BR supports AWS S3 Object Lock [#issue]() @[3pointer](https://github.com/3pointer) **tw: shichun-0415**
+* BR supports AWS S3 Object Lock [#13442](https://github.com/tikv/tikv/issues/13442) @[3pointer](https://github.com/3pointer)
 
     You can protect backup data on AWS from being tampered with or deleted by enabling [S3 Object Lock](https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-lock.html).
 
 ### Data migration
 
-* TiDB Lightning supports importing Parquet files exported by Apache Hive into TiDB [#issue]() @[buchuitoudegou](https://github.com/buchuitoudegou) **tw：ran-huang**
+* TiDB Lightning supports importing Parquet files exported by Apache Hive into TiDB [#37536](https://github.com/pingcap/tidb/issues/37536) @[buchuitoudegou](https://github.com/buchuitoudegou)
 
     TiDB Lightning supports [importing Parquet files exported by Apache Hive into TiDB](/tidb-lightning/tidb-lightning-data-source.md#parquet), thereby achieving data migration from Hive to TiDB.
 
-* DM adds a new configuration item `safe-mode-duration` in the task configuration file [#6224] (https://github.com/pingcap/tiflow/issues/6224) @[[okJiang](https://github.com/okJiang)] **tw：ran-huang**
+* DM adds a new configuration item `safe-mode-duration` in the task configuration file [#6224](https://github.com/pingcap/tiflow/issues/6224) @[okJiang](https://github.com/okJiang)
 
     DM adds a new configuration item `safe-mode-duration` in the [task configuration file](/task-configuration-file-full.md). You can adjust the automatic safe mode duration after DM exits abnormally. The default value is 60 seconds. If `safe-mode-duration` is set to `"0s"`, an error is reported when DM tries to enter safe mode after an abnormal restart.
 
 ### TiDB data share subscription
 
-* TiCDC supports a deployment topology that can replicate data from multiple geo-distributed data sources [#issue]() @[sdojjy](https://github.com/sdojjy) **tw：ran-huang**
+* TiCDC supports a deployment topology that can replicate data from multiple geo-distributed data sources [#5301](https://github.com/pingcap/tiflow/issues/5301) @[sdojjy](https://github.com/sdojjy)
 
-    To support replicating data from a single TiDB cluster to multiple geo-distributed data systems, starting from v6.3.0, [you can deploy TiCDC in multiple IDCs](link) to replicate data for each IDC. This feature helps deliver the capability of geo-distributed data replication and deployment topology.
+    To support replicating data from a single TiDB cluster to multiple geo-distributed data systems, starting from v6.3.0, [you can deploy TiCDC in multiple IDCs](/ticdc/deploy-ticdc.md) to replicate data for each IDC. This feature helps deliver the capability of geo-distributed data replication and deployment topology.
 
-* TiCDC supports keeping the snapshots consistent between the upstream and the downstream (sync point) [#issue]() @[asddongmen](https://github.com/asddongmen) **tw: TomShawn**
+* TiCDC supports keeping the snapshots consistent between the upstream and the downstream (sync point) [#6977](https://github.com/pingcap/tiflow/issues/6977) @[asddongmen](https://github.com/asddongmen)
 
-    In the scenarios of data replication for disaster recovery, TiCDC supports periodically maintaining a downstream data snapshot so that the downstream snapshot is consistent with the upstream snapshot. With this feature, TiCDC can better support the scenarios where reads and writes are separate, and help you lower the cost.
+    In the scenarios of data replication for disaster recovery, TiCDC supports [periodically maintaining a downstream data snapshot](/sync-diff-inspector/upstream-downstream-diff.md#data-check-for-tidb-upstream-and-downstream-clusters) so that the downstream snapshot is consistent with the upstream snapshot. With this feature, TiCDC can better support the scenarios where reads and writes are separate, and help you lower the cost.
 
-* TiCDC supports graceful upgrade [#4757](https://github.com/pingcap/tiflow/issues/4757) @[overvenus](https://github.com/overvenus) @[3AceShowHand](https://github.com/3AceShowHand) **tw:ran-huang**
+* TiCDC supports graceful upgrade [#4757](https://github.com/pingcap/tiflow/issues/4757) @[overvenus](https://github.com/overvenus) @[3AceShowHand](https://github.com/3AceShowHand)
 
     When TiCDC is deployed using [TiUP](/ticdc/deploy-ticdc.md#rolling-upgrade-ticdc-using-tiup) (>=v1.11.0) or [TiDB Operator](https://docs.pingcap.com/tidb-in-kubernetes/v1.3/configure-a-tidb-cluster#configure-graceful-upgrade-for-ticdc-cluster) (>=v1.3.8), you can gracefully upgrade the TiCDC cluster. During the upgrade, data replication latency is kept as low as 30 seconds. This improves stability, empowering TiCDC to better support latency-sensitive applications.
 
@@ -276,7 +276,6 @@ Since v6.3.0, TiCDC no longer supports configuring Pulsar sink. [kop](https://gi
 
     - planner
 
-        - planner: just pop cte's handleHelper map out since it shouldn't be considered [#35758](https://github.com/pingcap/tidb/issues/35758) @[AilinKid](https://github.com/AilinKid)
         - [`PLAN REPLAYER`](/sql-plan-replayer) can be used on multiple SQL statements, which makes troubleshooting more efficient [#37798](https://github.com/pingcap/tidb/issues/37798) @[Yisaer](https://github.com/Yisaer)
 
 + TiKV
@@ -361,7 +360,7 @@ Since v6.3.0, TiCDC no longer supports configuring Pulsar sink. [kop](https://gi
         - Fix the issue of failing to handle `prepared` statement flags in the typical MySQL protocol [#36731](https://github.com/pingcap/tidb/issues/36731) @[dveeden](https://github.com/dveeden)
         - (dup) Fix the issue of incorrect TiDB status that might appear on startup in some extreme cases [#36791](https://github.com/pingcap/tidb/issues/36791) @[xhebox](https://github.com/xhebox)
         - Fix the issue that `information_schema.variables_info` does not comply with security enhanced mode (SEM) [#37586](https://github.com/pingcap/tidb/issues/37586) @[CbcWestwolf](https://github.com/CbcWestwolf)
-
+        - Fix wrong casting in building the plan of union [#31678](https://github.com/pingcap/tidb/issues/31678) @[bb7133](https://github.com/bb7133)
     - execution
 
         - Fix the wrong result that occurs when enabling dynamic mode in partitioned tables for TiFlash [#37254](https://github.com/pingcap/tidb/issues/37254) @[wshwsh12](https://github.com/wshwsh12)
@@ -450,10 +449,6 @@ Since v6.3.0, TiCDC no longer supports configuring Pulsar sink. [kop](https://gi
     + TiDB Lightning
 
         - (dup) Fix the issue that TiDB Lightning does not support columns starting with slash, number, or non-ascii characters in Parquet files [#36980](https://github.com/pingcap/tidb/issues/36980) @[D3Hunter](https://github.com/D3Hunter)
-
-    - TiUP
-
-        - note [#issue]() @[Contributor GitHub ID]()
 
 ## Contributors
 
