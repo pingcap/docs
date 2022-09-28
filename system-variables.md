@@ -913,7 +913,7 @@ MPP is a distributed computing framework provided by the TiFlash engine, which a
 
 > **Warning:**
 >
-> The feature controlled by this variable is not fully functional in the current version. It is **not recommended** that you change the default value.
+> The feature controlled by this variable is not fully functional in the current TiDB version. Do not change the default value.
 
 - Scope: GLOBAL
 - Persists to cluster: Yes
@@ -1227,7 +1227,7 @@ MPP is a distributed computing framework provided by the TiFlash engine, which a
 
 > **Warning:**
 >
-> The feature controlled by this variable is not fully functional in the current version. It is **not recommended** that you change the default value.
+> The feature controlled by this variable is not fully functional in the current TiDB version. Do not change the default value.
 
 - Scope: GLOBAL
 - Persists to cluster: Yes
@@ -1238,7 +1238,7 @@ MPP is a distributed computing framework provided by the TiFlash engine, which a
 
 > **Warning:**
 >
-> The feature controlled by this variable is not fully functional in the current version. It is **not recommended** that you change the default value.
+> The feature controlled by this variable is not fully functional in the current TiDB version. Do not change the default value.
 
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
@@ -1541,7 +1541,7 @@ Query OK, 0 rows affected (0.09 sec)
 
 > **Warning:**
 >
-> The feature controlled by this variable is not fully functional in the current version. It is **not recommended** that you change the default value.
+> The feature controlled by this variable is not fully functional in the current TiDB version. Do not change the default value.
 
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
@@ -1870,13 +1870,13 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 
 > **Warning:**
 >
-> The feature controlled by this variable is not fully functional in the current version. It is **not recommended** that you change the default value.
+> The feature controlled by this variable is not fully functional in the current TiDB version. Do not change the default value.
 
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
 - Default value: `100`
 - Range: `[1, 100000]`
-- This variable controls the maximum number of execution plans that can be cached using General Plan Cache.
+- This variable controls the maximum number of execution plans that can be cached by General Plan Cache.
 
 ### tidb_guarantee_linearizability <span class="version-mark">New in v5.0</span>
 
