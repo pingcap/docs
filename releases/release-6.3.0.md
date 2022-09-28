@@ -264,9 +264,9 @@ Since v6.3.0, TiCDC no longer supports configuring Pulsar sink. [kop](https://gi
 
     - sql-infra
 
-        - TiDB is now case insensitive to the target table name when checking the table existence [#34610](https://github.com/pingcap/tidb/issues/34610) @[tiancaiamao](https://github.com/tiancaiamao)
-        - Improved MySQL compatibility by adding the parsing process on the value of `init_connect` [#35324](https://github.com/pingcap/tidb/issues/35324) @[CbcWestwolf](https://github.com/CbcWestwolf)
-        - Improve log warning generated when new connections arrive [#34964](https://github.com/pingcap/tidb/issues/34964) @[xiongjiwei](https://github.com/xiongjiwei)
+        - TiDB is now case-insensitive to the target table name when checking the table existence [#34610](https://github.com/pingcap/tidb/issues/34610) @[tiancaiamao](https://github.com/tiancaiamao)
+        - Improve MySQL compatibility by adding a parsing check when setting the value of `init_connect` [#35324](https://github.com/pingcap/tidb/issues/35324) @[CbcWestwolf](https://github.com/CbcWestwolf)
+        - Improve the log warning generated for new connections [#34964](https://github.com/pingcap/tidb/issues/34964) @[xiongjiwei](https://github.com/xiongjiwei)
         - Optimize the HTTP API for querying DDL history jobs, and add support for the `start_job_id` parameter [#35838](https://github.com/pingcap/tidb/issues/35838) @[tiancaiamao](https://github.com/tiancaiamao)
 
     - execution
@@ -347,21 +347,21 @@ Since v6.3.0, TiCDC no longer supports configuring Pulsar sink. [kop](https://gi
 
     - sql-infra
 
-        - Fix the issue that privilege check is skipped for `PREAPRE` statements [#35784](https://github.com/pingcap/tidb/issues/35784) @[lcwangchao](https://github.com/lcwangchao)
-        - Fix the issue that the system variable `tidb_enable_noop_variable` cannot be set to `WARN` [#36647](https://github.com/pingcap/tidb/issues/36647) @[lcwangchao](https://github.com/lcwangchao)
-        - Fix the issue that when 'expression index' is defined, the `ORDINAL_POSITION` column of the `INFORMAITON_SCHEMA`.`COLUMNS` table might be incorrect [#31200](https://github.com/pingcap/tidb/issues/31200) @[bb7133](https://github.com/bb7133)
+        - Fix the issue that the privilege check is skipped for `PREAPRE` statements [#35784](https://github.com/pingcap/tidb/issues/35784) @[lcwangchao](https://github.com/lcwangchao)
+        - Fix the issue that the system variable `tidb_enable_noop_variable` can be set to `WARN` [#36647](https://github.com/pingcap/tidb/issues/36647) @[lcwangchao](https://github.com/lcwangchao)
+        - Fix the issue that when an expression index is defined, the `ORDINAL_POSITION` column of the `INFORMAITON_SCHEMA`.`COLUMNS` table might be incorrect [#31200](https://github.com/pingcap/tidb/issues/31200) @[bb7133](https://github.com/bb7133)
         - Fix the issue that TiDB does not report an error when the timestamp is larger than `MAXINT32` [#31585](https://github.com/pingcap/tidb/issues/31585) @[bb7133](https://github.com/bb7133)
         - Fix the issue that TiDB server cannot be started when the enterprise plugin is used [#37319](https://github.com/pingcap/tidb/issues/37319) @[xhebox](https://github.com/xhebox)
         - Fix the incorrect output of `SHOW CREATE PLACEMENT POLICY` [#37526](https://github.com/pingcap/tidb/issues/37526) @[xhebox](https://github.com/xhebox)
-        - Fix unexpected exchange partition with temporary tables [#37201](https://github.com/pingcap/tidb/issues/37201) @[lcwangchao](https://github.com/lcwangchao)
+        - Fix the unexpected `EXCHANGE PARTITION` behaviors with temporary tables [#37201](https://github.com/pingcap/tidb/issues/37201) @[lcwangchao](https://github.com/lcwangchao)
         - Fix the issue that querying `INFORMATION_SCHEMA.TIKV_REGION_STATUS` returns an incorrect result @[zimulala](https://github.com/zimulala)
         - Fix the issue that the `EXPLAIN` query on views does not check privileges [#34326](https://github.com/pingcap/tidb/issues/34326) @[hawkingrei](https://github.com/hawkingrei)
         - Fix the issue that JSON `null` cannot be updated to `NULL` [#37852](https://github.com/pingcap/tidb/issues/37852) @[YangKeao](https://github.com/YangKeao)
         - Fix the issue that `row_count` of DDL jobs is inaccurate [#25968](https://github.com/pingcap/tidb/issues/25968) @[Defined2014](https://github.com/Defined2014)
         - Fix the issue that `FLASHBACK TABLE` does not work properly [#37386](https://github.com/pingcap/tidb/issues/37386) @[tiancaiamao](https://github.com/tiancaiamao)
-        - Fix handling of prepared statement flags in the classic MySQL protocol [#36731](https://github.com/pingcap/tidb/issues/36731) @[dveeden](https://github.com/dveeden)
+        - Fix the issue of failing to handle `prepared` statement flags in the typical MySQL protocol [#36731](https://github.com/pingcap/tidb/issues/36731) @[dveeden](https://github.com/dveeden)
         - (dup) Fix the issue of incorrect TiDB status that might appear on startup in some extreme cases [#36791](https://github.com/pingcap/tidb/issues/36791) @[xhebox](https://github.com/xhebox)
-        - Fix the issue that `information_schema.variables_info` does not respect SEM [#37586](https://github.com/pingcap/tidb/issues/37586) @[CbcWestwolf](https://github.com/CbcWestwolf)
+        - Fix the issue that `information_schema.variables_info` does not comply with security enhanced mode (SEM) [#37586](https://github.com/pingcap/tidb/issues/37586) @[CbcWestwolf](https://github.com/CbcWestwolf)
 
     - execution
 
