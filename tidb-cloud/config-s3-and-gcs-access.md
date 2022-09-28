@@ -101,7 +101,7 @@ To allow TiDB Cloud to access the source data in your Amazon S3 bucket, take the
 
 To allow TiDB Cloud to access the source data in your GCS bucket, you need to configure the GCS access for each TiDB Cloud as a service on the GCP project and GCS bucket pair. Once the configuration is done for one cluster in a project, all database clusters in that project can access the GCS bucket.
 
-1. Get the Google Cloud Service Account ID of the target TiDB cluster.
+1. In the TiDB Cloud console, get the Google Cloud Service Account ID of the target TiDB cluster.
 
     1. In the TiDB Cloud console, choose your target project, and navigate to the **Clusters** page.
 
@@ -117,9 +117,12 @@ To allow TiDB Cloud to access the source data in your GCS bucket, you need to co
 
     1. Sign in to the [GCP Console](https://console.cloud.google.com/).
     2. Go to the [Roles](https://console.cloud.google.com/iam-admin/roles) page, and then click **CREATE ROLE**.
-    4. Enter a name, description, ID, and role launch stage for the role. The role name cannot be changed after the role is created.
-    5. Click **ADD PERMISSIONS**.
-    6. Add the following read-only permissions to the role and click **Add**.
+
+        ![Create a role](/media/tidb-cloud/gcp-create-role.png)
+
+    3. Enter a name, description, ID, and role launch stage for the role. The role name cannot be changed after the role is created.
+    4. Click **ADD PERMISSIONS**.
+    5. Add the following read-only permissions to the role, and then click **Add**.
 
         - storage.buckets.get
         - storage.objects.get
@@ -127,11 +130,13 @@ To allow TiDB Cloud to access the source data in your GCS bucket, you need to co
 
         You can copy a permission name to the **Enter property name or value** field as a filter query, and choose the name in the filter result. To add the three permissions, you can use **OR** between the permission names.
 
-3. Go to the [Bucket](https://console.cloud.google.com/storage/browser) page, select the GCS bucket you want TiDB Cloud to access, and then click **PERMISSIONS**.
+        ![Add permissions](/media/tidb-cloud/gcp-add-permissions.png)
 
-    The permissions panel for the bucket is displayed.
+3. Go to the [Bucket](https://console.cloud.google.com/storage/browser) page, click the name of the GCS bucket you want TiDB Cloud to access.
 
-4. In the panel, click **ADD PRINCIPAL**.
+4. On the **Bucket details** page, click the **PERMISSIONS** tab, and then click **GRANT ACCESS**.
+
+    ![Grant Access to the bucket ](/media/tidb-cloud/gcp-bucket-permissions.png)
 
 5. Fill in the following information to grant principals access to your bucket, and then click **SAVE**.
 
