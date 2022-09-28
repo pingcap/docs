@@ -433,8 +433,8 @@ Since v6.3.0, TiCDC no longer supports configuring Pulsar sink. [kop](https://gi
 
     + TiCDC
 
-        - Handle error correctly with wrong PD address but with a grpc service [#6458](https://github.com/pingcap/tiflow/issues/6458) @[crelax](https://github.com/crelax)
-        - Fix a bug that `cdc cause cli changefeed list` does not contain failed changefeed [#6334](https://github.com/pingcap/tiflow/issues/6334) @[asddongmen](https://github.com/asddongmen)
+        - Fix a bug that TiCDC returns an inaccurate error for a wrong PD address with a grpc service [#6458](https://github.com/pingcap/tiflow/issues/6458) @[crelax](https://github.com/crelax)
+        - Fix a bug that the `cdc cause cli changefeed list` command does not return failed changefeeds [#6334](https://github.com/pingcap/tiflow/issues/6334) @[asddongmen](https://github.com/asddongmen)
         - Fix a bug that may cause cdc unavailable if a changefeed initializing fails  [#6859](https://github.com/pingcap/tiflow/issues/6859) @[asddongmen](https://github.com/asddongmen)
 
     + TiDB Data Migration (DM)
