@@ -128,8 +128,6 @@ To allow TiDB Cloud to access the source data in your GCS bucket, you need to co
         - storage.objects.get
         - storage.objects.list
 
-        You can copy a permission name to the **Enter property name or value** field as a filter query, and choose the name in the filter result. To add the three permissions, you can use **OR** between the permission names.
-
         ![Add permissions](/media/tidb-cloud/gcp-add-permissions.png)
 
 3. Go to the [Bucket](https://console.cloud.google.com/storage/browser) page, click the name of the GCS bucket you want TiDB Cloud to access.
