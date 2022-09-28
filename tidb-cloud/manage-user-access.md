@@ -9,13 +9,13 @@ This document describes how to manage user access of the [TiDB Cloud console](ht
 
 ## Sign in
 
-1. Navigate to the TiDB Cloud login page: <https://tidbcloud.com>.
+1. Go to the TiDB Cloud login page: <https://tidbcloud.com>.
 
 2. On the TiDB Cloud login page, sign in with Google, GitHub, or email.
 
 ## Sign out
 
-To sign out from TiDB Cloud, click your account name and select Logout.
+In the upper-right corner of the TiDB Cloud console, click your account name and select **Logout**.
 
 ## Manage user passwords
 
