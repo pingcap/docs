@@ -145,7 +145,7 @@ To allow TiDB Cloud to access the source data in your GCS bucket, you need to co
 
     > **Note:**
     >
-    > To remove the access to TiDB Cloud, you can simply remove the access that you granted.
+    > To remove the access to TiDB Cloud, you can simply remove the access that you have granted.
 
 6. On the **Bucket details** page, click the **CONFIGURATION** tab, and then copy your GCS bucket URL from the **gsutil URI** field.
 
