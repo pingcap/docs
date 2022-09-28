@@ -149,7 +149,7 @@ To allow TiDB Cloud to access the source data in your GCS bucket, you need to co
 
 6. You will need to fill in your bucket URL when you import data from GCS to TiDB Cloud.
 
-    To get the bucket URL, click the **CONFIGURATION** tab on the **Bucket details** page, and locate the URL in the **gsutil** URI field.
+    To get the bucket URL, click the **CONFIGURATION** tab on the **Bucket details** page, and locate the URL in the **gsutil URI** field.
 
     ![Get bucket URL](/media/tidb-cloud/gcp-bucket-url.png)
 
