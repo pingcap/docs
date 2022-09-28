@@ -5,12 +5,12 @@ summary: Learn about best practices when you use TiDB Data Migration (DM) to mig
 
 # Data Migration (DM) Best Practices
 
-TiDB Data Migration (DM) is an data migration tool developed by PingCAP. It supports the full data migration and the incremental data replication from MySQL-compatible databases such as MySQL, Percona MySQL, MariaDB, AWS MySQL RDS, AWS Aurora into TiDB.
+[TiDB Data Migration (DM)](https://github.com/pingcap/tiflow/tree/master/dm) is an data migration tool developed by PingCAP. It supports the full data migration and the incremental data replication from MySQL-compatible databases such as MySQL, Percona MySQL, MariaDB, AWS MySQL RDS, AWS Aurora into TiDB.
 
 You can use DM in the following scenarios:
 
 - Perform full and incremental data migration from a single MySQL-compatible database instance to TiDB
-- Migrate and merge MySQL shards of small datasets to TiDB
+- Migrate and merge MySQL shards of small datasets (less than 1 TB) to TiDB
 - In the Data HUB scenario, such as the middle platform of business data, and real-time aggregation of business data, use DM as the middleware for data migration
 
 This document introduces how to use DM in an elegant and efficient way, and how to avoid the common mistakes when using DM.
@@ -61,7 +61,7 @@ When you create a table, you can state that the primary key is either a clustere
 
 - Clustered indexes + `AUTO_RANDOM`
 
-    This solution can retain the benefits of using clustered indexes and avoid the write hotspot problem. It requires less effort for customization. You can modify the schema attribute when you switch to use TiDB as the write database. In the subsequent queries, you can sort using the ID column. You can use the [`AUTO_RANDOM`](/auto-random.md) ID column to left shift 5 bits to ensure the order of the query data. For example:
+    This solution can retain the benefits of using clustered indexes and avoid the write hotspot problem. It requires less effort for customization. You can modify the schema attribute when you switch to use TiDB as the write database. In the subsequent queries, you can sort using the ID column. If you have to use the ID column to sort data, you can use the [`AUTO_RANDOM`](/auto-random.md) ID column and left shift 5 bits to ensure the order of the query data. For example:
 
     ```sql
     CREATE TABLE t (a bigint PRIMARY KEY AUTO_RANDOM, b varchar(255));
@@ -72,10 +72,10 @@ The following table summarizes the pros and cons of each solution.
 
 | Scenario | Recommended solution | Pros | Cons |
 | :--- | :--- | :--- | :--- |
-| TIDB will act as the primary and write-intensive database. The business logic is strongly dependent on the continuity of the primary key IDs. | Create the table with non-clustered indexes and set `SHARD_ROW_ID_BIT`. Use `SEQUENCE` as the primary key column.  | It can avoid data writing hotspots and ensure the continuity and monotonic increment of business data. | The throughput capacity of data write is reduced (to ensure data write continuity). The performance of primary key queries is reduced. |
-| TIDB will act as the primary and write-intensive database. The business logic is strongly dependent on the increment of the primary key IDs.  | Create the table with non-clustered indexes and set `SHARD_ROW_ID_BIT`. Use the application ID generator to define the primary key IDs. | It can avoid data writing hotspots, guarantees the performance of data write, guarantees the increment of business data, but cannot guarantees continuity. | Need code customization. External ID generators strongly depend on the clock accuracy and might introduce failure risks |
-| **Recommended solution for data migration**<br/>TIDB will act as the primary and write-intensive database. The business logic does not depend on the continuity of the primary key IDs. | Create the table with clustered indexes and set `AUTO_RANDOM` for the primary key column. | It can avoid data writing hotspots. Limited write throughput ability. Excellent query performance of the primary keys. You can smoothly switch `AUTO_INCREMENT` to `AUTO_RANDOM`. | The primary key ID is random. It is recommended to sort the business data by using inserting the time column. If you have to use the primary key ID to sort data, you can left shift 5 bits to query, which can guarantee the increment of the data. |
-| **Recommended solution for middle platforms**<br/>TIDB will act as the read-only database. | Create the table with non-clustered indexes and set `SHARD_ROW_ID_BIT`. Keep the primary key column consistent with the data source. | It can avoid data writing hotspots. Low customization cost. | The query performance of the primary keys is impacted. |
+| TiDB will act as the primary and write-intensive database. The business logic is strongly dependent on the continuity of the primary key IDs. | Create the table with non-clustered indexes and set `SHARD_ROW_ID_BIT`. Use `SEQUENCE` as the primary key column.  | It can avoid data writing hotspots and ensure the continuity and monotonic increment of business data. | The throughput capacity of data write is reduced (to ensure data write continuity). The performance of primary key queries is reduced. |
+| TiDB will act as the primary and write-intensive database. The business logic is strongly dependent on the increment of the primary key IDs.  | Create the table with non-clustered indexes and set `SHARD_ROW_ID_BIT`. Use the application ID generator to define the primary key IDs. | It can avoid data writing hotspots, guarantees the performance of data write, guarantees the increment of business data, but cannot guarantees continuity. | Need code customization. External ID generators strongly depend on the clock accuracy and might introduce failure risks |
+| TiDB will act as the primary and write-intensive database. The business logic does not depend on the continuity of the primary key IDs. | Create the table with clustered indexes and set `AUTO_RANDOM` for the primary key column. | It can avoid data writing hotspots. Limited write throughput ability. Excellent query performance of the primary keys. You can smoothly switch `AUTO_INCREMENT` to `AUTO_RANDOM`. | The primary key ID is random. It is recommended to sort the business data by using inserting the time column. If you have to use the primary key ID to sort data, you can left shift 5 bits to query, which can guarantee the increment of the data. |
+| TiDB will act as the read-only database. | Create the table with non-clustered indexes and set `SHARD_ROW_ID_BIT`. Keep the primary key column consistent with the data source. | It can avoid data writing hotspots. Low customization cost. | The query performance of the primary keys is impacted. |
 
 ### Key points for MySQL shards
 
@@ -83,7 +83,7 @@ The following table summarizes the pros and cons of each solution.
 
 It is recommended that you use DM to [migrate and merge MySQL shards of small datasets to TiDB](/migrate-small-mysql-shards-to-tidb.md). The benefits are not described here.
 
-This section only introduces the scenario of data archiving. Data is constantly being written. As time goes by, large amounts of data gradually change from hot data to warm or even cold data. Fortunately, in TiDB, you can use [placement rules](/configure-placement-rules.md) to set different placement rules for data. The minimum granularity is [partitioned tables](/partitioned-table.md).
+Besides data merging, another typical scenario is data archiving. Data is constantly being written. As time goes by, large amounts of data gradually change from hot data to warm or even cold data. Fortunately, in TiDB, you can use [placement rules](/configure-placement-rules.md) to set different placement rules for data. The minimum granularity is [partitioned tables](/partitioned-table.md).
 
 Therefore, it is recommended that for write-intensive scenarios, you need to evaluate from the beginning whether you need to archive data and store hot and cold data on different media separately. If you need to archive data, you need to set the partition rules before migration (TiDB does not support Table Rebuild operations yet). This can save you from the need to create tables and import data in future.
 
@@ -91,9 +91,9 @@ Therefore, it is recommended that for write-intensive scenarios, you need to eva
 
 DM uses the pessimistic mode by default. In scenarios of migrating and merging MySQL shards, changes in upstream shard schemas can block DML writing to downstream databases. You need to wait for all the schemas to change and have the same structure, and then continue migration from the break point.
 
-- If the upstream schema changes take a long time, it can cause the upstream Binlog to be cleaned up. You can enable the Relay log to avoid this problem.
+- If the upstream schema changes take a long time, it might cause the upstream Binlog to be cleaned up. You can enable the Relay log to avoid this problem.
 
-- If you do not want to block data write due to upstream schema changes, consider using the optimistic mode. In this case, DM will not block the data migration even when it spots changes in the upstream shard schemas, but will continue to migrate the data. However, if incompatible formats are spotted in upstream and downstream, the migration task will stop. You need to resolve this issue manually.
+- If you do not want to block data write due to upstream schema changes, consider using the optimistic mode. In this case, DM will not block the data migration even when it spots changes in the upstream shard schemas, but will continue to migrate the data. However, if DM spots incompatible formats in upstream and downstream, the migration task will stop. You need to resolve this issue manually.
 
 The following table summarizes the pros and cons of optimistic mode and pessimistic mode.
 
@@ -110,7 +110,7 @@ TiDB supports most MySQL data types. However, some special types are not support
 
 #### Character sets and collations
 
-If you want TiDB to support utf8_general_ci, utf8mb4_general_ci, utf8_unicode_ci, utf8mb4_unicode_ci, gbk_chinese_ci and gbk_bin, you need explicitly state it when creating the cluster by setting the value of `new_collations_enabled_on_first_bootstrap` to `true`. For more information, see [New framework for collations](/character-set-and-collation.md#new-framework-for-collations)
+Since TiDB v6.0.0, the new framework for collations are used by default. If you want TiDB to support utf8_general_ci, utf8mb4_general_ci, utf8_unicode_ci, utf8mb4_unicode_ci, gbk_chinese_ci and gbk_bin, you need explicitly state it when creating the cluster by setting the value of `new_collations_enabled_on_first_bootstrap` to `true`. For more information, see [New framework for collations](/character-set-and-collation.md#new-framework-for-collations)
 
 The default character set in TiDB is utf8mb4. It is recommended that you use utf8mb4 for the upstream and downstream databases and applications. If the upstream database has explicitly specified a character set or collation, you need to check whether TiDB supports it. Since TiDB v6.0.0, GBK is supported. For more information, see the following documents:
 
