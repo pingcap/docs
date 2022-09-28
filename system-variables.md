@@ -435,7 +435,7 @@ This variable is an alias for `last_insert_id`.
 - Persists to cluster: Yes
 - Type: Boolean
 - Default value: `OFF`
-- When enabled, this variable enforces that tables must have a primary key. Attempting to create or alter a table to not have a primary key will return an error.
+- This variable controls whether to enforce the requirement that a table has a primary key. After this variable is enabled, attempting to create or alter a table without a primary key will produce an error. 
 - This feature is based on the similarly named [`sql_require_primary_key`](https://dev.mysql.com/doc/refman/8.0/en/server-system-variables.html#sysvar_sql_require_primary_key) in MySQL 8.0.
 - It is strongly recommended to enable this variable when using TiCDC. This is because replicating changes to a MySQL sink requires that tables have a primary key.
 
