@@ -143,8 +143,16 @@ To allow TiDB Cloud to access the source data in your GCS bucket, you need to co
     - In the **New Principals** field, paste the Google Cloud Service Account ID of the target TiDB cluster.
     - In the **Select a role** drop-down list, choose the IAM role you just created.
 
-Your TiDB Cloud cluster can now access the GCS bucket.
+    > **Note:**
+    >
+    > To remove the access to TiDB Cloud, you can simply remove the access that you granted.
 
-> **Note:**
->
-> To remove the access to TiDB Cloud, you can simply delete the principal that you added.
+6. You will need to fill in your bucket URL when you import data from GCS to TiDB Cloud.
+
+    To get the bucket URL, click the **CONFIGURATION** tab on the **Bucket details** page, and locate the URL in the **gsutil** URI field.
+
+    ![Get bucket URL](/media/tidb-cloud/gcp-bucket-url.png)
+
+    To allow TiDB Cloud to access all files in the bucket, you must add `/` to the end of the URL for the **Bucket URL** field in the TiDB Cloud console. For example, if your bucket URL is `gs://tidb-cloud-source-data`, you need to fill in `gs://tidb-cloud-source-data/`.
+
+Your TiDB Cloud cluster can now access the GCS bucket.
