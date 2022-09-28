@@ -99,7 +99,7 @@ To allow TiDB Cloud to access the source data in your Amazon S3 bucket, take the
 
 ## Configure GCS access
 
-To allow TiDB Cloud to access the source data in your GCS bucket, you need to configure the GCS access for each TiDB Cloud as a service on the GCP project and GCS bucket pair. Once the configuration is done for one cluster in a project, all database clusters in that project can access the GCS bucket.
+To allow TiDB Cloud to access the source data in your GCS bucket, you need to configure the GCS access for each TiDB Cloud as a service on the GCP project and GCS bucket pair. Once the configuration is done for one TiDB cluster in a project, all TiDB clusters in that project can access the GCS bucket.
 
 1. In the TiDB Cloud console, get the Google Cloud Service Account ID of the target TiDB cluster.
 
