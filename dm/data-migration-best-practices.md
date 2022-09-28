@@ -25,17 +25,26 @@ This document introduces how to use DM in an elegant and efficient way, and how 
 |  Max Binlog throughput       |  20 MB/s/worker |
 |  Table number limit per task | Unlimited       |
 
-- DM 支持同时管理 1000 个同步节点（Work Node），最大同步任务数量为 600 个。为了保证同步节点的高可用，应预留一部分 Work Node 节点作为备用节点，保证数据同步的高可用。预留已开启同步任务 Work Node 数量的 20% ~ 50%。
-- 单机部署 Work Node 数量。在服务器配置较好情况下，要保证每个 Work Node 至少有 2 核 CPU 加 4G 内存的可用工作资源，并且应为主机预留 10% ~ 20% 的系统资源。
-- A single Work Node 理论最大同步 QPS 是 30K QPS/worker（不同 Schema 和 workload 会有所差异），处理上游 Binlog 的能力最高为 20 MB/s/worker。
-- 如果将 DM 作为需要长期使用的数据同步中间件，需要注意 DM 组件的部署架构。请参见 [Master 与 Woker 部署实践](#master-与-woker-部署实践)。
-
 - DM supports managing 1000 work nodes simultaneously, and the maximum number of tasks is 600. To ensure the high availability of work nodes, you should reserve some work nodes as standby nodes. Reserve 20% to 50% of the number of the work nodes that have run migration task.
-- A single work node has a theoretical maximum replication QPS of 30K QPS/worker. It varies for different schemas and workloads. The ability to handle upstream binlog is up to 20 MB/s/worker.
-- If you use DM as a data replication middleware that will be used for a long time, you need to carefully design the deployment architecture of DM components. For more information, see [Deploy DM-Master and DM-Woker](#deploy-dm-master-and-dm-woker)
+- A single work node can theoretically support replication QPS of up to 30K QPS/worker. It varies for different schemas and workloads. The ability to handle upstream binlog is up to 20 MB/s/worker.
+- If you use DM as a data replication middleware that will be used for a long time, you need to carefully design the deployment architecture of DM components. For more information, see [Deploy DM-master and DM-woker](#deploy-dm-master-and-dm-woker)
 
+## Before data migration
 
+Before data migration, the design of the overall solution is critical. Especially the design of the scheme before migration is the most important part of the whole scheme. The following sections describe best practices and scenarios from the business side and the implementation side.
+
+### Key points in the business side
+
+To distribute workloads evenly on multiple nodes, the schema design for the distributed database is very different from traditonal databases. It is disgned for both low migration cost and logic correctness after migration. The following sections describe best practices before data migration.
+
+#### Business impact of AUTO_INCREMENT in Schema design
+
+TiDB 的 `AUTO_INCREMENT` 与 MySQL 的 `AUTO_INCREMENT` 整体上看是相互兼容的。但因为 TiDB 作为分布式数据库，一般会有多个计算节点（client 端入口），应用数据写入时会将负载均分开，这就导致在有 `AUTO_INCREMENT` 列的表上，可能出现不连续的自增 ID。详细原理参考 [`AUTO_INCREMENT`](/auto-increment.md#实现原理)。
+
+如果业务对自增 ID 有强依赖，可以考虑使用 [SEQUENCE 函数](/sql-statements/sql-statement-create-sequence.md#sequence-函数)。
+
+In general, `AUTO_INCREMENT` in TiDB is compatible 
 
 ### Best practices for deployment
 
-#### Deploy DM-Master and DM-Woker
+#### Deploy DM-master and DM-woker
