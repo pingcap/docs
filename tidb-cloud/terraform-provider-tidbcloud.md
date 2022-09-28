@@ -1,31 +1,22 @@
 ---
 title: TiDB Cloud Terraform
-summary: TiDB Cloud Terraform
+summary: TiDB Cloud Terraform allows one to use Terraform with TiDB Cloud
 ---
-
-# Terraform TiDB Cloud Provider
-
-terraform-provider-tidbcloud allows one to use Terraform with TiDB Cloud. Learn more about [TiDB Cloud](https://en.pingcap.com/tidb-cloud/)
-
-For general information about Terraform, visit the [official website](https://www.terraform.io) and the [GitHub project page](https://github.com/hashicorp/terraform).
-
-## TOC
 
 - [Requirements](#requirements)
 - [Support](#support)
-- [Using the provider](#using-the-provider)
-    * [Set up](#set-up)
-    * [Create an API key](#create-an-api-key)
-    * [Get TiDB Cloud provider](#get-tidb-cloud-provider)
-    * [Config the provider](#config-the-provider)
-    * [Get projectId with project Data Source](#get-projectid-with-project-data-source)
-    * [Get cluster spec info with cluster-spec Data Source](#get-cluster-spec-info-with-cluster-spec-data-source)
-    * [Create a dedicated cluster with cluster resource](#create-a-dedicated-cluster-with-cluster-resource)
-    * [Change the dedicated cluster](#change-the-dedicated-cluster)
-    * [Create a backup with backup resource](#create-a-backup-with-backup-resource)
-    * [Create a restore task with restore resource](#create-a-restore-task-with-restore-resource)
-    * [Importing the restore cluster](#importing-the-restore-cluster)
-    * [Destroy the dedicated cluster](#destroy-the-dedicated-cluster)
+- [Set up](#set-up)
+- [Create an API key](#create-an-api-key)
+- [Get TiDB Cloud provider](#get-tidb-cloud-provider)
+- [Config the provider](#config-the-provider)
+- [Get projectId with project Data Source](#get-projectid-with-project-data-source)
+- [Get cluster spec info with cluster-spec Data Source](#get-cluster-spec-info-with-cluster-spec-data-source)
+- [Create a dedicated cluster with cluster resource](#create-a-dedicated-cluster-with-cluster-resource)
+- [Change the dedicated cluster](#change-the-dedicated-cluster)
+- [Create a backup with backup resource](#create-a-backup-with-backup-resource)
+- [Create a restore task with restore resource](#create-a-restore-task-with-restore-resource)
+- [Import the restore cluster](#import-the-restore-cluster)
+- [Destroy the dedicated cluster](#destroy-the-dedicated-cluster)
 
 
 ## Requirements
@@ -36,43 +27,39 @@ For general information about Terraform, visit the [official website](https://ww
 ## Support
 
 Resources
-- [cluster](./docs/resources/cluster.md)
-- [backup](./docs/resources/backup.md) (not support update)
-- [restore](./docs/resources/restore.md) (not support update and delete)
+
+- cluster
+- backup
+- restore
 
 DataSource
-- [project](./docs/data-sources/project.md)
-- [cluster spec](./docs/data-sources/cluster_spec.md)
-- [restore](./docs/data-sources/restore.md)
-- [backcup](./docs/data-sources/backup.md)
 
+- project
+- cluster spec
+- restore
+- backup
 
-## Using the provider
-
-Documentation about the provider usage and the corresponding specific configuration options can be found on the [official's website](https://www.terraform.io/language/providers).
-
-Here we just give an example to show how to use the TiDB Cloud provider.
-
-In this example, you will create and manage a dedicated cluster, create a backup for it and restore from the backup.
-
-### Set up
+## Set up
 
 TiDB Cloud provider has released to terraform registry. All you need to do is install terraform (>=1.0).
 
 For Mac user, you can install it with Homebrew.
 
 First, install the HashiCorp tap, a repository of all our Homebrew packages.
+
 ```shell
 brew tap hashicorp/tap
 ```
+
 Now, install Terraform with hashicorp/tap/terraform.
+
 ```shell
 brew install hashicorp/tap/terraform
 ```
 
-See [official doc](https://learn.hashicorp.com/tutorials/terraform/install-cli?in=terraform/aws-get-started) for other installation methods.
+See [terraform doc](https://learn.hashicorp.com/tutorials/terraform/install-cli?in=terraform/aws-get-started) for other installation methods.
 
-### Create an API key
+## Create an API key
 
 The TiDB Cloud API uses HTTP Digest Authentication. It protects your private key from being sent over the network.
 
@@ -80,7 +67,7 @@ However, terraform-provider-tidbcloud does not support managing API key now. So 
 
 Turn to [TiDB Cloud API doc](https://docs.pingcap.com/tidbcloud/api/v1beta#section/Authentication/API-Key-Management) for help if you meet any problems.
 
-### Get TiDB Cloud provider
+## Get TiDB Cloud provider
 
 Create a main.tf file:
 
@@ -95,11 +82,13 @@ terraform {
   required_version = ">= 1.0.0"
 }
 ```
+
 - The `source` attribute defines the provider which will be downloaded from [Terraform Registry](https://registry.terraform.io/) by default
 - The `version` attribute is optional which defines the version of the provider, it will use the latest version by default
 - The `required_version` is optional which defines the version of the terraform, it will use the latest version by default
 
-To get the TiDB Cloud provider, execute `terraform init`. It will download the provider from terraform registry
+To get the TiDB Cloud provider, execute `terraform init`. It will download the provider from terraform registry.
+
 ```
 $ terraform init
 
@@ -120,7 +109,7 @@ rerun this command to reinitialize your working directory. If you forget, other
 commands will detect it and remind you to do so if necessary.
 ```
 
-### Config the provider
+## Config the provider
 
 You need to config the provider like:
 
@@ -150,13 +139,14 @@ export TIDBCLOUD_PASSWORD = ${private_key}
 
 Now, you can use the tidbcloud provider!
 
-### Get projectId with project Data Source
+## Get projectId with project Data Source
 
 Let us get all the projects by project data source first:
+
 - Use `data` block to define the data source of tidbcloud, it consists of the data source type and the data source name. In this example, data source type is `tidbcloud_project` and the name is `example_project`. The prefix of the type maps to the name of the provider.
 - Use `output` block to get the information, and expose information for other Terraform configurations to use. It is similar to return values in programming languages. See [official doc](https://www.terraform.io/language/values/outputs) for more detail
 
-Besides, you can find all the supported configs for the data source and resource [here](./docs)
+Besides, you can find all the supported configs for the data source and resource [here](https://github.com/tidbcloud/terraform-provider-tidbcloud/tree/main/docs).
 
 ```
 terraform {
@@ -239,7 +229,7 @@ projects = tolist([
 
 Now, you get all the available projects, copy one of the id you need. Here we use the default project's ID.
 
-### Get cluster spec info with cluster-spec Data Source
+## Get cluster spec info with cluster-spec Data Source
 
 Before creating a TiDB cluster, you may need to get the available config values (providers, regions, etc.) by cluster-spec Data Source:
 
@@ -379,15 +369,15 @@ Execute the `terraform apply --auto-approve`, we will get all the specifications
 - `node_size` is the size of the node
 - `storage_size_gib_range` shows the min and max storage you can set to the node
 
-
-### Create a dedicated cluster with cluster resource
+## Create a dedicated cluster with cluster resource
 
 > Make sure you have set a Project CIDR on TiDB Cloud console first.
 
 Now, you can create a dedicated cluster with the projectId and the spec info:
+
 - Use `resource` block to define the resource of tidbcloud, it consists of the resource type and the resource name. In this example, resource type is `tidbcloud_cluster` and the name is `example_cluster`
 
-Once again, you can find all the supported configs for the data source and resource [here](./docs)
+Once again, you can find all the supported configs for the data source and resource [here](https://github.com/tidbcloud/terraform-provider-tidbcloud/tree/main/docs)
 
 Here I give an example for tidbcloud_cluster:
 
@@ -470,6 +460,7 @@ Do you want to perform these actions?
 ```
 
 Terraform will generate an execution plan for you:
+
 - You can check the diff between the configuration and the state
 - You can also see the results of this `apply`: it will add a new resource, and no resource will be changed or destroyed
 - The `known after apply` shows that you will get the value after `apply`
@@ -566,12 +557,13 @@ resource "tidbcloud_cluster" "example_cluster" {
 }
 ```
 
-Congratulations! Your cluster is available now.
+Congratulations. Your cluster is available now.
 
 
-### Change the dedicated cluster
+## Change the dedicated cluster
 
 We can also use terraform to manage the resource. As for cluster resource, we can:
+
 - Increase TiFlash component for the dedicated cluster
 - Scale the TiDB cluster
 - Pause or resume the cluster
@@ -774,6 +766,7 @@ Wait for the status from `MODIFYING` to `AVAILABLE`.
 **Pause or resume the cluster**
 
 The cluster can also be paused when the status is `AVAILABLE` or be resumed when the status is `PAUSED`.
+
 - set `paused = true ` to pause the cluster
 - set `paused = false ` to resume the cluster
 
@@ -917,7 +910,7 @@ resource "tidbcloud_cluster" "example_cluster" {
 
 Wait for a moment, the status will be changed to `AVAILABLE` again.
 
-### Create a backup with backup resource
+## Create a backup with backup resource
 
 You have created and managed a dedicated cluster with terraform now.
 
@@ -1032,10 +1025,10 @@ resource "tidbcloud_backup" "example_backup" {
 
 ```
 
-Congratulations! You have create a backup for your cluster. Pay attention that the backup can not be updated.
+Congratulations. You have create a backup for your cluster. Pay attention that the backup can not be updated.
 
 
-### Create a restore task with restore resource
+## Create a restore task with restore resource
 
 You have created a dedicated cluster and have a backup of the cluster.
 
@@ -1185,7 +1178,7 @@ It is everything ok? No, the bad news is the restored cluster is not managed by 
 
 Don't worry, we can solve it in the next section.
 
-### Importing the restore cluster
+## Import the restore cluster
 
 We can manage a cluster with terraform by import even if it is not created by terraform.
 
@@ -1197,6 +1190,7 @@ resource "tidbcloud_cluster" "restore_cluster1" {}
 ```
 
 Then import the cluster by `terraform import tidbcloud_cluster.restore_cluster1 projectId,clusterId`, you can get the projectId and clusterId by restore resource:
+
 ```
 $ terraform import tidbcloud_cluster.restore_cluster1 1372813089189561287,1379661944630264072
 
@@ -1247,6 +1241,7 @@ resource "tidbcloud_cluster" "restore_cluster1" {
 ```
 
 In order to manage it, you can copy it to your config file. Remember to delete the status and id, for they are computed by terraform and can not be set in the config:
+
 ```
 resource "tidbcloud_cluster" "restore_cluster1" {
       cloud_provider = "AWS"
@@ -1277,6 +1272,7 @@ resource "tidbcloud_cluster" "restore_cluster1" {
 ```
 
 You can use `terraform fmt` to format your config file:
+
 ```
 $ terraform fmt 
 
@@ -1302,7 +1298,7 @@ Apply complete! Resources: 0 added, 0 changed, 0 destroyed.
 
 Now you can manage the cluster created by the restore task.
 
-### Destroy the dedicated cluster
+## Destroy the dedicated cluster
 
 To destroy the resource, you can simply use `terraform destroy` and type `yes`. Don't worry about the order of deletion, terraform will generate a DAG based on the dependencies automatically.
 
@@ -1337,6 +1333,7 @@ Destroy complete! Resources: 4 destroyed.
 Note that a warning is appeared for restore can't be deleted.
 
 If you execute `terraform show`, you will find nothing for all the states is cleared:
+
 ```
 $ terraform show
 
