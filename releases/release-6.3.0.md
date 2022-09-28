@@ -414,7 +414,7 @@ Since v6.3.0, TiCDC no longer supports configuring Pulsar sink. [kop](https://gi
 
     - Compute
 
-        - Fix the bug that the WindowFunctionLeadLagBase may cause TifFlash to crash when canceled [#5814](https://github.com/pingcap/tiflash/issues/5814) @[SeaRise](https://github.com/SeaRise)
+        - Fix the bug that the window function may cause TifFlash to crash when the query is canceled [#5814](https://github.com/pingcap/tiflash/issues/5814) @[SeaRise](https://github.com/SeaRise)
         - Fix the bug that wrong data input for `date(CAST(value AS DATETIME))` causing high TiFlash sys CPU [#5097](https://github.com/pingcap/tiflash/issues/5097) @[xzhangxian1008](https://github.com/xzhangxian1008)
         - Fix that the result of expression casting real or decimal as time is inconsistent with MySQL [#3779](https://github.com/pingcap/tiflash/issues/3779) @[mengxin9014](https://github.com/mengxin9014)
 
