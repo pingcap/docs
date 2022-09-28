@@ -1,6 +1,6 @@
 ---
-title: TiDB Cloud Terraform
-summary: TiDB Cloud Terraform allows one to use Terraform with TiDB Cloud
+title: Terraform
+summary: Create, manage, and update your TiDB Cloud resources through Terraform
 ---
 
 - [Requirements](#requirements)
@@ -17,7 +17,6 @@ summary: TiDB Cloud Terraform allows one to use Terraform with TiDB Cloud
 - [Create a restore task with restore resource](#create-a-restore-task-with-restore-resource)
 - [Import the restore cluster](#import-the-restore-cluster)
 - [Destroy the dedicated cluster](#destroy-the-dedicated-cluster)
-
 
 ## Requirements
 
@@ -137,7 +136,7 @@ export TIDBCLOUD_USERNAME = ${public_key}
 export TIDBCLOUD_PASSWORD = ${private_key}
 ```
 
-Now, you can use the tidbcloud provider!
+Now, you can use the tidbcloud provider.
 
 ## Get projectId with project Data Source
 
@@ -231,7 +230,7 @@ Now, you get all the available projects, copy one of the id you need. Here we us
 
 ## Get cluster spec info with cluster-spec Data Source
 
-Before creating a TiDB cluster, you may need to get the available config values (providers, regions, etc.) by cluster-spec Data Source:
+Before creating a TiDB cluster, you may need to get the available config values (providers, regions and so on.) by cluster-spec Data Source:
 
 ```
 data "tidbcloud_cluster_spec" "example_cluster_spec" {
@@ -559,7 +558,6 @@ resource "tidbcloud_cluster" "example_cluster" {
 
 Congratulations. Your cluster is available now.
 
-
 ## Change the dedicated cluster
 
 We can also use terraform to manage the resource. As for cluster resource, we can:
@@ -767,8 +765,8 @@ Wait for the status from `MODIFYING` to `AVAILABLE`.
 
 The cluster can also be paused when the status is `AVAILABLE` or be resumed when the status is `PAUSED`.
 
-- set `paused = true ` to pause the cluster
-- set `paused = false ` to resume the cluster
+- set `paused = true` to pause the cluster
+- set `paused = false` to resume the cluster
 
 ```
 config = {
@@ -1027,7 +1025,6 @@ resource "tidbcloud_backup" "example_backup" {
 
 Congratulations. You have create a backup for your cluster. Pay attention that the backup can not be updated.
 
-
 ## Create a restore task with restore resource
 
 You have created a dedicated cluster and have a backup of the cluster.
@@ -1185,6 +1182,7 @@ We can manage a cluster with terraform by import even if it is not created by te
 Let us import the cluster which is created by the restore task in the last section.
 
 First add a cluster resource like:
+
 ```
 resource "tidbcloud_cluster" "restore_cluster1" {}
 ```
@@ -1206,6 +1204,7 @@ your Terraform state and will henceforth be managed by Terraform.
 ```
 
 Use `terraform state show tidbcloud_cluster.restore_cluster1` to get the state of the cluster:
+
 ```
 $ terraform state show tidbcloud_cluster.restore_cluster1
 
