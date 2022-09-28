@@ -302,9 +302,9 @@ Since v6.3.0, TiCDC no longer supports configuring Pulsar sink. [kop](https://gi
         - Support to push down the `castTimeAsDuration` function to TiFlash [#5306](https://github.com/pingcap/tiflash/issues/5306) @[AntiTopQuark](https://github.com/AntiTopQuark)
         - Support to push down the `HexIntArg/HexStrArg` function to TiFlash [#5107](https://github.com/pingcap/tiflash/issues/5107) @[YangKeao](https://github.com/YangKeao)
         - Refactor TiFlash's interpreter, and support the new interpreter Planner [#4739](https://github.com/pingcap/tiflash/issues/4739) @[SeaRise](https://github.com/SeaRise)
-        - Suppress the "cannot set inq" logs [#4940](https://github.com/pingcap/tiflash/issues/4940)
-        - Improve the accuracy of memory tracker in TiFlash [#5609](https://github.com/pingcap/tiflash/issues/5609)
-        - Improve the performance of string columns with the `UTF8_BIN/ASCII_BIN/LATIN1_BIN/UTF8MB4_BIN` collations [#5294](https://github.com/pingcap/tiflash/issues/5294)
+        - Suppress the "cannot set inq" logs [#4940](https://github.com/pingcap/tiflash/issues/4940) @[LittleFall](https://github.com/LittleFall) 
+        - Improve the accuracy of memory tracker in TiFlash [#5609](https://github.com/pingcap/tiflash/issues/5609) @[bestwoody](https://github.com/bestwoody)
+        - Improve the performance of string columns with the `UTF8_BIN/ASCII_BIN/LATIN1_BIN/UTF8MB4_BIN` collations [#5294](https://github.com/pingcap/tiflash/issues/5294) @[solotzg](https://github.com/solotzg)
 
     - Storage
 
