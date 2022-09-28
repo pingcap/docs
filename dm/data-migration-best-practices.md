@@ -11,7 +11,7 @@ You can use DM in the following scenarios:
 
 - Perform full and incremental data migration from a single MySQL-compatible database instance to TiDB
 - Migrate and merge MySQL shards of small datasets to TiDB
-- In the DataHUB scenario, such as the middle platform of business data, and real-time aggregation of business data, use DM as the middleware for data migration
+- In the Data HUB scenario, such as the middle platform of business data, and real-time aggregation of business data, use DM as the middleware for data migration
 
 This document introduces how to use DM in an elegant and efficient way, and how to avoid the common mistakes when using DM.
 
@@ -27,7 +27,7 @@ This document introduces how to use DM in an elegant and efficient way, and how 
 
 - DM supports managing 1000 work nodes simultaneously, and the maximum number of tasks is 600. To ensure the high availability of work nodes, you should reserve some work nodes as standby nodes. Reserve 20% to 50% of the number of the work nodes that have run migration task.
 - A single work node can theoretically support replication QPS of up to 30K QPS/worker. It varies for different schemas and workloads. The ability to handle upstream binlog is up to 20 MB/s/worker.
-- If you use DM as a data replication middleware that will be used for a long time, you need to carefully design the deployment architecture of DM components. For more information, see [Deploy DM-master and DM-woker](#deploy-dm-master-and-dm-woker)
+- If you use DM as a data replication middleware that will be used for a long time, you need to carefully design the deployment architecture of DM components. For more information, see [Deploy DM-master and DM-worker](#deploy-dm-master-and-dm-worker)
 
 ## Before data migration
 
@@ -35,7 +35,7 @@ Before data migration, the design of the overall solution is critical. Especiall
 
 ### Best practices for the business side
 
-To distribute workloads evenly on multiple nodes, the schema design for the distributed database is very different from traditonal databases. It is disgned for both low migration cost and logic correctness after migration. The following sections describe best practices before data migration.
+To distribute workloads evenly on multiple nodes, the schema design for the distributed database is very different from traditional databases. It is designed for both low migration cost and logic correctness after migration. The following sections describe best practices before data migration.
 
 #### Business impact of AUTO_INCREMENT in Schema design
 
@@ -61,7 +61,7 @@ When you create a table, you can state that the primary key is either a clustere
 
 - Clustered indexes + `AUTO_RANDOM`
 
-    This solution can retain the benefits of using clustered indexes and avoid the write hotspot problem. It requires less effort for customization. You can modify the schema attribute when you switch to use TiDB as the write database. In the subsequtial queries, you can sort using the ID column. You can use the [`AUTO_RANDOM`](/auto-random.md) ID column to left shift 5 bits to ensure the order of the query data. For example:
+    This solution can retain the benefits of using clustered indexes and avoid the write hotspot problem. It requires less effort for customization. You can modify the schema attribute when you switch to use TiDB as the write database. In the subsequent queries, you can sort using the ID column. You can use the [`AUTO_RANDOM`](/auto-random.md) ID column to left shift 5 bits to ensure the order of the query data. For example:
 
     ```sql
 
@@ -75,7 +75,7 @@ The following table summarizes the pros and cons of each solution.
 | Scenario | Recommended solution | Pros | Cons |
 | :--- | :--- | :--- | :--- |
 | TIDB will act as the primary and write-intensive database. The business logic is strongly dependent on the continuity of the primary key IDs. | Create the table with non-clustered indexes and set `SHARD_ROW_ID_BIT`. Use `SEQUENCE` as the primary key column.  | It can avoid data writing hotspots and ensure the continuity and monotonic increment of business data. | The throughput capacity of data write is reduced (to ensure data write continuity). The performance of primary key queries is reduced. |
-| TIDB will act as the primary and write-intensive database. The business logic is strongly dependent on the increment of the primary key IDs.  | Create the table with non-clustered indexes and set `SHARD_ROW_ID_BIT`. Use the application ID generator to define the primary key IDs. | It can avoid data writing hotspots, guarantees the performance of data wirte, guarantees the increment of business data, but cannot guarantees continuity. | Need code customization. External ID generators strongly depend on the clock accurancy and might introduce failure risks |
+| TIDB will act as the primary and write-intensive database. The business logic is strongly dependent on the increment of the primary key IDs.  | Create the table with non-clustered indexes and set `SHARD_ROW_ID_BIT`. Use the application ID generator to define the primary key IDs. | It can avoid data writing hotspots, guarantees the performance of data write, guarantees the increment of business data, but cannot guarantees continuity. | Need code customization. External ID generators strongly depend on the clock accuracy and might introduce failure risks |
 | **Recommended solution for data migration**<br/>TIDB will act as the primary and write-intensive database. The business logic does not depend on the continuity of the primary key IDs. | Create the table with clustered indexes and set `AUTO_RANDOM` for the primary key column. | It can avoid data writing hotspots. Limited write throughput ability. Excellent query performance of the primary keys. You can smoothly switch `AUTO_INCREMENT` to `AUTO_RANDOM`. | The primary key ID is random. It is recommended to sort the business data by using inserting the time column. If you have to use the primary key ID to sort data, you can query by using leftshift 5 bits, which can guarantee the increment of the data. |
 | **Recommended solution for middle platforms**<br/>TIDB will act as the read-only database. | Create the table with non-clustered indexes and set `SHARD_ROW_ID_BIT`. Keep the primary key column consistent with the data source. | It can avoid data writing hotspots. Low customization cost. | The query performance of the primary keys is impacted. |
 
@@ -102,7 +102,7 @@ The following table summarizes the pros and cons of optimistic mode and pessimis
 | Scenario | Pros | Cons |
 | :--- | :--- | :--- |
 | Optimistic mode (Default) | It can ensure that the data migrated to the downstream will not go wrong.  | If there are a large number of shards, the migration task will be blocked for a long time, or even stopped if the upstream Binlogs have been cleaned up. You can enable the Relay log to avoid this problem. For more limitations, see [Use Relay log](#use-relay-log). |
-| Pessimistic mode| Data can not be blocked during migration. | In this mode, ensure that schame changes are compatible (whether the incremental column has a default value). It is possible that inconsistent data can be overlooked. For more limitations, see [Merge and Migrate Data from Sharded Tables in Optimistic Mode](/dm/feature-shard-merge-optimistic.md#restrictions).|
+| Pessimistic mode| Data can not be blocked during migration. | In this mode, ensure that schema changes are compatible (whether the incremental column has a default value). It is possible that inconsistent data can be overlooked. For more limitations, see [Merge and Migrate Data from Sharded Tables in Optimistic Mode](/dm/feature-shard-merge-optimistic.md#restrictions).|
 
 ### Other restrictions and impact
 
@@ -121,7 +121,7 @@ The default character set in TiDB is utf8mb4. It is recommended that you use utf
 
 ### Best practices for deployment
 
-#### Deploy DM-master and DM-woker
+#### Deploy DM-master and DM-worker
 
 DM consists of DM-master and DM-worker.
 
@@ -132,7 +132,7 @@ DM consists of DM-master and DM-worker.
 
 Splitting the migration task can only guarantee the final consistency of data. Real-time consistency may deviate significantly due to various reasons.
 
-- When migrating and merging MysQL shards, you can split the migration task according to the types of shards in the upstream. For example, if `usertable_1~50` and `Logtable_1~50` are two types of shards, you can create two migration tasks. It can simplify the migration task template and effectively control the impact of interruption in data migration.
+- When migrating and merging MySQL shards, you can split the migration task according to the types of shards in the upstream. For example, if `usertable_1~50` and `Logtable_1~50` are two types of shards, you can create two migration tasks. It can simplify the migration task template and effectively control the impact of interruption in data migration.
 
 - For large-scale data migration, you can refer to the following to split the migration task:
     - If you need to migrate multiple databases in the upstream, you can split the migration task in terms of databases.
@@ -146,7 +146,7 @@ The following table gives the recommended deployment plans for DM-master and DM-
 | Large dataset (more than 1 TB) and MySQL shards, one-time data migration | It is recommended to deploy 3 DM-master nodes to ensure the availability of the DM cluster during long-time data migration. | Deploy DM-worker nodes according to the number of data sources or migration tasks. It is recommended to deploy 1~3 idle DM-worker nodes. |
 | Long-term data migration | It is necessary to deploy 3 DM-master nodes. If you deploy DM-master nodes on the cloud, try to deploy them in different availability zones (AZ). | Deploy DM-worker nodes according to the number of data sources or migration tasks. It is necessary to deploy 1.5~2 times the number of DM-worker nodes that are actually needed. |
 
-#### 上游数据源选择与设置
+#### Choose and configure the upstream data source
 
 DM supports full data migration, but when doing it, it backs up the full data of the entire database. DM uses the parallel logical backup method. During the backup, it uses a relatively heavy lock [`FLUSH TABLES WITH READ LOCK`](https://dev.mysql.com/doc/refman/8.0/en/flush.html#flush-tables-with-read-lock). At this time, DML and DDL operations of the upstream database will be blocked for a short time. Therefore, it is strongly recommended to use a backup database to perform the full data backup, and enable the GTID function of the data source at the same time (`enable-gtid: true`). This way, you can not only avoid the impact of the upstream during migration, but also switch to the master node in the upstream to reduce the delay during the incremental migration. For the method of switching the upstream MySQL data source, see [Switch DM-worker Connection between Upstream MySQL Instances](/dm/usage-scenario-master-slave-switch.md#switch-dm-worker-connection-via-virtual-ip).
 
@@ -196,7 +196,7 @@ In daily MySQL operation and maintenance, usually you use tools such as PT-osc/G
 
 ## Best practices during migration
 
-This section introduce how to troubleshoot porblems you encounter during migration.
+This section introduce how to troubleshoot problems you encounter during migration.
 
 ### Inconsistent schemas in upstream and downstream
 
@@ -205,7 +205,7 @@ Common errors include:
 - `messages: Column count doesn't match value count: 3 (columns) vs 2 (values)`
 - `Schema/Column doesn't match`
 
-Usually such issues are caused by changed or added indexes in the downstream TiDB, or tere are more columns in the downstream. When such errors occur, check whether the upstream and downstream schemas are inconsistent.
+Usually such issues are caused by changed or added indexes in the downstream TiDB, or there are more columns in the downstream. When such errors occur, check whether the upstream and downstream schemas are inconsistent.
 
 To resolve such issues, update the schema information cached in DM to be consistent with the downstream TiDB Schema. For details, see [Manage Table Schemas of Tables to be Migrated](/dm/dm-manage-schema.md).
 
