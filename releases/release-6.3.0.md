@@ -94,6 +94,10 @@ In v6.3.0-DMR, the key new features and improvements are as follows:
 
     TiFlash uses the Raft protocol for data replication from TiKV. Prior to v6.3.0, it often took a long time to replicate large amounts of replica data. TiDB v6.3.0 optimizes the TiFlash data replication mechanism and significantly improves the replication speed. When you use BR to recover data, use TiDB Lightning to import data, or add new TiFlash replicas, the TiFlash replicas can be replicated more quickly. You can query with TiFlash in a more timely manner. In addition, TiFlash replicas will also reach a secure and balanced state faster when you scale up, scale down, or modify the number of TiFlash replicas.
 
+* TiFlash supports three-stage aggregation of individual `COUNT(DISTINCT)` [#37202](https://github.com/pingcap/tidb/issues/37202) @[fixdb](https://github.com/fixdb)
+
+     TiFlash supports rewriting queries containing only one `COUNT(DISTINCT)` into a [three-stage aggregation](/system-variables.md#tidb_opt_three_stage_distinct_agg-new-in-v630). This improves concurrency and performance.
+     
 * TiKV supports log recycling [#214](https://github.com/tikv/raft-engine/issues/214) @[LykxSassinator](https://github.com/LykxSassinator) **tw：ran-huang**
 
     TiKV supports [recycling log files](/tikv-configuration-file.md#enable-log-recycle-new-in-v630) in Raft Engine. This reduces the long tail latency in network disks during Raft log appending and improves performance under write workloads.
@@ -212,10 +216,17 @@ In v6.3.0-DMR, the key new features and improvements are as follows:
 | [`tidb_last_plan_replayer_token`](/system-variables.md#tidb_enable_unsafe_substitute-new-in-v630) | Newly added | This variable is read-only and is used to obtain the result of the last `PLAN REPLAYER DUMP` execution in the current session. |
 | [`tidb_opt_force_inline_cte`](/system-variables.md#tidb_opt_force_inline_cte-new-in-v630) | Newly added | This variable is used to control whether common table expressions (CTEs) in the entire session are inlined or not. The default value is `OFF`, which means that inlining CTE is not enforced by default. |
 | [`tidb_opt_three_stage_distinct_agg`](/system-variables.md#tidb_opt_three_stage_distinct_agg-new-in-v630) | Newly added | This variable specifies whether to rewrite a `COUNT(DISTINCT)` aggregation into a three-stage aggregation in MPP mode. The default value is `ON`. |
-| [`tidb_partition_prune_mode`](/system-variables.md#tidb_partition_prune_mode-从-v51-版本开始引入) | Modified | Specifies whether to enable dynamic pruning. Since v6.3.0, the default value changes to `dynamic`. |
+| [`tidb_partition_prune_mode`](/system-variables.md#tidb_partition_prune_mode-new-in-v51) | Modified | Specifies whether to enable dynamic pruning. Since v6.3.0, the default value changes to `dynamic`. |
 | [`tidb_rc_read_check_ts`](/system-variables.md#tidb_rc_read_check_ts-new-in-v600) | Modified | This variable is used to optimize the timestamp acquisition, which is suitable for scenarios with read-committed isolation level where read-write conflicts are rare. This feature is oriented to specific service workloads and might cause performance regression in other scenarios. For this reason, since v6.3.0, the scope of this variable changes from `GLOBAL | SESSION` to `INSTANCE`. That means you can enable this feature for specific TiDB instances. |
 | [`tidb_rc_write_check_ts`](/system-variables.md#tidb_rc_write_check_ts-new-in-v630)  | Newly added | This variable is used to optimize the acquisition of timestamps and is suitable for scenarios with few point-write conflicts in `READ-COMMITTED` isolation level of pessimistic transactions. Enabling this variable can avoid the latency and overhead brought by obtaining the global timestamps during the execution of point-write statements |
 | [`tiflash_fastscan`](/system-variables.md#tiflash_fastscan-new-in-v630) | Newly added | This variable controls whether to enable FastScan. If [FastScan](/develop/dev-guide-use-fastscan.md) is enabled (set to `ON`), TiFlash provides more efficient query performance, but does not guarantee the accuracy of the query results or data consistency. |
+| [`sql_require_primary_key`](/system-variables.md#sql_require_primary_key-new-in-v630)   | Newly added  |  This variable controls whether to enforce the requirement that a table has a primary key. After this variable is enabled, attempting to create or alter a table without a primary key will produce an error.  |
+| [`tidb_ddl_flashback_concurrency`](/system-variables.md#tidb_ddl_flashback_concurrency-new-in-v630) | Newly added |  Controls the concurrency of `flashback cluster`. The feature controlled by this variable is not fully functional in the current TiDB version. Do not change the default value.  |
+| [`tidb_enable_foreign_key`](/system-variables.md#tidb_enable_foreign_key-new-in-v630) | Newly added |  Controls whether to enable the `FOREIGN KEY` feature. The feature controlled by this variable is not fully functional in the current TiDB version. Do not change the default value.  |
+| [`tidb_enable_general_plan_cache`](/system-variables.md#tidb_enable_general_plan_cache-new-in-v630) | Newly added |  Controls whether to enable the General Plan Cache feature. The feature controlled by this variable is not fully functional in the current TiDB version. Do not change the default value.  |
+| [`tidb_enable_null_aware_anti_join`](/system-variables.md#tidb_enable_null_aware_anti_join-new-in-v630) | Newly added |  Controls whether TiDB applies Null Aware Hash Join when ANTI JOIN is generated by subqueries led by special set operators `NOT IN` and `!= ALL`. |
+| [`tidb_enable_tiflash_read_for_write_stmt`](/system-variables.md#tidb_enable_tiflash_read_for_write_stmt-new-in-v630) | Newly added |  Controls whether read requests in SQL write statements are pushed down to TiFlash. The feature controlled by this variable is not fully functional in the current TiDB version. Do not change the default value.  |
+| [`tidb_general_plan_cache_size`](/system-variables.md#tidb_general_plan_cache_size-new-in-v630) | Newly added | Controls the maximum number of execution plans that can be cached by General Plan Cache. The feature controlled by this variable is not fully functional in the current TiDB version. Do not change the default value.  |
 
 ### Configuration file parameters
 
@@ -253,9 +264,10 @@ Since v6.3.0, TiCDC no longer supports configuring Pulsar sink. [kop](https://gi
 
     - sql-infra
 
-        - Grant privilege of a table to an user checks the target table exist first, in the past, the table name comparison works in a case sensitive manner, now it's changed to case insensitive [#34610](https://github.com/pingcap/tidb/issues/34610) @[tiancaiamao](https://github.com/tiancaiamao)
-        - Previously, TiDB users can set `init_connect` without any checking. From now on, the value of `init_connect` should be checked by the sql parser [#35324](https://github.com/pingcap/tidb/issues/35324) @[CbcWestwolf](https://github.com/CbcWestwolf)
-        - Improve warning log when new connection arrives [#34964](https://github.com/pingcap/tidb/issues/34964) @[xiongjiwei](https://github.com/xiongjiwei)
+        - TiDB is now case insensitive to the target table name when checking the table existence [#34610](https://github.com/pingcap/tidb/issues/34610) @[tiancaiamao](https://github.com/tiancaiamao)
+        - Improved MySQL compatibility by adding the parsing process on the value of `init_connect` [#35324](https://github.com/pingcap/tidb/issues/35324) @[CbcWestwolf](https://github.com/CbcWestwolf)
+        - Improve log warning generated when new connections arrive [#34964](https://github.com/pingcap/tidb/issues/34964) @[xiongjiwei](https://github.com/xiongjiwei)
+        - Optimize the HTTP API for querying DDL history jobs, and add support for the `start_job_id` parameter [#35838](https://github.com/pingcap/tidb/issues/35838) @[tiancaiamao](https://github.com/tiancaiamao)
 
     - execution
 
@@ -336,21 +348,20 @@ Since v6.3.0, TiCDC no longer supports configuring Pulsar sink. [kop](https://gi
 
     - sql-infra
 
-        - Fix the issue that `PREAPRE` statements do not check privileges [#35784](https://github.com/pingcap/tidb/issues/35784) @[lcwangchao](https://github.com/lcwangchao)
-        - System variable `tidb_enable_noop_variable` cannot be set to `WARN` [#36647](https://github.com/pingcap/tidb/issues/36647) @[lcwangchao](https://github.com/lcwangchao)
-        - Fix the issue that when 'expression index' is defined, the value of `ORDINAL_POSITION` column of `INFORMAITON_SCHEMA`.`COLUMNS` table might be incorrect [#31200](https://github.com/pingcap/tidb/issues/31200) @[bb7133](https://github.com/bb7133)
-        - Fix the issue that when setting a timestamp that is larger than `MAXINT32`, TiDB doesn't report an error like MySQL [#31585](https://github.com/pingcap/tidb/issues/31585) @[bb7133](https://github.com/bb7133)
-        - Fix the panic issue of enterprise plugin on 6.1 [#37319](https://github.com/pingcap/tidb/issues/37319) @[xhebox](https://github.com/xhebox)
+        - Fix the issue that privilege check is skipped for `PREAPRE` statements [#35784](https://github.com/pingcap/tidb/issues/35784) @[lcwangchao](https://github.com/lcwangchao)
+        - Fix the issue that the system variable `tidb_enable_noop_variable` cannot be set to `WARN` [#36647](https://github.com/pingcap/tidb/issues/36647) @[lcwangchao](https://github.com/lcwangchao)
+        - Fix the issue that when 'expression index' is defined, the `ORDINAL_POSITION` column of the `INFORMAITON_SCHEMA`.`COLUMNS` table might be incorrect [#31200](https://github.com/pingcap/tidb/issues/31200) @[bb7133](https://github.com/bb7133)
+        - Fix the issue that TiDB does not report an error when the timestamp is larger than `MAXINT32` [#31585](https://github.com/pingcap/tidb/issues/31585) @[bb7133](https://github.com/bb7133)
+        - Fix the issue that TiDB server cannot be started when the enterprise plugin is used [#37319](https://github.com/pingcap/tidb/issues/37319) @[xhebox](https://github.com/xhebox)
         - Fix the incorrect output of `SHOW CREATE PLACEMENT POLICY` [#37526](https://github.com/pingcap/tidb/issues/37526) @[xhebox](https://github.com/xhebox)
-        - Disallow exchange partition with temporary table [#37201](https://github.com/pingcap/tidb/issues/37201) @[lcwangchao](https://github.com/lcwangchao)
-        - Fix the issue that query on `INFORMATION_SCHEMA.TIKV_REGION_STATUS` returns an incorrect result @[zimulala](https://github.com/zimulala)
-        - Fix the issue that `EXPLAIN` query on views does not check privileges [#34326](https://github.com/pingcap/tidb/issues/34326) @[hawkingrei](https://github.com/hawkingrei)
-        - Fix the issue that the user cannot update from JSON 'null' to NULL [#37852](https://github.com/pingcap/tidb/issues/37852) @[YangKeao](https://github.com/YangKeao)
-        - Optimize DDL history HTTP API, and add support for 'start_job_id' parameter [#35838](https://github.com/pingcap/tidb/issues/35838) @[tiancaiamao](https://github.com/tiancaiamao)
+        - Fix unexpected exchange partition with temporary tables [#37201](https://github.com/pingcap/tidb/issues/37201) @[lcwangchao](https://github.com/lcwangchao)
+        - Fix the issue that querying `INFORMATION_SCHEMA.TIKV_REGION_STATUS` returns an incorrect result @[zimulala](https://github.com/zimulala)
+        - Fix the issue that the `EXPLAIN` query on views does not check privileges [#34326](https://github.com/pingcap/tidb/issues/34326) @[hawkingrei](https://github.com/hawkingrei)
+        - Fix the issue that JSON `null` cannot be updated to `NULL` [#37852](https://github.com/pingcap/tidb/issues/37852) @[YangKeao](https://github.com/YangKeao)
         - Fix the issue that `row_count` of DDL jobs is inaccurate [#25968](https://github.com/pingcap/tidb/issues/25968) @[Defined2014](https://github.com/Defined2014)
         - Fix the issue that `FLASHBACK TABLE` does not work properly [#37386](https://github.com/pingcap/tidb/issues/37386) @[tiancaiamao](https://github.com/tiancaiamao)
         - Fix handling of prepared statement flags in the classic MySQL protocol [#36731](https://github.com/pingcap/tidb/issues/36731) @[dveeden](https://github.com/dveeden)
-        - Fix data-race issue on start up in rare cases [#36791](https://github.com/pingcap/tidb/issues/36791) @[xhebox](https://github.com/xhebox)
+        - (dup) Fix the issue of incorrect TiDB status that might appear on startup in some extreme cases [#36791](https://github.com/pingcap/tidb/issues/36791) @[xhebox](https://github.com/xhebox)
         - Fix the issue that `information_schema.variables_info` does not respect SEM [#37586](https://github.com/pingcap/tidb/issues/37586) @[CbcWestwolf](https://github.com/CbcWestwolf)
 
     - execution
