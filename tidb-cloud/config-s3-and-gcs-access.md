@@ -141,7 +141,7 @@ To allow TiDB Cloud to access the source data in your GCS bucket, you need to co
 5. Fill in the following information to grant access to your bucket, and then click **SAVE**.
 
     - In the **New Principals** field, paste the Google Cloud Service Account ID of the target TiDB cluster.
-    - In the **Select a role** drop-down list, choose the IAM role you just created.
+    - In the **Select a role** drop-down list, type the name of the IAM role you just created, and then choose the name from the filter result.
 
 Your TiDB Cloud cluster can now access the GCS bucket.
 
