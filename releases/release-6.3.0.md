@@ -10,8 +10,8 @@ TiDB version: 6.3.0-DMR
 
 In v6.3.0-DMR, the key new features and improvements are as follows:
 
-- TiKV support SM4 encryption at rest.
-- TiDB supports authentication with the SM3 algorithm.
+- TiKV supports encryption at rest using the SM4 algorithm.
+- TiDB supports authentication using the SM3 algorithm.
 - The `CREATE USER` and `ALTER USER` statements support the `ACCOUNT LOCK/UNLOCK` option.
 - JSON data type and functions become generally available (GA).
 - TiDB supports null-aware anti join.
