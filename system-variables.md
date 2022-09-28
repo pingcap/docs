@@ -1546,7 +1546,7 @@ Query OK, 0 rows affected (0.09 sec)
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
 - Default value: `OFF`
-- This variable controls whether read requests in SQL write statements are pushed down to TiFlash.
+- This variable controls whether read requests in SQL write statements can be pushed down to TiFlash.
 
 ### tidb_enable_top_sql <span class="version-mark">New in v5.4.0</span>
 
