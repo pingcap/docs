@@ -13,7 +13,7 @@ The TiDB Cloud roadmap brings you what's coming in the near future, so you can s
 
 ## Developer experience and enterprise-grade features
 
-| Scenario | Feature | Description |
+| Domain | Feature | Description |
 |---|---|---|
 | Developer experience | Load sample datasets manually. | Support loading sample datasets into a cluster. You can use this data to quickly get started with testing the features of TiDB Cloud. |
 | UI experience | Provide a more convenient feedback channel. | Users can quickly get help with and give feedback on the product. |
@@ -28,7 +28,7 @@ The TiDB Cloud roadmap brings you what's coming in the near future, so you can s
 <table>
 <thead>
   <tr>
-    <th>Scenario</th>
+    <th>Domain</th>
     <th>Feature</th>
     <th>Description</th>
   </tr>
@@ -81,7 +81,7 @@ The TiDB Cloud roadmap brings you what's coming in the near future, so you can s
 <table>
 <thead>
   <tr>
-    <th>Scenario</th>
+    <th>Domain</th>
     <th>Feature</th>
     <th>Description</th>
   </tr>
@@ -115,7 +115,7 @@ The TiDB Cloud roadmap brings you what's coming in the near future, so you can s
 <table>
 <thead>
   <tr>
-    <th>Scenario</th>
+    <th>Domain</th>
     <th>Feature</th>
     <th>Description</th>
   </tr>
@@ -158,7 +158,7 @@ The TiDB Cloud roadmap brings you what's coming in the near future, so you can s
 <table>
 <thead>
   <tr>
-    <th>Scenario</th>
+    <th>Domain</th>
     <th>Feature</th>
     <th>Description</th>
   </tr>
