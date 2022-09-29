@@ -7,17 +7,17 @@ summary: Create, manage, and update your TiDB Cloud resources through Terraform
 
 TiDB Cloud already automate many database operations, and with our Open API you can programmatically handle additional operations like deployment, scaling, and restore.
 
-If you are looking to a simplified ways to automate resource provisioning and your infrastructure workflow. I propose trying out our TiDB Cloud Terraform provider with the capabilities:
+If you are looking to a simplified ways to automate resource provisioning and your infrastructure workflow. You can try out our TiDB Cloud Terraform provider with the capabilities:
 
 - Get your project information
 - Get cluster spec information, like supported cloud_provider, region, node size and so on
 - Mange your developer tier and dedicated tier, including create, scale, paused and resume the cluster
-- Create and Delete the backup for your cluster
+- Create and delete the backup for your cluster
 - Create the restore task for your cluster
 
 ## Requirements
 
-- [TiDB Cloud](https://docs.pingcap.com/tidbcloud/): compatible with TiDB Cloud release 20220927
+- [TiDB Cloud](https://docs.pingcap.com/tidbcloud/release-notes): compatible with TiDB Cloud release 20220927
 - [Terraform](https://www.terraform.io/downloads.html) >= 1.0
 - [Go](https://golang.org/doc/install) >= 1.18 (if you want to build the provider plugin)
 
