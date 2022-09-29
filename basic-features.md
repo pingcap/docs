@@ -119,6 +119,8 @@ This document lists the features supported in each TiDB version. Note that suppo
 | [List COLUMNS partitioning](/partitioned-table.md)           | Y | Y | Y | Experimental | Experimental | Experimental | Experimental | Experimental | Experimental |    N    |
 | [`EXCHANGE PARTITION`](/partitioned-table.md)                | Y | Experimental | Experimental | Experimental | Experimental | Experimental | Experimental | Experimental | Experimental |    N    |
 | [Dynamic Pruning](/partitioned-table.md#dynamic-pruning-mode) | Y | Y | Y | Experimental | Experimental | Experimental | Experimental | Experimental |      N       |    N    |
+| [Range COLUMNS partitioning](/partitioned-table.md#range-columns-partitioning) | Y | N | N | N | N | N |N | N | N |      N       |    N    |
+| [Range INTERVAL partitioning](/partitioned-table.md#range-interval-partitioning) | Experimental | N | N | N | N | N |N | N | N |      N       |    N    |
 
 ## Statistics
 
@@ -131,8 +133,6 @@ This document lists the features supported in each TiDB version. Note that suppo
 | [Automatically update statistics](/statistics.md#automatic-update) | Y | Y | Y | Y | Y | Y | Y | Y | Y | Y |
 | [Fast Analyze](/system-variables.md#tidb_enable_fast_analyze) | Experimental | Experimental| Experimental | Experimental | Experimental | Experimental | Experimental | Experimental | Experimental | Experimental |
 | [Dynamic pruning](/partitioned-table.md#dynamic-pruning-mode) | Y | Y | Y | Experimental | Experimental | Experimental | Experimental | Experimental | N | N |
-| [Range COLUMNS partitioning](/partitioned-table.md#range-columns-partitioning) | Y | N | N | N | N | N |N | N | N |      N       |    N    |
-| [Range INTERVAL partitioning](/partitioned-table.md#range-interval-partitioning) | Experimental | N | N | N | N | N |N | N | N |      N       |    N    |
 
 ## Security
 
