@@ -245,7 +245,7 @@ In v6.3.0-DMR, the key new features and improvements are as follows:
 | TiCDC | [`enable-sync-point`](/ticdc/manage-ticdc.md#task-configuration-file) | Newly added | Specifies whether to enable the Syncpoint feature. |
 | TiCDC | [`sync-point-interval`](/ticdc/manage-ticdc.md#task-configuration-file) | Newly added | Specifies the interval at which Syncpoint aligns the upstream and downstream snapshots. |
 | TiCDC | [`sync-point-retention`](/ticdc/manage-ticdc.md#task-configuration-file) | Newly added | Specifies how long the data is retained by Syncpoint in the downstream table. When this duration is exceeded, the data is cleaned up. |
-| TiCDC | [`sink-uri.memory`](/ticdc/manage-ticdc.md#create-a-replication-task) | Deprecated | This configuration item is deprecated. It is not recommended to use it in any situation. |
+| TiCDC | [`sink-uri.memory`](/ticdc/manage-ticdc.md#create-a-replication-task) | Deprecated | The `memory` sorting is deprecated. It is not recommended to use it in any situation. You can use the `unified` sorting instead. |
 
 ### Others
 
@@ -325,7 +325,6 @@ Since v6.3.0, TiCDC no longer supports configuring Pulsar sink. [kop](https://gi
         - Support logging `start ts` of DML statements when MySQL sink gets an error [#6460](https://github.com/pingcap/tiflow/issues/6460) @[overvenus](https://github.com/overvenus)
         - Make the API `api/v1/health` reflects the health status of the TiCDC cluster [#4757](https://github.com/pingcap/tiflow/issues/4757) @[overvenus](https://github.com/overvenus)
          - Implement MQ sink and MySQL sink in the asynchronous mode to improve the sink throughput [#5928](https://github.com/pingcap/tiflow/issues/5928) @[hicqu](https://github.com/hicqu) @[hi-rustin](https://github.com/hi-rustin)
-         - Deprecate the memory sorter and always use the unified sorter [#7087](https://github.com/pingcap/tiflow/issues/5928) @[hi-rustin](https://github.com/hi-rustin)
          - Delete the deprecated pulsar sink [#7087](https://github.com/pingcap/tiflow/issues/7087) @[hi-rustin](https://github.com/hi-rustin)
          - Improve replication performance by discarding DDL statements that are irrelevant with a changefeed [#6447](https://github.com/pingcap/tiflow/issues/6447) @[asddongmen](https://github.com/asddongmen)
 
