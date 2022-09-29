@@ -1,16 +1,16 @@
 ---
-title: TiDB DM Best Practices
+title: TiDB Data Migration (DM) Best Practices
 summary: Learn about best practices when you use TiDB Data Migration (DM) to migrate data.
 ---
 
-# TiDB DM Best Practices
+# TiDB Data Migration (DM) Best Practices
 
 [TiDB Data Migration (DM)](https://github.com/pingcap/tiflow/tree/master/dm) is an data migration tool developed by PingCAP. It supports full and incremental data migration from MySQL-compatible databases such as MySQL, Percona MySQL, MariaDB, Amazon RDS for MySQL and Amazon Aurora into TiDB.
 
 You can use DM in the following scenarios:
 
 - Perform full and incremental data migration from a single MySQL-compatible database instance to TiDB
-- Migrate and merge MySQL shards of small datasets (less than 1 TB) to TiDB
+- Migrate and merge MySQL shards of small datasets (less than 1 TiB) to TiDB
 - In the Data HUB scenario, such as the middle platform of business data, and real-time aggregation of business data, use DM as the middleware for data migration
 
 This document introduces how to use DM in an elegant and efficient way, and how to avoid the common mistakes when using DM.
@@ -144,8 +144,8 @@ The following table describes the recommended deployment plans for DM-master and
 
 | Scenario | DM-master deployment | DM-worker deployment |
 | :--- | :--- | :--- |
-| <li>Small dataset (less than 1 TB)</li><li>One-time data migration</li> | Deploy 1 DM-master node | Deploy 1~N DM-worker nodes according to the number of upstream data sources. Generally, 1 DM-worker node is recommended. |
-| <li>Large dataset (more than 1 TB) and migrating and merging MySQL shards</li><li>One-time data migration</li> | It is recommended to deploy 3 DM-master nodes to ensure the availability of the DM cluster during long-time data migration. | Deploy DM-worker nodes according to the number of data sources or migration tasks. Besides working DM-worker nodes, it is recommended to deploy 1~3 idle DM-worker nodes. |
+| <li>Small dataset (less than 1 TiB)</li><li>One-time data migration</li> | Deploy 1 DM-master node | Deploy 1~N DM-worker nodes according to the number of upstream data sources. Generally, 1 DM-worker node is recommended. |
+| <li>Large dataset (more than 1 TiB) and migrating and merging MySQL shards</li><li>One-time data migration</li> | It is recommended to deploy 3 DM-master nodes to ensure the availability of the DM cluster during long-time data migration. | Deploy DM-worker nodes according to the number of data sources or migration tasks. Besides working DM-worker nodes, it is recommended to deploy 1~3 idle DM-worker nodes. |
 | Long-term data replication | It is necessary to deploy 3 DM-master nodes. If you deploy DM-master nodes on the cloud, try to deploy them in different availability zones (AZ). | Deploy DM-worker nodes according to the number of data sources or migration tasks. It is necessary to deploy 1.5~2 times the number of DM-worker nodes that are actually needed. |
 
 #### Choose and configure the upstream data source
