@@ -27,7 +27,7 @@ Now, install Terraform with hashicorp/tap/terraform.
 brew install hashicorp/tap/terraform
 ```
 
-See [terraform doc](https://learn.hashicorp.com/tutorials/terraform/install-cli?in=terraform/aws-get-started) for other installation methods.
+See [terraform doc](https://learn.hashicorp.com/tutorials/terraform/install-cli) for other installation methods.
 
 ## Create an API key
 
