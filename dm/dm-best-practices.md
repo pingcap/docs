@@ -183,7 +183,7 @@ This section does not elaborate on the filter rules. It is reminded that you con
 >
 > When you migrate and merge MySQL shards, if you have configured filter rules in the data source, you must make sure that the rules match between the data source and the migration task. If they do not match, it may cause the issue that the migration task can not receive incremental data for a long time.
 
-### Use the relay log
+#### Use the relay log
 
 In the MySQL master/standby mechanism, the standby node saves a copy of relay logs to ensure the reliability and efficiency of asynchronous replication. DM also supports saving a copy of relay logs on DM-worker. You can configure information such as the storage location and expiration time. This feature applies to the following scenarios:
 
