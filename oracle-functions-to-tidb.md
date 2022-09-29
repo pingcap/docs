@@ -5,7 +5,7 @@ summary: Learn the mappings between functions and syntax of Oracle and TiDB
 
 # Mappings between Functions and Syntax of Oracle and TiDB
 
-This document describes the mappings between functions and syntax of Oracle and TiDB. It helps you find the corresponding TiDB function based on the Oracle function, and understand the syntax differences between Oracle and TiDB.
+This document describes the mappings between functions and syntax of Oracle and TiDB. It helps you find the corresponding TiDB functions based on the Oracle functions, and understand the syntax differences between Oracle and TiDB.
 
 > **Note:**
 >
