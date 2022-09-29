@@ -85,7 +85,7 @@ Issue: [#38229](https://github.com/pingcap/tidb/issues/38229)
 
 When you run `PITR Truncate` on GCS or Azure Blob Storage for the first time, you are prompted that the file `v1_stream_trancate_safepoint.txt` does not exist. You can address this issue as follows:
 
-Under the root directory of PITR, create a file `v1_stream_trancate_safepoint.txt` and write `0` in it. Note that this file should not include other characters and should be created only when you run `PITR Truncate` for the first time.
+Under the backup root directory of PITR, create a file `v1_stream_trancate_safepoint.txt` and write `0` in it. Note that this file should not include other characters and should be created only when you run `PITR Truncate` for the first time.
 
 <!-- TODO: Add the following content upon v6.4.0 release  -->
 <!-- Alternatively, use BR of v6.4.0 or later. -->
