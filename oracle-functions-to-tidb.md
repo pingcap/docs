@@ -28,7 +28,7 @@ The following table shows the mappings between some Oracle and TiDB functions.
 | Get the first date of the month | `TRUNC(SYSDATE,'mm')` | `DATE_ADD(CURDATE(),interval - day(CURDATE()) + 1 day)`  | |
 | Truncate a value | `TRUNC(2.136) = 2`<br/> `TRUNC(2.136,2) = 2.13` | `TRUNCATE(2.136,0) = 2`<br/> `TRUNCATE(2.136,2) = 2.13` | Data precision is preserved. Truncate the corresponding decimal places without rounding.  |
 | Combine the strings `a` and `b` | `'a' \|\| 'b'` | `CONCAT('a','b')` | |
-| Get the next value in a sequence | `SEQUENCENAME.NEXTVAL` | `NEXTVAL(sequenceName)` | |
+| Get the next value in a sequence | `sequence_name.NEXTVAL` | `NEXTVAL(sequence_name)` | |
 | Left join or right join | `SELECT * FROM a, b WHERE a.id = b.id(+);`<br/>`SELECT * FROM a, b WHERE a.id(+) = b.id;` | `SELECT * FROM a LEFT JOIN b ON a.id = b.id;`<br/>`SELECT * FROM a RIGHT JOIN b ON a.id = b.id;` | When correlating queries, TiDB does not support using (+) to left join or right join. You can use `LEFT JOIN` or `RIGHT JOIN` instead. |
 | Get random sequence values | `SYS_GUID()` | `UUID()` | TiDB returns a Universal Unique Identifier (UUID).|
 | `NVL()` | `NVL(key,val)` | `IFNULL(key,val)` | If the value of the field is `NULL`, it returns the value of `val`; otherwise, it returns the value of the field.  |
@@ -36,9 +36,9 @@ The following table shows the mappings between some Oracle and TiDB functions.
 | `DECODE()` | <li>`DECODE(key,val1,val2,val3)`</li><li>`DECODE(value,if1,val1,if2,val2,...,ifn,valn,val)`</li> | <li>`IF(key=val1,val2,val3)`</li><li>`CASE WHEN value=if1 THEN val1 WHEN value=if2 THEN val2,...,WHEN value=ifn THEN valn ELSE val END`</li> | <li>If the value of the field is equal to val1, then it returns val2; otherwise it returns val3.</li><li>When the field value satisfies the condition 1 (if1), it returns val1. When it satisfies the condition 2 (if2), it returns val2. When it satisfies the condition 3 (if3), it returns val3.</li> |
 | Get the length of a string | `LENGTH(str)` | `CHAR_LENGTH(str)` | |
 | Get sub strings | `SUBSTR('abcdefg',0,2) = 'ab'`<br/> `SUBSTR('abcdefg',1,2) = 'ab'` | `SUBSTRING('abcdefg',0,2) = ''`<br/>`SUBSTRING('abcdefg',1,2) = 'ab'` | <li>In Oracle, the starting position 0 has the same effect as 1. </li><li>In TiDB, the substring starting from 0 is null. If you need to start from the beginning of the string, you should start from 1.</li>|
-| Search a string for substrings | `INSTR('abcdefg','b',1,1)` | `INSTR('abcdefg','b')` | Search from the first character of the string 'abcdefg' and return the position of the first occurrence of the 'b' string. |
-| Search a string for substrings| `INSTR('stst','s',1,2)` | `LENGTH(SUBSTRING_INDEX('stst','s',2)) + 1` | Search from the first character of 'stst' and return the second occurrence of the 's' character. |
-| Search a string for substrings | `INSTR('abcabc','b',2,1)` | `LOCATE('b','abcabc',2)` | Search from the second character of the string `abcabc` and return the first occurrence of the character `b`. |
+| The position of the string in the source string | `INSTR('abcdefg','b',1,1)` | `INSTR('abcdefg','b')` | Search from the first character of the string 'abcdefg' and return the position of the first occurrence of the 'b' string. |
+| The position of the string in the source string| `INSTR('stst','s',1,2)` | `LENGTH(SUBSTRING_INDEX('stst','s',2)) + 1` | Search from the first character of 'stst' and return the second occurrence of the 's' character. |
+| The position of the string in the source string | `INSTR('abcabc','b',2,1)` | `LOCATE('b','abcabc',2)` | Search from the second character of the string `abcabc` and return the first occurrence of the character `b`. |
 | Get the interval months between dates | `MONTHS_BETWEEN(ENDDATE,SYSDATE)` | `TIMESTAMPDIFF(MONTH,SYSDATE,ENDDATE)` | The results of `MONTHS_BETWEEN()` in Oracle and `TIMESTAMPDIFF()` in TiDB are different. `TIMESTAMPDIFF()` keeps months only in integer. Note that the parameters in the two functions are in opposite positions. |
 | Merge columns into rows | `LISTAGG(CONCAT(E.dimensionid,'---',E.DIMENSIONNAME),'***') within GROUP(ORDER BY  DIMENSIONNAME)` | `GROUP_CONCAT(CONCAT(E.dimensionid,'---',E.DIMENSIONNAME) ORDER BY DIMENSIONNAME SEPARATOR '***')` | Combine a column of fields into one row and split them according to the `***` notation. |
 | Get the current time (precision to the second) | `SYSTIMESTAMP` | `CURRENT_TIMESTAMP(6)` | |
@@ -48,20 +48,6 @@ The following table shows the mappings between some Oracle and TiDB functions.
 
 This section describes some syntax differences between Oracle and TiDB.
 
-### Add an alias for a table in the DELETE statement
-
-Oracle supports adding an alias for a table in the DELETE statement. For example:
-
-```sql
-DELETE FROM test t WHERE t.xxx = xxx
-```
-
-TiDB does not support adding an alias for a table in the DELETE statement. For example:
-
-```sql
-DELETE FROM test WHERE xxx = xxx
-```
-
 ### String syntax
 
 - Oracle: strings can only be enclosed in single quotes (''). For example `'a'`
@@ -70,7 +56,7 @@ DELETE FROM test WHERE xxx = xxx
 ### Difference between `NULL` and an empty string
 
 - Oracle does not distinguish between `NULL` and the empty string `''`, that is, `NULL` is equivalent to `''`.
-- TiDB distinguishes between `NULL` and the empty string `''`. In TiDB, you need to convert `''` to `NULL`.
+- TiDB distinguishes between `NULL` and the empty string `''`. 
 
 ### Read and write to the same table in an `INSERT` statement
 
@@ -132,20 +118,6 @@ TiDB does not support `MINUS`. You need to change it to `EXCEPT`. For example:
 
 ```sql
 SELECT * FROM t1 EXCEPT SELECT * FROM t2
-```
-
-### Alias for `NULL` and `''`
-
-Oracle: `NULL` is equivalent to `''`, and no special conversion is needed to alias a null value. For example
-
-```sql
-SELECT NULL AS ... FROM DUAL
-```
-
-TiDB: `NULL` is different from `''`. To alias a null value, you need to change `NULL` to `''`. For example:
-
-```sql
-SELECT '' AS ... FROM DUAL
 ```
 
 ### Comment syntax
