@@ -141,7 +141,7 @@ TiDB supports the following two isolation levels in the pessimistic transaction 
 
 ## Pessimistic transaction commit process
 
-The commits of the pessimistic transactions and the optimistic transactions in TiDB have the same logic. Both transactions adopt the two-phase commit (2PC) mode. The important adaptation of pessimistic transactions is DML execution.
+In the transaction commit process, pessimistic transactions and optimistic transactions have the same logic. Both transactions adopt the two-phase commit (2PC) mode. The important adaptation of pessimistic transactions is DML execution.
 
 ![TiDB pessimistic transaction commit process](/media/pessimistic-transaction-commit.png)
 
