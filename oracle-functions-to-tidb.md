@@ -83,7 +83,7 @@ INSERT INTO table1 VALUES (feild1,(SELECT feild2 FROM table1 WHERE...))
 TiDB does not support reading and writing to the same table in `INSERT` statements. For example:
 
 ```sql
-INSERT INTO table1 VALUES（feild1,(SELECT T.fields2 FROM table1 T WHERE...)
+INSERT INTO table1 VALUES (feild1,(SELECT T.fields2 FROM table1 T WHERE...))
 ```
 
 ### Get the first n pieces of data
