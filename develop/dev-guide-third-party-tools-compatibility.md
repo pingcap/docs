@@ -71,8 +71,6 @@ Use `ADMIN CHECK [TABLE|INDEX]`.
 
 The collations of MySQL Connector/J are stored in the client and are distinguished by the server version.
 
-已知的客户端与服务端排序规则不一致的字符集：
-
 Known character sets for which client-side and server-side collations do not match:
 
 | Character Sets | Client Default Collations | Server Default Collations |
@@ -128,12 +126,33 @@ TiDB does not support `UpdatableResultSet`, that means **_DO NOT_** specify the 
 
 Using additional `UPDATE` statements for data updates, you can use transactions to ensure data consistency.
 
-### Not Support `useLocalTransactionState` Parameters
+## MySQL Connector/J Bug
+
+### `useLocalTransactionState` and `rewriteBatchedStatements` are true at the same time will cause the transaction to fail to commit
 
 **Description**
 
-TiDB relies on `COMMIT()` and `ROLLBACK()` for committing or rolling back transactions. the [useLocalTransactionState](https://dev.mysql.com/doc/connector-j/8.0/en/connector-j-connp-props-performance-extensions.html) parameter may omit `COMMIT()` and `ROLLBACK()`, which are unnecessary in MySQL. But those statements are necessary for TiDB.
+`useLocalTransactionState` 和 `rewriteBatchedStatements` 两参数同时开启时，将导致事务无法提交的问题。你可以使用[代码](https://github.com/Icemap/tidb-java-gitpod/tree/reproduction-local-transaction-state-txn-error)复现。
 
 **Ways to Avoid**
 
-Do not turn on the `useLocalTransactionState` parameter, as this may lead to transactions not being committed or rolled back.
+> **Note:**
+>
+> This bug has been reported to MySQL, you can follow this [Bug Report](https://bugs.mysql.com/bug.php?id=108643) to keep track of the latest news.
+
+**_DO NOT_** turn on `useLocalTransactionState`, as this may prevent transactions from being committed or rolled back.
+
+### Connector Forward Compatibility Issue
+
+**Description**
+
+Newer versions of MySQL Connector/J work with MySQL servers below version **5.7.5**, or databases using MySQL server protocols below version **5.7.5** (e.g. TiDB below version **6.3**).  It will cause the database connection to hang under certain circumstances, see [Bug Report](https://bugs.mysql.com/bug.php?id=106252) for more details.
+
+**Ways to Avoid**
+
+This is a known issue, and MySQL Connector/J has not merged the fix code so far.
+
+PingCAP made two dimensional fixes to it:
+
+- Client side: You can replace the official MySQL Connector/J with [pingcap/mysql-connector-j](https://github.com/pingcap/mysql-connector-j). The bug is fixed in **pingcap/mysql-connector-j**.
+- Server side: you can upgrade the server to version **6.3** or above; TiDB has fixed this compatibility issue in version **6.3**.
