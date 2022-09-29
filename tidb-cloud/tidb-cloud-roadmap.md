@@ -35,13 +35,17 @@ The TiDB Cloud roadmap brings you what's coming in the near future, so you can s
 </thead>
 <tbody>
   <tr>
-    <td rowspan="2">Support JSON</td>
+    <td rowspan="3">Support JSON</td>
     <td>Support JSON function.</td>
     <td>In business scenarios that require flexible schema definitions, the application can use JSON to store information for ODS, transaction indicators, commodities, game characters, and props.</td>
   </tr>
   <tr>
     <td><ul><li>Support expression indexes.</li><li>Support generated columns.</li></ul></td>
     <td>Provides query acceleration for specific field indexes in JSON scenarios.</td>
+  </tr>
+  <tr>
+    <td>Support array index.</td>
+    <td>Array is one of the commonly used data types in JSON scenarios. For inclusive queries in arrays, multi-value indexes can efficiently improve the query speed. </td>
   </tr>
   <tr>
     <td>Flashback</td>
@@ -58,11 +62,7 @@ The TiDB Cloud roadmap brings you what's coming in the near future, so you can s
     <td>Support automatically deleting expired table data based on custom rules.</td>
     <td>This feature enables automatic data cleanup in limited data archiving scenarios.</td>
   </tr>
-  <tr>
-    <td>Multi-value Index</td>
-    <td>Support array index.</td>
-    <td>Array is one of the commonly used data types in JSON scenarios. For inclusive queries in arrays, multi-value indexes can efficiently improve the query speed. </td>
-  </tr>
+
   <tr>
     <td>TiFlash kernel optimization</td>
     <td><ul><li>FastScan provides weak consistency but faster table scan capability.</li><li>Further optimize the join order, shuffle, and exchange algorithms to improve computing efficiency and boost performance for complex queries.</li><li>Add a fine-grained data sharding mechanism to optimize the <code>COUNT(DISTINCT)</code> function and high cardinality aggregation.</li></ul></td>
@@ -123,7 +123,7 @@ The TiDB Cloud roadmap brings you what's coming in the near future, so you can s
 <tbody>
   <tr>
     <td>Data replication to Kafka via TiCDC</td>
-    <td>Reduce TiCDC replication latency in planned offline scenarios.</td>
+    <td>Reduce TiCDC replication latency in daily operations.</td>
     <td>When TiKV, TiDB, PD, or TiCDC nodes are offline in a planned maintenance window, the replication latency of TiCDC can be reduced to less than 10 seconds.</td>
   </tr>
   <tr>
@@ -138,8 +138,8 @@ The TiDB Cloud roadmap brings you what's coming in the near future, so you can s
   </tr>
   <tr>
     <td>Backup and restore</td>
-    <td>Backup and restore service on the cloud based on EBS snapshots.</td>
-    <td>Backup and restore service on the cloud based on AWS EBS or GCP persistent disk snapshots.</td>
+    <td>Backup and restore service based on AWS EBS or GCP persistent disk snapshots.</td>
+    <td>Provide backup and restore service on the cloud based on AWS EBS or GCP persistent disk snapshots.</td>
   </tr>
   <tr>
     <td rowspan="2">Online data migration</td>
