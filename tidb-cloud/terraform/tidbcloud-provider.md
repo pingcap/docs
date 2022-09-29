@@ -79,9 +79,9 @@ rerun this command to reinitialize your working directory. If you forget, other
 commands will detect it and remind you to do so if necessary.
 ```
 
-## Config the provider with API Key
+## Configure the provider with API Key
 
-You need to config the provider like:
+You need to configure the provider like:
 
 ```
 terraform {
