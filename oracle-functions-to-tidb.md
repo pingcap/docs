@@ -24,7 +24,7 @@ The following table shows the mappings between some Oracle and TiDB functions.
 | Get the number of days between `date1` and `date2` | `date1 - date2` | `DATEDIFF(date1, date2)` | |
 | Add or reduce date by `n` days  | `DATEVAL + n` | `DATE_ADD(dateVal,INTERVAL n DAY)` | `n` can be a negative value.|
 | Add or reduce date by `n` months | `ADD_MONTHS(dateVal,n)`| `DATE_ADD(dateVal,INTERVAL n MONTH)` | `n` can be a negative value. |
-| Get the date (precision to the date) 获取日期到日 | `TRUNC(SYSDATE)` | <li>`CAST(NOW() AS DATE)`</li><li>`DATE_FORMAT(NOW(),'%Y-%m-%d')`</li> | In TiDB, `CAST` and  `DATE_FORMAT` return the same result. |
+| Get the date (precision to the date) | `TRUNC(SYSDATE)` | <li>`CAST(NOW() AS DATE)`</li><li>`DATE_FORMAT(NOW(),'%Y-%m-%d')`</li> | In TiDB, `CAST` and  `DATE_FORMAT` return the same result. |
 | Get the month of the date | `TRUNC(SYSDATE,'mm')` | `DATE_ADD(CURDATE(),interval - day(CURDATE()) + 1 day)`  | |
 | Round down a value | `TRUNC(2.136) = 2`<br/> `TRUNC(2.136,2) = 2.14` | `TRUNCATE(2.136,0) = 2`<br/> `TRUNCATE(2.136,2) = 2.14` |  |
 | Combine the strings `a` and `b` | `'a' || 'b'` | `CONCAT('a','b')` | |
@@ -33,7 +33,7 @@ The following table shows the mappings between some Oracle and TiDB functions.
 | Get random sequence values | `SYS_GUID()` | `UUID()` | TiDB returns a Universal Unique Identifier (UUID).|
 | `NVL()` | `NVL(key,val)` | `IFNULL(key,val)` | If the value of the field is `NULL`, it returns the value of `val`; otherwise, it returns the value of the field.  |
 | `NVL2()` | `NVL2(key, val1, val2)`  | `IF(key is NULL, val1, val2)` | If the value of the field is not `NULL`, it returns the value of `val1`; otherwise, it returns the value of `val2`. |
-| `DECODE()` | <li>`DECODE(key,val1,val2,val3)`</li><li>`DECODE(value,if1,val1,if2,val2,...,ifn,valn,val)`</li> | <li>`IF(key=val1,val2,val3)`</li><li>`CASE WHEN value=if1 THEN val1 WHEN value=if2 THEN val2,...,WHEN value=ifn THEN valn ELSE val END`</li> | <li>If the value of the field is equal to val1, then val2 is returned; otherwise val3 is returned.</li><li>当该字段值满足条件 1 (if1) 时，返回 val1，满足条件 2 (if2) 时，返回 val2，满足条件 3 (if3) 时，返回 val3。When the field value satisfies the condition 1 (if1), it returns val1. When it satisfies the condition 2 (if2), it returns val2. When it satisfies the condition 3 (if3), it returns val3.</li> |
+| `DECODE()` | <li>`DECODE(key,val1,val2,val3)`</li><li>`DECODE(value,if1,val1,if2,val2,...,ifn,valn,val)`</li> | <li>`IF(key=val1,val2,val3)`</li><li>`CASE WHEN value=if1 THEN val1 WHEN value=if2 THEN val2,...,WHEN value=ifn THEN valn ELSE val END`</li> | <li>If the value of the field is equal to val1, then val2 is returned; otherwise val3 is returned.</li><li>When the field value satisfies the condition 1 (if1), it returns val1. When it satisfies the condition 2 (if2), it returns val2. When it satisfies the condition 3 (if3), it returns val3.</li> |
 | Get the length of a string | `LENGTH(str)` | `CHAR_LENGTH(str)` | |
 | Get sub strings | `SUBSTR('abcdefg',0,2) = 'ab'`<br/> `SUBSTR('abcdefg',1,2) = 'ab'` | `SUBSTRING('abcdefg',0,2) = ''`<br/>`SUBSTRING('abcdefg',1,2) = 'ab'` | <li>In Oracle, the starting position 0 has the same effect as 1. </li><li>In TiDB, the substring starting from 0 is null. If you need to start from the beginning of the string, you should start from 1.</li>|
 | Search a string for substrings | `INSTR('abcdefg','b',1,1)` | `INSTR('abcdefg','b')` | Search from the first character of the string 'abcdefg' and return the position of the first occurrence of the 'b' string. |
@@ -48,7 +48,7 @@ The following table shows the mappings between some Oracle and TiDB functions.
 
 This section describes some syntax differences between Oracle and TiDB.
 
-### Add an alias for a table in the DELETE stateemnt
+### Add an alias for a table in the DELETE statement
 
 - Oracle supports adding an alias for a table in the DELETE statement. For example:
 
