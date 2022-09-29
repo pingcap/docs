@@ -186,7 +186,13 @@
     - [Scheduling](/tidb-scheduling.md)
   - [TiDB Cloud Cluster Limits and Quotas](/tidb-cloud/limitations-and-quotas.md)
   - [TiDB Limitations](/tidb-limitations.md)
-  - [TiDB Cloud Terraform](/tidb-cloud/terraform-provider-tidbcloud.md)
+  - Terraform
+    - [Overview](/tidb-cloud/terraform/terraform-overview.md)
+    - [Get TiDB Cloud Provider](/tidb-cloud/terraform/tidbcloud-provider.md)
+    - [Cluster Resource](/tidb-cloud/terraform/cluster-resource.md)
+    - [Backup Resource](/tidb-cloud/terraform/backup-resource.md)
+    - [Restore Resource](/tidb-cloud/terraform/restore-resource.md)
+    - [Destroy](/tidb-cloud/terraform/destroy.md)
   - SQL
     - [Explore SQL with TiDB](/basic-sql-operations.md)
     - SQL Language Structure and Syntax

@@ -1,0 +1,126 @@
+---
+title: Backup Resource
+summary: Learn How to use Backup Resource
+---
+
+# Backup Resource
+
+> **Note:**
+>
+> Make sure you have set up a dedicated cluster
+
+
+## Create a backup with backup resource
+
+First, copy the following config:
+
+```
+resource "tidbcloud_backup" "example_backup" {
+  project_id  = "1372813089189561287"
+  cluster_id  = "1379661944630234067"
+  name        = "firstBackup"
+  description = "create by terraform"
+}
+```
+
+You can also get project_id and cluster_id from the cluster resource like:
+
+```
+resource "tidbcloud_backup" "example_backup" {
+  project_id  = tidbcloud_cluster.example_cluster.project_id
+  cluster_id  = tidbcloud_cluster.example_cluster.id
+  name        = "firstBackup"
+  description = "create by terraform"
+}
+```
+
+Here we use the second config and execute `terraform apply`:
+
+```
+$ terraform apply
+
+tidbcloud_cluster.example_cluster: Refreshing state... [id=1379661944630234067]
+
+Terraform used the selected providers to generate the following execution plan. Resource actions are indicated with the following symbols:
+  + create
+
+Terraform will perform the following actions:
+
+  # tidbcloud_backup.example_backup will be created
+  + resource "tidbcloud_backup" "example_backup" {
+      + cluster_id       = "1379661944630234067"
+      + create_timestamp = (known after apply)
+      + description      = "create by terraform"
+      + id               = (known after apply)
+      + name             = "firstBackup"
+      + project_id       = "1372813089189561287"
+      + size             = (known after apply)
+      + status           = (known after apply)
+      + type             = (known after apply)
+    }
+
+Plan: 1 to add, 0 to change, 0 to destroy.
+
+Do you want to perform these actions?
+  Terraform will perform the actions described above.
+  Only 'yes' will be accepted to approve.
+
+  Enter a value: 
+```
+
+Type `yes` to create a backup:
+
+```
+  Enter a value: yes
+
+tidbcloud_backup.example_backup: Creating...
+tidbcloud_backup.example_backup: Creation complete after 2s [id=1350048]
+
+Apply complete! Resources: 1 added, 0 changed, 0 destroyed.
+
+```
+
+Use `terraform state show tidbcloud_backup.example_backup` to check the state of the backup:
+
+```
+$ terraform state show tidbcloud_backup.example_backup
+
+# tidbcloud_backup.example_backup:
+resource "tidbcloud_backup" "example_backup" {
+    cluster_id       = "1379661944630234067"
+    create_timestamp = "2022-08-26T07:56:10Z"
+    description      = "create by terraform"
+    id               = "1350048"
+    name             = "firstBackup"
+    project_id       = "1372813089189561287"
+    size             = "0"
+    status           = "PENDING"
+    type             = "MANUAL"
+}
+```
+
+Wait for some minutes and use `terraform refersh`  to update the states:
+
+```
+$ terraform refresh  
+tidbcloud_cluster.example_cluster: Refreshing state... [id=1379661944630234067]
+tidbcloud_backup.example_backup: Refreshing state... [id=1350048]
+$ terraform state show tidbcloud_backup.example_backup
+# tidbcloud_backup.example_backup:
+resource "tidbcloud_backup" "example_backup" {
+    cluster_id       = "1379661944630234067"
+    create_timestamp = "2022-08-26T07:56:10Z"
+    description      = "create by terraform"
+    id               = "1350048"
+    name             = "firstBackup"
+    project_id       = "1372813089189561287"
+    size             = "198775"
+    status           = "SUCCESS"
+    type             = "MANUAL"
+}
+
+```
+
+Congratulations. You have created a backup for your cluster. Pay attention that the backup can not be updated.
+
+> Next, let us use the backup to [restore a cluster](restore-resource.md)
