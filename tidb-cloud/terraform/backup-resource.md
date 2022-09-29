@@ -9,7 +9,6 @@ summary: Learn How to use Backup Resource
 >
 > Make sure you have set up a dedicated cluster
 
-
 ## Create a backup with backup resource
 
 First, copy the following config:
