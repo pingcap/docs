@@ -296,7 +296,7 @@ Since v6.3.0, TiCDC no longer supports configuring Pulsar sink. [kop](https://gi
 
     + Backup & Restore (BR)
 
-        - PITR can merge a batch of files, which greatly reduces the number of backup files required [#13232](https://github.com/tikv/tikv/issues/13232) @[Leavrth](https://github.com/Leavrth)
+        - PITR can merge small files generated in log backup, which greatly reduces the number of backup files [#13232](https://github.com/tikv/tikv/issues/13232) @[Leavrth](https://github.com/Leavrth)
         - PITR supports automatically configuring the number of TiFlash replicas based on the upstream cluster configuration after the restoration [#37208](https://github.com/pingcap/tidb/issues/37208) @[YuJuncen](https://github.com/YuJuncen)
 
     + TiCDC
