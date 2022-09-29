@@ -25,7 +25,7 @@ The following table shows the mappings between some Oracle and TiDB functions.
 | Increase or decrease date by `n` days  | `DATEVAL + n` | `DATE_ADD(dateVal,INTERVAL n DAY)` | `n` can be a negative value.|
 | Increase or decrease date by `n` months | `ADD_MONTHS(dateVal,n)`| `DATE_ADD(dateVal,INTERVAL n MONTH)` | `n` can be a negative value. |
 | Get the date (precision to the date) | `TRUNC(SYSDATE)` | <li>`CAST(NOW() AS DATE)`</li><li>`DATE_FORMAT(NOW(),'%Y-%m-%d')`</li> | In TiDB, `CAST` and  `DATE_FORMAT` return the same result. |
-| Get the month of the date | `TRUNC(SYSDATE,'mm')` | `DATE_ADD(CURDATE(),interval - day(CURDATE()) + 1 day)`  | |
+| Get the first date of the month | `TRUNC(SYSDATE,'mm')` | `DATE_ADD(CURDATE(),interval - day(CURDATE()) + 1 day)`  | |
 | Round down a value | `TRUNC(2.136) = 2`<br/> `TRUNC(2.136,2) = 2.14` | `TRUNCATE(2.136,0) = 2`<br/> `TRUNCATE(2.136,2) = 2.14` |  |
 | Combine the strings `a` and `b` | `'a' || 'b'` | `CONCAT('a','b')` | |
 | Get the next value in a sequence | `SEQUENCENAME.NEXTVAL` | `NEXTVAL(sequenceName)` | |
