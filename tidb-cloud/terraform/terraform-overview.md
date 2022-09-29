@@ -21,19 +21,23 @@ If you are looking to a simplified ways to automate resource provisioning and yo
 - [Terraform](https://www.terraform.io/downloads.html) >= 1.0
 - [Go](https://golang.org/doc/install) >= 1.18 (if you want to build the provider plugin)
 
-## Support
+## Supports
+
+[Resources](https://www.terraform.io/language/resources) and [Data sources](https://www.terraform.io/language/data-sources) are the important elements in the Terraform language.
+
+TiDB Cloud supports the following Resources and Data sources:
 
 Resources
 
 - cluster
-- backup
-- restore
+- backup (not support update)
+- restore (not support update and delete)
 
-Data-sources
+Data sources
 
 - project
 - cluster spec
 - restore
 - backup
 
-You can get all the available configuration for the resources and data-sources in this [doc](https://registry.terraform.io/providers/tidbcloud/tidbcloud/latest/docs)
+You can get all the available configuration for the resources and data sources in this [doc](https://registry.terraform.io/providers/tidbcloud/tidbcloud/latest/docs)

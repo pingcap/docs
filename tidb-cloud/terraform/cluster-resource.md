@@ -9,7 +9,7 @@ summary: Learn how to use cluster resource
 >
 > Make sure you have followed the [Get TiDB Cloud provider](/tidb-cloud/terraform/tidbcloud-provider.md)
 
-## Get projectId with project Data Source
+## Get projectId with project data source
 
 Let us get all the projects by project data source first:
 
@@ -99,7 +99,7 @@ projects = tolist([
 
 Now, you get all the available projects, copy one of the id you need. Here we use the default project's ID.
 
-## Get cluster spec info with cluster-spec Data Source
+## Get cluster spec info with cluster-spec data source
 
 Before creating a TiDB cluster, you may need to get the available config values (providers, regions and so on.) by cluster-spec Data Source:
 

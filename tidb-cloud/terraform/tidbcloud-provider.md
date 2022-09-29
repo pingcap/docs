@@ -9,7 +9,7 @@ summary: Learn how to get TiDB Cloud provider
 >
 > Make sure meet the requirements in [overview](/tidb-cloud/terraform/terraform-overview.md)
 
-## Set up Terraform
+## Set up terraform
 
 TiDB Cloud provider has released to terraform registry. All you need to do is install terraform (>=1.0).
 
