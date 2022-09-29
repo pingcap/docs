@@ -26,8 +26,8 @@ The following table shows the mappings between some Oracle and TiDB functions.
 | Increase or decrease date by `n` months | `ADD_MONTHS(dateVal,n)`| `DATE_ADD(dateVal,INTERVAL n MONTH)` | `n` can be a negative value. |
 | Get the date (precision to the date) | `TRUNC(SYSDATE)` | <li>`CAST(NOW() AS DATE)`</li><li>`DATE_FORMAT(NOW(),'%Y-%m-%d')`</li> | In TiDB, `CAST` and  `DATE_FORMAT` return the same result. |
 | Get the first date of the month | `TRUNC(SYSDATE,'mm')` | `DATE_ADD(CURDATE(),interval - day(CURDATE()) + 1 day)`  | |
-| Round down a value | `TRUNC(2.136) = 2`<br/> `TRUNC(2.136,2) = 2.14` | `TRUNCATE(2.136,0) = 2`<br/> `TRUNCATE(2.136,2) = 2.14` |  |
-| Combine the strings `a` and `b` | `'a' || 'b'` | `CONCAT('a','b')` | |
+| Truncate a value | `TRUNC(2.136) = 2`<br/> `TRUNC(2.136,2) = 2.14` | `TRUNCATE(2.136,0) = 2`<br/> `TRUNCATE(2.136,2) = 2.14` |  |
+| Combine the strings `a` and `b` | `'a' \|\| 'b'` | `CONCAT('a','b')` | |
 | Get the next value in a sequence | `SEQUENCENAME.NEXTVAL` | `NEXTVAL(sequenceName)` | |
 | Left join or right join | `SELECT * FROM a, b WHERE a.id = b.id(+);`<br/>`SELECT * FROM a, b WHERE a.id(+) = b.id;` | `SELECT * FROM a LEFT JOIN b ON a.id = b.id;`<br/>`SELECT * FROM a RIGHT JOIN b ON a.id = b.id;` | When correlating queries, TiDB does not support using (+) to left join or right join. You can use `LEFT JOIN` or `RIGHT JOIN` instead. |
 | Get random sequence values | `SYS_GUID()` | `UUID()` | TiDB returns a Universal Unique Identifier (UUID).|
