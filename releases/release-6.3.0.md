@@ -31,9 +31,7 @@ In v6.3.0-DMR, the key new features and improvements are as follows:
 
     TiDB supports [PARTITION BY RANGE COLUMNS (column_list)](/partitioned-table.md#range-columns-partitioning). `column_list` is no longer limited to a single column. The basic feature is the same as MySQL.
 
-* EXCHANGE PARTITION becomes GA [#35996](https://github.com/pingcap/tidb/issues/35996) @[ymkzpx](https://github.com/ymkzpx)
-
-    [EXCHANGE PARTITION](/partitioned-table.md#partition-management) becomes GA after performance and stability improvements.
+* [EXCHANGE PARTITION](/partitioned-table.md#partition-management) becomes GA [#35996](https://github.com/pingcap/tidb/issues/35996) @[ymkzpx](https://github.com/ymkzpx)
 
 * TiDB supports two more [window functions](/tiflash/tiflash-supported-pushdown-calculations.md) [#5579](https://github.com/pingcap/tiflash/issues/5579) @[SeaRise](https://github.com/SeaRise)
 
@@ -138,15 +136,17 @@ In v6.3.0-DMR, the key new features and improvements are as follows:
 
     When [`dynamic pruning`](/partitioned-table.md#dynamic-pruning-mode) is enabled, the optimizer selects execution plans based on [GlobalStats](/statistics.md#collect-statistics-of-partitioned-tables-in-dynamic-pruning-mode). Before GlobalStats are fully collected, using pseudo statistics might cause performance regression. In v6.3.0, this issue is addressed by maintaining the `static` mode if you enable dynamic pruning before GlobalStats are collected. TiDB remains in the `static` mode until GlobalStats are collected. This ensures performance stability when you change the partition pruning settings.
 
+### Ease of use
+
+* Improve compatibility of SQL-based data Placement Rules [#37171](https://github.com/pingcap/tidb/issues/37171) @[lcwangchao](https://github.com/lcwangchao)
+
+    TiDB v6.0.0 provides SQL-based data Placement Rules. But this feature is not compatible with TiFlash due to conflicts in implementation mechanisms. TiDB v6.3.0 optimizes this feature, and [improves compatibility of SQL-based data Placement Rules and TiFlash](/placement-rules-in-sql.md#known-limitations).
+
 ### MySQL compatibility
 
 * Improve MySQL 8.0 compatibility by adding support for four regular expression functions: `REGEXP_INSTR()`, `REGEXP_LIKE()`, `REGEXP_REPLACE()`, and `REGEXP_SUBSTR()` [#23881](https://github.com/pingcap/tidb/issues/23881) @[windtalker](https://github.com/windtalker)
 
     For more details about the compatibility with MySQL, see [Regular expression compatibility with MySQL](/functions-and-operators/string-functions.md#regular-expression-compatibility-with-mysql).
-
-* Improve compatibility of SQL-based data Placement Rules [#37171](https://github.com/pingcap/tidb/issues/37171) @[lcwangchao](https://github.com/lcwangchao)
-
-    TiDB v6.0.0 provides SQL-based data Placement Rules. But this feature is not compatible with TiFlash due to conflicts in implementation mechanisms. TiDB v6.3.0 optimizes this feature, and [improves compatibility of SQL-based data Placement Rules and TiFlash](/placement-rules-in-sql.md#known-limitations).
 
 * The `CREATE USER` and `ALTER USER` statements support the `ACCOUNT LOCK/UNLOCK` option [#37051](https://github.com/pingcap/tidb/issues/37051) @[CbcWestwolf](https://github.com/CbcWestwolf)
 
@@ -162,9 +162,9 @@ In v6.3.0-DMR, the key new features and improvements are as follows:
 
 ### Backup and restore
 
-* PITR supports GCS and Azure Blob Storage as backup storages @[joccau](https://github.com/joccau)
+* PITR supports [GCS](/br/backup-storage-gcs.md) and [Azure Blob Storage](/br/backup-storage-azblob.md) as backup storages @[joccau](https://github.com/joccau)
 
-    PITR supports [GCS](/br/backup-storage-gcs.md) and [Azure Blob Storage](/br/backup-storage-azblob.md) as backup storages. If your TiDB cluster is deployed on GCP or Azure, you can use the PITR feature after upgrading your cluster to v6.3.0.
+    If your TiDB cluster is deployed on GCP or Azure, you can use the PITR feature after upgrading your cluster to v6.3.0.
 
 * BR supports AWS S3 Object Lock [#13442](https://github.com/tikv/tikv/issues/13442) @[3pointer](https://github.com/3pointer)
 
@@ -172,13 +172,11 @@ In v6.3.0-DMR, the key new features and improvements are as follows:
 
 ### Data migration
 
-* TiDB Lightning supports importing Parquet files exported by Apache Hive into TiDB [#37536](https://github.com/pingcap/tidb/issues/37536) @[buchuitoudegou](https://github.com/buchuitoudegou)
+* TiDB Lightning supports [importing Parquet files exported by Apache Hive into TiDB](/tidb-lightning/tidb-lightning-data-source.md#parquet) [#37536](https://github.com/pingcap/tidb/issues/37536) @[buchuitoudegou](https://github.com/buchuitoudegou)
 
-    TiDB Lightning supports [importing Parquet files exported by Apache Hive into TiDB](/tidb-lightning/tidb-lightning-data-source.md#parquet), thereby achieving data migration from Hive to TiDB.
+* DM adds a new configuration item `safe-mode-duration` [#6224](https://github.com/pingcap/tiflow/issues/6224) @[okJiang](https://github.com/okJiang)
 
-* DM adds a new configuration item `safe-mode-duration` in the task configuration file [#6224](https://github.com/pingcap/tiflow/issues/6224) @[okJiang](https://github.com/okJiang)
-
-    DM adds a new configuration item `safe-mode-duration` in the [task configuration file](/dm/task-configuration-file-full.md). You can adjust the automatic safe mode duration after DM exits abnormally. The default value is 60 seconds. If `safe-mode-duration` is set to `"0s"`, an error is reported when DM tries to enter safe mode after an abnormal restart.
+    This configuration item is added to the [task configuration file](/dm/task-configuration-file-full.md). You can adjust the automatic safe mode duration after DM exits abnormally. The default value is 60 seconds. If `safe-mode-duration` is set to `"0s"`, an error is reported when DM tries to enter safe mode after an abnormal restart.
 
 ### TiDB data share subscription
 
