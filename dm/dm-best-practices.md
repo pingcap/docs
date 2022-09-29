@@ -150,13 +150,13 @@ The following table describes the recommended deployment plans for DM-master and
 
 #### Choose and configure the upstream data source
 
-DM backs up the full data of the entire database when performing full data migration, and uses the parallel logical backup method. During the backup, it uses a relatively heavy lock [`FLUSH TABLES WITH READ LOCK`](https://dev.mysql.com/doc/refman/8.0/en/flush.html#flush-tables-with-read-lock). DML and DDL operations of the upstream database will be blocked for a short time. Therefore, it is strongly recommended to use a backup database to perform the full data backup, and enable the GTID function of the data source (`enable-gtid: true`). This way, you can avoid the impact from the upstream, and switch to the master node in the upstream to reduce the delay during the incremental migration. For the method of switching the upstream MySQL data source, see [Switch DM-worker Connection between Upstream MySQL Instances](/dm/usage-scenario-master-slave-switch.md#switch-dm-worker-connection-via-virtual-ip).
+DM backs up the full data of the entire database when performing full data migration, and uses the parallel logical backup method. During the backup, it adds a global read lock [`FLUSH TABLES WITH READ LOCK`](https://dev.mysql.com/doc/refman/8.0/en/flush.html#flush-tables-with-read-lock). DML and DDL operations of the upstream database will be blocked for a short time. Therefore, it is strongly recommended to use a backup database in upstream to perform the full data backup, and enable the GTID function of the data source (`enable-gtid: true`). This way, you can avoid the impact from the upstream, and switch to the master node in the upstream to reduce the delay during the incremental migration. For the method of switching the upstream MySQL data source, see [Switch DM-worker Connection between Upstream MySQL Instances](/dm/usage-scenario-master-slave-switch.md#switch-dm-worker-connection-via-virtual-ip).
 
 Note the following:
 
 - You can only perform full data backup on the master node of the upstream database.
 
-    In this scenario, you can set the consistency parameter to `none` in the configuration file, `mydumpers.global.extra-args: "--consistency none"`, to avoid adding a heavy lock to the master node. But this may damage the data consistency of the full backup, which may lead to inconsistent data between the upstream and downstream.
+    In this scenario, you can set the consistency parameter to `none` in the configuration file, `mydumpers.global.extra-args: "--consistency none"`, to avoid adding a global read lock to the master node. But this may damage the data consistency of the full backup, which may lead to inconsistent data between the upstream and downstream.
 
 - Use backup snapshots to perform full data migration (only applicable to the migration of MySQL RDS and Aurora RDS on AWS)
 
@@ -174,7 +174,7 @@ In a special case, for example, if there is a database in the upstream that has 
 
 #### Filter rules
 
-This section does not elaborate on the filter rules. It is reminded that you configure the filter rules as soon as you configure the data source. The benefits of configuring the filter rules are:
+You can configure the filter rules as soon as you start configuring the data source. For more information, see [Data Migration Task Configuration Guide](/dm/dm-task-configuration-guide.md). The benefits of configuring the filter rules are:
 
 - Reduce the number of Binlog events that the downstream needs to process, thereby improving migration efficiency.
 - Reduce unnecessary Relay log storage, thereby saving disk space.
@@ -222,11 +222,11 @@ DM supports skipping or replacing DDL statements that cause the migration task t
 
 ## Data validation after data migration
 
-Usually you need to validate the consistency of data after data migration. TiDB provides [sync-diff-inspector](/sync-diff-inspector/sync-diff-inspector-overview.md) to help you complete the data validation.
+It is recommended that you validate the consistency of data after data migration. TiDB provides [sync-diff-inspector](/sync-diff-inspector/sync-diff-inspector-overview.md) to help you complete the data validation.
 
 Now sync-diff-inspector can automatically manage the table list to be checked for data consistency through DM tasks. Compared with the previous manual configuration, it is more efficient. For details, see [Data Check in the DM Replication Scenario](/sync-diff-inspector/dm-diff.md).
 
-Since DM v6.2, data validation is also supported for incremental replication. For details, see [Continuous Data Validation in DM](/dm/dm-continuous-data-validation.md).
+Since DM v6.2, DM supports continuous data validation for incremental replication. For details, see [Continuous Data Validation in DM](/dm/dm-continuous-data-validation.md).
 
 ## Long-term data replication
 
