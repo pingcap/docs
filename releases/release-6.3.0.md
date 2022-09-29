@@ -300,7 +300,6 @@ Since v6.3.0, TiCDC no longer supports configuring Pulsar sink. [kop](https://gi
         - Support to push down the `castTimeAsDuration` function to TiFlash [#5306](https://github.com/pingcap/tiflash/issues/5306) @[AntiTopQuark](https://github.com/AntiTopQuark)
         - Support to push down the `HexIntArg/HexStrArg` function to TiFlash [#5107](https://github.com/pingcap/tiflash/issues/5107) @[YangKeao](https://github.com/YangKeao)
         - Refactor TiFlash's interpreter, and support the new interpreter Planner [#4739](https://github.com/pingcap/tiflash/issues/4739) @[SeaRise](https://github.com/SeaRise)
-        - Suppress the "cannot set inq" logs [#4940](https://github.com/pingcap/tiflash/issues/4940) @[LittleFall](https://github.com/LittleFall) 
         - Improve the accuracy of memory tracker in TiFlash [#5609](https://github.com/pingcap/tiflash/issues/5609) @[bestwoody](https://github.com/bestwoody)
         - Improve the performance of string columns with the `UTF8_BIN/ASCII_BIN/LATIN1_BIN/UTF8MB4_BIN` collations [#5294](https://github.com/pingcap/tiflash/issues/5294) @[solotzg](https://github.com/solotzg)
 
@@ -411,14 +410,14 @@ Since v6.3.0, TiCDC no longer supports configuring Pulsar sink. [kop](https://gi
 
     - Compute
 
-        - Fix the bug that the window function may cause TiFlash to crash when the query is canceled [#5814](https://github.com/pingcap/tiflash/issues/5814) @[SeaRise](https://github.com/SeaRise)
-        - Fix the bug that wrong data input for `date(CAST(value AS DATETIME))` causing high TiFlash sys CPU [#5097](https://github.com/pingcap/tiflash/issues/5097) @[xzhangxian1008](https://github.com/xzhangxian1008)
-        - Fix that issue that the result of `cast(Real/Decimal)AsTime` is inconsistent with MySQL [#3779](https://github.com/pingcap/tiflash/issues/3779) @[mengxin9014](https://github.com/mengxin9014)
+        - Fix a bug that the window function might cause TiFlash to crash when the query is canceled [#5814](https://github.com/pingcap/tiflash/issues/5814) @[SeaRise](https://github.com/SeaRise)
+        - Fix a bug that wrong data input for `date(CAST(value AS DATETIME))` causing high TiFlash sys CPU [#5097](https://github.com/pingcap/tiflash/issues/5097) @[xzhangxian1008](https://github.com/xzhangxian1008)
+        - Fix the issue that the result of `cast(Real/Decimal)AsTime` is inconsistent with MySQL [#3779](https://github.com/pingcap/tiflash/issues/3779) @[mengxin9014](https://github.com/mengxin9014)
 
     - Storage
 
         - Fix the issue that there may be some obsolete data left in storage which cannot be deleted [#5570](https://github.com/pingcap/tiflash/issues/5570) @[JaySon-Huang](https://github.com/JaySon-Huang)
-        - Fix the bug that page GC may block creating tables [#5697](https://github.com/pingcap/tiflash/issues/5697) @[JaySon-Huang](https://github.com/JaySon-Huang)
+        - Fix a bug that page GC might block creating tables [#5697](https://github.com/pingcap/tiflash/issues/5697) @[JaySon-Huang](https://github.com/JaySon-Huang)
         - Fix the panic issue that occurs after creating the primary index with a column containing the `NULL` value [#5859](https://github.com/pingcap/tiflash/issues/5859) @[JaySon-Huang](https://github.com/JaySon-Huang)
 
 + Tools
