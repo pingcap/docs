@@ -34,7 +34,9 @@ Elastic scheduling feature. It enables the TiDB cluster to dynamically scale out
 + [Generated Columns](/generated-columns.md) (Introduced in v2.1)
 + [User-Defined Variables](/user-defined-variables.md) (Introduced in v2.1)
 + [Cascades Planner](/system-variables.md#tidb_enable_cascades_planner): a cascades framework-based top-down query optimizer (Introduced in v3.0)
-+ [`ALTER TABLE ... COMPACT`](/sql-statements/sql-statement-alter-table-compact.md) (Introduced in v6.1.0)
++ [Metadata Lock](/metadata-lock.md) (Introduced in v6.3.0)
++ [Range INTERVAL partitioning](/partitioned-table.md#range-interval-partitioning) (Introduced in v6.3.0)
++ [Add index acceleration](/system-variables.md#tidb_ddl_enable_fast_reorg-new-in-v630) (Introduced in v6.3.0)
 
 ## Storage
 
