@@ -109,4 +109,4 @@ export TIDBCLOUD_PASSWORD = ${private_key}
 
 Now, you can use the TiDB Cloud provider. 
 
-> Next, you can manage the cluster with [cluster resource](cluster-resource)
+> Next, you can manage the cluster with [cluster resource](/cluster-resource.md)
