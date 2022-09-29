@@ -487,6 +487,16 @@ mysql> SHOW GLOBAL VARIABLES LIKE 'max_prepared_stmt_count';
 - Default value: `ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION`
 - This variable controls a number of MySQL compatibility behaviors. See [SQL Mode](/sql-mode.md) for more information.
 
+### sql_require_primary_key <span class="version-mark">New in v6.3.0</span>
+
+- Scope: SESSION | GLOBAL
+- Persists to cluster: Yes
+- Type: Boolean
+- Default value: `OFF`
+- This variable controls whether to enforce the requirement that a table has a primary key. After this variable is enabled, attempting to create or alter a table without a primary key will produce an error. 
+- This feature is based on the similarly named [`sql_require_primary_key`](https://dev.mysql.com/doc/refman/8.0/en/server-system-variables.html#sysvar_sql_require_primary_key) in MySQL 8.0.
+- It is strongly recommended to enable this variable when using TiCDC. This is because replicating changes to a MySQL sink requires that tables have a primary key.
+
 ### sql_select_limit <span class="version-mark">New in v4.0.2</span>
 
 - Scope: SESSION | GLOBAL
@@ -886,6 +896,20 @@ MPP is a distributed computing framework provided by the TiFlash engine, which a
 - Default value: `OFF`
 - This variable controls whether to enable the acceleration of `ADD INDEX` and `CREATE INDEX` DDl operations to improve the speed of backfilling when creating an index. If this variable is enabled, TiDB uses a more effective way to create an index.
 
+<CustomContent platform="tidb">
+
+> **Warning:**
+>
+> Currently, acceleration of `ADD INDEX` and `CREATE INDEX` is an experimental feature. It is not recommended that you use it in production environments.
+>
+> Currently, this feature is not compatible with [PITR (Point-in-time recovery)](/br/point-in-time-recovery.md). When using index acceleration, you need to ensure that there are no PITR log backup tasks running in the background. Otherwise, unexpected behaviors might occur, including:
+>
+> - If you start a log backup task first, and then add an index. The adding index process is not accelerated even if index acceleration is enabled. But the index is added in a slow way.
+> - If you start an index acceleration task first, and then start a log backup task. The log backup task returns an error. But the index acceleration is not affected.
+> - If you start a log backup task and an index acceleration task at the same time, the two tasks might not be aware of each other. This might result in PITR failing to back up the newly added index.
+
+</CustomContent>
+
 ### tidb_ddl_error_count_limit
 
 - Scope: GLOBAL
@@ -894,6 +918,18 @@ MPP is a distributed computing framework provided by the TiFlash engine, which a
 - Default value: `512`
 - Range: `[0, 9223372036854775807]`
 - This variable is used to set the number of retries when the DDL operation fails. When the number of retries exceeds the parameter value, the wrong DDL operation is canceled.
+
+### `tidb_ddl_flashback_concurrency` <span class="version-mark">New in v6.3.0</span>
+
+> **Warning:**
+>
+> The feature controlled by this variable is not fully functional in the current TiDB version. Do not change the default value.
+
+- Scope: GLOBAL
+- Persists to cluster: Yes
+- Default value: `64`
+- Range: `[1, 256]`
+- This variable controls the concurrency of `flashback cluster`.
 
 ### tidb_ddl_reorg_batch_size
 
@@ -1155,6 +1191,35 @@ MPP is a distributed computing framework provided by the TiFlash engine, which a
     - `RESTRICTED_VARIABLES_ADMIN`: The ability to see and set sensitive variables in `SHOW [GLOBAL] VARIABLES` and `SET`.
     - `RESTRICTED_USER_ADMIN`: The ability to prevent other users from making changes or dropping a user account.
 
+### tidb_enable_exchange_partition
+
+- Scope: SESSION | GLOBAL
+- Persists to cluster: Yes
+- Type: Boolean
+- Default value: `ON`
+- This variable controls whether to enable the [`exchange partitions with tables`](/partitioned-table.md#partition-management) feature. The default value is `ON`, that is, `exchange partitions with tables` is enabled by default.
+- This variable is deprecated since v6.3.0. Its value will be fixed to the default value `ON`, that is, `exchange partitions with tables` is enabled by default.
+
+### tidb_enable_extended_stats
+
+<CustomContent platform="tidb-cloud">
+
+> **Note:**
+>
+> This TiDB variable is not applicable to TiDB Cloud.
+
+</CustomContent>
+
+<CustomContent platform="tidb">
+
+- Scope: SESSION | GLOBAL
+- Persists to cluster: Yes
+- Type: Boolean
+- Default value: `OFF`
+- This variable indicates whether TiDB can collect the extended statistic to guide the optimizer. See [Introduction to Extended Statistics](/extended-statistics.md) for more information.
+
+</CustomContent>
+
 ### tidb_enable_fast_analyze
 
 > **Warning:**
@@ -1167,6 +1232,28 @@ MPP is a distributed computing framework provided by the TiFlash engine, which a
 - Default value: `OFF`
 - This variable is used to set whether to enable the statistics `Fast Analyze` feature.
 - If the statistics `Fast Analyze` feature is enabled, TiDB randomly samples about 10,000 rows of data as statistics. When the data is distributed unevenly or the data size is small, the statistics accuracy is low. This might lead to a non-optimal execution plan, for example, selecting a wrong index. If the execution time of the regular `Analyze` statement is acceptable, it is recommended to disable the `Fast Analyze` feature.
+
+### `tidb_enable_foreign_key` <span class="version-mark">New in v6.3.0</span>
+
+> **Warning:**
+>
+> The feature controlled by this variable is not fully functional in the current TiDB version. Do not change the default value.
+
+- Scope: GLOBAL
+- Persists to cluster: Yes
+- Default value: `OFF`
+- This variable controls whether to enable the `FOREIGN KEY` feature.
+
+### `tidb_enable_general_plan_cache` <span class="version-mark">New in v6.3.0</span>
+
+> **Warning:**
+>
+> The feature controlled by this variable is not fully functional in the current TiDB version. Do not change the default value.
+
+- Scope: SESSION | GLOBAL
+- Persists to cluster: Yes
+- Default value: `OFF`
+- This variable controls whether to enable the General Plan Cache feature.
 
 ### tidb_enable_index_merge <span class="version-mark">New in v4.0</span>
 
@@ -1277,6 +1364,13 @@ MPP is a distributed computing framework provided by the TiFlash engine, which a
     * When you use `SELECT` to read a `noop` variable, TiDB returns the `"variable *variable_name* has no effect in TiDB"` warning.
 - To check whether a TiDB instance has set and read the `noop` variable, you can use the `SELECT * FROM INFORMATION_SCHEMA.CLIENT_ERRORS_SUMMARY_GLOBAL;` statement.
 
+### `tidb_enable_null_aware_anti_join` <span class="version-mark">New in v6.3.0</span>
+
+- Scope: SESSION ｜GLOBAL
+- Persists to cluster: Yes
+- Default value: `OFF`
+- This variable controls whether TiDB applies Null Aware Hash Join when ANTI JOIN is generated by subqueries led by special set operators `NOT IN` and `!= ALL`.
+
 ### tidb_enable_outer_join_reorder <span class="version-mark">New in v6.1.0</span>
 
 - Scope: SESSION | GLOBAL
@@ -1348,12 +1442,13 @@ MPP is a distributed computing framework provided by the TiFlash engine, which a
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
 - Type: Boolean
-- Default value: `ON`
+- Default value: `OFF`
 - This variable controls whether to enable the dynamic memory control feature for the operator that reads data. By default, this operator enables the maximum number of threads that [`tidb_distsql_scan_concurrency`](/system-variables.md#tidb_distsql_scan_concurrency) allows to read data. When the memory usage of a single SQL statement exceeds [`tidb_mem_quota_query`](/system-variables.md#tidb_mem_quota_query) each time, the operator that reads data stops one thread.
 
 <CustomContent platform="tidb">
 
 - When the operator that reads data has only one thread left and the memory usage of a single SQL statement continues to exceed [`tidb_mem_quota_query`](/system-variables.md#tidb_mem_quota_query), this SQL statement triggers other memory control behaviors, such as [spilling data to disk](/tidb-configuration-file.md#oom-use-tmp-storage).
+- This variable controls memory usage effectively when an SQL statement only reads data. If computing operations (such as join or aggregation operations) are required, memory usage might not be under the control of `tidb_mem_quota_query`, which increases the risk of OOM.
 
 </CustomContent>
 
@@ -1451,6 +1546,17 @@ Query OK, 0 rows affected (0.09 sec)
 - This variable is used to dynamically control whether the telemetry collection in TiDB is enabled.
 
 </CustomContent>
+
+### `tidb_enable_tiflash_read_for_write_stmt` <span class="version-mark">New in v6.3.0</span>
+
+> **Warning:**
+>
+> The feature controlled by this variable is not fully functional in the current TiDB version. Do not change the default value.
+
+- Scope: SESSION | GLOBAL
+- Persists to cluster: Yes
+- Default value: `OFF`
+- This variable controls whether read requests in SQL write statements can be pushed down to TiFlash.
 
 ### tidb_enable_top_sql <span class="version-mark">New in v5.4.0</span>
 
@@ -1770,6 +1876,18 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 
 </CustomContent>
 
+### `tidb_general_plan_cache_size` <span class="version-mark">New in v6.3.0</span>
+
+> **Warning:**
+>
+> The feature controlled by this variable is not fully functional in the current TiDB version. Do not change the default value.
+
+- Scope: SESSION | GLOBAL
+- Persists to cluster: Yes
+- Default value: `100`
+- Range: `[1, 100000]`
+- This variable controls the maximum number of execution plans that can be cached by General Plan Cache.
+
 ### tidb_guarantee_linearizability <span class="version-mark">New in v5.0</span>
 
 - Scope: SESSION | GLOBAL
@@ -1948,6 +2066,13 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
     - The transaction commit mode, which might be a two-phase, one-phase, or async commit.
     - The information of transaction fallback from async commit or one-phase commit to two-phase commit.
     - The error encountered.
+
+### `tidb_last_plan_replayer_token` <span class="version-mark">New in v6.3.0</span>
+
+- Scope：SESSION
+- Persists to cluster: No
+- Type: String
+- This variable is read-only and is used to obtain the result of the last `PLAN REPLAYER DUMP` execution in the current session.
 
 ### tidb_log_file_max_days <span class="version-mark">New in v5.3.0</span>
 
@@ -2491,12 +2616,20 @@ explain select * from t where age=5;
 - Default value: `OFF`
 - This variable is used to control whether common table expressions (CTEs) in the entire session are inlined or not. The default value is `OFF`, which means that inlining CTE is not enforced by default. However, you can still inline CTE by specifying the `MERGE()` hint. If the variable is set to `ON`, all CTEs (except recursive CTE) in this session are forced to be inlined.
 
+### tidb_optimizer_selectivity_level
+
+- Scope: SESSION | GLOBAL
+- Persists to cluster: Yes
+- Default value: `1`
+- Value options: `1` and `2` (not recommended)
+- This variable controls the iteration of the optimizer's estimation logic. After changing the value of this variable, the estimation logic of the optimizer will change greatly. Currently, `1` is the only valid value. It is not recommended to set the value to `2`.
+
 ### tidb_partition_prune_mode <span class="version-mark">New in v5.1</span>
 
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
-- Default value: `static`
-- Specifies whether to enable `dynamic` mode for partitioned tables. For details about the dynamic pruning mode, see [Dynamic Pruning Mode for Partitioned Tables](/partitioned-table.md#dynamic-pruning-mode).
+- Default value: `dynamic`
+- Specifies whether to use `dynamic` or `static` mode for partitioned tables. Note that dynamic partitioning is effective only after full table-level statistics, or GlobalStats, are collected. Before GlobalStats are collected, TiDB will use the `static` mode instead. For detailed information about GlobalStats, see [Collect statistics of partitioned tables in dynamic pruning mode](/statistics.md#collect-statistics-of-partitioned-tables-in-dynamic-pruning-mode). For details about the dynamic pruning mode, see [Dynamic Pruning Mode for Partitioned Tables](/partitioned-table.md#dynamic-pruning-mode).
 
 ### tidb_persist_analyze_options <span class="version-mark">New in v5.4.0</span>
 
@@ -2606,12 +2739,24 @@ explain select * from t where age=5;
 > - This feature is incompatible with [`replica-read`](#tidb_replica_read-new-in-v40). Do not enable `tidb_rc_read_check_ts` and `replica-read` at the same time.
 > - If your client uses a cursor, it is not recommended to enable `tidb_rc_read_check_ts` in case that the previous batch of returned data has already been used by the client and the statement eventually fails.
 
-- Scope: SESSION | GLOBAL
-- Persists to cluster: Yes
+- Scope: INSTANCE. Since v6.3.0, the scope changes from GLOBAL or SESSION to INSTANCE.
+- Persists to cluster: No, only applicable to the current TiDB instance that you are connecting to.
 - Type: Boolean
 - Default value: `OFF`
 - This variable is used to optimize the timestamp acquisition, which is suitable for scenarios with read-committed isolation level where read-write conflicts are rare. Enabling this variable can avoid the latency and cost of getting the global timestamp, and can optimize the transaction-level read latency.
 - If read-write conflicts are severe, enabling this feature will increase the cost and latency of getting the global timestamp, and might cause performance regression. For details, see [Read Committed isolation level](/transaction-isolation-levels.md#read-committed-isolation-level).
+
+### tidb_rc_write_check_ts <span class="version-mark">New in v6.3.0</span>
+
+> **Warning:**
+>
+> This feature is currently incompatible with [`replica-read`](#tidb_replica_read-new-in-v40). After this variable is enabled, all requests sent by the client cannot use `replica-read`. Therefore, do not enable `tidb_rc_write_check_ts` and `replica-read` at the same time.
+
+- Scope: SESSION | GLOBAL
+- Persists to cluster: Yes
+- Default value: `OFF`
+- This variable is used to optimize the acquisition of timestamps and is suitable for scenarios with few point-write conflicts in `READ-COMMITTED` isolation level of pessimistic transactions. Enabling this variable can avoid the latency and overhead brought by obtaining the global timestamps during the execution of point-write statements. Currently, this variable is applicable to three types of point-write statements: `UPDATE`, `DELETE`, and `SELECT ...... FOR UPDATE`. A point-write statement refers to a write statement that uses the primary key or unique key as a filter condition and the final execution operator contains `POINT-GET`.
+- If the point-write conflicts are severe, enabling this variable will increase extra overhead and latency, resulting in performance regression. For details, see [Read Committed isolation level](/transaction-isolation-levels.md#read-committed-isolation-level).
 
 ### tidb_read_consistency <span class="version-mark">New in v5.4.0</span>
 
@@ -3086,7 +3231,7 @@ For details, see [Identify Slow Queries](/identify-slow-queries.md).
     * There are not many TiDB instances in the cluster, but every TiDB instance is in high concurrency.
 - It is recommended to set this variable to a value as small as possible.
 
-> **Notes:**
+> **Note:**
 >
 > Suppose that the TSO RPC latency increases for reasons other than a CPU usage bottleneck of the PD leader (such as network issues). In this case, increasing the value of `tidb_tso_client_batch_max_wait_time` might increase the execution latency in TiDB and affect the QPS performance of the cluster.
 
