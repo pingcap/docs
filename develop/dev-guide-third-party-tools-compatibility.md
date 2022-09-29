@@ -61,9 +61,9 @@ TiDB uses the [ADMIN CHECK [TABLE|INDEX]](/sql-statements/sql-statement-admin-ch
 
 Use `ADMIN CHECK [TABLE|INDEX]`.
 
-## MySQL Connector/J
+## MySQL JDBC Incompatibility
 
-- Test Version: `8.0.29`
+- Test Version: MySQL Connector/J `8.0.29`
 
 ### Default Collations are inconsistent
 
@@ -126,13 +126,13 @@ TiDB does not support `UpdatableResultSet`, that means **_DO NOT_** specify the 
 
 Using additional `UPDATE` statements for data updates, you can use transactions to ensure data consistency.
 
-## MySQL Connector/J Bug
+## MySQL JDBC Bug
 
 ### `useLocalTransactionState` and `rewriteBatchedStatements` are true at the same time will cause the transaction to fail to commit
 
 **Description**
 
-`useLocalTransactionState` 和 `rewriteBatchedStatements` 两参数同时开启时，将导致事务无法提交的问题。你可以使用[代码](https://github.com/Icemap/tidb-java-gitpod/tree/reproduction-local-transaction-state-txn-error)复现。
+When the `useLocalTransactionState` and `rewriteBatchedStatements` parameters turned on at the same time, will cause the transaction to fail to commit. You can reproduce with [this code](https://github.com/Icemap/tidb-java-gitpod/tree/reproduction-local-transaction-state-txn-error).
 
 **Ways to Avoid**
 
