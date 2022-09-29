@@ -3,21 +3,21 @@ title: Maintain DM Clusters Using dmctl
 summary: Learn how to maintain a DM cluster using dmctl.
 ---
 
-# dmctlを使用してDMクラスターを管理する {#maintain-dm-clusters-using-dmctl}
+# dmctl を使用した DM クラスタの管理 {#maintain-dm-clusters-using-dmctl}
 
 > **ノート：**
 >
-> TiUPを使用してデプロイされたDMクラスターの場合、クラスターを維持するために[`tiup dmctl`](/dm/maintain-dm-using-tiup.md#dmctl)を直接使用することをお勧めします。
+> TiUP を使用してデプロイされた DM クラスターの場合、 [`tiup dmctl`](/dm/maintain-dm-using-tiup.md#dmctl)を直接使用してクラスターを維持することをお勧めします。
 
-dmctlは、DMクラスターを維持するために使用されるコマンドラインツールです。インタラクティブモードとコマンドモードの両方をサポートします。
+dmctl は、DM クラスターを維持するために使用されるコマンド ライン ツールです。対話モードとコマンド モードの両方をサポートします。
 
 ## インタラクティブモード {#interactive-mode}
 
-DMマスターと対話するには、対話モードに入ります。
+対話モードに入り、DM マスターと対話します。
 
 > **ノート：**
 >
-> インタラクティブモードはBash機能をサポートしていません。たとえば、文字列フラグを引用符で囲むのではなく、直接渡す必要があります。
+> 対話モードは Bash 機能をサポートしていません。たとえば、文字列フラグを引用符で囲むのではなく、直接渡す必要があります。
 
 {{< copyable "" >}}
 
@@ -49,7 +49,7 @@ Available Commands:
   offline-member  Offlines member which has been closed.
   operate-leader  `evict`/`cancel-evict` the leader.
   operate-schema  `get`/`set`/`remove` the schema for an upstream table.
-  operate-source  `create`/`update`/`stop`/`show` upstream MySQL/MariaDB source.
+  operate-source  `create`/`stop`/`show` upstream MySQL/MariaDB source.
   pause-relay     Pauses DM-worker's relay unit.
   pause-task      Pauses a specified running task.
   purge-relay     Purges relay log files of the DM-worker according to the specified filename.
@@ -70,12 +70,12 @@ Use "dmctl [command] --help" for more information about a command.
 
 ## コマンドモード {#command-mode}
 
-コマンドモードは、dmctlコマンドの直後にタスク操作を追加する必要があるという点でインタラクティブモードとは異なります。コマンドモードでのタスク操作のパラメータは、インタラクティブモードでのパラメータと同じです。
+コマンド モードは、dmctl コマンドの直後にタスク操作を追加する必要があるという点で対話モードとは異なります。コマンドモードでのタスク操作のパラメータは、対話モードと同じです。
 
 > **ノート：**
 >
-> -   dmctlコマンドの後には、1つのタスク操作のみを続ける必要があります。
-> -   v2.0.4以降、DMは環境変数`DM_MASTER_ADDR`からの`-master-addr`パラメーターの読み取りをサポートします。
+> -   dmctl コマンドの後には、タスク操作を 1 つだけ実行する必要があります。
+> -   v2.0.4 以降、DM は環境変数`DM_MASTER_ADDR`からの`-master-addr`パラメータの読み取りをサポートしています。
 
 {{< copyable "" >}}
 
