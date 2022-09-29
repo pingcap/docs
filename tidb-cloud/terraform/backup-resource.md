@@ -1,6 +1,6 @@
 ---
 title: Backup Resource
-summary: Learn How to use Backup Resource
+summary: Learn how to use backup resource
 ---
 
 # Backup Resource

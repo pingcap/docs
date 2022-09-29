@@ -1,6 +1,6 @@
 ---
 title: Get TiDB Cloud Provider
-summary: Learn How to Get TiDB Cloud provider
+summary: Learn how to get TiDB Cloud provider
 ---
 
 # Get TiDB Cloud Provider

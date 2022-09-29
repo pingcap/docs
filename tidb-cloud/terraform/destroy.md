@@ -1,6 +1,6 @@
 ---
 title: Destroy resource
-summary: Learn How to destroy the resource
+summary: Learn how to destroy resource
 ---
 
 # Destroy Resource

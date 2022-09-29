@@ -1,6 +1,6 @@
 ---
 title: Cluster Resource
-summary: Learn How to use Cluster Resource
+summary: Learn how to use cluster resource
 ---
 
 # Cluster Resource
@@ -14,9 +14,9 @@ summary: Learn How to use Cluster Resource
 Let us get all the projects by project data source first:
 
 - Use `data` block to define the data source of tidbcloud, it consists of the data source type and the data source name. In this example, data source type is `tidbcloud_project` and the name is `example_project`. The prefix of the type maps to the name of the provider.
-- Use `output` block to get the information, and expose information for other Terraform configurations to use. It is similar to return values in programming languages. See [official doc](https://www.terraform.io/language/values/outputs) for more detail
+- Use `output` block to get the information, and expose information for other Terraform configurations to use. It is similar to return values in programming languages. See [terraform doc](https://www.terraform.io/language/values/outputs) for more detail
 
-Besides, you can find all the supported configs for the data source and resource [here](https://github.com/tidbcloud/terraform-provider-tidbcloud/tree/main/docs).
+Besides, you can find all the supported configs for the data source and resource [here](https://registry.terraform.io/providers/tidbcloud/tidbcloud/latest/docs).
 
 ```
 terraform {
@@ -247,7 +247,7 @@ Now, you can create a dedicated cluster with the projectId and the spec info:
 
 - Use `resource` block to define the resource of tidbcloud, it consists of the resource type and the resource name. In this example, resource type is `tidbcloud_cluster` and the name is `example_cluster`
 
-Once again, you can find all the supported configs for the data source and resource [here](https://github.com/tidbcloud/terraform-provider-tidbcloud/tree/main/docs)
+Once again, you can find all the supported configs for the data source and resource [here](https://registry.terraform.io/providers/tidbcloud/tidbcloud/latest/docs)
 
 Here I give an example for tidbcloud_cluster:
 
