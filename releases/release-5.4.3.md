@@ -89,7 +89,7 @@ TiDB version: 5.4.3
 
     - None [#13467](https://github.com/tikv/tikv/issues/13467)
     - (dup) Fix the issue that the PD client might cause deadlocks [#13191](https://github.com/tikv/tikv/issues/13191)
-    - (dup) Fix the issue that PD does not reconnect to TiKV after the Region heartbeat is interrupted [#12934](https://github.com/tikv/tikv/issues/12934) @[bufferflies](https://github.com/bufferflies)
+    - (dup) Fix the issue that PD does not reconnect to TiKV after the Region heartbeat is interrupted [#12934](https://github.com/tikv/tikv/issues/12934)
     - (dup) Fix a bug that Regions might be overlapped if Raftstore is busy [#13160](https://github.com/tikv/tikv/issues/13160)
 
 + PD **owner: @nolouch**
