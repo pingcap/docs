@@ -7,7 +7,7 @@ summary: Learn How to use Cluster Resource
 
 > **Note:**
 >
-> Make sure you have followed the [Get TiDB Cloud provider](/tidbcloud-provider.md)
+> Make sure you have followed the [Get TiDB Cloud provider](/tidb-cloud/terraform/tidbcloud-provider.md)
 
 ## Get projectId with project Data Source
 
@@ -779,4 +779,4 @@ resource "tidbcloud_cluster" "example_cluster" {
 
 Wait for a moment, the status will be changed to `AVAILABLE` again.
 
-> You have created and managed a dedicated cluster with terraform now. Next, you will create a backup for the cluster by the [backup resource](/backup-resource.md)
+> You have created and managed a dedicated cluster with terraform now. Next, you will create a backup for the cluster by the [backup resource](/tidb-cloud/terraform/backup-resource.md)

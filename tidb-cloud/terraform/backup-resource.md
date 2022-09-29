@@ -123,4 +123,4 @@ resource "tidbcloud_backup" "example_backup" {
 
 Congratulations. You have created a backup for your cluster. Pay attention that the backup can not be updated.
 
-> Next, let us use the backup to [restore a cluster](/restore-resource.md)
+> Next, let us use the backup to [restore a cluster](/tidb-cloud/terraform/restore-resource.md)

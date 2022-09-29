@@ -7,7 +7,7 @@ summary: Learn How to Get TiDB Cloud provider
 
 > **Note:**
 >
-> Make sure meet the requirements in [overview](/terraform-overview.md)
+> Make sure meet the requirements in [overview](/tidb-cloud/terraform/terraform-overview.md)
 
 ## Set up Terraform
 
@@ -109,4 +109,4 @@ export TIDBCLOUD_PASSWORD = ${private_key}
 
 Now, you can use the TiDB Cloud provider. 
 
-> Next, you can manage the cluster with [cluster resource](/cluster-resource.md)
+> Next, you can manage the cluster with [cluster resource](/tidb-cloud/terraform/cluster-resource.md)
