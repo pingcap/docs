@@ -147,7 +147,7 @@ The commits of the pessimistic transactions and the optimistic transactions in T
 The pessimistic transaction adds an `Acquire Pessimistic Lock` phase before 2PC. This phase includes the following steps:
 
 1. (Same as the optimistic transaction mode) TiDB receives the `begin` request from the client, and the current timestamp is this transaction's start_ts.
-2. When the TiDB server receives a request of writing new data from the client, the TiDB server initiates a pessimistic lock request to the TiKV server, and the lock is persisted to the TiKV server.
+2. When the TiDB server receives a writing request from the client, the TiDB server initiates a pessimistic lock request to the TiKV server, and the lock is persisted to the TiKV server.
 3. (Same as the optimistic transaction mode) When the client sends the commit request, TiDB starts to perform the two-phase commit similar to the optimistic transaction mode.
 
 ![Pessimistic transactions in TiDB](/media/pessimistic-transaction-in-tidb.png)
