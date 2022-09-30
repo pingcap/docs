@@ -236,14 +236,19 @@ The TiDB Cloud roadmap brings you what's coming in the near future, so you can s
 </thead>
 <tbody>
   <tr>
-    <td>Enterprise-grade SSO support</td>
-    <td>Support quick configurations of SSO to TiDB Cloud via Okta.</td>
-    <td>Provide a fast sign-in method for enterprise users. </td>
+    <td>Key rotation</td>
+    <td>Support key rotation on TiDB clusters for AWS.</td>
+    <td>Support key rotation on TiDB clusters to improve the security of encrypted data.</td>
   </tr>
   <tr>
-    <td>Encrypted backup and restore</td>
-    <td>Support encrypted backup and restore.</td>
-    <td>Provide a method to securely back up and restore a database.</td>
+    <td>Key management</td>
+    <td>Support making your own key manageable (BYOK from AWS).</td>
+    <td>Allow customers to use their own data encryption keys on AWS.</td>
+  </tr>
+   <tr>
+    <td>Audit logging</td>
+    <td>Enhance the database audit logging feature.</td>
+    <td>Enhance the ability of database audit logging and provide the visual UI access.</td>
   </tr>
 </tbody>
 </table>
