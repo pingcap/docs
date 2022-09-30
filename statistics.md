@@ -5,7 +5,7 @@ summary: Learn how the statistics collect table-level and column-level informati
 
 # 統計入門 {#introduction-to-statistics}
 
-TiDB は統計を使用して決定します[どのインデックスを選択するか](/choose-index.md) 。 `tidb_analyze_version`変数は、TiDB によって収集される統計を制御します。現在、 `tidb_analyze_version = 1`と`tidb_analyze_version = 2`の 2 つのバージョンの統計がサポートされています。 v5.1.0 より前のバージョンでは、この変数のデフォルト値は`1`です。 v5.3.0 以降のバージョンでは、この変数のデフォルト値は`2`です。クラスタが v5.3.0 より前のバージョンから v5.3.0 以降にアップグレードされた場合、デフォルト値の`tidb_analyze_version`は変更されません。
+TiDB は統計を使用して決定します[どのインデックスを選択するか](/choose-index.md) 。 `tidb_analyze_version`変数は、TiDB によって収集される統計を制御します。現在、 `tidb_analyze_version = 1`と`tidb_analyze_version = 2`の 2 つのバージョンの統計がサポートされています。 v5.1.0 より前のバージョンでは、この変数のデフォルト値は`1`です。 v5.3.0 以降のバージョンでは、この変数のデフォルト値は`2`です。クラスターが v5.3.0 より前のバージョンから v5.3.0 以降にアップグレードされた場合、デフォルト値の`tidb_analyze_version`は変更されません。
 
 > **ノート：**
 >
@@ -13,18 +13,14 @@ TiDB は統計を使用して決定します[どのインデックスを選択�
 >
 > -   `ANALYZE`ステートメントを手動で実行する場合は、分析するすべてのテーブルを手動で分析します。
 >
->     {{< copyable "" >}}
->
 >     ```sql
->     select distinct(concat('ANALYZE ',table_schema, '.', table_name,';')) from information_schema.tables, mysql.stats_histograms where stats_ver = 2 and table_id = tidb_table_id ;
+>     SELECT DISTINCT(CONCAT('ANALYZE TABLE', table_schema, '.', table_name, ';')) FROM information_schema.tables, mysql.stats_histograms WHERE stats_ver = 2 AND table_id = tidb_table_id;
 >     ```
 >
 > -   自動分析が有効になっているために TiDB が`ANALYZE`ステートメントを自動的に実行する場合は、 `DROP STATS`ステートメントを生成する次のステートメントを実行します。
 >
->     {{< copyable "" >}}
->
 >     ```sql
->     select distinct(concat('DROP STATS ',table_schema, '.', table_name,';')) from information_schema.tables, mysql.stats_histograms where stats_ver = 2 and table_id = tidb_table_id ;
+>     SELECT DISTINCT(CONCAT('DROP STATS ', table_schema, '.', table_name, ';')) FROM information_schema.tables, mysql.stats_histograms WHERE stats_ver = 2 AND table_id = tidb_table_id;
 >     ```
 
 これら 2 つのバージョンには、TiDB に異なる情報が含まれています。
@@ -55,7 +51,7 @@ TiDB は統計を使用して決定します[どのインデックスを選択�
 
 ![Equal-depth Histogram Example](/media/statistics-1.png)
 
-ヒストグラムのバケット数の上限を決めるパラメーターについては、 [手動収集](#manual-collection)を参照してください。バケットの数が多いほど、ヒストグラムの精度は高くなります。ただし、精度を高くすると、メモリ リソースの使用量が犠牲になります。この数は、実際のシナリオに従って適切に調整できます。
+ヒストグラムのバケット数の上限を決めるパラメータについては、 [手動収集](#manual-collection)を参照してください。バケットの数が多いほど、ヒストグラムの精度は高くなります。ただし、精度を高くすると、メモリ リソースの使用量が犠牲になります。この数は、実際のシナリオに従って適切に調整できます。
 
 ## カウントミンスケッチ {#count-min-sketch}
 
@@ -112,14 +108,14 @@ Count-Min Sketch はハッシュ構造であるため、ハッシュ衝突が発
 
 `WITH NUM SAMPLES`と`WITH FLOAT_NUM SAMPLERATE`は、サンプルを収集する 2 つの異なるアルゴリズムに対応します。
 
--   `WITH NUM SAMPLES`は、TiDB のリザーバー サンプリング メソッドで実装されるサンプリング セットのサイズを指定します。テーブルが大きい場合、この方法を使用して統計を収集することはお勧めしません。リザーバ サンプリングの中間結果セットには冗長な結果が含まれているため、メモリなどのリソースにさらなる負荷がかかります。
+-   `WITH NUM SAMPLES`は、TiDB のリザーバー サンプリング メソッドで実装されるサンプリング セットのサイズを指定します。テーブルが大きい場合、この方法を使用して統計を収集することはお勧めしません。リザーバ サンプリングの中間結果セットには冗長な結果が含まれているため、メモリなどのリソースにさらに負荷がかかります。
 -   `WITH FLOAT_NUM SAMPLERATE`は v5.3.0 で導入されたサンプリング方法です。値の範囲が`(0, 1]`の場合、このパラメーターはサンプリング レートを指定します。これは、TiDB のベルヌーイ サンプリングの方法で実装されています。これは、より大きなテーブルのサンプリングに適していて、収集効率とリソース使用率が優れています。
 
 v5.3.0 より前の TiDB は、リザーバー サンプリング メソッドを使用して統計を収集します。 v5.3.0 以降、TiDB バージョン 2 統計は、デフォルトでベルヌーイ サンプリング法を使用して統計を収集します。リザーバー サンプリング法を再利用するには、 `WITH NUM SAMPLES`ステートメントを使用できます。
 
 > **ノート：**
 >
-> 現在のサンプリング レートは、適応アルゴリズムに基づいて計算されます。 [`SHOW STATS_META`](/sql-statements/sql-statement-show-stats-meta.md)を使用してテーブル内の行数を観測できる場合、この行数を使用して 100,000 行に対応するサンプリング レートを計算できます。この数値を確認できない場合は、 [`TABLE_STORAGE_STATS`](/information-schema/information-schema-table-storage-stats.md)番目の表の`TABLE_KEYS`列を別の参照として使用して、サンプリング レートを計算できます。
+> 現在のサンプリング レートは、適応アルゴリズムに基づいて計算されます。 [`SHOW STATS_META`](/sql-statements/sql-statement-show-stats-meta.md)を使用してテーブル内の行数を観測できる場合、この行数を使用して 100,000 行に対応するサンプリング レートを計算できます。この数を確認できない場合は、 [`TABLE_STORAGE_STATS`](/information-schema/information-schema-table-storage-stats.md)番目の表の`TABLE_KEYS`列を別の参照として使用して、サンプリング レートを計算できます。
 >
 > 通常、 `STATS_META`は`TABLE_KEYS`より信頼性が高くなります。ただし、 [TiDB Lightning](https://docs.pingcap.com/tidb/stable/tidb-lightning-overview)のような方法でデータをインポートすると、 `STATS_META`の結果は`0`になります。この状況に対処するために、 `STATS_META`の結果が`TABLE_KEYS`の結果よりもはるかに小さい場合、 `TABLE_KEYS`を使用してサンプリング レートを計算できます。
 
@@ -380,7 +376,7 @@ v5.4.0 以降、 `ANALYZE`は一部の構成の永続化をサポートしてい
 
 #### ANALYZE 構成の永続性を有効にする {#enable-analyze-configuration-persistence}
 
-`ANALYZE`構成永続化機能はデフォルトで有効になっています (システム変数`tidb_analyze_version`はデフォルトで`2`で、 `tidb_persist_analyze_options`は`ON`です)。この機能を使用して、ステートメントを手動で実行するときに、 `ANALYZE`ステートメントで指定された持続性構成を記録できます。記録されると、次に TiDB が自動的に統計を更新するか、これらの構成を指定せずに手動で統計を収集するときに、TiDB は記録された構成に従って統計を収集します。
+`ANALYZE`構成永続化機能は、デフォルトで有効になっています (システム変数`tidb_analyze_version`はデフォルトで`2`で、 `tidb_persist_analyze_options`は`ON`です)。この機能を使用して、ステートメントを手動で実行するときに、 `ANALYZE`ステートメントで指定された持続性構成を記録できます。記録されると、次に TiDB が自動的に統計を更新するか、これらの構成を指定せずに手動で統計を収集するときに、TiDB は記録された構成に従って統計を収集します。
 
 永続構成を指定して`ANALYZE`ステートメントを複数回手動で実行すると、TiDB は、最新の`ANALYZE`ステートメントで指定された新しい構成を使用して、以前に記録された永続構成を上書きします。
 
@@ -424,7 +420,7 @@ SHOW ANALYZE STATUS [ShowLikeOrWhere]
 
 ### テーブルのメタデータ {#metadata-of-tables}
 
-`SHOW STATS_META`ステートメントを使用して、合計行数と更新された行数を表示できます。
+`SHOW STATS_META`ステートメントを使用して、行の総数と更新された行の数を表示できます。
 
 {{< copyable "" >}}
 
@@ -453,7 +449,7 @@ SHOW STATS_META [ShowLikeOrWhere];
 
 ### テーブルのヘルス状態 {#health-state-of-tables}
 
-`SHOW STATS_HEALTHY`ステートメントを使用して、テーブルの正常性状態を確認し、統計の精度を概算できます。 `modify_count` &gt;= `row_count`の場合、ヘルス状態は 0 です。 `modify_count` &lt; `row_count`の場合、ヘルス状態は (1 - `modify_count` / `row_count` ) * 100 です。
+`SHOW STATS_HEALTHY`ステートメントを使用して、テーブルの正常性状態をチェックし、統計の精度を大まかに見積もることができます。 `modify_count` &gt;= `row_count`の場合、ヘルス状態は 0 です。 `modify_count` &lt; `row_count`の場合、ヘルス状態は (1 - `modify_count` / `row_count` ) * 100 です。
 
 構文は次のとおりです。
 
@@ -598,7 +594,7 @@ v5.4.0 以降、TiDB は同期読み込み統計機能を導入しています�
 >
 > 現在、統計の同期読み込みは実験的機能です。実稼働環境で使用することはお勧めしません。
 
-統計の同期読み込み機能は、デフォルトでは無効になっています。この機能を有効にするには、システム変数[`tidb_stats_load_sync_wait`](/system-variables.md#tidb_stats_load_sync_wait-new-in-v540)の値をタイムアウト (ミリ秒単位) に設定します。これは、SQL 最適化が完全な列統計を同期的にロードするまで最大で待機できる時間です。この変数のデフォルト値は`0`で、機能が無効になっていることを示します。
+統計の同期読み込み機能は、デフォルトで無効になっています。この機能を有効にするには、システム変数[`tidb_stats_load_sync_wait`](/system-variables.md#tidb_stats_load_sync_wait-new-in-v540)の値をタイムアウト (ミリ秒単位) に設定します。これは、SQL 最適化が完全な列統計を同期的にロードするまで最大で待機できる時間です。この変数のデフォルト値は`0`で、機能が無効になっていることを示します。
 
 <CustomContent platform="tidb">
 

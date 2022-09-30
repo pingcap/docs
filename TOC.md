@@ -139,7 +139,7 @@
                 -   [パーティションのプルーニング](/partition-pruning.md)
                 -   [TopN とリミット プッシュ ダウン](/topn-limit-push-down.md)
                 -   [結合したテーブルの再配置](/join-reorder.md)
-            -   物理的な最適化
+            -   物理的最適化
                 -   [概要](/sql-physical-optimization.md)
                 -   [インデックスの選択](/choose-index.md)
                 -   [統計](/statistics.md)
@@ -262,7 +262,7 @@
         -   [TiDBクラスタトポロジ リファレンス](/tiup/tiup-cluster-topology-reference.md)
         -   [DMクラスタトポロジ リファレンス](/tiup/tiup-dm-topology-reference.md)
         -   [ミラー リファレンス ガイド](/tiup/tiup-mirror-reference.md)
-        -   TiUPコンポーネント
+        -   TiUP コンポーネント
             -   [tiup-playground](/tiup/tiup-playground.md)
             -   [tiup-cluster](/tiup/tiup-cluster.md)
             -   [tiup-mirror](/tiup/tiup-mirror.md)
@@ -408,7 +408,7 @@
         -   [TiCDC OpenAPI](/ticdc/ticdc-open-api.md)
         -   [TiCDC オープン プロトコル](/ticdc/ticdc-open-protocol.md)
         -   [TiCDC Canal- JSON プロトコル](/ticdc/ticdc-canal-json.md)
-        -   [TiDB をコンフルエント プラットフォームと統合する](/ticdc/integrate-confluent-using-ticdc.md)
+        -   [TiDB とコンフルエント プラットフォームを統合する](/ticdc/integrate-confluent-using-ticdc.md)
         -   [用語集](/ticdc/ticdc-glossary.md)
     -   [Dumpling](/dumpling-overview.md)
     -   同期差分インスペクター
@@ -612,6 +612,7 @@
             -   [セット操作](/functions-and-operators/set-operators.md)
             -   [プッシュダウンの式一覧](/functions-and-operators/expressions-pushed-down.md)
             -   [TiDB固有の機能](/functions-and-operators/tidb-functions.md)
+            -   [Oracle と TiDB の関数と構文の比較](/oracle-functions-to-tidb.md)
         -   [クラスタ化インデックス](/clustered-indexes.md)
         -   [制約](/constraints.md)
         -   [生成された列](/generated-columns.md)
