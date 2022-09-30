@@ -99,8 +99,8 @@ The following table summarizes the pros and cons of optimistic mode and pessimis
 
 | Scenario | Pros | Cons |
 | :--- | :--- | :--- |
-| Pessimistic mode (Default) | It can ensure that the data migrated to the downstream will not go wrong.  | If there are a large number of shards, the migration task will be blocked for a long time, or even stop if the upstream Binlogs have been cleaned up. You can enable the Relay log to avoid this problem. For more information, see [Use Relay log](#use-relay-log). |
-| Optimistic mode| Data can not be blocked during migration. | In this mode, ensure that schema changes are compatible (whether the incremental column has a default value). It is possible that inconsistent data can be overlooked. For more information, see [Merge and Migrate Data from Sharded Tables in Optimistic Mode](/dm/feature-shard-merge-optimistic.md#restrictions).|
+| Pessimistic mode (Default) | It can ensure that the data migrated to the downstream will not go wrong.  | If there are a large number of shards, the migration task will be blocked for a long time, or even stop if the upstream binlogs have been cleaned up. You can enable the relay log to avoid this problem. For more information, see [Use relay log](#use-relay-log). |
+| Optimistic mode| Data can not be blocked during migration. | In this mode, ensure that schema changes are compatible (whether the incremental column has a default value). It is possible that the inconsistent data can be overlooked. For more information, see [Merge and Migrate Data from Sharded Tables in Optimistic Mode](/dm/feature-shard-merge-optimistic.md#restrictions).|
 
 ### Other restrictions and impact
 
