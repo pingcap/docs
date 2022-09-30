@@ -4,6 +4,10 @@ title: Release Notes
 
 # TiDB Release Notes
 
+## 6.3
+
+- [6.3.0-DMR](/releases/release-6.3.0.md)
+
 ## 6.2
 
 - [6.2.0-DMR](/releases/release-6.2.0.md)
