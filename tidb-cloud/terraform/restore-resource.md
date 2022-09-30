@@ -46,7 +46,7 @@ resource "tidbcloud_restore" "example_restore" {
 }
 ```
 
-Execute `terraform apply` and type `yes`:
+Run the `terraform apply` command and type `yes`:
 
 ```
 $ terraform apply
