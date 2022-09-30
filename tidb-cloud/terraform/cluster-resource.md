@@ -727,7 +727,7 @@ resource "tidbcloud_cluster" "example_cluster" {
 }
 ```
 
-Now, resume the cluster by set `paused = false`:
+Now, resume the cluster by setting `paused = false`:
 
 ```
 config = {
