@@ -242,7 +242,7 @@ The TiDB Cloud roadmap brings you what's coming in the near future, so you can s
   <tr>
     <td>Key management</td>
     <td>Support making your own key manageable (BYOK from AWS).</td>
-    <td>Allow customers to use their own data encryption keys on AWS.</td>
+    <td>Allow you to use your own data encryption keys on AWS.</td>
   </tr>
    <tr>
     <td>Audit logging</td>
