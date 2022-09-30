@@ -241,7 +241,7 @@ Execute the `terraform apply --auto-approve`, we will get all the specifications
 
 ## Create a dedicated cluster with cluster resource
 
-> Make sure you have set a Project CIDR on TiDB Cloud console first.
+Before you begin, make sure you have set a Project CIDR on the TiDB Cloud console.
 
 Now, you can create a dedicated cluster with the projectId and the spec info:
 
