@@ -85,7 +85,7 @@ It is recommended that you use DM to [migrate and merge MySQL shards of small da
 
 Besides data merging, another typical scenario is data archiving. Data is constantly being written. As time goes by, large amounts of data gradually change from hot data to warm or even cold data. Fortunately, in TiDB, you can use [placement rules](/configure-placement-rules.md) to set different placement rules for data. The minimum granularity is [a partition](/partitioned-table.md).
 
-Therefore, it is recommended that for write-intensive scenarios, you need to evaluate from the beginning whether you need to archive data and store hot and cold data on different media separately. If you need to archive data, you need to set the partitioning rules before migration (TiDB does not support Table Rebuild operations yet). This can save you from the need to create tables and import data in future.
+Therefore, it is recommended that for write-intensive scenarios, you need to evaluate from the beginning whether you need to archive data and store hot and cold data on different media separately. If you need to archive data, you can set the partitioning rules before migration (TiDB does not support Table Rebuild operations yet). It saves you from the need to create tables and import data in future.
 
 #### The pessimistic mode and the optimistic mode
 
