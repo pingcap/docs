@@ -7,7 +7,7 @@ summary: Learn how to use restore resource
 
 > **Note:**
 >
-> Make sure you have a restore of a cluster
+> Because the backup and restore feature is unavailable for Developer Tier clusters. To use restore resources, make sure that you have created a Dedicated Tier cluster.
 
 ## Create a restore task with restore resource
 
