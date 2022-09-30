@@ -22,7 +22,7 @@ summary: Learn how to use backup resource
     }
     ```
 
-You can also get project_id and cluster_id from the cluster resource like:
+    You can also get project_id and cluster_id from the cluster resource like:
 
     ```
     resource "tidbcloud_backup" "example_backup" {

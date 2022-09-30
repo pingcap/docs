@@ -13,7 +13,7 @@ summary: Learn how to use restore resource
 
 After creating a backup of a cluster, you can restore the cluster by creating a restore task with restore resources.
 
-You can configure a restore resource as follows. Note that you can only restore data from a smaller node size to a larger node size:
+1. You can configure a restore resource as follows. Note that you can only restore data from a smaller node size to a larger node size:
 
     ```
     resource "tidbcloud_restore" "example_restore" {
@@ -43,7 +43,7 @@ You can configure a restore resource as follows. Note that you can only restore 
     }
     ```
 
-Run the `terraform apply` command and type `yes`:
+2. Run the `terraform apply` command and type `yes`:
 
     ```
     $ terraform apply
@@ -106,7 +106,7 @@ Run the `terraform apply` command and type `yes`:
     Apply complete! Resources: 1 added, 0 changed, 0 destroyed.
     ```
 
-Check the state of the restore task with `terraform state show tidbcloud_restore.example_restore`:
+3. Check the state of the restore task with `terraform state show tidbcloud_restore.example_restore`:
 
     ```
     $ terraform state show tidbcloud_restore.example_restore
