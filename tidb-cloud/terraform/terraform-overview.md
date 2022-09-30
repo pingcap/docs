@@ -40,4 +40,4 @@ Data sources
 - restore
 - backup
 
-You can get all the available configuration for the resources and data sources in this [doc](https://registry.terraform.io/providers/tidbcloud/tidbcloud/latest/docs)
+You can get all the available configurations for the resources and data sources in this [document](https://registry.terraform.io/providers/tidbcloud/tidbcloud/latest/docs)
