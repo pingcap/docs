@@ -91,7 +91,7 @@ Therefore, it is recommended that for write-intensive scenarios, you need to eva
 
 DM uses the pessimistic mode by default. In scenarios of migrating and merging MySQL shards, changes in upstream shard schemas can block DML writing to downstream databases. You need to wait for all the schemas to change and have the same structure, and then continue migration from the break point.
 
-- If the upstream schema changes take a long time, it might cause the upstream Binlog to be cleaned up. You can enable the Relay log to avoid this problem.
+- If the upstream schema changes take a long time, it might cause the upstream Binlog to be cleaned up. You can enable the relay log to avoid this problem. For more information, see [Use relay log](#use-relay-log).
 
 - If you do not want to block data write due to upstream schema changes, consider using the optimistic mode. In this case, DM will not block the data migration even when it spots changes in the upstream shard schemas, but will continue to migrate the data. However, if DM spots incompatible formats in upstream and downstream, the migration task will stop. You need to resolve this issue manually.
 
@@ -100,7 +100,7 @@ The following table summarizes the pros and cons of optimistic mode and pessimis
 | Scenario | Pros | Cons |
 | :--- | :--- | :--- |
 | Pessimistic mode (Default) | It can ensure that the data migrated to the downstream will not go wrong.  | If there are a large number of shards, the migration task will be blocked for a long time, or even stop if the upstream binlogs have been cleaned up. You can enable the relay log to avoid this problem. For more information, see [Use relay log](#use-relay-log). |
-| Optimistic mode| Data can not be blocked during migration. | In this mode, ensure that schema changes are compatible (whether the incremental column has a default value). It is possible that the inconsistent data can be overlooked. For more information, see [Merge and Migrate Data from Sharded Tables in Optimistic Mode](/dm/feature-shard-merge-optimistic.md#restrictions).|
+| Optimistic mode| Data can not be blocked during migration. | In this mode, ensure that schema changes are compatible (check whether the incremental column has a default value). It is possible that the inconsistent data can be overlooked. For more information, see [Merge and Migrate Data from Sharded Tables in Optimistic Mode](/dm/feature-shard-merge-optimistic.md#restrictions).|
 
 ### Other restrictions and impact
 
@@ -110,7 +110,7 @@ TiDB supports most MySQL data types. However, some special types are not support
 
 #### Character sets and collations
 
-Since TiDB v6.0.0, the new framework for collations are used by default. If you want TiDB to support utf8_general_ci, utf8mb4_general_ci, utf8_unicode_ci, utf8mb4_unicode_ci, gbk_chinese_ci and gbk_bin, you need explicitly declare it when creating the cluster by setting the value of `new_collations_enabled_on_first_bootstrap` to `true`. For more information, see [New framework for collations](/character-set-and-collation.md#new-framework-for-collations).
+Since TiDB v6.0.0, the new framework for collations is used by default. If you want TiDB to support utf8_general_ci, utf8mb4_general_ci, utf8_unicode_ci, utf8mb4_unicode_ci, gbk_chinese_ci and gbk_bin, you need explicitly declare it when creating the cluster by setting the value of `new_collations_enabled_on_first_bootstrap` to `true`. For more information, see [New framework for collations](/character-set-and-collation.md#new-framework-for-collations).
 
 The default character set in TiDB is utf8mb4. It is recommended that you use utf8mb4 for the upstream and downstream databases and applications. If the upstream database has explicitly specified a character set or collation, you need to check whether TiDB supports it.
 
@@ -134,7 +134,7 @@ When migrating and merging MySQL shards, you can split the migration task accord
 
 For migration of large datasets, you can refer to the following suggestions to split the migration task:
 
-- If you need to migrate multiple databases in the upstream, you can split the migration task in terms of databases.
+- If you need to migrate multiple databases in the upstream, you can split the migration task according to the number of databases.
 
 - Split the task according to the write pressure in the upstream, that is, split the tables with frequent DML operations in the upstream to a separate migration task. Use another migration task to migrate the tables without frequent DML operations. This method can speed up the migration progress, especially when there are a large number of logs written to a table in the upstream. But if this table that contains logs does not affect the whole business, this method still works well.
 
@@ -226,7 +226,7 @@ It is recommended that you validate the consistency of data after data migration
 
 Now sync-diff-inspector can automatically manage the table list to be checked for data consistency through DM tasks. Compared with the previous manual configuration, it is more efficient. For details, see [Data Check in the DM Replication Scenario](/sync-diff-inspector/dm-diff.md).
 
-Since DM v6.2, DM supports continuous data validation for incremental replication. For details, see [Continuous Data Validation in DM](/dm/dm-continuous-data-validation.md).
+Since DM v6.2.0, DM supports continuous data validation for incremental replication. For details, see [Continuous Data Validation in DM](/dm/dm-continuous-data-validation.md).
 
 ## Long-term data replication
 
