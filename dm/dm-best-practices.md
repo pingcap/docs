@@ -91,7 +91,7 @@ Therefore, it is recommended that for write-intensive scenarios, you need to eva
 
 DM uses the pessimistic mode by default. In scenarios of migrating and merging MySQL shards, changes in upstream shard schemas can block DML writing to downstream databases. You need to wait for all the schemas to change and have the same structure, and then continue migration from the break point.
 
-- If the upstream schema changes take a long time, it might cause the upstream Binlog to be cleaned up. You can enable the relay log to avoid this problem. For more information, see [Use relay log](#use-relay-log).
+- If the upstream schema changes take a long time, it might cause the upstream Binlog to be cleaned up. You can enable the relay log to avoid this problem. For more information, see [Use the relay log](#use-the-relay-log).
 
 - If you do not want to block data write due to upstream schema changes, consider using the optimistic mode. In this case, DM will not block the data migration even when it spots changes in the upstream shard schemas, but will continue to migrate the data. However, if DM spots incompatible formats in upstream and downstream, the migration task will stop. You need to resolve this issue manually.
 
@@ -99,7 +99,7 @@ The following table summarizes the pros and cons of optimistic mode and pessimis
 
 | Scenario | Pros | Cons |
 | :--- | :--- | :--- |
-| Pessimistic mode (Default) | It can ensure that the data migrated to the downstream will not go wrong.  | If there are a large number of shards, the migration task will be blocked for a long time, or even stop if the upstream binlogs have been cleaned up. You can enable the relay log to avoid this problem. For more information, see [Use relay log](#use-relay-log). |
+| Pessimistic mode (Default) | It can ensure that the data migrated to the downstream will not go wrong.  | If there are a large number of shards, the migration task will be blocked for a long time, or even stop if the upstream binlogs have been cleaned up. You can enable the relay log to avoid this problem. For more information, see [Use the relay log](#use-the relay-log). |
 | Optimistic mode| Data can not be blocked during migration. | In this mode, ensure that schema changes are compatible (check whether the incremental column has a default value). It is possible that the inconsistent data can be overlooked. For more information, see [Merge and Migrate Data from Sharded Tables in Optimistic Mode](/dm/feature-shard-merge-optimistic.md#restrictions).|
 
 ### Other restrictions and impact
