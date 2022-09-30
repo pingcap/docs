@@ -29,9 +29,9 @@ TiDB Cloud supports the following Resources and Data sources:
 
 Resources
 
-- cluster
-- backup (not support update)
-- restore (not support update and delete)
+- `cluster`
+- `backup` (`update` is not supported)
+- `restore` (`update` and `delete` are not supported)
 
 Data sources
 
