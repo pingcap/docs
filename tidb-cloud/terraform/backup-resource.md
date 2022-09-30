@@ -7,7 +7,7 @@ summary: Learn how to use backup resource
 
 > **Note:**
 >
-> Make sure you have set up a dedicated cluster
+> Because the backup and restore feature is unavailable for Developer Tier clusters. To use backup resources, make sure that you have created a Dedicated Tier cluster. 
 
 ## Create a backup with backup resource
 
