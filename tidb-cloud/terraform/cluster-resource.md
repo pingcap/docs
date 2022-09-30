@@ -5,13 +5,13 @@ summary: Learn how to use cluster resource
 
 # Cluster Resource
 
+> **Note:**
+>
+> Please [Get TiDB Cloud Terraform Provider](/tidb-cloud/terraform/tidbcloud-provider.md) first.
+
 You can learn how to create and modify a TiDB Cloud cluster with cluster resource in this doc.
 
 Besides, you will also learn how to get the necessary information from project data source and cluster-spec data source in this doc.
-
-> **Note:**
->
-> Make sure you have followed the instructions in [Get TiDB Cloud Terraform provider](/tidb-cloud/terraform/tidbcloud-provider.md).
 
 ## Get projectId from project data source
 

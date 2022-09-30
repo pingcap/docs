@@ -5,11 +5,13 @@ summary: Learn how to use backup resource
 
 # Backup Resource
 
-You can learn how to create backup for a TiDB Cloud cluster with backup resource in this doc.
-
 > **Note:**
 >
-> Because the backup and restore feature is unavailable to Developer Tier clusters. To use backup resources, make sure that you have created a Dedicated Tier cluster. 
+> Please [Get TiDB Cloud Terraform Provider](/tidb-cloud/terraform/tidbcloud-provider.md) first.
+> 
+> Backup and restore feature is unavailable to Developer Tier clusters. To use backup resources, make sure that you have created a Dedicated Tier cluster. 
+
+You can learn how to create backup for a TiDB Cloud cluster with backup resource in this doc.
 
 ## Create a backup with backup resource
 
