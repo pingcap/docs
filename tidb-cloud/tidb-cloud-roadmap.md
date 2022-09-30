@@ -246,7 +246,7 @@ The TiDB Cloud roadmap brings you what's coming in the near future, so you can s
   </tr>
    <tr>
     <td>Audit logging</td>
-    <td>Enhance the database audit logging feature.</td>
+    <td>Enhance the database audit logging.</td>
     <td>Enhance the ability of database audit logging and provide the visual UI access.</td>
   </tr>
 </tbody>
