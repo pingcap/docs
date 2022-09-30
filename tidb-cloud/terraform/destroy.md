@@ -35,7 +35,7 @@ tidbcloud_cluster.example_cluster: Destruction complete after 0s
 Destroy complete! Resources: 4 destroyed.
 ```
 
-Note that a warning is appeared for restore can't be deleted.
+Note that you will get a warning indicating `restore can't be deleted`.
 
 Now, if you run the `terraform show` command, you will get nothing because all the states have been cleared:
 
