@@ -278,7 +278,7 @@ resource "tidbcloud_cluster" "example_cluster" {
 }
 ```
 
-Execute `terraform apply`, it is not recommended to use `terraform apply --auto-approve` when you apply a resource.
+Run the `terraform apply` command. It is not recommended to use `terraform apply --auto-approve` when you apply a resource.
 
 ```shell
 $ terraform apply
