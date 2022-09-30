@@ -108,7 +108,7 @@ The TiDB Cloud roadmap brings you what's coming in the near future, so you can s
 <p>Support TiFlash result write-back.</p>
 </td>
 <td>
-<p>Support&nbsp;INSERT INTO SELECT.</p>
+<p>Support <code>INSERT INTO SELECT</code>.</p>
 <ul>
 <li>Easily write analysis results in TiFlash back to TiDB.</li>
 <li>Provide complete ACID transactions, more convenient and reliable than general ETL solutions.</li>
@@ -116,7 +116,6 @@ The TiDB Cloud roadmap brings you what's coming in the near future, so you can s
 <li>Support fully distributed transactions, and remove or relax the limit on the intermediate result size.</li>
 </ul>
 <p>These features combined enable a way to materialize intermediate results. The analysis results can be easily reused, which reduces unnecessary ad-hoc queries, improves the performance of BI and other applications (by pulling results directly) and reduces system load (by avoiding duplicated computation), thereby improving the overall data pipeline efficiency and reducing costs. It will make TiFlash an online service.</p>
-<p>&nbsp;</p>
 </td>
 </tr>
 <tr>
@@ -127,7 +126,7 @@ The TiDB Cloud roadmap brings you what's coming in the near future, so you can s
 <ul>
 <li>FastScan provides weak consistency but faster table scan capability.</li>
 <li>Further optimize the join order, shuffle, and exchange algorithms to improve computing efficiency and boost performance for complex queries.</li>
-<li>Add a fine-grained data sharding mechanism to optimize the&nbsp;COUNT(DISTINCT)&nbsp;function and high cardinality aggregation.</li>
+<li>Add a fine-grained data sharding mechanism to optimize the <code>COUNT(DISTINCT)</code> function and high cardinality aggregation.</li>
 </ul>
 <p>This feature improves the basic computing capability of TiFlash, and optimizes the performance and reliability of the underlying algorithms of the columnar storage and MPP engine.</p>
 </td>
