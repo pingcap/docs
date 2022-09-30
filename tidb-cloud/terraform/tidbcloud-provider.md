@@ -55,7 +55,7 @@ terraform {
 
 - The `source` attribute defines the provider which will be downloaded from [Terraform Registry](https://registry.terraform.io/) by default
 - The `version` attribute is optional, which specifies the version of the provider. If it is not specified, the latest provider version is used by default.
-- The `required_version` is optional which defines the version of the terraform, it will use the latest version by default
+- The `required_version` is optional, which specifies the version of Terraform. If  it is not specified, the latest Terraform version is used by default.
 
 To get the TiDB Cloud provider, execute `terraform init`. It will download the provider from terraform registry.
 
