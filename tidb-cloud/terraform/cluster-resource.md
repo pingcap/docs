@@ -579,7 +579,7 @@ Add one node for TiDB and TiFlash, TiKV needs to add at least 3 nodes for its st
     }
 ```
 
-Execute `terraform apply` and type `yes` after check:
+Run the `terraform apply` command and type `yes` after check:
 
 ```
 $ terraform apply
