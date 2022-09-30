@@ -122,7 +122,9 @@ Run the `terraform apply --auto-approve` command and you will get all the specif
 
 The following is a part of the results for your reference.
 
-```
+<details>
+<summary>cluster specification</summary>
+<pre><code>
 {
     "cloud_provider" = "AWS"
     "cluster_type" = "DEDICATED"
@@ -239,7 +241,8 @@ The following is a part of the results for your reference.
       },
     ])
   }
-```
+</code></pre>
+</details>
 
 - `cloud_provider` is the cloud provider on which your TiDB cluster is hosted.
 - `region` is the region of `cloud_provider`.
@@ -787,7 +790,6 @@ Wait for a moment, the status will be changed to `AVAILABLE` again.
 
 Now, you have created and managed a Dedicated Tier cluster with Terraform. Next, you can create a backup of the cluster by the [backup resource](/tidb-cloud/terraform/backup-resource.md).
 
-
 ## Destroy cluster
 
 Run `terraform destroy` command to destroy the cluster resource:
@@ -809,4 +811,3 @@ Now, if you run the `terraform show` command, you will get nothing because the r
 ```
 $ terraform show
 ```
-
