@@ -68,44 +68,82 @@ The TiDB Cloud roadmap brings you what's coming in the near future, so you can s
   </tr>
 </thead>
 <tbody>
-  <tr>
-    <td rowspan="3">JSON</td>
-    <td>Support JSON function.</td>
-    <td>In business scenarios that require flexible schema definitions, the application can use JSON to store information for ODS, transaction indicators, commodities, game characters, and props.</td>
-  </tr>
-  <tr>
-    <td><ul><li>Support expression indexes.</li><li>Support generated columns.</li></ul></td>
-    <td>Provides query acceleration for specific field indexes in JSON scenarios.</td>
-  </tr>
-  <tr>
-    <td>Support array index.</td>
-    <td>Array is one of the commonly used data types in JSON scenarios. For inclusive queries in arrays, multi-value indexes can efficiently improve the query speed. </td>
-  </tr>
-  <tr>
-    <td>Flashback</td>
-    <td>Support cluster-level flashback.</td>
-    <td>In game rollback scenarios, the flashback can be used to achieve a fast rollback of the current cluster. This solves the common problems in the gaming industry such as version errors and bugs.</td>
-  </tr>
-  <tr>
-    <td>Time to live (TTL)</td>
-    <td>Support automatically deleting expired table data based on custom rules.</td>
-    <td>This feature enables automatic data cleanup in limited data archiving scenarios.</td>
-  </tr>
-  <tr>
-    <td>TiFlash result write-back</td>
-    <td><p>Support <code>INSERT INTO SELECT</code>.</p><ul><li>Easily write analysis results in TiFlash back to TiDB.</li><li>Provide complete ACID transactions, more convenient and reliable than general ETL solutions.</li><li>Set a hard limit on the threshold of intermediate result size, and report an error if the threshold is exceeded.</li><li>Support fully distributed transactions, and remove or relax the limit on the intermediate result size.</li></ul></td>
-    <td>These features combined enable a way to materialize intermediate results. The analysis results can be easily reused, which reduces unnecessary ad-hoc queries, improves the performance of BI and other applications (by pulling results directly) and reduces system load (by avoiding duplicated computation), thereby improving the overall data pipeline efficiency and reducing costs. It will make TiFlash an online service.</td>
-  </tr>
-  <tr>
-    <td>Hybrid Transactional and Analytical Processing (HTAP)</td>
-    <td><ul><li>FastScan provides weak consistency but faster table scan capability.</li><li>Further optimize the join order, shuffle, and exchange algorithms to improve computing efficiency and boost performance for complex queries.</li><li>Add a fine-grained data sharding mechanism to optimize the <code>COUNT(DISTINCT)</code> function and high cardinality aggregation.</li></ul></td>
-    <td>Improve the basic computing capability of TiFlash, and optimize the performance and reliability of the underlying algorithms of the columnar storage and MPP engine.</td>
-  </tr>
-  <tr>
-    <td>Proxy</td>
-    <td>Implement automatic load balancing so that upgrading a cluster or modifying configurations does not affect the application. After scaling out or scaling in the cluster, the application can automatically rebalance the connection without reconnecting.</td>
-    <td>In scenarios such as upgrades and configuration changes, TiDB proxy is more business-friendly.</td>
-  </tr>
+<tr>
+<td rowspan="3">
+<p>SQL</p>
+</td>
+<td>
+<p>Support the JSON function.</p>
+<ul>
+<li>Expression index</li>
+<li>Multi-value index</li>
+<li>Partial index</li>
+</ul>
+</td>
+<td>
+<p>In business scenarios that require flexible schema definitions, the application can use JSON to store information for ODS, transaction indicators, commodities, game characters, and props.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p>Support cluster-level flashback.</p>
+</td>
+<td>
+<p>In game rollback scenarios, the flashback can be used to achieve a fast rollback of the current cluster. This solves the common problems in the gaming industry such as version errors and bugs.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p>Support time to live (TTL).</p>
+</td>
+<td>
+<p>This feature enables automatic data cleanup in limited data archiving scenarios.</p>
+</td>
+</tr>
+<tr>
+<td rowspan="2">
+<p>Hybrid Transactional and Analytical Processing (HTAP)</p>
+</td>
+<td>
+<p>Support TiFlash result write-back.</p>
+</td>
+<td>
+<p>Support&nbsp;INSERT INTO SELECT.</p>
+<ul>
+<li>Easily write analysis results in TiFlash back to TiDB.</li>
+<li>Provide complete ACID transactions, more convenient and reliable than general ETL solutions.</li>
+<li>Set a hard limit on the threshold of intermediate result size, and report an error if the threshold is exceeded.</li>
+<li>Support fully distributed transactions, and remove or relax the limit on the intermediate result size.</li>
+</ul>
+<p>These features combined enable a way to materialize intermediate results. The analysis results can be easily reused, which reduces unnecessary ad-hoc queries, improves the performance of BI and other applications (by pulling results directly) and reduces system load (by avoiding duplicated computation), thereby improving the overall data pipeline efficiency and reducing costs. It will make TiFlash an online service.</p>
+<p>&nbsp;</p>
+</td>
+</tr>
+<tr>
+<td>
+<p>Support FastScan for TiFlash.</p>
+</td>
+<td>
+<ul>
+<li>FastScan provides weak consistency but faster table scan capability.</li>
+<li>Further optimize the join order, shuffle, and exchange algorithms to improve computing efficiency and boost performance for complex queries.</li>
+<li>Add a fine-grained data sharding mechanism to optimize the&nbsp;COUNT(DISTINCT)&nbsp;function and high cardinality aggregation.</li>
+</ul>
+<p>This feature improves the basic computing capability of TiFlash, and optimizes the performance and reliability of the underlying algorithms of the columnar storage and MPP engine.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p>Proxy</p>
+</td>
+<td>
+<p>Support TiDB proxy.</p>
+</td>
+<td>
+<p>Implement automatic load balancing so that upgrading a cluster or modifying configurations does not affect the application. After scaling out or scaling in the cluster, the application can automatically rebalance the connection without reconnecting.</p>
+<p>In scenarios such as upgrades and configuration changes, TiDB proxy is more business-friendly.</p>
+</td>
+</tr>
 </tbody>
 </table>
 
