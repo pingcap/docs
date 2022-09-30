@@ -390,7 +390,7 @@ resource "tidbcloud_cluster" "example_cluster" {
 
 The status of the cluster is `CREATING`. In this case, you need to wait until it changes to `AVAILABLE`, which usually takes 10 minutes at least.
 
-Once you want to check the status, execute `terraform refresh` to update the state, then use `terraform state show tidbcloud_cluster.example_cluster` to check the status.
+If you want to check the latest status, run the `terraform refresh` command to update the state, and then run the `terraform state show tidbcloud_cluster.example_cluster` command to display the status.
 
 ```
 $ terraform refresh
