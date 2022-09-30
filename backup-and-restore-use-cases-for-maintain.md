@@ -1,6 +1,6 @@
 ---
 title: BR Use Cases
-summary: Learn the use cases of backing up and restoring data using BR.
+summary: Learn use cases of backing up and restoring data using BR.
 ---
 
 # BR Use Cases
