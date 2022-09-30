@@ -11,7 +11,7 @@ summary: Learn how to use backup resource
 
 ## Create a backup with backup resource
 
-1. Copy the following config:
+1. Copy the following configuration example. You need to replace the `project_id` and `cluster_id` values with your own.
 
     ```
     resource "tidbcloud_backup" "example_backup" {
