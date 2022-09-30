@@ -136,18 +136,18 @@ TiDB uses the UTF-8 character set by default and currently only supports UTF-8. 
 
 The maximum number of statements in a transaction is 5000 by default.
 
-In the optimistic transaction mode, When transaction retry is enabled, the default upper limit is 5000. You can adjust the limit using the [`stmt-count-limit`](/tidb-configuration-file.md#stmt-count-limit) parameter.
+In the optimistic transaction mode, When transaction retry is enabled, the default upper limit is 5000. You can adjust the limit by using the [`stmt-count-limit`](/tidb-configuration-file.md#stmt-count-limit) parameter.
 
 ## Why does the auto-increment ID of the later inserted data is smaller than that of the earlier inserted data in TiDB?
 
-The auto-increment ID feature in TiDB is only guaranteed to be automatically incremental and unique but is not guaranteed to be allocated sequentially. Currently, TiDB is allocating IDs in batches. If data is inserted into multiple TiDB servers simultaneously, the allocated IDs are not sequential. When multiple threads concurrently insert data to multiple `tidb-server` instances, the auto-increment ID of the later inserted data may be smaller. TiDB allows specifying `AUTO_INCREMENT` for the integer field, but allows only one `AUTO_INCREMENT` field in a single table. For details, see [Auto-increment ID](/mysql-compatibility.md#auto-increment-id) and [the AUTO_INCREMENT attribute](/auto-increment.md).
+The auto-increment ID feature in TiDB is only guaranteed to be automatically incremental and unique but is not guaranteed to be allocated sequentially. Currently, TiDB is allocating IDs in batches. If data is inserted into multiple TiDB servers simultaneously, the allocated IDs are not sequential. When multiple threads concurrently insert data to multiple `tidb-server` instances, the auto-increment ID of the later inserted data might be smaller. TiDB allows specifying `AUTO_INCREMENT` for the integer field, but allows only one `AUTO_INCREMENT` field in a single table. For details, see [Auto-increment ID](/mysql-compatibility.md#auto-increment-id) and [the AUTO_INCREMENT attribute](/auto-increment.md).
 
 ## How do I modify the `sql_mode` in TiDB?
 
 TiDB supports modifying the [`sql_mode`](/system-variables.md#sql_mode) system variables on a SESSION or GLOBAL basis.
 
 - Changes to [`GLOBAL`](/sql-statements/sql-statement-set-variable.md) scoped variables propagate to the rest servers of the cluster and persist across restarts. This means that you do not need to change the `sql_mode` value on each TiDB server.
-- Changes to `SESSION` scoped variables only affect the current client session. After restart a server, the changes are lost.
+- Changes to `SESSION` scoped variables only affect the current client session. After restarting a server, the changes are lost.
 
 ## Error: `java.sql.BatchUpdateExecption:statement count 5001 exceeds the transaction limitation` while using Sqoop to write data into TiDB in batches
 
@@ -239,9 +239,9 @@ SELECT column_name FROM table_name USE INDEX（index_name）WHERE where_conditio
 
 TiDB handles the SQL statement using the `schema` of the time and supports online asynchronous DDL change. A DML statement and a DDL statement might be executed at the same time and you must ensure that each statement is executed using the same `schema`. Therefore, when the DML operation meets the ongoing DDL operation, the `Information schema is changed` error might be reported. Some improvements have been made to prevent too many error reportings during the DML operation.
 
-Now, there are still a few causes for this error reporting (only the first one is related to tables):
+Now, there are still a few causes for this error reporting:
 
-+ Cause 1: Some tables involved in the DML operation are the same tables involved in the ongoing DDL operation. To check the on-going DDL operations, use the `ADMIN SHOW DDL` statement.
++ Cause 1: Some tables involved in the DML operation are the same tables involved in the ongoing DDL operation. To check the ongoing DDL operations, use the `ADMIN SHOW DDL` statement.
 + Cause 2: The DML operation goes on for a long time. During this period, many DDL statements have been executed, which causes more than 1024 `schema` version changes. You can modify this default value by modifying the `tidb_max_delta_schema_count` variable.
 + Cause 3: The TiDB server that accepts the DML request is not able to load `schema information` for a long time (possibly caused by the connection failure between TiDB and PD or TiKV). During this period, many DDL statements have been executed, which causes more than 100 `schema` version changes.
 + Cause 4: After TiDB restarts and before the first DDL operation is executed, the DML operation is executed and then encounters the first DDL operation (which means before the first DDL operation is executed, the transaction corresponding to the DML is started. And after the first `schema` version of the DDL is changed, the transaction corresponding to the DML is committed), this DML operation reports this error.
