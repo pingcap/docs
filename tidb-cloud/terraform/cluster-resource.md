@@ -13,7 +13,7 @@ summary: Learn how to use cluster resource
 
 Let us get all the projects by project data source first:
 
-- Use `data` block to define the data source of tidbcloud, it consists of the data source type and the data source name. In this example, data source type is `tidbcloud_project` and the name is `example_project`. The prefix of the type maps to the name of the provider.
+- Use the `data` block to define the data source of TiDB Cloud. It consists of the data source type and the data source name. In this example, the data source type is `tidbcloud_project` and the name is `example_project`. The prefix of the type maps to the name of the provider.
 - Use `output` block to get the information, and expose information for other Terraform configurations to use. It is similar to return values in programming languages. See [terraform doc](https://www.terraform.io/language/values/outputs) for more detail
 
 Besides, you can find all the supported configs for the data source and resource [here](https://registry.terraform.io/providers/tidbcloud/tidbcloud/latest/docs).
