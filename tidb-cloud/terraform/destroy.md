@@ -5,7 +5,7 @@ summary: Learn how to destroy resource
 
 # Destroy Resource
 
-To destroy the resource, you can simply use `terraform destroy` and type `yes`. Don't worry about the order of deletion, terraform will generate a DAG based on the dependencies automatically.
+To destroy resources, you can simply run the `terraform destroy` command and type `yes`. Don't worry about the order of deletion, terraform will generate a DAG based on the dependencies automatically.
 
 ```
 $ terraform destroy
