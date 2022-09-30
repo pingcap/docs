@@ -237,7 +237,7 @@ The following is a part of the results for your reference.
 
 - `cloud_provider` is the cloud provider on which your TiDB cluster is hosted
 - `region` is the region of cloud_provider
-- `node_quantity_range` shows the min quantity of the node and the step if you want to scale the node
+- `node_quantity_range` shows the minimum quantity of the nodes and the step to scale a node.
 - `node_size` is the size of the node
 - `storage_size_gib_range` shows the min and max storage you can set to the node
 
