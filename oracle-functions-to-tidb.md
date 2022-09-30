@@ -39,7 +39,7 @@ The following table shows the mappings between some Oracle and TiDB functions.
 | The position of the string in the source string | `INSTR('abcdefg','b',1,1)` | `INSTR('abcdefg','b')` | Search from the first character of the string 'abcdefg' and return the position of the first occurrence of the 'b' string. |
 | The position of the string in the source string| `INSTR('stst','s',1,2)` | `LENGTH(SUBSTRING_INDEX('stst','s',2)) + 1` | Search from the first character of 'stst' and return the second occurrence of the 's' character. |
 | The position of the string in the source string | `INSTR('abcabc','b',2,1)` | `LOCATE('b','abcabc',2)` | Search from the second character of the string `abcabc` and return the first occurrence of the character `b`. |
-| Get the interval months between dates | `MONTHS_BETWEEN(ENDDATE,SYSDATE)` | `TIMESTAMPDIFF(MONTH,SYSDATE,ENDDATE)` | The results of `MONTHS_BETWEEN()` in Oracle and `TIMESTAMPDIFF()` in TiDB are different. `TIMESTAMPDIFF()` keeps months only in integer. Note that the parameters in the two functions are in opposite positions. |
+| Get the number of months between dates | `MONTHS_BETWEEN(ENDDATE,SYSDATE)` | `TIMESTAMPDIFF(MONTH,SYSDATE,ENDDATE)` | The results of `MONTHS_BETWEEN()` in Oracle and `TIMESTAMPDIFF()` in TiDB are different. `TIMESTAMPDIFF()` keeps months only in integer. Note that the parameters in the two functions are in opposite positions. |
 | Merge columns into rows | `LISTAGG(CONCAT(E.dimensionid,'---',E.DIMENSIONNAME),'***') within GROUP(ORDER BY  DIMENSIONNAME)` | `GROUP_CONCAT(CONCAT(E.dimensionid,'---',E.DIMENSIONNAME) ORDER BY DIMENSIONNAME SEPARATOR '***')` | Combine a column of fields into one row and split them according to the `***` notation. |
 | Get the current time (precision to the second) | `SYSTIMESTAMP` | `CURRENT_TIMESTAMP(6)` | |
 | Convert ASCII values to corresponding characters | `CHR(n)` | `CHAR(n)` | The tab (`CHR(9)`), line feed (`CHR(10)`), and carriage return (`CHR(13)`) characters in Oracle correspond to `CHAR(9)`, `CHAR(10)`, and `CHAR(13)` in TiDB. |
@@ -72,11 +72,11 @@ TiDB does not support reading and writing to the same table in `INSERT` statemen
 INSERT INTO table1 VALUES (feild1,(SELECT T.fields2 FROM table1 T WHERE...))
 ```
 
-### Get the first n pieces of data
+### Get the first n rows of data
 
-- Oracle gets the first n pieces of data by `ROWNUM <= n`. For example `ROWNUM <= 10`.
+- Oracle gets the first n rows of data by `ROWNUM <= n`. For example `ROWNUM <= 10`.
 
-- TiDB gets the first n pieces of data by `LIMIT n`. For example `LIMIT 10`. The Hibernate Query Language (HQL) running SQL statements with `LIMIT` results in an error. You need to change the Hibernate statements to SQL statements.
+- TiDB gets the first n rows of data by `LIMIT n`. For example `LIMIT 10`. The Hibernate Query Language (HQL) running SQL statements with `LIMIT` results in an error. You need to change the Hibernate statements to SQL statements.
 
 ### `UPDATE` statement for multi-table updates
 
