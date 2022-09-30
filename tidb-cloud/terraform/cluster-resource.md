@@ -648,7 +648,7 @@ config = {
   }
 ```
 
-execute `terraform apply` and type `yes` after check:
+Run the `terraform apply` command and type `yes` after check:
 
 ```
 $ terraform apply
