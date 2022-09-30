@@ -11,7 +11,7 @@ summary: Learn how to use restore resource
 > 
 > Backup and restore feature is unavailable for Developer Tier clusters. To use restore resources, make sure that you have created a Dedicated Tier cluster.
 
-You can learn how to create a restore task with restore resource in this doc.
+You can learn how to create a restore task with restore resource in this document.
 
 You can also learn how to import the TiDB Cloud cluster created by restore task.
 
