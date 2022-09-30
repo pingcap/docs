@@ -11,7 +11,7 @@ summary: Learn how to use backup resource
 
 ## Create a backup with backup resource
 
-First, copy the following config:
+1. Copy the following config:
 
 ```
 resource "tidbcloud_backup" "example_backup" {
@@ -33,7 +33,7 @@ resource "tidbcloud_backup" "example_backup" {
 }
 ```
 
-Here we use the second config and execute `terraform apply`:
+2. Here we use the second config and execute `terraform apply`:
 
 ```
 $ terraform apply
@@ -67,7 +67,7 @@ Do you want to perform these actions?
   Enter a value: 
 ```
 
-Type `yes` to create a backup:
+3. Type `yes` to create a backup:
 
 ```
   Enter a value: yes
@@ -79,7 +79,7 @@ Apply complete! Resources: 1 added, 0 changed, 0 destroyed.
 
 ```
 
-Use `terraform state show tidbcloud_backup.example_backup` to check the state of the backup:
+4. Use `terraform state show tidbcloud_backup.example_backup` to check the state of the backup:
 
 ```
 $ terraform state show tidbcloud_backup.example_backup
@@ -98,7 +98,7 @@ resource "tidbcloud_backup" "example_backup" {
 }
 ```
 
-Wait for some minutes and use `terraform refersh`  to update the states:
+5. Wait for some minutes and use `terraform refersh`  to update the states:
 
 ```
 $ terraform refresh  

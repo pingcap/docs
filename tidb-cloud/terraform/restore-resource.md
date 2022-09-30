@@ -163,13 +163,13 @@ You can manage a cluster with Terraform by importing the cluster even if it is n
 
 The following steps show you how to import the cluster created by the restore task in the last section.
 
-First add a cluster resource like:
+1. Add a cluster resource like:
 
 ```
 resource "tidbcloud_cluster" "restore_cluster1" {}
 ```
 
-Then import the cluster by `terraform import tidbcloud_cluster.restore_cluster1 projectId,clusterId`, you can get the projectId and clusterId by restore resource:
+2. Import the cluster by `terraform import tidbcloud_cluster.restore_cluster1 projectId,clusterId`, you can get the projectId and clusterId by restore resource:
 
 ```
 $ terraform import tidbcloud_cluster.restore_cluster1 1372813089189561287,1379661944630264072
@@ -185,7 +185,7 @@ The resources that were imported are shown above. These resources are now in
 your Terraform state and will henceforth be managed by Terraform.
 ```
 
-Use `terraform state show tidbcloud_cluster.restore_cluster1` to get the state of the cluster:
+3. Run `terraform state show tidbcloud_cluster.restore_cluster1` command to get the state of the cluster:
 
 ```
 $ terraform state show tidbcloud_cluster.restore_cluster1
@@ -221,7 +221,7 @@ resource "tidbcloud_cluster" "restore_cluster1" {
 }
 ```
 
-In order to manage it, you can copy it to your config file. Remember to delete the status and id, for they are computed by terraform and can not be set in the config:
+4. In order to manage it, you can copy it to your config file. Remember to delete the status and id, for they are computed by terraform and can not be set in the config:
 
 ```
 resource "tidbcloud_cluster" "restore_cluster1" {
@@ -252,7 +252,7 @@ resource "tidbcloud_cluster" "restore_cluster1" {
 }
 ```
 
-You can use `terraform fmt` to format your config file:
+5. You can use `terraform fmt` to format your config file:
 
 ```
 $ terraform fmt 
@@ -260,7 +260,7 @@ $ terraform fmt
 main.tf
 ```
 
-To ensure the consistency of the config and state, you can execute `terraform plan` or `terraform apply`. If you see `No changes`, the import is successful.
+6. To ensure the consistency of the config and state, you can execute `terraform plan` or `terraform apply`. If you see `No changes`, the import is successful.
 
 ```
 $ terraform apply

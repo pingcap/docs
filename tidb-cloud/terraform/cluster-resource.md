@@ -7,7 +7,7 @@ summary: Learn how to use cluster resource
 
 > **Note:**
 >
-> Make sure you have followed the instructions in [Get TiDB Cloud provider](/tidb-cloud/terraform/tidbcloud-provider.md).
+> Make sure you have followed the instructions in [Get TiDB Cloud Terraform provider](/tidb-cloud/terraform/tidbcloud-provider.md).
 
 ## Get projectId with project data source
 
@@ -16,7 +16,7 @@ Let us get all the projects by project data source first:
 - Use the `data` block to define the data source of TiDB Cloud. It consists of the data source type and the data source name. In this example, the data source type is `tidbcloud_project` and the name is `example_project`. The prefix of the type maps to the name of the provider.
 - Use the `output` block to get the information, and expose the information for other Terraform configurations to use. It works similarly to returned values in programming languages. See [Terraform documentation](https://www.terraform.io/language/values/outputs) for more details.
 
-Besides, you can find all the supported configs for the data source and resource [here](https://registry.terraform.io/providers/tidbcloud/tidbcloud/latest/docs).
+Besides, you can find all the supported configurations for the data sources and resources [here](https://registry.terraform.io/providers/tidbcloud/tidbcloud/latest/docs).
 
 ```
 terraform {
@@ -44,7 +44,9 @@ output "projects" {
 }
 ```
 
-Then you can apply the configuration with the `terraform apply`, you need to type `yes` at the confirmation prompt to proceed. Use `terraform apply --auto-approve` to skip the type.
+Then you can apply the configurations with the `terraform apply` command. You need to type `yes` at the confirmation prompt to proceed.
+
+To skip the prompt, use `terraform apply --auto-approve`:
 
 ```shell
 $ terraform apply --auto-approve
@@ -97,11 +99,11 @@ projects = tolist([
 ])
 ```
 
-Now, you get all the available projects, copy one of the id you need. Here we use the default project's ID.
+Now, you get all the available projects, copy one of the projectId you need. Here we use the default project's ID.
 
-## Get cluster spec info with cluster-spec data source
+## Get cluster spec information with the cluster-spec data source
 
-Before creating a TiDB cluster, you may need to get the available config values (providers, regions and so on.) by cluster-spec Data Source:
+Before creating a TiDB cluster, you may need to get the available configuration values (cloud providers, regions, and so on.) by the cluster-spec data source:
 
 ```
 data "tidbcloud_cluster_spec" "example_cluster_spec" {
@@ -235,23 +237,23 @@ The following is a part of the results for your reference.
   }
 ```
 
-- `cloud_provider` is the cloud provider on which your TiDB cluster is hosted
-- `region` is the region of cloud_provider
-- `node_quantity_range` shows the minimum quantity of the nodes and the step to scale a node.
-- `node_size` is the size of the node
+- `cloud_provider` is the cloud provider on which your TiDB cluster is hosted.
+- `region` is the region of `cloud_provider`.
+- `node_quantity_range` shows the min quantity of the node and the step if you want to scale the node.
+- `node_size` is the size of a node.
 - `storage_size_gib_range` shows the minimum and maximum storage size you can set for a node.
 
-## Create a dedicated cluster with cluster resource
+## Create a Dedicated Tier with cluster resource
 
 Before you begin, make sure you have set a Project CIDR on the TiDB Cloud console.
 
-Now, you can create a dedicated cluster with the projectId and the spec info:
+Then, you can create a Dedicated Tier cluster with the projectId and the spec info:
 
-- Use `resource` block to define the resource of tidbcloud, it consists of the resource type and the resource name. In this example, resource type is `tidbcloud_cluster` and the name is `example_cluster`
+- Use the `resource` block to define the resource of TiDB Cloud. It consists of the resource type and the resource name. In this example, the resource type is `tidbcloud_cluster` and the name is `example_cluster`.
 
-Once again, you can find all the supported configs for the data source and resource [here](https://registry.terraform.io/providers/tidbcloud/tidbcloud/latest/docs)
+You can find all the supported configurations for the data sources and resources [here](https://registry.terraform.io/providers/tidbcloud/tidbcloud/latest/docs)
 
-Here I give an example for tidbcloud_cluster:
+Taking `tidbcloud_cluster` as an example, you can define the resource of TiDB Cloud as follows:
 
 ```
 resource "tidbcloud_cluster" "example_cluster" {
@@ -333,11 +335,11 @@ Do you want to perform these actions?
 
 Terraform will generate an execution plan for you:
 
-- You can check the diff between the configuration and the state
-- You can also see the results of this `apply`: it will add a new resource, and no resource will be changed or destroyed
-- The `known after apply` shows that you will get the value after `apply`
+- You can check the difference between the configurations and the states.
+- You can also see the results of this `apply`. It will add a new resource, and no resource will be changed or destroyed.
+- The `known after apply` shows that you will get the value after `apply`.
 
-If everything is in your plan, type the `yes` to continue:
+If everything is in your plan, type `yes` to continue:
 
 ```
 Do you want to perform these actions?
@@ -353,7 +355,7 @@ Apply complete! Resources: 1 added, 0 changed, 0 destroyed.
 
 ```
 
-Use `terraform show` or `terraform state show tidbcloud_cluster.example_cluster` to inspect the state of your resource. The former will show all the states (all the resources and the data source).
+Use the `terraform show` or `terraform state show tidbcloud_cluster.example_cluster` command to inspect the state of your resource. The former will show all the states (all the resources and the data source).
 
 ```shell
 $ terraform state show tidbcloud_cluster.example_cluster
@@ -431,17 +433,17 @@ resource "tidbcloud_cluster" "example_cluster" {
 
 Congratulations. Your cluster is available now.
 
-## Change the dedicated cluster
+## Modify the Dedicated Tier cluster
 
-We can also use terraform to manage the resource. As for cluster resource, we can:
+You can use Terraform to manage cluster resources as follows:
 
-- Increase TiFlash component for the dedicated cluster
-- Scale the TiDB cluster
-- Pause or resume the cluster
+- Increase TiFlash component for the dedicated cluster.
+- Scale the TiDB cluster.
+- Pause or resume the cluster.
 
-**Increase TiFlash component**
+### increase TiFlash component
 
-First, add tiflash config in components:
+1. add tiflash config in components:
 
 ```
     components = {
@@ -462,7 +464,7 @@ First, add tiflash config in components:
     }
 ```
 
-Then, execute `terraform apply`:
+2. run `terraform apply` command:
 
 ```
 $ terraform apply
@@ -503,7 +505,7 @@ Do you want to perform these actions?
 
 ```
 
-Check the plan, you will find tiflash is added. And one resource will be changed after apply. Type `yes`:
+By checking the plan, you will find that TiFlash is added. And one resource will be changed after `terraform apply`. Then type `yes` to confirm:
 
 ```
   Enter a value: yes
@@ -514,7 +516,7 @@ tidbcloud_cluster.example_cluster: Modifications complete after 2s [id=137966194
 Apply complete! Resources: 0 added, 1 changed, 0 destroyed.
 ```
 
-Use `terraform state show tidbcloud_cluster.example_cluster` to see the status:
+3. Use `terraform state show tidbcloud_cluster.example_cluster` to see the status:
 
 ```
 $ terraform state show tidbcloud_cluster.example_cluster
@@ -554,13 +556,13 @@ resource "tidbcloud_cluster" "example_cluster" {
 }
 ```
 
-The `MODIFYING` status shows the cluster is changing now. Wait for a moment, the status will be changed to `AVAILABLE`.
+The `MODIFYING` status indicates that the cluster is changing now. Wait for a moment. The status will be changed to `AVAILABLE`.
 
-**Scale the TiDB cluster**
+### Scale a TiDB cluster
 
-After the status is `AVAILABLE`, let us try to scale the TiDB cluster.
+You can scale a TiDB cluster when its status is `AVAILABLE`.
 
-Add one node for TiDB and TiFlash, TiKV needs to add at least 3 nodes for its step is 3.
+For example, to add 1 node for TiDB, 3 nodes for TiKV (TiKV needs to add at least 3 nodes if its step is 3), and 1 node for TiFlash, you can update the configurations as follows:
 
 ```
     components = {
@@ -634,12 +636,12 @@ Apply complete! Resources: 0 added, 1 changed, 0 destroyed.
 
 Wait for the status from `MODIFYING` to `AVAILABLE`.
 
-**Pause or resume the cluster**
+### Pause or resume a cluster
 
-The cluster can also be paused when the status is `AVAILABLE` or be resumed when the status is `PAUSED`.
+You can pause a cluster when its status is `AVAILABLE` or resume a cluster when its status is `PAUSED`.
 
-- set `paused = true` to pause the cluster
-- set `paused = false` to resume the cluster
+- Set `paused = true` to pause a cluster.
+- Set `paused = false` to resume a cluster.
 
 ```
 config = {
