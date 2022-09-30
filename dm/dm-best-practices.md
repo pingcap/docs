@@ -125,8 +125,9 @@ Since TiDB v6.0.0, GBK is supported. For more information, see the following doc
 
 DM consists of DM-master and DM-worker.
 
-- DM-master manages the metadata of migration tasks and scheduls DM-worker nodes. It is the core of the whole DM platform. Therefore, DM-master can be deployed as clusters to ensure the availability of the DM platform.
-- DM-worker executes upstream and downstream migration tasks. It is a stateless node. You can deploy at most 1000 DM-worker nodes. When using DM, you can reserve some idle DM-workers to ensure high availability.
+- DM-master manages the metadata of migration tasks and scheduls DM-worker nodes. It is the core of the whole DM platform. Therefore, you can deploy DM-master as clusters to ensure high availability of the DM platform.
+
+- DM-worker executes upstream and downstream migration tasks. A DM-worker node is stateless. You can deploy at most 1000 DM-worker nodes. When using DM, it is recommended that you reserve some idle DM-workers to ensure high availability.
 
 #### Plan the migration tasks
 
