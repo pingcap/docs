@@ -5,6 +5,8 @@ summary: Learn how to use backup resource
 
 # Backup Resource
 
+You can learn how to create backup for a TiDB Cloud cluster with backup resource in this doc.
+
 > **Note:**
 >
 > Because the backup and restore feature is unavailable to Developer Tier clusters. To use backup resources, make sure that you have created a Dedicated Tier cluster. 
@@ -22,7 +24,7 @@ summary: Learn how to use backup resource
     }
     ```
 
-    You can also get project_id and cluster_id from the cluster resource like:
+   If you have maintained a cluster resource named `example_cluster`, you can also get project_id and cluster_id like:
 
     ```
     resource "tidbcloud_backup" "example_backup" {
@@ -33,7 +35,7 @@ summary: Learn how to use backup resource
     }
     ```
 
-2. Here we use the second config and execute `terraform apply`:
+2. Run `terraform apply` command:
 
     ```
     $ terraform apply
@@ -119,6 +121,28 @@ summary: Learn how to use backup resource
     }
     ```
 
-Congratulations. You have created a backup for your cluster. Pay attention that the backup can not be updated.
+It indicates that you have created a backup for your cluster if you see the status turns to `SUCCESS`. Pay attention that the backup can not be updated.
 
-> Next, let us use the backup to [restore a cluster](/tidb-cloud/terraform/restore-resource.md)
+> You can use the backup to [restore a cluster](/tidb-cloud/terraform/restore-resource.md)
+
+## Destroy backup
+
+Run `terraform destroy` command to destroy the backup resource.
+
+```
+$ terraform destroy
+
+Plan: 0 to add, 0 to change, 1 to destroy.
+
+Do you really want to destroy all resources?
+Terraform will destroy all your managed infrastructure, as shown above.
+There is no undo. Only 'yes' will be accepted to confirm.
+
+Enter a value: yes
+```
+
+Now, if you run the `terraform show` command, you will get nothing because the resource have been cleared:
+
+```
+$ terraform show
+```

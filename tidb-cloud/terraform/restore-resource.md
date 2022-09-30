@@ -5,6 +5,10 @@ summary: Learn how to use restore resource
 
 # Restore Resource
 
+You can learn how to create a restore task with restore resource in this doc.
+
+You can also learn how to import the TiDB Cloud cluster created by restore task.
+
 > **Note:**
 >
 > Because the backup and restore feature is unavailable for Developer Tier clusters. To use restore resources, make sure that you have created a Dedicated Tier cluster.
@@ -152,9 +156,7 @@ You can see the restore task's status is `PENDING` and the cluster's status is `
 
 After the cluster is `AVAILABLE`, the restore task will be `RUNNING` and turn to `SUCCESS` at last.
 
-It is everything ok? No, the bad news is the restored cluster is not managed by terraform.
-
-Don't worry, we can solve it in the next section.
+The bad news is the restored cluster is not managed by terraform. We can solve it by importing.
 
 ## Import the restore cluster
 
@@ -277,3 +279,7 @@ The following steps show you how to import the cluster created by the restore ta
     ```
 
 Now you can manage the cluster created by the restore task.
+
+## Destroy restore task
+
+Restore task can not be deleted now.

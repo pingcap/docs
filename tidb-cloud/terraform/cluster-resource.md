@@ -5,18 +5,22 @@ summary: Learn how to use cluster resource
 
 # Cluster Resource
 
+You can learn how to create and modify a TiDB Cloud cluster with cluster resource in this doc.
+
+Besides, you will also learn how to get the necessary information from project data source and cluster-spec data source in this doc.
+
 > **Note:**
 >
 > Make sure you have followed the instructions in [Get TiDB Cloud Terraform provider](/tidb-cloud/terraform/tidbcloud-provider.md).
 
-## Get projectId with project data source
+## Get projectId from project data source
 
 Let us get all the projects by project data source first:
 
 - Use the `data` block to define the data source of TiDB Cloud. It consists of the data source type and the data source name. In this example, the data source type is `tidbcloud_project` and the name is `example_project`. The prefix of the type maps to the name of the provider.
 - Use the `output` block to get the information, and expose the information for other Terraform configurations to use. It works similarly to returned values in programming languages. See [Terraform documentation](https://www.terraform.io/language/values/outputs) for more details.
 
-Besides, you can find all the supported configurations for the data sources and resources [here](https://registry.terraform.io/providers/tidbcloud/tidbcloud/latest/docs).
+By the way, you can find all the supported configurations for the data sources and resources [here](https://registry.terraform.io/providers/tidbcloud/tidbcloud/latest/docs).
 
 ```
 terraform {
@@ -44,7 +48,7 @@ output "projects" {
 }
 ```
 
-Then you can apply the configurations with the `terraform apply` command. You need to type `yes` at the confirmation prompt to proceed.
+Run `terraform apply` command to apply the configurations. You need to type `yes` at the confirmation prompt to proceed.
 
 To skip the prompt, use `terraform apply --auto-approve`:
 
@@ -101,7 +105,7 @@ projects = tolist([
 
 Now, you will get all the available projects, copy one of the projectId you need. Here we use the default project's ID.
 
-## Get cluster spec information with the cluster-spec data source
+## Get cluster specification information with cluster-spec data source
 
 Before creating a TiDB cluster, you may need to get the available configuration values (cloud providers, regions, and so on.) by the cluster-spec data source:
 
@@ -239,23 +243,19 @@ The following is a part of the results for your reference.
 
 - `cloud_provider` is the cloud provider on which your TiDB cluster is hosted.
 - `region` is the region of `cloud_provider`.
-- `node_quantity_range` shows the min quantity of the node and the step if you want to scale the node.
+- `node_quantity_range` shows the minimum quantity of the node and the step if you want to scale the node.
 - `node_size` is the size of a node.
 - `storage_size_gib_range` shows the minimum and maximum storage size you can set for a node.
 
 ## Create a Dedicated Tier with cluster resource
 
-> Before you begin, make sure you have set a Project CIDR on the TiDB Cloud console.
+> **Note:**
+>
+> Before you begin, make sure that you have set a Project CIDR in the TiDB Cloud console.
 
-Then, you can create a Dedicated Tier cluster with the projectId and the spec info:
+Then, you can create a Dedicated Tier cluster with the projectId and the spec info using cluster resource.
 
-- Use the `resource` block to define the resource of TiDB Cloud. It consists of the resource type and the resource name. In this example, the resource type is `tidbcloud_cluster` and the name is `example_cluster`.
-
-You can find all the supported configurations for the data sources and resources [here](https://registry.terraform.io/providers/tidbcloud/tidbcloud/latest/docs)
-
-Taking `tidbcloud_cluster` as an example:
-
-1. You can define the resource of TiDB Cloud as follows:
+1. Use the `resource` block to define the resource of TiDB Cloud. It consists of the resource type and the resource name. In this example, the resource type is `tidbcloud_cluster` and the name is `example_cluster`.
 
     ```
     resource "tidbcloud_cluster" "example_cluster" {
@@ -443,9 +443,9 @@ You can use Terraform to manage cluster resources as follows:
 - Scale the TiDB cluster.
 - Pause or resume the cluster.
 
-### increase TiFlash component
+### Increase TiFlash component
 
-1. add tiflash config in components:
+1. Add TiFlash configuration in components:
 
     ```
         components = {
@@ -466,7 +466,7 @@ You can use Terraform to manage cluster resources as follows:
         }
     ```
 
-2. run `terraform apply` command:
+2. Run `terraform apply` command:
 
     ```
     $ terraform apply
@@ -564,7 +564,7 @@ The `MODIFYING` status indicates that the cluster is changing now. Wait for a mo
 
 You can scale a TiDB cluster when its status is `AVAILABLE`.
 
-For example, to add 1 node for TiDB, 3 nodes for TiKV (TiKV needs to add at least 3 nodes if its step is 3), and 1 node for TiFlash, you can update the configurations as follows:
+For example, to add 1 node for TiDB, 3 nodes for TiKV (TiKV needs to add at least 3 nodes for its step is 3, you can get this information in cluster-spec data source), and 1 node for TiFlash, you can update the configurations as follows:
 
 ```
     components = {
@@ -786,3 +786,27 @@ resource "tidbcloud_cluster" "example_cluster" {
 Wait for a moment, the status will be changed to `AVAILABLE` again.
 
 Now, you have created and managed a Dedicated Tier cluster with Terraform. Next, you can create a backup of the cluster by the [backup resource](/tidb-cloud/terraform/backup-resource.md).
+
+
+## Destroy cluster
+
+Run `terraform destroy` command to destroy the cluster resource:
+
+```
+$ terraform destroy
+
+Plan: 0 to add, 0 to change, 1 to destroy.
+
+Do you really want to destroy all resources?
+Terraform will destroy all your managed infrastructure, as shown above.
+There is no undo. Only 'yes' will be accepted to confirm.
+
+Enter a value: yes
+```
+
+Now, if you run the `terraform show` command, you will get nothing because the resource have been cleared:
+
+```
+$ terraform show
+```
+

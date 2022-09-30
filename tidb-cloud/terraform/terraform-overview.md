@@ -10,7 +10,7 @@ As a fully managed service of TiDB, TiDB Cloud can automate database maintenance
 If you are looking for a simplified way to automate resource provisioning and your infrastructure workflow. You can try out our [TiDB Cloud Terraform provider](https://registry.terraform.io/providers/tidbcloud/tidbcloud), which provides you with the following capabilities:
 
 - Get your project information.
-- Get cluster spec information, like supported cloud_provider, region, node size and so on.
+- Get cluster specification information, like supported cloud_provider, region, node size and so on.
 - Manage your TiDB cluster, including creating, scaling, pausing and resuming a cluster.
 - Create and delete the backup for your cluster.
 - Create the restore task for your cluster.
