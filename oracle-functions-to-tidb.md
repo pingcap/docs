@@ -1,6 +1,6 @@
 ---
 title: Mappings between Functions and Syntax of Oracle and TiDB
-summary: Learn the mappings between functions and syntax of Oracle and TiDB
+summary: Learn the mappings between functions and syntax of Oracle and TiDB.
 ---
 
 # Mappings between Functions and Syntax of Oracle and TiDB
@@ -17,32 +17,32 @@ The following table shows the mappings between some Oracle and TiDB functions.
 
 | Function | Oracle syntax | TiDB syntax | Note |
 |---|---|---|---|
-| Convert data types | <li>`TO_NUMBER(key)`</li><li>`TO_CHAR(key)`</li> | `CONVERT(key,dataType)` | TiDB supports converting to the following types: `BINARY`, `CHAR`, `DATE`, `DATETIME`, `TIME`, `SIGNED INTEGER`, `UNSIGNED INTEGER` and `DECIMAL`. |
-| Convert a date type to a string type | <li>`TO_CHAR(SYSDATE,'yyyy-MM-dd hh24:mi:ss')`</li> <li>`TO_CHAR(SYSDATE,'yyyy-MM-dd')`</li> | <li>`DATE_FORMAT(NOW(),'%Y-%m-%d %H:%i:%s')`</li><li>`DATE_FORMAT(NOW(),'%Y-%m-%d')`</li> | TiDB format strings are case-sensitive. |
-| Convert a string type to a date type | <li>`TO_DATE('2021-05-28 17:31:37','yyyy-MM-dd hh24:mi:ss')`</li><li>`TO_DATE('2021-05-28','yyyy-MM-dd hh24:mi:ss')`</li> | <li>`STR_TO_DATE('2021-05-28 17:31:37','%Y-%m-%d %H:%i:%s')`</li><li>`STR_TO_DATE('2021-05-28','%Y-%m-%d%T')` </li> | TiDB format strings are case-sensitive.  |
-| Get the current system time (precision to the second) | `SYSDATE` | `NOW()` | |
-| Get the current time (precision to the second) | `SYSTIMESTAMP` | `CURRENT_TIMESTAMP(6)` | |
-| Get the number of days between two days | `date1 - date2` | `DATEDIFF(date1, date2)` | |
-| Get the number of months between dates | `MONTHS_BETWEEN(ENDDATE,SYSDATE)` | `TIMESTAMPDIFF(MONTH,SYSDATE,ENDDATE)` | The results of `MONTHS_BETWEEN()` in Oracle and `TIMESTAMPDIFF()` in TiDB are different. `TIMESTAMPDIFF()` keeps months only in integer. Note that the parameters in the two functions are in opposite positions. |
-| Increase or decrease date by `n` days  | `DATEVAL + n` | `DATE_ADD(dateVal,INTERVAL n DAY)` | `n` can be a negative value.|
-| Increase or decrease date by `n` months | `ADD_MONTHS(dateVal,n)`| `DATE_ADD(dateVal,INTERVAL n MONTH)` | `n` can be a negative value. |
-| Get the date (precision to the date) | `TRUNC(SYSDATE)` | <li>`CAST(NOW() AS DATE)`</li><li>`DATE_FORMAT(NOW(),'%Y-%m-%d')`</li> | In TiDB, `CAST` and  `DATE_FORMAT` return the same result. |
-| Get the first date of the month | `TRUNC(SYSDATE,'mm')` | `DATE_ADD(CURDATE(),interval - day(CURDATE()) + 1 day)`  | |
+| Cast a value as a certain type | <li>`TO_NUMBER(key)`</li><li>`TO_CHAR(key)`</li> | `CONVERT(key,dataType)` | TiDB supports casting a value as one of the following types: `BINARY`, `CHAR`, `DATE`, `DATETIME`, `TIME`, `SIGNED INTEGER`, `UNSIGNED INTEGER` and `DECIMAL`. |
+| Convert a date to a string | <li>`TO_CHAR(SYSDATE,'yyyy-MM-dd hh24:mi:ss')`</li> <li>`TO_CHAR(SYSDATE,'yyyy-MM-dd')`</li> | <li>`DATE_FORMAT(NOW(),'%Y-%m-%d %H:%i:%s')`</li><li>`DATE_FORMAT(NOW(),'%Y-%m-%d')`</li> | The format string of TiDB is case-sensitive. |
+| Convert a string to a date | <li>`TO_DATE('2021-05-28 17:31:37','yyyy-MM-dd hh24:mi:ss')`</li><li>`TO_DATE('2021-05-28','yyyy-MM-dd hh24:mi:ss')`</li> | <li>`STR_TO_DATE('2021-05-28 17:31:37','%Y-%m-%d %H:%i:%s')`</li><li>`STR_TO_DATE('2021-05-28','%Y-%m-%d%T')` </li> | The format string of TiDB is case-sensitive. |
+| Get the current system time in second precision | `SYSDATE` | `NOW()` | |
+| Get the current system time in microsecond precision | `SYSTIMESTAMP` | `CURRENT_TIMESTAMP(6)` | |
+| Get the number of days between two dates | `date1 - date2` | `DATEDIFF(date1, date2)` | |
+| Get the number of months between two dates | `MONTHS_BETWEEN(ENDDATE,SYSDATE)` | `TIMESTAMPDIFF(MONTH,SYSDATE,ENDDATE)` | The results of `MONTHS_BETWEEN()` in Oracle and `TIMESTAMPDIFF()` in TiDB are different. `TIMESTAMPDIFF()` keeps months only in integer. Note that the parameters in the two functions are in opposite positions. |
+| Add `n` days to a date | `DATEVAL + n` | `DATE_ADD(dateVal,INTERVAL n DAY)` | `n` can be a negative value.|
+| Add `n` months to a date | `ADD_MONTHS(dateVal,n)`| `DATE_ADD(dateVal,INTERVAL n MONTH)` | `n` can be a negative value. |
+| Get the day of a date | `TRUNC(SYSDATE)` | <li>`CAST(NOW() AS DATE)`</li><li>`DATE_FORMAT(NOW(),'%Y-%m-%d')`</li> | In TiDB, `CAST` and  `DATE_FORMAT` return the same result. |
+| Get the month of a date | `TRUNC(SYSDATE,'mm')` | `DATE_ADD(CURDATE(),interval - day(CURDATE()) + 1 day)`  | |
 | Truncate a value | `TRUNC(2.136) = 2`<br/> `TRUNC(2.136,2) = 2.13` | `TRUNCATE(2.136,0) = 2`<br/> `TRUNCATE(2.136,2) = 2.13` | Data precision is preserved. Truncate the corresponding decimal places without rounding.  |
 | Get the next value in a sequence | `sequence_name.NEXTVAL` | `NEXTVAL(sequence_name)` | |
 | Left join or right join | `SELECT * FROM a, b WHERE a.id = b.id(+);`<br/>`SELECT * FROM a, b WHERE a.id(+) = b.id;` | `SELECT * FROM a LEFT JOIN b ON a.id = b.id;`<br/>`SELECT * FROM a RIGHT JOIN b ON a.id = b.id;` | When correlating queries, TiDB does not support using (+) to left join or right join. You can use `LEFT JOIN` or `RIGHT JOIN` instead. |
-| Get random sequence values | `SYS_GUID()` | `UUID()` | TiDB returns a Universal Unique Identifier (UUID).|
+| Get a random sequence value | `SYS_GUID()` | `UUID()` | TiDB returns a Universal Unique Identifier (UUID).|
 | `NVL()` | `NVL(key,val)` | `IFNULL(key,val)` | If the value of the field is `NULL`, it returns the value of `val`; otherwise, it returns the value of the field.  |
 | `NVL2()` | `NVL2(key, val1, val2)`  | `IF(key is NULL, val1, val2)` | If the value of the field is not `NULL`, it returns the value of `val1`; otherwise, it returns the value of `val2`. |
-| `DECODE()` | <li>`DECODE(key,val1,val2,val3)`</li><li>`DECODE(value,if1,val1,if2,val2,...,ifn,valn,val)`</li> | <li>`IF(key=val1,val2,val3)`</li><li>`CASE WHEN value=if1 THEN val1 WHEN value=if2 THEN val2,...,WHEN value=ifn THEN valn ELSE val END`</li> | <li>If the value of the field is equal to val1, then it returns val2; otherwise it returns val3.</li><li>When the field value satisfies the condition 1 (if1), it returns val1. When it satisfies the condition 2 (if2), it returns val2. When it satisfies the condition 3 (if3), it returns val3.</li> |
-| Combine the strings `a` and `b` | <code>`'a' \|\| 'b'`</code> | `CONCAT('a','b')` | |
+| `DECODE()` | <li>`DECODE(key,val1,val2,val3)`</li><li>`DECODE(value,if1,val1,if2,val2,...,ifn,valn,val)`</li> | <li>`IF(key=val1,val2,val3)`</li><li>`CASE WHEN value=if1 THEN val1 WHEN value=if2 THEN val2,...,WHEN value=ifn THEN valn ELSE val END`</li> | <li>If the value of the field is equal to val1, then it returns val2; otherwise it returns val3.</li><li>When the field value satisfies condition 1 (if1), it returns val1. When it satisfies condition 2 (if2), it returns val2. When it satisfies condition 3 (if3), it returns val3.</li> |
+| Concatenating the string `a` and `b` | <code>'a' \|\| 'b'</code> | `CONCAT('a','b')` | |
 | Get the length of a string | `LENGTH(str)` | `CHAR_LENGTH(str)` | |
-| Get sub strings | `SUBSTR('abcdefg',0,2) = 'ab'`<br/> `SUBSTR('abcdefg',1,2) = 'ab'` | `SUBSTRING('abcdefg',0,2) = ''`<br/>`SUBSTRING('abcdefg',1,2) = 'ab'` | <li>In Oracle, the starting position 0 has the same effect as 1. </li><li>In TiDB, the substring starting from 0 is null. If you need to start from the beginning of the string, you should start from 1.</li>|
-| The position of the string in the source string | `INSTR('abcdefg','b',1,1)` | `INSTR('abcdefg','b')` | Search from the first character of the string 'abcdefg' and return the position of the first occurrence of the 'b' string. |
-| The position of the string in the source string| `INSTR('stst','s',1,2)` | `LENGTH(SUBSTRING_INDEX('stst','s',2)) + 1` | Search from the first character of 'stst' and return the second occurrence of the 's' character. |
-| The position of the string in the source string | `INSTR('abcabc','b',2,1)` | `LOCATE('b','abcabc',2)` | Search from the second character of the string `abcabc` and return the first occurrence of the character `b`. |
-| Merge columns into rows | `LISTAGG(CONCAT(E.dimensionid,'---',E.DIMENSIONNAME),'***') within GROUP(ORDER BY  DIMENSIONNAME)` | `GROUP_CONCAT(CONCAT(E.dimensionid,'---',E.DIMENSIONNAME) ORDER BY DIMENSIONNAME SEPARATOR '***')` | Combine a column of fields into one row and split them according to the `***` notation. |
-| Convert ASCII values to corresponding characters | `CHR(n)` | `CHAR(n)` | The tab (`CHR(9)`), line feed (`CHR(10)`), and carriage return (`CHR(13)`) characters in Oracle correspond to `CHAR(9)`, `CHAR(10)`, and `CHAR(13)` in TiDB. |
+| Get the substring as specified | `SUBSTR('abcdefg',0,2) = 'ab'`<br/> `SUBSTR('abcdefg',1,2) = 'ab'` | `SUBSTRING('abcdefg',0,2) = ''`<br/>`SUBSTRING('abcdefg',1,2) = 'ab'` | <li>In Oracle, the starting position 0 has the same effect as 1. </li><li>In TiDB, the starting position 0 returns an empty string. If you need to start from the beginning of the string, the starting position should be 1.</li>|
+| Get the position of a substring | `INSTR('abcdefg','b',1,1)` | `INSTR('abcdefg','b')` | Search from the first character of `'abcdefg'` and return the position of the first occurrence of `'b'`. |
+| Get the position of a substring | `INSTR('stst','s',1,2)` | `LENGTH(SUBSTRING_INDEX('stst','s',2)) + 1` | Search from the first character of `'stst'` and return the position of the second occurrence of `'s'`. |
+| Get the position of a substring | `INSTR('abcabc','b',2,1)` | `LOCATE('b','abcabc',2)` | Search from the second character of `abcabc` and return the position of the first occurrence of `b`. |
+| Concatenate values of a column | `LISTAGG(CONCAT(E.dimensionid,'---',E.DIMENSIONNAME),'***') within GROUP(ORDER BY  DIMENSIONNAME)` | `GROUP_CONCAT(CONCAT(E.dimensionid,'---',E.DIMENSIONNAME) ORDER BY DIMENSIONNAME SEPARATOR '***')` | Concatenate values of a specified column to one row with the `***` delimiter. |
+| Convert a ASCII code to character | `CHR(n)` | `CHAR(n)` | The tab (`CHR(9)`), line feed (`CHR(10)`), and carriage return (`CHR(13)`) characters in Oracle correspond to `CHAR(9)`, `CHAR(10)`, and `CHAR(13)` in TiDB. |
 
 ## Syntax differences
 
@@ -50,45 +50,45 @@ This section describes some syntax differences between Oracle and TiDB.
 
 ### String syntax
 
-In Oracle, strings can only be enclosed in single quotes (''). For example `'a'`
+In Oracle, a string can only be enclosed in single quotes (''). For example `'a'`
 
-In TiDB, strings can be enclosed in single quotes ('') or double quotes (""). For example, `'a'` and `"a"`
+In TiDB, a string can be enclosed in single quotes ('') or double quotes (""). For example, `'a'` and `"a"`
 
 ### Difference between `NULL` and an empty string
 
-Oracle does not distinguish between `NULL` and the empty string `''`, that is, `NULL` is equivalent to `''`.
+Oracle does not distinguish between `NULL` and an empty string `''`, that is, `NULL` is equivalent to `''`.
 
-TiDB distinguishes between `NULL` and the empty string `''`.
+TiDB distinguishes between `NULL` and an empty string `''`.
 
 ### Read and write to the same table in an `INSERT` statement
 
-Oracle supports reading and writing to the same table in the `INSERT` statement. For example:
+Oracle supports reading and writing to the same table in a `INSERT` statement. For example:
 
 ```sql
 INSERT INTO table1 VALUES (feild1,(SELECT feild2 FROM table1 WHERE...))
 ```
 
-TiDB does not support reading and writing to the same table in `INSERT` statements. For example:
+TiDB does not support reading and writing to the same table in a `INSERT` statement. For example:
 
 ```sql
 INSERT INTO table1 VALUES (feild1,(SELECT T.fields2 FROM table1 T WHERE...))
 ```
 
-### Get the first n rows of data
+### Get the first n rows from a query
 
-Oracle gets the first n rows of data by `ROWNUM <= n`. For example `ROWNUM <= 10`.
+In Oracle, to get the first n rows from a query, you can use the `ROWNUM <= n` clause. For example `ROWNUM <= 10`.
 
-TiDB gets the first n rows of data by `LIMIT n`. For example `LIMIT 10`. The Hibernate Query Language (HQL) running SQL statements with `LIMIT` results in an error. You need to change the Hibernate statements to SQL statements.
+In TiDB, to get the first n rows from a query, you can use the `LIMIT n` clause. For example `LIMIT 10`. The Hibernate Query Language (HQL) running SQL statements with `LIMIT` results in an error. You need to change the Hibernate statements to SQL statements.
 
-### `UPDATE` statement for multi-table updates
+### Update multiple tables in a `UPDATE` statement
 
-Oracle: it is not necessary to list the specific field update relationship when updating multiple tables. For example:
+In Oracle, it is not necessary to list the specific field update relationship when updating multiple tables. For example:
 
 ```sql
 UPDATE test1 SET(test1.name,test1.age) = (SELECT test2.name,test2.age FROM test2 WHERE test2.id=test1.id)
 ```
 
-TiDB: when updating multiple tables, you need to list all the specific field update relationships in `SET`. For example:
+In TiDB, when updating multiple tables, you need to list all the specific field update relationships in `SET`. For example:
 
 ```sql
 UPDATE test1,test2 SET test1.name=test2.name,test1.age=test2.age WHERE test1.id=test2.id
@@ -96,27 +96,27 @@ UPDATE test1,test2 SET test1.name=test2.name,test1.age=test2.age WHERE test1.id=
 
 ### Derived table alias
 
-Oracle：when querying multiple tables, a derived table alias is not necessary. For example:
+In Oracle, when querying multiple tables, it is unnecessary to add an alias to the derived table. For example:
 
 ```sql
 SELECT * FROM (SELECT * FROM test)
 ```
 
-TiDB: when querying multiple tables, each derived table must have an alias of its own. For example:
+In TiDB, when querying multiple tables, every derived table must have its own alias. For example:
 
 ```sql
 SELECT * FROM (SELECT * FROM test) t
 ```
 
-### Difference set operation
+### Set operations
 
-Oracle uses `MINUS` for difference set operations. For example:
+In Oracle, to get the rows that are in the first query result but not in the second, you can use the `MINUS` set operation. For example:
 
 ```sql
 SELECT * FROM t1 MINUS SELECT * FROM t2
 ```
 
-TiDB does not support `MINUS`. You need to change it to `EXCEPT` to perform difference set operations. For example:
+TiDB does not support the `MINUS` operation. You can use the `EXCEPT` set operation. For example:
 
 ```sql
 SELECT * FROM t1 EXCEPT SELECT * FROM t2
@@ -124,47 +124,47 @@ SELECT * FROM t1 EXCEPT SELECT * FROM t2
 
 ### Comment syntax
 
-In Oracle, the comment syntax is `--Comment`. Oracle does not need a space after `--`.
+In Oracle, the comment syntax is `--Comment`.
 
-In TiDB, the comment syntax is `-- Comment`. Note that TiDB needs a space after `--`.
+In TiDB, the comment syntax is `-- Comment`. Note that there is a white space after `--` in TiDB.
 
-### Paging queries
+### Pagination
 
-Oracle: `OFFSET m` means skipping `m` rows. `FETCH NEXT n ROWS ONLY` means taking `n` rows. For example:
+In Oracle, you can use the `OFFSET m ROWS` to skip `m` rows and use the `FETCH NEXT n ROWS ONLY`to fetch `n` rows. For example:
 
 ```sql
 SELECT * FROM tables OFFSET 0 ROWS FETCH NEXT 2000 ROWS ONLY
 ```
 
-TiDB: Use `LIMIT n OFFSET m` to replace `OFFSET m ROWS FETCH NEXT n ROWS ONLY`. For example:
+In TiDB, you can use the `LIMIT n OFFSET m` to replace `OFFSET m ROWS FETCH NEXT n ROWS ONLY`. For example:
 
 ```sql
 SELECT * FROM tables LIMIT 2000 OFFSET 0
 ```
 
-### `ORDER BY` sorting rules for `NULL`
+### Sorting order on `NULL` values
 
-Rules for sorting `NULL` by the `ORDER BY` statement in Oracle.
+In Oracle, `NULL` values are sorted by the `ORDER BY` clause in the following cases:
 
-- In `ORDER BY COLUM ASC`, `NULL` is placed last by default.
+- In the `ORDER BY column ASC` statement, `NULL` values are returned last.
 
-- In `ORDER BY COLUM DESC`, `NULL` is placed first by default.
+- In the `ORDER BY column DESC` statement, `NULL` values are returned first.
 
-- In `ORDER BY COLUM [ASC|DESC] NULLS FIRST`, `NULL` is forced to be placed first. Non-`NULL` values are still sorted by the declared order `ASC|DESC`.
+- In the `ORDER BY column [ASC|DESC] NULLS FIRST` statement, `NULL` values are returned before non-NULL values. Non-NULL values are returned in ascending order or descending order specified in `ASC|DESC`.
 
-- In `ORDER BY COLUM [ASC|DESC] NULLS LAST` , `NULL` is forced to be placed last. Non-`NULL` values are still sorted by the declared order `ASC|DESC`.
+- In the `ORDER BY column [ASC|DESC] NULLS LAST` statement, `NULL` values are returned after non-NULL values. Non-NULL values are returned in ascending order or descending order specified in `ASC|DESC`.
 
-Rules for sorting `NULL` by the `ORDER BY` statement in TiDB.
+In TiDB, `NULL` values are sorted by the `ORDER BY` clause in the following cases:
 
-- In `ORDER BY COLUM ASC`, `NULL` is placed first by default.
+- In the `ORDER BY column ASC` statement, `NULL` values are returned first.
 
-- `ORDER BY COLUM DESC`, `NULL` is placed last by default.
+- In the `ORDER BY column DESC` statement, `NULL` values are returned last.
 
 The following table shows some examples of equivalent `ORDER BY` statements in Oracle and TiDB:
 
-| `ORDER BY` in Oracle | Equivalent in TiDB |
+| `ORDER BY` in Oracle | Equivalent statements in TiDB |
 | :------------------- | :----------------- |
-| `SELECT * FROM t1 ORDER BY name NULLS FIRST;`      |`SELECT * FROM t1 ORDER BY NAME ;`  |
-| `SELECT * FROM t1 ORDER BY name DESC NULLS LAST;`  | `SELECT * FROM t1 ORDER BY NAME DESC;` |
+| `SELECT * FROM t1 ORDER BY name NULLS FIRST;`      | `SELECT * FROM t1 ORDER BY name;`  |
+| `SELECT * FROM t1 ORDER BY name DESC NULLS LAST;`  | `SELECT * FROM t1 ORDER BY name DESC;` |
 | `SELECT * FROM t1 ORDER BY name DESC NULLS FIRST;` | `SELECT * FROM t1 ORDER BY ISNULL(name) DESC, name DESC;` |
 | `SELECT * FROM t1 ORDER BY name ASC NULLS LAST;`   | `SELECT * FROM t1 ORDER BY ISNULL(name), name;` |
