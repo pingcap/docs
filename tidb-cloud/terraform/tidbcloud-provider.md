@@ -7,7 +7,7 @@ summary: Learn how to get TiDB Cloud provider
 
 > **Note:**
 >
-> Make sure meet the requirements in [overview](/tidb-cloud/terraform/terraform-overview.md)
+> Before you begin, make sure that the requirements in [Overview](/tidb-cloud/terraform/terraform-overview.md) are met.
 
 ## Set up terraform
 
