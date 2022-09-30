@@ -7,7 +7,7 @@ summary: Learn how to use cluster resource
 
 > **Note:**
 >
-> Make sure you have followed the [Get TiDB Cloud provider](/tidb-cloud/terraform/tidbcloud-provider.md)
+> Make sure you have followed the instructions in [Get TiDB Cloud provider](/tidb-cloud/terraform/tidbcloud-provider.md).
 
 ## Get projectId with project data source
 
