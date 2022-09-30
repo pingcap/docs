@@ -738,7 +738,7 @@ config = {
   }
 ```
 
-After apply you will find the status turns to `RESUMING`:
+After `apply`, you will find the status turns to `RESUMING`:
 
 ```
 # tidbcloud_cluster.example_cluster:
