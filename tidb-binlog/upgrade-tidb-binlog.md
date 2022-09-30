@@ -1,7 +1,6 @@
 ---
 title: Upgrade TiDB Binlog
 summary: Learn how to upgrade TiDB Binlog to the latest cluster version.
-aliases: ['/docs/dev/tidb-binlog/upgrade-tidb-binlog/','/docs/dev/reference/tidb-binlog/upgrade/','/docs/dev/how-to/upgrade/tidb-binlog/']
 ---
 
 # Upgrade TiDB Binlog

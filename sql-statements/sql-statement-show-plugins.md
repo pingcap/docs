@@ -1,7 +1,6 @@
 ---
 title: SHOW PLUGINS
 summary: An overview of the usage of SHOW PLUGINS for the TiDB database.
-aliases: ['/docs/dev/sql-statements/sql-statement-show-plugins/']
 ---
 
 # SHOW PLUGINS

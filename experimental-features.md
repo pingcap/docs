@@ -1,7 +1,6 @@
 ---
 title: TiDB Experimental Features
 summary: Learn the experimental features of TiDB.
-aliases: ['/tidb/dev/experimental-features-4.0/']
 ---
 
 # TiDB Experimental Features
