@@ -1,7 +1,6 @@
 ---
 title: binlogctl
 summary: Learns how to use `binlogctl`.
-aliases: ['/docs/dev/tidb-binlog/binlog-control/']
 ---
 
 # binlogctl
