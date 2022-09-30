@@ -5,7 +5,7 @@ summary: Create, manage, and update your TiDB Cloud resources through Terraform
 
 # Overview
 
-TiDB Cloud already automates many database operations, and with our [Open API](https://docs.pingcap.com/tidbcloud/api/v1beta) you can programmatically handle additional operations like deployment, scaling, and restore.
+As a fully-managed service of TiDB, TiDB Cloud automates many database maintenance operations. With the [TiDB Cloud API](https://docs.pingcap.com/tidbcloud/api/v1beta), you can programmatically handle more operations such as deployment, scaling, and restore.
 
 If you are looking to a simplified ways to automate resource provisioning and your infrastructure workflow. You can try out our TiDB Cloud Terraform provider with the capabilities:
 
