@@ -99,7 +99,7 @@ projects = tolist([
 ])
 ```
 
-Now, you get all the available projects, copy one of the projectId you need. Here we use the default project's ID.
+Now, you will get all the available projects, copy one of the projectId you need. Here we use the default project's ID.
 
 ## Get cluster spec information with the cluster-spec data source
 
@@ -245,7 +245,7 @@ The following is a part of the results for your reference.
 
 ## Create a Dedicated Tier with cluster resource
 
-Before you begin, make sure you have set a Project CIDR on the TiDB Cloud console.
+> Before you begin, make sure you have set a Project CIDR on the TiDB Cloud console.
 
 Then, you can create a Dedicated Tier cluster with the projectId and the spec info:
 
@@ -253,85 +253,87 @@ Then, you can create a Dedicated Tier cluster with the projectId and the spec in
 
 You can find all the supported configurations for the data sources and resources [here](https://registry.terraform.io/providers/tidbcloud/tidbcloud/latest/docs)
 
-Taking `tidbcloud_cluster` as an example, you can define the resource of TiDB Cloud as follows:
+Taking `tidbcloud_cluster` as an example:
 
-```
-resource "tidbcloud_cluster" "example_cluster" {
-  project_id     = "1372813089189561287"
-  name           = "firstCluster"
-  cluster_type   = "DEDICATED"
-  cloud_provider = "AWS"
-  region         = "eu-central-1"
-  config = {
-    root_password = "Your_root_password1."
-    port = 4000
-    components = {
-      tidb = {
-        node_size : "8C16G"
-        node_quantity : 1
-      }
-      tikv = {
-        node_size : "8C32G"
-        storage_size_gib : 500,
-        node_quantity : 3
-      }
-    }
-  }
-}
-```
+1. You can define the resource of TiDB Cloud as follows:
 
-Run the `terraform apply` command. It is not recommended to use `terraform apply --auto-approve` when you apply a resource.
-
-```shell
-$ terraform apply
-data.tidbcloud_project.example_project: Reading...
-data.tidbcloud_project.example_project: Read complete after 1s [id=just for test]
-
-Terraform used the selected providers to generate the following execution plan. Resource actions are indicated with the following symbols:
-  + create
-
-Terraform will perform the following actions:
-
-  # tidbcloud_cluster.example_cluster will be created
-  + resource "tidbcloud_cluster" "example_cluster" {
-      + cloud_provider = "AWS"
-      + cluster_type   = "DEDICATED"
-      + config         = {
-          + components     = {
-              + tidb = {
-                  + node_quantity = 1
-                  + node_size     = "8C16G"
-                }
-              + tikv = {
-                  + node_quantity    = 3
-                  + node_size        = "8C32G"
-                  + storage_size_gib = 500
-                }
-            }
-          + ip_access_list = [
-              + {
-                  + cidr        = "0.0.0.0/0"
-                  + description = "all"
-                },
-            ]
-          + port           = 4000
-          + root_password  = "Your_root_password1."
+    ```
+    resource "tidbcloud_cluster" "example_cluster" {
+      project_id     = "1372813089189561287"
+      name           = "firstCluster"
+      cluster_type   = "DEDICATED"
+      cloud_provider = "AWS"
+      region         = "eu-central-1"
+      config = {
+        root_password = "Your_root_password1."
+        port = 4000
+        components = {
+          tidb = {
+            node_size : "8C16G"
+            node_quantity : 1
+          }
+          tikv = {
+            node_size : "8C32G"
+            storage_size_gib : 500,
+            node_quantity : 3
+          }
         }
-      + id             = (known after apply)
-      + name           = "firstCluster"
-      + project_id     = "1372813089189561287"
-      + region         = "eu-central-1"
-      + status         = (known after apply)
+      }
     }
+    ```
 
-Plan: 1 to add, 0 to change, 0 to destroy.
+2. Run the `terraform apply` command. It is not recommended to use `terraform apply --auto-approve` when you apply a resource.
 
-Do you want to perform these actions?
-  Terraform will perform the actions described above.
-  Only 'yes' will be accepted to approve.
-
-  Enter a value: 
-```
+    ```shell
+    $ terraform apply
+    data.tidbcloud_project.example_project: Reading...
+    data.tidbcloud_project.example_project: Read complete after 1s [id=just for test]
+    
+    Terraform used the selected providers to generate the following execution plan. Resource actions are indicated with the following symbols:
+      + create
+    
+    Terraform will perform the following actions:
+    
+      # tidbcloud_cluster.example_cluster will be created
+      + resource "tidbcloud_cluster" "example_cluster" {
+          + cloud_provider = "AWS"
+          + cluster_type   = "DEDICATED"
+          + config         = {
+              + components     = {
+                  + tidb = {
+                      + node_quantity = 1
+                      + node_size     = "8C16G"
+                    }
+                  + tikv = {
+                      + node_quantity    = 3
+                      + node_size        = "8C32G"
+                      + storage_size_gib = 500
+                    }
+                }
+              + ip_access_list = [
+                  + {
+                      + cidr        = "0.0.0.0/0"
+                      + description = "all"
+                    },
+                ]
+              + port           = 4000
+              + root_password  = "Your_root_password1."
+            }
+          + id             = (known after apply)
+          + name           = "firstCluster"
+          + project_id     = "1372813089189561287"
+          + region         = "eu-central-1"
+          + status         = (known after apply)
+        }
+    
+    Plan: 1 to add, 0 to change, 0 to destroy.
+    
+    Do you want to perform these actions?
+      Terraform will perform the actions described above.
+      Only 'yes' will be accepted to approve.
+    
+      Enter a value: 
+    ```
 
 Terraform will generate an execution plan for you:
 
@@ -339,97 +341,97 @@ Terraform will generate an execution plan for you:
 - You can also see the results of this `apply`. It will add a new resource, and no resource will be changed or destroyed.
 - The `known after apply` shows that you will get the value after `apply`.
 
-If everything is in your plan, type `yes` to continue:
+3. If everything is in your plan, type `yes` to continue:
 
-```
-Do you want to perform these actions?
-  Terraform will perform the actions described above.
-  Only 'yes' will be accepted to approve.
+    ```
+    Do you want to perform these actions?
+      Terraform will perform the actions described above.
+      Only 'yes' will be accepted to approve.
+    
+      Enter a value: yes
+    
+    tidbcloud_cluster.example_cluster: Creating...
+    tidbcloud_cluster.example_cluster: Creation complete after 1s [id=1379661944630234067]
+    
+    Apply complete! Resources: 1 added, 0 changed, 0 destroyed.
+    
+    ```
 
-  Enter a value: yes
+4. Use the `terraform show` or `terraform state show tidbcloud_cluster.example_cluster` command to inspect the state of your resource. The former will show all the states (all the resources and the data source).
 
-tidbcloud_cluster.example_cluster: Creating...
-tidbcloud_cluster.example_cluster: Creation complete after 1s [id=1379661944630234067]
-
-Apply complete! Resources: 1 added, 0 changed, 0 destroyed.
-
-```
-
-Use the `terraform show` or `terraform state show tidbcloud_cluster.example_cluster` command to inspect the state of your resource. The former will show all the states (all the resources and the data source).
-
-```shell
-$ terraform state show tidbcloud_cluster.example_cluster
-
-# tidbcloud_cluster.example_cluster:
-resource "tidbcloud_cluster" "example_cluster" {
-    cloud_provider = "AWS"
-    cluster_type   = "DEDICATED"
-    config         = {
-        components     = {
-            tidb = {
-                node_quantity = 1
-                node_size     = "8C16G"
+    ```shell
+    $ terraform state show tidbcloud_cluster.example_cluster
+    
+    # tidbcloud_cluster.example_cluster:
+    resource "tidbcloud_cluster" "example_cluster" {
+        cloud_provider = "AWS"
+        cluster_type   = "DEDICATED"
+        config         = {
+            components     = {
+                tidb = {
+                    node_quantity = 1
+                    node_size     = "8C16G"
+                }
+                tikv = {
+                    node_quantity    = 3
+                    node_size        = "8C32G"
+                    storage_size_gib = 500
+                }
             }
-            tikv = {
-                node_quantity    = 3
-                node_size        = "8C32G"
-                storage_size_gib = 500
-            }
+            ip_access_list = [
+                # (1 unchanged element hidden)
+            ]
+            port           = 4000
+            root_password  = "Your_root_password1."
         }
-        ip_access_list = [
-            # (1 unchanged element hidden)
-        ]
-        port           = 4000
-        root_password  = "Your_root_password1."
+        id             = "1379661944630234067"
+        name           = "firstCluster"
+        project_id     = "1372813089189561287"
+        region         = "eu-central-1"
+        status         = "CREATING"
     }
-    id             = "1379661944630234067"
-    name           = "firstCluster"
-    project_id     = "1372813089189561287"
-    region         = "eu-central-1"
-    status         = "CREATING"
-}
-```
+    ```
 
 The status of the cluster is `CREATING`. In this case, you need to wait until it changes to `AVAILABLE`, which usually takes 10 minutes at least.
 
-If you want to check the latest status, run the `terraform refresh` command to update the state, and then run the `terraform state show tidbcloud_cluster.example_cluster` command to display the status.
+5. If you want to check the latest status, run the `terraform refresh` command to update the state, and then run the `terraform state show tidbcloud_cluster.example_cluster` command to display the status.
 
-```
-$ terraform refresh
-
-tidbcloud_cluster.example_cluster: Refreshing state... [id=1379661944630234067]
-
-$ terraform state show tidbcloud_cluster.example_cluste
-
-# tidbcloud_cluster.example_cluster:
-resource "tidbcloud_cluster" "example_cluster" {
-    cloud_provider = "AWS"
-    cluster_type   = "DEDICATED"
-    config         = {
-        components     = {
-            tidb = {
-                node_quantity = 1
-                node_size     = "8C16G"
+    ```
+    $ terraform refresh
+    
+    tidbcloud_cluster.example_cluster: Refreshing state... [id=1379661944630234067]
+    
+    $ terraform state show tidbcloud_cluster.example_cluste
+    
+    # tidbcloud_cluster.example_cluster:
+    resource "tidbcloud_cluster" "example_cluster" {
+        cloud_provider = "AWS"
+        cluster_type   = "DEDICATED"
+        config         = {
+            components     = {
+                tidb = {
+                    node_quantity = 1
+                    node_size     = "8C16G"
+                }
+                tikv = {
+                    node_quantity    = 3
+                    node_size        = "8C32G"
+                    storage_size_gib = 500
+                }
             }
-            tikv = {
-                node_quantity    = 3
-                node_size        = "8C32G"
-                storage_size_gib = 500
-            }
+            ip_access_list = [
+                # (1 unchanged element hidden)
+            ]
+            port           = 4000
+            root_password  = "Your_root_password1."
         }
-        ip_access_list = [
-            # (1 unchanged element hidden)
-        ]
-        port           = 4000
-        root_password  = "Your_root_password1."
+        id             = "1379661944630234067"
+        name           = "firstCluster"
+        project_id     = "1372813089189561287"
+        region         = "eu-central-1"
+        status         = "AVAILABLE"
     }
-    id             = "1379661944630234067"
-    name           = "firstCluster"
-    project_id     = "1372813089189561287"
-    region         = "eu-central-1"
-    status         = "AVAILABLE"
-}
-```
+    ```
 
 Congratulations. Your cluster is available now.
 
@@ -445,116 +447,116 @@ You can use Terraform to manage cluster resources as follows:
 
 1. add tiflash config in components:
 
-```
-    components = {
-      tidb = {
-        node_size : "8C16G"
-        node_quantity : 1
-      }
-      tikv = {
-        node_size : "8C32G"
-        storage_size_gib : 500
-        node_quantity : 3
-      }
-      tiflash = {
-        node_size : "8C64G"
-        storage_size_gib : 500
-        node_quantity : 1
-      }
-    }
-```
+    ```
+        components = {
+          tidb = {
+            node_size : "8C16G"
+            node_quantity : 1
+          }
+          tikv = {
+            node_size : "8C32G"
+            storage_size_gib : 500
+            node_quantity : 3
+          }
+          tiflash = {
+            node_size : "8C64G"
+            storage_size_gib : 500
+            node_quantity : 1
+          }
+        }
+    ```
 
 2. run `terraform apply` command:
 
-```
-$ terraform apply
-
-tidbcloud_cluster.example_cluster: Refreshing state... [id=1379661944630234067]
-
-Terraform used the selected providers to generate the following execution plan. Resource actions are indicated with the following symbols:
-  ~ update in-place
-
-Terraform will perform the following actions:
-
-  # tidbcloud_cluster.example_cluster will be updated in-place
-  ~ resource "tidbcloud_cluster" "example_cluster" {
-      ~ config         = {
-          ~ components     = {
-              + tiflash = {
-                  + node_quantity    = 1
-                  + node_size        = "8C64G"
-                  + storage_size_gib = 500
+    ```
+    $ terraform apply
+    
+    tidbcloud_cluster.example_cluster: Refreshing state... [id=1379661944630234067]
+    
+    Terraform used the selected providers to generate the following execution plan. Resource actions are indicated with the following symbols:
+      ~ update in-place
+    
+    Terraform will perform the following actions:
+    
+      # tidbcloud_cluster.example_cluster will be updated in-place
+      ~ resource "tidbcloud_cluster" "example_cluster" {
+          ~ config         = {
+              ~ components     = {
+                  + tiflash = {
+                      + node_quantity    = 1
+                      + node_size        = "8C64G"
+                      + storage_size_gib = 500
+                    }
+                    # (2 unchanged attributes hidden)
                 }
-                # (2 unchanged attributes hidden)
+                # (3 unchanged attributes hidden)
             }
-            # (3 unchanged attributes hidden)
+            id             = "1379661944630234067"
+            name           = "firstCluster"
+          ~ status         = "AVAILABLE" -> (known after apply)
+            # (4 unchanged attributes hidden)
         }
-        id             = "1379661944630234067"
-        name           = "firstCluster"
-      ~ status         = "AVAILABLE" -> (known after apply)
-        # (4 unchanged attributes hidden)
-    }
-
-Plan: 0 to add, 1 to change, 0 to destroy.
-
-Do you want to perform these actions?
-  Terraform will perform the actions described above.
-  Only 'yes' will be accepted to approve.
-
-  Enter a value: 
-
-```
+    
+    Plan: 0 to add, 1 to change, 0 to destroy.
+    
+    Do you want to perform these actions?
+      Terraform will perform the actions described above.
+      Only 'yes' will be accepted to approve.
+    
+      Enter a value: 
+    
+    ```
 
 By checking the plan, you will find that TiFlash is added. And one resource will be changed after `terraform apply`. Then type `yes` to confirm:
 
-```
-  Enter a value: yes
-
-tidbcloud_cluster.example_cluster: Modifying... [id=1379661944630234067]
-tidbcloud_cluster.example_cluster: Modifications complete after 2s [id=1379661944630234067]
-
-Apply complete! Resources: 0 added, 1 changed, 0 destroyed.
-```
+    ```
+      Enter a value: yes
+    
+    tidbcloud_cluster.example_cluster: Modifying... [id=1379661944630234067]
+    tidbcloud_cluster.example_cluster: Modifications complete after 2s [id=1379661944630234067]
+    
+    Apply complete! Resources: 0 added, 1 changed, 0 destroyed.
+    ```
 
 3. Use `terraform state show tidbcloud_cluster.example_cluster` to see the status:
 
-```
-$ terraform state show tidbcloud_cluster.example_cluster
-
-# tidbcloud_cluster.example_cluster:
-resource "tidbcloud_cluster" "example_cluster" {
-    cloud_provider = "AWS"
-    cluster_type   = "DEDICATED"
-    config         = {
-        components     = {
-            tidb    = {
-                node_quantity = 1
-                node_size     = "8C16G"
+    ```
+    $ terraform state show tidbcloud_cluster.example_cluster
+    
+    # tidbcloud_cluster.example_cluster:
+    resource "tidbcloud_cluster" "example_cluster" {
+        cloud_provider = "AWS"
+        cluster_type   = "DEDICATED"
+        config         = {
+            components     = {
+                tidb    = {
+                    node_quantity = 1
+                    node_size     = "8C16G"
+                }
+                tiflash = {
+                    node_quantity    = 1
+                    node_size        = "8C64G"
+                    storage_size_gib = 500
+                }
+                tikv    = {
+                    node_quantity    = 3
+                    node_size        = "8C32G"
+                    storage_size_gib = 500
+                }
             }
-            tiflash = {
-                node_quantity    = 1
-                node_size        = "8C64G"
-                storage_size_gib = 500
-            }
-            tikv    = {
-                node_quantity    = 3
-                node_size        = "8C32G"
-                storage_size_gib = 500
-            }
+            ip_access_list = [
+                # (1 unchanged element hidden)
+            ]
+            port           = 4000
+            root_password  = "Your_root_password1."
         }
-        ip_access_list = [
-            # (1 unchanged element hidden)
-        ]
-        port           = 4000
-        root_password  = "Your_root_password1."
+        id             = "1379661944630234067"
+        name           = "firstCluster"
+        project_id     = "1372813089189561287"
+        region         = "eu-central-1"
+        status         = "MODIFYING"
     }
-    id             = "1379661944630234067"
-    name           = "firstCluster"
-    project_id     = "1372813089189561287"
-    region         = "eu-central-1"
-    status         = "MODIFYING"
-}
-```
+    ```
 
 The `MODIFYING` status indicates that the cluster is changing now. Wait for a moment. The status will be changed to `AVAILABLE`.
 
