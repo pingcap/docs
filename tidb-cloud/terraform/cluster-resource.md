@@ -335,11 +335,11 @@ Taking `tidbcloud_cluster` as an example:
       Enter a value: 
     ```
 
-Terraform will generate an execution plan for you:
+    Terraform will generate an execution plan for you:
 
-- You can check the difference between the configurations and the states.
-- You can also see the results of this `apply`. It will add a new resource, and no resource will be changed or destroyed.
-- The `known after apply` shows that you will get the value after `apply`.
+   - You can check the difference between the configurations and the states.
+   - You can also see the results of this `apply`. It will add a new resource, and no resource will be changed or destroyed.
+   - The `known after apply` shows that you will get the value after `apply`.
 
 3. If everything is in your plan, type `yes` to continue:
 
@@ -392,7 +392,7 @@ Terraform will generate an execution plan for you:
     }
     ```
 
-The status of the cluster is `CREATING`. In this case, you need to wait until it changes to `AVAILABLE`, which usually takes 10 minutes at least.
+    The status of the cluster is `CREATING`. In this case, you need to wait until it changes to `AVAILABLE`, which usually takes 10 minutes at least.
 
 5. If you want to check the latest status, run the `terraform refresh` command to update the state, and then run the `terraform state show tidbcloud_cluster.example_cluster` command to display the status.
 
@@ -507,7 +507,7 @@ You can use Terraform to manage cluster resources as follows:
     
     ```
 
-By checking the plan, you will find that TiFlash is added. And one resource will be changed after `terraform apply`. Then type `yes` to confirm:
+3. By checking the plan, you will find that TiFlash is added. And one resource will be changed after `terraform apply`. Then type `yes` to confirm:
 
     ```
       Enter a value: yes
@@ -518,7 +518,7 @@ By checking the plan, you will find that TiFlash is added. And one resource will
     Apply complete! Resources: 0 added, 1 changed, 0 destroyed.
     ```
 
-3. Use `terraform state show tidbcloud_cluster.example_cluster` to see the status:
+4. Use `terraform state show tidbcloud_cluster.example_cluster` to see the status:
 
     ```
     $ terraform state show tidbcloud_cluster.example_cluster
