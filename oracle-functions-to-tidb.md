@@ -42,7 +42,7 @@ The following table shows the mappings between some Oracle and TiDB functions.
 | Get the position of a substring | `INSTR('stst','s',1,2)` | `LENGTH(SUBSTRING_INDEX('stst','s',2)) + 1` | Search from the first character of `'stst'` and return the position of the second occurrence of `'s'`. |
 | Get the position of a substring | `INSTR('abcabc','b',2,1)` | `LOCATE('b','abcabc',2)` | Search from the second character of `abcabc` and return the position of the first occurrence of `b`. |
 | Concatenate values of a column | `LISTAGG(CONCAT(E.dimensionid,'---',E.DIMENSIONNAME),'***') within GROUP(ORDER BY  DIMENSIONNAME)` | `GROUP_CONCAT(CONCAT(E.dimensionid,'---',E.DIMENSIONNAME) ORDER BY DIMENSIONNAME SEPARATOR '***')` | Concatenate values of a specified column to one row with the `***` delimiter. |
-| Convert a ASCII code to character | `CHR(n)` | `CHAR(n)` | The tab (`CHR(9)`), line feed (`CHR(10)`), and carriage return (`CHR(13)`) characters in Oracle correspond to `CHAR(9)`, `CHAR(10)`, and `CHAR(13)` in TiDB. |
+| Convert an ASCII code to character | `CHR(n)` | `CHAR(n)` | The tab (`CHR(9)`), line feed (`CHR(10)`), and carriage return (`CHR(13)`) characters in Oracle correspond to `CHAR(9)`, `CHAR(10)`, and `CHAR(13)` in TiDB. |
 
 ## Syntax differences
 
@@ -62,7 +62,7 @@ TiDB distinguishes between `NULL` and an empty string `''`.
 
 ### Read and write to the same table in an `INSERT` statement
 
-Oracle supports reading and writing to the same table in a `INSERT` statement. For example:
+Oracle supports reading and writing to the same table in an `INSERT` statement. For example:
 
 ```sql
 INSERT INTO table1 VALUES (feild1,(SELECT feild2 FROM table1 WHERE...))
@@ -80,7 +80,7 @@ In Oracle, to get the first n rows from a query, you can use the `ROWNUM <= n` c
 
 In TiDB, to get the first n rows from a query, you can use the `LIMIT n` clause. For example `LIMIT 10`. The Hibernate Query Language (HQL) running SQL statements with `LIMIT` results in an error. You need to change the Hibernate statements to SQL statements.
 
-### Update multiple tables in a `UPDATE` statement
+### Update multiple tables in an `UPDATE` statement
 
 In Oracle, it is not necessary to list the specific field update relationship when updating multiple tables. For example:
 
