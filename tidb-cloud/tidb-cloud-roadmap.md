@@ -13,15 +13,49 @@ The TiDB Cloud roadmap brings you what's coming in the near future, so you can s
 
 ## Developer experience and enterprise-grade features
 
-| Domain | Feature | Description |
-|---|---|---|
-| Developer experience | Load sample datasets manually. | Support loading sample datasets into a cluster. You can use this data to quickly get started with testing the features of TiDB Cloud. |
-| UI experience | Provide a more convenient feedback channel. | Users can quickly get help with and give feedback on the product. |
-| Cloud provider marketplace | Improve the user experience from AWS Marketplace and GCP Marketplace. | Improve the user journey and experience of users who sign up from AWS Marketplace and GCP Marketplace. |
-| Enterprise-grade features | Manage multiple organizations. | Support managing multiple organizations. A user can create and join more than one organization. |
-| UI experience | Add left navigation. | Present the TiDB Cloud console in the structure of organizations, projects, and users to simplify the layout logic and improve user experience. |
-| Developer experience | Add SQL Editor. | Write and run SQL queries, and view the results in the TiDB console. |
-| Enterprise-grade features | Support hierarchical user roles and permissions. | Support role-based access control (RBAC) for the TiDB Cloud console. You can manage user permissions in a fine-grained manner, such as by cluster, billing, and member. |
+<table>
+<thead>
+  <tr>
+    <th>Domain</th>
+    <th>Feature</th>
+    <th>Description</th>
+  </tr>
+</thead>
+<tbody>
+  <tr>
+    <td rowspan="2">Developer experience</td>
+    <td>Load sample datasets manually.</td>
+    <td>Support loading sample datasets into a cluster. You can use this data to quickly get started with testing the features of TiDB Cloud.</td>
+  </tr>
+  <tr>
+    <td>Add SQL Editor.</td>
+    <td>Write and run SQL queries, and view the results in the TiDB console.</td>
+  </tr>
+  <tr>
+    <td>Cloud provider marketplace</td>
+    <td>Improve the user experience from AWS Marketplace and GCP Marketplace.</td>
+    <td>Improve the user journey and experience of users who sign up from AWS Marketplace and GCP Marketplace.</td>
+  </tr>
+  <tr>
+    <td rowspan="2">Enterprise-grade features</td>
+    <td>Manage multiple organizations.</td>
+    <td>Support managing multiple organizations. A user can create and join more than one organization.</td>
+  </tr>
+  <tr>
+    <td>Support hierarchical user roles and permissions.</td>
+    <td>Support role-based access control (RBAC) for the TiDB Cloud console. You can manage user permissions in a fine-grained manner, such as by cluster, billing, and member.</td>
+  </tr>
+  <tr>
+    <td rowspan="2">UI experience</td>
+    <td>Provide a more convenient feedback channel.</td>
+    <td>Users can quickly get help with and give feedback on the product.</td>
+  </tr>
+  <tr>
+    <td>Add left navigation.</td>
+    <td>Present the TiDB Cloud console in the structure of organizations, projects, and users to simplify the layout logic and improve user experience.</td>
+  </tr>
+</tbody>
+</table>
 
 ## TiDB kernel
 
