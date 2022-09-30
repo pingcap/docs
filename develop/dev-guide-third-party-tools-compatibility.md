@@ -138,7 +138,7 @@ When the `useLocalTransactionState` and `rewriteBatchedStatements` parameters tu
 
 > **Note:**
 >
-> This bug has been reported to MySQL, you can follow this [Bug Report](https://bugs.mysql.com/bug.php?id=108643) to keep track of the latest news.
+> This bug has been reported to MySQL JDBC, you can follow this [Bug Report](https://bugs.mysql.com/bug.php?id=108643) to keep track of the latest news.
 
 **_DO NOT_** turn on `useLocalTransactionState`, as this may prevent transactions from being committed or rolled back.
 
