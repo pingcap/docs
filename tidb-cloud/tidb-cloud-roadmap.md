@@ -13,66 +13,136 @@ The TiDB Cloud roadmap brings you what's coming in the near future, so you can s
 
 ## Developer experience and enterprise-grade features
 
-| Scenario | Feature | Description |
-|---|---|---|
-| Developer experience | Load sample datasets manually. | Support loading sample datasets into a cluster. You can use this data to quickly get started with testing the features of TiDB Cloud. |
-| UI experience | Provide a more convenient feedback channel. | Users can quickly get help with and give feedback on the product. |
-| Cloud provider marketplace | Improve the user experience from AWS Marketplace and GCP Marketplace. | Improve the user journey and experience of users who sign up from AWS Marketplace and GCP Marketplace. |
-| Enterprise-grade features | Manage multiple organizations. | Support managing multiple organizations. A user can create and join more than one organization. |
-| UI experience | Add left navigation. | Present the TiDB Cloud console in the structure of organizations, projects, and users to simplify the layout logic and improve user experience. |
-| Developer experience | Add SQL Editor. | Write and run SQL queries, and view the results in the TiDB console. |
-| Enterprise-grade features | Support hierarchical user roles and permissions. | Support role-based access control (RBAC) for the TiDB Cloud console. You can manage user permissions in a fine-grained manner, such as by cluster, billing, and member. |
-
-## TiDB kernel
-
 <table>
 <thead>
   <tr>
-    <th>Scenario</th>
+    <th>Domain</th>
     <th>Feature</th>
     <th>Description</th>
   </tr>
 </thead>
 <tbody>
   <tr>
-    <td rowspan="2">Support JSON</td>
-    <td>Support JSON function.</td>
-    <td>In business scenarios that require flexible schema definitions, the application can use JSON to store information for ODS, transaction indicators, commodities, game characters, and props.</td>
+    <td rowspan="2">Developer experience</td>
+    <td>Load sample datasets manually.</td>
+    <td>Support loading sample datasets into a cluster. You can use this data to quickly get started with testing the features of TiDB Cloud.</td>
   </tr>
   <tr>
-    <td><ul><li>Support expression indexes.</li><li>Support generated columns.</li></ul></td>
-    <td>Provides query acceleration for specific field indexes in JSON scenarios.</td>
+    <td>Add SQL Editor.</td>
+    <td>Write and run SQL queries, and view the results in the TiDB console.</td>
   </tr>
   <tr>
-    <td>Flashback</td>
-    <td>Support cluster-level flashback.</td>
-    <td>In game rollback scenarios, the flashback can be used to achieve a fast rollback of the current cluster. This solves the common problems in the gaming industry such as version errors and bugs.</td>
+    <td>Cloud provider marketplace</td>
+    <td>Improve the user experience from AWS Marketplace and GCP Marketplace.</td>
+    <td>Improve the user journey and experience of users who sign up from AWS Marketplace and GCP Marketplace.</td>
   </tr>
   <tr>
-    <td>TiFlash result write-back (supports <code>INSERT INTO SELECT</code>)</td>
-    <td><ul><li>Easily write analysis results in TiFlash back to TiDB.</li><li>Provide complete ACID transactions, more convenient and reliable than general ETL solutions.</li><li>Set a hard limit on the threshold of intermediate result size, and report an error if the threshold is exceeded.</li><li>Support fully distributed transactions, and remove or relax the limit on the intermediate result size.</li></ul></td>
-    <td>These features combined enable a way to materialize intermediate results. The analysis results can be easily reused, which reduces unnecessary ad-hoc queries, improves the performance of BI and other applications (by pulling results directly) and reduces system load (by avoiding duplicated computation), thereby improving the overall data pipeline efficiency and reducing costs. It will make TiFlash an online service.</td>
+    <td rowspan="2">Enterprise-grade features</td>
+    <td>Manage multiple organizations.</td>
+    <td>Support managing multiple organizations. A user can create and join more than one organization.</td>
   </tr>
   <tr>
-    <td>Time to live (TTL)</td>
-    <td>Support automatically deleting expired table data based on custom rules.</td>
-    <td>This feature enables automatic data cleanup in limited data archiving scenarios.</td>
+    <td>Support hierarchical user roles and permissions.</td>
+    <td>Support role-based access control (RBAC) for the TiDB Cloud console. You can manage user permissions in a fine-grained manner, such as by cluster, billing, and member.</td>
   </tr>
   <tr>
-    <td>Multi-value Index</td>
-    <td>Support array index.</td>
-    <td>Array is one of the commonly used data types in JSON scenarios. For inclusive queries in arrays, multi-value indexes can efficiently improve the query speed. </td>
+    <td rowspan="2">UI experience</td>
+    <td>Provide a more convenient feedback channel.</td>
+    <td>Users can quickly get help with and give feedback on the product.</td>
   </tr>
   <tr>
-    <td>TiFlash kernel optimization</td>
-    <td><ul><li>FastScan provides weak consistency but faster table scan capability.</li><li>Further optimize the join order, shuffle, and exchange algorithms to improve computing efficiency and boost performance for complex queries.</li><li>Add a fine-grained data sharding mechanism to optimize the <code>COUNT(DISTINCT)</code> function and high cardinality aggregation.</li></ul></td>
-    <td>Improve the basic computing capability of TiFlash, and optimize the performance and reliability of the underlying algorithms of the columnar storage and MPP engine.</td>
+    <td>Add left navigation.</td>
+    <td>Present the TiDB Cloud console in the structure of organizations, projects, and users to simplify the layout logic and improve user experience.</td>
   </tr>
+</tbody>
+</table>
+
+## TiDB kernel
+
+<table>
+<thead>
   <tr>
-    <td>TiDB proxy</td>
-    <td>Implement automatic load balancing so that upgrading a cluster or modifying configurations does not affect the application. After scaling out or scaling in the cluster, the application can automatically rebalance the connection without reconnecting.</td>
-    <td>In scenarios such as upgrades and configuration changes, TiDB proxy is more business-friendly.</td>
+    <th>Domain</th>
+    <th>Feature</th>
+    <th>Description</th>
   </tr>
+</thead>
+<tbody>
+<tr>
+<td rowspan="3">
+<p>SQL</p>
+</td>
+<td>
+<p>Support the JSON function.</p>
+<ul>
+<li>Expression index</li>
+<li>Multi-value index</li>
+<li>Partial index</li>
+</ul>
+</td>
+<td>
+<p>In business scenarios that require flexible schema definitions, the application can use JSON to store information for ODS, transaction indicators, commodities, game characters, and props.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p>Support cluster-level flashback.</p>
+</td>
+<td>
+<p>In game rollback scenarios, the flashback can be used to achieve a fast rollback of the current cluster. This solves the common problems in the gaming industry such as version errors and bugs.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p>Support time to live (TTL).</p>
+</td>
+<td>
+<p>This feature enables automatic data cleanup in limited data archiving scenarios.</p>
+</td>
+</tr>
+<tr>
+<td rowspan="2">
+<p>Hybrid Transactional and Analytical Processing (HTAP)</p>
+</td>
+<td>
+<p>Support TiFlash result write-back.</p>
+</td>
+<td>
+<p>Support <code>INSERT INTO SELECT</code>.</p>
+<ul>
+<li>Easily write analysis results in TiFlash back to TiDB.</li>
+<li>Provide complete ACID transactions, more convenient and reliable than general ETL solutions.</li>
+<li>Set a hard limit on the threshold of intermediate result size, and report an error if the threshold is exceeded.</li>
+<li>Support fully distributed transactions, and remove or relax the limit on the intermediate result size.</li>
+</ul>
+<p>These features combined enable a way to materialize intermediate results. The analysis results can be easily reused, which reduces unnecessary ad-hoc queries, improves the performance of BI and other applications (by pulling results directly) and reduces system load (by avoiding duplicated computation), thereby improving the overall data pipeline efficiency and reducing costs. It will make TiFlash an online service.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p>Support FastScan for TiFlash.</p>
+</td>
+<td>
+<ul>
+<li>FastScan provides weak consistency but faster table scan capability.</li>
+<li>Further optimize the join order, shuffle, and exchange algorithms to improve computing efficiency and boost performance for complex queries.</li>
+<li>Add a fine-grained data sharding mechanism to optimize the <code>COUNT(DISTINCT)</code> function and high cardinality aggregation.</li>
+</ul>
+<p>This feature improves the basic computing capability of TiFlash, and optimizes the performance and reliability of the underlying algorithms of the columnar storage and MPP engine.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p>Proxy</p>
+</td>
+<td>
+<p>Support TiDB proxy.</p>
+</td>
+<td>
+<p>Implement automatic load balancing so that upgrading a cluster or modifying configurations does not affect the application. After scaling out or scaling in the cluster, the application can automatically rebalance the connection without reconnecting.</p>
+<p>In scenarios such as upgrades and configuration changes, TiDB proxy is more business-friendly.</p>
+</td>
+</tr>
 </tbody>
 </table>
 
@@ -81,7 +151,7 @@ The TiDB Cloud roadmap brings you what's coming in the near future, so you can s
 <table>
 <thead>
   <tr>
-    <th>Scenario</th>
+    <th>Domain</th>
     <th>Feature</th>
     <th>Description</th>
   </tr>
@@ -115,7 +185,7 @@ The TiDB Cloud roadmap brings you what's coming in the near future, so you can s
 <table>
 <thead>
   <tr>
-    <th>Scenario</th>
+    <th>Domain</th>
     <th>Feature</th>
     <th>Description</th>
   </tr>
@@ -123,7 +193,7 @@ The TiDB Cloud roadmap brings you what's coming in the near future, so you can s
 <tbody>
   <tr>
     <td>Data replication to Kafka via TiCDC</td>
-    <td>Reduce TiCDC replication latency in planned offline scenarios.</td>
+    <td>Reduce TiCDC replication latency in daily operations.</td>
     <td>When TiKV, TiDB, PD, or TiCDC nodes are offline in a planned maintenance window, the replication latency of TiCDC can be reduced to less than 10 seconds.</td>
   </tr>
   <tr>
@@ -138,8 +208,8 @@ The TiDB Cloud roadmap brings you what's coming in the near future, so you can s
   </tr>
   <tr>
     <td>Backup and restore</td>
-    <td>Backup and restore service on the cloud based on EBS snapshots.</td>
-    <td>Backup and restore service on the cloud based on AWS EBS or GCP persistent disk snapshots.</td>
+    <td>Backup and restore service based on AWS EBS or GCP persistent disk snapshots.</td>
+    <td>Provide backup and restore service on the cloud based on AWS EBS or GCP persistent disk snapshots.</td>
   </tr>
   <tr>
     <td rowspan="2">Online data migration</td>
@@ -158,21 +228,26 @@ The TiDB Cloud roadmap brings you what's coming in the near future, so you can s
 <table>
 <thead>
   <tr>
-    <th>Scenario</th>
+    <th>Domain</th>
     <th>Feature</th>
     <th>Description</th>
   </tr>
 </thead>
 <tbody>
   <tr>
-    <td>Enterprise-grade SSO support</td>
-    <td>Support quick configurations of SSO to TiDB Cloud via Okta.</td>
-    <td>Provide a fast sign-in method for enterprise users. </td>
+    <td>Key rotation</td>
+    <td>Support key rotation on TiDB clusters for AWS.</td>
+    <td>Support key rotation on TiDB clusters to improve the security of encrypted data.</td>
   </tr>
   <tr>
-    <td>Encrypted backup and restore</td>
-    <td>Support encrypted backup and restore.</td>
-    <td>Provide a method to securely back up and restore a database.</td>
+    <td>Key management</td>
+    <td>Support making your own key manageable (BYOK from AWS).</td>
+    <td>Allow you to use your own data encryption keys on AWS.</td>
+  </tr>
+   <tr>
+    <td>Audit logging</td>
+    <td>Enhance the database audit logging.</td>
+    <td>Enhance the ability of database audit logging and provide the visual UI access.</td>
   </tr>
 </tbody>
 </table>
