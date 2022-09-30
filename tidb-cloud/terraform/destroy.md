@@ -37,7 +37,7 @@ Destroy complete! Resources: 4 destroyed.
 
 Note that a warning is appeared for restore can't be deleted.
 
-If you execute `terraform show`, you will find nothing for all the states is cleared:
+Now, if you run the `terraform show` command, you will get nothing because all the states have been cleared:
 
 ```
 $ terraform show
