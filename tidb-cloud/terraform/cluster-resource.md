@@ -112,7 +112,9 @@ output "cluster_spec" {
 }
 ```
 
-Execute the `terraform apply --auto-approve`, we will get all the specifications. Here we show a part of the results:
+Run the `terraform apply --auto-approve` command and you will get all the specifications. 
+
+The following is a part of the results for your reference.
 
 ```
 {
