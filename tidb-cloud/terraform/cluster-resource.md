@@ -239,7 +239,7 @@ The following is a part of the results for your reference.
 - `region` is the region of cloud_provider
 - `node_quantity_range` shows the minimum quantity of the nodes and the step to scale a node.
 - `node_size` is the size of the node
-- `storage_size_gib_range` shows the min and max storage you can set to the node
+- `storage_size_gib_range` shows the minimum and maximum storage size you can set for a node.
 
 ## Create a dedicated cluster with cluster resource
 
