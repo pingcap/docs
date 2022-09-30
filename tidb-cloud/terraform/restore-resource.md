@@ -161,7 +161,7 @@ Don't worry, we can solve it in the next section.
 
 ## Import the restore cluster
 
-We can manage a cluster with terraform by import even if it is not created by terraform.
+You can manage a cluster with Terraform by importing the cluster even if it is not created by Terraform.
 
 Let us import the cluster which is created by the restore task in the last section.
 
