@@ -93,7 +93,7 @@ The TiDB Cloud roadmap brings you what's coming in the near future, so you can s
   </tr>
   <tr>
     <td>TiFlash result write-back</td>
-    <td><p>Support <code>INSERT INTO SELECT</code>).</p><ul><li>Easily write analysis results in TiFlash back to TiDB.</li><li>Provide complete ACID transactions, more convenient and reliable than general ETL solutions.</li><li>Set a hard limit on the threshold of intermediate result size, and report an error if the threshold is exceeded.</li><li>Support fully distributed transactions, and remove or relax the limit on the intermediate result size.</li></ul></td>
+    <td><p>Support <code>INSERT INTO SELECT</code>.</p><ul><li>Easily write analysis results in TiFlash back to TiDB.</li><li>Provide complete ACID transactions, more convenient and reliable than general ETL solutions.</li><li>Set a hard limit on the threshold of intermediate result size, and report an error if the threshold is exceeded.</li><li>Support fully distributed transactions, and remove or relax the limit on the intermediate result size.</li></ul></td>
     <td>These features combined enable a way to materialize intermediate results. The analysis results can be easily reused, which reduces unnecessary ad-hoc queries, improves the performance of BI and other applications (by pulling results directly) and reduces system load (by avoiding duplicated computation), thereby improving the overall data pipeline efficiency and reducing costs. It will make TiFlash an online service.</td>
   </tr>
   <tr>
