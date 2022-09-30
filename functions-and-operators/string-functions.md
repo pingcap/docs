@@ -10,7 +10,7 @@ TiDB supports most of the [string functions](https://dev.mysql.com/doc/refman/5.
 
 <CustomContent platform="tidb">
 
-For comparisons between functions and syntax of Oracle and TiDB, see [Mappings between Functions and Syntax of Oracle and TiDB](/oracle-functions-to-tidb.md).
+For comparisons between functions and syntax of Oracle and TiDB, see [Comparisons between Functions and Syntax of Oracle and TiDB](/oracle-functions-to-tidb.md).
 
 </CustomContent>
 
