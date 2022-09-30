@@ -1,19 +1,19 @@
 ---
-title: Mappings between Functions and Syntax of Oracle and TiDB
-summary: Learn the mappings between functions and syntax of Oracle and TiDB.
+title: Comparisons between Functions and Syntax of Oracle and TiDB
+summary: Learn the comparisons between functions and syntax of Oracle and TiDB.
 ---
 
-# Mappings between Functions and Syntax of Oracle and TiDB
+# Comparisons between Functions and Syntax of Oracle and TiDB
 
-This document describes the mappings between functions and syntax of Oracle and TiDB. It helps you find the corresponding TiDB functions based on the Oracle functions, and understand the syntax differences between Oracle and TiDB.
+This document describes the comparisons between functions and syntax of Oracle and TiDB. It helps you find the corresponding TiDB functions based on the Oracle functions, and understand the syntax differences between Oracle and TiDB.
 
 > **Note:**
 >
 > The functions and syntax in this document are based on Oracle 12.2.0.1.0 and TiDB v5.4.0. They might be different in other versions.
 
-## Mappings between some Oracle and TiDB functions
+## Comparisons of functions
 
-The following table shows the mappings between some Oracle and TiDB functions.
+The following table shows the comparisons between some Oracle and TiDB functions.
 
 | Function | Oracle syntax | TiDB syntax | Note |
 |---|---|---|---|
@@ -23,36 +23,36 @@ The following table shows the mappings between some Oracle and TiDB functions.
 | Get the current system time in second precision | `SYSDATE` | `NOW()` | |
 | Get the current system time in microsecond precision | `SYSTIMESTAMP` | `CURRENT_TIMESTAMP(6)` | |
 | Get the number of days between two dates | `date1 - date2` | `DATEDIFF(date1, date2)` | |
-| Get the number of months between two dates | `MONTHS_BETWEEN(ENDDATE,SYSDATE)` | `TIMESTAMPDIFF(MONTH,SYSDATE,ENDDATE)` | The results of `MONTHS_BETWEEN()` in Oracle and `TIMESTAMPDIFF()` in TiDB are different. `TIMESTAMPDIFF()` keeps months only in integer. Note that the parameters in the two functions are in opposite positions. |
+| Get the number of months between two dates | `MONTHS_BETWEEN(ENDDATE,SYSDATE)` | `TIMESTAMPDIFF(MONTH,SYSDATE,ENDDATE)` | The results of `MONTHS_BETWEEN()` in Oracle and `TIMESTAMPDIFF()` in TiDB are different. `TIMESTAMPDIFF()` returns an integer. Note that the parameters in the two functions are swapped. |
 | Add `n` days to a date | `DATEVAL + n` | `DATE_ADD(dateVal,INTERVAL n DAY)` | `n` can be a negative value.|
 | Add `n` months to a date | `ADD_MONTHS(dateVal,n)`| `DATE_ADD(dateVal,INTERVAL n MONTH)` | `n` can be a negative value. |
 | Get the day of a date | `TRUNC(SYSDATE)` | <li>`CAST(NOW() AS DATE)`</li><li>`DATE_FORMAT(NOW(),'%Y-%m-%d')`</li> | In TiDB, `CAST` and  `DATE_FORMAT` return the same result. |
 | Get the month of a date | `TRUNC(SYSDATE,'mm')` | `DATE_ADD(CURDATE(),interval - day(CURDATE()) + 1 day)`  | |
-| Truncate a value | `TRUNC(2.136) = 2`<br/> `TRUNC(2.136,2) = 2.13` | `TRUNCATE(2.136,0) = 2`<br/> `TRUNCATE(2.136,2) = 2.13` | Data precision is preserved. Truncate the corresponding decimal places without rounding.  |
+| Truncate a value | `TRUNC(2.136) = 2`<br/> `TRUNC(2.136,2) = 2.13` | `TRUNCATE(2.136,0) = 2`<br/> `TRUNCATE(2.136,2) = 2.13` | Data precision is preserved. Truncate the corresponding decimal places without rounding. |
 | Get the next value in a sequence | `sequence_name.NEXTVAL` | `NEXTVAL(sequence_name)` | |
-| Left join or right join | `SELECT * FROM a, b WHERE a.id = b.id(+);`<br/>`SELECT * FROM a, b WHERE a.id(+) = b.id;` | `SELECT * FROM a LEFT JOIN b ON a.id = b.id;`<br/>`SELECT * FROM a RIGHT JOIN b ON a.id = b.id;` | When correlating queries, TiDB does not support using (+) to left join or right join. You can use `LEFT JOIN` or `RIGHT JOIN` instead. |
-| Get a random sequence value | `SYS_GUID()` | `UUID()` | TiDB returns a Universal Unique Identifier (UUID).|
-| `NVL()` | `NVL(key,val)` | `IFNULL(key,val)` | If the value of the field is `NULL`, it returns the value of `val`; otherwise, it returns the value of the field.  |
-| `NVL2()` | `NVL2(key, val1, val2)`  | `IF(key is NULL, val1, val2)` | If the value of the field is not `NULL`, it returns the value of `val1`; otherwise, it returns the value of `val2`. |
-| `DECODE()` | <li>`DECODE(key,val1,val2,val3)`</li><li>`DECODE(value,if1,val1,if2,val2,...,ifn,valn,val)`</li> | <li>`IF(key=val1,val2,val3)`</li><li>`CASE WHEN value=if1 THEN val1 WHEN value=if2 THEN val2,...,WHEN value=ifn THEN valn ELSE val END`</li> | <li>If the value of the field is equal to val1, then it returns val2; otherwise it returns val3.</li><li>When the field value satisfies condition 1 (if1), it returns val1. When it satisfies condition 2 (if2), it returns val2. When it satisfies condition 3 (if3), it returns val3.</li> |
-| Concatenating the string `a` and `b` | <code>'a' \|\| 'b'</code> | `CONCAT('a','b')` | |
+| Get a random sequence value | `SYS_GUID()` | `UUID()` | TiDB returns a Universal Unique Identifier (UUID). |
+| Left join or right join | `SELECT * FROM a, b WHERE a.id = b.id(+);`<br/>`SELECT * FROM a, b WHERE a.id(+) = b.id;` | `SELECT * FROM a LEFT JOIN b ON a.id = b.id;`<br/>`SELECT * FROM a RIGHT JOIN b ON a.id = b.id;` | In a correlated query, TiDB does not support using (+) to left join or right join. You can use `LEFT JOIN` or `RIGHT JOIN` instead. |
+| `NVL()` | `NVL(key,val)` | `IFNULL(key,val)` | If the value of the field is `NULL`, it returns `val`; otherwise, it returns the value of the field.  |
+| `NVL2()` | `NVL2(key, val1, val2)` | `IF(key is NULL, val1, val2)` | If the value of the field is not `NULL`, it returns `val1`; otherwise, it returns `val2`. |
+| `DECODE()` | <li>`DECODE(key,val1,val2,val3)`</li><li>`DECODE(value,if1,val1,if2,val2,...,ifn,valn,val)`</li> | <li>`IF(key=val1,val2,val3)`</li><li>`CASE WHEN value=if1 THEN val1 WHEN value=if2 THEN val2,...,WHEN value=ifn THEN valn ELSE val END`</li> | <li>If the value of the field is `val1`, then it returns `val2`; otherwise it returns `val3`. </li><li>When the value of the field satisfies condition 1 (`if1`), it returns `val1`. When it satisfies condition 2 (`if2`), it returns `val2`. When it satisfies condition 3 (`if3`), it returns `val3`.</li> |
+| Concatenate the string `a` and `b` | <code>'a' \|\| 'b'</code> | `CONCAT('a','b')` | |
 | Get the length of a string | `LENGTH(str)` | `CHAR_LENGTH(str)` | |
-| Get the substring as specified | `SUBSTR('abcdefg',0,2) = 'ab'`<br/> `SUBSTR('abcdefg',1,2) = 'ab'` | `SUBSTRING('abcdefg',0,2) = ''`<br/>`SUBSTRING('abcdefg',1,2) = 'ab'` | <li>In Oracle, the starting position 0 has the same effect as 1. </li><li>In TiDB, the starting position 0 returns an empty string. If you need to start from the beginning of the string, the starting position should be 1.</li>|
+| Get the substring as specified | `SUBSTR('abcdefg',0,2) = 'ab'`<br/> `SUBSTR('abcdefg',1,2) = 'ab'` | `SUBSTRING('abcdefg',0,2) = ''`<br/>`SUBSTRING('abcdefg',1,2) = 'ab'` | <li>In Oracle, the starting position 0 has the same effect as 1. </li><li>In TiDB, the starting position 0 returns an empty string. If you want to get a substring from the beginning, the starting position should be 1.</li> |
 | Get the position of a substring | `INSTR('abcdefg','b',1,1)` | `INSTR('abcdefg','b')` | Search from the first character of `'abcdefg'` and return the position of the first occurrence of `'b'`. |
 | Get the position of a substring | `INSTR('stst','s',1,2)` | `LENGTH(SUBSTRING_INDEX('stst','s',2)) + 1` | Search from the first character of `'stst'` and return the position of the second occurrence of `'s'`. |
 | Get the position of a substring | `INSTR('abcabc','b',2,1)` | `LOCATE('b','abcabc',2)` | Search from the second character of `abcabc` and return the position of the first occurrence of `b`. |
 | Concatenate values of a column | `LISTAGG(CONCAT(E.dimensionid,'---',E.DIMENSIONNAME),'***') within GROUP(ORDER BY  DIMENSIONNAME)` | `GROUP_CONCAT(CONCAT(E.dimensionid,'---',E.DIMENSIONNAME) ORDER BY DIMENSIONNAME SEPARATOR '***')` | Concatenate values of a specified column to one row with the `***` delimiter. |
-| Convert an ASCII code to character | `CHR(n)` | `CHAR(n)` | The tab (`CHR(9)`), line feed (`CHR(10)`), and carriage return (`CHR(13)`) characters in Oracle correspond to `CHAR(9)`, `CHAR(10)`, and `CHAR(13)` in TiDB. |
+| Convert an ASCII code to a character | `CHR(n)` | `CHAR(n)` | The Tab (`CHR(9)`), LF (`CHR(10)`), and CR (`CHR(13)`) characters in Oracle correspond to `CHAR(9)`, `CHAR(10)`, and `CHAR(13)` in TiDB. |
 
-## Syntax differences
+## Comparisons of syntax
 
 This section describes some syntax differences between Oracle and TiDB.
 
 ### String syntax
 
-In Oracle, a string can only be enclosed in single quotes (''). For example `'a'`
+In Oracle, a string can only be enclosed in single quotes (''). For example `'a'`.
 
-In TiDB, a string can be enclosed in single quotes ('') or double quotes (""). For example, `'a'` and `"a"`
+In TiDB, a string can be enclosed in single quotes ('') or double quotes (""). For example, `'a'` and `"a"`.
 
 ### Difference between `NULL` and an empty string
 
