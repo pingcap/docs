@@ -13,15 +13,11 @@ TiDB uses statistics to decide [which index to choose](/choose-index.md). The `t
 >
 > - If the `ANALYZE` statement is executed manually, manually analyze every table to be analyzed.
 >
->    {{< copyable "sql" >}}
->
 >    ```sql
 >    SELECT DISTINCT(CONCAT('ANALYZE TABLE', table_schema, '.', table_name, ';')) FROM information_schema.tables, mysql.stats_histograms WHERE stats_ver = 2 AND table_id = tidb_table_id;
 >    ```
 >
 > - If TiDB automatically executes the `ANALYZE` statement because the auto-analysis has been enabled, execute the following statement that generates the `DROP STATS` statement:
->
->    {{< copyable "sql" >}}
 >
 >    ```sql
 >    SELECT DISTINCT(CONCAT('DROP STATS ', table_schema, '.', table_name, ';')) FROM information_schema.tables, mysql.stats_histograms WHERE stats_ver = 2 AND table_id = tidb_table_id;
