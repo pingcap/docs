@@ -11,9 +11,7 @@ summary: Learn how to use restore resource
 
 ## Create a restore task with restore resource
 
-You have created a dedicated cluster and have a backup of the cluster.
-
-Now, it is time to create a restore task by restore resource. With it, you can restore a cluster according to a backup.
+After creating a backup of a cluster, you can restore the cluster by creating a restore task with restore resources.
 
 You can configure a restore resource as follows. Note that you can only restore data from a smaller node size to a larger node size:
 
