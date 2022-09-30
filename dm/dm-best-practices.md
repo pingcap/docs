@@ -45,7 +45,7 @@ If your business has a strong dependence on the auto-increment ID, consider usin
 
 #### Usage of clustered indexes
 
-When you create a table, you can state that the primary key is either a clustered index or a non-clustered index. The following sections describe the pros and cons of each choice.
+When you create a table, you can declare that the primary key is either a clustered index or a non-clustered index. The following sections describe the pros and cons of each choice.
 
 - Clustered indexes
 
@@ -110,7 +110,7 @@ TiDB supports most MySQL data types. However, some special types are not support
 
 #### Character sets and collations
 
-Since TiDB v6.0.0, the new framework for collations are used by default. If you want TiDB to support utf8_general_ci, utf8mb4_general_ci, utf8_unicode_ci, utf8mb4_unicode_ci, gbk_chinese_ci and gbk_bin, you need explicitly state it when creating the cluster by setting the value of `new_collations_enabled_on_first_bootstrap` to `true`. For more information, see [New framework for collations](/character-set-and-collation.md#new-framework-for-collations).
+Since TiDB v6.0.0, the new framework for collations are used by default. If you want TiDB to support utf8_general_ci, utf8mb4_general_ci, utf8_unicode_ci, utf8mb4_unicode_ci, gbk_chinese_ci and gbk_bin, you need explicitly declare it when creating the cluster by setting the value of `new_collations_enabled_on_first_bootstrap` to `true`. For more information, see [New framework for collations](/character-set-and-collation.md#new-framework-for-collations).
 
 The default character set in TiDB is utf8mb4. It is recommended that you use utf8mb4 for the upstream and downstream databases and applications. If the upstream database has explicitly specified a character set or collation, you need to check whether TiDB supports it.
 
