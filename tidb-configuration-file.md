@@ -117,13 +117,13 @@ The TiDB configuration file supports more options than command-line parameters. 
 - Unit: byte
 - Currently, the valid value range is `[3072, 3072*4]`. MySQL and TiDB (version < v3.0.11) do not have this configuration item, but both limit the length of the newly created index. This limit in MySQL is `3072`. In TiDB (version =< 3.0.7), this limit is `3072*4`. In TiDB (3.0.7 < version < 3.0.11), this limit is `3072`. This configuration is added to be compatible with MySQL and earlier versions of TiDB.
 
-### `table-column-count-limit` <span class="version-mark">New in v5.0</span>
+### `table-column-count-limit` (New in v5.0)
 
 - Sets the limit on the number of columns in a single table.
 - Default value: `1017`
 - Currently, the valid value range is `[1017, 4096]`.
 
-### `index-limit` <span class="version-mark">New in v5.0</span>
+### `index-limit` (New in v5.0)
 
 - Sets the limit on the number of indexes in a single table.
 - Default value: `64`
@@ -356,7 +356,7 @@ Configuration items related to performance.
 - Default value: `5000`
 - If a transaction does not roll back or commit after the number of statements exceeds `stmt-count-limit`, TiDB returns the `statement count 5001 exceeds the transaction limitation, autocommit = false` error. This configuration takes effect **only** in the retryable optimistic transaction. If you use the pessimistic transaction or have disabled the transaction retry, the number of statements in a transaction is not limited by this configuration.
 
-### `txn-entry-size-limit` <span class="version-mark">New in v5.0</span>
+### `txn-entry-size-limit` (New in v5.0)
 
 - The size limit of a single row of data in TiDB.
 - Default value: `6291456` (in bytes)
