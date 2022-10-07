@@ -52,4 +52,4 @@ Multiple Regions exist in each TiKV node. TiKV APIs provide native support to di
 
 ### TiFlash server
 
-The [TiFlash Server](/tiflash/tiflash-overview.md) is a special type of storage server. Unlike ordinary TiKV nodes, TiFlash stores data by column, mainly designed to accelerate analytical processing.
+The [TiFlash server](/tiflash/tiflash-overview.md) is a special type of storage server. Unlike ordinary TiKV nodes, TiFlash stores data by column, mainly designed to accelerate analytical processing.
