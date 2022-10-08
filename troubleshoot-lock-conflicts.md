@@ -206,7 +206,7 @@ You can detect the read-write conflict in your TiDB cluster by the following way
     * primary_lock: Indicates that the target key is locked by the primary lock.
     * lock_version: The start_ts of the transaction that owns the lock.
     * key: The target key that is locked.
-    * lock_ttl: The lock’s TTL (Time To Live)
+    * lock_ttl: The lock's TTL (Time To Live)
     * txn_size: The number of keys that are in the Region of the transaction that owns the lock.
 
 Solutions:
