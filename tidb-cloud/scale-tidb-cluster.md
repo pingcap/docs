@@ -47,7 +47,7 @@ To increase the number of TiDB, TiKV, or TiFlash nodes, take the following steps
 4. On the **Modify Cluster** page, increase the number of TiDB, TiKV, or TiFlash nodes.
 5. Click **Confirm**.
 
-You can also increase the number of TiDB, TiKV, or TiFlash nodes using TiDB Cloud API through the [Modify a Dedicated Tier cluster](https://docs.pingcap.com/tidbcloud/api/v1beta#tag/Cluster/operation/UpdateCluster) endpoint. Currently, TiDB Cloud API is still in beta and only available upon request. For more information, see [TiDB Cloud API Documentation](https://docs.pingcap.com/tidbcloud/api/v1beta).
+You can also increase the number of TiDB, TiKV, or TiFlash nodes using TiDB Cloud API through the [Modify a Dedicated Tier cluster](https://docs.pingcap.com/tidbcloud/api/v1beta#tag/Cluster/operation/UpdateCluster) endpoint. Currently, TiDB Cloud API is still in beta. For more information, see [TiDB Cloud API Documentation](https://docs.pingcap.com/tidbcloud/api/v1beta).
 
 ### Decrease node number
 
@@ -97,7 +97,7 @@ To increase the node storage of TiKV or TiFlash, take the following steps:
 4. On the **Modify Cluster** page, increase the node storage of TiKV or TiFlash.
 5. Click **Confirm**.
 
-You can also increase the storage of a TiKV or TiFlash node using TiDB Cloud API through the [Modify a Dedicated Tier cluster](https://docs.pingcap.com/tidbcloud/api/v1beta#tag/Cluster/operation/UpdateCluster) endpoint. Currently, TiDB Cloud API is still in beta and only available upon request. For more information, see [TiDB Cloud API Documentation](https://docs.pingcap.com/tidbcloud/api/v1beta).
+You can also increase the storage of a TiKV or TiFlash node using TiDB Cloud API through the [Modify a Dedicated Tier cluster](https://docs.pingcap.com/tidbcloud/api/v1beta#tag/Cluster/operation/UpdateCluster) endpoint. Currently, TiDB Cloud API is still in beta. For more information, see [TiDB Cloud API Documentation](https://docs.pingcap.com/tidbcloud/api/v1beta).
 
 > **Note:**
 >
