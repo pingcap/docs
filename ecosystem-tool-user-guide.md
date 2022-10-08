@@ -8,7 +8,7 @@ aliases: ['/docs/dev/ecosystem-tool-user-guide/','/docs/dev/reference/tools/user
 
 TiDB provides a rich set of tools to help you deploy and maintain TiDB, manage data (such as data migration, backup & restore, and data comparison), and run Spark SQL on TiKV. You can select the applicable tools according to your needs.
 
-## Deploy and operate tools
+## Deployment and operation Tools
 
 TiDB provides TiUP and TiDB Operator to meet your deployment and operation needs in different system environments.
 
@@ -37,7 +37,7 @@ The following are the basics of TiDB Operator:
 
 ## Data management tools
 
- TiDB provides multiple data management tools, such as import and export, backup and restore, incremental data replication, and data comparison.
+ TiDB provides multiple data management tools, such as import and export, backup and restore, incremental data replication, and data validation.
 
 ### Data migration - TiDB Data Migration (DM)
 
@@ -90,7 +90,7 @@ The following are the basics of TiDB Lightning:
 
 - Data source:
     - The output files of Dumpling
-    - Other CSV-compatible files
+    - Other compatible CSV files
     - Parquet files exported from Amazon Aurora or Apache Hive
 - Supported TiDB versions: v2.1 and later versions
 - Kubernetes support: Yes. See [Quickly restore data into a TiDB cluster in Kubernetes using TiDB Lightning](https://docs.pingcap.com/tidb-in-kubernetes/stable/restore-data-using-tidb-lightning) for details.
