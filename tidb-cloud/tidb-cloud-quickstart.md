@@ -83,7 +83,6 @@ After loading data to the cluster, you can connect to your cluster from the comm
 
     2. Use a SQL client to connect to your cluster. Click the tab of your preferred connection method, and then connect to your cluster with the connection string.
 
-    For [Developer Tier clusters](/tidb-cloud/select-cluster-tier.md#developer-tier), when you connect to your cluster, you must include the prefix for your cluster in the user name and wrap the name with quotation marks. For more information, see [User name prefix](/tidb-cloud/select-cluster-tier.md#user-name-prefix).
 
     > **Tip:**
     >
