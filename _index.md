@@ -129,6 +129,4 @@ hide_commit: true
 
 </LearningPath>
 
-</LearningPath>
-
 </LearningPathContainer>
