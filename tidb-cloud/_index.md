@@ -127,7 +127,7 @@ hide_commit: true
 
 [Release Notes](https://docs.pingcap.com/tidbcloud/release-notes-2022)
 
-[TiDB Cloud FAQs](https://docs.pingcap.com/tidbcloud/tidb-cloud-faq)
+[SQL Reference](https://docs.pingcap.com/tidbcloud/basic-sql-operations)
 
 </LearningPath>
 
