@@ -193,7 +193,7 @@ This section gives the alert rules for the PD component.
 
 ### Emergency-level alerts
 
-#### `PD_cluster_down_store_nums`
+#### `PD_cluster_down_tikv_nums`
 
 * Alert rule:
 
@@ -243,7 +243,7 @@ This section gives the alert rules for the PD component.
 
 ### Warning-level alerts
 
-#### `PD_cluster_lost_connect_store_nums`
+#### `PD_cluster_lost_connect_tikv_nums`
 
 * Alert rule:
 
