@@ -31,7 +31,7 @@ https://download.pingcap.org/tidb-community-toolkit-{version}-linux-amd64.tar.gz
 
 > **Note:**
 >
-> If you need to download the [PD Control](/pd-control.md) tool `pd-ctl`, download the TiDB installation package separately from `https://download.pingcap.org/tidb-community-server-{version}-linux-{arch}.tar.gz`.
+> If you need to download the [PD Control](/pd-control.md) tool `pd-ctl`, download the TiDB installation package separately from `https://download.pingcap.org/tidb-community-server-{version}-linux-amd64.tar.gz`.
 
 ## TiDB Toolkit description
 
