@@ -17,7 +17,7 @@ TiDB Cloud [Developer Tier](/tidb-cloud/select-cluster-tier.md#developer-tier) i
 
 1. If you do not have a TiDB Cloud account, click [here](https://tidbcloud.com/free-trial) to sign up for an account.
 
-    For Google or GitHub users, you can also sign up with your Google or GitHub account. To do that, select the corresponding sign-up option on the [sign up](https://tidbcloud.com/signup) page. Your email address and password will be managed by Google or GitHub and cannot be changed using TiDB Cloud console.
+    For Google or GitHub users, you can also sign up with your Google or GitHub account. Your email address and password will be managed by Google or GitHub and cannot be changed using the TiDB Cloud console.
 
 2. [Log in](https://tidbcloud.com/) to your TiDB Cloud account.
 
@@ -38,7 +38,7 @@ TiDB Cloud [Developer Tier](/tidb-cloud/select-cluster-tier.md#developer-tier) i
 
 ## Step 2. Try Playground
 
-After your TiDB Cloud cluster is created, you can quickly start experimenting with TiDB using the built-in sample data on TiDB Cloud.
+After your TiDB Cloud cluster is created, you can quickly start experimenting with TiDB using the pre-loaded sample data on TiDB Cloud.
 
 On the **Clusters** page, click **Playground** to run queries instantly on TiDB Cloud.
 
