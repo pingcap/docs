@@ -346,7 +346,7 @@ This variable is an alias for `last_insert_id`.
 - Type: Integer
 - Default value: `0`
 - Range: `[0, 100000]`
-- The maximum number of connections for a single TiDB instance.
+- The maximum number of connections permitted for a single TiDB instance.
 - The value of `0` means no limit.
 
 ### max_execution_time
@@ -515,19 +515,19 @@ mysql> SHOW GLOBAL VARIABLES LIKE 'max_prepared_stmt_count';
 
 - Scope: NONE
 - Default value: ""
-- The location of the certificate authority file (if there is one), the value of this variable is defined by [`ssl-ca` configuration](https://docs.pingcap.com/tidb/dev/tidb-configuration-file#ssl-ca).
+- The location of the certificate authority file (if there is one), the value of this variable is defined by the TiDB configuration item [`ssl-ca`](/tidb-configuration-file.md#ssl-ca).
 
 ### ssl_cert
 
 - Scope: NONE
 - Default value: ""
-- The location of the certificate file (if there is a file) that is used for SSL/TLS connections, the value of this variable is defined by [`ssl-cert` configuration](https://docs.pingcap.com/tidb/dev/tidb-configuration-file#ssl-cert).
+- The location of the certificate file (if there is a file) that is used for SSL/TLS connections, the value of this variable is defined by the TiDB configuration item [`ssl-cert`](/tidb-configuration-file.md#ssl-cert).
 
 ### ssl_key
 
 - Scope: NONE
 - Default value: ""
-- The location of the private key file (if there is one) that is used for SSL/TLS connections, the value of this variable is defined by [`ssl-key` configuration](https://docs.pingcap.com/tidb/dev/tidb-configuration-file#ssl-cert).
+- The location of the private key file (if there is one) that is used for SSL/TLS connections, the value of this variable is defined by TiDB configuration item [`ssl-key`](/tidb-configuration-file.md#ssl-cert).
 
 ### system_time_zone
 
