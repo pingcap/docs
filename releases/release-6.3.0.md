@@ -288,7 +288,8 @@ Since v6.3.0, TiCDC no longer supports configuring Pulsar sink. [kop](https://gi
     - Refactor TiFlash's interpreter, and support the new interpreter Planner [#4739](https://github.com/pingcap/tiflash/issues/4739) @[SeaRise](https://github.com/SeaRise)
     - Improve the accuracy of memory tracker in TiFlash [#5609](https://github.com/pingcap/tiflash/issues/5609) @[bestwoody](https://github.com/bestwoody)
     - Improve the performance of string columns with the `UTF8_BIN/ASCII_BIN/LATIN1_BIN/UTF8MB4_BIN` collations [#5294](https://github.com/pingcap/tiflash/issues/5294) @[solotzg](https://github.com/solotzg)
-        - AMD64 CPU must support AVX2 instruction sets, use `cat /proc/cpuinfo |grep avx2` to confirm there is output. TiFlash's vectorization engine needs CPU instruction sets to perform a better effect.
+        - To deploy TiFlash under Linux with AMD64 architecture, the CPU must support AVX2 instruction sets, use `cat /proc/cpuinfo | grep avx2` to confirm there is output. TiFlash's vectorization engine needs CPU instruction sets to perform a better effect.
+
 
     - Calculate the I/O throughput in background in ReadLimiter [#5401](https://github.com/pingcap/tiflash/issues/5401), [#5091](https://github.com/pingcap/tiflash/issues/5091) @[Lloyd-Pottiger](https://github.com/Lloyd-Pottiger)
 
