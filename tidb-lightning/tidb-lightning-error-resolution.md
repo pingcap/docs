@@ -39,11 +39,11 @@ The following errors are always fatal, and cannot be skipped by changing `max-er
 * Syntax error (such as unclosed quotation marks) in the original CSV, SQL or Parquet file.
 * I/O, network or system permission errors.
 
-Unique/Primary key conflict in the Local-backend is handled separately and explained in the next section.
+Unique/Primary key conflict in the physical import mode is handled separately and explained in the next section.
 
-## Duplicate resolution in Local-backend mode
+## Duplicate resolution in the physical import mode
 
-In the Local-backend mode, TiDB Lightning imports data by first converting them to KV pairs and ingesting the pairs into TiKV in batches. Unlike the TiDB-backend mode, duplicate rows are not detected until the end of a task. Therefore, duplicate errors in the Local-backend mode are not controlled by `max-error`, but rather by a separate configuration `duplicate-resolution`.
+In the physical import mode, TiDB Lightning imports data by first converting them to KV pairs and ingesting the pairs into TiKV in batches. Unlike the logical import mode, duplicate rows are not detected until the end of a task. Therefore, duplicate errors in the physical import mode are not controlled by `max-error`, but rather by a separate configuration `duplicate-resolution`.
 
 {{< copyable "" >}}
 
@@ -131,7 +131,7 @@ CREATE TABLE conflict_error_v1 (
 
 **type_error_v1** records all [type errors](#type-error) managed by the `max-error` configuration. There is one row per error.
 
-**conflict_error_v1** records all [unique/primary key conflict in the Local-backend](#duplicate-resolution-in-local-backend-mode). There are 2 rows per pair of conflicts.
+**conflict_error_v1** records all [unique/primary key conflict in the Local-backend](#duplicate-resolution-in-the-physical-import-mode). There are 2 rows per pair of conflicts.
 
 | Column       | Syntax | Type | Conflict | Description                                                                                                                         |
 | ------------ | ------ | ---- | -------- | ----------------------------------------------------------------------------------------------------------------------------------- |

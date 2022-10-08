@@ -181,4 +181,4 @@ trim-last-separator = true
 
 ## What's next
 
-- [CSV Support and Restrictions](/tidb-lightning/migrate-from-csv-using-tidb-lightning.md).
+- [CSV Support and Restrictions](/tidb-lightning/tidb-lightning-data-source.md#csv).
