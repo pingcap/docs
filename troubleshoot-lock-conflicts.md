@@ -167,7 +167,7 @@ As the TiDB server receives a read request from a client, it gets a globally uni
 
 ![read-write conflict](/media/troubleshooting-lock-pic-04.png)
 
-Txn0 completes the Prewrite phase and enters the Commit phase. At this time, Txn1 requests to read the same target key. Txn1 needs to read the target key of the latest commit_ts that is smaller than its start_ts. Because Txn1’s start_ts is larger than Txn0's lock_ts, Txn1 must wait for the target key's lock to be cleared, but it hasn’t been done. As a result, Txn1 cannot confirm whether Txn0 has been committed or not. Thus, a read-write conflict between Txn1 and Txn0 happens.
+Txn0 completes the Prewrite phase and enters the Commit phase. At this time, Txn1 requests to read the same target key. Txn1 needs to read the target key of the latest commit_ts that is smaller than its start_ts. Because Txn1's start_ts is larger than Txn0's lock_ts, Txn1 must wait for the target key's lock to be cleared, but it hasn't been done. As a result, Txn1 cannot confirm whether Txn0 has been committed or not. Thus, a read-write conflict between Txn1 and Txn0 happens.
 
 You can detect the read-write conflict in your TiDB cluster by the following ways:
 
@@ -203,11 +203,11 @@ You can detect the read-write conflict in your TiDB cluster by the following way
 
     This message indicates that a read-write conflict occurs in TiDB. The target key of the read request has been locked by another transaction. The locks are from the uncommitted optimistic transaction and the uncommitted pessimistic transaction after the prewrite phase.
 
-    * primary_lock：Indicates that the target key is locked by the primary lock.
-    * lock_version：The start_ts of the transaction that owns the lock.
-    * key：The target key that is locked.
+    * primary_lock: Indicates that the target key is locked by the primary lock.
+    * lock_version: The start_ts of the transaction that owns the lock.
+    * key: The target key that is locked.
     * lock_ttl: The lock’s TTL (Time To Live)
-    * txn_size：The number of keys that are in the Region of the transaction that owns the lock.
+    * txn_size: The number of keys that are in the Region of the transaction that owns the lock.
 
 Solutions:
 
@@ -236,7 +236,7 @@ The `KV Errors` panel in the TiDB dashboard has two monitoring metrics `Lock Res
 Solutions:
 
 * If there is a small amount of txnLock in the monitoring, no need to pay too much attention. The backoff and retry is automatically performed in the background. The first time of the retry is 100 ms and the maximum time is 3000 ms for a single retry.
-* If there are too many “txnLock” operations in the `KV Backoff OPS`, it is recommended that you analyze the reasons to the write conflicts from the application side.
+* If there are too many "txnLock" operations in the `KV Backoff OPS`, it is recommended that you analyze the reasons to the write conflicts from the application side.
 * If your application is a write-write conflict scenario, it is strongly recommended to use the pessimistic transaction mode.
 
 ### LockNotFound error
