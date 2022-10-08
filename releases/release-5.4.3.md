@@ -113,11 +113,14 @@ TiDB version: 5.4.3
 
     + TiDB Lightning **owner: @niubell**
 
+        - Fix the issue of BigInt auto_increment column out of range error [#27397](https://github.com/pingcap/tidb/issues/27937)
+        - (dup) Fix the issue that de-duplication might cause TiDB Lightning to panic in extreme cases [#34163](https://github.com/pingcap/tidb/issues/34163)
         - (dup) Fix the issue that TiDB Lightning does not support columns starting with slash, number, or non-ascii characters in Parquet files [#36980](https://github.com/pingcap/tidb/issues/36980)
         - (dup) Fix the issue that TiDB Lightning fails to connect to TiDB when TiDB uses an IPv6 host [#35880](https://github.com/pingcap/tidb/issues/35880)
 
     + TiDB Data Migration (DM) **owner: @niubell**
 
+        - (dup) Fix the issue that DM Worker might get stuck when getting DB Conn [#3733](https://github.com/pingcap/tiflow/issues/3733)
         - (dup) Fix the issue that DM reports the `Specified key was too long` error [#5315](https://github.com/pingcap/tiflow/issues/5315)
         - (dup) Fix a bug that latin1 data might be corrupt during replication [#7028](https://github.com/pingcap/tiflow/issues/7028)
         - (dup) Fix the issue that DM fails to start when TiDB uses an IPv6 host [#6249](https://github.com/pingcap/tiflow/issues/6249)
