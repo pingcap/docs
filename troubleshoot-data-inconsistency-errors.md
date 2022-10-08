@@ -72,13 +72,13 @@ This error indicates that for index `c2` in table `t`, the value of column `c2` 
 
 This error indicates that `index-values` are null and `record-values` are not null, meaning that there is no corresponding index for the row.
 
-## Reasons and solutions
+## Solutions
 
-If you receive a data inconsistency error, contact PingCAP technical support for troubleshooting immediately instead of dealing with the error by yourself. If your application needs to skip such errors urgently, you can use the following methods to bypass the check.
+If you encounter a data inconsistency error, contact PingCAP technical support for troubleshooting immediately instead of dealing with the error by yourself. If your application needs to skip such errors urgently, you can use the following methods to bypass the check.
 
 ### Rewrite SQL
 
-If the data inconsistency error occurs in a particular SQL statement only, you can try bypassing the error by rewriting the SQL statement to another equivalent form using different execution operators.
+If the data inconsistency error occurs in a particular SQL statement only, you can bypass this error by rewriting the SQL statement to another equivalent form using different execution operators.
 
 ### Disable error checks
 
@@ -91,4 +91,4 @@ For the following errors reported in transaction execution, you can bypass the c
 >
 > Disabling `tidb_enable_mutation_checker` and `tidb_txn_assertion_level` will bypass the corresponding checks of all SQL statements.
 
-For other errors reported in transaction execution and all errors reported during the execution of the `ADMIN CHECK [TABLE|INDEX]` statement, you cannot bypass the corresponding check, because the data inconsistency has already occurred.
+For other errors reported in transaction execution and all errors reported during the execution of the `ADMIN CHECK [TABLE|INDEX]` statement, you cannot bypass the corresponding check, because the data is already inconsistent.
