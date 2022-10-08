@@ -185,6 +185,12 @@ mysql> SELECT * FROM t1;
 - Range: `[0, 7]`
 - Sets the week format used by the `WEEK()` function.
 
+### error_count
+
+- Scope: NONE
+- Type: Integer
+- A read-only variable that indicates the number of errors that resulted from the last statement that generated messages.
+
 ### foreign_key_checks
 
 - Scope: SESSION | GLOBAL
@@ -281,6 +287,16 @@ This variable is an alias for `last_insert_id`.
 - Unit: Bytes
 - The maximum size of a packet for the MySQL protocol.
 
+### max_connections
+
+- Scope: GLOBAL
+- Persists to cluster: No
+- Type: Integer
+- Default value: `0`
+- Range: `[0, 100000]`
+- The maximum number of connections permitted for a single TiDB instance.
+- The value of `0` means no limit.
+
 ### max_execution_time
 
 - Scope: SESSION | GLOBAL
@@ -370,19 +386,19 @@ This variable is an alias for `last_insert_id`.
 
 - Scope: NONE
 - Default value: ""
-- The location of the certificate authority file (if there is one).
+- The location of the certificate authority file (if there is one). The value of this variable is defined by the TiDB configuration item [`ssl-ca`](/tidb-configuration-file.md#ssl-ca).
 
 ### ssl_cert
 
 - Scope: NONE
 - Default value: ""
-- The location of the certificate file (if there is a file) that is used for SSL/TLS connections.
+- The location of the certificate file (if there is a file) that is used for SSL/TLS connections. The value of this variable is defined by the TiDB configuration item [`ssl-cert`](/tidb-configuration-file.md#ssl-cert).
 
 ### ssl_key
 
 - Scope: NONE
 - Default value: ""
-- The location of the private key file (if there is one) that is used for SSL/TLS connections.
+- The location of the private key file (if there is one) that is used for SSL/TLS connections. The value of this variable is defined by TiDB configuration item [`ssl-key`](/tidb-configuration-file.md#ssl-cert).
 
 ### system_time_zone
 
