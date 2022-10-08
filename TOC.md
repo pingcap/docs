@@ -4,7 +4,7 @@
 - [Docs Home](https://docs.pingcap.com/)
 - About TiDB
   - [TiDB Introduction](/overview.md)
-  - [TiDB 6.2 Release Notes](/releases/release-6.2.0.md)
+  - [TiDB 6.3 Release Notes](/releases/release-6.3.0.md)
   - [Basic Features](/basic-features.md)
   - [Experimental Features](/experimental-features.md)
   - [MySQL Compatibility](/mysql-compatibility.md)
@@ -385,6 +385,7 @@
     - [About TiDB Data Migration](/dm/dm-overview.md)
     - [Architecture](/dm/dm-arch.md)
     - [Quick Start](/dm/quick-start-with-dm.md)
+    - [Best Practices](/dm/dm-best-practices.md)
     - Deploy a DM cluster
       - [Hardware and Software Requirements](/dm/dm-hardware-and-software-requirements.md)
       - [Use TiUP (Recommended)](/dm/deploy-a-dm-cluster-using-tiup.md)
@@ -733,6 +734,7 @@
       - [Set Operations](/functions-and-operators/set-operators.md)
       - [List of Expressions for Pushdown](/functions-and-operators/expressions-pushed-down.md)
       - [TiDB Specific Functions](/functions-and-operators/tidb-functions.md)
+      - [Comparisons between Functions and Syntax of Oracle and TiDB](/oracle-functions-to-tidb.md)
     - [Clustered Indexes](/clustered-indexes.md)
     - [Constraints](/constraints.md)
     - [Generated Columns](/generated-columns.md)
@@ -888,6 +890,8 @@
   - [Release Timeline](/releases/release-timeline.md)
   - [TiDB Versioning](/releases/versioning.md)
   - [TiDB Installation Packages](/binary-package.md)
+  - v6.3
+    - [6.3.0-DMR](/releases/release-6.3.0.md)
   - v6.2
     - [6.2.0-DMR](/releases/release-6.2.0.md)
   - v6.1
