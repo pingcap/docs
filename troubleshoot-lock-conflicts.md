@@ -4,30 +4,13 @@ summary: Learn to analyze and resolve lock conflicts in TiDB.
 ---
 
 # Troubleshoot Lock Conflicts
-<<<<<<< HEAD
- 
-TiDB supports complete distributed transactions. Starting from v3.0, TiDB provides optimistic transaction mode and pessimistic transaction mode. This document introduces how to troubleshoot and resolve lock conflicts in TiDB.
-=======
 
 TiDB supports complete distributed transactions. Starting from v3.0, TiDB provides optimistic transaction mode and pessimistic transaction mode. This document describes how to use Lock View to troubleshoot lock issues and how to deal with common lock conflict issues in optimistic and pessimistic transactions.
->>>>>>> c9262e4b5 (Refine docs: troubleshoot lock conflicts  (#9865))
 
 ## Use Lock View to troubleshoot lock issues
 
 Since v5.1, TiDB supports the Lock View feature. This feature has several system tables built in `information_schema` that provide more information about the lock conflicts and lock waitings.
 
-<<<<<<< HEAD
-![two-phase commit in the optimistic transaction mode](/media/troubleshooting-lock-pic-01.png)
- 
-For details of Percolator and TiDB's algorithm of the transactions, see [Google's Percolator](https://ai.google/research/pubs/pub36726).
-
-### Prewrite phase (optimistic)
- 
-In the Prewrite phase, TiDB adds a primary lock and a secondary lock to target keys. If there are lots of requests for adding locks to the same target key, TiDB prints an error such as write conflict or `keyislocked` to the log and reports it to the client. Specifically, the following errors related to locks might occur in the Prewrite phase.
- 
-#### Read-write conflict (optimistic)
- 
-=======
 > **Note:**
 >
 > Currently, the Lock View feature provides conflict and waiting information for pessimistic locks only.
@@ -180,7 +163,6 @@ This section provides the solutions of common lock conflict issues in the optimi
 
 ### Read-write conflicts
 
->>>>>>> c9262e4b5 (Refine docs: troubleshoot lock conflicts  (#9865))
 As the TiDB server receives a read request from a client, it gets a globally unique and increasing timestamp at the physical time as the start_ts of the current transaction. The transaction needs to read the latest data before start_ts, that is, the target key of the latest commit_ts that is smaller than start_ts. When the transaction finds that the target key is locked by another transaction, and it cannot know which phase the other transaction is in, a read-write conflict happens. The diagram is as follows:
 
 ![read-write conflict](/media/troubleshooting-lock-pic-04.png)
@@ -299,35 +281,11 @@ Solutions:
 
 ## Troubleshoot pessimistic lock conflicts
 
-<<<<<<< HEAD
-![TiDB pessimistic transaction commit logic](/media/troubleshooting-lock-pic-05.png)
- 
-The pessimistic transaction adds an `Acquire Pessimistic Lock` phase before 2PC. This phase includes the following steps:
-
-1. (same as the optimistic transaction mode) Receive the `begin` request from the client, and the current timestamp is this transaction’s start_ts.
-2. When the TiDB server receives an `update` request from the client, the TiDB server initiates a pessimistic lock request to the TiKV server, and the lock is persisted to the TiKV server.
-3. (same as the optimistic transaction mode) When the client sends the commit request, TiDB starts to perform the 2PC similar to the optimistic transaction mode. 
-
-![Pessimistic transactions in TiDB](/media/troubleshooting-lock-pic-06.png)
-
-For details, see [Pessimistic transaction mode](/pessimistic-transaction.md).
-
-### Prewrite phase (pessimistic)
-
-In the transaction pessimistic mode, the commit phase is the same as the 2PC. Therefore, the read-write conflict also exists as in the optimistic transaction mode.
-
-#### Read-write conflict (pessimistic)
-
-Same as [Read-write conflict (optimistic)](#read-write-conflict-optimistic).
-
-### Commit phase (pessimistic)
-=======
 This section provides the solutions of common lock conflict issues in the pessimistic transaction mode.
 
 > **Note:**
 >
 > Even if the pessimistic transaction mode is set, autocommit transactions still try to commit using the optimistic mode first. If a conflict occurs, the transactions will switch to the pessimistic transaction mode during automatic retry.
->>>>>>> c9262e4b5 (Refine docs: troubleshoot lock conflicts  (#9865))
 
 ### Read-write conflicts
 
@@ -349,13 +307,8 @@ Solutions:
 
 * If the above error occurs frequently, it is recommended to adjust from the application side.
 
-<<<<<<< HEAD
-#### Lock wait timeout exceeded
- 
-=======
 ### Lock wait timeout exceeded
 
->>>>>>> c9262e4b5 (Refine docs: troubleshoot lock conflicts  (#9865))
 In the pessimistic transaction mode, transactions wait for locks of each other. The timeout for waiting a lock is defined by the [innodb_lock_wait_timeout](/pessimistic-transaction.md#behaviors) parameter of TiDB. This is the maximum wait lock time at the SQL statement level, which is the expectation of a SQL statement Locking, but the lock has never been acquired. After this time, TiDB will not try to lock again and will return the corresponding error message to the client.
 
 When a wait lock timeout occurs, the following error message will be returned to the client:
@@ -363,7 +316,7 @@ When a wait lock timeout occurs, the following error message will be returned to
 ```log
 ERROR 1205 (HY000): Lock wait timeout exceeded; try restarting transaction
 ```
- 
+
 Solutions:
 
 * If the above error occurs frequently, it is recommended to adjust the application logic.
