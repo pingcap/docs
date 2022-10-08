@@ -31,7 +31,7 @@ https://download.pingcap.org/tidb-community-toolkit-{version}-linux-amd64.tar.gz
 
 > **Note:**
 >
-> If you need to download the [PD Control](/pd-control.md) tool `pd-ctl`, download the TiDB installation package separately from `https://download.pingcap.org/tidb-community-server-{version}-linux-{arch}.tar.gz`.
+> If you need to download the [PD Control](/pd-control.md) tool `pd-ctl`, download the TiDB installation package separately from `https://download.pingcap.org/tidb-community-server-{version}-linux-amd64.tar.gz`.
 
 ## TiDB Toolkit description
 
@@ -48,13 +48,4 @@ Depending on which tools you want to use, you can install the corresponding offl
 | [Backup & Restore (BR)](/br/backup-and-restore-overview.md)  | `br-{version}-linux-amd64.tar.gz`  |
 | [sync-diff-inspector](/sync-diff-inspector/sync-diff-inspector-overview.md)  | `sync_diff_inspector`  |
 | [TiSpark](/tispark-overview.md)  | `tispark-{tispark-version}-any-any.tar.gz` <br/>`spark-{spark-version}-any-any.tar.gz`  |
-<<<<<<< HEAD
-| [PD Control](/pd-control.md)  | `pd-recover-{version}-linux-amd64.tar` |
-| [PD Recover](/pd-recover.md)  | `etcdctl` |
-=======
-| [PD Recover](/pd-recover.md)  | `pd-recover-{version}-linux-{arch}.tar` |
-
-> **Note:**
->
-> `{version}` depends on the version of the tool you are installing. `{arch}` depends on the architecture of the system, which can be `amd64` or `arm64`.
->>>>>>> 9dc6f2558 (Update download-ecosystem-tools.md (#9171))
+| [PD Recover](/pd-recover.md) | `pd-recover-{version}-linux-amd64.tar` |

@@ -19,20 +19,15 @@ To use PD Control, execute the `tiup ctl:<cluster-version> pd -u http://<pd_ip>:
 
 ### Download the installation package
 
-<<<<<<< HEAD
-The PD Control installation package (`pd-ctl`) is included in the TiDB Toolkit. To download the TiDB Toolkit, see [Download TiDB Tools](/download-ecosystem-tools.md).
-=======
-To obtain `pd-ctl` of the latest version, download the TiDB server installation package. `pd-ctl` is included in the `ctl-{version}-linux-{arch}.tar.gz` package.
+To obtain `pd-ctl` of the latest version, download the TiDB server installation package. `pd-ctl` is included in the `ctl-{version}-linux-amd64.tar.gz` package.
 
-| Installation package                                                                    | OS | Architecture | SHA256 checksum                                                    |
-| :------------------------------------------------------------------------ | :------- | :---- | :--------------------------------------------------------------- |
-| `https://download.pingcap.org/tidb-community-server-{version}-linux-amd64.tar.gz` (pd-ctl) | Linux | amd64 | `https://download.pingcap.org/tidb-community-server-{version}-linux-amd64.sha256` |
-| `https://download.pingcap.org/tidb-community-server-{version}-linux-arm64.tar.gz` (pd-ctl) | Linux | arm64 | `https://download.pingcap.org/tidb-community-server-{version}-linux-arm64.sha256` |
+| Installation package                                                     | OS    | Architecture | SHA256 checksum                                                  |
+| :------------------------------------------------------------------------ | :---- | :----------- | :--------------------------------------------------------------- |
+| `https://download.pingcap.org/tidb-community-server-{version}-linux-amd64.tar.gz` (pd-ctl) | Linux | amd64        | `https://download.pingcap.org/tidb-community-server-{version}-linux-amd64.sha256` |
 
 > **Note:**
 >
-> `{version}` in the link indicates the version number of TiDB. For example, the download link for `v6.3.0` in the `amd64` architecture is `https://download.pingcap.org/tidb-community-toolkit-v6.3.0-linux-amd64.tar.gz`.
->>>>>>> 9dc6f2558 (Update download-ecosystem-tools.md (#9171))
+> `{version}` indicates the version number of TiDB. For example, if `{version}` is `v6.0.0`, the package download link is `https://download.pingcap.org/tidb-community-server-v6.0.0-linux-amd64.tar.gz`.
 
 ### Compile from source code
 
