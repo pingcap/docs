@@ -246,6 +246,11 @@ Configuration items related to the single thread pool serving read requests. Thi
 + Default value: `2000`
 + Minimum value: `2`
 
+### `auto-adjust-pool-size` <span class="version-mark">New in v6.3.0</span>
+
++ Controls whether to automatically adjust the thread pool size. When it is enabled, the read performance of TiKV is optimized by automatically adjusting the UnifyReadPool thread pool size based on the current CPU usage. The possible range of the thread pool is `[max-thread-count, MAX(4, CPU)]`. The maximum value is the same as the one of [`max-thread-count`](#max-thread-count).
++ Default value: `false`
+
 ## readpool.storage
 
 Configuration items related to storage thread pool.
@@ -1497,9 +1502,13 @@ Configuration items related to Raft Engine.
 
 ### `format-version` <span class="version-mark">New in v6.3.0</span>
 
-> **Warning:**
+> **Note:**
 >
-> After `format-version` is set to `2`, you **cannot** downgrade the TiKV cluster to a version earlier than v6.3.0. Otherwise, data corruption might occur.
+> After `format-version` is set to `2`, if you need to downgrade a TiKV cluster from v6.3.0 to an earlier version, take the following steps **before** the downgrade:
+>
+> 1. Disable Raft Engine by setting [`enable`](/tikv-configuration-file.md#enable-1) to `false` and restart TiKV to make the configuration take effect.
+> 2. Set `format-version` to `1`.
+> 3. Enable Raft Engine by setting `enable` to `true` and restart TiKV to make the configuration take effect.
 
 + Specifies the version of log files in Raft Engine.
 + Value Options:
@@ -1514,7 +1523,7 @@ Configuration items related to Raft Engine.
 > This configuration item is only available when [`format-version`](#format-version-new-in-v630) >= 2.
 
 + Determines whether to recycle stale log files in Raft Engine. When it is enabled, logically purged log files will be reserved for recycling. This reduces the long tail latency on write workloads.
-+ Default value: `true`
++ Default value: `false`
 
 ## security
 
@@ -1552,7 +1561,7 @@ Configuration items related to [encryption at rest](/encryption-at-rest.md) (TDE
 ### `data-encryption-method`
 
 + The encryption method for data files
-+ Value options: "plaintext", "aes128-ctr", "aes192-ctr", and "aes256-ctr"
++ Value options: "plaintext", "aes128-ctr", "aes192-ctr", "aes256-ctr", and "sm4-ctr" (supported since v6.3.0)
 + A value other than "plaintext" means that encryption is enabled, in which case the master key must be specified.
 + Default value: `"plaintext"`
 
@@ -1615,12 +1624,13 @@ Configuration items related to log backup.
 ### `enable` <span class="version-mark">New in v6.2.0</span>
 
 + Determines whether to enable log backup.
-+ Default value: `false`
++ Default value: `true`
 
 ### `file-size-limit` <span class="version-mark">New in v6.2.0</span>
 
-+ The size limit on log backup data. Once this limit is reached, the backup data is automatically flushed to external storage.
-+ Default value: 256MB
++ The size limit on backup log data to be stored.
++ Default value: 256MiB
++ Note: Generally, the value of `file-size-limit` is greater than the backup file size displayed in external storage. This is because the backup files are compressed before being uploaded to external storage.
 
 ### `initial-scan-pending-memory-quota` <span class="version-mark">New in v6.2.0</span>
 
@@ -1635,7 +1645,7 @@ Configuration items related to log backup.
 ### `max-flush-interval` <span class="version-mark">New in v6.2.0</span>
 
 + The maximum interval for writing backup data to external storage in log backup.
-+ Default value: 5min
++ Default value: 3min
 
 ### `num-threads` <span class="version-mark">New in v6.2.0</span>
 
