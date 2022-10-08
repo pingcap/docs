@@ -173,6 +173,9 @@ title: Release Notes
 - [2.0.0-rc.4](/releases/release-2.0-rc.4.md): 2018-03-30
 - [2.0.0-rc.3](/releases/release-2.0-rc.3.md): 2018-03-23
 - [2.0.0-rc.1](/releases/release-2.0-rc.1.md): 2018-03-09
+
+## 1.1
+
 - [1.1.0-beta](/releases/release-1.1-beta.md): 2018-02-24
 - [1.1.0-alpha](/releases/release-1.1-alpha.md): 2018-01-19
 
@@ -191,4 +194,4 @@ title: Release Notes
 - [rc4](/releases/release-rc.4.md): 2017-08-04
 - [rc3](/releases/release-rc.3.md): 2017-06-16
 - [rc2](/releases/release-rc.2.md): 2017-03-01
-- [rc1](/releases/release-rc.1.md): 16-12-23
+- [rc1](/releases/release-rc.1.md): 2016-12-23
