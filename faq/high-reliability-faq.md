@@ -23,7 +23,7 @@ Yes. To encrypt data in the network traffic, you can [enable TLS between TiDB cl
         server-version: 'YOUR_VERSION_STRING'
     ```
 
-    Then, use the `tiup cluster reload <cluster-name> -R tidb` command to make the preceding modification above effective to avoid the failure of security vulnerability scan.
+    Then, use the `tiup cluster reload <cluster-name> -R tidb` command to make the preceding modification effective to avoid the failure of security vulnerability scan.
 
 ## What authentication protocols does TiDB support? What's the process?
 
