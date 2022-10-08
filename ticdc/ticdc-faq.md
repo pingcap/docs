@@ -119,7 +119,7 @@ cdc cli changefeed create --pd=http://10.0.10.25:2379 --sink-uri="kafka://127.0.
 > **Note:**
 >
 > * This feature is introduced in TiCDC 4.0.2.
-> * TiCDC currently supports outputting data changes in the Canal format only to MQ sinks such as Kafka and Pulsar.
+> * TiCDC currently supports outputting data changes in the Canal format only to MQ sinks such as Kafka.
 
 For more information, refer to [Create a replication task](/ticdc/manage-ticdc.md#create-a-replication-task).
 
@@ -193,10 +193,13 @@ TiCDC uses etcd in PD to store and regularly update the metadata. Because the ti
 
 TiCDC provides partial support for large transactions (more than 5 GB in size). Depending on different scenarios, the following risks might exist:
 
+- The latency of primary-secondary replication might greatly increase.
 - When TiCDC's internal processing capacity is insufficient, the replication task error `ErrBufferReachLimit` might occur.
 - When TiCDC's internal processing capacity is insufficient or the throughput capacity of TiCDC's downstream is insufficient, out of memory (OOM) might occur.
 
-If you encounter an error above, it is recommended to use BR to restore the incremental data of large transactions. The detailed operations are as follows:
+Since v6.2, TiCDC supports splitting a single-table transaction into multiple transactions. This can greatly reduce the latency and memory consumption of replicating large transactions. Therefore, if your application does not have a high requirement on transaction atomicity, it is recommended to enable the splitting of large transactions to avoid possible replication latency and OOM. To enable the splitting, set the value of the sink uri parameter [`transaction-atomicity`](/ticdc/manage-ticdc.md#configure-sink-uri-with-mysqltidb) to `none`.
+
+If you still encounter an error above, it is recommended to use BR to restore the incremental data of large transactions. The detailed operations are as follows:
 
 1. Record the `checkpoint-ts` of the changefeed that is terminated due to large transactions, use this TSO as the `--lastbackupts` of the BR incremental backup, and execute [incremental data backup](/br/br-usage-backup.md#back-up-incremental-data).
 2. After backing up the incremental data, you can find a log record similar to `["Full backup Failed summary : total backup ranges: 0, total success: 0, total failed: 0"] [BackupTS=421758868510212097]` in the BR log output. Record the `BackupTS` in this log.
@@ -254,6 +257,6 @@ If you need to replicate `recover table` to the downstream TiDB, you should have
 
 When upstream write traffic is at peak hours, the downstream may fail to consume all data in a timely manner, resulting in data pile-up. TiCDC uses disks to process the data that is piled up. TiCDC needs to write data to disks during normal operation. However, this is not usually the bottleneck for replication throughput and replication latency, given that writing to disks only results in latency within a hundred milliseconds. TiCDC also uses memory to accelerate reading data from disks to improve replication performance.
 
-## Why does replication using TiCDC stall or even stop after data restore using TiDB Lightning and BR?
+## Why does replication using TiCDC stall or even stop after data restore using TiDB Lightning and BR from upstream?
 
 Currently, TiCDC is not yet fully compatible with TiDB Lightning and BR. Therefore, please avoid using TiDB Lightning and BR on tables that are replicated by TiCDC.

@@ -5,7 +5,7 @@ summary: Learn how to connect to TiDB.
 
 # Connect to TiDB
 
-TiDB is highly compatible with the MySQL 5.7 protocol. For a full list of client link parameters, see [MySQL Client Options](https://dev.mysql.com/doc/refman/5.7/en/mysql-command-options.html).
+TiDB is highly compatible with the MySQL protocol. For a full list of client link parameters, see [MySQL Client Options](https://dev.mysql.com/doc/refman/5.7/en/mysql-command-options.html).
 
 TiDB supports the [MySQL Client/Server Protocol](https://dev.mysql.com/doc/internals/en/client-server-protocol.html), which allows most client drivers and ORM frameworks to connect to TiDB just as they connect to MySQL.
 
@@ -42,11 +42,23 @@ For more information on JDBC connections, see the [JDBC documentation](https://d
 
 | Parameter name | Description |
 | :---: | :----------------------------: |
-| `{username}` | A [SQL user](/user-account-management.md) to connect to the TiDB cluster |
+| `{username}` | A SQL user to connect to the TiDB cluster |
 | `{password}` | The password of the SQL user |
 | `{host}` | [Host](https://en.wikipedia.org/wiki/Host_(network)) of a TiDB node |
 | `{port}` | Port that the TiDB node is listening on |
 | `{database}` | Name of an existing database |
+
+<CustomContent platform="tidb">
+
+For more information about TiDB SQL users, see [TiDB User Account Management](/user-account-management.md).
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+For more information about TiDB SQL users, see [TiDB User Account Management](https://docs.pingcap.com/tidb/stable/user-account-management).
+
+</CustomContent>
 
 ## Hibernate
 
@@ -90,8 +102,20 @@ For more information about Hibernate connection parameters, see [Hibernate docum
 
 | Parameter name | Description |
 | :---: | :----------------------------: |
-| `{username}` |  A [SQL user](/user-account-management.md) to connect to the TiDB cluster  |
+| `{username}` |  A SQL user to connect to the TiDB cluster  |
 | `{password}` | The password of the SQL user |
 | `{host}` | [Host](https://en.wikipedia.org/wiki/Host_(network)) of a TiDB node |
 | `{port}` | Port that the TiDB node is listening on |
 | `{database}` |  Name of an existing database |
+
+<CustomContent platform="tidb">
+
+For more information about TiDB SQL users, see [TiDB User Account Management](/user-account-management.md).
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+For more information about TiDB SQL users, see [TiDB User Account Management](https://docs.pingcap.com/tidb/stable/user-account-management).
+
+</CustomContent>

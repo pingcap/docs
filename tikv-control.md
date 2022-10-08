@@ -44,18 +44,18 @@ FLAGS:
         --skip-paranoid-checks    Skip paranoid checks when open rocksdb
     -V, --version                 Prints version information
 OPTIONS:
-        --ca-path <ca_path>              Set the CA certificate path
-        --cert-path <cert_path>          Set the certificate path
-        --config <config>                Set the config for rocksdb
-        --db <db>                        Set the rocksdb path
+        --ca-path <ca-path>              Set the CA certificate path
+        --cert-path <cert-path>          Set the certificate path
+        --config <config>                TiKV config path, by default it's <deploy-dir>/conf/tikv.toml
+        --data-dir <data-dir>            TiKV data directory path, check <deploy-dir>/scripts/run.sh to get it
         --decode <decode>                Decode a key in escaped format
         --encode <encode>                Encode a key in escaped format
         --to-hex <escaped-to-hex>        Convert an escaped key to hex key
         --to-escaped <hex-to-escaped>    Convert a hex key to escaped key
         --host <host>                    Set the remote host
-        --key-path <key_path>            Set the private key path
+        --key-path <key-path>            Set the private key path
+        --log-level <log-level>          Set the log level [default: warn]
         --pd <pd>                        Set the address of pd
-        --raftdb <raftdb>                Set the raft rocksdb path
 SUBCOMMANDS:
     bad-regions           Get all regions with corrupt raft
     cluster               Print the cluster id
@@ -107,7 +107,12 @@ You can add corresponding parameters and subcommands after `tiup ctl tikv`.
     store:"127.0.0.1:20160" compact db:KV cf:default range:([], []) success!
     ```
 
-- Local mode: Use the `--db` option to specify the local TiKV data directory path. In this mode, you need to stop the running TiKV instance.
+- Local mode:
+
+    * Use the `--data-dir` option to specify the local TiKV data directory path.
+    * Use the `--config` option to specify the local TiKV configuration file path.
+
+  In this mode, you need to stop the running TiKV instance.
 
 Unless otherwise noted, all commands support both the remote mode and the local mode.
 
@@ -457,7 +462,7 @@ $ tikv-ctl --data-dir /path/to/tikv recover-mvcc -r 1001,1002 -p 127.0.0.1:2379
 success!
 ```
 
-> **Note**:
+> **Note:**
 >
 > - This command only supports the local mode. It prints `success!` when successfully run.
 > - The argument of the `-p` option specifies the PD endpoints without the `http` prefix. Specifying the PD endpoints is to query whether the specified `region_id` is validated or not.
@@ -538,7 +543,7 @@ Type "I consent" to continue, anything else to exit: I consent
 9291156302549018620: key: 8B6B6B8F83D36BE2467ED55D72AE808B method: Aes128Ctr creation_time: 1592938357
 ```
 
-> **Note**
+> **Note:**
 >
 > The command will expose data encryption keys as plaintext. In production, DO NOT redirect the output to a file. Even deleting the output file afterward may not cleanly wipe out the content from disk.
 
