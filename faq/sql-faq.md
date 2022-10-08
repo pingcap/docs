@@ -186,7 +186,7 @@ Deleting a large amount of data leaves a lot of useless keys, affecting the quer
 
 ## What should I do if it is slow to reclaim storage space after deleting data?
 
-Because TiDB uses Multi-version concurrency control (MVCC), when the old data is overwritten with new data, the old data is not replaced but retained along with the new data. Timestamps are used to identify the data version. Deleting data does not immediately reclaim space. Garbage collection is delayed so that concurrent transactions are able to see earlier versions of rows. This can be configured via the [`tidb_gc_life_time`](/system-variables.md#tidb_gc_life_time-new-in-v50) (default: `10m0s`) system variable.
+Because TiDB uses multi-version concurrency control (MVCC), when the old data is overwritten with new data, the old data is not replaced but retained along with the new data. Timestamps are used to identify the data version. Deleting data does not immediately reclaim space. Garbage collection is delayed so that concurrent transactions are able to see earlier versions of rows. This can be configured via the [`tidb_gc_life_time`](/system-variables.md#tidb_gc_life_time-new-in-v50) (default: `10m0s`) system variable.
 
 ## Does `SHOW PROCESSLIST` display the system process ID?
 
@@ -223,7 +223,7 @@ You can combine the above two parameters with the DML of TiDB to use them. For e
 
 Trigger strategy: `auto analyze` is automatically triggered when the number of rows in a new table reaches 1000 and this table has no write operation within one minute.
 
-When the ratio (the modified number of rows / the current total number of rows) is larger than `tidb_auto_analyze_ratio`, the `analyze` statement is automatically triggered. The default value of `tidb_auto_analyze_ratio` is 0.5, indicating that this feature is enabled by default. To ensure safety, its minimum value is 0.3 when the feature is enabled, and it must be smaller than `pseudo-estimate-ratio` whose default value is 0.8, otherwise pseudo statistics will be used for a period of time. It is recommended to set `tidb_auto_analyze_ratio` to 0.5.
+When the ratio (the number of modified rows / the current total number of rows) is larger than `tidb_auto_analyze_ratio`, the `analyze` statement is automatically triggered. The default value of `tidb_auto_analyze_ratio` is 0.5, indicating that this feature is enabled by default. To ensure safety, its minimum value is 0.3 when the feature is enabled, and it must be smaller than `pseudo-estimate-ratio` whose default value is 0.8, otherwise pseudo statistics will be used for a period of time. It is recommended to set `tidb_auto_analyze_ratio` to 0.5.
 
 To disable auto analyze, use the system variable `tidb_enable_auto_analyze`.
 
