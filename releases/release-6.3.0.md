@@ -248,6 +248,7 @@ In v6.3.0-DMR, the key new features and improvements are as follows:
 * Log backup supports GCS and Azure Blob Storage as backup storage.
 * Log backup is now compatible with the `exchange partition` DDL.
 * The SQL statement `ALTER TABLE ...SET TiFLASH MODE ...` previously used for enabling [fastscan](/develop/dev-guide-use-fastscan.md) is deprecated, and replaced by the system variable [`tiflash_fastscan`](/system-variables.md#tiflash_fastscan-new-in-v630). When you upgrade from v6.2.0 to v6.3.0, all FastScan settings in v6.2.0 will become invalid, but will not affect the normal reading of data. In this case, you need to configure the variable [`tiflash_fastscan`](/system-variables.md#tiflash_fastscan-new-in-v630) to enable or disable FastScan. When you upgrade from an earlier version to v6.3.0, the FastScan feature is not enabled by default for all sessions to keep data consistent.
+* To deploy TiFlash under Linux with AMD64 architecture, the CPU must support AVX2 instruction sets, use `cat /proc/cpuinfo | grep avx2` to confirm there is output. TiFlash's vectorization engine needs CPU instruction sets to perform a better effect.
 
 ## Removed feature
 
@@ -288,9 +289,6 @@ Since v6.3.0, TiCDC no longer supports configuring Pulsar sink. [kop](https://gi
     - Refactor TiFlash's interpreter, and support the new interpreter Planner [#4739](https://github.com/pingcap/tiflash/issues/4739) @[SeaRise](https://github.com/SeaRise)
     - Improve the accuracy of memory tracker in TiFlash [#5609](https://github.com/pingcap/tiflash/issues/5609) @[bestwoody](https://github.com/bestwoody)
     - Improve the performance of string columns with the `UTF8_BIN/ASCII_BIN/LATIN1_BIN/UTF8MB4_BIN` collations [#5294](https://github.com/pingcap/tiflash/issues/5294) @[solotzg](https://github.com/solotzg)
-        - To deploy TiFlash under Linux with AMD64 architecture, the CPU must support AVX2 instruction sets, use `cat /proc/cpuinfo | grep avx2` to confirm there is output. TiFlash's vectorization engine needs CPU instruction sets to perform a better effect.
-
-
     - Calculate the I/O throughput in background in ReadLimiter [#5401](https://github.com/pingcap/tiflash/issues/5401), [#5091](https://github.com/pingcap/tiflash/issues/5091) @[Lloyd-Pottiger](https://github.com/Lloyd-Pottiger)
 
 + Tools
