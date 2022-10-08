@@ -187,7 +187,7 @@
   - [TiDB Cloud Cluster Limits and Quotas](/tidb-cloud/limitations-and-quotas.md)
   - [TiDB Limitations](/tidb-limitations.md)
   - Terraform
-    - [Terraform Overview](/tidb-cloud/terraform/terraform-overview.md)
+    - [TiDB Cloud Terraform Provider Overview](/tidb-cloud/terraform/terraform-overview.md)
     - [Get TiDB Cloud Terraform Provider](/tidb-cloud/terraform/tidbcloud-provider.md)
     - [Cluster Resource](/tidb-cloud/terraform/cluster-resource.md)
     - [Backup Resource](/tidb-cloud/terraform/backup-resource.md)
