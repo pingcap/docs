@@ -2204,8 +2204,6 @@ mysql> desc select count(distinct a) from test.t;
 - This variable is used to set the threshold that determines whether to push the Limit or TopN operator down to TiKV.
 - If the value of the Limit or TopN operator is smaller than or equal to this threshold, these operators are forcibly pushed down to TiKV. This variable resolves the issue that the Limit or TopN operator cannot be pushed down to TiKV partly due to wrong estimation.
 
-<<<<<<< HEAD
-=======
 ### tidb_opt_memory_factor
 
 - Scope: SESSION | GLOBAL
@@ -2232,7 +2230,6 @@ mysql> desc select count(distinct a) from test.t;
 - Default value: `1.0`
 - Indicates the net cost of transferring 1 byte of data through the network. This variable is internally used in the [Cost Model](/cost-model.md), and it is **NOT** recommended to modify its value.
 
->>>>>>> 44108aaa6 (planner: add docs for some variables (#9943))
 ### tidb_opt_prefer_range_scan <span class="version-mark">New in v5.0</span>
 
 - Scope: SESSION | GLOBAL
@@ -2266,11 +2263,6 @@ explain select * from t where age=5;
 3 rows in set (0.00 sec)
 ```
 
-### tidb_opt_write_row_id
-
-<<<<<<< HEAD
-<CustomContent platform="tidb-cloud">
-=======
 ### tidb_opt_scan_factor
 
 - Scope: SESSION | GLOBAL
@@ -2289,8 +2281,9 @@ explain select * from t where age=5;
 - Default value: `20`
 - Indicates the start-up cost for TiDB to request data from TiKV. This variable is internally used in the [Cost Model](/cost-model.md), and it is **NOT** recommended to modify its value.
 
-### tidb_opt_skew_distinct_agg <span class="version-mark">New in v6.2.0</span>
->>>>>>> 44108aaa6 (planner: add docs for some variables (#9943))
+### tidb_opt_write_row_id
+
+<CustomContent platform="tidb-cloud">
 
 > **Note:**
 >
