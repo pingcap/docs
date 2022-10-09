@@ -1151,14 +1151,7 @@ Constraint checking is always performed in place for pessimistic transactions (d
 
 ### tidb_enable_new_cost_interface <span class="version-mark">New in v6.2.0</span>
 
-- Scope: SESSION | GLOBAL
-- Persists to cluster: Yes
-- Type: Boolean
-- Default value: `ON`
-- Value options: `OFF` and `ON`
-- TiDB v6.2.0 refactors the implementation of previous cost model. This variable controls whether to enable the refactored Cost Model implementation.
-- This variable is enabled by default because the refactored Cost Model uses the same cost formula as before, which does not change the plan decision.
-- If your cluster is upgraded from v6.1 to v6.2, this variable remains `OFF`, and it is recommended to enable it manually. If your cluster is upgraded from a version earlier than v6.1, this variable sets to `ON` by default.
+This variable is associated with a feature available since v6.2.0 and not usable in v6.1. For details, see the v6.2 documentation [`tidb_enable_new_cost_interface`](https://docs.pingcap.com/tidb/v6.2/system-variables#tidb_enable_new_cost_interface-span-classversion-marknew-in-v620span).
 
 ### tidb_enable_new_only_full_group_by_check <span class="version-mark">New in v6.1.0</span>
 
