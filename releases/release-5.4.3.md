@@ -12,7 +12,7 @@ TiDB version: 5.4.3
 
 ## Improvements
 
-+ TiDB
++ TiDB **TW: @TomShawn**
 
     <!--sql-infra **owner: @zimulala**-->
 
@@ -24,36 +24,36 @@ TiDB version: 5.4.3
 
     <!--diagnosis **owner: @mornyx**-->
 
-+ TiKV **owner: @tabokie**
++ TiKV **owner: @tabokie, TW: @Oreoxmt**
 
     - Support configuring RocksDB write stall settings with values smaller than flow control thresholds [#13467](https://github.com/tikv/tikv/issues/13467)
     - (dup) Support configuring the `unreachable_backoff` item to avoid Raftstore broadcasting too many messages after one peer becomes unreachable [#13054](https://github.com/tikv/tikv/issues/13054)
 
-+ PD **owner: @nolouch**
++ PD **owner: @nolouch, TW: @Oreoxmt**
 
-+ TiFlash
++ TiFlash **TW: @shichun-0415**
 
 + Tools
 
-    + TiDB Lightning **owner: @niubell**
+    + TiDB Lightning **owner: @niubell, TW: @ran-huang**
 
         - (dup) Optimize Scatter Region to batch mode to improve the stability of the Scatter Region process [#33618](https://github.com/pingcap/tidb/issues/33618)
 
-    + TiDB Data Migration (DM) **owner: @niubell**
+    + TiDB Data Migration (DM) **owner: @niubell, TW: @ran-huang**
 
-    + TiCDC **owner: @nongfushanquan**
+    + TiCDC **owner: @nongfushanquan, TW: @shichun-0415**
 
         - (dup) Reduce performance overhead caused by runtime context switching in multi-Region scenarios [#5610](https://github.com/pingcap/tiflow/issues/5610)
 
     + Backup & Restore (BR) **owner: @3pointer**
 
-    + Dumpling **owner: @niubell**
+    + Dumpling **owner: @niubell, TW: @ran-huang**
 
     + TiDB Binlog
 
 ## Bug fixes
 
-+ TiDB
++ TiDB **TW: @TomShawn**
 
     <!--sql-infra **owner: @zimulala**-->
     - (dup) Fix the incorrect output of `SHOW CREATE PLACEMENT POLICY` [#37526](https://github.com/pingcap/tidb/issues/37526)
@@ -85,20 +85,20 @@ TiDB version: 5.4.3
 
     <!--diagnosis **owner: @mornyx**-->
 
-+ TiKV **owner: @tabokie**
++ TiKV **owner: @tabokie, TW: @Oreoxmt**
 
     - Fix the issue that causes permission denied when TiKV gets an error from the web identity provider and fails back to the default provider [#13122](https://github.com/tikv/tikv/issues/13122)
     - (dup) Fix the issue that the PD client might cause deadlocks [#13191](https://github.com/tikv/tikv/issues/13191)
     - (dup) Fix the issue that PD does not reconnect to TiKV after the Region heartbeat is interrupted [#12934](https://github.com/tikv/tikv/issues/12934)
     - (dup) Fix the issue that Regions might be overlapped if Raftstore is busy [#13160](https://github.com/tikv/tikv/issues/13160)
 
-+ PD **owner: @nolouch**
++ PD **owner: @nolouch, TW: @Oreoxmt**
 
     - Fix the issue that PD could not handle dashboard proxy requests correctly [#5321](https://github.com/tikv/pd/issues/5321)
     - (dup) Fix the issue that a removed tombstone store appears again after the PD leader transfer ​​[#4941](https://github.com/tikv/pd/issues/4941)
     - (dup) Fix the issue that the TiFlash learner replica might not be created [#5401](https://github.com/tikv/pd/issues/5401)
 
-+ TiFlash
++ TiFlash **TW: @shichun-0415**
 
     <!--compute **owner: @zanmato1984**-->
 
@@ -111,14 +111,14 @@ TiDB version: 5.4.3
 
 + Tools
 
-    + TiDB Lightning **owner: @niubell**
+    + TiDB Lightning **owner: @niubell, TW: @ran-huang**
 
         - Fix the issue of BigInt auto_increment column out of range error [#27397](https://github.com/pingcap/tidb/issues/27937)
         - (dup) Fix the issue that de-duplication might cause TiDB Lightning to panic in extreme cases [#34163](https://github.com/pingcap/tidb/issues/34163)
         - (dup) Fix the issue that TiDB Lightning does not support columns starting with slash, number, or non-ascii characters in Parquet files [#36980](https://github.com/pingcap/tidb/issues/36980)
         - (dup) Fix the issue that TiDB Lightning fails to connect to TiDB when TiDB uses an IPv6 host [#35880](https://github.com/pingcap/tidb/issues/35880)
 
-    + TiDB Data Migration (DM) **owner: @niubell**
+    + TiDB Data Migration (DM) **owner: @niubell, TW: @ran-huang**
 
         - (dup) Fix the issue that DM Worker might get stuck when getting DB Conn [#3733](https://github.com/pingcap/tiflow/issues/3733)
         - (dup) Fix the issue that DM reports the `Specified key was too long` error [#5315](https://github.com/pingcap/tiflow/issues/5315)
@@ -127,16 +127,16 @@ TiDB version: 5.4.3
         - (dup) Fix the issue of possible data race in `query-status` [#4811](https://github.com/pingcap/tiflow/issues/4811)
         - (dup) Fix goroutine leak when relay meets an error [#6193](https://github.com/pingcap/tiflow/issues/6193)
 
-    + TiCDC **owner: @nongfushanquan**
+    + TiCDC **owner: @nongfushanquan, TW: @shichun-0415**
 
         - (dup) Fix the TiCDC panic issue when you set `enable-old-value = false` [#6198](https://github.com/pingcap/tiflow/issues/6198)
 
-    + Backup & Restore (BR) **owner: @3pointer**
+    + Backup & Restore (BR) **owner: @3pointer, TW: @shichun-0415**
 
         - (dup) Fix the issue that might lead to backup and restoration failure if special characters exist in the authorization key of external storage [#37469](https://github.com/pingcap/tidb/issues/37469)
         - (dup) Fix the issue that the regions are not balanced because the concurrency is set too large during the restoration [#37549](https://github.com/pingcap/tidb/issues/37549)
 
-    + Dumpling **owner: @niubell**
+    + Dumpling **owner: @niubell, TW: @ran-huang**
 
         - (dup) Fix the issue that GetDSN does not support IPv6 [#36112](https://github.com/pingcap/tidb/issues/36112)
 
