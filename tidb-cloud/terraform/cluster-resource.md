@@ -256,7 +256,7 @@ The following is a part of the results for your reference.
 >
 > Before you begin, make sure that you have set a Project CIDR in the TiDB Cloud console. For more information, see [Set a Project CIDR](/tidb-cloud/set-up-vpc-peering-connections.md#prerequisite-set-a-project-cidr).
 
-Then, you can create a Dedicated Tier cluster with the projectId and the spec info using cluster resource.
+Then, you can create a Dedicated Tier cluster with the Project ID and the spec info using cluster resource.
 
 1. Use the `resource` block to define the resource of TiDB Cloud. It consists of the resource type and the resource name. In this example, the resource type is `tidbcloud_cluster` and the name is `example_cluster`.
 
