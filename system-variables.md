@@ -2321,7 +2321,10 @@ This variable is an alias for `transaction_isolation`.
 
 ### tx_isolation_one_shot
 
-This variable is an internal system variable, not meant to be used directly.
+
+> **Note:**
+>
+> This variable is internally used in TiDB. You are not expected to use it.
 
 `SET TRANSACTION ISOLATION LEVEL [READ COMMITTED| REPEATABLE READ | ...]` is transformed to `SET @@SESSION.TX_ISOLATION_ONE_SHOT = [READ COMMITTED| REPEATABLE READ | ...]` by the TiDB parser internally.
 
