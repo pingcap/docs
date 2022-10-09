@@ -56,6 +56,8 @@ To view the billing details, perform the following steps:
 2. Click **Billing**.
 3. Click **Bills**. The billing details page is displayed.
 
+The billing details page shows the billing summary by project and by service. You can also see the usage details and download the data in CSV format.
+
 ## Credits
 
 TiDB Cloud offers a certain number of credits for Proof of Concept (PoC) users. One credit is equivalent to one U.S. dollar. You can use credits to pay TiDB cluster fees before the credits become expired.
