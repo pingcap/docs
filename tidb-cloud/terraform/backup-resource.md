@@ -5,13 +5,12 @@ summary: Learn how to use backup resource
 
 # Backup Resource
 
-> **Note:**
->
-> Please [Get TiDB Cloud Terraform Provider](/tidb-cloud/terraform/tidbcloud-provider.md) first.
-> 
-> Backup and restore feature is unavailable to Developer Tier clusters. To use backup resources, make sure that you have created a Dedicated Tier cluster. 
+You can learn how to create a backup of a TiDB Cloud cluster with backup resource in this document.
 
-You can learn how to create backup for a TiDB Cloud cluster with backup resource in this document.
+## Prerequisites
+
+- Before you begin, you need to [Get TiDB Cloud Terraform Provider](/tidb-cloud/terraform/tidbcloud-provider.md) first.
+- The backup and restore feature is unavailable to Developer Tier clusters. To use backup resources, make sure that you have created a Dedicated Tier cluster.
 
 ## Create a backup with backup resource
 
@@ -37,7 +36,7 @@ You can learn how to create backup for a TiDB Cloud cluster with backup resource
     }
     ```
 
-2. Run `terraform apply` command:
+2. Run the `terraform apply` command:
 
     ```
     $ terraform apply
@@ -83,7 +82,7 @@ You can learn how to create backup for a TiDB Cloud cluster with backup resource
     
     ```
 
-4. Use `terraform state show tidbcloud_backup.example_backup` to check the state of the backup:
+4. Use `terraform state show tidbcloud_backup.example_backup` to check the status of the backup:
 
     ```
     $ terraform state show tidbcloud_backup.example_backup
@@ -102,7 +101,7 @@ You can learn how to create backup for a TiDB Cloud cluster with backup resource
     }
     ```
 
-5. Wait for some minutes and use `terraform refersh`  to update the states:
+5. Wait for some minutes. Then use `terraform refersh`  to update the states:
 
     ```
     $ terraform refresh  
@@ -123,13 +122,13 @@ You can learn how to create backup for a TiDB Cloud cluster with backup resource
     }
     ```
 
-It indicates that you have created a backup for your cluster if you see the status turns to `SUCCESS`. Pay attention that the backup can not be updated.
+If you see the status turns to `SUCCESS`, it indicates that you have created a backup for your cluster. Pay attention that the backup cannot be updated.
 
-Now, you have created a backup for the cluster. Try to [restore a cluster](/tidb-cloud/terraform/restore-resource.md) with the backup.
+Now, you have created a backup for the cluster. Next, you can try [restoring a cluster](/tidb-cloud/terraform/restore-resource.md) with the backup.
 
-## Destroy backup
+## Delete a backup
 
-Run `terraform destroy` command to destroy the backup resource.
+To delete a backup, you can run the `terraform destroy` command to destroy the backup resource.
 
 ```
 $ terraform destroy

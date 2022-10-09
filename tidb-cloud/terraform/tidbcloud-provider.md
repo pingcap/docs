@@ -7,9 +7,9 @@ summary: Learn how to get TiDB Cloud Terraform Provider
 
 You will learn how to get TiDB Cloud Terraform Provider in this document.
 
-> **Note:**
->
-> Before you begin, make sure that the requirements in [TiDB Cloud Terraform Provider Overview](/tidb-cloud/terraform/terraform-overview.md) are met.
+## Prerequisites
+
+Before you begin, make sure that the requirements in [TiDB Cloud Terraform Provider Overview](/tidb-cloud/terraform/terraform-overview.md) are met.
 
 ## Step 1. Set up terraform
 

@@ -5,22 +5,22 @@ summary: Learn how to use cluster resource
 
 # Cluster Resource
 
-> **Note:**
->
-> Please [Get TiDB Cloud Terraform Provider](/tidb-cloud/terraform/tidbcloud-provider.md) first.
-
 You can learn how to create and modify a TiDB Cloud cluster with cluster resource in this document.
 
 Besides, you will also learn how to get the necessary information from project data source and cluster-spec data source in this document.
 
-## Get projectId from project data source
+## Prerequisites
 
-Let us get all the projects by project data source first:
+Before you begin, you need to [Get TiDB Cloud Terraform Provider](/tidb-cloud/terraform/tidbcloud-provider.md) first.
+
+## Get project ID from project data source
+
+Let us get all the projects by project data source first, Create a main.tf file:
 
 - Use the `data` block to define the data source of TiDB Cloud. It consists of the data source type and the data source name. In this example, the data source type is `tidbcloud_project` and the name is `example_project`. The prefix of the type maps to the name of the provider.
 - Use the `output` block to get the information, and expose the information for other Terraform configurations to use. It works similarly to returned values in programming languages. See [Terraform documentation](https://www.terraform.io/language/values/outputs) for more details.
 
-By the way, you can find all the supported configurations for the data sources and resources [here](https://registry.terraform.io/providers/tidbcloud/tidbcloud/latest/docs).
+You can find all the supported configurations for the data sources and resources [here](https://registry.terraform.io/providers/tidbcloud/tidbcloud/latest/docs).
 
 ```
 terraform {
@@ -103,7 +103,7 @@ projects = tolist([
 ])
 ```
 
-Now, you will get all the available projects, copy one of the projectId you need. Here we use the default project's ID.
+Now, you will get all the available projects, copy one of the projectId you need.
 
 ## Get cluster specification information with cluster-spec data source
 
@@ -123,7 +123,7 @@ Run the `terraform apply --auto-approve` command and you will get all the specif
 The following is a part of the results for your reference.
 
 <details>
-<summary>cluster specification</summary>
+<summary>Cluster specification</summary>
 <pre><code>
 {
     "cloud_provider" = "AWS"
@@ -244,6 +244,7 @@ The following is a part of the results for your reference.
 </code></pre>
 </details>
 
+In the results:
 - `cloud_provider` is the cloud provider on which your TiDB cluster is hosted.
 - `region` is the region of `cloud_provider`.
 - `node_quantity_range` shows the minimum quantity of the node and the step if you want to scale the node.
@@ -338,13 +339,13 @@ Then, you can create a Dedicated Tier cluster with the Project ID and the spec i
       Enter a value: 
     ```
 
-    Terraform will generate an execution plan for you:
+   As in the above result, Terraform generates generate an execution plan for you:
 
    - You can check the difference between the configurations and the states.
    - You can also see the results of this `apply`. It will add a new resource, and no resource will be changed or destroyed.
    - The `known after apply` shows that you will get the value after `apply`.
 
-3. If everything is in your plan, type `yes` to continue:
+3. If everything looks fine in your plan, type `yes` to continue:
 
     ```
     Do you want to perform these actions?
@@ -397,7 +398,7 @@ Then, you can create a Dedicated Tier cluster with the Project ID and the spec i
 
     The status of the cluster is `CREATING`. In this case, you need to wait until it changes to `AVAILABLE`, which usually takes 10 minutes at least.
 
-5. If you want to check the latest status, run the `terraform refresh` command to update the state, and then run the `terraform state show tidbcloud_cluster.example_cluster` command to display the status.
+5. If you want to check the latest status, run the `terraform refresh` command to update the state, and then run the `terraform state show tidbcloud_cluster.example_cluster` command to display the state.
 
     ```
     $ terraform refresh
@@ -438,15 +439,15 @@ Then, you can create a Dedicated Tier cluster with the Project ID and the spec i
 
 Congratulations. Your cluster is available now.
 
-## Modify the Dedicated Tier cluster
+## Modify a Dedicated Tier cluster
 
-You can use Terraform to manage cluster resources as follows:
+For a Dedicated Tier cluster, you can use Terraform to manage cluster resources as follows:
 
-- Increase TiFlash component for the dedicated cluster.
+- Add a TiFlash component to the cluster.
 - Scale the TiDB cluster.
 - Pause or resume the cluster.
 
-### Increase TiFlash component
+### Add a TiFlash component
 
 1. Add TiFlash configuration in components:
 
@@ -469,7 +470,7 @@ You can use Terraform to manage cluster resources as follows:
         }
     ```
 
-2. Run `terraform apply` command:
+2. Run the `terraform apply` command:
 
     ```
     $ terraform apply
@@ -510,7 +511,7 @@ You can use Terraform to manage cluster resources as follows:
     
     ```
 
-3. By checking the plan, you will find that TiFlash is added. And one resource will be changed after `terraform apply`. Then type `yes` to confirm:
+3. As in the above execution plan, TiFlash will be added, and one resource will be changed after `terraform apply`. Then type `yes` to confirm:
 
     ```
       Enter a value: yes
@@ -588,7 +589,7 @@ You can scale a TiDB cluster when its status is `AVAILABLE`.
        }
    ```
 
-2. Run the `terraform apply` command and type `yes` after check:
+2. Run the `terraform apply` command and type `yes` for confirmation:
 
    ```
    $ terraform apply
@@ -648,7 +649,7 @@ You can pause a cluster when its status is `AVAILABLE` or resume a cluster when 
 - Set `paused = true` to pause a cluster.
 - Set `paused = false` to resume a cluster.
 
-1. pause a cluster with the following config:
+1. Add the `pause = true` into config in the cluster resource:
 
    ```
    config = {
@@ -697,7 +698,7 @@ You can pause a cluster when its status is `AVAILABLE` or resume a cluster when 
    Apply complete! Resources: 0 added, 1 changed, 0 destroyed.
    ```
 
-3. Use the `terraform state show tidbcloud_cluster.example_cluster` to check the status:
+3. Use the `terraform state show tidbcloud_cluster.example_cluster` command to check the status:
 
    ```
    $ terraform state show tidbcloud_cluster.example_cluster
@@ -738,7 +739,7 @@ You can pause a cluster when its status is `AVAILABLE` or resume a cluster when 
    }
    ```
 
-4. Now, resume the cluster by setting `paused = false`:
+4. When you need to resume the cluster, set `paused = false`:
 
    ```
    config = {
@@ -788,13 +789,13 @@ You can pause a cluster when its status is `AVAILABLE` or resume a cluster when 
    }
    ```
 
-6. Wait for a moment, the status will be changed to `AVAILABLE` again.
+6. Wait for a moment, then use the `terraform refersh` command to update the state. The status will be changed to `AVAILABLE` finally.
 
-Now, you have created and managed a Dedicated Tier cluster with Terraform. Try to create a backup of the cluster by our [backup resource](/tidb-cloud/terraform/backup-resource.md).
+Now, you have created and managed a Dedicated Tier cluster with Terraform. Next, you can try creating a backup of the cluster by our [backup resource](/tidb-cloud/terraform/backup-resource.md).
 
-## Destroy cluster
+## Delete a cluster
 
-Run `terraform destroy` command to destroy the cluster resource:
+To delete a cluster, you can run the `terraform destroy` command to destroy the cluster resource:
 
 ```
 $ terraform destroy

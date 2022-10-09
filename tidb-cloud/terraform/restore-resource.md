@@ -5,15 +5,14 @@ summary: Learn how to use restore resource
 
 # Restore Resource
 
-> **Note:**
->
-> Please [Get TiDB Cloud Terraform Provider](/tidb-cloud/terraform/tidbcloud-provider.md) first.
-> 
-> Backup and restore feature is unavailable for Developer Tier clusters. To use restore resources, make sure that you have created a Dedicated Tier cluster.
-
 You can learn how to create a restore task with restore resource in this document.
 
-You can also learn how to import the TiDB Cloud cluster created by restore task.
+You can also learn how to import a TiDB Cloud cluster created a restore task.
+
+## Prerequisites
+
+- Before you begin, you need to [Get TiDB Cloud Terraform Provider](/tidb-cloud/terraform/tidbcloud-provider.md) first.
+- The backup and restore feature is unavailable for Developer Tier clusters. To use restore resources, make sure that you have created a Dedicated Tier cluster.
 
 ## Create a restore task with restore resource
 
@@ -156,23 +155,23 @@ After creating a backup of a cluster, you can restore the cluster by creating a 
 
 You can see the restore task's status is `PENDING` and the cluster's status is `INITIALIZING`.
 
-After the cluster is `AVAILABLE`, the restore task will be `RUNNING` and turn to `SUCCESS` at last.
+After the cluster status changes to `AVAILABLE`, the restore task will be `RUNNING` and turn to `SUCCESS` at last. Copy the project ID and cluster ID for later use.
 
-The bad news is the restored cluster is not managed by terraform. We can solve it by importing.
+Note that the restored cluster is not managed by Terraform. You can manage the restored cluster by importing it.
 
-## Import the restore cluster
+## Import a cluster
 
 You can manage a cluster with Terraform by importing the cluster even if it is not created by Terraform.
 
 The following steps show you how to import the cluster created by the restore task in the last section.
 
-1. Add a cluster resource like:
+1. Add a cluster resource as follows:
 
     ```
     resource "tidbcloud_cluster" "restore_cluster1" {}
     ```
 
-2. Import the cluster by `terraform import tidbcloud_cluster.restore_cluster1 projectId,clusterId`, you can get the projectId and clusterId by restore resource:
+2. Import the cluster by `terraform import tidbcloud_cluster.restore_cluster1 projectId,clusterId` (you can get the projectId and clusterId by restore resource) :
 
     ```
     $ terraform import tidbcloud_cluster.restore_cluster1 1372813089189561287,1379661944630264072
@@ -188,7 +187,7 @@ The following steps show you how to import the cluster created by the restore ta
     your Terraform state and will henceforth be managed by Terraform.
     ```
 
-3. Run `terraform state show tidbcloud_cluster.restore_cluster1` command to get the state of the cluster:
+3. Run the `terraform state show tidbcloud_cluster.restore_cluster1` command to get the status of the cluster:
 
     ```
     $ terraform state show tidbcloud_cluster.restore_cluster1
@@ -224,7 +223,7 @@ The following steps show you how to import the cluster created by the restore ta
     }
     ```
 
-4. In order to manage it, you can copy it to your config file. Remember to delete the status and id, for they are computed by terraform and can not be set in the config:
+4. To manage the cluster using Terraform, you can copy the output of the previous step to your configuration file. Note that you need to delete the lines of id and status, because they will be controlled by Terraform instead:
 
     ```
     resource "tidbcloud_cluster" "restore_cluster1" {
@@ -255,7 +254,7 @@ The following steps show you how to import the cluster created by the restore ta
     }
     ```
 
-5. You can use `terraform fmt` to format your config file:
+5. You can use `terraform fmt` to format your configuration file:
 
     ```
     $ terraform fmt 
@@ -263,7 +262,7 @@ The following steps show you how to import the cluster created by the restore ta
     main.tf
     ```
 
-6. To ensure the consistency of the config and state, you can execute `terraform plan` or `terraform apply`. If you see `No changes`, the import is successful.
+6. To ensure the consistency of the configuration and state, you can execute `terraform plan` or `terraform apply`. If you see `No changes`, the import is successful.
 
     ```
     $ terraform apply
@@ -280,8 +279,8 @@ The following steps show you how to import the cluster created by the restore ta
     Apply complete! Resources: 0 added, 0 changed, 0 destroyed.
     ```
 
-Now you can manage the cluster created by the restore task.
+Now you can use Terraform to manage the cluster created by the restore task.
 
-## Destroy restore task
+## Delete a restore task
 
-Restore task can not be deleted now.
+Restore tasks cannot be deleted now.
