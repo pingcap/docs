@@ -3455,7 +3455,6 @@ This variable is an alias for `transaction_isolation`.
 
 ### tx_isolation_one_shot
 
-
 > **Note:**
 >
 > This variable is internally used in TiDB. You are not expected to use it.
