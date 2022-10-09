@@ -17,7 +17,6 @@ If you are looking for a simplified way to automate resource provisioning and yo
 
 ## Requirements
 
-- [TiDB Cloud](https://docs.pingcap.com/tidbcloud/release-notes): compatible with TiDB Cloud that is released at September 27, 2022
 - [Terraform](https://www.terraform.io/downloads.html) >= 1.0
 - [Go](https://golang.org/doc/install) >= 1.18 (if you want to build the provider plugin)
 
