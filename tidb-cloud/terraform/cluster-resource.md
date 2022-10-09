@@ -567,7 +567,7 @@ The `MODIFYING` status indicates that the cluster is changing now. Wait for a mo
 
 You can scale a TiDB cluster when its status is `AVAILABLE`.
 
-1. For example, to add 1 node for TiDB, 3 nodes for TiKV (TiKV needs to add at least 3 nodes for its step is 3, you can get this information in cluster-spec data source), and 1 node for TiFlash, you can update the configurations as follows:
+1. For example, to add 1 node for TiDB, 3 nodes for TiKV (TiKV needs to add at least 3 nodes for its step is 3. You can get this information in cluster-spec data source), and 1 node for TiFlash, you can update the configurations as follows:
 
    ```
        components = {
