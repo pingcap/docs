@@ -1,10 +1,6 @@
 ---
 title: TiDB Tools Overview
-<<<<<<< HEAD
-=======
 summary: Learn the tools and applicable scenarios.
-aliases: ['/docs/dev/ecosystem-tool-user-guide/','/docs/dev/reference/tools/user-guide/','/docs/dev/how-to/migrate/from-mysql/','/docs/dev/how-to/migrate/incrementally-from-mysql/','/docs/dev/how-to/migrate/overview/']
->>>>>>> 07b3f790c (tools: updated ecosystem-tool-user-guide as chinese version (#10678))
 ---
 
 # TiDB Tools Overview
@@ -96,13 +92,11 @@ The following are the basics of TiDB Lightning:
     - The output file of Dumpling
     - Other compatible CSV file
 - Supported TiDB versions: v2.1 or later
-=======
 - Data source:
     - The output files of Dumpling
     - Other compatible CSV files
     - Parquet files exported from Amazon Aurora or Apache Hive
 - Supported TiDB versions: v2.1 and later versions
->>>>>>> 07b3f790c (tools: updated ecosystem-tool-user-guide as chinese version (#10678))
 - Kubernetes support: Yes. See [Quickly restore data into a TiDB cluster in Kubernetes using TiDB Lightning](https://docs.pingcap.com/tidb-in-kubernetes/stable/restore-data-using-tidb-lightning) for details.
 
 > **Note:**
