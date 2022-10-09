@@ -254,7 +254,7 @@ The following is a part of the results for your reference.
 
 > **Note:**
 >
-> Before you begin, make sure that you have set a Project CIDR in the TiDB Cloud console.
+> Before you begin, make sure that you have set a Project CIDR in the TiDB Cloud console. For more information, see [Set a Project CIDR](/tidb-cloud/set-up-vpc-peering-connections.md#prerequisite-set-a-project-cidr).
 
 Then, you can create a Dedicated Tier cluster with the projectId and the spec info using cluster resource.
 
