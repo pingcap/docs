@@ -1134,6 +1134,10 @@ Constraint checking is always performed in place for pessimistic transactions (d
 - This variable is used to control whether to enable TiDB mutation checker, which is a tool used to check consistency between data and indexes during the execution of DML statements. If the checker returns an error for a statement, TiDB rolls back the execution of the statement. Enabling this variable causes a slight increase in CPU usage. For more information, see [Troubleshoot Inconsistency Between Data and Indexes](/troubleshoot-data-inconsistency-errors.md).
 - For new clusters of v6.0.0 or later versions, the default value is `ON`. For existing clusters that upgrade from versions earlier than v6.0.0, the default value is `OFF`.
 
+### tidb_enable_new_cost_interface
+
+This variable is associated with a feature available since v6.2.0 and not usable in v6.1. For details, see the v6.2 documentation [`tidb_enable_new_cost_interface`](https://docs.pingcap.com/tidb/v6.2/system-variables#tidb_enable_new_cost_interface-span-classversion-marknew-in-v620span).
+
 ### tidb_enable_new_only_full_group_by_check <span class="version-mark">New in v6.1.0</span>
 
 - Scope: SESSION | GLOBAL
