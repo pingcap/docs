@@ -52,9 +52,7 @@ Run `terraform apply` command to apply the configurations. You need to type `yes
 
 To skip the prompt, use `terraform apply --auto-approve`:
 
-<details>
-<summary>project outputs</summary>
-<pre><code>
+```
 $ terraform apply --auto-approve
 data.tidbcloud_project.example_project: Reading...
 data.tidbcloud_project.example_project: Read complete after 1s [id=just for test]
@@ -103,8 +101,7 @@ projects = tolist([
     "user_count" = 1
   },
 ])
-</code></pre>
-</details>
+```
 
 Now, you will get all the available projects, copy one of the projectId you need. Here we use the default project's ID.
 
