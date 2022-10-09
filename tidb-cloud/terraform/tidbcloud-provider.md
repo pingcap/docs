@@ -29,7 +29,7 @@ For Mac users, you can install terraform with Homebrew.
     brew install hashicorp/tap/terraform
     ```
 
-See [terraform doc](https://learn.hashicorp.com/tutorials/terraform/install-cli) for other installation methods.
+For other operating systems, see [Terraform documentation](https://learn.hashicorp.com/tutorials/terraform/install-cli) for instructions.
 
 ## Create an API key
 
