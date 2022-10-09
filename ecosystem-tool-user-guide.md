@@ -87,11 +87,6 @@ TiDB Lightning supports the following modes:
 
 The following are the basics of TiDB Lightning:
 
-<<<<<<< HEAD
-- Input data source:
-    - The output file of Dumpling
-    - Other compatible CSV file
-- Supported TiDB versions: v2.1 or later
 - Data source:
     - The output files of Dumpling
     - Other compatible CSV files
