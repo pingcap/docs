@@ -102,6 +102,11 @@ To use the AWS Management Console to create a VPC interface endpoint, perform th
     > If your service is spanning across more than three availability zones (AZs), you might not be able to select AZs in the **Subnets** area. This issue occurs when there is an extra AZ in your selected region in addition to the AZs where your TiDB cluster is located. In this case, contact [PingCAP Technical Support](https://docs.pingcap.com/tidbcloud/tidb-cloud-support).
 
 8. Select your security group properly in the **Security groups** area.
+   
+    > **Note:**
+    >
+    >  Make sure the selected security group allows inbound access from your EC2 instances on Port 4000 or a customer-defined port.
+ 
 9. Click **Create endpoint**.
 
 </div>
@@ -183,7 +188,7 @@ The possible statuses of a private endpoint service are explained as follows:
 
 ### I cannot connect to a TiDB cluster via a private endpoint after enabling private DNS. Why?
 
-You might need to properly set the security group for your VPC endpoint in the AWS Management Console. Go to **VPC** > **Endpoints**. Right-click your VPC endpoint and select **Manage security groups**.
+You might need to properly set the security group for your VPC endpoint in the AWS Management Console. Go to **VPC** > **Endpoints**. Right-click your VPC endpoint and select the proper **Manage security groups**. A proper security group within your VPC that allows inbound access from your EC2 instances on Port 4000 or a customer-defined port.
 
 ![Manage security groups](/media/tidb-cloud/private-endpoint/manage-security-groups.png)
 
