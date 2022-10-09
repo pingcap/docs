@@ -4,26 +4,6 @@ title: Release Notes
 
 # TiDB Release Notes
 
-<<<<<<< HEAD
-=======
-## 6.3
-
-- [6.3.0-DMR](/releases/release-6.3.0.md): 2022-09-30
-
-## 6.2
-
-- [6.2.0-DMR](/releases/release-6.2.0.md): 2022-08-23
-
-## 6.1
-
-- [6.1.1](/releases/release-6.1.1.md): 2022-09-01
-- [6.1.0](/releases/release-6.1.0.md): 2022-06-13
-
-## 6.0
-
-- [6.0.0-DMR](/releases/release-6.0.0-dmr.md): 2022-04-07
-
->>>>>>> 937a90538 (Release notes: add release date (#10658))
 ## 5.4
 
 - [5.4.2](/releases/release-5.4.2.md): 2022-07-08
