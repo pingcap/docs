@@ -165,7 +165,7 @@ mysql> SELECT * FROM t1;
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
 - Default value: `utf8mb4_bin`
-- The default collation for a database when the database is created.
+- The default collation used when the database is created.
 
 ### cte_max_recursion_depth
 
@@ -264,7 +264,7 @@ For more possible values of this variable, see [Authentication plugin status](/s
 - Default value: (system hostname)
 - The hostname of the TiDB server as a read-only variable.
 
-### identity
+### identity <span class="version-mark">New in v5.3.0</span>
 
 This variable is an alias for [`last_insert_id`](#last_insert_id).
 
