@@ -1,10 +1,6 @@
 ---
 title: TiDB Tools Overview
-<<<<<<< HEAD
-=======
 summary: Learn the tools and applicable scenarios.
-aliases: ['/docs/dev/ecosystem-tool-user-guide/','/docs/dev/reference/tools/user-guide/','/docs/dev/how-to/migrate/from-mysql/','/docs/dev/how-to/migrate/incrementally-from-mysql/','/docs/dev/how-to/migrate/overview/']
->>>>>>> 07b3f790c (tools: updated ecosystem-tool-user-guide as chinese version (#10678))
 ---
 
 # TiDB Tools Overview
