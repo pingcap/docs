@@ -749,7 +749,7 @@ You can pause a cluster when its status is `AVAILABLE` or resume a cluster when 
      }
    ```
 
-5. After `apply`, you will find the status turns to `RESUMING`:
+5. Run the `terraform apply` command and type `yes` for confirmation. If you use the `terraform state show tidbcloud_cluster.example_cluster` command to check the status, you will find it turns to `RESUMING`:
 
    ```
    # tidbcloud_cluster.example_cluster:
