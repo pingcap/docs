@@ -656,21 +656,21 @@ MPP is a distributed computing framework provided by the TiFlash engine, which a
 
 </CustomContent>
 
-### tidb_auth_signing_cert <span class="version-mark">New in v6.2</span>
+### tidb_auth_signing_cert
 
 - Scope: GLOBAL
 - Persists to cluster: Yes
 - Type: String
 - Default value: ""
-- This variable is used in a feature this is not released yet. Please don't set this variable.
+- This variable is associated with an unreleased feature. **DO NOT** set this variable.
 
-### tidb_auth_signing_key <span class="version-mark">New in v6.2</span>
+### tidb_auth_signing_key
 
 - Scope: GLOBAL
 - Persists to cluster: Yes
 - Type: String
 - Default value: ""
-- This variable is used in a feature this is not released yet. Please don't set this variable.
+- This variable is associated with an unreleased feature. **DO NOT** set this variable.
 
 ### tidb_auto_analyze_end_time
 
