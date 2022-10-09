@@ -159,7 +159,7 @@ mysql> SELECT * FROM t1;
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
 - Default value: `utf8mb4_bin`
-- This variable indicates the collation of the default database in use. **It is NOT recommended to set this variable**. When a new default database is selected, the server changes the variable value.
+- This variable indicates the default collation of the database in use. **It is NOT recommended to set this variable**. When a new database is selected, TiDB changes this variable value.
 
 ### collation_server
 
