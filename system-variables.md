@@ -151,21 +151,21 @@ mysql> SELECT * FROM t1;
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
 - Default value: `utf8mb4_bin`
-- This variable indicates the collation for string literals that do not have a specified collation.
+- This variable indicates the collation used in the current connection. It is consistent with the MySQL variable `collation_connection`.
 
 ### collation_database
 
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
 - Default value: `utf8mb4_bin`
-- This variable indicates the collation of the default database in use. **It is NOT recommended to set this variable**. When a new default database is selected, the server changes the variable value.
+- This variable indicates the default collation of the database in use. **It is NOT recommended to set this variable**. When a new database is selected, TiDB changes this variable value.
 
 ### collation_server
 
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
 - Default value: `utf8mb4_bin`
-- The default collation for the server.
+- The default collation used when the database is created.
 
 ### cte_max_recursion_depth
 
@@ -264,9 +264,9 @@ For more possible values of this variable, see [Authentication plugin status](/s
 - Default value: (system hostname)
 - The hostname of the TiDB server as a read-only variable.
 
-### identity
+### identity <span class="version-mark">New in v5.3.0</span>
 
-This variable is an alias for `last_insert_id`.
+This variable is an alias for [`last_insert_id`](#last_insert_id).
 
 ### init_connect
 
@@ -363,6 +363,50 @@ This variable is an alias for `last_insert_id`.
 >
 > Unlike in MySQL, the `max_execution_time` system variable currently works on all kinds of statements in TiDB, not only restricted to the `SELECT` statement. The precision of the timeout value is roughly 100ms. This means the statement might not be terminated in accurate milliseconds as you specify.
 
+<<<<<<< HEAD
+=======
+### max_prepared_stmt_count
+
+- Scope: GLOBAL
+- Persists to cluster: Yes
+- Type: Integer
+- Default value: `-1`
+- Range: `[-1, 1048576]`
+- Specifies the maximum number of [`PREPARE`](/sql-statements/sql-statement-prepare.md) statements in a session.
+- The value of `-1` means no limit on the maximum number of `PREPARE` statements in a session.
+- If you set the variable to a value that exceeds the upper limit `1048576`, `1048576` is used instead:
+
+```sql
+mysql> SET GLOBAL max_prepared_stmt_count = 1048577;
+Query OK, 0 rows affected, 1 warning (0.01 sec)
+
+mysql> SHOW WARNINGS;
++---------+------+--------------------------------------------------------------+
+| Level   | Code | Message                                                      |
++---------+------+--------------------------------------------------------------+
+| Warning | 1292 | Truncated incorrect max_prepared_stmt_count value: '1048577' |
++---------+------+--------------------------------------------------------------+
+1 row in set (0.00 sec)
+
+mysql> SHOW GLOBAL VARIABLES LIKE 'max_prepared_stmt_count';
++-------------------------+---------+
+| Variable_name           | Value   |
++-------------------------+---------+
+| max_prepared_stmt_count | 1048576 |
++-------------------------+---------+
+1 row in set (0.00 sec)
+```
+
+### max_allowed_packet <span class="version-mark">New in v6.1.0</span>
+
+- Scope: SESSION | GLOBAL
+- Persists to cluster: Yes
+- Default value: `67108864`
+- Range: `[1024, 1073741824]`. The value should be an integer multiple of 1024. If the value is not divisible by 1024, a warning will be prompted and the value will be rounded down. For example, when the value is set to 1025, the actual value in TiDB is 1024.
+- The maximum packet size allowed by the server and the client in one transmission of packets, in bytes.
+- This variable is compatible with MySQL.
+
+>>>>>>> 7b828cf0c (sysvar: add 2 sysvars (#10662))
 ### plugin_dir
 
 - Scope: GLOBAL
@@ -2415,6 +2459,25 @@ explain select * from t where age=5;
 - By default, Regions are split for a new table when it is being created in TiDB. After this variable is enabled, the newly split Regions are scattered immediately during the execution of the `CREATE TABLE` statement. This applies to the scenario where data need to be written in batches right after the tables are created in batches, because the newly split Regions can be scattered in TiKV beforehand and do not have to wait to be scheduled by PD. To ensure the continuous stability of writing data in batches, the `CREATE TABLE` statement returns success only after the Regions are successfully scattered. This makes the statement's execution time multiple times longer than that when you disable this variable.
 - Note that if `SHARD_ROW_ID_BITS` and `PRE_SPLIT_REGIONS` have been set when a table is created, the specified number of Regions are evenly split after the table creation.
 
+<<<<<<< HEAD
+=======
+### tidb_shard_allocate_step <span class="version-mark">New in v5.0</span>
+
+- Scope: SESSION | GLOBAL
+- Persists to cluster: Yes
+- Default value: `9223372036854775807`
+- Range: `[1, 9223372036854775807]`
+- This variable controls the maximum number of continuous IDs to be allocated for the [`AUTO_RANDOM`](/auto-random.md) or [`SHARD_ROW_ID_BITS`](/shard-row-id-bits.md) attribute. Generally, `AUTO_RANDOM` IDs or the `SHARD_ROW_ID_BITS` annotated row IDs are incremental and continuous in one transaction. You can use this variable to solve the hotspot issue in large transaction scenarios.
+
+### tidb_simplified_metrics
+
+- Scope: GLOBAL
+- Persists to cluster: Yes
+- Type: Boolean
+- Default value: `OFF`
+- When this variable is enabled, TiDB does not collect or record the metrics that are not used in the Grafana panels.
+
+>>>>>>> 7b828cf0c (sysvar: add 2 sysvars (#10662))
 ### tidb_skip_ascii_check <span class="version-mark">New in v5.0</span>
 
 - Scope: SESSION | GLOBAL
