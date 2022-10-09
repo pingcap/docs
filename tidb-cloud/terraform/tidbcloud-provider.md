@@ -13,7 +13,7 @@ You will learn how to get TiDB Cloud Terraform Provider in this document.
 
 ## Step 1. Set up terraform
 
-TiDB Cloud Terraform Provider has been released to Terraform registry. All you need to do is install Terraform (>=1.0).
+TiDB Cloud Terraform Provider has been released to [Terraform registry](https://registry.terraform.io/). All you need to do is install Terraform (>=1.0).
 
 For Mac users, you can install Terraform with Homebrew.
 
@@ -35,7 +35,7 @@ For other operating systems, see [Terraform documentation](https://learn.hashico
 
 The TiDB Cloud API uses HTTP Digest Authentication. It protects your private key from being sent over the network.
 
-Currently, TiDB Cloud Terraform Provider does not support managing API keys now, so you need to create an API key in the [TiDB Cloud console](https://tidbcloud.com/console/clusters).
+Currently, TiDB Cloud Terraform Provider does not support managing API keys. So you need to create an API key in the [TiDB Cloud console](https://tidbcloud.com/console/clusters).
 
 For detailed steps, see [TiDB Cloud API documentation](https://docs.pingcap.com/tidbcloud/api/v1beta#section/Authentication/API-Key-Management).
 

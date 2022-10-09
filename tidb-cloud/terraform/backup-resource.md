@@ -125,7 +125,7 @@ You can learn how to create backup for a TiDB Cloud cluster with backup resource
 
 It indicates that you have created a backup for your cluster if you see the status turns to `SUCCESS`. Pay attention that the backup can not be updated.
 
-> You can use the backup to [restore a cluster](/tidb-cloud/terraform/restore-resource.md)
+Now, you have created a backup for the cluster. Try to [restore a cluster](/tidb-cloud/terraform/restore-resource.md) with the backup.
 
 ## Destroy backup
 
