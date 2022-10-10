@@ -106,7 +106,7 @@ projects = tolist([
 ])
 ```
 
-Now, you will get all the available projects, copy one of the projectId you need.
+Now, you can get all the available projects from the output. Copy one of the project IDs that you need.
 
 ## Get cluster specification information with cluster-spec data source
 
