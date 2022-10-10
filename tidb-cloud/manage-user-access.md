@@ -40,9 +40,9 @@ To change the password, take the following steps:
 
 4. Click **Change Password**, and then check your mail box for the link to reset the password.
 
-<Note>
-The new password must not be the same as any of the previous four passwords.
-</Note>
+> **Note:**
+>
+> The new password must not be the same as any of the previous four passwords.
 
 If your password is not changed within 90 days, you will get a prompt to reset your password when you log in to TiDB Cloud. It is recommended that you follow the prompt to reset the password.
 
