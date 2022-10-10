@@ -59,7 +59,7 @@ TiDB version: 5.4.3
     - (dup) Fix the incorrect output of `SHOW CREATE PLACEMENT POLICY` [#37526](https://github.com/pingcap/tidb/issues/37526)
     - (dup) Fix the issue that some DDL statements might be stuck for a period after the PD node of a cluster is replaced [#33908](https://github.com/pingcap/tidb/issues/33908)
     - (dup) Fix the issue that `KILL TIDB` cannot take effect immediately on idle connections [#24031](https://github.com/pingcap/tidb/issues/24031)
-    - Fix the issue that TiDB gets the incorrect result of `DATA_TYPE` and `COLUMN_TYPE` columns when executing the `SHOW COLUMNS` statement [#36496](https://github.com/pingcap/tidb/issues/36496)
+    - Fix the issue that incorrect results are returned in the `DATA_TYPE` and `COLUMN_TYPE` columns when querying the `INFORMSTION_SCHEMA.COLUMNS` system table [#36496](https://github.com/pingcap/tidb/issues/36496)
     - (dup) Fix the issue that when TiDB Binlog is enabled, executing the `ALTER SEQUENCE` statement might cause a wrong metadata version and cause Drainer to exit [#36276](https://github.com/pingcap/tidb/issues/36276)
 
     <!--execution **owner: @zanmato1984**-->
@@ -71,7 +71,7 @@ TiDB version: 5.4.3
 
     <!--transaction **owner: @cfzjywxk**-->
 
-    - Fix `invalid transaction` error when doing stale read in RC isolation level [#30872](https://github.com/pingcap/tidb/issues/30872)
+    - Fix the `invalid transaction` error that occurs when performing Stale Read in the RC isolation level [#30872](https://github.com/pingcap/tidb/issues/30872)
     - (dup) Fix the issue that the `EXPLAIN ANALYZE` statement with DML executors might return result before the transaction commit finishes [#37373](https://github.com/pingcap/tidb/issues/37373)
     - (dup) Fix the issue of the `data and columnID count not match` error that occurs when inserting duplicated values with TiDB Binlog enabled [#33608](https://github.com/pingcap/tidb/issues/33608)
 
@@ -83,7 +83,7 @@ TiDB version: 5.4.3
     - (dup) Fix the issue that the UPDATE statements incorrectly eliminate the projection in some cases, which causes the `Can't find column` error  [#37568](https://github.com/pingcap/tidb/issues/37568)
     - (dup) Fix the issue that partitioned tables cannot fully use indexes to scan data in some cases [#33966](https://github.com/pingcap/tidb/issues/33966)
     - Fix the issue that the `EXECUTE` might throw an unexpected error in specific scenarios [#37187](https://github.com/pingcap/tidb/issues/37187)
-    - Fix the issue that TiDB might get wrong results when using a `BIT` type index and enabling the prepared plan cache [#33067](https://github.com/pingcap/tidb/issues/33067)
+    - Fix the issue that TiDB might return wrong results when using a `BIT` type index with prepared plan cache enabled [#33067](https://github.com/pingcap/tidb/issues/33067)
 
     <!--diagnosis **owner: @mornyx**-->
 
