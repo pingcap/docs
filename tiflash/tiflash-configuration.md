@@ -256,7 +256,7 @@ In addition to the items above, other parameters are the same as those of TiKV. 
 
 ### Schedule replicas by topology labels
 
-See [Set available zones](/tiflash/create-tiflash-replicas.md#set-available-zones)
+See [Set available zones](/tiflash/create-tiflash-replicas.md#set-available-zones).
 
 ### Multi-disk deployment
 
