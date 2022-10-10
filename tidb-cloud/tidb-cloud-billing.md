@@ -60,7 +60,7 @@ The billing details page shows the billing summary by project and by service. Yo
 
 > **Note:**
 >
-> The total amount in the monthly bill may differ from that in the daily usage details due to differences in precision:
+> The total amount in the monthly bill might differ from that in the daily usage details due to differences in precision:
 >
 > - The total amount in the monthly bill is rounded off to the 2nd decimal place.
 > - The total amount in the daily usage details is accurate to the 6th decimal place.
