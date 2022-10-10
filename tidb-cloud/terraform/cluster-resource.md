@@ -452,7 +452,7 @@ For a Dedicated Tier cluster, you can use Terraform to manage cluster resources 
 
 ### Add a TiFlash component
 
-1. Add TiFlash configuration in components:
+1. Add TiFlash configuration in `components`:
 
     ```
         components = {
