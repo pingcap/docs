@@ -18,7 +18,7 @@ You can also learn how to import a TiDB Cloud cluster created a restore task.
 
 After creating a backup of a cluster, you can restore the cluster by creating a restore task with restore resources.
 
-1. You can configure a restore resource as follows. Note that you can only restore data from a smaller node size to a larger node size:
+1. You can configure a restore resource as follows. Note that you can only restore data from a smaller node size to the same or a larger node size:
 
     ```
     resource "tidbcloud_restore" "example_restore" {
