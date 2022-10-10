@@ -83,7 +83,7 @@ The place where the data of deleted clusters with valid backups is stored. Once 
 
 - TiDB Cloud region
 
-    A set of [TiKV](https://docs.pingcap.com/tidb/stable/tidb-storage) nodes deployed in the same geographical area. The set of TiKV nodes will be deployed across at least three different Availability Zones within that region.
+    A geographical area in which a TiDB Cloud cluster is deployed. A TiDB Cloud region comprises of at least 3 Availability Zones, and the cluster is deployed across these zones.
 
 - TiDB Region
 

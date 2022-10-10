@@ -1932,7 +1932,7 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 >
 > * [go-sql-driver](https://github.com/go-sql-driver/mysql#multistatements) (`multiStatements`)
 > * [Connector/J](https://dev.mysql.com/doc/connector-j/8.0/en/connector-j-reference-configuration-properties.html) (`allowMultiQueries`)
-> * PHP [mysqli](https://dev.mysql.com/doc/apis-php/en/apis-php-mysqli.quickstart.multiple-statement.html) (`mysqli_multi_query`)
+> * PHP [mysqli](https://www.php.net/manual/en/mysqli.quickstart.multiple-statement.php) (`mysqli_multi_query`)
 
 ### tidb_nontransactional_ignore_error <span class="version-mark">New in v6.1.0</span>
 
@@ -2667,7 +2667,7 @@ For details, see [Identify Slow Queries](/identify-slow-queries.md).
     * There are not many TiDB instances in the cluster, but every TiDB instance is in high concurrency.
 - It is recommended to set this variable to a value as small as possible.
 
-> **Notes:**
+> **Note:**
 >
 > Suppose that the TSO RPC latency increases for reasons other than a CPU usage bottleneck of the PD leader (such as network issues). In this case, increasing the value of `tidb_tso_client_batch_max_wait_time` might increase the execution latency in TiDB and affect the QPS performance of the cluster.
 

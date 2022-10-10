@@ -23,6 +23,11 @@ In the upper-right corner of the TiDB Cloud console, click your account name and
 >
 > The content in this section is only applicable to TiDB Cloud registration with email and password. If you sign up for TiDB Cloud with Google or GitHub, your password is managed by Google or GitHub and you cannot change it using the TiDB Cloud console.
 
+The password for TiDB Cloud account must meet the following requirements:
+
+- The password must be at least 8 characters in length.
+- The password must contain at least 1 uppercase letter, 1 lowercase letter, and 1 number.
+
 To improve your system security, if you sign up for TiDB Cloud with email and password, it is recommended that you reset your password every 90 days.
 
 To change the password, take the following steps:
@@ -34,6 +39,10 @@ To change the password, take the following steps:
 3. Click the **Change Password** tab.
 
 4. Click **Change Password**, and then check your mail box for the link to reset the password.
+
+<Note>
+The new password must not be the same as any of the previous four passwords.
+</Note>
 
 If your password is not changed within 90 days, you will get a prompt to reset your password when you log in to TiDB Cloud. It is recommended that you follow the prompt to reset the password.
 
@@ -61,10 +70,24 @@ Under this structure:
 
 To access a cluster in a project under an organization, a user must be both a member of the organization and a member of the project. Organization owners can invite users to join the project to create and manage clusters in the project.
 
+To view which organizations you belong to, perform these steps:
+
+1. Click the account name in the upper-right corner of the TiDB Cloud console.
+2. Select **Switch Organization** in the drop-down menu, and you can see all the organizations you belong to in the submenu.
+
 To check which project you belong to, perform these steps:
 
 1. Click the account name in the upper-right corner of the TiDB Cloud console.
 2. Click **Organization Settings**. The **Projects** tab is displayed by default.
+
+## Switch between organizations
+
+If you are a member of multiple organizations, you can switch your account between organizations.
+
+To switch between organizations, perform these steps:
+
+1. Click the account name in the upper-right corner of the TiDB Cloud console.
+2. Select **Switch Organization** in the drop-down menu, and click the organization you want to switch to.
 
 ## Invite an organization member
 
@@ -90,7 +113,7 @@ To invite a member to an organization, perform the following steps:
 
 7. After receiving this email, the user needs to click the link in the email to verify the identity, and a new page shows.
 
-8. On the new page, the user needs to view and agree with our license, and then click **Submit** to create the account in TiDB Cloud. After that, the user is redirected to the login page.
+8. If the invited email address has not been signed up for a TiDB Cloud account, the user is directed to the sign-up page to create an account. If the email address has been signed up for a TiDB Cloud account, the user is directed to the sign-in page, and after sign-in, the account joins the organization automatically.
 
 > **Note:**
 >
