@@ -170,6 +170,7 @@ There are four roles in an organization. The permissions of each role are as fol
 | View bills and edit payment information                                               | ✅     | ❌      | ✅             | ❌           |
 | View and configure audit logging                                                      | ❌     | ❌      | ❌             | ✅           |
 | Obtain project instance management rights                                             | ✅     | ✅      | ✅             | ✅           |
+| Create an API key                                                                                              | ✅     | ❌      | ❌             | ❌            |
 
 ## Remove an organization member
 
