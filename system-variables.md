@@ -151,21 +151,21 @@ mysql> SELECT * FROM t1;
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
 - Default value: `utf8mb4_bin`
-- This variable indicates the collation for string literals that do not have a specified collation.
+- This variable indicates the collation used in the current connection. It is consistent with the MySQL variable `collation_connection`.
 
 ### collation_database
 
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
 - Default value: `utf8mb4_bin`
-- This variable indicates the collation of the default database in use. **It is NOT recommended to set this variable**. When a new default database is selected, the server changes the variable value.
+- This variable indicates the default collation of the database in use. **It is NOT recommended to set this variable**. When a new database is selected, TiDB changes this variable value.
 
 ### collation_server
 
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
 - Default value: `utf8mb4_bin`
-- The default collation for the server.
+- The default collation used when the database is created.
 
 ### cte_max_recursion_depth
 
@@ -264,9 +264,9 @@ For more possible values of this variable, see [Authentication plugin status](/s
 - Default value: (system hostname)
 - The hostname of the TiDB server as a read-only variable.
 
-### identity
+### identity <span class="version-mark">New in v5.3.0</span>
 
-This variable is an alias for `last_insert_id`.
+This variable is an alias for [`last_insert_id`](#last_insert_id).
 
 ### init_connect
 
@@ -329,15 +329,14 @@ This variable is an alias for `last_insert_id`.
 - Default value: `OFF`
 - This variable indicates whether [TiDB Binlog](https://docs.pingcap.com/tidb/stable/tidb-binlog-overview) is used.
 
-### max_allowed_packet
+### max_allowed_packet <span class="version-mark">New in v6.1.0</span>
 
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
-- Type: Integer
 - Default value: `67108864`
-- Range: `[1024, 1073741824]`
-- Unit: Bytes
-- The maximum size of a packet for the MySQL protocol.
+- Range: `[1024, 1073741824]`. The value should be an integer multiple of 1024. If the value is not divisible by 1024, a warning will be prompted and the value will be rounded down. For example, when the value is set to 1025, the actual value in TiDB is 1024.
+- The maximum packet size allowed by the server and the client in one transmission of packets, in bytes.
+- This variable is compatible with MySQL.
 
 ### max_connections
 
