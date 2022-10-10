@@ -41,6 +41,8 @@ Data sources
 
 You can get all the available configurations for the resources and data sources in this [document](https://registry.terraform.io/providers/tidbcloud/tidbcloud/latest/docs).
 
+## Next step
+
 To start using TiDB Cloud Terraform Provider, refer to the following documents:
 
 - [Get TiDB Cloud Terraform Provider](/tidb-cloud/terraform/tidbcloud-provider.md)
