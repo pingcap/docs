@@ -21,6 +21,20 @@ After creating a backup of a cluster, you can restore the cluster by creating a 
 1. You can configure a restore resource as follows. Note that you can only restore data from a smaller node size to the same or a larger node size:
 
     ```
+    terraform {
+     required_providers {
+       tidbcloud = {
+         source = "tidbcloud/tidbcloud"
+         version = "~> 0.0.1"
+       }
+     }
+     required_version = ">= 1.0.0"
+   }
+   
+   provider "tidbcloud" {
+     username = "fake_username"
+     password = "fake_password"
+   }
     resource "tidbcloud_restore" "example_restore" {
       project_id = tidbcloud_cluster.example_cluster.project_id
       backup_id  = tidbcloud_backup.example_backup.id

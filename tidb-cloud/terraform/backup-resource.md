@@ -17,6 +17,20 @@ You can learn how to create a backup of a TiDB Cloud cluster with backup resourc
 1. Copy the following configuration example. You need to replace the `project_id` and `cluster_id` values with your own.
 
     ```
+    terraform {
+     required_providers {
+       tidbcloud = {
+         source = "tidbcloud/tidbcloud"
+         version = "~> 0.0.1"
+       }
+     }
+     required_version = ">= 1.0.0"
+   }
+   
+   provider "tidbcloud" {
+     username = "fake_username"
+     password = "fake_password"
+   }
     resource "tidbcloud_backup" "example_backup" {
       project_id  = "1372813089189561287"
       cluster_id  = "1379661944630234067"

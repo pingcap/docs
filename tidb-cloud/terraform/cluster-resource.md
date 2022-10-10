@@ -19,11 +19,97 @@ You can get all the projects by project data source first.
 
 1. Create a `main.tf` file:
 
+   - Use the `data` block to define the data source of TiDB Cloud, including the data source type and the data source name. For example, to define the project data source, you need to specify the type name as `tidbcloud_project` and the data source name as your project name.
+   - Use the `output` block to get the information, and expose the information for other Terraform configurations to use. It works similarly to returned values in programming languages. See [Terraform documentation](https://www.terraform.io/language/values/outputs) for more details.
 
-- Use the `data` block to define the data source of TiDB Cloud, including the data source type and the data source name. For example, to define the project data source, you need to specify the type name as `tidbcloud_project` and the data source name as your project name.
-- Use the `output` block to get the information, and expose the information for other Terraform configurations to use. It works similarly to returned values in programming languages. See [Terraform documentation](https://www.terraform.io/language/values/outputs) for more details.
+   You can find all the supported configurations for the data sources and resources [here](https://registry.terraform.io/providers/tidbcloud/tidbcloud/latest/docs).
+   
+   ```
+   terraform {
+     required_providers {
+       tidbcloud = {
+         source = "tidbcloud/tidbcloud"
+         version = "~> 0.0.1"
+       }
+     }
+     required_version = ">= 1.0.0"
+   }
+   
+   provider "tidbcloud" {
+     username = "fake_username"
+     password = "fake_password"
+   }
+   
+   data "tidbcloud_project" "example_project" {
+     page      = 1
+     page_size = 10
+   }
+   
+   output "projects" {
+     value = data.tidbcloud_project.example_project.items
+   }
+   ```
 
-You can find all the supported configurations for the data sources and resources [here](https://registry.terraform.io/providers/tidbcloud/tidbcloud/latest/docs).
+2. Run the `terraform apply` command to apply the configurations. You need to type `yes` at the confirmation prompt to proceed.
+
+   To skip the prompt, use `terraform apply --auto-approve`:
+
+   ```
+   $ terraform apply --auto-approve
+   data.tidbcloud_project.example_project: Reading...
+   data.tidbcloud_project.example_project: Read complete after 1s [id=just for test]
+   
+   Changes to Outputs:
+     + projects = [
+         + {
+             + cluster_count    = 0
+             + create_timestamp = "1649154426"
+             + id               = "1372813089191121286"
+             + name             = "test1"
+             + org_id           = "1372813089189921287"
+             + user_count       = 1
+           },
+         + {
+             + cluster_count    = 1
+             + create_timestamp = "1640602740"
+             + id               = "1372813089189561287"
+             + name             = "default project"
+             + org_id           = "1372813089189921287"
+             + user_count       = 1
+           },
+       ]
+   
+   You can apply this plan to save these new output values to the Terraform state, without changing any real infrastructure.
+   
+   Apply complete! Resources: 0 added, 0 changed, 0 destroyed.
+   
+   Outputs:
+   
+   projects = tolist([
+     {
+       "cluster_count" = 0
+       "create_timestamp" = "1649154426"
+       "id" = "1372813089191121286"
+       "name" = "test1"
+       "org_id" = "1372813089189921287"
+       "user_count" = 1
+     },
+     {
+       "cluster_count" = 1
+       "create_timestamp" = "1640602740"
+       "id" = "1372813089189561287"
+       "name" = "default project"
+       "org_id" = "1372813089189921287"
+       "user_count" = 1
+     },
+   ])
+   ```
+
+Now, you can get all the available projects from the output. Copy one of the project IDs that you need.
+
+## Get cluster specification information with cluster-spec data source
+
+Before creating a TiDB cluster, you may need to get the available configuration values (cloud providers, regions, and so on.) by the cluster-spec data source:
 
 ```
 terraform {
@@ -41,78 +127,6 @@ provider "tidbcloud" {
   password = "fake_password"
 }
 
-data "tidbcloud_project" "example_project" {
-  page      = 1
-  page_size = 10
-}
-
-output "projects" {
-  value = data.tidbcloud_project.example_project.items
-}
-```
-
-2. Run the `terraform apply` command to apply the configurations. You need to type `yes` at the confirmation prompt to proceed.
-
-To skip the prompt, use `terraform apply --auto-approve`:
-
-```
-$ terraform apply --auto-approve
-data.tidbcloud_project.example_project: Reading...
-data.tidbcloud_project.example_project: Read complete after 1s [id=just for test]
-
-Changes to Outputs:
-  + projects = [
-      + {
-          + cluster_count    = 0
-          + create_timestamp = "1649154426"
-          + id               = "1372813089191121286"
-          + name             = "test1"
-          + org_id           = "1372813089189921287"
-          + user_count       = 1
-        },
-      + {
-          + cluster_count    = 1
-          + create_timestamp = "1640602740"
-          + id               = "1372813089189561287"
-          + name             = "default project"
-          + org_id           = "1372813089189921287"
-          + user_count       = 1
-        },
-    ]
-
-You can apply this plan to save these new output values to the Terraform state, without changing any real infrastructure.
-
-Apply complete! Resources: 0 added, 0 changed, 0 destroyed.
-
-Outputs:
-
-projects = tolist([
-  {
-    "cluster_count" = 0
-    "create_timestamp" = "1649154426"
-    "id" = "1372813089191121286"
-    "name" = "test1"
-    "org_id" = "1372813089189921287"
-    "user_count" = 1
-  },
-  {
-    "cluster_count" = 1
-    "create_timestamp" = "1640602740"
-    "id" = "1372813089189561287"
-    "name" = "default project"
-    "org_id" = "1372813089189921287"
-    "user_count" = 1
-  },
-])
-```
-
-Now, you can get all the available projects from the output. Copy one of the project IDs that you need.
-
-## Get cluster specification information with cluster-spec data source
-
-Before creating a TiDB cluster, you may need to get the available configuration values (cloud providers, regions, and so on.) by the cluster-spec data source:
-
-```
 data "tidbcloud_cluster_spec" "example_cluster_spec" {
 }
 
@@ -265,6 +279,21 @@ Then, you can create a Dedicated Tier cluster with the Project ID and the spec i
 1. Use the `resource` block to define the resource of TiDB Cloud. It consists of the resource type and the resource name. In this example, the resource type is `tidbcloud_cluster` and the name is `example_cluster`.
 
     ```
+   terraform {
+     required_providers {
+       tidbcloud = {
+         source = "tidbcloud/tidbcloud"
+         version = "~> 0.0.1"
+       }
+     }
+     required_version = ">= 1.0.0"
+   }
+   
+   provider "tidbcloud" {
+     username = "fake_username"
+     password = "fake_password"
+   }
+   
     resource "tidbcloud_cluster" "example_cluster" {
       project_id     = "1372813089189561287"
       name           = "firstCluster"
