@@ -34,10 +34,10 @@ Resources
 
 Data sources
 
-- `project`
-- `cluster spec`
-- `restore`
-- `backup`
+- `tidbcloud_project`
+- `tidbcloud_cluster_spec`
+- `tidbcloud_restore`
+- `tidbcloud_backup`
 
 You can get all the available configurations for the resources and data sources in this [document](https://registry.terraform.io/providers/tidbcloud/tidbcloud/latest/docs).
 
