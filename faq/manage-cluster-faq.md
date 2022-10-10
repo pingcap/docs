@@ -61,15 +61,9 @@ For details about TiDB version management, see [TiDB versioning](/releases/versi
 
 ### What's the difference between various TiDB master versions?
 
-<<<<<<< HEAD
-The TiDB community is highly active. After the 1.0 GA release, the engineers have been keeping optimizing and fixing bugs. Therefore, the TiDB version is updated quite fast. If you want to keep informed of the latest version, see [TiDB Weekly update](https://pingcap.com/weekly/).
-
-It is recommeneded to [deploy TiDB using TiUP](/production-deployment-using-tiup.md). TiDB has a unified management of the version number after the 1.0 GA release. You can view the version number using the following two methods:
-=======
 The TiDB community is highly active. The engineers have been keeping optimizing features and fixing bugs. Therefore, the TiDB version is updated quite fast. If you want to keep informed of the latest version, see [TiDB Release Timeline](/releases/release-timeline.md).
 
-It is recommeneded to deploy TiDB [using TiUP](/production-deployment-using-tiup.md) or [using TiDB Operator](https://docs.pingcap.com/tidb-in-kubernetes/stable). TiDB has a unified management of the version number. You can view the version number using one of the following methods:
->>>>>>> d54cd7caa (faq: correct description about TiDB versions (#10694))
+It is recommended to deploy TiDB [using TiUP](/production-deployment-using-tiup.md) or [using TiDB Operator](https://docs.pingcap.com/tidb-in-kubernetes/stable). TiDB has a unified management of the version number. You can view the version number using one of the following methods:
 
 - `select tidb_version()`
 - `tidb-server -V`
