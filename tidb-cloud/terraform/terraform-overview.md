@@ -20,7 +20,7 @@ If you are looking for a simplified way to automate resource provisioning and yo
 - [Terraform](https://www.terraform.io/downloads.html) >= 1.0
 - [Go](https://golang.org/doc/install) >= 1.18 (if you want to build the provider plugin)
 
-## Supports
+## Supported resources and data sources
 
 [Resources](https://www.terraform.io/language/resources) and [Data sources](https://www.terraform.io/language/data-sources) are the two most important elements in the Terraform language.
 
