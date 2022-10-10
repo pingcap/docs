@@ -11,7 +11,7 @@ If you are looking for a simplified way to automate resource provisioning and yo
 
 - Get your project information.
 - Get cluster specification information, such as supported cloud provider, region and node size.
-- Manage your TiDB cluster, including creating, scaling, pausing and resuming a cluster.
+- Manage your TiDB cluster, including creating, scaling, pausing, and resuming a cluster.
 - Create and delete a backup for your cluster.
 - Create a restore task for your cluster.
 
