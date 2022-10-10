@@ -59,7 +59,7 @@ For detailed steps, see [TiDB Cloud API documentation](https://docs.pingcap.com/
    - The `version` attribute is optional, which specifies the version of the provider. If it is not specified, the latest provider version is used by default.
    - The `required_version` is optional, which specifies the version of Terraform. If  it is not specified, the latest Terraform version is used by default.
 
-2. To get the TiDB Cloud Terraform Provider, run the `terraform init` command. It will download the provider from the Terraform registry.
+2. Run the `terraform init` command to download TiDB Cloud Terraform Provider from Terraform Registry.
 
    ```
    $ terraform init
