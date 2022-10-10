@@ -17,15 +17,9 @@ To make this mechanism effective, you need to properly configure TiKV and PD so 
 
 ### Configure `labels` for TiKV
 
-<<<<<<< HEAD
-You can use the command-line flag or set the TiKV configuration file to bind some attributes in the form of key-value pairs. These attributes are called `labels`. After TiKV is started, it reports its `labels` to PD so users can identify the location of TiKV nodes.
-
-Assume that the topology has three layers: zone > rack > host, and you can use these labels (zone, rack, host) to set the TiKV location in one of the following methods:
-=======
 You can use the command-line flag or set the TiKV or TiFlash configuration file to bind some attributes in the form of key-value pairs. These attributes are called `labels`. After TiKV and TiFlash are started, they report their `labels` to PD so users can identify the location of TiKV and TiFlash nodes.
 
 Assume that the topology has four layers: zone > data center (dc) > rack > host, and you can use these labels (zone, dc, rack, host) to set location of the TiKV and TiFlash. To set labels for TiKV and TiFlash, you can use one of the following methods:
->>>>>>> 94c619ecd (add tiflash label settings example (#10699))
 
 + Use the command-line flag to start a TiKV instance:
 
