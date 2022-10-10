@@ -9,21 +9,13 @@ This document describes how to manage user access of the [TiDB Cloud console](ht
 
 ## Sign in
 
-1. Navigate to the TiDB Cloud login page: <https://tidbcloud.com>.
+1. Go to the TiDB Cloud login page: <https://tidbcloud.com>.
 
-2. Depending on how you signed up TiDB Cloud, do one of the following:
-
-    - If you signed up with a Google account, click **Sign in with Google**.
-    - If you signed up with a GitHub account, click **Sign in with GitHub**.
-    - If you signed up with an email address and password, enter your email and password, and then click **Sign In**.
+2. On the TiDB Cloud login page, sign in with Google, GitHub, or email.
 
 ## Sign out
 
-After you have signed into TiDB Cloud, if you need to sign out, perform the following steps:
-
-1. Click the account name on the upper right of the window.
-
-2. Click **Logout**.
+In the upper-right corner of the TiDB Cloud console, click your account name and select **Logout**.
 
 ## Manage user passwords
 
@@ -48,9 +40,9 @@ To change the password, take the following steps:
 
 4. Click **Change Password**, and then check your mail box for the link to reset the password.
 
-<Note>
-The new password must not be the same as any of the previous four passwords.
-</Note>
+> **Note:**
+>
+> The new password must not be the same as any of the previous four passwords.
 
 If your password is not changed within 90 days, you will get a prompt to reset your password when you log in to TiDB Cloud. It is recommended that you follow the prompt to reset the password.
 
@@ -168,21 +160,17 @@ If you are the owner of an organization, you can perform the following steps to 
 
 There are four roles in an organization. The permissions of each role are as follows:
 
-- Owner:
-    - Invite members to join the organization and remove members from the the organization
-    - Configure the roles of organization members
-    - Create and rename projects
-    - Invite members to join a project and remove members from a project
-    - Edit time zone
-    - View bills and edit payment information
-- Member:
-    - Can be invited to join a project and obtain project instance management rights
-- Billing Admin:
-    - View bills and edit payment information
-    - Can be invited to join a project and obtain project instance management rights
-- Audit Admin:
-    - View and configure audit logging
-    - Can be invited to join a project and obtain project instance management rights
+|  Permission                                                                        | Owner | Member | Billing Admin | Audit Admin |
+|---------------------------------------------------------------------------------------|-------|--------|---------------|-------------|
+| Invite members to join the organization, and remove members from the organization | ✅     | ❌      | ❌             | ❌           |
+| Set roles for an organization member                                                  | ✅     | ❌      | ❌             | ❌           |
+| Create and rename projects                                                            | ✅     | ❌      | ❌             | ❌           |
+| Invite members to join a project, and remove members from a project                   | ✅     | ❌      | ❌             | ❌           |
+| Edit time zone                                                                        | ✅     | ❌      | ❌             | ❌           |
+| View bills and edit payment information                                               | ✅     | ❌      | ✅             | ❌           |
+| View and configure audit logging                                                      | ❌     | ❌      | ❌             | ✅           |
+| Obtain project instance management rights                                             | ✅     | ✅      | ✅             | ✅           |
+| Manage an API key                                                                                              | ✅     | ❌      | ❌             | ❌            |
 
 ## Remove an organization member
 
