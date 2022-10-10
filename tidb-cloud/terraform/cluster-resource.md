@@ -11,7 +11,7 @@ Besides, you will also learn how to get the necessary information from project d
 
 ## Prerequisites
 
-Before you begin, you need to [get TiDB Cloud Terraform Provider](/tidb-cloud/terraform/tidbcloud-provider.md) first.
+Before you begin, you need to [Get TiDB Cloud Terraform Provider](/tidb-cloud/terraform/tidbcloud-provider.md) first.
 
 ## Get project ID from the project data source
 
