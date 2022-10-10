@@ -109,4 +109,4 @@ export TIDBCLOUD_USERNAME = ${public_key}
 export TIDBCLOUD_PASSWORD = ${private_key}
 ```
 
-Now, you can use the TiDB Cloud Terraform Provider. You can get started by managing the cluster with [cluster resource](/tidb-cloud/terraform/cluster-resource.md).
+Now, you can use the TiDB Cloud Terraform Provider. You can get started by managing a cluster with [cluster resource](/tidb-cloud/terraform/cluster-resource.md).
