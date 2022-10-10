@@ -51,7 +51,7 @@ output "projects" {
 }
 ```
 
-Run `terraform apply` command to apply the configurations. You need to type `yes` at the confirmation prompt to proceed.
+2. Run the `terraform apply` command to apply the configurations. You need to type `yes` at the confirmation prompt to proceed.
 
 To skip the prompt, use `terraform apply --auto-approve`:
 
