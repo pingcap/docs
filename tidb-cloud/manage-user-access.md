@@ -160,7 +160,7 @@ If you are the owner of an organization, you can perform the following steps to 
 
 There are four roles in an organization. The permissions of each role are as follows:
 
-|                                                                                       | Owner | Member | Billing Admin | Audit Admin |
+|  Permission                                                                        | Owner | Member | Billing Admin | Audit Admin |
 |---------------------------------------------------------------------------------------|-------|--------|---------------|-------------|
 | Invite members to join the organization, and remove members from the organization | ✅     | ❌      | ❌             | ❌           |
 | Set roles for an organization member                                                  | ✅     | ❌      | ❌             | ❌           |
