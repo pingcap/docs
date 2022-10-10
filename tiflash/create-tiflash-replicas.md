@@ -166,7 +166,7 @@ When configuring replicas, if you need to distribute TiFlash replicas to multipl
             zone: "z2"
     ```
 
-Note that the `flash.proxy.labels` configuration in earlier versions cannot handle special characters in the available zone name correctly. It is recommended to use the `server.labels` in `learner_config` to configure the name of an available zone.
+    Note that the `flash.proxy.labels` configuration in earlier versions cannot handle special characters in the available zone name correctly. It is recommended to use the `server.labels` in `learner_config` to configure the name of an available zone.
 
 2. After starting a cluster, specify the labels when creating replicas.
 
