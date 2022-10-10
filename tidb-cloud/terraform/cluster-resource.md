@@ -20,7 +20,7 @@ You can get all the projects by project data source first.
 1. Create a `main.tf` file:
 
 
-- Use the `data` block to define the data source of TiDB Cloud. It consists of the data source type and the data source name. In this example, the data source type is `tidbcloud_project` and the name is `example_project`. The prefix of the type maps to the name of the provider.
+- Use the `data` block to define the data source of TiDB Cloud, including the data source type and the data source name. For example, to define the project data source, you need to specify the type name as `tidbcloud_project` and the data source name as your project name.
 - Use the `output` block to get the information, and expose the information for other Terraform configurations to use. It works similarly to returned values in programming languages. See [Terraform documentation](https://www.terraform.io/language/values/outputs) for more details.
 
 You can find all the supported configurations for the data sources and resources [here](https://registry.terraform.io/providers/tidbcloud/tidbcloud/latest/docs).
