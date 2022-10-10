@@ -26,7 +26,7 @@ TiDB version: 5.4.3
 
 + TiKV **owner: @tabokie, TW: @Oreoxmt**
 
-    - Support configuring RocksDB write stall settings with values smaller than flow control thresholds [#13467](https://github.com/tikv/tikv/issues/13467)
+    - Support configuring the RocksDB write stall settings to a value smaller than the flow control threshold [#13467](https://github.com/tikv/tikv/issues/13467)
     - (dup) Support configuring the `unreachable_backoff` item to avoid Raftstore broadcasting too many messages after one peer becomes unreachable [#13054](https://github.com/tikv/tikv/issues/13054)
 
 + PD **owner: @nolouch, TW: @Oreoxmt**
@@ -80,7 +80,7 @@ TiDB version: 5.4.3
     - (dup) Fix the issue that in the static partition prune mode, SQL statements with an aggregate condition might return wrong result when the table is empty [#35295](https://github.com/pingcap/tidb/issues/35295)
     - (dup) Fix the issue that TiDB might panic when executing the `UPDATE` statement [#32311](https://github.com/pingcap/tidb/issues/32311)
     - (dup) Fix the issue of wrong query result because the `UnionScan` operator cannot maintain the order [#33175](https://github.com/pingcap/tidb/issues/33175)
-    - (dup) Fix the issue that the UPDATE statements incorrectly eliminate the projection in some cases, which causes the `Can't find column` error  [#37568](https://github.com/pingcap/tidb/issues/37568)
+    - (dup) Fix the issue that the UPDATE statements incorrectly eliminate the projection in some cases, which causes the `Can't find column` error [#37568](https://github.com/pingcap/tidb/issues/37568)
     - (dup) Fix the issue that partitioned tables cannot fully use indexes to scan data in some cases [#33966](https://github.com/pingcap/tidb/issues/33966)
     - Fix the issue that the `EXECUTE` might throw an unexpected error in specific scenarios [#37187](https://github.com/pingcap/tidb/issues/37187)
     - Fix the issue that TiDB might return wrong results when using a `BIT` type index with prepared plan cache enabled [#33067](https://github.com/pingcap/tidb/issues/33067)
@@ -89,14 +89,14 @@ TiDB version: 5.4.3
 
 + TiKV **owner: @tabokie, TW: @Oreoxmt**
 
-    - Fix the issue that causes permission denied when TiKV gets an error from the web identity provider and fails back to the default provider [#13122](https://github.com/tikv/tikv/issues/13122)
+    - Fix the issue that causes permission denied error when TiKV gets an error from the web identity provider and fails back to the default provider [#13122](https://github.com/tikv/tikv/issues/13122)
     - (dup) Fix the issue that the PD client might cause deadlocks [#13191](https://github.com/tikv/tikv/issues/13191)
     - (dup) Fix the issue that PD does not reconnect to TiKV after the Region heartbeat is interrupted [#12934](https://github.com/tikv/tikv/issues/12934)
     - (dup) Fix the issue that Regions might be overlapped if Raftstore is busy [#13160](https://github.com/tikv/tikv/issues/13160)
 
 + PD **owner: @nolouch, TW: @Oreoxmt**
 
-    - Fix the issue that PD could not handle dashboard proxy requests correctly [#5321](https://github.com/tikv/pd/issues/5321)
+    - Fix the issue that PD cannot correctly handle dashboard proxy requests [#5321](https://github.com/tikv/pd/issues/5321)
     - (dup) Fix the issue that a removed tombstone store appears again after the PD leader transfer ​​[#4941](https://github.com/tikv/pd/issues/4941)
     - (dup) Fix the issue that the TiFlash learner replica might not be created [#5401](https://github.com/tikv/pd/issues/5401)
 
