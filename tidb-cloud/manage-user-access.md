@@ -145,7 +145,6 @@ There are four roles in an organization. The permissions of each role are as fol
 | Invite members to join a project, and remove members from a project                   | ✅     | ❌      | ❌             | ❌           |
 | Edit time zone                                                                        | ✅     | ❌      | ❌             | ❌           |
 | View bills and edit payment information                                               | ✅     | ❌      | ✅             | ❌           |
-| Join a project                                                                        | ✅    | ✅      | ✅             | ✅           |
 | View and configure audit logging                                                      | ❌     | ❌      | ❌             | ✅           |
 | Obtain project instance management rights                                             | ✅     | ✅      | ✅             | ✅           |
 
