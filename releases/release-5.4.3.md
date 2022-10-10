@@ -82,6 +82,8 @@ TiDB version: 5.4.3
     - (dup) Fix the issue of wrong query result because the `UnionScan` operator cannot maintain the order [#33175](https://github.com/pingcap/tidb/issues/33175)
     - (dup) Fix the issue that the UPDATE statements incorrectly eliminate the projection in some cases, which causes the `Can't find column` error  [#37568](https://github.com/pingcap/tidb/issues/37568)
     - (dup) Fix the issue that partitioned tables cannot fully use indexes to scan data in some cases [#33966](https://github.com/pingcap/tidb/issues/33966)
+    - Fix the issue that the `EXECUTE` might throw an unexpected error in specific scenarios [#37187](https://github.com/pingcap/tidb/issues/37187)
+    - Fix the issue that TiDB might get wrong results when using a `BIT` type index and enabling the prepared plan cache [#33067](https://github.com/pingcap/tidb/issues/33067)
 
     <!--diagnosis **owner: @mornyx**-->
 
