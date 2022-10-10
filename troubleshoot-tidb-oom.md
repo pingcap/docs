@@ -84,20 +84,30 @@ This section describes the OOM issues and solutions caused by database issues.
 
 You can take the following measures to reduce the memory usage of SQL, depending on the different causes of OOM issues.
 
-- 如果 OOM 是由于 SQL 的执行计划不优，比如由于缺少合适的索引、统计信息过期、优化器 bug 等原因，导致选错了 SQL 的执行计划，进而出现巨大的中间结果集累积在内存中。这种情况下可以考虑采取以下措施：
-    - 添加合适的索引
-    - 使用算子的落盘功能
-    - 调整表之间的 JOIN 顺序
-    - 使用 hint 进行调优
+- 如果 SQL 的执行计划不优，比如由于缺少合适的索引、统计信息过期、优化器 bug 等原因，会导致选错 SQL 的执行计划，进而出现巨大的中间结果集累积在内存中。这种情况下可以考虑采取以下措施：
+- If the execution plan of SQL is not optimal, for example, due to lack of proper indexes, outdated statistics, and optimizer bugs, a wrong execution plan of SQL might be selected. A huge intermediate result set will then be accumulated in the memory. In this case, consider the following measures.
+    - Add appropriate indexes
+    - Use the [disk spill](/configure-memory-usage.md#disk-spill) feature for execution operators
+    - Adjust the JOIN order between tables
+    - Use hints to optimize SQL
 
 - 一些算子和函数不支持下推到存储层，导致出现巨大的中间结果集累积。此时可能需要改写业务 SQL，或使用 hint 进行调优，来使用可下推的函数或算子。
+- Some operators and functions do not support pushing down to the storage level, resulting in a huge accumulation of intermediate result sets. In this case, you need to refine the business SQL statements or use hints to tune and use the functions or operators that can be pushed down.
 
 - 执行计划中存在算子 HashAgg。HashAgg 是多线程并发执行，虽然执行速度较快，但会消耗较多内存。可以尝试使用 `STREAM_AGG()` hint 替代。
+- The execution plan contains the operator HashAgg. HashAgg is executed concurrently by multiple threads. It is faster but consumes more memory. You can use the `STREAM_AGG()` hint instead.
 
 - 调小同时读取的 Region 的数量，或降低算子并发度，以避免因高并发导致的内存问题。对应的系统变量包括：
+- Reduce the number of regions to be read simultaneously or reduce the concurrency of operators to avoid memory problems caused by high concurrency. The corresponding system variables include:
     - [`tidb_distsql_scan_concurrency`](/system-variables.md#tidb_distsql_scan_concurrency)
     - [`tidb_index_serial_scan_concurrency`](/system-variables.md#tidb_index_serial_scan_concurrency)
-    - [`tidb_executor_concurrency`](/system-variables.md#tidb_executor_concurrency-从-v50-版本开始引入)
+    - [`tidb_executor_concurrency`](/system-variables.md#tidb_executor_concurrency-span-classversion-marknew-in-v50span)
 
 - 问题发生时间附近，session 的并发度过高。此时可能需要添加节点进行扩容。
+- The concurrency of sessions is too high near the time point when the problem occurs. In this case, consider scaling up the TiDB nodes.
 
+#### 大事务或大写入在 TiDB 节点上消耗太多内存 Large transactions or large writes consume too much memory on TiDB nodes
+
+需要提前进行内存的容量规划，这是因为执行事务时 TiDB 进程的内存消耗相对于事务大小会存在一定程度的放大，最大可以达到提交事务大小的 2 倍到 3 倍以上。
+
+针对单个大事务，可以通过拆分的方式调小事务大小。
