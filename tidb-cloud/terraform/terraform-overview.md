@@ -24,7 +24,7 @@ If you are looking for a simplified way to automate resource provisioning and yo
 
 [Resources](https://www.terraform.io/language/resources) and [Data sources](https://www.terraform.io/language/data-sources) are the two most important elements in the Terraform language.
 
-TiDB Cloud supports the following Resources and Data sources:
+TiDB Cloud supports the following resources and data sources:
 
 Resources
 
