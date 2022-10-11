@@ -372,7 +372,7 @@ Then, you can create a Dedicated Tier cluster with the Project ID and the spec i
       Enter a value: 
     ```
 
-   As in the above result, Terraform generates generate an execution plan for you:
+   As in the above result, Terraform generates an execution plan for you, which describes the actions Terraform will take:
 
    - You can check the difference between the configurations and the states.
    - You can also see the results of this `apply`. It will add a new resource, and no resource will be changed or destroyed.
