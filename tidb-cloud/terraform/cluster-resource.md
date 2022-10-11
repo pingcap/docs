@@ -1,5 +1,5 @@
 ---
-title: Cluster Resource
+title: Use Cluster Resource
 summary: Learn how to use cluster resource
 ---
 
@@ -109,7 +109,7 @@ Now, you can get all the available projects from the output. Copy one of the pro
 
 ## Get cluster specification information with cluster-spec data source
 
-Before creating a TiDB cluster, you may need to get the available configuration values (cloud providers, regions, and so on.) by the cluster-spec data source:
+Before creating a TiDB cluster, you may need to get the available configuration values (cloud providers, regions, and so on.) by the cluster-spec data source. You can edit the `main.tf` as follows:
 
 ```
 terraform {
@@ -277,7 +277,7 @@ In the results:
 
 Then, you can create a Dedicated Tier cluster with the Project ID and the spec info using cluster resource.
 
-1. Use the `resource` block to define the resource of TiDB Cloud. It consists of the resource type and the resource name. In this example, the resource type is `tidbcloud_cluster` and the name is `example_cluster`.
+1. Create a cluster directory and entry it. Then create a `cluster.tf` file:
 
     ```
    terraform {
@@ -318,6 +318,8 @@ Then, you can create a Dedicated Tier cluster with the Project ID and the spec i
       }
     }
     ```
+
+   Use the `resource` block to define the resource of TiDB Cloud. It consists of the resource type and the resource name. In this example, the resource type is `tidbcloud_cluster` and the name is `example_cluster`.
 
 2. Run the `terraform apply` command. It is not recommended to use `terraform apply --auto-approve` when you apply a resource.
 
@@ -482,7 +484,7 @@ For a Dedicated Tier cluster, you can use Terraform to manage cluster resources 
 
 ### Add a TiFlash component
 
-1. Add TiFlash configuration in `components`:
+1. Edit the `cluster.tf` and add TiFlash configuration in `components` field:
 
     ```
         components = {
@@ -601,7 +603,7 @@ The `MODIFYING` status indicates that the cluster is changing now. Wait for a mo
 
 You can scale a TiDB cluster when its status is `AVAILABLE`.
 
-1. For example, to add 1 node for TiDB, 3 nodes for TiKV (TiKV needs to add at least 3 nodes for its step is 3. You can get this information in cluster-spec data source), and 1 node for TiFlash, you can update the configurations as follows:
+1. For example, to add 1 node for TiDB, 3 nodes for TiKV (TiKV needs to add at least 3 nodes for its step is 3. You can get this information in cluster-spec data source), and 1 node for TiFlash, you can edit the `cluster.tf` and add as follows:
 
    ```
        components = {
@@ -682,7 +684,7 @@ You can pause a cluster when its status is `AVAILABLE` or resume a cluster when 
 - Set `paused = true` to pause a cluster.
 - Set `paused = false` to resume a cluster.
 
-1. Add the `pause = true` into the `config` field of the cluster resource:
+1. Add the `pause = true` into the `config` field of the cluster resource in `cluster.tf`:
 
    ```
    config = {

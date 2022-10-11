@@ -11,7 +11,8 @@ If you are looking for a simplified way to automate resource provisioning and yo
 
 - Terraform:
 
-Terraform is an infrastructure as code tool that lets you define both cloud and on-prem resources in human-readable configuration files that you can version, reuse, and share.
+[Terraform](https://www.terraform.io/docs) is an infrastructure as code tool that lets you define both cloud and on-prem resources in human-readable configuration files that you can version, reuse, and share. It is highly recommended learning the Terraform first.
+
 
 - TiDB Cloud Terraform Provider:
 
@@ -25,11 +26,9 @@ TiDB Cloud Terraform Provider is a plugin that allows you to use Terraform to ma
 
 ## Requirements
 
-- [Create a TiDB Cloud account](https://tidbcloud.com/free-trial)
-- [Create a TiDB Cloud account](https://tidbcloud.com/free-trial)
-- [Create a TiDB Cloud account](https://tidbcloud.com/free-trial)
-- [Download Terraform](https://www.terraform.io/downloads.html) >= 1.0
-- [Intall Go](https://golang.org/doc/install) >= 1.18 (if you want to build TiDB Cloud Terraform Provider)
+- [A TiDB Cloud account](https://tidbcloud.com/free-trial)
+- [Terraform version](https://www.terraform.io/downloads.html) >= 1.0
+- [Go version](https://golang.org/doc/install) >= 1.18 (if you want to build [TiDB Cloud Terraform Provider](https://github.com/tidbcloud/terraform-provider-tidbcloud) locally)
 
 ## Supported resources and data sources
 
@@ -40,8 +39,8 @@ TiDB Cloud supports the following resources and data sources:
 Resources
 
 - `tidbcloud_cluster`
-- `tidbcloud_backup` (`update` is not supported)
-- `tidbcloud_restore` (`update` and `delete` are not supported)
+- `tidbcloud_backup` (updates is not supported)
+- `tidbcloud_restore` (updates and deletion are not supported)
 
 Data sources
 
@@ -57,6 +56,6 @@ You can get all the available configurations for the resources and data sources 
 To start using TiDB Cloud Terraform Provider, refer to the following documents:
 
 - [Get TiDB Cloud Terraform Provider](/tidb-cloud/terraform/tidbcloud-provider.md)
-- [Cluster Resource](/tidb-cloud/terraform/cluster-resource.md)
-- [Backup Resource](/tidb-cloud/terraform/backup-resource.md)
-- [Restore Resource](/tidb-cloud/terraform/restore-resource.md)
+- [Use Cluster Resource](/tidb-cloud/terraform/cluster-resource.md)
+- [Use Backup Resource](/tidb-cloud/terraform/backup-resource.md)
+- [Use Restore Resource](/tidb-cloud/terraform/restore-resource.md)

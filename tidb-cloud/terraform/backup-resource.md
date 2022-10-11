@@ -1,5 +1,5 @@
 ---
-title: Backup Resource
+title: Use Backup Resource
 summary: Learn how to use backup resource
 ---
 
@@ -14,7 +14,7 @@ You can learn how to create a backup of a TiDB Cloud cluster with backup resourc
 
 ## Create a backup with backup resource
 
-1. Copy the following configuration example. You need to replace the `project_id` and `cluster_id` values with your own.
+1. Create a backup directory and entry it. Then create a `backup.tf` file. You need to replace the `project_id` and `cluster_id` values with your own.
 
     ```
     terraform {
