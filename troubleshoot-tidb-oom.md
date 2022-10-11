@@ -5,13 +5,13 @@ summary: Learn how to diagnose and resolve TiDB Out Of Memory (OOM) issues.
 
 # Troubleshoot OOM Issues
 
-This document describes how to troubleshoot TiDB Out Of Memory (OOM) problems, including phenomenon, cuases, and solutions.
+This document describes how to troubleshoot TiDB Out Of Memory (OOM) problems, including phenomenon, causes, and solutions.
 
 ## General troubleshooting process
 
 When you troubleshoot OOM issues, follow this process:
 
-1. First, confirm whether it is an OOM issue. Execute the following command to check the operating system logs. If the result has the OOM-killer logs near the time point when the problem occurs, then it is likely that an OOM problem has occured.
+1. First, confirm whether it is an OOM issue. Execute the following command to check the operating system logs. If the result has the OOM-killer logs near the time point when the problem occurs, then it is likely that an OOM problem has occurred.
 
     ```shell
     dmesg -T | grep tidb-server
@@ -52,7 +52,7 @@ Typical failure phenomena of OOM include (but are not limited to) the following:
     - **TiDB-Runtime** > **Memory Usage** shows that `estimate-inuse` keeps rising.
 
 - Check `tidb.log`, and you can find the following log entries:
-    - Alerm about OOM: [WARN] [memory_usage_alarm.go:139] ["tidb-server has the risk of OOM. Running SQLs and heap profile will be recorded in record path"]. For more information, see [`memory-usage-alarm-ratio`](/system-variables.md#tidb_memory_usage_alarm_ratio).
+    - Alarm about OOM: [WARN] [memory_usage_alarm.go:139] ["tidb-server has the risk of OOM. Running SQLs and heap profile will be recorded in record path"]. For more information, see [`memory-usage-alarm-ratio`](/system-variables.md#tidb_memory_usage_alarm_ratio).
     - Log entries about restart: [INFO] [printer.go:33] ["Welcome to TiDB."]
 
 ## Typical causes and solutions
@@ -69,7 +69,7 @@ The following are common causes of OOM caused by deployment issues:
 
 - The memory capacity of the operating system is too small, and results in insufficient memory.
 - The TiUP [`resource_control`](/tiup/tiup-cluster-topology-reference.md#global) configuration is not appropriate.
-- In the case of hybrid deployments (meaning that TiDB and other applications are deployed on the same server), TiDB is killed accidentially by the OOM-killer.
+- In the case of hybrid deployments (meaning that TiDB and other applications are deployed on the same server), TiDB is killed accidentally by the OOM-killer.
 
 ### Database issues
 
@@ -102,7 +102,7 @@ You can take the following measures to reduce the memory usage of SQL, depending
 
 #### Large transactions or large writes consume too much memory
 
-You need to plan in advance for memory capacity. TiDB can consume up to two to three times more memory than the size of a commited transaction when processing a transaction.
+You need to plan in advance for memory capacity. TiDB can consume up to two to three times more memory than the size of a committed transaction when processing a transaction.
 
 For a single large transaction, you can split the transaction to make it smaller in size.
 
