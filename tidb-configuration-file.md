@@ -409,7 +409,7 @@ Configuration items related to performance.
 
 - Sets the priority for all statements.
 - Default value: `NO_PRIORITY`
-- Value options: The default value `NO_PRIORITY` means that the priority for statements is not forced to change. Other options are `LOW_PRIORITY`, `DELAYED`, and `HIGH_PRIORITY` in ascending priority order.
+- Value options: The default value `NO_PRIORITY` means that the priority for statements is not forced to change. Other options are `LOW_PRIORITY`, `DELAYED`, and `HIGH_PRIORITY` in ascending order.
 
 ### `distinct-agg-push-down`
 
