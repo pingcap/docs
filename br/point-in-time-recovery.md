@@ -91,18 +91,6 @@ Testing scenario 2 (on-premises):
 - During the backup process, do not exchange partition. For details, refer to [Executing the Exchange Partition DDL during PITR recovery](/br/pitr-troubleshoot.md#what-should-i-do-if-an-error-occurs-when-executing-the-exchange-partition-ddl-during-pitr-log-restoration).
 - Do not restore the log backup data of a certain time period repeatedly. If you restore the log backup data of a range `[t1=10, t2=20)` repeatedly, the restored data might be inconsistent.
 - For other known limitations, refer to [PITR Known Issues](/br/pitr-known-issues.md).
-<<<<<<< HEAD
-=======
-
-### Version compatibility check
-
-In v6.3.0, backup files generated after PITR are compressed in a new method. Small files are merged before being stored (to solve problems caused by too many small files). However, TiDB clusters of the earlier version are not compatible with backup data generated in v6.3 clusters. See the following table:
-
-| Restore version (horizontal) \ Backup version (vertical)   | Use PITR v6.2.0 to restore TiDB v6.2.0 | Use PITR v6.3.0 to restore TiDB v6.3.0 |
-|  ----  |  ----  | ---- |
-|Use PITR v6.2.0 to back up TiDB v6.2.0 | Compatible | Compatible |
-|Use PITR v6.3.0 to back up TiDB v6.3.0 | Incompatible |Compatible |
-
 ## Architecture
 
 PITR is used for snapshot backup and restoration *and* log backup and restoration. For snapshot backup and restoration, refer to [BR Design Principles](/br/backup-and-restore-design.md). This section describes the implementation of log backup and restoration.
@@ -132,4 +120,3 @@ When a log restoration task is performed:
 - [Perform Log Backup and Restoration Using BR](/br/br-log-command-line.md)
 - [Use PITR](/br/pitr-usage.md)
 - [PITR Monitoring and Alert](/br/pitr-monitoring-and-alert.md)
->>>>>>> fd2841f48 (br: add missing sections for pitr (#10535))
