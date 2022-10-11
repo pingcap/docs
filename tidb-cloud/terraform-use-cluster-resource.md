@@ -7,7 +7,7 @@ summary: Learn how to use the cluster resource to create and modify a TiDB Cloud
 
 You can learn how to create and modify a TiDB Cloud cluster with the `tidbcloud_cluster` resource in this document.
 
-Besides, you will also learn how to get the necessary information from the `tidbcloud_project` and `tidbcloud_cluster_spec` data sources.
+Besides, you will also learn how to get the necessary information with the `tidbcloud_project` and `tidbcloud_cluster_spec` data sources.
 
 ## Prerequisites
 
@@ -126,25 +126,22 @@ To get the cluster specification information, you can use the `tidbcloud_cluster
 
     ```
     terraform {
-    required_providers {
+      required_providers {
         tidbcloud = {
-        source = "tidbcloud/tidbcloud"
-        version = "~> 0.0.1"
+          source = "tidbcloud/tidbcloud"
+          version = "~> 0.0.1"
         }
+      }
+      required_version = ">= 1.0.0"
     }
-    required_version = ">= 1.0.0"
-    }
-
     provider "tidbcloud" {
-    username = "fake_username"
-    password = "fake_password"
+      username = "fake_username"
+      password = "fake_password"
     }
-
     data "tidbcloud_cluster_spec" "example_cluster_spec" {
     }
-
     output "cluster_spec" {
-    value = data.tidbcloud_cluster_spec.example_cluster_spec.items
+      value = data.tidbcloud_cluster_spec.example_cluster_spec.items
     }
     ```
 
@@ -160,117 +157,117 @@ To get the cluster specification information, you can use the `tidbcloud_cluster
         "cluster_type" = "DEDICATED"
         "region" = "eu-central-1"
         "tidb" = tolist([
-        {
+          {
             "node_quantity_range" = {
-            "min" = 1
-            "step" = 1
+              "min" = 1
+              "step" = 1
             }
             "node_size" = "2C8G"
-        },
-        {
+          },
+          {
             "node_quantity_range" = {
-            "min" = 1
-            "step" = 1
+              "min" = 1
+              "step" = 1
             }
             "node_size" = "4C16G"
-        },
-        {
+          },
+          {
             "node_quantity_range" = {
-            "min" = 1
-            "step" = 1
+              "min" = 1
+              "step" = 1
             }
             "node_size" = "8C16G"
-        },
-        {
+          },
+          {
             "node_quantity_range" = {
-            "min" = 1
-            "step" = 1
+              "min" = 1
+              "step" = 1
             }
             "node_size" = "16C32G"
-        },
+          },
         ])
         "tiflash" = tolist([
-        {
+          {
             "node_quantity_range" = {
-            "min" = 0
-            "step" = 1
+              "min" = 0
+              "step" = 1
             }
             "node_size" = "8C64G"
             "storage_size_gib_range" = {
-            "max" = 2048
-            "min" = 500
+              "max" = 2048
+              "min" = 500
             }
-        },
-        {
+          },
+          {
             "node_quantity_range" = {
-            "min" = 0
-            "step" = 1
+              "min" = 0
+              "step" = 1
             }
             "node_size" = "16C128G"
             "storage_size_gib_range" = {
-            "max" = 2048
-            "min" = 500
+              "max" = 2048
+              "min" = 500
             }
-        },
+          },
         ])
         "tikv" = tolist([
-        {
+          {
             "node_quantity_range" = {
-            "min" = 3
-            "step" = 3
+              "min" = 3
+              "step" = 3
             }
             "node_size" = "2C8G"
             "storage_size_gib_range" = {
-            "max" = 500
-            "min" = 200
+              "max" = 500
+              "min" = 200
             }
-        },
-        {
+          },
+          {
             "node_quantity_range" = {
-            "min" = 3
-            "step" = 3
+              "min" = 3
+              "step" = 3
             }
             "node_size" = "4C16G"
             "storage_size_gib_range" = {
-            "max" = 2048
-            "min" = 200
+              "max" = 2048
+              "min" = 200
             }
-        },
-        {
+          },
+          {
             "node_quantity_range" = {
-            "min" = 3
-            "step" = 3
+              "min" = 3
+              "step" = 3
             }
             "node_size" = "8C32G"
             "storage_size_gib_range" = {
-            "max" = 4096
-            "min" = 500
+              "max" = 4096
+              "min" = 500
             }
-        },
-        {
+          },
+          {
             "node_quantity_range" = {
-            "min" = 3
-            "step" = 3
+              "min" = 3
+              "step" = 3
             }
             "node_size" = "8C64G"
             "storage_size_gib_range" = {
-            "max" = 4096
-            "min" = 500
+              "max" = 4096
+              "min" = 500
             }
-        },
-        {
+          },
+          {
             "node_quantity_range" = {
-            "min" = 3
-            "step" = 3
+              "min" = 3
+              "step" = 3
             }
             "node_size" = "16C64G"
             "storage_size_gib_range" = {
-            "max" = 4096
-            "min" = 500
+              "max" = 4096
+              "min" = 500
             }
-        },
+          },
         ])
-    }
+      }
     </code></pre>
     </details>
 
@@ -417,7 +414,7 @@ The following example shows how to create a Dedicated Tier cluster.
 
     ```
 
-5. Use the `terraform show` or `terraform state show tidbcloud_cluster.example_cluster` command to inspect the state of your resource. The former will show the states of all  resources and data sources.
+5. Use the `terraform show` or `terraform state show tidbcloud_cluster.example_cluster` command to inspect the state of your resource. The former will show the states of all resources and data sources.
 
     ```shell
     $ terraform state show tidbcloud_cluster.example_cluster

@@ -113,4 +113,4 @@ Now, you can use the TiDB Cloud Terraform Provider.
 
 ## Next step
 
-Get started by managing a cluster with [cluster resource](/tidb-cloud/terraform-use-cluster-resource.md).
+Get started by managing a cluster with the [cluster resource](/tidb-cloud/terraform-use-cluster-resource.md).

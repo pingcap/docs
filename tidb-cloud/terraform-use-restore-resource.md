@@ -195,7 +195,7 @@ The following steps show you how to import the cluster created by the restore ta
     resource "tidbcloud_cluster" "restore_cluster1" {}
     ```
 
-2. Import the cluster by `terraform import tidbcloud_cluster.restore_cluster1 projectId,clusterId` (you can get the projectId and clusterId by restore resource):
+2. Import the cluster by `terraform import tidbcloud_cluster.restore_cluster1 projectId,clusterId` (you can get the projectId and clusterId by the restore resource):
 
     For example:
 
