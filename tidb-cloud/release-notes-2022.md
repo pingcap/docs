@@ -8,6 +8,19 @@ aliases: ['/tidbcloud/beta/supported-tidb-versions','/tidbcloud/release-notes']
 
 This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-cloud/) in 2022.
 
+## October 11, 2022
+
+**General changes**
+
+* Upgrade the default TiDB version of new [Developer Tier](/tidb-cloud/select-cluster-tier.md#developer-tier) clusters from [v6.2.0](https://docs.pingcap.com/tidb/v6.2/release-6.2.0) to [v6.3.0](https://docs.pingcap.com/tidb/v6.3/release-6.3.0).
+
+**Console changes**
+
+* Optimize billing information on the [billing details page](/tidb-cloud/tidb-cloud-billing.md#billing-details):
+
+    * Provide more fine-grained billing information at the node level in the **Summary By Service** section.
+    * Add a **Usage Details** section. You can also download usage details as a CSV file.
+
 ## September 27, 2022
 
 **General changes**
