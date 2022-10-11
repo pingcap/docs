@@ -5,7 +5,7 @@ summary: Learn how to diagnose and resolve TiDB Out Of Memory (OOM) issues.
 
 # Troubleshoot OOM Issues
 
-This document describes how to troubleshoot TiDB Out Of Memory (OOM) problems, including phenomenon, causes, and solutions.
+This document describes how to troubleshoot TiDB Out Of Memory (OOM) problems, including phenomena, causes, and solutions.
 
 ## Overall troubleshooting process
 
