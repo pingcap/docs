@@ -91,6 +91,7 @@ Testing scenario 2 (on-premises):
 - During the backup process, do not exchange partition. For details, refer to [Executing the Exchange Partition DDL during PITR recovery](/br/pitr-troubleshoot.md#what-should-i-do-if-an-error-occurs-when-executing-the-exchange-partition-ddl-during-pitr-log-restoration).
 - Do not restore the log backup data of a certain time period repeatedly. If you restore the log backup data of a range `[t1=10, t2=20)` repeatedly, the restored data might be inconsistent.
 - For other known limitations, refer to [PITR Known Issues](/br/pitr-known-issues.md).
+
 ## Architecture
 
 PITR is used for snapshot backup and restoration *and* log backup and restoration. For snapshot backup and restoration, refer to [BR Design Principles](/br/backup-and-restore-design.md). This section describes the implementation of log backup and restoration.
