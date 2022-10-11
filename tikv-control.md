@@ -243,17 +243,17 @@ Use the `compact` command to manually compact data of each TiKV.
 
 - To compact data in the local mode, use the following command:
 
-```shell
-$ tikv-ctl --data-dir /path/to/tikv compact --db kv
-success!
-```
+    ```shell
+    tikv-ctl --data-dir /path/to/tikv compact --db kv
+    success!
+    ```
 
 - To compact data in the remote mode, use the following command:
 
-```shell
-$ tikv-ctl --host ip:port compact --db kv
-success!
-```
+    ```shell
+    tikv-ctl --host ip:port compact --db kv
+    success!
+    ```
 
 ### Compact data of the whole TiKV cluster manually
 
