@@ -12,7 +12,7 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
 **General changes**
 
-* Upgrade the default TiDB version of new Developer Tier clusters from v6.2.0 to v6.3.0.
+* Upgrade the default TiDB version of new [Developer Tier](/tidb-cloud/select-cluster-tier.md#developer-tier) clusters from [v6.2.0](https://docs.pingcap.com/tidb/v6.2/release-6.2.0) to [v6.3.0](https://docs.pingcap.com/tidb/v6.3/release-6.3.0).
 
 **Console changes**
 
