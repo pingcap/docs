@@ -3509,3 +3509,19 @@ Internally, the TiDB parser transforms the `SET TRANSACTION ISOLATION LEVEL [REA
 - Type: Boolean
 - Default value: `ON`
 - This variable controls whether to use the high precision mode when computing the window functions.
+
+### tidb_external_ts <span class="version-mark">New in v6.4.0</span>
+
+- Scope: GLOBAL
+- Persists to cluster: Yes
+- Type: Integer
+- Default value: `0`
+- If [`tidb_enable_external_ts_read`](#tidb_enable_external_ts_read-new-in-v640) is set to `ON`, TiDB will read data with this timestamp.
+
+### tidb_enable_external_ts_read <span class="version-mark">New in v6.4.0</span>
+
+- Scope: SESSION | GLOBAL
+- Persists to cluster: Yes
+- Type: Boolean
+- Default value: `OFF`
+- If this variable is set to `ON`, TiDB will read data with the timestamp specified by [`tidb_external_ts`](#tidb_external_ts-new-in-v640).
