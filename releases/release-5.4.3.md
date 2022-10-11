@@ -115,7 +115,7 @@ TiDB version: 5.4.3
 
     + TiDB Lightning **owner: @niubell, TW: @ran-huang**
 
-        - Fix the issue of BigInt auto_increment column out of range error [#27397](https://github.com/pingcap/tidb/issues/27937)
+        - Fix the issue that an auto-increment column of the `BIGINT` type might be out of range [#27397](https://github.com/pingcap/tidb/issues/27937)
         - (dup) Fix the issue that de-duplication might cause TiDB Lightning to panic in extreme cases [#34163](https://github.com/pingcap/tidb/issues/34163)
         - (dup) Fix the issue that TiDB Lightning does not support columns starting with slash, number, or non-ascii characters in Parquet files [#36980](https://github.com/pingcap/tidb/issues/36980)
         - (dup) Fix the issue that TiDB Lightning fails to connect to TiDB when TiDB uses an IPv6 host [#35880](https://github.com/pingcap/tidb/issues/35880)
