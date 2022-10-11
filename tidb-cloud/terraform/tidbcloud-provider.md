@@ -41,7 +41,7 @@ For detailed steps, see [TiDB Cloud API documentation](https://docs.pingcap.com/
 
 ## Step 3. Download TiDB Cloud Terraform Provider
 
-1. Create a main.tf file:
+1. Create a `main.tf` file:
 
    ```
    terraform {
