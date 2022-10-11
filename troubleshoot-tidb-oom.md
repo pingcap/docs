@@ -177,7 +177,7 @@ To locate an OOM failure, you need to collect the following information:
     - Check `tidb_slow_query.log` on each TiDB node.
     - Run `grep "expensive_query" tidb.log` to check the corresponding log entries.
     - Run `EXPLAIN ANALYZE` to check memory usage of operators.
-    - Run `SELECT * FROM information_schema.processlist;` to check the value of the  `MEM`column.
+    - Run `SELECT * FROM information_schema.processlist;` to check the value of the `MEM` column.
 
 - Run the following command to collect TiDB Profile information when memory usage is high:
 
