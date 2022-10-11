@@ -13,7 +13,7 @@ Before you begin, make sure that the requirements in [TiDB Cloud Terraform Provi
 
 ## Step 1. Install Terraform
 
-TiDB Cloud Terraform Provider has been released to [Terraform registry](https://registry.terraform.io/). All you need to do is install Terraform (>=1.0).
+TiDB Cloud Terraform Provider has been released to [Terraform Registry](https://registry.terraform.io/). All you need to do is install Terraform (>=1.0).
 
 For Mac users, you can install Terraform with Homebrew.
 
