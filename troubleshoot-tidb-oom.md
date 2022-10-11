@@ -170,7 +170,7 @@ To locate an OOM failure, you need to collect the following information:
 
 - Check the SQL statements that consume more memory.
 
-    - View SQL statement analysis, slow queries and memory usage from SQL Dashboard.
+    - View SQL statement analysis, slow queries and memory usage from TiDB Dashboard.
     - Check `SLOW_QUERY` and `CLUSTER_SLOW_QUERY` in `INFORMATION_SCHEMA`.
     - Check `tidb_slow_query.log` on each TiDB node.
     - Run `grep "expensive_query" tidb.log` to check logs in `tidb.log`.
