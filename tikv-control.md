@@ -232,8 +232,8 @@ The properties can be used to check whether the Region is healthy or not. If not
 
 Use the `compact` command to manually compact data of each TiKV.
 
-- Use the `--from` and `--to` options to specify the compact range in the form of escaped raw key. If not set, the whole range will be compacted.
-- Use the `--region` option to compact range of a specific region. If set, `--from` and `--to` will be ignored.
+- Use the `--from` and `--to` options to specify the compaction range in the form of escaped raw key. If not set, the whole range will be compacted.
+- Use the `--region` option to compact the range of a specific region. If set, `--from` and `--to` will be ignored.
 - Use the `--db` option to specify the RocksDB that performs compaction. The optional values are `kv` and `raft`.
 - Use the `--threads` option allows you to specify the concurrency for the TiKV compaction and its default value is `8`. Generally, a higher concurrency comes with a faster compaction speed, which might yet affect the service. You need to choose an appropriate concurrency count based on your scenario.
 - Use the `--bottommost` option to include or exclude the bottommost files when TiKV performs compaction. The value options are `default`, `skip`, and `force`. The default value is `default`.
