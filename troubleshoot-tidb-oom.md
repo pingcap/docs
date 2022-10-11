@@ -106,7 +106,7 @@ You can take the following measures to reduce the memory usage of SQL statements
 
 You need to plan in advance for memory capacity. TiDB can consume up to two to three times more memory than the size of a committed transaction when processing a transaction.
 
-For a single large transaction, you can split the transaction to make it smaller in size.
+You can split a single large transaction to make it smaller in size.
 
 #### The process of collecting and loading statistical information consumes too much memory
 
@@ -115,7 +115,7 @@ A TiDB node needs to load statistics into memory after it starts. Since TiDB v6.
 TiDB consumes memory when collecting statistical information. You can control memory usage by the following ways:
 
 - Specify a sampling rate, only collect statistics for specific columns, and reduce analyze concurrency.
-- Since TiDB v6.1.0, the system variable [`tidb_mem_quota_analyze`](/system-variables.md#tidb_mem_quota_analyze-span-classversion-marknew-in-v610span) has been introduced to control the maximum memory usage when TiDB updates statistics.
+- Since TiDB v6.1.0, you can use the system variable [`tidb_mem_quota_analyze`](/system-variables.md#tidb_mem_quota_analyze-span-classversion-marknew-in-v610span) to control the maximum memory usage when TiDB updates statistics.
 
 For more information, see [Introduction to Statistics](/statistics.md).
 
