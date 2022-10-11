@@ -682,7 +682,7 @@ You can pause a cluster when its status is `AVAILABLE` or resume a cluster when 
 - Set `paused = true` to pause a cluster.
 - Set `paused = false` to resume a cluster.
 
-1. Add the `pause = true` into config in the cluster resource:
+1. Add the `pause = true` into the `config` field of the cluster resource:
 
    ```
    config = {
