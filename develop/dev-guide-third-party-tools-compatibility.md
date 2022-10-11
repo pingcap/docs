@@ -1,6 +1,6 @@
 ---
 title: Known Incompatibility Issues with Third-Party Tools
-summary: List the third-party tools incompatibility issues encountered while testing by PingCAP
+summary: Describes TiDB compatibility issues with third-party tools found during testing.
 ---
 
 # Known Incompatibility Issues with Third-Party Tools
@@ -29,23 +29,23 @@ summary: List the third-party tools incompatibility issues encountered while tes
 
 **Ways to Avoid**
 
-Please use each language's 64-bit integer type (or string type) for the reception to prevent overflow. For example, Java should use `Long` or `String` for reception, and JS/TS should use `string` type for the reception.
+Please use each language's 64-bit integer type (or string type) to store the result of `SELECT CONNECTION_ID()` to prevent overflow. For example, Java should use `Long` or `String` for reception, and JavaScript/TypeScript should use `string` type for the reception.
 
 ### TiDB does not set `Com_*` counters
 
 **Description**
 
-MySQL maintains a series of [server status variables starting with `Com_`](https://dev.mysql.com/doc/refman/8.0/en/server-status-variables.html#statvar_Com_xxx) to keep track of the total number of operations you have performed on the database. For example, `Com_select` keeps track of the total number of `SELECT` statements initiated by the MySQL database since it was last started (even if the statements were not queried successfully). TiDB does not maintain this variable. You can use the statement `SHOW GLOBAL STATUS LIKE 'Com_%'` to see the difference between the two databases.
+MySQL maintains a series of [server status variables starting with `Com_`](https://dev.mysql.com/doc/refman/8.0/en/server-status-variables.html#statvar_Com_xxx) to keep track of the total number of operations you have performed on the database. For example, `Com_select` keeps track of the total number of `SELECT` statements initiated by the MySQL database since it was last started (even if the statements were not queried successfully). TiDB does not maintain this variable. You can use the statement `SHOW GLOBAL STATUS LIKE 'Com_%'` to see the difference between the MySQL and TiDB.
 
 **Ways to Avoid**
 
 Please do not use these variables. Common usage scenarios such as monitoring. TiDB is well observable and does not require querying from server status variables. For custom monitoring tools, read the [TiDB Monitoring Framework Overview](/tidb-monitoring-framework.md) for more information.
 
-### TiDB error messages distinguish between `timestamp` and `datetime`
+### TiDB error messages distinguish between `TIMESTAMP` and `DATETIME` type
 
 **Description**
 
-TiDB error messages distinguish between `timestamp` and `datetime`, while MySQL does not, and returns them all as `datetime`. That is, MySQL incorrectly writes `timestamp` type error messages as `datetime` type.
+TiDB error messages distinguish between `TIMESTAMP` and `DATETIME`, while MySQL does not, and returns them all as `DATETIME`. That is, MySQL incorrectly writes `TIMESTAMP` type error messages as `DATETIME` type.
 
 **Ways to Avoid**
 
@@ -55,15 +55,15 @@ Do not use the error messages for string matching, but use [Error Codes](/error-
 
 **Description**
 
-TiDB uses the [ADMIN CHECK [TABLE|INDEX]](/sql-statements/sql-statement-admin-check-table-index.md) statement to check the consistency of data and corresponding indexes in tables. The `CHECK TABLE` statement is not supported.
+TiDB uses the [`ADMIN CHECK [TABLE|INDEX]`](/sql-statements/sql-statement-admin-check-table-index.md) statement to check the consistency of data and corresponding indexes in tables. The `CHECK TABLE` statement is not supported.
 
 **Ways to Avoid**
 
-Use `ADMIN CHECK [TABLE|INDEX]`.
+Use [`ADMIN CHECK [TABLE|INDEX]`](/sql-statements/sql-statement-admin-check-table-index.md).
 
 ## MySQL JDBC Incompatibility
 
-- Test Version: MySQL Connector/J `8.0.29`
+Test Version: MySQL Connector/J `8.0.29`
 
 ### Default Collations are inconsistent
 
@@ -152,7 +152,7 @@ Newer versions of MySQL Connector/J work with MySQL servers below version **5.7.
 
 This is a known issue, and MySQL Connector/J has not merged the fix code so far.
 
-PingCAP made two dimensional fixes to it:
+TiDB made two dimensional fixes to it:
 
 - Client side: You can replace the official MySQL Connector/J with [pingcap/mysql-connector-j](https://github.com/pingcap/mysql-connector-j). The bug is fixed in **pingcap/mysql-connector-j**.
 - Server side: you can upgrade the server to version **6.3** or above; TiDB has fixed this compatibility issue in version **6.3**.
