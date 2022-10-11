@@ -15,7 +15,7 @@ Terraform is an infrastructure as code tool that lets you define both cloud and 
 
 - TiDB Cloud Terraform Provider:
 
-TiDB Cloud Terraform Provider allows one to use Terraform to manage TiDB Cloud with the following capacities.
+TiDB Cloud Terraform Provider is a plugin that allows you to use Terraform to manage TiDB Cloud with the following capacities:
 
 - Get your project information.
 - Get cluster specification information, such as supported cloud provider, region, and node size.
