@@ -54,7 +54,7 @@ You can get all the available configurations for the resources and data sources 
 
 To start using TiDB Cloud Terraform Provider, refer to the following documents:
 
-- [Get TiDB Cloud Terraform Provider](/tidb-cloud/terraform/tidbcloud-provider.md)
-- [Use Cluster Resource](/tidb-cloud/terraform/cluster-resource.md)
-- [Use Backup Resource](/tidb-cloud/terraform/backup-resource.md)
-- [Use Restore Resource](/tidb-cloud/terraform/restore-resource.md)
+- [Get TiDB Cloud Terraform Provider](/tidb-cloud/terraform-tidbcloud-provider-overview.md)
+- [Use Cluster Resource](/tidb-cloud/terraform-use-cluster-resource.md)
+- [Use Backup Resource](/tidb-cloud/terraform-use-backup-resource.md)
+- [Use Restore Resource](/tidb-cloud/terraform-use-restore-resource)

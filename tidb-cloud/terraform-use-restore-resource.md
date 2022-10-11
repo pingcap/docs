@@ -3,7 +3,7 @@ title: Use Restore Resource
 summary: Learn how to use restore resource
 ---
 
-# Restore Resource
+# Use Restore Resource
 
 You can learn how to create a restore task with restore resource in this document.
 
@@ -11,7 +11,7 @@ You can also learn how to import a TiDB Cloud cluster created a restore task.
 
 ## Prerequisites
 
-- Before you begin, you need to [Get TiDB Cloud Terraform Provider](/tidb-cloud/terraform/tidbcloud-provider.md) first.
+- Before you begin, you need to [Get TiDB Cloud Terraform Provider](/tidb-cloud/terraform-tidbcloud-provider-overview.md) first.
 - The backup and restore feature is unavailable for Developer Tier clusters. To use restore resources, make sure that you have created a Dedicated Tier cluster.
 
 ## Create a restore task with restore resource

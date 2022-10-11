@@ -3,7 +3,7 @@ title: Use Cluster Resource
 summary: Learn how to use cluster resource
 ---
 
-# Cluster Resource
+# Use Cluster Resource
 
 You can learn how to create and modify a TiDB Cloud cluster with cluster resource in this document.
 
@@ -11,7 +11,7 @@ Besides, you will also learn how to get the necessary information from project d
 
 ## Prerequisites
 
-Before you begin, you need to [Get TiDB Cloud Terraform Provider](/tidb-cloud/terraform/tidbcloud-provider.md) first.
+Before you begin, you need to [Get TiDB Cloud Terraform Provider](/tidb-cloud/terraform-tidbcloud-provider-overview.md) first.
 
 ## Get project ID from the project data source
 
@@ -826,7 +826,7 @@ You can pause a cluster when its status is `AVAILABLE` or resume a cluster when 
 
 6. Wait for a moment, then use the `terraform refersh` command to update the state. The status will be changed to `AVAILABLE` finally.
 
-Now, you have created and managed a Dedicated Tier cluster with Terraform. Next, you can try creating a backup of the cluster by our [backup resource](/tidb-cloud/terraform/backup-resource.md).
+Now, you have created and managed a Dedicated Tier cluster with Terraform. Next, you can try creating a backup of the cluster by our [backup resource](/tidb-cloud/terraform-use-backup-resource.md).
 
 ## Delete a cluster
 
