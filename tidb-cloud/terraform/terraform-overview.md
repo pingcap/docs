@@ -26,6 +26,7 @@ TiDB Cloud Terraform Provider is a plugin that allows you to use Terraform to ma
 ## Requirements
 
 - [Create a TiDB Cloud account](https://tidbcloud.com/free-trial)
+- [Create a TiDB Cloud account](https://tidbcloud.com/free-trial)
 - [Download Terraform](https://www.terraform.io/downloads.html) >= 1.0
 - [Intall Go](https://golang.org/doc/install) >= 1.18 (if you want to build TiDB Cloud Terraform Provider)
 
