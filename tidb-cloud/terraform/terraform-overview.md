@@ -7,14 +7,13 @@ summary: Create, manage, and update your TiDB Cloud resources through Terraform
 
 As a fully managed service of TiDB, TiDB Cloud can automate database maintenance operations. With the [TiDB Cloud API](https://docs.pingcap.com/tidbcloud/api/v1beta), you can programmatically handle operations such as deployment, scaling, and restore.
 
-If you are looking for a simplified way to automate resource provisioning and your infrastructure workflow. You can try out our [TiDB Cloud Terraform Provider](https://registry.terraform.io/providers/tidbcloud/tidbcloud).
+If you are looking for a simplified way to automate resource provisioning and your infrastructure workflow. You can try out our TiDB Cloud Terraform Provider.
 
-- Terraform:
+- [Terraform](https://www.terraform.io/docs):
 
-[Terraform](https://www.terraform.io/docs) is an infrastructure as code tool that lets you define both cloud and on-prem resources in human-readable configuration files that you can version, reuse, and share. It is highly recommended learning the Terraform first.
+Terraform is an infrastructure as code tool that lets you define both cloud and on-prem resources in human-readable configuration files that you can version, reuse, and share. If you know nothing about Terraform. It is highly recommended to learn it first.
 
-
-- TiDB Cloud Terraform Provider:
+- [TiDB Cloud Terraform Provider](https://registry.terraform.io/providers/tidbcloud/tidbcloud):
 
 TiDB Cloud Terraform Provider is a plugin that allows you to use Terraform to manage TiDB Cloud with the following capacities:
 
