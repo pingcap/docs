@@ -1,24 +1,18 @@
 ---
 title: TiDB Cloud Terraform Provider Overview
-summary: Create, manage, and update your TiDB Cloud resources through Terraform
+summary: Create, manage, and update your TiDB Cloud resources through Terraform.
 ---
 
 # TiDB Cloud Terraform Provider Overview
 
-As a fully managed service of TiDB, TiDB Cloud can automate database maintenance operations. With the [TiDB Cloud API](https://docs.pingcap.com/tidbcloud/api/v1beta), you can programmatically handle operations such as deployment, scaling, and restore.
+[Terraform](https://www.terraform.io/) is an infrastructure as code tool that lets you define both cloud and on-premises resources in human-readable configuration files that you can version, reuse, and share.
 
-If you are looking for a simplified way to automate resource provisioning and your infrastructure workflow. You can try out our TiDB Cloud Terraform Provider.
+[TiDB Cloud Terraform Provider](https://registry.terraform.io/providers/tidbcloud/tidbcloud) is a plugin that allows you to use Terraform to manage TiDB Cloud resources, such as clusters, backups, and restores.
 
-- [Terraform](https://www.terraform.io/docs):
-
-Terraform is an infrastructure as code tool that lets you define both cloud and on-prem resources in human-readable configuration files that you can version, reuse, and share. If you know nothing about Terraform. It is highly recommended to learn it first.
-
-- [TiDB Cloud Terraform Provider](https://registry.terraform.io/providers/tidbcloud/tidbcloud):
-
-TiDB Cloud Terraform Provider is a plugin that allows you to use Terraform to manage TiDB Cloud with the following capacities:
+If you are looking for a simple way to automate resource provisioning and your infrastructure workflow, you can try out TiDB Cloud Terraform Provider, which provides you with the following capacities:
 
 - Get your project information.
-- Get cluster specification information, such as supported cloud provider, region, and node size.
+- Get cluster specification information, such as supported cloud providers, regions, and node sizes.
 - Manage your TiDB cluster, including creating, scaling, pausing, and resuming a cluster.
 - Create and delete a backup for your cluster.
 - Create a restore task for your cluster.
@@ -27,7 +21,7 @@ TiDB Cloud Terraform Provider is a plugin that allows you to use Terraform to ma
 
 - [A TiDB Cloud account](https://tidbcloud.com/free-trial)
 - [Terraform version](https://www.terraform.io/downloads.html) >= 1.0
-- [Go version](https://golang.org/doc/install) >= 1.18 (if you want to build [TiDB Cloud Terraform Provider](https://github.com/tidbcloud/terraform-provider-tidbcloud) locally)
+- [Go version](https://golang.org/doc/install) >= 1.18 (required only if you want to build [TiDB Cloud Terraform Provider](https://github.com/tidbcloud/terraform-provider-tidbcloud) locally)
 
 ## Supported resources and data sources
 
@@ -35,25 +29,24 @@ TiDB Cloud Terraform Provider is a plugin that allows you to use Terraform to ma
 
 TiDB Cloud supports the following resources and data sources:
 
-Resources
+- Resources
 
-- `tidbcloud_cluster`
-- `tidbcloud_backup` (updates is not supported)
-- `tidbcloud_restore` (updates and deletion are not supported)
+    - `tidbcloud_cluster`
+    - `tidbcloud_backup` (updates are not supported)
+    - `tidbcloud_restore` (updates and deletion are not supported)
 
-Data sources
+- Data sources
 
-- `tidbcloud_project`
-- `tidbcloud_cluster_spec`
-- `tidbcloud_restore`
-- `tidbcloud_backup`
+    - `tidbcloud_project`
+    - `tidbcloud_cluster_spec`
+    - `tidbcloud_restore`
+    - `tidbcloud_backup`
 
-You can get all the available configurations for the resources and data sources in this [document](https://registry.terraform.io/providers/tidbcloud/tidbcloud/latest/docs).
+To get all the available configurations for the resources and data sources, see this [configuration documentation](https://registry.terraform.io/providers/tidbcloud/tidbcloud/latest/docs).
 
 ## Next step
 
-To start using TiDB Cloud Terraform Provider, refer to the following documents:
-
+- [Learn more about Terraform](https://www.terraform.io/docs)
 - [Get TiDB Cloud Terraform Provider](/tidb-cloud/terraform-tidbcloud-provider-overview.md)
 - [Use Cluster Resource](/tidb-cloud/terraform-use-cluster-resource.md)
 - [Use Backup Resource](/tidb-cloud/terraform-use-backup-resource.md)

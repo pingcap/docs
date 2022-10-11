@@ -5,20 +5,28 @@ summary: Learn how to use restore resource
 
 # Use Restore Resource
 
-You can learn how to create a restore task with restore resource in this document.
+You can learn how to create a restore task with the `tidbcloud_restore` resource in this document.
 
-You can also learn how to import a TiDB Cloud cluster created a restore task.
+You can also learn how to import a TiDB Cloud cluster.
 
 ## Prerequisites
 
-- Before you begin, you need to [Get TiDB Cloud Terraform Provider](/tidb-cloud/terraform-tidbcloud-provider-overview.md) first.
+- [Get TiDB Cloud Terraform Provider](/tidb-cloud/terraform-get-tidbcloud-provider.md)
 - The backup and restore feature is unavailable for Developer Tier clusters. To use restore resources, make sure that you have created a Dedicated Tier cluster.
 
-## Create a restore task with restore resource
+## Create a restore task with the restore resource
 
-After creating a backup of a cluster, you can restore the cluster by creating a restore task with restore resources.
+After creating a backup of a cluster, you can restore the cluster by creating a restore task with the `tidbcloud_restore` resource.
 
-1. Create a restore directory and entry it. Then create a `restore.tf` file. Note that you can only restore data from a smaller node size to the same or a larger node size:
+> **Note:**
+>
+> You can only restore data from a smaller node size to the same or larger node size.
+
+1. Create a directory for the restore and enter it.
+
+2. Create a `restore.tf` file.
+
+    For example:
 
     ```
     terraform {
@@ -30,7 +38,7 @@ After creating a backup of a cluster, you can restore the cluster by creating a 
      }
      required_version = ">= 1.0.0"
    }
-   
+
    provider "tidbcloud" {
      username = "fake_username"
      password = "fake_password"
@@ -62,18 +70,18 @@ After creating a backup of a cluster, you can restore the cluster by creating a 
     }
     ```
 
-2. Run the `terraform apply` command and type `yes`:
+3. Run the `terraform apply` command and type `yes` for confirmation:
 
     ```
     $ terraform apply
     tidbcloud_cluster.example_cluster: Refreshing state... [id=1379661944630234067]
     tidbcloud_backup.example_backup: Refreshing state... [id=1350048]
-    
+
     Terraform used the selected providers to generate the following execution plan. Resource actions are indicated with the following symbols:
       + create
-    
+
     Terraform will perform the following actions:
-    
+
       # tidbcloud_restore.example_restore will be created
       + resource "tidbcloud_restore" "example_restore" {
           + backup_id        = "1350048"
@@ -110,26 +118,26 @@ After creating a backup of a cluster, you can restore the cluster by creating a 
           + project_id       = "1372813089189561287"
           + status           = (known after apply)
         }
-    
+
     Plan: 1 to add, 0 to change, 0 to destroy.
-    
+
     Do you want to perform these actions?
       Terraform will perform the actions described above.
       Only 'yes' will be accepted to approve.
-    
+
       Enter a value: yes
-    
+
     tidbcloud_restore.example_restore: Creating...
     tidbcloud_restore.example_restore: Creation complete after 1s [id=780114]
-    
+
     Apply complete! Resources: 1 added, 0 changed, 0 destroyed.
     ```
 
-3. Check the state of the restore task with `terraform state show tidbcloud_restore.example_restore`:
+4. Use the `terraform state show tidbcloud_restore.example_restore` command to check the status of the restore task:
 
     ```
     $ terraform state show tidbcloud_restore.example_restore
-    
+
     # tidbcloud_restore.example_restore:
     resource "tidbcloud_restore" "example_restore" {
         backup_id        = "1350048"
@@ -167,9 +175,11 @@ After creating a backup of a cluster, you can restore the cluster by creating a 
     }
     ```
 
-You can see the restore task's status is `PENDING` and the cluster's status is `INITIALIZING`.
+    You can see the restore task's status is `PENDING` and the cluster's status is `INITIALIZING`.
 
-After the cluster status changes to `AVAILABLE`, the restore task will be `RUNNING` and turn to `SUCCESS` at last. Copy the project ID and cluster ID for later use.
+5. Wait for some minutes. Then use `terraform refersh` to update the status.
+
+6. After the cluster status changes to `AVAILABLE`, the restore task will be `RUNNING` and turn to `SUCCESS` at last. Copy the project ID and cluster ID for later use.
 
 Note that the restored cluster is not managed by Terraform. You can manage the restored cluster by importing it.
 
@@ -185,27 +195,29 @@ The following steps show you how to import the cluster created by the restore ta
     resource "tidbcloud_cluster" "restore_cluster1" {}
     ```
 
-2. Import the cluster by `terraform import tidbcloud_cluster.restore_cluster1 projectId,clusterId` (you can get the projectId and clusterId by restore resource) :
+2. Import the cluster by `terraform import tidbcloud_cluster.restore_cluster1 projectId,clusterId` (you can get the projectId and clusterId by restore resource):
+
+    For example:
 
     ```
     $ terraform import tidbcloud_cluster.restore_cluster1 1372813089189561287,1379661944630264072
-    
+
     tidbcloud_cluster.restore_cluster1: Importing from ID "1372813089189561287,1379661944630264072"...
     tidbcloud_cluster.restore_cluster1: Import prepared!
       Prepared tidbcloud_cluster for import
     tidbcloud_cluster.restore_cluster1: Refreshing state... [id=1379661944630264072]
-    
+
     Import successful!
-    
+
     The resources that were imported are shown above. These resources are now in
     your Terraform state and will henceforth be managed by Terraform.
     ```
 
-3. Run the `terraform state show tidbcloud_cluster.restore_cluster1` command to get the status of the cluster:
+3. Run the `terraform state show tidbcloud_cluster.restore_cluster1` command to check the status of the cluster:
 
     ```
     $ terraform state show tidbcloud_cluster.restore_cluster1
-    
+
     # tidbcloud_cluster.restore_cluster1:
     resource "tidbcloud_cluster" "restore_cluster1" {
         cloud_provider = "AWS"
@@ -237,7 +249,7 @@ The following steps show you how to import the cluster created by the restore ta
     }
     ```
 
-4. To manage the cluster using Terraform, you can copy the output of the previous step to your configuration file. Note that you need to delete the lines of id and status, because they will be controlled by Terraform instead:
+4. To manage the cluster using Terraform, you can copy the output of the previous step to your configuration file. Note that you need to delete the lines of `id` and `status`, because they will be controlled by Terraform instead:
 
     ```
     resource "tidbcloud_cluster" "restore_cluster1" {
@@ -271,8 +283,8 @@ The following steps show you how to import the cluster created by the restore ta
 5. You can use `terraform fmt` to format your configuration file:
 
     ```
-    $ terraform fmt 
-    
+    $ terraform fmt
+
     main.tf
     ```
 
@@ -280,16 +292,16 @@ The following steps show you how to import the cluster created by the restore ta
 
     ```
     $ terraform apply
-    
+
     tidbcloud_cluster.restore_cluster1: Refreshing state... [id=1379661944630264072]
     tidbcloud_cluster.example_cluster: Refreshing state... [id=1379661944630234067]
     tidbcloud_backup.example_backup: Refreshing state... [id=1350048]
     tidbcloud_restore.example_restore: Refreshing state... [id=780114]
-    
+
     No changes. Your infrastructure matches the configuration.
-    
+
     Terraform has compared your real infrastructure against your configuration and found no differences, so no changes are needed.
-    
+
     Apply complete! Resources: 0 added, 0 changed, 0 destroyed.
     ```
 
@@ -297,4 +309,4 @@ Now you can use Terraform to manage the cluster created by the restore task.
 
 ## Delete a restore task
 
-Restore tasks cannot be deleted now.
+Restore tasks cannot be deleted.

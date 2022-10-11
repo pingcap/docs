@@ -1,20 +1,22 @@
 ---
 title: Use Backup Resource
-summary: Learn how to use backup resource
+summary: Learn how to create a backup of a TiDB Cloud cluster using the backup resource.
 ---
 
 # Use Backup Resource
 
-You can learn how to create a backup of a TiDB Cloud cluster with backup resource in this document.
+You can learn how to create a backup of a TiDB Cloud cluster with the `tidbcloud_backup` resource in this document.
 
 ## Prerequisites
 
-- Before you begin, you need to [Get TiDB Cloud Terraform Provider](/tidb-cloud/terraform-tidbcloud-provider-overview.md) first.
+- [Get TiDB Cloud Terraform Provider](/tidb-cloud/terraform-get-tidbcloud-provider.md)
 - The backup and restore feature is unavailable to Developer Tier clusters. To use backup resources, make sure that you have created a Dedicated Tier cluster.
 
-## Create a backup with backup resource
+## Create a backup with the backup resource
 
-1. Create a backup directory and entry it. Then create a `backup.tf` file. You need to replace the `project_id` and `cluster_id` values with your own.
+1. Create a directory for the backup and enter it.
+
+2. Create a `backup.tf` file:
 
     ```
     terraform {
@@ -26,7 +28,7 @@ You can learn how to create a backup of a TiDB Cloud cluster with backup resourc
      }
      required_version = ">= 1.0.0"
    }
-   
+
    provider "tidbcloud" {
      username = "fake_username"
      password = "fake_password"
@@ -39,7 +41,9 @@ You can learn how to create a backup of a TiDB Cloud cluster with backup resourc
     }
     ```
 
-   If you have maintained a cluster resource (for example, `example_cluster`) using Terraform, you can configure the backup resource as follows, without specifying the actual project ID and cluster ID.
+    You need to replace resource values (such as project ID and cluster ID) in the file with your own.
+
+    If you have maintained a cluster resource (for example, `example_cluster`) using Terraform, you can also configure the backup resource as follows, without specifying the actual project ID and cluster ID.
 
     ```
     resource "tidbcloud_backup" "example_backup" {
@@ -50,18 +54,18 @@ You can learn how to create a backup of a TiDB Cloud cluster with backup resourc
     }
     ```
 
-2. Run the `terraform apply` command:
+3. Run the `terraform apply` command:
 
     ```
     $ terraform apply
-    
+
     tidbcloud_cluster.example_cluster: Refreshing state... [id=1379661944630234067]
-    
+
     Terraform used the selected providers to generate the following execution plan. Resource actions are indicated with the following symbols:
       + create
-    
+
     Terraform will perform the following actions:
-    
+
       # tidbcloud_backup.example_backup will be created
       + resource "tidbcloud_backup" "example_backup" {
           + cluster_id       = "1379661944630234067"
@@ -74,33 +78,33 @@ You can learn how to create a backup of a TiDB Cloud cluster with backup resourc
           + status           = (known after apply)
           + type             = (known after apply)
         }
-    
+
     Plan: 1 to add, 0 to change, 0 to destroy.
-    
+
     Do you want to perform these actions?
       Terraform will perform the actions described above.
       Only 'yes' will be accepted to approve.
-    
-      Enter a value: 
+
+      Enter a value:
     ```
 
-3. Type `yes` to create a backup:
+4. Type `yes` to create a backup:
 
     ```
       Enter a value: yes
-    
+
     tidbcloud_backup.example_backup: Creating...
     tidbcloud_backup.example_backup: Creation complete after 2s [id=1350048]
-    
+
     Apply complete! Resources: 1 added, 0 changed, 0 destroyed.
-    
+
     ```
 
-4. Use `terraform state show tidbcloud_backup.example_backup` to check the status of the backup:
+5. Use `terraform state show tidbcloud_backup.example_backup` to check the status of the backup:
 
     ```
     $ terraform state show tidbcloud_backup.example_backup
-    
+
     # tidbcloud_backup.example_backup:
     resource "tidbcloud_backup" "example_backup" {
         cluster_id       = "1379661944630234067"
@@ -115,10 +119,10 @@ You can learn how to create a backup of a TiDB Cloud cluster with backup resourc
     }
     ```
 
-5. Wait for some minutes. Then use `terraform refersh`  to update the states:
+6. Wait for some minutes. Then use `terraform refersh` to update the status:
 
     ```
-    $ terraform refresh  
+    $ terraform refresh
     tidbcloud_cluster.example_cluster: Refreshing state... [id=1379661944630234067]
     tidbcloud_backup.example_backup: Refreshing state... [id=1350048]
     $ terraform state show tidbcloud_backup.example_backup
@@ -136,13 +140,13 @@ You can learn how to create a backup of a TiDB Cloud cluster with backup resourc
     }
     ```
 
-If you see the status turns to `SUCCESS`, it indicates that you have created a backup for your cluster. Pay attention that the backup cannot be updated.
+When the status turns to `SUCCESS`, it indicates that you have created a backup for your cluster. Pay attention that the backup cannot be updated after the creation.
 
-Now, you have created a backup for the cluster. Next, you can try [restoring a cluster](/tidb-cloud/terraform-use-restore-resource) with the backup.
+Now, you have created a backup for the cluster. If you want to use the backup to restore the cluster, you can [use the restore resources]](/tidb-cloud/terraform-use-restore-resource).
 
 ## Delete a backup
 
-To delete a backup, you can run the `terraform destroy` command to destroy the backup resource.
+To delete a backup, go to the backup directory where the corresponding `backup.tf` file is located, and then run the `terraform destroy` command to destroy the backup resource.
 
 ```
 $ terraform destroy
@@ -156,7 +160,7 @@ There is no undo. Only 'yes' will be accepted to confirm.
 Enter a value: yes
 ```
 
-Now, if you run the `terraform show` command, you will get nothing because the resource have been cleared:
+Now, if you run the `terraform show` command, you will get nothing because the resource has been cleared:
 
 ```
 $ terraform show
