@@ -186,12 +186,12 @@ To specify the content and format of the output, you can use the `FORMAT = xxx` 
 
 | FORMAT | Description |
 | ------ | ------ |
-| Empty  | Same as row |
+| Empty  | Same as `row` |
 | `row`  | The `EXPLAIN` statement outputs results in a tabular format. See [Understand the Query Execution Plan](/explain-overview.md) for more information. |
 | `brief`  | The operator IDs in the output of the `EXPLAIN` statement are simplified, compared with those when `FORMAT` is left unspecified. |
 | `dot`    | The `EXPLAIN` statement outputs DOT execution plans, which can be used to generate PNG files through a `dot` program (in the `graphviz` package). |
 
-The following is an example when `FORMAT` is "brief"` in `EXPLAIN`:
+The following is an example when `FORMAT` is `"brief"` in `EXPLAIN`:
 
 {{< copyable "sql" >}}
 
