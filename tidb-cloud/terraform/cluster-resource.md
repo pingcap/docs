@@ -262,6 +262,7 @@ The following is a part of the results for your reference.
 </details>
 
 In the results:
+
 - `cloud_provider` is the cloud provider on which your TiDB cluster is hosted.
 - `region` is the region of `cloud_provider`.
 - `node_quantity_range` shows the minimum quantity of the node and the step if you want to scale the node.
