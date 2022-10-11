@@ -39,7 +39,7 @@ You can learn how to create a backup of a TiDB Cloud cluster with backup resourc
     }
     ```
 
-   If you have maintained a cluster resource named `example_cluster`, you can also get project_id and cluster_id like:
+   If you have maintained a cluster resource (for example, `example_cluster`) using Terraform, you can configure the backup resource as follows, without specifying the actual project ID and cluster ID.
 
     ```
     resource "tidbcloud_backup" "example_backup" {
