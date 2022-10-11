@@ -11,7 +11,7 @@ You will learn how to get TiDB Cloud Terraform Provider in this document.
 
 Before you begin, make sure that the requirements in [TiDB Cloud Terraform Provider Overview](/tidb-cloud/terraform/terraform-overview.md) are met.
 
-## Step 1. Install terraform
+## Step 1. Install Terraform
 
 TiDB Cloud Terraform Provider has been released to [Terraform registry](https://registry.terraform.io/). All you need to do is install Terraform (>=1.0).
 
