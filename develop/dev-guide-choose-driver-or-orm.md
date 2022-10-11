@@ -12,7 +12,7 @@ summary: Learn how to choose a driver or ORM framework to connect to TiDB.
 > - **Full**: indicates that using this driver or ORM does not have any known issues.
 > - **Verified**: indicates that using this driver or ORM might get errors because of compatibility differences between TiDB and MySQL.
 >
-> You can get more information on [Third-Party Tools Supported by TiDB](/develop/dev-guide-third-party-support.md).
+> For more information, refer to [Third-Party Tools Supported by TiDB](/develop/dev-guide-third-party-support.md).
 
 TiDB is highly compatible with the MySQL protocol but some features are incompatible with MySQL.
 
@@ -104,12 +104,12 @@ implementation group: 'org.bouncycastle', name: 'bcpkix-jdk15on', version: '1.67
 > **Note:**
 >
 > - Currently, Hibernate does [not support nested transactions](https://stackoverflow.com/questions/37927208/nested-transaction-in-spring-app-with-jpa-postgres).
-> - Since v6.2.0, TiDB supports [savepoint](/sql-statements/sql-statement-savepoint.md). Therefore, make sure your TiDB version is v6.2.0 or newer. Otherwise, do not use the `Propagation.NESTED` transaction propagation option in `@Transactional`, that is, do not set `@Transactional( propagation = Propagation.NESTED)`.
+> - Since v6.2.0, TiDB supports [savepoint](/sql-statements/sql-statement-savepoint.md). Therefore, make sure that your TiDB is v6.2.0 or later versions. Otherwise, do not use the `Propagation.NESTED` transaction propagation option in `@Transactional`, that is, do not set `@Transactional(propagation = Propagation.NESTED)`.
 
 <SimpleTab>
 <div label="Hibernate">
 
-Support level: `Full`
+Support level: **Full**
 
 To avoid manually managing complex relationships between different dependencies of an application, you can use [Gradle](https://gradle.org/install) or [Maven](https://maven.apache.org/install.html) to get all dependencies of your application, including those indirect ones. Note that only Hibernate `6.0.0.Beta2` or above supports the TiDB dialect.
 
@@ -151,11 +151,11 @@ In addition, you need to specify the TiDB dialect in your [Hibernate configurati
 
 <div label="MyBatis">
 
-Support level: `Full`
+Support level: **Full**
 
 To avoid manually managing complex relationships between different dependencies of an application, you can use [Gradle](https://gradle.org/install) or [Maven](https://maven.apache.org/install.html) to get all dependencies of your application, including those indirect ones.
 
-If you are using **Maven**, add the following to your `<dependencies></dependencies>`:
+If you are using Maven, add the following to your `<dependencies></dependencies>`:
 
 ```xml
 <dependency>
@@ -171,7 +171,7 @@ If you are using **Maven**, add the following to your `<dependencies></dependenc
 </dependency>
 ```
 
-If you are using **Gradle**, add the following to your `dependencies`:
+If you are using Gradle, add the following to your `dependencies`:
 
 ```gradle
 implementation 'org.mybatis:mybatis:3.5.9'
@@ -188,7 +188,7 @@ For an example of using MyBatis to build a TiDB application, see [Build a Simple
 
 **tidb-loadbalance**
 
-Support level: `Full`
+Support level: **Full**
 
 [tidb-loadbalance](https://github.com/pingcap/tidb-loadbalance) is a load balancing component on the application side. With tidb-loadbalance, you can automatically maintain the node information of TiDB server and distribute JDBC connections on the client using the tidb-loadbalance policies. Using a direct JDBC connection between the client application and TiDB server has higher performance than using the load balancing component.
 
@@ -228,7 +228,7 @@ This section describes how to use Driver and ORM of Golang language.
 
 **go-sql-driver/mysql**
 
-Support level: `Full`
+Support level: **Full**
 
 You can follow the [go-sql-driver/mysql documentation](https://github.com/go-sql-driver/mysql) to download and configure a Golang driver.
 
@@ -238,7 +238,7 @@ For an example of how to build a complete application, see [Build a Simple CRUD 
 
 **GORM**
 
-Support level: `Full`
+Support level: **Full**
 
 GORM is a popular ORM framework for Golang, and you can use `go get` to get all of your application's dependencies.
 
