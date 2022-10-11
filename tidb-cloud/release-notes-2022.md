@@ -16,7 +16,7 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
 **Console changes**
 
-* Optimize billing information in the [billing details page](/tidb-cloud/tidb-cloud-billing.md#billing-details):
+* Optimize billing information on the [billing details page](/tidb-cloud/tidb-cloud-billing.md#billing-details):
 
     * Provide more fine-grained billing information at the node level in the **Summary By Service** section.
     * Add a **Usage Details** section. You can also download usage details as a CSV file.
