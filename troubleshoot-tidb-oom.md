@@ -179,7 +179,7 @@ To locate an OOM failure, you need to collect the following information:
     - Run `EXPLAIN ANALYZE` to check memory usage of operators.
     - Run `SELECT * FROM information_schema.processlist;` to check the value of the `MEM` column.
 
-- Run the following command to collect TiDB Profile information when memory usage is high:
+- Run the following command to collect the TiDB Profile information when memory usage is high:
 
     ```shell
     curl -G http://{TiDBIP}:10080/debug/zip?seconds=10" > profile.zip
