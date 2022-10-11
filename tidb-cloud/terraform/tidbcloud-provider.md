@@ -81,7 +81,7 @@ For detailed steps, see [TiDB Cloud API documentation](https://docs.pingcap.com/
    commands will detect it and remind you to do so if necessary.
    ```
 
-## Step 4. Configure TiDB Cloud Terraform Provider with the API Key
+## Step 4. Configure TiDB Cloud Terraform Provider with the API key
 
 You can configure the main.tf as follows:
 
