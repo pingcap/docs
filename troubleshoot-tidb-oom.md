@@ -11,13 +11,15 @@ This document describes how to troubleshoot TiDB Out Of Memory (OOM) problems, i
 
 When you troubleshoot OOM issues, follow this process:
 
-1. First, confirm whether it is an OOM issue. Execute the following command to check the operating system logs. If the result has the OOM-killer logs near the time point when the problem occurs, then it is likely that an OOM problem has occurred.
+1. First, confirm whether it is an OOM issue.
+
+    Execute the following command to check the operating system logs. If the result has the OOM-killer logs near the time point when the problem occurs, then it is likely that an OOM problem has occurred.
 
     ```shell
     dmesg -T | grep tidb-server
     ```
 
-    The following is an example of the output result:
+    The following is an example of the log that contains oom-killer:
 
     ```shell
     ......
@@ -52,8 +54,8 @@ Typical OOM phenomena include (but are not limited to) the following:
     - **TiDB-Runtime** > **Memory Usage** shows that `estimate-inuse` keeps rising.
 
 - Check `tidb.log`, and you can find the following log entries:
-    - An alarm about OOM: [WARN] [memory_usage_alarm.go:139] ["tidb-server has the risk of OOM. Running SQLs and heap profile will be recorded in record path"]. For more information, see [`memory-usage-alarm-ratio`](/system-variables.md#tidb_memory_usage_alarm_ratio).
-    - A log entry about restart: [INFO] [printer.go:33] ["Welcome to TiDB."]
+    - An alarm about OOM: `[WARN] [memory_usage_alarm.go:139] ["tidb-server has the risk of OOM. Running SQLs and heap profile will be recorded in record path"]`. For more information, see [`memory-usage-alarm-ratio`](/system-variables.md#tidb_memory_usage_alarm_ratio).
+    - A log entry about restart: `[INFO] [printer.go:33] ["Welcome to TiDB."]`
 
 ## Typical causes and solutions
 
@@ -69,7 +71,7 @@ The following are common causes of OOM caused by deployment issues:
 
 - The memory capacity of the operating system is too small.
 - The TiUP configuration [`resource_control`](/tiup/tiup-cluster-topology-reference.md#global) is not appropriate.
-- In the case of hybrid deployments (meaning that TiDB and other applications are deployed on the same server), TiDB is killed accidentally by the OOM-killer.
+- In the case of hybrid deployments (meaning that TiDB and other applications are deployed on the same server), TiDB is killed accidentally by the oom-killer.
 
 ### Database issues
 
@@ -91,7 +93,7 @@ You can take the following measures to reduce the memory usage of SQL statements
 
 - Some operators and functions do not support pushing down to the storage level, resulting in a huge accumulation of intermediate result sets. In this case, you need to refine the business SQL statements or use hints to tune, and use the functions or operators that support pushing down.
 
-- The execution plan contains the operator HashAgg. HashAgg is executed concurrently by multiple threads, which is faster but consumes more memory. Instead, you can use the `STREAM_AGG()` hint.
+- The execution plan contains the operator HashAgg. HashAgg is executed concurrently by multiple threads, which is faster but consumes more memory. Instead, you can use the `STREAM_AGG()`.
 
 - Reduce the number of regions to be read simultaneously or reduce the concurrency of operators to avoid memory problems caused by high concurrency. The corresponding system variables include:
     - [`tidb_distsql_scan_concurrency`](/system-variables.md#tidb_distsql_scan_concurrency)
@@ -173,7 +175,7 @@ To locate an OOM failure, you need to collect the following information:
     - View SQL statement analysis, slow queries and memory usage from TiDB Dashboard.
     - Check `SLOW_QUERY` and `CLUSTER_SLOW_QUERY` in `INFORMATION_SCHEMA`.
     - Check `tidb_slow_query.log` on each TiDB node.
-    - Run `grep "expensive_query" tidb.log` to check logs in `tidb.log`.
+    - Run `grep "expensive_query" tidb.log` to check the corresponding log entries.
     - Run `EXPLAIN ANALYZE` to check memory usage of operators.
     - Run `SELECT * FROM information_schema.processlist;` to check the value of the  `MEM`column.
 
