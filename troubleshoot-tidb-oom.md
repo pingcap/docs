@@ -1,11 +1,26 @@
 ---
 title: Troubleshoot OOM Issues
-summary: Learn how to diagnose and resolve TiDB Out Of Memory (OOM) issues.
+summary: Learn how to diagnose and resolve TiDB Out of Memory (OOM) issues.
 ---
 
 # Troubleshoot OOM Issues
 
-This document describes how to troubleshoot TiDB Out Of Memory (OOM) problems, including phenomena, causes, solutions, and diagnostic information.
+This document describes how to troubleshoot TiDB Out of Memory (OOM) problems, including phenomena, causes, solutions, and diagnostic information.
+
+## Typical OOM phenomena
+
+Typical OOM phenomena include (but are not limited to) the following:
+
+- The client side reports the following error: `SQL error, errno = 2013, state = 'HY000': Lost connection to MySQL server during query`
+
+- Check Grafana, and you can find the following problems:
+    - **TiDB** > **Server** > **Memory Usage** shows that process/heapInUse keeps rising, and suddenly drops to zero after reaching the threshold.
+    - **TiDB** > **Server** > **Uptime** suddenly drops to zero.
+    - **TiDB-Runtime** > **Memory Usage** shows that `estimate-inuse` keeps rising.
+
+- Check `tidb.log`, and you can find the following log entries:
+    - An alarm about OOM: `[WARN] [memory_usage_alarm.go:139] ["tidb-server has the risk of OOM. Running SQLs and heap profile will be recorded in record path"]`. For more information, see [`memory-usage-alarm-ratio`](/system-variables.md#tidb_memory_usage_alarm_ratio).
+    - A log entry about restart: `[INFO] [printer.go:33] ["Welcome to TiDB."]`
 
 ## Overall troubleshooting process
 
@@ -19,7 +34,7 @@ When you troubleshoot OOM issues, follow this process:
     dmesg -T | grep tidb-server
     ```
 
-    The following is an example of the log that contains oom-killer:
+    The following is an example of the log that contains `oom-killer`:
 
     ```shell
     ......
@@ -42,20 +57,7 @@ When you troubleshoot OOM issues, follow this process:
         - TiDB is in a high concurrency scenario, where multiple SQL concurrency consumes resources or operator concurrency is high.
         - TiDB has a memory leak and resources are not freed.
 
-## Typical OOM phenomena
-
-Typical OOM phenomena include (but are not limited to) the following:
-
-- The client side reports the following error: `SQL error, errno = 2013, state = 'HY000': Lost connection to MySQL server during query`
-
-- Check Grafana, and you can find the following problems:
-    - **TiDB** > **Server** > **Memory Usage** shows that process/heapInUse keeps rising, and suddenly drops to zero after reaching the threshold.
-    - **TiDB** > **Server** > **Uptime** suddenly drops to zero.
-    - **TiDB-Runtime** > **Memory Usage** shows that `estimate-inuse` keeps rising.
-
-- Check `tidb.log`, and you can find the following log entries:
-    - An alarm about OOM: `[WARN] [memory_usage_alarm.go:139] ["tidb-server has the risk of OOM. Running SQLs and heap profile will be recorded in record path"]`. For more information, see [`memory-usage-alarm-ratio`](/system-variables.md#tidb_memory_usage_alarm_ratio).
-    - A log entry about restart: `[INFO] [printer.go:33] ["Welcome to TiDB."]`
+    Refer to the following sections for specific troubleshooting methods.
 
 ## Typical causes and solutions
 
@@ -71,7 +73,7 @@ The following are common causes of OOM caused by deployment issues:
 
 - The memory capacity of the operating system is too small.
 - The TiUP configuration [`resource_control`](/tiup/tiup-cluster-topology-reference.md#global) is not appropriate.
-- In the case of hybrid deployments (meaning that TiDB and other applications are deployed on the same server), TiDB is killed accidentally by the oom-killer.
+- In the case of hybrid deployments (meaning that TiDB and other applications are deployed on the same server), TiDB is killed accidentally by the `oom-killer` due to lack of resources.
 
 ### Database issues
 
@@ -125,7 +127,7 @@ The client side keeps creating prepared statements but does not execute [`deallo
 To solve the problem, consider the following measures:
 
 - Adjust the session lifecycle.
-- Adjust the life time of the connection pool.
+- Adjust [the `wait_timeout` and `max_execution_time` of the connection pool](/develop/dev-guide-connection-parameters.md#timeout-related-parameters).
 - Use the system variable [`max_prepared_stmt_count`](/system-variables.md#max_prepared_stmt_count) to control the maximum number of prepared statements in a session.
 
 #### `tidb_enable_rate_limit_action` is not configured properly
