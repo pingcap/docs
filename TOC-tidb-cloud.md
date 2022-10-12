@@ -122,9 +122,8 @@
 - Tune Performance
   - [Overview](/tidb-cloud/tidb-cloud-tune-performance-overview.md)
   - Analyze Performance
-    - [Statement Analysis](/tidb-cloud/tune-performance.md)
-    - [Key Visualizer](/tidb-cloud/tune-performance.md#key-visualizer)
-    - [Statement Summary Tables](/statement-summary-tables.md)
+    - [Use the Diagnosis Tab](/tidb-cloud/tune-performance.md)
+    - [Use Statement Summary Tables](/statement-summary-tables.md)
   - SQL Tuning
     - [Overview](/tidb-cloud/tidb-cloud-sql-tuning-overview.md)
     - Understanding the Query Execution Plan
@@ -155,6 +154,7 @@
         - [Statistics](/statistics.md)
         - [Wrong Index Solution](/wrong-index-solution.md)
         - [Distinct Optimization](/agg-distinct-optimization.md)
+        - [Cost Model](/cost-model.md)
       - [Prepare Execution Plan Cache](/sql-prepared-plan-cache.md)
     - Control Execution Plans
       - [Overview](/control-execution-plan.md)

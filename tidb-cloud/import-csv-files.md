@@ -135,7 +135,7 @@ To import the CSV files to TiDB Cloud, take the following steps:
 
 5. Click **Next**.
 
-6. On the **Preview** page, you can have a preview of the data, and click the **Click here to edit csv configuration** link to check and update the CSV-specific configurations, including separator, delimiter, header, not-null, null, backslash-escape, and trim-last-separator.
+6. On the **Preview** page, you can have a preview of the data. If the previewed data is not what you expect, click the **Click here to edit csv configuration** link to update the CSV-specific configurations, including separator, delimiter, header, not-null, null, backslash-escape, and trim-last-separator.
 
     > **Note:**
     >

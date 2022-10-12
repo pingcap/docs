@@ -52,7 +52,7 @@ To pause a cluster, take the following steps:
 
 4. In the dialog, click **Pause** to confirm your choice.
 
-You can also pause a cluster using TiDB Cloud API. Currently, TiDB Cloud API is still in beta and only available upon request. For more information, see [TiDB Cloud API Documentation](https://docs.pingcap.com/tidbcloud/api/v1beta).
+You can also pause a cluster using TiDB Cloud API. Currently, TiDB Cloud API is still in beta. For more information, see [TiDB Cloud API Documentation](https://docs.pingcap.com/tidbcloud/api/v1beta).
 
 ## Resume a TiDB cluster
 
@@ -73,4 +73,4 @@ To resume a paused cluster, take the following steps:
 
 Depending on your cluster size, it can take several minutes to resume the cluster. After the cluster is resumed, the cluster state changes from **RESUMING**to **AVAILABLE**.
 
-You can also resume a cluster using TiDB Cloud API. Currently, TiDB Cloud API is still in beta and only available upon request. For more information, see [TiDB Cloud API Documentation](https://docs.pingcap.com/tidbcloud/api/v1beta).
+You can also resume a cluster using TiDB Cloud API. Currently, TiDB Cloud API is still in beta. For more information, see [TiDB Cloud API Documentation](https://docs.pingcap.com/tidbcloud/api/v1beta).

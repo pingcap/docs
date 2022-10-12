@@ -14,7 +14,7 @@ You can adjust the PD scheduling parameters using [pd-ctl](/pd-control.md). Note
 
 - [`replica-schedule-limit`](/pd-configuration-file.md#replica-schedule-limit): determines the rate at which the replica-related operator is generated. The parameter affects operations such as making nodes offline and add replicas.
 
-  > **Notes:**
+  > **Note:**
   >
   > The value of this parameter should be less than that of `region-schedule-limit`. Otherwise, the normal Region scheduling among TiKV nodes is affected.
 
@@ -247,6 +247,10 @@ delta_index_cache_size = 0
 ```
 
 In addition to the items above, other parameters are the same as those of TiKV. Note that the `label` whose key is `engine` is reserved and cannot be configured manually.
+
+### Schedule replicas by topology labels
+
+See [Set available zones](/tiflash/create-tiflash-replicas.md#set-available-zones).
 
 ### Multi-disk deployment
 

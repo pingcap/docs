@@ -151,21 +151,21 @@ mysql> SELECT * FROM t1;
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
 - Default value: `utf8mb4_bin`
-- This variable indicates the collation for string literals that do not have a specified collation.
+- This variable indicates the collation used in the current connection. It is consistent with the MySQL variable `collation_connection`.
 
 ### collation_database
 
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
 - Default value: `utf8mb4_bin`
-- This variable indicates the collation of the default database in use. **It is NOT recommended to set this variable**. When a new default database is selected, the server changes the variable value.
+- This variable indicates the default collation of the database in use. **It is NOT recommended to set this variable**. When a new database is selected, TiDB changes this variable value.
 
 ### collation_server
 
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
 - Default value: `utf8mb4_bin`
-- The default collation for the server.
+- The default collation used when the database is created.
 
 ### cte_max_recursion_depth
 
@@ -223,6 +223,12 @@ For more possible values of this variable, see [Authentication plugin status](/s
 - Range: `[0, 7]`
 - Sets the week format used by the `WEEK()` function.
 
+### error_count
+
+- Scope: NONE
+- Type: Integer
+- A read-only variable that indicates the number of errors that resulted from the last statement that generated messages.
+
 ### foreign_key_checks
 
 - Scope: SESSION | GLOBAL
@@ -258,9 +264,9 @@ For more possible values of this variable, see [Authentication plugin status](/s
 - Default value: (system hostname)
 - The hostname of the TiDB server as a read-only variable.
 
-### identity
+### identity <span class="version-mark">New in v5.3.0</span>
 
-This variable is an alias for `last_insert_id`.
+This variable is an alias for [`last_insert_id`](#last_insert_id).
 
 ### init_connect
 
@@ -323,15 +329,24 @@ This variable is an alias for `last_insert_id`.
 - Default value: `OFF`
 - This variable indicates whether [TiDB Binlog](https://docs.pingcap.com/tidb/stable/tidb-binlog-overview) is used.
 
-### max_allowed_packet
+### max_allowed_packet <span class="version-mark">New in v6.1.0</span>
 
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
-- Type: Integer
 - Default value: `67108864`
-- Range: `[1024, 1073741824]`
-- Unit: Bytes
-- The maximum size of a packet for the MySQL protocol.
+- Range: `[1024, 1073741824]`. The value should be an integer multiple of 1024. If the value is not divisible by 1024, a warning will be prompted and the value will be rounded down. For example, when the value is set to 1025, the actual value in TiDB is 1024.
+- The maximum packet size allowed by the server and the client in one transmission of packets, in bytes.
+- This variable is compatible with MySQL.
+
+### max_connections
+
+- Scope: GLOBAL
+- Persists to cluster: No
+- Type: Integer
+- Default value: `0`
+- Range: `[0, 100000]`
+- The maximum number of connections permitted for a single TiDB instance.
+- The value of `0` means no limit.
 
 ### max_execution_time
 
@@ -346,6 +361,38 @@ This variable is an alias for `last_insert_id`.
 > **Note:**
 >
 > Unlike in MySQL, the `max_execution_time` system variable currently works on all kinds of statements in TiDB, not only restricted to the `SELECT` statement. The precision of the timeout value is roughly 100ms. This means the statement might not be terminated in accurate milliseconds as you specify.
+
+### max_prepared_stmt_count
+
+- Scope: GLOBAL
+- Persists to cluster: Yes
+- Type: Integer
+- Default value: `-1`
+- Range: `[-1, 1048576]`
+- Specifies the maximum number of [`PREPARE`](/sql-statements/sql-statement-prepare.md) statements in a session.
+- The value of `-1` means no limit on the maximum number of `PREPARE` statements in a session.
+- If you set the variable to a value that exceeds the upper limit `1048576`, `1048576` is used instead:
+
+```sql
+mysql> SET GLOBAL max_prepared_stmt_count = 1048577;
+Query OK, 0 rows affected, 1 warning (0.01 sec)
+
+mysql> SHOW WARNINGS;
++---------+------+--------------------------------------------------------------+
+| Level   | Code | Message                                                      |
++---------+------+--------------------------------------------------------------+
+| Warning | 1292 | Truncated incorrect max_prepared_stmt_count value: '1048577' |
++---------+------+--------------------------------------------------------------+
+1 row in set (0.00 sec)
+
+mysql> SHOW GLOBAL VARIABLES LIKE 'max_prepared_stmt_count';
++-------------------------+---------+
+| Variable_name           | Value   |
++-------------------------+---------+
+| max_prepared_stmt_count | 1048576 |
++-------------------------+---------+
+1 row in set (0.00 sec)
+```
 
 ### plugin_dir
 
@@ -465,21 +512,57 @@ This variable is an alias for `last_insert_id`.
 
 ### ssl_ca
 
+<CustomContent platform="tidb">
+
 - Scope: NONE
 - Default value: ""
-- The location of the certificate authority file (if there is one).
+- The location of the certificate authority file (if there is one). The value of this variable is defined by the TiDB configuration item [`ssl-ca`](/tidb-configuration-file.md#ssl-ca).
+   
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+- Scope: NONE
+- Default value: ""
+- The location of the certificate authority file (if there is one). The value of this variable is defined by the TiDB configuration item [`ssl-ca`](https://docs.pingcap.com/tidb/stable/tidb-configuration-file#ssl-ca).
+   
+</CustomContent>
 
 ### ssl_cert
 
+<CustomContent platform="tidb">
+
 - Scope: NONE
 - Default value: ""
-- The location of the certificate file (if there is a file) that is used for SSL/TLS connections.
+- The location of the certificate file (if there is a file) that is used for SSL/TLS connections. The value of this variable is defined by the TiDB configuration item [`ssl-cert`](/tidb-configuration-file.md#ssl-cert).
+   
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+- Scope: NONE
+- Default value: ""
+- The location of the certificate file (if there is a file) that is used for SSL/TLS connections. The value of this variable is defined by the TiDB configuration item [`ssl-cert`](https://docs.pingcap.com/tidb/stable/tidb-configuration-file#ssl-cert).
+   
+</CustomContent>
 
 ### ssl_key
 
+<CustomContent platform="tidb">
+
 - Scope: NONE
 - Default value: ""
-- The location of the private key file (if there is one) that is used for SSL/TLS connections.
+- The location of the private key file (if there is one) that is used for SSL/TLS connections. The value of this variable is defined by TiDB configuration item [`ssl-key`](/tidb-configuration-file.md#ssl-cert).
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+- Scope: NONE
+- Default value: ""
+- The location of the private key file (if there is one) that is used for SSL/TLS connections. The value of this variable is defined by TiDB configuration item [`ssl-key`](https://docs.pingcap.com/tidb/stable/tidb-configuration-file#ssl-key).
+
+</CustomContent>
 
 ### system_time_zone
 
@@ -1082,6 +1165,10 @@ Constraint checking is always performed in place for pessimistic transactions (d
 - This variable is used to control whether to enable TiDB mutation checker, which is a tool used to check consistency between data and indexes during the execution of DML statements. If the checker returns an error for a statement, TiDB rolls back the execution of the statement. Enabling this variable causes a slight increase in CPU usage. For more information, see [Troubleshoot Inconsistency Between Data and Indexes](/troubleshoot-data-inconsistency-errors.md).
 - For new clusters of v6.0.0 or later versions, the default value is `ON`. For existing clusters that upgrade from versions earlier than v6.0.0, the default value is `OFF`.
 
+### tidb_enable_new_cost_interface
+
+This variable is associated with a feature available since v6.2.0 and not usable in v6.1. For details, see the v6.2 documentation [`tidb_enable_new_cost_interface`](https://docs.pingcap.com/tidb/v6.2/system-variables#tidb_enable_new_cost_interface-span-classversion-marknew-in-v620span).
+
 ### tidb_enable_new_only_full_group_by_check <span class="version-mark">New in v6.1.0</span>
 
 - Scope: SESSION | GLOBAL
@@ -1117,6 +1204,14 @@ Constraint checking is always performed in place for pessimistic transactions (d
 - Default value: In v6.1.0, the default value is `ON`. After v6.1.0, the default value is `OFF`.
 - Since v6.1.0, the [Join Reorder](/join-reorder.md) algorithm of TiDB supports Outer Join. This variable controls the support behavior. The default value is `OFF`, which means the Join Reorder's support for Outer Join is disabled by default.
 - For a cluster upgraded from a version earlier than v6.1.0, the default value is `OFF`. For a cluster upgraded from v6.1.0, the default value is `ON`.
+
+### tidb_enable_ordered_result_mode
+
+- Scope: SESSION | GLOBAL
+- Persists to cluster: Yes
+- Default value: `OFF`
+- Specifies whether to sort the final output result automatically.
+- For example, with this variable enabled, TiDB processes `SELECT a, MAX(b) FROM t GROUP BY a` as `SELECT a, MAX(b) FROM t GROUP BY a ORDER BY a, MAX(b)`.
 
 ### tidb_enable_paging <span class="version-mark">New in v5.4.0</span>
 
@@ -1460,7 +1555,7 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 - Persists to cluster: No, only applicable to the current TiDB instance that you are connecting to.
 - Default value: `NO_PRIORITY`
 - This variable is used to change the default priority for statements executed on a TiDB server. A use case is to ensure that a particular user that is performing OLAP queries receives lower priority than users performing OLTP queries.
-- You can set the value of this variable to `NO_PRIORITY`, `LOW_PRIORITY`, `DELAYED` or `HIGH_PRIORITY`.
+- The default value `NO_PRIORITY` means that the priority for statements is not forced to change. Other options are `LOW_PRIORITY`, `DELAYED`, and `HIGH_PRIORITY` in ascending order.
 
 ### tidb_gc_concurrency <span class="version-mark">New in v5.0</span>
 
@@ -1932,7 +2027,7 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 >
 > * [go-sql-driver](https://github.com/go-sql-driver/mysql#multistatements) (`multiStatements`)
 > * [Connector/J](https://dev.mysql.com/doc/connector-j/8.0/en/connector-j-reference-configuration-properties.html) (`allowMultiQueries`)
-> * PHP [mysqli](https://dev.mysql.com/doc/apis-php/en/apis-php-mysqli.quickstart.multiple-statement.html) (`mysqli_multi_query`)
+> * PHP [mysqli](https://www.php.net/manual/en/mysqli.quickstart.multiple-statement.php) (`mysqli_multi_query`)
 
 ### tidb_nontransactional_ignore_error <span class="version-mark">New in v6.1.0</span>
 
@@ -1950,6 +2045,35 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 - Default value: `OFF`
 - This variable is used to set whether the optimizer executes the optimization operation of pushing down the aggregate function to the position before Join, Projection, and UnionAll.
 - When the aggregate operation is slow in query, you can set the variable value to ON.
+
+### tidb_opt_broadcast_cartesian_join
+
+- Scope: SESSION | GLOBAL
+- Persists to cluster: YES
+- Type: Integer
+- Default value: `1`
+- Range: `[0, 2]`
+- Indicates whether to allow the Broadcast Cartesian Join. 
+- `0` means that the Broadcast Cartesian Join is not allowed. `1` means that it is allowed based on [`tidb_broadcast_join_threshold_count`](#tidb_broadcast_join_threshold_count-new-in-v50). `2` means that it is always allowed even if the table size exceeds the threshold.
+- This variable is internally used in TiDB, and it is **NOT** recommended to modify its value.
+
+### tidb_opt_concurrency_factor
+
+- Scope: SESSION | GLOBAL
+- Persists to cluster: YES
+- Type: Float
+- Range: `[0, 2147483647]`
+- Default value: `3.0`
+- Indicates the CPU cost of starting a Golang goroutine in TiDB. This variable is internally used in the [Cost Model](/cost-model.md), and it is **NOT** recommended to modify its value.
+
+### tidb_opt_copcpu_factor
+
+- Scope: SESSION | GLOBAL
+- Persists to cluster: YES
+- Type: Float
+- Range: `[0, 2147483647]`
+- Default value: `3.0`
+- Indicates the CPU cost for TiKV Coprocessor to process one row. This variable is internally used in the [Cost Model](/cost-model.md), and it is **NOT** recommended to modify its value.
 
 ### tidb_opt_correlation_exp_factor
 
@@ -1972,6 +2096,33 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 - Default value: `0.9`
 - Range: `[0, 1]`
 - This variable is used to set the threshold value that determines whether to enable estimating the row count by using column order correlation. If the order correlation between the current column and the `handle` column exceeds the threshold value, this method is enabled.
+
+### tidb_opt_cpu_factor
+
+- Scope: SESSION | GLOBAL
+- Persists to cluster: YES
+- Type: Float
+- Range: `[0, 2147483647]`
+- Default value: `3.0`
+- Indicates the CPU cost for TiDB to process one row. This variable is internally used in the [Cost Model](/cost-model.md), and it is **NOT** recommended to modify its value.
+
+### tidb_opt_desc_factor
+
+- Scope: SESSION | GLOBAL
+- Persists to cluster: YES
+- Type: Float
+- Range: `[0, 2147483647]`
+- Default value: `3.0`
+- Indicates the cost for TiKV to scan one row from the disk in descending order. This variable is internally used in the [Cost Model](/cost-model.md), and it is **NOT** recommended to modify its value.
+
+### tidb_opt_disk_factor
+
+- Scope: SESSION | GLOBAL
+- Persists to cluster: YES
+- Type: Float
+- Range: `[0, 2147483647]`
+- Default value: `1.5`
+- Indicates the I/O cost for TiDB to read or write one byte of data from or to the temporary disk. This variable is internally used in the [Cost Model](/cost-model.md), and it is **NOT** recommended to modify its value.
 
 ### tidb_opt_distinct_agg_push_down
 
@@ -2052,6 +2203,32 @@ mysql> desc select count(distinct a) from test.t;
 - This variable is used to set the threshold that determines whether to push the Limit or TopN operator down to TiKV.
 - If the value of the Limit or TopN operator is smaller than or equal to this threshold, these operators are forcibly pushed down to TiKV. This variable resolves the issue that the Limit or TopN operator cannot be pushed down to TiKV partly due to wrong estimation.
 
+### tidb_opt_memory_factor
+
+- Scope: SESSION | GLOBAL
+- Persists to cluster: YES
+- Type: Float
+- Range: `[0, 2147483647]`
+- Default value: `0.001`
+- Indicates the memory cost for TiDB to store one row. This variable is internally used in the [Cost Model](/cost-model.md), and it is **NOT** recommended to modify its value.
+
+### tidb_opt_mpp_outer_join_fixed_build_side <span class="version-mark">New in v5.1.0</span>
+
+- Scope: SESSION | GLOBAL
+- Persists to cluster: Yes
+- Type: Boolean
+- Default value: `OFF`
+- When the variable value is `ON`, the left join operator always uses inner table as the build side and the right join operator always uses outer table as the build side. If you set the value to `OFF`, the outer join operator can use either side of the tables as the build side.
+
+### tidb_opt_network_factor
+
+- Scope: SESSION | GLOBAL
+- Persists to cluster: YES
+- Type: Float
+- Range: `[0, 2147483647]`
+- Default value: `1.0`
+- Indicates the net cost of transferring 1 byte of data through the network. This variable is internally used in the [Cost Model](/cost-model.md), and it is **NOT** recommended to modify its value.
+
 ### tidb_opt_prefer_range_scan <span class="version-mark">New in v5.0</span>
 
 - Scope: SESSION | GLOBAL
@@ -2084,6 +2261,24 @@ explain select * from t where age=5;
 +-------------------------------+------------+-----------+-----------------------------+-------------------------------+
 3 rows in set (0.00 sec)
 ```
+
+### tidb_opt_scan_factor
+
+- Scope: SESSION | GLOBAL
+- Persists to cluster: YES
+- Type: Float
+- Range: `[0, 2147483647]`
+- Default value: `1.5`
+- Indicates the cost for TiKV to scan one row of data from the disk in ascending order. This variable is internally used in the [Cost Model](/cost-model.md), and it is **NOT** recommended to modify its value.
+
+### tidb_opt_seek_factor
+
+- Scope: SESSION | GLOBAL
+- Persists to cluster: YES
+- Type: Float
+- Range: `[0, 2147483647]`
+- Default value: `20`
+- Indicates the start-up cost for TiDB to request data from TiKV. This variable is internally used in the [Cost Model](/cost-model.md), and it is **NOT** recommended to modify its value.
 
 ### tidb_opt_write_row_id
 
@@ -2667,7 +2862,7 @@ For details, see [Identify Slow Queries](/identify-slow-queries.md).
     * There are not many TiDB instances in the cluster, but every TiDB instance is in high concurrency.
 - It is recommended to set this variable to a value as small as possible.
 
-> **Notes:**
+> **Note:**
 >
 > Suppose that the TSO RPC latency increases for reasons other than a CPU usage bottleneck of the PD leader (such as network issues). In this case, increasing the value of `tidb_tso_client_batch_max_wait_time` might increase the execution latency in TiDB and affect the QPS performance of the cluster.
 
@@ -2767,6 +2962,14 @@ For details, see [Identify Slow Queries](/identify-slow-queries.md).
 ### tx_isolation
 
 This variable is an alias for `transaction_isolation`.
+
+### tx_isolation_one_shot
+
+> **Note:**
+>
+> This variable is internally used in TiDB. You are not expected to use it.
+
+Internally, the TiDB parser transforms the `SET TRANSACTION ISOLATION LEVEL [READ COMMITTED| REPEATABLE READ | ...]` statements to `SET @@SESSION.TX_ISOLATION_ONE_SHOT = [READ COMMITTED| REPEATABLE READ | ...]`.
 
 ### version
 

@@ -8,6 +8,35 @@ aliases: ['/tidbcloud/beta/supported-tidb-versions','/tidbcloud/release-notes']
 
 This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-cloud/) in 2022.
 
+## October 11, 2022
+
+**General changes**
+
+* Upgrade the default TiDB version of new [Developer Tier](/tidb-cloud/select-cluster-tier.md#developer-tier) clusters from [v6.2.0](https://docs.pingcap.com/tidb/v6.2/release-6.2.0) to [v6.3.0](https://docs.pingcap.com/tidb/v6.3/release-6.3.0).
+
+**Console changes**
+
+* Optimize billing information on the [billing details page](/tidb-cloud/tidb-cloud-billing.md#billing-details):
+
+    * Provide more fine-grained billing information at the node level in the **Summary By Service** section.
+    * Add a **Usage Details** section. You can also download usage details as a CSV file.
+
+## September 27, 2022
+
+**General changes**
+
+* Support joining multiple organizations by invitation.
+
+    In the TiDB Cloud console, you can view all organizations you have joined and switch between them. For details, see [Switch between organizations](/tidb-cloud/manage-user-access.md#switch-between-organizations).
+
+* Add the [Slow Query](/tidb-cloud/tune-performance.md#slow-query) page for SQL diagnosis.
+
+    On the Slow Query page, you can search and view all slow queries in your TiDB cluster, and explore the bottlenecks of each slow query by viewing its [execution plan](https://docs.pingcap.com/tidbcloud/explain-overview), SQL execution information, and other details.
+
+* When you reset the password for your account, TiDB Cloud will check your new password input against your last four passwords, and remind you to avoid using any of them. Any of the four used passwords will not be permitted.
+
+    For details, see [Manage user passwords](/tidb-cloud/manage-user-access.md#manage-user-passwords).
+
 ## September 20, 2022
 
 **General changes**

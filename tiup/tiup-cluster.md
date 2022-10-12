@@ -90,6 +90,11 @@ tikv_servers:
   - host: 172.16.5.139
   - host: 172.16.5.140
 
+tiflash_servers:
+  - host: 172.16.5.141
+  - host: 172.16.5.142
+  - host: 172.16.5.143
+
 grafana_servers:
   - host: 172.16.5.134
 
@@ -224,12 +229,12 @@ For the PD component, `|L` or `|UI` might be appended to `Up` or `Down`. `|L` in
 
 Scaling in a cluster means making some node(s) offline. This operation removes the specific node(s) from the cluster and deletes the remaining files.
 
-Because the offline process of the TiKV and TiDB Binlog components is asynchronous (which requires removing the node through API), and the process takes a long time (which requires continuous observation on whether the node is successfully taken offline), special treatment is given to the TiKV and TiDB Binlog components.
+Because the offline process of the TiKV, TiFlash, and TiDB Binlog components is asynchronous (which requires removing the node through API), and the process takes a long time (which requires continuous observation on whether the node is successfully taken offline), special treatment is given to the TiKV, TiFlash, and TiDB Binlog components.
 
-- For TiKV and Binlog:
+- For TiKV, TiFlash, and Binlog:
 
     - TiUP cluster takes the node offline through API and directly exits without waiting for the process to be completed.
-    - Afterwards, when a command related to the cluster operation is executed, TiUP cluster examines whether there is a TiKV/Binlog node that has been taken offline. If not, TiUP cluster continues with the specified operation; If there is, TiUP cluster takes the following steps:
+    - Afterwards, when a command related to the cluster operation is executed, TiUP cluster examines whether there is a TiKV, TiFlash, or Binlog node that has been taken offline. If not, TiUP cluster continues with the specified operation; If there is, TiUP cluster takes the following steps:
 
         1. Stop the service of the node that has been taken offline.
         2. Clean up the data files related to the node.

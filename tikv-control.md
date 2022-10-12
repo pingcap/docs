@@ -229,20 +229,28 @@ The properties can be used to check whether the Region is healthy or not. If not
 
 ### Compact data of each TiKV manually
 
-Use the `compact` command to manually compact data of each TiKV. If you specify the `--from` and `--to` options, then their flags are also in the form of escaped raw key.
+Use the `compact` command to manually compact data of each TiKV.
 
-- Use the `--host` option to specify the TiKV that needs to perform compaction.
-- Use the `-d` option to specify the RocksDB that performs compaction. The optional values are `kv` and `raft`.
+- Use the `--from` and `--to` options to specify the compaction range in the form of escaped raw key. If not set, the whole range will be compacted.
+- Use the `--region` option to compact the range of a specific region. If set, `--from` and `--to` will be ignored.
+- Use the `--db` option to specify the RocksDB that performs compaction. The optional values are `kv` and `raft`.
 - Use the `--threads` option allows you to specify the concurrency for the TiKV compaction and its default value is `8`. Generally, a higher concurrency comes with a faster compaction speed, which might yet affect the service. You need to choose an appropriate concurrency count based on your scenario.
 - Use the `--bottommost` option to include or exclude the bottommost files when TiKV performs compaction. The value options are `default`, `skip`, and `force`. The default value is `default`.
     - `default` means that the bottommost files are included only when the Compaction Filter feature is enabled.
     - `skip` means that the bottommost files are excluded when TiKV performs compaction.
     - `force` means that the bottommost files are always included when TiKV performs compaction.
 
-```bash
-$ tikv-ctl --data-dir /path/to/tikv compact -d kv
-success!
-```
+- To compact data in the local mode, use the following command:
+
+    ```shell
+    tikv-ctl --data-dir /path/to/tikv compact --db kv
+    ```
+
+- To compact data in the remote mode, use the following command:
+
+    ```shell
+    tikv-ctl --host ip:port compact --db kv
+    ```
 
 ### Compact data of the whole TiKV cluster manually
 
@@ -461,7 +469,7 @@ $ tikv-ctl --data-dir /path/to/tikv recover-mvcc -r 1001,1002 -p 127.0.0.1:2379
 success!
 ```
 
-> **Note**:
+> **Note:**
 >
 > - This command only supports the local mode. It prints `success!` when successfully run.
 > - The argument of the `-p` option specifies the PD endpoints without the `http` prefix. Specifying the PD endpoints is to query whether the specified `region_id` is validated or not.
@@ -542,7 +550,7 @@ Type "I consent" to continue, anything else to exit: I consent
 9291156302549018620: key: 8B6B6B8F83D36BE2467ED55D72AE808B method: Aes128Ctr creation_time: 1592938357
 ```
 
-> **Note**
+> **Note:**
 >
 > The command will expose data encryption keys as plaintext. In production, DO NOT redirect the output to a file. Even deleting the output file afterward may not cleanly wipe out the content from disk.
 

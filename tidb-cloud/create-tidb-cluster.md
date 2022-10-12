@@ -79,6 +79,10 @@ To create a Developer Tier cluster, take the following steps:
     1. Click **Security Settings** in the upper-right corner of the cluster area.
     2. In the **Security Settings** dialog box, set the root password and allowed IP addresses to connect to your cluster, and then click **Apply**.
 
+    > **Note:**
+    >
+    > If you do not set a password, you cannot connect to the cluster.
+
 </div>
 
 <div label="Dedicated Tier">
