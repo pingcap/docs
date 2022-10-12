@@ -2004,7 +2004,7 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 - Type: Boolean
 - Default value: `ON`
 - This variable controls whether the MPP hash partition exchange operator is generated in a cluster with new collation enabled. `true` means to generate the operator, and `false` means not to generate it.
-- This variable is used for the internal operation of TiDB. It is **not recommended** to set this variable.
+- This variable is used for the internal operation of TiDB. It is **NOT recommended** to set this variable.
 
 ### tidb_hash_join_concurrency
 
@@ -2329,7 +2329,7 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 - Type: Float
 - Default value: `0`
 - This variable represents the memory statistics error value allowed in the TiDB memory debug mode.
-- This variable is used for the internal testing of TiDB. It is **not recommended** to set this variable. 
+- This variable is used for the internal testing of TiDB. It is **NOT recommended** to set this variable. 
 
 ### tidb_memory_debug_mode_min_heap_inuse
 
@@ -2337,7 +2337,7 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 - Persists to cluster: No
 - Type: INT64
 - Default value: `0`
-- This variable is used for the internal testing of TiDB. It is **not recommended** to set this variable. Enabling this variable will affect the performance of TiDB.
+- This variable is used for the internal testing of TiDB. It is **NOT recommended** to set this variable. Enabling this variable will affect the performance of TiDB.
 - After configuring this parameter, TiDB will enter the memory debug mode to analyze the accuracy of memory tracking. TiDB will frequently trigger GC during the execution of subsequent SQL statements, and compare the actual memory usage and memory statistics. If the current memory usage is greater than `tidb_memory_debug_mode_min_heap_inuse` and the memory statistics error exceeds `tidb_memory_debug_mode_alarm_ratio`, TiDB will output the relevant memory information to the log and file.
 
 ### tidb_memory_usage_alarm_ratio
@@ -2375,7 +2375,7 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 - Persists to cluster: Yes
 - Default value: `1`
 - This variable sets the concurrency of the `MergeJoin` operator when a query is executed.
-- **It is not recommended to set this variable**. Modifying the value of this variable might cause data correctness issues.
+- It is **NOT recommended** to set this variable. Modifying the value of this variable might cause data correctness issues.
 
 ### tidb_metric_query_range_duration <span class="version-mark">New in v4.0</span>
 
@@ -3252,7 +3252,7 @@ For details, see [Identify Slow Queries](/identify-slow-queries.md).
 - Persists to cluster: Yes
 - Default value: `1`
 - This variable sets the concurrency of the `StreamAgg` operator when queries are executed.
-- **It is not recommended to set this variable**. Modifying the variable value might cause data correctness issues.
+- It is **NOT recommended** to set this variable. Modifying the variable value might cause data correctness issues.
 
 ### tidb_super_read_only <span class="version-mark">New in v5.3.1</span>
 
@@ -3551,7 +3551,7 @@ Internally, the TiDB parser transforms the `SET TRANSACTION ISOLATION LEVEL [REA
 - Persists to cluster: No
 - Default value: `0`
 - In the Stale Read scenarios, this session variable is used to help record the Stable Read timestamp value.
-- This variable is used for the internal operation of TiDB. It is **not recommended to set this variable**.
+- This variable is used for the internal operation of TiDB. It is **NOT recommended** to set this variable.
 
 ### txn_scope
 
@@ -3560,7 +3560,7 @@ Internally, the TiDB parser transforms the `SET TRANSACTION ISOLATION LEVEL [REA
 - Default value: `global`
 - Value options: `global` and `local`
 - This variable is used to set whether the current session transaction is a global transaction or a local transaction.
-- This variable is used for the internal operation of TiDB. It is **not recommended to set this variable**.
+- This variable is used for the internal operation of TiDB. It is **NOT recommended** to set this variable.
 
 ### version
 
