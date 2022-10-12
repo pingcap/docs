@@ -1991,24 +1991,6 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 
 </CustomContent>
 
-### tidb_memory_debug_mode_alarm_ratio
-
-- Scope: SESSION
-- Persists to cluster: No
-- Type: Float
-- Default value: `0`
-- This variable represents the memory statistics error value allowed in the TiDB memory debug mode.
-- This variable is used for the internal testing of TiDB. It is **NOT recommended** to set this variable. 
-
-### tidb_memory_debug_mode_min_heap_inuse
-
-- Scope: SESSION
-- Persists to cluster: No
-- Type: INT64
-- Default value: `0`
-- This variable is used for the internal testing of TiDB. It is **NOT recommended** to set this variable. Enabling this variable will affect the performance of TiDB.
-- After configuring this parameter, TiDB will enter the memory debug mode to analyze the accuracy of memory tracking. TiDB will frequently trigger GC during the execution of subsequent SQL statements, and compare the actual memory usage and memory statistics. If the current memory usage is greater than `tidb_memory_debug_mode_min_heap_inuse` and the memory statistics error exceeds `tidb_memory_debug_mode_alarm_ratio`, TiDB will output the relevant memory information to the log and file.
-
 ### tidb_memory_usage_alarm_ratio
 
 <CustomContent platform="tidb-cloud">
