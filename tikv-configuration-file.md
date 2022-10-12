@@ -974,7 +974,7 @@ RocksDBに関するConfiguration / コンフィグレーション項目
 -   オプションの値: `"read-only"` 、 `"write-only"` 、 `"all-io"`
 -   デフォルト値: `"write-only"`
 
-### <code>rate-limiter-auto-tuned</code> <span class="version-mark">v5.0 の新</span>機能 {#code-rate-limiter-auto-tuned-code-span-class-version-mark-new-in-v5-0-span}
+### <code>rate-limiter-auto-tuned</code><span class="version-mark">新</span>機能 {#code-rate-limiter-auto-tuned-code-span-class-version-mark-new-in-v5-0-span}
 
 -   最近のワークロードに基づいて、RocksDB の圧縮レート リミッターの構成を自動的に最適化するかどうかを決定します。この構成が有効になっている場合、圧縮保留中のバイトは通常よりわずかに高くなります。
 -   デフォルト値: `true`
@@ -1127,7 +1127,7 @@ Titan関連のConfiguration / コンフィグレーション項目。
 ### <code>bottommost-level-compression</code> {#code-bottommost-level-compression-code}
 
 -   最レイヤーの圧縮アルゴリズムを設定します。この構成項目は`compression-per-level`の設定をオーバーライドします。
--   データが LSM ツリーに書き込まれて以来、RocksDB は最レイヤーの`compression-per-level`配列で指定された最後の圧縮アルゴリズムを直接採用しません。 `bottommost-level-compression`を指定すると、最初から圧縮効果が最も高い圧縮アルゴリズムを最レイヤーで使用できます。
+-   データが LSM ツリーに書き込まれて以来、RocksDB は最レイヤーの`compression-per-level`配列で指定された最後の圧縮アルゴリズムを直接採用しません。 `bottommost-level-compression`の場合、最初から最レイヤーで最も圧縮効果の高い圧縮アルゴリズムを使用できます。
 -   最レイヤーの圧縮アルゴリズムを設定しない場合は、この構成項目の値を`disable`に設定します。
 -   デフォルト値: `"zstd"`
 
@@ -1153,7 +1153,7 @@ Titan関連のConfiguration / コンフィグレーション項目。
 
 ### <code>max-bytes-for-level-base</code> {#code-max-bytes-for-level-base-code}
 
--   ベース レベル (L1) の最大バイト数。通常、memtable の 4 倍のサイズに設定されます。
+-   ベース レベル (L1) での最大バイト数。通常、memtable の 4 倍のサイズに設定されます。
 -   `defaultcf`および`writecf`のデフォルト値: `"512MB"`
 -   `lockcf`のデフォルト値: `"128MB"`
 -   最小値: `0`
@@ -1257,7 +1257,7 @@ Titan関連のConfiguration / コンフィグレーション項目。
 
 ## rocksdb.defaultcf.titan {#rocksdb-defaultcf-titan}
 
-関連するConfiguration / コンフィグレーション項目`rocksdb.defaultcf.titan` ．
+に関連するConfiguration / コンフィグレーション項目`rocksdb.defaultcf.titan` ．
 
 ### <code>min-blob-size</code> {#code-min-blob-size-code}
 
@@ -1505,6 +1505,16 @@ BRバックアップに関するConfiguration / コンフィグレーション�
 -   クラスタ リソースの使用率が高い場合に、バックアップ タスクで使用されるリソースを制限してクラスタへの影響を軽減するかどうかを制御します。詳細については、 [BR オートチューン](/br/br-auto-tune.md)を参照してください。
 -   デフォルト値: `true`
 
+### <code>s3-multi-part-size</code> <span class="version-mark">v5.3.2 の新機能</span> {#code-s3-multi-part-size-code-span-class-version-mark-new-in-v5-3-2-span}
+
+> **ノート：**
+>
+> この構成は、S3 レート制限によって引き起こされるバックアップの失敗に対処するために導入されました。この問題は[バックアップ データ ストレージ構造の改善](https://docs.pingcap.com/tidb/stable/backup-and-restore-design#backup-file-structure)で修正されました。したがって、この構成は v6.1.1 から廃止され、推奨されなくなりました。
+
+-   バックアップ中に S3 へのマルチパート アップロードを実行するときに使用されるパート サイズ。この設定の値を調整して、S3 に送信されるリクエストの数を制御できます。
+-   データが S3 にバックアップされ、バックアップ ファイルがこの構成項目の値よりも大きい場合、 [マルチパートアップロード](https://docs.aws.amazon.com/AmazonS3/latest/API/API_UploadPart.html)が自動的に有効になります。圧縮率に基づくと、96 MiBリージョンによって生成されるバックアップ ファイルは、約 10 MiB から 30 MiB です。
+-   デフォルト値: 5MiB
+
 ## CDC {#cdc}
 
 TiCDC に関連するConfiguration / コンフィグレーション項目。
@@ -1578,13 +1588,3 @@ TiCDC に関連するConfiguration / コンフィグレーション項目。
 
 -   この構成アイテムは、ペシミスティック ロックを追加するパイプライン プロセスを有効にします。この機能を有効にすると、データをロックできることを検出した後、TiKV は直ちに TiDB に通知して後続のリクエストを実行し、悲観的ロックを非同期で書き込みます。これにより、ほとんどのレイテンシーが短縮され、悲観的トランザクションのパフォーマンスが大幅に向上します。しかし、悲観的ロックの非同期書き込みが失敗する可能性はまだ低く、悲観的トランザクション コミットの失敗を引き起こす可能性があります。
 -   デフォルト値: `true`
-
-### <code>s3-multi-part-size</code> <span class="version-mark">v5.3.2 の新機能</span> {#code-s3-multi-part-size-code-span-class-version-mark-new-in-v5-3-2-span}
-
-> **ノート：**
->
-> この構成は、S3 レート制限によって引き起こされるバックアップの失敗に対処するために導入されました。この問題は[バックアップ データ ストレージ構造の改善](https://docs.pingcap.com/tidb/stable/backup-and-restore-design#backup-file-structure)で修正されました。したがって、この構成は v6.1.1 から廃止され、推奨されなくなりました。
-
--   バックアップ中に S3 へのマルチパート アップロードを実行するときに使用されるパート サイズ。この設定の値を調整して、S3 に送信されるリクエストの数を制御できます。
--   データが S3 にバックアップされ、バックアップ ファイルがこの構成項目の値よりも大きい場合、 [マルチパートアップロード](https://docs.aws.amazon.com/AmazonS3/latest/API/API_UploadPart.html)が自動的に有効になります。圧縮率に基づくと、96 MiBリージョンによって生成されるバックアップ ファイルは、約 10 MiB から 30 MiB です。
--   デフォルト値: 5MiB
