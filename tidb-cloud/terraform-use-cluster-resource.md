@@ -852,6 +852,134 @@ You can pause a cluster when its status is `AVAILABLE` or resume a cluster when 
 
 Now, you have created and managed a Dedicated Tier cluster with Terraform. Next, you can try creating a backup of the cluster by our [backup resource](/tidb-cloud/terraform-use-backup-resource.md).
 
+## Import a cluster
+
+You can manage a cluster with Terraform by importing the cluster even if it is not created by Terraform.
+
+The following steps show you how to import the cluster created by the restore task in the last section.
+
+1. Create a new `import_cluster.tf` as follows:
+
+    ```
+    terraform {
+     required_providers {
+       tidbcloud = {
+         source = "tidbcloud/tidbcloud"
+         version = "~> 0.0.1"
+       }
+     }
+     required_version = ">= 1.0.0"
+   }
+    resource "tidbcloud_cluster" "import_cluster" {}
+    ```
+
+2. Import the cluster by `terraform import tidbcloud_cluster.import_cluster projectId,clusterId`:
+
+   For example:
+
+    ```
+    $ terraform import tidbcloud_cluster.import_cluster 1372813089189561287,1379661944630264072
+
+    tidbcloud_cluster.import_cluster: Importing from ID "1372813089189561287,1379661944630264072"...
+    tidbcloud_cluster.import_cluster: Import prepared!
+      Prepared tidbcloud_cluster for import
+    tidbcloud_cluster.import_cluster: Refreshing state... [id=1379661944630264072]
+
+    Import successful!
+
+    The resources that were imported are shown above. These resources are now in
+    your Terraform state and will henceforth be managed by Terraform.
+    ```
+
+3. Run the `terraform state show tidbcloud_cluster.import_cluster` command to check the status of the cluster:
+
+    ```
+    $ terraform state show tidbcloud_cluster.restore_cluster1
+
+    # tidbcloud_cluster.restore_cluster1:
+    resource "tidbcloud_cluster" "restore_cluster1" {
+        cloud_provider = "AWS"
+        cluster_type   = "DEDICATED"
+        config         = {
+            components = {
+                tidb    = {
+                    node_quantity = 2
+                    node_size     = "8C16G"
+                }
+                tiflash = {
+                    node_quantity    = 2
+                    node_size        = "8C64G"
+                    storage_size_gib = 500
+                }
+                tikv    = {
+                    node_quantity    = 6
+                    node_size        = "8C32G"
+                    storage_size_gib = 500
+                }
+            }
+            port       = 4000
+        }
+        id             = "1379661944630264072"
+        name           = "restoreCluster"
+        project_id     = "1372813089189561287"
+        region         = "eu-central-1"
+        status         = "AVAILABLE"
+    }
+    ```
+
+4. To manage the cluster using Terraform, you can copy the output of the previous step to your configuration file. Note that you need to delete the lines of `id` and `status`, because they will be controlled by Terraform instead:
+
+    ```
+    resource "tidbcloud_cluster" "restore_cluster1" {
+          cloud_provider = "AWS"
+          cluster_type   = "DEDICATED"
+          config         = {
+              components = {
+                  tidb    = {
+                      node_quantity = 2
+                      node_size     = "8C16G"
+                  }
+                  tiflash = {
+                      node_quantity    = 2
+                      node_size        = "8C64G"
+                      storage_size_gib = 500
+                  }
+                  tikv    = {
+                      node_quantity    = 6
+                      node_size        = "8C32G"
+                      storage_size_gib = 500
+                  }
+              }
+              port       = 4000
+          }
+          name           = "restoreCluster"
+          project_id     = "1372813089189561287"
+          region         = "eu-central-1"
+    }
+    ```
+
+5. You can use `terraform fmt` to format your configuration file:
+
+    ```
+    $ terraform fmt
+    ```
+
+6. To ensure the consistency of the configuration and state, you can execute `terraform plan` or `terraform apply`. If you see `No changes`, the import is successful.
+
+    ```
+    $ terraform apply
+
+    tidbcloud_cluster.import_cluster: Refreshing state... [id=1379661944630264072]
+
+    No changes. Your infrastructure matches the configuration.
+
+    Terraform has compared your real infrastructure against your configuration and found no differences, so no changes are needed.
+
+    Apply complete! Resources: 0 added, 0 changed, 0 destroyed.
+    ```
+
+Now you can use Terraform to manage the cluster created by the restore task.
+
 ## Delete a cluster
 
 To delete a cluster, go to the cluster directory where the corresponding `cluster.tf` file is located, and then run the `terraform destroy` command to destroy the cluster resource:
