@@ -32,7 +32,7 @@ For a full list of compatibility differences, see [MySQL Compatibility](/mysql-c
 
 ## Java
 
-This section describes how to use Driver and ORM of Java language.
+This section describes how to use Driver and ORM in Java.
 
 ### Java Drivers
 
@@ -153,7 +153,7 @@ In addition, you need to specify the TiDB dialect in your [Hibernate configurati
 
 Support level: **Full**
 
-To avoid manually managing complex relationships between different dependencies of an application, you can use [Gradle](https://gradle.org/install) or [Maven](https://maven.apache.org/install.html) to get all dependencies of your application, including those indirect ones.
+To avoid manually managing complex relationships between different dependencies of an application, you can use [Gradle](https://gradle.org/install) or [Maven](https://maven.apache.org/install.html) to get all dependencies of your application, including those indirect dependencies.
 
 If you are using Maven, add the following to your `<dependencies></dependencies>`:
 
@@ -222,7 +222,7 @@ implementation group: 'io.github.lastincisor', name: 'tidb-loadbalance', version
 
 ## Golang
 
-This section describes how to use Driver and ORM of Golang language.
+This section describes how to use Driver and ORM in Golang.
 
 ### Golang Drivers
 
@@ -230,7 +230,7 @@ This section describes how to use Driver and ORM of Golang language.
 
 Support level: **Full**
 
-You can follow the [go-sql-driver/mysql documentation](https://github.com/go-sql-driver/mysql) to download and configure a Golang driver.
+To download and configure a Golang driver, refer to the [go-sql-driver/mysql documentation](https://github.com/go-sql-driver/mysql).
 
 For an example of how to build a complete application, see [Build a Simple CRUD App with TiDB and Golang](/develop/dev-guide-sample-application-golang.md).
 
@@ -240,7 +240,7 @@ For an example of how to build a complete application, see [Build a Simple CRUD 
 
 Support level: **Full**
 
-GORM is a popular ORM framework for Golang, and you can use `go get` to get all of your application's dependencies.
+GORM is a popular ORM framework for Golang. To get all dependencies in your application, you can use the `go get` command.
 
 ```shell
 go get -u gorm.io/gorm
