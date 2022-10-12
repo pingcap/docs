@@ -189,7 +189,7 @@ You can manage a cluster with Terraform by importing the cluster even if it is n
 
 The following steps show you how to import the cluster created by the restore task in the last section.
 
-1. Add a cluster resource as follows:
+1. Add a cluster resource in `restore.tf` as follows, you can also create a new `tf` file:
 
     ```
     resource "tidbcloud_cluster" "restore_cluster1" {}
