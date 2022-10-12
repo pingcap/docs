@@ -17,7 +17,7 @@ summary: Describes TiDB compatibility issues with third-party tools found during
 > - `SPATIAL` functions, data types and indexes
 > - `XA` syntax
 >
-> The preceding unsupported features are considered expected behavior and are not listed in this document. For more details, see [MySQL Compatibility](/mysql-compatibility.md).
+> The preceding unsupported features are expected behavior and are not listed in this document. For more details, see [MySQL Compatibility](/mysql-compatibility.md).
 
 ## General incompatibility
 
@@ -39,7 +39,7 @@ MySQL maintains a series of [server status variables starting with `Com_`](https
 
 **Way to avoid**
 
-Please do not use these variables. One of the common usage scenarios is monitoring. TiDB is well observable and does not require querying from server status variables. For custom monitoring tools, refer to [TiDB Monitoring Framework Overview](/tidb-monitoring-framework.md).
+Do not use these variables. One common scenario is monitoring. TiDB is well observable and does not require querying from server status variables. For custom monitoring tools, refer to [TiDB Monitoring Framework Overview](/tidb-monitoring-framework.md).
 
 ### TiDB distinguishes between `TIMESTAMP` and `DATETIME` in error messages
 
@@ -49,21 +49,21 @@ TiDB error messages distinguish between `TIMESTAMP` and `DATETIME`, while MySQL 
 
 **Way to avoid**
 
-Do not use the error messages for string matching, but use [Error Codes](/error-codes.md) for troubleshooting.
+Do not use the error messages for string matching. Instead, use [Error Codes](/error-codes.md) for troubleshooting.
 
 ### TiDB does not support the `CHECK TABLE` statement
 
 **Description**
 
-The `CHECK TABLE` statement is not supported in TiDB. To check the consistency of data and corresponding indexes, you can use the [`ADMIN CHECK [TABLE|INDEX]`](/sql-statements/sql-statement-admin-check-table-index.md) statement in TiDB.
+The `CHECK TABLE` statement is not supported in TiDB. 
 
 **Way to avoid**
 
-Use [`ADMIN CHECK [TABLE|INDEX]`](/sql-statements/sql-statement-admin-check-table-index.md) instead.
+To check the consistency of data and corresponding indexes, you can use the [`ADMIN CHECK [TABLE|INDEX]`](/sql-statements/sql-statement-admin-check-table-index.md) statement in TiDB.
 
 ## MySQL JDBC incompatibility
 
-Test Version: MySQL Connector/J `8.0.29`
+Test Version: MySQL Connector/J `8.0.29`.
 
 ### Default collations are inconsistent
 
@@ -71,7 +71,7 @@ Test Version: MySQL Connector/J `8.0.29`
 
 The collations of MySQL Connector/J are stored in the client and are distinguished by the server version.
 
-Known character sets for which client-side and server-side collations do not match:
+The following table shows known character sets for which client-side and server-side collations do not match:
 
 | Character Sets | Client Default Collations | Server Default Collations |
 | - | - | - |
@@ -81,23 +81,23 @@ Known character sets for which client-side and server-side collations do not mat
 
 **Way to avoid**
 
-Set the sorting rules manually and do not rely on the client default sorting rules (client default sorting rules are saved by the MySQL Connector/J configuration file).
+Set the sorting rules manually and do not rely on the client default sorting rules. Client default sorting rules are saved in the MySQL Connector/J configuration file.
 
-### The `NO_BACKSLASH_ESCAPES` parameter is ineffective
+### The `NO_BACKSLASH_ESCAPES` parameter does not work
 
 **Description**
 
-The `NO_BACKSLASH_ESCAPES` parameter cannot be used so that `\` character is not escaped. Tracking the [issue](https://github.com/pingcap/tidb/issues/35302).
+The `NO_BACKSLASH_ESCAPES` parameter cannot be used so that `\` character is not escaped. Track this [issue](https://github.com/pingcap/tidb/issues/35302).
 
 **Way to avoid**
 
-Do not use `NO_BACKSLASH_ESCAPES` with `\`, but use normal `\\` for SQL writing.
+Do not use `NO_BACKSLASH_ESCAPES` with `\`, but use `\\` for SQL writing.
 
 ### The `INDEX_USED` parameters are not supported
 
 **Description**
 
-TiDB does not set the `SERVER_QUERY_NO_GOOD_INDEX_USED` and `SERVER_QUERY_NO_INDEX_USED` parameters in the protocol. This will cause the following parameters to be returned inconsistently with the actual:
+TiDB does not set the `SERVER_QUERY_NO_GOOD_INDEX_USED` and `SERVER_QUERY_NO_INDEX_USED` parameters in the protocol. This will cause the following parameters to be returned inconsistently with the actual situation:
 
 - `com.mysql.cj.protocol.ServerSession.noIndexUsed()`
 - `com.mysql.cj.protocol.ServerSession.noGoodIndexUsed()`
@@ -110,7 +110,7 @@ Do not use the `noIndexUsed()` and `noGoodIndexUsed()` functions.
 
 **Description**
 
-TiDB does not support the [enablePacketDebug](https://dev.mysql.com/doc/connector-j/8.0/en/connector-j-connp-props-debugging-profiling.html) parameter, which is a MySQL Connector/J parameter used for debugging that will retain the packet's ring buffer. This might cause the connection to **UNEXPECTED CLOSE** and **DO NOT** turn it on.
+TiDB does not support the [enablePacketDebug](https://dev.mysql.com/doc/connector-j/8.0/en/connector-j-connp-props-debugging-profiling.html) parameter. It is a MySQL Connector/J parameter used for debugging that will retain the packet's ring buffer. This might cause the connection to **UNEXPECTED CLOSE**. **DO NOT** turn it on.
 
 **Way to avoid**
 
@@ -120,7 +120,7 @@ Do not set the `enablePacketDebug` parameter.
 
 **Description**
 
-TiDB does not support `UpdatableResultSet`, that is **DO NOT** specify the `ResultSet.CONCUR_UPDATABLE` parameter and update data inside the ResultSet.
+TiDB does not support `UpdatableResultSet`. **DO NOT** specify the `ResultSet.CONCUR_UPDATABLE` parameter or update data inside the `ResultSet`.
 
 **Way to avoid**
 
@@ -152,7 +152,7 @@ The database connection might hang under certain conditions when using MySQL Con
 
 This is a known issue, and MySQL Connector/J has not merged the fixed code so far.
 
-There are two-dimensional fixes in TiDB:
+TiDB fixes it in the following ways:
 
 - Client side: you can replace the official MySQL Connector/J with [pingcap/mysql-connector-j](https://github.com/pingcap/mysql-connector-j). The bug is fixed in **pingcap/mysql-connector-j**.
 - Server side: you can upgrade the server to v6.3.0 or later versions. In TiDB v6.3.0, this compatibility issue has been fixed.
