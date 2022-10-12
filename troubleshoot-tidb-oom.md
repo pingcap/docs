@@ -13,7 +13,7 @@ When you troubleshoot OOM issues, follow this process:
 
 1. First, confirm whether it is an OOM issue.
 
-    Execute the following command to check the operating system logs. If the result has the OOM-killer logs near the time point when the problem occurs, then it is likely that an OOM problem has occurred.
+    Execute the following command to check the operating system logs. If the result has the OOM-killer logs near the time point when the problem occurs, then you can confirm that an OOM problem has occurred.
 
     ```shell
     dmesg -T | grep tidb-server
@@ -110,11 +110,10 @@ You can split a single large transaction to make it smaller in size.
 
 #### The process of collecting and loading statistical information consumes too much memory
 
-A TiDB node needs to load statistics into memory after it starts. Since TiDB v6.1.0, [`enable_tidb_stats_cache_mem_quota`](/tidb-configuration-file.md#enable-stats-cache-mem-quota-span-classversion-marknew-in-v610span) has been introduced to improve memory usage for statistical information.
-
-TiDB consumes memory when collecting statistical information. You can control memory usage by the following ways:
+A TiDB node needs to load statistics into memory after it starts. TiDB consumes memory when collecting statistical information. You can control memory usage by the following ways:
 
 - Specify a sampling rate, only collect statistics for specific columns, and reduce analyze concurrency.
+- Since TiDB v6.1.0, you can use the system variable [`enable_tidb_stats_cache_mem_quota`](/tidb-configuration-file.md#enable-stats-cache-mem-quota-span-classversion-marknew-in-v610span) to control the memory usage for statistical information.
 - Since TiDB v6.1.0, you can use the system variable [`tidb_mem_quota_analyze`](/system-variables.md#tidb_mem_quota_analyze-span-classversion-marknew-in-v610span) to control the maximum memory usage when TiDB updates statistics.
 
 For more information, see [Introduction to Statistics](/statistics.md).
