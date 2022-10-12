@@ -11,7 +11,7 @@ This document describes how to troubleshoot TiDB OOM (Out of Memory) issues, inc
 
 The following are some typical OOM phenomena:
 
-- The client side reports the following error: `SQL error, errno = 2013, state = 'HY000': Lost connection to MySQL server during query`
+- The client side reports the following error: `SQL error, errno = 2013, state = 'HY000': Lost connection to MySQL server during query`.
 
 - The Grafana dashboard shows:
     - **TiDB** > **Server** > **Memory Usage** shows that the `process/heapInUse` metric keeps rising, and suddenly drops to zero after reaching the threshold.
@@ -54,7 +54,7 @@ When you troubleshoot OOM issues, follow this process:
     - If the OOM is caused by a deployment issue, you need to investigate the resource configuration and impact of hybrid deployment.
     - If the OOM is caused by a database issue, the following are some possible causes:
         - TiDB handles large data traffic, such as large queries, large writes, and data import.
-        - TiDB is in a high concurrency scenario, where multiple SQL concurrency consumes resources or operator concurrency is high.
+        - TiDB is in a high concurrency scenario, where multiple SQL statements consume resources concurrently or operator concurrency is high.
         - TiDB has a memory leak and resources are not released.
 
     Refer to the following sections for specific troubleshooting methods.
@@ -69,7 +69,7 @@ Depending on the reasons for OOM issues, it can be divided into the following sc
 
 ### Deployment issues
 
-The following are common causes of OOM caused by deployment issues:
+The following are some causes of OOM due to improper deployment:
 
 - The memory capacity of the operating system is too small.
 - The TiUP configuration [`resource_control`](/tiup/tiup-cluster-topology-reference.md#global) is not appropriate.
@@ -93,7 +93,7 @@ You can take the following measures to reduce the memory usage of SQL statements
     - Adjust the JOIN order between tables.
     - Use hints to optimize SQL statements.
 
-- Some operators and functions do not support pushing down to the storage level, resulting in a huge accumulation of intermediate result sets. In this case, you need to refine the business SQL statements or use hints to optimize, and use the functions or operators that support pushing down.
+- Some operators and functions are not supported to be pushed down to the storage level, resulting in a huge accumulation of intermediate result sets. In this case, you need to refine the SQL statements or use hints to optimize, and use the functions or operators that support pushing down.
 
 - The execution plan contains the operator HashAgg. HashAgg is executed concurrently by multiple threads, which is faster but consumes more memory. Instead, you can use `STREAM_AGG()`.
 
@@ -108,13 +108,13 @@ You can take the following measures to reduce the memory usage of SQL statements
 
 You need to plan for memory capacity. TiDB can consume up to two to three times more memory than the size of a committed transaction when processing a transaction.
 
-You can split a single large transaction to make it smaller in size.
+You can split a single large transaction to multiple smaller transactions.
 
 #### The process of collecting and loading statistical information consumes too much memory
 
-A TiDB node needs to load statistics into memory after it starts. TiDB consumes memory when collecting statistical information. You can control memory usage by the following ways:
+A TiDB node needs to load statistics into memory after it starts. TiDB consumes memory when collecting statistical information. You can control memory usage in the following ways:
 
-- Specify a sampling rate, only collect statistics for specific columns, and reduce `ANALYZE`concurrency.
+- Specify a sampling rate, only collect statistics for specific columns, and reduce `ANALYZE` concurrency.
 - Since TiDB v6.1.0, you can use the system variable [`tidb_stats_cache_mem_quota`](/tidb-configuration-file.md#tidb-stats-cache-mem-quota-span-classversion-marknew-in-v610span) to control the memory usage for statistical information.
 - Since TiDB v6.1.0, you can use the system variable [`tidb_mem_quota_analyze`](/system-variables.md#tidb_mem_quota_analyze-span-classversion-marknew-in-v610span) to control the maximum memory usage when TiDB updates statistics.
 
@@ -122,7 +122,7 @@ For more information, see [Introduction to Statistics](/statistics.md).
 
 #### Prepared statements are overused
 
-The client side keeps creating prepared statements but does not execute [`deallocate prepare stmt`](/sql-prepared-plan-cache.md#ignore-the-com_stmt_close-command-and-the-deallocate-prepare-statement), which causes memory consumption to continue to rise and eventually triggers TiDB OOM. The reason is that the memory occupied by a prepared statement is not released until the session is closed. This is especially important under long connections.
+The client side keeps creating prepared statements but does not execute [`deallocate prepare stmt`](/sql-prepared-plan-cache.md#ignore-the-com_stmt_close-command-and-the-deallocate-prepare-statement), which causes memory consumption to continue to rise and eventually triggers TiDB OOM. The reason is that the memory occupied by a prepared statement is not released until the session is closed. This is especially important for long-time connection sessions.
 
 To solve the problem, consider the following measures:
 
@@ -132,7 +132,7 @@ To solve the problem, consider the following measures:
 
 #### `tidb_enable_rate_limit_action` is not configured properly
 
-The system variable [`tidb_enable_rate_limit_action`](/system-variables.md#tidb_enable_rate_limit_action) controls memory usage effectively when an SQL statement only reads data. If computing operations (such as join or aggregation operations) are required, memory usage might not be under the control of [`tidb_mem_quota_query`](/system-variables.md#tidb_mem_quota_query), which increases the risk of OOM.
+The system variable [`tidb_enable_rate_limit_action`](/system-variables.md#tidb_enable_rate_limit_action) controls memory usage effectively when an SQL statement only reads data. When this variable is enabled and computing operations (such as join or aggregation operations) are required, memory usage might not be under the control of [`tidb_mem_quota_query`](/system-variables.md#tidb_mem_quota_query), which increases the risk of OOM.
 
 It is recommended that you disable this system variable. Since TiDB v6.3.0, this system variable is disabled by default.
 
@@ -141,15 +141,15 @@ It is recommended that you disable this system variable. Since TiDB v6.3.0, this
 If OOM occurs on the client side, investigate the following:
 
 - Check the trend and speed on **Grafana TiDB Details** > **Server** > **Client Data Traffic** to see if there is a network blockage.
-- Check whether there is an application OOM caused by wrong JDBC configuration parameters. For example, if the parameter related to streaming read `defaultFetchSize` is incorrectly configured, it can cause data to be heavily accumulated on the client side.
+- Check whether there is an application OOM caused by wrong JDBC configuration parameters. For example, if the `defaultFetchSize` parameter for streaming read is incorrectly configured, it can cause data to be heavily accumulated on the client side.
 
-## Diagnostic information to be collected to address OOM issues
+## Diagnostic information to be collected to troubleshoot OOM issues
 
-To locate an OOM issue, you need to collect the following information:
+To locate the root cause of an OOM issue, you need to collect the following information:
 
 - Collect the memory-related configurations of the operating system:
     - TiUP configuration: `resource_control.memory_limit`
-    - Operating system configuration:
+    - Operating system configurations:
         - Memory information: `cat /proc/meminfo`
         - Kernel parameters: `vm.overcommit_memory`
     - NUMA information:
