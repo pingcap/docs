@@ -28,7 +28,7 @@ When you troubleshoot OOM issues, follow this process:
 
 1. First, confirm whether it is an OOM issue.
 
-    Execute the following command to check the operating system logs. If the result has the OOM-killer logs near the time point when the problem occurs, then you can confirm that an OOM problem has occurred.
+    Execute the following command to check the operating system logs. If the result has the `oom-killer` logs near the time point when the problem occurs, then you can confirm that an OOM problem has occurred.
 
     ```shell
     dmesg -T | grep tidb-server
@@ -156,7 +156,7 @@ To locate an OOM failure, you need to collect the following information:
         - `numactl --hardware`
         - `numactl --show`
 
-- Collect the memory-related configuration of the database
+- Collect the version information and the memory-related configuration of the database
     - tidb version
     - `tidb_mem_quota_query`,
     - `memory-usage-alarm-ratio`
