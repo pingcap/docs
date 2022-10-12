@@ -115,7 +115,7 @@ You can split a single large transaction to multiple smaller transactions.
 A TiDB node needs to load statistics into memory after it starts. TiDB consumes memory when collecting statistical information. You can control memory usage in the following ways:
 
 - Specify a sampling rate, only collect statistics for specific columns, and reduce `ANALYZE` concurrency.
-- Since TiDB v6.1.0, you can use the system variable [`tidb_stats_cache_mem_quota`](/tidb-configuration-file.md#tidb-stats-cache-mem-quota-span-classversion-marknew-in-v610span) to control the memory usage for statistical information.
+- Since TiDB v6.1.0, you can use the system variable [`tidb_stats_cache_mem_quota`](/system-variables.md#tidb-stats-cache-mem-quota-span-classversion-marknew-in-v610span) to control the memory usage for statistical information.
 - Since TiDB v6.1.0, you can use the system variable [`tidb_mem_quota_analyze`](/system-variables.md#tidb_mem_quota_analyze-span-classversion-marknew-in-v610span) to control the maximum memory usage when TiDB updates statistics.
 
 For more information, see [Introduction to Statistics](/statistics.md).
