@@ -61,7 +61,7 @@ When you troubleshoot OOM issues, follow this process:
 
 ## Typical causes and solutions
 
-Depending on the reasons for OOM issues, it can be divided into the following scenarios.
+OOM issues are usually caused by the following:
 
 - [Deployment issues](#deployment-issues)
 - [Database issues](#database-issues)
@@ -106,7 +106,7 @@ You can take the following measures to reduce the memory usage of SQL statements
 
 #### Large transactions or large writes consume too much memory
 
-You need to plan for memory capacity. TiDB can consume up to two to three times more memory than the size of a committed transaction when processing a transaction.
+You need to plan for memory capacity. When processing a transaction, TiDB can consume memory up to two to three times the size of the transaction.
 
 You can split a single large transaction to multiple smaller transactions.
 
