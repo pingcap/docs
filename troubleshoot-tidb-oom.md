@@ -1,5 +1,5 @@
 ---
-title: Troubleshoot OOM Issues
+title: Troubleshoot TiDB OOM Issues
 summary: Learn how to diagnose and resolve TiDB Out of Memory (OOM) issues.
 ---
 
