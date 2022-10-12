@@ -856,7 +856,7 @@ Now, you have created and managed a Dedicated Tier cluster with Terraform. Next,
 
 You can manage a cluster with Terraform by importing the cluster even if it is not created by Terraform.
 
-1. Create a new `import_cluster.tf` as follows:
+1. Create a `import_cluster.tf` file as follows:
 
     ```
     terraform {
