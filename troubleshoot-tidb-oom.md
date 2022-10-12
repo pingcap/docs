@@ -5,7 +5,7 @@ summary: Learn how to diagnose and resolve TiDB Out of Memory (OOM) issues.
 
 # Troubleshoot OOM Issues
 
-This document describes how to troubleshoot TiDB Out of Memory (OOM) problems, including phenomena, causes, solutions, and diagnostic information.
+This document describes how to troubleshoot TiDB Out of Memory (OOM), including phenomena, causes, solutions, and diagnostic information.
 
 ## Typical OOM phenomena
 
@@ -73,7 +73,7 @@ The following are common causes of OOM caused by deployment issues:
 
 - The memory capacity of the operating system is too small.
 - The TiUP configuration [`resource_control`](/tiup/tiup-cluster-topology-reference.md#global) is not appropriate.
-- In the case of hybrid deployments (meaning that TiDB and other applications are deployed on the same server), TiDB is killed accidentally by the `oom-killer` due to lack of resources.
+- In the case of hybrid deployments (meaning that TiDB and other applications are deployed on the same server), TiDB is killed accidentally by `oom-killer` due to lack of resources.
 
 ### Database issues
 
