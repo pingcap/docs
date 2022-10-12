@@ -1299,7 +1299,7 @@ MPP is a distributed computing framework provided by the TiFlash engine, which a
 - This variable is used to set whether to enable the statistics `Fast Analyze` feature.
 - If the statistics `Fast Analyze` feature is enabled, TiDB randomly samples about 10,000 rows of data as statistics. When the data is distributed unevenly or the data size is small, the statistics accuracy is low. This might lead to a non-optimal execution plan, for example, selecting a wrong index. If the execution time of the regular `Analyze` statement is acceptable, it is recommended to disable the `Fast Analyze` feature.
 
-### tidb_enable_foreign_key <span class="version-mark">New in v6.3.0</span>
+### `tidb_enable_foreign_key` <span class="version-mark">New in v6.3.0</span>
 
 > **Warning:**
 >
@@ -1310,7 +1310,7 @@ MPP is a distributed computing framework provided by the TiFlash engine, which a
 - Default value: `OFF`
 - This variable controls whether to enable the `FOREIGN KEY` feature.
 
-### tidb_enable_general_plan_cache <span class="version-mark">New in v6.3.0</span>
+### `tidb_enable_general_plan_cache` <span class="version-mark">New in v6.3.0</span>
 
 > **Warning:**
 >
@@ -1351,7 +1351,8 @@ MPP is a distributed computing framework provided by the TiFlash engine, which a
 - Persists to cluster: Yes
 - Type: Boolean
 - Default value: `false`
-- Specifies whether to enable the `IndexMergeJoin` operator. This variable is used only for the internal operation of TiDB. It is **NOT recommended** to adjust it. Otherwise, data correctness might be affected.
+- Specifies whether to enable the `IndexMergeJoin` operator.
+- This variable is used only for the internal operation of TiDB. It is **NOT recommended** to adjust it. Otherwise, data correctness might be affected.
 
 ### tidb_enable_legacy_instance_scope <span class="version-mark">New in v6.0.0</span>
 
@@ -2002,8 +2003,8 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 - Persists to cluster: Yes
 - Type: Boolean
 - Default value: `true`
-- This variable is used for the internal operation of TiDB. It is **not recommended** to set this variable.
 - This variable controls whether the MPP hash partition exchange operator is generated in a cluster with new collation enabled. `true` means to generate the operator, and `false` means not to generate it.
+- This variable is used for the internal operation of TiDB. It is **not recommended** to set this variable.
 
 ### tidb_hash_join_concurrency
 
@@ -2327,7 +2328,8 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 - Persists to cluster: No
 - Type: Float
 - Default value: `0`
-- This variable is used for the internal testing of TiDB. It is **not recommended** to set this variable. This variable represents the memory statistics error value allowed in the TiDB memory debug mode.
+- This variable represents the memory statistics error value allowed in the TiDB memory debug mode.
+- This variable is used for the internal testing of TiDB. It is **not recommended** to set this variable. 
 
 ### tidb_memory_debug_mode_min_heap_inuse
 
@@ -3548,8 +3550,8 @@ Internally, the TiDB parser transforms the `SET TRANSACTION ISOLATION LEVEL [REA
 - Scope: SESSION
 - Persists to cluster: No
 - Default value: `0`
-- This variable is used for the internal operation of TiDB. It is **not recommended to set this variable**.
 - In the Stale Read scenarios, this session variable is used to help record the Stable Read timestamp value.
+- This variable is used for the internal operation of TiDB. It is **not recommended to set this variable**.
 
 ### txn_scope
 
@@ -3557,8 +3559,8 @@ Internally, the TiDB parser transforms the `SET TRANSACTION ISOLATION LEVEL [REA
 - Persists to cluster: No
 - Default value: `global`
 - Value options: `global` and `local`
-- This variable is used for the internal operation of TiDB. It is **not recommended to set this variable**.
 - This variable is used to set whether the current session transaction is a global transaction or a local transaction.
+- This variable is used for the internal operation of TiDB. It is **not recommended to set this variable**.
 
 ### version
 
