@@ -25,8 +25,7 @@ For example, if you do not want to use the MPP mode, you can execute the followi
 {{< copyable "sql" >}}
 
 ```sql
-set @@session.tidb_allow_mpp=1;
-set @@session.tidb_enforce_mpp=0;
+set @@session.tidb_allow_mpp=0;
 ```
 
 If you want TiDB's cost-based optimizer to automatically decide whether to use the MPP mode (by default), you can execute the following statements:
@@ -58,8 +57,6 @@ The initial value of the `tidb_enforce_mpp` session variable is equal to the [`e
 > When `tidb_enforce_mpp=1` takes effect, the TiDB optimizer will ignore the cost estimation to choose the MPP mode. However, if other factors block the MPP mode, TiDB will not select the MPP mode. These factors include the absence of TiFlash replica, unfinished replication of TiFlash replicas, and statements containing operators or functions that are not supported by the MPP mode.
 >
 > If TiDB optimizer cannot select the MPP mode due to reasons other than cost estimation, when you use the `EXPLAIN` statement to check out the execution plan, a warning is returned to explain the reason. For example:
->
-> {{< copyable "sql" >}}
 >
 > ```sql
 > set @@session.tidb_enforce_mpp=1;
