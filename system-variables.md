@@ -1351,7 +1351,7 @@ MPP is a distributed computing framework provided by the TiFlash engine, which a
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
 - Type: Boolean
-- Default value: `false`
+- Default value: `OFF`
 - Specifies whether to enable the `IndexMergeJoin` operator.
 - This variable is used only for the internal operation of TiDB. It is **NOT recommended** to adjust it. Otherwise, data correctness might be affected.
 
@@ -1497,12 +1497,12 @@ MPP is a distributed computing framework provided by the TiFlash engine, which a
 - Default value: `OFF`
 - This variable controls whether to enable concurrency for the `Apply` operator. The number of concurrencies is controlled by the `tidb_executor_concurrency` variable. The `Apply` operator processes correlated subqueries and has no concurrency by default, so the execution speed is slow. Setting this variable value to `1` can increase concurrency and speed up execution. Currently, concurrency for `Apply` is disabled by default.
 
-### tidb_enable_piplelined_window_function
+### tidb_enable_pipelined_window_function
 
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
 - Type: Boolean
-- Default value: `true`
+- Default value: `ON`
 - This variables specifies whether to use the pipeline execution algorithm for window functions.
 
 ### tidb_enable_prepared_plan_cache <span class="version-mark">New in v6.1.0</span>
@@ -2003,7 +2003,7 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
 - Type: Boolean
-- Default value: `true`
+- Default value: `ON`
 - This variable controls whether the MPP hash partition exchange operator is generated in a cluster with new collation enabled. `true` means to generate the operator, and `false` means not to generate it.
 - This variable is used for the internal operation of TiDB. It is **not recommended** to set this variable.
 
@@ -2376,7 +2376,7 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 - Persists to cluster: Yes
 - Default value: `1`
 - This variable sets the concurrency of the `MergeJoin` operator when a query is executed.
-- Warning: **It is not recommended to set this variable. Modifying the value of this variable might cause data correctness issues**.
+- **It is not recommended to set this variable**. Modifying the value of this variable might cause data correctness issues.
 
 ### tidb_metric_query_range_duration <span class="version-mark">New in v4.0</span>
 
@@ -3253,7 +3253,7 @@ For details, see [Identify Slow Queries](/identify-slow-queries.md).
 - Persists to cluster: Yes
 - Default value: `1`
 - This variable sets the concurrency of the `StreamAgg` operator when queries are executed.
-- Warning: **It is not recommended to set this variable. Modifying the variable value might cause data correctness issues**.
+- **It is not recommended to set this variable**. Modifying the variable value might cause data correctness issues.
 
 ### tidb_super_read_only <span class="version-mark">New in v5.3.1</span>
 
