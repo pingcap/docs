@@ -1239,6 +1239,7 @@ Constraint checking is always performed in place for pessimistic transactions (d
 - Type: Boolean
 - Default value: `OFF`
 - This variable is used for an unreleased feature. **Do not change the variable value**.
+
 ### tidb_enable_mutation_checker <span class="version-mark">New in v6.0.0</span>
 
 - Scope: SESSION | GLOBAL
