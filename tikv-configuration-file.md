@@ -39,7 +39,7 @@ This document only describes the parameters that are not included in command-lin
 ### `memory-usage-limit`
 
 + The limit on memory usage of the TiKV instance. When the memory usage of TiKV almost reaches this threshold, internal cache will be evicted to release memory.
-+ In most cases, the TiKV instance is set to use 75% of the total available system memory, so you do not need to explicitly specify this configuration item. Considering the behavior of `storage.block-cache.capacity`, this means the rest 25% of memory is reserved for the OS page cache.
++ In most cases, the TiKV instance is set to use 75% of the total available system memory, so you do not need to explicitly specify this configuration item. The rest 25% of the memory is reserved for the OS page cache. See [`storage.block-cache.capacity`](#capacity) for details.
 + When deploying multiple TiKV nodes on a single physical machine, you still do not need to set this configuration item. In this case, the TiKV instance uses `5/3 * block-cache.capacity` of memory.
 + The default value for different system memory capacity is as follows:
 
@@ -120,18 +120,18 @@ This document only describes the parameters that are not included in command-lin
 ### `advertise-addr`
 
 + Advertise the listening address for client communication
-+ If this configuration item is not set, `addr` is used.
++ If this configuration item is not set, the value of `addr` is used.
 + Default value: `""`
 
 ### `status-addr`
 
-+ The status address reports TiKV status directly through the `HTTP` address
++ The configuration item reports TiKV status directly through the `HTTP` address
 
-    > **Note:**
+    > **Warning:**
     >
     > If this value is exposed to the public, the status information of the TiKV server might be leaked.
 
-+ To disable this configuration item, set the value to `""`.
++ To disable the status address, set the value to `""`.
 + Default value: `"127.0.0.1:20180"`
 
 ### `status-thread-pool-size`
@@ -230,18 +230,18 @@ This document only describes the parameters that are not included in command-lin
 
 ### `enable-request-batch`
 
-+ Whether to enable to process requests in batches
++ Determines whether to process requests in batches
 + Default value: `true`
 
 ### `labels`
 
-+ Attributes about the server, such as `{ zone = "us-west-1", disk = "ssd" }`.
++ Specifies server attributes, such as `{ zone = "us-west-1", disk = "ssd" }`.
 + Default value: `{}`
 
 ### `background-thread-count`
 
-+ The working thread counts of the background pool, including endpoint threads, BR threads, split-check threads, Region threads, and other threads of delay-insensitive tasks.
-+ Default value: when the number of CPU cores is less than 16, the default value is `2`; Otherwise, the default value is `3`.
++ The working thread count of the background pool, including endpoint threads, BR threads, split-check threads, Region threads, and other threads of delay-insensitive tasks.
++ Default value: when the number of CPU cores is less than 16, the default value is `2`; otherwise, the default value is `3`.
 
 ### `end-point-slow-log-threshold`
 
@@ -413,7 +413,7 @@ Configuration items related to storage.
 
 ### `data-dir`
 
-+ The storage path to RocksDB directory
++ The storage path of the RocksDB directory
 + Default value: `"./"`
 
 ### `scheduler-concurrency`
@@ -436,7 +436,7 @@ Configuration items related to storage.
 
 ### `enable-async-apply-prewrite`
 
-+ + Async Commit transactions can respond to the TiKV client before applying prewrite requests. Enabling this configuration item can reduce latency easily when apply duration is high, or reduce the delay jitter when apply duration is not stable.
++ Determines whether Async Commit transactions respond to the TiKV client before applying prewrite requests. After enabling this configuration item, latency can be easily reduced when the apply duration is high, or the delay jitter can be reduced when the apply duration is not stable.
 + Default value: `false`
 
 ### `reserve-space`
@@ -552,7 +552,7 @@ Configuration items related to the I/O rate limiter.
 
 ### `endpoints`
 
-+ The endpoints of PD. When specifying endpoints, you need to split them by commas.
++ The endpoints of PD. When multiple endpoints are specified, you need to separate them using commas.
 + Default value: `["127.0.0.1:2379"]`
 
 ### `retry-interval`
@@ -562,14 +562,14 @@ Configuration items related to the I/O rate limiter.
 
 ### `retry-log-every`
 
-+ When PD client observes an error, the client skips reporting the error except every `n` time.
-+ To disable this feature, set `1`.
++ Specified the frequency at which the PD client skips reporting errors when the client observes errors. For example, when the value is `5`, after the PD client observes errors, the client skips reporting errors every 4 times and reports errors every 5th time.
++ To disable this feature, set the value to `1`.
 + Default value: `10`
 
 ### `retry-max-count`
 
-+ The maximum number of times to retry to initialize the PD connection
-+ To disable retries, set `0`; to not limit the number of retries, set `-1`.
++ The maximum number of times to retry to initialize PD connection
++ To disable the retry, set its value to `0`. To release the limit on the number of retries, set the value to `-1`.
 + Default value: `-1`
 
 ## raftstore
@@ -710,7 +710,7 @@ Configuration items related to Raftstore.
 
 ### `raft-engine-purge-interval`
 
-+ The interval of purging old log files to recycle disk space as soon as possible. Raft engine is a replaceable component, so the purging process is needed for some implementations.
++ The interval for purging old TiKV log files to recycle disk space as soon as possible. Raft engine is a replaceable component, so the purging process is needed for some implementations.
 + Default value: `"10s"`
 
 ### `raft-entry-cache-life-time`
@@ -1001,15 +1001,15 @@ Configuration items related to Coprocessor.
 
 ### `consistency-check-method`
 
-+ The method for consistency check
-+ For the consistency check of MVCC data, set `"mvcc"`; for the consistency check of raw data, set `"raw"`.
++ Specifies the method of data consistency check
++ For the consistency check of MVCC data, set the value to `"mvcc"`. For the consistency check of raw data, set the value to `"raw"`.
 + Default value: `"mvcc"`
 
 ## coprocessor-v2
 
 ### `coprocessor-plugin-directory`
 
-+ THe path of the directory where compiled coprocessor plugins are located. Plugins in this directory are automatically loaded by TiKV.
++ The path of the directory where compiled coprocessor plugins are located. Plugins in this directory are automatically loaded by TiKV.
 + If this configuration item is not set, the coprocessor plugin is disabled.
 + Default value: `"./coprocessors"`
 
@@ -1559,12 +1559,12 @@ Configuration items related to `raftdb`
 
 ### `create-if-missing`
 
-+ Determines whether to automatically create a DB switch
++ If the value is `true`, the database will be created if it is missing
 + Default value: `true`
 
 ### `enable-statistics`
 
-+ Determines whether to enable the statistics of RocksDB
++ Determines whether to enable the statistics of Raft RocksDB
 + Default value: `true`
 
 ### `stats-dump-period`
@@ -1574,14 +1574,14 @@ Configuration items related to `raftdb`
 
 ### `wal-dir`
 
-+ The directory in which Raft RocksDB WAL files are stored, which is the absolute directory path for WAL. **Do not** set this config the same as [`rocksdb.wal-dir`](#wal-dir).
-+ If this configuration item is not set, the log files store in the same directory as data.
++ The directory in which Raft RocksDB WAL files are stored, which is the absolute directory path for WAL. **Do not** set this configuration item to the same value as [`rocksdb.wal-dir`](#wal-dir).
++ If this configuration item is not set, the log files are stored in the same directory as data.
 + If there are two disks on the machine, storing RocksDB data and WAL logs on different disks can improve performance.
 + Default value: `""`
 
 ### `wal-ttl-seconds`
 
-+ The existing time of the archived WAL files. When the value is exceeded, the system deletes these files.
++ Specifies how long the archived WAL files are retained. When the value is exceeded, the system deletes these files.
 + Default value: `0`
 + Minimum value: `0`
 + Unit: second
@@ -1620,7 +1620,7 @@ Configuration items related to `raftdb`
 
 ### `enable-pipelined-write`
 
-+ Controls whether to enable Pipelined Write
++ Controls whether to enable Pipelined Write. When this configuration is enabled, the previous Pipelined Write is used. When this configuration is disabled, the new Pipelined Commit mechanism is used.
 + Default value: `true`
 
 ### `allow-concurrent-memtable-write`
@@ -1840,13 +1840,13 @@ Configuration items related to TiDB Lightning import and BR restore.
 
 ### `batch-keys`
 
-+ The number of keys to GC in one batch
++ The number of keys to be garbage-collected in one batch
 + Default value: `512`
 
 ### `max-write-bytes-per-sec`
 
 + The maximum bytes that GC worker can write to RocksDB in one second.
-+ If the value set to `0`, there is no limit.
++ If the value is set to `0`, there is no limit.
 + Default value: `"0"`
 
 ### `enable-compaction-filter` <span class="version-mark">New in v5.0</span>
@@ -1877,7 +1877,7 @@ Configuration items related to BR backup.
 
 ### `sst-max-size`
 
-+ When the size of a backup file with the region [a,e) is larger than `sst-max-size`, the file is backed up to several files with regions [a,b), [b,c), [c,d) and [d,e), and the size of [a,b), [b,c), [c,d) is same as that of `sst-max-size` (or slightly larger).
++ When the size of a backup file in the Region of `[a,e)` is larger than `sst-max-size`, the file is backed up to several files with regions `[a,b)`, `[b,c)`, `[c,d)` and `[d,e)`, and the size of `[a,b)`, `[b,c)`, `[c,d)` is the same as that of `sst-max-size` (or slightly larger).
 + Default value: `"144MB"`
 
 ### `enable-auto-tune` <span class="version-mark">New in v5.4.0</span>
@@ -1904,7 +1904,7 @@ Configuration items related to BR backup.
 
 ### `linux-user`
 
-+ Allows TiKV to run the HDFS shell command under this linux user.
++ Specifies the Linux user with which TiKV runs HDFS shell commands.
 + If this configuration item is not set, TiKV uses the current linux user.
 + Default value: `""`
 
