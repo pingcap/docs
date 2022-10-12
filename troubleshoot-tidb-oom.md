@@ -9,7 +9,7 @@ This document describes how to troubleshoot TiDB OOM (Out of Memory) issues, inc
 
 ## Typical OOM phenomena
 
-The following lists some typical OOM phenomena:
+The following are some typical OOM phenomena:
 
 - The client side reports the following error: `SQL error, errno = 2013, state = 'HY000': Lost connection to MySQL server during query`
 
