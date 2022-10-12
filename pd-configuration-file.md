@@ -98,6 +98,14 @@ This document only describes parameters that are not included in command-line pa
 + Determines whether to force PD to start as a new cluster and modify the number of Raft members to `1`
 + Default value: `false`
 
+### `tso-update-physical-interval`
+
++ The interval at which PD updates the physical time of TSO.
++ In a default TSO physical time update interval, PD provides at most 262144 TSOs. To get more TSOs, you can reduce this configuration item. The minimum value is `1ms`.
++ Decreasing this configuration item might increase the CPU usage of PD. According to the test, `1ms` consumes about 0.1 CPU core more than `50ms`.
++ Default value: `50ms`
++ Minimum value: `1ms`
+
 ## security
 
 Configuration items related to security
