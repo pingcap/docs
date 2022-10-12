@@ -157,8 +157,8 @@ To locate an OOM failure, you need to collect the following information:
         - `numactl --show`
 
 - Collect the version information and the memory-related configuration of the database
-    - tidb version
-    - `tidb_mem_quota_query`,
+    - TiDB version
+    - `tidb_mem_quota_query`
     - `memory-usage-alarm-ratio`
     - `mem-quota-query`
     - `oom-action`
