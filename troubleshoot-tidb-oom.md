@@ -3,7 +3,7 @@ title: Troubleshoot OOM Issues
 summary: Learn how to diagnose and resolve TiDB Out of Memory (OOM) issues.
 ---
 
-# Troubleshoot OOM Issues
+# Troubleshoot TiDB OOM Issues
 
 This document describes how to troubleshoot TiDB Out of Memory (OOM), including phenomena, causes, solutions, and diagnostic information.
 
@@ -13,22 +13,22 @@ Typical OOM phenomena include (but are not limited to) the following:
 
 - The client side reports the following error: `SQL error, errno = 2013, state = 'HY000': Lost connection to MySQL server during query`
 
-- Check Grafana, and you can find the following problems:
-    - **TiDB** > **Server** > **Memory Usage** shows that process/heapInUse keeps rising, and suddenly drops to zero after reaching the threshold.
+- The Grafana dashboard shows:
+    - **TiDB** > **Server** > **Memory Usage** shows that the `process/heapInUse` metric keeps rising, and suddenly drops to zero after reaching the threshold.
     - **TiDB** > **Server** > **Uptime** suddenly drops to zero.
-    - **TiDB-Runtime** > **Memory Usage** shows that `estimate-inuse` keeps rising.
+    - **TiDB-Runtime** > **Memory Usage** shows that the `estimate-inuse` metric keeps rising.
 
 - Check `tidb.log`, and you can find the following log entries:
     - An alarm about OOM: `[WARN] [memory_usage_alarm.go:139] ["tidb-server has the risk of OOM. Running SQLs and heap profile will be recorded in record path"]`. For more information, see [`memory-usage-alarm-ratio`](/system-variables.md#tidb_memory_usage_alarm_ratio).
-    - A log entry about restart: `[INFO] [printer.go:33] ["Welcome to TiDB."]`
+    - A log entry about restart: `[INFO] [printer.go:33] ["Welcome to TiDB."]`.
 
 ## Overall troubleshooting process
 
 When you troubleshoot OOM issues, follow this process:
 
-1. First, confirm whether it is an OOM issue.
+1. Confirm whether it is an OOM issue.
 
-    Execute the following command to check the operating system logs. If the result has the `oom-killer` logs near the time point when the problem occurs, then you can confirm that an OOM problem has occurred.
+    Execute the following command to check the operating system logs. If there is a `oom-killer` log near the time when the problem occurs, you can confirm that it is an OOM issue.
 
     ```shell
     dmesg -T | grep tidb-server
@@ -49,10 +49,10 @@ When you troubleshoot OOM issues, follow this process:
     ......
     ```
 
-2. After confirming that it is an OOM issue, you can further investigate whether OOM is caused by a deployment issue or a database issue.
+2. After confirming that it is an OOM issue, you can further investigate whether the OOM is caused by deployment or database.
 
-    - If OOM is caused by a deployment issue, you need to investigate the resource configuration and impact of hybrid deployment.
-    - If OOM is caused by a database issue, the following are some possible causes:
+    - If the OOM is caused by a deployment issue, you need to investigate the resource configuration and impact of hybrid deployment.
+    - If the OOM is caused by a database issue, the following are some possible causes:
         - TiDB handles large data traffic, such as large queries, large writes, and data import.
         - TiDB is in a high concurrency scenario, where multiple SQL concurrency consumes resources or operator concurrency is high.
         - TiDB has a memory leak and resources are not freed.
@@ -87,17 +87,17 @@ This section describes the causes and solutions for OOM caused by database issue
 
 You can take the following measures to reduce the memory usage of SQL statements, depending on the different causes of OOM issues.
 
-- If the execution plan of SQL is not optimal, for example, due to lack of proper indexes, outdated statistics, or optimizer bugs, a wrong execution plan of SQL might be selected. A huge intermediate result set will then be accumulated in the memory. In this case, consider the following measures.
-    - Add appropriate indexes
-    - Use the [disk spill](/configure-memory-usage.md#disk-spill) feature for execution operators
-    - Adjust the JOIN order between tables
-    - Use hints to optimize SQL statements
+- If the execution plan of SQL is not optimal, for example, due to lack of proper indexes, outdated statistics, or optimizer bugs, a wrong execution plan of SQL might be selected. A huge intermediate result set will then be accumulated in the memory. In this case, consider the following measures:
+    - Add appropriate indexes.
+    - Use the [disk spill](/configure-memory-usage.md#disk-spill) feature for execution operators.
+    - Adjust the JOIN order between tables.
+    - Use hints to optimize SQL statements.
 
-- Some operators and functions do not support pushing down to the storage level, resulting in a huge accumulation of intermediate result sets. In this case, you need to refine the business SQL statements or use hints to tune, and use the functions or operators that support pushing down.
+- Some operators and functions do not support pushing down to the storage level, resulting in a huge accumulation of intermediate result sets. In this case, you need to refine the business SQL statements or use hints to optimize, and use the functions or operators that support pushing down.
 
 - The execution plan contains the operator HashAgg. HashAgg is executed concurrently by multiple threads, which is faster but consumes more memory. Instead, you can use `STREAM_AGG()`.
 
-- Reduce the number of regions to be read simultaneously or reduce the concurrency of operators to avoid memory problems caused by high concurrency. The corresponding system variables include:
+- Reduce the number of Regions to be read simultaneously or reduce the concurrency of operators to avoid memory problems caused by high concurrency. The corresponding system variables include:
     - [`tidb_distsql_scan_concurrency`](/system-variables.md#tidb_distsql_scan_concurrency)
     - [`tidb_index_serial_scan_concurrency`](/system-variables.md#tidb_index_serial_scan_concurrency)
     - [`tidb_executor_concurrency`](/system-variables.md#tidb_executor_concurrency-span-classversion-marknew-in-v50span)
@@ -106,7 +106,7 @@ You can take the following measures to reduce the memory usage of SQL statements
 
 #### Large transactions or large writes consume too much memory
 
-You need to plan in advance for memory capacity. TiDB can consume up to two to three times more memory than the size of a committed transaction when processing a transaction.
+You need to plan for memory capacity. TiDB can consume up to two to three times more memory than the size of a committed transaction when processing a transaction.
 
 You can split a single large transaction to make it smaller in size.
 
@@ -114,15 +114,15 @@ You can split a single large transaction to make it smaller in size.
 
 A TiDB node needs to load statistics into memory after it starts. TiDB consumes memory when collecting statistical information. You can control memory usage by the following ways:
 
-- Specify a sampling rate, only collect statistics for specific columns, and reduce analyze concurrency.
-- Since TiDB v6.1.0, you can use the system variable [`enable_tidb_stats_cache_mem_quota`](/tidb-configuration-file.md#enable-stats-cache-mem-quota-span-classversion-marknew-in-v610span) to control the memory usage for statistical information.
+- Specify a sampling rate, only collect statistics for specific columns, and reduce `ANALYZE`concurrency.
+- Since TiDB v6.1.0, you can use the system variable [`tidb_stats_cache_mem_quota`](/tidb-configuration-file.md#tidb-stats-cache-mem-quota-span-classversion-marknew-in-v610span) to control the memory usage for statistical information.
 - Since TiDB v6.1.0, you can use the system variable [`tidb_mem_quota_analyze`](/system-variables.md#tidb_mem_quota_analyze-span-classversion-marknew-in-v610span) to control the maximum memory usage when TiDB updates statistics.
 
 For more information, see [Introduction to Statistics](/statistics.md).
 
 #### Prepared statements are overused
 
-The client side keeps creating prepared statements but does not execute [`deallocate prepare stmt`](/sql-prepared-plan-cache.md#ignore-the-com_stmt_close-command-and-the-deallocate-prepare-statement), which causes memory consumption to continue to rise and eventually triggers TiDB OOM. The reason is that the memory occupied by a prepared statement is not released until the session is closed. This is especially important in the case of long connections.
+The client side keeps creating prepared statements but does not execute [`deallocate prepare stmt`](/sql-prepared-plan-cache.md#ignore-the-com_stmt_close-command-and-the-deallocate-prepare-statement), which causes memory consumption to continue to rise and eventually triggers TiDB OOM. The reason is that the memory occupied by a prepared statement is not released until the session is closed. This is especially important under long connections.
 
 To solve the problem, consider the following measures:
 
@@ -145,9 +145,9 @@ If OOM occurs on the client side, investigate the following:
 
 ## Diagnostic information to be collected to address OOM issues
 
-To locate an OOM failure, you need to collect the following information:
+To locate an OOM issue, you need to collect the following information:
 
-- Collect the memory-related configuration of the operating system
+- Collect the memory-related configurations of the operating system:
     - TiUP configuration: `resource_control.memory_limit`
     - Operating system configuration:
         - Memory information: `cat /proc/meminfo`
@@ -156,7 +156,7 @@ To locate an OOM failure, you need to collect the following information:
         - `numactl --hardware`
         - `numactl --show`
 
-- Collect the version information and the memory-related configuration of the database
+- Collect the version information and the memory-related configurations of the database:
     - TiDB version
     - `tidb_mem_quota_query`
     - `memory-usage-alarm-ratio`
@@ -169,15 +169,15 @@ To locate an OOM failure, you need to collect the following information:
     - `tmp-storage-quota`
     - `tidb_analyze_version`
 
-- Check the daily usage of TiDB memory on Grafana: **TiDB** > **Server** > **Memory Usage**
+- Check the daily usage of TiDB memory on the Grafana dashboard: **TiDB** > **Server** > **Memory Usage**.
 
 - Check the SQL statements that consume more memory.
 
-    - View SQL statement analysis, slow queries and memory usage from TiDB Dashboard.
+    - View SQL statement analysis, slow queries, and memory usage on the TiDB Dashboard.
     - Check `SLOW_QUERY` and `CLUSTER_SLOW_QUERY` in `INFORMATION_SCHEMA`.
     - Check `tidb_slow_query.log` on each TiDB node.
     - Run `grep "expensive_query" tidb.log` to check the corresponding log entries.
-    - Run `EXPLAIN ANALYZE` to check memory usage of operators.
+    - Run `EXPLAIN ANALYZE` to check the memory usage of operators.
     - Run `SELECT * FROM information_schema.processlist;` to check the value of the `MEM` column.
 
 - Run the following command to collect the TiDB Profile information when memory usage is high:
@@ -186,7 +186,7 @@ To locate an OOM failure, you need to collect the following information:
     curl -G http://{TiDBIP}:10080/debug/zip?seconds=10" > profile.zip
     ```
 
-- Run `grep "tidb-server has the risk of OOM" tidb.log` to check the path of the alert file collected by TiDB Server. The following is an example:
+- Run `grep "tidb-server has the risk of OOM" tidb.log` to check the path of the alert file collected by TiDB Server. The following is an example output:
 
     ```shell
     ["tidb-server has the risk of OOM. Running SQLs and heap profile will be recorded in record path"] ["is server-memory-quota set"=false] ["system memory total"=14388137984] ["system memory usage"=11897434112] ["tidb-server memory usage"=11223572312] [memory-usage-alarm-ratio=0.8] ["record path"="/tmp/0_tidb/MC4wLjAuMDo0MDAwLzAuMC4wLjA6MTAwODA=/tmp-storage/record"]
