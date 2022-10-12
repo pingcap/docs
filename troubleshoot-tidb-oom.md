@@ -1,15 +1,15 @@
 ---
 title: Troubleshoot TiDB OOM Issues
-summary: Learn how to diagnose and resolve TiDB Out of Memory (OOM) issues.
+summary: Learn how to diagnose and resolve TiDB OOM (Out of Memory) issues.
 ---
 
 # Troubleshoot TiDB OOM Issues
 
-This document describes how to troubleshoot TiDB Out of Memory (OOM), including phenomena, causes, solutions, and diagnostic information.
+This document describes how to troubleshoot TiDB OOM (Out of Memory) issues, including phenomena, causes, solutions, and diagnostic information.
 
 ## Typical OOM phenomena
 
-Typical OOM phenomena include (but are not limited to) the following:
+The following lists some typical OOM phenomena:
 
 - The client side reports the following error: `SQL error, errno = 2013, state = 'HY000': Lost connection to MySQL server during query`
 
@@ -28,7 +28,7 @@ When you troubleshoot OOM issues, follow this process:
 
 1. Confirm whether it is an OOM issue.
 
-    Execute the following command to check the operating system logs. If there is a `oom-killer` log near the time when the problem occurs, you can confirm that it is an OOM issue.
+    Execute the following command to check the operating system logs. If there is an `oom-killer` log near the time when the problem occurs, you can confirm that it is an OOM issue.
 
     ```shell
     dmesg -T | grep tidb-server
@@ -49,13 +49,13 @@ When you troubleshoot OOM issues, follow this process:
     ......
     ```
 
-2. After confirming that it is an OOM issue, you can further investigate whether the OOM is caused by deployment or database.
+2. After confirming that it is an OOM issue, you can further investigate whether the OOM is caused by deployment or the database.
 
     - If the OOM is caused by a deployment issue, you need to investigate the resource configuration and impact of hybrid deployment.
     - If the OOM is caused by a database issue, the following are some possible causes:
         - TiDB handles large data traffic, such as large queries, large writes, and data import.
         - TiDB is in a high concurrency scenario, where multiple SQL concurrency consumes resources or operator concurrency is high.
-        - TiDB has a memory leak and resources are not freed.
+        - TiDB has a memory leak and resources are not released.
 
     Refer to the following sections for specific troubleshooting methods.
 
