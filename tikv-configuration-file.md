@@ -1872,7 +1872,7 @@ Configuration items related to BR backup.
 
 ### `batch-size`
 
-+ The number of ranges to backup in one batch
++ The number of data ranges to back up in one batch
 + Default value: `8`
 
 ### `sst-max-size`
