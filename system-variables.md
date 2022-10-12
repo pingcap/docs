@@ -2195,7 +2195,7 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 - This variable is used to set whether the optimizer executes the optimization operation of pushing down the aggregate function to the position before Join, Projection, and UnionAll.
 - When the aggregate operation is slow in query, you can set the variable value to ON.
 
-### tidb_opt_cartesian_bcj
+### tidb_opt_broadcast_cartesian_join
 
 - Scope: SESSION | GLOBAL
 - Persists to cluster: YES
@@ -2215,7 +2215,7 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 - Default value: `3.0`
 - Indicates the CPU cost of starting a Golang goroutine in TiDB. This variable is internally used in the [Cost Model](/cost-model.md), and it is **NOT** recommended to modify its value.
 
-### tidb_opt_cop_cpu_factor
+### tidb_opt_copcpu_factor
 
 - Scope: SESSION | GLOBAL
 - Persists to cluster: YES
@@ -2255,7 +2255,7 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 - Default value: `3.0`
 - Indicates the CPU cost for TiDB to process one row. This variable is internally used in the [Cost Model](/cost-model.md), and it is **NOT** recommended to modify its value.
 
-### tidb_opt_desc_scan_factor
+### tidb_opt_desc_factor
 
 - Scope: SESSION | GLOBAL
 - Persists to cluster: YES
@@ -2366,7 +2366,7 @@ mysql> desc select count(distinct a) from test.t;
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
 - Type: Boolean
-- Default value: `ON`
+- Default value: `OFF`
 - When the variable value is `ON`, the left join operator always uses inner table as the build side and the right join operator always uses outer table as the build side. If you set the value to `OFF`, the outer join operator can use either side of the tables as the build side.
 
 ### tidb_opt_network_factor
