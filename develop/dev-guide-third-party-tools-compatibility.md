@@ -17,9 +17,9 @@ summary: Describes TiDB compatibility issues with third-party tools found during
 > - `SPATIAL` functions, data types and indexes
 > - `XA` syntax
 >
-> Such incompatibilities are considered expected behavior and will not be listed in this document. For more details, see [MySQL Compatibility](/mysql-compatibility.md).
+> The preceding unsupported features are considered expected behavior and are not listed in this document. For more details, see [MySQL Compatibility](/mysql-compatibility.md).
 
-## General
+## General incompatibility
 
 ### `SELECT CONNECTION_ID()` returns a 64-bit integer in TiDB
 
@@ -41,11 +41,11 @@ MySQL maintains a series of [server status variables starting with `Com_`](https
 
 Please do not use these variables. One of the common usage scenarios is monitoring. TiDB is well observable and does not require querying from server status variables. For custom monitoring tools, refer to [TiDB Monitoring Framework Overview](/tidb-monitoring-framework.md).
 
-### TiDB error messages distinguish between `TIMESTAMP` and `DATETIME` type
+### TiDB distinguishes between `TIMESTAMP` and `DATETIME` in error messages
 
 **Description**
 
-TiDB error messages distinguish between `TIMESTAMP` and `DATETIME`, while MySQL does not, and returns them all as `DATETIME`. That is, MySQL incorrectly converts `TIMESTAMP` type error messages as `DATETIME` type.
+TiDB error messages distinguish between `TIMESTAMP` and `DATETIME`, while MySQL does not, and returns them all as `DATETIME`. That is, MySQL incorrectly converts `TIMESTAMP` type error messages to `DATETIME` type.
 
 **Way to avoid**
 
@@ -83,7 +83,7 @@ Known character sets for which client-side and server-side collations do not mat
 
 Set the sorting rules manually and do not rely on the client default sorting rules (client default sorting rules are saved by the MySQL Connector/J configuration file).
 
-### Parameter `NO_BACKSLASH_ESCAPES` not effect
+### The `NO_BACKSLASH_ESCAPES` parameter is ineffective
 
 **Description**
 
@@ -93,7 +93,7 @@ The `NO_BACKSLASH_ESCAPES` parameter cannot be used so that `\` character is not
 
 Do not use `NO_BACKSLASH_ESCAPES` with `\`, but use normal `\\` for SQL writing.
 
-### Not support `INDEX_USED` parameters
+### The `INDEX_USED` parameters are not supported
 
 **Description**
 
@@ -106,7 +106,7 @@ TiDB does not set the `SERVER_QUERY_NO_GOOD_INDEX_USED` and `SERVER_QUERY_NO_IND
 
 Do not use the `noIndexUsed()` and `noGoodIndexUsed()` functions.
 
-### Not support `enablePacketDebug` parameters
+### The `enablePacketDebug` parameter is not supported
 
 **Description**
 
@@ -116,7 +116,7 @@ TiDB does not support the [enablePacketDebug](https://dev.mysql.com/doc/connecto
 
 Do not set the `enablePacketDebug` parameter.
 
-### Not Support UpdatableResultSet
+### The UpdatableResultSet is not supported
 
 **Description**
 
@@ -126,13 +126,13 @@ TiDB does not support `UpdatableResultSet`, that is **DO NOT** specify the `Resu
 
 To ensure data consistency by transaction, you can use additional `UPDATE` statements to update data.
 
-## MySQL JDBC Bug
+## MySQL JDBC bugs
 
 ### `useLocalTransactionState` and `rewriteBatchedStatements` are true at the same time will cause the transaction to fail to commit
 
 **Description**
 
-When the `useLocalTransactionState` and `rewriteBatchedStatements` parameters are set to `true` at the same time, the transaction might fail to to commit. You can reproduce with [this code](https://github.com/Icemap/tidb-java-gitpod/tree/reproduction-local-transaction-state-txn-error).
+When the `useLocalTransactionState` and `rewriteBatchedStatements` parameters are set to `true` at the same time, the transaction might fail to commit. You can reproduce with [this code](https://github.com/Icemap/tidb-java-gitpod/tree/reproduction-local-transaction-state-txn-error).
 
 **Way to avoid**
 
@@ -142,17 +142,17 @@ When the `useLocalTransactionState` and `rewriteBatchedStatements` parameters ar
 
 **DO NOT** turn on `useLocalTransactionState` as this might prevent transactions from being committed or rolled back.
 
-### Connector forward compatibility issue
+### Connector is incompatible with the server version earlier than 5.7.5
 
 **Description**
 
-The database connection might hang under certain conditions when using MySQL Connector/J 8.0.29 with a MySQL server < 5.7.5 or a database that using the MySQL server < 5.7.5 protocol (such as TiDB earlier than v6.3.0). For more details, see the [Bug Report](https://bugs.mysql.com/bug.php?id=106252).
+The database connection might hang under certain conditions when using MySQL Connector/J 8.0.29 with a MySQL server < 5.7.5 or a database using the MySQL server < 5.7.5 protocol (such as TiDB earlier than v6.3.0). For more details, see the [Bug Report](https://bugs.mysql.com/bug.php?id=106252).
 
 **Way to avoid**
 
-This is a known issue, and MySQL Connector/J has not merged the fix code so far.
+This is a known issue, and MySQL Connector/J has not merged the fixed code so far.
 
-There are two dimensional fix in TiDB:
+There are two-dimensional fixes in TiDB:
 
 - Client side: you can replace the official MySQL Connector/J with [pingcap/mysql-connector-j](https://github.com/pingcap/mysql-connector-j). The bug is fixed in **pingcap/mysql-connector-j**.
 - Server side: you can upgrade the server to v6.3.0 or later versions. In TiDB v6.3.0, this compatibility issue has been fixed.
