@@ -856,8 +856,6 @@ Now, you have created and managed a Dedicated Tier cluster with Terraform. Next,
 
 You can manage a cluster with Terraform by importing the cluster even if it is not created by Terraform.
 
-The following steps show you how to import the cluster created by the restore task in the last section.
-
 1. Create a new `import_cluster.tf` as follows:
 
     ```
@@ -894,10 +892,10 @@ The following steps show you how to import the cluster created by the restore ta
 3. Run the `terraform state show tidbcloud_cluster.import_cluster` command to check the status of the cluster:
 
     ```
-    $ terraform state show tidbcloud_cluster.restore_cluster1
+    $ terraform state show tidbcloud_cluster.import_cluster
 
-    # tidbcloud_cluster.restore_cluster1:
-    resource "tidbcloud_cluster" "restore_cluster1" {
+    # tidbcloud_cluster.import_cluster:
+    resource "tidbcloud_cluster" "import_cluster" {
         cloud_provider = "AWS"
         cluster_type   = "DEDICATED"
         config         = {
@@ -930,7 +928,7 @@ The following steps show you how to import the cluster created by the restore ta
 4. To manage the cluster using Terraform, you can copy the output of the previous step to your configuration file. Note that you need to delete the lines of `id` and `status`, because they will be controlled by Terraform instead:
 
     ```
-    resource "tidbcloud_cluster" "restore_cluster1" {
+    resource "tidbcloud_cluster" "import_cluster" {
           cloud_provider = "AWS"
           cluster_type   = "DEDICATED"
           config         = {
