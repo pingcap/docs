@@ -3,123 +3,132 @@ title: Scale Your TiDB Cluster
 summary: Learn how to scale your TiDB Cloud cluster.
 ---
 
-# Scale Your TiDB Cluster
+# TiDBクラスタをスケーリングする {#scale-your-tidb-cluster}
 
-> **Note:**
+> **ノート：**
 >
-> - Currently, you cannot scale a [Developer Tier cluster](/tidb-cloud/select-cluster-tier.md#developer-tier).
-> - When a cluster is in the scaling status, you cannot perform any new scaling operations on it.
+> -   現在、 [開発者層クラスター](/tidb-cloud/select-cluster-tier.md#developer-tier)をスケーリングすることはできません。
+> -   クラスターがスケーリング状態の場合、そのクラスターに対して新しいスケーリング操作を実行することはできません。
 
-You can scale a TiDB cluster in the following dimensions:
+次のディメンションで TiDB クラスターをスケーリングできます。
 
-- Node number of TiDB, TiKV, and TiFlash
-- Storage size of TiKV and TiFlash
-- Node size (including vCPUs and memory) of TiDB, TiKV, and TiFlash
+-   TiDB、TiKV、TiFlash のノード番号
+-   TiKV と TiFlash のストレージ サイズ
+-   TiDB、TiKV、TiFlash のノード サイズ (vCPU とメモリを含む)
 
-For information about how to determine the size of your TiDB cluster, see [Determine Your TiDB Size](/tidb-cloud/size-your-cluster.md).
+TiDB クラスターのサイズを決定する方法については、 [TiDB のサイズを決定する](/tidb-cloud/size-your-cluster.md)を参照してください。
 
-> **Note:**
+> **ノート：**
 >
-> If the node size of TiDB or TiKV is set as **4 vCPU, 16 GiB**, note the following restrictions. To bypass these restrictions, you can [increase your node size](#increase-node-size) first.
+> TiDB または TiKV のノード サイズを**4 vCPU、16 GiB**に設定する場合は、次の制限事項に注意してください。これらの制限を回避するには、まず[ノードサイズを増やす](#increase-node-size)を実行します。
 >
-> - The node quantity of TiDB can only be set to 1 or 2, and the node quantity of TiKV is fixed to 3.
-> - 4 vCPU TiDB can only be used with 4 vCPU TiKV, and 4 vCPU TiKV can only be used with 4 vCPU TiDB.
-> - TiFlash is unavailable.
+> -   TiDB のノード数は 1 または 2 にのみ設定でき、TiKV のノード数は 3 に固定されています。
+> -   4 vCPU TiDB は 4 vCPU TiKV でのみ使用でき、4 vCPU TiKV は 4 vCPU TiDB でのみ使用できます。
+> -   TiFlash は利用できません。
 
-## Change node number
+## ノード番号の変更 {#change-node-number}
 
-You can change the number of TiDB, TiKV, or TiFlash nodes.
+TiDB、TiKV、または TiFlash ノードの数を変更できます。
 
-### Increase node number
+### ノード数を増やす {#increase-node-number}
 
-To increase the number of TiDB, TiKV, or TiFlash nodes, take the following steps:
+TiDB、TiKV、または TiFlash ノードの数を増やすには、次の手順を実行します。
 
-1. In the TiDB Cloud console, navigate to the **Active Clusters** page for your project.
-2. Find the area of the cluster that you want to scale, and click **...** in the upper-right corner of the area.
+1.  TiDB Cloudコンソールで、プロジェクトの**Active Clusters**ページに移動します。
 
-    > **Tip:**
+2.  スケーリングするクラスターの領域を見つけて、その領域の右上隅にある [ **...** ] をクリックします。
+
+    > **ヒント：**
     >
-    > Alternatively, you can also click the name of the cluster that you want to scale on the **Active Clusters** page and click **...** in the upper-right corner.
+    > または、[**アクティブなクラスター**] ページでスケーリングするクラスターの名前をクリックし、右上隅にある [ <strong>...</strong> ] をクリックすることもできます。
 
-3. Click **Scale** in the drop-down menu. The **Scale** window is displayed.
-4. In the **Scale** window, increase the number of TiDB, TiKV, or TiFlash nodes.
-5. Click **Confirm**.
+3.  ドロップダウン メニューで [**スケール**] をクリックします。<strong>スケール</strong>ウィンドウが表示されます。
 
-### Decrease node number
+4.  **Scale**ウィンドウで、TiDB、TiKV、または TiFlash ノードの数を増やします。
 
-To decrease the number of TiDB nodes, take the following steps:
+5.  [**確認]**をクリックします。
 
-1. In the TiDB Cloud console, navigate to the **Active Clusters** page for your project.
-2. Find the area of the cluster that you want to scale, and click **...** in the upper-right corner of the area.
+### ノード番号を減らす {#decrease-node-number}
 
-    > **Tip:**
+TiDB ノードの数を減らすには、次の手順を実行します。
+
+1.  TiDB Cloudコンソールで、プロジェクトの**Active Clusters**ページに移動します。
+
+2.  スケーリングするクラスターの領域を見つけて、その領域の右上隅にある [ **...** ] をクリックします。
+
+    > **ヒント：**
     >
-    > Alternatively, you can also click the name of the cluster that you want to scale on the **Active Clusters** page and click **...** in the upper-right corner.
+    > または、[**アクティブなクラスター**] ページでスケーリングするクラスターの名前をクリックし、右上隅にある [ <strong>...</strong> ] をクリックすることもできます。
 
-3. Click **Scale** in the drop-down menu. The **Scale** window is displayed.
-4. In the **Scale** window, decrease the number of TiDB nodes.
-5. Click **Confirm**.
+3.  ドロップダウン メニューで [**スケール**] をクリックします。<strong>スケール</strong>ウィンドウが表示されます。
 
-To decrease the number of TiKV or TiFlash nodes, you need to submit a support ticket. The PingCAP support team will contact you and complete the scaling within the agreed time.
+4.  [**スケール**] ウィンドウで、TiDB ノードの数を減らします。
 
-> **Warning:**
+5.  [**確認]**をクリックします。
+
+TiKV または TiFlash ノードの数を減らすには、サポート チケットを送信する必要があります。 PingCAP サポート チームがお客様に連絡し、合意された時間内にスケーリングを完了します。
+
+> **警告：**
 >
-> Decreasing TiKV or TiFlash node number can be risky, which might lead to insufficient storage space, excessive CPU usage, or excessive memory usage on remaining nodes.
+> TiKV または TiFlash ノード番号を減らすことは危険であり、ストレージ容量が不足したり、CPU 使用率が過剰になったり、残りのノードでメモリ使用率が過剰になったりする可能性があります。
 
-To submit a support ticket, perform the steps in [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md). For each node to be scaled, provide the following information in the **Description** box:
+サポート チケットを送信するには、 [TiDB Cloudのサポート](/tidb-cloud/tidb-cloud-support.md)の手順を実行します。スケーリングするノードごとに、[**説明**] ボックスに次の情報を入力します。
 
-- Cluster name: xxx
-- Cloud provider: GCP or AWS
-- Node type: TiKV or TiFlash
-- Current node number: xxx
-- Expected node number: xxx
+-   クラスタ名: xxx
+-   クラウド プロバイダー: GCP または AWS
+-   ノードタイプ: TiKV または TiFlash
+-   現在のノード番号: xxx
+-   予想されるノード番号: xxx
 
-## Change storage size
+## ストレージ サイズの変更 {#change-storage-size}
 
-You can change the storage size of TiKV or TiFlash.
+TiKV または TiFlash のストレージ サイズを変更できます。
 
-### Increase storage size
+### ストレージ サイズを増やす {#increase-storage-size}
 
-To increase the storage size of TiKV or TiFlash, take the following steps:
+TiKV または TiFlash のストレージ サイズを増やすには、次の手順を実行します。
 
-1. In the TiDB Cloud console, navigate to the **Active Clusters** page for your project.
-2. Find the area of the cluster that you want to scale, and click **...** in the upper-right corner of the area.
+1.  TiDB Cloudコンソールで、プロジェクトの**Active Clusters**ページに移動します。
 
-    > **Tip:**
+2.  スケーリングするクラスターの領域を見つけて、その領域の右上隅にある [ **...** ] をクリックします。
+
+    > **ヒント：**
     >
-    > Alternatively, you can also click the name of the cluster that you want to scale on the **Active Clusters** page and click **...** in the upper-right corner.
+    > または、[**アクティブなクラスター**] ページでスケーリングするクラスターの名前をクリックし、右上隅にある [ <strong>...</strong> ] をクリックすることもできます。
 
-3. Click **Scale** in the drop-down menu. The **Scale** window is displayed.
-4. In the **Scale** window, increase the storage size of TiKV or TiFlash.
-5. Click **Confirm**.
+3.  ドロップダウン メニューで [**スケール**] をクリックします。<strong>スケール</strong>ウィンドウが表示されます。
 
-> **Note:**
+4.  **Scale**ウィンドウで、TiKV または TiFlash のストレージ サイズを増やします。
+
+5.  [**確認]**をクリックします。
+
+> **ノート：**
 >
-> AWS has a cooldown period of storage size changes. If your TiDB cluster is hosted by AWS, after changing the storage size of TiKV or TiFlash, you must wait at least six hours before you can change it again.
+> AWS には、ストレージ サイズの変更のクールダウン期間があります。 TiDB クラスターが AWS によってホストされている場合、TiKV または TiFlash のストレージ サイズを変更した後、再度変更するには、少なくとも 6 時間待つ必要があります。
 
-### Decrease storage size
+### ストレージ サイズを減らす {#decrease-storage-size}
 
-For a running cluster, AWS and Google Cloud do not allow in-place storage capacity downgrade.
+実行中のクラスタの場合、AWS と Google Cloud はインプレース ストレージ容量のダウングレードを許可しません。
 
-## Increase node size
+## ノードサイズを大きくする {#increase-node-size}
 
-When a cluster is running, you cannot increase its node size. To make such changes, take either of the following methods:
+クラスターの実行中は、そのノード サイズを増やすことはできません。このような変更を行うには、次のいずれかの方法を実行します。
 
-- Method 1: Increase the node size through backup and restore
+-   方法 1: バックアップと復元によってノード サイズを増やす
 
-    You need to [create a latest backup of the cluster](/tidb-cloud/backup-and-restore.md#manual-backup), [delete the cluster](/tidb-cloud/delete-tidb-cluster.md), and then increase the node size when you [restore the deleted cluster](/tidb-cloud/backup-and-restore.md#restore-a-deleted-cluster). Before taking this method, make sure the following impacts are acceptable:
+    [クラスターの最新のバックアップを作成する](/tidb-cloud/backup-and-restore.md#manual-backup) 、そして[クラスタを削除します](/tidb-cloud/delete-tidb-cluster.md)のときにノード サイズを増やす必要があり[削除されたクラスターを復元する](/tidb-cloud/backup-and-restore.md#restore-a-deleted-cluster) 。この方法を実行する前に、次の影響が許容できることを確認してください。
 
-    - To avoid any data loss during or after the backup, you need to stop the connection to the cluster through your SQL client before creating the backup.
-    - After you stop the connection to the cluster, your applications running on this cluster cannot provide service normally until the restoring process is completed.
+    -   バックアップ中またはバックアップ後のデータ損失を回避するには、バックアップを作成する前に、SQL クライアントを介したクラスターへの接続を停止する必要があります。
+    -   クラスターへの接続を停止すると、復元プロセスが完了するまで、このクラスターで実行されているアプリケーションは正常にサービスを提供できません。
 
-- Method 2: Increase the node size through a support ticket
+-   方法 2: サポート チケットを通じてノード サイズを増やす
 
-    To submit a support ticket, perform the steps in [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md). The PingCAP support team will contact you and complete the scaling within the agreed time.
+    サポート チケットを送信するには、 [TiDB Cloudのサポート](/tidb-cloud/tidb-cloud-support.md)の手順を実行します。 PingCAP サポート チームがお客様に連絡し、合意された時間内にスケーリングを完了します。
 
-    For each node to be scaled, provide the following information in the **Description** box of the ticket:
+    スケーリングするノードごとに、チケットの [**説明**] ボックスに次の情報を入力します。
 
-    - Cluster name: xxx
-    - Cloud provider: GCP or AWS
-    - Node type: TiDB, TiKV, or TiFlash
-    - Current node size: xxx
-    - Expected node size: xxx
+    -   クラスタ名: xxx
+    -   クラウド プロバイダー: GCP または AWS
+    -   ノード タイプ: TiDB、TiKV、または TiFlash
+    -   現在のノード サイズ: xxx
+    -   予想されるノード サイズ: xxx

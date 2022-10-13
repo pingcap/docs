@@ -3,11 +3,11 @@ title: TIDB_SERVERS_INFO
 summary: Learn the `TIDB_SERVERS_INFO` information_schema table.
 ---
 
-# TIDB_SERVERS_INFO
+# TIDB_SERVERS_INFO {#tidb-servers-info}
 
-The `TIDB_SERVERS_INFO` table provides information about TiDB servers in the TiDB Cluster (namely, tidb-server processes).
+`TIDB_SERVERS_INFO`テーブルは、TiDBクラスタ内の TiDB サーバー (つまり、tidb-server プロセス) に関する情報を提供します。
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 USE information_schema;
@@ -30,7 +30,7 @@ DESC tidb_servers_info;
 8 rows in set (0.00 sec)
 ```
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 SELECT * FROM tidb_servers_info\G

@@ -2,103 +2,103 @@
 title: Bookshop Example Application
 ---
 
-# Bookshop Example Application
+# 書店のサンプル アプリケーション {#bookshop-example-application}
 
-Bookshop is a virtual online bookstore application through which you can buy books of various categories and rate the books you have read.
+Bookshop は、さまざまなカテゴリの本を購入し、読んだ本を評価できる仮想オンライン書店アプリケーションです。
 
-To make your reading on the application developer guide more smoothly, we present the example SQL statements based on the [table structures](#description-of-the-tables) and data of the Bookshop application. This document focuses on the methods of importing the table structures and data as well as the definitions of the table structures.
+アプリケーション開発者ガイドをよりスムーズに読むために、Bookshop アプリケーションの[テーブル構造](#description-of-the-tables)とデータに基づいた SQL ステートメントの例を示します。このドキュメントでは、テーブル構造とデータのインポート方法、およびテーブル構造の定義に焦点を当てています。
 
-## Import table structures and data
+## テーブル構造とデータをインポートする {#import-table-structures-and-data}
 
 <CustomContent platform="tidb">
 
-You can import Bookshop table structures and data either [via TiUP](#method-1-via-tiup-demo) or [via the import feature of TiDB Cloud](#method-2-via-tidb-cloud-import).
+Bookshop のテーブル構造とデータをインポートできます[TiUP経由](#method-1-via-tiup-demo)または[TiDB Cloudのインポート機能経由](#method-2-via-tidb-cloud-import) 。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-For TiDB Cloud, you can skip [Method 1: Via `tiup demo`](#method-1-via-tiup-demo) and import Bookshop table structures [via the import feature of TiDB Cloud](#method-2-via-tidb-cloud-import).
+TiDB Cloudの場合、 [方法 1: `tiup demo`経由](#method-1-via-tiup-demo)をスキップして Bookshop テーブル構造をインポートできます[TiDB Cloudのインポート機能経由](#method-2-via-tidb-cloud-import) 。
 
 </CustomContent>
 
-### Method 1: Via `tiup demo`
+### 方法 1: <code>tiup demo</code>経由 {#method-1-via-code-tiup-demo-code}
 
 <CustomContent platform="tidb">
 
-If your TiDB cluster is deployed using [TiUP](/tiup/tiup-reference.md#tiup-reference) or you can connect to your TiDB server, you can quickly generate and import sample data for the Bookshop application by running the following command:
+TiDB クラスターが[TiUP](/tiup/tiup-reference.md#tiup-reference)を使用してデプロイされている場合、または TiDBサーバーに接続できる場合は、次のコマンドを実行して、Bookshop アプリケーションのサンプル データをすばやく生成してインポートできます。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-If your TiDB cluster is deployed using [TiUP](https://docs.pingcap.com/tidb/stable/tiup-reference) or you can connect to your TiDB server, you can quickly generate and import sample data for the Bookshop application by running the following command:
+TiDB クラスターが[TiUP](https://docs.pingcap.com/tidb/stable/tiup-reference)を使用してデプロイされている場合、または TiDBサーバーに接続できる場合は、次のコマンドを実行して、Bookshop アプリケーションのサンプル データをすばやく生成してインポートできます。
 
 </CustomContent>
 
-{{< copyable "shell" >}}
+{{< copyable "" >}}
 
 ```shell
 tiup demo bookshop prepare
 ```
 
-By default, this command enables your application to connect to port `4000` on address `127.0.0.1`, enables you to log in as the `root` user without a password, and creates a [table structure](#description-of-the-tables) in the database named `bookshop`.
+デフォルトでは、このコマンドはアプリケーションがアドレス`127.0.0.1`のポート`4000`に接続できるようにし、パスワードなしで`root`ユーザーとしてログインできるようにし、 `bookshop`という名前のデータベースに[テーブル構造](#description-of-the-tables)を作成します。
 
-#### Configure connection information
+#### 接続情報の構成 {#configure-connection-information}
 
-The following table lists the connection parameters. You can change their default settings to match your environment.
+次の表に、接続パラメータを示します。環境に合わせてデフォルト設定を変更できます。
 
-| Parameter    | Abbreviation | Default value      | Description           |
-| ------------ | ---- | ----------- | -------------- |
-| `--password` | `-p` | None        | Database user password |
-| `--host`     | `-H` | `127.0.0.1` | Database address     |
-| `--port`     | `-P` | `4000`      | Database port     |
-| `--db`       | `-D` | `bookshop`  | Database name     |
-| `--user`     | `-U` | `root`      | Database user     |
+| パラメータ        | 略語   | デフォルト値      | 説明                |
+| ------------ | ---- | ----------- | ----------------- |
+| `--password` | `-p` | なし          | データベース ユーザーのパスワード |
+| `--host`     | `-H` | `127.0.0.1` | データベースアドレス        |
+| `--port`     | `-P` | `4000`      | データベース ポート        |
+| `--db`       | `-D` | `bookshop`  | データベース名           |
+| `--user`     | `-U` | `root`      | データベース ユーザー       |
 
-For example, if you want to connect to a database on TiDB Cloud, you can specify the connection information as follows:
+たとえば、 TiDB Cloud上のデータベースに接続する場合は、次のように接続情報を指定できます。
 
-{{< copyable "shell" >}}
+{{< copyable "" >}}
 
 ```shell
 tiup demo bookshop prepare -U root -H tidb.xxx.yyy.ap-northeast-1.prod.aws.tidbcloud.com -P 4000 -p
 ```
 
-#### Set the data volume
+#### データ量を設定する {#set-the-data-volume}
 
-You can specify the volume of data to be generated in each database table by configuring the following parameters:
+次のパラメーターを構成することにより、各データベース テーブルで生成されるデータの量を指定できます。
 
-| Parameter        | Default value   | Description                              |
-| ----------- | -------- | --------------------------------- |
-| `--users`   | `10000`  | The number of rows of data to be generated in the `users` table   |
-| `--authors` | `20000`  | The number of rows to be generated in the `authors` table |
-| `--books`   | `20000`  | The number of rows of data to be generated in the `books` table   |
-| `--orders`  | `300000` | The number of rows of data to be generated in the `orders` table  |
-| `--ratings` | `300000` | The number of rows of data to be generated in the `ratings` table |
+| パラメータ       | デフォルト値   | 説明                       |
+| ----------- | -------- | ------------------------ |
+| `--users`   | `10000`  | `users`テーブルに生成するデータの行数   |
+| `--authors` | `20000`  | `authors`テーブルに生成する行数     |
+| `--books`   | `20000`  | `books`テーブルに生成するデータの行数   |
+| `--orders`  | `300000` | `orders`テーブルに生成するデータの行数  |
+| `--ratings` | `300000` | `ratings`テーブルに生成するデータの行数 |
 
-For example, the following command is executed to generate:
+たとえば、次のコマンドを実行して生成します。
 
-- 200,000 rows of user information via the `--users` parameter
-- 500,000 rows of book information via the `--books` parameter
-- 100,000 rows of author information via the `--authors` parameter
-- 1,000,000 rows of rating records via the `--ratings` parameter
-- 1,000,000 rows of order records via the `--orders` parameter
+-   `--users`パラメータによる 200,000 行のユーザー情報
+-   `--books`パラメータによる 500,000 行の書籍情報
+-   `--authors`パラメータによる 100,000 行の著者情報
+-   `--ratings`パラメータによる 1,000,000 行の評価レコード
+-   `--orders`パラメータによる 1,000,000 行の注文レコード
 
-{{< copyable "shell" >}}
+{{< copyable "" >}}
 
 ```shell
 tiup demo bookshop prepare --users=200000 --books=500000 --authors=100000 --ratings=1000000 --orders=1000000 --drop-tables
 ```
 
-You can delete the original table structure through the `--drop-tables` parameter. For more parameter descriptions, run the `tiup demo bookshop --help` command.
+`--drop-tables`パラメータを使用して、元のテーブル構造を削除できます。パラメーターの詳細については、 `tiup demo bookshop --help`コマンドを実行してください。
 
-### Method 2: Via TiDB Cloud Import
+### 方法 2: TiDB Cloudインポート経由 {#method-2-via-tidb-cloud-import}
 
-On the database details page of TiDB Cloud, click the **Import** button to enter the **Data Import Task** page. On this page, perform the following steps to import the Bookshop sample data from AWS S3 to TiDB Cloud.
+TiDB Cloudのデータベースの詳細ページで、[**インポート**] ボタンをクリックして、[<strong>データのインポート タスク</strong>] ページに入ります。このページで、次の手順を実行して Bookshop サンプル データを AWS S3 からTiDB Cloudにインポートします。
 
-1. Copy the following **Bucket URL** and **Role-ARN** to the corresponding input boxes:
+1.  次の**バケット URL**と<strong>Role-ARN</strong>を対応する入力ボックスにコピーします。
 
-    **Bucket URL**:
+    **バケット URL** :
 
     {{< copyable "" >}}
 
@@ -106,7 +106,7 @@ On the database details page of TiDB Cloud, click the **Import** button to enter
     s3://developer.pingcap.com/bookshop/
     ```
 
-   **Role-ARN**:
+    **Role-ARN** :
 
     {{< copyable "" >}}
 
@@ -114,36 +114,39 @@ On the database details page of TiDB Cloud, click the **Import** button to enter
     arn:aws:iam::494090988690:role/s3-tidb-cloud-developer-access
     ```
 
-    In this example, the following data is generated in advance:
+    この例では、次のデータが事前に生成されます。
 
-    - 200,000 rows of user information
-    - 500,000 rows of book information
-    - 100,000 rows of author information
-    - 1,000,000 rows of rating records
-    - 1,000,000 rows of order records
+    -   200,000 行のユーザー情報
+    -   500,000 行の書籍情報
+    -   100,000 行の著者情報
+    -   1,000,000 行の評価レコード
+    -   1,000,000 行の注文レコード
 
-2. Select **US West (Oregon)** for **Bucket Region**.
-3. Select **TiDB Dumpling** for **Data Format**.
+2.  **Bucket リージョン**に<strong>US West (Oregon)</strong>を選択します。
+
+3.  **データ形式**に<strong>TiDB Dumpling</strong>を選択します。
 
     ![Import Bookshop data in TiDB Cloud](/media/develop/tidb_cloud_import_bookshop_data.png)
 
-4. Enter database login information.
-5. Click the **Import** button to confirm the import.
-6. Wait for TiDB Cloud to complete the import.
+4.  データベースのログイン情報を入力します。
+
+5.  [**インポート**] ボタンをクリックして、インポートを確認します。
+
+6.  TiDB Cloudがインポートを完了するまで待ちます。
 
     ![Bookshop data importing](/media/develop/importing_bookshop_data.png)
 
-    If the following error message appears during the import process, run the `DROP DATABASE bookshop;` command to clear the previously created sample database and then import data again.
+    インポート プロセス中に次のエラー メッセージが表示された場合は、 `DROP DATABASE bookshop;`コマンドを実行して、以前に作成したサンプル データベースをクリアしてから、データを再度インポートします。
 
-    > table(s) [`bookshop`.`authors`, `bookshop`.`book_authors`, `bookshop`.`books`, `bookshop`.`orders`, `bookshop`.`ratings`, `bookshop`.`users`] are not empty.
+    > テーブル [ `bookshop` . `authors` `bookshop` `book_authors` `bookshop` `books` `bookshop` `orders` `bookshop` `ratings` `bookshop` `users` ] は空ではありません。
 
-For more information about TiDB Cloud, see [TiDB Cloud Documentation](https://docs.pingcap.com/tidbcloud).
+TiDB Cloudの詳細については、 [TiDB Cloudのドキュメント](https://docs.pingcap.com/tidbcloud)を参照してください。
 
-### View data import status
+### データのインポート ステータスをビューする {#view-data-import-status}
 
-After the import is completed, you can view the data volume information of each table by executing the following SQL statement:
+インポートが完了したら、次の SQL ステートメントを実行して、各テーブルのデータ ボリューム情報を表示できます。
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 SELECT
@@ -157,7 +160,7 @@ FROM
 WHERE table_schema LIKE 'bookshop';
 ```
 
-The result is as follows:
+結果は次のとおりです。
 
 ```
 +-----------------------+----------------+-----------+------------+---------+
@@ -173,82 +176,82 @@ The result is as follows:
 6 rows in set (0.03 sec)
 ```
 
-## Description of the tables
+## テーブルの説明 {#description-of-the-tables}
 
-This section describes the database tables of the Bookshop application in detail.
+このセクションでは、Bookshop アプリケーションのデータベース テーブルについて詳しく説明します。
 
-### `books` table
+### <code>books</code>テーブル {#code-books-code-table}
 
-This table stores the basic information of books.
+このテーブルには、書籍の基本情報が格納されます。
 
-| Field name   | Type          | Description                                                          |
-|--------------|---------------|------------------------------------------------------------------|
-| id           | bigint(20)    | Unique ID of a book                                            |
-| title        | varchar(100)  | Title of a book                                                       |
-| type         | enum          | Type of a book (for example, magazine, animation, or teaching aids) |
-| stock        | bigint(20)    | Stock                                                            |
-| price        | decimal(15,2) | Price                                                            |
-| published_at | datetime      | Date of publish                                                  |
+| フィールド名       | タイプ          | 説明                  |
+| ------------ | ------------ | ------------------- |
+| ID           | bigint(20)   | 書籍の一意の ID           |
+| 題名           | varchar(100) | 本のタイトル              |
+| タイプ          | 列挙           | 書籍の種類 (雑誌、アニメ、教材など) |
+| 株式           | bigint(20)   | ストック                |
+| 価格           | 10 進数 (15,2) | 価格                  |
+| published_at | 日付時刻         | 発行日                 |
 
-### `authors` table
+### <code>authors</code>表 {#code-authors-code-table}
 
-This table stores basic information of authors.
+このテーブルには、著者の基本情報が格納されます。
 
-| Field name | Type         | Description                                               |
-|------------|--------------|-------------------------------------------------------|
-| id         | bigint(20)   | Unique ID of an author                               |
-| name       | varchar(100) | Name of an author                                                 |
-| gender     | tinyint(1)   | Biological gender (0: female, 1: male, NULL: unknown) |
-| birth_year | smallint(6)  | Year of birth                                     |
-| death_year | smallint(6)  | Year of death                                     |
+| フィールド名 | タイプ          | 説明                            |
+| ------ | ------------ | ----------------------------- |
+| ID     | bigint(20)   | 著者の一意の ID                     |
+| 名前     | varchar(100) | 著者名                           |
+| 性別     | tinyint(1)   | 生物学的性別 (0: 女性、1: 男性、NULL: 不明) |
+| 生年     | smallint(6)  | 生年                            |
+| 死亡年    | smallint(6)  | 没年                            |
 
-### `users` table
+### <code>users</code>テーブル {#code-users-code-table}
 
-This table stores information of Bookshop users.
+このテーブルには、Bookshop ユーザーの情報が格納されます。
 
-| Field name | Type          | Description               |
-|------------|---------------|-----------------------|
-| id         | bigint(20)    | Unique ID of a user |
-| balance    | decimal(15,2) | Balance               |
-| nickname   | varchar(100)  | Nickname              |
+| フィールド名 | タイプ          | 説明          |
+| ------ | ------------ | ----------- |
+| ID     | bigint(20)   | ユーザーの一意の ID |
+| 残高     | 10 進数 (15,2) | バランス        |
+| ニックネーム | varchar(100) | ニックネーム      |
 
-### `ratings` table
+### <code>ratings</code>表 {#code-ratings-code-table}
 
-This table stores records of user ratings on books.
+このテーブルには、書籍に対するユーザーの評価のレコードが格納されます。
 
-| Field name | Type     | Description                                                    |
-|------------|----------|------------------------------------------------------------|
-| book_id    | bigint   | Unique ID of a book (linked to [books](#books-table))    |
-| user_id    | bigint   | User's unique identifier (linked to [users](#users-table)) |
-| score      | tinyint  | User rating (1-5)                                          |
-| rated_at   | datetime | Rating time                                                |
+| フィールド名    | タイプ     | 説明                                      |
+| --------- | ------- | --------------------------------------- |
+| book_id   | bigint  | 書籍の一意の ID ( [本](#books-table)にリンク)      |
+| ユーザーID    | bigint  | ユーザーの一意の識別子 ( [ユーザー](#users-table)にリンク) |
+| スコア       | tinyint | ユーザー評価 (1-5)                            |
+| rating_at | 日付時刻    | 評価時間                                    |
 
-### `book_authors` table
+### <code>book_authors</code>テーブル {#code-book-authors-code-table}
 
-An author may write multiple books, and a book may involve more than one author. This table stores the correspondence between books and authors.
+著者は複数の本を執筆する場合があり、1 つの本に複数の著者が関与する場合があります。このテーブルには、書籍と著者の間の対応が格納されます。
 
-| Field name | Type       | Description                                                      |
-|------------|------------|--------------------------------------------------------------|
-| book_id    | bigint(20) | Unique ID of a book (linked to [books](#books-table))      |
-| author_id  | bigint(20) | Unique ID of an author（Link to [authors](#authors-table)） |
+| フィールド名    | タイプ        | 説明                                 |
+| --------- | ---------- | ---------------------------------- |
+| book_id   | bigint(20) | 書籍の一意の ID ( [本](#books-table)にリンク) |
+| author_id | bigint(20) | 著者固有ID（ [著者](#authors-table)へのリンク） |
 
-### `orders` table
+### <code>orders</code>表 {#code-orders-code-table}
 
-This table stores user purchase information.
+このテーブルには、ユーザーの購入情報が格納されます。
 
-| Field name | Type       | Description                                                        |
-|------------|------------|----------------------------------------------------------------|
-| id         | bigint(20) | Unique ID of an order                                     |
-| book_id    | bigint(20) | Unique ID of a book (linked to [books](#books-table))        |
-| user_id    | bigint(20) | User unique identifier (associated with [users](#users-table)) |
-| quantity   | tinyint(4) | Purchase quantity                                              |
-| ordered_at | datetime   | Purchase time                                                  |
+| フィールド名   | タイプ        | 説明                                           |
+| -------- | ---------- | -------------------------------------------- |
+| ID       | bigint(20) | 注文の一意の ID                                    |
+| book_id  | bigint(20) | 書籍の一意の ID ( [本](#books-table)にリンク)           |
+| ユーザーID   | bigint(20) | ユーザー固有の識別子 ( [ユーザー](#users-table)に関連付けられている) |
+| 量        | tinyint(4) | 購入数量                                         |
+| order_at | 日付時刻       | 購入時期                                         |
 
-## Database initialization script `dbinit.sql`
+## データベース初期化スクリプト<code>dbinit.sql</code> {#database-initialization-script-code-dbinit-sql-code}
 
-If you want to manually create database table structures in the Bookshop application, run the following SQL statements:
+Bookshop アプリケーションでデータベース テーブル構造を手動で作成する場合は、次の SQL ステートメントを実行します。
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 CREATE DATABASE IF NOT EXISTS `bookshop`;

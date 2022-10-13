@@ -3,11 +3,11 @@ title: ALTER USER | TiDB SQL Statement Reference
 summary: An overview of the usage of ALTER USER for the TiDB database.
 ---
 
-# ALTER USER
+# ユーザーの変更 {#alter-user}
 
-This statement changes an existing user inside the TiDB privilege system. In the MySQL privilege system, a user is the combination of a username and the host from which they are connecting from. Thus, it is possible to create a user `'newuser2'@'192.168.1.1'` who is only able to connect from the IP address `192.168.1.1`. It is also possible to have two users have the same user-portion, and different permissions as they login from different hosts.
+このステートメントは、TiDB 特権システム内の既存のユーザーを変更します。 MySQL 特権システムでは、ユーザーはユーザー名と接続元のホストの組み合わせです。これにより、ＩＰアドレス`192.168.1.1`からしか接続できないユーザ`'newuser2'@'192.168.1.1'`を作成することができる。 2 人のユーザーが同じユーザー部分を持ち、異なるホストからログインするときに異なる権限を持つことも可能です。
 
-## Synopsis
+## あらすじ {#synopsis}
 
 ```ebnf+diagram
 AlterUserStmt ::=
@@ -28,7 +28,7 @@ AuthOption ::=
 LockOption ::= ( 'ACCOUNT' 'LOCK' | 'ACCOUNT' 'UNLOCK' )?
 ```
 
-## Examples
+## 例 {#examples}
 
 ```sql
 mysql> CREATE USER 'newuser' IDENTIFIED BY 'newuserpassword';
@@ -62,22 +62,22 @@ ALTER USER 'newuser' ACCOUNT LOCK;
 Query OK, 0 rows affected (0.02 sec)
 ```
 
-> **Note:**
+> **ノート：**
 >
-> Do not use `ACCOUNT UNLOCK` to unlock a [role](/sql-statements/sql-statement-create-role.md). Otherwise, the unlocked role can be used to log in to TiDB without password.
+> `ACCOUNT UNLOCK`を使用して[役割](/sql-statements/sql-statement-create-role.md)のロックを解除しないでください。それ以外の場合、ロック解除された役割を使用して、パスワードなしで TiDB にログインできます。
 
-## MySQL compatibility
+## MySQL の互換性 {#mysql-compatibility}
 
-* In MySQL this statement is used to change attributes such as to expire a password. This functionality is not yet supported by TiDB.
+-   MySQL では、このステートメントは、パスワードの期限切れなどの属性を変更するために使用されます。この機能は、TiDB ではまだサポートされていません。
 
-## See also
+## こちらもご覧ください {#see-also}
 
 <CustomContent platform="tidb">
 
-* [Security Compatibility with MySQL](/security-compatibility-with-mysql.md)
+-   [MySQL とのセキュリティの互換性](/security-compatibility-with-mysql.md)
 
 </CustomContent>
 
-* [CREATE USER](/sql-statements/sql-statement-create-user.md)
-* [DROP USER](/sql-statements/sql-statement-drop-user.md)
-* [SHOW CREATE USER](/sql-statements/sql-statement-show-create-user.md)
+-   [ユーザーを作成](/sql-statements/sql-statement-create-user.md)
+-   [ユーザーをドロップ](/sql-statements/sql-statement-drop-user.md)
+-   [ユーザーの作成を表示](/sql-statements/sql-statement-show-create-user.md)

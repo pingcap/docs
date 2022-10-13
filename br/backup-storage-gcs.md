@@ -3,34 +3,34 @@ title: Back Up and Restore Data on Google Cloud Storage Using BR
 summary: Learn how to use BR to back up and restore data on Google Cloud Storage.
 ---
 
-# Back Up and Restore Data on Google Cloud Storage Using BR
+# BR を使用した Google Cloud Storage でのデータのバックアップと復元 {#back-up-and-restore-data-on-google-cloud-storage-using-br}
 
-The Backup & Restore (BR) tool supports using Google Cloud Storage (GCS) as the external storage for backing up and restoring data.
+バックアップと復元 (BR) ツールは、データのバックアップと復元のための外部ストレージとして Google Cloud Storage (GCS) の使用をサポートしています。
 
-## User scenario
+## ユーザーシナリオ {#user-scenario}
 
-You can quickly back up the data of a TiDB cluster deployed in Google Compute Engine (GCE) to GCS, or quickly restore a TiDB cluster from the backup data in GCS.
+Google Compute Engine (GCE) にデプロイされた TiDB クラスターのデータを GCS にすばやくバックアップしたり、GCS のバックアップ データから TiDB クラスターをすばやく復元したりできます。
 
-## Back up data to GCS
+## データを GCS にバックアップする {#back-up-data-to-gcs}
 
-{{< copyable "shell-regular" >}}
+{{< copyable "" >}}
 
 ```shell
 br backup full --pd "${PDIP}:2379" --Storage 'gcs://bucket-name/prefix?credentials-file=${credentials-file-path}' --send-credentials-to-tikv=true
 ```
 
-When backing up data to GCS, you need to place a credential file in the node where BR is running. The credential file contains the account credentials for accessing GCS. If `--send-credentials-to-tikv` is displayed, it means the account access credentials of GCS will be passed to the TiKV node.
+データを GCS にバックアップする場合、BR が実行されているノードに認証情報ファイルを配置する必要があります。認証情報ファイルには、GCS にアクセスするためのアカウント認証情報が含まれています。 `--send-credentials-to-tikv`が表示された場合、GCS のアカウント アクセス資格情報が TiKV ノードに渡されることを意味します。
 
-To obtain the credential files, refer to [CREATE AND DOWNLOAD THE GCS CREDENTIALS FILE](https://access.redhat.com/documentation/en-us/red_hat_openstack_platform/13/html/google_cloud_backup_guide/creds).
+認証情報ファイルを取得するには、 [GCS 認証情報ファイルを作成してダウンロードする](https://access.redhat.com/documentation/en-us/red_hat_openstack_platform/13/html/google_cloud_backup_guide/creds)を参照してください。
 
-## Restore data from GCS
+## GCS からデータを復元する {#restore-data-from-gcs}
 
-{{< copyable "shell-regular" >}}
+{{< copyable "" >}}
 
 ```shell
 br restore full --pd "${PDIP}:2379" --Storage 'gcs://bucket-name/prefix?credentials-file=${credentials-file-path}' --send-credentials-to-tikv=true
 ```
 
-## See also
+## こちらもご覧ください {#see-also}
 
-To learn other external storages supported by BR, see [External storages](/br/backup-and-restore-storages.md).
+BR でサポートされているその他の外部ストレージについては、 [外部ストレージ](/br/backup-and-restore-storages.md)を参照してください。

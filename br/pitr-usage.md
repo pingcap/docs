@@ -3,92 +3,92 @@ title: Use PITR
 summary: Learn how to use PITR.
 ---
 
-# Use PITR
+# PITR を使用する {#use-pitr}
 
-This document describe how to deploy the relevant tool and use point-in-time recovery (PITR). It aims to help you get started with this feature.
+このドキュメントでは、関連するツールを展開し、ポイント イン タイム リカバリ (PITR) を使用する方法について説明します。この機能を使い始めるのに役立つことを目的としています。
 
-Assume that you have deployed a TiDB cluster in the production environment on AWS, and the business team puts forward the following requirements:
+AWS の本番環境に TiDB クラスターをデプロイし、ビジネス チームが次の要件を提案したとします。
 
-- Back up the data changes in time. When the database encounters an error, you can quickly recover the application data with a minimum data loss (only a few minutes of data loss is tolerable).
-- Perform business audits every month at no specific time. When an audit request is received, you must provide a database to query the data at a certain time point in the past month as requested.
+-   データの変更を適時にバックアップします。データベースでエラーが発生した場合、最小限のデータ損失でアプリケーション データを迅速に回復できます (数分間のデータ損失のみが許容されます)。
+-   毎月特定の時間にビジネス監査を実行します。監査要求を受け取ったら、要求に応じて過去 1 か月の特定の時点でデータをクエリするためのデータベースを提供する必要があります。
 
-With PITR, you can satisfy the above requirements.
+PITR を使用すると、上記の要件を満たすことができます。
 
-## Deploy the TiDB cluster and BR
+## TiDB クラスターと BR をデプロイ {#deploy-the-tidb-cluster-and-br}
 
-To use PITR, you need to deploy a TiDB cluster >= v6.2.0 and update BR to the same version as the TiDB cluster. This document uses v6.2.0 as an example.
+PITR を使用するには、TiDB クラスター &gt;= v6.2.0 をデプロイし、BR を TiDB クラスターと同じバージョンに更新する必要があります。このドキュメントでは、例として v6.2.0 を使用しています。
 
-The following table shows the recommended hardware resources for using PITR in a TiDB cluster.
+次の表は、TiDB クラスターで PITR を使用するために推奨されるハードウェア リソースを示しています。
 
-| Component | CPU | Memory | Local storage  | AWS instance  | Number of instances |
-| --- | --- | --- | --- | --- | --- |
-| TiDB | 8 core+ | 16 GB+ | SAS | c5.2xlarge | 2 |
-| PD | 8 core+ | 16 GB+ | SSD | c5.2xlarge | 3 |
-| TiKV | 8 core+ | 32 GB+ | SSD | m5.2xlarge | 3 |
-| BR | 8 core+ | 16 GB+ | SAS | c5.2xlarge | 1 |
-| Monitor | 8 core+ | 16 GB+ | SAS | c5.2xlarge | 1 |
+| 成分   | CPU  | メモリー   | ローカルストレージ | AWS インスタンス | インスタンス数 |
+| ---- | ---- | ------ | --------- | ---------- | ------- |
+| TiDB | 8コア+ | 16GB以上 | SAS       | c5.2xlarge | 2       |
+| PD   | 8コア+ | 16GB以上 | SSD       | c5.2xlarge | 3       |
+| TiKV | 8コア+ | 32GB以上 | SSD       | m5.2x大     | 3       |
+| ブラジル | 8コア+ | 16GB以上 | SAS       | c5.2xlarge | 1       |
+| モニター | 8コア+ | 16GB以上 | SAS       | c5.2xlarge | 1       |
 
-> **Note:**
+> **ノート：**
 >
-> - When BR runs the backup and restoration tasks, it needs to access PD and TiKV. Make sure that BR and all PD and TiKV servers are connected.
-> - BR and PD servers must use the same time zone.
+> -   BR がバックアップおよび復元タスクを実行するとき、PD および TiKV にアクセスする必要があります。 BR とすべての PD および TiKV サーバーが接続されていることを確認します。
+> -   BR サーバーと PD サーバーは同じタイム ゾーンを使用する必要があります。
 
-Deploy or upgrade a TiDB cluster using TiUP:
+TiUP を使用して TiDB クラスターをデプロイまたはアップグレードします。
 
-- To deploy a new TiDB cluster, refer to [Deploy a TiDB cluster](/production-deployment-using-tiup.md).
-- To upgrade an existing TiDB cluster, refer to [Upgrade a TiDB cluster](/upgrade-tidb-using-tiup.md).
+-   新しい TiDB クラスターをデプロイするには、 [TiDB クラスターをデプロイする](/production-deployment-using-tiup.md)を参照してください。
+-   既存の TiDB クラスターをアップグレードするには、 [TiDB クラスターをアップグレードする](/upgrade-tidb-using-tiup.md)を参照してください。
 
-Install or upgrade BR using TiUP:
+TiUP を使用して BR をインストールまたはアップグレードします。
 
-- Install: run `tiup install br:v6.2.0`.
-- Upgrade: run `tiup update br:v6.2.0`.
+-   インストール: `tiup install br:v6.2.0`を実行します。
+-   アップグレード: `tiup update br:v6.2.0`を実行します。
 
-## Enable log backup
+## ログのバックアップを有効にする {#enable-log-backup}
 
-Before you use log backup, ensure that [`log-backup.enable`](/tikv-configuration-file.md#enable-new-in-v620) in the TiKV configuration file is in its default value `true`. For the method to modify configuration, refer to [Modify the configuration](/maintain-tidb-using-tiup.md#modify-the-configuration).
+ログ バックアップを使用する前に、TiKV 構成ファイルの[`log-backup.enable`](/tikv-configuration-file.md#enable-new-in-v620)が既定値の`true`であることを確認してください。設定変更方法は[構成を変更する](/maintain-tidb-using-tiup.md#modify-the-configuration)を参照してください。
 
-## Configure backup storage (Amazon S3)
+## バックアップ ストレージの構成 (Amazon S3) {#configure-backup-storage-amazon-s3}
 
-Before you start a backup task, prepare the backup storage, including the following aspects:
+バックアップ タスクを開始する前に、次の点を含めてバックアップ ストレージを準備します。
 
-1. Prepare the S3 bucket and directory that stores the backup data.
-2. Configure the permissions to access the S3 bucket.
-3. Plan the directory that stores the backup data.
+1.  バックアップデータを格納する S3 バケットとディレクトリを準備します。
+2.  S3 バケットにアクセスする権限を設定します。
+3.  バックアップ データを格納するディレクトリを計画します。
 
-The detailed steps are as follows:
+詳細な手順は次のとおりです。
 
-1. Create a directory in S3 to store the backup data. The directory in this example is `s3://tidb-pitr-bucket/backup-data`.
+1.  バックアップデータを保存するディレクトリを S3 に作成します。この例のディレクトリは`s3://tidb-pitr-bucket/backup-data`です。
 
-    1. Create a bucket. You can choose an existing S3 to store the backup data. If there is none, refer to [AWS documentation - Creating a bucket](https://docs.aws.amazon.com/AmazonS3/latest/userguide/create-bucket-overview.html) and create an S3 bucket. In this example, the bucket name is `tidb-pitr-bucket`.
-    2. Create a directory for your backup data. In the bucket (`tidb-pitr-bucket`), create a directory named `backup-data`. For detailed steps, refer to [AWS documentation -  Organizing objects in the Amazon S3 console using folders](https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-folders.html).
+    1.  バケットを作成します。バックアップ データを保存する既存の S3 を選択できます。無い場合は[AWS ドキュメント - バケットの作成](https://docs.aws.amazon.com/AmazonS3/latest/userguide/create-bucket-overview.html)を参照してS3バケットを作成してください。この例では、バケット名は`tidb-pitr-bucket`です。
+    2.  バックアップ データ用のディレクトリを作成します。バケット ( `tidb-pitr-bucket` ) で、 `backup-data`という名前のディレクトリを作成します。詳細な手順については、 [AWS ドキュメント - フォルダを使用して Amazon S3 コンソールでオブジェクトを整理する](https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-folders.html)を参照してください。
 
-2. Configure permissions for BR and TiKV to access the S3 directory. It is recommended to grant permissions using the IAM method, which is the most secure way to access the S3 bucket. For detailed steps, refer to [AWS documentation -  Controlling access to a bucket with user policies](https://docs.aws.amazon.com/AmazonS3/latest/userguide/walkthrough1.html). The required permissions are as follows:
+2.  S3 ディレクトリにアクセスするための BR と TiKV のアクセス許可を構成します。 S3 バケットにアクセスする最も安全な方法であるIAMメソッドを使用してアクセス許可を付与することをお勧めします。詳細な手順については、 [AWS ドキュメント - ユーザー ポリシーによるバケットへのアクセスの制御](https://docs.aws.amazon.com/AmazonS3/latest/userguide/walkthrough1.html)を参照してください。必要な権限は次のとおりです。
 
-    - TiKV and BR in the backup cluster need `s3:ListBucket`, `s3:PutObject`, and `s3:AbortMultipartUpload` permissions of the `s3://tidb-pitr-bucket/backup-data` directory.
-    - TiKV and BR in the restoration cluster need `s3:ListBucket` and `s3:GetObject` permissions of the `s3://tidb-pitr-bucket/backup-data` directory.
+    -   バックアップ クラスター内の TiKV および BR には、 `s3://tidb-pitr-bucket/backup-data`ディレクトリの`s3:ListBucket` 、 `s3:PutObject` 、および`s3:AbortMultipartUpload`のアクセス許可が必要です。
+    -   復元クラスタの TiKV と BR には、 `s3://tidb-pitr-bucket/backup-data`ディレクトリの`s3:ListBucket`と`s3:GetObject`の権限が必要です。
 
-3. Plan the directory structure that stores the backup data, including the snapshot (full) backup and the log backup.
+3.  スナップショット (完全) バックアップとログ バックアップを含む、バックアップ データを格納するディレクトリ構造を計画します。
 
-    - All snapshot backup data is stored in the `s3://tidb-pitr-bucket/backup-data/snapshot-${date}` directory. `${date}` is the start time of the snapshot backup. For example, a snapshot backup starting at 2022/05/12 00:01:30 is stored in `s3://tidb-pitr-bucket/backup-data/snapshot-20220512000130`.
-    - Log backup data is stored in the `s3://tidb-pitr-bucket/backup-data/log-backup/` directory.
+    -   すべてのスナップショット バックアップ データは、 `s3://tidb-pitr-bucket/backup-data/snapshot-${date}`ディレクトリに格納されます。 `${date}`は、スナップショット バックアップの開始時刻です。たとえば、2022/05/12 00:01:30 から始まるスナップショット バックアップは`s3://tidb-pitr-bucket/backup-data/snapshot-20220512000130`に格納されます。
+    -   ログバックアップデータは`s3://tidb-pitr-bucket/backup-data/log-backup/`ディレクトリに格納されます。
 
-## Determine the backup policy
+## バックアップ ポリシーを決定する {#determine-the-backup-policy}
 
-To meet the requirements of minimum data loss, quick recovery, and business audits within a month, you can set the backup policy as follows:
+最小限のデータ損失、迅速な復旧、および 1 か月以内のビジネス監査の要件を満たすために、次のようにバックアップ ポリシーを設定できます。
 
-- Run the log backup to continuously back up the data change in the database.
-- Run a snapshot backup at 00:00 every two days.
-- Retain the snapshot backup data and log backup data within 30 days and clean up backup data older than 30 days.
+-   ログ バックアップを実行して、データベースのデータ変更を継続的にバックアップします。
+-   2 日ごとに 00:00 にスナップショット バックアップを実行します。
+-   スナップショット バックアップ データとログ バックアップ データを 30 日以内に保持し、30 日より古いバックアップ データをクリーンアップします。
 
-## Run log backup
+## ログのバックアップを実行する {#run-log-backup}
 
-After the log backup task is started, the log backup process runs in the TiKV cluster to continuously send the data change in the database to the S3 storage. To start a log backup task, run the following command:
+ログ バックアップ タスクが開始されると、TiKV クラスターでログ バックアップ プロセスが実行され、データベース内のデータ変更が S3 ストレージに継続的に送信されます。ログ バックアップ タスクを開始するには、次のコマンドを実行します。
 
 ```shell
 tiup br log start --task-name=pitr --pd=172.16.102.95:2379 --storage='s3://tidb-pitr-bucket/backup-data/log-backup'
 ```
 
-When the log backup task is running, you can query the backup status:
+ログ バックアップ タスクの実行中に、バックアップ ステータスを照会できます。
 
 ```shell
 tiup br log status --task-name=pitr --pd=172.16.102.95:2379
@@ -104,29 +104,29 @@ tiup br log status --task-name=pitr --pd=172.16.102.95:2379
 checkpoint[global]: 2022-05-13 11:31:47.2 +0800; gap=4m53s
 ```
 
-## Run snapshot backup
+## スナップショット バックアップの実行 {#run-snapshot-backup}
 
-You can run snapshot backup tasks on a regular basis using an automatic tool such as crontab. For example, run a snapshot backup at 00:00 every two days.
+crontab などの自動ツールを使用して、定期的にスナップショット バックアップ タスクを実行できます。たとえば、2 日おきに 00:00 にスナップショット バックアップを実行します。
 
-The following are two snapshot backup examples:
+次に、2 つのスナップショット バックアップの例を示します。
 
-- Run a snapshot backup at 2022/05/14 00:00:00
+-   2022/05/14 00:00:00 にスナップショット バックアップを実行します。
 
     ```shell
     tiup br backup full --pd=172.16.102.95:2379 --storage='s3://tidb-pitr-bucket/backup-data/snapshot-20220514000000' --backupts='2022/05/14 00:00:00'
     ```
 
-- Run a snapshot backup at 2022/05/16 00:00:00
+-   2022/05/16 00:00:00 にスナップショット バックアップを実行します。
 
     ```shell
     tiup br backup full --pd=172.16.102.95:2379 --storage='s3://tidb-pitr-bucket/backup-data/snapshot-20220516000000' --backupts='2022/05/16 00:00:00'
     ```
 
-## Run PITR
+## PITR を実行する {#run-pitr}
 
-Assume that you need to query the data at 2022/05/15 18:00:00. You can use PITR to restore a cluster to that timestamp by restoring a snapshot backup taken at 2022/05/14 and a log backup between the snapshot and 2022/05/15 18:00:00.
+2022/05/15 18:00:00 にデータをクエリする必要があるとします。 PITR を使用して、2022/05/14 に作成されたスナップショット バックアップと、スナップショットと 2022/05/15 18:00:00 の間のログ バックアップを復元することで、クラスターをそのタイムスタンプに復元できます。
 
-The command is as follows:
+コマンドは次のとおりです。
 
 ```shell
 tiup br restore point --pd=172.16.102.95:2379
@@ -141,25 +141,25 @@ Restore KV Files <--------------------------------------------------------------
 [2022/05/29 18:15:39.325 +08:00] [INFO] [collector.go:69] ["restore log success summary"] [total-take=xxx.xx] [restore-from={TS}] [restore-to={TS}] [total-kv-count=xxx] [total-size=xxx]
 ```
 
-## Clean up outdated data
+## 古いデータのクリーンアップ {#clean-up-outdated-data}
 
-You can clean up outdated data every two days using an automatic tool such as crontab.
+crontab などの自動ツールを使用して、2 日ごとに古いデータをクリーンアップできます。
 
-For example, you can run the following commands to clean up outdated data:
+たとえば、次のコマンドを実行して古いデータをクリーンアップできます。
 
-- Delete snapshot data earlier than 2022/05/14 00:00:00
+-   2022/05/14 00:00:00より前のスナップショットデータを削除
 
     ```shell
     rm s3://tidb-pitr-bucket/backup-data/snapshot-20220514000000
     ```
 
-- Delete log backup data earlier than 2022/05/14 00:00:00
+-   2022/05/14 00:00:00より前のログバックアップデータを削除
 
     ```shell
     tiup br log truncate --until='2022-05-14 00:00:00 +0800' --storage='s3://tidb-pitr-bucket/backup-data/log-backup'
     ```
 
-## Learn more
+## もっと詳しく知る {#learn-more}
 
-- [Use PITR via CLI](/br/br-log-command-line.md)
-- [PITR Overview](/br/point-in-time-recovery.md)
+-   [CLI 経由で PITR を使用する](/br/br-log-command-line.md)
+-   [PITRの概要](/br/point-in-time-recovery.md)

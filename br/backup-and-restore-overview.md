@@ -3,111 +3,111 @@ title: BR Overview
 summary: Learn about the definition and functions of BR.
 ---
 
-# BR Overview
+# BRの概要 {#br-overview}
 
-[BR](https://github.com/pingcap/tidb/tree/master/br) (Backup & Restore) is a command-line tool for **distributed backup and restoration** of the TiDB cluster data. In addition to regular backup and restoration, you can also use BR for large-scale data migration as long as compatibility is ensured.
+[ブラジル](https://github.com/pingcap/tidb/tree/master/br) (バックアップと復元) は、TiDB クラスター データの**分散バックアップと復元**のためのコマンド ライン ツールです。定期的なバックアップとリストアに加えて、BR は互換性が確保されている限り、大規模なデータ移行にも使用できます。
 
-This document describes BR's architecture, features, and usage tips.
+このドキュメントでは、BR のアーキテクチャ、機能、および使用上のヒントについて説明します。
 
-## BR architecture
+## BRアーキテクチャ {#br-architecture}
 
-BR sends a backup or restoration command to each TiKV node. After receiving the command, TiKV performs the corresponding backup or restoration operation.
+BR は、各 TiKV ノードにバックアップまたは復元コマンドを送信します。コマンドを受け取った後、TiKV は対応するバックアップまたは復元操作を実行します。
 
-Each TiKV node has a path in which the backup files generated in the backup operation are stored and from which the stored backup files are read during the restoration.
+各 TiKV ノードには、バックアップ操作で生成されたバックアップ ファイルが格納されるパスと、復元時に格納されたバックアップ ファイルが読み込まれるパスがあります。
 
 ![br-arch](/media/br-arch.png)
 
-For detailed information about the BR design, see [BR Design Principles](/br/backup-and-restore-design.md).
+BR 設計の詳細については、 [BR の設計原則](/br/backup-and-restore-design.md)を参照してください。
 
-## BR features
+## BRの特徴 {#br-features}
 
-This section describes BR features and the performance impact.
+このセクションでは、BR の機能とパフォーマンスへの影響について説明します。
 
-### Back up TiDB cluster data
+### TiDB クラスター データのバックアップ {#back-up-tidb-cluster-data}
 
-- **Back up cluster snapshots**: A snapshot of a TiDB cluster contains transactionally consistent data at a specific time. You can back up snapshot data of a TiDB cluster using BR. For details, see [Back up TiDB cluster snapshots](/br/br-usage-backup.md#back-up-tidb-cluster-snapshots).
-- **Back up incremental data**: The incremental data of a TiDB cluster represents changes between the latest snapshot and the previous snapshot. Incremental data is smaller in size compared with full data, and can be used together with snapshot backup, which reduces the volume of backup data. For details, see [Back up incremental data](/br/br-usage-backup.md#back-up-incremental-data).
-- **Back up a database or table**: On top of snapshot and incremental data backup, BR supports backing up a specific database or table and filtering out unnecessary data. For details, see [Back up a database or table](/br/br-usage-backup.md#back-up-a-database-or-a-table).
-- **Encrypt backup data**: BR supports backup data encryption and Amazon S3 server-side encryption. You can select an encryption method as needed. For details, see [Encrypt backup data](/br/br-usage-backup.md#encrypt-backup-data).
+-   **クラスター スナップショットのバックアップ**: TiDB クラスターのスナップショットには、特定の時点でトランザクション的に一貫性のあるデータが含まれています。 BR を使用して、TiDB クラスターのスナップショット データをバックアップできます。詳細については、 [TiDB クラスターのスナップショットをバックアップする](/br/br-usage-backup.md#back-up-tidb-cluster-snapshots)を参照してください。
+-   **増分データのバックアップ**: TiDB クラスターの増分データは、最新のスナップショットと以前のスナップショットの間の変更を表します。増分データは、フル データに比べてサイズが小さく、スナップショット バックアップと併用できるため、バックアップ データの量を減らすことができます。詳細については、 [増分データのバックアップ](/br/br-usage-backup.md#back-up-incremental-data)を参照してください。
+-   **データベースまたはテーブル**のバックアップ : スナップショットおよび増分データ バックアップに加えて、BR は特定のデータベースまたはテーブルのバックアップと不要なデータの除外をサポートします。詳細については、 [データベースまたはテーブルのバックアップ](/br/br-usage-backup.md#back-up-a-database-or-a-table)を参照してください。
+-   **バックアップ**データの暗号化: BR は、バックアップ データの暗号化と Amazon S3 サーバー側の暗号化をサポートしています。必要に応じて暗号化方式を選択できます。詳細については、 [バックアップ データの暗号化](/br/br-usage-backup.md#encrypt-backup-data)を参照してください。
 
-#### Impact on performance
+#### パフォーマンスへの影響 {#impact-on-performance}
 
-The impact of backup on a TiDB cluster is kept below 20%, and this value can be reduced to 10% or less with the proper configuration of the TiDB cluster. The backup speed of a TiKV node is scalable and ranges from 50 MB/s to 100 MB/s. For more information, see [Backup performance and impact](/br/br-usage-backup.md#backup-performance-and-impact).
+TiDB クラスターに対するバックアップの影響は 20% 未満に抑えられており、TiDB クラスターを適切に構成することで、この値を 10% 以下に減らすことができます。 TiKV ノードのバックアップ速度はスケーラブルで、50 MB/秒から 100 MB/秒の範囲です。詳細については、 [バックアップのパフォーマンスと影響](/br/br-usage-backup.md#backup-performance-and-impact)を参照してください。
 
-#### Storage types of backup data
+#### バックアップ データのストレージの種類 {#storage-types-of-backup-data}
 
-BR supports backing up data to Amazon S3, Google Cloud Storage, Azure Blob Storage, NFS, and other S3-compatible file storage services. For details, see [Back up data to external storages](/br/br-usage-backup.md#back-up-data-to-external-storage).
+BR は、Amazon S3、Google Cloud Storage、Azure Blob Storage、NFS、およびその他の S3 互換ファイル ストレージ サービスへのデータのバックアップをサポートしています。詳細については、 [データを外部ストレージにバックアップする](/br/br-usage-backup.md#back-up-data-to-external-storage)を参照してください。
 
-### Restore TiDB cluster data
+### TiDB クラスター データの復元 {#restore-tidb-cluster-data}
 
-- **Restore snapshot backup**: You can restore snapshot backup data to a new cluster. For details, see [Restore TiDB cluster snapshots](/br/br-usage-restore.md#restore-tidb-cluster-snapshots).
-- **Restore incremental backup**: You can restore the incremental backup data to a cluster. For details, see [Restore incremental backup](/br/br-usage-restore.md#restore-incremental-data).
-- **Restore a database or a table from backup**: You can restore part of a specific database or table. During the process, BR will filter out unnecessary data. For details, see [Restore a database or a table](/br/br-usage-restore.md#restore-a-database-or-a-table).
+-   **スナップショット バックアップの復元**: スナップショット バックアップ データを新しいクラスターに復元できます。詳細については、 [TiDB クラスターのスナップショットを復元する](/br/br-usage-restore.md#restore-tidb-cluster-snapshots)を参照してください。
+-   **増分バックアップの復元**: 増分バックアップ データをクラスタに復元できます。詳細については、 [増分バックアップを復元する](/br/br-usage-restore.md#restore-incremental-data)を参照してください。
+-   **バックアップからデータベースまたはテーブルを**復元する : 特定のデータベースまたはテーブルの一部を復元できます。処理中、BR は不要なデータを除外します。詳細については、 [データベースまたはテーブルを復元する](/br/br-usage-restore.md#restore-a-database-or-a-table)を参照してください。
 
-#### Impact on performance
+#### パフォーマンスへの影響 {#impact-on-performance}
 
-Data restoration is performed at a scalable speed. Generally, the speed is 100 MB/s per TiKV node. BR only supports restoring data to a new cluster and uses the resources of the target cluster as much as possible. For more details, see [Restoration performance and impact](/br/br-usage-restore.md#restoration-performance-and-impact).
+データの復元は、スケーラブルな速度で実行されます。通常、速度は TiKV ノードあたり 100 MB/秒です。 BR は、新しいクラスターへのデータの復元のみをサポートし、ターゲット クラスターのリソースを可能な限り使用します。詳細については、 [復元性能と影響](/br/br-usage-restore.md#restoration-performance-and-impact)を参照してください。
 
-## Before you use BR
+## BRを使用する前に {#before-you-use-br}
 
-Before you use BR, pay attention to its usage restrictions, compatibility, and other considerations.
+BR を使用する前に、その使用制限、互換性、およびその他の考慮事項に注意してください。
 
-### Usage restrictions
+### 利用制限 {#usage-restrictions}
 
-This section describes usage restrictions of BR.
+BRの使用制限について説明します。
 
-#### Unsupported scenarios
+#### サポートされていないシナリオ {#unsupported-scenarios}
 
-When BR restores data to the upstream cluster of TiCDC or TiDB Binlog, TiCDC or TiDB Binlog cannot replicate the restored data to the downstream cluster.
+BR が TiCDC または TiDB Binlog のアップストリーム クラスターにデータを復元する場合、TiCDC またはBinlogは、復元されたデータをダウンストリーム クラスターにレプリケートできません。
 
-#### Compatibility
+#### 互換性 {#compatibility}
 
-The compatibility issues of BR and a TiDB cluster are as follows:
+BR と TiDB クラスターの互換性の問題は次のとおりです。
 
-- There is a cross-version compatibility issue:
+-   バージョン間の互換性の問題があります。
 
-    Before v5.4.0, BR cannot restore tables with `charset=GBK`. At the same time, no version of BR supports restoring `charset=GBK` tables to a TiDB cluster earlier than v5.4.0.
+    v5.4.0 より前では、BR は`charset=GBK`でテーブルを復元できません。同時に、v5.4.0 より前の TiDB クラスターへの`charset=GBK`のテーブルの復元をサポートする BR のバージョンはありません。
 
-- The KV format might change when some features are enabled or disabled. If these features are not consistently enabled or disabled during backup and restoration, compatibility issues might occur.
+-   一部の機能を有効または無効にすると、KV 形式が変更される場合があります。バックアップと復元中にこれらの機能が一貫して有効化または無効化されていない場合、互換性の問題が発生する可能性があります。
 
-These features are as follows:
+これらの機能は次のとおりです。
 
-| Feature | Issue | Solution |
-|  ----  | ----  | ----- |
-| Clustered index | [#565](https://github.com/pingcap/br/issues/565)       | Make sure that the value of the `tidb_enable_clustered_index` global variable during restoration is consistent with that during backup. Otherwise, data inconsistency might occur, such as `default not found` and inconsistent data index. |
-| New collation  | [#352](https://github.com/pingcap/br/issues/352)       | Make sure that the value of the `new_collations_enabled_on_first_bootstrap` variable during restoration is consistent with that during backup. Otherwise, inconsistent data index might occur and checksum might fail to pass. |
-| Global temporary tables | | Make sure that you are using BR v5.3.0 or a later version to back up and restore data. Otherwise, an error occurs in the definition of the backed global temporary tables. |
+| 特徴             | 問題                                               | 解決                                                                                                                                          |
+| -------------- | ------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------- |
+| クラスタ化されたインデックス | [#565](https://github.com/pingcap/br/issues/565) | リストア中の`tidb_enable_clustered_index`グローバル変数の値がバックアップ中の値と一致していることを確認してください。そうしないと、 `default not found`や不整合なデータ インデックスなど、データの不整合が発生する可能性があります。 |
+| 新しい照合順序        | [#352](https://github.com/pingcap/br/issues/352) | リストア中の`new_collations_enabled_on_first_bootstrap`変数の値がバックアップ中の値と一致していることを確認してください。そうしないと、不整合なデータ インデックスが発生し、チェックサムが渡されない可能性があります。           |
+| グローバル一時テーブル    |                                                  | データのバックアップと復元には、BR v5.3.0 以降のバージョンを使用していることを確認してください。そうしないと、バッキングされたグローバル一時テーブルの定義でエラーが発生します。                                               |
 
-However, even after you have ensured that the preceding features are consistently enabled or disabled during backup and restoration, compatibility issues might still occur due to the inconsistent internal versions or inconsistent interfaces between BR and TiKV/TiDB/PD. To avoid such cases, BR provides a built-in version check.
+ただし、バックアップと復元中に前述の機能が一貫して有効または無効になっていることを確認した後でも、BR と TiKV/TiDB/PD の間の一貫性のない内部バージョンまたは一貫性のないインターフェイスが原因で、互換性の問題が引き続き発生する可能性があります。このようなケースを回避するために、BR には組み込みのバージョン チェックが用意されています。
 
-#### Version check
+#### バージョンチェック {#version-check}
 
-Before performing backup and restoration, BR compares and checks the TiDB cluster version and the BR version. If there is a major-version mismatch (for example, BR v4.x and TiDB v5.x), BR prompts a reminder to exit. To forcibly skip the version check, you can set `--check-requirements=false`. Note that skipping the version check might introduce incompatibility.
+BR は、バックアップとリストアを実行する前に、TiDB クラスターのバージョンと BR のバージョンを比較および確認します。メジャー バージョンの不一致がある場合 (たとえば、BR v4.x と TiDB v5.x)、BR は終了するよう促します。バージョン チェックを強制的にスキップするには、 `--check-requirements=false`を設定します。バージョン チェックをスキップすると、互換性が失われる可能性があることに注意してください。
 
-The version compatibility mapping between BR and TiDB versions are as follows:
+BR と TiDB のバージョン間のバージョン互換性マッピングは次のとおりです。
 
-| Backup version (vertical) \ Restoration version (horizontal) | Use BR v5.4 to restore TiDB v5.4 | Use BR v6.0 to restore TiDB v6.0 | Use BR v6.1 to restore TiDB v6.1 | Use BR v6.2 to restore TiDB v6.2 |
-|  ----  |  ----  | ---- | ---- | ---- |
-| Use BR v5.4 to back up TiDB v5.4 | Compatible | Incompatible (Before restoration, modify the restoration cluster to use the same [new collation](/tidb-configuration-file.md#new_collations_enabled_on_first_bootstrap) as the backup cluster.) | Incompatible (Before restoration, modify the restoration cluster to use the same [new collation](/tidb-configuration-file.md#new_collations_enabled_on_first_bootstrap) as the backup cluster.) | Incompatible (Before restoration, modify the restoration cluster to use the same [new collation](/tidb-configuration-file.md#new_collations_enabled_on_first_bootstrap) as the backup cluster.) |
-| Use BR v6.0 to back up TiDB v6.0 | Incompatible | Compatible | Compatible | Compatible |
-| Use BR v6.1 to back up TiDB v6.1 | Incompatible | Compatible (A known issue [#36379](https://github.com/pingcap/tidb/issues/36379): if backup data contains an empty schema, BR might report an error.) | Compatible | Compatible |
-| Use BR v6.2 to back up TiDB v6.2 | Incompatible | Compatible (A known issue [#36379](https://github.com/pingcap/tidb/issues/36379): if backup data contains an empty schema, BR might report an error.) | Compatible | Compatible |
+| バックアップ版（縦）\リストア版（横）               | BR v5.4 を使用して TiDB v5.4 を復元する | BR v6.0 を使用して TiDB v6.0 を復元する                                                                                                      | BR v6.1 を使用して TiDB v6.1 を復元する                                                                                                      | BR v6.2 を使用して TiDB v6.2 を復元する                                                                                                      |
+| --------------------------------- | ----------------------------- | ---------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------- |
+| BR v5.4 を使用して TiDB v5.4 をバックアップする | 互換性                           | 互換性なし (復元前に、バックアップ クラスターと同じ[新しい照合順序](/tidb-configuration-file.md#new_collations_enabled_on_first_bootstrap)を使用するように復元クラスターを変更します。) | 互換性なし (復元前に、バックアップ クラスターと同じ[新しい照合順序](/tidb-configuration-file.md#new_collations_enabled_on_first_bootstrap)を使用するように復元クラスターを変更します。) | 互換性なし (復元前に、バックアップ クラスターと同じ[新しい照合順序](/tidb-configuration-file.md#new_collations_enabled_on_first_bootstrap)を使用するように復元クラスターを変更します。) |
+| BR v6.0 を使用して TiDB v6.0 をバックアップする | 非互換                           | 互換性                                                                                                                                | 互換性                                                                                                                                | 互換性                                                                                                                                |
+| BR v6.1 を使用して TiDB v6.1 をバックアップする | 非互換                           | 互換性あり (既知の問題[#36379](https://github.com/pingcap/tidb/issues/36379) : バックアップ データに空のスキーマが含まれている場合、BR がエラーを報告する場合があります。)              | 互換性                                                                                                                                | 互換性                                                                                                                                |
+| BR v6.2 を使用して TiDB v6.2 をバックアップする | 非互換                           | 互換性あり (既知の問題[#36379](https://github.com/pingcap/tidb/issues/36379) : バックアップ データに空のスキーマが含まれている場合、BR がエラーを報告する場合があります。)              | 互換性                                                                                                                                | 互換性                                                                                                                                |
 
-#### Some tips
+#### いくつかのヒント {#some-tips}
 
-The following are some recommended operations for using BR:
+以下は、BR を使用するための推奨操作の一部です。
 
-- It is recommended that you perform the backup operation during off-peak hours to minimize the impact on applications.
-- BR only supports restoring data to a new cluster and uses resources of the target cluster as much as possible. Therefore, it is not recommended that you restore data to a production cluster. Otherwise, services might be affected.
-- It is recommended that you execute multiple backup or restoration operations one by one. Running backup or restoration operations in parallel reduces performance and also affects online applications. Worse still, lack of collaboration between multiple tasks might result in task failures and affect cluster performance.
-- Amazon S3, Google Cloud Storage, and Azure Blob Storage are recommended to store backup data.
-- Make sure that the BR and TiKV nodes, and the backup storage system have sufficient network bandwidth to ensure sound write/read performance. Insufficient storage capacity might be the bottleneck for a backup or restoration operation.
+-   アプリケーションへの影響を最小限に抑えるために、オフピーク時にバックアップ操作を実行することをお勧めします。
+-   BR は、新しいクラスターへのデータの復元のみをサポートし、ターゲット クラスターのリソースを可能な限り使用します。したがって、本番クラスターにデータを復元することはお勧めしません。そうしないと、サービスが影響を受ける可能性があります。
+-   複数のバックアップまたは復元操作を 1 つずつ実行することをお勧めします。バックアップまたは復元操作を並行して実行すると、パフォーマンスが低下し、オンライン アプリケーションにも影響します。さらに悪いことに、複数のタスク間のコラボレーションが不足していると、タスクが失敗し、クラスターのパフォーマンスに影響を与える可能性があります。
+-   バックアップ データの保存には、Amazon S3、Google Cloud Storage、および Azure Blob Storage をお勧めします。
+-   BR ノードと TiKV ノード、およびバックアップ ストレージ システムに、適切な書き込み/読み取りパフォーマンスを確保するのに十分なネットワーク帯域幅があることを確認してください。不十分なストレージ容量は、バックアップまたは復元操作のボトルネックになる可能性があります。
 
-### See also
+### こちらもご覧ください {#see-also}
 
-- [Back up Data to S3-Compatible Storage Using BR](https://docs.pingcap.com/tidb-in-kubernetes/stable/backup-to-aws-s3-using-br)
-- [Restore Data from S3-Compatible Storage Using BR](https://docs.pingcap.com/tidb-in-kubernetes/stable/restore-from-aws-s3-using-br)
-- [Back up Data to GCS Using BR](https://docs.pingcap.com/tidb-in-kubernetes/stable/backup-to-gcs-using-br)
-- [Restore Data from GCS Using BR](https://docs.pingcap.com/tidb-in-kubernetes/stable/restore-from-gcs-using-br)
-- [Back up Data to PV](https://docs.pingcap.com/tidb-in-kubernetes/stable/backup-to-pv-using-br)
-- [Restore Data from PV](https://docs.pingcap.com/tidb-in-kubernetes/stable/restore-from-pv-using-br)
+-   [BR を使用して S3 互換ストレージにデータをバックアップする](https://docs.pingcap.com/tidb-in-kubernetes/stable/backup-to-aws-s3-using-br)
+-   [BR を使用して S3 互換ストレージからデータを復元する](https://docs.pingcap.com/tidb-in-kubernetes/stable/restore-from-aws-s3-using-br)
+-   [BR を使用してデータを GCS にバックアップする](https://docs.pingcap.com/tidb-in-kubernetes/stable/backup-to-gcs-using-br)
+-   [BR を使用して GCS からデータを復元する](https://docs.pingcap.com/tidb-in-kubernetes/stable/restore-from-gcs-using-br)
+-   [PVへのデータのバックアップ](https://docs.pingcap.com/tidb-in-kubernetes/stable/backup-to-pv-using-br)
+-   [PV からのデータの復元](https://docs.pingcap.com/tidb-in-kubernetes/stable/restore-from-pv-using-br)

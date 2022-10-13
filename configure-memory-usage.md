@@ -3,43 +3,43 @@ title: TiDB Memory Control
 summary: Learn how to configure the memory quota of a query and avoid OOM (out of memory).
 ---
 
-# TiDB Memory Control
+# TiDB メモリ制御 {#tidb-memory-control}
 
-Currently, TiDB can track the memory quota of a single SQL query and take actions to prevent OOM (out of memory) or troubleshoot OOM when the memory usage exceeds a specific threshold value. The system variable [`tidb_mem_oom_action`](/system-variables.md#tidb_mem_oom_action-new-in-v610) specifies the action to take when a query reaches the memory limit:
+現在、TiDB は単一の SQL クエリのメモリ クォータを追跡し、メモリ使用量が特定のしきい値を超えた場合に OOM (メモリ不足) を防止したり、OOM のトラブルシューティングを行ったりするためのアクションを実行できます。システム変数[`tidb_mem_oom_action`](/system-variables.md#tidb_mem_oom_action-new-in-v610)は、クエリがメモリ制限に達したときに実行するアクションを指定します。
 
-- A value of `LOG` means that queries will continue to execute when the [`tidb_mem_quota_query`](/system-variables.md#tidb_mem_quota_query) limit is reached, but TiDB will print an entry to the log.
-- A value of `CANCEL` means TiDB stops executing the SQL query immediately after the [`tidb_mem_quota_query`](/system-variables.md#tidb_mem_quota_query) limit is reached, and returns an error to the client. The error information clearly shows the memory usage of each physical execution operator that consumes memory in the SQL execution process.
+-   `LOG`の値は、 [`tidb_mem_quota_query`](/system-variables.md#tidb_mem_quota_query)の制限に達したときにクエリが引き続き実行されることを意味しますが、TiDB はログにエントリを出力します。
+-   値`CANCEL`は、TiDB が[`tidb_mem_quota_query`](/system-variables.md#tidb_mem_quota_query)制限に達した直後に SQL クエリの実行を停止し、クライアントにエラーを返すことを意味します。エラー情報には、SQL 実行プロセスでメモリを消費する各物理実行演算子のメモリ使用量が明確に示されます。
 
-## Configure the memory quota of a query
+## クエリのメモリ クォータを構成する {#configure-the-memory-quota-of-a-query}
 
-The system variable [`tidb_mem_quota_query`](/system-variables.md#tidb_mem_quota_query) sets the limit for a query in bytes. Some usage examples:
+システム変数[`tidb_mem_quota_query`](/system-variables.md#tidb_mem_quota_query)は、クエリの制限をバイト単位で設定します。いくつかの使用例:
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 -- Set the threshold value of memory quota for a single SQL query to 8GB:
 SET tidb_mem_quota_query = 8 << 30;
 ```
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 -- Set the threshold value of memory quota for a single SQL query to 8MB:
 SET tidb_mem_quota_query = 8 << 20;
 ```
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 -- Set the threshold value of memory quota for a single SQL query to 8KB:
 SET tidb_mem_quota_query = 8 << 10;
 ```
 
-## Configure the memory usage threshold of a tidb-server instance
+## tidb-server インスタンスのメモリ使用量のしきい値を構成する {#configure-the-memory-usage-threshold-of-a-tidb-server-instance}
 
-In the TiDB configuration file, you can set the memory usage threshold of a tidb-server instance by configuring [`server-memory-quota`](/tidb-configuration-file.md#server-memory-quota-new-in-v409).
+TiDB 構成ファイルで、 [`server-memory-quota`](/tidb-configuration-file.md#server-memory-quota-new-in-v409)を構成することにより、tidb-server インスタンスのメモリ使用量のしきい値を設定できます。
 
-The following example sets the total memory usage of a tidb-server instance to 32 GB:
+次の例では、tidb-server インスタンスの合計メモリ使用量を 32 GB に設定します。
 
 {{< copyable "" >}}
 
@@ -48,22 +48,22 @@ The following example sets the total memory usage of a tidb-server instance to 3
 server-memory-quota = 34359738368
 ```
 
-In this configuration, when the memory usage of a tidb-server instance reaches 32 GB, the instance starts to kill running SQL statements randomly until the memory usage drops below 32 GB. SQL operations that are forced to terminate return an `Out Of Global Memory Limit!` error message to the client.
+この構成では、tidb-server インスタンスのメモリ使用量が 32 GB に達すると、メモリ使用量が 32 GB を下回るまで、インスタンスは実行中の SQL ステートメントをランダムに強制終了し始めます。強制終了された SQL 操作は、クライアントに`Out Of Global Memory Limit!`エラー メッセージを返します。
 
-> **Warning:**
+> **警告：**
 >
-> + `server-memory-quota` is still an experimental feature. It is **NOT** recommended that you use it in a production environment.
-> + The default value of `server-memory-quota` is `0`, which means no memory limit.
+> -   `server-memory-quota`はまだ実験的機能です。実稼働環境で使用することはお勧めし**ません**。
+> -   `server-memory-quota`のデフォルト値は`0`で、これはメモリ制限がないことを意味します。
 
-## Trigger the alarm of excessive memory usage
+## 過剰なメモリ使用量のアラームをトリガーする {#trigger-the-alarm-of-excessive-memory-usage}
 
-In the default configuration, a tidb-server instance prints an alarm log and records associated status files when the machine memory usage reaches 80% of its total memory. You can set the memory usage ratio threshold by configuring `memory-usage-alarm-ratio`. For detailed alarm rules, refer to the description of [`memory-usage-alarm-ratio`](/tidb-configuration-file.md#memory-usage-alarm-ratio-new-in-v409).
+デフォルトの構成では、マシンのメモリ使用量が合計メモリの 80% に達すると、tidb-server インスタンスはアラーム ログを出力し、関連するステータス ファイルを記録します。 `memory-usage-alarm-ratio`を構成することで、メモリ使用率のしきい値を設定できます。詳細なアラーム ルールについては、 [`memory-usage-alarm-ratio`](/tidb-configuration-file.md#memory-usage-alarm-ratio-new-in-v409)の説明を参照してください。
 
-Note that after the alarm is triggered once, it will be triggered again only if the memory usage rate has been below the threshold for more than ten seconds and reaches the threshold again. In addition, to avoid storing excessive status files generated by alarms, currently, TiDB only retains the status files generated during the recent five alarms.
+アラームが一度トリガーされた後、メモリ使用率が 10 秒以上しきい値を下回り、再びしきい値に達した場合にのみ、アラームが再度トリガーされることに注意してください。さらに、アラームによって生成された過剰なステータス ファイルを保存しないようにするために、現在、TiDB は最近の 5 つのアラーム中に生成されたステータス ファイルのみを保持します。
 
-The following example constructs a memory-intensive SQL statement that triggers the alarm:
+次の例では、アラームをトリガーするメモリ集約型の SQL ステートメントを作成します。
 
-1. Set `memory-usage-alarm-ratio` to `0.8`:
+1.  `memory-usage-alarm-ratio` ～ `0.8`を設定:
 
     {{< copyable "" >}}
 
@@ -72,86 +72,87 @@ The following example constructs a memory-intensive SQL statement that triggers 
     memory-usage-alarm-ratio = 0.8
     ```
 
-2. Execute `CREATE TABLE t(a int);` and insert 1000 rows of data.
+2.  `CREATE TABLE t(a int);`を実行し、1000 行のデータを挿入します。
 
-3. Execute `select * from t t1 join t t2 join t t3 order by t1.a`. This SQL statement outputs one billion records, which consumes a large amount of memory and therefore triggers the alarm.
+3.  `select * from t t1 join t t2 join t t3 order by t1.a`を実行します。この SQL ステートメントは 10 億件のレコードを出力します。これは大量のメモリを消費するため、アラームがトリガーされます。
 
-4. Check the `tidb.log` file which records the total system memory, current system memory usage, memory usage of the tidb-server instance, and the directory of status files.
+4.  合計システム メモリ、現在のシステム メモリ使用量、tidb-server インスタンスのメモリ使用量、およびステータス ファイルのディレクトリを記録する`tidb.log`のファイルを確認します。
 
     ```
     [2020/11/30 15:25:17.252 +08:00] [WARN] [memory_usage_alarm.go:141] ["tidb-server has the risk of OOM. Running SQLs and heap profile will be recorded in record path"] ["is server-memory-quota set"=false] ["system memory total"=33682427904] ["system memory usage"=27142864896] ["tidb-server memory usage"=22417922896] [memory-usage-alarm-ratio=0.8] ["record path"="/tmp/1000_tidb/MC4wLjAuMDo0MDAwLzAuMC4wLjA6MTAwODA=/tmp-storage/record"]
     ```
 
-    The fields of the example log file above are described as follows:
+    上記のログ ファイルの例のフィールドは、次のように説明されています。
 
-    * `is server-memory-quota set` indicates whether [`server-memory-quota`](/tidb-configuration-file.md#server-memory-quota-new-in-v409) is set.
-    * `system memory total` indicates the total memory of the current system.
-    * `system memory usage` indicates the current system memory usage.
-    * `tidb-server memory usage` indicates the memory usage of the tidb-server instance.
-    * `memory-usage-alarm-ratio` indicates the value of [`memory-usage-alarm-ratio`](/tidb-configuration-file.md#memory-usage-alarm-ratio-new-in-v409).
-    * `record path` indicates the directory of status files.
+    -   `is server-memory-quota set`は[`server-memory-quota`](/tidb-configuration-file.md#server-memory-quota-new-in-v409)が設定されているかどうかを示します。
+    -   `system memory total`は、現在のシステムの合計メモリを示します。
+    -   `system memory usage`は、現在のシステム メモリ使用量を示します。
+    -   `tidb-server memory usage`は、tidb-server インスタンスのメモリ使用量を示します。
+    -   `memory-usage-alarm-ratio`は[`memory-usage-alarm-ratio`](/tidb-configuration-file.md#memory-usage-alarm-ratio-new-in-v409)の値を示します。
+    -   `record path`は、ステータス ファイルのディレクトリを示します。
 
-5. You can see a set of files in the directory of status files (In the above example, the directory is `/tmp/1000_tidb/MC4wLjAuMDo0MDAwLzAuMC4wLjA6MTAwODA=/tmp-storage/record`), including `goroutinue`, `heap`, and `running_sql`. These three files are suffixed with the time when status files are logged. They respectively record goroutine stack information, the usage status of heap memory, and the running SQL information when the alarm is triggered. For the format of log content in `running_sql`, refer to [`expensive-queries`](/identify-expensive-queries.md).
+5.  ステータス ファイルのディレクトリ (上記の例では、ディレクトリは`/tmp/1000_tidb/MC4wLjAuMDo0MDAwLzAuMC4wLjA6MTAwODA=/tmp-storage/record`です) に、 `goroutinue` 、 `heap` 、および`running_sql`を含む一連のファイルが表示されます。これら 3 つのファイルの末尾には、ステータス ファイルがログに記録された時刻が付けられます。それぞれ、ゴルーチンのスタック情報、ヒープメモリの使用状況、アラーム発生時の実行中のSQL情報を記録します。 `running_sql`のログ内容の形式については、 [`expensive-queries`](/identify-expensive-queries.md)を参照してください。
 
-## Other memory control behaviors of tidb-server
+## tidb-server のその他のメモリ制御動作 {#other-memory-control-behaviors-of-tidb-server}
 
-### Flow control
+### フロー制御 {#flow-control}
 
-- TiDB supports dynamic memory control for the operator that reads data. By default, this operator uses the maximum number of threads that [`tidb_distsql_scan_concurrency`](/system-variables.md#tidb_distsql_scan_concurrency) allows to read data. When the memory usage of a single SQL execution exceeds [`tidb_mem_quota_query`](/system-variables.md#tidb_mem_quota_query) each time, the operator that reads data stops one thread.
+-   TiDB は、データを読み取るオペレーターの動的メモリー制御をサポートしています。デフォルトでは、このオペレーターは、データの読み取りを許可するスレッドの最大数を使用し[`tidb_distsql_scan_concurrency`](/system-variables.md#tidb_distsql_scan_concurrency) 。 1 回の SQL 実行のメモリー使用量が毎回[`tidb_mem_quota_query`](/system-variables.md#tidb_mem_quota_query)を超えると、データを読み取るオペレーターは 1 つのスレッドを停止します。
 
-- This flow control behavior is controlled by the system variable [`tidb_enable_rate_limit_action`](/system-variables.md#tidb_enable_rate_limit_action).
-- When the flow control behavior is triggered, TiDB outputs a log containing the keywords `memory exceeds quota, destroy one token now`.
+-   このフロー制御動作は、システム変数[`tidb_enable_rate_limit_action`](/system-variables.md#tidb_enable_rate_limit_action)によって制御されます。
 
-### Disk spill
+-   フロー制御動作がトリガーされると、TiDB はキーワード`memory exceeds quota, destroy one token now`を含むログを出力します。
 
-TiDB supports disk spill for execution operators. When the memory usage of a SQL execution exceeds the memory quota, tidb-server can spill the intermediate data of execution operators to the disk to relieve memory pressure. Operators supporting disk spill include Sort, MergeJoin, HashJoin, and HashAgg.
+### ディスクこぼれ {#disk-spill}
 
-- The disk spill behavior is jointly controlled by [`tidb_mem_quota_query`](/system-variables.md#tidb_mem_quota_query), [`oom-use-tmp-storage`](/tidb-configuration-file.md#oom-use-tmp-storage), [`tmp-storage-path`](/tidb-configuration-file.md#tmp-storage-path), and [`tmp-storage-quota`](/tidb-configuration-file.md#tmp-storage-quota) parameters.
-- When the disk spill is triggered, TiDB outputs a log containing the keywords `memory exceeds quota, spill to disk now` or `memory exceeds quota, set aggregate mode to spill-mode`.
-- Disk spill for the Sort, MergeJoin, and HashJoin operator is introduced in v4.0.0; disk spill for the HashAgg operator is introduced in v5.2.0.
-- When the SQL executions containing Sort, MergeJoin, or HashJoin cause OOM, TiDB triggers disk spill by default. When SQL executions containing HashAgg cause OOM, TiDB does not trigger disk spill by default. You can configure the system variable `tidb_executor_concurrency = 1` to trigger disk spill for HashAgg.
+TiDB は、実行オペレーターのディスクスピルをサポートしています。 SQL 実行のメモリ使用量がメモリ クォータを超えると、tidb-server は実行オペレータの中間データをディスクにスピルして、メモリの負荷を軽減することができます。ディスク スピルをサポートする演算子には、Sort、MergeJoin、HashJoin、HashAgg などがあります。
 
-> **Note:**
+-   ディスク スピルの動作は、 [`tidb_mem_quota_query`](/system-variables.md#tidb_mem_quota_query) 、 [`oom-use-tmp-storage`](/tidb-configuration-file.md#oom-use-tmp-storage) 、 [`tmp-storage-path`](/tidb-configuration-file.md#tmp-storage-path) 、および[`tmp-storage-quota`](/tidb-configuration-file.md#tmp-storage-quota)パラメータによって共同で制御されます。
+-   ディスク スピルがトリガーされると、TiDB はキーワード`memory exceeds quota, spill to disk now`または`memory exceeds quota, set aggregate mode to spill-mode`を含むログを出力します。
+-   Sort、MergeJoin、および HashJoin オペレーターのディスク スピルは v4.0.0 で導入されました。 HashAgg オペレーターのディスク スピルは v5.2.0 で導入されました。
+-   Sort、MergeJoin、または HashJoin を含む SQL 実行によって OOM が発生すると、TiDB はデフォルトでディスク スピルをトリガーします。 HashAgg を含む SQL 実行によって OOM が発生した場合、TiDB はデフォルトでディスク スピルをトリガーしません。システム変数`tidb_executor_concurrency = 1`を構成して、HashAgg のディスク スピルをトリガーできます。
+
+> **ノート：**
 >
-> The disk spill for HashAgg does not support SQL executions containing the `DISTINCT` aggregate function. When a SQL execution containing a `DISTINCT` aggregate function uses too much memory, the disk spill does not apply.
+> HashAgg のディスク スピルは、 `DISTINCT`の集計関数を含む SQL 実行をサポートしていません。 `DISTINCT`の集計関数を含む SQL 実行でメモリが大量に使用される場合、ディスク スピルは適用されません。
 
-The following example uses a memory-consuming SQL statement to demonstrate the disk spill feature for HashAgg:
+次の例では、メモリを消費する SQL ステートメントを使用して、HashAgg のディスク スピル機能を示します。
 
-1. Configure the memory quota of a SQL statement to 1GB (1 GB by default):
+1.  SQL ステートメントのメモリ クォータを 1 GB (既定では 1 GB) に構成します。
 
-    {{< copyable "sql" >}}
+    {{< copyable "" >}}
 
     ```sql
     SET tidb_mem_quota_query = 1 << 30;
     ```
 
-2. Create a single table `CREATE TABLE t(a int);` and insert 256 rows of different data.
+2.  1 つのテーブル`CREATE TABLE t(a int);`を作成し、256 行の異なるデータを挿入します。
 
-3. Execute the following SQL statement:
+3.  次の SQL ステートメントを実行します。
 
-    {{< copyable "sql" >}}
+    {{< copyable "" >}}
 
     ```sql
     [tidb]> explain analyze select /*+ HASH_AGG() */ count(*) from t t1 join t t2 join t t3 group by t1.a, t2.a, t3.a;
     ```
 
-    Because executing this SQL statement occupies too much memory, the following "Out of Memory Quota" error message is returned:
+    この SQL ステートメントを実行すると大量のメモリが占有されるため、次の「メモリ クォータが不足しています」というエラー メッセージが返されます。
 
     ```sql
     ERROR 1105 (HY000): Out Of Memory Quota![conn_id=3]
     ```
 
-4. Configure the system variable `tidb_executor_concurrency` to 1. With this configuration, when out of memory, HashAgg automatically tries to trigger disk spill.
+4.  システム変数を`tidb_executor_concurrency`対 1 で構成します。この構成では、メモリが不足すると、HashAgg は自動的にディスク スピルをトリガーしようとします。
 
-    {{< copyable "sql" >}}
+    {{< copyable "" >}}
 
     ```sql
     SET tidb_executor_concurrency = 1;
     ```
 
-5. Execute the same SQL statement. You can find that this time, the statement is successfully executed and no error message is returned. From the following detailed execution plan, you can see that HashAgg has used 600 MB of hard disk space.
+5.  同じ SQL ステートメントを実行します。今回は、ステートメントが正常に実行され、エラー メッセージが返されていないことがわかります。次の詳細な実行計画から、HashAgg が 600 MB のハード ディスク領域を使用したことがわかります。
 
-    {{< copyable "sql" >}}
+    {{< copyable "" >}}
 
     ```sql
     [tidb]> explain analyze select /*+ HASH_AGG() */ count(*) from t t1 join t t2 join t t3 group by t1.a, t2.a, t3.a;

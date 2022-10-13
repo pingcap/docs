@@ -3,11 +3,11 @@ title: Stress Test TiDB Using TiUP Bench Component
 summary: Learns how to stress test TiDB with TPC-C and TPC-H workloads using TiUP.
 ---
 
-# Stress Test TiDB Using TiUP Bench Component
+# TiUP ベンチ コンポーネントを使用した TiDB のストレス テスト {#stress-test-tidb-using-tiup-bench-component}
 
-When you test the performance of a database, it is often required to stress test the database. To facilitate this, TiUP has integrated the bench component, which provides two workloads for stress testing: [TPC-C](http://www.tpc.org/tpcc/) and [TPC-H](http://www.tpc.org/tpch/). The commands and flags are as follows. For more information, see the [TPC official website](http://www.tpc.org).
+データベースのパフォーマンスをテストする場合、多くの場合、データベースのストレス テストが必要になります。これを容易にするために、TiUP はストレス テスト用の 2 つのワークロードを提供するベンチ コンポーネントを統合しました: [TPC-C](http://www.tpc.org/tpcc/)と[TPC-H](http://www.tpc.org/tpch/) 。コマンドとフラグは次のとおりです。詳細については、 [TPC公式サイト](http://www.tpc.org)を参照してください。
 
-{{< copyable "shell-root" >}}
+{{< copyable "" >}}
 
 ```bash
 tiup bench
@@ -47,11 +47,11 @@ Flags:
   -U, --user string         Database user (default "root")
 ```
 
-The following sections describe how to run TPC-C and TPC-H tests using TiUP.
+次のセクションでは、TiUP を使用して TPC-C および TPC-H テストを実行する方法について説明します。
 
-## Run TPC-C test using TiUP
+## TiUP を使用して TPC-C テストを実行する {#run-tpc-c-test-using-tiup}
 
-The TiUP bench component supports the following commands and flags to run the TPC-C test:
+TiUP ベンチ コンポーネントは、TPC-C テストを実行するために次のコマンドとフラグをサポートしています。
 
 ```bash
 Available Commands:
@@ -67,59 +67,59 @@ Flags:
       --warehouses int   Number of warehouses (default 10)
 ```
 
-### Test procedures
+### 試験手順 {#test-procedures}
 
-1. Create 4 warehouses using 4 partitions via hash:
+1.  ハッシュを介して 4 つのパーティションを使用して 4 つのウェアハウスを作成します。
 
-    {{< copyable "shell-regular" >}}
+    {{< copyable "" >}}
 
     ```shell
     tiup bench tpcc --warehouses 4 --parts 4 prepare
     ```
 
-2. Run the TPC-C test:
+2.  TPC-C テストを実行します。
 
-    {{< copyable "shell-regular" >}}
+    {{< copyable "" >}}
 
     ```shell
     tiup bench tpcc --warehouses 4 run
     ```
 
-3. Clean up data:
+3.  データのクリーンアップ:
 
-    {{< copyable "shell-regular" >}}
+    {{< copyable "" >}}
 
     ```shell
     tiup bench tpcc --warehouses 4 cleanup
     ```
 
-4. Check the consistency:
+4.  一貫性を確認します。
 
-    {{< copyable "shell-regular" >}}
+    {{< copyable "" >}}
 
     ```shell
     tiup bench tpcc --warehouses 4 check
     ```
 
-5. Generate the CSV file:
+5.  CSV ファイルを生成します。
 
-    {{< copyable "shell-regular" >}}
+    {{< copyable "" >}}
 
     ```shell
     tiup bench tpcc --warehouses 4 prepare --output-dir data --output-type=csv
     ```
 
-6. Generate the CSV file for the specified table:
+6.  指定したテーブルの CSV ファイルを生成します。
 
-    {{< copyable "shell-regular" >}}
+    {{< copyable "" >}}
 
     ```shell
     tiup bench tpcc --warehouses 4 prepare --output-dir data --output-type=csv --tables history,orders
     ```
 
-## Run TPC-H test using TiUP
+## TiUP を使用して TPC-H テストを実行する {#run-tpc-h-test-using-tiup}
 
-The TiUP bench component supports the following commands and parameters to run the TPC-H test:
+TiUP ベンチ コンポーネントは、TPC-H テストを実行するために、次のコマンドとパラメーターをサポートしています。
 
 ```bash
 Available Commands:
@@ -134,37 +134,37 @@ Flags:
       --sf int           scale factor
 ```
 
-### Test procedures
+### 試験手順 {#test-procedures}
 
-1. Prepare data:
+1.  データを準備します。
 
-    {{< copyable "shell-regular" >}}
+    {{< copyable "" >}}
 
     ```shell
     tiup bench tpch --sf=1 prepare
     ```
 
-2. Run the TPC-H test by executing one of the following commands:
+2.  次のいずれかのコマンドを実行して、TPC-H テストを実行します。
 
-    - If you check the result, run this command:
+    -   結果を確認する場合は、次のコマンドを実行します。
 
-        {{< copyable "shell-regular" >}}
+        {{< copyable "" >}}
 
         ```shell
         tiup bench tpch --sf=1 --check=true run
         ```
 
-    - If you do not check the result, run this command:
+    -   結果を確認しない場合は、次のコマンドを実行します。
 
-        {{< copyable "shell-regular" >}}
+        {{< copyable "" >}}
 
         ```shell
         tiup bench tpch --sf=1 run
         ```
 
-3. Clean up data:
+3.  データのクリーンアップ:
 
-    {{< copyable "shell-regular" >}}
+    {{< copyable "" >}}
 
     ```shell
     tiup bench tpch cleanup

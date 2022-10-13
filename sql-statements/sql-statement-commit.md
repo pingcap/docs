@@ -3,13 +3,13 @@ title: COMMIT | TiDB SQL Statement Reference
 summary: An overview of the usage of COMMIT for the TiDB database.
 ---
 
-# COMMIT
+# 専念 {#commit}
 
-This statement commits a transaction inside of the TIDB server.
+このステートメントは、TIDBサーバー内でトランザクションをコミットします。
 
-In the absence of a `BEGIN` or `START TRANSACTION` statement, the default behavior of TiDB is that every statement will be its own transaction and autocommit. This behavior ensures MySQL compatibility.
+`BEGIN`または`START TRANSACTION`ステートメントがない場合、TiDB のデフォルトの動作では、すべてのステートメントが独自のトランザクションになり、自動コミットされます。この動作により、MySQL の互換性が確保されます。
 
-## Synopsis
+## あらすじ {#synopsis}
 
 ```ebnf+diagram
 CommitStmt ::=
@@ -20,7 +20,7 @@ CompletionTypeWithinTransaction ::=
 |   'NO'? 'RELEASE'
 ```
 
-## Examples
+## 例 {#examples}
 
 ```sql
 mysql> CREATE TABLE t1 (a int NOT NULL PRIMARY KEY);
@@ -36,17 +36,17 @@ mysql> COMMIT;
 Query OK, 0 rows affected (0.01 sec)
 ```
 
-## MySQL compatibility
+## MySQL の互換性 {#mysql-compatibility}
 
-* Currently, TiDB does not use Metadata Locking (MDL) to prevent DDL statements from modifying tables used by transactions by default. If the definition of a table has changed, committing a transaction will result in an `Information schema is changed` error. In this event, the transaction is rolled back automatically.
-* By default, TiDB 3.0.8 and later versions use [Pessimistic Locking](/pessimistic-transaction.md). When using [Optimistic Locking](/optimistic-transaction.md), it is important to consider that a `COMMIT` statement might fail because rows have been modified by another transaction.
-* When Optimistic Locking is enabled, `UNIQUE` and `PRIMARY KEY` constraint checks are deferred until statement commit. This results in additional situations where a a `COMMIT` statement might fail. This behavior can be changed by setting `tidb_constraint_check_in_place=ON`.
-* TiDB parses but ignores the syntax `ROLLBACK AND [NO] RELEASE`. This functionality is used in MySQL to disconnect the client session immediately after committing the transaction. In TiDB, it is recommended to instead use the `mysql_close()` functionality of your client driver.
-* TiDB parses but ignores the syntax `ROLLBACK AND [NO] CHAIN`. This functionality is used in MySQL to immediately start a new transaction with the same isolation level while the current transaction is being committed. In TiDB, it is recommended to instead start a new transaction.
+-   現在、TiDB は Metadata Locking (MDL) を使用して、DDL ステートメントがデフォルトでトランザクションによって使用されるテーブルを変更するのを防ぎます。テーブルの定義が変更されている場合、トランザクションをコミットすると`Information schema is changed`エラーになります。この場合、トランザクションは自動的にロールバックされます。
+-   デフォルトでは、TiDB 3.0.8 以降のバージョンは[悲観的ロック](/pessimistic-transaction.md)を使用します。 [楽観的ロック](/optimistic-transaction.md)を使用する場合、行が別のトランザクションによって変更されたために`COMMIT`ステートメントが失敗する可能性があることを考慮することが重要です。
+-   楽観的ロックが有効な場合、ステートメントがコミットされるまで、 `UNIQUE`つと`PRIMARY KEY`の制約チェックが延期されます。これにより、aa `COMMIT`ステートメントが失敗する可能性がある追加の状況が発生します。この動作は`tidb_constraint_check_in_place=ON`を設定することで変更できます。
+-   TiDB は構文を解析しますが、構文`ROLLBACK AND [NO] RELEASE`を無視します。この機能は MySQL で使用され、トランザクションをコミットした直後にクライアント セッションを切断します。 TiDB では、代わりにクライアント ドライバーの`mysql_close()`の機能を使用することをお勧めします。
+-   TiDB は構文を解析しますが、構文`ROLLBACK AND [NO] CHAIN`を無視します。この機能は MySQL で使用され、現在のトランザクションがコミットされている間に、同じ分離レベルで新しいトランザクションをすぐに開始します。 TiDB では、代わりに新しいトランザクションを開始することをお勧めします。
 
-## See also
+## こちらもご覧ください {#see-also}
 
-* [START TRANSACTION](/sql-statements/sql-statement-start-transaction.md)
-* [ROLLBACK](/sql-statements/sql-statement-rollback.md)
-* [BEGIN](/sql-statements/sql-statement-begin.md)
-* [Lazy checking of constraints](/transaction-overview.md#lazy-check-of-constraints)
+-   [取引開始](/sql-statements/sql-statement-start-transaction.md)
+-   [ロールバック](/sql-statements/sql-statement-rollback.md)
+-   [始める](/sql-statements/sql-statement-begin.md)
+-   [制約の遅延チェック](/transaction-overview.md#lazy-check-of-constraints)

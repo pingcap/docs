@@ -2,10 +2,10 @@
 title: Control Execution Plan
 ---
 
-# Control Execution Plan
+# 統制実行計画 {#control-execution-plan}
 
-The first two chapters of SQL Tuning introduce how to understand TiDB's execution plan and how TiDB generates an execution plan. This chapter introduces what methods can be used to control the generation of the execution plan when you determine the problems with the execution plan. This chapter mainly includes the following three aspects:
+SQL Tuning の最初の 2 つの章では、TiDB の実行計画を理解する方法と、TiDB が実行計画を生成する方法を紹介します。この章では、実行計画の問題を特定するときに、実行計画の生成を制御するために使用できる方法を紹介します。この章には、主に次の 3 つの側面が含まれます。
 
-- In [Optimizer Hints](/optimizer-hints.md), you will learn how to use hints to guide TiDB to generate an execution plan.
-- But hints change the SQL statement intrusively. In some scenarios, hints cannot be simply inserted. In [SQL Plan Management](/sql-plan-management.md), you will know how TiDB uses another syntax to non-intrusively control the generation of execution plans, and the methods of automatic execution plan evolution in the background to alleviate the execution plan instability caused by reasons such as version upgrades, which degrades cluster performance.
-- Finally, you will learn how to use the blocklist in [Blocklist of Optimization Rules and Expression Pushdown](/blocklist-control-plan.md).
+-   [オプティマイザーのヒント](/optimizer-hints.md)では、ヒントを使用して TiDB が実行計画を生成するように導く方法を学習します。
+-   しかし、ヒントは SQL ステートメントを煩わしく変更します。一部のシナリオでは、ヒントを単純に挿入することはできません。 [SQL計画管理](/sql-plan-management.md)では、TiDB が別の構文を使用して非介入的に実行計画の生成を制御する方法と、バックグラウンドでの自動実行計画進化の方法を理解して、クラスタのパフォーマンスを低下させるバージョン アップグレードなどの理由によって引き起こされる実行計画の不安定性を緩和します。パフォーマンス。
+-   最後に、 [最適化ルールのブロックリストと式のプッシュダウン](/blocklist-control-plan.md)でブロックリストの使用方法を学習します。

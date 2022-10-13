@@ -3,74 +3,74 @@ title: Delete Data
 summary: Learn about the SQL syntax, best practices, and examples for deleting data.
 ---
 
-# Delete Data
+# データの削除 {#delete-data}
 
-This document describes how to use the [DELETE](/sql-statements/sql-statement-delete.md) SQL statement to delete the data in TiDB.
+このドキュメントでは、 [消去](/sql-statements/sql-statement-delete.md) SQL ステートメントを使用して TiDB 内のデータを削除する方法について説明します。
 
-## Before you start
+## 始める前に {#before-you-start}
 
-Before reading this document, you need to prepare the following:
+このドキュメントを読む前に、次の準備が必要です。
 
-- [Build a TiDB Cluster in TiDB Cloud (Developer Tier)](/develop/dev-guide-build-cluster-in-cloud.md)
-- Read [Schema Design Overview](/develop/dev-guide-schema-design-overview.md), [Create a Database](/develop/dev-guide-create-database.md), [Create a Table](/develop/dev-guide-create-table.md), and [Create Secondary Indexes](/develop/dev-guide-create-secondary-indexes.md)
-- [Insert Data](/develop/dev-guide-insert-data.md)
+-   [TiDB Cloud(開発者層) で TiDBクラスタを構築する](/develop/dev-guide-build-cluster-in-cloud.md)
+-   [スキーマ設計の概要](/develop/dev-guide-schema-design-overview.md) 、 [データベースを作成する](/develop/dev-guide-create-database.md) 、 [テーブルを作成する](/develop/dev-guide-create-table.md) 、および[セカンダリ インデックスの作成](/develop/dev-guide-create-secondary-indexes.md)を読み取る
+-   [データの挿入](/develop/dev-guide-insert-data.md)
 
-## SQL syntax
+## SQL 構文 {#sql-syntax}
 
-The `DELETE` statement is generally in the following form:
+`DELETE`ステートメントは通常、次の形式です。
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 DELETE FROM {table} WHERE {filter}
 ```
 
-| Parameter Name | Description |
-| :--------: | :------------: |
-| `{table}`  |      Table name      |
-| `{filter}` | Matching conditions of the filter|
+|   パラメータ名   |       説明      |
+| :--------: | :-----------: |
+|  `{table}` |     テーブル名     |
+| `{filter}` | フィルターのマッチング条件 |
 
-This example only shows a simple use case of `DELETE`. For detailed information, see [DELETE syntax](/sql-statements/sql-statement-delete.md).
+この例は、 `DELETE`の単純な使用例のみを示しています。詳細については、 [DELETE 構文](/sql-statements/sql-statement-delete.md)を参照してください。
 
-## Best practices
+## ベストプラクティス {#best-practices}
 
-The following are some best practices to follow when you delete data:
+データを削除するときに従うべきいくつかのベスト プラクティスを次に示します。
 
-- Always specify the `WHERE` clause in the `DELETE` statement. If the `WHERE` clause is not specified, TiDB will delete **_ALL ROWS_** in the table.
+-   `DELETE`文には必ず`WHERE`節を指定してください。 `WHERE`句が指定されていない場合、TiDB はテーブル内の***すべて***の行を削除します。
 
 <CustomContent platform="tidb">
 
-- Use [bulk-delete](#bulk-delete) when you delete a large number of rows (for example, more than ten thousand), because TiDB limits the size of a single transaction ([txn-total-size-limit](/tidb-configuration-file.md#txn-total-size-limit), 100 MB by default).
+-   多数の行 (たとえば、1 万行以上) を削除する場合は[一括削除](#bulk-delete)を使用します。これは、TiDB が 1 つのトランザクションのサイズを制限しているためです (デフォルトでは[txn-合計サイズ制限](/tidb-configuration-file.md#txn-total-size-limit) MB)。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-- Use [bulk-delete](#bulk-delete) when you delete a large number of rows (for example, more than ten thousand), because TiDB limits the size of a single transaction to 100 MB by default.
+-   TiDB はデフォルトで 1 つのトランザクションのサイズを 100 MB に制限しているため、多数の行 (たとえば、1 万行以上) を削除する場合は[一括削除](#bulk-delete)を使用します。
 
 </CustomContent>
 
-- If you delete all the data in a table, do not use the `DELETE` statement. Instead, use the [`TRUNCATE`](/sql-statements/sql-statement-truncate.md) statement.
-- For performance considerations, see [Performance Considerations](#performance-considerations).
+-   テーブル内のすべてのデータを削除する場合は、 `DELETE`ステートメントを使用しないでください。代わりに、 [`TRUNCATE`](/sql-statements/sql-statement-truncate.md)ステートメントを使用してください。
+-   パフォーマンスに関する考慮事項については、 [パフォーマンスに関する考慮事項](#performance-considerations)を参照してください。
 
-## Example
+## 例 {#example}
 
-Suppose you find an application error within a specific time period and you need to delete all the data for the [ratings](/develop/dev-guide-bookshop-schema-design.md#ratings-table) within this period, for example, from `2022-04-15 00:00:00` to `2022-04-15 00:15:00`. In this case, you can use the `SELECT` statement to check the number of records to be deleted.
+特定の期間内にアプリケーション エラーが見つかり、この期間内の[評価](/develop/dev-guide-bookshop-schema-design.md#ratings-table)のすべてのデータ (たとえば、 `2022-04-15 00:00:00`から`2022-04-15 00:15:00`まで) を削除する必要があるとします。この場合、 `SELECT`ステートメントを使用して、削除するレコードの数を確認できます。
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 SELECT COUNT(*) FROM `ratings` WHERE `rated_at` >= "2022-04-15 00:00:00" AND  `rated_at` <= "2022-04-15 00:15:00";
 ```
 
-If more than 10,000 records are returned, use [Bulk-Delete](#bulk-delete) to delete them.
+10,000 を超えるレコードが返された場合は、 [一括削除](#bulk-delete)を使用してそれらを削除します。
 
-If fewer than 10,000 records are returned, use the following example to delete them.
+返されるレコードが 10,000 件未満の場合は、次の例を使用してそれらを削除します。
 
 <SimpleTab groupId="language">
 <div label="SQL" value="sql">
 
-In SQL, the example is as follows:
+SQL では、例は次のとおりです。
 
 ```sql
 DELETE FROM `ratings` WHERE `rated_at` >= "2022-04-15 00:00:00" AND  `rated_at` <= "2022-04-15 00:15:00";
@@ -80,7 +80,7 @@ DELETE FROM `ratings` WHERE `rated_at` >= "2022-04-15 00:00:00" AND  `rated_at` 
 
 <div label="Java" value="java">
 
-In Java, the example is as follows:
+Java では、例は次のとおりです。
 
 ```java
 // ds is an entity of com.mysql.cj.jdbc.MysqlDataSource
@@ -107,7 +107,7 @@ try (Connection connection = ds.getConnection()) {
 
 <div label="Golang" value="golang">
 
-In Golang, the example is as follows:
+Golang では、例は次のとおりです。
 
 ```go
 package main
@@ -148,64 +148,64 @@ func main() {
 
 <CustomContent platform="tidb">
 
-The `rated_at` field is of the `DATETIME` type in [Date and Time Types](/data-type-date-and-time.md). You can assume that it is stored as a literal quantity in TiDB, independent of the time zone. On the other hand, the `TIMESTAMP` type stores a timestamp and thus displays a different time string in a different [time zone](/configure-time-zone.md).
+`rated_at`フィールドは[日付と時刻の種類](/data-type-date-and-time.md)の`DATETIME`タイプです。タイムゾーンに関係なく、文字どおりの量として TiDB に格納されていると想定できます。一方、 `TIMESTAMP`タイプはタイムスタンプを格納するため、別の[タイムゾーン](/configure-time-zone.md)には別の時間文字列が表示されます。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-The `rated_at` field is of the `DATETIME` type in [Date and Time Types](/data-type-date-and-time.md). You can assume that it is stored as a literal quantity in TiDB, independent of the time zone. On the other hand, the `TIMESTAMP` type stores a timestamp and thus displays a different time string in a different time zone.
+`rated_at`フィールドは[日付と時刻の種類](/data-type-date-and-time.md)の`DATETIME`タイプです。タイムゾーンに関係なく、文字どおりの量として TiDB に格納されていると想定できます。一方、 `TIMESTAMP`タイプはタイムスタンプを格納するため、別のタイム ゾーンでは別の時刻文字列が表示されます。
 
 </CustomContent>
 
-> **Note:**
+> **ノート：**
 >
-> Like MySQL, the `TIMESTAMP` data type is affected by the [year 2038 problem](https://en.wikipedia.org/wiki/Year_2038_problem). It is recommended to use the `DATETIME` type if you store values larger than 2038.
+> MySQL と同様に、 `TIMESTAMP`データ型は[2038年問題](https://en.wikipedia.org/wiki/Year_2038_problem)の影響を受けます。 2038 より大きい値を格納する場合は、 `DATETIME`型を使用することをお勧めします。
 
-## Performance considerations
+## パフォーマンスに関する考慮事項 {#performance-considerations}
 
-### TiDB GC mechanism
+### TiDB GC メカニズム {#tidb-gc-mechanism}
 
-TiDB does not delete the data immediately after you run the `DELETE` statement. Instead, it marks the data as ready for deletion. Then it waits for TiDB GC (Garbage Collection) to clean up the outdated data. Therefore, the `DELETE` statement **_DOES NOT_** immediately reduce disk usage.
+TiDB は、 `DELETE`ステートメントを実行した直後にデータを削除しません。代わりに、データを削除の準備ができているとマークします。次に、TiDB GC (ガベージ コレクション) が古いデータをクリーンアップするのを待ちます。したがって、 `DELETE`ステートメントは、ディスク使用量をすぐには削減し***ません***。
 
-GC is triggered once every 10 minutes by default. Each GC calculates a time point called **safe_point**. Any data earlier than this time point will not be used again, so TiDB can safely clean it up.
+デフォルトでは、GC は 10 分ごとに 1 回トリガーされます。各 GC は、 **safe_point**と呼ばれる時点を計算します。この時点より前のデータは再使用されないため、TiDB は安全にクリーンアップできます。
 
-For more information, see [GC mechanism](/garbage-collection-overview.md).
+詳細については、 [GC メカニズム](/garbage-collection-overview.md)を参照してください。
 
-### Update statistical information
+### 統計情報の更新 {#update-statistical-information}
 
-TiDB uses [statistical information](/statistics.md) to determine index selection. There is a high risk that the index is not correctly selected after a large volume of data is deleted. You can use [manual collection](/statistics.md#manual-collection) to update the statistics. It provides the TiDB optimizer with more accurate statistical information for SQL performance optimization.
+TiDB は[統計情報](/statistics.md)を使用してインデックスの選択を決定します。大量のデータを削除すると、インデックスが正しく選択されない可能性が高くなります。 [手動収集](/statistics.md#manual-collection)を使用して統計を更新できます。これは、TiDB オプティマイザーに SQL パフォーマンス最適化のためのより正確な統計情報を提供します。
 
-## Bulk-delete
+## 一括削除 {#bulk-delete}
 
-When you need to delete multiple rows of data from a table, you can choose the [`DELETE` example](#example) and use the `WHERE` clause to filter the data that needs to be deleted.
+テーブルから複数行のデータを削除する必要がある場合は、 [`DELETE`例](#example)句を選択し、 `WHERE`句を使用して、削除する必要があるデータをフィルタリングできます。
 
 <CustomContent platform="tidb">
 
-However, if you need to delete a large number of rows (more than ten thousand), it is recommended that you delete the data in an iterative way, that is, deleting a portion of the data at each iteration until the deletion is completed. This is because TiDB limits the size of a single transaction ([`txn-total-size-limit`](/tidb-configuration-file.md#txn-total-size-limit), 100 MB by default). You can use loops in your programs or scripts to perform such operations.
+ただし、多数の行 (1 万行以上) を削除する必要がある場合は、データを繰り返し削除することをお勧めします。つまり、削除が完了するまで繰り返しごとにデータの一部を削除します。これは、TiDB が[`txn-total-size-limit`](/tidb-configuration-file.md#txn-total-size-limit)つのトランザクションのサイズを制限しているためです (デフォルトでは 1、100 MB)。プログラムまたはスクリプトでループを使用して、このような操作を実行できます。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-However, if you need to delete a large number of rows (more than ten thousand), it is recommended that you delete the data in an iterative way, that is, deleting a portion of the data at each iteration until the deletion is completed. This is because TiDB limits the size of a single transaction to 100 MB by default. You can use loops in your programs or scripts to perform such operations.
+ただし、多数の行 (1 万行以上) を削除する必要がある場合は、データを繰り返し削除することをお勧めします。つまり、削除が完了するまで繰り返しごとにデータの一部を削除します。これは、TiDB がデフォルトで 1 つのトランザクションのサイズを 100 MB に制限しているためです。プログラムまたはスクリプトでループを使用して、このような操作を実行できます。
 
 </CustomContent>
 
-This section provides an example of writing a script to handle an iterative delete operation that demonstrates how you should do a combination of `SELECT` and `DELETE` to complete a bulk-delete.
+このセクションでは、一括削除を完了するために`SELECT`と`DELETE`の組み合わせを実行する方法を示す、反復的な削除操作を処理するスクリプトを作成する例を示します。
 
-### Write a bulk-delete loop
+### 一括削除ループを作成する {#write-a-bulk-delete-loop}
 
-You can write a `DELETE` statement in the loop of your application or script, use the `WHERE` clause to filter data, and use `LIMIT` to constrain the number of rows to be deleted in a single statement.
+アプリケーションまたはスクリプトのループに`DELETE`ステートメントを記述し、 `WHERE`句を使用してデータをフィルター処理し、 `LIMIT`句を使用して 1 つのステートメントで削除する行数を制限できます。
 
-### Bulk-delete example
+### 一括削除の例 {#bulk-delete-example}
 
-Suppose you find an application error within a specific time period. You need to delete all the data for the [rating](/develop/dev-guide-bookshop-schema-design.md#ratings-table) within this period, for example, from `2022-04-15 00:00:00` to `2022-04-15 00:15:00`, and more than 10,000 records are written in 15 minutes. You can perform as follows.
+特定の期間内にアプリケーション エラーが見つかったとします。この期間内に[評価](/develop/dev-guide-bookshop-schema-design.md#ratings-table)のすべてのデータ (たとえば`2022-04-15 00:00:00`から`2022-04-15 00:15:00`まで) を削除する必要があり、15 分間で 10,000 を超えるレコードが書き込まれます。次のように実行できます。
 
 <SimpleTab groupId="language">
 <div label="Java" value="java">
 
-In Java, the bulk-delete example is as follows:
+Java での一括削除の例は次のとおりです。
 
 {{< copyable "" >}}
 
@@ -261,13 +261,13 @@ public class BatchDeleteExample
 }
 ```
 
-In each iteration, `DELETE` deletes up to 1000 rows from `2022-04-15 00:00:00` to `2022-04-15 00:15:00`.
+各反復で、 `DELETE`は`2022-04-15 00:00:00`から`2022-04-15 00:15:00`までの最大 1000 行を削除します。
 
 </div>
 
 <div label="Golang" value="golang">
 
-In Golang, the bulk-delete example is as follows:
+Golang での一括削除の例は次のとおりです。
 
 {{< copyable "" >}}
 
@@ -318,7 +318,7 @@ func deleteBatch(db *sql.DB, startTime, endTime time.Time) (int64, error) {
 }
 ```
 
-In each iteration, `DELETE` deletes up to 1000 rows from `2022-04-15 00:00:00` to `2022-04-15 00:15:00`.
+各反復で、 `DELETE`は`2022-04-15 00:00:00`から`2022-04-15 00:15:00`までの最大 1000 行を削除します。
 
 </div>
 

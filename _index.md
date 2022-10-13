@@ -8,93 +8,93 @@ hide_commit: true
 
 <LearningPath label="Learn" icon="cloud1">
 
-[What is TiDB](https://docs.pingcap.com/tidb/v6.3/overview)
+[TiDBとは](https://docs.pingcap.com/tidb/v6.3/overview)
 
-[Features](https://docs.pingcap.com/tidb/v6.3/basic-features)
+[特徴](https://docs.pingcap.com/tidb/v6.3/basic-features)
 
-[TiFlash](https://docs.pingcap.com/tidb/v6.3/tiflash-overview)
+[ティフラッシュ](https://docs.pingcap.com/tidb/v6.3/tiflash-overview)
 
 </LearningPath>
 
 <LearningPath label="Try" icon="cloud5">
 
-[Try Out TiDB](https://docs.pingcap.com/tidb/v6.3/quick-start-with-tidb)
+[TiDB を試す](https://docs.pingcap.com/tidb/v6.3/quick-start-with-tidb)
 
-[Try Out HTAP](https://docs.pingcap.com/tidb/v6.3/quick-start-with-htap)
+[HTAP を試す](https://docs.pingcap.com/tidb/v6.3/quick-start-with-htap)
 
-[Import Example Database](https://docs.pingcap.com/tidb/v6.3/import-example-data)
+[サンプル データベースのインポート](https://docs.pingcap.com/tidb/v6.3/import-example-data)
 
 </LearningPath>
 
 <LearningPath label="Develop" icon="doc8">
 
-[Developer Guide Overview](https://docs.pingcap.com/tidb/v6.3/dev-guide-overview)
+[開発者ガイドの概要](https://docs.pingcap.com/tidb/v6.3/dev-guide-overview)
 
-[Quick Start](https://docs.pingcap.com/tidb/v6.3/dev-guide-build-cluster-in-cloud)
+[クイックスタート](https://docs.pingcap.com/tidb/v6.3/dev-guide-build-cluster-in-cloud)
 
-[Example Application](https://docs.pingcap.com/tidb/v6.3/dev-guide-sample-application-spring-boot)
+[適用例](https://docs.pingcap.com/tidb/v6.3/dev-guide-sample-application-spring-boot)
 
 </LearningPath>
 
 <LearningPath label="Deploy" icon="deploy">
 
-[Software and Hardware Requirements](https://docs.pingcap.com/tidb/v6.3/hardware-and-software-requirements)
+[ソフトウェアとハードウェアの要件](https://docs.pingcap.com/tidb/v6.3/hardware-and-software-requirements)
 
-[Deploy a TiDB Cluster Using TiUP (Recommended)](https://docs.pingcap.com/tidb/v6.3/production-deployment-using-tiup)
+[TiUP を使用して TiDBクラスタをデプロイする (推奨)](https://docs.pingcap.com/tidb/v6.3/production-deployment-using-tiup)
 
-[Deploy a TiDB Cluster in Kubernetes](https://docs.pingcap.com/tidb/v6.3/tidb-in-kubernetes)
+[Kubernetes に TiDBクラスタをデプロイする](https://docs.pingcap.com/tidb/v6.3/tidb-in-kubernetes)
 
 </LearningPath>
 
 <LearningPath label="Migrate" icon="cloud3">
 
-[Migration Overview](https://docs.pingcap.com/tidb/v6.3/migration-overview)
+[移行の概要](https://docs.pingcap.com/tidb/v6.3/migration-overview)
 
-[Migration Tools](https://docs.pingcap.com/tidb/v6.3/migration-tools)
+[移行ツール](https://docs.pingcap.com/tidb/v6.3/migration-tools)
 
-[Typical Scenarios](https://docs.pingcap.com/tidb/v6.3/migrate-aurora-to-tidb)
+[典型的なシナリオ](https://docs.pingcap.com/tidb/v6.3/migrate-aurora-to-tidb)
 
 </LearningPath>
 
 <LearningPath label="Maintain" icon="maintain">
 
-[Upgrade a Cluster](https://docs.pingcap.com/tidb/v6.3/upgrade-tidb-using-tiup)
+[クラスタをアップグレードする](https://docs.pingcap.com/tidb/v6.3/upgrade-tidb-using-tiup)
 
-[Scale a Cluster](https://docs.pingcap.com/tidb/v6.3/scale-tidb-using-tiup)
+[クラスタのスケーリング](https://docs.pingcap.com/tidb/v6.3/scale-tidb-using-tiup)
 
-[Back Up Cluster Data](https://docs.pingcap.com/tidb/v6.3/br-usage-backup)
+[クラスタデータのバックアップ](https://docs.pingcap.com/tidb/v6.3/br-usage-backup)
 
-[Restore Cluster Data](https://docs.pingcap.com/tidb/v6.3/br-usage-restore)
+[クラスタデータの復元](https://docs.pingcap.com/tidb/v6.3/br-usage-restore)
 
-[Daily Check](https://docs.pingcap.com/tidb/v6.3/daily-check)
+[毎日のチェック](https://docs.pingcap.com/tidb/v6.3/daily-check)
 
-[Maintain TiDB Using TiUP](https://docs.pingcap.com/tidb/v6.3/maintain-tidb-using-tiup)
+[TiUP を使用して TiDB を管理する](https://docs.pingcap.com/tidb/v6.3/maintain-tidb-using-tiup)
 
 </LearningPath>
 
 <LearningPath label="Monitor" icon="cloud6">
 
-[Use Prometheus and Grafana](https://docs.pingcap.com/tidb/v6.3/tidb-monitoring-framework)
+[Prometheus と Grafana を使用する](https://docs.pingcap.com/tidb/v6.3/tidb-monitoring-framework)
 
-[Monitoring API](https://docs.pingcap.com/tidb/v6.3/tidb-monitoring-api)
+[モニタリング API](https://docs.pingcap.com/tidb/v6.3/tidb-monitoring-api)
 
-[Alert Rules](https://docs.pingcap.com/tidb/v6.3/alert-rules)
+[アラート ルール](https://docs.pingcap.com/tidb/v6.3/alert-rules)
 
 </LearningPath>
 
 <LearningPath label="Tune" icon="tidb-cloud-tune">
 
-[Tuning Overview](https://docs.pingcap.com/tidb/v6.3/performance-tuning-overview)
+[チューニングの概要](https://docs.pingcap.com/tidb/v6.3/performance-tuning-overview)
 
-[Tuning Methods](https://docs.pingcap.com/tidb/v6.3/performance-tuning-methods)
+[チューニング方法](https://docs.pingcap.com/tidb/v6.3/performance-tuning-methods)
 
-[Tune OLTP Performance](https://docs.pingcap.com/tidb/v6.3/performance-tuning-practices)
+[OLTP パフォーマンスの調整](https://docs.pingcap.com/tidb/v6.3/performance-tuning-practices)
 
-[Tune Operating System](https://docs.pingcap.com/tidb/v6.3/tune-operating-system)
+[オペレーティング システムの調整](https://docs.pingcap.com/tidb/v6.3/tune-operating-system)
 
-[Tune Configurations](https://docs.pingcap.com/tidb/v6.3/configure-memory-usage)
+[構成の調整](https://docs.pingcap.com/tidb/v6.3/configure-memory-usage)
 
-[Tune SQL Performance](https://docs.pingcap.com/tidb/v6.3/sql-tuning-overview)
+[SQL パフォーマンスの調整](https://docs.pingcap.com/tidb/v6.3/sql-tuning-overview)
 
 </LearningPath>
 
@@ -106,27 +106,27 @@ hide_commit: true
 
 [TiDB Lightning](https://docs.pingcap.com/tidb/v6.3/tidb-lightning-overview)
 
-[Data Migration](https://docs.pingcap.com/tidb/v6.3/dm-overview)
+[データ移行](https://docs.pingcap.com/tidb/v6.3/dm-overview)
 
-[Backup & Restore (BR)](https://docs.pingcap.com/tidb/v6.3/backup-and-restore-overview)
+[バックアップと復元 (BR)](https://docs.pingcap.com/tidb/v6.3/backup-and-restore-overview)
 
 [TiCDC](https://docs.pingcap.com/tidb/v6.3/ticdc-overview)
 
-[PingCAP Clinic](https://docs.pingcap.com/tidb/v6.3/clinic-introduction)
+[PingCAPクリニック](https://docs.pingcap.com/tidb/v6.3/clinic-introduction)
 
 [TiDB Operator](https://docs.pingcap.com/tidb/v6.3/tidb-operator-overview)
 
-[TiSpark](https://docs.pingcap.com/tidb/v6.3/tispark-overview)
+[ティスパーク](https://docs.pingcap.com/tidb/v6.3/tispark-overview)
 
 </LearningPath>
 
 <LearningPath label="Reference" icon="cloud-dev">
 
-[System Variables](https://docs.pingcap.com/tidb/v6.3/system-variables)
+[システム変数](https://docs.pingcap.com/tidb/v6.3/system-variables)
 
-[Release Notes](https://docs.pingcap.com/tidb/v6.3/release-notes)
+[リリースノート](https://docs.pingcap.com/tidb/v6.3/release-notes)
 
-[FAQ Summary](https://docs.pingcap.com/tidb/v6.3/faq-overview)
+[FAQのまとめ](https://docs.pingcap.com/tidb/v6.3/faq-overview)
 
 </LearningPath>
 

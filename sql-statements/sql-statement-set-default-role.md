@@ -3,11 +3,11 @@ title: SET DEFAULT ROLE | TiDB SQL Statement Reference
 summary: An overview of the usage of SET DEFAULT ROLE for the TiDB database.
 ---
 
-# `SET DEFAULT ROLE`
+# <code>SET DEFAULT ROLE</code> {#code-set-default-role-code}
 
-This statement sets a specific role to be applied to a user by default. Thus, they will automatically have the permissions associated with a role without having to execute `SET ROLE <rolename>` or `SET ROLE ALL`.
+このステートメントは、デフォルトでユーザーに適用される特定のロールを設定します。したがって、 `SET ROLE <rolename>`または`SET ROLE ALL`を実行しなくても、ロールに関連付けられた権限が自動的に付与されます。
 
-## Synopsis
+## あらすじ {#synopsis}
 
 **SetDefaultRoleStmt:**
 
@@ -21,13 +21,13 @@ This statement sets a specific role to be applied to a user by default. Thus, th
 
 ![RolenameList](/media/sqlgram/RolenameList.png)
 
-**UsernameList:**
+**ユーザー名リスト:**
 
 ![UsernameList](/media/sqlgram/UsernameList.png)
 
-## Examples
+## 例 {#examples}
 
-Create a new role for the analytics team, and a new user called `jennifer`:
+分析チーム用の新しいロールと、 `jennifer`という名前の新しいユーザーを作成します。
 
 ```sql
 $ mysql -uroot
@@ -56,7 +56,7 @@ mysql> GRANT analyticsteam TO jennifer;
 Query OK, 0 rows affected (0.01 sec)
 ```
 
-Note that by default `jennifer` needs to `SET ROLE analyticsteam` in order to be able to use the privileges associated with the role:
+ロールに関連付けられた権限を使用できるようにするには、デフォルトで`jennifer` ～ `SET ROLE analyticsteam`が必要であることに注意してください。
 
 ```sql
 $ mysql -ujennifer
@@ -105,7 +105,7 @@ mysql> SHOW TABLES IN test;
 1 row in set (0.00 sec)
 ```
 
-The statement `SET DEFAULT ROLE` can be used to associated a role to `jennifer` so that she will not have to execute the statement `SET ROLE` in order to assume the privileges associated with the role:
+ステートメント`SET DEFAULT ROLE`を使用してロールを`jennifer`に関連付けることができるため、ロールに関連付けられた権限を引き受けるためにステートメント`SET ROLE`を実行する必要はありません。
 
 ```sql
 $ mysql -uroot
@@ -158,27 +158,27 @@ mysql> SHOW TABLES IN test;
 1 row in set (0.00 sec)
 ```
 
-`SET DEFAULT ROLE` will not automatically `GRANT` the associated role to the user. Attempting to `SET DEFAULT ROLE` for a role that `jennifer` does not have granted results in the following error:
+`SET DEFAULT ROLE`は自動的に`GRANT`ロールをユーザーに関連付けません。 `jennifer`が付与していないロールに対して`SET DEFAULT ROLE`を実行しようとすると、次のエラーが発生します。
 
 ```sql
 mysql> SET DEFAULT ROLE analyticsteam TO jennifer;
 ERROR 3530 (HY000): `analyticsteam`@`%` is is not granted to jennifer@%
 ```
 
-## MySQL compatibility
+## MySQL の互換性 {#mysql-compatibility}
 
-This statement is understood to be fully compatible with roles, which are a feature of MySQL 8.0. Any compatibility differences should be [reported via an issue](https://github.com/pingcap/tidb/issues/new/choose) on GitHub.
+このステートメントは、MySQL 8.0 の機能であるロールと完全に互換性があると理解されています。互換性の違いは、GitHub で[問題を介して報告された](https://github.com/pingcap/tidb/issues/new/choose)にする必要があります。
 
-## See also
+## こちらもご覧ください {#see-also}
 
-* [CREATE ROLE](/sql-statements/sql-statement-create-role.md)
-* [DROP ROLE](/sql-statements/sql-statement-drop-role.md)
-* [`GRANT <role>`](/sql-statements/sql-statement-grant-role.md)
-* [`REVOKE <role>`](/sql-statements/sql-statement-revoke-role.md)
-* [SET ROLE](/sql-statements/sql-statement-set-role.md)
+-   [役割を作成](/sql-statements/sql-statement-create-role.md)
+-   [ロールを削除](/sql-statements/sql-statement-drop-role.md)
+-   [`GRANT &#x3C;role>`](/sql-statements/sql-statement-grant-role.md)
+-   [`REVOKE &#x3C;role>`](/sql-statements/sql-statement-revoke-role.md)
+-   [ロールを設定](/sql-statements/sql-statement-set-role.md)
 
 <CustomContent platform="tidb">
 
-* [Role-Based Access Control](/role-based-access-control.md)
+-   [役割ベースのアクセス制御](/role-based-access-control.md)
 
 </CustomContent>

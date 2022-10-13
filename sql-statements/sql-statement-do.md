@@ -3,17 +3,17 @@ title: DO | TiDB SQL Statement Reference
 summary: An overview of the usage of DO for the TiDB database.
 ---
 
-# DO
+# 行う {#do}
 
-`DO` executes the expressions but does not return any results. In most cases, `DO` is equivalent to `SELECT expr, ...` that does not return a result.
+`DO`は式を実行しますが、結果を返しません。ほとんどの場合、 `DO`は結果を返さない`SELECT expr, ...`に相当します。
 
-> **Note:**
+> **ノート：**
 >
-> `DO` only executes expressions. It cannot be used in all cases where `SELECT` can be used. For example, `DO id FROM t1` is invalid because it references a table.
+> `DO`は式のみを実行します。 `SELECT`が使用できるすべての場合に使用できるわけではありません。たとえば、 `DO id FROM t1`はテーブルを参照しているため無効です。
 
-In MySQL, a common use case is to execute stored procedure or trigger. Since TiDB does not provide stored procedure or trigger, this function has a limited use.
+MySQL での一般的な使用例は、ストアド プロシージャまたはトリガーを実行することです。 TiDB はストアド プロシージャまたはトリガーを提供しないため、この関数の用途は限られています。
 
-## Synopsis
+## あらすじ {#synopsis}
 
 ```ebnf+diagram
 DoStmt   ::= 'DO' ExpressionList
@@ -27,9 +27,9 @@ Expression ::=
 |   PredicateExpr ( IsOrNotOp 'NULL' | CompareOp ( ( singleAtIdentifier assignmentEq )? PredicateExpr | AnyOrAll SubSelect ) )* ( IsOrNotOp ( trueKwd | falseKwd | 'UNKNOWN' ) )?
 ```
 
-## Examples
+## 例 {#examples}
 
-This SELECT statement pauses, but also produces a result set.
+この SELECT ステートメントは一時停止しますが、結果セットも生成します。
 
 ```sql
 mysql> SELECT SLEEP(5);
@@ -41,7 +41,7 @@ mysql> SELECT SLEEP(5);
 1 row in set (5.00 sec)
 ```
 
-DO, on the other hand, pauses without producing a result set.
+一方、DO は結果セットを生成せずに一時停止します。
 
 ```sql
 mysql> DO SLEEP(5);
@@ -51,10 +51,10 @@ mysql> DO SLEEP(1), SLEEP(1.5);
 Query OK, 0 rows affected (2.50 sec)
 ```
 
-## MySQL compatibility
+## MySQL の互換性 {#mysql-compatibility}
 
-This statement is understood to be fully compatible with MySQL. Any compatibility differences should be [reported via an issue](https://github.com/pingcap/tidb/issues/new/choose) on GitHub.
+このステートメントは、MySQL と完全に互換性があると理解されています。互換性の違いは、GitHub で[問題を介して報告された](https://github.com/pingcap/tidb/issues/new/choose)にする必要があります。
 
-## See also
+## こちらもご覧ください {#see-also}
 
-* [SELECT](/sql-statements/sql-statement-select.md)
+-   [選択する](/sql-statements/sql-statement-select.md)

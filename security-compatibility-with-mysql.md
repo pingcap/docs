@@ -3,43 +3,43 @@ title: Security Compatibility with MySQL
 summary: Learn TiDB's security compatibilities with MySQL.
 ---
 
-# Security Compatibility with MySQL
+# MySQL とのセキュリティの互換性 {#security-compatibility-with-mysql}
 
-TiDB supports similar security functionality to MySQL 5.7, with the following exceptions:
+TiDB はMySQL 5.7と同様のセキュリティ機能をサポートしていますが、次の例外があります。
 
-- Column level permissions are not supported
-- Password expiry, as well as password last-changed tracking and password lifetime are not supported [#9709](https://github.com/pingcap/tidb/issues/9709)
-- The permission attributes `max_questions`, `max_updated`, `max_connections`, `max_user_connections` are not supported
-- Password validation is not currently supported [#9741](https://github.com/pingcap/tidb/issues/9741)
+-   カラムレベルの権限はサポートされていません
+-   パスワードの有効期限、パスワードの最終変更の追跡、およびパスワードの有効期間はサポートされていません[#9709](https://github.com/pingcap/tidb/issues/9709)
+-   許可属性`max_questions` 、 `max_updated` 、 `max_connections` 、 `max_user_connections`はサポートされていません
+-   パスワード検証は現在サポートされていません[#9741](https://github.com/pingcap/tidb/issues/9741)
 
-## Authentication plugin status
+## 認証プラグインのステータス {#authentication-plugin-status}
 
-TiDB supports multiple authentication methods. These methods can be specified on a per user basis using [`CREATE USER`](/sql-statements/sql-statement-create-user.md) and [`ALTER USER`](/sql-statements/sql-statement-create-user.md). These methods are compatible with the authentication methods of MySQL with the same names.
+TiDB は複数の認証方法をサポートしています。これらのメソッドは、 [`CREATE USER`](/sql-statements/sql-statement-create-user.md)および[`ALTER USER`](/sql-statements/sql-statement-create-user.md)を使用してユーザーごとに指定できます。これらのメソッドは、同じ名前の MySQL の認証メソッドと互換性があります。
 
-You can use one of the following supported authentication methods in the table. To specify a default method that the server advertises when the client-server connection is being established, set the [`default_authentication_plugin`](/system-variables.md#default_authentication_plugin) variable. `tidb_sm3_password` is the SM3 authentication method only supported in TiDB. Therefore, to authenticate using this method, you must connect to TiDB using [TiDB-JDBC](https://github.com/pingcap/mysql-connector-j/tree/release/8.0-sm3).
+次の表でサポートされている認証方法のいずれかを使用できます。クライアント/サーバー接続が確立されているときにサーバーがアドバタイズするデフォルトの方法を指定するには、 [`default_authentication_plugin`](/system-variables.md#default_authentication_plugin)変数を設定します。 `tidb_sm3_password`は、TiDB でのみサポートされている SM3 認証方式です。したがって、この方法を使用して認証するには、 [TiDB-JDBC](https://github.com/pingcap/mysql-connector-j/tree/release/8.0-sm3)を使用して TiDB に接続する必要があります。
 
 <CustomContent platform="tidb">
 
-The support for TLS authentication is configured differently. For detailed information, see [Enable TLS between TiDB Clients and Servers](/enable-tls-between-clients-and-servers.md).
+TLS 認証のサポートの構成は異なります。詳細については、 [TiDB クライアントとサーバー間の TLS を有効にする](/enable-tls-between-clients-and-servers.md)を参照してください。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-The support for TLS authentication is configured differently. For detailed information, see [Enable TLS between TiDB Clients and Servers](https://docs.pingcap.com/tidb/stable/enable-tls-between-clients-and-servers).
+TLS 認証のサポートの構成は異なります。詳細については、 [TiDB クライアントとサーバー間の TLS を有効にする](https://docs.pingcap.com/tidb/stable/enable-tls-between-clients-and-servers)を参照してください。
 
 </CustomContent>
 
-| Authentication Method    | Supported        |
-| :------------------------| :--------------- |
-| `mysql_native_password`  | Yes              |
-| `sha256_password`        | No               |
-| `caching_sha2_password`  | Yes, since 5.2.0 |
-| `auth_socket`            | Yes, since 5.3.0 |
-| `tidb_sm3_password`      | Yes, since 6.3.0 |
-| TLS Certificates      | Yes              |
-| LDAP                     | No               |
-| PAM                      | No               |
-| ed25519 (MariaDB)        | No               |
-| GSSAPI (MariaDB)         | No               |
-| FIDO                     | No               |
+| 認証方法                    | 対応          |
+| :---------------------- | :---------- |
+| `mysql_native_password` | はい          |
+| `sha256_password`       | いいえ         |
+| `caching_sha2_password` | はい、5.2.0 以降 |
+| `auth_socket`           | はい、5.3.0 以降 |
+| `tidb_sm3_password`     | はい、6.3.0 以降 |
+| TLS 証明書                 | はい          |
+| LDAP                    | いいえ         |
+| パム                      | いいえ         |
+| ed25519 (マリアDB)         | いいえ         |
+| GSSAPI (MariaDB)        | いいえ         |
+| ファイド                    | いいえ         |

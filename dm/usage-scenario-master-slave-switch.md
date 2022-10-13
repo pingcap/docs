@@ -3,50 +3,50 @@ title: Switch DM-worker Connection between Upstream MySQL Instances
 summary: Learn how to switch the DM-worker connection between upstream MySQL instances.
 ---
 
-# Switch DM-worker Connection between Upstream MySQL Instances
+# アップストリーム MySQL インスタンス間の DM-worker 接続の切り替え {#switch-dm-worker-connection-between-upstream-mysql-instances}
 
-When the upstream MySQL instance that DM-worker connects to needs downtime maintenance or when the instance crashes unexpectedly, you need to switch the DM-worker connection to another MySQL instance within the same migration group.
+DM-worker が接続する上流の MySQL インスタンスでダウンタイム メンテナンスが必要な場合、またはインスタンスが予期せずクラッシュした場合、DM-worker 接続を同じ移行グループ内の別の MySQL インスタンスに切り替える必要があります。
 
-> **Note:**
+> **ノート：**
 >
-> - You can switch the DM-worker connection to only an instance within the same primary-secondary migration cluster.
-> - The MySQL instance to be newly connected to must have the binlog required by DM-worker.
-> - DM-worker must operate in the GTID sets mode, which means you must specify `enable-gtid: true` in the corresponding source configuration file.
-> - The connection switch only supports the following two scenarios. Strictly follow the procedures for each scenario. Otherwise, you might have to re-deploy the DM cluster according to the newly connected MySQL instance and perform the data migration task all over again.
+> -   DM-worker 接続を、同じプライマリ - セカンダリ移行クラスター内のインスタンスのみに切り替えることができます。
+> -   新しく接続する MySQL インスタンスには、DM-worker が必要とする binlog が必要です。
+> -   DM-worker は GTID セット モードで動作する必要があります。つまり、対応するソース構成ファイルで`enable-gtid: true`を指定する必要があります。
+> -   接続スイッチは、次の 2 つのシナリオのみをサポートします。各シナリオの手順に厳密に従ってください。そうしないと、新しく接続された MySQL インスタンスに従って DM クラスターを再デプロイし、データ移行タスクを最初からやり直す必要がある場合があります。
 
-For more details on GTID set, refer to [MySQL documentation](https://dev.mysql.com/doc/refman/5.7/en/replication-gtids-concepts.html#replication-gtids-concepts-gtid-sets).
+GTID セットの詳細については、 [MySQL ドキュメント](https://dev.mysql.com/doc/refman/5.7/en/replication-gtids-concepts.html#replication-gtids-concepts-gtid-sets)を参照してください。
 
-## Switch DM-worker connection via virtual IP
+## 仮想 IP 経由で DM-worker 接続を切り替える {#switch-dm-worker-connection-via-virtual-ip}
 
-When DM-worker connects the upstream MySQL instance via a virtual IP (VIP), switching the VIP connection to another MySQL instance means switching the MySQL instance connected to DM-worker, without the upstream connection address changed.
+DM-worker が仮想 IP (VIP) 経由で上流の MySQL インスタンスに接続する場合、VIP 接続を別の MySQL インスタンスに切り替えることは、上流の接続アドレスを変更せずに、DM-worker に接続されている MySQL インスタンスを切り替えることを意味します。
 
-> **Note:**
+> **ノート：**
 >
-> Make necessary changes to DM in this scenario. Otherwise, when you switch the VIP connection to another MySQL instance, DM might connect to the new and old MySQL instances at the same time in different connections. In this situation, the binlog replicated to DM is not consistent with other upstream status that DM receives, causing unpredictable anomalies and even data damage.
+> このシナリオでは、DM に必要な変更を加えます。そうしないと、VIP 接続を別の MySQL インスタンスに切り替えると、DM が新しいおよび古い MySQL インスタンスに同時に異なる接続で接続する可能性があります。この状況では、DM にレプリケートされたバイナリログは、DM が受け取る他のアップストリーム ステータスと一致せず、予測できない異常やデータの損傷さえ引き起こします。
 
-To switch one upstream MySQL instance (when DM-worker connects to it via a VIP) to another, perform the following steps:
+アップストリームの MySQL インスタンス (DM ワーカーが VIP 経由で接続する場合) を別のインスタンスに切り替えるには、次の手順を実行します。
 
-1. Use the `query-status` command to get the GTID sets (`syncerBinlogGtid`) corresponding to the binlog that the current processing unit of binlog replication has replicated to the downstream. Mark the sets as `gtid-S`.
-2. Use the `SELECT @@GLOBAL.gtid_purged;` command on the new MySQL instance to get the GTID sets corresponding to the purged binlogs. Mark the sets as `gtid-P`.
-3. Use the `SELECT @@GLOBAL.gtid_executed;` command on the new MySQL instance to get the GTID sets corresponding to all successfully executed transactions. Mark the sets as `gtid-E`.
-4. Make sure that the following conditions are met. Otherwise, you cannot switch the DM-work connection to the new MySQL instance:
-    - `gtid-S` contains `gtid-P`. `gtid-P` can be empty.
-    - `gtid-E` contains `gtid-S`.
-5. Use `pause-task` to pause all running tasks of data migration.
-6. Change the VIP for it to direct at the new MySQL instance.
-7. Use `resume-task` to resume the previous migration task.
+1.  `query-status`コマンドを使用して、バイナリログ レプリケーションの現在の処理単位がダウンストリームにレプリケートしたバイナリログに対応する GTID セット ( `syncerBinlogGtid` ) を取得します。セットを`gtid-S`としてマークします。
+2.  新しい MySQL インスタンスで`SELECT @@GLOBAL.gtid_purged;`コマンドを使用して、パージされたバイナリログに対応する GTID セットを取得します。セットを`gtid-P`としてマークします。
+3.  新しい MySQL インスタンスで`SELECT @@GLOBAL.gtid_executed;`コマンドを使用して、正常に実行されたすべてのトランザクションに対応する GTID セットを取得します。セットを`gtid-E`としてマークします。
+4.  以下の条件を満たしていることを確認してください。そうしないと、DM-work 接続を新しい MySQL インスタンスに切り替えることができません。
+    -   `gtid-S`には`gtid-P`が含まれます。 `gtid-P`は空にすることができます。
+    -   `gtid-E`には`gtid-S`が含まれます。
+5.  実行中のデータ移行タスクをすべて一時停止するには、 `pause-task`を使用します。
+6.  VIP を変更して、新しい MySQL インスタンスに向けます。
+7.  前の移行タスクを再開するには、 `resume-task`を使用します。
 
-## Change the address of the upstream MySQL instance that DM-worker connects to
+## DM-worker が接続する上流の MySQL インスタンスのアドレスを変更します {#change-the-address-of-the-upstream-mysql-instance-that-dm-worker-connects-to}
 
-To make DM-worker connect to a new MySQL instance in the upstream by modifying the DM-worker configuration, perform the following steps:
+DM-worker 設定を変更して DM-worker をアップストリームの新しい MySQL インスタンスに接続するには、次の手順を実行します。
 
-1. Use the `query-status` command to get the GTID sets (`syncerBinlogGtid`) corresponding to the binlog that the current processing unit of binlog replication has replicated to the downstream. Mark this sets as `gtid-S`.
-2. Use the `SELECT @@GLOBAL.gtid_purged;` command on the new MySQL instance to get the GTID sets corresponding to the purged binlogs. Mark this sets as `gtid-P`.
-3. Use the `SELECT @@GLOBAL.gtid_executed;` command on the new MySQL instance to get the GTID sets corresponding to all successfully executed transactions. Mark this sets as `gtid-E`.
-4. Make sure that the following conditions are met. Otherwise, you cannot switch the DM-work connection to the new MySQL instance:
-    - `gtid-S` contains `gtid-P`. `gtid-P` can be empty.
-    - `gtid-E` contains `gtid-S`.
-5. Use `stop-task` to stop all running tasks of data migration.
-6. Use the `operator-source stop` command to remove the source configuration corresponding to the address of the old MySQL instance from the DM cluster.
-7. Update the address of the MySQL instance in the source configuration file and use the `operate-source create` command to reload the new source configuration in the DM cluster.
-8. Use `start-task` to restart the migration task.
+1.  `query-status`コマンドを使用して、バイナリログ レプリケーションの現在の処理単位がダウンストリームにレプリケートしたバイナリログに対応する GTID セット ( `syncerBinlogGtid` ) を取得します。このセットを`gtid-S`としてマークします。
+2.  新しい MySQL インスタンスで`SELECT @@GLOBAL.gtid_purged;`コマンドを使用して、パージされたバイナリログに対応する GTID セットを取得します。このセットを`gtid-P`としてマークします。
+3.  新しい MySQL インスタンスで`SELECT @@GLOBAL.gtid_executed;`コマンドを使用して、正常に実行されたすべてのトランザクションに対応する GTID セットを取得します。このセットを`gtid-E`としてマークします。
+4.  以下の条件を満たしていることを確認してください。そうしないと、DM-work 接続を新しい MySQL インスタンスに切り替えることができません。
+    -   `gtid-S`には`gtid-P`が含まれます。 `gtid-P`は空にすることができます。
+    -   `gtid-E`には`gtid-S`が含まれます。
+5.  実行中のデータ移行タスクをすべて停止するには、 `stop-task`を使用します。
+6.  `operator-source stop`コマンドを使用して、古い MySQL インスタンスのアドレスに対応するソース構成を DM クラスターから削除します。
+7.  ソース構成ファイルで MySQL インスタンスのアドレスを更新し、 `operate-source create`コマンドを使用して DM クラスターに新しいソース構成をリロードします。
+8.  移行タスクを再開するには、 `start-task`を使用します。

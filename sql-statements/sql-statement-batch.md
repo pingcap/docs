@@ -3,17 +3,17 @@ title: BATCH
 summary: An overview of the usage of BATCH for the TiDB database.
 ---
 
-# BATCH
+# バッチ {#batch}
 
-The `BATCH` syntax splits a DML statement into multiple statements in TiDB for execution. This means that there are **no guarantees** of transactional atomicity and isolation. Therefore, it is a "non-transactional" statement.
+`BATCH`構文は、実行のために DML ステートメントを TiDB の複数のステートメントに分割します。これは、トランザクションの原子性と分離が**保証されないこと**を意味します。したがって、これは「非トランザクション」ステートメントです。
 
-Currently, only `DELETE` is supported in `BATCH`.
+現在、 `BATCH`では`DELETE`のみがサポートされています。
 
-Based on a column, the `BATCH` syntax divides a DML statement into multiple ranges of scope for execution. In each range, a single SQL statement is executed.
+`BATCH`構文は、列に基づいて、DML ステートメントを複数の実行範囲に分割します。各範囲で、単一の SQL ステートメントが実行されます。
 
-For details about the usage and restrictions, see [Non-transactional DML statements](/non-transactional-dml.md).
+使用方法と制限事項については、 [非トランザクション DML ステートメント](/non-transactional-dml.md)を参照してください。
 
-## Synopsis
+## あらすじ {#synopsis}
 
 ```ebnf+diagram
 NonTransactionalDeleteStmt ::=
@@ -23,10 +23,10 @@ DryRunOptions ::=
     'DRY' 'RUN' 'QUERY'?
 ```
 
-## MySQL compatibility
+## MySQL の互換性 {#mysql-compatibility}
 
-The `BATCH` syntax is TiDB-specific and not compatible with MySQL.
+`BATCH`構文は TiDB 固有であり、MySQL と互換性がありません。
 
-## See also
+## こちらもご覧ください {#see-also}
 
-* [Non-transactional DML statements](/non-transactional-dml.md)
+-   [非トランザクション DML ステートメント](/non-transactional-dml.md)

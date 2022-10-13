@@ -3,89 +3,90 @@ title: Known Issues in Log Backup
 summary: Learn known issues in log backup.
 ---
 
-# Known Issues in Log Backup
+# ログ バックアップの既知の問題 {#known-issues-in-log-backup}
 
-This document lists the known issues and corresponding workarounds when you use the log backup feature.
+このドキュメントでは、ログ バックアップ機能を使用する場合の既知の問題と対応する回避策を示します。
 
-## BR encounters the OOM problem during a PITR or after you run the `br log truncate` command
+## PITR 中または<code>br log truncate</code>コマンドの実行後に BR で OOM 問題が発生する {#br-encounters-the-oom-problem-during-a-pitr-or-after-you-run-the-code-br-log-truncate-code-command}
 
-Issue: [#36648](https://github.com/pingcap/tidb/issues/36648)
+問題: [#36648](https://github.com/pingcap/tidb/issues/36648)
 
-Consider the following possible causes:
+次の考えられる原因を検討してください。
 
-- PITR experiences OOM because the log data to be recovered is too much. The following are two typical causes:
+-   回復するログ データが多すぎるため、PITR で OOM が発生します。代表的な原因として、次の 2 つが挙げられます。
 
-    - The log range to be recovered is too large.
+    -   リカバリするログ範囲が大きすぎます。
 
-        It is recommended that you recover logs of no more than two days, and one week to maximum. That is, perform a full backup operation at least once in two days during PITR backup process.
+        2 日以内、最長で 1 週間のログを回復することをお勧めします。つまり、PITR バックアップ プロセス中に少なくとも 2 日に 1 回、フル バックアップ操作を実行します。
 
-    - There are a large number of writes for a long time during the log backup process.
+    -   ログ バックアップ プロセス中に大量の書き込みが長時間発生します。
 
-        A large number of writes for a long time usually occur when you perform a full data import to initialize the cluster. It is recommended that you perform a snapshot backup after the initial import and use that backup to restore the cluster.
+        クラスターを初期化するためにフル データ インポートを実行すると、通常、長時間にわたる大量の書き込みが発生します。最初のインポート後にスナップショット バックアップを実行し、そのバックアップを使用してクラスターを復元することをお勧めします。
 
-- OOM occurs when you delete logs because the range of logs to be deleted is too large.
+-   削除するログの範囲が大きすぎるため、ログを削除すると OOM が発生します。
 
-    To resolve this issue, reduce the range of logs to be deleted first and delete the target logs in several batches instead of deleting them once.
+    この問題を解決するには、最初に削除するログの範囲を縮小し、対象のログを一度に削除するのではなく、数回に分けて削除します。
 
-- The memory allocation of the node where the BR process is located is too low.
+-   BR プロセスが配置されているノードのメモリ割り当てが低すぎます。
 
-    It is recommended to scale up the node memory configuration to at least 16 GB to ensure that PITR has sufficient memory resources for recovery.
+    ノードのメモリ構成を少なくとも 16 GB にスケールアップして、PITR にリカバリ用の十分なメモリ リソースがあることを確認することをお勧めします。
 
-## The upstream database imports data using TiDB Lightning in the physical import mode, which makes it impossible to use the log backup feature
+## アップストリーム データベースは物理インポート モードでTiDB Lightningを使用してデータをインポートするため、ログ バックアップ機能を使用できません。 {#the-upstream-database-imports-data-using-tidb-lightning-in-the-physical-import-mode-which-makes-it-impossible-to-use-the-log-backup-feature}
 
-Currently, the log backup feature is not fully adapted to TiDB Lightning. Therefore, data imported in the physical mode of TiDB Lightning cannot be backed up to logs.
+現在、ログ バックアップ機能はTiDB Lightningに完全には適合していません。そのため、 TiDB Lightningの物理モードでインポートされたデータは、ログにバックアップできません。
 
-In upstream clusters where you create log backup tasks, avoid using the TiDB Lightning physical mode to import data. Instead, you can use TiDB Lightning logical mode. If you do need to use the physical mode, perform a snapshot backup after the import is complete, so that PITR can be restored to the time point after the snapshot backup.
+ログ バックアップ タスクを作成するアップストリーム クラスターでは、 TiDB Lightning物理モードを使用してデータをインポートすることは避けてください。代わりに、 TiDB Lightning論理モードを使用できます。物理モードを使用する必要がある場合は、インポートの完了後にスナップショット バックアップを実行して、PITR をスナップショット バックアップ後の時点に復元できるようにします。
 
-## The cluster has recovered from the network partition failure, but the checkpoint of the log backup task progress still does not resume
+## クラスターはネットワーク パーティションの障害から回復しましたが、ログ バックアップ タスクの進行状況のチェックポイントはまだ再開されません。 {#the-cluster-has-recovered-from-the-network-partition-failure-but-the-checkpoint-of-the-log-backup-task-progress-still-does-not-resume}
 
-Issue: [#13126](https://github.com/tikv/tikv/issues/13126)
+問題: [#13126](https://github.com/tikv/tikv/issues/13126)
 
-After a network partition failure in the cluster, the backup task cannot continue backing up logs. After a certain retry time, the task will be set to `ERROR` state. At this point, the backup task has stopped.
+クラスタでネットワーク パーティションに障害が発生した後、バックアップ タスクはログのバックアップを続行できません。一定の再試行時間の後、タスクは`ERROR`状態に設定されます。この時点で、バックアップ タスクは停止しています。
 
-To resolve this issue, you need to manually execute the `br log resume` command to resume the log backup task.
+この問題を解決するには、 `br log resume`コマンドを手動で実行して、ログ バックアップ タスクを再開する必要があります。
 
-## The actual storage space used by log backup is 2~3 times the volume of the incremental data displayed in the cluster monitoring metrics
+## ログ バックアップで使用される実際のストレージ スペースは、クラスタ モニタリング メトリックに表示される増分データのボリュームの 2 ～ 3 倍です。 {#the-actual-storage-space-used-by-log-backup-is-2-3-times-the-volume-of-the-incremental-data-displayed-in-the-cluster-monitoring-metrics}
 
-Issue: [#13306](https://github.com/tikv/tikv/issues/13306)
+問題: [#13306](https://github.com/tikv/tikv/issues/13306)
 
-This issue occurs because log backup data use a customized encoding format. The different format leads to different data compression ratios, the difference of which is 2~3 times.
+この問題は、ログ バックアップ データがカスタマイズされたエンコード形式を使用するために発生します。フォーマットが異なればデータ圧縮率も異なり、その差は 2 ～ 3 倍です。
 
-Log backup does not store data the way RocksDB generates SST files, because the data generated during log backup might have a large range and a small content. In such cases, restoring data by ingesting SST files cannot improve the restoration performance.
+ログ バックアップは、RocksDB が SST ファイルを生成する方法ではデータを保存しません。これは、ログ バックアップ中に生成されるデータの範囲が大きく、内容が小さい可能性があるためです。このような場合、SST ファイルを取り込んでデータを復元しても、復元のパフォーマンスは向上しません。
 
-## The error `execute over region id` is returned when you perform PITR
+## PITR を<code>execute over region id</code>エラーが返される {#the-error-code-execute-over-region-id-code-is-returned-when-you-perform-pitr}
 
-Issue: [#37207](https://github.com/pingcap/tidb/issues/37207)
+問題: [#37207](https://github.com/pingcap/tidb/issues/37207)
 
-This issue usually occurs when you enable log backup during a full data import and afterwards perform a PITR to restore data at a time point during the data import.
+この問題は通常、完全なデータ インポート中にログ バックアップを有効にし、その後 PITR を実行して、データ インポート中のある時点でデータを復元する場合に発生します。
 
-Specifically, there is a probability that this issue occurs if there are a large number of hotspot writes for a long time (such as 24 hours) and if the OPS of each TiKV node is larger than 50k/s (you can view the metrics in Grafana: **TiKV-Details** -> **Backup Log** -> **Handle Event Rate**).
+具体的には、長時間 (24 時間など) に多数のホットスポット書き込みがあり、各 TiKV ノードの OPS が 50k/s を超える場合 (メトリクスはGrafana: **TiKV-Details** -&gt; <strong>Backup Log</strong> -&gt; <strong>Handle Event Rate</strong> )。
 
-For the current version, it is recommended that you perform a snapshot backup after the data import and perform PITR based on this snapshot backup.
+現在のバージョンでは、データのインポート後にスナップショット バックアップを実行し、このスナップショット バックアップに基づいて PITR を実行することをお勧めします。
 
-## The commit time of a large transaction affects the checkpoint lag of log backup
+## 大規模なトランザクションのコミット時間は、ログ バックアップのチェックポイント ラグに影響します {#the-commit-time-of-a-large-transaction-affects-the-checkpoint-lag-of-log-backup}
 
-Issue: [#13304](https://github.com/tikv/tikv/issues/13304)
+問題: [#13304](https://github.com/tikv/tikv/issues/13304)
 
-When there is a large transaction, the log checkpoint lag is not updated before the transaction is committed. Therefore, the checkpoint lag is increased by a period of time close to the commit time of the transaction.
+大規模なトランザクションがある場合、ログ チェックポイント ラグは、トランザクションがコミットされる前に更新されません。したがって、トランザクションのコミット時間に近い時間、チェックポイントの遅延が増加します。
 
-## The acceleration of adding indexes feature is not compatible with PITR
+## インデックス追加機能の高速化は PITR と互換性がありません {#the-acceleration-of-adding-indexes-feature-is-not-compatible-with-pitr}
 
-Issue: [#38045](https://github.com/pingcap/tidb/issues/38045)
+問題: [#38045](https://github.com/pingcap/tidb/issues/38045)
 
-Currently, the [acceleration of adding indexes](/system-variables.md#tidb_ddl_enable_fast_reorg-new-in-v630) feature is not compatible with PITR. When using index acceleration, you need to ensure that there are no PITR log backup tasks running in the background. Otherwise, unexpected behaviors might occur, including:
+現在、 [インデックス追加の高速化](/system-variables.md#tidb_ddl_enable_fast_reorg-new-in-v630)の機能は PITR と互換性がありません。インデックス アクセラレーションを使用する場合は、バックグラウンドで実行されている PITR ログ バックアップ タスクがないことを確認する必要があります。そうしないと、次のような予期しない動作が発生する可能性があります。
 
-- If you start a log backup task first, and then add an index. The adding index process is not accelerated even if index acceleration is enabled. But the index is added in a slow way.
-- If you start an index acceleration task first, and then start a log backup task. The log backup task returns an error. But the index acceleration is not affected.
-- If you start a log backup task and an index acceleration task at the same time, the two tasks might not be aware of each other. This might result in PITR failing to back up the newly added index.
+-   最初にログ バックアップ タスクを開始してから、インデックスを追加する場合。インデックス アクセラレーションが有効になっていても、インデックスの追加プロセスは高速化されません。しかし、インデックスはゆっくりと追加されます。
+-   最初にインデックス アクセラレーション タスクを開始してから、ログ バックアップ タスクを開始した場合。ログ バックアップ タスクがエラーを返します。しかし、インデックスの加速は影響を受けません。
+-   ログ バックアップ タスクとインデックス アクセラレーション タスクを同時に開始すると、2 つのタスクが互いを認識しない場合があります。これにより、PITR が新しく追加されたインデックスのバックアップに失敗する可能性があります。
 
-## An error occurs when you run the `PITR Truncate` command on GCS or Azure Blob Storage for the first time
+## GCS または Azure Blob Storage で初めて<code>PITR Truncate</code>コマンドを実行するとエラーが発生する {#an-error-occurs-when-you-run-the-code-pitr-truncate-code-command-on-gcs-or-azure-blob-storage-for-the-first-time}
 
-Issue: [#38229](https://github.com/pingcap/tidb/issues/38229)
+問題: [#38229](https://github.com/pingcap/tidb/issues/38229)
 
-When you run `PITR Truncate` on GCS or Azure Blob Storage for the first time, you are reminded that the file `v1_stream_trancate_safepoint.txt` does not exist. To address this issue, take the following steps:
+GCS または Azure Blob Storage で初めて`PITR Truncate`を実行すると、ファイル`v1_stream_trancate_safepoint.txt`が存在しないことが通知されます。この問題に対処するには、次の手順を実行します。
 
-In the backup root directory of PITR, create a file `v1_stream_trancate_safepoint.txt` and write `0` in it. Note that this file should not include any other characters and should be created only when you run `PITR Truncate` for the first time.
+PITR のバックアップ ルート ディレクトリに、ファイル`v1_stream_trancate_safepoint.txt`を作成し、その中に`0`を書き込みます。このファイルには他の文字を含めてはならず、 `PITR Truncate`を初めて実行するときにのみ作成する必要があることに注意してください。
 
 <!-- TODO: Add the following content upon v6.4.0 release  -->
+
 <!-- Alternatively, use BR of v6.4.0 or later. -->

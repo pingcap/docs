@@ -3,63 +3,64 @@ title: Import Sample Data
 summary: Learn how to import sample data into TiDB Cloud via UI.
 ---
 
-# Import Sample Data
+# サンプル データのインポート {#import-sample-data}
 
-This document describes how to import sample data into TiDB Cloud via the UI. The sample data used is the system data from Capital Bikeshare, released under the Capital Bikeshare Data License Agreement. Before importing the sample data, you need to have one TiDB cluster.
+このドキュメントでは、UI を介してサンプル データをTiDB Cloudにインポートする方法について説明します。使用されるサンプル データは、Capital Bikeshare Data License Agreement に基づいてリリースされた Capital Bikeshare のシステム データです。サンプル データをインポートする前に、1 つの TiDB クラスターが必要です。
 
-1. Navigate to the **Active Clusters** page.
-2. Find the area of your cluster and click **Import Data** in the upper-right corner of the area. The **Data Import Task** page is displayed.
+1.  [**アクティブなクラスター]**ページに移動します。
 
-    > **Tip:**
+2.  クラスターの領域を見つけて、領域の右上隅にある [**データのインポート**] をクリックします。 [<strong>データ インポート タスク]</strong>ページが表示されます。
+
+    > **ヒント：**
     >
-    > Alternatively, you can also click the name of your cluster on the **Active Clusters** page and click **Import Data** in the upper-right corner.
+    > または、[**アクティブなクラスター**] ページでクラスターの名前をクリックし、右上隅にある [<strong>データのインポート</strong>] をクリックすることもできます。
 
-3. Fill in the import parameters:
+3.  インポート パラメータを入力します。
 
     <SimpleTab>
-    <div label="AWS">
+     <div label="AWS">
 
-    If your TiDB cluster is hosted by AWS (the Developer Tier is hosted by AWS by default), fill in the following parameters:
+    TiDB クラスターが AWS によってホストされている場合 (Developer Tier はデフォルトで AWS によってホストされています)、次のパラメーターを入力します。
 
-    - **Data Source Type**: `AWS S3`.
-    - **Bucket URL**: enter the sample data URL `s3://tidbcloud-samples/data-ingestion/`.
-    - **Data Format**: select **TiDB Dumpling**.
-    - **Setup Credentials**: enter `arn:aws:iam::385595570414:role/import-sample-access` for Role-ARN.
-    - **Target Cluster**: fill in the **Username** and **Password** fields.
-    - **DB/Tables Filter**: leave this field blank.
+    -   **データ ソースの種類**: `AWS S3` 。
+    -   **バケット URL** : サンプル データの URL を入力します。 `s3://tidbcloud-samples/data-ingestion/` .
+    -   **データ形式**: <strong>TiDB Dumpling</strong>を選択します。
+    -   **資格情報のセットアップ**: Role-ARN に`arn:aws:iam::385595570414:role/import-sample-access`を入力します。
+    -   **ターゲットクラスタ**: <strong>[ユーザー名]</strong>および [<strong>パスワード</strong>] フィールドに入力します。
+    -   **DB/Tables Filter** : このフィールドは空白のままにします。
 
     </div>
 
     <div label="GCP">
 
-    If your TiDB cluster is hosted by GCP, fill in the following parameters:
+    TiDB クラスターが GCP によってホストされている場合は、次のパラメーターを入力します。
 
-    - **Data Source Type**: `Google Cloud Stroage`.
-    - **Bucket URL**: enter the sample data URL `gcs://tidbcloud-samples-us-west1`.
-    - **Data Format**: select **TiDB Dumpling**.
-    - **Target Cluster**: fill in the **Username** and **Password** fields.
-    - **DB/Tables Filter**: leave this field blank.
+    -   **データ ソースの種類**: `Google Cloud Stroage` 。
+    -   **バケット URL** : サンプル データの URL を入力します。 `gcs://tidbcloud-samples-us-west1` .
+    -   **データ形式**: <strong>TiDB Dumpling</strong>を選択します。
+    -   **ターゲットクラスタ**: <strong>[ユーザー名]</strong>および [<strong>パスワード</strong>] フィールドに入力します。
+    -   **DB/Tables Filter** : このフィールドは空白のままにします。
 
     </div>
-    </SimpleTab>
+     </SimpleTab>
 
-4. Click **Import**.
+4.  [**インポート]**をクリックします。
 
-    A warning message about the database resource consumption is displayed.
+    データベース リソースの消費に関する警告メッセージが表示されます。
 
-5. Click **Confirm**.
+5.  [**確認]**をクリックします。
 
-    TiDB Cloud starts validating whether it can access the sample data in the specified bucket URL. After the validation is completed and successful, the import task starts automatically.
+    TiDB Cloudは、指定されたバケット URL のサンプル データにアクセスできるかどうかの検証を開始します。検証が完了して成功すると、インポート タスクが自動的に開始されます。
 
-The data import process will take 5 to 10 minutes. When the data import progress bar shows **Success**, you have successfully imported the sample data and the database schema to your database in TiDB Cloud.
+データのインポート プロセスには 5 ～ 10 分かかります。データ インポート プログレス バーに**Success**と表示されたら、サンプル データとデータベース スキーマがTiDB Cloudのデータベースに正常にインポートされたことになります。
 
-Once the cluster finishes the data importing process, you will get the sample data in your database.
+クラスターがデータのインポート プロセスを完了すると、データベースにサンプル データが取得されます。
 
-You can run some queries to check the result, for example:
+いくつかのクエリを実行して、結果を確認できます。次に例を示します。
 
-1. Get the trip records starting at "12th & U St NW":
+1.  「12th &amp; U St NW」から始まる旅行記録を取得します。
 
-    {{< copyable "sql" >}}
+    {{< copyable "" >}}
 
     ```sql
     use bikeshare;
@@ -83,9 +84,9 @@ You can run some queries to check the result, for example:
     +-----------------+---------------+---------------------+---------------------+--------------------+------------------+-------------------------------------------+----------------+-----------+------------+-----------+------------+---------------+
     ```
 
-2. Get the trip records with electric bikes:
+2.  電動自転車で旅行記録を取得します。
 
-    {{< copyable "sql" >}}
+    {{< copyable "" >}}
 
     ```sql
     use bikeshare;

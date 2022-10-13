@@ -3,42 +3,42 @@ title: Manage Table Schemas of Tables to be Migrated
 summary: Learn how to manage the schema of the table to be migrated in DM.
 ---
 
-# Manage Table Schemas of Tables to be Migrated
+# 移行するテーブルのテーブル スキーマの管理 {#manage-table-schemas-of-tables-to-be-migrated}
 
-This document describes how to manage the schema of the table in DM during migration using [dmctl](/dm/dmctl-introduction.md).
+このドキュメントでは、 [dmctl](/dm/dmctl-introduction.md)を使用して移行中に DM でテーブルのスキーマを管理する方法について説明します。
 
-## Implementation principles
+## 実施原則 {#implementation-principles}
 
-When you migrate tables using DM, DM performs the following operations on the table schema:
+DM を使用してテーブルを移行する場合、DM はテーブル スキーマに対して次の操作を実行します。
 
-- For full export and import, DM directly exports the upstream table schema of the current time to SQL files and applies the table schema to the downstream.
+-   完全なエクスポートとインポートの場合、DM は現在の上流のテーブル スキーマを SQL ファイルに直接エクスポートし、そのテーブル スキーマを下流に適用します。
 
-- For incremental replication, the whole data link contains the following table schemas, which might be the same or different:
+-   増分レプリケーションの場合、データ リンク全体に次のテーブル スキーマが含まれます。これらは同じ場合も異なる場合もあります。
 
     ![schema](/media/dm/operate-schema.png)
 
-    * The upstream table schema at the current time, identified as `schema-U`.
-    * The table schema of the binlog event currently being consumed by DM, identified as `schema-B`. This schema corresponds to the upstream table schema at a historical time.
-    * The table schema currently maintained in DM (the schema tracker component), identified as `schema-I`.
-    * The table schema in the downstream TiDB cluster, identified as `schema-D`.
+    -   `schema-U`として識別される、現時点でのアップストリーム テーブル スキーマ。
+    -   `schema-B`として識別される、現在 DM によって消費されている binlog イベントのテーブル スキーマ。このスキーマは、過去の時点での上流のテーブル スキーマに対応します。
+    -   `schema-I`として識別される、現在 DM (スキーマ トラッカー コンポーネント) で維持されているテーブル スキーマ。
+    -   `schema-D`として識別される、ダウンストリーム TiDB クラスター内のテーブル スキーマ。
 
-    In most cases, the four table schemas above are the same.
+    ほとんどの場合、上記の 4 つのテーブル スキーマは同じです。
 
-When the upstream database performs a DDL operation to change the table schema, `schema-U` is changed. By applying the DDL operation to the internal schema tracker component and the downstream TiDB cluster, DM updates `schema-I` and `schema-D` in an orderly manner to keep them consistent with `schema-U`. Therefore, DM can then normally consume the binlog event corresponding to the `schema-B` table schema. That is, after the DDL operation is successfully migrated, `schema-U`, `schema-B`, `schema-I`, and `schema-D` are still consistent.
+アップストリーム データベースが DDL 操作を実行してテーブル スキーマを変更すると、 `schema-U`が変更されます。 DDL 操作を内部スキーマ トラッカー コンポーネントとダウンストリームの TiDB クラスターに適用することにより、DM は`schema-I`と`schema-D`を順番に更新して`schema-U`との一貫性を保ちます。したがって、DM は通常、 `schema-B`テーブル スキーマに対応する binlog イベントを使用できます。つまり、DDL 操作が正常に移行された後でも、 `schema-U` 、 `schema-B` 、 `schema-I` 、および`schema-D`は一貫しています。
 
-However, during the migration with [optimistic mode sharding DDL support](/dm/feature-shard-merge-optimistic.md) enabled, the `schema-D` of the downstream table might be inconsistent with the `schema-B` and `schema-I` of some upstream sharded tables. In such cases, DM still keeps `schema-I` and `schema-B` consistent to ensure that the binlog event corresponding to DML can be parsed normally.
+ただし、 [オプティミスティック モード シャーディング DDL サポート](/dm/feature-shard-merge-optimistic.md)が有効になっている移行中に、ダウンストリーム テーブルの`schema-D`が、一部のアップストリーム シャード テーブルの`schema-B`および`schema-I`と一致しない場合があります。このような場合でも、DM は`schema-I`と`schema-B`の一貫性を保ち、DML に対応する binlog イベントを正常に解析できるようにします。
 
-In addition, in some scenarios (such as when the downstream table has more columns than the upstream table), `schema-D` might be inconsistent with `schema-B` and `schema-I`.
+さらに、一部のシナリオ (下流のテーブルに上流のテーブルよりも多くの列がある場合など) では、 `schema-D`が`schema-B`および`schema-I`と一致しない場合があります。
 
-To support the scenarios mentioned above and handle other migration interruptions caused by schema inconsistency, DM provides the `binlog-schema` command to obtain, modify, and delete the `schema-I` table schema maintained in DM.
+上記のシナリオをサポートし、スキーマの不一致によって引き起こされるその他の移行の中断を処理するために、DM は、DM で維持される`schema-I`のテーブル スキーマを取得、変更、および削除するための`binlog-schema`のコマンドを提供します。
 
-> **Note:**
+> **ノート：**
 >
-> The `binlog-schema` command is supported only in DM v6.0 or later versions. For earlier versions, you must use the `operate-schema` command.
+> `binlog-schema`コマンドは、DM v6.0 以降のバージョンでのみサポートされています。以前のバージョンでは、 `operate-schema`コマンドを使用する必要があります。
 
-## Command
+## 指示 {#command}
 
-{{< copyable "shell-regular" >}}
+{{< copyable "" >}}
 
 ```bash
 help binlog-schema
@@ -64,25 +64,25 @@ Global Flags:
 Use "dmctl binlog-schema [command] --help" for more information about a command.
 ```
 
-> **Note:**
+> **ノート：**
 >
-> - Because a table schema might change during data migration, to obtain a predictable table schema, currently the `binlog-schema` command can be used only when the data migration task is in the `Paused` state.
-> - To avoid data loss due to mishandling, it is **strongly recommended** to get and backup the table schema firstly before you modify the schema.
+> -   テーブル スキーマはデータ移行中に変更される可能性があるため、予測可能なテーブル スキーマを取得するために、現在、データ移行タスクが`Paused`状態にある場合にのみ`binlog-schema`コマンドを使用できます。
+> -   誤った取り扱いによるデータ損失を避けるために、スキーマを変更する前に、まずテーブル スキーマを取得してバックアップすることを**強くお勧め**します。
 
-## Parameters
+## パラメーター {#parameters}
 
-* `delete`: Deletes the table schema.
-* `list`: Lists the table schema.
-* `update`: Updates the table schema.
-* `-s` or `--source`:
-    - Required.
-    - Specifies the MySQL source that the operation is applied to.
+-   `delete` : テーブル スキーマを削除します。
+-   `list` : テーブル スキーマを一覧表示します。
+-   `update` : テーブル スキーマを更新します。
+-   `-s`または`--source` :
+    -   必須。
+    -   操作が適用される MySQL ソースを指定します。
 
-## Usage example
+## 使用例 {#usage-example}
 
-### Get the table schema
+### テーブル スキーマを取得する {#get-the-table-schema}
 
-To get the table schema, run the `binlog-schema list` command:
+テーブル スキーマを取得するには、次の`binlog-schema list`コマンドを実行します。
 
 ```bash
 help binlog-schema list
@@ -101,9 +101,9 @@ Global Flags:
   -s, --source strings   MySQL Source ID.
 ```
 
-If you want to get the table schema of the ``` `db_single`.`t1` ``` table corresponding to the `mysql-replica-01` MySQL source in the `db_single` task, run the following command:
+`db_single`番目のタスクで`mysql-replica-01`番目の MySQL ソースに対応する`` `db_single`.`t1` ``番目のテーブルのテーブル スキーマを取得する場合は、次のコマンドを実行します。
 
-{{< copyable "shell-regular" >}}
+{{< copyable "" >}}
 
 ```bash
 binlog-schema list -s mysql-replica-01 task_single db_single t1
@@ -124,11 +124,11 @@ binlog-schema list -s mysql-replica-01 task_single db_single t1
 }
 ```
 
-### Update the table schema
+### テーブル スキーマを更新する {#update-the-table-schema}
 
-To update the table schema, run the `binlog-schema update` command:
+テーブル スキーマを更新するには、次の`binlog-schema update`コマンドを実行します。
 
-{{< copyable "shell-regular" >}}
+{{< copyable "" >}}
 
 ```bash
 help binlog-schema update
@@ -151,7 +151,7 @@ Global Flags:
   -s, --source strings   MySQL Source ID.
 ```
 
-If you want to set the table schema of the ``` `db_single`.`t1` ``` table corresponding to the `mysql-replica-01` MySQL source in the `db_single` task as follows:
+`db_single`タスクで`mysql-replica-01` MySQL ソースに対応する`` `db_single`.`t1` ``テーブルのテーブル スキーマを次のように設定する場合:
 
 ```sql
 CREATE TABLE `t1` (
@@ -161,9 +161,9 @@ CREATE TABLE `t1` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_bin
 ```
 
-Save the `CREATE TABLE` statement above as a file (for example, `db_single.t1-schema.sql`), and run the following command:
+上記の`CREATE TABLE`ステートメントをファイル (たとえば、 `db_single.t1-schema.sql` ) として保存し、次のコマンドを実行します。
 
-{{< copyable "shell-regular" >}}
+{{< copyable "" >}}
 
 ```bash
 operate-schema set -s mysql-replica-01 task_single -d db_single -t t1 db_single.t1-schema.sql
@@ -184,9 +184,9 @@ operate-schema set -s mysql-replica-01 task_single -d db_single -t t1 db_single.
 }
 ```
 
-### Delete the table schema
+### テーブル スキーマを削除する {#delete-the-table-schema}
 
-To delete the table schema, run the `binlog-schema delete` command:
+テーブル スキーマを削除するには、次の`binlog-schema delete`コマンドを実行します。
 
 ```bash
 help binlog-schema delete
@@ -205,17 +205,17 @@ Global Flags:
   -s, --source strings   MySQL Source ID.
 ```
 
-> **Note:**
+> **ノート：**
 >
-> After the table schema maintained in DM is deleted, if a DDL/DML statement related to this table needs to be migrated to the downstream, DM will try to get the table schema from the following three sources in an orderly manner:
+> DM で保持されているテーブル スキーマが削除された後、このテーブルに関連する DDL/DML ステートメントをダウンストリームに移行する必要がある場合、DM は次の 3 つのソースから順番にテーブル スキーマを取得しようとします。
 >
-> * The `table_info` field in the checkpoint table
-> * The meta information in the optimistic sharding DDL
-> * The corresponding table in the downstream TiDB
+> -   チェックポイント テーブルの`table_info`フィールド
+> -   オプティミスティック シャーディング DDL のメタ情報
+> -   下流の TiDB の対応するテーブル
 
-If you want to delete the table schema of the ``` `db_single`.`t1` ``` table corresponding to the `mysql-replica-01` MySQL source in the `db_single` task, run the following command:
+`db_single`タスクで`mysql-replica-01` MySQL ソースに対応する`` `db_single`.`t1` ``テーブルのテーブル スキーマを削除する場合は、次のコマンドを実行します。
 
-{{< copyable "shell-regular" >}}
+{{< copyable "" >}}
 
 ```bash
 binlog-schema delete -s mysql-replica-01 task_single db_single t1

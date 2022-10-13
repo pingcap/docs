@@ -3,11 +3,11 @@ title: CREATE ROLE | TiDB SQL Statement Reference
 summary: An overview of the usage of CREATE ROLE for the TiDB database.
 ---
 
-# CREATE ROLE
+# 役割を作成 {#create-role}
 
-This statement creates a new role, which can be assigned to users as part of role-based access control.
+このステートメントは、ロールベースのアクセス制御の一部としてユーザーに割り当てることができる新しいロールを作成します。
 
-## Synopsis
+## あらすじ {#synopsis}
 
 ```ebnf+diagram
 CreateRoleStmt ::=
@@ -20,9 +20,9 @@ RoleSpec ::=
     Rolename
 ```
 
-## Examples
+## 例 {#examples}
 
-Create a new role for the analytics team, and a new user called `jennifer`:
+分析チーム用の新しいロールと、 `jennifer`という名前の新しいユーザーを作成します。
 
 ```sql
 $ mysql -uroot
@@ -51,7 +51,7 @@ mysql> GRANT analyticsteam TO jennifer;
 Query OK, 0 rows affected (0.01 sec)
 ```
 
-Note that by default `jennifer` needs to `SET ROLE analyticsteam` in order to be able to use the privileges associated with the role:
+ロールに関連付けられた権限を使用できるようにするには、デフォルトで`jennifer` ～ `SET ROLE analyticsteam`が必要であることに注意してください。
 
 ```sql
 $ mysql -ujennifer
@@ -100,7 +100,7 @@ mysql> SHOW TABLES IN test;
 1 row in set (0.00 sec)
 ```
 
-The statement `SET DEFAULT ROLE` can be used to associate a role to `jennifer` so that she will not have to execute the statement `SET ROLE` in order to assume the privileges associated with the role:
+ステートメント`SET DEFAULT ROLE`を使用してロールを`jennifer`に関連付けることができるため、ロールに関連付けられた権限を引き受けるためにステートメント`SET ROLE`を実行する必要はありません。
 
 ```sql
 $ mysql -uroot
@@ -153,20 +153,20 @@ mysql> SHOW TABLES IN test;
 1 row in set (0.00 sec)
 ```
 
-## MySQL compatibility
+## MySQL の互換性 {#mysql-compatibility}
 
-This statement is understood to be fully compatible with roles, which are a feature of MySQL 8.0. Any compatibility differences should be [reported via an issue](https://github.com/pingcap/tidb/issues/new/choose) on GitHub.
+このステートメントは、MySQL 8.0 の機能であるロールと完全に互換性があると理解されています。互換性の違いは、GitHub で[問題を介して報告された](https://github.com/pingcap/tidb/issues/new/choose)にする必要があります。
 
-## See also
+## こちらもご覧ください {#see-also}
 
-* [DROP ROLE](/sql-statements/sql-statement-drop-role.md)
-* [`GRANT <role>`](/sql-statements/sql-statement-grant-role.md)
-* [`REVOKE <role>`](/sql-statements/sql-statement-revoke-role.md)
-* [SET ROLE](/sql-statements/sql-statement-set-role.md)
-* [SET DEFAULT ROLE](/sql-statements/sql-statement-set-default-role.md)
+-   [ロールを削除](/sql-statements/sql-statement-drop-role.md)
+-   [`GRANT &#x3C;role>`](/sql-statements/sql-statement-grant-role.md)
+-   [`REVOKE &#x3C;role>`](/sql-statements/sql-statement-revoke-role.md)
+-   [ロールを設定](/sql-statements/sql-statement-set-role.md)
+-   [デフォルトの役割を設定](/sql-statements/sql-statement-set-default-role.md)
 
 <CustomContent platform="tidb">
 
-* [Role-Based Access Control](/role-based-access-control.md)
+-   [役割ベースのアクセス制御](/role-based-access-control.md)
 
 </CustomContent>

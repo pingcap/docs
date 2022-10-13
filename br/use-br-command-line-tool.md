@@ -3,84 +3,84 @@ title: Use BR Command-line for Backup and Restoration
 summary: Learn how to use the BR command line to back up and restore cluster data.
 ---
 
-# Use BR Command-line for Backup and Restoration
+# バックアップと復元に BR コマンドラインを使用する {#use-br-command-line-for-backup-and-restoration}
 
-This document describes how to back up and restore TiDB cluster data using the BR command line.
+このドキュメントでは、BR コマンド ラインを使用して TiDB クラスター データをバックアップおよび復元する方法について説明します。
 
-Make sure you have read [BR Tool Overview](/br/backup-and-restore-overview.md), especially [Usage restrictions](/br/backup-and-restore-overview.md#usage-restrictions) and [Some tips](/br/backup-and-restore-overview.md#some-tips).
+[BR ツールの概要](/br/backup-and-restore-overview.md) 、特に[利用制限](/br/backup-and-restore-overview.md#usage-restrictions)と[いくつかのヒント](/br/backup-and-restore-overview.md#some-tips)を読んだことを確認してください。
 
-## BR command-line description
+## BR コマンドラインの説明 {#br-command-line-description}
 
-A `br` command consists of sub-commands, options, and parameters.
+`br`コマンドは、サブコマンド、オプション、およびパラメーターで構成されます。
 
-* Sub-command: the characters without `-` or `--`.
-* Option: the characters that start with `-` or `--`.
-* Parameter: the characters that immediately follow behind and are passed to the sub-command or the option.
+-   サブコマンド: `-`または`--`のない文字。
+-   オプション: `-`または`--`で始まる文字。
+-   パラメータ: 直後に続き、サブコマンドまたはオプションに渡される文字。
 
-This is a complete `br` command:
+これは完全な`br`のコマンドです。
 
-{{< copyable "shell-regular" >}}
+{{< copyable "" >}}
 
 ```shell
 `br backup full --pd "${PDIP}:2379" -s "s3://backup-data/2022-01-30/"`
 ```
 
-Explanations for the above command are as follows:
+上記のコマンドの説明は次のとおりです。
 
-* `backup`: the sub-command of `br`.
-* `full`: the sub-command of `backup`.
-* `-s` (or `--storage`): the option that specifies the path where the backup files are stored.
-* `"s3://backup-data/2022-01-30/"`: the parameter of `-s`, indicating that backup data is stored to the `2022-01-30/` directory in the `backup-data` bucket of Amazon S3.
-* `--pd`: the option that specifies the Placement Driver (PD) service address.
-* `"${PDIP}:2379"`: the parameter of `--pd`.
+-   `backup` : `br`のサブコマンド。
+-   `full` : `backup`のサブコマンド。
+-   `-s` (または`--storage` ): バックアップ ファイルが格納されるパスを指定するオプション。
+-   `"s3://backup-data/2022-01-30/"` : `-s`のパラメータ。バックアップ データが Amazon S3 の`backup-data`バケットの`2022-01-30/`ディレクトリに保存されることを示します。
+-   `--pd` : Placement Driver (PD) サービス アドレスを指定するオプション。
+-   `"${PDIP}:2379"` : `--pd`のパラメーター。
 
-### Sub-commands
+### サブコマンド {#sub-commands}
 
-A `br` command consists of multiple layers of sub-commands. Currently, BR has the following sub-commands:
+`br`のコマンドは、サブコマンドの複数のレイヤーで構成されます。現在、BR には次のサブコマンドがあります。
 
-* `br backup`: used to back up the data of the TiDB cluster.
-* `br restore`: used to restore the data of the TiDB cluster.
+-   `br backup` : TiDB クラスターのデータをバックアップするために使用されます。
+-   `br restore` : TiDB クラスターのデータを復元するために使用されます。
 
-Each of the above sub-commands might still include the following sub-commands to specify the scope of an operation:
+上記の各サブコマンドには、操作の範囲を指定する次のサブコマンドが含まれる場合があります。
 
-* `full`: used to back up or restore all the cluster data.
-* `db`: used to back up or restore the specified database of the cluster.
-* `table`: used to back up or restore a single table in the specified database of the cluster.
+-   `full` : すべてのクラスター データのバックアップまたは復元に使用されます。
+-   `db` : クラスターの指定されたデータベースのバックアップまたは復元に使用されます。
+-   `table` : クラスターの指定されたデータベース内の単一のテーブルをバックアップまたは復元するために使用されます。
 
-### Common options
+### 共通オプション {#common-options}
 
-* `--pd`: used for connection, specifying the PD server address. For example, `"${PDIP}:2379"`.
-* `-h` (or `--help`): used to get help on all sub-commands. For example, `br backup --help`.
-* `-V` (or `--version`): used to check the version of BR.
-* `--ca`: specifies the path to the trusted CA certificate in the PEM format.
-* `--cert`: specifies the path to the SSL certificate in the PEM format.
-* `--key`: specifies the path to the SSL certificate key in the PEM format.
-* `--status-addr`: specifies the listening address through which BR provides statistics to Prometheus.
+-   `--pd` : 接続に使用され、PDサーバーのアドレスを指定します。たとえば、 `"${PDIP}:2379"`です。
+-   `-h` (または`--help` ): すべてのサブコマンドのヘルプを取得するために使用されます。たとえば、 `br backup --help`です。
+-   `-V` (または`--version` ): BR のバージョンを確認するために使用されます。
+-   `--ca` : 信頼できる CA 証明書へのパスを PEM 形式で指定します。
+-   `--cert` : SSL 証明書へのパスを PEM 形式で指定します。
+-   `--key` : SSL 証明書キーへのパスを PEM 形式で指定します。
+-   `--status-addr` : BR が Prometheus に統計情報を提供するためのリスニング アドレスを指定します。
 
-## Examples of using BR command-line to back up cluster data
+## BR コマンドラインを使用してクラスタ データをバックアップする例 {#examples-of-using-br-command-line-to-back-up-cluster-data}
 
-To back up cluster data, run the `br backup` command. You can add the `full` or `table` sub-command to specify the scope of your backup operation: the whole cluster or a single table.
+クラスター データをバックアップするには、 `br backup`コマンドを実行します。 `full`または`table`サブコマンドを追加して、バックアップ操作の範囲 (クラスター全体または単一のテーブル) を指定できます。
 
-- [Back up TiDB cluster snapshots](/br/br-usage-backup.md#back-up-tidb-cluster-snapshots)
-- [Back up a database](/br/br-usage-backup.md#back-up-a-database)
-- [Back up a table](/br/br-usage-backup.md#back-up-a-table)
-- [Back up multiple tables with table filter](/br/br-usage-backup.md#back-up-multiple-tables-with-table-filter)
-- [Back Up data on Amazon S3 using BR](/br/backup-storage-S3.md)
-- [Back up data on Google Cloud Storage using BR](/br/backup-storage-gcs.md)
-- [Back up data on Azure Blob Storage using BR](/br/backup-storage-azblob.md)
-- [Back up incremental data](/br/br-usage-backup.md#back-up-incremental-data)
-- [Encrypt data during backup](/br/br-usage-backup.md#encrypt-backup-data-at-the-backup-end)
+-   [TiDB クラスターのスナップショットをバックアップする](/br/br-usage-backup.md#back-up-tidb-cluster-snapshots)
+-   [データベースのバックアップ](/br/br-usage-backup.md#back-up-a-database)
+-   [テーブルをバックアップする](/br/br-usage-backup.md#back-up-a-table)
+-   [テーブル フィルターを使用して複数のテーブルをバックアップする](/br/br-usage-backup.md#back-up-multiple-tables-with-table-filter)
+-   [BR を使用して Amazon S3 にデータをバックアップする](/br/backup-storage-S3.md)
+-   [BR を使用して Google Cloud Storage にデータをバックアップする](/br/backup-storage-gcs.md)
+-   [BR を使用して Azure Blob Storage 上のデータをバックアップする](/br/backup-storage-azblob.md)
+-   [増分データのバックアップ](/br/br-usage-backup.md#back-up-incremental-data)
+-   [バックアップ中にデータを暗号化する](/br/br-usage-backup.md#encrypt-backup-data-at-the-backup-end)
 
-## Examples of using BR command-line to restore cluster data
+## BR コマンドラインを使用してクラスタ データを復元する例 {#examples-of-using-br-command-line-to-restore-cluster-data}
 
-To restore cluster data, run the `br restore` command. You can add the `full`, `db` or `table` sub-command to specify the scope of your restoration: the whole cluster, a database or a single table.
+クラスター データを復元するには、 `br restore`コマンドを実行します。 `full` 、 `db`または`table`サブコマンドを追加して、復元の範囲 (クラスター全体、データベース、または単一のテーブル) を指定できます。
 
-- [Restore TiDB cluster snapshots](/br/br-usage-restore.md#restore-tidb-cluster-snapshots)
-- [Restore a database](/br/br-usage-restore.md#restore-a-database)
-- [Restore a table](/br/br-usage-restore.md#restore-a-table)
-- [Restore multiple tables with table filter](/br/br-usage-restore.md#restore-multiple-tables-with-table-filter)
-- [Restore data on Amazon S3 using BR](/br/backup-storage-S3.md)
-- [Restore data on Google Cloud Storage using BR](/br/backup-storage-gcs.md)
-- [Restore data on Azure Blob Storage using BR](/br/backup-storage-azblob.md)
-- [Restore incremental data](/br/br-usage-restore.md#restore-incremental-data)
-- [Restore encrypted backup data](/br/br-usage-restore.md#restore-encrypted-backup-data)
+-   [TiDB クラスターのスナップショットを復元する](/br/br-usage-restore.md#restore-tidb-cluster-snapshots)
+-   [データベースを復元する](/br/br-usage-restore.md#restore-a-database)
+-   [テーブルを復元する](/br/br-usage-restore.md#restore-a-table)
+-   [テーブル フィルターを使用して複数のテーブルを復元する](/br/br-usage-restore.md#restore-multiple-tables-with-table-filter)
+-   [BR を使用して Amazon S3 にデータを復元する](/br/backup-storage-S3.md)
+-   [BR を使用して Google Cloud Storage にデータを復元する](/br/backup-storage-gcs.md)
+-   [BR を使用して Azure Blob Storage にデータを復元する](/br/backup-storage-azblob.md)
+-   [増分データの復元](/br/br-usage-restore.md#restore-incremental-data)
+-   [暗号化されたバックアップ データを復元する](/br/br-usage-restore.md#restore-encrypted-backup-data)

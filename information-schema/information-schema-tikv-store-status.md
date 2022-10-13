@@ -3,11 +3,11 @@ title: TIKV_STORE_STATUS
 summary: Learn the `TIKV_STORE_STATUS` information_schema table.
 ---
 
-# TIKV_STORE_STATUS
+# TIKV_STORE_STATUS {#tikv-store-status}
 
-The `TIKV_STORE_STATUS` table shows some basic information of TiKV nodes via PD's API, like the ID allocated in the cluster, address and port, and status, capacity, and the number of Region leaders of the current node.
+`TIKV_STORE_STATUS`番目のテーブルは、PD の API を介して TiKV ノードのいくつかの基本情報を示します。たとえば、クラスターに割り当てられた ID、アドレスとポート、ステータス、容量、現在のノードのリージョンリーダーの数などです。
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 USE information_schema;
@@ -41,24 +41,24 @@ DESC tikv_store_status;
 19 rows in set (0.00 sec)
 ```
 
-The descriptions of the columns in the `TIKV_STORE_STATUS` table are as follows:
+`TIKV_STORE_STATUS`テーブルの列の説明は次のとおりです。
 
-* `STORE_ID`: The ID of the Store.
-* `ADDRESS`: The address of the Store.
-* `STORE_STATE`: The identifier of the Store state, which corresponds to `STORE_STATE_NAME`.
-* `STORE_STATE_NAME`: The name of the Store state. The name is `Up`, `Offline`, or `Tombstone`.
-* `LABEL`: The label set for the Store.
-* `VERSION`: The version number of the Store.
-* `CAPACITY`: The storage capacity of the Store.
-* `AVAILABLE`: The remaining storage space of the Store.
-* `LEADER_COUNT`: The number of leaders on the Store.
-* `LEADER_WEIGHT`: The leader weight of the Store.
-* `LEADER_SCORE`: The leader score of the Store.
-* `LEADER_SIZE`: The approximate total data size (MB) of all leaders on the Store.
-* `REGION_COUNT`: The number of Regions on the Store.
-* `REGION_WEIGHT`: The Region weight of the Store.
-* `REGION_SCORE`: The Region score of the Store.
-* `REGION_SIZE`: The approximate total data size (MB) of all Regions on the Store.
-* `START_TS`: The timestamp when the Store is started.
-* `LAST_HEARTBEAT_TS`: The timestamp of the last heartbeat sent by the Store.
-* `UPTIME`: The total time since the Store starts.
+-   `STORE_ID` : ストアの ID。
+-   `ADDRESS` : ストアのアドレス。
+-   `STORE_STATE` : `STORE_STATE_NAME`に対応する Store 状態の識別子。
+-   `STORE_STATE_NAME` : Store 状態の名前。名前は`Up` 、 `Offline` 、または`Tombstone`です。
+-   `LABEL` : ストアに設定されたラベル。
+-   `VERSION` : ストアのバージョン番号。
+-   `CAPACITY` : ストアのストレージ容量。
+-   `AVAILABLE` : ストアの残りのストレージ容量。
+-   `LEADER_COUNT` : ストアのリーダーの数。
+-   `LEADER_WEIGHT` : ストアのリーダーの重み。
+-   `LEADER_SCORE` : ストアのリーダー スコア。
+-   `LEADER_SIZE` : ストアにあるすべてのリーダーのおおよその合計データ サイズ (MB)。
+-   `REGION_COUNT` : ストアのリージョン数。
+-   `REGION_WEIGHT` : ストアのリージョンの重み。
+-   `REGION_SCORE` : ストアのリージョンスコア。
+-   `REGION_SIZE` : ストアのすべてのリージョンのおおよその合計データ サイズ (MB)。
+-   `START_TS` : ストアが開始されたときのタイムスタンプ。
+-   `LAST_HEARTBEAT_TS` : ストアによって送信された最後のハートビートのタイムスタンプ。
+-   `UPTIME` : ストアが開始してからの合計時間。

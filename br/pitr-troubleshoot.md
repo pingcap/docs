@@ -3,31 +3,31 @@ title: Troubleshoot Log Backup
 summary: Learn about common problems of log backup and how to fix them.
 ---
 
-# Troubleshoot Log Backup
+# ログ バックアップのトラブルシューティング {#troubleshoot-log-backup}
 
-This document summarizes common problems during log backup and the solutions.
+このドキュメントでは、ログ バックアップ中の一般的な問題とその解決策をまとめています。
 
-## After restoring a downstream cluster using the `br restore point` command, data cannot be accessed from TiFlash. What should I do?
+## <code>br restore point</code>コマンドを使用してダウンストリーム クラスターを復元した後、TiFlash からデータにアクセスできません。私は何をすべきか？ {#after-restoring-a-downstream-cluster-using-the-code-br-restore-point-code-command-data-cannot-be-accessed-from-tiflash-what-should-i-do}
 
-In v6.2.0, PITR does not support restoring the TiFlash replicas of a cluster. After restoring data, you need to execute the following statement to set the TiFlash replica of the schema or table.
+v6.2.0 では、PITR はクラスターの TiFlash レプリカの復元をサポートしていません。データを復元した後、次のステートメントを実行して、スキーマまたはテーブルの TiFlash レプリカを設定する必要があります。
 
 ```sql
 ALTER TABLE table_name SET TIFLASH REPLICA @count;
 ```
 
-In v6.3.0 and later versions, after PITR completes data restore, BR automatically executes the `ALTER TABLE SET TIFLASH REPLICA` DDL statement according to the number of TiFlash replicas in the upstream cluster at the corresponding time. You can check the TiFlash replica setting using the following SQL statement:
+v6.3.0 以降のバージョンでは、PITR がデータの復元を完了した後、BR は、対応する時間の上流クラスター内の TiFlash レプリカの数に従って、 `ALTER TABLE SET TIFLASH REPLICA`の DDL ステートメントを自動的に実行します。次の SQL ステートメントを使用して、TiFlash レプリカの設定を確認できます。
 
-``` sql
+```sql
 SELECT * FROM INFORMATION_SCHEMA.tiflash_replica;
 ```
 
-> **Note:**
+> **ノート：**
 >
-> Currently, PITR does not support writing data directly to TiFlash during the restore phase. Therefore, TiFlash replicas are not available immediately after PITR completes data restore. Instead, you need to wait for a certain period of time for the data to be replicated from TiKV nodes. To check the replication progress, check the `progress` information in the `INFORMATION_SCHEMA.tiflash_replica` table.
+> 現在、PITR は、復元段階での TiFlash へのデータの直接書き込みをサポートしていません。したがって、PITR がデータの復元を完了した直後は、TiFlash レプリカは使用できません。代わりに、TiKV ノードからデータがレプリケートされるまで、一定期間待機する必要があります。レプリケーションの進行状況を確認するには、 `INFORMATION_SCHEMA.tiflash_replica`テーブルの`progress`情報を確認します。
 
-## What should I do if the `status` of a log backup task becomes `ERROR`?
+## ログ バックアップ タスクの<code>status</code>が<code>ERROR</code>になった場合はどうすればよいですか? {#what-should-i-do-if-the-code-status-code-of-a-log-backup-task-becomes-code-error-code}
 
-During a log backup task, the task status becomes `ERROR` if it fails and cannot be recovered after retrying. The following is an example:
+ログ バックアップ タスク中に失敗し、再試行後に回復できない場合、タスク ステータスは`ERROR`になります。次に例を示します。
 
 ```shell
 br log status --pd x.x.x.x:2379
@@ -46,13 +46,13 @@ error-happen-at[store=1]: 2022-07-25 14:54:44.467 +0000; gap=11h23m35s
   error-message[store=1]: retry time exceeds: and error failed to get initial snapshot: failed to get the snapshot (region_id = 94812): Error during requesting raftstore: message: "read index not ready, reason can not read index due to merge, region 94812" read_index_not_ready { reason: "can not read index due to merge" region_id: 94812 }: failed to get initial snapshot: failed to get the snapshot (region_id = 94812): Error during requesting raftstore: message: "read index not ready, reason can not read index due to merge, region 94812" read_index_not_ready { reason: "can not read index due to merge" region_id: 94812 }: failed to get initial snapshot: failed to get the snapshot (region_id = 94812): Error during requesting raftstore: message: "read index not ready, reason can not read index due to merge, region 94812" read_index_not_ready { reason: "can not read index due to merge" region_id: 94812 }
 ```
 
-To address this problem, check the error message for the cause and perform as instructed. After the problem is addressed, run the following command to resume the task:
+この問題を解決するには、エラー メッセージで原因を確認し、指示に従ってください。問題が解決したら、次のコマンドを実行してタスクを再開します。
 
 ```shell
 br log resume --task-name=task1 --pd x.x.x.x:2379
 ```
 
-After the backup task is resumed, you can check the status using `br log status`. The backup task continues when the task status becomes `NORMAL`.
+バックアップ タスクが再開されたら、 `br log status`を使用してステータスを確認できます。タスクのステータスが`NORMAL`になると、バックアップ タスクは続行されます。
 
 ```shell
 ● Total 1 Tasks.
@@ -66,16 +66,16 @@ After the backup task is resumed, you can check the status using `br log status`
 checkpoint[global]: 2022-07-25 14:46:50.118 +0000; gap=6m28s
 ```
 
-> **Note:**
+> **ノート：**
 >
-> This feature backs up multiple versions of data. When a long backup task fails and the status becomes `ERROR`, the checkpoint data of this task is set as a `safe point`, and the data of the `safe point` will not be garbage collected within 24 hours. Therefore, the backup task continues from the last checkpoint after resuming the error. If the task fails for more than 24 hours and the last checkpoint data has been garbage collected, an error will be reported when you resume the task. In this case, you can only run the `br log stop` command to stop the task first and then start a new backup task.
+> この機能は、複数のバージョンのデータをバックアップします。長時間のバックアップ タスクが失敗し、ステータスが`ERROR`になると、このタスクのチェックポイント データは`safe point`に設定され、 `safe point`のデータは 24 時間以内にガベージ コレクションされません。したがって、エラーが再開された後、バックアップ タスクは最後のチェックポイントから続行されます。タスクが 24 時間以上失敗し、最後のチェックポイント データがガベージ コレクションされている場合、タスクを再開するとエラーが報告されます。この場合、最初にタスクを停止してから新しいバックアップ タスクを開始する`br log stop`コマンドしか実行できません。
 
-## What should I do if the error message `ErrBackupGCSafepointExceeded` is returned when using the `br log resume` command to resume the suspended task?
+## <code>br log resume</code>コマンドを使用して中断されたタスクを再開するときに、エラー メッセージ<code>ErrBackupGCSafepointExceeded</code>が返された場合はどうすればよいですか? {#what-should-i-do-if-the-error-message-code-errbackupgcsafepointexceeded-code-is-returned-when-using-the-code-br-log-resume-code-command-to-resume-the-suspended-task}
 
 ```shell
 Error: failed to check gc safePoint, checkpoint ts 433177834291200000: GC safepoint 433193092308795392 exceed TS 433177834291200000: [BR:Backup:ErrBackupGCSafepointExceeded]backup GC safepoint exceeded
 ```
 
-After you pause a log backup task, to prevent the MVCC data from being garbage collected, the pausing task program sets the current checkpoint as the service safepoint automatically. This ensures that the MVCC data generated within 24 hours can remain. If the MVCC data of the backup checkpoint has been generated for more than 24 hours, the data of the checkpoint will be garbage collected, and the backup task is unable to resume.
+ログ バックアップ タスクを一時停止した後、MVCC データがガベージ コレクションされるのを防ぐために、一時停止中のタスク プログラムは、現在のチェックポイントをサービス セーフポイントとして自動的に設定します。これにより、24 時間以内に生成された MVCC データを確実に残すことができます。バックアップ チェックポイントの MVCC データが 24 時間以上生成されている場合、チェックポイントのデータはガベージ コレクションされ、バックアップ タスクは再開できません。
 
-To address this problem, delete the current task using `br log stop`, and then create a log backup task using `br log start`. At the same time, you can perform a full backup for subsequent PITR.
+この問題に対処するには、 `br log stop`を使用して現在のタスクを削除し、 `br log start`を使用してログ バックアップ タスクを作成します。同時に、後続の PITR のフル バックアップを実行できます。

@@ -3,220 +3,224 @@ title: TiDB Cloud Release Notes in 2022
 summary: Learn about the release notes of TiDB Cloud in 2022.
 ---
 
-# TiDB Cloud Release Notes in 2022
+# 2022 年のTiDB Cloudリリース ノート {#tidb-cloud-release-notes-in-2022}
 
-This page lists the release notes of [TiDB Cloud](https://en.pingcap.com/tidb-cloud/) in 2022.
+このページでは、2022 年の[TiDB Cloud](https://en.pingcap.com/tidb-cloud/)のリリース ノートを一覧表示します。
 
-## August 9, 2022
+## 2022 年 8 月 9 日 {#august-9-2022}
 
-* Add the support of the GCP region `Osaka` for [Dedicated Tier](/tidb-cloud/select-cluster-tier.md#dedicated-tier) cluster creation.
+-   GCP リージョン`Osaka` for [専用ティア](/tidb-cloud/select-cluster-tier.md#dedicated-tier)クラスタ作成のサポートを追加します。
 
-## August 2, 2022
+## 2022 年 8 月 2 日 {#august-2-2022}
 
-* The `4 vCPU, 16 GiB` node size of TiDB and TiKV is now in General Availability (GA).
+-   TiDB と TiKV の`4 vCPU, 16 GiB`ノード サイズは、一般提供 (GA) になりました。
 
-    * For each `4 vCPU, 16 GiB` TiKV node, the storage size is between 200 GiB and 2 TiB.
-    * Suggested usage scenarios:
+    -   `4 vCPU, 16 GiB` TiKV ノードごとに、ストレージ サイズは 200 GiB から 2 TiB です。
+    -   推奨される使用シナリオ:
 
-        * Low workload production environments for SMB
-        * PoC and staging environments
-        * Development environments
+        -   SMB 向けの低ワークロード本番環境
+        -   PoC とステージング環境
+        -   開発環境
 
-* Add a [Monitoring page](/tidb-cloud/built-in-monitoring.md) to the **Diagnosis** tab for [Dedicated Tier clusters](/tidb-cloud/select-cluster-tier.md#dedicated-tier).
+-   [専用層クラスター](/tidb-cloud/select-cluster-tier.md#dedicated-tier)の [**診断**] タブに[モニタリングページ](/tidb-cloud/built-in-monitoring.md)を追加します。
 
-    The Monitoring page provides a system-level entry for overall performance diagnosis. According to the top-down performance analysis methodology, the Monitoring page organizes TiDB performance metrics based on database time breakdown and displays these metrics in different colors. By checking these colors, you can identify performance bottlenecks of the entire system at the first glance, which significantly reduces performance diagnosis time and simplifies performance analysis and diagnosis.
+    [監視] ページには、全体的なパフォーマンス診断のためのシステム レベルのエントリが表示されます。トップダウンのパフォーマンス分析方法に従って、監視ページは、データベース時間の内訳に基づいて TiDB パフォーマンス メトリックを整理し、これらのメトリックを異なる色で表示します。これらの色をチェックすることで、システム全体のパフォーマンスのボトルネックを一目で特定できるため、パフォーマンスの診断時間が大幅に短縮され、パフォーマンスの分析と診断が簡素化されます。
 
-* Add a switch to enable or disable **Custom Pattern** on the **Data Import** page for CSV and Parquet source files.
+-   CSV および Parquet ソース ファイルの [**データ インポート]**ページで<strong>カスタム パターン</strong>を有効または無効にするスイッチを追加します。
 
-    The **Custom Pattern** feature is disabled by default. You can enable it when you are going to import CSV or Parquet files whose filenames match a certain pattern to a single target table.
+    **カスタム パターン**機能はデフォルトで無効になっています。ファイル名が特定のパターンに一致する CSV ファイルまたは Parquet ファイルを単一のターゲット テーブルにインポートするときに、これを有効にすることができます。
 
-    For more information, see [Import CSV Files](/tidb-cloud/import-csv-files.md) and [Import Apache Parquet Files](/tidb-cloud/import-parquet-files.md).
+    詳細については、 [CSV ファイルのインポート](/tidb-cloud/import-csv-files.md)および[Apache Parquet ファイルのインポート](/tidb-cloud/import-parquet-files.md)を参照してください。
 
-* Add TiDB Cloud Support Plans (Basic, Standard, Enterprise, and Premium) to meet different support needs of customers' organizations. For more information, see [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md).
+-   TiDB Cloudサポート プラン (Basic、Standard、Enterprise、Premium) を追加して、お客様の組織のさまざまなサポート ニーズに対応します。詳細については、 [TiDB Cloudのサポート](/tidb-cloud/tidb-cloud-support.md)を参照してください。
 
-* Optimize the UI of the [Active Clusters](https://tidbcloud.com/console/clusters) page and the cluster details page:
+-   [アクティブなクラスター](https://tidbcloud.com/console/clusters)ページとクラスターの詳細ページの UI を最適化します。
 
-    * Add **Connect** and **Import data** buttons to the **Active Clusters** page.
-    * Move **Connect** and **Import data** buttons to the upper-right corner on the cluster details page.
+    -   [**接続**] ボタンと [<strong>データのインポート]</strong>ボタンを [<strong>アクティブなクラスター]</strong>ページに追加します。
+    -   [**接続**] ボタンと [<strong>データのインポート]</strong>ボタンをクラスターの詳細ページの右上隅に移動します。
 
-## July 28, 2022
+## 2022 年 7 月 28 日 {#july-28-2022}
 
-* Add the **Allow Access from Anywhere** button to the **Security Quick Start** dialog, which allows your cluster to be accessible by any IP addresses. For more information, see [Configure Cluster Security Settings](/tidb-cloud/configure-security-settings.md).
+-   **[どこからでもアクセスを許可]**ボタンを [<strong>セキュリティ クイック スタート</strong>] ダイアログに追加します。これにより、任意の IP アドレスからクラスターにアクセスできるようになります。詳細については、 [クラスタセキュリティ設定の構成](/tidb-cloud/configure-security-settings.md)を参照してください。
 
-## July 26, 2022
+## 2022 年 7 月 26 日 {#july-26-2022}
 
-* Support [automatic hibernation and resuming](/tidb-cloud/select-cluster-tier.md#automatic-hibernation-and-resuming) for new [Developer Tier clusters](/tidb-cloud/select-cluster-tier.md#developer-tier).
+-   新しい[開発者層のクラスター](/tidb-cloud/select-cluster-tier.md#developer-tier)に対して[自動休止状態と再開](/tidb-cloud/select-cluster-tier.md#automatic-hibernation-and-resuming)をサポートします。
 
-    A Developer Tier cluster will not be deleted after 7 days of inactivity so you can still use it at any time until the one-year free trial ends. After 24 hours of inactivity, the Developer Tier cluster will hibernate automatically. To resume the cluster, either send a new connection to the cluster or click the **Resume** button in the TiDB Cloud console. The cluster will be resumed within 50 seconds and back to service automatically.
+    Developer Tier クラスターは、7 日間非アクティブになった後も削除されないため、1 年間の無料試用期間が終了するまでいつでも使用できます。非アクティブ状態が 24 時間続くと、Developer Tier クラスターは自動的に休止状態になります。クラスターを再開するには、クラスターに新しい接続を送信するか、 TiDB Cloudコンソールの [**再開**] ボタンをクリックします。クラスターは 50 秒以内に再開され、自動的にサービスに戻ります。
 
-* Add a user name prefix limitation for new [Developer Tier clusters](/tidb-cloud/select-cluster-tier.md#developer-tier).
+-   new [開発者層のクラスター](/tidb-cloud/select-cluster-tier.md#developer-tier)のユーザー名プレフィックス制限を追加します。
 
-    Whenever you use or set a database user name, you must include the prefix for your cluster in the user name. For more information, see [User name prefix](/tidb-cloud/select-cluster-tier.md#user-name-prefix).
+    データベース ユーザー名を使用または設定するときは常に、クラスターのプレフィックスをユーザー名に含める必要があります。詳細については、 [ユーザー名のプレフィックス](/tidb-cloud/select-cluster-tier.md#user-name-prefix)を参照してください。
 
-* Disable the backup and restore feature for [Developer Tier clusters](/tidb-cloud/select-cluster-tier.md#developer-tier).
+-   [開発者層のクラスター](/tidb-cloud/select-cluster-tier.md#developer-tier)のバックアップおよび復元機能を無効にします。
 
-    The backup and restore feature (including both automatic backup and manual backup) is disabled for Developer Tier clusters. You can still use [Dumpling](https://docs.pingcap.com/tidb/stable/dumpling-overview) to export your data as a backup.
+    Developer Tier クラスターでは、バックアップと復元の機能 (自動バックアップと手動バックアップの両方を含む) が無効になっています。 [Dumpling](https://docs.pingcap.com/tidb/stable/dumpling-overview)を使用して、データをバックアップとしてエクスポートできます。
 
-* Increase the storage size of a [Developer Tier](/tidb-cloud/select-cluster-tier.md#developer-tier) cluster from 500 MiB to 1 GiB.
-* Add breadcrumbs to the TiDB Cloud console to improve the navigation experience.
-* Support configuring multiple filter rules when you import data into TiDB Cloud.
-* Remove the **Traffic Filters** page from **Project Settings**, and remove the **Add Rules from Default Set** button from the **Connect to TiDB** dialog.
+-   [開発者層](/tidb-cloud/select-cluster-tier.md#developer-tier)クラスターのストレージ サイズを 500 MiB から 1 GiB に増やします。
 
-## July 19, 2022
+-   パンくずリストをTiDB Cloudコンソールに追加して、ナビゲーション エクスペリエンスを向上させます。
 
-* Provide a new option for [TiKV node size](/tidb-cloud/size-your-cluster.md#tikv-node-size): `8 vCPU, 32 GiB`. You can choose either `8 vCPU, 32 GiB` or `8 vCPU, 64 GiB` for an 8 vCPU TiKV node.
-* Support syntax highlighting in sample code provided in the [**Connect to TiDB**](/tidb-cloud/connect-to-tidb-cluster.md#connect-via-standard-connection) dialog to improve code readability. You can easily identify the parameters that you need to replace in the sample code.
-* Support automatically validating whether TiDB Cloud can access your source data after you confirm the import task on the [**Data Import Task**](/tidb-cloud/import-sample-data.md) page.
-* Change the theme color of the TiDB Cloud console to make it consistent with that of [PingCAP website](https://en.pingcap.com/).
+-   データをTiDB Cloudにインポートするときに、複数のフィルター ルールの構成をサポートします。
 
-## July 12, 2022
+-   **Project Settings**から<strong>Traffic Filters</strong>ページを削除し、 <strong>Connect to TiDB</strong>ダイアログから<strong>Add Rules from Default Set</strong>ボタンを削除します。
 
-* Add the **Validate** button to the [**Data Import Task**](/tidb-cloud/import-sample-data.md) page for Amazon S3, which helps you detect data access issues before the data import starts.
-* Add **Billing Profile** under the [**Payment Method**](/tidb-cloud/tidb-cloud-billing.md#payment-method) tab. By providing your tax registration number in **Billing Profile**, certain taxes might be exempted from your invoice. For more information, see [Edit billing profile information](/tidb-cloud/tidb-cloud-billing.md#edit-billing-profile-information).
+## 2022 年 7 月 19 日 {#july-19-2022}
 
-## July 05, 2022
+-   [TiKV ノードサイズ](/tidb-cloud/size-your-cluster.md#tikv-node-size) : `8 vCPU, 32 GiB`の新しいオプションを提供します。 8 vCPU TiKV ノードの場合は、 `8 vCPU, 32 GiB`または`8 vCPU, 64 GiB`のいずれかを選択できます。
+-   [**TiDB に接続する**](/tidb-cloud/connect-to-tidb-cluster.md#connect-via-standard-connection)ダイアログで提供されるサンプル コードで構文の強調表示をサポートし、コードの読みやすさを向上させます。サンプル コードで置き換える必要のあるパラメーターを簡単に特定できます。
+-   [**データ インポート タスク**](/tidb-cloud/import-sample-data.md)ページでインポート タスクを確認した後、 TiDB Cloudがソース データにアクセスできるかどうかの自動検証をサポートします。
+-   TiDB Cloudコンソールのテーマの色を変更して、 [PingCAP ウェブサイト](https://en.pingcap.com/)の色と一致させます。
 
-* The columnar storage [TiFlash](/tiflash/tiflash-overview.md) is now in General Availability (GA).
+## 2022 年 7 月 12 日 {#july-12-2022}
 
-    - TiFlash makes TiDB essentially an Hybrid Transactional/Analytical Processing (HTAP) database. Your application data is first stored in TiKV and then replicated to TiFlash via the Raft consensus algorithm. So it is real time replication from the row storage to the columnar storage.
-    - For tables with TiFlash replicas, the TiDB optimizer automatically determines whether to use either TiKV or TiFlash replicas based on the cost estimation.
+-   Amazon S3 の[**データ インポート タスク**](/tidb-cloud/import-sample-data.md)ページに [**検証**] ボタンを追加すると、データのインポートが開始される前にデータ アクセスの問題を検出できます。
+-   [**支払方法**](/tidb-cloud/tidb-cloud-billing.md#payment-method)タブの下に**課金プロファイル**を追加します。<strong>請求プロファイル</strong>で税務登録番号を提供することにより、特定の税金が請求書から免除される場合があります。詳細については、 [請求プロファイル情報の編集](/tidb-cloud/tidb-cloud-billing.md#edit-billing-profile-information)を参照してください。
 
-    To experience the benefits brought by TiFlash, see [TiDB Cloud HTAP Quick Start Guide](/tidb-cloud/tidb-cloud-htap-quickstart.md).
+## 2022 年 7 月 5 日 {#july-05-2022}
 
-* Support [increasing the storage size](/tidb-cloud/scale-tidb-cluster.md#increase-storage-size) of TiKV and TiFlash for a Dedicated Tier cluster.
-* Support showing the memory information in the node size field.
+-   カラムナ ストレージ[ティフラッシュ](/tiflash/tiflash-overview.md)は、一般提供 (GA) になりました。
 
-## June 28, 2022
+    -   TiFlash により、TiDB は本質的に Hybrid Transactional/Analytical Processing (HTAP) データベースになります。アプリケーション データはまず TiKV に保存され、次にRaftコンセンサス アルゴリズムを介して TiFlash に複製されます。つまり、行ストレージから列ストレージへのリアルタイム レプリケーションです。
+    -   TiFlash レプリカを含むテーブルの場合、TiDB オプティマイザーは、コストの見積もりに基づいて、TiKV または TiFlash レプリカのどちらを使用するかを自動的に決定します。
 
-* Upgrade TiDB Cloud Dedicated Tier from [TiDB v5.4.1](https://docs.pingcap.com/tidb/stable/release-5.4.1) to [TiDB v6.1.0](https://docs.pingcap.com/tidb/stable/release-6.1.0).
+    TiFlash がもたらす利点を体験するには、 [TiDB CloudHTAP クイック スタート ガイド](/tidb-cloud/tidb-cloud-htap-quickstart.md)を参照してください。
 
-## June 23, 2022
+-   Dedicated Tier クラスターの TiKV と TiFlash の[ストレージサイズの増加](/tidb-cloud/scale-tidb-cluster.md#increase-storage-size)をサポートします。
 
-* Increase the maximum [storage capacity of TiKV](/tidb-cloud/size-your-cluster.md#tikv-storage-size) on TiDB Cloud.
+-   ノード サイズ フィールドにメモリ情報を表示できるようになりました。
 
-    * 8 vCPU or 16 vCPU TiKV: support up to 4 TiB storage capacity.
-    * 4 vCPU TiKV: support up to 2 TiB storage capacity.
+## 2022 年 6 月 28 日 {#june-28-2022}
 
-## June 21, 2022
+-   TiDB Cloud Dedicated Tier を[TiDB v5.4.1](https://docs.pingcap.com/tidb/stable/release-5.4.1)から[TiDB v6.1.0](https://docs.pingcap.com/tidb/stable/release-6.1.0)にアップグレードします。
 
-* Add the support of the GCP region `Taiwan` for [Dedicated Tier](/tidb-cloud/select-cluster-tier.md#dedicated-tier) cluster creation.
-* Support [updating user profiles](/tidb-cloud/manage-user-access.md#manage-user-profiles) on the TiDB Cloud console, including first name, last time, company name, country, and phone number.
-* Provide the connection strings for MySQL, MyCLI, JDBC, Python, Go, and Node.js in the [**Connect to TiDB**](/tidb-cloud/connect-to-tidb-cluster.md#connect-via-standard-connection) dialog so you can easily connect to your TiDB cluster.
-* Support obtaining bucket regions from bucket URLs automatically during data import to save your effort to fill in such information.
+## 2022 年 6 月 23 日 {#june-23-2022}
 
-## June 16, 2022
+-   TiDB Cloudの最大値を[TiKVのストレージ容量](/tidb-cloud/size-your-cluster.md#tikv-storage-size)増やします。
 
-* Simplify the [cluster creation process](/tidb-cloud/create-tidb-cluster.md).
+    -   8 vCPU または 16 vCPU TiKV: 最大 4 TiB のストレージ容量をサポートします。
+    -   4 vCPU TiKV: 最大 2 TiB のストレージ容量をサポートします。
 
-    - When you create a cluster, TiDB Cloud provides a default cluster name. You can either use the default name or update it.
-    - When you create a cluster, you do not need to set the password on the **Create a Cluster** page.
-    - During or after the cluster creation, you can set the root password to access the cluster and also the IP addresses to connect to the cluster in the **Security Quick Start** dialog box.
+## 2022 年 6 月 21 日 {#june-21-2022}
 
-## June 14, 2022
+-   GCP リージョン`Taiwan` for [専用ティア](/tidb-cloud/select-cluster-tier.md#dedicated-tier)クラスタ作成のサポートを追加します。
+-   TiDB Cloudコンソールでサポート[ユーザー プロファイルの更新](/tidb-cloud/manage-user-access.md#manage-user-profiles) (名、最終時間、会社名、国、電話番号を含む)。
+-   [**TiDB に接続する**](/tidb-cloud/connect-to-tidb-cluster.md#connect-via-standard-connection)ダイアログで MySQL、MyCLI、JDBC、Python、Go、および Node.js の接続文字列を指定して、TiDB クラスターに簡単に接続できるようにします。
+-   データのインポート中にバケット URL からバケット領域を自動的に取得することをサポートして、そのような情報を入力する手間を省きます。
 
-* Upgrade TiDB Cloud to [TiDB v6.1.0](https://docs.pingcap.com/tidb/stable/release-6.1.0) for Developer Tier.
-* Optimize the entrance of **Project Settings**. From the TiDB Cloud console, you can choose a target project and go to its settings easily by clicking the **Project Settings** tab.
-* Optimize the experience of password expiration by providing expiration messages in the TiDB Cloud console.
+## 2022 年 6 月 16 日 {#june-16-2022}
 
-## June 7, 2022
+-   [クラスタ作成プロセス](/tidb-cloud/create-tidb-cluster.md)を単純化します。
 
-* Add the [Try Free](https://tidbcloud.com/free-trial) registration page to quickly sign up for TiDB Cloud.
-* Remove the **Proof of Concept plan** option from the plan selection page. If you want to apply for a 14-day PoC trial for free, go to the [Apply for PoC](https://en.pingcap.com/apply-for-poc/) page. For more information, see [Perform a Proof of Concept (PoC) with TiDB Cloud](/tidb-cloud/tidb-cloud-poc.md).
-* Improve the system security by prompting users who sign up for TiDB Cloud with emails and passwords to reset their passwords every 90 days. For more information, see [Manage user passwords](/tidb-cloud/manage-user-access.md#manage-user-passwords).
+    -   クラスターを作成すると、 TiDB Cloudはデフォルトのクラスター名を提供します。デフォルト名を使用することも、更新することもできます。
+    -   クラスターを作成する場合、[クラスターの**クラスタ]**ページでパスワードを設定する必要はありません。
+    -   クラスターの作成中または作成後に、[**セキュリティ クイック スタート**] ダイアログ ボックスで、クラスターにアクセスするためのルート パスワードと、クラスターに接続するための IP アドレスを設定できます。
 
-## May 24, 2022
+## 2022 年 6 月 14 日 {#june-14-2022}
 
-* Support customizing TiDB port number when you [create](/tidb-cloud/create-tidb-cluster.md) or [restore](/tidb-cloud/backup-and-restore.md#restore) a Dedicated Tier cluster.
+-   TiDB Cloudを Developer Tier の[TiDB v6.1.0](https://docs.pingcap.com/tidb/stable/release-6.1.0)にアップグレードします。
+-   **Project Settings**の入り口を最適化します。 TiDB Cloudコンソールから、ターゲット プロジェクトを選択し、[ <strong>Project Settings</strong> ] タブをクリックして簡単にその設定に移動できます。
+-   TiDB Cloudコンソールで有効期限メッセージを提供することにより、パスワード有効期限のエクスペリエンスを最適化します。
 
-## May 19, 2022
+## 2022 年 6 月 7 日 {#june-7-2022}
 
-* Add the support of the AWS region `Frankfurt` for [Developer Tier](/tidb-cloud/select-cluster-tier.md#developer-tier) cluster creation.
+-   [無料で試す](https://tidbcloud.com/free-trial)登録ページを追加して、 TiDB Cloudにすばやくサインアップします。
+-   プラン選択ページから**概念実証プラン**オプションを削除します。 14日間の無料PoCトライアルを申し込む場合は、 [PoCに申し込む](https://en.pingcap.com/apply-for-poc/)ページへ。詳細については、 [TiDB Cloudで概念実証 (PoC) を実行する](/tidb-cloud/tidb-cloud-poc.md)を参照してください。
+-   電子メールとパスワードを使用してTiDB Cloudにサインアップするユーザーに、90 日ごとにパスワードをリセットするよう求めることで、システムのセキュリティを向上させます。詳細については、 [ユーザーのパスワードを管理する](/tidb-cloud/manage-user-access.md#manage-user-passwords)を参照してください。
 
-## May 18, 2022
+## 2022 年 5 月 24 日 {#may-24-2022}
 
-* Support [signing up](https://tidbcloud.com/signup) TiDB Cloud with a GitHub account.
+-   Dedicated Tier クラスターを[作成](/tidb-cloud/create-tidb-cluster.md)または[戻す](/tidb-cloud/backup-and-restore.md#restore)使用する場合の TiDB ポート番号のカスタマイズをサポートします。
 
-## May 13, 2022
+## 2022 年 5 月 19 日 {#may-19-2022}
 
-* Support [signing up](https://tidbcloud.com/signup) TiDB Cloud with a Google account.
+-   AWS リージョン`Frankfurt` for [開発者層](/tidb-cloud/select-cluster-tier.md#developer-tier)クラスター作成のサポートを追加します。
 
-## May 1, 2022
+## 2022 年 5 月 18 日 {#may-18-2022}
 
-* Support configuring vCPU size of TiDB, TiKV, and TiFlash when you [create](/tidb-cloud/create-tidb-cluster.md) or [restore](/tidb-cloud/backup-and-restore.md#restore) a [Dedicated Tier](/tidb-cloud/select-cluster-tier.md#dedicated-tier) cluster.
-* Add the support of the AWS region `Mumbai` for cluster creation.
-* Update the compute, storage, and data transfer cost for [TiDB Cloud billing](/tidb-cloud/tidb-cloud-billing.md).
+-   GitHub アカウントで[サインアップ](https://tidbcloud.com/signup)つのTiDB Cloudをサポートします。
 
-## April 7, 2022
+## 2022 年 5 月 13 日 {#may-13-2022}
 
-* Upgrade TiDB Cloud to [TiDB v6.0.0](https://docs.pingcap.com/tidb/v6.0/release-6.0.0-dmr) for Developer Tier.
+-   Google アカウントで[サインアップ](https://tidbcloud.com/signup)つのTiDB Cloudをサポートします。
 
-## March 31, 2022
+## 2022 年 5 月 1 日 {#may-1-2022}
 
-TiDB Cloud is now in General Availability. You can [sign up](https://tidbcloud.com/signup) and select one of the following options:
+-   [作成](/tidb-cloud/create-tidb-cluster.md)または[戻す](/tidb-cloud/backup-and-restore.md#restore) a [専用ティア](/tidb-cloud/select-cluster-tier.md#dedicated-tier)クラスターの場合、TiDB、TiKV、および TiFlash の vCPU サイズの構成をサポートします。
+-   クラスター作成のための AWS リージョン`Mumbai`のサポートを追加します。
+-   [TiDB Cloud請求](/tidb-cloud/tidb-cloud-billing.md)のコンピューティング、ストレージ、およびデータ転送のコストを更新します。
 
-* Get started with [Developer Tier](/tidb-cloud/select-cluster-tier.md#developer-tier) for free.
-* Apply for [a 14-day PoC trial for free](https://en.pingcap.com/apply-for-poc/).
-* Get full access with [Dedicated Tier](/tidb-cloud/select-cluster-tier.md#dedicated-tier).
+## 2022 年 4 月 7 日 {#april-7-2022}
 
-## March 25, 2022
+-   TiDB Cloudを Developer Tier の[TiDB v6.0.0](https://docs.pingcap.com/tidb/v6.0/release-6.0.0-dmr)にアップグレードします。
 
-New feature:
+## 2022 年 3 月 31 日 {#march-31-2022}
 
-* Support [TiDB Cloud built-in alerting](/tidb-cloud/monitor-built-in-alerting.md).
+TiDB Cloudは一般提供になりました。次のいずれかのオプションを選択でき[サインアップ](https://tidbcloud.com/signup) 。
 
-    With the TiDB Cloud built-in alerting feature, you can be notified by emails whenever a TiDB Cloud cluster in your project triggers one of TiDB Cloud built-in alert conditions.
+-   [開発者層](/tidb-cloud/select-cluster-tier.md#developer-tier)から無料で始めましょう。
+-   [14 日間の無料 PoC トライアル](https://en.pingcap.com/apply-for-poc/)に申し込む。
+-   [専用ティア](/tidb-cloud/select-cluster-tier.md#dedicated-tier)でフル アクセスを取得します。
 
-## March 15, 2022
+## 2022 年 3 月 25 日 {#march-25-2022}
 
-General changes:
+新機能：
 
-* No cluster tier with the fixed cluster size any more. You can customize the [cluster size](/tidb-cloud/size-your-cluster.md) of TiDB, TiKV, and TiFlash easily.
-* Support adding [TiFlash](/tiflash/tiflash-overview.md) nodes for an existing cluster without TiFlash.
-* Support specifying the storage size (500 to 2048 GiB) when [creating a new cluster](/tidb-cloud/create-tidb-cluster.md). The storage size cannot be changed after the cluster is created.
-* Introduce a new public region: `eu-central-1`.
-* Deprecate 8 vCPU TiFlash and provide 16 vCPU TiFlash.
-* Separate the price of CPU and storage (both have 30% public preview discount).
-* Update the [billing information](/tidb-cloud/tidb-cloud-billing.md) and the [price table](https://en.pingcap.com/tidb-cloud/#pricing).
+-   サポート[TiDB Cloud組み込みアラート](/tidb-cloud/monitor-built-in-alerting.md) 。
 
-New features:
+    TiDB Cloud組み込みアラート機能を使用すると、プロジェクト内のTiDB CloudクラスターがTiDB Cloud組み込みアラート条件のいずれかをトリガーするたびに、電子メールで通知を受けることができます。
 
-* Support [the Prometheus and Grafana integration](/tidb-cloud/monitor-prometheus-and-grafana-integration.md).
+## 2022 年 3 月 15 日 {#march-15-2022}
 
-    With the Prometheus and Grafana integration, you can configure a [Prometheus](https://prometheus.io/) service to read key metrics from the TiDB Cloud endpoint and view the metrics using [Grafana](https://grafana.com/).
+一般的な変更:
 
-* Support assigning a default backup time based on the selected region of your new cluster.
+-   クラスター サイズが固定されたクラスター層はなくなりました。 TiDB、TiKV、TiFlashの[クラスターサイズ](/tidb-cloud/size-your-cluster.md)台を簡単にカスタマイズできます。
+-   TiFlash を使用しない既存のクラスターに[ティフラッシュ](/tiflash/tiflash-overview.md)のノードを追加することをサポートします。
+-   [新しいクラスターの作成](/tidb-cloud/create-tidb-cluster.md)の場合、ストレージ サイズ (500 ～ 2048 GiB) の指定をサポートします。クラスターの作成後にストレージ サイズを変更することはできません。
+-   新しいパブリック リージョンを導入する: `eu-central-1` .
+-   8 vCPU TiFlash を廃止し、16 vCPU TiFlash を提供します。
+-   CPU とストレージの価格を分けます (どちらも 30% のパブリック プレビュー割引があります)。
+-   [課金情報](/tidb-cloud/tidb-cloud-billing.md)と[価格表](https://en.pingcap.com/tidb-cloud/#pricing)を更新します。
 
-    For more information, see [Back up and Restore TiDB Cluster Data](/tidb-cloud/backup-and-restore.md).
+新機能:
 
-## March 04, 2022
+-   サポート[Prometheus と Grafana の統合](/tidb-cloud/monitor-prometheus-and-grafana-integration.md) 。
 
-New feature:
+    Prometheus と Grafana の統合により、 TiDB Cloudエンドポイントから主要なメトリックを読み取り、 [グラファナ](https://grafana.com/)を使用してメトリックを表示するように[プロメテウス](https://prometheus.io/)サービスを構成できます。
 
-* Support [the Datadog integration](/tidb-cloud/monitor-datadog-integration.md).
+-   新しいクラスターの選択されたリージョンに基づくデフォルトのバックアップ時間の割り当てをサポートします。
 
-    With the Datadog integration, you can configure TiDB Cloud to send metric data about your TiDB clusters to [Datadog](https://www.datadoghq.com/). After that, you can view these metrics in your Datadog dashboards directly.
+    詳細については、 [TiDBクラスタデータのバックアップと復元](/tidb-cloud/backup-and-restore.md)を参照してください。
 
-## February 15, 2022
+## 2022 年 3 月 4 日 {#march-04-2022}
 
-General change:
+新機能：
 
-* Upgrade TiDB Cloud to [TiDB v5.4.0](https://docs.pingcap.com/tidb/stable/release-5.4.0) for Developer Tier.
+-   サポート[Datadog 統合](/tidb-cloud/monitor-datadog-integration.md) 。
 
-Improvement:
+    Datadog 統合を使用すると、TiDB クラスターに関するメトリクス データを[データドッグ](https://www.datadoghq.com/)に送信するようにTiDB Cloudを構成できます。その後、これらのメトリクスを Datadog ダッシュボードで直接表示できます。
 
-* Support using custom file names when importing [CSV files](/tidb-cloud/import-csv-files.md) or [Apache Parquet files](/tidb-cloud/import-parquet-files.md) into TiDB Cloud.
+## 2022 年 2 月 15 日 {#february-15-2022}
 
-## January 11, 2022
+一般的な変更:
 
-General change:
+-   TiDB Cloudを Developer Tier の[TiDB v5.4.0](https://docs.pingcap.com/tidb/stable/release-5.4.0)にアップグレードします。
 
-* Upgrade TiDB Operator to [v1.2.6](https://docs.pingcap.com/tidb-in-kubernetes/stable/release-1.2.6).
+改善：
 
-Improvement:
+-   [CSV ファイル](/tidb-cloud/import-csv-files.md)または[Apache 寄木細工のファイル](/tidb-cloud/import-parquet-files.md)をTiDB Cloudにインポートする際のカスタム ファイル名の使用をサポートします。
 
-* Add a suggested option `--connect-timeout 15` to the MySQL client on the [**Connect**](/tidb-cloud/connect-to-tidb-cluster.md#connect-via-standard-connection) page.
+## 2022 年 1 月 11 日 {#january-11-2022}
 
-Bug fixes:
+一般的な変更:
 
-* Fix the issue that a user cannot create a cluster if the password contains a single quote.
-* Fix the issue that even an organization only has one owner, the owner can be deleted or changed to another role.
+-   TiDB Operatorを[v1.2.6](https://docs.pingcap.com/tidb-in-kubernetes/stable/release-1.2.6)にアップグレードします。
+
+改善：
+
+-   [**接続**](/tidb-cloud/connect-to-tidb-cluster.md#connect-via-standard-connection)ページで、提案されたオプション`--connect-timeout 15`を MySQL クライアントに追加します。
+
+バグの修正：
+
+-   パスワードに一重引用符が含まれていると、ユーザーがクラスターを作成できないという問題を修正します。
+-   組織に所有者が 1 人しかいない場合でも、所有者が削除されたり、別の役割に変更されたりする可能性があるという問題を修正します。
