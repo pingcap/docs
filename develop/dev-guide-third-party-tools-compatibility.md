@@ -7,7 +7,7 @@ summary: Describes TiDB compatibility issues with third-party tools found during
 
 > **Note:**
 >
-> The [Unsupported features](/mysql-compatibility.md#unsupported-features) lists features that are not supported in TiDB, including:
+> The [Unsupported features](/mysql-compatibility.md#unsupported-features) section lists the unsupported features in TiDB, including:
 >
 > - Stored procedures and functions
 > - Triggers
