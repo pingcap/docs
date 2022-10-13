@@ -35,7 +35,7 @@ In a TiDB application, to avoid data overflow, you should use a 64-bit integer o
 
 **Description**
 
-MySQL maintains a series of [server status variables starting with `Com_`](https://dev.mysql.com/doc/refman/8.0/en/server-status-variables.html#statvar_Com_xxx) to keep track of the total number of operations you have performed on the database. For example, `Com_select` records the total number of `SELECT` statements initiated by MySQL since it was last started (even if the statements were not queried successfully). TiDB does not maintain these variables. You can use the statement `SHOW GLOBAL STATUS LIKE 'Com_%'` to see the difference between TiDB and MySQL.
+MySQL maintains a series of [server status variables starting with `Com_`](https://dev.mysql.com/doc/refman/8.0/en/server-status-variables.html#statvar_Com_xxx) to keep track of the total number of operations you have performed on the database. For example, `Com_select` records the total number of `SELECT` statements initiated by MySQL since it was last started (even if the statements were not queried successfully). TiDB does not maintain these variables. You can use the statement [`SHOW GLOBAL STATUS LIKE 'Com_%'`](/sql-statements/sql-statement-show-status.md) to see the difference between TiDB and MySQL.
 
 **Way to avoid**
 
@@ -120,11 +120,11 @@ Do not set the `enablePacketDebug` parameter.
 
 **Description**
 
-TiDB does not support `UpdatableResultSet`. **DO NOT** specify the `ResultSet.CONCUR_UPDATABLE` parameter or update data inside the `ResultSet`.
+TiDB does not support `UpdatableResultSet`. **DO NOT** specify the `ResultSet.CONCUR_UPDATABLE` parameter and **DO NOT** update data inside the `ResultSet`.
 
 **Way to avoid**
 
-To ensure data consistency by transaction, you can use additional `UPDATE` statements to update data.
+To ensure data consistency by transaction, you can use `UPDATE` statements to update data.
 
 ## MySQL JDBC bugs
 
@@ -150,7 +150,7 @@ The database connection might hang under certain conditions when using MySQL Con
 
 **Way to avoid**
 
-This is a known issue, and MySQL Connector/J has not merged the fixed code so far.
+This is a known issue and as of October 12, 2022, MySQL Connector/J has not merged the fixed code so far.
 
 TiDB fixes it in the following ways:
 
