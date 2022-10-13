@@ -66,47 +66,34 @@ export const getAllMdList = (tocFile) => {
   return filteredLinkList;
 };
 
-const checkDestDir = (destPath) => {
+export const copySingleFileSync = (srcPath, destPath) => {
   const dir = path.dirname(destPath);
 
   if (!fs.existsSync(dir)) {
     // console.info(`Create empty dir: ${dir}`);
     fs.mkdirSync(dir, { recursive: true });
   }
-};
-
-export const copySingleFileSync = (srcPath, destPath) => {
-  checkDestDir(destPath);
 
   fs.copyFileSync(srcPath, destPath);
 };
 
-export const copyFileWithCustomContentSync = (srcPath, destPath, handler) => {
-  const srcContent = fs.readFileSync(srcPath).toString();
-  const fileContent = handler(srcContent);
-  writeFileSync(destPath, fileContent);
-};
-
 export const writeFileSync = (destPath, fileContent) => {
-  checkDestDir(destPath);
+  const dir = path.dirname(destPath);
+
+  if (!fs.existsSync(dir)) {
+    // console.info(`Create empty dir: ${dir}`);
+    fs.mkdirSync(dir, { recursive: true });
+  }
 
   fs.writeFileSync(destPath, fileContent);
 };
 
 const getMds = (src) => {
-  return glob.sync(src + "/**/*.md", {
-    ignore: ["**/node_modules/**", "./node_modules/**"],
-  });
+  return glob.sync(src + "/**/*.md");
 };
 
 export const getMdFileList = (prefix) => {
   return getMds(prefix);
-};
-
-export const getFileList = (prefix) => {
-  return glob.sync(prefix + "/**/*", {
-    ignore: ["**/node_modules/**", "./node_modules/**"],
-  });
 };
 
 const getAllFiles = (dirPath, arrayOfFiles) => {
@@ -133,18 +120,6 @@ export const copyDirectorySync = (srcPath, destPath) => {
   });
 };
 
-export const copyDirectoryWithCustomContentSync = (
-  srcPath,
-  destPath,
-  handler
-) => {
-  const allFiles = getAllFiles(srcPath);
-  allFiles.forEach((filePath) => {
-    const relativePath = path.relative(srcPath, filePath);
-    copyFileWithCustomContentSync(filePath, destPath + relativePath, handler);
-  });
-};
-
 export const astNode2mdStr = (astNode) => {
   const result = toMarkdown(astNode, {
     bullet: "-",
@@ -155,15 +130,4 @@ export const astNode2mdStr = (astNode) => {
     ],
   });
   return result;
-};
-
-export const removeCustomContent = (type, content = "") => {
-  const TIDB_CUSTOM_CONTENT_REGEX =
-    /<CustomContent +platform=["']tidb["'] *>(.|\n)*?<\/CustomContent>\n/g;
-  const TIDB_CLOUD_CONTENT_REGEX =
-    /<CustomContent +platform=["']tidb-cloud["'] *>(.|\n)*?<\/CustomContent>\n/g;
-  if (type === "tidb") {
-    return content.replaceAll(TIDB_CLOUD_CONTENT_REGEX, "");
-  }
-  return content.replaceAll(TIDB_CUSTOM_CONTENT_REGEX, "");
 };
