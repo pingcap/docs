@@ -248,7 +248,7 @@ PARTITION BY RANGE (`id`)
  PARTITION `P_MAXVALUE` VALUES LESS THAN (MAXVALUE))
 ```
 
-Range INTERVAL partitioning also works with [Range COLUMNS](#range-columns-partitioning) partitioning.
+Range INTERVAL partitioning also works with single column [Range COLUMNS](#range-columns-partitioning) partitioning.
 
 For example:
 
@@ -305,6 +305,7 @@ ALTER TABLE table_name LAST PARTITION LESS THAN (<expression>)
 - There is no change in the output format of `SHOW CREATE TABLE` to keep MySQL compatibility.
 - The new `ALTER` syntax applies to existing tables conforming to INTERVAL. You do not need to create these tables with the `INTERVAL` syntax.
 - For `RANGE COLUMNS`, only integer, date, and datetime column types are supported.
+- For `RANGE COLUMNS`, only a single partitioning column is supported.
 
 ### List partitioning
 
