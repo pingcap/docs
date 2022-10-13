@@ -193,6 +193,12 @@ mysql> SELECT * FROM t1;
 - Range: `[0, 7]`
 - Sets the week format used by the `WEEK()` function.
 
+### error_count
+
+- Scope: NONE
+- Type: Integer
+- A read-only variable that indicates the number of errors that resulted from the last statement that generated messages.
+
 ### foreign_key_checks
 
 - Scope: SESSION | GLOBAL
@@ -288,6 +294,16 @@ This variable is an alias for `last_insert_id`.
 - Range: `[1024, 1073741824]`
 - Unit: Bytes
 - The maximum size of a packet for the MySQL protocol.
+
+### max_connections
+
+- Scope: GLOBAL
+- Persists to cluster: No
+- Type: Integer
+- Default value: `0`
+- Range: `[0, 100000]`
+- The maximum number of connections permitted for a single TiDB instance.
+- The value of `0` means no limit.
 
 ### max_execution_time
 
@@ -412,21 +428,57 @@ This variable is an alias for `last_insert_id`.
 
 ### ssl_ca
 
+<CustomContent platform="tidb">
+
 - Scope: NONE
 - Default value: ""
-- The location of the certificate authority file (if there is one).
+- The location of the certificate authority file (if there is one). The value of this variable is defined by the TiDB configuration item [`ssl-ca`](/tidb-configuration-file.md#ssl-ca).
+   
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+- Scope: NONE
+- Default value: ""
+- The location of the certificate authority file (if there is one). The value of this variable is defined by the TiDB configuration item [`ssl-ca`](https://docs.pingcap.com/tidb/stable/tidb-configuration-file#ssl-ca).
+   
+</CustomContent>
 
 ### ssl_cert
 
+<CustomContent platform="tidb">
+
 - Scope: NONE
 - Default value: ""
-- The location of the certificate file (if there is a file) that is used for SSL/TLS connections.
+- The location of the certificate file (if there is a file) that is used for SSL/TLS connections. The value of this variable is defined by the TiDB configuration item [`ssl-cert`](/tidb-configuration-file.md#ssl-cert).
+   
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+- Scope: NONE
+- Default value: ""
+- The location of the certificate file (if there is a file) that is used for SSL/TLS connections. The value of this variable is defined by the TiDB configuration item [`ssl-cert`](https://docs.pingcap.com/tidb/stable/tidb-configuration-file#ssl-cert).
+   
+</CustomContent>
 
 ### ssl_key
 
+<CustomContent platform="tidb">
+
 - Scope: NONE
 - Default value: ""
-- The location of the private key file (if there is one) that is used for SSL/TLS connections.
+- The location of the private key file (if there is one) that is used for SSL/TLS connections. The value of this variable is defined by TiDB configuration item [`ssl-key`](/tidb-configuration-file.md#ssl-cert).
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+- Scope: NONE
+- Default value: ""
+- The location of the private key file (if there is one) that is used for SSL/TLS connections. The value of this variable is defined by TiDB configuration item [`ssl-key`](https://docs.pingcap.com/tidb/stable/tidb-configuration-file#ssl-key).
+
+</CustomContent>
 
 ### system_time_zone
 
