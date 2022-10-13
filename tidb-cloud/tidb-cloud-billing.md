@@ -141,3 +141,14 @@ To edit the billing profile information, perform the following steps:
 2. Click **Billing**.
 3. Click the **Payment Method** tab.
 4. Edit the billing profile information, and then click **Save**.
+
+## Contract
+
+If you have agreed with our sales on a subscription and received an email to review and accept the agreement online, you can do the following:
+
+1. Click the account name in the upper-right corner of the TiDB Cloud console.
+2. Click **Billing**.
+3. Click **Contract**. The contract list is displayed.
+4. Click **Download**, **Accept**, or **Reject** according to your need.
+
+To learn more about contacts, feel free to [contact our sales](https://www.pingcap.com/contact-us/).
