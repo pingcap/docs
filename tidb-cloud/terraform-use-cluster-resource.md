@@ -699,7 +699,7 @@ You can scale a TiDB cluster when its status is `AVAILABLE`.
    Apply complete! Resources: 0 added, 1 changed, 0 destroyed.
    ```
 
-Wait for the status from `MODIFYING` to `AVAILABLE`.
+Wait for the status to turn from `MODIFYING` to `AVAILABLE`.
 
 ### Pause or resume a cluster
 
