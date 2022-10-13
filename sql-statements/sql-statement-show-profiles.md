@@ -3,13 +3,13 @@ title: SHOW PROFILES
 summary: An overview of the usage of SHOW PROFILES for the TiDB database.
 ---
 
-# プロファイルを表示 {#show-profiles}
+# プロフィールを表示 {#show-profiles}
 
 `SHOW PROFILES`ステートメントは現在、空の結果のみを返します。
 
 ## あらすじ {#synopsis}
 
-**ShowStmt：**
+**表示ステートメント:**
 
 ![ShowStmt](/media/sqlgram/ShowStmt.png)
 
@@ -18,13 +18,13 @@ summary: An overview of the usage of SHOW PROFILES for the TiDB database.
 {{< copyable "" >}}
 
 ```sql
-SHOW PROFILES
+SHOW PROFILES;
 ```
 
 ```
 Empty set (0.00 sec)
 ```
 
-## MySQLの互換性 {#mysql-compatibility}
+## MySQL の互換性 {#mysql-compatibility}
 
-このステートメントは、MySQLとの互換性のためにのみ含まれています。 `SHOW PROFILES`を実行すると、常に空の結果が返されます。
+このステートメントは、MySQL との互換性のためにのみ含まれています。 `SHOW PROFILES`を実行すると、常に空の結果が返されます。
