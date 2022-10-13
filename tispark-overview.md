@@ -34,7 +34,7 @@ Also, TiSpark supports distributed writes to TiKV. Compared with writes to TiDB 
 
 ## Requirements
 
-+ TiSpark supports Spark >= 2.3, but does not support any Spark versions earlier than 2.3.
++ TiSpark supports Spark >= 2.3.
 + TiSpark requires JDK 1.8 and Scala 2.11/2.12.
 + TiSpark runs in any Spark mode such as `YARN`, `Mesos`, and `Standalone`.
 
@@ -42,15 +42,15 @@ Also, TiSpark supports distributed writes to TiKV. Compared with writes to TiDB 
 
 > **Warning:**
 >
-> You may find TiSpark can be deployment by TiUP in this [doc](/tispark-deployment-topology.md). Note that it has been deprecated.
+> Deploying TiSpark using TiUP as described in this [doc](/tispark-deployment-topology.md) has been deprecated.
 
 Since TiSpark is a TiDB connector of Spark, to use it, a running Spark cluster is required.
 
-Here we give some basic advice for the deployment of Spark. Please Turn to the [Spark official website](https://spark.apache.org/docs/latest/hardware-provisioning.html) for detailed hardware recommendations.
+This document provides basic advice on deploying Spark. Please turn to the [Spark official website](https://spark.apache.org/docs/latest/hardware-provisioning.html) for detailed hardware recommendations.
 
 For independent deployment of Spark cluster:
 
-+ It is recommended to allocate 32G memory for Spark. Reserve at least 25% of the memory for the operating system and the buffer cache.
++ It is recommended to allocate 32 GB memory for Spark. Reserve at least 25% of the memory for the operating system and the buffer cache.
 + It is recommended to provision at least 8 to 16 cores per machine for Spark. First, you must assign all the CPU cores to Spark.
 
 The following is an example based on the `spark-env.sh` configuration:
@@ -61,15 +61,13 @@ SPARK_WORKER_MEMORY = 32g
 SPARK_WORKER_CORES = 8
 ```
 
-For the hybrid deployment of Spark and TiKV, add the resources required by Spark to the resources reserved in TiKV, and allocate 25% of the memory for the system.
+## Get TiSpark
 
-## Getting TiSpark
-
-TiSpark is a third-party jar package for Spark that provides the ability to read/write TiKV
+TiSpark is a third-party jar package for Spark that provides the ability to read and write TiKV.
 
 ### Get mysql-connector-j
 
-We will not provide the `mysql-connector-java` dependency because of the limit of the GPL license.
+The `mysql-connector-java` dependency is no longer provided because of the limit of the GPL license.
 
 The following versions of TiSpark's jar will no longer include `mysql-connector-java`.
 
@@ -77,11 +75,11 @@ The following versions of TiSpark's jar will no longer include `mysql-connector-
 - TiSpark > 2.5.1 for TiSpark 2.5.x
 - TiSpark > 2.4.3 for TiSpark 2.4.x
 
-Now, TiSpark needs `mysql-connector-java` for writing and auth. Please import `mysql-connector-java` manually when you need to write or auth.
+However, TiSpark needs `mysql-connector-java` for writing and authentication. In such cases, you need to import `mysql-connector-java` manually when you need to write or auth using either of the following methods:
 
-- you can import it by putting the jar into spark jars file
+- Put `mysql-connector-java` into spark jars file.
 
-- you can also import it when you submit spark job like
+- Import `mysql-connector-java` when you submit a spark job. See the following example:
 
 ```
 spark-submit --jars tispark-assembly-3.0_2.12-3.1.0-SNAPSHOT.jar,mysql-connector-java-8.0.29.jar
@@ -89,31 +87,35 @@ spark-submit --jars tispark-assembly-3.0_2.12-3.1.0-SNAPSHOT.jar,mysql-connector
 
 ### Choose TiSpark Version
 
-You can choose TiSpark version according to your TiDB and Spark version
+You can choose TiSpark version according to your TiDB and Spark version.
 
-| TiSpark version | TiDB、TiKV、PD version | Spark version | Scala version |
-| ---------------  | -------------------- | ------------- | ------------- |
-| 2.4.x-scala_2.11 | 5.x, 4.x             | 2.3.x, 2.4.x   | 2.11          |
-| 2.4.x-scala_2.12 | 5.x, 4.x             | 2.4.x         | 2.12          |
-| 2.5.x            | 5.x, 4.x             | 3.0.x, 3.1.x   | 2.12          |
-| 3.0.x            | 5.x, 4.x             | 3.0.x, 3.1.x, 3.2.x|2.12|
-| 3.1.x            | 6.x, 5.x, 4.x             | 3.0.x, 3.1.x, 3.2.x, 3.3.x|2.12|
+| TiSpark version | TiDB, TiKV, PD version | Spark version | Scala version |
+| ---------------  |------------------------| ------------- | ------------- |
+| 2.4.x-scala_2.11 | 5.x, 4.x               | 2.3.x, 2.4.x   | 2.11          |
+| 2.4.x-scala_2.12 | 5.x, 4.x               | 2.4.x         | 2.12          |
+| 2.5.x            | 5.x, 4.x               | 3.0.x, 3.1.x   | 2.12          |
+| 3.0.x            | 5.x, 4.x               | 3.0.x, 3.1.x, 3.2.x|2.12|
+| 3.1.x            | 6.x, 5.x, 4.x          | 3.0.x, 3.1.x, 3.2.x, 3.3.x|2.12|
 
-- TiSpark 2.4.3, 2.5.2, 3.0.2, 3.1.0 is the latest stable version, which is highly recommended.
+TiSpark 2.4.4, 2.5.2, 3.0.2 and 3.1.1 are the latest stable versions and are highly recommended.
 
 ### Get TiSpark jar
+
+You can get the TiSpark jar using one of the following methods:
 
 - get from [maven central](https://search.maven.org/) and search with GroupId [![Maven Search](https://img.shields.io/badge/com.pingcap/tispark-green.svg)](http://search.maven.org/#search%7Cga%7C1%7Cpingcap)
 - get from [TiSpark releases](https://github.com/pingcap/tispark/releases)
 - build from source with the steps below
 
-Currently, java8 is the only choice to build TiSpark, run mvn -version to check.
+> **Note:**
+>
+> Currently, java8 is the only choice to build TiSpark, run mvn -version to check.
 
 ```
 git clone https://github.com/pingcap/tispark.git
 ```
 
-Run the following command under the TiSpark root directory:
+Run the following command under the TiSpark root directory.
 
 ```
 // add -Dmaven.test.skip=true to skip the tests
@@ -124,7 +126,7 @@ mvn clean install -Dmaven.test.skip=true -Pspark3.2.1
 
 ### TiSpark jar's Artifact ID
 
-> The Artifact ID of TiSpark is a bit different in different TiSpark version
+The Artifact ID of TiSpark varies with TiSpark versions.
 
 | TiSpark version               | Artifact ID                                        |
 |-------------------------------| -------------------------------------------------- |
