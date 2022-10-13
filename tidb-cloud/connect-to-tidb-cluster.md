@@ -81,6 +81,8 @@ To connect to a Dedicated Tier cluster via standard connection, perform the foll
 
 5. Under **Step 3: Connect with a SQL client** in the dialog, click the tab of your preferred connection method, and then refer to the connection string and sample code on the tab to connect to your cluster.
 
+    Note that you need to use the path of the downloaded CA file as the argument of the `--ssl-ca` option in the connection string.
+
 </div>
 </SimpleTab>
 
