@@ -31,7 +31,7 @@ Once see an Airbyte banner, the UI is ready to go at [http://localhost:8000](htt
 
 ## Set TiDB Connector
 
-> For TiDB as the source, here is a step-by-step tutorial about [Using Airbyte to Migrate Data from TiDB Cloud to Snowflake](https://www.pingcap.com/blog/using-airbyte-to-migrate-data-from-tidb-cloud-to-snowflake/).
+For TiDB as the source, here is a step-by-step tutorial about [Using Airbyte to Migrate Data from TiDB Cloud to Snowflake](https://www.pingcap.com/blog/using-airbyte-to-migrate-data-from-tidb-cloud-to-snowflake/).
 
 Conveniently, the steps are the same for setting TiDB as source or as destination。
 
