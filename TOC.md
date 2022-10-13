@@ -164,6 +164,7 @@
   - [Troubleshoot Hotspot Issues](/troubleshoot-hot-spot-issues.md)
   - [Troubleshoot Increased Read and Write Latency](/troubleshoot-cpu-issues.md)
   - [Save and Restore the On-Site Information of a Cluster](/sql-plan-replayer.md)
+  - [Troubleshoot TiDB OOM Issues](/troubleshoot-tidb-oom.md)
   - [Troubleshoot Cluster Setup](/troubleshoot-tidb-cluster.md)
   - [Troubleshoot High Disk I/O Usage](/troubleshoot-high-disk-io.md)
   - [Troubleshoot Lock Conflicts](/troubleshoot-lock-conflicts.md)
@@ -345,7 +346,7 @@
   - PingCAP Clinic Diagnostic Service
     - [Overview](/clinic/clinic-introduction.md)
     - [Quick Start](/clinic/quick-start-with-clinic.md)
-    - [Troubleshoot TiDB Cluster Using PingCAP Clinic](/clinic/clinic-user-guide-for-tiup.md)
+    - [Troubleshoot Clusters Using PingCAP Clinic](/clinic/clinic-user-guide-for-tiup.md)
     - [PingCAP Clinic Diagnostic Data](/clinic/clinic-data-instruction-for-tiup.md)
   - [TiDB Operator](/tidb-operator-overview.md)
   - [Dumpling](/dumpling-overview.md)
