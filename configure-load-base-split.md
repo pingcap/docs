@@ -39,7 +39,7 @@ To modify the parameter, take either of the following two methods:
     ```sql
     # Set the QPS threshold to 1500
     SET config tikv split.qps-threshold=1500;
-    # Set the traffic threshold to 15 MiB (15 * 1024 * 1024)
+    # Set the byte threshold to 15 MiB (15 * 1024 * 1024)
     SET config tikv split.byte-threshold=15728640;
     # Set the CPU usage threshold to 50%
     SET config tikv split.region-cpu-overload-threshold-ratio=0.5;
