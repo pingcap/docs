@@ -13,7 +13,7 @@ This document describes the typical PoC procedures and aims to help you quickly 
 
 If you are interested in doing a PoC, feel free to contact <a href="mailto:tidbcloud-support@pingcap.com">PingCAP</a> before you get started. The support team can help you create a test plan and walk you through the PoC procedures smoothly.
 
-Alternatively, you can [create a Developer Tier](/tidb-cloud/tidb-cloud-quickstart.md#step-1-create-a-tidb-cluster) (one-year free trial) to get familiar with TiDB Cloud for a quick evaluation. Note that the Developer Tier has some [special terms and conditions](/tidb-cloud/select-cluster-tier.md#developer-tier-special-terms-and-conditions).
+Alternatively, you can [create a Serverless Tier](/tidb-cloud/tidb-cloud-quickstart.md#step-1-create-a-tidb-cluster) to get familiar with TiDB Cloud for a quick evaluation. Note that the Serverless Tier has some [special terms and conditions](/tidb-cloud/select-cluster-tier.md#serverless-tier-special-terms-and-conditions).
 
 ## Overview of the PoC procedures
 
@@ -87,7 +87,7 @@ For a newly created cluster, note the following configurations:
 
 Next, you can load your database schemas to the TiDB cluster, including tables and indexes.
 
-Because the amount of PoC credits is limited, to maximize the value of credits, it is recommended that you create a [Developer Tier cluster](/tidb-cloud/select-cluster-tier.md#developer-tier) (one-year free trial) for compatibility tests and preliminary analysis on TiDB Cloud.
+Because the amount of PoC credits is limited, to maximize the value of credits, it is recommended that you create a [Serverless Tier cluster](/tidb-cloud/select-cluster-tier.md#serverless-tier) (one-year free trial) for compatibility tests and preliminary analysis on TiDB Cloud.
 
 TiDB Cloud is highly compatible with MySQL 5.7. You can directly import your data into TiDB if it is MySQL-compatible or can be adapted to be compatible with MySQL.
 

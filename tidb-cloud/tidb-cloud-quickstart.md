@@ -13,12 +13,12 @@ This tutorial guides you through an easy way to get started with your TiDB Cloud
 
 ## Step 1. Create a TiDB cluster
 
-You can either create a free [Developer Tier](/tidb-cloud/select-cluster-tier.md#developer-tier) cluster or a [Dedicated Tier](/tidb-cloud/select-cluster-tier.md#dedicated-tier).
+You can either create a free [Serverless Tier](/tidb-cloud/select-cluster-tier.md#serverless-tier) cluster or a [Dedicated Tier](/tidb-cloud/select-cluster-tier.md#dedicated-tier).
 
 <SimpleTab>
-<div label="Developer Tier">
+<div label="Serverless Tier">
 
-To create a free Developer Tier cluster, take the following steps:
+To create a free Serverless Tier cluster, take the following steps:
 
 1. If you do not have a TiDB Cloud account, click [here](https://tidbcloud.com/free-trial) to sign up for an account.
 
@@ -29,9 +29,9 @@ To create a free Developer Tier cluster, take the following steps:
 
     The plan selection page is displayed by default.
 
-3. On the plan selection page, click **Get Started for Free** in the **Developer Tier** plan.
+3. On the plan selection page, click **Get Started for Free** in the **Serverless Tier** plan.
 
-4. On the **Create Cluster** page, **Developer Tier** is selected by default. Update the default cluster name if necessary, and then select the region where you want to create your cluster.
+4. On the **Create Cluster** page, **Serverless Tier** is selected by default. Update the default cluster name if necessary, and then select the region where you want to create your cluster.
 
 5. Click **Create**.
 
@@ -106,13 +106,13 @@ To create a Dedicated Tier cluster, take the following steps:
 3. Follow the instructions in the dialog to connect to your TiDB cluster.
 
     <SimpleTab>
-    <div label="Developer Tier">
+    <div label="Serverless Tier">
 
-    To connect to a Developer Tier cluster, check **Step 2: Connect with a SQL client** in the dialog, click the tab of your preferred connection method, and then connect to your cluster with the connection string.
+    To connect to a Serverless Tier cluster, check **Step 2: Connect with a SQL client** in the dialog, click the tab of your preferred connection method, and then connect to your cluster with the connection string.
 
     > **Note:**
     >
-    > - For [Developer Tier clusters](/tidb-cloud/select-cluster-tier.md#developer-tier), when you connect to your cluster, you must include the prefix for your cluster in the user name and wrap the name with quotation marks. For more information, see [User name prefix](/tidb-cloud/select-cluster-tier.md#user-name-prefix).
+    > - For [Serverless Tier clusters](/tidb-cloud/select-cluster-tier.md#serverless-tier), when you connect to your cluster, you must include the prefix for your cluster in the user name and wrap the name with quotation marks. For more information, see [User name prefix](/tidb-cloud/select-cluster-tier.md#user-name-prefix).
     > - TiDB Cloud is MySQL-compatible, so you can connect to your cluster using any MySQL client tools. We recommend using [mysql — The MySQL Command-Line Client](https://dev.mysql.com/doc/refman/8.0/en/mysql.html) or [mysql — The MySQL Command-Line Client from MariaDB](https://mariadb.com/kb/en/mysql-command-line-client/).
 
     </div>
@@ -157,7 +157,7 @@ We provide Capital Bikeshare sample data for you to easily import data and run s
     <SimpleTab>
     <div label="AWS">
 
-    If your TiDB cluster is hosted by AWS (the Developer Tier is hosted by AWS by default), fill in the following parameters:
+    If your TiDB cluster is hosted by AWS (the Serverless Tier is hosted by AWS by default), fill in the following parameters:
 
     - **Data Format**: select **TiDB Dumpling**
     - **Location**: `AWS`
