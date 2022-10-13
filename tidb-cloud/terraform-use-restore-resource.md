@@ -1,6 +1,6 @@
 ---
 title: Use Restore Resource
-summary: Learn how to use restore resource
+summary: Learn how to use restore resource.
 ---
 
 # Use Restore Resource
