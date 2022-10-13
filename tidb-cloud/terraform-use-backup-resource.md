@@ -100,7 +100,7 @@ You can learn how to create a backup of a TiDB Cloud cluster with the `tidbcloud
 
     ```
 
-5. Use `terraform state show tidbcloud_backup.example_backup` to check the status of the backup:
+5. Use `terraform state show tidbcloud_backup.${resource-name}` to check the status of the backup:
 
     ```
     $ terraform state show tidbcloud_backup.example_backup

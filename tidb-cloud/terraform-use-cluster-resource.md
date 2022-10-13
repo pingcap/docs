@@ -414,7 +414,7 @@ The following example shows how to create a Dedicated Tier cluster.
 
     ```
 
-5. Use the `terraform show` or `terraform state show tidbcloud_cluster.example_cluster` command to inspect the state of your resource. The former will show the states of all resources and data sources.
+5. Use the `terraform show` or `terraform state show tidbcloud_cluster.${resource-name}` command to inspect the state of your resource. The former will show the states of all resources and data sources.
 
     ```shell
     $ terraform state show tidbcloud_cluster.example_cluster
@@ -451,7 +451,7 @@ The following example shows how to create a Dedicated Tier cluster.
 
     The status of the cluster is `CREATING`. In this case, you need to wait until it changes to `AVAILABLE`, which usually takes 10 minutes at least.
 
-6. If you want to check the latest status, run the `terraform refresh` command to update the state, and then run the `terraform state show tidbcloud_cluster.example_cluster` command to display the state.
+6. If you want to check the latest status, run the `terraform refresh` command to update the state, and then run the `terraform state show tidbcloud_cluster.${resource-name}` command to display the state.
 
     ```
     $ terraform refresh
@@ -579,7 +579,7 @@ For a Dedicated Tier cluster, you can use Terraform to manage cluster resources 
     Apply complete! Resources: 0 added, 1 changed, 0 destroyed.
     ```
 
-4. Use `terraform state show tidbcloud_cluster.example_cluster` to see the status:
+4. Use `terraform state show tidbcloud_cluster.${resource-name}` to see the status:
 
     ```
     $ terraform state show tidbcloud_cluster.example_cluster
@@ -757,7 +757,7 @@ You can pause a cluster when its status is `AVAILABLE` or resume a cluster when 
    Apply complete! Resources: 0 added, 1 changed, 0 destroyed.
    ```
 
-3. Use the `terraform state show tidbcloud_cluster.example_cluster` command to check the status:
+3. Use the `terraform state show tidbcloud_cluster.${resource-name}` command to check the status:
 
    ```
    $ terraform state show tidbcloud_cluster.example_cluster
@@ -809,7 +809,7 @@ You can pause a cluster when its status is `AVAILABLE` or resume a cluster when 
      }
    ```
 
-5. Run the `terraform apply` command and type `yes` for confirmation. If you use the `terraform state show tidbcloud_cluster.example_cluster` command to check the status, you will find it turns to `RESUMING`:
+5. Run the `terraform apply` command and type `yes` for confirmation. If you use the `terraform state show tidbcloud_cluster.${resource-name}` command to check the status, you will find it turns to `RESUMING`:
 
    ```
    # tidbcloud_cluster.example_cluster:

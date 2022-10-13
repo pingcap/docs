@@ -133,7 +133,7 @@ After creating a backup of a cluster, you can restore the cluster by creating a 
     Apply complete! Resources: 1 added, 0 changed, 0 destroyed.
     ```
 
-4. Use the `terraform state show tidbcloud_restore.example_restore` command to check the status of the restore task:
+4. Use the `terraform state show tidbcloud_restore.${resource-name}` command to check the status of the restore task:
 
     ```
     $ terraform state show tidbcloud_restore.example_restore
