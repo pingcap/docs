@@ -1123,6 +1123,14 @@ Constraint checking is always performed in place for pessimistic transactions (d
 - This variable is used to set whether to enable the statistics `Fast Analyze` feature.
 - If the statistics `Fast Analyze` feature is enabled, TiDB randomly samples about 10,000 rows of data as statistics. When the data is distributed unevenly or the data size is small, the statistics accuracy is low. This might lead to a non-optimal execution plan, for example, selecting a wrong index. If the execution time of the regular `Analyze` statement is acceptable, it is recommended to disable the `Fast Analyze` feature.
 
+### tidb_enable_historical_stats
+
+- Scope: GLOBAL
+- Persists to cluster: Yes
+- Type: Boolean
+- Default value: `OFF`
+- This variable is used for an unreleased feature. **Do not change the variable value**.
+
 ### tidb_enable_index_merge <span class="version-mark">New in v4.0</span>
 
 > **Note:**
@@ -1138,6 +1146,15 @@ Constraint checking is always performed in place for pessimistic transactions (d
 - Type: Boolean
 - Default value: `ON`
 - This variable is used to control whether to enable the index merge feature.
+
+### tidb_enable_index_merge_join
+
+- Scope: SESSION | GLOBAL
+- Persists to cluster: Yes
+- Type: Boolean
+- Default value: `OFF`
+- Specifies whether to enable the `IndexMergeJoin` operator.
+- This variable is used only for the internal operation of TiDB. It is **NOT recommended** to adjust it. Otherwise, data correctness might be affected.
 
 ### tidb_enable_legacy_instance_scope <span class="version-mark">New in v6.0.0</span>
 
@@ -1155,6 +1172,14 @@ Constraint checking is always performed in place for pessimistic transactions (d
 - Type: Boolean
 - Default value: `ON`
 - This variable is used to set whether to enable the `LIST (COLUMNS) TABLE PARTITION` feature.
+
+### tidb_enable_local_txn
+
+- Scope: GLOBAL
+- Persists to cluster: Yes
+- Type: Boolean
+- Default value: `OFF`
+- This variable is used for an unreleased feature. **Do not change the variable value**.
 
 ### tidb_enable_mutation_checker <span class="version-mark">New in v6.0.0</span>
 
@@ -1230,6 +1255,14 @@ This variable is associated with a feature available since v6.2.0 and not usable
 - Type: Boolean
 - Default value: `OFF`
 - This variable controls whether to enable concurrency for the `Apply` operator. The number of concurrencies is controlled by the `tidb_executor_concurrency` variable. The `Apply` operator processes correlated subqueries and has no concurrency by default, so the execution speed is slow. Setting this variable value to `1` can increase concurrency and speed up execution. Currently, concurrency for `Apply` is disabled by default.
+
+### tidb_enable_pipelined_window_function
+
+- Scope: SESSION | GLOBAL
+- Persists to cluster: Yes
+- Type: Boolean
+- Default value: `ON`
+- This variables specifies whether to use the pipeline execution algorithm for window functions.
 
 ### tidb_enable_prepared_plan_cache <span class="version-mark">New in v6.1.0</span>
 
@@ -1673,6 +1706,25 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 
 </CustomContent>
 
+### tidb_guarantee_linearizability <span class="version-mark">New in v5.0</span>
+
+- Scope: SESSION | GLOBAL
+- Persists to cluster: Yes
+- Type: Boolean
+- Default value: `ON`
+- This variable controls the way commit TS is calculated for async commit. By default (with the `OFF` value), the two-phase commit requests a new TS from the PD server and uses the TS to calculate the final commit TS. In this situation, linearizability is guaranteed for all the concurrent transactions.
+- If you set this variable to `ON`, the process of fetching TS from the PD server is skipped, with the cost that only causal consistency is guaranteed but not linearizability. For more details, see the blog post [Async Commit, the Accelerator for Transaction Commit in TiDB 5.0](https://en.pingcap.com/blog/async-commit-the-accelerator-for-transaction-commit-in-tidb-5-0/).
+- For scenarios that require only causal consistency, you can set this variable to `ON` to improve performance.
+
+### tidb_hash_exchange_with_new_collation
+
+- Scope: SESSION | GLOBAL
+- Persists to cluster: Yes
+- Type: Boolean
+- Default value: `ON`
+- This variable controls whether the MPP hash partition exchange operator is generated in a cluster with new collation enabled. `true` means to generate the operator, and `false` means not to generate it.
+- This variable is used for the internal operation of TiDB. It is **NOT recommended** to set this variable.
+
 ### tidb_hash_join_concurrency
 
 > **Warning:**
@@ -1967,6 +2019,14 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 - TiDB triggers an alarm when the percentage of the memory it takes exceeds a certain threshold. For the detailed usage description of this feature, see [`memory-usage-alarm-ratio`](https://docs.pingcap.com/tidb/stable/tidb-configuration-file#memory-usage-alarm-ratio-new-in-v409).
 
 </CustomContent>
+
+### tidb_merge_join_concurrency
+
+- Scope: SESSION | GLOBAL
+- Persists to cluster: Yes
+- Default value: `1`
+- This variable sets the concurrency of the `MergeJoin` operator when a query is executed.
+- It is **NOT recommended** to set this variable. Modifying the value of this variable might cause data correctness issues.
 
 ### tidb_metric_query_range_duration <span class="version-mark">New in v4.0</span>
 
@@ -2620,6 +2680,14 @@ Query OK, 0 rows affected, 1 warning (0.00 sec)
 - Range: `[-1, 256]`
 - This variable is used to set the maximum concurrency for TiFlash to execute a request. The default value is `-1`, indicating that this system variable is invalid. When the value is `0`, the maximum number of threads is automatically configured by TiFlash.
 
+### tidb_mpp_store_fail_ttl
+
+- Scope: SESSION | GLOBAL
+- Persists to cluster: Yes
+- Type: Duration
+- Default value: `60s`
+- The newly started TiFlash does not provide services. To prevent queries from failing, TiDB limits the tidb-server sending queries to the newly started TiFlash nodes. This variable indicates the time range in which the newly started TiFlash is not sent requests.
+
 ### tidb_slow_query_file
 
 <CustomContent platform="tidb-cloud">
@@ -2738,6 +2806,14 @@ For details, see [Identify Slow Queries](/identify-slow-queries.md).
 - Default value: `0`
 - Range: `[0, 9223372036854775807]`
 - This variable is used to limit the maximum number of requests TiDB can send to TiKV at the same time. 0 means no limit.
+
+### tidb_streamagg_concurrency
+
+- Scope: SESSION | GLOBAL
+- Persists to cluster: Yes
+- Default value: `1`
+- This variable sets the concurrency of the `StreamAgg` operator when queries are executed.
+- It is **NOT recommended** to set this variable. Modifying the variable value might cause data correctness issues.
 
 ### tidb_super_read_only <span class="version-mark">New in v5.3.1</span>
 
@@ -2970,6 +3046,23 @@ This variable is an alias for `transaction_isolation`.
 > This variable is internally used in TiDB. You are not expected to use it.
 
 Internally, the TiDB parser transforms the `SET TRANSACTION ISOLATION LEVEL [READ COMMITTED| REPEATABLE READ | ...]` statements to `SET @@SESSION.TX_ISOLATION_ONE_SHOT = [READ COMMITTED| REPEATABLE READ | ...]`.
+
+### tx_read_ts
+
+- Scope: SESSION
+- Persists to cluster: No
+- Default value: `0`
+- In the Stale Read scenarios, this session variable is used to help record the Stable Read timestamp value.
+- This variable is used for the internal operation of TiDB. It is **NOT recommended** to set this variable.
+
+### txn_scope
+
+- Scope: SESSION
+- Persists to cluster: No
+- Default value: `global`
+- Value options: `global` and `local`
+- This variable is used to set whether the current session transaction is a global transaction or a local transaction.
+- This variable is used for the internal operation of TiDB. It is **NOT recommended** to set this variable.
 
 ### version
 
