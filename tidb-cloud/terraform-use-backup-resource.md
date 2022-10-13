@@ -16,7 +16,7 @@ You can learn how to create a backup of a TiDB Cloud cluster with the `tidbcloud
 
 1. Create a directory for the backup and enter it.
 
-2. Create a `backup.tf` file:
+2. Create a `backup.tf` file.
 
     ```
     terraform {
