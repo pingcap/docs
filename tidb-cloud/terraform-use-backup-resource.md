@@ -20,6 +20,8 @@ You can learn how to create a backup of a TiDB Cloud cluster with the `tidbcloud
 
     For example:
 
+    For example:
+
     ```
     terraform {
      required_providers {
