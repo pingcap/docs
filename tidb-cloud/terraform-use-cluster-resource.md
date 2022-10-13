@@ -11,7 +11,7 @@ In addition, you will also learn how to get the necessary information with the `
 
 ## Prerequisites
 
-- [Get TiDB Cloud Terraform Provider](/tidb-cloud/terraform-get-tidbcloud-provider.md)
+- [Get TiDB Cloud Terraform Provider](/tidb-cloud/terraform-get-tidbcloud-provider.md).
 
 ## Get project IDs using the project data source
 
