@@ -11,7 +11,7 @@ You can also learn how to import a TiDB Cloud cluster.
 
 ## Prerequisites
 
-- [Get TiDB Cloud Terraform Provider](/tidb-cloud/terraform-get-tidbcloud-provider.md)
+- [Get TiDB Cloud Terraform Provider](/tidb-cloud/terraform-get-tidbcloud-provider.md).
 - The backup and restore feature is unavailable for Developer Tier clusters. To use restore resources, make sure that you have created a Dedicated Tier cluster.
 
 ## Create a restore task with the restore resource
