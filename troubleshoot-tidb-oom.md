@@ -128,7 +128,7 @@ To solve the problem, consider the following measures:
 
 - Adjust the session lifecycle.
 - Adjust [the `wait_timeout` and `max_execution_time` of the connection pool](/develop/dev-guide-connection-parameters.md#timeout-related-parameters).
-- Use the system variable [`max_prepared_stmt_count`](/system-variables.md#max_prepared_stmt_count) to control the maximum number of prepared statements in a session.
+- Use the system variable `max_prepared_stmt_count` to control the maximum number of prepared statements in a session.
 
 #### `tidb_enable_rate_limit_action` is not configured properly
 
