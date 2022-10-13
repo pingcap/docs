@@ -81,7 +81,7 @@ This section describes the causes and solutions for OOM caused by database issue
 
 > **Note:**
 >
-> If you have configured [`tidb_mem_quota_query`](/system-variables.md#tidb_mem_quota_query), an error occurs: `ERROR 1105 (HY000): Out Of Memory Quota![conn_id=54]`. It is caused by the memory usage control behavior of the database. You can safely ignore it.
+> If you have configured [`tidb_mem_quota_query`](/system-variables.md#tidb_mem_quota_query), an error occurs: `ERROR 1105 (HY000): Out Of Memory Quota![conn_id=54]`. It is caused by the memory usage control behavior of the database.
 
 #### Executing SQL statements consumes too much memory
 
