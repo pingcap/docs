@@ -55,45 +55,45 @@ Do not use the error messages for string matching. Instead, use [Error Codes](/e
 
 **Description**
 
-The `CHECK TABLE` statement is not supported in TiDB. 
+The `CHECK TABLE` statement is not supported in TiDB.
 
 **Way to avoid**
 
 To check the consistency of data and corresponding indexes, you can use the [`ADMIN CHECK [TABLE|INDEX]`](/sql-statements/sql-statement-admin-check-table-index.md) statement in TiDB.
 
-## MySQL JDBC incompatibility
+## Compatibility with MySQL JDBC
 
-Test Version: MySQL Connector/J `8.0.29`.
+The test version is MySQL Connector/J 8.0.29.
 
-### Default collations are inconsistent
+### The default collation is inconsistent
 
 **Description**
 
-The collations of MySQL Connector/J are stored in the client and are distinguished by the server version.
+The collations of MySQL Connector/J are stored on the client side and distinguished by the server version.
 
-The following table shows known character sets for which client-side and server-side collations do not match:
+The following table lists known client-side and server-side collation inconsistencies in character sets:
 
-| Character Sets | Client Default Collations | Server Default Collations |
-| - | - | - |
-| `ascii` | `ascii_general_ci` | `ascii_bin` |
-| `latin1` | `latin1_swedish_ci` | `latin1_bin` |
+| Character | Client-side default collation | Server-side default collation |
+| --------- | -------------------- | ------------- |
+| `ascii`   | `ascii_general_ci`   | `ascii_bin`   |
+| `latin1`  | `latin1_swedish_ci`  | `latin1_bin`  |
 | `utf8mb4` | `utf8mb4_0900_ai_ci` | `utf8mb4_bin` |
 
 **Way to avoid**
 
-Set the sorting rules manually and do not rely on the client default sorting rules. Client default sorting rules are saved in the MySQL Connector/J configuration file.
+Set the collation manually, and do not rely on the client-side default collation. The client-side default collation is stored by the MySQL Connector/J configuration file.
 
-### The `NO_BACKSLASH_ESCAPES` parameter does not work
+### The `NO_BACKSLASH_ESCAPES` parameter does not take effect
 
 **Description**
 
-The `NO_BACKSLASH_ESCAPES` parameter cannot be used so that `\` character is not escaped. Track this [issue](https://github.com/pingcap/tidb/issues/35302).
+In TiDB, you cannot use the `NO_BACKSLASH_ESCAPES` parameter without escaping the `\` character. For more details, track this [issue](https://github.com/pingcap/tidb/issues/35302).
 
 **Way to avoid**
 
-Do not use `NO_BACKSLASH_ESCAPES` with `\`, but use `\\` for SQL writing.
+Do not use `NO_BACKSLASH_ESCAPES` with `\` in TiDB, but use `\\` in SQL statements.
 
-### The `INDEX_USED` parameters are not supported
+### The `INDEX_USED` related parameters are not supported
 
 **Description**
 
@@ -104,17 +104,17 @@ TiDB does not set the `SERVER_QUERY_NO_GOOD_INDEX_USED` and `SERVER_QUERY_NO_IND
 
 **Way to avoid**
 
-Do not use the `noIndexUsed()` and `noGoodIndexUsed()` functions.
+Do not use the `noIndexUsed()` and `noGoodIndexUsed()` functions in TiDB.
 
 ### The `enablePacketDebug` parameter is not supported
 
 **Description**
 
-TiDB does not support the [enablePacketDebug](https://dev.mysql.com/doc/connector-j/8.0/en/connector-j-connp-props-debugging-profiling.html) parameter. It is a MySQL Connector/J parameter used for debugging that will retain the packet's ring buffer. This might cause the connection to **UNEXPECTED CLOSE**. **DO NOT** turn it on.
+TiDB does not support the [enablePacketDebug](https://dev.mysql.com/doc/connector-j/8.0/en/connector-j-connp-props-debugging-profiling.html) parameter. It is a MySQL Connector/J parameter used for debugging that will keep the buffer of the data packet. This might cause the connection to close unexpectedly. **DO NOT** turn it on.
 
 **Way to avoid**
 
-Do not set the `enablePacketDebug` parameter.
+Do not set the `enablePacketDebug` parameter in TiDB.
 
 ### The UpdatableResultSet is not supported
 
@@ -128,7 +128,7 @@ To ensure data consistency by transaction, you can use `UPDATE` statements to up
 
 ## MySQL JDBC bugs
 
-### `useLocalTransactionState` and `rewriteBatchedStatements` are true at the same time will cause the transaction to fail to commit
+### `useLocalTransactionState` and `rewriteBatchedStatements` are true at the same time will cause the transaction to fail to commit or roll back
 
 **Description**
 
@@ -138,7 +138,7 @@ When the `useLocalTransactionState` and `rewriteBatchedStatements` parameters ar
 
 > **Note:**
 >
-> This bug has been reported to MySQL JDBC, you can follow this [Bug Report](https://bugs.mysql.com/bug.php?id=108643) to keep track of the latest news.
+> This bug has been reported to MySQL JDBC. To keep track of the process, you can follow this [Bug Report](https://bugs.mysql.com/bug.php?id=108643).
 
 **DO NOT** turn on `useLocalTransactionState` as this might prevent transactions from being committed or rolled back.
 
@@ -150,9 +150,9 @@ The database connection might hang under certain conditions when using MySQL Con
 
 **Way to avoid**
 
-This is a known issue and as of October 12, 2022, MySQL Connector/J has not merged the fixed code so far.
+This is a known issue. As of October 12, 2022, MySQL Connector/J has not fixed the issue.
 
 TiDB fixes it in the following ways:
 
-- Client side: you can replace the official MySQL Connector/J with [pingcap/mysql-connector-j](https://github.com/pingcap/mysql-connector-j). The bug is fixed in **pingcap/mysql-connector-j**.
-- Server side: you can upgrade the server to v6.3.0 or later versions. In TiDB v6.3.0, this compatibility issue has been fixed.
+- Client side: This bug has been fixed in **pingcap/mysql-connector-j** and you can use the [pingcap/mysql-connector-j](https://github.com/pingcap/mysql-connector-j) instead of the official MySQL Connector/J.
+- Server side: This compatibility issue has been fixed since TiDB v6.3.0 and you can upgrade the server to v6.3.0 or later versions.
