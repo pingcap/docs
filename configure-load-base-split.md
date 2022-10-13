@@ -72,7 +72,7 @@ Accordingly, you can view the configuration by either of the following two metho
     {{< copyable "sql" >}}
 
     ```sql
-    show config where type='tikv' and name like '%split.qps-threshold%'
+    show config where type='tikv' and name like '%split.qps-threshold%';
     ```
 
 - Use TiKV:
