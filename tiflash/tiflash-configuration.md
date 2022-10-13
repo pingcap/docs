@@ -14,7 +14,7 @@ You can adjust the PD scheduling parameters using [pd-ctl](/pd-control.md). Note
 
 - [`replica-schedule-limit`](/pd-configuration-file.md#replica-schedule-limit): determines the rate at which the replica-related operator is generated. The parameter affects operations such as making nodes offline and add replicas.
 
-  > **Notes:**
+  > **Note:**
   >
   > The value of this parameter should be less than that of `region-schedule-limit`. Otherwise, the normal Region scheduling among TiKV nodes is affected.
 
@@ -207,10 +207,6 @@ delta_index_cache_size = 0
     ## New in v6.2.0. This item specifies the minimum ratio of valid data in a PageStorage data file. When the ratio of valid data in a PageStorage data file is less than the value of this configuration, GC is triggered to compact data in the file. The default value is 0.5.
     dt_page_gc_threshold = 0.5
 
-    ## New in v6.2.0. Use the thread pool to handle read requests from the storage engine. The default value is false.
-    ## Warning: This is still an experimental feature. It is NOT recommended that you use it in the production environment.
-
-    # dt_enable_read_thread = false
 
 ## Security settings take effect starting from v4.0.5.
 [security]
@@ -258,6 +254,10 @@ delta_index_cache_size = 0
 ```
 
 In addition to the items above, other parameters are the same as those of TiKV. Note that the `label` whose key is `engine` is reserved and cannot be configured manually.
+
+### Schedule replicas by topology labels
+
+See [Set available zones](/tiflash/create-tiflash-replicas.md#set-available-zones).
 
 ### Multi-disk deployment
 

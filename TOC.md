@@ -4,13 +4,9 @@
 - [Docs Home](https://docs.pingcap.com/)
 - About TiDB
   - [TiDB Introduction](/overview.md)
-  - [TiDB 6.2 Release Notes](/releases/release-6.2.0.md)
+  - [TiDB 6.3 Release Notes](/releases/release-6.3.0.md)
   - [Basic Features](/basic-features.md)
   - [Experimental Features](/experimental-features.md)
-  - Benchmarks
-    - [v6.2 Sysbench Performance Test Report](/benchmark/benchmark-sysbench-v6.2.0-vs-v6.1.0.md)
-    - [v6.2 TPC-C Performance Test Report](/benchmark/v6.2-performance-benchmarking-with-tpcc.md)
-    - [Performance Comparison between TiFlash and Greenplum/Spark](/benchmark/v6.2-performance-benchmarking-with-tpch.md)
   - [MySQL Compatibility](/mysql-compatibility.md)
   - [TiDB Limitations](/tidb-limitations.md)
   - [Credits](/credits.md)
@@ -106,6 +102,7 @@
   - Test Cluster Performance
     - [Test TiDB Using Sysbench](/benchmark/benchmark-tidb-using-sysbench.md)
     - [Test TiDB Using TPC-C](/benchmark/benchmark-tidb-using-tpcc.md)
+    - [Test TiDB Using CH-benCHmark](/benchmark/benchmark-tidb-using-ch.md)
 - Migrate
   - [Overview](/migration-overview.md)
   - [Migration Tools](/migration-tools.md)
@@ -167,6 +164,7 @@
   - [Troubleshoot Hotspot Issues](/troubleshoot-hot-spot-issues.md)
   - [Troubleshoot Increased Read and Write Latency](/troubleshoot-cpu-issues.md)
   - [Save and Restore the On-Site Information of a Cluster](/sql-plan-replayer.md)
+  - [Troubleshoot TiDB OOM Issues](/troubleshoot-tidb-oom.md)
   - [Troubleshoot Cluster Setup](/troubleshoot-tidb-cluster.md)
   - [Troubleshoot High Disk I/O Usage](/troubleshoot-high-disk-io.md)
   - [Troubleshoot Lock Conflicts](/troubleshoot-lock-conflicts.md)
@@ -178,18 +176,19 @@
     - [Performance Tuning Overview](/performance-tuning-overview.md)
     - [Performance Analysis and Tuning](/performance-tuning-methods.md)
     - [Performance Tuning Practices for OLTP Scenarios](/performance-tuning-practices.md)
+    - [Latency Breakdown](/latency-breakdown.md)
   - Configuration Tuning
-    - System Tuning
-      - [Operating System Tuning](/tune-operating-system.md)
-    - Software Tuning
-      - Configuration
-        - [Tune TiDB Memory](/configure-memory-usage.md)
-        - [Tune TiKV Threads](/tune-tikv-thread-performance.md)
-        - [Tune TiKV Memory](/tune-tikv-memory-performance.md)
-        - [TiKV Follower Read](/follower-read.md)
-        - [Tune Region Performance](/tune-region-performance.md)
-        - [Tune TiFlash Performance](/tiflash/tune-tiflash-performance.md)
-      - [Coprocessor Cache](/coprocessor-cache.md)
+    - [Tune Operating System Performance](/tune-operating-system.md)
+    - [Tune TiDB Memory](/configure-memory-usage.md)
+    - [Tune TiKV Threads](/tune-tikv-thread-performance.md)
+    - [Tune TiKV Memory](/tune-tikv-memory-performance.md)
+    - [TiKV Follower Read](/follower-read.md)
+    - [Tune Region Performance](/tune-region-performance.md)
+    - [Tune TiFlash Performance](/tiflash/tune-tiflash-performance.md)
+    - [Coprocessor Cache](/coprocessor-cache.md)
+    - Garbage Collection (GC)
+      - [Overview](/garbage-collection-overview.md)
+      - [Configuration](/garbage-collection-configuration.md)
   - SQL Tuning
     - [Overview](/sql-tuning-overview.md)
     - Understanding the Query Execution Plan
@@ -218,6 +217,7 @@
         - [Overview](/sql-physical-optimization.md)
         - [Index Selection](/choose-index.md)
         - [Statistics](/statistics.md)
+        - [Extended Statistics](/extended-statistics.md)
         - [Wrong Index Solution](/wrong-index-solution.md)
         - [Distinct Optimization](/agg-distinct-optimization.md)
         - [Cost Model](/cost-model.md)
@@ -346,22 +346,16 @@
   - PingCAP Clinic Diagnostic Service
     - [Overview](/clinic/clinic-introduction.md)
     - [Quick Start](/clinic/quick-start-with-clinic.md)
-    - [Troubleshoot TiDB Cluster Using PingCAP Clinic](/clinic/clinic-user-guide-for-tiup.md)
+    - [Troubleshoot Clusters Using PingCAP Clinic](/clinic/clinic-user-guide-for-tiup.md)
     - [PingCAP Clinic Diagnostic Data](/clinic/clinic-data-instruction-for-tiup.md)
   - [TiDB Operator](/tidb-operator-overview.md)
   - [Dumpling](/dumpling-overview.md)
   - TiDB Lightning
     - [Overview](/tidb-lightning/tidb-lightning-overview.md)
+    - [Get Started](/get-started-with-tidb-lightning.md)
     - Prechecks and requirements
       - [Prechecks](/tidb-lightning/tidb-lightning-prechecks.md)
-      - [Downstream privilege requirements](/tidb-lightning/tidb-lightning-requirements.md)
-      - [Downstream storage space requirements](/tidb-lightning/tidb-lightning-requirements.md#downstream-storage-space-requirements)
-    - Key Features
-      - [Checkpoints](/tidb-lightning/tidb-lightning-checkpoints.md)
-      - [Table Filter](/table-filter.md)
-      - [Import Data in Parallel](/tidb-lightning/tidb-lightning-distributed-import.md)
-      - [Error Resolution](/tidb-lightning/tidb-lightning-error-resolution.md)
-      - [Web Interface](/tidb-lightning/tidb-lightning-web-interface.md)
+      - [Target Database Requirements](/tidb-lightning/tidb-lightning-requirements.md)
     - Data Sources
       - [Data Match Rules](/tidb-lightning/tidb-lightning-data-source.md)
       - [CSV](/tidb-lightning/tidb-lightning-data-source.md#csv)
@@ -374,17 +368,25 @@
     - Logical Import Mode
       - [Requirements and Limitations](/tidb-lightning/tidb-lightning-logical-import-mode.md)
       - [Use Logical Import Mode](/tidb-lightning/tidb-lightning-logical-import-mode-usage.md)
-    - [Tutorial](/get-started-with-tidb-lightning.md)
+    - Key Features
+      - [Checkpoints](/tidb-lightning/tidb-lightning-checkpoints.md)
+      - [Table Filter](/table-filter.md)
+      - [Import Data in Parallel](/tidb-lightning/tidb-lightning-distributed-import.md)
+      - [Error Resolution](/tidb-lightning/tidb-lightning-error-resolution.md)
+      - [Web Interface](/tidb-lightning/tidb-lightning-web-interface.md)
     - [Deploy](/tidb-lightning/deploy-tidb-lightning.md)
-    - [Configure](/tidb-lightning/tidb-lightning-configuration.md)
-    - [Monitor](/tidb-lightning/monitor-tidb-lightning.md)
-    - [FAQ](/tidb-lightning/tidb-lightning-faq.md)
     - [Troubleshooting](/tidb-lightning/troubleshoot-tidb-lightning.md)
-    - [Glossary](/tidb-lightning/tidb-lightning-glossary.md)
+    - Reference
+      - [Configuration File](/tidb-lightning/tidb-lightning-configuration.md)
+      - [Command Line Flags](/tidb-lightning/tidb-lightning-command-line-full.md)
+      - [Monitor](/tidb-lightning/monitor-tidb-lightning.md)
+      - [FAQ](/tidb-lightning/tidb-lightning-faq.md)
+      - [Glossary](/tidb-lightning/tidb-lightning-glossary.md)
   - TiDB Data Migration
     - [About TiDB Data Migration](/dm/dm-overview.md)
     - [Architecture](/dm/dm-arch.md)
     - [Quick Start](/dm/quick-start-with-dm.md)
+    - [Best Practices](/dm/dm-best-practices.md)
     - Deploy a DM cluster
       - [Hardware and Software Requirements](/dm/dm-hardware-and-software-requirements.md)
       - [Use TiUP (Recommended)](/dm/deploy-a-dm-cluster-using-tiup.md)
@@ -589,7 +591,6 @@
       - [`ALTER PLACEMENT POLICY`](/sql-statements/sql-statement-alter-placement-policy.md)
       - [`ALTER TABLE`](/sql-statements/sql-statement-alter-table.md)
       - [`ALTER TABLE COMPACT`](/sql-statements/sql-statement-alter-table-compact.md)
-      - [`ALTER TABLE SET TIFLASH MODE`](/sql-statements/sql-statement-set-tiflash-mode.md)
       - [`ALTER USER`](/sql-statements/sql-statement-alter-user.md)
       - [`ANALYZE TABLE`](/sql-statements/sql-statement-analyze-table.md)
       - [`BACKUP`](/sql-statements/sql-statement-backup.md)
@@ -734,6 +735,7 @@
       - [Set Operations](/functions-and-operators/set-operators.md)
       - [List of Expressions for Pushdown](/functions-and-operators/expressions-pushed-down.md)
       - [TiDB Specific Functions](/functions-and-operators/tidb-functions.md)
+      - [Comparisons between Functions and Syntax of Oracle and TiDB](/oracle-functions-to-tidb.md)
     - [Clustered Indexes](/clustered-indexes.md)
     - [Constraints](/constraints.md)
     - [Generated Columns](/generated-columns.md)
@@ -745,9 +747,6 @@
       - [Optimistic Transactions](/optimistic-transaction.md)
       - [Pessimistic Transactions](/pessimistic-transaction.md)
       - [Non-Transactional DML Statements](/non-transactional-dml.md)
-    - Garbage Collection (GC)
-      - [Overview](/garbage-collection-overview.md)
-      - [Configuration](/garbage-collection-configuration.md)
     - [Views](/views.md)
     - [Partitioning](/partitioned-table.md)
     - [Temporary Tables](/temporary-tables.md)
@@ -809,6 +808,7 @@
         - [`VARIABLES_INFO`](/information-schema/information-schema-variables-info.md)
         - [`VIEWS`](/information-schema/information-schema-views.md)
       - [`METRICS_SCHEMA`](/metrics-schema.md)
+    - [Metadata Lock](/metadata-lock.md)
   - UI
     - TiDB Dashboard
       - [Overview](/dashboard/dashboard-intro.md)
@@ -891,6 +891,8 @@
   - [Release Timeline](/releases/release-timeline.md)
   - [TiDB Versioning](/releases/versioning.md)
   - [TiDB Installation Packages](/binary-package.md)
+  - v6.3
+    - [6.3.0-DMR](/releases/release-6.3.0.md)
   - v6.2
     - [6.2.0-DMR](/releases/release-6.2.0.md)
   - v6.1
