@@ -7,7 +7,7 @@ summary: Learn how to use the cluster resource to create and modify a TiDB Cloud
 
 You can learn how to create and modify a TiDB Cloud cluster with the `tidbcloud_cluster` resource in this document.
 
-Besides, you will also learn how to get the necessary information with the `tidbcloud_project` and `tidbcloud_cluster_spec` data sources.
+In addition, you will also learn how to get the necessary information with the `tidbcloud_project` and `tidbcloud_cluster_spec` data sources.
 
 ## Prerequisites
 
