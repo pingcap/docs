@@ -102,7 +102,7 @@ provider "tidbcloud" {
 }
 ```
 
-`username` and `password` are the API key's public key and private key. You can also pass them with the environment variables:
+`username` and `password` are the API key's public key and private key. You can also pass them through the environment variables:
 
 ```
 export TIDBCLOUD_USERNAME = ${public_key}
