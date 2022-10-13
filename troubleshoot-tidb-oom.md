@@ -81,7 +81,7 @@ This section describes the causes and solutions for OOM caused by database issue
 
 > **Note:**
 >
-> If you have configured [`tidb_mem_quota_query`](/system-variables.md#tidb_mem_quota_query), an error occurs: `ERROR 1105 (HY000): Out Of Memory Quota![conn_id=54]`. It is caused by the memory usage control behavior of the database.
+> If you have configured [`tidb_mem_quota_query`](/system-variables.md#tidb_mem_quota_query), an error occurs: `ERROR 1105 (HY000): Out Of Memory Quota![conn_id=54]`. It is caused by the memory usage control behavior of the database. It is a normal behavior.
 
 #### Executing SQL statements consumes too much memory
 
@@ -106,7 +106,7 @@ You can take the following measures to reduce the memory usage of SQL statements
 
 #### Large transactions or large writes consume too much memory
 
-You need to plan for memory capacity. When processing a transaction, TiDB can consume memory up to two to three times the size of the transaction.
+You need to plan for memory capacity. When a transaction is executed, the memory usage of the TiDB process is scaled up comparing with the transaction size, up to two to three times or more of the transaction size.
 
 You can split a single large transaction to multiple smaller transactions.
 
