@@ -88,7 +88,7 @@ Minimum number of TiKV nodes: `ceil(2048 ÷ 0.8 ÷ 1024) × 3 = 9`
 
 ### TiKV node storage
 
-The supported node storage of different TiKV node size is as follows:
+The supported node storage of different TiKV node sizes is as follows:
 
 | Node size | Min node storage | Max node storage | Default node storage |
 |:---------:|:----------------:|:----------------:|:--------------------:|
@@ -130,7 +130,7 @@ Minimum number of TiFlash nodes: `min((800 GiB * 2 + 100 GiB * 1) / 1024 GiB, ma
 
 ### TiFlash node storage
 
-The supported node storage of different TiFlash node size is as follows:
+The supported node storage of different TiFlash node sizes is as follows:
 
 | Node size | Min node storage | Max node storage | Default node storage |
 |:---------:|:----------------:|:----------------:|:--------------------:|
