@@ -33,8 +33,8 @@ To view the information of all available projects, you can use the `tidbcloud_pr
    }
 
    provider "tidbcloud" {
-     username = "fake_username"
-     password = "fake_password"
+     public_key = "fake_public_key"
+     private_key = "fake_private_key"
    }
 
    data "tidbcloud_project" "example_project" {
@@ -135,8 +135,8 @@ To get the cluster specification information, you can use the `tidbcloud_cluster
       required_version = ">= 1.0.0"
     }
     provider "tidbcloud" {
-      username = "fake_username"
-      password = "fake_password"
+      public_key = "fake_public_key"
+      private_key = "fake_private_key"
     }
     data "tidbcloud_cluster_spec" "example_cluster_spec" {
     }
@@ -305,8 +305,8 @@ The following example shows how to create a Dedicated Tier cluster.
    }
 
    provider "tidbcloud" {
-     username = "fake_username"
-     password = "fake_password"
+     public_key = "fake_public_key"
+     private_key = "fake_private_key"
    }
 
     resource "tidbcloud_cluster" "example_cluster" {

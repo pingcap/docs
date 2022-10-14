@@ -40,8 +40,8 @@ After creating a backup of a cluster, you can restore the cluster by creating a 
    }
 
    provider "tidbcloud" {
-     username = "fake_username"
-     password = "fake_password"
+     public_key = "fake_public_key"
+     private_key = "fake_private_key"
    }
     resource "tidbcloud_restore" "example_restore" {
       project_id = tidbcloud_cluster.example_cluster.project_id

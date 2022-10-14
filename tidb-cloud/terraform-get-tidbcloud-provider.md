@@ -97,16 +97,16 @@ terraform {
 }
 
 provider "tidbcloud" {
-  username = "fake_username"
-  password = "fake_password"
+  public_key = "fake_public_key"
+  private_key = "fake_private_key"
 }
 ```
 
-`username` and `password` are the API key's public key and private key. You can also pass them through the environment variables:
+`public_key` and `private_key` are the API key's public key and private key. You can also pass them through the environment variables:
 
 ```
-export TIDBCLOUD_USERNAME = ${public_key}
-export TIDBCLOUD_PASSWORD = ${private_key}
+export TIDBCLOUD_PUBLIC_KEY = ${public_key}
+export TIDBCLOUD_PRIVATE_KEY = ${private_key}
 ```
 
 Now, you can use the TiDB Cloud Terraform Provider.

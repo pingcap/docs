@@ -32,8 +32,8 @@ You can learn how to create a backup of a TiDB Cloud cluster with the `tidbcloud
    }
 
    provider "tidbcloud" {
-     username = "fake_username"
-     password = "fake_password"
+     public_key = "fake_public_key"
+     private_key = "fake_private_key"
    }
     resource "tidbcloud_backup" "example_backup" {
       project_id  = "1372813089189561287"
