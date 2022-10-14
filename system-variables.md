@@ -2322,6 +2322,14 @@ explain select * from t where age=5;
 3 rows in set (0.00 sec)
 ```
 
+### tidb_opt_projection_push_down <span class="version-mark">New in v6.1.0</span>
+
+- Scope: SESSION
+- Persists to cluster: No
+- Type: Boolean
+- Default value: `OFF`
+- Specifies whether to allow the optimizer to push `Projection` down to the TiKV or TiFlash coprocessor.
+
 ### tidb_opt_scan_factor
 
 - Scope: SESSION | GLOBAL
@@ -2533,6 +2541,14 @@ explain select * from t where age=5;
 - Default value: `ON`
 - This variable controls whether the optimizer can use a query condition including null equivalence as a prefix condition for index access.
 - This variable is enabled by default. When it is enabled, the optimizer can reduce the volume of index data to be accessed, which accelerates query execution. For example, if a query involves multiple-column indexes `index(a, b)` and the query condition contains `a<=>null and b=1`, the optimizer can use both `a<=>null` and `b=1` in the query condition for index access. If the variable is disabled, because `a<=>null and b=1` includes the null equivalence condition, the optimizer does not use `b=1` for index access.
+
+### tidb_remove_orderby_in_subquery <span class="version-mark">New in v6.1.0</span>
+
+- Scope: SESSION | GLOBAL
+- Persists to cluster: Yes
+- Type: Boolean
+- Default value: `OFF`
+- Specifies whether to remove `ORDER BY` clause in a subquery.
 
 ### tidb_replica_read <span class="version-mark">New in v4.0</span>
 
