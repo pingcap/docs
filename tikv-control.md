@@ -99,7 +99,7 @@ SUBCOMMANDS:
     $ tikv-ctl --ca-path ca.pem --cert-path client.pem --key-path client-key.pem --host 127.0.0.1:20160 <subcommands>
     ```
 
-    ただし、 `tikv-ctl`ではなく PD と通信する場合もあります。この場合、 `--host`の代わりに`--pd`オプションを使用する必要があります。以下に例を示します。
+    ただし、 `tikv-ctl`ではなく PD と通信する場合もあります。この場合、 `--host`の代わりに`--pd`オプションを使用する必要があります。次に例を示します。
 
     ```
     $ tikv-ctl --pd 127.0.0.1:2379 compact-cluster
@@ -464,7 +464,7 @@ $ tikv-ctl --data-dir /path/to/tikv recover-mvcc -r 1001,1002 -p 127.0.0.1:2379
 success!
 ```
 
-> **注**:
+> **ノート：**
 >
 > -   このコマンドは、ローカル モードのみをサポートします。正常に実行されると`success!`が出力されます。
 > -   `-p`オプションの引数は、 `http`プレフィックスなしで PD エンドポイントを指定します。 PD エンドポイントを指定すると、指定された`region_id`が検証されているかどうかを照会します。
@@ -545,7 +545,7 @@ Type "I consent" to continue, anything else to exit: I consent
 9291156302549018620: key: 8B6B6B8F83D36BE2467ED55D72AE808B method: Aes128Ctr creation_time: 1592938357
 ```
 
-> **ノート**
+> **ノート：**
 >
 > このコマンドは、データ暗号化キーをプレーンテキストとして公開します。本番環境では、出力をファイルにリダイレクトしないでください。後で出力ファイルを削除しても、コンテンツがディスクから完全に消去されない場合があります。
 

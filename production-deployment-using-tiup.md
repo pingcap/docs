@@ -5,7 +5,7 @@ summary: Learn how to easily deploy a TiDB cluster using TiUP.
 
 # TiUP を使用して TiDBクラスタをデプロイする {#deploy-a-tidb-cluster-using-tiup}
 
-[TiUP](https://github.com/pingcap/tiup)は、TiDB 4.0 で導入されたクラスター運用保守ツールです。 TiUP は、Golang で記述されたクラスター管理コンポーネントである[TiUPクラスター](https://github.com/pingcap/tiup/tree/master/components/cluster)を提供します。 TiUP クラスターを使用すると、TiDB クラスターのデプロイ、開始、停止、破棄、スケーリング、およびアップグレードを含む日常のデータベース操作を簡単に実行し、TiDB クラスターのパラメーターを管理できます。
+[TiUP](https://github.com/pingcap/tiup)は、TiDB 4.0 で導入されたクラスター運用保守ツールです。 TiUP は、Golang で記述されたクラスター管理コンポーネントである[TiUPクラスター](https://github.com/pingcap/tiup/tree/master/components/cluster)を提供します。 TiUP クラスターを使用すると、TiDB クラスターのデプロイ、開始、停止、破棄、スケーリング、アップグレードなどの日常的なデータベース操作を簡単に実行し、TiDB クラスターのパラメーターを管理できます。
 
 TiUP は、TiDB、TiFlash、TiDB Binlog、TiCDC、および監視システムの展開をサポートしています。このドキュメントでは、さまざまなトポロジの TiDB クラスターをデプロイする方法を紹介します。
 
@@ -321,13 +321,13 @@ alertmanager_servers:
     {{< copyable "" >}}
 
     ```shell
-    tiup cluster deploy tidb-test v5.4.2 ./topology.yaml --user root [-p] [-i /home/root/.ssh/gcp_rsa]
+    tiup cluster deploy tidb-test v5.4.3 ./topology.yaml --user root [-p] [-i /home/root/.ssh/gcp_rsa]
     ```
 
 上記の`tiup cluster deploy`コマンドで:
 
 -   `tidb-test`は、デプロイする TiDB クラスターの名前です。
--   `v5.4.2`は、デプロイする TiDB クラスターのバージョンです。 `tiup list tidb`を実行すると、サポートされている最新のバージョンを確認できます。
+-   `v5.4.3`は、デプロイする TiDB クラスターのバージョンです。 `tiup list tidb`を実行すると、サポートされている最新のバージョンを確認できます。
 -   `topology.yaml`は初期設定ファイルです。
 -   `--user root`は、ターゲット マシンに`root`ユーザーとしてログインして、クラスターの展開を完了することを示します。 `root`人のユーザーは、ターゲット マシンに対して`ssh`と`sudo`の権限を持つことが期待されます。または、 `ssh`および`sudo`の権限を持つ他のユーザーを使用して展開を完了することもできます。
 -   `[-i]`と`[-p]`はオプションです。パスワードなしでターゲット マシンへのログインを構成した場合、これらのパラメーターは必要ありません。そうでない場合は、2 つのパラメーターのいずれかを選択します。 `[-i]`は、ターゲット マシンにアクセスできる root ユーザー (または`--user`で指定された他のユーザー) の秘密鍵です。 `[-p]`は、対話的にユーザーパスワードを入力するために使用されます。

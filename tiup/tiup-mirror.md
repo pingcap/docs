@@ -3,9 +3,9 @@ title: Create a Private Mirror
 summary: Learn how to create a private mirror.
 ---
 
-# プライベートミラーを作成する {#create-a-private-mirror}
+# プライベート ミラーの作成 {#create-a-private-mirror}
 
-プライベートクラウドを作成するときは、通常、TiUPの公式ミラーにアクセスできない分離されたネットワーク環境を使用する必要があります。したがって、主に`mirror`コマンドによって実装されるプライベートミラーを作成できます。オフライン展開には`mirror`コマンドを使用することもできます。プライベートミラーを使用すると、自分で作成してパッケージ化したコンポーネントを使用することもできます。
+プライベート クラウドを作成する場合、通常、TiUP の公式ミラーにアクセスできない分離されたネットワーク環境を使用する必要があります。したがって、主に`mirror`コマンドで実装されるプライベート ミラーを作成できます。 `mirror`コマンドを使用してオフラインで展開することもできます。プライベート ミラーを使用すると、自分でビルドしてパッケージ化したコンポーネントを使用することもできます。
 
 ## TiUP <code>mirror</code>の概要 {#tiup-code-mirror-code-overview}
 
@@ -50,7 +50,7 @@ Use "tiup mirror [command] --help" for more information about a command.
 
 ## ミラーのクローンを作成する {#clone-a-mirror}
 
-`tiup mirror clone`コマンドを実行して、ローカルミラーを構築できます。
+`tiup mirror clone`コマンドを実行して、ローカル ミラーを構築できます。
 
 {{< copyable "" >}}
 
@@ -58,44 +58,44 @@ Use "tiup mirror [command] --help" for more information about a command.
 tiup mirror clone <target-dir> [global-version] [flags]
 ```
 
--   `target-dir` ：クローンデータが保存されるディレクトリを指定するために使用されます。
--   `global-version` ：すべてのコンポーネントのグローバルバージョンをすばやく設定するために使用されます。
+-   `target-dir` : 複製されたデータが格納されるディレクトリを指定するために使用されます。
+-   `global-version` : すべてのコンポーネントのグローバル バージョンをすばやく設定するために使用されます。
 
-`tiup mirror clone`コマンドは、多くのオプションのフラグを提供します（将来さらに提供される可能性があります）。これらのフラグは、使用目的に応じて次のカテゴリに分類できます。
+`tiup mirror clone`コマンドは、多くのオプションのフラグを提供します (将来さらに追加される可能性があります)。これらのフラグは、使用目的に応じて次のカテゴリに分類できます。
 
--   クローン作成時にバージョンと一致するようにプレフィックス一致を使用するかどうかを決定します
+-   クローン作成時にバージョンを一致させるためにプレフィックス マッチングを使用するかどうかを決定します
 
-    `--prefix`フラグが指定されている場合、バージョン番号はクローンのプレフィックスと一致します。たとえば、「v5.0.0」として`--prefix`を指定すると、「v5.0.0-rc」と「v5.0.0」が一致します。
+    `--prefix`フラグが指定されている場合、バージョン番号はクローンのプレフィックスによって照合されます。たとえば、「v5.0.0」と`--prefix`を指定すると、「v5.0.0-rc」と「v5.0.0」が一致します。
 
--   フルクローンを使用するかどうかを決定します
+-   完全クローンを使用するかどうかを決定します
 
     `--full`フラグを指定すると、公式ミラーを完全に複製できます。
 
     > **ノート：**
     >
-    > `--full`フラグ、およびコンポーネントバージョンが指定されていない場合、一部のメタ情報のみが複製され`global-version` 。
+    > `--full` 、 `global-version`フラグ、およびコンポーネントのバージョンが指定されていない場合、一部のメタ情報のみが複製されます。
 
 -   特定のプラットフォームからパッケージを複製するかどうかを決定します
 
-    特定のプラットフォームのパッケージのみを複製する場合は、 `-os`と`-arch`を使用してプラットフォームを指定します。例えば：
+    特定のプラットフォーム用にのみパッケージを複製する場合は、 `-os`と`-arch`を使用してプラットフォームを指定します。例えば：
 
-    -   `tiup mirror clone <target-dir> [global-version] --os=linux`コマンドを実行して、Linuxのクローンを作成します。
-    -   `tiup mirror clone <target-dir> [global-version] --arch=amd64`コマンドを実行して、amd64のクローンを作成します。
-    -   `tiup mirror clone <target-dir> [global-version] --os=linux --arch=amd64`コマンドを実行して、linux/amd64のクローンを作成します。
+    -   `tiup mirror clone <target-dir> [global-version] --os=linux`コマンドを実行して Linux のクローンを作成します。
+    -   `tiup mirror clone <target-dir> [global-version] --arch=amd64`コマンドを実行して、amd64 のクローンを作成します。
+    -   `tiup mirror clone <target-dir> [global-version] --os=linux --arch=amd64`コマンドを実行して linux/amd64 のクローンを作成します。
 
 -   パッケージの特定のバージョンを複製するかどうかを決定します
 
-    コンポーネントの1つのバージョン（すべてのバージョンではない）のみを複製する場合は、 `--<component>=<version>`を使用してこのバージョンを指定します。例えば：
+    コンポーネントの (すべてのバージョンではなく) 1 つのバージョンのみを複製する場合は、 `--<component>=<version>`を使用してこのバージョンを指定します。例えば：
 
-    -   `tiup mirror clone <target-dir> --tidb v5.4.2`コマンドを実行して、TiDBコンポーネントのv5.4.2バージョンのクローンを作成します。
-    -   `tiup mirror clone <target-dir> --tidb v5.4.2 --tikv all`コマンドを実行して、v5.4.2バージョンのTiDBコンポーネントとすべてのバージョンのTiKVコンポーネントのクローンを作成します。
-    -   `tiup mirror clone <target-dir> v5.4.2`コマンドを実行して、クラスタのすべてのコンポーネントのv5.4.2バージョンのクローンを作成します。
+    -   `tiup mirror clone <target-dir> --tidb v5.4.3`コマンドを実行して、v5.4.3 バージョンの TiDB コンポーネントを複製します。
+    -   `tiup mirror clone <target-dir> --tidb v5.4.3 --tikv all`コマンドを実行して、TiDB コンポーネントの v5.4.3 バージョンと TiKV コンポーネントのすべてのバージョンを複製します。
+    -   `tiup mirror clone <target-dir> v5.4.3`コマンドを実行して、クラスター内のすべてのコンポーネントの v5.4.3 バージョンを複製します。
 
-クローン作成後、署名キーが自動的に設定されます。
+複製後、署名鍵が自動的に設定されます。
 
-### プライベートリポジトリを管理する {#manage-the-private-repository}
+### プライベート リポジトリを管理する {#manage-the-private-repository}
 
-SCP、NFSを介してファイルを共有するか、HTTPまたはHTTPSプロトコルを介してリポジトリを利用できるようにすることで、ホスト間で`tiup mirror clone`を使用して複製されたリポジトリを共有できます。 `tiup mirror set <location>`を使用して、リポジトリの場所を指定します。
+SCP、NFS を介してファイルを共有するか、HTTP または HTTPS プロトコルを介してリポジトリを利用できるようにすることで、ホスト間で`tiup mirror clone`を使用して複製されたリポジトリを共有できます。 `tiup mirror set <location>`を使用して、リポジトリの場所を指定します。
 
 ```bash
 tiup mirror set /shared_data/tiup
@@ -107,34 +107,34 @@ tiup mirror set https://tiup-mirror.example.com/
 
 > **ノート：**
 >
-> `tiup mirror clone`を実行しているマシンで`tiup mirror set...`を実行すると、次に`tiup mirror clone...`を実行すると、マシンはリモートミラーではなく、ローカルミラーからクローンを作成します。したがって、プライベートミラーを更新する前に、 `tiup mirror set --reset`を実行してミラーをリセットする必要があります。
+> `tiup mirror clone`を実行するマシンで`tiup mirror set...`を実行すると、次に`tiup mirror clone...`を実行すると、マシンはリモート ミラーではなくローカル ミラーからクローンを作成します。したがって、プライベート ミラーを更新する前に、 `tiup mirror set --reset`を実行してミラーをリセットする必要があります。
 
-ミラーを使用する別の方法は、 `TIUP_MIRRORS`の環境変数を使用することです。プライベートリポジトリで`tiup list`を実行する例を次に示します。
+ミラーを使用する別の方法は、 `TIUP_MIRRORS`環境変数を使用することです。プライベート リポジトリで`tiup list`を実行する例を次に示します。
 
 ```bash
 export TIUP_MIRRORS=/shared_data/tiup
 tiup list
 ```
 
-`TIUP_MIRRORS`に設定すると、ミラー構成を永続的に変更できます（例： `tiup mirror set` ）。詳細については、 [tiup問題＃651](https://github.com/pingcap/tiup/issues/651)を参照してください。
+`TIUP_MIRRORS`設定は、ミラー構成を永続的に変更できます (例: `tiup mirror set` )。詳細については、 [ティアップ号 #651](https://github.com/pingcap/tiup/issues/651)を参照してください。
 
-### プライベートリポジトリを更新する {#update-the-private-repository}
+### プライベート リポジトリを更新する {#update-the-private-repository}
 
 同じ`target-dir`で`tiup mirror clone`コマンドを再度実行すると、マシンは新しいマニフェストを作成し、利用可能なコンポーネントの最新バージョンをダウンロードします。
 
 > **ノート：**
 >
-> マニフェストを再作成する前に、すべてのコンポーネントとバージョン（以前にダウンロードしたものを含む）が含まれていることを確認してください。
+> マニフェストを再作成する前に、すべてのコンポーネントとバージョン (以前にダウンロードしたものを含む) が含まれていることを確認してください。
 
-## カスタムリポジトリ {#custom-repository}
+## カスタム リポジトリ {#custom-repository}
 
-自分で作成したTiDB、TiKV、PDなどのTiDBコンポーネントを操作するカスタムリポジトリを作成できます。独自のtiupコンポーネントを作成することもできます。
+自分で構築した TiDB、TiKV、PD などの TiDB コンポーネントを操作するカスタム リポジトリを作成できます。独自の tiup コンポーネントを作成することもできます。
 
 独自のコンポーネントを作成するには、 `tiup package`コマンドを実行し、 [コンポーネントのパッケージ](https://github.com/pingcap/tiup/blob/master/doc/user/package.md)の指示に従って実行します。
 
-### カスタムリポジトリを作成する {#create-a-custom-repository}
+### カスタム リポジトリを作成する {#create-a-custom-repository}
 
-`/data/mirror`で空のリポジトリを作成するには：
+`/data/mirror`で空のリポジトリを作成するには:
 
 ```bash
 tiup mirror init /data/mirror
@@ -142,22 +142,22 @@ tiup mirror init /data/mirror
 
 リポジトリ作成の一環として、キーは`/data/mirror/keys`に書き込まれます。
 
-`~/.tiup/keys/private.json`で新しい秘密鍵を作成するには：
+`~/.tiup/keys/private.json`で新しい秘密鍵を作成するには:
 
 ```bash
 tiup mirror genkey
 ```
 
-`/data/mirror`の秘密鍵`~/.tiup/keys/private.json`の所有権を持つ`jdoe`を付与します。
+`/data/mirror`の秘密鍵`~/.tiup/keys/private.json`所有権で`jdoe`を付与します。
 
 ```bash
 tiup mirror set /data/mirror
 tiup mirror grant jdoe
 ```
 
-### カスタムコンポーネントを操作する {#work-with-custom-components}
+### カスタム コンポーネントの操作 {#work-with-custom-components}
 
-1.  helloというカスタムコンポーネントを作成します。
+1.  hello というカスタム コンポーネントを作成します。
 
     ```bash
     $ cat > hello.c << END
@@ -198,7 +198,7 @@ tiup mirror grant jdoe
     hello
     ```
 
-    `tiup mirror merge`を使用すると、カスタムコンポーネントを含むリポジトリを別のリポジトリにマージできます。これは、 `/data/my_custom_components`のすべてのコンポーネントが現在の`$USER`によって署名されていることを前提としています。
+    `tiup mirror merge`を使用すると、カスタム コンポーネントを含むリポジトリを別のリポジトリにマージできます。これは、 `/data/my_custom_components`のすべてのコンポーネントが現在の`$USER`によって署名されていることを前提としています。
 
     ```bash
     $ tiup mirror set /data/my_mirror

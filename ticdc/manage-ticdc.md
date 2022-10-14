@@ -11,14 +11,14 @@ HTTP インターフェイス (TiCDC OpenAPI 機能) を使用して、TiCDC ク
 
 ## TiUP を使用して TiCDC をアップグレードする {#upgrade-ticdc-using-tiup}
 
-このセクションでは、TiUP を使用して TiCDC クラスターをアップグレードする方法を紹介します。次の例では、TiCDC と TiDB クラスター全体を v5.4.2 にアップグレードする必要があると想定しています。
+このセクションでは、TiUP を使用して TiCDC クラスターをアップグレードする方法を紹介します。次の例では、TiCDC と TiDB クラスター全体を v5.4.3 にアップグレードする必要があると想定しています。
 
 {{< copyable "" >}}
 
 ```shell
 tiup update --self && \
 tiup update --all && \
-tiup cluster upgrade <cluster-name> v5.4.2
+tiup cluster upgrade <cluster-name> v5.4.3
 ```
 
 ### バージョンアップ時の注意事項 {#notes-for-upgrade}

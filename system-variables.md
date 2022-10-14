@@ -686,7 +686,7 @@ MPP モードの選択については、 [MPP モードを選択するかどう�
         ERROR 1062 : Duplicate entry '1' for key 'PRIMARY'
         ```
 
-    -   1 に設定し、楽観的トランザクションを使用する場合:
+    -   1 に設定し、楽観的なトランザクションを使用する場合:
 
         ```sql
         tidb> set @@tidb_constraint_check_in_place=1;
@@ -695,7 +695,7 @@ MPP モードの選択については、 [MPP モードを選択するかどう�
         ERROR 1062 : Duplicate entry '1' for key 'PRIMARY'
         ```
 
-制約チェックは、悲観的なトランザクションに対して常に実行されます (デフォルト)。
+制約チェックは、ペシミスティック トランザクションに対して常に実行されます (デフォルト)。
 
 ### tidb_current_ts {#tidb-current-ts}
 
@@ -988,7 +988,7 @@ MPP モードの選択については、 [MPP モードを選択するかどう�
 -   スコープ: セッション |グローバル
 -   デフォルト値: `OFF`
 -   この変数は、 `IndexLookUp`のオペレーターでコプロセッサー要求を送信するためにページングの方法を使用するかどうかを制御します。
--   ユーザー シナリオ: `IndexLookup`と`Limit`を使用し、 `Limit`を`IndexScan`にプッシュできない読み取りクエリの場合、読み取りクエリの待機時間が長くなり、 レイテンシーの`unified read pool`の CPU 使用率が高くなる可能性があります。このような場合、 `Limit`演算子は小さなデータセットしか必要としないため、 `tidb_enable_paging`から`ON`を設定すると、TiDB が処理するデータが少なくなり、クエリのレイテンシーとリソース消費が削減されます。
+-   ユーザー シナリオ: `IndexLookup`と`Limit`を使用し、 `Limit`を`IndexScan`にプッシュできない読み取りクエリの場合、読み取りクエリの待機時間が長くなり、 レイテンシーの`unified read pool`の CPU 使用率が高くなる可能性があります。このような場合、 `Limit`演算子は小さなデータセットしか必要としないため、 `tidb_enable_paging`を`ON`に設定すると、TiDB が処理するデータが少なくなり、クエリのレイテンシーとリソース消費が削減されます。
 -   `tidb_enable_paging`が有効な場合、プッシュダウンできず`960`未満の`Limit`の`IndexLookUp`のリクエストに対して、TiDB はページングの方法を使用してコプロセッサ リクエストを送信します。 `Limit`が少ないほど、最適化がより明確になります。
 
 ### tidb_enable_parallel_apply <span class="version-mark">v5.0 の新</span>機能 {#tidb-enable-parallel-apply-span-class-version-mark-new-in-v5-0-span}
@@ -1964,7 +1964,7 @@ Query OK, 0 rows affected, 1 warning (0.00 sec)
 
 > **ノート：**
 >
-> 文字チェックがスキップされると、TiDB はアプリケーションによって書き込まれた不正な UTF-8 文字の検出に失敗し、 `ANALYZE`の実行時にデコード エラーが発生し、その他の未知のエンコーディングの問題が発生する可能性があります。アプリケーションが書き込まれた文字列の有効性を保証できない場合、文字チェックをスキップすることはお勧めしません。
+> 文字チェックがスキップされると、TiDB はアプリケーションによって書き込まれた不正な UTF-8 文字の検出に失敗し、 `ANALYZE`の実行時にデコード エラーが発生し、その他の不明なエンコードの問題が発生する可能性があります。アプリケーションが書き込まれた文字列の有効性を保証できない場合、文字チェックをスキップすることはお勧めしません。
 
 ### tidb_slow_log_threshold {#tidb-slow-log-threshold}
 

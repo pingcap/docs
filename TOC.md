@@ -389,7 +389,7 @@
         -   セキュリティ
             -   [DM 接続の TLS を有効にする](/dm/dm-enable-tls.md)
             -   [自己署名証明書の生成](/dm/dm-generate-self-signed-certificates.md)
-        -   [指標の監視](/dm/monitor-a-dm-cluster.md)
+        -   [指標のモニタリング](/dm/monitor-a-dm-cluster.md)
         -   [アラート ルール](/dm/dm-alert-rules.md)
         -   [エラーコード](/dm/dm-error-handling.md#handle-common-errors)
         -   [FAQ](/dm/dm-faq.md)
@@ -408,7 +408,7 @@
         -   [TiCDC OpenAPI](/ticdc/ticdc-open-api.md)
         -   [TiCDC オープン プロトコル](/ticdc/ticdc-open-protocol.md)
         -   [TiCDC Canal- JSON プロトコル](/ticdc/ticdc-canal-json.md)
-        -   [TiDB とコンフルエント プラットフォームを統合する](/ticdc/integrate-confluent-using-ticdc.md)
+        -   [TiDB をコンフルエント プラットフォームと統合する](/ticdc/integrate-confluent-using-ticdc.md)
         -   [用語集](/ticdc/ticdc-glossary.md)
     -   [Dumpling](/dumpling-overview.md)
     -   同期差分インスペクター
@@ -759,6 +759,7 @@
     -   [リリースのタイムライン](/releases/release-timeline.md)
     -   [TiDB のバージョニング](/releases/versioning.md)
     -   v5.4
+        -   [5.4.3](/releases/release-5.4.3.md)
         -   [5.4.2](/releases/release-5.4.2.md)
         -   [5.4.1](/releases/release-5.4.1.md)
         -   [5.4.0](/releases/release-5.4.0.md)

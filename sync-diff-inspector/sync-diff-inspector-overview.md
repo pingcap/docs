@@ -9,7 +9,7 @@ summary: Use sync-diff-inspector to compare data and repair inconsistent data.
 
 このガイドでは、sync-diff-inspector の主な機能を紹介し、このツールを構成して使用する方法について説明します。 sync-diff-inspector をダウンロードするには、次のいずれかの方法を使用します。
 
--   バイナリパッケージ。 [tidb-community-toolkit-v5.4.2-linux-amd64](https://download.pingcap.org/tidb-community-toolkit-v5.4.2-linux-amd64.tar.gz)をクリックしてダウンロードしてください。
+-   バイナリ パッケージ。 [tidb-community-toolkit-v5.4.3-linux-amd64](https://download.pingcap.org/tidb-community-toolkit-v5.4.3-linux-amd64.tar.gz)をクリックしてダウンロードしてください。
 -   Docker イメージ。次のコマンドを実行してダウンロードします。
 
     {{< copyable "" >}}
@@ -62,7 +62,7 @@ sync-diff-inspector の構成は、次の部分で構成されます。
 
 以下は、完全な構成ファイルの説明です。
 
--   注: 名前の後に`s`が付いている構成は複数の値を持つことができるため、構成値を含めるには角括弧`[]`を使用する必要があります。
+-   注: 名前の後に`s`が付いている構成は複数の値を持つことができるため、角括弧`[]`を使用して構成値を含める必要があります。
 
 ```toml
 # Diff Configuration.
@@ -276,7 +276,7 @@ REPLACE INTO `sbtest`.`sbtest99`(`id`,`k`,`c`,`pad`) VALUES (3700000,2501808,'he
 
 ## ノート {#note}
 
--   sync-diff-inspector は、データをチェックするときに一定量のサーバー リソースを消費します。営業時間のピーク時に sync-diff-inspector を使用してデータをチェックすることは避けてください。
+-   sync-diff-inspector は、データをチェックするときに一定量のサーバーリソースを消費します。営業時間のピーク時に sync-diff-inspector を使用してデータをチェックすることは避けてください。
 -   MySQL のデータと TiDB のデータを比較する前に、テーブルの照合順序構成に注意してください。主キーまたはユニークキーが`varchar`型で、MySQL と TiDB の照合順序構成が異なる場合、照合順序の問題により、最終的なチェック結果が正しくない可能性があります。 sync-diff-inspector 構成ファイルに照合順序を追加する必要があります。
 -   sync-diff-inspector は、最初に TiDB 統計に従ってデータをチャンクに分割します。統計の正確性を保証する必要があります。 TiDB サーバーの*ワークロードが軽い*場合は、 `analyze table {table_name}`コマンドを手動で実行できます。
 -   `table-rules`に特に注意してください。 `schema-pattern="test1"` 、および`table-pattern = "t_1"`を`target-table = "t_2"`する`test1` `target-schema="test2"`ソース データベースの`t_1`スキーマと`test2` .ターゲット データベースの`t_2`個のスキーマが比較されます。シャーディングは sync-diff-inspector でデフォルトで有効になっているため、ソース データベースに`test2`がある場合。 `t_2`テーブル、 `test1` 。 `t_1`テーブルと`test2` 。シャーディングとして機能するソース データベースの`t_2`のテーブルが`test2`と比較されます。ターゲット データベースの`t_2`テーブル。

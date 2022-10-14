@@ -10,7 +10,7 @@ TiDB バージョン: 5.4.2
 
 > **警告：**
 >
-> このバージョンには既知のバグがあるため、v5.4.2 の使用はお勧めしません。詳細については、 [#12934](https://github.com/tikv/tikv/issues/12934)を参照してください。このバグは、次の v5.4.3 で修正される予定です。
+> このバージョンには既知のバグがあるため、v5.4.2 の使用はお勧めしません。詳細については、 [#12934](https://github.com/tikv/tikv/issues/12934)を参照してください。このバグは v5.4.3 で修正されています。 [v5.4.3](/releases/release-5.4.3.md)を使用することをお勧めします。
 
 ## 改良点 {#improvements}
 
@@ -38,7 +38,7 @@ TiDB バージョン: 5.4.2
 
 -   TiDB
 
-    -   バイナリ プロトコルで間違った TableDual プランがキャッシュされる問題を修正[#34690](https://github.com/pingcap/tidb/issues/34690) [#34678](https://github.com/pingcap/tidb/issues/34678)
+    -   バイナリ プロトコルに間違った TableDual プランがキャッシュされる問題を修正[#34690](https://github.com/pingcap/tidb/issues/34690) [#34678](https://github.com/pingcap/tidb/issues/34678)
     -   EqualAll ケース[#34584](https://github.com/pingcap/tidb/issues/34584)で TiFlash `firstrow`集約関数の null フラグが誤って推論される問題を修正
     -   プランナーが TiFlash [#34682](https://github.com/pingcap/tidb/issues/34682)の間違った 2 フェーズ集計プランを生成する問題を修正します。
     -   `tidb_opt_agg_push_down`と`tidb_enforce_mpp`が有効な場合に発生する Planner の誤った動作を修正します[#34465](https://github.com/pingcap/tidb/issues/34465)
