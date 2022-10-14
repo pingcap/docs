@@ -2416,7 +2416,7 @@ mysql> desc select count(distinct a) from test.t;
 - Persists to cluster: Yes
 - Default value: `0`
 - Range: `[0, 2147483647]`
-- This variable is used to control the selection of the TiDB Join Reorder algorithm. When the number of nodes participating in Join Reorder is greater than the threshold, TiDB selects the greedy algorithm, and when it is less than the threshold, TiDB selects the dynamic programming algorithm.
+- This variable is used to control the selection of the TiDB Join Reorder algorithm. When the number of nodes participating in Join Reorder is greater than this threshold, TiDB selects the greedy algorithm, and when it is less than this threshold, TiDB selects the dynamic programming algorithm.
 - Currently, for OLTP queries, it is recommended to keep the default value. For OLAP queries, it is recommended to set the variable value to 10~15 to get better connection orders in OLAP scenarios.
 
 ### tidb_opt_limit_push_down_threshold
