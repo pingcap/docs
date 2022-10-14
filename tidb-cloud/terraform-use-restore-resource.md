@@ -181,7 +181,7 @@ After creating a backup of a cluster, you can restore the cluster by creating a 
 
 6. After the cluster status changes to `AVAILABLE`, the restore task will be `RUNNING` and turn to `SUCCESS` at last. Copy the project ID and cluster ID for later use.
 
-Note that the restored cluster is not managed by Terraform. You can manage the restored cluster by [importing it](/tidb-cloud/terraform-use-cluster-resource.md#Import a cluster).
+Note that the restored cluster is not managed by Terraform. You can manage the restored cluster by [importing it](/tidb-cloud/terraform-use-cluster-resource.md#import-a-cluster).
 
 ## Delete a restore task
 
