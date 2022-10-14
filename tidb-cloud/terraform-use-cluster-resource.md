@@ -854,7 +854,9 @@ Now, you have created and managed a Dedicated Tier cluster with Terraform. Next,
 
 ## Import a cluster
 
-You can manage a cluster with Terraform by importing the cluster even if it is not created by Terraform.
+For a TiDB cluster that is not managed by Terraform, you can use Terraform to manage it just by importing it.
+
+For example, you can import a cluster that is not created by Terraform or import a cluster that is [created with the restore resource](/tidb-cloud/terraform-use-restore-resource.md#create-a-restore-task-with-the-restore-resource).
 
 1. Create a `import_cluster.tf` file as follows:
 
@@ -977,8 +979,6 @@ You can manage a cluster with Terraform by importing the cluster even if it is n
     ```
 
 Now you can use Terraform to manage the cluster. 
-
-An example of using import is managing the cluster created by restored task.
 
 ## Delete a cluster
 
