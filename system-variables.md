@@ -1704,17 +1704,13 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
     - `txn_mode`: The transactional mode. Value options are `OPTIMISTIC` and `PESSIMISTIC`.
     - `sql`: The SQL statement corresponding to the current query.
 
-<<<<<<< HEAD
 </CustomContent>
 
-=======
->>>>>>> 449e1c7b9 (add descriptions for two system variables (#9896))
 ### tidb_guarantee_linearizability <span class="version-mark">New in v5.0</span>
 
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
 - Type: Boolean
-<<<<<<< HEAD
 - Default value: `ON`
 - This variable controls the way commit TS is calculated for async commit. By default (with the `OFF` value), the two-phase commit requests a new TS from the PD server and uses the TS to calculate the final commit TS. In this situation, linearizability is guaranteed for all the concurrent transactions.
 - If you set this variable to `ON`, the process of fetching TS from the PD server is skipped, with the cost that only causal consistency is guaranteed but not linearizability. For more details, see the blog post [Async Commit, the Accelerator for Transaction Commit in TiDB 5.0](https://en.pingcap.com/blog/async-commit-the-accelerator-for-transaction-commit-in-tidb-5-0/).
@@ -1729,13 +1725,6 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 - This variable controls whether the MPP hash partition exchange operator is generated in a cluster with new collation enabled. `true` means to generate the operator, and `false` means not to generate it.
 - This variable is used for the internal operation of TiDB. It is **NOT recommended** to set this variable.
 
-=======
-- Default value: `OFF`
-- This variable controls the way commit TS is calculated for async commit. By default (with the `OFF` value), the two-phase commit requests a new TS from the PD server and uses the TS to calculate the final commit TS. In this situation, linearizability is guaranteed for all the concurrent transactions.
-- If you set this variable to `ON`, the TS fetched from the PD server is saved, with the cost that only causal consistency is guaranteed but not linearizability. For more details, see the blog post [Async Commit, the Accelerator for Transaction Commit in TiDB 5.0](https://en.pingcap.com/blog/async-commit-the-accelerator-for-transaction-commit-in-tidb-5-0/).
-- For scenarios that require only causal consistency, you can set this variable to `ON` to improve performance.
-
->>>>>>> 449e1c7b9 (add descriptions for two system variables (#9896))
 ### tidb_hash_join_concurrency
 
 > **Warning:**
