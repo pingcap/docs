@@ -19,7 +19,7 @@ Each TiDB cluster is in a project. Before you create a TiDB cluster, you need to
 
 To view the information of all available projects, you can use the `tidbcloud_project` data source as follows:
 
-1. In the `main.tf` file that is created when you [get TiDB Cloud Terraform Provider](/tidb-cloud/terraform-get-tidbcloud-provider.md), add the `data` and `output` blocks as follows:
+1. In the `main.tf` file that is created when you [Get TiDB Cloud Terraform Provider](/tidb-cloud/terraform-get-tidbcloud-provider.md), add the `data` and `output` blocks as follows:
 
    ```
    terraform {
