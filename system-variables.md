@@ -2263,7 +2263,6 @@ mysql> desc select count(distinct a) from test.t;
 - This variable is used to set the threshold that determines whether to push the Limit or TopN operator down to TiKV.
 - If the value of the Limit or TopN operator is smaller than or equal to this threshold, these operators are forcibly pushed down to TiKV. This variable resolves the issue that the Limit or TopN operator cannot be pushed down to TiKV partly due to wrong estimation.
 
-<<<<<<< HEAD
 ### tidb_opt_memory_factor
 
 - Scope: SESSION | GLOBAL
@@ -2273,14 +2272,11 @@ mysql> desc select count(distinct a) from test.t;
 - Default value: `0.001`
 - Indicates the memory cost for TiDB to store one row. This variable is internally used in the [Cost Model](/cost-model.md), and it is **NOT** recommended to modify its value.
 
-=======
->>>>>>> d5f74640c (system variable: add doc for tidb_remove_orderby_in_subquery, tidb_opt_projection_push_down, tidb_opt_mpp_outer_join_fixed_build_side (#9779))
 ### tidb_opt_mpp_outer_join_fixed_build_side <span class="version-mark">New in v5.1.0</span>
 
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
 - Type: Boolean
-<<<<<<< HEAD
 - Default value: `OFF`
 - When the variable value is `ON`, the left join operator always uses inner table as the build side and the right join operator always uses outer table as the build side. If you set the value to `OFF`, the outer join operator can use either side of the tables as the build side.
 
@@ -2292,10 +2288,6 @@ mysql> desc select count(distinct a) from test.t;
 - Range: `[0, 2147483647]`
 - Default value: `1.0`
 - Indicates the net cost of transferring 1 byte of data through the network. This variable is internally used in the [Cost Model](/cost-model.md), and it is **NOT** recommended to modify its value.
-=======
-- Default value: `ON`
-- Specifies whether to allow using outer table as the build side in outer join for TiFlash.
->>>>>>> d5f74640c (system variable: add doc for tidb_remove_orderby_in_subquery, tidb_opt_projection_push_down, tidb_opt_mpp_outer_join_fixed_build_side (#9779))
 
 ### tidb_opt_prefer_range_scan <span class="version-mark">New in v5.0</span>
 
@@ -2330,9 +2322,6 @@ explain select * from t where age=5;
 3 rows in set (0.00 sec)
 ```
 
-<<<<<<< HEAD
-### tidb_opt_scan_factor
-=======
 ### tidb_opt_projection_push_down <span class="version-mark">New in v6.1.0</span>
 
 - Scope: SESSION
@@ -2341,8 +2330,7 @@ explain select * from t where age=5;
 - Default value: `OFF`
 - Specifies whether to allow the optimizer to push `Projection` down to the TiKV or TiFlash coprocessor.
 
-### tidb_opt_skew_distinct_agg <span class="version-mark">New in v6.2.0</span>
->>>>>>> d5f74640c (system variable: add doc for tidb_remove_orderby_in_subquery, tidb_opt_projection_push_down, tidb_opt_mpp_outer_join_fixed_build_side (#9779))
+### tidb_opt_scan_factor
 
 - Scope: SESSION | GLOBAL
 - Persists to cluster: YES
@@ -2354,18 +2342,11 @@ explain select * from t where age=5;
 ### tidb_opt_seek_factor
 
 - Scope: SESSION | GLOBAL
-<<<<<<< HEAD
 - Persists to cluster: YES
 - Type: Float
 - Range: `[0, 2147483647]`
 - Default value: `20`
 - Indicates the start-up cost for TiDB to request data from TiKV. This variable is internally used in the [Cost Model](/cost-model.md), and it is **NOT** recommended to modify its value.
-=======
-- Persists to cluster: Yes
-- Type: Boolean
-- Default value: `OFF`
-- This variable sets whether the optimizer rewrites the aggregate functions with `DISTINCT` to the two-level aggregate functions, such as rewriting `SELECT b, COUNT(DISTINCT a) FROM t GROUP BY b` to `SELECT b, COUNT(a) FROM (SELECT b, a FROM t GROUP BY b, a) t GROUP BY b`. When the aggregation column has serious skew and the `DISTINCT` column has many different values, this rewriting can avoid the data skew in the query execution and improve the query performance.
->>>>>>> d5f74640c (system variable: add doc for tidb_remove_orderby_in_subquery, tidb_opt_projection_push_down, tidb_opt_mpp_outer_join_fixed_build_side (#9779))
 
 ### tidb_opt_write_row_id
 
