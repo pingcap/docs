@@ -30,7 +30,7 @@ The **TiDB-backend**: `tidb-lightning` first encodes these data into SQL `INSERT
 | TiDB versions supported | >= v4.0.0 | All | All |
 | TiDB services impacted | Yes | Yes | No |
 
-> **Note**:
+> **Note:**
 >
 > - Apply only one backend at a time when using multiple TiDB Lightning instances to import data to the same target. For example, you cannot import data to the same TiDB cluster in both Local-backend and TiDB-backend modes at the same time.
 >

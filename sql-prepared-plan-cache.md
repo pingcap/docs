@@ -67,7 +67,7 @@ In TiDB v5.4, the execution plan cache is disabled by default. To use this featu
 
 </CustomContent>
 
-> **Note：**
+> **Note:**
 >
 > The execution plan cache feature applies only to `Prepare` / `Execute` queries and does not take effect for normal queries.
 
