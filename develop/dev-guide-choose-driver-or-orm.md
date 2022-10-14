@@ -32,9 +32,9 @@ For a full list of compatibility differences, see [MySQL Compatibility](/mysql-c
 
 ## Java
 
-This section describes how to use Driver and ORM in Java.
+This section describes how to use drivers and ORM frameworks in Java.
 
-### Java Drivers
+### Java drivers
 
 <SimpleTab>
 <div label="MySQL-JDBC">
@@ -99,12 +99,12 @@ implementation group: 'org.bouncycastle', name: 'bcpkix-jdk15on', version: '1.67
 </div>
 </SimpleTab>
 
-### Java ORM framework
+### Java ORM frameworks
 
 > **Note:**
 >
 > - Currently, Hibernate does [not support nested transactions](https://stackoverflow.com/questions/37927208/nested-transaction-in-spring-app-with-jpa-postgres).
-> - Since v6.2.0, TiDB supports [savepoint](/sql-statements/sql-statement-savepoint.md). Therefore, make sure that your TiDB is v6.2.0 or later versions. Otherwise, do not use the `Propagation.NESTED` transaction propagation option in `@Transactional`, that is, do not set `@Transactional(propagation = Propagation.NESTED)`.
+> - Since v6.2.0, TiDB supports [savepoint](/sql-statements/sql-statement-savepoint.md). To use the `Propagation.NESTED` transaction propagation option in `@Transactional`, that is, to set `@Transactional(propagation = Propagation.NESTED)`, make sure that your TiDB is v6.2.0 or later.
 
 <SimpleTab>
 <div label="Hibernate">
@@ -184,7 +184,7 @@ For an example of using MyBatis to build a TiDB application, see [Build a Simple
 
 </SimpleTab>
 
-### Java Client Load Balancing
+### Java client load balancing
 
 **tidb-loadbalance**
 
@@ -222,9 +222,9 @@ implementation group: 'io.github.lastincisor', name: 'tidb-loadbalance', version
 
 ## Golang
 
-This section describes how to use Driver and ORM in Golang.
+This section describes how to use drivers and ORM frameworks in Golang.
 
-### Golang Drivers
+### Golang drivers
 
 **go-sql-driver/mysql**
 
@@ -234,7 +234,7 @@ To download and configure a Golang driver, refer to the [go-sql-driver/mysql doc
 
 For an example of how to build a complete application, see [Build a Simple CRUD App with TiDB and Golang](/develop/dev-guide-sample-application-golang.md).
 
-### Golang ORM Framework
+### Golang ORM frameworks
 
 **GORM**
 
