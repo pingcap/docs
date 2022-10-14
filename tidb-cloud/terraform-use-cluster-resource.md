@@ -976,7 +976,9 @@ You can manage a cluster with Terraform by importing the cluster even if it is n
     Apply complete! Resources: 0 added, 0 changed, 0 destroyed.
     ```
 
-Now you can use Terraform to manage the cluster created by the restore task.
+Now you can use Terraform to manage the cluster. 
+
+An example of using import is managing the cluster created by restored task.
 
 ## Delete a cluster
 
