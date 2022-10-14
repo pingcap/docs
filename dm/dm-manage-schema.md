@@ -19,7 +19,7 @@ The internal table schema comes from the following sources:
 - In the sync stage, when DM handles DDL statements such as `ALTER TABLE`, it updates the internal table schema at the same time.
 - If the task is an incremental migration (`task-mode=incremental`), in which the downstream has completed creating the table to be migrated, DM obtains the table schema information from the downstream database. This behavior varies with DM versions.
 
-For incremental replication, the schema maintenance is complicated. The whole data link contains the following table schemas, which might be the same or different:
+For incremental replication, schema maintenance is complicated. During the whole data replication, the following four table schemas are involved. These schemas might be the consistent or inconsistent with one another:
 
 ![schema](/media/dm/operate-schema.png)
 
