@@ -147,11 +147,12 @@ To get the cluster specification information, you can use the `tidbcloud_cluster
 
 2. Run the `terraform apply --auto-approve` command and you will get the cluster specification information.
 
-    The following provides only a part of the results for your reference.
+    Click the following line to get a part of the example results for your reference.
 
     <details>
-    <summary>Cluster specification</summary>
-    <pre><code>
+      <summary>Cluster specification</summary>
+   
+    ```
     {
         "cloud_provider" = "AWS"
         "cluster_type" = "DEDICATED"
@@ -268,7 +269,8 @@ To get the cluster specification information, you can use the `tidbcloud_cluster
           },
         ])
       }
-    </code></pre>
+    ```
+
     </details>
 
 In the results:
