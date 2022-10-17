@@ -59,7 +59,7 @@ The following describes the output of the `EXPLAIN` statement above:
 
 > **Note:**
 >
-> For the `estRows` of all Probe side sub-operators of `IndexJoin` and `Apply`, the meaning of the displayed row count is different before and after v6.4.0.
+> For the `estRows` of all Probe side sub-operators of `IndexJoin` and `Apply`, the meanings of the displayed row count are different before and after v6.4.0.
 > Before v6.4.0, it means the estimated row count expected to be processed by the Probe side operators for every row from the Build side operator, not the estimated total row count expected to be processed by the Probe side operators. However, the actual row count displayed (the `actRows` column) in the `EXPLAIN ANALYZE` statement means the total row count, so there is an inconsistency in their meanings. 
 >
 > For example：

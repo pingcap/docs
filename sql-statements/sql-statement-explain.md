@@ -40,7 +40,7 @@ ExplainableStmt ::=
 
 > **Note:**
 >
-> For the `estRows` of all Probe side sub-operators of `IndexJoin` and `Apply`, the meaning of the displayed row count is different before and after v6.4.0. You can find details in [TiDB Query Execution Plan Overview](/explain-overview.md#understand-explain-output).
+> For the `estRows` of all Probe side sub-operators of `IndexJoin` and `Apply`, the meanings of the displayed row count are different before and after v6.4.0. You can find details in [TiDB Query Execution Plan Overview](/explain-overview.md#understand-explain-output).
 
 Currently, `EXPLAIN` in TiDB outputs 5 columns: `id`, `estRows`, `task`, `access object`, `operator info`. Each operator in the execution plan is described by these attributes, with each row in the `EXPLAIN` output describing an operator. The description of each attribute is as follows:
 
