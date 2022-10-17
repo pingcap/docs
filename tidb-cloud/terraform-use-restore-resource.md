@@ -7,8 +7,6 @@ summary: Learn how to use restore resource.
 
 You can learn how to create a restore task with the `tidbcloud_restore` resource in this document.
 
-You can also learn how to import a TiDB Cloud cluster.
-
 ## Prerequisites
 
 - [Get TiDB Cloud Terraform Provider](/tidb-cloud/terraform-get-tidbcloud-provider.md).
