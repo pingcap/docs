@@ -144,7 +144,7 @@ To edit the billing profile information, perform the following steps:
 
 ## Contract
 
-If you have agreed with our sales on a subscription and received an email to review and accept the agreement online, you can do the following:
+If you have agreed with our sales on a contract and received an email to review and accept the contract online, you can do the following:
 
 1. Click the account name in the upper-right corner of the TiDB Cloud console.
 2. Click **Billing**.
