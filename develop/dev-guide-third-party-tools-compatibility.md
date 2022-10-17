@@ -157,7 +157,6 @@ TiDB fixes it in the following ways:
 - Client side: This bug has been fixed in **pingcap/mysql-connector-j** and you can use the [pingcap/mysql-connector-j](https://github.com/pingcap/mysql-connector-j) instead of the official MySQL Connector/J.
 - Server side: This compatibility issue has been fixed since TiDB v6.3.0 and you can upgrade the server to v6.3.0 or later versions.
 
-
 ## Compatibility with Sequelize
 
 The compatibility information described in this section is based on [Sequelize v6.21.4](https://www.npmjs.com/package/sequelize/v/6.21.4).
@@ -178,9 +177,9 @@ Unsupported features are:
 
 **Description**
 
-Modification of Integer Primary Key is not supported. TiDB uses primary key as an index for data organization if the primary key is  integer type. Refer to [Issue #18090](https://github.com/pingcap/tidb/issues/18090) and [Clustered Indexes](/clustered-indexes.md) for more details.
+Modification of Integer Primary Key is not supported. TiDB uses primary key as an index for data organization if the primary key is integer type. Refer to [Issue #18090](https://github.com/pingcap/tidb/issues/18090) and [Clustered Indexes](/clustered-indexes.md) for more details.
 
-### The isolation level `READ-UNCOMMITTED` and `SERIALIZABLE` are not supported;
+### The isolation level `READ-UNCOMMITTED` and `SERIALIZABLE` are not supported
 
 **Description**
 
