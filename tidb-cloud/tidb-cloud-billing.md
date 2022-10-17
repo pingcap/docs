@@ -153,4 +153,4 @@ If you have agreed with our sales on a contract and received an email to review 
 3. Click **Contract**. The contract list is displayed.
 4. Click **Download**, **Accept**, or **Reject** according to your need.
 
-To learn more about contacts, feel free to [contact our sales](https://www.pingcap.com/contact-us/).
+To learn more about contracts, feel free to [contact our sales](https://www.pingcap.com/contact-us/).
