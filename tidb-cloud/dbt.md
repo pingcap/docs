@@ -7,22 +7,23 @@ summary: Learn the use cases of dbt in TiDB.
 
 [Data build tool (dbt)](https://www.getdbt.com/) is a popular open-source data transformation tool that enables analytics engineers to transform data in their warehouses through SQL statements. Through the [dbt-tidb](https://github.com/pingcap/dbt-tidb) plug-in, analytics engineers working with TiDB can directly create forms and match data through SQL without having to think about the process of creating tables or views.
 
-Here we use the official dbt tutorial as an example to introduce the use of TiDB in dbt together.
+This document uses the official dbt tutorial as an example to introduce how to use TiDB in dbt together.
 
 The software used in this example and its version requirements:
-- TiDB 5.3 or upper
-- dbt 1.01 or upper
+
+- TiDB 5.3 or later versions
+- dbt 1.01 or later versions
 - dbt-tidb 1.0.0
 
-## Installation
+## Install dbt
 
-Installing dbt and dbt-tidb requires only one command because dbt is installed as a dependency when we install dbt-tidb.
+You only need to run one line of command to install dbt and dbt-tidb, because dbt is installed as a dependency when you install dbt-tidb.
 
 ```shell
 pip install dbt-tidb
 ```
 
-## Creating project: jaffle shop
+## Create an example project: jaffle shop
 
 The jaffle_shop is a project provided by dbt-lab to demonstrate dbt functionality.
 
@@ -31,11 +32,13 @@ git clone https://github.com/dbt-labs/jaffle_shop
 cd jaffle_shop
 ```
 
-## Configuring project
+## Configure the project
+
+This section describes how to configure the global configurations and the project configurations, and how to verify the configurations.
 
 ### Global configurations
 
-dbt has a default global profile: `~/.dbt/profiles.yml`, which we first set up in the user directory and configured the connection information for the TiDB database.
+dbt has a default global profile: `~/.dbt/profiles.yml`. You can set it up in the user directory and configure the connection information for the TiDB database.
 
 ```shell
 vi ~/.dbt/profiles.yml
@@ -45,31 +48,31 @@ vi ~/.dbt/profiles.yml
   outputs:
     dev:
       type: tidb                        # adapter type
-      server: 127.0.0.1                  
-      port: 4000                         
+      server: 127.0.0.1
+      port: 4000
       schema: analytics                 # database name
-      username: root                     
-      password: ""                       
+      username: root
+      password: ""
 ```
 
-**Description of Configurations**
+The following table lists the descriptions of the configurations.
 
 | Option           | Description                                           | Required? | Example                        |
 |------------------|-------------------------------------------------------|-----------|--------------------------------|
 | type             | The specific adapter to use                           | Required  | `tidb`                         |
-| server           | The server (hostname) to connect to                   | Required  | `yourorg.tidb.com`             |
+| server           | The server (hostname) to connect to                   | Required  | `yourorg.tidb.com`               |
 | port             | The port to use                                       | Required  | `4000`                         |
-| schema           | Specify the schema (database) to build models into    | Required  | `analytics`                    |
+| schema           | The schema (database) to build models into            | Required  | `analytics`                    |
 | username         | The username to use to connect to the server          | Required  | `dbt_admin`                    |
 | password         | The password to use for authenticating to the server  | Required  | `correct-horse-battery-staple` |
-| retries          | The retry times for connection to TiDB (1 in default) | Optional  | `2`                            |
+| retries          | The retry times for connection to TiDB (1 by default) | Optional  | `2`                            |
 
 ### Project configurations
 
-In the jaffle_shop project directory, the project configuration file `dbt_project.yml` is available. Change the `profile` configuration item to `jaffle_shop_tidb`, which is the project name in `profiles.yml`. Then, the project will query the database connection configuration in the `~/.dbt/profiles.yml file`.
+The project configuration file `dbt_project.yml` is stored in the `jaffle_shop` project directory. Change the `profile` configuration item to `jaffle_shop_tidb` which is the project name in `profiles.yml`. Then, the project will query the database connection configuration in the `~/.dbt/profiles.yml file`.
 
 ```shell
-vi dbt_project.yml 
+vi dbt_project.yml
 
 name: 'jaffle_shop'
 
@@ -80,7 +83,7 @@ profile: 'jaffle_shop_tidb'                   # note the modification here
 
 model-paths: ["models"]                       # model path
 seed-paths: ["seeds"]                         # seed path
-test-paths: ["tests"]                         
+test-paths: ["tests"]
 analysis-paths: ["analysis"]
 macro-paths: ["macros"]
 
@@ -95,31 +98,31 @@ require-dbt-version: [">=1.0.0", "<2.0.0"]
 models:
   jaffle_shop:
       materialized: table            # *.sql which in models/ would be materialized to table
-      staging:           
+      staging:
         materialized: view           # *.sql which in models/staging/ would bt materialized to view
 ```
 
-### Verify the configuration
+### Verify the configurations
 
-You can run the following command to check whether the database and project configuration is correct.
+You can run the following command to check whether the database and project configurations are correct.
 
 ```shell
 dbt debug
 ```
 
-## Loading CSV
+## Load the CSV data
 
-Load the CSV data and materialize the CSV as a table in the target database. 
+Load the CSV data and materialize the CSV as a table in the target database.
 
-> **Note:** 
-> 
-> In general, dbt projects do not need this step because the data for your pending projects is in the database.
+> **Note:**
+>
+> In general, you do not need to perform this step for dbt projects because the data for your pending projects is in the database.
 
 ```shell
 dbt seed
 ```
 
-## Running
+## Run dbt
 
 ```shell
 dbt run
@@ -131,7 +134,7 @@ Go to the TiDB database to verify that the creation is successful.
 mysql -h <your_TiDB_host> -u <user_name> -P <port>
 ```
 
-The result illustrates that five more tables or views, such as `customers`, have been added, and the data in the tables or views have been transformed. Only part of `customers` data is shown here.
+The result illustrates that five more tables or views, such as `customers`, have been added, and the data in the tables or views has been transformed. Only part of `customers` data is shown here.
 
 ```sql
 mysql> show tables;
@@ -164,18 +167,18 @@ mysql> select * from customers;
 ....
 ```
 
-## Generating doc
+## Generate the docs
 
-dbt also supports the generation of visual documents, using the following command.
+Use the following command to generate a visual document:
 
 ```
 dbt docs generate
 dbt docs serve
 ```
 
-The document, which contains the overall structure of the jaffle_shop project and a description of all the tables and views, can be viewed at [http://localhost:8080](http://localhost:8080).
+The document contains the overall structure of the jaffle_shop project and a description of all the tables and views. You can viewed it at [http://localhost:8080](http://localhost:8080).
 
-## Supports and Limitations
+## Supports and limitations
 
 |     TiDB 4.X     | TiDB 5.0 ~ 5.2 | TiDB >= 5.3 |           Feature           |
 |:----------------:|:--------------:|:-----------:|:---------------------------:|
@@ -192,13 +195,14 @@ The document, which contains the overall structure of the jaffle_shop project an
 |        ✅         |       ✅        |      ✅      |            Grant            |
 
 > **Note:**
-> * TiDB 4.0 ~ 5.0 does not support [CTE](https://docs.pingcap.com/tidb/dev/sql-statement-with), you should avoid using `WITH` in your SQL code.
+>
+> * TiDB 4.0 ~ 5.0 does not support [CTE](https://docs.pingcap.com/tidb/dev/sql-statement-with). Avoid using `WITH` in your SQL code.
 > * TiDB 4.0 ~ 5.2 does not support creating a [temporary table or view](https://docs.pingcap.com/tidb/v5.2/sql-statement-create-table#:~:text=sec\)-,MySQL%20compatibility,-TiDB%20does%20not).
-> * TiDB 4.X does not support using SQL func in `CREATE VIEW`, avoid it in your SQL code. You can find more detail [here](https://github.com/pingcap/tidb/pull/27252).
+> * TiDB 4.X does not support using SQL func in `CREATE VIEW`. Avoid using it in your SQL code. You can find more details in [PR 27252](https://github.com/pingcap/tidb/pull/27252).
 
 ## Supported functions
 
-cross-db macros are moved from dbt-utils into dbt-core, so you can use the following functions directly, see [dbt-util](https://github.com/dbt-labs/dbt-utils) on how to use them.
+Cross-db macros are moved from dbt-utils into dbt-core, so you can use the following functions directly. For more information about how to use them, see [dbt-util](https://github.com/dbt-labs/dbt-utils).
 
 - bool_or
 - cast_bool_to_text
@@ -220,4 +224,6 @@ cross-db macros are moved from dbt-utils into dbt-core, so you can use the follo
 - right
 - listagg (not support yet)
 
-> pay attention that datediff is a little different from dbt-util that it will round down rather than round up.
+> **Note:**
+>
+> datediff is a little different from dbt-util. It rounds down rather than rounds up.
