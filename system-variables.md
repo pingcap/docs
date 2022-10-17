@@ -1149,7 +1149,14 @@ Constraint checking is always performed in place for pessimistic transactions (d
     - `RESTRICTED_VARIABLES_ADMIN`: The ability to see and set sensitive variables in `SHOW [GLOBAL] VARIABLES` and `SET`.
     - `RESTRICTED_USER_ADMIN`: The ability to prevent other users from making changes or dropping a user account.
 
-<<<<<<< HEAD
+### tidb_enable_exchange_partition
+
+- Scope: SESSION | GLOBAL
+- Persists to cluster: Yes
+- Type: Boolean
+- Default value: `OFF`
+- This variable controls whether to enable the [`exchange partitions with tables`](/partitioned-table.md#partition-management) feature. The default value is `OFF`, that is, `exchange partitions with tables` is disabled by default.
+
 ### tidb_enable_extended_stats
 
 <CustomContent platform="tidb-cloud">
@@ -1161,23 +1168,14 @@ Constraint checking is always performed in place for pessimistic transactions (d
 </CustomContent>
 
 <CustomContent platform="tidb">
-=======
-### tidb_enable_exchange_partition
->>>>>>> 3de0a41c2 (table partition: tidb_enable_exchange_partition variable description (#9860))
 
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
 - Type: Boolean
-<<<<<<< HEAD
 - Default value: `OFF`
 - This variable indicates whether TiDB can collect the extended statistic to guide the optimizer. See [Introduction to Extended Statistics](/extended-statistics.md) for more information.
 
 </CustomContent>
-=======
-- Default value: `ON`
-- This variable controls whether to enable the [`exchange partitions with tables`](/partitioned-table.md#partition-management) feature. The default value is `ON`, that is, `exchange partitions with tables` is enabled by default.
-- This variable is deprecated since v6.3.0. Its value will be fixed to the default value `ON`, that is, `exchange partitions with tables` is enabled by default.
->>>>>>> 3de0a41c2 (table partition: tidb_enable_exchange_partition variable description (#9860))
 
 ### tidb_enable_fast_analyze
 
