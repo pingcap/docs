@@ -147,3 +147,5 @@ After connecting to your TiDB cluster, you can run some queries in your Terminal
     ```
 
 For more details on TiDB SQL usage, see [Explore SQL with TiDB](/basic-sql-operations.md).
+
+For production use with the benefits of cross-zone high availability, horizontal scaling, and [HTAP](https://en.wikipedia.org/wiki/Hybrid_transactional/analytical_processing), refer to [Create a TiDB Cluster](/tidb-cloud/create-tidb-cluster.md) and create a Dedicated Tier cluster.
