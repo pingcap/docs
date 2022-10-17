@@ -15,7 +15,7 @@ In addition, you will also learn how to get the necessary information with the `
 
 ## Get project IDs using the project data source
 
-Each TiDB cluster is in a project. Before you create a TiDB cluster, you need to get the ID of the project that you want to create a cluster in.
+Each TiDB cluster is in a project. Before you create a TiDB cluster, you need to get the ID of the project in which you want to create a cluster.
 
 To view the information of all available projects, you can use the `tidbcloud_project` data source as follows:
 
