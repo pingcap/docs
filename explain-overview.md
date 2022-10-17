@@ -57,6 +57,74 @@ The following describes the output of the `EXPLAIN` statement above:
 * `access object` shows the table, partition and index that is being accessed. The parts of the index are also shown, as in the case above that the column `a` from the index was used. This can be useful in cases where you have composite indexes.
 * `operator info` shows additional details about the access. See [Operator info overview](#operator-info-overview) for additional details.
 
+> **Note:**
+>
+> For the `estRows` of all Probe side sub-operators of `IndexJoin` and `Apply`, the meaning of the displayed row count is different before and after v6.4.0.
+> Before v6.4.0, it means the estimated row count expected to be processed by the Probe side operators for every row from the Build side operator, not the estimated total row count expected to be processed by the Probe side operators. However, the actual row count displayed (the `actRows` column) in the `EXPLAIN ANALYZE` statement means the total row count, so there is an inconsistency in their meanings. 
+>
+> For example：
+>
+> ```sql
+> CREATE TABLE t1(a INT, b INT);
+> CREATE TABLE t2(a INT, b INT, INDEX ia(a));
+> EXPLAIN SELECT /*+ INL_JOIN(t2) */ * FROM t1 JOIN t2 ON t1.a = t2.a;
+> EXPLAIN SELECT (SELECT a FROM t2 WHERE t2.a = t1.b LIMIT 1) FROM t1;
+> ```
+>
+> ```sql
+> -- Before v6.4.0:
+> +---------------------------------+----------+-----------+-----------------------+-----------------------------------------------------------------------------------------------------------------+
+> | id                              | estRows  | task      | access object         | operator info                                                                                                   |
+> +---------------------------------+----------+-----------+-----------------------+-----------------------------------------------------------------------------------------------------------------+
+> | IndexJoin_12                    | 12487.50 | root      |                       | inner join, inner:IndexLookUp_11, outer key:test.t1.a, inner key:test.t2.a, equal cond:eq(test.t1.a, test.t2.a) |
+> | ├─TableReader_24(Build)         | 9990.00  | root      |                       | data:Selection_23                                                                                               |
+> | │ └─Selection_23                | 9990.00  | cop[tikv] |                       | not(isnull(test.t1.a))                                                                                          |
+> | │   └─TableFullScan_22          | 10000.00 | cop[tikv] | table:t1              | keep order:false, stats:pseudo                                                                                  |
+> | └─IndexLookUp_11(Probe)         | 1.25     | root      |                       |                                                                                                                 |
+> |   ├─Selection_10(Build)         | 1.25     | cop[tikv] |                       | not(isnull(test.t2.a))                                                                                          |
+> |   │ └─IndexRangeScan_8          | 1.25     | cop[tikv] | table:t2, index:ia(a) | range: decided by [eq(test.t2.a, test.t1.a)], keep order:false, stats:pseudo                                    |
+> |   └─TableRowIDScan_9(Probe)     | 1.25     | cop[tikv] | table:t2              | keep order:false, stats:pseudo                                                                                  |
+> +---------------------------------+----------+-----------+-----------------------+-----------------------------------------------------------------------------------------------------------------+
+> +---------------------------------+----------+-----------+-----------------------+------------------------------------------------------------------------------+
+> | id                              | estRows  | task      | access object         | operator info                                                                |
+> +---------------------------------+----------+-----------+-----------------------+------------------------------------------------------------------------------+
+> | Projection_12                   | 10000.00 | root      |                       | test.t2.a                                                                    |
+> | └─Apply_14                      | 10000.00 | root      |                       | CARTESIAN left outer join                                                    |
+> |   ├─TableReader_16(Build)       | 10000.00 | root      |                       | data:TableFullScan_15                                                        |
+> |   │ └─TableFullScan_15          | 10000.00 | cop[tikv] | table:t1              | keep order:false, stats:pseudo                                               |
+> |   └─Limit_17(Probe)             | 1.00     | root      |                       | offset:0, count:1                                                            |
+> |     └─IndexReader_21            | 1.00     | root      |                       | index:Limit_20                                                               |
+> |       └─Limit_20                | 1.00     | cop[tikv] |                       | offset:0, count:1                                                            |
+> |         └─IndexRangeScan_19     | 1.00     | cop[tikv] | table:t2, index:ia(a) | range: decided by [eq(test.t2.a, test.t1.b)], keep order:false, stats:pseudo |
+> +---------------------------------+----------+-----------+-----------------------+------------------------------------------------------------------------------+
+> 
+> -- From v6.4.0:
+> +---------------------------------+----------+-----------+-----------------------+-----------------------------------------------------------------------------------------------------------------+
+> | id                              | estRows  | task      | access object         | operator info                                                                                                   |
+> +---------------------------------+----------+-----------+-----------------------+-----------------------------------------------------------------------------------------------------------------+
+> | IndexJoin_12                    | 12487.50 | root      |                       | inner join, inner:IndexLookUp_11, outer key:test.t1.a, inner key:test.t2.a, equal cond:eq(test.t1.a, test.t2.a) |
+> | ├─TableReader_24(Build)         | 9990.00  | root      |                       | data:Selection_23                                                                                               |
+> | │ └─Selection_23                | 9990.00  | cop[tikv] |                       | not(isnull(test.t1.a))                                                                                          |
+> | │   └─TableFullScan_22          | 10000.00 | cop[tikv] | table:t1              | keep order:false, stats:pseudo                                                                                  |
+> | └─IndexLookUp_11(Probe)         | 12487.50 | root      |                       |                                                                                                                 |
+> |   ├─Selection_10(Build)         | 12487.50 | cop[tikv] |                       | not(isnull(test.t2.a))                                                                                          |
+> |   │ └─IndexRangeScan_8          | 12500.00 | cop[tikv] | table:t2, index:ia(a) | range: decided by [eq(test.t2.a, test.t1.a)], keep order:false, stats:pseudo                                    |
+> |   └─TableRowIDScan_9(Probe)     | 12487.50 | cop[tikv] | table:t2              | keep order:false, stats:pseudo                                                                                  |
+> +---------------------------------+----------+-----------+-----------------------+-----------------------------------------------------------------------------------------------------------------+
+> +---------------------------------+----------+-----------+-----------------------+------------------------------------------------------------------------------+
+> | id                              | estRows  | task      | access object         | operator info                                                                |
+> +---------------------------------+----------+-----------+-----------------------+------------------------------------------------------------------------------+
+> | Projection_12                   | 10000.00 | root      |                       | test.t2.a                                                                    |
+> | └─Apply_14                      | 10000.00 | root      |                       | CARTESIAN left outer join                                                    |
+> |   ├─TableReader_16(Build)       | 10000.00 | root      |                       | data:TableFullScan_15                                                        |
+> |   │ └─TableFullScan_15          | 10000.00 | cop[tikv] | table:t1              | keep order:false, stats:pseudo                                               |
+> |   └─Limit_17(Probe)             | 10000.00 | root      |                       | offset:0, count:1                                                            |
+> |     └─IndexReader_21            | 10000.00 | root      |                       | index:Limit_20                                                               |
+> |       └─Limit_20                | 10000.00 | cop[tikv] |                       | offset:0, count:1                                                            |
+> |         └─IndexRangeScan_19     | 10000.00 | cop[tikv] | table:t2, index:ia(a) | range: decided by [eq(test.t2.a, test.t1.b)], keep order:false, stats:pseudo |
+> +---------------------------------+----------+-----------+-----------------------+------------------------------------------------------------------------------+
+> ```
+
 ### Operator overview
 
 An operator is a particular step that is executed as part of returning query results. The operators that perform table scans (of the disk or the TiKV Block Cache) are listed as follows:
