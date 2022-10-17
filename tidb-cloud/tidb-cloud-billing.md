@@ -144,7 +144,7 @@ To edit the billing profile information, perform the following steps:
 
 ## Contract
 
-In the TiDB Cloud console, you can manage your customized TiDB Cloud subscriptions to meet compliance requirements.
+If you are the owner or billing administrator of your organization, you can manage your customized TiDB Cloud subscriptions in the TiDB Cloud console to meet compliance requirements. Otherwise, skip this section.
 
 If you have agreed with our sales on a contract and received an email to review and accept the contract online, you can do the following:
 
