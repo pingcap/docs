@@ -1187,7 +1187,7 @@ MPP is a distributed computing framework provided by the TiFlash engine, which a
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
 - Type: Enumeration
-- Default value: `ON`
+- Default value: `INT_ONLY`
 - Possible values: `OFF`, `ON`, `INT_ONLY`
 - This variable is used to control whether to create the primary key as a [clustered index](/clustered-indexes.md) by default. "By default" here means that the statement does not explicitly specify the keyword `CLUSTERED`/`NONCLUSTERED`. Supported values are `OFF`, `ON`, and `INT_ONLY`:
     - `OFF` indicates that primary keys are created as non-clustered indexes by default.
@@ -2612,6 +2612,15 @@ mysql> desc select count(distinct a) from test.t;
     ```sql
     select t.* from t, t1 where t.a=t1.aa;
     ```
+
+### tidb_opt_join_reorder_threshold
+
+- Scope: SESSION | GLOBAL
+- Persists to cluster: Yes
+- Default value: `0`
+- Range: `[0, 2147483647]`
+- This variable is used to control the selection of the TiDB Join Reorder algorithm. When the number of nodes participating in Join Reorder is greater than this threshold, TiDB selects the greedy algorithm, and when it is less than this threshold, TiDB selects the dynamic programming algorithm.
+- Currently, for OLTP queries, it is recommended to keep the default value. For OLAP queries, it is recommended to set the variable value to 10~15 to get better connection orders in OLAP scenarios.
 
 ### tidb_opt_limit_push_down_threshold
 

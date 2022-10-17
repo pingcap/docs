@@ -81,8 +81,9 @@
       - [For mysql-connector-python](/develop/dev-guide-outdated-for-python-mysql-connector.md)
   - Cloud Native Development Environment
     - [Gitpod](/develop/dev-guide-playground-gitpod.md)
-  - Third-party Support
+  - Third-Party Support
     - [Third-Party Tools Supported by TiDB](/develop/dev-guide-third-party-support.md)
+    - [Known Incompatibility Issues with Third-Party Tools](/develop/dev-guide-third-party-tools-compatibility.md)
     - [Integrate with ProxySQL](/develop/dev-guide-proxysql-integration.md)
 - Deploy
   - [Software and Hardware Requirements](/hardware-and-software-requirements.md)
@@ -901,6 +902,7 @@
   - v6.0
     - [6.0.0-DMR](/releases/release-6.0.0-dmr.md)
   - v5.4
+    - [5.4.3](/releases/release-5.4.3.md)
     - [5.4.2](/releases/release-5.4.2.md)
     - [5.4.1](/releases/release-5.4.1.md)
     - [5.4.0](/releases/release-5.4.0.md)
