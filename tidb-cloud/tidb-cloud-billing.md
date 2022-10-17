@@ -144,6 +144,8 @@ To edit the billing profile information, perform the following steps:
 
 ## Contract
 
+TiDB Clould provides the online contracts feature to customize TiDB Cloud subscriptions and meet compliance requirements.
+
 If you have agreed with our sales on a contract and received an email to review and accept the contract online, you can do the following:
 
 1. Click the account name in the upper-right corner of the TiDB Cloud console.
