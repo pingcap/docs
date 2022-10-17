@@ -1098,6 +1098,14 @@ Constraint checking is always performed in place for pessimistic transactions (d
     - `RESTRICTED_VARIABLES_ADMIN`: The ability to see and set sensitive variables in `SHOW [GLOBAL] VARIABLES` and `SET`.
     - `RESTRICTED_USER_ADMIN`: The ability to prevent other users from making changes or dropping a user account.
 
+### tidb_enable_exchange_partition
+
+- Scope: SESSION | GLOBAL
+- Persists to cluster: Yes
+- Type: Boolean
+- Default value: `OFF`
+- This variable controls whether to enable the [`exchange partitions with tables`](/partitioned-table.md#partition-management) feature. The default value is `OFF`, that is, `exchange partitions with tables` is disabled by default.
+
 ### tidb_enable_extended_stats
 
 <CustomContent platform="tidb-cloud">
