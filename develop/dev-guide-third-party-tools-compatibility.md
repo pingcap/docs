@@ -200,7 +200,7 @@ Adding or removing the `AUTO_INCREMENT` attribute of a column via `ALTER TABLE M
 
 **Way to avoid**
 
-Refer to the [restrictions of `AUTO_INCREMENT`](/auto-increment.md#Restrictions).
+Refer to the [restrictions of `AUTO_INCREMENT`](/auto-increment.md#restrictions).
 
 Set `@@tidb_allow_remove_auto_inc` to `true` to allow removal of the `AUTO_INCREMENT` attribute.
 
