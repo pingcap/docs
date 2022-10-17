@@ -66,7 +66,7 @@ After setting up the source and destination, you can build and configure the con
 
 1. Click **Connections** in the sidebar and then click **New Connection**.
 2. Select the previously established source and destination.
-3. Go to the **Set up** connection panel and create a name for the connection, such as "${source_name} \<\> ${destination-name}".
+3. Go to the **Set up** connection panel and create a name for the connection, such as "${source_name} - ${destination-name}".
 4. Set **Replication frequency** to **Every 24 hours** which means the connection replicates data once a day.
 5. Set **Destination Namespace** to **Custom format** and set **Namespace Custom Format** to **test** to store all data in the `test` database.
 6. Choose the **Sync schema** to **Full refresh | Overwrite**.
