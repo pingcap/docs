@@ -5,7 +5,7 @@ summary: Learn how to use restore resource.
 
 # Use Restore Resource
 
-You can learn how to create a restore task with the `tidbcloud_restore` resource in this document.
+You can learn how to create a restore task with the `tidbcloud_restore` resource in this document. The restore task will create a restored cluster according to your backup. 
 
 ## Prerequisites
 
