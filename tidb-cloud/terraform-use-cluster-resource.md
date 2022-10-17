@@ -149,9 +149,7 @@ To get the cluster specification information, you can use the `tidbcloud_cluster
 
     The following provides only a part of the results for your reference.
 
-    <details>
-    <summary>Cluster specification</summary>
-    <pre><code>
+    ```
     {
         "cloud_provider" = "AWS"
         "cluster_type" = "DEDICATED"
@@ -268,8 +266,7 @@ To get the cluster specification information, you can use the `tidbcloud_cluster
           },
         ])
       }
-    </code></pre>
-    </details>
+     ```
 
 In the results:
 
