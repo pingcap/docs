@@ -67,7 +67,7 @@ You can use several ways to dump data from MySQL, such as using `mysqldump` or `
 
 2. Export your MySQL database using Dumpling.
 
-    - To export your data to Amazon S3 cloud storage, see [Export data to Amazon S3 cloud storage](/dumpling-overview.md#export-data-to-amazon-s3-cloud-storage). 
+    - To export your data to Amazon S3 cloud storage, see [Export data to Amazon S3 cloud storage](/dumpling-overview.md#export-data-to-amazon-s3-cloud-storage).
     - To export your data to local data files, use the following command:
 
         {{< copyable "shell-regular" >}}
@@ -140,7 +140,7 @@ The following steps show how to import local data to TiDB Cloud using the logica
         password = "${password}"
 
         [tikv-importer]
-        # The TiDB backend to be used for data importing.
+        # The logical import mode to be used for data importing.
         backend = "tidb"
 
         [mydumper]
