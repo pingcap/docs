@@ -267,6 +267,7 @@ To get the cluster specification information, you can use the `tidbcloud_cluster
           },
         ])
       }
+    ```
     </details>
 
 In the results:
