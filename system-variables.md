@@ -225,6 +225,15 @@ For more possible values of this variable, see [Authentication plugin status](/s
 - Range: `[0, 7]`
 - Sets the week format used by the `WEEK()` function.
 
+### block_encryption_mode
+
+- Scope: GLOBAL
+- Persists to cluster: Yes
+- Type: Enumeration
+- Default value: `aes-128-ecb`
+- Possible values: `aes-128-ecb`, `aes-192-ecb`, `aes-256-ecb`, `aes-128-cbc`, `aes-192-cbc`, `aes-256-cbc`, `aes-128-ofb`, `aes-192-ofb`, `aes-256-ofb`, `aes-128-cfb`, `aes-192-cfb`, `aes-256-cfb`
+- This variable sets the encryption mode for the built-in functions `AES_ENCRYPT` and `AES_DECRYPT`.
+
 ### error_count
 
 - Scope: NONE
