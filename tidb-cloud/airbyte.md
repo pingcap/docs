@@ -34,7 +34,7 @@ Once you see an Airbyte banner, go to [http://localhost:8000](http://localhost:8
 
 If you use TiDB as the source, see a step-by-step tutorial about [Using Airbyte to Migrate Data from TiDB Cloud to Snowflake](https://www.pingcap.com/blog/using-airbyte-to-migrate-data-from-tidb-cloud-to-snowflake/).
 
-Conveniently, the steps are the same for setting TiDB as the source or the destination。
+Conveniently, the steps are the same for setting TiDB as the source or the destination.
 
 1. Click **Sources** or **Destinations** in the sidebar and choose TiDB type to create a new TiDB connector.
 
@@ -66,7 +66,7 @@ After setting up the source and destination, you can build and configure the con
 
 1. Click **Connections** in the sidebar and then click **New Connection**.
 2. Select the previously established source and destination.
-3. Go to the **Set up** connection panel and create a name for the connection, such as "${source_name} <> ${destination-name}".
+3. Go to the **Set up** connection panel and create a name for the connection, such as "${source_name} \<\> ${destination-name}".
 4. Set **Replication frequency** to **Every 24 hours** which means the connection replicates data once a day.
 5. Set **Destination Namespace** to **Custom format** and set **Namespace Custom Format** to **test** to store all data in the `test` database.
 6. Choose the **Sync schema** to **Full refresh | Overwrite**.
