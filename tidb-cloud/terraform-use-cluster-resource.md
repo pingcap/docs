@@ -151,6 +151,7 @@ To get the cluster specification information, you can use the `tidbcloud_cluster
 
     <details>
       <summary>Cluster specification</summary>
+   
     ```
     {
         "cloud_provider" = "AWS"
@@ -269,6 +270,7 @@ To get the cluster specification information, you can use the `tidbcloud_cluster
         ])
       }
     ```
+
     </details>
 
 In the results:
