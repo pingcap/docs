@@ -85,4 +85,4 @@ After setting up the source and destination, you can build and configure the con
 
 - The TiDB connector does not support the Change Data Capture(CDC) feature.
 - TiDB destination converts the `timestamp` type to the `varchar` type in default normalization mode. It happens because Airbyte converts the timestamp type to string during transmission, and TiDB does not support `cast ('2020-07-28 14:50:15+1:00' as timestamp)`.
-- For some large ETL missions, you need to raise the parameters of [transaction restrictions](/develop/dev-guide-transaction-restraints.md#large-transaction-restrictions) in TiDB.
+- For some large ETL missions, you need to increase the parameters of [transaction restrictions](/develop/dev-guide-transaction-restraints.md#large-transaction-restrictions) in TiDB.
