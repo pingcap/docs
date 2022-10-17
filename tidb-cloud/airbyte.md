@@ -26,7 +26,7 @@ Airbyte supports local deployment with only a few steps.
     $ docker-compose up
     ```
 
-Once you see an Airbyte banner, go to [http://localhost:8000](http://localhost:8000) to visit the UI.
+Once you see an Airbyte banner, you can go to [http://localhost:8000](http://localhost:8000) to visit the UI.
 
 ![img](/media/tidb-cloud/integration-airbyte-ready.jpg)
 
@@ -34,7 +34,7 @@ Once you see an Airbyte banner, go to [http://localhost:8000](http://localhost:8
 
 If you use TiDB as the source, see a step-by-step tutorial about [Using Airbyte to Migrate Data from TiDB Cloud to Snowflake](https://www.pingcap.com/blog/using-airbyte-to-migrate-data-from-tidb-cloud-to-snowflake/).
 
-Conveniently, the steps are the same for setting TiDB as the source or the destination.
+Conveniently, the steps are the same for setting TiDB as the source and the destination.
 
 1. Click **Sources** or **Destinations** in the sidebar and choose TiDB type to create a new TiDB connector.
 
