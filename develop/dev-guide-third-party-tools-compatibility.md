@@ -165,13 +165,13 @@ According to the test results, TiDB supports most of the Sequelize features ([us
 
 Unsupported features are:
 
-- `Foreign Key` constraints (including many-to-many relationships) are not supported;
-- [`GEOMETRY`](https://github.com/pingcap/tidb/issues/6347) is not supported;
-- Modification of integer primary key is not supported;
-- `PROCEDURE` is not supported;
-- The `READ-UNCOMMITTED` and `SERIALIZABLE` [isolation levels](/system-variables.md#transaction_isolation) are not supported;
-- Modification of a column's `AUTO_INCREMENT` attribute is not allowed by default;
-- `FULLTEXT`, `HASH`, and `SPATIAL` indexes are not supported;
+- `Foreign Key` constraints (including many-to-many relationships) are not supported.
+- [`GEOMETRY`](https://github.com/pingcap/tidb/issues/6347) is not supported.
+- Modification of integer primary key is not supported.
+- `PROCEDURE` is not supported.
+- The `READ-UNCOMMITTED` and `SERIALIZABLE` [isolation levels](/system-variables.md#transaction_isolation) are not supported.
+- Modification of a column's `AUTO_INCREMENT` attribute is not allowed by default.
+- `FULLTEXT`, `HASH`, and `SPATIAL` indexes are not supported.
 
 ### Modification of integer primary key is not supported
 
