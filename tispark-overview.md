@@ -254,7 +254,7 @@ spark.sql("select * from spark_catalog.default.t").show
 spark.sql("select t1.id,t2.id from spark_catalog.default.t t1 left join tidb_catalog.test.t t2").show
 ```
 
-## TiSpark Configuration
+## TiSpark configurations
 
 The configurations in the following table can be put together with `spark-defaults.conf` or passed in the same way as other Spark configuration properties.
 
