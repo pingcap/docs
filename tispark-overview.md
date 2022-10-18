@@ -165,7 +165,7 @@ spark.sql("select ti_version()").collect
 
 ### Read with TiSpark
 
-You can use Spark SQL to read from TiKV
+You can use Spark SQL to read data from TiKV.
 
 ```scala
 spark.sql("use tidb_catalog")
