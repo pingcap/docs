@@ -18,8 +18,10 @@ Starting from v6.1.1, TiDB provides multi-level support for different quality st
 
     |  Operating systems   |   Supported CPU architectures   |
     |   :---   |   :---   |
-    | <ul><li>Red Hat Enterprise Linux 8.4 or a later 8.x version</li><li>CentOS 8.4 or a later 8.x version</li></ul>  |  <ul><li>x86_64</li><li>ARM 64</li></ul>  |
+    | Red Hat Enterprise Linux 8.4 or a later 8.x version  |  <ul><li>x86_64</li><li>ARM 64</li></ul>  |
+    | CentOS 8 Stream | <ul><li>x86_64</li><li>ARM 64</li></ul> |
     | <ul><li>Red Hat Enterprise Linux 7.3 or a later 7.x version</li><li>CentOS 7.3 or a later 7.x version</li></ul>  |  <ul><li>x86_64</li><li>ARM 64</li></ul>   |
+    | Amazon Linux 2 | <ul><li>x86_64</li><li>ARM 64</li></ul> |
     | Kylin Euler V10 SP1/SP2   |   <ul><li>x86_64</li><li>ARM 64</li></ul>   |
     | UOS V20                 |   <ul><li>x86_64</li><li>ARM 64</li></ul>   |
 

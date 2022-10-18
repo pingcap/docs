@@ -12,13 +12,13 @@ summary: An overview of the usage of RECOVER TABLE for the TiDB database.
 {{< copyable "sql" >}}
 
 ```sql
-RECOVER TABLE table_name
+RECOVER TABLE table_name;
 ```
 
 {{< copyable "sql" >}}
 
 ```sql
-RECOVER TABLE BY JOB ddl_job_id
+RECOVER TABLE BY JOB ddl_job_id;
 ```
 
 ## Synopsis
