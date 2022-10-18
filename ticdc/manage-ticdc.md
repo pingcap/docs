@@ -12,14 +12,14 @@ You can also use the HTTP interface (the TiCDC OpenAPI feature) to manage the Ti
 
 ## Upgrade TiCDC using TiUP
 
-This section introduces how to upgrade the TiCDC cluster using TiUP. In the following example, assume that you need to upgrade TiCDC and the entire TiDB cluster to v6.1.0.
+This section introduces how to upgrade the TiCDC cluster using TiUP. In the following example, assume that you need to upgrade TiCDC and the entire TiDB cluster to v6.3.0.
 
 {{< copyable "shell-regular" >}}
 
 ```shell
 tiup update --self && \
 tiup update --all && \
-tiup cluster upgrade <cluster-name> v6.1.0
+tiup cluster upgrade <cluster-name> v6.3.0
 ```
 
 ### Notes for upgrade
@@ -65,11 +65,11 @@ For details about using encrypted data transmission (TLS), see [Enable TLS Betwe
 This section introduces how to use `cdc cli` to manage a TiCDC cluster and data replication tasks. `cdc cli` is the `cli` sub-command executed using the `cdc` binary. The following description assumes that:
 
 - `cli` commands are executed directly using the `cdc` binary;
-- PD listens on `10.0.10.25` and the port is `2379`.
+- TiCDC listens on `10.0.10.25` and the port is `8300`.
 
 > **Note:**
 >
-> The IP address and port that PD listens on correspond to the `advertise-client-urls` parameter specified during the `pd-server` startup. Multiple `pd-server`s have multiple `advertise-client-urls` parameters and you can specify one or multiple parameters. For example, `--pd=http://10.0.10.25:2379` or `--pd=http://10.0.10.25:2379,http://10.0.10.26:2379,http://10.0.10.27:2379`.
+> The IP address and port that TiCDC listens on correspond to the `advertise-client-urls` parameter specified during the `cdc-server` startup. Starting from TiCDC v6.2.0, the `cdc cli` command can directly interact with TiCDC server via TiCDC Open API. You can specify the address of TiCDC server using the `--server` parameter. `--pd` is deprecated and no longer recommended.
 
 If you deploy TiCDC using TiUP, replace `cdc cli` in the following commands with `tiup ctl cdc`.
 
@@ -77,13 +77,11 @@ If you deploy TiCDC using TiUP, replace `cdc cli` in the following commands with
 
 - Query the `capture` list:
 
-    {{< copyable "shell-regular" >}}
-
     ```shell
-    cdc cli capture list --pd=http://10.0.10.25:2379
+    cdc cli capture list --server=http://10.0.10.25:8300
     ```
 
-    ```
+    ```json
     [
       {
         "id": "806e3a1b-0e31-477f-9dd6-f3f2c570abdd",
@@ -133,10 +131,8 @@ The numbers in the above state transfer diagram are described as follows.
 
 Execute the following commands to create a replication task:
 
-{{< copyable "shell-regular" >}}
-
 ```shell
-cdc cli changefeed create --pd=http://10.0.10.25:2379 --sink-uri="mysql://root:123456@127.0.0.1:3306/" --changefeed-id="simple-replication-task" --sort-engine="unified"
+cdc cli changefeed create --server=http://10.0.10.25:8300 --sink-uri="mysql://root:123456@127.0.0.1:3306/" --changefeed-id="simple-replication-task" --sort-engine="unified"
 ```
 
 ```shell
@@ -146,7 +142,7 @@ Info: {"sink-uri":"mysql://root:123456@127.0.0.1:3306/","opts":{},"create-time":
 ```
 
 - `--changefeed-id`: The ID of the replication task. The format must match the `^[a-zA-Z0-9]+(\-[a-zA-Z0-9]+)*$` regular expression. If this ID is not specified, TiCDC automatically generates a UUID (the version 4 format) as the ID.
-- `--sink-uri`: The downstream address of the replication task. Configure `--sink-uri` according to the following format. Currently, the scheme supports `mysql`/`tidb`/`kafka`/`pulsar`/`s3`/`local`.
+- `--sink-uri`: The downstream address of the replication task. Configure `--sink-uri` according to the following format. Currently, the scheme supports `mysql`, `tidb`, and `kafka`.
 
     {{< copyable "" >}}
 
@@ -161,8 +157,8 @@ Info: {"sink-uri":"mysql://root:123456@127.0.0.1:3306/","opts":{},"create-time":
 - `--sort-engine`: Specifies the sorting engine for the `changefeed`. Because TiDB and TiKV adopt distributed architectures, TiCDC must sort the data changes before writing them to the sink. This option supports `unified` (by default)/`memory`/`file`.
 
     - `unified`: When `unified` is used, TiCDC prefers data sorting in memory. If the memory is insufficient, TiCDC automatically uses the disk to store the temporary data. This is the default value of `--sort-engine`.
-    - `memory`: Sorts data changes in memory. It is **NOT recommended** to use this sorting engine, because OOM is easily triggered when you replicate a large amount of data.
-    - `file`: Entirely uses the disk to store the temporary data. This feature is **deprecated**. It is **NOT recommended** to use it in **any** situation.
+    - `memory`: Sorts data changes in memory. This option is **deprecated**. It is **NOT recommended** to use it in **any** situation.
+    - `file`: Entirely uses the disk to store the temporary data. This option is **deprecated**. It is **NOT recommended** to use it in **any** situation.
 
 - `--config`: Specifies the configuration file of the `changefeed`.
 - `sort-dir`: Specifies the temporary file directory used by the sorting engine. **Note that this option is not supported since TiDB v4.0.13, v5.0.3 and v5.1.0. Do not use it any more**.
@@ -174,7 +170,7 @@ Sample configuration:
 {{< copyable "shell-regular" >}}
 
 ```shell
---sink-uri="mysql://root:123456@127.0.0.1:3306/?worker-count=16&max-txn-row=5000"
+--sink-uri="mysql://root:123456@127.0.0.1:3306/?worker-count=16&max-txn-row=5000&transaction-atomicity=table"
 ```
 
 The following are descriptions of parameters and parameter values that can be configured for the sink URI with `mysql`/`tidb`:
@@ -191,6 +187,7 @@ The following are descriptions of parameters and parameter values that can be co
 | `ssl-cert` | The path of the certificate file needed to connect to the downstream MySQL instance (optional) |
 | `ssl-key` | The path of the certificate key file needed to connect to the downstream MySQL instance (optional) |
 | `time-zone` | The time zone used when connecting to the downstream MySQL instance, which is effective since v4.0.8. This is an optional parameter. If this parameter is not specified, the time zone of TiCDC service processes is used. If this parameter is set to an empty value, no time zone is specified when TiCDC connects to the downstream MySQL instance and the default time zone of the downstream is used. |
+| `transaction-atomicity`  |  The atomicity level of a transaction. This is an optional parameter, with the default value of `table`. When the value is `table`, TiCDC ensures the atomicity of a single-table transaction. When the value is `none`, TiCDC splits the single-table transaction.  |
 
 #### Configure sink URI with `kafka`
 
@@ -313,53 +310,14 @@ dispatchers = [
 
 For detailed integration guide, see [Quick Start Guide on Integrating TiDB with Confluent Platform](/ticdc/integrate-confluent-using-ticdc.md).
 
-#### Configure sink URI with `pulsar`
-
-> **Warning:**
->
-> This is still an experimental feature. Do **NOT** use it in a production environment.
-
-Sample configuration:
-
-{{< copyable "shell-regular" >}}
-
-```shell
---sink-uri="pulsar://127.0.0.1:6650/topic-name?connectionTimeout=2s"
-```
-
-The following are descriptions of parameters that can be configured for the sink URI with `pulsar`:
-
-| Parameter  | Description                                            |
-| :------------------ | :------------------------------------------------------------ |
-| `connectionTimeout` | The timeout for establishing a connection to the downstream Pulsar, which is optional and defaults to 30 (seconds) |
-| `operationTimeout` | The timeout for performing an operation on the downstream Pulsar, which is optional and defaults to 30 (seconds) |
-| `tlsTrustCertsFilePath` | The path of the CA certificate file needed to connect to the downstream Pulsar instance (optional) |
-| `tlsAllowInsecureConnection` | Determines whether to allow unencrypted connection after TLS is enabled (optional) |
-| `tlsValidateHostname` |  Determines whether to verify the host name of the certificate from the downstream Pulsar (optional) |
-| `maxConnectionsPerBroker` | The maximum number of connections allowed to a single downstream Pulsar broker, which is optional and defaults to 1 |
-| `auth.tls` | Uses the TLS mode to verify the downstream Pulsar (optional). For example, `auth=tls&auth.tlsCertFile=/path/to/cert&auth.tlsKeyFile=/path/to/key`. |
-| `auth.token` | Uses the token mode to verify the downstream Pulsar (optional). For example, `auth=token&auth.token=secret-token` or `auth=token&auth.file=path/to/secret-token-file`. |
-| `name` | The name of Pulsar producer in TiCDC (optional) |
-| `protocol` | The protocol with which messages are output to Pulsar. The value options are `canal-json`, `open-protocol`, `canal`, `avro`, and `maxwell`. |
-| `maxPendingMessages` | Sets the maximum size of the pending message queue, which is optional and defaults to 1000. For example, pending for the confirmation message from Pulsar. |
-| `disableBatching` |  Disables automatically sending messages in batches (optional) |
-| `batchingMaxPublishDelay` | Sets the duration within which the messages sent are batched (default: 10ms) |
-| `compressionType` | Sets the compression algorithm used for sending messages (optional). The value options are `NONE`, `LZ4`, `ZLIB`, and `ZSTD`. (`NONE` by default) |
-| `hashingScheme` | The hash algorithm used for choosing the partition to which a message is sent (optional). The value options are `JavaStringHash` (default) and `Murmur3`. |
-| `properties.*` | The customized properties added to the Pulsar producer in TiCDC (optional). For example, `properties.location=Hangzhou`. |
-
-For more parameters of Pulsar, see [pulsar-client-go ClientOptions](https://godoc.org/github.com/apache/pulsar-client-go/pulsar#ClientOptions) and [pulsar-client-go ProducerOptions](https://godoc.org/github.com/apache/pulsar-client-go/pulsar#ProducerOptions).
-
 #### Use the task configuration file
 
 For more replication configuration (for example, specify replicating a single table), see [Task configuration file](#task-configuration-file).
 
 You can use a configuration file to create a replication task in the following way:
 
-{{< copyable "shell-regular" >}}
-
 ```shell
-cdc cli changefeed create --pd=http://10.0.10.25:2379 --sink-uri="mysql://root:123456@127.0.0.1:3306/" --config changefeed.toml
+cdc cli changefeed create --server=http://10.0.10.25:8300 --sink-uri="mysql://root:123456@127.0.0.1:3306/" --config changefeed.toml
 ```
 
 In the command above, `changefeed.toml` is the configuration file for the replication task.
@@ -371,7 +329,7 @@ Execute the following command to query the replication task list:
 {{< copyable "shell-regular" >}}
 
 ```shell
-cdc cli changefeed list --pd=http://10.0.10.25:2379
+cdc cli changefeed list --server=http://10.0.10.25:8300
 ```
 
 ```shell
@@ -398,10 +356,8 @@ cdc cli changefeed list --pd=http://10.0.10.25:2379
 
 To query a specific replication task, execute the `changefeed query` command. The query result includes the task information and the task state. You can specify the `--simple` or `-s` argument to simplify the query result that will only include the basic replication state and the checkpoint information. If you do not specify this argument, detailed task configuration, replication states, and replication table information are output.
 
-{{< copyable "shell-regular" >}}
-
 ```shell
-cdc cli changefeed query -s --pd=http://10.0.10.25:2379 --changefeed-id=simple-replication-task
+cdc cli changefeed query -s --server=http://10.0.10.25:8300 --changefeed-id=simple-replication-task
 ```
 
 ```
@@ -420,10 +376,8 @@ In the command and result above:
 + `checkpoint` represents the corresponding time of the largest transaction TSO in the current `changefeed` that has been successfully replicated to the downstream.
 + `error` records whether an error has occurred in the current `changefeed`.
 
-{{< copyable "shell-regular" >}}
-
 ```shell
-cdc cli changefeed query --pd=http://10.0.10.25:2379 --changefeed-id=simple-replication-task
+cdc cli changefeed query --server=http://10.0.10.25:8300 --changefeed-id=simple-replication-task
 ```
 
 ```
@@ -502,10 +456,8 @@ In the command and result above:
 
 Execute the following command to pause a replication task:
 
-{{< copyable "shell-regular" >}}
-
 ```shell
-cdc cli changefeed pause --pd=http://10.0.10.25:2379 --changefeed-id simple-replication-task
+cdc cli changefeed pause --server=http://10.0.10.25:8300 --changefeed-id simple-replication-task
 ```
 
 In the above command:
@@ -516,15 +468,18 @@ In the above command:
 
 Execute the following command to resume a paused replication task:
 
-{{< copyable "shell-regular" >}}
-
 ```shell
-cdc cli changefeed resume --pd=http://10.0.10.25:2379 --changefeed-id simple-replication-task
+cdc cli changefeed resume --server=http://10.0.10.25:8300 --changefeed-id simple-replication-task
 ```
 
-In the above command:
-
 - `--changefeed-id=uuid` represents the ID of the `changefeed` that corresponds to the replication task you want to resume.
+- `--overwrite-checkpoint-ts`: starting from v6.2.0, you can specify the starting TSO of resuming the replication task. TiCDC starts pulling data from the specified TSO. The argument accepts `now` or a specific TSO (such as 434873584621453313). The specified TSO must be in the range of (GC safe point, CurrentTSO]. If this argument is not specified, TiCDC replicates data from the current `checkpoint-ts` by default.
+- `--no-confirm`: when the replication is resumed, you do not need to confirm the related information. Defaults to `false`.
+
+> **Note:**
+>
+> - If the TSO specified in `--overwrite-checkpoint-ts` (`t2`) is larger than the current checkpoint TSO in the changefeed (`t1`), data between `t1` and `t2` will not be replicated to the downstream. This causes data loss. You can obtain `t1` by running `cdc cli changefeed query`.
+> - If the TSO specified in `--overwrite-checkpoint-ts` (`t2`) is smaller than the current checkpoint TSO in the changefeed (`t1`), TiCDC pulls data from an old time point (`t2`), which might cause data duplication (for example, if the downstream is MQ sink).
 
 #### Remove a replication task
 
@@ -533,7 +488,7 @@ Execute the following command to remove a replication task:
 {{< copyable "shell-regular" >}}
 
 ```shell
-cdc cli changefeed remove --pd=http://10.0.10.25:2379 --changefeed-id simple-replication-task
+cdc cli changefeed remove --server=http://10.0.10.25:8300 --changefeed-id simple-replication-task
 ```
 
 In the above command:
@@ -544,12 +499,10 @@ In the above command:
 
 Starting from v4.0.4, TiCDC supports modifying the configuration of the replication task (not dynamically). To modify the `changefeed` configuration, pause the task, modify the configuration, and then resume the task.
 
-{{< copyable "shell-regular" >}}
-
 ```shell
-cdc cli changefeed pause -c test-cf --pd=http://10.0.10.25:2379
-cdc cli changefeed update -c test-cf --pd=http://10.0.10.25:2379 --sink-uri="mysql://127.0.0.1:3306/?max-txn-row=20&worker-number=8" --config=changefeed.toml
-cdc cli changefeed resume -c test-cf --pd=http://10.0.10.25:2379
+cdc cli changefeed pause -c test-cf --server=http://10.0.10.25:8300
+cdc cli changefeed update -c test-cf --server=http://10.0.10.25:8300 --sink-uri="mysql://127.0.0.1:3306/?max-txn-row=20&worker-number=8" --config=changefeed.toml
+cdc cli changefeed resume -c test-cf --server=http://10.0.10.25:8300
 ```
 
 Currently, you can modify the following configuration items:
@@ -563,13 +516,11 @@ Currently, you can modify the following configuration items:
 
 - Query the `processor` list:
 
-    {{< copyable "shell-regular" >}}
-
     ```shell
-    cdc cli processor list --pd=http://10.0.10.25:2379
+    cdc cli processor list --server=http://10.0.10.25:8300
     ```
 
-    ```
+    ```json
     [
             {
                     "id": "9f84ff74-abf9-407f-a6e2-56aa35b33888",
@@ -581,13 +532,11 @@ Currently, you can modify the following configuration items:
 
 - Query a specific `changefeed` which corresponds to the status of a specific replication task:
 
-    {{< copyable "shell-regular" >}}
-
     ```shell
-    cdc cli processor query --pd=http://10.0.10.25:2379 --changefeed-id=simple-replication-task --capture-id=b293999a-4168-4988-a4f4-35d9589b226b
+    cdc cli processor query --server=http://10.0.10.25:8300 --changefeed-id=simple-replication-task --capture-id=b293999a-4168-4988-a4f4-35d9589b226b
     ```
 
-    ```
+    ```json
     {
       "status": {
         "tables": {
@@ -625,6 +574,19 @@ case-sensitive = true
 # Specifies whether to output the old value. New in v4.0.5. Since v5.0, the default value is `true`.
 enable-old-value = true
 
+# Specifies whether to enable the Syncpoint feature, which is supported since v6.3.0.
+enable-sync-point = true
+
+# Specifies the interval at which Syncpoint aligns the upstream and downstream snapshots.
+# The format is in h m s. For example, "1h30m30s".
+# The default value is "10m" and the minimum value is "30s".
+sync-point-interval = "5m"
+
+# Specifies how long the data is retained by Syncpoint in the downstream table. When this duration is exceeded, the data is cleaned up.
+# The format is in h m s. For example, "24h30m30s".
+# The default value is "24h".
+sync-point-retention = "1h"
+
 [filter]
 # Ignores the transaction of specified start_ts.
 ignore-txn-start-ts = [1, 2]
@@ -633,9 +595,23 @@ ignore-txn-start-ts = [1, 2]
 # Filter syntax: https://docs.pingcap.com/tidb/stable/table-filter#syntax.
 rules = ['*.*', '!test.*']
 
-[mounter]
-# mounter thread counts, which is used to decode the TiKV output data.
-worker-num = 16
+# Event filter rules.
+# The detailed syntax is described in the event filter rules section.
+# The first event filter rule.
+[[filter.event-filters]]
+matcher = ["test.worker"] # matcher is an allow list, which means this rule only applies to the worker table in the test database.
+ignore-event = ["insert"] # Ignore insert events.
+ignore-sql = ["^drop", "add column"] # Ignore DDLs that start with "drop" or contain "add column".
+ignore-delete-value-expr = "name = 'john'" # Ignore delete DMLs that contain the condition "name = 'john'".
+ignore-insert-value-expr = "id >= 100" # Ignore insert DMLs that contain the condition "id >= 100".
+ignore-update-old-value-expr = "age < 18" # Ignore update DMLs whose old value contains "age < 18".
+ignore-update-new-value-expr = "gender = 'male'" # Ignore update DMLs whose new value contains "gender = 'male'".
+
+# The second event filter rule.
+matcher = ["test.fruit"] # matcher is an allow list, which means this rule only applies to the fruit table in the test database.
+ignore-event = ["drop table"] # Ignore drop table events.
+ignore-sql = ["delete"] # Ignore delete DMLs.
+ignore-insert-value-expr = "price > 1000 and origin = 'no where'" # Ignore insert DMLs that contain the conditions "price > 1000" and "origin = 'no where'".
 
 [sink]
 # For the sink of MQ type, you can use dispatchers to configure the event dispatcher.
@@ -653,10 +629,69 @@ dispatchers = [
 protocol = "canal-json"
 ```
 
+### Event filter rules <span class="version-mark">New in v6.2.0</span>
+
+Starting in v6.2.0, TiCDC supports event filter. You can configure event filter rules to filter out the DML and DDL events that meet the specified conditions.
+
+The following is an example of event filter rules:
+
+```toml
+[filter]
+# The event filter rules must be under the `[filter]` configuration. You can configure multiple event filters at the same time.
+
+[[filter.event-filters]]
+matcher = ["test.worker"] # matcher is an allow list, which means this rule only applies to the worker table in the test database.
+ignore-event = ["insert"] # Ignore insert events.
+ignore-sql = ["^drop", "add column"] # Ignore DDLs that start with "drop" or contain "add column".
+ignore-delete-value-expr = "name = 'john'" # Ignore delete DMLs that contain the condition "name = 'john'".
+ignore-insert-value-expr = "id >= 100" # Ignore insert DMLs that contain the condition "id >= 100".
+ignore-update-old-value-expr = "age < 18 or name = 'lili'" # Ignore update DMLs whose old value contains "age < 18" or "name = 'lili'".
+ignore-update-new-value-expr = "gender = 'male' and age > 18" # Ignore update DMLs whose new value contains "gender = 'male'" and "age > 18".
+```
+
+The event filter rules must be under the `[filter]` configuration. For detailed configuration, refer to [Task configuration file](#task-configuration-file).
+
+Description of configuration parameters :
+
+- `matcher`: the database and table that this event filter rule applies to. The syntax is the same as [table filter](/table-filter.md).
+- `ignore-event`: the event type to be ignored. This parameter accepts an array of strings. You can configure multiple event types. Currently, the following event types are supported:
+
+| Event           | Type | Alias | Description         |
+| --------------- | ---- | -|--------------------------|
+| all dml         |      | |Matches all DML events       |
+| all ddl         |      | |Matches all DDL events         |
+| insert          | DML  | |Matches `insert` DML event      |
+| update          | DML  | |Matches `update` DML event      |
+| delete          | DML  | |Matches `delete` DML event      |
+| create schema   | DDL  | create database |Matches `create database` event |
+| drop schema     | DDL  | drop database  |Matches `drop database` event |
+| create table    | DDL  | |Matches `create table` event    |
+| drop table      | DDL  | |Matches `drop table` event      |
+| rename table    | DDL  | |Matches `rename table` event    |
+| truncate table  | DDL  | |Matches `truncate table` event  |
+| alter table     | DDL  | |Matches `alter table` event, including all clauses of `alter table`, `create index` and `drop index`   |
+| add table partition    | DDL  | |Matches `add table partition` event     |
+| drop table partition    | DDL  | |Matches `drop table partition` event     |
+| truncate table partition    | DDL  | |Matches `truncate table partition` event     |
+| create view     | DDL  | |Matches `create view`event     |
+| drop view     | DDL  | |Matches `drop view` event     |
+
+- `ignore-sql`: the DDL statements to be ignored. This parameter accepts an array of strings, in which you can configure multiple regular expressions. This rule only applies to DDL events.
+- `ignore-delete-value-expr`: this parameter accepts a SQL expression. This rule only applies to delete DML events with the specified value.
+- `ignore-insert-value-expr`: this parameter accepts a SQL expression. This rule only applies to insert DML events with the specified value.
+- `ignore-update-old-value-expr`: this parameter accepts a SQL expression. This rule only applies to update DML events whose old value contains the specified value.
+- `ignore-update-new-value-expr`: this parameter accepts a SQL expression. This rule only applies to update DML events whose new value contains the specified value.
+
+> **Note:**
+>
+> - When TiDB updates a value in the column of the clustered index, TiDB splits an `UPDATE` event into a `DELETE` event and an `INSERT` event. TiCDC does not identify such events as an `UPDATE` event and thus cannot correctly filter out such events.
+> - When you configure a SQL expression, make sure all tables that matches `matcher` contain all the columns specified in the SQL expression. Otherwise, the replication task cannot be created. In addition, if the table schema changes during the replication, which results in a table no longer containing a required column, the replication task fails and cannot be resumed automatically. In such a situation, you must manually modify the configuration and resume the task.
+
 ### Notes for compatibility
 
 * In TiCDC v4.0.0, `ignore-txn-commit-ts` is removed and `ignore-txn-start-ts` is added, which uses start_ts to filter transactions.
 * In TiCDC v4.0.2, `db-dbs`/`db-tables`/`ignore-dbs`/`ignore-tables` are removed and `rules` is added, which uses new filter rules for databases and tables. For detailed filter syntax, see [Table Filter](/table-filter.md).
+* In TiCDC v6.1.0, `mounter` is removed. If you configure `mounter`, TiCDC does not report an error, but the configuration does not take effect.
 
 ## Customize the rules for Topic and Partition dispatchers of Kafka Sink
 
@@ -781,26 +816,18 @@ For the changefeeds created using `cdc cli` after v4.0.13, Unified Sorter is ena
 
 To check whether or not the Unified Sorter feature is enabled on a changefeed, you can execute the following example command (assuming the IP address of the PD instance is `http://10.0.10.25:2379`):
 
-{{< copyable "shell-regular" >}}
-
 ```shell
-cdc cli --pd="http://10.0.10.25:2379" changefeed query --changefeed-id=simple-replication-task | grep 'sort-engine'
+cdc cli --server="http://10.0.10.25:8300" changefeed query --changefeed-id=simple-replication-task | grep 'sort-engine'
 ```
 
 In the output of the above command, if the value of `sort-engine` is "unified", it means that Unified Sorter is enabled on the changefeed.
 
 > **Note:**
 >
-> + If your servers use mechanical hard drives or other storage devices that have high latency or limited bandwidth, use the unified sorter with caution.
+> + If your servers use mechanical hard drives or other storage devices that have high latency or limited bandwidth, the performance of Unified Sorter will be affected significantly.
 > + By default, Unified Sorter uses `data_dir` to store temporary files. It is recommended to ensure that the free disk space is greater than or equal to 500 GiB. For production environments, it is recommended to ensure that the free disk space on each node is greater than (the maximum `checkpoint-ts` delay allowed by the business) * (upstream write traffic at business peak hours). In addition, if you plan to replicate a large amount of historical data after `changefeed` is created, make sure that the free space on each node is greater than the amount of replicated data.
-> + Unified sorter is enabled by default. If your servers do not match the above requirements and you want to disable the unified sorter, you need to manually set `sort-engine` to `memory` for the changefeed.
-> + To enable Unified Sorter on an existing changefeed that uses `memory` to sort, see the methods provided in [How do I handle the OOM that occurs after TiCDC is restarted after a task interruption?](/ticdc/troubleshoot-ticdc.md#what-should-i-do-to-handle-the-oom-that-occurs-after-ticdc-is-restarted-after-a-task-interruption).
 
 ## Eventually consistent replication in disaster scenarios
-
-> **Warning:**
->
-> Currently, it is not recommended that you use eventually consistent replication in disaster scenarios. For details, see [critical bug #6189](https://github.com/pingcap/tiflow/issues/6189).
 
 Starting from v5.3.0, TiCDC supports backing up incremental data from an upstream TiDB cluster to S3 storage or an NFS file system of a downstream cluster. When the upstream cluster encounters a disaster and becomes unavailable, TiCDC can restore the downstream data to the recent eventually consistent state. This is the eventually consistent replication capability provided by TiCDC. With this capability, you can switch applications to the downstream cluster quickly, avoiding long-time downtime and improving service continuity.
 

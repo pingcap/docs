@@ -14,7 +14,7 @@ You can adjust the PD scheduling parameters using [pd-ctl](/pd-control.md). Note
 
 - [`replica-schedule-limit`](/pd-configuration-file.md#replica-schedule-limit): determines the rate at which the replica-related operator is generated. The parameter affects operations such as making nodes offline and add replicas.
 
-  > **Notes:**
+  > **Note:**
   >
   > The value of this parameter should be less than that of `region-schedule-limit`. Otherwise, the normal Region scheduling among TiKV nodes is affected.
 
@@ -76,8 +76,9 @@ delta_index_cache_size = 0
     ## DTFile format
     ## * format_version = 1, the old format, deprecated.
     ## * format_version = 2, the default format for versions < v6.0.0.
-    ## * format_version = 3, the default format for versions >= v6.0.0, which provides more data validation features.
-    # format_version = 3
+    ## * format_version = 3, the default format for v6.0.0 and v6.1.x, which provides more data validation features.
+    ## * format_version = 4, the default format for v6.2.0 and later versions, which reduces write amplification and background task resource consumption
+    # format_version = 4
 
     [storage.main]
     ## The list of directories to store the main data. More than 90% of the total data is stored in
@@ -176,7 +177,9 @@ delta_index_cache_size = 0
     ## of DeltaTree Storage Engine uses logical split.
     ## Using the logical split can reduce the write amplification.
     ## However, these are at the cost of disk space waste.
-    ## Modifying the default value is not recommended.
+    ## It is strongly recommended to keep the default value `false` and
+    ## not to change it to `true` in v6.2.0 and later versions. For details,
+    ## see known issue [#5576](https://github.com/pingcap/tiflash/issues/5576).
     # dt_enable_logical_split = false
 
     ## The memory usage limit for the generated intermediate data when a single
@@ -196,10 +199,14 @@ delta_index_cache_size = 0
     manual_compact_pool_size = 1
     ## New in v5.4.0. This item enables or disables the elastic thread pool feature, which significantly improves CPU utilization in high concurrency scenarios of TiFlash. The default value is true.
     enable_elastic_threadpool = true
-    # Compression algorithm of the TiFlash storage engine. The value can be LZ4, zstd, or LZ4HC, and is case-insensitive. By default, LZ4 is used.
+    ## Compression algorithm of the TiFlash storage engine. The value can be LZ4, zstd, or LZ4HC, and is case-insensitive. By default, LZ4 is used.
     dt_compression_method = "LZ4"
-    # Compression level of the TiFlash storage engine. The default value is 1. It is recommended that you set this value to 1 if dt_compression_method is LZ4, -1 (smaller compression rate, but better read performance) or 1 if dt_compression_method is zstd, and 9 if dt_compression_method is LZ4HC.
+    ## Compression level of the TiFlash storage engine. The default value is 1. It is recommended that you set this value to 1 if dt_compression_method is LZ4, -1 (smaller compression rate, but better read performance) or 1 if dt_compression_method is zstd, and 9 if dt_compression_method is LZ4HC.
     dt_compression_level = 1
+
+    ## New in v6.2.0. This item specifies the minimum ratio of valid data in a PageStorage data file. When the ratio of valid data in a PageStorage data file is less than the value of this configuration, GC is triggered to compact data in the file. The default value is 0.5.
+    dt_page_gc_threshold = 0.5
+
 
 ## Security settings take effect starting from v4.0.5.
 [security]
@@ -247,6 +254,10 @@ delta_index_cache_size = 0
 ```
 
 In addition to the items above, other parameters are the same as those of TiKV. Note that the `label` whose key is `engine` is reserved and cannot be configured manually.
+
+### Schedule replicas by topology labels
+
+See [Set available zones](/tiflash/create-tiflash-replicas.md#set-available-zones).
 
 ### Multi-disk deployment
 

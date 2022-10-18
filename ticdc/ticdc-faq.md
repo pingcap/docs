@@ -119,7 +119,7 @@ cdc cli changefeed create --pd=http://10.0.10.25:2379 --sink-uri="kafka://127.0.
 > **Note:**
 >
 > * This feature is introduced in TiCDC 4.0.2.
-> * TiCDC currently supports outputting data changes in the Canal format only to MQ sinks such as Kafka and Pulsar.
+> * TiCDC currently supports outputting data changes in the Canal format only to MQ sinks such as Kafka.
 
 For more information, refer to [Create a replication task](/ticdc/manage-ticdc.md#create-a-replication-task).
 
@@ -132,15 +132,15 @@ For more information, refer to [Create a replication task](/ticdc/manage-ticdc.m
     * Increase the `replica.fetch.max.bytes` value in `server.properties` to `1073741824` (1 GB).
     * Increase the `fetch.message.max.bytes` value in `consumer.properties` to make it larger than the `message.max.bytes` value.
 
-## When TiCDC replicates data to Kafka, does it write all the changes in a transaction into one message? If not, on what basis does it divide the changes?
-
-No. According to the different distribution strategies configured, TiCDC divides the changes on different bases, including `default`, `row id`, `table`, and `ts`.
-
-For more information, refer to [Replication task configuration file](/ticdc/manage-ticdc.md#task-configuration-file).
-
 ## When TiCDC replicates data to Kafka, can I control the maximum size of a single message in TiDB?
 
-Yes. You can set the `max-message-bytes` parameter to control the maximum size of data sent to the Kafka broker each time (optional, `10MB` by default). You can also set `max-batch-size` to specify the maximum number of change records in each Kafka message. Currently, the setting only takes effect when Kafka's `protocol` is `open-protocol` (optional, `16` by default).
+When `protocol` is set to `avro` or `canal-json`, messages are sent per row change. A single Kafka message contains only one row change and is generally no larger than Kafka's limit. Therefore, there is no need to limit the size of a single message. If the size of a single Kafka message does exceed Kakfa's limit, refer to [Why does the latency from TiCDC to Kafka become higher and higher?](/ticdc/ticdc-faq.md#why-does-the-latency-from-ticdc-to-kafka-become-higher-and-higher).
+
+When `protocol` is set to `open-protocol`, messages are sent in batches. Therefore, one Kafka message might be excessively large. To avoid this situation, you can configure the `max-message-bytes` parameter to control the maximum size of data sent to the Kafka broker each time (optional, `10MB` by default). You can also configure the `max-batch-size` parameter (optional, `16` by default) to specify the maximum number of change records in each Kafka message.
+
+## If I modify a row multiple times in a transaction, will TiCDC output multiple row change events?
+
+No. When you modify the same row in one transaction multiple times, TiDB only sends the latest modification to TiKV. Therefore, TiCDC can only obtain the result of the latest modification.
 
 ## When TiCDC replicates data to Kafka, does a message contain multiple types of data changes?
 
@@ -193,10 +193,13 @@ TiCDC uses etcd in PD to store and regularly update the metadata. Because the ti
 
 TiCDC provides partial support for large transactions (more than 5 GB in size). Depending on different scenarios, the following risks might exist:
 
+- The latency of primary-secondary replication might greatly increase.
 - When TiCDC's internal processing capacity is insufficient, the replication task error `ErrBufferReachLimit` might occur.
 - When TiCDC's internal processing capacity is insufficient or the throughput capacity of TiCDC's downstream is insufficient, out of memory (OOM) might occur.
 
-If you encounter an error above, it is recommended to use BR to restore the incremental data of large transactions. The detailed operations are as follows:
+Since v6.2, TiCDC supports splitting a single-table transaction into multiple transactions. This can greatly reduce the latency and memory consumption of replicating large transactions. Therefore, if your application does not have a high requirement on transaction atomicity, it is recommended to enable the splitting of large transactions to avoid possible replication latency and OOM. To enable the splitting, set the value of the sink uri parameter [`transaction-atomicity`](/ticdc/manage-ticdc.md#configure-sink-uri-with-mysqltidb) to `none`.
+
+If you still encounter an error above, it is recommended to use BR to restore the incremental data of large transactions. The detailed operations are as follows:
 
 1. Record the `checkpoint-ts` of the changefeed that is terminated due to large transactions, use this TSO as the `--lastbackupts` of the BR incremental backup, and execute [incremental data backup](/br/br-usage-backup.md#back-up-incremental-data).
 2. After backing up the incremental data, you can find a log record similar to `["Full backup Failed summary : total backup ranges: 0, total success: 0, total failed: 0"] [BackupTS=421758868510212097]` in the BR log output. Record the `BackupTS` in this log.
@@ -254,6 +257,10 @@ If you need to replicate `recover table` to the downstream TiDB, you should have
 
 When upstream write traffic is at peak hours, the downstream may fail to consume all data in a timely manner, resulting in data pile-up. TiCDC uses disks to process the data that is piled up. TiCDC needs to write data to disks during normal operation. However, this is not usually the bottleneck for replication throughput and replication latency, given that writing to disks only results in latency within a hundred milliseconds. TiCDC also uses memory to accelerate reading data from disks to improve replication performance.
 
-## Why does replication using TiCDC stall or even stop after data restore using TiDB Lightning and BR?
+## Why does replication using TiCDC stall or even stop after data restore using TiDB Lightning and BR from upstream?
 
 Currently, TiCDC is not yet fully compatible with TiDB Lightning and BR. Therefore, please avoid using TiDB Lightning and BR on tables that are replicated by TiCDC.
+
+## After a changefeed resumes from pause, its replication latency gets higher and higher and returns to normal only after a few minutes. Why?
+
+When a changefeed is resumed, TiCDC needs to scan the historical versions of data in TiKV to catch up with the incremental data logs generated during the pause. The replication process proceeds only after the scan is completed. The scan process might take several to tens of minutes.

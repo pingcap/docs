@@ -47,7 +47,7 @@ The best way to learn about TiDB Cloud is to follow our step-by-step tutorial. C
 
 ## What companies are using TiDB or TiDB Cloud in production?
 
-TiDB is trusted by over 1500 global enterprises across a variety of industries, such as financial services, gaming, and e-commerce. Our users include Square (US), PayPay (Japan), Shopee (Singapore), and China UnionPay (China). See our [case studies](https://en.pingcap.com/customers/) for specific details.
+TiDB is trusted by over 1500 global enterprises across a variety of industries, such as financial services, gaming, and e-commerce. Our users include Square (US), Shopee (Singapore), and China UnionPay (China). See our [case studies](https://en.pingcap.com/customers/) for specific details.
 
 ## How does TiDB Cloud ensure high availability?
 
@@ -92,3 +92,11 @@ TiDB is highly compatible with MySQL. You can migrate data from any MySQL-compat
 ## How does TiDB protect data privacy and ensure security?
 
 Transport Layer Security (TLS) and Transparent Data Encryption (TDE) are included for encryption at rest. There are two different network planes: the application to the TiDB server and the plane for data communication. We include extended syntax to compare Subject Alternative Name for verification of certificates and TLS context for internal communication.
+
+## Can I import my data directly to TiFlash?
+
+No. When you import data to TiDB Cloud, the data is imported to TiKV. After the import is complete, you can use SQL statements to specify which tables to be replicated to TiFlash. Then, TiDB will create the replicas of the specified tables in TiFlash accordingly. For more information, see [Create TiFlash Replicas](/tiflash/create-tiflash-replicas.md).
+
+## Can I export TiFlash data in the CSV format?
+
+No. TiFlash data cannot be exported.

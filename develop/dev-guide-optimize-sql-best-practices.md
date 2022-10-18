@@ -144,14 +144,14 @@ See the [rules to follow when selecting the primary key](/develop/dev-guide-crea
 
 See [Index Best Practices](/develop/dev-guide-index-best-practice.md).
 
-### `ADD INDEX` best practices
+### Add index best practices
 
-TiDB supports the online `ADD INDEX` operation and does not block data reads and writes in the table. You can adjust the speed of `ADD INDEX` by modifying the following system variables:
+TiDB supports the online index add operation. You can use [ADD INDEX](/sql-statements/sql-statement-add-index.md) or [CREATE INDEX](/sql-statements/sql-statement-create-index.md) statement to add an index. It does not block data reads and writes in the table. You can adjust the concurrency and the batch size during the `re-organize` phase of the index add operation by modifying the following system variables:
 
 * [`tidb_ddl_reorg_worker_cnt`](/system-variables.md#tidb_ddl_reorg_worker_cnt)
 * [`tidb_ddl_reorg_batch_size`](/system-variables.md#tidb_ddl_reorg_batch_size)
 
-To reduce the impact on the online application, the default speed of `ADD INDEX` is slow. When the target column of `ADD INDEX` only involves read load or is not directly related to online workload, you can appropriately increase the value of the above variables to speed up the `ADD INDEX` operation:
+To reduce the impact on the online application, the default speed of add index operation is slow. When the target column of add index operation only involves read load or is not directly related to online workload, you can appropriately increase the value of the above variables to speed up the add index operation:
 
 {{< copyable "sql" >}}
 
@@ -160,7 +160,7 @@ SET @@global.tidb_ddl_reorg_worker_cnt = 16;
 SET @@global.tidb_ddl_reorg_batch_size = 4096;
 ```
 
-When the target column of `ADD INDEX` is updated frequently (including `UPDATE`, `INSERT` and `DELETE`), increasing the above variables causes more write conflicts, which impacts the online workload. Accordingly, `ADD INDEX` might take a long time to complete due to constant retries. In this case, it is recommended to decrease the value of the above variables to avoid write conflicts with the online application:
+When the target column of the add index operation is updated frequently (including `UPDATE`, `INSERT` and `DELETE`), increasing the above variables causes more write conflicts, which impacts the online workload. Accordingly, the add index operation might take a long time to complete due to constant retries. In this case, it is recommended to decrease the value of the above variables to avoid write conflicts with the online application:
 
 {{< copyable "sql" >}}
 
@@ -171,12 +171,42 @@ SET @@global.tidb_ddl_reorg_batch_size = 128;
 
 ## Transaction conflicts
 
+<CustomContent platform="tidb">
+
 For how to locate and resolve transaction conflicts, see [Troubleshoot Lock Conflicts](/troubleshoot-lock-conflicts.md).
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+For how to locate and resolve transaction conflicts, see [Troubleshoot Lock Conflicts](https://docs.pingcap.com/tidb/stable/troubleshoot-lock-conflicts).
+
+</CustomContent>
 
 ## Best practices for developing Java applications with TiDB
 
+<CustomContent platform="tidb">
+
 See [Best Practices for Developing Java Applications with TiDB](/best-practices/java-app-best-practices.md).
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+See [Best Practices for Developing Java Applications with TiDB](https://docs.pingcap.com/tidb/stable/java-app-best-practices).
+
+</CustomContent>
 
 ### See also
 
+<CustomContent platform="tidb">
+
 - [Highly Concurrent Write Best Practices](/best-practices/high-concurrency-best-practices.md)
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+- [Highly Concurrent Write Best Practices](https://docs.pingcap.com/tidb/stable/high-concurrency-best-practices)
+
+</CustomContent>
