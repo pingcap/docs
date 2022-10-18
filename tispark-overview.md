@@ -151,7 +151,7 @@ spark.sql.catalog.tidb_catalog  org.apache.spark.sql.catalyst.catalog.TiCatalog
 spark.sql.catalog.tidb_catalog.pd.addresses  ${your_pd_adress}
 ```
 
-Start spark-shell with the --jars option
+Start spark-shell with the `--jars` option.
 
 ```
 spark-shell --jars tispark-assembly-{version}.jar
