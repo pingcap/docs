@@ -18,7 +18,7 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
 * Introduce online contracts to customize TiDB Cloud subscriptions and meet compliance requirements.
 
-    A [**Contract** tab](/tidb-cloud/tidb-cloud-billing.md#contract) is added to the Billing page of the TiDB Cloud console. If you have agreed with our sales on a contract and received an email to process the contract online, you can go to the **Contract** tab to review and accept the contract. To learn more about contracts, feel free to [contact our sales](https://www.pingcap.com/contact-us/).
+    A [**Contract** tab](/tidb-cloud/tidb-cloud-billing.md#contract) is added to the **Billing** page of the TiDB Cloud console. If you have agreed with our sales on a contract and received an email to process the contract online, you can go to the **Contract** tab to review and accept the contract. To learn more about contracts, feel free to [contact our sales](https://www.pingcap.com/contact-us/).
 
 **Documentation changes**
 
