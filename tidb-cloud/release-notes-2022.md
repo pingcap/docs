@@ -16,10 +16,6 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
     For more details, see [TiKV node storage](/tidb-cloud/size-your-cluster.md#tikv-node-storage) and [TiFlash node storage](/tidb-cloud/size-your-cluster.md#tiflash-node-storage).
 
-* For Dedicated Tier clusters, you can entirely disable public access to your cluster.
-
-    For more details, see [Configure Cluster Security Settings](/tidb-cloud/configure-security-settings.md).
-
 * Introduce online contracts to customize TiDB Cloud subscriptions and meet compliance requirements.
 
     The Billing page adds [a Contract tab](/tidb-cloud/tidb-cloud-billing.md#contract). If you have agreed with our sales on a contract and received an email to process the contract online, you can go to the Contract tab to review and accept the contract. To learn more about contracts, feel free to contact our sales.
