@@ -385,7 +385,7 @@ The major features of TiSpark are as follows:
 | TLS                             |               |               | ✔         | ✔             |
 | DataFrame auth                  |               |               |             | ✔             |
 
-### Support for expression Index
+### Support for expression index
 
 TiDB v5.0 supports [expression Index](/sql-statements/sql-statement-create-index.md#Expression index).
 
