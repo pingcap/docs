@@ -12,13 +12,13 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
 **General changes**
 
-* For Dedicated Tier clusters, the minimum node storage of TiKV and TiFlash is changed from 500 GiB to 200 GiB. This will be more cost-effective for users whose workload is in small data volumes.
+* For Dedicated Tier clusters, the minimum storage size of a TiKV or TiFlash node is changed from 500 GiB to 200 GiB. This will be more cost-effective for users whose workload is in small data volumes.
 
     For more details, see [TiKV node storage](/tidb-cloud/size-your-cluster.md#tikv-node-storage) and [TiFlash node storage](/tidb-cloud/size-your-cluster.md#tiflash-node-storage).
 
 * Introduce online contracts to customize TiDB Cloud subscriptions and meet compliance requirements.
 
-    The Billing page adds [a Contract tab](/tidb-cloud/tidb-cloud-billing.md#contract). If you have agreed with our sales on a contract and received an email to process the contract online, you can go to the Contract tab to review and accept the contract. To learn more about contracts, feel free to contact our sales.
+    The Billing page adds [a **Contract** tab](/tidb-cloud/tidb-cloud-billing.md#contract). If you have agreed with our sales on a contract and received an email to process the contract online, you can go to the **Contract** tab to review and accept the contract. To learn more about contracts, feel free to [contact our sales](https://www.pingcap.com/contact-us/).
 
 **Documentation changes**
 
