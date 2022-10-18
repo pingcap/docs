@@ -1,9 +1,9 @@
 ---
-title: Integrate with Vercel
+title: Vercel
 summary: Learn how to connect your TiDB Cloud clusters to Vercel projects.
 ---
 
-# Integrate with Vercel
+# Vercel
 
 ## Introduction
 
@@ -21,7 +21,7 @@ It will cover two options:
 The integration with Vercel requires that you have an account and a project in Vercel. If you don't have any, refer to
 
 * [Create a new personal account](https://vercel.com/docs/concepts/personal-accounts/overview) or [create a new team](https://vercel.com/docs/concepts/teams/overview) in Vercel.
-* [Create a new project](https://vercel.com/docs/concepts/projects/overview) in Vercel.
+* [Create a new project](https://vercel.com/docs/concepts/projects/overview) in Vercel, or if you don't already have an application to deploy, you can use our [template](https://vercel.com/templates/next.js/tidb-cloud-starter).
 
 A Vercel project can only be connected to one TiDB Cloud cluster. To change the integration, you need to first disconnect the current cluster and then connect to a new cluster.
 
