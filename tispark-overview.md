@@ -142,7 +142,7 @@ This document describes how to use TiSpark in spark-shell.
 
 To use TiSpark in spark-shell:
 
-Add the following configuration in `spark-defaults.conf`
+Add the following configuration in `spark-defaults.conf`:
 
 ```
 spark.sql.extensions  org.apache.spark.sql.TiExtensions
