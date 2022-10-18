@@ -75,7 +75,7 @@ The following versions of TiSpark's jar will no longer include `mysql-connector-
 - TiSpark > 2.5.1 for TiSpark 2.5.x
 - TiSpark > 2.4.3 for TiSpark 2.4.x
 
-However, TiSpark needs `mysql-connector-java` for writing and authentication. In such cases, you need to import `mysql-connector-java` manually when you need to write or auth using either of the following methods:
+However, TiSpark needs `mysql-connector-java` for writing and authentication. In such cases, you need to import `mysql-connector-java` manually using either of the following methods:
 
 - Put `mysql-connector-java` into spark jars file.
 
