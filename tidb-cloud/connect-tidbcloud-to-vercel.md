@@ -9,11 +9,10 @@ summary: Learn how to connect your TiDB Cloud clusters to Vercel projects.
 
 This guide introduces how to connect your TiDB Cloud clusters to Vercel projects.
 
-To connect your TiDB Cloud database to your Vercel projects, you can use one of the following methods:
+To connect your TiDB Cloud database to your Vercel projects, have all prerequisites met and use one of the following methods:
 
-* Manually adding environment variables
-* Using the Vercel integration
-
+* [Connect via the TiDB Cloud Vercel Integration](connect-via-the-tidb-cloud-verce-integration)
+* [Connect via manually configuring environment variables](connect-via-manually-configuring-environment-variables)
 ## Prerequisites
 
 Before connecting your TiDB Cloud cluster to a Vercel project, make sure the following prerequisites are met.
@@ -22,34 +21,36 @@ Before connecting your TiDB Cloud cluster to a Vercel project, make sure the fol
 
 You are expected to have an account and a project in Vercel. If you do not have any, refer to the following Vercel documents to create one:
 
-* [Creating a new personal account](https://vercel.com/docs/teams-and-accounts#creating-a-personal-account) or [Creating a new team](https://vercel.com/docs/teams-and-accounts/create-or-join-a-team#creating-a-team) in Vercel.
-* [Creating a project](https://vercel.com/docs/concepts/projects/overview#creating-a-project) in Vercel, or if you do not already have an application to deploy, you can use the [template](https://vercel.com/templates/next.js/tidb-cloud-starter).
+* [Creating a new personal account](https://vercel.com/docs/teams-and-accounts#creating-a-personal-account) or [Creating a new team](https://vercel.com/docs/teams-and-accounts/create-or-join-a-team#creating-a-team).
+* [Creating a project](https://vercel.com/docs/concepts/projects/overview#creating-a-project) in Vercel, or if you do not already have an application to deploy, you can use our [template](https://vercel.com/templates/next.js/tidb-cloud-starter).
 
-One Vercel project can only be connected to one TiDB Cloud cluster. To change the integration, you need to first disconnect the current cluster and then connect to a new cluster.
+One Vercel project can only connect to one TiDB Cloud cluster. To change the integration, you need to first disconnect the current cluster and then connect to a new cluster.
 
 ### Available TiDB Cloud account and cluster
 
 You are expected to have an account and a cluster in TiDB Cloud. If you do not have any, refer to [Create a TiDB cluster](/tidb-cloud/create-tidb-cluster.md) in TiDB Cloud.
 
-To integrate with Vercel, you are expected to have the "Organization Owner" access to your organization or "Organization Member + Project Access" to the target project in TiDB Cloud.
+To integrate with Vercel, you are expected to have the "Organization Owner" access to your organization or "Organization Member" + "Project" Access to the target project in TiDB Cloud.
 
 One TiDB Cloud cluster can connect to multiple Vercel projects.
 
-### Traffic filter properly set for your TiDB Cloud cluster
+### All IP addresses allowed for traffic filter in TiDB Cloud
 
-To connect to a TiDB Cloud cluster, the traffic filter of your TiDB Cloud cluster must allow all IP addresses(0.0.0.0/0) because Vercel deployments use [dynamic IP  addresses](https://vercel.com/guides/how-to-allowlist-deployment-ip-address). If you use TiDB Cloud Vercel Integration, TiDB Cloud automatically adds a 0.0.0.0/0 traffic filter to your cluster in the integration workflow if there is none.
+Make sure that the traffic filter of your TiDB Cloud cluster allows all IP addresses (set to `0.0.0.0/0`) for connection, this is because Vercel deployments use [dynamic IP  addresses](https://vercel.com/guides/how-to-allowlist-deployment-ip-address). If you use TiDB Cloud Vercel Integration, TiDB Cloud automatically adds a `0.0.0.0/0` traffic filter to your cluster in the integration workflow if there is none.
 
 ## Connect via the TiDB Cloud Vercel Integration
 
-You can install the [TiDB Cloud integration](https://vercel.com/integrations/tidb-cloud) from the [Vercel's Integrations Marketplace](https://vercel.com/integrations). You can choose which cluster you want to connect to, and we'll automatically generate all the necessary environment variables into your Vercel projects.
+To connect via the TiDB Cloud Vercel Integration, go to the [TiDB Cloud integration](https://vercel.com/integrations/tidb-cloud) page from the [Vercel's Integrations Marketplace](https://vercel.com/integrations). Using this method, you can choose which cluster to connect to, and TiDB Cloud will automatically generate all the necessary environment variables for your Vercel projects.
 
-1. Click **Add Integration** button on the [TiDB Cloud integration page](https://vercel.com/integrations/tidb-cloud).
-2. Choose the scope of your integration (personal or team).
-3. Select Vercel projects to connect to a TiDB Cloud cluster.
-4. Confirm the required permissions for integration.
-5. On the left side, select the Vercel projects you want to connect to.
-6. On the right side, select the TiDB Cloud cluster. Clusters resides under [organizations and projects](/tidb-cloud/manage-user-access.md#view-the-organization-and-project).
-7. Click **Add Integration and Return to Vercel** button.
+The detailed steps are as follows:
+
+1. Click **Add Integration** in the upper-right area of the [TiDB Cloud Vercel Integration](https://vercel.com/integrations/tidb-cloud) page. The **Add TiDB Cloud** dialog displays.
+2. Select the scope of your integration in the drop-down list and click **CONTINUE**.
+3. Select the Vercel Projects to which the Integration will be added and click **CONTINUE**.
+4. Confirm the required permissions for integration and click **ADD INTEGRATION**. Then you are directed to an integration page of the TiDB Cloud console.
+5. On the left side of the integration page, select the Vercel Projects for connection.
+6. On the right side of the integration page, provide the organization and project information and select the target cluster. A TiDB Cloud cluster belongs to [an organizations and a project](/tidb-cloud/manage-user-access.md#view-the-organization-and-project).
+7. Click **Add Integration and Return to Vercel**.
 8. Back to your Vercel dashboard, confirm the environment variables were added by going to your Vercel project > **Settings** > **Environment Variables**.
 
 ### Environment Variables
