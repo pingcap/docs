@@ -83,7 +83,6 @@ After loading data to the cluster, you can connect to your cluster from the comm
 
     2. Use a SQL client to connect to your cluster. Click the tab of your preferred connection method, and then connect to your cluster with the connection string.
 
-
     > **Tip:**
     >
     > TiDB Cloud is MySQL-compatible, so you can connect to your cluster using any MySQL client tool. We recommend using [mysql — The MySQL Command-Line Client](https://dev.mysql.com/doc/refman/8.0/en/mysql.html) or [mysql — The MySQL Command-Line Client from MariaDB](https://mariadb.com/kb/en/mysql-command-line-client/).
