@@ -136,7 +136,7 @@ The Artifact ID of TiSpark varies with TiSpark versions.
 
 ## Getting Started
 
-> Take the use of spark-shell for example, make sure you have deployed Spark.
+This document describes how to use TiSpark in spark-shell.
 
 ### Start spark-shell
 
