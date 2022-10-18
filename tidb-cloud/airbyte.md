@@ -38,7 +38,7 @@ Conveniently, the steps are the same for setting TiDB as the source and the dest
 
 1. Click **Sources** or **Destinations** in the sidebar and choose TiDB type to create a new TiDB connector.
 
-2. Fill in the parameters, such as host, port, database, username, and password.
+2. Fill in the following parameters.
 
     - Host: The host domain of TiDB
     - Port: The port of the database
