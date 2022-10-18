@@ -92,7 +92,7 @@ The `MERGE_JOIN(t1_name [, tl_name ...])` hint tells the optimizer to use the so
 {{< copyable "sql" >}}
 
 ```sql
-select /*+ MERGE_JOIN(t1, t2) */ * from t1，t2 where t1.id = t2.id;
+select /*+ MERGE_JOIN(t1, t2) */ * from t1, t2 where t1.id = t2.id;
 ```
 
 > **Note:**
@@ -106,7 +106,7 @@ The `INL_JOIN(t1_name [, tl_name ...])` hint tells the optimizer to use the inde
 {{< copyable "sql" >}}
 
 ```sql
-select /*+ INL_JOIN(t1, t2) */ * from t1，t2 where t1.id = t2.id;
+select /*+ INL_JOIN(t1, t2) */ * from t1, t2 where t1.id = t2.id;
 ```
 
 The parameter(s) given in `INL_JOIN()` is the candidate table for the inner table when you create the query plan. For example, `INL_JOIN(t1)` means that TiDB only considers using `t1` as the inner table to create a query plan. If the candidate table has an alias, you must use the alias as the parameter in `INL_JOIN()`; if it does not has an alias, use the table's original name as the parameter. For example, in the `select /*+ INL_JOIN(t1) */ * from t t1, t t2 where t1.a = t2.b;` query, you must use the `t` table's alias `t1` or `t2` rather than `t` as `INL_JOIN()`'s parameter.
@@ -126,12 +126,80 @@ The `HASH_JOIN(t1_name [, tl_name ...])` hint tells the optimizer to use the has
 {{< copyable "sql" >}}
 
 ```sql
-select /*+ HASH_JOIN(t1, t2) */ * from t1，t2 where t1.id = t2.id;
+select /*+ HASH_JOIN(t1, t2) */ * from t1, t2 where t1.id = t2.id;
 ```
 
 > **Note:**
 >
 > `TIDB_HJ` is the alias for `HASH_JOIN` in TiDB 3.0.x and earlier versions. If you are using any of these versions, you must apply the `TIDB_HJ(t1_name [, tl_name ...])` syntax for the hint. For the later versions of TiDB, `TIDB_HJ` and `HASH_JOIN` are both valid names for the hint, but `HASH_JOIN` is recommended.
+
+### HASH_JOIN_BUILD(t1_name [, tl_name ...])
+
+The `HASH_JOIN_BUILD(t1_name [, tl_name ...])` hint tells the optimizer to use the hash join algorithm on specified tables with these tables working as the build side. In this way, you can build hash tables using specific tables. For example:
+
+```sql
+SELECT /*+ HASH_JOIN_BUILD(t1) */ * FROM t1, t2 WHERE t1.id = t2.id;
+```
+
+### HASH_JOIN_PROBE(t1_name [, tl_name ...])
+
+The `HASH_JOIN_PROBE(t1_name [, tl_name ...])` hint tells the optimizer to use the hash join algorithm on specified tables with these tables working as the probe side. In this way, you can execute the hash join algorithm with specific tables as the probe side. For example:
+
+```sql
+SELECT /*+ HASH_JOIN_PROBE(t2) */ * FROM t1, t2 WHERE t1.id = t2.id;
+```
+
+### SEMI_JOIN_REWRITE()
+
+The `SEMI_JOIN_REWRITE()` hint tells the optimizer to rewrite the semi-join query to an ordinary join query. Currently, this hint only works for `EXISTS` subqueries.
+
+If this hint is not used to rewrite the query, when the hash join is selected in the execution plan, the semi-join query can only use the subquery to build a hash table. In this case, when the result of the subquery is bigger than that of the outer query, the execution speed might be slower than expected.
+
+Similarly, when the index join is selected in the execution plan, the semi-join query can only use the outer query as the driving table. In this case, when the result of the subquery is smaller than that of the outer query, the execution speed might be slower than expected.
+
+When `SEMI_JOIN_REWRITE()` is used to rewrite the query, the optimizer can extend the selection range to select a better execution plan.
+
+{{< copyable "sql" >}}
+
+```sql
+-- Does not use SEMI_JOIN_REWRITE() to rewrite the query.
+EXPLAIN SELECT * FROM t WHERE EXISTS (SELECT 1 FROM t1 WHERE t1.a = t.a);
+```
+
+```sql
++-----------------------------+---------+-----------+------------------------+---------------------------------------------------+
+| id                          | estRows | task      | access object          | operator info                                     |
++-----------------------------+---------+-----------+------------------------+---------------------------------------------------+
+| MergeJoin_9                 | 7992.00 | root      |                        | semi join, left key:test.t.a, right key:test.t1.a |
+| ├─IndexReader_25(Build)     | 9990.00 | root      |                        | index:IndexFullScan_24                            |
+| │ └─IndexFullScan_24        | 9990.00 | cop[tikv] | table:t1, index:idx(a) | keep order:true, stats:pseudo                     |
+| └─IndexReader_23(Probe)     | 9990.00 | root      |                        | index:IndexFullScan_22                            |
+|   └─IndexFullScan_22        | 9990.00 | cop[tikv] | table:t, index:idx(a)  | keep order:true, stats:pseudo                     |
++-----------------------------+---------+-----------+------------------------+---------------------------------------------------+
+```
+
+{{< copyable "sql" >}}
+
+```sql
+-- Uses SEMI_JOIN_REWRITE() to rewrite the query.
+EXPLAIN SELECT * FROM t WHERE EXISTS (SELECT /*+ SEMI_JOIN_REWRITE() */ 1 FROM t1 WHERE t1.a = t.a);
+```
+
+```sql
++------------------------------+---------+-----------+------------------------+---------------------------------------------------------------------------------------------------------------+
+| id                           | estRows | task      | access object          | operator info                                                                                                 |
++------------------------------+---------+-----------+------------------------+---------------------------------------------------------------------------------------------------------------+
+| IndexJoin_16                 | 1.25    | root      |                        | inner join, inner:IndexReader_15, outer key:test.t1.a, inner key:test.t.a, equal cond:eq(test.t1.a, test.t.a) |
+| ├─StreamAgg_39(Build)        | 1.00    | root      |                        | group by:test.t1.a, funcs:firstrow(test.t1.a)->test.t1.a                                                      |
+| │ └─IndexReader_34           | 1.00    | root      |                        | index:IndexFullScan_33                                                                                        |
+| │   └─IndexFullScan_33       | 1.00    | cop[tikv] | table:t1, index:idx(a) | keep order:true                                                                                               |
+| └─IndexReader_15(Probe)      | 1.25    | root      |                        | index:Selection_14                                                                                            |
+|   └─Selection_14             | 1.25    | cop[tikv] |                        | not(isnull(test.t.a))                                                                                         |
+|     └─IndexRangeScan_13      | 1.25    | cop[tikv] | table:t, index:idx(a)  | range: decided by [eq(test.t.a, test.t1.a)], keep order:false, stats:pseudo                                   |
++------------------------------+---------+-----------+------------------------+---------------------------------------------------------------------------------------------------------------+
+```
+
+From the preceding example, you can see that when using the `SEMI_JOIN_REWRITE()` hint, TiDB can select the execution method of IndexJoin based on the driving table `t1`.
 
 ### HASH_AGG()
 
@@ -140,7 +208,7 @@ The `HASH_AGG()` hint tells the optimizer to use the hash aggregation algorithm 
 {{< copyable "sql" >}}
 
 ```sql
-select /*+ HASH_AGG() */ count(*) from t1，t2 where t1.a > 10 group by t1.id;
+select /*+ HASH_AGG() */ count(*) from t1, t2 where t1.a > 10 group by t1.id;
 ```
 
 ### STREAM_AGG()
@@ -150,7 +218,7 @@ The `STREAM_AGG()` hint tells the optimizer to use the stream aggregation algori
 {{< copyable "sql" >}}
 
 ```sql
-select /*+ STREAM_AGG() */ count(*) from t1，t2 where t1.a > 10 group by t1.id;
+select /*+ STREAM_AGG() */ count(*) from t1, t2 where t1.a > 10 group by t1.id;
 ```
 
 ### USE_INDEX(t1_name, idx1_name [, idx2_name ...])
@@ -166,6 +234,23 @@ SELECT /*+ USE_INDEX(t1, idx1, idx2) */ * FROM t1;
 > **Note:**
 >
 > If you specify only the table name but not index name in this hint, the execution does not consider any index but scan the entire table.
+
+### FORCE_INDEX(t1_name, idx1_name [, idx2_name ...])
+
+The `FORCE_INDEX(t1_name, idx1_name [, idx2_name ...])` hint tells the optimizer to use only the given index(es).
+
+The usage and effect of `FORCE_INDEX(t1_name, idx1_name [, idx2_name ...])` are the same as the usage and effect of `USE_INDEX(t1_name, idx1_name [, idx2_name ...])`.
+
+The following 4 queries have the same effect:
+
+{{< copyable "sql" >}}
+
+```sql
+SELECT /*+ USE_INDEX(t, idx1) */ * FROM t;
+SELECT /*+ FORCE_INDEX(t, idx1) */ * FROM t;
+SELECT * FROM t use index(idx1);
+SELECT * FROM t force index(idx1);
+```
 
 ### IGNORE_INDEX(t1_name, idx1_name [, idx2_name ...])
 
@@ -211,8 +296,6 @@ select /*+ READ_FROM_STORAGE(TIFLASH[t1], TIKV[t2]) */ t1.a from t t1, t t2 wher
 >
 > If you want the optimizer to use a table from another schema, you need to explicitly specify the schema name. For example:
 >
-> {{< copyable "sql" >}}
->
 > ```sql
 > SELECT /*+ READ_FROM_STORAGE(TIFLASH[test1.t1,test2.t2]) */ t1.a FROM test1.t t1, test2.t t2 WHERE t1.a = t2.a;
 > ```
@@ -236,6 +319,71 @@ When multiple `USE_INDEX_MERGE` hints are made to the same table, the optimizer 
 This hint takes effect on strict conditions, including:
 
 - If the query can select a single index scan in addition to full table scan, the optimizer does not select index merge.
+
+### LEADING(t1_name [, tl_name ...])
+
+The `LEADING(t1_name [, tl_name ...])` hint reminds the optimizer that, when generating the execution plan, to determine the order of multi-table joins according to the order of table names specified in the hint. For example:
+
+{{< copyable "sql" >}}
+
+```sql
+SELECT /*+ LEADING(t1, t2) */ * FROM t1, t2, t3 WHERE t1.id = t2.id and t2.id = t3.id;
+```
+
+In the above query with multi-table joins, the order of joins is determined by the order of table names specified in the `LEADING()` hint. The optimizer will first join `t1` and `t2` and then join the result with `t3`. This hint is more general than [`STRAIGHT_JOIN`](#straight_join).
+
+The `LEADING` hint does not take effect in the following situations:
+
++ Multiple `LEADING` hints are specified.
++ The table name specified in the `LEADING` hint does not exist.
++ A duplicated table name is specified in the `LEADING` hint.
++ The optimizer cannot perform join operations according to the order as specified by the `LEADING` hint.
++ The `straight_join()` hint already exists.
++ The query contains an outer join together with the Cartesian product.
++ Any of the `MERGE_JOIN`, `INL_JOIN`, `INL_HASH_JOIN`, and `HASH_JOIN` hints is used at the same time.
+
+In the above situations, a warning is generated.
+
+```sql
+-- Multiple `LEADING` hints are specified.
+SELECT /*+ LEADING(t1, t2) LEADING(t3) */ * FROM t1, t2, t3 WHERE t1.id = t2.id and t2.id = t3.id;
+
+-- To learn why the `LEADING` hint fails to take effect, execute `show warnings`.
+SHOW WARNINGS;
+```
+
+```sql
++---------+------+-------------------------------------------------------------------------------------------------------------------+
+| Level   | Code | Message                                                                                                           |
++---------+------+-------------------------------------------------------------------------------------------------------------------+
+| Warning | 1815 | We can only use one leading hint at most, when multiple leading hints are used, all leading hints will be invalid |
++---------+------+-------------------------------------------------------------------------------------------------------------------+
+```
+
+> **Note:**
+>
+> If the query statement includes an outer join, in the hint you can specify only the tables whose join order can be swapped. If there is a table in the hint whose join order cannot be swapped, the hint will be invalid. For example, in `SELECT * FROM t1 LEFT JOIN (t2 JOIN t3 JOIN t4) ON t1.a = t2.a;`, if you want to control the join order of `t2`, `t3`, and `t4` tables, you cannot specify `t1` in the `LEADING` hint.
+
+### MERGE()
+
+Using the `MERGE()` hint in queries with common table expressions (CTE) can disable the materialization of the subqueries and expand the subquery inlines into CTE. This hint is only applicable to non-recursive CTE. In some scenarios, using `MERGE()` brings higher execution efficiency than the default behavior of allocating a temporary space. For example, pushing down query conditions or in nesting CTE queries:
+
+```sql
+-- Uses the hint to push down the predicate of the outer query.
+WITH CTE AS (SELECT /*+ MERGE() */ * FROM tc WHERE tc.a < 60) SELECT * FROM CTE WHERE CTE.a < 18;
+
+-- Uses the hint in a nested CTE query to expand a CTE inline into the outer query.
+WITH CTE1 AS (SELECT * FROM t1), CTE2 AS (WITH CTE3 AS (SELECT /*+ MERGE() */ * FROM t2), CTE4 AS (SELECT * FROM t3) SELECT * FROM CTE3, CTE4) SELECT * FROM CTE1, CTE2;
+```
+
+> **Note:**
+>
+> `MERGE()` is only applicable to simple CTE queries. It is not applicable in the following situations:
+>
+> - [Recursive CTE](https://docs.pingcap.com/tidb/stable/dev-guide-use-common-table-expression#recursive-cte)
+> - Subqueries with inlines that cannot be expanded, such as aggregate operators, window functions, and `DISTINCT`.
+>
+> When the number of CTE references is too high, the query performance might be lower than the default materialization behavior.
 
 ## Hints that take effect in the whole query
 
@@ -261,7 +409,7 @@ In addition to this hint, setting the `tidb_enable_index_merge` system variable 
 
 > **Note:**
 >
-> - `NO_INDEX_MERGE` has a higher priority over `USE_INDEX_MERGE`. When both hints are used, `USE_INDEX_MERGE` does not take effect. 
+> - `NO_INDEX_MERGE` has a higher priority over `USE_INDEX_MERGE`. When both hints are used, `USE_INDEX_MERGE` does not take effect.
 > - For a subquery, `NO_INDEX_MERGE` only takes effect when it is placed at the outermost level of the subquery.
 
 ### USE_TOJA(boolean_value)
@@ -302,7 +450,7 @@ In the following hint, `MEMORY_QUOTA(1024 MB)` means that the memory usage is li
 select /*+ MEMORY_QUOTA(1024 MB) */ * from t;
 ```
 
-In addition to this hint, the `tidb_mem_quota_query` system variable can also limit the memory usage of a statement.
+In addition to this hint, the [`tidb_mem_quota_query`](/system-variables.md#tidb_mem_quota_query) system variable can also limit the memory usage of a statement.
 
 ### READ_CONSISTENT_REPLICA()
 
@@ -320,7 +468,7 @@ In addition to this hint, setting the `tidb_replica_read` environment variable t
 
 The `IGNORE_PLAN_CACHE()` hint reminds the optimizer not to use the Plan Cache when handling the current `prepare` statement.
 
-This hint is used to temporarily disable the Plan Cache for a certain type of queries when [prepare-plan-cache](/tidb-configuration-file.md#prepared-plan-cache) is enabled.
+This hint is used to temporarily disable the Plan Cache for a certain type of queries when [prepare-plan-cache](/sql-prepared-plan-cache.md) is enabled.
 
 In the following example, the Plan Cache is forcibly disabled when executing the `prepare` statement.
 
@@ -329,6 +477,21 @@ In the following example, the Plan Cache is forcibly disabled when executing the
 ```sql
 prepare stmt from 'select  /*+ IGNORE_PLAN_CACHE() */ * from t where t.id = ?';
 ```
+
+### STRAIGHT_JOIN()
+
+The `STRAIGHT_JOIN()` hint reminds the optimizer to join tables in the order of table names in the `FROM` clause when generating the join plan.
+
+{{< copyable "sql" >}}
+
+```sql
+SELECT /*+ STRAIGHT_JOIN() */ * FROM t t1, t t2 WHERE t1.a = t2.a;
+```
+
+> **Note:**
+>
+> - `STRAIGHT_JOIN` has higher priority over `LEADING`. When both hints are used, `LEADING` does not take effect.
+> - It is recommended to use the `LEADING` hint, which is more general than the `STRAIGHT_JOIN` hint.
 
 ### NTH_PLAN(N)
 

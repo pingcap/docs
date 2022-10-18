@@ -39,11 +39,13 @@ TiDB splits data into Regions, each representing a range of data with a size lim
 
 ![TiDB Data Overview](/media/best-practices/tidb-data-overview.png)
 
-In theory, by the virtue of this architecture, TiDB can linearly scale its read and write capacities and make full use of the distributed resources so long as there is no `AUTO_INCREMENT` primary key in the write scenario, or there is no monotonically increasing index. From this point of view, TiDB is especially suitable for the highly-concurrent and write-intensive scenario. However, the actual situation often differs from the theoretical assumption.
+In theory, if an application has no write hotspot, TiDB, by the virtue of its architecture, can not only linearly scale its read and write capacities, but also make full use of the distributed resources. From this point of view, TiDB is especially suitable for the high-concurrent and write-intensive scenario.
+
+However, the actual situation often differs from the theoretical assumption.
 
 > **Note:**
 >
-> No `AUTO_INCREMENT` primary key in the write scenario or no monotonically increasing index means no write hotspot in the application.
+> No write hotspot in an application means the write scenario does not have any `AUTO_INCREMENT` primary key or monotonically increasing index.
 
 ## Hotspot case
 
@@ -65,7 +67,25 @@ This table is simple in structure. In addition to `id` as the primary key, no se
 {{< copyable "sql" >}}
 
 ```sql
-INSERT INTO TEST_HOTSPOT(id, age, user_name, email) values(%v, %v, '%v', '%v');
+SET SESSION cte_max_recursion_depth = 1000000;
+INSERT INTO TEST_HOTSPOT
+SELECT
+  n,                                       -- ID
+  RAND()*80,                               -- Number between 0 and 80
+  CONCAT('user-',n),
+  CONCAT(
+    CHAR(65 + (RAND() * 25) USING ascii),  -- Number between 65 and 65+25, converted to a character, A-Z
+    '-user-',
+    n,
+    '@example.com'
+  )
+FROM
+  (WITH RECURSIVE nr(n) AS 
+    (SELECT 1                              -- Start CTE at 1
+      UNION ALL SELECT n + 1               -- increase n with 1 every loop
+      FROM nr WHERE n < 1000000            -- stop loop at 1_000_000 
+    ) SELECT n FROM nr
+  ) a;
 ```
 
 The load comes from executing the above statement intensively in a short time.
@@ -150,18 +170,24 @@ SPLIT TABLE TEST_HOTSPOT BETWEEN (0) AND (9223372036854775807) REGIONS 128;
 
 After the pre-split operation, execute the `SHOW TABLE test_hotspot REGIONS;` statement to check the status of Region scattering. If the values of the `SCATTERING` column are all `0`, the scheduling is successful.
 
-You can also check the Region distribution using the [table-regions.py](https://github.com/pingcap/tidb-ansible/blob/dabf60baba5e740a4bee9faf95e77563d8084be1/scripts/table-regions.py) script. Currently, the Region distribution is relatively even:
+You can also check the Region leader distribution using the following SQL statement. You need to replace `table_name` with the actual table name.
 
-```
-[root@172.16.4.4 scripts]# python table-regions.py --host 172.16.4.3 --port 31453 test test_hotspot
-[RECORD - test.test_hotspot] - Leaders Distribution:
-  total leader count: 127
-  store: 1, num_leaders: 21, percentage: 16.54%
-  store: 4, num_leaders: 20, percentage: 15.75%
-  store: 6, num_leaders: 21, percentage: 16.54%
-  store: 46, num_leaders: 21, percentage: 16.54%
-  store: 82, num_leaders: 23, percentage: 18.11%
-  store: 62, num_leaders: 21, percentage: 16.54%
+{{< copyable "sql" >}}
+
+```sql
+SELECT
+    p.STORE_ID,
+    COUNT(s.REGION_ID) PEER_COUNT
+FROM
+    INFORMATION_SCHEMA.TIKV_REGION_STATUS s
+    JOIN INFORMATION_SCHEMA.TIKV_REGION_PEERS p ON s.REGION_ID = p.REGION_ID
+WHERE
+    TABLE_NAME = 'table_name'
+    AND p.is_leader = 1
+GROUP BY
+    p.STORE_ID
+ORDER BY
+    PEER_COUNT DESC;
 ```
 
 Then operate the write load again:

@@ -195,6 +195,7 @@ Dynamic privileges include:
 * `ROLE_ADMIN`
 * `CONNECTION_ADMIN`
 * `SYSTEM_VARIABLES_ADMIN`
+* `RESTRICTED_REPLICA_WRITER_ADMIN` allows privilege owners to perform write or update operations without being affected when the read-only mode is enabled in the TiDB cluster. For details, see [`tidb_restricted_read_only`](/system-variables.md#tidb_restricted_read_only-new-in-v520).
 
 To see the full set of dynamic privileges, execute the `SHOW PRIVILEGES` statement. Because plugins are permitted to add new privileges, the list of privileges that are assignable might differ based on your TiDB installation.
 
@@ -293,7 +294,7 @@ Requires the `DROP` privilege for the table.
 
 ### LOAD DATA
 
-Requires the `INSERT` privilege for the table.
+Requires the `INSERT` privilege for the table. When you use `REPLACE INTO`, the `DELETE` privilege is also required.
 
 ### TRUNCATE TABLE
 
@@ -406,7 +407,7 @@ User identity is based on two pieces of information: `Host`, the host that initi
 
 When the connection is successful, the request verification process checks whether the operation has the privilege.
 
-For database-related requests (`INSERT`, `UPDATE`), the request verification process first checks the user’s global privileges in the `mysql.user` table. If the privilege is granted, you can access directly. If not, check the `mysql.db` table.
+For database-related requests (`INSERT`, `UPDATE`), the request verification process first checks the user's global privileges in the `mysql.user` table. If the privilege is granted, you can access directly. If not, check the `mysql.db` table.
 
 The `user` table has global privileges regardless of the default database. For example, the `DELETE` privilege in `user` can apply to any row, table, or database.
 

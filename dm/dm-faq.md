@@ -1,10 +1,10 @@
 ---
-title: TiDB Data Migration FAQ
+title: TiDB Data Migration FAQs
 summary: Learn about frequently asked questions (FAQs) about TiDB Data Migration (DM).
 aliases: ['/docs/tidb-data-migration/dev/faq/']
 ---
 
-# TiDB Data Migration FAQ
+# TiDB Data Migration FAQs
 
 This document collects the frequently asked questions (FAQs) about TiDB Data Migration (DM).
 
@@ -130,11 +130,11 @@ Since DM v2.0, if you directly run the `start-task` command with the task config
 
 This error can be handled by [manually importing DM migration tasks of a DM 1.0 cluster to a DM 2.0 cluster](/dm/manually-upgrade-dm-1.0-to-2.0.md).
 
-## Why does TiUP fail to deploy some versions of DM (for example, v2.0.0-hotfix)？
+## Why does TiUP fail to deploy some versions of DM (for example, v2.0.0-hotfix)?
 
 You can use the `tiup list dm-master` command to view the DM versions that TiUP supports to deploy. TiUP does not manage DM versions which are not shown by this command.
 
-## How to handle the error `parse mydumper metadata error: EOF` that occurs when DM is replicating data？
+## How to handle the error `parse mydumper metadata error: EOF` that occurs when DM is replicating data?
 
 You need to check the error message and log files to further analyze this error. The cause might be that the dump unit does not produce the correct metadata file due to a lack of permissions.
 
@@ -188,7 +188,7 @@ if the DDL is not needed, you can use a filter rule with \"*\" schema-pattern to
 
 The reason for this type of error is that the TiDB parser cannot parse DDL statements sent by the upstream, such as `ALTER EVENT`, so `sql-skip` does not take effect as expected. You can add [binlog event filters](/dm/dm-key-features.md#binlog-event-filter) in the configuration file to filter those statements and set `schema-pattern: "*"`. Starting from DM v2.0.1, DM pre-filters statements related to `EVENT`.
 
-Since DM v2.0, `handle-error` replaces `sql-skip`. You can use `handle-error` instead to avoid this issue.
+Since DM v6.0, `binlog` replaces `sql-skip` and `handle-error`. You can use the `binlog` command instead to avoid this issue.
 
 ## Why do `REPLACE` statements keep appearing in the downstream when DM is replicating?
 
@@ -368,7 +368,7 @@ In this case, you can check the environment variable `https_proxy` (note that it
 To solve this issue, check whether `https_proxy` is mandatory. If not, cancel the setting. Otherwise, add the environment variable setting `https_proxy="" ./dmctl --master-addr "x.x.x.x:8261"` before the oringial dmctl commands.
 
 > **Note:**
-> 
+>
 > The environment variables related to `proxy` include `http_proxy`, `https_proxy`, and `no_proxy`. If the connection error persists after you perform the above steps, check whether the configuration parameters of `http_proxy` and `no_proxy` are correct.
 
 ## How to handle the returned error when executing start-relay command for DM versions from 2.0.2 to 2.0.6?

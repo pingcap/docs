@@ -8,7 +8,23 @@ aliases: ['/docs/dev/auto-increment/']
 
 This document introduces the `AUTO_INCREMENT` column attribute, including its concept, implementation principles, auto-increment related features, and restrictions.
 
-## Concept 
+<CustomContent platform="tidb">
+
+> **Note:**
+>
+> The `AUTO_INCREMENT` attribute might cause hotspot in production environments. See [Troubleshoot HotSpot Issues](/troubleshoot-hot-spot-issues.md) for details. It is recommended to use [`AUTO_RANDOM`](/auto-random.md) instead.
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+> **Note:**
+>
+> The `AUTO_INCREMENT` attribute might cause hotspot in production environments. See [Troubleshoot HotSpot Issues](https://docs.pingcap.com/tidb/stable/troubleshoot-hot-spot-issues#handle-auto-increment-primary-key-hotspot-tables-using-auto_random) for details. It is recommended to use [`AUTO_RANDOM`](/auto-random.md) instead.
+
+</CustomContent>
+
+## Concept
 
 `AUTO_INCREMENT` is a column attribute that is used to automatically fill in default column values. When the `INSERT` statement does not specify values for the `AUTO_INCREMENT` column, the system automatically assigns values to this column.
 
@@ -335,8 +351,10 @@ The value (ID) implicitly assigned to auto-increment columns satisfies the follo
 
 Currently, `AUTO_INCREMENT` has the following restrictions when used in TiDB:
 
-- It must be defined on the column of the primary key or unique index.
+- It must be defined on the first column of the primary key or the first column of an index.
 - It must be defined on the column of `INTEGER`, `FLOAT`, or `DOUBLE` type.
 - It cannot be specified on the same column with the `DEFAULT` column value.
 - `ALTER TABLE` cannot be used to add the `AUTO_INCREMENT` attribute.
 - `ALTER TABLE` can be used to remove the `AUTO_INCREMENT` attribute. However, starting from v2.1.18 and v3.0.4, TiDB uses the session variable `@@tidb_allow_remove_auto_inc` to control whether `ALTER TABLE MODIFY` or `ALTER TABLE CHANGE` can be used to remove the `AUTO_INCREMENT` attribute of a column. By default, you cannot use `ALTER TABLE MODIFY` or `ALTER TABLE CHANGE` to remove the `AUTO_INCREMENT` attribute.
+- `ALTER TABLE` requires the `FORCE` option to set the `AUTO_INCREMENT` value to a smaller value.
+- Setting the `AUTO_INCREMENT` to a value smaller than `MAX(<auto_increment_column>)` leads to duplicate keys because pre-existing values are not skipped.

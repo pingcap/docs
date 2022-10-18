@@ -27,26 +27,12 @@ Because CSV files do not contain schema information, before importing data from 
 
 * **Method 1**: create the target table schema using TiDB Lightning.
 
-    1. Write SQL files that contain the required DDL statements.
+    Create SQL files that contain the required DDL statements:
 
-        - Add `CREATE DATABASE` statements in the `${db_name}-schema-create.sql` files.
-        - Add `CREATE TABLE` statements in the `${db_name}.${table_name}-schema.sql` files.
-
-    2. During the migration, add the following configuration in `tidb-lightning.toml`:
-
-        ```toml
-        [mydumper]
-        no-schema = false # To create a target table schema using Lightning, set the value to false.
-        ```
+    - Add `CREATE DATABASE` statements in the `${db_name}-schema-create.sql` files.
+    - Add `CREATE TABLE` statements in the `${db_name}.${table_name}-schema.sql` files.
 
 * **Method 2**: create the target table schema manually.
-
-    During the migration, add the following configuration in `tidb-lightning.toml`:
-
-    ```toml
-    [mydumper]
-    no-schema = true # If you have already created the target table schema, set the value to true, which means skipping the schema creation.
-    ```
 
 ## Step 3. Create the configuration file
 
@@ -64,17 +50,12 @@ file = "tidb-lightning.log"
 # "local": Default backend. The local backend is recommended to import large volumes of data (1 TiB or more). During the import, the target TiDB cluster cannot provide any service.
 # "tidb": The "tidb" backend is recommended to import data less than 1 TiB. During the import, the target TiDB cluster can provide service normally.
 backend = "local"
-# Set the temporary storage directory for the sorted Key-Value files. The directory must be empty, and the storage space must be enough to hold the largest single table from the data source. For better import performance, it is recommended to use a directory different from `data-source-dir` and use flash storage, which can use I/O exclusively.
+# Set the temporary storage directory for the sorted Key-Value files. The directory must be empty, and the storage space must be greater than the size of the dataset to be imported. For better import performance, it is recommended to use a directory different from `data-source-dir` and use flash storage, which can use I/O exclusively.
 sorted-kv-dir = "/mnt/ssd/sorted-kv-dir"
 
 [mydumper]
 # Directory of the data source.
-data-source-dir = "${data-path}" # A local path or S3 path. For example, 's3://my-bucket/sql-backup?region=us-west-2'.
-
-# Configures whether to create the target database and table.
-# If you need TiDB Lightning to create the target database and table, set the value to false.
-# If you have already created the target database and table, set the value to true.
-no-schema = true
+data-source-dir = "${data-path}" # A local path or S3 path. For example, 's3://my-bucket/sql-backup'.
 
 # Defines CSV format.
 [mydumper.csv]
@@ -102,7 +83,7 @@ host = ${host}            # e.g.: 172.16.32.1
 port = ${port}            # e.g.: 4000
 user = "${user_name}"     # e.g.: "root"
 password = "${password}"  # e.g.: "rootroot"
-status-port = ${status-port} # During the import, TiCb Lightning needs to obtain the table schema information from the TiDB status port. e.g.: 10080
+status-port = ${status-port} # During the import, TiDB Lightning needs to obtain the table schema information from the TiDB status port. e.g.: 10080
 pd-addr = "${ip}:${port}" # The address of the PD cluster, e.g.: 172.16.31.3:2379. TiDB Lightning obtains some information from PD. When backend = "local", you must specify status-port and pd-addr correctly. Otherwise, the import will be abnormal.
 ```
 
@@ -146,7 +127,7 @@ After the import starts, you can check the progress of the import by either of t
 - Check progress in [the monitoring dashboard](/tidb-lightning/monitor-tidb-lightning.md).
 - Check progress in [the TiDB Lightning web interface](/tidb-lightning/tidb-lightning-web-interface.md).
 
-After TiDB Lightning completes the import, it exits automatically. If you find the last 5 lines of its log print `the whole procedure completed`, the import is successful.
+After TiDB Lightning completes the import, it exits automatically. Check whether `tidb-lightning.log` contains `the whole procedure completed` in the last lines. If yes, the import is successful. If no, the import encounters an error. Address the error as instructed in the error message.
 
 > **Note:**
 >

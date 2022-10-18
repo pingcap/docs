@@ -5,7 +5,7 @@ summary: Learn about the execution plan information returned by the EXPLAIN stat
 
 # Explain Statements in the MPP Mode
 
-TiDB supports using the [MPP mode](/tiflash/use-tiflash.md#use-the-mpp-mode) to execute queries. In the MPP mode, the TiDB optimizer generates execution plans for MPP. Note that the MPP mode is only available for tables that have replicas on [TiFlash](/tiflash/tiflash-overview.md).
+TiDB supports using the [MPP mode](/tiflash/use-tiflash-mpp-mode.md) to execute queries. In the MPP mode, the TiDB optimizer generates execution plans for MPP. Note that the MPP mode is only available for tables that have replicas on [TiFlash](/tiflash/tiflash-overview.md).
 
 The examples in this document are based on the following sample data:
 
@@ -81,7 +81,6 @@ The following is a typical execution plan for Shuffle Hash Join:
 {{< copyable "sql" >}}
 
 ```sql
-SET tidb_opt_broadcast_join=0;
 SET tidb_broadcast_join_threshold_count=0;
 SET tidb_broadcast_join_threshold_size=0;
 EXPLAIN SELECT COUNT(*) FROM t1 a JOIN t1 b ON a.id = b.id;

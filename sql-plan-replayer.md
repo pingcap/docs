@@ -5,7 +5,7 @@ summary: Learn how to use PLAN REPLAYER to save and restore the on-site informat
 
 # Use PLAN REPLAYER to Save and Restore the On-Site Information of a Cluster
 
-When you locate and troubleshoot the issues of a TiDB cluster, you often need to provide information on the system and the execution plan. To help you get the information and troubleshoot cluster issues in a more convenient and efficient way, the `PLAN REPLAY` command is introduced in TiDB v5.3.0. This command enables you to easily save and restore the on-site information of a cluster, improves the efficiency of troubleshooting, and helps you more easily archive the issue for management.
+When you locate and troubleshoot the issues of a TiDB cluster, you often need to provide information on the system and the execution plan. To help you get the information and troubleshoot cluster issues in a more convenient and efficient way, the `PLAN REPLAYER` command is introduced in TiDB v5.3.0. This command enables you to easily save and restore the on-site information of a cluster, improves the efficiency of troubleshooting, and helps you more easily archive the issue for management.
 
 The features of `PLAN REPLAYER` are as follows:
 
@@ -43,7 +43,7 @@ Based on `sql-statement`, TiDB sorts out and exports the following on-site infor
 ```sql
 use test;
 create table t(a int, b int);
-insert into t valuse(1,1), (2, 2), (3, 3);
+insert into t values(1,1), (2, 2), (3, 3);
 analyze table t;
 
 plan replayer dump explain select * from t;
@@ -57,12 +57,53 @@ plan replayer dump explain select * from t;
 
 ```sql
 MySQL [test]> plan replayer dump explain select * from t;
+```
+
+```sql
 +------------------------------------------------------------------+
 | Dump_link                                                        |
 +------------------------------------------------------------------+
-| replayer_single_JOGvpu4t7dssySqJfTtS4A==_1635750890568691080.zip |
+| replayer_JOGvpu4t7dssySqJfTtS4A==_1635750890568691080.zip |
 +------------------------------------------------------------------+
 1 row in set (0.015 sec)
+```
+
+Alternatively, you can use the session variable [`tidb_last_plan_replayer_token`](/system-variables.md#tidb_last_plan_replayer_token-new-in-v630) to obtain the result of the last `PLAN REPLAYER DUMP` execution.
+
+```sql
+SELECT @@tidb_last_plan_replayer_token;
+```
+
+```sql
++-----------------------------------------------------------+
+| @@tidb_last_plan_replayer_token                           |
++-----------------------------------------------------------+
+| replayer_Fdamsm3C7ZiPJ-LQqgVjkA==_1663304195885090000.zip |
++-----------------------------------------------------------+
+1 row in set (0.00 sec)
+```
+
+When there are multiple SQL statements, you can obtain the result of the `PLAN REPLAYER DUMP` execution using a file. The results of multiple SQL statements are separated by `;` in this file.
+
+```sql
+plan replayer dump explain 'sqls.txt';
+```
+
+```sql
+Query OK, 0 rows affected (0.03 sec)
+```
+
+```sql
+SELECT @@tidb_last_plan_replayer_token;
+```
+
+```sql
++-----------------------------------------------------------+
+| @@tidb_last_plan_replayer_token                           |
++-----------------------------------------------------------+
+| replayer_LEDKg8sb-K0u24QesiH8ig==_1663226556509182000.zip |
++-----------------------------------------------------------+
+1 row in set (0.00 sec)
 ```
 
 Because the file cannot be downloaded on MySQL Client, you need to use the TiDB HTTP interface and the file identifier to download the file:
@@ -78,7 +119,7 @@ http://${tidb-server-ip}:${tidb-server-status-port}/plan_replayer/dump/${file_to
 {{< copyable "shell-regular" >}}
 
 ```shell
-curl http://127.0.0.1:10080/plan_replayer/dump/replayer_single_JOGvpu4t7dssySqJfTtS4A==_1635750890568691080.zip > plan_replayer.zip
+curl http://127.0.0.1:10080/plan_replayer/dump/replayer_JOGvpu4t7dssySqJfTtS4A==_1635750890568691080.zip > plan_replayer.zip
 ```
 
 ## Use `PLAN REPLAYER` to import cluster information

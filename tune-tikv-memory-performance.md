@@ -6,7 +6,7 @@ aliases: ['/docs/dev/tune-tikv-performance/','/docs/dev/reference/performance/tu
 
 # Tune TiKV Memory Parameter Performance
 
-This document describes how to tune the TiKV parameters for optimal performance.
+This document describes how to tune the TiKV parameters for optimal performance. You can find the default configuration file in [etc/config-template.toml](https://github.com/tikv/tikv/blob/master/etc/config-template.toml). To modify the configuration, you can [use TiUP](/maintain-tidb-using-tiup.md#modify-the-configuration) or [modify TiKV online](/dynamic-config.md#modify-tikv-configuration-online) for a limited set of configuration items. For the complete configuration, see [TiKV configuration file](/tikv-configuration-file.md).
 
 TiKV uses RocksDB for persistent storage at the bottom level of the TiKV architecture. Therefore, many of the performance parameters are related to RocksDB. TiKV uses two RocksDB instances: the default RocksDB instance stores KV data, the Raft RocksDB instance (RaftDB) stores Raft logs.
 
@@ -103,13 +103,15 @@ job = "tikv"
 # If there are multiple disks on the machine, store the data of Raft RocksDB on different disks to improve TiKV performance.
 # raftdb-path = "/tmp/tikv/store/raft"
 
-region-max-size = "384MB"
-# The threshold value of Region split
-region-split-size = "256MB"
 # When the data size change in a Region is larger than the threshold value, TiKV checks whether this Region needs split.
-# To reduce the costs of scanning data in the checking process, set the value to 32MB during checking and set it to
-# the default value in normal operation.
+# To reduce the costs of scanning data in the checking process, set the value to 32 MB during the data import process. In the normal operation status, set it to the default value.
 region-split-check-diff = "32MB"
+
+[coprocessor]
+## If the size of a Region with the range of [a,e) is larger than the value of `region_max_size`, TiKV trys to split the Region to several Regions, for example, the Regions with the ranges of [a,b), [b,c), [c,d), and [d,e).
+## After the Region split, the size of the split Regions is equal to the value of `region_split_size` (or slightly larger than the value of `region_split_size`).
+# region-max-size = "144MB"
+# region-split-size = "96MB"
 
 [rocksdb]
 # The maximum number of threads of RocksDB background tasks. The background tasks include compaction and flush.

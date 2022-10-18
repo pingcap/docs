@@ -8,10 +8,6 @@ aliases: ['/docs/dev/dynamic-config/']
 
 This document describes how to modify the cluster configuration online.
 
-> **Note:**
->
-> This feature is experimental. It is **NOT** recommended to use this feature in the production environment.
-
 You can update the configuration of components (including TiDB, TiKV, and PD) online using SQL statements, without restarting the cluster components. Currently, the method of changing TiDB instance configuration is different from that of changing configuration of other components (such TiKV and PD).
 
 ## Common Operations
@@ -72,7 +68,7 @@ When using the `set config` statement, you can modify the configuration of a sin
 {{< copyable "sql" >}}
 
 ```sql
-set config tikv `split.qps-threshold`=1000
+set config tikv `split.qps-threshold`=1000;
 ```
 
 - Modify the configuration of a single TiKV instance:
@@ -80,7 +76,7 @@ set config tikv `split.qps-threshold`=1000
     {{< copyable "sql" >}}
 
     ```sql
-    set config "127.0.0.1:20180" `split.qps-threshold`=1000
+    set config "127.0.0.1:20180" `split.qps-threshold`=1000;
     ```
 
 If the modification is successful, `Query OK` is returned:
@@ -94,7 +90,7 @@ If an error occurs during the batch modification, a warning is returned:
 {{< copyable "sql" >}}
 
 ```sql
-set config `tikv log-level`='warn';
+set config tikv `log-level`='warn';
 ```
 
 ```sql
@@ -126,11 +122,14 @@ The following TiKV configuration items can be modified online:
 
 | Configuration item | Description |
 | :--- | :--- |
-| `raftstore.raft-entry-max-size` | The maximum size of a single log |
+| log.level | The log level. |
+| `raftstore.raft-max-inflight-msgs` | The number of Raft logs to be confirmed. If this number is exceeded, the Raft state machine slows down log sending. |
 | `raftstore.raft-log-gc-tick-interval` | The time interval at which the polling task of deleting Raft logs is scheduled |
 | `raftstore.raft-log-gc-threshold` | The soft limit on the maximum allowable number of residual Raft logs |
 | `raftstore.raft-log-gc-count-limit` | The hard limit on the allowable number of residual Raft logs |
 | `raftstore.raft-log-gc-size-limit` | The hard limit on the allowable size of residual Raft logs |
+| `raftstore.raft-max-size-per-msg` | The soft limit on the size of a single message packet that is allowed to be generated |
+| `raftstore.raft-entry-max-size` | The hard limit on the maximum size of a single Raft log |
 | `raftstore.raft-entry-cache-life-time` | The maximum remaining time allowed for the log cache in memory |
 | `raftstore.split-region-check-tick-interval` | The time interval at which to check whether the Region split is needed |
 | `raftstore.region-split-check-diff` | The maximum value by which the Region data is allowed to exceed before Region split |
@@ -149,14 +148,18 @@ The following TiKV configuration items can be modified online:
 | `raftstore.max-leader-missing-duration` | The longest duration allowed for a peer to be without a leader. If this value is exceeded, the peer verifies with PD whether it has been deleted. |
 | `raftstore.abnormal-leader-missing-duration` | The normal duration allowed for a peer to be without a leader. If this value is exceeded, the peer is seen as abnormal and marked in metrics and logs. |
 | `raftstore.peer-stale-state-check-interval` | The time interval to check whether a peer is without a leader |
-| `raftstore.consistency-check-interval` | The time interval to check consistency |
+| `raftstore.consistency-check-interval` | The time interval to check consistency (**NOT** recommended because it is not compatible with the garbage collection in TiDB) |
 | `raftstore.raft-store-max-leader-lease` | The longest trusted period of a Raft leader |
 | `raftstore.merge-check-tick-interval` | The time interval for merge check |
 | `raftstore.cleanup-import-sst-interval` | The time interval to check expired SST files |
 | `raftstore.local-read-batch-size` | The maximum number of read requests processed in one batch |
 | `raftstore.hibernate-timeout` | The shortest wait duration before entering hibernation upon start. Within this duration, TiKV does not hibernate (not released). |
-| `raftstore.apply-pool-size` | The number of apply thread pool size |
-| `raftstore.store-pool-size` | The number of store thread pool size |
+| `raftstore.apply-pool-size` | The number of threads in the pool that flushes data to the disk, which is the size of the Apply thread pool |
+| `raftstore.store-pool-size` | The number of threads in the pool that processes Raft, which is the size of the Raftstore thread pool |
+| `raftstore.apply-max-batch-size` | Raft state machines process data write requests in batches by the BatchSystem. This configuration item specifies the maximum number of Raft state machines that can execute the requests in one batch. |
+| `raftstore.store-max-batch-size` | Raft state machines process requests for flushing logs into the disk in batches by the BatchSystem. This configuration item specifies the maximum number of Raft state machines that can process the requests in one batch. |
+| `readpool.unified.max-thread-count` | The maximum number of threads in the thread pool that uniformly processes read requests, which is the size of the UnifyReadPool thread pool |
+| `readpool.unified.auto-adjust-pool-size` | Determines whether to automatically adjust the UnifyReadPool thread pool size |
 | `coprocessor.split-region-on-table` | Enables to split Region by table |
 | `coprocessor.batch-split-limit` | The threshold of Region split in batches |
 | `coprocessor.region-max-size` | The maximum size of a Region |
@@ -165,7 +168,16 @@ The following TiKV configuration items can be modified online:
 | `coprocessor.region-split-keys` | The number of keys in the newly split Region |
 | `pessimistic-txn.wait-for-lock-timeout` | The longest duration that a pessimistic transaction waits for the lock |
 | `pessimistic-txn.wake-up-delay-duration` | The duration after which a pessimistic transaction is woken up |
-| `pessimistic-txn.pipelined` | Whether to enable the pipelined pessimistic locking process |
+| `pessimistic-txn.pipelined` | Determines whether to enable the pipelined pessimistic locking process |
+| `pessimistic-txn.in-memory` | Determines whether to enable the in-memory pessimistic lock |
+| `quota.foreground-cpu-time` | The soft limit on the CPU resources used by TiKV foreground to process read and write requests |
+| `quota.foreground-write-bandwidth` | The soft limit on the bandwidth with which foreground transactions write data |
+| `quota.foreground-read-bandwidth` | The soft limit on the bandwidth with which foreground transactions and the Coprocessor read data |
+| `quota.background-cpu-time` | The soft limit on the CPU resources used by TiKV background to process read and write requests |
+| `quota.background-write-bandwidth` | The soft limit on the bandwidth with which background transactions write data (not effective yet) |
+| `quota.background-read-bandwidth` | The soft limit on the bandwidth with which background transactions and the Coprocessor read data (not effective yet) |
+| `quota.enable-auto-tune` | Whether to enable the auto-tuning of quota. If this configuration item is enabled, TiKV dynamically adjusts the quota for the background requests based on the load of TiKV instances.  |
+| `quota.max-delay-duration` | The maximum time that a single read or write request is forced to wait before it is processed in the foreground |
 | `gc.ratio-threshold` | The threshold at which Region GC is skipped (the number of GC versions/the number of keys) |
 | `gc.batch-keys` | The number of keys processed in one batch |
 | `gc.max-write-bytes-per-sec` | The maximum bytes that can be written into RocksDB per second |
@@ -193,10 +205,16 @@ The following TiKV configuration items can be modified online:
 | `{db-name}.{cf-name}.soft-pending-compaction-bytes-limit` | The soft limit on the pending compaction bytes |
 | `{db-name}.{cf-name}.hard-pending-compaction-bytes-limit` | The hard limit on the pending compaction bytes |
 | `{db-name}.{cf-name}.titan.blob-run-mode` | The mode of processing blob files |
+| `server.grpc-memory-pool-quota` | Limits the memory size that can be used by gRPC |
+| `server.max-grpc-send-msg-len` | Sets the maximum length of a gRPC message that can be sent |
+| `server.raft-msg-max-batch-size` | Sets the maximum number of Raft messages that are contained in a single gRPC message |
+| `server.simplify-metrics`        | Controls whether to simplify the sampling monitoring metrics                   |
 | `storage.block-cache.capacity` | The size of shared block cache (supported since v4.0.3) |
+| `storage.scheduler-worker-pool-size` | The number of threads in the Scheduler thread pool |
 | `backup.num-threads` | The number of backup threads (supported since v4.0.3) |
-| `split.qps-threshold` | The threshold to execute `load-base-split` on a Region. If the QPS of read requests for a Region exceeds `qps-threshold` for a consecutive period of time, this Region should be split.|
-| `split.byte-threshold` | The threshold to execute `load-base-split` on a Region. If the traffic of read requests for a Region exceeds the `byte-threshold` for a consecutive period of time, this Region should be split. |
+| `split.qps-threshold` | The threshold to execute `load-base-split` on a Region. If the QPS of read requests for a Region exceeds `qps-threshold` for 10 consecutive seconds, this Region should be split.|
+| `split.byte-threshold` | The threshold to execute `load-base-split` on a Region. If the traffic of read requests for a Region exceeds the `byte-threshold` for 10 consecutive seconds, this Region should be split. |
+| `split.region-cpu-overload-threshold-ratio` | The threshold to execute `load-base-split` on a Region. If the CPU usage in the Unified Read Pool for a Region exceeds the `region-cpu-overload-threshold-ratio` for 10 consecutive seconds, this Region should be split. (supported since v6.2.0) |
 | `split.split-balance-score` | The parameter of `load-base-split`, which ensures the load of the two split Regions is as balanced as possible. The smaller the value is, the more balanced the load is. But setting it too small might cause split failure. |
 | `split.split-contained-score` | The parameter of `load-base-split`. The smaller the value, the fewer cross-Region visits after Region split. |
 | `cdc.min-ts-interval` | The time interval at which Resolved TS is forwarded  |
@@ -221,7 +239,7 @@ You can modify the PD configurations using the following statement:
 {{< copyable "sql" >}}
 
 ```sql
-set config pd `log.level`='info'
+set config pd `log.level`='info';
 ```
 
 If the modification is successful, `Query OK` is returned:
@@ -238,7 +256,7 @@ The following PD configuration items can be modified online:
 | :--- | :--- |
 | `log.level` | The log level |
 | `cluster-version` | The cluster version |
-| `schedule.max-merge-region-size` | Controls the size limit of `Region Merge` (in MB) |
+| `schedule.max-merge-region-size` | Controls the size limit of `Region Merge` (in MiB) |
 | `schedule.max-merge-region-keys` | Specifies the maximum numbers of the `Region Merge` keys |
 | `schedule.patrol-region-interval` | Determines the frequency at which `replicaChecker` checks the health state of a Region |
 | `schedule.split-merge-interval` | Determines the time interval of performing split and merge operations on the same Region |
@@ -279,7 +297,7 @@ For detailed parameter description, refer to [PD Configuration File](/pd-configu
 
 Currently, the method of changing TiDB configuration is different from that of changing TiKV and PD configurations. You can modify TiDB configuration by using [system variables](/system-variables.md).
 
-The following example shows how to modify `slow-threshold` online by using the `tidb_slow_log_threshold` variable. 
+The following example shows how to modify `slow-threshold` online by using the `tidb_slow_log_threshold` variable.
 
 The default value of `slow-threshold` is 300 ms. You can set it to 200 ms by using `tidb_slow_log_threshold`.
 
@@ -312,7 +330,37 @@ The following TiDB configuration items can be modified online:
 
 | Configuration item | SQL variable | Description |
 | :--- | :--- |
-| `mem-quota-query` | `tidb_mem_quota_query` | The memory usage limit of a query |
 | `log.enable-slow-log` | `tidb_enable_slow_log` | Whether to enable slow log |
 | `log.slow-threshold` | `tidb_slow_log_threshold` | The threshold of slow log |
 | `log.expensive-threshold` | `tidb_expensive_query_time_threshold` | The threshold of a expensive query |
+
+### Modify TiFlash configuration online
+
+Currently, you can modify the TiFlash configuration `max_threads` by using the system variable [`tidb_max_tiflash_threads`](/system-variables.md#tidb_max_tiflash_threads-new-in-v610), which specifies the maximum concurrency for TiFlash to execute a request.
+
+The default value of `tidb_max_tiflash_threads` is `-1`, indicating that this system variable is invalid and depends on the setting of the TiFlash configuration file. You can set `max_threads` to 10 by using `tidb_max_tiflash_threads`:
+
+{{< copyable "sql" >}}
+
+```sql
+set tidb_max_tiflash_threads = 10;
+```
+
+```sql
+Query OK, 0 rows affected (0.00 sec)
+```
+
+{{< copyable "sql" >}}
+
+```sql
+select @@tidb_max_tiflash_threads;
+```
+
+```sql
++----------------------------+
+| @@tidb_max_tiflash_threads |
++----------------------------+
+| 10                         |
++----------------------------+
+1 row in set (0.00 sec)
+```

@@ -1,7 +1,7 @@
 ---
 title: Migrate Data from Amazon Aurora to TiDB
 summary: Learn how to migrate data from Amazon Aurora to TiDB using DB snapshot.
-aliases: ['/tidb/dev/migrate-from-aurora-using-lightning','/docs/dev/migrate-from-aurora-mysql-database/','/docs/dev/how-to/migrate/from-mysql-aurora/','/docs/dev/how-to/migrate/from-aurora/', '/tidb/dev/migrate-from-aurora-mysql-database/', 'tidb/dev/migrate-from-mysql-aurora/']
+aliases: ['/tidb/dev/migrate-from-aurora-using-lightning','/docs/dev/migrate-from-aurora-mysql-database/','/docs/dev/how-to/migrate/from-mysql-aurora/','/docs/dev/how-to/migrate/from-aurora/', '/tidb/dev/migrate-from-aurora-mysql-database/', '/tidb/dev/migrate-from-mysql-aurora/','/tidb/stable/migrate-from-aurora-using-lightning/']
 ---
 
 # Migrate Data from Amazon Aurora to TiDB
@@ -57,7 +57,7 @@ Export the schema using Dumpling by running the following command. The command i
 {{< copyable "shell-regular" >}}
 
 ```shell
-tiup dumpling --host ${host} --port 3306 --user root --password ${password} --filter 'my_db1.table[12]' --no-data --output 's3://my-bucket/schema-backup?region=us-west-2' --filter "mydb.*"
+tiup dumpling --host ${host} --port 3306 --user root --password ${password} --filter 'my_db1.table[12]' --no-data --output 's3://my-bucket/schema-backup' --filter "mydb.*"
 ```
 
 The parameters used in the command above are as follows. For more parameters, refer to [Dumpling overview](/dumpling-overview.md).
@@ -105,12 +105,12 @@ pd-addr = "${ip}:${port}"     # The cluster PD address, e.g.: 172.16.31.3:2379. 
 # "tidb": The "tidb" backend is recommended to import data less than 1 TiB. During the import, the target TiDB cluster can provide service normally.
 backend = "local"
 
-# Set the temporary storage directory for the sorted Key-Value files. The directory must be empty, and the storage space must be enough to hold the largest single table in the data source. For better import performance, it is recommended to use a directory different from `data-source-dir` and use flash storage, which can use I/O exclusively.
+# Set the temporary storage directory for the sorted Key-Value files. The directory must be empty, and the storage space must be greater than the size of the dataset to be imported. For better import performance, it is recommended to use a directory different from `data-source-dir` and use flash storage, which can use I/O exclusively.
 sorted-kv-dir = "/mnt/ssd/sorted-kv-dir"
 
 [mydumper]
 # The path that stores the snapshot file.
-data-source-dir = "${s3_path}"  # e.g.: s3://my-bucket/sql-backup?region=us-west-2
+data-source-dir = "${s3_path}"  # e.g.: s3://my-bucket/sql-backup
 
 [[mydumper.files]]
 # The expression that parses the parquet file.
@@ -129,7 +129,7 @@ If you need to enable TLS in the TiDB cluster, refer to [TiDB Lightning Configur
     {{< copyable "shell-regular" >}}
 
     ```shell
-    tiup tidb-lightning -config tidb-lightning.toml -d ./schema -no-schema=false
+    tiup tidb-lightning -config tidb-lightning.toml -d 's3://my-bucket/schema-backup'
     ```
 
 2. Start the import by running `tidb-lightning`. If you launch the program directly in the command line, the process might exit unexpectedly after receiving a SIGHUP signal. In this case, it is recommended to run the program using a `nohup` or `screen` tool. For example:
@@ -141,7 +141,7 @@ If you need to enable TLS in the TiDB cluster, refer to [TiDB Lightning Configur
     ```shell
     export AWS_ACCESS_KEY_ID=${access_key}
     export AWS_SECRET_ACCESS_KEY=${secret_key}
-    nohup tiup tidb-lightning -config tidb-lightning.toml -no-schema=true > nohup.out 2>&1 &
+    nohup tiup tidb-lightning -config tidb-lightning.toml > nohup.out 2>&1 &
     ```
 
 3. After the import starts, you can check the progress of the import by either of the following methods:
@@ -150,7 +150,7 @@ If you need to enable TLS in the TiDB cluster, refer to [TiDB Lightning Configur
     - Check progress in [the monitoring dashboard](/tidb-lightning/monitor-tidb-lightning.md).
     - Check progress in [the TiDB Lightning web interface](/tidb-lightning/tidb-lightning-web-interface.md).
 
-4. After TiDB Lightning completes the import, it exits automatically. If you find the last 5 lines of its log print `the whole procedure completed`, the import is successful.
+4. After TiDB Lightning completes the import, it exits automatically. Check whether `tidb-lightning.log` contains `the whole procedure completed` in the last lines. If yes, the import is successful. If no, the import encounters an error. Address the error as instructed in the error message.
 
 > **Note:**
 >
@@ -229,7 +229,7 @@ block-allow-list:                     # If the DM version is earlier than v2.0.0
 
 # Configures the data source.
 mysql-instances:
-  - source-id: "mysql-01"               # Data source ID，i.e., source-id in source1.yaml
+  - source-id: "mysql-01"               # Data source ID, i.e., source-id in source1.yaml
     block-allow-list: "listA"           # References the block-allow-list configuration above.
 #       syncer-config-name: "global"    # References the syncers incremental data configuration.
     meta:                               # When task-mode is "incremental" and the downstream database does not have a checkpoint, DM uses the binlog position as the starting point. If the downstream database has a checkpoint, DM uses the checkpoint as the starting point.

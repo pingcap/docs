@@ -14,15 +14,15 @@ You can adjust the PD scheduling parameters using [pd-ctl](/pd-control.md). Note
 
 - [`replica-schedule-limit`](/pd-configuration-file.md#replica-schedule-limit): determines the rate at which the replica-related operator is generated. The parameter affects operations such as making nodes offline and add replicas.
 
-    > **Notes:**
-    >
-    > The value of this parameter should be less than that of `region-schedule-limit`. Otherwise, the normal Region scheduling among TiKV nodes is affected.
+  > **Note:**
+  >
+  > The value of this parameter should be less than that of `region-schedule-limit`. Otherwise, the normal Region scheduling among TiKV nodes is affected.
 
 - `store-balance-rate`: limits the rate at which Regions of each TiKV/TiFlash store are scheduled. Note that this parameter takes effect only when the stores have newly joined the cluster. If you want to change the setting for existing stores, use the following command.
 
-    > **Note:**
-    >
-    > Since v4.0.2, the `store-balance-rate` parameter has been deprecated and changes have been made to the `store limit` command. See [store-limit](/configure-store-limit.md) for details.
+  > **Note:**
+  >
+  > Since v4.0.2, the `store-balance-rate` parameter has been deprecated and changes have been made to the `store limit` command. See [store-limit](/configure-store-limit.md) for details.
 
     - Execute the `pd-ctl -u <pd_ip:pd_port> store limit <store_id> <value>` command to set the scheduling rate of a specified store. (To get `store_id`, you can execute the `pd-ctl -u <pd_ip:pd_port> store` command.
     - If you do not set the scheduling rate for Regions of a specified store, this store inherits the setting of `store-balance-rate`.
@@ -75,9 +75,10 @@ delta_index_cache_size = 0
 
     ## DTFile format
     ## * format_version = 1, the old format, deprecated.
-    ## * format_version = 2, the default format.
-    ## * format_version = 3, the new format, which provides more data validation features.
-    # format_version = 2
+    ## * format_version = 2, the default format for versions < v6.0.0.
+    ## * format_version = 3, the default format for v6.0.0 and v6.1.x, which provides more data validation features.
+    ## * format_version = 4, the default format for v6.2.0 and later versions, which reduces write amplification and background task resource consumption
+    # format_version = 4
 
     [storage.main]
     ## The list of directories to store the main data. More than 90% of the total data is stored in
@@ -172,11 +173,14 @@ delta_index_cache_size = 0
 [profiles]
 
 [profiles.default]
-    ## The default value is true. This parameter determines whether the segment
+    ## The default value is false. This parameter determines whether the segment
     ## of DeltaTree Storage Engine uses logical split.
-    ## Using the logical split can reduce the write amplification, and improve the write speed.
+    ## Using the logical split can reduce the write amplification.
     ## However, these are at the cost of disk space waste.
-    dt_enable_logical_split = true
+    ## It is strongly recommended to keep the default value `false` and
+    ## not to change it to `true` in v6.2.0 and later versions. For details,
+    ## see known issue [#5576](https://github.com/pingcap/tiflash/issues/5576).
+    # dt_enable_logical_split = false
 
     ## The memory usage limit for the generated intermediate data when a single
     ## coprocessor query is executed. The default value is 0, which means no limit.
@@ -190,8 +194,19 @@ delta_index_cache_size = 0
     cop_pool_size = 0
     ## New in v5.0. This item specifies the maximum number of batch requests that TiFlash Coprocessor executes at the same time. If the number of requests exceeds the specified value, the exceeded requests will queue. If the configuration value is set to 0 or not set, the default value is used, which is twice the number of physical cores.
     batch_cop_pool_size = 0
-    ## New in v5.4.0. This item enables or disables the elastic thread pool feature, which significantly improves CPU utilization in high concurrency scenarios of TiFlash. The default value is false. The elastic thread pool feature is experimental and not recommended for production environments.
-    enable_elastic_threadpool = false
+    ## New in v6.1.0. This item specifies the number of requests that TiFlash can concurrently process when it receives ALTER TABLE ... COMPACT from TiDB.
+    ## If the value is set to 0, the default value 1 prevails.
+    manual_compact_pool_size = 1
+    ## New in v5.4.0. This item enables or disables the elastic thread pool feature, which significantly improves CPU utilization in high concurrency scenarios of TiFlash. The default value is true.
+    enable_elastic_threadpool = true
+    ## Compression algorithm of the TiFlash storage engine. The value can be LZ4, zstd, or LZ4HC, and is case-insensitive. By default, LZ4 is used.
+    dt_compression_method = "LZ4"
+    ## Compression level of the TiFlash storage engine. The default value is 1. It is recommended that you set this value to 1 if dt_compression_method is LZ4, -1 (smaller compression rate, but better read performance) or 1 if dt_compression_method is zstd, and 9 if dt_compression_method is LZ4HC.
+    dt_compression_level = 1
+
+    ## New in v6.2.0. This item specifies the minimum ratio of valid data in a PageStorage data file. When the ratio of valid data in a PageStorage data file is less than the value of this configuration, GC is triggered to compact data in the file. The default value is 0.5.
+    dt_page_gc_threshold = 0.5
+
 
 ## Security settings take effect starting from v4.0.5.
 [security]
@@ -238,7 +253,11 @@ delta_index_cache_size = 0
     redact-info-log = false
 ```
 
-In addition to the items above, other parameters are the same with those of TiKV. Note that the configuration items in `tiflash.toml [flash.proxy]` will override the overlapping parameters in `tiflash-learner.toml`; The `label` whose key is `engine` is reserved and cannot be configured manually.
+In addition to the items above, other parameters are the same as those of TiKV. Note that the `label` whose key is `engine` is reserved and cannot be configured manually.
+
+### Schedule replicas by topology labels
+
+See [Set available zones](/tiflash/create-tiflash-replicas.md#set-available-zones).
 
 ### Multi-disk deployment
 
@@ -264,5 +283,4 @@ If there are multiple disks with different I/O metrics on your TiFlash node, it 
 
 > **Warning:**
 >
-> * The `[storage]` configuration is supported in TiUP since v1.2.5. If your TiDB cluster version is v4.0.9 or later, make sure that your TiUP version is v1.2.5 or later. Otherwise, the data directories defined in `[storage]` will not be managed by TiUP.
-> * After using the [storage] configurations, downgrading your cluster to a version earlier than v4.0.9 might cause **data loss** on TiFlash..
+> The `[storage]` configuration is supported in TiUP since v1.2.5. If your TiDB cluster version is v4.0.9 or later, make sure that your TiUP version is v1.2.5 or later. Otherwise, the data directories defined in `[storage]` will not be managed by TiUP.

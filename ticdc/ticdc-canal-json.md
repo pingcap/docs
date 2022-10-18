@@ -27,7 +27,7 @@ cdc cli changefeed create --pd=http://127.0.0.1:2379 --changefeed-id="kafka-cana
 
 ## TiDB extension field
 
-The Canal-JSON protocol is originally designed for MySQL. It does not contain important fields such as the TiDB-specific unique identifier for the CommitTS transaction. To solve this problem, TiCDC appends a TiDB extension field to the Canal-JSON protocol format. After you set `enable-tidb-extension` to `true` in `sink-uri`, TiCDC behaves as follows when generating Canal-JSON messages:
+The Canal-JSON protocol is originally designed for MySQL. It does not contain important fields such as the TiDB-specific unique identifier for the CommitTS transaction. To solve this problem, TiCDC appends a TiDB extension field to the Canal-JSON protocol format. After you set `enable-tidb-extension` to `true` (`false` by default) in `sink-uri`, TiCDC behaves as follows when generating Canal-JSON messages:
 
 * TiCDC sends DML Event and DDL Event messages that contain a field named `_tidb`.
 * TiCDC sends WATERMARK Event messages.
@@ -39,8 +39,6 @@ The following is an example:
 ```shell
 cdc cli changefeed create --pd=http://127.0.0.1:2379 --changefeed-id="kafka-canal-json-enable-tidb-extension" --sink-uri="kafka://127.0.0.1:9092/topic-name?kafka-version=2.6.0&protocol=canal-json&enable-tidb-extension=true"
 ```
-
-By default, the value of `enable-tidb-extension` is `false`. It only takes effect when you use Canal-JSON.
 
 ## Definitions of message formats
 
@@ -451,5 +449,51 @@ The output of the official Canal is as follows:
         }
     ],
     "old": null,
+}
+```
+
+## Changes in TiCDC Canal-JSON
+
+### Changes in the `Old` field of the `Delete` events
+
+From v5.4.0, the `old` field of the `Delete` events has changed.
+
+The following is a `Delete` event message. Before v5.4.0, the `old` field contains the same content as the "data" field. In v5.4.0 and later versions, the `old` field is set to null. You can get the deleted data by using the "data" field.
+
+```
+{
+    "id": 0,
+    "database": "test",
+    ...
+    "type": "DELETE",
+    ...
+    "sqlType": {
+        ...
+    },
+    "mysqlType": {
+        ...
+    },
+    "data": [
+        {
+            "c_bigint": "9223372036854775807",
+            "c_int": "0",
+            "c_mediumint": "8388607",
+            "c_smallint": "32767",
+            "c_tinyint": "0",
+            "id": "2"
+        }
+    ],
+    "old": null,
+    // The following is an example before v5.4.0. The `old` field contains the same content as the "data" field.
+    "old": [
+        {
+            "c_bigint": "9223372036854775807",
+            "c_int": "0",
+            "c_mediumint": "8388607",
+            "c_smallint": "32767",
+            "c_tinyint": "0",
+            "id": "2"
+        }
+    ]
 }
 ```

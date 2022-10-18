@@ -6,9 +6,14 @@ aliases: ['/docs/dev/ticdc/ticdc-overview/','/docs/dev/reference/tools/ticdc/ove
 
 # TiCDC Overview
 
-[TiCDC](https://github.com/pingcap/tiflow/tree/master/cdc) is a tool for replicating the incremental data of TiDB. This tool is implemented by pulling TiKV change logs. It can restore data to a consistent state with any upstream TSO, and provides [TiCDC Open Protocol](/ticdc/ticdc-open-protocol.md) to support other systems to subscribe to data changes.
+[TiCDC](https://github.com/pingcap/tiflow/tree/master/cdc) is a tool used for replicating incremental data of TiDB. Specifically, TiCDC pulls TiKV change logs, sorts captured data, and exports row-based incremental data to downstream databases. 
 
-## TiCDC Architecture
+## Usage scenarios
+
+- Database disaster recovery: TiCDC can be used for disaster recovery between homogeneous databases to ensure eventual data consistency of primary and secondary databases after a disaster event. This function works only with TiDB primary and secondary clusters.
+- Data integration: TiCDC provides [TiCDC Canal-JSON Protocol](/ticdc/ticdc-canal-json.md), which allows other systems to subscribe data changes from TiCDC. In this way, TiCDC provides data sources for various scenarios such as monitoring, caching, global indexing, data analysis, and primary-secondary replication between heterogeneous databases.
+
+## TiCDC architecture
 
 When TiCDC is running, it is a stateless node that achieves high availability through etcd in PD. The TiCDC cluster supports creating multiple replication tasks to replicate data to multiple different downstream platforms.
 
@@ -59,6 +64,10 @@ Currently, the TiCDC sink component supports replicating data to the following d
     - TiCDC splits cross-table transactions in the unit of table and does **not ensure** the atomicity of cross-table transactions.
     - TiCDC **ensures** that the order of single-row updates is consistent with that in the upstream.
 
+    > **Note:**
+    >
+    > Since v6.2, you can use the sink uri parameter [`transaction-atomicity`](/ticdc/manage-ticdc.md#configure-sink-uri-with-mysqltidb) to control whether to split single-table transactions. Splitting single-table transactions can greatly reduce the latency and memory consumption of replicating large transactions.
+
 - Kafka sink
 
     - TiCDC provides different strategies for data distribution. You can distribute data to different Kafka partitions based on the table, primary key, or timestamp.
@@ -87,7 +96,7 @@ Currently, the following scenarios are not supported:
 - The TiKV cluster that uses RawKV alone.
 - The [DDL operation `CREATE SEQUENCE`](/sql-statements/sql-statement-create-sequence.md) and the [SEQUENCE function](/sql-statements/sql-statement-create-sequence.md#sequence-function) in TiDB. When the upstream TiDB uses `SEQUENCE`, TiCDC ignores `SEQUENCE` DDL operations/functions performed upstream. However, DML operations using `SEQUENCE` functions can be correctly replicated.
 
-TiCDC only provides partial support for scenarios of large transactions in the upstream. For details, refer to [FAQ: Does TiCDC support replicating large transactions? Is there any risk?](/ticdc/troubleshoot-ticdc.md#does-ticdc-support-replicating-large-transactions-is-there-any-risk).
+TiCDC only provides partial support for scenarios of large transactions in the upstream. For details, refer to [FAQ: Does TiCDC support replicating large transactions? Is there any risk?](/ticdc/ticdc-faq.md#does-ticdc-support-replicating-large-transactions-is-there-any-risk).
 
 > **Note:**
 >
@@ -144,6 +153,7 @@ Since v5.3.0, TiCDC supports [global temporary tables](/temporary-tables.md#glob
 
 If the upstream cluster contains a global temporary table, the downstream TiDB cluster is expected to be v5.3.0 or a later version. Otherwise, an error occurs during the replication process.
 
-## Troubleshoot TiCDC
+## TiCDC FAQs and troubleshooting
 
-For details, refer to [Troubleshoot TiCDC](/ticdc/troubleshoot-ticdc.md).
+- To learn the FAQs of TiCDC, see [TiCDC FAQs](/ticdc/ticdc-faq.md).
+- To learn how to troubleshoot TiCDC, see [Troubleshoot TiCDC](/ticdc/troubleshoot-ticdc.md).

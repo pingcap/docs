@@ -6,7 +6,7 @@ aliases: ['/docs/dev/tiup/tiup-bench/','/docs/dev/reference/tools/tiup/bench/']
 
 # Stress Test TiDB Using TiUP Bench Component
 
-When you test the performance of a database, it is often required to stress test the database. To facilitate this, TiUP has integrated the bench component, which provides two workloads for stress testing: TPC-C and TPC-H. The commands and flags are as follows:
+When you test the performance of a database, it is often required to stress test the database. To facilitate this, TiUP has integrated the bench component, which provides two workloads for stress testing: [TPC-C](http://www.tpc.org/tpcc/) and [TPC-H](http://www.tpc.org/tpch/). The commands and flags are as follows. For more information, see the [TPC official website](http://www.tpc.org).
 
 {{< copyable "shell-root" >}}
 
@@ -15,7 +15,6 @@ tiup bench
 ```
 
 ```
-Starting component `bench`: /home/tidb/.tiup/components/bench/v1.5.0/bench
 Benchmark database with different workloads
 
 Usage:
@@ -65,9 +64,7 @@ Available Commands:
 Flags:
       --check-all        Run all consistency checks
   -h, --help             help for tpcc
-      --output string    Output directory for generating csv file when preparing data
       --parts int        Number to partition warehouses (default 1)
-      --tables string    Specified tables for generating file, separated by ','. Valid only if output is set. If this flag is not set, generate all tables by default.
       --warehouses int   Number of warehouses (default 10)
 ```
 
@@ -110,7 +107,7 @@ Flags:
     {{< copyable "shell-regular" >}}
 
     ```shell
-    tiup bench tpcc --warehouses 4 prepare --output data
+    tiup bench tpcc --warehouses 4 prepare --output-dir data --output-type=csv
     ```
 
 6. Generate the CSV file for the specified table:
@@ -118,15 +115,7 @@ Flags:
     {{< copyable "shell-regular" >}}
 
     ```shell
-    tiup bench tpcc --warehouses 4 prepare --output data --tables history,orders
-    ```
-
-7. Enable pprof:
-
-    {{< copyable "shell-regular" >}}
-
-    ```shell
-    tiup bench tpcc --warehouses 4 prepare --output data --pprof :10111
+    tiup bench tpcc --warehouses 4 prepare --output-dir data --output-type=csv --tables history,orders
     ```
 
 ## Run TPC-H test using TiUP

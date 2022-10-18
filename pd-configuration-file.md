@@ -158,11 +158,13 @@ Configuration items related to the log file
 ### `max-days`
 
 + The maximum number of days in which a log is kept
++ If the configuration item is not set, or the value of it is set to the default value 0, PD does not clean log files.
 + Default value: `0`
 
 ### `max-backups`
 
 + The maximum number of log files to keep
++ If the configuration item is not set, or the value of it is set to the default value 0, PD keeps all log files.
 + Default value: `0`
 
 ## `metric`
@@ -182,6 +184,7 @@ Configuration items related to scheduling
 
 + Controls the size limit of `Region Merge`. When the Region size is greater than the specified value, PD does not merge the Region with the adjacent Regions.
 + Default value: `20`
++ Unit: MiB
 
 ### `max-merge-region-keys`
 
@@ -213,6 +216,11 @@ Configuration items related to scheduling
 + The downtime after which PD judges that the disconnected store can not be recovered. When PD fails to receive the heartbeat from a store after the specified period of time, it adds replicas at other nodes.
 + Default value: `30m`
 
+### `max-store-preparing-time` <span class="version-mark">New in v6.1.0</span>
+
++ Controls the maximum waiting time for the store to go online. During the online stage of a store, PD can query the online progress of the store. When the specified time is exceeded, PD assumes that the store has been online and cannot query the online progress of the store again. But this does not prevent Regions from transferring to the new online store. In most scenarios, you do not need to adjust this parameter.
++ Default value: `48h`
+
 ### `leader-schedule-limit`
 
 + The number of Leader scheduling tasks performed at the same time
@@ -222,6 +230,11 @@ Configuration items related to scheduling
 
 + The number of Region scheduling tasks performed at the same time
 + Default value: `2048`
+
+### `enable-diagnostic` <span class="version-mark">New in v6.3.0</span>
+
++ Controls whether to enable the diagnostic feature. When it is enabled, PD records the state during scheduling to help diagnose. If enabled, it might slightly affect the scheduling speed and consume more memory when there are many stores.
++ Default value: false
 
 ### `hot-region-schedule-limit`
 
@@ -268,7 +281,7 @@ Configuration items related to scheduling
 + Determines whether to enable the merging of cross-table Regions
 + Default value: `true`
 
-### `region-score-formula-version` <span class="version-mark">New in v5.0</span> 
+### `region-score-formula-version` <span class="version-mark">New in v5.0</span>
 
 + Controls the version of the Region score formula
 + Default value: `v2`
@@ -289,7 +302,7 @@ Configuration items related to scheduling
 + Default value: `10m`
 
 > **Note:**
-> 
+>
 > The information about hot Regions is updated every three minutes. If the interval is set to less than three minutes, updates during the interval might be meaningless.
 
 ### `hot-regions-reserved-days` <span class="version-mark">New in v5.4.0</span>
