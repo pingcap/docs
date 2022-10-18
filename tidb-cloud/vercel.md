@@ -1,9 +1,9 @@
 ---
-title: Vercel
+title: Integrate TiDB Cloud with Vercel
 summary: Learn how to connect your TiDB Cloud clusters to Vercel projects.
 ---
 
-# Vercel
+# Integrate TiDB Cloud with Vercel
 
 [Vercel](https://vercel.com/) is the platform for frontend developers, providing the speed and reliability innovators need to create at the moment of inspiration.
 
@@ -11,29 +11,31 @@ summary: Learn how to connect your TiDB Cloud clusters to Vercel projects.
 
 This guide will walk you through connecting your TiDB Cloud clusters to Vercel projects.
 
-It will cover two options:
+To connect your TiDB Cloud database to your Vercel projects, you can use one of the following methods:
 
-* Connecting your TiDB Cloud database to your Vercel projects by manually adding environment variables
-* Connecting your TiDB Cloud database to your Vercel projects by using the Vercel integration
+* Manually adding environment variables
+* Using the Vercel integration
 
-## Considerations
+## Prerequisites
 
-### Vercel Accounts and Projects 
+Before connecting your TiDB Cloud cluster to a Vercel project, make sure the following prerequisites are met.
 
-The integration with Vercel requires that you have an account and a project in Vercel. If you don't have any, refer to
+### Available Vercel account and project
 
-* [Create a new personal account](https://vercel.com/docs/concepts/personal-accounts/overview) or [create a new team](https://vercel.com/docs/concepts/teams/overview) in Vercel.
-* [Create a new project](https://vercel.com/docs/concepts/projects/overview) in Vercel, or if you don't already have an application to deploy, you can use our [template](https://vercel.com/templates/next.js/tidb-cloud-starter).
+You are expected to have an account and a project in Vercel. If you do not have any, refer to the following Vercel documents to create one:
 
-A Vercel project can only be connected to one TiDB Cloud cluster. To change the integration, you need to first disconnect the current cluster and then connect to a new cluster.
+* [Creating a new personal account](https://vercel.com/docs/teams-and-accounts#creating-a-personal-account) or [Creating a new team](https://vercel.com/docs/teams-and-accounts/create-or-join-a-team#creating-a-team) in Vercel.
+* [Creating a project](https://vercel.com/docs/concepts/projects/overview#creating-a-project) in Vercel, or if you do not already have an application to deploy, you can use the [template](https://vercel.com/templates/next.js/tidb-cloud-starter).
 
-### TiDB Cloud Accounts and Clusters
+One Vercel project can only be connected to one TiDB Cloud cluster. To change the integration, you need to first disconnect the current cluster and then connect to a new cluster.
+
+### Available TiDB Cloud account and cluster
 
 The integration with Vercel requires that you have an account and a cluster in TiDB Cloud. If you don't have any, refer to [create a TiDB cluster](/tidb-cloud/create-tidb-cluster.md) in TiDB Cloud.
 
-To integrate with Vercel, you must have the `Organization Owner` access to your organization or `Organization Member + Project Access` to the target project in TiDB Cloud.
+To integrate with Vercel, you are expected to have the "Organization Owner" access to your organization or "Organization Member + Project Access" to the target project in TiDB Cloud.
 
-A TiDB Cloud cluster can connect to more than one Vercel projects.
+One TiDB Cloud cluster can connect to multiple Vercel projects.
 
 ### TiDB Cloud Cluster Traffic Filter
 
