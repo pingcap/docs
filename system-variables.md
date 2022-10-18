@@ -737,7 +737,7 @@ MPP is a distributed computing framework provided by the TiFlash engine, which a
 - Persists to cluster: No
 - Type: Boolean
 - Default value: `OFF`
-- This variable has been deprecated and does not take effect any more. It was used to control whether to enable the batch commit feature. When truned on, transactions may be split into multiple transactions and be committed non-atomically.
+- The variable is used to control whether to enable the deprecated batch commit feature. When truned on, a transaction may be split into multiple transactions by grouping every a few statements and be committed non-atomically. It is not recommended to turn on this feature.
 
 ### tidb_batch_delete
 - Scope: Session
