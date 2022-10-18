@@ -41,7 +41,7 @@ To view the list of invoices, perform the following steps:
 
     > **Note:**
     >
-    > If you are in multiple organizations, select **Switch Organization** and switch your accout to the target organization.
+    > If you are in multiple organizations, select **Switch Organization** and switch your account to the target organization.
 
 2. Click **Billing**. The invoices page is displayed.
 
@@ -61,7 +61,7 @@ To view the billing details, perform the following steps:
 
     > **Note:**
     >
-    > If you are in multiple organizations, select **Switch Organization** and switch your accout to the target organization.
+    > If you are in multiple organizations, select **Switch Organization** and switch your account to the target organization.
 
 2. Click **Billing**.
 3. Click **Bills**. The billing details page is displayed.
@@ -91,7 +91,7 @@ To view this page, perform the following steps:
 
     > **Note:**
     >
-    > If you are in multiple organizations, select **Switch Organization** and switch your accout to the target organization.
+    > If you are in multiple organizations, select **Switch Organization** and switch your account to the target organization.
 
 2. Click **Billing**.
 3. Click **Credits**. The credit details page is displayed.
@@ -132,7 +132,7 @@ The fee is deducted from a bound credit card according to your cluster usage. To
 
         > **Note:**
         >
-        > If you are in multiple organizations, select **Switch Organization** and switch your accout to the target organization.
+        > If you are in multiple organizations, select **Switch Organization** and switch your account to the target organization.
 
     2. Click **Billing**.
     3. Under the **Payment Method** tab, click **Add a New Card**.
@@ -150,7 +150,7 @@ To set the default credit card, perform the following steps:
 
     > **Note:**
     >
-    > If you are in multiple organizations, select **Switch Organization** and switch your accout to the target organization.
+    > If you are in multiple organizations, select **Switch Organization** and switch your account to the target organization.
 
 2. Click **Billing**.
 3. Click the **Payment Method** tab.
@@ -166,7 +166,7 @@ To edit the billing profile information, perform the following steps:
 
     > **Note:**
     >
-    > If you are in multiple organizations, select **Switch Organization** and switch your accout to the target organization.
+    > If you are in multiple organizations, select **Switch Organization** and switch your account to the target organization.
 
 2. Click **Billing**.
 3. Click the **Payment Method** tab.
@@ -182,7 +182,7 @@ If you have agreed with our sales on a contract and received an email to review 
 
     > **Note:**
     >
-    > If you are in multiple organizations, select **Switch Organization** and switch your accout to the target organization.
+    > If you are in multiple organizations, select **Switch Organization** and switch your account to the target organization.
 
 2. Click **Billing**.
 3. Click **Contract**. The contract list is displayed.
