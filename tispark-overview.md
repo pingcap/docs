@@ -389,7 +389,7 @@ The major features of TiSpark are as follows:
 
 TiDB v5.0 supports [expression index](/sql-statements/sql-statement-create-index.md#expression-index).
 
-TiSpark currently supports retrieving data from table with `expression Index`, but the `expression Index` will not be used by the planner of TiSpark.
+TiSpark currently supports retrieving data from tables with `expression index`, but the `expression index` will not be used by the planner of TiSpark.
 
 ### Work with TiFlash
 
