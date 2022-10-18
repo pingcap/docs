@@ -20,6 +20,12 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
     The Billing page adds [a Contract tab](/tidb-cloud/tidb-cloud-billing.md#contract). If you have agreed with our sales on a contract and received an email to process the contract online, you can go to the Contract tab to review and accept the contract. To learn more about contracts, feel free to contact our sales.
 
+**Documentation changes**
+
+* Add [documentation](/tidb-cloud/terraform-tidbcloud-provider-overview.md) for [TiDB Cloud Terraform Provider](https://registry.terraform.io/providers/tidbcloud/tidbcloud).
+
+    TiDB Cloud Terraform Provider is a plugin that allows you to use [Terraform](https://www.terraform.io/) to manage TiDB Cloud resources, such as clusters, backups, and restores. If you are looking for a simple way to automate resource provisioning and your infrastructure workflow, you can try out TiDB Cloud Terraform Provider according to the [documentation](/tidb-cloud/terraform-tidbcloud-provider-overview.md).
+
 ## October 11, 2022
 
 **General changes**
