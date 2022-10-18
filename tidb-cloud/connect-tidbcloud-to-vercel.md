@@ -11,8 +11,9 @@ This guide introduces how to connect your TiDB Cloud clusters to Vercel projects
 
 To connect your TiDB Cloud database to your Vercel projects, have all prerequisites met and use one of the following methods:
 
-* [Connect via the TiDB Cloud Vercel Integration](connect-via-the-tidb-cloud-verce-integration)
-* [Connect via manually configuring environment variables](connect-via-manually-configuring-environment-variables)
+* [Connect via the TiDB Cloud Vercel Integration](#connect-via-the-tidb-cloud-verce-integration)
+* [Connect via manually configuring environment variables](#connect-via-manually-configuring-environment-variables)
+
 ## Prerequisites
 
 Before connecting your TiDB Cloud cluster to a Vercel project, make sure the following prerequisites are met.
