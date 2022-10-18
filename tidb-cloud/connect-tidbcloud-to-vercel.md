@@ -7,9 +7,7 @@ summary: Learn how to connect your TiDB Cloud clusters to Vercel projects.
 
 [Vercel](https://vercel.com/) is the platform for frontend developers, providing the speed and reliability innovators need to create at the moment of inspiration.
 
-## Introduction
-
-This guide will walk you through connecting your TiDB Cloud clusters to Vercel projects.
+This guide introduces how to connect your TiDB Cloud clusters to Vercel projects.
 
 To connect your TiDB Cloud database to your Vercel projects, you can use one of the following methods:
 
@@ -31,15 +29,15 @@ One Vercel project can only be connected to one TiDB Cloud cluster. To change th
 
 ### Available TiDB Cloud account and cluster
 
-The integration with Vercel requires that you have an account and a cluster in TiDB Cloud. If you don't have any, refer to [create a TiDB cluster](/tidb-cloud/create-tidb-cluster.md) in TiDB Cloud.
+You are expected to have an account and a cluster in TiDB Cloud. If you do not have any, refer to [Create a TiDB cluster](/tidb-cloud/create-tidb-cluster.md) in TiDB Cloud.
 
 To integrate with Vercel, you are expected to have the "Organization Owner" access to your organization or "Organization Member + Project Access" to the target project in TiDB Cloud.
 
 One TiDB Cloud cluster can connect to multiple Vercel projects.
 
-### TiDB Cloud Cluster Traffic Filter
+### Traffic filter properly set for your TiDB Cloud cluster
 
-TiDB Cloud automatically adds a 0.0.0.0/0 traffic filter to your cluster in the integration workflow if there is none because Vercel deployments use [dynamic IP addresses](https://vercel.com/guides/how-to-allowlist-deployment-ip-address). To connect to a TiDB Cloud cluster, the traffic filter of your TiDB Cloud cluster must allow all IP addresses(0.0.0.0/0).
+To connect to a TiDB Cloud cluster, the traffic filter of your TiDB Cloud cluster must allow all IP addresses(0.0.0.0/0) because Vercel deployments use [dynamic IP  addresses](https://vercel.com/guides/how-to-allowlist-deployment-ip-address). If you use TiDB Cloud Vercel Integration, TiDB Cloud automatically adds a 0.0.0.0/0 traffic filter to your cluster in the integration workflow if there is none.
 
 ## Connect via the TiDB Cloud Vercel Integration
 
