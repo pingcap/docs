@@ -12,7 +12,7 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
 **General changes**
 
-* For Dedicated Tier clusters, the minimum node storage of TiKV and TiFlash is changed to 200 GiB.
+* For Dedicated Tier clusters, the minimum node storage of TiKV and TiFlash is changed from 500 GiB to 200 GiB. This will be more cost-effective for users whose workload is in small data volumes.
 
     For more details, see [TiKV node storage](/tidb-cloud/size-your-cluster.md#tikv-node-storage) and [TiFlash node storage](/tidb-cloud/size-your-cluster.md#tiflash-node-storage).
 
