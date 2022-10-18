@@ -17,7 +17,7 @@ If you do not configure the root password or allowed IP addresses at that time, 
     * For Dedicated Tier clusters, you can enable or disable public access to the cluster by clicking the **Public Access** toggle.
     * To allow your cluster to be accessible by any IP addresses, click **Allow Access from Anywhere**.
 
-5. Click **Apply**.
+5. Click **Submit**.
 
 > **Tip:**
 >
