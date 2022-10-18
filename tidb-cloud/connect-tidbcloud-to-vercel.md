@@ -51,9 +51,7 @@ The detailed steps are as follows:
 5. On the left side of the integration page, select the Vercel Projects for connection.
 6. On the right side of the integration page, provide the organization and project information and select the target cluster. A TiDB Cloud cluster belongs to [an organizations and a project](/tidb-cloud/manage-user-access.md#view-the-organization-and-project).
 7. Click **Add Integration and Return to Vercel**.
-8. Back to your Vercel dashboard, confirm the environment variables were added by going to your Vercel project > **Settings** > **Environment Variables**.
-
-### Environment Variables
+8. Back to your Vercel dashboard, go to your Vercel project by clicking **Settings** > **Environment Variables**, and confirm that the environment variables have been automatically added.
 
 After you have completed the integration setup and successfully connected a TiDB Cloud cluster to your Vercel projects, the information necessary to connect the TiDB Cloud cluster are set in the projects' environment variables
 
@@ -64,18 +62,18 @@ TIDB_USER
 TIDB_PASSWORD
 ```
 
-For *Dedicated Tier* clusters, the root CA is set in
+For Dedicated Tier clusters, the root CA is set in
 
 ```
 TIDB_SSL_CA
 ```
 
-## Connect Manually
+## Connect via manually setting environment variables
 
-1. Follow [connect via standard connection](/tidb-cloud/connect-to-tidb-cluster.md#connect-via-standard-connection) to get the connection information. Don't forget to set the *Allow Access from Anywhere* traffic filter and save the password.
+1. Follow [connect to a TiDB Cloud cluster via standard connection](/tidb-cloud/connect-to-tidb-cluster.md#connect-via-standard-connection) to get the connection information. Do not forget to set the **Allow Access from Anywhere** traffic filter on the **Security Settings** page and save the password.
 2. Go to your Vercel dashboard, [declare each value](https://vercel.com/docs/concepts/projects/environment-variables#declare-an-environment-variable) got from the previous step on your Vercel project > **Settings** > **Environment Variables**.
 
-For example, for a *Dedicated Tier* cluster, you get connection variables like
+The following is an example of the connection variables for a TiDB Cloud Dedicated Tier cluster:
 
 ```
 var connection = mysql.createConnection({
@@ -92,7 +90,7 @@ var connection = mysql.createConnection({
 });
 ```
 
-In Vercel, you could declare them as follows (you could use whatever name, just suits your projects)
+In Vercel, you can declare the variables as follows. You can use whatever name that suits your projects.
 
 * **NAME** = TIDB\_HOST **VALUE** = <your_host>
 * **NAME** = TIDB\_PORT **VALUE** = 4000
