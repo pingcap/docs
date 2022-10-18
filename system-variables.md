@@ -750,6 +750,33 @@ MPP is a distributed computing framework provided by the TiFlash engine, which a
 
     In the case of a poor network environment, appropriately increasing the value of this variable can effectively alleviate error reporting to the application end caused by timeout. If the application end wants to receive the error information more quickly, minimize the value of this variable.
 
+### tidb_batch_commit
+- Scope: Session
+- Persists to cluster: No
+- Type: Boolean
+- Default value: `OFF`
+- This variable has been deprecated and does not take effect any more. It was used to control whether to enable the batch commit feature. When truned on, transactions may be split into multiple transactions and be committed non-atomically.
+
+### tidb_batch_delete
+- Scope: Session
+- Persists to cluster: No
+- Type: Boolean
+- Default value: `OFF`
+- This variable is used to control whether to enable the batch delete feature, which is part of the deprecated batch-dml feature. When truned on, delete statements may be split into multiple transactions and be committed non-atomically. You must also turn on `tidb_enable_batch_dml` and set a positive `tidb_dml_batch_size` to make it work.
+
+> **Warning:**
+> batch-dml is deprecated because it's easy to misuse it and cause data corruption. Consider using [non-transactional DML](/non-transactional-dml.md) instead.
+
+### tidb_batch_insert
+- Scope: Session
+- Persists to cluster: No
+- Type: Boolean
+- Default value: `OFF`
+- This variable is used to control whether to enable the batch insert feature, which is part of the deprecated batch-dml feature. When truned on, insert statements may be split into multiple transactions and be committed non-atomically. You must also turn on `tidb_enable_batch_dml` and set a positive `tidb_dml_batch_size` to make it work.
+
+> **Warning:**
+> batch-dml is deprecated because it's easy to misuse it and cause data corruption. Consider using [non-transactional DML](/non-transactional-dml.md) instead.
+
 ### tidb_batch_pending_tiflash_count <span class="version-mark">New in v6.0</span>
 
 - Scope: SESSION | GLOBAL
@@ -1087,6 +1114,10 @@ MPP is a distributed computing framework provided by the TiFlash engine, which a
 - Unit: Rows
 - When this value is greater than `0`, TiDB will batch commit statements such as `INSERT` or `LOAD DATA` into smaller transactions. This reduces memory usage and helps ensure that the `txn-total-size-limit` is not reached by bulk modifications.
 - Only the value `0` provides ACID compliance. Setting this to any other value will break the atomicity and isolation guarantees of TiDB.
+- You must also turn on `tidb_enable_batch_dml` and at least one of `tidb_batch_insert` and `tidb_batch_delete` to use this feature.
+
+> **Warning:**
+> batch-dml is deprecated because it's easy to misuse it and cause data corruption. Consider using [non-transactional DML](/non-transactional-dml.md) instead.
 
 ### tidb_enable_1pc <span class="version-mark">New in v5.0</span>
 
@@ -1161,6 +1192,16 @@ MPP is a distributed computing framework provided by the TiFlash engine, which a
 - Type: Boolean
 - Default value: `OFF`
 - This variable is used to determine whether to include the `AUTO_INCREMENT` columns when creating a generated column or an expression index.
+
+### tidb_enable_batch_dml
+- Scope: GLOBAL
+- Persists to cluster: Yes
+- Type: Boolean
+- Default values: `OFF`
+- This variable contronls whether to enable the deprecated batch-dml feature. When it's enabled, certain statements may be split into multiple transactions, which means it's non-atomic and should be used with care. When using the feature you must ensure there is no concurrent opertaions on the data you are operating on. You must also specify a positive `tidb_batch_dml_size` and turn on at least one of `tidb_batch_insert` and `tidb_batch_delete` to make it work.
+
+> **Warning:**
+> batch-dml is deprecated because it's easy to misuse it and cause data corruption. Consider using [non-transactional DML](/non-transactional-dml.md) instead.
 
 ### tidb_enable_cascades_planner
 
