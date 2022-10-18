@@ -1,11 +1,11 @@
 ---
-title: Connect Airbyte with TiDB
+title: Use Airbyte to Extract, Load and Transform Data
 summary: Learn how to use Airbyte TiDB connector.
 ---
 
-# Connect Airbyte with TiDB
+# Use Airbyte to Extract, Load and Transform Data
 
-[Airbyte](https://airbyte.com/) is an open-source data integration engine that helps you consolidate your data in your data warehouses, lakes, and databases. This document shows how to connect Airbyte to TiDB as a source or a destination.
+[Airbyte](https://airbyte.com/) is an open-source data integration engine to build Extract, Load, Transform (ELT) pipelines and consolidate your data in your data warehouses, data lakes, and databases. This document shows how to connect Airbyte to TiDB as a source or a destination.
 
 ## Deploy Airbyte
 
@@ -64,6 +64,8 @@ For more details about the TiDB connector, see [TiDB Source](https://docs.airbyt
 
 After setting up the source and destination, you can build and configure the connection. You can use any combination of sources and destinations, such as TiDB to Snowflake, and CSV file to TiDB.
 
+The following steps use TiDB as source and destination. Other connectors may have different parameters.
+
 1. Click **Connections** in the sidebar and then click **New Connection**.
 2. Select the previously established source and destination.
 3. Go to the **Set up** connection panel and create a name for the connection, such as "${source_name} - ${destination-name}".
@@ -83,6 +85,6 @@ After setting up the source and destination, you can build and configure the con
 
 ## Limitations
 
-- The TiDB connector does not support the Change Data Capture(CDC) feature.
+- The TiDB connector does not support the Change Data Capture (CDC) feature.
 - TiDB destination converts the `timestamp` type to the `varchar` type in default normalization mode. It happens because Airbyte converts the timestamp type to string during transmission, and TiDB does not support `cast ('2020-07-28 14:50:15+1:00' as timestamp)`.
 - For some large ETL missions, you need to increase the parameters of [transaction restrictions](/develop/dev-guide-transaction-restraints.md#large-transaction-restrictions) in TiDB.
