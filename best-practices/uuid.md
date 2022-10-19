@@ -5,7 +5,7 @@ summary: Learn best practice and strategy for using UUIDs with TiDB.
 
 # UUID Best Practices
 
-## The usecase for UUID
+## Overview of UUIDs
 
 There are several benefits to using a `UUID` as a primary key, instead of an `AUTO_INCREMENT` integer value:
 
