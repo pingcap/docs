@@ -133,6 +133,14 @@ SELECT TABLE_NAME FROM information_schema.tables where TABLE_SCHEMA = "<db_name>
 
 ## Set available zones
 
+<CustomContent platform="tidb-cloud">
+
+> **Note:**
+>
+> This section is not applicable to TiDB Cloud.
+
+</CustomContent>
+
 When configuring replicas, if you need to distribute TiFlash replicas to multiple data centers for disaster recovery, you can configure available zones by following the steps below:
 
 1. Specify labels for TiFlash nodes in the cluster configuration file.
@@ -140,15 +148,25 @@ When configuring replicas, if you need to distribute TiFlash replicas to multipl
     ```
     tiflash_servers:
       - host: 172.16.5.81
-        config:
-          flash.proxy.labels: zone=z1
+          logger.level: "info"
+        learner_config:
+          server.labels:
+            zone: "z1"
       - host: 172.16.5.82
         config:
-          flash.proxy.labels: zone=z1
+          logger.level: "info"
+        learner_config:
+          server.labels:
+            zone: "z1"
       - host: 172.16.5.85
         config:
-          flash.proxy.labels: zone=z2
+          logger.level: "info"
+        learner_config:
+          server.labels:
+            zone: "z2"
     ```
+
+    Note that the `flash.proxy.labels` configuration in earlier versions cannot handle special characters in the available zone name correctly. It is recommended to use the `server.labels` in `learner_config` to configure the name of an available zone.
 
 2. After starting a cluster, specify the labels when creating replicas.
 
@@ -197,4 +215,8 @@ When configuring replicas, if you need to distribute TiFlash replicas to multipl
         ...
     ```
 
+<CustomContent platform="tidb">
+
 For more information about scheduling replicas by using labels, see [Schedule Replicas by Topology Labels](/schedule-replicas-by-topology-labels.md), [Multiple Data Centers in One City Deployment](/multi-data-centers-in-one-city-deployment.md), and [Three Data Centers in Two Cities Deployment](/three-data-centers-in-two-cities-deployment.md).
+
+</CustomContent>

@@ -68,7 +68,7 @@ When using the `set config` statement, you can modify the configuration of a sin
 {{< copyable "sql" >}}
 
 ```sql
-set config tikv `split.qps-threshold`=1000
+set config tikv `split.qps-threshold`=1000;
 ```
 
 - Modify the configuration of a single TiKV instance:
@@ -76,7 +76,7 @@ set config tikv `split.qps-threshold`=1000
     {{< copyable "sql" >}}
 
     ```sql
-    set config "127.0.0.1:20180" `split.qps-threshold`=1000
+    set config "127.0.0.1:20180" `split.qps-threshold`=1000;
     ```
 
 If the modification is successful, `Query OK` is returned:
@@ -159,6 +159,7 @@ The following TiKV configuration items can be modified online:
 | `raftstore.apply-max-batch-size` | Raft state machines process data write requests in batches by the BatchSystem. This configuration item specifies the maximum number of Raft state machines that can execute the requests in one batch. |
 | `raftstore.store-max-batch-size` | Raft state machines process requests for flushing logs into the disk in batches by the BatchSystem. This configuration item specifies the maximum number of Raft state machines that can process the requests in one batch. |
 | `readpool.unified.max-thread-count` | The maximum number of threads in the thread pool that uniformly processes read requests, which is the size of the UnifyReadPool thread pool |
+| `readpool.unified.auto-adjust-pool-size` | Determines whether to automatically adjust the UnifyReadPool thread pool size |
 | `coprocessor.split-region-on-table` | Enables to split Region by table |
 | `coprocessor.batch-split-limit` | The threshold of Region split in batches |
 | `coprocessor.region-max-size` | The maximum size of a Region |
@@ -238,7 +239,7 @@ You can modify the PD configurations using the following statement:
 {{< copyable "sql" >}}
 
 ```sql
-set config pd `log.level`='info'
+set config pd `log.level`='info';
 ```
 
 If the modification is successful, `Query OK` is returned:

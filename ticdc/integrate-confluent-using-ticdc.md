@@ -1,18 +1,18 @@
 ---
-title: Integrate Data with Confluent Cloud
-summary: Learn how to stream TiDB data to the Confluent Cloud using TiCDC, and how to replicate incremental data to ksqlDB, Snowflake, and SQL Server.
+title: Integrate Data with Confluent Cloud and Snowflake
+summary: Learn how to stream TiDB data to Confluent Cloud, Snowflake, ksqlDB, and SQL Server.
 ---
 
-# Integrate Data with Confluent Cloud
+# Integrate Data with Confluent Cloud and Snowflake
 
 Confluent is an Apache Kafka-compatible streaming data platform that provides strong data integration capabilities. On this platform, you can access, store, and manage non-stop real-time streaming data.
 
-Starting from TiDB v6.1.0, TiCDC supports replicating incremental data to Confluent in Avro format. This document introduces how to replicate TiDB incremental data to Confluent using [TiCDC](/ticdc/ticdc-overview.md), and further replicate data to ksqlDB, Snowflake, and SQL Server via Confluent Cloud. The organization of this document is as follows:
+Starting from TiDB v6.1.0, TiCDC supports replicating incremental data to Confluent in Avro format. This document introduces how to replicate TiDB incremental data to Confluent using [TiCDC](/ticdc/ticdc-overview.md), and further replicate data to Snowflake, ksqlDB, and SQL Server via Confluent Cloud. The organization of this document is as follows:
 
 1. Quickly deploy a TiDB cluster with TiCDC included.
 2. Create a changefeed that replicates data from TiDB to Confluent Cloud.
-3. Create Connectors that replicate data from Confluent Cloud to ksqlDB, Snowflake, and SQL Server.
-4. Write data to TiDB using go-tpc, and observe data changes in ksqlDB, Snowflake, and SQL Server.
+3. Create Connectors that replicate data from Confluent Cloud to Snowflake, ksqlDB, and SQL Server.
+4. Write data to TiDB using go-tpc, and observe data changes in Snowflake, ksqlDB, and SQL Server.
 
 The preceding steps are performed in a lab environment. You can also deploy a cluster in a production environment by referring to these steps.
 
@@ -22,7 +22,7 @@ The preceding steps are performed in a lab environment. You can also deploy a cl
 
 1. Deploy a TiDB cluster with TiCDC included.
 
-    In a lab or testing environment, you can deploy a TiDB cluster with TiCDC quickly by using TiUP Playground.
+    In a lab or testing environment, you can deploy a TiDB cluster with TiCDC included quickly by using TiUP Playground.
 
     ```shell
     tiup playground --host 0.0.0.0 --db 1 --pd 1 --kv 1 --tiflash 0 --ticdc 1
@@ -99,7 +99,7 @@ The preceding steps are performed in a lab environment. You can also deploy a cl
 2. Create a changefeed to replicate incremental data to Confluent Cloud:
 
     ```shell
-    tiup ctl:v6.2.0 cdc changefeed create --pd="http://127.0.0.1:2379" --sink-uri="kafka://<broker_endpoint>/ticdc-meta?protocol=avro&replication-factor=3&enable-tls=true&auto-create-topic=true&sasl-mechanism=plain&sasl-user=<broker_api_key>&sasl-password=<broker_api_secret>" --schema-registry="https://<schema_registry_api_key>:<schema_registry_api_secret>@<schema_registry_endpoint>" --changefeed-id="confluent-changefeed" --config changefeed.conf
+    tiup ctl:v6.3.0 cdc changefeed create --pd="http://127.0.0.1:2379" --sink-uri="kafka://<broker_endpoint>/ticdc-meta?protocol=avro&replication-factor=3&enable-tls=true&auto-create-topic=true&sasl-mechanism=plain&sasl-user=<broker_api_key>&sasl-password=<broker_api_secret>" --schema-registry="https://<schema_registry_api_key>:<schema_registry_api_secret>@<schema_registry_endpoint>" --changefeed-id="confluent-changefeed" --config changefeed.conf
     ```
 
     You need to replace the values of the following fields with those created or recorded in [Step 2. Create an access key pair](#step-2-create-an-access-key-pair):
@@ -114,7 +114,7 @@ The preceding steps are performed in a lab environment. You can also deploy a cl
     Note that you should encode `<schema_registry_api_secret>` based on [HTML URL Encoding Reference](https://www.w3schools.com/tags/ref_urlencode.asp) before replacing its value. After you replace all the preceding fields, the configuration file is as follows:
 
     ```shell
-    tiup ctl:v6.2.0 cdc changefeed create --pd="http://127.0.0.1:2379" --sink-uri="kafka://xxx-xxxxx.ap-east-1.aws.confluent.cloud:9092/ticdc-meta?protocol=avro&replication-factor=3&enable-tls=true&auto-create-topic=true&sasl-mechanism=plain&sasl-user=L5WWA4GK4NAT2EQV&sasl-password=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx" --schema-registry="https://7NBH2CAFM2LMGTH7:xxxxxxxxxxxxxxxxxx@yyy-yyyyy.us-east-2.aws.confluent.cloud" --changefeed-id="confluent-changefeed" --config changefeed.conf
+    tiup ctl:v6.3.0 cdc changefeed create --pd="http://127.0.0.1:2379" --sink-uri="kafka://xxx-xxxxx.ap-east-1.aws.confluent.cloud:9092/ticdc-meta?protocol=avro&replication-factor=3&enable-tls=true&auto-create-topic=true&sasl-mechanism=plain&sasl-user=L5WWA4GK4NAT2EQV&sasl-password=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx" --schema-registry="https://7NBH2CAFM2LMGTH7:xxxxxxxxxxxxxxxxxx@yyy-yyyyy.us-east-2.aws.confluent.cloud" --changefeed-id="confluent-changefeed" --config changefeed.conf
     ```
 
     - Run the command to create a changefeed.
@@ -132,7 +132,7 @@ The preceding steps are performed in a lab environment. You can also deploy a cl
 3. After creating the changefeed, run the following command to check the changefeed status:
 
     ```shell
-    tiup ctl:v6.2.0 cdc changefeed list --pd="http://127.0.0.1:2379"
+    tiup ctl:v6.3.0 cdc changefeed list --pd="http://127.0.0.1:2379"
     ```
 
     You can refer to [Manage TiCDC Cluster and Replication Tasks](/ticdc/manage-ticdc.md) to manage the changefeed.
@@ -154,33 +154,9 @@ After the preceding steps are done, TiCDC sends change logs of incremental data 
 
 2. Observe data in Confluent Cloud.
 
-    ![Confluent topics](/media/integrate/confluent-topics.PNG)
+    ![Confluent topics](/media/integrate/confluent-topics.png)
 
     In the Confluent Cloud Console, click **Topics**. You can see that the target topics have been created and are receiving data. At this time, incremental data of the TiDB database is successfully replicated to Confluent Cloud.
-
-## Integrate data with ksqlDB
-
-ksqlDB is a database purpose-built for stream processing applications. You can create ksqlDB clusters on Confluent Cloud and access incremental data replicated by TiCDC.
-
-1. Select **ksqlDB** in the Confluent Cloud Console and create a ksqlDB cluster as instructed.
-
-    Wait until the ksqlDB cluster status is **Running**. This process takes several minutes.
-
-2. In the ksqlDB Editor, run the following command to create a stream to access the `tidb_tpcc_orders` topic:
-
-    ```sql
-    CREATE STREAM orders (o_id INTEGER, o_d_id INTEGER, o_w_id INTEGER, o_c_id INTEGER, o_entry_d STRING, o_carrier_id INTEGER, o_ol_cnt INTEGER, o_all_local INTEGER) WITH (kafka_topic='tidb_tpcc_orders', partitions=3, value_format='AVRO');
-    ```
-
-3. Run the following command to check the orders STREAM data:
-
-    ```sql
-    SELECT * FROM ORDERS EMIT CHANGES;
-    ```
-
-    ![Select from orders](/media/integrate/select-from-orders.png)
-
-    You can see that the incremental data has been replicated to ksqlDB, as shown in the preceding figure. Data integration with ksqlDB is done.
 
 ## Integrate data with Snowflake
 
@@ -214,6 +190,30 @@ Snowflake is a cloud native data warehouse. With Confluent, you can replicate Ti
     ![Data preview](/media/integrate/data-preview.png)
 
 6. In the Snowflake console, choose **Data** > **Database** > **TPCC** > **TiCDC**. You can see that TiDB incremental data has been replicated to Snowflake. Data integration with Snowflake is done.
+
+## Integrate data with ksqlDB
+
+ksqlDB is a database purpose-built for stream processing applications. You can create ksqlDB clusters on Confluent Cloud and access incremental data replicated by TiCDC.
+
+1. Select **ksqlDB** in the Confluent Cloud Console and create a ksqlDB cluster as instructed.
+
+    Wait until the ksqlDB cluster status is **Running**. This process takes several minutes.
+
+2. In the ksqlDB Editor, run the following command to create a stream to access the `tidb_tpcc_orders` topic:
+
+    ```sql
+    CREATE STREAM orders (o_id INTEGER, o_d_id INTEGER, o_w_id INTEGER, o_c_id INTEGER, o_entry_d STRING, o_carrier_id INTEGER, o_ol_cnt INTEGER, o_all_local INTEGER) WITH (kafka_topic='tidb_tpcc_orders', partitions=3, value_format='AVRO');
+    ```
+
+3. Run the following command to check the orders STREAM data:
+
+    ```sql
+    SELECT * FROM ORDERS EMIT CHANGES;
+    ```
+
+    ![Select from orders](/media/integrate/select-from-orders.png)
+
+    You can see that the incremental data has been replicated to ksqlDB, as shown in the preceding figure. Data integration with ksqlDB is done.
 
 ## Integrate data with SQL Server
 

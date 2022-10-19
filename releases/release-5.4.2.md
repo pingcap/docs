@@ -8,6 +8,10 @@ Release Date: July 8, 2022
 
 TiDB version: 5.4.2
 
+> **Warning:**
+>
+> It is not recommended to use v5.4.2, because this version has a known bug. For details, see [#12934](https://github.com/tikv/tikv/issues/12934). This bug has been fixed in v5.4.3. It is recommended to use [v5.4.3](/releases/release-5.4.3.md).
+
 ## Improvements
 
 + TiDB
