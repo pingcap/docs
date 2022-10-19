@@ -1039,34 +1039,32 @@ Constraint checking is always performed in place for pessimistic transactions (d
 - Default value: `OFF`
 - This variable is used to determine whether to include the `AUTO_INCREMENT` columns when creating a generated column or an expression index.
 
-<<<<<<< HEAD
-### tidb_enable_change_multi_schema
-
-> **Warning:**
->
-> TiDB will support more types of multi-schema changes in the future. This system variable will be deleted in a future release of TiDB.
-=======
 ### tidb_enable_batch_dml
 
 > **Warning:**
 >
 > This variable is associated with the deprecated batch-dml feature, which might cause data corruption. Therefore, it is not recommended to enable this variable for batch-dml. Instead, use [non-transactional DML](/non-transactional-dml.md).
->>>>>>> 95c07bcea (add the variables of batch-dml (#10872))
+- Scope: GLOBAL
+- Persists to cluster: Yes
+- Type: Boolean
+- Default values: `OFF`
+- This variable controls whether to enable the deprecated batch-dml feature. When it is enabled, certain statements might be split into multiple transactions, which is non-atomic and should be used with care. When using batch-dml, you must ensure that there are no concurrent operations on the data you are operating on. To make it work, you must also specify a positive value for `tidb_batch_dml_size` and enable at least one of `tidb_batch_insert` and `tidb_batch_delete`.
+
+### tidb_enable_change_multi_schema
+
+> **Warning:**
+>
+> TiDB will support more types of multi-schema changes in the future. This system variable will be deleted in a future release of TiDB.
 
 - Scope: GLOBAL
 - Persists to cluster: Yes
 - Type: Boolean
-<<<<<<< HEAD
 - Default value: `OFF`
 - This variable is used to control whether multiple columns or indexes can be altered in one `ALTER TABLE` statement. When the value of this variable is `ON`, only the following multi-schema changes are supported:
     - Add multiple columns. For example, `ATLER TABLE t ADD COLUMN c1 INT, ADD COLUMN c2 INT;`.
     - Drop multiple columns. For example, `ATLER TABLE t DROP COLUMN c1, DROP COLUMN c2;`.
     - Drop multiple indexes. For example, `ATLER TABLE t DROP INDEX i1, DROP INDEX i2;`.
     - Drop a column covered by a single-column index. For example, `ALTER TABLE t DROP COLUMN c1`, in which the schema contains `INDEX idx(c1)`.
-=======
-- Default values: `OFF`
-- This variable controls whether to enable the deprecated batch-dml feature. When it is enabled, certain statements might be split into multiple transactions, which is non-atomic and should be used with care. When using batch-dml, you must ensure that there are no concurrent operations on the data you are operating on. To make it work, you must also specify a positive value for `tidb_batch_dml_size` and enable at least one of `tidb_batch_insert` and `tidb_batch_delete`.
->>>>>>> 95c07bcea (add the variables of batch-dml (#10872))
 
 ### tidb_enable_cascades_planner
 
