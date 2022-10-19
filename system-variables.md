@@ -2383,7 +2383,7 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 
 <CustomContent platform="tidb-cloud">
 
-- TiDB triggers an alarm when the percentage of the memory it takes exceeds a certain threshold. For the detailed usage description of this feature, see [`tidb_memory_usage_alarm_ratio`](https://docs.pingcap.com/tidb/stable/tidb-configuration-file.md#tidb_memory_usage_alarm_ratio).
+- TiDB triggers an alarm when the percentage of the memory it takes exceeds a certain threshold. For the detailed usage description of this feature, see [`tidb_memory_usage_alarm_ratio`](https://docs.pingcap.com/tidb/stable/tidb-configuration-file#tidb_memory_usage_alarm_ratio).
 
 </CustomContent>
 
