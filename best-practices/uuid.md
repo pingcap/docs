@@ -1,6 +1,6 @@
 ---
 title: UUID Best Practices
-summary: Learn best practice and strategy for using UUID's with TiDB.
+summary: Learn best practice and strategy for using UUIDs with TiDB.
 ---
 
 # UUID Best Practices
