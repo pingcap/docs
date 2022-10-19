@@ -31,7 +31,7 @@ One Vercel project can only connect to one TiDB Cloud cluster. To change the int
 
 You are expected to have an account and a cluster in TiDB Cloud. If you do not have any, refer to [Create a TiDB cluster](/tidb-cloud/create-tidb-cluster.md) in TiDB Cloud.
 
-To integrate with Vercel, you are expected to have the "Organization Owner" access to your organization or "Organization Member" + "Project" Access to the target project in TiDB Cloud.
+To integrate with Vercel, you are expected to have the "Organization Owner" access to your organization or "Organization Member" + "Project" access to the target project in TiDB Cloud.
 
 One TiDB Cloud cluster can connect to multiple Vercel projects.
 
@@ -54,7 +54,7 @@ The detailed steps are as follows:
 7. Click **Add Integration and Return to Vercel**.
 8. Back to your Vercel dashboard, go to your Vercel project by clicking **Settings** > **Environment Variables**, and confirm that the environment variables have been automatically added.
 
-After you have completed the integration setup and successfully connected a TiDB Cloud cluster to your Vercel projects, the information necessary to connect the TiDB Cloud cluster are set in the projects' environment variables
+After you have completed the integration setup and successfully connected a TiDB Cloud cluster to your Vercel projects, the information necessary for the connection is set in the projects' environment variables. The following are some common variables:
 
 ```
 TIDB_HOST
@@ -63,7 +63,7 @@ TIDB_USER
 TIDB_PASSWORD
 ```
 
-For Dedicated Tier clusters, the root CA is set in
+For Dedicated Tier clusters, the root CA is set in this variable:
 
 ```
 TIDB_SSL_CA
@@ -72,7 +72,7 @@ TIDB_SSL_CA
 ## Connect via manually setting environment variables
 
 1. Follow [connect to a TiDB Cloud cluster via standard connection](/tidb-cloud/connect-to-tidb-cluster.md#connect-via-standard-connection) to get the connection information. Do not forget to set the **Allow Access from Anywhere** traffic filter on the **Security Settings** page and save the password.
-2. Go to your Vercel dashboard, [declare each value](https://vercel.com/docs/concepts/projects/environment-variables#declare-an-environment-variable) got from the previous step on your Vercel project > **Settings** > **Environment Variables**.
+2. Go to your Vercel dashboard > Vercel project > **Settings** > **Environment Variables**, [declare each environment variable value](https://vercel.com/docs/concepts/projects/environment-variables#declare-an-environment-variable) according to the connection information in Step 1.
 
 The following is an example of the connection variables for a TiDB Cloud Dedicated Tier cluster:
 
@@ -93,19 +93,19 @@ var connection = mysql.createConnection({
 
 In Vercel, you can declare the variables as follows. You can use whatever name that suits your projects.
 
-* **NAME** = TIDB\_HOST **VALUE** = <your_host>
+* **NAME** = TIDB\_HOST **VALUE** = `<your_host>`
 * **NAME** = TIDB\_PORT **VALUE** = 4000
 * **NAME** = TIDB\_USER **VALUE** = root
-* **NAME** = TIDB\_PASSWORD **VALUE** = <your_password>
-* **NAME** = TIDB\_SSL\_CA **VALUE** = <content_of_ca.pem>
+* **NAME** = TIDB\_PASSWORD **VALUE** = `<your_password>`
+* **NAME** = TIDB\_SSL\_CA **VALUE** = `<content_of_ca.pem>`
 
 ## Configure Connections
 
-After you install an integration, you can add or remove connections inside the integration.
+After you have installed TiDB Cloud Vercel Integration, you can add or remove connections inside the integration.
 
 1. In your Vercel dashboard, click **Integrations**.
-2. Click the **Manage** button of TiDB Cloud entry.
-3. Click the **Configure** button.
-4. Click the **Add Project** button or **Remove** to add or remove connections.
+2. Click **Manage** in the TiDB Cloud entry.
+3. Click **Configure**.
+4. Click **Add Project** or **Remove** to add or remove connections.
 
-When removing a connection, environment variables set by the integration workflow are removed from the Vercel project. Traffic filter and data of the TiDB Cloud cluster are left untouched.
+When you remove a connection, environment variables set by the integration workflow are removed from the Vercel project. The traffic filter and the data of the TiDB Cloud cluster are not changed.
