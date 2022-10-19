@@ -50,4 +50,4 @@ CREATE TABLE `uuid_demo_2` (
 
 ## MySQL compatibility
 
-UUID's can be used in MySQL as well. The `BIN_TO_UUID()` and `UUID_TO_BIN()` functions were introduced in MySQL 8.0. The `UUID()` function is available in older MySQL versions as well.
+UUIDs can be used in MySQL as well. The `BIN_TO_UUID()` and `UUID_TO_BIN()` functions were introduced in MySQL 8.0. The `UUID()` function is available in earlier MySQL versions as well.
