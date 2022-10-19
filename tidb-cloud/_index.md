@@ -77,10 +77,6 @@ hide_commit: true
 
 [Built-in Alerting](https://docs.pingcap.com/tidbcloud/monitor-built-in-alerting)
 
-[Use Datadog](https://docs.pingcap.com/tidbcloud/monitor-datadog-integration)
-
-[Use Prometheus and Grafana](https://docs.pingcap.com/tidbcloud/monitor-prometheus-and-grafana-integration)
-
 </LearningPath>
 
 <LearningPath label="Tune" icon="tidb-cloud-tune">
@@ -128,6 +124,18 @@ hide_commit: true
 [Release Notes](https://docs.pingcap.com/tidbcloud/release-notes-2022)
 
 [SQL Reference](https://docs.pingcap.com/tidbcloud/basic-sql-operations)
+
+</LearningPath>
+
+<LearningPath label="Integrations" icon="cloud4">
+
+[Terraform](https://docs.pingcap.com/tidbcloud/terraform-tidbcloud-provider-overview)
+
+[Vercel](https://docs.pingcap.com/tidbcloud/integrate-tidbcloud-with-vercel)
+
+[Datadog](https://docs.pingcap.com/tidbcloud/monitor-datadog-integration)
+
+[Prometheus and Grafana](https://docs.pingcap.com/tidbcloud/monitor-prometheus-and-grafana-integration)
 
 </LearningPath>
 
