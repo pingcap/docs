@@ -11,7 +11,7 @@ When used as a primary key, instead of an `AUTO_INCREMENT` integer value, a univ
 
 - UUIDs are designed to be globally unique, and can be generated on multiple systems without risking conflicts. In some cases, this means that the number of network trips to TiDB can be reduced, leading to improved performance.
 - UUIDs are supported by most programming languages and database systems.
-- When used as part of URLs, a UUID is not vulnerable to enumeration attacks. i.e. with an `auto_increment` number, it is possible to guess the other invoice ids or user ids.
+- When used as a part of a URL, a UUID is not vulnerable to enumeration attacks. In comparison, with an `auto_increment` number, it is possible to guess the other invoice IDs or user IDs.
 
 ## Best practices
 
