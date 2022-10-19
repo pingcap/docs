@@ -35,25 +35,25 @@ One TiDB Cloud cluster can connect to multiple Vercel projects.
 
 ### All IP addresses allowed for traffic filter in TiDB Cloud
 
-Make sure that the traffic filter of your TiDB Cloud cluster allows all IP addresses (set to `0.0.0.0/0`) for connection, this is because Vercel deployments use [dynamic IP  addresses](https://vercel.com/guides/how-to-allowlist-deployment-ip-address). If you use TiDB Cloud Vercel Integration, TiDB Cloud automatically adds a `0.0.0.0/0` traffic filter to your cluster in the integration workflow if there is none.
+Make sure that the traffic filter of your TiDB Cloud cluster allows all IP addresses (set to `0.0.0.0/0`) for connection, this is because Vercel deployments use [dynamic IP  addresses](https://vercel.com/guides/how-to-allowlist-deployment-ip-address). If you use the TiDB Cloud Vercel integration, TiDB Cloud automatically adds a `0.0.0.0/0` traffic filter to your cluster in the integration workflow if there is none.
 
-## Connect via the TiDB Cloud Vercel Integration
+## Connect via the TiDB Cloud Vercel integration
 
-To connect via the TiDB Cloud Vercel Integration, go to the [TiDB Cloud integration](https://vercel.com/integrations/tidb-cloud) page from the [Vercel's Integrations Marketplace](https://vercel.com/integrations). Using this method, you can choose which cluster to connect to, and TiDB Cloud will automatically generate all the necessary environment variables for your Vercel projects.
+To connect via the TiDB Cloud Vercel integration, go to the [TiDB Cloud integration](https://vercel.com/integrations/tidb-cloud) page from the [Vercel's Integrations Marketplace](https://vercel.com/integrations). Using this method, you can choose which cluster to connect to, and TiDB Cloud will automatically generate all the necessary environment variables for your Vercel projects.
 
 The detailed steps are as follows:
 
-1. Click **Add Integration** in the upper-right area of the [TiDB Cloud Vercel Integration](https://vercel.com/integrations/tidb-cloud) page. The **Add TiDB Cloud** dialog displays.
+1. Click **Add Integration** in the upper-right area of the [TiDB Cloud Vercel Integration](https://vercel.com/integrations/tidb-cloud) page. The **Add TiDB Cloud** dialog is displayed.
 2. Select the scope of your integration in the drop-down list and click **CONTINUE**.
-3. Select the Vercel Projects to which the Integration will be added and click **CONTINUE**.
+3. Select the Vercel Projects to which the integration will be added and click **CONTINUE**.
 4. Confirm the required permissions for integration and click **ADD INTEGRATION**. Then you are directed to an integration page of the TiDB Cloud console.
-5. On the integration page, select the target Vercel Projects, and select the target TiDB Cloud cluster after providing the cluster information. A TiDB Cloud cluster belongs to [an organizations and a project](/tidb-cloud/manage-user-access.md#view-the-organization-and-project).
+5. On the integration page, select the target Vercel projects, and select the target TiDB Cloud cluster after providing the cluster information. Each TiDB Cloud cluster belongs to [an organizations and a project](/tidb-cloud/manage-user-access.md#view-the-organization-and-project).
 6. Click **Add Integration and Return to Vercel**.
 7. Back to your Vercel dashboard, go to your Vercel project, click **Settings** > **Environment Variables**, and confirm that the environment variables have been automatically added.
 
     If the variables have been added, the connection is completed.
 
-After you have completed the integration setup and successfully connected a TiDB Cloud cluster to your Vercel projects, the information necessary for the connection is set in the projects' environment variables. The following are some common variables:
+After you have completed the integration setup and successfully connected a TiDB Cloud cluster to your Vercel projects, the information necessary for the connection is automatically set in the projects' environment variables. The following are some common variables:
 
 ```
 TIDB_HOST
@@ -70,8 +70,10 @@ TIDB_SSL_CA
 
 ## Connect via manually setting environment variables
 
-1. Follow [connect to a TiDB Cloud cluster via standard connection](/tidb-cloud/connect-to-tidb-cluster.md#connect-via-standard-connection) to get the connection information. Do not forget to set the **Allow Access from Anywhere** traffic filter on the **Security Settings** page and save the password.
-2. Go to your Vercel dashboard > Vercel project > **Settings** > **Environment Variables**, [declare each environment variable value](https://vercel.com/docs/concepts/projects/environment-variables#declare-an-environment-variable) according to the connection information in Step 1.
+To use this method, make sure that you have set the **Allow Access from Anywhere** traffic filter in the [**Security Settings**](/tidb-cloud/configure-security-settings) dialog and save the password.
+
+1. Follow [connect to a TiDB Cloud cluster via standard connection](/tidb-cloud/connect-to-tidb-cluster.md#connect-via-standard-connection) to get the connection information of your TiDB cluster. 
+2. Go to your Vercel dashboard > Vercel project > **Settings** > **Environment Variables**, and then [declare each environment variable value](https://vercel.com/docs/concepts/projects/environment-variables#declare-an-environment-variable) according to the connection information of your TiDB cluster.
 
 The following is an example of the connection variables for a TiDB Cloud Dedicated Tier cluster:
 
@@ -90,7 +92,7 @@ var connection = mysql.createConnection({
 });
 ```
 
-In Vercel, you can declare the variables as follows. You can use whatever name that suits your projects.
+In Vercel, you can declare the variables as follows. You can customize the name according to your project need.
 
 * **NAME** = TIDB\_HOST **VALUE** = `<your_host>`
 * **NAME** = TIDB\_PORT **VALUE** = 4000
@@ -98,7 +100,7 @@ In Vercel, you can declare the variables as follows. You can use whatever name t
 * **NAME** = TIDB\_PASSWORD **VALUE** = `<your_password>`
 * **NAME** = TIDB\_SSL\_CA **VALUE** = `<content_of_ca.pem>`
 
-## Configure Connections
+## Configure connections
 
 After you have installed TiDB Cloud Vercel Integration, you can add or remove connections inside the integration.
 
@@ -107,4 +109,4 @@ After you have installed TiDB Cloud Vercel Integration, you can add or remove co
 3. Click **Configure**.
 4. Click **Add Project** or **Remove** to add or remove connections.
 
-When you remove a connection, environment variables set by the integration workflow are removed from the Vercel project. The traffic filter and the data of the TiDB Cloud cluster are not affected.
+When you remove a connection, environment variables set by the integration workflow are removed from the Vercel project either. The traffic filter and the data of the TiDB Cloud cluster are not affected.
