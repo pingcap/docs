@@ -226,7 +226,7 @@ The `operator info` column in the `EXPLAIN` result table also records other info
 
 ### Runtime Statistics
 
-If [`tidb_mem_quota_query`](/system-variables.md#tidb_mem_quota_query) (default value: 1GB) is exceeded, TiDB will attempt to use temporary storage on condition that the `oom-use-tmp-storage` value is `true` (default). This means that the `Build` operator used as part of the hash join might be created on disk. Runtime statistics such as memory usage are visible in the `execution info` of the `EXPLAIN ANALYZE` result table. The following example shows the output of `EXPLAIN ANALYZE` with a 1GB (default) `tidb_mem_quota_query` quota, and a 500MB quota. At 500MB, disk is used for temporary storage:
+If [`tidb_mem_quota_query`](/system-variables.md#tidb_mem_quota_query) (default value: 1GB) is exceeded, TiDB will attempt to use temporary storage on condition that the [`tidb_enable_tmp_storage_on_oom`](/system-variables.md#tidb_enable_tmp_storage_on_oom) value is `ON` (default). This means that the `Build` operator used as part of the hash join might be created on disk. Runtime statistics such as memory usage are visible in the `execution info` of the `EXPLAIN ANALYZE` result table. The following example shows the output of `EXPLAIN ANALYZE` with a 1GB (default) `tidb_mem_quota_query` quota, and a 500MB quota. At 500MB, disk is used for temporary storage:
 
 ```sql
 EXPLAIN ANALYZE SELECT /*+ HASH_JOIN(t1, t2) */ * FROM t1, t2 WHERE t1.id = t2.id;
