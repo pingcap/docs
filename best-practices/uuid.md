@@ -7,7 +7,7 @@ summary: Learn best practice and strategy for using UUIDs with TiDB.
 
 ## Overview of UUIDs
 
-There are several benefits to using a `UUID` as a primary key, instead of an `AUTO_INCREMENT` integer value:
+When used as a primary key, instead of an `AUTO_INCREMENT` integer value, a universally unique identifier (UUID) delivers the following benefits:
 
 - UUIDs are designed to be globally unique, and can be generated on multiple systems without risking conflicts. In some cases, this means that the number of network trips to TiDB can be reduced, leading to improved performance.
 - UUIDs are supported by most programming languages and database systems.
