@@ -992,7 +992,12 @@ MPP is a distributed computing framework provided by the TiFlash engine, which a
 - Persists to cluster: Yes
 - Default value: `64`
 - Range: `[1, 256]`
+
+<CustomContent platform="tidb">
+
 - This variable controls the concurrency of [`FLASHBACK [CLUSTER | DATABASE | TABLE] TO TIMESTAMP`](/sql-statements/sql-statement-flashback-to-timestamp.md).
+
+</CustomContent>
 
 ### tidb_ddl_reorg_batch_size
 
