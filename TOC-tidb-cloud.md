@@ -420,7 +420,7 @@
     - [Use Backup Resource](/tidb-cloud/terraform-use-backup-resource.md)
     - [Use Restore Resource](/tidb-cloud/terraform-use-restore-resource.md)
   - [Vercel](/tidb-cloud/integrate-tidbcloud-with-vercel.md)
-  - Third-Party Monitoring Integrations
+  - Monitoring
     - [Datadog](/tidb-cloud/monitor-datadog-integration.md)
     - [Prometheus and Grafana](/tidb-cloud/monitor-prometheus-and-grafana-integration.md)
 - [FAQs](/tidb-cloud/tidb-cloud-faq.md)
