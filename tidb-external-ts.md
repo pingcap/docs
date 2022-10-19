@@ -5,114 +5,118 @@ summary: Learn how to read historical data using the `tidb_external_ts` variable
 
 # Read Historical Data Using the `tidb_external_ts` Variable
 
-This document describes how to perform the [Stale Read](/stale-read.md) feature using the [`tidb_external_ts`](/system-variables.md#tidb_external_ts-new-in-v640) system variable to read historical data in TiDB, including specific usage examples.
+To support reading the historical data, TiDB v6.4.0 introduces a system variable [`tidb_external_ts`](/system-variables.md#tidb_external_ts-new-in-v640). This document describes how to read historical data through this system variable, including detailed usage examples.
 
 > **Warning:**
 >
-> Currently, you cannot use Stale Read together with TiFlash. If you enables `tidb_enable_external_ts_read` and TiDB might read data from TiFlash replicas, you might encounter an error with a message like `ERROR 1105 (HY000): stale requests require tikv backend`.
+> Currently, you cannot use Stale Read together with TiFlash. If you enables [`tidb_enable_external_ts_read`](/system-variables.md#tidb_enable_external_ts_read-new-in-v640) when querying and TiDB might read data from TiFlash replicas, you might encounter an error with a message like `ERROR 1105 (HY000): stale requests require tikv backend`.
 >
 > To fix the problem, disable TiFlash replicas for your Stale Read query. To do that, perform one of the following operations:
 >
-> - Use the `set session tidb_isolation_read_engines='tidb,tikv'` variable.
-> - Use the [hint](/optimizer-hints.md#read_from_storagetiflasht1_name--tl_name--tikvt2_name--tl_name-) to enforce TiDB to read data from TiKV.
+> - Use the `tidb_isolation_read_engines` variable to disable TiFlash replicas `SET SESSION tidb_isolation_read_engines='tidb,tikv'`.
+> - Use the [READ_FROM_STORAGE](/optimizer-hints.md#read_from_storagetiflasht1_name--tl_name--tikvt2_name--tl_name-) hint to enforce TiDB to read data from TiKV.
 
 ## Scenarios
 
-Read with an absolute timestamp is especially useful for data replication software (for example TiCDC). After the data replication software ensures that all data before a timestamp have been synchronized to the downstream, it can set the [`tidb_external_ts`](#tidb_external_ts-new-in-v640) for the downstream TiDB, so that the read queries of the downstream TiDB can read consistent data.
+Read historical data from a specified point in time is very useful for data replication tools such as TiCDC. After the data replication tool completes the data replication before a certain point in time, you can set the `tidb_external_ts` system variable of the downstream TiDB to read the data before that point in time. This prevents the data inconsistency caused by data replication.
 
-## Usage
+## Feature description
 
-The [`tidb_external_ts`](#tidb_external_ts-new-in-v640) variable is used to specify the timestamp of the historical data to be read.
+The system variable [`tidb_external_ts`](/system-variables.md#tidb_external_ts-new-in-v640) specifies the timestamp of the historical data to be read when `tidb_enable_external_ts_read` is enabled.
 
-The `tidb_enable_external_ts_read` controls whether TiDB will read with the [`tidb_external_ts`](#tidb_external_ts-new-in-v640) variable. The default value is `OFF`, which means that the [`tidb_external_ts`](#tidb_external_ts-new-in-v640) variable is ignored. If `tidb_enable_external_ts_read` is set `ON` globally, all the queries will read historical data. If `tidb_enable_external_ts_read` is set `ON` for a session, only the queries in the session will read historical data.
+The system variable [`tidb_enable_external_ts_read`](/system-variables.md#tidb_enable_external_ts_read-new-in-v640) controls whether to read historical data in the current session or globally. The default value is `OFF`, which means the reading historical data function is disabled, and the `tidb_external_ts` value is ignored. When this variable is set to `ON` globally, all queries read historical data before the time specified by `tidb_external_ts`. If `tidb_enable_external_ts_read` is set to `ON` only for a certain session, only queries in that session read historical data.
 
-When `tidb_enable_external_ts_read` is enabled, TiDB becomes read-only. All the write queries will fail with an error like `ERROR 1836 (HY000): Running in read-only mode`.
+When the `tidb_enable_external_ts_read` is enabled, TiDB becomes read-only. All write queries will fail with an error like `ERROR 1836 (HY000): Running in read-only mode`.
 
-Here is an example:
+## Usage examples
 
-```sql
-CREATE TABLE t (c INT);
-```
+This section describes how to use the `tidb_external_ts` variable to read historical data with examples.
 
-```
-Query OK, 0 rows affected (0.01 sec)
-```
+1. Create a table and insert some rows into the table:
 
-```sql
-INSERT INTO t VALUES (1), (2), (3);
-```
+    ```sql
+    CREATE TABLE t (c INT);
+    ```
 
-```
-Query OK, 3 rows affected (0.00 sec)
-```
+    ```
+    Query OK, 0 rows affected (0.01 sec)
+    ```
 
-View the data in the table:
+    ```sql
+    INSERT INTO t VALUES (1), (2), (3);
+    ```
 
-```sql
-SELECT * FROM t;
-```
+    ```
+    Query OK, 3 rows affected (0.00 sec)
+    ```
 
-```
-+------+
-| c    |
-+------+
-|    1 |
-|    2 |
-|    3 |
-+------+
-3 rows in set (0.00 sec)
-```
+2. View the data in the table:
 
-Set the [`tidb_external_ts`](#tidb_external_ts-new-in-v640) to be `@@tidb_current_ts`:
+    ```sql
+    SELECT * FROM t;
+    ```
 
-```sql
-START TRANSACTION;
-SET GLOBAL tidb_external_ts=@@tidb_current_ts;
-COMMIT;
-```
+    ```
+    +------+
+    | c    |
+    +------+
+    |    1 |
+    |    2 |
+    |    3 |
+    +------+
+    3 rows in set (0.00 sec)
+    ```
 
-Insert a new row:
+3. Set the `tidb_external_ts` to `@@tidb_current_ts`:
 
-```sql
-INSERT INTO t VALUES (4);
-```
+    ```sql
+    START TRANSACTION;
+    SET GLOBAL tidb_external_ts=@@tidb_current_ts;
+    COMMIT;
+    ```
 
-```
-Query OK, 1 row affected (0.001 sec)
-```
+4. Insert a new row and confirm that it is inserted:
 
-Confirm that the new row is inserted:
+    ```sql
+    INSERT INTO t VALUES (4);
+    ```
 
-```sql
-SELECT * FROM t;
-```
+    ```
+    Query OK, 1 row affected (0.001 sec)
+    ```
 
-```
-+------+
-| id   |
-+------+
-|    1 |
-|    2 |
-|    3 |
-|    4 |
-+------+
-4 rows in set (0.00 sec)
-```
+    ```sql
+    SELECT * FROM t;
+    ```
 
-However, as [`tidb_external_ts`](#tidb_external_ts-new-in-v640) is set to the timestamp before inserting the new row. After turning on the `tidb_enable_external_ts_read`, the new row will not be read:
+    ```
+    +------+
+    | id   |
+    +------+
+    |    1 |
+    |    2 |
+    |    3 |
+    |    4 |
+    +------+
+    4 rows in set (0.00 sec)
+    ```
 
-```sql
-SET tidb_enable_external_ts_read=ON;
-SELECT * FROM t;
-```
+5. Set the `tidb_enable_external_ts_read` to `ON` and then view data in the table:
 
-```
-+------+
-| c    |
-+------+
-|    1 |
-|    2 |
-|    3 |
-+------+
-3 rows in set (0.00 sec)
-```
+    ```sql
+    SET tidb_enable_external_ts_read=ON;
+    SELECT * FROM t;
+    ```
+
+    ```
+    +------+
+    | c    |
+    +------+
+    |    1 |
+    |    2 |
+    |    3 |
+    +------+
+    3 rows in set (0.00 sec)
+    ```
+
+    As the `tidb_external_ts` is set to the timestamp before the new row is inserted, the newly inserted row is not returned after the `tidb_enable_external_ts_read` is enabled.

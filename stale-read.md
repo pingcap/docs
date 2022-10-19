@@ -27,7 +27,7 @@ If a transaction only involves read operations and is tolerant of data staleness
 
 ## Usages
 
-TiDB provides the methods of performing Stale Read at the statement level and the session level as follows:
+TiDB provides the methods of performing Stale Read at the statement level, the session level and the global level as follows:
 
 - Statement level
     - Specifying an exact point in time (**recommended**): If you need TiDB to read data that is globally consistent from a specific point in time without violating the isolation level, you can specify the corresponding timestamp of that point in time in the query statement. For detailed usage, see [`AS OF TIMESTAMP` clause](/as-of-timestamp.md#syntax).
@@ -35,4 +35,8 @@ TiDB provides the methods of performing Stale Read at the statement level and th
 - Session level
     - Specifying a time range: In a session, if you need TiDB to read the data as new as possible within a time range in subsequent queries without violating the isolation level, you can specify the time range by setting the `tidb_read_staleness` system variable. For detailed usage, refer to [`tidb_read_staleness`](/tidb-read-staleness.md).
 
-Besides, TiDB also provides a way to specify an exact point in time through [`tidb_external_ts`](#tidb_external_ts-new-in-v640) variable on session or global level. For detailed usage, refer to [`tidb_external_ts`](/tidb-external-ts.md)
+<CustomContent platform="tidb">
+
+Besides, TiDB provides a way to specify an exact point in time by setting the [`tidb_external_ts`](/system-variables.md#tidb_external_ts-new-in-v640) system variable on session or global level. For detailed usage, refer to [`tidb_external_ts`](/tidb-external-ts.md).
+
+</CustomContent>
