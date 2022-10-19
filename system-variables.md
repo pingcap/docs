@@ -1044,6 +1044,7 @@ Constraint checking is always performed in place for pessimistic transactions (d
 > **Warning:**
 >
 > This variable is associated with the deprecated batch-dml feature, which might cause data corruption. Therefore, it is not recommended to enable this variable for batch-dml. Instead, use [non-transactional DML](/non-transactional-dml.md).
+
 - Scope: GLOBAL
 - Persists to cluster: Yes
 - Type: Boolean
