@@ -192,6 +192,7 @@
     - [Use Cluster Resource](/tidb-cloud/terraform-use-cluster-resource.md)
     - [Use Backup Resource](/tidb-cloud/terraform-use-backup-resource.md)
     - [Use Restore Resource](/tidb-cloud/terraform-use-restore-resource.md)
+  - [Vercel](/tidb-cloud/integrate-tidbcloud-with-vercel.md)
   - SQL
     - [Explore SQL with TiDB](/basic-sql-operations.md)
     - SQL Language Structure and Syntax
