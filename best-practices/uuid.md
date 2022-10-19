@@ -23,7 +23,7 @@ The textual UUID format looks like this: `ab06f63e-8fe7-11ec-a514-5405db7aad56`,
 
 The `UUID_TO_BIN()` function can be used with one argument, the UUID or with two arguments where the second argument is a `swap_flag`. It is recommended to not set the `swap_flag` with TiDB to avoid [hotspots](/best-practices/high-concurrency-best-practices.md).
 
-To avoid hotspots it is recommended to explicitly set [the `CLUSTERED` option](/clustered-indexes.md) for UUID based primary keys to avoid hotspots.
+You can also explicitly set the [`CLUSTERED` option](/clustered-indexes.md) for UUID based primary keys to avoid hotspots.
 
 To demonstrate the effect of the `swap_flag`, here are two tables with an identical structure. The difference is that the data inserted into `uuid_demo_1` uses `UUID_TO_BIN(?, 0)` and `uuid_demo_2` uses `UUID_TO_BIN(?, 1)`.
 
