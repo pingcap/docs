@@ -32,7 +32,7 @@ Instead, you can:
 Data from multiple sharded tables might cause conflicts between the primary keys or unique indexes. You need to check each primary key or unique index based on the sharding logic of these sharded tables. The following are three cases related to primary keys or unique indexes:
 
 - Shard key: Usually, the same shard key only exists in one sharded table, which means no data conflict is caused on shard key.
-- Auto-increment primary key：The auto-increment primary key of each sharded tables counts separately, so their range might overlap. In this case, you need to refer to the next section [Handle conflicts of auto-increment primary key](/dm/shard-merge-best-practices.md#handle-conflicts-of-auto-increment-primary-key) to solve it.
+- Auto-increment primary key: The auto-increment primary key of each sharded tables counts separately, so their range might overlap. In this case, you need to refer to the next section [Handle conflicts of auto-increment primary key](/dm/shard-merge-best-practices.md#handle-conflicts-of-auto-increment-primary-key) to solve it.
 - Other primary keys or unique indexes: you need to analyze them based on the business logic. If data conflict, you can also refer to the next section [Handle conflicts of auto-increment primary key](/dm/shard-merge-best-practices.md#handle-conflicts-of-auto-increment-primary-key) to solve it.
 
 ## Handle conflicts of auto-increment primary key
@@ -117,6 +117,10 @@ Then you can perform the following steps to fix the `ERROR 1062 (23000): Duplica
 2. Start the full and incremental data migration task.
 
 3. Run `query-status` to verify whether the data migration task is successfully processed and whether the data from upstream has already been merged and migrated to the downstream database.
+
+## Special processing when the upstream RDS contains sharded tables
+
+If the upstream data source is an RDS and it contains sharded tables, the table names in MySQL binlog might be invisible when connecting to a SQL client. For example, if the upstream is a UCloud distributed database, the table name in the binlog might have an extra prefix `_0001`. Therefore, you need to configure [table routing](/dm/dm-key-features.md#table-routing) based on the table names in binlog, instead of those in the SQL client.
 
 ## Create/drop tables in the upstream
 

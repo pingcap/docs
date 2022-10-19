@@ -25,7 +25,7 @@ In 6.0.0-DMR, the key new features or improvements are as follows:
 - Provide PingCAP Clinic, an automatic diagnosis service for TiDB clusters (Technical Preview version).
 - Provide TiDB Enterprise Manager, an enterprise-level database management platform.
 
-Also, as a core component of TiDB’s HTAP solution, TiFlash<sup>TM</sup> is officially open source in this release. For details, see [TiFlash repository](https://github.com/pingcap/tiflash).
+Also, as a core component of TiDB's HTAP solution, TiFlash<sup>TM</sup> is officially open source in this release. For details, see [TiFlash repository](https://github.com/pingcap/tiflash).
 
 ## Release strategy changes
 
@@ -53,7 +53,7 @@ TiDB v6.0.0 is a DMR, and its version is 6.0.0-DMR.
 
 - Support building TiFlash replicas by databases. To add TiFlash replicas for all tables in a database, you only need to use a single SQL statement, which greatly saves operation and maintenance costs.
 
-    [User document](/tiflash/use-tiflash.md#create-tiflash-replicas-for-databases)
+    [User document](/tiflash/create-tiflash-replicas.md#create-tiflash-replicas-for-databases)
 
 ### Transaction
 
@@ -103,7 +103,7 @@ TiDB v6.0.0 is a DMR, and its version is 6.0.0-DMR.
 
     Reusing SQL execution plans can effectively reduce the time for parsing SQL statements, lessen CPU resource consumption, and improve SQL execution efficiency. One of the important methods of SQL tuning is to reuse SQL execution plans effectively. TiDB has supported sharing execution plans with prepared statements. However, when the prepared statements are closed, TiDB automatically clears the corresponding plan cache. After that, TiDB might unnecessarily parse the repeated SQL statements, affecting the execution efficiency. Since v6.0.0, TiDB supports controlling whether to ignore the `COM_STMT_CLOSE` command through the `tidb_ignore_prepared_cache_close_stmt` parameter (disabled by default). When the parameter is enabled, TiDB ignores the command of closing prepared statements and keeps the execution plan in the cache, improving the reuse rate of the execution plan.
 
-    [User document](/sql-prepare-plan-cache.md#ignore-the-com_stmt_close-command-and-the-deallocate-prepare-statement), [#31056](https://github.com/pingcap/tidb/issues/31056)
+    [User document](/sql-prepared-plan-cache.md#ignore-the-com_stmt_close-command-and-the-deallocate-prepare-statement), [#31056](https://github.com/pingcap/tidb/issues/31056)
 
 - Improve query pushdown
 
@@ -111,11 +111,17 @@ TiDB v6.0.0 is a DMR, and its version is 6.0.0-DMR.
 
     [User document](/functions-and-operators/expressions-pushed-down.md#add-to-the-blocklist), [#30738](https://github.com/pingcap/tidb/issues/30738)
 
+- Optimization of hotspot index
+
+    Writing monotonically increasing data in batches to the secondary index causes an index hotspot and affects the overall write throughput. Since v6.0.0, TiDB supports scattering the index hotspot using the `tidb_shard` function to improve the write performance. Currently, `tidb_shard` only takes effect on the unique secondary index. This application-friendly solution does not require modifying the original query conditions. You can use this solution in the scenarios of high write throughput, point queries, and batch point queries. Note that using the data that has been scattered by range queries in the application might cause a performance regression. Therefore, do not use this function in such cases without verification.
+
+    [User document](/functions-and-operators/tidb-functions.md#tidb_shard), [#31040](https://github.com/pingcap/tidb/issues/31040)
+
 - Support dynamic pruning mode for partitioned tables in TiFlash MPP engine (experimental)
 
     In this mode, TiDB can read and compute the data on partitioned tables using the MPP engine of TiFlash, which greatly improves the query performance of partitioned tables.
 
-    [User document](/tiflash/use-tiflash.md#access-partitioned-tables-in-the-mpp-mode)
+    [User document](/tiflash/use-tiflash-mpp-mode.md#access-partitioned-tables-in-the-mpp-mode)
 
 - Improve the computing performance of the MPP engine
 
@@ -124,10 +130,10 @@ TiDB v6.0.0 is a DMR, and its version is 6.0.0-DMR.
         - Logical functions: `IS`, `IS NOT`
         - String functions: `REGEXP()`, `NOT REGEXP()`
         - Mathematical functions: `GREATEST(int/real)`, `LEAST(int/real)`
-        - Date functions: `DAYOFNAME()`, `DAYOFMONTH()`, `DAYOFWEEK()`, `DAYOFYEAR()`, `LAST_DAY()`, `MONTHNAME()`
+        - Date functions: `DAYNAME()`, `DAYOFMONTH()`, `DAYOFWEEK()`, `DAYOFYEAR()`, `LAST_DAY()`, `MONTHNAME()`
         - Operators: Anti Left Outer Semi Join, Left Outer Semi Join
 
-        [User document](/tiflash/use-tiflash.md#supported-push-down-calculations)
+        [User document](/tiflash/tiflash-supported-pushdown-calculations.md)
 
     - The elastic thread pool (enabled by default) becomes GA. This feature aims to improve CPU utilization.
 
@@ -155,11 +161,11 @@ TiDB v6.0.0 is a DMR, and its version is 6.0.0-DMR.
 
 - Enable all I/O checks (Checksum) by default
 
-    This feature was introduced in v5.4.0 as experimental. It enhances data accuracy and security without imposing an obvious impact on users’ businesses.
+    This feature was introduced in v5.4.0 as experimental. It enhances data accuracy and security without imposing an obvious impact on users' businesses.
 
     Warning: Newer version of data format cannot be downgraded in place to versions earlier than v5.4.0. During such a downgrade, you need to delete TiFlash replicas and replicate data after the downgrade. Alternatively, you can perform a downgrade by referring to [dttool migrate](/tiflash/tiflash-command-line-flags.md#dttool-migrate).
 
-    [User document](/tiflash/use-tiflash.md#use-data-validation)
+    [User document](/tiflash/tiflash-data-validation.md)
 
 - Improve thread utilization
 
@@ -281,7 +287,7 @@ TiDB v6.0.0 is a DMR, and its version is 6.0.0-DMR.
 | `placement_checks` | Deleted | Controls whether the DDL statement validates the placement rules specified by [Placement Rules in SQL](/placement-rules-in-sql.md). Replaced by `tidb_placement_mode`. |
 | `tidb_enable_alter_placement` | Deleted | Controls whether to enable [placement rules in SQL](/placement-rules-in-sql.md). |
 | `tidb_mem_quota_hashjoin`<br/>`tidb_mem_quota_indexlookupjoin`<br/>`tidb_mem_quota_indexlookupreader` <br/>`tidb_mem_quota_mergejoin`<br/>`tidb_mem_quota_sort`<br/>`tidb_mem_quota_topn` | Deleted | Since v5.0, these variables have been replaced by `tidb_mem_quota_query` and removed from the [system variables](/system-variables.md) document. To ensure compatibility, these variables were kept in source code. Since TiDB 6.0.0, these variables are removed from the code, too. |
-| [`tidb_enable_mutation_checker`](/system-variables.md#tidb_enable_mutation_checker-new-in-v600) | Newly added | Controls whether to enable the mutation checker. The default value is `ON`. |
+| [`tidb_enable_mutation_checker`](/system-variables.md#tidb_enable_mutation_checker-new-in-v600) | Newly added | Controls whether to enable the mutation checker. The default value is `ON`. For existing clusters that upgrade from versions earlier than v6.0.0, the mutation checker is disabled by default. |
 | [`tidb_ignore_prepared_cache_close_stmt`](/system-variables.md#tidb_ignore_prepared_cache_close_stmt-new-in-v600) | Newly added | Controls whether to ignore the command that closes Prepared Statement. The default value is `OFF`. |
 | [`tidb_mem_quota_binding_cache`](/system-variables.md#tidb_mem_quota_binding_cache-new-in-v600) | Newly added | Sets the memory usage threshold for the cache holding `binding`. The default value is `67108864` (64 MiB). |
 | [`tidb_placement_mode`](/system-variables.md#tidb_placement_mode-new-in-v600) | Newly added | Controls whether DDL statements ignore the placement rules specified by [Placement Rules in SQL](/placement-rules-in-sql.md). The default value is `strict`, which means that DDL statements do not ignore placement rules. |
@@ -290,7 +296,7 @@ TiDB v6.0.0 is a DMR, and its version is 6.0.0-DMR.
 | [`tidb_table_cache_lease`](/system-variables.md#tidb_table_cache_lease-new-in-v600) | Newly added | Controls the lease time of [table cache](/cached-tables.md), in seconds. The default value is `3`. |
 | [`tidb_top_sql_max_meta_count`](/system-variables.md#tidb_top_sql_max_meta_count-new-in-v600) | Newly added | Controls the maximum number of SQL statement types collected by [Top SQL](/dashboard/top-sql.md) per minute. The default value is `5000`. |
 | [`tidb_top_sql_max_time_series_count`](/system-variables.md#tidb_top_sql_max_time_series_count-new-in-v600) | Newly added | Controls how many SQL statements that contribute the most to the load (that is, top N) can be recorded by [Top SQL](/dashboard/top-sql.md) per minute. The default value is `100`. |
-| [`tidb_txn_assertion_level`](/system-variables.md#tidb_txn_assertion_level-new-in-v600) | Newly added | Controls the assertion level. The assertion is a consistency check between data and indexes, which checks whether a key being written exists in the transaction commit process. By default, the check enables most of the check items, with almost no impact on performance.  |
+| [`tidb_txn_assertion_level`](/system-variables.md#tidb_txn_assertion_level-new-in-v600) | Newly added | Controls the assertion level. The assertion is a consistency check between data and indexes, which checks whether a key being written exists in the transaction commit process. By default, the check enables most of the check items, with almost no impact on performance. For existing clusters that upgrade from versions earlier than v6.0.0, the check is disabled by default. |
 
 ### Configuration file parameters
 
@@ -300,7 +306,7 @@ TiDB v6.0.0 is a DMR, and its version is 6.0.0-DMR.
 | TiDB | [`new_collations_enabled_on_first_bootstrap`](/tidb-configuration-file.md#new_collations_enabled_on_first_bootstrap) | Modified | Controls whether to enable support for the new collation. Since v6.0, the default value is changed from `false` to `true`. This configuration item only takes effect when the cluster is initialized for the first time. After the first bootstrap, you cannot enable or disable the new collation framework using this configuration item. |
 | TiKV | [`backup.num-threads`](/tikv-configuration-file.md#num-threads-1) | Modified | The value range is modified to `[1, CPU]`.  |
 | TiKV | [`raftstore.apply-max-batch-size`](/tikv-configuration-file.md#apply-max-batch-size) | Modified | The maximum value is changed to `10240`. |
-| TiKV | [`raftstore.raft-max-size-per-msg`](/tikv-configuration-file.md#raft-max-size-per-msg) | Modified | <ul><li>The minimum value is changed from `0` to larger than `0`.</li><li>The maximum value is set to `3GB`.</li><li>The unit is changed from `MB` to `KB\|MB\|GB`.</li></ul> |
+| TiKV | [`raftstore.raft-max-size-per-msg`](/tikv-configuration-file.md#raft-max-size-per-msg) | Modified | <ul><li>The minimum value is changed from `0` to larger than `0`.</li><li>The maximum value is set to `3GB`.</li><li>The unit is changed from `MB` to <code>KB\|MB\|GB</code>.</li></ul> |
 | TiKV | [`raftstore.store-max-batch-size`](/tikv-configuration-file.md#store-max-batch-size) | Modified | The maximum value is set to `10240`. |
 | TiKV | [`readpool.unified.max-thread-count`](/tikv-configuration-file.md#max-thread-count) | Modified | The adjustable range is changed to `[min-thread-count, MAX(4, CPU)]`. |
 | TiKV | [`rocksdb.enable-pipelined-write`](/tikv-configuration-file.md#enable-pipelined-write) | Modified | The default value is changed from `true` to `false`. When this configuration is enabled, the previous Pipelined Write is used. When this configuration is disabled, the new Pipelined Commit mechanism is used. |
@@ -314,7 +320,7 @@ TiDB v6.0.0 is a DMR, and its version is 6.0.0-DMR.
 | TiKV | [`quota`](/tikv-configuration-file.md#quota) | Newly added | Add configuration items related to Quota Limiter, which limit the resources occupied by frontend requests. Quota Limiter is an experimental feature and is disabled by default. New quota-related configuration items are `foreground-cpu-time`, `foreground-write-bandwidth`, `foreground-read-bandwidth`, and `max-delay-duration`. |
 | TiFlash | [`profiles.default.dt_compression_method`](/tiflash/tiflash-configuration.md#configure-the-tiflashtoml-file) | Newly added | Specifies the compression algorithm for TiFlash. The optional values are `LZ4`, `zstd` and `LZ4HC`, all case insensitive. The default value is `LZ4`. |
 | TiFlash | [`profiles.default.dt_compression_level`](/tiflash/tiflash-configuration.md#configure-the-tiflashtoml-file) | Newly added | Specifies the compression level of TiFlash. The default value is `1`. |
-| DM | [`loaders.<name>.import-mode`](/dm/task-configuration-file-full.md#task-configuration-file-template-advanced) | Newly added | The import mode during the full import phase. Since v6.0, DM uses TiDB Lightning’s TiDB-backend mode to import data during the full import phase; the previous Loader component is no longer used. This is an internal replacement and has no obvious impact on daily operations.<br/>The default value is set to `sql`, which means using `tidb-backend` mode. In some rare cases, `tidb-backend` might not be fully compatible. You can fall back to Loader mode by configuring this parameter to `loader`. |
+| DM | [`loaders.<name>.import-mode`](/dm/task-configuration-file-full.md#task-configuration-file-template-advanced) | Newly added | The import mode during the full import phase. Since v6.0, DM uses TiDB Lightning's TiDB-backend mode to import data during the full import phase; the previous Loader component is no longer used. This is an internal replacement and has no obvious impact on daily operations.<br/>The default value is set to `sql`, which means using `tidb-backend` mode. In some rare cases, `tidb-backend` might not be fully compatible. You can fall back to Loader mode by configuring this parameter to `loader`. |
 | DM | [`loaders.<name>.on-duplicate`](/dm/task-configuration-file-full.md#task-configuration-file-template-advanced) | Newly added | Specifies the methods to resolve conflicts during the full import phase. The default value is `replace`, which means using the new data to replace the existing data. |
 | TiCDC | [`dial-timeout`](/ticdc/manage-ticdc.md#configure-sink-uri-with-kafka) | Newly added | The timeout in establishing a connection with the downstream Kafka. The default value is `10s`. |
 | TiCDC | [`read-timeout`](/ticdc/manage-ticdc.md#configure-sink-uri-with-kafka) | Newly added | The timeout in getting a response returned by the downstream Kafka. The default value is `10s`. |
@@ -325,7 +331,7 @@ TiDB v6.0.0 is a DMR, and its version is 6.0.0-DMR.
 - The data placement policy has the following compatibility changes:
     - Binding is not supported. The direct placement option is removed from the syntax.
     - The `CREATE PLACEMENT POLICY` and `ALTER PLACEMENT POLICY` statements no longer support the `VOTERS` and `VOTER_CONSTRAINTS` placement options.
-    - TiDB ecosystem tools (TiDB Binlog, TiCDC, and BR) are now compatible with placement rules. The placement option is moved to a special comment in TiDB Binlog.
+    - TiDB migration tools (TiDB Binlog, TiCDC, and BR) are now compatible with placement rules. The placement option is moved to a special comment in TiDB Binlog.
     - The `information_schema.placement_rules` system table is renamed to `information_schema.placement_policies`. This table now only displays information about placement policies.
     - The `placement_checks` system variable is replaced by `tidb_placement_mode`.
     - It is prohibited to add partitions with placement rules to tables that have TiFlash replicas.
@@ -463,7 +469,7 @@ TiDB v6.0.0 is a DMR, and its version is 6.0.0-DMR.
     - Fix wrong collation of the `json` type when this type is processed using builtin-func [#31320](https://github.com/pingcap/tidb/issues/31320)
     - Fix a bug that PD rules are not deleted when the count of TiFlash replicas is set to 0 [#32190](https://github.com/pingcap/tidb/issues/32190)
     - Fix the issue that `alter column set default` wrongly updates the table schema [#31074](https://github.com/pingcap/tidb/issues/31074)
-    - Fix the issue that `date_format` in TiDB handles in a MySQL-incompatible way [#32232](https://github.com/pingcap/tidb/issues/32232)
+    - Fix the issue that `date_format` in TiDB handles `'\n'` in a MySQL-incompatible way [#32232](https://github.com/pingcap/tidb/issues/32232)
     - Fix a bug that errors may occur when updating partitioned tables using join [#31629](https://github.com/pingcap/tidb/issues/31629)
     - Fix wrong range calculation results for Nulleq function on Enum values [#32428](https://github.com/pingcap/tidb/issues/32428)
     - Fix possible panic in `upper()` and `lower()` functions [#32488](https://github.com/pingcap/tidb/issues/32488)
@@ -525,7 +531,7 @@ TiDB v6.0.0 is a DMR, and its version is 6.0.0-DMR.
     - Fix the potential issue of TiFlash panic when `Snapshot` is applied simultaneously with multiple DDL operations [#4072](https://github.com/pingcap/tiflash/issues/4072)
     - Fix the potential query error after adding columns under heavy read workload [#3967](https://github.com/pingcap/tiflash/issues/3967)
     - Fix the issue that the `SQRT` function with a negative argument returns `NaN` instead of `Null` [#3598](https://github.com/pingcap/tiflash/issues/3598)
-    - Fix the issue that casting `INI` to `DECIMAL` might cause overflow [#3920](https://github.com/pingcap/tiflash/issues/3920)
+    - Fix the issue that casting `INT` to `DECIMAL` might cause overflow [#3920](https://github.com/pingcap/tiflash/issues/3920)
     - Fix the issue that the result of `IN` is incorrect in multi-value expressions [#4016](https://github.com/pingcap/tiflash/issues/4016)
     - Fix the issue that the date format identifies `'\n'` as an invalid separator [#4036](https://github.com/pingcap/tiflash/issues/4036)
     - Fix the issue that the learner-read process takes too much time under high concurrency scenarios [#3555](https://github.com/pingcap/tiflash/issues/3555)
@@ -545,7 +551,7 @@ TiDB v6.0.0 is a DMR, and its version is 6.0.0-DMR.
 
     + TiCDC
 
-        - Fix a bug that MySQL sink generates duplicated `replace` SQL statements when`batch-replace-enable` is disabled [#4501](https://github.com/pingcap/tiflow/issues/4501)
+        - Fix a bug that MySQL sink generates duplicated `replace` SQL statements when `batch-replace-enable` is disabled [#4501](https://github.com/pingcap/tiflow/issues/4501)
         - Fix a bug that a TiCDC node exits abnormally when a PD leader is killed [#4248](https://github.com/pingcap/tiflow/issues/4248)
         - Fix the error `Unknown system variable 'transaction_isolation'` for some MySQL versions [#4504](https://github.com/pingcap/tiflow/issues/4504)
         - Fix the TiCDC panic issue that might occur when `Canal-JSON` incorrectly handles `string` [#4635](https://github.com/pingcap/tiflow/issues/4635)
@@ -568,7 +574,7 @@ TiDB v6.0.0 is a DMR, and its version is 6.0.0-DMR.
 
         - Fix a bug that TiDB Lightning may not delete the metadata schema when some import tasks do not contain source files [#28144](https://github.com/pingcap/tidb/issues/28144)
         - Fix the panic that occurs when the table names in the source file and in the target cluster are different [#31771](https://github.com/pingcap/tidb/issues/31771)
-        - Fix the checksum error “GC life time is shorter than transaction duration” [#32733](https://github.com/pingcap/tidb/issues/32733)
+        - Fix the checksum error "GC life time is shorter than transaction duration" [#32733](https://github.com/pingcap/tidb/issues/32733)
         - Fix the issue that TiDB Lightning gets stuck when it fails to check empty tables [#31797](https://github.com/pingcap/tidb/issues/31797)
 
     + Dumpling

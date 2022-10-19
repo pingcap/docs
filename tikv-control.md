@@ -44,18 +44,18 @@ FLAGS:
         --skip-paranoid-checks    Skip paranoid checks when open rocksdb
     -V, --version                 Prints version information
 OPTIONS:
-        --ca-path <ca_path>              Set the CA certificate path
-        --cert-path <cert_path>          Set the certificate path
-        --config <config>                Set the config for rocksdb
-        --db <db>                        Set the rocksdb path
+        --ca-path <ca-path>              Set the CA certificate path
+        --cert-path <cert-path>          Set the certificate path
+        --config <config>                TiKV config path, by default it's <deploy-dir>/conf/tikv.toml
+        --data-dir <data-dir>            TiKV data directory path, check <deploy-dir>/scripts/run.sh to get it
         --decode <decode>                Decode a key in escaped format
         --encode <encode>                Encode a key in escaped format
         --to-hex <escaped-to-hex>        Convert an escaped key to hex key
         --to-escaped <hex-to-escaped>    Convert a hex key to escaped key
         --host <host>                    Set the remote host
-        --key-path <key_path>            Set the private key path
+        --key-path <key-path>            Set the private key path
+        --log-level <log-level>          Set the log level [default: warn]
         --pd <pd>                        Set the address of pd
-        --raftdb <raftdb>                Set the raft rocksdb path
 SUBCOMMANDS:
     bad-regions           Get all regions with corrupt raft
     cluster               Print the cluster id
@@ -107,7 +107,12 @@ You can add corresponding parameters and subcommands after `tiup ctl tikv`.
     store:"127.0.0.1:20160" compact db:KV cf:default range:([], []) success!
     ```
 
-- Local mode: Use the `--db` option to specify the local TiKV data directory path. In this mode, you need to stop the running TiKV instance.
+- Local mode:
+
+    * Use the `--data-dir` option to specify the local TiKV data directory path.
+    * Use the `--config` option to specify the local TiKV configuration file path.
+
+  In this mode, you need to stop the running TiKV instance.
 
 Unless otherwise noted, all commands support both the remote mode and the local mode.
 
@@ -225,20 +230,28 @@ The properties can be used to check whether the Region is healthy or not. If not
 
 ### Compact data of each TiKV manually
 
-Use the `compact` command to manually compact data of each TiKV. If you specify the `--from` and `--to` options, then their flags are also in the form of escaped raw key.
+Use the `compact` command to manually compact data of each TiKV.
 
-- Use the `--host` option to specify the TiKV that needs to perform compaction.
-- Use the `-d` option to specify the RocksDB that performs compaction. The optional values are `kv` and `raft`.
+- Use the `--from` and `--to` options to specify the compaction range in the form of escaped raw key. If not set, the whole range will be compacted.
+- Use the `--region` option to compact the range of a specific region. If set, `--from` and `--to` will be ignored.
+- Use the `--db` option to specify the RocksDB that performs compaction. The optional values are `kv` and `raft`.
 - Use the `--threads` option allows you to specify the concurrency for the TiKV compaction and its default value is `8`. Generally, a higher concurrency comes with a faster compaction speed, which might yet affect the service. You need to choose an appropriate concurrency count based on your scenario.
 - Use the `--bottommost` option to include or exclude the bottommost files when TiKV performs compaction. The value options are `default`, `skip`, and `force`. The default value is `default`.
     - `default` means that the bottommost files are included only when the Compaction Filter feature is enabled.
     - `skip` means that the bottommost files are excluded when TiKV performs compaction.
     - `force` means that the bottommost files are always included when TiKV performs compaction.
 
-```bash
-$ tikv-ctl --data-dir /path/to/tikv compact -d kv
-success!
-```
+- To compact data in the local mode, use the following command:
+
+    ```shell
+    tikv-ctl --data-dir /path/to/tikv compact --db kv
+    ```
+
+- To compact data in the remote mode, use the following command:
+
+    ```shell
+    tikv-ctl --host ip:port compact --db kv
+    ```
 
 ### Compact data of the whole TiKV cluster manually
 
@@ -300,6 +313,7 @@ DebugClient::check_region_consistency: RpcFailure(RpcStatus { status: Unknown, d
 
 > **Note:**
 >
+> - It is **NOT** recommended to use the `consistency-check` command, because it is incompatible with the garbage collection in TiDB and might mistakenly report an error.
 > - This command only supports the remote mode.
 > - Even if this command returns `success!`, you need to check whether TiKV panics. This is because this command is only a proposal that requests a consistency check for the leader, and you cannot know from the client whether the whole check process is successful or not.
 
@@ -405,7 +419,11 @@ tikv-ctl --host ip:port modify-tikv-config -n rocksdb.rate-bytes-per-sec -v "1GB
 success
 ```
 
-### Force Regions to recover services from failure of multiple replicas (use with caution)
+### Force Regions to recover services from failure of multiple replicas (deprecated)
+
+> **Warning:**
+>
+> It is not recommended to use this feature. Instead, you can use Online Unsafe Recovery in `pd-ctl` which provides one-stop automatic recovery capabilities. Extra operations such as stopping services are not needed. For detailed introduction, see [Online Unsafe Recovery](/online-unsafe-recovery.md).
 
 You can use the `unsafe-recover remove-fail-stores` command to remove the failed machines from the peer list of Regions. Before running this command, you need to stop the service of the target TiKV store to release file locks.
 
@@ -452,7 +470,7 @@ $ tikv-ctl --data-dir /path/to/tikv recover-mvcc -r 1001,1002 -p 127.0.0.1:2379
 success!
 ```
 
-> **Note**:
+> **Note:**
 >
 > - This command only supports the local mode. It prints `success!` when successfully run.
 > - The argument of the `-p` option specifies the PD endpoints without the `http` prefix. Specifying the PD endpoints is to query whether the specified `region_id` is validated or not.
@@ -533,13 +551,15 @@ Type "I consent" to continue, anything else to exit: I consent
 9291156302549018620: key: 8B6B6B8F83D36BE2467ED55D72AE808B method: Aes128Ctr creation_time: 1592938357
 ```
 
-> **Note**
+> **Note:**
 >
 > The command will expose data encryption keys as plaintext. In production, DO NOT redirect the output to a file. Even deleting the output file afterward may not cleanly wipe out the content from disk.
 
 ### Print information related to damaged SST files
 
-Damaged SST files in TiKV might cause the TiKV process to panic. To clean up the damaged SST files, you will need the information of these files. To get the information, you can execute the `bad-ssts` command in TiKV Control. The needed information is shown in the output. The following is an example command and output.
+Damaged SST files in TiKV might cause TiKV processes to panic. Before TiDB v6.1.0, these files cause TiKV to panic immediately. Since TiDB v6.1.0, TiKV processes panic 1 hour after SST files are damaged.
+
+To clean up the damaged SST files, you can run the `bad-ssts` command in TiKV Control to show the needed information. The following is an example command and output.
 
 > **Note:**
 >

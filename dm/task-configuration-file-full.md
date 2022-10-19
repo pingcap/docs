@@ -7,8 +7,6 @@ aliases: ['/docs/tidb-data-migration/dev/task-configuration-file-full/','/docs/t
 
 This document introduces the advanced task configuration file of Data Migration (DM), including [global configuration](#global-configuration) and [instance configuration](#instance-configuration).
 
-For the feature and configuration of each configuration item, see [Data migration features](/dm/dm-overview.md#basic-features).
-
 ## Important concepts
 
 For description of important concepts including `source-id` and the DM-worker ID, see [Important concepts](/dm/dm-config-overview.md#important-concepts).
@@ -24,16 +22,16 @@ The following is the task configuration file template which allows you to perfor
 ## ********* Basic configuration *********
 name: test                      # The name of the task. Should be globally unique.
 task-mode: all                  # The task mode. Can be set to `full`(only migrates full data)/`incremental`(replicates binlogs synchronously)/`all` (replicates both full data and incremental binlogs).
-is-sharding: true               # `is-sharding` has been deprecated since v2.0.0, so it is recommended to directly use `shard-mode`
 shard-mode: "pessimistic"       # The shard merge mode. Optional modes are ""/"pessimistic"/"optimistic". The "" mode is used by default which means sharding DDL merge is disabled. If the task is a shard merge task, set it to the "pessimistic" mode.
                                 # After understanding the principles and restrictions of the "optimistic" mode, you can set it to the "optimistic" mode.
 meta-schema: "dm_meta"          # The downstream database that stores the `meta` information.
 timezone: "Asia/Shanghai"       # The timezone used in SQL Session. By default, DM uses the global timezone setting in the target cluster, which ensures the correctness automatically. A customized timezone does not affect data migration but is unnecessary.
 case-sensitive: false           # Determines whether the schema/table is case-sensitive.
 online-ddl: true                # Supports automatic processing of upstream "gh-ost" and "pt".
-online-ddl-scheme: "gh-ost"     # `online-ddl-scheme` has been deprecated in v2.0.6, so it is recommended to use `online-ddl`.
+online-ddl-scheme: "gh-ost"     # `online-ddl-scheme` is deprecated, so it is recommended to use `online-ddl`.
 clean-dump-file: true           # Whether to clean up the files generated during data dump. Note that these include `metadata` files.
 collation_compatible: "loose"   # The mode to sync the default collation in `CREATE` SQL statements. The supported values are "loose" (by default) or "strict". When the value is "strict", DM explicitly appends the corresponding collation of the upstream to the SQL statements; when the value is "loose", DM does not modify the SQL statements. In "strict" mode, if the downstream does not support the default collation in the upstream, the downstream might report an error.
+ignore-checking-items: []       # Ignorable checking items. For the complete list of ignorable checking items, see DM precheck: https://docs.pingcap.com/tidb/stable/dm-precheck#ignorable-checking-items.
 
 target-database:                # Configuration of the downstream database instance.
   host: "192.168.0.1"
@@ -110,9 +108,9 @@ loaders:
   global:                            # The configuration name of the processing unit.
     pool-size: 16                    # The number of threads that concurrently execute dumped SQL files in the load processing unit (16 by default). When multiple instances are migrating data to TiDB at the same time, slightly reduce the value according to the load.
     # The directory that stores full data exported from the upstream ("./dumped_data" by default).
-    # Supoprts a local filesystem path or an Amazon S3 path. For example, "s3://dm_bucket/dumped_data?region=us-west-2&endpoint=s3-website.us-east-2.amazonaws.com&access_key=s3accesskey&secret_access_key=s3secretkey&force_path_style=true"
+    # Supoprts a local filesystem path or an Amazon S3 path. For example, "s3://dm_bucket/dumped_data?endpoint=s3-website.us-east-2.amazonaws.com&access_key=s3accesskey&secret_access_key=s3secretkey&force_path_style=true"
     dir: "./dumped_data"
-    # The import mode during the full import phase. In most cases you don't need to care about this configuration. 
+    # The import mode during the full import phase. In most cases you don't need to care about this configuration.
     # - "sql" (default). Use [TiDB Lightning](/tidb-lightning/tidb-lightning-overview.md) TiDB-backend mode to import data.
     # - "loader". Use Loader mode to import data. This mode is only for compatibility with features that TiDB Lightning does not support yet. It will be deprecated in the future.
     import-mode: "sql"
@@ -131,6 +129,14 @@ syncers:
 
     # If set to true, `INSERT` statements from upstream are rewritten to `REPLACE` statements, and `UPDATE` statements are rewritten to `DELETE` and `REPLACE` statements. This ensures that DML statements can be imported repeatedly during data migration when there is any primary key or unique index in the table schema.
     safe-mode: false
+    # The duration of the automatic safe mode.
+    # If this value is not set or set to "", the default value is twice of `checkpoint-flush-interval` (30s by default), which is 60s.
+    # If this value is set to "0s", DM reports an error when it automatically enters the safe mode.
+    # If this value is set to a normal value, such as "1m30s", when the task pauses abnormally, when DM fails to
+    # record safemode_exit_point, or when DM exits unexpectedly, the duration of the automatic safe mode is set to
+    # 1 minute 30 seconds.
+    safe-mode-duration: "60s"
+
     # If set to true, DM compacts as many upstream statements on the same rows as possible into a single statements without increasing latency.
     # For example, `INSERT INTO tb(a,b) VALUES(1,1); UPDATE tb SET b=11 WHERE a=1`;` will be compacted to `INSERT INTO tb(a,b) VALUES(1,11);`, where "a" is the primary key
     # `UPDATE tb SET b=1 WHERE a=1; UPDATE tb(a,b) SET b=2 WHERE a=1;` will be compacted to `UPDATE tb(a,b) SET b=2 WHERE a=1;`, where "a" is the primary key
@@ -141,6 +147,16 @@ syncers:
     # `UPDATE tb SET b=11 WHERE a=1; UPDATE tb(a,b) set b=22 WHERE a=2;` will become `INSERT INTO tb(a,b) VALUES(1,11),(2,22) ON DUPLICATE KEY UPDATE a=VALUES(a), b= VALUES(b);`, where "a" is the primary key
     # `DELETE FROM tb WHERE a=1; DELETE FROM tb WHERE a=2` will become `DELETE FROM tb WHERE (a) IN (1),(2)`, where "a" is the primary key
     multiple-rows: true
+
+# Configuration arguments of continuous data validation (validator).
+validators:
+  global:                # Configuration name.
+    # full: validates the data in each row is correct.
+    # fast: validates whether the row is successfully migrated to the downstream.
+    # none: does not validate the data.
+    mode: full           # Possible values are "full", "fast", and "none". The default value is "none", which does not validate the data.
+    worker-count: 4      # The number of validation workers in the background. The default value is 4.
+    row-error-delay: 30m # If a row cannot pass the validation within the specified time, it will be marked as an error row. The default value is 30m, which means 30 minutes.
 
 # ----------- Instance configuration -----------
 mysql-instances:
@@ -159,6 +175,7 @@ mysql-instances:
     mydumper-config-name: "global"                  # The name of the mydumpers configuration.
     loader-config-name: "global"                    # The name of the loaders configuration.
     syncer-config-name: "global"                    # The name of the syncers configuration.
+    validator-config-name: "global"                 # The name of the validators configuration.
 
   -
     source-id: "mysql-replica-02"                   # The `source-id` in source.toml.

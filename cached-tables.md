@@ -173,8 +173,6 @@ SELECT * FROM users;
 >
 > When you insert data to a cached table, second-level write latency might occur. The latency is controlled by the global environment variable [`tidb_table_cache_lease`](/system-variables.md#tidb_table_cache_lease-new-in-v600). You can decide whether to use the cached table feature by checking whether the latency is acceptable based on your application. For example, in a read-only scenario, you can increase the value of `tidb_table_cache_lease`:
 >
-> {{< copyable "sql" >}}
->
 > ```sql
 > set @@global.tidb_table_cache_lease = 10;
 > ```
@@ -212,7 +210,7 @@ To revert a cached table to a normal table, use `ALTER TABLE t NOCACHE`:
 {{< copyable "sql" >}}
 
 ```sql
-ALTER TABLE users NOCACHE
+ALTER TABLE users NOCACHE;
 ```
 
 ```sql
@@ -240,9 +238,9 @@ Cached tables **CANNOT** be used in the following scenarios:
 - Setting the system variable `tidb_snapshot` to read historical data.
 - During modification, the cached data becomes invalid until the data is reloaded.
 
-## Compatibility with TiDB ecosystem tools
+## Compatibility with TiDB migration tools
 
-The cached table is a TiDB extension to MySQL syntax. Only TiDB can recognize the `ALTER TABLE ... CACHE` statement. TiDB ecosystem tools **DO NOT** support cached tables, including Backup & Restore (BR), TiCDC, and Dumpling. These tools treat cached tables as normal tables.
+The cached table is a TiDB extension to MySQL syntax. Only TiDB can recognize the `ALTER TABLE ... CACHE` statement. TiDB migration tools **DO NOT** support cached tables, including Backup & Restore (BR), TiCDC, and Dumpling. These tools treat cached tables as normal tables.
 
 That is to say, when a cached table is backed up and restored, it becomes a normal table. If the downstream cluster is a different TiDB cluster and you want to continue using the cached table feature, you can manually enable cached tables on the downstream cluster by executing `ALTER TABLE ... CACHE` on the downstream table.
 

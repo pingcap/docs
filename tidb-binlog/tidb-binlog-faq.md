@@ -1,10 +1,10 @@
 ---
-title: TiDB Binlog FAQ
+title: TiDB Binlog FAQs
 summary: Learn about the frequently asked questions (FAQs) and answers about TiDB Binlog.
 aliases: ['/docs/dev/tidb-binlog/tidb-binlog-faq/','/docs/dev/reference/tidb-binlog/faq/','/docs/dev/reference/tools/tidb-binlog/faq/']
 ---
 
-# TiDB Binlog FAQ
+# TiDB Binlog FAQs
 
 This document collects the frequently asked questions (FAQs) about TiDB Binlog.
 
@@ -36,7 +36,7 @@ To replicate data to the downstream MySQL or TiDB cluster, Drainer must have the
 
 1. Check whether Pump's GC works well:
 
-    - Check whether the **gc_tso** time in Pump’s monitoring panel is identical with that of the configuration file.
+    - Check whether the **gc_tso** time in Pump's monitoring panel is identical with that of the configuration file.
 
 2. If GC works well, perform the following steps to reduce the amount of space required for a single Pump:
 
