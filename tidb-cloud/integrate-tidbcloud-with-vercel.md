@@ -7,9 +7,11 @@ summary: Learn how to connect your TiDB Cloud clusters to Vercel projects.
 
 [Vercel](https://vercel.com/) is the platform for frontend developers, providing the speed and reliability innovators need to create at the moment of inspiration.
 
+Using TiDB Cloud with Vercel enables you to build new frontend applications faster with a MySQL-compatible relational model and grow your app with confidence with a platform built for resilience, scale, and the highest levels of data privacy and security.
+
 This guide describes how to connect your TiDB Cloud clusters to Vercel projects using one of the following methods:
 
-* [Connect via the TiDB Cloud Vercel Integration](#connect-via-the-tidb-cloud-vercel-integration)
+* [Connect via the TiDB Cloud Vercel integration](#connect-via-the-tidb-cloud-vercel-integration)
 * [Connect via manually configuring environment variables](#connect-via-manually-setting-environment-variables)
 
 ## Prerequisites
@@ -43,7 +45,7 @@ To connect via the TiDB Cloud Vercel integration, go to the [TiDB Cloud integrat
 
 The detailed steps are as follows:
 
-1. Click **Add Integration** in the upper-right area of the [TiDB Cloud Vercel Integration](https://vercel.com/integrations/tidb-cloud) page. The **Add TiDB Cloud** dialog is displayed.
+1. Click **Add Integration** in the upper-right area of the [TiDB Cloud Vercel integration](https://vercel.com/integrations/tidb-cloud) page. The **Add TiDB Cloud** dialog is displayed.
 2. Select the scope of your integration in the drop-down list and click **CONTINUE**.
 3. Select the Vercel Projects to which the integration will be added and click **CONTINUE**.
 4. Confirm the required permissions for integration and click **ADD INTEGRATION**. Then you are directed to an integration page of the TiDB Cloud console.
@@ -102,7 +104,7 @@ In Vercel, you can declare the variables as follows. You can customize the name 
 
 ## Configure connections
 
-After you have installed TiDB Cloud Vercel Integration, you can add or remove connections inside the integration.
+If you have installed [TiDB Cloud Vercel integration](https://vercel.com/integrations/tidb-cloud), you can add or remove connections inside the integration.
 
 1. In your Vercel dashboard, click **Integrations**.
 2. Click **Manage** in the TiDB Cloud entry.
