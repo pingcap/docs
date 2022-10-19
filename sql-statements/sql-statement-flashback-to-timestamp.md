@@ -10,9 +10,9 @@ The `FLASHBACK [CLUSTER | DATABASE | TABLE] TO TIMESTAMP` syntax is introduced s
 ## Syntax
 
 ```sql
-FLASHBACK CLUSTER TO TIMESATMP '2022-09-21 16:02:50';
-FLASHBACK DATABASE db1, db2 TO TIMESATMP '2022-09-21 16:02:50';
-FLASHBACK TABLE tbl1, tbl2 TO TIMESATMP '2022-09-21 16:02:50';
+FLASHBACK CLUSTER TO TIMESTAMP '2022-09-21 16:02:50';
+FLASHBACK DATABASE db1, db2 TO TIMESTAMP '2022-09-21 16:02:50';
+FLASHBACK TABLE tbl1, tbl2 TO TIMESTAMP '2022-09-21 16:02:50';
 ```
 
 ### Synopsis
@@ -24,7 +24,7 @@ FlashbackToTimestampStmt ::=
 
 ## Notes
 
-* The time specified in the `FLASHBACK` statement must within the Garbage Collection (GC) lifetime. The system variable [`tidb_gc_life_time`](/system-variables.md#tidb_gc_life_time-new-in-v50) (default: `10m0s`) defines the retention time of earlier versions of rows. The current `safePoint` of where garbage collection has been performed up to can be obtained with the following query:
+* The time specified in the `FLASHBACK` statement must be within the Garbage Collection (GC) lifetime. The system variable [`tidb_gc_life_time`](/system-variables.md#tidb_gc_life_time-new-in-v50) (default: `10m0s`) defines the retention time of earlier versions of rows. The current `safePoint` of where garbage collection has been performed up to can be obtained with the following query:
 
     ```sql
     SELECT * FROM mysql.tidb WHERE variable_name = 'tikv_gc_safe_point';
