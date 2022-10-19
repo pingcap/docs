@@ -1,9 +1,9 @@
 ---
-title: Transport Layer Security (TLS) in TiDB Serverless
+title: Connect Securely to Serverless Clusters
 summary: Introduce TLS connection in TiDB Serverless.
 ---
 
-# Transport Layer Security (TLS) in TiDB Serverless
+# Connect Securely to Serverless Clusters
 
 This document introduces the core information about TLS in TiDB Serverless.
 

@@ -421,7 +421,7 @@
   - [Dumpling](/dumpling-overview.md)
   - [Table Filter](/table-filter.md)
   - [Troubleshoot Inconsistency Between Data and Indexes](/troubleshoot-data-inconsistency-errors.md)
-  - [Transport Layer Security (TLS) in TiDB Serverless](/tidb-cloud/transport-layer-security-in-tidb-serverless.md)
+  - [Transport Layer Security (TLS) in TiDB Serverless](/tidb-cloud/connect-securely-to-serverless-clusters.md)
 - [FAQs](/tidb-cloud/tidb-cloud-faq.md)
 - Release Notes
   - [2022](/tidb-cloud/release-notes-2022.md)
