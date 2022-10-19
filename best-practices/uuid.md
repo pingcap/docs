@@ -27,7 +27,8 @@ You can also explicitly set the [`CLUSTERED` option](/clustered-indexes.md) for 
 
 To demonstrate the effect of the `swap_flag`, here are two tables with an identical structure. The difference is that the data inserted into `uuid_demo_1` uses `UUID_TO_BIN(?, 0)` and `uuid_demo_2` uses `UUID_TO_BIN(?, 1)`.
 
-In the screenshot of the [Key Visualizer](/dashboard/dashboard-key-visualizer.md) below you can see that writes are concentrated in a single region of the `uuid_demo_2` table that has the order of the fields swapped in the binary format.
+In the screenshot of the [Key Visualizer](/dashboard/dashboard-key-visualizer.md) below,
+ you can see that writes are concentrated in a single region of the `uuid_demo_2` table that has the order of the fields swapped in the binary format.
 
 ![Key Visualizer](/media/best-practices/uuid_keyviz.png)
 
