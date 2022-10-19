@@ -17,7 +17,7 @@ When used as a primary key, instead of an `AUTO_INCREMENT` integer value, a univ
 
 ### Store as binary
 
-The textual UUID format looks like this: `ab06f63e-8fe7-11ec-a514-5405db7aad56`, this is a string of 36 characters. By using `UUID_TO_BIN()` the textual format can be converted into a binary format of 16 bytes. This allows you to store this in `BINARY(16)` column. When retrieving you can use the `BIN_TO_UUID()` function to get back to the textual format.
+The textual UUID format looks like this: `ab06f63e-8fe7-11ec-a514-5405db7aad56`, which is a string of 36 characters. By using `UUID_TO_BIN()`, the textual format can be converted into a binary format of 16 bytes. This allows you to store the text in a `BINARY(16)` column. When retrieving the UUID, you can use the `BIN_TO_UUID()` function to get back to the textual format.
 
 ### UUID format binary order and a clustered PK
 
