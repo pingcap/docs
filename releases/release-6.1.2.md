@@ -24,8 +24,6 @@ TiDB version: 6.1.2
 
     <!--transaction **owner: @cfzjywxk**-->
 
-    - Reduce the risk of data race of SelectLock under parallel executors [#37141](https://github.com/pingcap/tidb/issues/37141)
-
     <!--planner **owner: @fixdb**-->
 
 + TiKV **owner: @ethercflow**
@@ -69,6 +67,8 @@ TiDB version: 6.1.2
 
     <!--transaction **owner: @cfzjywxk**-->
 
+    - Fix the issue that the Region cache is not cleaned up in time when the Region is merged [#37141](https://github.com/pingcap/tidb/issues/37141)
+    - Fix the issue that the KV client sends unnecessary ping messages [#36861](https://github.com/pingcap/tidb/issues/36861)
     - (dup) Fix the issue that the `EXPLAIN ANALYZE` statement with DML executors might return result before the transaction commit finishes [#37373](https://github.com/pingcap/tidb/issues/37373)
 
     <!--planner **owner: @fixdb**-->
