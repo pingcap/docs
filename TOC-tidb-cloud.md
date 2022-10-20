@@ -180,7 +180,7 @@
   - [Datadog](/tidb-cloud/monitor-datadog-integration.md)
   - [Prometheus and Grafana](/tidb-cloud/monitor-prometheus-and-grafana-integration.md)
   - Terraform
-    - [TiDB Cloud Terraform Provider Overview](/tidb-cloud/terraform-tidbcloud-provider-overview.md)
+    - [Terraform Integration Overview](/tidb-cloud/terraform-tidbcloud-provider-overview.md)
     - [Get TiDB Cloud Terraform Provider](/tidb-cloud/terraform-get-tidbcloud-provider.md)
     - [Use Cluster Resource](/tidb-cloud/terraform-use-cluster-resource.md)
     - [Use Backup Resource](/tidb-cloud/terraform-use-backup-resource.md)

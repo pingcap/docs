@@ -1,9 +1,9 @@
 ---
-title: Integrate TiDB Cloud with Terraform
+title: Terraform Integration Overview
 summary: Create, manage, and update your TiDB Cloud resources through Terraform.
 ---
 
-# Integrate TiDB Cloud with Terraform
+# Terraform Integration Overview
 
 [Terraform](https://www.terraform.io/) is an infrastructure as code tool that lets you define both cloud and on-premises resources in human-readable configuration files that you can version, reuse, and share.
 
