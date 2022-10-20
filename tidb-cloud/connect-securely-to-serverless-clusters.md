@@ -3,7 +3,7 @@ title: Connect Securely to Serverless Tier Clusters
 summary: Introduce TLS connection in TiDB Serverless.
 ---
 
-# Connect Securely to Serverless Clusters
+# Connect Securely to Serverless Tier Clusters
 
 This document introduces the core information about TLS in TiDB Serverless.
 
