@@ -175,6 +175,16 @@
 - API
   - [API Overview](/tidb-cloud/api-overview.md)
   - [API Reference](https://docs.pingcap.com/tidbcloud/api/v1beta)
+- Integrations
+  - [Datadog](/tidb-cloud/monitor-datadog-integration.md)
+  - [Prometheus and Grafana](/tidb-cloud/monitor-prometheus-and-grafana-integration.md)
+  - Terraform
+    - [TiDB Cloud Terraform Provider Overview](/tidb-cloud/terraform-tidbcloud-provider-overview.md)
+    - [Get TiDB Cloud Terraform Provider](/tidb-cloud/terraform-get-tidbcloud-provider.md)
+    - [Use Cluster Resource](/tidb-cloud/terraform-use-cluster-resource.md)
+    - [Use Backup Resource](/tidb-cloud/terraform-use-backup-resource.md)
+    - [Use Restore Resource](/tidb-cloud/terraform-use-restore-resource.md)
+  - [Vercel](/tidb-cloud/integrate-tidbcloud-with-vercel.md)
 - Reference
   - TiDB Cluster Architecture
     - [Overview](/tidb-architecture.md)
@@ -412,16 +422,6 @@
   - [Dumpling](/dumpling-overview.md)
   - [Table Filter](/table-filter.md)
   - [Troubleshoot Inconsistency Between Data and Indexes](/troubleshoot-data-inconsistency-errors.md)
-- Integrations
-  - [Datadog](/tidb-cloud/monitor-datadog-integration.md)
-  - [Prometheus and Grafana](/tidb-cloud/monitor-prometheus-and-grafana-integration.md)
-  - Terraform
-    - [TiDB Cloud Terraform Provider Overview](/tidb-cloud/terraform-tidbcloud-provider-overview.md)
-    - [Get TiDB Cloud Terraform Provider](/tidb-cloud/terraform-get-tidbcloud-provider.md)
-    - [Use Cluster Resource](/tidb-cloud/terraform-use-cluster-resource.md)
-    - [Use Backup Resource](/tidb-cloud/terraform-use-backup-resource.md)
-    - [Use Restore Resource](/tidb-cloud/terraform-use-restore-resource.md)
-  - [Vercel](/tidb-cloud/integrate-tidbcloud-with-vercel.md)
 - [FAQs](/tidb-cloud/tidb-cloud-faq.md)
 - Release Notes
   - [2022](/tidb-cloud/release-notes-2022.md)

@@ -117,16 +117,6 @@ hide_commit: true
 
 </LearningPath>
 
-<LearningPath label="Reference" icon="cloud-dev">
-
-[System Variables](https://docs.pingcap.com/tidbcloud/system-variables)
-
-[Release Notes](https://docs.pingcap.com/tidbcloud/release-notes-2022)
-
-[SQL Reference](https://docs.pingcap.com/tidbcloud/basic-sql-operations)
-
-</LearningPath>
-
 <LearningPath label="Integrations" icon="cloud4">
 
 [Datadog](https://docs.pingcap.com/tidbcloud/monitor-datadog-integration)
@@ -136,6 +126,16 @@ hide_commit: true
 [Terraform](https://docs.pingcap.com/tidbcloud/terraform-tidbcloud-provider-overview)
 
 [Vercel](https://docs.pingcap.com/tidbcloud/integrate-tidbcloud-with-vercel)
+
+</LearningPath>
+
+<LearningPath label="Reference" icon="cloud-dev">
+
+[System Variables](https://docs.pingcap.com/tidbcloud/system-variables)
+
+[Release Notes](https://docs.pingcap.com/tidbcloud/release-notes-2022)
+
+[SQL Reference](https://docs.pingcap.com/tidbcloud/basic-sql-operations)
 
 </LearningPath>
 
