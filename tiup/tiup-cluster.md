@@ -750,4 +750,4 @@ tiup cluster meta restore ${cluster_name} ${backup_file}
 
 > **Note:**
 >
-> The restore operation overwrites the current meta files. Therefore, perform a restore operation only when the meta files are lost.
+> The restore operation overwrites the current meta files. Therefore, it is recommended to restore the meta files only when they are lost.
