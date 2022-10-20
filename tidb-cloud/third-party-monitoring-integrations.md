@@ -1,5 +1,5 @@
 ---
-title: Third-party Monitoring Integrations
+title: Third-Party Monitoring Integrations
 summary: Learn how to use third-party monitoring integrations.
 ---
 
@@ -7,11 +7,10 @@ summary: Learn how to use third-party monitoring integrations.
 
 You can integrate TiDB Cloud with third-party monitoring services to receive TiDB Cloud alerts and view the performance metrics of your TiDB cluster using the monitoring services.
 
-
 > **Note:**
 >
 > For [Developer Tier clusters](/tidb-cloud/select-cluster-tier.md#developer-tier), third-party monitoring integrations are not supported.
- 
+
 ## Required access
 
 To edit third-party integration settings, you must have the `Owner` access to your organization or `Member` access to the target project.
@@ -31,6 +30,6 @@ For the detailed integration steps and a list of metrics that Datadog tracks, re
 
 ### Prometheus and Grafana integration
 
-With the Prometheus and Grafana integration, you can get a scrape_config file for Prometheus from TiDB Cloud and use the content from the file to configure Prometheus. You can view these metrics in your Grafana dashboards. 
+With the Prometheus and Grafana integration, you can get a scrape_config file for Prometheus from TiDB Cloud and use the content from the file to configure Prometheus. You can view these metrics in your Grafana dashboards.
 
 For the detailed integration steps and a list of metrics that Prometheus tracks, see [Integrate TiDB Cloud with Prometheus and Grafana](/tidb-cloud/monitor-prometheus-and-grafana-integration.md).
