@@ -302,7 +302,7 @@ dbt lets you generate visual documents that display the overall structure of the
 |        ✅         |       ✅        |      ✅      |            Seeds            |
 |        ✅         |       ✅        |      ✅      |           Sources           |
 |        ✅         |       ✅        |      ✅      |      Custom data tests      |
-|        ✅         |       ✅        |      ✅      |        Docs generate        |
+|        ✅         |       ✅        |      ✅      |        Docs generation       |
 |        ❌         |       ❌        |      ✅      |          Snapshots          |
 |        ✅         |       ✅        |      ✅      |      Connection retry       |
 |        ✅         |       ✅        |      ✅      |            Grant            |
