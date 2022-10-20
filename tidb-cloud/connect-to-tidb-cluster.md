@@ -131,7 +131,7 @@ To connect to your TiDB cluster using SQL shell, perform the following steps:
 >
 > SQL shell is only available for Dedicated Tier clusters, not for Developer Tier clusters.
 >
-> If you are a Developer Tier user, you can edit and run your SQL statements in [**Playground**](/tidb-cloud/tidb-cloud-glossary.md#playground). To access it, navigate to the **Clusters** page, locate the area of your target Developer Tier cluster, click **Playground**, and select the **Edit and Run Your SQL** tab.
+> If you are a Developer Tier user, you can edit and run your SQL statements in [**Playground**](/tidb-cloud/tidb-cloud-glossary.md#playground). To access **Playground**, navigate to the **Clusters** page, locate the area of your target Developer Tier cluster, click **Playground**, and select the **Edit and Run Your SQL** tab.
 
 1. Navigate to the **Clusters** page.
 
