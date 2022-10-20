@@ -29,7 +29,7 @@ TiDB Serverless does not allow you to manually use other unsupported TLS version
 
 ## What certificates do I need？
 
-TiDB Serverless uses certificates from [Let's Encrypt](https://letsencrypt.org/) as a Certificate Authority (CA) for TLS connection between clients and TiDB Serverless gateway. Usually, Let's Encrypt's root certificate is present in your system's root CA stores. You can easily connect securely to TiDB Serverless without specifying the path of CA roots, such as JAVA, Go, etc.
+TiDB Serverless uses certificates from [Let's Encrypt](https://letsencrypt.org/) as a Certificate Authority (CA) for TLS connection between clients and TiDB Serverless gateway. Usually, Let's Encrypt's root certificate is present in your system's root CA stores. If the programming language you use can read the system's root CA stores, such as Java and Go, you can easily connect securely to TiDB Serverless without specifying the path of CA roots.
 
 However, some drivers and ORMs do not use the system root CA stores. So you should make sure to add Let's Encrypt's root Certificate Authority ([ISRG Root X1](https://letsencrypt.org/certs/isrgrootx1.pem.txt)) to your drivers' or ORMs' certificate store.
 
