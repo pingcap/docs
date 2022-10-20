@@ -12,7 +12,7 @@ TiDB version: 6.1.2
 
 ## Improvements
 
-+ TiDB
++ TiDB **TW: @TomShawn**
 
     <!--sql-infra **owner: @wjhuang2016**-->
 
@@ -24,12 +24,12 @@ TiDB version: 6.1.2
 
     <!--planner **owner: @fixdb**-->
 
-+ TiKV **owner: @ethercflow**
++ TiKV **owner: @ethercflow TW: @Oreoxmt**
 
     - (dup) Support configuring the `unreachable_backoff` item to avoid Raftstore broadcasting too many messages after one peer becomes unreachable [#13054](https://github.com/tikv/tikv/issues/13054)
     - (dup) Support configuring the RocksDB write stall settings to a value smaller than the flow control threshold [#13467](https://github.com/tikv/tikv/issues/13467)
 
-+ PD **owner: @nolouch**
++ PD **owner: @nolouch TW: @Oreoxmt**
 
 + TiFlash
 
@@ -39,7 +39,7 @@ TiDB version: 6.1.2
 
 + Tools
 
-    + TiDB Lightning **owner: @niubell**
+    + TiDB Lightning **owner: @niubell TW: @shichun-0415**
 
         - Add retryable driver error on checksum [#37690](https://github.com/pingcap/tidb/issues/37690)
 
@@ -53,7 +53,7 @@ TiDB version: 6.1.2
 
 ## Bug fixes
 
-+ TiDB
++ TiDB **TW: @TomShawn**
 
     <!--sql-infra **owner: @wjhuang2016**-->
 
@@ -78,21 +78,21 @@ TiDB version: 6.1.2
     - (dup) Fix the issue that `Can't find column` is reported if an `UPDATE` statement contains common table expressions (CTE) [#35758](https://github.com/pingcap/tidb/issues/35758)
     - (dup) Fix the issue that the `EXECUTE` might throw an unexpected error in specific scenarios [#37187](https://github.com/pingcap/tidb/issues/37187)
 
-+ TiKV **owner: @ethercflow**
++ TiKV **owner: @ethercflow TW: @Oreoxmt**
 
     - Fix the issue that snapshot might not contain the complete data caused by introduced batch snapshot across regions [#13553](https://github.com/tikv/tikv/issues/13553)
     - (dup) Fix the issue of QPS drop when flow control is enabled and `level0_slowdown_trigger` is set explicitly [#11424](https://github.com/tikv/tikv/issues/11424)
     - (dup) Fix the issue that causes permission denied error when TiKV gets an error from the web identity provider and fails back to the default provider [#13122](https://github.com/tikv/tikv/issues/13122)
     - (dup) Fix the issue that the TiKV service is unavailable for several minutes when a TiKV instance is in an isolated network environment [#12966](https://github.com/tikv/tikv/issues/12966)
 
-+ PD **owner: @nolouch**
++ PD **owner: @nolouch TW: @Oreoxmt**
 
     - Fix the issue that the statistics of the region tree might be not accurate [#5318](https://github.com/tikv/pd/issues/5318)
     - (dup) Fix the issue that the TiFlash learner replica might not be created [#5401](https://github.com/tikv/pd/issues/5401)
     - (dup) Fix the issue that PD cannot correctly handle dashboard proxy requests [#5321](https://github.com/tikv/pd/issues/5321)
     - (dup) Fix the issue that unhealthy Region might cause PD panic [#5491](https://github.com/tikv/pd/issues/5491)
 
-+ TiFlash
++ TiFlash **TW: @Oreoxmt**
 
     <!--compute **owner: @zanmato1984**-->
 
@@ -105,11 +105,11 @@ TiDB version: 6.1.2
 
 + Tools
 
-    + TiDB Lightning **owner: @niubell**
+    + TiDB Lightning **owner: @niubell TW: @shichun-0415**
 
         - Fix the issue of panic on invalid mertic countter operation [#37338](https://github.com/pingcap/tidb/issues/37338)
 
-    + TiDB Data Migration (DM) **owner: @niubell**
+    + TiDB Data Migration (DM) **owner: @niubell TW: @shichun-0415**
 
         - DM will try to persist upstream table structure from dump files when firstly switch to sync unit [#5010](https://github.com/pingcap/tiflow/issues/5010), [#7159](https://github.com/pingcap/tiflow/issues/7159)
         - DM precheck no longer reports lacking privileges of INFORMATION_SCHEMA [#7317](https://github.com/pingcap/tiflow/issues/7317)
@@ -117,7 +117,7 @@ TiDB version: 6.1.2
         - (dup) Fix the issue that DM reports the `Specified key was too long` error [#5315](https://github.com/pingcap/tiflow/issues/5315)
         - (dup) Fix the issue that latin1 data might be corrupted during replication [#7028](https://github.com/pingcap/tiflow/issues/7028)
 
-    + TiCDC **owner: @nongfushanquan**
+    + TiCDC **owner: @nongfushanquan TW: @hfxsd**
 
         - Fix a bug that may cause cdc server panic if it received a http request before cdc server fully started [#6838](https://github.com/pingcap/tiflow/issues/6838)
         - Change log level from info to debug for some logs to avoid too many logs [#7235](https://github.com/pingcap/tiflow/issues/7235)
@@ -126,7 +126,7 @@ TiDB version: 6.1.2
         - Fix a bug which can lead inconsistency Change if non-reentrant DDLs can be executed twice [#6927](https://github.com/pingcap/tiflow/issues/6927)
         - Enhance the region worker's performance by handling the resolved ts in the batch mode [#7078](https://github.com/pingcap/tiflow/issues/7078)
 
-    + Backup & Restore (BR) **owner: @3pointer**
+    + Backup & Restore (BR) **owner: @3pointer TW: @shichun-0415**
 
         - (dup) Fix the issue that the regions are not balanced because the concurrency is set too large during the restoration [#37549](https://github.com/pingcap/tidb/issues/37549)
         - (dup) Fix the issue that might lead to backup and restoration failure if special characters exist in the authorization key of external storage [#37469](https://github.com/pingcap/tidb/issues/37469)
