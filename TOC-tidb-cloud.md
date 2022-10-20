@@ -116,7 +116,7 @@
   - [Overview](/tidb-cloud/monitor-tidb-cluster.md)
   - [Built-in Monitoring](/tidb-cloud/built-in-monitoring.md)
   - [Built-in Alerting](/tidb-cloud/monitor-built-in-alerting.md)
-  - [Third-Party Integrations](/tidb-cloud/third-party-integrations.md)
+  - [Third-Party Integrations](/tidb-cloud/third-party-monitoring-integrations.md)
 - Tune Performance
   - [Overview](/tidb-cloud/tidb-cloud-tune-performance-overview.md)
   - Analyze Performance
