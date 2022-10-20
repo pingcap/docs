@@ -417,6 +417,7 @@
   - [Troubleshoot Inconsistency Between Data and Indexes](/troubleshoot-data-inconsistency-errors.md)
 - Integrations
   - [Airbyte](/tidb-cloud/airbyte.md)
+  - [Vercel](/tidb-cloud/integrate-tidbcloud-with-vercel.md)
 - [FAQs](/tidb-cloud/tidb-cloud-faq.md)
 - Release Notes
   - [2022](/tidb-cloud/release-notes-2022.md)
