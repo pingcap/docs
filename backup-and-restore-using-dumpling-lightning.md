@@ -24,7 +24,7 @@ If you need to back up a small amount of data (for example, less than 50 GB) and
     ```
 
 - [Grant the source database privileges required for Dumpling](/dumpling-overview.md#export-data-from-tidbmysql)
-- [Grant the target database privileges required for TiDB Lightning](/tidb-lightning/tidb-lightning-requirements.md#privileges-of-the-target-database)
+- [Grant the target database privileges required for TiDB Lightning](/tidb-lightning/tidb-lightning-requirements.md#downstream-privilege-requirements)
 
 ## Resource requirements
 
@@ -38,7 +38,7 @@ It is recommended to use Amazon S3, Google Cloud Storage (GCS), or Azure Blob St
 
 If you need to save data of one backup task to the local disk, note the following limitations:
 
-- Dumpling requires a disk space that can store the whole data source (or to store all upstream tables to be exported). To calculate the required space, see [Downstream storage space requirements](/tidb-lightning/tidb-lightning-requirements.md#storage-space-of-the-target-database).
+- Dumpling requires a disk space that can store the whole data source (or to store all upstream tables to be exported). To calculate the required space, see [Downstream storage space requirements](/tidb-lightning/tidb-lightning-requirements.md#downstream-storage-space-requirements).
 - During the import, TiDB Lightning needs temporary space to store the sorted key-value pairs. The disk space should be enough to hold the largest single table from the data source.
 
 **Note**: It is difficult to calculate the exact data volume exported by Dumpling from MySQL, but you can estimate the data volume by using the following SQL statement to summarize the `data-length` field in the `information_schema.tables` table:
