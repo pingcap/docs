@@ -5,13 +5,13 @@ summary: An overview of the usage of FLASHBACK [CLUSTER | DATABASE | TABLE] TO T
 
 # FLASHBACK [CLUSTER | DATABASE | TABLE] TO TIMESTAMP
 
-The `FLASHBACK [CLUSTER | DATABASE | TABLE] TO TIMESTAMP` syntax is introduced since TiDB v6.4.0. You can use this statement to restore the data of the cluster, database, or table to a specific point in time.
+The `FLASHBACK [CLUSTER | DATABASE | TABLE] TO TIMESTAMP` syntax is introduced since TiDB v6.4.0. You can use this statement to restore the data of the cluster, databases, or tables to a specific point in time.
 
 ## Syntax
 
 ```sql
 FLASHBACK CLUSTER TO TIMESTAMP '2022-09-21 16:02:50';
-FLASHBACK DATABASE db1, db2 TO TIMESTAMP '2022-09-21 16:02:50';
+FLASHBACK DATABASE db TO TIMESTAMP '2022-09-21 16:02:50';
 FLASHBACK TABLE tbl1, tbl2 TO TIMESTAMP '2022-09-21 16:02:50';
 ```
 
@@ -19,7 +19,7 @@ FLASHBACK TABLE tbl1, tbl2 TO TIMESTAMP '2022-09-21 16:02:50';
 
 ```ebnf+diagram
 FlashbackToTimestampStmt ::=
-    "FLASHBACK" ("CLUSTER" | "DATABASE" DBNameList | "TABLE" TableNameList) "TO" "TIMESTAMP" stringLit
+    "FLASHBACK" ("CLUSTER" | "DATABASE" DBName | "TABLE" TableNameList) "TO" "TIMESTAMP" stringLit
 ```
 
 ## Notes
@@ -36,7 +36,7 @@ FlashbackToTimestampStmt ::=
     * The `TABLE` privilege is required to execute `FLASHBACK TABLE`.
 
 * From the time specified in the `FLASHBACK` statement to the time when the `FLASHBACK` is executed, there cannot be a DDL statement that changes the related table structure. If it exists, TiDB will reject the DDL statement.
-* Before executing `FLASHBACK [CLUSTER | DATABASE | TABLE] TO TIMESTAMP`, TiDB actively disconnects all related tables and prohibits read and write operations on these tables until the `FLASHBACK` statement is completed.
+* Before executing `FLASHBACK [CLUSTER | DATABASE | TABLE] TO TIMESTAMP`, TiDB actively disconnects all related connections and prohibits read and write operations on these tables until the `FLASHBACK` statement is completed.
 * The `FLASHBACK [CLUSTER | DATABASE | TABLE] TO TIMESTAMP` statement cannot be canceled. Once the statement is executed, TiDB will keep retrying until it succeeds.
 * Through the log, you can obtain the execution process of `FLASHBACK`. The following is an example:
 
