@@ -102,7 +102,7 @@ This document only describes parameters that are not included in command-line pa
 
 + The interval at which PD updates the physical time of TSO.
 + In a default TSO physical time update interval, PD provides at most 262144 TSOs. To get more TSOs, you can reduce this configuration item. The minimum value is `1ms`.
-+ Decreasing this configuration item might increase the CPU usage of PD. According to the test, `1ms` consumes about 0.1 CPU core more than `50ms`.
++ Decreasing this configuration item might increase the CPU usage of PD. According to the test, compared with the interval of `50ms`, the CPU usage of PD will increase by about 10% when the interval is `1ms`.
 + Default value: `50ms`
 + Minimum value: `1ms`
 

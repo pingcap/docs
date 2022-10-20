@@ -1706,7 +1706,7 @@ Configuration items related to TiCDC.
 
 > **Warning:**
 >
-> This configuration item is deprecated in v6.4.0 and will be removed in a future release.
+> This configuration item is deprecated since v6.4.0.
 
 + The threshold at which TiKV checks whether the Resolved TS of RawKV is abnormal.
 + If the Resolved TS latency of a Region exceeds this threshold, the anomaly detection process is triggered. At this time, the Region whose Resolved TS latency exceeds 3 x [interquartile range](https://en.wikipedia.org/wiki/Interquartile_range) is considered as slow in lock resolution, and triggers TiKV-CDC to re-subscribe the data changes of the Region, which resets the lock resource status.
@@ -1836,15 +1836,15 @@ Suppose that your machine on which TiKV is deployed has limited resources, for e
 
 Configuration items related to getting the timestamp when TiKV API V2 is enabled (`storage.api-version = 2`).
 
-To reduce write latency and avoid frequent access to PD, TiKV periodically fetches, caches a batch of timestamps in the local, and tolerates short-term TSO service failure.
+To reduce write latency, TiKV periodically fetches and caches a batch of timestamps locally. Cached timestamps help avoid frequent access to PD and allow short-term TSO service failure.
 
 ### `alloc-ahead-buffer` <span class="version-mark">New in v6.4.0</span>
 
 + The pre-allocated TSO cache size (in duration).
-+ Indicates that TiKV pre-allocates the TSO cache for the duration specified by this configuration item. TiKV estimates and requests the TSO usage of `alloc-ahead-buffer` based on the usage of the previous period and caches locally.
++ Indicates that TiKV pre-allocates the TSO cache based on the duration specified by this configuration item. TiKV estimates the TSO usage based on the previous period, and requests and caches TSOs satisfying `alloc-ahead-buffer` locally.
 + This configuration item is often used to increase the tolerance of PD failures when TiKV API V2 is enabled (`storage.api-version = 2`).
-+ Increasing this configuration item might increase the TSO consumption and increase the memory overhead of TiKV. To obtain more TSO supply, it is recommended to decrease the [`tso-update-physical-interval`](/pd-configuration-file.md#tso-update-physical-interval) configuration item of PD.
-+ According to the test, when the PD leader fails and switches to other nodes, the write request will experience a short-term increase in latency and a decrease in QPS (about 15%) in the default configuration.
++ Increasing the value of this configuration item might result in more TSO consumption and memory overhead of TiKV. To obtain enough TSOs, it is recommended to decrease the [`tso-update-physical-interval`](/pd-configuration-file.md#tso-update-physical-interval) configuration item of PD.
++ According to the test, when `alloc-ahead-buffer` is in its default value and the PD leader fails and switches to another node, the write request will experience a short-term increase in latency and a decrease in QPS (about 15%).
 + To avoid the impact on the business, you can set the following configuration items:
     + `causal-ts.alloc-ahead-buffer = "6s"`
     + `causal-ts.renew-batch-max-size = 65536`
@@ -1855,18 +1855,18 @@ To reduce write latency and avoid frequent access to PD, TiKV periodically fetch
 ### `renew-interval`
 
 + The interval at which the locally cached timestamps are updated.
-+ At an interval of `renew-interval`, TiKV starts a batch of timestamp refresh and adjusts the number of cached timestamps according to the timestamp consumption in the previous period and the [`alloc-ahead-buffer`](#alloc-ahead-buffer-new-in-v640). If you set this parameter to too large a value, the latest TiKV workload changes are not reflected in time. If you set this parameter to too small a value, the load of PD increases. If the write traffic is strongly fluctuating, if timestamps are frequently exhausted, and if write latency increases, you can set this parameter to a smaller value. At the same time, you should also consider the load of PD.
++ At an interval of `renew-interval`, TiKV starts a batch of timestamp refresh and adjusts the number of cached timestamps according to the timestamp consumption in the previous period and the setting of [`alloc-ahead-buffer`](#alloc-ahead-buffer-new-in-v640). If you set this parameter to too large a value, the latest TiKV workload changes are not reflected in time. If you set this parameter to too small a value, the load of PD increases. If the write traffic is strongly fluctuating, if timestamps are frequently exhausted, and if write latency increases, you can set this parameter to a smaller value. At the same time, you should also consider the load of PD.
 + Default value: `"100ms"`
 
 ### `renew-batch-min-size`
 
-+ The minimum number of a timestamp request.
-+ TiKV adjusts the number of cached timestamps according to the timestamp consumption in the previous period. If the requirement of TSO is low, TiKV reduces the request number of each TSO until it reaches `renew-batch-min-size`. If large bursty write traffic often occurs in your application, you can set this parameter to a larger value as appropriate. Note that this parameter is the cache size for a single tikv-server. If you set the parameter to too large a value and the cluster contains many tikv-servers, the TSO consumption will be too fast.
++ The minimum number of TSOs in a timestamp request.
++ TiKV adjusts the number of cached timestamps according to the timestamp consumption in the previous period. If only a few TSOs are required, TiKV reduces the TSOs requested until the number reaches `renew-batch-min-size`. If large bursty write traffic often occurs in your application, you can set this parameter to a larger value as appropriate. Note that this parameter is the cache size for a single tikv-server. If you set the parameter to too large a value and the cluster contains many tikv-servers, the TSO consumption will be too fast.
 + In the **TiKV-RAW** \> **Causal timestamp** panel in Grafana, **TSO batch size** is the number of locally cached timestamps that has been dynamically adjusted according to the application workload. You can refer to this metric to adjust `renew-batch-min-size`.
 + Default value: `100`
 
 ### `renew-batch-max-size` <span class="version-mark">New in v6.4.0</span>
 
-+ The maximum number of a timestamp request.
-+ In a default TSO physical time update interval, PD provides at most 262144 TSOs. When exceeding this number, PD does not handle TSO requests. This configuration item is used to avoid the TSO of PD being consumed which might have an impact on other businesses. If you increase the configuration item to improve high availability, you need to decrease the [`tso-update-physical-interval`](/pd-configuration-file.md#tso-update-physical-interval) at the same time to get enough TSO.
++ The maximum number of TSOs in a timestamp request.
++ In a default TSO physical time update interval (`50ms`), PD provides at most 262144 TSOs. When requested TSOs exceed this number, PD provides no more TSOs. This configuration item is used to avoid exhausting TSOs and the reverse impact of TSO exhaustion on other businesses. If you increase the value of this configuration item to improve high availability, you need to decrease the value of [`tso-update-physical-interval`](/pd-configuration-file.md#tso-update-physical-interval) at the same time to get enough TSOs.
 + Default value: `8192`
