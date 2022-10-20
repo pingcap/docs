@@ -347,8 +347,8 @@ This variable is an alias for [`last_insert_id`](#last_insert_id).
 - Type: Integer
 - Default value: `0`
 - Range: `[0, 100000]`
-- The maximum number of connections permitted for a single TiDB instance. It can be used for resources control.
-- Defaultly the value of `0` means no limit. When the value of this variable is larger than `0`, and the number of connections reaches the value, TiDB server would reject new connections from clients.
+- The maximum number of connections permitted for a single TiDB instance. This variable can be used for resources control.
+- The default value of `0` means no limit. When the value of this variable is larger than `0`, and the number of connections reaches the value, TiDB server rejects new connections from clients.
 
 ### max_execution_time
 
@@ -1200,7 +1200,7 @@ MPP is a distributed computing framework provided by the TiFlash engine, which a
 - Persists to cluster: No, only applicable to the current TiDB instance that you are connecting to. 
 - Default value: `ON`
 - Possible values: `OFF`, `ON`
-- This variable controls whether the corresponding TiDB instance can run DDL statements or not.
+- This variable controls whether the corresponding TiDB server can run DDL statements or not.
 
 ### tidb_enable_collect_execution_info
 
@@ -1587,9 +1587,9 @@ MPP is a distributed computing framework provided by the TiFlash engine, which a
 - Scope: GLOBAL
 - Persists to cluster: Yes
 - Default value: `ON`
-- Possible values: `OFF`, `ON`
+- Value options: `OFF`, `ON`
 - Controls whether to enable the temporary storage for some operators when a single SQL statement exceeds the memory quota specified by the system variable [`tidb_mem_quota_query`](/system-variables.md#tidb_mem_quota_query).
-- Before v6.3.0 this feature was enabled/disabled by `oom-use-tmp-storage` in configurations. When upgrading to v6.3.0 or newer versions, TiDB cluster will initialize this variable using the value of `oom-use-tmp-storage` automatically. After that, changing the value of `oom-use-tmp-storage` does NOT take effect any more.
+- Before v6.3.0, this feature can be enabled or disabled using the TiDB configuration item `oom-use-tmp-storage`. After upgrading the cluster to v6.3.0 or a later version, the TiDB cluster will initialize this variable using the value of `oom-use-tmp-storage` automatically. After that, changing the value of `oom-use-tmp-storage` does NOT take effect anymore.
 
 ### tidb_enable_stmt_summary <span class="version-mark">New in v3.0.4</span>
 
