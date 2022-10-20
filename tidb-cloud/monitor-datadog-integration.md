@@ -1,5 +1,5 @@
 ---
-title: Integrate TiDB Cloud with Datadog (Third-Party Monitoring Service)
+title: Integrate TiDB Cloud with Datadog
 summary: Learn how to monitor your TiDB cluster with the Datadog integration.
 ---
 
