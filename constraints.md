@@ -270,7 +270,7 @@ To achieve better performance of pessimistic transactions, you can set the [`tid
     ERROR 8147 (23000): transaction aborted because lazy uniqueness check is enabled and an error occurred: [kv:1062]Duplicate entry 'bill' for key 'users.username'
     ```
 
-- When this variable is disabled, the `1062` Duplicate entry error does not necessarily happen in the currently executing SQL statement. Therefore, when a transaction operates on multiple tables that have indexes with the same name, please check the `1062` error message to find which actual index the error is from .
+- When this variable is disabled, the `1062 Duplicate entry` error does not necessarily happen in the currently executing SQL statement. Therefore, when a transaction operates on multiple tables that have indexes with the same name, please check the `1062` error message to find which actual index the error is from .
 
 ## PRIMARY KEY
 
