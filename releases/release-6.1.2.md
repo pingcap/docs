@@ -16,7 +16,7 @@ TiDB version: 6.1.2
 
     <!--sql-infra **owner: @wjhuang2016**-->
 
-    - (dup) Address the conflict between SQL-based data Placement Rules and TiFlash replicas [#37171](https://github.com/pingcap/tidb/issues/37171)
+    - Allow setting Placement Rules and TiFlash replica at the same time in one table [#37171](https://github.com/pingcap/tidb/issues/37171)
 
     <!--execution **owner: @zanmato1984**-->
 
