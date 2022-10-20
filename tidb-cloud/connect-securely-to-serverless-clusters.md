@@ -25,7 +25,7 @@ TiDB Serverless only supports TLSv1.2 and TLSv1.3.
 
 TiDB Serverless uses TLSv1.2 as the default version. If you want another TLS version, you can specify the version in the connection strings. For example, If you use MySQL Client to connect TiDB Serverless, you can set `--tls-version=TLSv1.3` to enforce the TLSv1.3 version.
 
-TiDB Serverless does not allow you to manually use TLSv1.0 or TLSv1.1.
+TiDB Serverless does not allow you to manually use other unsupported TLS versions.
 
 ## What certificates do I need？
 
