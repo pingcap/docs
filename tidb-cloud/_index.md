@@ -129,13 +129,13 @@ hide_commit: true
 
 <LearningPath label="Integrations" icon="cloud4">
 
-[Terraform](https://docs.pingcap.com/tidbcloud/terraform-tidbcloud-provider-overview)
-
-[Vercel](https://docs.pingcap.com/tidbcloud/integrate-tidbcloud-with-vercel)
-
 [Datadog](https://docs.pingcap.com/tidbcloud/monitor-datadog-integration)
 
 [Prometheus and Grafana](https://docs.pingcap.com/tidbcloud/monitor-prometheus-and-grafana-integration)
+
+[Terraform](https://docs.pingcap.com/tidbcloud/terraform-tidbcloud-provider-overview)
+
+[Vercel](https://docs.pingcap.com/tidbcloud/integrate-tidbcloud-with-vercel)
 
 </LearningPath>
 
