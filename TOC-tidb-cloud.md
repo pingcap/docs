@@ -116,9 +116,7 @@
   - [Overview](/tidb-cloud/monitor-tidb-cluster.md)
   - [Built-in Monitoring](/tidb-cloud/built-in-monitoring.md)
   - [Built-in Alerting](/tidb-cloud/monitor-built-in-alerting.md)
-  - Third-Party Monitoring Integrations
-    - [Datadog Integration](/tidb-cloud/monitor-datadog-integration.md)
-    - [Prometheus and Grafana Integration](/tidb-cloud/monitor-prometheus-and-grafana-integration.md)
+  - [Third-Party Monitoring Integrations](/tidb-cloud/third-party-monitoring-integrations.md)
 - Tune Performance
   - [Overview](/tidb-cloud/tidb-cloud-tune-performance-overview.md)
   - Analyze Performance
@@ -178,6 +176,16 @@
 - API
   - [API Overview](/tidb-cloud/api-overview.md)
   - [API Reference](https://docs.pingcap.com/tidbcloud/api/v1beta)
+- Integrations
+  - [Datadog](/tidb-cloud/monitor-datadog-integration.md)
+  - [Prometheus and Grafana](/tidb-cloud/monitor-prometheus-and-grafana-integration.md)
+  - Terraform
+    - [Terraform Integration Overview](/tidb-cloud/terraform-tidbcloud-provider-overview.md)
+    - [Get TiDB Cloud Terraform Provider](/tidb-cloud/terraform-get-tidbcloud-provider.md)
+    - [Use Cluster Resource](/tidb-cloud/terraform-use-cluster-resource.md)
+    - [Use Backup Resource](/tidb-cloud/terraform-use-backup-resource.md)
+    - [Use Restore Resource](/tidb-cloud/terraform-use-restore-resource.md)
+  - [Vercel](/tidb-cloud/integrate-tidbcloud-with-vercel.md)
 - Reference
   - TiDB Cluster Architecture
     - [Overview](/tidb-architecture.md)
@@ -186,13 +194,6 @@
     - [Scheduling](/tidb-scheduling.md)
   - [TiDB Cloud Cluster Limits and Quotas](/tidb-cloud/limitations-and-quotas.md)
   - [TiDB Limitations](/tidb-limitations.md)
-  - Terraform
-    - [TiDB Cloud Terraform Provider Overview](/tidb-cloud/terraform-tidbcloud-provider-overview.md)
-    - [Get TiDB Cloud Terraform Provider](/tidb-cloud/terraform-get-tidbcloud-provider.md)
-    - [Use Cluster Resource](/tidb-cloud/terraform-use-cluster-resource.md)
-    - [Use Backup Resource](/tidb-cloud/terraform-use-backup-resource.md)
-    - [Use Restore Resource](/tidb-cloud/terraform-use-restore-resource.md)
-  - [Vercel](/tidb-cloud/integrate-tidbcloud-with-vercel.md)
   - SQL
     - [Explore SQL with TiDB](/basic-sql-operations.md)
     - SQL Language Structure and Syntax
