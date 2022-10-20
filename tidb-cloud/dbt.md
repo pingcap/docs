@@ -334,6 +334,6 @@ cross-db macros are moved from dbt-utils into dbt-core, so you can use the follo
 - position
 - replace
 - right
-- listagg (not support yet)
+- listagg (not supported yet)
 
 > pay attention that datediff is a little different from dbt-util that it will round down rather than round up.
