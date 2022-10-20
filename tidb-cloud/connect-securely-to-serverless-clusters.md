@@ -5,7 +5,7 @@ summary: Introduce TLS connection in TiDB Serverless.
 
 # Connect Securely to Serverless Tier Clusters
 
-This document introduces the core information about TLS in TiDB Serverless.
+This document introduces the core information about TLS in TiDB Serverless Tier.
 
 ## How do I connect to TiDB Serverless in TLS connection?
 
