@@ -79,13 +79,14 @@ TiDB version: 6.1.2
 
 + TiKV **owner: @ethercflow**
 
+    - Fix the issue that snapshot might not contain the complete data caused by introduced batch snapshot across regions [#13553](https://github.com/tikv/tikv/issues/13553)
     - (dup) Fix the issue of QPS drop when flow control is enabled and `level0_slowdown_trigger` is set explicitly [#11424](https://github.com/tikv/tikv/issues/11424)
     - (dup) Fix the issue that causes permission denied error when TiKV gets an error from the web identity provider and fails back to the default provider [#13122](https://github.com/tikv/tikv/issues/13122)
     - (dup) Fix the issue that the TiKV service is unavailable for several minutes when a TiKV instance is in an isolated network environment [#12966](https://github.com/tikv/tikv/issues/12966)
 
 + PD **owner: @nolouch**
 
-    - Fix the issue that the statistics of the region tree may be not accurate [#5318](https://github.com/tikv/pd/issues/5318)
+    - Fix the issue that the statistics of the region tree might be not accurate [#5318](https://github.com/tikv/pd/issues/5318)
     - (dup) Fix the issue that the TiFlash learner replica might not be created [#5401](https://github.com/tikv/pd/issues/5401)
     - (dup) Fix the issue that PD cannot correctly handle dashboard proxy requests [#5321](https://github.com/tikv/pd/issues/5321)
     - (dup) Fix the issue that unhealthy Region might cause PD panic [#5491](https://github.com/tikv/pd/issues/5491)
@@ -98,6 +99,7 @@ TiDB version: 6.1.2
 
     <!--storage **owner: @flowbehappy**-->
 
+    - Fix the issue that iolimiter could unexpectedly throttle io throughput of query requests after large volume writes, which slows down query performance [#5801](https://github.com/pingcap/tiflash/issues/5801)
     - (dup) Fix the panic that occurs after creating the primary index with a column containing the `NULL` value [#5859](https://github.com/pingcap/tiflash/issues/5859)
 
 + Tools
