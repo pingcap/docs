@@ -20,8 +20,6 @@ TiDB version: 6.1.2
 
     <!--execution **owner: @zanmato1984**-->
 
-    - (dup) Fix the wrong result that occurs when enabling dynamic mode in partitioned tables for TiFlash [#37254](https://github.com/pingcap/tidb/issues/37254)
-
     <!--transaction **owner: @cfzjywxk**-->
 
     <!--planner **owner: @fixdb**-->
@@ -57,13 +55,14 @@ TiDB version: 6.1.2
 
     <!--sql-infra **owner: @wjhuang2016**-->
 
+    - Fix the issue that the database level privileges are cleaned up incorrectly [#38363](https://github.com/pingcap/tidb/issues/38363)
     - (dup) Fix the incorrect output of `SHOW CREATE PLACEMENT POLICY` [#37526](https://github.com/pingcap/tidb/issues/37526)
     - (dup) Fix the issue that when one PD node goes down, the query of `information_schema.TIKV_REGION_STATUS` fails due to not retrying other PD nodes [#35708](https://github.com/pingcap/tidb/issues/35708)
     - (dup) Fix the issue that the `UNION` operator might return unexpected empty result [#36903](https://github.com/pingcap/tidb/issues/36903)
 
     <!--execution **owner: @zanmato1984**-->
 
-    - Database level privileges are cleaned up correctly [#38363](https://github.com/pingcap/tidb/issues/38363)
+    - (dup) Fix the wrong result that occurs when enabling dynamic mode in partitioned tables for TiFlash [#37254](https://github.com/pingcap/tidb/issues/37254)
 
     <!--transaction **owner: @cfzjywxk**-->
 
