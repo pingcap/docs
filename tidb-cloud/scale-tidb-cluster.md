@@ -115,4 +115,3 @@ You need to [create a latest backup of the cluster](/tidb-cloud/backup-and-resto
 
 - To avoid any data loss during or after the backup, you need to stop the connection to the cluster through your SQL client before creating the backup.
 - After you stop the connection to the cluster, your applications running on this cluster cannot provide service normally until the restoring process is completed.
-
