@@ -169,7 +169,7 @@ After the recovery is completed, the data and index might be inconsistent. Use t
 <SimpleTab>
 <div label="Stores deployed using TiUP">
 
-1. Scale in the unrecoverable nodes:
+1. Remove the unrecoverable nodes:
 
     ```bash
     tiup cluster scale-in <cluster-name> -N <host> --force
