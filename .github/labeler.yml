@@ -1,0 +1,4 @@
+# Add the 'area/tidb-cloud' label to any changes within the 'tidb-cloud' folder or any subfolders
+area/tidb-cloud:
+- tidb-cloud/**/
+
