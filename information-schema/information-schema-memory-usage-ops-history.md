@@ -51,7 +51,7 @@ The columns in the `MEMORY_USAGE_OPS_HISTORY` table are described as follows:
 
 * `TIME`: The timestamp when the session is terminated.
 * `OPS`: "SessionKill"
-* `MEMORY_LIMIT`: The memory usage limit of TiDB at the time, in bytes. Its value is the same as that of the system variable `tidb_server_memory_limit`.
+* `MEMORY_LIMIT`: The memory usage limit of TiDB at the time of termination, in bytes. Its value is the same as that of the system variable `tidb_server_memory_limit`](/system-variables.md#tidb_server_memory_limit-new-in-v640).
 * `MEMORY_CURRENT`: The current memory usage of TiDB, in bytes.
 * `PROCESSID`: The connection ID of the terminated session.
 * `MEM`: The memory usage of the terminated session, in bytes.

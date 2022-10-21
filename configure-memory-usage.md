@@ -48,7 +48,7 @@ The following example sets the total memory usage of a tidb-server instance to 3
 SET GLOBAL tidb_server_memory_limit = "32GB";
 ```
 
-After setting this variable, when the memory usage of a tidb-server instance reaches 32 GB, TiDB will terminate the SQL operation with the largest memory usage out of all running SQL operations, until the memory usage of the instance drops below 32 GB. The forcibly terminated SQL operation will return the `Out Of Memory Quota!` error to the client.
+After setting this variable, when the memory usage of a tidb-server instance reaches 32 GB, TiDB will terminate the SQL operation with the largest memory usage among all running SQL operations in order, until the memory usage of the instance drops below 32 GB. The forcibly terminated SQL operation will return the `Out Of Memory Quota!` error to the client.
 
 Currently, the memory limit set by `tidb_server_memory_limit` **DOES NOT** terminate the following SQL operations:
 
@@ -58,8 +58,8 @@ Currently, the memory limit set by `tidb_server_memory_limit` **DOES NOT** termi
 
 > **Warning:**
 >
-> + During the startup process, TiDB does not guarantee that the `tidb_server_memory_limit` limit is enforced. If the idle memory of the operating system is insufficient, TiDB might still encounter OOM. You need to ensure that the TiDB instance has enough available memory.
-> + In the process of memory control, the total memory usage of TiDB might slightly exceed the limit set by [`tidb_server_memory_limit`](/system-variables.md#tidb_server_memory_limit-new-in-v640).
+> + During the startup process, TiDB does not guarantee that the [`tidb_server_memory_limit`](/system-variables.md#tidb_server_memory_limit-new-in-v640) limit is enforced. If the free memory of the operating system is insufficient, TiDB might still encounter OOM. You need to ensure that the TiDB instance has enough available memory.
+> + In the process of memory control, the total memory usage of TiDB might slightly exceed the limit set by `tidb_server_memory_limit`.
 > + Since v6.4.0, the `server-memory-quota` configuration item is deprecated. To ensure compatibility, in v6.4.0 or clusters of later versions, `server-memory-quota` overrides `tidb_server_memory_limit` in a single instance. If `server-memory-quota` is not configured in the cluster before the cluster is upgraded to v6.4.0 or later, the memory usage limit of the tidb-server instance will be set by `tidb_server_memory_limit`.
 
 When the memory usage of a tidb-server instance reaches a certain proportion of the total memory (the proportion is controlled by the system variable [`tidb_server_memory_limit_gc_trigger`](/system-variables.md#tidb_server_memory_limit_gc_trigger-new-in-v640)), tidb-server will try to trigger a Golang GC to relieve memory stress. To avoid frequent GCs that cause performance issues due to the instance memory fluctuating around the threshold, this GC method will trigger GC at most once every minute.
