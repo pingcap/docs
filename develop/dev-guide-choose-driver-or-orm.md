@@ -105,11 +105,6 @@ implementation group: 'org.bouncycastle', name: 'bcpkix-jdk15on', version: '1.67
 
 ### Java ORM frameworks
 
-#### Hibernate
-
-<SimpleTab>
-<div label="Hibernate">
-
 > **Note:**
 >
 > - Currently, Hibernate does [not support nested transactions](https://stackoverflow.com/questions/37927208/nested-transaction-in-spring-app-with-jpa-postgres).
