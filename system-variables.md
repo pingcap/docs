@@ -2459,29 +2459,6 @@ explain select * from t where age=5;
 - Default value: `20`
 - Indicates the start-up cost for TiDB to request data from TiKV. This variable is internally used in the [Cost Model](/cost-model.md), and it is **NOT** recommended to modify its value.
 
-<<<<<<< HEAD
-=======
-### tidb_opt_skew_distinct_agg <span class="version-mark">New in v6.2.0</span>
-
-> **Note:**
->
-> The query performance optimization by enabling this variable is effective **only for TiFlash**.
-
-- Scope: SESSION | GLOBAL
-- Persists to cluster: Yes
-- Type: Boolean
-- Default value: `OFF`
-- This variable sets whether the optimizer rewrites the aggregate functions with `DISTINCT` to the two-level aggregate functions, such as rewriting `SELECT b, COUNT(DISTINCT a) FROM t GROUP BY b` to `SELECT b, COUNT(a) FROM (SELECT b, a FROM t GROUP BY b, a) t GROUP BY b`. When the aggregation column has serious skew and the `DISTINCT` column has many different values, this rewriting can avoid the data skew in the query execution and improve the query performance.
-
-### tidb_opt_three_stage_distinct_agg <span class="version-mark">New in v6.3.0</span>
-
-- Scope: SESSION | GLOBAL
-- Persists to cluster: Yes
-- Type: Boolean
-- Default value: `ON`
-- This variable specifies whether to rewrite a `COUNT(DISTINCT)` aggregation into a three-stage aggregation in MPP mode.
-- This variable currently applies to an aggregation that only contains one `COUNT(DISTINCT)`.
-
 ### tidb_opt_tiflash_concurrency_factor
 
 - Scope: SESSION | GLOBAL
@@ -2490,26 +2467,6 @@ explain select * from t where age=5;
 - Range: `[0, 2147483647]`
 - Default value: `24.0`
 - Indicates the concurrency number of TiFlash computation. This variable is internally used in the [Cost Model](/cost-model.md), and it is **NOT** recommended to modify its value.
-
-### tidb_opt_tiflash_cpu_factor_v2
-
-- Scope: SESSION | GLOBAL
-- Persists to cluster: YES
-- Type: Float
-- Range: `[0, 2147483647]`
-- Default value: `2.0`
-- Indicates the CPU cost for TiFlash to process one row. This variable is internally used in the [Cost Model](/cost-model.md), and it is **NOT** recommended to modify its value.
-
-### tidb_opt_tiflash_scan_factor_v2
-
-- Scope: SESSION | GLOBAL
-- Persists to cluster: YES
-- Type: Float
-- Range: `[0, 2147483647]`
-- Default value: `15.0`
-- Indicates the cost for TiFlash to scan one row from the disk. This variable is internally used in the [Cost Model](/cost-model.md), and it is **NOT** recommended to modify its value.
-
->>>>>>> d4b473277 (sysvar: add a description for a sysvar (#10955))
 ### tidb_opt_write_row_id
 
 <CustomContent platform="tidb-cloud">
