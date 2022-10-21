@@ -1,11 +1,11 @@
 ---
 title: FLASHBACK [CLUSTER | DATABASE | TABLE] TO TIMESTAMP
-summary: An overview of the usage of FLASHBACK [CLUSTER | DATABASE | TABLE] TO TIMESTAMP for the TiDB database.
+summary: Learn the usage of FLASHBACK [CLUSTER | DATABASE | TABLE] TO TIMESTAMP in TiDB databases.
 ---
 
 # FLASHBACK [CLUSTER | DATABASE | TABLE] TO TIMESTAMP
 
-The `FLASHBACK [CLUSTER | DATABASE | TABLE] TO TIMESTAMP` syntax is introduced since TiDB v6.4.0. You can use this statement to restore the data of the cluster, databases, or tables to a specific point in time.
+TiDB v6.4.0 introduces the `FLASHBACK [CLUSTER | DATABASE | TABLE] TO TIMESTAMP` syntax. You can use it to restore a cluster, a database, or a table to a specific point in time.
 
 ## Syntax
 
@@ -35,10 +35,10 @@ FlashbackToTimestampStmt ::=
     * The `DATABASE` privilege is required to execute `FLASHBACK DATABASE`.
     * The `TABLE` privilege is required to execute `FLASHBACK TABLE`.
 
-* From the time specified in the `FLASHBACK` statement to the time when the `FLASHBACK` is executed, there cannot be a DDL statement that changes the related table structure. If it exists, TiDB will reject the DDL statement.
-* Before executing `FLASHBACK [CLUSTER | DATABASE | TABLE] TO TIMESTAMP`, TiDB actively disconnects all related connections and prohibits read and write operations on these tables until the `FLASHBACK` statement is completed.
-* The `FLASHBACK [CLUSTER | DATABASE | TABLE] TO TIMESTAMP` statement cannot be canceled. Once the statement is executed, TiDB will keep retrying until it succeeds.
-* Through the log, you can obtain the execution process of `FLASHBACK`. The following is an example:
+* From the time specified in the `FLASHBACK` statement to the time when the `FLASHBACK` is executed, there cannot be a DDL statement that changes the related table structure. If such a DDL exists, TiDB will reject it.
+* Before executing `FLASHBACK [CLUSTER | DATABASE | TABLE] TO TIMESTAMP`, TiDB disconnects all related connections and prohibits read and write operations on these tables until the `FLASHBACK` statement is completed.
+* The `FLASHBACK [CLUSTER | DATABASE | TABLE] TO TIMESTAMP` statement cannot be canceled after being executed. TiDB will keep retrying until it succeeds.
+* Through the log, you can obtain the execution progress of `FLASHBACK`. The following is an example:
 
     ```
     [2022/10/09 17:25:59.316 +08:00] [INFO] [cluster.go:463] ["flashback cluster stats"] ["complete regions"=9] ["total regions"=10] []
@@ -81,7 +81,7 @@ mysql> SELECT * FROM t;
 Empty set (0.00 sec)
 ```
 
-If there is a DDL statement that changes the table schema from the time specified in the `FLASHBACK` statement to the time when the `FLASHBACK` is executed, the statement fails:
+If there is a DDL statement that changes the table structure from the time specified in the `FLASHBACK` statement to the time when the `FLASHBACK` is executed, the `FLASHBACK` statement fails:
 
 ```sql
 mysql> SELECT now();
