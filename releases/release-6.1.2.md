@@ -47,6 +47,8 @@ TiDB version: 6.1.2
 
     + TiCDC **owner: @nongfushanquan**
 
+        - Enhance the performance of the region worker by handling resolved TS in a batch [#7078](https://github.com/pingcap/tiflow/issues/7078)
+
     + Backup & Restore (BR) **owner: @3pointer**
 
     + Dumpling
@@ -120,12 +122,11 @@ TiDB version: 6.1.2
 
     + TiCDC **owner: @nongfushanquan TW: @hfxsd**
 
-        - Fix a bug that the cdc server might panic if it receives an HTTP request before the cdc server fully starts [#6838](https://github.com/pingcap/tiflow/issues/6838)
+        - Fix the issue that the cdc server might panic if it receives an HTTP request before the cdc server fully starts [#6838](https://github.com/pingcap/tiflow/issues/6838)
         - Fix the log flooding issue during upgrade [#7235](https://github.com/pingcap/tiflow/issues/7235)
-        - Fix a bug that changefeed's redo log files might be deleted by mistake [#6413](https://github.com/pingcap/tiflow/issues/6413)
-        - Fix a bug that TiCDC might become unavailable when too many operations in an etcd transaction are committed  [#7131](https://github.com/pingcap/tiflow/issues/7131)
-        - Fix a bug that data inconsistency might occur when non-reentrant DDL statements in redo logs are executed twice [#6927](https://github.com/pingcap/tiflow/issues/6927)
-        - Enhance the performance of the region worker by handling resolved TS in a batch [#7078](https://github.com/pingcap/tiflow/issues/7078)
+        - Fix the issue that changefeed's redo log files might be deleted by mistake [#6413](https://github.com/pingcap/tiflow/issues/6413)
+        - Fix the issue that TiCDC might become unavailable when too many operations in an etcd transaction are committed  [#7131](https://github.com/pingcap/tiflow/issues/7131)
+        - Fix the issue that data inconsistency might occur when non-reentrant DDL statements in redo logs are executed twice [#6927](https://github.com/pingcap/tiflow/issues/6927)
 
     + Backup & Restore (BR) **owner: @3pointer TW: @shichun-0415**
 
