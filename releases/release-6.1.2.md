@@ -100,7 +100,7 @@ TiDB version: 6.1.2
 
     <!--storage **owner: @flowbehappy**-->
 
-    - Fix the issue that I/O Limiter might incorrectly throttle the IO throughput of query requests after bulk writes, which reduces the query performance [#5801](https://github.com/pingcap/tiflash/issues/5801)
+    - Fix the issue that I/O Limiter might incorrectly throttle the I/O throughput of query requests after bulk writes, which reduces the query performance [#5801](https://github.com/pingcap/tiflash/issues/5801)
     - (dup) Fix the panic that occurs after creating the primary index with a column containing the `NULL` value [#5859](https://github.com/pingcap/tiflash/issues/5859)
 
 + Tools
