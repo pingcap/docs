@@ -2862,7 +2862,6 @@ explain select * from t where age=5;
 - Default value: `OFF`
 - This variable sets whether the optimizer rewrites the aggregate functions with `DISTINCT` to the two-level aggregate functions, such as rewriting `SELECT b, COUNT(DISTINCT a) FROM t GROUP BY b` to `SELECT b, COUNT(a) FROM (SELECT b, a FROM t GROUP BY b, a) t GROUP BY b`. When the aggregation column has serious skew and the `DISTINCT` column has many different values, this rewriting can avoid the data skew in the query execution and improve the query performance.
 
-<<<<<<< HEAD
 ### tidb_opt_three_stage_distinct_agg <span class="version-mark">New in v6.3.0</span>
 
 - Scope: SESSION | GLOBAL
@@ -2871,7 +2870,7 @@ explain select * from t where age=5;
 - Default value: `ON`
 - This variable specifies whether to rewrite a `COUNT(DISTINCT)` aggregation into a three-stage aggregation in MPP mode.
 - This variable currently applies to an aggregation that only contains one `COUNT(DISTINCT)`.
-=======
+
 ### tidb_opt_tiflash_concurrency_factor
 
 - Scope: SESSION | GLOBAL
@@ -2898,7 +2897,6 @@ explain select * from t where age=5;
 - Range: `[0, 2147483647]`
 - Default value: `15.0`
 - Indicates the cost for TiFlash to scan one row from the disk. This variable is internally used in the [Cost Model](/cost-model.md), and it is **NOT** recommended to modify its value.
->>>>>>> 925cb1e9c (planner: add docs for some variables (#10906))
 
 ### tidb_opt_write_row_id
 
