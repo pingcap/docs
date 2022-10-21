@@ -2675,7 +2675,7 @@ explain select * from t where age=5;
 - Type: Float
 - Range: `[0, 2147483647]`
 - Default value: `24.0`
-- This variable is internally used in the [Cost Model](/cost-model.md), and it is **NOT** recommended to modify its value.
+- Indicates the concurrency number of TiFlash computation. This variable is internally used in the [Cost Model](/cost-model.md), and it is **NOT** recommended to modify its value.
 
 ### tidb_opt_tiflash_cpu_factor_v2
 
