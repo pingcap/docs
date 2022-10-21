@@ -11,7 +11,7 @@ This document introduces the core information about TLS in TiDB Serverless Tier.
 
 No.
 
-Serverless clusters allow only TLS connections and reject normal connections. The reason for this is that users connect to Serverless Tier clusters through a public network, so communication security is really important.
+Serverless clusters allow only TLS connections and reject non-TLS connections. The reason for this is that users connect to Serverless Tier clusters through a public network, so communication security is really important.
 
 ## What TLS versions can I use?
 
