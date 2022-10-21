@@ -16,7 +16,7 @@ TiDB version: 6.1.2
 
     <!--sql-infra **owner: @wjhuang2016**-->
 
-    - Allow setting Placement Rules and TiFlash replica at the same time in one table [#37171](https://github.com/pingcap/tidb/issues/37171)
+    - Allow setting placement rules and TiFlash replicas at the same time in one table [#37171](https://github.com/pingcap/tidb/issues/37171)
 
     <!--execution **owner: @zanmato1984**-->
 
@@ -57,7 +57,7 @@ TiDB version: 6.1.2
 
     <!--sql-infra **owner: @wjhuang2016**-->
 
-    - Fix the issue that the database level privileges are cleaned up incorrectly [#38363](https://github.com/pingcap/tidb/issues/38363)
+    - Fix the issue that database-level privileges are incorrectly cleaned up [#38363](https://github.com/pingcap/tidb/issues/38363)
     - (dup) Fix the incorrect output of `SHOW CREATE PLACEMENT POLICY` [#37526](https://github.com/pingcap/tidb/issues/37526)
     - (dup) Fix the issue that when one PD node goes down, the query of `information_schema.TIKV_REGION_STATUS` fails due to not retrying other PD nodes [#35708](https://github.com/pingcap/tidb/issues/35708)
     - (dup) Fix the issue that the `UNION` operator might return unexpected empty result [#36903](https://github.com/pingcap/tidb/issues/36903)
@@ -74,7 +74,7 @@ TiDB version: 6.1.2
 
     <!--planner **owner: @fixdb**-->
 
-    - Fix the issue that GROUP CONCAT with ORDER BY might fail when the ORDER BY clause contains a correlated subquery [#18216](https://github.com/pingcap/tidb/issues/18216)
+    - Fix the issue that `GROUP CONCAT` with `ORDER BY` might fail when the `ORDER BY` clause contains a correlated subquery [#18216](https://github.com/pingcap/tidb/issues/18216)
     - (dup) Fix the issue that `Can't find column` is reported if an `UPDATE` statement contains common table expressions (CTE) [#35758](https://github.com/pingcap/tidb/issues/35758)
     - (dup) Fix the issue that the `EXECUTE` might throw an unexpected error in specific scenarios [#37187](https://github.com/pingcap/tidb/issues/37187)
 
