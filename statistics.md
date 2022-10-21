@@ -14,7 +14,7 @@ TiDB は統計を使用して決定します[どのインデックスを選択�
 > -   `ANALYZE`ステートメントを手動で実行する場合は、分析するすべてのテーブルを手動で分析します。
 >
 >     ```sql
->     SELECT DISTINCT(CONCAT('ANALYZE TABLE', table_schema, '.', table_name, ';')) FROM information_schema.tables, mysql.stats_histograms WHERE stats_ver = 2 AND table_id = tidb_table_id;
+>     SELECT DISTINCT(CONCAT('ANALYZE TABLE ', table_schema, '.', table_name, ';')) FROM information_schema.tables, mysql.stats_histograms WHERE stats_ver = 2 AND table_id = tidb_table_id;
 >     ```
 >
 > -   自動分析が有効になっているために TiDB が`ANALYZE`ステートメントを自動的に実行する場合は、 `DROP STATS`ステートメントを生成する次のステートメントを実行します。
@@ -39,7 +39,7 @@ TiDB は統計を使用して決定します[どのインデックスを選択�
 | 列の平均長             | √                              | √                                                        |
 | 索引の平均長            | √                              | √                                                        |
 
-バージョン 1 と比較して、バージョン 2 の統計では、データ ボリュームが膨大な場合にハッシュの衝突によって生じる可能性のある不正確さが回避されます。また、ほとんどのシナリオで推定精度が維持されます。
+バージョン 1 と比較して、バージョン 2 の統計では、データ量が膨大な場合にハッシュの衝突によって生じる潜在的な不正確さが回避されます。また、ほとんどのシナリオで推定精度が維持されます。
 
 このドキュメントでは、ヒストグラム、Count-Min Sketch、および Top-N について簡単に紹介し、統計の収集と維持について詳しく説明します。
 
@@ -115,7 +115,7 @@ v5.3.0 より前の TiDB は、リザーバー サンプリング メソッド�
 
 > **ノート：**
 >
-> 現在のサンプリング レートは、適応アルゴリズムに基づいて計算されます。 [`SHOW STATS_META`](/sql-statements/sql-statement-show-stats-meta.md)を使用してテーブル内の行数を観測できる場合、この行数を使用して 100,000 行に対応するサンプリング レートを計算できます。この数を確認できない場合は、 [`TABLE_STORAGE_STATS`](/information-schema/information-schema-table-storage-stats.md)番目の表の`TABLE_KEYS`列を別の参照として使用して、サンプリング レートを計算できます。
+> 現在のサンプリング レートは、適応アルゴリズムに基づいて計算されます。 [`SHOW STATS_META`](/sql-statements/sql-statement-show-stats-meta.md)を使用してテーブル内の行数を観測できる場合、この行数を使用して 100,000 行に対応するサンプリング レートを計算できます。この数値を確認できない場合は、 [`TABLE_STORAGE_STATS`](/information-schema/information-schema-table-storage-stats.md)番目の表の`TABLE_KEYS`列を別の参照として使用して、サンプリング レートを計算できます。
 >
 > 通常、 `STATS_META`は`TABLE_KEYS`より信頼性が高くなります。ただし、 [TiDB Lightning](https://docs.pingcap.com/tidb/stable/tidb-lightning-overview)のような方法でデータをインポートすると、 `STATS_META`の結果は`0`になります。この状況に対処するために、 `STATS_META`の結果が`TABLE_KEYS`の結果よりもはるかに小さい場合、 `TABLE_KEYS`を使用してサンプリング レートを計算できます。
 
@@ -594,7 +594,7 @@ v5.4.0 以降、TiDB は同期読み込み統計機能を導入しています�
 >
 > 現在、統計の同期読み込みは実験的機能です。実稼働環境で使用することはお勧めしません。
 
-統計の同期読み込み機能は、デフォルトで無効になっています。この機能を有効にするには、システム変数[`tidb_stats_load_sync_wait`](/system-variables.md#tidb_stats_load_sync_wait-new-in-v540)の値をタイムアウト (ミリ秒単位) に設定します。これは、SQL 最適化が完全な列統計を同期的にロードするまで最大で待機できる時間です。この変数のデフォルト値は`0`で、機能が無効になっていることを示します。
+統計の同期読み込み機能は、デフォルトでは無効になっています。この機能を有効にするには、システム変数[`tidb_stats_load_sync_wait`](/system-variables.md#tidb_stats_load_sync_wait-new-in-v540)の値をタイムアウト (ミリ秒単位) に設定します。これは、SQL 最適化が完全な列統計を同期的にロードするまで最大で待機できる時間です。この変数のデフォルト値は`0`で、機能が無効になっていることを示します。
 
 <CustomContent platform="tidb">
 
