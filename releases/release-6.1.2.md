@@ -112,9 +112,9 @@ TiDB version: 6.1.2
     + TiDB Data Migration (DM) **owner: @niubell TW: @shichun-0415**
 
         - Fix the issue that upstream table structure information is lost when DM tasks enter the sync unit and are interrupted [#7159](https://github.com/pingcap/tiflow/issues/7159)
-        - Fix large transaction errors by spliting SQL statements when saving checkpoints [#5010](https://github.com/pingcap/tiflow/issues/5010)
+        - Fix large transaction errors by splitting SQL statements when saving checkpoints [#5010](https://github.com/pingcap/tiflow/issues/5010)
         - Fix the issue that DM precheck requires the `SELECT` privilege on `INFORMATION_SCHEMA` [#7317](https://github.com/pingcap/tiflow/issues/7317)
-        - Fix the issue dm-worker triggers a deadlock error after running dm tasks with fast/full validators [#7241](https://github.com/pingcap/tiflow/issues/7241)
+        - Fix the issue that DM-worker triggers a deadlock error after running DM tasks with fast/full validators [#7241](https://github.com/pingcap/tiflow/issues/7241)
         - (dup) Fix the issue that DM reports the `Specified key was too long` error [#5315](https://github.com/pingcap/tiflow/issues/5315)
         - (dup) Fix the issue that latin1 data might be corrupted during replication [#7028](https://github.com/pingcap/tiflow/issues/7028)
 
