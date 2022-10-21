@@ -2882,7 +2882,7 @@ The usage example of this variable is as follows:
 <details>
 <summary><code>tidb_opt_range_max_size</code> usage examples</summary>
 
-View the default value of this variable. From the result, you can see that the optimizer uses up to 64 MiB of memory to build a scan range.
+View the default value of this variable. From the result, you can see that the optimizer uses up to 64 MiB of memory to build scan ranges.
 
 ```sql
 SELECT @@tidb_opt_range_max_size;
