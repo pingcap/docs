@@ -2538,6 +2538,15 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 - Default value: `3.0`
 - Indicates the CPU cost of starting a Golang goroutine in TiDB. This variable is internally used in the [Cost Model](/cost-model.md), and it is **NOT** recommended to modify its value.
 
+### tidb_opt_concurrency_factor_v2
+
+- Scope: SESSION | GLOBAL
+- Persists to cluster: YES
+- Type: Float
+- Range: `[0, 2147483647]`
+- Default value: `3.0`
+- Indicates the CPU cost of starting a Golang goroutine in TiDB. This variable is internally used in the [Cost Model](/cost-model.md), and it is **NOT** recommended to modify its value.
+
 ### tidb_opt_copcpu_factor
 
 - Scope: SESSION | GLOBAL
@@ -2545,6 +2554,15 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 - Type: Float
 - Range: `[0, 2147483647]`
 - Default value: `3.0`
+- Indicates the CPU cost for TiKV Coprocessor to process one row. This variable is internally used in the [Cost Model](/cost-model.md), and it is **NOT** recommended to modify its value.
+
+### tidb_opt_copcpu_factor_v2
+
+- Scope: SESSION | GLOBAL
+- Persists to cluster: YES
+- Type: Float
+- Range: `[0, 2147483647]`
+- Default value: `30.0`
 - Indicates the CPU cost for TiKV Coprocessor to process one row. This variable is internally used in the [Cost Model](/cost-model.md), and it is **NOT** recommended to modify its value.
 
 ### tidb_opt_correlation_exp_factor
@@ -2578,6 +2596,15 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 - Default value: `3.0`
 - Indicates the CPU cost for TiDB to process one row. This variable is internally used in the [Cost Model](/cost-model.md), and it is **NOT** recommended to modify its value.
 
+### tidb_opt_cpu_factor_v2
+
+- Scope: SESSION | GLOBAL
+- Persists to cluster: YES
+- Type: Float
+- Range: `[0, 2147483647]`
+- Default value: `30.0`
+- Indicates the CPU cost for TiDB to process one row. This variable is internally used in the [Cost Model](/cost-model.md), and it is **NOT** recommended to modify its value.
+
 ### tidb_opt_desc_factor
 
 - Scope: SESSION | GLOBAL
@@ -2587,10 +2614,28 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 - Default value: `3.0`
 - Indicates the cost for TiKV to scan one row from the disk in descending order. This variable is internally used in the [Cost Model](/cost-model.md), and it is **NOT** recommended to modify its value.
 
+### tidb_opt_desc_factor_v2
+
+- Scope: SESSION | GLOBAL
+- Persists to cluster: YES
+- Type: Float
+- Range: `[0, 2147483647]`
+- Default value: `150.0`
+- Indicates the cost for TiKV to scan one row from the disk in descending order. This variable is internally used in the [Cost Model](/cost-model.md), and it is **NOT** recommended to modify its value.
+
 ### tidb_opt_disk_factor
 
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
+- Type: Float
+- Range: `[0, 2147483647]`
+- Default value: `1.5`
+- Indicates the I/O cost for TiDB to read or write one byte of data from or to the temporary disk. This variable is internally used in the [Cost Model](/cost-model.md), and it is **NOT** recommended to modify its value.
+
+### tidb_opt_disk_factor_v2
+
+- Scope: SESSION | GLOBAL
+- Persists to cluster: YES
 - Type: Float
 - Range: `[0, 2147483647]`
 - Default value: `1.5`
@@ -2693,6 +2738,15 @@ mysql> desc select count(distinct a) from test.t;
 - Default value: `0.001`
 - Indicates the memory cost for TiDB to store one row. This variable is internally used in the [Cost Model](/cost-model.md), and it is **NOT** recommended to modify its value.
 
+### tidb_opt_memory_factor_v2
+
+- Scope: SESSION | GLOBAL
+- Persists to cluster: YES
+- Type: Float
+- Range: `[0, 2147483647]`
+- Default value: `0.001`
+- Indicates the memory cost for TiDB to store one row. This variable is internally used in the [Cost Model](/cost-model.md), and it is **NOT** recommended to modify its value.
+
 ### tidb_opt_mpp_outer_join_fixed_build_side <span class="version-mark">New in v5.1.0</span>
 
 - Scope: SESSION | GLOBAL
@@ -2708,6 +2762,15 @@ mysql> desc select count(distinct a) from test.t;
 - Type: Float
 - Range: `[0, 2147483647]`
 - Default value: `1.0`
+- Indicates the net cost of transferring 1 byte of data through the network. This variable is internally used in the [Cost Model](/cost-model.md), and it is **NOT** recommended to modify its value.
+
+### tidb_opt_network_factor_v2
+
+- Scope: SESSION | GLOBAL
+- Persists to cluster: YES
+- Type: Float
+- Range: `[0, 2147483647]`
+- Default value: `4.0`
 - Indicates the net cost of transferring 1 byte of data through the network. This variable is internally used in the [Cost Model](/cost-model.md), and it is **NOT** recommended to modify its value.
 
 ### tidb_opt_prefer_range_scan <span class="version-mark">New in v5.0</span>
@@ -2760,6 +2823,15 @@ explain select * from t where age=5;
 - Default value: `1.5`
 - Indicates the cost for TiKV to scan one row of data from the disk in ascending order. This variable is internally used in the [Cost Model](/cost-model.md), and it is **NOT** recommended to modify its value.
 
+### tidb_opt_scan_factor_v2
+
+- Scope: SESSION | GLOBAL
+- Persists to cluster: YES
+- Type: Float
+- Range: `[0, 2147483647]`
+- Default value: `100.0`
+- Indicates the cost for TiKV to scan one row of data from the disk in ascending order. This variable is internally used in the [Cost Model](/cost-model.md), and it is **NOT** recommended to modify its value.
+
 ### tidb_opt_seek_factor
 
 - Scope: SESSION | GLOBAL
@@ -2767,6 +2839,15 @@ explain select * from t where age=5;
 - Type: Float
 - Range: `[0, 2147483647]`
 - Default value: `20`
+- Indicates the start-up cost for TiDB to request data from TiKV. This variable is internally used in the [Cost Model](/cost-model.md), and it is **NOT** recommended to modify its value.
+
+### tidb_opt_seek_factor_v2
+
+- Scope: SESSION | GLOBAL
+- Persists to cluster: YES
+- Type: Float
+- Range: `[0, 2147483647]`
+- Default value: `9500000`
 - Indicates the start-up cost for TiDB to request data from TiKV. This variable is internally used in the [Cost Model](/cost-model.md), and it is **NOT** recommended to modify its value.
 
 ### tidb_opt_skew_distinct_agg <span class="version-mark">New in v6.2.0</span>
@@ -2789,6 +2870,33 @@ explain select * from t where age=5;
 - Default value: `ON`
 - This variable specifies whether to rewrite a `COUNT(DISTINCT)` aggregation into a three-stage aggregation in MPP mode.
 - This variable currently applies to an aggregation that only contains one `COUNT(DISTINCT)`.
+
+### tidb_opt_tiflash_concurrency_factor
+
+- Scope: SESSION | GLOBAL
+- Persists to cluster: YES
+- Type: Float
+- Range: `[0, 2147483647]`
+- Default value: `24.0`
+- This variable is internally used in the [Cost Model](/cost-model.md), and it is **NOT** recommended to modify its value.
+
+### tidb_opt_tiflash_cpu_factor_v2
+
+- Scope: SESSION | GLOBAL
+- Persists to cluster: YES
+- Type: Float
+- Range: `[0, 2147483647]`
+- Default value: `2.0`
+- Indicates the CPU cost for TiFlash to process one row. This variable is internally used in the [Cost Model](/cost-model.md), and it is **NOT** recommended to modify its value.
+
+### tidb_opt_tiflash_scan_factor_v2
+
+- Scope: SESSION | GLOBAL
+- Persists to cluster: YES
+- Type: Float
+- Range: `[0, 2147483647]`
+- Default value: `15.0`
+- Indicates the cost for TiFlash to scan one row from the disk. This variable is internally used in the [Cost Model](/cost-model.md), and it is **NOT** recommended to modify its value.
 
 ### tidb_opt_write_row_id
 
