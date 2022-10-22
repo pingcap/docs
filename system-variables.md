@@ -1245,6 +1245,43 @@ Constraint checking is always performed in place for pessimistic transactions (d
 - This variable is used to set whether to enable the statistics `Fast Analyze` feature.
 - If the statistics `Fast Analyze` feature is enabled, TiDB randomly samples about 10,000 rows of data as statistics. When the data is distributed unevenly or the data size is small, the statistics accuracy is low. This might lead to a non-optimal execution plan, for example, selecting a wrong index. If the execution time of the regular `Analyze` statement is acceptable, it is recommended to disable the `Fast Analyze` feature.
 
+<<<<<<< HEAD
+=======
+### `tidb_enable_foreign_key` <span class="version-mark">New in v6.3.0</span>
+
+> **Warning:**
+>
+> The feature controlled by this variable is not fully functional in the current TiDB version. Do not change the default value.
+
+- Scope: GLOBAL
+- Persists to cluster: Yes
+- Default value: `OFF`
+- This variable controls whether to enable the `FOREIGN KEY` feature.
+
+### tidb_enable_gc_aware_memory_track
+
+> **Warning:**
+>
+> This variable is an internal variable for debugging in TiDB. It might be removed in a future release. **Do not** set this variable.
+
+- Scope: GLOBAL
+- Persists to cluster: Yes
+- Type: Boolean
+- Default value: `ON`
+- This variable controls whether to enable GC-Aware memory track.
+
+### `tidb_enable_general_plan_cache` <span class="version-mark">New in v6.3.0</span>
+
+> **Warning:**
+>
+> The feature controlled by this variable is not fully functional in the current TiDB version. Do not change the default value.
+
+- Scope: SESSION | GLOBAL
+- Persists to cluster: Yes
+- Default value: `OFF`
+- This variable controls whether to enable the General Plan Cache feature.
+
+>>>>>>> b5a53cdde (sysvar: add a sysvar (#10958))
 ### tidb_enable_historical_stats
 
 - Scope: GLOBAL
