@@ -1245,6 +1245,18 @@ Constraint checking is always performed in place for pessimistic transactions (d
 - This variable is used to set whether to enable the statistics `Fast Analyze` feature.
 - If the statistics `Fast Analyze` feature is enabled, TiDB randomly samples about 10,000 rows of data as statistics. When the data is distributed unevenly or the data size is small, the statistics accuracy is low. This might lead to a non-optimal execution plan, for example, selecting a wrong index. If the execution time of the regular `Analyze` statement is acceptable, it is recommended to disable the `Fast Analyze` feature.
 
+### tidb_enable_gc_aware_memory_track
+
+> **Warning:**
+>
+> This variable is an internal variable for debugging in TiDB. It might be removed in a future release. **Do not** set this variable.
+
+- Scope: GLOBAL
+- Persists to cluster: Yes
+- Type: Boolean
+- Default value: `ON`
+- This variable controls whether to enable GC-Aware memory track.
+
 ### tidb_enable_historical_stats
 
 - Scope: GLOBAL
