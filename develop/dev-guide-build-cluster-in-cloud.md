@@ -56,7 +56,7 @@ This document walks you through the quickest way to get started with TiDB Cloud.
 
     > **Note:**
     >
-    > For [Serverless Tier clusters](https://docs.pingcap.com/tidbcloud/select-cluster-tier#serverless-tier), when you connect to your cluster, you must include the prefix for your cluster in the user name and wrap the name with quotation marks. For more information, see [User name prefix](https://docs.pingcap.com/tidbcloud/select-cluster-tier#user-name-prefix).
+    > For [Serverless Tier clusters](/tidb-cloud/select-cluster-tier.md#serverless-tier), when you connect to your cluster, you must include the prefix for your cluster in the user name and wrap the name with quotation marks. For more information, see [User name prefix](/tidb-cloud/select-cluster-tier.md#user-name-prefix).
 
     </CustomContent>
 
