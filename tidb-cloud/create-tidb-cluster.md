@@ -21,7 +21,7 @@ This tutorial guides you through signing up and creating a TiDB cluster.
 
 TiDB Cloud provides the following two cluster tier options. Before creating a TiDB cluster, consider which option suits your need better:
 
-- Serverless Tier
+- Serverless Tier (Beta)
 
     The TiDB Cloud Serverless Tier is fully managed service of TiDB. It's still in beta phase and can not be used in production. However, you can use Serverless Tier clusters for non-production workloads such as prototype applications, hackathons, academic courses, or to provide a temporary data service for your datasets.
 
