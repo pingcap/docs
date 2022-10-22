@@ -88,9 +88,14 @@ Minimum number of TiKV nodes: `ceil(2048 ÷ 0.8 ÷ 1024) × 3 = 9`
 
 ### TiKV node storage
 
-- Each 8 vCPU or 16 vCPU TiKV node supports up to 4 TiB storage capacity.
-- Each 4 vCPU TiKV node supports up to 2 TiB storage capacity.
-- Each 2 vCPU TiKV node supports up to 500 GiB storage capacity.
+The supported node storage of different TiKV node sizes is as follows:
+
+| Node size | Min node storage | Max node storage | Default node storage |
+|:---------:|:----------------:|:----------------:|:--------------------:|
+| 2 vCPU    | 200 GiB          | 500 GiB          | 200 GiB              |
+| 4 vCPU    | 200 GiB          | 2048 GiB         | 500 GiB              |
+| 8 vCPU    | 200 GiB          | 4096 GiB         | 500 GiB              |
+| 16 vCPU   | 200 GiB          | 4096 GiB         | 500 GiB              |
 
 > **Note:**
 >
@@ -125,7 +130,12 @@ Minimum number of TiFlash nodes: `min((800 GiB * 2 + 100 GiB * 1) / 1024 GiB, ma
 
 ### TiFlash node storage
 
-Each TiFlash node supports up to 2 TiB storage capacity.
+The supported node storage of different TiFlash node sizes is as follows:
+
+| Node size | Min node storage | Max node storage | Default node storage |
+|:---------:|:----------------:|:----------------:|:--------------------:|
+| 8 vCPU    | 200 GiB          | 2048 GiB         | 500 GiB              |
+| 16 vCPU   | 200 GiB          | 2048 GiB         | 500 GiB              |
 
 > **Note:**
 >
