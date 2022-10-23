@@ -11,7 +11,7 @@ With TiDB Cloud, you can create an HTAP cluster easily by specifying one or more
 
 > **Note:**
 >
-> Serverless Tier clusters have TiFlash support and can disable TiFlash.
+> Serverless Tier clusters support TiFlash. You can not disable TiFlash.
 
 TiKV data is not replicated to TiFlash by default. You can select which table to replicate to TiFlash using the following SQL statement:
 
