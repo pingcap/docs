@@ -11,7 +11,7 @@ This document describes best practices for configuration and usage of [HAProxy](
 
 > **Note:**
 >
-> The minimum version of HAProxy that works with all versions of TiDB is v1.5. Between v1.5 and v2.1 you need to set the `post-41` option in the `mysql-check`. It is recommended to use version v2.2 or newer.
+> The minimum version of HAProxy that works with all versions of TiDB is v1.5. Between v1.5 and v2.1, you need to set the `post-41` option in `mysql-check`. It is recommended to use HAProxy v2.2 or newer.
 
 ## HAProxy overview
 
