@@ -53,8 +53,13 @@ Regardless of the migration mode you choose, the precheck always includes the fo
 - Compatibility of the upstream MySQL table schema
 
     - Check whether the upstream tables have foreign keys, which are not supported by TiDB. A warning is returned if a foreign key is found in the precheck.
-    - (Mandatory) Check whether there are compatibility differences in character sets. For more information, see [TiDB Supported Character Sets](/character-set-and-collation.md).
-    - (Mandatory) Check whether the upstream tables have primary key constraints or unique key constraints (introduced from v1.0.7)
+    - Check whether there are compatibility differences in character sets. For more information, see [TiDB Supported Character Sets](/character-set-and-collation.md).
+    - Check whether the upstream tables have primary key constraints or unique key constraints (introduced from v1.0.7)
+
+    > **Warning:**
+    >
+    > - When the upstream uses incompatible character sets, you can still continue the replication by creating tables with the utf8mb4 character set in the downstream. However, this practice is not recommended. You are advised to change the character set used by the upstream or use the same character set in both the upstream and downstream.
+    > - When the upstream tables have no primary key constraints or unique key constraints, the same row of data might be replicated multiple times to the downstream, which might affect the performance of replication. In a production environment, it is recommended that you specify primary key constraints or unique key constraints.
 
 ### Check items for full data migration
 
@@ -94,9 +99,9 @@ For the incremental data migration mode (`task-mode: incremental`), in addition 
     - REPLICATION CLIENT permission
     - REPLICATION SLAVE permission
 
-* (Mandatory) Database primary-secondary configuration
+* Database primary-secondary configuration
 
-    - The database ID `server_id` of the upstream database must be specified (GTID is recommended for non-AWS Aurora environments).
+    - It is recommended that you specify the database ID `server_id` for the upstream database (GTID is recommended for non-AWS Aurora environments), so as to avoid primary-secondary replication failures.
 
 * (Mandatory) MySQL binlog configuration
 
