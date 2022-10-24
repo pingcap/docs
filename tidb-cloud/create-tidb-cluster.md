@@ -23,7 +23,7 @@ TiDB Cloud provides the following two cluster tier options. Before creating a Ti
 
 - Serverless Tier (Beta)
 
-    The TiDB Cloud Serverless Tier is fully managed service of TiDB. It's still in beta phase and can not be used in production. However, you can use Serverless Tier clusters for non-production workloads such as prototype applications, hackathons, academic courses, or to provide a temporary data service for your datasets.
+    The TiDB Cloud Serverless Tier is a fully managed service of TiDB. It is still in the beta phase and cannot be used in production. However, you can use Serverless Tier clusters for non-production workloads such as prototype applications, hackathons, academic courses, or to provide a temporary data service for your datasets.
 
 - Dedicated Tier
 
