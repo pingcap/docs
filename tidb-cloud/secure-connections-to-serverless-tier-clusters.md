@@ -11,7 +11,7 @@ This document introduces the core information about TLS in TiDB Serverless Tier.
 
 No.
 
-TiDB Serverless Tier allows only TLS connections and rejects non-TLS connections. The reason is that users connect to TiDB Serverless Tier clusters through a public network, so it is really important to use TLS to improve communication security.
+TiDB Serverless Tier allows only TLS connections and rejects non-TLS connections. The reason is that users connect to TiDB Serverless Tier clusters through a public network, so it is really important to use TLS to ensure communication security.
 
 ## What TLS versions can I use?
 
@@ -26,9 +26,9 @@ However, some drivers and ORMs do not use the system root CA stores. In those ca
 > **Note:**
 > 
 > TiDB Serverless Tier does not provide a CA root certificate download, because we don't guarantee that the same CA will be used to issue a certificate in the future, which will cause the CA root certificate to change. 
-> While, TiDB Serverless Tier can always use the CA root certificate that is normally available, which is provided in all common systems. 
+> However, TiDB Serverless Tier promises always using a CA root certificate that is commonly available, which is provided in all common systems. 
 > 
-> If you really need the CA certificate of a TiDB Serverless Tier cluster, it is recommended that you download the [Mozilla CA Certificate bundle](https://curl.se/docs/caextract.html) instead of a single CA certificate.
+> If you really need the CA certificate of a TiDB Serverless Tier cluster, it is recommended that you download the [Mozilla CA Certificate bundle](https://curl.se/docs/caextract.html) instead of the single CA certificate in case we change the CA in the future.
 
 ## How do I connect to a TiDB Serverless Tier cluster in TLS connection?
 
@@ -137,7 +137,7 @@ The following lists the CA root paths in common platforms.
 /etc/ssl/certs/ca-certificates.crt
 ```
 
-**RedHat / Fedora / CentOS / Mageia / Vercel / Netlify**
+**RedHat / Fedora / CentOS / Mageia**
 
 ```
 /etc/pki/tls/certs/ca-bundle.crt
