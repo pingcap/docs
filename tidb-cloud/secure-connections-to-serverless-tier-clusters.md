@@ -105,7 +105,7 @@ db, err := sql.Open("mysql", "<usename>:<your_password>@tcp(<host>:4000)/test?tl
 ```
 
 - Register `tls.Config` in connection to enable TLS and validate TiDB Serverless Tier clusters. Go-MySQL-Driver uses system CA root certificates by default, so you do not need to configure certificates.
-- Set `MinVersion: tls.VersionTLS12,` to restrict the versions of TLS protocol.
+- Set `MinVersion: tls.VersionTLS12` to restrict the versions of TLS protocol.
 - Set `ServerName: "<host>"` to verify TiDB Serverless Tier's hostname.
 - If you do not want to register a new TLS configuration, you can just set `tls=true` in the connection string.
 
