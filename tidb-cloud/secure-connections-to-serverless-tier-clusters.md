@@ -86,7 +86,7 @@ jdbc:mysql://<host>:4000/test?user=<username>&password=<your_password>&sslMode=V
 host="<host>", user="<username>", password="<your_password>", port=4000, database="test", ssl_mode="VERIFY_IDENTITY", ssl={"ca": "<CA_root_path>"}
 ```
 
-- Set `ssl_mode="VERIFY_IDENTITY"` enable TLS and validate TiDB Serverless Tier clusters.
+- Set `ssl_mode="VERIFY_IDENTITY"` to enable TLS and validate TiDB Serverless Tier clusters.
 - Set `ssl={"ca": "<CA_root_path>"}` to set the CA root path on your system.
 
 </div>
