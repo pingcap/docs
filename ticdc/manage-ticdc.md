@@ -310,6 +310,41 @@ dispatchers = [
 
 For detailed integration guide, see [Quick Start Guide on Integrating TiDB with Confluent Platform](/ticdc/integrate-confluent-using-ticdc.md).
 
+#### Configure `s3`, `azure blob storage`, `gcs`, or `nfs` in sink URI
+
+From v6.4, TiCDC supports saving row change events to cloud storage systems, including Amazon S3, GCS, and Azblob.
+
+- Saving row change events to Amazon S3:
+
+    ```shell
+    --sink-uri="s3://my-bucket/prefix?region=us-west-2&worker-count=4"
+    ```
+
+    The URI parameters of Amazon S3 in TiCDC are the same as the URL parameters of Amazon S3 in BR. For details, see [S3 URL parameters](/br/backup-and-restore-storages.md#s3-url-parameters).
+
+- Saving row change events to GCS:
+
+    ```shell
+    --sink-uri="gcs://my-bucket/prefix?flush-interval=15s"
+    ```
+
+    The URI parameters of GCS in TiCDC are the same as the URL parameters of GCS in BR. For details, see [GCS URL parameters](/br/backup-and-restore-storages.md#gcs-url-parameters).
+
+- Saving row change events to Azblob:
+
+    ```shell
+    --sink-uri="azblob://my-bucket/prefix"
+    ```
+
+    The URI parameters of Azblob in TiCDC are the same as the URL parameters of Azblob in BR. For details, see [Azblob URL parameters](/br/backup-and-restore-storages.md#azblob-url-parameters).
+
+Other parameters optional in the URI are as follows:
+
+| Parameter         | Description                                             |
+| :------------ | :------------------------------------------------ |
+| `worker-count` | Concurrency for saving data changes to cloud storage in the downstream (optional, defaults to `16`) |
+| `flush-interval` | Interval for saving data changes to cloud storage in the downstream (optional, defaults to `10s`)|
+
 #### Use the task configuration file
 
 For more replication configuration (for example, specify replicating a single table), see [Task configuration file](#task-configuration-file).
@@ -624,9 +659,30 @@ dispatchers = [
     {matcher = ['test1.*', 'test5.*'], topic = "Topic expression 3", partition = "table"},
     {matcher = ['test6.*'], partition = "ts"}
 ]
-# For the sink of MQ type, you can specify the protocol format of the message.
-# Currently the following protocols are supported: canal-json, open-protocol, canal, avro, and maxwell.
+
+# protocol is used to specify the protocol format of the message sent to the downstream.
+# When the downstream is Kafka, the protocol can be canal-json or avro.
+# When the downstream is object storage, the protocol can only be set to csv.
 protocol = "canal-json"
+
+# The following three configuration items are only used in cloud storage sinks.
+# Line break. The value is empty by default, which means "\r\n" is used.
+terminator = ''
+# Date separator type of the file directory. Value options are `none`, `year`, `month`, and `day`. `none` is the default value and means that the date is not separated.
+date-separator = 'none'
+# Whether to use partitions as the separation string.
+enable-partition-separator = false
+
+# Since v6.4, TiCDC supports saving data changes to cloud storage in CSV format.
+[sink.csv]
+# Delimiter between fields. The value must be an ASCII character and defaults to `,`.
+delimiter = ','
+# The quotation that surrounds fields. The default value is `"`, which means no quotation is used.
+quote = '"'
+# The character displayed when the csv column is null. The default value is `\N`.
+null = '\N'
+# Whether to include commit-ts in the csv column. The default value is false.
+include-commit-ts = false
 ```
 
 ### Event filter rules <span class="version-mark">New in v6.2.0</span>
@@ -771,6 +827,207 @@ You can use `partition = "xxx"` to specify a partition dispatcher. It supports f
 > ```
 > {matcher = ['*.*'], dispatcher = "ts", partition = "table"},
 > ```
+
+## Cloud storage sinks
+
+### Data change records
+
+Data change records are saved to the following path:
+
+```shell
+{protocol}://{prefix}/{schema}/{table}/{table-version-separator}/{partition-separator}/{date-separator}/CDC{num}.{extension}
+```
+
+- `protocol`: specifies the data transmission protocol, or the storage type, for example, `s3://xxxxx`.
+- `prefix`: specifies the user-defined parent directory, for example, `s3://bucket/bbb/ccc`.
+- `schema`: specifies the schema name, for example, `s3://bucket/bbb/ccc/test`.
+- `table`: specifies the table name, for example, `s3://bucket/bbb/ccc/test/table1`.
+- `table-version-separator`: specifies the separator that separates the file path by the table version, for example, `s3://bucket/bbb/ccc/test/table1/9999`.
+- `partition-separator`: specifies the separator that separates the file path by the table partition, for example, `s3://bucket/bbb/ccc/test/table1/9999/20`
+- `date-separator`: classifies the files by the transaction commit date. Value options are:
+    - none: no date-separator. For example, all files with `test.table1` version being `9999` are saved to `s3://bucket/bbb/ccc/test/table1/9999`.
+    - `year`: the separator is the year a transaction is committed, for example, `s3://bucket/bbb/ccc/test/table1/9999/2022`.
+    - `month`: the separator is the year and month a transaction is committed, for example,`s3://bucket/bbb/ccc/test/table1/9999/2022-01`.
+    - `day`: the separator is the year, month, and day a transaction is committed, for example,`s3://bucket/bbb/ccc/test/table1/9999/2022-01-02`.
+- `num`: saves the serial number of the file that records the data change, for example, `s3://bucket/bbb/ccc/test/table1/9999/2022-01-02/CDC000005.csv`.
+- `extension`: specifies the extension of the file. TiDB v6.4 supports the csv format only.
+
+### Metadata
+
+Metadata is saved in the following path:
+
+```shell
+{protocol}://{prefix}/metadata
+```
+
+Metadata is a JSON-formatted file, for example:
+
+```shell
+{
+    "checkpoint-ts":433305438660591626
+}
+```
+
+- checkpoint-ts: Transactions with `commit-ts` smaller than `checkpoint-ts` are written to the target storage in the downstream.
+
+### DDL events
+
+When DDL events cause the table version to change, TiCDC switches to the new path to write data change records. For example, when the version of `test.table1` changes from `9999` to `10000`, data will be written to the path `s3://bucket/bbb/ccc/test/table1/10000/2022-01-02/CDC000001.csv`. In addition, when DDL events occur, TiCDC generates a `schema.json` file to save the table structure information.
+
+Table structure information is saved in the following path:
+
+```shell
+{protocol}://{prefix}/{schema}/{table}/{table-version-separator}/schema.json
+```
+
+The following is a `schema.json` file:
+
+```shell
+{
+    "Table":"employee",
+    "Schema":"hr",
+    "Version":123123,
+    "TableColumns":[
+        {
+            "ColumnName":"Id",
+            "ColumnType":"INT",
+            "ColumnNullable":"false",
+            "ColumnIsPk":"true"
+        },
+        {
+            "ColumnName":"LastName",
+            "ColumnType":"CHAR",
+            "ColumnLength":"20"
+        },
+        {
+            "ColumnName":"FirstName",
+            "ColumnType":"VARCHAR",
+            "ColumnLength":"30"
+        },
+        {
+            "ColumnName":"HireDate",
+            "ColumnType":"DATETIME"
+        },
+        {
+            "ColumnName":"OfficeLocation",
+            "ColumnType":"BLOB",
+            "ColumnLength":"20"
+        }
+    ],
+    "TableColumnsTotal":"5"
+}
+```
+
+- `Table`: Table name.
+- `Schema`: Schema name.
+- `Version`: Table version.
+- `TableColumns`: An array of one or more maps, each of which describes a column in the source table.
+    - `ColumnName`: Column name.
+    - `ColumnType`: Column type. For details, see [Data type](#data-type).
+    - `ColumnLength`: Column length. For details, see [Data type](#data-type).
+    - `ColumnPrecision`: Column precision. For details, see [Data type](#data-type).
+    - `ColumnScale`: The number of digits following the decimal point (the scale). For details, see [Data type](#data-type).
+    - `ColumnNullable`: The column can be null when the value of this option is `true`.
+    - `ColumnIsPk`: The column is part of the primary key when the value of this option is `true`.
+- `TableColumnsTotal`: The size of the `TableColumns` array.
+
+### Data type
+
+Data type is defined as `T(M[, D])`. For details, see [Data Types](/data-type-overview.md).
+
+#### Integer types
+
+Integer types in TiDB are defined as `IT[(M)] [UNSIGNED]`, where
+
+- `IT` is the integer type, which can be `TINYINT`, `SMALLINT`, `MEDIUMINT`, `INT`, `BIGINT`, or `BIT`.
+- `M` is the display width of the type.
+
+Integer types are defined as follows in `schema.json`:
+
+```shell
+{
+    "ColumnName":"COL1",
+    "ColumnType":"{IT} [UNSIGNED]",
+    "ColumnPrecision":"{M}"
+}
+```
+
+#### Decimal types
+
+Decimal types in TiDB are defined as `DT[(M,D)][UNSIGNED]`, where
+
+- `DT` is the floating-point type, which can be `FLOAT`, `DOUBLE`, `DECIMAL`, or `NUMERIC`.
+- `M` is the precision of the data type, or the total number of digits.
+- `D` is the number of digits following the decimal point.
+
+Decimal types are defined as follows in `schema.json`:
+
+```shell
+{
+    "ColumnName":"COL1",
+    "ColumnType":"{DT} [UNSIGNED]",
+    "ColumnPrecision":"{M}",
+    "ColumnScale":"{D}"
+}
+```
+
+#### Date and time types
+
+Date types in TiDB are defined as `DT`, where
+
+- `DT` is the date type, which can be `DATE` or `YEAR`.
+
+The date types are defined as follows in `schema.json`:
+
+```shell
+{
+    "ColumnName":"COL1",
+    "ColumnType":"{DT}"
+}
+```
+
+The time types in TiDB are defined as `TT[(M)]`, where
+
+- `TT` is the time type, which can be `TIME`, `DATETIME`, or `TIMESTAMP`.
+- `M` is the precision of seconds in the range from 0 to 6.
+
+The time types are defined as follows in `schema.json`:
+
+```shell
+{
+    "ColumnName":"COL1",
+    "ColumnType":"{TT}",
+    "ColumnScale":"{M}"
+}
+```
+
+#### String types
+
+The string types in TiDB are defined as `ST[(M)]`, where
+
+- `ST` is the string type, which can be `CHAR`, `VARCHAR`, `TEXT`, `BINARY`, `BLOB`, or `JSON`.
+- `M` is the maximum length of the string.
+
+The string types are defined as follows in `schema.json`:
+
+```shell
+{
+    "ColumnName":"COL1",
+    "ColumnType":"{ST}",
+    "ColumnLength":"{M}"
+}
+```
+
+#### Enum and Set types
+
+The `ENUM` and `SET` types are defined as follows in `schema.json`:
+
+```shell
+{
+    "ColumnName":"COL1",
+    "ColumnType":"{ENUM/SET}",
+}
+```
 
 ## Output the historical value of a Row Changed Event <span class="version-mark">New in v4.0.5</span>
 
