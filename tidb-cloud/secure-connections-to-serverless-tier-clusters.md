@@ -11,7 +11,7 @@ This document introduces the core information about TLS in TiDB Serverless Tier.
 
 No.
 
-TiDB Serverless Tier allows only TLS connections and reject non-TLS connections. The reason for this is that users connect to TiDB Serverless Tier clusters through a public network, so communication security is really important.
+TiDB Serverless Tier allows only TLS connections and rejects non-TLS connections. The reason is that users connect to TiDB Serverless Tier clusters through a public network, so it is really important to use TLS to improve communication security.
 
 ## What TLS versions can I use?
 
@@ -19,9 +19,9 @@ TiDB Serverless Tier only supports TLS 1.2 and TLS 1.3.
 
 ## What certificates do I need？
 
-TiDB Serverless Tier use certificates from [Let's Encrypt](https://letsencrypt.org/) as a Certificate Authority (CA) for TLS connection between clients and TiDB Serverless Tier Clusters. Usually, Let's Encrypt's root certificate ([ISRG Root X1](https://letsencrypt.org/certs/isrgrootx1.pem.txt)) is present in your system's root CA stores. If the client uses the system's root CA stores by default, such as Java and Go, you can easily connect securely to TiDB Serverless Tier clusters without specifying the path of CA roots.
+TiDB Serverless Tier uses certificates from [Let's Encrypt](https://letsencrypt.org/) as a Certificate Authority (CA) for TLS connection between clients and TiDB Serverless Tier clusters. Usually, the root certificate ([ISRG Root X1](https://letsencrypt.org/certs/isrgrootx1.pem.txt)) of Let's Encrypt is present in your system's root CA stores. If the client uses the system's root CA stores by default, such as Java and Go, you can easily connect securely to TiDB Serverless Tier clusters without specifying the path of CA roots.
 
-However, some drivers and ORMs do not use the system root CA stores. In those cases, you should configure CA root path of the drivers or ORMs to your system root CA stores. For example, when you use MySQLdb to connect TiDB Serverless Tier clusters in Python, you should set `ca: /etc/ssl/cert.pem` in ssl configurations.
+However, some drivers and ORMs do not use the system root CA stores. In those cases, you should configure the CA root path of the drivers or ORMs to your system root CA stores. For example, when you use MySQLdb to connect a TiDB Serverless Tier cluster in Python, you should set `ca: /etc/ssl/cert.pem` in ssl configurations.
 
 > **Note:**
 > 
