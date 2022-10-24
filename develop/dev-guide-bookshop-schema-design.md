@@ -123,7 +123,7 @@ On the database details page of TiDB Cloud, click the **Import** button to enter
     - 1,000,000 rows of order records
 
 2. Select **US West (Oregon)** for **Bucket Region**.
-3. Select **TiDB Dumpling** for **Data Format**.
+3. Select **SQL File** for **Data Format**.
 
     ![Import Bookshop data in TiDB Cloud](/media/develop/tidb_cloud_import_bookshop_data.png)
 

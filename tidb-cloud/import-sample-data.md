@@ -22,9 +22,9 @@ This document describes how to import sample data into TiDB Cloud via the UI. Th
 
     If your TiDB cluster is hosted by AWS (the Developer Tier is hosted by AWS by default), fill in the following parameters:
 
-    - **Data Format**: select **TiDB Dumpling**.
+    - **Data Format**: select **SQL File**.
     - **Location**: `AWS`
-    - **Bucket URL**: enter the sample data URL `s3://tidbcloud-samples/data-ingestion/`
+    - **Bucket URI**: enter the sample data URI `s3://tidbcloud-samples/data-ingestion/`
     - **Role-ARN**: enter `arn:aws:iam::385595570414:role/import-sample-access`
     - **Target Cluster**: shows the cluster name and the region name.
 
@@ -36,9 +36,9 @@ This document describes how to import sample data into TiDB Cloud via the UI. Th
 
     If your TiDB cluster is hosted by GCP, fill in the following parameters:
 
-    - **Data Format**: select **TiDB Dumpling**.
+    - **Data Format**: select **SQL File**.
     - **Location**: `Google Cloud`
-    - **Bucket URL**: enter the sample data URL `gs://tidbcloud-samples-us-west1`.
+    - **Bucket URI**: enter the sample data URI `gs://tidbcloud-samples-us-west1`.
     - **Target Cluster**: shows the cluster name and the region name.
 
     If the region of the bucket is different from your cluster, confirm the compliance of cross region. Click **Next**.

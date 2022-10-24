@@ -147,7 +147,7 @@ You need to prepare an EC2 to run the following data export task. It's better to
     -F 256MiB
     ```
 
-4. On the data import task panel of TiDB Cloud, choose **TiDB Dumpling** as the **Data Format**.
+4. On the data import task panel of TiDB Cloud, choose **SQL File** as the **Data Format**.
 
 ### Option 2: Prepare source data files using Amazon Aurora snapshots
 
