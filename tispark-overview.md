@@ -87,7 +87,7 @@ However, TiSpark needs `mysql-connector-java` for writing and authentication. In
 spark-submit --jars tispark-assembly-3.0_2.12-3.1.0-SNAPSHOT.jar,mysql-connector-java-8.0.29.jar
 ```
 
-### Choose TiSpark Version
+### Choose TiSpark version
 
 You can choose TiSpark version according to your TiDB and Spark version.
 
