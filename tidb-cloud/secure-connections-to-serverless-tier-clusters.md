@@ -54,7 +54,7 @@ mysql --connect-timeout 15 -u <username> -h <host> -P 4000 --ssl-mode=VERIFY_IDE
 
 <div label="MyCLI Client">
 
-[MyCLI](https://www.mycli.net/) automatically enables TLS when using TLS related parameters. When you connect to TiDB Serverless Tier clusters, you should set `ssl-ca` and `ssl-verify-server-cert`.
+[MyCLI](https://www.mycli.net/) automatically enables TLS when using TLS related parameters. When you connect to TiDB Serverless Tier clusters, you need to set `ssl-ca` and `ssl-verify-server-cert`.
 
 ```shell
 mycli -u <username> -h <host> -P 4000 -D test --ssl-ca=<CA_root_path> --ssl-verify-server-cert
@@ -119,8 +119,8 @@ db, err := sql.Open("mysql", "<usename>:<your_password>@tcp(<host>:4000)/test?tl
 host: '<host>', port: 4000,user: '<username>', password: '<your_password>', database: 'test', ssl: {minVersion: 'TLSv1.2', rejectUnauthorized: true}
 ```
 
-- Set `ssl: {minVersion: 'TLSv1.2'}` to restrict the versions of TLS protocol.
-- Set `ssl: {rejectUnauthorized: true}` to validate TiDB Serverless Tier clusters.
+- Set `ssl: {minVersion: 'TLSv1.2'}` to restrict the versions of TLS protocol. 
+- Set `ssl: {rejectUnauthorized: true}` to validate TiDB Serverless Tier clusters. Mysql2 uses system CA root certificates by default, so you do not need to configure certificates.
 
 </div>
 </SimpleTab>
