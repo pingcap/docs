@@ -125,7 +125,7 @@
 - Integrate
   - [Overview](/integration-overview.md)
   - Integration Scenarios
-    - [Integrate TiDB with Confluent and Snowflake](/ticdc/integrate-confluent-using-ticdc.md)
+    - [Integrate with Confluent and Snowflake](/ticdc/integrate-confluent-using-ticdc.md)
     - [Integrate with Apache Kafka and Apache Flink](/replicate-data-to-kafka.md)
 - Maintain
   - Upgrade
