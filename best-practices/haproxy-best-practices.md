@@ -10,6 +10,10 @@ This document describes best practices for configuration and usage of [HAProxy](
 
 ![HAProxy Best Practices in TiDB](/media/haproxy.jpg)
 
+> **Note:**
+>
+> The minimum version of HAProxy that works with TiDB is v1.5. Between v1.5 and v2.1 you need to set the `post-41` option in the `mysql-check`. It is recommended to use version v2.2 or newer.
+
 ## HAProxy overview
 
 HAProxy is free, open-source software written in C language that provides a high availability load balancer and proxy server for TCP and HTTP-based applications. Because of its fast and efficient use of CPU and memory, HAProxy is now widely used by many well-known websites such as GitHub, Bitbucket, Stack Overflow, Reddit, Tumblr, Twitter, Tuenti, and AWS (Amazon Web Services).
