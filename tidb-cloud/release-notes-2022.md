@@ -10,7 +10,7 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
 ## November 1, 2022
 
-* Developer Tier is upgraded to [Serverless Tier](/tidb-cloud/select-cluster-tier.md#serverless-tier). Serverless Tier, a fully-managed, auto-scaling deployment of TiDB, is now available. It is still in beta stage and free to use.
+* Developer Tier is upgraded to [Serverless Tier](/tidb-cloud/select-cluster-tier.md#serverless-tier). Serverless Tier, a fully-managed, auto-scaling deployment of TiDB, is now available. It is still in beta and free to use.
 
     * A Serverless Tier cluster still contains fully functional HTAP ability as Dedicated Tier clusters.
     * Serverless Tier gives users faster creation time and instantaneous cold start time. Compared with Deverloper Tier, the creation time reduces from minutes to seconds.
