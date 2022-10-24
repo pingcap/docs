@@ -17,7 +17,7 @@ tiup cluster
 ```
 
 ```
-Starting component `cluster`: /home/tidb/.tiup/components/cluster/v1.10.3/cluster
+Starting component `cluster`: /home/tidb/.tiup/components/cluster/v1.11.0/cluster
 Deploy a TiDB cluster for production
 
 Usage:
@@ -91,6 +91,11 @@ tikv_servers:
   - host: 172.16.5.139
   - host: 172.16.5.140
 
+tiflash_servers:
+  - host: 172.16.5.141
+  - host: 172.16.5.142
+  - host: 172.16.5.143
+
 grafana_servers:
   - host: 172.16.5.134
 
@@ -114,12 +119,12 @@ tidb_servers:
 ...
 ```
 
-Save the file as `/tmp/topology.yaml`. If you want to use TiDB v6.2.0 and your cluster name is `prod-cluster`, run the following command:
+Save the file as `/tmp/topology.yaml`. If you want to use TiDB v6.3.0 and your cluster name is `prod-cluster`, run the following command:
 
 {{< copyable "shell-regular" >}}
 
 ```shell
-tiup cluster deploy -p prod-cluster v6.2.0 /tmp/topology.yaml
+tiup cluster deploy -p prod-cluster v6.3.0 /tmp/topology.yaml
 ```
 
 During the execution, TiUP asks you to confirm your topology again and requires the root password of the target machine (the `-p` flag means inputting password):
@@ -127,18 +132,21 @@ During the execution, TiUP asks you to confirm your topology again and requires 
 ```bash
 Please confirm your topology:
 TiDB Cluster: prod-cluster
-TiDB Version: v6.2.0
-Type        Host          Ports        Directories
-----        ----          -----        -----------
-pd          172.16.5.134  2379/2380    deploy/pd-2379,data/pd-2379
-pd          172.16.5.139  2379/2380    deploy/pd-2379,data/pd-2379
-pd          172.16.5.140  2379/2380    deploy/pd-2379,data/pd-2379
-tikv        172.16.5.134  20160/20180  deploy/tikv-20160,data/tikv-20160
-tikv        172.16.5.139  20160/20180  deploy/tikv-20160,data/tikv-20160
-tikv        172.16.5.140  20160/20180  deploy/tikv-20160,data/tikv-20160
-tidb        172.16.5.134  4000/10080   deploy/tidb-4000
-tidb        172.16.5.139  4000/10080   deploy/tidb-4000
-tidb        172.16.5.140  4000/10080   deploy/tidb-4000
+TiDB Version: v6.3.0
+Type        Host          Ports                            OS/Arch       Directories
+----        ----          -----                            -------       -----------
+pd          172.16.5.134  2379/2380                        linux/x86_64  deploy/pd-2379,data/pd-2379
+pd          172.16.5.139  2379/2380                        linux/x86_64  deploy/pd-2379,data/pd-2379
+pd          172.16.5.140  2379/2380                        linux/x86_64  deploy/pd-2379,data/pd-2379
+tikv        172.16.5.134  20160/20180                      linux/x86_64  deploy/tikv-20160,data/tikv-20160
+tikv        172.16.5.139  20160/20180                      linux/x86_64  deploy/tikv-20160,data/tikv-20160
+tikv        172.16.5.140  20160/20180                      linux/x86_64  deploy/tikv-20160,data/tikv-20160
+tidb        172.16.5.134  4000/10080                       linux/x86_64  deploy/tidb-4000
+tidb        172.16.5.139  4000/10080                       linux/x86_64  deploy/tidb-4000
+tidb        172.16.5.140  4000/10080                       linux/x86_64  deploy/tidb-4000
+tiflash     172.16.5.141  9000/8123/3930/20170/20292/8234  linux/x86_64  deploy/tiflash-9000,data/tiflash-9000
+tiflash     172.16.5.142  9000/8123/3930/20170/20292/8234  linux/x86_64  deploy/tiflash-9000,data/tiflash-9000
+tiflash     172.16.5.143  9000/8123/3930/20170/20292/8234  linux/x86_64  deploy/tiflash-9000,data/tiflash-9000
 prometheus  172.16.5.134  9090         deploy/prometheus-9090,data/prometheus-9090
 grafana     172.16.5.134  3000         deploy/grafana-3000
 Attention:
@@ -164,10 +172,10 @@ tiup cluster list
 ```
 
 ```
-Starting /root/.tiup/components/cluster/v1.10.3/cluster list
+Starting /root/.tiup/components/cluster/v1.11.0/cluster list
 Name          User  Version    Path                                               PrivateKey
 ----          ----  -------    ----                                               ----------
-prod-cluster  tidb  v6.2.0    /root/.tiup/storage/cluster/clusters/prod-cluster  /root/.tiup/storage/cluster/clusters/prod-cluster/ssh/id_rsa
+prod-cluster  tidb  v6.3.0    /root/.tiup/storage/cluster/clusters/prod-cluster  /root/.tiup/storage/cluster/clusters/prod-cluster/ssh/id_rsa
 ```
 
 ## Start the cluster
@@ -195,22 +203,25 @@ tiup cluster display prod-cluster
 ```
 
 ```
-Starting /root/.tiup/components/cluster/v1.10.3/cluster display prod-cluster
+Starting /root/.tiup/components/cluster/v1.11.0/cluster display prod-cluster
 TiDB Cluster: prod-cluster
-TiDB Version: v6.2.0
-ID                  Role        Host          Ports        Status     Data Dir              Deploy Dir
---                  ----        ----          -----        ------     --------              ----------
-172.16.5.134:3000   grafana     172.16.5.134  3000         Up         -                     deploy/grafana-3000
-172.16.5.134:2379   pd          172.16.5.134  2379/2380    Up|L       data/pd-2379          deploy/pd-2379
-172.16.5.139:2379   pd          172.16.5.139  2379/2380    Up|UI      data/pd-2379          deploy/pd-2379
-172.16.5.140:2379   pd          172.16.5.140  2379/2380    Up         data/pd-2379          deploy/pd-2379
-172.16.5.134:9090   prometheus  172.16.5.134  9090         Up         data/prometheus-9090  deploy/prometheus-9090
-172.16.5.134:4000   tidb        172.16.5.134  4000/10080   Up         -                     deploy/tidb-4000
-172.16.5.139:4000   tidb        172.16.5.139  4000/10080   Up         -                     deploy/tidb-4000
-172.16.5.140:4000   tidb        172.16.5.140  4000/10080   Up         -                     deploy/tidb-4000
-172.16.5.134:20160  tikv        172.16.5.134  20160/20180  Up         data/tikv-20160       deploy/tikv-20160
-172.16.5.139:20160  tikv        172.16.5.139  20160/20180  Up         data/tikv-20160       deploy/tikv-20160
-172.16.5.140:20160  tikv        172.16.5.140  20160/20180  Up         data/tikv-20160       deploy/tikv-20160
+TiDB Version: v6.3.0
+ID                  Role        Host          Ports                            OS/Arch       Status  Data Dir              Deploy Dir
+--                  ----        ----          -----                            -------       ------  --------              ----------
+172.16.5.134:3000   grafana     172.16.5.134  3000                             linux/x86_64  Up      -                     deploy/grafana-3000
+172.16.5.134:2379   pd          172.16.5.134  2379/2380                        linux/x86_64  Up|L    data/pd-2379          deploy/pd-2379
+172.16.5.139:2379   pd          172.16.5.139  2379/2380                        linux/x86_64  Up|UI   data/pd-2379          deploy/pd-2379
+172.16.5.140:2379   pd          172.16.5.140  2379/2380                        linux/x86_64  Up      data/pd-2379          deploy/pd-2379
+172.16.5.134:9090   prometheus  172.16.5.134  9090                             linux/x86_64  Up      data/prometheus-9090  deploy/prometheus-9090
+172.16.5.134:4000   tidb        172.16.5.134  4000/10080                       linux/x86_64  Up      -                     deploy/tidb-4000
+172.16.5.139:4000   tidb        172.16.5.139  4000/10080                       linux/x86_64  Up      -                     deploy/tidb-4000
+172.16.5.140:4000   tidb        172.16.5.140  4000/10080                       linux/x86_64  Up      -                     deploy/tidb-4000
+172.16.5.141:9000   tiflash     172.16.5.141  9000/8123/3930/20170/20292/8234  linux/x86_64  Up      data/tiflash-9000     deploy/tiflash-9000
+172.16.5.142:9000   tiflash     172.16.5.142  9000/8123/3930/20170/20292/8234  linux/x86_64  Up      data/tiflash-9000     deploy/tiflash-9000
+172.16.5.143:9000   tiflash     172.16.5.143  9000/8123/3930/20170/20292/8234  linux/x86_64  Up      data/tiflash-9000     deploy/tiflash-9000
+172.16.5.134:20160  tikv        172.16.5.134  20160/20180                      linux/x86_64  Up      data/tikv-20160       deploy/tikv-20160
+172.16.5.139:20160  tikv        172.16.5.139  20160/20180                      linux/x86_64  Up      data/tikv-20160       deploy/tikv-20160
+172.16.5.140:20160  tikv        172.16.5.140  20160/20180                      linux/x86_64  Up      data/tikv-20160       deploy/tikv-20160
 ```
 
 The `Status` column uses `Up` or `Down` to indicate whether the service is running normally.
@@ -225,12 +236,12 @@ For the PD component, `|L` or `|UI` might be appended to `Up` or `Down`. `|L` in
 
 Scaling in a cluster means making some node(s) offline. This operation removes the specific node(s) from the cluster and deletes the remaining files.
 
-Because the offline process of the TiKV and TiDB Binlog components is asynchronous (which requires removing the node through API), and the process takes a long time (which requires continuous observation on whether the node is successfully taken offline), special treatment is given to the TiKV and TiDB Binlog components.
+Because the offline process of the TiKV, TiFlash, and TiDB Binlog components is asynchronous (which requires removing the node through API), and the process takes a long time (which requires continuous observation on whether the node is successfully taken offline), special treatment is given to the TiKV, TiFlash, and TiDB Binlog components.
 
-- For TiKV and Binlog:
+- For TiKV, TiFlash, and Binlog:
 
     - TiUP cluster takes the node offline through API and directly exits without waiting for the process to be completed.
-    - Afterwards, when a command related to the cluster operation is executed, TiUP cluster examines whether there is a TiKV/Binlog node that has been taken offline. If not, TiUP cluster continues with the specified operation; If there is, TiUP cluster takes the following steps:
+    - Afterwards, when a command related to the cluster operation is executed, TiUP cluster examines whether there is a TiKV, TiFlash, or Binlog node that has been taken offline. If not, TiUP cluster continues with the specified operation; If there is, TiUP cluster takes the following steps:
 
         1. Stop the service of the node that has been taken offline.
         2. Clean up the data files related to the node.
@@ -266,22 +277,25 @@ tiup cluster display prod-cluster
 ```
 
 ```
-Starting /root/.tiup/components/cluster/v1.10.3/cluster display prod-cluster
+Starting /root/.tiup/components/cluster/v1.11.0/cluster display prod-cluster
 TiDB Cluster: prod-cluster
-TiDB Version: v6.2.0
-ID                  Role        Host          Ports        Status     Data Dir              Deploy Dir
---                  ----        ----          -----        ------     --------              ----------
-172.16.5.134:3000   grafana     172.16.5.134  3000         Up         -                     deploy/grafana-3000
-172.16.5.134:2379   pd          172.16.5.134  2379/2380    Up|L       data/pd-2379          deploy/pd-2379
-172.16.5.139:2379   pd          172.16.5.139  2379/2380    Up|UI      data/pd-2379          deploy/pd-2379
-172.16.5.140:2379   pd          172.16.5.140  2379/2380    Up         data/pd-2379          deploy/pd-2379
-172.16.5.134:9090   prometheus  172.16.5.134  9090         Up         data/prometheus-9090  deploy/prometheus-9090
-172.16.5.134:4000   tidb        172.16.5.134  4000/10080   Up         -                     deploy/tidb-4000
-172.16.5.139:4000   tidb        172.16.5.139  4000/10080   Up         -                     deploy/tidb-4000
-172.16.5.140:4000   tidb        172.16.5.140  4000/10080   Up         -                     deploy/tidb-4000
-172.16.5.134:20160  tikv        172.16.5.134  20160/20180  Up         data/tikv-20160       deploy/tikv-20160
-172.16.5.139:20160  tikv        172.16.5.139  20160/20180  Up         data/tikv-20160       deploy/tikv-20160
-172.16.5.140:20160  tikv        172.16.5.140  20160/20180  Offline    data/tikv-20160       deploy/tikv-20160
+TiDB Version: v6.3.0
+ID                  Role        Host          Ports                            OS/Arch       Status   Data Dir              Deploy Dir
+--                  ----        ----          -----                            -------       ------   --------              ----------
+172.16.5.134:3000   grafana     172.16.5.134  3000                             linux/x86_64  Up       -                     deploy/grafana-3000
+172.16.5.134:2379   pd          172.16.5.134  2379/2380                        linux/x86_64  Up|L     data/pd-2379          deploy/pd-2379
+172.16.5.139:2379   pd          172.16.5.139  2379/2380                        linux/x86_64  Up|UI    data/pd-2379          deploy/pd-2379
+172.16.5.140:2379   pd          172.16.5.140  2379/2380                        linux/x86_64  Up       data/pd-2379          deploy/pd-2379
+172.16.5.134:9090   prometheus  172.16.5.134  9090                             linux/x86_64  Up       data/prometheus-9090  deploy/prometheus-9090
+172.16.5.134:4000   tidb        172.16.5.134  4000/10080                       linux/x86_64  Up       -                     deploy/tidb-4000
+172.16.5.139:4000   tidb        172.16.5.139  4000/10080                       linux/x86_64  Up       -                     deploy/tidb-4000
+172.16.5.140:4000   tidb        172.16.5.140  4000/10080                       linux/x86_64  Up       -                     deploy/tidb-4000
+172.16.5.141:9000   tiflash     172.16.5.141  9000/8123/3930/20170/20292/8234  linux/x86_64  Up       data/tiflash-9000     deploy/tiflash-9000
+172.16.5.142:9000   tiflash     172.16.5.142  9000/8123/3930/20170/20292/8234  linux/x86_64  Up       data/tiflash-9000     deploy/tiflash-9000
+172.16.5.143:9000   tiflash     172.16.5.143  9000/8123/3930/20170/20292/8234  linux/x86_64  Up       data/tiflash-9000     deploy/tiflash-9000
+172.16.5.134:20160  tikv        172.16.5.134  20160/20180                      linux/x86_64  Up       data/tikv-20160       deploy/tikv-20160
+172.16.5.139:20160  tikv        172.16.5.139  20160/20180                      linux/x86_64  Up       data/tikv-20160       deploy/tikv-20160
+172.16.5.140:20160  tikv        172.16.5.140  20160/20180                      linux/x86_64  Offline  data/tikv-20160       deploy/tikv-20160
 ```
 
 After PD schedules the data on the node to other TiKV nodes, this node will be deleted automatically.
@@ -376,12 +390,12 @@ Global Flags:
   -y, --yes               Skip all confirmations and assumes 'yes'
 ```
 
-For example, the following command upgrades the cluster to v6.2.0:
+For example, the following command upgrades the cluster to v6.3.0:
 
 {{< copyable "shell-regular" >}}
 
 ```bash
-tiup cluster upgrade tidb-test v6.2.0
+tiup cluster upgrade tidb-test v6.3.0
 ```
 
 ## Update configuration
@@ -560,14 +574,14 @@ tiup cluster audit
 ```
 
 ```
-Starting component `cluster`: /home/tidb/.tiup/components/cluster/v1.10.3/cluster audit
+Starting component `cluster`: /home/tidb/.tiup/components/cluster/v1.11.0/cluster audit
 ID      Time                       Command
 --      ----                       -------
-4BLhr0  2022-08-10T13:25:09+08:00  /home/tidb/.tiup/components/cluster/v1.10.3/cluster deploy test v6.2.0 /tmp/topology.yaml
-4BKWjF  2022-08-08T23:36:57+08:00  /home/tidb/.tiup/components/cluster/v1.10.3/cluster deploy test v6.2.0 /tmp/topology.yaml
-4BKVwH  2022-08-08T23:02:08+08:00  /home/tidb/.tiup/components/cluster/v1.10.3/cluster deploy test v6.2.0 /tmp/topology.yaml
-4BKKH1  2022-08-08T16:39:04+08:00  /home/tidb/.tiup/components/cluster/v1.10.3/cluster destroy test
-4BKKDx  2022-08-08T16:36:57+08:00  /home/tidb/.tiup/components/cluster/v1.10.3/cluster deploy test v6.2.0 /tmp/topology.yaml
+4BLhr0  2022-09-30T13:25:09+08:00  /home/tidb/.tiup/components/cluster/v1.11.0/cluster deploy test v6.3.0 /tmp/topology.yaml
+4BKWjF  2022-09-28T23:36:57+08:00  /home/tidb/.tiup/components/cluster/v1.11.0/cluster deploy test v6.3.0 /tmp/topology.yaml
+4BKVwH  2022-09-28T23:02:08+08:00  /home/tidb/.tiup/components/cluster/v1.11.0/cluster deploy test v6.3.0 /tmp/topology.yaml
+4BKKH1  2022-09-28T16:39:04+08:00  /home/tidb/.tiup/components/cluster/v1.11.0/cluster destroy test
+4BKKDx  2022-09-28T16:36:57+08:00  /home/tidb/.tiup/components/cluster/v1.11.0/cluster deploy test v6.3.0 /tmp/topology.yaml
 ```
 
 The first column is `audit-id`. To view the execution log of a certain command, pass the `audit-id` of a command as the flag as follows:
@@ -719,3 +733,21 @@ The TiUP data is stored in the `.tiup` directory in the user's home directory. T
 > **Note:**
 >
 > It is recommended that you back up the `.tiup` directory regularly to avoid the loss of TiUP data caused by abnormal conditions, such as disk damage of the control machine.
+
+## Back up and restore meta files for cluster deployment and O&M
+
+If the meta files used for operation and maintenance (O&M) are lost, managing the cluster using TiUP will fail. It is recommended that you back up the meta files regularly by running the following command:
+
+```bash
+tiup cluster meta backup ${cluster_name}
+```
+
+If the meta files are lost, you can restore them by running the following command:
+
+```bash
+tiup cluster meta restore ${cluster_name} ${backup_file}
+```
+
+> **Note:**
+>
+> The restore operation overwrites the current meta files. Therefore, it is recommended to restore the meta files only when they are lost.

@@ -37,26 +37,6 @@ Currently, the log backup feature is not fully adapted to TiDB Lightning. Theref
 
 In upstream clusters where you create log backup tasks, avoid using the TiDB Lightning physical mode to import data. Instead, you can use TiDB Lightning logical mode. If you do need to use the physical mode, perform a snapshot backup after the import is complete, so that PITR can be restored to the time point after the snapshot backup.
 
-## When you use the self-built Minio system as the storage for log backups, running `br restore point` or `br log truncate` returns a `RequestCanceled` error
-
-Issue: [#36515](https://github.com/pingcap/tidb/issues/36515)
-
-```shell
-[error="RequestCanceled: request context canceled\ncaused by: context canceled"]
-```
-
-This error occurs because the current log backup generates a large number of small files. The self-built Minio storage system fails to store all these files.
-
-To resolve this issue, you need to upgrade your Minio system to a large distributed cluster, or use the Amazon S3 storage system as the storage for log backups.
-
-## If the cluster load is too high, there are too many Regions, and the storage has reached a performance bottleneck (for example, a self-built Minio system is used as storage for log backups), the backup progress checkpoint delay may exceed 10 minutes
-
-Issue: [#13030](https://github.com/tikv/tikv/issues/13030)
-
-Because the current log backup generates a large number of small files, the self-built Minio system is not able to support the writing requirements, which results in slow backup progress.
-
-To resolve this issue, you need to upgrade your Minio system to a large distributed cluster, or use the Amazon S3 storage system as the storage for log backups.
-
 ## The cluster has recovered from the network partition failure, but the checkpoint of the log backup task progress still does not resume
 
 Issue: [#13126](https://github.com/tikv/tikv/issues/13126)
@@ -88,3 +68,24 @@ For the current version, it is recommended that you perform a snapshot backup af
 Issue: [#13304](https://github.com/tikv/tikv/issues/13304)
 
 When there is a large transaction, the log checkpoint lag is not updated before the transaction is committed. Therefore, the checkpoint lag is increased by a period of time close to the commit time of the transaction.
+
+## The acceleration of adding indexes feature is not compatible with PITR
+
+Issue: [#38045](https://github.com/pingcap/tidb/issues/38045)
+
+Currently, the [acceleration of adding indexes](/system-variables.md#tidb_ddl_enable_fast_reorg-new-in-v630) feature is not compatible with PITR. When using index acceleration, you need to ensure that there are no PITR log backup tasks running in the background. Otherwise, unexpected behaviors might occur, including:
+
+- If you start a log backup task first, and then add an index. The adding index process is not accelerated even if index acceleration is enabled. But the index is added in a slow way.
+- If you start an index acceleration task first, and then start a log backup task. The log backup task returns an error. But the index acceleration is not affected.
+- If you start a log backup task and an index acceleration task at the same time, the two tasks might not be aware of each other. This might result in PITR failing to back up the newly added index.
+
+## An error occurs when you run the `PITR Truncate` command on GCS or Azure Blob Storage for the first time
+
+Issue: [#38229](https://github.com/pingcap/tidb/issues/38229)
+
+When you run `PITR Truncate` on GCS or Azure Blob Storage for the first time, you are reminded that the file `v1_stream_trancate_safepoint.txt` does not exist. To address this issue, take the following steps:
+
+In the backup root directory of PITR, create a file `v1_stream_trancate_safepoint.txt` and write `0` in it. Note that this file should not include any other characters and should be created only when you run `PITR Truncate` for the first time.
+
+<!-- TODO: Add the following content upon v6.4.0 release  -->
+<!-- Alternatively, use BR of v6.4.0 or later. -->

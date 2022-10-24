@@ -12,8 +12,18 @@ This document summarizes common problems during log backup and the solutions.
 In v6.2.0, PITR does not support restoring the TiFlash replicas of a cluster. After restoring data, you need to execute the following statement to set the TiFlash replica of the schema or table.
 
 ```sql
-ALTER TABLE table_name SET TIFLASH REPLICA count;
+ALTER TABLE table_name SET TIFLASH REPLICA @count;
 ```
+
+In v6.3.0 and later versions, after PITR completes data restore, BR automatically executes the `ALTER TABLE SET TIFLASH REPLICA` DDL statement according to the number of TiFlash replicas in the upstream cluster at the corresponding time. You can check the TiFlash replica setting using the following SQL statement:
+
+``` sql
+SELECT * FROM INFORMATION_SCHEMA.tiflash_replica;
+```
+
+> **Note:**
+>
+> Currently, PITR does not support writing data directly to TiFlash during the restore phase. Therefore, TiFlash replicas are not available immediately after PITR completes data restore. Instead, you need to wait for a certain period of time for the data to be replicated from TiKV nodes. To check the replication progress, check the `progress` information in the `INFORMATION_SCHEMA.tiflash_replica` table.
 
 ## What should I do if the `status` of a log backup task becomes `ERROR`?
 
@@ -69,13 +79,3 @@ Error: failed to check gc safePoint, checkpoint ts 433177834291200000: GC safepo
 After you pause a log backup task, to prevent the MVCC data from being garbage collected, the pausing task program sets the current checkpoint as the service safepoint automatically. This ensures that the MVCC data generated within 24 hours can remain. If the MVCC data of the backup checkpoint has been generated for more than 24 hours, the data of the checkpoint will be garbage collected, and the backup task is unable to resume.
 
 To address this problem, delete the current task using `br log stop`, and then create a log backup task using `br log start`. At the same time, you can perform a full backup for subsequent PITR.
-
-## What should I do if an error occurs when executing the Exchange Partition DDL during PITR log restoration?
-
-The following error occurs during PITR log restoration:
-
-```
-restore of ddl `exchange-table-partition` is not supported
-```
-
-In v6.2.0, the log backup feature is not compatible with the Exchange Partition DDL. It is recommended not to use this DDL during log backup. If you have executed the DDL, you must perform a full backup immediately. Then, PITR can restore the log data after the full backup checkpoint.
