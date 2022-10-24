@@ -26,7 +26,7 @@ However, some drivers and ORMs do not use the system root CA stores. In those ca
 > **Note:**
 > 
 > TiDB Serverless Tier does not provide a CA root certificate download, because we don't guarantee that the same CA will be used to issue a certificate in the future, which will cause the CA root certificate to change. 
-> While, TiDB Serverless Tier can always use the CA root certificate that is normally available, which is provided in all common systems. 
+> While, TiDB Serverless Tier can always use the CA root certificate that is normally available, which is provided on all common systems. 
 > 
 > If you really need the CA certificate of a TiDB Serverless Tier cluster, it is recommended that you download the [Mozilla CA Certificate bundle](https://curl.se/docs/caextract.html) instead of a single CA certificate.
 
@@ -36,67 +36,64 @@ TiDB Cloud provides some connection examples in the **Connect** tab. You can fol
 
 Generally, enabling TLS and offering a CA root path to authenticate the server is a good practice to prevent a man-in-the-middle attack. Different clients have different operations in the TLS connection. Enable TLS and verify the server according to your actual use of the client.
 
-The following examples show the connection string in MySQL Client, MyCLI client, Java, Python, Go, and Node.js:
+The following examples show the connection string in MySQL CLI client, MyCLI client, Java, Python, Go, and Node.js:
 
 <SimpleTab>
-<div label="MySQL Client">
+<div label="MySQL CLI client">
 
-MySQL Client attempts to establish TLS connection by default. When you connect to TiDB Serverless Tier clusters, you must set `ssl-mode` and `ssl-ca`.
-
-- With `--ssl-mode=VERIFY_IDENTITY`, MySQL Client forces to enable TLS and validate TiDB Serverless Tier clusters.
-- Use `--ssl-ca=<CA_root_path>` to set the CA root path in your system.
+MySQL CLI client attempts to establish TLS connection by default. When you connect to TiDB Serverless Tier clusters, you must set `ssl-mode` and `ssl-ca`.
 
 ```shell
 mysql --connect-timeout 15 -u <username> -h <host> -P 4000 --ssl-mode=VERIFY_IDENTITY --ssl-ca=<CA_root_path> -D test -p
 ```
 
+- With `--ssl-mode=VERIFY_IDENTITY`, MySQL CLI client forces to enable TLS and validate TiDB Serverless Tier clusters.
+- Use `--ssl-ca=<CA_root_path>` to set the CA root path on your system.
+
 </div>
 
 <div label="MyCLI Client">
 
-[MyCLI](https://www.mycli.net/) enables TLS automatically with the `ssl` flag. You can set `ssl-ca` to enable TLS and validate TiDB serverless Tier clusters.
-
-- Use `--ssl-ca=<CA_root_path>` to set the CA root path in your system.
+[MyCLI](https://www.mycli.net/) automatically enables TLS when using TLS related parameters. When you connect to TiDB Serverless Tier clusters, you should set `ssl-ca` and `ssl-verify-server-cert`.
 
 ```shell
-mycli -u <username> -h <host> -P 4000 -D test --ssl-ca=<CA_root_path>
+mycli -u <username> -h <host> -P 4000 -D test --ssl-ca=<CA_root_path> --ssl-verify-server-cert
 ```
+
+- Use `--ssl-ca=<CA_root_path>` to set the CA root path on your system.
+- With `--ssl-verify-server-cert` to validate TiDB Serverless Tier clusters' hostname.
 
 </div>
 
 <div label="Java">
 
-We recommend using [MySQL Connector/J 8.0](https://dev.mysql.com/doc/connector-j/8.0/en/) or later versions to connect to TiDB Serverless Tier clusters in Java.
-
-- Set `sslMode` in connection string to enable TLS and validate TiDB Serverless Tier clusters. JDBC trusts system CA root certificates by default, so you do not need to configure certificates.
-- With `--ssl-mode=VERIFY_IDENTITY`, JDBC forces to enable TLS and validate TiDB Serverless Tier clusters.
+[MySQL Connector/J](https://dev.mysql.com/doc/connector-j/8.0/en/)'s TLS connection configurations are used here as an example.
 
 ```
-jdbc:mysql://<host>:4000/test?user=<username>&password=<your_password>&sslMode=VERIFY_IDENTITY
+jdbc:mysql://<host>:4000/test?user=<username>&password=<your_password>&sslMode=VERIFY_IDENTITY&enabledTLSProtocols=TLSv1.2,TLSv1.3
 ```
+
+- Set `sslMode=VERIFY_IDENTITY` to enable TLS and validate TiDB Serverless Tier clusters. JDBC trusts system CA root certificates by default, so you do not need to configure certificates.
+- Set `enabledTLSProtocols=TLSv1.2,TLSv1.3` to restrict the versions of TLS protocol.
 
 </div>
 
 <div label="Python">
 
-We recommend using [mysqlclient](https://pypi.org/project/mysqlclient/) to connect to TiDB Serverless Tier clusters in Python. 
-
-- Set `ssl.ca` in the connection string to enable TLS and validate TiDB Serverless Tier clusters.
-- Use `ssl={"ca": "<CA_root_path>"}` to set the CA root path in your system.
+[Mysqlclient](https://pypi.org/project/mysqlclient/)'s TLS connection configurations are used here as an example.
 
 ```
-host="<host>", user="<username>", password="<your_password>", port=4000, database="test", ssl={"ca": "<CA_root_path>"}
+host="<host>", user="<username>", password="<your_password>", port=4000, database="test", ssl_mode="VERIFY_IDENTITY", ssl={"ca": "<CA_root_path>"}
 ```
+
+- Set `ssl_mode="VERIFY_IDENTITY"` enable TLS and validate TiDB Serverless Tier clusters.
+- Set `ssl={"ca": "<CA_root_path>"}` to set the CA root path on your system.
 
 </div>
 
 <div label="Go">
 
-It is recommended to use the [Go-MySQL-Driver](https://github.com/go-sql-driver/mysql) to connect to TiDB Serverless Tier clusters in Go.
-
-- Register `tls.Config` in connection to enable TLS and validate TiDB Serverless Tier clusters. Go uses system CA root certificates by default, so you do not need to configure certificates.
-- Register `tidb` TLS configuration. Set `ServerName: "<host>"` to verify TiDB Serverless Tier's hostname.
-- If you do not want to register a new TLS configuration, you can just set `tls=true` in the connection string.
+[Go-MySQL-Driver](https://github.com/go-sql-driver/mysql)'s TLS connection configurations are used here as an example.
 
 ```
 mysql.RegisterTLSConfig("tidb", &tls.Config{
@@ -107,24 +104,30 @@ mysql.RegisterTLSConfig("tidb", &tls.Config{
 db, err := sql.Open("mysql", "<usename>:<your_password>@tcp(<host>:4000)/test?tls=tidb")
 ```
 
+- Register `tls.Config` in connection to enable TLS and validate TiDB Serverless Tier clusters. Go-MySQL-Driver uses system CA root certificates by default, so you do not need to configure certificates.
+- Set `MinVersion: tls.VersionTLS12,` to restrict the versions of TLS protocol.
+- Set `ServerName: "<host>"` to verify TiDB Serverless Tier's hostname.
+- If you do not want to register a new TLS configuration, you can just set `tls=true` in the connection string.
+
 </div>
 
 <div label="Node.js">
 
-It is recommended to use [mysql2](https://www.npmjs.com/package/mysql2) to connect with TiDB Serverless Tier clusters in Node.js. Node.js use system CA root certificates by default, so you do not need to configure certificates anymore.
-
-- Set `ssl: {"rejectUnauthorized": true}` to validate TiDB Serverless Tier's hostname.
+[Mysql2](https://www.npmjs.com/package/mysql2)'s TLS connection configurations are used here as an example.
 
 ```
-host: '<host>', port: 4000,user: '<username>', password: '<your_password>', database: 'test', ssl: {"rejectUnauthorized": true}
+host: '<host>', port: 4000,user: '<username>', password: '<your_password>', database: 'test', ssl: {minVersion: 'TLSv1.2', rejectUnauthorized: true}
 ```
+
+- Set `ssl: {minVersion: 'TLSv1.2'}` to restrict the versions of TLS protocol.
+- Set `ssl: {rejectUnauthorized: true}` to validate TiDB Serverless Tier clusters.
 
 </div>
 </SimpleTab>
 
-## Where is the CA root path in my system?
+## Where is the CA root path on my system?
 
-The following lists the CA root paths in common platforms.
+The following lists the CA root paths on common platforms.
 
 **MacOS**
 
@@ -159,4 +162,4 @@ The following lists the CA root paths in common platforms.
 
 No.
 
-Currently, TiDB Serverless Tier uses one-way TLS authentication, which means only the client uses the public certificate pair to validate the server while the server does not validate the client. For example, when you use MySQL Client, you cannot configure `--ssl-cert` or `--ssl-key` in connection strings.
+Currently, TiDB Serverless Tier uses one-way TLS authentication, which means only the client uses the public certificate pair to validate the server while the server does not validate the client. For example, when you use MySQL CLI client, you cannot configure `--ssl-cert` or `--ssl-key` in connection strings.
