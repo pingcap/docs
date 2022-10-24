@@ -54,7 +54,7 @@ Regardless of the migration mode you choose, the precheck always includes the fo
 
     - Check whether the upstream tables have foreign keys, which are not supported by TiDB. A warning is returned if a foreign key is found in the precheck.
     - Check whether there are compatibility differences in character sets. For more information, see [TiDB Supported Character Sets](/character-set-and-collation.md).
-    - Check whether the upstream tables have primary key constraints or unique key constraints (introduced from v1.0.7)
+    - Check whether the upstream tables have primary key constraints or unique key constraints (introduced from v1.0.7).
 
     > **Warning:**
     >
