@@ -54,7 +54,7 @@ Conveniently, the steps are the same for setting TiDB as the source and the dest
     > - If you want to disable TLS connection to TiDB Cloud via JDBC, you need to set useSSL to `false` in JDBC URL Params specifically and close SSL connection, for example, `useSSL=false`.
     > - TiDB Serverless Tier only supports TLS connections.
 
-4. Click **Set up source** or **destinations** to complete creating the connector.
+4. Click **Set up sources** or **destinations** to complete creating the connector.
 
 ![img](/media/tidb-cloud/integration-airbyte-parameters.jpg)
 
