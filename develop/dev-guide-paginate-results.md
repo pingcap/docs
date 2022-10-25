@@ -305,7 +305,7 @@ ORDER BY page_num;
 
 > **Note:**
 >
-> The SQL will be executed as `TableFullScan`, when the data volume is large, the query will be slow, here you can [use TiFlash](/tiflash/tiflash-overview.md#use -tiflash) to speed up.
+> The preceding SQL statement is executed as `TableFullScan`. When the data volume is large, the query will be slow, and you can [use TiFlash](/tiflash/tiflash-overview.md#use -tiflash) to speed up it.
 
 The result is as follows:
 
