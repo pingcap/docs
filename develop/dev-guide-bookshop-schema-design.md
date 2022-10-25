@@ -96,7 +96,7 @@ You can delete the original table structure through the `--drop-tables` paramete
 
 On the cluster detail page of TiDB Cloud, click **Import Data** in the **Import** area to enter the **Data Import** page. On this page, perform the following steps to import the Bookshop sample data from AWS S3 to TiDB Cloud.
 
-1. Select **TiDB Dumpling** for **Data Format**.
+1. Select **SQL File** for **Data Format**.
 2. Copy the following **Bucket URL** and **Role-ARN** to the corresponding input boxes:
 
     **Bucket URL**:
@@ -115,11 +115,7 @@ On the cluster detail page of TiDB Cloud, click **Import Data** in the **Import*
     arn:aws:iam::494090988690:role/s3-tidb-cloud-developer-access
     ```
 
-    ![The fill from step of import data](/media/develop/import-data-fill-from.png)
-
 3. Click **Next** to go to the **File and filter** step to confirm the information of the files to be imported.
-
-    ![The file and filter step of import data](/media/develop/import-data-file-and-filter.png)
 
 4. Click **Next**  again to go to the **Preview** step to confirm the preview of the data to be imported.
 
@@ -130,8 +126,6 @@ On the cluster detail page of TiDB Cloud, click **Import Data** in the **Import*
     - 100,000 rows of author information
     - 1,000,000 rows of rating records
     - 1,000,000 rows of order records
-
-    ![The preview step of import data](/media/develop/import-data-preview.png)
 
 5. Click the **Start Import** button to start the import process and wait for TiDB Cloud to complete the importing.
 
