@@ -1,11 +1,11 @@
 ---
 title: Naming Conventions for Data Import
-summary: Learn about the naming conventions of CSV, Parquet, Aurora Snapshot, and SQL files.
+summary: Learn about the naming conventions for CSV, Parquet, Aurora Snapshot, and SQL files during data import.
 ---
 
 # Naming Conventions for Data Import
 
-The Data Import feature in TiDB Cloud supports the following file formats: CSV, Parquet, Aurora Snapshot, and SQL. To make sure that data can be imported successfully, note the following:
+The Data Import feature in TiDB Cloud supports the following file formats: CSV, Parquet, Aurora Snapshot, and SQL. To make sure that data can be imported successfully, you need to prepare the following:
 
 - Prepare the SQL file for creating the target database (optional) and the SQL file for creating the target table that conform to the naming conventions. If the SQL file for creating the target table is not provided, you need to create the corresponding table manually in the target database in advance.
 - Prepare a data file that conforms to the naming conventions for importing data. If the data file name cannot meet the requirements, it is recommended to use the file pattern to perform the import task. Otherwise, the import task can not scan the data files you need to import.
@@ -19,9 +19,14 @@ The naming conventions for schema files are as follows:
 - Database schema file(optional): `${db_name}-schema-create.sql`
 - Table schema file: `${db_name}.${table_name}-schema.sql`
 
+For example:
+
+- mytestdb-schema-create.sql
+- mytestdb.testtable-schema.sql
+
 ## Naming conventions for data files
 
-This section describes the naming conventions for data files. Ddpending on the type of source files, the naming conventions for data files are different.
+This section describes the naming conventions for data files. Depending on the type of source files, the naming conventions for data files are different.
 
 ### CSV
 
