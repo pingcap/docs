@@ -19,10 +19,26 @@ The naming conventions for schema files are as follows:
 - Database schema file (optional): `${db_name}-schema-create.sql`
 - Table schema file: `${db_name}.${table_name}-schema.sql`
 
-For example:
+The following is an example of a database schema file:
 
-- `mytestdb-schema-create.sql`
-- `mytestdb.testtable-schema.sql`
+- Name: `import_db-schema-create.sql`
+- File content:
+
+    ```sql
+    CREATE DATABASE import_db;
+    ```
+
+The following is an example of a table schema file:
+
+- Name: `import_db.test_table-schema.sql`
+- File content:
+
+    ```sql
+    CREATE TABLE test_table (
+        id INTEGER PRIMARY KEY,
+        val VARCHAR(255)
+    );
+    ```
 
 ## Naming conventions for data files
 
