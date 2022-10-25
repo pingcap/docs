@@ -52,7 +52,7 @@ Conveniently, the steps are the same for setting TiDB as the source and the dest
     >
     > - TiDB Cloud supports TLS connection. You can choose your TLS protocols in **TLSv1.2** and **TLSv1.3**, for example, `enabledTLSProtocols=TLSv1.2`.
     > - If you want to disable TLS connection to TiDB Cloud via JDBC, you need to set useSSL to `false` in JDBC URL Params specifically and close SSL connection, for example, `useSSL=false`.
-    > - TiDB Serverless only supports TLS connections.
+    > - TiDB Serverless Tier only supports TLS connections.
 
 4. Click **Set up source** or **destinations** to complete creating the connector.
 
@@ -60,7 +60,7 @@ Conveniently, the steps are the same for setting TiDB as the source and the dest
 
 For more details about the TiDB connector, see [TiDB Source](https://docs.airbyte.com/integrations/sources/tidb) and [TiDB Destination](https://docs.airbyte.com/integrations/destinations/tidb).
 
-## Set the connection
+## Set up the connection
 
 After setting up the source and destination, you can build and configure the connection. You can use any combination of sources and destinations, such as TiDB to Snowflake, and CSV file to TiDB.
 
