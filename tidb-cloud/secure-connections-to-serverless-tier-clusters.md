@@ -41,7 +41,7 @@ The following examples show the connection string in MySQL CLI client, MyCLI cli
 <SimpleTab>
 <div label="MySQL CLI client">
 
-MySQL CLI client attempts to establish TLS connection by default. When you connect to TiDB Serverless Tier clusters, you must set `ssl-mode` and `ssl-ca`.
+MySQL CLI client attempts to establish TLS connection by default. When you connect to TiDB Serverless Tier clusters, you should set `ssl-mode` and `ssl-ca`.
 
 ```shell
 mysql --connect-timeout 15 -u <username> -h <host> -P 4000 --ssl-mode=VERIFY_IDENTITY --ssl-ca=<CA_root_path> -D test -p
@@ -61,7 +61,7 @@ mycli -u <username> -h <host> -P 4000 -D test --ssl-ca=<CA_root_path> --ssl-veri
 ```
 
 - Use `--ssl-ca=<CA_root_path>` to set the CA root path on your system.
-- With `--ssl-verify-server-cert` to validate TiDB Serverless Tier clusters' hostname.
+- With `--ssl-verify-server-cert` to validate TiDB Serverless Tier clusters.
 
 </div>
 
