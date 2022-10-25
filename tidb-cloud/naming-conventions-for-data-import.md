@@ -10,48 +10,63 @@ The Data Import feature in TiDB Cloud supports the following file formats: CSV, 
 - Prepare the SQL file for creating the target database (optional) and the SQL file for creating the target table that conform to the naming conventions. If the SQL file for creating the target table is not provided, you need to create the corresponding table manually in the target database in advance.
 - Prepare a data file that conforms to the naming conventions for importing data. If the data file name cannot meet the requirements, it is recommended to use the file pattern to perform the import task. Otherwise, the import task can not scan the data files you need to import.
 
-## Naming conventions for data files and schema files
+## Naming conventions for schema files
 
-This section describes the naming conventions for data files and schema files.
+This section describes the naming conventions for database and table schema files. The naming conventions for schema files are the same for all the following types of source files: CSV, Parquet, Aurora Snapshot, and SQL.
+
+The naming conventions for schema files are as follows:
+
+- Database schema file(optional): `${db_name}-schema-create.sql`
+- Table schema file: `${db_name}.${table_name}-schema.sql`
+
+## Naming conventions for data files
+
+This section describes the naming conventions for data files. Ddpending on the type of source files, the naming conventions for data files are different.
 
 ### CSV
 
-When you import CSV files, name the schema files and data files as follows:
+When you import CSV files, name the data files as follows:
 
-- DB schema file (optional): `${db_name}-schema-create.sql`
-- Table schema file: `${db_name}.${table_name}-schema.sql`
-- Data file: `${db_name}.${table_name}[.XXXXXX].csv` ([.XXXXXX] is optional)
+- `${db_name}.${table_name}[.XXXXXX].csv` ([.XXXXXX] is optional)
 
-For example, `import_db.test_table.csv`, `import_db.test_table.01.csv`
+For example:
+
+- `import_db.test_table.csv`
+- `import_db.test_table.01.csv`
 
 ### Parquet
 
-When you import Parquet files, name the schema files and data files as follows:
+When you import Parquet files, name the data files as follows:
 
-- DB schema file (optional): `${db_name}-schema-create.sql`
-- Table schema file: `${db_name}.${table_name}-schema.sql`
-- Data file: `${db_name}.${table_name}[.XXXXXX][.{snappy|gz|lzo}].parquet` (`[.XXXXXXX]` and `[.{snappy|gz|lzo}]` are optional )
+- `${db_name}.${table_name}[.XXXXXX][.{snappy|gz|lzo}].parquet` (`[.XXXXXXX]` and `[.{snappy|gz|lzo}]` are optional)
 
-For example, `import_db.test_table.parquet`, `import_db.test_table.01.parquet`, 
- `import_db.test_table.gz.parquet`, `import_db.test_table.01.gz.parquet`
+For example:
+
+- `import_db.test_table.parquet`
+- `import_db.test_table.01.parquet`
+- `import_db.test_table.gz.parquet`
+- `import_db.test_table.01.gz.parquet`
 
 ### Aurora Snapshot
 
-When you import Aurora Snapshot files, name the schema files and data files as follows:
+When you import Aurora Snapshot files, name the data files as follows:
 
-- DB schema file (optional): `${db_name}-schema-create.sql`
-- Table schema file: `${db_name}.${table_name}-schema.sql`
-- Data file: All files with the `.parquet` suffix in the `${db_name}.${table_name}/` folder.
+- All files with the `.parquet` suffix in the `${db_name}.${table_name}/` folder.
+
+A data file name can contain any prefix consisting of "a-z, 0-9, - , _ , ." and suffix ".parquet". For example:
+
+- `dbname.tablename.01.parquet`
 
 ### SQL
 
-When you import SQL files, name the schema files and data files as follows:
+When you import SQL files, name the data files as follows:
 
-- DB schema file (optional): `${db_name}-schema-create.sql`
-- Table schema file: `${db_name}.${table_name}-schema.sql`
-- Data file: `${db_name}.${table_name}[.XXXXXXX].sql` ([.XXXXXXX] is optional)
+- `${db_name}.${table_name}[.XXXXXXX].sql` ([.XXXXXXX] is optional)
 
-For example, `import_db.test_table.sql`, `import_db.test_table.01.sql`
+For example:
+
+- `import_db.test_table.sql`
+- `import_db.test_table.01.sql`
 
 If the SQL file is exported through TiDB Dumpling with the default configuration, it conforms to the naming convention by default.
 
