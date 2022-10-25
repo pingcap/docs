@@ -108,8 +108,10 @@ mysql> SELECT * FROM t1;
 
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
+- Type: Enumeration
 - Default value: `aes-128-ecb`
-- Defines the encryption mode for the `AES_ENCRYPT()` and `AES_DECRYPT()` functions.
+- Value options: `aes-128-ecb`, `aes-192-ecb`, `aes-256-ecb`, `aes-128-cbc`, `aes-192-cbc`, `aes-256-cbc`, `aes-128-ofb`, `aes-192-ofb`, `aes-256-ofb`, `aes-128-cfb`, `aes-192-cfb`, `aes-256-cfb`
+- This variable sets the encryption mode for the built-in functions `AES_ENCRYPT()` and `AES_DECRYPT()`.
 
 ### character_set_client
 
@@ -820,7 +822,7 @@ MPP is a distributed computing framework provided by the TiFlash engine, which a
 - Scope: SESSION
 - Default value: `4`
 - Unit: Threads
-- This variable is used to set the scan index concurrency of executing the `ADMIN CHECKSUM TABLE` statement.
+- This variable is used to set the scan index concurrency of executing the [`ADMIN CHECKSUM TABLE`](/sql-statements/sql-statement-admin-checksum-table.md) statement.
 - When the variable is set to a larger value, the execution performance of other queries is affected.
 
 ### tidb_committer_concurrency <span class="version-mark">New in v6.1.0</span>
@@ -2458,6 +2460,15 @@ explain select * from t where age=5;
 - Range: `[0, 2147483647]`
 - Default value: `20`
 - Indicates the start-up cost for TiDB to request data from TiKV. This variable is internally used in the [Cost Model](/cost-model.md), and it is **NOT** recommended to modify its value.
+
+### tidb_opt_tiflash_concurrency_factor
+
+- Scope: SESSION | GLOBAL
+- Persists to cluster: YES
+- Type: Float
+- Range: `[0, 2147483647]`
+- Default value: `24.0`
+- Indicates the concurrency number of TiFlash computation. This variable is internally used in the [Cost Model](/cost-model.md), and it is **NOT** recommended to modify its value.
 
 ### tidb_opt_write_row_id
 
