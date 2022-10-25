@@ -7,18 +7,15 @@ summary: Learn the concept of TiCDC CSV Protocol and how to use it.
 
 ## Use CSV
 
-当使用云存储作为下游 Sink 时，你可以在使用 CSV 格式将 DML 事件发送到下游云存储。
 When using a cloud storage as the sink, you can send DML events to the cloud storage in the CSV format.
 
-使用 CSV 时的配置样例如下所示：
-
-{{< copyable "shell-regular" >}}
+The following is an example of the configuration when using the CSV protocol:
 
 ```shell
 cdc cli changefeed create --pd=http://127.0.0.1:2379 --changefeed-id="csv-test" --sink-uri="s3://bucket/prefix?worker-count=8&flush-interval=5s"  --config changefeed.toml
 ```
 
-changefeed.toml 文件内容如下：
+The configuration in the `changefeed.toml` file is as follows:
 
 ```
 [sink]
@@ -33,33 +30,25 @@ null = '\N'
 include-commit-ts = false
 ```
 
-## 事务性约束
+## Transactional constraints
 
-- 单个 CSV 文件中后一行数据的 commit-ts 必须大于前一行数据的 commit-ts。
-- 单表的同一事务不能跨不同的 CSV 文件来存储。
-- 相同事务涉及的不同表可跨不同的 CSV 文件来存储。
+- `commit-ts` of the last row in a single CSV file must be greater than that in the previous row.
+- The same transaction of a single table cannot be stored in different CSV files.
+- Multiple tables of the same transaction can be stored in different CSV files.
 
-## 数据格式定义
+## Definition of the data format
 
-CSV 行中的每一列定义如下：
+Each column in the CSV file is defined as follows:
 
-- Col1: The operation-type indicator: `I`, `D`, `U`; `I` means INSERT, `U` means UPDATE, `D` means DELETE.
-- Col2: Table name, the name of the source table.
-- Col3: Schema name, the name of the source schema.
-- Col4: Commit TS, the commit-ts of the source txn. The existence of this column can be configured.
-- Col5-n: one or more columns that represent the data to be changed.
+- Column 1: The operation-type indicator, including `I`, `D`, and `U`. `I` means `INSERT`, `U` means `UPDATE`, and `D` means `DELETE`.
+- Column 2: Table name.
+- Column 3: Schema name.
+- Column 4: `commit-ts` of the source transaction. This column is configurable.
+- Column 5- Column n: One or more columns that represent data to be changed.
 
-- 第一列：DML 操作指示符，取值为 `I`、`D` 或 `U`。`I` 表示 `INSERT`，`U` 表示 `UPDATE`，`D` 表示 `DELETE`。
-- 第二列：表名。
-- 第三列：库名。
-- 第四列：Commit ts，原始事务的 commit ts。该列是否存在可通过配置文件中的 `include-commit-ts` 配置项配置。
-- 第五列到最后一列：变更数据的所有列。
+假设某张表 `hr`.`employee` 的表定义如下：Assume that table `hr`.`employee` is defined as follows:
 
-假设某张表 `hr`.`employee` 的表定义如下：
-
-{{< copyable "shell-regular" >}}
-
-```shell
+```sql
 CREATE TABLE `employee` (
   `Id` int NOT NULL,
   `LastName` varchar(20) DEFAULT NULL,
@@ -69,7 +58,7 @@ CREATE TABLE `employee` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 ```
 
-该表上的 DML 事件以 CSV 格式存储后如下所示：
+The DML events of this table are stored in the CSV format as follows:
 
 ```shell
 "I","employee","hr",433305438660591626,101,"Smith","Bob","2014-06-04","New York"
@@ -79,20 +68,20 @@ CREATE TABLE `employee` (
 "U","employee","hr",433305438660591630,102,"Alex","Alice","2018-06-15","Beijing"
 ```
 
-## 数据类型映射
+## Date type mapping
 
-| MySQL 类型                                           | CSV 类型 | 示例                          | 描述                                   |
+| MySQL type                                          | CSV type | Example                          | Description                                   |
 |-----------------------------------------------------|----------|------------------------------|---------------------------------------|
-| FLOAT/DOUBLE                                        | Float    | 153.123                      |                                       |
-| BOOLEAN/TINYINT/SMALLINT/INT/MEDIUMINT/BIGINT       | Integer  | 123                          |                                       |
-| YEAR                                                | Integer  | 1970                         |                                       |
-| BIT                                                 | Integer  | 81                           |                                       |
-| NULL                                                | Null     | \N                           |                                       |
-| TIMESTAMP/DATETIME                                  | String   | "1973-12-30 15:30:00.123456" | 格式: yyyy-MM-dd HH:mm:ss.%06d         |
-| DATE                                                | String   | "2000-01-01"                 | 格式: yyyy-MM-dd                       |
-| TIME                                                | String   | "23:59:59"                   | 格式: HH:mm:ss                         |
-| VARCHAR/JSON/TINYTEXT/MEDIUMTEXT/LONGTEXT/TEXT/CHAR | String   | "test"                       | 以 UTF-8 编码输出                       |
-| VARBINARY/TINYBLOB/MEDIUMBLOB/LONGBLOB/BLOB/BINARY  | String   | "6Zi/5pav"                   | 以 base64 编码输出                      |
-| DECIMAL                                             | String   | "129012.1230000"             |                                       |
-| ENUM                                                | String   | "a"                          |                                       |
-| SET                                                 | String   | "a,b"                        |                                       |
+| FLOAT/DOUBLE                                        | Float    | 153.123                      | -                                     |
+| BOOLEAN/TINYINT/SMALLINT/INT/MEDIUMINT/BIGINT       | Integer  | 123                          | -                                     |
+| YEAR                                                | Integer  | 1970                         | -                                     |
+| BIT                                                 | Integer  | 81                           | -                                     |
+| NULL                                                | Null     | \N                           | -                                     |
+| TIMESTAMP/DATETIME                                  | String   | "1973-12-30 15:30:00.123456" | Format: yyyy-MM-dd HH:mm:ss.%06d         |
+| DATE                                                | String   | "2000-01-01"                 | Format: yyyy-MM-dd                       |
+| TIME                                                | String   | "23:59:59"                   | Format: HH:mm:ss                         |
+| VARCHAR/JSON/TINYTEXT/MEDIUMTEXT/LONGTEXT/TEXT/CHAR | String   | "test"                       | UTF-8 encoded                       |
+| VARBINARY/TINYBLOB/MEDIUMBLOB/LONGBLOB/BLOB/BINARY  | String   | "6Zi/5pav"                   | base64 encoded                      |
+| DECIMAL                                             | String   | "129012.1230000"             | -                                     |
+| ENUM                                                | String   | "a"                          | -                                     |
+| SET                                                 | String   | "a,b"                        | -                                     |
