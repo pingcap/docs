@@ -77,7 +77,7 @@ The following steps use TiDB as both source and destination. Other connectors ma
 
     ![img](/media/tidb-cloud/integration-airbyte-connection.jpg)
 
-7. Set **Normalization & Transformation** to **Normalized tabular data** to use the default normalization mode, or you can set the dbt file for your job.
+7. Set **Normalization & Transformation** to **Normalized tabular data** to use the default normalization mode, or you can set the dbt file for your job. For more information about normalization, refer to [Transformations and Normalization](https://docs.airbyte.com/operator-guides/transformation-and-normalization/transformations-with-dbt).
 8. Click **Set up connection**.
 9. Once the connection is established, click **ENABLED** to activate the synchronization task. You can also click **Sync now** to sync immediately.
 
