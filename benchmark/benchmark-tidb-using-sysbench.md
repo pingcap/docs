@@ -19,6 +19,8 @@ server_configs:
     log.level: "error"
 ```
 
+It is also recommended to make sure [`tidb_enable_prepared_plan_cache`](/system-variables#tidb_enable_prepared_plan_cache-new-in-v610) is enabled and that you allow sysbench to use prepared statements by _not_ using `--db-ps-mode=disabled`. See the [SQL Prepared Execution Plan Cache](/sql-prepared-pan-cache.md) for documetnation about what the SQL plan cache does and how to monitor it.
+
 ### TiKV configuration
 
 Higher log level also means better performance for TiKV.
