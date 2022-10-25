@@ -177,6 +177,7 @@
   - [API Overview](/tidb-cloud/api-overview.md)
   - [API Reference](https://docs.pingcap.com/tidbcloud/api/v1beta)
 - Integrations
+  - [Airbyte](/tidb-cloud/airbyte.md)
   - [Datadog](/tidb-cloud/monitor-datadog-integration.md)
   - [Prometheus and Grafana](/tidb-cloud/monitor-prometheus-and-grafana-integration.md)
   - Terraform
@@ -423,9 +424,6 @@
   - [Dumpling](/dumpling-overview.md)
   - [Table Filter](/table-filter.md)
   - [Troubleshoot Inconsistency Between Data and Indexes](/troubleshoot-data-inconsistency-errors.md)
-- Integrations
-  - [Airbyte](/tidb-cloud/airbyte.md)
-  - [Vercel](/tidb-cloud/integrate-tidbcloud-with-vercel.md)
 - [FAQs](/tidb-cloud/tidb-cloud-faq.md)
 - Release Notes
   - [2022](/tidb-cloud/release-notes-2022.md)

@@ -30,9 +30,7 @@ Once you see an Airbyte banner, you can go to [http://localhost:8000](http://loc
 
 ![img](/media/tidb-cloud/integration-airbyte-ready.jpg)
 
-## Set the TiDB connector
-
-If you use TiDB as the source, see a step-by-step tutorial about [Using Airbyte to Migrate Data from TiDB Cloud to Snowflake](https://www.pingcap.com/blog/using-airbyte-to-migrate-data-from-tidb-cloud-to-snowflake/).
+## Set up the TiDB connector
 
 Conveniently, the steps are the same for setting TiDB as the source and the destination.
 
@@ -77,14 +75,20 @@ The following steps use TiDB as both source and destination. Other connectors ma
     >
     > The TiDB connector supports both Incremental and Full Refresh syncs. In Incremental mode, Airbyte only reads records added to the source since the last sync job. The first sync using Incremental mode is equivalent to Full Refresh mode. In Full Refresh mode, Airbyte reads all records in the source and replicates to the destination in every sync task. You can set the sync mode for every table named **Namespace** in Airbyte individually.
 
+    ![img](/media/tidb-cloud/integration-airbyte-connection.jpg)
+
 7. Set **Normalization & Transformation** to **Normalized tabular data** to use the default normalization mode, or you can set the dbt file for your job.
 8. Click **Set up connection**.
-9. Start the sync task and wait a few minutes for the mission to establish.
+9. Once the connection is established, click **ENABLED** to activate the synchronization task. You can also click **Sync now** to sync immediately.
 
-![img](/media/tidb-cloud/integration-airbyte-connection.jpg)
+![img](/media/tidb-cloud/integration-airbyte-sync.jpg)
 
 ## Limitations
 
 - The TiDB connector does not support the Change Data Capture (CDC) feature.
 - TiDB destination converts the `timestamp` type to the `varchar` type in default normalization mode. It happens because Airbyte converts the timestamp type to string during transmission, and TiDB does not support `cast ('2020-07-28 14:50:15+1:00' as timestamp)`.
 - For some large ETL missions, you need to increase the parameters of [transaction restrictions](/develop/dev-guide-transaction-restraints.md#large-transaction-restrictions) in TiDB.
+
+## Extended Reading
+
+[Using Airbyte to Migrate Data from TiDB Cloud to Snowflake](https://www.pingcap.com/blog/using-airbyte-to-migrate-data-from-tidb-cloud-to-snowflake/).
