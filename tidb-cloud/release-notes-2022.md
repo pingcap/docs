@@ -40,6 +40,8 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
     - [`tidb_query_log_max_len`](/system-variables.md#tidb_query_log_max_len)
     - [`tidb_max_tiflash_threads`](/system-variables.md#tidb_max_tiflash_threads-new-in-v610)
 
+- Upgrade the default TiDB version of new [Dedicated Tier](/tidb-cloud/select-cluster-tier.md#dedicated-tier) clusters from [v6.1.1](https://docs.pingcap.com/tidb/stable/release-6.1.1) to [v6.1.2](https://docs.pingcap.com/tidb/stable/release-6.1.2).
+
 ## October 19, 2022
 
 **Integration changes**
