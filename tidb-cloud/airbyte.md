@@ -79,7 +79,7 @@ The following steps use TiDB as source and destination. Other connectors may hav
 
 7. Set **Normalization & Transformation** to **Normalized tabular data** to use the default normalization mode, or you can set the dbt file for your job.
 8. Click **Set up connection**.
-9. Start the sync task and wait a few minutes for the mission to finish.
+9. Start the sync task and wait a few minutes for the mission to establish.
 
 ![img](/media/tidb-cloud/integration-airbyte-connection.jpg)
 
