@@ -117,11 +117,11 @@ On the cluster detail page of TiDB Cloud, switch to the **Import** tab, and clic
 
     ![The fill from step of import data](/media/develop/import-data-fill-from.png)
 
-3. Click the **Next** button switch to the **File and filter** step to confirm the information of the file that will be imported.
+3. Click **Next** to go to the **File and filter** step to confirm the information of the files to be imported.
 
     ![The file and filter step of import data](/media/develop/import-data-file-and-filter.png)
 
-4. Click the **Next** button again switch to the **Preview** step to confirm the sample data that will be imported is fine.
+4. Click **Next**  again to go to the **Preview** step to confirm the preview of the data to be imported.
 
     In this example, the following data is generated in advance:
 
@@ -135,7 +135,7 @@ On the cluster detail page of TiDB Cloud, switch to the **Import** tab, and clic
 
 5. Click the **Start Import** button to start the import process and wait for TiDB Cloud to complete the importing.
 
-For more information about TiDB Cloud, see [TiDB Cloud Documentation](https://docs.pingcap.com/tidbcloud).
+For more information about how to import or migrate data to TiDB Cloud, see [TiDB Cloud Migration Overview](https://docs.pingcap.com/tidbcloud/tidb-cloud-migration-overview).
 
 ### View data import status
 
