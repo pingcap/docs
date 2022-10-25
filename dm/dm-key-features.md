@@ -51,7 +51,7 @@ routes:
 ### Parameter explanation
 
 - DM migrates the upstream MySQL or MariaDB instance table that matches the [`schema-pattern`/`table-pattern` rule provided by Table selector](/dm/table-selector.md) to the downstream `target-schema`/`target-table`.
-- For sharded tables that match `schema-pattern`/`table-pattern` rules, DM extracts the table, schema, and source information of these tables by using the `extract-table`.`table-regexp`, `extract-schema`.`schema-regexp`, and `extract-source`.`source-regexp` regular expressions, respectively. Then DM writes the extracted information to the corresponding `target-column` in the merged table downstream.
+- For sharded tables that match the `schema-pattern`/`table-pattern` rules, DM extracts the table name by using the `extract-table`.`table-regexp` regular expression, the schema name by using the `extract-schema`.`schema-regexp` regular expression, and source information by using the `extract-source`.`source-regexp` regular expression. Then DM writes the extracted information to the corresponding `target-column` in the merged table in the downstream.
 
 ### Usage examples
 
@@ -86,11 +86,11 @@ To migrate the upstream instances to the downstream `test`.`t`, you must create 
 
 Assuming in the scenario of sharded schemas and tables, you want to migrate the `test_{1,2,3...}`.`t_{1,2,3...}` tables in two upstream MySQL instances to the `test`.`t` table in the downstream TiDB instance. At the same time, you want to extract the source information of the sharded tables and write it to the downstream merged table.
 
-Similar to the previous section, to migrate the upstream instances to the downstream `test`.`t`, you must create the following routing rules. At the same time, you need to add the `extract-table`, `extract-schema`, `extract-source` configurations:
+Similar to the previous section [Merge sharded schemas and tables](#merge-sharded-schemas-and-tables), to migrate the upstream instances to the downstream `test`.`t`, you must create the following routing rules. At the same time, you need to add the `extract-table`, `extract-schema`, and `extract-source` configurations:
 
-- `extract-table`: For a sharded table matching `schema-pattern`/`table-pattern`, DM extracts the sharded table by using `table-regexp` and writes the suffix without the `t_` part to `target-column` of the merged table, that is, the `c_table` column.
-- `extract-schema`: For a sharded schema matching `schema-pattern`/`table-pattern`, DM extracts the sharded schema by using `schema-regexp` and writes the suffix without the `test_` part to `target-column` of the merged table, that is, the `c_schema` column.
-- `extract-source`: For a sharded table matching `schema-pattern`/`table-pattern`, DM writes the source information to the `target-column` of the merged table, that is, the `c_source` column.
+- `extract-table`: For a sharded table matching `schema-pattern` and `table-pattern`, DM extracts the sharded table by using `table-regexp` and writes the suffix without the `t_` part to `target-column` of the merged table, that is, the `c_table` column.
+- `extract-schema`: For a sharded schema matching `schema-pattern` and `table-pattern`, DM extracts the sharded schema by using `schema-regexp` and writes the suffix without the `test_` part to `target-column` of the merged table, that is, the `c_schema` column.
+- `extract-source`: For a sharded table matching `schema-pattern` and `table-pattern`, DM writes the source information to the `target-column` of the merged table, that is, the `c_source` column.
 
 ```yaml
   rule-1:
@@ -112,7 +112,7 @@ Similar to the previous section, to migrate the upstream instances to the downst
     target-schema: "test"
 ```
 
-To migrate the source information of upstream sharded tables to the merged table downstream, you **must manually create the a merged table in the downstream before starting the migration**. The merged table must contain all the defined `target-column`. The `target-column` used for storing the source information **must be the last columns and be a character type**.
+To extract the source information of upstream sharded tables to the merged table in the downstream, you **must manually create a merged table in the downstream before starting the migration**. The merged table must contain the three `target-columns` (`c_table`, `c_schema`, and `c_source`) used for specifying the source information. In addition, these columns **must be the last columns and be character types**.
 
 ```sql
 CREATE TABLE `test`.`t` (
@@ -123,7 +123,7 @@ CREATE TABLE `test`.`t` (
 );
 ```
 
-Source data in the upstream:
+Assume that the upstream has the following two data sources:
 
 Data source `mysql-01`:
 
@@ -174,6 +174,10 @@ mysql> select * from test.t;
 ```
 
 ##### Incorrect example of merged tables
+
+> **Note:**
+>
+> If any of the following errors occur, source information of sharded tables and schemas might fail to be written to the merged table.
 
 - `c-table` is not in the last columns:
 

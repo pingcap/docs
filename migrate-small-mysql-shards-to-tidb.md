@@ -144,8 +144,8 @@ mysql-instances:
 # Configurations for merging MySQL shards
 routes:
   sale-route-rule:
-    schema-pattern: "store_*"                               # Merge schemas store_01 and store_02 to the store schema downstream
-    table-pattern: "sale_*"                                 # Merge tables sale_01 and sale_02 of schemas store_01 and store_02 to the sale table downstream
+    schema-pattern: "store_*"                               # Merge schemas store_01 and store_02 to the store schema in the downstream
+    table-pattern: "sale_*"                                 # Merge tables sale_01 and sale_02 of schemas store_01 and store_02 to the sale table in the downstream
     target-schema: "store"
     target-table:  "sale"
     # Optional. Used for extracting the source information of sharded schemas and tables and writing the information to the user-defined columns in the downstream. If these options are configured, you need to manually create a merged table in the downstream. For details, see the following table routing setting.
