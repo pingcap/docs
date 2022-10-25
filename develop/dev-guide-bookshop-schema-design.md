@@ -94,7 +94,7 @@ You can delete the original table structure through the `--drop-tables` paramete
 
 ### Method 2: Via TiDB Cloud Import
 
-On the cluster detail page of TiDB Cloud, switch to the **Import** tab, and click the **Import Data** button to enter the **Data Import** page. On this page, perform the following steps to import the Bookshop sample data from AWS S3 to TiDB Cloud. (Please refer to the [Migrate From Amazon S3 or GCS](https://docs.pingcap.com/tidbcloud/migrate-from-amazon-s3-or-gcs#step-3-import-data-into-tidb-cloud) guide for detailed steps)
+On the cluster detail page of TiDB Cloud, switch to the **Import** tab, and click the **Import Data** button to enter the **Data Import** page. On this page, perform the following steps to import the Bookshop sample data from AWS S3 to TiDB Cloud. (Please refer to the [Migrate From Amazon S3 or GCS](https://docs.pingcap.com/tidbcloud/migrate-from-amazon-s3-or-gcs#step-3-import-data-into-tidb-cloud) guide for detailed steps):
 
 1. Select **TiDB Dumpling** for **Data Format**.
 2. Copy the following **Bucket URL** and **Role-ARN** to the corresponding input boxes:
@@ -120,7 +120,6 @@ On the cluster detail page of TiDB Cloud, switch to the **Import** tab, and clic
 3. Click the **Next** button switch to the **File and filter** step to confirm the information of the file that will be imported.
 
     ![The file and filter step of import data](/media/develop/import-data-file-and-filter.png)
-
 
 4. Click the **Next** button again switch to the **Preview** step to confirm the sample data that will be imported is fine.
 
