@@ -12,7 +12,7 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
 **General changes**
 
-- Support dynamically changing and persisting a subset of TiDB system variables.
+- Support dynamically changing and persisting a subset of TiDB system variables (beta).
 
     You can use the standard SQL statement to set a new value for a supported system variable.
 
@@ -30,15 +30,15 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
     **This feature is still in beta**, and only a limited number of variables are supported. It is not recommended to modify other [system variables](/system-variables.md) due to uncertainty of the side effects. See the following list for all supported variables based on TiDB v6.1:
 
-    - [`tidb_enable_batch_dml`](/system-variables.md#tidb_enable_batch_dml)
     - [`require_secure_transport`](/system-variables.md#require_secure_transport-new-in-v610)
-    - [`tidb_mem_oom_action`](/system-variables.md#tidb_mem_oom_action-new-in-v610)
-    - [`tidb_enable_prepared_plan_cache`](/system-variables.md#tidb_enable_prepared_plan_cache-new-in-v610)
-    - [`tidb_mem_quota_query`](/system-variables.md#tidb_mem_quota_query)
     - [`tidb_committer_concurrency`](/system-variables.md#tidb_committer_concurrency-new-in-v610)
+    - [`tidb_enable_batch_dml`](/system-variables.md#tidb_enable_batch_dml)
+    - [`tidb_enable_prepared_plan_cache`](/system-variables.md#tidb_enable_prepared_plan_cache-new-in-v610)
+    - [`tidb_max_tiflash_threads`](/system-variables.md#tidb_max_tiflash_threads-new-in-v610)
+    - [`tidb_mem_oom_action`](/system-variables.md#tidb_mem_oom_action-new-in-v610)
+    - [`tidb_mem_quota_query`](/system-variables.md#tidb_mem_quota_query)
     - [`tidb_prepared_plan_cache_size`](/system-variables.md#tidb_prepared_plan_cache_size-new-in-v610)
     - [`tidb_query_log_max_len`](/system-variables.md#tidb_query_log_max_len)
-    - [`tidb_max_tiflash_threads`](/system-variables.md#tidb_max_tiflash_threads-new-in-v610)
 
 - Upgrade the default TiDB version of new [Dedicated Tier](/tidb-cloud/select-cluster-tier.md#dedicated-tier) clusters from [v6.1.1](https://docs.pingcap.com/tidb/stable/release-6.1.1) to [v6.1.2](https://docs.pingcap.com/tidb/stable/release-6.1.2).
 
