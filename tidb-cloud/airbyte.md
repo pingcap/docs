@@ -64,7 +64,7 @@ For more details about the TiDB connector, see [TiDB Source](https://docs.airbyt
 
 After setting up the source and destination, you can build and configure the connection. You can use any combination of sources and destinations, such as TiDB to Snowflake, and CSV file to TiDB.
 
-The following steps use TiDB as source and destination. Other connectors may have different parameters.
+The following steps use TiDB as both source and destination. Other connectors may have different parameters.
 
 1. Click **Connections** in the sidebar and then click **New Connection**.
 2. Select the previously established source and destination.
