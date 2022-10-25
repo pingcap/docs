@@ -80,7 +80,7 @@ jdbc:mysql://<host>:4000/test?user=<username>&password=<your_password>&sslMode=V
 
 <div label="Python">
 
-[Mysqlclient](https://pypi.org/project/mysqlclient/)'s TLS connection configurations are used here as an example.
+[mysqlclient](https://pypi.org/project/mysqlclient/)'s TLS connection configurations are used here as an example.
 
 ```
 host="<host>", user="<username>", password="<your_password>", port=4000, database="test", ssl_mode="VERIFY_IDENTITY", ssl={"ca": "<CA_root_path>"}
