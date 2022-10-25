@@ -127,7 +127,7 @@ On the cluster detail page of TiDB Cloud, click **Import Data** in the **Import*
     - 1,000,000 rows of rating records
     - 1,000,000 rows of order records
 
-5. Click the **Start Import** button to start the import process and wait for TiDB Cloud to complete the importing.
+5. Click **Start Import** to start the import process and wait for TiDB Cloud to complete the import.
 
 For more information about how to import or migrate data to TiDB Cloud, see [TiDB Cloud Migration Overview](https://docs.pingcap.com/tidbcloud/tidb-cloud-migration-overview).
 
