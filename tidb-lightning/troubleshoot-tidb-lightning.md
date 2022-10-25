@@ -204,4 +204,4 @@ header = false
 
 ### `Unknown character set`
 
-TiDB does not support all MySQL character sets. Therefore, TiDB Lightning reports this error if an unsupported character set is used when creating the table structure during an import. You can bypass this error by using [character sets supported by TiDB](/character-set-and-collation.md) according to the specific data and creating the table structure in the downstream in advance.
+TiDB does not support all MySQL character sets. Therefore, TiDB Lightning reports this error if an unsupported character set is used when creating the table schema during an import. To bypass this error, you can create the table schema in the downstream in advance using the [character sets supported by TiDB](/character-set-and-collation.md) according to the specific data.
