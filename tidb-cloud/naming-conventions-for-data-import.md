@@ -74,7 +74,9 @@ For Aurora Snapshot files, all files with the `.parquet` suffix in the `${db_nam
 
 For example:
 
-- `dbname.tablename.01.parquet`
+- `import_db.test_table/mydata.parquet`
+- `import_db.test_table/part001/mydata.parquet`
+- `import_db.test_table/part002/mydata-part002.parquet`
 
 ### SQL
 
