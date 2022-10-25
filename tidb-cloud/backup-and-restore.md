@@ -14,9 +14,9 @@ This document describes how to back up and restore your TiDB cluster data on TiD
 
 ## Backup
 
-TiDB Cloud provides two types of data backup: automatic backup and manual backup.
+TiDB Cloud supports automatic backup and manual backup.
 
-Daily backups are automatically scheduled for your TiDB clusters in TiDB Cloud. You can pick a backup snapshot and restore it into a new TiDB cluster at any time. Automated backup can reduce your losses in extreme disaster situations.
+Automatic backups are scheduled for your TiDB clusters according to the backup setting, which can reduce your losses in extreme disaster situations. You can also pick a backup snapshot and restore it into a new TiDB cluster at any time.
 
 ### Automatic backup
 
@@ -24,15 +24,37 @@ By the automatic backup, you can back up the cluster data every day at the backu
 
 1. Navigate to the **Backup** tab of a cluster.
 
-2. Click **Auto Setting**. The setting window displays.
+2. Click **Backup Settings**. The setting window displays.
 
-3. In the setting window, select **Backup Time** and maximum backup files in **Limit (backup files)**.
+3. In the setting window,
+
+    - check whether the PITR(**Point-in-time Recovery**) feature is on.
+
+    - select **Backup Time**, which is the scheduling start time for cluster backup, and it is recommended to be the low workload peak period, if you do not specify a preferred backup time, TiDB Cloud assigns a default backup time, which is 2:00 AM in the time zone of the region where the cluster is located.
+
+    - select **Backup Retention**, which is the minimum backup data retention period.
+
+    - select **Backup Storage Region**, in addition to storing the backup data in where the cluster is located, you can add another remote region, TiDB Cloud will copy all new backup data to the remote region which facilitates data safety and faster recovery.
 
 4. Click **Confirm**.
 
-If you do not specify a preferred backup time, TiDB Cloud assigns a default backup time, which is 2:00 AM in the time zone of the region where the cluster is located.
+> **Note that:**
+> You can not disable automatic backup.
+> To use the PITR feature, firstly make sure your TiDB cluster version is at least v6.3.0 and the TiKV node configuration is at least 8c/16g, then file a ticket to request to enable the PITR feature.
+> After adding a remote region as a backup data store, you can't turn it off.
 
-Note that you can not disable automatic backup.
+### Backup storage region support
+
+TiDB Cloud does not yet support adding an arbitrary remote region as backup data storage, the regions already supported are as follows:
+
+| Cloud provider | Region                      | Remote regions support   |
+|----------------|-----------------------------|--------------------------|
+| GCP            | Tokyo (asia-northeast1)     | Osaka (asia-northeast2)  |
+
+> **Note that:**
+> TiDB Cloud will charge you for multiple copies of backup storage based on Backup Storage Region setting, and backup storage price varies by region.
+> If you select multiple backup storage regions then you will also incur backup data replication charges.
+> See [Data Backup Cost](https://en.pingcap.com/tidb-cloud-pricing-details/#data-backup-cost) for more information.
 
 ### Manual backup
 
@@ -83,18 +105,26 @@ To restore your TiDB cluster data from a backup to a new cluster, take the follo
 
 1. Navigate to the **Backup** tab of a cluster.
 
-2. Select an existing backup in the list, and click **Restore**.
+2. Click **Restore**. The setting window displays.
 
-3. In the **Restore** window, make the following changes if necessary:
+3. Select **Restore Mode**, you can
 
+    - In **Select Backup Name**, select an existing backup in the backup list.
+    - If PITR is enabled, you can click **Select Time Point**, select the point in time you want to recover.
+
+4. In **Restore to Region**, you can select the same region as the **Backup Storage Region** configured in the **Backup Settings**.
+
+5. In the **Restore** window, you can also make the following changes if necessary:
+
+    - Set the cluster name.
     - Update the port number of the cluster.
     - Increase the node size, node quantity, and node storage for the cluster.
 
-4. Click **Confirm**.
+6. Click **Restore**.
 
    The cluster restore process starts and the **Security Settings** dialog box is displayed.
 
-5. In the **Security Settings** dialog box, set the root password and allowed IP addresses to connect to your cluster, and then click **Apply**.
+7. In the **Security Settings** dialog box, set the root password and allowed IP addresses to connect to your cluster, and then click **Apply**.
 
 ### Restore a deleted cluster
 
@@ -113,3 +143,5 @@ To restore a deleted cluster from recycle bin, take the following steps:
    The cluster restore process starts and the **Security Settings** dialog box is displayed.
 
 6. In the **Security Settings** dialog box, set the root password and allowed IP addresses to connect to your cluster, and then click **Apply**.
+
+> **Note that:** Do PITRin the Recycle Bin is not supported.
