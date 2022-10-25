@@ -310,9 +310,9 @@ dispatchers = [
 
 For detailed integration guide, see [Quick Start Guide on Integrating TiDB with Confluent Platform](/ticdc/integrate-confluent-using-ticdc.md).
 
-#### Configure `s3`, `azure blob storage`, `gcs`, or `nfs` in sink URI
+#### Configure `s3`, `azure blob storage`, `gcs`, and `nfs` in sink URI
 
-From v6.4, TiCDC supports saving row change events to cloud storage systems, including Amazon S3, GCS, and Azblob.
+From v6.4.0, TiCDC supports saving row change events to a cloud storage system, including Amazon S3, GCS, and Azblob.
 
 - Saving row change events to Amazon S3:
 
@@ -673,7 +673,7 @@ date-separator = 'none'
 # Whether to use partitions as the separation string.
 enable-partition-separator = false
 
-# Since v6.4, TiCDC supports saving data changes to cloud storage in CSV format.
+# Since v6.4.0, TiCDC supports saving data changes to cloud storage in CSV format.
 [sink.csv]
 # Delimiter between fields. The value must be an ASCII character and defaults to `,`.
 delimiter = ','
@@ -850,7 +850,7 @@ Data change records are saved to the following path:
     - `month`: the separator is the year and month a transaction is committed, for example,`s3://bucket/bbb/ccc/test/table1/9999/2022-01`.
     - `day`: the separator is the year, month, and day a transaction is committed, for example,`s3://bucket/bbb/ccc/test/table1/9999/2022-01-02`.
 - `num`: saves the serial number of the file that records the data change, for example, `s3://bucket/bbb/ccc/test/table1/9999/2022-01-02/CDC000005.csv`.
-- `extension`: specifies the extension of the file. TiDB v6.4 supports the csv format only.
+- `extension`: specifies the extension of the file. TiDB v6.4.0 supports the CSV format only.
 
 ### Metadata
 

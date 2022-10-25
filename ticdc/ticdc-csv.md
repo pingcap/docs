@@ -46,7 +46,7 @@ Each column in the CSV file is defined as follows:
 - Column 4: `commit-ts` of the source transaction. This column is configurable.
 - Column 5- Column n: One or more columns that represent data to be changed.
 
-假设某张表 `hr`.`employee` 的表定义如下：Assume that table `hr`.`employee` is defined as follows:
+Assume that table `hr`.`employee` is defined as follows:
 
 ```sql
 CREATE TABLE `employee` (
