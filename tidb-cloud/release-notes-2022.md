@@ -13,7 +13,8 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 **General changes**
 
 - Support dynamically changing and persisting a subset of TiDB system variables.
-  You can use the standard SQL statement to set a new value for a supported system variable.
+
+    You can use the standard SQL statement to set a new value for a supported system variable.
 
     ```sql
     SET [GLOBAL|SESSION] <variable>
