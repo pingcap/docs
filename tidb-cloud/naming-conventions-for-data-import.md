@@ -7,10 +7,8 @@ summary: Learn about the naming conventions of CSV, Parquet, Aurora Snapshot, an
 
 The Data Import feature in TiDB Cloud supports the following file formats: CSV, Parquet, Aurora Snapshot, and SQL. To make sure that data can be imported successfully, note the following:
 
-- The data files and the schema files for building the database and tables must conform to the naming conventions.
-- If you can not provide the schema file for building the database, TiDB Cloud will create a target database for you according to the default configuration.
-- If you can not provide the schema file for building tables, you need to create the target tables in TiDB Cloud in advance.
-- If you can not provide data files with the required file names, you can modify the file pattern to perform the import task. Otherwise, TiDB Cloud can not scan the files you want to import.
+- Prepare the SQL file for creating the target database (optional) and the SQL file for creating the target table that conform to the naming conventions. If the SQL file for creating the target table is not provided, you need to create the corresponding table manually in the target database in advance.
+- Prepare a data file that conforms to the naming conventions for importing data. If the data file name cannot meet the requirements, it is recommended to use the file pattern to perform the import task. Otherwise, the import task can not scan the data files you need to import.
 
 ## Naming conventions for data files and schema files
 
@@ -24,35 +22,36 @@ When you import CSV files, name the schema files and data files as follows:
 - Table schema file: `${db_name}.${table_name}-schema.sql`
 - Data file: `${db_name}.${table_name}[.XXXXXX].csv` ([.XXXXXX] is optional)
 
-For example, `import_db.test_table.01.csv`
+For example, `import_db.test_table.csv`, `import_db.test_table.01.csv`
 
 ### Parquet
 
 When you import Parquet files, name the schema files and data files as follows:
 
-- DB schema file(optional): `${db_name}-schema-create.sql`
+- DB schema file (optional): `${db_name}-schema-create.sql`
 - Table schema file: `${db_name}.${table_name}-schema.sql`
-- Data file: `${db_name}.${table_name}[.XXXXXX].{snappy|gz|lzo}.parquet` (`[.XXXXXXX].{snappy|gz|lzo}` is optional )
+- Data file: `${db_name}.${table_name}[.XXXXXX][.{snappy|gz|lzo}].parquet` (`[.XXXXXXX]` and `[.{snappy|gz|lzo}]` are optional )
 
-For example, `import_db.test_table.01.parquet`
+For example, `import_db.test_table.parquet`, `import_db.test_table.01.parquet`, 
+ `import_db.test_table.gz.parquet`, `import_db.test_table.01.gz.parquet`
 
 ### Aurora Snapshot
 
 When you import Aurora Snapshot files, name the schema files and data files as follows:
 
-- DB schema file: `${db_name}-schema-create.sql (optional)`
+- DB schema file (optional): `${db_name}-schema-create.sql`
 - Table schema file: `${db_name}.${table_name}-schema.sql`
-- Data file: All files with the `.parquet` suffix in the `db_name.table_name/` folder.
+- Data file: All files with the `.parquet` suffix in the `${db_name}.${table_name}/` folder.
 
 ### SQL
 
 When you import SQL files, name the schema files and data files as follows:
 
-- DB schema file: `${db_name}-schema-create.sql` (optional)
+- DB schema file (optional): `${db_name}-schema-create.sql`
 - Table schema file: `${db_name}.${table_name}-schema.sql`
 - Data file: `${db_name}.${table_name}[.XXXXXXX].sql` ([.XXXXXXX] is optional)
 
-For example, `import_db.test_table.01.sql`
+For example, `import_db.test_table.sql`, `import_db.test_table.01.sql`
 
 If the SQL file is exported through TiDB Dumpling with the default configuration, it conforms to the naming convention by default.
 
