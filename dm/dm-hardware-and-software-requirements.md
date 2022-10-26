@@ -1,9 +1,9 @@
 ---
-title: Software and Hardware Requirements
+title: Software and Hardware Requirements for TiDB Data Migration
 summary: Learn the software and hardware requirements for DM cluster.
 ---
 
-# Software and Hardware Requirements
+# Software and Hardware Requirements for TiDB Data Migration
 
 TiDB Data Migration (DM) supports mainstream Linux operating systems. See the following table for specific version requirements:
 

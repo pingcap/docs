@@ -1,9 +1,9 @@
 ---
-title: Upstream Database Configuration File
+title: Upstream Database Configuration File of TiDB Data Migration
 summary: Learn the configuration file of the upstream database
 ---
 
-# Upstream Database Configuration File
+# Upstream Database Configuration File of TiDB Data Migration
 
 This document introduces the configuration file of the upstream database, including a configuration file template and the description of each configuration parameter in this file.
 
