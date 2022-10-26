@@ -116,7 +116,7 @@ You can import a small dataset to quickly test feasibility, or a large dataset t
 
 You can import data in various formats to TiDB Cloud:
 
-- [Import sample data in the TiDB Dumpling format](/tidb-cloud/import-sample-data.md)
+- [Import sample data in the SQL file format](/tidb-cloud/import-sample-data.md)
 - [Migrate from Amazon Aurora MySQL](/tidb-cloud/migrate-from-aurora-bulk-import.md)
 - [Import CSV Files from Amazon S3 or GCS](/tidb-cloud/import-csv-files.md)
 - [Import Apache Parquet Files](/tidb-cloud/import-parquet-files.md)

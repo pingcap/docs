@@ -147,12 +147,12 @@ To allow TiDB Cloud to access the source data in your GCS bucket, you need to co
     >
     > To remove the access to TiDB Cloud, you can simply remove the access that you have granted.
 
-6. On the **Bucket details** page, click the **CONFIGURATION** tab, and then copy your GCS bucket URL from the **gsutil URI** field.
+6. On the **Bucket details** page, click the **CONFIGURATION** tab, and then copy your GCS bucket URI from the **gsutil URI** field.
 
-    ![Get bucket URL](/media/tidb-cloud/gcp-bucket-url.png)
+    ![Get bucket URI](/media/tidb-cloud/gcp-bucket-url.png)
 
-7. In the TiDB Cloud console, go to the **Data Import** page where you get the Google Cloud Service Account ID, and then paste the GCS bucket URL to the **Bucket URL** field. Note that you must add `/` to the end of the URL.
+7. In the TiDB Cloud console, go to the **Data Import** page where you get the Google Cloud Service Account ID, and then paste the GCS bucket URI to the **Bucket URI** field. Note that you must add `/` to the end of the URI.
 
-    For example, if your bucket URL is `gs://tidb-cloud-source-data`, you need to fill in `gs://tidb-cloud-source-data/`.
+    For example, if your bucket URI is `gs://tidb-cloud-source-data`, you need to fill in `gs://tidb-cloud-source-data/`.
 
-    ![Fill in bucket URL in the TiDB Cloud console](/media/tidb-cloud/gcp-bucket-url-field.png)
+    ![Fill in bucket URI in the TiDB Cloud console](/media/tidb-cloud/gcp-bucket-url-field.png)
