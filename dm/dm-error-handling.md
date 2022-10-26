@@ -1,9 +1,9 @@
 ---
-title: Handle Errors
+title: Handle Errors in TiDB Data Migration
 summary: Learn about the error system and how to handle common errors when you use DM.
 ---
 
-# Handle Errors
+# Handle Errors in TiDB Data Migration
 
 This document introduces the error system and how to handle common errors when you use DM.
 

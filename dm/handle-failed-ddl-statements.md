@@ -1,9 +1,9 @@
 ---
-title: Handle Failed DDL Statements
+title: Handle Failed DDL Statements in TiDB Data Migration
 summary: Learn how to handle failed DDL statements when you're using the TiDB Data Migration tool to migrate data.
 ---
 
-# Handle Failed DDL Statements
+# Handle Failed DDL Statements in TiDB Data Migration
 
 This document introduces how to handle failed DDL statements when you're using the TiDB Data Migration (DM) tool to migrate data.
 
