@@ -1,11 +1,11 @@
 ---
-title: Use Airbyte to Extract, Load and Transform Data
+title: Integrate TiDB Cloud with Airbyte
 summary: Learn how to use Airbyte TiDB connector.
 ---
 
-# Use Airbyte to Extract, Load and Transform Data
+# Integrate TiDB Cloud with Airbyte
 
-[Airbyte](https://airbyte.com/) is an open-source data integration engine to build Extract, Load, Transform (ELT) pipelines and consolidate your data in your data warehouses, data lakes, and databases. This document shows how to connect Airbyte to TiDB as a source or a destination.
+[Airbyte](https://airbyte.com/) is an open-source data integration engine to build Extract, Load, Transform (ELT) pipelines and consolidate your data in your data warehouses, data lakes, and databases. This document describes how to connect Airbyte to TiDB as a source or a destination.
 
 ## Deploy Airbyte
 
@@ -36,7 +36,7 @@ Conveniently, the steps are the same for setting TiDB as the source and the dest
 
 1. Click **Sources** or **Destinations** in the sidebar and choose TiDB type to create a new TiDB connector.
 
-2. Fill in the following parameters.
+2. Fill in the following parameters:
 
     - Host: The host domain of TiDB
     - Port: The port of the database
@@ -52,7 +52,7 @@ Conveniently, the steps are the same for setting TiDB as the source and the dest
     > - If you want to disable TLS connection to TiDB Cloud via JDBC, you need to set useSSL to `false` in JDBC URL Params specifically and close SSL connection, for example, `useSSL=false`.
     > - TiDB Serverless Tier only supports TLS connections.
 
-4. Click **Set up source** or **destination** to complete creating the connector.
+4. Click **Set up source** or **destination** to complete creating the connector. The following screenshot shows the configuration of TiDB as the source.
 
 ![img](/media/tidb-cloud/integration-airbyte-parameters.jpg)
 
@@ -89,6 +89,6 @@ The following steps use TiDB as both source and destination. Other connectors ma
 - TiDB destination converts the `timestamp` type to the `varchar` type in default normalization mode. It happens because Airbyte converts the timestamp type to string during transmission, and TiDB does not support `cast ('2020-07-28 14:50:15+1:00' as timestamp)`.
 - For some large ETL missions, you need to increase the parameters of [transaction restrictions](/develop/dev-guide-transaction-restraints.md#large-transaction-restrictions) in TiDB.
 
-## Extended Reading
+## See also
 
 [Using Airbyte to Migrate Data from TiDB Cloud to Snowflake](https://www.pingcap.com/blog/using-airbyte-to-migrate-data-from-tidb-cloud-to-snowflake/).
