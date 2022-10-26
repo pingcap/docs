@@ -26,13 +26,14 @@ However, some drivers and ORMs do not use the system root CA stores. In those ca
 > **Note:**
 > 
 > TiDB Serverless Tier does not provide a CA root certificate download, because we don't guarantee that the same CA will be used to issue a certificate in the future, which will cause the CA root certificate to change. 
+>
 > However, TiDB Serverless Tier promises always using a CA root certificate that is commonly available, which is provided in all common systems. 
 > 
 > If you really need the CA certificate of a TiDB Serverless Tier cluster, it is recommended that you download the [Mozilla CA Certificate bundle](https://curl.se/docs/caextract.html) instead of the single CA certificate in case we change the CA in the future.
 
 ## How do I connect to a TiDB Serverless Tier cluster in TLS connection?
 
-TiDB Cloud provides some connection examples in the **Connect** tab. You can follow the instructions in [Connect via standard connection](/tidb-cloud/connect-to-tidb-cluster.md#connect-via-standard-connection) to connect to a TiDB Serverless Tier cluster.
+TiDB Cloud provides some connection examples in the **Connect** dialog. You can follow the instructions in [Connect via standard connection](/tidb-cloud/connect-to-tidb-cluster.md#connect-via-standard-connection) to connect to a TiDB Serverless Tier cluster.
 
 Generally, enabling TLS and offering a CA root path to authenticate the server is a good practice to prevent a man-in-the-middle attack. Different clients have different operations in the TLS connection. Enable TLS and verify the server according to your actual use of the client.
 
@@ -129,34 +130,47 @@ host: '<host>', port: 4000,user: '<username>', password: '<your_password>', data
 
 The following lists the CA root paths on common platforms.
 
-**MacOS**
+<SimpleTab>
+
+<div label="macOS">
 
 ```
 /etc/ssl/cert.pem
 ```
 
-**Debian / Ubuntu / Arch**
+</div>
+
+<div label="Debian / Ubuntu / Arch">
+
 ```
 /etc/ssl/certs/ca-certificates.crt
 ```
 
-**RedHat / Fedora / CentOS / Mageia**
+</div>
+
+<div label="RedHat / Fedora / CentOS / Mageia">
 
 ```
 /etc/pki/tls/certs/ca-bundle.crt
 ```
 
-**Alpine**
+</div>
+
+<div label="Alpine">
 
 ```
 /etc/ssl/cert.pem
 ```
 
-**OpenSUSE**
+</div>
+
+<div label="OpenSUSE">
 
 ```
 /etc/ssl/ca-bundle.pem
 ```
+
+</div>
 
 ## Can TiDB Serverless Tier verify the client's identity?
 
