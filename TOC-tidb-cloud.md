@@ -178,6 +178,7 @@
   - [API Reference](https://docs.pingcap.com/tidbcloud/api/v1beta)
 - Integrations
   - [Datadog](/tidb-cloud/monitor-datadog-integration.md)
+  - [dbt](/tidb-cloud/dbt.md)
   - [Prometheus and Grafana](/tidb-cloud/monitor-prometheus-and-grafana-integration.md)
   - Terraform
     - [Terraform Integration Overview](/tidb-cloud/terraform-tidbcloud-provider-overview.md)
