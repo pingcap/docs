@@ -9,21 +9,15 @@ aliases: ['/tidbcloud/beta/tidb-cloud-quickstart']
 
 *Estimated completion time: 20 minutes*
 
-This tutorial guides you through an easy way to get started with your TiDB Cloud. The content includes how to create a cluster, connect to a cluster, import data, and run queries.
+This tutorial guides you through an easy way to get started with your TiDB Cloud. The content includes how to create a cluster, try playground, load your data, and connect to your cluster.
 
 ## Step 1. Create a TiDB cluster
 
-You can either create a free [Developer Tier](/tidb-cloud/select-cluster-tier.md#developer-tier) cluster or a [Dedicated Tier](/tidb-cloud/select-cluster-tier.md#dedicated-tier).
-
-<SimpleTab>
-<div label="Developer Tier">
-
-To create a free Developer Tier cluster, take the following steps:
+TiDB Cloud [Developer Tier](/tidb-cloud/select-cluster-tier.md#developer-tier) is the best way to get started with TiDB Cloud. To create a free Developer Tier cluster, take the following steps:
 
 1. If you do not have a TiDB Cloud account, click [here](https://tidbcloud.com/free-trial) to sign up for an account.
 
-    - For Google users, you can also sign up with Google. To do that, click **Sign up with Google** on the [sign up](https://tidbcloud.com/signup) page. Your email address and password will be managed by Google and cannot be changed using TiDB Cloud console.
-    - For GitHub users, you can also sign up with GitHub. To do that, click **Sign up with GitHub** on the [sign up](https://tidbcloud.com/signup) page. Your email address and password will be managed by GitHub and cannot be changed using TiDB Cloud console.
+    For Google or GitHub users, you can also sign up with your Google or GitHub account. Your email address and password will be managed by Google or GitHub and cannot be changed using the TiDB Cloud console.
 
 2. [Log in](https://tidbcloud.com/) to your TiDB Cloud account.
 
@@ -35,114 +29,22 @@ To create a free Developer Tier cluster, take the following steps:
 
 5. Click **Create**.
 
-    The cluster creation process starts and your TiDB Cloud cluster will be created in approximately 5 to 15 minutes.
+    Your TiDB Cloud cluster will be created in several minutes.
 
 6. During the creation process, perform security settings for your cluster:
 
     1. Click **Security Settings** in the upper-right corner of the cluster area.
-    2. In the **Security Settings** dialog box, set the root password and allowed IP addresses to connect to your cluster, and then click **Apply**.
+    2. In the **Security Settings** dialog box, set a root password and allowed IP addresses to connect to your cluster, and then click **Apply**. If you do not set a root password, you cannot connect to the cluster.
 
-> **Tip:**
->
-> After your TiDB Cloud cluster is created, and before importing your data or connecting to a client, you can click **Playground** to run queries instantly on TiDB Cloud. Playground contains a pre-loaded dataset of GitHub events.
+## Step 2. Try Playground
 
-</div>
+After your TiDB Cloud cluster is created, you can quickly start experimenting with TiDB using the pre-loaded sample data on TiDB Cloud.
 
-<div label="Dedicated Tier">
+On the **Clusters** page, click **Playground** to run queries instantly on TiDB Cloud.
 
-To create a Dedicated Tier cluster, take the following steps:
+## Step 3. Load sample data
 
-1. If you do not have a TiDB Cloud account, click [here](https://tidbcloud.com/signup) to sign up for an account.
-
-    - For Google users, you can also sign up with Google. To do that, click **Sign up with Google** on the [sign up](https://tidbcloud.com/signup) page. Your email address and password will be managed by Google and cannot be changed using TiDB Cloud console.
-    - For GitHub users, you can also sign up with GitHub. To do that, click **Sign up with GitHub** on the [sign up](https://tidbcloud.com/signup) page. Your email address and password will be managed by GitHub and cannot be changed using TiDB Cloud console.
-    - For AWS Marketplace users, you can also sign up through AWS Marketplace. To do that, search for `TiDB Cloud` in [AWS Marketplace](https://aws.amazon.com/marketplace), subscribe to TiDB Cloud, and then follow the onscreen instructions to set up your TiDB Cloud account.
-
-2. [Log in](https://tidbcloud.com/) to your TiDB Cloud account.
-
-    The plan selection page is displayed by default.
-
-3. On the plan selection page, click **Get Full Access Today** in the **Dedicated Tier** plan.
-
-4. On the **Create a Cluster** page, **Dedicated Tier** is selected by default. Update the default cluster name and port number if necessary, choose a cloud provider and a region, and then click **Next**.
-
-    > **Note:**
-    >
-    > If you want to get a 14-day free trial of TiDB Cloud Dedicated Tier first, see [Perform a Proof of Concept (PoC) with TiDB Cloud](/tidb-cloud/tidb-cloud-poc.md).
-
-5. If this is the first cluster of your current project and CIDR has not been configured for this project, you need to set the project CIDR, and then click **Next**. If you do not see the **project CIDR** field, it means that CIDR has already been configured for this project.
-
-    > **Note:**
-    >
-    > When setting the project CIDR, avoid any conflicts with the CIDR of the VPC where your application is located. The CIDR of a project cannot be modified once it is set.
-
-6. Configure the [cluster size](/tidb-cloud/size-your-cluster.md) for TiDB, TiKV, and TiFlash (optional) respectively, and then click **Next**.
-
-7. Confirm the cluster information on the page and also the billing information in the lower-left corner.
-
-8. Click **Add Credit Card** in the lower-right corner to add a credit card for your account.
-
-9. Click **Create**.
-
-    The cluster creation process starts and the **Security Settings** dialog box is displayed.
-
-10. In the **Security Settings** dialog box, set the root password and allowed IP addresses to connect to your cluster, and then click **Apply**.
-
-    Your TiDB Cloud cluster will be created in approximately 5 to 15 minutes.
-
-</div>
-</SimpleTab>
-
-## Step 2. Connect to your TiDB cluster
-
-1. Navigate to the **Clusters** page.
-
-2. In the area of your newly created cluster, click **Connect** in the upper-right corner. A connection dialog is displayed.
-
-    > **Tip:**
-    >
-    > Alternatively, you can also click the name of your newly created cluster on the **Clusters** page, and then click **Setup** in the **Connection** area.
-
-3. Follow the instructions in the dialog to connect to your TiDB cluster.
-
-    <SimpleTab>
-    <div label="Developer Tier">
-
-    To connect to a Developer Tier cluster, check **Step 2: Connect with a SQL client** in the dialog, click the tab of your preferred connection method, and then connect to your cluster with the connection string.
-
-    > **Note:**
-    >
-    > - For [Developer Tier clusters](/tidb-cloud/select-cluster-tier.md#developer-tier), when you connect to your cluster, you must include the prefix for your cluster in the user name and wrap the name with quotation marks. For more information, see [User name prefix](/tidb-cloud/select-cluster-tier.md#user-name-prefix).
-    > - TiDB Cloud is MySQL-compatible, so you can connect to your cluster using any MySQL client tools. We recommend using [mysql — The MySQL Command-Line Client](https://dev.mysql.com/doc/refman/8.0/en/mysql.html) or [mysql — The MySQL Command-Line Client from MariaDB](https://mariadb.com/kb/en/mysql-command-line-client/).
-
-    </div>
-
-    <div label="Dedicated Tier">
-
-    To connect to a Dedicated Tier cluster, take the following steps:
-
-    1. Under **Step 1: Create traffic filter** in the dialog, specify the allowed IP addresses to connect to your cluster. If you have already configured the IP addresses in **Security Settings**, skip this step.
-
-    2. Under **Step 2: Download TiDB cluster CA** in the dialog, click **Download TiDB cluster CA** for TLS connection to TiDB clusters. The TiDB cluster CA supports TLS 1.2 version by default.
-
-    3. Under **Step 3: Connect with a SQL client** in the dialog, click the tab of your preferred connection method, and then refer to the connection string and sample code on the tab to connect to your cluster.
-
-    </div>
-    </SimpleTab>
-
-4. After logging into your TiDB cluster, you can use the following SQL statement to validate the connection:
-
-    {{< copyable "sql" >}}
-
-    ```sql
-    SELECT TiDB_version();
-    ```
-
-    If you see the release version information, you are ready to use your TiDB cluster.
-
-## Step 3. Import the sample data
-
-We provide Capital Bikeshare sample data for you to easily import data and run sample queries.
+After trying **Plaground**, you can load sample data to your TiDB Cloud cluster. We provide Capital Bikeshare sample data for you to easily import data and run sample queries.
 
 1. Navigate to the **Clusters** page.
 
@@ -154,44 +56,50 @@ We provide Capital Bikeshare sample data for you to easily import data and run s
 
 3. Fill in the import parameters:
 
-    <SimpleTab>
-    <div label="AWS">
-
-    If your TiDB cluster is hosted by AWS (the Developer Tier is hosted by AWS by default), fill in the following parameters:
-
-    - **Data Format**: select **TiDB Dumpling**
+    - **Data Format**: select **SQL File**
     - **Location**: `AWS`
-    - **Bucket URL**: enter the sample data URL `s3://tidbcloud-samples/data-ingestion/`
-    - **Role-ARN**: enter `arn:aws:iam::385595570414:role/import-sample-access`
-    - **Target Cluster**: shows the cluster name and the region name.
+    - **Bucket URI**: `s3://tidbcloud-samples/data-ingestion/`
+    - **Role-ARN**: `arn:aws:iam::385595570414:role/import-sample-access`
 
     If the region of the bucket is different from your cluster, confirm the compliance of cross region. Click **Next**.
-
-    </div>
-
-    <div label="GCP">
-
-    If your TiDB cluster is hosted by GCP, fill in the following parameters:
-
-    - **Data Format**: select **TiDB Dumpling**.
-    - **Location**: `Google Cloud`
-    - **Bucket URL**: enter the sample data URL `gs://tidbcloud-samples-us-west1`.
-    - **Target Cluster**: shows the cluster name and the region name.
-
-    If the region of the bucket is different from your cluster, confirm the compliance of cross region. Click **Next** to validate the data access and go to the next page.
-
-    </div>
-    </SimpleTab>
 
 4. Add the table filter rules if needed. For the sample data, you can skip this step. Click **Next**.
 
 5. On the **Preview** page, confirm the data to be imported and then click **Start Import**.
 
-The data import process will take 5 to 10 minutes. When the data import progress shows **Finished**, you have successfully imported the sample data and the database schema to your database in TiDB Cloud.
+The data import process will take several minutes. When the data import progress shows **Finished**, you have successfully imported the sample data and the database schema to your database in TiDB Cloud.
+
+## Step 4. Connect to your TiDB cluster
+
+After loading data to the cluster, you can connect to your cluster from the command line or with a programming language.
+
+1. Navigate to the **Clusters** page.
+
+2. In the area of your newly created cluster, click **Connect** in the upper-right corner. A connection dialog is displayed.
+
+3. Follow the instructions in the dialog to connect to your TiDB cluster.
+
+    1. Create traffic filter for your connection.
+
+    2. Use a SQL client to connect to your cluster. Click the tab of your preferred connection method, and then connect to your cluster with the connection string.
+
+    > **Tip:**
+    >
+    > TiDB Cloud is MySQL-compatible, so you can connect to your cluster using any MySQL client tool. We recommend using [mysql — The MySQL Command-Line Client](https://dev.mysql.com/doc/refman/8.0/en/mysql.html) or [mysql — The MySQL Command-Line Client from MariaDB](https://mariadb.com/kb/en/mysql-command-line-client/).
+
+4. After logging into your TiDB cluster, you can use the following SQL statement to validate the connection:
+
+    {{< copyable "sql" >}}
+
+    ```sql
+    SELECT TiDB_version();
+    ```
+
+    If you see the release version information, you are ready to use your TiDB cluster.
 
 ## Step 4. Query data
 
-When the process of importing data is completed, you can start to run some queries in your Terminal:
+After connecting to your TiDB cluster, you can run some queries in your Terminal.
 
 1. Use the `bikeshare` database and tables:
 
@@ -236,3 +144,7 @@ When the process of importing data is completed, you can start to run some queri
     ORDER BY count ASC
     LIMIT 10;
     ```
+
+For more details on TiDB SQL usage, see [Explore SQL with TiDB](/basic-sql-operations.md).
+
+For production use with the benefits of cross-zone high availability, horizontal scaling, and [HTAP](https://en.wikipedia.org/wiki/Hybrid_transactional/analytical_processing), refer to [Create a TiDB Cluster](/tidb-cloud/create-tidb-cluster.md) and create a Dedicated Tier cluster.

@@ -105,13 +105,13 @@ To import the Parquet files to TiDB Cloud, take the following steps:
 
     - **Data Format**: select **Parquet**.
     - **Location**: select the location where your Parquet files are located.
-    - **Bucket URL**: select the bucket URL where your Parquet files are located.
+    - **Bucket URI**: select the bucket URI where your Parquet files are located.
     - **Role-ARN**: (This field is visible only for AWS S3): enter the Role ARN value for **Role-ARN**.
     - **Target Cluster**: shows the cluster name and the region name.
 
     If the region of the bucket is different from your cluster, confirm the compliance of cross region. Click **Next**.
     
-    TiDB Cloud starts validating whether it can access your data in the specified bucket URL. After validation, TiDB Cloud tries to scan all the files in the data source using the default file naming pattern, and returns a scan summary result on the left side of the next page. If you get the `AccessDenied` error, see [Troubleshoot Access Denied Errors during Data Import from S3](/tidb-cloud/troubleshoot-import-access-denied-error.md).
+    TiDB Cloud starts validating whether it can access your data in the specified bucket URI. After validation, TiDB Cloud tries to scan all the files in the data source using the default file naming pattern, and returns a scan summary result on the left side of the next page. If you get the `AccessDenied` error, see [Troubleshoot Access Denied Errors during Data Import from S3](/tidb-cloud/troubleshoot-import-access-denied-error.md).
 
 4. Modify the file patterns and add the table filter rules if needed.
 
