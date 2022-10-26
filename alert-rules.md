@@ -260,6 +260,20 @@ This section gives the alert rules for the PD component.
     * If you confirm that the TiKV/TiFlash instance cannot be recovered, you can make it offline.
     * If you confirm that the TiKV/TiFlash instance can be recovered, but not in the short term, you can consider increasing the value of `max-down-time`. It will prevent the TiKV/TiFlash instance from being considered as irrecoverable and the data from being removed from the TiKV/TiFlash.
 
+#### `PD_cluster_unhealthy_tikv_nums`
+
+* Alert rule:
+
+    `(sum ( pd_cluster_status{type="store_unhealth_count"} ) by (instance) > 0) and (sum(etcd_server_is_leader) by (instance) > 0)`
+
+* Description:
+
+    Indicates that there are unhealthy stores. If the situation persists for 30m this might trigger the [`PD_cluster_down_store_nums`](#PD_cluster_down_store_nums) alert.
+
+* Solution:
+
+    * Check the status of the TiKV stores.
+
 #### `PD_cluster_low_space`
 
 * Alert rule:
