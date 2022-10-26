@@ -29,7 +29,7 @@ The interface is as follows:
 
 ## Access method
 
-You can access DM WebUI from any master node of the DM cluster. The access port is `8261` by default and is the same as that of DM OpenAPI. Here is an example of an access address: `http://{master_ip}:{master_port}/dashboard/`.
+After you enable [OpenAPI](/dm/dm-open-api.md#maintain-dm-clusters-using-openapi), you can access DM WebUI from any master node of the DM cluster. The access port is `8261` by default and is the same as that of DM OpenAPI. Here is an example of an access address: `http://{master_ip}:{master_port}/dashboard/`.
 
 ## Migration
 
