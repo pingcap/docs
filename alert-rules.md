@@ -268,7 +268,7 @@ This section gives the alert rules for the PD component.
 
 * Description:
 
-    Indicates that there are unhealthy stores. If the situation persists for some time (configurable, by default 30m) the store state is likely to change to down and trigger the [`PD_cluster_down_store_nums`](#PD_cluster_down_store_nums) alert.
+    Indicates that there are unhealthy stores. If the situation persists for some time (configured by [`max-store-down-time`](/pd-configuration-file.md#max-store-down-time), by default `30m`) the store state is likely to change to down and trigger the [`PD_cluster_down_store_nums`](#pd_cluster_down_store_nums) alert.
 
 * Solution:
 
