@@ -172,6 +172,8 @@ The following lists the CA root paths on common platforms.
 
 </div>
 
+</SimpleTab>
+
 ## Can TiDB Serverless Tier verify the client's identity?
 
 No.
