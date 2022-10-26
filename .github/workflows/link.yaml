@@ -1,6 +1,7 @@
 name: Links
 
 on:
+  pull_request:
   repository_dispatch:
   workflow_dispatch:
   schedule:
@@ -14,7 +15,7 @@ jobs:
 
       - name: Download Exclude Path
         run: |
-          curl https://raw.githubusercontent.com/pingcap/docs/master/.lycheeignore --output .lycheeignore
+          curl https://raw.githubusercontent.com/Oreoxmt/docs/fix/broken-lins/.lycheeignore --output .lycheeignore
 
       - name: Check Links
         uses: lycheeverse/lychee-action@v1.5.0
