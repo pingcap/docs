@@ -53,7 +53,7 @@ mysql --connect-timeout 15 -u <username> -h <host> -P 4000 --ssl-mode=VERIFY_IDE
 
 </div>
 
-<div label="MyCLI Client">
+<div label="MyCLI client">
 
 [MyCLI](https://www.mycli.net/) automatically enables TLS when using TLS related parameters. When you connect to TiDB Serverless Tier clusters, you need to set `ssl-ca` and `ssl-verify-server-cert`.
 
