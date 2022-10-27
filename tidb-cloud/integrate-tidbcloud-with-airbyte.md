@@ -5,30 +5,30 @@ summary: Learn how to use Airbyte TiDB connector.
 
 # Integrate TiDB Cloud with Airbyte
 
-[Airbyte](https://airbyte.com/) is an open-source data integration engine to build Extract, Load, Transform (ELT) pipelines and consolidate your data in your data warehouses, data lakes, and databases. This document describes how to connect Airbyte to TiDB as a source or a destination.
+[Airbyte](https://airbyte.com/) is an open-source data integration engine to build Extract, Load, Transform (ELT) pipelines and consolidate your data in your data warehouses, data lakes, and databases. This document describes how to connect Airbyte to TiDB Cloud as a source or a destination.
 
 ## Deploy Airbyte
 
-Airbyte supports local deployment with only a few steps.
+You can deploy Airbyte locally with only a few steps.
 
 1. Install [Docker](https://www.docker.com/products/docker-desktop) on your workspace.
 
 2. Clone the Airbyte source code.
 
     ```shell
-    $ git clone https://github.com/airbytehq/airbyte.git
-    $ cd airbyte
+    git clone https://github.com/airbytehq/airbyte.git && \
+    cd airbyte
     ```
 
 3. Run the Docker images by docker-compose.
 
     ```shell
-    $ docker-compose up
+    docker-compose up
     ```
 
-Once you see an Airbyte banner, you can go to [http://localhost:8000](http://localhost:8000) to visit the UI.
+Once you see an Airbyte banner, you can go to <http://localhost:8000> to visit the UI.
 
-![img](/media/tidb-cloud/integration-airbyte-ready.jpg)
+![Airbyte banner](/media/tidb-cloud/integration-airbyte-ready.jpg)
 
 ## Set up the TiDB connector
 
@@ -54,7 +54,7 @@ Conveniently, the steps are the same for setting TiDB as the source and the dest
 
 4. Click **Set up source** or **destination** to complete creating the connector. The following screenshot shows the configuration of TiDB as the source.
 
-![img](/media/tidb-cloud/integration-airbyte-parameters.jpg)
+![TiDB source configuration](/media/tidb-cloud/integration-airbyte-parameters.jpg)
 
 For more details about the TiDB connector, see [TiDB Source](https://docs.airbyte.com/integrations/sources/tidb) and [TiDB Destination](https://docs.airbyte.com/integrations/destinations/tidb).
 
@@ -66,22 +66,25 @@ The following steps use TiDB as both source and destination. Other connectors ma
 
 1. Click **Connections** in the sidebar and then click **New Connection**.
 2. Select the previously established source and destination.
-3. Go to the **Set up** connection panel and create a name for the connection, such as "${source_name} - ${destination-name}".
+3. Go to the **Set up** connection panel and create a name for the connection, such as `${source_name} - ${destination-name}`.
 4. Set **Replication frequency** to **Every 24 hours** which means the connection replicates data once a day.
 5. Set **Destination Namespace** to **Custom format** and set **Namespace Custom Format** to **test** to store all data in the `test` database.
 6. Choose the **Sync schema** to **Full refresh | Overwrite**.
 
-    > **Tips**
+    > **Tip:**
     >
-    > The TiDB connector supports both Incremental and Full Refresh syncs. In Incremental mode, Airbyte only reads records added to the source since the last sync job. The first sync using Incremental mode is equivalent to Full Refresh mode. In Full Refresh mode, Airbyte reads all records in the source and replicates to the destination in every sync task. You can set the sync mode for every table named **Namespace** in Airbyte individually.
+    > The TiDB connector supports both Incremental and Full Refresh syncs.
+    >
+    > - In Incremental mode, Airbyte only reads records added to the source since the last sync job. The first sync using Incremental mode is equivalent to Full Refresh mode.
+    > - In Full Refresh mode, Airbyte reads all records in the source and replicates to the destination in every sync task. You can set the sync mode for every table named **Namespace** in Airbyte individually.
 
-    ![img](/media/tidb-cloud/integration-airbyte-connection.jpg)
+    ![Set up connection](/media/tidb-cloud/integration-airbyte-connection.jpg)
 
 7. Set **Normalization & Transformation** to **Normalized tabular data** to use the default normalization mode, or you can set the dbt file for your job. For more information about normalization, refer to [Transformations and Normalization](https://docs.airbyte.com/operator-guides/transformation-and-normalization/transformations-with-dbt).
 8. Click **Set up connection**.
 9. Once the connection is established, click **ENABLED** to activate the synchronization task. You can also click **Sync now** to sync immediately.
 
-![img](/media/tidb-cloud/integration-airbyte-sync.jpg)
+![Sync data](/media/tidb-cloud/integration-airbyte-sync.jpg)
 
 ## Limitations
 
