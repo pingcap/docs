@@ -19,6 +19,7 @@ This document introduces the experimental features of TiDB v4.0. It is **NOT** r
 - [Prepare Plan cache](/sql-prepare-plan-cache.md). (Introduced in v4.0)
 - [Randomly sample about 10000 rows of data to quickly build statistics](/system-variables.md#tidb_enable_fast_analyze). (Introduced in v3.0)
 - [Cascades Planner](/system-variables.md#tidb_enable_cascades_planner): a cascades framework-based top-down query optimizer (Introduced in v3.0)
+- [Table Lock](/tidb-configuration-file.md#enable-table-lock-new-in-v400) (Introduced in v4.0.0)
 
 ## Service-level features
 
