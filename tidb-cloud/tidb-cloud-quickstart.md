@@ -34,7 +34,7 @@ TiDB Cloud [Serverless Tier](/tidb-cloud/select-cluster-tier.md#serverless-tier)
 6. During the creation process, perform security settings for your cluster:
 
     1. Click **Security Settings** in the upper-right corner of the cluster area.
-    2. In the **Security Settings** dialog box, set a root password and allowed IP addresses to connect to your cluster, and then click **Apply**. If you do not set a root password, you cannot connect to the cluster.
+    2. In the **Security Settings** dialog box, set a root password to connect to your cluster, and then click **Apply**. If you do not set a root password, you cannot connect to the cluster.
 
 ## Step 2. Try Playground
 
