@@ -40,8 +40,6 @@ By the automatic backup, you can back up the cluster data every day at the backu
 
 > **Note that:**
 > You can not disable automatic backup.
-> To use the PITR feature, firstly make sure your TiDB cluster version is at least v6.3.0 and the TiKV node configuration is at least 8c/16g, then file a ticket to request to enable the PITR feature.
-> After adding a remote region as a backup data store, you can't turn it off.
 
 ### Backup storage region support
 
