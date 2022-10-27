@@ -16,7 +16,7 @@ This document describes how to back up and restore your TiDB cluster data on TiD
 
 TiDB Cloud supports automatic backup and manual backup.
 
-Automatic backups are scheduled for your TiDB clusters according to the backup setting, which can reduce your losses in extreme disaster situations. You can also pick a backup snapshot and restore it into a new TiDB cluster at any time.
+Automatic backups are scheduled for your TiDB clusters according to the backup setting, which can reduce your loss in extreme disaster situations. You can also pick a backup snapshot and restore it into a new TiDB cluster at any time.
 
 ### Automatic backup
 
@@ -30,11 +30,11 @@ By the automatic backup, you can back up the cluster data every day at the backu
 
     - check whether the PITR(**Point-in-time Recovery**) feature is on.
 
-    - select **Backup Time**, which is the scheduling start time for cluster backup, and it is recommended to be the low workload peak period, if you do not specify a preferred backup time, TiDB Cloud assigns a default backup time, which is 2:00 AM in the time zone of the region where the cluster is located.
+    - In **Backup Time**, schedule a start time for the daily cluster backup. It is recommended to schedule automatic backup at the low workload period. If you do not specify a preferred backup time, TiDB Cloud assigns a default backup time, which is 2:00 AM in the time zone of the region where the cluster is located.
 
-    - select **Backup Retention**, which is the minimum backup data retention period.
+    - In **Backup Retention**, configure the minimum backup data retention period.
 
-    - select **Backup Storage Region**, in addition to storing the backup data in where the cluster is located, you can add another remote region, TiDB Cloud will copy all new backup data to the remote region which facilitates data safety and faster recovery.
+    - In **Backup Storage Region**, select the regions where you want to store your backup data. TiDB Cloud stores your backup data in your local region by default. In addition, you can add another remote region, and TiDB Cloud will copy all new backup data to the remote region, which facilitates data safety and faster recovery.
 
 4. Click **Confirm**.
 
