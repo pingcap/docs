@@ -27,7 +27,7 @@ However, some drivers and ORMs do not use the system root CA stores. In those ca
 > 
 > TiDB Serverless Tier does not provide a CA root certificate download, because we don't guarantee that the same CA will be used to issue a certificate in the future, which will cause the CA root certificate to change. 
 >
-> However, TiDB Serverless Tier promises always using a CA root certificate that is commonly available, which is provided in all common systems. 
+> However, TiDB Serverless Tier ensures always using a CA root certificate that is commonly available, which is provided in all common systems. 
 > 
 > If you really need the CA certificate of a TiDB Serverless Tier cluster, it is recommended that you download the [Mozilla CA Certificate bundle](https://curl.se/docs/caextract.html) instead of the single CA certificate in case we change the CA in the future.
 
