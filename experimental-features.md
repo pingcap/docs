@@ -34,6 +34,7 @@ Elastic scheduling feature. It enables the TiDB cluster to dynamically scale out
 + [User-Defined Variables](/user-defined-variables.md) (Introduced in v2.1)
 + [JSON data type](/data-type-json.md) and [JSON functions](/functions-and-operators/json-functions.md) (Introduced in v2.1)
 + [Cascades Planner](/system-variables.md#tidb_enable_cascades_planner): a cascades framework-based top-down query optimizer (Introduced in v3.0)
++ [Table Lock](/tidb-configuration-file.md#enable-table-lock-new-in-v400) (Introduced in v4.0.0)
 + [`ALTER TABLE ... COMPACT`](/sql-statements/sql-statement-alter-table-compact.md) (Introduced in v6.1.0)
 
 ## Storage
