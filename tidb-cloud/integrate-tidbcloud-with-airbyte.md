@@ -56,11 +56,13 @@ Conveniently, the steps are the same for setting TiDB as the source and the dest
 
 ![TiDB source configuration](/media/tidb-cloud/integration-airbyte-parameters.jpg)
 
+You can use any combination of sources and destinations, such as TiDB to Snowflake, and CSV file to TiDB.
+
 For more details about the TiDB connector, see [TiDB Source](https://docs.airbyte.com/integrations/sources/tidb) and [TiDB Destination](https://docs.airbyte.com/integrations/destinations/tidb).
 
 ## Set up the connection
 
-After setting up the source and destination, you can build and configure the connection. You can use any combination of sources and destinations, such as TiDB to Snowflake, and CSV file to TiDB.
+After setting up the source and destination, you can build and configure the connection.
 
 The following steps use TiDB as both source and destination. Other connectors may have different parameters.
 
