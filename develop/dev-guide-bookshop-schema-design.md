@@ -58,8 +58,6 @@ The following table lists the connection parameters. You can change their defaul
 
 For example, if you want to connect to a database on TiDB Cloud, you can specify the connection information as follows:
 
-{{< copyable "shell" >}}
-
 ```shell
 tiup demo bookshop prepare -U <username> -H <endpoint> -P 4000 -p <password>
 ```
@@ -84,8 +82,6 @@ For example, the following command is executed to generate:
 - 1,000,000 rows of rating records via the `--ratings` parameter
 - 1,000,000 rows of order records via the `--orders` parameter
 
-{{< copyable "shell" >}}
-
 ```shell
 tiup demo bookshop prepare --users=200000 --books=500000 --authors=100000 --ratings=1000000 --orders=1000000 --drop-tables
 ```
@@ -101,15 +97,11 @@ On the cluster detail page of TiDB Cloud, click **Import Data** in the **Import*
 
     **Bucket URI**:
 
-    {{< copyable "" >}}
-
     ```
     s3://developer.pingcap.com/bookshop/
     ```
 
    **Role ARN**:
-
-    {{< copyable "" >}}
 
     ```
     arn:aws:iam::494090988690:role/s3-tidb-cloud-developer-access
@@ -117,7 +109,7 @@ On the cluster detail page of TiDB Cloud, click **Import Data** in the **Import*
 
 3. Click **Next** to go to the **File and filter** step to confirm the information of the files to be imported.
 
-4. Click **Next**  again to go to the **Preview** step to confirm the preview of the data to be imported.
+4. Click **Next** again to go to the **Preview** step to confirm the preview of the data to be imported.
 
     In this example, the following data is generated in advance:
 
@@ -134,8 +126,6 @@ For more information about how to import or migrate data to TiDB Cloud, see [TiD
 ### View data import status
 
 After the import is completed, you can view the data volume information of each table by executing the following SQL statement:
-
-{{< copyable "sql" >}}
 
 ```sql
 SELECT
@@ -239,8 +229,6 @@ This table stores user purchase information.
 ## Database initialization script `dbinit.sql`
 
 If you want to manually create database table structures in the Bookshop application, run the following SQL statements:
-
-{{< copyable "sql" >}}
 
 ```sql
 CREATE DATABASE IF NOT EXISTS `bookshop`;
