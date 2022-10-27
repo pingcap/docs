@@ -92,18 +92,10 @@ You can delete the original table structure through the `--drop-tables` paramete
 
 On the cluster detail page of TiDB Cloud, click **Import Data** in the **Import** area to enter the **Data Import** page. On this page, perform the following steps to import the Bookshop sample data from AWS S3 to TiDB Cloud.
 
-<<<<<<< HEAD
-1. Copy the following **Bucket URI** and **Role-ARN** to the corresponding input boxes:
-
-    **Bucket URI**:
-
-    {{< copyable "" >}}
-=======
 1. Select **SQL File** for **Data Format**.
 2. Copy the following **Bucket URI** and **Role ARN** to the corresponding input boxes:
 
     **Bucket URI**:
->>>>>>> 28eba48e8 (develop: update tidb cloud import steps (#10987))
 
     ```
     s3://developer.pingcap.com/bookshop/
@@ -127,12 +119,7 @@ On the cluster detail page of TiDB Cloud, click **Import Data** in the **Import*
     - 1,000,000 rows of rating records
     - 1,000,000 rows of order records
 
-<<<<<<< HEAD
-2. Select **US West (Oregon)** for **Bucket Region**.
-3. Select **SQL File** for **Data Format**.
-=======
 5. Click **Start Import** to start the import process and wait for TiDB Cloud to complete the import.
->>>>>>> 28eba48e8 (develop: update tidb cloud import steps (#10987))
 
 For more information about how to import or migrate data to TiDB Cloud, see [TiDB Cloud Migration Overview](https://docs.pingcap.com/tidbcloud/tidb-cloud-migration-overview).
 
