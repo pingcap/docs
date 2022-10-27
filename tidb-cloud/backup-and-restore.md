@@ -28,13 +28,13 @@ By the automatic backup, you can back up the cluster data every day at the backu
 
 3. In the setting window,
 
-    - check whether the PITR(**Point-in-time Recovery**) feature is on.
+    - check whether the PITR(**Point-in-time Recovery**) feature is on. To use the PITR feature, firstly make sure your TiDB cluster version is at least v6.3.0 and the TiKV node configuration is at least 8c/16g, then file a ticket to request to enable the PITR feature.
 
     - In **Backup Time**, schedule a start time for the daily cluster backup. It is recommended to schedule automatic backup at the low workload period. If you do not specify a preferred backup time, TiDB Cloud assigns a default backup time, which is 2:00 AM in the time zone of the region where the cluster is located.
 
     - In **Backup Retention**, configure the minimum backup data retention period.
 
-    - In **Backup Storage Region**, select the regions where you want to store your backup data. TiDB Cloud stores your backup data in your local region by default. In addition, you can add another remote region, and TiDB Cloud will copy all new backup data to the remote region, which facilitates data safety and faster recovery.
+    - In **Backup Storage Region**, select the regions where you want to store your backup data. TiDB Cloud stores your backup data in your local region by default. In addition, you can add another remote region, and TiDB Cloud will copy all new backup data to the remote region, which facilitates data safety and faster recovery. After adding a remote region as a backup data store, you can't turn it off.
 
 4. Click **Confirm**.
 
