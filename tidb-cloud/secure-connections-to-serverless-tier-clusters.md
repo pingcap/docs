@@ -15,7 +15,7 @@ TiDB Serverless Tier allows only TLS connections and rejects non-TLS connections
 
 ## What TLS versions can I use?
 
-TiDB Serverless Tier only supports TLS 1.2 and TLS 1.3. 
+TiDB Serverless Tier only supports TLS 1.2 and TLS 1.3.
 
 ## What certificates do I need？
 
@@ -24,11 +24,11 @@ TiDB Serverless Tier uses certificates from [Let's Encrypt](https://letsencrypt.
 However, some drivers and ORMs do not use the system root CA stores. In those cases, you need to configure the CA root path of the drivers or ORMs to your system root CA stores. For example, when you use [mysqlclient](https://github.com/PyMySQL/mysqlclient) to connect a TiDB Serverless Tier cluster in Python on macOS, you need to set `ca: /etc/ssl/cert.pem` in the `ssl` argument.
 
 > **Note:**
-> 
-> TiDB Serverless Tier does not provide a CA root certificate download, because we don't guarantee that the same CA will be used to issue a certificate in the future, which will cause the CA root certificate to change. 
 >
-> However, TiDB Serverless Tier ensures always using a CA root certificate that is commonly available, which is provided in all common systems. 
-> 
+> TiDB Serverless Tier does not provide a CA root certificate download, because we don't guarantee that the same CA will be used to issue a certificate in the future, which will cause the CA root certificate to change.
+>
+> However, TiDB Serverless Tier ensures always using a CA root certificate that is commonly available, which is provided in all common systems.
+>
 > If you really need the CA certificate of a TiDB Serverless Tier cluster, it is recommended that you download the [Mozilla CA Certificate bundle](https://curl.se/docs/caextract.html) instead of the single CA certificate in case we change the CA in the future.
 
 ## How do I connect to a TiDB Serverless Tier cluster in TLS connection?
@@ -120,7 +120,7 @@ db, err := sql.Open("mysql", "<usename>:<your_password>@tcp(<host>:4000)/test?tl
 host: '<host>', port: 4000,user: '<username>', password: '<your_password>', database: 'test', ssl: {minVersion: 'TLSv1.2', rejectUnauthorized: true}
 ```
 
-- Set `ssl: {minVersion: 'TLSv1.2'}` to restrict the versions of TLS protocol. 
+- Set `ssl: {minVersion: 'TLSv1.2'}` to restrict the versions of TLS protocol.
 - Set `ssl: {rejectUnauthorized: true}` to validate TiDB Serverless Tier clusters. Mysql2 uses system CA root certificates by default, so you do not need to configure certificates.
 
 </div>
@@ -137,6 +137,7 @@ The following lists the CA root paths on common platforms.
 ```
 
 **Debian / Ubuntu / Arch**
+
 ```
 /etc/ssl/certs/ca-certificates.crt
 ```
