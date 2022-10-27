@@ -35,6 +35,7 @@ This document introduces the experimental features of TiDB in different versions
 + [User-Defined Variables](/user-defined-variables.md) (Introduced in v2.1)
 + [JSON data type](/data-type-json.md) and [JSON functions](/functions-and-operators/json-functions.md) (Introduced in v2.1)
 + [View](/information-schema/information-schema-views.md) (Introduced in v2.1)
++ [Table Lock](/tidb-configuration-file.md#enable-table-lock-new-in-v400) (Introduced in v4.0.0)
 
 ## Configuration management
 
