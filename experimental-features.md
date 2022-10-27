@@ -21,7 +21,7 @@ summary: Learn the experimental features of TiDB.
 
 ## スケジューリング {#scheduling}
 
-エラスティック スケジューリング機能。これにより、TiDBクラスタは、リアルタイムのワークロードに基づいて Kubernetes で動的にスケールアウトおよびスケールインできます。これにより、アプリケーションのピーク時のストレスが効果的に軽減され、オーバーヘッドが節約されます。詳細は[TidbCluster 自動スケーリングを有効にする](https://docs.pingcap.com/tidb-in-kubernetes/stable/enable-tidb-cluster-auto-scaling)を参照してください。 (v4.0 で導入)
+エラスティック スケジューリング機能。これにより、TiDB クラスターは、リアルタイムのワークロードに基づいて Kubernetes で動的にスケールアウトおよびスケールインできます。これにより、アプリケーションのピーク時のストレスが効果的に軽減され、オーバーヘッドが節約されます。詳細は[TidbCluster 自動スケーリングを有効にする](https://docs.pingcap.com/tidb-in-kubernetes/stable/enable-tidb-cluster-auto-scaling)を参照してください。 (v4.0 で導入)
 
 ## SQL {#sql}
 
@@ -35,6 +35,7 @@ summary: Learn the experimental features of TiDB.
 -   [JSON データ型](/data-type-json.md)と[JSON関数](/functions-and-operators/json-functions.md) (v2.1 で導入)
 -   [`ALTER TABLE`を使用して複数の列またはインデックスを変更する](/system-variables.md#tidb_enable_change_multi_schema) (v5.0.0 で導入)
 -   [カスケード プランナー](/system-variables.md#tidb_enable_cascades_planner) : カスケード フレームワーク ベースのトップダウン クエリ オプティマイザー (v3.0 で導入)
+-   [テーブルロック](/tidb-configuration-file.md#enable-table-lock-new-in-v400) (v4.0.0 で導入)
 
 ## Configuration / コンフィグレーション管理 {#configuration-management}
 
