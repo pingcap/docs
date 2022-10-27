@@ -183,15 +183,42 @@ EXPLAIN DELETE FROM t1 WHERE c1=3;
 4 rows in set (0.01 sec)
 ```
 
-If you do not specify the `FORMAT`, or specify `FORMAT = "row"`, `EXPLAIN` statement will output the results in a tabular format. See [Understand the Query Execution Plan](/explain-overview.md) for more information.
+To specify the content and format of the output, you can use the `FORMAT = xxx` syntax in the `EXPLAIN` statement.
+
+| FORMAT | Description |
+| ------ | ------ |
+| Empty  | Same as `row` |
+| `row`  | The `EXPLAIN` statement outputs results in a tabular format. See [Understand the Query Execution Plan](/explain-overview.md) for more information. |
+| `brief`  | The operator IDs in the output of the `EXPLAIN` statement are simplified, compared with those when `FORMAT` is left unspecified. |
+| `dot`    | The `EXPLAIN` statement outputs DOT execution plans, which can be used to generate PNG files through a `dot` program (in the `graphviz` package). |
+
+The following is an example when `FORMAT` is `"brief"` in `EXPLAIN`:
+
+{{< copyable "sql" >}}
+
+```sql
+EXPLAIN FORMAT = "brief" DELETE FROM t1 WHERE c1 = 3;
+```
+
+```sql
++-------------------------+---------+-----------+---------------+--------------------------------+
+| id                      | estRows | task      | access object | operator info                  |
++-------------------------+---------+-----------+---------------+--------------------------------+
+| Delete                  | N/A     | root      |               | N/A                            |
+| └─TableReader           | 0.00    | root      |               | data:Selection                 |
+|   └─Selection           | 0.00    | cop[tikv] |               | eq(test.t1.c1, 3)              |
+|     └─TableFullScan     | 3.00    | cop[tikv] | table:t1      | keep order:false, stats:pseudo |
++-------------------------+---------+-----------+---------------+--------------------------------+
+4 rows in set (0.001 sec)
+```
 
 In addition to the MySQL standard result format, TiDB also supports DotGraph and you need to specify `FORMAT = "dot"` as in the following example:
 
 {{< copyable "sql" >}}
 
 ```sql
-create table t(a bigint, b bigint);
-desc format = "dot" select A.a, B.b from t A join t B on A.a > B.b where A.a < 10;
+CREATE TABLE t(a bigint, b bigint);
+EXPLAIN format = "dot" SELECT A.a, B.b FROM t A JOIN t B ON A.a > B.b WHERE A.a < 10;
 ```
 
 ```sql
@@ -229,7 +256,7 @@ label = "cop"
 1 row in set (0.00 sec)
 ```
 
-If the `dot` program (in the `graphviz` package) is installed on your computer, you can generate a PNG file using the following method:
+If your computer has a `dot` program, you can generate a PNG file using the following method:
 
 ```bash
 dot xx.dot -T png -O
@@ -237,7 +264,7 @@ dot xx.dot -T png -O
 The xx.dot is the result returned by the above statement.
 ```
 
-If the `dot` program is not installed on your computer, copy the result to [this website](http://www.webgraphviz.com/) to get a tree diagram:
+If your computer has no `dot` program, copy the result to [this website](http://www.webgraphviz.com/) to get a tree diagram:
 
 ![Explain Dot](/media/explain_dot.png)
 

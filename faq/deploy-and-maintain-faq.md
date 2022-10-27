@@ -1,9 +1,9 @@
 ---
-title: Deployment FAQs
+title: TiDB Deployment FAQs
 summary: Learn about the FAQs related to TiDB deployment.
 ---
 
-# Deployment FAQs
+# TiDB Deployment FAQs
 
 This document summarizes the FAQs related to TiDB deployment.
 
@@ -116,7 +116,7 @@ Check the time difference between the machine time of the monitor and the time w
 
 2. If a slow query occurs, you can locate the `tidb-server` instance where the slow query is and the slow query time point using Grafana and find the SQL statement information recorded in the log on the corresponding node.
 
-3. In addition to the log, you can also view the slow query using the `admin show slow` command. For details, see [`admin show slow` command](/identify-slow-queries.md#admin-show-slow-command).
+3. In addition to the log, you can also view the slow query using the `ADMIN SHOW SLOW` command. For details, see [`ADMIN SHOW SLOW` command](/identify-slow-queries.md#admin-show-slow-command).
 
 ### How to add the `label` configuration if `label` of TiKV was not configured when I deployed the TiDB cluster for the first time?
 
@@ -145,3 +145,9 @@ The Direct mode wraps the Write request into the I/O command and sends this comm
     ```bash
     ./fio -ioengine=psync -bs=32k -fdatasync=1 -thread -rw=randrw -percentage_random=100,0 -size=10G -filename=fio_randread_write_test.txt -name='fio mixed randread and sequential write test' -iodepth=4 -runtime=60 -numjobs=4 -group_reporting --output-format=json --output=fio_randread_write_test.json
     ```
+
+## What public cloud vendors are currently supported by TiDB?
+
+TiDB supports deployment on [Google GKE](https://docs.pingcap.com/tidb-in-kubernetes/stable/deploy-on-gcp-gke), [AWS EKS](https://docs.pingcap.com/tidb-in-kubernetes/stable/deploy-on-aws-eks), and [Alibaba Cloud ACK](https://docs.pingcap.com/tidb-in-kubernetes/stable/deploy-on-alibaba-cloud).
+
+In addition, TiDB is currently available on JD Cloud and UCloud, and has the first-level database entries on them.

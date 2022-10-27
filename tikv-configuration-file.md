@@ -90,6 +90,13 @@ This document only describes the parameters that are not included in command-lin
     + If the configuration item is set to a value other than `0`, TiKV keeps at most the number of old log files specified by `max-backups`. For example, if the value is set to `7`, TiKV keeps up to 7 old log files.
 + Default value: `0`
 
+### `pd.enable-forwarding` <span class="version-mark">New in v5.0.0</span>
+
++ Controls whether the PD client in TiKV forwards requests to the leader via the followers in the case of possible network isolation.
++ Default value: `false`
++ If the environment might have isolated network, enabling this parameter can reduce the window of service unavailability.
++ If you cannot accurately determine whether isolation, network interruption, or downtime has occurred, using this mechanism has the risk of misjudgment and causes reduced availability and performance. If network failure has never occurred, it is not recommended to enable this parameter.
+
 ## server
 
 + Configuration items related to the server.
@@ -204,6 +211,11 @@ This document only describes the parameters that are not included in command-lin
 + Specifies whether to simplify the returned monitoring metrics. After you set the value to `true`, TiKV reduces the amount of data returned for each request by filtering out some metrics.
 + Default value: `false`
 
+### `forward-max-connections-per-address` <span class="version-mark">New in v5.0.0</span>
+
++ Sets the size of the connection pool for service and forwarding requests to the server. Setting it to too small a value affects the request latency and load balancing.
++ Default value: `4`
+
 ## readpool.unified
 
 Configuration items related to the single thread pool serving read requests. This thread pool supersedes the original storage thread pool and coprocessor thread pool since the 4.0 version.
@@ -233,6 +245,11 @@ Configuration items related to the single thread pool serving read requests. Thi
 + The maximum number of tasks allowed for a single thread in the unified read pool. `Server Is Busy` is returned when the value is exceeded.
 + Default value: `2000`
 + Minimum value: `2`
+
+### `auto-adjust-pool-size` <span class="version-mark">New in v6.3.0</span>
+
++ Controls whether to automatically adjust the thread pool size. When it is enabled, the read performance of TiKV is optimized by automatically adjusting the UnifyReadPool thread pool size based on the current CPU usage. The possible range of the thread pool is `[max-thread-count, MAX(4, CPU)]`. The maximum value is the same as the one of [`max-thread-count`](#max-thread-count).
++ Default value: `false`
 
 ## readpool.storage
 
@@ -370,7 +387,7 @@ Configuration items related to storage.
 + The name of the temporary file is `space_placeholder_file`, located in the `storage.data-dir` directory. When TiKV goes offline because its disk space ran out, if you restart TiKV, the temporary file is automatically deleted and TiKV tries to reclaim the space.
 + When the remaining space is insufficient, TiKV does not create the temporary file. The effectiveness of the protection is related to the size of the reserved space. The size of the reserved space is the larger value between 5% of the disk capacity and this configuration value. When the value of this configuration item is `"0MB"`, TiKV disables this disk protection feature.
 + Default value: `"5GB"`
-+ Unite: MB|GB
++ Unit: MB|GB
 
 ### `enable-ttl`
 
@@ -470,7 +487,7 @@ Configuration items related to the I/O rate limiter.
 ### `mode`
 
 + Determines which types of I/O operations are counted and restrained below the `max-bytes-per-sec` threshold. Currently, only the write-only mode is supported.
-+ Optional value: `"write-only"`
++ Value options: `"read-only"`, `"write-only"`, and `"all-io"`
 + Default value: `"write-only"`
 
 ## raftstore
@@ -857,12 +874,6 @@ Configuration items related to Raftstore.
 + Determines the threshold at which Raft data is written into the disk. If the data size is larger than the value of this configuration item, the data is written to the disk. When the value of `store-io-pool-size` is `0`, this configuration item does not take effect.
 + Default value: `1MB`
 + Minimum value: `0`
-
-### `report-min-resolved-ts-interval` <span class="version-mark">New in v6.2.0</span>
-
-+ If you set this configuration value greater than `0`, TiKV checks the minimum ResolvedTS regularly for all Regions on the current node and reports the information to PD.
-+ Default value: `0s`
-+ Minimum value: `0s`
 
 ## Coprocessor
 
@@ -1489,6 +1500,31 @@ Configuration items related to Raft Engine.
 + When this configuration value is not set, 15% of the available system memory is used.
 + Default value: `Total machine memory * 15%`
 
+### `format-version` <span class="version-mark">New in v6.3.0</span>
+
+> **Note:**
+>
+> After `format-version` is set to `2`, if you need to downgrade a TiKV cluster from v6.3.0 to an earlier version, take the following steps **before** the downgrade:
+>
+> 1. Disable Raft Engine by setting [`enable`](/tikv-configuration-file.md#enable-1) to `false` and restart TiKV to make the configuration take effect.
+> 2. Set `format-version` to `1`.
+> 3. Enable Raft Engine by setting `enable` to `true` and restart TiKV to make the configuration take effect.
+
++ Specifies the version of log files in Raft Engine.
++ Value Options:
+    + `1`: Default log file version for TiKV earlier than v6.3.0. Can be read by TiKV >= v6.1.0.
+    + `2`: Supports log recycling. Can be read by TiKV >= v6.3.0.
++ Default value: `2`
+
+### `enable-log-recycle` <span class="version-mark">New in v6.3.0</span>
+
+> **Note:**
+>
+> This configuration item is only available when [`format-version`](#format-version-new-in-v630) >= 2.
+
++ Determines whether to recycle stale log files in Raft Engine. When it is enabled, logically purged log files will be reserved for recycling. This reduces the long tail latency on write workloads.
++ Default value: `false`
+
 ## security
 
 Configuration items related to security.
@@ -1525,7 +1561,7 @@ Configuration items related to [encryption at rest](/encryption-at-rest.md) (TDE
 ### `data-encryption-method`
 
 + The encryption method for data files
-+ Value options: "plaintext", "aes128-ctr", "aes192-ctr", and "aes256-ctr"
++ Value options: "plaintext", "aes128-ctr", "aes192-ctr", "aes256-ctr", and "sm4-ctr" (supported since v6.3.0)
 + A value other than "plaintext" means that encryption is enabled, in which case the master key must be specified.
 + Default value: `"plaintext"`
 
@@ -1580,6 +1616,57 @@ Configuration items related to BR backup.
 
 + Controls whether to limit the resources used by backup tasks to reduce the impact on the cluster when the cluster resource utilization is high. For more information, refer to [BR Auto-Tune](/br/br-auto-tune.md).
 + Default value: `true`
+
+### `s3-multi-part-size` <span class="version-mark">New in v5.3.2</span>
+
+> **Note:**
+>
+> This configuration is introduced to address backup failures caused by S3 rate limiting. This problem has been fixed by [refining the backup data storage structure](/br/backup-and-restore-design.md#backup-file-structure). Therefore, this configuration is deprecated from v6.1.1 and is no longer recommended.
+
++ The part size used when you perform multipart upload to S3 during backup. You can adjust the value of this configuration to control the number of requests sent to S3.
++ If data is backed up to S3 and the backup file is larger than the value of this configuration item, [multipart upload](https://docs.aws.amazon.com/AmazonS3/latest/API/API_UploadPart.html) is automatically enabled. Based on the compression ratio, the backup file generated by a 96-MiB Region is approximately 10 MiB to 30 MiB.
++ Default value: 5MiB
+
+## log-backup
+
+Configuration items related to log backup.
+
+### `enable` <span class="version-mark">New in v6.2.0</span>
+
++ Determines whether to enable log backup.
++ Default value: `true`
+
+### `file-size-limit` <span class="version-mark">New in v6.2.0</span>
+
++ The size limit on backup log data to be stored.
++ Default value: 256MiB
++ Note: Generally, the value of `file-size-limit` is greater than the backup file size displayed in external storage. This is because the backup files are compressed before being uploaded to external storage.
+
+### `initial-scan-pending-memory-quota` <span class="version-mark">New in v6.2.0</span>
+
++ The quota of cache used for storing incremental scan data during log backup.
++ Default value: `min(Total machine memory * 10%, 512 MB)`
+
+### `initial-scan-rate-limit` <span class="version-mark">New in v6.2.0</span>
+
++ The rate limit on throughput in an incremental data scan during log backup.
++ Default value: 60, indicating that the rate limit is 60 MB/s by default.
+
+### `max-flush-interval` <span class="version-mark">New in v6.2.0</span>
+
++ The maximum interval for writing backup data to external storage in log backup.
++ Default value: 3min
+
+### `num-threads` <span class="version-mark">New in v6.2.0</span>
+
++ The number of threads used in log backup.
++ Default value: CPU * 0.5
++ Value range: [2, 12]
+
+### `temp-path` <span class="version-mark">New in v6.2.0</span>
+
++ The temporary path to which log files are written before being flushed to external storage.
++ Default value: `${deploy-dir}/data/log-backup-temp`
 
 ## cdc
 
@@ -1705,7 +1792,7 @@ Suppose that your machine on which TiKV is deployed has limited resources, for e
 
 + The soft limit on the bandwidth with which transactions and the Coprocessor read data.
 + Default value: `0KB` (which means no limit)
-+ + Recommended setting: Use the default value `0` in most cases unless the `foreground-cpu-time` setting is not enough to limit the read bandwidth. For such an exception, it is recommended to set the value smaller than `20MB` in the instance with 4 or less cores.
++ Recommended setting: Use the default value `0` in most cases unless the `foreground-cpu-time` setting is not enough to limit the read bandwidth. For such an exception, it is recommended to set the value smaller than `20MB` in the instance with 4 or less cores.
 
 ### Background Quota Limiter
 

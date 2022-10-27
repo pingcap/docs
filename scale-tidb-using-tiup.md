@@ -274,9 +274,9 @@ This section exemplifies how to remove a TiKV node from the `10.0.1.5` host.
     ```
 
     ```
-    Starting /root/.tiup/components/cluster/v1.10.0/cluster display <cluster-name>
+    Starting /root/.tiup/components/cluster/v1.10.3/cluster display <cluster-name>
     TiDB Cluster: <cluster-name>
-    TiDB Version: v6.1.0
+    TiDB Version: v6.3.0
     ID              Role         Host        Ports                            Status  Data Dir                Deploy Dir
     --              ----         ----        -----                            ------  --------                ----------
     10.0.1.3:8300   cdc          10.0.1.3    8300                             Up      data/cdc-8300           deploy/cdc-8300
@@ -411,12 +411,12 @@ In special cases (such as when a node needs to be forcibly taken down), or if th
 
 4. Manually delete TiFlash data files (the location can be found in the `data_dir` directory under the TiFlash configuration of the cluster topology file).
 
-5. Manually update TiUP's cluster configuration file (delete the information of the TiFlash node that goes down in edit mode).
+5. Delete information about the TiFlash node that goes down from the cluster topology using the following command:
 
     {{< copyable "shell-regular" >}}
 
     ```shell
-    tiup cluster edit-config <cluster-name>
+    tiup cluster scale-in <cluster-name> --node <pd_ip>:<pd_port> --force
     ```
 
 > **Note:**

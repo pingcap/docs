@@ -9,7 +9,7 @@ docs_cn_url = 'https://github.com/pingcap/docs-cn/pulls?q=is%3Apr'
 docs_url = 'https://github.com/pingcap/docs/pulls?q=is%3Apr'
 open_url = '+is%3Aopen+is%3Apr'
 close_url = '+is%3Aclosed+label%3Atranslation%2Fdoing'
-v62 = '+label%3Av6.2'
+v64 = '+label%3Av6.4'
 type_compatibility_change = '+label%3Atype%2Fcompatibility-or-feature-change'
 type_oncall = '+label%3AONCALL'
 type_bugfix = '+label%3Atype%2Fbug-fix'
@@ -70,18 +70,18 @@ if __name__ == "__main__":
 
     data_oreoxmt = {
         'date': datetime.now().strftime('%Y-%m-%d'),
-        'oreoxmt_zh_assignee_open': '有 {} 个未合源语 PR'.format(get_pr_no(docs_cn_url + open_url + oreoxmt_assignee + v62)),
-        'oreoxmt_zh_assignee_close': '有 {} 个已合源语 PR'.format(get_pr_no(docs_cn_url + close_url + oreoxmt_assignee + v62)),
-        'oreoxmt_zh_author_open': '已翻译了 {} 个 PR'.format(get_pr_no(docs_cn_url + open_url + oreoxmt_author + v62)),
-        'oreoxmt_en_assignee_open': '有 {} 个未合源语 PR'.format(get_pr_no(docs_url + open_url + oreoxmt_assignee + v62)),
-        'oreoxmt_en_assignee_close': '有 {} 个已合源语 PR'.format(get_pr_no(docs_url + close_url + oreoxmt_assignee + v62)),
-        'oreoxmt_en_author_open': '已翻译了 {} 个 PR'.format(get_pr_no(docs_url + open_url + oreoxmt_author + v62)),
-        'oreoxmt_zh_assignee_open_url': docs_cn_url + open_url + oreoxmt_assignee + v62,
-        'oreoxmt_zh_assignee_close_url': docs_cn_url + close_url + oreoxmt_assignee + v62,
-        'oreoxmt_zh_author_open_url': docs_cn_url + open_url + oreoxmt_author + v62,
-        'oreoxmt_en_assignee_open_url': docs_url + open_url + oreoxmt_assignee + v62,
-        'oreoxmt_en_assignee_close_url': docs_url + close_url + oreoxmt_assignee + v62,
-        'oreoxmt_en_author_open_url': docs_url + open_url + oreoxmt_author + v62,
+        'oreoxmt_zh_assignee_open': '有 {} 个未合源语 PR'.format(get_pr_no(docs_cn_url + open_url + oreoxmt_assignee + v64)),
+        'oreoxmt_zh_assignee_close': '有 {} 个已合源语 PR'.format(get_pr_no(docs_cn_url + close_url + oreoxmt_assignee + v64)),
+        'oreoxmt_zh_author_open': '已翻译了 {} 个 PR'.format(get_pr_no(docs_cn_url + open_url + oreoxmt_author + v64)),
+        'oreoxmt_en_assignee_open': '有 {} 个未合源语 PR'.format(get_pr_no(docs_url + open_url + oreoxmt_assignee + v64)),
+        'oreoxmt_en_assignee_close': '有 {} 个已合源语 PR'.format(get_pr_no(docs_url + close_url + oreoxmt_assignee + v64)),
+        'oreoxmt_en_author_open': '已翻译了 {} 个 PR'.format(get_pr_no(docs_url + open_url + oreoxmt_author + v64)),
+        'oreoxmt_zh_assignee_open_url': docs_cn_url + open_url + oreoxmt_assignee + v64,
+        'oreoxmt_zh_assignee_close_url': docs_cn_url + close_url + oreoxmt_assignee + v64,
+        'oreoxmt_zh_author_open_url': docs_cn_url + open_url + oreoxmt_author + v64,
+        'oreoxmt_en_assignee_open_url': docs_url + open_url + oreoxmt_assignee + v64,
+        'oreoxmt_en_assignee_close_url': docs_url + close_url + oreoxmt_assignee + v64,
+        'oreoxmt_en_author_open_url': docs_url + open_url + oreoxmt_author + v64,
         'oreoxmt_zh_assignee_open_url_text': '待处理。',
         'oreoxmt_zh_assignee_close_url_text': '待翻译。',
         'oreoxmt_zh_author_open_url_text': '未合并。',
@@ -92,18 +92,18 @@ if __name__ == "__main__":
 
     data_shichun_0415 = {
         'date': datetime.now().strftime('%Y-%m-%d'),
-        'shichun_0415_zh_assignee_open': '有 {} 个未合源语 PR'.format(get_pr_no(docs_cn_url + open_url + shichun_0415_assignee + v62)),
-        'shichun_0415_zh_assignee_close': '有 {} 个已合源语 PR'.format(get_pr_no(docs_cn_url + close_url + shichun_0415_assignee + v62)),
-        'shichun_0415_zh_author_open': '已翻译了 {} 个 PR'.format(get_pr_no(docs_cn_url + open_url + shichun_0415_author + v62)),
-        'shichun_0415_en_assignee_open': '有 {} 个未合源语 PR'.format(get_pr_no(docs_url + open_url + shichun_0415_assignee + v62)),
-        'shichun_0415_en_assignee_close': '有 {} 个已合源语 PR'.format(get_pr_no(docs_url + close_url + shichun_0415_assignee + v62)),
-        'shichun_0415_en_author_open': '已翻译了 {} 个 PR'.format(get_pr_no(docs_url + open_url + shichun_0415_author + v62)),
-        'shichun_0415_zh_assignee_open_url': docs_cn_url + open_url + shichun_0415_assignee + v62,
-        'shichun_0415_zh_assignee_close_url': docs_cn_url + close_url + shichun_0415_assignee + v62,
-        'shichun_0415_zh_author_open_url': docs_cn_url + open_url + shichun_0415_author + v62,
-        'shichun_0415_en_assignee_open_url': docs_url + open_url + shichun_0415_assignee + v62,
-        'shichun_0415_en_assignee_close_url': docs_url + close_url + shichun_0415_assignee + v62,
-        'shichun_0415_en_author_open_url': docs_url + open_url + shichun_0415_author + v62,
+        'shichun_0415_zh_assignee_open': '有 {} 个未合源语 PR'.format(get_pr_no(docs_cn_url + open_url + shichun_0415_assignee + v64)),
+        'shichun_0415_zh_assignee_close': '有 {} 个已合源语 PR'.format(get_pr_no(docs_cn_url + close_url + shichun_0415_assignee + v64)),
+        'shichun_0415_zh_author_open': '已翻译了 {} 个 PR'.format(get_pr_no(docs_cn_url + open_url + shichun_0415_author + v64)),
+        'shichun_0415_en_assignee_open': '有 {} 个未合源语 PR'.format(get_pr_no(docs_url + open_url + shichun_0415_assignee + v64)),
+        'shichun_0415_en_assignee_close': '有 {} 个已合源语 PR'.format(get_pr_no(docs_url + close_url + shichun_0415_assignee + v64)),
+        'shichun_0415_en_author_open': '已翻译了 {} 个 PR'.format(get_pr_no(docs_url + open_url + shichun_0415_author + v64)),
+        'shichun_0415_zh_assignee_open_url': docs_cn_url + open_url + shichun_0415_assignee + v64,
+        'shichun_0415_zh_assignee_close_url': docs_cn_url + close_url + shichun_0415_assignee + v64,
+        'shichun_0415_zh_author_open_url': docs_cn_url + open_url + shichun_0415_author + v64,
+        'shichun_0415_en_assignee_open_url': docs_url + open_url + shichun_0415_assignee + v64,
+        'shichun_0415_en_assignee_close_url': docs_url + close_url + shichun_0415_assignee + v64,
+        'shichun_0415_en_author_open_url': docs_url + open_url + shichun_0415_author + v64,
         'shichun_0415_zh_assignee_open_url_text': '待处理。',
         'shichun_0415_zh_assignee_close_url_text': '待翻译。',
         'shichun_0415_zh_author_open_url_text': '未合并。',
@@ -114,18 +114,18 @@ if __name__ == "__main__":
 
     data_ran_huang = {
         'date': datetime.now().strftime('%Y-%m-%d'),
-        'ran_huang_zh_assignee_open': '有 {} 个未合源语 PR'.format(get_pr_no(docs_cn_url + open_url + ran_huang_assignee + v62)),
-        'ran_huang_zh_assignee_close': '有 {} 个已合源语 PR'.format(get_pr_no(docs_cn_url + close_url + ran_huang_assignee + v62)),
-        'ran_huang_zh_author_open': '已翻译了 {} 个 PR'.format(get_pr_no(docs_cn_url + open_url + ran_huang_author + v62)),
-        'ran_huang_en_assignee_open': '有 {} 个未合源语 PR'.format(get_pr_no(docs_url + open_url + ran_huang_assignee + v62)),
-        'ran_huang_en_assignee_close': '有 {} 个已合源语 PR'.format(get_pr_no(docs_url + close_url + ran_huang_assignee + v62)),
-        'ran_huang_en_author_open': '已翻译了 {} 个 PR'.format(get_pr_no(docs_url + open_url + ran_huang_author + v62)),
-        'ran_huang_zh_assignee_open_url': docs_cn_url + open_url + ran_huang_assignee + v62,
-        'ran_huang_zh_assignee_close_url': docs_cn_url + close_url + ran_huang_assignee + v62,
-        'ran_huang_zh_author_open_url': docs_cn_url + open_url + ran_huang_author + v62,
-        'ran_huang_en_assignee_open_url': docs_url + open_url + ran_huang_assignee + v62,
-        'ran_huang_en_assignee_close_url': docs_url + close_url + ran_huang_assignee + v62,
-        'ran_huang_en_author_open_url': docs_url + open_url + ran_huang_author + v62,
+        'ran_huang_zh_assignee_open': '有 {} 个未合源语 PR'.format(get_pr_no(docs_cn_url + open_url + ran_huang_assignee + v64)),
+        'ran_huang_zh_assignee_close': '有 {} 个已合源语 PR'.format(get_pr_no(docs_cn_url + close_url + ran_huang_assignee + v64)),
+        'ran_huang_zh_author_open': '已翻译了 {} 个 PR'.format(get_pr_no(docs_cn_url + open_url + ran_huang_author + v64)),
+        'ran_huang_en_assignee_open': '有 {} 个未合源语 PR'.format(get_pr_no(docs_url + open_url + ran_huang_assignee + v64)),
+        'ran_huang_en_assignee_close': '有 {} 个已合源语 PR'.format(get_pr_no(docs_url + close_url + ran_huang_assignee + v64)),
+        'ran_huang_en_author_open': '已翻译了 {} 个 PR'.format(get_pr_no(docs_url + open_url + ran_huang_author + v64)),
+        'ran_huang_zh_assignee_open_url': docs_cn_url + open_url + ran_huang_assignee + v64,
+        'ran_huang_zh_assignee_close_url': docs_cn_url + close_url + ran_huang_assignee + v64,
+        'ran_huang_zh_author_open_url': docs_cn_url + open_url + ran_huang_author + v64,
+        'ran_huang_en_assignee_open_url': docs_url + open_url + ran_huang_assignee + v64,
+        'ran_huang_en_assignee_close_url': docs_url + close_url + ran_huang_assignee + v64,
+        'ran_huang_en_author_open_url': docs_url + open_url + ran_huang_author + v64,
         'ran_huang_zh_assignee_open_url_text': '待处理。',
         'ran_huang_zh_assignee_close_url_text': '待翻译。',
         'ran_huang_zh_author_open_url_text': '未合并。',
@@ -136,18 +136,18 @@ if __name__ == "__main__":
 
     data_hfxsd = {
         'date': datetime.now().strftime('%Y-%m-%d'),
-        'hfxsd_zh_assignee_open': '有 {} 个未合源语 PR'.format(get_pr_no(docs_cn_url + open_url + hfxsd_assignee + v62)),
-        'hfxsd_zh_assignee_close': '有 {} 个已合源语 PR'.format(get_pr_no(docs_cn_url + close_url + hfxsd_assignee + v62)),
-        'hfxsd_zh_author_open': '已翻译了 {} 个 PR'.format(get_pr_no(docs_cn_url + open_url + hfxsd_author + v62)),
-        'hfxsd_en_assignee_open': '有 {} 个未合源语 PR'.format(get_pr_no(docs_url + open_url + hfxsd_assignee + v62)),
-        'hfxsd_en_assignee_close': '有 {} 个已合源语 PR'.format(get_pr_no(docs_url + close_url + hfxsd_assignee + v62)),
-        'hfxsd_en_author_open': '已翻译了 {} 个 PR'.format(get_pr_no(docs_url + open_url + hfxsd_author + v62)),
-        'hfxsd_zh_assignee_open_url': docs_cn_url + open_url + hfxsd_assignee + v62,
-        'hfxsd_zh_assignee_close_url': docs_cn_url + close_url + hfxsd_assignee + v62,
-        'hfxsd_zh_author_open_url': docs_cn_url + open_url + hfxsd_author + v62,
-        'hfxsd_en_assignee_open_url': docs_url + open_url + hfxsd_assignee + v62,
-        'hfxsd_en_assignee_close_url': docs_url + close_url + hfxsd_assignee + v62,
-        'hfxsd_en_author_open_url': docs_url + open_url + hfxsd_author + v62,
+        'hfxsd_zh_assignee_open': '有 {} 个未合源语 PR'.format(get_pr_no(docs_cn_url + open_url + hfxsd_assignee + v64)),
+        'hfxsd_zh_assignee_close': '有 {} 个已合源语 PR'.format(get_pr_no(docs_cn_url + close_url + hfxsd_assignee + v64)),
+        'hfxsd_zh_author_open': '已翻译了 {} 个 PR'.format(get_pr_no(docs_cn_url + open_url + hfxsd_author + v64)),
+        'hfxsd_en_assignee_open': '有 {} 个未合源语 PR'.format(get_pr_no(docs_url + open_url + hfxsd_assignee + v64)),
+        'hfxsd_en_assignee_close': '有 {} 个已合源语 PR'.format(get_pr_no(docs_url + close_url + hfxsd_assignee + v64)),
+        'hfxsd_en_author_open': '已翻译了 {} 个 PR'.format(get_pr_no(docs_url + open_url + hfxsd_author + v64)),
+        'hfxsd_zh_assignee_open_url': docs_cn_url + open_url + hfxsd_assignee + v64,
+        'hfxsd_zh_assignee_close_url': docs_cn_url + close_url + hfxsd_assignee + v64,
+        'hfxsd_zh_author_open_url': docs_cn_url + open_url + hfxsd_author + v64,
+        'hfxsd_en_assignee_open_url': docs_url + open_url + hfxsd_assignee + v64,
+        'hfxsd_en_assignee_close_url': docs_url + close_url + hfxsd_assignee + v64,
+        'hfxsd_en_author_open_url': docs_url + open_url + hfxsd_author + v64,
         'hfxsd_zh_assignee_open_url_text': '待处理。',
         'hfxsd_zh_assignee_close_url_text': '待翻译。',
         'hfxsd_zh_author_open_url_text': '未合并。',
@@ -158,18 +158,18 @@ if __name__ == "__main__":
 
     data_qiancai = {
         'date': datetime.now().strftime('%Y-%m-%d'),
-        'qiancai_zh_assignee_open': '有 {} 个未合源语 PR'.format(get_pr_no(docs_cn_url + open_url + qiancai_assignee + v62)),
-        'qiancai_zh_assignee_close': '有 {} 个已合源语 PR'.format(get_pr_no(docs_cn_url + close_url + qiancai_assignee + v62)),
-        'qiancai_zh_author_open': '已翻译了 {} 个 PR'.format(get_pr_no(docs_cn_url + open_url + qiancai_author + v62)),
-        'qiancai_en_assignee_open': '有 {} 个未合源语 PR'.format(get_pr_no(docs_url + open_url + qiancai_assignee + v62)),
-        'qiancai_en_assignee_close': '有 {} 个已合源语 PR'.format(get_pr_no(docs_url + close_url + qiancai_assignee + v62)),
-        'qiancai_en_author_open': '已翻译了 {} 个 PR'.format(get_pr_no(docs_url + open_url + qiancai_author + v62)),
-        'qiancai_zh_assignee_open_url': docs_cn_url + open_url + qiancai_assignee + v62,
-        'qiancai_zh_assignee_close_url': docs_cn_url + close_url + qiancai_assignee + v62,
-        'qiancai_zh_author_open_url': docs_cn_url + open_url + qiancai_author + v62,
-        'qiancai_en_assignee_open_url': docs_url + open_url + qiancai_assignee + v62,
-        'qiancai_en_assignee_close_url': docs_url + close_url + qiancai_assignee + v62,
-        'qiancai_en_author_open_url': docs_url + open_url + qiancai_author + v62,
+        'qiancai_zh_assignee_open': '有 {} 个未合源语 PR'.format(get_pr_no(docs_cn_url + open_url + qiancai_assignee + v64)),
+        'qiancai_zh_assignee_close': '有 {} 个已合源语 PR'.format(get_pr_no(docs_cn_url + close_url + qiancai_assignee + v64)),
+        'qiancai_zh_author_open': '已翻译了 {} 个 PR'.format(get_pr_no(docs_cn_url + open_url + qiancai_author + v64)),
+        'qiancai_en_assignee_open': '有 {} 个未合源语 PR'.format(get_pr_no(docs_url + open_url + qiancai_assignee + v64)),
+        'qiancai_en_assignee_close': '有 {} 个已合源语 PR'.format(get_pr_no(docs_url + close_url + qiancai_assignee + v64)),
+        'qiancai_en_author_open': '已翻译了 {} 个 PR'.format(get_pr_no(docs_url + open_url + qiancai_author + v64)),
+        'qiancai_zh_assignee_open_url': docs_cn_url + open_url + qiancai_assignee + v64,
+        'qiancai_zh_assignee_close_url': docs_cn_url + close_url + qiancai_assignee + v64,
+        'qiancai_zh_author_open_url': docs_cn_url + open_url + qiancai_author + v64,
+        'qiancai_en_assignee_open_url': docs_url + open_url + qiancai_assignee + v64,
+        'qiancai_en_assignee_close_url': docs_url + close_url + qiancai_assignee + v64,
+        'qiancai_en_author_open_url': docs_url + open_url + qiancai_author + v64,
         'qiancai_zh_assignee_open_url_text': '待处理。',
         'qiancai_zh_assignee_close_url_text': '待翻译。',
         'qiancai_zh_author_open_url_text': '未合并。',
@@ -180,18 +180,18 @@ if __name__ == "__main__":
 
     data_tomshawn = {
         'date': datetime.now().strftime('%Y-%m-%d'),
-        'tomshawn_zh_assignee_open': '有 {} 个未合源语 PR'.format(get_pr_no(docs_cn_url + open_url + tomshawn_assignee + v62)),
-        'tomshawn_zh_assignee_close': '有 {} 个已合源语 PR'.format(get_pr_no(docs_cn_url + close_url + tomshawn_assignee + v62)),
-        'tomshawn_zh_author_open': '已翻译了 {} 个 PR'.format(get_pr_no(docs_cn_url + open_url + tomshawn_author + v62)),
-        'tomshawn_en_assignee_open': '有 {} 个未合源语 PR'.format(get_pr_no(docs_url + open_url + tomshawn_assignee + v62)),
-        'tomshawn_en_assignee_close': '有 {} 个已合源语 PR'.format(get_pr_no(docs_url + close_url + tomshawn_assignee + v62)),
-        'tomshawn_en_author_open': '已翻译了 {} 个 PR'.format(get_pr_no(docs_url + open_url + tomshawn_author + v62)),
-        'tomshawn_zh_assignee_open_url': docs_cn_url + open_url + tomshawn_assignee + v62,
-        'tomshawn_zh_assignee_close_url': docs_cn_url + close_url + tomshawn_assignee + v62,
-        'tomshawn_zh_author_open_url': docs_cn_url + open_url + tomshawn_author + v62,
-        'tomshawn_en_assignee_open_url': docs_url + open_url + tomshawn_assignee + v62,
-        'tomshawn_en_assignee_close_url': docs_url + close_url + tomshawn_assignee + v62,
-        'tomshawn_en_author_open_url': docs_url + open_url + tomshawn_author + v62,
+        'tomshawn_zh_assignee_open': '有 {} 个未合源语 PR'.format(get_pr_no(docs_cn_url + open_url + tomshawn_assignee + v64)),
+        'tomshawn_zh_assignee_close': '有 {} 个已合源语 PR'.format(get_pr_no(docs_cn_url + close_url + tomshawn_assignee + v64)),
+        'tomshawn_zh_author_open': '已翻译了 {} 个 PR'.format(get_pr_no(docs_cn_url + open_url + tomshawn_author + v64)),
+        'tomshawn_en_assignee_open': '有 {} 个未合源语 PR'.format(get_pr_no(docs_url + open_url + tomshawn_assignee + v64)),
+        'tomshawn_en_assignee_close': '有 {} 个已合源语 PR'.format(get_pr_no(docs_url + close_url + tomshawn_assignee + v64)),
+        'tomshawn_en_author_open': '已翻译了 {} 个 PR'.format(get_pr_no(docs_url + open_url + tomshawn_author + v64)),
+        'tomshawn_zh_assignee_open_url': docs_cn_url + open_url + tomshawn_assignee + v64,
+        'tomshawn_zh_assignee_close_url': docs_cn_url + close_url + tomshawn_assignee + v64,
+        'tomshawn_zh_author_open_url': docs_cn_url + open_url + tomshawn_author + v64,
+        'tomshawn_en_assignee_open_url': docs_url + open_url + tomshawn_assignee + v64,
+        'tomshawn_en_assignee_close_url': docs_url + close_url + tomshawn_assignee + v64,
+        'tomshawn_en_author_open_url': docs_url + open_url + tomshawn_author + v64,
         'tomshawn_zh_assignee_open_url_text': '待处理。',
         'tomshawn_zh_assignee_close_url_text': '待翻译。',
         'tomshawn_zh_author_open_url_text': '未合并。',
@@ -211,7 +211,7 @@ if __name__ == "__main__":
         "content": {
             "post": {
                 "zh-CN": {
-                    "title": "待处理的 PR 数目报告",
+                    "title": "待处理的发版文档 PR 数目报告",
                     "content": [
                         [
                             {
@@ -222,7 +222,7 @@ if __name__ == "__main__":
                         [
                             {
                                 "tag": "text",
-                                "text": "待处理 PR 数目如下"
+                                "text": "待处理的发版文档 PR 数目如下"
                             }
                         ],
                         [
@@ -234,7 +234,7 @@ if __name__ == "__main__":
                         [
                             {
                                 "tag": "text",
-                                "text": "v6.2 发版文档，中文文档截止日期 2022-07-29，英文文档截止日期 2022-08-10"
+                                "text": "v6.4 发版文档，中英文截止日期 2022-11-04"
                             }
                         ],
                         [
