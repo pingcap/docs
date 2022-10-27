@@ -130,49 +130,34 @@ host: '<host>', port: 4000,user: '<username>', password: '<your_password>', data
 
 The following lists the CA root paths on common platforms.
 
-<SimpleTab>
-
-<div label="macOS">
+**MacOS**
 
 ```
 /etc/ssl/cert.pem
 ```
 
-</div>
-
-<div label="Debian / Ubuntu / Arch">
-
+**Debian / Ubuntu / Arch**
 ```
 /etc/ssl/certs/ca-certificates.crt
 ```
 
-</div>
-
-<div label="RedHat / Fedora / CentOS / Mageia">
+**RedHat / Fedora / CentOS / Mageia**
 
 ```
 /etc/pki/tls/certs/ca-bundle.crt
 ```
 
-</div>
-
-<div label="Alpine">
+**Alpine**
 
 ```
 /etc/ssl/cert.pem
 ```
 
-</div>
-
-<div label="OpenSUSE">
+**OpenSUSE**
 
 ```
 /etc/ssl/ca-bundle.pem
 ```
-
-</div>
-
-</SimpleTab>
 
 ## Can TiDB Serverless Tier verify the client's identity?
 
