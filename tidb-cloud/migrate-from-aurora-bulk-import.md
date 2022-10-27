@@ -21,7 +21,7 @@ To import data, perform the following steps:
 
 3. Prepare source data according to [Learn how to create an Amazon S3 Bucket and prepare source data files](#learn-how-to-create-an-amazon-s3-bucket-and-prepare-source-data-files). You can see the advantages and disadvantages of different **Data Format** in the preparing data part.
 
-4. Select or fill in the **Data Format**, **Location**, **Bucket URI**, and **Role-ARN** fields according to the specification of your source data. For more information about how to create the bucket policy and role for cross-account access, see [configure Amazon S3 access](/tidb-cloud/config-s3-and-gcs-access.md#configure-amazon-s3-access).
+4. Select or fill in the **Data Format**, **Location**, **Bucket URI**, and **Role ARN** fields according to the specification of your source data. For more information about how to create the bucket policy and role for cross-account access, see [configure Amazon S3 access](/tidb-cloud/config-s3-and-gcs-access.md#configure-amazon-s3-access).
 
 5. Check the cluster name and the region name in the **Target Cluster**. Click **Next**.
 
