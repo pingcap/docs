@@ -37,15 +37,15 @@ TiDB Cloud provides some connection examples in the **Connect** dialog. You can 
 
 Generally, enabling TLS and offering a CA root path to authenticate the server is a good practice to prevent a man-in-the-middle attack. Different clients have different operations in the TLS connection. Enable TLS and verify the server according to your actual use of the client.
 
-The following examples show the connection string in MySQL CLI client, MyCLI client, Java, Python, Go, and Node.js:
+The following examples show the connection string in MySQL CLI client, MariaDB CLI client, MyCLI client, Java, Python, Go, and Node.js:
 
 <SimpleTab>
-<div label="MySQL CLI client">
+<div label="MySQL CLI">
 
 MySQL CLI client attempts to establish TLS connection by default. When you connect to TiDB Serverless Tier clusters, you should set `ssl-mode` and `ssl-ca`.
 
 ```shell
-mysql --connect-timeout 15 -u <username> -h <host> -P 4000 --ssl-mode=VERIFY_IDENTITY --ssl-ca=<CA_root_path> -D test -p
+mysql -u <username> -h <host> -P 4000 --ssl-mode=VERIFY_IDENTITY --ssl-ca=<CA_root_path> -D test -p
 ```
 
 - With `--ssl-mode=VERIFY_IDENTITY`, MySQL CLI client forces to enable TLS and validate TiDB Serverless Tier clusters.
@@ -53,7 +53,20 @@ mysql --connect-timeout 15 -u <username> -h <host> -P 4000 --ssl-mode=VERIFY_IDE
 
 </div>
 
-<div label="MyCLI client">
+<div label="MariaDB CLI">
+
+[MariaDB CLI client](https://mariadb.com/kb/en/mysql-command-line-client/) automatically enables TLS when using TLS related parameters. When you connect to TiDB Serverless Tier clusters, you need to set `ssl-ca` and `ssl-verify-server-cert`.
+
+ ```shell
+mysql -u <username> -h <host> -P 4000 --ssl-ca=<CA_root_path> --ssl-verify-server-cert -D test -p
+ ```
+
+ - Use `--ssl-ca=<CA_root_path>` to set the CA root path on your system.
+ - With `--ssl-verify-server-cert` to validate TiDB Serverless Tier clusters.
+
+ </div>
+
+<div label="MyCLI">
 
 [MyCLI](https://www.mycli.net/) automatically enables TLS when using TLS related parameters. When you connect to TiDB Serverless Tier clusters, you need to set `ssl-ca` and `ssl-verify-server-cert`.
 
