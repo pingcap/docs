@@ -58,9 +58,7 @@ Currently, you cannot select an arbitrary remote region for backup data storage.
 
 > **Note:**
 >
-> TiDB Cloud will charge you for multiple copies of backup storage based on Backup Storage Region setting, and backup storage price varies by region.
-> If you select multiple backup storage regions then you will also incur backup data replication charges.
-> See [Data Backup Cost](https://en.pingcap.com/tidb-cloud-pricing-details/#data-backup-cost) for more information.
+> Based on the Backup Storage Region setting, you might be charged for multiple copies of backup storage. If you select multiple backup storage regions, you are also charged for backup data replication. The pricing varies by region. For more information, see [Data Backup Cost](https://en.pingcap.com/tidb-cloud-pricing-details/#data-backup-cost).
 
 ### Manual backup
 
