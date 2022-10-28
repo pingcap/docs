@@ -9,7 +9,7 @@ You can integrate TiDB Cloud with third-party monitoring services to receive TiD
 
 > **Note:**
 >
-> For [Developer Tier clusters](/tidb-cloud/select-cluster-tier.md#developer-tier), third-party monitoring integrations are not supported.
+> For [Serverless Tier clusters](/tidb-cloud/select-cluster-tier.md#serverless-tier), third-party monitoring integrations are not supported.
 
 ## Required access
 

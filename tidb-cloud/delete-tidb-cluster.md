@@ -23,7 +23,7 @@ You can delete a cluster at any time by performing the following steps:
 
     > **Note:**
     >
-    > For [Developer Tier clusters](/tidb-cloud/select-cluster-tier.md#developer-tier), the backup and restore feature is unavailable. You can use [Dumpling](https://docs.pingcap.com/tidb/stable/dumpling-overview) to export your data as a backup.
+    > For [Serverless Tier clusters](/tidb-cloud/select-cluster-tier.md#serverless-tier), the backup and restore feature is unavailable. You can use [Dumpling](https://docs.pingcap.com/tidb/stable/dumpling-overview) to export your data as a backup.
 
 5. Click **I understand the consequences, delete this cluster**.
 

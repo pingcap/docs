@@ -13,7 +13,7 @@ This tutorial guides you through an easy way to get started with your TiDB Cloud
 
 ## Step 1. Create a TiDB cluster
 
-TiDB Cloud [Developer Tier](/tidb-cloud/select-cluster-tier.md#developer-tier) is the best way to get started with TiDB Cloud. To create a free Developer Tier cluster, take the following steps:
+TiDB Cloud [Serverless Tier](/tidb-cloud/select-cluster-tier.md#serverless-tier) is the best way to get started with TiDB Cloud. To create a free Serverless Tier cluster, take the following steps:
 
 1. If you do not have a TiDB Cloud account, click [here](https://tidbcloud.com/free-trial) to sign up for an account.
 
@@ -23,9 +23,9 @@ TiDB Cloud [Developer Tier](/tidb-cloud/select-cluster-tier.md#developer-tier) i
 
     The plan selection page is displayed by default.
 
-3. On the plan selection page, click **Get Started for Free** in the **Developer Tier** plan.
+3. On the plan selection page, click **Get Started for Free** in the **Serverless Tier** plan.
 
-4. On the **Create Cluster** page, **Developer Tier** is selected by default. Update the default cluster name if necessary, and then select the region where you want to create your cluster.
+4. On the **Create Cluster** page, **Serverless Tier** is selected by default. Update the default cluster name if necessary, and then select the region where you want to create your cluster.
 
 5. Click **Create**.
 
@@ -34,7 +34,7 @@ TiDB Cloud [Developer Tier](/tidb-cloud/select-cluster-tier.md#developer-tier) i
 6. During the creation process, perform security settings for your cluster:
 
     1. Click **Security Settings** in the upper-right corner of the cluster area.
-    2. In the **Security Settings** dialog box, set a root password and allowed IP addresses to connect to your cluster, and then click **Apply**. If you do not set a root password, you cannot connect to the cluster.
+    2. In the **Security Settings** dialog box, set a root password to connect to your cluster, and then click **Apply**. If you do not set a root password, you cannot connect to the cluster.
 
 ## Step 2. Try Playground
 

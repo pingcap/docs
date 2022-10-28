@@ -20,7 +20,7 @@ This document describes how to import sample data into TiDB Cloud via the UI. Th
     <SimpleTab>
     <div label="AWS">
 
-    If your TiDB cluster is hosted by AWS (the Developer Tier is hosted by AWS by default), fill in the following parameters:
+    If your TiDB cluster is hosted by AWS (the Serverless Tier is hosted by AWS by default), fill in the following parameters:
 
     - **Data Format**: select **SQL File**.
     - **Location**: `AWS`
