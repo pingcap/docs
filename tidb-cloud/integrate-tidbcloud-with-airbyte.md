@@ -38,11 +38,13 @@ Conveniently, the steps are the same for setting TiDB as the source and the dest
 
 2. Fill in the following parameters:
 
-    - Host: The host domain (for TiDB Cloud, use Endpoint)
+    - Host: The Endpoint of TiDB Cloud (for self-deployment TiDB, use host domain)
     - Port: The port of the database
     - Database: The database that you want to sync the data
     - Username: The username to access the database
     - Password: The password of the username
+
+    For more information, refer to [Connect via standard connection](/tidb-cloud/connect-to-tidb-cluster.md#connect-via-standard-connection).
 
 3. Enable **SSL Connection**, and set TLS protocols to **TLSv1.2** or **TLSv1.3** in **JDBC URL Params**.
 
