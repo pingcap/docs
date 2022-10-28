@@ -38,7 +38,7 @@ Conveniently, the steps are the same for setting TiDB as the source and the dest
 
 2. Fill in the following parameters:
 
-    - Host: The Endpoint of TiDB Cloud clusters
+    - Host: The endpoint of TiDB Cloud cluster
     - Port: The port of the database
     - Database: The database that you want to sync the data
     - Username: The username to access the database
