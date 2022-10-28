@@ -70,14 +70,14 @@ To create a Serverless Tier cluster, take the following steps:
 
 3. Note that the cloud provider of Serverless Tier is AWS, and then select the region where you want to create your cluster.
 
-4. View the cluster size of the Serverless Tier, and then click **Create**.
+4. Click **Create**.
 
     The cluster creation process starts and your TiDB Cloud cluster will be created in approximately 30 seconds.
 
 5. During the creation process, perform security settings for your cluster:
 
     1. Click **Security Settings** in the upper-right corner of the cluster area.
-    2. In the **Security Settings** dialog box, set the root password and allowed IP addresses to connect to your cluster, and then click **Apply**.
+    2. In the **Security Settings** dialog box, set the root password to connect to your cluster, and then click **Apply**.
 
     > **Note:**
     >
