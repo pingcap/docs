@@ -12,7 +12,7 @@ This statement creates a new user, specified with a password. In the MySQL privi
 
 ```ebnf+diagram
 CreateUserStmt ::=
-    'CREATE' 'USER' IfNotExists UserSpecList RequireClauseOpt ConnectionOptions LockOption
+    'CREATE' 'USER' IfNotExists UserSpecList RequireClauseOpt ConnectionOptions LockOption AttributeOption
 
 IfNotExists ::=
     ('IF' 'NOT' 'EXISTS')?
@@ -31,6 +31,8 @@ StringName ::=
 |   Identifier
 
 LockOption ::= ( 'ACCOUNT' 'LOCK' | 'ACCOUNT' 'UNLOCK' )?
+
+AttributeOption ::= ( 'COMMENT' CommentString | 'ATTRIBUTE' AttributeString )?
 ```
 
 ## Examples
@@ -67,6 +69,30 @@ Create a user who is locked upon creation.
 
 ```sql
 CREATE USER 'newuser5'@'%' ACCOUNT LOCK;
+```
+
+```
+Query OK, 1 row affected (0.02 sec)
+```
+
+Create a user with a comment.
+
+{{< copyable "sql" >}}
+
+```sql
+CREATE USER 'newuser6'@'%' COMMENT 'This user is created only for test';
+```
+
+```
+Query OK, 1 row affected (0.02 sec)
+```
+
+Create a user with an `email` attribute:
+
+{{< copyable "sql" >}}
+
+```sql
+CREATE USER 'newuser7'@'%' ATTRIBUTE '{"email": "user@pingcap.com"}';
 ```
 
 ```
