@@ -42,7 +42,7 @@ The following examples show the connection string in MySQL CLI client, MariaDB C
 <SimpleTab>
 <div label="MySQL CLI">
 
-MySQL CLI client attempts to establish TLS connection by default. When you connect to TiDB Serverless Tier clusters, you should set `ssl-mode` and `ssl-ca`.
+[MySQL CLI client](https://dev.mysql.com/doc/refman/8.0/en/mysql.html) attempts to establish TLS connection by default. When you connect to TiDB Serverless Tier clusters, you should set `ssl-mode` and `ssl-ca`.
 
 ```shell
 mysql -u <username> -h <host> -P 4000 --ssl-mode=VERIFY_IDENTITY --ssl-ca=<CA_root_path> -D test -p
@@ -127,7 +127,7 @@ db, err := sql.Open("mysql", "<usename>:<your_password>@tcp(<host>:4000)/test?tl
 
 <div label="Node.js">
 
-[Mysql2](https://www.npmjs.com/package/mysql2)'s TLS connection configurations are used here as an example.
+[mysql2](https://www.npmjs.com/package/mysql2)'s TLS connection configurations are used here as an example.
 
 ```
 host: '<host>', port: 4000,user: '<username>', password: '<your_password>', database: 'test', ssl: {minVersion: 'TLSv1.2', rejectUnauthorized: true}
