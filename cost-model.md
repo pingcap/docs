@@ -40,11 +40,6 @@ The preceding example is simplified and only used to explain the basic principle
 
 ## Cost Model Version 2
 
-> **Warning:**
->
-> - Cost Model Version 2 is currently an experimental feature. It is not recommended that you use it for production environments.
-> - Switching the version of the cost model might cause changes to query plans.
-
 TiDB v6.2.0 introduces Cost Model Version 2, a new cost model.
 
 Cost Model Version 2 provides a more accurate regression calibration of the cost formula, adjusts some of the cost formulas, and is more accurate than the previous version of the cost formula.
