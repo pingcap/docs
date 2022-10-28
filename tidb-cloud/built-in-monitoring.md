@@ -19,7 +19,11 @@ To view the metrics on the Monitoring page, take the following steps:
 
 2. Click the **Monitoring** tab.
 
-## Monitoring metrics
+## Metrics Retention Policy
+
+All monitoring data are kept for 15 days.
+
+## Monitoring Metrics
 
 The following sections illustrate the metrics on the Monitoring page.
 
