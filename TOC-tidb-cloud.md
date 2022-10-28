@@ -177,6 +177,7 @@
   - [API Overview](/tidb-cloud/api-overview.md)
   - [API Reference](https://docs.pingcap.com/tidbcloud/api/v1beta)
 - Integrations
+  - [Airbyte](/tidb-cloud/integrate-tidbcloud-with-airbyte.md)
   - [Datadog](/tidb-cloud/monitor-datadog-integration.md)
   - [Prometheus and Grafana](/tidb-cloud/monitor-prometheus-and-grafana-integration.md)
   - Terraform
