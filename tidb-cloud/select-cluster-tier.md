@@ -57,6 +57,7 @@ To get the prefix for your cluster, take the following steps:
 - You cannot use the third-party monitoring service.
 - You cannot customize the port number of a TiDB cluster.
 - The data transfer is limited to a total of 20 GiB in and out per week. If the 20 GiB limit is reached, the network traffic will be throttled to 10 KB/s.
+- The storage is limited to a total of 1 GiB of OLTP storage and 1 GiB of OLAP storage.
 
 ## Dedicated Tier
 
