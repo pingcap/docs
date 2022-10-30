@@ -25,12 +25,12 @@ As t1 and t3 have different data volumes and distribution, these two execution o
 
 Therefore, the optimizer needs an algorithm to determine the join order. Currently, the following two Join Reorder algorithms are used in TiDB:
 
-- The greedy algorithm: among all the nodes participating in the join, TiDB selects the table with the least rows to estimate its join result with each of the other tables respectively, and then selects the pair with the smallest join result. After that, TiDB continues the similar process to the next round of selection and join, until all the nodes have completed the join.
-- The dynamic programming algorithm: among all nodes participating in the join, TiDB enumerates all possible Join orders and selects the optimal Join order.
+- The greedy algorithm: among all the nodes participating in the join, TiDB selects the table with the least rows to estimate its join result with each of the other tables respectively, and then selects the pair with the smallest join result. After that, TiDB continues the similar process to select and join other nodes for the next round, until all the nodes have completed the join.
+- The dynamic programming algorithm: among all nodes participating in the join, TiDB enumerates all possible join orders and selects the optimal join order.
 
-## Example of the greedy algorithm
+## Example: the greedy algorithm of Join Reorder
 
-Take the three tables above (t1, t2, and t3) as an example.
+Take the preceding three tables (t1, t2, and t3) as an example.
 
 First, TiDB obtains all the nodes that participates in the join operation, and sorts the nodes in the ascending order of row numbers.
 
@@ -46,9 +46,9 @@ In this case only three tables are joined, so TiDB gets the final join result.
 
 ![join-reorder-3](/media/join-reorder-3.png)
 
-## Example of the dynamic programming algorithm
+## Example: the dynamic programming algorithm of Join Reorder
 
-Taking the same tables in [Example of the greedy algorithm](#example-of-the-greedy-algorithm) as an example. The dynamic programming algorithm can enumerate all possibilities. Therefore, comparing with the greedy algorithm, which must start with the `t1` table (the table with the least rows), the dynamic programming algorithm can enumerate a join order as follows:
+Taking the preceding three tables (t1, t2, and t3) as an example again, the dynamic programming algorithm can enumerate all possibilities. Therefore, comparing with the greedy algorithm, which must start with the `t1` table (the table with the least rows), the dynamic programming algorithm can enumerate a join order as follows:
 
 ! [join-reorder-4](/media/join-reorder-4.png)
 
@@ -56,13 +56,13 @@ When this choice is better than the greedy algorithm, the dynamic programming al
 
 Because all possibilities are enumerated, the dynamic programming algorithm consumes more time and is more susceptible to statistics.
 
-## Control the Join Reorder algorithm
+## Control the Join Reorder algorithms
 
-The Join Reorder algorithm is controlled by the [`tidb_opt_join_reorder_threshold`](/system-variables.md#tidb_opt_join_reorder_threshold) variable. If the number of nodes participating in Join Reorder is greater than this threshold, TiDB uses the greedy algorithm. Otherwise, TiDB uses the dynamic programming algorithm.
+The Join Reorder algorithms are controlled by the [`tidb_opt_join_reorder_threshold`](/system-variables.md#tidb_opt_join_reorder_threshold) variable. If the number of nodes participating in Join Reorder is greater than this threshold, TiDB uses the greedy algorithm. Otherwise, TiDB uses the dynamic programming algorithm.
 
-## Limitations of Join Reorder algorithm
+## Limitations of Join Reorder algorithms
 
-The current Join Reorder algorithm has the following limitations:
+The current Join Reorder algorithms have the following limitations:
 
 - Limited by the calculation methods of the result sets, the algorithm cannot ensure it selects the optimum join order.
 - Currently, the Join Reorder algorithm's support for Outer Join is disabled by default. To enable it, set the value of the system variable [`tidb_enable_outer_join_reorder`](/system-variables.md#tidb_enable_outer_join_reorder-new-in-v610) to `ON`.
