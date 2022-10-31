@@ -25,7 +25,8 @@ This document introduces the experimental features of TiDB in different versions
 
 ## Scheduling
 
-Elastic scheduling feature. It enables the TiDB cluster to dynamically scale out and in on Kubernetes based on real-time workloads, which effectively reduces the stress during your application's peak hours and saves overheads. See [Enable TidbCluster Auto-scaling](https://docs.pingcap.com/tidb-in-kubernetes/stable/enable-tidb-cluster-auto-scaling) for details. (Introduced in v4.0)
++ Elastic scheduling feature. It enables the TiDB cluster to dynamically scale out and in on Kubernetes based on real-time workloads, which effectively reduces the stress during your application's peak hours and saves overheads. See [Enable TidbCluster Auto-scaling](https://docs.pingcap.com/tidb-in-kubernetes/stable/enable-tidb-cluster-auto-scaling) for details. (Introduced in v4.0)
++ Balance hot Region scheduling by using the v2 algorithm in PD. See [`scheduler config balance-hot-region-scheduler`](/pd-control.md#scheduler-config-balance-hot-region-scheduler) for details. (Introduced in v6.3)
 
 ## SQL
 
@@ -33,6 +34,7 @@ Elastic scheduling feature. It enables the TiDB cluster to dynamically scale out
 + [Generated Columns](/generated-columns.md) (Introduced in v2.1)
 + [User-Defined Variables](/user-defined-variables.md) (Introduced in v2.1)
 + [Cascades Planner](/system-variables.md#tidb_enable_cascades_planner): a cascades framework-based top-down query optimizer (Introduced in v3.0)
++ [Table Lock](/tidb-configuration-file.md#enable-table-lock-new-in-v400) (Introduced in v4.0.0)
 + [Metadata Lock](/metadata-lock.md) (Introduced in v6.3.0)
 + [Range INTERVAL partitioning](/partitioned-table.md#range-interval-partitioning) (Introduced in v6.3.0)
 + [Add index acceleration](/system-variables.md#tidb_ddl_enable_fast_reorg-new-in-v630) (Introduced in v6.3.0)
