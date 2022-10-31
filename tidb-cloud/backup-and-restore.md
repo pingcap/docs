@@ -52,7 +52,7 @@ By the automatic backup, you can back up the cluster data every day at the backu
 
 Currently, you cannot select an arbitrary remote region for backup data storage. The regions already supported are as follows:
 
-| Cloud provider | Region                      | Remote regions support   |
+| Cloud provider | Custer region                      | Remote regions support   |
 |----------------|-----------------------------|--------------------------|
 | GCP            | Tokyo (asia-northeast1)     | Osaka (asia-northeast2)  |
 
