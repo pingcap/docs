@@ -347,7 +347,7 @@ This variable is an alias for [`last_insert_id`](#last_insert_id).
 - Type: Integer
 - Default value: `0`
 - Range: `[0, 100000]`
-- The maximum number of connections permitted for a single TiDB instance. This variable can be used for resources control.
+- The maximum number of connections permitted for a single TiDB instance simultaneously. This variable can be used for resources control.
 - The default value of `0` means no limit. When the value of this variable is larger than `0`, and the number of connections reaches the value, TiDB server rejects new connections from clients.
 
 ### max_execution_time
