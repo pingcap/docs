@@ -169,6 +169,7 @@ This document lists the features supported in each TiDB version. Note that suppo
 | [TiDB Dashboard Continuous Profiling](/dashboard/continuous-profiling.md)   | Y | Y | Y | Y | Y | Experimental | Experimental |      N       |      N       |      N       |      N       |
 | [TiDB Dashboard Top SQL](/dashboard/top-sql.md)                             | Y | Y | Y | Y | Y | Experimental |      N       |      N       |      N       |      N       |      N       |
 | [TiDB Dashboard SQL Diagnostics](/information-schema/information-schema-sql-diagnostics.md) | Y | Experimental | Experimental | Experimental | Experimental | Experimental | Experimental | Experimental | Experimental | Experimental | Experimental |
+| [TiDB Dashboard Cluster Diagnostics](/dashboard/dashboard-diagnostics-access.md) | Y | Experimental | Experimental | Experimental | Experimental | Experimental | Experimental | Experimental | Experimental | Experimental | Experimental |
 | [Information schema](/information-schema/information-schema.md) | Y | Y | Y | Y | Y | Y            |      Y       |      Y       |      Y       |      Y       |      Y       |
 | [Metrics schema](/metrics-schema.md)                       | Y | Y | Y | Y | Y  | Y            |      Y       |      Y       |      Y       |      Y       |      Y       |
 | [Statements summary tables](/statement-summary-tables.md)    | Y | Y | Y | Y | Y | Y            |      Y       |      Y       |      Y       |      Y       |      Y       |
