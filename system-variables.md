@@ -2848,7 +2848,7 @@ explain select * from t where age=5;
 - Persists to cluster: Yes
 - Default value: `0`
 - Range: `[0, 2147483647]`
-- This variable is used to control the selectivity estimation level.
+- This variable controls the iteration of the optimizer's estimation logic. After changing the value of this variable, the estimation logic of the optimizer will change greatly. Currently, `0` is the only valid value. It is not recommended to set it to other values.
 
 ### tidb_partition_prune_mode <span class="version-mark">New in v5.1</span>
 
