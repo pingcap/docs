@@ -57,5 +57,5 @@ The columns in the `MEMORY_USAGE` table are described as follows:
 * SESSION_KILL_TOTAL: The number of times sessions are terminated, from the time TiDB is started to the current time.
 * GC_LAST: The timestamp of the last time Golang GC is triggered by memory usage.
 * GC_TOTAL: The number of times Golang GC is triggered by memory usage, from the time TiDB is started to the current time.
-* DISK_USAGE: The disk usage of the current data write operation, in bytes.
-* QUERY_FORCE_DISK: The number of times data is written to disk, from the time TiDB is started to the current time.
+* DISK_USAGE: The disk usage for the current data spill operation, in bytes.
+* QUERY_FORCE_DISK: The number of times data is spilled to disk, from the time TiDB is started to the current time.
