@@ -1570,7 +1570,7 @@ MPP is a distributed computing framework provided by the TiFlash engine, which a
 
 ### tidb_enable_prepared_plan_cache <span class="version-mark">New in v6.1.0</span>
 
-- Scope: SESSION | GLOBAL (only for >=v6.3)
+- Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
 - Type: Boolean
 - Default value: `ON`
@@ -2924,7 +2924,7 @@ explain select * from t where age=5;
 
 ### tidb_prepared_plan_cache_size <span class="version-mark">New in v6.1.0</span>
 
-- Scope: SESSION | GLOBAL (only for >=v6.3)
+- Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
 - Type: Integer
 - Default value: `100`
@@ -3110,7 +3110,7 @@ explain select * from t where age=5;
 
 </CustomContent>
 
-- Scope: SESSION | GLOBAL (only for >=v6.3)
+- Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
 - Type: Integer
 - Default value: `2`
@@ -3246,7 +3246,7 @@ For details, see [Identify Slow Queries](/identify-slow-queries.md).
 - Scope: GLOBAL
 - Persists to cluster: Yes
 - Type: Boolean
-- Default value: `ON` (only for >=v6.3)
+- Default value: `ON`
 - This variable controls how TiDB behaves when the waiting time of SQL optimization reaches the timeout to synchronously load complete column statistics. The default value `ON` means that the SQL optimization gets back to using pseudo statistics after the timeout. If this variable to `OFF`, SQL execution fails after the timeout.
 
 ### tidb_stats_load_sync_wait <span class="version-mark">New in v5.4.0</span>
