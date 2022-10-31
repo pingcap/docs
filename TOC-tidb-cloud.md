@@ -24,7 +24,6 @@
     - [Build a TiDB Application using Spring Boot](/develop/dev-guide-sample-application-spring-boot.md)
   - Connect to TiDB
     - [Choose Driver or ORM](/develop/dev-guide-choose-driver-or-orm.md)
-    - [Connect to TiDB](/develop/dev-guide-connect-to-tidb.md)
     - [Connection Pools and Connection Parameters](/develop/dev-guide-connection-parameters.md)
   - Design Database Schema
     - [Overview](/develop/dev-guide-schema-design-overview.md)
