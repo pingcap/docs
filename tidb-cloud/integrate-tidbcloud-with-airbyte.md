@@ -28,7 +28,17 @@ You can deploy Airbyte locally with only a few steps.
 
 Once you see an Airbyte banner, you can go to <http://localhost:8000> with the username (`airbyte`) and password (`password`) to visit the UI.
 
-![Airbyte banner](/media/tidb-cloud/integration-airbyte-ready.jpg)
+```
+airbyte-server      |     ___    _      __          __
+airbyte-server      |    /   |  (_)____/ /_  __  __/ /____
+airbyte-server      |   / /| | / / ___/ __ \/ / / / __/ _ \
+airbyte-server      |  / ___ |/ / /  / /_/ / /_/ / /_/  __/
+airbyte-server      | /_/  |_/_/_/  /_.___/\__, /\__/\___/
+airbyte-server      |                     /____/
+airbyte-server      | --------------------------------------
+airbyte-server      |  Now ready at http://localhost:8000/
+airbyte-server      | --------------------------------------
+```
 
 ## Set up the TiDB connector
 
