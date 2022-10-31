@@ -28,6 +28,7 @@ The following table lists the price of TiDB Cloud for each TiCDC Capacity Unit (
 | AWS            | N. Virginia (us-east-1)     |          $0.1307 |
 | AWS            | Mumbai (ap-south-1)         |          $0.1393 |
 | AWS            | Singapore (ap-southeast-1)  |          $0.1623 |
+| AWS            | Jakarta (ap-southeast-3)    |          $0.1623 |
 | AWS            | Tokyo (ap-northeast-1)      |          $0.1669 |
 | AWS            | Frankfurt (eu-central-1)    |          $0.1564 |
 | GCP            | Oregon (us-west1)           |          $0.1452 |
