@@ -2429,7 +2429,7 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 - Type: Float
 - Default value: `0.7`
 - Range: `[0.0, 1.0]`
-- This variable sets the memory usage ratio that triggers the tidb-server memory alarm. By default, TiDB prints an alarm log when TiDB memory usage exceeds 70% of total memory and [alarm condition](/configure-memory-usage.md#tidb-server-alarm-on-excessive-memory-usage) is met.
+- This variable sets the memory usage ratio that triggers the tidb-server memory alarm. By default, TiDB prints an alarm log when TiDB memory usage exceeds 70% of total memory and any [alarm condition](/configure-memory-usage.md#tidb-server-alarm-on-excessive-memory-usage) is met.
 - When the value of this variable is configured to `0` or `1`, it means the memory threshold alarm feature is disabled.
 
 <CustomContent platform="tidb">
@@ -2453,7 +2453,7 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 ### `tidb_memory_usage_alarm_keep_record_num` <span class="version-mark">New in v6.4.0</span>
 
 - Scope: GLOBAL
-- Whether to persist to the cluster: Yes
+- Persists to cluster: Yes
 - Default value: `5`
 - Range: `[1, 10000]`
 - When the tidb-server memory usage exceeds the memory alarm threshold and triggers an alarm, TiDB only retains the status file generated during the recent 5 alarms by default. You can adjust this number with this variable.
