@@ -2429,24 +2429,24 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 - Type: Float
 - Default value: `0.7`
 - Range: `[0.0, 1.0]`
+- This variable sets the memory usage ratio that triggers the tidb-server memory alarm. By default, TiDB prints an alarm log when TiDB memory usage exceeds 70% of total memory and [alarm condition](/configure-memory-usage.md#tidb-server-alarm-on-excessive-memory-usage) is met.
+- When the value of this variable is configured to `0` or `1`, it means the memory threshold alarm feature is disabled.
 
 <CustomContent platform="tidb">
 
-- TiDB triggers an alarm when the percentage of the memory it takes exceeds a certain threshold. For the detailed usage description of this feature, see [`memory-usage-alarm-ratio`](/tidb-configuration-file.md#memory-usage-alarm-ratio-new-in-v409).
-- You can set the initial value of this variable by configuring [`memory-usage-alarm-ratio`](/tidb-configuration-file.md#memory-usage-alarm-ratio-new-in-v409).
+- When the value of this variable is configured to a value between `0` and `1`, it means that the memory threshold alarm feature is enabled.
 
-- This variable is used to set the memory usage ratio that triggers the tidb-server memory alarm. By default, TiDB prints an alarm log when TiDB memory usage exceeds 70% of total memory and [alarm condition](/configure-memory-usage.md#tidb-server-alarm-on-excessive-memory-usage) is met.
-- When the value of this variable is configured to `0` or `1`, it means the memory threshold alarm function is disabled.
-- When configuring this variable with a value between `0` and `1`, it means that the memory threshold alarm function is turned on.
-
-    - If the configuration item [`server-memory-quota`](/tidb-configuration-file.md#server-memory-quota-introduced-from-v409-version) is not set, then the memory alarm threshold is `tidb_memory-usage-alarm- ratio * system memory size`.
-    - If the configuration item `server-memory-quota` is set and greater than 0, the memory alarm threshold is `tidb_memory-usage-alarm-ratio * server-memory-quota`.
+    - If the [`server-memory-quota`](/tidb-configuration-file.md#server-memory-quota-introduced-from-v409-version) configuration is not set, the memory alarm threshold is `tidb_memory-usage-alarm-ratio * system memory size`.
+    - If the `server-memory-quota` configuration is set and greater than 0, the memory alarm threshold is `tidb_memory-usage-alarm-ratio * server-memory-quota`.
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-- TiDB triggers an alarm when the percentage of the memory it takes exceeds a certain threshold. For the detailed usage description of this feature, see [`memory-usage-alarm-ratio`](https://docs.pingcap.com/tidb/stable/tidb-configuration-file#memory-usage-alarm-ratio-new-in-v409).
+- When the value of this variable is configured to a value between `0` and `1`, it means that the memory threshold alarm feature is enabled.
+
+    - If the [`server-memory-quota`](https://docs.pingcap.com/tidb/stable/tidb-configuration-file#memory-usage-alarm-ratio-new-in-v409) configuration is not set, the memory alarm threshold is `tidb_memory-usage-alarm-ratio * system memory size`.
+    - If the `server-memory-quota` configuration is set and greater than 0, the memory alarm threshold is `tidb_memory-usage-alarm-ratio * server-memory-quota`.
 
 </CustomContent>
 
@@ -2456,7 +2456,7 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 - Whether to persist to the cluster: Yes
 - Default value: `5`
 - Range: `[1, 10000]`
-- When the tidb-server memory usage exceeds the memory alarm threshold and triggers an alarm, TiDB will only keep the status file generated during the last 5 alarms by default. You can adjust this number with this variable.
+- When the tidb-server memory usage exceeds the memory alarm threshold and triggers an alarm, TiDB only retains the status file generated during the recent 5 alarms by default. You can adjust this number with this variable.
 
 ### tidb_merge_join_concurrency
 
