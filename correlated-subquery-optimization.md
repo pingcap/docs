@@ -17,7 +17,7 @@ The reason why TiDB needs to do this rewriting is that the correlated subquery i
 
 The disadvantage of this rewriting is that when the correlation is not lifted, the optimizer can use the index on the correlated column. That is, although this subquery may repeat many times, the index can be used to filter data each time. After using the rewriting rule, the position of the correlated column usually changes. Although the subquery is only executed once, the single execution time would be longer than that without decorrelation.
 
-Therefore, when there are few external values, do not perform decorrelation, because it might bring better execution performance. At present, this optimization can be disabled by using the [`NO_DECORRELATE`](/optimizer-hints.md#no_decorrelate) optimizer hint or by setting "subquery decorrelation" optimization rules in [blocklist of optimization rules and expression pushdown](/blocklist-control-plan.md). In most cases, it is recommended to use the optimizer hint along with [SQL Plan Management](/sql-plan-management.md) to disable the decorrelation.
+Therefore, when there are few external values, do not perform decorrelation, which might bring better execution performance. In this case, you can disable this optimization by using the [`NO_DECORRELATE`](/optimizer-hints.md#no_decorrelate) optimizer hint or by disabling the "subquery decorrelation" optimization rule in the [blocklist of optimization rules and expression pushdown](/blocklist-control-plan.md). In most cases, it is recommended to use the optimizer hint along with [SQL Plan Management](/sql-plan-management.md) to disable the decorrelation.
 
 ## Example
 
