@@ -180,7 +180,7 @@ Suppose the source cluster has the following topology:
 
 ![TiDB Lightning FAQ - source cluster topology](/media/lightning-faq-source-cluster-topology.jpg)
 
-The placement rule is as follows:
+The source cluster has the following placement rule:
 
 ```sql
 CREATE PLACEMENT POLICY p1 PRIMARY_REGION="us-east" REGIONS="us-east,us-west";
