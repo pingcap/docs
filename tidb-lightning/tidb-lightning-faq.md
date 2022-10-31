@@ -168,15 +168,15 @@ See also [How to properly restart TiDB Lightning?](#how-to-properly-restart-tidb
 
 2. Access `http://<lightning-ip>:<status-port>/debug/pprof/goroutine?debug=2` to get the goroutine information.
 
-## Why is TiDB Lightning not compatible with Placement Rules in SQL
+## Why is TiDB Lightning not compatible with Placement Rules in SQL?
 
 TiDB Lightning is not compatible with [Placement Rules in SQL](/placement-rules-in-sql.md). When TiDB Lightning imports data that contains placement policies, TiDB Lightning reports an error.
 
 The reason is explained as follows:
 
-The purpose of placement rule in SQL is to control the data location of certain TiKV nodes at table or partition level. TiDB Lightning imports data in text files into the target TiDB cluster. If the data files is exported with the definition of placement rules, during the import process, TiDB Lightning must create the corresponding placement rule policy in the target cluster based on the exported definition. This might cause two problems when the source cluster and the target cluster have different topology.
+The purpose of placement rule in SQL is to control the data location of certain TiKV nodes at the table or partition level. TiDB Lightning imports data in text files into the target TiDB cluster. If the data files is exported with the definition of placement rules, during the import process, TiDB Lightning must create the corresponding placement rule policy in the target cluster based on the definition. When the source cluster and the target cluster have different topology, this might cause problems.
 
-Suppose the source cluster has the following topology：
+Suppose the source cluster has the following topology:
 
 ![TiDB Lightning FAQ - source cluster topology](/media/lightning-faq-source-cluster-topology.jpg)
 
@@ -186,11 +186,11 @@ The placement rule is as follows:
 CREATE PLACEMENT POLICY p1 PRIMARY_REGION="us-east" REGIONS="us-east,us-west";
 ```
 
-**Situation 1:** you want to have 3 replicas on the target cluster, but the topology is different with the source cluster (see the following diagram). In such cases, TiDB Lightning will not report an error when it creates placement rules in the target cluster, but the semantics are wrong.
+**Situation 1:** you want to have 3 replicas on the target cluster, but the topology is different with the source cluster (see the following diagram). In such cases, the semantics are wrong, but TiDB Lightning will not report an error when it creates placement rules in the target cluster.
 
 ![TiDB Lightning FAQ - situation 1](/media/lightning-faq-situation-1.jpg)
 
-**Situation 2:** you want to locate the follower replica at other TiKV nodes in region "us-west". TiDB Lightning will report an error when it creates placement rules in the target cluster, because region "us-west" does not exist any more.
+**Situation 2:** you want to locate the follower replica at other TiKV nodes in region "us-west". Because the region "us-west" does not exist in the target cluster topology, TiDB Lightning will report an error when it creates placement rules in the target cluster.
 
 ![TiDB Lightning FAQ - situation 2](/media/lightning-faq-situation-2.jpg)
 
