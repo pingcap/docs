@@ -97,7 +97,7 @@ After loading data to the cluster, you can connect to your cluster from the comm
 
     If you see the release version information, you are ready to use your TiDB cluster.
 
-## Step 4. Query data
+## Step 5. Query data
 
 After connecting to your TiDB cluster, you can run some queries in your Terminal.
 
