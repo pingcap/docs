@@ -202,5 +202,5 @@ The steps are as follows:
 
 1. Plan the data distribution topology.
 2. Configure the required labels for TiKV and PD.
-3. Create the placement rule policy and apply the created policy to the target tables.
+3. Create the placement rule policy and apply the created policy to the target table.
 4. Use TiDB Lightning to import data into the target table.
