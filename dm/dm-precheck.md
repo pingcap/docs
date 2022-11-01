@@ -59,7 +59,7 @@ Regardless of the migration mode you choose, the precheck always includes the fo
     > **Warning:**
     >
     > - When the upstream uses incompatible character sets, you can still continue the replication by creating tables with the utf8mb4 character set in the downstream. However, this practice is not recommended. You are advised to replace the incompatible character set used by the upstream with another character set that is supported in downstream.
-    > - When the upstream tables have no primary key constraints or unique key constraints, the same row of data might be replicated multiple times to the downstream, which might affect the performance of replication. In a production environment, it is recommended that you specify primary key constraints or unique key constraints for the upstream database.
+    > - When the upstream tables have no primary key constraints or unique key constraints, the same row of data might be replicated multiple times to the downstream, which might also affect the performance of replication. In a production environment, it is recommended that you specify primary key constraints or unique key constraints for the upstream table.
 
 ### Check items for full data migration
 
