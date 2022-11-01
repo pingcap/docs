@@ -5,7 +5,7 @@ summary: Learn the `USER_ATTRIBUTES` INFORMATION_SCHEMA table.
 
 # USER_ATTRIBUTES
 
-The `USER_PRIVILEGES` table provides information about user comments and user attributes. This information comes from the `mysql.user` system table:
+The `USER_PRIVILEGES` table provides information about user comments and user attributes. This information comes from the `mysql.user` system table.
 
 ```sql
 USE information_schema;
