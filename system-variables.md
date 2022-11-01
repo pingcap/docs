@@ -1033,7 +1033,7 @@ MPP is a distributed computing framework provided by the TiFlash engine, which a
 
 <CustomContent platform="tidb">
 
-- This variable controls the concurrency of [`FLASHBACK [CLUSTER | DATABASE | TABLE] TO TIMESTAMP`](/sql-statements/sql-statement-flashback-to-timestamp.md).
+- This variable controls the concurrency of [`FLASHBACK CLUSTER TO TIMESTAMP`](/sql-statements/sql-statement-flashback-to-timestamp.md).
 
 </CustomContent>
 
