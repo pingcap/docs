@@ -9,7 +9,7 @@ TiDB v6.4.0 introduces the `FLASHBACK CLUSTER TO TIMESTAMP` syntax. You can use 
 
 > **Warning:**
 >
-> Before executing `FLASHBACK CLUSTER TO TIMESTAMP`, you need to pause PITR and TiCDC tasks and restart them after the `FLASHBACK` is completed. Otherwise, it might lead to synchronization failure.
+> Before executing `FLASHBACK CLUSTER TO TIMESTAMP`, you need to pause PITR and replication tasks running on such tools as TiCDC and restart them after the `FLASHBACK` is completed. Otherwise, it might lead to replication failure.
 
 ## Syntax
 
