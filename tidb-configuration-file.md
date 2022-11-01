@@ -750,8 +750,10 @@ Configuration items related to read isolation.
 - When TiDB detects that the memory usage of the tidb-server instance exceeds the threshold, it considers that there might be a risk of OOM. Therefore, it records the following information to the directory [`tmp-storage-path/record`](/tidb-configuration-file.md#tmp-storage-path):
     - Top 10 SQL statements with the highest memory usage
     - Top 10 SQL statements with the longest running time
-    - The heap profile among all SQL statements currently being executed 
-It then outputs a log containing the keyword `tidb-server has the risk of OOM`.
+    - The heap profile among all SQL statements currently being executed
+    
+    It then outputs a log containing the keyword `tidb-server has the risk of OOM`.
+
 - The value of this configuration will initialize the value of system variable [`tidb_memory_usage_alarm_ratio`](/system-variables.md#tidb_memory_usage_alarm_ratio)
 - Before v6.1.0, this configuration is set by `memory-usage-alarm-ratio`.
 
