@@ -224,7 +224,7 @@ Usage example:
 
 ### Stop and restart a backup task
 
-You can stop a log backup task by running the `br log stop` command and restart a backup task that is stopped by using the `--storage` directory.
+You can stop a log backup task by running the `br log stop` command and restart a backup task that is stopped by using the original `--storage` directory.
 
 #### Stop a backup task
 
@@ -264,7 +264,7 @@ Usage example:
 
 After running the `br log stop` command to stop a log backup task, you can create a new log backup task in another `--storage` directory or restart the log backup task in the original `--storage` directory by running the `br log start` command. If you restart the task in the original `--storage` directory, pay attention to the following points:
 
-- Parameters of the `--storage` directory for restart must be the same as those of the task that is stopped.
+- Parameters of the `--storage` directory for restarting a task must be the same as the task that is stopped.
 - The `--start-ts` does not need to be specified. BR automatically starts the backup from the last backup checkpoint.
 - If the task is stopped for a long time and multiple versions of the data have been garbage collected, the error `BR:Backup:ErrBackupGCSafepointExceeded` is reported when you attempt to restart the task. To address this issue, you need to configure another directory to create a new log backup task.
 
