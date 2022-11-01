@@ -327,6 +327,24 @@ Configuration items related to security.
 - Default value: "", which allows TLSv1.1 or higher.
 - Optional values: `"TLSv1.0"`, `"TLSv1.1"`, `"TLSv1.2"` and `"TLSv1.3"`
 
+### `auth-token-jwks` <span class="version-mark">New in v6.4.0</span>
+
+> **Warning:**
+>
+> The `tidb_auth_token` authentication method is used only for the internal operation of TiDB Cloud. **DO NOT** set the variable to this value.
+
+- Set the local file path of the JSON Web Key Sets (JWKS) of the `tidb_auth_token` authentication method.
+- Default value: `""`
+
+### `auth-token-refresh-interval` <span class="version-mark">New in v6.4.0</span>
+
+> **Warning:**
+>
+> The `tidb_auth_token` authentication method is used only for the internal operation of TiDB Cloud. **DO NOT** set the variable to this value.
+
+- Set the JSON Web Key Sets refresh interval of the `tidb_auth_token` authentication method.
+- Default value: `1h`
+
 ## Performance
 
 Configuration items related to performance.
