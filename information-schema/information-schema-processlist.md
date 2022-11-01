@@ -9,9 +9,9 @@ summary: Learn the `PROCESSLIST` information_schema table.
 
 The `PROCESSLIST` table has additional columns not present in `SHOW PROCESSLIST`:
 
-* A `DIGEST` column to show the digest of the SQL statement
+* A `DIGEST` column to show the digest of the SQL statement.
 * A `MEM` column to show the memory used by the request that is being processed, in bytes.
-* A `DISK` column to show the disk usage in bytes
+* A `DISK` column to show the disk usage in bytes.
 * A `TxnStart` column to show the start time of the transaction
 
 {{< copyable "sql" >}}
@@ -72,7 +72,7 @@ Fields in the `PROCESSLIST` table are described as follows:
 * TIME: The current execution duration of `PROCESS`, in seconds.
 * STATE: The current connection state.
 * INFO: The requested statement that is being processed.
-* DIGEST: The digest of the SQL statement
+* DIGEST: The digest of the SQL statement.
 * MEM: The memory used by the request that is being processed, in bytes.
 * DISK: The disk usage in bytes.
 * TxnStart: The start time of the transaction.
