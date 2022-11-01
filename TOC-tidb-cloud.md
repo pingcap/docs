@@ -98,6 +98,7 @@
   - Migrate Data into TiDB
     - [Overview](/tidb-cloud/tidb-cloud-migration-overview.md)
     - [Configure Amazon S3 Access and GCS Access](/tidb-cloud/config-s3-and-gcs-access.md)
+    - [Naming Conventions for Data Import](/tidb-cloud/naming-conventions-for-data-import.md)
     - [Migrate from MySQL-Compatible Databases](/tidb-cloud/migrate-data-into-tidb.md)
     - [Migrate Incremental Data from MySQL-Compatible Databases](/tidb-cloud/migrate-incremental-data-from-mysql.md)
     - [Migrate and Merge MySQL Shards of Large Datasets](/tidb-cloud/migrate-sql-shards.md)
