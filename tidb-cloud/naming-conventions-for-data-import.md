@@ -5,10 +5,10 @@ summary: Learn about the naming conventions for CSV, Parquet, Aurora Snapshot, a
 
 # Naming Conventions for Data Import
 
-The Data Import feature in TiDB Cloud supports the following file formats: CSV, Parquet, Aurora Snapshot, and SQL. To make sure that data can be imported successfully, you need to prepare the following:
+You can import data into TiDB Cloud in the following file formats: CSV, Parquet, Aurora Snapshot, and SQL. To make sure that your data is imported successfully, you need to prepare the following two types of files:
 
-- Prepare the SQL file for creating the target database (optional) and the SQL file for creating the target table that conforms to the naming conventions. If the SQL file for creating the target table is not provided, you need to create the corresponding table manually in the target database in advance.
-- Prepare a data file that conforms to the naming conventions for importing data. If the data file name can not meet the requirements, it is recommended to use the file pattern to perform the import task. Otherwise, the import task can not scan the data files you want to import.
+- **Schema file**. Prepare the database schema file (optional) and the table schema file, both in SQL format (`.sql`). If the table schema file is not provided, you need to create the corresponding table manually in the target database in advance.
+- **Data file**. Prepare a data file that conforms to the naming conventions for importing data. If the data file name can not meet the requirements, it is recommended to use **File Pattern** to perform the import task. Otherwise, the import task cannot scan the data files you want to import.
 
 ## Naming conventions for schema files
 
@@ -70,7 +70,7 @@ For example:
 
 ### Aurora Snapshot
 
-For Aurora Snapshot files, all files with the `.parquet` suffix in the `${db_name}.${table_name}/` conform to the naming convention. A data file name can contain any prefix consisting of "a-z, 0-9, - , _ , ." and suffix ".parquet".
+For Aurora Snapshot files, all files with the `.parquet` suffix in the `${db_name}.${table_name}/` folder conform to the naming convention. A data file name can contain any prefix consisting of "a-z, 0-9, - , _ , ." and suffix ".parquet".
 
 For example:
 
