@@ -266,7 +266,7 @@ After running the `br log stop` command to stop a log backup task, you can creat
 
 - Parameters of the `--storage` directory for restarting a task must be the same as the task that is stopped.
 - The `--start-ts` does not need to be specified. BR automatically starts the backup from the last backup checkpoint.
-- If the task is stopped for a long time and multiple versions of the data have been garbage collected, the error `BR:Backup:ErrBackupGCSafepointExceeded` is reported when you attempt to restart the task. To address this issue, you need to configure another directory to create a new log backup task.
+- If the task is stopped for a long time and multiple versions of the data have been garbage collected, the error `BR:Backup:ErrBackupGCSafepointExceeded` is reported when you attempt to restart the task. In this case, you have to create a new log backup task in another `--storage` directory.
 
 ### Clean up the backup data
 
