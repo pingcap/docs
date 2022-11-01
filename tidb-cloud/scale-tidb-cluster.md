@@ -109,23 +109,9 @@ For a running cluster, AWS and Google Cloud do not allow in-place storage capaci
 
 ## Increase node size
 
-When a cluster is running, you cannot increase its node size. To make such changes, take either of the following methods:
+Currently, when a cluster is running, you cannot increase its node size. You can only increase the node size through backup and restore.
 
-- Method 1: Increase the node size through backup and restore
+You need to [create a latest backup of the cluster](/tidb-cloud/backup-and-restore.md#manual-backup), [delete the cluster](/tidb-cloud/delete-tidb-cluster.md), and then increase the node size when you [restore the deleted cluster](/tidb-cloud/backup-and-restore.md#restore-a-deleted-cluster). Before taking this method, make sure the following impacts are acceptable:
 
-    You need to [create a latest backup of the cluster](/tidb-cloud/backup-and-restore.md#manual-backup), [delete the cluster](/tidb-cloud/delete-tidb-cluster.md), and then increase the node size when you [restore the deleted cluster](/tidb-cloud/backup-and-restore.md#restore-a-deleted-cluster). Before taking this method, make sure the following impacts are acceptable:
-
-    - To avoid any data loss during or after the backup, you need to stop the connection to the cluster through your SQL client before creating the backup.
-    - After you stop the connection to the cluster, your applications running on this cluster cannot provide service normally until the restoring process is completed.
-
-- Method 2: Increase the node size through a support ticket
-
-    To submit a support ticket, perform the steps in [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md). The PingCAP support team will contact you and complete the scaling within the agreed time.
-
-    For each node to be scaled, provide the following information in the **Description** box of the ticket:
-
-    - Cluster name: xxx
-    - Cloud provider: GCP or AWS
-    - Node type: TiDB, TiKV, or TiFlash
-    - Current node size: xxx
-    - Expected node size: xxx
+- To avoid any data loss during or after the backup, you need to stop the connection to the cluster through your SQL client before creating the backup.
+- After you stop the connection to the cluster, your applications running on this cluster cannot provide service normally until the restoring process is completed.
