@@ -310,33 +310,17 @@ dispatchers = [
 
 For detailed integration guide, see [Quick Start Guide on Integrating TiDB with Confluent Platform](/ticdc/integrate-confluent-using-ticdc.md).
 
-#### Configure `s3`, `azure blob storage`, `gcs`, and `nfs` in sink URI
+#### Configure `s3` in sink URI
 
-From v6.4.0, TiCDC supports saving row change events to a cloud storage system, including Amazon S3, GCS, and Azblob.
+From v6.4.0, TiCDC supports saving row change events to Amazon S3.
 
-- Saving row change events to Amazon S3:
+Saving row change events to Amazon S3:
 
-    ```shell
-    --sink-uri="s3://my-bucket/prefix?region=us-west-2&worker-count=4"
-    ```
+```shell
+--sink-uri="s3://my-bucket/prefix?region=us-west-2&worker-count=4"
+```
 
-    The URI parameters of Amazon S3 in TiCDC are the same as the URL parameters of Amazon S3 in BR. For details, see [S3 URL parameters](/br/backup-and-restore-storages.md#s3-url-parameters).
-
-- Saving row change events to GCS:
-
-    ```shell
-    --sink-uri="gcs://my-bucket/prefix?flush-interval=15s"
-    ```
-
-    The URI parameters of GCS in TiCDC are the same as the URL parameters of GCS in BR. For details, see [GCS URL parameters](/br/backup-and-restore-storages.md#gcs-url-parameters).
-
-- Saving row change events to Azblob:
-
-    ```shell
-    --sink-uri="azblob://my-bucket/prefix"
-    ```
-
-    The URI parameters of Azblob in TiCDC are the same as the URL parameters of Azblob in BR. For details, see [Azblob URL parameters](/br/backup-and-restore-storages.md#azblob-url-parameters).
+The URI parameters of Amazon S3 in TiCDC are the same as the URL parameters of Amazon S3 in BR. For details, see [S3 URL parameters](/br/backup-and-restore-storages.md#s3-url-parameters).
 
 Other parameters optional in the URI are as follows:
 
@@ -677,11 +661,11 @@ enable-partition-separator = false
 [sink.csv]
 # Delimiter between fields. The value must be an ASCII character and defaults to `,`.
 delimiter = ','
-# The quotation that surrounds fields. The default value is `"`, which means no quotation is used.
+# The quotation that surrounds the fields. The default value is `"`, which means no quotation is used.
 quote = '"'
-# The character displayed when the csv column is null. The default value is `\N`.
+# The character displayed when the CSV column is null. The default value is `\N`.
 null = '\N'
-# Whether to include commit-ts in the csv column. The default value is false.
+# Whether to include commit-ts in the CSV column. The default value is false.
 include-commit-ts = false
 ```
 
@@ -829,6 +813,8 @@ You can use `partition = "xxx"` to specify a partition dispatcher. It supports f
 > ```
 
 ## Cloud storage sinks
+
+This section describes cloud storage sinks in details.
 
 ### Data change records
 

@@ -5,9 +5,9 @@ summary: Learn the concept of TiCDC CSV Protocol and how to use it.
 
 # TiCDC CSV Protocol
 
-## Use CSV
-
 When using a cloud storage as the sink, you can send DML events to the cloud storage in the CSV format.
+
+## Use CSV
 
 The following is an example of the configuration when using the CSV protocol:
 
@@ -38,7 +38,7 @@ include-commit-ts = false
 
 ## Definition of the data format
 
-Each column in the CSV file is defined as follows:
+Each column in a row of the CSV file is defined as follows:
 
 - Column 1: The operation-type indicator, including `I`, `D`, and `U`. `I` means `INSERT`, `U` means `UPDATE`, and `D` means `DELETE`.
 - Column 2: Table name.
