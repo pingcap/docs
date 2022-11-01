@@ -8,7 +8,7 @@ summary: Learn about the naming conventions for CSV, Parquet, Aurora Snapshot, a
 You can import data into TiDB Cloud in the following file formats: CSV, Parquet, Aurora Snapshot, and SQL. To make sure that your data is imported successfully, you need to prepare the following two types of files:
 
 - **Schema file**. Prepare the database schema file (optional) and the table schema file, both in SQL format (`.sql`). If the table schema file is not provided, you need to create the corresponding table manually in the target database in advance.
-- **Data file**. Prepare a data file that conforms to the naming conventions for importing data. If the data file name can not meet the requirements, it is recommended to use **File Pattern** to perform the import task. Otherwise, the import task cannot scan the data files you want to import.
+- **Data file**. Prepare a data file that conforms to the naming conventions for importing data. If the data file name can not meet the requirements, it is recommended to use [**File Pattern**](#file-pattern) to perform the import task. Otherwise, the import task cannot scan the data files you want to import.
 
 ## Naming conventions for schema files
 
@@ -59,14 +59,14 @@ For example:
 
 When you import Parquet files, name the data files as follows:
 
-- `${db_name}.${table_name}[.XXXXXX][.{snappy|gz|lzo}].parquet` (`[.XXXXXXX]` and `[.{snappy|gz|lzo}]` are optional)
+- `${db_name}.${table_name}[.XXXXXX].parquet[.{snappy|gz|lzo}]` (`[.XXXXXXX]` and `[.{snappy|gz|lzo}]` are optional)
 
 For example:
 
 - `import_db.test_table.parquet`
 - `import_db.test_table.01.parquet`
-- `import_db.test_table.gz.parquet`
-- `import_db.test_table.01.gz.parquet`
+- `import_db.test_table.parquet.gz`
+- `import_db.test_table.01.parquet.gz`
 
 ### Aurora Snapshot
 
@@ -93,7 +93,7 @@ If the SQL file is exported through TiDB Dumpling with the default configuration
 
 ## File pattern
 
-If the source file of CSV or Parquet does not conform to the naming convention, you can use the file pattern feature to establish the name mapping relationship between the source data file and the target table. This feature does not support Aurora Snapshot and SQL files.
+If the source data file of CSV or Parquet does not conform to the naming convention, you can use the file pattern feature to establish the name mapping relationship between the source data file and the target table. This feature does not support Aurora Snapshot and SQL data files.
 
 - For CSV files, see **File Pattern** in [Step 4. Import CSV files to TiDB Cloud](/tidb-cloud/import-csv-files.md#step-4-import-csv-files-to-tidb-cloud)
 - For Parquet files, see **File Pattern** in [Step 4. Import Parquet files to TiDB Cloud](/tidb-cloud/import-parquet-files.md#step-4-import-parquet-files-to-tidb-cloud)
