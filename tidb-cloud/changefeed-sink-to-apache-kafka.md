@@ -9,7 +9,7 @@ This document describes how to create a changefeed to stream data from TiDB Clou
 
 > **Note:**
 >
-> For [Serverless Tier clusters](/tidb-cloud/select-cluster-tier.md#serverless-tier), the changefeed feature is unavailable.
+> For [Serverless Tier clusters](/tidb-cloud/select-cluster-tier.md#serverless-tier-beta), the changefeed feature is unavailable.
 
 ## Prerequisites
 

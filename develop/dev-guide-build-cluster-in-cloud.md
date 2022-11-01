@@ -42,8 +42,6 @@ This document walks you through the quickest way to get started with TiDB Cloud.
 
 7. In the dialog box, locate **Step 2: Connect with a SQL client**, and then copy the string to connect with a SQL client for later use.
 
-    ![SQL string](/media/develop/tidb-cloud-connect.png)
-
     <CustomContent platform="tidb">
 
     > **Note:**
@@ -56,7 +54,7 @@ This document walks you through the quickest way to get started with TiDB Cloud.
 
     > **Note:**
     >
-    > For [Serverless Tier clusters](/tidb-cloud/select-cluster-tier.md#serverless-tier), when you connect to your cluster, you must include the prefix for your cluster in the user name and wrap the name with quotation marks. For more information, see [User name prefix](/tidb-cloud/select-cluster-tier.md#user-name-prefix).
+    > For [Serverless Tier clusters](/tidb-cloud/select-cluster-tier.md#serverless-tier-beta), when you connect to your cluster, you must include the prefix for your cluster in the user name and wrap the name with quotation marks. For more information, see [User name prefix](/tidb-cloud/select-cluster-tier.md#user-name-prefix).
 
     </CustomContent>
 

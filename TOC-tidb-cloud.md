@@ -24,7 +24,6 @@
     - [Build a TiDB Application using Spring Boot](/develop/dev-guide-sample-application-spring-boot.md)
   - Connect to TiDB
     - [Choose Driver or ORM](/develop/dev-guide-choose-driver-or-orm.md)
-    - [Connect to TiDB](/develop/dev-guide-connect-to-tidb.md)
     - [Connection Pools and Connection Parameters](/develop/dev-guide-connection-parameters.md)
   - Design Database Schema
     - [Overview](/develop/dev-guide-schema-design-overview.md)
@@ -99,6 +98,7 @@
   - Migrate Data into TiDB
     - [Overview](/tidb-cloud/tidb-cloud-migration-overview.md)
     - [Configure Amazon S3 Access and GCS Access](/tidb-cloud/config-s3-and-gcs-access.md)
+    - [Naming Conventions for Data Import](/tidb-cloud/naming-conventions-for-data-import.md)
     - [Migrate MySQL-Compatible Databases to TiDB Cloud](/tidb-cloud/migration-job.md)
     - Migrate On-Premises MySQL-Compatible Databases to TiDB Cloud
         - [Migrate from MySQL-Compatible Databases](/tidb-cloud/migrate-data-into-tidb.md)
