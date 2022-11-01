@@ -8,6 +8,52 @@ aliases: ['/tidbcloud/beta/supported-tidb-versions','/tidbcloud/release-notes']
 
 This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-cloud/) in 2022.
 
+## October 28, 2022
+
+* Developer Tier is upgraded to [Serverless Tier](/tidb-cloud/select-cluster-tier.md#serverless-tier). Serverless Tier, a fully-managed, auto-scaling deployment of TiDB, is now available. It is still in beta and free to use.
+
+    * A Serverless Tier cluster still contains fully functional HTAP ability as Dedicated Tier clusters.
+    * Serverless Tier offers you faster cluster creation time and instantaneous cold start time. Compared with Developer Tier, the creation time reduces from minutes to seconds.
+    * You do not need to worry about deployment topology. Serverless Tier will adjust automatically according to your requests.
+    * Serverless Tier [enforces TLS connection to clusters for the sake of security](/tidb-cloud/secure-connections-to-serverless-tier-clusters.md).
+    * Existing Developer Tier clusters will be automatically migrated to Serverless Tier in the coming months. Your ability to use your cluster should not be affected, and you will not be charged for the use of your Serverless Tier cluster in beta.
+
+  Get started [here](/tidb-cloud/tidb-cloud-quickstart.md).
+
+## October 25, 2022
+
+**General changes**
+
+- Support dynamically changing and persisting a subset of TiDB system variables (beta).
+
+    You can use the standard SQL statement to set a new value for a supported system variable.
+
+    ```sql
+    SET [GLOBAL|SESSION] <variable>
+    ```
+
+    For example:
+
+    ```sql
+    SET GLOBAL tidb_committer_concurrency = 127;
+    ```
+
+    If a variable is set at the `GLOBAL` level, the variable will be applied to the cluster and persistent (keep effective even after you restart or reload the server). A variable at the `SESSION` level is not persistent and is only effective in the current session.
+
+    **This feature is still in beta**, and only a limited number of variables are supported. It is not recommended to modify other [system variables](/system-variables.md) due to uncertainty of the side effects. See the following list for all supported variables based on TiDB v6.1:
+
+    - [`require_secure_transport`](/system-variables.md#require_secure_transport-new-in-v610)
+    - [`tidb_committer_concurrency`](/system-variables.md#tidb_committer_concurrency-new-in-v610)
+    - [`tidb_enable_batch_dml`](/system-variables.md#tidb_enable_batch_dml)
+    - [`tidb_enable_prepared_plan_cache`](/system-variables.md#tidb_enable_prepared_plan_cache-new-in-v610)
+    - [`tidb_max_tiflash_threads`](/system-variables.md#tidb_max_tiflash_threads-new-in-v610)
+    - [`tidb_mem_oom_action`](/system-variables.md#tidb_mem_oom_action-new-in-v610)
+    - [`tidb_mem_quota_query`](/system-variables.md#tidb_mem_quota_query)
+    - [`tidb_prepared_plan_cache_size`](/system-variables.md#tidb_prepared_plan_cache_size-new-in-v610)
+    - [`tidb_query_log_max_len`](/system-variables.md#tidb_query_log_max_len)
+
+- Upgrade the default TiDB version of new [Dedicated Tier](/tidb-cloud/select-cluster-tier.md#dedicated-tier) clusters from [v6.1.1](https://docs.pingcap.com/tidb/stable/release-6.1.1) to [v6.1.2](https://docs.pingcap.com/tidb/stable/release-6.1.2).
+
 ## October 19, 2022
 
 **Integration changes**
@@ -42,7 +88,7 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
 **General changes**
 
-* Upgrade the default TiDB version of new [Developer Tier](/tidb-cloud/select-cluster-tier.md#developer-tier) clusters from [v6.2.0](https://docs.pingcap.com/tidb/v6.2/release-6.2.0) to [v6.3.0](https://docs.pingcap.com/tidb/v6.3/release-6.3.0).
+* Upgrade the default TiDB version of new [Developer Tier](/tidb-cloud/select-cluster-tier.md#serverless-tier) clusters from [v6.2.0](https://docs.pingcap.com/tidb/v6.2/release-6.2.0) to [v6.3.0](https://docs.pingcap.com/tidb/v6.3/release-6.3.0).
 
 **Console changes**
 
@@ -105,7 +151,7 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
     In the new design, the entrances of upgrade to Dedicated Tier, cluster connection, and data import are highlighted.
 
-* Introduce Playground for [Developer Tier](/tidb-cloud/select-cluster-tier.md#developer-tier) clusters.
+* Introduce Playground for [Developer Tier](/tidb-cloud/select-cluster-tier.md#serverless-tier) clusters.
 
     Playground contains a pre-loaded dataset of GitHub events, which allows you to get started with TiDB Cloud by running queries instantly, without importing your data or connecting to a client.
 
@@ -169,7 +215,7 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
 **General changes**
 
-* Upgrade the default TiDB version of new [Developer Tier](/tidb-cloud/select-cluster-tier.md#developer-tier) clusters from [v6.1.0](https://docs.pingcap.com/tidb/stable/release-6.1.0) to [v6.2.0](https://docs.pingcap.com/tidb/v6.2/release-6.2.0).
+* Upgrade the default TiDB version of new [Developer Tier](/tidb-cloud/select-cluster-tier.md#serverless-tier) clusters from [v6.1.0](https://docs.pingcap.com/tidb/stable/release-6.1.0) to [v6.2.0](https://docs.pingcap.com/tidb/v6.2/release-6.2.0).
 
 **API changes**
 
@@ -236,19 +282,19 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
 ## July 26, 2022
 
-* Support [automatic hibernation and resuming](/tidb-cloud/select-cluster-tier.md#automatic-hibernation-and-resuming) for new [Developer Tier clusters](/tidb-cloud/select-cluster-tier.md#developer-tier).
+* Support automatic hibernation and resuming for new [Developer Tier clusters](/tidb-cloud/select-cluster-tier.md#serverless-tier).
 
     A Developer Tier cluster will not be deleted after 7 days of inactivity so you can still use it at any time until the one-year free trial ends. After 24 hours of inactivity, the Developer Tier cluster will hibernate automatically. To resume the cluster, either send a new connection to the cluster or click the **Resume** button in the TiDB Cloud console. The cluster will be resumed within 50 seconds and back to service automatically.
 
-* Add a user name prefix limitation for new [Developer Tier clusters](/tidb-cloud/select-cluster-tier.md#developer-tier).
+* Add a user name prefix limitation for new [Developer Tier clusters](/tidb-cloud/select-cluster-tier.md#serverless-tier).
 
     Whenever you use or set a database user name, you must include the prefix for your cluster in the user name. For more information, see [User name prefix](/tidb-cloud/select-cluster-tier.md#user-name-prefix).
 
-* Disable the backup and restore feature for [Developer Tier clusters](/tidb-cloud/select-cluster-tier.md#developer-tier).
+* Disable the backup and restore feature for [Developer Tier clusters](/tidb-cloud/select-cluster-tier.md#serverless-tier).
 
     The backup and restore feature (including both automatic backup and manual backup) is disabled for Developer Tier clusters. You can still use [Dumpling](https://docs.pingcap.com/tidb/stable/dumpling-overview) to export your data as a backup.
 
-* Increase the storage size of a [Developer Tier](/tidb-cloud/select-cluster-tier.md#developer-tier) cluster from 500 MiB to 1 GiB.
+* Increase the storage size of a [Developer Tier](/tidb-cloud/select-cluster-tier.md#serverless-tier) cluster from 500 MiB to 1 GiB.
 * Add breadcrumbs to the TiDB Cloud console to improve the navigation experience.
 * Support configuring multiple filter rules when you import data into TiDB Cloud.
 * Remove the **Traffic Filters** page from **Project Settings**, and remove the **Add Rules from Default Set** button from the **Connect to TiDB** dialog.
@@ -293,7 +339,7 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 * Add the support of the GCP region `Taiwan` for [Dedicated Tier](/tidb-cloud/select-cluster-tier.md#dedicated-tier) cluster creation.
 * Support [updating user profiles](/tidb-cloud/manage-user-access.md#manage-user-profiles) on the TiDB Cloud console, including first name, last time, company name, country, and phone number.
 * Provide the connection strings for MySQL, MyCLI, JDBC, Python, Go, and Node.js in the [**Connect to TiDB**](/tidb-cloud/connect-to-tidb-cluster.md#connect-via-standard-connection) dialog so you can easily connect to your TiDB cluster.
-* Support obtaining bucket regions from bucket URLs automatically during data import to save your effort to fill in such information.
+* Support obtaining bucket regions from bucket URIs automatically during data import to save your effort to fill in such information.
 
 ## June 16, 2022
 
@@ -321,7 +367,7 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
 ## May 19, 2022
 
-* Add the support of the AWS region `Frankfurt` for [Developer Tier](/tidb-cloud/select-cluster-tier.md#developer-tier) cluster creation.
+* Add the support of the AWS region `Frankfurt` for [Developer Tier](/tidb-cloud/select-cluster-tier.md#serverless-tier) cluster creation.
 
 ## May 18, 2022
 
@@ -345,7 +391,7 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
 TiDB Cloud is now in General Availability. You can [sign up](https://tidbcloud.com/signup) and select one of the following options:
 
-* Get started with [Developer Tier](/tidb-cloud/select-cluster-tier.md#developer-tier) for free.
+* Get started with [Developer Tier](/tidb-cloud/select-cluster-tier.md#serverless-tier) for free.
 * Apply for [a 14-day PoC trial for free](https://en.pingcap.com/apply-for-poc/).
 * Get full access with [Dedicated Tier](/tidb-cloud/select-cluster-tier.md#dedicated-tier).
 

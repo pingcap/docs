@@ -9,7 +9,7 @@ This document describes how to determine the size of a Dedicated Tier cluster.
 
 > **Note:**
 >
-> A [Developer Tier cluster](/tidb-cloud/select-cluster-tier.md#developer-tier) comes with a default cluster size, which cannot be changed.
+> You cannot change the size of a [Serverless Tier](/tidb-cloud/select-cluster-tier.md#serverless-tier) cluster.
 
 ## Size TiDB
 

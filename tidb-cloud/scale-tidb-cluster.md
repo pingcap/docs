@@ -8,7 +8,7 @@ aliases: ['/tidbcloud/beta/scale-tidb-cluter']
 
 > **Note:**
 >
-> - Currently, you cannot scale a [Developer Tier cluster](/tidb-cloud/select-cluster-tier.md#developer-tier).
+> - You cannot scale a [Serverless Tier cluster](/tidb-cloud/select-cluster-tier.md#serverless-tier).
 > - When a cluster is in the **MODIFYING** status, you cannot perform any new scaling operations on it.
 
 You can scale a TiDB cluster in the following dimensions:
@@ -109,7 +109,7 @@ For a running cluster, AWS and Google Cloud do not allow in-place storage capaci
 
 ## Increase node size
 
-Cuurently, when a cluster is running, you cannot increase its node size. You can only increase the node size through backup and restore.
+Currently, when a cluster is running, you cannot increase its node size. You can only increase the node size through backup and restore.
 
 You need to [create a latest backup of the cluster](/tidb-cloud/backup-and-restore.md#manual-backup), [delete the cluster](/tidb-cloud/delete-tidb-cluster.md), and then increase the node size when you [restore the deleted cluster](/tidb-cloud/backup-and-restore.md#restore-a-deleted-cluster). Before taking this method, make sure the following impacts are acceptable:
 

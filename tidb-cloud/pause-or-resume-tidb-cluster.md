@@ -13,7 +13,7 @@ Comparing with backup and restore, pausing and resuming a cluster takes less tim
 
 > **Note:**
 >
-> You cannot pause a [Developer Tier cluster](/tidb-cloud/select-cluster-tier.md#developer-tier). See [Automatic hibernation and resuming](/tidb-cloud/select-cluster-tier.md#automatic-hibernation-and-resuming) for Developer Tier.
+> You cannot pause a [Serverless Tier cluster](/tidb-cloud/select-cluster-tier.md#serverless-tier).
 
 ## Limitations
 
