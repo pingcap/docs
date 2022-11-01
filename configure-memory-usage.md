@@ -58,7 +58,7 @@ In this configuration, when the memory usage of a tidb-server instance reaches 3
 
 ## Trigger the alarm of excessive memory usage
 
-When the memory usage of a tidb-server instance exceeds its memory threshold (70% of its total memory by default) and any of the following conditions are met, TiDB prints an alarm log and records the associated status files.
+When the memory usage of a tidb-server instance exceeds its memory threshold (70% of its total memory by default) and any of the following conditions are met, TiDB records the associated status files and prints an alarm log.
 
 - It is the first time the memory usage exceeds the memory threshold.
 - The memory usage exceeds the memory threshold and it has been more than 60s since the last alarm.
@@ -72,7 +72,7 @@ When the alarm of excessive memory usage is triggered, TiDB takes the following 
 
     - The information about the top 10 SQL statements with the highest memory usage and the top 10 SQL statements with the longest running time among all SQL statements currently being executed
     - The goroutine stack information
-    - The heap profile status information
+    - The usage status of heap memory
 
 - TiDB prints an alarm log containing the keyword `tidb-server has the risk of OOM` and the values of the following memory-related system variables.
 
@@ -82,7 +82,7 @@ When the alarm of excessive memory usage is triggered, TiDB takes the following 
     - [`tidb_analyze_version`](#tidb_analyze_version-span-classversion-mark-v510-span)
     - [`tidb_enable_rate_limit_action`](#tidb_enable_rate_limit_action)
 
-To avoid accumulating too many status files for alarms, currently, TiDB only retains the status files generated during the recent five alarms by default. You can adjust this number by configuring the system variable [`tidb_memory_usage_alarm_keep_record_num`](/system-variables.md#tidb_memory_usage_alarm_keep_record_num).
+To avoid accumulating too many status files for alarms, currently, TiDB only retains the status files generated during the recent five alarms by default. You can adjust this number by configuring the system variable [`tidb_memory_usage_alarm_keep_record_num`](/system-variables.md#tidb_memory_usage_alarm_keep_record_num-new-in-v640).
 
 The following example constructs a memory-intensive SQL statement that triggers the alarm:
 
