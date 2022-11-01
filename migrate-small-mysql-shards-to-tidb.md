@@ -149,13 +149,13 @@ routes:
     target-schema: "store"
     target-table:  "sale"
     # Optional. Used for extracting the source information of sharded schemas and tables and writing the information to the user-defined columns in the downstream. If these options are configured, you need to manually create a merged table in the downstream. For details, see the following table routing setting.
-    # extract-table:                                        # Extracts and writes the suffix without the sale_ part to the c-table column of the merged table. For example, 01 is extracted and written to the c-table column for the sharded table sale_01.
+    # extract-table:                                        # Extracts and writes the table name suffix without the sale_ part to the c-table column of the merged table. For example, 01 is extracted and written to the c-table column for the sharded table sale_01.
     #   table-regexp: "sale_(.*)"
     #   target-column: "c_table"
-    # extract-schema:                                       # Extracts and writes the suffix without the store_ part to the c_schema column of the merged table. For example, 02 is extracted and written to the c_schema column for the sharded schema store_02.
+    # extract-schema:                                       # Extracts and writes the schema name suffix without the store_ part to the c_schema column of the merged table. For example, 02 is extracted and written to the c_schema column for the sharded schema store_02.
     #   schema-regexp: "store_(.*)"
     #   target-column: "c_schema"
-    # extract-source:                                       # Extracts and writes the source information to the c_source column of the merged table. For example, mysql-01 is extracted and written to the c_source column for the data source mysql-01.
+    # extract-source:                                       # Extracts and writes the source instance information to the c_source column of the merged table. For example, mysql-01 is extracted and written to the c_source column for the data source mysql-01.
     #   source-regexp: "(.*)"
     #   target-column: "c_source"
 
