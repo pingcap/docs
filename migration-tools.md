@@ -28,7 +28,7 @@ The following list introduces the user scenarios, the supported upstreams and do
 ## [TiDB Lightning](/tidb-lightning/tidb-lightning-overview.md)
 | User scenario | Upstream (or the imported source file) | Downstream (or the output file) | Advantages | Limitation |
 |:---|:---|:---|:---|:---|
-| Full data import into TiDB | <ul><li>Files exported from Dumpling</li><li>CSV files</li><li>Data read from local disks or Amazon S3</li></ul> | TiDB | <ul><li>Support quickly importing a large amount of data and quickly initializing a specific table in a TiDB cluster </li><li>Support checkpoints to store the import progress, so that `tidb-lightning` continues importing from where it lefts off after restarting</li><li>Support data filtering</li></ul> | <ul><li>If Local-backend is used for data import, during the import process, the TiDB cluster cannot provide services.</li><li> If you do not want the TiDB services to be impacted, perform the data import according to TiDB Lightning TiDB-backend.</li></ul> |
+| Full data import into TiDB | <ul><li>Files exported from Dumpling</li><li>Parquet files exported by Amazon Aurora or Apache Hive</li><li>CSV files</li><li>Data read from local disks or Amazon S3</li></ul> | TiDB | <ul><li>Support quickly importing a large amount of data and quickly initializing a specific table in a TiDB cluster </li><li>Support checkpoints to store the import progress, so that `tidb-lightning` continues importing from where it lefts off after restarting</li><li>Support data filtering</li></ul> | <ul><li>If Local-backend is used for data import, during the import process, the TiDB cluster cannot provide services.</li><li> If you do not want the TiDB services to be impacted, perform the data import according to TiDB Lightning TiDB-backend.</li></ul> |
 
 ## [Backup & Restore (BR)](/br/backup-and-restore-overview.md)
 | User scenario | Upstream (or the imported source file) | Downstream (or the output file) | Advantages | Limitation |
@@ -38,12 +38,12 @@ The following list introduces the user scenarios, the supported upstreams and do
 ## [TiCDC](/ticdc/ticdc-overview.md)
 | User scenario | Upstream (or the imported source file) | Downstream (or the output file) | Advantages | Limitation |
 |:---|:---|:---|:---|:---|
-| This tool is implemented by pulling TiKV change logs. It can restore data to a consistent state with any upstream TSO, and support other systems to subscribe to data changes.|TiDB | TiDB, MySQL, Apache Pulsar, Kafka, Confluent| Provide TiCDC Open Protocol  | TiCDC only replicates tables that have at least one valid index. The following scenarios are not supported:<ul><li>the TiKV cluster that uses RawKV alone.</li><li>the DDL operation `CREATE SEQUENCE` and the `SEQUENCE` function in TiDB.</li></ul>|
+| This tool is implemented by pulling TiKV change logs. It can restore data to a consistent state with any upstream TSO, and support other systems to subscribe to data changes.|TiDB | TiDB, MySQL, Kafka, Confluent| Provide TiCDC Open Protocol  | TiCDC only replicates tables that have at least one valid index. The following scenarios are not supported:<ul><li>the TiKV cluster that uses RawKV alone.</li><li>the DDL operation `CREATE SEQUENCE` and the `SEQUENCE` function in TiDB.</li></ul>|
 
 ## [TiDB Binlog](/tidb-binlog/tidb-binlog-overview.md)
 | User scenario | Upstream (or the imported source file) | Downstream (or the output file) | Advantages | Limitation |
 |:---|:---|:---|:---|:---|
-| Incremental replication between TiDB clusters, such as using one TiDB cluster as the secondary cluster of another TiDB cluster | TiDB | TiDB, MySQL, Kafka, incremental backup files | Support real-time backup and restore. Back up TiDB cluster data to be restored for disaster recovery | Incompatible with some TiDB versions |
+| Incremental replication between TiDB clusters, such as using one TiDB cluster as the secondary cluster of another TiDB cluster | TiDB | TiDB, MySQL, Kafka, incremental backup files | Support real-time backup and restore. Back up TiDB cluster data to be restored for disaster recovery | TiDB Binlog is incompatible with some TiDB versions. It is recommended that you use [TiCDC](/ticdc/ticdc-overview.md). |
 
 ## [sync-diff-inspector](/sync-diff-inspector/sync-diff-inspector-overview.md)
 | User scenario | Upstream (or the imported source file) | Downstream (or the output file) | Advantages | Limitation |

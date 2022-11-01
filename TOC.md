@@ -19,7 +19,7 @@
 - Develop
   - [Overview](/develop/dev-guide-overview.md)
   - Quick Start
-    - [Build a TiDB Cluster in TiDB Cloud (Developer Tier)](/develop/dev-guide-build-cluster-in-cloud.md)
+    - [Build a TiDB Cluster in TiDB Cloud (Serverless Tier)](/develop/dev-guide-build-cluster-in-cloud.md)
     - [CRUD SQL in TiDB](/develop/dev-guide-tidb-crud-sql.md)
     - Build a Simple CRUD App with TiDB
       - [Java](/develop/dev-guide-sample-application-java.md)
@@ -125,7 +125,7 @@
 - Integrate
   - [Overview](/integration-overview.md)
   - Integration Scenarios
-    - [Integrate with Confluent Cloud](/ticdc/integrate-confluent-using-ticdc.md)
+    - [Integrate with Confluent and Snowflake](/ticdc/integrate-confluent-using-ticdc.md)
     - [Integrate with Apache Kafka and Apache Flink](/replicate-data-to-kafka.md)
 - Maintain
   - Upgrade
@@ -248,6 +248,7 @@
     - [TiKV Performance Tuning with Massive Regions](/best-practices/massive-regions-best-practices.md)
     - [Three-node Hybrid Deployment](/best-practices/three-nodes-hybrid-deployment.md)
     - [Local Read Under Three Data Centers Deployment](/best-practices/three-dc-local-read.md)
+    - [Use UUIDs](/best-practices/uuid.md)
   - [Use Placement Rules](/configure-placement-rules.md)
   - [Use Load Base Split](/configure-load-base-split.md)
   - [Use Store Limit](/configure-store-limit.md)
@@ -486,6 +487,7 @@
       - [Back Up and Restore Data on Azure Blob Storage Using BR](/br/backup-storage-azblob.md)
       - [Back Up and Restore Data on Google Cloud Storage Using BR](/br/backup-storage-gcs.md)
       - [Back Up and Restore RawKV](/br/rawkv-backup-and-restore.md)
+      - [Back up and Restore Data Using Dumpling and TiDB Lightning](/backup-and-restore-using-dumpling-lightning.md)
       - [BR FAQs](/br/backup-and-restore-faq.md)
   - Point-in-Time Recovery
     - [PITR Overview](/br/point-in-time-recovery.md)
@@ -527,7 +529,6 @@
       - [TiCDC Open Protocol](/ticdc/ticdc-open-protocol.md)
       - [TiCDC Avro Protocol](/ticdc/ticdc-avro-protocol.md)
       - [TiCDC Canal-JSON Protocol](/ticdc/ticdc-canal-json.md)
-      - [Integrate TiDB with Confluent and Snowflake](/ticdc/integrate-confluent-using-ticdc.md)
     - [FAQs](/ticdc/ticdc-faq.md)
     - [Glossary](/ticdc/ticdc-glossary.md)
   - sync-diff-inspector
@@ -897,6 +898,7 @@
   - v6.2
     - [6.2.0-DMR](/releases/release-6.2.0.md)
   - v6.1
+    - [6.1.2](/releases/release-6.1.2.md)
     - [6.1.1](/releases/release-6.1.1.md)
     - [6.1.0](/releases/release-6.1.0.md)
   - v6.0
