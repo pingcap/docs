@@ -125,11 +125,19 @@ MySQL [test]> select @@last_plan_from_cache;
 
 ## Memory management of Prepared Plan Cache
 
-Using Prepared Plan Cache has some memory overhead. In internal tests, each cached plan consumes an average of 100 KiB of memory. Because Plan Cache is currently at the `SESSION` level, the total memory consumption is approximately `the number of sessions * the average number of cached plans in a session * 100 KiB`.
+Using Prepared Plan Cache has some memory overhead. To view the total memory consumption by the cached execution plans of all sessions in each TiDB instance, you can use the [`Plan Cache Memory Usage` monitoring panel](/grafana-tidb-dashboard.md) in Grafana.
 
-For example, the current TiDB instance has 50 sessions in concurrency and each session has approximately 100 cached plans. The total memory consumption is approximately `50 * 100 * 100 KiB` = `512 MB`.
+> **Note:**
+>
+> Because of the the memory reclaim mechanism of Golang and some uncounted memory structures, the memory displayed in Grafana is not equal to the actual heap memory usage. It is tested that there is an error of about 20% between the memory displayed in Grafana and the actual heap memory usage.
 
-You can control the maximum number of plans that can be cached in each session by configuring the system variable `tidb_prepared_plan_cache_size`. For different environments, the recommended value is as follows:
+To view the total number of execution plans cached in each TiDB instance, you can use the [`Plan Cache Plan Num` panel](/grafana-tidb-dashboard.md) in Grafana.
+
+The `Plan Cache Memory Usage` and `Plan Cache Plan Num` panels in Grafana look like the following:
+
+![grafana_panels](/media/planCache-memoryUsage-planNum-panels.png)
+
+You can control the maximum number of plans that can be cached in each session by configuring the system variable `tidb_prepared_plan_cache_size`. For different environments, the recommended value is as follows and you can adjust it according to the monitoring panels:
 
 - When the memory threshold of the TiDB server instance is <= 64 GiB, set `tidb_prepared_plan_cache_size` to `50`.
 - When the memory threshold of the TiDB server instance is > 64 GiB, set `tidb_prepared_plan_cache_size` to `100`.
