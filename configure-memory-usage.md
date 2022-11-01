@@ -82,7 +82,7 @@ When the alarm of excessive memory usage is triggered, TiDB takes the following 
     - [`tidb_analyze_version`](#tidb_analyze_version-span-classversion-mark-v510-span)
     - [`tidb_enable_rate_limit_action`](#tidb_enable_rate_limit_action)
 
-To avoid accumulating too many status files for alarms, currently, TiDB only retains the status files generated during the recent five alarms by default. You can adjust this number by configuring the system variable [`tidb_memory_usage_alarm_keep_record_num`](/system-variables.md#tidb_memory_usage_alarm_keep_record_num-new-in-v640).
+To avoid accumulating too many status files for alarms, TiDB only retains the status files generated during the recent five alarms by default. You can adjust this number by configuring the system variable [`tidb_memory_usage_alarm_keep_record_num`](/system-variables.md#tidb_memory_usage_alarm_keep_record_num-new-in-v640).
 
 The following example constructs a memory-intensive SQL statement that triggers the alarm:
 
