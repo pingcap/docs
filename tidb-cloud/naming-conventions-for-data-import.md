@@ -59,14 +59,14 @@ For example:
 
 When you import Parquet files, name the data files as follows:
 
-- `${db_name}.${table_name}[.XXXXXX][.{snappy|gz|lzo}].parquet` (`[.XXXXXXX]` and `[.{snappy|gz|lzo}]` are optional)
+- `${db_name}.${table_name}[.XXXXXX].parquet[.{snappy|gz|lzo}]` (`[.XXXXXXX]` and `[.{snappy|gz|lzo}]` are optional)
 
 For example:
 
 - `import_db.test_table.parquet`
 - `import_db.test_table.01.parquet`
-- `import_db.test_table.gz.parquet`
-- `import_db.test_table.01.gz.parquet`
+- `import_db.test_table.parquet.gz`
+- `import_db.test_table.01.parquet.gz`
 
 ### Aurora Snapshot
 
