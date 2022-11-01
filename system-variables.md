@@ -2098,16 +2098,6 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 - Range: `[100, 16384]`
 - This variable is used to set the maximum number of schema versions (the table IDs modified for corresponding versions) allowed to be cached. The value range is 100 ~ 16384.
 
-### tidb_max_paging_size <span class="version-mark">New in v6.3.0</span>
-
-- Scope: SESSION | GLOBAL
-- Persists to cluster: Yes
-- Type: Integer
-- Default value: `50000`
-- Range: `[1, 9223372036854775807]`
-- Unit: Rows
-- This variable is used to set the maximum number of rows during the coprocessor paging request process. Setting it to too small a value increases the RPC count between TiDB and TiKV, while setting it to too large a value results in excessive memory usage in some cases, such as loading data and full table scan.
-
 ### tidb_max_tiflash_threads <span class="version-mark">New in v6.1.0</span>
 
 - Scope: SESSION | GLOBAL
@@ -2515,14 +2505,6 @@ mysql> desc select count(distinct a) from test.t;
 - Type: Boolean
 - Default value: `ON`
 - This variable is used to control whether the optimizer estimates the number of rows based on column order correlation
-
-### tidb_opt_force_inline_cte <span class="version-mark">New in v6.3.0</span>
-
-- Scope: SESSION | GLOBAL
-- Persists to cluster: Yes
-- Type: Boolean
-- Default value: `OFF`
-- This variable is used to control whether common table expressions (CTEs) in the entire session are inlined or not. The default value is `OFF`, which means that inlining CTE is not enforced by default. However, you can still inline CTE by specifying the `MERGE()` hint. If the variable is set to `ON`, all CTEs (except recursive CTE) in this session are forced to be inlined.
 
 ### tidb_opt_insubq_to_join_and_agg
 
