@@ -2456,7 +2456,7 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 - Persists to cluster: Yes
 - Default value: `5`
 - Range: `[1, 10000]`
-- When the tidb-server memory usage exceeds the memory alarm threshold and triggers an alarm, TiDB only retains the status file generated during the recent 5 alarms by default. You can adjust this number with this variable.
+- When the tidb-server memory usage exceeds the memory alarm threshold and triggers an alarm, TiDB only retains the status files generated during the recent 5 alarms by default. You can adjust this number with this variable.
 
 ### tidb_merge_join_concurrency
 
