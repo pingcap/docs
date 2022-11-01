@@ -191,7 +191,7 @@ CREATE PLACEMENT POLICY p1 PRIMARY_REGION="us-east" REGIONS="us-east,us-west";
 
 ![TiDB Lightning FAQ - situation 1](/media/lightning-faq-situation-1.jpg)
 
-**Situation 2:** The target cluster locates the follower replica in another TiKV node in region "us-mid". Because the region "us-west" does not exist in the target cluster topology, when creating the placement policy in the target cluster, TiDB Lightning will report an error.
+**Situation 2:** The target cluster locates the follower replica in another TiKV node in region "us-mid" and does not have the region "us-west" in the topology. In such cases, when creating the placement policy in the target cluster, TiDB Lightning will report an error.
 
 ![TiDB Lightning FAQ - situation 2](/media/lightning-faq-situation-2.jpg)
 
