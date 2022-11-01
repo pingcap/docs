@@ -3115,8 +3115,8 @@ For details, see [Identify Slow Queries](/identify-slow-queries.md).
 
 ### tidb_stats_load_pseudo_timeout <span class="version-mark">New in v5.4.0</span>
 
-> **Warning:**	
->	
+> **Warning:**
+>
 > Currently, synchronously loading statistics is an experimental feature. It is not recommended that you use it in production environments.
 
 - Scope: GLOBAL
