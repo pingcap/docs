@@ -54,6 +54,7 @@ If you also need to migrate the data from other databases into TiDB Cloud, make 
 1. Log in to the [TiDB Cloud console](https://tidbcloud.com/console/clusters). Navigate to the **Clusters** page for your project.
 
 2. Locate your target cluster, click **...** in the upper-right corner of the cluster area, and select **Data Migration**. The **Data Migration** page is displayed.
+
    Alternatively, you can also click the name of your cluster on the **Clusters** page and click **Data Migration** in the **Data Migration** area.
 
 3. On the **Data Migration** page, click **Create Migration Job**. The **Create Migration Job** page is displayed.
