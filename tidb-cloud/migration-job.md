@@ -7,7 +7,7 @@ summary: Learn how to create migration jobs to migrate data into TiDB Cloud.
 
 This document describes how to create a migration job to migrate data into TiDB Cloud.
 
-You can import data in CSV, Parquet, SQL, and Aurora Snapshot formats to TiDB Cloud. All these scenarios are offline data import scenarios. When importing these data, to ensure the consistency of upstream and downstream data, you need to stop the upstream business, then export the offline files from the database, and then import the data to TiDB Cloud, it will bring a long downtime to the business, which is unbearable in many cases.
+You can import data in CSV, Parquet, SQL, and Aurora Snapshot formats to TiDB Cloud. All these scenarios are offline data import scenarios. When importing these data, to ensure the consistency of upstream and downstream data, you need to stop the upstream business, then export the offline files from the database, and then import the data to TiDB Cloud, it will bring a long downtime to the business, which is unacceptable in some cases.
 
 To solve this problem, TiDB Cloud provides the Migration Job feature, which supports full migration incremental migration, allowing you to migrate your business from the upstream database to TiDB Cloud within a short downtime window.
 
