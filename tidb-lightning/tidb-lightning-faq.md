@@ -181,23 +181,23 @@ Suppose the source cluster has the following topology:
 
 ![TiDB Lightning FAQ - source cluster topology](/media/lightning-faq-source-cluster-topology.jpg)
 
-The source cluster has the following placement rule:
+The source cluster has the following placement policy:
 
 ```sql
 CREATE PLACEMENT POLICY p1 PRIMARY_REGION="us-east" REGIONS="us-east,us-west";
 ```
 
-**Situation 1:** you want to have 3 replicas on the target cluster, but the topology is different with the source cluster (see the following diagram). In such cases, the semantics are wrong, but TiDB Lightning will not report an error when it creates placement rules in the target cluster.
+**Situation 1:** The target cluster has 3 replicas, and the topology is different from the source cluster. In such cases, when TiDB Lightning creates the placement policy in the target cluster, it will not report an error. However, the semantics in the target cluster is wrong.
 
 ![TiDB Lightning FAQ - situation 1](/media/lightning-faq-situation-1.jpg)
 
-**Situation 2:** you want to locate the follower replica at other TiKV nodes in region "us-west". Because the region "us-west" does not exist in the target cluster topology, TiDB Lightning will report an error when it creates placement rules in the target cluster.
+**Situation 2:** The target cluster locates the follower replica in another TiKV node in region "us-mid". Because the region "us-west" does not exist in the target cluster topology,when TiDB Lightning creates the placement policy in the target cluster, it will report an error.
 
 ![TiDB Lightning FAQ - situation 2](/media/lightning-faq-situation-2.jpg)
 
 **Workaround:**
 
-To use placement rules in SQL with TiDB Lightning, you need to make sure the related labels and objects have been created in the target TiDB cluster before you import data into the target table. Because the placement rules in SQL acts at the PD and TiKV layer, TiDB Lightning can get the necessary information to find out which TiKV should be used to store the imported data. In this way, this placement rule in SQL is transparent to TiDB Lightning.
+To use placement rules in SQL with TiDB Lightning, you need to make sure the related labels and objects have been created in the target TiDB cluster **before** you import data into the target table. Because the placement rules in SQL acts at the PD and TiKV layer, TiDB Lightning can get the necessary information to find out which TiKV should be used to store the imported data. In this way, this placement rule in SQL is transparent to TiDB Lightning.
 
 The steps are as follows:
 
