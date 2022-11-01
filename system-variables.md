@@ -596,7 +596,7 @@ mysql> SHOW GLOBAL VARIABLES LIKE 'max_prepared_stmt_count';
 ### tidb_allow_function_for_expression_index <span class="version-mark">New in v5.2.0</span>
 
 - Scope: NONE
-- Default value: `json_array`, `json_array_append`, `json_array_insert`, `json_contains`, `json_contains_path`, `json_depth`, `json_extract`, `json_insert`, `json_keys`, `json_length`, `json_merge_patch`, `json_merge_preserve`, `json_object`, `json_pretty`, `json_quote`, `json_remove`, `json_replace`, `json_search`, `json_set`, `json_storage_size`, `json_type`, `json_unquote`, `json_valid`, `lower`, `md5`, `reverse`, `tidb_shard`, `upper`, `vitess_hash`
+- Default value: `lower`, `md5`, `reverse`, `tidb_shard`, `upper`, `vitess_hash`
 - This variable is used to show the functions that are allowed to be used for creating expression indexes.
 
 ### tidb_allow_mpp <span class="version-mark">New in v5.0</span>
@@ -1408,7 +1408,7 @@ Constraint checking is always performed in place for pessimistic transactions (d
 
 ### tidb_enable_prepared_plan_cache <span class="version-mark">New in v6.1.0</span>
 
-- Scope: SESSION | GLOBAL
+- Scope: GLOBAL
 - Persists to cluster: Yes
 - Type: Boolean
 - Default value: `ON`
@@ -1848,20 +1848,6 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 
 </CustomContent>
 
-<<<<<<< HEAD
-=======
-### tidb_general_plan_cache_size <span class="version-mark">New in v6.3.0</span>
-
-> **Warning:**
->
-> The feature controlled by this variable is not fully functional in the current TiDB version. Do not change the default value.
-
-- Scope: SESSION | GLOBAL
-- Persists to cluster: Yes
-- Default value: `100`
-- Range: `[1, 100000]`
-- This variable controls the maximum number of execution plans that can be cached by General Plan Cache.
-
 ### tidb_generate_binary_plan <span class="version-mark">New in v6.2.0</span>
 
 - Scope: GLOBAL
@@ -1871,7 +1857,6 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 - When this variable is set to `ON`, you can view visual execution plans in TiDB Dashboard. Note that TiDB Dashboard only provides visual display for execution plans generated after this variable is enabled.
 - You can execute the `SELECT tidb_decode_binary_plan('xxx...')` statement to parse the specific plan from a binary plan.
 
->>>>>>> c13945301 (sysvar: correct sysvar information (#11100))
 ### tidb_guarantee_linearizability <span class="version-mark">New in v5.0</span>
 
 - Scope: SESSION | GLOBAL
@@ -2057,15 +2042,6 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
     - The information of transaction fallback from async commit or one-phase commit to two-phase commit.
     - The error encountered.
 
-<<<<<<< HEAD
-=======
-### `tidb_last_plan_replayer_token` <span class="version-mark">New in v6.3.0</span>
-
-- Scope：SESSION
-- Type: String
-- This variable is read-only and is used to obtain the result of the last `PLAN REPLAYER DUMP` execution in the current session.
-
->>>>>>> c13945301 (sysvar: correct sysvar information (#11100))
 ### tidb_log_file_max_days <span class="version-mark">New in v5.3.0</span>
 
 - Scope: GLOBAL
@@ -2847,7 +2823,7 @@ explain select * from t where age=5;
 
 ### tidb_prepared_plan_cache_size <span class="version-mark">New in v6.1.0</span>
 
-- Scope: SESSION | GLOBAL
+- Scope: GLOBAL
 - Persists to cluster: Yes
 - Type: Integer
 - Default value: `100`
@@ -3024,7 +3000,7 @@ explain select * from t where age=5;
 
 </CustomContent>
 
-- Scope: SESSION | GLOBAL
+- Scope: GLOBAL
 - Persists to cluster: Yes
 - Type: Integer
 - Default value: `1`
@@ -3160,8 +3136,8 @@ For details, see [Identify Slow Queries](/identify-slow-queries.md).
 - Scope: GLOBAL
 - Persists to cluster: Yes
 - Type: Boolean
-- Default value: `ON`
-- This variable controls how TiDB behaves when the waiting time of SQL optimization reaches the timeout to synchronously load complete column statistics. The default value `ON` means that the SQL optimization gets back to using pseudo statistics after the timeout. If this variable to `OFF`, SQL execution fails after the timeout.
+- Default value: `OFF`
+- This variable controls how TiDB behaves when the waiting time of SQL optimization reaches the timeout to synchronously load complete column statistics. The default value `OFF` means that SQL execution fails after the timeout. If you set this variable to `ON`, the SQL optimization gets back to using pseudo statistics after the timeout.
 
 ### tidb_stats_load_sync_wait <span class="version-mark">New in v5.4.0</span>
 
