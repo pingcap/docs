@@ -112,7 +112,7 @@ To migrate the upstream instances to the downstream `test`.`t`, you must create 
     target-schema: "test"
 ```
 
-To extract the source information of upstream sharded tables to the merged table in the downstream, you **must manually create a merged table in the downstream before starting the migration**. The merged table must contain the three `target-columns` (`c_table`, `c_schema`, and `c_source`) used for specifying the source information. In addition, these columns **must be the last columns and be character types**.
+To extract the source information of upstream sharded tables to the merged table in the downstream, you **must manually create a merged table in the downstream before starting the migration**. The merged table must contain the three `target-columns` (`c_table`, `c_schema`, and `c_source`) used for specifying the source information. In addition, these columns **must be the last columns and be [string types](/data-type-string.md)**.
 
 ```sql
 CREATE TABLE `test`.`t` (
