@@ -25,7 +25,7 @@ As t1 and t3 have different data volumes and distribution, these two execution o
 
 Therefore, the optimizer needs an algorithm to determine the join order. Currently, the following two Join Reorder algorithms are used in TiDB:
 
-- The greedy algorithm: among all the nodes participating in the join, TiDB selects the table with the least rows to estimate its join result with each of the other tables respectively, and then selects the pair with the smallest join result. After that, TiDB continues the similar process to select and join other nodes for the next round, until all the nodes have completed the join.
+- The greedy algorithm: among all nodes participating in the join, TiDB selects the table with the least rows to estimate its join result with each of the other tables respectively, and then selects the pair with the smallest join result. After that, TiDB continues the similar process to select and join other nodes for the next round, until all the nodes have completed the join.
 - The dynamic programming algorithm: among all nodes participating in the join, TiDB enumerates all possible join orders and selects the optimal join order.
 
 ## Example: the greedy algorithm of Join Reorder
@@ -56,9 +56,9 @@ When this choice is better than the greedy algorithm, the dynamic programming al
 
 Because all possibilities are enumerated, the dynamic programming algorithm consumes more time and is more susceptible to statistics.
 
-## Control the Join Reorder algorithms
+## Selection of the Join Reorder algorithm
 
-The Join Reorder algorithms are controlled by the [`tidb_opt_join_reorder_threshold`](/system-variables.md#tidb_opt_join_reorder_threshold) variable. If the number of nodes participating in Join Reorder is greater than this threshold, TiDB uses the greedy algorithm. Otherwise, TiDB uses the dynamic programming algorithm.
+The selection of the TiDB Join Reorder algorithm is controlled by the [`tidb_opt_join_reorder_threshold`](/system-variables.md#tidb_opt_join_reorder_threshold) variable. If the number of nodes participating in Join Reorder is greater than this threshold, TiDB uses the greedy algorithm. Otherwise, TiDB uses the dynamic programming algorithm.
 
 ## Limitations of Join Reorder algorithms
 
@@ -66,6 +66,6 @@ The current Join Reorder algorithms have the following limitations:
 
 - Limited by the calculation methods of the result sets, the algorithm cannot ensure it selects the optimum join order.
 - Currently, the Join Reorder algorithm's support for Outer Join is disabled by default. To enable it, set the value of the system variable [`tidb_enable_outer_join_reorder`](/system-variables.md#tidb_enable_outer_join_reorder-new-in-v610) to `ON`.
-- Currently, the dynamic planning algorithm cannot perform Join Reorder for outer join.
+- Currently, the dynamic programming algorithm cannot perform Join Reorder for outer join.
 
 Currently, the `STRAIGHT_JOIN` syntax is supported in TiDB to force a join order. For more information, refer to [Description of the syntax elements](/sql-statements/sql-statement-select.md#description-of-the-syntax-elements).
