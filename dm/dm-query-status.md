@@ -206,14 +206,14 @@ The status of a DM migration task depends on the status of each subtask assigned
                     "unit": "Dump",
                     "result": null,
                     "unresolvedDDLLockID": "",
-                    "dump": {                        # `Dump` 处理单元的迁移信息
-                        "totalTables": "10",         # 需要 dump 的表数量
-                        "completedTables": "3",      # 已 dump 的表数量
-                        "finishedBytes": "2542",     # 已 dump 的字节数
-                        "finishedRows": "32",        # 已 dump 的行数
-                        "estimateTotalRows": "563",  # 预估需要 dump 的行数
-                        "progress": "30.52 %",       # dump 的进度
-                        "bps": "445"                 # dump 的速度 (bps)
+                    "dump": {                        # The replication information of the `Dump` processing unit.
+                        "totalTables": "10",         # The number of tables to be dumped.
+                        "completedTables": "3",      # The number of tables that have been dumped.
+                        "finishedBytes": "2542",     # The number of bytes that have been dumped.
+                        "finishedRows": "32",        # The number of rows that have been dumped.
+                        "estimateTotalRows": "563",  # The estimated number of rows to be dumped.
+                        "progress": "30.52 %",       # The progress of the dumping process.
+                        "bps": "445"                 # The dumping speed (bps).
                     }
                 }
             ]
