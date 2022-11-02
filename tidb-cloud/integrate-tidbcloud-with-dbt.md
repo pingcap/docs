@@ -1,17 +1,13 @@
 ---
-title: Transform Data by dbt
-summary: Learn the use cases of dbt in TiDB.
+title: Integrate TiDB Cloud with dbt
+summary: Learn the use cases of dbt in TiDB Cloud.
 ---
 
-# Transform Data by dbt
+# Integrate TiDB Cloud with dbt
 
-[Data build tool (dbt)](https://www.getdbt.com/) is a popular open-source data transformation tool that enables analytics engineers to transform data in their warehouses through SQL statements. Through the [dbt-tidb](https://github.com/pingcap/dbt-tidb) plug-in, analytics engineers working with TiDB can directly create forms and match data through SQL without having to think about the process of creating tables or views.
+[Data build tool (dbt)](https://www.getdbt.com/) is a popular open-source data transformation tool that enables analytics engineers to transform data in their warehouses through SQL statements. Through the [dbt-tidb](https://github.com/pingcap/dbt-tidb) plug-in, analytics engineers working with TiDB Cloud can directly create forms and match data through SQL without having to think about the process of creating tables or views.
 
-Here we use the official dbt tutorial as an example to introduce the use of TiDB in dbt together. Before you try any of the steps below, make sure the following items are installed:
-
-- TiDB 5.3 or upper
-- dbt 1.01 or upper
-- dbt-tidb 1.0.0
+Here we use the official dbt tutorial as an example to introduce the use of TiDB Cloud in dbt together. 
 
 ## Step 1: install dbt and dbt-tidb
 
@@ -62,26 +58,26 @@ tree
 
 - **dbt_project.yml** is the dbt project configuration file, which holds the project name and database configuration file information.
 - **The models directory** contains the project’s SQL models and table schemas. Note that the data analyst at your company writes this section. To learn more about models, see [dbt Docs](https://docs.getdbt.com/docs/build/sql-models).
-- **The seed directory** stores CSV files that are dumped from database export tools. For example, TiDB can export the table data into CSV files through [Dumpling](https://docs.pingcap.com/tidb/stable/dumpling-overview). In the jaffle shop project, these CSV files are used as raw data to be processed.
+- **The seed directory** stores CSV files that are dumped from database export tools. For example, TiDB Cloud can export the table data into CSV files through [Dumpling](https://docs.pingcap.com/tidbcloud/dumpling-overview#dumpling-overview). In the jaffle shop project, these CSV files are used as raw data to be processed.
 
 ## Step 3: configure the project
 
 To configure the project:
 
-1. Complete the global configuration. In the user directory, edit the default global profile, `~/.dbt/profiles.yml` to configure the connection with TiDB:
+1. Complete the global configuration. In the user directory, edit the default global profile, `~/.dbt/profiles.yml` to configure the connection with TiDB Cloud:
 
     ```shell
     vi ~/.dbt/profiles.yml
-    jaffle_shop_tidb:                      # project name
-      target: dev                           # target
+    jaffle_shop_tidb:                                                         # project name
+      target: dev                                                             # target
       outputs:
         dev:
-          type: tidb                        # adapter type
-          server: 127.0.0.1
+          type: tidb                                                          # adapter type
+          server: gateway01.ap-southeast-1.prod.aws.tidbcloud.com             # endpoint
           port: 4000
-          schema: analytics                 # database name
-          username: root
-          password: ""
+          schema: analytics                                                   # database name
+          username: xxxxxxxxxxx.root
+          password: "your_password"
     ```
 
 2. Complete the project configuration. In the jaffle_shop project directory, enter the project configuration file `dbt_project.yml` and change the profile field to `jaffle_shop_tidb`. This configuration allows the project to query from the database as specified in the `~/.dbt/profiles.yml` file.
@@ -156,7 +152,7 @@ Now that you have successfully created and configured the project, it’s time t
 
     As you can see in the results, the seed file was started and loaded into three tables: `analytics.raw_customers`, `analytics.raw_orders`, and `analytics.raw_payments`.
 
-2. Verify the results in TiDB. The show databases command lists the new analytics database that dbt created. The show tables command indicates that there are three tables in the analytics database, corresponding to the ones we created above.
+2. Verify the results in TiDB Cloud. The show databases command lists the new analytics database that dbt created. The show tables command indicates that there are three tables in the analytics database, corresponding to the ones we created above.
 
     ```sql
     mysql> show databases;
@@ -222,9 +218,10 @@ Now you are ready to run the configured projects and finish the data transformat
 
     The result shows three views (`analytics.stg_customers`, `analytics.stg_orders`, and `analytics.stg_payments`) and two tables (`analytics.customers` and `analytics.orders`) were created successfully.
 
-2. Go to the TiDB database to verify that the creation is successful.
+2. Go to the TiDB Cloud to verify that the creation is successful.
 
     ```sql
+    mysql> use analytics;
     mysql> show tables;
     +---------------------+
     | Tables_in_analytics |
@@ -281,36 +278,15 @@ dbt lets you generate visual documents that display the overall structure of the
 
 ## Description of profile fields
 
-| Option           | Description                                           | Required? | Example                        |
-|------------------|-------------------------------------------------------|-----------|--------------------------------|
-| type             | The specific adapter to use                           | Required  | `tidb`                         |
-| server           | The server (hostname) to connect to                   | Required  | `yourorg.tidb.com`             |
-| port             | The port to use                                       | Required  | `4000`                         |
-| schema           | Specify the schema (database) to build models into    | Required  | `analytics`                    |
-| username         | The username to use to connect to the server          | Required  | `dbt_admin`                    |
-| password         | The password to use for authenticating to the server  | Required  | `correct-horse-battery-staple` |
-| retries          | The retry times for connection to TiDB (1 in default) | Optional  | `2`                            |
-
-## Supported features
-
-|     TiDB 4.X     | TiDB 5.0 ~ 5.2 | TiDB >= 5.3 |           Feature           |
-|:----------------:|:--------------:|:-----------:|:---------------------------:|
-|        ✅         |       ✅        |      ✅      |    Table materialization    |
-|        ✅         |       ✅        |      ✅      |    View materialization     |
-|        ❌         |       ❌        |      ✅      | Incremental materialization |
-|        ❌         |       ✅        |      ✅      |  Ephemeral materialization  |
-|        ✅         |       ✅        |      ✅      |            Seeds            |
-|        ✅         |       ✅        |      ✅      |           Sources           |
-|        ✅         |       ✅        |      ✅      |      Custom data tests      |
-|        ✅         |       ✅        |      ✅      |        Docs generation       |
-|        ❌         |       ❌        |      ✅      |          Snapshots          |
-|        ✅         |       ✅        |      ✅      |      Connection retry       |
-|        ✅         |       ✅        |      ✅      |            Grant            |
-
-> **Note:**
-> * TiDB 4.0 ~ 5.0 does not support [CTE](https://docs.pingcap.com/tidb/dev/sql-statement-with), you should avoid using `WITH` in your SQL code.
-> * TiDB 4.0 ~ 5.2 does not support creating a [temporary table or view](https://docs.pingcap.com/tidb/v5.2/sql-statement-create-table).
-> * TiDB 4.X does not support using SQL func in `CREATE VIEW`, avoid it in your SQL code. You can find more detail [here](https://github.com/pingcap/tidb/pull/27252).
+| Option           | Description                                                             | Required? | Example                                           |
+|------------------|-------------------------------------------------------------------------|-----------|---------------------------------------------------|
+| type             | The specific adapter to use                                             | Required  | `tidb`                                            |
+| server           | The TiDB Cloud clusters' endpoint to connect to                         | Required  | `gateway01.ap-southeast-1.prod.aws.tidbcloud.com` |
+| port             | The port to use                                                         | Required  | `4000`                                            |
+| schema           | Specify the schema (database) to build models into                      | Required  | `analytics`                                       |
+| username         | The username to use to connect to the TiDB Cloud clusters               | Required  | `xxxxxxxxxxx.root`                                |
+| password         | The password to use for authenticating to the TiDB Cloud clusters       | Required  | `"your_password"`                                 |
+| retries          | The retry times for connection to TiDB Cloud clusters (1 in default)    | Optional  | `2`                                               |
 
 ## Supported functions
 
