@@ -321,6 +321,12 @@ This variable is an alias for [`last_insert_id`](#last_insert_id).
 - Default value: `OFF`
 - This variable is used to show whether the execution plan used in the previous `execute` statement is taken directly from the plan cache.
 
+### `last_sql_use_alloc` <span class="version-mark">New in v6.4.0</span>
+
+- Scope: SESSION
+- Default value: `OFF`
+- This variable is read-only. It is used to show whether the previous statement uses a cached chunk object (Chunk allocation).
+
 ### license
 
 - Scope: NONE
@@ -1248,7 +1254,7 @@ MPP is a distributed computing framework provided by the TiFlash engine, which a
 ### tidb_enable_ddl
 
 - Scope: GLOBAL
-- Persists to cluster: No, only applicable to the current TiDB instance that you are connecting to. 
+- Persists to cluster: No, only applicable to the current TiDB instance that you are connecting to.
 - Default value: `ON`
 - Possible values: `OFF`, `ON`
 - This variable controls whether the corresponding TiDB server can run DDL statements or not.
@@ -1492,6 +1498,14 @@ MPP is a distributed computing framework provided by the TiFlash engine, which a
 - Default value: `ON`
 - This variable is used to control whether to enable TiDB mutation checker, which is a tool used to check consistency between data and indexes during the execution of DML statements. If the checker returns an error for a statement, TiDB rolls back the execution of the statement. Enabling this variable causes a slight increase in CPU usage. For more information, see [Troubleshoot Inconsistency Between Data and Indexes](/troubleshoot-data-inconsistency-errors.md).
 - For new clusters of v6.0.0 or later versions, the default value is `ON`. For existing clusters that upgrade from versions earlier than v6.0.0, the default value is `OFF`.
+
+### tidb_enable_reuse_chunk <span class="version-mark">New in v6.4.0</span>
+
+- Scope: SESSION | GLOBAL
+- Persists to cluster: Yes
+- Default value: `ON`
+- Value options: `OFF`, `ON`
+- This variable controls whether TiDB enables chunk objects cache. If the value is `ON`, TiDB prefers to use the cached chunk object and only requests from the system if the requested object is not in the cache. If the value is `OFF`, TiDB requests chunk objects from the system directly.
 
 ### tidb_enable_new_cost_interface <span class="version-mark">New in v6.2.0</span>
 
@@ -2371,6 +2385,22 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 
 - The default value is `CANCEL`, but in TiDB v4.0.2 and earlier versions, the default value is `LOG`.
 - This setting was previously a `tidb.toml` option (`oom-action`), but changed to a system variable starting from TiDB v6.1.0.
+
+### `tidb_max_reuse_chunk` <span class="version-mark">New in v6.4.0</span>
+
+- Scope: SESSION | GLOBAL
+- Persists to cluster: Yes
+- Default value: `64`
+- Range: `[0, 2147483647]`
+- This variable controls the maximum cached chunk objects of chunk allocation. Adjusting this variable to a larger value might increase the risk of OOM.
+
+### `tidb_max_reuse_column` <span class="version-mark">New in v6.4.0</span>
+
+- Scope: SESSION | GLOBAL
+- Persists to cluster: Yes
+- Default value: `256`
+- Range: `[0, 2147483647]`
+- This variable controls the maximum cached column objects of chunk allocation. Adjusting this variable to a larger value might increase the risk of OOM.
 
 ### tidb_mem_quota_analyze <span class="version-mark">New in v6.1.0</span>
 
