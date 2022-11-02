@@ -2755,6 +2755,15 @@ explain select * from t where age=5;
 - This variable specifies whether to rewrite a `COUNT(DISTINCT)` aggregation into a three-stage aggregation in MPP mode.
 - This variable currently applies to an aggregation that only contains one `COUNT(DISTINCT)`.
 
+### tidb_opt_tiflash_concurrency_factor
+
+- Scope: SESSION | GLOBAL
+- Persists to cluster: YES
+- Type: Float
+- Range: `[0, 2147483647]`
+- Default value: `24.0`
+- Indicates the concurrency number of TiFlash computation. This variable is internally used in the Cost Model, and it is NOT recommended to modify its value.
+
 ### tidb_opt_write_row_id
 
 <CustomContent platform="tidb-cloud">
