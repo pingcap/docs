@@ -34,6 +34,7 @@ This document introduces the experimental features of TiDB in different versions
 + [Generated Columns](/generated-columns.md) (Introduced in v2.1)
 + [User-Defined Variables](/user-defined-variables.md) (Introduced in v2.1)
 + [Cascades Planner](/system-variables.md#tidb_enable_cascades_planner): a cascades framework-based top-down query optimizer (Introduced in v3.0)
++ [Table Lock](/tidb-configuration-file.md#enable-table-lock-new-in-v400) (Introduced in v4.0.0)
 + [Metadata Lock](/metadata-lock.md) (Introduced in v6.3.0)
 + [Range INTERVAL partitioning](/partitioned-table.md#range-interval-partitioning) (Introduced in v6.3.0)
 + [Add index acceleration](/system-variables.md#tidb_ddl_enable_fast_reorg-new-in-v630) (Introduced in v6.3.0)
@@ -60,6 +61,4 @@ This document introduces the experimental features of TiDB in different versions
 
 ## Diagnostics
 
-+ [SQL diagnostics](/information-schema/information-schema-sql-diagnostics.md) (Introduced in v4.0)
-+ [Cluster diagnostics](/dashboard/dashboard-diagnostics-access.md) (Introduced in v4.0)
 + [TiKV-FastTune dashboard](/grafana-tikv-dashboard.md#tikv-fasttune-dashboard) (Introduced in v4.0)
