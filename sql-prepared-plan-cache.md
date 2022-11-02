@@ -125,15 +125,15 @@ MySQL [test]> select @@last_plan_from_cache;
 
 ## Memory management of Prepared Plan Cache
 
-Using Prepared Plan Cache has some memory overhead. To view the total memory consumption by the cached execution plans of all sessions in each TiDB instance, you can use the [`Plan Cache Memory Usage` monitoring panel](/grafana-tidb-dashboard.md) in Grafana.
+Using Prepared Plan Cache incurs memory overhead. To view the total memory consumption by the cached execution plans of all sessions in each TiDB instance, you can use the [`Plan Cache Memory Usage` monitoring panel](/grafana-tidb-dashboard.md) in Grafana.
 
 > **Note:**
 >
-> Because of the the memory reclaim mechanism of Golang and some uncounted memory structures, the memory displayed in Grafana is not equal to the actual heap memory usage. It is tested that there is an error of about 20% between the memory displayed in Grafana and the actual heap memory usage.
+> Because of the the memory reclaim mechanism of Golang and some uncounted memory structures, the memory displayed in Grafana is not equal to the actual heap memory usage. It is tested that there is a deviation of about 20% between the memory displayed in Grafana and the actual heap memory usage.
 
 To view the total number of execution plans cached in each TiDB instance, you can use the [`Plan Cache Plan Num` panel](/grafana-tidb-dashboard.md) in Grafana.
 
-The `Plan Cache Memory Usage` and `Plan Cache Plan Num` panels in Grafana look like the following:
+The following is an example of the `Plan Cache Memory Usage` and `Plan Cache Plan Num` panels in Grafana:
 
 ![grafana_panels](/media/planCache-memoryUsage-planNum-panels.png)
 
