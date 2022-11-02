@@ -70,11 +70,11 @@ For detailed steps, see [Configure Amazon S3 access](/tidb-cloud/config-s3-and-g
     - **Data Format**: choose the format of your data.
     - **Location**: `AWS`
     - **Bucket URI**: fill in the bucket URI of your source data.
-    - **Role-ARN**: enter the Role-ARN you obtained in [Step 2](#step-2-configure-amazon-s3-access).
+    - **Role ARN**: enter the Role-ARN you obtained in [Step 2](#step-2-configure-amazon-s3-access).
     - **Target Cluster**: shows the cluster name and the region name.
 
     If the region of the bucket is different from your cluster, confirm the compliance of cross region. Click **Next**.
-    
+
     TiDB Cloud starts validating whether it can access your data in the specified bucket URI. After validation, TiDB Cloud tries to scan all the files in the data source using the default file naming pattern, and returns a scan summary result on the left side of the next page. If you get the `AccessDenied` error, see [Troubleshoot Access Denied Errors during Data Import from S3](/tidb-cloud/troubleshoot-import-access-denied-error.md).
 
 4. Modify the file patterns and add the table filter rules if needed.

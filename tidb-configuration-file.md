@@ -165,6 +165,16 @@ The TiDB configuration file supports more options than command-line parameters. 
 + If the environment might have isolated network, enabling this parameter can reduce the window of service unavailability.
 + If you cannot accurately determine whether isolation, network interruption, or downtime has occurred, using this mechanism has the risk of misjudgment and causes reduced availability and performance. If network failure has never occurred, it is not recommended to enable this parameter.
 
+### `enable-table-lock` <span class="version-mark">New in v4.0.0</span>
+
+> **Warning:**
+>
+> The table lock is an experimental feature. It is not recommended that you use it in the production environment.
+
++ Controls whether to enable the table lock feature.
++ Default value: `false`
++ The table lock is used to coordinate concurrent access to the same table among multiple sessions. Currently, the `READ`, `WRITE`, and `WRITE LOCAL` lock types are supported. When the configuration item is set to `false`, executing the `LOCK TABLE` or `UNLOCK TABLE` statement does not take effect and returns the "LOCK/UNLOCK TABLES is not supported" warning.
+
 ## Log
 
 Configuration items related to log.
@@ -209,7 +219,8 @@ Configuration items related to log.
 ### `slow-threshold`
 
 - Outputs the threshold value of consumed time in the slow log.
-- Default value: `300ms`
+- Default value: `300`
+- Unit: Milliseconds
 - If the value in a query is larger than the default value, it is a slow query and is output to the slow log.
 
 ### `record-plan-in-slow-log`
@@ -361,6 +372,8 @@ Configuration items related to performance.
 - Default value: `6291456` (in bytes)
 - The size limit of a single key-value record in a transaction. If the size limit is exceeded, TiDB returns the `entry too large` error. The maximum value of this configuration item does not exceed `125829120` (120 MB).
 - Note that TiKV has a similar limit. If the data size of a single write request exceeds [`raft-entry-max-size`](/tikv-configuration-file.md#raft-entry-max-size), which is 8 MB by default, TiKV refuses to process this request. When a table has a row of large size, you need to modify both configurations at the same time.
+- The default value of [`max_allowed_packet`](/system-variables.md#max_allowed_packet-new-in-v610) (the maximum size of a packet for the MySQL protocol) is 67108864 (64 MiB). If a row is larger than `max_allowed_packet`, the row gets truncated.
+- The default value of [`txn-total-size-limit`](#txn-total-size-limit) (the size limit of a single transaction in TiDB) is 100 MiB. If you increase the `txn-entry-size-limit` value to be over 100 MiB, you need to increase the `txn-total-size-limit` value accordingly.
 
 ### `txn-total-size-limit`
 

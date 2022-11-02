@@ -1,9 +1,9 @@
 ---
-title: Query Status
+title: Query Task Status in TiDB Data Migration
 summary: Learn how to query the status of a data replication task.
 ---
 
-# Query Status
+# Query Task Status in TiDB Data Migration
 
 This document introduces how to use the `query-status` command to query the task status, and the subtask status of DM.
 
