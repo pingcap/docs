@@ -95,9 +95,6 @@ The status of a DM migration task depends on the status of each subtask assigned
                                                                         # lock in the abnormal condition.
                     "sync": {                   # The replication information of the `Sync` processing unit. This information is about the
                                                 # same component with the current processing unit.
-                        "totalEvents": "12",    # The total number of binlog events that are replicated in this subtask.
-                        "totalTps": "1",        # The number of binlog events that are replicated in this subtask per second.
-                        "recentTps": "1",       # The number of binlog events that are replicated in this subtask in the last one second.
                         "masterBinlog": "(bin.000001, 3234)",                               # The binlog position in the upstream database.
                         "masterBinlogGtid": "c0149e17-dff1-11e8-b6a8-0242ac110004:1-14",    # The GTID information in the upstream database.
                         "syncerBinlog": "(bin.000001, 2525)",                               # The position of the binlog that has been replicated
@@ -126,8 +123,11 @@ The status of a DM migration task depends on the status of each subtask assigned
                             }
                         ],
                         "synced": false         # Whether the incremental replication catches up with the upstream and has the same binlog position as that in the
-                                                # upstream. The save point is not refreshed in real time in the `Sync` background, so "false" of "synced"
+                                                # upstream. The save point is not refreshed in real time in the `Sync` background, so `false` of `synced`
                                                 # does not always mean a replication delay exits.
+                        "totalRows": "12",      # The total number of rows that are replicated in this subtask.
+                        "totalRps": "1",        # The number of rows that are replicated in this subtask per second.
+                        "recentRps": "1"        # The number of rows that are replicated in this subtask in the last one second.
                     }
                 }
             ]
@@ -152,6 +152,7 @@ The status of a DM migration task depends on the status of each subtask assigned
                         "finishedBytes": "115", # The number of bytes that have been loaded.
                         "totalBytes": "452",    # The total number of bytes that need to be loaded.
                         "progress": "25.44 %"   # The progress of the loading process.
+                        "CurrentSpeedBytesPerSecond": "2734" # The speed of the full loading.
                     }
                 }
             ]
@@ -184,10 +185,39 @@ The status of a DM migration task depends on the status of each subtask assigned
                         "finishedBytes": "0",
                         "totalBytes": "156",
                         "progress": "0.00 %"
+                        "CurrentSpeedBytesPerSecond": "0",
                     }
                 }
             ]
-        }
+        },
+        {
+            "result": true,
+            "msg": "",
+            "sourceStatus": {
+                "source": "mysql-replica-04",
+                "worker": "worker4",
+                "result": null,
+                "relayStatus": null
+            },
+            "subTaskStatus": [
+                {
+                    "name": "test",
+                    "stage": "Running",
+                    "unit": "Dump",
+                    "result": null,
+                    "unresolvedDDLLockID": "",
+                    "dump": {                        # `Dump` 处理单元的迁移信息
+                        "totalTables": "10",         # 需要 dump 的表数量
+                        "completedTables": "3",      # 已 dump 的表数量
+                        "finishedBytes": "2542",     # 已 dump 的字节数
+                        "finishedRows": "32",        # 已 dump 的行数
+                        "estimateTotalRows": "563",  # 预估需要 dump 的行数
+                        "progress": "30.52 %",       # dump 的进度
+                        "bps": "445"                 # dump 的速度 (bps)
+                    }
+                }
+            ]
+        },
     ]
 }
 
