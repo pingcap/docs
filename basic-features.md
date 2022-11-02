@@ -53,7 +53,7 @@ This document lists the features supported in each TiDB version. Note that suppo
 | `INSERT ON DUPLICATE KEY UPDATE`                             | Y | Y | Y            |      Y       |      Y       |      Y       |      Y       |      Y       |
 | `LOAD DATA INFILE`                                           | Y | Y | Y            |      Y       |      Y       |      Y       |      Y       |      Y       |
 | `SELECT INTO OUTFILE`                                        | Y | Y | Y            |      Y       |      Y       |      Y       |      Y       |      Y       |
-| `INNER JOIN`, `LEFT\|RIGHT [OUTER] JOIN`                     | Y | Y | Y            |      Y       |      Y       |      Y       |      Y       |      Y       |
+| `INNER JOIN`, <code>LEFT\|RIGHT [OUTER] JOIN</code>                     | Y | Y | Y            |      Y       |      Y       |      Y       |      Y       |      Y       |
 | `UNION`, `UNION ALL`                                         | Y | Y | Y            |      Y       |      Y       |      Y       |      Y       |      Y       |
 | [`EXCEPT` and `INTERSECT` operators](/functions-and-operators/set-operators.md) | Y | Y | Y            |      Y       |      Y       |      Y       |      Y       |      N       |
 | `GROUP BY`, `ORDER BY`                                       | Y | Y | Y            |      Y       |      Y       |      Y       |      Y       |      Y       |
@@ -124,7 +124,7 @@ This document lists the features supported in each TiDB version. Note that suppo
 | ------------------------------------------------------------ | :--: | :--: | ------------ | :----------: | :----------: | :----------: | :----------: | :----------: |
 | [CMSketch](/statistics.md)                                   | Disabled by default | Disabled by default | Disabled by default | Disabled by default | Y | Y | Y |      Y       |
 | [Histograms](/statistics.md)                                 | Y | Y | Y            |      Y       |      Y       |      Y       |      Y       |      Y       |
-| Extended statistics (multiple columns)     | Experimental | Experimental| Experimental | Experimental | Experimental | Experimental | Experimental |      N       |
+| [Extended statistics](/extended-statistics.md)     | Experimental | Experimental| Experimental | Experimental | Experimental | Experimental | Experimental |      N       |
 | [Statistics feedback](/statistics.md#automatic-update)       | Deprecated | Deprecated | Deprecated   | Experimental | Experimental | Experimental | Experimental | Experimental |
 | [Automatically update statistics](/statistics.md#automatic-update) | Y | Y | Y | Y | Y | Y | Y | Y |
 | [Fast Analyze](/system-variables.md#tidb_enable_fast_analyze) | Experimental | Experimental | Experimental | Experimental | Experimental | Experimental | Experimental | Experimental |

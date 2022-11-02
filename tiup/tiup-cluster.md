@@ -90,6 +90,11 @@ tikv_servers:
   - host: 172.16.5.139
   - host: 172.16.5.140
 
+tiflash_servers:
+  - host: 172.16.5.141
+  - host: 172.16.5.142
+  - host: 172.16.5.143
+
 grafana_servers:
   - host: 172.16.5.134
 
@@ -113,12 +118,12 @@ tidb_servers:
 ...
 ```
 
-Save the file as `/tmp/topology.yaml`. If you want to use TiDB v6.1.0 and your cluster name is `prod-cluster`, run the following command:
+Save the file as `/tmp/topology.yaml`. If you want to use TiDB v6.1.2 and your cluster name is `prod-cluster`, run the following command:
 
 {{< copyable "shell-regular" >}}
 
 ```shell
-tiup cluster deploy -p prod-cluster v6.1.0 /tmp/topology.yaml
+tiup cluster deploy -p prod-cluster v6.1.2 /tmp/topology.yaml
 ```
 
 During the execution, TiUP asks you to confirm your topology again and requires the root password of the target machine (the `-p` flag means inputting password):
@@ -126,7 +131,7 @@ During the execution, TiUP asks you to confirm your topology again and requires 
 ```bash
 Please confirm your topology:
 TiDB Cluster: prod-cluster
-TiDB Version: v6.1.0
+TiDB Version: v6.1.2
 Type        Host          Ports        Directories
 ----        ----          -----        -----------
 pd          172.16.5.134  2379/2380    deploy/pd-2379,data/pd-2379
@@ -166,7 +171,7 @@ tiup cluster list
 Starting /root/.tiup/components/cluster/v1.10.0/cluster list
 Name          User  Version    Path                                               PrivateKey
 ----          ----  -------    ----                                               ----------
-prod-cluster  tidb  v6.1.0    /root/.tiup/storage/cluster/clusters/prod-cluster  /root/.tiup/storage/cluster/clusters/prod-cluster/ssh/id_rsa
+prod-cluster  tidb  v6.1.2    /root/.tiup/storage/cluster/clusters/prod-cluster  /root/.tiup/storage/cluster/clusters/prod-cluster/ssh/id_rsa
 ```
 
 ## Start the cluster
@@ -196,7 +201,7 @@ tiup cluster display prod-cluster
 ```
 Starting /root/.tiup/components/cluster/v1.10.0/cluster display prod-cluster
 TiDB Cluster: prod-cluster
-TiDB Version: v6.1.0
+TiDB Version: v6.1.2
 ID                  Role        Host          Ports        Status     Data Dir              Deploy Dir
 --                  ----        ----          -----        ------     --------              ----------
 172.16.5.134:3000   grafana     172.16.5.134  3000         Up         -                     deploy/grafana-3000
@@ -224,12 +229,12 @@ For the PD component, `|L` or `|UI` might be appended to `Up` or `Down`. `|L` in
 
 Scaling in a cluster means making some node(s) offline. This operation removes the specific node(s) from the cluster and deletes the remaining files.
 
-Because the offline process of the TiKV and TiDB Binlog components is asynchronous (which requires removing the node through API), and the process takes a long time (which requires continuous observation on whether the node is successfully taken offline), special treatment is given to the TiKV and TiDB Binlog components.
+Because the offline process of the TiKV, TiFlash, and TiDB Binlog components is asynchronous (which requires removing the node through API), and the process takes a long time (which requires continuous observation on whether the node is successfully taken offline), special treatment is given to the TiKV, TiFlash, and TiDB Binlog components.
 
-- For TiKV and Binlog:
+- For TiKV, TiFlash, and Binlog:
 
     - TiUP cluster takes the node offline through API and directly exits without waiting for the process to be completed.
-    - Afterwards, when a command related to the cluster operation is executed, TiUP cluster examines whether there is a TiKV/Binlog node that has been taken offline. If not, TiUP cluster continues with the specified operation; If there is, TiUP cluster takes the following steps:
+    - Afterwards, when a command related to the cluster operation is executed, TiUP cluster examines whether there is a TiKV, TiFlash, or Binlog node that has been taken offline. If not, TiUP cluster continues with the specified operation; If there is, TiUP cluster takes the following steps:
 
         1. Stop the service of the node that has been taken offline.
         2. Clean up the data files related to the node.
@@ -267,7 +272,7 @@ tiup cluster display prod-cluster
 ```
 Starting /root/.tiup/components/cluster/v1.10.0/cluster display prod-cluster
 TiDB Cluster: prod-cluster
-TiDB Version: v6.1.0
+TiDB Version: v6.1.2
 ID                  Role        Host          Ports        Status     Data Dir              Deploy Dir
 --                  ----        ----          -----        ------     --------              ----------
 172.16.5.134:3000   grafana     172.16.5.134  3000         Up         -                     deploy/grafana-3000
@@ -375,12 +380,12 @@ Global Flags:
   -y, --yes               Skip all confirmations and assumes 'yes'
 ```
 
-For example, the following command upgrades the cluster to v6.1.0:
+For example, the following command upgrades the cluster to v6.1.2:
 
 {{< copyable "shell-regular" >}}
 
 ```bash
-tiup cluster upgrade tidb-test v6.1.0
+tiup cluster upgrade tidb-test v6.1.2
 ```
 
 ## Update configuration
@@ -562,11 +567,11 @@ tiup cluster audit
 Starting component `cluster`: /home/tidb/.tiup/components/cluster/v1.10.0/cluster audit
 ID      Time                       Command
 --      ----                       -------
-4BLhr0  2022-06-10T13:25:09+08:00  /home/tidb/.tiup/components/cluster/v1.10.0/cluster deploy test v6.1.0 /tmp/topology.yaml
-4BKWjF  2022-06-08T23:36:57+08:00  /home/tidb/.tiup/components/cluster/v1.10.0/cluster deploy test v6.1.0 /tmp/topology.yaml
-4BKVwH  2022-06-08T23:02:08+08:00  /home/tidb/.tiup/components/cluster/v1.10.0/cluster deploy test v6.1.0 /tmp/topology.yaml
-4BKKH1  2022-06-08T16:39:04+08:00  /home/tidb/.tiup/components/cluster/v1.10.0/cluster destroy test
-4BKKDx  2022-06-08T16:36:57+08:00  /home/tidb/.tiup/components/cluster/v1.10.0/cluster deploy test v6.1.0 /tmp/topology.yaml
+4BLhr0  2022-09-02T13:25:09+08:00  /home/tidb/.tiup/components/cluster/v1.10.0/cluster deploy test v6.1.2 /tmp/topology.yaml
+4BKWjF  2022-09-02T23:36:57+08:00  /home/tidb/.tiup/components/cluster/v1.10.0/cluster deploy test v6.1.2 /tmp/topology.yaml
+4BKVwH  2022-09-02T23:02:08+08:00  /home/tidb/.tiup/components/cluster/v1.10.0/cluster deploy test v6.1.2 /tmp/topology.yaml
+4BKKH1  2022-09-02T16:39:04+08:00  /home/tidb/.tiup/components/cluster/v1.10.0/cluster destroy test
+4BKKDx  2022-09-02T16:36:57+08:00  /home/tidb/.tiup/components/cluster/v1.10.0/cluster deploy test v6.1.2 /tmp/topology.yaml
 ```
 
 The first column is `audit-id`. To view the execution log of a certain command, pass the `audit-id` of a command as the flag as follows:
@@ -718,3 +723,21 @@ The TiUP data is stored in the `.tiup` directory in the user's home directory. T
 > **Note:**
 >
 > It is recommended that you back up the `.tiup` directory regularly to avoid the loss of TiUP data caused by abnormal conditions, such as disk damage of the control machine.
+
+## Back up and restore meta files for cluster deployment and O&M
+
+If the meta files used for operation and maintenance (O&M) are lost, managing the cluster using TiUP will fail. It is recommended that you back up the meta files regularly by running the following command:
+
+```bash
+tiup cluster meta backup ${cluster_name}
+```
+
+If the meta files are lost, you can restore them by running the following command:
+
+```bash
+tiup cluster meta restore ${cluster_name} ${backup_file}
+```
+
+> **Note:**
+>
+> The restore operation overwrites the current meta files. Therefore, it is recommended to restore the meta files only when they are lost.

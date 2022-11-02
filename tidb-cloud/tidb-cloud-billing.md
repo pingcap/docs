@@ -7,7 +7,7 @@ summary: Learn about TiDB Cloud billing.
 
 > **Note:**
 >
-> [Developer Tier clusters](/tidb-cloud/select-cluster-tier.md#developer-tier) are free to use for up to one year. You will not be charged for the use of your Developer Tier cluster, and your TiDB Cloud bill will not display any Developer Tier charges.
+> [Serverless Tier clusters](/tidb-cloud/select-cluster-tier.md#serverless-tier-beta) are free to use in beta. You will not be charged for the use of your Serverless Tier cluster, and your TiDB Cloud bill will not display any Serverless Tier charges.
 
 TiDB Cloud charges according to the resources that you consume. You can visit [TiDB Cloud Pricing Details](https://en.pingcap.com/tidb-cloud-pricing-details/) to get more information.
 
@@ -15,15 +15,20 @@ TiDB Cloud charges according to the resources that you consume. You can visit [T
 
 If you are the owner or billing administrator of your organization, you can manage the invoice information of TiDB Cloud. Otherwise, skip this section.
 
+After you set up the payment method, TiDB Cloud will generate an invoice once your cost reaches a quota, which is $500 by default. If you want to raise the quota or receive one invoice per month, you can [contact our sales](https://www.pingcap.com/contact-us/).
+
 > **Note:**
 >
-> If you sign up for TiDB Cloud through [AWS Marketplace](https://aws.amazon.com/marketplace), you can pay through your AWS account directly but cannot add payment methods or download invoices in the TiDB Cloud portal.
+> If you sign up for TiDB Cloud through [AWS Marketplace](https://aws.amazon.com/marketplace) or [Google Cloud Marketplace](https://cloud.google.com/marketplace), you can pay through your AWS account or Google Cloud account directly but cannot add payment methods or download invoices in the TiDB Cloud portal.
 
-After you set up the payment method, TiDB Cloud will generate the invoice for the previous month at the beginning of each month. Invoice costs include TiDB cluster usage consumption, discounts, backup storage costs, support service cost, credit consumption, and data transmission costs in your organization.
+After you contact our sales for receiving an invoice on a monthly basis, TiDB Cloud will generate the invoice for the previous month at the beginning of each month.
+
+Invoice costs include TiDB cluster usage consumption, discounts, backup storage costs, support service cost, credit consumption, and data transmission costs in your organization.
+
+For each monthly invoice:
 
 - TiDB Cloud provides the invoice to you on the ninth of each month. From the first to the ninth day, you cannot view the last month's cost details, but can obtain the cluster usage information of this month via the billing console.
 - The default method for paying invoices is credit card deduction. If you want to use other payment methods, please send a ticket request to let us know.
-- After the invoice is generated, please finish the payment within 30 days.
 - You can view the summary and details of charges for the current month and the previous month.
 
 > **Note:**
@@ -33,6 +38,11 @@ After you set up the payment method, TiDB Cloud will generate the invoice for th
 To view the list of invoices, perform the following steps:
 
 1. Click the account name in the upper-right corner of the TiDB Cloud console.
+
+    > **Note:**
+    >
+    > If you are in multiple organizations, select **Switch Organization** and switch your account to the target organization.
+
 2. Click **Billing**. The invoices page is displayed.
 
 ## Billing details
@@ -48,8 +58,22 @@ After setting the payment method, TiDB Cloud will generate the invoice and billi
 To view the billing details, perform the following steps:
 
 1. Click the account name in the upper-right corner of the TiDB Cloud console.
+
+    > **Note:**
+    >
+    > If you are in multiple organizations, select **Switch Organization** and switch your account to the target organization.
+
 2. Click **Billing**.
 3. Click **Bills**. The billing details page is displayed.
+
+The billing details page shows the billing summary by project and by service. You can also see the usage details and download the data in CSV format.
+
+> **Note:**
+>
+> The total amount in the monthly bill might differ from that in the daily usage details due to differences in precision:
+>
+> - The total amount in the monthly bill is rounded off to the 2nd decimal place.
+> - The total amount in the daily usage details is accurate to the 6th decimal place.
 
 ## Credits
 
@@ -64,6 +88,11 @@ The detailed information of your credits is available on the **Credits** page, i
 To view this page, perform the following steps:
 
 1. Click the account name in the upper-right corner of the TiDB Cloud console.
+
+    > **Note:**
+    >
+    > If you are in multiple organizations, select **Switch Organization** and switch your account to the target organization.
+
 2. Click **Billing**.
 3. Click **Credits**. The credit details page is displayed.
 
@@ -100,6 +129,11 @@ The fee is deducted from a bound credit card according to your cluster usage. To
 - Anytime in the billing console:
 
     1. Click the account name in the upper-right corner of the TiDB Cloud console.
+
+        > **Note:**
+        >
+        > If you are in multiple organizations, select **Switch Organization** and switch your account to the target organization.
+
     2. Click **Billing**.
     3. Under the **Payment Method** tab, click **Add a New Card**.
     4. Fill in the billing address and card information, and then click **Save**.
@@ -113,6 +147,11 @@ You can bind multiple credit cards, and set one of them as the default credit ca
 To set the default credit card, perform the following steps:
 
 1. Click the account name in the upper-right corner of the TiDB Cloud console.
+
+    > **Note:**
+    >
+    > If you are in multiple organizations, select **Switch Organization** and switch your account to the target organization.
+
 2. Click **Billing**.
 3. Click the **Payment Method** tab.
 4. Select a credit card in the credit card list, and click **Set as default**.
@@ -124,6 +163,29 @@ The billing profile information includes the business legal address and tax regi
 To edit the billing profile information, perform the following steps:
 
 1. Click the account name in the upper-right corner of the TiDB Cloud console.
+
+    > **Note:**
+    >
+    > If you are in multiple organizations, select **Switch Organization** and switch your account to the target organization.
+
 2. Click **Billing**.
 3. Click the **Payment Method** tab.
 4. Edit the billing profile information, and then click **Save**.
+
+## Contract
+
+If you are the owner or billing administrator of your organization, you can manage your customized TiDB Cloud subscriptions in the TiDB Cloud console to meet compliance requirements. Otherwise, skip this section.
+
+If you have agreed with our sales on a contract and received an email to review and accept the contract online, you can do the following:
+
+1. Click the account name in the upper-right corner of the TiDB Cloud console.
+
+    > **Note:**
+    >
+    > If you are in multiple organizations, select **Switch Organization** and switch your account to the target organization.
+
+2. Click **Billing**.
+3. Click **Contract**. The contract list is displayed.
+4. Click **Download**, **Accept**, or **Reject** according to your need.
+
+To learn more about contracts, feel free to [contact our sales](https://www.pingcap.com/contact-us/).

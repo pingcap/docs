@@ -21,7 +21,7 @@ For more detailed definitions of the private endpoint and endpoint service, see 
 ## Restrictions
 
 - Currently, TiDB Cloud supports private endpoint connection only when the endpoint service is hosted in AWS. If the service is hosted in Google Cloud Platform (GCP), the private endpoint is not applicable.
-- The private endpoint support is provided only for the TiDB Cloud Dedicated Tier, not for the Developer Tier.
+- The private endpoint support is provided only for the TiDB Cloud Dedicated Tier, not for the Serverless Tier.
 - Private endpoint connection across regions is not supported.
 
 In most scenarios, you are recommended to use private endpoint connection over VPC peering. However, in the following scenarios, you should use VPC peering instead of private endpoint connection:
@@ -106,6 +106,11 @@ To use the AWS Management Console to create a VPC interface endpoint, perform th
     > Select the AZs you have taken note from the TiDB Cloud console. TiDB Cloud only support creating VPC Interface Endpoints in these AZs. Make sure that your service spans across the AZs in which the endpoint service is created. For more details, see [Troubleshooting](#troubleshooting).
 
 8. Select your security group properly in the **Security groups** area.
+   
+    > **Note:**
+    >
+    >  Make sure the selected security group allows inbound access from your EC2 instances on Port 4000 or a customer-defined port.
+ 
 9. Click **Create endpoint**.
 10. Go back to the **Endpoints** page, select your newly created endpoint, and take a note of the VPC endpoint ID.
 
@@ -197,7 +202,7 @@ Remove the unsupported subnet IDs and retry.
 
 ### I cannot connect to a TiDB cluster via a private endpoint after enabling private DNS. Why?
 
-You might need to properly set the security group for your VPC endpoint in the AWS Management Console. Go to **VPC** > **Endpoints**. Right-click your VPC endpoint and select **Manage security groups**.
+You might need to properly set the security group for your VPC endpoint in the AWS Management Console. Go to **VPC** > **Endpoints**. Right-click your VPC endpoint and select the proper **Manage security groups**. A proper security group within your VPC that allows inbound access from your EC2 instances on Port 4000 or a customer-defined port.
 
 ![Manage security groups](/media/tidb-cloud/private-endpoint/manage-security-groups.png)
 

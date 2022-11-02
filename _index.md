@@ -120,4 +120,14 @@ hide_commit: true
 
 </LearningPath>
 
+<LearningPath label="Reference" icon="cloud-dev">
+
+[System Variables](https://docs.pingcap.com/tidb/v6.1/system-variables)
+
+[Release Notes](https://docs.pingcap.com/tidb/v6.1/release-notes)
+
+[FAQ Summary](https://docs.pingcap.com/tidb/v6.1/faq-overview)
+
+</LearningPath>
+
 </LearningPathContainer>

@@ -1,7 +1,7 @@
 ---
 title: TiDB Lightning Overview
 summary: Learn about Lightning and the whole architecture.
-aliases: ['/tidb/v6.1/tidb-lightning-backends']
+aliases: ['/tidb/stable/tidb-lightning-backends','/tidb/v6.1/tidb-lightning-backends']
 ---
 
 # TiDB Lightning Overview

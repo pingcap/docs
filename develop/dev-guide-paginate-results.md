@@ -233,7 +233,7 @@ This method significantly improves the efficiency of batch processing by avoidin
 
 For non-clustered index tables (also known as "non-index-organized tables"), the internal field `_tidb_rowid` can be used as a pagination key, and the pagination method is the same as that of single-field primary key tables.
 
-> **Tips:**
+> **Tip:**
 >
 > You can use the `SHOW CREATE TABLE users;` statement to check whether the table primary key uses [clustered index](/clustered-indexes.md).
 
@@ -303,6 +303,10 @@ GROUP BY page_num
 ORDER BY page_num;
 ```
 
+> **Note:**
+>
+> The preceding SQL statement is executed as `TableFullScan`. When the data volume is large, the query will be slow, and you can [use TiFlash](/tiflash/tiflash-overview.md#use-tiflash) to speed up it.
+
 The result is as follows:
 
 ```
@@ -328,7 +332,12 @@ To delete all rating records on page 1, replace the `start_key` and `end_key` wi
 ```sql
 SELECT * FROM ratings
 WHERE
-    (book_id, user_id) >= (268996, 92104804)
-    AND (book_id, user_id) <= (140982742, 374645100)
+    (book_id > 268996 AND book_id < 140982742)
+    OR (
+        book_id = 268996 AND user_id >= 92104804
+    )
+    OR (
+        book_id = 140982742 AND user_id <= 374645100
+    )
 ORDER BY book_id, user_id;
 ```
