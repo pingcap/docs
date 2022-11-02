@@ -68,7 +68,7 @@ You can control the memory threshold that triggers the alarm by modifying the me
 
 When the alarm of excessive memory usage is triggered, TiDB takes the following actions:
 
-- TiDB records the following information in the directory where the TiDB log files [`filename`](tidb-configuration-file.md#filename) are located.
+- TiDB records the following information in the directory where the TiDB log files [`filename`](/tidb-configuration-file.md#filename) are located.
 
     - The information about the top 10 SQL statements with the highest memory usage and the top 10 SQL statements with the longest running time among all SQL statements currently being executed
     - The goroutine stack information
