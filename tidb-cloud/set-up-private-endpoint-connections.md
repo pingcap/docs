@@ -79,7 +79,7 @@ Once the endpoint service is created:
     aws ec2 create-vpc-endpoint --vpc-id <your_vpc_id> --region <your_region> --service-name <your_endpoint_service_name> --vpc-endpoint-type Interface --subnet-ids <your_application_subnet_ids>
     ```
 
-- Take a note of the supported availability zones (AZs) that follow **Endpoint Service Ready in**. You will need the information for the follow-up step.
+- Take a note of the supported availability zones (AZs) that follow **Endpoint Service Ready in**. You will need the information in the follow-up step.
 
 Then create an AWS interface endpoint either using the AWS Management Console or using the AWS CLI.
 
