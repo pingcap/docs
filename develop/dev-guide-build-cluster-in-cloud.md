@@ -146,55 +146,32 @@ mysql  Ver 15.1 Distrib 5.5.68-MariaDB, for Linux (x86_64) using readline 5.1
     {{< copyable "shell-regular" >}}
 
     ```shell
-    mysql --connect-timeout 15 -u '<prefix>.root' -h <host> -P 4000 -p
+    mysql --connect-timeout 15 -u '<prefix>.root' -h <host> -P 4000 -D test --ssl-mode=VERIFY_IDENTITY --ssl-ca=/etc/ssl/cert.pem -p
     ```
+
+> **Note:**
+>
+> - Use TLS connections here is [required](https://docs.pingcap.com/tidbcloud/secure-connections-to-serverless-tier-clusters).
+> - If you are having issues with connecting, you can read TiDB Cloud [Serverless Tier Clusters](https://docs.pingcap.com/tidbcloud/secure-connections-to-serverless-tier-clusters) for more information.
 
 3. Fill in the password to sign in.
 
-## Step 3. Run the sample application
+## Step 3. Run a SQL
 
-1. Clone the `tidb-example-java` project:
+Let's try to run your first SQL on TiDB Cloud.
 
-  {{< copyable "shell-regular" >}}
+```sql
+SELECT 'Hello TiDB Cloud!';
+```
 
-  ```shell
-  git clone https://github.com/pingcap-inc/tidb-example-java.git
-  ```
+You will see output like this.
 
-2. Change connection parameters.
+```sql
++-------------------+
+| Hello TiDB Cloud! |
++-------------------+
+| Hello TiDB Cloud! |
++-------------------+
+```
 
-    In `plain-java-jdbc/src/main/java/com/pingcap/JDBCExample.java`, modify the parameters of the host, port, user, and password:
-
-    {{< copyable "" >}}
-
-    ```java
-    mysqlDataSource.setServerName("localhost");
-    mysqlDataSource.setPortNumber(4000);
-    mysqlDataSource.setDatabaseName("test");
-    mysqlDataSource.setUser("root");
-    mysqlDataSource.setPassword("");
-    ```
-
-    Suppose that the password you set is `123456` and the connection string you get from TiDB Cloud is the following:
-
-    {{< copyable "" >}}
-
-    ```shell
-    mysql --connect-timeout 15 -u '4JC1i9KroBMFRwW.root' -h xxx.tidbcloud.com -P 4000 -D test -p
-    ```
-
-    In this case, you can modify the parameters as follows:
-
-    {{< copyable "" >}}
-
-    ```java
-    mysqlDataSource.setServerName("xxx.tidbcloud.com");
-    mysqlDataSource.setPortNumber(4000);
-    mysqlDataSource.setDatabaseName("test");
-    mysqlDataSource.setUser("4JC1i9KroBMFRwW.root");
-    mysqlDataSource.setPassword("123456");
-    ```
-
-3. Run `make plain-java-jdbc`.
-
-  Here is an example of the [expected output](https://github.com/pingcap-inc/tidb-example-java/blob/main/Expected-Output.md#plain-java-jdbc).
+If you see output like this. **_CONGRATULATIONS_**! You have successfully run your own SQL on TiDB Cloud.
