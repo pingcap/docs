@@ -7,9 +7,9 @@ summary: Introduce how to save the query results of TiFlash in the same transact
 
 > **Warning:**
 >
-> Currently, this feature is experimental and its form and usage may change in future releases.
+> Currently, this feature is experimental and its form and usage might change in subsequent versions.
 
-This document introduces how to save TiFlash query results to a specified TiDB table in the same `INSERT INTO SELECT` transaction.
+This document introduces how to save the TiFlash query result to a specified TiDB table in an `INSERT INTO SELECT` transaction.
 
 Since v6.4.0, during the execution of the `INSERT INTO SELECT` statement, the query result of TiFlash can be saved to a specified TiDB table when TiDB pushes down the subquery in the `SELECT` clause to TiFlash, that is, the materialization of TiFlash query result. For TiDB versions earlier than v6.4.0, the query results of TiFlash are read-only, so if you want to save TiFlash query results, you have to obtain them at the application level, and then save them in a separate transaction or process.
 
@@ -33,7 +33,7 @@ assignment:
     assignment [, assignment] ...
 ```
 
-For example, you can save the query results from table `t1` in the `SELECT` clause to table `t2` with the following `INSERT INTO SELECT` statement:
+For example, you can save the query result from table `t1` in the `SELECT` clause to table `t2` with the following `INSERT INTO SELECT` statement:
 
 ```sql
 INSERT INTO t2 (name, country)
@@ -44,7 +44,7 @@ SELECT app_name, country FROM t1;
 
 - Efficient BI solutions
 
-    For many reporting applications, the analysis query requests are usually very heavy. If a lot of users access and refresh reports at the same time, the query requests are getting even heavier. To address this issue effectively, you can use `INSERT INTO SELECT` to save report query results in TiDB tables. Then, you can query data direclty from the result tables when the reports are refreshed, which avoids multiple repeated computation and analysis. Similarly, by saving the historical analysis results, you can further reduce the computation volume for long-time historical data analysis. For example, if report `A` is used to analyze daily sales profit, you can use `INSERT INTO SELECT` to save the daily analysis results of report `A` to a result table `T`. Then, when generating report `B` to analyze the sales profit of the last month, you can directly use the daily analysis results data in table `T`. This way not only greatly reduces the computation volume but also improves the query response speed and reduces the system load.
+    For many BI applications, the analysis query requests are very heavy. For example, when a lot of users access and refresh a report at the same time, an BI application needs to handle a lot of concurrent query requests. To address this issue effectively, you can use `INSERT INTO SELECT` to save query results of the report in a TiDB table. Then, the end users can query data direclty from the result table when the report is refreshed, which avoids multiple repeated computation and analysis. Similarly, by saving historical analysis results, you can further reduce the computation volume for long-time historical data analysis. For example, if report `A` is used to analyze daily sales profit, you can use `INSERT INTO SELECT` to save the daily analysis results of report `A` to a result table `T`. Then, when generating report `B` to analyze the sales profit of the last month, you can directly use the daily analysis results in table `T`. This way not only greatly reduces the computation volume but also improves the query response speed and reduces the system load.
 
 - Serving online applications with TiFlash
 
