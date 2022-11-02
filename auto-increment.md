@@ -355,7 +355,7 @@ The value (ID) implicitly assigned to auto-increment columns satisfies the follo
 
 TiDB v6.4.0 introduces a centralized auto-increment ID allocating service. In each request, an auto-increment ID is allocated from this service instead of caching data in TiDB instances.
 
-Currently, the centralized allocating service is in the TiDB process and works like DDL Owner. There is one TiDB instance that allocates ID as a primary node and the other TiDB instances work as secondary nodes. To ensure high availability, when the primary instance fails, TiDB starts automatic failover.
+Currently, the centralized allocating service is in the TiDB process and works like DDL Owner. One TiDB instance allocates IDs as the primary node and other TiDB instances work as secondary nodes. To ensure high availability, when the primary instance fails, TiDB starts automatic failover.
 
 To use the MySQL compatibility mode, you can set `AUTO_ID_CACHE` to `1` when creating a table:
 
@@ -365,12 +365,12 @@ CREATE TABLE t(a int AUTO_INCREMENT key) AUTO_ID_CACHE 1;
 
 > **Note:**
 >
-> In TiDB, setting `AUTO_ID_CACHE` to `1` means that TiDB no longer caches IDs. But the implementation is different:
+> In TiDB, setting `AUTO_ID_CACHE` to `1` means that TiDB no longer caches IDs. But the implementation varies with TiDB versions:
 >
 > - Before TiDB v6.4.0, since allocating ID requires a TiKV transaction to persist the `AUTO_INCREMENT` value for each request, setting `AUTO_ID_CACHE` to `1` causes performance degradation.
 > - Since TiDB v6.4.0, the modification of the `AUTO_INCREMENT` value is faster because it is only an in-memory operation in the TiDB process as the centralized allocating service is introduced.
 
-After enabling the MySQL compatibility mode, the allocated IDs are **unique** and **monotonically increasing**, and the behavior is almost the same as MySQL. Even if you access across TiDB instances, the ID will keep monotonic. Only when the primary instance of the centralized service crashes, there might be a few IDs that are not continuous. This is because when the instances are switched, to ensure ID uniqueness, the secondary instance discards some IDs that the primary instance might have already allocated.
+After you enable the MySQL compatibility mode, the allocated IDs are **unique** and **monotonically increasing**, and the behavior is almost the same as MySQL. Even if you access across TiDB instances, the IDs will keep monotonic. Only when the primary instance of the centralized service crashes, there might be a few IDs that are not continuous. This is because the secondary instance discards some IDs that are supposed to have been allocated by the primary instance during the failover to ensure ID uniqueness.
 
 ## Restrictions
 
