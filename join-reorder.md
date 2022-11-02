@@ -56,9 +56,9 @@ When this choice is better than the greedy algorithm, the dynamic programming al
 
 Because all possibilities are enumerated, the dynamic programming algorithm consumes more time and is more susceptible to statistics.
 
-## Selection of the Join Reorder algorithm
+## Selection of the Join Reorder algorithms
 
-The selection of the TiDB Join Reorder algorithm is controlled by the [`tidb_opt_join_reorder_threshold`](/system-variables.md#tidb_opt_join_reorder_threshold) variable. If the number of nodes participating in Join Reorder is greater than this threshold, TiDB uses the greedy algorithm. Otherwise, TiDB uses the dynamic programming algorithm.
+The selection of the TiDB Join Reorder algorithms is controlled by the [`tidb_opt_join_reorder_threshold`](/system-variables.md#tidb_opt_join_reorder_threshold) variable. If the number of nodes participating in Join Reorder is greater than this threshold, TiDB uses the greedy algorithm. Otherwise, TiDB uses the dynamic programming algorithm.
 
 ## Limitations of Join Reorder algorithms
 
