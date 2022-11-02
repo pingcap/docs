@@ -1,6 +1,6 @@
 ---
 title: TiFlash Query Result Materialization
-summary: Introduce how to save the query results of TiFlash in the same transaction.
+summary: Learn how to save the query results of TiFlash in the same transaction.
 ---
 
 # TiFlash Query Result Materialization
