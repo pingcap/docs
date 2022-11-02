@@ -2932,7 +2932,6 @@ explain select * from t where age=5;
 - Type: Float
 - Range: `[0, 2147483647]`
 - Default value: `24.0`
-<<<<<<< HEAD
 - Indicates the concurrency number of TiFlash computation. This variable is internally used in the [Cost Model](/cost-model.md), and it is **NOT** recommended to modify its value.
 
 ### tidb_opt_tiflash_cpu_factor_v2
@@ -2952,9 +2951,6 @@ explain select * from t where age=5;
 - Range: `[0, 2147483647]`
 - Default value: `15.0`
 - Indicates the cost for TiFlash to scan one row from the disk. This variable is internally used in the [Cost Model](/cost-model.md), and it is **NOT** recommended to modify its value.
-=======
-- Indicates the concurrency number of TiFlash computation. This variable is internally used in the Cost Model, and it is NOT recommended to modify its value.
->>>>>>> d1367799b (config, sysvar: update descriptions about instance sysvars (#10910))
 
 ### tidb_opt_write_row_id
 
