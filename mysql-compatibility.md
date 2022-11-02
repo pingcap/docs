@@ -151,7 +151,6 @@ In TiDB, all supported DDL changes are performed online. Compared with DDL opera
 * Table Partitioning also supports `ADD`, `DROP`, and `TRUNCATE` operations. Other partition operations are ignored. The following Table Partition syntaxes are not supported:
     - `PARTITION BY KEY`
     - `PARTITION BY LINEAR KEY`
-    - `PARTITION BY LINEAR HASH`, instead of a normal, non-partitioned table it will be created as a non-linear HASH partitioned table
     - `SUBPARTITION`
     - `{CHECK|TRUNCATE|OPTIMIZE|REPAIR|IMPORT|DISCARD|REBUILD|REORGANIZE|COALESCE} PARTITION`
 
