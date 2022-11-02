@@ -77,8 +77,6 @@ Query OK, 1 row affected (0.02 sec)
 
 Create a user with a comment.
 
-{{< copyable "sql" >}}
-
 ```sql
 CREATE USER 'newuser6'@'%' COMMENT 'This user is created only for test';
 ```
@@ -88,8 +86,6 @@ Query OK, 1 row affected (0.02 sec)
 ```
 
 Create a user with an `email` attribute.
-
-{{< copyable "sql" >}}
 
 ```sql
 CREATE USER 'newuser7'@'%' ATTRIBUTE '{"email": "user@pingcap.com"}';

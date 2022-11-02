@@ -65,28 +65,52 @@ ALTER USER 'newuser' ACCOUNT LOCK;
 Query OK, 0 rows affected (0.02 sec)
 ```
 
+Modify the attributes of `newuser`:
+
 ```sql
 ALTER USER 'newuser' ATTRIBUTE '{"newAttr": "value", "deprecatedAttr": null}';
+SELECT * FROM information_schema.user_attributes;
 ```
 
+```sql
++-----------+------+--------------------------+
+| USER      | HOST | ATTRIBUTE                |
++-----------+------+--------------------------+
+| newuser   | %    | {"newAttr": "value"}     |
++-----------+------+--------------------------+
+1 rows in set (0.00 sec)
 ```
-Query OK, 0 rows affected (0.02 sec)
-```
+
+Modify the comment of `newuser` using `ALTER USER ... COMMENT`:
 
 ```sql
 ALTER USER 'newuser' COMMENT 'Here is the comment';
-```
-
-```
-Query OK, 0 rows affected (0.02 sec)
+SELECT * FROM information_schema.user_attributes;
 ```
 
 ```sql
-ALTER USER 'newuser' ATTRIBUTE '{"comment": null}';
++-----------+------+--------------------------------------------------------+
+| USER      | HOST | ATTRIBUTE                                              |
++-----------+------+--------------------------------------------------------+
+| newuser   | %    | {"comment": "Here is the comment", "newAttr": "value"} |
++-----------+------+--------------------------------------------------------+
+1 rows in set (0.00 sec)
 ```
 
+Modify the comment of `newuser` using `ALTER USER ... ATTRIBUTE`:
+
+```sql
+ALTER USER 'newuser' ATTRIBUTE '{"comment": null}';
+SELECT * FROM information_schema.user_attributes;
 ```
-Query OK, 0 rows affected (0.02 sec)
+
+```sql
++-----------+------+---------------------------+
+| USER      | HOST | ATTRIBUTE                 |
++-----------+------+---------------------------+
+| newuser   | %    | {"newAttr": "value"}      |
++-----------+------+---------------------------+
+1 rows in set (0.00 sec)
 ```
 
 > **Note:**
