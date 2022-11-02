@@ -2775,7 +2775,7 @@ explain select * from t where age=5;
 <details>
 <summary>Usage example of <code>tidb_opt_prefix_index_single_scan</code></summary>
 
-Create a table with prefix index:
+Create a table with a prefix index:
 
 ```sql
 CREATE TABLE t (a INT, b VARCHAR(10), c INT, INDEX idx_a_b(a, b(5)));
