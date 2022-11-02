@@ -11,11 +11,11 @@ summary: Introduce how to save the query results of TiFlash in the same transact
 
 This document introduces how to save the TiFlash query result to a specified TiDB table in an `INSERT INTO SELECT` transaction.
 
-Since v6.4.0, during the execution of the `INSERT INTO SELECT` statement, the query result of TiFlash can be saved to a specified TiDB table when TiDB pushes down the subquery in the `SELECT` clause to TiFlash, that is, the materialization of TiFlash query result. For TiDB versions earlier than v6.4.0, the query results of TiFlash are read-only, so if you want to save TiFlash query results, you have to obtain them at the application level, and then save them in a separate transaction or process.
+Since v6.4.0, during the execution of the `INSERT INTO SELECT` statement, the query result of TiFlash can be saved to a specified TiDB table when TiDB pushes down the subquery in the `SELECT` clause to TiFlash, that is, the materialization of TiFlash query result. For TiDB versions earlier than v6.4.0, the query results of TiFlash are read-only, so if you want to save TiFlash query results, you have to obtain them from the application level, and then save them in a separate transaction or process.
 
 > **Note:**
 >
-> By default ([`tidb_allow_mpp = ON`](/system-variables#tidb_allow_mpp-new-in-v50)), the TiDB optimizer will intelligently choose to push down queries to TiKV or to TiFlash based on the query cost. To enforce that the queries are pushed down to TiFlash, you can set the system variable [`tidb_enforce_mpp = ON`](/system-variables#tidb_enforce_mpp-new-in-v51).
+> By default ([`tidb_allow_mpp = ON`](/system-variables#tidb_allow_mpp-new-in-v50)), the TiDB optimizer intelligently chooses to push down queries to TiKV or TiFlash based on the query cost. To enforce that the queries are pushed down to TiFlash, you can set the system variable [`tidb_enforce_mpp = ON`](/system-variables#tidb_enforce_mpp-new-in-v51).
 
 The syntax of `INSERT INTO SELECT` is as follows.
 
@@ -44,24 +44,24 @@ SELECT app_name, country FROM t1;
 
 - Efficient BI solutions
 
-    For many BI applications, the analysis query requests are very heavy. For example, when a lot of users access and refresh a report at the same time, an BI application needs to handle a lot of concurrent query requests. To address this issue effectively, you can use `INSERT INTO SELECT` to save query results of the report in a TiDB table. Then, the end users can query data direclty from the result table when the report is refreshed, which avoids multiple repeated computation and analysis. Similarly, by saving historical analysis results, you can further reduce the computation volume for long-time historical data analysis. For example, if report `A` is used to analyze daily sales profit, you can use `INSERT INTO SELECT` to save the daily analysis results of report `A` to a result table `T`. Then, when generating report `B` to analyze the sales profit of the last month, you can directly use the daily analysis results in table `T`. This way not only greatly reduces the computation volume but also improves the query response speed and reduces the system load.
+    For many BI applications, the analysis query requests are very heavy. For example, when a lot of users access and refresh a report at the same time, a BI application needs to handle a lot of concurrent query requests. To deal with this situation effectively, you can use `INSERT INTO SELECT` to save the query results of the report in a TiDB table. Then, the end users can query data directly from the result table when the report is refreshed, which avoids multiple repeated computations and analyses. Similarly, by saving historical analysis results, you can further reduce the computation volume for long-time historical data analysis. For example, if report `A` is used to analyze daily sales profit, you can use `INSERT INTO SELECT` to save the daily analysis results of report `A` to a result table `T`. Then, when generating report `B` to analyze the sales profit of the last month, you can directly use the daily analysis results in table `T`. This way not only greatly reduces the computation volume but also improves the query response speed and reduces the system load.
 
 - Serving online applications with TiFlash
 
-    The number of concurrent requests supported by TiFlash depends on the volume of data and complexity of the queries, but it typically does not exceed 100 QPS. You can use `INSERT INTO SELECT` to save TiFlash query results and then use the query result tables to support highly concurrent online requests. The data in result tables can be updated in the background at a low frequency, for example at the 0.5 second interval, which is well below TiFlash concurrency limit, while still maintaining a high level of data freshness.
+    The number of concurrent requests supported by TiFlash depends on the volume of data and complexity of the queries, but it typically does not exceed 100 QPS. You can use `INSERT INTO SELECT` to save TiFlash query results, and then use the query result tables to support highly concurrent online requests. The data in result tables can be updated in the background at a low frequency (for example, at a interval of 0.5 second), which is well below the TiFlash concurrency limit, while still maintaining a high level of data freshness.
 
-## Execution Process
+## Execution process
 
-* During the execution of the `INSERT INTO SELECT` statement, TiFlash first returns the query results of the `SELECT` clause to a TiDB server node in the cluster, and then writes the resutls to the target table (which can have a TiFlash replica).
+* During the execution of the `INSERT INTO SELECT` statement, TiFlash first returns the query results of the `SELECT` clause to a TiDB server node in the cluster, and then writes the results to the target table (which can have a TiFlash replica).
 * The execution of the `INSERT INTO SELECT` statement guarantees ACID properties.
 
 ## Restrictions
 
-* TiDB has a hard limit of 1 GiB on the size of the results returned by the `SELECT` clause (that is, the size of the write transaction `INSERT`). The recommended usage scenario is under 100 MiB.
+* TiDB has a hard limit of 1 GiB on the size of the results returned by the `SELECT` clause and the size of the transaction to be written with `INSERT`. The recommended size is less than 100 MiB.
 
-    If the size of results returned by `SELECT` exceeds 1 GiB, the statement is forced to terminated and TiDB returns the `The query produced a too large intermediate result and thus failed` error.
+    If the size of results returned by `SELECT` exceeds 1 GiB, the statement is forced to be terminated and TiDB returns an error `The query produced a too large intermediate result and thus failed`.
 
-* TiDB has no hard limit on the concurrency of the `INSERT INTO SELECT` statement, but it is recommended to consider the following practices.
+* TiDB has no hard limit on the concurrency of the `INSERT INTO SELECT` statement, but it is recommended to consider the following practices:
 
     * When a "write transaction" is large, such as close to 1 GiB, it is recommended to control concurrency to no more than 10.
     * When a "write transaction" is small, such as less than 100 MiB, it is recommended to control concurrency to no more than 30.
