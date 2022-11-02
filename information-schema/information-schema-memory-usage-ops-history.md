@@ -56,7 +56,7 @@ The columns in the `MEMORY_USAGE_OPS_HISTORY` table are described as follows:
 * `PROCESSID`: The connection ID of the terminated session.
 * `MEM`: The memory usage of the terminated session, in bytes.
 * `DISK`: The disk usage of the terminated session, in bytes.
-* `CLIENT`: The connection address of the terminated session.
+* `CLIENT`: The client connection address of the terminated session.
 * `DB`: The name of the database connected to the terminated session.
 * `USER`: The user name of the terminated session.
 * `SQL_DIGEST`: The digest of the SQL statement being executed in the terminated session.

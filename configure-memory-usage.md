@@ -48,7 +48,7 @@ The following example sets the total memory usage of a tidb-server instance to 3
 SET GLOBAL tidb_server_memory_limit = "32GB";
 ```
 
-After setting this variable, when the memory usage of a tidb-server instance reaches 32 GB, TiDB will terminate the SQL operation with the largest memory usage among all running SQL operations in order, until the memory usage of the instance drops below 32 GB. The forcibly terminated SQL operation will return the `Out Of Memory Quota!` error to the client.
+After you set this variable, when the memory usage of a tidb-server instance reaches 32 GB, TiDB will terminate the SQL operation with the largest memory usage among all running SQL operations in order, until the memory usage of the instance drops below 32 GB. The forcibly terminated SQL operation will return the `Out Of Memory Quota!` error to the client.
 
 Currently, the memory limit set by `tidb_server_memory_limit` **DOES NOT** terminate the following SQL operations:
 
@@ -68,7 +68,7 @@ When the memory usage of a tidb-server instance reaches a certain proportion of 
 
 To view the memory usage of the current instance or cluster, you can query the system table [`INFORMATION_SCHEMA.(CLUSTER_)MEMORY_USAGE`](/information-schema/information-schema-memory-usage.md).
 
-To view the memory-related operations and execution basis of the current instance or cluster, you can query the system table [`INFORMATION_SCHEMA.(CLUSTER_)MEMORY_USAGE_OPS_HISTORY`](/information-schema/information-schema-memory-usage-ops-history.md). For each instance, this table retains the last 50 records.
+To view the memory-related operations and execution basis of the current instance or cluster, you can query the system table [`INFORMATION_SCHEMA.(CLUSTER_)MEMORY_USAGE_OPS_HISTORY`](/information-schema/information-schema-memory-usage-ops-history.md). For each instance, this table retains the latest 50 records.
 
 ## Trigger the alarm of excessive memory usage
 

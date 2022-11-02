@@ -49,7 +49,7 @@ SELECT * FROM information_schema.memory_usage;
 The columns in the `MEMORY_USAGE` table are described as follows:
 
 * MEMORY_TOTAL: The total available memory of TiDB, in bytes.
-* MEMORY_LIMIT: The memory usage limit of TiDB, in bytes. The value is the same as the value of the [`tidb_server_memory_limit`](/system-variables.md#tidb_server_memory_limit-new-in-v640) system variable.
+* MEMORY_LIMIT: The memory usage limit of TiDB, in bytes. The value is the same as that of the system variable [`tidb_server_memory_limit`](/system-variables.md#tidb_server_memory_limit-new-in-v640).
 * MEMORY_CURRENT: The current memory usage of TiDB, in bytes.
 * MEMORY_MAX_USED: The maximum memory usage of TiDB from the time it is started to the current time, in bytes.
 * CURRENT_OPS: "shrinking" | null. "shrinking" means that TiDB is performing operations that shrink memory usage.

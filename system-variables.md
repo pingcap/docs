@@ -3126,7 +3126,7 @@ explain select * from t where age=5;
 - Persists to cluster: Yes
 - Default value: `134217728` (which is 128 MB)
 - Range: `[128, 9223372036854775807]`, in bytes
-- After enabling the memory limit, TiDB will terminate the SQL statement with the highest memory usage on the current instance. This variable specifies the minimum memory usage of the SQL statement to be terminated. If the memory usage of a TiDB instance that exceeds the limit is caused by too many sessions with low memory usage, you can properly lower the value of this variable to allow more sessions to be canceled.
+- After you enable the memory limit, TiDB will terminate the SQL statement with the highest memory usage on the current instance. This variable specifies the minimum memory usage of the SQL statement to be terminated. If the memory usage of a TiDB instance that exceeds the limit is caused by too many sessions with low memory usage, you can properly lower the value of this variable to allow more sessions to be canceled.
 
 ### tidb_shard_allocate_step <span class="version-mark">New in v5.0</span>
 
