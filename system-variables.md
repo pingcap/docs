@@ -2255,7 +2255,6 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 ### `tidb_last_plan_replayer_token` <span class="version-mark">New in v6.3.0</span>
 
 - Scope: SESSION
-- Persists to cluster: No
 - Type: String
 - This variable is read-only and is used to obtain the result of the last `PLAN REPLAYER DUMP` execution in the current session.
 
