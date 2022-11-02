@@ -333,7 +333,7 @@ Configuration items related to security.
 >
 > The `tidb_auth_token` authentication method is used only for the internal operation of TiDB Cloud. **DO NOT** change the value of this configuration.
 
-- Set the local file path of the JSON Web Key Sets (JWKS) of the `tidb_auth_token` authentication method.
+- Set the local file path of the JSON Web Key Sets (JWKS) for the `tidb_auth_token` authentication method.
 - Default value: `""`
 
 ### `auth-token-refresh-interval` <span class="version-mark">New in v6.4.0</span>
@@ -342,7 +342,7 @@ Configuration items related to security.
 >
 > The `tidb_auth_token` authentication method is used only for the internal operation of TiDB Cloud. **DO NOT** change the value of this configuration.
 
-- Set the JSON Web Key Sets refresh interval of the `tidb_auth_token` authentication method.
+- Set the JWKS refresh interval for the `tidb_auth_token` authentication method.
 - Default value: `1h`
 
 ## Performance
