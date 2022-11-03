@@ -19,8 +19,6 @@ A migration job supports the following network types:
 - VPC peering
 - Private Link
 
-A migration job supports data migration within the same region and cross regions.
-
 A migration job supports the following data sources:
 
 - MySQL 5.6-8.0 on premises or on a cloud
@@ -28,7 +26,9 @@ A migration job supports the following data sources:
 - AWS RDS MySQL 5.7 and 8.0
 - Google Cloud MySQL 5.6, 5.7 and 8.0
 
-Note that the default MySQL system database will be filtered out during migration, and will not be migrated to TiDB Cloud. The default MySQL system database includs the following:
+A migration job supports data migration within the same region and cross regions.
+
+Note that the default MySQL system database will be filtered out during migration (even when you migrate the entire upstream MySQL instance), and will not be migrated to TiDB Cloud. The default MySQL system database includes the following:
 
 - The `mysql` system database
 - The `information_schema` database
