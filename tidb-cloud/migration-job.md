@@ -28,6 +28,13 @@ A migration job supports the following data sources:
 - AWS RDS MySQL 5.7 and 8.0
 - Google Cloud MySQL 5.6, 5.7 and 8.0
 
+Note that the default MySQL system database will be filtered out during migration, and will not be migrated to TiDB Cloud. The default MySQL system database includs the following:
+
+- The `mysql` system database
+- The `information_schema` database
+- The `performance_schema` database
+- The `sys` schema
+
 ## Prerequisites
 
 The username you use for the upstream database must have the following privileges:
