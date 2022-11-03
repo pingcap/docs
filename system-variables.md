@@ -325,7 +325,7 @@ This variable is an alias for [`last_insert_id`](#last_insert_id).
 
 - Scope: SESSION
 - Default value: `OFF`
-- This variable is read-only. It is used to show whether the previous statement uses a cached chunk object (Chunk allocation).
+- This variable is read-only. It is used to show whether the previous statement uses a cached chunk object (chunk allocation).
 
 ### license
 
@@ -2392,7 +2392,7 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 - Persists to cluster: Yes
 - Default value: `64`
 - Range: `[0, 2147483647]`
-- This variable controls the maximum cached chunk objects of chunk allocation. Adjusting this variable to a larger value might increase the risk of OOM.
+- This variable controls the maximum cached chunk objects of chunk allocation. Adjusting this variable to too large a value might increase the risk of OOM.
 
 ### `tidb_max_reuse_column` <span class="version-mark">New in v6.4.0</span>
 
@@ -2400,7 +2400,7 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 - Persists to cluster: Yes
 - Default value: `256`
 - Range: `[0, 2147483647]`
-- This variable controls the maximum cached column objects of chunk allocation. Adjusting this variable to a larger value might increase the risk of OOM.
+- This variable controls the maximum cached column objects of chunk allocation. Adjusting this variable to too large a value might increase the risk of OOM.
 
 ### tidb_mem_quota_analyze <span class="version-mark">New in v6.1.0</span>
 
