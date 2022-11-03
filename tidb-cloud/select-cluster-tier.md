@@ -30,8 +30,12 @@ Whenever you use or set a database user name, you must include the prefix in the
 - To connect to your cluster:
 
     ```shell
-    mysql --connect-timeout 15 -u '3pTAoNNegb47Uc8.root' -h <host> -P 4000 -D test --ssl-mode=VERIFY_IDENTITY --ssl-ca=<CA_root_path> -p
+    mysql -u '3pTAoNNegb47Uc8.root' -h <host> -P 4000 -D test --ssl-mode=VERIFY_IDENTITY --ssl-ca=<CA_root_path> -p
     ```
+
+    > **Note:**
+    >
+    > Serverless Tier requires TLS connection. To find the CA root path on your system, see [CA root path lists](/tidb-cloud/secure-connections-to-serverless-tier-clusters.md#where-is-the-ca-root-path-on-my-system).
 
 - To create a database user:
 
