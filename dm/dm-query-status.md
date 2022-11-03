@@ -149,10 +149,10 @@ The status of a DM migration task depends on the status of each subtask assigned
                     "result": null,
                     "unresolvedDDLLockID": "",
                     "load": {                   # The replication information of the `Load` processing unit.
-                        "finishedBytes": "115",                                  # The number of bytes that have been loaded.
-                        "totalBytes": "452",                                       # The total number of bytes that need to be loaded.
-                        "progress": "25.44 %"                                  # The progress of the loading process.
-                        "CurrentSpeedBytesPerSecond": "2734"  # The speed of the full loading.
+                        "finishedBytes": "115",          # The number of bytes that have been loaded.
+                        "totalBytes": "452",               # The total number of bytes that need to be loaded.
+                        "progress": "25.44 %",         # The progress of the loading process.
+                        "bps": "2734"                        # The speed of the full loading.
                     }
                 }
             ]
@@ -185,7 +185,7 @@ The status of a DM migration task depends on the status of each subtask assigned
                         "finishedBytes": "0",
                         "totalBytes": "156",
                         "progress": "0.00 %",
-                        "CurrentSpeedBytesPerSecond": "0",
+                        "bps": "0"
                     }
                 }
             ]
