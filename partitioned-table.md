@@ -562,7 +562,7 @@ MOD(YEAR('2005-09-01'),4)
 
 #### LINEAR HASH handling
 
-`PARTITION BY LINEAR HASH` is accepted by the LINEAR is ignored, and it will be created as a non-linear HASH partitioned table. Before v6.4 it was created as a non-partitioned table.
+`PARTITION BY LINEAR HASH` is parsed by TiDB, but the LINEAR word is ignored. The table will be created as a non-linear HASH partitioned table. Before v6.4 it was created as a non-partitioned table.
 
 ### How TiDB partitioning handles NULL
 
