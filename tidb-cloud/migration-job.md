@@ -28,12 +28,7 @@ A migration job supports the following data sources:
 
 A migration job supports data migration within the same region and cross regions.
 
-Note that the default MySQL system database will be filtered out during migration (even when you migrate the entire upstream MySQL instance), and will not be migrated to TiDB Cloud. The default MySQL system database includes the following:
-
-- The `mysql` system database
-- The `information_schema` database
-- The `performance_schema` database
-- The `sys` schema
+Note that `mysql`, `information_schema`, `information_schema` and `sys` will be filtered out during migration (even when you migrate the entire upstream MySQL instance), and will not be migrated to TiDB Cloud.
 
 ## Prerequisites
 
