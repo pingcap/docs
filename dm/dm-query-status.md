@@ -213,7 +213,7 @@ The status of a DM migration task depends on the status of each subtask assigned
                         "finishedRows": "32",        # The number of rows that have been dumped.
                         "estimateTotalRows": "563",  # The estimated number of rows to be dumped.
                         "progress": "30.52 %",       # The progress of the dumping process.
-                        "bps": "445"                 # The dumping speed (bps).
+                        "bps": "445"                 # The dumping speed.
                     }
                 }
             ]
