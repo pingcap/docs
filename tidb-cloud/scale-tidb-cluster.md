@@ -8,7 +8,7 @@ aliases: ['/tidbcloud/beta/scale-tidb-cluter']
 
 > **Note:**
 >
-> - Currently, you cannot scale a [Developer Tier cluster](/tidb-cloud/select-cluster-tier.md#developer-tier).
+> - You cannot scale a [Serverless Tier cluster](/tidb-cloud/select-cluster-tier.md#serverless-tier-beta).
 > - When a cluster is in the **MODIFYING** status, you cannot perform any new scaling operations on it.
 
 You can scale a TiDB cluster in the following dimensions:
@@ -111,31 +111,10 @@ For a running cluster, AWS and Google Cloud do not allow in-place storage capaci
 
 You can increase the node size for TiDB, TiKV, and TiFlash. Decreasing the node size is not supported.
 
-To increase the node size, take one of the following methods:
+To increase the node size, take the following steps:
 
-- Method 1: Increase the node size in the TiDB Cloud console
-
-    1. In the TiDB Cloud console, navigate to the **Clusters** page for your project.
-    2. Locate the cluster that you want to scale up, and click **...** in the upper-right corner of the cluster area.
-    3. Click **Modify** in the drop-down menu. The **Modify Cluster** page is displayed.
-    4. On the **Modify Cluster** page, increase the node size as you need.
-    5. Click **Confirm**.
-
-- Method 2: Increase the node size through backup and restore
-
-    You need to [create a latest backup of the cluster](/tidb-cloud/backup-and-restore.md#manual-backup), [delete the cluster](/tidb-cloud/delete-tidb-cluster.md), and then increase the node size when you [restore the deleted cluster](/tidb-cloud/backup-and-restore.md#restore-a-deleted-cluster). Before taking this method, make sure the following impacts are acceptable:
-
-    - To avoid any data loss during or after the backup, you need to stop the connection to the cluster through your SQL client before creating the backup.
-    - After you stop the connection to the cluster, your applications running on this cluster cannot provide service normally until the restoring process is completed.
-
-- Method 3: Increase the node size through a support ticket
-
-    To submit a support ticket, perform the steps in [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md). The PingCAP support team will contact you and complete the scaling within the agreed time.
-
-    For each node to be scaled, provide the following information in the **Description** box of the ticket:
-
-    - Cluster name: xxx
-    - Cloud provider: GCP or AWS
-    - Node type: TiDB, TiKV, or TiFlash
-    - Current node size: xxx
-    - Expected node size: xxx
+1. In the TiDB Cloud console, navigate to the **Clusters** page for your project.
+2. Locate the cluster that you want to scale up, and click **...** in the upper-right corner of the cluster area.
+3. Click **Modify** in the drop-down menu. The **Modify Cluster** page is displayed.
+4. On the **Modify Cluster** page, increase the node size as you need.
+5. Click **Confirm**.
