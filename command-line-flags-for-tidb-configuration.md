@@ -13,11 +13,6 @@ When you start the TiDB cluster, you can use command-line options or environment
 - Default: `""`
 - This address must be accessible by the rest of the TiDB cluster and the user.
 
-## `--alsologtostderr`
-
-- Also send logging to standard error when a log file is supplied.
-- Default: `false`
-
 ## `--config`
 
 - The configuration file
@@ -71,21 +66,6 @@ When you start the TiDB cluster, you can use command-line options or environment
 
 - The duration of the schema lease. It is **dangerous** to change the value unless you know what you do.
 - Default: `45s`
-
-## `--log_backtrace_at`
-
-- When logging hits line `file:N`, emit a stack trace.
-- Default: `""`
-
-## `--log_dir`
-
-- If non-empty, write log files in this directory
-- Default: `""`
-
-## `--logtostderr`
-
-- Log to standard error instead of files.
-- Default: `false`
 
 ## `--log-file`
 
@@ -236,13 +216,3 @@ When you start the TiDB cluster, you can use command-line options or environment
 
 + The names of the tables to be repaired in the repair mode.
 + Default: `""`
-
-## `-v`
-
-- log level for V logs
-- Default: `""`
-
-## `-vmodule`
-
-- comma-separated list of `pattern=N` settings for file-filtered logging
-- Default: `""`
