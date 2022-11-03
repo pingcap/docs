@@ -1499,14 +1499,6 @@ MPP is a distributed computing framework provided by the TiFlash engine, which a
 - This variable is used to control whether to enable TiDB mutation checker, which is a tool used to check consistency between data and indexes during the execution of DML statements. If the checker returns an error for a statement, TiDB rolls back the execution of the statement. Enabling this variable causes a slight increase in CPU usage. For more information, see [Troubleshoot Inconsistency Between Data and Indexes](/troubleshoot-data-inconsistency-errors.md).
 - For new clusters of v6.0.0 or later versions, the default value is `ON`. For existing clusters that upgrade from versions earlier than v6.0.0, the default value is `OFF`.
 
-### tidb_enable_reuse_chunk <span class="version-mark">New in v6.4.0</span>
-
-- Scope: SESSION | GLOBAL
-- Persists to cluster: Yes
-- Default value: `ON`
-- Value options: `OFF`, `ON`
-- This variable controls whether TiDB enables chunk objects cache. If the value is `ON`, TiDB prefers to use the cached chunk object and only requests from the system if the requested object is not in the cache. If the value is `OFF`, TiDB requests chunk objects from the system directly.
-
 ### tidb_enable_new_cost_interface <span class="version-mark">New in v6.2.0</span>
 
 - Scope: SESSION | GLOBAL
@@ -1658,6 +1650,14 @@ MPP is a distributed computing framework provided by the TiFlash engine, which a
 - When the operator that reads data has only one thread left and the memory usage of a single SQL statement continues to exceed [`tidb_mem_quota_query`](/system-variables.md#tidb_mem_quota_query), this SQL statement triggers other memory control behaviors, such as spilling data to disk.
 
 </CustomContent>
+
+### tidb_enable_reuse_chunk <span class="version-mark">New in v6.4.0</span>
+
+- Scope: SESSION | GLOBAL
+- Persists to cluster: Yes
+- Default value: `ON`
+- Value options: `OFF`, `ON`
+- This variable controls whether TiDB enables chunk objects cache. If the value is `ON`, TiDB prefers to use the cached chunk object and only requests from the system if the requested object is not in the cache. If the value is `OFF`, TiDB requests chunk objects from the system directly.
 
 ### tidb_enable_slow_log
 
