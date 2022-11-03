@@ -2576,11 +2576,13 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 
 ### tidb_opt_agg_push_down
 
-- Scope: SESSION
+- Scope: SESSION | GLOBAL
+- Persists to cluster: Yes
 - Type: Boolean
 - Default value: `OFF`
 - This variable is used to set whether the optimizer executes the optimization operation of pushing down the aggregate function to the position before Join, Projection, and UnionAll.
 - When the aggregate operation is slow in query, you can set the variable value to ON.
+- Add GLOBAL scope for the variable from v6.4.0.
 
 ### tidb_opt_broadcast_cartesian_join
 
