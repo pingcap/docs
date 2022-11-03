@@ -73,7 +73,7 @@ explain select * from t1 where t1.a < (select /*+ NO_DECORRELATE() */ sum(t2.a) 
 +----------------------------------------+----------+-----------+------------------------+--------------------------------------------------------------------------------------+
 ```
 
-Disabling the correlation rule can also achieve the same effect:
+Disabling the decorrelation rule can also achieve the same effect:
 
 {{< copyable "sql" >}}
 
