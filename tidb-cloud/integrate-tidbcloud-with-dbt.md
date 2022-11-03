@@ -5,23 +5,23 @@ summary: Learn the use cases of dbt in TiDB Cloud.
 
 # Integrate TiDB Cloud with dbt
 
-[Data build tool (dbt)](https://www.getdbt.com/) is a popular open-source data transformation tool that enables analytics engineers to transform data in their warehouses through SQL statements. Through the [dbt-tidb](https://github.com/pingcap/dbt-tidb) plug-in, analytics engineers working with TiDB Cloud can directly create forms and match data through SQL without having to think about the process of creating tables or views.
+[Data build tool (dbt)](https://www.getdbt.com/) is a popular open-source data transformation tool that helps analytics engineers transform data in their warehouses through SQL statements. Through the [dbt-tidb](https://github.com/pingcap/dbt-tidb) plug-in, analytics engineers working with TiDB Cloud can directly create forms and match data through SQL without having to think about the process of creating tables or views.
 
-Here we use the official dbt tutorial as an example to introduce the use of TiDB Cloud in dbt together. 
+This document uses the official dbt tutorial as an example to introduce the use of TiDB Cloud in dbt.
 
-## Step 1: install dbt and dbt-tidb
+## Step 1: Install dbt and dbt-tidb
 
-Installing dbt and dbt-tidb requires only one command because dbt is installed as a dependency when we install dbt-tidb.
+Installing dbt and dbt-tidb requires only one command because dbt is installed as a dependency when you install dbt-tidb.
 
 ```shell
 pip install dbt-tidb
 ```
 
-You can also install dbt separately. Please refer to [How to install dbt](https://docs.getdbt.com/docs/get-started/installation) in the dbt documentation.
+You can also install dbt separately. Refer to [How to install dbt](https://docs.getdbt.com/docs/get-started/installation) in the dbt documentation.
 
-## Step 2: create project: jaffle shop
+## Step 2: Create a project: jaffle_shop
 
-The jaffle_shop is a project provided by dbt-lab to demonstrate dbt functionality. You can get the project directly from GitHub:
+The [jaffle_shop](https://github.com/dbt-labs/jaffle_shop) project is provided by dbt-lab to demonstrate the dbt function. You can get the project directly from GitHub:
 
 ```shell
 git clone https://github.com/dbt-labs/jaffle_shop
@@ -56,11 +56,15 @@ tree
     └── raw_payments.csv
 ```
 
-- **dbt_project.yml** is the dbt project configuration file, which holds the project name and database configuration file information.
-- **The models directory** contains the project’s SQL models and table schemas. Note that the data analyst at your company writes this section. To learn more about models, see [dbt Docs](https://docs.getdbt.com/docs/build/sql-models).
-- **The seed directory** stores CSV files that are dumped from database export tools. For example, TiDB Cloud can export the table data into CSV files through [Dumpling](https://docs.pingcap.com/tidbcloud/dumpling-overview#dumpling-overview). In the jaffle shop project, these CSV files are used as raw data to be processed.
+In this directory, the most important files are:
 
-## Step 3: configure the project
+- **dbt_project.yml** is the dbt project configuration file, which holds the project name and database configuration file information.
+
+- **The models directory** contains the project’s SQL models and table schemas. Note that the data analyst in your company writes this section. To learn more about models, see the [SQL models](https://docs.getdbt.com/docs/build/sql-models) in the dbt documentation.
+
+- **The seed directory** stores the CSV files that are dumped from the database export tools. For example, TiDB Cloud can export the table data into CSV files through [Dumpling](https://docs.pingcap.com/tidbcloud/dumpling-overview#dumpling-overview). In the jaffle_shop project, these CSV files are used as raw data to be processed.
+
+## Step 3: Configure the project
 
 To configure the project:
 
@@ -80,7 +84,7 @@ To configure the project:
           password: "your_password"
     ```
 
-2. Complete the project configuration. In the jaffle_shop project directory, enter the project configuration file `dbt_project.yml` and change the profile field to `jaffle_shop_tidb`. This configuration allows the project to query from the database as specified in the `~/.dbt/profiles.yml` file.
+2. Complete the project configuration. In the jaffle_shop project directory, edit the project configuration file `dbt_project.yml` and change the profile field to `jaffle_shop_tidb`. This configuration allows the project to query from the database as specified in the `~/.dbt/profiles.yml` file.
 
     ```shell
     vi dbt_project.yml
@@ -119,21 +123,21 @@ To configure the project:
     dbt debug
     ```
 
-## Step 4: load CSV files
+## Step 4: Load CSV files
 
-Now that you have successfully created and configured the project, it’s time to load the CSV data and materialize the CSV as a table in the target database. Note that this step is not generally required for a dbt project because the data items for processing are already in the database.
+Now that you have successfully created and configured the project, it’s time to load the CSV data and materialize the CSV as a table in the target database. Note that this step is not generally required for a dbt project because the data for processing is already in the database.
 
 1. Load the CSV data and materialize the CSV as a table in the target database.
 
     > **Note:**
     >
-    > In general, dbt projects do not need this step because the data for your pending projects is in the database.
+    > Usually dbt projects do not need this step because the data for your pending projects is already in the database.
 
     ```shell
     dbt seed
     ```
 
-    This displays the following:
+    The following is an example output:
 
     ```shell
     Running with dbt=1.0.1
@@ -152,7 +156,7 @@ Now that you have successfully created and configured the project, it’s time t
 
     As you can see in the results, the seed file was started and loaded into three tables: `analytics.raw_customers`, `analytics.raw_orders`, and `analytics.raw_payments`.
 
-2. Verify the results in TiDB Cloud. The show databases command lists the new analytics database that dbt created. The show tables command indicates that there are three tables in the analytics database, corresponding to the ones we created above.
+2. Verify the results in TiDB Cloud. The `show databases` command lists the new analytics database that dbt created. The `show tables` command indicates that there are three tables in the analytics database, corresponding to the ones you have created.
 
     ```sql
     mysql> show databases;
@@ -181,7 +185,7 @@ Now that you have successfully created and configured the project, it’s time t
     3 rows in set (0.00 sec)
     ```
 
-## Step 5: run the project
+## Step 5: Run the project
 
 Now you are ready to run the configured projects and finish the data transformation.
 
@@ -190,9 +194,10 @@ Now you are ready to run the configured projects and finish the data transformat
     ```shell
     dbt run
     ```
-    This displays the following:
 
-    ```
+    The following is an example output:
+
+    ```shell
     Running with dbt=1.0.1
     Found 5 models, 20 tests, 0 snapshots, 0 analyses, 170 macros, 0 operations, 3 seed files, 0 sources, 0 exposures, 0 metrics
 
@@ -216,9 +221,9 @@ Now you are ready to run the configured projects and finish the data transformat
     Done. PASS=5 WARN=0 ERROR=0 SKIP=0 TOTAL=5
     ```
 
-    The result shows three views (`analytics.stg_customers`, `analytics.stg_orders`, and `analytics.stg_payments`) and two tables (`analytics.customers` and `analytics.orders`) were created successfully.
+    The result shows three views (`analytics.stg_customers`, `analytics.stg_orders`, and `analytics.stg_payments`) and two tables (`analytics.customers` and `analytics.orders`) are created successfully.
 
-2. Go to the TiDB Cloud to verify that the creation is successful.
+2. Go to TiDB Cloud to verify that the creation is successful.
 
     ```sql
     mysql> use analytics;
@@ -255,9 +260,9 @@ Now you are ready to run the configured projects and finish the data transformat
     10 rows in set (0.00 sec)
     ```
 
-    The output shows that five more tables or views have been added, and the data in the tables or views has been transformed. Note that only part of the data from the customer table is shown here.
+    The output shows that five more tables or views have been added, and the data in the tables or views has been transformed. Note that only part of the data from the customer table is shown in this example.
 
-## Step 6: generate the doc
+## Step 6: Generate the doc
 
 dbt lets you generate visual documents that display the overall structure of the project and describe all the tables and views. To generate visual documents:
 
@@ -273,8 +278,7 @@ dbt lets you generate visual documents that display the overall structure of the
     dbt docs serve
     ```
 
-3. To access the document view from your browser, navigate to [http://localhost:8080](http://localhost:8080).
-
+3. To access the document view from your browser, go to [http://localhost:8080](http://localhost:8080).
 
 ## Description of profile fields
 
@@ -290,12 +294,12 @@ dbt lets you generate visual documents that display the overall structure of the
 
 ## Supported functions
 
-cross-db macros are moved from dbt-utils into dbt-core, so you can use the following functions directly, see [dbt-util](https://github.com/dbt-labs/dbt-utils) on how to use them.
+cross-db macros are moved from dbt-utils into dbt-core, so you can use the following functions directly. For information about how to use them, see [dbt-util](https://github.com/dbt-labs/dbt-utils).
 
 - bool_or
 - cast_bool_to_text
 - dateadd
-- datediff
+- datediff. Note that datediff is a little different from dbt-util. It rounds down rather than rounds up.
 - date_trunc
 - hash
 - safe_cast
@@ -311,5 +315,3 @@ cross-db macros are moved from dbt-utils into dbt-core, so you can use the follo
 - replace
 - right
 - listagg (not supported yet)
-
-> pay attention that datediff is a little different from dbt-util that it will round down rather than round up.
