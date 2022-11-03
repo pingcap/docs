@@ -7,13 +7,11 @@ summary: Learn an overview of the TiDB migration tools.
 
 TiDB provides multiple data migration tools for different scenarios such as full data migration, incremental data migration, backup and restore, and data replication.
 
-This document introduces the user scenarios, advantages, and limitations of these tools. You can choose the right tool according to your needs.
+This document introduces the user scenarios, supported upstreams and downstreams, advantages, and limitations of these tools. You can choose the right tool according to your needs.
 
 <!--The following diagram shows the user scenario of each migration tool.
 
 !TiDB Migration Tools media/migration-tools.png-->
-
-The following list introduces the user scenarios, the supported upstreams and downstreams of migration tools.
 
 ## [TiDB Data Migration (DM)](/dm/dm-overview.md)
 
