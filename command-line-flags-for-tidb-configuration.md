@@ -34,6 +34,11 @@ When you start the TiDB cluster, you can use command-line options or environment
 - Specifies the `Access-Control-Allow-Origin` value for Cross-Origin Request Sharing (CORS) request of the TiDB HTTP status service
 - Default: `""`
 
+## `--enable-binlog`
+
++ Enables or disables TiDB binlog generation
++ Default: `false`
+
 ## `--host`
 
 - The host address that the TiDB server monitors
@@ -43,18 +48,13 @@ When you start the TiDB cluster, you can use command-line options or environment
 
 ## `--initialize-insecure`
 
-- Bootstrap tidb-server in insecure mode
+- Bootstraps tidb-server in insecure mode
 - Default: `true`
 
 ## `--initialize-secure`
 
-- Bootstrap tidb-server in secure mode
+- Bootstraps tidb-server in secure mode
 - Default: `false`
-
-## `--enable-binlog`
-
-+ Enables or disables TiDB binlog generation
-+ Default: `false`
 
 ## `-L`
 
@@ -165,7 +165,7 @@ When you start the TiDB cluster, you can use command-line options or environment
 
 ## `--temp-dir`
 
-- TiDB temporary directory
+- The temporary directory of TiDB
 - Default: `"/tmp/tidb"`
 
 ## `--token-limit`
