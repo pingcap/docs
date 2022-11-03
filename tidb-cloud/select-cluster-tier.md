@@ -30,8 +30,12 @@ Whenever you use or set a database user name, you must include the prefix in the
 - To connect to your cluster:
 
     ```shell
-    mysql --connect-timeout 15 -u '3pTAoNNegb47Uc8.root' -h <host> -P 4000 -D test -p
+    mysql -u '3pTAoNNegb47Uc8.root' -h <host> -P 4000 -D test --ssl-mode=VERIFY_IDENTITY --ssl-ca=<CA_root_path> -p
     ```
+
+    > **Note:**
+    >
+    > Serverless Tier requires TLS connection. To find the CA root path on your system, see [CA root path lists](/tidb-cloud/secure-connections-to-serverless-tier-clusters.md#where-is-the-ca-root-path-on-my-system).
 
 - To create a database user:
 
@@ -48,6 +52,7 @@ To get the prefix for your cluster, take the following steps:
 ### Serverless Tier special terms and conditions
 
 - Serverless Tier does not have uptime SLA guarantee during beta phase. If you use Serverless Tier beta to store a commercial or production dataset, any potential risk associated with the use should be taken on your own, and PingCAP shall not be liable for any damage.
+- Serverless Tier only supports TLS connection, and you cannot disable TLS. For more information, see [Secure Connections to Serverless Tier Clusters](/tidb-cloud/secure-connections-to-serverless-tier-clusters.md).
 - The backup and restore feature is unavailable. You can use [Dumpling](https://docs.pingcap.com/tidb/stable/dumpling-overview) to export your data as a backup.
 - You cannot create any changefeeds (Apache Kafka Sink and MySQL Sink) or use [TiCDC](https://docs.pingcap.com/tidb/stable/ticdc-overview) to replicate incremental data.
 - You cannot use VPC Peering or private endpoint to connect to Serverless Tier clusters.
