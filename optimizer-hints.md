@@ -203,7 +203,7 @@ From the preceding example, you can see that when using the `SEMI_JOIN_REWRITE()
 
 ### NO_DECORRELATE()
 
-The `NO_DECORRELATE()` hint tells the optimizer not to try to perform decorrelation for the correlated subquery in the specified query block. This hint is applicable to the `EXISTS`, `IN`, `ANY`, `ALL`, and `SOME` clauses that contain correlated columns, and scalar subqueries (that is, correlated subqueries).
+The `NO_DECORRELATE()` hint tells the optimizer not to try to perform decorrelation for the correlated subquery in the specified query block. This hint is applicable to the `EXISTS`, `IN`, `ANY`, `ALL`, `SOME` subqueries and scalar subqueries that contain correlated columns (that is, correlated subqueries).
 
 When this hint is used in a query block, the optimizer will not try to perform decorrelation for the correlated columns between the subquery and its outer query block, but always use the Apply operator to execute the query.
 
