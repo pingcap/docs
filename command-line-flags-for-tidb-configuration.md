@@ -157,11 +157,6 @@ When you start the TiDB cluster, you can use command-line options or environment
 - The `HOST` used to monitor the status of TiDB service
 - Default: `0.0.0.0`
 
-## `-stderrthreshold`
-
-- Logs at or above this threshold go to stderr.
-- Default: `""`
-
 ## `--store`
 
 - Specifies the storage engine used by TiDB in the bottom layer
