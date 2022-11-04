@@ -2386,22 +2386,6 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 - The default value is `CANCEL`, but in TiDB v4.0.2 and earlier versions, the default value is `LOG`.
 - This setting was previously a `tidb.toml` option (`oom-action`), but changed to a system variable starting from TiDB v6.1.0.
 
-### `tidb_max_reuse_chunk` <span class="version-mark">New in v6.4.0</span>
-
-- Scope: SESSION | GLOBAL
-- Persists to cluster: Yes
-- Default value: `64`
-- Range: `[0, 2147483647]`
-- This variable controls the maximum cached chunk objects of chunk allocation. Adjusting this variable to too large a value might increase the risk of OOM.
-
-### `tidb_max_reuse_column` <span class="version-mark">New in v6.4.0</span>
-
-- Scope: SESSION | GLOBAL
-- Persists to cluster: Yes
-- Default value: `256`
-- Range: `[0, 2147483647]`
-- This variable controls the maximum cached column objects of chunk allocation. Adjusting this variable to too large a value might increase the risk of OOM.
-
 ### tidb_mem_quota_analyze <span class="version-mark">New in v6.1.0</span>
 
 > **Warning:**
