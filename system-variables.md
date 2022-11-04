@@ -1004,7 +1004,7 @@ MPP is a distributed computing framework provided by the TiFlash engine, which a
 >
 > Currently, this feature is not compatible with [PITR (Point-in-time recovery)](/br/point-in-time-recovery.md). When using index acceleration, you need to ensure that there are no PITR log backup tasks running in the background. Otherwise, unexpected behaviors might occur, including:
 >
-> - If you start a log backup task first, and then add an index. The adding index process is not accelerated even if index acceleration is enabled. But the index is added in a slow way. Since the log backup task will always run, it is equivalent to the index acceleration feature being disabled.
+> - If you start a log backup task first, and then add an index. The adding index process is not accelerated even if index acceleration is enabled. But the index is added in a slow way. Since the log backup task keeps running after being started, it means that the index acceleration feature is disabled in this case.
 > - If you start an index acceleration task first, and then start a log backup task. The log backup task returns an error. But the index acceleration is not affected.
 > - If you start a log backup task and an index acceleration task at the same time, the two tasks might not be aware of each other. This might result in PITR failing to back up the newly added index.
 
