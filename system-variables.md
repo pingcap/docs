@@ -2494,7 +2494,7 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 
 <CustomContent platform="tidb-cloud">
 
-- When this variable is configured to a value between `0` and `1`, it means that the memory threshold alarm feature is enabled.
+- When this variable is configured to a value greater than `0` and less than `1`, it means that the memory threshold alarm feature is enabled.
 
 </CustomContent>
 
