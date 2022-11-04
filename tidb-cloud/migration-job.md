@@ -28,7 +28,11 @@ A migration job supports the following data sources:
 
 A migration job supports data migration within the same region and cross regions.
 
-Note that the system databases of `mysql`, `information_schema`, `information_schema` and `sys` will be filtered out during migration (even when you migrate the entire upstream MySQL instance), and will not be migrated to TiDB Cloud.
+## Limitations
+
+- The system databases of `mysql`, `information_schema`, `information_schema` and `sys` will be filtered out during migration (even when you migrate the entire upstream MySQL instance), and will not be migrated to TiDB Cloud.
+
+- When you delete a cluster, all migration jobs in that cluster are automatically deleted, and the deleted migration jobs are not recoverable.
 
 ## Prerequisites
 
