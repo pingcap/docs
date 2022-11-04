@@ -10,25 +10,6 @@ This statement removes an index from a specified table, marking space as free in
 ## Synopsis
 
 ```ebnf+diagram
-<<<<<<< HEAD
-AlterTableDropIndexStmt ::=
-    'ALTER' IgnoreOptional 'TABLE' AlterTableDropIndexSpec
-
-IgnoreOptional ::=
-    'IGNORE'?
-
-TableName ::=
-    Identifier ('.' Identifier)?
-
-AlterTableDropIndexSpec ::=
-    'DROP' ( KeyOrIndex | 'FOREIGN' 'KEY' ) IfExists Identifier
-
-KeyOrIndex ::=
-    'KEY'
-|   'INDEX'
-
-IfExists ::= ( 'IF' 'EXISTS' )?
-=======
 DropIndexStmt ::=
     "DROP" "INDEX" IfExists Identifier "ON" TableName IndexLockAndAlgorithmOpt
 
@@ -37,7 +18,6 @@ IfExists ::=
 
 IndexLockAndAlgorithmOpt ::=
     ( LockClause AlgorithmClause? | AlgorithmClause LockClause? )?
->>>>>>> 0adb6a71e (align 2 PR from docs-cn (2) (#10809))
 ```
 
 ## Examples
