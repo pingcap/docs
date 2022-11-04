@@ -1,6 +1,6 @@
 ---
 title: SHOW CREATE DATABASE
-summary: Overview of the use of SHOW CREATE DATABASE in the TiDB database.
+summary: An overview of the use of SHOW CREATE DATABASE in the TiDB database.
 ---
 
 # SHOW CREATE DATABASE
@@ -54,7 +54,7 @@ SHOW CREATE SCHEMA IF NOT EXISTS test;
 
 ## MySQL compatibility
 
-`SHOW CREATE DATABASE` is expected to be fully compatible with MySQL. If you find any compatibility difference, submit a GitHub [issue](https://github.com/pingcap/tidb/issues/new/choose).
+`SHOW CREATE DATABASE` is expected to be fully compatible with MySQL. If you find any compatibility differences, submit a GitHub [issue](https://github.com/pingcap/tidb/issues/new/choose).
 
 ## See also
 
