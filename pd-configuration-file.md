@@ -305,9 +305,8 @@ Configuration items related to replicas
 ### `enable-placement-rules`
 
 + Enables `placement-rules`.
-+ Default value: `false`
++ Default value: `true`
 + See [Placement Rules](/configure-placement-rules.md).
-+ An experimental feature of TiDB 4.0.
 
 ## `label-property`
 
