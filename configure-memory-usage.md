@@ -85,7 +85,7 @@ When the memory usage of a tidb-server instance reaches a certain proportion of 
 
 > **Warning:**
 >
-> Currently, the following system tables are still experimental. The memory usage information provided is only for reference. It is not recommended to use the following system tables in a production environment to obtain memory usage information for decision-making.
+> The following system tables are introduced in v6.4.0. Currently, these tables are still experimental. The memory usage information provided is only for reference. It is not recommended to use the following system tables in a production environment to obtain memory usage information for decision-making.
 
 To view the memory usage of the current instance or cluster, you can query the system table [`INFORMATION_SCHEMA.(CLUSTER_)MEMORY_USAGE`](/information-schema/information-schema-memory-usage.md).
 
