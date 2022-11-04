@@ -58,7 +58,7 @@ In this configuration, when the memory usage of a tidb-server instance reaches 3
 
 ## Trigger the alarm of excessive memory usage
 
-When the memory usage of a tidb-server instance exceeds its memory threshold (70% of its total memory by default) and any of the following conditions is met, TiDB records the associated status files and prints an alarm log.
+When the memory usage of a tidb-server instance exceeds its memory threshold (70% of its total memory by default) and any of the following conditions is met, TiDB records the related status files and prints an alarm log.
 
 - It is the first time the memory usage exceeds the memory threshold.
 - The memory usage exceeds the memory threshold and it has been more than 60 seconds since the last alarm.
@@ -86,7 +86,7 @@ To avoid accumulating too many status files for alarms, TiDB only retains the st
 
 The following example constructs a memory-intensive SQL statement that triggers the alarm:
 
-1. Set `memory-usage-alarm-ratio` to `0.85`:
+1. Set `tidb_memory_usage_alarm_ratio` to `0.85`:
 
     {{< copyable "" >}}
 
