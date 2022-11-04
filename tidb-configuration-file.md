@@ -19,14 +19,14 @@ The TiDB configuration file supports more options than command-line parameters. 
 
 ### `tidb_max_reuse_chunk` <span class="version-mark">New in v6.4.0</span>
 
-- Controls the maximum cached chunk objects of chunk allocation. Adjusting this variable to too large a value might increase the risk of OOM.
+- Controls the maximum cached chunk objects of chunk allocation. Setting this configuration item to too large a value might increase the risk of OOM.
 - Default value: `64`
 - Minimum value: `0`
 - Maximum value: `2147483647`
 
 ### `tidb_max_reuse_column` <span class="version-mark">New in v6.4.0</span>
 
-- Controls the maximum cached column objects of chunk allocation. Adjusting this variable to too large a value might increase the risk of OOM.
+- Controls the maximum cached column objects of chunk allocation. Setting this configuration item to too large a value might increase the risk of OOM.
 - Default value: `256`
 - Minimum value: `0`
 - Maximum value: `2147483647`
