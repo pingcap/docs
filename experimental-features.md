@@ -37,6 +37,7 @@ This document introduces the experimental features of TiDB in different versions
 + [Metadata Lock](/metadata-lock.md) (Introduced in v6.3.0)
 + [Range INTERVAL partitioning](/partitioned-table.md#range-interval-partitioning) (Introduced in v6.3.0)
 + [Add index acceleration](/system-variables.md#tidb_ddl_enable_fast_reorg-new-in-v630) (Introduced in v6.3.0)
++ [`AUTO_INCREMENT` MySQL compatibility mode](/auto-increment.md#mysql-compatibility-mode) (Introduced in v6.4.0)
 
 ## Storage
 
