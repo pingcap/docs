@@ -255,7 +255,7 @@ delta_index_cache_size = 0
 [security.encryption]
     ## The encryption method for data files.
     ## Value options: "aes128-ctr", "aes192-ctr", "aes256-ctr", "sm4-ctr" (supported since v6.4.0), and "plaintext".
-    ## Default value: `"plaintext"` which means encryption is disabled by default. A value other than "plaintext" means that encryption is enabled, in which case the master key must be specified.
+    ## Default value: `"plaintext"`, which means encryption is disabled by default. A value other than "plaintext" means that encryption is enabled, in which case the master key must be specified.
     data-encryption-method = "aes128-ctr"
     ## Specifies how often the data encryption key is rotated. Default value: `7d`.
     data-key-rotation-period = "168h" # 7 days
