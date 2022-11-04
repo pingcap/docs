@@ -3108,7 +3108,7 @@ explain select * from t where age=5;
 
 - Scope: GLOBAL
 - Persists to cluster: Yes
-- Default value: 80%
+- Default value: `0`
 - Range:
     - You can set the value in the percentage format, which means the percentage of the memory usage relative to the total memory. The value range is `[1%, 99%]`.
     - You can also set the value in memory size in bytes. The value range is `[0, 9223372036854775807]`. The memory format with the units "KB|MB|GB|TB" is supported. The `0` value means no memory limit.
