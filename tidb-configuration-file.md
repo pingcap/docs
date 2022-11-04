@@ -760,21 +760,6 @@ Configuration items related to read isolation.
 - The value of this configuration will initialize the value of system variable [`max_connections`](/system-variables.md#max_connections)
 - Before v6.2.0, this configuration is set by `max-server-connections`.
 
-### `tidb_memory_usage_alarm_ratio`
-
-- TiDB triggers an alarm when the memory usage of tidb-server instance exceeds a certain threshold. The valid value for this configuration item ranges from `0` to `1`. If it is configured as `0` or `1`, this alarm feature is disabled.
-- Default value: `0.8`
-- When the memory usage alarm is enabled, if [`server-memory-quota`](/tidb-configuration-file.md#server-memory-quota-new-in-v409) is not set, then the threshold of memory usage is ```the `memory-usage-alarm-ratio` value * the system memory size```; if `server-memory-quota` is set to a value greater than 0, then the threshold of memory usage is ```the `memory-usage-alarm-ratio` value * the `server-memory-quota` value```.
-- When TiDB detects that the memory usage of the tidb-server instance exceeds the threshold, it considers that there might be a risk of OOM. Therefore, it records the following information to the directory [`tmp-storage-path/record`](/tidb-configuration-file.md#tmp-storage-path):
-    - Top 10 SQL statements with the highest memory usage
-    - Top 10 SQL statements with the longest running time
-    - The heap profile among all SQL statements currently being executed
-    
-    It then outputs a log containing the keyword `tidb-server has the risk of OOM`.
-
-- The value of this configuration will initialize the value of system variable [`tidb_memory_usage_alarm_ratio`](/system-variables.md#tidb_memory_usage_alarm_ratio)
-- Before v6.1.0, this configuration is set by `memory-usage-alarm-ratio`.
-
 ### `tidb_enable_ddl`
 
 - This configuration controls whether the corresponding TiDB instance can run DDL statements or not.
