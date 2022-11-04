@@ -58,6 +58,7 @@ Currently, the memory limit set by `tidb_server_memory_limit` **DOES NOT** termi
 
 > **Warning:**
 >
+> + The global memory control of tidb-server instances is still an experimental feature. It is not recommended to use it in the production environment.
 > + During the startup process, TiDB does not guarantee that the [`tidb_server_memory_limit`](/system-variables.md#tidb_server_memory_limit-new-in-v640) limit is enforced. If the free memory of the operating system is insufficient, TiDB might still encounter OOM. You need to ensure that the TiDB instance has enough available memory.
 > + In the process of memory control, the total memory usage of TiDB might slightly exceed the limit set by `tidb_server_memory_limit`.
 > + Since v6.4.0, the `server-memory-quota` configuration item is deprecated. To ensure compatibility, after upgrading to v6.4.0 or a later version, `tidb_server_memory_limit` inherits the value of the configuration item `server-memory-quota`. If `server-memory-quota` is not configured in the cluster before the cluster is upgraded to v6.4.0 or later, `tidb_server_memory_limit` uses the default value.
@@ -65,6 +66,10 @@ Currently, the memory limit set by `tidb_server_memory_limit` **DOES NOT** termi
 When the memory usage of a tidb-server instance reaches a certain proportion of the total memory (the proportion is controlled by the system variable [`tidb_server_memory_limit_gc_trigger`](/system-variables.md#tidb_server_memory_limit_gc_trigger-new-in-v640)), tidb-server will try to trigger a Golang GC to relieve memory stress. To avoid frequent GCs that cause performance issues due to the instance memory fluctuating around the threshold, this GC method will trigger GC at most once every minute.
 
 ## View the memory usage of the current tidb-server instance using the INFORMATION_SCHEMA system table
+
+> **Warning:**
+>
+> Currently, the following system tables are still experimental. The memory usage information provided is only for reference. It is not recommended to use the following system tables in a production environment to obtain memory usage information for decision-making.
 
 To view the memory usage of the current instance or cluster, you can query the system table [`INFORMATION_SCHEMA.(CLUSTER_)MEMORY_USAGE`](/information-schema/information-schema-memory-usage.md).
 

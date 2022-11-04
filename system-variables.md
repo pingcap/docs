@@ -3102,6 +3102,10 @@ explain select * from t where age=5;
 
 ### tidb_server_memory_limit <span class="version-mark">New in v6.4.0</span>
 
+> **Warning:**
+>
+> Currently, `tidb_server_memory_limit` is still experimental. It is not recommended to use it in the production environment.
+
 - Scope: GLOBAL
 - Persists to cluster: Yes
 - Default value: 80%
@@ -3114,6 +3118,10 @@ explain select * from t where age=5;
 
 ### tidb_server_memory_limit_gc_trigger <span class="version-mark">New in v6.4.0</span>
 
+> **Warning:**
+>
+> Currently, `tidb_server_memory_limit_gc_trigger` is still experimental. It is not recommended to use it in the production environment.
+
 - Scope: GLOBAL
 - Persists to cluster: Yes
 - Default value: `70%`
@@ -3121,6 +3129,10 @@ explain select * from t where age=5;
 - The threshold at which TiDB tries to trigger GC. When the memory usage of TiDB reaches the value of `tidb_server_memory_limit` \* the value of `tidb_server_memory_limit_gc_trigger`, TiDB will actively trigger a Golang GC operation. Only one GC operation will be triggered in one minute.
 
 ### tidb_server_memory_limit_sess_min_size <span class="version-mark">New in v6.4.0</span>
+
+> **Warning:**
+>
+> Currently, `tidb_server_memory_limit_sess_min_size` is still experimental. It is not recommended to use it in the production environment.
 
 - Scope: GLOBAL
 - Persists to cluster: Yes
