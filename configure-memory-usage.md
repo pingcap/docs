@@ -62,7 +62,7 @@ When the memory usage of a tidb-server instance exceeds its memory threshold (70
 
 - It is the first time the memory usage exceeds the memory threshold.
 - The memory usage exceeds the memory threshold and it has been more than 60s since the last alarm.
-- The memory usage exceeds the memory threshold and `(Current memory usage - Memory usage at the last alarm) / Maximum available memory > 10%`.
+- The memory usage exceeds the memory threshold and `(Current memory usage - Memory usage at the last alarm) / Total memory > 10%`.
 
 You can control the memory threshold that triggers the alarm by modifying the memory usage ratio via the system variable [`tidb_memory_usage_alarm_ratio`](/system-variables.md#tidb_memory_usage_alarm_ratio).
 

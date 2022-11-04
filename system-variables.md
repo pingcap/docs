@@ -2436,17 +2436,15 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 
 - When this variable is configured to a value between `0` and `1`, it means that the memory threshold alarm feature is enabled.
 
-    - If the [`server-memory-quota`](/tidb-configuration-file.md#server-memory-quota-introduced-from-v409-version) configuration is not set, the memory alarm threshold is `tidb_memory-usage-alarm-ratio * system memory size`.
-    - If the `server-memory-quota` configuration is set and greater than 0, the memory alarm threshold is `tidb_memory-usage-alarm-ratio * server-memory-quota`.
+    - If the system variable [`tidb_server_memory_limit`](#tidb_server_memory_limit-new-in-v640) is `0` and the [`server-memory-quota`](/tidb-configuration-file.md#server-memory-quota-introduced-from-v409-version) configuration item is not set, the memory alarm threshold is `tidb_memory-usage-alarm-ratio * system memory size`.
+    - If the system variable `tidb_server_memory_limit` is `0` and the `server-memory-quota` configuration item is set to greater than 0, the memory alarm threshold is `tidb_memory-usage-alarm-ratio * server-memory-quota`.
+    - If the system variable `tidb_server_memory_limit` is set to greater than 0, the memory alarm threshold is `tidb_memory-usage-alarm-ratio * tidb_server_memory_limit`.
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
 - When this variable is configured to a value between `0` and `1`, it means that the memory threshold alarm feature is enabled.
-
-    - If the [`server-memory-quota`](https://docs.pingcap.com/tidb/stable/tidb-configuration-file#memory-usage-alarm-ratio-new-in-v409) configuration is not set, the memory alarm threshold is `tidb_memory-usage-alarm-ratio * system memory size`.
-    - If the `server-memory-quota` configuration is set and greater than 0, the memory alarm threshold is `tidb_memory-usage-alarm-ratio * server-memory-quota`.
 
 </CustomContent>
 
