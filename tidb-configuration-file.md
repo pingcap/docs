@@ -42,7 +42,7 @@ TiDB 構成ファイルは、コマンドライン パラメーターよりも�
 ### <code>tmp-storage-path</code> {#code-tmp-storage-path-code}
 
 -   1 つの SQL ステートメントが`mem-quota-query`で指定されたメモリ クォータを超える場合に、一部の演算子の一時ストレージ パスを指定します。
--   デフォルト値: `<temporary directory of OS>/<OS user ID>_tidb/MC4wLjAuMDo0MDAwLzAuMC4wLjA6MTAwODA=/tmp-storage` 。 `MC4wLjAuMDo0MDAwLzAuMC4wLjA6MTAwODA=`は`<host>:<port>/<statusHost>:<statusPort>`の`Base64`エンコード結果です。
+-   デフォルト値: `<temporary directory of OS>/<OS user ID>_tidb/MC4wLjAuMDo0MDAwLzAuMC4wLjA6MTAwODA=/tmp-storage` 。 `MC4wLjAuMDo0MDAwLzAuMC4wLjA6MTAwODA=`は`Base64`の`<host>:<port>/<statusHost>:<statusPort>`のエンコード結果です。
 -   この構成は、 `oom-use-tmp-storage`が`true`の場合にのみ有効です。
 
 ### <code>tmp-storage-quota</code> {#code-tmp-storage-quota-code}
@@ -169,13 +169,13 @@ TiDB 構成ファイルは、コマンドライン パラメーターよりも�
 
 -   単一の`ENUM`要素と単一の`SET`要素の最大長を制限するかどうかを決定します。
 -   デフォルト値: `true`
--   この構成値が`true`の場合、単一の`ENUM`要素と単一の`SET`要素の最大長は 255 文字で、これは[MySQL 8.0](https://dev.mysql.com/doc/refman/8.0/en/string-type-syntax.html)と互換性があります。この構成値が`false`の場合、1 つの要素の長さに制限はなく、TiDB (v5.0 より前) と互換性があります。
+-   この構成値が`true`の場合、単一の`ENUM`エレメントと単一の`SET`エレメントの最大長は 255 文字であり、これは[MySQL 8.0](https://dev.mysql.com/doc/refman/8.0/en/string-type-syntax.html)と互換性があります。この構成値が`false`の場合、1 つの要素の長さに制限はなく、TiDB (v5.0 より前) と互換性があります。
 
 #### <code>graceful-wait-before-shutdown</code> <span class="version-mark">v5.0 の新</span>機能 {#code-graceful-wait-before-shutdown-code-span-class-version-mark-new-in-v5-0-span}
 
 -   サーバーをシャットダウンするときに TiDB が待機する秒数を指定します。これにより、クライアントは切断できるようになります。
 -   デフォルト値: `0`
--   TiDB がシャットダウンを待機している場合 (猶予期間中)、HTTP ステータスは失敗を示し、ロード バランサーがトラフィックを再ルーティングできるようにします。
+-   TiDB が (猶予期間で) シャットダウンを待機している場合、HTTP ステータスは失敗を示し、ロード バランサーがトラフィックを再ルーティングできるようにします。
 
 ### <code>enable-forwarding</code><span class="version-mark">新機能</span> {#code-enable-forwarding-code-span-class-version-mark-new-in-v5-0-0-span}
 
@@ -468,7 +468,7 @@ TiDB 構成ファイルは、コマンドライン パラメーターよりも�
 
 ### <code>force-priority</code> {#code-force-priority-code}
 
--   すべてのステートメントの優先順位を設定します。
+-   すべてのステートメントの優先度を設定します。
 -   デフォルト: `NO_PRIORITY`
 -   オプションの値: `NO_PRIORITY` 、 `LOW_PRIORITY` 、 `HIGH_PRIORITY` 、および`DELAYED` 。
 
@@ -525,16 +525,16 @@ opentracing.sampler に関するConfiguration / コンフィグレーション�
 
 ### <code>type</code> {#code-type-code}
 
--   opentracing サンプラーのタイプを指定します。
+-   opentracing サンプラーのタイプを指定します。文字列値は大文字と小文字を区別しません。
 -   デフォルト値: `"const"`
--   値のオプション: `"const"` 、 `"probabilistic"` 、 `"rateLimiting"` 、 `"remote"`
+-   値のオプション: `"const"` 、 `"probabilistic"` 、 `"ratelimiting"` 、 `"remote"`
 
 ### <code>param</code> {#code-param-code}
 
 -   opentracing サンプラーのパラメーター。
     -   `const`タイプの場合、値は`0`または`1`で、 `const`サンプラーを有効にするかどうかを示します。
     -   `probabilistic`タイプの場合、パラメーターはサンプリング確率を指定します。これは、 `0`から`1`までの浮動小数点数にすることができます。
-    -   `rateLimiting`タイプの場合、パラメーターは 1 秒あたりにサンプリングされるスパンの数を指定します。
+    -   `ratelimiting`タイプの場合、パラメーターは 1 秒あたりにサンプリングされるスパンの数を指定します。
     -   `remote`タイプの場合、パラメーターはサンプリング確率を指定します。これは、 `0`から`1`までの浮動小数点数にすることができます。
 -   デフォルト値: `1.0`
 

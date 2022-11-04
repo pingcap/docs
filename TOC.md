@@ -262,7 +262,7 @@
         -   [TiDBクラスタトポロジ リファレンス](/tiup/tiup-cluster-topology-reference.md)
         -   [DMクラスタトポロジ リファレンス](/tiup/tiup-dm-topology-reference.md)
         -   [ミラー リファレンス ガイド](/tiup/tiup-mirror-reference.md)
-        -   TiUP コンポーネント
+        -   TiUPコンポーネント
             -   [tiup-playground](/tiup/tiup-playground.md)
             -   [tiup-cluster](/tiup/tiup-cluster.md)
             -   [tiup-mirror](/tiup/tiup-mirror.md)
@@ -319,7 +319,7 @@
             -   基本的な機能
                 -   [テーブル ルーティング](/dm/dm-key-features.md)
                 -   [ブロックリストと許可リスト](/dm/dm-key-features.md#block-and-allow-table-lists)
-                -   [Binlogイベント フィルタ](/dm/dm-key-features.md#binlog-event-filter)
+                -   [Binlogイベント フィルター](/dm/dm-key-features.md#binlog-event-filter)
             -   高度な機能
                 -   シャード テーブルからのデータのマージと移行
                     -   [概要](/dm/feature-shard-merge.md)
@@ -389,7 +389,7 @@
         -   セキュリティ
             -   [DM 接続の TLS を有効にする](/dm/dm-enable-tls.md)
             -   [自己署名証明書の生成](/dm/dm-generate-self-signed-certificates.md)
-        -   [指標のモニタリング](/dm/monitor-a-dm-cluster.md)
+        -   [指標の監視](/dm/monitor-a-dm-cluster.md)
         -   [アラート ルール](/dm/dm-alert-rules.md)
         -   [エラーコード](/dm/dm-error-handling.md#handle-common-errors)
         -   [FAQ](/dm/dm-faq.md)
@@ -521,6 +521,7 @@
             -   [`MODIFY COLUMN`](/sql-statements/sql-statement-modify-column.md)
             -   [`PREPARE`](/sql-statements/sql-statement-prepare.md)
             -   [`RECOVER TABLE`](/sql-statements/sql-statement-recover-table.md)
+            -   [`RENAME USER`](/sql-statements/sql-statement-rename-user.md)
             -   [`RENAME INDEX`](/sql-statements/sql-statement-rename-index.md)
             -   [`RENAME TABLE`](/sql-statements/sql-statement-rename-table.md)
             -   [`REPLACE`](/sql-statements/sql-statement-replace.md)
