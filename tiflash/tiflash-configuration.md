@@ -264,7 +264,7 @@ delta_index_cache_size = 0
     ## Specifies the master key if encryption is enabled. To learn how to configure a master key, see Configure encryption: https://docs.pingcap.com/tidb/dev/encryption-at-rest#configure-encryption .
 
 [security.encryption.previous-master-key]
-    ## Specifies the old master key when rotating the new master key. The configuration format is the same as that of `master-key`. To learn how to configure a master key, see [Encryption at Rest - Configure encryption](/encryption-at-rest.md#configure-encryption).
+    ## Specifies the old master key when rotating the new master key. The configuration format is the same as that of `master-key`. To learn how to configure a master key, see  Configure encryption: https://docs.pingcap.com/tidb/dev/encryption-at-rest#configure-encryption .
 ```
 
 In addition to the items above, other parameters are the same as those of TiKV. Note that the `label` whose key is `engine` is reserved and cannot be configured manually.
