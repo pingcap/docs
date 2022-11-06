@@ -821,7 +821,7 @@ Configuration items related to Raftstore.
 
 ### `apply-yield-write-size` <span class="version-mark">New in v6.4.0</span>
 
-+ The maximum number of bytes that apply thread can write for one FSM in one round of poll. This is a soft limit.
++ The maximum number of bytes that the Apply thread can write for one FSM (Finite-state Machine) in one round of poll. This is a soft limit.
 + Default value: `"32KiB"`
 + Minimum value: greater than `0`
 + Unit: KiB|MiB|GiB
