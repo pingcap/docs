@@ -97,7 +97,7 @@ SELECT * FROM information_schema.user_attributes;
 1 rows in set (0.00 sec)
 ```
 
-Modify the comment of `newuser` using `ALTER USER ... ATTRIBUTE`:
+Remove the comment of `newuser` using `ALTER USER ... ATTRIBUTE`:
 
 ```sql
 ALTER USER 'newuser' ATTRIBUTE '{"comment": null}';
@@ -116,10 +116,6 @@ SELECT * FROM information_schema.user_attributes;
 > **Note:**
 >
 > Do not use `ACCOUNT UNLOCK` to unlock a [role](/sql-statements/sql-statement-create-role.md). Otherwise, the unlocked role can be used to log in to TiDB without password.
-
-## MySQL compatibility
-
-* In MySQL this statement is used to change attributes such as to expire a password. This functionality is not yet supported by TiDB.
 
 ## See also
 
