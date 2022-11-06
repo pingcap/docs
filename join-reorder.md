@@ -50,7 +50,7 @@ In this case only three tables are joined, so TiDB gets the final join result.
 
 Taking the preceding three tables (t1, t2, and t3) as an example again, the dynamic programming algorithm can enumerate all possibilities. Therefore, comparing with the greedy algorithm, which must start with the `t1` table (the table with the least rows), the dynamic programming algorithm can enumerate a join order as follows:
 
-! [join-reorder-4](/media/join-reorder-4.png)
+![join-reorder-4](/media/join-reorder-4.png)
 
 When this choice is better than the greedy algorithm, the dynamic programming algorithm can choose a better join order.
 
