@@ -2501,9 +2501,11 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 ### `tidb_memory_usage_alarm_keep_record_num` <span class="version-mark">New in v6.4.0</span>
 
 <CustomContent platform="tidb-cloud">
+
 > **Note:**
 >
 > This TiDB variable is not applicable to TiDB Cloud.
+
 </CustomContent>
 
 - Scope: GLOBAL
