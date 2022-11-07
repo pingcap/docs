@@ -57,13 +57,7 @@ Info: {"sink-uri":"kafka://127.0.0.1:9092/kafka-topic-name?protocol=canal-json",
 
 If the command does not return any information, you should check network connectivity from the server where the command is executed to the target Kafka cluster.
 
-<<<<<<< HEAD
 In production environments, a Kafka cluster has multiple broker nodes. Therefore, you can add the addresses of multiple brokers to the sink UIR. This improves stable access to the Kafka cluster. When a Kafka cluster is faulty, the changefeed still works. Suppose that a Kafka cluster has three broker nodes, with IP addresses being 127.0.0.1:9092, 127.0.0.2:9092, and 127.0.0.3:9092, respectively. You can create a changefeed with the following sink URI.
-=======
-    ```shell
-    tiup ctl:<cluster-version> cdc changefeed create --pd="http://127.0.0.1:2379" --sink-uri="kafka://127.0.0.1:9092/kafka-topic-name?protocol=canal-json" --changefeed-id="kafka-changefeed" --config="changefeed.conf"
-    ```
->>>>>>> 58015a654 (add version to tiup ctl (2) (#11186))
 
 {{< copyable "shell-regular" >}}
 
@@ -75,27 +69,13 @@ After executing the preceding command, run the following command to check the st
 
 {{< copyable "shell-regular" >}}
 
-<<<<<<< HEAD
 ```shell
-tiup ctl cdc changefeed list --pd="http://127.0.0.1:2379"
+tiup ctl:<cluster-version> cdc changefeed list --pd="http://127.0.0.1:2379"
 ```
-=======
-    ```shell
-    tiup ctl:<cluster-version> cdc changefeed create --pd="http://127.0.0.1:2379" --sink-uri="kafka://127.0.0.1:9092,127.0.0.2:9092,127.0.0.3:9092/kafka-topic-name?protocol=canal-json&partition-num=3&replication-factor=1&max-message-bytes=1048576" --config="changefeed.conf"
-    ```
->>>>>>> 58015a654 (add version to tiup ctl (2) (#11186))
 
 You can manage the status of a changefeed as instructed in [Manage replication tasks (`changefeed`)](/ticdc/manage-ticdc.md#manage-replication-tasks-changefeed).
 
-<<<<<<< HEAD
 ## Step 3. Generate data changes in the TiDB cluster
-=======
-    ```shell
-    tiup ctl:<cluster-version> cdc changefeed list --pd="http://127.0.0.1:2379"
-    ```
-
-    You can refer to [Manage TiCDC Cluster and Replication Tasks](/ticdc/manage-ticdc.md) to manage the changefeed.
->>>>>>> 58015a654 (add version to tiup ctl (2) (#11186))
 
 After a changefeed is created, once there is any event change in the TiDB cluster, such as an `INSERT`, `UPDATE`, or `DELETE` operation, data change is generated in TiCDC. Then TiCDC replicates the data change to the sink specified in the changefeed. In this document, the sink is Kafka and the data change is written to the specified Kafka topic.
 
