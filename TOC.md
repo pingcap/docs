@@ -51,7 +51,7 @@
   - [Replicate Incremental Data between TiDB Clusters in Real Time](/incremental-replication-between-clusters.md)
 - Maintain
   - Upgrade
-    - [Use TiUP (Recommended)](/upgrade-tidb-using-tiup.md)
+    - [Use TiUP](/upgrade-tidb-using-tiup.md)
     - [Use TiDB Operator](https://docs.pingcap.com/tidb-in-kubernetes/stable/upgrade-a-tidb-cluster)
   - Scale
     - [Use TiUP (Recommended)](/scale-tidb-using-tiup.md)
