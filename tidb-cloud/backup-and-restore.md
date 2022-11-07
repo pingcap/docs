@@ -166,4 +166,4 @@ To restore a deleted cluster from recycle bin, take the following steps:
 
 > **Note:** 
 > 
-> You cannot restore a deleted cluster to any point in time. You can only select an automatic or manual backup  to restore.
+> You cannot restore a deleted cluster to any point in time. You can only select an automatic or manual backup to restore.
