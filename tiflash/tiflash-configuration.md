@@ -10,7 +10,7 @@ This document introduces the configuration parameters related to the deployment 
 
 ## PD scheduling parameters
 
-You can adjust the PD scheduling parameters using [pd-ctl](/pd-control.md). Note that you can use `tiup ctl pd` to replace `pd-ctl -u <pd_ip:pd_port>` when using tiup to deploy and manage your cluster.
+You can adjust the PD scheduling parameters using [pd-ctl](/pd-control.md). Note that you can use `tiup ctl:<cluster-version> pd` to replace `pd-ctl -u <pd_ip:pd_port>` when using tiup to deploy and manage your cluster.
 
 - [`replica-schedule-limit`](/pd-configuration-file.md#replica-schedule-limit): determines the rate at which the replica-related operator is generated. The parameter affects operations such as making nodes offline and add replicas.
 
@@ -251,6 +251,20 @@ delta_index_cache_size = 0
     ## If the configuration value is set to true,
     ## all user data in the log will be replaced by ?. The default value is false.
     redact-info-log = false
+
+[security.encryption]
+    ## The encryption method for data files.
+    ## Value options: "aes128-ctr", "aes192-ctr", "aes256-ctr", "sm4-ctr" (supported since v6.4.0), and "plaintext".
+    ## Default value: `"plaintext"`, which means encryption is disabled by default. A value other than "plaintext" means that encryption is enabled, in which case the master key must be specified.
+    data-encryption-method = "aes128-ctr"
+    ## Specifies how often the data encryption key is rotated. Default value: `7d`.
+    data-key-rotation-period = "168h" # 7 days
+
+[security.encryption.master-key]
+    ## Specifies the master key if encryption is enabled. To learn how to configure a master key, see Configure encryption: https://docs.pingcap.com/tidb/dev/encryption-at-rest#configure-encryption .
+
+[security.encryption.previous-master-key]
+    ## Specifies the old master key when rotating the new master key. The configuration format is the same as that of `master-key`. To learn how to configure a master key, see  Configure encryption: https://docs.pingcap.com/tidb/dev/encryption-at-rest#configure-encryption .
 ```
 
 In addition to the items above, other parameters are the same as those of TiKV. Note that the `label` whose key is `engine` is reserved and cannot be configured manually.

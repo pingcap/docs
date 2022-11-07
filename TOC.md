@@ -97,7 +97,7 @@
     - [Cross-DC Topology](/geo-distributed-deployment-topology.md)
     - [Hybrid Topology](/hybrid-deployment-topology.md)
   - Install and Start
-    - [Use TiUP (Recommended)](/production-deployment-using-tiup.md)
+    - [Use TiUP](/production-deployment-using-tiup.md)
     - [Deploy in Kubernetes](/tidb-in-kubernetes.md)
   - [Verify Cluster Status](/post-installation-check.md)
   - Test Cluster Performance
@@ -129,7 +129,7 @@
     - [Integrate with Apache Kafka and Apache Flink](/replicate-data-to-kafka.md)
 - Maintain
   - Upgrade
-    - [Use TiUP (Recommended)](/upgrade-tidb-using-tiup.md)
+    - [Use TiUP](/upgrade-tidb-using-tiup.md)
     - [Use TiDB Operator](https://docs.pingcap.com/tidb-in-kubernetes/stable/upgrade-a-tidb-cluster)
     - [TiFlash v6.2.0 Upgrade Guide](/tiflash-620-upgrade-guide.md)
   - Scale
@@ -787,6 +787,8 @@
         - [`INSPECTION_RULES`](/information-schema/information-schema-inspection-rules.md)
         - [`INSPECTION_SUMMARY`](/information-schema/information-schema-inspection-summary.md)
         - [`KEY_COLUMN_USAGE`](/information-schema/information-schema-key-column-usage.md)
+        - [`MEMORY_USAGE`](/information-schema/information-schema-memory-usage.md)
+        - [`MEMORY_USAGE_OPS_HISTORY`](/information-schema/information-schema-memory-usage-ops-history.md)
         - [`METRICS_SUMMARY`](/information-schema/information-schema-metrics-summary.md)
         - [`METRICS_TABLES`](/information-schema/information-schema-metrics-tables.md)
         - [`PARTITIONS`](/information-schema/information-schema-partitions.md)
@@ -810,6 +812,7 @@
         - [`TIKV_REGION_PEERS`](/information-schema/information-schema-tikv-region-peers.md)
         - [`TIKV_REGION_STATUS`](/information-schema/information-schema-tikv-region-status.md)
         - [`TIKV_STORE_STATUS`](/information-schema/information-schema-tikv-store-status.md)
+        - [`USER_ATTRIBUTES`](/information-schema/information-schema-user-attributes.md)
         - [`USER_PRIVILEGES`](/information-schema/information-schema-user-privileges.md)
         - [`VARIABLES_INFO`](/information-schema/information-schema-variables-info.md)
         - [`VIEWS`](/information-schema/information-schema-views.md)
