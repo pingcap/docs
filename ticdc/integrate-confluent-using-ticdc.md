@@ -73,7 +73,11 @@ To integrate TiDB with Confluent Platform, you can use the TiCDC component with 
 
     {{< copyable "shell-regular" >}}
 
+    ```shell
     ./cdc cli changefeed create --pd="http://127.0.0.1:2379" --sink-uri="kafka://127.0.0.1:9092/testdb_test?protocol=avro" --opts "registry=http://127.0.0.1:8081"
+    ```
+
+    > **Note:**
     >
     > Make sure that PD, Kafka, and Schema Registry are running on their respective default ports.
 
