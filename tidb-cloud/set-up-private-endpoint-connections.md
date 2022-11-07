@@ -103,7 +103,7 @@ To use the AWS Management Console to create a VPC interface endpoint, perform th
 
     > **Tip:**
     >
-    > Select the AZs you have taken note from the TiDB Cloud console. TiDB Cloud only support creating VPC Interface Endpoints in these AZs. Make sure that your service spans across the AZs in which the endpoint service is created. For more details, see [Troubleshooting](#troubleshooting).
+    > Select the AZs you have taken note from the TiDB Cloud console. TiDB Cloud only supports creating VPC Interface Endpoints in these AZs. Make sure that your service spans across the AZs in which the endpoint service is created. For more details, see [Troubleshooting](#troubleshooting).
 
 8. Select your security group properly in the **Security groups** area.
    
