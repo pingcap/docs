@@ -67,19 +67,33 @@ You need the following previleges to export data from the upstream database:
 - REPLICATION CLIENT
 - PROCESS
 
-#### Deploy TiCDC
+### Deploy TiCDC
 
-  3. 部署增量同步工具 TiCDC
-参考文档 - TiCDC 安装部署
-    1. 首先需要确认当前 TiDB 版本是否支持 TiCDC，集群版本如低于 4.0.0 rc.1 ，请先升级 TiDB  集群至 4.0.0 rc.1 或更新版本 参考文档 - 升级 TiDB 版本
-    2. 【OP TiDB】使用 tiup 在原有 TiDB 集群上新增 TiCDC 组件 参考文档 - 扩容 TICDC 节点 
-      1. 编辑扩容文件 scale-out.yaml
-cdc_servers:
-  - host: 10.0.1.3
-    gc-ttl: 86400
-    data_dir: /data/deploy/install/data/cdc-8300
-  - host: 10.0.1.4
-    gc-ttl: 86400
-    data_dir: /data/deploy/install/data/cdc-8300
+You need to [deploy TiCDC](https://docs.pingcap.com/tidb/dev/deploy-ticdc) to replicate incremental data from the upstream TiDB cluster to TiDB Cloud.
 
-      2. 扩容 TiCDC 组件并检查状态
+- First you need to confirm whether the current TiDB version supports TiCDC. You can check the TiDB version by executing `select tidb_version();` in the TiDB cluster. If the TiDB version is earlier than v4.0.8.rc.1, you need to upgrade first. See [Upgrade TiDB Using TiUP](https://docs.pingcap.com/tidb/dev/upgrade-tidb-using-tiup).
+
+- Add the TiCDC component to the TiDB cluster. See [Scale a TiDB Cluster Using TiUP](https://docs.pingcap.com/tidb/dev/scale-tidb-using-tiup).
+
+  1. Edit the `scale-out.yaml` file to add TiCDC:
+
+      ```yaml
+      cdc_servers:
+      - host: 10.0.1.3
+        gc-ttl: 86400
+        data_dir: /data/deploy/install/data/cdc-8300
+      - host: 10.0.1.4
+        gc-ttl: 86400
+        data_dir: /data/deploy/install/data/cdc-8300
+      ```
+
+  2. Add the TiCDC component and check the status.
+
+        ```shell
+        tiup cluster scale-out <cluster-name> scale-out.yaml
+        tiup cluster display <cluster-name>
+        ```
+
+## Perform full data migration
+
+
