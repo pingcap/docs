@@ -31,7 +31,7 @@ hide_commit: true
 
 [ソフトウェアとハードウェアの要件](https://docs.pingcap.com/tidb/v5.4/hardware-and-software-requirements)
 
-[TiUP を使用して TiDBクラスタをデプロイする (推奨)](https://docs.pingcap.com/tidb/v5.4/production-deployment-using-tiup)
+[TiUP を使用して TiDBクラスタをデプロイする](https://docs.pingcap.com/tidb/v5.4/production-deployment-using-tiup)
 
 [Kubernetes に TiDBクラスタをデプロイする](https://docs.pingcap.com/tidb/v5.4/tidb-in-kubernetes)
 

@@ -269,8 +269,8 @@ TiDB ダッシュボードの`KV Errors`パネルには、2 つのモニタリ�
     PD 制御ツールを使用した時間間隔の確認:
 
     ```shell
-    tiup ctl pd tso [start_ts]
-    tiup ctl pd tso [commit_ts]
+    tiup ctl:<cluster-version> pd tso [start_ts]
+    tiup ctl:<cluster-version> pd tso [commit_ts]
     ```
 
 -   トランザクションコミットの効率が悪く、ロックが解除されている可能性があるため、書き込みパフォーマンスが遅いかどうかを確認することをお勧めします。
@@ -307,7 +307,7 @@ err="pessimistic lock retry limit reached"
 
 ### ロック待機タイムアウトを超えました {#lock-wait-timeout-exceeded}
 
-ペシミスティック トランザクション モードでは、トランザクションは互いのロックを待ちます。ロック待ちのタイムアウトは、TiDB の[innodb_lock_wait_timeout](/pessimistic-transaction.md#behaviors)パラメータで定義されます。これは SQL ステートメント レベルでの最大待機ロック時間であり、SQL ステートメント ロックの予想ですが、ロックは取得されていません。この時間が経過すると、TiDB はロックを再試行せず、対応するエラー メッセージをクライアントに返します。
+ペシミスティック トランザクション モードでは、トランザクションは互いのロックを待ちます。ロック待ちのタイムアウトは、TiDB の[innodb_lock_wait_timeout](/pessimistic-transaction.md#behaviors)パラメータで定義されます。これは、SQL ステートメント レベルでの最大待機ロック時間であり、SQL ステートメント ロックの予想ですが、ロックは取得されていません。この時間が経過すると、TiDB はロックを再試行せず、対応するエラー メッセージをクライアントに返します。
 
 待機ロック タイムアウトが発生すると、次のエラー メッセージがクライアントに返されます。
 
@@ -331,7 +331,7 @@ TTL manager has timed out, pessimistic locks may expire, please commit or rollba
 
 ソリューション:
 
--   まず、アプリケーションロジックが最適化できるか確認します。たとえば、大規模なトランザクションは TiDB のトランザクション サイズ制限をトリガーする場合があり、これは複数の小さなトランザクションに分割される可能性があります。
+-   まず、アプリケーションのロジックが最適化できるか確認します。たとえば、大きなトランザクションは TiDB のトランザクション サイズ制限をトリガーする可能性があり、これは複数の小さなトランザクションに分割される可能性があります。
 -   また、関連するパラメータを適切に調整して、アプリケーションのトランザクション ロジックに適合させることもできます。
 
 ### ロックを取得しようとしたときにデッドロックが見つかりました {#deadlock-found-when-trying-to-get-lock}

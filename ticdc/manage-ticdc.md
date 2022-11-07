@@ -70,7 +70,7 @@ tiup cluster edit-config <cluster-name>
 >
 > PD が listen する IP アドレスとポートは、 `pd-server`始動時に指定された`advertise-client-urls`パラメーターに対応します。複数の`pd-server`には複数の`advertise-client-urls`パラメータがあり、1 つまたは複数のパラメータを指定できます。たとえば、 `--pd=http://10.0.10.25:2379`または`--pd=http://10.0.10.25:2379,http://10.0.10.26:2379,http://10.0.10.27:2379`です。
 
-TiUP を使用して TiCDC をデプロイする場合は、次のコマンドの`cdc cli`を`tiup ctl cdc`に置き換えます。
+TiUP を使用して TiCDC をデプロイする場合は、次のコマンドの`cdc cli`を`tiup ctl:<cluster-version> cdc`に置き換えます。
 
 ### TiCDC サービスの進行状況を管理する ( <code>capture</code> ) {#manage-ticdc-service-progress-code-capture-code}
 
@@ -214,7 +214,7 @@ Info: {"sink-uri":"mysql://root:123456@127.0.0.1:3306/","opts":{},"create-time":
 | `topic-name`            | 変数。 Kafka トピックの名前                                                                                                                                                                 |
 | `kafka-version`         | ダウンストリーム Kafka のバージョン (オプション、デフォルトでは`2.4.0`現在、サポートされている最も古い Kafka バージョンは`0.11.0.2`で、最新のものは`2.7.0`です。この値は、ダウンストリーム Kafka の実際のバージョンと一致する必要があります)                                    |
 | `kafka-client-id`       | レプリケーション タスクの Kafka クライアント ID を指定します (オプション。既定では`TiCDC_sarama_producer_replication ID` )。                                                                                         |
-| `partition-num`         | ダウンストリーム Kafka パーティションの数 (オプション。値は実際のパーティション数を**超えてはなりません**。そうでない場合、レプリケーション タスクは正常に作成されません。デフォルトでは`3` )                                                                          |
+| `partition-num`         | ダウンストリーム Kafka パーティションの数 (オプション。値は、実際のパーティション数を**超えてはなりません**。そうでない場合、レプリケーション タスクは正常に作成されません。デフォルトでは`3` )                                                                         |
 | `max-message-bytes`     | 毎回 Kafka ブローカーに送信されるデータの最大サイズ (オプション、デフォルトでは`10MB` )。 v5.0.6 および v4.0.6 から、デフォルト値が 64MB および 256MB から 10MB に変更されました。                                                               |
 | `replication-factor`    | 保存できる Kafka メッセージ レプリカの数 (オプション、既定では`1` )                                                                                                                                         |
 | `protocol`              | メッセージが Kafka に出力されるプロトコル。値のオプションは`canal-json` 、 `open-protocol` 、 `canal` 、 `avro` 、および`maxwell`です。                                                                               |
@@ -236,7 +236,7 @@ Info: {"sink-uri":"mysql://root:123456@127.0.0.1:3306/","opts":{},"create-time":
 
 > **ノート：**
 >
-> `protocol`が`open-protocol`の場合、TiCDC は長さが`max-message-bytes`を超えるメッセージの生成を回避しようとします。ただし、1 つの変更だけで長さが`max-message-bytes`を超えるほど行が大きい場合、サイレント エラーを回避するために、TiCDC はこのメッセージを出力しようとし、ログに警告を出力します。
+> `protocol`が`open-protocol`の場合、TiCDC は長さが`max-message-bytes`を超えるメッセージの生成を回避しようとします。ただし、1 つの変更だけで長さが`max-message-bytes`を超える行が非常に大きい場合、TiCDC はサイレント エラーを回避するために、このメッセージを出力しようとし、ログに警告を出力します。
 
 #### TiCDC を Kafka Connect (コンフルエント プラットフォーム) と統合する {#integrate-ticdc-with-kafka-connect-confluent-platform}
 
@@ -680,7 +680,7 @@ v5.3.0 以降、TiCDC はアップストリームの TiDB クラスターから 
 -   アップストリームで大規模または長時間のトランザクションが発生する
 -   アップストリームの TiKV または TiCDC クラスターがリロードまたはアップグレードされている
 -   `add index`などの時間のかかる DDL ステートメントはアップストリームで実行されます。
--   PD は積極的なスケジューリング戦略で構成されているため、リージョンリーダーが頻繁に異動したり、リージョンの合併やリージョンの分割が頻繁に発生したりします。
+-   PD はアグレッシブなスケジューリング戦略で構成されているため、リージョンリーダーが頻繁に異動したり、リージョンの合併やリージョンの分割が頻繁に発生したりします。
 
 ### 前提条件 {#prerequisites}
 

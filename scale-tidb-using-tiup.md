@@ -336,9 +336,9 @@ TiDB クラスターの容量は、オンライン サービスを中断する�
 
 ### 1. 残りの TiFlash ノードの数に応じて、テーブルのレプリカの数を調整します。 {#1-adjust-the-number-of-replicas-of-the-tables-according-to-the-number-of-remaining-tiflash-nodes}
 
-ノードがダウンする前に、TiFlash クラスター内の残りのノードの数が、すべてのテーブルのレプリカの最大数よりも少なくないことを確認してください。それ以外の場合は、関連するテーブルの TiFlash レプリカの数を変更します。
+ノードがダウンする前に、TiFlash クラスター内の残りのノードの数が、すべてのテーブルのレプリカの最大数以上であることを確認してください。それ以外の場合は、関連するテーブルの TiFlash レプリカの数を変更します。
 
-1.  レプリカがクラスター内の残りの TiFlash ノードの数より多いすべてのテーブルに対して、TiDB クライアントで次のコマンドを実行します。
+1.  レプリカがクラスター内の残りの TiFlash ノードの数よりも多いすべてのテーブルに対して、TiDB クライアントで次のコマンドを実行します。
 
     {{< copyable "" >}}
 
@@ -378,7 +378,7 @@ TiDB クラスターの容量は、オンライン サービスを中断する�
 
     -   [pd-ctl](/pd-control.md)に store コマンドを入力します (バイナリ ファイルは tidb-ansible ディレクトリの`resources/bin`の下にあります)。
 
-    -   TiUP デプロイメントを使用する場合は、 `pd-ctl`を`tiup ctl pd`に置き換えます。
+    -   TiUP デプロイメントを使用する場合は、 `pd-ctl`を`tiup ctl:<cluster-version> pd`に置き換えます。
 
     {{< copyable "" >}}
 
@@ -394,7 +394,7 @@ TiDB クラスターの容量は、オンライン サービスを中断する�
 
     -   pd-ctl に`store delete <store_id>`を入力します ( `<store_id>`は、前の手順で見つかった TiFlash ノードのストア ID です。
 
-    -   TiUP デプロイメントを使用する場合は、 `pd-ctl`を`tiup ctl pd`に置き換えます。
+    -   TiUP デプロイメントを使用する場合は、 `pd-ctl`を`tiup ctl:<cluster-version> pd`に置き換えます。
 
         {{< copyable "" >}}
 

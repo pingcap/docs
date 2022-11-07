@@ -33,7 +33,7 @@
         -   [クロス DC トポロジ](/geo-distributed-deployment-topology.md)
         -   [ハイブリッド トポロジ](/hybrid-deployment-topology.md)
     -   インストールして開始
-        -   [TiUP を使用する (推奨)](/production-deployment-using-tiup.md)
+        -   [TiUPを利用する](/production-deployment-using-tiup.md)
         -   [Kubernetes にデプロイ](/tidb-in-kubernetes.md)
     -   [クラスタステータスの確認](/post-installation-check.md)
     -   クラスタパフォーマンスのテスト
@@ -58,7 +58,7 @@
         -   [SQL 式を使用した DML イベントのフィルタリング](/filter-dml-event.md)
 -   管理
     -   アップグレード
-        -   [TiUP を使用する (推奨)](/upgrade-tidb-using-tiup.md)
+        -   [TiUPを利用する](/upgrade-tidb-using-tiup.md)
         -   [TiDB Operatorを使用する](https://docs.pingcap.com/tidb-in-kubernetes/stable/upgrade-a-tidb-cluster)
     -   規模
         -   [TiUP を使用する (推奨)](/scale-tidb-using-tiup.md)
@@ -109,7 +109,7 @@
         -   [オペレーティング システムのチューニング](/tune-operating-system.md)
     -   ソフトウェアのチューニング
         -   Configuration / コンフィグレーション
-            -   [TiDB メモリの調整](/configure-memory-usage.md)
+            -   [TiDB メモリのチューニング](/configure-memory-usage.md)
             -   [TiKV スレッドの調整](/tune-tikv-thread-performance.md)
             -   [TiKV メモリの調整](/tune-tikv-memory-performance.md)
             -   [TiKV Follower Readの調整](/follower-read.md)
@@ -139,7 +139,7 @@
                 -   [パーティションのプルーニング](/partition-pruning.md)
                 -   [TopN とリミット プッシュ ダウン](/topn-limit-push-down.md)
                 -   [結合したテーブルの再配置](/join-reorder.md)
-            -   物理的最適化
+            -   物理的な最適化
                 -   [概要](/sql-physical-optimization.md)
                 -   [インデックスの選択](/choose-index.md)
                 -   [統計](/statistics.md)
@@ -319,7 +319,7 @@
             -   基本的な機能
                 -   [テーブル ルーティング](/dm/dm-key-features.md)
                 -   [ブロックリストと許可リスト](/dm/dm-key-features.md#block-and-allow-table-lists)
-                -   [Binlogイベント フィルター](/dm/dm-key-features.md#binlog-event-filter)
+                -   [Binlogイベント フィルタ](/dm/dm-key-features.md#binlog-event-filter)
             -   高度な機能
                 -   シャード テーブルからのデータのマージと移行
                     -   [概要](/dm/feature-shard-merge.md)
