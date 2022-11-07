@@ -31,7 +31,7 @@ hide_commit: true
 
 [Software and Hardware Requirements](https://docs.pingcap.com/tidb/v5.2/hardware-and-software-requirements)
 
-[Deploy a TiDB Cluster Using TiUP (Recommended)](https://docs.pingcap.com/tidb/v5.2/production-deployment-using-tiup)
+[Deploy a TiDB Cluster Using TiUP](https://docs.pingcap.com/tidb/v5.2/production-deployment-using-tiup)
 
 [Deploy a TiDB Cluster in Kubernetes](https://docs.pingcap.com/tidb/v5.2/tidb-in-kubernetes)
 
