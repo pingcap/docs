@@ -1489,7 +1489,7 @@ When using JDBC, you need to connect to your cluster and run the statement in th
 
 <div label="Using Mybatis (Recommended)" value="mybatis">
 
-If you are using the TiDB Cloud Serverless Tier clusters, modify the `dataSource.url`, `dataSource.username`, `dataSource.password` in `mybatis-config.xml`.
+If you are using a TiDB Cloud Serverless Tier cluster, modify the `dataSource.url`, `dataSource.username`, `dataSource.password` in `mybatis-config.xml`.
 
 {{< copyable "" >}}
 
@@ -1534,7 +1534,7 @@ If you are using the TiDB Cloud Serverless Tier clusters, modify the `dataSource
 </configuration>
 ```
 
-Suppose that the password you set is `123456`, and the connection parameters you get from TiDB Cloud Serverless Tier are the following:
+Suppose that the password you set is `123456`, and the connection parameters you get from the cluster details page are the following:
 
 - Endpoint: `xxx.tidbcloud.com`
 - Port: `4000`
@@ -1568,7 +1568,7 @@ In this case, you can modify the parameters in `dataSource` node as follows:
 
 <div label="Using Hibernate (Recommended)" value="hibernate">
 
-If you are using the TiDB Cloud Serverless Tier clusters, modify the `hibernate.connection.url`, `hibernate.connection.username`, `hibernate.connection.password` in `hibernate.cfg.xml`.
+If you are using a TiDB Cloud Serverless Tier cluster, modify the `hibernate.connection.url`, `hibernate.connection.username`, `hibernate.connection.password` in `hibernate.cfg.xml`.
 
 {{< copyable "" >}}
 
@@ -1598,7 +1598,7 @@ If you are using the TiDB Cloud Serverless Tier clusters, modify the `hibernate.
 </hibernate-configuration>
 ```
 
-Suppose that the password you set is `123456`, and the connection parameters you get from TiDB Cloud Serverless Tier are the following:
+Suppose that the password you set is `123456`, and the connection parameters you get from the cluster details page are the following:
 
 - Endpoint: `xxx.tidbcloud.com`
 - Port: `4000`
@@ -1638,7 +1638,7 @@ In this case, you can modify the parameters as follows:
 
 <div label="Using JDBC" value="jdbc">
 
-If you are using the TiDB Cloud Serverless Tier clusters, modify the parameters of the host, port, user, and password in `JDBCExample.java`:
+If you are using a TiDB Cloud Serverless Tier cluster, modify the parameters of the host, port, user, and password in `JDBCExample.java`:
 
 {{< copyable "" >}}
 
@@ -1650,7 +1650,7 @@ mysqlDataSource.setUser("root");
 mysqlDataSource.setPassword("");
 ```
 
-Suppose that the password you set is `123456`, and the connection parameters you get from TiDB Cloud Serverless Tier are the following:
+Suppose that the password you set is `123456`, and the connection parameters you get from the cluster details page are the following:
 
 - Endpoint: `xxx.tidbcloud.com`
 - Port: `4000`

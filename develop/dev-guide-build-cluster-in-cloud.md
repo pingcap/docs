@@ -149,22 +149,35 @@ mysql  Ver 15.1 Distrib 5.5.68-MariaDB, for Linux (x86_64) using readline 5.1
     mysql --connect-timeout 15 -u '<prefix>.root' -h <host> -P 4000 -D test --ssl-mode=VERIFY_IDENTITY --ssl-ca=/etc/ssl/cert.pem -p
     ```
 
+<CustomContent platform="tidb">
+
 > **Note:**
 >
-> - Use TLS connections here is [required](https://docs.pingcap.com/tidbcloud/secure-connections-to-serverless-tier-clusters).
-> - If you are having issues with connecting, you can read TiDB Cloud [Serverless Tier Clusters](https://docs.pingcap.com/tidbcloud/secure-connections-to-serverless-tier-clusters) for more information.
+> - The preceding example uses the TLS connection, which is [required](https://docs.pingcap.com/tidbcloud/secure-connections-to-serverless-tier-clusters) when connecting a Serverless Tier cluster.
+> - If you encounter problems when connecting to a Serverless Tier cluster, you can read [Secure Connections to Serverless Tier Clusters](https://docs.pingcap.com/tidbcloud/secure-connections-to-serverless-tier-clusters) for more information.
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+> **Note:**
+>
+> - The preceding example uses the TLS connection, which is [required](/tidb-cloud/secure-connections-to-serverless-tier-clusters.md) when connecting a Serverless Tier cluster.
+> - If you encounter problems when connecting to a Serverless Tier cluster, you can read [Secure Connections to Serverless Tier Clusters](/tidb-cloud/secure-connections-to-serverless-tier-clusters.md) for more information.
+
+</CustomContent>
 
 3. Fill in the password to sign in.
 
-## Step 3. Run a SQL
+## Step 3. Execute a SQL statement
 
-Let's try to run your first SQL on TiDB Cloud.
+Let's try to execute your first SQL statement on TiDB Cloud.
 
 ```sql
 SELECT 'Hello TiDB Cloud!';
 ```
 
-You will see output like this.
+Expected output:
 
 ```sql
 +-------------------+
@@ -174,4 +187,4 @@ You will see output like this.
 +-------------------+
 ```
 
-If you see output like this. **_CONGRATULATIONS_**! You have successfully run your own SQL on TiDB Cloud.
+If your actual output is similar to the expected output, congratulations, you have successfully execute a SQL statement on TiDB Cloud.

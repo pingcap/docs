@@ -188,7 +188,7 @@ If you want to learn more about the code of this application, refer to [Implemen
 
 ### Step 5.1 Change parameters
 
-If you are using the TiDB Cloud Serverless Tier clusters, change the `spring.datasource.url`, `spring.datasource.username`, `spring.datasource.password` parameters in the `application.yml` (located in `src/main/resources`).
+If you are using a TiDB Cloud Serverless Tier cluster, change the `spring.datasource.url`, `spring.datasource.username`, `spring.datasource.password` parameters in the `application.yml` (located in `src/main/resources`).
 
 {{< copyable "" >}}
 
@@ -206,7 +206,7 @@ spring:
       ddl-auto: create-drop
 ```
 
-Suppose that the password you set is `123456`, and the connection parameters you get from TiDB Cloud Serverless Tier are the following:
+Suppose that the password you set is `123456`, and the connection parameters you get from the cluster details page are the following:
 
 - Endpoint: `xxx.tidbcloud.com`
 - Port: `4000`

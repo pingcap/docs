@@ -793,7 +793,7 @@ When using go-sql-driver/mysql, you need to connect to your cluster and run the 
 
 <div label="Using GORM (Recommended)" value="gorm">
 
-If you are using the TiDB Cloud Serverless Tier clusters, modify the value of the `dsn` in `gorm.go`:
+If you are using a TiDB Cloud Serverless Tier cluster, modify the value of the `dsn` in `gorm.go`:
 
 {{< copyable "" >}}
 
@@ -807,7 +807,7 @@ Suppose that the password you set is `123456`, and the connection parameters you
 - Port: `4000`
 - User: `2aEp24QWEDLqRFs.root`
 
-In this case, you can modify the code block as follows:
+In this case, you can modify the `mysql.RegisterTLSConfig` and `dsn` as follows:
 
 {{< copyable "" >}}
 
@@ -824,19 +824,19 @@ dsn := "2aEp24QWEDLqRFs.root:123456@tcp(xxx.tidbcloud.com:4000)/test?charset=utf
 
 <div label="Using go-sql-driver/mysql" value="sqldriver">
 
-If you are using the TiDB Cloud Serverless Tier clusters, modify the value of the `dsn` in `sqldriver.go`:
+If you are using a TiDB Cloud Serverless Tier cluster, modify the value of the `dsn` in `sqldriver.go`:
 
 ```go
 dsn := "root:@tcp(127.0.0.1:4000)/test?charset=utf8mb4"
 ```
 
-Suppose that the password you set is `123456`, and the connection parameters you get from TiDB Cloud Serverless Tier are the following:
+Suppose that the password you set is `123456`, and the connection parameters you get from the cluster details page are the following:
 
 - Endpoint: `xxx.tidbcloud.com`
 - Port: `4000`
 - User: `2aEp24QWEDLqRFs.root`
 
-In this case, you can modify the code block as follows:
+In this case, you can modify the `mysql.RegisterTLSConfig` and `dsn` as follows:
 
 {{< copyable "" >}}
 
