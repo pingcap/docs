@@ -113,7 +113,7 @@ When the alarm of excessive memory usage is triggered, TiDB takes the following 
 
     - [`tidb_mem_oom_action`](/system-variables.md#tidb_mem_oom_action-new-in-v610)
     - [`tidb_mem_quota_query`](/system-variables.md#tidb_mem_quota_query)
-    - [`tidb_server_memory_limit`](/system-variables.md#tidb_server_memory_limit)
+    - [`tidb_server_memory_limit`](/system-variables.md#tidb_server_memory_limit-new-in-v640)
     - [`tidb_analyze_version`](/system-variables.md#tidb_analyze_version-new-in-v510)
     - [`tidb_enable_rate_limit_action`](#tidb_enable_rate_limit_action)
 
