@@ -131,7 +131,7 @@ Using Prepared Plan Cache incurs memory overhead. To view the total memory consu
 
 > **Note:**
 >
-> Because of the the memory reclaim mechanism of Golang and some uncounted memory structures, the memory displayed in Grafana is not equal to the actual heap memory usage. It is tested that there is a deviation of about 20% between the memory displayed in Grafana and the actual heap memory usage.
+> Because of the the memory reclaim mechanism of Golang and some uncounted memory structures, the memory displayed in Grafana is not equal to the actual heap memory usage. It is tested that there is a deviation of about ±20% between the memory displayed in Grafana and the actual heap memory usage.
 
 To view the total number of execution plans cached in each TiDB instance, you can use the [**Plan Cache Plan Num** panel](/grafana-tidb-dashboard.md) in Grafana.
 
