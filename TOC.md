@@ -97,7 +97,7 @@
     - [Cross-DC Topology](/geo-distributed-deployment-topology.md)
     - [Hybrid Topology](/hybrid-deployment-topology.md)
   - Install and Start
-    - [Use TiUP (Recommended)](/production-deployment-using-tiup.md)
+    - [Use TiUP](/production-deployment-using-tiup.md)
     - [Deploy in Kubernetes](/tidb-in-kubernetes.md)
   - [Verify Cluster Status](/post-installation-check.md)
   - Test Cluster Performance
