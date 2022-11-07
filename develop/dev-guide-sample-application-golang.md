@@ -801,7 +801,7 @@ If you are using a TiDB Cloud Serverless Tier cluster, modify the value of the `
 dsn := "root:@tcp(127.0.0.1:4000)/test?charset=utf8mb4"
 ```
 
-Suppose that the password you set is `123456`, and the connection parameters you get from TiDB Cloud Serverless Tier are the following:
+Suppose that the password you set is `123456`, and the connection parameters you get from the cluster details page are the following:
 
 - Endpoint: `xxx.tidbcloud.com`
 - Port: `4000`
