@@ -28,6 +28,7 @@ To integrate TiDB with Confluent Platform, you can use the TiCDC component with 
     {{< copyable "shell-regular" >}}
 
     ```shell
+<<<<<<< HEAD
     confluent local services connect connector list
     ```
 
@@ -51,6 +52,24 @@ To integrate TiDB with Confluent Platform, you can use the TiCDC component with 
         "auto.evolve": true
       }
     }
+=======
+    tiup ctl:<cluster-version> cdc changefeed create --pd="http://127.0.0.1:2379" --sink-uri="kafka://<broker_endpoint>/ticdc-meta?protocol=avro&replication-factor=3&enable-tls=true&auto-create-topic=true&sasl-mechanism=plain&sasl-user=<broker_api_key>&sasl-password=<broker_api_secret>" --schema-registry="https://<schema_registry_api_key>:<schema_registry_api_secret>@<schema_registry_endpoint>" --changefeed-id="confluent-changefeed" --config changefeed.conf
+    ```
+
+    You need to replace the values of the following fields with those created or recorded in [Step 2. Create an access key pair](#step-2-create-an-access-key-pair):
+
+    - `<broker_endpoint>`
+    - `<broker_api_key>`
+    - `<broker_api_secret>`
+    - `<schema_registry_api_key>`
+    - `<schema_registry_api_secret>`
+    - `<schema_registry_endpoint>`
+
+    Note that you should encode `<schema_registry_api_secret>` based on [HTML URL Encoding Reference](https://www.w3schools.com/tags/ref_urlencode.asp) before replacing its value. After you replace all the preceding fields, the configuration file is as follows:
+
+    ```shell
+    tiup ctl:<cluster-version> cdc changefeed create --pd="http://127.0.0.1:2379" --sink-uri="kafka://xxx-xxxxx.ap-east-1.aws.confluent.cloud:9092/ticdc-meta?protocol=avro&replication-factor=3&enable-tls=true&auto-create-topic=true&sasl-mechanism=plain&sasl-user=L5WWA4GK4NAT2EQV&sasl-password=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx" --schema-registry="https://7NBH2CAFM2LMGTH7:xxxxxxxxxxxxxxxxxx@yyy-yyyyy.us-east-2.aws.confluent.cloud" --changefeed-id="confluent-changefeed" --config changefeed.conf
+>>>>>>> 58015a654 (add version to tiup ctl (2) (#11186))
     ```
 
 2. Create an instance of the JDBC sink connector by running the following command (assuming Kafka is listening on `127.0.0.1:8083`):
@@ -58,7 +77,11 @@ To integrate TiDB with Confluent Platform, you can use the TiCDC component with 
     {{< copyable "shell-regular" >}}
 
     ```shell
+<<<<<<< HEAD
     curl -X POST -H "Content-Type: application/json" -d @jdbc-sink-connector.json http://127.0.0.1:8083/connectors
+=======
+    tiup ctl:<cluster-version> cdc changefeed list --pd="http://127.0.0.1:2379"
+>>>>>>> 58015a654 (add version to tiup ctl (2) (#11186))
     ```
 
 3. Deploy TiCDC in one of the following ways. If TiCDC is already deployed, you can skip this step.
