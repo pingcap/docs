@@ -32,7 +32,7 @@ For performance reasons, `AUTO_INCREMENT` numbers are allocated in a batch of va
 
 > **Note:**
 >
-> If you want the `AUTO_INCREMENT` numbers to be monotonic on all TiDB servers and your TiDB version is v6.4.0 or later, you can enable the [MySQL compatibility mode](#mysql-compatibility mode) which is an experimental feature introduced in v6.4.0.
+> If you want the `AUTO_INCREMENT` numbers to be monotonic on all TiDB servers and your TiDB version is v6.4.0 or later, you can enable the [MySQL compatibility mode](#mysql-compatibility-mode) which is an experimental feature introduced in v6.4.0.
 
 The following is a basic example of `AUTO_INCREMENT`:
 
@@ -351,7 +351,7 @@ The value (ID) implicitly assigned to auto-increment columns satisfies the follo
 
 `(ID - auto_increment_offset) % auto_increment_increment == 0`
 
-## MySQL compatibility  mode
+## MySQL compatibility mode
 
 TiDB v6.4.0 introduces a centralized auto-increment ID allocating service. In each request, an auto-increment ID is allocated from this service instead of caching data in TiDB instances.
 
