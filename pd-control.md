@@ -40,26 +40,42 @@ If you want to download the latest version of `pd-ctl`, directly download the Ti
 Single-command mode:
 
 ```bash
+<<<<<<< HEAD
 ./pd-ctl store -u http://127.0.0.1:2379
+=======
+tiup ctl:<cluster-version> pd store -u http://127.0.0.1:2379
+>>>>>>> ad25ccd69 (add version to tiup ctl to make the command work (#11180))
 ```
 
 Interactive mode:
 
 ```bash
+<<<<<<< HEAD
 ./pd-ctl -i -u http://127.0.0.1:2379
+=======
+tiup ctl:<cluster-version> pd -i -u http://127.0.0.1:2379
+>>>>>>> ad25ccd69 (add version to tiup ctl to make the command work (#11180))
 ```
 
 Use environment variables:
 
 ```bash
 export PD_ADDR=http://127.0.0.1:2379
+<<<<<<< HEAD
 ./pd-ctl
+=======
+tiup ctl:<cluster-version> pd
+>>>>>>> ad25ccd69 (add version to tiup ctl to make the command work (#11180))
 ```
 
 Use TLS to encrypt:
 
 ```bash
+<<<<<<< HEAD
 ./pd-ctl -u https://127.0.0.1:2379 --cacert="path/to/ca" --cert="path/to/cert" --key="path/to/key"
+=======
+tiup ctl:<cluster-version> pd -u https://127.0.0.1:2379 --cacert="path/to/ca" --cert="path/to/cert" --key="path/to/key"
+>>>>>>> ad25ccd69 (add version to tiup ctl to make the command work (#11180))
 ```
 
 ## Command line flags

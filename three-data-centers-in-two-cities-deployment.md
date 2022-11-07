@@ -181,7 +181,7 @@ In the deployment of three DCs in two cities, to optimize performance, you need 
     raftstore.raft-max-election-timeout-ticks: 1200
     ```
 
-- Configure scheduling. After the cluster is enabled, use the `tiup ctl pd` tool to modify the scheduling policy. Modify the number of TiKV Raft replicas. Configure this number as planned. In this example, the number of replicas is five.
+- Configure scheduling. After the cluster is enabled, use the `tiup ctl:<cluster-version> pd` tool to modify the scheduling policy. Modify the number of TiKV Raft replicas. Configure this number as planned. In this example, the number of replicas is five.
 
     ```yaml
     config set max-replicas 5
@@ -192,6 +192,13 @@ In the deployment of three DCs in two cities, to optimize performance, you need 
     ```yaml
     config set label-property reject-leader dc 3
     ```
+<<<<<<< HEAD
+=======
+
+   > **Note:**
+   >
+   > Since TiDB 5.2, the `label-property` configuration is not supported by default. To set the replica policy, use the [placement rules](/configure-placement-rules.md).
+>>>>>>> ad25ccd69 (add version to tiup ctl to make the command work (#11180))
 
 - Configure the priority of PD. To avoid the situation where the PD leader is in another city (IDC3), you can increase the priority of local PD (in Seattle) and decrease the priority of PD in another city (San Francisco). The larger the number, the higher the priority.
 
