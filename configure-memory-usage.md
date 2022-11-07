@@ -76,10 +76,10 @@ When the alarm of excessive memory usage is triggered, TiDB takes the following 
 
 - TiDB prints an alarm log containing the keyword `tidb-server has the risk of OOM` and the values of the following memory-related system variables.
 
-    - [`tidb_mem_oom_action`](#tidb_mem_oom_action-span-classversion-mark-v610-span)
-    - [`tidb_mem_quota_query`](#tidb_mem_quota_query)
-    - [`tidb_server_memory_limit`](#tidb_server_memory_limit)
-    - [`tidb_analyze_version`](#tidb_analyze_version-span-classversion-mark-v510-span)
+    - [`tidb_mem_oom_action`](/system-variables.md#tidb_mem_oom_action-new-in-v610)
+    - [`tidb_mem_quota_query`](/system-variables.md#tidb_mem_quota_query)
+    - [`tidb_server_memory_limit`](/system-variables.md#tidb_server_memory_limit)
+    - [`tidb_analyze_version`](/system-variables.md#tidb_analyze_version-new-in-v510)
     - [`tidb_enable_rate_limit_action`](#tidb_enable_rate_limit_action)
 
 To avoid accumulating too many status files for alarms, TiDB only retains the status files generated during the recent five alarms by default. You can adjust this number by configuring the system variable [`tidb_memory_usage_alarm_keep_record_num`](/system-variables.md#tidb_memory_usage_alarm_keep_record_num-new-in-v640).
