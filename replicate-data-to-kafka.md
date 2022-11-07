@@ -70,7 +70,7 @@ After executing the preceding command, run the following command to check the st
 {{< copyable "shell-regular" >}}
 
 ```shell
-tiup ctl cdc changefeed list --pd="http://127.0.0.1:2379"
+tiup ctl:<cluster-version> cdc changefeed list --pd="http://127.0.0.1:2379"
 ```
 
 You can manage the status of a changefeed as instructed in [Manage replication tasks (`changefeed`)](/ticdc/manage-ticdc.md#manage-replication-tasks-changefeed).
