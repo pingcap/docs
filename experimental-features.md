@@ -17,6 +17,7 @@ This document introduces the experimental features of TiDB in different versions
 + [FastScan](/develop/dev-guide-use-fastscan.md). (Introduced in v6.2.0)
 + [Extended statistics](/extended-statistics.md). (Introduced in v5.0.0)
 + [Randomly sample about 10000 rows of data to quickly build statistics](/system-variables.md#tidb_enable_fast_analyze) (Introduced in v3.0)
++ [Globally control the memory usage of a tidb-server instance](/configure-memory-usage.md#configure-the-memory-usage-threshold-of-a-tidb-server-instance). (Introduced in v6.4.0)
 
 ## Stability
 
@@ -37,6 +38,8 @@ Elastic scheduling feature. It enables the TiDB cluster to dynamically scale out
 + [Metadata Lock](/metadata-lock.md) (Introduced in v6.3.0)
 + [Range INTERVAL partitioning](/partitioned-table.md#range-interval-partitioning) (Introduced in v6.3.0)
 + [Add index acceleration](/system-variables.md#tidb_ddl_enable_fast_reorg-new-in-v630) (Introduced in v6.3.0)
++ [Restore a cluster to a specific point in time using the `FLASHBACK CLUSTER TO TIMESTAMP` syntax](/sql-statements/sql-statement-flashback-to-timestamp.md) (Introduced in v6.4.0)
++ [`AUTO_INCREMENT` MySQL compatibility mode](/auto-increment.md#mysql-compatibility-mode) (Introduced in v6.4.0)
 
 ## Storage
 
