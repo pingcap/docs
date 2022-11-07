@@ -28,9 +28,9 @@ By the automatic backup, you can back up the cluster data every day at the backu
 
 3. In the setting window, configure the automatic backup:
 
-    - Check whether the PITR(**Point-in-time Recovery**) feature is on. 
+    - Check whether the PITR (**Point-in-time Recovery**) feature is on. 
 
-        To use the PITR feature, make sure your TiDB cluster version is at least v6.3.0 and the TiKV node configuration is at least 8C/16G, and file a ticket to request to enable the PITR feature.
+        To use the PITR feature, make sure your TiDB cluster version is at least v6.3.0 and the TiKV node size is at least 8C/16G, and file a ticket to request to enable the PITR feature.
 
     - In **Backup Time**, schedule a start time for the daily cluster backup. 
 
@@ -40,7 +40,7 @@ By the automatic backup, you can back up the cluster data every day at the backu
 
     - In **Backup Storage Region**, select the regions where you want to store your backup data. 
 
-        TiDB Cloud stores your backup data in your local region by default. In addition, you can add another remote region, and TiDB Cloud will copy all new backup data to the remote region, which facilitates data safety and faster recovery. After adding a remote region as a backup data storage, you cannot turn it off.
+        TiDB Cloud stores your backup data in the current region of your cluster by default. In addition, you can add another remote region, and TiDB Cloud will copy all new backup data to the remote region, which facilitates data safety and faster recovery. After adding a remote region as a backup data storage, you cannot remove it.
 
 4. Click **Confirm**.
 
@@ -164,4 +164,6 @@ To restore a deleted cluster from recycle bin, take the following steps:
 
 6. In the **Security Settings** dialog box, set the root password and allowed IP addresses to connect to your cluster, and then click **Apply**.
 
-> **Note that:** Recycle Bin doesn't support PITR.
+> **Note:** 
+> 
+> You cannot restore a deleted cluster to any point in time. You can only select an automatic or manual backup  to restore.
