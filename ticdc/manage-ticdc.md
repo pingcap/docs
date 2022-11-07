@@ -68,7 +68,7 @@ This section introduces how to use `cdc cli` to manage a TiCDC cluster and data 
 >
 > The IP address and port that PD listens on correspond to the `advertise-client-urls` parameter specified during the `pd-server` startup. Multiple `pd-server`s have multiple `advertise-client-urls` parameters and you can specify one or multiple parameters. For example, `--pd=http://10.0.10.25:2379` or `--pd=http://10.0.10.25:2379,http://10.0.10.26:2379,http://10.0.10.27:2379`.
 
-If you deploy TiCDC using TiUP, replace `cdc cli` in the following commands with `tiup ctl cdc`.
+If you deploy TiCDC using TiUP, replace `cdc cli` in the following commands with `tiup ctl:<cluster-version> cdc`.
 
 ### Manage TiCDC service progress (`capture`)
 
