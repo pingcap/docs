@@ -8,6 +8,9 @@ Release date: October 24, 2022
 
 TiDB version: 6.1.2
 
+Links: [Quick start](https://docs.pingcap.com/tidb/v6.1/quick-start-with-tidb) | [Production deployment](https://docs.pingcap.com/tidb/v6.1/production-deployment-using-tiup) | [Installation packages](https://www.pingcap.com/download/)
+
+
 ## Improvements
 
 + TiDB
