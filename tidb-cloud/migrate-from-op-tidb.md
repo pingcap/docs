@@ -96,4 +96,140 @@ You need to [deploy TiCDC](https://docs.pingcap.com/tidb/dev/deploy-ticdc) to re
 
 ## Perform full data migration
 
+To migrate data from the on-premises TiDB cluster to TiDB Cloud, you need to perform a full data migration as follows:
+
+1. Migrate data from the on-premises TiDB cluster to Amazon S3.
+2. Migrate data from Amazon S3 to TiDB Cloud.
+
+### Migrate data from the on-premises TiDB cluster to Amazon S3
+
+You need to migrate data from the on-premises TiDB cluster to Amazon S3 using Dumpling.
+
+If your TiDB cluster is in a local IDC, or the network between the Dumpling server and Amazon S3 is not connected, you can export the files to the local storage first, and then upload them to S3 later.
+
+#### Step 1: Disable the GC mechanism of the upstream OP TiDB cluster temporarily
+
+To ensure that newly written data is not lost during incremental migration, you need to disable the upstream cluster's garbage collection (GC) mechanism before starting the backup to ensure that the system does not clean up historical data.
+
+```shell
+mysql > SET GLOBAL tidb_gc_enable = FALSE;
+## Verify whether the setting is successful. 0 means it is disabled.
+mysql > SELECT @@global.tidb_gc_enable;
++-------------------------+
+| @@global.tidb_gc_enable |
++-------------------------+
+|                       0 |
++-------------------------+
+1 row in set (0.01 sec)
+```
+
+#### Step 2: Configure access permissions to the Amazon S3 bucket for Dumpling
+
+Create an access key on the AWS console. See [Create an access key](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html#Using_CreateAccessKey) for details.
+
+#### Step 3: Export data from the upstream TiDB cluster to Amazon S3 using Dumpling
+
+1. Configure environment variables for Dumpling.
+
+    ```shell
+    export AWS_ACCESS_KEY_ID=${AccessKey}
+    export AWS_SECRET_ACCESS_KEY=${SecretKey}
+    ```
+
+2. Get the S3 bucket URI and Region information from the AWS console. See [Create a bucket](https://docs.aws.amazon.com/AmazonS3/latest/userguide/create-bucket-overview.html) for details.
+
+3. Run Dumpling to export data to the Amazon S3 bucket.
+
+    ```ymal
+    dumpling \
+    -u root \
+    -P 4000 \
+    -h 127.0.0.1 \
+    -r 20000 \
+    --filetype {sql|csv}  \
+    -F 256MiB  \
+    -o "${S3 URI}" \
+    --s3.region "${s3.region}"
+    ```
+
+    The `-t` option specifies the number of threads for the export. Increasing the number of threads improves the concurrency of Dumpling and the export speed, and also increases the database's memory consumption. Therefore, it is not recommended to set the number too large.
+
+    For mor information, see [Dumpling](https://docs.pingcap.com/tidb/dev/dumpling-overview).
+
+4. Check the export data. Usually the exported data includes the following:
+
+    - metadata: this file contains the start time of the export, and the location of the master binary log.
+    - {schema}-schema-create.sql: the SQL file for creating the schema
+    - {schema}.{table}-schema.sql: the SQL file for creating the table
+    - {schema}.{table}.{0001}.{sql|csv}: data files
+    - \*-schema-view.sql, \*-schema-trigger.sql, \*-schema-post.sql: other exported SQL files
+
+### Migrate data from Amazon S3 to TiDB Cloud
+
+After you export data from the on-premises TiDB cluster to Amazon S3, you need to migrate the data to TiDB Cloud.
+
+If your TiDB cluster is in a local IDC, or the network between the Dumpling server and Amazon S3 is not connected, you can export the files to the local storage first, and then upload them to S3 later.
+
+1. Get the Account ID and External ID of the cluster on the TiDB Cloud Console. For more information, see [Step 2. Configure Amazon S3 access](/tidb-cloud/tidb-cloud-auditing.md#step-2-configure-amazon-s3-access).
+
+2. Configure access permissions for Amazon s3. Usually you need the following read-only permissions:
+    - s3:GetObject
+    - s3:GetObjectVersion
+    - s3:ListBucket
+    - s3:GetBucketLocation
+    If the S3 bucket uses server-side encryption SSE-KMS, you also need to add KMS permissions:
+    - kms:Decrypt
+
+3. Configure the access policy. Go to the AWS Console > IAM > Access Management > Policies to check if the access policy for TiDB Cloud exists already. If it does not exist, create a policy following [Creating policies on the JSON tab](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_create-console.html). The following is an example template for the json policy.
+
+    ```json
+    ## Create a json policy template
+    ##<Your customized directory>: fill in the path to the folder in the S3 bucket where the data files to be imported are located
+    ##<Your S3 bucket ARN>: fill in the ARN of S3 bucket. You can click the Copy ARN button on the S3 Bucket Overview page to get it.
+    ##<Your AWS KMS ARN>: Fill ARN for the S3 bucket KMS key. You can get it from S3 bucket > Properties > Default encryption > AWS KMS Key ARN. For more informaiton, see https://docs.aws.amazon.com/AmazonS3/latest/userguide/viewing-bucket-key-settings.html
+
+    {
+        "Version": "2012-10-17",
+        "Statement": [
+            {
+                "Effect": "Allow",
+                "Action": [
+                    "s3:GetObject",
+                    "s3:GetObjectVersion"
+                ],
+                "Resource": "arn:aws:s3:::<Your customized directory>"
+            },
+            {
+                "Effect": "Allow",
+                "Action": [
+                    "s3:ListBucket",
+                    "s3:GetBucketLocation"
+                ],
+                "Resource": "<Your S3 bucket ARN>"
+            }
+            // If you have enabled SSE-KMS for the S3 bucket, add the following permissions.
+            {
+                "Effect": "Allow",
+                "Action": [
+                    "kms:Decrypt"
+                ],
+                "Resource": "<Your AWS KMS ARN>"
+            }
+            ,
+            {
+                "Effect": "Allow",
+                "Action": "kms:Decrypt",
+                "Resource": "<Your AWS KMS ARN>"
+            }
+        ]
+    }
+    ```
+
+4. Configure the role. See [Creating an IAM role (console)](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create_for-user.html). In the Account ID field, enter the TiDB Cloud Account ID and  TiDB Cloud External ID you have noted down in Step 1.
+
+5. Get the Role-ARN. Go to IAM > Access Management > Roles. Click the role you have created, and note down the ARN. You will use it when importing data into TiDB Cloud.
+
+6. Import data to TiDB Cloud. See [Step 3. Import data into TiDB Cloud](/tidb-cloud/migrate-from-amazon-s3-or-gcs.md#step-3-import-data-into-tidb-cloud).
+
+## Perform incremental data migration
 
