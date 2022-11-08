@@ -31,7 +31,6 @@ cd jaffle_shop
 All files in the `jaffle_shop` directory are structured as follows:
 
 ```shell
-tree
 .
 ├── LICENSE
 ├── README.md
