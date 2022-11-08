@@ -67,7 +67,7 @@ In this directory:
 
 To configure the project:
 
-1. Complete the global configuration. In the user directory, edit the default global profile, `~/.dbt/profiles.yml` to configure the connection with TiDB Cloud:
+1. Complete the global configuration. You can refer to [Description of profile fields](#description-of-profile-fields) and edit the default global profile, `~/.dbt/profiles.yml` to configure the connection with TiDB Cloud:
 
     ```shell
     sudo vi ~/.dbt/profiles.yml
