@@ -178,6 +178,23 @@ Now that you have successfully created and configured the project, it’s time t
     | raw_payments        |
     +---------------------+
     3 rows in set (0.00 sec)
+
+    mysql> select * from raw_customers limit 10;
+    +------+------------+-----------+
+    | id   | first_name | last_name |
+    +------+------------+-----------+
+    |    1 | Michael    | P.        |
+    |    2 | Shawn      | M.        |
+    |    3 | Kathleen   | P.        |
+    |    4 | Jimmy      | C.        |
+    |    5 | Katherine  | R.        |
+    |    6 | Sarah      | R.        |
+    |    7 | Martin     | M.        |
+    |    8 | Frank      | R.        |
+    |    9 | Jennifer   | F.        |
+    |   10 | Henry      | W.        |
+    +------+------------+-----------+
+    10 rows in set (0.10 sec)
     ```
 
 ## Step 5: Run the project
