@@ -8,7 +8,19 @@ aliases: ['/tidbcloud/beta/supported-tidb-versions','/tidbcloud/release-notes']
 
 This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-cloud/) in 2022.
 
+## November 8, 2022
+
+**General changes**
+
+* Improve the user feedback channel.
+
+    Now you can request a demo or credits in **Support** > **Give Feedback** in the TiDB Cloud console. This can be helpful if you want to learn more about TiDB Cloud.
+
+    After receiving your request, we will contact you to provide help as soon as possible.
+
 ## October 28, 2022
+
+**General changes**
 
 * Developer Tier is upgraded to [Serverless Tier](/tidb-cloud/select-cluster-tier.md#serverless-tier-beta). Serverless Tier, a fully-managed, auto-scaling deployment of TiDB, is now available. It is still in beta and free to use.
 
