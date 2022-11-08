@@ -652,6 +652,17 @@ MPP is a distributed computing framework provided by the TiFlash engine, which a
 - Default value: `OFF`
 - This variable is used to set whether the `AUTO_INCREMENT` property of a column is allowed to be removed by executing `ALTER TABLE MODIFY` or `ALTER TABLE CHANGE` statements. It is not allowed by default.
 
+### tidb_analyze_partition_concurrency
+
+> **Warning:**
+>
+> The feature controlled by this variable is not fully functional in the current TiDB version. Do not change the default value.
+
+- Scope: SESSION | GLOBAL
+- Persists to cluster: Yes
+- Default value: `1`
+- This variable specifies the concurrency of reading and writing statistics for a partitioned table when TiDB analyzes the partitioned table.
+
 ### tidb_analyze_version <span class="version-mark">New in v5.1.0</span>
 
 - Scope: SESSION | GLOBAL
@@ -2557,6 +2568,17 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 - Default value: `1`
 - This variable sets the concurrency of the `MergeJoin` operator when a query is executed.
 - It is **NOT recommended** to set this variable. Modifying the value of this variable might cause data correctness issues.
+
+### tidb_merge_partition_stats_concurrency
+
+> **Warning:**
+>
+> The feature controlled by this variable is not fully functional in the current TiDB version. Do not change the default value.
+
+- Scope: SESSION | GLOBAL
+- Persists to cluster: Yes
+- Default value: `1`
+- This variable specifies the concurrency of merging statistics for a partitioned table when TiDB analyzes the partitioned table.
 
 ### tidb_metric_query_range_duration <span class="version-mark">New in v4.0</span>
 
