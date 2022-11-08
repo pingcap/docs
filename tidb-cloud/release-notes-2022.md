@@ -10,6 +10,8 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
 ## November 8, 2022
 
+**General changes**
+
 * Support point-in-time recovery (PITR) for [Dedicated Tier](/select-cluster-tier.md#dedicated-tier) clusters (beta).
 
     PITR supports restoring data of any point in time to a new cluster. You can use it to:
@@ -36,6 +38,8 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
     After receiving your request, we will contact you to provide help as soon as possible.
 
 ## October 28, 2022
+
+**General changes**
 
 * Developer Tier is upgraded to [Serverless Tier](/tidb-cloud/select-cluster-tier.md#serverless-tier-beta). Serverless Tier, a fully-managed, auto-scaling deployment of TiDB, is now available. It is still in beta and free to use.
 
