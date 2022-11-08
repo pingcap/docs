@@ -349,6 +349,24 @@ Configuration items related to security.
 - Default value: "", which allows TLSv1.1 or higher.
 - Optional values: `"TLSv1.0"`, `"TLSv1.1"`, `"TLSv1.2"` and `"TLSv1.3"`
 
+### `auth-token-jwks` <span class="version-mark">New in v6.4.0</span>
+
+> **Warning:**
+>
+> The `tidb_auth_token` authentication method is used only for the internal operation of TiDB Cloud. **DO NOT** change the value of this configuration.
+
+- Set the local file path of the JSON Web Key Sets (JWKS) for the `tidb_auth_token` authentication method.
+- Default value: `""`
+
+### `auth-token-refresh-interval` <span class="version-mark">New in v6.4.0</span>
+
+> **Warning:**
+>
+> The `tidb_auth_token` authentication method is used only for the internal operation of TiDB Cloud. **DO NOT** change the value of this configuration.
+
+- Set the JWKS refresh interval for the `tidb_auth_token` authentication method.
+- Default value: `1h`
+
 ## Performance
 
 Configuration items related to performance.
@@ -367,15 +385,6 @@ Configuration items related to performance.
 
 + The memory usage limit of tidb-server instances.
 + Default value: `0` (in bytes), which means no memory limit.
-
-### `memory-usage-alarm-ratio` <span class="version-mark">New in v4.0.9</span>
-
-+ TiDB triggers an alarm when the memory usage of tidb-server instance exceeds a certain threshold. The valid value for this configuration item ranges from `0` to `1`. If it is configured as `0` or `1`, this alarm feature is disabled.
-+ Default value: `0.8`
-+ When the memory usage alarm is enabled, if [`server-memory-quota`](/tidb-configuration-file.md#server-memory-quota-new-in-v409) is not set, then the threshold of memory usage is ```the `memory-usage-alarm-ratio` value * the system memory size```; if `server-memory-quota` is set to a value greater than 0, then the threshold of memory usage is ```the `memory-usage-alarm-ratio` value * the `server-memory-quota` value```.
-+ When TiDB detects that the memory usage of the tidb-server instance exceeds the threshold, it considers that there might be a risk of OOM. Therefore, it records ten SQL statements with the highest memory usage, ten SQL statements with the longest running time, and the heap profile among all SQL statements currently being executed to the directory [`tmp-storage-path/record`](/tidb-configuration-file.md#tmp-storage-path) and outputs a log containing the keyword `tidb-server has the risk of OOM`.
-+ The value of this configuration item is the initial value of the system variable [`tidb_memory_usage_alarm_ratio`](/system-variables.md#tidb_memory_usage_alarm_ratio).
-+ Since v6.1.0, this threshold is determined by the TiDB configuration item [`instance.tidb_memory_usage_alarm_ratio`](/tidb-configuration-file.md#tidb_memory_usage_alarm_ratio) or the system variable [`tidb_memory_usage_alarm_ratio`](/system-variables.md#tidb_memory_usage_alarm_ratio). `memory-usage-alarm-ratio` still takes effect. But if `memory-usage-alarm-ratio` and `instance.tidb_memory_usage_alarm_ratio` are set at the same time, the latter takes effect.
 
 ### `max-txn-ttl`
 
@@ -768,21 +777,6 @@ Configuration items related to read isolation.
 - The default value `0` means no limit. When the value of this variable is larger than `0`, and the number of connections reaches the value, the TiDB server will reject new connections from clients.
 - The value of this configuration will initialize the value of system variable [`max_connections`](/system-variables.md#max_connections)
 - Before v6.2.0, this configuration is set by `max-server-connections`.
-
-### `tidb_memory_usage_alarm_ratio`
-
-- TiDB triggers an alarm when the memory usage of tidb-server instance exceeds a certain threshold. The valid value for this configuration item ranges from `0` to `1`. If it is configured as `0` or `1`, this alarm feature is disabled.
-- Default value: `0.8`
-- When the memory usage alarm is enabled, if [`server-memory-quota`](/tidb-configuration-file.md#server-memory-quota-new-in-v409) is not set, then the threshold of memory usage is ```the `memory-usage-alarm-ratio` value * the system memory size```; if `server-memory-quota` is set to a value greater than 0, then the threshold of memory usage is ```the `memory-usage-alarm-ratio` value * the `server-memory-quota` value```.
-- When TiDB detects that the memory usage of the tidb-server instance exceeds the threshold, it considers that there might be a risk of OOM. Therefore, it records the following information to the directory [`tmp-storage-path/record`](/tidb-configuration-file.md#tmp-storage-path):
-    - Top 10 SQL statements with the highest memory usage
-    - Top 10 SQL statements with the longest running time
-    - The heap profile among all SQL statements currently being executed
-    
-    It then outputs a log containing the keyword `tidb-server has the risk of OOM`.
-
-- The value of this configuration will initialize the value of system variable [`tidb_memory_usage_alarm_ratio`](/system-variables.md#tidb_memory_usage_alarm_ratio)
-- Before v6.1.0, this configuration is set by `memory-usage-alarm-ratio`.
 
 ### `tidb_enable_ddl`
 
