@@ -272,7 +272,7 @@ This section gives the alert rules for the PD component.
 
 * Solution:
 
-    * Check the status of the TiKV stores.
+    Check the state of the TiKV stores.
 
 #### `PD_cluster_low_space`
 
