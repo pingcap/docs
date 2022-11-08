@@ -264,7 +264,7 @@ This section gives the alert rules for the PD component.
 
 * Alert rule:
 
-    `(sum ( pd_cluster_status{type="store_unhealth_count"} ) by (instance) > 0) and (sum(etcd_server_is_leader) by (instance) > 0)`
+    `(sum(pd_cluster_status{type="store_unhealth_count"}) by (instance) > 0) and (sum(etcd_server_is_leader) by (instance) > 0)`
 
 * Description:
 
