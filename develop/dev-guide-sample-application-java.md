@@ -1556,7 +1556,7 @@ In this case, you can modify the parameters in `dataSource` node as follows:
             <dataSource type="POOLED">
                 <property name="driver" value="com.mysql.jdbc.Driver"/>
                 <property name="url" value="jdbc:mysql://xxx.tidbcloud.com:4000/test?sslMode=VERIFY_IDENTITY&amp;enabledTLSProtocols=TLSv1.2,TLSv1.3"/>
-                <property name="username" value="root"/>
+                <property name="username" value="2aEp24QWEDLqRFs.root"/>
                 <property name="password" value="123456"/>
             </dataSource>
         ...
