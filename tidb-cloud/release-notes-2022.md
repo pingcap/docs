@@ -31,7 +31,7 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
 * Improve the user feedback channel and the PoC application process.
 
-    Now you can request a demo or credits by submitting your requirements in **Support** > **Get Feedback** in the TiDB Cloud console. This can be helpful if you want to learn more about TiDB Cloud.
+    Now you can request a demo or credits by submitting your requirements in **Support** > **Give Feedback** in the TiDB Cloud console. This can be helpful if you want to learn more about TiDB Cloud.
 
     After receiving your request, we will contact you to provide help as soon as possible.
 
