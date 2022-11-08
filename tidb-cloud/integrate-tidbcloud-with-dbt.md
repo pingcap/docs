@@ -78,7 +78,7 @@ To configure the project:
           type: tidb                                                  # The specific adapter to use
           server: gateway01.ap-southeast-1.prod.aws.tidbcloud.com     # The TiDB Cloud clusters' endpoint to connect to
           port: 4000                                                  # The port to use
-          schema: analytics                                           # Specify the schema (database) to build models into
+          schema: analytics                                           # Specify the schema (database) to normalize data into
           username: xxxxxxxxxxx.root                                  # The username to use to connect to the TiDB Cloud clusters
           password: "your_password"                                   # The password to use for authenticating to the TiDB Cloud clusters
     ```
@@ -301,7 +301,7 @@ To generate visual documents:
 | type             | The specific adapter to use                                             | Required  | `tidb`                                            |
 | server           | The TiDB Cloud clusters' endpoint to connect to                         | Required  | `gateway01.ap-southeast-1.prod.aws.tidbcloud.com` |
 | port             | The port to use                                                         | Required  | `4000`                                            |
-| schema           | Specify the schema (database) to build models into                      | Required  | `analytics`                                       |
+| schema           | Specify the schema (database) to normalize data into                      | Required  | `analytics`                                       |
 | username         | The username to use to connect to the TiDB Cloud clusters               | Required  | `xxxxxxxxxxx.root`                                |
 | password         | The password to use for authenticating to the TiDB Cloud clusters       | Required  | `"your_password"`                                 |
 | retries          | The retry times for connection to TiDB Cloud clusters (1 by default)    | Optional  | `2`                                               |
