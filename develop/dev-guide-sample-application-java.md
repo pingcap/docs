@@ -1584,7 +1584,7 @@ If you are using a TiDB Cloud Serverless Tier cluster, modify the `hibernate.con
         <property name="hibernate.connection.driver_class">com.mysql.cj.jdbc.Driver</property>
         <property name="hibernate.dialect">org.hibernate.dialect.TiDBDialect</property>
         <property name="hibernate.connection.url">jdbc:mysql://localhost:4000/test</property>
-        <property name="hibernate.connection.username">2aEp24QWEDLqRFs.root</property>
+        <property name="hibernate.connection.username">root</property>
         <property name="hibernate.connection.password"></property>
         <property name="hibernate.connection.autocommit">false</property>
 
