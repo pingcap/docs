@@ -11,7 +11,7 @@ This document uses a project in the official dbt tutorial as an example to intro
 
 ## Step 1: Install dbt and dbt-tidb
 
-Installing dbt and dbt-tidb requires only one command because dbt is installed as a dependency when you install dbt-tidb.
+You can install dbt and dbt-tidb using only one command. In the following command, dbt is installed as a dependency when you install dbt-tidb.
 
 ```shell
 pip install dbt-tidb
@@ -21,14 +21,14 @@ You can also install dbt separately. See [How to install dbt](https://docs.getdb
 
 ## Step 2: Create a project jaffle_shop
 
-The [jaffle_shop](https://github.com/dbt-labs/jaffle_shop) project is provided by dbt-lab to demonstrate the dbt function. You can get the project directly from GitHub:
+To try out the dbt function, you can use [jaffle_shop](https://github.com/dbt-labs/jaffle_shop), a demo project provided by dbt-lab. You can clone the project directly from GitHub:
 
 ```shell
 git clone https://github.com/dbt-labs/jaffle_shop
 cd jaffle_shop
 ```
 
-All files in the jaffle_shop project directory are structured as follows.
+All files in the `jaffle_shop` directory are structured as follows:
 
 ```shell
 tree
@@ -58,11 +58,11 @@ tree
 
 In this directory:
 
-- **dbt_project.yml** is the dbt project configuration file, which holds the project name and database configuration file information.
+- `dbt_project.yml` is the dbt project configuration file, which holds the project name and database configuration file information.
 
-- The **models** directory contains the project’s SQL models and table schemas. Note that the data analyst in your company writes this section. For more information about models, see [SQL models](https://docs.getdbt.com/docs/build/sql-models).
+- The `models` directory contains the project’s SQL models and table schemas. Note that the data analyst in your company writes this section. For more information about models, see [SQL models](https://docs.getdbt.com/docs/build/sql-models).
 
-- The **seeds** directory stores the CSV files that are dumped from the database export tools. For example, TiDB Cloud can export the table data into CSV files through [Dumpling](https://docs.pingcap.com/tidbcloud/dumpling-overview#dumpling-overview). In the jaffle_shop project, these CSV files are used as raw data to be processed.
+- The `seeds` directory stores the CSV files that are dumped by the database export tools. For example,  you can export the TiDB Cloud data into CSV files through [Dumpling](https://docs.pingcap.com/tidbcloud/dumpling-overview#dumpling-overview). In the `jaffle_shop` project, these CSV files are used as raw data to be processed.
 
 ## Step 3: Configure the project
 
