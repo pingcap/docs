@@ -35,7 +35,7 @@ This document walks you through the quickest way to get started with TiDB Cloud.
 
 6. After your TiDB Cloud cluster is created, click **Security Settings**. In the **Security Settings** dialog box, set a root password to connect to your cluster, and then click **Apply**. If you do not set a root password, you cannot connect to the cluster.
 
-7. Then click **Connect**. A connection dialog box is displayed. Under **Connect with a SQL Client** in the dialog, click the tab of your preferred connection method, and then save the corresponding connection string. The following section uses MySQL client as an example.
+7. Click **Connect**. A connection dialog box is displayed. Under **Connect with a SQL Client** in the dialog, click the tab of your preferred connection method, and then save the corresponding connection string. The following section uses MySQL client as an example.
 
     <CustomContent platform="tidb">
 
