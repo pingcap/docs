@@ -31,8 +31,6 @@ This document walks you through the quickest way to get started with TiDB Cloud.
 
 4. On the **Create Cluster** page, **Serverless Tier** is selected by default. Update the default cluster name if necessary, and then select the region where you want to create your cluster.
 
-5. Click **Create**.
-
     Your TiDB Cloud cluster will be created in approximately 30 seconds.
 
 6. After your TiDB Cloud cluster is created, click **Security Settings**. In the **Security Settings** dialog box, set a root password to connect to your cluster, and then click **Apply**. If you do not set a root password, you cannot connect to the cluster.
