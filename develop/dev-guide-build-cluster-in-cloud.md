@@ -23,24 +23,21 @@ This document walks you through the quickest way to get started with TiDB Cloud.
 
 ## Step 1. Create a free cluster
 
-1. If you do not have a TiDB Cloud account, click [TiDB Cloud](https://tidbcloud.com/free-trial) to sign up for an account.
-2. [Sign in](https://tidbcloud.com/) with your TiDB Cloud account.
-3. To create a Serverless Tier cluster for free, you can either select the **Serverless Tier** plan on the [plan page](https://tidbcloud.com/console/plans) or click **Create Cluster** on the [**Clusters**](https://tidbcloud.com/console/clusters) page.
-4. On the **Create Cluster** page, set up your cluster name, cloud provider (for now, only AWS is available for Serverless Tier), and region (a nearby region is recommended). Then click **Create** to create your cluster.
+1. If you do not have a TiDB Cloud account, click [here](https://tidbcloud.com/free-trial) to sign up for an account.
 
-    The cluster creation process starts and the **Security Settings** dialog box is displayed.
+2. [Log in](https://tidbcloud.com/) to your TiDB Cloud account.
 
-5. In the **Security Settings** dialog box, set the root password and allowed IP addresses to connect to your cluster, and then click **Apply**.
+3. On the **Clusters** page, click **Create Cluster**.
 
-    Your TiDB Cloud cluster will be created in approximately 5 to 15 minutes.
+4. On the **Create Cluster** page, **Serverless Tier** is selected by default. Update the default cluster name if necessary, and then select the region where you want to create your cluster.
 
-6. After creating a cluster, click **Connect** in the upper-right corner. A connection dialog box is displayed.
+5. Click **Create**.
 
-    > **Tip:**
-    >
-    > Alternatively, you can also click the name of your newly created cluster to go to the cluster details page, and then click **Connect** in the upper-right corner.
+    Your TiDB Cloud cluster will be created in approximately 30 seconds.
 
-7. In the dialog box, locate **Step 2: Connect with a SQL client**, and then copy the string to connect with a SQL client for later use.
+6. After your TiDB Cloud cluster is created, click **Security Settings**. In the **Security Settings** dialog box, set a root password to connect to your cluster, and then click **Apply**. If you do not set a root password, you cannot connect to the cluster.
+
+7. Then click **Connect**. A connection dialog box is displayed. Under **Connect with a SQL Client** in the dialog, click the tab of your preferred connection method, and then save the corresponding connection string. The following section uses MySQL client as an example.
 
     <CustomContent platform="tidb">
 
@@ -153,7 +150,7 @@ mysql  Ver 15.1 Distrib 5.5.68-MariaDB, for Linux (x86_64) using readline 5.1
 
 > **Note:**
 >
-> - The preceding example uses the TLS connection, which is [required](https://docs.pingcap.com/tidbcloud/secure-connections-to-serverless-tier-clusters) when connecting a Serverless Tier cluster.
+> - When you connect to a Serverless Tier cluster, you must [use the TLS connection](https://docs.pingcap.com/tidbcloud/secure-connections-to-serverless-tier-clusters).
 > - If you encounter problems when connecting to a Serverless Tier cluster, you can read [Secure Connections to Serverless Tier Clusters](https://docs.pingcap.com/tidbcloud/secure-connections-to-serverless-tier-clusters) for more information.
 
 </CustomContent>
@@ -162,7 +159,7 @@ mysql  Ver 15.1 Distrib 5.5.68-MariaDB, for Linux (x86_64) using readline 5.1
 
 > **Note:**
 >
-> - The preceding example uses the TLS connection, which is [required](/tidb-cloud/secure-connections-to-serverless-tier-clusters.md) when connecting a Serverless Tier cluster.
+> - When you connect to a Serverless Tier cluster, you must [use the TLS connection](/tidb-cloud/secure-connections-to-serverless-tier-clusters.md).
 > - If you encounter problems when connecting to a Serverless Tier cluster, you can read [Secure Connections to Serverless Tier Clusters](/tidb-cloud/secure-connections-to-serverless-tier-clusters.md) for more information.
 
 </CustomContent>
