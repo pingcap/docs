@@ -10,17 +10,17 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
 ## November 8, 2022
 
-* Support point-in-time recovery (PITR).
+* Support point-in-time recovery (PITR) for [Dedicated Tier](/select-cluster-tier.md#dedicated-tier) clusters.
 
-    PITR supports restoring data of any point in time to a new cluster. It can be used to:
+    PITR supports restoring data of any point in time to a new cluster. You can use it to:
 
     * Reduce RPO in disaster recovery.
-    * Resolve cases of data write errors by restoring point in time that is before the error event.
+    * Resolve cases of data write errors by restoring point-in-time that is before the error event.
     * Audit the historical data of the business.
 
     To use the PITR feature, make sure that your TiDB cluster version is at least v6.3.0 and the TiKV node size is at least 8C/16G.
 
-    In addition, with PITR, TiDB Cloud supports setting the backup storage region for clusters located in Tokyo and Osaka regions, so that backup data can be stored in both Tokyo and Osaka, which facilitates data safety and faster recovery. When you restore data, you can choose either region for the new cluster.
+    In addition, with PITR, you can set the backup storage region for clusters located in Tokyo and Osaka regions, so that backup data can be stored in both Tokyo and Osaka, which facilitates data safety and faster recovery. When you restore data, you can choose either region for the new cluster.
 
     For more information, see [Back up and Restore TiDB Cluster Data](/tidb-cloud/backup-and-restore.md).
 
