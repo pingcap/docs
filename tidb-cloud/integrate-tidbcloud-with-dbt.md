@@ -71,16 +71,16 @@ To configure the project:
 
     ```shell
     sudo vi ~/.dbt/profiles.yml
-    jaffle_shop_tidb:                                                         # project name
-      target: dev                                                             # target
+    jaffle_shop_tidb:                                                 # Project name
+      target: dev                                                     # Target
       outputs:
         dev:
-          type: tidb                                                          # adapter type
-          server: gateway01.ap-southeast-1.prod.aws.tidbcloud.com             # endpoint
-          port: 4000
-          schema: analytics                                                   # database name
-          username: xxxxxxxxxxx.root
-          password: "your_password"
+          type: tidb                                                  # The specific adapter to use
+          server: gateway01.ap-southeast-1.prod.aws.tidbcloud.com     # The TiDB Cloud clusters' endpoint to connect to
+          port: 4000                                                  # The port to use
+          schema: analytics                                           # Specify the schema (database) to build models into
+          username: xxxxxxxxxxx.root                                  # The username to use to connect to the TiDB Cloud clusters
+          password: "your_password"                                   # The password to use for authenticating to the TiDB Cloud clusters
     ```
 
 2. Complete the project configuration. In the jaffle_shop project directory, edit the project configuration file `dbt_project.yml` and change the profile field to `jaffle_shop_tidb`. This configuration allows the project to query from the database as specified in the `~/.dbt/profiles.yml` file.
