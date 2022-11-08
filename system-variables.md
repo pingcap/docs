@@ -2770,7 +2770,7 @@ explain select * from t where age=5;
 - Persists to cluster: Yes
 - Default value: `ON`
 - This variable controls whether the TiDB optimizer pushes down some filter conditions to the prefix index to avoid unnecessary table lookup and to improve query performance.
-- When this variable value is set to `ON`, the filter conditions are pushed down to the prefix index. Suppose that the `col` column is the index prefix column in a table. The `col is null` or `col is not null` condition in the query is handled as a filter condition on the index instead of a filter condition for the table lookup, so that unnecessary table lookup is avoided.
+- When this variable value is set to `ON`, some filter conditions are pushed down to the prefix index. Suppose that the `col` column is the index prefix column in a table. The `col is null` or `col is not null` condition in the query is handled as a filter condition on the index instead of a filter condition for the table lookup, so that unnecessary table lookup is avoided.
 
 <details>
 <summary>Usage example of <code>tidb_opt_prefix_index_single_scan</code></summary>
