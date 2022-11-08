@@ -30,7 +30,7 @@ By the automatic backup, you can back up the cluster data every day at the backu
 
     - Check whether the PITR (**Point-in-time Recovery**) feature is on. 
 
-        To use the PITR feature, make sure that your TiDB cluster version is at least v6.3.0 and the TiKV node size is at least 8C/16G, and file a ticket to request the PITR feature.
+        To use the PITR feature, make sure that your TiDB cluster version is at least v6.3.0 and the TiKV node size is at least 8 vCPU and 16 GiB. Currently, PITR is in beta. To enable it, [file a ticket](/tidb-cloud/tidb-cloud-support.md) to request the PITR feature.
 
     - In **Backup Time**, schedule a start time for the daily cluster backup. 
 
