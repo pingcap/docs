@@ -164,13 +164,7 @@ mysql  Ver 15.1 Distrib 5.5.68-MariaDB, for Linux (x86_64) using readline 5.1
 
 3. Fill in the password to sign in.
 
-<<<<<<< HEAD
-    ```shell
-    mysql --connect-timeout 15 -u '9ATyn6DhCXoo6U1.root' -h xxx.tidbcloud.com -P 4000 -D test -p
-    ```
-=======
 ## Step 3. Execute a SQL statement
->>>>>>> da642444f (Adapt Serverless Tier in Developer Guide (#11125))
 
 Let's try to execute your first SQL statement on TiDB Cloud.
 
@@ -178,17 +172,7 @@ Let's try to execute your first SQL statement on TiDB Cloud.
 SELECT 'Hello TiDB Cloud!';
 ```
 
-<<<<<<< HEAD
-    ```java
-    mysqlDataSource.setServerName("xxx.tidbcloud.com");
-    mysqlDataSource.setPortNumber(4000);
-    mysqlDataSource.setDatabaseName("test");
-    mysqlDataSource.setUser("9ATyn6DhCXoo6U1.root");
-    mysqlDataSource.setPassword("123456");
-    ```
-=======
 Expected output:
->>>>>>> da642444f (Adapt Serverless Tier in Developer Guide (#11125))
 
 ```sql
 +-------------------+
