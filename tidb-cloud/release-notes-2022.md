@@ -10,7 +10,7 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
 ## November 8, 2022
 
-* Support point-in-time recovery (PITR) for [Dedicated Tier](/select-cluster-tier.md#dedicated-tier) clusters.
+* Support point-in-time recovery (PITR) for [Dedicated Tier](/select-cluster-tier.md#dedicated-tier) clusters (beta).
 
     PITR supports restoring data of any point in time to a new cluster. You can use it to:
 
