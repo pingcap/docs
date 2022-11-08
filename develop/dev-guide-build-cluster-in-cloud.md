@@ -27,11 +27,7 @@ This document walks you through the quickest way to get started with TiDB Cloud.
 
 2. [Log in](https://tidbcloud.com/) to your TiDB Cloud account.
 
-<<<<<<< HEAD
-6. In the **Security Settings** dialog box, set the root password and allowed IP addresses to connect to your cluster, and then click **Apply**.
-=======
 3. On the **Clusters** page, click **Create Cluster**.
->>>>>>> da642444f (Adapt Serverless Tier in Developer Guide (#11125))
 
 4. On the **Create Cluster** page, **Serverless Tier** is selected by default. Update the default cluster name if necessary, and then select the region where you want to create your cluster.
 
