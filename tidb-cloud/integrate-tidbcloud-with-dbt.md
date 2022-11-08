@@ -70,7 +70,7 @@ To configure the project:
 1. Complete the global configuration. In the user directory, edit the default global profile, `~/.dbt/profiles.yml` to configure the connection with TiDB Cloud:
 
     ```shell
-    vi ~/.dbt/profiles.yml
+    sudo vi ~/.dbt/profiles.yml
     jaffle_shop_tidb:                                                         # project name
       target: dev                                                             # target
       outputs:
