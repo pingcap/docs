@@ -30,17 +30,17 @@ By the automatic backup, you can back up the cluster data every day at the backu
 
     - Check whether the PITR (**Point-in-time Recovery**) feature is on. 
 
-        To use the PITR feature, make sure your TiDB cluster version is at least v6.3.0 and the TiKV node size is at least 8C/16G, and file a ticket to request to enable the PITR feature.
+        To use the PITR feature, make sure that your TiDB cluster version is at least v6.3.0 and the TiKV node size is at least 8C/16G, and file a ticket to request the PITR feature.
 
     - In **Backup Time**, schedule a start time for the daily cluster backup. 
 
-        It is recommended to schedule automatic backup at the low workload period. If you do not specify a preferred backup time, TiDB Cloud assigns a default backup time, which is 2:00 AM in the time zone of the region where the cluster is located.
+        It is recommended to schedule automatic backup at a low workload period. If you do not specify a preferred backup time, TiDB Cloud assigns a default backup time, which is 2:00 AM in the time zone of the region where the cluster is located.
 
     - In **Backup Retention**, configure the minimum backup data retention period.
 
     - In **Backup Storage Region**, select the regions where you want to store your backup data. 
 
-        TiDB Cloud stores your backup data in the current region of your cluster by default. In addition, you can add another remote region, and TiDB Cloud will copy all new backup data to the remote region, which facilitates data safety and faster recovery. After adding a remote region as a backup data storage, you cannot remove it.
+        TiDB Cloud stores your backup data in the current region of your cluster by default. In addition, you can add another remote region, and TiDB Cloud will copy all new backup data to the remote region, which facilitates data safety and faster recovery. After adding a remote region as a backup data storage, you cannot remove the region.
 
 4. Click **Confirm**.
 
@@ -52,13 +52,13 @@ By the automatic backup, you can back up the cluster data every day at the backu
 
 Currently, you cannot select an arbitrary remote region for backup data storage. The regions already supported are as follows:
 
-| Cloud provider | Custer region                      | Remote regions support   |
+| Cloud provider | Custer region                      | Remote region support   |
 |----------------|-----------------------------|--------------------------|
 | GCP            | Tokyo (asia-northeast1)     | Osaka (asia-northeast2)  |
 
 > **Note:**
 >
-> Based on the Backup Storage Region setting, you might be charged for multiple copies of backup storage. If you select multiple backup storage regions, you are also charged for backup data replication. The pricing varies by region. For more information, see [Data Backup Cost](https://en.pingcap.com/tidb-cloud-pricing-details/#data-backup-cost).
+> Based on the Backup Storage Region setting, you might be charged for multiple replicas of backup storage. If you select multiple backup storage regions, you are also charged for backup data replication. The pricing varies by region. For more information, see [Data Backup Cost](https://en.pingcap.com/tidb-cloud-pricing-details/#data-backup-cost).
 
 ### Manual backup
 
@@ -111,12 +111,12 @@ To restore your TiDB cluster data from a backup to a new cluster, take the follo
 
 2. Click **Restore**. The setting window displays.
 
-3. In **Restore Mode**, you can choose to restore the new cluster to any point in time or to a selected backup.
+3. In **Restore Mode**, you can choose to restore data of any point in time or a selected backup to a new cluster.
 
     <SimpleTab>
     <div label="Select Time Point">
 
-    To restore the new cluster to any point in time, take the following steps:
+    To restore data of any point in time to a new cluster, take the following steps:
 
     1. Click **Select Time Point**.
     2. Select **Date** and **Time** you want to restore to.
@@ -125,14 +125,14 @@ To restore your TiDB cluster data from a backup to a new cluster, take the follo
 
     <div label="Select Backup Name">
 
-    To restore the new cluster to a selected backup, take the following steps:
+    To restore a selected backup to the new cluster, take the following steps:
 
     1. Click **Select Backup Name**.
     2. Select a backup you want to restore to.
 
     </div>
 
-4. In **Restore to Region**, you can select the same region as the **Backup Storage Region** configured in the **Backup Settings**.
+4. In **Restore to Region**, select the same region as the **Backup Storage Region** configured in the **Backup Settings**.
 
 5. In the **Restore** window, you can also make the following changes if necessary:
 
