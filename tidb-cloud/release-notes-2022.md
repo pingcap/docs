@@ -29,7 +29,7 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
     * Click **Help** in the lower-right corner of TiDB Cloud console.
     * In the dialog, fill in "Apply for PITR" in the **Description** field and click **Send**.
 
-* Improve the user feedback channel and the PoC application process.
+* Improve the user feedback channel.
 
     Now you can request a demo or credits by submitting your requirements in **Support** > **Give Feedback** in the TiDB Cloud console. This can be helpful if you want to learn more about TiDB Cloud.
 
