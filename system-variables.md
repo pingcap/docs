@@ -1427,6 +1427,14 @@ MPP is a distributed computing framework provided by the TiFlash engine, which a
 - Default value: `OFF`
 - This variable controls whether to enable the General Plan Cache feature.
 
+### tidb_enable_gogc_tuner <span class="version-mark">New in v6.4.0</span>
+
+- Scope: GLOBAL
+- Persists to cluster: No, only applicable to the current TiDB instance that you are connecting to.
+- Type: Boolean
+- Default value: `ON`
+- This variable controls whether to enable GOGC Tuner.
+
 ### tidb_enable_historical_stats
 
 - Scope: GLOBAL
@@ -2116,6 +2124,14 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 - This variable controls whether to generate binary-encoded execution plans in slow logs and statement summaries.
 - When this variable is set to `ON`, you can view visual execution plans in TiDB Dashboard. Note that TiDB Dashboard only provides visual display for execution plans generated after this variable is enabled.
 - You can execute the `SELECT tidb_decode_binary_plan('xxx...')` statement to parse the specific plan from a binary plan.
+
+### tidb_gogc_tuner_threshold <span class="version-mark">New in v6.4.0</span>
+
+- Scope: GLOBAL
+- Persists to cluster:  No, only applicable to the current TiDB instance that you are connecting to.
+- Default value: `0.6`
+- Range: `[0, 0.9)`
+- This variable specifies the maximum memory usage for GOGC Tuner. When the memory usage of GOGC Tuner exceeds this threshold, GOGC Tuner stops working.
 
 ### tidb_guarantee_linearizability <span class="version-mark">New in v5.0</span>
 
