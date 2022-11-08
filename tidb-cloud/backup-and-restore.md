@@ -28,9 +28,15 @@ By the automatic backup, you can back up the cluster data every day at the backu
 
 3. In the setting window, configure the automatic backup:
 
-    - Check whether the PITR (**Point-in-time Recovery**) feature is on. 
+    - (Optional) Check whether the PITR (**Point-in-time Recovery**) feature is on. 
 
-        To use the PITR feature, make sure that your TiDB cluster version is at least v6.3.0 and the TiKV node size is at least 8 vCPU and 16 GiB. Currently, PITR is in beta. To enable it, [file a ticket](/tidb-cloud/tidb-cloud-support.md) to request the PITR feature.
+    PITR supports restoring data of any point in time to a new cluster. You can use it to:
+
+    - Reduce RPO in disaster recovery.
+    - Resolve cases of data write errors by restoring point-in-time that is before the error event.
+    - Audit the historical data of the business.
+
+        If you have one of the preceding needs and want to use the PITR feature, make sure that your TiDB cluster version is at least v6.3.0 and the TiKV node size is at least 8 vCPU and 16 GiB. Currently, PITR is in beta. To enable it, [file a ticket](/tidb-cloud/tidb-cloud-support.md) to request the PITR feature.
 
     - In **Backup Time**, schedule a start time for the daily cluster backup. 
 
@@ -116,7 +122,7 @@ To restore your TiDB cluster data from a backup to a new cluster, take the follo
     <SimpleTab>
     <div label="Select Time Point">
 
-    To restore data of any point in time to a new cluster, take the following steps:
+    To restore data of any point in time to a new cluster, make sure that **PITR** in **Backup Settings** is on and then take the following steps:
 
     1. Click **Select Time Point**.
     2. Select **Date** and **Time** you want to restore to.
