@@ -2142,7 +2142,7 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 - Persists to cluster:  No, only applicable to the current TiDB instance that you are connecting to.
 - Default value: `0.6`
 - Range: `[0, 0.9)`
-- This variable specifies the maximum memory usage for GOGC Tuner. When the memory usage of GOGC Tuner exceeds this threshold, GOGC Tuner stops working.
+- This variable specifies the maximum memory threshold for tuning GOGC. When the memory exceeds this threshold, GOGC Tuner stops working.
 
 ### tidb_guarantee_linearizability <span class="version-mark">New in v5.0</span>
 
