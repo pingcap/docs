@@ -32,7 +32,7 @@ This document walks you through the quickest way to get started with TiDB Cloud.
 
 5. In the **Security Settings** dialog box, set the root password and allowed IP addresses to connect to your cluster, and then click **Apply**.
 
-    Your TiDB Cloud cluster will be created in approximately 5 to 15 minutes.
+    Your TiDB Cloud cluster will be created in approximately 30 seconds.
 
 6. After creating a cluster, click **Connect** in the upper-right corner. A connection dialog box is displayed.
 
