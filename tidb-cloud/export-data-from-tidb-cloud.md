@@ -46,7 +46,7 @@ You can use the tool [Dumpling](/dumpling-overview.md) for data export.
     <div label="Serverless Tier">
 
     ```shell
-    tiup dumpling:v6.1.1 -h ${tidb-endpoint} -P ${port} -u ${user} -p ${password} --ca=${cert_path} -F 67108864MiB -t 4 -o ${export_dir} --filetype sql
+    tiup dumpling:v6.1.1 -h ${tidb-endpoint} -P 4000 -u ${user} -p ${password} --ca=${cert_path} -F 67108864MiB -t 4 -o ${export_dir} --filetype sql
     ```
 
     </div>
