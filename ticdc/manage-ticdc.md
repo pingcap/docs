@@ -91,11 +91,11 @@ The states in the above state transfer diagram are described as follows:
 
 The numbers in the above state transfer diagram are described as follows.
 
-- ① Execute the `changefeed pause` command
-- ② Execute the `changefeed resume` command to resume the replication task
+- ① Execute the `changefeed pause` command.
+- ② Execute the `changefeed resume` command to resume the replication task.
 - ③ Recoverable errors occur during the `changefeed` operation, and the operation is resumed automatically.
-- ④ Execute the `changefeed resume` command to resume the replication task
-- ⑤ Recoverable errors occur during the `changefeed` operation
+- ④ Execute the `changefeed resume` command to resume the replication task.
+- ⑤ Unrecoverable errors occur during the `changefeed` operation.
 - ⑥ `changefeed` has reached the preset `TargetTs`, and the replication is automatically stopped.
 - ⑦ `changefeed` suspended longer than the duration specified by `gc-ttl`, and cannot be resumed.
 - ⑧ `changefeed` experienced an unrecoverable error when trying to execute automatic recovery.
