@@ -110,7 +110,7 @@ MEDIUMBLOB
 
 ### `LONGBLOB` type
 
-The `LONGBLOB` type is similar to the [`BLOB` type](#blob-type). The difference is that the maximum column length of `LONGBLOB` is 4,294,967,295. But due to the [Limitation on a single column in TiDB](/tidb-limitations.md#limitation-on-a-single-column), the maximum storage size of a single column in TiDB is 6 MiB by default and can be raised to 120 MiB by changing the configuration.
+The `LONGBLOB` type is similar to the [`BLOB` type](#blob-type). The difference is that the maximum column length of `LONGBLOB` is 4,294,967,295. But due to the [Limitation on a single column in TiDB](/tidb-limitations.md#limitation-on-a-single-column), the maximum storage size of a single column in TiDB is 6 MiB by default and can be increased to 120 MiB by changing the configuration.
 
 ```sql
 LONGBLOB
