@@ -149,7 +149,7 @@ In 6.1.0, the key new features or improvements are as follows:
     * If the configuration items specified in the configuration file before the upgrade already exist, TiDB will automatically update the values of the configured items to those of the corresponding system variables during the upgrade process. In this way, after the upgrade, the system behavior is not affected by parameter optimization.
     * The automatic update mentioned above occurs only once during the upgrade. After the upgrade, the deprecated configuration items are no longer effective.
 
-  This feature allows you to modify parameters online, and validate and persist them, instead of restarting the system and interrupting services. This makes your daily maintenance easier.
+  This feature allows you to modify parameters dynamically, and validate and persist them, instead of restarting the system and interrupting services. This makes your daily maintenance easier.
 
   [User document](/dynamic-config.md)
 

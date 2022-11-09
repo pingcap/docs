@@ -211,7 +211,7 @@ This feature is enabled by default. To disable it, modify the TiKV configuration
 in-memory = false
 ```
 
-To dynamically disable this feature, modify the TiKV configuration online:
+To dynamically disable this feature, dynamically modify the TiKV configuration:
 
 {{< copyable "sql" >}}
 
