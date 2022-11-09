@@ -127,6 +127,8 @@ SHOW PROCESSLIST;
 
 To terminate a non-transactional DML statement, you can use `KILL TIDB`. Then TiDB will cancel all batches after the batch that is currently being executed. You can get the execution result from the log.
 
+For more information about `KILL TIDB`, see the reference [`KILL`](/sql-statements/sql-statement-kill.md).
+
 ### Query the batch-dividing statement
 
 During the execution of a non-transactional DML statement, a statement is internally used to divide the DML statement into multiple batches. To query this batch-dividing statement, you can add `DRY RUN QUERY` to this non-transactional DML statement. Then TiDB will not execute this query and the subsequent DML operations.
