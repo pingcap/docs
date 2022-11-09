@@ -19,7 +19,6 @@ Starting from v6.1.1, TiDB provides multi-level support for different quality st
     |  Operating systems   |   Supported CPU architectures   |
     |   :---   |   :---   |
     | Red Hat Enterprise Linux 8.4 or a later 8.x version  |  <ul><li>x86_64</li><li>ARM 64</li></ul>  |
-    | CentOS 8 Stream | <ul><li>x86_64</li><li>ARM 64</li></ul> |
     | <ul><li>Red Hat Enterprise Linux 7.3 or a later 7.x version</li><li>CentOS 7.3 or a later 7.x version</li></ul>  |  <ul><li>x86_64</li><li>ARM 64</li></ul>   |
     | Amazon Linux 2 | <ul><li>x86_64</li><li>ARM 64</li></ul> |
     | Kylin Euler V10 SP1/SP2   |   <ul><li>x86_64</li><li>ARM 64</li></ul>   |
@@ -36,6 +35,7 @@ Starting from v6.1.1, TiDB provides multi-level support for different quality st
     |   macOS Catalina or later   |  <ul><li>x86_64</li><li>ARM 64</li></ul>  |
     |  Oracle Enterprise Linux 7.3 or a later 7.x version  |  x86_64           |
     |   Ubuntu LTS 18.04 or later   |  x86_64           |
+    | CentOS 8 Stream | <ul><li>x86_64</li><li>ARM 64</li></ul> |
     |  Debian 9 (Stretch) or later |  x86_64           |
     |  Fedora 35 or later   |  x86_64           |
     |  openSUSE Leap later than v15.3 (not including Tumbleweed) |  x86_64           |
@@ -177,7 +177,7 @@ As an open source distributed NewSQL database, TiDB requires the following netwo
 | Drainer | 8249 | the Drainer communication port |
 | TiCDC | 8300 | the TiCDC communication port |
 | Monitoring | 9090 | the communication port for the Prometheus service|
-| Monitoring | 20120 | the communication port for the NgMonitoring service|
+| Monitoring | 12020 | the communication port for the NgMonitoring service|
 | Node_exporter | 9100 | the communication port to report the system information of every TiDB cluster node |
 | Blackbox_exporter | 9115 | the Blackbox_exporter communication port, used to monitor the ports in the TiDB cluster |
 | Grafana | 3000 | the port for the external Web monitoring service and client (Browser) access|

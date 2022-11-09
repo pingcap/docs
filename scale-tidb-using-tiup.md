@@ -275,7 +275,7 @@ This section exemplifies how to remove a TiKV node from the `10.0.1.5` host.
     ```
     Starting /root/.tiup/components/cluster/v1.10.0/cluster display <cluster-name>
     TiDB Cluster: <cluster-name>
-    TiDB Version: v6.1.1
+    TiDB Version: v6.1.2
     ID              Role         Host        Ports                            Status  Data Dir                Deploy Dir
     --              ----         ----        -----                            ------  --------                ----------
     10.0.1.3:8300   cdc          10.0.1.3    8300                             Up      data/cdc-8300           deploy/cdc-8300
@@ -378,7 +378,7 @@ In special cases (such as when a node needs to be forcibly taken down), or if th
 
     * Enter the store command in [pd-ctl](/pd-control.md) (the binary file is under `resources/bin` in the tidb-ansible directory).
 
-    * If you use TiUP deployment, replace `pd-ctl` with `tiup ctl pd`:
+    * If you use TiUP deployment, replace `pd-ctl` with `tiup ctl:<cluster-version> pd`:
 
     {{< copyable "shell-regular" >}}
 
@@ -394,7 +394,7 @@ In special cases (such as when a node needs to be forcibly taken down), or if th
 
     * Enter `store delete <store_id>` in pd-ctl (`<store_id>` is the store ID of the TiFlash node found in the previous step.
 
-    * If you use TiUP deployment, replace `pd-ctl` with `tiup ctl pd`:
+    * If you use TiUP deployment, replace `pd-ctl` with `tiup ctl:<cluster-version> pd`:
 
         {{< copyable "shell-regular" >}}
 
