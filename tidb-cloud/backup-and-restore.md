@@ -30,11 +30,11 @@ By the automatic backup, you can back up the cluster data every day at the backu
 
     - (Optional) Check whether the PITR (**Point-in-time Recovery**) feature is on. 
 
-    PITR supports restoring data of any point in time to a new cluster. You can use it to:
+        PITR supports restoring data of any point in time to a new cluster. You can use it to:
 
-    - Reduce RPO in disaster recovery.
-    - Resolve cases of data write errors by restoring point-in-time that is before the error event.
-    - Audit the historical data of the business.
+        - Reduce RPO in disaster recovery.
+        - Resolve cases of data write errors by restoring point-in-time that is before the error event.
+        - Audit the historical data of the business.
 
         If you have one of the preceding needs and want to use the PITR feature, make sure that your TiDB cluster version is at least v6.3.0 and the TiKV node size is at least 8 vCPU and 16 GiB. Currently, PITR is in beta. To enable it, [file a ticket](/tidb-cloud/tidb-cloud-support.md) to request the PITR feature.
 
