@@ -5,9 +5,9 @@ summary: Learn the use cases of dbt in TiDB Cloud.
 
 # Integrate TiDB Cloud with dbt
 
-[Data build tool (dbt)](https://www.getdbt.com/) is a popular open-source data transformation tool that helps analytics engineers transform data in their warehouses through SQL statements. Through the [dbt-tidb](https://github.com/pingcap/dbt-tidb) plug-in, analytics engineers working with TiDB Cloud can directly create forms and match data through SQL without having to think about the process of creating tables or views.
+[Data build tool (dbt)](https://www.getdbt.com/) is a popular open-source data transformation tool that helps analytics engineers transform data in their warehouses through SQL statements. Through the [dbt-tidb](https://github.com/pingcap/dbt-tidb) plugin, analytics engineers working with TiDB Cloud can directly create forms and match data through SQL without having to think about the process of creating tables or views.
 
-This document uses a project in the official dbt tutorial as an example to introduce how to use dbt with TiDB Cloud.
+This document introduces how to use dbt with TiDB Cloud, taking a dbt project as an example.
 
 ## Step 1: Install dbt and dbt-tidb
 
@@ -19,7 +19,7 @@ pip install dbt-tidb
 
 You can also install dbt separately. See [How to install dbt](https://docs.getdbt.com/docs/get-started/installation) in the dbt documentation.
 
-## Step 2: Create a project jaffle_shop
+## Step 2: Create a demo project
 
 To try out the dbt function, you can use [jaffle_shop](https://github.com/dbt-labs/jaffle_shop), a demo project provided by dbt-lab. You can clone the project directly from GitHub:
 
@@ -61,16 +61,21 @@ In this directory:
 
 - The `models` directory contains the project’s SQL models and table schemas. Note that the data analyst in your company writes this section. For more information about models, see [SQL models](https://docs.getdbt.com/docs/build/sql-models).
 
-- The `seeds` directory stores the CSV files that are dumped by the database export tools. For example,  you can export the TiDB Cloud data into CSV files through [Dumpling](https://docs.pingcap.com/tidbcloud/dumpling-overview#dumpling-overview). In the `jaffle_shop` project, these CSV files are used as raw data to be processed.
+- The `seeds` directory stores the CSV files that are dumped by the database export tools. For example, you can [export the TiDB Cloud data](https://docs.pingcap.com/tidbcloud/export-data-from-tidb-cloud) into CSV files through Dumpling. In the `jaffle_shop` project, these CSV files are used as raw data to be processed.
 
 ## Step 3: Configure the project
 
 To configure the project:
 
-1. Complete the global configuration. You can refer to [Description of profile fields](#description-of-profile-fields) and edit the default global profile, `~/.dbt/profiles.yml` to configure the connection with TiDB Cloud:
+1. Complete the global configuration. You can refer to [Description of profile fields](#description-of-profile-fields) and edit the default global profile, `~/.dbt/profiles.yml`, to configure the connection with TiDB Cloud:
 
     ```shell
     sudo vi ~/.dbt/profiles.yml
+    ```
+
+    In the editor, add the following configuration:
+
+   ```yaml
     jaffle_shop_tidb:                                                 # Project name
       target: dev                                                     # Target
       outputs:
@@ -83,11 +88,15 @@ To configure the project:
           password: "your_password"                                   # The password to use for authenticating to the TiDB Cloud clusters
     ```
 
-2. Complete the project configuration. In the jaffle_shop project directory, edit the project configuration file `dbt_project.yml` and change the profile field to `jaffle_shop_tidb`. This configuration allows the project to query from the database as specified in the `~/.dbt/profiles.yml` file.
+2. Complete the project configuration. In the jaffle_shop project directory, edit the project configuration file `dbt_project.yml` and change the `profile` field to `jaffle_shop_tidb`. This configuration allows the project to query from the database as specified in the `~/.dbt/profiles.yml` file.
 
     ```shell
     vi dbt_project.yml
+    ```
 
+    In the editor, update the configuration as follows:
+
+    ```yaml
     name: 'jaffle_shop'
 
     config-version: 2
@@ -122,9 +131,13 @@ To configure the project:
     dbt debug
     ```
 
-## Step 4: Load CSV files
+## Step 4: (optional) Load CSV files
 
-Now that you have successfully created and configured the project, it’s time to load the CSV data and materialize the CSV as a table in the target database. Note that this step is not generally required for a dbt project because the data for processing is already in the database.
+> **Note:**
+>
+> This step is optional. If the data for processing is already in the target database, you can skip this step.
+
+Now that you have successfully created and configured the project, it’s time to load the CSV data and materialize the CSV as a table in the target database. 
 
 1. Load the CSV data and materialize the CSV as a table in the target database.
 
@@ -151,7 +164,7 @@ Now that you have successfully created and configured the project, it’s time t
 
     As you can see in the results, the seed file was started and loaded into three tables: `analytics.raw_customers`, `analytics.raw_orders`, and `analytics.raw_payments`.
 
-2. Verify the results in TiDB Cloud. The `show databases` command lists the new analytics database that dbt created. The `show tables` command indicates that there are three tables in the analytics database, corresponding to the ones you have created.
+2. Verify the results in TiDB Cloud. The `show databases` command lists the new `analytics` database that dbt created. The `show tables` command indicates that there are three tables in the `analytics` database, corresponding to the ones you have created.
 
     ```sql
     mysql> show databases;
@@ -197,7 +210,7 @@ Now that you have successfully created and configured the project, it’s time t
     10 rows in set (0.10 sec)
     ```
 
-## Step 5: Run the project
+## Step 5: Transform data
 
 Now you are ready to run the configured projects and finish the data transformation.
 
@@ -235,7 +248,7 @@ Now you are ready to run the configured projects and finish the data transformat
 
     The result shows that two tables (`analytics.customers` and `analytics.orders`), and three views (`analytics.stg_customers`, `analytics.stg_orders`, and `analytics.stg_payments`) are created successfully.
 
-2. Go to TiDB Cloud to verify that the creation is successful.
+2. Go to TiDB Cloud to verify that the transformation is successful.
 
     ```sql
     mysql> use analytics;
@@ -308,7 +321,7 @@ To generate visual documents:
 
 ## Supported functions
 
-The cross-db macros are moved from dbt-utils into dbt-core, so you can use the following functions directly. For information about how to use them, see [dbt-util](https://github.com/dbt-labs/dbt-utils).
+You can use the following functions directly in dbt-tidb. For information about how to use them, see [dbt-util](https://github.com/dbt-labs/dbt-utils).
 
 The following functions are supported:
 
