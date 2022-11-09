@@ -38,7 +38,7 @@ The space occupied by a single character might differ for different character se
 
 ### `TEXT` type
 
-`TEXT` is a string of variable-length. The maxium column length is 65,535 bytes. The optional M is in characters and is used to select the best type of `TEXT` column. For example `TEXT(60)` will yield a `TINYTEXT` data type that can hold up to 255 bytes, which fits a 60 character UTF-8 string that has up to 4 bytes per character (4×60=240). Using the M argument is not recommended.
+`TEXT` is a string of variable-length. The maximum column length is 65,535 bytes. The optional M argument is in characters and is used to automatically select the fittest type of a `TEXT` column. For example `TEXT(60)` will yield a `TINYTEXT` data type that can hold up to 255 bytes, which fits a 60-character UTF-8 string that has up to 4 bytes per character (4×60=240). Using the M argument is not recommended.
 
 ```sql
 TEXT[(M)] [CHARACTER SET charset_name] [COLLATE collation_name]
