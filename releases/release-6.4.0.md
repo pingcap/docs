@@ -82,25 +82,25 @@ In v6.4.0-DMR, the key new features and improvements are as follows:
 
     [用户文档](/join-reorder.md)
 
-* 前缀索引支持对空值的过滤 [#21145](https://github.com/pingcap/tidb/issues/21145) @[xuyifangreeneyes](https://github.com/xuyifangreeneyes) **tw@TomShawn**
+* The prefix index supports filtering null values. [#21145](https://github.com/pingcap/tidb/issues/21145) @[xuyifangreeneyes](https://github.com/xuyifangreeneyes) **tw@TomShawn**
 
-    这是对前缀索引使用上的优化。当表中某列存在前缀索引，那么 SQL 中对该列的 `IS NULL` 或 `IS NOT NULL` 条件可以直接利用前缀进行过滤，避免了这种情况下的回表，提升了 SQL 的执行性能。
+    This feature is an optimization of the prefix index. When a column in a table has a prefix index, the `IS NULL` or `IS NOT NULL` condition of the column in the SQL statement can be directly filtered by the prefix, which avoids table lookup in this case and improves the performance of the SQL execution.
 
-    [用户文档](/system-variables.md#tidb-opt-prefix-index-single-scan-从-v640-版本开始引入)
+    [User document](/system-variables.md#tidb-opt-prefix-index-single-scan-new-in-v640)
 
 * 增强了 TiDB Chunk 复用机制 [#38606](https://github.com/pingcap/tidb/issues/38606) @[keeplearning20221](https://github.com/keeplearning20221) **tw@Oreoxmt**
 
     在之前的版本中， TiDB 只在 writechunk 函数中复用 chunk。 在 v6.4.0 版本中，将 chunk 复用机制扩展到执行函数中，通过复用 chunk 减少 TiDB 申请释放内存频率，进而提升部分场景下 SQL 执行效率。目前 Chunk 复用由变量 [`tidb_enable_reuse_chunk`]控制。
 
-* 引入新的优化器提示 `NO_DECORRELATE` 来控制解关联优化 [#37789](https://github.com/pingcap/tidb/issues/37789) @[time-and-fate](https://github.com/time-and-fate) **tw@TomShawn**
+* Introduce a new optimizer hint `NO_DECORRELATE` to control whether to perform decorrelation for correlated subqueries [#37789](https://github.com/pingcap/tidb/issues/37789) @[time-and-fate](https://github.com/time-and-fate) **tw@TomShawn**
 
-    默认情况下，TiDB 总是会尝试对关联子查询重写，解除关联，这通常会达到更高的执行效率。但是在一部分场景下，解除关联反而会降低执行效率。TiDB 在新版本中引入了 hint `NO_DECORRELATE`，用来提示优化器不要对指定的查询块解关联，以提升部分场景下的查询性能。
+    By default, TiDB always tries to rewrite correlated subqueries to perform decorrelation, which usually improves execution efficiency. However, in some scenarios, decorrelation reduces the execution efficiency. In v6.4.0, TiDB introduces the optimizer hint `NO_DECORRELATE` to tell the optimizer not to perform decorrelation for specified query blocks to improve query performance in some scenarios.
 
-    [用户文档](/optimizer-hints.md#no_decorrelate)
+    [User document](/optimizer-hints.md#no_decorrelate)
 
-* 提升了分区表统计信息收集的性能 [#37977](https://github.com/pingcap/tidb/issues/37977) @[Yisaer](https://github.com/Yisaer) **tw@TomShawn**
+* Improve the performance of statistics collection on partitioned tables [#37977](https://github.com/pingcap/tidb/issues/37977) @[Yisaer](https://github.com/Yisaer) **tw@TomShawn**
 
-    在新版本中，TiDB 优化了分区表统计信息的收集策略。 用户可以通过变量 [`tidb_auto_analyze_partition_batch_size`](/system-variables.md#tidb-auto-analyze-partitoin-batch-size) 定义并发度，用并行的方式同时收集多个分区的统计信息，从而加快统计信息收集的速度，减少 analyze 所需的时间。
+    In v6.4.0, TiDB optimizes the strategy of collecting statistics on partitioned tables. You can use the system variable [`tidb_auto_analyze_partition_batch_size`](/system-variables.md#tidb-auto-analyze-partitoin-batch-size-new-in-v640) to set the concurrency of collecting statistics on partitioned tables in parallel to speed up the collection and shorten the analysis time.
 
 ### Transactions
 
@@ -116,21 +116,21 @@ In v6.4.0-DMR, the key new features and improvements are as follows:
 
     数据库的可用性是企业用户最为关注的指标之一，但是在复杂的硬件环境下，如何快速检测故障，快速恢复一直是数据库面临的挑战之一。TiDB 在 6.4 版本，全面优化了 TiKV 节点的状态检测机制，即使在磁盘故障，I/O 无响应等极端情况，依然可以快速上报节点状态，同时搭配主动唤醒机制，提前发起选主，加速集群自愈。通过这次优化，TiDB 在磁盘故障场景下，集群恢复时间可以缩短 50% 左右。
 
-* TiDB 全局内存限制 [#37816](https://github.com/pingcap/tidb/issues/37816) @[wshwsh12](https://github.com/wshwsh12) **tw@TomShawn**
+* Global control on TiDB memory usage [#37816](https://github.com/pingcap/tidb/issues/37816) @[wshwsh12](https://github.com/wshwsh12) **tw@TomShawn**
 
-    在 v6.4.0 中，我们引入了一个实验特性，对 TiDB 实例的全局内存使用进行追踪。 用户可以通过系统变量 [`tidb_server_memory_limit`](/system-variables.md#tidbservermemorylimit-span-classversion-mark从-v640-版本开始引入span) 设置全局内存的使用上限。 当内存使用量逼近预设的上限时， TiDB 会尝试对内存进行回收，释放更多的可用内存； 当内存使用量超出预设的上限时， TiDB 会识别出当前内存使用量最大的 SQL 操作，并取消这个操作，避免因为内存使用过度而产生的系统性问题。
+    In v6.4.0, TiDB introduces global control of memory usage as an experimental feature that tracks the global memory usage of TiDB instances. You can use the system variable [`tidb_server_memory_limit`](/system-variables.md#tidb_server_memory_limit-new-in-v640) to set the upper limit for the global memory usage. When the memory usage reaches the threshold, TiDB tries to reclaim and release more free memory. When the memory usage exceeds the threshold, TiDB identifies and cancels the SQL operation that has the highest memory usage to avoid system issues caused by excessive memory usage.
 
-    当 TiDB 实例的内存消耗存在潜在风险时，TiDB 会预先收集诊断信息并写入指定目录，方便对问题的诊断。 同时，TiDB 提供了视图 [`information_schame.MEMORY_USAGE`](/information-schema/information-schema-memory-usage.md) 和 [`information_schame.MEMORY_USAGE_OPS_HISTORY`](/information-schema/information-schema-memory-usage-ops-history.md) 用来展示内存使用情况及历史操作， 可以帮助客户清晰了解内存使用状况。
+    When the memory consumption of TiDB instances has potential risks, TiDB will collect diagnostic information in advance and write it to the specified directory to facilitate the issue diagnosis. At the same time, TiDB provides system table views [`information_schame.MEMORY_USAGE`](/information-schema/information-schema-memory-usage.md) and [`information_schame.MEMORY_USAGE_OPS_HISTORY`](/information-schema/information-schema-memory-usage-ops-history.md) that show the memory usage and operation history to help you better understand the memory usage.
 
-    全局内存限制是 TiDB 内存管理的重要一步， 实例采用全局视角，引入系统性方法对内存的使用进行管理， 这将会极大提升数据库的稳定性，提高服务的可用性，支持 TiDB 在更多重要场景平稳运行。
+    Global memory control is a milestone in TiDB memory management. It introduces a global view for instances and adopts systematic management for memory, which can greatly enhance database stability and service availability in more key scenarios.
 
-    [用户文档](/configure-memory-usage.md)
+    [User document](/configure-memory-usage.md)
 
-* 控制优化器在构造范围时的内存占用 [#37176](https://github.com/pingcap/tidb/issues/37176) @[xuyifangreeneyes](https://github.com/xuyifangreeneyes) **tw@TomShawn**
+* Control the memory usage of optimizer building ranges [#37176](https://github.com/pingcap/tidb/issues/37176) @[xuyifangreeneyes](https://github.com/xuyifangreeneyes) **tw@TomShawn**
 
-    v6.4.0 引入了系统变量 [`tidb_opt_range_max_size`](/system-variables.md#tidb-opt-range-max-size-从-v640-版本开始引入) 用来限制优化器在构造范围时消耗的内存上限。 当内存使用超出这个限制，则放弃构造精确的范围，转而构建更粗粒度的范围，以此降低内存消耗。 当 SQL 中的 `IN` 条件特别多时， 这个优化可以显著降低编译时的内存使用量，保证系统的稳定性。
+    In v6.4.0, the system variable [`tidb_opt_range_max_size`](/system-variables.md#tidb-opt-range-max-size-new-in-v640) is introduced to limit the maximum memory usage of the optimizer building ranges. When the memory usage exceeds the limit, the optimizer will build more coarse-grained ranges instead of more exact ranges to reduce memory consumption. If a SQL statement has many `IN` conditions, this optimization can significantly reduce the memory usage of compiling and ensure system stability.
 
-    [用户文档](/system-variables.md#tidb-opt-range-max-size-从-v640-版本开始引入)
+    [User document](/system-variables.md#tidb-opt-range-max-size-new-in-v640)
 
 ### Ease of use
 
