@@ -1,10 +1,10 @@
 ---
-title: Modify Cluster Configuration Dynamically
+title: Modify Configuration Dynamically
 summary: Learn how to dynamically modify the cluster configuration.
 aliases: ['/docs/dev/dynamic-config/']
 ---
 
-# Modify Cluster Configuration Dynamically
+# Modify Configuration Dynamically
 
 This document describes how to dynamically modify the cluster configuration.
 
