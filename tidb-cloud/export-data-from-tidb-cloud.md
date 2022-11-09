@@ -60,8 +60,11 @@ You can use the tool [Dumpling](/dumpling-overview.md) for data export.
 
     Parameters are described as follows:
 
-    - `-h` or `--host`: The TiDB cluster endpoint.
+    - `-h`: The TiDB cluster endpoint.
+    - `-P`: The TiDB cluster port.
+    - `-u`: The TiDB cluster user.
     - `--ca`: The CA root path. Refer to [Secure Connections to Serverless Tier Clusters](/tidb-cloud/secure-connections-to-serverless-tier-clusters.md#where-is-the-ca-root-path-on-my-system).
+    - `-o`: The export directory.
     - `--filetype`: The exported file type. The default value is `sql`. You can choose from `sql` and `csv`.
 
     For more information about Dumpling options, see [Dumpling option list](/dumpling-overview.md#option-list-of-dumpling).
@@ -72,3 +75,5 @@ You can use the tool [Dumpling](/dumpling-overview.md) for data export.
     - `RELOAD`
     - `LOCK TABLES`
     - `REPLICATION CLIENT`
+
+After exporting data using Dumpling, you can import the data to MySQL compatible databases by using [TiDB Lightning](https://docs.pingcap.com/tidb/stable/tidb-lightning-overview).
