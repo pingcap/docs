@@ -336,7 +336,7 @@ This section exemplifies how to remove a TiFlash node from the `10.0.1.4` host.
 
 ### 1. Adjust the number of replicas of the tables according to the number of remaining TiFlash nodes
 
-Before the node goes down, make sure that the number of remaining nodes in the TiFlash cluster is no smaller than the maximum number of replicas of all tables. Otherwise, modify the number of TiFlash replicas of the related tables.
+Before the node goes down, execute `SELECT * FROM information_schema.tiflash_replica WHERE REPLICA_COUNT > 'tobe_left_nodes';` to check the number of table replicas in TiFlash, and make sure that the number of remaining nodes in the TiFlash cluster is no smaller than the maximum number of replicas of all tables. Otherwise, modify the number of TiFlash replicas of the related tables.
 
 1. For all tables whose replicas are greater than the number of remaining TiFlash nodes in the cluster, run the following command in the TiDB client:
 
