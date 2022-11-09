@@ -292,7 +292,7 @@ In 6.1.0, the key new features or improvements are as follows:
 
 * Damaged SST files in TiKV might cause the TiKV process to panic. Before TiDB v6.1.0, damaged SST files caused TiKV to panic immediately. Since TiDB v6.1.0, the TiKV process will panic 1 hour after SST files are damaged.
 
-* The following TiKV configuration items support [modifying values online](/dynamic-config.md#modify-tikv-configuration-online):
+* The following TiKV configuration items support [modifying values online](/dynamic-config.md#modify-tikv-configuration-dynamically):
 
     * `raftstore.raft-entry-max-size`
     * `quota.foreground-cpu-time`
