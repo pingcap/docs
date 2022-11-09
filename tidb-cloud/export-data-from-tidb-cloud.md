@@ -39,7 +39,7 @@ You can use the tool [Dumpling](/dumpling-overview.md) for data export.
     tiup install dumpling:v6.1.1
     ```
 
-4. Export your data using Dumpling from TiDB. You can export data in the following formats:
+4. Export your data using Dumpling from TiDB. 
 
     <SimpleTab>
 
