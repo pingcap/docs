@@ -1,12 +1,6 @@
 ---
-<<<<<<< HEAD
-title: Modify Configuration Online
-summary: Learn how to change the cluster configuration online.
-=======
 title: Modify Configuration Dynamically
-summary: Learn how to dynamically modify the cluster configuration.
-aliases: ['/docs/dev/dynamic-config/']
->>>>>>> cc54597f7 (*: replace the wording "modify configuration online"" (#11248))
+summary: Learn how to change the cluster configuration dynamically.
 ---
 
 # Modify Configuration Dynamically
