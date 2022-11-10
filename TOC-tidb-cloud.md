@@ -178,6 +178,7 @@
 - Integrations
   - [Airbyte](/tidb-cloud/integrate-tidbcloud-with-airbyte.md)
   - [Datadog](/tidb-cloud/monitor-datadog-integration.md)
+  - [dbt](/tidb-cloud/integrate-tidbcloud-with-dbt.md)
   - [Prometheus and Grafana](/tidb-cloud/monitor-prometheus-and-grafana-integration.md)
   - Terraform
     - [Terraform Integration Overview](/tidb-cloud/terraform-tidbcloud-provider-overview.md)

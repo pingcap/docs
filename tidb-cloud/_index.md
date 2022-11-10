@@ -123,6 +123,8 @@ hide_commit: true
 
 [Datadog](https://docs.pingcap.com/tidbcloud/monitor-datadog-integration)
 
+[dbt](https://docs.pingcap.com/tidbcloud/integrate-tidbcloud-with-dbt)
+
 [Prometheus and Grafana](https://docs.pingcap.com/tidbcloud/monitor-prometheus-and-grafana-integration)
 
 [Terraform](https://docs.pingcap.com/tidbcloud/terraform-tidbcloud-provider-overview)
