@@ -24,7 +24,7 @@ You can also install dbt separately. See [How to install dbt](https://docs.getdb
 To try out the dbt function, you can use [jaffle_shop](https://github.com/dbt-labs/jaffle_shop), a demo project provided by dbt-lab. You can clone the project directly from GitHub:
 
 ```shell
-git clone https://github.com/dbt-labs/jaffle_shop
+git clone https://github.com/dbt-labs/jaffle_shop && \
 cd jaffle_shop
 ```
 
@@ -59,15 +59,17 @@ In this directory:
 
 - `dbt_project.yml` is the dbt project configuration file, which holds the project name and database configuration file information.
 
-- The `models` directory contains the project’s SQL models and table schemas. Note that the data analyst in your company writes this section. For more information about models, see [SQL models](https://docs.getdbt.com/docs/build/sql-models).
+- The `models` directory contains the project’s SQL models and table schemas. Note that the data analyst writes this section. For more information about models, see [SQL models](https://docs.getdbt.com/docs/build/sql-models).
 
 - The `seeds` directory stores the CSV files that are dumped by the database export tools. For example, you can [export the TiDB Cloud data](https://docs.pingcap.com/tidbcloud/export-data-from-tidb-cloud) into CSV files through Dumpling. In the `jaffle_shop` project, these CSV files are used as raw data to be processed.
 
 ## Step 3: Configure the project
 
-To configure the project:
+To configure the project, take the following steps:
 
-1. Complete the global configuration. You can refer to [Description of profile fields](#description-of-profile-fields) and edit the default global profile, `~/.dbt/profiles.yml`, to configure the connection with TiDB Cloud:
+1. Complete the global configuration.
+
+    You can refer to [Description of profile fields](#description-of-profile-fields) and edit the default global profile, `~/.dbt/profiles.yml`, to configure the connection with TiDB Cloud:
 
     ```shell
     sudo vi ~/.dbt/profiles.yml
@@ -88,7 +90,11 @@ To configure the project:
           password: "your_password"                                   # The password to use for authenticating to the TiDB Cloud clusters
     ```
 
-2. Complete the project configuration. In the jaffle_shop project directory, edit the project configuration file `dbt_project.yml` and change the `profile` field to `jaffle_shop_tidb`. This configuration allows the project to query from the database as specified in the `~/.dbt/profiles.yml` file.
+    You can get the values of `server`, `port`, and `username` from the **Connection** card in TiDB Cloud console.
+
+2. Complete the project configuration.
+
+    In the jaffle_shop project directory, edit the project configuration file `dbt_project.yml` and change the `profile` field to `jaffle_shop_tidb`. This configuration allows the project to query from the database as specified in the `~/.dbt/profiles.yml` file.
 
     ```shell
     vi dbt_project.yml
@@ -125,7 +131,9 @@ To configure the project:
             materialized: view           # *.sql which in models/staging/ would bt materialized to view
     ```
 
-3. Verify the configuration. Run the following command to check whether the database and project configuration is correct.
+3. Verify the configuration.
+
+    Run the following command to check whether the database and project configuration is correct.
 
     ```shell
     dbt debug
@@ -137,7 +145,7 @@ To configure the project:
 >
 > This step is optional. If the data for processing is already in the target database, you can skip this step.
 
-Now that you have successfully created and configured the project, it’s time to load the CSV data and materialize the CSV as a table in the target database. 
+Now that you have successfully created and configured the project, it’s time to load the CSV data and materialize the CSV as a table in the target database.
 
 1. Load the CSV data and materialize the CSV as a table in the target database.
 
@@ -164,10 +172,12 @@ Now that you have successfully created and configured the project, it’s time t
 
     As you can see in the results, the seed file was started and loaded into three tables: `analytics.raw_customers`, `analytics.raw_orders`, and `analytics.raw_payments`.
 
-2. Verify the results in TiDB Cloud. The `show databases` command lists the new `analytics` database that dbt created. The `show tables` command indicates that there are three tables in the `analytics` database, corresponding to the ones you have created.
+2. Verify the results in TiDB Cloud.
+
+    The `show databases` command lists the new `analytics` database that dbt has created. The `show tables` command indicates that there are three tables in the `analytics` database, corresponding to the ones you have created.
 
     ```sql
-    mysql> show databases;
+    mysql> SHOW DATABASES;
     +--------------------+
     | Database           |
     +--------------------+
@@ -181,8 +191,8 @@ Now that you have successfully created and configured the project, it’s time t
     +--------------------+
     7 rows in set (0.00 sec)
 
-    mysql> use analytics;
-    mysql> show tables;
+    mysql> USE ANALYTICS;
+    mysql> SHOW TABLES;
     +---------------------+
     | Tables_in_analytics |
     +---------------------+
@@ -192,7 +202,7 @@ Now that you have successfully created and configured the project, it’s time t
     +---------------------+
     3 rows in set (0.00 sec)
 
-    mysql> select * from raw_customers limit 10;
+    mysql> SELECT * FROM raw_customers LIMIT 10;
     +------+------------+-----------+
     | id   | first_name | last_name |
     +------+------------+-----------+
@@ -212,7 +222,7 @@ Now that you have successfully created and configured the project, it’s time t
 
 ## Step 5: Transform data
 
-Now you are ready to run the configured projects and finish the data transformation.
+Now you are ready to run the configured project and finish the data transformation.
 
 1. Run the dbt project to finish the data transformation:
 
@@ -251,8 +261,8 @@ Now you are ready to run the configured projects and finish the data transformat
 2. Go to TiDB Cloud to verify that the transformation is successful.
 
     ```sql
-    mysql> use analytics;
-    mysql> show tables;
+    mysql> USE ANALYTICS;
+    mysql> SHOW TABLES;
     +---------------------+
     | Tables_in_analytics |
     +---------------------+
@@ -267,7 +277,7 @@ Now you are ready to run the configured projects and finish the data transformat
     +---------------------+
     8 rows in set (0.00 sec)
 
-    mysql> select * from customers limit 10;
+    mysql> SELECT * FROM customers LIMIT 10;
     +-------------+------------+-----------+-------------+-------------------+------------------+-------------------------+
     | customer_id | first_name | last_name | first_order | most_recent_order | number_of_orders | customer_lifetime_value |
     +-------------+------------+-----------+-------------+-------------------+------------------+-------------------------+
@@ -285,13 +295,13 @@ Now you are ready to run the configured projects and finish the data transformat
     10 rows in set (0.00 sec)
     ```
 
-    The output shows that five more tables or views have been added, and the data in the tables or views has been transformed. Note that only part of the data from the customer table is shown in this example.
+    The output shows that five more tables or views have been added, and the data in the tables or views has been transformed. Only part of the data from the customer table is shown in this example.
 
-## Step 6: Generate the doc
+## Step 6: Generate the document
 
 dbt lets you generate visual documents that display the overall structure of the project and describe all the tables and views.
 
-To generate visual documents:
+To generate visual documents, take the following steps:
 
 1. Generate the document:
 
@@ -305,19 +315,19 @@ To generate visual documents:
     dbt docs serve
     ```
 
-3. To access the document view from your browser, go to [http://localhost:8080](http://localhost:8080).
+3. To access the document from your browser, go to <http://localhost:8080>.
 
 ## Description of profile fields
 
 | Option           | Description                                                             | Required? | Example                                           |
 |------------------|-------------------------------------------------------------------------|-----------|---------------------------------------------------|
-| type             | The specific adapter to use                                             | Required  | `tidb`                                            |
-| server           | The TiDB Cloud clusters' endpoint to connect to                         | Required  | `gateway01.ap-southeast-1.prod.aws.tidbcloud.com` |
-| port             | The port to use                                                         | Required  | `4000`                                            |
-| schema           | Specify the schema (database) to normalize data into                      | Required  | `analytics`                                       |
-| username         | The username to use to connect to the TiDB Cloud clusters               | Required  | `xxxxxxxxxxx.root`                                |
-| password         | The password to use for authenticating to the TiDB Cloud clusters       | Required  | `"your_password"`                                 |
-| retries          | The retry times for connection to TiDB Cloud clusters (1 by default)    | Optional  | `2`                                               |
+| `type`             | The specific adapter to use                                             | Required  | `tidb`                                            |
+| `server`           | The TiDB Cloud clusters' endpoint to connect to                         | Required  | `gateway01.ap-southeast-1.prod.aws.tidbcloud.com` |
+| `port`             | The port to use                                                         | Required  | `4000`                                            |
+| `schema`           | The schema (database) to normalize data into                      | Required  | `analytics`                                       |
+| `username`         | The username to use to connect to the TiDB Cloud clusters               | Required  | `xxxxxxxxxxx.root`                                |
+| `password`         | The password to use for authenticating to the TiDB Cloud clusters       | Required  | `"your_password"`                                 |
+| `retries`          | The retry times for connection to TiDB Cloud clusters (1 by default)    | Optional  | `2`                                               |
 
 ## Supported functions
 
@@ -325,22 +335,22 @@ You can use the following functions directly in dbt-tidb. For information about 
 
 The following functions are supported:
 
-- bool_or
-- cast_bool_to_text
-- dateadd
-- datediff. Note that datediff is a little different from dbt-util. It rounds down rather than rounds up.
-- date_trunc
-- hash
-- safe_cast
-- split_part
-- last_day
-- cast_bool_to_text
-- concat
-- escape_single_quotes
-- except
-- intersect
-- length
-- position
-- replace
-- right
-- listagg (not supported yet)
+- `bool_or`
+- `cast_bool_to_text`
+- `dateadd`
+- `datediff`. Note that `datediff` is a little different from dbt-util. It rounds down rather than rounds up.
+- `date_trunc`
+- `hash`
+- `safe_cast`
+- `split_part`
+- `last_day`
+- `cast_bool_to_text`
+- `concat`
+- `escape_single_quotes`
+- `except`
+- `intersect`
+- `length`
+- `position`
+- `replace`
+- `right`
+- `listagg` (not supported yet)
