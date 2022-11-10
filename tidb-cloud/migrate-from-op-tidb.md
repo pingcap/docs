@@ -177,8 +177,7 @@ If your TiDB cluster is in a local IDC, or the network between the Dumpling serv
     - s3:GetObjectVersion
     - s3:ListBucket
     - s3:GetBucketLocation
-    If the S3 bucket uses server-side encryption SSE-KMS, you also need to add KMS permissions:
-    - kms:Decrypt
+    - kms:Decrypt. If the S3 bucket uses server-side encryption SSE-KMS, you also need to add the KMS permissions.
 
 3. Configure the access policy. Go to the AWS Console > IAM > Access Management > Policies to check if the access policy for TiDB Cloud exists already. If it does not exist, create a policy following [Creating policies on the JSON tab](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_create-console.html). The following is an example template for the json policy.
 
@@ -231,5 +230,65 @@ If your TiDB cluster is in a local IDC, or the network between the Dumpling serv
 
 6. Import data to TiDB Cloud. See [Step 3. Import data into TiDB Cloud](/tidb-cloud/migrate-from-amazon-s3-or-gcs.md#step-3-import-data-into-tidb-cloud).
 
-## Perform incremental data migration
+## Perform incremental replication
 
+To perform incremental data migration, do the following:
+
+1. Get the start time of the incremental data migration. For example, you can get it from the metadata file of the full data migration.
+
+    ![Start Time in Metadata](/media/tidb-cloud/start_ts_in_metadata.png)
+
+2. Grant TiCDC to connect to TiDB Cloud. On the TiDB Cloud console, locate the cluster, and then go to **Overview** > **Connect** > **Standard Connection** > **Create traffic filter**. Click **Edit** > **Add Item**. Fill in the public IP address of the TiCDC component in the **IP Address** field, and click **Update Filter** to save it. Now TiCDC can access TiDB Cloud.
+
+    ![Update Filter](/media/tidb-cloud/edit_traffic_filter_rules.png)
+
+3. Get the connection information of the downstream TiDB Cloud cluster. On the TiDB Cloud console, go to **Overview** > **Connect** > **Standard Connection** > **Connect with a SQL client**. From the connection information, you can get the host IP address and port of the cluster. For more information, see [Connect via standard connection](/tidb-cloud/connect-to-tidb-cluster.md#connect-via-standard-connection).
+
+4. Create and run the incremental replication task. In the upstream cluster, run the following:
+
+    ```shell
+    tiup cdc cli changefeed create \
+    --pd=http://172.16.6.122:2379  \
+    --sink-uri="tidb://root:123456@172.16.6.125:4000"  \
+    --changefeed-id="upstream-to-downstream"  \
+    --start-ts="431434047157698561"
+    ```
+
+    Where,
+    - --pd: the PD address of the upstream cluster. The format is: [upstream_pd_ip]:[pd_port]
+    - --sink-uri: the downstream address of the replication task. Configure --sink-uri according to the following format. Currently, the scheme supports mysql/tidb/kafka/pulsar/s3/local.
+
+        ```
+        [scheme]://[userinfo@][host]:[port][/path]?[query_parameters]
+        ```
+
+    - --changefeed-id: The ID of the replication task. The format must match the ^[a-zA-Z0-9]+(\-[a-zA-Z0-9]+)*$ regular expression. If this ID is not specified, TiCDC automatically generates a UUID (the version 4 format) as the ID.
+    - --start-ts: Specifies the starting TSO of the changefeed. From this TSO, the TiCDC cluster starts pulling data. The default value is the current time.
+
+    For more information, see [Manage TiCDC Cluster and Replication Tasks](https://docs.pingcap.com/tidb/stable/manage-ticdc).
+
+5. Reopen the GC mechanism in the upstream cluster. After checking the incremental replication, and there is no error and no delay in replication, enable the GC mechanism to resume the garbage collection function of the cluster.
+
+    ```sql
+    mysql > SET GLOBAL tidb_gc_enable = TRUE;
+    ## Verify whether the setting works. 1 means the GC mechanism is enabled.
+    mysql > SELECT @@global.tidb_gc_enable;
+    +-------------------------+
+    | @@global.tidb_gc_enable |
+    +-------------------------+
+    |                       1 |
+    +-------------------------+
+    1 row in set (0.01 sec)
+    ```
+
+6. Verify the incremental replication task.
+
+    - If the replication task is created successfully, it shows "Create changefeed successfully!" in the output.
+    - Check the status of the replication task. If the state shows `normal`, it means the replication task is normal.
+
+        ```shell
+         tiup cdc cli changefeed list --pd=http://172.16.6.122:2379
+        ```
+
+        ![Update Filter](/media/tidb-cloud/normal_status_in_replication_task.png)
+    - Verify the replication. Write a new record to the upstream cluster, and then check whether the record is replicated to the downstream TiDB Cloud cluster.
