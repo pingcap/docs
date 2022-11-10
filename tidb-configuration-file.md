@@ -724,7 +724,7 @@ For pessimistic transaction usage, refer to [TiDB Pessimistic Transaction Mode](
 ### constraint-check-in-place-pessimistic <span class="version-mark">New in v6.4.0</span>
 
 + Controls the default value of the system variable [`tidb_constraint_check_in_place_pessimistic`](/system-variables.md#tidb_constraint_check_in_place_pessimistic-new-in-v630).
-+ default value: `true`
++ Default value: `true`
 
 ## isolation-read
 
