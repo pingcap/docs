@@ -353,4 +353,3 @@ The following functions are supported:
 - `position`
 - `replace`
 - `right`
-- `listagg` (not supported yet)
