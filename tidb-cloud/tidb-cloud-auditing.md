@@ -7,10 +7,6 @@ summary: Learn about how to audit a cluster in TiDB Cloud.
 
 TiDB Cloud provides you with a database audit logging feature to record a history of user access details (such as any SQL statements executed) in logs.
 
-> **Note:**
->
-> Currently, the **audit logging** feature is experimental. The interface and output are subject to change.
-
 To assess the effectiveness of user access policies and other information security measures of your organization, it is a security best practice to conduct a periodic analysis of the database audit logs.
 
 The audit logging feature is disabled by default. To audit a cluster, you need to enable the audit logging first, and then specify the auditing filter rules.
@@ -188,6 +184,12 @@ For example, `13796619446086334065/tidb-0/tidb-audit-2022-04-21T18-16-29.529.log
 ## Disable audit logging
 
 If you no longer want to audit a cluster, go to the page of the cluster, click **Settings** > **Audit Settings**, and then toggle the audit setting in the upper-right corner to **Off**.
+
+> **Note:**
+>
+> After the audit log is disabled, the last log file will not be pushed to the bucket on the cloud. Users can push this file to the bucket on the cloud in two ways:
+> - You can restart the cluster, or expand the cluster.
+> - You can contact the PingCAP support team.
 
 ## Audit log fields
 
