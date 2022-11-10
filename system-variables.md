@@ -925,7 +925,6 @@ MPP is a distributed computing framework provided by the TiFlash engine, which a
 ### `tidb_constraint_check_in_place_pessimistic` <span class="version-mark">New in v6.3.0</span>
 
 - Scope: SESSION
-- Persists to cluster: No
 
 <CustomContent platform="tidb">
 
