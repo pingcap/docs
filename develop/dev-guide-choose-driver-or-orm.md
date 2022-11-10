@@ -108,21 +108,12 @@ implementation group: 'org.bouncycastle', name: 'bcpkix-jdk15on', version: '1.67
 > **Note:**
 >
 > - Currently, Hibernate does [not support nested transactions](https://stackoverflow.com/questions/37927208/nested-transaction-in-spring-app-with-jpa-postgres).
-<<<<<<< HEAD
->
-> <CustomContent platform="tidb">
->
-> - Since v6.2.0, TiDB supports [savepoint](https://docs.pingcap.com/tidb/v6.2/sql-statement-savepoint). To use the `Propagation.NESTED` transaction propagation option in `@Transactional`, that is, to set `@Transactional(propagation = Propagation.NESTED)`, make sure that your TiDB is v6.2.0 or later.
->
-> </CustomContent>
-=======
 
 <CustomContent platform="tidb">
 
 > - Since v6.2.0, TiDB supports [savepoint](/sql-statements/sql-statement-savepoint.md). To use the `Propagation.NESTED` transaction propagation option in `@Transactional`, that is, to set `@Transactional(propagation = Propagation.NESTED)`, make sure that your TiDB is v6.2.0 or later.
 
 </CustomContent>
->>>>>>> a0a9436b7 (Fix typo and style (#11260))
 
 <SimpleTab>
 <div label="Hibernate">
