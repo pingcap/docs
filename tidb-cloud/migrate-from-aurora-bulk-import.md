@@ -217,6 +217,10 @@ The TiDB Cloud cluster and the S3 bucket are in different AWS accounts. To allow
 
 Once finished, you will have created a policy and role for cross-account. You can then continue with the configuration on the data import task panel of TiDB Cloud.
 
+> **Note:**
+>
+> To ensure data consistency, TiDB Cloud allows to import CSV files into empty tables only. To import data into an existing table that already contains data, you can use TiDB Cloud to import the data into a temporary empty table by following this document, and then use the `INSERT SELECT` statement to copy the data to the target existing table.
+
 ## Learn how to set up filter rules
 
 Refer to the [Table Filter](/table-filter.md#syntax) document.
