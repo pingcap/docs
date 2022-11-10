@@ -221,7 +221,7 @@ Configuration items related to scheduling
 
 ### `max-store-down-time`
 
-+ The downtime after which PD judges that the disconnected store can not be recovered. When PD fails to receive the heartbeat from a store after the specified period of time, it adds replicas at other nodes.
++ The downtime after which PD judges that the disconnected store cannot be recovered. When PD fails to receive the heartbeat from a store after the specified period of time, it adds replicas at other nodes.
 + Default value: `30m`
 
 ### `max-store-preparing-time` <span class="version-mark">New in v6.1.0</span>

@@ -17,6 +17,6 @@ Please answer the following questions before submitting your issue. Thanks!
 2. Describe your suggestion or addition.
 
 
-3. Provide some reference materials (documents, websites, etc) if you could.
+3. Provide some reference materials (documents, websites, and so on) if you could.
 
 

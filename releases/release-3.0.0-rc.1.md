@@ -44,7 +44,7 @@ On May 10, 2019, TiDB 3.0.0-rc.1 is released. The corresponding TiDB Ansible ver
     - Support `GRANT ROLE` [#9721](https://github.com/pingcap/tidb/pull/9721)
     - Fix the `ConnectionEvent` error from the `whitelist` plugin that makes TiDB exit [#9889](https://github.com/pingcap/tidb/pull/9889)
     - Fix the issue of mistakenly adding read-only statements to the transaction history [#9723](https://github.com/pingcap/tidb/pull/9723)
-    - Improve `kill` statements to stop SQL execution  and release resources more quickly [#9844](https://github.com/pingcap/tidb/pull/9844)
+    - Improve `kill` statements to stop SQL execution and release resources more quickly [#9844](https://github.com/pingcap/tidb/pull/9844)
     - Add a startup option `config-check` to check the validity of the configuration file [#9855](https://github.com/pingcap/tidb/pull/9855)
     - Fix the validity check of inserting NULL fields when the strict SQL mode is disabled [#10161](https://github.com/pingcap/tidb/pull/10161)
 

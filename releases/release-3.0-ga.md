@@ -143,7 +143,7 @@ On June 28, 2019, TiDB 3.0 GA is released. The corresponding TiDB Ansible versio
 + Others
     - Upgrade etcd to solve the issues of inconsistent log output formats, Leader selection failure in prevote, and lease deadlocking
     - Develop a unified log format specification with restructured log system to facilitate collection and analysis by tools
-    - Add monitoring metrics including scheduling parameters, cluster label information, time consumed by PD to process TSO requests, Store ID and address information, etc.
+    - Add monitoring metrics including scheduling parameters, cluster label information, time consumed by PD to process TSO requests, Store ID and address information, and so on.
 
 ## TiKV
 

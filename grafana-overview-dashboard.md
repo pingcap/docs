@@ -37,7 +37,7 @@ To understand the key metrics displayed on the Overview dashboard, check the fol
 | TiDB | CPS By Instance | CPS By Instance: the command statistics on each TiDB instance, which is classified according to the success or failure of command execution results. |
 | TiDB | Failed Query OPM | The statistics of error types (such as syntax errors and primary key conflicts) based on the errors occurred when executing SQL statements per second on each TiDB instance. The module in which the error occurs and the error code are included. |
 | TiDB | Connection Count | The connection number of each TiDB instance. |
-| TiDB | Memory Usage | The  memory usage statistics of each TiDB instance, which is divided into the memory occupied by processes and the memory applied by Golang on the heap. |
+| TiDB | Memory Usage | The memory usage statistics of each TiDB instance, which is divided into the memory occupied by processes and the memory applied by Golang on the heap. |
 | TiDB | Transaction OPS | The number of transactions executed per second. |
 | TiDB | Transaction Duration | The execution time of a transaction |
 | TiDB | KV Cmd OPS | The number of executed KV commands. |
