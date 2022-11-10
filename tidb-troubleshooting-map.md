@@ -186,7 +186,7 @@ For more information about troubleshooting OOM, see [Troubleshoot TiDB OOM Issue
 
     This issue is expected. You can restore the Region using `tikv-ctl`.
 
-- 4.1.2 If TiKV is deployed on a virtual machine, when the virtual machine is killed or the physical machine is powered off, the `entries[X, Y]  is unavailable from storage` error is reported.
+- 4.1.2 If TiKV is deployed on a virtual machine, when the virtual machine is killed or the physical machine is powered off, the `entries[X, Y] is unavailable from storage` error is reported.
 
     This issue is expected. The `fsync` of virtual machines is not reliable, so you need to restore the Region using `tikv-ctl`.
 

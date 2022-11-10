@@ -71,7 +71,7 @@ Log in to the control machine using a regular user account (take the `tidb` user
     tiup update --self && tiup update cluster
     ```
 
-    If `“Update successfully!”` is displayed, the TiUP cluster is updated successfully.
+    If `Update successfully!` is displayed, the TiUP cluster is updated successfully.
 
 5. Verify the current version of your TiUP cluster:
 
@@ -137,7 +137,7 @@ To prepare the TiUP offline component package, you can manually pack an offline 
 
         `tidb-community-server-${version}-linux-amd64.tar.gz` is an independent offline environment package.
 
-3. Customize the offline mirror, or adjust the contents of an existing offline  mirror.
+3. Customize the offline mirror, or adjust the contents of an existing offline mirror.
 
     If you want to adjust an existing offline mirror (such as adding a new version of a component), take the following steps:
 
