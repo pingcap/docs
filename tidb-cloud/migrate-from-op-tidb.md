@@ -254,7 +254,6 @@ To perform incremental data migration, do the following:
     --start-ts="431434047157698561"
     ```
 
-    Where,
     - --pd: the PD address of the upstream cluster. The format is: [upstream_pd_ip]:[pd_port]
     - --sink-uri: the downstream address of the replication task. Configure --sink-uri according to the following format. Currently, the scheme supports mysql/tidb/kafka/pulsar/s3/local.
 
