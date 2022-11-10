@@ -44,19 +44,19 @@ In v6.4.0-DMR, the key new features and improvements are as follows:
 
     [用户文档](/sql-statements/sql-statement-flashback-to-timestamp.md)
 
-* 支持通过 FLASHBACK DATABASE 命令将被删除的数据库恢复 [#20463](https://github.com/pingcap/tidb/issues/20463)  @[erwadba](https://github.com/erwadba) **tw@ran-huang**
+* Support restoring a deleted database by using `FLASH DATABASE` [#20463](https://github.com/pingcap/tidb/issues/20463)  @[erwadba](https://github.com/erwadba) **tw@ran-huang**
 
-    FLASHBACK DATABASE 支持在 Garbage Collection (GC) life time 时间内恢复被 `DROP` 删除的数据库以及数据。该特性不依赖任何外部工具，可以轻松快速通过 SQL 语句进行数据和元信息的恢复。
+    By using `FLASHBACK DATABASE`, you can restore a database and its data deleted by `DROP` within the garbage collection (GC) life time. This feature does not depend on any external tools. You can quickly restore data and metadata using SQL statements.
 
-    [用户文档](/sql-statements/sql-statement-flashback-database.md)
+    [User document](/sql-statements/sql-statement-flashback-database.md)
 
 ### Security
 
-* TiFlash 静态加密支持国密算法 SM4 [#5953](https://github.com/pingcap/tiflash/issues/5953) @[lidezhu](https://github.com/lidezhu) **tw@ran-huang**
+*  TiFlash supports the SM4 algorithm for encryption at rest [#5953](https://github.com/pingcap/tiflash/issues/5953) @[lidezhu](https://github.com/lidezhu) **tw@ran-huang**
 
-    TiFlash 的静态加密新增 SM4 算法，用户可以修改配置文件 tiflash-learner.toml 中的 data-encryption-method 参数，设置为 sm4-ctr，以启用基于国密算法 SM4 的静态加密能力。
+    Add the SM4 algorithm for TiFlash encryption at rest. When you configure encryption at rest, you can enable the SM4 encryption capacity by setting the value of the `data-encryption-method` configuration to `sm4-ctr` in the `tiflash-learner.toml` configuration file.
 
-    [用户文档](/encryption-at-rest.md)
+    [User document](/encryption-at-rest.md#tiflash)
 
 ### Observability
 
@@ -70,9 +70,9 @@ In v6.4.0-DMR, the key new features and improvements are as follows:
 
 ### Performance
 
-* 引入 cop task 并发度自适应机制 [#37724](https://github.com/pingcap/tidb/issues/37724) @[you06](https://github.com/you06) **tw@ran-huang**
+* Introduce the concurrency adaptive mechanism for coprocessor tasks [#37724](https://github.com/pingcap/tidb/issues/37724) @[you06](https://github.com/you06) **tw@ran-huang**
 
-    随 cop task 任务数增加结合 TiKV 处理速度，自动调整增加 [`tidb_distsql_scan_concurrency`](/system-variables.md#tidb_distsql_scan_concurrency) 并发度，减少因 cop task 任务排队，降低延迟。
+    As the number of coprocessor tasks increases, based on TiKV's processing speed, TiDB automatically increases concurrency (adjust the value of [`tidb_distsql_scan_concurrency`](/system-variables.md#tidb_distsql_scan_concurrency)) to reduce the coprocessor task queue and thus reduce latency.
 
 * 增加了动态规划算法来决定表的连接顺序 [#18969](https://github.com/pingcap/tidb/issues/18969) @[winoros](https://github.com/winoros) **tw@qiancai**
 
