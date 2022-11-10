@@ -42,7 +42,7 @@ hide_commit: true
 
 [Deploy a TiDB Cluster Using TiUP](https://docs.pingcap.com/tidb/v6.3/production-deployment-using-tiup)
 
-[Deploy a TiDB Cluster in Kubernetes](https://docs.pingcap.com/tidb/v6.3/tidb-in-kubernetes)
+[Deploy a TiDB Cluster on Kubernetes](https://docs.pingcap.com/tidb/v6.3/tidb-in-kubernetes)
 
 </LearningPath>
 
