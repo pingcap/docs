@@ -5,7 +5,7 @@ summary: An overview of the usage of SHOW ERRORS for the TiDB database.
 
 # SHOW ERRORS
 
-This statement shows error(s) from previously executed statements. The error buffer is cleared as soon as a statement executes successfully.  In which case, `SHOW ERRORS` will return an empty set.
+This statement shows errors from previously executed statements. The error buffer is cleared as soon as a statement executes successfully. In which case, `SHOW ERRORS` will return an empty set.
 
 The behavior of which statements generate errors vs. warnings is highly influenced by the current `sql_mode`.
 

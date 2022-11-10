@@ -5,11 +5,15 @@ summary: Learn about the JSON data type in TiDB.
 
 # JSON Type
 
+<<<<<<< HEAD
 > **Warning:**
 >
 > This is still an experimental feature. It is **NOT** recommended that you use it in the production environment.
 
 TiDB supports the `JSON` (JavaScript Object Notation) data type, which is useful for storing semi-structured data.  The `JSON` data type provides the following advantages over storing `JSON`-format strings in a string column:
+=======
+TiDB supports the `JSON` (JavaScript Object Notation) data type, which is useful for storing semi-structured data. The `JSON` data type provides the following advantages over storing `JSON`-format strings in a string column:
+>>>>>>> a0a9436b7 (Fix typo and style (#11260))
 
 - Use the Binary format for serialization. The internal format permits quick read access to `JSON` document elements.
 - Automatic validation of the JSON documents stored in `JSON` columns. Only valid documents can be stored.

@@ -5,7 +5,7 @@ summary: An overview of the usage of SHOW INDEXES [FROM|IN] for the TiDB databas
 
 # SHOW INDEXES [FROM|IN]
 
-The statement `SHOW INDEXES [FROM|IN]` lists the indexes on a specified table.  The statements `SHOW INDEX [FROM|IN]`, `SHOW KEYS [FROM|IN]` are aliases of this statement, and included for compatibility with MySQL.
+The statement `SHOW INDEXES [FROM|IN]` lists the indexes on a specified table. The statements `SHOW INDEX [FROM|IN]`, `SHOW KEYS [FROM|IN]` are aliases of this statement, and included for compatibility with MySQL.
 
 ## Synopsis
 

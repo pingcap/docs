@@ -1,6 +1,11 @@
 ---
 title: TiCDC Overview
+<<<<<<< HEAD
 summary: Learn what TiCDC is, what features TiCDC provides, etc.
+=======
+summary: Learn what TiCDC is, what features TiCDC provides, and how to install and deploy TiCDC.
+aliases: ['/docs/dev/ticdc/ticdc-overview/','/docs/dev/reference/tools/ticdc/overview/']
+>>>>>>> a0a9436b7 (Fix typo and style (#11260))
 ---
 
 # TiCDC Overview
