@@ -409,7 +409,7 @@ Common scenarios where `Commit Log Duration` is long:
 - `raftstore.store-pool-size` is either excessively small or large (an excessively large value might also cause performance degradation)
 - The I/O latency is high, resulting in high `Append Log Duration` latency
 - The network latency between TiKV nodes is high
-- The number of the gRPC threads are too small,  CPU usage is uneven among the GRPC threads.
+- The number of the gRPC threads are too small, CPU usage is uneven among the GRPC threads.
 
 Common scenarios where `Apply Log Duration` is long:
 

@@ -86,7 +86,7 @@ On May 10, 2019, TiDB 3.0.0-rc.1 is released. The corresponding TiDB Ansible ver
     - Support `block cache` sharing among different `column families` [#4612](https://github.com/tikv/tikv/pull/4612)
 
 + Server
-    - Reduce context switch overhead of  `batch commands` [#4473](https://github.com/tikv/tikv/pull/4473)
+    - Reduce context switch overhead of `batch commands` [#4473](https://github.com/tikv/tikv/pull/4473)
     - Check the validity of seek iterator status [#4470](https://github.com/tikv/tikv/pull/4470)
 
 + RaftStore

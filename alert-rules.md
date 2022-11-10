@@ -367,7 +367,7 @@ This section gives the alert rules for the PD component.
 
 * Solution:
 
-    * Exclude the human factors, such as restarting PD, manually transferring leader and adjusting leader priority.
+    * Exclude the human factors, such as restarting PD, manually transferring leader, and adjusting leader priority.
     * Check the network and system load status.
     * If the problematic PD instance cannot be recovered due to environmental factors, make it offline and replace it.
 
@@ -384,7 +384,7 @@ This section gives the alert rules for the PD component.
 * Solution:
 
     * Check whether it is needed to increase capacity.
-    * Check whether there is any file that occupies a large amount of disk space, such as the log, snapshot and core dump.
+    * Check whether there is any file that occupies a large amount of disk space, such as the log, snapshot, and core dump.
 
 #### `PD_system_time_slow`
 
