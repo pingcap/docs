@@ -1,12 +1,6 @@
 ---
-<<<<<<< HEAD
-title: Deploy a TiDB Cluster in Kubernetes
-summary: Learn how to deploy a TiDB cluster in Kubernetes.
-=======
 title: Deploy a TiDB Cluster on Kubernetes
 summary: Learn how to deploy a TiDB cluster on Kubernetes.
-aliases: ['/docs/tidb-in-kubernetes/dev/']
->>>>>>> 3361dbc53 (k8s: in k8s -> on k8s (#11224))
 ---
 
 # Deploy a TiDB Cluster on Kubernetes
