@@ -8,7 +8,7 @@ aliases: ['/docs/dev/grafana-tikv-dashboard/','/docs/dev/reference/key-monitorin
 
 If you use TiUP to deploy the TiDB cluster, the monitoring system (Prometheus/Grafana) is deployed at the same time. For more information, see [Overview of the Monitoring Framework](/tidb-monitoring-framework.md).
 
-The Grafana dashboard is divided into a series of sub dashboards which include Overview, PD, TiDB, TiKV, Node\_exporter and Performance\_overview. A lot of metrics are there to help you diagnose.
+The Grafana dashboard is divided into a series of sub dashboards which include Overview, PD, TiDB, TiKV, Node\_exporter, and Performance\_overview. A lot of metrics are there to help you diagnose.
 
 ## TiKV-Details dashboard
 

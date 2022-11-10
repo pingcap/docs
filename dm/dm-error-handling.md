@@ -112,7 +112,7 @@ However, you need to reset the data migration task in some cases. For details, r
 
 #### Reason
 
-The `invalid connection` error indicates that anomalies have occurred in the connection between DM and the downstream TiDB database (such as network failure, TiDB restart and, TiKV busy) and that a part of the data for the current request has been sent to TiDB.
+The `invalid connection` error indicates that anomalies have occurred in the connection between DM and the downstream TiDB database (such as network failure, TiDB restart, and TiKV busy) and that a part of the data for the current request has been sent to TiDB.
 
 #### Solutions
 
