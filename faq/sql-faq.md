@@ -64,61 +64,7 @@ It is not a bug. The default order of records depends on various situations with
 
 The order of results in MySQL might appear stable because queries are executed in a single thread. However, it is common that query plans can change when upgrading to new versions. It is recommended to use `ORDER BY` whenever an order of results is desired.
 
-The reference can be found in [ISO/IEC 9075:1992, Database Language SQL- July 30, 1992](http://www.contrib.andrew.cmu.edu/~shadow/sql/sql1992.txt), which states as follows:
-
-> If an `<order by clause>` is not specified, then the table specified by the `<cursor specification>` is T and the ordering of rows in T is implementation-dependent.
-
-In the following two queries, both results are considered legal:
-
-```sql
-> select * from t;
-+------+------+
-| a    | b    |
-+------+------+
-|    1 |    1 |
-|    2 |    2 |
-+------+------+
-2 rows in set (0.00 sec)
-```
-
-```sql
-> select * from t; -- the order of results is not guaranteed
-+------+------+
-| a    | b    |
-+------+------+
-|    2 |    2 |
-|    1 |    1 |
-+------+------+
-2 rows in set (0.00 sec)
-```
-
-If the list of columns used in the `ORDER BY` is non-unique, the statement is also considered non-deterministic. In the following example, the column `a` has duplicate values. Thus, only `ORDER BY a, b` is guaranteed deterministic:
-
-```sql
-> select * from t order by a;
-+------+------+
-| a    | b    |
-+------+------+
-|    1 |    1 |
-|    2 |    1 |
-|    2 |    2 |
-+------+------+
-3 rows in set (0.00 sec)
-```
-
-In the following statement, the order of column `a` is guaranteed, but the order of `b` is not guaranteed.
-
-```sql
-> select * from t order by a;
-+------+------+
-| a    | b    |
-+------+------+
-|    1 |    1 |
-|    2 |    2 |
-|    2 |    1 |
-+------+------+
-3 rows in set (0.00 sec)
-```
+You can also use the system variable [`tidb_enable_ordered_result_mode`](/system-variables.md#tidb_enable_ordered_result_mode) to sort the final output result automatically. After setting the variable value to `ON`, TiDB processes `SELECT a, MAX(b) FROM t GROUP BY a` as `SELECT a, MAX(b) FROM t GROUP BY a ORDER BY a, MAX(b)`.
 
 ## Does TiDB support `SELECT FOR UPDATE`?
 
@@ -347,12 +293,9 @@ To learn the scenarios that cause hotspots, refer to [common hotpots](/troublesh
 - The [`AUTO_RANDOM`](/troubleshoot-hot-spot-issues.md#handle-auto-increment-primary-key-hotspot-tables-using-auto_random) attribute, which helps resolve hotspots brought by auto-increment primary keys.
 - [Coprocessor Cache](/coprocessor-cache.md), for read hotspots on small tables.
 - [Load Base Split](/configure-load-base-split.md), for hotspots caused by unbalanced access between Regions, such as full table scans for small tables.
+- [Cached tables](/cached-tables.md), for frequently accessed but rarely updated small hotspot tables.
 
 If you have a performance issue caused by hotspot, refer to [Troubleshoot Hotspot Issues](/troubleshoot-hot-spot-issues.md) to get it resolved.
-
-### How to scatter the hotspots?
-
-In TiDB, data is divided into Regions for management. Generally, the TiDB hotspot means the Read/Write hotspot in a Region. In TiDB, for the table whose primary key (PK) is not an integer or which has no PK, you can properly break Regions by configuring `SHARD_ROW_ID_BITS` to scatter the Region hotspots. For details, see the introduction of `SHARD_ROW_ID_BITS` in [`SHARD_ROW_ID_BITS`](/shard-row-id-bits.md).
 
 ### Tune TiKV performance
 

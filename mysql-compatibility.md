@@ -57,6 +57,7 @@ However, some features of MySQL are not supported. This could be because there i
 + `OPTIMIZE TABLE` syntax
 + `HANDLER` statement
 + `CREATE TABLESPACE` statement
++ "Session Tracker: Add GTIDs context to the OK packet". See [MySQL WL#6128: Session Tracker: Add GTIDs context to the OK packet](https://dev.mysql.com/worklog/task/?id=6128).
 
 ## Features that are different from MySQL
 
