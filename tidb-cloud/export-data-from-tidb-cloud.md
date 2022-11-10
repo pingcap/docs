@@ -39,7 +39,9 @@ You can use the tool [Dumpling](/dumpling-overview.md) for data export.
     tiup install dumpling:v6.1.1
     ```
 
-4. Export your data using Dumpling from TiDB. You can export data in the following formats:
+4. Export your data using Dumpling from TiDB. 
+
+    You can get the following connection parameters `${tidb-endpoint}`, `${port}`, and `${user}` from the **Connection** section on the **Clusters** page.
 
     <SimpleTab>
 
@@ -59,11 +61,13 @@ You can use the tool [Dumpling](/dumpling-overview.md) for data export.
     </div>
     </SimpleTab>
 
-    Parameters are described as follows:
+    Options are described as follows:
 
     - `-h`: The TiDB cluster endpoint.
     - `-P`: The TiDB cluster port.
     - `-u`: The TiDB cluster user.
+    - `-p`: The TiDB cluster password.
+    - `-F`: The maximum size of a single file.
     - `--ca`: The CA root path. Refer to [Secure Connections to Serverless Tier Clusters](/tidb-cloud/secure-connections-to-serverless-tier-clusters.md#where-is-the-ca-root-path-on-my-system).
     - `-o`: The export directory.
     - `--filetype`: The exported file type. The default value is `sql`. You can choose from `sql` and `csv`.
