@@ -13,10 +13,6 @@ Please answer the following questions before submitting your issue. Thanks!
 
 1. Describe what you find is inappropriate or missing in the existing docs.
 
-
 2. Describe your suggestion or addition.
 
-
-3. Provide some reference materials (documents, websites, and so on) if you could.
-
-
+3. Provide some reference materials (such as documents and websites) if you could.

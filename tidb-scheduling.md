@@ -19,7 +19,7 @@ Now consider about the following situations:
 * When a TiKV store fails, PD needs to consider:
     * Recovery time of the failed store.
         * If it's short (for example, the service is restarted), whether scheduling is necessary or not.
-        * If it's long (for example, disk fault, data is lost, and so on), how to do scheduling.
+        * If it's long (for example, disk fault and data is lost), how to do scheduling.
     * Replicas of all Regions.
         * If the number of replicas is not enough for some Regions, PD needs to complete them.
         * If the number of replicas is more than expected (for example, the failed store re-joins into the cluster after recovery), PD needs to delete them.

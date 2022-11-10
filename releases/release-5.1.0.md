@@ -174,7 +174,7 @@ In v5.1, the key new features or improvements are as follows:
 
 ### Telemetry
 
-TiDB adds the running status of TiDB cluster requests in telemetry, including execution status, failure status, and so on.
+TiDB adds the running status of TiDB cluster requests in telemetry, including execution status and failure status.
 
 To learn more about the information and how to disable this behavior, refer to [Telemetry](/telemetry.md).
 
