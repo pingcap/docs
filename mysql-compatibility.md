@@ -57,6 +57,7 @@ In addition, TiDB does not support the MySQL replication protocol, but provides 
 + `OPTIMIZE TABLE` syntax
 + `HANDLER` statement
 + `CREATE TABLESPACE` statement
++ "Session Tracker: Add GTIDs context to the OK packet". See [MySQL WL#6128: Session Tracker: Add GTIDs context to the OK packet](https://dev.mysql.com/worklog/task/?id=6128).
 
 ## Features that are different from MySQL
 
