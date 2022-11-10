@@ -18,7 +18,7 @@ SET SESSION tidb_distsql_scan_concurrency = 10;
 
 # These two identical statements change a global variable
 SET @@global.tidb_distsql_scan_concurrency = 10;
-SET  GLOBAL tidb_distsql_scan_concurrency = 10;
+SET GLOBAL tidb_distsql_scan_concurrency = 10;
 ```
 
 > **Note:**
@@ -3079,7 +3079,7 @@ For details, see [Identify Slow Queries](/identify-slow-queries.md).
 
 ### tidb_track_aggregate_memory_usage
 
-- Scope: SESSION ｜ GLOBAL
+- Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
 - Type: Boolean
 - Default value: `ON`

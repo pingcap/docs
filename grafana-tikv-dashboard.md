@@ -7,7 +7,7 @@ summary: Learn some key metrics displayed on the Grafana TiKV dashboard.
 
 If you use TiUP to deploy the TiDB cluster, the monitoring system (Prometheus/Grafana) is deployed at the same time. For more information, see [Overview of the Monitoring Framework](/tidb-monitoring-framework.md).
 
-The Grafana dashboard is divided into a series of sub dashboards which include Overview, PD, TiDB, TiKV, Node\_exporter, Performance\_overview, and so on. A lot of metrics are there to help you diagnose.
+The Grafana dashboard is divided into a series of sub dashboards which include Overview, PD, TiDB, TiKV, Node\_exporter, and Performance\_overview. A lot of metrics are there to help you diagnose.
 
 ## TiKV-Details dashboard
 
@@ -35,7 +35,7 @@ This section provides a detailed description of these key metrics on the **TiKV-
 ### Errors
 
 - Critical error: The number of critical errors
-- Server is busy: Indicates occurrences of events that make the TiKV instance unavailable temporarily, such as Write Stall, Channel Full, and so on. It should be `0` in normal case.
+- Server is busy: Indicates occurrences of events that make the TiKV instance unavailable temporarily, such as Write Stall, and Channel Full. It should be `0` in normal case.
 - Server report failures: The number of error messages reported by server. It should be `0` in normal case.
 - Raftstore error: The number of Raftstore errors per type on each TiKV instance
 - Scheduler error: The number of scheduler errors per type on each TiKV instance
@@ -265,7 +265,7 @@ This section provides a detailed description of these key metrics on the **TiKV-
 - Total Requests: The number of requests by type per second
 - Handle duration: The histogram of time spent actually processing coprocessor requests per minute
 - Total Request Errors: The number of request errors of Coprocessor per second. There should not be a lot of errors in a short time.
-- Total KV Cursor Operations: The total number of the KV cursor operations by type per second, such as `select`, `index`, `analyze_table`, `analyze_index`, `checksum_table`, `checksum_index`, and so on.
+- Total KV Cursor Operations: The total number of the KV cursor operations by type per second, such as `select`, `index`, `analyze_table`, `analyze_index`, `checksum_table`, and `checksum_index`.
 - KV Cursor Operations: The histogram of KV cursor operations by type per second
 - Total RocksDB Perf Statistics: The statistics of RocksDB performance
 - Total Response Size: The total size of coprocessor response
