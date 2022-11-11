@@ -56,7 +56,6 @@ To get the prefix for your cluster, take the following steps:
 - The backup and restore feature is unavailable. You can use [Dumpling](https://docs.pingcap.com/tidb/stable/dumpling-overview) to export your data as a backup.
 - You cannot create any changefeeds (Apache Kafka Sink and MySQL Sink) or use [TiCDC](https://docs.pingcap.com/tidb/stable/ticdc-overview) to replicate incremental data.
 - You cannot use VPC Peering or private endpoint to connect to Serverless Tier clusters.
-- You cannot scale clusters to larger storage, standard nodes, or increase the number of nodes.
 - You cannot [pause or resume](/tidb-cloud/pause-or-resume-tidb-cluster.md) a Serverless Tier cluster.
 - You cannot view the [Monitoring page](/tidb-cloud/built-in-monitoring.md).
 - You cannot use the third-party monitoring service.
