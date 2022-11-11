@@ -79,7 +79,8 @@ ALTER TABLE t DROP PRIMARY KEY;     -- If the primary key is a clustered index, 
 ALTER TABLE t DROP INDEX `PRIMARY`; -- If the primary key is a clustered index, then not supported.
 ```
 
-If you try to drop the integer primary key (clustered index) of a table, the `Unsupported drop primary key when the table's pkIsHandle is true` error is returned. If you try to drop the primary key (clustered index) of a table that is not an integer type, the `Unsupported drop primary key when the table is using clustered index` error is returned.
+- If you try to drop the integer primary key (clustered index) of a table, the `Unsupported drop primary key when the table's pkIsHandle is true` error is returned.
+- If you try to drop the primary key (clustered index) of a table that is not an integer type, the `Unsupported drop primary key when the table is using clustered index` error is returned.
 
 ### Add or drop non-clustered indexes
 
