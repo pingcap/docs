@@ -64,7 +64,63 @@ It is not a bug. The default order of records depends on various situations with
 
 The order of results in MySQL might appear stable because queries are executed in a single thread. However, it is common that query plans can change when upgrading to new versions. It is recommended to use `ORDER BY` whenever an order of results is desired.
 
-You can also use the system variable [`tidb_enable_ordered_result_mode`](/system-variables.md#tidb_enable_ordered_result_mode) to sort the final output result automatically. After setting the variable value to `ON`, TiDB processes `SELECT a, MAX(b) FROM t GROUP BY a` as `SELECT a, MAX(b) FROM t GROUP BY a ORDER BY a, MAX(b)`.
+The reference can be found in [ISO/IEC 9075:1992, Database Language SQL- July 30, 1992](http://www.contrib.andrew.cmu.edu/~shadow/sql/sql1992.txt), which states as follows:
+
+> If an `<order by clause>` is not specified, then the table specified by the `<cursor specification>` is T and the ordering of rows in T is implementation-dependent.
+
+In the following two queries, both results are considered legal:
+
+```sql
+> select * from t;
++------+------+
+| a    | b    |
++------+------+
+|    1 |    1 |
+|    2 |    2 |
++------+------+
+2 rows in set (0.00 sec)
+```
+
+```sql
+> select * from t; -- the order of results is not guaranteed
++------+------+
+| a    | b    |
++------+------+
+|    2 |    2 |
+|    1 |    1 |
++------+------+
+2 rows in set (0.00 sec)
+```
+
+If the list of columns used in the `ORDER BY` is non-unique, the statement is also considered non-deterministic. In the following example, the column `a` has duplicate values. Thus, only `ORDER BY a, b` is guaranteed deterministic:
+
+```sql
+> select * from t order by a;
++------+------+
+| a    | b    |
++------+------+
+|    1 |    1 |
+|    2 |    1 |
+|    2 |    2 |
++------+------+
+3 rows in set (0.00 sec)
+```
+
+In the following statement, the order of column `a` is guaranteed, but the order of `b` is not guaranteed.
+
+```sql
+> select * from t order by a;
++------+------+
+| a    | b    |
++------+------+
+|    1 |    1 |
+|    2 |    2 |
+|    2 |    1 |
++------+------+
+3 rows in set (0.00 sec)
+```
+
+In TiDB, you can also use the system variable [`tidb_enable_ordered_result_mode`](/system-variables.md#tidb_enable_ordered_result_mode) to sort the final output result automatically.
 
 ## Does TiDB support `SELECT FOR UPDATE`?
 
