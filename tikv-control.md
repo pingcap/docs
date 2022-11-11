@@ -21,7 +21,7 @@ TiKV Control (`tikv-ctl`) is a command line tool of TiKV, used to manage the clu
 {{< copyable "shell-regular" >}}
 
 ```bash
-tiup ctl tikv
+tiup ctl:<cluster-version> tikv
 ```
 
 ```
@@ -86,7 +86,7 @@ SUBCOMMANDS:
     unsafe-recover        Unsafely recover the cluster when the majority replicas are failed
 ```
 
-You can add corresponding parameters and subcommands after `tiup ctl tikv`.
+You can add corresponding parameters and subcommands after `tiup ctl:<cluster-version> tikv`.
 
 ## General options
 
@@ -348,9 +348,9 @@ If the command is successfully executed, it prints the above information. If the
 
 ### Modify the TiKV configuration dynamically
 
-You can use the `modify-tikv-config` command to dynamically modify the configuration arguments. Currently, the TiKV configuration items that can be dynamically modified and the detailed modification are consistent with modifying configuration using SQL statements. For details, see [Modify TiKV configuration online](/dynamic-config.md#modify-tikv-configuration-online).
+You can use the `modify-tikv-config` command to dynamically modify the configuration arguments. Currently, the TiKV configuration items that can be dynamically modified and the detailed modification are consistent with modifying configuration using SQL statements. For details, see [Modify TiKV configuration dynamically](/dynamic-config.md#modify-tikv-configuration-dynamically).
 
-- `-n` is used to specify the full name of the configuration item. For the list of configuration items that can be modified online, see [Modify TiKV configuration online](/dynamic-config.md#modify-tikv-configuration-online).
+- `-n` is used to specify the full name of the configuration item. For the list of configuration items that can be modified dynamically, see [Modify TiKV configuration dynamically](/dynamic-config.md#modify-tikv-configuration-dynamically).
 - `-v` is used to specify the configuration value.
 
 Set the size of `shared block cache`:
