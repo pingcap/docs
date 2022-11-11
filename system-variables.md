@@ -3702,7 +3702,7 @@ For details, see [Identify Slow Queries](/identify-slow-queries.md).
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
 - Type: Enumeration
-- Default value: ""
+- Default value: `pessimistic`
 - Possible values: `pessimistic`, `optimistic`
 - This variable is used to set the transaction mode. TiDB 3.0 supports the pessimistic transactions. Since TiDB 3.0.8, the [pessimistic transaction mode](/pessimistic-transaction.md) is enabled by default.
 - If you upgrade TiDB from v3.0.7 or earlier versions to v3.0.8 or later versions, the default transaction mode does not change. **Only the newly created clusters use the pessimistic transaction mode by default**.
