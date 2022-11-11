@@ -24,7 +24,8 @@ In v6.4.0-DMR, the key new features and improvements are as follows:
 - TiFlash 静态加密支持国密算法 SM4。
 - 支持通过 SQL 语句对指定 Partition 的 TiFlash 副本立即触发物理数据整理 (Compaction)。
 - 支持对数据库用户增加额外说明。
-- 支持基于 AWS EBS snapshot 的集群备份和恢复。
+- 支持[基于 AWS EBS snapshot 的集群备份和恢复](https://docs.pingcap.com/zh/tidb-in-kubernetes/v1.4/backup-to-aws-s3-by-snapshot)。
+- 支持在分库分表合并迁移场景中[标记下游表中的数据来自上游哪个分库、分表和数据源](/dm/dm-key-features.md#提取分库分表数据源信息写入合表)。
 
 ## New features
 
@@ -52,7 +53,7 @@ In v6.4.0-DMR, the key new features and improvements are as follows:
 
 ### Security
 
-*  TiFlash supports the SM4 algorithm for encryption at rest [#5953](https://github.com/pingcap/tiflash/issues/5953) @[lidezhu](https://github.com/lidezhu) **tw@ran-huang**
+* TiFlash supports the SM4 algorithm for encryption at rest [#5953](https://github.com/pingcap/tiflash/issues/5953) @[lidezhu](https://github.com/lidezhu) **tw@ran-huang**
 
     Add the SM4 algorithm for TiFlash encryption at rest. When you configure encryption at rest, you can enable the SM4 encryption capacity by setting the value of the `data-encryption-method` configuration to `sm4-ctr` in the `tiflash-learner.toml` configuration file.
 
@@ -60,13 +61,11 @@ In v6.4.0-DMR, the key new features and improvements are as follows:
 
 ### Observability
 
-* 集群诊断功能 GA [#1438](https://github.com/pingcap/tidb-dashboard/issues/1438) @[Hawkson-jee](https://github.com/Hawkson-jee) **tw@shichun-0415**
+* Cluster diagnostics becomes GA [#1438](https://github.com/pingcap/tidb-dashboard/issues/1438) @[Hawkson-jee](https://github.com/Hawkson-jee) **tw@shichun-0415**
 
-    集群诊断功能是在指定的时间范围内，对集群可能存在的问题进行诊断，并将诊断结果和一些集群相关的负载监控信息汇总成一个诊断报告。诊断报告是网页形式，通过浏览器保存后可离线浏览和传阅。
+    [Cluster diagnostics](/dashboard/dashboard-diagnostics-access.md) diagnoses the problems that might exist in a cluster within a specified time range, and summarizes the diagnostic results and the cluster-related load monitoring information into [a diagnostic report](/dashboard/dashboard-diagnostics-report.md). This diagnostic report is in the form of a web page. You can browse the page offline and circulate this page link after saving the page from a browser.
 
-    用户可以通过该报告快速了解集群内的基本诊断信息，包括负载、组件、耗时和配置信息。若用户的集群存在一些常见问题，在[诊断信息](/dashboard/dashboard-diagnostics-report.md#诊断信息)部分可以了解 TiDB 内置自动诊断的结果。
-
-    详细内容见[用户文档](/dashboard/dashboard-diagnostics-access.md)
+    With the diagnostic reports, you can quickly understand the basic health information of the cluster, including the load, component status, latency, and configurations. If the cluster has some common problems, you can further locate the causes in the result of the built-in automatic diagnosis in the [diagnostic information](/dashboard/dashboard-diagnostics-report.md#diagnostic-information) section.
 
 ### Performance
 
@@ -103,14 +102,6 @@ In v6.4.0-DMR, the key new features and improvements are as follows:
 * Improve the performance of statistics collection on partitioned tables [#37977](https://github.com/pingcap/tidb/issues/37977) @[Yisaer](https://github.com/Yisaer) **tw@TomShawn**
 
     In v6.4.0, TiDB optimizes the strategy of collecting statistics on partitioned tables. You can use the system variable [`tidb_auto_analyze_partition_batch_size`](/system-variables.md#tidb-auto-analyze-partitoin-batch-size-new-in-v640) to set the concurrency of collecting statistics on partitioned tables in parallel to speed up the collection and shorten the analysis time.
-
-### Transactions
-
-* 功能简短描述
-
-    功能详细描述（功能是什么，对用户的价值是什么，怎么用） [#issue]() @[贡献者 GitHub ID]()
-
-    [用户文档]()
 
 ### Stability
 
@@ -194,51 +185,58 @@ In v6.4.0-DMR, the key new features and improvements are as follows:
 
     This feature improves TiDB compatibility with MySQL syntax and makes it easier to integrate TiDB into tools or platforms in the MySQL ecosystem.
 
-
 ### Backup and restore
 
-* 基于 AWS EBS snapshot 的集群备份和恢复 [#issue](https://github.com/pingcap/tidb/issues/33849) @[fengou1](https://github.com/fengou1) **tw@shichun-0415**
+* Support backing up a TiDB cluster using EBS volume snapshots [#issue](https://github.com/pingcap/tidb/issues/33849) @[fengou1](https://github.com/fengou1) **tw@shichun-0415**
 
-    如果你的 TiDB 集群部署在 EKS 上，使用了 AWS EBS 卷，并且对数据备份有以下要求，可考虑使用 TiDB Operator 将 TiDB 集群数据以卷快照以及元数据的方式备份至 AWS S3：
+    If your TiDB cluster is deployed on EKS and uses AWS EBS volumes, and you have the following requirements when backing up TiDB cluster data , you can use TiDB Operator to back up the data by volume snapshots and metadata to AWS S3:
 
-    - 备份的影响降到最小，如备份对 QPS 和事务耗时影响小于 5%，不占用集群 CPU 以及内存。
-    - 快速备份和恢复，比如 1 小时内完成备份，2 小时内完成恢复。
+    - Minimize the impact of backup, for example, to keep the impact on QPS and transaction latency less than 5%, and to occupy no cluster CPU and memory.
+    - Back up and restore data in a short time. For example, finish backup within 1 hour and restore data in 2 hours.
 
-    [用户文档](https://docs.pingcap.com/zh/tidb-in-kubernetes/v1.4/backup-to-aws-s3-by-snapshot)
+    For more information, see [User document](https://docs.pingcap.com/tidb-in-kubernetes/v1.4/backup-to-aws-s3-by-snapshot).
 
 ### Data migration
 
-* 支持在分库分表合并迁移场景，下游合表支持增加扩展列并赋值，用于标记下游表中的记录来自上游哪个分库/分表/数据源。[#37797](https://github.com/pingcap/tidb/issues/37797) @[lichunzhu](https://github.com/lichunzhu) **tw@shichun-0415**
+* DM supports writing upstream source data to a merged table in extended columns to the downstream [#37797](https://github.com/pingcap/tidb/issues/37797) @[lichunzhu](https://github.com/lichunzhu) **tw@shichun-0415**
 
-    在上游分库分表合并到 TiDB 的场景，用户可以在目标表手动额外增加几个字段（扩展列），并在配置 DM 任务时，对这几个扩展列赋值，如赋予上游分库分表的名称，则通过 DM 写入到下游的记录会带上上游分库分表的名称，在一些数据异常的场景，用户可以通过该功能快速定位目标表的问题数据时来自于上游哪个分库分表。
+    When merging sharded schemas and tables from upstream to TiDB, you can manually add several fields (extended columns) in the target table and specify their values when configuring the DM task. Specifically, if you specify the names of the upstream sharded schema and table in the extended columns, the data written to the downstream by DM will include the schema name and table name. In scenarios with data exceptions, you can use this feature to quickly locate the source information of the data in the target table, such as the schema name and table name.
 
-    [用户文档](/dm/dm-key-features.md#提取分库分表数据源信息写入合表)
+    For more information, see [Extract table, schema, and source information and write into the merged table](/dm/dm-key-features.md#extract-table-schema-and-source-information-and-write-into-the-merged-table).
 
-* 优化 DM 的前置检查项，将部分必须通过项改为非必须通过项。[#7333](https://github.com/pingcap/tiflow/issues/7333) @[lichunzhu](https://github.com/lichunzhu) **tw@shichun-0415**
+* DM optimizes the pre-check mechanism by changing mandatory check items to optional ones [#7333](https://github.com/pingcap/tiflow/issues/7333) @[lichunzhu](https://github.com/lichunzhu) **tw@shichun-0415**
 
-    将“检查字符集是否存在兼容性差异”、“检查上游表中是否存在主键或唯一键约束”，“数据库主从配置，上游数据库必须设置数据库 ID server_id” 这 3 个前置检查从必须通过项，改为非必须通过项，提升用户前置检查的通过率。
+    To run a data migration task smoothly, DM triggers [a precheck](/dm/dm-precheck.md) automatically at the start of the task and returns the check results. DM starts the migration only after the precheck is passed.
 
-    [用户文档](/dm/dm-precheck.md)
+    In v6.4.0, DM changes the following three check items from mandatory to optional, which improves the pass rate of the pre-check:
 
-* 配置 DM 增量迁移任务，支持 binlog_name 和 GTID 的参数可作为选配项。[#7393](https://github.com/pingcap/tiflow/issues/7393) @[GMHDBJD](https://github.com/GMHDBJD) **tw@shichun-0415**
+    - Check whether the upstream tables use character sets that are incompatible with TiDB.
+    - Check whether the upstream tables have primary key constraints or unique key constraints
+    - Check whether the database ID `server_id` for the upstream database has been specified in the primary-secondary configuration.
 
-    用户只配置 DM 增量迁移任务时，如果不指定 binlog_name 和 GTID 的参数取值，则默认按任务的启动时间去上游获取该时间之后的 binlog file，并将这些增量数据迁移到下游 ，降低了用户的理解成本和配置复杂度。
+* DM supports configuring binlog position and GTID as optional parameters for incremental migration tasks [#7393](https://github.com/pingcap/tiflow/issues/7393) @[GMHDBJD](https://github.com/GMHDBJD) **tw@shichun-0415**
 
-    [用户文档](/dm/task-configuration-file-full.md)
+    Since v6.4.0, you can perform incremental migration directly without specifying the binlog position or GTID. DM automatically obtains the binlog files generated after the task starts from upstream and migrates these incremental data to the downstream. This relieves users from laborious understanding and complicated configuration.
 
-* DM 任务增加一些状态信息的展示 [#7343](https://github.com/pingcap/tiflow/issues/7343) @[okJiang](https://github.com/okJiang) **tw@shichun-0415**
+    For more information, see [DM Advanced Task Configuration File](/dm/task-configuration-file-full.md).
 
-    * 增加了 DM 任务当前数据导出、数据导入的性能，单位 bytes/s
-    * 将当前 DM 写入目标库的性能指标命名 从 TPS 改为 RPS （rows/second）
-    * 新增了 DM 全量任务数据导出的进度展示
+* DM adds more status indicators for migration tasks [#7343](https://github.com/pingcap/tiflow/issues/7343) @[okJiang](https://github.com/okJiang) **tw@shichun-0415**
 
-    [用户文档](/dm/dm-query-status.md)
+    DM provides performance and progress indicators for migration tasks. Such information helps users learn about and control the task progress. In addition, the status information also provides a references for troubleshooting.
+
+    In v6.4.0, DM adds several status indicators. They can help users understand the migration performance and progress more intuitively:
+
+    * Add status indicators (in bytes/s) showing data importing and exporting performance.
+    * Rename the performance indicator for writing data to the downstream database from TPS to RPS (in rows/s).
+    * Add progress indicators showing the data export progress of DM full migration tasks.
+
+    For more information about these indicators, see [Query Task Status in TiDB Data Migration](/dm/dm-query-status.md).
 
 ### TiDB data share subscription
 
-- TiCDC 支持同步数据到 `3.2.0` 版本的 Kafka **tw@shichun-0415**
+- TiCDC supports replicating data to Kafka of the `3.2.0` version [#7191](https://github.com/pingcap/tiflow/issues/7191) @[3AceShowHand](https://github.com/3AceShowHand) **tw@shichun-0415**
 
-    TiCDC 下游可支持的 Kafka 的最高版本从 `3.1.0` 变为 `3.2.0`。你可以将通过 TiCDC 将数据同步到不高于 `3.2.0` 版本的 Kafka。
+    From v6.4.0, TiCDC supports replicating data to Kafka of the `3.2.0` version and earlier.
 
 ## Compatibility changes
 
@@ -350,7 +348,7 @@ In v6.4.0-DMR, the key new features and improvements are as follows:
 
         - 封装、暴露 Checker 对应的接口，提升各个入口功能组装、调用的灵活性。[#7116](https://github.com/pingcap/tiflow/issues/7116) @[D3Hunter](https://github.com/D3Hunter)
         - 移除 dmctl 中无用的 operate-source update 指令。[#7246](https://github.com/pingcap/tiflow/issues/7246) @[buchuitoudegou](https://github.com/buchuitoudegou)
-        - 解决了 TiDB 不兼容上游数据库的建表 SQL 导致 DM 全量迁移报错的问题 [#37984](https://github.com/pingcap/tidb/issues/37984) @[lance6716](https://github.com/lance6716) **tw@shichun-0415**
+        - 解决了 TiDB 不兼容上游数据库的建表 SQL 导致 DM 全量迁移报错的问题，当上游的建表 SQL TiDB 不兼容时，用户可以提前在 TiDB 手动创建好目标表，让全量迁移任务继续运行 [#37984](https://github.com/pingcap/tidb/issues/37984) @[lance6716](https://github.com/lance6716) **tw@shichun-0415**
 
     + TiDB Lightning
 
@@ -366,10 +364,11 @@ In v6.4.0-DMR, the key new features and improvements are as follows:
     - 修复 CTE 在 union 时可能得到错误结果的问题 [#37928](https://github.com/pingcap/tidb/issues/37928) @[YangKeao](https://github.com/YangKeao)
     - 修复监控 transaction region num panel 信息不准确问题 [#38139](https://github.com/pingcap/tidb/issues/38139) @[jackysp](github.com/jackysp)
     - 修复 [`tidb_constraint_check_in_place_pessimistic`](/system-variables.md#tidb_constraint_check_in_place_pessimistic-从-v630-版本开始引入) 可能影响内部事务问题，修改该变量作用域为 session [#38766](https://github.com/pingcap/tidb/issues/38766)
-- 修复了条件在某些场景下被错误下推 projection 的问题 [#35623](https://github.com/pingcap/tidb/issues/35623)@[Reminiscent](https://github.com/Reminiscent)
-- 修复了 `AND` `OR` 条件的 `isNullRejected` 的错误导致查询结果错误的问题 [#38304]( https://github.com/pingcap/tidb/issues/38304) @[Yisaer](https://github.com/Yisaer)
-- 修复了外连接消除时没有考虑 `GROUP_CONCAT` 内部的 `order by` 导致查询出错的问题 [#18216](https://github.com/pingcap/tidb/issues/18216) @[winoros](https://github.com/winoros) 
-- 修复了错误下推的条件被 join reorder 丢弃后导致查询结果错误的问题 [#38736](https://github.com/pingcap/tidb/issues/38736) @[winoros](https://github.com/winoros) 
+    - 修复了条件在某些场景下被错误下推 projection 的问题 [#35623](https://github.com/pingcap/tidb/issues/35623)@[Reminiscent](https://github.com/Reminiscent)
+    - 修复了 `AND` `OR` 条件的 `isNullRejected` 的错误导致查询结果错误的问题 [#38304]( https://github.com/pingcap/tidb/issues/38304) @[Yisaer](https://github.com/Yisaer)
+    - 修复了外连接消除时没有考虑 `GROUP_CONCAT` 内部的 `order by` 导致查询出错的问题 [#18216](https://github.com/pingcap/tidb/issues/18216) @[winoros](https://github.com/winoros)
+    - 修复了错误下推的条件被 join reorder 丢弃后导致查询结果错误的问题 [#38736](https://github.com/pingcap/tidb/issues/38736) @[winoros](https://github.com/winoros)
+
 + TiKV
 
     - 修复了当环境中存在多个 `cgroup`s 和 `mountinfo`s 时的启动异常问题 [#13660](https://github.com/tikv/tikv/issues/13660) @[tabokie](https://github.com/tabokie)
