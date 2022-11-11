@@ -428,7 +428,7 @@ Configuration items related to storage.
 
 > **Warning:**
 
-> - As the difference of storage format between API V1 and API V2, you can enable or disable API V2 smoothly **ONLY** when no other but TiDB data existing in TiKV. In other scenarios, you need to deploy a new cluster, and migrate data by [RawKV BR](https://tikv.org/docs/dev/concepts/explore-tikv-features/backup-restore/).
+> - As the different underlying storage format between API V1 and API V2, you can enable or disable API V2 smoothly **only** when there are only TiDB data existing in TiKV. In other scenarios, you need to deploy a new cluster, and migrate data using [RawKV Backup & Restore](https://tikv.org/docs/dev/concepts/explore-tikv-features/backup-restore/).
 > - After API V2 is enabled, you **cannot** downgrade the TiKV cluster to a version earlier than v6.1.0. Otherwise, data corruption might occur.
 
 ## storage.block-cache
