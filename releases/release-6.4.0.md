@@ -296,11 +296,10 @@ In v6.4.0-DMR, the key new features and improvements are as follows:
 
 + TiDB
 
-    - `mysql.tables_priv` 表中新增了 `grantor` 字段. [#38293](https://github.com/pingcap/tidb/issues/38293) @[CbcWestwolf](https://github.com/CbcWestwolf)
-    - 允许修改系统变量 `lc_messages`. [#38231](https://github.com/pingcap/tidb/issues/38231) @[djshow832](https://github.com/djshow832)
-    - 允许 `AUTO_RANDOM` 列作为聚簇复合索引中的第一列. [#38572](https://github.com/pingcap/tidb/issues/38572) @[tangenta](https://github.com/tangenta)
-    - `json_path` 支持数组范围选取 [#38583](https://github.com/pingcap/tidb/issues/38583) @[YangKeao](https://github.com/YangKeao)
-    - `CREATE USER` 和 `ALTER USER` 支持 `ATTRIBUTE` 和 `COMMENT`. [#38172](https://github.com/pingcap/tidb/issues/38172) @[CbcWestwolf](https://github.com/CbcWestwolf)
+    - `mysql.tables_priv` 表中新增了 `grantor` 字段 [#38293](https://github.com/pingcap/tidb/issues/38293) @[CbcWestwolf](https://github.com/CbcWestwolf)
+    - 允许修改系统变量 `lc_messages` [#38231](https://github.com/pingcap/tidb/issues/38231) @[djshow832](https://github.com/djshow832)
+    - 允许 `AUTO_RANDOM` 列作为聚簇复合索引中的第一列 [#38572](https://github.com/pingcap/tidb/issues/38572) @[tangenta](https://github.com/tangenta)
+    - `CREATE USER` 和 `ALTER USER` 支持 `ATTRIBUTE` 和 `COMMENT` [#38172](https://github.com/pingcap/tidb/issues/38172) @[CbcWestwolf](https://github.com/CbcWestwolf)
     - 内部事务重试使用悲观模式避免重试失败，降低耗时 [#38136](https://github.com/pingcap/tidb/issues/38136) @[jackysp](https://github.com/jackysp)
 
 + TiKV
@@ -308,12 +307,15 @@ In v6.4.0-DMR, the key new features and improvements are as follows:
     - raftstore 新增 `apply-yield-write-size` 配置项，以限制 raftstore 的最大单轮 Apply 写入的数据大小，减缓 raftstore 线程在 Apply 写入过大时的阻塞现象。[#13594](https://github.com/tikv/tikv/pull/13594) @[glorv](https://github.com/glorv)
     - 为 Region 的 Leader 迁移前增加缓存预热阶段，减缓 Leader 迁移时造成QPS剧烈抖动现象。[#13556](https://github.com/tikv/tikv/pull/13556) @[cosven](https://github.com/cosven)
     - 新增支持将 `json_contains` 算子下推至 Coprocessor 。[#13592](https://github.com/tikv/tikv/issues/13592) @[lizhenhuan](https://github.com/lizhenhuan)
-    - 新增对 `CausalTsProvider` 的异步实现。 [#13428](https://github.com/tikv/tikv/issues/13428) @[zeminzhou](https://github.com/zeminzhou)
+    - 新增对 `CausalTsProvider` 的异步实现 [#13428](https://github.com/tikv/tikv/issues/13428) @[zeminzhou](https://github.com/zeminzhou)
 
 + PD
 
-    - note [#issue]() @[贡献者 GitHub ID]()
-    - note [#issue]() @[贡献者 GitHub ID]()
+    - 新增热点调度 rank v2 算法，在特定场景下 `v2` 版本算法则可以在两个维度都取得更好的均衡效果，并减少无效调度 [#5021](https://github.com/tikv/pd/issues/5021) @[HundunDM](https://github.com/hundundm)
+    - 改进 Operator 超时机制，防止过早超时 [#5596](https://github.com/tikv/pd/issues/5596) @[bufferflies](https://github.com/bufferflies)
+    - 新增 Placement rule 支持 witness [#5568](https://github.com/tikv/pd/issues/5568) @[ethercflow](https://github.com/ethercflow)
+    - 优化调度器在大集群下的性能 [#5473](https://github.com/tikv/pd/issues/5473)@[bufferflies](https://github.com/bufferflies)
+    - 支持 external timestamp [#5637](https://github.com/tikv/pd/issues/5637) @[lhy1024](https://github.com/lhy1024)
 
 + TiFlash
 
@@ -328,60 +330,57 @@ In v6.4.0-DMR, the key new features and improvements are as follows:
 
     + TiDB Dashboard
 
-        - Monitoring 页面展示 TiFlash 相关指标，并且优化指标的展示方式。 [#1440](https://github.com/pingcap/tidb-dashboard/issues/1440) @[YiniXu9506](https://github.com/YiniXu9506)
-        - 在 Slow Query 列表 和 SQL Statement 列表展示结果行数。 [#1407](https://github.com/pingcap/tidb-dashboard/pull/1407) @[baurine](https://github.com/baurine)
+        - Monitoring 页面展示 TiFlash 相关指标，并且优化指标的展示方式 [#1440](https://github.com/pingcap/tidb-dashboard/issues/1440) @[YiniXu9506](https://github.com/YiniXu9506)
+        - 在 Slow Query 列表 和 SQL Statement 列表展示结果行数 [#1407](https://github.com/pingcap/tidb-dashboard/pull/1407) @[baurine](https://github.com/baurine)
         - 优化 Dashboard 的报错信息。  [#1407](https://github.com/pingcap/tidb-dashboard/pull/1407) @[baurine](https://github.com/baurine)
 
     + Backup & Restore (BR)
 
-        - 改进加载元数据的机制，仅在需要的时候才会将元数据加载到内存中，显著减少了 PITR 过程中的内存压力。 [#38404](https://github.com/pingcap/tidb/issues/38404) @[YuJuncen](https://github.com/YuJuncen)
-        - note [#issue]() @[贡献者 GitHub ID]()
+        - 改进加载元数据的机制，仅在需要的时候才会将元数据加载到内存中，显著减少了 PITR 过程中的内存压力 [#38404](https://github.com/pingcap/tidb/issues/38404) @[YuJuncen](https://github.com/YuJuncen)
 
     + TiCDC
 
-        - note [#issue]() @[贡献者 GitHub ID]()
-        - note [#issue]() @[贡献者 GitHub ID]()
+        - TiCDC 支持同步 Exchange Partition DDL [#639](https://github.com/pingcap/tiflow/issues/639) @[asddongmen](https://github.com/asddongmen)
+        - 提升 MQ sink 非 batch 协议的性能 [#7353](https://github.com/pingcap/tiflow/issues/7353) @[hi-rustin](https://github.com/hi-rustin)
+        - 提升单表大量 region 场景下 TiCDC puller 的性能 [#7078](https://github.com/pingcap/tiflow/issues/7078) [#7281](https://github.com/pingcap/tiflow/issues/7281) @[sdojjy](https://github.com/sdojjy)
+        - 支持 Kafka 3.x 版 [7191](https://github.com/pingcap/tiflow/issues/7191) @[3AceShowHand](https://github.com/3AceShowHand)
+        - 支持 syncpoint 功能与下游 TiDB 集群的 `tidb_enable_external_ts_read`  一起使用  [#7419](https://github.com/pingcap/tiflow/issues/7419) @[asddongmen](https://github.com/asddongmen)
 
     + TiDB Data Migration (DM)
 
-        - 解决了 TiDB 不兼容上游数据库的建表 SQL 导致 DM 全量迁移报错的问题。[#37984](https://github.com/pingcap/tidb/issues/37984) @[lance6716](https://github.com/lance6716) **tw@shichun-0415**
-
-        DM 会默认使用上游数据库的建表 SQL 去 TiDB 执行，帮用户创建好目标表。当上游的建表 SQL  TiDB 不兼容时，DM 使用该 SQL 帮用户创建目标表会失败，导致 DM 任务中断。这时候用户可以提前在 TiDB 手动创建好目标表，DM 检查到已存在的目标表时会忽略掉这个建表 SQL 报错，让全量迁移任务继续运行。
-
-        [用户文档](https://github.com/pingcap/docs-cn/pull/11718)
-
-        - note [#issue]() @[贡献者 GitHub ID]()
+        - 封装、暴露 Checker 对应的接口，提升各个入口功能组装、调用的灵活性。[#7116](https://github.com/pingcap/tiflow/issues/7116) @[D3Hunter](https://github.com/D3Hunter)
+        - 移除 dmctl 中无用的 operate-source update 指令。[#7246](https://github.com/pingcap/tiflow/issues/7246) @[buchuitoudegou](https://github.com/buchuitoudegou)
+        - 解决了 TiDB 不兼容上游数据库的建表 SQL 导致 DM 全量迁移报错的问题 [#37984](https://github.com/pingcap/tidb/issues/37984) @[lance6716](https://github.com/lance6716) **tw@shichun-0415**
 
     + TiDB Lightning
 
-        - note [#issue]() @[贡献者 GitHub ID]()
-        - note [#issue]() @[贡献者 GitHub ID]()
-
-    + TiUP
-
-        - note [#issue]() @[贡献者 GitHub ID]()
-        - note [#issue]() @[贡献者 GitHub ID]()
+        - 优化文件扫描逻辑，提升 Schema 类型文件的扫描速度。[#38598](https://github.com/pingcap/tidb/issues/38598) @[dsdashun](https://github.com/dsdashun)
 
 ## Bug fixes
 
 + TiDB
 
-    - 修复新建索引之后有可能导致的数据索引不一致的问题. [#38165](https://github.com/pingcap/tidb/issues/38165) @[tangenta](https://github.com/tangenta)
-    - 修复关于 `information_schema.TIKV_REGION_STATUS` 表的权限问题. [#38407](https://github.com/pingcap/tidb/issues/38407) @[CbcWestwolf](https://github.com/CbcWestwolf)
-    - 修复 CTE 在 join 时可能得到错误结果的问题. [#38170](https://github.com/pingcap/tidb/issues/38170) @[wjhuang2016](https://github.com/wjhuang2016)
-    - 修复 CTE 在 union 时可能得到错误结果的问题. [#37928](https://github.com/pingcap/tidb/issues/37928) @[YangKeao](https://github.com/YangKeao)
+    - 修复新建索引之后有可能导致的数据索引不一致的问题 [#38165](https://github.com/pingcap/tidb/issues/38165) @[tangenta](https://github.com/tangenta)
+    - 修复关于 `information_schema.TIKV_REGION_STATUS` 表的权限问题 [#38407](https://github.com/pingcap/tidb/issues/38407) @[CbcWestwolf](https://github.com/CbcWestwolf)
+    - 修复 CTE 在 join 时可能得到错误结果的问题 [#38170](https://github.com/pingcap/tidb/issues/38170) @[wjhuang2016](https://github.com/wjhuang2016)
+    - 修复 CTE 在 union 时可能得到错误结果的问题 [#37928](https://github.com/pingcap/tidb/issues/37928) @[YangKeao](https://github.com/YangKeao)
     - 修复监控 transaction region num panel 信息不准确问题 [#38139](https://github.com/pingcap/tidb/issues/38139) @[jackysp](github.com/jackysp)
     - 修复 [`tidb_constraint_check_in_place_pessimistic`](/system-variables.md#tidb_constraint_check_in_place_pessimistic-从-v630-版本开始引入) 可能影响内部事务问题，修改该变量作用域为 session [#38766](https://github.com/pingcap/tidb/issues/38766)
-
+- 修复了条件在某些场景下被错误下推 projection 的问题 [#35623](https://github.com/pingcap/tidb/issues/35623)@[Reminiscent](https://github.com/Reminiscent)
+- 修复了 `AND` `OR` 条件的 `isNullRejected` 的错误导致查询结果错误的问题 [#38304]( https://github.com/pingcap/tidb/issues/38304) @[Yisaer](https://github.com/Yisaer)
+- 修复了外连接消除时没有考虑 `GROUP_CONCAT` 内部的 `order by` 导致查询出错的问题 [#18216](https://github.com/pingcap/tidb/issues/18216) @[winoros](https://github.com/winoros) 
+- 修复了错误下推的条件被 join reorder 丢弃后导致查询结果错误的问题 [#38736](https://github.com/pingcap/tidb/issues/38736) @[winoros](https://github.com/winoros) 
 + TiKV
 
     - 修复了当环境中存在多个 `cgroup`s 和 `mountinfo`s 时的启动异常问题 [#13660](https://github.com/tikv/tikv/issues/13660) @[tabokie](https://github.com/tabokie)
     - 修复 tikv 监控 tikv_gc_compaction_filtered 表达式错误问题 [#13537](https://github.com/tikv/tikv/issues/13537)
+    - 修复了 `delete_files_in_range` 中存在的异常而导致的性能问题 [#13534](https://github.com/tikv/tikv/issues/13534) @[tabokie](https://github.com/tabokie)
+    - 修复了获取 Snapshot 时 Lease 过期而引发的异常竞争问题 [#13553](https://github.com/tikv/tikv/issues/13553) @[SpadeA-Tang](https://github.com/SpadeA-Tang)
+    - 修复了第一次 FlashBack 失败时存在异常的问题 [#13695](https://github.com/tikv/tikv/issues/13695) @[HuSharp](https://github.com/HuSharp)
 
 + PD
 
-    - note [#issue]() @[贡献者 GitHub ID]()
-    - note [#issue]() @[贡献者 GitHub ID]()
+    - 修复 Stream 超时问题，加速 Leader 切换的速度 [#5207](https://github.com/tikv/pd/issues/5207) @[CabinfeverB](https://github.com/CabinfeverB)
 
 + TiFlash
 
@@ -391,36 +390,64 @@ In v6.4.0-DMR, the key new features and improvements are as follows:
 
     + TiDB Dashboard
 
-        - 避免查询 Statement 执行计划的时候造成 TiDB OOM。 [#1386](https://github.com/pingcap/tidb-dashboard/issues/1386) @[baurine](https://github.com/baurine)
+        - 避免查询 Statement 执行计划的时候造成 TiDB OOM [#1386](https://github.com/pingcap/tidb-dashboard/issues/1386) @[baurine](https://github.com/baurine)
+        - 修复 ng-monitoring 丢失 PD 连接后有概率造成 TopSQL 开关无效的问题 [#164](https://github.com/pingcap/ng-monitoring/issues/164) @[zhongzc](https://github.com/zhongzc)
 
     + Backup & Restore (BR)
-
-        - note [#issue]() @[贡献者 GitHub ID]()
-        - note [#issue]() @[贡献者 GitHub ID]()
+        - 修复由于恢复过程中 PD leader 切换，导致恢复失败的问题。[#36910](https://github.com/pingcap/tidb/issues/36910) @[MoCuishle28](https://github.com/MoCuishle28)
+        - 修复了日志备份任务无法 pause 的问题。[#38250](https://github.com/pingcap/tidb/issues/38250)@[joccau](https://github.com/joccau)
+        - 修复 BR 删除日志备份数据时，会删除不应被删除的数据的问题。[#38939](https://github.com/pingcap/tidb/issues/38939) @[Leavrth](https://github.com/leavrth)
+        - 修复 BR 第一次执行删除在 `Azure Storage Blob` 或 `Google Cloud Storage` 的日志备份数据时，会执行失败的问题。[#38229](https://github.com/pingcap/tidb/issues/38229) @[Leavrth](https://github.com/leavrth)
 
     + TiCDC
 
-        - note [#issue]() @[贡献者 GitHub ID]()
-        - note [#issue]() @[贡献者 GitHub ID]()
+        - 修复`changefeed query` 的输出中有`sasl-password` 明文的问题 [#7182](https://github.com/pingcap/tiflow/issues/7182) @[dveeden](https://github.com/dveeden)
+        - 修复可能向 ETCD 提交过多操作的问题 [#7131](https://github.com/pingcap/tiflow/issues/7131)  @[asddongmen](https://github.com/asddongmen)
+        - 修复 redo log 文件可能被错误删除的问题 [#7131](https://github.com/pingcap/tiflow/issues/7131)  @[asddongmen](https://github.com/asddongmen)
+        - 修复 sink v2 MQ 协议在同步宽表时性能回退的问题 [#7344](https://github.com/pingcap/tiflow/issues/7344) @[hi-rustin](https://github.com/hi-rustin)
+        - 修复 checkpoint ts 可能被提前推进的问题 [#7274](https://github.com/pingcap/tiflow/issues/7274) @[hi-rustin](https://github.com/hi-rustin)
+        - 修改 mounter 模块的日志级以修复 log 打印太多的问题 [#7235](https://github.com/pingcap/tiflow/issues/7235) @[hi-rustin](https://github.com/hi-rustin)
+        - 修复可能存在两个 owner 的问题 [#4051](https://github.com/pingcap/tiflow/issues/4051)  @[asddongmen](https://github.com/asddongmen)
 
     + TiDB Data Migration (DM)
 
-        - note [#issue]() @[贡献者 GitHub ID]()
-        - note [#issue]() @[贡献者 GitHub ID]()
+        - 修复 DM UI 产生错误 allow-list 参数问题。[#7096](https://github.com/pingcap/tiflow/issues/7096) @[zoubingwu](https://github.com/zoubingwu)
+        - 修复 DM Worker 在启动、停止时有一定概率触发 data race 的问题。[#6401](https://github.com/pingcap/tiflow/issues/6401) @[liumengya94](https://github.com/liumengya94)
+        - 修复当同步 Update、Delete 语句且下游行数据不存在时，DM 静默忽略的问题。[#6383](https://github.com/pingcap/tiflow/issues/6383) @[GMHDBJD](https://github.com/GMHDBJD)
+        - 修复 Query Status 时 secondsBehindMaster 字段未显示的问题。[#7189](https://github.com/pingcap/tiflow/issues/7189) @[GMHDBJD](https://github.com/GMHDBJD)
+        - 修复更新 Checkpoint 时可能触发大事务的问题。[#5010](https://github.com/pingcap/tiflow/issues/5010) @[lance6716](https://github.com/lance6716)
+        - 修复从 full 模式进行入 sync 模式且很快失败时可能丢失上游表结构信息的问题。[#7159](https://github.com/pingcap/tiflow/issues/7159) @[lance6716](https://github.com/lance6716)
+        - 修复开启一致性校验（validator）时可能触发死锁的问题。[#7241](https://github.com/pingcap/tiflow/issues/7241) @[buchuitoudegou](https://github.com/buchuitoudegou)
+        - 修复任务预检查对 INFORMATION_SCHEMA 表需要 SELECT 权限的问题。[#7317](https://github.com/pingcap/tiflow/issues/7317) @[lance6716](https://github.com/lance6716)
+        - 修复空 TLS 配置导致直接报错的问题。[#7384](https://github.com/pingcap/tiflow/issues/7384) @[liumengya94](https://github.com/liumengya94)
 
     + TiDB Lightning
 
-        - note [#issue]() @[贡献者 GitHub ID]()
-        - note [#issue]() @[贡献者 GitHub ID]()
+        - 修复 Parquet String Column 且 Table 设置了 binary 属性时导致导入性能下降的问题。[#38351](https://github.com/pingcap/tidb/issues/38351) @[dsdashun](https://github.com/dsdashun)
 
-    + TiUP
+    + TiDB Dumpling
 
-        - note [#issue]() @[贡献者 GitHub ID]()
-        - note [#issue]() @[贡献者 GitHub ID]()
+        - 修复导出大量表时可能导致超时的问题。[#36549](https://github.com/pingcap/tidb/issues/36549) @[lance6716](https://github.com/lance6716)
+        - 修复加锁模式但是上游不存在对应表时导致加锁报错的问题 [#38683](https://github.com/pingcap/tidb/issues/38683) @[lance6716](https://github.com/lance6716)
 
-## 贡献者
+## Contributors
 
-感谢来自 TiDB 社区的贡献者们：
+We would like to thank the following contributors from the TiDB community:
 
-- [goldwind-ting](https://github.com/goldwind-ting)
+- [645775992](https://github.com/645775992)
+- [An-DJ](https://github.com/An-DJ)
+- [AndrewDi](https://github.com/AndrewDi)
+- [erwadba](https://github.com/erwadba)
+- [fuzhe1989](https://github.com/fuzhe1989)
+- [goldwind-ting](https://github.com/goldwind-ting) (First-time contributor)
+- [h3n4l](https://github.com/h3n4l)
+- [igxlin](https://github.com/igxlin) (First-time contributor)
+- [ihcsim](https://github.com/ihcsim)
+- [JigaoLuo](https://github.com/JigaoLuo)
+- [morgo](https://github.com/morgo)
+- [Ranxy](https://github.com/Ranxy)
+- [shenqidebaozi](https://github.com/shenqidebaozi) (First-time contributor)
+- [taofengliu](https://github.com/taofengliu) (First-time contributor)
+- [TszKitLo40](https://github.com/TszKitLo40)
+- [wxbty](https://github.com/wxbty) (First-time contributor)
 - [zgcbj](https://github.com/zgcbj)
