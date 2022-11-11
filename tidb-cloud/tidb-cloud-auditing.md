@@ -43,18 +43,16 @@ For more information, see [Creating a bucket](https://docs.aws.amazon.com/Amazon
 1. Get the TiDB Cloud account ID and the External ID of the TiDB cluster that you want to enable audit logging.
 
     1. In the TiDB Cloud console, choose a project and a cluster deployed on AWS.
-    2. Select **Settings** > **Audit Settings**. The **Audit Logging** dialog box is displayed.
-    3. In the **Audit Logging** dialog box, click **Show AWS IAM policy settings**. The corresponding TiDB Cloud Account ID and TiDB Cloud External ID of the TiDB cluster are displayed.
+    2. Select **Settings** > **Audit Settings**. The **Audit Logging** dialog is displayed.
+    3. In the **Audit Logging** dialog, click **Show AWS IAM policy settings**. The corresponding TiDB Cloud Account ID and TiDB Cloud External ID of the TiDB cluster are displayed.
     4. Record the TiDB Cloud Account ID and the External ID for later use.
 
-2. In the AWS Management console, go to **IAM** > **Access Management** > **Policies**, and then check whether a storage bucket policy with the `s3:PutObject` write-only permission exists.
+2. In the AWS Management console, go to **IAM** > **Access Management** > **Policies**, and then check whether there is a storage bucket policy with the `s3:PutObject` write-only permission.
 
     - If yes, record the matched storage bucket policy for later use.
     - If not, go to **IAM** > **Access Management** > **Policies** > **Create Policy**, and define a bucket policy according to the following policy template.
 
-        {{< copyable "" >}}
-
-        ```
+        ```json
         {
             "Version": "2012-10-17",
             "Statement": [
@@ -67,7 +65,7 @@ For more information, see [Creating a bucket](https://docs.aws.amazon.com/Amazon
         }
         ```
 
-        In the template, `<Your S3 bucket ARN>` is the Amazon Resource Name (ARN) of your S3 bucket where the audit log files are to be written. You can go to the **Properties** tab in your S3 bucket and get the Amazon Resource Name (ARN) value in the **Bucket Overview** area. In the `"Resource"` field, you need to add `/*` after the ARN. For example, if the ARN is `arn:aws:s3:::tidb-cloud-test`, you need to configure the value of the `"Resource"` field as `"arn:aws:s3:::tidb-cloud-test/*"`.
+        In the template, `<Your S3 bucket ARN>` is the Amazon Resource Name (ARN) of your S3 bucket where the audit log files are to be written. You can go to the **Properties** tab in your S3 bucket and get the ARN value in the **Bucket Overview** area. In the `"Resource"` field, you need to add `/*` after the ARN. For example, if the ARN is `arn:aws:s3:::tidb-cloud-test`, you need to configure the value of the `"Resource"` field as `"arn:aws:s3:::tidb-cloud-test/*"`.
 
 3. Go to **IAM** > **Access Management** > **Roles**, and then check whether a role whose trust entity corresponds to the TiDB Cloud Account ID and the External ID that you recorded earlier already exists.
 
