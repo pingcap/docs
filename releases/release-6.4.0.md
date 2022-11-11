@@ -38,11 +38,11 @@ In v6.4.0-DMR, the key new features and improvements are as follows:
 
     [User document](/sql-statements/sql-statement-alter-table-compact.md#compact-tiflash-replicas-of-specified-partitions-in-a-table)
 
-* 支持通过 FLASHBACK CLUSTER 命令将集群快速回退到过去某一个指定的时间点 [#37197](https://github.com/pingcap/tidb/issues/37197) [#13303](https://github.com/tikv/tikv/issues/13303)  @[Defined2014](https://github.com/Defined2014) @[bb7133](https://github.com/bb7133) @[JmPotato](https://github.com/JmPotato) @[Connor1996](https://github.com/Connor1996) @[HuSharp](https://github.com/HuSharp) @[CalvinNeo](https://github.com/CalvinNeo) **tw@Oreoxmt**
+* Support restoring a cluster to a specific point in time by using `FLASHBACK CLUSTER TO TIMESTAMP` [#37197](https://github.com/pingcap/tidb/issues/37197) [#13303](https://github.com/tikv/tikv/issues/13303)  @[Defined2014](https://github.com/Defined2014) @[bb7133](https://github.com/bb7133) @[JmPotato](https://github.com/JmPotato) @[Connor1996](https://github.com/Connor1996) @[HuSharp](https://github.com/HuSharp) @[CalvinNeo](https://github.com/CalvinNeo) **tw@Oreoxmt**
 
-    FLASHBACK CLUSTER 支持在 Garbage Collection (GC) life time 时间内，快速回退整个集群到指定的时间点。使用该特性可以轻松快速撤消 DML 误操作，例如，用户误执行了没有 WHERE 子句的 DELETE，FLASHBACK CLUSTER 能够在几分钟内回退原数据库集群到指点时间点。该特性不依赖于数据库备份，支持在时间线上反复回退以确定特定数据更改发生的时间。FLASHBACK CLUSTER 不能替代数据库备份。
+    You can use the `FLASHBACK CLUSTER TO TIMESTAMP` syntax to restore a cluster to a specific point in time quickly with the Garbage Collection lifetime. This feature helps you to easily and quickly undo DML misoperations. For example, `FLASHBACK CLUSTER TO TIMESTAMP` can be used to restore the original cluster in minutes after mistakenly executing a `DELETE` without a `WHERE` clause. This feature does not rely on database backups and supports multiple rollbacks on the timeline to determine when the specific data changes occurred. Note that `FLASHBACK CLUSTER TO TIMESTAMP` cannot replace database backups.
 
-    [用户文档](/sql-statements/sql-statement-flashback-to-timestamp.md)
+    [User document](/sql-statements/sql-statement-flashback-to-timestamp.md)
 
 * Support restoring a deleted database by using `FLASH DATABASE` [#20463](https://github.com/pingcap/tidb/issues/20463)  @[erwadba](https://github.com/erwadba) **tw@ran-huang**
 
@@ -88,9 +88,11 @@ In v6.4.0-DMR, the key new features and improvements are as follows:
 
     [User document](/system-variables.md#tidb-opt-prefix-index-single-scan-new-in-v640)
 
-* 增强了 TiDB Chunk 复用机制 [#38606](https://github.com/pingcap/tidb/issues/38606) @[keeplearning20221](https://github.com/keeplearning20221) **tw@Oreoxmt**
+* Enhance TiDB chunk reuse mechanism [#38606](https://github.com/pingcap/tidb/issues/38606) @[keeplearning20221](https://github.com/keeplearning20221) **tw@Oreoxmt**
 
-    在之前的版本中， TiDB 只在 writechunk 函数中复用 chunk。 在 v6.4.0 版本中，将 chunk 复用机制扩展到执行函数中，通过复用 chunk 减少 TiDB 申请释放内存频率，进而提升部分场景下 SQL 执行效率。目前 Chunk 复用由变量 [`tidb_enable_reuse_chunk`]控制。
+    In previous versions, TiDB only reuses chunk in the `writechunk` function. TiDB v6.4.0 extends the chunk reuse mechanism to execute functions, reducing the frequency of TiDB applications to free memory by reusing Chunk, thus improving the SQL query execution efficiency in some scenarios. You can use the system variable [`tidb_enable_reuse_chunk`](/system-variables.md#tidb_enable_reuse_chunk-new-in-v640) to control whether to reuse chunk objects, which is enabled by default.
+
+    [User document](/system-variables.md#tidb_enable_reuse_chunk-new-in-v640)
 
 * Introduce a new optimizer hint `NO_DECORRELATE` to control whether to perform decorrelation for correlated subqueries [#37789](https://github.com/pingcap/tidb/issues/37789) @[time-and-fate](https://github.com/time-and-fate) **tw@TomShawn**
 
@@ -134,24 +136,19 @@ In v6.4.0-DMR, the key new features and improvements are as follows:
 
 ### Ease of use
 
-* TiKV API V2 GA [#11745](https://github.com/tikv/tikv/issues/11745) @[pingyu](https://github.com/pingyu) **tw@Oreoxmt**
+* TiKV API V2 becomes generally available (GA) [#11745](https://github.com/tikv/tikv/issues/11745) @[pingyu](https://github.com/pingyu) **tw@Oreoxmt**
 
-    在 v6.1.0 之前，TiKV 的 RawKV 接口仅存储客户端传入的原始数据，因此只提供基本的 Key Value 读写能力。此外，由于编码方式不同、数据范围没有隔离，因此在同一个 TiKV 集群中，TiDB、事务 KV、RawKV 无法同时使用，对于不同使用方式并存的场景，必须部署多套集群，增加了机器和部署成本。
+    Before v6.1.0, TiKV only provides basic Key Value read and write capability because it only stores the raw data passed in by the client. In addition, due to different coding methods and no isolation of data ranges, TiDB, Transactional KV, and RawKv cannot be used at the same time in the same TiKV cluster. Therefore, multiple clusters are needed in this case, thus increasing machine and deployment costs.
 
-    TiKV API V2 提供了新的存储格式，包括：
+    TiKV API V2 provides a new Raw Key Value storage format and access interface, including:
 
-    * RawKV 数据以 MVCC 方式存储，记录数据的变更时间戳，并在此基础上提供 Change Data Capture 能力（实验特性，见 [TiKV-CDC](https://github.com/tikv/migration/blob/main/cdc/README.md)）。
-    * 数据根据使用方式划分范围，支持单一集群 TiDB、事务 KV、RawKV 应用共存。
-    * 预留 Key Space 字段，可以为多租户等特性提供支持。
+    - The data is stored in MVCC and the change timestamp of the data is recorded. Based on this, Change Data Capture is implemented, which is an experimental. For more information, see [TiKV-CDC](https://github.com/tikv/migration/blob/main/cdc/README.md)
+    - Data is scoped according to different usage and supports co-existence of a single TiDB cluster, Transactional KV, and RawKV applications.
+    - The Key Space field is reserved to support features such as multi-tenancy.
 
-    使用 TiKV API V2 请在 TiKV 的 `[storage]` 配置中增加或修改 `api-version = 2`。详见[用户文档](/tikv-configuration-file.md#api-version-从-v610-版本开始引入)。
+    To enable TiKV API V2, you can set `api-version = 2` in the `[storage]` section of the TiKV configuration file.
 
-    > **警告：**
-    >
-    > - 由于底层存储格式发生了重大变化，因此仅当 TiKV 只有 TiDB 数据时，可以平滑启用或关闭 API V2。其他情况下，需要新建集群，并使用 [TiKV-BR](https://github.com/tikv/migration/blob/main/br/README-cn.md) 进行数据迁移。
-    > - 启用 API V2 后，不能将 TiKV 集群回退到 v6.1.0 之前的版本，否则可能导致数据损坏。
-
-    [用户文档](/tikv-configuration-file.md#api-version-从-v610-版本开始引入)
+    [User documentation](/tikv-configuration-file.md#api-version-new-in-v610)
 
 * Improve the accuracy of TiFlash data replication progress [#4902](https://github.com/pingcap/tiflash/issues/4902) @[hehechen](https://github.com/hehechen) **tw@qiancai**
 
@@ -169,11 +166,15 @@ In v6.4.0-DMR, the key new features and improvements are as follows:
 
     [User document](/partitioned-table.md#linear-hash-handling)
 
-* 支持高性能、全局单调递增的 AUTO_INCREMENT 列属性 (实验特性，见 [#38442](https://github.com/pingcap/tidb/issues/38442) @[tiancaiamao](https://github.com/tiancaiamao)) **tw@Oreoxmt**
+* Support a high-performance and globally monotonically increasing `AUTO_INCREMENT` (experimental) [#38442](https://github.com/pingcap/tidb/issues/38442) @[tiancaiamao](https://github.com/tiancaiamao) **tw@Oreoxmt**
 
-    TiDB 现有的 AUTO_INCREMENT 列属性的全局单调性和性能不可兼得，提供高性能、全局单调递增的 AUTO_INCREMENT 列属性能够更完美的兼容 MySQL AUTO_INCREMENT 的功能，降低用户从 MySQL 迁移到 TiDB 的改造成本。例如，使用该特性能够轻松解决用户的查询结果需要按照自增 ID 排序的问题。
+    TiDB v6.4.0 introduces the `AUTO_INCREMENT` MySQL compatibility mode, which enables monotonically increasing IDs on all TiDB instances by a centralized allocating service. This feature makes it easier to sort query results by auto-increment IDs. To use the MySQL compatibility mode, you can set `AUTO_ID_CACHE` to `1` when creating a table. The following is an example:
 
-    [用户文档](/auto-increment.md#mysql-兼容模式)
+    ```sql
+    CREATE TABLE t (a INT AUTO_INCREMENT PRIMARY KEY) AUTO_ID_CACHE = 1;
+    ```
+
+    [User document](/auto-increment.md#mysql-compatibility-mode)
 
 * Support range selection of array data in the JSON type [#13644](https://github.com/tikv/tikv/issues/13644) @[YangKeao](https://github.com/YangKeao) **tw@qiancai**
 
