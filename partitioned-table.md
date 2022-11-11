@@ -567,7 +567,7 @@ Before v6.4, if you execute DDL statements of MySQL Linear Hash partitions in Ti
 Since v6.4.0, TiDB supports parsing the MySQL `PARTITION BY LINEAR HASH` syntax but ignores the `LINEAR` keyword in it. If you have some existing DDL and DML statements of MySQL Linear Hash partitions, you can execute them in TiDB without modification:
 
 - For DDL statements of MySQL Linear Hash partitions, TiDB will create non-linear Hash partitioned tables correspondingly (note that Linear Hash partitioned tables are not provided in TiDB). 
-- DML statements of MySQL Linear Hash partitions are not affected unless you use explicit partition selection, in which case TiDB will return the query results of the corresponding TiDB Hash partitioned normally.
+- For DML statements of MySQL Linear Hash partitions, as long as you do not use explicit partition selection, TiDB will return the query results of the corresponding TiDB Hash partitioned normally.
 
 ### How TiDB partitioning handles NULL
 
