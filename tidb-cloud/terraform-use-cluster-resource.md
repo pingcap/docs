@@ -65,9 +65,7 @@ To view the information of all available projects, you can use the `tidbcloud_pr
 
    ```
    $ terraform apply --auto-approve
-   data.tidbcloud_projects.example_project: Reading...
-   data.tidbcloud_projects.example_project: Read complete after 1s [id=just for test]
-
+  
    Changes to Outputs:
      + projects = [
          + {
