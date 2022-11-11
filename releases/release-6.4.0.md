@@ -30,13 +30,13 @@ In v6.4.0-DMR, the key new features and improvements are as follows:
 
 ### SQL
 
-* 支持通过 SQL 语句对指定 Partition 的 TiFlash 副本立即触发物理数据整理 (Compaction) [#5315](https://github.com/pingcap/tiflash/issues/5315) @[hehechen](https://github.com/hehechen) **tw@qiancai**
+* Support using a SQL statement to compact TiFlash replicas of specified partitions in a table immediately [#5315](https://github.com/pingcap/tiflash/issues/5315) @[hehechen](https://github.com/hehechen) **tw@qiancai**
 
-    v6.2.0 版本发布了针对全表的 TiFlash 副本立即触发 [物理数据整理 (Compaction)](/sql-statements/sql-statement-alter-table-compact.md#alter-table--compact) 功能，支持用户自行选择合适的时机、手动执行 SQL 语句来对 TiFlash 中的物理数据立即进行整理，从而减少存储空间占用，并提升查询性能。v6.4.0 版本细化了 TiFlash 副本物理数据整理的粒度，支持对表中的指定 Partition 的 TiFlash 副本立即触发物理数据整理。
+    Since v6.2.0, TiDB has supported the feature of [compacting physical data immediately](/sql-statements/sql-statement-alter-table-compact.md#alter-table--compact) on a full-table replica of TiFlash. You can choose the right time to manually execute SQL statements to immediately compact the physical data in TiFlash, which helps to reduce storage space and improve query performance. In v6.4.0, we refine the granularity of TiFlash replica data to be compacted and support compacting TiFlash replicas of specified partitions in a table immediately.
 
-    通过 SQL 语句 `ALTER TABLE table_name COMPACT [PARTITION PartitionNameList] [engine_type REPLICA]` 可以立即触发指定 Partition 的 TiFlash 副本物理数据整理。
+    BY executing the SQL statement `ALTER TABLE table_name COMPACT [PARTITION PartitionNameList] [engine_type REPLICA]`, you can immediately compact TiFlash replicas of specified partitions in a table.
 
-    [用户文档](/sql-statements/sql-statement-alter-table-compact.md#alter-table--compact)
+    [User document](/sql-statements/sql-statement-alter-table-compact.md#compact-tiflash-replicas-of-specified-partitions-in-a-table)
 
 * 支持通过 FLASHBACK CLUSTER 命令将集群快速回退到过去某一个指定的时间点 [#37197](https://github.com/pingcap/tidb/issues/37197) [#13303](https://github.com/tikv/tikv/issues/13303)  @[Defined2014](https://github.com/Defined2014) @[bb7133](https://github.com/bb7133) @[JmPotato](https://github.com/JmPotato) @[Connor1996](https://github.com/Connor1996) @[HuSharp](https://github.com/HuSharp) @[CalvinNeo](https://github.com/CalvinNeo) **tw@Oreoxmt**
 
@@ -74,13 +74,13 @@ In v6.4.0-DMR, the key new features and improvements are as follows:
 
     As the number of coprocessor tasks increases, based on TiKV's processing speed, TiDB automatically increases concurrency (adjust the value of [`tidb_distsql_scan_concurrency`](/system-variables.md#tidb_distsql_scan_concurrency)) to reduce the coprocessor task queue and thus reduce latency.
 
-* 增加了动态规划算法来决定表的连接顺序 [#18969](https://github.com/pingcap/tidb/issues/18969) @[winoros](https://github.com/winoros) **tw@qiancai**
+* Add the dynamic planning algorithm to determine table join order [#18969](https://github.com/pingcap/tidb/issues/18969) @[winoros](https://github.com/winoros) **tw@qiancai**
 
-    在之前的版本中， TiDB 采用贪心算法来决定表的连接顺序。 在版本 v6.4.0 中， 优化器引入了[动态规划算法](/join-reorder.md#join-reorder-算法实例)，相比贪心算法， 动态规划算法会枚举更多可能的连接顺序，进而有机会发现更好的执行计划，提升部分场景下 SQL 执行效率。
+    In earlier versions, TiDB uses the greedy algorithm to determine the join order of tables. In v6.4.0, the TiDB optimizer introduces the [dynamic planning algorithm](/join-reorder.md#example-the-dynamic-programming-algorithm-of-join-reorder). The dynamic planning algorithm can enumerate more possible join orders than the greedy algorithm, so it increases the possibility to find a better execution plan and improve the SQL execution efficiency in some scenarios.
 
-    由于动态规划算法的枚举过程可能消耗更多的时间，目前 Join Reorder 算法由变量 [`tidb_opt_join_reorder_threshold`](/system-variables.md#tidboptjoinreorderthreshold) 控制，当参与 Join Reorder 的节点个数大于该阈值时选择贪心算法，反之选择动态规划算法。
+    Because the dynamic programming algorithm consumes more time, the selection of the TiDB Join Reorder algorithms is controlled by the [`tidb_opt_join_reorder_threshold`](/system-variables.md#tidb_opt_join_reorder_threshold) variable. If the number of nodes participating in Join Reorder is greater than this threshold, TiDB uses the greedy algorithm. Otherwise, TiDB uses the dynamic programming algorithm.
 
-    [用户文档](/join-reorder.md)
+    [User document](/join-reorder.md)
 
 * The prefix index supports filtering null values. [#21145](https://github.com/pingcap/tidb/issues/21145) @[xuyifangreeneyes](https://github.com/xuyifangreeneyes) **tw@TomShawn**
 
@@ -112,9 +112,9 @@ In v6.4.0-DMR, the key new features and improvements are as follows:
 
 ### Stability
 
-* 磁盘故障、I/O 无响应等极端情况下的故障恢复加速 [#13648](https://github.com/tikv/tikv/issues/13648) @[LykxSassinator](https://github.com/LykxSassinator) **tw@qiancai**
+* Accelerate fault recovery in extreme situations such as disk failure and I/O non-response   [#13648](https://github.com/tikv/tikv/issues/13648) @[LykxSassinator](https://github.com/LykxSassinator) **tw@qiancai**
 
-    数据库的可用性是企业用户最为关注的指标之一，但是在复杂的硬件环境下，如何快速检测故障，快速恢复一直是数据库面临的挑战之一。TiDB 在 6.4 版本，全面优化了 TiKV 节点的状态检测机制，即使在磁盘故障，I/O 无响应等极端情况，依然可以快速上报节点状态，同时搭配主动唤醒机制，提前发起选主，加速集群自愈。通过这次优化，TiDB 在磁盘故障场景下，集群恢复时间可以缩短 50% 左右。
+    For enterprise users, database availability is one of the most important metrics. While in complex hardware environments, how to quickly detect and recover from failures has always been one of the challenges of database availability. In v6.4, TiDB fully optimizes the state detection mechanism of TiKV nodes. Even in extreme situations such as disk failures and I/O non-response, TiDB can still report node status quickly and use the active wake-up mechanism to launch Leader election in advance, which accelerates cluster self-healing. Through this optimization, TiDB can shorten the cluster recovery time by about 50% in the case of disk failures.
 
 * Global control on TiDB memory usage [#37816](https://github.com/pingcap/tidb/issues/37816) @[wshwsh12](https://github.com/wshwsh12) **tw@TomShawn**
 
@@ -153,23 +153,21 @@ In v6.4.0-DMR, the key new features and improvements are as follows:
 
     [用户文档](/tikv-configuration-file.md#api-version-从-v610-版本开始引入)
 
-* 优化 TiFlash 数据同步进度的准确性 [#4902](https://github.com/pingcap/tiflash/issues/4902) @[hehechen](https://github.com/hehechen) **tw@qiancai**
+* Improve the accuracy of TiFlash data replication progress [#4902](https://github.com/pingcap/tiflash/issues/4902) @[hehechen](https://github.com/hehechen) **tw@qiancai**
 
-    TiDB 的 `information_schema.tiflash_replica` 表中的 `PROGRESS` 字段表示 TiFlash 副本与 TiKV 中对应表数据的同步进度。在之前的版本中，`PROCESS` 字段只显示 TiFlash 副本创建过程中的数据同步进度。在 TiFlash 副本创建完后，当在 TiKV 相应的表中导入新的数据时，该值不会更新数据的同步进度。
+    In TiDB, the `PROGRESS` field of the `information_schema.tiflash_replica` table is used to indicate the progress of data replication from the corresponding tables in TiKV to the TiFlash replicas. In earlier TiDB versions, the `PROCESS` field only provides the progress of data replication during the creation of the TiFlash replicas. After a TiFlash replica is created, if new data is imported to a corresponding table in TiKV, this field will not be updated to show the replication progress from TiKV to TiFlash for the new data.
 
-    v6.3.0 版本改进了 TiFlash 副本数据同步进度更新机制，在创建 TiFlash 副本后，进行数据导入等操作，TiFlash 副本需要和 TiKV 数据进行同步时，[`information_schema.tiflash_replica`](/information-schema/information-schema-tiflash-replica.md) 表中的 `PROGRESS` 值将会更新，显示实际的数据同步进度。通过此优化，你可以方便地查看 TiFlash 数据同步的实际进度。
-
-    [用户文档](/information-schema/information-schema-tiflash-replica.md)
+    In v6.4.0, TiDB improves the update mechanism of data replication progress for TiFlash replicas. After a TiFlash replica is created, if new data is imported to a corresponding table in TiKV, the `PROGRESS` value in the [`information_schema.tiflash_replica`](/information-schema/information-schema-tiflash-replica.md) table will be updated to show the actual replication progress from TiKV to TiFlash for the new data. With this improvement, you can easily view the actual progress of TiFlash data replication.
 
 ### MySQL compatibility
 
-* TiDB 分区表兼容 Linear Hash 分区 [#issue](https://github.com/pingcap/tidb/issues/38450) @[mjonss](https://github.com/mjonss) **tw@qiancai**
+* Be compatible with the Linear Hash partitioning syntax [#issue](https://github.com/pingcap/tidb/issues/38450) @[mjonss](https://github.com/mjonss) **tw@qiancai**
 
-    TiDB 现有的分区方式支持 Hash、Range、List 分区。TiDB v6.4.0 增加了对 [MySQL Linear Hash](https://dev.mysql.com/doc/refman/5.7/en/partitioning-linear-hash.html) 分区语法的兼容。
+    In the earlier version, TiDB has supported the Hash, Range, and List partitioning. Starting from v6.4.0, TiDB can also be compatible with [MySQL Linear Hash partitioning](https://dev.mysql.com/doc/refman/5.7/en/partitioning-linear-hash.html).
 
-    在 TiDB 上，你可以直接执行原有的 MySQL Linear Hash 分区的 DDL 语句，TiDB 将创建一个相应的 Hash 分区表（注意 TiDB 内部实际不存在 Linear Hash 分区）。你也可以直接执行原有的 MySQL Linear Hash 分区的 DML 语句，TiDB 将正常返回对应的 TiDB Hash 分区的查询结果。此功能保证了 TiDB 对 MySQL Linear Hash 分区的语法兼容，方便基于 MySQL 的应用无缝迁移到 TiDB。
+    In TiDB, you can execute the existing DDL statements of your MySQL Linear Hash partitions directly, and TiDB will create the corresponding Hash partition tables (note that there is no Linear Hash partition inside TiDB). You can also execute the existing DML statements of your MySQL Linear Hash partitions directly, and TiDB will return the query result of the corresponding TiDB Hash partitions normally. This feature ensures the TiDB syntax compatibility with MySQL Linear Hash partitions and facilitates seamless migration from MySQL-based applications to TiDB.
 
-    [用户文档](/mysql-compatibility.md)
+    [User document](/partitioned-table.md#linear-hash-handling)
 
 * 支持高性能、全局单调递增的 AUTO_INCREMENT 列属性 (实验特性，见 [#38442](https://github.com/pingcap/tidb/issues/38442) @[tiancaiamao](https://github.com/tiancaiamao)) **tw@Oreoxmt**
 
@@ -177,15 +175,24 @@ In v6.4.0-DMR, the key new features and improvements are as follows:
 
     [用户文档](/auto-increment.md#mysql-兼容模式)
 
-* 支持对 JSON 类型中的 Array 数据做范围选择 [#13644](https://github.com/tikv/tikv/issues/13644) @[YangKeao](https://github.com/YangKeao) **tw@qiancai**
+* Support range selection of array data in the JSON type [#13644](https://github.com/tikv/tikv/issues/13644) @[YangKeao](https://github.com/YangKeao) **tw@qiancai**
 
-    从 v6.4.0 起，TiDB 支持 [MySQL 兼容的范围选择语法](https://dev.mysql.com/doc/refman/8.0/en/json.html#json-paths)。 通过关键字 `to`，你可以指定元素起始和结束的位置，并选择 Array 中连续范围的元素，起始位置记为 `0`。 例如，使用 `$[0 to 2]` 可以选择 Array 中的前三个元素。 通过关键字 `last`，你可以指定 Array 中最后一个元素的位置，实现从右到左的位置设定。例如，使用 `$[last-2 to last]` 可以选择 Array 中的最后三个元素。 该特性简化了 SQL 的编写过程，进一步提升了 JSON 类型的兼容能力，降低了 MySQL 应用向 TiDB 迁移的难度。
+    Starting from v6.4.0, TiDB supports the [range selection syntax](https://dev.mysql.com/doc/refman/8.0/en/json.html#json-paths) to be compatible with MySQL.
 
-* 支持对数据库用户增加额外说明 [#38172](https://github.com/pingcap/tidb/issues/38172) @[CbcWestwolf](https://github.com/CbcWestwolf) **tw@qiancai**
+    - With the keyword `to`, you can specify the start and end positions of array elements and select elements of a continuous range in an array. With `0`, you can specify the position of the first element in an array. For example, using `$[0 to 2]`, you can select the first three elements of an array.
 
-    新版本扩展了 `Create User` 和 `Alter User` 的语法，能够为数据库用户添加额外的说明。 说明支持两种格式，利用 `COMMENT` 添加一段文本，或者用 `ATTRIBUTE` 添加一组 JSON 格式的结构化属性。 这个特性加强了 TiDB 对 MySQL 的语法的兼容性， 使得 TiDB 更容易融入 MySQL 生态的工具或平台。
+    - With the keyword `last`, you can specify the position of the last element in an array, which allows you to set the position from right to left. For example, using `$[last-2 to last]`, you can select the last three elements of an array.
 
-    [用户文档](/information-schema/information-schema-user-attributes.md)
+   This feature simplifies the process of writing SQL statements, further improves the JSON type compatibility, and reduces the difficulty of migrating MySQL applications to TiDB.
+
+* Support adding additional descriptions for database users [#38172](https://github.com/pingcap/tidb/issues/38172) @[CbcWestwolf](https://github.com/CbcWestwolf) **tw@qiancai**
+
+    In TiDB v6.4, you can use the [`CREATE USER`](/sql-statements/sql-statement-create-user.md) or [`ALTER USER`](/sql-statements/sql-statement-alter-user.md) to add additional descriptions for database users. TiDB provides two description formats. You can add a text comment using `COMMENT` and add a set of structured attributes in JSON format using `ATTRIBUTE`.
+
+    In addition, TiDB v6.4 adds the [USER_ATTRIBUTES](/information-schema/information-schema-user-attributes.md) table, where you can view the information of user comments and use attributes.
+
+    This feature improves TiDB compatibility with MySQL syntax and makes it easier to integrate TiDB into tools or platforms in the MySQL ecosystem.
+
 
 ### Backup and restore
 
