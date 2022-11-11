@@ -43,7 +43,7 @@ If the number of estimated rows that need to be joined is small (typically less 
 
 > **Note:**
 >
-> For the `estRows` of all Probe side sub-operators of `IndexJoin` and `Apply`, the meaning of the displayed row count is different before and after v6.4.0. You can find details in [TiDB Query Execution Plan Overview](/explain-overview.md#understand-explain-output).
+> In the execution plan, for all Probe side operators of `IndexJoin` and `Apply`, the meaning of `estRows` from v6.4.0 is different that before v6.4.0. You can find details in [TiDB Query Execution Plan Overview](/explain-overview.md#understand-explain-output).
 
 {{< copyable "sql" >}}
 
