@@ -7,17 +7,17 @@ summary: Learn how to use the cluster resource to create and modify a TiDB Cloud
 
 You can learn how to create and modify a TiDB Cloud cluster with the `tidbcloud_cluster` resource in this document.
 
-In addition, you will also learn how to get the necessary information with the `tidbcloud_project` and `tidbcloud_cluster_spec` data sources.
+In addition, you will also learn how to get the necessary information with the `tidbcloud_projects` and `tidbcloud_cluster_specs` data sources.
 
 ## Prerequisites
 
 - [Get TiDB Cloud Terraform Provider](/tidb-cloud/terraform-get-tidbcloud-provider.md).
 
-## Get project IDs using the project data source
+## Get project IDs using the projects data source
 
 Each TiDB cluster is in a project. Before you create a TiDB cluster, you need to get the ID of the project in which you want to create a cluster.
 
-To view the information of all available projects, you can use the `tidbcloud_project` data source as follows:
+To view the information of all available projects, you can use the `tidbcloud_projects` data source as follows:
 
 1. In the `main.tf` file that is created when you [Get TiDB Cloud Terraform Provider](/tidb-cloud/terraform-get-tidbcloud-provider.md), add the `data` and `output` blocks as follows:
 
@@ -37,21 +37,21 @@ To view the information of all available projects, you can use the `tidbcloud_pr
      private_key = "fake_private_key"
    }
 
-   data "tidbcloud_project" "example_project" {
+   data "tidbcloud_projects" "example_project" {
      page      = 1
      page_size = 10
    }
 
    output "projects" {
-     value = data.tidbcloud_project.example_project.items
+     value = data.tidbcloud_projects.example_project.items
    }
    ```
 
    - Use the `data` block to define the data source of TiDB Cloud, including the data source type and the data source name.
 
-      - To use the project data source, set the data source type as `tidbcloud_project`.
+      - To use the projects data source, set the data source type as `tidbcloud_projects`.
       - For the data source name, you can define it according to your need. For example, "example_project".
-      - For the project data source, you can use the `page` and `page_size` attributes to limit the maximum number of projects you want to check.
+      - For the projects data source, you can use the `page` and `page_size` attributes to limit the maximum number of projects you want to check.
 
    - Use the `output` block to define the data source information to be displayed in the output, and expose the information for other Terraform configurations to use.
 
@@ -65,8 +65,8 @@ To view the information of all available projects, you can use the `tidbcloud_pr
 
    ```
    $ terraform apply --auto-approve
-   data.tidbcloud_project.example_project: Reading...
-   data.tidbcloud_project.example_project: Read complete after 1s [id=just for test]
+   data.tidbcloud_projects.example_project: Reading...
+   data.tidbcloud_projects.example_project: Read complete after 1s [id=just for test]
 
    Changes to Outputs:
      + projects = [
@@ -116,11 +116,11 @@ To view the information of all available projects, you can use the `tidbcloud_pr
 
 Now, you can get all the available projects from the output. Copy one of the project IDs that you need.
 
-## Get cluster specification information using the cluster-spec data source
+## Get cluster specification information using the cluster-specs data source
 
 Before you create a cluster, you need to get the cluster specification information, which contains all available configuration values (such as supported cloud providers, regions, and node sizes).
 
-To get the cluster specification information, you can use the `tidbcloud_cluster_spec` data source as follows:
+To get the cluster specification information, you can use the `tidbcloud_cluster_specs` data source as follows:
 
 1. Edit the `main.tf` file as follows:
 
@@ -138,10 +138,10 @@ To get the cluster specification information, you can use the `tidbcloud_cluster
       public_key = "fake_public_key"
       private_key = "fake_private_key"
     }
-    data "tidbcloud_cluster_spec" "example_cluster_spec" {
+    data "tidbcloud_cluster_specs" "example_cluster_spec" {
     }
     output "cluster_spec" {
-      value = data.tidbcloud_cluster_spec.example_cluster_spec.items
+      value = data.tidbcloud_cluster_specs.example_cluster_spec.items
     }
     ```
 
@@ -345,12 +345,7 @@ The following example shows how to create a Dedicated Tier cluster.
 
     ```shell
     $ terraform apply
-    data.tidbcloud_project.example_project: Reading...
-    data.tidbcloud_project.example_project: Read complete after 1s [id=just for test]
-
-    Terraform used the selected providers to generate the following execution plan. Resource actions are indicated with the following symbols:
-      + create
-
+    
     Terraform will perform the following actions:
 
       # tidbcloud_cluster.example_cluster will be created
