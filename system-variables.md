@@ -2589,9 +2589,9 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 - Unit: Rows
 - This variable is used to set the minimum number of rows during the coprocessor paging request process. Setting it to a too small value increases the RPC request count between TiDB and TiKV, while setting it to a too large value might cause performance decrease when executing queries using IndexLookup with Limit. The default value of this variable is more friendly in OLTP scenarios than in OLAP scenarios. If the application only uses TiKV as the storage engine, consider increasing the value of this variable when executing OLAP workload queries, which might bring you better performance.
 
-![](https://user-images.githubusercontent.com/1420062/201061302-d88f4702-cb10-4523-8500-02389769d774.png)
+![TPCH](https://user-images.githubusercontent.com/1420062/201061302-d88f4702-cb10-4523-8500-02389769d774.png)
 
-As shown in this diagram, the performance of TPCH is affected by the settings of [`tidb_enable_paging`](/system-variables.md#tidb_max_paging_size-new-in-v630), `tidb_min_paging_size`, and [`tidb_max_paging_size`](/ system-variables.md#tidb_max_paging_size-new-in-v630), in which the vertical axis is the execution time and the smaller the better.
+As shown in this diagram, the performance of TPCH is affected by the settings of [`tidb_enable_paging`](/system-variables.md#tidb_max_paging_size-new-in-v630), `tidb_min_paging_size`, and [`tidb_max_paging_size`](/ system-variables.md#tidb_max_paging_size-new-in-v630). The vertical axis is the execution time, and it is the smaller the better.
 
 ### tidb_mpp_store_fail_ttl
 
