@@ -559,14 +559,14 @@ MOD(YEAR('2005-09-01'),4)
 =  1
 ```
 
-#### LINEAR HASH handling
+#### How TiDB handles LINEAR HASH partitions
 
-Before v6.4, if you execute DDL statements of MySQL Linear Hash partitions in TiDB, TiDB can only create non-partitioned tables. In this case, if you still want to use partitioned tables in TiDB, you need to update your DDL statements.
+Before v6.4.0, if you execute DDL statements of [MySQL Linear Hash](https://dev.mysql.com/doc/refman/5.7/en/partitioning-linear-hash.html) partitions in TiDB, TiDB can only create non-partitioned tables. In this case, if you still want to use partitioned tables in TiDB, you need to modify the DDL statements.
 
 Since v6.4.0, TiDB supports parsing the MySQL `PARTITION BY LINEAR HASH` syntax but ignores the `LINEAR` keyword in it. If you have some existing DDL and DML statements of MySQL Linear Hash partitions, you can execute them in TiDB without modification:
 
 - For DDL statements of MySQL Linear Hash partitions, TiDB will create non-linear Hash partitioned tables correspondingly (note that Linear Hash partitioned tables are not provided in TiDB). 
-- For DML statements of MySQL Linear Hash partitions, as long as you do not use explicit partition selection, TiDB will return the query results of the corresponding TiDB Hash partitioned normally.
+- For DML statements of MySQL Linear Hash partitions, as long as you do not use [partition selection](#partition-selection), TiDB will return the query results of the corresponding TiDB Hash partitioned normally.
 
 ### How TiDB partitioning handles NULL
 
