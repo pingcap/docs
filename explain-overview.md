@@ -59,7 +59,7 @@ The following describes the output of the `EXPLAIN` statement above:
 
 > **Note:**
 >
-> In the execution plan, for all Probe side operators of `IndexJoin` and `Apply`, the meaning of `estRows` from v6.4.0 is different that before v6.4.0.
+> In the returned execution plan, for all probe-side child nodes of `IndexJoin` and `Apply` operators, the meaning of `estRows` since v6.4.0 is different from that before v6.4.0.
 > Before v6.4.0, `estRows` means the estimated row count expected to be processed by the Probe side operators for each row from the Build side operator. From v6.4.0, `estRows` means the estimated **total row count** expected to be processed by the Probe side operators. The actual row count displayed (the `actRows` column) in the `EXPLAIN ANALYZE` statement means the total row count, so the meanings of `estRows` and `actRows` for those operatos are consistent from v6.4.0.
 >
 >
@@ -99,9 +99,9 @@ The following describes the output of the `EXPLAIN` statement above:
 > |         └─IndexRangeScan_19     | 1.00     | cop[tikv] | table:t2, index:ia(a) | range: decided by [eq(test.t2.a, test.t1.b)], keep order:false, stats:pseudo |
 > +---------------------------------+----------+-----------+-----------------------+------------------------------------------------------------------------------+
 > 
-> -- From v6.4.0:
+> -- Since v6.4.0:
 >
-> -- You can find the difference between `estRows` of `IndexLookUp_11`、`Selection_10`、`IndexRangeScan_8` and `TableRowIDScan_9` and that before v6.4.0.
+> -- You can find that the `estRows` column values for `IndexLookUp_11`, `Selection_10`, `IndexRangeScan_8`, and `TableRowIDScan_9` since v6.4.0 are different from that before v6.4.0.
 > +---------------------------------+----------+-----------+-----------------------+-----------------------------------------------------------------------------------------------------------------+
 > | id                              | estRows  | task      | access object         | operator info                                                                                                   |
 > +---------------------------------+----------+-----------+-----------------------+-----------------------------------------------------------------------------------------------------------------+
@@ -115,7 +115,7 @@ The following describes the output of the `EXPLAIN` statement above:
 > |   └─TableRowIDScan_9(Probe)     | 12487.50 | cop[tikv] | table:t2              | keep order:false, stats:pseudo                                                                                  |
 > +---------------------------------+----------+-----------+-----------------------+-----------------------------------------------------------------------------------------------------------------+
 >
-> -- You can find the difference between `estRows` of `Limit_17`、`IndexReader_21`、`Limit_20` and `IndexRangeScan_19` and that before v6.4.0.
+> -- You can find that the `estRows` column values for `Limit_17`, `IndexReader_21`, `Limit_20`, and `IndexRangeScan_19` since v6.4.0 are different from that before v6.4.0.
 > +---------------------------------+----------+-----------+-----------------------+------------------------------------------------------------------------------+
 > | id                              | estRows  | task      | access object         | operator info                                                                |
 > +---------------------------------+----------+-----------+-----------------------+------------------------------------------------------------------------------+
