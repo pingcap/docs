@@ -119,7 +119,11 @@ hide_commit: true
 
 <LearningPath label="Integrations" icon="cloud4">
 
+[Airbyte](https://docs.pingcap.com/tidbcloud/integrate-tidbcloud-with-airbyte)    
+
 [Datadog](https://docs.pingcap.com/tidbcloud/monitor-datadog-integration)
+
+[dbt](https://docs.pingcap.com/tidbcloud/integrate-tidbcloud-with-dbt)
 
 [Prometheus and Grafana](https://docs.pingcap.com/tidbcloud/monitor-prometheus-and-grafana-integration)
 

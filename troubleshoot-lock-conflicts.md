@@ -271,8 +271,8 @@ Solutions:
     Checking the time interval using the PD control tool:
 
     ```shell
-    tiup ctl pd tso [start_ts]
-    tiup ctl pd tso [commit_ts]
+    tiup ctl:<cluster-version> pd tso [start_ts]
+    tiup ctl:<cluster-version> pd tso [commit_ts]
     ```
 
 * It is recommended to check whether the write performance is slow, which might cause that the efficiency of transaction commit is poor, and thus the lock is cleared.
@@ -323,7 +323,7 @@ Solutions:
 
 ### TTL manager has timed out
 
-The transaction execution time can not exceed the GC time limit. In addition, the TTL time of pessimistic transactions has an upper limit, whose default value is 1 hour. Therefore, a pessimistic transaction executed for more than 1 hour will fail to commit. This timeout threshold is controlled by the TiDB parameter [performance.max-txn-ttl](https://github.com/pingcap/tidb/blob/master/config/config.toml.example).
+The transaction execution time cannot exceed the GC time limit. In addition, the TTL time of pessimistic transactions has an upper limit, whose default value is 1 hour. Therefore, a pessimistic transaction executed for more than 1 hour will fail to commit. This timeout threshold is controlled by the TiDB parameter [performance.max-txn-ttl](https://github.com/pingcap/tidb/blob/master/config/config.toml.example).
 
 When the execution time of a pessimistic transaction exceeds the TTL time, the following error message occurs in the TiDB log:
 

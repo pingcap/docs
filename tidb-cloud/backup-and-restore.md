@@ -10,7 +10,7 @@ This document describes how to back up and restore your TiDB cluster data on TiD
 
 > **Note:**
 >
-> For [Developer Tier clusters](/tidb-cloud/select-cluster-tier.md#developer-tier), the backup and restore feature is unavailable. You can use [Dumpling](https://docs.pingcap.com/tidb/stable/dumpling-overview) to export your data as a backup.
+> For [Serverless Tier clusters](/tidb-cloud/select-cluster-tier.md#serverless-tier-beta), the backup and restore feature is unavailable. You can use [Dumpling](https://docs.pingcap.com/tidb/stable/dumpling-overview) to export your data as a backup.
 
 ## Backup
 
@@ -52,7 +52,7 @@ By the automatic backup, you can back up the cluster data every day at the backu
 
 > **Note:**
 >
-> You can not disable automatic backup.
+> You cannot disable automatic backup.
 
 ### Backup storage region support
 

@@ -87,7 +87,7 @@ Currently no.
 You can scale out your TiDB cluster without interrupting the online services.
 
 - If your cluster is deployed using [TiUP](/production-deployment-using-tiup.md), refer to [Scale a TiDB Cluster Using TiUP](/scale-tidb-using-tiup.md).
-- If your cluster is deployed using [TiDB Operator](/tidb-operator-overview.md) in Kubernetes, refer to [Manually Scale TiDB in Kubernetes](https://docs.pingcap.com/tidb-in-kubernetes/stable/scale-a-tidb-cluster).
+- If your cluster is deployed using [TiDB Operator](/tidb-operator-overview.md) on Kubernetes, refer to [Manually Scale TiDB on Kubernetes](https://docs.pingcap.com/tidb-in-kubernetes/stable/scale-a-tidb-cluster).
 
 ### How to scale TiDB horizontally?
 
@@ -334,7 +334,7 @@ TiKV implements the Column Family (CF) feature of RocksDB. By default, the KV da
 ### Why is the TiKV channel full?
 
 - The Raftstore thread is too slow or blocked by I/O. You can view the CPU usage status of Raftstore.
-- TiKV is too busy (CPU, disk I/O, etc.) and cannot manage to handle it.
+- TiKV is too busy (such as CPU and disk I/O) and cannot manage to handle it.
 
 ### Why does TiKV frequently switch Region leader?
 
