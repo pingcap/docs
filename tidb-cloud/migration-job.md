@@ -60,7 +60,7 @@ If you also need to migrate the data from other databases to TiDB Cloud, make su
 
 3. On the **Data Migration** page, click **Create Migration Job**. The **Create Migration Job** page is displayed.
 
-## Step 2: Config source and target connection
+## Step 2: Configure the source and target connection
 
 On the **Create Migration Job** page, configure the source and target connection.
 
