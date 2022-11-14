@@ -42,6 +42,10 @@ After your TiDB Cloud cluster is created, you can quickly start experimenting wi
 
 On the **Clusters** page, click **Playground** to run queries instantly on TiDB Cloud.
 
+> **Tip:**
+>
+> If the preloaded sample data in Playground is deleted, click **Load Sample Data** in the upper-right corner to reload the sample data to continue trying Playground.
+
 ## Step 3. Load sample data
 
 After trying **Plaground**, you can load sample data to your TiDB Cloud cluster. We provide Capital Bikeshare sample data for you to easily import data and run sample queries.
