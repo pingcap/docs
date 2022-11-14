@@ -6,7 +6,7 @@ aliases: ['/docs/dev/data-type-json/','/docs/dev/reference/sql/data-types/json/'
 
 # JSON Type
 
-TiDB supports the `JSON` (JavaScript Object Notation) data type, which is useful for storing semi-structured data.  The `JSON` data type provides the following advantages over storing `JSON`-format strings in a string column:
+TiDB supports the `JSON` (JavaScript Object Notation) data type, which is useful for storing semi-structured data. The `JSON` data type provides the following advantages over storing `JSON`-format strings in a string column:
 
 - Use the Binary format for serialization. The internal format permits quick read access to `JSON` document elements.
 - Automatic validation of the JSON documents stored in `JSON` columns. Only valid documents can be stored.
@@ -29,13 +29,6 @@ For more information, see [JSON Functions](/functions-and-operators/json-functio
 ## Restrictions
 
 - Currently, TiDB does not support pushing down `JSON` functions to TiFlash.
-- TiDB does not support using the range selection syntax in JSON PATH. For example, executing the following SQL statements in TiDB will return errors.
-
-    ```sql
-    SELECT j->'$[1 to 2]' FROM t;
-    SELECT j->'$[last]' FROM t;
-    ```
-
 - TiDB Backup & Restore (BR) versions earlier than v6.3.0 do not support recovering data containing JSON columns. No version of BR supports recovering data containing JSON columns to TiDB clusters earlier than v6.3.0.
 - Do not use any replication tool to replicate data containing non-standard `JSON` data types, such as `DATE`, `DATETIME`, and `TIME`.
 

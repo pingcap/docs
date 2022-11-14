@@ -626,7 +626,7 @@ Before TiUP is released, you can control the cluster using `tidb-ctl`, `tikv-ctl
 
 ```bash
 Usage:
-  tiup ctl {tidb/pd/tikv/binlog/etcd} [flags]
+  tiup ctl:<cluster-version> {tidb/pd/tikv/binlog/etcd} [flags]
 
 Flags:
   -h, --help   help for tiup
@@ -647,7 +647,7 @@ For example, if you previously view the store by running `pd-ctl -u http://127.0
 {{< copyable "shell-regular" >}}
 
 ```bash
-tiup ctl pd -u http://127.0.0.1:2379 store
+tiup ctl:<cluster-version> pd -u http://127.0.0.1:2379 store
 ```
 
 ## Environment checks for target machines
@@ -733,3 +733,21 @@ The TiUP data is stored in the `.tiup` directory in the user's home directory. T
 > **Note:**
 >
 > It is recommended that you back up the `.tiup` directory regularly to avoid the loss of TiUP data caused by abnormal conditions, such as disk damage of the control machine.
+
+## Back up and restore meta files for cluster deployment and O&M
+
+If the meta files used for operation and maintenance (O&M) are lost, managing the cluster using TiUP will fail. It is recommended that you back up the meta files regularly by running the following command:
+
+```bash
+tiup cluster meta backup ${cluster_name}
+```
+
+If the meta files are lost, you can restore them by running the following command:
+
+```bash
+tiup cluster meta restore ${cluster_name} ${backup_file}
+```
+
+> **Note:**
+>
+> The restore operation overwrites the current meta files. Therefore, it is recommended to restore the meta files only when they are lost.

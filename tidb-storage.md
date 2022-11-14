@@ -7,7 +7,7 @@ summary: Understand the storage layer of a TiDB database.
 
 This document introduces some design ideas and key concepts of [TiKV](https://github.com/tikv/tikv).
 
-![storage-architecture](/media/tidb-storage-architecture.png)
+![storage-architecture](/media/tidb-storage-architecture-1.png)
 
 ## Key-Value pairs
 
@@ -33,7 +33,7 @@ A simple way is to replicate data to multiple machines, so that even if one mach
 Raft is a consensus algorithm. This document only briefly introduces Raft. For more details, you can see [In Search of an Understandable Consensus Algorithm](https://raft.github.io/raft.pdf). The Raft has several important features:
 
 - Leader election
-- Membership changes (such as adding replicas, deleting replicas, transferring leaders, and so on)
+- Membership changes (such as adding replicas, deleting replicas, and transferring leaders)
 - Log replication
 
 TiKV use Raft to perform data replication. Each data change will be recorded as a Raft log. Through Raft log replication, data is safely and reliably replicated to multiple nodes of the Raft group. However, according to Raft protocol, successful writes only need that data is replicated to the majority of nodes.

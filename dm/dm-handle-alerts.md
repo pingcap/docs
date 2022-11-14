@@ -1,9 +1,9 @@
 ---
-title: Handle Alerts
+title: Handle Alerts in TiDB Data Migration
 summary: Understand how to deal with the alert information in DM.
 ---
 
-# Handle Alerts
+# Handle Alerts in TiDB Data Migration
 
 This document introduces how to deal with the alert information in DM.
 
@@ -162,7 +162,7 @@ This document introduces how to deal with the alert information in DM.
 
 - Description:
 
-    When the binlog replication processing unit encounters an error,  this unit moves to the `Paused` state, and an alert is triggered immediately.
+    When the binlog replication processing unit encounters an error, this unit moves to the `Paused` state, and an alert is triggered immediately.
 
 - Solution:
 

@@ -5,7 +5,7 @@ summary: Learn how to back up data using BR commands
 
 # Use BR to Back Up Cluster Data
 
-This document describes how to back up cluster data using BR in the following scenarios:
+This document describes how to back up TiDB cluster data in the following scenarios:
 
 - [Back up TiDB cluster snapshots](#back-up-tidb-cluster-snapshots)
 - [Back up a database](#back-up-a-database)
@@ -15,10 +15,12 @@ This document describes how to back up cluster data using BR in the following sc
 - [Back up incremental data](#back-up-incremental-data)
 - [Encrypt backup data](#encrypt-backup-data)
 
-If you are not familiar with Backup & Restore (BR), it is recommended that you read the following documents to fully understand BR usage principles and methods:
+If you are not familiar with the backup and restore tools, it is recommended that you read the following documents to fully understand usage principles and methods of these tools:
 
 - [BR Overview](/br/backup-and-restore-overview.md)
 - [Use BR Command-line for Backup and Restoration](/br/use-br-command-line-tool.md)
+
+If you need to back up a small amount of data (for example, less than 50 GB) and do not require high backup speed, you can use Dumpling to export data to implement backup. For detailed backup operations, see [Use Dumpling to back up full data](/backup-and-restore-using-dumpling-lightning.md#use-dumpling-to-back-up-full-data).
 
 ## Back up TiDB cluster snapshots
 
@@ -103,7 +105,7 @@ In the preceding command, `--db` and `--table` specify the database name and tab
 
 To back up multiple tables with more criteria, run the `br backup full` command and specify the [table filters](/table-filter.md) with `--filter` or `-f`.
 
-Example: Back up `db*.tbl*` data of a table to  the `table-filter/2022-01-30/` directory in the `backup-data` bucket of Amazon S3.
+Example: Back up `db*.tbl*` data of a table to the `table-filter/2022-01-30/` directory in the `backup-data` bucket of Amazon S3.
 
 {{< copyable "shell-regular" >}}
 
@@ -170,7 +172,7 @@ BR supports encrypting backup data at the backup end and at the storage end when
 Since TiDB v5.3.0, you can encrypt backup data by configuring the following parameters:
 
 - `--crypter.method`: Encryption algorithm, which can be `aes128-ctr`, `aes192-ctr`, or `aes256-ctr`. The default value is `plaintext`, indicating that data is not encrypted.
-- `--crypter.key`: Encryption key in hexadecimal string format. It is a  128-bit (16 bytes) key for the algorithm `aes128-ctr`, 24-byte key for the algorithm `aes192-ctr`, and 32-byte key for the algorithm `aes256-ctr`.
+- `--crypter.key`: Encryption key in hexadecimal string format. It is a 128-bit (16 bytes) key for the algorithm `aes128-ctr`, 24-byte key for the algorithm `aes192-ctr`, and 32-byte key for the algorithm `aes256-ctr`.
 - `--crypter.key-file`: The key file. You can directly pass in the file path where the key is stored as a parameter without passing in "crypter.key".
 
 Example: Encrypt backup data at the backup end.

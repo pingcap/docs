@@ -73,7 +73,6 @@ server_configs:
     server.grpc-compression-type: gzip
   pd:
     replication.location-labels:  ["dc","zone","rack","host"]
-    schedule.tolerant-size-ratio: 20.0
 
 pd_servers:
   - host: 10.63.10.10
@@ -168,12 +167,6 @@ In the deployment of three DCs in two cities, to optimize performance, you need 
     server.grpc-compression-type: gzip
     ```
 
-- Adjust the PD balance buffer size and increase the tolerance of PD. Because PD calculates the score of each object according to the situation of the node as the basis for scheduling, when the difference between the scores of leaders (or Regions) of two stores is less than the specified multiple of the Region size, PD believes the balance is achieved.
-
-    ```yaml
-    schedule.tolerant-size-ratio: 20.0
-    ```
-
 - Optimize the network configuration of the TiKV node in another city (San Francisco). Modify the following TiKV parameters for IDC3 (alone) in San Francisco and try to prevent the replica in this TiKV node from participating in the Raft election.
 
     ```yaml
@@ -181,7 +174,7 @@ In the deployment of three DCs in two cities, to optimize performance, you need 
     raftstore.raft-max-election-timeout-ticks: 1200
     ```
 
-- Configure scheduling. After the cluster is enabled, use the `tiup ctl pd` tool to modify the scheduling policy. Modify the number of TiKV Raft replicas. Configure this number as planned. In this example, the number of replicas is five.
+- Configure scheduling. After the cluster is enabled, use the `tiup ctl:<cluster-version> pd` tool to modify the scheduling policy. Modify the number of TiKV Raft replicas. Configure this number as planned. In this example, the number of replicas is five.
 
     ```yaml
     config set max-replicas 5
@@ -192,7 +185,7 @@ In the deployment of three DCs in two cities, to optimize performance, you need 
     ```yaml
     config set label-property reject-leader dc 3
     ```
-   
+
    > **Note:**
    >
    > Since TiDB 5.2, the `label-property` configuration is not supported by default. To set the replica policy, use the [placement rules](/configure-placement-rules.md).
