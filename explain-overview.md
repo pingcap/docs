@@ -93,7 +93,9 @@ In the `WHERE`/`HAVING`/`ON` conditions, the TiDB optimizer analyzes the result 
 
 Currently, calculation tasks of TiDB can be divided into two categories: cop tasks and root tasks. A `cop[tikv]` task indicates that the operator is performed inside the TiKV coprocessor. A `root` task indicates that it will be completed inside of TiDB.
 
-One of the goals of SQL optimization is to push the calculation down to TiKV as much as possible. The Coprocessor in TiKV supports most of the built-in SQL functions (including the aggregate functions and the scalar functions), SQL `LIMIT` operations, index scans, and table scans. However, all `Join` operations can only be performed as root tasks in TiDB.
+One of the goals of SQL optimization is to push the calculation down to TiKV as much as possible. The Coprocessor in TiKV supports most of the built-in SQL functions (including the aggregate functions and the scalar functions), SQL `LIMIT` operations, index scans, and table scans.
+
+ not pushed down to TiKV and are only performed as root tasks in TiDB. However, `Join` operations are also performed in the [TiFlash MPP](/tiflash/use-tiflash-mpp-mode.md) mode in some cases and these `Join` operations are pushed down to TiFlash nodes.
 
 ### Operator info overview
 
