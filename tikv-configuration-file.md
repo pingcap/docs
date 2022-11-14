@@ -418,7 +418,7 @@ Configuration items related to storage.
 + Value options:
     + `1`: Uses API V1, does not encode the data passed from the client, and stores data as it is. In versions earlier than v6.1.0, TiKV uses API V1 by default.
     + `2`: Uses API V2:
-        + The data is stored in the MVCC (Multi-Version Concurrency Control) format, where the timestamp is obtained from PD (which is TSO) by tikv-server.
+        + The data is stored in the Multi-Version Concurrency Control (MVCC) format, where the timestamp is obtained from PD (which is TSO) by tikv-server.
         + Data is scoped according to different usage and supports co-existence of TiDB, Transactional KV, and RawKV applications in a single cluster.
         + When API V2 is used, you are expected to set `storage.enable-ttl = true` at the same time. Because API V2 supports the TTL feature, you must turn on `enable-ttl` explicitly. Otherwise, it will be in conflict because `storage.enable-ttl` defaults to `false`.
         + When API V2 is enabled, you need to deploy at least one tidb-server instance to reclaim obsolete data. This tidb-server instance can provide read and write services at the same time. To ensure high availability, you can deploy multiple tidb-server instances.
@@ -428,7 +428,7 @@ Configuration items related to storage.
 
 > **Warning:**
 
-> - As the different underlying storage format between API V1 and API V2, you can enable or disable API V2 smoothly **only** when there are only TiDB data existing in TiKV. In other scenarios, you need to deploy a new cluster, and migrate data using [RawKV Backup & Restore](https://tikv.org/docs/dev/concepts/explore-tikv-features/backup-restore/).
+> - API V1 and API V2 are different from each other in the storage format. You can enable or disable API V2 directly **only** when TiKV contains only TiDB data. In other scenarios, you need to deploy a new cluster, and migrate data using [RawKV Backup & Restore](https://tikv.org/docs/dev/concepts/explore-tikv-features/backup-restore/).
 > - After API V2 is enabled, you **cannot** downgrade the TiKV cluster to a version earlier than v6.1.0. Otherwise, data corruption might occur.
 
 ## storage.block-cache
