@@ -95,7 +95,7 @@ Currently, calculation tasks of TiDB can be divided into two categories: cop tas
 
 One of the goals of SQL optimization is to push the calculation down to TiKV as much as possible. The Coprocessor in TiKV supports most of the built-in SQL functions (including the aggregate functions and the scalar functions), SQL `LIMIT` operations, index scans, and table scans.
 
- not pushed down to TiKV and are only performed as root tasks in TiDB. However, `Join` operations are also performed in the [TiFlash MPP](/tiflash/use-tiflash-mpp-mode.md) mode in some cases and these `Join` operations are pushed down to TiFlash nodes.
+`Join` operations are not pushed down to TiKV and are only performed as root tasks in TiDB. However, for `Join` operations performed in the [TiFlash MPP](/tiflash/use-tiflash-mpp-mode.md) mode in some cases, these `Join` operations are pushed down to TiFlash nodes.
 
 ### Operator info overview
 
