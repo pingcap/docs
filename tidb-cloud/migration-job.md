@@ -1,13 +1,13 @@
 ---
-title: Migrate Data Using Migration Jobs
-summary: Learn how to create migration jobs to migrate data into TiDB Cloud.
+title: Migrate Online or On-Premises Data Using Migration Jobs
+summary: Learn how to create migration jobs to migrate online or on-premises data to TiDB Cloud.
 ---
 
-# Migrate Data Using Migration Jobs
+# Migrate Online or On-Premises Data Using Migration Jobs
 
-This document describes how to create a migration job to migrate data into TiDB Cloud.
+This document describes how to create a migration job to migrate online or on-premises data to TiDB Cloud.
 
-You can import data in CSV, Parquet, SQL, and Aurora Snapshot formats to TiDB Cloud. All these scenarios are offline data import scenarios. When importing such data, to ensure the consistency of upstream and downstream data, you need to stop the upstream business, then export the offline files from the database, and then import the data to TiDB Cloud. It will bring a long downtime to the business, which is unacceptable in some cases.
+You can import data in CSV, Parquet, SQL, and Aurora Snapshot formats to TiDB Cloud, as described in [Migration Overview](/tidb-cloud/tidb-cloud-migration-overview.md). Many of these scenarios are offline data import scenarios. When importing such data, to ensure the consistency of upstream and downstream data, you need to stop the upstream business, then export the offline files from the database, and then import the data to TiDB Cloud. It will bring a long downtime to the business, which is unacceptable in some cases.
 
 To solve this problem, TiDB Cloud provides the Migration Job feature, which supports full migration and incremental migration, allowing you to migrate your business from the upstream database to TiDB Cloud within a short downtime window.
 
@@ -15,8 +15,7 @@ A migration job supports the following data sources:
 
 - MySQL 5.6-8.0 on premises or on a cloud
 - AWS Aurora MySQL 5.6 and 5.7
-- AWS RDS MySQL 5.7 and 8.0
-- Google Cloud MySQL 5.6, 5.7 and 8.0
+- AWS RDS MySQL 5.7
 
 A migration job supports the following network types:
 
@@ -69,7 +68,7 @@ On the **Create Migration Job** page, configure the source and target connection
 
 2. Fill in the source connection profile.
 
-   - **Data source**: the data source type. Currently, it supports MySQL, AWS Aurora MySQL, AWS RDS MySQL and Google Cloud MySQL.
+   - **Data source**: the data source type. Currently, it supports MySQL, AWS Aurora MySQL, and AWS RDS MySQL.
    - **Region**: the region of the data source. If the source database is a self-built, the parameter is empty.
    - **Connectivity method**: the connectivity method of the data source. Currently, it supports Public IP, VPC peering, and Private Link.
    - **Hostname or IP address**: the hostname or IP address of the data source.
