@@ -154,6 +154,14 @@ Do the following to export data from the upstream TiDB cluster to Amazon S3 usin
 
 2. Get the S3 bucket URI and region information from the AWS console. See [Create a bucket](https://docs.aws.amazon.com/AmazonS3/latest/userguide/create-bucket-overview.html) for details.
 
+    The following screenshot shows how to get the S3 bucket URI information:
+
+    ![Get the S3 URI](/media/tidb-cloud/op-to-cloud-copy-s3-uri.png)
+
+    The following screenshot shows how to get the region information:
+
+    ![Get the region information](/media/tidb-cloud/op-to-cloud-copy-region-info.png)
+
 3. Run Dumpling to export data to the Amazon S3 bucket.
 
     ```ymal
@@ -168,40 +176,49 @@ Do the following to export data from the upstream TiDB cluster to Amazon S3 usin
     --s3.region "${s3.region}"
     ```
 
-    The `-t` option specifies the number of threads for the export. Increasing the number of threads improves the concurrency of Dumpling and the export speed, and also increases the database's memory consumption. Therefore, it is not recommended to set the number too large.
+    The `-t` option specifies the number of threads for the export. Increasing the number of threads improves the concurrency of Dumpling and the export speed, and also increases the database's memory consumption. Therefore, do not set a too large number for this parameter.
 
     For mor information, see [Dumpling](https://docs.pingcap.com/tidb/dev/dumpling-overview).
 
 4. Check the export data. Usually the exported data includes the following:
 
-    - metadata: this file contains the start time of the export, and the location of the master binary log.
-    - {schema}-schema-create.sql: the SQL file for creating the schema
-    - {schema}.{table}-schema.sql: the SQL file for creating the table
-    - {schema}.{table}.{0001}.{sql|csv}: data files
-    - \*-schema-view.sql, \*-schema-trigger.sql, \*-schema-post.sql: other exported SQL files
+    - `metadata`: this file contains the start time of the export, and the location of the master binary log.
+    - `{schema}-schema-create.sql`: the SQL file for creating the schema
+    - `{schema}.{table}-schema.sql`: the SQL file for creating the table
+    - `{schema}.{table}.{0001}.{sql|csv}`: data files
+    - `*-schema-view.sql`, `*-schema-trigger.sql`, `*-schema-post.sql`: other exported SQL files
 
 ### Migrate data from Amazon S3 to TiDB Cloud
 
 After you export data from the on-premises TiDB cluster to Amazon S3, you need to migrate the data to TiDB Cloud.
 
-If your TiDB cluster is in a local IDC, or the network between the Dumpling server and Amazon S3 is not connected, you can export the files to the local storage first, and then upload them to S3 later.
+If your TiDB cluster is in a local IDC, or the network between the Dumpling server and Amazon S3 is not connected, you can export the files to the local storage first, and then upload them to Amazon S3 later.
 
-1. Get the Account ID and External ID of the cluster in the TiDB Cloud Console. For more information, see [Step 2. Configure Amazon S3 access](/tidb-cloud/tidb-cloud-auditing.md#step-2-configure-amazon-s3-access).
+1. Get the Account ID and External ID of the cluster in the TiDB Cloud console. For more information, see [Step 2. Configure Amazon S3 access](/tidb-cloud/tidb-cloud-auditing.md#step-2-configure-amazon-s3-access).
+
+    The following screenshot shows how to get the Account ID and External ID:
+
+    ![Get the Account ID and External ID](/media/tidb-cloud/op-to-cloud-get-role-arn.png)
 
 2. Configure access permissions for Amazon s3. Usually you need the following read-only permissions:
     - s3:GetObject
     - s3:GetObjectVersion
     - s3:ListBucket
     - s3:GetBucketLocation
-    - kms:Decrypt. If the S3 bucket uses server-side encryption SSE-KMS, you also need to add the KMS permissions.
 
-3. Configure the access policy. Go to the AWS Console > IAM > Access Management > Policies to check if the access policy for TiDB Cloud exists already. If it does not exist, create a policy following [Creating policies on the JSON tab](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_create-console.html). The following is an example template for the json policy.
+    If the S3 bucket uses server-side encryption SSE-KMS, you also need to add the KMS permissions.
+
+    - kms:Decrypt
+
+3. Configure the access policy. Go to the AWS Console > IAM > Access Management > Policies to check if the access policy for TiDB Cloud exists already. If it does not exist, create a policy following this document [Creating policies on the JSON tab](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_create-console.html). 
+
+    The following is an example template for the json policy.
 
     ```json
     ## Create a json policy template
-    ##<Your customized directory>: fill in the path to the folder in the S3 bucket where the data files to be imported are located
-    ##<Your S3 bucket ARN>: fill in the ARN of S3 bucket. You can click the Copy ARN button on the S3 Bucket Overview page to get it.
-    ##<Your AWS KMS ARN>: Fill ARN for the S3 bucket KMS key. You can get it from S3 bucket > Properties > Default encryption > AWS KMS Key ARN. For more informaiton, see https://docs.aws.amazon.com/AmazonS3/latest/userguide/viewing-bucket-key-settings.html
+    ##<Your customized directory>: fill in the path to the folder in the S3 bucket where the data files to be imported are located.
+    ##<Your S3 bucket ARN>: fill in the ARN of the S3 bucket. You can click the Copy ARN button on the S3 Bucket Overview page to get it.
+    ##<Your AWS KMS ARN>: fill in the ARN for the S3 bucket KMS key. You can get it from S3 bucket > Properties > Default encryption > AWS KMS Key ARN. For more informaiton, see https://docs.aws.amazon.com/AmazonS3/latest/userguide/viewing-bucket-key-settings.html
 
     {
         "Version": "2012-10-17",
@@ -222,7 +239,7 @@ If your TiDB cluster is in a local IDC, or the network between the Dumpling serv
                 ],
                 "Resource": "<Your S3 bucket ARN>"
             }
-            // If you have enabled SSE-KMS for the S3 bucket, add the following permissions.
+            // If you have enabled SSE-KMS for the S3 bucket, you need to add the following permissions.
             {
                 "Effect": "Allow",
                 "Action": [
@@ -258,7 +275,7 @@ To perform incremental data migration, do the following:
 
     ![Update Filter](/media/tidb-cloud/edit_traffic_filter_rules.png)
 
-3. Get the connection information of the downstream TiDB Cloud cluster. On the TiDB Cloud console, go to **Overview** > **Connect** > **Standard Connection** > **Connect with a SQL client**. From the connection information, you can get the host IP address and port of the cluster. For more information, see [Connect via standard connection](/tidb-cloud/connect-to-tidb-cluster.md#connect-via-standard-connection).
+3. Get the connection information of the downstream TiDB Cloud cluster. In the TiDB Cloud console, go to **Overview** > **Connect** > **Standard Connection** > **Connect with a SQL client**. From the connection information, you can get the host IP address and port of the cluster. For more information, see [Connect via standard connection](/tidb-cloud/connect-to-tidb-cluster.md#connect-via-standard-connection).
 
 4. Create and run the incremental replication task. In the upstream cluster, run the following:
 
@@ -282,11 +299,11 @@ To perform incremental data migration, do the following:
 
     For more information, see [Manage TiCDC Cluster and Replication Tasks](https://docs.pingcap.com/tidb/stable/manage-ticdc).
 
-5. Reopen the GC mechanism in the upstream cluster. After checking the incremental replication, and there is no error and no delay in replication, enable the GC mechanism to resume the garbage collection function of the cluster.
+5. Reopen the GC mechanism in the upstream cluster. After checking the incremental replication, and there is no error or delay in replication, enable the GC mechanism to resume the garbage collection function of the cluster.
 
     ```sql
     mysql > SET GLOBAL tidb_gc_enable = TRUE;
-    ## Verify whether the setting works. 1 means the GC mechanism is enabled.
+    ## Verify whether the setting works. 1 indicates that the GC mechanism is enabled.
     mysql > SELECT @@global.tidb_gc_enable;
     +-------------------------+
     | @@global.tidb_gc_enable |
@@ -298,7 +315,7 @@ To perform incremental data migration, do the following:
 
 6. Verify the incremental replication task.
 
-    - If the replication task is created successfully, it shows "Create changefeed successfully!" in the output.
+    - If the replication task is created successfully, the message "Create changefeed successfully!" is displayed in the output.
     - Check the status of the replication task. If the state shows `normal`, it means the replication task is normal.
 
         ```shell
@@ -306,4 +323,5 @@ To perform incremental data migration, do the following:
         ```
 
         ![Update Filter](/media/tidb-cloud/normal_status_in_replication_task.png)
+
     - Verify the replication. Write a new record to the upstream cluster, and then check whether the record is replicated to the downstream TiDB Cloud cluster.
