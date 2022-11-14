@@ -41,9 +41,9 @@ In v6.4.0-DMR, the key new features and improvements are as follows:
 
 * Support restoring a cluster to a specific point in time by using `FLASHBACK CLUSTER TO TIMESTAMP` (experimental) [#37197](https://github.com/pingcap/tidb/issues/37197) [#13303](https://github.com/tikv/tikv/issues/13303)  @[Defined2014](https://github.com/Defined2014) @[bb7133](https://github.com/bb7133) @[JmPotato](https://github.com/JmPotato) @[Connor1996](https://github.com/Connor1996) @[HuSharp](https://github.com/HuSharp) @[CalvinNeo](https://github.com/CalvinNeo) **tw@Oreoxmt**
 
-    You can use the `FLASHBACK CLUSTER TO TIMESTAMP` syntax to restore a cluster to a specific point in time quickly with the Garbage Collection lifetime. This feature helps you to easily and quickly undo DML misoperations. For example, `FLASHBACK CLUSTER TO TIMESTAMP` can be used to restore the original cluster in minutes after mistakenly executing a `DELETE` without a `WHERE` clause. This feature does not rely on database backups and supports multiple rollbacks on the timeline to determine when the specific data changes occurred. Note that `FLASHBACK CLUSTER TO TIMESTAMP` cannot replace database backups.
+    You can use the `FLASHBACK CLUSTER TO TIMESTAMP` syntax to restore a cluster to a specific point in time quickly within the Garbage Collection (GC) lifetime. This feature helps you to easily and quickly undo DML misoperations. For example, you can use this syntax to restore the original cluster in minutes after mistakenly executing `DELETE` without a `WHERE` clause. This feature does not rely on database backups and supports rolling back data at different time points to determine the exact time when data changes. Note that `FLASHBACK CLUSTER TO TIMESTAMP` cannot replace database backups.
 
-    Before executing `FLASHBACK CLUSTER TO TIMESTAMP`, you need to pause PITR and replication tasks running on such tools as TiCDC and restart them after the `FLASHBACK` is completed. Otherwise, it might lead to replication failure.
+    Before executing `FLASHBACK CLUSTER TO TIMESTAMP`, you need to pause PITR and replication tasks running on such tools as TiCDC and restart them after the `FLASHBACK` is completed. Otherwise, replication tasks might fail.
 
     [User document](/sql-statements/sql-statement-flashback-to-timestamp.md)
 
@@ -89,9 +89,9 @@ In v6.4.0-DMR, the key new features and improvements are as follows:
 
     [User document](/system-variables.md#tidb-opt-prefix-index-single-scan-new-in-v640)
 
-* Enhance TiDB chunk reuse mechanism [#38606](https://github.com/pingcap/tidb/issues/38606) @[keeplearning20221](https://github.com/keeplearning20221) **tw@Oreoxmt**
+* Enhance the TiDB chunk reuse mechanism [#38606](https://github.com/pingcap/tidb/issues/38606) @[keeplearning20221](https://github.com/keeplearning20221) **tw@Oreoxmt**
 
-    In earlier versions, TiDB only reuses chunk in the `writechunk` function. TiDB v6.4.0 extends the chunk reuse mechanism to execute functions, reducing the frequency of TiDB applications to free memory by reusing chunk, thus improving the SQL query execution efficiency in some scenarios. You can use the system variable [`tidb_enable_reuse_chunk`](/system-variables.md#tidb_enable_reuse_chunk-new-in-v640) to control whether to reuse chunk objects, which is enabled by default.
+    In earlier versions, TiDB only reuses chunks in the `writechunk` function. TiDB v6.4.0 extends the chunk reuse mechanism to operators in Executor. By reusing chunks, TiDB does not need to frequently request memory release and SQL queries are executed more efficiently in some scenarios. You can use the system variable [`tidb_enable_reuse_chunk`](/system-variables.md#tidb_enable_reuse_chunk-new-in-v640) to control whether to reuse chunk objects, which is enabled by default.
 
     [User document](/system-variables.md#tidb_enable_reuse_chunk-new-in-v640)
 
@@ -131,15 +131,15 @@ In v6.4.0-DMR, the key new features and improvements are as follows:
 
 * TiKV API V2 becomes generally available (GA) [#11745](https://github.com/tikv/tikv/issues/11745) @[pingyu](https://github.com/pingyu) **tw@Oreoxmt**
 
-    Before v6.1.0, TiKV only provides basic Key Value read and write capability because it only stores the raw data passed in by the client. In addition, due to different coding methods and no isolation of data ranges, TiDB, Transactional KV, and RawKv cannot be used at the same time in the same TiKV cluster. Therefore, multiple clusters are needed in this case, thus increasing machine and deployment costs.
+    Before v6.1.0, TiKV only provides basic Key Value read and write capability because it only stores the raw data passed in by the client. In addition, due to different coding methods and unscoped data ranges, TiDB, Transactional KV, and RawKV cannot be used at the same time in the same TiKV cluster; instead, multiple clusters are needed in this case, thus increasing machine and deployment costs.
 
-    TiKV API V2 provides a new Raw Key Value storage format and access interface, including:
+    TiKV API V2 provides a new Raw Key Value storage format and access interface, which delievers the following benefits:
 
-    - The data is stored in MVCC and the change timestamp of the data is recorded. Based on this, Change Data Capture is implemented, which is an experimental. For more information, see [TiKV-CDC](https://github.com/tikv/migration/blob/main/cdc/README.md)
-    - Data is scoped according to different usage and supports co-existence of a single TiDB cluster, Transactional KV, and RawKV applications.
-    - The Key Space field is reserved to support features such as multi-tenancy.
+    - Store data in MVCC with the change timestamp of the data recorded, based on which Change Data Capture (CDC) is implemented. This feature is experimental and is detailed in [TiKV-CDC](https://github.com/tikv/migration/blob/main/cdc/README.md).
+    - Scope data according to the usage and allow co-existence of a single TiDB cluster, Transactional KV, and RawKV applications.
+    - Reserve the Key Space field to support features such as multi-tenancy.
 
-    To enable TiKV API V2, you can set `api-version = 2` in the `[storage]` section of the TiKV configuration file.
+    To enable TiKV API V2, set `api-version = 2` in the `[storage]` section of the TiKV configuration file.
 
     [User documentation](/tikv-configuration-file.md#api-version-new-in-v610)
 
@@ -161,7 +161,7 @@ In v6.4.0-DMR, the key new features and improvements are as follows:
 
 * Support a high-performance and globally monotonic `AUTO_INCREMENT` (experimental) [#38442](https://github.com/pingcap/tidb/issues/38442) @[tiancaiamao](https://github.com/tiancaiamao) **tw@Oreoxmt**
 
-    TiDB v6.4.0 introduces the `AUTO_INCREMENT` MySQL compatibility mode, which enables monotonically increasing IDs on all TiDB instances by a centralized allocating service. This feature makes it easier to sort query results by auto-increment IDs. To use the MySQL compatibility mode, you can set `AUTO_ID_CACHE` to `1` when creating a table. The following is an example:
+    TiDB v6.4.0 introduces the `AUTO_INCREMENT` MySQL compatibility mode. This mode introduces a centralized auto-increment ID allocating service that ensures IDs monotonically increase on all TiDB instances. This feature makes it easier to sort query results by auto-increment IDs. To use the MySQL compatibility mode, you need to set `AUTO_ID_CACHE` to `1` when creating a table. The following is an example:
 
     ```sql
     CREATE TABLE t (a INT AUTO_INCREMENT PRIMARY KEY) AUTO_ID_CACHE = 1;
