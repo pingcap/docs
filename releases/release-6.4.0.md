@@ -45,7 +45,7 @@ In v6.4.0-DMR, the key new features and improvements are as follows:
 
     [User document](/sql-statements/sql-statement-flashback-to-timestamp.md)
 
-* Support restoring a deleted database by using `FLASH DATABASE` [#20463](https://github.com/pingcap/tidb/issues/20463)  @[erwadba](https://github.com/erwadba) **tw@ran-huang**
+* Support restoring a deleted database by using `FLASH DATABASE` [#20463](https://github.com/pingcap/tidb/issues/20463) @[erwadba](https://github.com/erwadba) **tw@ran-huang**
 
     By using `FLASHBACK DATABASE`, you can restore a database and its data deleted by `DROP` within the garbage collection (GC) life time. This feature does not depend on any external tools. You can quickly restore data and metadata using SQL statements.
 
@@ -340,7 +340,7 @@ In v6.4.0-DMR, the key new features and improvements are as follows:
 
     + Backup & Restore (BR)
 
-        - Improve the mechanism for loading metadata. Metadata is loaded into memory only when needed, which significantly reduces the memory usage during PITR [#38404](https://github.com/pingcap/tidb/issues/38404) @[YuJuncen](https://github.com/YuJuncen)
+        - Improve the mechanism for loading the metadata. The metadata is loaded into memory only when necessary, which significantly reduces the memory usage during PITR [#38404](https://github.com/pingcap/tidb/issues/38404) @[YuJuncen](https://github.com/YuJuncen)
 
     + TiCDC
 
@@ -401,9 +401,9 @@ In v6.4.0-DMR, the key new features and improvements are as follows:
     + Backup & Restore (BR)
 
         - Fix the restoration failure issue caused by PD leader switch during the restoration process [#36910](https://github.com/pingcap/tidb/issues/36910) @[MoCuishle28](https://github.com/MoCuishle28)
-        - Fix the issue that the log backup task cannot be paused  [#38250](https://github.com/pingcap/tidb/issues/38250)@[joccau](https://github.com/joccau)
+        - Fix the issue that the log backup task cannot be paused [#38250](https://github.com/pingcap/tidb/issues/38250)@[joccau](https://github.com/joccau)
         - Fix the issue that when BR deletes log backup data, it mistakenly deletes data that should not be deleted [#38939](https://github.com/pingcap/tidb/issues/38939) @[Leavrth](https://github.com/leavrth)
-        - Fix the issue that BR fails to delete data when deleting log backup data stored in Azure Blob Storage or Google Cloud Storage [#38229](https://github.com/pingcap/tidb/issues/38229) @[Leavrth](https://github.com/leavrth)
+        - Fix the issue that BR fails to delete data when deleting the log backup data stored in Azure Blob Storage or Google Cloud Storage for the first time [#38229](https://github.com/pingcap/tidb/issues/38229) @[Leavrth](https://github.com/leavrth)
 
     + TiCDC
 
