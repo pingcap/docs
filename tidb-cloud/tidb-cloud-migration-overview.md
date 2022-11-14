@@ -13,7 +13,7 @@ If your source data is stored in Amazon S3 or Google Cloud Storage (GCS) buckets
 
 ## Migrate online or on-premises data to TiDB Cloud
 
-TiDB Cloud provides the Migration Job feature, which supports full migration and incremental migration, allowing you to migrate your business from the upstream database to TiDB Cloud within a short downtime window. For more information, see [Migrate Online or On-Premises Data Using Migration Jobs](/tidb-cloud/migration-job.md.md).
+TiDB Cloud provides the Migration Job feature, which supports full migration and incremental migration, allowing you to migrate your business from the upstream database to TiDB Cloud within a short downtime window. For more information, see [Migrate Online or On-Premises Data Using Migration Jobs](/tidb-cloud/migration-job.md).
 
 ## Migrate data from MySQL-compatible databases
 
