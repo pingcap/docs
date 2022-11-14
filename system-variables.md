@@ -2868,6 +2868,19 @@ explain select * from t where age=5;
 - Default value: `OFF`
 - Specifies whether to allow the optimizer to push `Projection` down to the TiKV or TiFlash coprocessor.
 
+### tidb_opt_range_max_size <span class="version-mark">New in v6.4.0</span>
+
+> **Warning:**
+>
+> The feature controlled by this variable is not fully functional in the current TiDB version. Do not change the default value.
+
+- Scope: SESSION | GLOBAL
+- Persists to cluster: Yes
+- Default value: `0`
+- Scope: `[0, 9223372036854775807]`
+- Unit: Bytes
+- This variable is used to set the upper limit of memory usage for the optimizer to build scan ranges. When the variable value is `0`, there is no memory limit for building scan ranges. If building exact scan ranges consumes memory that exceeds the limit, the optimizer uses more relaxed scan ranges (such as `[[NULL,+inf]]`). If the execution plan does not use exact scan ranges, you can increase the value of this variable to let the optimizer build exact scan ranges.
+
 ### tidb_opt_scan_factor
 
 - Scope: SESSION | GLOBAL
