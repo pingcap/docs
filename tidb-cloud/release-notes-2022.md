@@ -35,10 +35,6 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
     For detailed information, see [Database Audit Logging](/tidb-cloud/tidb-cloud-auditing.md).
 
-* Support reloading sample data to [Playground](/tidb-cloud/tidb-cloud-quickstart.md#step-2-try-playground).
-
-    In your [Serverless Tier](/tidb-cloud/select-cluster-tier.md#serverless-tier-beta) cluster, if the preloaded sample dataset in **Playground** is deleted, you can now reload the sample data to continue trying **Playground**.
-
 ## November 8, 2022
 
 **General changes**
