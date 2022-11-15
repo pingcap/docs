@@ -1,11 +1,7 @@
 ---
 title: PD Configuration File
 summary: Learn the PD configuration file.
-<<<<<<< HEAD
 aliases: ['/docs/dev/pd-configuration-file/','/docs/dev/reference/configuration/pd-server/configuration-file/']
-=======
-aliases: ['/docs/stable/reference/configuration/pd-server/configuration-file/']
->>>>>>> 4b15577b7 (Add aliases for configuration files (#11302))
 ---
 
 # PD Configuration File
