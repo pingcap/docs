@@ -93,6 +93,12 @@ As a Software as a Service (SaaS) provider, we take data security seriously. We 
 
 TiDB is highly compatible with MySQL. You can migrate data from any MySQL-compatible databases to TiDB smoothly, whether the data is from a self-hosted MySQL instance or RDS service provided by the public cloud. For more information, see [Migrate Data from MySQL-Compatible Databases](/tidb-cloud/migrate-data-into-tidb.md).
 
+## Backup and restore FAQ
+
+### Does TiDB Cloud support incremental backups?
+
+No. If you need to restore data to any point in time within the cluster's backup retention, you can [use PITR (Point-in-time Recovery)](/tidb-cloud/backup-and-restore.md#automatic-backup).
+
 ## HTAP FAQs
 
 ### How do I make use of TiDB Cloud's HTAP capabilities?
