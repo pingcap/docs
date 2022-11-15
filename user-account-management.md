@@ -5,7 +5,21 @@ summary: Learn how to manage a TiDB user account.
 
 # TiDB User Account Management
 
+<CustomContent platform="tidb">
+
 This document describes how to manage a TiDB user account.
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+This document describes how to manage a database user account for TiDB Cloud.
+
+> **Note:**
+>
+> For each Developer Tier cluster, TiDB Cloud generates a unique prefix to distinguish it from other clusters. If you are using a Developer Tier cluster, whenever you use or set a database user name or role name, you must include the prefix (for example, `3pTAoNNegb47Uc8`) in the name. For more information, see [User name prefix](/tidb-cloud/select-cluster-tier.md#user-name-prefix).
+
+</CustomContent>
 
 ## User names and passwords
 
@@ -82,31 +96,45 @@ If the specified user does not exist, the behavior of automatically creating use
 
 For example, assume that the `sql_mode` does not include `NO_AUTO_CREATE_USER`, and you use the following `CREATE USER` and `GRANT` statements to create four accounts:
 
-{{< copyable "sql" >}}
-
 ```sql
 CREATE USER 'finley'@'localhost' IDENTIFIED BY 'some_pass';
 ```
 
-{{< copyable "sql" >}}
+<CustomContent platform="tidb">
 
 ```sql
 GRANT ALL PRIVILEGES ON *.* TO 'finley'@'localhost' WITH GRANT OPTION;
 ```
 
-{{< copyable "sql" >}}
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+```sql
+GRANT RELOAD,PROCESS ON *.* TO 'finley'@'localhost' WITH GRANT OPTION;
+```
+
+</CustomContent>
 
 ```sql
 CREATE USER 'finley'@'%' IDENTIFIED BY 'some_pass';
 ```
 
-{{< copyable "sql" >}}
+<CustomContent platform="tidb">
 
 ```sql
 GRANT ALL PRIVILEGES ON *.* TO 'finley'@'%' WITH GRANT OPTION;
 ```
 
-{{< copyable "sql" >}}
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+```sql
+GRANT RELOAD,PROCESS ON *.* TO 'finley'@'%' WITH GRANT OPTION;
+```
+
+</CustomContent>
 
 ```sql
 CREATE USER 'admin'@'localhost' IDENTIFIED BY 'admin_pass';
@@ -154,7 +182,20 @@ This operation clears the user's records in the `mysql.user` table and the relat
 
 ## Reserved user accounts
 
+<CustomContent platform="tidb">
+
 TiDB creates the `'root'@'%'` default account during the database initialization.
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+TiDB Cloud creates the following default accounts during the database initialization.
+
+- `root` for a Dedicated Tier cluster or `<user_name_prefix>.root` for a Developer Tier cluster
+- `cloud_admin`
+
+</CustomContent>
 
 ## Set account resource limits
 
@@ -184,6 +225,8 @@ TiDB stores passwords in the `mysql.user` system database. Operations that assig
 
 ## Forget the `root` password
 
+<CustomContent platform="tidb">
+
 1. Modify the configuration file by adding `skip-grant-table` in the `security` part:
 
     ```
@@ -198,6 +241,14 @@ TiDB stores passwords in the `mysql.user` system database. Operations that assig
     ```
 
 When the `skip-grant-table` is set, starting the TiDB process will check whether the user is an administrator of the operating system, and only the `root` user of the operating system can start the TiDB process.
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+If you forget the root password, you can log in to the TiDB Cloud console, and change the password in security settings. For more information, see [Configure Cluster Security Settings](/tidb-cloud/configure-security-settings.md).
+
+</CustomContent>
 
 ## `FLUSH PRIVILEGES`
 

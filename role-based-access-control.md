@@ -9,6 +9,14 @@ The implementation of TiDB's role-based access control (RBAC) system is similar 
 
 This document introduces TiDB RBAC-related operations and implementation.
 
+<CustomContent platform="tidb-cloud">
+
+> **Note:**
+>
+> For each Developer Tier cluster, TiDB Cloud generates a unique prefix to distinguish it from other clusters. If you are using a Developer Tier cluster, whenever you use or set a database user name or role name, you must include the prefix (for example, `3pTAoNNegb47Uc8`) in the name. For more information, see [User name prefix](/tidb-cloud/select-cluster-tier.md#user-name-prefix).
+
+</CustomContent>
+
 ## RBAC operations
 
 A role is a collection of a series of privileges. You can do the following operations:

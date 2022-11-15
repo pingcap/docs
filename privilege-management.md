@@ -12,6 +12,14 @@ TiDB supports MySQL 5.7's privilege management system, including the syntax and 
 
 This document introduces privilege-related TiDB operations, privileges required for TiDB operations and implementation of the privilege system.
 
+<CustomContent platform="tidb-cloud">
+
+> **Note:**
+>
+> For each Developer Tier cluster, TiDB Cloud generates a unique prefix to distinguish it from other clusters. If you are using a Developer Tier cluster, whenever you use or set a database user name or role name, you must include the prefix (for example, `3pTAoNNegb47Uc8`) in the name. For more information, see [User name prefix](/tidb-cloud/select-cluster-tier.md#user-name-prefix).
+
+</CustomContent>
+
 ## Privilege-related operations
 
 ### Grant privileges
@@ -24,11 +32,15 @@ For example, use the following statement to grant the `xxx` user the privilege t
 GRANT SELECT ON test.* TO 'xxx'@'%';
 ```
 
+<CustomContent platform="tidb">
+
 Use the following statement to grant the `xxx` user all privileges on all databases:
 
 ```sql
 GRANT ALL PRIVILEGES ON *.* TO 'xxx'@'%';
 ```
+
+</CustomContent>
 
 By default, `GRANT` statements will return an error if the user specified does not exist. This behavior depends on if the SQL Mode `NO_AUTO_CREATE_USER` is specified:
 
@@ -151,6 +163,8 @@ Query OK, 0 rows affected (0.27 sec)
 
 You can use the `SHOW GRANTS` statement to see what privileges are granted to a user. For example:
 
+<CustomContent platform="tidb">
+
 ```sql
 SHOW GRANTS; -- show grants for the current user
 
@@ -161,6 +175,20 @@ SHOW GRANTS; -- show grants for the current user
 +-------------------------------------------------------------+
 SHOW GRANTS FOR 'root'@'%'; -- show grants for a specific user
 ```
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+```sql
+SHOW GRANTS; -- show grants for the current user
+```
+
+```sql
+SHOW GRANTS FOR 'root'@'%'; -- show grants for a specific user
+```
+
+</CustomContent>
 
 For example, create a user `rw_user@192.168.%` and grant the user with write privilege on the `test.write_table` table and global read privilege.
 
@@ -202,6 +230,8 @@ To see the full set of dynamic privileges, execute the `SHOW PRIVILEGES` stateme
 
 You can check privileges of TiDB users in the `INFORMATION_SCHEMA.USER_PRIVILEGES` table. For example:
 
+<CustomContent platform="tidb">
+
 ```sql
 mysql> SELECT * FROM INFORMATION_SCHEMA.USER_PRIVILEGES WHERE grantee = "'root'@'%'";
 +------------+---------------+-------------------------+--------------+
@@ -241,6 +271,52 @@ mysql> SELECT * FROM INFORMATION_SCHEMA.USER_PRIVILEGES WHERE grantee = "'root'@
 +------------+---------------+-------------------------+--------------+
 31 rows in set (0.00 sec)
 ```
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+<!--Compared with TiDB, the root user in TiDB Cloud does not have the SHUTDOWN and CONFIG privileges.-->
+
+```sql
+mysql> SELECT * FROM INFORMATION_SCHEMA.USER_PRIVILEGES WHERE grantee = "'root'@'%'";
++------------+---------------+-------------------------+--------------+
+| GRANTEE    | TABLE_CATALOG | PRIVILEGE_TYPE          | IS_GRANTABLE |
++------------+---------------+-------------------------+--------------+
+| 'root'@'%' | def           | Select                  | YES          |
+| 'root'@'%' | def           | Insert                  | YES          |
+| 'root'@'%' | def           | Update                  | YES          |
+| 'root'@'%' | def           | Delete                  | YES          |
+| 'root'@'%' | def           | Create                  | YES          |
+| 'root'@'%' | def           | Drop                    | YES          |
+| 'root'@'%' | def           | Process                 | YES          |
+| 'root'@'%' | def           | References              | YES          |
+| 'root'@'%' | def           | Alter                   | YES          |
+| 'root'@'%' | def           | Show Databases          | YES          |
+| 'root'@'%' | def           | Super                   | YES          |
+| 'root'@'%' | def           | Execute                 | YES          |
+| 'root'@'%' | def           | Index                   | YES          |
+| 'root'@'%' | def           | Create User             | YES          |
+| 'root'@'%' | def           | Create Tablespace       | YES          |
+| 'root'@'%' | def           | Trigger                 | YES          |
+| 'root'@'%' | def           | Create View             | YES          |
+| 'root'@'%' | def           | Show View               | YES          |
+| 'root'@'%' | def           | Create Role             | YES          |
+| 'root'@'%' | def           | Drop Role               | YES          |
+| 'root'@'%' | def           | CREATE TEMPORARY TABLES | YES          |
+| 'root'@'%' | def           | LOCK TABLES             | YES          |
+| 'root'@'%' | def           | CREATE ROUTINE          | YES          |
+| 'root'@'%' | def           | ALTER ROUTINE           | YES          |
+| 'root'@'%' | def           | EVENT                   | YES          |
+| 'root'@'%' | def           | RELOAD                  | YES          |
+| 'root'@'%' | def           | FILE                    | YES          |
+| 'root'@'%' | def           | REPLICATION CLIENT      | YES          |
+| 'root'@'%' | def           | REPLICATION SLAVE       | YES          |
++------------+---------------+-------------------------+--------------+
+31 rows in set (0.00 sec)
+```
+
+</CustomContent>
 
 ### ALTER
 
