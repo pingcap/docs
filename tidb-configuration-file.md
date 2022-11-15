@@ -1,11 +1,7 @@
 ---
 title: TiDB Configuration File
 summary: Learn the TiDB configuration file options that are not involved in command line options.
-<<<<<<< HEAD
 aliases: ['/docs/dev/tidb-configuration-file/','/docs/dev/reference/configuration/tidb-server/configuration-file/']
-=======
-aliases: ['/docs/stable/reference/configuration/tidb-server/configuration-file/']
->>>>>>> 4b15577b7 (Add aliases for configuration files (#11302))
 ---
 
 <!-- markdownlint-disable MD001 -->
