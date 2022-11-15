@@ -137,6 +137,7 @@ To restore your TiDB cluster data from a backup to a new cluster, take the follo
     2. Select a backup you want to restore to.
 
     </div>
+    </SimpleTab>
 
 4. In **Restore to Region**, select the same region as the **Backup Storage Region** configured in the **Backup Settings**.
 
