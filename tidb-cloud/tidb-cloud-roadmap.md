@@ -122,7 +122,7 @@ For the roadmap of TiDB kernel, refer to [TiDB Roadmap](https://github.com/pingc
   <tr>
     <td>Backup and Restore</td>
     <td>✅ Support EBS snapshot-based backup and restore.</td>
-    <td>BR service on TiDB cloud uses EBS snapshot-based backup and recovery.</td>
+    <td>BR service on TiDB Cloud uses EBS snapshot-based backup and restore.</td>
   </tr>
   <tr>
     <td>Backup and restore</td>
