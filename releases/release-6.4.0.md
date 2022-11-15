@@ -65,9 +65,9 @@ In v6.4.0-DMR, the key new features and improvements are as follows:
 
 * Cluster diagnostics becomes GA [#1438](https://github.com/pingcap/tidb-dashboard/issues/1438) @[Hawkson-jee](https://github.com/Hawkson-jee) **tw@shichun-0415**
 
-    [Cluster diagnostics](/dashboard/dashboard-diagnostics-access.md) diagnoses the problems that might exist in a cluster within a specified time range, and summarizes the diagnostic results and the cluster-related load monitoring information into [a diagnostic report](/dashboard/dashboard-diagnostics-report.md). This diagnostic report is in the form of a web page. You can browse the page offline and circulate this page link after saving the page from a browser.
+    The [cluster diagnostics](/dashboard/dashboard-diagnostics-access.md) feature in TiDB Dashboard diagnoses the problems that might exist in a cluster within a specified time range, and summarizes the diagnostic results and the cluster-related load monitoring information into [a diagnostic report](/dashboard/dashboard-diagnostics-report.md). This diagnostic report is in the form of a web page. You can browse the page offline and circulate this page link after saving the page from a browser.
 
-    With the diagnostic reports, you can quickly understand the basic health information of the cluster, including the load, component status, latency, and configurations. If the cluster has some common problems, you can further locate the causes in the result of the built-in automatic diagnosis in the [diagnostic information](/dashboard/dashboard-diagnostics-report.md#diagnostic-information) section.
+    With the diagnostic reports, you can quickly understand the basic health information of the cluster, including the load, component status, time consumption, and configurations. If the cluster has some common problems, you can locate the causes in the result of the built-in automatic diagnosis in the [diagnostic information](/dashboard/dashboard-diagnostics-report.md#diagnostic-information) section.
 
 ### Performance
 
@@ -200,13 +200,13 @@ In v6.4.0-DMR, the key new features and improvements are as follows:
 
 ### Data migration
 
-* DM supports writing upstream source data to a merged table in extended columns to the downstream [#37797](https://github.com/pingcap/tidb/issues/37797) @[lichunzhu](https://github.com/lichunzhu) **tw@shichun-0415**
+* DM supports writing upstream data source information to the extended columns of the downstream merged table [#37797](https://github.com/pingcap/tidb/issues/37797) @[lichunzhu](https://github.com/lichunzhu) **tw@shichun-0415**
 
-    When merging sharded schemas and tables from upstream to TiDB, you can manually add several fields (extended columns) in the target table and specify their values when configuring the DM task. Specifically, if you specify the names of the upstream sharded schema and table in the extended columns, the data written to the downstream by DM will include the schema name and table name. In scenarios with data exceptions, you can use this feature to quickly locate the source information of the data in the target table, such as the schema name and table name.
+    When merging sharded schemas and tables from upstream to TiDB, you can manually add several fields (extended columns) in the target table and specify their values when configuring the DM task. For example, if you specify the names of the upstream sharded schema and table for the extended columns, the data written to the downstream by DM will include the schema name and table name. When the downstream data looks unusual, you can use this feature to quickly locate the data source information in the target table, such as the schema name and table name.
 
     For more information, see [Extract table, schema, and source information and write into the merged table](/dm/dm-key-features.md#extract-table-schema-and-source-information-and-write-into-the-merged-table).
 
-* DM optimizes the pre-check mechanism by changing mandatory check items to optional ones [#7333](https://github.com/pingcap/tiflow/issues/7333) @[lichunzhu](https://github.com/lichunzhu) **tw@shichun-0415**
+* DM optimizes the pre-check mechanism by changing some mandatory check items to optional ones [#7333](https://github.com/pingcap/tiflow/issues/7333) @[lichunzhu](https://github.com/lichunzhu) **tw@shichun-0415**
 
     To run a data migration task smoothly, DM triggers [a precheck](/dm/dm-precheck.md) automatically at the start of the task and returns the check results. DM starts the migration only after the precheck is passed.
 
@@ -224,9 +224,7 @@ In v6.4.0-DMR, the key new features and improvements are as follows:
 
 * DM adds more status indicators for migration tasks [#7343](https://github.com/pingcap/tiflow/issues/7343) @[okJiang](https://github.com/okJiang) **tw@shichun-0415**
 
-    DM provides performance and progress indicators for migration tasks. Such information helps users learn about and control the task progress. In addition, the status information also provides a references for troubleshooting.
-
-    In v6.4.0, DM adds several status indicators. They can help users understand the migration performance and progress more intuitively:
+    In v6.4.0, DM adds more performance and progress indicators for migration tasks, which helps you understand the migration performance and progress more intuitively and provides you with a reference for troubleshooting.
 
     * Add status indicators (in bytes/s) showing data importing and exporting performance.
     * Rename the performance indicator for writing data to the downstream database from TPS to RPS (in rows/s).
@@ -238,7 +236,7 @@ In v6.4.0-DMR, the key new features and improvements are as follows:
 
 - TiCDC supports replicating data to Kafka of the `3.2.0` version [#7191](https://github.com/pingcap/tiflow/issues/7191) @[3AceShowHand](https://github.com/3AceShowHand) **tw@shichun-0415**
 
-    From v6.4.0, TiCDC supports replicating data to Kafka of the `3.2.0` version and earlier.
+    From v6.4.0, TiCDC supports [replicating data to Kafka](/replicate-data-to-kafka.md) of the `3.2.0` version and earlier.
 
 ## Compatibility changes
 
@@ -342,7 +340,7 @@ In v6.4.0-DMR, the key new features and improvements are as follows:
 
     + TiCDC
 
-        - TiCDC supports replicating the exchange partition DDL [#639](https://github.com/pingcap/tiflow/issues/639) @[asddongmen](https://github.com/asddongmen)
+        - Support replicating the exchange partition DDL statements [#639](https://github.com/pingcap/tiflow/issues/639) @[asddongmen](https://github.com/asddongmen)
         - Improve non-batch sending performance for the MQ sink module [#7353](https://github.com/pingcap/tiflow/issues/7353) @[hi-rustin](https://github.com/hi-rustin)
         - Improve performance of TiCDC puller when a table has a large number of Regions [#7078](https://github.com/pingcap/tiflow/issues/7078) [#7281](https://github.com/pingcap/tiflow/issues/7281) @[sdojjy](https://github.com/sdojjy)
         - Support reading historical data in the downstream TiDB by using the `tidb_enable_external_ts_read` varaible when Syncpoint is enabled [#7419](https://github.com/pingcap/tiflow/issues/7419) @[asddongmen](https://github.com/asddongmen)
