@@ -23,13 +23,17 @@ The TiDB Cloud roadmap brings you what's coming in the near future, so you can s
 </thead>
 <tbody>
   <tr>
-    <td rowspan="2">Developer experience</td>
-    <td>Load sample datasets manually.</td>
+    <td rowspan="3">Developer experience</td>
+    <td>✅ Load sample datasets manually.</td>
     <td>Support loading sample datasets into a cluster. You can use this data to quickly get started with testing the features of TiDB Cloud.</td>
   </tr>
   <tr>
     <td>Add SQL Editor.</td>
     <td>Write and run SQL queries, and view the results in the TiDB console.</td>
+  </tr>
+  <tr>
+    <td>Data API</td>
+    <td>Allow developers to read/write databases via data API.</td>
   </tr>
   <tr>
     <td>Cloud provider marketplace</td>
@@ -38,21 +42,25 @@ The TiDB Cloud roadmap brings you what's coming in the near future, so you can s
   </tr>
   <tr>
     <td rowspan="2">Enterprise-grade features</td>
-    <td>Manage multiple organizations.</td>
-    <td>Support managing multiple organizations. A user can create and join more than one organization.</td>
+    <td>✅ Manage users in multiple organizations.</td>
+    <td>Allow a user to join multiple organizations by accepting the invitations.</td>
   </tr>
   <tr>
     <td>Support hierarchical user roles and permissions.</td>
     <td>Support role-based access control (RBAC) for the TiDB Cloud console. You can manage user permissions in a fine-grained manner, such as by cluster, billing, and member.</td>
   </tr>
   <tr>
-    <td rowspan="2">UI experience</td>
-    <td>Provide a more convenient feedback channel.</td>
+    <td rowspan="3">UI experience</td>
+    <td>✅ Provide a more convenient feedback channel.</td>
     <td>Users can quickly get help with and give feedback on the product.</td>
   </tr>
   <tr>
     <td>Add left navigation.</td>
     <td>Present the TiDB Cloud console in the structure of organizations, projects, and users to simplify the layout logic and improve user experience.</td>
+  </tr>
+  <tr>
+    <td>Optimize Playground.</td>
+    <td>Improve interactivity combined with the new SQL Editor, and guide users to finish the tutorial.</td>
   </tr>
 </tbody>
 </table>
@@ -159,7 +167,7 @@ The TiDB Cloud roadmap brings you what's coming in the near future, so you can s
 <tbody>
   <tr>
     <td>Self-service cluster analysis and diagnosis using reports</td>
-    <td><ul><li>Cluster health report.</li><li>Cluster status comparison report.</li><li>Cluster performance analysis report.</li><li>Cluster system check report.</li></ul></td>
+    <td><ul><li>✅ Cluster health report.</li><li>✅ Cluster status comparison report.</li><li>✅ Cluster system check report.</li></ul></td>
     <td><ul><li>Provide diagnosis and analysis reports for several different usage scenarios.</li><li>Locate cluster failures for some scenarios and provide recommended solutions.</li><li>Provide cluster key status summary for some scenarios.</li></ul></td>
   </tr>
   <tr>
@@ -169,7 +177,7 @@ The TiDB Cloud roadmap brings you what's coming in the near future, so you can s
   </tr>
   <tr>
     <td>Cluster diagnosis data accessibility </td>
-    <td><ul><li>Access diagnosis data online in real time.</li><li>Access diagnosis data offline.</li><li>Build logic for data reconstruction.</li></ul></td>
+    <td><ul><li>✅ Access diagnosis data online in real time.</li><li>✅ Access diagnosis data offline.</li><li>Build logic for data reconstruction.</li></ul></td>
     <td><ul><li>Integrate with various monitoring and diagnosis systems to improve the real-time data access capability.</li><li>Provide offline data access for large-scale diagnosis, analysis, and tuning.</li><li>Improve data stability and build logic for data reconstruction.</li></ul></td>
   </tr>
   <tr>
@@ -192,19 +200,14 @@ The TiDB Cloud roadmap brings you what's coming in the near future, so you can s
 </thead>
 <tbody>
   <tr>
-    <td>Data replication to Kafka via TiCDC</td>
-    <td>Reduce TiCDC replication latency in daily operations.</td>
-    <td>When TiKV, TiDB, PD, or TiCDC nodes are offline in a planned maintenance window, the replication latency of TiCDC can be reduced to less than 10 seconds.</td>
+    <td>Data replication to Kafka/MySQL</td>
+    <td>TiDB Cloud supports replicating data to Kafka/MySQL.</td>
+    <td>TiDB Cloud supports TiCDC-based data replication to Kafka and MySQL compatible databases.</td>
   </tr>
   <tr>
-    <td>Data disaster recovery</td>
-    <td>TiCDC provides cross-region disaster recovery on the cloud.</td>
-    <td>TiCDC provides disaster recovery that ensures data eventual consistency with lower cost on TiDB Cloud.</td>
-  </tr>
-  <tr>
-    <td>Point-in-time recovery (PITR)</td>
-    <td>Support PITR on the cloud.</td>
-    <td>Support cluster-level PITR on the cloud.</td>
+    <td>Backup and Restore</td>
+    <td>✅ Support EBS snapshot-based backup and restore.</td>
+    <td>BR service on TiDB cloud uses EBS snapshot-based backup and recovery.</td>
   </tr>
   <tr>
     <td>Backup and restore</td>
@@ -214,7 +217,7 @@ The TiDB Cloud roadmap brings you what's coming in the near future, so you can s
   <tr>
     <td rowspan="2">Online data migration</td>
     <td>Support full data migration from Amazon Relational Database Service (RDS).</td>
-    <td>Full data migration from RDS to TiDB Cloud</td>
+    <td>Full data migration from RDS to TiDB Cloud.</td>
   </tr>
   <tr>
     <td>Support incremental data migration from RDS.</td>
@@ -235,19 +238,25 @@ The TiDB Cloud roadmap brings you what's coming in the near future, so you can s
 </thead>
 <tbody>
   <tr>
-    <td>Key rotation</td>
-    <td>Support key rotation on TiDB clusters for AWS.</td>
-    <td>Support key rotation on TiDB clusters to improve the security of encrypted data.</td>
+    <td>TLS rotation</td>
+    <td>Support TLS rotation for TiDB clusters.</td>
+    <td>Support internal TLS rotation settings and automatic updates in TiDB clusters.</td>
   </tr>
   <tr>
-    <td>Key management</td>
-    <td>Support making your own key manageable (BYOK from AWS).</td>
-    <td>Allow you to use your own data encryption keys on AWS.</td>
+    <td>Data Encryption</td>
+    <td>Enablement of customer-managed encryption keys.</td>
+    <td>Allow customers to use their own KMS encryption keys on TIBD Cloud.</td>
   </tr>
    <tr>
-    <td>Audit logging</td>
+    <td>Database audit logging</td>
     <td>Enhance the database audit logging.</td>
-    <td>Enhance the ability of database audit logging and provide the visual UI access.</td>
+    <td>Enhance the ability of database audit logging.</td>
+  </tr>
+  </tr>
+   <tr>
+    <td>Console audit logging</td>
+    <td>Support auditing TiDB Cloud Console operations.</td>
+    <td>Support reliable auditing capabilities for various operations in the TiDB Cloud Console.</td>
   </tr>
 </tbody>
 </table>
