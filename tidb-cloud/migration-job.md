@@ -20,7 +20,6 @@ A migration job supports the following data sources:
 A migration job supports the following network types:
 
 - Public IP
-- VPC peering
 - Private Link
 
 A migration job supports data migration within the same region and cross regions.
@@ -48,7 +47,7 @@ The username you use for the upstream database must have the following privilege
 For example, if you need to migrate the data from `db1` to TiDB Cloud, execute the following `GRANT` statement:
 
 ```sql
-GRANT RELOAD, REPLICATION SLAVE, REPLICATION CLIENT ON *.* TO 'your_user'@'your_wildcard_of_host'
+GRANT RELOAD, REPLICATION SLAVE, REPLICATION CLIENT, PROCESS ON *.* TO 'your_user'@'your_wildcard_of_host'
 GRANT SELECT ON db1.* TO 'your_user'@'your_wildcard_of_host';
 ```
 
@@ -72,8 +71,9 @@ On the **Create Migration Job** page, configure the source and target connection
 
    - **Data source**: the data source type. Currently, it supports MySQL, AWS Aurora MySQL, and AWS RDS MySQL.
    - **Region**: the region of the data source. If the source database is a self-built, the parameter is empty.
-   - **Connectivity method**: the connectivity method of the data source. Currently, it supports Public IP, VPC peering, and Private Link.
-   - **Hostname or IP address**: the hostname or IP address of the data source.
+   - **Connectivity method**: the connectivity method of the data source. Currently, it supports Public IP and Private Link.
+   - **Hostname or IP address** (for Public IP): the hostname or IP address of the data source.
+   - **Service Name** (for Private Link): the endpoint service name.
    - **Port**: the port of the data source.
    - **Username**: the username of the data source.
    - **Password**: the password of the data source.
