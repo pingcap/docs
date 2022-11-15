@@ -164,13 +164,12 @@ For the roadmap of TiDB kernel, refer to [TiDB Roadmap](https://github.com/pingc
     <td>Enablement of customer-managed encryption keys.</td>
     <td>Allow customers to use their own KMS encryption keys on TIBD Cloud.</td>
   </tr>
-   <tr>
+  <tr>
     <td>Database audit logging</td>
     <td>Enhance the database audit logging.</td>
     <td>Enhance the ability of database audit logging.</td>
   </tr>
-  </tr>
-   <tr>
+  <tr>
     <td>Console audit logging</td>
     <td>Support auditing TiDB Cloud Console operations.</td>
     <td>Support reliable auditing capabilities for various operations in the TiDB Cloud Console.</td>
