@@ -201,7 +201,7 @@ Adding or removing the `AUTO_INCREMENT` attribute of a column via `ALTER TABLE M
 
 Refer to the [restrictions of `AUTO_INCREMENT`](/auto-increment.md#restrictions).
 
-Set `@@tidb_allow_remove_auto_inc` to `true` to allow removal of the `AUTO_INCREMENT` attribute.
+To allow the removal of the `AUTO_INCREMENT` attribute, set `@@tidb_allow_remove_auto_inc` to `true`.
 
 ### `FULLTEXT`, `HASH`, and `SPATIAL` indexes are not supported
 
