@@ -2679,7 +2679,7 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 - Default value: `128`
 - Range: `[1, 9223372036854775807]`
 - Unit: Rows
-- This variable is used to set the minimum number of rows during the coprocessor paging request process. Setting it to a too small value increases the RPC request count between TiDB and TiKV, while setting it to a too large value might cause performance decrease when executing queries using IndexLookup with Limit. The default value of this variable is more friendly in OLTP scenarios than in OLAP scenarios. If the application only uses TiKV as the storage engine, consider increasing the value of this variable when executing OLAP workload queries, which might bring you better performance.
+- This variable is used to set the minimum number of rows during the coprocessor paging request process. Setting it to a too small value increases the RPC request count between TiDB and TiKV, while setting it to a too large value might cause a performance decrease when executing queries using IndexLookup with Limit. The default value of this variable brings better performance in OLTP scenarios than in OLAP scenarios. If the application only uses TiKV as the storage engine, consider increasing the value of this variable when executing OLAP workload queries, which might bring you better performance.
 
 ![Paging size impact on TPCH](/media/paging-size-impact-on-tpch.png)
 
