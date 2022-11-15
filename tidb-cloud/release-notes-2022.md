@@ -8,6 +8,35 @@ aliases: ['/tidbcloud/beta/supported-tidb-versions','/tidbcloud/release-notes']
 
 This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-cloud/) in 2022.
 
+## November 15, 2022
+
+**General changes**
+
+* Support point-in-time recovery (PITR) for [Dedicated Tier](/tidb-cloud/select-cluster-tier.md#dedicated-tier) clusters (beta).
+
+    PITR supports restoring data of any point in time to a new cluster. You can use it to:
+
+    * Reduce RPO in disaster recovery.
+    * Resolve data write errors by restoring point-in-time that is before the error event.
+    * Audit the historical data of the business.
+
+    To use the PITR feature, make sure that your TiDB cluster version is at least v6.3.0 and the TiKV node size is at least 8 vCPU and 16 GiB.
+
+    By default, backup data is stored in the same region where the cluster is created. In Japan, for TiDB clusters hosted on GCP with PITR enabled, you can choose to store backup data in one or two regions (Tokyo and/or Osaka). Restoring data from an alternative region provides a higher level of data safety and can tolerate region failures.
+
+    For more information, see [Back Up and Restore TiDB Cluster Data](/tidb-cloud/backup-and-restore.md).
+
+    This feature is still in beta and only available upon request:
+
+    * Click **Help** in the lower-right corner of TiDB Cloud console.
+    * In the dialog, fill in "Apply for PITR" in the **Description** field and click **Send**.
+
+* The database audit logging feature is now GA.
+
+    You can use database audit logging to record a history of user access details (such as any SQL statements executed) in logs and conduct a periodic analysis of the database audit logs, which helps keep your database secure.
+
+    For more information, see [Database Audit Logging](/tidb-cloud/tidb-cloud-auditing.md).
+
 ## November 8, 2022
 
 **General changes**
