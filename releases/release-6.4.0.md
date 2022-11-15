@@ -24,7 +24,7 @@ In v6.4.0-DMR, the key new features and improvements are as follows:
 - TiFlash supports the SM4 algorithm for [encryption at rest](/encryption-at-rest.md#tiflash).
 - Support using a SQL statement to [compact TiFlash replicas of specified partitions in a table immediately](/sql-statements/sql-statement-alter-table-compact.md#compact-tiflash-replicas-of-specified-partitions-in-a-table).
 - Support [backing up a TiDB cluster using EBS volume snapshots](https://docs.pingcap.com/tidb-in-kubernetes/v1.4/backup-to-aws-s3-by-snapshot).
-- DM supports [writing upstream data source information to the extended columns of the downstream merged table] (/dm/dm-key-features.md#extract-table-schema-and-source-information-and-write-into-the-merged-table).
+- DM supports [writing upstream data source information to the extended columns of the downstream merged table](/dm/dm-key-features.md#extract-table-schema-and-source-information-and-write-into-the-merged-table).
 
 ## New features
 
