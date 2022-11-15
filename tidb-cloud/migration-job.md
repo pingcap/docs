@@ -5,11 +5,11 @@ summary: Learn how to create migration jobs to migrate online or on-premises dat
 
 # Migrate Online or On-Premises Data Using Migration Jobs
 
-This document describes how to create a migration job to migrate online or on-premises data to TiDB Cloud.
+This document describes how to use a migration job to migrate online or on-premises data to TiDB Cloud.
 
 You can import data in CSV, Parquet, SQL, and Aurora Snapshot formats to TiDB Cloud, as described in [Migration Overview](/tidb-cloud/tidb-cloud-migration-overview.md). Many of these scenarios are offline data import scenarios. When importing such data, to ensure the consistency of upstream and downstream data, you need to stop the upstream business, then export the offline files from the database, and then import the data to TiDB Cloud. It will bring a long downtime to the business, which is unacceptable in some cases.
 
-To solve this problem, TiDB Cloud provides the Migration Job feature, which supports full migration and incremental migration, allowing you to migrate your business from the upstream database to TiDB Cloud within a short downtime window.
+To solve this problem, TiDB Cloud provides the migration job feature, which supports full migration and incremental migration, allowing you to migrate your business from the upstream database to TiDB Cloud within a short downtime window.
 
 A migration job supports the following data sources:
 
@@ -27,7 +27,9 @@ A migration job supports data migration within the same region and cross regions
 
 ## Limitations
 
-- The system databases of `mysql`, `information_schema`, `information_schema` and `sys` will be filtered out during migration (even when you migrate the entire upstream MySQL instance), and will not be migrated to TiDB Cloud.
+- The system databases including `mysql`, `information_schema`, `information_schema` and `sys` will be filtered out during migration (even when you migrate the entire upstream MySQL instance), and will not be migrated to TiDB Cloud.
+
+- If the table to migrated already exists in the target database, TiDB Cloud appends the data to the target table directly. If the keys conflict, it will report an error.
 
 - When you delete a cluster, all migration jobs in that cluster are automatically deleted, and the deleted migration jobs are not recoverable.
 
