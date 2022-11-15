@@ -1655,7 +1655,7 @@ MPP is a distributed computing framework provided by the TiFlash engine, which a
 
 > **Note:**
 >
-> In OLAP scenarios where TiKV is used as the storage engine instead of TiFlash, enabling paging might cause performance regression in some cases. If the regression occurs, consider using this variable to disable paging, or using the [`tidb_min_paging_size`](/system-variables.md#tidb_min_paging_size-new-in-v620) and [`tidb_max_paging_size`](/system-variables.md#tidb_max_paging_size-new-in-v620) variables to adjust the range of rows for paging size.
+> In OLAP scenarios where TiKV is used as the storage engine instead of TiFlash, enabling paging might cause performance regression in some cases. If the regression occurs, consider using this variable to disable paging, or using the [`tidb_min_paging_size`](/system-variables.md#tidb_min_paging_size-new-in-v620) and [`tidb_max_paging_size`](/system-variables.md#tidb_max_paging_size-new-in-v630) variables to adjust the range of rows for paging size.
 
 ### tidb_enable_parallel_apply <span class="version-mark">New in v5.0</span>
 
