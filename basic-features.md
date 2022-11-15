@@ -143,6 +143,7 @@ This document lists the features supported in each TiDB version. Note that suppo
 | [Certificate-based authentication](/certificate-authentication.md) | Y | Y | Y | Y | Y | Y    |    Y    |    Y    |    Y    |    Y    |    Y    |
 | [`caching_sha2_password` authentication](/system-variables.md#default_authentication_plugin)        | Y | Y | Y | Y | Y | Y    |    Y    |    Y    |    N    |    N    |    N    |
 | [`tidb_sm3_password` authentication](/system-variables.md#default_authentication_plugin)             | Y | Y | N | N | N | N | N | N |    N    |    N    |    N    |
+| [`tidb_auth_token` authentication](/system-variables.md#default_authentication_plugin)             | Y | N | N | N | N | N | N | N |    N    |    N    |    N    |
 | [MySQL compatible `GRANT` system](/privilege-management.md)  | Y | Y | Y | Y | Y | Y    |    Y    |    Y    |    Y    |    Y    |    Y    |
 | [Dynamic Privileges](/privilege-management.md#dynamic-privileges) | Y | Y | Y | Y | Y | Y    |    Y    |    Y    |    Y    |    N    |    N    |
 | [Security Enhanced Mode](/system-variables.md#tidb_enable_enhanced_security) | Y | Y | Y | Y | Y | Y    |    Y    |    Y    |    Y    |    N    |    N    |
