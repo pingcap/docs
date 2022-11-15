@@ -1591,7 +1591,11 @@ MPP is a distributed computing framework provided by the TiFlash engine, which a
 - Type: Boolean
 - Default value: `ON`
 - This variable controls whether to use the method of paging to send coprocessor requests. For TiDB versions in [v5.4.0, v6.2.0), this variable only takes effect on the `IndexLookup` operator; for v6.2.0 and later, this variable takes effect globally. Starting from v6.4.0, the default value of this variable is changed from `OFF` to `ON`.
-- User scenarios: recommended for all OLTP scenarios. For read queries that use `IndexLookup` and `Limit` and that `Limit` cannot be pushed down to `IndexScan`, there might be high latency for the read queries and high CPU usage for TiKV `unified read pool`. In such cases, because the `Limit` operator only requires a small set of data, if you set `tidb_enable_paging` to `ON`, TiDB processes less data, which reduces query latency and resource consumption. In addition, in scenarios such as data export using Dumpling or full table scan, enabling paging can effectively reduce memory consumption of TiDB processes.
+- User scenarios: 
+
+    - In all OLTP scenarios, it is recommended to use the method of paging.
+    - For read queries that use `IndexLookup` and `Limit` and that `Limit` cannot be pushed down to `IndexScan`, there might be high latency for the read queries and high CPU usage for TiKV `unified read pool`. In such cases, because the `Limit` operator only requires a small set of data, if you set `tidb_enable_paging` to `ON`, TiDB processes less data, which reduces query latency and resource consumption. 
+    - In scenarios such as data export using Dumpling and full table scan, enabling paging can effectively reduce the memory consumption of TiDB processes.
 
 > **Note:**
 >
@@ -2591,7 +2595,7 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 
 ![TPCH](https://user-images.githubusercontent.com/1420062/201061302-d88f4702-cb10-4523-8500-02389769d774.png)
 
-As shown in this diagram, the performance of TPCH is affected by the settings of [`tidb_enable_paging`](/system-variables.md#tidb_max_paging_size-new-in-v630), `tidb_min_paging_size`, and [`tidb_max_paging_size`](/ system-variables.md#tidb_max_paging_size-new-in-v630). The vertical axis is the execution time, and it is the smaller the better.
+As shown in this diagram, when [`tidb_enable_paging`](/system-variables.md#tidb_max_paging_size-new-in-v630) is enabled, the performance of TPCH is affected by the settings of `tidb_min_paging_size`, and [`tidb_max_paging_size`](/ system-variables.md#tidb_max_paging_size-new-in-v630). The vertical axis is the execution time, and it is the smaller the better.
 
 ### tidb_mpp_store_fail_ttl
 
