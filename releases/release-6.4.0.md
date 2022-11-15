@@ -359,16 +359,16 @@ In v6.4.0-DMR, the key new features and improvements are as follows:
 
 + TiDB
 
-    - Fix the potential issue of index inconsistency that occurs after creating a new index [#38165](https://github.com/pingcap/tidb/issues/38165) @[tangenta](https://github.com/tangenta)
+    - Fix the potential issue of index inconsistency that occurs after you create a new index [#38165](https://github.com/pingcap/tidb/issues/38165) @[tangenta](https://github.com/tangenta)
     - Fix a permission issue of the `information_schema.TIKV_REGION_STATUS` table [#38407](https://github.com/pingcap/tidb/issues/38407) @[CbcWestwolf](https://github.com/CbcWestwolf)
     - Fix the issue that the join result of common table expressions might be wrong [#38170](https://github.com/pingcap/tidb/issues/38170) @[wjhuang2016](https://github.com/wjhuang2016)
     - Fix the issue that the union result of common table expressions might be wrong [#37928](https://github.com/pingcap/tidb/issues/37928) @[YangKeao](https://github.com/YangKeao)
     - Fix the issue that the information in the **transaction region num** monitoring panel is incorrect [#38139](https://github.com/pingcap/tidb/issues/38139) @[jackysp](https://github.com/jackysp)
     - Fix the issue that the system variable [`tidb_constraint_check_in_place_pessimistic`](/system-variables.md#tidb_constraint_check_in_place_pessimistic-new-in-v630) might affect internal transactions. The variable scope is modified to SESSION. [#38766](https://github.com/pingcap/tidb/issues/38766)
     - Fix the issue that conditions in a query are mistakenly pushed down to projections [#35623](https://github.com/pingcap/tidb/issues/35623)@[Reminiscent](https://github.com/Reminiscent)
-    - Fix the issue that the wrong `isNullRejected` check results for `AND` and `OR` cause wrong query result [#38304]( https://github.com/pingcap/tidb/issues/38304) @[Yisaer](https://github.com/Yisaer)
-    - Fix the issue that `ORDER BY` in `GROUP_CONCAT` is not considered when the outer join is eliminated, which causes wrong query result [#18216](https://github.com/pingcap/tidb/issues/18216) @[winoros](https://github.com/winoros)
-    - Fix the issue of wrong query result that occurs when the mistakenly pushed-down conditions are discarded by join reorder [#38736](https://github.com/pingcap/tidb/issues/38736) @[winoros](https://github.com/winoros)
+    - Fix the issue that the wrong `isNullRejected` check results for `AND` and `OR` cause wrong query results [#38304]( https://github.com/pingcap/tidb/issues/38304) @[Yisaer](https://github.com/Yisaer)
+    - Fix the issue that `ORDER BY` in `GROUP_CONCAT` is not considered when the outer join is eliminated, which causes wrong query results [#18216](https://github.com/pingcap/tidb/issues/18216) @[winoros](https://github.com/winoros)
+    - Fix the issue of the wrong query result that occurs when the mistakenly pushed-down conditions are discarded by Join Reorder [#38736](https://github.com/pingcap/tidb/issues/38736) @[winoros](https://github.com/winoros)
 
 + TiKV
 
