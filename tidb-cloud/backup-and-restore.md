@@ -28,7 +28,7 @@ By the automatic backup, you can back up the cluster data every day at the backu
 
 3. In the setting window, configure the automatic backup:
 
-    - (Optional) Check whether the PITR (**Point-in-time Recovery**) feature is on. 
+    - (Optional) Check whether the PITR (**Point-in-time Recovery**) feature is on.
 
         PITR supports restoring data of any point in time to a new cluster. You can use it to:
 
@@ -36,15 +36,15 @@ By the automatic backup, you can back up the cluster data every day at the backu
         - Resolve cases of data write errors by restoring point-in-time that is before the error event.
         - Audit the historical data of the business.
 
-        If you have one of the preceding needs and want to use the PITR feature, make sure that your TiDB cluster version is at least v6.3.0 and the TiKV node size is at least 8 vCPU and 16 GiB. Currently, PITR is in beta. To enable it, [file a ticket](/tidb-cloud/tidb-cloud-support.md).
+        If you have one of the preceding needs and want to use the PITR feature, make sure that your TiDB cluster version is at least v6.3.0 and the TiKV node size is at least 8 vCPU and 16 GiB. Currently, PITR is in **beta**. To enable it, [file a ticket](/tidb-cloud/tidb-cloud-support.md).
 
-    - In **Backup Time**, schedule a start time for the daily cluster backup. 
+    - In **Backup Time**, schedule a start time for the daily cluster backup.
 
         It is recommended to schedule automatic backup at a low workload period. If you do not specify a preferred backup time, TiDB Cloud assigns a default backup time, which is 2:00 AM in the time zone of the region where the cluster is located.
 
     - In **Backup Retention**, configure the minimum backup data retention period.
 
-    - In **Backup Storage Region**, select the regions where you want to store your backup data. 
+    - In **Backup Storage Region**, select the regions where you want to store your backup data.
 
         TiDB Cloud stores your backup data in the current region of your cluster by default. In addition, you can add another remote region, and TiDB Cloud will copy all new backup data to the remote region, which facilitates data safety and faster recovery. After adding a remote region as a backup data storage, you cannot remove the region.
 
@@ -122,11 +122,11 @@ To restore your TiDB cluster data from a backup to a new cluster, take the follo
     <SimpleTab>
     <div label="Select Time Point">
 
-    To restore data of any point in time to a new cluster, make sure that **PITR** in **Backup Settings** is on and then take the following steps:
+    To restore data of any point in time within the backup retention to a new cluster, make sure that **PITR** in **Backup Settings** is on and then take the following steps:
 
     1. Click **Select Time Point**.
     2. Select **Date** and **Time** you want to restore to.
-    
+
     </div>
 
     <div label="Select Backup Name">
