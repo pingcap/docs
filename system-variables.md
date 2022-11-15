@@ -2595,7 +2595,7 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 
 ![Paging size impact on TPCH](/media/paging-size-impact-on-tpch.png)
 
-As shown in this diagram, when [`tidb_enable_paging`](/system-variables.md#tidb_max_paging_size-new-in-v630) is enabled, the performance of TPCH is affected by the settings of `tidb_min_paging_size` and [`tidb_max_paging_size`](/ system-variables.md#tidb_max_paging_size-new-in-v630). The vertical axis is the execution time, and it is the smaller the better.
+As shown in this diagram, when [`tidb_enable_paging`](/system-variables.md#tidb_max_paging_size-new-in-v630) is enabled, the performance of TPCH is affected by the settings of `tidb_min_paging_size` and [`tidb_max_paging_size`](/system-variables.md#tidb_max_paging_size-new-in-v630). The vertical axis is the execution time, and it is the smaller the better.
 
 ### tidb_mpp_store_fail_ttl
 
