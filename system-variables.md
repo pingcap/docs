@@ -1650,7 +1650,7 @@ MPP is a distributed computing framework provided by the TiFlash engine, which a
 - User scenarios:
 
     - In all OLTP scenarios, it is recommended to use the method of paging.
-    - For read queries that use `IndexLookup` and `Limit` and that `Limit` cannot be pushed down to `IndexScan`, there might be high latency for the read queries and high CPU usage for TiKV `unified read pool`. In such cases, because the `Limit` operator only requires a small set of data, if you set `tidb_enable_paging` to `ON`, TiDB processes less data, which reduces query latency and resource consumption.
+    - For read queries that use `IndexLookup` and `Limit` and that `Limit` cannot be pushed down to `IndexScan`, there might be high latency for the read queries and high usage for TiKV `Unified read pool CPU`. In such cases, because the `Limit` operator only requires a small set of data, if you set `tidb_enable_paging` to `ON`, TiDB processes less data, which reduces query latency and resource consumption.
     - In scenarios such as data export using [Dumpling](/dumpling-overview.md) and full table scan, enabling paging can effectively reduce the memory consumption of TiDB processes.
 
 > **Note:**
