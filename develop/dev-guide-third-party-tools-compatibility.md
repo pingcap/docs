@@ -165,7 +165,7 @@ According to the test results, TiDB supports most of the Sequelize features ([us
 
 Unsupported features are:
 
-- `Foreign Key` constraints (including many-to-many relationships) are not supported.
+- Foreign key constraints (including many-to-many relationships) are not supported.
 - [`GEOMETRY`](https://github.com/pingcap/tidb/issues/6347) is not supported.
 - Modification of integer primary key is not supported.
 - `PROCEDURE` is not supported.
