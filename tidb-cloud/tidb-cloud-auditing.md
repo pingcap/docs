@@ -185,7 +185,7 @@ If you no longer want to audit a cluster, go to the page of the cluster, click *
 
 > **Note:**
 >
-> Each time the log file is filled with 10 MiB, it will be pushed to the cloud storage bucket. Therefore, after the audit log is disabled, the log file smaller than 10 MiB will not be automatically pushed to the cloud storage bucket. If you need to get this log file, contact [PingCAP support](/tidb-cloud/tidb-cloud-support.md).
+> Each time the size of the log file reaches 10 MiB, the log file will be pushed to the cloud storage bucket. Therefore, after the audit log is disabled, the log file whose size is smaller than 10 MiB will not be automatically pushed to the cloud storage bucket. To get the log file in this situation, contact [PingCAP support](/tidb-cloud/tidb-cloud-support.md).
 
 ## Audit log fields
 
