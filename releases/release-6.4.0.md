@@ -12,20 +12,19 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v6.4/quick-start-with-
 
 In v6.4.0-DMR, the key new features and improvements are as follows:
 
-- 支持通过 FLASHBACK CLUSTER 命令将集群快速回退到过去某一个指定的时间点
-- 支持 TiDB 全局内存限制
-- TiDB 分区表兼容 Linear Hash 分区。
-- 支持高性能、全局单调递增的 AUTO_INCREMENT 列属性。
-- 支持对 JSON 类型中的 Array 数据做范围选择。
-- 磁盘故障、I/O 无响应等极端情况下的故障恢复加速。
-- 增加了动态规划算法来决定表的连接顺序。
-- 引入新的优化器提示 `NO_DECORRELATE` 来控制解关联优化。
-- 集群诊断功能 GA。
-- TiFlash 静态加密支持国密算法 SM4。
-- 支持通过 SQL 语句对指定 Partition 的 TiFlash 副本立即触发物理数据整理 (Compaction)。
-- 支持对数据库用户增加额外说明。
-- 支持[基于 AWS EBS snapshot 的集群备份和恢复](https://docs.pingcap.com/zh/tidb-in-kubernetes/v1.4/backup-to-aws-s3-by-snapshot)。
-- 支持在分库分表合并迁移场景中[标记下游表中的数据来自上游哪个分库、分表和数据源](/dm/dm-key-features.md#提取分库分表数据源信息写入合表)。
+- Support restoring a cluster to a specific point in time by using [`FLASHBACK CLUSTER TO TIMESTAMP`](/sql-statements/sql-statement-flashback-to-timestamp.md) (experimental).
+- Support [tracking the global memory usage](/configure-memory-usage.md) of TiDB instances (experimental).
+- Be compatible with [the Linear Hash partitioning syntax](/partitioned-table.md#how-tidb-handles-linear-hash-partitions).
+- Support a high-performance and globally monotonic [`AUTO_INCREMENT`](/auto-increment.md#mysql-compatibility-mode) (experimental)
+- Support range selection of array data in [the JSON type](/data-type-json.md).
+- Accelerate fault recovery in extreme situations such as disk failure and I/O non-response.
+- Add the [dynamic planning algorithm](/join-reorder.md#example-the-dynamic-programming-algorithm-of-join-reorder) to determine table join order.
+- Introduce [a new optimizer hint `NO_DECORRELATE`](/optimizer-hints.md#no_decorrelate) to control whether to perform decorrelation for correlated subqueries.
+- The [cluster diagnostics](/dashboard/dashboard-diagnostics-access.md) feature becomes GA.
+- TiFlash supports the SM4 algorithm for [encryption at rest](/encryption-at-rest.md#tiflash).
+- Support using a SQL statement to [compact TiFlash replicas of specified partitions in a table immediately](/sql-statements/sql-statement-alter-table-compact.md#compact-tiflash-replicas-of-specified-partitions-in-a-table).
+- Support [backing up a TiDB cluster using EBS volume snapshots](https://docs.pingcap.com/tidb-in-kubernetes/v1.4/backup-to-aws-s3-by-snapshot).
+- DM supports [writing upstream data source information to the extended columns of the downstream merged table] (/dm/dm-key-features.md#extract-table-schema-and-source-information-and-write-into-the-merged-table).
 
 ## New features
 
@@ -107,7 +106,7 @@ In v6.4.0-DMR, the key new features and improvements are as follows:
 
 ### Stability
 
-* Accelerate fault recovery in extreme situations such as disk failure and I/O non-response   [#13648](https://github.com/tikv/tikv/issues/13648) @[LykxSassinator](https://github.com/LykxSassinator) **tw@qiancai**
+* Accelerate fault recovery in extreme situations such as disk failure and I/O non-response [#13648](https://github.com/tikv/tikv/issues/13648) @[LykxSassinator](https://github.com/LykxSassinator) **tw@qiancai**
 
     For enterprise users, database availability is one of the most important metrics. While in complex hardware environments, how to quickly detect and recover from failures has always been one of the challenges of database availability. In v6.4, TiDB fully optimizes the state detection mechanism of TiKV nodes. Even in extreme situations such as disk failures and I/O non-response, TiDB can still report node status quickly and use the active wake-up mechanism to launch Leader election in advance, which accelerates cluster self-healing. Through this optimization, TiDB can shorten the cluster recovery time by about 50% in the case of disk failures.
 
@@ -127,6 +126,11 @@ In v6.4.0-DMR, the key new features and improvements are as follows:
 
     [User document](/system-variables.md#tidb-opt-range-max-size-new-in-v640)
 
+* Support synchronously loading statistics (GA) [#37434](https://github.com/pingcap/tidb/issues/37434) @[chrysan](https://github.com/chrysan) **tw@ran-huang**
+
+    TiDB v6.4.0 enables the synchronously loading statistics feature by default. This feature allows TiDB to synchronously load large-sized statistics (such as histograms, TopN, and Count-Min Sketch statistics) into memory when you execute SQL statements, which improves the completeness of statistics for SQL optimization.
+
+    [User document](/system-varaibles.md#tidb_stats_load_sync_wait-new-in-v540)
 ### Ease of use
 
 * TiKV API V2 becomes generally available (GA) [#11745](https://github.com/tikv/tikv/issues/11745) @[pingyu](https://github.com/pingyu) **tw@Oreoxmt**
@@ -323,7 +327,7 @@ In v6.4.0-DMR, the key new features and improvements are as follows:
 + TiFlash
 
     - Refactor the TiFlash MPP error handling logic to further improve the stability of MPP [#5095](https://github.com/pingcap/tiflash/issues/5095) @[windtalker](https://github.com/windtalker)
-    - Optimize Block Sort and key handling for Join and Aggregation [#5294](https://github.com/pingcap/tiflash/issues/5294) @[solotzg](https://github.com/solotzg)
+    - Optimize the sorting of the TiFlash computation process, and optimize the key handling for Join and Aggregation [#5294](https://github.com/pingcap/tiflash/issues/5294) @[solotzg](https://github.com/solotzg)
     - Optimize the memory usage for decoding and remove redundant transfer columns to improve Join performance [#6157](https://github.com/pingcap/tiflash/issues/6157) @[yibin87](https://github.com/yibin87)
 
 + Tools
@@ -390,7 +394,7 @@ In v6.4.0-DMR, the key new features and improvements are as follows:
 
     + TiDB Dashboard
 
-        - Avoid TiDB OOM issues when querying execution plans of certain complex SQL statements [#1386](https://github.com/pingcap/tidb-dashboard/issues/1386) @[baurine](https://github.com/baurine)
+        - Fix the TiDB OOM issue when querying execution plans of certain complex SQL statements [#1386](https://github.com/pingcap/tidb-dashboard/issues/1386) @[baurine](https://github.com/baurine)
         - Fix the issue that the Top SQL switch might not take effect when NgMonitoring loses the connection to the PD nodes [#164](https://github.com/pingcap/ng-monitoring/issues/164) @[zhongzc](https://github.com/zhongzc)
 
     + Backup & Restore (BR)
@@ -424,7 +428,7 @@ In v6.4.0-DMR, the key new features and improvements are as follows:
 
     + TiDB Lightning
 
-        - Fix the import performance degradation when importing the Apache Parquet files that contain columns in the string type and have the encoding of the schemas set to `binary` [#38351](https://github.com/pingcap/tidb/issues/38351) @[dsdashun](https://github.com/dsdashun)
+        - Fix the import performance degradation when importing the Apache Parquet files to the target tables that contain the string type columns in the`binary` encoding format [#38351](https://github.com/pingcap/tidb/issues/38351) @[dsdashun](https://github.com/dsdashun)
 
     + TiDB Dumpling
 
