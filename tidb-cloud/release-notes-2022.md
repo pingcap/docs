@@ -8,6 +8,37 @@ aliases: ['/tidbcloud/beta/supported-tidb-versions','/tidbcloud/release-notes']
 
 This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-cloud/) in 2022.
 
+## November 15, 2022
+
+* Support point-in-time recovery (PITR) for [Dedicated Tier](/tidb-cloud/select-cluster-tier.md#dedicated-tier) clusters (beta).
+
+    PITR supports restoring data of any point in time to a new cluster. You can use it to:
+
+    * Reduce RPO in disaster recovery.
+    * Resolve cases of data write errors by restoring point-in-time that is before the error event.
+    * Audit the historical data of the business.
+
+    To use the PITR feature, make sure that your TiDB cluster version is at least v6.3.0 and the TiKV node size is at least 8 vCPU and 16 GiB.
+
+    In addition, with PITR, you can set the backup storage region for clusters located in Tokyo and Osaka regions (for GCP only), so that backup data can be stored in both Tokyo and Osaka, which facilitates data safety and faster recovery. When you restore data, you can choose either region for the new cluster.
+
+    For more information, see [Back up and Restore TiDB Cluster Data](/tidb-cloud/backup-and-restore.md).
+
+    This feature is still in beta and only available upon request:
+
+    * Click **Help** in the lower-right corner of TiDB Cloud console.
+    * In the dialog, fill in "Apply for PITR" in the **Description** field and click **Send**.
+
+* The Database Audit Logging feature is now GA.
+
+    You can use Database Audit Logging to record a history of user access details (such as any SQL statements executed) in logs and conduct a periodic analysis of the database audit logs, which helps keep your database secure.
+
+    For detailed information, see [Database Audit Logging](/tidb-cloud/tidb-cloud-auditing.md).
+
+* Support reloading sample data to [Playground](/tidb-cloud/tidb-cloud-quickstart.md#step-2-try-playground).
+
+    In your [Serverless Tier](/tidb-cloud/select-cluster-tier.md#serverless-tier-beta) cluster, if the preloaded sample dataset in **Playground** is deleted, you can now reload the sample data to continue trying **Playground**.
+
 ## November 8, 2022
 
 **General changes**
