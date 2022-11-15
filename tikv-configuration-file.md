@@ -1,11 +1,7 @@
 ---
 title: TiKV Configuration File
 summary: Learn the TiKV configuration file.
-<<<<<<< HEAD
 aliases: ['/docs/dev/tikv-configuration-file/','/docs/dev/reference/configuration/tikv-server/configuration-file/']
-=======
-aliases: ['/docs/stable/reference/configuration/tikv-server/configuration-file/']
->>>>>>> 4b15577b7 (Add aliases for configuration files (#11302))
 ---
 
 # TiKV Configuration File
