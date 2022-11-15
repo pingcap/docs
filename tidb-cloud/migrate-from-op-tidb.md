@@ -18,7 +18,7 @@ The overall procedure is as follows:
 
 It is recommended that you put the S3 bucket and TiDB Cloud in the same region. Cross-region migration might incur additional data conversion cost.
 
-Before migraiton, you need to prepare the following:
+Before migration, you need to prepare the following:
 
 - Prepare an [AWS account](https://docs.aws.amazon.com/AmazonS3/latest/userguide/setting-up-s3.html#sign-up-for-aws-gsg) with administrator access
 - Prepare an [AWS S3 bucket](https://docs.aws.amazon.com/AmazonS3/latest/userguide/creating-bucket.html)
@@ -67,7 +67,7 @@ To deploy Dumpling using the installation package:
 
 #### Configure privileges for Dumpling
 
-You need the following previleges to export data from the upstream database:
+You need the following privileges to export data from the upstream database:
 
 - SELECT
 - RELOAD
