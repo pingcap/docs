@@ -34,7 +34,7 @@ The TiDB Cloud roadmap brings you what's coming in the near future, so you can s
     <td>Write and run SQL queries, and view the results in the TiDB console.</td>
   </tr>
   <tr>
-    <td>Data API</td>
+    <td>Support Data API.</td>
     <td>Allow developers to read/write databases via data API.</td>
   </tr>
   <tr>
