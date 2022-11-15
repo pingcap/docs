@@ -29,9 +29,9 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
     * Click **Help** in the lower-right corner of TiDB Cloud console.
     * In the dialog, fill in "Apply for PITR" in the **Description** field and click **Send**.
 
-* The Database Audit Logging feature is now GA.
+* The database audit logging feature is now GA.
 
-    You can use Database Audit Logging to record a history of user access details (such as any SQL statements executed) in logs and conduct a periodic analysis of the database audit logs, which helps keep your database secure.
+    You can use database audit logging to record a history of user access details (such as any SQL statements executed) in logs and conduct a periodic analysis of the database audit logs, which helps keep your database secure.
 
     For detailed information, see [Database Audit Logging](/tidb-cloud/tidb-cloud-auditing.md).
 
