@@ -185,7 +185,7 @@ If you no longer want to audit a cluster, go to the page of the cluster, click *
 
 > **Note:**
 >
-> After the audit log is disabled, the last log file will not be pushed to the bucket on the cloud. You can push this file in two ways:
+> After the audit log is disabled, the last log file will not be pushed to the bucket on the cloud. You can push this file in either of the following ways:
 >
 > - Restart the cluster, or scale out the cluster.
 > - Contact [PingCAP support team](/tidb-cloud/tidb-cloud-support.md).
