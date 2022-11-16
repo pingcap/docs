@@ -130,7 +130,7 @@ In v6.4.0-DMR, the key new features and improvements are as follows:
 
     TiDB v6.4.0 enables the synchronously loading statistics feature by default. This feature allows TiDB to synchronously load large-sized statistics (such as histograms, TopN, and Count-Min Sketch statistics) into memory when you execute SQL statements, which improves the completeness of statistics for SQL optimization.
 
-    For more information, see [User document](/system-variable.md#tidb_stats_load_sync_wait-new-in-v540).
+    For more information, see [User document](/system-variables.md#tidb_stats_load_sync_wait-new-in-v540).
 
 ### Ease of use
 
