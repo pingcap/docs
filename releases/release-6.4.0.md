@@ -114,7 +114,7 @@ In v6.4.0-DMR, the key new features and improvements are as follows:
 
     In v6.4.0, TiDB introduces global control of memory usage as an experimental feature that tracks the global memory usage of TiDB instances. You can use the system variable [`tidb_server_memory_limit`](/system-variables.md#tidb_server_memory_limit-new-in-v640) to set the upper limit for the global memory usage. When the memory usage reaches the threshold, TiDB tries to reclaim and release more free memory. When the memory usage exceeds the threshold, TiDB identifies and cancels the SQL operation that has the highest memory usage to avoid system issues caused by excessive memory usage.
 
-    When the memory consumption of TiDB instances has potential risks, TiDB will collect diagnostic information in advance and write it to the specified directory to facilitate the issue diagnosis. At the same time, TiDB provides system table views [`information_schame.MEMORY_USAGE`](/information-schema/information-schema-memory-usage.md) and [`information_schame.MEMORY_USAGE_OPS_HISTORY`](/information-schema/information-schema-memory-usage-ops-history.md) that show the memory usage and operation history to help you better understand the memory usage.
+    When the memory consumption of TiDB instances has potential risks, TiDB will collect diagnostic information in advance and write it to the specified directory to facilitate the issue diagnosis. At the same time, TiDB provides system table views [`INFORMATION_SCHEMA.MEMORY_USAGE`](/information-schema/information-schema-memory-usage.md) and [`INFORMATION_SCHEMA.MEMORY_USAGE_OPS_HISTORY`](/information-schema/information-schema-memory-usage-ops-history.md) that show the memory usage and operation history to help you better understand the memory usage.
 
     Global memory control is a milestone in TiDB memory management. It introduces a global view for instances and adopts systematic management for memory, which can greatly enhance database stability and service availability in more key scenarios.
 
@@ -158,9 +158,9 @@ In v6.4.0-DMR, the key new features and improvements are as follows:
 
 ### MySQL compatibility
 
-* Be compatible with the Linear Hash partitioning syntax [#issue](https://github.com/pingcap/tidb/issues/38450) @[mjonss](https://github.com/mjonss)
+* Be compatible with the Linear Hash partitioning syntax [#38450](https://github.com/pingcap/tidb/issues/38450) @[mjonss](https://github.com/mjonss)
 
-    In the earlier version, TiDB has supported the Hash, Range, and List partitioning. Starting from v6.4.0, TiDB can also be compatible with [MySQL Linear Hash partitioning](https://dev.mysql.com/doc/refman/5.7/en/partitioning-linear-hash.html).
+    In the earlier version, TiDB has supported the Hash, Range, and List partitioning. Starting from v6.4.0, TiDB can also be compatible with the syntaxt of [MySQL Linear Hash partitioning](https://dev.mysql.com/doc/refman/5.7/en/partitioning-linear-hash.html).
 
     In TiDB, you can execute the existing DDL statements of your MySQL Linear Hash partitions directly, and TiDB will create the corresponding Hash partition tables (note that there is no Linear Hash partition inside TiDB). You can also execute the existing DML statements of your MySQL Linear Hash partitions directly, and TiDB will return the query result of the corresponding TiDB Hash partitions normally. This feature ensures the TiDB syntax compatibility with MySQL Linear Hash partitions and facilitates seamless migration from MySQL-based applications to TiDB.
 
@@ -180,7 +180,7 @@ In v6.4.0-DMR, the key new features and improvements are as follows:
 
 * Support range selection of array data in the JSON type [#13644](https://github.com/tikv/tikv/issues/13644) @[YangKeao](https://github.com/YangKeao)
 
-    Starting from v6.4.0, TiDB supports the [range selection syntax](https://dev.mysql.com/doc/refman/8.0/en/json.html#json-paths) to be compatible with MySQL.
+    Starting from v6.4.0, you can use the MySQL-compatible [range selection syntax](https://dev.mysql.com/doc/refman/8.0/en/json.html#json-paths) in TiDB.
 
     - With the keyword `to`, you can specify the start and end positions of array elements and select elements of a continuous range in an array. With `0`, you can specify the position of the first element in an array. For example, using `$[0 to 2]`, you can select the first three elements of an array.
 
@@ -197,7 +197,7 @@ In v6.4.0-DMR, the key new features and improvements are as follows:
     ```sql
     CREATE USER 'newuser1'@'%' COMMENT 'This user is created only for test';
     CREATE USER 'newuser2'@'%' ATTRIBUTE '{"email": "user@pingcap.com"}';
-    SELECT * FROM INFORMATION_SCHAME.USER_ATTRIBUTES;
+    SELECT * FROM INFORMATION_SCHEMA.USER_ATTRIBUTES;
     ```
 
     ```sql
@@ -214,7 +214,7 @@ In v6.4.0-DMR, the key new features and improvements are as follows:
 
 ### Backup and restore
 
-* Support backing up a TiDB cluster using EBS volume snapshots [#issue](https://github.com/pingcap/tidb/issues/33849) @[fengou1](https://github.com/fengou1)
+* Support backing up a TiDB cluster using EBS volume snapshots [#33849](https://github.com/pingcap/tidb/issues/33849) @[fengou1](https://github.com/fengou1)
 
     If your TiDB cluster is deployed on EKS and uses AWS EBS volumes, and you have the following requirements when backing up TiDB cluster data, you can use TiDB Operator to back up the data by volume snapshots and metadata to AWS S3:
 
