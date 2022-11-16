@@ -2,7 +2,6 @@
 title: TiDB Cloud Quick Start
 summary: Sign up quickly to try TiDB Cloud and create your TiDB cluster.
 category: quick start
-aliases: ['/tidbcloud/beta/tidb-cloud-quickstart']
 ---
 
 # TiDB Cloud Quick Start

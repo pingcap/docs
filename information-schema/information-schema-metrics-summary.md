@@ -1,7 +1,6 @@
 ---
 title: METRICS_SUMMARY
 summary: Learn the METRICS_SUMMARY system table.
-aliases: ['/docs/dev/system-tables/system-table-metrics-summary/','/docs/dev/reference/system-databases/metrics-summary/','/tidb/dev/system-table-metrics-summary']
 ---
 
 # METRICS_SUMMARY
