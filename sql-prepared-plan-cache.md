@@ -290,7 +290,7 @@ mysql> select @@last_plan_from_cache;       -- Reuse the last plan
 
 ### Monitoring
 
-In [the Grafana dashboard](/grafana-tidb-dashboard.md) on the TiDB page in the Executor section there are the "Queries Using Plan Cache OPS" and "Plan Cache Miss OPS" graphs. These graphs can be used to check if both TiDB and the application are configured correctly to allow the SQL Plan Cache to work correctly. On the same page, but in the Server section there is a "Prepared Statement Count" graph, which should show a non-zero value if the application uses prepared statements, which is required for the SQL Plan Cache to function correctly.
+In [the Grafana dashboard](/grafana-tidb-dashboard.md) on the TiDB page in the **Executor** section, there are the "Queries Using Plan Cache OPS" and "Plan Cache Miss OPS" graphs. These graphs can be used to check if both TiDB and the application are configured correctly to allow the SQL Plan Cache to work correctly. The **Server** section on the same page provides the "Prepared Statement Count" graph. This graph shows a non-zero value if the application uses prepared statements, which is required for the SQL Plan Cache to function correctly.
 
 ![`sql_plan_cache`](/media/performance/sql_plan_cache.png)
 
