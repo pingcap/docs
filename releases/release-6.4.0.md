@@ -138,10 +138,10 @@ In v6.4.0-DMR, the key new features and improvements are as follows:
 
     Before v6.1.0, TiKV only provides basic Key Value read and write capability because it only stores the raw data passed in by the client. In addition, due to different coding methods and unscoped data ranges, TiDB, Transactional KV, and RawKV cannot be used at the same time in the same TiKV cluster; instead, multiple clusters are needed in this case, thus increasing machine and deployment costs.
 
-    TiKV API V2 provides a new Raw Key Value storage format and access interface, which delievers the following benefits:
+    TiKV API V2 provides a new RawKV storage format and access interface, which delivers the following benefits:
 
     - Store data in MVCC with the change timestamp of the data recorded, based on which Change Data Capture (CDC) is implemented. This feature is experimental and is detailed in [TiKV-CDC](https://github.com/tikv/migration/blob/main/cdc/README.md).
-    - Scope data according to the usage and allow co-existence of a single TiDB cluster, Transactional KV, and RawKV applications.
+    - Data is scoped according to different usage and API V2 supports co-existence of TiDB, Transactional KV, and RawKV applications in a single cluster.
     - Reserve the Key Space field to support features such as multi-tenancy.
 
   To enable TiKV API V2, set `api-version = 2` in the `[storage]` section of the TiKV configuration file.
