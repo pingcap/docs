@@ -11,6 +11,7 @@ This document describes how to import uncompressed CSV files from Amazon Simple 
 >
 > - If your CSV source files are compressed, you must uncompress the files first before the import.
 > - To ensure data consistency, TiDB Cloud allows to import CSV files into empty tables only. To import data into an existing table that already contains data, you can use TiDB Cloud to import the data into a temporary empty table by following this document, and then use the `INSERT SELECT` statement to copy the data to the target existing table.
+> - If there is a changefeed in a Dedicated Tier cluster, you cannot import data to the cluster (the **Import Data** button will be disabled), because the current import data feature uses the [physical import mode](https://docs.pingcap.com/tidb/stable/tidb-lightning-physical-import-mode). In this mode, the imported data does not generate change logs, so the changefeed cannot detect the imported data.
 
 ## Step 1. Prepare the CSV files
 
