@@ -61,9 +61,9 @@ Before using PingCAP Clinic, you need to install Diag (a component to collect da
         [Clinic Server for international users](https://clinic.pingcap.com): Data is stored in AWS in US.
 
         </div>
-        <div label="Clinic Server for the Chinese mainland users" value="clinic-cn">
+        <div label="Clinic Server for users in the Chinese mainland" value="clinic-cn">
 
-        [Clinic Server for the Chinese mainland users](https://clinic.pingcap.com.cn): Data is stored in AWS in China (Beijing) regions.
+        [Clinic Server for users in the Chinese mainland](https://clinic.pingcap.com.cn): Data is stored in AWS in China (Beijing) regions.
 
         </div>
 
@@ -104,9 +104,9 @@ Before using PingCAP Clinic, you need to install Diag (a component to collect da
     ```
 
     </div>
-    <div label="Clinic Server for the Chinese mainland users" value="clinic-cn">
+    <div label="Clinic Server for users in the Chinese mainland" value="clinic-cn">
 
-    When using Clinic Server for the Chinese mainland users, set `region` to `CN` using the following command:
+    When using Clinic Server for users in the Chinese mainland, set `region` to `CN` using the following command:
 
     ```bash
     tiup diag config clinic.region CN
