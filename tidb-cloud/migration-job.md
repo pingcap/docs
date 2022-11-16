@@ -51,14 +51,36 @@ The username you use for the upstream database must have the following privilege
 | `REPLICATION CLIENT` | Global |
 | `PROCESS` | Global |
 
-For example, if you need to migrate the data from `db1` to TiDB Cloud, execute the following `GRANT` statement:
+For example, you can execute the following `GRANT` statement grant privileges:
 
 ```sql
-GRANT RELOAD, REPLICATION SLAVE, REPLICATION CLIENT, PROCESS ON *.* TO 'your_user'@'your_wildcard_of_host'
-GRANT SELECT ON db1.* TO 'your_user'@'your_wildcard_of_host';
+GRANT SELECT,RELOAD,REPLICATION SLAVE,REPLICATION CLIENT,LOCK TABLES,PROCESS ON *.* TO 'your_user'@'your_wildcard_of_host'
 ```
 
 If you also need to migrate the data from other databases to TiDB Cloud, make sure the same privileges are granted to the user of the respective databases.
+
+### Privileges for the downstream TiDB Cloud cluster
+
+The username you use for the downstream TiDB Cloud cluster must have the following privileges:
+
+| Privilege | Scope |
+|:----|:----|
+| `CREATE` | Tables |
+| `SELECT` | Tables |
+| `INSERT` | Tables |
+| `UPDATE` | Tables |
+| `DELETE` | Tables |
+| `ALTER`  | Tables |
+| `DROP`   | Tables |
+| `INDEX`  | Tables |
+
+For example, you can execute the following `GRANT` statement grant privileges:
+
+```sql
+GRANT CREATE,SELECT,INSERT,UPDATE,DELETE,ALTER,DROP,INDEX ON *.* TO 'your_user'@'your_wildcard_of_host'
+```
+
+If you want to quickly migrate the data, you can use the `root` account of the TiDB Cloud cluster to test the migration job quickly.
 
 ### Set up VPC Peering
 
