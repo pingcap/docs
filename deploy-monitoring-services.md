@@ -3,26 +3,26 @@ title: Deploy Monitoring Services for the TiDB Cluster
 summary: Learn how to deploy monitoring services for the TiDB cluster.
 ---
 
-# TiDBクラスターの監視サービスをデプロイ {#deploy-monitoring-services-for-the-tidb-cluster}
+# TiDBクラスタの監視サービスをデプロイ {#deploy-monitoring-services-for-the-tidb-cluster}
 
-このドキュメントは、TiDB監視およびアラートサービスを手動で展開するユーザーを対象としています。
+このドキュメントは、TiDB の監視およびアラート サービスを手動で展開したいユーザーを対象としています。
 
-TiUPを使用してTiDBクラスタをデプロイする場合、監視およびアラートサービスは自動的にデプロイされ、手動でデプロイする必要はありません。
+TiUP を使用して TiDB クラスターをデプロイすると、監視サービスとアラート サービスが自動的にデプロイされるため、手動でデプロイする必要はありません。
 
-## PrometheusとGrafanaをデプロイ {#deploy-prometheus-and-grafana}
+## Prometheus と Grafana をデプロイ {#deploy-prometheus-and-grafana}
 
-TiDBクラスタトポロジが次のとおりであると想定します。
+TiDB クラスターのトポロジーが次のようになっているとします。
 
-| 名前    | ホストIP           | サービス                                    |
-| :---- | :-------------- | :-------------------------------------- |
-| Node1 | 192.168.199.113 | PD1、TiDB、node_export、Prometheus、Grafana |
-| Node2 | 192.168.199.114 | PD2、node_export                         |
-| Node3 | 192.168.199.115 | PD3、node_export                         |
-| Node4 | 192.168.199.116 | TiKV1、node_export                       |
-| Node5 | 192.168.199.117 | TiKV2、node_export                       |
-| Node6 | 192.168.199.118 | TiKV3、node_export                       |
+| 名前    | ホスト IP          | サービス                                |
+| :---- | :-------------- | :---------------------------------- |
+| ノード1  | 192.168.199.113 | PD1、TiDB、node_export、プロメテウス、Grafana |
+| ノード 2 | 192.168.199.114 | PD2、node_export                     |
+| ノード 3 | 192.168.199.115 | PD3、node_export                     |
+| ノード4  | 192.168.199.116 | TiKV1、node_export                   |
+| ノード5  | 192.168.199.117 | TiKV2、node_export                   |
+| ノード6  | 192.168.199.118 | TiKV3、node_export                   |
 
-### ステップ1：バイナリパッケージをダウンロードする {#step-1-download-the-binary-package}
+### ステップ 1: バイナリ パッケージをダウンロードする {#step-1-download-the-binary-package}
 
 {{< copyable "" >}}
 
@@ -30,7 +30,7 @@ TiDBクラスタトポロジが次のとおりであると想定します。
 # Downloads the package.
 wget https://download.pingcap.org/prometheus-2.27.1.linux-amd64.tar.gz
 wget https://download.pingcap.org/node_exporter-0.17.0.linux-amd64.tar.gz
-wget https://download.pingcap.org/grafana-6.1.6.linux-amd64.tar.gz
+wget https://download.pingcap.org/grafana-7.5.11.linux-amd64.tar.gz
 ```
 
 {{< copyable "" >}}
@@ -39,10 +39,10 @@ wget https://download.pingcap.org/grafana-6.1.6.linux-amd64.tar.gz
 # Extracts the package.
 tar -xzf prometheus-2.27.1.linux-amd64.tar.gz
 tar -xzf node_exporter-0.17.0.linux-amd64.tar.gz
-tar -xzf grafana-6.1.6.linux-amd64.tar.gz
+tar -xzf grafana-7.5.11.linux-amd64.tar.gz
 ```
 
-### ステップ2：Node1、Node2、Node3、およびNode4で<code>node_exporter</code>を開始します {#step-2-start-code-node-exporter-code-on-node1-node2-node3-and-node4}
+### ステップ 2: Node1、Node2、Node3、および Node4 で<code>node_exporter</code>を開始する {#step-2-start-code-node-exporter-code-on-node1-node2-node3-and-node4}
 
 {{< copyable "" >}}
 
@@ -54,9 +54,9 @@ $ ./node_exporter --web.listen-address=":9100" \
     --log.level="info" &
 ```
 
-### ステップ3：Node1でPrometheusを起動する {#step-3-start-prometheus-on-node1}
+### ステップ 3: Node1 で Prometheus を開始する {#step-3-start-prometheus-on-node1}
 
-Prometheus構成ファイルを編集します。
+Prometheus 構成ファイルを編集します。
 
 {{< copyable "" >}}
 
@@ -114,7 +114,7 @@ scrape_configs:
 
 ```
 
-Prometheusサービスを開始します。
+プロメテウス サービスを開始します。
 
 ```bash
 $ ./prometheus \
@@ -127,14 +127,14 @@ $ ./prometheus \
     --storage.tsdb.retention="15d" &
 ```
 
-### ステップ4：Node1でGrafanaを起動する {#step-4-start-grafana-on-node1}
+### ステップ 4: Node1 で Grafana を開始する {#step-4-start-grafana-on-node1}
 
-Grafana構成ファイルを編集します。
+Grafana 構成ファイルを編集します。
 
 {{< copyable "" >}}
 
 ```ini
-cd grafana-6.1.6 &&
+cd grafana-7.5.11 &&
 vi conf/grafana.ini
 
 ...
@@ -179,93 +179,93 @@ url = https://grafana.net
 
 ```
 
-Grafanaサービスを開始します。
+Grafana サービスを開始します。
 
 ```bash
 $ ./bin/grafana-server \
     --config="./conf/grafana.ini" &
 ```
 
-## Grafanaを構成する {#configure-grafana}
+## Grafana の構成 {#configure-grafana}
 
-このセクションでは、Grafanaを構成する方法について説明します。
+このセクションでは、Grafana を構成する方法について説明します。
 
-### ステップ1：Prometheusデータソースを追加する {#step-1-add-a-prometheus-data-source}
+### ステップ 1: Prometheus データ ソースを追加する {#step-1-add-a-prometheus-data-source}
 
-1.  GrafanaWebインターフェースにログインします。
+1.  Grafana Web インターフェイスにログインします。
 
-    -   デフォルトアドレス： [http：// localhost：3000](http://localhost:3000)
+    -   デフォルトのアドレス: [http://localhost:3000](http://localhost:3000)
 
-    -   デフォルトのアカウント：admin
+    -   デフォルトのアカウント: 管理者
 
-    -   デフォルトのパスワード：admin
+    -   デフォルトのパスワード: 管理者
 
     > **ノート：**
     >
     > [**パスワードの変更]**ステップでは、[<strong>スキップ]</strong>を選択できます。
 
-2.  Grafanaサイドバーメニューで、**Configuration / コンフィグレーション**内の<strong>データソース</strong>をクリックします。
+2.  Grafana サイドバー メニューで、[**Configuration / コンフィグレーション**] 内の [<strong>データ ソース</strong>] をクリックします。
 
-3.  [**データソースの追加]を**クリックします。
+3.  [**データ ソースの追加] を**クリックします。
 
-4.  データソース情報を指定します。
+4.  データ ソース情報を指定します。
 
-    -   データソースの**名前**を指定します。
-    -   [**タイプ]**で、[<strong>プロメテウス]</strong>を選択します。
-    -   **URL**には、Prometheusアドレスを指定します。
+    -   データ ソースの**名前**を指定します。
+    -   [**タイプ]**で [ <strong>Prometheus]</strong>を選択します。
+    -   **URL**には、Prometheus アドレスを指定します。
     -   必要に応じて他のフィールドを指定します。
 
-5.  [**追加]**をクリックして、新しいデータソースを保存します。
+5.  [**追加]**をクリックして、新しいデータ ソースを保存します。
 
-### ステップ2：Grafanaダッシュボードをインポートする {#step-2-import-a-grafana-dashboard}
+### ステップ 2: Grafana ダッシュボードをインポートする {#step-2-import-a-grafana-dashboard}
 
-PDサーバー、TiKVサーバー、およびTiDBサーバーのGrafanaダッシュボードをインポートするには、それぞれ次の手順を実行します。
+PDサーバー、TiKVサーバー、および TiDBサーバーの Grafana ダッシュボードをインポートするには、それぞれ次の手順を実行します。
 
-1.  Grafanaロゴをクリックして、サイドバーメニューを開きます。
+1.  Grafana ロゴをクリックして、サイドバー メニューを開きます。
 
-2.  サイドバーメニューで、[**ダッシュボード**]-&gt; [<strong>インポート</strong>]をクリックして、[ダッシュボードの<strong>インポート</strong>]ウィンドウを開きます。
+2.  サイドバー メニューで、[**ダッシュボード**] -&gt; [<strong>インポート</strong>] をクリックして、[ダッシュボードの<strong>インポート</strong>] ウィンドウを開きます。
 
-3.  [ **.jsonファイルのアップロード]**をクリックして、JSONファイルをアップロードし[tikv / tikv](https://github.com/tikv/tikv/tree/master/metrics/grafana) （ [pingcap / tidb](https://github.com/pingcap/tidb/tree/master/metrics/grafana) 、および[tikv / pd](https://github.com/tikv/pd/tree/master/metrics/grafana)からTiDB Grafana構成ファイルをダウンロードします）。
+3.  [ **.json ファイルのアップロード]**をクリックして、JSON ファイルをアップロードします ( [pingcap/tidb](https://github.com/pingcap/tidb/tree/master/metrics/grafana) 、 [tikv/tikv](https://github.com/tikv/tikv/tree/master/metrics/grafana) 、および[tikv/pd](https://github.com/tikv/pd/tree/master/metrics/grafana)から TiDB Grafana 構成ファイルをダウンロードします)。
 
     > **ノート：**
     >
-    > `tidb.json` 、PD、および`tikv_trouble_shooting.json`ダッシュボードの場合、対応する`tidb_summary.json`ファイルは`tikv_summary.json` 、および`pd.json` `tikv_details.json` 。
+    > TiKV、PD、および TiDB ダッシュボードの場合、対応する JSON ファイルは`tikv_summary.json` 、 `tikv_details.json` 、 `tikv_trouble_shooting.json` 、 `pd.json` 、 `tidb.json` 、および`tidb_summary.json`です。
 
 4.  [**ロード]**をクリックします。
 
-5.  Prometheusデータソースを選択します。
+5.  Prometheus データ ソースを選択します。
 
-6.  [**インポート]**をクリックします。 Prometheusダッシュボードがインポートされます。
+6.  [**インポート]**をクリックします。 Prometheus ダッシュボードがインポートされます。
 
-## コンポーネントメトリックを表示する {#view-component-metrics}
+## コンポーネント メトリックをビューする {#view-component-metrics}
 
-トップメニューの[**新しいダッシュボード**]をクリックして、表示するダッシュボードを選択します。
+上部のメニューで [**新しいダッシュボード**] をクリックし、表示するダッシュボードを選択します。
 
 ![view dashboard](/media/view-dashboard.png)
 
-クラスタコンポーネントについて、次のメトリックを取得できます。
+クラスター コンポーネントの次のメトリックを取得できます。
 
--   **TiDBサーバー：**
+-   **TiDBサーバー:**
 
-    -   レイテンシとスループットを監視するためのクエリ処理時間
-    -   DDLプロセスの監視
-    -   TiKVクライアント関連の監視
-    -   PDクライアント関連の監視
+    -   レイテンシーとスループットを監視するためのクエリ処理時間
+    -   DDL プロセスの監視
+    -   TiKV クライアント関連の監視
+    -   PD クライアント関連のモニタリング
 
--   **PDサーバー：**
+-   **PDサーバー:**
 
-    -   コマンドが実行される合計回数
+    -   コマンドが実行された合計回数
     -   特定のコマンドが失敗した合計回数
     -   コマンドが成功する期間
     -   コマンドが失敗する期間
     -   コマンドが終了して結果を返す期間
 
--   **TiKVサーバー：**
+-   **TiKVサーバー:**
 
-    -   ガベージコレクション（GC）の監視
-    -   TiKVコマンドが実行される合計回数
+    -   ガベージ コレクション (GC) の監視
+    -   TiKV コマンドが実行された合計回数
     -   スケジューラがコマンドを実行する期間
-    -   ラフト提案コマンドの合計回数
+    -   Raftの提案コマンドの合計回数
     -   Raftがコマンドを実行する期間
     -   Raftコマンドが失敗した合計回数
-    -   Raftが準備完了状態を処理する合計回数
+    -   Raftが準備完了状態を処理した合計回数
