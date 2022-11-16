@@ -28,8 +28,8 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
     This feature is still in beta and only available upon request:
 
-    * Click **Help** in the lower-right corner of TiDB Cloud console.
-    * In the dialog, fill in "Apply for PITR" in the **Description** field and click **Send**.
+      * Click **Help** in the lower-right corner of TiDB Cloud console.
+      * In the dialog, fill in "Apply for PITR" in the **Description** field and click **Send**.
 
 * The database audit logging feature is now GA.
 
