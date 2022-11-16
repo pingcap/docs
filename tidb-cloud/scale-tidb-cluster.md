@@ -1,7 +1,6 @@
 ---
 title: Scale Your TiDB Cluster
 summary: Learn how to scale your TiDB Cloud cluster.
-aliases: ['/tidbcloud/beta/scale-tidb-cluter']
 ---
 
 # Scale Your TiDB Cluster
