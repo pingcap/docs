@@ -130,7 +130,7 @@ In v6.4.0-DMR, the key new features and improvements are as follows:
 
     TiDB v6.4.0 enables the synchronously loading statistics feature by default. This feature allows TiDB to synchronously load large-sized statistics (such as histograms, TopN, and Count-Min Sketch statistics) into memory when you execute SQL statements, which improves the completeness of statistics for SQL optimization.
 
-    [User document](/system-varaibles.md#tidb_stats_load_sync_wait-new-in-v540)
+    [User document](/system-variable.md#tidb_stats_load_sync_wait-new-in-v540)
 
 ### Ease of use
 
@@ -214,7 +214,7 @@ In v6.4.0-DMR, the key new features and improvements are as follows:
 
 * Support backing up a TiDB cluster using EBS volume snapshots [#issue](https://github.com/pingcap/tidb/issues/33849) @[fengou1](https://github.com/fengou1)
 
-    If your TiDB cluster is deployed on EKS and uses AWS EBS volumes, and you have the following requirements when backing up TiDB cluster data , you can use TiDB Operator to back up the data by volume snapshots and metadata to AWS S3:
+    If your TiDB cluster is deployed on EKS and uses AWS EBS volumes, and you have the following requirements when backing up TiDB cluster data, you can use TiDB Operator to back up the data by volume snapshots and metadata to AWS S3:
 
     - Minimize the impact of backup, for example, to keep the impact on QPS and transaction latency less than 5%, and to occupy no cluster CPU and memory.
     - Back up and restore data in a short time. For example, finish backup within 1 hour and restore data in 2 hours.
@@ -363,7 +363,7 @@ In v6.4.0-DMR, the key new features and improvements are as follows:
         - Support replicating the exchange partition DDL statements [#639](https://github.com/pingcap/tiflow/issues/639) @[asddongmen](https://github.com/asddongmen)
         - Improve non-batch sending performance for the MQ sink module [#7353](https://github.com/pingcap/tiflow/issues/7353) @[hi-rustin](https://github.com/hi-rustin)
         - Improve performance of TiCDC puller when a table has a large number of Regions [#7078](https://github.com/pingcap/tiflow/issues/7078) [#7281](https://github.com/pingcap/tiflow/issues/7281) @[sdojjy](https://github.com/sdojjy)
-        - Support reading historical data in the downstream TiDB by using the `tidb_enable_external_ts_read` varaible when Syncpoint is enabled [#7419](https://github.com/pingcap/tiflow/issues/7419) @[asddongmen](https://github.com/asddongmen)
+        - Support reading historical data in the downstream TiDB by using the `tidb_enable_external_ts_read` variable when Syncpoint is enabled [#7419](https://github.com/pingcap/tiflow/issues/7419) @[asddongmen](https://github.com/asddongmen)
 
     + TiDB Data Migration (DM)
 
@@ -395,7 +395,7 @@ In v6.4.0-DMR, the key new features and improvements are as follows:
     - Fix the issue that TiDB fails to start on Gitpod when there are multiple `cgroup` and `mountinfo` records [#13660](https://github.com/tikv/tikv/issues/13660) @[tabokie](https://github.com/tabokie)
     - Fix the wrong expression of a TiKV metric `tikv_gc_compaction_filtered` [#13537](https://github.com/tikv/tikv/issues/13537) @[Defined2014](https://github.com/Defined2014)
     - Fix the performance issue caused by the abnormal `delete_files_in_range` [#13534](https://github.com/tikv/tikv/issues/13534) @[tabokie](https://github.com/tabokie)
-    - Fix abnormal Region competiton caused by expired lease during snapshot acquistition [#13553](https://github.com/tikv/tikv/issues/13553) @[SpadeA-Tang](https://github.com/SpadeA-Tang)
+    - Fix abnormal Region competition caused by expired lease during snapshot acquisition [#13553](https://github.com/tikv/tikv/issues/13553) @[SpadeA-Tang](https://github.com/SpadeA-Tang)
     - Fix errors occurred when `FLASHBACK` fails in the first batch [#13672](https://github.com/tikv/tikv/issues/13672) [#13704](https://github.com/tikv/tikv/issues/13704) [#13723](https://github.com/tikv/tikv/issues/13723) @[HuSharp](https://github.com/HuSharp)
 
 + PD
