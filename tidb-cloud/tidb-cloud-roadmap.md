@@ -83,24 +83,47 @@ For the roadmap of TiDB kernel, refer to [TiDB Roadmap](https://github.com/pingc
 </thead>
 <tbody>
   <tr>
-    <td>Self-service cluster analysis and diagnosis using reports</td>
-    <td><ul><li>✅ Cluster health report.</li><li>✅ Cluster status comparison report.</li><li>✅ Cluster system check report.</li></ul></td>
-    <td><ul><li>Provide diagnosis and analysis reports for several different usage scenarios.</li><li>Locate cluster failures for some scenarios and provide recommended solutions.</li><li>Provide cluster key status summary for some scenarios.</li></ul></td>
+    <td rowspan="3">Self-service cluster analysis and diagnosis using reports</td>
+    <td>✅ Cluster health report.</td>
+    <td>Provide diagnosis and analysis reports for several different usage scenarios.</td>
   </tr>
   <tr>
-    <td>SQL tuning for HTAP workloads</td>
-    <td><ul><li>Provide SQL execution information from the perspective of applications.</li><li>Provide suggestions on optimizing SQL for TiFlash and TiKV in HTAP workloads.</li></ul></td>
-    <td><ul><li>Provide a dashboard that displays a SQL execution overview from the perspective of applications in HTAP workloads.</li><li>For one or several HTAP scenarios, provide suggestions on SQL optimization.</li></ul></td>
+    <td>✅ Cluster status comparison report.</td>
+    <td>Locate cluster failures for some scenarios and provide recommended solutions.</td>
   </tr>
   <tr>
-    <td>Cluster diagnosis data accessibility </td>
-    <td><ul><li>✅ Access diagnosis data online in real time.</li><li>✅ Access diagnosis data offline.</li><li>Build logic for data reconstruction.</li></ul></td>
-    <td><ul><li>Integrate with various monitoring and diagnosis systems to improve the real-time data access capability.</li><li>Provide offline data access for large-scale diagnosis, analysis, and tuning.</li><li>Improve data stability and build logic for data reconstruction.</li></ul></td>
+    <td>✅ Cluster system check report.</td>
+    <td>Provide cluster key status summary for some scenarios.</td>
+  </tr>
+  <tr>
+    <td rowspan="2">SQL tuning for HTAP workloads</td>
+    <td>Provide suggestions on optimizing SQL for TiFlash and TiKV in HTAP workloads.</td>
+    <td>Provide a dashboard that displays a SQL execution overview from the perspective of applications in HTAP workloads.</td>
+  </tr>
+  <tr>
+    <td>Provide SQL execution information from the perspective of applications.</td>
+    <td>For one or several HTAP scenarios, provide suggestions on SQL optimization.</td>
+  </tr>
+  <tr>
+    <td rowspan="3">Cluster diagnosis data accessibility </td>
+    <td>✅ Access diagnosis data online in real time.</td>
+    <td>Integrate with various monitoring and diagnosis systems to improve the real-time data access capability.</td>
+  </tr>
+  <tr>
+    <td>✅ Access diagnosis data offline.</td>
+    <td>Provide offline data access for large-scale diagnosis, analysis, and tuning.</td>
+  </tr>
+  <tr>
+    <td>Build logic for data reconstruction.</td>
+    <td>Improve data stability and build logic for data reconstruction.</td>
   </tr>
   <tr>
     <td>TiDB Cloud service tracing</td>
     <td>Build the monitoring links for each component of TiDB Cloud service.</td>
-    <td><ul><li>Build the tracing links for each component of TiDB Cloud service in user scenarios.</li><li>Provide assessment on service availability from the perspective of users.</li></ul></td>
+    <td>
+      <ul><li>Build the tracing links for each component of TiDB Cloud service in user scenarios.</li>
+      <li>Provide assessment on service availability from the perspective of users.</li></ul>
+    </td>
   </tr>
 </tbody>
 </table>
