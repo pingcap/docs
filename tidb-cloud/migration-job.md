@@ -134,6 +134,8 @@ On the **Create Migration Job** page, configure the source and target connection
     - If you click **Customize** and select some databases, the migration job will migrate the existing data and replicate ongoing changes of the selected databases to TiDB Cloud.
     - If you click **Customize** and select some tables below a dabaset name, the migration job only will migrate the existing data and replicate ongoing changes of the selected tables. It will not migrate the tables that will be created in the same database in future.
 
+   ![Select Objects](/media/tidb-cloud/migration-job-select-objects.png)
+
 3. Click **Next**.
 
 ## Step 4: Precheck
