@@ -560,11 +560,11 @@ MOD(YEAR('2005-09-01'),4)
 =  1
 ```
 
-#### How TiDB handles LINEAR HASH partitions
+#### How TiDB handles Linear Hash partitions
 
 Before v6.4.0, if you execute DDL statements of [MySQL Linear Hash](https://dev.mysql.com/doc/refman/5.7/en/partitioning-linear-hash.html) partitions in TiDB, TiDB can only create non-partitioned tables. In this case, if you still want to use partitioned tables in TiDB, you need to modify the DDL statements.
 
-Since v6.4.0, TiDB supports parsing the MySQL `PARTITION BY LINEAR HASH` syntax but ignores the `LINEAR` keyword in it. If you have some existing DDL and DML statements of MySQL Linear Hash partitions, you can execute them in TiDB without modification:
+Since v6.4.0, TiDB supports parsing the MySQL `PARTITION BY Linear Hash` syntax but ignores the `LINEAR` keyword in it. If you have some existing DDL and DML statements of MySQL Linear Hash partitions, you can execute them in TiDB without modification:
 
 - For a `CREATE` statement of MySQL Linear Hash partitions, TiDB will create a non-linear Hash partitioned table (note that there is no Linear Hash partitioned table in TiDB). If the number of partitions is a power of 2, the rows in the table in TiDB are distributed the same as that in MySQL. Otherwise, the distribution of these rows in TiDB is different from MySQL. This is because non-linear partitioned tables use a simple "modulus number of partition", while linear partitioned tables use "modulus next power of 2 and fold the values between the number of partitions and the next power of 2". For details, see [#38450](https://github.com/pingcap/tidb/issues/38450).
 
