@@ -4,7 +4,7 @@ title: TiDB 6.4.0 Release Notes
 
 # TiDB v6.4.0 Release Notes
 
-Release date: November xx, 2022
+Release date: November 17, 2022
 
 TiDB version: 6.4.0-DMR
 
