@@ -724,9 +724,7 @@ You can see that the inserted record `(NULL, 'mothra')` falls into the same part
 
 ## Partition management
 
-For `LIST` and `RANGE` partitioned tables, you can add and drop partitions using the `ALTER TABLE <table name> ADD PARTITION (<partition specification>)` or `ALTER TABLE <table name> DROP PARTITION <list of partitions>` statement.
-
-For `LIST` and `RANGE` partitioned tables, `REORGANIZE PARTITION` is not yet supported.
+For `LIST` and `RANGE` partitioned tables, you can add and drop partitions using the `ALTER TABLE <table name> ADD PARTITION (<partition specification>)` or `ALTER TABLE <table name> DROP PARTITION <list of partitions>` statement. You can also merge, split or do other changes to the partitions with `ALTER TABLE <table name> REORGANIZE PARTITION <list of partitions> INTO (<new partition definitions>)`.
 
 For `HASH` partitioned tables, `COALESCE PARTITION` and `ADD PARTITION` are not yet supported.
 
@@ -753,77 +751,152 @@ In addition, there are limitations on the compatibility of `EXCHANGE PARTITION` 
 - TiCDC: TiCDC replicates the `EXCHANGE PARTITION` operation when both partitioned and non-partitioned tables have primary keys or unique keys. Otherwise, TiCDC will not replicate the operation.
 - TiDB Lightning and BR: do not perform the `EXCHANGE PARTITION` operation during import using TiDB Lightning or during restore using BR.
 
-### Range partition management
+### Range and List partition management
 
-Create a partitioned table:
+Create some partitioned tables:
 
 {{< copyable "sql" >}}
 
 ```sql
 CREATE TABLE members (
-    id INT,
-    fname VARCHAR(25),
-    lname VARCHAR(25),
-    dob DATE
+    id int,
+    fname varchar(255),
+    lname varchar(255),
+    dob date,
+    data json
 )
+PARTITION BY RANGE (YEAR(dob)) (
+ PARTITION pBefore1950 VALUES LESS THAN (1950),
+ PARTITION p1950 VALUES LESS THAN (1960),
+ PARTITION p1960 VALUES LESS THAN (1970),
+ PARTITION p1970 VALUES LESS THAN (1980),
+ PARTITION p1980 VALUES LESS THAN (1990),
+ PARTITION p1990 VALUES LESS THAN (2000));
 
-PARTITION BY RANGE( YEAR(dob) ) (
-    PARTITION p0 VALUES LESS THAN (1980),
-    PARTITION p1 VALUES LESS THAN (1990),
-    PARTITION p2 VALUES LESS THAN (2000)
-);
+CREATE TABLE member_level (
+ id int,
+ level int,
+ achievements json
+)
+PARTITION BY LIST (level) (
+ PARTITION l1 VALUES IN (1),
+ PARTITION l2 VALUES IN (2),
+ PARTITION l3 VALUES IN (3),
+ PARTITION l4 VALUES IN (4),
+ PARTITION l5 VALUES IN (5));
 ```
 
-Drop a partition:
+#### DROP Partition
 
 {{< copyable "sql" >}}
 
 ```sql
-ALTER TABLE members DROP PARTITION p2;
+ALTER TABLE members DROP PARTITION p1990;
+
+ALTER TABLE member_level DROP PARTITION l5;
 ```
 
-```
-Query OK, 0 rows affected (0.03 sec)
-```
-
-Empty a partition:
+#### TRUNCATE Partition
 
 {{< copyable "sql" >}}
 
 ```sql
-ALTER TABLE members TRUNCATE PARTITION p1;
+ALTER TABLE members TRUNCATE PARTITION p1980;
+
+ALTER TABLE member_level TRUNCATE PARTITION l4;
+```
+
+#### ADD Partition
+
+{{< copyable "sql" >}}
+
+```sql
+ALTER TABLE members ADD PARTITION (PARTITION `p1990to2010` VALUES LESS THAN (2010));
+
+ALTER TABLE member_level ADD PARTITION (PARTITION l5_6 VALUES IN (5,6));
+```
+
+For Range partitioned table, `ADD PARTITION` can be only appended to the very end of a partition list. If it is appended to an existing Range partition, an error is reported:
+
+{{< copyable "sql" >}}
+
+```sql
+ALTER TABLE members ADD PARTITION (PARTITION p1990 VALUES LESS THAN (2000));
 ```
 
 ```
-Query OK, 0 rows affected (0.03 sec)
+ERROR 1493 (HY000): VALUES LESS THAN value must be strictly increasing for each partition
 ```
 
-> **Note:**
+#### Reorganize partition
+> **Warning:**
 >
-> `ALTER TABLE ... REORGANIZE PARTITION` is currently unsupported in TiDB.
+> This is an experimental feature, which might be changed or removed without prior notice. The syntax and implementation may change before GA. If you find a bug, please open an issue in the [TiDB repository](https://github.com/pingcap/tidb/issues). 
 
-Add a partition:
-
+Split a partition:
 {{< copyable "sql" >}}
 
 ```sql
-ALTER TABLE members ADD PARTITION (PARTITION p3 VALUES LESS THAN (2010));
+ALTER TABLE members REORGANIZE PARTITION `p1990to2010` INTO
+(PARTITION p1990 VALUES LESS THAN (2000),
+ PARTITION p2000 VALUES LESS THAN (2010),
+ PARTITION p2010 VALUES LESS THAN (2020),
+ PARTITION p2020 VALUES LESS THAN (2030),
+ PARTITION pMax VALUES LESS THAN (MAXVALUE));
+
+ALTER TABLE member_level REORGANIZE PARTITION l5_6 INTO
+(PARTITION l5 VALUES IN (5),
+ PARTITION l6 VALUES IN (6));
 ```
 
-When partitioning tables by Range, `ADD PARTITION` can be only appended to the very end of a partition list. If it is appended to an existing Range partition, an error is reported:
-
+Merge partitions:
 {{< copyable "sql" >}}
 
 ```sql
-ALTER TABLE members
-    ADD PARTITION (
-    PARTITION n VALUES LESS THAN (1970));
+ALTER TABLE members REORGANIZE PARTITION pBefore1950,p1950 INTO (PARTITION pBefore1960 VALUES LESS THAN (1960));
+
+ALTER TABLE member_level REORGANIZE PARTITION l1,l2 INTO (PARTITION l1_2 VALUES IN (1,2));
+```
+
+Change the whole partitioning scheme:
+{{< copyable "sql" >}}
+
+```sql
+ALTER TABLE members REORGANIZE PARTITION pBefore1960,p1960,p1970,p1980,p1990,p2000,p2010,p2020,pMax INTO
+(PARTITION p1800 VALUES LESS THAN (1900),
+ PARTITION p1900 VALUES LESS THAN (2000),
+ PARTITION p2000 VALUES LESS THAN (2100));
+
+ALTER TABLE member_level REORGANIZE PARTITION l1_2,l3,l4,l5,l6 INTO
+(PARTITION lOdd VALUES IN (1,3,5),
+ PARTITION lEven VALUES IN (2,4,6));
+```
+
+Reorganize partition (including merging or splitting partitions) in the generic form changes a list of partitions into a new set of partition definitions. It cannot change the type of partitioning (LIST or RANGE [COLUMNS]). For RANGE [COLUMNS] partitioned tables, the list of partitions needs to be in a single range. One can only change the end of the range if it includes the last partition. If the end is changed and there exists rows that no longer fits, the DDL will fail with an error.
+
+Range partitions needs to be a single range:
+{{< copyable "sql" >}}
+
+```sql
+ALTER TABLE members REORGANIZE PARTITION p1800,p2000 INTO (PARTITION p2000 VALUES LESS THAN (2100));
 ```
 
 ```
-ERROR 1463 (HY000): VALUES LESS THAN value must be strictly »
-   increasing for each partition
+ERROR 8200 (HY000): Unsupported REORGANIZE PARTITION of RANGE; not a single range
 ```
+
+New partition definitions that does not accommodate all existing rows:
+{{< copyable "sql" >}}
+
+```sql
+INSERT INTO member_level (id, level) values (313, 6);
+ALTER TABLE member_level REORGANIZE PARTITION lEven INTO (PARTITION lEven VALUES IN (2,4));
+```
+
+```
+ERROR 1526 (HY000): Table has no partition for value 6
+```
+
 
 ### Hash partition management
 
@@ -834,7 +907,7 @@ Currently, `ALTER TABLE ... COALESCE PARTITION` is not supported in TiDB as well
 {{< copyable "sql" >}}
 
 ```sql
-alter table members optimize partition p0;
+ALTER TABLE MEMBERS OPTIMIZE PARTITION p0;
 ```
 
 ```sql

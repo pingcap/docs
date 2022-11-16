@@ -153,7 +153,7 @@ In TiDB, all supported DDL changes are performed online. Compared with DDL opera
     - `PARTITION BY KEY`
     - `PARTITION BY LINEAR KEY`
     - `SUBPARTITION`
-    - `{CHECK|TRUNCATE|OPTIMIZE|REPAIR|IMPORT|DISCARD|REBUILD|REORGANIZE|COALESCE} PARTITION`
+    - `{CHECK|TRUNCATE|OPTIMIZE|REPAIR|IMPORT|DISCARD|REBUILD|COALESCE} PARTITION`
 
     For more details, see [Partitioning](/partitioned-table.md).
 
