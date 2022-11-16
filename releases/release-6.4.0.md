@@ -131,7 +131,7 @@ In v6.4.0-DMR, the key new features and improvements are as follows:
     TiDB v6.4.0 enables the synchronously loading statistics feature by default. This feature allows TiDB to synchronously load large-sized statistics (such as histograms, TopN, and Count-Min Sketch statistics) into memory when you execute SQL statements, which improves the completeness of statistics for SQL optimization.
 
     [User document](/system-varaibles.md#tidb_stats_load_sync_wait-new-in-v540)
-    
+
 ### Ease of use
 
 * TiKV API V2 becomes generally available (GA) [#11745](https://github.com/tikv/tikv/issues/11745) @[pingyu](https://github.com/pingyu) **tw@Oreoxmt**
@@ -189,6 +189,22 @@ In v6.4.0-DMR, the key new features and improvements are as follows:
 * Support adding additional descriptions for database users [#38172](https://github.com/pingcap/tidb/issues/38172) @[CbcWestwolf](https://github.com/CbcWestwolf) **tw@qiancai**
 
     In TiDB v6.4, you can use the [`CREATE USER`](/sql-statements/sql-statement-create-user.md) or [`ALTER USER`](/sql-statements/sql-statement-alter-user.md) to add additional descriptions for database users. TiDB provides two description formats. You can add a text comment using `COMMENT` and add a set of structured attributes in JSON format using `ATTRIBUTE`.
+
+    ```sql
+    CREATE USER 'newuser1'@'%' COMMENT 'This user is created only for test';
+    CREATE USER 'newuser2'@'%' ATTRIBUTE '{"email": "user@pingcap.com"}';
+    SELECT * FROM information_schema.user_attributes;
+    ```
+
+    ```sql
+    +-----------+------+---------------------------------------------------+
+    | USER      | HOST | ATTRIBUTE                                         |
+    +-----------+------+---------------------------------------------------+
+    | newuser1  | %    | {"comment": "This user is created only for test"} |
+    | newuser1  | %    | {"email": "user@pingcap.com"}                     |
+    +-----------+------+---------------------------------------------------+
+    2 rows in set (0.00 sec)
+    ```
 
     In addition, TiDB v6.4 adds the [USER_ATTRIBUTES](/information-schema/information-schema-user-attributes.md) table, where you can view the information of user comments and use attributes.
 
@@ -301,8 +317,6 @@ In v6.4.0-DMR, the key new features and improvements are as follows:
 - For files whose names match the Dumpling schemas and data format but end with uncompressed formats (such as `test-schema-create.sql.origin` and `test.table-schema.sql.xxx`), the way how TiDB Lightning handles them is changed. Before v6.4.0, if the files to be imported include such files, TiDB Lightning will skip importing such files. Starting from v6.4.0, TiDB Lightning assumes that such files use unsupported compression formats, so the import task will fail.
 - Starting with v6.4.0, only the changefeed with the `SYSTEM_VARIABLES_ADMIN` or `SUPER` privilege can use the TiCDC Syncpoint feature.
 
-## Removed feature
-
 ## Improvements
 
 + TiDB
@@ -337,8 +351,8 @@ In v6.4.0-DMR, the key new features and improvements are as follows:
     + TiDB Dashboard
 
         - Support displaying TiFlash metrics on the Monitoring page and optimize the presentation of metrics on that page [#1440](https://github.com/pingcap/tidb-dashboard/issues/1440) @[YiniXu9506](https://github.com/YiniXu9506)
-        - Show the number of rows for results in the Slow Query list and SQL Statement list [#1407](https://github.com/pingcap/tidb-dashboard/pull/1407) @[baurine](https://github.com/baurine)
-        - Optimize the error messages of the Dashboard [#1407](https://github.com/pingcap/tidb-dashboard/pull/1407) @[baurine](https://github.com/baurine)
+        - Show the number of rows for results in the Slow Query list and SQL Statement list [#1443](https://github.com/pingcap/tidb-dashboard/issues/1443) @[baurine](https://github.com/baurine)
+        - Optimize the Dashboard to not report the Alertmanager errors when Alertmanager does not exist [#1444](https://github.com/pingcap/tidb-dashboard/issues/1444) @[baurine](https://github.com/baurine)
 
     + Backup & Restore (BR)
 
