@@ -20,13 +20,13 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
     * Resolve data write errors by restoring point-in-time that is before the error event.
     * Audit the historical data of the business.
 
-    To use the PITR feature, make sure that your TiDB cluster version is at least v6.3.0 and the TiKV node size is at least 8 vCPU and 16 GiB.
+  To use the PITR feature, make sure that your TiDB cluster version is at least v6.3.0 and the TiKV node size is at least 8 vCPU and 16 GiB.
 
-    By default, backup data is stored in the same region where the cluster is created. In Japan, for TiDB clusters hosted on GCP with PITR enabled, you can choose to store backup data in one or two regions (Tokyo and/or Osaka). Restoring data from an alternative region provides a higher level of data safety and can tolerate region failures.
+  By default, backup data is stored in the same region where the cluster is created. In Japan, for TiDB clusters hosted on GCP with PITR enabled, you can choose to store backup data in one or two regions (Tokyo and/or Osaka). Restoring data from an alternative region provides a higher level of data safety and can tolerate region failures.
 
-    For more information, see [Back Up and Restore TiDB Cluster Data](/tidb-cloud/backup-and-restore.md).
+  For more information, see [Back Up and Restore TiDB Cluster Data](/tidb-cloud/backup-and-restore.md).
 
-    This feature is still in beta and only available upon request:
+  This feature is still in beta and only available upon request:
 
     * Click **Help** in the lower-right corner of TiDB Cloud console.
     * In the dialog, fill in "Apply for PITR" in the **Description** field and click **Send**.
