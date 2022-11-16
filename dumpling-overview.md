@@ -66,7 +66,7 @@ In the above commands, you need to modify `~/.bash_profile` to the path of your 
 ### Required privileges
 
 - SELECT: Required when exporting tables.
-- RELOAD: Required when using `consistency flush`. RDS databases do not support this privilege. Therefore, you can ignore this privilege if the upstream is an RDS database or a managed service.
+- RELOAD: Required when using `consistency flush`. Note that only TiDB supports this privilege. When the upstream is an RDS database or a managed service, you can ignore this privilege.
 - LOCK TABLES: Required when using `consistency lock`. This privilege must be granted for all the databases and tables to be exported.
 - REPLICATION CLIENT: Required when exporting metadata to record data snapshot. This privilege is optional.
 
