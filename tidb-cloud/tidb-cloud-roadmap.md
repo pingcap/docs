@@ -162,7 +162,7 @@ For the roadmap of TiDB kernel, refer to [TiDB Roadmap](https://github.com/pingc
   <tr>
     <td>Data Encryption</td>
     <td>Enablement of customer-managed encryption keys.</td>
-    <td>Allow customers to use their own KMS encryption keys on TIBD Cloud.</td>
+    <td>Allow customers to use their own KMS encryption keys on TiDB Cloud.</td>
   </tr>
   <tr>
     <td>Database audit logging</td>
