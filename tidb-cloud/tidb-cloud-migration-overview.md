@@ -11,9 +11,9 @@ You can migrate data from a wide variety of data sources to TiDB Cloud. This doc
 
 If your source data is stored in Amazon S3 or Google Cloud Storage (GCS) buckets, before importing or migrating the data to TiDB Cloud, you need to configure access to the buckets. For more information, see [Configure Amazon S3 access and GCS access](/tidb-cloud/config-s3-and-gcs-access.md).
 
-## Migrate online or on-premises data to TiDB Cloud
+## Migrate MySQL-Compatible Databases to TiDB Cloud Using Migration Jobs
 
-TiDB Cloud provides the Migration Job feature, which supports full migration and incremental migration, allowing you to migrate your business from the upstream database to TiDB Cloud within a short downtime window. For more information, see [Migrate Online or On-Premises Data Using Migration Jobs](/tidb-cloud/migration-job.md).
+TiDB Cloud provides the Migration Job feature, which supports full migration and incremental migration, allowing you to migrate your business from the upstream database to TiDB Cloud within a short downtime window. For more information, see [Migrate MySQL-Compatible Databases to TiDB Cloud Using Migration Jobs](/tidb-cloud/migration-job.md).
 
 ## Migrate data from MySQL-compatible databases
 

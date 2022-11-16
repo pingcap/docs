@@ -39,6 +39,8 @@ A migration job supports data migration within the same region and cross regions
 
 ## Prerequisites
 
+### Privileges for the upstream database
+
 The username you use for the upstream database must have the following privileges:
 
 | Privilege | Scope |
@@ -57,9 +59,11 @@ GRANT SELECT ON db1.* TO 'your_user'@'your_wildcard_of_host';
 ```
 
 If you also need to migrate the data from other databases to TiDB Cloud, make sure the same privileges are granted to the user of the respective databases.
- 
- If you use VPC Peering, you need to set it up in advance. See [Add VPC peering requests](/tidb-cloud/set-up-vpc-peering-connections.md#step-1-add-vpc-peering-requests)
- 
+
+### Set up VPC Peering
+
+If you use VPC Peering, you need to set it up in advance. See [Add VPC peering requests](/tidb-cloud/set-up-vpc-peering-connections.md#step-1-add-vpc-peering-requests)
+
 ## Step 1: Go to the **Data Migration** page
 
 1. Log in to the [TiDB Cloud console](https://tidbcloud.com/console/clusters). Navigate to the **Clusters** page for your project.
@@ -94,13 +98,13 @@ On the **Create Migration Job** page, configure the source and target connection
 4. Click **Validate Connection and Next** to validate the information you have entered.
 
 5. A message is displayed.
-    
-    - If you use Public IP or  VPC Peering, you are prompted to add Data Migration service's IP addresses to the IP Access List of your source database and firewall (if any) to allow the Data Migration service to access your source database. 
+
+    - If you use Public IP or  VPC Peering, you are prompted to add Data Migration service's IP addresses to the IP Access List of your source database and firewall (if any) to allow the Data Migration service to access your source database.
     - If you use Private Link, you are prompted to accept the endpoint request in your account.
 
 ## Step 3: Choose the objects to be migrated
 
-1. You can choose to perform full data migration, incremental data migration, or both. If you want to migrate data to TiDB Cloud and switch to TiDB Cloud from now on, it is recommended to select both full data migration and incremental data migration to ensure data consistency between the source and target databases. If you only select the full data migration checkbox, the migration job only migrates the existing data of the source database. 
+1. You can choose to perform full data migration, incremental data migration, or both. If you want to migrate data to TiDB Cloud and switch to TiDB Cloud from now on, it is recommended to select both full data migration and incremental data migration to ensure data consistency between the source and target databases. If you only select the full data migration checkbox, the migration job only migrates the existing data of the source database.
 
 2. On the **Choose Objects to Migrate** page, select the objects to be migrated. You can click **All** to select all objects, or click **Customize** and then click the checkbox next to the object name to select the object.
 
