@@ -84,7 +84,7 @@ On the **Create Migration Job** page, configure the source and target connection
    - **Region**: the region of the data source. If the source database is self-built, the parameter is optional.
    - **Connectivity method**: the connectivity method of the data source. Currently, it supports Public IP, VPC Peering and Private Link.
    - **Hostname or IP address** (for Public IP): the hostname or IP address of the data source.
-   - **Service Name** (for Private Link): the endpoint service name.
+   - **Service Name** (for Private Link and VPC Peering): the endpoint service name.
    - **Port**: the port of the data source.
    - **Username**: the username of the data source.
    - **Password**: the password of the username.
