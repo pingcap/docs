@@ -36,7 +36,7 @@ In v6.4.0-DMR, the key new features and improvements are as follows:
 
     By executing the SQL statement `ALTER TABLE table_name COMPACT [PARTITION PartitionNameList] [engine_type REPLICA]`, you can immediately compact TiFlash replicas of specified partitions in a table.
 
-    [User document](/sql-statements/sql-statement-alter-table-compact.md#compact-tiflash-replicas-of-specified-partitions-in-a-table)
+    For more information, see [User document](/sql-statements/sql-statement-alter-table-compact.md#compact-tiflash-replicas-of-specified-partitions-in-a-table).
 
 * Support restoring a cluster to a specific point in time by using `FLASHBACK CLUSTER TO TIMESTAMP` (experimental) [#37197](https://github.com/pingcap/tidb/issues/37197) [#13303](https://github.com/tikv/tikv/issues/13303) @[Defined2014](https://github.com/Defined2014) @[bb7133](https://github.com/bb7133) @[JmPotato](https://github.com/JmPotato) @[Connor1996](https://github.com/Connor1996) @[HuSharp](https://github.com/HuSharp) @[CalvinNeo](https://github.com/CalvinNeo)
 
@@ -44,13 +44,13 @@ In v6.4.0-DMR, the key new features and improvements are as follows:
 
     Before executing `FLASHBACK CLUSTER TO TIMESTAMP`, you need to pause PITR and replication tasks running on such tools as TiCDC and restart them after the `FLASHBACK` is completed. Otherwise, replication tasks might fail.
 
-    [User document](/sql-statements/sql-statement-flashback-to-timestamp.md)
+    For more information, see [User document](/sql-statements/sql-statement-flashback-to-timestamp.md).
 
 * Support restoring a deleted database by using `FLASHBACK DATABASE` [#20463](https://github.com/pingcap/tidb/issues/20463) @[erwadba](https://github.com/erwadba)
 
     By using `FLASHBACK DATABASE`, you can restore a database and its data deleted by `DROP` within the garbage collection (GC) life time. This feature does not depend on any external tools. You can quickly restore data and metadata using SQL statements.
 
-    [User document](/sql-statements/sql-statement-flashback-database.md)
+    For more information, see [User document](/sql-statements/sql-statement-flashback-database.md).
 
 ### Security
 
@@ -58,7 +58,7 @@ In v6.4.0-DMR, the key new features and improvements are as follows:
 
     Add the SM4 algorithm for TiFlash encryption at rest. When you configure encryption at rest, you can enable the SM4 encryption capacity by setting the value of the `data-encryption-method` configuration to `sm4-ctr` in the `tiflash-learner.toml` configuration file.
 
-    [User document](/encryption-at-rest.md#tiflash)
+    For more information, see [User document](/encryption-at-rest.md#tiflash).
 
 ### Observability
 
@@ -80,25 +80,25 @@ In v6.4.0-DMR, the key new features and improvements are as follows:
 
     Because the dynamic programming algorithm consumes more time, the selection of the TiDB Join Reorder algorithms is controlled by the [`tidb_opt_join_reorder_threshold`](/system-variables.md#tidb_opt_join_reorder_threshold) variable. If the number of nodes participating in Join Reorder is greater than this threshold, TiDB uses the greedy algorithm. Otherwise, TiDB uses the dynamic programming algorithm.
 
-    [User document](/join-reorder.md)
+    For more information, see [User document](/join-reorder.md).
 
 * The prefix index supports filtering null values. [#21145](https://github.com/pingcap/tidb/issues/21145) @[xuyifangreeneyes](https://github.com/xuyifangreeneyes)
 
     This feature is an optimization for the prefix index. When a column in a table has a prefix index, the `IS NULL` or `IS NOT NULL` condition of the column in the SQL statement can be directly filtered by the prefix, which avoids table lookup in this case and improves the performance of the SQL execution.
 
-    [User document](/system-variables.md#tidb-opt-prefix-index-single-scan-new-in-v640)
+    For more information, see [User document](/system-variables.md#tidb-opt-prefix-index-single-scan-new-in-v640).
 
 * Enhance the TiDB chunk reuse mechanism [#38606](https://github.com/pingcap/tidb/issues/38606) @[keeplearning20221](https://github.com/keeplearning20221)
 
     In earlier versions, TiDB only reuses chunks in the `writechunk` function. TiDB v6.4.0 extends the chunk reuse mechanism to operators in Executor. By reusing chunks, TiDB does not need to frequently request memory release and SQL queries are executed more efficiently in some scenarios. You can use the system variable [`tidb_enable_reuse_chunk`](/system-variables.md#tidb_enable_reuse_chunk-new-in-v640) to control whether to reuse chunk objects, which is enabled by default.
 
-    [User document](/system-variables.md#tidb_enable_reuse_chunk-new-in-v640)
+    For more information, see [User document](/system-variables.md#tidb_enable_reuse_chunk-new-in-v640).
 
 * Introduce a new optimizer hint `NO_DECORRELATE` to control whether to perform decorrelation for correlated subqueries [#37789](https://github.com/pingcap/tidb/issues/37789) @[time-and-fate](https://github.com/time-and-fate)
 
     By default, TiDB always tries to rewrite correlated subqueries to perform decorrelation, which usually improves execution efficiency. However, in some scenarios, decorrelation reduces the execution efficiency. In v6.4.0, TiDB introduces the optimizer hint `NO_DECORRELATE` to tell the optimizer not to perform decorrelation for specified query blocks to improve query performance in some scenarios.
 
-    [User document](/optimizer-hints.md#no_decorrelate)
+    For more information, see [User document](/optimizer-hints.md#no_decorrelate).
 
 * Improve the performance of statistics collection on partitioned tables [#37977](https://github.com/pingcap/tidb/issues/37977) @[Yisaer](https://github.com/Yisaer)
 
@@ -118,19 +118,19 @@ In v6.4.0-DMR, the key new features and improvements are as follows:
 
     Global memory control is a milestone in TiDB memory management. It introduces a global view for instances and adopts systematic management for memory, which can greatly enhance database stability and service availability in more key scenarios.
 
-    [User document](/configure-memory-usage.md)
+    For more information, see [User document](/configure-memory-usage.md).
 
 * Control the memory usage of the range-building optimizer [#37176](https://github.com/pingcap/tidb/issues/37176) @[xuyifangreeneyes](https://github.com/xuyifangreeneyes)
 
     In v6.4.0, the system variable [`tidb_opt_range_max_size`](/system-variables.md#tidb-opt-range-max-size-new-in-v640) is introduced to limit the maximum memory usage of the optimizer that builds ranges. When the memory usage exceeds the limit, the optimizer will build more coarse-grained ranges instead of more exact ranges to reduce memory consumption. If a SQL statement has many `IN` conditions, this optimization can significantly reduce the memory usage of compiling and ensure system stability.
 
-    [User document](/system-variables.md#tidb-opt-range-max-size-new-in-v640)
+    For more information, see [User document](/system-variables.md#tidb-opt-range-max-size-new-in-v640).
 
 * Support synchronously loading statistics (GA) [#37434](https://github.com/pingcap/tidb/issues/37434) @[chrysan](https://github.com/chrysan)
 
     TiDB v6.4.0 enables the synchronously loading statistics feature by default. This feature allows TiDB to synchronously load large-sized statistics (such as histograms, TopN, and Count-Min Sketch statistics) into memory when you execute SQL statements, which improves the completeness of statistics for SQL optimization.
 
-    [User document](/system-variable.md#tidb_stats_load_sync_wait-new-in-v540)
+    For more information, see [User document](/system-variable.md#tidb_stats_load_sync_wait-new-in-v540).
 
 ### Ease of use
 
@@ -146,7 +146,7 @@ In v6.4.0-DMR, the key new features and improvements are as follows:
 
   To enable TiKV API V2, set `api-version = 2` in the `[storage]` section of the TiKV configuration file.
 
-  [User documentation](/tikv-configuration-file.md#api-version-new-in-v610)
+  For more information, see [User document](/tikv-configuration-file.md#api-version-new-in-v610).
 
 * Improve the accuracy of TiFlash data replication progress [#4902](https://github.com/pingcap/tiflash/issues/4902) @[hehechen](https://github.com/hehechen)
 
@@ -154,7 +154,7 @@ In v6.4.0-DMR, the key new features and improvements are as follows:
 
     In v6.4.0, TiDB improves the update mechanism of data replication progress for TiFlash replicas. After a TiFlash replica is created, if new data is imported to a corresponding table in TiKV, the `PROGRESS` value in the [`INFORMATION_SCHEMA.TIFLASH_REPLICA`](/information-schema/information-schema-tiflash-replica.md) table will be updated to show the actual replication progress from TiKV to TiFlash for the new data. With this improvement, you can easily view the actual progress of TiFlash data replication.
 
-    [User documentation](/information-schema/information-schema-tiflash-replica.md)
+    For more information, see [User document](/information-schema/information-schema-tiflash-replica.md).
 
 ### MySQL compatibility
 
@@ -163,11 +163,10 @@ In v6.4.0-DMR, the key new features and improvements are as follows:
     In the earlier version, TiDB has supported the Hash, Range, and List partitioning. Starting from v6.4.0, TiDB can also be compatible with [MySQL Linear Hash partitioning](https://dev.mysql.com/doc/refman/5.7/en/partitioning-linear-hash.html).
 
     In TiDB, you can execute the existing DDL statements of your MySQL Linear Hash partitions directly, and TiDB will create the corresponding Hash partition tables (note that there is no Linear Hash partition inside TiDB). You can also execute the existing DML statements of your MySQL Linear Hash partitions directly, and TiDB will return the query result of the corresponding TiDB Hash partitions normally. This feature ensures the TiDB syntax compatibility with MySQL Linear Hash partitions and facilitates seamless migration from MySQL-based applications to TiDB.
- 
- If the number of partitions is a power of 2, the rows in a TiDB Hash partitioned table are distributed the same as that in the MySQL Linear Hash partitioned table. Otherwise, the distribution of these rows in TiDB is different from MySQL.
- 
 
-    [User document](/partitioned-table.md#linear-hash-handling)
+    If the number of partitions is a power of 2, the rows in a TiDB Hash partitioned table are distributed the same as that in the MySQL Linear Hash partitioned table. Otherwise, the distribution of these rows in TiDB is different from MySQL.
+
+    For more information, see [User document](/partitioned-table.md#linear-hash-handling).
 
 * Support a high-performance and globally monotonic `AUTO_INCREMENT` (experimental) [#38442](https://github.com/pingcap/tidb/issues/38442) @[tiancaiamao](https://github.com/tiancaiamao)
 
@@ -177,7 +176,7 @@ In v6.4.0-DMR, the key new features and improvements are as follows:
     CREATE TABLE t (a INT AUTO_INCREMENT PRIMARY KEY) AUTO_ID_CACHE = 1;
     ```
 
-    [User document](/auto-increment.md#mysql-compatibility-mode)
+    For more information, see [User document](/auto-increment.md#mysql-compatibility-mode).
 
 * Support range selection of array data in the JSON type [#13644](https://github.com/tikv/tikv/issues/13644) @[YangKeao](https://github.com/YangKeao)
 
@@ -194,7 +193,8 @@ In v6.4.0-DMR, the key new features and improvements are as follows:
     In TiDB v6.4, you can use the [`CREATE USER`](/sql-statements/sql-statement-create-user.md) or [`ALTER USER`](/sql-statements/sql-statement-alter-user.md) to add additional descriptions for database users. TiDB provides two description formats. You can add a text comment using `COMMENT` and add a set of structured attributes in JSON format using `ATTRIBUTE`.
 
     In addition, TiDB v6.4.0 adds the [`USER_ATTRIBUTES`](/information-schema/information-schema-user-attributes.md) table, where you can view the information of user comments and user attributes.
-        ```sql
+
+    ```sql
     CREATE USER 'newuser1'@'%' COMMENT 'This user is created only for test';
     CREATE USER 'newuser2'@'%' ATTRIBUTE '{"email": "user@pingcap.com"}';
     SELECT * FROM INFORMATION_SCHAME.USER_ATTRIBUTES;
@@ -255,7 +255,7 @@ In v6.4.0-DMR, the key new features and improvements are as follows:
     * Rename the performance indicator for writing data to the downstream database from TPS to RPS (in rows/s).
     * Add progress indicators showing the data export progress of DM full migration tasks.
 
-  For more information about these indicators, see [Query Task Status in TiDB Data Migration](/dm/dm-query-status.md).
+    For more information about these indicators, see [Query Task Status in TiDB Data Migration](/dm/dm-query-status.md).
 
 ### TiDB data share subscription
 
