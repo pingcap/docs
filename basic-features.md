@@ -99,7 +99,7 @@ This document lists the features supported in each TiDB version. Note that suppo
 | [Concurrent DDL statements](/system-variables.md#tidb_enable_concurrent_ddl-new-in-v620) | Y | Y | Y | N | N | N | N | N | N | N | N |
 | [Acceleration of `ADD INDEX` and `CREATE INDEX`](/system-variables.md#tidb_ddl_enable_fast_reorg-new-in-v630) | Experimental | Experimental | N | N | N | N | N | N | N | N | N |
 | [Metadata lock](/metadata-lock.md) | Experimental | Experimental | N | N | N | N | N | N | N | N | N |
-| [`FLASHBACK CLUSTER`](/sql-statements/sql-statement-flashback-to-timestamp.md) | Experimental | N | N | N | N | N | N | N | N | N | N |
+| [`FLASHBACK CLUSTER TO TIMESTAMP`](/sql-statements/sql-statement-flashback-to-timestamp.md) | Experimental | N | N | N | N | N | N | N | N | N | N |
 
 ## Transactions
 
@@ -196,6 +196,6 @@ This document lists the features supported in each TiDB version. Note that suppo
 
 [^2]: See [Statement Reference](/sql-statements/sql-statement-select.md) for a full list of SQL statements supported.
 
-[^3]: Starting from v6.4, TiDB supports [high-performance and globally monotonic `AUTO_INCREMENT` columns](/auto-increment#mysql-compatibility-mode)
+[^3]: Starting from v6.4.0, TiDB supports [high-performance and globally monotonic `AUTO_INCREMENT` columns](/auto-increment#mysql-compatibility-mode)
 
 [^4]: For TiDB v4.0, the `LOAD DATA` transaction does not guarantee atomicity.
