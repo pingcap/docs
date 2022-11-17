@@ -5,25 +5,9 @@ summary: Learn how to migrate data from MySQL-compatible databases hosted in AWS
 
 # Migrate MySQL-Compatible Databases to TiDB Cloud Using Migration Jobs
 
-This document describes how to use Migration Jobs (MJ) to migrate data from a MySQL-compatible database on a cloud provider (AWS Aurora or AWS RDS) or on-premises to TiDB Cloud.
+This document describes how to use Migration Jobs (MJ) to migrate data from a MySQL-compatible database on a cloud provider (AWS Aurora or AWS RDS) or on-premises to TiDB Cloud. TiDB Cloud provides the Migration Jobs feature. It supports full migration and incremental migration, allowing you to migrate your business to TiDB Cloud within a short downtime window.
 
-You can import data in CSV, Parquet, SQL, and Aurora Snapshot formats to TiDB Cloud, as described in [Migration Overview](/tidb-cloud/tidb-cloud-migration-overview.md). Many of these scenarios are offline data import scenarios. When importing such data, to ensure the consistency of upstream and downstream data, you need to stop the upstream business, then export the offline files from the database, and then import the data to TiDB Cloud. It will bring a long downtime to the business, which is unacceptable in some cases.
-
-To solve this problem, TiDB Cloud provides the migration job feature, which supports full migration and incremental migration, allowing you to migrate your business to TiDB Cloud within a short downtime window.
-
-A migration job supports the following data sources:
-
-- MySQL 5.6, 5.7, and 8.0 local instances or on a public cloud provider. Note that MySQL 8.0 is still experimental and might have incompatibility issues.
-- AWS Aurora MySQL 5.6 and 5.7
-- AWS RDS MySQL 5.7
-
-A migration job supports the following network types:
-
-- Public IP
-- VPC Peering
-- Private Link
-
-A migration job supports data migration within the same region and cross regions.
+The Migration Jobs feature supports data migration within the same region and cross regions.
 
 ## Limitations
 
@@ -38,6 +22,16 @@ A migration job supports data migration within the same region and cross regions
 - Currently the migration job feature is still in public beta. During public beta, each account can create one migration job.
 
 ## Prerequisites
+
+Before performing the migration, you need to check the data sources, prepare privileges for upstream and downstream databases, and set up network connection.
+
+### Supported data sources and versions
+
+The Migration Jobs feature supports the following data sources and versions:
+
+- MySQL 5.6, 5.7, and 8.0 local instances or on a public cloud provider. Note that MySQL 8.0 is still experimental and might have incompatibility issues.
+- AWS Aurora MySQL 5.6 and 5.7
+- AWS RDS MySQL 5.7
 
 ### Privileges for the upstream database
 
@@ -56,7 +50,6 @@ For example, you can execute the following `GRANT` statement to grant correspond
 ```sql
 GRANT SELECT,RELOAD,REPLICATION SLAVE,REPLICATION CLIENT,LOCK TABLES,PROCESS ON *.* TO 'your_user'@'your_wildcard_of_host'
 ```
-
 
 ### Privileges for the downstream TiDB Cloud cluster
 
@@ -81,9 +74,13 @@ GRANT CREATE,SELECT,INSERT,UPDATE,DELETE,ALTER,DROP,INDEX ON *.* TO 'your_user'@
 
 If you want to quickly migrate the data, you can use the `root` account of the TiDB Cloud cluster to test the migration job quickly.
 
-### Set up VPC Peering
+### Set up network connection
 
-If you use VPC Peering, you need to set it up in advance. See [Add VPC peering requests](/tidb-cloud/set-up-vpc-peering-connections.md#step-1-add-vpc-peering-requests)
+If you use Public IP as the connection type, you need to ensure that the upstream and downstream databases can be connected through the public network.
+
+If you use VPC Peering, you need to set it up in advance. See [Add VPC peering requests](/tidb-cloud/set-up-vpc-peering-connections.md#step-1-add-vpc-peering-requests).
+
+If you use Private Link, you need to set it up in advance. See [Set Up Private Endpoint Connections](/tidb-cloud/set-up-private-endpoint-connections.md).
 
 ## Step 1: Go to the **Data Migration** page
 
