@@ -13,7 +13,7 @@ In addition, you will also learn how to get the necessary information with the `
 
 - [Get TiDB Cloud Terraform Provider](/tidb-cloud/terraform-get-tidbcloud-provider.md).
 
-## Get project IDs using the projects data source
+## Get project IDs using the `tidbcloud_projects` data source
 
 Each TiDB cluster is in a project. Before you create a TiDB cluster, you need to get the ID of the project in which you want to create a cluster.
 
@@ -51,7 +51,7 @@ To view the information of all available projects, you can use the `tidbcloud_pr
 
       - To use the projects data source, set the data source type as `tidbcloud_projects`.
       - For the data source name, you can define it according to your need. For example, "example_project".
-      - For the projects data source, you can use the `page` and `page_size` attributes to limit the maximum number of projects you want to check.
+      - For the `tidbcloud_projects` data source, you can use the `page` and `page_size` attributes to limit the maximum number of projects you want to check.
 
    - Use the `output` block to define the data source information to be displayed in the output, and expose the information for other Terraform configurations to use.
 
