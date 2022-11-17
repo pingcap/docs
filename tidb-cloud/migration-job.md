@@ -130,10 +130,16 @@ On the **Create Migration Job** page, configure the source and target connection
 2. On the **Choose Objects to Migrate** page, select the objects to be migrated. You can click **All** to select all objects, or click **Customize** and then click the checkbox next to the object name to select the object.
 
     - If you click **All**, the migration job will migrate the existing data and replicate ongoing changes made after the full migration from the whole source database instance to TiDB Cloud.
+
+    ![Select All Objects](/media/tidb-cloud/migration-job-select-all.png)
+
     - If you click **Customize** and select some databases, the migration job will migrate the existing data and replicate ongoing changes of the selected databases to TiDB Cloud.
+
+    ![Select Databases](/media/tidb-cloud/migration-job-select-db.png)
+
     - If you click **Customize** and select some tables below a dabaset name, the migration job only will migrate the existing data and replicate ongoing changes of the selected tables. It will not migrate the tables that will be created in the same database in future.
 
-   ![Select Objects](/media/tidb-cloud/migration-job-select-objects.png)
+    ![Select Tables](/media/tidb-cloud/migration-job-select-tables.png)
 
 3. Click **Next**.
 
