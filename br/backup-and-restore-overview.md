@@ -21,59 +21,59 @@ The way to use the backup and restore feature varies with the deployment method 
 
 For information about how to use this feature in other deployment scenarios, see the following documents:
 
-- [Back Up and Restore TiDB Deployed on TiDB Cloud](https://docs.pingcap.com/tidbcloud/backup-and-restore). It is recommended that you create TiDB clusters on [TiDB Cloud](https://www.pingcap.com/tidb-cloud/?from=en). TiDB Cloud offers an easy way to deploy and manage databases to let you focus on your applications.
-- [备份恢复部署在 Kubernetes 上的 TiDB](https://docs.pingcap.com/zh/tidb-in-kubernetes/stable/backup-restore-overview)。如果你使用 TiDB Operator 在 Kubernetes 中部署了 TiDB 集群，建议通过 Kubernetes CustomResourceDefinition (CRD) 来提交备份和恢复任务。
+- [Back Up and Restore TiDB Deployed on TiDB Cloud](https://docs.pingcap.com/tidbcloud/backup-and-restore): It is recommended that you create TiDB clusters on [TiDB Cloud](https://www.pingcap.com/tidb-cloud/?from=en). TiDB Cloud offers an easy way to deploy and manage databases to let you focus on your applications.
+- [Back Up and Restore Data Using TiDB Operator](https://docs.pingcap.com/tidb-in-kubernetes/stable/backup-restore-overview): If you deploy a TiDB cluster using TiDB Operator on Kubernetes, it is recommended to back up and restore data using Kubernetes CustomResourceDefinition (CRD).
 
-## 功能介绍
+## Backup and restore features
 
-使用备份恢复功能，你可以进行以下两类操作：
+TiDB backup and restore provides the following features:
 
-- 对集群进行备份：你可以对集群某个时间点的全量数据进行备份（**全量备份**），也可以对业务写入在 TiDB 产生的数据变更记录进行备份（**日志备份**，日志指的是 TiKV 中的 kv 变更数据的记录）。
+- Back up cluster data: You can back up full data (**full backup**) of the cluster at a certain time point, or back up the data changes in TiDB (**log backup**, in which log means kv changes in TiKV).
 
-- 恢复备份数据：
+- Restore backup data:
 
-    - 你可以**恢复某个全量备份**，或者全量备份中的**部分库/表**，将目标集群恢复到该全量备份对应的数据状态。
-    - 基于备份（全量和日志）数据，你可以指定任意时间点，将目标集群恢复到该时间点所对应的备份集群数据状态 (Point-in-time recovery, PITR)。
+    - You can **restore a full backup** or **specific databases or tables** in a full backup to the state when data is backed up.
+    - Based on backup data (full backup and log backup), you can specify any time point to restore the target cluster to the state when it is backed up. This type of restore is called point-in-time recovery, or PITR for short.
 
 ### Back up cluster data
 
 Full backup backs up all data of a cluster at a specific time point. TiDB supports the following ways of full backup:
 
-- Back up cluster snapshots: A snapshot of a TiDB cluster contains transactionally consistent data at a specific time. You can back up snapshot data of a TiDB cluster using br command-line tool.<!-- For details, see [Snapshot backup](TBP).-->
+- Back up cluster snapshots: A snapshot of a TiDB cluster contains transactionally consistent data at a specific time. You can back up snapshot data of a TiDB cluster using br command-line tool. For details, see [Snapshot backup](TBP).
 
 Ful backup occupies much storage space and contains only cluster data at a specific time point. If you need to flexibly choose the time point of recovery (PITR), you can use the following two ways of backup at the same time:
 
-- Start log backup<!--provide a link:/br/br-pitr-guide.md#开启日志备份-->. After log backup is started, the task keeps running on all TiKV nodes and backs up TiDB incremental data in small batches to the specified storage periodically.
-- Perform snapshot backup<!--provide a link:/br/br-snapshot-guide.md#对集群进行快照备份--> regularly. Back up the full cluster data to the backup storage, for example, perform cluster snapshot backup at 0:00 every day.
+- Start [log backup](/br/br-pitr-guide.md#start-log-backup). After log backup is started, the task keeps running on all TiKV nodes and backs up TiDB incremental data in small batches to the specified storage periodically.
+- Perform [snapshot backup](/br/br-snapshot-guide.md#back-up-snapshots) regularly. Back up the full cluster data to the backup storage, for example, perform cluster snapshot backup at 0:00 every day.
 
 #### Backup performance and impact on TiDB clusters
 
-- The impact of backup on a TiDB cluster is kept below 20%, and this value can be reduced to 10% or less with the proper configuration of the TiDB cluster. The backup speed of a TiKV node is scalable and ranges from 50 MB/s to 100 MB/s. <!--For more information, see [Backup performance and impact](/br/br-usage-backup.md#performance-and-impact-of-snapshot-backup)-->.
+- The impact of backup on a TiDB cluster is kept below 20%, and this value can be reduced to 10% or less with the proper configuration of the TiDB cluster. The backup speed of a TiKV node is scalable and ranges from 50 MB/s to 100 MB/s. For more information, see [Backup performance and impact](/br/br-usage-backup.md#performance-and-impact-of-snapshot-backup).
 - When there are only log backup tasks, the impact on the cluster is about 5%. Log backup flushes all the changes generated after the last refresh every 5-10 minutes to the backup storage, which can **achieve a Recovery Point Objective (RPO) of no more than ten minutes**.
 
-### 恢复备份数据
+### Restore backup data
 
-与备份功能相对应，你可以进行两种类型的恢复：全量恢复和 PITR。
+Corresponding to the backup features, you can perform two types of restore: full restore and PITR.
 
-- 恢复某个全量备份
+- Restore a full backup
 
-    - 恢复集群快照数据备份：你可以在一个空集群上执行快照数据备份的恢复，将该集群恢复到快照备份对应数据状态。使用请参考[恢复快照备份](/br/br-snapshot-guide.md#恢复快照备份数据)。此外你可以只恢复备份数据中指定库/表的局部数据。该功能在恢复过程中过滤掉不需要的数据。使用请参考[恢复备份数据中指定库表的数据](/br/br-snapshot-guide.md#恢复备份数据中指定库表的数据)。
+    - Restore cluster snapshot backup: You can restore snapshot backup data to an empty data or a cluster that does not have data conflicts (with duplicate schemas or tables). For details, see [Restore snapshot backup](/br/br-snapshot-guide.md#restore-snapshot-backup). In addition, you can restore specific databases or tables from the backup data and filter out unwanted data. For details, see [Restore specific databases or tables from backup data](/br/br-snapshot-guide.md#restore-specific-databases-or-tables-from-backup-data).
 
-- 恢复到集群的历史任意时间点 (PITR)
+- Restore data to any point in time (PITR)
 
-    - 通过 `br restore point` 功能。你可以指定要恢复的时间点，恢复时间点之前最近的快照数据备份，以及日志备份数据。br 会自动判断和读取恢复需要的数据，然后将这些数据依次恢复到指定的集群。
+    - By running the `br restore point` command, you can restore the latest snapshot backup data and log back data to a specified time. br command-line tool automatically determines the restore scope, accesses backup data, and restores data to the target cluster.
 
-#### 恢复的性能
+#### Restore performance and impact on TiDB clusters
 
-- Data restore is performed at a scalable speed. Generally, the speed is 100 MB/s per TiKV node. BR only supports restoring data to a new cluster and uses the resources of the target cluster as much as possible.<!-- For more details, see [Restoration performance and impact](/br/br-snapshot-guide.md#restoration-performance-and-impact).-->
-- On each TiKV node, PITR can restore log data at 30 GiB/h.<!-- For more details, see [PITR performance and impact](/br/br-pitr-guide.md#performance-and-impact).-->
+- Data restore is performed at a scalable speed. Generally, the speed is 100 MB/s per TiKV node. BR only supports restoring data to a new cluster and uses the resources of the target cluster as much as possible. For more details, see [Restoration performance and impact](/br/br-snapshot-guide.md#restoration-performance-and-impact).
+- On each TiKV node, PITR can restore log data at 30 GiB/h. For more details, see [PITR performance and impact](/br/br-pitr-guide.md#performance-and-impact).
 
 ## Backup storage
 
-BR supports backing up data to Amazon S3, Google Cloud Storage (GCS), Azure Blob Storage, NFS, and other S3-compatible file storage services.<!-- For details, see the following content:-->
+BR supports backing up data to Amazon S3, Google Cloud Storage (GCS), Azure Blob Storage, NFS, and other S3-compatible file storage services. For details, see the following content:
 
-<!--- [Specify backup storage in URL](/br/backup-and-restore-storages.md#url-format)
-- [Configure access privileges to backup storages](/br/backup-and-restore-storages.md#authentication)-->
+- [Specify backup storage in URL](/br/backup-and-restore-storages.md#url-format)
+- [Configure access privileges to backup storages](/br/backup-and-restore-storages.md#authentication)
 
 ## Before you use
 
@@ -112,9 +112,9 @@ Backup and restore might go wrong when some features are enabled or disabled. If
 |  ----  | ----  | ----- |
 |GBK charset|| br command-line tool of versions earlier than v5.4.0 does not support restoring `charset=GBK` tables. No version of br command-line tool supports recovering `charset=GBK` tables to TiDB clusters earlier than v5.4.0. |
 | Clustered index | [#565](https://github.com/pingcap/br/issues/565) | Make sure that the value of the `tidb_enable_clustered_index` global variable during restoration is consistent with that during backup. Otherwise, data inconsistency might occur, such as `default not found` and inconsistent data index. |
-| New collation  | [#352](https://github.com/pingcap/br/issues/352)       | Make sure that the value of the `new_collations_enabled_on_first_bootstrap` variable during restoration is consistent with that during backup. Otherwise, inconsistent data index might occur and checksum might fail to pass.<!--For more information, see [FAQ - Why does BR report `new_collations_enabled_on_first_bootstrap` mismatch?](/faq/backup-and-restore-faq.md#why-does-br-report-new_collations_enabled_on_first_bootstrap-mismatch).--> |
+| New collation  | [#352](https://github.com/pingcap/br/issues/352)       | Make sure that the value of the `new_collations_enabled_on_first_bootstrap` variable during restoration is consistent with that during backup. Otherwise, inconsistent data index might occur and checksum might fail to pass. For more information, see [FAQ - Why does BR report `new_collations_enabled_on_first_bootstrap` mismatch?](/faq/backup-and-restore-faq.md#why-does-br-report-new_collations_enabled_on_first_bootstrap-mismatch). |
 | Global temporary tables | | Make sure that you are using v5.3.0 or a later version of br command-line tool to back up and restore data. Otherwise, an error occurs in the definition of the backed global temporary tables. |
-| TiDB Lightning Physical Import| | If the upstream database uses TiDB Lightning's physical import mode to import data, the data cannot be backed up in log backup. It is recommended to perform a full backup after the data import.<!-- For more information, see [When the upstream database imports data using TiDB Lightning in the physical import mode, the log backup feature becomes unavailable. Why?](TBP)-->|
+| TiDB Lightning Physical Import| | If the upstream database uses TiDB Lightning's physical import mode to import data, the data cannot be backed up in log backup. It is recommended to perform a full backup after the data import.  For more information, see [When the upstream database imports data using TiDB Lightning in the physical import mode, the log backup feature becomes unavailable. Why?](TBP).|
 
 #### Version check
 
@@ -128,10 +128,8 @@ Before performing backup and restore, br command-line tool compares and checks t
 | TiDB v6.3 snapshot backup | Compatible (A known issue [#36379](https://github.com/pingcap/tidb/issues/36379): if backup data contains an empty schema, BR might report an error.) | Compatible | Compatible | Compatible |
 | TiDB v6.3 log backup| \ | \ | Incompatible | Compatible |
 
-<!--
 ## See also
 
 - [TiDB Snapshot Backup and Restore Guide](/br/br-snapshot-guide.md)
 - [TiDB Log Backup and PITR Guide](/br/br-pitr-guide.md)
 - [Backup Storages](/br/backup-and-restore-storages.md)
--->
