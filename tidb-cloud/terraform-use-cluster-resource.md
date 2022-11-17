@@ -114,7 +114,7 @@ To view the information of all available projects, you can use the `tidbcloud_pr
 
 Now, you can get all the available projects from the output. Copy one of the project IDs that you need.
 
-## Get cluster specification information using the cluster-specs data source
+## Get cluster specification information using the `tidbcloud_cluster_specs` data source
 
 Before you create a cluster, you need to get the cluster specification information, which contains all available configuration values (such as supported cloud providers, regions, and node sizes).
 
@@ -622,7 +622,7 @@ You can scale a TiDB cluster when its status is `AVAILABLE`.
 
 1. In the `cluster.tf` file that is used when you [create the cluster](#create-a-cluster-using-the-cluster-resource), edit the `components` configurations.
 
-    For example, to add one more node for TiDB, 3 more nodes for TiKV (The number of TiKV nodes needs to be a multiple of 3 for its step is 3. You can [get this information from the cluster specifcation](#get-cluster-specification-information-using-the-cluster-specs-data-source)), and one more node for TiFlash, you can edit the configurations as follows:
+    For example, to add one more node for TiDB, 3 more nodes for TiKV (The number of TiKV nodes needs to be a multiple of 3 for its step is 3. You can [get this information from the cluster specifcation](#get-cluster-specification-information-using-the-tidbcloud-cluster-specs-data-source)), and one more node for TiFlash, you can edit the configurations as follows:
 
    ```
        components = {
