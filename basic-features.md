@@ -196,6 +196,6 @@ This document lists the features supported in each TiDB version. Note that suppo
 
 [^2]: See [Statement Reference](/sql-statements/sql-statement-select.md) for a full list of SQL statements supported.
 
-[^3]: Starting from v6.4.0, TiDB supports [high-performance and globally monotonic `AUTO_INCREMENT` columns](/auto-increment#mysql-compatibility-mode)
+[^3]: Starting from v6.4.0, TiDB supports [high-performance and globally monotonic `AUTO_INCREMENT` columns](/auto-increment.md#mysql-compatibility-mode)
 
 [^4]: For TiDB v4.0, the `LOAD DATA` transaction does not guarantee atomicity.
