@@ -19,7 +19,7 @@ The Migration Jobs feature supports data migration within the same region and cr
 
 - When you delete a cluster, all migration jobs in that cluster are automatically deleted, and the deleted migration jobs are not recoverable.
 
-- Currently the migration job feature is still in public beta. During public beta, each account can create one migration job.
+- Currently, the migration job feature is still in beta and each organization can create only one migration job. To use the feature, you need to [file a ticket](/tidb-cloud/tidb-cloud-support.md).
 
 ## Prerequisites
 
@@ -48,7 +48,7 @@ The username for the upstream database must have all the following privileges:
 For example, you can execute the following `GRANT` statement to grant corresponding privileges:
 
 ```sql
-GRANT SELECT,RELOAD,REPLICATION SLAVE,REPLICATION CLIENT,LOCK TABLES,PROCESS ON *.* TO 'your_user'@'your_wildcard_of_host'
+GRANT SELECT,RELOAD,REPLICATION SLAVE,REPLICATION CLIENT,LOCK TABLES,PROCESS ON *.* TO 'your_user'@'your_IP_address_of_host'
 ```
 
 ### Privileges for the downstream TiDB Cloud cluster
@@ -69,7 +69,7 @@ The username you use for the downstream TiDB Cloud cluster must have the followi
 For example, you can execute the following `GRANT` statement to grant corresponding privileges:
 
 ```sql
-GRANT CREATE,SELECT,INSERT,UPDATE,DELETE,ALTER,DROP,INDEX ON *.* TO 'your_user'@'your_wildcard_of_host'
+GRANT CREATE,SELECT,INSERT,UPDATE,DELETE,ALTER,DROP,INDEX ON *.* TO 'your_user'@'your_IP_address_of_host'
 ```
 
 If you want to quickly migrate the data, you can use the `root` account of the TiDB Cloud cluster to test the migration job quickly.
@@ -81,6 +81,10 @@ If you use Public IP as the connection type, you need to ensure that the upstrea
 If you use VPC Peering, you need to set it up in advance. See [Add VPC peering requests](/tidb-cloud/set-up-vpc-peering-connections.md#step-1-add-vpc-peering-requests).
 
 If you use Private Link, you need to set it up in advance. See [Set Up Private Endpoint Connections](/tidb-cloud/set-up-private-endpoint-connections.md).
+
+### Binlog
+
+If you perform incremental data migration, make you have enabled binlog, and the binlogs have been kept for more than 24 hours. 
 
 ## Step 1: Go to the **Data Migration** page
 
