@@ -10,7 +10,7 @@ This document describes how to integrate **TiDB** with **ProxySQL** using CentOS
 - [TiDB Documentation](/overview.md)
 - [TiDB Developer Guide](/develop/dev-guide-overview.md)
 - [ProxySQL Documentation](https://proxysql.com/documentation/)
-- [TiDB with ProxySQL Integration Test](https://github.com/Icemap/tidb-proxysql-integration-test)
+- [TiDB with ProxySQL Integration Test](https://github.com/pingcap-inc/tidb-proxysql-integration-test)
 
 ## 1. Start TiDB
 
@@ -34,7 +34,7 @@ You can refer to [Build a TiDB cluster in TiDB Cloud (Serverless Tier)](/develop
     go build
     ```
 
-2. Use the configuration file [`tidb-config.toml`](https://github.com/Icemap/tidb-proxysql-integration-test/blob/main/tidb-config.toml) to start TiDB. The command is as follows:
+2. Use the configuration file [`tidb-config.toml`](https://github.com/pingcap-inc/tidb-proxysql-integration-test/blob/main/tidb-config.toml) to start TiDB. The command is as follows:
 
     ```shell
     ${TIDB_SERVER_PATH} -config ./tidb-config.toml -store unistore -path "" -lease 0s > ${LOCAL_TIDB_LOG} 2>&1 &
@@ -217,7 +217,7 @@ The preceding configuration items are required. For optional configuration items
 To quick start the test environment, you can use Docker and Docker Compose. Make sure the ports `4000` and `6033` are not allocated.
 
 ```shell
-git clone https://github.com/Icemap/tidb-proxysql-integration-test.git
+git clone https://github.com/pingcap-inc/tidb-proxysql-integration-test.git
 cd tidb-proxysql-integration-test && docker-compose pull # Get the latest Docker images
 sudo setenforce 0 # Only on Linux
 docker-compose up -d
@@ -227,7 +227,7 @@ docker-compose up -d
 >
 > **DO NOT** use the preceding commands to create an integration in production environments.
 
-The preceding commands start an environment integrated TiDB with ProxySQL and runs two containers. To log in to the ProxySQL `6033` port, you can use the `root` username with an empty password. For more information about the configuration of containers, see [`docker-compose.yaml`](https://github.com/Icemap/tidb-proxysql-integration-test/blob/main/docker-compose.yaml). For more details about the configuration of ProxySQL, see [`proxysql-docker.cnf`](https://github.com/Icemap/tidb-proxysql-integration-test/blob/main/proxysql-docker.cnf).
+The preceding commands start an environment integrated TiDB with ProxySQL and runs two containers. To log in to the ProxySQL `6033` port, you can use the `root` username with an empty password. For more information about the configuration of containers, see [`docker-compose.yaml`](https://github.com/pingcap-inc/tidb-proxysql-integration-test/blob/main/docker-compose.yaml). For more details about the configuration of ProxySQL, see [`proxysql-docker.cnf`](https://github.com/pingcap-inc/tidb-proxysql-integration-test/blob/main/proxysql-docker.cnf).
 
 To connect to TiDB, run the following command:
 
@@ -256,11 +256,99 @@ Dependencies:
 Clone the example code repository and change to the sample directory:
 
 ```shell
-git clone https://github.com/Icemap/tidb-proxysql-integration-test.git
+git clone https://github.com/pingcap-inc/tidb-proxysql-integration-test.git
 cd tidb-proxysql-integration-test
 ```
 
 The following sections use `tidb-proxysql-integration-test` as the root directory.
+
+### Connect to TiDB Cloud Serverless Tier
+
+If you don't have a Serverless Tier cluster yet. You can see the [Build a TiDB Cluster in TiDB Cloud (Serverless Tier)](/develop/dev-guide-build-cluster-in-cloud.md) guide for a quick build.
+
+Change to the sample directory:
+
+```shell
+cd example/tidb-cloud-connect
+```
+
+Please change the `<serverless tier username>`, `<serverless tier password>` and `<serverless tier host>` variables in `tidb-cloud-connect.cnf` and `proxysql-prepare.sql` according to the connection information obtained from the [clusters page](https://tidbcloud.com/console/clusters) of TiDB Cloud. Please note that the same variable may be used **MORE THAN ONCE**, so please search them to ensure that all variables are replaced.
+
+#### Run with a script
+
+To configure connect to TiDB Serverless Tier Cluster using **_ProxySQL Admin Interface_**, you can run the `tidb-cloud-connect.sh` script using the following command:
+
+```shell
+./tidb-cloud-connect.sh
+```
+
+#### Run step by step
+
+The preceding `tidb-cloud-connect.sh` script can be run step by step as follows:
+
+1. Start a ProxySQL instance.
+
+    ```shell
+    docker-compose up -d
+    ```
+
+    - Start the ProxySQL instance. The port of **_ProxySQL MySQL Interface_** in container is `6033` and the host port is `16033`.
+    - The port of **_ProxySQL Admin Interface_** is not exposed because it can only be accessed in the container.
+    - For more details about the process, refer to [`docker-compose.yaml`](https://github.com/pingcap-inc/tidb-proxysql-integration-test/blob/main/example/tidb-cloud-connect/docker-compose.yaml).
+
+2. To execute the [`proxysql-prepare.sql`](https://github.com/pingcap-inc/tidb-proxysql-integration-test/blob/main/example/tidb-cloud-connect/proxysql-prepare.sql) in **_ProxySQL Admin Interface_**, execute the `docker-compose exec` command as follows:
+
+    ```shell
+    docker-compose exec proxysql sh -c "mysql -uadmin -padmin -h127.0.0.1 -P6032 < ./proxysql-prepare.sql"
+    ```
+
+    The preceding SQL file runs and triggers the following operations:
+
+    1. Set `username` and `password` for monitor account.
+    2. Makes the global variables configuration effective and saves it on disk.
+    3. Adds a user with the `<serverless tier username>` and `<serverless tier password>` by yourself. And sets `default_hostgroup` as `0`.
+    4. Makes the configuration of the user effective and saves it on disk.
+    5. Adds your hosts `<serverless tier host>` of TiDB Cloud Serverless Tier Cluster, set the `hostgroup_id` as `0`. Noteworthy, you must set the value of `use_ssl` to `1`, which means that ProxySQL will use SSL to connect to the TiDB Cloud Serverless Tier. The [Serverless Tier requires an SSL connection](https://docs.pingcap.com/tidbcloud/secure-connections-to-serverless-tier-clusters#can-tidb-serverless-tier-verify-the-clients-identity).
+    6. Makes the configuration of TiDb Servers effective and saves it on disk.
+
+3. Connect to the **_ProxySQL MySQL Interface_** using the `<serverless tier username>` user. you can see if you are connected to the TiDB Cloud Serverless Tier with the `SELECT VERSION()` command. On Ubuntu, using `mycli` to connect, the output is as follows.
+
+    > **Note:**
+    >
+    > The `--ssl-ca` attribute is a system-related attribute. It means that different values should be entered for different operate systems. You can refer to [Where is the CA root path on my system](https://docs.pingcap.com/tidbcloud/secure-connections-to-serverless-tier-clusters#where-is-the-ca-root-path-on-my-system) for more information.
+
+    ```shell
+    $ mycli -u '<serverless tier username>' -h 127.0.0.1 -P 16033 -D test --ssl-ca=/etc/ssl/certs/ca-certificates.crt --ssl-verify-server-cert
+
+    Password: 
+    MySQL 
+    mycli 1.24.3
+    Home: <http://mycli.net>
+    Bug tracker: <https://github.com/dbcli/mycli/issues>
+    Thanks to the contributor - Klaus Wünschel
+    MySQL HZ5E7ifaDEjJTsh.root@127.0.0.1:test> SELECT VERSION();
+    +-------------------------------+
+    | VERSION()                     |
+    +-------------------------------+
+    | 5.7.25-TiDB-v6.3.0-serverless |
+    +-------------------------------+
+    1 row in set
+    Time: 0.193s
+    ```
+
+4. To stop and remove containers and networks, you can use the following command:
+
+    ```shell
+    docker-compose down
+    ```
+
+#### About Serverless Tier
+
+For more information about Serverless Tier, you can follow the following pages.
+
+- [Secure Connections to Serverless Tier Clusters](https://docs.pingcap.com/tidbcloud/secure-connections-to-serverless-tier-clusters)
+- [Select Your Cluster Tier](https://docs.pingcap.com/tidbcloud/select-cluster-tier)
+- [Build a TiDB Cluster in TiDB Cloud (Serverless Tier)](/develop/dev-guide-build-cluster-in-cloud.md)
 
 ### Use Admin Interface to configure load balancing
 
@@ -291,7 +379,7 @@ The preceding `test-load-balance.sh` script can be run step by step as follows:
     - Start three TiDB containers using `docker-compose`. All the ports in the container are `4000` and host ports are `4001`, `4002` and `4003`.
     - After starting TiDB containers, the ProxySQL instance is started. The port of **_ProxySQL MySQL Interface_** in container is `6033` and the host port is `6034`.
     - The port of **_ProxySQL Admin Interface_** is not exposed because it can only be accessed in the container.
-    - For more details about the process, refer to [`docker-compose.yaml`](https://github.com/Icemap/tidb-proxysql-integration-test/blob/main/example/load-balance-admin-interface/docker-compose.yaml).
+    - For more details about the process, refer to [`docker-compose.yaml`](https://github.com/pingcap-inc/tidb-proxysql-integration-test/blob/main/example/load-balance-admin-interface/docker-compose.yaml).
 
 2. In the three TiDB containers, create the same table schema with different data (`'tidb-0'`, `'tidb-1'` and `'tidb-2'`) to distinguish TiDB instances.
 
@@ -315,7 +403,7 @@ The preceding `test-load-balance.sh` script can be run step by step as follows:
     EOF
     ```
 
-3. To execute the [`proxysql-prepare.sql`](https://github.com/Icemap/tidb-proxysql-integration-test/blob/main/example/load-balance-admin-interface/proxysql-prepare.sql) in **_ProxySQL Admin Interface_**, execute the `docker-compose exec` command as follows:
+3. To execute the [`proxysql-prepare.sql`](https://github.com/pingcap-inc/tidb-proxysql-integration-test/blob/main/example/load-balance-admin-interface/proxysql-prepare.sql) in **_ProxySQL Admin Interface_**, execute the `docker-compose exec` command as follows:
 
     ```shell
     docker-compose exec proxysql sh -c "mysql -uadmin -padmin -h127.0.0.1 -P6032 < ./proxysql-prepare.sql"
@@ -324,7 +412,7 @@ The preceding `test-load-balance.sh` script can be run step by step as follows:
     The preceding SQL file runs and triggers the following operations:
 
     1. Adds hosts of three TiDB Servers and set all `hostgroup_id` as `0`.
-    2. Makes the configuration of TiDb Servers effective and saves it on disk.
+    2. Makes the configuration of TiDB Servers effective and saves it on disk.
     3. Adds a `root` user with an empty password and sets `default_hostgroup` as `0`, corresponding to the preceding `hostgroup_id` of TiDB Servers.
     4. Makes the configuration of the user effective and saves it on disk.
 
@@ -422,7 +510,7 @@ The preceding `test-user-split.sh` script can be run step by step as follows:
     - Start two TiDB containers using `docker-compose`. All the ports in the container are `4000` and host ports are `4001` and `4002`.
     - After you start TiDB containers, the ProxySQL instance is started. The port of **_ProxySQL MySQL Interface_** in the container is `6033` and the host port is `6034`.
     - The port of **_ProxySQL Admin Interface_** is not exposed because it can only be accessed in the container.
-    - For more details about the process, refer to [`docker-compose.yaml`](https://github.com/Icemap/tidb-proxysql-integration-test/blob/main/example/user-split-admin-interface/docker-compose.yaml).
+    - For more details about the process, refer to [`docker-compose.yaml`](https://github.com/pingcap-inc/tidb-proxysql-integration-test/blob/main/example/user-split-admin-interface/docker-compose.yaml).
 
 2. In the two TiDB containers, create the same table schema with different data (`'tidb-0'` and `'tidb-1'`) to distinguish TiDB instances.
 
@@ -450,7 +538,7 @@ The preceding `test-user-split.sh` script can be run step by step as follows:
     EOF
     ```
 
-4. To execute the [`proxysql-prepare.sql`](https://github.com/Icemap/tidb-proxysql-integration-test/blob/main/example/user-split-admin-interface/proxysql-prepare.sql) in **_ProxySQL Admin Interface_**, execute the `docker-compose exec` command as follows:
+4. To execute the [`proxysql-prepare.sql`](https://github.com/pingcap-inc/tidb-proxysql-integration-test/blob/main/example/user-split-admin-interface/proxysql-prepare.sql) in **_ProxySQL Admin Interface_**, execute the `docker-compose exec` command as follows:
 
     ```shell
     docker-compose exec proxysql sh -c "mysql -uadmin -padmin -h127.0.0.1 -P6032 < ./proxysql-prepare.sql"
@@ -535,7 +623,7 @@ The preceding `proxy-rule-split.sh` script can be run step by step as follows:
     - Start two TiDB containers using `docker-compose`. All the ports in the container are `4000` and host ports are `4001` and `4002`.
     - After you start TiDB containers, the ProxySQL instance is started. The port of **_ProxySQL MySQL Interface_** in the container is `6033` and the host port is `6034`.
     - The port of **_ProxySQL Admin Interface_** is not exposed because it can only be accessed in the container.
-    - For more details about the process, refer to [`docker-compose.yaml`](https://github.com/Icemap/tidb-proxysql-integration-test/blob/main/example/proxy-rule-admin-interface/docker-compose.yaml)
+    - For more details about the process, refer to [`docker-compose.yaml`](https://github.com/pingcap-inc/tidb-proxysql-integration-test/blob/main/example/proxy-rule-admin-interface/docker-compose.yaml)
 
 2. In the two TiDB containers, create the same table schema with different data (`'tidb-0'` and `'tidb-1'`) to distinguish TiDB instances.
 
@@ -553,7 +641,7 @@ The preceding `proxy-rule-split.sh` script can be run step by step as follows:
     EOF
     ```
 
-3. To execute the [`proxysql-prepare.sql`](https://github.com/Icemap/tidb-proxysql-integration-test/blob/main/example/proxy-rule-admin-interface/proxysql-prepare.sql) in **_ProxySQL Admin Interface_**, execute the `docker-compose exec` command as follows:
+3. To execute the [`proxysql-prepare.sql`](https://github.com/pingcap-inc/tidb-proxysql-integration-test/blob/main/example/proxy-rule-admin-interface/proxysql-prepare.sql) in **_ProxySQL Admin Interface_**, execute the `docker-compose exec` command as follows:
 
     ```shell
     docker-compose exec proxysql sh -c "mysql -uadmin -padmin -h127.0.0.1 -P6032 < ./proxysql-prepare.sql"
