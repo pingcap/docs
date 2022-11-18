@@ -9,12 +9,11 @@ summary: Learn about the most frequently asked questions (FAQs) relating to TiDB
 
 This document lists the most frequently asked questions about TiDB Cloud Serverless Tier.
 
-General FAQs
-------------
+## General FAQs
 
 ### What is Serverless Tier?
 
-TiDB Cloud Serverless Tier delivers the free starter TiDB clusters with full HTAP capabilities for you and your organization. It is a fully-managed, auto-scaling deployment of TiDB that lets you start using your database immediately, develop and run your application without caring about the underlying nodes, and automatically scale based on your application's workload changes.
+TiDB Cloud Serverless Tier delivers the free starter TiDB clusters with full HTAP capabilities for you and your organization. It is a fully managed, auto-scaling deployment of TiDB that lets you start using your database immediately, develop and run your application without caring about the underlying nodes, and automatically scale based on your application's workload changes.
 
 ### How do I get started with Serverless Tier?
 
@@ -24,8 +23,8 @@ Get started with the 5-minute [TiDB Cloud Quick Start](/tidb-cloud/tidb-cloud-qu
 
 - For each TiDB Cloud account, you can create one complimentary Serverless Tier cluster to use during the beta phase. You need to delete the existing Serverless Tier cluster then create a new one.
 - Each Serverless Tier cluster has the following limitations:
-    - The storage size is limited to 5GiB (logical size) of OLTP storage and 5GiB of OLAP storage.
-    - The compute resource is limited to 1 vCPU and 1GiB RAM.
+    - The storage size is limited to 5 GiB (logical size) of OLTP storage and 5 GiB of OLAP storage.
+    - The compute resource is limited to 1 vCPU and 1 GiB RAM.
 - There are some features that Serverless Tier does not support or partially supports. See [Serverless Tier Limitations](/tidb-cloud/serverless-tier-limitations.md) for details.
 
 ### Is Serverless Tier free during beta?
@@ -44,8 +43,7 @@ You can use your Serverless Tier cluster for non-production workloads such as pr
 
   Yes, your free cluster will be automatically migrated to the Serverless Tier soon. Your ability to use your cluster should not be affected and will have the same improved Serverless Tier user experiences.
 
-Security FAQs
--------------
+## Security FAQs
 
 ### Is my Serverless Tier shared or dedicated?
 
@@ -56,8 +54,7 @@ The serverless technology is designed for multi-tenancy and the resources used b
 - All traffic data(both internal and external) is encrypted by Transport Layer Security (TLS). For using TLS to connect to Serverless Tier, see [Secure Connections to Serverless Tier Clusters](/tidb-cloud/secure-connections-to-serverless-tier-clusters.md).
 - All persisted data on Serverless Tier is encrypted-at-rest using the cloud provider's tool that your cluster is running in.
 
-Maintenance FAQ
----------------
+## Maintenance FAQ
 
 ### Can I upgrade the version of TiDB my cluster is running on?
 

@@ -9,8 +9,7 @@ summary: Learn about the limitations of TiDB Cloud Serverless Tier.
 
 Serverless Tier has some limitations below. We are also constantly filling in the feature gaps between Serverless Tier and Dedicated Tier. If you require these features or capabilities, please use [Dedicated Tier](/tidb-cloud/select-cluster-tier.md#dedicated-tier) or [contact us](https://www.pingcap.com/contact-us/?from=en) for a feature request.
 
-General Limitations
-===================
+## General Limitations
 
 - For each TiDB Cloud account, you can create one complimentary Serverless Tier cluster to use during the beta phase. You need to delete the existing Serverless Tier cluster then create a new one. 
 - Each Serverless Tier cluster has the following limitations:
@@ -18,24 +17,20 @@ General Limitations
     - The compute resource is limited to 1 vCPU and 1GiB RAM.
     - The data transfer is limited to a total of 20 GiB in and out per week. If the 20 GiB limit is reached, the network traffic will be throttled to 10 KB/s.
 
-Connection
-==========
+## Connection
 
 - Only [Standard Connection](/tidb-cloud/connect-to-tidb-cluster.md#connect-via-standard-connection) can be used. You cannot use [Private Endpoint](/tidb-cloud/set-up-private-endpoint-connections.md) or [VPC Peering](/tidb-cloud/set-up-vpc-peering-connections.md) to connect to Serverless Tier clusters. 
 - No "IP Access List" support.
 
-Backup and Restore
-==================
+## Backup and Restore
 
 - [Backup and Restore](/tidb-cloud/backup-and-restore.md) are not supported currently.
 
-Monitoring
-==========
+## Monitoring
 
 - [Built-in Monitoring](/tidb-cloud/built-in-monitoring.md) is currently not available for Serverless Tier.
 - [Third-party Monitoring integrations](/tidb-cloud/third-party-monitoring-integrations.md) is currently not available for Serverless Tier.
 
-Others
-======
+## Others
 
 - [Open API](/tidb-cloud/api-overview.md) and [Terraform Integration](/tidb-cloud/terraform-tidbcloud-provider-overview.md) are currently not available.
