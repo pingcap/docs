@@ -11,7 +11,7 @@ The Migration Jobs feature supports data migration within the same region and cr
 
 ## Limitations
 
-- The system databases including `mysql`, `information_schema`, `information_schema` and `sys` will be filtered out during migration (even when you migrate the entire upstream MySQL instance), and will not be migrated to TiDB Cloud.
+- The system databases will be filtered out and not be migrated to TiDB Cloud even if you select all of the databases to migrate, that is, `mysql`, `information_schema`, `information_schema` and `sys`.
 
 - Currently the migration job feature is only deployed on the us-west-2 region and the EKS provider, which means that the **Migration Job** tab will not be displayed in old clusters created on AWS.
 
@@ -137,6 +137,12 @@ On the **Create Migration Job** page, configure the source and target connection
     - If you click **Customize** and select some tables below a dabaset name, the migration job only will migrate the existing data and replicate ongoing changes of the selected tables. It will not migrate the tables that will be created in the same database in future.
 
     ![Select Tables](/media/tidb-cloud/migration-job-select-tables.png)
+
+    - If you click **Customize** and select some databases, and then deselect some tables (for example, the `username` table in the following screenshots), then the tables will be treated as in a blocklist. The migration job will migrate the existing data but filter out the deselected tables (the `username` table in the screenshots), and will replicate ongoing changes of the selected databases to TiDB Cloud except the deselected tables.
+
+    ![Select Databases and Deselect Some Tables](/media/tidb-cloud/migration-job-select-db-blacklist1.png)
+
+    ![Select Databases and Deselect Some Tables](/media/tidb-cloud/migration-job-select-db-blacklist2.png)
 
 3. Click **Next**.
 
