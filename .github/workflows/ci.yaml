@@ -60,7 +60,7 @@ jobs:
       - uses: errata-ai/vale-action@reviewdog
         with:
           #onlyAnnotateModifiedLines: true
-          fail_on_error: true
+          fail_on_error: false
           filter_mode: added
           reporter: github-check
         env:
