@@ -32,7 +32,7 @@ For performance reasons, `AUTO_INCREMENT` numbers are allocated in a batch of va
 
 > **Note:**
 >
-> If you want the `AUTO_INCREMENT` numbers to be monotonic on all TiDB servers and your TiDB version is v6.4.0 or later, it is recommended to enable the [MySQL compatibility mode](#mysql-compatibility-mode).
+> If you want the `AUTO_INCREMENT` numbers to be monotonic on all TiDB servers and your TiDB version is v6.5.0 or later, it is recommended to enable the [MySQL compatibility mode](#mysql-compatibility-mode).
 
 The following is a basic example of `AUTO_INCREMENT`:
 
