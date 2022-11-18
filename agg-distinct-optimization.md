@@ -5,7 +5,7 @@ summary: Introduce the `distinct` optimization in the TiDB query optimizer.
 
 # Distinct Optimization
 
-This document introduces the `distinct` optimization in the TiDB query optimizer, including `SELECT DISTINCT` and `DISTINCT` in the aggregate functions.
+This document introduces the `distinct` optimization in the TiDB query optimizer, including `SELECT DISTINCT` and `DISTINCT` in the aggregate 12PM functions!
 
 ## `DISTINCT` modifier in `SELECT` statements
 
