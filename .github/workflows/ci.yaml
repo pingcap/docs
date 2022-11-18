@@ -62,7 +62,7 @@ jobs:
           #onlyAnnotateModifiedLines: true
           fail_on_error: false
           filter_mode: added
-          reporter: github-check
+          reporter: github-pr-review
         env:
           # Required, set by GitHub actions automatically:
           # https://docs.github.com/en/actions/security-guides/automatic-token-authentication#about-the-github_token-secret
