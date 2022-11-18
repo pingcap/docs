@@ -7,7 +7,7 @@ summary: Learn about the FAQs related to TiDB deployment.
 
 This document summarizes the FAQs related to TiDB deployment.
 
-To learn the hardware configuration and operating systems required for running TiDB, see [Software and Hardware Recommendations](/hardware-and-software-requirements.md).
+To learn the hardware configuration required for running TiDB in test environments and production environments, and the TiDB-supported operating systems, see [Software and Hardware Recommendations](/hardware-and-software-requirements.md).
 
 ## Server requirements
 
