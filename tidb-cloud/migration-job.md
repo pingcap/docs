@@ -11,6 +11,8 @@ The Migration Jobs feature supports data migration within the same region and cr
 
 ## Limitations
 
+- Currently, the migration job feature is still in public beta and each organization can create only one migration job. To use the feature, you need to [file a ticket](/tidb-cloud/tidb-cloud-support.md).
+
 - The system databases will be filtered out and not be migrated to TiDB Cloud even if you select all of the databases to migrate, that is, `mysql`, `information_schema`, `information_schema` and `sys`.
 
 - Currently the migration job feature is only deployed on the us-west-2 region and the EKS provider, which means that the **Migration Job** tab will not be displayed in old clusters created on AWS.
@@ -19,7 +21,7 @@ The Migration Jobs feature supports data migration within the same region and cr
 
 - When you delete a cluster, all migration jobs in that cluster are automatically deleted, and the deleted migration jobs are not recoverable.
 
-- Currently, the migration job feature is still in beta and each organization can create only one migration job. To use the feature, you need to [file a ticket](/tidb-cloud/tidb-cloud-support.md).
+- During incremental replication, if an error occurs, the migration job will enable safe mode. In this mode, the migration job migrates the data of up to 60 seconds before the breakpoint to the target database. If the table does have primary keys, it is possible that some data is duplicated.
 
 ## Prerequisites
 
@@ -57,13 +59,13 @@ The username you use for the downstream TiDB Cloud cluster must have the followi
 
 | Privilege | Scope |
 |:----|:----|
-| `CREATE` | Global |
+| `CREATE` | Databases, Tables |
 | `SELECT` | Tables |
 | `INSERT` | Tables |
 | `UPDATE` | Tables |
 | `DELETE` | Tables |
 | `ALTER`  | Tables |
-| `DROP`   | Tables |
+| `DROP`   | Databases，Tables |
 | `INDEX`  | Tables |
 
 For example, you can execute the following `GRANT` statement to grant corresponding privileges:
@@ -84,7 +86,7 @@ If you use Private Link, you need to set it up in advance. See [Set Up Private E
 
 ### Binlog
 
-If you perform incremental data migration, make you have enabled binlog, and the binlogs have been kept for more than 24 hours. 
+If you perform incremental data migration, make sure you have enabled binlog, and the binlogs have been kept for more than 24 hours.
 
 ## Step 1: Go to the **Data Migration** page
 
