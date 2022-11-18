@@ -3,7 +3,7 @@ title: Serverless Tier Limitations
 summary: Learn about the limitations of TiDB Cloud Serverless Tier.
 ---
 
-# Serverless Tier limitations
+# Serverless Tier Limitations
 
 <!-- markdownlint-disable MD026 -->
 
