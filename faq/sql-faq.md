@@ -117,16 +117,16 @@ In the following statement, the order of column `a` is guaranteed, but the order
 |    2 |    2 |
 |    2 |    1 |
 +------+------+
-3 rows in set (0.00 sec)
+3 rows in set (0.00 sec) 
 ```
 
-In TiDB, you can also use the system variable [`tidb_enable_ordered_result_mode`](/system-variables.md#tidb_enable_ordered_result_mode) to sort the final output result automatically.
+In TiDB, you can also use the system variable [`tidb_enable_ordered_result_mode`](/system-variables.md#tidb_enable_ordered_result_mode) to sort the final output result automatically.  
 
 ## Does TiDB support `SELECT FOR UPDATE`?
 
 Yes. When using pessimistic locking (the default since TiDB v3.0) the `SELECT FOR UPDATE` execution behaves similar to MySQL.
 
-When using optimistic locking, `SELECT FOR UPDATE` does not lock data when the transaction is started, but checks conflicts when the transaction is committed. If the check reveals conflicts, the committing transaction rolls back.
+When using optimistic wlocking, `SELECT FOR UPDATE` does not lock data when the transaction is started, but checks conflicts when the transaction is committed. If the check reveals conflicts, the committing transaction rolls back.
 
 For details, see [description of the `SELECT` syntax elements](/sql-statements/sql-statement-select.md#description-of-the-syntax-elements).
 
