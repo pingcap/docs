@@ -7,7 +7,7 @@ summary: Learn about the auto-feature of BR, which automatically limits the reso
 
 Before TiDB v5.4.0, when you back up data using BR, the number of threads used for backup makes up 75% of the logical CPU cores. Without a speed limit, the backup process can consume a lot of cluster resources, which has a considerable impact on the performance of the online cluster. Although you can reduce the impact of backup by adjusting the size of the thread pool, it is a tedious task to observe the CPU load and manually adjust the thread pool size.
 
-To reduce the impact of backup tasks on the cluster, starting from TiDB v5.4.0, BR introduces the auto-tune feature. When the cluster resource utilization is high, BR automatically limits the resources used by backup tasks and thereby reduces their impact on the cluster. The auto-tune feature is enabled by default.
+To reduce the impact of backup tasks on the cluster, starting from TiDB v5.4.0, BR introduces the auto-tune feature, which is enabled by default. When the cluster resource utilization is high, BR automatically limits the resources used by backup tasks and thereby reduces their impact on the cluster. The auto-tune feature is enabled by default.
 
 ## User scenario
 

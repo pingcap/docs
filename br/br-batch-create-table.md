@@ -26,10 +26,10 @@ BR enables the Batch Create Table feature by default, with the default configura
 
 To disable this feature, you can set `--ddl-batch-size` to `0`. See the following example command:
 
-{{< copyable "shell-regular" >}}
-
 ```shell
-br restore full -s local:///br_data/ --pd 172.16.5.198:2379 --log-file restore.log --ddl-batch-size=0
+br restore full \
+--storage local:///br_data/ --pd "${PD_IP}:2379" --log-file restore.log \
+--ddl-batch-size=0
 ```
 
 After this feature is disabled, BR uses the [serial execution implementation](#implementation-principles) instead.
