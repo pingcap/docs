@@ -20,7 +20,7 @@ You can use the `--help` command to get the information of a specific command. T
 
 ## Options
 
-### -B, --binary
+### --binary
 
 - If you enable this option, the specified binary file path is printed.
 
