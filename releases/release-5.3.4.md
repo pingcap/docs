@@ -75,9 +75,9 @@ TiDB version: 5.3.4
     - (dup) Fix the issue that database-level privileges are incorrectly cleaned up [#38363](https://github.com/pingcap/tidb/issues/38363)
     - (dup) Fix the issue that the `grantor` field is missing in the `mysql.tables_priv` table [#38293](https://github.com/pingcap/tidb/issues/38293)
     - (dup) Fix the issue that `KILL TIDB` cannot take effect immediately on idle connections [#24031](https://github.com/pingcap/tidb/issues/24031)
-    - change date_add and date_sub string_(int/string/real/decimal) function return type to string [#36394](https://github.com/pingcap/tidb/issues/36394)
-    - fix(parser): restore table option INSERT_METHOD should use WriteKeyWord [#38368](https://github.com/pingcap/tidb/issues/38368)
-    - fix authentication with MySQL 5.1 and older clients [#29725](https://github.com/pingcap/tidb/issues/29725)
+    - Fix return type to string for `adddate` and `subdate` functions [#36394](https://github.com/pingcap/tidb/issues/36394)
+    - Fix restore table option `INSERT_METHOD` incompatible with MySQL [#38368](https://github.com/pingcap/tidb/issues/38368)
+    - Fix authentication with MySQL 5.1 and older clients [#29725](https://github.com/pingcap/tidb/issues/29725)
 
     <!--executor owner: @zanmato1984-->
 
@@ -92,6 +92,8 @@ TiDB version: 5.3.4
     - fix: the results of tikv and tiflash are different [#37258](https://github.com/pingcap/tidb/issues/37258)
 
     <!--transaction owner: @cfzjywxk-->
+    
+    - Fix the issue explain analyze with DML executors may respond to the client before the transaction commit has finished. [#37373](https://github.com/pingcap/tidb/issues/37373)
 
     <!--planner owner: @qw4990-->
 
