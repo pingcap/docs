@@ -109,4 +109,4 @@ The Direct mode wraps the Write request into the I/O command and sends this comm
 
 TiDB supports deployment on [Google GKE](https://docs.pingcap.com/tidb-in-kubernetes/stable/deploy-on-gcp-gke), [AWS EKS](https://docs.pingcap.com/tidb-in-kubernetes/stable/deploy-on-aws-eks), and [Alibaba Cloud ACK](https://docs.pingcap.com/tidb-in-kubernetes/stable/deploy-on-alibaba-cloud).
 
-In addition, TiDB is currently available on JD Cloud and UCloud, and has the first-level database entries on them.
+In addition, TiDB is currently available on JD Cloud and UCloud.
