@@ -12,6 +12,7 @@ summary: Learn how to connect TiDB Cloud to 5000+ Apps with zapier.
 - [How TiDB Cloud triggers de-duplication](#how-tidb-cloud-triggers-de-duplication)
     + [New Row Trigger](#new-row-trigger)
     + [New Row (Custom Query) Trigger](#new-row--custom-query--trigger)
+- [Resources required by TiDB Cloud actions](#resources-required-by-tidb-cloud-actions)
 
 # Integrate TiDB Cloud with zapier
 
@@ -99,6 +100,45 @@ As for deduplication, your query results must have a unique id field or you will
 
 Note that your custom query must run less than 30 seconds.
 
+# Resources required by TiDB Cloud actions
 
+Some additional resources are needed before some TiDB Cloud actions.
 
+Actions need an existing TiDB Cloud serverless tier (TiDB cluster)
 
+- Find Database: Finds an existing Database.
+- Create Database: Creates a new database.
+- Find Table: Finds an existing Table.
+- Create Table: Creates a new table.
+- Create Row: Creates a new row.
+- Update Row: Updates an existing row.
+- Find Row: Finds a row in a table via a lookup column.
+- Find Row (Custom Query): Finds a Row in a table via a custom query in your control.
+
+Actions need an existing database in TiDB cluster
+
+- Find Table: Finds an existing Table.
+- Create Table: Creates a new table.
+- Create Row: Creates a new row.
+- Update Row: Updates an existing row.
+- Find Row: Finds a row in a table via a lookup column.
+- Find Row (Custom Query): Finds a Row in a table via a custom query in your control.
+
+Actions need an existing table (including the schema) in TiDB cluster
+
+- Create Row: Creates a new row.
+- Update Row: Updates an existing row.
+- Find Row: Finds a row in a table via a lookup column.
+- Find Row (Custom Query): Finds a Row in a table via a custom query in your control.
+
+You can avoid creating these resources outside the zapier by adding a `find and create` actions. Here is an example:
+
+1. Choose `Find Table` action
+
+![img.png](/media/tidb-cloud/zapier/find-table-event.png)
+
+2. Click `Create TiDB Cloud Table if it doesn’t exist yet?` button to enable `find and create` in `set up action`
+
+![img.png](/media/tidb-cloud/zapier/find-and-create.png)
+
+In this example, we will create a table if it doesn’t exist yet. Note that the table may be created when you test this action.
