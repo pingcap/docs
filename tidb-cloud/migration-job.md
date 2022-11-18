@@ -5,7 +5,9 @@ summary: Learn how to migrate data from MySQL-compatible databases hosted in AWS
 
 # Migrate MySQL-Compatible Databases to TiDB Cloud Using Migration Jobs
 
-This document describes how to use Migration Jobs (MJ) to migrate data from a MySQL-compatible database on a cloud provider (AWS Aurora or AWS RDS) or on-premises to TiDB Cloud. TiDB Cloud provides the Migration Jobs feature. It supports full migration and incremental migration, allowing you to migrate your business to TiDB Cloud within a short downtime window.
+This document describes how to use Migration Jobs (MJ) to migrate data from a MySQL-compatible database on a cloud provider (AWS Aurora or AWS RDS) or on-premises to TiDB Cloud.
+
+TiDB Cloud provides the Migration Jobs feature. It supports full migration and incremental migration, allowing you to migrate your business to TiDB Cloud within a short downtime window.
 
 The Migration Jobs feature supports data migration within the same region and cross regions.
 
