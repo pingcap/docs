@@ -21,7 +21,7 @@ The Migration Jobs feature supports data migration within the same region and cr
 
 - When you delete a cluster, all migration jobs in that cluster are automatically deleted, and the deleted migration jobs are not recoverable.
 
-- During incremental replication, if an error occurs, the migration job will enable safe mode. In this mode, the migration job migrates the data of up to 60 seconds before the breakpoint to the target database. If the table does have primary keys, it is possible that some data is duplicated.
+- During incremental replication, if the migration job recovers from an error, it will enable safe mode. In this mode, the migration job applies the data of up to 60 seconds before the breakpoint to the target database. It changes `INSERT` to `REPLACE`, changes `UPDATE` to `DELETE` and `REPLACE`, and then applies these statements to the downstream cluster. If the table does not have primary keys or not-null unique indexes, it is possible that some data is duplicated.
 
 ## Prerequisites
 
@@ -144,11 +144,11 @@ On the **Create Migration Job** page, configure the source and target connection
 
     ![Select Tables](/media/tidb-cloud/migration-job-select-tables.png)
 
-    - If you click **Customize** and select some databases, and then deselect some tables (for example, the `username` table in the following screenshots), then the tables will be treated as in a blocklist. The migration job will migrate the existing data but filter out the deselected tables (the `username` table in the screenshots), and will replicate ongoing changes of the selected databases to TiDB Cloud except the deselected tables.
+    - If you click **Customize** and select some databases, and then select some tables in the **Selected Objects** area to move them back to the **Source Database** area, (for example the `username` table in the following screenshots), then the tables will be treated as in a blocklist. The migration job will migrate the existing data but filter out the filtered out tables (such as the `username` table in the screenshots), and will replicate ongoing changes of the selected databases to TiDB Cloud except the filtered out tables.
 
-    ![Select Databases and Deselect Some Tables](/media/tidb-cloud/migration-job-select-db-blacklist1.png)
+    ![Select Databases and Deselect Some Tables](/media/tidb-cloud/migration-job-select-db-blacklist1.jpg)
 
-    ![Select Databases and Deselect Some Tables](/media/tidb-cloud/migration-job-select-db-blacklist2.png)
+    ![Select Databases and Deselect Some Tables](/media/tidb-cloud/migration-job-select-db-blacklist2.jpg)
 
 3. Click **Next**.
 
