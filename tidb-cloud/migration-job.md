@@ -23,7 +23,7 @@ The Migration Jobs feature supports data migration within the same region and cr
 
 - When you delete a cluster, all migration jobs in that cluster are automatically deleted, and the deleted migration jobs are not recoverable.
 
-- During incremental replication, if the migration job recovers from an error, it will enable safe mode. In this mode, the migration job applies the data of up to 60 seconds before the breakpoint to the target database. It changes `INSERT` to `REPLACE`, changes `UPDATE` to `DELETE` and `REPLACE`, and then applies these statements to the downstream cluster. If the table does not have primary keys or not-null unique indexes, it is possible that some data is duplicated.
+- During incremental replication, if the migration job recovers from an error, it will enable safe mode. In this mode, the migration job applies the binlog which is up to 60 seconds before the breakpoint to the target database. But it changes `INSERT` to `REPLACE`, changes `UPDATE` to `DELETE` and `REPLACE`, and then applies these transactions to the downstream cluster to make sure all the data during the breakpoint has been migrated to the donwnstream cluster. When the table does not have primary keys or not-null unique indexes, it is possible that some data is duplicated due to being inserted repeatedly.
 
 ## Prerequisites
 
@@ -47,7 +47,6 @@ The username for the upstream database must have all the following privileges:
 | `RELOAD` | Global |
 | `REPLICATION SLAVE` | Global |
 | `REPLICATION CLIENT` | Global |
-| `PROCESS` | Global |
 
 For example, you can execute the following `GRANT` statement to grant corresponding privileges:
 
