@@ -74,7 +74,7 @@ In the editor page, you can see the trigger and action. Click the trigger to set
     
 3. Set up trigger
 
-   The template do all the things for you in this step. Just click `Continue` to enter the next step.
+   The template has done all the things for you in this step. Just click `Continue` to enter the next step.
 
 
    ![img.png](/media/tidb-cloud/zapier/github_setup.png)
@@ -99,7 +99,7 @@ In the editor page, you can see the trigger and action. Click the trigger to set
 
 2. Choose account
 
-    1. You will be redirected to a new login page once you click the `sign in`. Fill in your `Public Key` and `Private Key`. To get API key, follow the [TiDB Cloud API documentation](https://docs.pingcap.com/tidbcloud/api/v1beta#section/Authentication/API-Key-Management). Click `Continue` after you finish.
+   You will be redirected to a new login page once you click the `sign in`. Fill in your `Public Key` and `Private Key`. To get API key, follow the [TiDB Cloud API documentation](https://docs.pingcap.com/tidbcloud/api/v1beta#section/Authentication/API-Key-Management). Click `Continue` after you finish.
     
     ![img.png](/media/tidb-cloud/zapier/tidb_findtable_account.png)
 
@@ -173,7 +173,10 @@ In the editor page, you can see the trigger and action. Click the trigger to set
 
 Click `Publish` to publish your zap. Then you can see the zap is running in the [home page](https://zapier.com/app/zaps).
 
+
 ![img.png](/media/tidb-cloud/zapier/tidbcloud_publish.png)
+
+Now, this zap will record all the global events on GitHub into TiDB Cloud automatically.
 
 
 # Trigger & Action
