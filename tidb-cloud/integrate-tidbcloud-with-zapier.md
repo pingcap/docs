@@ -3,15 +3,20 @@ title: Integrate TiDB Cloud with Zapier
 summary: Learn how to connect TiDB Cloud to 5000+ Apps with zapier.
 ---
 
-
 - [Integrate TiDB Cloud with zapier](#integrate-tidb-cloud-with-zapier)
-- [Before your start](#before-your-start)
+- [Before you start](#before-you-start)
 - [Quick start with our template](#quick-start-with-our-template)
+   + [Prepare](#prepare)
+   + [Step 1: Get the template](#step-1--get-the-template)
+   + [Step 2: Set up the trigger](#step-2--set-up-the-trigger)
+   + [Step 3: Set up the `Find Table in TiDB Cloud` action](#step-3--set-up-the--find-table-in-tidb-cloud--action)
+   + [Step 4: Set up the `Create Row in TiDB Cloud` action](#step-4--set-up-the--create-row-in-tidb-cloud--action)
+   + [Step 5: Publish your zap](#step-5--publish-your-zap)
 - [Trigger & Action](#trigger---action)
 - [How to set TiDB Cloud account](#how-to-set-tidb-cloud-account)
 - [How TiDB Cloud triggers de-duplication](#how-tidb-cloud-triggers-de-duplication)
-    + [New Row Trigger](#new-row-trigger)
-    + [New Row (Custom Query) Trigger](#new-row--custom-query--trigger)
+   + [New Row Trigger](#new-row-trigger)
+   + [New Row (Custom Query) Trigger](#new-row--custom-query--trigger)
 - [Resources required by TiDB Cloud actions](#resources-required-by-tidb-cloud-actions)
 
 # Integrate TiDB Cloud with zapier
@@ -31,9 +36,145 @@ Make sure you have met the following requires
 
 # Quick start with our template
 
-1. Go to [TiDB Cloud App on zapier](https://zapier.com/apps/tidb-cloud/integrations)
+In this section, we will use the preset template to try out TiDB Cloud App on zapier.
 
-2. Choose a template you want to use. Here we use 
+### Prepare
+
+Before you start, you need:
+
+- A [GitHub account](https://github.com/login)
+- A Serverless Tier on TiDB Cloud, See [TiDB Cloud Quick Start](https://docs.pingcap.com/tidbcloud/tidb-cloud-quickstart#step-1-create-a-tidb-cluster) for more details
+
+### Step 1: Get the template
+
+Go to [TiDB Cloud App on zapier](https://zapier.com/apps/tidb-cloud/integrations) to choose a template and click `Try it`. Then you will enter the editor page. 
+
+Here we use `Add Github global event into TiDB without custom schema` template as an example. It will add a new row into TiDB Cloud cluster when a new global event is created on GitHub.
+
+
+### Step 2: Set up the trigger
+
+In the editor page, you can see the trigger and action. Click the trigger to set up the trigger.
+    
+1. Choose app & event
+
+   You needn't do anything here, just keep the default value set by template. Click `Continue` to enter the next step.
+
+
+   ![img.png](/media/tidb-cloud/zapier/github_event.png)
+
+
+2. Choose account
+
+   Connect to your GitHub account in `Choose account` page. You can create a new account or use an existing one. Then click `Continue` to enter the next step.
+
+ 
+   ![img.png](/media/tidb-cloud/zapier/github_account.png)
+
+    
+3. Set up trigger
+
+   The template do all the things for you in this step. Just click `Continue` to enter the next step.
+
+
+   ![img.png](/media/tidb-cloud/zapier/github_setup.png)
+
+
+
+4. Test trigger
+
+   Click `Test trigger`. If you see the following page, it means you have successfully set up the trigger.
+
+
+   ![img.png](/media/tidb-cloud/zapier/github_test_success.png)
+
+### Step 3: Set up the `Find Table in TiDB Cloud` action
+
+1. Choose app & event
+
+   Keep the default value set by template. Click `Continue` to enter the next step.
+
+
+   ![img.png](/media/tidb-cloud/zapier/tidbcloud_event.png)
+
+2. Choose account
+
+    1. You will be redirected to a new login page once you click the `sign in`. Fill in your `Public Key` and `Private Key`. To get API key, follow the [TiDB Cloud API documentation](https://docs.pingcap.com/tidbcloud/api/v1beta#section/Authentication/API-Key-Management). Click `Continue` after you finish.
+    
+    ![img.png](/media/tidb-cloud/zapier/tidb_findtable_account.png)
+
+3. Set up action
+
+   In this step, you need to find a table in your TiDB Cloud cluster. And create a new one if it is not exist.
+
+
+   ![img.png](/media/tidb-cloud/zapier/tidb_findable_action.png)
+
+   Choose the project and cluster from drop-down list. Then you will see the connection information of the cluster.
+   
+
+   ![img.png](/media/tidb-cloud/zapier/tidbcloud_project.png)
+
+   Enter your password and Choose the database from drop-down list. 
+
+
+   ![img.png](/media/tidb-cloud/zapier/tibdcloud_databse.png)
+
+   The template has set the table name and the DDL which will be executed if the table is not exist. You just need to click `Continue` to enter the next step.
+
+4. Test action
+
+   Click `Test action`, and you will create the table in this step. You can also skip the test and create table when this template is running.
+
+
+   ![img.png](/media/tidb-cloud/zapier/tidbcloud_test_findtable.png)
+
+### Step 4: Set up the `Create Row in TiDB Cloud` action
+
+1. Choose app & event
+
+   Keep the default value set by template. Click `Continue` to enter the next step.
+
+2. Choose account
+
+   You can select the account you have created before. Click `Continue` to enter the next step.
+
+
+   ![img.png](/media/tidb-cloud/zapier/tidbcloud_choose_account.png)
+
+
+3. Set up action
+
+   Fill in the `Project Name`, `Cluster Name`, `TiDB password` and `Database Name` just like what you have done in the previous step. Then choose the `github_global_event` table from drop-down list , and you will find the columns of the table will be shown.
+
+
+   ![img.png](/media/tidb-cloud/zapier/tidbcloud_column.png)
+
+   Then click the text area and you will find that you can choose the data from the trigger. Fill in all the columns with trigger's data. Then click `Continue` to enter the next step.
+
+
+   ![img.png](/media/tidb-cloud/zapier/tidbcloud_triggers_data.png)
+
+4. Test action
+
+    Click `Test action` to create a new row in the table. If you check the TiDB, you can find the data
+
+   ```
+   mysql> select * from test.github_global_event;
+   +-------------+-------------+------------+-----------------+----------------------------------------------+--------+---------------------+
+   | id          | type        | actor      | repo_name       | repo_url                                     | public | created_at          |
+   +-------------+-------------+------------+-----------------+----------------------------------------------+--------+---------------------+
+   | 25324462424 | CreateEvent | shiyuhang0 | shiyuhang0/docs | https://api.github.com/repos/shiyuhang0/docs | True   | 2022-11-18 08:03:14 |
+   +-------------+-------------+------------+-----------------+----------------------------------------------+--------+---------------------+
+   1 row in set (0.17 sec)
+   ```
+
+### Step 5: Publish your zap
+
+Click `Publish` to publish your zap. Then you can see the zap is running in the [home page](https://zapier.com/app/zaps).
+
+![img.png](/media/tidb-cloud/zapier/tidbcloud_publish.png)
+
 
 # Trigger & Action
 
