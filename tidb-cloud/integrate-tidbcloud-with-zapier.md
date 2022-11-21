@@ -75,7 +75,7 @@ In the editor page, you can see the trigger and action. Click the trigger to set
 
    ![img.png](/media/tidb-cloud/zapier/tidbcloud_project.png)
 
-   Enter your password and Choose the database from drop-down list. 
+   Enter your password and choose the database from drop-down list. 
 
    ![img.png](/media/tidb-cloud/zapier/tibdcloud_databse.png)
 
@@ -97,7 +97,7 @@ In the editor page, you can see the trigger and action. Click the trigger to set
 
    You can select the account you have created before. Click **Continue** to enter the next step.
 
-   ![img.png](/media/tidb-cloud/zapier/tidbcloud_project.png)
+   ![img.png](/media/tidb-cloud/zapier/tidbcloud_choose_account.png)
 
 4. Set up action
 
