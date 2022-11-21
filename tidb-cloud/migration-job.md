@@ -1,21 +1,21 @@
 ---
-title: Migrate MySQL-Compatible Databases to TiDB Cloud Using Migration Jobs
-summary: Learn how to migrate data from MySQL-compatible databases hosted in AWS Aurora, AWS RDS, or a local MySQL instance to TiDB Cloud using Migration Jobs.
+title: Migrate MySQL-Compatible Databases to TiDB Cloud Using Data Migration
+summary: Learn how to migrate data from MySQL-compatible databases hosted in AWS Aurora, AWS RDS, or a local MySQL instance to TiDB Cloud using Data Migration.
 ---
 
-# Migrate MySQL-Compatible Databases to TiDB Cloud Using Migration Jobs
+# Migrate MySQL-Compatible Databases to TiDB Cloud Using Data Migration
 
-This document describes how to migrate data from a MySQL-compatible database on a cloud provider (AWS Aurora or AWS RDS) or on-premises to TiDB Cloud directly on the TiDB Cloud console using the Migration Jobs feature.
+This document describes how to migrate data from a MySQL-compatible database on a cloud provider (AWS Aurora or AWS RDS) or on-premises to TiDB Cloud directly on the TiDB Cloud console using the Data Migration feature.
 
 This feature allows you to migrate your application data and its ongoing changes to TiDB Cloud within a short downtime window within the same region or cross regions.
 
 ## Limitations
 
-- Currently, the Migration Jobs feature is still in public beta and each organization can create only one migration job. To use the feature, you need to [file a ticket](/tidb-cloud/tidb-cloud-support.md).
+- Currently, the Data Migration feature is still in public beta and each organization can create only one migration job. To use the feature, you need to [file a ticket](/tidb-cloud/tidb-cloud-support.md).
 
 - The system databases will be filtered out and will not be migrated to TiDB Cloud even if you select all of the databases to migrate, that is, `mysql`, `information_schema`, `information_schema`, and `sys`.
 
-- The Migration Jobs feature is only available to clusters created in the `us-west-2` region after November 9, 2022. If your cluster was created before the date or if your cluster is in another region, this feature is not available to your cluster and the **Data Migration** tab will not be displayed on the cluster overview page in the TiDB Cloud console.
+- The Data Migration feature is only available to clusters created in the `us-west-2` region after November 9, 2022. If your cluster was created before the date or if your cluster is in another region, this feature is not available to your cluster and the **Data Migration** tab will not be displayed on the cluster overview page in the TiDB Cloud console.
 
 - If the table to migrate already exists in the target database, TiDB Cloud appends the data to the target table directly. If the keys conflict, an error is reported.
 
@@ -29,7 +29,7 @@ Before performing the migration, you need to check the data sources, prepare pri
 
 ### Make sure your data source and version are supported
 
-The Migration Jobs feature supports the following data sources and versions:
+Data Migration supports the following data sources and versions:
 
 - MySQL 5.6, 5.7, and 8.0 local instances or on a public cloud provider. Note that MySQL 8.0 is still experimental and might have incompatibility issues.
 - AWS Aurora MySQL 5.6 and 5.7
@@ -77,7 +77,7 @@ To quickly test a migration job, you can use the `root` account of the TiDB Clou
 
 ### Set up network connection
 
-Before the migration job, set up the network connection according to different connection types. See [Connect to Your TiDB Cluster](/tidb-cloud/connect-to-tidb-cluster).
+Before creating a migration job, set up the network connection according to different connection types. See [Connect to Your TiDB Cluster](/tidb-cloud/connect-to-tidb-cluster).
 
 - If you use public IP for network connection, make sure that the upstream and downstream databases can be connected through the public network.
 
@@ -133,7 +133,7 @@ On the **Create Migration Job** page, configure the source and target connection
 
     > **Tip:**
     >
-    > - To migrate data to TiDB Cloud once and for all, choose both full data migration and incremental data migration, which ensures data consistency between the source and target databases. 
+    > - To migrate data to TiDB Cloud once and for all, choose both full data migration and incremental data migration, which ensures data consistency between the source and target databases.
     > - To migrate the existing data of the source database to TiDB Cloud, choose the full data migration checkbox.
 
 2. On the **Choose Objects to Migrate** page, select the objects to be migrated. You can click **All** to select all objects, or click **Customize** and then click the checkbox next to the object name to select the object.
