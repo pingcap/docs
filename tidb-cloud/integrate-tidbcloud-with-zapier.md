@@ -15,7 +15,7 @@ Use TiDB Cloud App on Zapier enables you:
 
 This guide will give a high-level introduction to TiDB Cloud App on Zapier and an example on how to use it.
 
-# Quick start with our template
+# Quick start with template
 
 In this section, we will use the preset template as an example to try out TiDB Cloud App on Zapier.
 
@@ -155,7 +155,7 @@ Actions
 - Find Row: Finds a row in a table via a lookup column.
 - Find Row (Custom Query): Finds a Row in a table via a custom query in your control.
 
-# TiDB Cloud App Template
+# TiDB Cloud App template
 
 We also provide some templates for you to use directly. Here are some examples, you can find all the templates in the [TiDB Cloud App](https://zapier.com/apps/tidb-cloud/integrations) page.
 
@@ -166,13 +166,15 @@ We also provide some templates for you to use directly. Here are some examples, 
 - Save Typeform form entries to a TiDB.
 - Store Twitter followers into TiDB and create Salesforce leads.
 
-# How to set TiDB Cloud account
+# FAQ 
+
+## How to set TiDB Cloud account
 
 TiDB Cloud account is not your TiDB Cloud login account. It is your TiDB Cloud API key.
 
 To get your TiDB Cloud API key, follow the [TiDB Cloud API documentation](https://docs.pingcap.com/tidbcloud/api/v1beta#section/Authentication/API-Key-Management).
 
-# How TiDB Cloud triggers de-duplication
+## How TiDB Cloud triggers de-duplication
 
 Zapier triggers can work with a polling API call to check for new data periodically (depends on Zapier plan).
 
@@ -182,7 +184,7 @@ Since we don’t want to trigger an action multiple times when an item in your A
 
 `New Cluster` and `New Table` can simply use the `cluster_id` and `table_id` as `id` field to do the deduplication. You need not do anything for them. Here I will introduce other triggers. 
 
-## New Row Trigger
+### New Row Trigger
 
 First, `New Row` trigger limits 10,000 results in every fetch. This will cause the new rows will not be triggered for they may not be included in this 10000 results.
 
@@ -196,7 +198,7 @@ Second, `New Row` will use a flexible strategy to generate the `id` filed to do 
 4. unique key if the table has a unique key.
 5. the first column of the table.
 
-## New Row (Custom Query) Trigger
+### New Row (Custom Query) Trigger
 
 `New Row (Custom Query)` trigger limits 1,000,000 results in every fetch. It is a large number, and we only set it to protect the whole system. So, Your query is desired to include order and limit.
 
@@ -204,7 +206,7 @@ As for deduplication, your query results must have a unique id field or you will
 
 Note that your custom query must run less than 30 seconds.
 
-# Resources required by TiDB Cloud actions
+## Resources required by TiDB Cloud actions
 
 Some additional resources are needed before some TiDB Cloud actions.
 
