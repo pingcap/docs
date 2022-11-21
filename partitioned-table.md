@@ -857,6 +857,7 @@ ALTER TABLE member_level REORGANIZE PARTITION l5_6 INTO
 ```
 
 Merge partitions:
+
 {{< copyable "sql" >}}
 
 ```sql
