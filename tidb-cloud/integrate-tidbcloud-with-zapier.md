@@ -159,12 +159,11 @@ Actions
 
 We also provide some templates for you to use directly. Here are some examples, you can find all the templates in the [TiDB Cloud App](https://zapier.com/apps/tidb-cloud/integrations) page.
 
-- Create Google Sheets rows from new TiDB rows.
-- Send emails via Gmail from a custom TiDB query.
-- Copy new TiDB rows from one TiDB to another.
-- Store new Salesforce contacts to a TiDB.
-- Save Typeform form entries to a TiDB.
-- Store Twitter followers into TiDB and create Salesforce leads.
+- [Duplicate new TiDB Cloud rows in Google Sheets](https://zapier.com/apps/google-sheets/integrations/tidb-cloud/1134881/duplicate-new-tidb-cloud-rows-in-google-sheets).
+- [Send emails via Gmail from new custom TiDB queries](https://zapier.com/apps/gmail/integrations/tidb-cloud/1134903/send-emails-via-gmail-from-new-custom-tidb-queries).
+- [Add rows to TiDB Cloud from newly caught webhooks](https://zapier.com/apps/tidb-cloud/integrations/webhook/1134955/add-rows-to-tidb-cloud-from-newly-caught-webhooks)
+- [Store new Salesforce contacts on TiDB rows](https://zapier.com/apps/salesforce/integrations/tidb-cloud/1134923/store-new-salesforce-contacts-on-tidb-rows).
+- [Create TiDB rows for new Gmail emails with resumes and send direct Slack notifications](https://zapier.com/apps/gmail/integrations/slack/1135456/create-tidb-rows-for-new-gmail-emails-with-resumes-and-send-direct-slack-notifications)
 
 # FAQ 
 
@@ -238,9 +237,9 @@ Most of the TiDB Cloud actions require additional resources you need prepare.
    - Find Row (Custom Query): Finds a Row in a table via a custom query in your control.
 
 
-## How to use `find and create` action
+## How to use `find or create` action
 
-`Find and create` action enables you create a resource when it is not exist. Here is an example:
+`Find or create` action enables you create a resource when it is not exist. Here is an example:
 
 1. Choose `Find Table` action
 
