@@ -161,7 +161,7 @@ Now, this zap will record all the global events on GitHub into TiDB Cloud automa
 
 # Trigger & Action
 
-[Trigger](https://help.zapier.com/hc/en-us/articles/8496181725453-Learn-key-concepts-in-Zapier#trigger-0-3) and [action](https://help.zapier.com/hc/en-us/articles/8496181725453-Learn-key-concepts-in-Zapier#action-0-6) are the key concepts in zapier.
+[Trigger and action](https://zapier.com/how-it-works) are the key concepts in zapier.
 
 TiDB Cloud App on zapier provides the following triggers and actions
 
