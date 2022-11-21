@@ -5,31 +5,29 @@ summary: Learn how to migrate data from MySQL-compatible databases hosted in AWS
 
 # Migrate MySQL-Compatible Databases to TiDB Cloud Using Migration Jobs
 
-This document describes how to use Migration Jobs (MJ) to migrate data from a MySQL-compatible database on a cloud provider (AWS Aurora or AWS RDS) or on-premises to TiDB Cloud.
+This document describes how to migrate data from a MySQL-compatible database on a cloud provider (AWS Aurora or AWS RDS) or on-premises to TiDB Cloud directly on the TiDB Cloud console using the Migration Jobs feature.
 
-TiDB Cloud provides the Migration Jobs feature. It supports full migration and incremental migration, allowing you to migrate your business to TiDB Cloud within a short downtime window.
-
-The Migration Jobs feature supports data migration within the same region and cross regions.
+This feature allows you to migrate your application data and its ongoing changes to TiDB Cloud within a short downtime window within the same region or cross regions.
 
 ## Limitations
 
 - Currently, the Migration Jobs feature is still in public beta and each organization can create only one migration job. To use the feature, you need to [file a ticket](/tidb-cloud/tidb-cloud-support.md).
 
-- The system databases will be filtered out and not be migrated to TiDB Cloud even if you select all of the databases to migrate, that is, `mysql`, `information_schema`, `information_schema` and `sys`.
+- The system databases will be filtered out and will not be migrated to TiDB Cloud even if you select all of the databases to migrate, that is, `mysql`, `information_schema`, `information_schema`, and `sys`.
 
-- The Migration Jobs feature is only available to clusters created in the `us-west-2` region after November 9, 2022. It means that the **Migration Job** tab will not be displayed in old clusters or clusters in other regions.
+- The Migration Jobs feature is only available to clusters created in the `us-west-2` region after November 9, 2022. If your cluster was created before the date or if your cluster is in another region, this feature is not available to your cluster and the **Data Migration** tab will not be displayed on the cluster overview page in the TiDB Cloud console.
 
 - If the table to migrate already exists in the target database, TiDB Cloud appends the data to the target table directly. If the keys conflict, an error is reported.
 
-- When you delete a cluster, all migration jobs in that cluster are automatically deleted, and the deleted migration jobs are not recoverable.
+- When you delete a cluster in TiDB Cloud, all migration jobs in that cluster are automatically deleted and not recoverable.
 
-- During incremental replication, if the migration job recovers from an error, it will enable safe mode. In this mode, the migration job applies the binlog which is up to 60 seconds before the breakpoint to the target database. But it changes `INSERT` to `REPLACE`, changes `UPDATE` to `DELETE` and `REPLACE`, and then applies these transactions to the downstream cluster to make sure all the data during the breakpoint has been migrated to the donwnstream cluster. When the table does not have primary keys or not-null unique indexes, it is possible that some data is duplicated due to being inserted repeatedly.
+- During incremental replication (migrating ongoing changes to your cluster), if the migration job recovers from an error, it will enable safe mode. In this mode, the migration job applies the binlog which is up to 60 seconds before the breakpoint to the target database. In this mode, `INSERT` statements are replicated as `REPLACE`, `UPDATE` statements as `DELETE` and `REPLACE`, and then these transactions are replicated to the downstream cluster to make sure all the data during the breakpoint has been migrated to the downstream cluster. When the table does not have primary keys or not-null unique indexes, some data might be duplicated because the data is inserted repeatedly.
 
 ## Prerequisites
 
 Before performing the migration, you need to check the data sources, prepare privileges for upstream and downstream databases, and set up network connection.
 
-### Supported data sources and versions
+### Make sure your data source and version are supported
 
 The Migration Jobs feature supports the following data sources and versions:
 
@@ -37,7 +35,7 @@ The Migration Jobs feature supports the following data sources and versions:
 - AWS Aurora MySQL 5.6 and 5.7
 - AWS RDS MySQL 5.7
 
-### Privileges for the upstream database
+### Grant required privileges to the upstream database
 
 The username for the upstream database must have all the following privileges:
 
@@ -48,13 +46,13 @@ The username for the upstream database must have all the following privileges:
 | `REPLICATION SLAVE` | Global |
 | `REPLICATION CLIENT` | Global |
 
-For example, you can execute the following `GRANT` statement to grant corresponding privileges:
+For example, you can use the following `GRANT` statement to grant corresponding privileges:
 
 ```sql
 GRANT SELECT,RELOAD,REPLICATION SLAVE,REPLICATION CLIENT,LOCK TABLES,PROCESS ON *.* TO 'your_user'@'your_IP_address_of_host'
 ```
 
-### Privileges for the downstream TiDB Cloud cluster
+### Grant required privileges to the downstream TiDB Cloud cluster
 
 The username you use for the downstream TiDB Cloud cluster must have the following privileges:
 
@@ -75,17 +73,19 @@ For example, you can execute the following `GRANT` statement to grant correspond
 GRANT CREATE,SELECT,INSERT,UPDATE,DELETE,ALTER,DROP,INDEX ON *.* TO 'your_user'@'your_IP_address_of_host'
 ```
 
-If you want to quickly migrate the data, you can use the `root` account of the TiDB Cloud cluster to test the migration job quickly.
+To quickly test a migration job, you can use the `root` account of the TiDB Cloud cluster.
 
 ### Set up network connection
 
-If you use Public IP as the connection type, you need to ensure that the upstream and downstream databases can be connected through the public network.
+Before the migration job, set up the network connection according to different connection types. See [Connect to Your TiDB Cluster](/tidb-cloud/connect-to-tidb-cluster).
 
-If you use VPC Peering, you need to set it up in advance. See [Add VPC peering requests](/tidb-cloud/set-up-vpc-peering-connections.md#step-1-add-vpc-peering-requests).
+- If you use public IP for network connection, make sure that the upstream and downstream databases can be connected through the public network.
 
-If you use Private Link, you need to set it up in advance. See [Set Up Private Endpoint Connections](/tidb-cloud/set-up-private-endpoint-connections.md).
+- If you use VPC Peering, set it up according to [Add VPC peering requests](/tidb-cloud/set-up-vpc-peering-connections.md#step-1-add-vpc-peering-requests).
 
-### Binlog
+If you use AWS PrivateLink, set it up according to [Set Up Private Endpoint Connections](/tidb-cloud/set-up-private-endpoint-connections.md).
+
+### Enable binlog
 
 If you perform incremental data migration, make sure you have enabled binlog, and the binlogs have been kept for more than 24 hours.
 
@@ -101,14 +101,14 @@ If you perform incremental data migration, make sure you have enabled binlog, an
 
 On the **Create Migration Job** page, configure the source and target connection.
 
-1. Input a job name. It must start with a letter, and can consist of letters (A-Z, a-z), numbers (0-9), underscores (_) and hyphens (-) with less than 60 characters.
+1. Enter a job name, which must start with a letter and must be less than 60 characters. Letters (A-Z, a-z), numbers (0-9), underscores (_), and hyphens (-) are acceptable.
 
 2. Fill in the source connection profile.
 
    - **Data source**: the data source type.
    - **Region**: the region of the data source, which is required for cloud databases only.
    - **Connectivity method**: the connectivity method for the data source. Currently, public IP, VPC Peering, or Private Private Link is supported.
-   - **Hostname or IP address** (for Public IP and VPC Peering): the hostname or IP address of the data source.
+   - **Hostname or IP address** (for public IP and VPC Peering): the hostname or IP address of the data source.
    - **Service Name** (for Private Link): the endpoint service name.
    - **Port**: the port of the data source.
    - **Username**: the username of the data source.
@@ -129,11 +129,16 @@ On the **Create Migration Job** page, configure the source and target connection
 
 ## Step 3: Choose the objects to be migrated
 
-1. You can choose to perform full data migration, incremental data migration, or both. If you want to migrate data to TiDB Cloud and switch to TiDB Cloud from now on, it is recommended to select both full data migration and incremental data migration to ensure data consistency between the source and target databases. If you only select the full data migration checkbox, the migration job only migrates the existing data of the source database.
+1. Choose full data migration, incremental data migration, or both by choosing the checkboxes.
+
+    > **Tip:**
+    >
+    > - To migrate data to TiDB Cloud once and for all, choose both full data migration and incremental data migration, which ensures data consistency between the source and target databases. 
+    > - To migrate the existing data of the source database to TiDB Cloud, choose the full data migration checkbox.
 
 2. On the **Choose Objects to Migrate** page, select the objects to be migrated. You can click **All** to select all objects, or click **Customize** and then click the checkbox next to the object name to select the object.
 
-    - If you click **All**, the migration job will migrate the existing data and replicate ongoing changes made after the full migration from the whole source database instance to TiDB Cloud.
+    - If you click **All**, the migration job will migrate the existing data from the whole source database instance to TiDB Cloud and replicate ongoing changes after the full migration.
 
     ![Select All Objects](/media/tidb-cloud/migration-job-select-all.png)
 
@@ -141,7 +146,7 @@ On the **Create Migration Job** page, configure the source and target connection
 
     ![Select Databases](/media/tidb-cloud/migration-job-select-db.png)
 
-    - If you click **Customize** and select some tables below a dabaset name, the migration job only will migrate the existing data and replicate ongoing changes of the selected tables. It will not migrate the tables that will be created in the same database in future.
+    - If you click **Customize** and select some tables under a dataset name, the migration job only will migrate the existing data and replicate ongoing changes of the selected tables. Tables created afterwards in the same database will not be migrated.
 
     ![Select Tables](/media/tidb-cloud/migration-job-select-tables.png)
 
@@ -157,7 +162,7 @@ On the **Create Migration Job** page, configure the source and target connection
 
 On the **Precheck** page, you can view the precheck results. If the precheck fails, you need to operate according to **Failed** or **Warning** details, and then click **Check again** to recheck.
 
-If there are no failed check items, but only some warning items, you can evaluate the risk and ignore the warning items. If all warning items are ignored, the migration job will automatically go to the next step.
+If there are only some warning items, you can evaluate the risk and ignore the warning items. If all warning items are ignored, the migration job will automatically go on to the next step.
 
 For more information about precheck items, see [Migration Task Precheck](https://docs.pingcap.com/tidb/stable/dm-precheck).
 

@@ -101,11 +101,11 @@
     - [Naming Conventions for Data Import](/tidb-cloud/naming-conventions-for-data-import.md)
     - [Migrate MySQL-Compatible Databases to TiDB Cloud Using Migration Jobs](/tidb-cloud/migration-job.md)
     - [Migrate MySQL-Compatible Databases to TiDB Cloud](/tidb-cloud/migration-job.md)
-    - Migrate On-Premises MySQL-Compatible Databases to TiDB Cloud
+    - Migrate On-Premises MySQL-Compatible Databases
         - [Migrate from MySQL-Compatible Databases](/tidb-cloud/migrate-data-into-tidb.md)
         - [Migrate Incremental Data from MySQL-Compatible Databases](/tidb-cloud/migrate-incremental-data-from-mysql.md)
         - [Migrate and Merge MySQL Shards of Large Datasets](/tidb-cloud/migrate-sql-shards.md)
-    - Migrate from Public Cloud Storage to TiDB Cloud
+    - Migrate from Public Cloud Storage
         - [Migrate from Amazon Aurora MySQL in Bulk](/tidb-cloud/migrate-from-aurora-bulk-import.md)
         - [Import or Migrate from Amazon S3 or GCS to TiDB Cloud](/tidb-cloud/migrate-from-amazon-s3-or-gcs.md)
         - [Import CSV Files from Amazon S3 or GCS into TiDB Cloud](/tidb-cloud/import-csv-files.md)
