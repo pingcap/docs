@@ -152,9 +152,9 @@ On the **Create Migration Job** page, configure the source and target connection
 
     - If you click **Customize** and select some databases, and then select some tables in the **Selected Objects** area to move them back to the **Source Database** area, (for example the `username` table in the following screenshots), then the tables will be treated as in a blocklist. The migration job will migrate the existing data but filter out the filtered out tables (such as the `username` table in the screenshots), and will replicate ongoing changes of the selected databases to TiDB Cloud except the filtered out tables.
 
-    ![Select Databases and Deselect Some Tables](/media/tidb-cloud/migration-job-select-db-blacklist1.jpg)
+    ![Select Databases and Deselect Some Tables](/media/tidb-cloud/migration-job-select-db-blacklist1.png)
 
-    ![Select Databases and Deselect Some Tables](/media/tidb-cloud/migration-job-select-db-blacklist2.jpg)
+    ![Select Databases and Deselect Some Tables](/media/tidb-cloud/migration-job-select-db-blacklist2.png)
 
 3. Click **Next**.
 
