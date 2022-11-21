@@ -801,7 +801,7 @@ ALTER TABLE members DROP PARTITION p1990;
 ALTER TABLE member_level DROP PARTITION l5;
 ```
 
-#### TRUNCATE Partition
+#### Truncate partitions
 
 {{< copyable "sql" >}}
 
