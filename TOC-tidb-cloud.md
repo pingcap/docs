@@ -99,8 +99,7 @@
     - [Overview](/tidb-cloud/tidb-cloud-migration-overview.md)
     - [Configure Amazon S3 Access and GCS Access](/tidb-cloud/config-s3-and-gcs-access.md)
     - [Naming Conventions for Data Import](/tidb-cloud/naming-conventions-for-data-import.md)
-    - [Migrate MySQL-Compatible Databases to TiDB Cloud Using Migration Jobs](/tidb-cloud/migration-job.md)
-    - [Migrate MySQL-Compatible Databases to TiDB Cloud](/tidb-cloud/migration-job.md)
+    - [Migrate from MySQL-Compatible Databases Using Migration Jobs](/tidb-cloud/migration-job.md)
     - Migrate On-Premises MySQL-Compatible Databases
         - [Migrate from MySQL-Compatible Databases](/tidb-cloud/migrate-data-into-tidb.md)
         - [Migrate Incremental Data from MySQL-Compatible Databases](/tidb-cloud/migrate-incremental-data-from-mysql.md)
