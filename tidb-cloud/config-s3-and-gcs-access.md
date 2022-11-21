@@ -147,11 +147,13 @@ To allow TiDB Cloud to access the source data in your GCS bucket, you need to co
     >
     > To remove the access to TiDB Cloud, you can simply remove the access that you have granted.
 
-6. On the **Bucket details** page, click the **OBJECTS** tab. If you want to copy a file's gsutil URI, select the file, click **Open object overflow menu**, and then click **Copy gsutil URI**, as shown in the screenshot below.
+6. On the **Bucket details** page, click the **OBJECTS** tab.
+
+    If you want to copy a file's gsutil URI, select the file, click **Open object overflow menu**, and then click **Copy gsutil URI**.
 
     ![Get bucket URI](/media/tidb-cloud/gcp-bucket-uri01.png)
 
-    If you want to use a folder's gsutil URI, open the folder, and then click the copy button following the folder name to copy the folder name, as shown in the screenshot below. After that, you must add `gs://` to the beginning and `/` to the end of the name to get a correct URI of the folder.
+    If you want to use a folder's gsutil URI, open the folder, and then click the copy button following the folder name to copy the folder name. After that, you need to add `gs://` to the beginning and `/` to the end of the name to get a correct URI of the folder.
 
     For example, if the folder name is `tidb-cloud-source-data`, you need to use `gs://tidb-cloud-source-data/` as the URI.
 
