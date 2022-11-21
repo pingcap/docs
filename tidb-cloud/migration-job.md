@@ -17,7 +17,7 @@ The Migration Jobs feature supports data migration within the same region and cr
 
 - The system databases will be filtered out and not be migrated to TiDB Cloud even if you select all of the databases to migrate, that is, `mysql`, `information_schema`, `information_schema` and `sys`.
 
-- Currently the migration job feature is only deployed on the us-west-2 region and the EKS provider, which means that the **Migration Job** tab will not be displayed in old clusters created on AWS.
+- Currently the migration job feature is only deployed on the us-west-2 region, which means that the **Migration Job** tab will not be displayed in old clusters created on AWS.
 
 - If the table to migrate already exists in the target database, TiDB Cloud appends the data to the target table directly. If the keys conflict, an error is reported.
 
