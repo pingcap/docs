@@ -17,15 +17,13 @@ The Migration Jobs feature supports data migration within the same region and cr
 
 - The system databases will be filtered out and not be migrated to TiDB Cloud even if you select all of the databases to migrate, that is, `mysql`, `information_schema`, `information_schema` and `sys`.
 
-- Currently the migration job feature is only deployed on the us-west-2 region, which means that the **Migration Job** tab will not be displayed in old clusters created on AWS.
+- The Migration Jobs feature is only available to clusters created in the `us-west-2` region after November 9, 2022. It means that the **Migration Job** tab will not be displayed in old clusters or clusters in other regions.
 
 - If the table to migrate already exists in the target database, TiDB Cloud appends the data to the target table directly. If the keys conflict, an error is reported.
 
 - When you delete a cluster, all migration jobs in that cluster are automatically deleted, and the deleted migration jobs are not recoverable.
 
 - During incremental replication, if the migration job recovers from an error, it will enable safe mode. In this mode, the migration job applies the binlog which is up to 60 seconds before the breakpoint to the target database. But it changes `INSERT` to `REPLACE`, changes `UPDATE` to `DELETE` and `REPLACE`, and then applies these transactions to the downstream cluster to make sure all the data during the breakpoint has been migrated to the donwnstream cluster. When the table does not have primary keys or not-null unique indexes, it is possible that some data is duplicated due to being inserted repeatedly.
-
-- The Migration Jobs feature is only available to clusters created in the `us-west-2` region after November 9, 2022.
 
 ## Prerequisites
 
