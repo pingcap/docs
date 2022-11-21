@@ -170,7 +170,7 @@ If all check items show **Pass**, click **Next**.
 
 ## Step 5: Choose a spec and start migration
 
-On the **Choose a Spec and Start Migration** page, select the migration spec. During the public beta, the free migration job is limited to 3 TCUs.
+On the **Choose a Spec and Start Migration** page, select the migration spec. During the public beta, the free migration job is limited to 4 RCUs (Replication Capacity Unit).
 
 After selecting the spec, click **Create Job and Start** to start the migration.
 
