@@ -35,14 +35,14 @@ TiDB version: 5.3.4
 
     - (dup) Fix wrong results of `GREATEST` and `LEAST` when passing in unsigned `BIGINT` arguments [#30101](https://github.com/pingcap/tidb/issues/30101)
     - (dup) Fix the issue that the result of `concat(ifnull(time(3))` in TiDB is different from that in MySQL [#29498](https://github.com/pingcap/tidb/issues/29498)
-    - Fix the issue that avg() returns error `ERROR 1105 (HY000): other error for mpp stream: Could not convert to the target type - -value is out of range.` when quering from TiFlash [#29952](https://github.com/pingcap/tidb/issues/29952)
+    - Fix the issue that avg() returns error `ERROR 1105 (HY000): other error for mpp stream: Could not convert to the target type - -value is out of range.` when querying from TiFlash [#29952](https://github.com/pingcap/tidb/issues/29952)
     - Fix the issue that sql returns `ERROR 1105 (HY000): close of nil channel` when using HashJoinExec [#30289](https://github.com/pingcap/tidb/issues/30289)
     - Fix the different return type of date_add and date_sub between TiDB and MySQL. Change date_add and date_sub string_(int/string/real/decimal) function return type to string [#27573](https://github.com/pingcap/tidb/issues/27573)
     - Fix the problem that tikv and tiflash return different results when query logical operations [#37258](https://github.com/pingcap/tidb/issues/37258)
 
     <!--transaction owner: @cfzjywxk-->
 
-    - Fix the issue explain analyze with DML executors may respond to the client before the transaction commit has finished [#37373](https://github.com/pingcap/tidb/issues/37373)
+    - (dup) Fix the issue explain analyze with DML executors may respond to the client before the transaction commit has finished [#37373](https://github.com/pingcap/tidb/issues/37373)
     - Fix the issue that the region cache after merging many regions is not cleared properly [#37174](https://github.com/pingcap/tidb/issues/37174)
 
     <!--planner owner: @qw4990-->
