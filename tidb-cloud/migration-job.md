@@ -124,7 +124,7 @@ On the **Create Migration Job** page, configure the source and target connection
 
 5. Take action according to the message you see:
 
-    - If you use Public IP or  VPC Peering, you are prompted to add Data Migration service's IP addresses to the IP Access List of your source database and firewall (if any) to allow the Data Migration service to access your source database.
+    - If you use Public IP or  VPC Peering, you need to add the Data Migration service's IP addresses to the IP Access List of your source database and firewall (if any).
     - If you use Private Link, you are prompted to accept the endpoint request in your account.
 
 ## Step 3: Choose the objects to be migrated
