@@ -178,4 +178,8 @@ After selecting the spec, click **Create Job and Start** to start the migration.
 
 After the migration job is created, you can view the migration progress on the **Migration Job Details** page. The migration progress is displayed in the **Stage and Status** area.
 
-You can pause or delete a migration job when it is running. You can delete a migration job in any status.
+You can pause or delete a migration job when it is running.
+
+If a migration job has failed, you can restart it after solving the problem.
+
+You can delete a migration job in any status.
