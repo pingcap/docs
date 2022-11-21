@@ -7,11 +7,13 @@ summary: Learn about the limitations of TiDB Cloud Serverless Tier.
 
 <!-- markdownlint-disable MD026 -->
 
-Serverless Tier has some limitations below. We are also constantly filling in the feature gaps between Serverless Tier and Dedicated Tier. If you require these features or capabilities, please use [Dedicated Tier](/tidb-cloud/select-cluster-tier.md#dedicated-tier) or [contact us](https://www.pingcap.com/contact-us/?from=en) for a feature request.
+This document describes the limitations of Serverless Tier. 
 
-## General Limitations
+We are constantly filling in the feature gaps between Serverless Tier and Dedicated Tier. If you require these features or capabilities in the gap, use [Dedicated Tier](/tidb-cloud/select-cluster-tier.md#dedicated-tier) or [contact us](https://www.pingcap.com/contact-us/?from=en) for a feature request.
 
-- For each TiDB Cloud account, you can create one complimentary Serverless Tier cluster to use during the beta phase. You need to delete the existing Serverless Tier cluster then create a new one. 
+## General limitations
+
+- For each TiDB Cloud account, you can create one complimentary Serverless Tier cluster during the beta phase. To create a new Serverless Tier cluster, you need to delete the existing one first.
 - Each Serverless Tier cluster has the following limitations:
     - The storage size is limited to 5 GiB (logical size) of OLTP storage and 5 GiB (logical size) of OLAP storage.
     - The compute resource is limited to 1 vCPU and 1 GiB RAM.
@@ -24,7 +26,7 @@ Serverless Tier has some limitations below. We are also constantly filling in th
 
 ## Backup and Restore
 
-- [Backup and Restore](/tidb-cloud/backup-and-restore.md) are not supported currently.
+- [Backup and Restore](/tidb-cloud/backup-and-restore.md) are not supported for Serverless Tier currently.
 
 ## Monitoring
 
@@ -33,4 +35,4 @@ Serverless Tier has some limitations below. We are also constantly filling in th
 
 ## Others
 
-- [Open API](/tidb-cloud/api-overview.md) and [Terraform Integration](/tidb-cloud/terraform-tidbcloud-provider-overview.md) are currently not available.
+- [Open API](/tidb-cloud/api-overview.md) and [Terraform Integration](/tidb-cloud/terraform-tidbcloud-provider-overview.md) are currently not available for Serverless Tier.

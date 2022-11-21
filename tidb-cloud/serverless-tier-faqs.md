@@ -25,7 +25,7 @@ Yes. Serverless Tier is free to use during the beta phase. In the coming months,
 
 ### What does it mean for beta release?
 
-Serverless Tier is in beta while we continue to add new features and improve existing features before it becomes generally available. We do not provide SLA for beta products, therefore it should **not** be used in production.
+Serverless Tier is in beta while we continuously add new features and improve existing features before it becomes generally available. We do not provide SLA for beta products. Therefore, Serverless Tier should **NOT** be used in production currently.
 
 ### What are the limitations of a Serverless Tier cluster when in free beta?
 
@@ -42,13 +42,13 @@ You can use your Serverless Tier cluster for non-production workloads such as pr
 
 ### I created a Developer Tier cluster before Serverless Tier was available. Can I still use my cluster?
 
-  Yes, your free cluster will be automatically migrated to the Serverless Tier soon. Your ability to use your cluster should not be affected and will have the same improved Serverless Tier user experiences.
+Yes, your free Developer Tier cluster will be automatically migrated to the Serverless Tier cluster soon. Your ability to use your cluster should not be affected, and you will have the same improved Serverless Tier user experiences.
 
 ## Security FAQs
 
 ### Is my Serverless Tier shared or dedicated?
 
-The serverless technology is designed for multi-tenancy and the resources used by all clusters are shared. Upgrade to Dedicated Tier for managed TiDB service with isolated infrastructure and resources.
+The serverless technology is designed for multi-tenancy and the resources used by all clusters are shared. To get managed TiDB service with isolated infrastructure and resources, you can upgrade it to the Dedicated Tier.
 
 ### How does TiDB Serverless Tier ensure security?
 
@@ -57,6 +57,6 @@ The serverless technology is designed for multi-tenancy and the resources used b
 
 ## Maintenance FAQ
 
-### Can I upgrade the version of TiDB my cluster is running on?
+### Can I upgrade the version of TiDB that my cluster is running on?
 
-No, Serverless Tier clusters are upgraded automatically as we release the new TiDB version on TiDB Cloud. You can see what version of TiDB your cluster is running in the [TiDB Cloud Console](https://tidbcloud.com/console/clusters) or in the latest [release note](https://docs.pingcap.com/tidbcloud/release-notes). Alternatively, you can also connect to your cluster and use `SELECT version()` or `SELECT tidb_version()` to find the TiDB version.
+No, Serverless Tier clusters are upgraded automatically as we release new TiDB versions on TiDB Cloud. You can see what version of TiDB your cluster is running in the [TiDB Cloud Console](https://tidbcloud.com/console/clusters) or in the latest [release note](https://docs.pingcap.com/tidbcloud/release-notes). Alternatively, you can also connect to your cluster and use `SELECT version()` or `SELECT tidb_version()` to check the TiDB version.
