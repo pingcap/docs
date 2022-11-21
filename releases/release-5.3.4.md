@@ -90,7 +90,8 @@ TiDB version: 5.3.4
 
     <!--transaction owner: @cfzjywxk-->
     
-    - Fix the issue explain analyze with DML executors may respond to the client before the transaction commit has finished. [#37373](https://github.com/pingcap/tidb/issues/37373)
+    - Fix the issue explain analyze with DML executors may respond to the client before the transaction commit has finished [#37373](https://github.com/pingcap/tidb/issues/37373)
+    - Fix the issue that the region cache after merging many regions is not cleared properly [#37174](https://github.com/pingcap/tidb/issues/37174)
 
     <!--planner owner: @qw4990-->
 
@@ -114,12 +115,11 @@ TiDB version: 5.3.4
 
     <!--compute owner: @zanmato1984-->
 
-    - fix: the results of tikv and tiflash are different [#5849](https://github.com/pingcap/tiflash/issues/5849)
-    - fix inconsistent result before deleting some rows [#6127](https://github.com/pingcap/tiflash/issues/6127)
+    - Fix the issue that logical operators return wrong results when the argument type is UInt8  [#6127](https://github.com/pingcap/tiflash/issues/6127)
 
     <!--storage owner: @flowbehappy-->
 
-    - Fix an invalid default value cause bootstrap failed [#3157](https://github.com/pingcap/tiflash/issues/3157)
+    - Fix the issue that TiFlash crash due to using `0.0` as the integer's default value. E.g. `i` int(11) NOT NULL DEFAULT '0.0' [#3157](https://github.com/pingcap/tiflash/issues/3157)
 + Tools
 
     + Backup & Restore (BR)
@@ -130,11 +130,12 @@ TiDB version: 5.3.4
 
     <!--owner: @niubell-->
 
+    - Fix the issue that dumpling can't dump with `--compress` option and s3 output directory [#30534](https://github.com/pingcap/tidb/issues/30534)
     + TiCDC
 
     <!--owner: @nongfushanquan-->
 
-      - use white list for retryable error [#6698](https://github.com/pingcap/tiflow/issues/6698)
+      - Fix a issue that causes MySQL related error not reported to owner in time [#6698](https://github.com/pingcap/tiflow/issues/6698)
 
     + TiDB Binlog
 
