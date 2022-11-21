@@ -7,15 +7,9 @@ summary: Learn an overview of data migration scenarios and the solutions for TiD
 
 You can migrate data from a wide variety of data sources to TiDB Cloud. This document gives an overview of the data migration scenarios.
 
-## Migrate MySQL-Compatible Databases Using Migration Jobs
-
-You can migrate data from a MySQL-compatible database on a cloud provider (AWS Aurora or AWS RDS) or on-premises to TiDB Cloud directly on the TiDB Cloud console using the Migration Jobs feature.
-
-For more information, see [Migrate MySQL-Compatible Databases to TiDB Cloud Using Migration Jobs](/tidb-cloud/migration-job.md).
-
 ## Migrate On-Premises MySQL-Compatible Databases
 
-TiDB is highly compatible with MySQL. You can migrate data from any MySQL-compatible databases to TiDB Cloud smoothly, whether the data is from a self-hosted MySQL instance or RDS service provided by the public cloud. For more information, see [Migrate Data from MySQL-Compatible Databases](/tidb-cloud/migrate-data-into-tidb.md).
+TiDB is highly compatible with MySQL. You can migrate data from any MySQL-compatible databases to TiDB Cloud smoothly, whether the data is from a self-hosted MySQL instance or RDS service provided by the public cloud. For more information, [Migrate MySQL-Compatible Databases to TiDB Cloud Using Migration Jobs](/tidb-cloud/migration-job.md).
 
 After full data migration, you can also perform incremental data migration from MySQL-compatible databases to TiDB Cloud. For more information, see [Migrate Incremental Data from MySQL-Compatible Databases](/tidb-cloud/migrate-incremental-data-from-mysql.md).
 
@@ -29,7 +23,7 @@ If your source data is stored in Amazon S3 or Google Cloud Storage (GCS) buckets
 
 ### Migrate MySQL-Compatible Databases to TiDB Cloud Using Migration Jobs
 
-TiDB Cloud provides the Migration Job feature, which supports full migration and incremental migration, allowing you to migrate your business from the upstream database to TiDB Cloud within a short downtime window. For more information, see [Migrate MySQL-Compatible Databases to TiDB Cloud Using Migration Jobs](/tidb-cloud/migration-job.md).
+TiDB Cloud provides the Migration Jobs feature, which supports full migration and incremental migration, allowing you to migrate your business from the upstream database to TiDB Cloud within a short downtime window. For more information, see [Migrate MySQL-Compatible Databases to TiDB Cloud Using Migration Jobs](/tidb-cloud/migration-job.md).
 
 ### Migrate from Amazon Aurora MySQL to TiDB Cloud in bulk
 
