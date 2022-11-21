@@ -16,7 +16,7 @@ summary: Learn how to connect TiDB Cloud to 5000+ Apps with zapier.
 - [How to set TiDB Cloud account](#how-to-set-tidb-cloud-account)
 - [How TiDB Cloud triggers de-duplication](#how-tidb-cloud-triggers-de-duplication)
    + [New Row Trigger](#new-row-trigger)
-   + [New Row (Custom Query) Trigger](#new-row--custom-query--trigger)
+   + [New Row (Custom Query) Trigger](#new-row-custom-query-trigger)
 - [Resources required by TiDB Cloud actions](#resources-required-by-tidb-cloud-actions)
 
 # Integrate TiDB Cloud with zapier
@@ -161,7 +161,7 @@ Now, this zap will record all the global events on GitHub into TiDB Cloud automa
 
 # Trigger & Action
 
-[Trigger and action](https://help.zapier.com/hc/en-us/articles/8496181725453-Learn-key-concepts-in-Zapier) are the key concepts in zapier.
+[Trigger](https://help.zapier.com/hc/en-us/articles/8496181725453-Learn-key-concepts-in-Zapier#trigger-0-3) and [action](https://help.zapier.com/hc/en-us/articles/8496181725453-Learn-key-concepts-in-Zapier#action-0-6) are the key concepts in zapier.
 
 TiDB Cloud App on zapier provides the following triggers and actions
 
