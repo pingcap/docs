@@ -21,7 +21,7 @@ Get started with the 5-minute [TiDB Cloud Quick Start](/tidb-cloud/tidb-cloud-qu
 
 ### Is Serverless Tier free during beta?
 
-Yes. Serverless Tier cluster is free to use during beta phase. When Serverless Tier goes GA, we will still offer a free starter plan and have a usage-based billing plan for additional resources and maintain higher performance.
+Yes. Serverless Tier is free to use during the beta phase. In the coming months, we intend to offer a usage-based billing plan for additional resources and higher performance, while still keeping offering the free starter plan.
 
 ### What does it mean for beta release?
 
@@ -33,7 +33,7 @@ Serverless Tier is in beta while we continue to add new features and improve exi
 - Each Serverless Tier cluster has the following limitations:
     - The storage size is limited to 5 GiB (logical size) of OLTP storage and 5 GiB of OLAP storage.
     - The compute resource is limited to 1 vCPU and 1 GiB RAM.
-    - **Note**: In the coming months, TiDB Cloud Serverless intends to offer auto-scaling if you pay more and still keep offering free tier. After the coming releases, the limitation of the free serverless tier may be changed.
+    - **Note**: In the coming months, we intend to offer a usage-based billing plan for additional resources and higher performance, while still keeping offering the free starter plan. After the coming releases, the limitation of the free serverless tier may be changed.
 - There are some features that Serverless Tier does not support or partially supports. See [Serverless Tier Limitations](/tidb-cloud/serverless-tier-limitations.md) for details.
 
 ### What Serverless Tier can be used for?

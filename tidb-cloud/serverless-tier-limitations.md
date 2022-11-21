@@ -15,7 +15,7 @@ Serverless Tier has some limitations below. We are also constantly filling in th
 - Each Serverless Tier cluster has the following limitations:
     - The storage size is limited to 5 GiB (logical size) of OLTP storage and 5 GiB (logical size) of OLAP storage.
     - The compute resource is limited to 1 vCPU and 1 GiB RAM.
-    - **Note**: In the coming months, TiDB Cloud Serverless intends to offer auto-scaling if you pay more and still keep offering free tier. After the coming releases, the limitation of the free serverless tier may be changed.
+    - **Note**: In the coming months, we intend to offer a usage-based billing plan for additional resources and higher performance, while still keeping offering the free starter plan. After the coming releases, the limitation of the free serverless tier may be changed.
 
 ## Connection
 
