@@ -43,33 +43,23 @@ In the editor page, you can see the trigger and action. Click the trigger to set
 
    You needn't do anything here, just keep the default value set by template. Click `Continue` to enter the next step.
 
-   ![img.png](/media/tidb-cloud/zapier/github_event.png)
-
 2. Choose account
 
    Connect to your GitHub account in `Choose account` page. You can create a new account or use an existing one. Then click `Continue` to enter the next step.
- 
-   ![img.png](/media/tidb-cloud/zapier/github_account.png)
 
 3. Set up trigger
 
    The template has done all the things for you in this step. Just click `Continue` to enter the next step.
 
-   ![img.png](/media/tidb-cloud/zapier/github_setup.png)
-
 4. Test trigger
 
-   Click `Test trigger`. If you see the following page, it means you have successfully set up the trigger.
-
-   ![img.png](/media/tidb-cloud/zapier/github_test_success.png)
+   Click `Test trigger`. It will show the data from GitHub global event if nothing get wrong.
 
 ## Step 3: Set up the `Find Table in TiDB Cloud` action
 
 1. Choose app & event
 
    Keep the default value set by template. Click `Continue` to enter the next step.
-
-   ![img.png](/media/tidb-cloud/zapier/tidbcloud_event.png)
 
 2. Choose account
 
@@ -80,8 +70,6 @@ In the editor page, you can see the trigger and action. Click the trigger to set
 3. Set up action
 
    In this step, you need to find a table in your TiDB Cloud cluster. And create a new one if it is not exist.
-
-   ![img.png](/media/tidb-cloud/zapier/tidb_findable_action.png)
 
    Choose the project and cluster from drop-down list. Then you will see the connection information of the cluster.
 
@@ -109,15 +97,13 @@ In the editor page, you can see the trigger and action. Click the trigger to set
 
    You can select the account you have created before. Click `Continue` to enter the next step.
 
-   ![img.png](/media/tidb-cloud/zapier/tidbcloud_choose_account.png)
-
 3. Set up action
 
    Fill in the `Project Name`, `Cluster Name`, `TiDB password` and `Database Name` just like what you have done in the previous step. Then choose the `github_global_event` table from drop-down list , and you will find the columns of the table will be shown.
 
    ![img.png](/media/tidb-cloud/zapier/tidbcloud_column.png)
 
-   Then click the text area and you will find that you can choose the data from the trigger. Fill in all the columns with trigger's data. Then click `Continue` to enter the next step.
+   Then click the text area, and you will find that you can choose the data from the trigger. Fill in all the columns with trigger's data. Then click `Continue` to enter the next step.
 
    ![img.png](/media/tidb-cloud/zapier/tidbcloud_triggers_data.png)
 
@@ -238,13 +224,11 @@ Actions need an existing table (including the schema) in TiDB cluster
 - Find Row: Finds a row in a table via a lookup column.
 - Find Row (Custom Query): Finds a Row in a table via a custom query in your control.
 
-You can avoid creating these resources outside the zapier by adding a `find and create` actions. Here is an example:
+You can avoid creating these resources outside the zapier by adding a `find and create` actions. Here is an example to create table if it is not exist:
 
 1. Choose `Find Table` action
 
-   ![img.png](/media/tidb-cloud/zapier/find-table-event.png)
-
-2. Click `Create TiDB Cloud Table if it doesn’t exist yet?` button to enable `find and create` in `set up action`
+2. Click `Create TiDB Cloud Table if it doesn’t exist yet?` button to enable `find and create` in `set up action` step
 
    ![img.png](/media/tidb-cloud/zapier/find-and-create.png)
 
