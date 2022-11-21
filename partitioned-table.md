@@ -858,7 +858,8 @@ ALTER TABLE members REORGANIZE PARTITION pBefore1950,p1950 INTO (PARTITION pBefo
 ALTER TABLE member_level REORGANIZE PARTITION l1,l2 INTO (PARTITION l1_2 VALUES IN (1,2));
 ```
 
-Change the whole partitioning scheme:
+Change the partitioning scheme definition:
+
 {{< copyable "sql" >}}
 
 ```sql
