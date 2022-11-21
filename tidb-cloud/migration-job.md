@@ -13,7 +13,7 @@ The Migration Jobs feature supports data migration within the same region and cr
 
 ## Limitations
 
-- Currently, the migration job feature is still in public beta and each organization can create only one migration job. To use the feature, you need to [file a ticket](/tidb-cloud/tidb-cloud-support.md).
+- Currently, the Migration Jobs feature is still in public beta and each organization can create only one migration job. To use the feature, you need to [file a ticket](/tidb-cloud/tidb-cloud-support.md).
 
 - The system databases will be filtered out and not be migrated to TiDB Cloud even if you select all of the databases to migrate, that is, `mysql`, `information_schema`, `information_schema` and `sys`.
 
