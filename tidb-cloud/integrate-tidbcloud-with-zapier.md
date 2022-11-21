@@ -3,22 +3,6 @@ title: Integrate TiDB Cloud with Zapier
 summary: Learn how to connect TiDB Cloud to 5000+ Apps with zapier.
 ---
 
-- [Integrate TiDB Cloud with zapier](#integrate-tidb-cloud-with-zapier)
-- [Before you start](#before-you-start)
-- [Quick start with our template](#quick-start-with-our-template)
-   + [Prepare](#prepare)
-   + [Step 1: Get the template](#step-1-get-the-template)
-   + [Step 2: Set up the trigger](#step-2-set-up-the-trigger)
-   + [Step 3: Set up the `Find Table in TiDB Cloud` action](#step-3-set-up-the-find-table-in-tidb-cloud-action)
-   + [Step 4: Set up the `Create Row in TiDB Cloud` action](#step-4-set-up-the-create-row-in-tidb-cloud-action)
-   + [Step 5: Publish your zap](#step-5-publish-your-zap)
-- [Trigger & Action](#trigger--action)
-- [How to set TiDB Cloud account](#how-to-set-tidb-cloud-account)
-- [How TiDB Cloud triggers de-duplication](#how-tidb-cloud-triggers-de-duplication)
-   + [New Row Trigger](#new-row-trigger)
-   + [New Row (Custom Query) Trigger](#new-row-custom-query-trigger)
-- [Resources required by TiDB Cloud actions](#resources-required-by-tidb-cloud-actions)
-
 # Integrate TiDB Cloud with zapier
 
 [Zapier](https://zapier.com/app/dashboard) is an automation tool that lets you easily create workflows that involve common apps and services.
@@ -38,20 +22,20 @@ Make sure you have met the following requires
 
 In this section, we will use the preset template to try out TiDB Cloud App on zapier.
 
-### Prepare
+## Prepare
 
 Before you start, you need:
 
 - A [GitHub account](https://github.com/login)
 - A Serverless Tier on TiDB Cloud, See [TiDB Cloud Quick Start](https://docs.pingcap.com/tidbcloud/tidb-cloud-quickstart#step-1-create-a-tidb-cluster) for more details
 
-### Step 1: Get the template
+## Step 1: Get the template
 
 Go to [TiDB Cloud App on zapier](https://zapier.com/apps/tidb-cloud/integrations) to choose a template and click `Try it`. Then you will enter the editor page. 
 
 Here we use `Add Github global event into TiDB without custom schema` template as an example. It will add a new row into TiDB Cloud cluster when a new global event is created on GitHub.
 
-### Step 2: Set up the trigger
+## Step 2: Set up the trigger
 
 In the editor page, you can see the trigger and action. Click the trigger to set up the trigger.
     
@@ -79,7 +63,7 @@ In the editor page, you can see the trigger and action. Click the trigger to set
 
    ![img.png](/media/tidb-cloud/zapier/github_test_success.png)
 
-### Step 3: Set up the `Find Table in TiDB Cloud` action
+## Step 3: Set up the `Find Table in TiDB Cloud` action
 
 1. Choose app & event
 
@@ -115,7 +99,7 @@ In the editor page, you can see the trigger and action. Click the trigger to set
 
    ![img.png](/media/tidb-cloud/zapier/tidbcloud_test_findtable.png)
 
-### Step 4: Set up the `Create Row in TiDB Cloud` action
+## Step 4: Set up the `Create Row in TiDB Cloud` action
 
 1. Choose app & event
 
@@ -151,7 +135,7 @@ In the editor page, you can see the trigger and action. Click the trigger to set
    1 row in set (0.17 sec)
    ```
 
-### Step 5: Publish your zap
+## Step 5: Publish your zap
 
 Click `Publish` to publish your zap. Then you can see the zap is running in the [home page](https://zapier.com/app/zaps).
 
@@ -191,7 +175,6 @@ TiDB Cloud account is not your TiDB Cloud login account. It is your TiDB Cloud A
 
 To get your TiDB Cloud API key, follow the [TiDB Cloud API documentation](https://docs.pingcap.com/tidbcloud/api/v1beta#section/Authentication/API-Key-Management).
 
-
 # How TiDB Cloud triggers de-duplication
 
 Zapier triggers can work with a polling API call to check for new data periodically (depends on zapier plan).
@@ -202,7 +185,7 @@ Since we don’t want to trigger an action multiple times when an item in your A
 
 `New Cluster` and `New Table` can simply use the `cluster_id` and `table_id` as `id` field to do the deduplication. You need not do anything for them. Here I will introduce other triggers. 
 
-### New Row Trigger
+## New Row Trigger
 
 First, `New Row` trigger limits 10,000 results in every fetch. This will cause the new rows will not be triggered for they may not be included in this 10000 results.
 
@@ -216,7 +199,7 @@ Second, `New Row` will use a flexible strategy to generate the `id` filed to do 
 4. unique key if the table has a unique key.
 5. the first column of the table.
 
-### New Row (Custom Query) Trigger
+## New Row (Custom Query) Trigger
 
 `New Row (Custom Query)` trigger limits 1,000,000 results in every fetch. It is a large number, and we only set it to protect the whole system. So, Your query is desired to include order and limit.
 
