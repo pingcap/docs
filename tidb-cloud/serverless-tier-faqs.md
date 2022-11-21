@@ -13,19 +13,11 @@ This document lists the most frequently asked questions about TiDB Cloud Serverl
 
 ### What is Serverless Tier?
 
-TiDB Cloud Serverless Tier delivers the free starter TiDB clusters with full HTAP capabilities for you and your organization. It is a fully managed, auto-scaling deployment of TiDB that lets you start using your database immediately, develop and run your application without caring about the underlying nodes, and automatically scale based on your application's workload changes.
+TiDB Cloud Serverless Tier offers the TiDB database with full HTAP capabilities for you and your organization. It is a fully managed, auto-scaling deployment of TiDB that lets you start using your database immediately, develop and run your application without caring about the underlying nodes, and automatically scale based on your application's workload changes.
 
 ### How do I get started with Serverless Tier?
 
 Get started with the 5-minute [TiDB Cloud Quick Start](/tidb-cloud/tidb-cloud-quickstart.md).
-
-### What are the limitations of a Serverless Tier cluster?
-
-- For each TiDB Cloud account, you can create one complimentary Serverless Tier cluster to use during the beta phase. You need to delete the existing Serverless Tier cluster then create a new one.
-- Each Serverless Tier cluster has the following limitations:
-    - The storage size is limited to 5 GiB (logical size) of OLTP storage and 5 GiB of OLAP storage.
-    - The compute resource is limited to 1 vCPU and 1 GiB RAM.
-- There are some features that Serverless Tier does not support or partially supports. See [Serverless Tier Limitations](/tidb-cloud/serverless-tier-limitations.md) for details.
 
 ### Is Serverless Tier free during beta?
 
@@ -34,6 +26,15 @@ Yes. Serverless Tier cluster is free to use during beta phase. When Serverless T
 ### What does it mean for beta release?
 
 Serverless Tier is in beta while we continue to add new features and improve existing features before it becomes generally available. We do not provide SLA for beta products, therefore it should **not** be used in production.
+
+### What are the limitations of a Serverless Tier cluster when in free beta?
+
+- For each TiDB Cloud account, you can create one complimentary Serverless Tier cluster to use during the beta phase. You need to delete the existing Serverless Tier cluster then create a new one.
+- Each Serverless Tier cluster has the following limitations:
+    - The storage size is limited to 5 GiB (logical size) of OLTP storage and 5 GiB of OLAP storage.
+    - The compute resource is limited to 1 vCPU and 1 GiB RAM.
+    - **Note**: In the coming months, TiDB Cloud Serverless intends to offer auto-scaling if you pay more and still keep offering free tier. After the coming releases, the limitation of the free serverless tier may be changed.
+- There are some features that Serverless Tier does not support or partially supports. See [Serverless Tier Limitations](/tidb-cloud/serverless-tier-limitations.md) for details.
 
 ### What Serverless Tier can be used for?
 
@@ -51,7 +52,7 @@ The serverless technology is designed for multi-tenancy and the resources used b
 
 ### How does TiDB Serverless Tier ensure security?
 
-- All traffic data(both internal and external) is encrypted by Transport Layer Security (TLS). For using TLS to connect to Serverless Tier, see [Secure Connections to Serverless Tier Clusters](/tidb-cloud/secure-connections-to-serverless-tier-clusters.md).
+- Your connections are encrypted by Transport Layer Security (TLS). For using TLS to connect to Serverless Tier, see [Secure Connections to Serverless Tier Clusters](/tidb-cloud/secure-connections-to-serverless-tier-clusters.md).
 - All persisted data on Serverless Tier is encrypted-at-rest using the cloud provider's tool that your cluster is running in.
 
 ## Maintenance FAQ

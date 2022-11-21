@@ -13,9 +13,9 @@ Serverless Tier has some limitations below. We are also constantly filling in th
 
 - For each TiDB Cloud account, you can create one complimentary Serverless Tier cluster to use during the beta phase. You need to delete the existing Serverless Tier cluster then create a new one. 
 - Each Serverless Tier cluster has the following limitations:
-    - The storage size is limited to 5GiB (logical size) of OLTP storage and 5GiB of OLAP storage.
-    - The compute resource is limited to 1 vCPU and 1GiB RAM.
-    - The data transfer is limited to a total of 20 GiB in and out per week. If the 20 GiB limit is reached, the network traffic will be throttled to 10 KB/s.
+    - The storage size is limited to 5 GiB (logical size) of OLTP storage and 5 GiB (logical size) of OLAP storage.
+    - The compute resource is limited to 1 vCPU and 1 GiB RAM.
+    - **Note**: In the coming months, TiDB Cloud Serverless intends to offer auto-scaling if you pay more and still keep offering free tier. After the coming releases, the limitation of the free serverless tier may be changed.
 
 ## Connection
 
