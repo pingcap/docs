@@ -29,7 +29,7 @@ Serverless Tier is in beta while we continuously add new features and improve ex
 
 ### What are the limitations of a Serverless Tier cluster when in free beta?
 
-- For each TiDB Cloud account, you can create one complimentary Serverless Tier cluster to use during the beta phase. You need to delete the existing Serverless Tier cluster then create a new one.
+- For each TiDB Cloud account, you can create one complimentary Serverless Tier cluster during the beta phase. To create a new Serverless Tier cluster, you need to delete the existing one first.
 - Each Serverless Tier cluster has the following limitations:
     - The storage size is limited to 5 GiB (logical size) of OLTP storage and 5 GiB of OLAP storage.
     - The compute resource is limited to 1 vCPU and 1 GiB RAM.
