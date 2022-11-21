@@ -1,5 +1,5 @@
 ---
-title: Integrate TiDB Cloud with Zapier
+title: Integrate TiDB Cloud with zapier
 summary: Learn how to connect TiDB Cloud to 5000+ Apps with zapier.
 ---
 
@@ -41,29 +41,29 @@ In the editor page, you can see the trigger and action. Click the trigger to set
     
 1. Choose app & event
 
-   You needn't do anything here, just keep the default value set by template. Click `Continue` to enter the next step.
+   You needn't do anything here, just keep the default value set by template. Click **Continue** to enter the next step.
 
 2. Choose account
 
-   Connect to your GitHub account in `Choose account` page. You can create a new account or use an existing one. Then click `Continue` to enter the next step.
+   Connect to your GitHub account in `Choose account` page. You can create a new account with **Sign in** button or use an existing one. Then click **Continue** to enter the next step.
 
 3. Set up trigger
 
-   The template has done all the things for you in this step. Just click `Continue` to enter the next step.
+   The template has done all the things for you in this step. Just click **Continue** to enter the next step.
 
 4. Test trigger
 
-   Click `Test trigger`. It will show the data from GitHub global event if nothing get wrong.
+   Click **Test trigger**. It will show the data from GitHub global event if nothing get wrong.
 
 ## Step 3: Set up the `Find Table in TiDB Cloud` action
 
 1. Choose app & event
 
-   Keep the default value set by template. Click `Continue` to enter the next step.
+   Keep the default value `Find Table` set by template. Click **Continue** to enter the next step.
 
 2. Choose account
 
-   You will be redirected to a new login page once you click the `sign in`. Fill in your `Public Key` and `Private Key`. To get API key, follow the [TiDB Cloud API documentation](https://docs.pingcap.com/tidbcloud/api/v1beta#section/Authentication/API-Key-Management). Click `Continue` after you finish.
+   You will be redirected to a new login page once you click the **Sign in**. Fill in your `Public Key` and `Private Key`. To get API key, follow the [TiDB Cloud API documentation](https://docs.pingcap.com/tidbcloud/api/v1beta#section/Authentication/API-Key-Management). Click `Continue` after you finish.
     
     ![img.png](/media/tidb-cloud/zapier/tidb_findtable_account.png)
 
@@ -79,11 +79,11 @@ In the editor page, you can see the trigger and action. Click the trigger to set
 
    ![img.png](/media/tidb-cloud/zapier/tibdcloud_databse.png)
 
-   The template has set the table name and the DDL which will be executed if the table is not exist. You just need to click `Continue` to enter the next step.
+   The template has set the table name and the DDL which will be executed if the table is not exist. You just need to click **Continue** to enter the next step.
 
 4. Test action
 
-   Click `Test action`, and you will create the table in this step. You can also skip the test and create table when this template is running.
+   Click **Test action**, and you will create the table in this step. You can also skip the test and create table when this template is running.
 
    ![img.png](/media/tidb-cloud/zapier/tidbcloud_test_findtable.png)
 
@@ -91,25 +91,25 @@ In the editor page, you can see the trigger and action. Click the trigger to set
 
 1. Choose app & event
 
-   Keep the default value set by template. Click `Continue` to enter the next step.
+   Keep the default value set by template. Click **Continue** to enter the next step.
 
 2. Choose account
 
-   You can select the account you have created before. Click `Continue` to enter the next step.
+   You can select the account you have created before. Click **Continue** to enter the next step.
 
 3. Set up action
 
-   Fill in the `Project Name`, `Cluster Name`, `TiDB password` and `Database Name` just like what you have done in the previous step. Then choose the `github_global_event` table from drop-down list , and you will find the columns of the table will be shown.
+   Fill in the `Project Name`, `Cluster Name`, `TiDB password` and `Database Name` just like what you have done in the previous step. Then choose the **github_global_event** table from drop-down list , and you will find the columns of the table will be shown.
 
    ![img.png](/media/tidb-cloud/zapier/tidbcloud_column.png)
 
-   Then click the text area, and you will find that you can choose the data from the trigger. Fill in all the columns with trigger's data. Then click `Continue` to enter the next step.
+   Then click the text area, and you will find that you can choose the data from the trigger. Fill in all the columns with trigger's data. Then click **Continue** to enter the next step.
 
    ![img.png](/media/tidb-cloud/zapier/tidbcloud_triggers_data.png)
 
 4. Test action
 
-    Click `Test action` to create a new row in the table. If you check the TiDB, you can find the data
+    Click **Test action** to create a new row in the table. If you check the TiDB, you can find the data
 
    ```
    mysql> select * from test.github_global_event;
@@ -123,7 +123,7 @@ In the editor page, you can see the trigger and action. Click the trigger to set
 
 ## Step 5: Publish your zap
 
-Click `Publish` to publish your zap. Then you can see the zap is running in the [home page](https://zapier.com/app/zaps).
+Click **Publish** to publish your zap. Then you can see the zap is running in the [home page](https://zapier.com/app/zaps).
 
 ![img.png](/media/tidb-cloud/zapier/tidbcloud_publish.png)
 
@@ -155,6 +155,17 @@ Actions
 - Find Row: Finds a row in a table via a lookup column.
 - Find Row (Custom Query): Finds a Row in a table via a custom query in your control.
 
+# TiDB Cloud App Template
+
+We provide some templates for you to use. Here are some examples, you can find all the templates in the [TiDB Cloud App](https://zapier.com/apps/tidb-cloud/integrations) page.
+
+- Create Google Sheets rows from new TiDB rows.
+- Send emails via Gmail from a custom TiDB query.
+- Copy new TiDB rows.
+- Store new Salesforce contacts on TiDB rows.
+- Save Typeform form entries to a TiDB.
+- Store Twitter followers into TiDB and create Salesforce leads.
+
 # How to set TiDB Cloud account
 
 TiDB Cloud account is not your TiDB Cloud login account. It is your TiDB Cloud API key.
@@ -165,7 +176,7 @@ To get your TiDB Cloud API key, follow the [TiDB Cloud API documentation](https:
 
 Zapier triggers can work with a polling API call to check for new data periodically (depends on zapier plan).
 
-TiDB Cloud triggers provide the polling API call which will return many results, most of which Zapier has seen before.
+TiDB Cloud triggers provide the polling API call which will return many results, most of which zapier has seen before.
 
 Since we don’t want to trigger an action multiple times when an item in your API exists in multiple distinct polls, we will deduplicate the data with the `id` field.
 
