@@ -873,7 +873,7 @@ ALTER TABLE member_level REORGANIZE PARTITION l1_2,l3,l4,l5,l6 INTO
  PARTITION lEven VALUES IN (2,4,6));
 ```
 
-Reorganize partition (including merging or splitting partitions) in the generic form changes a list of partitions into a new set of partition definitions. It cannot change the type of partitioning (LIST or RANGE [COLUMNS]). For RANGE [COLUMNS] partitioned tables, the list of partitions needs to be in a single range. One can only change the end of the range if it includes the last partition. If the end is changed and there exists rows that no longer fits, the DDL will fail with an error.
+Reorganizing partitions (including merging or splitting partitions) changes partitions into a new set of partition definitions. It cannot change the type of partitioning (LIST or RANGE [COLUMNS]). For RANGE [COLUMNS] partitioned tables, the list of partitions needs to be in a single range. You can only change the end of the range if it includes the last partition. If the end is changed and rows no longer fit, the DDL will fail with an error.
 
 Range partitions needs to be a single range:
 {{< copyable "sql" >}}
