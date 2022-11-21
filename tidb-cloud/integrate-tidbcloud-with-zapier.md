@@ -97,7 +97,7 @@ In the editor page, you can see the trigger and action. Click the trigger to set
 
    You can select the account you have created before. Click **Continue** to enter the next step.
 
-   ![img.png](/media/tidb-cloud/zapier/tidbcloud_choose_account.png)
+   ![img.png](/media/tidb-cloud/zapier/tidbcloud_project.png)
 
 4. Set up action
 
