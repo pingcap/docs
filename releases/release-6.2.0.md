@@ -2,13 +2,13 @@
 title: TiDB 6.2.0 Release Notes
 ---
 
-# TiDB v6.2.0 Release Notes
+# TiDB 6.2.0 Release Notes
 
 Release date: August 23, 2022
 
 TiDB version: 6.2.0-DMR
 
-Quick access: [Quick start](https://docs.pingcap.com/tidb/v6.2/quick-start-with-tidb) | [Installation packages](https://www.pingcap.com/download/)
+Quick access: [Quick start](https://docs.pingcap.com/tidb/v6.2/quick-start-with-tidb) | [Installation packages](https://www.pingcap.com/download/?version=v6.2.0#version-list)
 
 In v6.2.0-DMR, the key new features and improvements are as follows:
 
