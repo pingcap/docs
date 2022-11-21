@@ -8,61 +8,13 @@ Release date: xx, xx, 2022
 
 TiDB version: 5.3.4
 
-## Compatibility changes
-
 ## Improvements
-
-+ TiDB
-
-    <!--sql-infra owner: @Defined2014-->
-
-    <!--executor owner: @zanmato1984-->
-
-    <!--transaction owner: @cfzjywxk-->
-
-    <!--planner owner: @qw4990-->
 
 + TiKV
 
     <!--owner: @v01dstar-->
 
     - (dup) Reload TLS certificate automatically for each update to improve availability [#12546](https://github.com/tikv/tikv/issues/12546)
-
-+ PD
-
-    <!--owner: @nolouch-->
-
-+ TiFlash
-
-    <!--compute owner: @zanmato1984-->
-
-    <!--storage owner: @flowbehappy-->
-
-+ Tools
-
-    + Backup & Restore (BR)
-
-    <!--owner: @3pointer-->
-
-    + Dumpling
-
-    <!--owner: @niubell-->
-
-    + TiCDC
-
-    <!--owner: @nongfushanquan-->
-
-    + TiDB Binlog
-
-    <!--owner: @niubell-->
-
-    + TiDB Lightning
-
-    <!--owner: @niubell-->
-
-    + TiDB Data Migration (DM)
-
-    <!--owner: @niubell-->
 
 ## Bug fixes
 
@@ -89,7 +41,7 @@ TiDB version: 5.3.4
     - Fix the problem that tikv and tiflash return different results when query logical operations [#37258](https://github.com/pingcap/tidb/issues/37258)
 
     <!--transaction owner: @cfzjywxk-->
-    
+
     - Fix the issue explain analyze with DML executors may respond to the client before the transaction commit has finished [#37373](https://github.com/pingcap/tidb/issues/37373)
     - Fix the issue that the region cache after merging many regions is not cleared properly [#37174](https://github.com/pingcap/tidb/issues/37174)
 
@@ -98,10 +50,6 @@ TiDB version: 5.3.4
     - (dup) Fix the issue that the EXECUTE might throw an unexpected error in specific scenarios [#37187](https://github.com/pingcap/tidb/issues/37187)
     - (dup) Fix the issue that `GROUP CONCAT` with `ORDER BY` might fail when the `ORDER BY` clause contains a correlated subquery [#18216](https://github.com/pingcap/tidb/issues/18216)
     - Fix the issue that wrong length and width are set for Decimal and Real when using plan-cache [#29565](https://github.com/pingcap/tidb/issues/29565)
-
-+ TiKV
-
-    <!--owner: @v01dstar-->
 
 + PD
 
@@ -120,31 +68,17 @@ TiDB version: 5.3.4
     <!--storage owner: @flowbehappy-->
 
     - Fix the issue that TiFlash crash due to using `0.0` as the integer's default value. E.g. `i` int(11) NOT NULL DEFAULT '0.0' [#3157](https://github.com/pingcap/tiflash/issues/3157)
+
 + Tools
-
-    + Backup & Restore (BR)
-
-    <!--owner: @3pointer-->
 
     + Dumpling
 
     <!--owner: @niubell-->
 
-    - Fix the issue that dumpling can't dump with `--compress` option and s3 output directory [#30534](https://github.com/pingcap/tidb/issues/30534)
+        - Fix the issue that dumpling can't dump with `--compress` option and s3 output directory [#30534](https://github.com/pingcap/tidb/issues/30534)
+
     + TiCDC
 
     <!--owner: @nongfushanquan-->
 
-      - Fix a issue that causes MySQL related error not reported to owner in time [#6698](https://github.com/pingcap/tiflow/issues/6698)
-
-    + TiDB Binlog
-
-    <!--owner: @niubell-->
-
-    + TiDB Lightning
-
-    <!--owner: @niubell-->
-
-    + TiDB Data Migration (DM)
-
-    <!--owner: @niubell-->
+        - Fix a issue that causes MySQL related error not reported to owner in time [#6698](https://github.com/pingcap/tiflow/issues/6698)
