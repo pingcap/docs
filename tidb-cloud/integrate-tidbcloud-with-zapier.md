@@ -210,7 +210,7 @@ Note that your custom query must run less than 30 seconds.
 
 Most of the TiDB Cloud actions require additional resources you need prepare.
 
-1. Actions need an existing TiDB Cloud serverless tier (TiDB cluster)
+1. Actions need an existing TiDB Cloud serverless tier (TiDB database):
 
    - Find Database: Finds an existing Database.
    - Create Database: Creates a new database.
@@ -221,7 +221,7 @@ Most of the TiDB Cloud actions require additional resources you need prepare.
    - Find Row: Finds a row in a table via a lookup column.
    - Find Row (Custom Query): Finds a Row in a table via a custom query in your control.
 
-2. Actions need an existing database in TiDB cluster
+2. Actions need an existing database in TiDB:
 
    - Find Table: Finds an existing Table.
    - Create Table: Creates a new table.
@@ -230,7 +230,7 @@ Most of the TiDB Cloud actions require additional resources you need prepare.
    - Find Row: Finds a row in a table via a lookup column.
    - Find Row (Custom Query): Finds a Row in a table via a custom query in your control.
 
-3. Actions need an existing table (including the schema) in TiDB cluster
+3. Actions need an existing table (including the schema) in TiDB:
 
    - Create Row: Creates a new row.
    - Update Row: Updates an existing row.
@@ -240,7 +240,7 @@ Most of the TiDB Cloud actions require additional resources you need prepare.
 
 ## How to use `find and create` action
 
-`Find and create` action enable you create a resource when it is not exist. Here is an example:
+`Find and create` action enables you create a resource when it is not exist. Here is an example:
 
 1. Choose `Find Table` action
 
