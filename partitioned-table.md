@@ -791,7 +791,7 @@ PARTITION BY LIST (level) (
  PARTITION l5 VALUES IN (5));
 ```
 
-#### DROP Partition
+#### Drop partitions
 
 {{< copyable "sql" >}}
 
