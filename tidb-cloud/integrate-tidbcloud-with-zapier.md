@@ -15,8 +15,8 @@ This guide describes how to use TiDB Cloud App on zapier.
 
 Make sure you have met the following requires
 
-1. A TiDB Cloud account
-2. A zapier account
+1. A [TiDB Cloud account](https://tidbcloud.com/signup)
+2. A [zapier account](https://zapier.com/app/login)
 
 # Quick start with our template
 
