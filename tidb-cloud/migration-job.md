@@ -25,6 +25,8 @@ The Migration Jobs feature supports data migration within the same region and cr
 
 - During incremental replication, if the migration job recovers from an error, it will enable safe mode. In this mode, the migration job applies the binlog which is up to 60 seconds before the breakpoint to the target database. But it changes `INSERT` to `REPLACE`, changes `UPDATE` to `DELETE` and `REPLACE`, and then applies these transactions to the downstream cluster to make sure all the data during the breakpoint has been migrated to the donwnstream cluster. When the table does not have primary keys or not-null unique indexes, it is possible that some data is duplicated due to being inserted repeatedly.
 
+- The Migration Jobs feature is only available to clusters created in the `us-west-2` region after November 9, 2022.
+
 ## Prerequisites
 
 Before performing the migration, you need to check the data sources, prepare privileges for upstream and downstream databases, and set up network connection.
