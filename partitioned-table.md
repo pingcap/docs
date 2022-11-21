@@ -758,7 +758,7 @@ In addition, there are limitations on the compatibility of `EXCHANGE PARTITION` 
 
 ### Range and List partition management
 
-Create some partitioned tables:
+This section uses the partitioned tables created by the following SQL statements as examples to show you how to manage Range and List partitions.
 
 {{< copyable "sql" >}}
 
