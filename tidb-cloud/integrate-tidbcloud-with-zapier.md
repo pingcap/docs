@@ -1,37 +1,35 @@
 ---
-title: Integrate TiDB Cloud with zapier
-summary: Learn how to connect TiDB Cloud to 5000+ Apps with zapier.
+title: Integrate TiDB Cloud with Zapier
+summary: Learn how to connect TiDB Cloud to 5000+ Apps with Zapier.
 ---
 
-# Integrate TiDB Cloud with zapier
+# Integrate TiDB Cloud with Zapier
 
-[Zapier](https://zapier.com/app/dashboard) is an automation tool that lets you easily create workflows that involve common apps and services.
+[Zapier](https://zapier.com/app/dashboard) is an automation tool that lets you easily create workflows that involve thousands of apps and services.
 
-Use TiDB Cloud App on zapier enable you connect TiDB Cloud to 5000+ Apps.
+Use TiDB Cloud App on Zapier enables you:
 
-This guide describes how to use TiDB Cloud App on zapier.
+- Use TiDB, a MySQl-compatible HTAP database for free. No need to build locally!
+- Make it easier to manage your TiDB Cloud.
+- Connect TiDB Cloud to 5000+ Apps and automate your workflows.
 
-# Before you start
-
-Make sure you have met the following requires
-
-1. A [TiDB Cloud account](https://tidbcloud.com/signup)
-2. A [zapier account](https://zapier.com/app/login)
+This guide will give a high-level introduction to TiDB Cloud App on Zapier and an example on how to use it.
 
 # Quick start with our template
 
-In this section, we will use the preset template to try out TiDB Cloud App on zapier.
+In this section, we will use the preset template as an example to try out TiDB Cloud App on Zapier.
 
 ## Prepare
 
 Before you start, you need:
 
-- A [GitHub account](https://github.com/login)
-- A Serverless Tier on TiDB Cloud, See [TiDB Cloud Quick Start](https://docs.pingcap.com/tidbcloud/tidb-cloud-quickstart#step-1-create-a-tidb-cluster) for more details
+- A [Zapier account](https://zapier.com/app/login).
+- A [GitHub account](https://github.com/login).
+- A [TiDB Cloud account](https://tidbcloud.com/signup) and a Serverless Tier on TiDB Cloud, See [TiDB Cloud Quick Start](https://docs.pingcap.com/tidbcloud/tidb-cloud-quickstart#step-1-create-a-tidb-cluster) for more details.
 
 ## Step 1: Get the template
 
-Go to [TiDB Cloud App on zapier](https://zapier.com/apps/tidb-cloud/integrations) to choose a template and click `Try it`. Then you will enter the editor page. 
+Go to [TiDB Cloud App on Zapier](https://zapier.com/apps/tidb-cloud/integrations) to choose a template and click **Try it**. Then you will enter the editor page. 
 
 Here we use `Add Github global event into TiDB without custom schema` template as an example. It will add a new row into TiDB Cloud cluster when a new global event is created on GitHub.
 
@@ -133,9 +131,9 @@ Now, this zap will record all the global events on GitHub into TiDB Cloud automa
 
 # Trigger & Action
 
-[Trigger and action](https://zapier.com/how-it-works) are the key concepts in zapier.
+[Trigger and action](https://zapier.com/how-it-works) are the key concepts in Zapier.
 
-TiDB Cloud App on zapier provides the following triggers and actions
+TiDB Cloud App on Zapier provides the following triggers and actions:
 
 Triggers
 
@@ -159,12 +157,12 @@ Actions
 
 # TiDB Cloud App Template
 
-We provide some templates for you to use. Here are some examples, you can find all the templates in the [TiDB Cloud App](https://zapier.com/apps/tidb-cloud/integrations) page.
+We also provide some templates for you to use directly. Here are some examples, you can find all the templates in the [TiDB Cloud App](https://zapier.com/apps/tidb-cloud/integrations) page.
 
 - Create Google Sheets rows from new TiDB rows.
 - Send emails via Gmail from a custom TiDB query.
-- Copy new TiDB rows.
-- Store new Salesforce contacts on TiDB rows.
+- Copy new TiDB rows from one TiDB to another.
+- Store new Salesforce contacts to a TiDB.
 - Save Typeform form entries to a TiDB.
 - Store Twitter followers into TiDB and create Salesforce leads.
 
@@ -176,9 +174,9 @@ To get your TiDB Cloud API key, follow the [TiDB Cloud API documentation](https:
 
 # How TiDB Cloud triggers de-duplication
 
-Zapier triggers can work with a polling API call to check for new data periodically (depends on zapier plan).
+Zapier triggers can work with a polling API call to check for new data periodically (depends on Zapier plan).
 
-TiDB Cloud triggers provide the polling API call which will return a lot of results, most of which zapier has seen before.
+TiDB Cloud triggers provide the polling API call which will return a lot of results, most of which Zapier has seen before.
 
 Since we don’t want to trigger an action multiple times when an item in your API exists in multiple distinct polls, we will deduplicate the data with the `id` field.
 
@@ -237,7 +235,7 @@ Actions need an existing table (including the schema) in TiDB cluster
 - Find Row: Finds a row in a table via a lookup column.
 - Find Row (Custom Query): Finds a Row in a table via a custom query in your control.
 
-You can avoid creating these resources outside the zapier by adding a `find and create` actions. Here is an example to create table if it is not exist:
+You can avoid creating these resources outside the Zapier by adding a `find and create` actions. Here is an example to create table if it is not exist:
 
 1. Choose `Find Table` action
 
