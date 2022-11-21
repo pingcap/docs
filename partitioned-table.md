@@ -835,10 +835,6 @@ ERROR 1493 (HY000): VALUES LESS THAN value must be strictly increasing for each 
 
 #### Reorganize partitions
 
-> **Warning:**
->
-> This is an experimental feature, which might be changed or removed without prior notice. The syntax and implementation may change before GA. If you find a bug, please open an issue in the [TiDB repository](https://github.com/pingcap/tidb/issues). 
-
 Split a partition:
 
 {{< copyable "sql" >}}
