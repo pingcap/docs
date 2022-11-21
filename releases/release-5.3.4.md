@@ -42,7 +42,7 @@ TiDB version: 5.3.4
 
     <!--transaction owner: @cfzjywxk-->
 
-    - (dup) Fix the issue explain analyze with DML executors may respond to the client before the transaction commit has finished [#37373](https://github.com/pingcap/tidb/issues/37373)
+    - (dup) Fix the issue that the `EXPLAIN ANALYZE` statement with DML executors might return result before the transaction commit finishes [#37373](https://github.com/pingcap/tidb/issues/37373)
     - Fix the issue that the region cache after merging many regions is not cleared properly [#37174](https://github.com/pingcap/tidb/issues/37174)
 
     <!--planner owner: @qw4990-->
