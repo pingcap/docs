@@ -83,13 +83,10 @@ TiDB version: 5.3.4
 
     - (dup) Fix wrong results of `GREATEST` and `LEAST` when passing in unsigned `BIGINT` arguments [#30101](https://github.com/pingcap/tidb/issues/30101)
     - (dup) Fix the issue that the result of `concat(ifnull(time(3))` in TiDB is different from that in MySQL [#29498](https://github.com/pingcap/tidb/issues/29498)
-    - avoid sum from avg overflow [#29952](https://github.com/pingcap/tidb/issues/29952)
-    - add an unit test case for unreasonable invoking Close [#30587](https://github.com/pingcap/tidb/issues/27125)
-    - HashJoinExec checks the buildError even if the probeSide is empty [#30289](https://github.com/pingcap/tidb/issues/30289)
-    - expression: resize the result for IfXXSig [#37414](https://github.com/pingcap/tidb/issues/37414)
-    - change date_add and date_sub string_(int/string/real/decimal) function return type to string. [#27573](https://github.com/pingcap/tidb/issues/27573)
-    - fix hashjoin goleak [#39026](https://github.com/pingcap/tidb/issues/39026)
-    - fix: the results of tikv and tiflash are different [#37258](https://github.com/pingcap/tidb/issues/37258)
+    - Fix the issue that avg() returns error `ERROR 1105 (HY000): other error for mpp stream: Could not convert to the target type - -value is out of range.` when quering from TiFlash [#29952](https://github.com/pingcap/tidb/issues/29952)
+    - Fix the issue that sql returns `ERROR 1105 (HY000): close of nil channel` when using HashJoinExec [#30289](https://github.com/pingcap/tidb/issues/30289)
+    - Fix the different return type of date_add and date_sub between TiDB and MySQL. Change date_add and date_sub string_(int/string/real/decimal) function return type to string [#27573](https://github.com/pingcap/tidb/issues/27573)
+    - Fix the problem that tikv and tiflash return different results when query logical operations [#37258](https://github.com/pingcap/tidb/issues/37258)
 
     <!--transaction owner: @cfzjywxk-->
     
@@ -99,8 +96,7 @@ TiDB version: 5.3.4
 
     - (dup) Fix the issue that the EXECUTE might throw an unexpected error in specific scenarios [#37187](https://github.com/pingcap/tidb/issues/37187)
     - (dup) Fix the issue that `GROUP CONCAT` with `ORDER BY` might fail when the `ORDER BY` clause contains a correlated subquery [#18216](https://github.com/pingcap/tidb/issues/18216)
-    - Fix the issue that set wrong length and width for Decimal and Real when using plan-cache [#29565](https://github.com/pingcap/tidb/issues/29565)
-    - add an unit test case for unreasonable invoking Close [#27125](https://github.com/pingcap/tidb/issues/27125)
+    - Fix the issue that wrong length and width are set for Decimal and Real when using plan-cache [#29565](https://github.com/pingcap/tidb/issues/29565)
 
 + TiKV
 
@@ -111,7 +107,7 @@ TiDB version: 5.3.4
     <!--owner: @nolouch-->
 
     - (dup) Fix the issue that PD cannot correctly handle dashboard proxy requests [#5321](https://github.com/tikv/pd/issues/5321)
-    - (dup) Fix the issue that the TiFlash learner replica might not be created [#5401](https://github.com/tikv/pd/issues/5401)
+    - (dup) Fix the issue that the TiFlash learner replica might not be created in specific scenarios [#5401](https://github.com/tikv/pd/issues/5401)
     - (dup) Fix inaccurate Stream timeout and accelerate leader switchover [#5207](https://github.com/tikv/pd/issues/5207)
 
 + TiFlash
