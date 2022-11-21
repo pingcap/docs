@@ -259,10 +259,10 @@ You can avoid creating these resources outside the zapier by adding a `find and 
 
 1. Choose `Find Table` action
 
-![img.png](/media/tidb-cloud/zapier/find-table-event.png)
+   ![img.png](/media/tidb-cloud/zapier/find-table-event.png)
 
 2. Click `Create TiDB Cloud Table if it doesn’t exist yet?` button to enable `find and create` in `set up action`
 
-![img.png](/media/tidb-cloud/zapier/find-and-create.png)
+   ![img.png](/media/tidb-cloud/zapier/find-and-create.png)
 
 In this example, we will create a table if it doesn’t exist yet. Note that the table may be created when you test this action.
