@@ -63,7 +63,7 @@ In the editor page, you can see the trigger and action. Click the trigger to set
 
 2. Choose account
 
-   You will be redirected to a new login page once you click the **Sign in**. Fill in your `Public Key` and `Private Key`. To get API key, follow the [TiDB Cloud API documentation](https://docs.pingcap.com/tidbcloud/api/v1beta#section/Authentication/API-Key-Management). Click `Continue` after you finish.
+   You will be redirected to a new login page once you click the **Sign in**. Fill in your `Public Key` and `Private Key`. To get API key, follow the [TiDB Cloud API documentation](https://docs.pingcap.com/tidbcloud/api/v1beta#section/Authentication/API-Key-Management). Click **Continue** after you finish.
     
     ![img.png](/media/tidb-cloud/zapier/tidb_findtable_account.png)
 
@@ -71,7 +71,7 @@ In the editor page, you can see the trigger and action. Click the trigger to set
 
    In this step, you need to find a table in your TiDB Cloud cluster. And create a new one if it is not exist.
 
-   Choose the project and cluster from drop-down list. Then you will see the connection information of the cluster.
+   Choose the project and cluster from drop-down list. Then you will see the connection information of the database.
 
    ![img.png](/media/tidb-cloud/zapier/tidbcloud_project.png)
 
@@ -81,11 +81,11 @@ In the editor page, you can see the trigger and action. Click the trigger to set
 
    The template has set the table name and the DDL which will be executed if the table is not exist. You just need to click **Continue** to enter the next step.
 
+   ![img.png](/media/tidb-cloud/zapier/tibdcloud_ddl.png)
+
 4. Test action
 
    Click **Test action**, and you will create the table in this step. You can also skip the test and create table when this template is running.
-
-   ![img.png](/media/tidb-cloud/zapier/tidbcloud_test_findtable.png)
 
 ## Step 4: Set up the `Create Row in TiDB Cloud` action
 
@@ -97,17 +97,19 @@ In the editor page, you can see the trigger and action. Click the trigger to set
 
    You can select the account you have created before. Click **Continue** to enter the next step.
 
-3. Set up action
+   ![img.png](/media/tidb-cloud/zapier/tidbcloud_choose_account.png)
+
+4. Set up action
 
    Fill in the `Project Name`, `Cluster Name`, `TiDB password` and `Database Name` just like what you have done in the previous step. Then choose the **github_global_event** table from drop-down list , and you will find the columns of the table will be shown.
 
-   ![img.png](/media/tidb-cloud/zapier/tidbcloud_column.png)
+   ![img.png](/media/tidb-cloud/zapier/tidbcloud_columns.png)
 
    Then click the text area, and you will find that you can choose the data from the trigger. Fill in all the columns with trigger's data. Then click **Continue** to enter the next step.
 
    ![img.png](/media/tidb-cloud/zapier/tidbcloud_triggers_data.png)
 
-4. Test action
+5. Test action
 
     Click **Test action** to create a new row in the table. If you check the TiDB, you can find the data
 
@@ -176,7 +178,7 @@ To get your TiDB Cloud API key, follow the [TiDB Cloud API documentation](https:
 
 Zapier triggers can work with a polling API call to check for new data periodically (depends on zapier plan).
 
-TiDB Cloud triggers provide the polling API call which will return many results, most of which zapier has seen before.
+TiDB Cloud triggers provide the polling API call which will return a lot of results, most of which zapier has seen before.
 
 Since we don’t want to trigger an action multiple times when an item in your API exists in multiple distinct polls, we will deduplicate the data with the `id` field.
 
