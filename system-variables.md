@@ -1006,7 +1006,7 @@ MPP is a distributed computing framework provided by the TiFlash engine, which a
 - Type: Integer
 - Default value: `2`
 - Value options:
-    - `1`: enable the Cost Model Version 1.
+    - `1`: enable the Cost Model Version 1, which is used by default in TiDB v6.4.0 and earlier versions. 
     - `2`: enable the [Cost Model Version 2](/cost-model.md#cost-model-version-2), which is introduced in TiDB v6.2.0 and is more accurate than the version 1 in internal tests.
 - The version of cost model affects the plan decision of optimizer. For more details, see [Cost Model](/cost-model.md).
 
