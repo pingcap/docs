@@ -11,7 +11,7 @@ This document describes how to monitor a TiDB cluster on TiDB Cloud.
 
 You can see the current status of each running cluster on the cluster page.
 
-### Cluster Status
+### Cluster status
 
 | Cluster status | Description |
 |:--|:--|
@@ -26,22 +26,29 @@ You can see the current status of each running cluster on the cluster page.
 
 ### TiDB node status
 
+> **Note:**
+>
+> The TiDB node status is only available for Dedicated Tier clusters.
+
 | TiDB node status | Description |
 |:--|:--|
-| **Normal** | Normal running |
-| **Creating** | Creating the node |
-| **Unavailable** | The TiDB node is not available |
-| **Terminating** | The TiDB node is terminating |
+| **Available** | The TiDB node is healthy and available. |
+| **Creating** | The TiDB node is being created. |
+| **Unavailable** | The TiDB node is not available. |
+| **Deleting** | The TiDB node is being deleted. |
 
 ### TiKV node status
 
+> **Note:**
+>
+> The TiKV node status is only available for Dedicated Tier clusters.
+
 | TiKV node status | Description |
 |:--|:--|
-| **Normal** | Normal running |
-| **Creating** | Creating the node |
-| **Unavailable** | The TiKV node is not available |
-| **Terminating** | The TiKV node is terminating |
-| **Leaving** | Migrating the current node data before termination |
+| **Available** | The TiKV node is healthy and available. |
+| **Creating** | The TiKV node is being created. |
+| **Unavailable** | The TiKV node is not available. |
+| **Deleting** | The TiKV node is being deleted. |
 
 ## Monitoring metrics
 
@@ -53,6 +60,10 @@ In TiDB Cloud, you can view the commonly used metrics of a cluster from the foll
 ### Metrics on the cluster overview page
 
 The cluster overview page provides general metrics of a cluster, including total QPS, query duration, active connections, TiDB CPU, TiKV CPU, TiFlash CPU, TiDB memory, TiKV memory, TiFlash memory, TiKV used storage size, and TiFlash used storage size.
+
+> **Note:**
+>
+> Some of these metrics might be available only for Dedicated Tier clusters.
 
 To view metrics on the cluster overview page, take the following steps:
 
