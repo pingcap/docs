@@ -78,6 +78,70 @@ SELECT * FROM information_schema.tiflash_replica WHERE TABLE_SCHEMA = '<db_name>
 -   `AVAILABLE`は、このテーブルの TiFlash レプリカが使用可能かどうかを示します。 `1`は利用可能であることを意味し、 `0`は利用できないことを意味します。レプリカが利用可能になると、このステータスは変わりません。 DDL ステートメントを使用してレプリカの数を変更すると、レプリケーション ステータスが再計算されます。
 -   `PROGRESS`は、レプリケーションの進行状況を意味します。値は`0.0` ～ `1.0`です。 `1`は、少なくとも 1 つのレプリカが複製されていることを意味します。
 
+### TiFlash レプリケーションの高速化 {#speed-up-tiflash-replication}
+
+TiFlash レプリカが追加される前に、各 TiKV インスタンスはフル テーブル スキャンを実行し、スキャンされたデータを「スナップショット」として TiFlash に送信してレプリカを作成します。デフォルトでは、オンライン サービスへの影響を最小限に抑えるために、TiFlash レプリカはリソースの使用量を抑えてゆっくりと追加されます。 TiKV および TiFlash ノードに予備の CPU およびディスク IO リソースがある場合は、次の手順を実行して TiFlash レプリケーションを高速化できます。
+
+1.  TiFlash Proxy と TiKV の設定を調整して、各 TiKV と TiFlash インスタンスのスナップショット書き込み速度制限を一時的に上げます。たとえば、TiUP を使用して構成を管理する場合、構成は次のようになります。
+
+    ```yaml
+    tikv:
+      server.snap-max-write-bytes-per-sec: 300MiB  # Default to 100MiB.
+    tiflash-learner:
+      raftstore.snap-handle-pool-size: 10          # Default to 2. Can be adjusted to >= node's CPU num * 0.6.
+      raftstore.apply-low-priority-pool-size: 10   # Default to 1. Can be adjusted to >= node's CPU num * 0.6.
+      server.snap-max-write-bytes-per-sec: 300MiB  # Default to 100MiB.
+    ```
+
+    構成の変更は、TiFlash および TiKV インスタンスを再起動した後に有効になります。 TiKV 構成は、 [動的構成 SQL ステートメント](https://docs.pingcap.com/tidb/stable/dynamic-config)を使用してオンラインで変更することもできます。これは、TiKV インスタンスを再起動せずにすぐに有効になります。
+
+    ```sql
+    SET CONFIG tikv `server.snap-max-write-bytes-per-sec` = '300MiB';
+    ```
+
+    前述の構成を調整した後、レプリケーション速度はグローバルに PD 制限によってまだ制限されているため、現時点では加速を観察できません。
+
+2.  [PD Control](https://docs.pingcap.com/tidb/stable/pd-control)を使用して、新しいレプリカの速度制限を徐々に緩和します。
+
+    デフォルトの新しいレプリカの速度制限は 30 です。これは、毎分約 30 のリージョンが TiFlash レプリカを追加することを意味します。次のコマンドを実行すると、すべての TiFlash インスタンスの制限が 60 に調整され、元の速度の 2 倍になります。
+
+    ```shell
+    tiup ctl:v<CLUSTER_VERSION> pd -u http://<PD_ADDRESS>:2379 store limit all engine tiflash 60 add-peer
+    ```
+
+    > 上記のコマンドでは、 `<CLUSTER_VERSION>`を実際のクラスター バージョンに置き換え、 `<PD_ADDRESS>:2379`を任意の PD ノードのアドレスに置き換える必要があります。例えば：
+    >
+    > ```shell
+    > tiup ctl:v6.1.1 pd -u http://192.168.1.4:2379 store limit all engine tiflash 60 add-peer
+    > ```
+
+    数分以内に、TiFlash ノードの CPU およびディスク IO リソースの使用率が大幅に増加し、TiFlash はレプリカをより速く作成するはずです。同時に、TiKV ノードの CPU およびディスク IO リソースの使用率も増加します。
+
+    この時点で TiKV ノードと TiFlash ノードにまだ予備のリソースがあり、オンライン サービスのレイテンシーが大幅に増加しない場合は、制限をさらに緩和できます。たとえば、元の速度を 3 倍にします。
+
+    ```shell
+    tiup ctl:v<CLUSTER_VERSION> pd -u http://<PD_ADDRESS>:2379 store limit all engine tiflash 90 add-peer
+    ```
+
+3.  TiFlash の複製が完了したら、既定の構成に戻して、オンライン サービスへの影響を軽減します。
+
+    次のPD Controlコマンドを実行して、デフォルトの新しいレプリカの速度制限を復元します。
+
+    ```shell
+    tiup ctl:v<CLUSTER_VERSION> pd -u http://<PD_ADDRESS>:2379 store limit all engine tiflash 30 add-peer
+    ```
+
+    TiUP で変更された構成をコメントアウトして、デフォルトのスナップショットの書き込み速度制限を復元します。
+
+    ```yaml
+    # tikv:
+    #   server.snap-max-write-bytes-per-sec: 300MiB
+    # tiflash-learner:
+    #   raftstore.snap-handle-pool-size: 10
+    #   raftstore.apply-low-priority-pool-size: 10
+    #   server.snap-max-write-bytes-per-sec: 300MiB
+    ```
+
 ### 利用可能なゾーンを設定する {#set-available-zones}
 
 レプリカを構成するときに、災害復旧のために TiFlash レプリカを複数のデータ センターに配布する必要がある場合は、次の手順に従って使用可能なゾーンを構成できます。
@@ -116,7 +180,7 @@ SELECT * FROM information_schema.tiflash_replica WHERE TABLE_SCHEMA = '<db_name>
 3.  PD は、ラベルに基づいてレプリカをスケジュールします。この例では、PD はそれぞれテーブル`t`の 2 つのレプリカを 2 つの使用可能なゾーンにスケジュールします。 pd-ctl を使用してスケジュールを表示できます。
 
     ```shell
-    > tiup ctl:<version> pd -u<pd-host>:<pd-port> store
+    > tiup ctl:v<CLUSTER_VERSION> pd -u http://<PD_ADDRESS>:2379 store
 
         ...
         "address": "172.16.5.82:23913",
