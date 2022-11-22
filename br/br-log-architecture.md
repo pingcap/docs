@@ -64,26 +64,26 @@ The full PITR process is as follows:
 1. `br` receives the `br restore point` command.
 
    * Parses the full backup data address, log backup data address, and the point-in-time recovery time.
-   * Queries the restoration object (database or table) in the backup data and checks whether the table to be restored exists and meets the restoration requirements.
+   * Queries the restore object (database or table) in the backup data and checks whether the table to be restored exists and meets the restore requirements.
 
 2. `br` restores the full backup data.
 
-   * For more details about the process of snapshot backup data restoration, refer to [Restore snapshot backup data](/br/br-snapshot-architecture.md#process-of-restoration).
+   * For more details about the process of snapshot backup data restore, refer to [Restore snapshot backup data](/br/br-snapshot-architecture.md#process-of-restore).
 
 3. `br` restores the log backup data.
 
    * **Read backup data**: reads the log backup data and calculates the log backup data that needs to be restored.
    * **Fetch Region info**: fetches the mapping between all Regions and the corresponding KV ranges by accessing PD.
-   * **Request TiKV to restore data**: creates a log restoration request and sends it to the corresponding TiKV node. The log restoration request contains the log backup data information to be restored.
+   * **Request TiKV to restore data**: creates a log restore request and sends it to the corresponding TiKV node. The log restore request contains the log backup data information to be restored.
 
-4. TiKV accepts the restoration request from `br` and initiates a log restore worker.
+4. TiKV accepts the restore request from `br` and initiates a log restore worker.
 
    * The log restore worker gets the log backup data that needs to be restored.
 
 5. TiKV restores the log backup data.
 
-   * **Download KVs**: the log restore worker downloads the corresponding backup data from the backup storage to the local according to the backup data to be restored in the log restoration request.
-   * **Rewrite KVs**: the log restore worker rewrites the KV data of the backup data according to the table ID of the restoration cluster table, that is, replace the original table ID in the [Key-Value](/tidb-computing.md#mapping-table-data-to-key-value) with the new table ID. The restore worker also rewrites the index ID in the same way.
+   * **Download KVs**: the log restore worker downloads the corresponding backup data from the backup storage to the local according to the backup data to be restored in the log restore request.
+   * **Rewrite KVs**: the log restore worker rewrites the KV data of the backup data according to the table ID of the restore cluster table, that is, replace the original table ID in the [Key-Value](/tidb-computing.md#mapping-table-data-to-key-value) with the new table ID. The restore worker also rewrites the index ID in the same way.
    * **Apply KVs**: the log restore worker writes the processed KV data to the store (RocksDB) through the raft interface.
    * **Report restore result**: the log restore worker returns the restore result to `br`.
 

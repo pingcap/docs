@@ -52,7 +52,7 @@ tiup br backup full --pd "${PD_IP}:2379" \
 
 ## Run PITR
 
-To restore the cluster to any point in time within the backup retention period, you can use `br restore point`. When you run this command, you need to specify the **time point you want to restore**, **the latest snapshot backup data before the time point**, and the **log backup data**. `br` will automatically determine and read data needed for the restoration, and then restore these data to the specified cluster in order.
+To restore the cluster to any point in time within the backup retention period, you can use `br restore point`. When you run this command, you need to specify the **time point you want to restore**, **the latest snapshot backup data before the time point**, and the **log backup data**. `br` will automatically determine and read data needed for the restore, and then restore these data to the specified cluster in order.
 
 ```shell
 br restore point --pd "${PD_IP}:2379" \
@@ -61,7 +61,7 @@ br restore point --pd "${PD_IP}:2379" \
 --restored-ts '2022-05-15 18:00:00+0800'
 ```
 
-During restoration, you can view the progress through the progress bar in the terminal. The restoration is divided into two phases, full restore and log restore (Restore Meta Files and Restore KV Files). After each phase is completed, `br` outputs information such as restore time and data size.
+During restore, you can view the progress through the progress bar in the terminal. The restore is divided into two phases, full restore and log restore (Restore Meta Files and Restore KV Files). After each phase is completed, `br` outputs information such as restore time and data size.
 
 ```shell
 Full Restore <--------------------------------------------------------------------------------------------------------------------------------------------------------> 100.00%
@@ -108,8 +108,8 @@ The following steps describe how to clean up backup data that exceeds the backup
 > **Note:**
 >
 > - The preceding functional specification is based on test results from the following two testing scenarios. The actual data might be different.
-> - Snapshot data restoration speed = Snapshot data size / (duration * the number of TiKV nodes)
-> - Log data restoration speed = Restored log data size / (duration * the number of TiKV nodes)
+> - Snapshot data restore speed = Snapshot data size / (duration * the number of TiKV nodes)
+> - Log data restore speed = Restored log data size / (duration * the number of TiKV nodes)
 
 Testing scenario 1 (on [TiDB Cloud](https://tidbcloud.com)):
 
