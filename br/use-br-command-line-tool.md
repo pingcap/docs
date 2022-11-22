@@ -5,7 +5,7 @@ summary: Learn about the description, options, and usage of the br command-line 
 
 # br Command-line Manual
 
-This document describes the description, components, and common options of the `br` command-line tool and how to perform snapshot backup and restoration, log backup and restoration, and PITR (Point-in-time recovery).
+This document describes the description, components, and common options of the `br` command-line tool and how to perform snapshot backup and restore, log backup and restore, and PITR (Point-in-time recovery).
 
 ## `br` command-line description
 
@@ -71,7 +71,7 @@ To back up logs and manage log backup tasks, run the `br log` command.
 
 ## Commands of restoring backup data
 
-To restore cluster data, run the `br restore` command. You can add the `full`, `db`, or `table` sub-command to specify the scope of your restoration: the whole cluster (`full`), a single database (`db`), or a single table (`table`).
+To restore cluster data, run the `br restore` command. You can add the `full`, `db`, or `table` sub-command to specify the scope of your restore: the whole cluster (`full`), a single database (`db`), or a single table (`table`).
 
 - [Point-in-time recovery](/br/br-pitr-manual.md#restore-to-a-specified-point-in-time-pitr)
 - [Restore TiDB cluster snapshots](/br/br-snapshot-manual.md#restore-tidb-cluster-snapshots)
