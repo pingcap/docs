@@ -7,7 +7,7 @@ summary: Learn how to connect TiDB Cloud to 5000+ Apps with Zapier.
 
 [Zapier](https://zapier.com/app/dashboard) is an automation tool that lets you easily create workflows that involve thousands of apps and services.
 
-Use TiDB Cloud App on Zapier enables you:
+Using the [TiDB Cloud app](https://zapier.com/apps/tidb-cloud/integrations) on Zapier enables you to:
 
 - Use TiDB, a MySQl-compatible HTAP database for free. No need to build locally.
 - Make it easier to manage your TiDB Cloud.
