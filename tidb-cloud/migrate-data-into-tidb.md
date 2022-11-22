@@ -7,7 +7,7 @@ summary: Learn how to migrate data from MySQL-compatible databases to TiDB Cloud
 
 > **Note:**
 >
-> It is recommended that you use the Migration Jobs feature to migrate MySQL-compatible databases. See [Migrate MySQL-Compatible Databases to TiDB Cloud Using Migration Jobs](/tidb-cloud/migration-job.md).
+> It is recommended that you use the Data Migration feature to migrate MySQL-compatible databases. See [Migrate MySQL-Compatible Databases to TiDB Cloud Using Data Migration](/tidb-cloud/migration-job.md).
 
 TiDB is highly compatible with MySQL. You can migrate data from any MySQL-compatible databases to TiDB smoothly, whether the data is from a self-hosted MySQL instance or RDS service provided by the public cloud.
 

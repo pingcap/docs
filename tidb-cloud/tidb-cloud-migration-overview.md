@@ -21,9 +21,9 @@ If your application uses MySQL shards for data storage, you can migrate these sh
 
 If your source data is stored in Amazon S3 or Google Cloud Storage (GCS) buckets, before importing or migrating the data to TiDB Cloud, you need to configure access to the buckets. For more information, see [Configure Amazon S3 access and GCS access](/tidb-cloud/config-s3-and-gcs-access.md).
 
-### Migrate MySQL-Compatible Databases to TiDB Cloud Using Migration Jobs
+### Migrate MySQL-Compatible Databases to TiDB Cloud Using Data Migration
 
-TiDB Cloud provides the Migration Jobs feature, which supports full migration and incremental migration, allowing you to migrate your business from the upstream database to TiDB Cloud within a short downtime window. For more information, see [Migrate MySQL-Compatible Databases to TiDB Cloud Using Migration Jobs](/tidb-cloud/migration-job.md).
+TiDB Cloud provides the Data Migration feature, which supports full migration and incremental migration, allowing you to migrate your business from the upstream database to TiDB Cloud within a short downtime window. For more information, see [Migrate MySQL-Compatible Databases to TiDB Cloud Using Data Migration](/tidb-cloud/migration-job.md).
 
 ### Migrate from Amazon Aurora MySQL to TiDB Cloud in bulk
 
