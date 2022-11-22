@@ -31,7 +31,7 @@ Before you start, you need:
 
 Go to [TiDB Cloud App on Zapier](https://zapier.com/apps/tidb-cloud/integrations) to choose a template and click **Try it**. Then you will enter the editor page. 
 
-Here we use `Add Github global event into TiDB without custom schema` template as an example. It will add a new row into TiDB Cloud cluster when a new global event is created on GitHub.
+Here we use `Add new Github global events to TiDB rows` template as an example. It will add a new row into TiDB Cloud cluster when a new global event is created on GitHub.
 
 ## Step 2: Set up the trigger
 
@@ -235,8 +235,7 @@ Most of the TiDB Cloud actions require additional resources you need prepare.
    - Update Row: Updates an existing row.
    - Find Row: Finds a row in a table via a lookup column.
    - Find Row (Custom Query): Finds a Row in a table via a custom query in your control.
-
-
+   
 ## How to use `find or create` action
 
 `Find or create` action enables you create a resource when it is not exist. Here is an example:
