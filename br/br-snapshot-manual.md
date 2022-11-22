@@ -1,11 +1,11 @@
 ---
-title: TiDB Snapshot Backup and Restoration Command-line Manual
-summary: Learn about the commands of TiDB snapshot backup and restoration.
+title: TiDB Snapshot Backup and restore Command-line Manual
+summary: Learn about the commands of TiDB snapshot backup and restore.
 ---
 
-# TiDB Snapshot Backup and Restoration Command-line Manual
+# TiDB Snapshot Backup and restore Command-line Manual
 
-This document describes the commands of TiDB snapshot backup and restoration according to the backup and restoration scenario, including:
+This document describes the commands of TiDB snapshot backup and restore according to the backup and restore scenario, including:
 
 - [Back up TiDB cluster snapshots](#back-up-tidb-cluster-snapshots)
 - [Back up a database](#back-up-a-database)
@@ -18,7 +18,7 @@ This document describes the commands of TiDB snapshot backup and restoration acc
 - [Restore multiple tables with table filter](#restore-multiple-tables-with-table-filter)
 - [Restore encrypted snapshots](#restore-encrypted-snapshots)
 
-For more information about snapshot backup and restoration, refer to:
+For more information about snapshot backup and restore, refer to:
 
 - [Back up and Restore TiDB Snapshots Guide](/br/br-snapshot-guide.md)
 - [TiDB Back up and Restore Use Cases](/br/backup-and-restore-use-cases.md)
@@ -148,7 +148,7 @@ In the preceding command:
 - `--ratelimit`: The maximum speed **per TiKV** performing backup tasks. The unit is MiB/s
 - `--log-file`: The target file where the `br` log is written.
 
-During restoration, a progress bar is displayed in the terminal as shown below. When the progress bar advances to 100%, the restoration task is completed. Then `br` will verify the restored data to ensure data security.
+During restore, a progress bar is displayed in the terminal as shown below. When the progress bar advances to 100%, the restore task is completed. Then `br` will verify the restored data to ensure data security.
 
 ```shell
 Full Restore <---------/...............................................> 17.12%.
@@ -156,7 +156,7 @@ Full Restore <---------/...............................................> 17.12%.
 
 ## Restore a database or a table
 
-You can use `br` to restore partial data of a specified database or table from backup data. This feature allows you to filter out data that you do not need during the restoration.
+You can use `br` to restore partial data of a specified database or table from backup data. This feature allows you to filter out data that you do not need during the restore.
 
 ### Restore a database
 
@@ -177,7 +177,7 @@ In the preceding command, `--db` specifies the name of the database to be restor
 
 > **Note:**
 >
-> When you restore the backup data, the database name specified by `--db` must be the same as the one specified by `-- db` in the backup command. Otherwise, the restoration fails. This is because the metafile of the backup data (`backupmeta` file) records the database name, and you can only restore data to the database with the same name. The recommended method is to restore the backup data to the database with the same name in another cluster.
+> When you restore the backup data, the database name specified by `--db` must be the same as the one specified by `-- db` in the backup command. Otherwise, the restore fails. This is because the metafile of the backup data (`backupmeta` file) records the database name, and you can only restore data to the database with the same name. The recommended method is to restore the backup data to the database with the same name in another cluster.
 
 ### Restore a table
 

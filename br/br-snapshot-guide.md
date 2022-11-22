@@ -10,7 +10,7 @@ This document describes how to back up and restore TiDB snapshots using the `br`
 
 Snapshot backup is an implementation to back up the entire cluster. It is based on [multi-version concurrency control (MVCC)](/tidb-storage.md#mvcc) and backs up all data in the specified snapshot to a target storage. The size of the backup data is approximately the size of the compressed single replica in the cluster. After the backup is completed, you can restore the backup data to an empty cluster or a cluster that does not raise data conflicts (with the same schema or same tables), restore the cluster to the state at the time of the snapshot backup, and restore multiple replicas according to the cluster replica settings.
 
-Besides basic backup and restoration, snapshot backup and restoration also provides the following features:
+Besides basic backup and restore, snapshot backup and restore also provides the following features:
 
 * Backup data of a specified time point
 * [Restore data of a specified database or table](#restore-a-database-or-a-table)
@@ -66,7 +66,7 @@ tiup br restore full --pd "${PD_IP}:2379" \
 --storage "s3://backup-101/snapshot-202209081330?access_key=${access_key}&secret_access_key=${secret_access_key}"
 ```
 
-During restoration, a progress bar is displayed in the terminal as shown below. When the progress bar advances to 100%, the restoration task is completed and statistics such as total restore time, average restore speed, and total data size are displayed.
+During restore, a progress bar is displayed in the terminal as shown below. When the progress bar advances to 100%, the restore task is completed and statistics such as total restore time, average restore speed, and total data size are displayed.
 
 ```shell
 Full Restore <------------------------------------------------------------------------------> 100.00%
@@ -168,13 +168,13 @@ You can use the following methods to manually control the impact of backup tasks
 
 The impact of backup on cluster performance can be reduced by limiting the backup threads number, but this affects the backup performance. The preceding tests show that the backup speed is proportional to the number of backup threads. When the number of threads is small, the backup speed is about 20 MiB/thread. For example, 5 backup threads on a single TiKV node can reach a backup speed of 100 MiB/s.
 
-### Performance and impact of snapshot restoration
+### Performance and impact of snapshot restore
 
 - During restoring data, TiDB tries to fully utilize the TiKV CPU, disk IO, and network bandwidth resources. Therefore, it is recommended to restore the backup data on an empty cluster to avoid affecting the running applications.
-- The restore speed of backup data has a great relationship with the cluster configuration, deployment, and running applications. In the internal tests, the restore speed of a single TiKV node can reach 100 MiB/s. The performance and impact of snapshot restoration are different in different user scenarios and should be tested in actual environments.
+- The restore speed of backup data has a great relationship with the cluster configuration, deployment, and running applications. In the internal tests, the restore speed of a single TiKV node can reach 100 MiB/s. The performance and impact of snapshot restore are different in different user scenarios and should be tested in actual environments.
 
 ## What's next
 
 * [TiDB back up and restore use cases](/br/backup-and-restore-use-cases.md)
 * [`br` command-line manual](/br/use-br-command-line-tool.md)
-* [TiDB snapshot backup and restoration architecture](/br/br-snapshot-architecture.md)
+* [TiDB snapshot backup and restore architecture](/br/br-snapshot-architecture.md)

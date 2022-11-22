@@ -1,15 +1,15 @@
 ---
-title: TiDB Snapshot Backup and Restoration Architecture
-summary: Learn about the architecture of TiDB snapshot backup and restoration.
+title: TiDB Snapshot Backup and restore Architecture
+summary: Learn about the architecture of TiDB snapshot backup and restore.
 ---
 
-# TiDB Snapshot Backup and Restoration Architecture
+# TiDB Snapshot Backup and restore Architecture
 
-This document introduces the architecture and process of TiDB snapshot backup and restoration using the `br` command-line tool as an example.
+This document introduces the architecture and process of TiDB snapshot backup and restore using the `br` command-line tool as an example.
 
 ## Architecture
 
-The TiDB snapshot backup and restoration architecture is as follows:
+The TiDB snapshot backup and restore architecture is as follows:
 
 ![BR snapshot backup and restore architecture](/media/br/br-snapshot-arch.png)
 
@@ -50,22 +50,22 @@ The full backup process is as follows:
     * **Back up schemas**: `br` backs up the table schemas and calculates the checksum of the table data at the same time.
     * **Upload metadata**: `br` generates the backup metadata and uploads it to the storage path. The backup metadata includes the backup timestamp, the table and corresponding backup files, data checksum, and file checksum.
 
-## Process of restoration
+## Process of restore
 
-The process of a TiDB cluster restoration is as follows:
+The process of a TiDB cluster restore is as follows:
 
 ![snapshot restore process design](/media/br/br-snapshot-restore-ts.png)
 
-The full restoration process is as follows:
+The full restore process is as follows:
 
 1. `br` receives the `br restore` command.
 
     * Gets the storage path and the database or table to be restored of the backup data.
-    * Checks whether the table to be restored exists and whether it meets the requirements for restoration.
+    * Checks whether the table to be restored exists and whether it meets the requirements for restore.
 
-2. `br` schedules the restoration data.
+2. `br` schedules the restore data.
 
-    * **Pause Region schedule**: `br` requests PD to pause the automatic Region scheduling during restoration.
+    * **Pause Region schedule**: `br` requests PD to pause the automatic Region scheduling during restore.
     * **Restore schema**: `br` gets the schema of the backup data and the database and table to be restored. Note that the ID of a new created table might be different from the backup data.
     * **Split & scatter Region**: `br` requests PD to allocate Region (split Region) based on backup data and schedules Regions to be uniform distributed to storage nodes (scatter Region). Each Region has a clear data range `[start key, end key)`.
     * **Request TiKV to restore data**: `br` creates a restore request and sends it to the corresponding TiKV node according to the result of Region split. The restore request includes the data to be restored and rewrite rules.
@@ -87,7 +87,7 @@ The full restoration process is as follows:
     * If there is any data fails to be restored and cannot be retried, the restore task fails.
     * After all data is restored, the restore task succeeds.
 
-For more details about the backup and restoration process, see [Design of backup and restoration](https://github.com/pingcap/tidb/blob/master/br/docs/cn/2019-08-05-new-design-of-backup-restore.md).
+For more details about the backup and restore process, see [Design of backup and restore](https://github.com/pingcap/tidb/blob/master/br/docs/cn/2019-08-05-new-design-of-backup-restore.md).
 
 ## Backup files
 
@@ -157,4 +157,4 @@ When you back up data to Amazon S3 or a network disk, the SST files are stored i
 
 ## What's next
 
-- [TiDB snapshot backup and restoration guide](/br/br-snapshot-guide.md)
+- [TiDB snapshot backup and restore guide](/br/br-snapshot-guide.md)
