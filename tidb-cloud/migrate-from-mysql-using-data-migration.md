@@ -1,11 +1,11 @@
 ---
 title: Migrate MySQL-Compatible Databases to TiDB Cloud Using Data Migration
-summary: Learn how to migrate data from MySQL-compatible databases hosted in AWS Aurora, AWS RDS, or a local MySQL instance to TiDB Cloud using Data Migration.
+summary: Learn how to migrate data from MySQL-compatible databases hosted in Amazon Aurora MySQL, Amazon Relational Database Service (RDS), or a local MySQL instance to TiDB Cloud using Data Migration.
 ---
 
 # Migrate MySQL-Compatible Databases to TiDB Cloud Using Data Migration
 
-This document describes how to migrate data from a MySQL-compatible database on a cloud provider (AWS Aurora or AWS RDS) or on-premises to TiDB Cloud directly using the Data Migration feature of the TiDB Cloud console.
+This document describes how to migrate data from a MySQL-compatible database on a cloud provider (Amazon Aurora MySQL and Amazon Relational Database Service (RDS)) or on-premises to TiDB Cloud directly using the Data Migration feature of the TiDB Cloud console.
 
 This feature allows you to migrate your application data and its ongoing changes to TiDB Cloud (either in the same region or cross regions) within a short downtime window.
 
@@ -32,8 +32,8 @@ Before performing the migration, you need to check the data sources, prepare pri
 Data Migration supports the following data sources and versions:
 
 - MySQL 5.6, 5.7, and 8.0 local instances or on a public cloud provider. Note that MySQL 8.0 is still experimental on TiDB Cloud and might have incompatibility issues.
-- AWS Aurora MySQL 5.6 and 5.7
-- AWS RDS MySQL 5.7
+- Amazon Aurora MySQL 5.6 and 5.7
+- Amazon RDS MySQL 5.7
 
 ### Grant required privileges to the upstream database
 
