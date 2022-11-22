@@ -13,13 +13,13 @@ This feature helps you migrate your database and its ongoing changes to TiDB Clo
 
 - The Data Migration feature is available only for **Dedicated Tier** clusters.
 
-- Currently, the Data Migration feature is in beta, and you can create only one migration job **for free** for each organization. To create more migration jobs, you need to [file a support ticket](/tidb-cloud/tidb-cloud-support.md).
-
 - The Data Migration feature is only available to clusters created in the AWS `Oregon (us-west-2)` and AWS `Singapore (ap-southeast-1)` regions after November 9, 2022. If your cluster was created before the date or if your cluster is in another region, this feature is not available to your cluster and the **Data Migration** tab will not be displayed on the cluster overview page in the TiDB Cloud console.
+
+- Currently, the Data Migration feature is in beta, and you can create only one migration job **for free** for each organization. To create more migration jobs, you need to [file a support ticket](/tidb-cloud/tidb-cloud-support.md).
 
 - The system databases will be filtered out and not migrated to TiDB Cloud even if you select all of the databases to migrate. That is, `mysql`, `information_schema`, `information_schema`, and `sys` will not be migrated using this feature.
 
-- If the table to be migrated already exists in the target database, TiDB Cloud appends the data to the target table directly. If the keys conflict, an error is reported.
+- During full data migration, if the table to be migrated already exists in the target database with duplicated keys, the table in the target database will be replaced by the table to be migrated. During incremental data migration, if the table to be migrated already exists in the target database with duplicated keys, an error is reported and the migration is interrupted.
 
 - When you delete a cluster in TiDB Cloud, all migration jobs in that cluster are automatically deleted and not recoverable.
 
@@ -27,10 +27,10 @@ This feature helps you migrate your database and its ongoing changes to TiDB Clo
 
 - When you use Data Migration, it is recommended to keep the size of your dataset smaller than 1 TiB. If the dataset size is larger than 1 TiB, the full data migration will take a long time due to limited specifications.
 
-    In the following scenarios, if the migration job takes longer than 24 hours, do not purge binlogs in the source database to ensure that Data Migration can get consecutive binlogs for incremental replication:
+- In the following scenarios, if the migration job takes longer than 24 hours, do not purge binlogs in the source database to ensure that Data Migration can get consecutive binlogs for incremental replication:
 
-    - During full data migration
-    - After incremental data replication and the latency is not 0
+    - During full data migration.
+    - After the full data migration is completed and when incremental data migration is started for the first time, the latency is not 0ms.
 
 ## Prerequisites
 
