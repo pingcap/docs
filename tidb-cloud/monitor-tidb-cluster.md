@@ -11,7 +11,7 @@ This document describes how to monitor a TiDB cluster on TiDB Cloud.
 
 You can see the current status of each running cluster on the cluster page.
 
-### Cluster Status
+### Cluster status
 
 | Cluster status | Description |
 |:--|:--|
