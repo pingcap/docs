@@ -12,7 +12,7 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
 **General changes**
 
-* Support directly migrating data from AWS Aurora, AWS RDS or MySQL-compatible databases to TiDB Cloud
+* Support directly migrating data from Amazon Aurora, Amazon Relational Database Service (RDS), or self-built MySQL-compatible databases to TiDB Cloud.
 
     The Data Migration feature helps you quickly migrate data from MySQL-compatible databases, including self-built MySQL instances, AWS Aurora MySQL, and AWS RDS MySQL, to TiDB Cloud online.
 
