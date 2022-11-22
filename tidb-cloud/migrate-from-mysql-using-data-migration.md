@@ -11,11 +11,11 @@ This feature helps you migrate your database and its ongoing changes to TiDB Clo
 
 ## Limitations
 
+- The Data Migration feature is available only for **Dedicated Tier** clusters.
+
 - Currently, the Data Migration feature is in beta, and you can create only one migration job **for free** for each organization. To create more migration jobs, you need to [file a support ticket](/tidb-cloud/tidb-cloud-support.md).
 
 - The Data Migration feature is only available to clusters created in the AWS `Oregon (us-west-2)` and AWS `Singapore (ap-southeast-1)` regions after November 9, 2022. If your cluster was created before the date or if your cluster is in another region, this feature is not available to your cluster and the **Data Migration** tab will not be displayed on the cluster overview page in the TiDB Cloud console.
-
-- The Data Migration feature is available only for **Dedicated Tier** clusters.
 
 - The system databases will be filtered out and not migrated to TiDB Cloud even if you select all of the databases to migrate. That is, `mysql`, `information_schema`, `information_schema`, and `sys` will not be migrated using this feature.
 
