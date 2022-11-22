@@ -8,6 +8,22 @@ aliases: ['/tidbcloud/beta/supported-tidb-versions','/tidbcloud/release-notes']
 
 This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-cloud/) in 2022.
 
+## November 22, 2022
+
+**General changes**
+
+* Support directly migrating data from AWS Aurora, AWS RDS or MySQL-compatible databases to TiDB Cloud
+
+    The Data Migration feature helps you quickly migrate data from MySQL-compatible databases, including self-built MySQL instances, AWS Aurora MySQL, and AWS RDS MySQL, to TiDB Cloud online.
+
+    Previously, you needed to stop your business and import data offline, or use third-party tools to migrate data to TiDB Cloud, which was complicated. Now, with Data Migration, you only need to perform operations on your TiDB Cloud console without stopping your business for a long time.
+
+    In addition, Data Migration provides full and incremental data migration capabilities to migrate the existing data and ongoing changes from your data source to TiDB Cloud.
+
+    Currently, Data Migration is available for [Dedicated Tier](/tidb-cloud/select-cluster-tier.md#dedicated-tier) clusters only and still **in beta**. You can create one migration job for free for each organization. To create multiple migration jobs for an organization, you need to [file a ticket](/tidb-cloud/tidb-cloud-support.md).
+
+    For detailed information, see [Migrate MySQL-Compatible Databases to TiDB Cloud Using Data Migration](/tidb-cloud/migration-job.md).
+
 ## November 15, 2022
 
 **General changes**
