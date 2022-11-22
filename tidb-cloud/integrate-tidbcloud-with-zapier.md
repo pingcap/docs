@@ -19,7 +19,7 @@ This guide gives a high-level introduction to the TiDB Cloud app on Zapier and a
 
 In this section, we will use the preset template as an example to try out TiDB Cloud App on Zapier.
 
-## Prepare
+## Prerequisites
 
 Before you start, you need:
 
