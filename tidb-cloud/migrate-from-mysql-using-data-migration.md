@@ -15,7 +15,7 @@ This feature allows you to migrate your application data and its ongoing changes
 
 - The system databases will be filtered out and not migrated to TiDB Cloud even if you select all of the databases to migrate. That is, `mysql`, `information_schema`, `information_schema`, and `sys` will not be migrated using this feature.
 
-- The Data Migration feature is only available to clusters created in the AWS `Oregon (us-west-2)` region after November 9, 2022. If your cluster was created before the date or if your cluster is in another region, this feature is not available to your cluster and the **Data Migration** tab will not be displayed on the cluster overview page in the TiDB Cloud console.
+- The Data Migration feature is only available to clusters created in the AWS `Oregon (us-west-2)` and `Singapore (ap-southeast-1)` regions after November 9, 2022. If your cluster was created before the date or if your cluster is in another region, this feature is not available to your cluster and the **Data Migration** tab will not be displayed on the cluster overview page in the TiDB Cloud console.
 
 - If the table to be migrated already exists in the target database, TiDB Cloud appends the data to the target table directly. If the keys conflict, an error is reported.
 
@@ -77,7 +77,7 @@ To quickly test a migration job, you can use the `root` account of the TiDB Clou
 
 ### Set up network connection
 
-Before creating a migration job, set up the network connection according to your connection methods. See [Connect to Your TiDB Cluster](/tidb-cloud/connect-to-tidb-cluster).
+Before creating a migration job, set up the network connection according to your connection methods. See [Connect to Your TiDB Cluster](/tidb-cloud/connect-to-tidb-cluster.md).
 
 - If you use public IP (this is, standard connection) for network connection, make sure that the upstream and downstream databases can be connected through the public network.
 
@@ -133,16 +133,16 @@ On the **Create Migration Job** page, configure the source and target connection
 
     > **Tip:**
     >
-    > - To migrate data to TiDB Cloud once and for all, choose both full data migration and incremental data migration, which ensures data consistency between the source and target databases.
-    > - To migrate only the existing data of the source database to TiDB Cloud, choose the full data migration checkbox.
+    > - To migrate data to TiDB Cloud once and for all, choose both **Full data migration** and **Incremental data migration**, which ensures data consistency between the source and target databases.
+    > - To migrate only the existing data of the source database to TiDB Cloud, choose the **Full data migration** checkbox.
 
 2. On the **Choose Objects to Migrate** page, select the objects to be migrated. You can click **All** to select all objects, or click **Customize** and then click the checkbox next to the object name to select the object.
 
-    - If you click **All**, the migration job will migrate the existing data from the whole source database instance to TiDB Cloud and replicate ongoing changes after the full migration.
+    - If you click **All**, the migration job will migrate the existing data from the whole source database instance to TiDB Cloud and replicate ongoing changes after the full migration. Note that it happens only if you have selected the **Full data migration** and **Incremental data migration** checkboxes in the previous step.
 
     ![Select All Objects](/media/tidb-cloud/migration-job-select-all.png)
 
-    - If you click **Customize** and select some databases, the migration job will migrate the existing data and replicate ongoing changes of the selected databases to TiDB Cloud.
+    - If you click **Customize** and select some databases, the migration job will migrate the existing data and replicate ongoing changes of the selected databases to TiDB Cloud. Note that it happens only if you have selected the **Full data migration** and **Incremental data migration** checkboxes in the previous step.
 
     ![Select Databases](/media/tidb-cloud/migration-job-select-db.png)
 
