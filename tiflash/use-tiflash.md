@@ -76,6 +76,70 @@ In the result of above statement:
 * `AVAILABLE` indicates whether the TiFlash replicas of this table are available or not. `1` means available and `0` means unavailable. Once the replicas become available, this status does not change. If you use DDL statements to modify the number of replicas, the replication status will be recalculated.
 * `PROGRESS` means the progress of the replication. The value is between `0.0` and `1.0`. `1` means at least one replica is replicated.
 
+### Speed up TiFlash replication
+
+Before TiFlash replicas are added, each TiKV instance performs a full table scan and sends the scanned data to TiFlash as a "snapshot" to create replicas. By default, TiFlash replicas are added slowly with fewer resources usage in order to minimize the impact on the online service. If there are spare CPU and disk IO resources in your TiKV and TiFlash nodes, you can accelerate TiFlash replication by performing the following steps.
+
+1. Temporarily increase the snapshot write speed limit for each TiKV and TiFlash instance by adjusting the TiFlash Proxy and TiKV configuration. For example, when using TiUP to manage configurations, the configuration is as below:
+
+   ```yaml
+   tikv:
+     server.snap-max-write-bytes-per-sec: 300MiB  # Default to 100MiB.
+   tiflash-learner:
+     raftstore.snap-handle-pool-size: 10          # Default to 2. Can be adjusted to >= node's CPU num * 0.6.
+     raftstore.apply-low-priority-pool-size: 10   # Default to 1. Can be adjusted to >= node's CPU num * 0.6.
+     server.snap-max-write-bytes-per-sec: 300MiB  # Default to 100MiB.
+   ```
+
+   The configuration change takes effect after restarting the TiFlash and TiKV instances. The TiKV configuration can be also changed online by using the [Dynamic Config SQL statement](https://docs.pingcap.com/tidb/stable/dynamic-config), which takes effect immediately without restarting TiKV instances:
+
+   ```sql
+   SET CONFIG tikv `server.snap-max-write-bytes-per-sec` = '300MiB';
+   ```
+   
+   After adjusting the preceding configurations, you cannot observe the acceleration for now, as the replication speed is still restricted by the PD limit globally.
+
+2. Use [PD Control](https://docs.pingcap.com/tidb/stable/pd-control) to progressively ease the new replica speed limit.
+
+   The default new replica speed limit is 30, which means, approximately 30 Regions add TiFlash replicas every minute. Executing the following command will adjust the limit to 60 for all TiFlash instances, which doubles the original speed:
+
+   ```shell
+   tiup ctl:v<CLUSTER_VERSION> pd -u http://<PD_ADDRESS>:2379 store limit all engine tiflash 60 add-peer
+   ```
+
+   > In the preceding command, you need to replace `<CLUSTER_VERSION>` with the actual cluster version and `<PD_ADDRESS>:2379` with the address of any PD node. For example:
+   >
+   > ```shell
+   > tiup ctl:v6.1.1 pd -u http://192.168.1.4:2379 store limit all engine tiflash 60 add-peer
+   > ```
+
+   Within a few minutes, you will observe a significant increase in CPU and disk IO resource usage of the TiFlash nodes, and TiFlash should create replicas faster. At the same time, the TiKV nodes' CPU and disk IO resource usage increases as well.
+
+   If the TiKV and TiFlash nodes still have spare resources at this point and the latency of your online service does not increase significantly, you can further ease the limit, for example, triple the original speed:
+
+   ```shell
+   tiup ctl:v<CLUSTER_VERSION> pd -u http://<PD_ADDRESS>:2379 store limit all engine tiflash 90 add-peer
+   ```
+
+3. After the TiFlash replication is complete, revert to the default configuration to reduce the impact on online services.
+
+   Execute the following PD Control command to restore the default new replica speed limit:
+
+   ```shell
+   tiup ctl:v<CLUSTER_VERSION> pd -u http://<PD_ADDRESS>:2379 store limit all engine tiflash 30 add-peer
+   ```
+
+   Comment out the changed configuration in TiUP to restore the default snapshot write speed limit:
+
+   ```yaml
+   # tikv:
+   #   server.snap-max-write-bytes-per-sec: 300MiB
+   # tiflash-learner:
+   #   raftstore.snap-handle-pool-size: 10
+   #   raftstore.apply-low-priority-pool-size: 10
+   #   server.snap-max-write-bytes-per-sec: 300MiB
+   ```
+
 ### Set available zones
 
 When configuring replicas, if you need to distribute TiFlash replicas to multiple data centers for disaster recovery, you can configure available zones by following the steps below:
@@ -114,7 +178,7 @@ When configuring replicas, if you need to distribute TiFlash replicas to multipl
 3. PD schedules the replicas based on the labels. In this example, PD respectively schedules two replicas of the table `t` to two available zones. You can use pd-ctl to view the scheduling.
 
     ```shell
-    > tiup ctl:<version> pd -u<pd-host>:<pd-port> store
+    > tiup ctl:v<CLUSTER_VERSION> pd -u http://<PD_ADDRESS>:2379 store
 
         ...
         "address": "172.16.5.82:23913",
