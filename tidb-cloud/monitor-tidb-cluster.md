@@ -32,10 +32,10 @@ You can see the current status of each running cluster on the cluster page.
 
 | TiDB node status | Description |
 |:--|:--|
-| **Available** | The TiDB node is healthy and available |
-| **Creating** | The TiDB node is being created |
-| **Unavailable** | The TiDB node is not available |
-| **Deleting** | The TiDB node is being deleted |
+| **Available** | The TiDB node is healthy and available. |
+| **Creating** | The TiDB node is being created. |
+| **Unavailable** | The TiDB node is not available. |
+| **Deleting** | The TiDB node is being deleted. |
 
 ### TiKV node status
 
@@ -45,10 +45,10 @@ You can see the current status of each running cluster on the cluster page.
 
 | TiKV node status | Description |
 |:--|:--|
-| **Available** | The TiKV node is healthy and available |
-| **Creating** | The TiKV node is being created |
-| **Unavailable** | The TiKV node is not available |
-| **Deleting** | The TiKV node is being deleted |
+| **Available** | The TiKV node is healthy and available. |
+| **Creating** | The TiKV node is being created. |
+| **Unavailable** | The TiKV node is not available. |
+| **Deleting** | The TiKV node is being deleted. |
 
 ## Monitoring metrics
 
