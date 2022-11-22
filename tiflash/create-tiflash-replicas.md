@@ -238,7 +238,7 @@ When configuring replicas, if you need to distribute TiFlash replicas to multipl
 3. PD schedules the replicas based on the labels. In this example, PD respectively schedules two replicas of the table `t` to two available zones. You can use pd-ctl to view the scheduling.
 
     ```shell
-    > tiup ctl:<version> pd -u<pd-host>:<pd-port> store
+    > tiup ctl:v<CLUSTER_VERSION> pd -u http://<PD_ADDRESS>:2379 store
 
         ...
         "address": "172.16.5.82:23913",
