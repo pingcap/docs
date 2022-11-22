@@ -7,7 +7,7 @@ summary: Learn how to migrate data from MySQL-compatible databases hosted in Ama
 
 This document describes how to migrate data from a MySQL-compatible database on a cloud provider (Amazon Aurora MySQL or Amazon Relational Database Service (RDS)) or on-premises to TiDB Cloud using the Data Migration feature of the TiDB Cloud console.
 
-This feature allows you to migrate your database and its ongoing changes to TiDB Cloud (either in the same region or cross regions) with minimal downtime.
+This feature helps you migrate your database and its ongoing changes to TiDB Cloud (either in the same region or cross regions). Compared with previous solutions that require tools such as DUmpling or TiDB Lightning, this feature is more convenient and easier to use. You do not need to manually dump data from the source database and then import it to TiDB Cloud. You can migrate data directly from the source database to TiDB Cloud in one go.
 
 ## Limitations
 
@@ -23,7 +23,7 @@ This feature allows you to migrate your database and its ongoing changes to TiDB
 
 - When you delete a cluster in TiDB Cloud, all migration jobs in that cluster are automatically deleted and not recoverable.
 
-- During incremental replication (migrating ongoing changes to your cluster), if the migration job recovers from an error, it will enable a safe mode. In this mode, the migration job applies the binlogs that are up to 60 seconds before the breakpoint to the target database. In this mode, `INSERT` statements are replicated as `REPLACE`, `UPDATE` statements as `DELETE` and `REPLACE`, and then these transactions are replicated to the downstream cluster to make sure all the data during the breakpoint has been migrated to the downstream cluster. For upstream tables without primary keys or not-null unique indexes, some data might be duplicated in the downstream cluster because the data might be inserted repeatedly to the downstream.
+- During incremental replication (migrating ongoing changes to your cluster), if the migration job recovers from an abrupt error, it may open the safe mode for 60 seconds. During the safe mode, `INSERT` statements are replicated as `REPLACE`, `UPDATE` statements as `DELETE` and `REPLACE`, and then these transactions are replicated to the downstream cluster to make sure that all the data during the abrupt error has been migrated smoothly to the downstream cluster. For upstream tables without primary keys or not-null unique indexes, some data might be duplicated in the downstream cluster because the data might be inserted repeatedly to the downstream.
 
 ## Prerequisites
 
