@@ -16,7 +16,7 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
     The Data Migration feature helps you quickly migrate data from MySQL-compatible databases, including self-built MySQL instances, AWS Aurora MySQL, and AWS RDS MySQL, to TiDB Cloud online.
 
-    Previously, you needed to stop your business and import data offline, or use third-party tools to migrate data to TiDB Cloud, which was complicated. Now, with Data Migration, you only need to perform operations on your TiDB Cloud console without stopping your business for a long time.
+    Previously, you needed to stop your business and import data offline, or use third-party tools to migrate data to TiDB Cloud, which was complicated. Now, with Data Migration, you only need to perform operations on your TiDB Cloud console and securely migrate your data to TiDB Cloud with minimal downtime.
 
     In addition, Data Migration provides full and incremental data migration capabilities to migrate the existing data and ongoing changes from your data source to TiDB Cloud.
 
