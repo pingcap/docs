@@ -63,7 +63,7 @@ The cluster overview page provides general metrics of a cluster, including total
 
 > **Note:**
 >
-> Some of these metrics might be available only in Dedicated Tier clusters.
+> Some of these metrics might be available only for Dedicated Tier clusters.
 
 To view metrics on the cluster overview page, take the following steps:
 
