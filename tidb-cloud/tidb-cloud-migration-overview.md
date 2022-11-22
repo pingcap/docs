@@ -23,7 +23,7 @@ If your source data is stored in Amazon S3 or Google Cloud Storage (GCS) buckets
 
 ### Migrate MySQL-Compatible Databases to TiDB Cloud Using Data Migration
 
-TiDB Cloud provides the Data Migration feature, which supports full migration and incremental migration, allowing you to migrate your business from the upstream database to TiDB Cloud within a short downtime window. For more information, see [Migrate MySQL-Compatible Databases to TiDB Cloud Using Data Migration](/tidb-cloud/migrate-from-mysql-using-data-migration.md).
+TiDB Cloud provides the Data Migration feature, which supports full migration and incremental migration, allowing you to migrate your business data from the upstream database to TiDB Cloud with minimal downtime. For more information, see [Migrate MySQL-Compatible Databases to TiDB Cloud Using Data Migration](/tidb-cloud/migrate-from-mysql-using-data-migration.md).
 
 ### Migrate from Amazon Aurora MySQL to TiDB Cloud in bulk
 

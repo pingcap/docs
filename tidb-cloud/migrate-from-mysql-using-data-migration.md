@@ -5,17 +5,17 @@ summary: Learn how to migrate data from MySQL-compatible databases hosted in Ama
 
 # Migrate MySQL-Compatible Databases to TiDB Cloud Using Data Migration
 
-This document describes how to migrate data from a MySQL-compatible database on a cloud provider (Amazon Aurora MySQL and Amazon Relational Database Service (RDS)) or on-premises to TiDB Cloud directly using the Data Migration feature of the TiDB Cloud console.
+This document describes how to migrate data from a MySQL-compatible database on a cloud provider (Amazon Aurora MySQL or Amazon Relational Database Service (RDS)) or on-premises to TiDB Cloud using the Data Migration feature of the TiDB Cloud console.
 
-This feature allows you to migrate your application data and its ongoing changes to TiDB Cloud (either in the same region or cross regions) within a short downtime window.
+This feature allows you to migrate your database and its ongoing changes to TiDB Cloud (either in the same region or cross regions) with minimal downtime
 
 ## Limitations
 
-- Currently, the Data Migration feature is in public beta, and each organization can create only one migration job. To create more migration jobs, you need to [file a support ticket](/tidb-cloud/tidb-cloud-support.md).
+- Currently, the Data Migration feature is in beta, and you can create only one migration job for free for each organization. To create more migration jobs, you need to [file a support ticket](/tidb-cloud/tidb-cloud-support.md).
 
 - The system databases will be filtered out and not migrated to TiDB Cloud even if you select all of the databases to migrate. That is, `mysql`, `information_schema`, `information_schema`, and `sys` will not be migrated using this feature.
 
-- The Data Migration feature is only available to clusters created in the AWS `Oregon (us-west-2)` and `Singapore (ap-southeast-1)` regions after November 9, 2022. If your cluster was created before the date or if your cluster is in another region, this feature is not available to your cluster and the **Data Migration** tab will not be displayed on the cluster overview page in the TiDB Cloud console.
+- The Data Migration feature is only available to clusters created in the AWS `Oregon (us-west-2)` and AWS `Singapore (ap-southeast-1)` regions after November 9, 2022. If your cluster was created before the date or if your cluster is in another region, this feature is not available to your cluster and the **Data Migration** tab will not be displayed on the cluster overview page in the TiDB Cloud console.
 
 - If the table to be migrated already exists in the target database, TiDB Cloud appends the data to the target table directly. If the keys conflict, an error is reported.
 
