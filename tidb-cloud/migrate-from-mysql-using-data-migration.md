@@ -27,7 +27,7 @@ This feature helps you migrate your database and its ongoing changes to TiDB Clo
 
 - When you use Data Migration, it is recommended to keep the size of your dataset smaller than 1 TiB. If the dataset size is larger than 1 TiB, the full data migration will take a long time due to limited specifications.
 
-    In the following scenarios, do not purge binlogs in the source database to ensure that Data Migration can get consecutive binlogs for incremental replication:
+    In the following scenarios, if the migration job takes longer than 24 hours, do not purge binlogs in the source database to ensure that Data Migration can get consecutive binlogs for incremental replication:
 
     - During full data migration
     - After incremental data replication and the latency is not 0
