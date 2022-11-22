@@ -20,7 +20,7 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
     Currently, Data Migration is available only for [Dedicated Tier](/tidb-cloud/select-cluster-tier.md#dedicated-tier) clusters and only in AWS Oregon (us-west-2) and AWS Singapore (ap-southeast-1) regions. This feature is still **in beta** and you can create one migration job for free for each organization. To create multiple migration jobs for an organization, you need to [file a ticket](/tidb-cloud/tidb-cloud-support.md).
 
-    For detailed information, see [Migrate MySQL-Compatible Databases to TiDB Cloud Using Data Migration](/tidb-cloud/migration-job.md).
+    For detailed information, see [Migrate MySQL-Compatible Databases to TiDB Cloud Using Data Migration](/tidb-cloud/migrate-from-mysql-using-data-migration.md).
 
 ## November 15, 2022
 
