@@ -52,7 +52,7 @@ To get the prefix for your cluster, take the following steps:
 ### Serverless Tier special terms and conditions
 
 - Serverless Tier is currently in beta and does not have uptime SLA guarantee during beta phase. If you use Serverless Tier beta to store a commercial or production dataset, any potential risk associated with the use should be taken on your own, and PingCAP shall not be liable for any damage.
-- There are some features that Serverless Tier does not support or partially supports. See [Serverless Tier Limitations](/tidb-cloud/serverless-tier-limitations.md) for details.
+- Some of TiDB Cloud features are partially supported or not supported on Serverless Tier. See [Serverless Tier Limitations](/tidb-cloud/serverless-tier-limitations.md) for details.
 
 ## Dedicated Tier
 
