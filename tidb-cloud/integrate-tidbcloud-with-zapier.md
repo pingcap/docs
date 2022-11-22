@@ -13,7 +13,7 @@ Using the [TiDB Cloud app](https://zapier.com/apps/tidb-cloud/integrations) on Z
 - Make it easier to manage your TiDB Cloud.
 - Connect TiDB Cloud to 5000+ apps and automate your workflows.
 
-This guide will give a high-level introduction to TiDB Cloud App on Zapier and an example on how to use it.
+This guide gives a high-level introduction to the TiDB Cloud app on Zapier and an example of how to use it.
 
 # Quick start with template
 
