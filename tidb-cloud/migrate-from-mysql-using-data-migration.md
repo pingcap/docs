@@ -19,7 +19,9 @@ This feature helps you migrate your database and its ongoing changes to TiDB Clo
 
 - The system databases will be filtered out and not migrated to TiDB Cloud even if you select all of the databases to migrate. That is, `mysql`, `information_schema`, `information_schema`, and `sys` will not be migrated using this feature.
 
-- During full data migration, if the table to be migrated already exists in the target database with duplicated keys, the table in the target database will be replaced by the table to be migrated. During incremental data migration, if the table to be migrated already exists in the target database with duplicated keys, an error is reported and the migration is interrupted.
+- During full data migration, if the table to be migrated already exists in the target database with duplicated keys, the duplicate keys will be replaced.
+
+- During incremental data migration, if the table to be migrated already exists in the target database with duplicated keys, an error is reported and the migration is interrupted. In this situation, you need to make sure whether the upstream data is accurate. If yes, click the "Restart" button of the migration job and the migration job will replace the downstream conflicting records with the upstream records.
 
 - When you delete a cluster in TiDB Cloud, all migration jobs in that cluster are automatically deleted and not recoverable.
 
