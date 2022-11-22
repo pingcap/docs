@@ -23,7 +23,7 @@ This feature allows you to migrate your database and its ongoing changes to TiDB
 
 - When you delete a cluster in TiDB Cloud, all migration jobs in that cluster are automatically deleted and not recoverable.
 
-- During incremental replication (migrating ongoing changes to your cluster), if the migration job recovers from an error, it will enable a safe mode. In this mode, the migration job applies the binlogs which are up to 60 seconds before the breakpoint to the target database. In this mode, `INSERT` statements are replicated as `REPLACE`, `UPDATE` statements as `DELETE` and `REPLACE`, and then these transactions are replicated to the downstream cluster to make sure all the data during the breakpoint has been migrated to the downstream cluster. When the table does not have primary keys or not-null unique indexes, some data might be duplicated because the data is inserted repeatedly.
+- During incremental replication (migrating ongoing changes to your cluster), if the migration job recovers from an error, it will enable a safe mode. In this mode, the migration job applies the binlogs that are up to 60 seconds before the breakpoint to the target database. In this mode, `INSERT` statements are replicated as `REPLACE`, `UPDATE` statements as `DELETE` and `REPLACE`, and then these transactions are replicated to the downstream cluster to make sure all the data during the breakpoint has been migrated to the downstream cluster. For upstream tables without primary keys or not-null unique indexes, some data might be duplicated in the downstream cluster because the data might be inserted repeatedly to the downstream.
 
 ## Prerequisites
 
@@ -90,7 +90,7 @@ Before creating a migration job, set up the network connection according to your
 
 ### Enable binlogs
 
-If you perform incremental data migration, make sure you have enabled binlogs of the upstream database, and the binlogs have been kept for more than 24 hours.
+To perform incremental data migration, make sure you have enabled binlogs of the upstream database, and the binlogs have been kept for more than 24 hours.
 
 ## Step 1: Go to the **Data Migration** page
 
