@@ -27,29 +27,28 @@ TiDB version: 5.3.4
     - (dup) Fix the issue that database-level privileges are incorrectly cleaned up [#38363](https://github.com/pingcap/tidb/issues/38363)
     - (dup) Fix the issue that the `grantor` field is missing in the `mysql.tables_priv` table [#38293](https://github.com/pingcap/tidb/issues/38293)
     - (dup) Fix the issue that `KILL TIDB` cannot take effect immediately on idle connections [#24031](https://github.com/pingcap/tidb/issues/24031)
-    - Fix return type to string for `adddate` and `subdate` functions [#36394](https://github.com/pingcap/tidb/issues/36394)
-    - Fix restore table option `INSERT_METHOD` incompatible with MySQL [#38368](https://github.com/pingcap/tidb/issues/38368)
-    - Fix authentication with MySQL 5.1 and older clients [#29725](https://github.com/pingcap/tidb/issues/29725)
+    - Fix the issue that the return type of `date_add` and `date_sub` is different between TiDB and MySQL [#36394], [#27573](https://github.com/pingcap/tidb/issues/27573)(https://github.com/pingcap/tidb/issues/36394)
+    - Fix incorrect `INSERT_METHOD` in Parser's restore table options [#38368](https://github.com/pingcap/tidb/issues/38368)
+    - Fix the issue that authentication fails when a MySQL client of v5.1 or earlier connects with the TiDB server [#29725](https://github.com/pingcap/tidb/issues/29725)
 
     <!--executor owner: @zanmato1984-->
 
     - (dup) Fix wrong results of `GREATEST` and `LEAST` when passing in unsigned `BIGINT` arguments [#30101](https://github.com/pingcap/tidb/issues/30101)
     - (dup) Fix the issue that the result of `concat(ifnull(time(3))` in TiDB is different from that in MySQL [#29498](https://github.com/pingcap/tidb/issues/29498)
-    - Fix the issue that avg() returns error `ERROR 1105 (HY000): other error for mpp stream: Could not convert to the target type - -value is out of range.` when querying from TiFlash [#29952](https://github.com/pingcap/tidb/issues/29952)
-    - Fix the issue that sql returns `ERROR 1105 (HY000): close of nil channel` when using HashJoinExec [#30289](https://github.com/pingcap/tidb/issues/30289)
-    - Fix the different return type of date_add and date_sub between TiDB and MySQL. Change date_add and date_sub string_(int/string/real/decimal) function return type to string [#27573](https://github.com/pingcap/tidb/issues/27573)
-    - Fix the problem that tikv and tiflash return different results when query logical operations [#37258](https://github.com/pingcap/tidb/issues/37258)
+    - Fix the issue that the `avg()` function returns `ERROR 1105 (HY000): other error for mpp stream: Could not convert to the target type - -value is out of range.` when queried from TiFlash [#29952](https://github.com/pingcap/tidb/issues/29952)
+    - Fix the issue that `ERROR 1105 (HY000): close of nil channel` is returned when using `HashJoinExec` [#30289](https://github.com/pingcap/tidb/issues/30289)
+    - Fix the issue that TiKV and TiFlash return different results when query logical operations [#37258](https://github.com/pingcap/tidb/issues/37258)
 
     <!--transaction owner: @cfzjywxk-->
 
     - (dup) Fix the issue that the `EXPLAIN ANALYZE` statement with DML executors might return result before the transaction commit finishes [#37373](https://github.com/pingcap/tidb/issues/37373)
-    - Fix the issue that the region cache after merging many regions is not cleared properly [#37174](https://github.com/pingcap/tidb/issues/37174)
+    - Fix the issue that Region cache is not cleared properly after merging many Regions [#37174](https://github.com/pingcap/tidb/issues/37174)
 
     <!--planner owner: @qw4990-->
 
     - (dup) Fix the issue that the EXECUTE might throw an unexpected error in specific scenarios [#37187](https://github.com/pingcap/tidb/issues/37187)
     - (dup) Fix the issue that `GROUP CONCAT` with `ORDER BY` might fail when the `ORDER BY` clause contains a correlated subquery [#18216](https://github.com/pingcap/tidb/issues/18216)
-    - Fix the issue that wrong length and width are set for Decimal and Real when using plan-cache [#29565](https://github.com/pingcap/tidb/issues/29565)
+    - Fix the issue of wrong results that occur because wrong length and width values are set for Decimal and Real when using plan cache [#29565](https://github.com/pingcap/tidb/issues/29565)
 
 + PD
 
@@ -67,7 +66,7 @@ TiDB version: 5.3.4
 
     <!--storage owner: @flowbehappy-->
 
-    - Fix the issue that TiFlash crash due to using `0.0` as the integer's default value. E.g. `i` int(11) NOT NULL DEFAULT '0.0' [#3157](https://github.com/pingcap/tiflash/issues/3157)
+    - Fix the issue that TiFlash bootstrap fails caused by using `0.0` as the default value for integers. For example,`` `i` int(11) NOT NULL DEFAULT '0.0'`` [#3157](https://github.com/pingcap/tiflash/issues/3157)
 
 + Tools
 
@@ -75,10 +74,10 @@ TiDB version: 5.3.4
 
     <!--owner: @niubell-->
 
-        - Fix the issue that dumpling can't dump with `--compress` option and s3 output directory [#30534](https://github.com/pingcap/tidb/issues/30534)
+        - Fix the issue that Dumpling cannot dump when the `--compress` option and the S3 output directory are set simultaneously [#30534](https://github.com/pingcap/tidb/issues/30534)
 
     + TiCDC
 
     <!--owner: @nongfushanquan-->
 
-        - Fix a issue that causes MySQL related error not reported to owner in time [#6698](https://github.com/pingcap/tiflow/issues/6698)
+        - Fix the issue that changefeed state is incorrect because a MySQL-related error is not reported to the owner in time [#6698](https://github.com/pingcap/tiflow/issues/6698)
