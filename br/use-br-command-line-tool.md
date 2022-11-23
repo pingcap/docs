@@ -5,11 +5,11 @@ summary: Learn about the description, options, and usage of the br command-line 
 
 # br Command-line Manual
 
-This document describes the description, components, and common options of the `br` command-line tool and how to perform snapshot backup and restore, log backup and restore, and PITR (Point-in-time recovery).
+This document describes the definition, components, and common options of `br` commands, and how to perform snapshot backup and restore, and log backup and point-in-time recovery (PITR) using `br` commands.
 
 ## `br` command-line description
 
-A `br` command consists of sub-commands, options, and parameters. The sub-command is the characters without `-` or `--`. The option is the characters that start with `-` or `--`. The parameter is the characters that immediately follow behind and are passed to the sub-command or the option.
+A `br` command consists of sub-commands, options, and parameters. A sub-command is the characters without `-` or `--`. An option is the characters that start with `-` or `--`. A parameter is the characters that immediately follow behind and are passed to the sub-command or the option.
 
 The following is a complete `br` command:
 
@@ -27,11 +27,11 @@ Explanations for the preceding command are as follows:
 
 ### Commands and sub-commands
 
-A `br` command consists of multiple layers of sub-commands. Currently, BR has the following sub-commands:
+A `br` command consists of multiple layers of sub-commands. Currently, br command-line tool has the following sub-commands:
 
 * `br backup`: used to back up the data of the TiDB cluster.
-* `br log`: used to back up logs and manage log backup tasks.
-* `br restore`: used to restore the data of the TiDB cluster.
+* `br log`: used to start and manage log backup tasks.
+* `br restore`: used to restore backup data of the TiDB cluster.
 
 `br backup` and `br restore` include the following sub-commands:
 
@@ -60,7 +60,7 @@ To back up cluster data, run the `br backup` command. You can add the `full` or 
 
 ## Commands of log backup
 
-To back up logs and manage log backup tasks, run the `br log` command.
+To start log backup and manage log backup tasks, run the `br log` command.
 
 - [Start a log backup task](/br/br-pitr-manual.md#start-a-backup-task)
 - [Query the backup status](/br/br-pitr-manual.md#query-the-backup-status)
