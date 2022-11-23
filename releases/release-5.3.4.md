@@ -48,7 +48,7 @@ TiDB version: 5.3.4
 
     - (dup) Fix the issue that the EXECUTE might throw an unexpected error in specific scenarios [#37187](https://github.com/pingcap/tidb/issues/37187)
     - (dup) Fix the issue that `GROUP CONCAT` with `ORDER BY` might fail when the `ORDER BY` clause contains a correlated subquery [#18216](https://github.com/pingcap/tidb/issues/18216)
-    - Fix the issue of wrong results that occur because wrong length and width values are set for Decimal and Real when using plan cache [#29565](https://github.com/pingcap/tidb/issues/29565)
+    - Fix wrong results returned when length and width are incorrectly set for Decimal and Real when using plan cache [#29565](https://github.com/pingcap/tidb/issues/29565)
 
 + PD
 
@@ -62,11 +62,11 @@ TiDB version: 5.3.4
 
     <!--compute owner: @zanmato1984-->
 
-    - Fix the issue that logical operators return wrong results when the argument type is UInt8  [#6127](https://github.com/pingcap/tiflash/issues/6127)
+    - Fix the issue that logical operators return wrong results when the argument type is UInt8 [#6127](https://github.com/pingcap/tiflash/issues/6127)
 
     <!--storage owner: @flowbehappy-->
 
-    - Fix the issue that TiFlash bootstrap fails caused by using `0.0` as the default value for integers. For example,`` `i` int(11) NOT NULL DEFAULT '0.0'`` [#3157](https://github.com/pingcap/tiflash/issues/3157)
+    - Fix the issue that TiFlash bootstrap fails when `0.0` is used as the default value for integers, for example, `` `i` int(11) NOT NULL DEFAULT '0.0'`` [#3157](https://github.com/pingcap/tiflash/issues/3157)
 
 + Tools
 
@@ -74,7 +74,7 @@ TiDB version: 5.3.4
 
     <!--owner: @niubell-->
 
-        - Fix the issue that Dumpling cannot dump when the `--compress` option and the S3 output directory are set simultaneously [#30534](https://github.com/pingcap/tidb/issues/30534)
+        - Fix the issue that Dumpling cannot dump data when the `--compress` option and the S3 output directory are set simultaneously [#30534](https://github.com/pingcap/tidb/issues/30534)
 
     + TiCDC
 
