@@ -30,6 +30,27 @@ In most scenarios, you are recommended to use private endpoint connection over V
 - You are using a TiCDC cluster to replicate data to a downstream cluster (such as Amazon Aurora, MySQL, and Kafka) but you cannot maintain the endpoint service on your own.
 - You are connecting to PD or TiKV nodes directly.
 
+## Steps
+
+> **Note:**
+>
+> This method does not work for Serverless Tier clusters because you cannot connect to [Serverless Tier clusters](/tidb-cloud/select-cluster-tier.md#serverless-tier-beta) using private endpoint.
+
+To connect to your TiDB cluster via private endpoint, perform the following steps:
+
+1. In the TiDB Cloud console, navigate to the **Clusters** page.
+2. Locate your cluster, and click **Connect** in the upper-right corner of the cluster area. A connection dialog box is displayed.
+3. Select the **Private Endpoint** tab.
+4. Set up a private endpoint. See [Set Up Private Endpoint Connections](/tidb-cloud/set-up-private-endpoint-connections.md#set-up-a-private-endpoint-with-aws).
+
+    If you have created a private endpoint, it is displayed under **Step 1: Create Private Endpoint**.
+
+5. Under **Step 2: Connect your application**, click the tab of your preferred connection method, and then connect to your cluster with the connection string. The placeholders `<cluster_endpoint_name>:<port>` in the connection string are automatically replaced with the real values.
+
+> **Tip:**
+>
+> If you cannot connect to the cluster, the reason might be that the security group of your VPC endpoint in AWS is not properly set. See [this FAQ](/tidb-cloud/set-up-private-endpoint-connections.md#troubleshooting) for solutions.
+
 ## Set up a private endpoint with AWS
 
 This section describes how to set up a private endpoint with AWS PrivateLink.
@@ -102,11 +123,11 @@ To use the AWS Management Console to create a VPC interface endpoint, perform th
     > If your service is spanning across more than three availability zones (AZs), you might not be able to select AZs in the **Subnets** area. This issue occurs when there is an extra AZ in your selected region in addition to the AZs where your TiDB cluster is located. In this case, contact [PingCAP Technical Support](https://docs.pingcap.com/tidbcloud/tidb-cloud-support).
 
 8. Select your security group properly in the **Security groups** area.
-   
+
     > **Note:**
     >
     >  Make sure the selected security group allows inbound access from your EC2 instances on Port 4000 or a customer-defined port.
- 
+
 9. Click **Create endpoint**.
 
 </div>

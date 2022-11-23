@@ -15,6 +15,24 @@ Currently, TiDB Cloud only supports VPC peering in the same region for the same 
 >
 > To connect your application to TiDB Cloud, you can also set up [private endpoint connection](/tidb-cloud/set-up-private-endpoint-connections.md) with TiDB Cloud, which is secure and private, and does not expose your data to the public internet. It is recommended to use private endpoints over VPC peering connections.
 
+## Connect via VPC peering
+
+> **Note:**
+>
+> This method does not work for Serverless Tier clusters because you cannot connect to [Serverless Tier clusters](/tidb-cloud/select-cluster-tier.md#serverless-tier-beta) using VPC peering.
+
+To connect to your TiDB cluster via VPC peering, perform the following steps:
+
+1. Navigate to the **Clusters** page.
+
+2. Locate your cluster, click **Connect** in the upper-right corner of the cluster area, and select the **VPC Peering** tab in the connection dialog.
+
+3. Set up VPC peering. See [Set up VPC Peering](/tidb-cloud/set-up-vpc-peering-connections.md) for details.
+
+4. Click **Get Endpoint** and wait for a few minutes. Then the connection command displays in the dialog.
+
+5. Under **Step 2: Connect with a SQL client** in the dialog box, click the tab of your preferred connection method, and then connect to your cluster with the connection string.
+
 ## Prerequisite: Set a Project CIDR
 
 Project CIDR (Classless Inter-Domain Routing) is the CIDR block used for network peering in a project.

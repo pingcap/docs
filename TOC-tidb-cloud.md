@@ -80,10 +80,11 @@
     - [TiDB Cloud Performance Reference](/tidb-cloud/tidb-cloud-performance-reference.md)
   - [Create a TiDB Cluster](/tidb-cloud/create-tidb-cluster.md)
   - Connect to Your TiDB Cluster
-    - [Connect via a SQL Client](/tidb-cloud/connect-to-tidb-cluster.md)
-    - [Connect via SQL Shell](/tidb-cloud/connect-to-tidb-cluster.md#connect-via-sql-shell)
-  - [Set Up Private Endpoint Connections](/tidb-cloud/set-up-private-endpoint-connections.md)
-  - [Set Up VPC Peering Connections](/tidb-cloud/set-up-vpc-peering-connections.md)
+    - [Connection Method Overview](/tidb-cloud/connect-to-tidb-cluster.md)
+    - [Connect via Standard Connection](/tidb-cloud/connect-via-standard-connection.md)
+    - [Connect via Private Endpoint](/tidb-cloud/set-up-private-endpoint-connections.md)
+    - [Connect via VPC Peering](/tidb-cloud/set-up-vpc-peering-connections.md)
+    - [Connect via SQL Shell](/tidb-cloud/connect-via-sql-shell.md)
   - Use an HTAP Cluster with TiFlash
     - [TiFlash Overview](/tiflash/tiflash-overview.md)
     - [Create TiFlash Replicas](/tiflash/create-tiflash-replicas.md)
