@@ -109,6 +109,10 @@ For a running cluster, AWS and Google Cloud do not allow in-place storage capaci
 
 ## Increase node size
 
+> **Note:**
+>
+> Increasing ndoe size is only available to clusters that are created in AWS after 2022/yy/mm.
+
 You can increase the node size for TiDB, TiKV, and TiFlash. Decreasing the node size is not supported.
 
 To increase the node size, take the following steps:
