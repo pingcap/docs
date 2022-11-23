@@ -12,7 +12,7 @@ This document lists the frequently asked questions (FAQs) and the solutions abou
 
 ## In TiDB v5.4.0 and later versions, when backup tasks are performed on the cluster under high workload, why does the speed of backup tasks become slow?
 
-Starting from TiDB v5.4.0, backup and restore introduces the auto-tune feature for backup tasks. For clusters in v5.4.0 or later versions, this feature is enabled by default. When the cluster workload is heavy, the feature limits the resources used by backup tasks to reduce the impact on the online cluster. For more information, refer to [BR Auto-Tune](/br/br-auto-tune.md).
+Starting from TiDB v5.4.0, backup and restore introduces the auto-tune feature for backup tasks. For clusters in v5.4.0 or later versions, this feature is enabled by default. When the cluster workload is heavy, the feature limits the resources used by backup tasks to reduce the impact on the online cluster. For more information, refer to [Backup Auto-Tune](/br/br-auto-tune.md).
 
 TiKV supports [dynamically configuring](/tikv-control.md#modify-the-tikv-configuration-dynamically) the auto-tune feature. You can enable or disable the feature by the following methods without restarting your cluster:
 
@@ -150,8 +150,8 @@ Since TiDB v6.0.0, the default value of [`new_collations_enabled_on_first_bootst
 
 Suppose that you have backed up the data in a TiDB cluster of an earlier version of v6.0.0, and you want to restore this data to a TiDB cluster of v6.0.0 or later versions. In this situation, you need to manually check whether the value of `new_collations_enabled_on_first_bootstrap` is consistent between the upstream and downstream clusters:
 
-- If the value is consistent, you can add `--check-requirements=false` to the restoration command to skip this configuration check.
-- If the value is inconsistent, and you forcibly perform the restoration, `br` reports a data validation error.
+- If the value is consistent, you can add `--check-requirements=false` to the restore command to skip this configuration check.
+- If the value is inconsistent, and you forcibly perform the restore, `br` reports a data validation error.
 
 ### Why does an error occur when I restore placement rules to a cluster?
 
@@ -171,7 +171,7 @@ For example, you might encounter the `Code: 22(invalid argument)` error when bac
 
 This error might occur when the capacity of the cluster to restore (using `br`) is insufficient. You can further confirm the cause by checking the monitoring metrics of this cluster or the TiKV log.
 
-To handle this issue, you can try to scale out the cluster resources, reduce the concurrency during restoration, and enable the `RATE_LIMIT` option.
+To handle this issue, you can try to scale out the cluster resources, reduce the concurrency during restore, and enable the `RATE_LIMIT` option.
 
 ### What should I do if the restore fails with the error message `the entry too large, the max entry size is 6291456, the size of data is 7690800`?
 
@@ -187,7 +187,7 @@ When using `br` to restore the backup data with the value of [`--ddl-batch-size`
 
 When you use `local` storage, `backupmeta` is generated on the node where `br` is running, and backup files are generated on the Leader nodes of each Region.
 
-### What should I do if the error message `could not read local://...:download sst failed` is returned during data restoration?
+### What should I do if the error message `could not read local://...:download sst failed` is returned during data restore?
 
 When you restore data, each node must have access to **all** backup files (SST files). By default, if `local` storage is used, you cannot restore data because the backup files are scattered among different nodes. Therefore, you have to copy the backup file of each TiKV node to the other TiKV nodes. **It is recommended that you store backup data to Amazon S3, Google Cloud Storage (GCS), Azure Blob Storage, or NFS**.
 
@@ -201,7 +201,7 @@ Running `br` with the root access might fail due to the disk permission, because
 
 > **Note:**
 >
-> You might encounter the same problem during data restoration. When the SST files are read for the first time, the read permission is verified. The execution duration of DDL suggests that there might be a long interval between checking the permission and running `br`. You might receive the error message `Permission denied` after waiting for a long time.
+> You might encounter the same problem during data restore. When the SST files are read for the first time, the read permission is verified. The execution duration of DDL suggests that there might be a long interval between checking the permission and running `br`. You might receive the error message `Permission denied` after waiting for a long time.
 >
 > Therefore, it is recommended to check the permission before data restore according to the following steps:
 
@@ -276,7 +276,7 @@ Running `br` with the root access might fail due to the disk permission, because
 
 Starting from `br` v5.1.0, when you perform a full backup, `br` backs up the **tables in the `mysql` schema**. Before `br` v6.2.0, under default configuration, `br` only restores user data, but does not restore tables in the **mysql schema**.
 
-To restore a table created by the user in the `mysql` schema (not system tables), you can explicitly include the table using [table filters](/table-filter.md#syntax). The following example shows how to restore the `mysql.usertable` table when `br` performs a normal restoration.
+To restore a table created by the user in the `mysql` schema (not system tables), you can explicitly include the table using [table filters](/table-filter.md#syntax). The following example shows how to restore the `mysql.usertable` table when `br` performs a normal restore.
 
 {{< copyable "shell-regular" >}}
 
@@ -314,7 +314,7 @@ However, if you want to restore data from local storage, the number of replicas 
 
 ### Why is the disk usage shown on the monitoring node inconsistent after backup or restore using `br` ?
 
-This inconsistency is caused by the fact that the data compression rate used in backup is different from the default rate used in restoration. If the checksum succeeds, you can ignore this issue.
+This inconsistency is caused by the fact that the data compression rate used in backup is different from the default rate used in restore. If the checksum succeeds, you can ignore this issue.
 
 ### After `br` restores the backup data, do I need to execute the `ANALYZE` statement on the table to update the statistics of TiDB on the tables and indexes?
 

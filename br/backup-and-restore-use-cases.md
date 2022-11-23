@@ -1,6 +1,6 @@
 ---
-title: BR Use Cases
-summary: Learn the use cases of backing up and restoring data using BR.
+title: TiDB Backup and Restore Use Cases
+summary: Learn the use cases of backing up and restoring data using br command-line tool.
 aliases: ['/docs/dev/br/backup-and-restore-use-cases/','/docs/dev/reference/tools/br/use-cases/','/tidb/dev/backup-and-restore-use-cases-for-maintain/']
 ---
 
@@ -31,7 +31,7 @@ The following table shows the recommended hardware resources for using PITR in a
 
 > **Note:**
 >
-> - When br tool runs the backup and restoration tasks, it needs to access PD and TiKV. Make sure that br tool and all PD and TiKV servers are connected.
+> - When br tool runs the backup and restore tasks, it needs to access PD and TiKV. Make sure that br tool and all PD and TiKV servers are connected.
 > - br tool and PD servers must use the same time zone.
 
 Deploy or upgrade a TiDB cluster using TiUP:
@@ -71,7 +71,7 @@ The detailed steps are as follows:
 2. Configure permissions for br command-line tool and TiKV to access the S3 directory. It is recommended to grant permissions using the IAM method, which is the most secure way to access the S3 bucket. For detailed steps, refer to [AWS documentation -  Controlling access to a bucket with user policies](https://docs.aws.amazon.com/AmazonS3/latest/userguide/walkthrough1.html). The required permissions are as follows:
 
     - TiKV and br tool in the backup cluster need `s3:ListBucket`, `s3:PutObject`, and `s3:AbortMultipartUpload` permissions of the `s3://tidb-pitr-bucket/backup-data` directory.
-    - TiKV and br tool in the restoration cluster need `s3:ListBucket` and `s3:GetObject` permissions of the `s3://tidb-pitr-bucket/backup-data` directory.
+    - TiKV and br tool in the restore cluster need `s3:ListBucket` and `s3:GetObject` permissions of the `s3://tidb-pitr-bucket/backup-data` directory.
 
 3. Plan the directory structure that stores the backup data, including the snapshot (full) backup and the log backup.
 

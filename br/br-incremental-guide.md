@@ -34,7 +34,7 @@ tiup br backup full --pd "${PD_IP}:2379" \
 
 ## Restore incremental data
 
-When restoring incremental data, make sure that all the data backed up before `LAST_BACKUP_TS` has been restored to the target cluster. Also, because incremental restoration updates data, you need to ensure that there are no other writes during the restoration. Otherwise, conflicts might occur.
+When restoring incremental data, make sure that all the data backed up before `LAST_BACKUP_TS` has been restored to the target cluster. Also, because incremental restore updates data, you need to ensure that there are no other writes during the restore. Otherwise, conflicts might occur.
 
 The following command restores the full backup data stored in the `backup-101/snapshot-202209081330` directory:
 
