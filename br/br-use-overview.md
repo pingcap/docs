@@ -21,7 +21,7 @@ Before using TiDB backup and restore features, it is recommended that you unders
 
 ### How to manage backup data?
 
-BR provides only basic backup and restore features, and does not support backup management. Therefore, you need to decide how to manage backup data on your own, which might involve the following questions?
+br command-line tool provides only basic backup and restore features, and does not support backup management. Therefore, you need to decide how to manage backup data on your own, which might involve the following questions?
 
 * Which backup storage system should I choose?
 * In which directory should I place the backup data during a backup task?
