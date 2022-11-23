@@ -27,9 +27,9 @@ TiDB version: 5.3.4
     - (dup) Fix the issue that database-level privileges are incorrectly cleaned up [#38363](https://github.com/pingcap/tidb/issues/38363)
     - (dup) Fix the issue that the `grantor` field is missing in the `mysql.tables_priv` table [#38293](https://github.com/pingcap/tidb/issues/38293)
     - (dup) Fix the issue that `KILL TIDB` cannot take effect immediately on idle connections [#24031](https://github.com/pingcap/tidb/issues/24031)
-    - Fix the issue that the return type of `date_add` and `date_sub` is different between TiDB and MySQL [#36394], [#27573](https://github.com/pingcap/tidb/issues/27573)(https://github.com/pingcap/tidb/issues/36394)
+    - Fix the issue that the return type of `date_add` and `date_sub` is different between TiDB and MySQL [#36394](https://github.com/pingcap/tidb/issues/36394), [#27573](https://github.com/pingcap/tidb/issues/27573)
     - Fix incorrect `INSERT_METHOD` in Parser's restore table options [#38368](https://github.com/pingcap/tidb/issues/38368)
-    - Fix the issue that authentication fails when a MySQL client of v5.1 or earlier connects with the TiDB server [#29725](https://github.com/pingcap/tidb/issues/29725)
+    - Fix the issue that authentication fails when a MySQL client of v5.1 or earlier connects to the TiDB server [#29725](https://github.com/pingcap/tidb/issues/29725)
 
     <!--executor owner: @zanmato1984-->
 
@@ -37,7 +37,7 @@ TiDB version: 5.3.4
     - (dup) Fix the issue that the result of `concat(ifnull(time(3))` in TiDB is different from that in MySQL [#29498](https://github.com/pingcap/tidb/issues/29498)
     - Fix the issue that the `avg()` function returns `ERROR 1105 (HY000): other error for mpp stream: Could not convert to the target type - -value is out of range.` when queried from TiFlash [#29952](https://github.com/pingcap/tidb/issues/29952)
     - Fix the issue that `ERROR 1105 (HY000): close of nil channel` is returned when using `HashJoinExec` [#30289](https://github.com/pingcap/tidb/issues/30289)
-    - Fix the issue that TiKV and TiFlash return different results when query logical operations [#37258](https://github.com/pingcap/tidb/issues/37258)
+    - Fix the issue that TiKV and TiFlash return different results when querying logical operations [#37258](https://github.com/pingcap/tidb/issues/37258)
 
     <!--transaction owner: @cfzjywxk-->
 
