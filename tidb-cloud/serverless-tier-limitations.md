@@ -17,7 +17,7 @@ We are constantly filling in the feature gaps between Serverless Tier and Dedica
 - Each Serverless Tier cluster has the following limitations:
     - The storage size is limited to 5 GiB (logical size) of OLTP storage and 5 GiB (logical size) of OLAP storage.
     - The compute resource is limited to 1 vCPU and 1 GiB RAM.
-    - **Note**: In the coming months, we intend to offer a usage-based billing plan for additional resources and higher performance, while still keeping offering the free starter plan. In the coming releases, the limitations of the free serverless tier might be changed.
+    - **Note**: In the coming months, we intend to offer a usage-based billing plan for additional resources and higher performance, while still keeping offering the free starter plan. In the coming releases, the limitations of the free Serverless Tier might be changed.
 
 ## Connection
 
@@ -31,8 +31,8 @@ We are constantly filling in the feature gaps between Serverless Tier and Dedica
 ## Monitoring
 
 - [Built-in Monitoring](/tidb-cloud/built-in-monitoring.md) is currently not available for Serverless Tier.
-- [Third-party Monitoring integrations](/tidb-cloud/third-party-monitoring-integrations.md) is currently not available for Serverless Tier.
+- [Third-party Monitoring integrations](/tidb-cloud/third-party-monitoring-integrations.md) are currently not available for Serverless Tier.
 
 ## Others
 
-- [Open API](/tidb-cloud/api-overview.md) and [Terraform Integration](/tidb-cloud/terraform-tidbcloud-provider-overview.md) are currently not available for Serverless Tier.
+- [TiDB Cloud API](/tidb-cloud/api-overview.md) and [Terraform Integration](/tidb-cloud/terraform-tidbcloud-provider-overview.md) are currently not available for Serverless Tier.

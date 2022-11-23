@@ -33,7 +33,7 @@ Serverless Tier is in beta while we continuously add new features and improve ex
 - Each Serverless Tier cluster has the following limitations:
     - The storage size is limited to 5 GiB (logical size) of OLTP storage and 5 GiB of OLAP storage.
     - The compute resource is limited to 1 vCPU and 1 GiB RAM.
-    - **Note**: In the coming months, we intend to offer a usage-based billing plan for additional resources and higher performance, while still keeping offering the free starter plan. In the coming releases, the limitations of the free serverless tier might be changed.
+    - **Note**: In the coming months, we intend to offer a usage-based billing plan for additional resources and higher performance, while still keeping offering the free starter plan. In the coming releases, the limitations of the free Serverless Tier might be changed.
 - Some of TiDB Cloud features are partially supported or not supported on Serverless Tier. See [Serverless Tier Limitations](/tidb-cloud/serverless-tier-limitations.md) for details.
 
 ### What can Serverless Tier be used for?
@@ -53,10 +53,10 @@ The serverless technology is designed for multi-tenancy and the resources used b
 ### How does TiDB Serverless Tier ensure security?
 
 - Your connections are encrypted by Transport Layer Security (TLS). For more information about using TLS to connect to Serverless Tier, see [Secure Connections to Serverless Tier Clusters](/tidb-cloud/secure-connections-to-serverless-tier-clusters.md).
-- All persisted data on Serverless Tier is encrypted-at-rest using the cloud provider's tool that your cluster is running in.
+- All persisted data on Serverless Tier is encrypted-at-rest using the tool of the cloud provider that your cluster is running in.
 
 ## Maintenance FAQ
 
 ### Can I upgrade the version of TiDB that my cluster is running on?
 
-No, Serverless Tier clusters are upgraded automatically as we release new TiDB versions on TiDB Cloud. You can see what version of TiDB your cluster is running in the [TiDB Cloud Console](https://tidbcloud.com/console/clusters) or in the latest [release note](https://docs.pingcap.com/tidbcloud/release-notes). Alternatively, you can also connect to your cluster and use `SELECT version()` or `SELECT tidb_version()` to check the TiDB version.
+No. Serverless Tier clusters are upgraded automatically as we roll out new TiDB versions on TiDB Cloud. You can see what version of TiDB your cluster is running in the [TiDB Cloud Console](https://tidbcloud.com/console/clusters) or in the latest [release note](https://docs.pingcap.com/tidbcloud/release-notes). Alternatively, you can also connect to your cluster and use `SELECT version()` or `SELECT tidb_version()` to check the TiDB version.
