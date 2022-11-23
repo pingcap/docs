@@ -8,18 +8,6 @@ aliases: ['/docs/dev/br/backup-and-restore-storages/','/tidb/dev/backup-storage-
 
 TiDB supports storing backup data to Amazon S3, Google Cloud Storage (GCS), Azure Blob Storage, and NFS. Specifically, you can specify the URL of backup storage in the `--storage` or `-s` parameter of `br`. This document introduces the [URL format](#url-format) and [authentication](#authentication) of different external storage services, and [server-side encryption](#server-side-encryption).
 
-## Schemes
-
-The following services are supported:
-
-| Service | Schemes | Example URL |
-|---------|---------|-------------|
-| Local filesystem, distributed on every node | local | `local:///path/to/dest/` |
-| Amazon S3 and compatible services | s3 | `s3://bucket-name/prefix/of/dest/` |
-| Google Cloud Storage (GCS) | gcs, gs | `gcs://bucket-name/prefix/of/dest/` |
-| Azure Blob Storage | azure, azblob | `azure://container-name/prefix/of/dest/` |
-| Write to nowhere (for benchmarking only) | noop | `noop://` |
-
 ## URL format
 
 ### URL format description
@@ -54,7 +42,7 @@ This section describes the URL format of the storage services:
 - `host`: `bucket name`
 - `parameters`:
 
-    - `credentials-file`: Specifies the path to the credentials JSON file on the tool node.
+    - `credentials-file`: Specifies the path to the credentials JSON file on the migration tool node.
     - `storage-class`: Specifies the storage class of the uploaded objects (for example, `STANDARD` or `COLDLINE`)
     - `predefined-acl`: Specifies the predefined ACL of the uploaded objects (for example, `private` or `project-private`)
 
