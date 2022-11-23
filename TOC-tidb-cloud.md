@@ -432,7 +432,10 @@
   - [Dumpling](/dumpling-overview.md)
   - [Table Filter](/table-filter.md)
   - [Troubleshoot Inconsistency Between Data and Indexes](/troubleshoot-data-inconsistency-errors.md)
-- [FAQs](/tidb-cloud/tidb-cloud-faq.md)
+  - [Serverless Tier Limitations](/tidb-cloud/serverless-tier-limitations.md)
+- FAQs
+  - [TiDB Cloud FAQs](/tidb-cloud/tidb-cloud-faq.md)
+  - [Serverless Tier FAQs](/tidb-cloud/serverless-tier-faqs.md)
 - Release Notes
   - [2022](/tidb-cloud/release-notes-2022.md)
   - [2021](/tidb-cloud/release-notes-2021.md)

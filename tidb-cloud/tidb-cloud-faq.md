@@ -61,15 +61,15 @@ The best way to learn about TiDB Cloud is to follow our step-by-step tutorial. C
 
 ## Architecture FAQs
 
-### There are different components in my TiDB cluster. What are PD, TiDB, TiKV, and TiFlash nodes?
-
-PD, the Placement Driver is "the brain" of the entire TiDB cluster, as it stores the metadata of the cluster. It sends data scheduling commands to specific TiKV nodes according to the data distribution state reported by TiKV nodes in real-time.
+### There are different components in my TiDB cluster. What are TiDB, TiKV, and TiFlash nodes?
 
 TiDB is the SQL computing layer that aggregates data from queries returned from TiKV or TiFlash stores. TiDB is horizontally scalable; increasing the number of TiDB nodes will increase the number of concurrent queries the cluster can handle.
 
 TiKV is the transactional store used to store OLTP data. All the data in TiKV is automatically maintained in multiple replicas (three replicas by default), so TiKV has native high availability and supports automatic failover. TiKV is horizontally scalable; increasing the number of transactional stores will increase OLTP throughput.
 
 TiFlash is the analytical storage that replicates data from the transactional store (TiKV) in real-time and supports real-time OLAP workloads. Unlike TiKV, TiFlash stores data in columns to accelerate analytical processing. TiFlash is also horizontally scalable; increasing TiFlash nodes will increase OLAP storage and computing capacity.
+
+PD, the Placement Driver is "the brain" of the entire TiDB cluster, as it stores the metadata of the cluster. It sends data scheduling commands to specific TiKV nodes according to the data distribution state reported by TiKV nodes in real-time. On TiDB Cloud, PD of each cluster is managed by PingCAP and you can not see or maintain it.
 
 ### How does TiDB replicate data between the TiKV nodes?
 

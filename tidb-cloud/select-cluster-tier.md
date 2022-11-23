@@ -51,17 +51,8 @@ To get the prefix for your cluster, take the following steps:
 
 ### Serverless Tier special terms and conditions
 
-- Serverless Tier does not have uptime SLA guarantee during beta phase. If you use Serverless Tier beta to store a commercial or production dataset, any potential risk associated with the use should be taken on your own, and PingCAP shall not be liable for any damage.
-- Serverless Tier only supports TLS connection, and you cannot disable TLS. For more information, see [Secure Connections to Serverless Tier Clusters](/tidb-cloud/secure-connections-to-serverless-tier-clusters.md).
-- The backup and restore feature is unavailable. You can use [Dumpling](https://docs.pingcap.com/tidb/stable/dumpling-overview) to export your data as a backup.
-- You cannot create any changefeeds (Apache Kafka Sink and MySQL Sink) or use [TiCDC](https://docs.pingcap.com/tidb/stable/ticdc-overview) to replicate incremental data.
-- You cannot use VPC Peering or private endpoint to connect to Serverless Tier clusters.
-- You cannot scale clusters to larger storage, standard nodes, or increase the number of nodes.
-- You cannot [pause or resume](/tidb-cloud/pause-or-resume-tidb-cluster.md) a Serverless Tier cluster.
-- You cannot view the [Monitoring page](/tidb-cloud/built-in-monitoring.md).
-- You cannot use the third-party monitoring service.
-- You cannot customize the port number of a TiDB cluster.
-- The data transfer is limited to a total of 20 GiB in and out per week. If the 20 GiB limit is reached, the network traffic will be throttled to 10 KB/s.
+- Serverless Tier is currently in beta and does not have uptime SLA guarantee during beta phase. If you use Serverless Tier beta to store a commercial or production dataset, any potential risk associated with the use should be taken on your own, and PingCAP shall not be liable for any damage.
+- Some of TiDB Cloud features are partially supported or not supported on Serverless Tier. See [Serverless Tier Limitations](/tidb-cloud/serverless-tier-limitations.md) for details.
 
 ## Dedicated Tier
 
