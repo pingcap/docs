@@ -65,7 +65,7 @@ Corresponding to the backup features, you can perform two types of restore: full
 
 #### Restore performance and impact on TiDB clusters
 
-- Data restore is performed at a scalable speed. Generally, the speed is 100 MB/s per TiKV node. BR only supports restoring data to a new cluster and uses the resources of the target cluster as much as possible. For more details, see [Restoration performance and impact](/br/br-snapshot-guide.md#restoration-performance-and-impact).
+- Data restore is performed at a scalable speed. Generally, the speed is 100 MB/s per TiKV node. BR only supports restoring data to a new cluster and uses the resources of the target cluster as much as possible. For more details, see [Restore performance and impact](/br/br-snapshot-guide.md#restore-performance-and-impact).
 - On each TiKV node, PITR can restore log data at 30 GiB/h. For more details, see [PITR performance and impact](/br/br-pitr-guide.md#performance-and-impact).
 
 ## Backup storage
@@ -84,7 +84,7 @@ This section describes the prerequisites for using the TiDB backup and restore t
 Snapshot backup
 
 - It is recommended that you perform the backup operation during off-peak hours to minimize the impact on applications.
-- It is recommended that you execute multiple backup or restoration operations one by one. Running backup operations in parallel reduces performance and also affects online applications. Worse still, lack of collaboration between multiple tasks might result in task failures and affect cluster performance.
+- It is recommended that you execute multiple backup or restore operations one by one. Running backup operations in parallel reduces performance and also affects online applications. Worse still, lack of collaboration between multiple tasks might result in task failures and affect cluster performance.
 
 Snapshot restore
 
@@ -111,8 +111,8 @@ Backup and restore might go wrong when some features are enabled or disabled. If
 | Feature | Issue | Solution |
 |  ----  | ----  | ----- |
 |GBK charset|| br command-line tool of versions earlier than v5.4.0 does not support restoring `charset=GBK` tables. No version of br command-line tool supports recovering `charset=GBK` tables to TiDB clusters earlier than v5.4.0. |
-| Clustered index | [#565](https://github.com/pingcap/br/issues/565) | Make sure that the value of the `tidb_enable_clustered_index` global variable during restoration is consistent with that during backup. Otherwise, data inconsistency might occur, such as `default not found` and inconsistent data index. |
-| New collation  | [#352](https://github.com/pingcap/br/issues/352)       | Make sure that the value of the `new_collations_enabled_on_first_bootstrap` variable during restoration is consistent with that during backup. Otherwise, inconsistent data index might occur and checksum might fail to pass. For more information, see [FAQ - Why does BR report `new_collations_enabled_on_first_bootstrap` mismatch?](/faq/backup-and-restore-faq.md#why-does-br-report-new_collations_enabled_on_first_bootstrap-mismatch). |
+| Clustered index | [#565](https://github.com/pingcap/br/issues/565) | Make sure that the value of the `tidb_enable_clustered_index` global variable during restore is consistent with that during backup. Otherwise, data inconsistency might occur, such as `default not found` and inconsistent data index. |
+| New collation  | [#352](https://github.com/pingcap/br/issues/352)       | Make sure that the value of the `new_collations_enabled_on_first_bootstrap` variable during restore is consistent with that during backup. Otherwise, inconsistent data index might occur and checksum might fail to pass. For more information, see [FAQ - Why does BR report `new_collations_enabled_on_first_bootstrap` mismatch?](/faq/backup-and-restore-faq.md#why-does-br-report-new_collations_enabled_on_first_bootstrap-mismatch). |
 | Global temporary tables | | Make sure that you are using v5.3.0 or a later version of br command-line tool to back up and restore data. Otherwise, an error occurs in the definition of the backed global temporary tables. |
 | TiDB Lightning Physical Import| | If the upstream database uses TiDB Lightning's physical import mode to import data, the data cannot be backed up in log backup. It is recommended to perform a full backup after the data import.  For more information, see [When the upstream database imports data using TiDB Lightning in the physical import mode, the log backup feature becomes unavailable. Why?](TBP).|
 
@@ -120,7 +120,7 @@ Backup and restore might go wrong when some features are enabled or disabled. If
 
 Before performing backup and restore, br command-line tool compares and checks the TiDB cluster version with its own. If there is a major-version mismatch, br command-line tool prompts a reminder to exit. To forcibly skip the version check, you can set `--check-requirements=false`. Note that skipping the version check might introduce incompatibility.
 
-| Backup version (vertical) \ Restoration version (horizontal) | Restore to TiDB v6.0 | Restore to TiDB v6.1 | Restore to TiDB v6.2 | Restore to TiDB v6.3 |
+| Backup version (vertical) \ Restore version (horizontal) | Restore to TiDB v6.0 | Restore to TiDB v6.1 | Restore to TiDB v6.2 | Restore to TiDB v6.3 |
 |  ----  |  ----  | ---- | ---- | ---- |
 | TiDB v6.0 snapshot backup | Compatible | Compatible | Compatible | Compatible |
 | TiDB v6.1 snapshot backup | Compatible (A known issue [#36379](https://github.com/pingcap/tidb/issues/36379): if backup data contains an empty schema, br might report an error.) | Compatible | Compatible | Compatible |

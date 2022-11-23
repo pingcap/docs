@@ -66,7 +66,7 @@ Assume that you have specified a **backup retention period**. Backup data will b
 To deploy br command-line tool, ensure that the following requirements are met:
 
 - br command-line tool, TiKV nodes, and the backup storage system provide network bandwidth that is greater than the backup speed. If the target cluster is particularly large, the threshold of backup and restore speed is limited by the bandwidth of the backup network.
-- The backup storage system provides sufficient write/read performance (IOPS). Otherwise, the IOPS might become a performance bottleneck during backup or restoration.
+- The backup storage system provides sufficient write/read performance (IOPS). Otherwise, the IOPS might become a performance bottleneck during backup or restore.
 - TiKV nodes have at least two additional CPU cores and high performance disks for backups. Otherwise, the backup might have an impact on the services running on the cluster.
 - br command-line tool runs on a node with more than 8 cores and 16 GiB memory.
 
