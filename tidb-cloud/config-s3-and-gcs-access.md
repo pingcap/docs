@@ -159,6 +159,4 @@ To allow TiDB Cloud to access the source data in your GCS bucket, you need to co
 
     ![Get bucket URI](/media/tidb-cloud/gcp-bucket-uri02.png)
 
-7. In the TiDB Cloud console, go to the **Data Import** page where you get the Google Cloud Service Account ID, and then paste the GCS bucket gsutil URI to the **Bucket gsutil URI** field. The following is an example.
-
-    ![Fill in bucket URI in the TiDB Cloud console](/media/tidb-cloud/gcp-bucket-url-field.png)
+7. In the TiDB Cloud console, go to the **Data Import** page where you get the Google Cloud Service Account ID, and then paste the GCS bucket gsutil URI to the **Bucket gsutil URI** field. For example, paste `gs://tidb-cloud-source-data/`.
