@@ -1,11 +1,11 @@
 ---
-title: TiDB Snapshot Backup and restore Command-line Manual
+title: TiDB Snapshot Backup and Restore Command Manual
 summary: Learn about the commands of TiDB snapshot backup and restore.
 ---
 
-# TiDB Snapshot Backup and restore Command-line Manual
+# TiDB Snapshot Backup and Restore Command Manual
 
-This document describes the commands of TiDB snapshot backup and restore according to the backup and restore scenario, including:
+This document describes the commands of TiDB snapshot backup and restore according to the application scenarios, including:
 
 - [Back up TiDB cluster snapshots](#back-up-tidb-cluster-snapshots)
 - [Back up a database](#back-up-a-database)
@@ -20,8 +20,8 @@ This document describes the commands of TiDB snapshot backup and restore accordi
 
 For more information about snapshot backup and restore, refer to:
 
-- [Back up and Restore TiDB Snapshots Guide](/br/br-snapshot-guide.md)
-- [TiDB Back up and Restore Use Cases](/br/backup-and-restore-use-cases.md)
+- [Snapshot Backup and Restore Guide](/br/br-snapshot-guide.md)
+- [Backup and Restore Use Cases](/br/backup-and-restore-use-cases.md)
 
 ## Back up TiDB cluster snapshots
 
@@ -38,8 +38,8 @@ br backup full \
 
 In the preceding command:
 
-- `--backupts`: The physical time of the snapshot. The format can be [TSO](/glossary.md#tso) or timestamp, such as `400036290571534337` or `2018-05-11 01:42:23`. If the data of this snapshot is processed by Garbage Collection (GC), the `br backup` command will exit with an error. If you leave this parameter unspecified, `br` picks the snapshot corresponding to the backup start time.
-- `--ratelimit`: The maximum speed **per TiKV** performing backup tasks. The unit is MiB/s
+- `--backupts`: The physical time of the snapshot. The format can be [TSO](/glossary.md#tso) or timestamp, such as `400036290571534337` or `2018-05-11 01:42:23`. If the data of this snapshot is garbage collected, the `br backup` command returns an error and 'br' exits. If you leave this parameter unspecified, `br` picks the snapshot corresponding to the backup start time.
+- `--ratelimit`: The maximum speed **per TiKV** performing backup tasks. The unit is in MiB/s.
 - `--log-file`: The target file where `br` log is written.
 
 During backup, a progress bar is displayed in the terminal, as shown below. When the progress bar advances to 100%, the backup is complete.
@@ -56,7 +56,7 @@ The `br` command-line tool supports backing up partial data of a specified datab
 
 To back up a database in a cluster, run the `br backup db` command.
 
-The following backs up the `test` database to Amazon S3:
+The following example backs up the `test` database to Amazon S3:
 
 ```shell
 br backup db \
@@ -73,7 +73,7 @@ In the preceding command, `--db` specifies the database name, and other paramete
 
 To back up a table in a cluster, run the `br backup table` command.
 
-The following backs up the `test.usertable` table to Amazon S3:
+The following example backs up the `test.usertable` table to Amazon S3:
 
 ```shell
 br backup table \
@@ -91,7 +91,7 @@ In the preceding command, `--db` and `--table` specify the database name and tab
 
 To back up multiple tables with more criteria, run the `br backup full` command and specify the [table filters](/table-filter.md) with `--filter` or `-f`.
 
-The following backs up tables that match the `db*.tbl*` filter rule to Amazon S3:
+The following example backs up tables that match the `db*.tbl*` filter rule to Amazon S3:
 
 ```shell
 br backup full \
@@ -145,7 +145,7 @@ br restore full \
 
 In the preceding command:
 
-- `--ratelimit`: The maximum speed **per TiKV** performing backup tasks. The unit is MiB/s
+- `--ratelimit`: The maximum speed **per TiKV** performing backup tasks. The unit is in MiB/s.
 - `--log-file`: The target file where the `br` log is written.
 
 During restore, a progress bar is displayed in the terminal as shown below. When the progress bar advances to 100%, the restore task is completed. Then `br` will verify the restored data to ensure data security.
@@ -201,7 +201,7 @@ In the preceding command, `--table` specifies the name of the table to be restor
 
 To restore multiple tables with more complex filter rules, run the `br restore full` command and specify the [table filters](/table-filter.md) with `--filter` or `-f`.
 
-The following restores tables that match the `db*.tbl*` filter rule from Amazon S3 to the target cluster:
+The following example restores tables that match the `db*.tbl*` filter rule from Amazon S3 to the target cluster:
 
 ```shell
 br restore full \

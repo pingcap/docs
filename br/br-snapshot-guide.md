@@ -1,12 +1,12 @@
 ---
-title: Back up and Restore TiDB Snapshots Guide
+title: Snapshot Back up and Restore Guide
 summary: Learn about how to back up and restore TiDB snapshots using the br command-line tool.
 aliases: ['/tidb/dev/br-usage-backup/','/tidb/dev/br-usage-restore/','/tidb/dev/br-usage-restore-for-maintain/', '/tidb/dev/br-usage-backup-for-maintain/']
 ---
 
-# Back up and Restore TiDB Snapshots Guide
+# Snapshot Back up and Restore Guide
 
-This document describes how to back up and restore TiDB snapshots using the `br` command-line tool. Before backing up and restoring, you need to [install the `br` command-line tool](/br/br-use-overview.md#deploy-and-use-br-command-line-tool) first.
+This document describes how to back up and restore TiDB snapshots using the `br` command-line tool. Before backing up and restoring data, you need to [install the `br` command-line tool](/br/br-use-overview.md#deploy-and-use-br-command-line-tool) first.
 
 Snapshot backup is an implementation to back up the entire cluster. It is based on [multi-version concurrency control (MVCC)](/tidb-storage.md#mvcc) and backs up all data in the specified snapshot to a target storage. The size of the backup data is approximately the size of the compressed single replica in the cluster. After the backup is completed, you can restore the backup data to an empty cluster or a cluster that does not raise data conflicts (with the same schema or same tables), restore the cluster to the state at the time of the snapshot backup, and restore multiple replicas according to the cluster replica settings.
 
@@ -28,11 +28,11 @@ tiup br backup full --pd "${PD_IP}:2379" \
 
 In the preceding command:
 
-- `--backupts`: The physical time of the snapshot. The format can be [TSO](/glossary.md#tso) or timestamp, such as `400036290571534337` or `2018-05-11 01:42:23`. If the data of this snapshot is processed by Garbage Collection (GC), the `br backup` command will exit with an error. If you leave this parameter unspecified, `br` picks the snapshot corresponding to the backup start time.
+- `--backupts`: The physical time of the snapshot. The format can be [TSO](/glossary.md#tso) or timestamp, such as `400036290571534337` or `2018-05-11 01:42:23`. If the data of this snapshot is garbage collected, the `br backup` command returns an error and `br` exits. If you leave this parameter unspecified, `br` picks the snapshot corresponding to the backup start time.
 - `--storage`: The storage address of the backup data. Snapshot backup supports Amazon S3, Google Cloud Storage, and Azure Blob Storage as backup storage. The preceding command uses Amazon S3 as an example. For more details, see [URL format of backup storages](/br/backup-and-restore-storages.md#url-format).
-- `--ratelimit`: The maximum speed **per TiKV** performing backup tasks. The unit is MiB/s
+- `--ratelimit`: The maximum speed **per TiKV** performing backup tasks. The unit is in MiB/s.
 
-During backup, a progress bar is displayed in the terminal as shown below. When the progress bar advances to 100%, the backup task is completed.
+During backup, a progress bar is displayed in the terminal as shown below. When the progress bar advances to 100%, the backup task is completed and statistics such as total backup time, average backup speed, and backup data size are displayed.
 
 ```shell
 Full Backup <-------------------------------------------------------------------------------> 100.00%
@@ -57,7 +57,7 @@ The output is as follows, corresponding to the physical time `2022-09-08 13:30:0
 
 ## Restore TiDB cluster snapshots
 
-You can restore a TiDB cluster snapshot by running the `br restore full` command. Run `br restore full --help` to see the help information:
+You can restore a snapshot backup by running the `br restore full` command. Run `br restore full --help` to see the help information:
 
 The following example restores the [preceding backup snapshot](#back-up-tidb-cluster-snapshots) to a target cluster:
 
@@ -79,7 +79,7 @@ Full Restore <------------------------------------------------------------------
 
 **Restore a database**
 
-To restore a database to a cluster, run the `br restore db` command. The following restores the `test` database from the backup data to the target cluster:
+To restore a database to a cluster, run the `br restore db` command. The following example restores the `test` database from the backup data to the target cluster:
 
 ```shell
 tiup br restore db \
@@ -92,7 +92,7 @@ In the preceding command, `--db` specifies the name of the database to be restor
 
 **Restore a table**
 
-To restore a single table to a cluster, run the `br restore table` command. The following restores the `test.usertable` table from the backup data to the target cluster:
+To restore a single table to a cluster, run the `br restore table` command. The following example restores the `test.usertable` table from the backup data to the target cluster:
 
 ```shell
 tiup br restore table --pd "${PD_IP}:2379" \
@@ -105,7 +105,7 @@ In the preceding command, `--db` specifies the name of the database to be restor
 
 **Restore multiple tables with table filter**
 
-To restore multiple tables with more complex filter rules, run the `br restore full` command and specify the [table filters](/table-filter.md) with `--filter` or `-f`. The following restores tables that match the `db*.tbl*` filter rule from the backup data to the target cluster:
+To restore multiple tables with more complex filter rules, run the `br restore full` command and specify the [table filters](/table-filter.md) with `--filter` or `-f`. The following example restores tables that match the `db*.tbl*` filter rule from the backup data to the target cluster:
 
 ```shell
 tiup br restore full \
@@ -156,7 +156,7 @@ The backup feature has some impact on cluster performance (transaction latency a
 
 To illustrate the impact of backup, this document lists the test conclusions of several snapshot backup tests:
 
-- (5.3.0 and earlier) When the backup threads of `br` on a TiKV node take up 75% of the total CPU of the node, the QPS is reduced by 30% of the original QPS.
+- (5.3.0 and earlier) When the backup threads of `br` on a TiKV node take up 75% of the total CPU of the node, the QPS is reduced by 35% of the original QPS.
 - (5.4.0 and later) When there are no more than `8` threads of `br` on a TiKV node and the cluster's total CPU utilization does not exceed 80%, the impact of `br` tasks on the cluster (write and read) is 20% at most.
 - (5.4.0 and later) When there are no more than `8` threads of `br` on a TiKV node and the cluster's total CPU utilization does not exceed 75%, the impact of `br` tasks on the cluster (write and read) is 10% at most.
 - (5.4.0 and later) When there are no more than `8` threads of `br` on a TiKV node and the cluster's total CPU utilization does not exceed 60%, `br` tasks have little impact on the cluster (write and read).
@@ -170,11 +170,11 @@ The impact of backup on cluster performance can be reduced by limiting the backu
 
 ### Performance and impact of snapshot restore
 
-- During restoring data, TiDB tries to fully utilize the TiKV CPU, disk IO, and network bandwidth resources. Therefore, it is recommended to restore the backup data on an empty cluster to avoid affecting the running applications.
-- The restore speed of backup data has a great relationship with the cluster configuration, deployment, and running applications. In the internal tests, the restore speed of a single TiKV node can reach 100 MiB/s. The performance and impact of snapshot restore are different in different user scenarios and should be tested in actual environments.
+- During data restore, TiDB tries to fully utilize the TiKV CPU, disk IO, and network bandwidth resources. Therefore, it is recommended to restore the backup data on an empty cluster to avoid affecting the running applications.
+- The speed of restoring backup data is much related with the cluster configuration, deployment, and running applications. In internal tests, the restore speed of a single TiKV node can reach 100 MiB/s. The performance and impact of snapshot restore are varied in different user scenarios and should be tested in actual environments.
 
-## What's next
+## See also
 
-* [TiDB back up and restore use cases](/br/backup-and-restore-use-cases.md)
-* [`br` command-line manual](/br/use-br-command-line-tool.md)
-* [TiDB snapshot backup and restore architecture](/br/br-snapshot-architecture.md)
+* [TiDB Backup and Restore Use Cases](/br/backup-and-restore-use-cases.md)
+* [`br` Command-line Manual](/br/use-br-command-line-tool.md)
+* [TiDB Snapshot Backup and Restore Architecture](/br/br-snapshot-architecture.md)

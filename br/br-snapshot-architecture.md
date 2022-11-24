@@ -1,11 +1,11 @@
 ---
-title: TiDB Snapshot Backup and restore Architecture
+title: TiDB Snapshot Backup and Restore Architecture
 summary: Learn about the architecture of TiDB snapshot backup and restore.
 ---
 
-# TiDB Snapshot Backup and restore Architecture
+# TiDB Snapshot Backup and Restore Architecture
 
-This document introduces the architecture and process of TiDB snapshot backup and restore using the `br` command-line tool as an example.
+This document introduces the architecture and process of TiDB snapshot backup and restore using the br command-line tool (hereinafter referred to as `br`) as an example.
 
 ## Architecture
 
@@ -15,11 +15,11 @@ The TiDB snapshot backup and restore architecture is as follows:
 
 ## Process of backup
 
-The process of a TiDB cluster backup is as follows:
+The process of a cluster snapshot backup is as follows:
 
 ![snapshot backup process design](/media/br/br-snapshot-backup-ts.png)
 
-The full backup process is as follows:
+The complete backup process is as follows:
 
 1. `br` receives the `br backup full` command.
 
@@ -29,46 +29,46 @@ The full backup process is as follows:
 
     * **Pause GC**: `br` configures the TiDB GC time to prevent the backup data from being cleaned up by [TiDB GC mechanism](/garbage-collection-overview.md).
     * **Fetch TiKV and Region info**: `br` accesses PD to get all TiKV nodes addresses and [Region](/tidb-storage.md#region) distribution of data.
-    * **Request TiKV to back up data**: `br` creates a backup request and sends it to all TiKV nodes. The backup request includes the backup timestamp, Region to be backed up, and the storage path, and send it to all TiKV nodes.
+    * **Request TiKV to back up data**: `br` creates a backup request and sends it to all TiKV nodes. The backup request includes the backup timestamp, Regions to be backed up, and the storage path.
 
 3. TiKV accepts the backup request and initiates a backup worker.
 
 4. TiKV backs up the data.
 
-    * **Scan KVs**: the backup worker reads data corresponding to the backup timestamp from Region (only leader).
+    * **Scan KVs**: the backup worker reads data corresponding to the backup timestamp from the Region where the leader locates.
     * **Generate SST**: the backup worker saves the data to SST files, which are stored in the memory.
     * **Upload SST**: the backup worker uploads the SST files to the storage path.
 
 5. `br` receives the backup result from each TiKV node.
 
-    * If some data fails to be backed up due to Region changes, for example, a TiKV node is down, `br` will retry to back up these data.
+    * If some data fails to be backed up due to Region changes, for example, a TiKV node is down, `br` will retry the backup.
     * If there is any data fails to be backed up and cannot be retried, the backup task fails.
-    * After all data is backed up, `br` will back up the metadata.
+    * After all data is backed up, `br` will then back up the metadata.
 
 6. `br` backs up the metadata.
 
-    * **Back up schemas**: `br` backs up the table schemas and calculates the checksum of the table data at the same time.
+    * **Back up schemas**: `br` backs up the table schemas and calculates the checksum of the table data.
     * **Upload metadata**: `br` generates the backup metadata and uploads it to the storage path. The backup metadata includes the backup timestamp, the table and corresponding backup files, data checksum, and file checksum.
 
 ## Process of restore
 
-The process of a TiDB cluster restore is as follows:
+The process of a cluster snapshot restore is as follows:
 
 ![snapshot restore process design](/media/br/br-snapshot-restore-ts.png)
 
-The full restore process is as follows:
+The complete restore process is as follows:
 
 1. `br` receives the `br restore` command.
 
-    * Gets the storage path and the database or table to be restored of the backup data.
+    * Gets the data storage path and the database or table to be restored.
     * Checks whether the table to be restored exists and whether it meets the requirements for restore.
 
 2. `br` schedules the restore data.
 
     * **Pause Region schedule**: `br` requests PD to pause the automatic Region scheduling during restore.
-    * **Restore schema**: `br` gets the schema of the backup data and the database and table to be restored. Note that the ID of a new created table might be different from the backup data.
-    * **Split & scatter Region**: `br` requests PD to allocate Region (split Region) based on backup data and schedules Regions to be uniform distributed to storage nodes (scatter Region). Each Region has a clear data range `[start key, end key)`.
-    * **Request TiKV to restore data**: `br` creates a restore request and sends it to the corresponding TiKV node according to the result of Region split. The restore request includes the data to be restored and rewrite rules.
+    * **Restore schema**: `br` gets the schema of the backup data and the database and table to be restored. Note that the ID of a newly created table might be different from that of the backup data.
+    * **Split & scatter Region**: `br` requests PD to allocate Regions (split Region) based on backup data, and schedules Regions to be evenly distributed to storage nodes (scatter Region). Each Region has a specified data range `[start key, end key)`.
+    * **Request TiKV to restore data**: `br` creates a restore request and sends it to the corresponding TiKV nodes according to the result of Region split. The restore request includes the data to be restored and rewrite rules.
 
 3. TiKV accepts the restore request and initiates a restore worker.
 
@@ -76,14 +76,14 @@ The full restore process is as follows:
 
 4. TiKV restores the data.
 
-    * **Download SST**: the restore worker downloads corresponding SST files from the storage path.
+    * **Download SST**: the restore worker downloads corresponding SST files from the storage path to a local directory.
     * **Rewrite KVs**: the restore worker rewrites the KV data according to the new table ID, that is, replace the original table ID in the [Key-Value](/tidb-computing.md#mapping-table-data-to-key-value) with the new table ID. The restore worker also rewrites the index ID in the same way.
     * **Ingest SST**: the restore worker ingests the processed SST files into RocksDB.
     * **Report restore result**: the restore worker reports the restore result to `br`.
 
 5. `br` receives the restore result from each TiKV node.
 
-    * If some data fails to be restored due to `RegionNotFound` or `EpochNotMatch`, for example, a TiKV node is down, `br` will retry to restore these data.
+    * If some data fails to be restored due to `RegionNotFound` or `EpochNotMatch`, for example, a TiKV node is down, `br` will retry the restore.
     * If there is any data fails to be restored and cannot be retried, the restore task fails.
     * After all data is restored, the restore task succeeds.
 
@@ -95,28 +95,28 @@ For more details about the backup and restore process, see [Design of backup and
 
 Snapshot backup generates the following types of files:
 
-- `SST` file: stores the data that the TiKV node backs up. The size of an `SST` file equals to the size of the Region.
+- `SST` file: stores the data that the TiKV node backs up. The size of an `SST` file equals to that of a Region.
 - `backupmeta` file: stores the metadata of a backup task, including the number, the key range, the size, and the Hash (sha256) value of the backup files.
 - `backup.lock` file: prevents multiple backup tasks from storing data at the same directory.
 
 ### Naming format of SST files
 
-When data is backed up to Google Cloud Storage or Azure Blob Storage, SST files are named in the format of `storeID_regionID_regionEpoch_keyHash_timestamp_cf`. The fields in the format are explained as follows:
+When data is backed up to Google Cloud Storage (GCS) or Azure Blob Storage, SST files are named in the format of `storeID_regionID_regionEpoch_keyHash_timestamp_cf`. The fields in the name are explained as follows:
 
 - `storeID` is the TiKV node ID.
 - `regionID` is the Region ID.
 - `regionEpoch` is the version number of Region.
 - `keyHash` is the Hash (sha256) value of the startKey of a range, which ensures the uniqueness of a file.
 - `timestamp` is the Unix timestamp of an SST file when it is generated by TiKV.
-- `cf` indicates the Column Family of RocksDB (only restores data which `cf` is `default` or `write` ).
+- `cf` indicates the Column Family of RocksDB (only restores data whose `cf` is `default` or `write` ).
 
-When data is backed up to Amazon S3 or a network disk, the SST files are named in the format of `regionID_regionEpoch_keyHash_timestamp_cf`. The fields in the format are explained as follows:
+When data is backed up to Amazon S3 or a network disk, the SST files are named in the format of `regionID_regionEpoch_keyHash_timestamp_cf`. The fields in the name are explained as follows:
 
 - `regionID` is the Region ID.
 - `regionEpoch` is the version number of Region.
 - `keyHash` is the Hash (sha256) value of the startKey of a range, which ensures the uniqueness of a file.
 - `timestamp` is the Unix timestamp of an SST file when it is generated by TiKV.
-- `cf` indicates the Column Family of RocksDB (only restores data which `cf` is `default` or `write` ).
+- `cf` indicates the Column Family of RocksDB (only restores data whose `cf` is `default` or `write` ).
 
 ### Storage format of SST files
 
@@ -125,7 +125,7 @@ When data is backed up to Amazon S3 or a network disk, the SST files are named i
 
 ### Structure of backup files
 
-When you back up data to Google Cloud Storage or Azure Blob Storage, the SST files, `backupmeta` files, and `backup.lock` files are stored in the same directory as the following structure:
+When you back up data to GCS or Azure Blob Storage, the SST files, `backupmeta` files, and `backup.lock` files are stored in the same directory as the following structure:
 
 ```
 .
@@ -155,6 +155,6 @@ When you back up data to Amazon S3 or a network disk, the SST files are stored i
     └── store5
 ```
 
-## What's next
+## See also
 
 - [TiDB snapshot backup and restore guide](/br/br-snapshot-guide.md)
