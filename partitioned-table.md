@@ -879,7 +879,19 @@ ALTER TABLE member_level REORGANIZE PARTITION l1_2,l3,l4,l5,l6 INTO
 
 Reorganizing partitions (including merging or splitting partitions) changes partitions into a new set of partition definitions. It cannot change the type of partitioning (for example, change the List type to the Range type or Range Columns to Range type). 
 
-For Range COLUMNS partitioned tables, the list of partitions needs to be in a single range. You can only change the end of the range if it includes the last partition. If the end is changed and rows no longer fit, the DDL statements will fail with an error.
+For Range partitioned tables, the list of partitions needs to be in a single range. You can only change the end of the range if it includes the last partition. If the end is changed and rows no longer fit, the DDL statements will fail with an error.
+
+{{< copyable "sql" >}}
+
+```sql
+INSERT INTO members VALUES (313, "John", "Doe", "2022-11-22", NULL);
+ALTER TABLE members REORGANIZE PARTITION p2000 INTO (PARTITION p2000 VALUES LESS THAN (2050));
+ALTER TABLE members REORGANIZE PARTITION p2000 INTO (PARTITION p2000 VALUES LESS THAN (2020));
+```
+
+```
+ERROR 1526 (HY000): Table has no partition for value 2022
+```
 
 For Range partitions, a REORGANIZE PARTITION clause can only merge adjacent partitions.
 
@@ -890,7 +902,7 @@ ALTER TABLE members REORGANIZE PARTITION p1800,p2000 INTO (PARTITION p2000 VALUE
 ```
 
 ```
-ERROR 8200 (HY000): Unsupported REORGANIZE PARTITION of RANGE; not a single range
+ERROR 8200 (HY000): Unsupported REORGANIZE PARTITION of RANGE; not adjacent partitions
 ```
 
 New partition definitions must cover the existing range or set of values so that existing rows can fit into the new partitions.
