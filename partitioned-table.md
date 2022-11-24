@@ -729,7 +729,7 @@ For `LIST` and `RANGE` partitioned tables, you can manage the partitions as foll
  - Add partitions using the `ALTER TABLE <table name> ADD PARTITION (<partition specification>)` statement. 
  - Drop partitions using the `ALTER TABLE <table name> DROP PARTITION <list of partitions>` statement. 
   - Delete data from specified partitions using the `ALTER TABLE <table name> TRUNCATE PARTITION <list of partitions>` statement. 
-- Merge, split, or make other changes to the partitions using the `ALTER TABLE <table name> REORGANIZE PARTITION <list of partitions> INTO (<new partition definitions>)` statement.
+ - Merge, split, or make other changes to the partitions using the `ALTER TABLE <table name> REORGANIZE PARTITION <list of partitions> INTO (<new partition definitions>)` statement.
 
 For `HASH` partitioned tables, `COALESCE PARTITION` and `ADD PARTITION` are not yet supported.
 
@@ -877,9 +877,12 @@ ALTER TABLE member_level REORGANIZE PARTITION l1_2,l3,l4,l5,l6 INTO
  PARTITION lEven VALUES IN (2,4,6));
 ```
 
-Reorganizing partitions (including merging or splitting partitions) changes partitions into a new set of partition definitions. It cannot change the type of partitioning (LIST or RANGE [COLUMNS]). For RANGE [COLUMNS] partitioned tables, the list of partitions needs to be in a single range. You can only change the end of the range if it includes the last partition. If the end is changed and rows no longer fit, the DDL will fail with an error.
+Reorganizing partitions (including merging or splitting partitions) changes partitions into a new set of partition definitions. It cannot change the type of partitioning (for example, change the List type to the Range COLUMNS type). 
 
-Range partitions needs to be a single range:
+For Range COLUMNS partitioned tables, the list of partitions needs to be in a single range. You can only change the end of the range if it includes the last partition. If the end is changed and rows no longer fit, the DDL statements will fail with an error.
+
+For Range partitions, a REORGANIZE PARTITION clause can only merge adjacent partitions.
+
 {{< copyable "sql" >}}
 
 ```sql
@@ -890,7 +893,7 @@ ALTER TABLE members REORGANIZE PARTITION p1800,p2000 INTO (PARTITION p2000 VALUE
 ERROR 8200 (HY000): Unsupported REORGANIZE PARTITION of RANGE; not a single range
 ```
 
-New partition definitions that does not accommodate all existing rows:
+New partition definitions must cover the existing range or set of values so that existing rows can fit into the new partitions.
 {{< copyable "sql" >}}
 
 ```sql
