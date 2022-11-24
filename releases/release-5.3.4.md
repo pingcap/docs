@@ -1,8 +1,8 @@
 ---
-title: TiDB 5.3.4 Release Note
+title: TiDB 5.3.4 Release Notes
 ---
 
-# TiDB 5.3.4 Release Note
+# TiDB 5.3.4 Release Notes
 
 Release date: November 24, 2022
 
