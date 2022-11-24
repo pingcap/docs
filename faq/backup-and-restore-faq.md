@@ -6,11 +6,11 @@ aliases: ['/docs/dev/br/backup-and-restore-faq/','/tidb/dev/pitr-troubleshoot/',
 
 # Backup & Restore FAQs
 
-This document lists the frequently asked questions (FAQs) and the solutions about backup and restore provided by TiDB.
+This document lists the frequently asked questions (FAQs) and the solutions of backup and restore provided by TiDB.
 
 ## Performance issues of backup and restore
 
-## In TiDB v5.4.0 and later versions, when backup tasks are performed on the cluster under high workload, why does the speed of backup tasks become slow?
+## In TiDB v5.4.0 and later versions, when backup tasks are performed on the cluster under a heavy workload, why does the speed of backup tasks become slow?
 
 Starting from TiDB v5.4.0, backup and restore introduces the auto-tune feature for backup tasks. For clusters in v5.4.0 or later versions, this feature is enabled by default. When the cluster workload is heavy, the feature limits the resources used by backup tasks to reduce the impact on the online cluster. For more information, refer to [Backup Auto-Tune](/br/br-auto-tune.md).
 
@@ -39,7 +39,7 @@ Consider the following possible causes:
 
 - The memory allocation of the node where the `br` process is located is too low.
 
-    It is recommended to scale up the node memory configuration to at least 16 GB to ensure that PITR has sufficient memory resources for recovery.
+    It is recommended to scale up the node memory configuration to at least 16 GB to ensure that PITR has sufficient memory for recovery.
 
 ### When the upstream database imports data using TiDB Lightning in the physical import mode, the log backup feature becomes unavailable. Why?
 
@@ -69,7 +69,7 @@ To resolve this issue, you need to manually execute the `br log resume` command 
 
 Issue: [#37207](https://github.com/pingcap/tidb/issues/37207)
 
-This issue usually occurs when you enable log backup during a full data import and afterwards perform a PITR to restore data at a time point during the data import.
+This issue usually occurs when you enable log backup during a full data import and afterward perform a PITR to restore data at a time point during the data import.
 
 Specifically, there is a probability that this issue occurs if there are a large number of hotspot writes for a long time (such as 24 hours) and if the OPS of each TiKV node is larger than 50k/s (you can view the metrics in Grafana: **TiKV-Details** -> **Backup Log** -> **Handle Event Rate**).
 
@@ -185,7 +185,7 @@ When using `br` to restore the backup data with the value of [`--ddl-batch-size`
 >
 > If no Network File System (NFS) is mounted to a `br` or TiKV node, or if you use external storage that supports Amazon S3, GCS, or Azure Blob Storage protocols, the data backed up by `br` is generated at each TiKV node.**Note that this is not the recommended way to deploy `br`**, because the backup data are scattered in the local file system of each node. Collecting the backup data might result in data redundancy and operation and maintenance problems. Meanwhile, if you restore data directly before collecting the backup data, you will encounter the `SST file not found` error.
 
-When you use `local` storage, `backupmeta` is generated on the node where `br` is running, and backup files are generated on the Leader nodes of each Region.
+When you use local storage, `backupmeta` is generated on the node where `br` is running, and backup files are generated on the Leader nodes of each Region.
 
 ### What should I do if the error message `could not read local://...:download sst failed` is returned during data restore?
 
@@ -197,15 +197,15 @@ You need to confirm whether TiKV has access to the backup directory. To back up 
 
 During the backup operation, if the storage medium is the local disk or a network file system (NFS), make sure that the user to start `br` and the user to start TiKV are consistent (if `br` and TiKV are on different machines, the users' UIDs must be consistent). Otherwise, the `Permission denied` issue might occur.
 
-Running `br` with the root access might fail due to the disk permission, because the backup files (SST files) are saved by TiKV.
+Running `br` as the `root` user might fail due to the disk permission, because the backup files (SST files) are saved by TiKV.
 
 > **Note:**
 >
 > You might encounter the same problem during data restore. When the SST files are read for the first time, the read permission is verified. The execution duration of DDL suggests that there might be a long interval between checking the permission and running `br`. You might receive the error message `Permission denied` after waiting for a long time.
->
-> Therefore, it is recommended to check the permission before data restore according to the following steps:
 
-1. Run the Linux-native command for process query:
+Therefore, it is recommended to check the permission before data restore according to the following steps:
+
+1. Run the Linux command for process query:
 
     {{< copyable "shell-regular" >}}
 
@@ -213,7 +213,7 @@ Running `br` with the root access might fail due to the disk permission, because
     ps aux | grep tikv-server
     ```
 
-    The output of the above command:
+    The output is as follows:
 
     ```shell
     tidb_ouo  9235 10.9  3.8 2019248 622776 ?      Ssl  08:28   1:12 bin/tikv-server --addr 0.0.0.0:20162 --advertise-addr 172.16.6.118:20162 --status-addr 0.0.0.0:20188 --advertise-status-addr 172.16.6.118:20188 --pd 172.16.6.118:2379 --data-dir /home/user1/tidb-data/tikv-20162 --config conf/tikv.toml --log-file /home/user1/tidb-deploy/tikv-20162/log/tikv.log
@@ -228,14 +228,14 @@ Running `br` with the root access might fail due to the disk permission, because
     ps aux | grep tikv-server | awk '{print $1}'
     ```
 
-    The output of the above command:
+    The output is as follows:
 
     ```shell
     tidb_ouo
     tidb_ouo
     ```
 
-2. Query the startup information of the cluster using the TiUP command:
+2. Query the startup information of the cluster using the `tiup` command:
 
     {{< copyable "shell-regular" >}}
 
@@ -243,7 +243,7 @@ Running `br` with the root access might fail due to the disk permission, because
     tiup cluster list
     ```
 
-    The output of the above command:
+    The output is as follows:
 
     ```shell
     [root@Copy-of-VM-EE-CentOS76-v1 br]# tiup cluster list
@@ -261,7 +261,7 @@ Running `br` with the root access might fail due to the disk permission, because
     ls -al backup
     ```
 
-    The output of the above command:
+    The output is as follows:
 
     ```shell
     [root@Copy-of-VM-EE-CentOS76-v1 user1]# ls -al backup
@@ -270,11 +270,11 @@ Running `br` with the root access might fail due to the disk permission, because
     drwxr-xr-x 11 root root 310 Jul  4 10:35 ..
     ```
 
-    From the above output, you can find that the `tikv-server` instance is started by the user `tidb_ouo`. But the user `tidb_ouo` does not have the write permission for `backup`. Therefore, the backup fails.
+    From the output of step 2, you can find that the `tikv-server` instance is started by the user `tidb_ouo`. But the user `tidb_ouo` does not have the write permission for `backup`. Therefore, the backup fails.
 
-### Why does tables in the `mysql` schema not be restored?
+### Why are tables in the `mysql` schema not restored?
 
-Starting from `br` v5.1.0, when you perform a full backup, `br` backs up the **tables in the `mysql` schema**. Before `br` v6.2.0, under default configuration, `br` only restores user data, but does not restore tables in the **mysql schema**.
+Starting from `br` v5.1.0, when you perform a full backup, `br` backs up the **tables in the `mysql` schema**. Before `br` v6.2.0, under default configuration, `br` only restores user data, but does not restore tables in the **`mysql` schema**.
 
 To restore a table created by the user in the `mysql` schema (not system tables), you can explicitly include the table using [table filters](/table-filter.md#syntax). The following example shows how to restore the `mysql.usertable` table when `br` performs a normal restore.
 
@@ -312,7 +312,7 @@ During data backup, backup files are generated on the Leader nodes of each Regio
 
 However, if you want to restore data from local storage, the number of replicas is equal to that of the TiKV nodes, because each TiKV must have access to all backup files.
 
-### Why is the disk usage shown on the monitoring node inconsistent after backup or restore using `br` ?
+### Why is the disk usage shown on the monitoring node inconsistent after backup or restore using `br`?
 
 This inconsistency is caused by the fact that the data compression rate used in backup is different from the default rate used in restore. If the checksum succeeds, you can ignore this issue.
 
@@ -322,7 +322,7 @@ This inconsistency is caused by the fact that the data compression rate used in 
 
 In v4.0.9, `br` backs up statistics by default, which consumes too much memory. To ensure that the backup process goes well, the backup for statistics is disabled by default starting from v4.0.10.
 
-If you do not execute `ANALYZE` on the table, TiDB will fail to select the optimized execution plan due to inaccurate statistics. If query performance is not a key concern, you can ignore `ANALYZE`.
+If you do not execute `ANALYZE` on the table, TiDB will fail to select the optimal execution plan due to inaccurate statistics. If query performance is not a key concern, you can ignore `ANALYZE`.
 
 ### Can I use multiple `br` processes at the same time to restore the data of a single cluster?
 
