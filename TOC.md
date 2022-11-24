@@ -109,7 +109,7 @@
         -   [オペレーティング システムのチューニング](/tune-operating-system.md)
     -   ソフトウェアのチューニング
         -   Configuration / コンフィグレーション
-            -   [TiDB メモリのチューニング](/configure-memory-usage.md)
+            -   [TiDB メモリの調整](/configure-memory-usage.md)
             -   [TiKV スレッドの調整](/tune-tikv-thread-performance.md)
             -   [TiKV メモリの調整](/tune-tikv-memory-performance.md)
             -   [TiKV Follower Readの調整](/follower-read.md)
@@ -139,7 +139,7 @@
                 -   [パーティションのプルーニング](/partition-pruning.md)
                 -   [TopN とリミット プッシュ ダウン](/topn-limit-push-down.md)
                 -   [結合したテーブルの再配置](/join-reorder.md)
-            -   物理的な最適化
+            -   物理的最適化
                 -   [概要](/sql-physical-optimization.md)
                 -   [インデックスの選択](/choose-index.md)
                 -   [統計](/statistics.md)
@@ -262,7 +262,7 @@
         -   [TiDBクラスタトポロジ リファレンス](/tiup/tiup-cluster-topology-reference.md)
         -   [DMクラスタトポロジ リファレンス](/tiup/tiup-dm-topology-reference.md)
         -   [ミラー リファレンス ガイド](/tiup/tiup-mirror-reference.md)
-        -   TiUPコンポーネント
+        -   TiUP コンポーネント
             -   [tiup-playground](/tiup/tiup-playground.md)
             -   [tiup-cluster](/tiup/tiup-cluster.md)
             -   [tiup-mirror](/tiup/tiup-mirror.md)
@@ -319,7 +319,7 @@
             -   基本的な機能
                 -   [テーブル ルーティング](/dm/dm-key-features.md)
                 -   [ブロックリストと許可リスト](/dm/dm-key-features.md#block-and-allow-table-lists)
-                -   [Binlogイベント フィルタ](/dm/dm-key-features.md#binlog-event-filter)
+                -   [Binlogイベント フィルター](/dm/dm-key-features.md#binlog-event-filter)
             -   高度な機能
                 -   シャード テーブルからのデータのマージと移行
                     -   [概要](/dm/feature-shard-merge.md)
@@ -765,6 +765,7 @@
         -   [5.4.1](/releases/release-5.4.1.md)
         -   [5.4.0](/releases/release-5.4.0.md)
     -   v5.3
+        -   [5.3.4](/releases/release-5.3.4.md)
         -   [5.3.3](/releases/release-5.3.3.md)
         -   [5.3.2](/releases/release-5.3.2.md)
         -   [5.3.1](/releases/release-5.3.1.md)
