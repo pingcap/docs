@@ -34,6 +34,7 @@ This document describes how to integrate TiDB with Amazon AppFlow and takes a Ti
 ## Step 1. Register a TiDB connector
 
 ### Clone the code
+
 ```bash
 git clone https://github.com/pingcap-inc/tidb-appflow-integration
 ```
@@ -67,18 +68,19 @@ git clone https://github.com/pingcap-inc/tidb-appflow-integration
     > - If you already run the `sam deploy --guided`. Next time, you can just run `sam deploy` instead, SAM CLI will use the config file `samconfig.toml` to simplify the interaction.
 
     If you see a similar output as follows, this Lambda is successfully deployed.
-    
+
     ```
     Successfully created/updated stack - <stack_name> in <region>
     ```
+
     Then you can see the [Lambda Dashboard](https://us-west-2.console.aws.amazon.com/lambda/home). It will appear you uploaded Lambda just now (Don't forget to select the correct region).
-    
+
     ![lambda dashboard](/media/develop/aws-appflow-step-lambda-dashboard.png)
 
 ### Using Lambda to register a connector
 
 > **Note:**
-> 
+>
 > The following operations are on [AWS Console](https://console.aws.amazon.com), which is super handy.
 
 Navigate to [Amazon AppFlow > Connectors](https://console.aws.amazon.com/appflow/home#/gallery) and click **Register new connector**.
@@ -221,7 +223,6 @@ The following diagram shows an example when the flow runs successfully:
 
 Query the `sf_account` table and you can see that the records have been written to it.
 
-
 ```sql
 test> SELECT * FROM sf_account;
 +--------------------+-------------------------------------+--------------------+---------------+--------+----------------+
@@ -242,6 +243,7 @@ test> SELECT * FROM sf_account;
 | 001Do000003EDTkIAO | sForce                              | null               | CA            | null   | null           |
 +--------------------+-------------------------------------+--------------------+---------------+--------+----------------+
 ```
+
 ## Noteworthy Things
 
 - If something goes wrong, you can navigate to [CloudWatch](https://console.aws.amazon.com/cloudwatch/home) page on the AWS Management console to get logs.
