@@ -728,7 +728,7 @@ For `LIST` and `RANGE` partitioned tables, you can manage the partitions as foll
 
  - Add partitions using the `ALTER TABLE <table name> ADD PARTITION (<partition specification>)` statement. 
  - Drop partitions using the `ALTER TABLE <table name> DROP PARTITION <list of partitions>` statement. 
-  - Delete data from specified partitions using the `ALTER TABLE <table name> TRUNCATE PARTITION <list of partitions>` statement. 
+ - Remove all data from specified partitions using the `ALTER TABLE <table name> TRUNCATE PARTITION <list of partitions>` statement. Like [TRUNCATE TABLE](/sql-statement-truncate.md), but for partitions.
  - Merge, split, or make other changes to the partitions using the `ALTER TABLE <table name> REORGANIZE PARTITION <list of partitions> INTO (<new partition definitions>)` statement.
 
 For `HASH` partitioned tables, `COALESCE PARTITION` and `ADD PARTITION` are not yet supported.
@@ -821,7 +821,7 @@ ALTER TABLE members ADD PARTITION (PARTITION `p1990to2010` VALUES LESS THAN (201
 ALTER TABLE member_level ADD PARTITION (PARTITION l5_6 VALUES IN (5,6));
 ```
 
-For Range partitioned table, `ADD PARTITION` can be only appended to the very end of a partition list. If it is appended to an existing Range partition, an error is reported:
+For Range partitioned table, `ADD PARTITION` will append partitions after the last existing partition. If the new definitions do not have increasing VALUES LESS THAN, an error is reported:
 
 {{< copyable "sql" >}}
 
@@ -877,21 +877,7 @@ ALTER TABLE member_level REORGANIZE PARTITION l1_2,l3,l4,l5,l6 INTO
  PARTITION lEven VALUES IN (2,4,6));
 ```
 
-Reorganizing partitions (including merging or splitting partitions) changes partitions into a new set of partition definitions. It cannot change the type of partitioning (for example, change the List type to the Range type or Range Columns to Range).
-
-For Range partitioned tables, one can only change the end of the range if it includes the last partition. If the end is changed and rows no longer fit, the DDL statements will fail with an error.
-
-{{< copyable "sql" >}}
-
-```sql
-INSERT INTO members VALUES (313, "John", "Doe", "2022-11-22", NULL);
-ALTER TABLE members REORGANIZE PARTITION p2000 INTO (PARTITION p2000 VALUES LESS THAN (2050));
-ALTER TABLE members REORGANIZE PARTITION p2000 INTO (PARTITION p2000 VALUES LESS THAN (2020));
-```
-
-```
-ERROR 1526 (HY000): Table has no partition for value 2022
-```
+Reorganizing partitions (including merging or splitting partitions) changes the listed partitions into a new set of partition definitions. It cannot change the type of partitioning (for example, change the List type to the Range type or Range Columns to Range).
 
 For Range partitions, a REORGANIZE PARTITION clause can only change adjacent partitions.
 
@@ -903,6 +889,20 @@ ALTER TABLE members REORGANIZE PARTITION p1800,p2000 INTO (PARTITION p2000 VALUE
 
 ```
 ERROR 8200 (HY000): Unsupported REORGANIZE PARTITION of RANGE; not adjacent partitions
+```
+
+For Range partitioned tables, one can only change the end of the range if the list of partitions includes the last partition. If the end is changed and rows no longer fit, the DDL statements will fail with an error.
+
+{{< copyable "sql" >}}
+
+```sql
+INSERT INTO members VALUES (313, "John", "Doe", "2022-11-22", NULL);
+ALTER TABLE members REORGANIZE PARTITION p2000 INTO (PARTITION p2000 VALUES LESS THAN (2050)); -- succeeds, since it covers the existing row
+ALTER TABLE members REORGANIZE PARTITION p2000 INTO (PARTITION p2000 VALUES LESS THAN (2020)); -- fails
+```
+
+```
+ERROR 1526 (HY000): Table has no partition for value 2022
 ```
 
 New partition definitions must match existing rows in the reorganized partitions.
