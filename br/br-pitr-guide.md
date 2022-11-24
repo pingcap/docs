@@ -8,7 +8,7 @@ aliases: ['/tidb/dev/pitr-usage']
 
 A full backup (snapshot backup) contains the full cluster data at a certain point, while TiDB log backup can back up data written by applications to a specified storage timely. If you want to flexibly choose the restore point, that is, to perform point-in-time recovery (PITR), you can [run log backup](#run-log-backup) and [run full backup regularly](#run-full-backup-regularly).
 
-Before you back up or restore data using the `br` command-line tool, you need to [install `br`](/br/br-use-overview.md#deploy-and-use-br-command-line-tool) first.
+Before you back up or restore data using the br command-line tool (hereinafter referred to as `br`), you need to [install `br`](/br/br-use-overview.md#deploy-and-use-br-command-line-tool) first.
 
 ## Back up TiDB cluster
 
@@ -61,7 +61,7 @@ br restore point --pd "${PD_IP}:2379" \
 --restored-ts '2022-05-15 18:00:00+0800'
 ```
 
-During restore, you can view the progress through the progress bar in the terminal. The restore is divided into two phases, full restore and log restore (Restore Meta Files and Restore KV Files). After each phase is completed, `br` outputs information such as restore time and data size.
+During data restore, you can view the progress through the progress bar in the terminal. The restore is divided into two phases, full restore and log restore (Restore Meta Files and Restore KV Files). After each phase is completed, `br` outputs information such as restore time and data size.
 
 ```shell
 Full Restore <--------------------------------------------------------------------------------------------------------------------------------------------------------> 100.00%
@@ -125,7 +125,7 @@ Testing scenario 2 (on-premises):
 - New log created in the cluster: 10 GB/h
 - Write (insert/update/delete) QPS: 10,000
 
-## What's next
+## See also
 
 * [TiDB back up and restore use cases](/br/backup-and-restore-use-cases.md)
 * [`br` command-line manual](/br/use-br-command-line-tool.md)

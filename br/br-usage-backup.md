@@ -41,7 +41,7 @@ br backup full \
 
 In the preceding command:
 
-- `--backupts`: The physical time of the snapshot. If data of this snapshot is processed by Garbage Collection (GC), the `br backup` command will exit with an error. If you leave this parameter unspecified, BR picks the snapshot corresponding to the backup start time.
+- `--backupts`: The physical time of the snapshot. If data of this snapshot is garbage collected, the `br backup` command returns an error and `br` exits. If you leave this parameter unspecified, BR picks the snapshot corresponding to the backup start time.
 - `--ratelimit`: The maximum speed **per TiKV** performing backup tasks (in MiB/s).
 - `--log-file`: The target file for BR logging.
 

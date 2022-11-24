@@ -5,7 +5,7 @@ summary: Learn about the architecture of TiDB log backup and Point-in-time recov
 
 # TiDB Log Backup and PITR Architecture
 
-This document introduces the architecture and process of TiDB log backup, and Point-in-time recovery (PITR) using the `br` command-line tool as an example.
+This document introduces the architecture and process of TiDB log backup, and Point-in-time recovery (PITR) using the br command-line tool (hereinafter referred to as `br`) as an example.
 
 ## Architecture
 
@@ -15,7 +15,7 @@ The TiDB log backup and PITR architecture are as follows:
 
 ## Process of log backup
 
-The process of a TiDB cluster log backup is as follows:
+The process of a cluster log backup is as follows:
 
 ![BR log backup process design](/media/br/br-log-backup-ts.png)
 
@@ -27,7 +27,7 @@ Concepts of system components in the log backup process:
 * **TiDB Coordinator Component**: A TiDB node is elected as the coordinator, which is responsible for collecting and calculating the progress of the entire log backup task (global checkpoint ts). This component is stateless in design, and after its failure, a node can be re-elected from the surviving TiDB nodes as the Coordinator.
 * **TiKV log observer Component**: runs on each TiKV node in the TiDB cluster, which is responsible for reading and backing up log data from TiKV. If a TiKV node fails, the node is responsible for backing up the data range until the Region is re-elected to other TiKV nodes, and these nodes will redo back up data in the failure range starting from global checkpoint ts.
 
-The full backup process is as follows:
+The complete backup process is as follows:
 
 1. `br` receives the `br log start` command.
 
@@ -59,7 +59,7 @@ The process of PITR is as follows:
 
 ![Point-in-time recovery process design](/media/br/pitr-ts.png)
 
-The full PITR process is as follows:
+The complete PITR process is as follows:
 
 1. `br` receives the `br restore point` command.
 
@@ -89,7 +89,7 @@ The full PITR process is as follows:
 
 6. `br` receives the restore result from each TiKV node.
 
-   * If some data fails to be restored due to `RegionNotFound` or `EpochNotMatch`, for example, a TiKV node is down, `br` retries to restore these data.
+   * If some data fails to be restored due to `RegionNotFound` or `EpochNotMatch`, for example, a TiKV node is down, `br` will retry the restore.
    * If there is any data fails to be restored and cannot retry, the restore task fails.
    * After all data is restored, the restore task is successful.
 
