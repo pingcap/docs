@@ -6,11 +6,11 @@ aliases: ['/docs/dev/br/backup-and-restore-use-cases/','/docs/dev/reference/tool
 
 # TiDB Backup and Restore Use Cases
 
-[TiDB Snapshot Backup and Restore Guide](/br/br-snapshot-guide.md) and [TiDB Log Backup and PITR Guide](/br/br-pitr-guide.md) introduce the backup and restore solutions provided by TiDB, namely, snapshot (full) backup and restore, log backup and point-in-time recovery (PITR). This document helps you to quickly get started with TiDB's backup and restore solutions in specific use cases.
+[TiDB Snapshot Backup and Restore Guide](/br/br-snapshot-guide.md) and [TiDB Log Backup and PITR Guide](/br/br-pitr-guide.md) introduce the backup and restore solutions provided by TiDB, namely, snapshot (full) backup and restore, log backup and point-in-time recovery (PITR). This document helps you to quickly get started with the backup and restore solutions of TiDB in specific use cases.
 
 Assume that you have deployed a TiDB production cluster on AWS and the business team puts forward the following requirements:
 
-- Back up the data changes in time. When the database encounters an error, you can quickly recover the application data with a minimum data loss (only a few minutes of data loss is tolerable).
+- Back up the data changes in a timely manner. When the database encounters an error, you can quickly recover the application data with minimal data loss (only a few minutes of data loss is tolerable).
 - Perform business audits every month at no specific time. When an audit request is received, you must provide a database to query the data at a certain time point in the past month as requested.
 
 With PITR, you can satisfy the preceding requirements.
@@ -21,7 +21,7 @@ To use PITR, you need to deploy a TiDB cluster >= v6.2.0 and update br command-l
 
 The following table shows the recommended hardware resources for using PITR in a TiDB cluster.
 
-| Component | CPU | Memory | Local storage  | AWS instance  | Number of instances |
+| Component | CPU | Memory | Disk | AWS instance  | Number of instances |
 | --- | --- | --- | --- | --- | --- |
 | TiDB | 8 core+ | 16 GB+ | SAS | c5.2xlarge | 2 |
 | PD | 8 core+ | 16 GB+ | SSD | c5.2xlarge | 3 |
@@ -31,7 +31,7 @@ The following table shows the recommended hardware resources for using PITR in a
 
 > **Note:**
 >
-> - When br tool runs the backup and restore tasks, it needs to access PD and TiKV. Make sure that br tool and all PD and TiKV servers are connected.
+> - When br tool runs the backup and restore tasks, it needs to access PD and TiKV. Make sure that br tool can connect to all PD and TiKV nodes.
 > - br tool and PD servers must use the same time zone.
 
 Deploy or upgrade a TiDB cluster using TiUP:
@@ -44,13 +44,13 @@ Install or upgrade br tool using TiUP:
 - Install:
 
     ```shell
-    `tiup install br:v6.4.0`
+    tiup install br:v6.4.0
     ```
 
 - Upgrade:
 
     ```shell
-    `tiup update br:v6.4.0`
+    tiup update br:v6.4.0
     ```
 
 ## Configure backup storage (Amazon S3)
@@ -65,25 +65,25 @@ The detailed steps are as follows:
 
 1. Create a directory in S3 to store the backup data. The directory in this example is `s3://tidb-pitr-bucket/backup-data`.
 
-    1. Create a bucket. You can choose an existing S3 to store the backup data. If there is none, refer to [AWS documentation - Creating a bucket](https://docs.aws.amazon.com/AmazonS3/latest/userguide/create-bucket-overview.html) and create an S3 bucket. In this example, the bucket name is `tidb-pitr-bucket`.
-    2. Create a directory for your backup data. In the bucket (`tidb-pitr-bucket`), create a directory named `backup-data`. For detailed steps, refer to [AWS documentation -  Organizing objects in the Amazon S3 console using folders](https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-folders.html).
+    1. Create a bucket. You can choose an existing S3 to store the backup data. If there is none, refer to [AWS documentation: Creating a bucket](https://docs.aws.amazon.com/AmazonS3/latest/userguide/create-bucket-overview.html) and create an S3 bucket. In this example, the bucket name is `tidb-pitr-bucket`.
+    2. Create a directory for your backup data. In the bucket (`tidb-pitr-bucket`), create a directory named `backup-data`. For detailed steps, refer to [AWS documentation: Organizing objects in the Amazon S3 console using folders](https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-folders.html).
 
-2. Configure permissions for br command-line tool and TiKV to access the S3 directory. It is recommended to grant permissions using the IAM method, which is the most secure way to access the S3 bucket. For detailed steps, refer to [AWS documentation -  Controlling access to a bucket with user policies](https://docs.aws.amazon.com/AmazonS3/latest/userguide/walkthrough1.html). The required permissions are as follows:
+2. Configure permissions for br command-line tool and TiKV to access the S3 directory. It is recommended to grant permissions using the IAM method, which is the most secure way to access the S3 bucket. For detailed steps, refer to [AWS documentation: Controlling access to a bucket with user policies](https://docs.aws.amazon.com/AmazonS3/latest/userguide/walkthrough1.html). The required permissions are as follows:
 
     - TiKV and br tool in the backup cluster need `s3:ListBucket`, `s3:PutObject`, and `s3:AbortMultipartUpload` permissions of the `s3://tidb-pitr-bucket/backup-data` directory.
     - TiKV and br tool in the restore cluster need `s3:ListBucket` and `s3:GetObject` permissions of the `s3://tidb-pitr-bucket/backup-data` directory.
 
 3. Plan the directory structure that stores the backup data, including the snapshot (full) backup and the log backup.
 
-    - All snapshot backup data is stored in the `s3://tidb-pitr-bucket/backup-data/snapshot-${date}` directory. `${date}` is the start time of the snapshot backup. For example, a snapshot backup starting at 2022/05/12 00:01:30 is stored in `s3://tidb-pitr-bucket/backup-data/snapshot-20220512000130`.
-    - Log backup data is stored in the `s3://tidb-pitr-bucket/backup-data/log-backup/` directory.
+    - All snapshot backup data are stored in the `s3://tidb-pitr-bucket/backup-data/snapshot-${date}` directory. `${date}` is the start time of the snapshot backup. For example, a snapshot backup starting at 2022/05/12 00:01:30 is stored in `s3://tidb-pitr-bucket/backup-data/snapshot-20220512000130`.
+    - Log backup data are stored in the `s3://tidb-pitr-bucket/backup-data/log-backup/` directory.
 
 ## Determine the backup policy
 
 To meet the requirements of minimum data loss, quick recovery, and business audits within a month, you can set the backup policy as follows:
 
 - Run the log backup to continuously back up the data change in the database.
-- Run a snapshot backup at 00:00 every two days.
+- Run a snapshot backup at 00:00 AM every two days.
 - Retain the snapshot backup data and log backup data within 30 days and clean up backup data older than 30 days.
 
 ## Run log backup
