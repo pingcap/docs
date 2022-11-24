@@ -577,6 +577,7 @@
   - [All Releases](/releases/release-notes.md)
   - [Release Timeline](/releases/release-timeline.md)
   - v5.3
+    - [5.3.4](/releases/release-5.3.4.md)
     - [5.3.3](/releases/release-5.3.3.md)
     - [5.3.2](/releases/release-5.3.2.md)
     - [5.3.1](/releases/release-5.3.1.md)
