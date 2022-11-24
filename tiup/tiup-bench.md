@@ -6,49 +6,50 @@ aliases: ['/docs/dev/tiup/tiup-bench/','/docs/dev/reference/tools/tiup/bench/']
 
 # Stress Test TiDB Using TiUP Bench Component
 
-When you test the performance of a database, it is often required to stress test the database. To facilitate this, TiUP has integrated the bench component, which provides two workloads for stress testing: [TPC-C](http://www.tpc.org/tpcc/) and [TPC-H](http://www.tpc.org/tpch/). The commands and flags are as follows. For more information, see the [TPC official website](http://www.tpc.org).
-
-{{< copyable "shell-root" >}}
+When you test the performance of a database, it is often required to stress test the database. To facilitate this, TiUP has integrated the bench component, which provides multiple workloads for stress testing. These workloads can be accessed by the following commands:
 
 ```bash
-tiup bench
+tiup bench tpcc   # Benchmark a database using TPC-C
+tiup bench tpch   # Benchmark a database using TPC-H
+tiup bench ch     # Benchmark a database using CH-benCHmark
+tiup bench ycsb   # Benchmark a database using YCSB
+tiup bench rawsql # Benchmark a database using arbitrary SQL files
 ```
 
+`tpcc`, `tpch`, `ch`, `rawsql` share the following common command flags, however, `ycsb` is mainly configured by a `.properties` file, which is described in its [usage guide](https://github.com/pingcap/go-ycsb#usage).
+
 ```
-Benchmark database with different workloads
-
-Usage:
-  tiup bench [command]
-
-Available Commands:
-  help        Help about any command
-  tpcc
-  tpch
-
-Flags:
-      --count int           Total execution count, 0 means infinite
-  -D, --db string           Database name (default "test")
-  -d, --driver string       Database driver: mysql
-      --dropdata            Cleanup data before prepare
-  -h, --help                help for /Users/joshua/.tiup/components/bench/v0.0.1/bench
-  -H, --host string         Database host (default "127.0.0.1")
-      --ignore-error        Ignore error when running workload
-      --interval duration   Output interval time (default 10s)
-      --isolation int       Isolation Level 0: Default, 1: ReadUncommitted,
-                            2: ReadCommitted, 3: WriteCommitted, 4: RepeatableRead,
-                            5: Snapshot, 6: Serializable, 7: Linerizable
-      --max-procs int       runtime.GOMAXPROCS
-  -p, --password string     Database password
-  -P, --port int            Database port (default 4000)
-      --pprof string        Address of pprof endpoint
-      --silence             Don't print error when running workload
-      --summary             Print summary TPM only, or also print current TPM when running workload
-  -T, --threads int         Thread concurrency (default 16)
-      --time duration       Total execution time (default 2562047h47m16.854775807s)
-  -U, --user string         Database user (default "root")
+  -t, --acThreads int         OLAP client concurrency, only for CH-benCHmark (default 1)
+      --conn-params string    Session variables, e.g. --conn-params tidb_isolation_read_engines='tiflash' for TiDB, --conn-params sslmode=disable for PostgreSQL
+      --count int             Total execution count, 0 means infinite
+  -D, --db string             Database name (default "test")
+  -d, --driver string         Database driver: mysql, postgres (default "mysql")
+      --dropdata              Cleanup data before prepare
+  -H, --host strings          Database host (default [127.0.0.1])
+      --ignore-error          Ignore error when running workload
+      --interval duration     Output interval time (default 10s)
+      --isolation int         Isolation Level 0: Default, 1: ReadUncommitted,
+                              2: ReadCommitted, 3: WriteCommitted, 4: RepeatableRead,
+                              5: Snapshot, 6: Serializable, 7: Linerizable
+      --max-procs int         runtime.GOMAXPROCS of golang, the limits of how many cores can be used
+      --output string         Output style, valid values can be { plain | table | json } (default "plain")
+  -p, --password string       Database password
+  -P, --port ints             Database port (default [4000])
+      --pprof string          Address of pprof endpoint
+      --silence               Don't print error when running workload
+  -S, --statusPort int        Database status port (default 10080)
+  -T, --threads int           Thread concurrency (default 1)
+      --time duration         Total execution time (default 2562047h47m16.854775807s)
+  -U, --user string           Database user (default "root")
 ```
 
-The following sections describe how to run TPC-C and TPC-H tests using TiUP.
+- You can pass comma-separated values to `--host` and `--port` to enable client-side load balancing. e.g. when specifying `--host 172.16.4.1,172.16.4.2 --port 4000,4001`, the program will connect to 172.16.4.1:4000, 172.16.4.1:4001, 172.16.4.2:4000, 172.16.4.2:4001, chosen in round-robin fashion.
+- `--conn-params` must follow the format of [query string](https://en.wikipedia.org/wiki/Query_string). Different database may have different parameters, e.g.
+    - `--conn-params tidb_isolation_read_engines='tiflash'` force TiDB to read from tiflash.
+    - `--conn-params sslmode=disable` disable SSL when connecting to PostgreSQL.
+- When running CH-benCHmark, `--ap-host`, `--ap-port`, `--ap-conn-params` can be used to specify a tidb-server for OLAP queries.
+
+The following sections describe how to run TPC-C, TPC-H, YCSB tests using TiUP.
 
 ## Run TPC-C test using TiUP
 
@@ -62,13 +63,17 @@ Available Commands:
   run         Run workload
 
 Flags:
-      --check-all        Run all consistency checks
-  -h, --help             help for tpcc
-      --parts int        Number to partition warehouses (default 1)
-      --warehouses int   Number of warehouses (default 10)
+      --check-all            Run all consistency checks
+  -h, --help                 help for tpcc
+      --partition-type int   Partition type: 1 - HASH, 2 - RANGE, 3 - LIST (HASH-like), 4 - LIST (RANGE-like) (default 1)
+      --parts int            Number to partition warehouses (default 1)
+      --warehouses int       Number of warehouses (default 10)
+
 ```
 
 ### Test procedures
+
+Here we show simplified steps for running a TPC-C test. Please refer to [How to Run TPC-C Test on TiDB](/benchmark/benchmark-tidb-using-tpcc.md) for a more complete guide.
 
 1. Create 4 warehouses using 4 partitions via hash:
 
@@ -102,7 +107,9 @@ Flags:
     tiup bench tpcc --warehouses 4 check
     ```
 
-5. Generate the CSV file:
+Preparing data via SQL might be slow when you want to conduct a benchmark with a large data set, in which case, you can generate data in CSV format by the following commands and then import it via [TiDB lightning](/tidb-lightning/tidb-lightning-overview.md).
+
+- Generate the CSV file:
 
     {{< copyable "shell-regular" >}}
 
@@ -110,7 +117,7 @@ Flags:
     tiup bench tpcc --warehouses 4 prepare --output-dir data --output-type=csv
     ```
 
-6. Generate the CSV file for the specified table:
+- Generate the CSV file for the specified table:
 
     {{< copyable "shell-regular" >}}
 
@@ -170,3 +177,58 @@ Flags:
     ```shell
     tiup bench tpch cleanup
     ```
+
+## Run YCSB test using TiUP
+
+You can stress test both TiDB and TiKV via YCSB.
+
+### Stress test TiDB
+
+1. Prepare data:
+
+    ```shell
+    tiup bench ycsb load tidb -p tidb.instances="127.0.0.1:4000" -p recordcount=10000
+    ```
+
+2. Run YCSB workload:
+
+    ```shell
+    # the read-write percent is 95% by default
+    tiup bench ycsb run tidb -p tidb.instances="127.0.0.1:4000" -p operationcount=10000
+    ```
+
+### Stress test TiKV
+
+1. Prepare data:
+
+    ```shell
+    tiup bench ycsb load tikv -p tikv.pd="127.0.0.1:2379" -p recordcount=10000
+    ```
+
+2. Run YCSB workload:
+
+    ```shell
+    # the read-write percent is 95% by default
+    tiup bench ycsb run tikv -p tikv.pd="127.0.0.1:2379" -p operationcount=10000
+    ```
+
+## Run RawSQL test using TiUP
+
+You can write down an arbitrary query into a SQL file, then run it repeatedly by executing `tiup bench rawsql` like the following:
+
+1. Prepare data and the query:
+
+    ```sql
+    -- prepare data
+    CREATE TABLE t (a int);
+    INSERT INTO t VALUES (1), (2), (3);
+
+    -- save the following demo query into demo.sql
+    SELECT a, sleep(rand()) FROM t WHERE a < 4*rand();
+    ```
+
+2. Run RawSQL test:
+
+   ```shell
+   tiup bench rawsql run --count 60 --query-files demo.sql
+   ```
