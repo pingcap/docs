@@ -905,7 +905,8 @@ ALTER TABLE members REORGANIZE PARTITION p1800,p2000 INTO (PARTITION p2000 VALUE
 ERROR 8200 (HY000): Unsupported REORGANIZE PARTITION of RANGE; not adjacent partitions
 ```
 
-New partition definitions must cover the existing range or set of values so that existing rows can fit into the new partitions.
+New partition definitions must match existing rows in the reorganized partitions.
+
 {{< copyable "sql" >}}
 
 ```sql
