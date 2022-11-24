@@ -16,7 +16,7 @@ For details about the architecture of each backup and restore feature, see the f
 
 - Data change log backup
 
-    - [Log backup - backup of kv data change](/br/br-log-architecture.md#log-backup)
+    - [Log backup: backup of KV data change](/br/br-log-architecture.md#log-backup)
 
 - Point-in-time recovery (PITR)
 
