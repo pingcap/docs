@@ -1,12 +1,12 @@
 ---
-title: TiDB Log Backup and PITR Command-line Manual
-summary: Learn about the commands of TiDB log backup and Point-in-time recovery.
+title: TiDB Log Backup and PITR Command Manual
+summary: Learn about the commands of TiDB log backup and point-in-time recovery.
 aliases: ['/tidb/dev/br-log-command-line/']
 ---
 
-# TiDB Log Backup and PITR Command-line Manual
+# TiDB Log Backup and PITR Command Manual
 
-This document describes commands of TiDB log backup the PITR (Point-in-time recovery).
+This document describes the commands used in TiDB log backup point-in-time recovery (PITR).
 
 For more information about log backup and PITR, you can refer to the following documents:
 
@@ -15,7 +15,7 @@ For more information about log backup and PITR, you can refer to the following d
 
 ## Perform log backup
 
-You can perform log backup and manage backup tasks using the `br log` command.
+You can start and manage log backup using the `br log` command.
 
 ```shell
 ./br log --help
@@ -74,7 +74,7 @@ Global Flags:
 
 The example output only shows the common parameters. These parameters are described as follows:
 
-- `--start-ts`: specifies the start timestamp for the log backup. If this is not specified, the backup program uses the current time as `start-ts`.
+- `--start-ts`: specifies the start timestamp for the log backup. If this parameter is not specified, the backup program uses the current time as `start-ts`.
 - `task-name`: specifies the task name for the log backup. This name is also used to query, pause, and resume the backup task.
 - `--ca`, `--cert`, `--key`: specifies the mTLS encryption method to communicate with TiKV and PD.
 - `--pd`: specifies the PD address for the backup cluster. `br` needs to access PD to start the log backup task.
@@ -393,4 +393,4 @@ Restore KV Files <--------------------------------------------------------------
 > **Note:**
 >
 > - You cannot restore the log backup data of a certain time period repeatedly. If you restore the log backup data of a range `[t1=10, t2=20)` repeatedly, the restored data might be inconsistent.
-> - When you restore log data of different time periods in multiple batches, you must ensure the log data is restored in consecutive order. If you restore the log backup data of `[t1, t2)`, `[t2, t3)`, and `[t3, t4)` in consecutive order, the restored data is consistent. However, if you restore `[t1, t2)` and then skip `[t2, t3)` to restore `[t3, t4)`, the restored data might be inconsistent.
+> - When you restore log data of different time periods in multiple batches, ensure that the log data is restored in consecutive order. If you restore the log backup data of `[t1, t2)`, `[t2, t3)`, and `[t3, t4)` in consecutive order, the restored data is consistent. However, if you restore `[t1, t2)` and then skip `[t2, t3)` to restore `[t3, t4)`, the restored data might be inconsistent.

@@ -6,22 +6,22 @@ aliases: ['/tidb/dev/pitr-usage']
 
 # TiDB Log Backup and PITR Guide
 
-A full backup (snapshot backup) contains the full cluster data at a certain point, while TiDB log backup can back up data written by applications to a specified storage timely. If you want to flexibly choose the restore point, that is, to perform point-in-time recovery (PITR), you can [run log backup](#run-log-backup) and [run full backup regularly](#run-full-backup-regularly).
+A full backup (snapshot backup) contains the full cluster data at a certain point, while TiDB log backup can back up data written by applications to a specified storage in a timely manner. If you want to choose the restore point as required, that is, to perform point-in-time recovery (PITR), you can [start log backup](#start-log-backup) and [run full backup regularly](#run-full-backup-regularly).
 
 Before you back up or restore data using the br command-line tool (hereinafter referred to as `br`), you need to [install `br`](/br/br-use-overview.md#deploy-and-use-br-command-line-tool) first.
 
 ## Back up TiDB cluster
 
-### Run log backup
+### Start log backup
 
-To start a log backup, run `br log start`. A cluster can only run one log backup task.
+To start a log backup, run `br log start`. A cluster can only run one log backup task each time.
 
 ```shell
 tiup br log start --task-name=pitr --pd "${PD_IP}:2379" \
 --storage 's3://backup-101/logbackup?access_key=${access_key}&secret_access_key=${secret_access_key}"'
 ```
 
-After the log backup task starts, the task runs in the background of the TiDB cluster until you stop it manually. During this process, the TiDB change log will be regularly backed up to the specified storage in small batches. To query the status of the log backup task, you can run the following command:
+After the log backup task starts, it runs in the background of the TiDB cluster until you stop it manually. During this process, the TiDB change logs are regularly backed up to the specified storage in small batches. To query the status of the log backup task, run the following command:
 
 ```shell
 tiup br log status --task-name=pitr --pd "${PD_IP}:2379"
@@ -43,7 +43,7 @@ checkpoint[global]: 2022-05-13 11:31:47.2 +0800; gap=4m53s
 
 ### Run full backup regularly
 
-The snapshot backup can be used as a method of full backup. You can run `br backup full` to back up the cluster snapshot to the backup storage according a fixed schedule (for example, every 2 days).
+The snapshot backup can be used as a method of full backup. You can run `br backup full` to back up the cluster snapshot to the backup storage according to a fixed schedule (for example, every 2 days).
 
 ```shell
 tiup br backup full --pd "${PD_IP}:2379" \
@@ -61,7 +61,7 @@ br restore point --pd "${PD_IP}:2379" \
 --restored-ts '2022-05-15 18:00:00+0800'
 ```
 
-During data restore, you can view the progress through the progress bar in the terminal. The restore is divided into two phases, full restore and log restore (Restore Meta Files and Restore KV Files). After each phase is completed, `br` outputs information such as restore time and data size.
+During data restore, you can view the progress through the progress bar in the terminal. The restore is divided into two phases, full restore and log restore (restore meta files and restore KV files). After each phase is completed, `br` outputs information such as restore time and data size.
 
 ```shell
 Full Restore <--------------------------------------------------------------------------------------------------------------------------------------------------------> 100.00%
@@ -102,7 +102,7 @@ The following steps describe how to clean up backup data that exceeds the backup
 
 ### Capabilities
 
-- On each TiKV node, PITR can restore snapshot data at 280 GB/h and log data at 30 GB/h.
+- On each TiKV node, PITR can restore snapshot data at a speed of 280 GB/h and log data 30 GB/h.
 - `br` deletes outdated log backup data at a speed of 600 GB/h.
 
 > **Note:**
@@ -115,18 +115,18 @@ Testing scenario 1 (on [TiDB Cloud](https://tidbcloud.com)):
 
 - The number of TiKV nodes (8 core, 16 GB memory): 21
 - The number of Regions: 183,000
-- New log created in the cluster: 10 GB/h
-- Write (insert/update/delete) QPS: 10,000
+- New log data created in the cluster: 10 GB/h
+- Write (INSERT/UPDATE/DELETE) QPS: 10,000
 
 Testing scenario 2 (on-premises):
 
 - The number of TiKV nodes (8 core, 64 GB memory): 6
 - The number of Regions: 50,000
-- New log created in the cluster: 10 GB/h
-- Write (insert/update/delete) QPS: 10,000
+- New log data created in the cluster: 10 GB/h
+- Write (INSERT/UPDATE/DELETE) QPS: 10,000
 
 ## See also
 
-* [TiDB back up and restore use cases](/br/backup-and-restore-use-cases.md)
-* [`br` command-line manual](/br/use-br-command-line-tool.md)
-* [TiDB log backup and PITR architecture](/br/br-log-architecture.md)
+* [TiDB Backup and Restore Use Cases](/br/backup-and-restore-use-cases.md)
+* [`br` Command-line Manual](/br/use-br-command-line-tool.md)
+* [Log Backup and PITR Architecture](/br/br-log-architecture.md)
