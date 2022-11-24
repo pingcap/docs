@@ -893,7 +893,7 @@ ALTER TABLE members REORGANIZE PARTITION p2000 INTO (PARTITION p2000 VALUES LESS
 ERROR 1526 (HY000): Table has no partition for value 2022
 ```
 
-For Range partitions, a REORGANIZE PARTITION clause can only merge adjacent partitions.
+For Range partitions, a REORGANIZE PARTITION clause can only change adjacent partitions.
 
 {{< copyable "sql" >}}
 
