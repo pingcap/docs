@@ -7,6 +7,10 @@ summary: Learn the usage of FLASHBACK CLUSTER TO TIMESTAMP in TiDB databases.
 
 TiDB v6.4.0 introduces the `FLASHBACK CLUSTER TO TIMESTAMP` syntax. You can use it to restore a cluster to a specific point in time.
 
+> **Note:**
+>
+> The principle of `FLASHBACK CLUSTER TO TIMESTAMP` is to rewrite an old data with the latest timestamp, and will not delete the data directly. So, you need to ensure that there is enough storage space before using it.
+
 ## Syntax
 
 ```sql
