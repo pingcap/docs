@@ -189,7 +189,7 @@ For the roadmap of TiDB kernel, refer to [TiDB Roadmap](https://github.com/pingc
   </tr>
   <tr>
     <td>Database audit logging</td>
-    <td>Enhance the database audit logging.</td>
+    <td>✅ Enhance the database audit logging.</td>
     <td>Enhance the ability of database audit logging.</td>
   </tr>
   <tr>
