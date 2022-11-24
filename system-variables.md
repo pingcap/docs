@@ -3511,13 +3511,9 @@ SHOW WARNINGS;
 
 ### tidb_server_memory_limit <span class="version-mark">New in v6.4.0</span>
 
-> **Warning:**
->
-> Currently, `tidb_server_memory_limit` is still experimental. It is not recommended to use it in the production environment.
-
 - Scope: GLOBAL
 - Persists to cluster: Yes
-- Default value: `0`
+- Default value: `80%`
 - Range:
     - You can set the value in the percentage format, which means the percentage of the memory usage relative to the total memory. The value range is `[1%, 99%]`.
     - You can also set the value in memory size in bytes. The value range is `[0, 9223372036854775807]`. The memory format with the units "KB|MB|GB|TB" is supported. The `0` value means no memory limit.
@@ -3527,10 +3523,6 @@ SHOW WARNINGS;
 
 ### tidb_server_memory_limit_gc_trigger <span class="version-mark">New in v6.4.0</span>
 
-> **Warning:**
->
-> Currently, `tidb_server_memory_limit_gc_trigger` is still experimental. It is not recommended to use it in the production environment.
-
 - Scope: GLOBAL
 - Persists to cluster: Yes
 - Default value: `70%`
@@ -3539,14 +3531,10 @@ SHOW WARNINGS;
 
 ### tidb_server_memory_limit_sess_min_size <span class="version-mark">New in v6.4.0</span>
 
-> **Warning:**
->
-> Currently, `tidb_server_memory_limit_sess_min_size` is still experimental. It is not recommended to use it in the production environment.
-
 - Scope: GLOBAL
 - Persists to cluster: Yes
 - Default value: `134217728` (which is 128 MB)
-- Range: `[128, 9223372036854775807]`, in bytes
+- Range: `[128, 9223372036854775807]`, in bytes. The memory format with the units "KB|MB|GB|TB" is also supported.
 - After you enable the memory limit, TiDB will terminate the SQL statement with the highest memory usage on the current instance. This variable specifies the minimum memory usage of the SQL statement to be terminated. If the memory usage of a TiDB instance that exceeds the limit is caused by too many sessions with low memory usage, you can properly lower the value of this variable to allow more sessions to be canceled.
 
 ### tidb_shard_allocate_step <span class="version-mark">New in v5.0</span>
