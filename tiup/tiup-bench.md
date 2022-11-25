@@ -29,8 +29,8 @@ tiup bench rawsql # Benchmark a database using arbitrary SQL files
       --ignore-error          Ignore error when running workload
       --interval duration     Output interval time (default to 10s)
       --isolation int         Isolation Level (0: Default; 1: ReadUncommitted;
-                              2: ReadCommitted, 3: WriteCommitted, 4: RepeatableRead,
-                              5: Snapshot, 6: Serializable, 7: Linerizable
+                              2: ReadCommitted; 3: WriteCommitted; 4: RepeatableRead; 
+                              5: Snapshot; 6: Serializable; 7: Linerizable)
       --max-procs int         runtime.GOMAXPROCS of golang, the limits of how many cores can be used
       --output string         Output style, valid values can be { plain | table | json } (default to "plain")
   -p, --password string       Database password
