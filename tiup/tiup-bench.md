@@ -24,15 +24,15 @@ tiup bench rawsql # Benchmark a database using arbitrary SQL files
       --count int             Total execution count (0 means infinite count)
   -D, --db string             Database name (default to "test")
   -d, --driver string         Database driver: mysql, postgres (default to "mysql")
-      --dropdata              Clean up historical data before preparing 
+      --dropdata              Clean up historical data before preparing
   -H, --host strings          Database host (default to [127.0.0.1])
       --ignore-error          Ignore error when running workload
       --interval duration     Output interval time (default to 10s)
       --isolation int         Isolation Level (0: Default; 1: ReadUncommitted;
-                              2: ReadCommitted; 3: WriteCommitted; 4: RepeatableRead; 
+                              2: ReadCommitted; 3: WriteCommitted; 4: RepeatableRead;
                               5: Snapshot; 6: Serializable; 7: Linerizable)
       --max-procs int         runtime.GOMAXPROCS of golang, the limits of how many cores can be used
-      --output string         Output style, valid values can be { plain | table | json } (default to "plain")
+      --output string         Output style. Valid values can be { plain | table | json } (default to "plain")
   -p, --password string       Database password
   -P, --port ints             Database port (default to [4000])
       --pprof string          Address of pprof endpoint
@@ -66,7 +66,7 @@ Flags:
       --check-all            Run all consistency checks
   -h, --help                 Help for TPC-C
       --partition-type int   Partition type: 1 - HASH, 2 - RANGE, 3 - LIST (HASH-like), 4 - LIST (RANGE-like) (default to 1)
-      --parts int            Number to partition warehouses (default 1)
+      --parts int            Number of partitions (default to 1)
       --warehouses int       Number of warehouses (default to 10)
 
 ```
@@ -88,23 +88,23 @@ The following provides simplified steps for running a TPC-C test. For detailed s
     {{< copyable "shell-regular" >}}
 
     ```shell
-    tiup bench tpcc --warehouses 4 run
+    tiup bench tpcc --warehouses 4 --time 10m run
     ```
 
-3. Clean up data:
-
-    {{< copyable "shell-regular" >}}
-
-    ```shell
-    tiup bench tpcc --warehouses 4 cleanup
-    ```
-
-4. Check the consistency:
+3. Check the consistency:
 
     {{< copyable "shell-regular" >}}
 
     ```shell
     tiup bench tpcc --warehouses 4 check
+    ```
+
+4. Clean up data:
+
+    {{< copyable "shell-regular" >}}
+
+    ```shell
+    tiup bench tpcc --warehouses 4 cleanup
     ```
 
 Preparing data via SQL might be slow when you want to run a benchmark with a large data set. In that case, you can generate data in the CSV format by the following commands and then import it to TiDB via [TiDB lightning](/tidb-lightning/tidb-lightning-overview.md).
