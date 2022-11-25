@@ -23,7 +23,7 @@ tiup bench rawsql # Benchmark a database using arbitrary SQL files
       --conn-params string    Session variables, such as setting `--conn-params tidb_isolation_read_engines='tiflash'` for TiDB queries and setting `--conn-params sslmode=disable` for PostgreSQL connections
       --count int             Total execution count (0 means infinite count)
   -D, --db string             Database name (default to "test")
-  -d, --driver string         Database driver: mysql, postgres (default "mysql")
+  -d, --driver string         Database driver: mysql, postgres (default to "mysql")
       --dropdata              Cleanup data before prepare
   -H, --host strings          Database host (default [127.0.0.1])
       --ignore-error          Ignore error when running workload
