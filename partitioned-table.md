@@ -728,7 +728,7 @@ For `LIST` and `RANGE` partitioned tables, you can manage the partitions as foll
 
  - Add partitions using the `ALTER TABLE <table name> ADD PARTITION (<partition specification>)` statement. 
  - Drop partitions using the `ALTER TABLE <table name> DROP PARTITION <list of partitions>` statement. 
- - Remove all data from specified partitions using the `ALTER TABLE <table name> TRUNCATE PARTITION <list of partitions>` statement. Like [TRUNCATE TABLE](/sql-statements/sql-statement-truncate.md), but for partitions.
+ - Remove all data from specified partitions using the `ALTER TABLE <table name> TRUNCATE PARTITION <list of partitions>` statement. The logic of `TRUNCATE PARTITION` is similar to [`TRUNCATE TABLE`](/sql-statements/sql-statement-truncate.md) but it is for partitions.
  - Merge, split, or make other changes to the partitions using the `ALTER TABLE <table name> REORGANIZE PARTITION <list of partitions> INTO (<new partition definitions>)` statement.
 
 For `HASH` partitioned tables, `COALESCE PARTITION` and `ADD PARTITION` are not yet supported.
