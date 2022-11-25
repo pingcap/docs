@@ -16,7 +16,7 @@ tiup bench ycsb   # Benchmark a database using YCSB
 tiup bench rawsql # Benchmark a database using arbitrary SQL files
 ```
 
-`tpcc`, `tpch`, `ch`, `rawsql` share the following common command flags, however, `ycsb` is mainly configured by a `.properties` file, which is described in its [usage guide](https://github.com/pingcap/go-ycsb#usage).
+`tpcc`, `tpch`, `ch`, `rawsql` share the following common command flags. However, `ycsb` is mainly configured by a `.properties` file, which is described in its [usage guide](https://github.com/pingcap/go-ycsb#usage).
 
 ```
   -t, --acThreads int         OLAP client concurrency, only for CH-benCHmark (default 1)
