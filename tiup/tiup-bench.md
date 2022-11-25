@@ -37,7 +37,7 @@ tiup bench rawsql # Benchmark a database using arbitrary SQL files
   -P, --port ints             Database port (default [4000])
       --pprof string          Address of pprof endpoint
       --silence               Don't print error when running workload
-  -S, --statusPort int        Database status port (default 10080)
+  -S, --statusPort int        Database status port (default to 10080)
   -T, --threads int           Thread concurrency (default to 1)
       --time duration         Total execution time (default to 2562047h47m16.854775807s)
   -U, --user string           Database user (default to "root")
