@@ -905,7 +905,7 @@ ALTER TABLE members REORGANIZE PARTITION p2000 INTO (PARTITION p2000 VALUES LESS
 ERROR 1526 (HY000): Table has no partition for value 2022
 ```
 
-New partition definitions must match existing rows in the reorganized partitions.
+For a List partitioned table, to modify the set of values in a partition, the new definition must cover the existing values in that partition. Otherwise, an error is reported:
 
 {{< copyable "sql" >}}
 
