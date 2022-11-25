@@ -25,7 +25,7 @@ tiup bench rawsql # Benchmark a database using arbitrary SQL files
   -D, --db string             Database name (default to "test")
   -d, --driver string         Database driver: mysql, postgres (default to "mysql")
       --dropdata              Cleanup data before prepare
-  -H, --host strings          Database host (default [127.0.0.1])
+  -H, --host strings          Database host (default to [127.0.0.1])
       --ignore-error          Ignore error when running workload
       --interval duration     Output interval time (default 10s)
       --isolation int         Isolation Level 0: Default, 1: ReadUncommitted,
