@@ -370,6 +370,8 @@ Three system variables related to automatic update of statistics are as follows:
 
 When the ratio of the number of modified rows to the total number of rows of `tbl` in a table is greater than `tidb_auto_analyze_ratio`, and the current time is between `tidb_auto_analyze_start_time` and `tidb_auto_analyze_end_time`, TiDB executes the `ANALYZE TABLE tbl` statement in the background to automatically update the statistics on this table.
 
+To avoid the situation that modifying a small amount of data on a small table will have automatic update frequently triggered, when a table has less than 1000 rows, TiDB does not trigger automatic update for this table. You can use `SHOW STATS_META` to see the number of rows of a table.
+
 > **Note:**
 >
 > Currently, the automatic update does not record the configuration items input at manual `ANALYZE`. Therefore, when you use the `WITH` syntax to control the collecting behavior of `ANALYZE`, you need to manually set scheduled tasks to collect statistics.
