@@ -39,7 +39,7 @@ tiup install bench
 
 For detailed usage of the TiUP Bench component, see [TiUP Bench](/tiup/tiup-bench.md).
 
-Assume that we've deployed a TiDB cluster with two tidb servers located at 172.16.5.140 and 172.16.5.141, and both servers are listening on port 4000. We can conduct a TPC-C benchmark with the following steps.
+Assume that you have deployed a TiDB cluster with two TiDB servers located at 172.16.5.140 and 172.16.5.141, and both servers are listening on port 4000. You can run a TPC-C test with the following steps.
 
 ## Load data
 
