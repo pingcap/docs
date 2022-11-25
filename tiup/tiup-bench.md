@@ -28,7 +28,7 @@ tiup bench rawsql # Benchmark a database using arbitrary SQL files
   -H, --host strings          Database host (default to [127.0.0.1])
       --ignore-error          Ignore error when running workload
       --interval duration     Output interval time (default to 10s)
-      --isolation int         Isolation Level 0: Default, 1: ReadUncommitted,
+      --isolation int         Isolation Level (0: Default; 1: ReadUncommitted;
                               2: ReadCommitted, 3: WriteCommitted, 4: RepeatableRead,
                               5: Snapshot, 6: Serializable, 7: Linerizable
       --max-procs int         runtime.GOMAXPROCS of golang, the limits of how many cores can be used
