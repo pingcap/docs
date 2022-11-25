@@ -6,7 +6,7 @@ aliases: ['/docs/dev/tiup/tiup-bench/','/docs/dev/reference/tools/tiup/bench/']
 
 # Stress Test TiDB Using TiUP Bench Component
 
-When you test the performance of a database, it is often required to stress test the database. To facilitate this, TiUP has integrated the bench component, which provides multiple workloads for stress testing. These workloads can be accessed by the following commands:
+When you test the performance of a database, it is often required to stress test the database. To facilitate this, TiUP has integrated the bench component, which provides multiple workloads for stress testing. You can access these workloads by the following commands:
 
 ```bash
 tiup bench tpcc   # Benchmark a database using TPC-C
