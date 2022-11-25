@@ -891,7 +891,7 @@ ALTER TABLE members REORGANIZE PARTITION p1800,p2000 INTO (PARTITION p2000 VALUE
 ERROR 8200 (HY000): Unsupported REORGANIZE PARTITION of RANGE; not adjacent partitions
 ```
 
-For Range partitioned tables, one can only change the end of the range if the list of partitions includes the last partition. If the end is changed and rows no longer fit, the DDL statements will fail with an error.
+For a Range partitioned table, to modify the end of the range, the new end defined in `VALUES LESS THAN` must cover the existing rows in the last partition. If the end is changed and existing rows no longer fit, an error is reported:
 
 {{< copyable "sql" >}}
 
