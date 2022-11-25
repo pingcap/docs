@@ -219,7 +219,7 @@ You can write an arbitrary query in a SQL file, and then use it for the test by 
 1. Prepare data and the query:
 
     ```sql
-    -- prepare data
+    -- Prepare data
     CREATE TABLE t (a int);
     INSERT INTO t VALUES (1), (2), (3);
 
