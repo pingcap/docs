@@ -107,7 +107,7 @@ The following provides simplified steps for running a TPC-C test. For detailed s
     tiup bench tpcc --warehouses 4 check
     ```
 
-Preparing data via SQL might be slow when you want to conduct a benchmark with a large data set, in which case, you can generate data in CSV format by the following commands and then import it via [TiDB lightning](/tidb-lightning/tidb-lightning-overview.md).
+Preparing data via SQL might be slow when you want to run a benchmark with a large data set. In that case, you can generate data in the CSV format by the following commands and then import it to TiDB via [TiDB lightning](/tidb-lightning/tidb-lightning-overview.md).
 
 - Generate the CSV file:
 
