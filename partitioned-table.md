@@ -877,7 +877,7 @@ ALTER TABLE member_level REORGANIZE PARTITION l1_2,l3,l4,l5,l6 INTO
  PARTITION lEven VALUES IN (2,4,6));
 ```
 
-Reorganizing partitions (including merging or splitting partitions) changes the listed partitions into a new set of partition definitions. It cannot change the type of partitioning (for example, change the List type to the Range type or Range Columns to Range).
+Reorganizing partitions (including merging or splitting partitions) changes the listed partitions into a new set of partition definitions. It cannot change the type of partitioning (for example, change the List type to the Range type, or change the Range COLUMNS type to the Range type).
 
 For Range partitions, a REORGANIZE PARTITION clause can only change adjacent partitions.
 
