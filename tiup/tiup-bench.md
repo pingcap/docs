@@ -64,7 +64,7 @@ Available Commands:
 
 Flags:
       --check-all            Run all consistency checks
-  -h, --help                 help for tpcc
+  -h, --help                 Help for TPC-C
       --partition-type int   Partition type: 1 - HASH, 2 - RANGE, 3 - LIST (HASH-like), 4 - LIST (RANGE-like) (default 1)
       --parts int            Number to partition warehouses (default 1)
       --warehouses int       Number of warehouses (default 10)
