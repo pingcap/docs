@@ -208,4 +208,4 @@ TiDB does not support all MySQL character sets. Therefore, TiDB Lightning report
 
 ### `invalid compression type ...`
 
-TiDB v6.4 and later versions of TiDB Lightning do not support data files with non-`.bak` suffixes and report errors. You need to modify the file names in advance, or move these files out of the import data directory to avoid such errors. For more details, see [Compressed files](/tidb-lightning/tidb-lightning-data-source.md#compressed-files).
+- TiDB Lightning v6.4 and later versions only support `.bak` files and the following compressed data files: `gzip`, `snappy`, and `zstd`. Other types of files cause errors. For those unsupported files, you need to modify the file names in advance, or move those files out of the import data directory to avoid such errors. For more details, see [Compressed files](/tidb-lightning/tidb-lightning-data-source.md#compressed-files).
