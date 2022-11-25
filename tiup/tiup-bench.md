@@ -34,7 +34,7 @@ tiup bench rawsql # Benchmark a database using arbitrary SQL files
       --max-procs int         runtime.GOMAXPROCS of golang, the limits of how many cores can be used
       --output string         Output style, valid values can be { plain | table | json } (default "plain")
   -p, --password string       Database password
-  -P, --port ints             Database port (default [4000])
+  -P, --port ints             Database port (default to [4000])
       --pprof string          Address of pprof endpoint
       --silence               Don't print error when running workload
   -S, --statusPort int        Database status port (default to 10080)
