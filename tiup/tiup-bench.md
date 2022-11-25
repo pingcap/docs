@@ -32,7 +32,7 @@ tiup bench rawsql # Benchmark a database using arbitrary SQL files
                               2: ReadCommitted, 3: WriteCommitted, 4: RepeatableRead,
                               5: Snapshot, 6: Serializable, 7: Linerizable
       --max-procs int         runtime.GOMAXPROCS of golang, the limits of how many cores can be used
-      --output string         Output style, valid values can be { plain | table | json } (default "plain")
+      --output string         Output style, valid values can be { plain | table | json } (default to "plain")
   -p, --password string       Database password
   -P, --port ints             Database port (default to [4000])
       --pprof string          Address of pprof endpoint
