@@ -21,7 +21,7 @@ tiup bench rawsql # Benchmark a database using arbitrary SQL files
 ```
   -t, --acThreads int         OLAP client concurrency, only for CH-benCHmark (default to 1)
       --conn-params string    Session variables, such as setting `--conn-params tidb_isolation_read_engines='tiflash'` for TiDB queries and setting `--conn-params sslmode=disable` for PostgreSQL connections
-      --count int             Total execution count, 0 means infinite
+      --count int             Total execution count (0 means infinite count)
   -D, --db string             Database name (default "test")
   -d, --driver string         Database driver: mysql, postgres (default "mysql")
       --dropdata              Cleanup data before prepare
