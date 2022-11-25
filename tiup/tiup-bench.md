@@ -47,7 +47,7 @@ tiup bench rawsql # Benchmark a database using arbitrary SQL files
 - `--conn-params` must follow the format of [query string](https://en.wikipedia.org/wiki/Query_string). Different databases might have different parameters. For example:
     - `--conn-params tidb_isolation_read_engines='tiflash'` forces TiDB to read from TiFlash.
     - `--conn-params sslmode=disable` disables SSL when you connect to PostgreSQL.
-- When running CH-benCHmark, `--ap-host`, `--ap-port`, `--ap-conn-params` can be used to specify a tidb-server for OLAP queries.
+- When running CH-benCHmark, you can use `--ap-host`, `--ap-port`, `--ap-conn-params` to specify a standalone TiDB server for OLAP queries.
 
 The following sections describe how to run TPC-C, TPC-H, YCSB tests using TiUP.
 
