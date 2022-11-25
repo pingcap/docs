@@ -67,7 +67,7 @@ Flags:
   -h, --help                 Help for TPC-C
       --partition-type int   Partition type: 1 - HASH, 2 - RANGE, 3 - LIST (HASH-like), 4 - LIST (RANGE-like) (default to 1)
       --parts int            Number to partition warehouses (default 1)
-      --warehouses int       Number of warehouses (default 10)
+      --warehouses int       Number of warehouses (default to 10)
 
 ```
 
