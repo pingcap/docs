@@ -39,7 +39,7 @@ tiup bench rawsql # Benchmark a database using arbitrary SQL files
       --silence               Don't print error when running workload
   -S, --statusPort int        Database status port (default 10080)
   -T, --threads int           Thread concurrency (default 1)
-      --time duration         Total execution time (default 2562047h47m16.854775807s)
+      --time duration         Total execution time (default to 2562047h47m16.854775807s)
   -U, --user string           Database user (default "root")
 ```
 
