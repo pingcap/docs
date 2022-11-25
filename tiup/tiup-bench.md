@@ -73,7 +73,7 @@ Flags:
 
 ### Test procedures
 
-Here we show simplified steps for running a TPC-C test. Please refer to [How to Run TPC-C Test on TiDB](/benchmark/benchmark-tidb-using-tpcc.md) for a more complete guide.
+The following provides simplified steps for running a TPC-C test. For detailed steps, see [How to Run TPC-C Test on TiDB](/benchmark/benchmark-tidb-using-tpcc.md).
 
 1. Create 4 warehouses using 4 partitions via hash:
 
