@@ -40,7 +40,7 @@ tiup bench rawsql # Benchmark a database using arbitrary SQL files
   -S, --statusPort int        Database status port (default 10080)
   -T, --threads int           Thread concurrency (default 1)
       --time duration         Total execution time (default to 2562047h47m16.854775807s)
-  -U, --user string           Database user (default "root")
+  -U, --user string           Database user (default to "root")
 ```
 
 - You can pass comma-separated values to `--host` and `--port` to enable client-side load balancing. e.g. when specifying `--host 172.16.4.1,172.16.4.2 --port 4000,4001`, the program will connect to 172.16.4.1:4000, 172.16.4.1:4001, 172.16.4.2:4000, 172.16.4.2:4001, chosen in round-robin fashion.
