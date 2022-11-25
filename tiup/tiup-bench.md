@@ -193,7 +193,7 @@ You can stress test both TiDB and TiKV via YCSB.
 2. Run YCSB workload:
 
     ```shell
-    # the read-write percent is 95% by default
+    # The read-write percent is 95% by default
     tiup bench ycsb run tidb -p tidb.instances="127.0.0.1:4000" -p operationcount=10000
     ```
 
