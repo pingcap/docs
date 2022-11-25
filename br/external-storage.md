@@ -24,18 +24,21 @@ The following services are supported:
 Cloud storages such as S3, GCS and Azblob sometimes require additional configuration for connection. You can specify parameters for such configuration. For example:
 
 + Use Dumpling to export data to S3:
+
     ```bash
     ./dumpling -u root -h 127.0.0.1 -P 3306 -B mydb -F 256MiB \
         -o 's3://my-bucket/sql-backup'
     ```
 
 + Use TiDB Lightning to import data from S3:
+
     ```bash
     ./tidb-lightning --tidb-port=4000 --pd-urls=127.0.0.1:2379 --backend=local --sorted-kv-dir=/tmp/sorted-kvs \
         -d 's3://my-bucket/sql-backup'
     ```
 
 + Use TiDB Lightning to import data from S3 (using the path-style request):
+
     ```bash
     ./tidb-lightning --tidb-port=4000 --pd-urls=127.0.0.1:2379 --backend=local --sorted-kv-dir=/tmp/sorted-kvs \
         -d 's3://my-bucket/sql-backup?force-path-style=true&endpoint=http://10.154.10.132:8088'
@@ -49,12 +52,14 @@ Cloud storages such as S3, GCS and Azblob sometimes require additional configura
     ```
 
 + Use br command-line tool to back up data to GCS:
+
     ```bash
     ./br backup full -u 127.0.0.1:2379 \
         -s 'gcs://bucket-name/prefix'
     ```
 
 + Use br command-line tool to back up data to Azblob:
+
     ```bash
     ./br backup full -u 127.0.0.1:2379 \
         -s 'azure://container-name/prefix'
