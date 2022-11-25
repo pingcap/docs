@@ -214,7 +214,7 @@ You can stress test both TiDB and TiKV via YCSB.
 
 ## Run RawSQL test using TiUP
 
-You can write down an arbitrary query into a SQL file, then run it repeatedly by executing `tiup bench rawsql` like the following:
+You can write an arbitrary query in a SQL file, and then use it for the test by executing `tiup bench rawsql` as follows:
 
 1. Prepare data and the query:
 
