@@ -223,7 +223,7 @@ You can write an arbitrary query in a SQL file, and then use it for the test by 
     CREATE TABLE t (a int);
     INSERT INTO t VALUES (1), (2), (3);
 
-    -- save the following demo query into demo.sql
+    -- Save your query in a SQL file. For example, you can save the following query in `demo.sql`.
     SELECT a, sleep(rand()) FROM t WHERE a < 4*rand();
     ```
 
