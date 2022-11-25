@@ -43,7 +43,7 @@ tiup bench rawsql # Benchmark a database using arbitrary SQL files
   -U, --user string           Database user (default to "root")
 ```
 
-- You can pass comma-separated values to `--host` and `--port` to enable client-side load balancing. e.g. when specifying `--host 172.16.4.1,172.16.4.2 --port 4000,4001`, the program will connect to 172.16.4.1:4000, 172.16.4.1:4001, 172.16.4.2:4000, 172.16.4.2:4001, chosen in round-robin fashion.
+- You can pass comma-separated values to `--host` and `--port` to enable client-side load balancing. For example, when specifying `--host 172.16.4.1,172.16.4.2 --port 4000,4001`, the program will connect to 172.16.4.1:4000, 172.16.4.1:4001, 172.16.4.2:4000, 172.16.4.2:4001, chosen in round-robin fashion.
 - `--conn-params` must follow the format of [query string](https://en.wikipedia.org/wiki/Query_string). Different database may have different parameters, e.g.
     - `--conn-params tidb_isolation_read_engines='tiflash'` force TiDB to read from tiflash.
     - `--conn-params sslmode=disable` disable SSL when connecting to PostgreSQL.
