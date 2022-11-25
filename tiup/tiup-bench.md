@@ -24,7 +24,7 @@ tiup bench rawsql # Benchmark a database using arbitrary SQL files
       --count int             Total execution count (0 means infinite count)
   -D, --db string             Database name (default to "test")
   -d, --driver string         Database driver: mysql, postgres (default to "mysql")
-      --dropdata              Cleanup data before prepare
+      --dropdata              Clean up historical data before preparing 
   -H, --host strings          Database host (default to [127.0.0.1])
       --ignore-error          Ignore error when running workload
       --interval duration     Output interval time (default to 10s)
