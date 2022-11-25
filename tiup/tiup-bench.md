@@ -227,7 +227,7 @@ You can write an arbitrary query in a SQL file, and then use it for the test by 
     SELECT a, sleep(rand()) FROM t WHERE a < 4*rand();
     ```
 
-2. Run RawSQL test:
+2. Run the RawSQL test:
 
    ```shell
    tiup bench rawsql run --count 60 --query-files demo.sql
