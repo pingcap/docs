@@ -65,6 +65,13 @@ The cluster overview page provides general metrics of a cluster, including total
 >
 > Some of these metrics might be available only for Dedicated Tier clusters.
 
+| Serverless Tier metric | Description |
+|:--|:--|
+| **Total QPS** | The number of SQL statements executed per second. |
+| **Average Query Duration** | The average of execution time for SQL statements. |
+| **Active Connections** | Number of connections that are actively executing SQL statements. |
+| **Used Storage Size** | The amount of data stored in the cluster. This is the logical number of live bytes and does not account for compression or replication. |
+
 To view metrics on the cluster overview page, take the following steps:
 
 1. Navigate to the **Clusters** page.
