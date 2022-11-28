@@ -102,7 +102,6 @@ Backup storage and network configuration:
 
 ### Compatibility
 
-
 #### Compatibility with other features
 
 Backup and restore might go wrong when some TiDB features are enabled or disabled. If these features are not consistently enabled or disabled during backup and restore, compatibility issues might occur.
