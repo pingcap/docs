@@ -75,12 +75,12 @@ Restore KV Files <--------------------------------------------------------------
 
 As described in the [Usage Overview of TiDB Backup and Restore](/br/br-use-overview.md):
 
-To perform PITR, you need to restore the full backup before the restore point, and the log backup between the full backup point and the restore point. Therefore, for log backups that exceed the backup retention period, you need to run `br log truncate` to delete the backup before the specified time point. **It is recommended to only delete the log backup before the full snapshot**.
+To perform PITR, you need to restore the full backup before the restore point, and the log backup between the full backup point and the restore point. Therefore, for log backups that exceed the backup retention period, you can use `br log truncate` to delete the backup before the specified time point. **It is recommended to only delete the log backup before the full snapshot**.
 
 The following steps describe how to clean up backup data that exceeds the backup retention period:
 
 1. Get the **last full backup** outside the backup retention period.
-2. Use the `validate` command to get the time point corresponding to the backup. Assume that the backup data before 2022/09/01 needs to be cleaned, you should look for the last full backup before this and ensure that it will not be cleaned.
+2. Use the `validate` command to get the time point corresponding to the backup. Assume that the backup data before 2022/09/01 needs to be cleaned, you should look for the last full backup before this time point and ensure that it will not be cleaned.
 
     ```shell
     FULL_BACKUP_TS=`tiup br validate decode --field="end-version" --storage "s3://backup-101/snapshot-${date}?access_key=${access_key}&secret_access_key=${secret_access_key}"| tail -n1`

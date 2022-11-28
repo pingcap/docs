@@ -111,7 +111,7 @@ Log backup and restoration are implemented as follows:
 When a log backup task is performed:
 
 1. BR receives the `br log start` command.
-2. BR registers a log backup task with PD and saves the log backup metadata in PD.
+2. BR registers a log backup task in PD and saves the log backup metadata in PD.
 3. The TiKV backup executor module listens on the creation of a log backup task in PD. When it detects the creation of a log backup task, it starts to perform log backup.
 4. The TiKV backup executor module reads the KV data changes and writes into the local SST files.
 5. The TiKV backup executor module periodically writes the SST files to the backup storage and updates the metadata in the backup storage.
