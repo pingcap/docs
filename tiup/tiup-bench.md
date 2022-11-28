@@ -159,7 +159,7 @@ Flags:
         {{< copyable "shell-regular" >}}
 
         ```shell
-        tiup bench tpch --sf=1 --check=true run
+        tiup bench tpch --count=22 --sf=1 --check=true run
         ```
 
     - If you do not check the result, run this command:
@@ -167,7 +167,7 @@ Flags:
         {{< copyable "shell-regular" >}}
 
         ```shell
-        tiup bench tpch --sf=1 run
+        tiup bench tpch --count=22 --sf=1 run
         ```
 
 3. Clean up data:
