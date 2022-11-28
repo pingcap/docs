@@ -140,6 +140,10 @@ Create an access key in the AWS console. See [Create an access key](https://docs
 
 3. To create an access key, click **Create access key**. Then choose **Download .csv file** to save the access key ID and secret access key to a CSV file on your computer. Store the file in a secure location. You will not have access to the secret access key again after this dialog box closes. After you download the CSV file, choose Close. When you create an access key, the key pair is active by default, and you can use the pair right away.
 
+    ![Create access key](/media/tidb-cloud/op-to-cloud-create-access-key01.png)
+
+    ![Download CSV file](/media/tidb-cloud/op-to-cloud-create-access-key02.png)
+
 #### Step 3: Export data from the upstream TiDB cluster to Amazon S3 using Dumpling
 
 Do the following to export data from the upstream TiDB cluster to Amazon S3 using Dumpling:
