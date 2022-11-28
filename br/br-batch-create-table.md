@@ -12,7 +12,7 @@ To speed up the table creation process and reduce the time for restoring data, t
 > **Note:**
 >
 > - To use the Batch Create Table feature, both TiDB and br command-line tool are expected to be of v6.0.0 or later. If either TiDB or br command-line tool is earlier than v6.0.0, the br tool uses the serial execution implementation.
-> - Suppose that you use a cluster management tool (for example, TiUP), and your TiDB and br command-line tool are of v6.0.0 or later versions, or your TiDB and br command-line tool are upgraded from a version earlier than v6.0.0 to v6.0.0 or later. In this case, the br tool enables the Batch Create Table feature by default.
+> - Suppose that you use a cluster management tool (for example, TiUP), and your TiDB and br command-line tool are of v6.0.0 or later versions, or your TiDB and br command-line tool are upgraded from a version earlier than v6.0.0 to v6.0.0 or later.
 
 ## Usage scenario
 
