@@ -33,7 +33,7 @@ TiDB BR provides the following features:
 - Restore backup data:
 
     - You can **restore a full backup** or **specific databases or tables** in a full backup.
-    - Based on backup data (full backup and log backup), you can specify any time point to restore the target cluster to the state when it is backed up. This type of restore is called point-in-time recovery, or PITR for short.
+    - Based on backup data (full backup and log backup), you can restore the target cluster to any time point of the backup cluster. This type of restore is called point-in-time recovery, or PITR for short.
 
 ### Back up cluster data
 
@@ -77,7 +77,7 @@ TiDB supports backing up data to Amazon S3, Google Cloud Storage (GCS), Azure Bl
 
 ## Before you use
 
-This section describes the prerequisites for using the TiDB backup and restore tool, including the usage tips and compatibility issues.
+This section describes the prerequisites for using TiDB backup and restore, including the usage tips and compatibility issues.
 
 ### Some tips
 

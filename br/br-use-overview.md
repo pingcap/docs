@@ -59,7 +59,7 @@ Assume that you have specified a **backup retention period**. Backup data will b
 ### How to restore data?
 
 - To restore only full backup data, you can use `br restore` to perform a full restore of the specified backup.
-- If you have started log backup and regularly performed a full backup, you can run the `br restore point` command to restore backup data to any time point within the backup retention period.
+- If you have started log backup and regularly performed a full backup, you can run the `br restore point` command to restore data to any time point within the backup retention period.
 
 ## Deploy and use br command-line tool
 
