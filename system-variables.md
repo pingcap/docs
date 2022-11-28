@@ -1035,7 +1035,7 @@ MPP is a distributed computing framework provided by the TiFlash engine, which a
 - Persists to cluster: Yes
 - Type: Boolean
 - Default value: `ON`
-- This variable controls whether to enable the acceleration of `ADD INDEX` and `CREATE INDEX` DDl operations to improve the speed of backfilling when creating an index. If this variable is enabled, TiDB uses a more effective way to create an index especially for large tables.
+- This variable controls whether to enable the acceleration of `ADD INDEX` and `CREATE INDEX` to improve the speed of backfilling when creating an index. The performance improvement is especially significant for tables with a large amount of data.
 - To verify whether a completed `ADD INDEX` operation is accelerated, you can execute the [`ADMIN SHOW DDL JOBS`](/sql-statements/sql-statement-admin-show-ddl.md#admin-show-ddl-jobs) statement to see if `ingest` is displayed in the `JOB_TYPE` column.
 
 <CustomContent platform="tidb">
