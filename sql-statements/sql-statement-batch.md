@@ -7,13 +7,13 @@ summary: An overview of the usage of BATCH for the TiDB database.
 
 The `BATCH` syntax splits a DML statement into multiple statements in TiDB for execution. This means that there are **no guarantees** of transactional atomicity and isolation. Therefore, it is a "non-transactional" statement.
 
-Currently, `INSERT`, `REPLACE`, and `DELETE` are supported in `BATCH`.
+Currently, `INSERT`, `REPLACE`, `UPDATE`, and `DELETE` are supported in `BATCH`.
 
 Based on a column, the `BATCH` syntax divides a DML statement into multiple ranges of scope for execution. In each range, a single SQL statement is executed.
 
 For details about the usage and restrictions, see [Non-transactional DML statements](/non-transactional-dml.md).
 
-When you use the `BATCH` syntax in a multi-table join, you need to specify the full path of the column to avoid ambiguity:
+When you use multi-table join in a `BATCH` statement, you need to specify the full path of the column to avoid ambiguity:
 
 ```sql
 BATCH ON test.t2.id LIMIT 1 INSERT INTO t SELECT t2.id, t2.v, t3.v FROM t2 JOIN t3 ON t2.id = t3.id;

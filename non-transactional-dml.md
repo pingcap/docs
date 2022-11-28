@@ -38,8 +38,8 @@ Before using non-transactional DML statements, make sure that the following cond
 - The data to be operated on has no other concurrent writes, which means it is not updated by other statements at the same time. Otherwise, unexpected results such as missing writing, wrong writing, and modifying the same line multiple times might occur.
 - The statement does not modify the data to be read by the statement itself. Otherwise, the following batch will read the data written by the previous batch and easily causes unexpected results.
 
-    - The split column should not be updated in the statement. For example, for a non-transactional `UPDATE` statement, the split SQL statements are executed in sequence. The modification of the previous batch is read by the next batch after it is committed, which causes the same line of data to be modified multiple times.
-    - The split column should not be used as a Join key. For example, the following example uses the split column `test.t.id` as a Join key, which causes a non-transactional `UPDATE` statement to modify the same line multiple times:
+    - The shard column should not be updated in the statement. For example, for a non-transactional `UPDATE` statement, the split SQL statements are executed in sequence. The modification of the previous batch is read by the next batch after it is committed, which causes the same line of data to be modified multiple times.
+    - The shard column should not be used as a Join key. For example, the following example uses the shard column `test.t.id` as a Join key, which causes a non-transactional `UPDATE` statement to modify the same line multiple times:
 
         ```sql
         CREATE TABLE t(id int, v int, key(id));
@@ -128,7 +128,7 @@ CREATE TABLE t2(id int, v int, key(id));
 INSERT INTO t2 VALUES (1,1), (3,3), (5,5);
 ```
 
-Then, update the data of table `t2` by joining table `t` and `t2`. Note that the split column needs to be specified with the complete database name, table name, and column name (`test.t.id`):
+Then, update the data of table `t2` by joining table `t` and `t2`. Note that the shard column needs to be specified with the complete database name, table name, and column name (`test.t.id`):
 
 ```sql
 BATCH ON test.t.id LIMIT 1 UPDATE t JOIN t2 ON t.id = t2.id SET t2.id = t2.id+1;
