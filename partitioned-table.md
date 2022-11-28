@@ -760,8 +760,6 @@ In addition, there are limitations on the compatibility of `EXCHANGE PARTITION` 
 
 This section uses the partitioned tables created by the following SQL statements as examples to show you how to manage Range and List partitions.
 
-{{< copyable "sql" >}}
-
 ```sql
 CREATE TABLE members (
     id int,
@@ -793,8 +791,6 @@ PARTITION BY LIST (level) (
 
 #### Drop partitions
 
-{{< copyable "sql" >}}
-
 ```sql
 ALTER TABLE members DROP PARTITION p1990;
 
@@ -802,8 +798,6 @@ ALTER TABLE member_level DROP PARTITION l5;
 ```
 
 #### Truncate partitions
-
-{{< copyable "sql" >}}
 
 ```sql
 ALTER TABLE members TRUNCATE PARTITION p1980;
@@ -813,8 +807,6 @@ ALTER TABLE member_level TRUNCATE PARTITION l4;
 
 #### Add partitions
 
-{{< copyable "sql" >}}
-
 ```sql
 ALTER TABLE members ADD PARTITION (PARTITION `p1990to2010` VALUES LESS THAN (2010));
 
@@ -822,8 +814,6 @@ ALTER TABLE member_level ADD PARTITION (PARTITION l5_6 VALUES IN (5,6));
 ```
 
 For a Range partitioned table, `ADD PARTITION` will append new partitions after the last existing partition. Compared with the existing partitions, the value defined in `VALUES LESS THAN` for new partitions must be increasing. Otherwise, an error is reported:
-
-{{< copyable "sql" >}}
 
 ```sql
 ALTER TABLE members ADD PARTITION (PARTITION p1990 VALUES LESS THAN (2000));
@@ -836,8 +826,6 @@ ERROR 1493 (HY000): VALUES LESS THAN value must be strictly increasing for each 
 #### Reorganize partitions
 
 Split a partition:
-
-{{< copyable "sql" >}}
 
 ```sql
 ALTER TABLE members REORGANIZE PARTITION `p1990to2010` INTO
@@ -854,8 +842,6 @@ ALTER TABLE member_level REORGANIZE PARTITION l5_6 INTO
 
 Merge partitions:
 
-{{< copyable "sql" >}}
-
 ```sql
 ALTER TABLE members REORGANIZE PARTITION pBefore1950,p1950 INTO (PARTITION pBefore1960 VALUES LESS THAN (1960));
 
@@ -863,8 +849,6 @@ ALTER TABLE member_level REORGANIZE PARTITION l1,l2 INTO (PARTITION l1_2 VALUES 
 ```
 
 Change the partitioning scheme definition:
-
-{{< copyable "sql" >}}
 
 ```sql
 ALTER TABLE members REORGANIZE PARTITION pBefore1960,p1960,p1970,p1980,p1990,p2000,p2010,p2020,pMax INTO
@@ -877,46 +861,42 @@ ALTER TABLE member_level REORGANIZE PARTITION l1_2,l3,l4,l5,l6 INTO
  PARTITION lEven VALUES IN (2,4,6));
 ```
 
-Reorganizing partitions (including merging or splitting partitions) changes the listed partitions into a new set of partition definitions. It cannot change the type of partitioning (for example, change the List type to the Range type, or change the Range COLUMNS type to the Range type).
+When reorganizing partitions, you need to note the following key points:
 
-For Range partitions, you can reorganize only adjacent partitions.
+- Reorganizing partitions (including merging or splitting partitions) can change the listed partitions into a new set of partition definitions but cannot change the type of partitioning (for example, change the List type to the Range type, or change the Range COLUMNS type to the Range type).
 
-{{< copyable "sql" >}}
+- For a Range partition table, you can reorganize only adjacent partitions in it.
 
-```sql
-ALTER TABLE members REORGANIZE PARTITION p1800,p2000 INTO (PARTITION p2000 VALUES LESS THAN (2100));
-```
+    ```sql
+    ALTER TABLE members REORGANIZE PARTITION p1800,p2000 INTO (PARTITION p2000 VALUES LESS THAN (2100));
+    ```
 
-```
-ERROR 8200 (HY000): Unsupported REORGANIZE PARTITION of RANGE; not adjacent partitions
-```
+    ```
+    ERROR 8200 (HY000): Unsupported REORGANIZE PARTITION of RANGE; not adjacent partitions
+    ```
 
-For a Range partitioned table, to modify the end of the range, the new end defined in `VALUES LESS THAN` must cover the existing rows in the last partition. If the end is changed and existing rows no longer fit, an error is reported:
+- For a Range partitioned table, to modify the end of the range, the new end defined in `VALUES LESS THAN` must cover the existing rows in the last partition. Otherwise, existing rows no longer fit and an error is reported:
 
-{{< copyable "sql" >}}
+    ```sql
+    INSERT INTO members VALUES (313, "John", "Doe", "2022-11-22", NULL);
+    ALTER TABLE members REORGANIZE PARTITION p2000 INTO (PARTITION p2000 VALUES LESS THAN (2050)); -- succeeds, since it covers the existing rows
+    ALTER TABLE members REORGANIZE PARTITION p2000 INTO (PARTITION p2000 VALUES LESS THAN (2020)); -- fails
+    ```
 
-```sql
-INSERT INTO members VALUES (313, "John", "Doe", "2022-11-22", NULL);
-ALTER TABLE members REORGANIZE PARTITION p2000 INTO (PARTITION p2000 VALUES LESS THAN (2050)); -- succeeds, since it covers the existing rows
-ALTER TABLE members REORGANIZE PARTITION p2000 INTO (PARTITION p2000 VALUES LESS THAN (2020)); -- fails
-```
+    ```
+    ERROR 1526 (HY000): Table has no partition for value 2022
+    ```
 
-```
-ERROR 1526 (HY000): Table has no partition for value 2022
-```
+- For a List partitioned table, to modify the set of values defined for a partition, the new definition must cover the existing values in that partition. Otherwise, an error is reported:
 
-For a List partitioned table, to modify the set of values in a partition, the new definition must cover the existing values in that partition. Otherwise, an error is reported:
+    ```sql
+    INSERT INTO member_level (id, level) values (313, 6);
+    ALTER TABLE member_level REORGANIZE PARTITION lEven INTO (PARTITION lEven VALUES IN (2,4));
+    ```
 
-{{< copyable "sql" >}}
-
-```sql
-INSERT INTO member_level (id, level) values (313, 6);
-ALTER TABLE member_level REORGANIZE PARTITION lEven INTO (PARTITION lEven VALUES IN (2,4));
-```
-
-```
-ERROR 1526 (HY000): Table has no partition for value 6
-```
+    ```
+    ERROR 1526 (HY000): Table has no partition for value 6
+    ```
 
 ### Hash partition management
 
