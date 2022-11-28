@@ -149,7 +149,7 @@ In TiDB, all supported DDL changes are performed online. Compared with DDL opera
 * Adding/Dropping the primary key of the `CLUSTERED` type is unsupported. For more details about the primary key of the `CLUSTERED` type, refer to [clustered index](/clustered-indexes.md).
 * Different types of indexes (`HASH|BTREE|RTREE|FULLTEXT`) are not supported, and will be parsed and ignored when specified.
 * Table Partitioning supports `HASH`, `RANGE`, and `LIST` partitioning types. For the unsupported partition type, the `Warning: Unsupported partition type %s, treat as normal table` error might be output, where `%s` is a specific partition type.
-* Table Partitioning also supports `ADD`, `DROP`, and `TRUNCATE` operations. Other partition operations are ignored. The following Table Partition syntaxes are not supported:
+* Table Partitioning also supports `ADD`, `DROP`, `TRUNCATE`, and `REORGANIZE` operations. Other partition operations are ignored. The following Table Partition syntaxes are not supported:
     - `PARTITION BY KEY`
     - `PARTITION BY LINEAR KEY`
     - `SUBPARTITION`
