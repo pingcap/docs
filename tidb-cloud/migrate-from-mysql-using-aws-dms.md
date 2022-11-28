@@ -49,3 +49,77 @@ AWS DMS does not support replicating `DROP TABLE`.
     ![Click the Create button](/media/tidb-cloud/aws-dms-tidb-cloud/aws-dms-to-tidb-cloud-create-button.png)
 
 ## Step 2: Create the source database endpoint
+
+1. Go to the AWS DMS console and click the replication instance that you just created. Copy the public and private network IP addresses as shown in the following screen shot.
+
+    ![Copy the public and private network IP addresses](/media/tidb-cloud/aws-dms-tidb-cloud/aws-dms-to-tidb-cloud-copy-ip.png)
+
+2. Configure the security group rules for AWS RDS. In the example in this document, add the public and private IP addresses of the AWS DMS instance to the security group.
+
+    ![Configure the security group rules](/media/tidb-cloud/aws-dms-tidb-cloud/aws-dms-to-tidb-cloud-rules.png)
+
+3. Click **Create endpoint** to create the source database endpoint.
+
+    ![Click Create endpoint](/media/tidb-cloud/aws-dms-tidb-cloud/aws-dms-to-tidb-cloud-endpoint.png)
+
+4. In this example, click **Select RDS DB instance** and then select the source database. If the source database is a self-built MySQL, you can skip this step and fill in the information in the following steps.
+
+    ![Select RDS DB instance](/media/tidb-cloud/aws-dms-tidb-cloud/aws-dms-to-tidb-cloud-select-rds.png)
+
+5. Fill in the following information:
+   - **Endpoint identifier**: create a label for the source endpoint to help you identify it in the subsequent task configuration.
+   - **Source engine**: select **MySQL**.
+   - **Access to endpoint database**: select **Provide access information manually**.
+   - **Server name**: fill in the Server name. It is the name of the data server for the data provider. If the upstream is Amazon RDS or Amazon Aurora, it will be automatically filled in. You can copy it from the database console. If it is a self-built MySQL without a domain name, you can fill in the IP address.
+   - Fill in the database **Port**, **Username**, and **Password**.
+   - Secure Socket Layer (SSL) mode: you can enable SSL mode as needed.
+
+    ![Fill in the endpoint configrations](/media/tidb-cloud/aws-dms-tidb-cloud/aws-dms-to-tidb-cloud-endpoint-config.png)
+
+6. Use default values for Endpoint settings, KMS key, and Tags. In the **Test endpoint connection (optional)** section, it is recommended to select the same VPC as the source database to simplify the network configuration. Select the corresponding replication instance, and then click **Run test**. The status needs to be **successful**. Finally, click **Create endpoint**.
+
+    ![Click Create endpoint](/media/tidb-cloud/aws-dms-tidb-cloud/aws-dms-to-tidb-cloud-connection.png)
+
+## Step 3: Create the target database endpoint
+
+1. Go to the AWS DMS console and click the replication instance that you just created. Copy the public and private network IP addresses as shown in the following screen shot.
+
+    ![Copy the public and private network IP addresses](/media/tidb-cloud/aws-dms-tidb-cloud/aws-dms-to-tidb-cloud-copy-ip.png)
+
+2. Go to the TiDB Cloud console, and click **Connect** to get the TiDB Cloud database connection information.
+
+    ![Get the TiDB Cloud database connection information](/media/tidb-cloud/aws-dms-tidb-cloud/aws-dms-to-tidb-cloud-connect.png)
+
+3. Enter the public and private network IP addresses that you copied from the AWS DMS console and click **Update Filter**. It is recommended to add the Public IP address and Private IP address of the AWS DMS replication instance to the TiDB Cluster traffic filter at the same time. Otherwise AWS DMS might not be able to connect to the TiDB Cluster in some scenarios.
+
+    ![Update the TiDB Cloud traffic filter](/media/tidb-cloud/aws-dms-tidb-cloud/aws-dms-to-tidb-cloud-traffic-filter.png)
+
+4. As shown in the following screen shot, you need to connect to the TiDB cluster through SSL. Click **Download TiDB cluster CA** to download the CA certificate. Record the information in the highlighted boxes 2, 3, and 4 in the following screen shot for subsequent connection with TiDB.
+
+    ![Download TiDB cluster CA](/media/tidb-cloud/aws-dms-tidb-cloud/aws-dms-to-tidb-cloud-ca.png)
+
+5. Create VPC Peering for TiDB Cluster and AWS DMS.
+
+    ![Create VPC Peering](/media/tidb-cloud/aws-dms-tidb-cloud/aws-dms-to-tidb-cloud-vpc-peering.png)
+
+6. Fill in the corresponding information. See [Set Up VPC Peering Connections](/tidb-cloud/set-up-vpc-peering-connections.md).
+
+    ![Fill in the VPC Peering information](/media/tidb-cloud/aws-dms-tidb-cloud/aws-dms-to-tidb-cloud-vpc-peering-info.png)
+
+7. Configure the Target endpoint for TiDB. Select **Target endpoint** for **Endpoint type**, and fill in a name for **Endpoint identifier**. Select **MySQL** for **Target engine**.
+
+    ![Configure the Target endpoint](/media/tidb-cloud/aws-dms-tidb-cloud/aws-dms-to-tidb-cloud-target-endpoint.png)
+
+8. Fill in the server name. You can copy it from the TiDB Cloud console. The port is 4000. Fill in the username and password. Selects "Verify-ca" for SSL mode. Upload the ca file downloaded in the previous step.
+
+    ![Fill in the Target endpoint information](/media/tidb-cloud/aws-dms-tidb-cloud/aws-dms-to-tidb-cloud-target-endpoint2.png)
+
+9. Upload the CA file.
+
+    ![Fill in the Target endpoint information](/media/tidb-cloud/aws-dms-tidb-cloud/aws-dms-to-tidb-cloud-upload-ca.png)
+
+10. Use the default values for Endpoint settings, KMS key, and Tags. In the **Test endpoint connection (optional)** section, select the same VPC as the source database. Select the corresponding replication instance, and then click **Run test**. The status needs to be **successful**. Finally, click **Create endpoint**.
+
+    ![Click Create endpoint](/media/tidb-cloud/aws-dms-tidb-cloud/aws-dms-to-tidb-cloud-target-endpoint3.png)
+
+## Step 4：在 AWS DMS 上创建数据迁移任务
