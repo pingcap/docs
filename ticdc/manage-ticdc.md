@@ -887,41 +887,41 @@ In this command:
 
 ## Bi-directional replication
 
-Starting from v6.4.0, TiCDC supports bi-directional replication among multiple TiDB clusters. Based on this feature, you can create a multi-master TiDB solution using TiCDC.
-
-### Limitations
-
-- Bi-directional replication clusters do not support replicating DDL. You need to manually execute all DDL statements in each TiDB cluster, and the table schemas before and after executing the DDL statement must be compatible.
-
-- When the bi-directional replication clusters are running, you cannot add or remove a cluster.
-
-- Bi-directional replication clusters cannot detect write conflict, which might cause undefined behavior. Therefore, you must ensure there is no write conflict from the application side.
-
-- You can add three TiDB clusters at most in a bi-directional replication topology.
+Starting from v6.5.0, TiCDC supports bi-directional replication among multiple TiDB clusters. Based on this feature, you can create a multi-master TiDB solution using TiCDC.
 
 ### Use bi-directional replication
 
 The following example shows how to use bi-directional replication between two TiDB clusters.
 
-![TiCDC bidirectional replication](/media/ticdc/ticdc-bidirectional-replication.png)
+#### Deploy bi-directional replication
 
-1. Deploy two TiCDC clusters between the two TiDB clusters. The arrows in the preceding diagram indicate the directions of data replication.
+1. Replicate data between two TiDB clusters using a data migration tool to make sure data in the two clusters is consistent.
 
-2. When you create each changefeed, add the following configuration in the configuration file specified by the `--config` parameter:
+2. Deploy two TiCDC clusters between the two TiDB clusters. The cluster topology is as follows. The arrows in the diagram indicate the directions of data flow.
+
+    ![TiCDC bidirectional replication](/media/ticdc/ticdc-bidirectional-replication.png)
+
+3. When you create each changefeed, add the following configuration in the configuration file specified by the `--config` parameter:
 
     ```toml
-    [filter]
-    # Specifies the databases to be replicated
-    rules = ["test.*"]
-    # Filters out all changes written by TiCDC and only replicates changes
-    # written by the application
-    ignore-rows-written-by-ticdc = true
-
-    [[filter.event-filters]]
-    # Specifies the tables to be replicated
-    matcher = ["test.t1"]
-    # Filter out all DDL events
-    ignore-event = ["all ddl"]
+    # Whether to enable the bi-directional replication mode
+    bdr-mode = true
     ```
 
-After the configuration takes effect, the clusters can perform bi-directional replication on data in the `test.t1` table.
+After the configuration takes effect, the clusters can perform bi-directional replication.
+
+#### Stop bi-directional replication
+
+To stop the bi-directional replication, wait for all data replication to complete and stop the changefeed.
+
+### Limitations
+
+- Bi-directional replication clusters do not support replicating DDL. To execute DDL statements, take the following steps:
+
+    1. Pause the write operations in the corresponding table.
+    2. After the data replication is completed, manually execute all DDL statements in each TiDB cluster.
+    3. After the DDl statements are executed, resume the write operations.
+
+- Bi-directional replication clusters cannot detect write conflict, which might cause undefined behaviors. Therefore, you must ensure there are no write conflicts from the application side.
+
+- Bi-directional replication can span multiple clusters. Each cluster must be connected with other clusters.

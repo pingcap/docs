@@ -3236,6 +3236,15 @@ For details, see [Identify Slow Queries](/identify-slow-queries.md).
 - Default value: ""
 - This variable is used to set the time point at which the data is read by the session. For example, when you set the variable to "2017-11-11 20:20:20" or a TSO number like "400036290571534337", the current session reads the data of this moment.
 
+### tidb_source_id <span class="version-mark">New in v6.5.0</span>
+
+- Scope: GLOBAL
+- Persists to cluster: Yes
+- Type: Integer
+- Default value: `1`
+- Range: `[1, 15]`
+- This variable is used to configure the different cluster ID in a bi-direcional replication cluster.
+
 ### tidb_stats_cache_mem_quota <span class="version-mark">New in v6.1.0</span>
 
 > **Warning:**
@@ -3564,13 +3573,14 @@ For details, see [Identify Slow Queries](/identify-slow-queries.md).
 - This variable is used to set the concurrency degree of the window operator.
 - A value of `-1` means that the value of `tidb_executor_concurrency` will be used instead.
 
-### `tidb_write_by_ticdc` <span class="version-mark">New in v6.4.0</span>
+### `tidb_cdc_write_source` <span class="version-mark">New in v6.5.0</span>
 
 - Scope: SESSION
 - Persists to cluster: No
-- Type: Boolean
-- Default value: `OFF`
-- When this variable is set to `ON`, data written in this session is considered to be written by TiCDC. This variable can only be modified by TiCDC. Do not manually modify this variable in any case.
+- Type: Integer
+- Default value: `0`
+- Range: `[0, 15]`
+- When this variable is set to a value other than 0, data written in this session is considered to be written by TiCDC. This variable can only be modified by TiCDC. Do not manually modify this variable in any case.
 
 ### `tiflash_fastscan` <span class="version-mark">New in v6.3.0</span>
 
