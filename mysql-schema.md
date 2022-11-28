@@ -16,6 +16,7 @@ These system tables contain grant information about user accounts and their priv
 - `db`: database-level privileges
 - `tables_priv`: table-level privileges
 - `columns_priv`: column-level privileges
+- `password_history`: information related to password history
 
 ## Server-side help system tables
 
