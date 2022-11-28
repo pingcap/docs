@@ -8,7 +8,7 @@ aliases: ['/tidb/dev/br-usage-backup/','/tidb/dev/br-usage-restore/','/tidb/dev/
 
 This document describes how to back up and restore TiDB snapshots using the `br` command-line tool. Before backing up and restoring data, you need to [install the `br` command-line tool](/br/br-use-overview.md#deploy-and-use-br-command-line-tool) first.
 
-Snapshot backup is an implementation to back up the entire cluster. It is based on [multi-version concurrency control (MVCC)](/tidb-storage.md#mvcc) and backs up all data in the specified snapshot to a target storage. The size of the backup data is approximately the size of the compressed single replica in the cluster. After the backup is completed, you can restore the backup data to an empty cluster or a cluster that does not raise data conflicts (with the same schema or same tables), restore the cluster to the state at the time of the snapshot backup, and restore multiple replicas according to the cluster replica settings.
+Snapshot backup is an implementation to back up the entire cluster. It is based on [multi-version concurrency control (MVCC)](/tidb-storage.md#mvcc) and backs up all data in the specified snapshot to a target storage. The size of the backup data is approximately the size of the compressed single replica in the cluster. After the backup is completed, you can restore the backup data to an empty cluster or a cluster that does not contain conflict data (with the same schema or same tables), restore the cluster to the time point of the snapshot backup, and restore multiple replicas according to the cluster replica settings.
 
 Besides basic backup and restore, snapshot backup and restore also provides the following features:
 
@@ -28,7 +28,7 @@ tiup br backup full --pd "${PD_IP}:2379" \
 
 In the preceding command:
 
-- `--backupts`: The physical time of the snapshot. The format can be [TSO](/glossary.md#tso) or timestamp, such as `400036290571534337` or `2018-05-11 01:42:23`. If the data of this snapshot is garbage collected, the `br backup` command returns an error and `br` exits. If you leave this parameter unspecified, `br` picks the snapshot corresponding to the backup start time.
+- `--backupts`: The time point of the snapshot. The format can be [TSO](/glossary.md#tso) or timestamp, such as `400036290571534337` or `2018-05-11 01:42:23`. If the data of this snapshot is garbage collected, the `br backup` command returns an error and `br` exits. If you leave this parameter unspecified, `br` picks the snapshot corresponding to the backup start time.
 - `--storage`: The storage address of the backup data. Snapshot backup supports Amazon S3, Google Cloud Storage, and Azure Blob Storage as backup storage. The preceding command uses Amazon S3 as an example. For more details, see [URL format of backup storages](/br/backup-and-restore-storages.md#url-format).
 - `--ratelimit`: The maximum speed **per TiKV** performing backup tasks. The unit is in MiB/s.
 
@@ -40,9 +40,9 @@ Checksum <----------------------------------------------------------------------
 *** ["Full Backup success summary"] *** [backup-checksum=3.597416ms] [backup-fast-checksum=2.36975ms] *** [total-take=4.715509333s] [BackupTS=435844546560000000] [total-kv=1131] [total-kv-size=250kB] [average-speed=53.02kB/s] [backup-data-size(after-compressed)=71.33kB] [Size=71330]
 ```
 
-## Get the backup timestamp of a snapshot backup
+## Get the backup time point of a snapshot backup
 
-To manage the number of backups, if you need to get the physical time of a snapshot backup, you can run the following command:
+To manage a lot of backups, if you need to get the physical time of a snapshot backup, you can run the following command:
 
 ```shell
 tiup br validate decode --field="end-version" \

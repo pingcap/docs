@@ -23,19 +23,19 @@ The complete backup process is as follows:
 
 1. `br` receives the `br backup full` command.
 
-    * Gets the backup timestamp and storage path.
+    * Gets the backup time point and storage path.
 
 2. `br` schedules the backup data.
 
     * **Pause GC**: `br` configures the TiDB GC time to prevent the backup data from being cleaned up by [TiDB GC mechanism](/garbage-collection-overview.md).
     * **Fetch TiKV and Region info**: `br` accesses PD to get all TiKV nodes addresses and [Region](/tidb-storage.md#region) distribution of data.
-    * **Request TiKV to back up data**: `br` creates a backup request and sends it to all TiKV nodes. The backup request includes the backup timestamp, Regions to be backed up, and the storage path.
+    * **Request TiKV to back up data**: `br` creates a backup request and sends it to all TiKV nodes. The backup request includes the backup time point, Regions to be backed up, and the storage path.
 
 3. TiKV accepts the backup request and initiates a backup worker.
 
 4. TiKV backs up the data.
 
-    * **Scan KVs**: the backup worker reads data corresponding to the backup timestamp from the Region where the leader locates.
+    * **Scan KVs**: the backup worker reads data corresponding to the backup time point from the Region where the leader locates.
     * **Generate SST**: the backup worker saves the data to SST files, which are stored in the memory.
     * **Upload SST**: the backup worker uploads the SST files to the storage path.
 
@@ -87,8 +87,6 @@ The complete restore process is as follows:
     * If there is any data fails to be restored and cannot be retried, the restore task fails.
     * After all data is restored, the restore task succeeds.
 
-For more details about the backup and restore process, see [Design of backup and restore](https://github.com/pingcap/tidb/blob/master/br/docs/cn/2019-08-05-new-design-of-backup-restore.md).
-
 ## Backup files
 
 ### Types of backup files
@@ -96,7 +94,7 @@ For more details about the backup and restore process, see [Design of backup and
 Snapshot backup generates the following types of files:
 
 - `SST` file: stores the data that the TiKV node backs up. The size of an `SST` file equals to that of a Region.
-- `backupmeta` file: stores the metadata of a backup task, including the number, the key range, the size, and the Hash (sha256) value of the backup files.
+- `backupmeta` file: stores the metadata of a backup task, including the number, the files within the key range, the size, and the Hash (sha256) value of the backup files.
 - `backup.lock` file: prevents multiple backup tasks from storing data at the same directory.
 
 ### Naming format of SST files
