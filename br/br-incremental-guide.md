@@ -5,7 +5,7 @@ summary: Learns about how to perform incremental backup and restore in TiDB.
 
 # TiDB Incremental Backup and Restore Guide
 
-Incremental data of a TiDB cluster is differentiated data between the snapshot of a starting point and that of an end point, and the DDLs generated during this period. Compared with full (snapshot) backup data, incremental data is smaller and therefore it is a supplementary to snapshot backup, which reduces the volume of backup data. To perform incremental backup, ensure that MVCC data generated within the specified period is not garbage collected by the [TiDB GC mechanism](/garbage-collection-overview.md). For example, to perform incremental backup hourly, you must set [`tidb_gc_life_time`](/system-variables.md#tidb_gc_life_time-new-in-v50) to a value greater than 1 hour.
+Incremental data of a TiDB cluster is differentiated data between the starting snapshot and the end snapshot of time period, and the DDLs generated during this period. Compared with full (snapshot) backup data, incremental data is smaller and therefore it is a supplementary to snapshot backup, which reduces the volume of backup data. To perform incremental backup, ensure that MVCC data generated within the specified period is not garbage collected by the [TiDB GC mechanism](/garbage-collection-overview.md). For example, to perform incremental backup hourly, you must set [`tidb_gc_life_time`](/system-variables.md#tidb_gc_life_time-new-in-v50) to a value greater than 1 hour.
 
 > **Warning:**
 >

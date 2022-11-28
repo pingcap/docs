@@ -8,16 +8,16 @@ aliases: ['/docs/dev/br/backup-and-restore-use-cases/','/docs/dev/reference/tool
 
 [TiDB Snapshot Backup and Restore Guide](/br/br-snapshot-guide.md) and [TiDB Log Backup and PITR Guide](/br/br-pitr-guide.md) introduce the backup and restore solutions provided by TiDB, namely, snapshot (full) backup and restore, log backup and point-in-time recovery (PITR). This document helps you to quickly get started with the backup and restore solutions of TiDB in specific use cases.
 
-Assume that you have deployed a TiDB production cluster on AWS and the business team puts forward the following requirements:
+Assume that you have deployed a TiDB production cluster on AWS and the business team requests the following requirements:
 
-- Back up the data changes in a timely manner. When the database encounters an error, you can quickly recover the application data with minimal data loss (only a few minutes of data loss is tolerable).
-- Perform business audits every month at no specific time. When an audit request is received, you must provide a database to query the data at a certain time point in the past month as requested.
+- Back up the data changes in a timely manner. When the database encounters a disaster, you can quickly recover the application with minimal data loss (only a few minutes of data loss is tolerable).
+- Perform business audits every month at no specific time. When an audit request is received, you must provide a database to query the data at a certain time point of the past month as requested.
 
 With PITR, you can satisfy the preceding requirements.
 
 ## Deploy the TiDB cluster and br command-line tool
 
-To use PITR, you need to deploy a TiDB cluster >= v6.2.0 and update br command-line tool to the same version as the TiDB cluster. This document uses v6.4.0 as an example.
+To use PITR, you need to deploy a TiDB cluster >= v6.4.0 and update br command-line tool to the same version as the TiDB cluster. This document uses v6.4.0 as an example.
 
 The following table shows the recommended hardware resources for using PITR in a TiDB cluster.
 
@@ -37,7 +37,7 @@ The following table shows the recommended hardware resources for using PITR in a
 Deploy or upgrade a TiDB cluster using TiUP:
 
 - To deploy a new TiDB cluster, refer to [Deploy a TiDB cluster](/production-deployment-using-tiup.md).
-- If the TiDB cluster is earlier than v6.2.0, upgrade it by referring to [Upgrade a TiDB cluster](/upgrade-tidb-using-tiup.md).
+- If the TiDB cluster is earlier than v6.4.0, upgrade it by referring to [Upgrade a TiDB cluster](/upgrade-tidb-using-tiup.md).
 
 Install or upgrade br tool using TiUP:
 
@@ -59,7 +59,7 @@ Before you start a backup task, prepare the backup storage, including the follow
 
 1. Prepare the S3 bucket and directory that stores the backup data.
 2. Configure the permissions to access the S3 bucket.
-3. Plan the directory that stores the backup data.
+3. Plan the subdirectory that stores each backup data.
 
 The detailed steps are as follows:
 
@@ -135,7 +135,7 @@ The following are two snapshot backup examples:
 
 ## Run PITR
 
-Assume that you need to query the data at 2022/05/15 18:00:00. You can use PITR to restore a cluster to that timestamp by restoring a snapshot backup taken at 2022/05/14 and a log backup between the snapshot and 2022/05/15 18:00:00.
+Assume that you need to query the data at 2022/05/15 18:00:00. You can use PITR to restore a cluster to that time point by restoring a snapshot backup taken at 2022/05/14 and the log backup data between the snapshot and 2022/05/15 18:00:00.
 
 The command is as follows:
 
