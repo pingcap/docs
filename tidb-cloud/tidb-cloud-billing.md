@@ -190,17 +190,19 @@ If you have agreed with our sales on a contract and received an email to review 
 
 To learn more about contracts, feel free to [contact our sales](https://www.pingcap.com/contact-us/).
 
-## Billing from cloud provider
+## Billing from AWS Marketplace or Google Cloud Marketplace
 
-If you are the owner of the organization, you can link your cloud provider billing account to TiDB Cloud. Otherwise, skip this section.
+If you are the owner of an organization, you can link your AWS billing account or Google Cloud billing account to TiDB Cloud. Otherwise, skip this section.
 
-TiDB Cloud account can be signed up through [AWS Marketplace](https://aws.amazon.com/marketplace) or [Google Cloud Marketplace](https://cloud.google.com/marketplace), and you can pay the usage via the cloud provider. For an existing TiDB Cloud account, you can link a cloud provider (AWS or GCP) billing account to it.
+You can sign up for a TiDB Cloud account through [AWS Marketplace](https://aws.amazon.com/marketplace) or [Google Cloud Marketplace](https://cloud.google.com/marketplace), and you can pay the usage via the cloud provider.
 
-The following sections introduce how to link a cloud provider's billing account to TiDB Cloud. For more details about signing up through Marketplaces, refer to [Create a TiDB Cloud account](/tidb-cloud/create-tidb-cluster.md#step-1-create-a-tidb-cloud-account).
+You can also link a cloud provider (AWS or GCP) billing account to an existing TiDB Cloud account.
+
+The following sections introduce how to link an AWS or GCP billing account to TiDB Cloud. For more details about signing up through Marketplaces, refer to [Create a TiDB Cloud account](/tidb-cloud/create-tidb-cluster.md#step-1-create-a-tidb-cloud-account).
 
 ### Link to an AWS billing account
 
-To link an AWS billing account to an existing TiDB Cloud, take the following steps:
+To link an AWS billing account to an existing TiDB Cloud account, take the following steps:
 
 1. Log in to the [AWS Management Console](https://aws.amazon.com/console/).
 
@@ -210,23 +212,21 @@ To link an AWS billing account to an existing TiDB Cloud, take the following ste
 
 4. On the TiDB Cloud product page, click **Continue to Subscribe**.
 
-5. On the TiDB Cloud order page, click **Subscribe**, and then click **Set Up your Account** to go to the TiDB Cloud sign up page.
+5. On the TiDB Cloud order page, click **Subscribe**, and then click **Set Up your Account** to go to the TiDB Cloud sign-up page.
 
-6. On the TiDB Cloud sign up page, click **Sign in** to link your AWS account to TiDB Cloud.
+6. On the TiDB Cloud sign-up page, click **Sign in** to link your AWS account to TiDB Cloud.
 
 7. On the **Link to Your AWS Billing Account** page, select an existing organization and click **Link** to link with your AWS account.
 
     > **Note:**
     >
-    > The existing payment method for this organization will be replaced by your AWS billing account.
+    > If your organization already has a payment method in TiDB Cloud, the existing payment method for this organization will be replaced by the newly added AWS billing account.
 
 ### Link to a Google Cloud billing account
 
-To link a Google Cloud billing account to an existing TiDB Cloud, take the following steps:
+To link a Google Cloud billing account to an existing TiDB Cloud account, take the following steps:
 
-1. Log in to the [Google Cloud Console](https://console.cloud.google.com/).
-
-2. Navigate to the [Google Cloud Marketplace page](https://cloud.google.com/marketplace).
+1. Open the [Google Cloud Marketplace page](https://console.cloud.google.com/marketplace) and log in.
 
 3. Search for `TiDB Cloud` and select **TiDB Cloud** in the search results.
 
@@ -240,4 +240,4 @@ To link a Google Cloud billing account to an existing TiDB Cloud, take the follo
 
     > **Note:**
     >
-    > The existing payment method for this organization will be replaced by your Google Cloud billing account.
+    > If your organization already has a payment method in TiDB Cloud, the existing payment method for this organization will be replaced by your Google Cloud billing account.
