@@ -28,7 +28,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v6.1/quick-start-with-
 
     <!--executor owner: zanmato1984-->
 
-    <!--planner owner: chrysan-->
+    <!--planner owner: qw4990-->
 
     <!--transaction owner: cfzjywxk-->
 
@@ -42,7 +42,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v6.1/quick-start-with-
 
 + TiKV
 
-    <!--owner: busyjay-->
+    <!--owner: tonyxuqqi-->
 
     - (dup) Fix abnormal Region competition caused by expired lease during snapshot acquisition [#13553](https://github.com/tikv/tikv/issues/13553) @[SpadeA-Tang](https://github.com/SpadeA-Tang)
 
