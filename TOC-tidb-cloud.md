@@ -84,7 +84,7 @@
         -   [SQL クライアント経由で接続する](/tidb-cloud/connect-to-tidb-cluster.md)
         -   [SQL シェル経由で接続](/tidb-cloud/connect-to-tidb-cluster.md#connect-via-sql-shell)
     -   [プライベート エンドポイント接続のセットアップ](/tidb-cloud/set-up-private-endpoint-connections.md)
-    -   [VPC ピアリング接続のセットアップ](/tidb-cloud/set-up-vpc-peering-connections.md)
+    -   [VPC ピアリング接続の設定](/tidb-cloud/set-up-vpc-peering-connections.md)
     -   TiFlash で HTAPクラスタを使用する
         -   [TiFlash の概要](/tiflash/tiflash-overview.md)
         -   [TiFlash レプリカの作成](/tiflash/create-tiflash-replicas.md)
@@ -100,8 +100,6 @@
     -   [サンプル データのインポート](/tidb-cloud/import-sample-data.md)
     -   データを TiDB に移行する
         -   [概要](/tidb-cloud/tidb-cloud-migration-overview.md)
-        -   [Amazon S3 アクセスと GCS アクセスの設定](/tidb-cloud/config-s3-and-gcs-access.md)
-        -   [データ インポートの命名規則](/tidb-cloud/naming-conventions-for-data-import.md)
         -   [データ移行を使用して MySQL 互換データベースから移行する](/tidb-cloud/migrate-from-mysql-using-data-migration.md)
         -   データ インポートを使用して MySQL 互換のオンプレミス データベースから移行する
             -   [MySQL 互換データベースからの移行](/tidb-cloud/migrate-data-into-tidb.md)
@@ -112,7 +110,10 @@
             -   [Amazon S3 または GCS からTiDB Cloudへのインポートまたは移行](/tidb-cloud/migrate-from-amazon-s3-or-gcs.md)
             -   [Amazon S3 または GCS からTiDB Cloudに CSV ファイルをインポートする](/tidb-cloud/import-csv-files.md)
             -   [Amazon S3 または GCS からTiDB Cloudに Apache Parquet ファイルをインポートする](/tidb-cloud/import-parquet-files.md)
-        -   [Amazon S3 からのデータ インポート中のアクセス拒否エラーのトラブルシューティング](/tidb-cloud/troubleshoot-import-access-denied-error.md)
+        -   参照
+            -   [Amazon S3 アクセスと GCS アクセスの設定](/tidb-cloud/config-s3-and-gcs-access.md)
+            -   [データ インポートの命名規則](/tidb-cloud/naming-conventions-for-data-import.md)
+            -   [Amazon S3 からのデータ インポート中のアクセス拒否エラーのトラブルシューティング](/tidb-cloud/troubleshoot-import-access-denied-error.md)
     -   [TiDB からのデータのエクスポート](/tidb-cloud/export-data-from-tidb-cloud.md)
 -   バックアップと復元
     -   [自動バックアップ](/tidb-cloud/backup-and-restore.md)
