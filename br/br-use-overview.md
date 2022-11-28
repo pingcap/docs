@@ -53,7 +53,7 @@ If the TiDB cluster is deployed in a self-built data center, the following pract
 
 Assume that you need to set the life cycle for each backup data, for example, 7 days. Such a life cycle is called **backup retention period**, which will also be mentioned in backup tutorials.
 
-* To perform PITR, you need to restore the full backup before the restore point, and the log backup between the full backup and the restore point. Therefore, **It is recommended to only delete the log backup before the full snapshot**.  For log backups that exceed the backup retention period, you can use `br log truncate` command to delete the backup before the specified time point.
+* To perform PITR, you need to restore the full backup before the restore point, and the log backup between the full backup and the restore point. Therefore, **It is recommended to only delete the log backup before the full snapshot**. For log backups that exceed the backup retention period, you can use `br log truncate` command to delete the backup before the specified time point.
 * For backup data that exceeds the retention period, you can delete or archive the backup directory.
 
 ### How to restore data?
