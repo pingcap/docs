@@ -67,13 +67,13 @@ When resuming an incremental replication task from the checkpoint, whether DM en
     1. This is a new task, or this task is exited as expected.
     2. This task is paused abnormally but DM fails to record `safemode_exit_point`, or the DM process exits abnormally.
 
-    In the second case, DM does not know which binlog events after the checkpoint are executed in the downstream. To ensure that repeatedly executed binlog events do not cause any problems, DM automatically enables safe mode between the preceding two checkpoints. The default interval between two checkpoints is 30 seconds, which means when a normal incremental replication task starts, safe mode is enforced for the first 60 seconds (2 * 30 seconds).
+    In the second case, DM does not know which binlog events after the checkpoint are executed in the downstream. To ensure that repeatedly executed binlog events do not cause any problems, DM automatically enables safe mode during the first two checkpoint intervals. The default interval between two checkpoints is 30 seconds, which means when a normal incremental replication task starts, safe mode is enforced for the first 60 seconds (2 * 30 seconds).
 
     Usually, it is not recommended to change the checkpoint interval to adjust the safe mode period at the beginning of the incremental replication task. However, if you do need a change, you can [manually enable safe mode](#manually-enable) (recommended) or change the `checkpoint-flush-interval` item in syncer configuration.
 
 ### Manually enable
 
-You can control whether to enable safe mode during the entire replication process by setting the `safe-mode` item in the syncer configuration. `safe-mode` is a bool type parameter and is `false` by default. If it is set to `true`, DM enables safe mode for the whole incremental replication process. The following is a task configuration example with safe mode enabled:
+You can set the `safe-mode` item in the syncer configuration to enable safe mode during the entire replication process. `safe-mode` is a bool type parameter and is `false` by default. If it is set to `true`, DM enables safe mode for the whole incremental replication process. The following is a task configuration example with safe mode enabled:
 
 ```
 syncers:                              # The running configurations of the sync processing unit.
