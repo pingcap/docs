@@ -192,11 +192,11 @@ To learn more about contracts, feel free to [contact our sales](https://www.ping
 
 ## Billing from AWS Marketplace or Google Cloud Marketplace
 
-If you are the owner or billing administrator of your organization, you can link your AWS billing account or Google Cloud billing account to TiDB Cloud. Otherwise, skip this section.
+If you are the owner or billing administrator of your organization, you can link your TiDB Cloud account to an AWS billing account or Google Cloud billing account. Otherwise, skip this section.
 
-You can sign up for a TiDB Cloud account through [AWS Marketplace](https://aws.amazon.com/marketplace) or [Google Cloud Marketplace](https://cloud.google.com/marketplace), and you can pay the usage via the cloud provider.
+If you are new to TiDB Cloud and do not have a TiDB Cloud account, you can sign up for a TiDB Cloud account through [AWS Marketplace](https://aws.amazon.com/marketplace) or [Google Cloud Marketplace](https://cloud.google.com/marketplace), and pay the usage via the AWS or GCP billing account.
 
-You can also link a cloud provider (AWS or GCP) billing account to an existing TiDB Cloud account.
+If you already have a TiDB Cloud account, you can link the account to an AWS or GCP billing account.
 
 The following sections introduce how to link an AWS or GCP billing account to TiDB Cloud. For more details about signing up through Marketplaces, refer to [Create a TiDB Cloud account](/tidb-cloud/create-tidb-cluster.md#step-1-create-a-tidb-cloud-account).
 
