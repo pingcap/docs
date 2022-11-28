@@ -6,7 +6,7 @@ aliases: ['/docs/dev/br/backup-and-restore-tool/','/docs/dev/reference/tools/br/
 
 # TiDB Backup & Restore Overview
 
-Based on the Raft protocol and a reasonable topology, TiDB realizes high availability of clusters. When a few nodes in the cluster fail, the cluster can still provide services. On this basis, to further ensure the security of user data, TiDB provides the Backup & Restore (BR) feature. As the last resort to restore data from natural disasters and misuse, this feature provides the capability to restore service data from any misoperations.
+Based on the Raft protocol and a reasonable deployment topology, TiDB realizes high availability of clusters. When a few nodes in the cluster fail, the cluster can still be available. On this basis, to further ensure data safety, TiDB provides the Backup & Restore (BR) feature as the last resort to recover data from natural disasters and misoperations.
 
 BR satisfies the following requirements:
 
@@ -102,7 +102,6 @@ Backup storage and network configuration:
 
 ### Compatibility
 
-Before you use BR feature of TiDB, pay attention to the usage restrictions, compatibility, and other considerations of BR.
 
 #### Compatibility with other features
 

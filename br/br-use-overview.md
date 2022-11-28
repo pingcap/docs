@@ -41,19 +41,19 @@ If the TiDB cluster is deployed in a self-built data center, the following pract
 
 > **Note:**
 >
-> If no NFS is mounted to the br command-line tool or TiKV node, or if you use a storage system that supports Amazon S3, GCS, or Azure Blob Storage protocols, the data backed up by br command-line tool is generated at each TiKV node. **Note that this is not the recommended way to deploy the br command-line tool**, because the backup data are scattered in the local file system of each node. Collecting the backup data might result in data redundancy and operation and maintenance problems. Meanwhile, if you restore data directly before collecting the backup data, you will encounter the `SST file not found` error.
+> If you do not choose NFS or a storage system that supports Amazon S3, GCS, or Azure Blob Storage protocols, the data backed up is generated at each TiKV node. **Note that this is not the recommended way to use BR**, because collecting the backup data might result in data redundancy and operation and maintenance problems. 
 
 **Organize the backup data directory**
 
 * Store the snapshot backup and log backup in the same directory for unified management, for example, `backup-${cluster-id}`.
 * Store each snapshot backup in a directory with the backup date included, for example, `backup-${cluster-id}/fullbackup-202209081330`.
-* Store the log backup in a fixed directory, for example, `backup-${cluster-id}/logbackup`. The log backup program creates a subdirectory in the `logbackup` directory every day to distinguish the data backed up each day.
+* Store the log backup in a fixed directory, for example, `backup-${cluster-id}/logbackup`. The log backup program creates subdirectories under the `logbackup` directory every day to distinguish the data backed up each day.
 
 **Handle historical backup data**
 
-Assume that you have specified a **backup retention period**. Backup data will be retained only for this period, for example, 7 days. The concept **backup retention period** will also be mentioned in backup tutorials.
+Assume that you need to set the life cycle for each backup data, for example, 7 days. Such a life cycle is called **backup retention period**, which will also be mentioned in backup tutorials.
 
-* To perform PITR, you need to restore the full backup before the restore point, and the log backup between the full backup and the restore point. Therefore, for log backups that exceed the backup retention period, you need to run the `br log truncate` command to delete the backup before the specified time point. **It is recommended to only delete the log backup before the full snapshot**.
+* To perform PITR, you need to restore the full backup before the restore point, and the log backup between the full backup and the restore point. Therefore, **It is recommended to only delete the log backup before the full snapshot**.  For log backups that exceed the backup retention period, you can use `br log truncate` command to delete the backup before the specified time point.
 * For backup data that exceeds the retention period, you can delete or archive the backup directory.
 
 ### How to restore data?
