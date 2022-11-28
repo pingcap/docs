@@ -1,6 +1,6 @@
 ---
 title: Connect to Your TiDB Cluster
-summary: Connect to your TiDB cluster via a SQL client or SQL shell.
+summary: Learn how to connect to your TiDB cluster via a SQL client or SQL shell.
 ---
 
 # Connect to Your TiDB Cluster
@@ -17,7 +17,7 @@ After your TiDB cluster is created on TiDB Cloud, you can use one of the followi
 
 > **Tip:**
 >
-> For production environments, it is recommended to use the [private endpoint](#connect-via-private-endpoint-recommended) connection.
+> For production environments, it is recommended to use the [private endpoint](/tidb-cloud/set-up-private-endpoint-connections.md) connection.
 
 ## What's next
 

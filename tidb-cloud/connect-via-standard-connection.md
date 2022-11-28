@@ -1,14 +1,13 @@
 ---
 title: Connect via Standard Connection
-summary:
+summary: Learn how to connect to your TiDB Cloud cluster via standard connection.
 ---
 
 # Connect via Standard Connection
 
-## Connect via standard connection
+This document describes how to connect to your TiDB Cloud cluster via standard connection. Standard connection is available to both Serverless Tier and Dedicated Tier.
 
-<SimpleTab>
-<div label="Serverless Tier">
+## Serverless Tier
 
 To connect to a Serverless Tier cluster via standard connection, perform the following steps:
 
@@ -18,14 +17,12 @@ To connect to a Serverless Tier cluster via standard connection, perform the fol
 
 3. Under **Connect with a SQL client** in the dialog, click the tab of your preferred connection method, and then connect to your cluster with the connection string.
 
-    > **Note:**
-    >
-    > - When you connect to a Serverless Tier cluster, you must include the prefix for your cluster in the user name and wrap the name with quotation marks. For more information, see [User name prefix](/tidb-cloud/select-cluster-tier.md#user-name-prefix).
-    > - Serverless Tier clusters only support TLS connection. For more information, see [Secure Connections to Serverless Tier Clusters](/tidb-cloud/secure-connections-to-serverless-tier-clusters.md).
+> **Note:**
+>
+> - When you connect to a Serverless Tier cluster, you must include the prefix for your cluster in the user name and wrap the name with quotation marks. For more information, see [User name prefix](/tidb-cloud/select-cluster-tier.md#user-name-prefix).
+> - Serverless Tier clusters only support TLS connection. For more information, see [Secure Connections to Serverless Tier Clusters](/tidb-cloud/secure-connections-to-serverless-tier-clusters.md).
 
-</div>
-
-<div label="Dedicated Tier">
+## Dedicated Tier
 
 To connect to a Dedicated Tier cluster via standard connection, perform the following steps:
 
@@ -57,5 +54,6 @@ To connect to a Dedicated Tier cluster via standard connection, perform the foll
 
     Note that you need to use the path of the downloaded CA file as the argument of the `--ssl-ca` option in the connection string.
 
-</div>
-</SimpleTab>
+## What's next
+
+After you have successfully connected to your TiDB cluster, you can [explore SQL statements with TiDB](/basic-sql-operations.md).

@@ -1,9 +1,13 @@
 ---
-title: Set Up Private Endpoint Connections
-summary: Learn how to set up private endpoint connections in TiDB Cloud.
+title: Connect via Private Endpoint
+summary:  Learn how to connect to your TiDB Cloud cluster via private endpoint.
 ---
 
-# Set Up Private Endpoint Connections
+# Connect via Private Endpoint
+
+> **Note:**
+>
+> Private endpoint connection is only available for Dedicated Tier clusters. You cannot connect to [Serverless Tier clusters](/tidb-cloud/select-cluster-tier.md#serverless-tier-beta) using the private endpoint.
 
 TiDB Cloud supports highly secure and one-way access to the TiDB Cloud service hosted in an AWS VPC via the [AWS PrivateLink](https://aws.amazon.com/privatelink/?privatelink-blogs.sort-by=item.additionalFields.createdDate&privatelink-blogs.sort-order=desc), as if the service were in your own VPC. A private endpoint is exposed in your VPC and you can create a connection to the TiDB Cloud service via the endpoint with permission.
 
