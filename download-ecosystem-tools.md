@@ -27,7 +27,11 @@ TiDB Toolkitには、データ エクスポート ツールDumpling、データ 
 https://download.pingcap.org/tidb-community-toolkit-{version}-linux-amd64.tar.gz
 ```
 
-リンクの`{version}`は、TiDB のバージョン番号を示します。たとえば、 `v6.1.0`のダウンロード リンクは`https://download.pingcap.org/tidb-community-toolkit-v6.1.0-linux-amd64.tar.gz`です。
+リンクの`{version}`は、TiDB のバージョン番号を示します。たとえば、 `v6.1.2`のダウンロード リンクは`https://download.pingcap.org/tidb-community-toolkit-v6.1.2-linux-amd64.tar.gz`です。
+
+> **ノート：**
+>
+> [PD Control](/pd-control.md)ツール`pd-ctl`をダウンロードする必要がある場合は、 `https://download.pingcap.org/tidb-community-server-{version}-linux-amd64.tar.gz`とは別に TiDB インストール パッケージをダウンロードします。
 
 ## TiDB Toolkitの説明 {#tidb-toolkit-description}
 
@@ -44,5 +48,4 @@ https://download.pingcap.org/tidb-community-toolkit-{version}-linux-amd64.tar.gz
 | [バックアップと復元 (BR)](/br/backup-and-restore-overview.md)                | `br-{version}-linux-amd64.tar.gz`                                                                                                                               |
 | [同期差分インスペクター](/sync-diff-inspector/sync-diff-inspector-overview.md) | `sync_diff_inspector`                                                                                                                                           |
 | [ティスパーク](/tispark-overview.md)                                      | `tispark-{tispark-version}-any-any.tar.gz` <br/>`spark-{spark-version}-any-any.tar.gz`                                                                          |
-| [PD Control](/pd-control.md)                                        | `pd-recover-{version}-linux-amd64.tar`                                                                                                                          |
-| [PD 回復](/pd-recover.md)                                             | `etcdctl`                                                                                                                                                       |
+| [PD 回復](/pd-recover.md)                                             | `pd-recover-{version}-linux-amd64.tar`                                                                                                                          |

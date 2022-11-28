@@ -1,9 +1,9 @@
 ---
-title: Handle Performance Issues
+title: Handle Performance Issues of TiDB Data Migration
 summary: Learn about common performance issues that might exist in DM and how to deal with them.
 ---
 
-# パフォーマンスの問題を処理する {#handle-performance-issues}
+# TiDB データ移行のパフォーマンスの問題を処理する {#handle-performance-issues-of-tidb-data-migration}
 
 このドキュメントでは、DM に存在する可能性のある一般的なパフォーマンスの問題とその対処方法について説明します。
 

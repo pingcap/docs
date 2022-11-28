@@ -197,15 +197,7 @@ update t set a = 10 where id = 1; update t set a = 11 where id = 2; update t set
 
 監視を通じて、アプリケーションが TiDB クラスターに対して`INSERT`の操作しか実行しないにもかかわらず、冗長な`SELECT`のステートメントが多数あることに気付く場合があります。通常、これは、JDBC が`select @@session.transaction_read_only`などの設定をクエリするためにいくつかの SQL ステートメントを送信するために発生します。これらの SQL ステートメントは TiDB には役に立たないため、余分なオーバーヘッドを避けるために`useConfigs=maxPerformance`を構成することをお勧めします。
 
-`useConfigs=maxPerformance`構成には、構成のグループが含まれます。
-
-```ini
-cacheServerConfiguration=true
-useLocalSessionState=true
-elideSetAutoCommits=true
-alwaysSendSetIsolation=false
-enableQueryTimeouts=false
-```
+`useConfigs=maxPerformance`には、構成のグループが含まれます。 MySQL JDBC 8.0 と MySQL JDBC 5.1 の詳細な構成を取得するには、それぞれ[mysql-connector-j 8.0](https://github.com/mysql/mysql-connector-j/blob/release/8.0/src/main/resources/com/mysql/cj/configurations/maxPerformance.properties)と[mysql-connector-j 5.1](https://github.com/mysql/mysql-connector-j/blob/release/5.1/src/com/mysql/jdbc/configs/maxPerformance.properties)を参照してください。
 
 構成後、モニタリングを確認して、 `SELECT`ステートメントの数が減少していることを確認できます。
 

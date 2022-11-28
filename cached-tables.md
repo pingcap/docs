@@ -173,8 +173,6 @@ SELECT * FROM users;
 >
 > キャッシュされたテーブルにデータを挿入すると、第 2 レベルの書き込みレイテンシーが発生する場合があります。レイテンシーは、グローバル環境変数[`tidb_table_cache_lease`](/system-variables.md#tidb_table_cache_lease-new-in-v600)によって制御されます。アプリケーションに基づいてレイテンシーが許容できるかどうかを確認することで、キャッシュ テーブル機能を使用するかどうかを決定できます。たとえば、読み取り専用のシナリオでは、 `tidb_table_cache_lease`の値を増やすことができます。
 >
-> {{< copyable "" >}}
->
 > ```sql
 > set @@global.tidb_table_cache_lease = 10;
 > ```
@@ -212,7 +210,7 @@ ERROR 8242 (HY000): 'Alter Table' is unsupported on cache tables.
 {{< copyable "" >}}
 
 ```sql
-ALTER TABLE users NOCACHE
+ALTER TABLE users NOCACHE;
 ```
 
 ```sql

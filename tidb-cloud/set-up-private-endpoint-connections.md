@@ -21,7 +21,7 @@ AWS PrivateLink を利用したエンドポイント接続は安全でプライ�
 ## 制限 {#restrictions}
 
 -   現在、 TiDB Cloudは、エンドポイント サービスが AWS でホストされている場合にのみ、プライベート エンドポイント接続をサポートしています。サービスが Google Cloud Platform (GCP) でホストされている場合、プライベート エンドポイントは適用されません。
--   プライベート エンドポイントのサポートは、 TiDB Cloud Dedicated Tier に対してのみ提供され、Developer Tier に対しては提供されません。
+-   プライベート エンドポイントのサポートは、サーバーレス層ではなく、 TiDB Cloud Dedicated 層に対してのみ提供されます。
 -   リージョン間のプライベート エンドポイント接続はサポートされていません。
 
 ほとんどのシナリオでは、VPC ピアリング経由でプライベート エンドポイント接続を使用することをお勧めします。ただし、次のシナリオでは、プライベート エンドポイント接続の代わりに VPC ピアリングを使用する必要があります。
@@ -34,139 +34,151 @@ AWS PrivateLink を利用したエンドポイント接続は安全でプライ�
 
 このセクションでは、AWS PrivateLink を使用してプライベート エンドポイントを設定する方法について説明します。
 
-次の手順を実行して、プライベート エンドポイントを設定します。複数のクラスターがある場合は、AWS PrivateLink を使用して接続するクラスターごとにこれらの手順を繰り返す必要があります。
+[前提条件](#prerequisites)に加えて、AWS PrivateLink とのプライベート エンドポイント接続をセットアップするには 5 つのステップがあります。
+
+1.  [TiDB クラスターを選択する](#step-1-choose-a-tidb-cluster)
+2.  [サービス エンドポイントのリージョンを確認する](#step-2-check-the-service-endpoint-region)
+3.  [AWS インターフェイス エンドポイントを作成する](#step-3-create-an-aws-interface-endpoint)
+4.  [エンドポイント接続を受け入れる](#step-4-accept-the-endpoint-connection)
+5.  [プライベート DNS を有効にする](#step-5-enable-private-dns)
+
+複数のクラスターがある場合は、AWS PrivateLink を使用して接続するクラスターごとにこれらの手順を繰り返す必要があります。
 
 ### 前提条件 {#prerequisites}
 
 TiDB Cloudは、Dedicated Tier クラスターのプライベート エンドポイントのみをサポートします。プライベート エンドポイントを作成する前に、Dedicated Tier クラスターを作成する必要があります。詳細な手順については、 [TiDB Cloudで TiDBクラスタを作成する](/tidb-cloud/create-tidb-cluster.md)を参照してください。
 
-#### ステップ 1. プライベート エンドポイントの作成ページを開く {#step-1-open-the-private-endpoint-creation-page}
+プライベート エンドポイントの設定を開始するには、プライベート エンドポイントの作成ページを開きます。
 
-プライベート エンドポイントの作成ページを開くには、次の手順を実行します。
+1.  TiDB Cloudコンソールの [**プロジェクト設定**] タブをクリックします。
+2.  左側のメニューで [**プライベート エンドポイント**] をクリックします。
+3.  [**プライベート エンドポイント]**ページで [<strong>追加]</strong>をクリックします。
 
-1.  TiDB Cloudコンソールで [**プロジェクト設定**] タブをクリックし、左側のメニューで [<strong>プライベート エンドポイント</strong>] をクリックします。
-2.  [**プライベート エンドポイント**] ページで、右上隅にある [<strong>追加</strong>] をクリックして作成ページを開きます。
+### ステップ 1. TiDB クラスターを選択する {#step-1-choose-a-tidb-cluster}
 
-> **ヒント：**
->
-> または、次の手順に従ってプライベート エンドポイントの作成ページを開くこともできます。
->
-> 1.  TiDB Cloudコンソールで、[**クラスター**] ページに移動します。
-> 2.  クラスターを見つけて、クラスター領域の右上隅にある [**接続**] をクリックします。接続ダイアログボックスが表示されます。
-> 3.  [**プライベート エンドポイント**] タブを選択します。プライベート エンドポイントが作成されていない場合は、ダイアログで [<strong>作成</strong>] をクリックして作成ページを開きます。
+1.  ドロップダウン リストをクリックして、利用可能な TiDB クラスターを選択します。
+2.  [**次へ**] をクリックします。
 
-#### ステップ 2. TiDB クラスターを選択する {#step-2-choose-a-tidb-cluster}
+### ステップ 2. サービス エンドポイント リージョンを確認する {#step-2-check-the-service-endpoint-region}
 
-ドロップダウン リストをクリックして、プライベート エンドポイントを作成する TiDB クラスターを選択し、 [**次へ**] をクリックします。
-
-> **ノート：**
->
-> クラスターが作成される前は、ドロップダウン リストに表示されません。
-
-#### ステップ 3. サービス エンドポイント リージョンを選択する {#step-3-choose-the-service-endpoint-region}
-
-**リージョン**リストから、プライベート エンドポイントを作成するリージョンを選択します。次に、[<strong>次へ</strong>] をクリックします。
+サービス エンドポイント リージョンはデフォルトで選択されています。簡単に確認して、[**次へ**] をクリックします。
 
 > **ノート：**
 >
 > デフォルトのリージョンは、クラスターが配置されている場所です。変更しないでください。クロスリージョン プライベート エンドポイントは現在サポートされていません。
 
-#### ステップ 4.AWS インターフェイス エンドポイントを作成する {#step-4-create-an-aws-interface-endpoint}
+### ステップ 3.AWS インターフェイス エンドポイントを作成する {#step-3-create-an-aws-interface-endpoint}
 
-この段階で、 TiDB Cloudはエンドポイント サービスの作成を開始します。これには 3 ～ 4 分かかります。作成プロセス中に、次の操作を実行します。
+TiDB Cloudがエンドポイント サービスの作成を開始します。これには 3 ～ 4 分かかります。
 
-1.  **VPC ID**および<strong>サブネット ID</strong>フィールドに入力します。 ID は AWS マネジメント コンソールから取得できます。
+エンドポイント サービスが作成されたら、コンソールの下部領域にあるコマンドからエンドポイント サービス名をメモします。
 
-    これらの ID を取得する方法がわからない場合は、[**手順の表示**] をクリックすると、参照用の 2 つのスクリーンショットが表示されます。
+```bash
+aws ec2 create-vpc-endpoint --vpc-id <your_vpc_id> --region <your_region> --service-name <your_endpoint_service_name> --vpc-endpoint-type Interface --subnet-ids <your_application_subnet_ids>
+```
 
-2.  エンドポイント サービスが作成されたら、[ **Create VPC Interface Endpoint]**領域のコマンドを確認し、エンドポイント サービス名をメモします。
+次に、AWS マネジメント コンソールまたは AWS CLI を使用して、AWS インターフェイス エンドポイントを作成します。
 
-    ![Endpoint service name](/media/tidb-cloud/private-endpoint/private-endpoint-service-name.png)
+<SimpleTab>
+<div label="Use AWS Console">
 
-3.  AWS で VPC インターフェイス エンドポイントを作成します。 AWS マネジメント コンソールまたは AWS CLI を使用できます。
+AWS マネジメント コンソールを使用して VPC インターフェイス エンドポイントを作成するには、次の手順を実行します。
 
-    <SimpleTab>
-     <div label="Use AWS Console">
+1.  **VPC** &gt;<strong>エンドポイント</strong>に移動します。
 
-    AWS マネジメント コンソールを使用して VPC インターフェイス エンドポイントを作成するには、次の手順を実行します。
+2.  [**エンドポイントの作成]**をクリックします。
 
-    1.  AWS マネジメント コンソールで、[ **VPC** ] &gt; [<strong>エンドポイント</strong>] に移動し、右上隅にある [<strong>エンドポイントの作成</strong>] をクリックします。<strong>エンドポイントの作成</strong>ページが表示されます。
+    **エンドポイントの作成**ページが表示されます。
 
-        ![Create endpoint](/media/tidb-cloud/private-endpoint/create-endpoint-1.png)
+    ![Verify endpoint service](/media/tidb-cloud/private-endpoint/create-endpoint-2.png)
 
-    2.  [**サービス カテゴリ]**で、[<strong>その他のエンドポイント サービス]</strong>を選択します。
+3.  [**その他のエンドポイント サービス] を**選択します。
 
-    3.  **Service settings**で、 TiDB Cloudコンソールの<strong>Interface endpoint</strong>ページから取得したエンドポイント サービス名を入力し、 <strong>Verify service</strong>をクリックします。
+4.  エンドポイント サービス名を入力します。
 
-        ![Verify endpoint service](/media/tidb-cloud/private-endpoint/create-endpoint-2.png)
+5.  [**サービスの確認 ] を**クリックします。
 
-    4.  サービス名が確認されたら、 VPC の下で、ドロップダウン リストから**VPC**を選択します。次に、事前設定された<strong>サブネット</strong>領域が表示されます。
+6.  ドロップダウン リストで VPC を選択します。
 
-    5.  [**サブネット**] 領域で、TiDB クラスターが配置されている可用性ゾーンを選択します。次に、ページの下部にある [<strong>エンドポイントの作成</strong>] をクリックします。
-
-        ![Create endpoint service 2](/media/tidb-cloud/private-endpoint/create-endpoint-3.png)
+7.  **サブネット**領域で、TiDB クラスターが配置されている可用性ゾーンを選択します。
 
     > **ヒント：**
     >
     > サービスが 3 つ以上のアベイラビリティ ゾーン (AZ) にまたがっている場合、[**サブネット**] 領域で AZ を選択できない場合があります。この問題は、TiDB クラスターが配置されている AZ に加えて、選択したリージョンに余分な AZ がある場合に発生します。この場合は[PingCAP テクニカル サポート](https://docs.pingcap.com/tidbcloud/tidb-cloud-support)にお問い合わせください。
 
-    </div>
-     <div label="AWS CLI">
+8.  [**セキュリティ グループ**] 領域でセキュリティ グループを適切に選択します。
 
-    AWS CLI を使用して VPC インターフェイス エンドポイントを作成するには、次の手順を実行します。
-
-    1.  AWS コマンド ライン インターフェイス (AWS CLI) をインストールします。
-
-        ```bash
-        curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
-        unzip awscliv2.zip
-        sudo ./aws/install
-        ```
-
-    2.  アカウント情報に従って AWS CLI を設定します。 AWS CLI で必要な情報を取得するには、 [AWS CLI 設定の基本](https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-quickstart.html)を参照してください。
-
-        ```bash
-        aws configure
-        ```
-
-    3.  **Create VPC Interface Endpoint**領域のコマンドをコピーし、ターミナルで実行して VPC インターフェイス エンドポイントを作成します。次に、[<strong>次へ</strong>] をクリックします。
-
-    エンドポイント サービスが作成されると、コマンド内のプレースホルダーは自動的に実際の値に置き換えられます。
-
-    > **ヒント：**
+    > **ノート：**
     >
-    > -   サービスが 3 つ以上のアベイラビリティ ゾーン (AZ) にまたがっている場合、VPC エンドポイント サービスがサブネットの AZ をサポートしていないことを示すエラー メッセージが表示されます。この問題は、TiDB クラスターが配置されている AZ に加えて、選択したリージョンに余分な AZ がある場合に発生します。この場合、 [PingCAP テクニカル サポート](https://docs.pingcap.com/tidbcloud/tidb-cloud-support)に連絡できます。
-    >
-    > -   TiDB Cloudがエンドポイント サービスの作成をバックグラウンドで完了するまで、コマンドをコピーすることはできません。
+    > 選択したセキュリティ グループが、ポート 4000 または顧客定義のポートで EC2 インスタンスからのインバウンド アクセスを許可していることを確認してください。
 
-    </div>
-     </SimpleTab>
+9.  [**エンドポイントの作成]**をクリックします。
 
-#### ステップ 5. エンドポイント接続を受け入れる {#step-5-accept-the-endpoint-connection}
+</div>
+<div label="Use AWS CLI">
 
-ボックスに VPC エンドポイント ID を入力し、[**次へ**] をクリックします。
+AWS CLI を使用して VPC インターフェイス エンドポイントを作成するには、次の手順を実行します。
 
-#### ステップ 6. プライベート DNS を有効にする {#step-6-enable-private-dns}
+1.  プライベート エンドポイントの作成ページで、 **VPC** ID フィールドと<strong>サブネット ID</strong>フィールドに入力します。 ID は AWS マネジメント コンソールから取得できます。
+2.  ページの下部にあるコマンドをコピーして、ターミナルで実行します。次に、[**次へ**] をクリックします。
 
-[**コピー**] ボタンをクリックしてコマンドをコピーし、AWS CLI で実行します。 `<your_vpc_endpoint_id>`プレースホルダーは、ステップ 5 で指定した値に自動的に置き換えられます。
+> **ヒント：**
+>
+> -   コマンドを実行する前に、AWS CLI をインストールして設定する必要があります。詳細は[AWS CLI 設定の基本](https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-quickstart.html)を参照してください。
+>
+> -   サービスが 3 つ以上のアベイラビリティ ゾーン (AZ) にまたがっている場合、VPC エンドポイント サービスがサブネットの AZ をサポートしていないことを示すエラー メッセージが表示されます。この問題は、TiDB クラスターが配置されている AZ に加えて、選択したリージョンに余分な AZ がある場合に発生します。この場合、 [PingCAP テクニカル サポート](https://docs.pingcap.com/tidbcloud/tidb-cloud-support)に連絡できます。
+>
+> -   TiDB Cloudがバックグラウンドでエンドポイント サービスの作成を完了するまで、コマンドをコピーすることはできません。
 
-または、AWS マネジメント コンソールでプライベート DNS を有効にすることもできます。方法がわからない場合は、[**説明を表示**] をクリックすると、参照用のスクリーンショットが表示されます。
+</div>
+</SimpleTab>
 
-次に、 [作成] をクリックして、プライベート エンドポイントの**作成**を完了します。
+### ステップ 4. エンドポイント接続を受け入れる {#step-4-accept-the-endpoint-connection}
 
-#### ステップ 7. エンドポイント サービスに接続する {#step-7-connect-to-the-endpoint-service}
+1.  TiDB Cloudコンソールに戻ります。
+2.  [**プライベート エンドポイントの作成]**ページで、ボックスに VPC エンドポイント ID を入力します。
+3.  [**次へ**] をクリックします。
 
-詳細は[プライベート エンドポイント経由で TiDB クラスターに接続する](/tidb-cloud/connect-to-tidb-cluster.md#connect-via-private-endpoint)を参照してください。
+### ステップ 5. プライベート DNS を有効にする {#step-5-enable-private-dns}
+
+AWS でプライベート DNS を有効にします。 AWS マネジメント コンソールまたは AWS CLI を使用できます。
+
+<SimpleTab>
+<div label="Use AWS Console">
+
+AWS マネジメント コンソールでプライベート DNS を有効にするには:
+
+1.  **VPC** &gt;<strong>エンドポイント</strong>に移動します。
+2.  エンドポイント ID を右クリックし、 **[プライベート DNS 名の変更**] を選択します。
+3.  [**このエンドポイントを有効にする]**チェック ボックスをオンにします。
+4.  [**変更を保存] を**クリックします。
+
+    ![Enable private DNS](/media/tidb-cloud/private-endpoint/enable-private-dns.png)
+
+</div>
+<div label="Use AWS CLI">
+
+AWS CLI を使用してプライベート DNS を有効にするには、コマンドをコピーして AWS CLI で実行します。
+
+```bash
+aws ec2 modify-vpc-endpoint --vpc-endpoint-id <your_vpc_endpoint_id> --private-dns-enabled
+```
+
+</div>
+</SimpleTab>
+
+TiDB Cloudコンソールで [**作成**] をクリックして、プライベート エンドポイントの作成を完了します。
+
+その後、エンドポイント サービスに接続できます。詳細は[プライベート エンドポイント経由で TiDB クラスターに接続する](/tidb-cloud/connect-to-tidb-cluster.md#connect-via-private-endpoint-recommended)を参照してください。
 
 ## プライベート エンドポイントのステータス リファレンス {#private-endpoint-status-reference}
 
-[プライベート エンドポイント接続](/tidb-cloud/set-up-private-endpoint-connections.md)を使用すると、プライベート エンドポイントまたはプライベート エンドポイント サービスのステータスが[**プライベート エンドポイント**ページ](/tidb-cloud/set-up-private-endpoint-connections.md#step-1-open-the-private-endpoint-creation-page)に表示されます。
+プライベート エンドポイント接続を使用すると、プライベート エンドポイントまたはプライベート エンドポイント サービスの状態が[**プライベート エンドポイント**ページ](#prerequisites)に表示されます。
 
 プライベート エンドポイントの可能なステータスは、次のように説明されています。
 
--   **未構成**: エンドポイント サービスを作成したばかりですが、プライベート エンドポイントはまだ作成していません。その行の [<strong>編集</strong>] をクリックすると、プライベート エンドポイントを作成する<strong>インターフェイス エンドポイント</strong>ステージに移動します。詳細は[ステップ 4. エンドポイント サービスを作成する](/tidb-cloud/set-up-private-endpoint-connections.md#step-4-create-an-aws-interface-endpoint)を参照してください。
--   **Initiating** : プライベート エンドポイントの作成の<strong>インターフェイス エンドポイント</strong>ステージで VPC ID を入力した後、プライベート エンドポイントが開始または検証されています。新しい<strong>プライベート エンドポイント</strong>ページを開くと、行の [<strong>編集</strong>] ボタンが無効になっていることがわかります。
--   **Pending** : プライベート エンドポイントを作成する<strong>インターフェイス エンドポイント</strong>ステージで VPC ID が検証された後、プライベート DNS はまだ有効になっていません。その行の [<strong>編集</strong>] をクリックすると、プライベート エンドポイントを作成する<strong>プライベート DNS</strong>の有効化ステージに移動します。詳細は[ステップ 6.プライベート DNS を有効にする](/tidb-cloud/set-up-private-endpoint-connections.md#step-6-enable-private-dns)を参照してください。
+-   **未構成**: エンドポイント サービスを作成したばかりですが、プライベート エンドポイントはまだ作成していません。
+-   **保留中**: 処理を待っています。
 -   **Active** : プライベート エンドポイントを使用する準備ができています。このステータスのプライベート エンドポイントは編集できません。
 -   **削除**中 : プライベート エンドポイントを削除しています。
 -   **Failed** : プライベート エンドポイントの作成に失敗しました。その行の [<strong>編集</strong>] をクリックして、作成を再試行できます。
@@ -176,3 +188,15 @@ TiDB Cloudは、Dedicated Tier クラスターのプライベート エンドポ
 -   **作成**中 : エンドポイント サービスが作成されています。これには 3 ～ 5 分かかります。
 -   **Active** : プライベート エンドポイントが作成されているかどうかに関係なく、エンドポイント サービスが作成されます。
 -   **削除**中 : エンドポイント サービスまたはクラスターを削除しています。これには 3 ～ 5 分かかります。
+
+## トラブルシューティング {#troubleshooting}
+
+### プライベート DNS を有効にした後、プライベート エンドポイント経由で TiDB クラスターに接続できません。なんで？ {#i-cannot-connect-to-a-tidb-cluster-via-a-private-endpoint-after-enabling-private-dns-why}
+
+AWS マネジメント コンソールで VPC エンドポイントのセキュリティ グループを適切に設定する必要がある場合があります。 **VPC** &gt;<strong>エンドポイント</strong>に移動します。 VPC エンドポイントを右クリックし、適切な<strong>Manage security groups</strong>を選択します。ポート 4000 または顧客定義のポートで EC2 インスタンスからのインバウンド アクセスを許可する、VPC 内の適切なセキュリティ グループ。
+
+![Manage security groups](/media/tidb-cloud/private-endpoint/manage-security-groups.png)
+
+### プライベート DNS を有効にできません。 <code>enableDnsSupport</code>および<code>enableDnsHostnames</code> VPC 属性が有効になっていないことを示すエラーが報告される {#i-cannot-enable-private-dns-an-error-is-reported-indicating-that-the-code-enablednssupport-code-and-code-enablednshostnames-code-vpc-attributes-are-not-enabled}
+
+VPC 設定で DNS ホスト名と DNS 解決の両方が有効になっていることを確認します。 AWS マネジメント コンソールで VPC を作成すると、デフォルトで無効になります。

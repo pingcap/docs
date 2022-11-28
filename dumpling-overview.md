@@ -90,11 +90,11 @@ dumpling \
 
 上記のコマンドでは:
 
--   `-h` 、 `-p` 、および`-u`オプションは、それぞれアドレス、ポート、およびユーザーを意味します。認証にパスワードが必要な場合は、 `-p $YOUR_SECRET_PASSWORD`を使用してパスワードをDumplingに渡すことができます。
+-   `-h` 、 `-P` 、および`-u`オプションは、それぞれアドレス、ポート、およびユーザーを意味します。認証にパスワードが必要な場合は、 `-p $YOUR_SECRET_PASSWORD`を使用してパスワードをDumplingに渡すことができます。
 
 <CustomContent platform="tidb">
 
--   `-o`オプションは、ローカル ファイル パスまたは[外部ストレージの URL](/br/backup-and-restore-storages.md)をサポートするストレージのエクスポート ディレクトリを指定します。
+-   `-o`オプションは、ローカル ファイル パスまたは[外部ストレージのURL](/br/backup-and-restore-storages.md)をサポートするストレージのエクスポート ディレクトリを指定します。
 
 </CustomContent>
 
@@ -395,7 +395,7 @@ SET GLOBAL tidb_gc_life_time = '10m';
 
 <CustomContent platform="tidb">
 
-最後に、エクスポートされたすべてのデータは、 [TiDB Lightning](/tidb-lightning/tidb-lightning-backends.md)を使用して TiDB にインポートして戻すことができます。
+最後に、エクスポートされたすべてのデータは、 [TiDB Lightning](/tidb-lightning/tidb-lightning-overview.md)を使用して TiDB にインポートして戻すことができます。
 
 </CustomContent>
 

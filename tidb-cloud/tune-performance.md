@@ -5,9 +5,11 @@ summary: Learn how to analyze and tune performance of your TiDB Cloud cluster.
 
 # パフォーマンスの分析と調整 {#analyze-and-tune-performance}
 
-TiDB Cloudは、パフォーマンスを分析するために[ステートメント分析](#statement-analysis)と[キー ビジュアライザー](#key-visualizer)を提供します。
+TiDB Cloudは、パフォーマンスを分析するために[ステートメント分析](#statement-analysis) 、 [スロークエリ](#slow-query) 、および[キー ビジュアライザー](#key-visualizer)を提供します。
 
 -   ステートメント分析を使用すると、ページでの SQL の実行を直接観察し、システム テーブルを照会せずにパフォーマンスの問題を簡単に特定できます。
+
+-   スロー クエリを使用すると、TiDB クラスター内のすべてのスロー クエリを検索して表示し、実行計画、SQL 実行情報、およびその他の詳細を表示して、各スロー クエリのボトルネックを調べることができます。
 
 -   Key Visualizer は、TiDB のデータ アクセス パターンとデータ ホットスポットを観察するのに役立ちます。
 
@@ -28,6 +30,26 @@ TiDB Cloudは、パフォーマンスを分析するために[ステートメン
 ![Statement Analysis](/media/tidb-cloud/statement-analysis.png)
 
 詳細については、 [TiDB ダッシュボードでのステートメント実行の詳細](https://docs.pingcap.com/tidb/stable/dashboard-statement-details)を参照してください。
+
+## スロークエリ {#slow-query}
+
+デフォルトでは、300 ミリ秒を超える SQL クエリは低速クエリと見なされます。
+
+クラスター内のスロー クエリを表示するには、次の手順を実行します。
+
+1.  クラスターの [**診断**] タブに移動します。
+
+2.  [**スロー クエリ**] タブをクリックします。
+
+3.  リスト内のスロー クエリをクリックすると、詳細な実行情報が表示されます。
+
+4.  (オプション) ターゲットの時間範囲、関連するデータベース、および SQL キーワードに基づいて、スロー クエリをフィルタリングできます。表示するスロー クエリの数を制限することもできます。
+
+結果は表形式で表示され、異なる列で結果を並べ替えることができます。
+
+![Slow Queries](/media/tidb-cloud/slow-queries.png)
+
+詳細については、 [TiDB ダッシュボードでの遅いクエリ](https://docs.pingcap.com/tidb/stable/dashboard-slow-query)を参照してください。
 
 ## キー ビジュアライザー {#key-visualizer}
 

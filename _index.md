@@ -40,9 +40,9 @@ hide_commit: true
 
 [ソフトウェアとハードウェアの要件](https://docs.pingcap.com/tidb/v6.1/hardware-and-software-requirements)
 
-[TiUP を使用して TiDBクラスタをデプロイする (推奨)](https://docs.pingcap.com/tidb/v6.1/production-deployment-using-tiup)
+[TiUP を使用して TiDBクラスタをデプロイする](https://docs.pingcap.com/tidb/v6.1/production-deployment-using-tiup)
 
-[Kubernetes に TiDBクラスタをデプロイする](https://docs.pingcap.com/tidb/v6.1/tidb-in-kubernetes)
+[TiDBクラスタを Kubernetes にデプロイする](https://docs.pingcap.com/tidb/v6.1/tidb-in-kubernetes)
 
 </LearningPath>
 
@@ -117,6 +117,16 @@ hide_commit: true
 [TiDB Operator](https://docs.pingcap.com/tidb/v6.1/tidb-operator-overview)
 
 [ティスパーク](https://docs.pingcap.com/tidb/v6.1/tispark-overview)
+
+</LearningPath>
+
+<LearningPath label="Reference" icon="cloud-dev">
+
+[システム変数](https://docs.pingcap.com/tidb/v6.1/system-variables)
+
+[リリースノート](https://docs.pingcap.com/tidb/v6.1/release-notes)
+
+[FAQのまとめ](https://docs.pingcap.com/tidb/v6.1/faq-overview)
 
 </LearningPath>
 

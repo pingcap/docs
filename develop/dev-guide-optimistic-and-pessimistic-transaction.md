@@ -821,7 +821,7 @@ mysql> SELECT * FROM users;
 
 ### 楽観的なトランザクションの例を書く {#write-an-optimistic-transaction-example}
 
-<SimpleTab  groupId="language">
+<SimpleTab groupId="language">
 
 <div label="Java" value="java">
 

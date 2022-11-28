@@ -5,7 +5,7 @@ summary: Learn how to back up data using BR commands
 
 # BR を使用してクラスタデータをバックアップする {#use-br-to-back-up-cluster-data}
 
-このドキュメントでは、次のシナリオで BR を使用してクラスター データをバックアップする方法について説明します。
+このドキュメントでは、次のシナリオで TiDB クラスター データをバックアップする方法について説明します。
 
 -   [TiDB クラスターのスナップショットをバックアップする](#back-up-tidb-cluster-snapshots)
 -   [データベースのバックアップ](#back-up-a-database)
@@ -15,10 +15,12 @@ summary: Learn how to back up data using BR commands
 -   [増分データのバックアップ](#back-up-incremental-data)
 -   [バックアップ データの暗号化](#encrypt-backup-data)
 
-バックアップと復元 (BR) に慣れていない場合は、次のドキュメントを読んで、BR の使用原理と方法を完全に理解することをお勧めします。
+バックアップ ツールと復元ツールに慣れていない場合は、次のドキュメントを読んで、これらのツールの使用原理と方法を完全に理解することをお勧めします。
 
 -   [BRの概要](/br/backup-and-restore-overview.md)
 -   [バックアップと復元に BR コマンドラインを使用する](/br/use-br-command-line-tool.md)
+
+少量のデータ (たとえば、50 GB 未満) をバックアップする必要があり、高速なバックアップ速度を必要としない場合は、Dumplingを使用してデータをエクスポートし、バックアップを実装できます。詳細なバックアップ操作については、 [Dumplingを使用して完全なデータをバックアップする](/backup-and-restore-using-dumpling-lightning.md#use-dumpling-to-back-up-full-data)を参照してください。
 
 ## TiDB クラスターのスナップショットをバックアップする {#back-up-tidb-cluster-snapshots}
 
@@ -163,7 +165,7 @@ br backup full\
 >
 > これはまだ実験的機能です。本番環境で使用することはお勧めし**ません**。
 
-BR は、Amazon S3 へのバックアップ時に、バックアップ側とストレージ側でバックアップ データの暗号化をサポートします。必要に応じて、いずれかの暗号化方式を選択できます。
+BR は、Amazon S3 へのバックアップ時に、バックアップ側とストレージ側でバックアップ データの暗号化をサポートします。必要に応じて、いずれかの暗号化方法を選択できます。
 
 ### バックアップ終了時にバックアップ データを暗号化する {#encrypt-backup-data-at-the-backup-end}
 

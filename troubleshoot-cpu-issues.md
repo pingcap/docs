@@ -78,7 +78,7 @@ PD TSO の`wait duration`メトリックの異常な増加があります。こ�
 
 -   TiKV再始動のため再選。
     -   TiKV がパニックした後、 `systemd`でプルアップされ、正常に実行されます。panicが発生したかどうかは、TiKV ログを表示することで確認できます。この問題は予期しないものであるため、発生した場合は[バグを報告](https://github.com/tikv/tikv/issues/new?template=bug-report.md) 。
-    -   TiKV は第三者によって停止または強制終了され、その後`systemd`によって引き上げられます。 `dmesg`と TiKV ログを参照して原因を確認してください。
+    -   TiKV は第三者によって停止または強制終了され、その後`systemd`によって引き上げられました。 `dmesg`と TiKV ログを参照して原因を確認してください。
     -   TiKV は OOM であり、再起動を引き起こします。
     -   `THP` (Transparent Hugepage) を動的に調整するため、TiKV がハングします。
 

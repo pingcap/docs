@@ -275,7 +275,7 @@ TiDB クラスターの容量は、オンライン サービスを中断する�
     ```
     Starting /root/.tiup/components/cluster/v1.10.0/cluster display <cluster-name>
     TiDB Cluster: <cluster-name>
-    TiDB Version: v6.1.0
+    TiDB Version: v6.1.2
     ID              Role         Host        Ports                            Status  Data Dir                Deploy Dir
     --              ----         ----        -----                            ------  --------                ----------
     10.0.1.3:8300   cdc          10.0.1.3    8300                             Up      data/cdc-8300           deploy/cdc-8300
@@ -336,17 +336,19 @@ TiDB クラスターの容量は、オンライン サービスを中断する�
 
 ### 1. 残りの TiFlash ノードの数に応じて、テーブルのレプリカの数を調整します。 {#1-adjust-the-number-of-replicas-of-the-tables-according-to-the-number-of-remaining-tiflash-nodes}
 
-ノードがダウンする前に、TiFlash クラスター内の残りのノードの数が、すべてのテーブルのレプリカの最大数以上であることを確認してください。それ以外の場合は、関連するテーブルの TiFlash レプリカの数を変更します。
-
-1.  レプリカがクラスター内の残りの TiFlash ノードの数よりも多いすべてのテーブルに対して、TiDB クライアントで次のコマンドを実行します。
-
-    {{< copyable "" >}}
+1.  スケールイン後に、TiFlash ノードの数を超える TiFlash レプリカを持つテーブルがあるかどうかをクエリします。 `tobe_left_nodes`は、スケールイン後の TiFlash ノードの数を意味します。クエリ結果が空の場合、TiFlash でスケーリングを開始できます。クエリ結果が空でない場合は、関連するテーブルの TiFlash レプリカの数を変更する必要があります。
 
     ```sql
-    ALTER TABLE <db-name>.<table-name> SET tiflash replica 0;
+    SELECT * FROM information_schema.tiflash_replica WHERE REPLICA_COUNT >  'tobe_left_nodes';
     ```
 
-2.  関連するテーブルの TiFlash レプリカが削除されるまで待ちます。 [テーブル レプリケーションの進行状況を確認する](/tiflash/create-tiflash-replicas.md#check-replication-progress)であり、関連するテーブルのレプリケーション情報が見つからない場合、レプリカは削除されます。
+2.  スケールイン後に、TiFlash ノードの数を超える TiFlash レプリカを持つすべてのテーブルに対して、次のステートメントを実行します。 `new_replica_num`は`tobe_left_nodes`以下でなければなりません:
+
+    ```sql
+    ALTER TABLE <db-name>.<table-name> SET tiflash replica 'new_replica_num';
+    ```
+
+3.  ステップ 1 を再度実行し、スケールイン後に TiFlash ノードの数を超える TiFlash レプリカを持つテーブルがないことを確認します。
 
 ### 2. スケールイン操作を実行する {#2-perform-the-scale-in-operation}
 
@@ -378,7 +380,7 @@ TiDB クラスターの容量は、オンライン サービスを中断する�
 
     -   [pd-ctl](/pd-control.md)に store コマンドを入力します (バイナリ ファイルは tidb-ansible ディレクトリの`resources/bin`の下にあります)。
 
-    -   TiUP デプロイメントを使用する場合は、 `pd-ctl`を`tiup ctl pd`に置き換えます。
+    -   TiUP デプロイメントを使用する場合は、 `pd-ctl`を`tiup ctl:<cluster-version> pd`に置き換えます。
 
     {{< copyable "" >}}
 
@@ -394,7 +396,7 @@ TiDB クラスターの容量は、オンライン サービスを中断する�
 
     -   pd-ctl に`store delete <store_id>`を入力します ( `<store_id>`は、前の手順で見つかった TiFlash ノードのストア ID です。
 
-    -   TiUP デプロイメントを使用する場合は、 `pd-ctl`を`tiup ctl pd`に置き換えます。
+    -   TiUP デプロイメントを使用する場合は、 `pd-ctl`を`tiup ctl:<cluster-version> pd`に置き換えます。
 
         {{< copyable "" >}}
 

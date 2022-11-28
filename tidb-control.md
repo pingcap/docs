@@ -17,7 +17,7 @@ TiUP を使用してインストールするか、ソース コードからコ�
 
 ### TiUP を使用して TiDB コントロールをインストールする {#install-tidb-control-using-tiup}
 
-TiUP をインストールすると、コマンド`tiup ctl tidb`つで TiDB Control を取得して実行できます。
+TiUP をインストールすると、コマンド`tiup ctl:<cluster-version> tidb`つで TiDB Control を取得して実行できます。
 
 ### ソースコードからコンパイル {#compile-from-source-code}
 

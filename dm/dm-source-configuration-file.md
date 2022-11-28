@@ -1,9 +1,9 @@
 ---
-title: Upstream Database Configuration File
+title: Upstream Database Configuration File of TiDB Data Migration
 summary: Learn the configuration file of the upstream database
 ---
 
-# アップストリーム データベースConfiguration / コンフィグレーションファイル {#upstream-database-configuration-file}
+# TiDB データ移行のアップストリーム データベースConfiguration / コンフィグレーションファイル {#upstream-database-configuration-file-of-tidb-data-migration}
 
 このドキュメントでは、構成ファイル テンプレートと、このファイル内の各構成パラメーターの説明を含む、アップストリーム データベースの構成ファイルを紹介します。
 

@@ -5,7 +5,7 @@ summary: Learn about the release notes of TiDB Cloud in 2021.
 
 # 2021 年のTiDB Cloudリリース ノート {#tidb-cloud-release-notes-in-2021}
 
-このページでは、2021 年の[TiDB Cloud](https://en.pingcap.com/tidb-cloud/)のリリース ノートを一覧表示します。
+このページでは、2021 年の[TiDB Cloud](https://www.pingcap.com/tidb-cloud/)のリリース ノートを一覧表示します。
 
 ## 2021 年 12 月 28 日 {#december-28-2021}
 
@@ -40,7 +40,7 @@ summary: Learn about the release notes of TiDB Cloud in 2021.
 
 ## 2021 年 11 月 8 日 {#november-8-2021}
 
--   Launch [開発者層](/tidb-cloud/select-cluster-tier.md#developer-tier) TiDB Cloudの 1 年間の無料トライアルを提供します。
+-   Launch [開発者層](/tidb-cloud/select-cluster-tier.md#serverless-tier-beta) TiDB Cloudの 1 年間の無料トライアルを提供します。
 
     各 Developer Tier クラスターはフル機能の TiDB クラスターであり、以下が付属しています。
 

@@ -53,8 +53,6 @@ http://192.168.0.123:2379/dashboard/
 >
 > <details><summary>TiUPクラスタのアップグレード</summary>
 >
-> {{< copyable "" >}}
->
 > ```bash
 > tiup update --self
 > tiup update cluster --force
@@ -64,12 +62,12 @@ http://192.168.0.123:2379/dashboard/
 
 ### TiDB ダッシュボードを提供するために別の PD インスタンスに切り替える {#switch-to-another-pd-instance-to-serve-tidb-dashboard}
 
-TiUP を使用して展開された実行中のクラスターの場合、 `tiup ctl pd`コマンドを使用して、TiDB ダッシュボードを提供する PD インスタンスを変更するか、無効になっている場合に TiDB ダッシュボードを提供する PD インスタンスを再指定できます。
+TiUP を使用して展開された実行中のクラスターの場合、 `tiup ctl:<cluster-version> pd`コマンドを使用して、TiDB ダッシュボードを提供する PD インスタンスを変更するか、無効になっている場合に TiDB ダッシュボードを提供する PD インスタンスを再指定できます。
 
 {{< copyable "" >}}
 
 ```bash
-tiup ctl pd -u http://127.0.0.1:2379 config set dashboard-address http://9.9.9.9:2379
+tiup ctl:<cluster-version> pd -u http://127.0.0.1:2379 config set dashboard-address http://9.9.9.9:2379
 ```
 
 上記のコマンドでは:
@@ -91,12 +89,12 @@ tiup cluster display CLUSTER_NAME --dashboard
 
 ## TiDB ダッシュボードを無効にする {#disable-tidb-dashboard}
 
-TiUP を使用して展開された実行中のクラスターの場合、 `tiup ctl pd`コマンドを使用して、すべての PD インスタンスで TiDB ダッシュボードを無効にします ( `127.0.0.1:2379`を任意の PD インスタンスの IP とポートに置き換えます)。
+TiUP を使用して展開された実行中のクラスターの場合、 `tiup ctl:<cluster-version> pd`コマンドを使用して、すべての PD インスタンスで TiDB ダッシュボードを無効にします ( `127.0.0.1:2379`を任意の PD インスタンスの IP とポートに置き換えます)。
 
 {{< copyable "" >}}
 
 ```bash
-tiup ctl pd -u http://127.0.0.1:2379 config set dashboard-address none
+tiup ctl:<cluster-version> pd -u http://127.0.0.1:2379 config set dashboard-address none
 ```
 
 TiDB ダッシュボードを無効にした後、どの PD インスタンスが TiDB ダッシュボード サービスを提供しているかの確認に失敗します。
@@ -113,12 +111,12 @@ Dashboard is not started.
 
 ## TiDB ダッシュボードを再度有効にする {#re-enable-tidb-dashboard}
 
-TiUP を使用してデプロイされた実行中のクラスターの場合、 `tiup ctl pd`コマンドを使用して、TiDB ダッシュボードを実行するインスタンスを再ネゴシエートするよう PD に要求します ( `127.0.0.1:2379`を任意の PD インスタンスの IP とポートに置き換えます)。
+TiUP を使用してデプロイされた実行中のクラスターの場合、 `tiup ctl:<cluster-version> pd`コマンドを使用して、TiDB ダッシュボードを実行するインスタンスを再ネゴシエートするよう PD に要求します ( `127.0.0.1:2379`を任意の PD インスタンスの IP とポートに置き換えます)。
 
 {{< copyable "" >}}
 
 ```bash
-tiup ctl pd -u http://127.0.0.1:2379 config set dashboard-address auto
+tiup ctl:<cluster-version> pd -u http://127.0.0.1:2379 config set dashboard-address auto
 ```
 
 上記のコマンドを実行した後、 `tiup cluster display`コマンドを使用して、PD によって自動的にネゴシエートされた TiDB ダッシュボード インスタンス アドレスを表示できます ( `CLUSTER_NAME`をクラスター名に置き換えます)。

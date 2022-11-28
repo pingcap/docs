@@ -13,11 +13,11 @@ summary: Learn about the most frequently asked questions (FAQs) relating to TiDB
 
 ### TiDBとは？ {#what-is-tidb}
 
-TiDB は、水平スケーラビリティ、高可用性、および一貫した分散トランザクションを特徴とする分散 SQL データベースです。また、MySQL の SQL 構文とプロトコルを使用してデータを管理および取得することもできます。
+[TiDB](https://github.com/pingcap/tidb)は、Hybrid Transactional and Analytical Processing (HTAP) ワークロードをサポートするオープンソースの NewSQL データベースです。 MySQL と互換性があり、水平方向のスケーラビリティ、強力な一貫性、および高可用性を備えています。 TiDB の目標は、OLTP (オンライン トランザクション処理)、OLAP (オンライン分析処理)、および HTAP サービスをカバーするワンストップ データベース ソリューションをユーザーに提供することです。 TiDB は、高可用性と大規模データとの強力な整合性を必要とするさまざまなユース ケースに適しています。
 
 ### TiDB のアーキテクチャとは? {#what-is-tidb-s-architecture}
 
-TiDB クラスターには、TiDBサーバー、PD (Placement Driver)サーバー、および TiKVサーバーの 3 つのコンポーネントがあります。詳細については、 [TiDBアーキテクチャ](/tidb-architecture.md)を参照してください。
+TiDB クラスターには、TiDBサーバー、PD (Placement Driver)サーバー、および TiKVサーバーの 3 つのコンポーネントがあります。詳細については、 [TiDBアーキテクチャ](/tidb-architecture.md) 、 [TiDB ストレージ](/tidb-storage.md) 、 [TiDB コンピューティング](/tidb-computing.md) 、および[TiDB スケジューリング](/tidb-scheduling.md)を参照してください。
 
 ### TiDB は MySQL をベースにしていますか? {#is-tidb-based-on-mysql}
 
@@ -76,7 +76,9 @@ Usage of ./bin/tidb-server:
 
 ### TiDB のドキュメント以外に、TiDB の知識を得る方法はありますか? {#in-addition-to-the-tidb-documentation-are-there-any-other-ways-to-acquire-tidb-knowledge}
 
-現在、TiDB 関連の知識を得るための最も重要でタイムリーな方法は[TiDB ドキュメント](/overview.md#tidb-introduction)です。さらに、テクニカル コミュニケーション グループもいくつかあります。必要な場合は、 [info@pingcap.com](mailto:info@pingcap.com)にお問い合わせください。
+-   [TiDB ドキュメント](https://docs.pingcap.com/) : TiDB 関連の知識を得るための最も重要でタイムリーな方法。
+-   [TiDB ブログ](https://www.pingcap.com/blog/) : 技術記事、製品の洞察、およびケース スタディを学習します。
+-   [PingCAP教育](https://www.pingcap.com/education/?from=en) : オンライン コースと認定プログラムを受講します。
 
 ### TiDB ユーザー名の長さ制限は? {#what-is-the-length-limit-for-the-tidb-user-name}
 
@@ -95,7 +97,7 @@ Usage of ./bin/tidb-server:
 
 Atomikos の 2 つのデータ ソースを構成したら、JDBC ドライブを XA に設定します。 Atomikos が TM と RM (DB) を操作する場合、Atomikos は XA を含むコマンドを JDBCレイヤーに送信します。 MySQL を例にとると、JDBCレイヤーで XA が有効になっている場合、JDBC は、DML を使用して`redo`のログを変更するなど、一連の XA ロジック操作を InnoDB に送信します。これが 2 フェーズ コミットの動作です。現在の TiDB バージョンは、上位アプリケーションレイヤーの JTA/XA をサポートしておらず、Atomikos から送信された XA 操作を解析していません。
 
-スタンドアロン データベースとして、MySQL は XA を使用したデータベース間トランザクションのみを実装できます。一方、TiDB は Google Percolator トランザクション モデルを使用した分散トランザクションをサポートし、そのパフォーマンスの安定性は XA よりも高いため、TiDB は XA をサポートせず、TiDB が XA をサポートする必要はありません。
+スタンドアロン データベースとして、MySQL は XA を使用したデータベース間トランザクションのみを実装できます。一方、TiDB は Google Percolator トランザクション モデルを使用した分散トランザクションをサポートし、そのパフォーマンスの安定性は XA よりも高いため、TiDB は JTA/XA をサポートせず、TiDB が XA をサポートする必要はありません。
 
 ### TiDB は、パフォーマンスを損なうことなく、カラムナ ストレージ エンジン (TiFlash) への同時<code>INSERT</code>または<code>UPDATE</code>操作をどのようにサポートできるでしょうか? {#how-could-tidb-support-high-concurrent-code-insert-code-or-code-update-code-operations-to-the-columnar-storage-engine-tiflash-without-hurting-performance}
 
@@ -110,12 +112,12 @@ Atomikos の 2 つのデータ ソースを構成したら、JDBC ドライブ�
 
 ### データストレージ用TiKV {#tikv-for-data-storage}
 
-[TiDB 内部 (I) - データストレージ](https://en.pingcap.com/blog/tidb-internal-data-storage/)を参照してください。
+[TiDB 内部 (I) - データストレージ](https://www.pingcap.com/blog/tidb-internal-data-storage/?from=en)を参照してください。
 
 ### データ コンピューティング用の TiDB {#tidb-for-data-computing}
 
-[TiDB 内部 (II) - コンピューティング](https://en.pingcap.com/blog/tidb-internal-computing/)を参照してください。
+[TiDB 内部 (II) - コンピューティング](https://www.pingcap.com/blog/tidb-internal-computing/?from=en)を参照してください。
 
 ### スケジューリング用 PD {#pd-for-scheduling}
 
-[TiDB 内部 (III) - スケジューリング](https://en.pingcap.com/blog/tidb-internal-scheduling/)を参照してください。
+[TiDB 内部 (III) - スケジューリング](https://www.pingcap.com/blog/tidb-internal-scheduling/?from=en)を参照してください。

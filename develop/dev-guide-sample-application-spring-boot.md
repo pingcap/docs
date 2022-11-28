@@ -21,9 +21,9 @@ summary: Learn an example of how to build a TiDB application using Spring Boot.
 
 以下にTiDBクラスターの起動方法を紹介します。
 
-**TiDB Cloudの無料クラスターを使用する**
+**TiDB Cloud Tier クラスターを使用する**
 
-詳細な手順については、 [無料のクラスターを作成する](/develop/dev-guide-build-cluster-in-cloud.md#step-1-create-a-free-cluster)を参照してください。
+詳細な手順については、 [サーバーレス層クラスターを作成する](/develop/dev-guide-build-cluster-in-cloud.md#step-1-create-a-serverless-tier-cluster)を参照してください。
 
 **ローカル クラスターを使用する**
 
@@ -33,7 +33,7 @@ summary: Learn an example of how to build a TiDB application using Spring Boot.
 
 <CustomContent platform="tidb-cloud">
 
-[無料のクラスターを作成する](/develop/dev-guide-build-cluster-in-cloud.md#step-1-create-a-free-cluster)を参照してください。
+[サーバーレス層クラスターを作成する](/develop/dev-guide-build-cluster-in-cloud.md#step-1-create-a-serverless-tier-cluster)を参照してください。
 
 </CustomContent>
 
@@ -155,14 +155,14 @@ summary: Learn an example of how to build a TiDB application using Spring Boot.
 
     ```xml
     <dependency>
-    <groupId>org.springframework.boot</groupId>
-    <artifactId>spring-boot-starter-data-jpa</artifactId>
-    <exclusions>
-        <exclusion>
-            <groupId>org.hibernate</groupId>
-            <artifactId>hibernate-core-jakarta</artifactId>
-        </exclusion>
-    </exclusions>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-data-jpa</artifactId>
+        <exclusions>
+            <exclusion>
+                <groupId>org.hibernate</groupId>
+                <artifactId>hibernate-core-jakarta</artifactId>
+            </exclusion>
+        </exclusions>
     </dependency>
     ```
 
@@ -188,7 +188,7 @@ summary: Learn an example of how to build a TiDB application using Spring Boot.
 
 ### ステップ 5.1 パラメータの変更 {#step-5-1-change-parameters}
 
-ローカル以外のデフォルト クラスター、 TiDB Cloudクラスター、またはリモート クラスターを使用する場合は、 `application.yml` ( `src/main/resources`にあります) の`spring.datasource.url` 、 `spring.datasource.username` 、 `spring.datasource.password`パラメーターを変更します。
+TiDB Cloud Tier クラスターを使用している場合は、 `application.yml` ( `src/main/resources`にあります) の`spring.datasource.url` 、 `spring.datasource.username` 、 `spring.datasource.password`パラメーターを変更します。
 
 {{< copyable "" >}}
 
@@ -206,13 +206,11 @@ spring:
       ddl-auto: create-drop
 ```
 
-パスワードを`123456`に設定すると、 TiDB Cloudで得られる接続文字列は次のようになります。
+設定したパスワードが`123456`で、クラスターの詳細ページから取得した接続パラメーターが次のとおりであるとします。
 
-{{< copyable "" >}}
-
-```shell
-mysql --connect-timeout 15 -u root -h xxx.tidbcloud.com -P 4000 -p
-```
+-   エンドポイント: `xxx.tidbcloud.com`
+-   ポート: `4000`
+-   ユーザー: `2aEp24QWEDLqRFs.root`
 
 したがって、パラメータは次のように設定する必要があります。
 
@@ -221,8 +219,8 @@ mysql --connect-timeout 15 -u root -h xxx.tidbcloud.com -P 4000 -p
 ```yaml
 spring:
   datasource:
-    url: jdbc:mysql://xxx.tidbcloud.com:4000/test
-    username: root
+    url: jdbc:mysql://xxx.tidbcloud.com:4000/test?sslMode=VERIFY_IDENTITY&enabledTLSProtocols=TLSv1.2,TLSv1.3
+    username: 2aEp24QWEDLqRFs.root
     password: 123456
     driver-class-name: com.mysql.cj.jdbc.Driver
   jpa:

@@ -1,9 +1,9 @@
 ---
-title: Daily Check
+title: Daily Check for TiDB Data Migration
 summary: Learn about the daily check of TiDB Data Migration (DM).
 ---
 
-# 毎日のチェック {#daily-check}
+# TiDB データ移行の毎日のチェック {#daily-check-for-tidb-data-migration}
 
 このドキュメントでは、TiDB Data Migration (DM) で日常的なチェックを実行する方法をまとめています。
 

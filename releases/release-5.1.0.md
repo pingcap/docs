@@ -31,7 +31,7 @@ v5.1 の主な新機能または改善点は次のとおりです。
 | [`cte_max_recursion_depth`](/system-variables.md#cte_max_recursion_depth)                | 新規追加   | 共通テーブル式の最大再帰深度を制御します。                                                                                                       |
 | [`init_connect`](/system-variables.md#init_connect)                                      | 新規追加   | TiDBサーバーへの初期接続を制御します。                                                                                                       |
 | [`tidb_analyze_version`](/system-variables.md#tidb_analyze_version-new-in-v510)          | 新規追加   | TiDB が統計を収集する方法を制御します。この変数のデフォルト値は`2`です。これは実験的機能です。                                                                         |
-| [`tidb_enable_enhanced_security`](/system-variables.md#tidb_enable_enhanced_security)    | 新規追加   | 接続している TiDBサーバーでセキュリティ拡張モード (SEM) が有効になっているかどうかを示します。この変数の設定は、TiDBサーバーを再起動しないと変更できません。                                      |
+| [`tidb_enable_enhanced_security`](/system-variables.md#tidb_enable_enhanced_security)    | 新規追加   | 接続している TiDBサーバーでセキュリティ強化モード (SEM) が有効になっているかどうかを示します。この変数の設定は、TiDBサーバーを再起動しないと変更できません。                                      |
 | [`tidb_enforce_mpp`](/system-variables.md#tidb_enforce_mpp-new-in-v51)                   | 新規追加   | オプティマイザーのコスト見積もりを無視し、クエリの実行に MPP モードを強制的に使用するかどうかを制御します。この変数のデータ型は`BOOL`で、デフォルト値は`false`です。                                 |
 | [`tidb_partition_prune_mode`](/system-variables.md#tidb_partition_prune_mode-new-in-v51) | 新規追加   | 分割されたテーブルの動的プルーニング モードを有効にするかどうかを指定します。この機能は実験的です。この変数のデフォルト値は`static`です。これは、分割されたテーブルの動的プルーニング モードがデフォルトで無効になっていることを意味します。 |
 
@@ -174,7 +174,7 @@ v5.1 の主な新機能または改善点は次のとおりです。
 
 ### テレメトリー {#telemetry}
 
-TiDB は、実行ステータス、失敗ステータスなどを含む、TiDB クラスター要求の実行ステータスをテレメトリに追加します。
+TiDB は、実行ステータスと失敗ステータスを含む、TiDB クラスター要求の実行ステータスをテレメトリに追加します。
 
 情報とこの動作を無効にする方法について詳しくは、 [テレメトリー](/telemetry.md)を参照してください。
 
@@ -184,6 +184,7 @@ TiDB は、実行ステータス、失敗ステータスなどを含む、TiDB �
 
     -   内蔵機能をサポート`VITESS_HASH()` [#23915](https://github.com/pingcap/tidb/pull/23915)
     -   列挙型のデータの TiKV へのプッシュ ダウンをサポートして、 `WHERE`句で列挙型を使用する場合のパフォーマンスを向上させます[#23619](https://github.com/pingcap/tidb/issues/23619)
+    -   `RENAME USER`構文[#23648](https://github.com/pingcap/tidb/issues/23648)をサポート
     -   ウィンドウ関数の計算を最適化して、ROW_NUMBER() でデータをページングする際の TiDB OOM の問題を解決します[#23807](https://github.com/pingcap/tidb/issues/23807)
     -   `UNION ALL`を使用して多数の`SELECT`ステートメントを結合する場合の TiDB OOM 問題を解決するために`UNION ALL`の計算を最適化します[#21441](https://github.com/pingcap/tidb/issues/21441)
     -   パーティション化されたテーブルの動的プルーニング モードを最適化して、パフォーマンスと安定性を向上させる[#24150](https://github.com/pingcap/tidb/issues/24150)
@@ -279,7 +280,7 @@ TiDB は、実行ステータス、失敗ステータスなどを含む、TiDB �
     -   列のプルーニングの改善により、 `Apply`と`Join`の演算子の結果が正しくない問題を修正します[#23887](https://github.com/pingcap/tidb/issues/23887)
     -   非同期コミットからフォールバックしたプライマリ ロックが解決できないバグを修正[#24384](https://github.com/pingcap/tidb/issues/24384)
     -   重複した fm-sketch レコードを引き起こす可能性のある統計の GC の問題を修正します[#24357](https://github.com/pingcap/tidb/pull/24357)
-    -   悲観的ロックが`ErrKeyExists`エラー[#23799](https://github.com/pingcap/tidb/issues/23799)を受け取った場合、不要な悲観的ロールバックを回避します。
+    -   悲観的ロックが`ErrKeyExists`エラー[#23799](https://github.com/pingcap/tidb/issues/23799)を受け取ったときに、不要な悲観的ロールバックを回避します。
     -   sql_mode に`ANSI_QUOTES` [#24429](https://github.com/pingcap/tidb/issues/24429)が含まれている場合、数値リテラルが認識されない問題を修正します。
     -   リストされていないパーティションからデータを読み取る`INSERT INTO table PARTITION (<partitions>) ... ON DUPLICATE KEY UPDATE`などのステートメントを禁止します[#24746](https://github.com/pingcap/tidb/issues/24746)
     -   SQL ステートメントに`GROUP BY`と`UNION` [#24281](https://github.com/pingcap/tidb/issues/24281)の両方が含まれている場合に発生する可能性のある`index out of range`エラーを修正します。

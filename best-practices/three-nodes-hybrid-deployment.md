@@ -109,7 +109,7 @@ TiDB はマルチバージョン同時実行制御 (MVCC) モデルを使用す�
 {{< copyable "" >}}
 
 ```shell
-tiup ctl tikv --host=${ip:port} modify-tikv-config -n gc.max_write_bytes_per_sec -v ${limit}
+tiup ctl:<cluster-version> tikv --host=${ip:port} modify-tikv-config -n gc.max_write_bytes_per_sec -v ${limit}
 ```
 
 > **ノート：**

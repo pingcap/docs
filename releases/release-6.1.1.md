@@ -8,6 +8,8 @@ title: TiDB 6.1.1 Release Notes
 
 TiDB バージョン: 6.1.1
 
+クイック アクセス: [クイックスタート](https://docs.pingcap.com/tidb/v6.1/quick-start-with-tidb) | [本番展開](https://docs.pingcap.com/tidb/v6.1/production-deployment-using-tiup) | [インストール パッケージ](https://www.pingcap.com/download/?version=v6.1.1#version-list)
+
 ## 互換性の変更 {#compatibility-changes}
 
 -   TiDB

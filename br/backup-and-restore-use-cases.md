@@ -39,10 +39,10 @@ TiDB と[TiKV](https://tikv.org/)の基本的な知識が必要です。
 
 ### クラスタのバージョン {#cluster-versions}
 
--   TiDB: v6.1.0
--   TiKV: v6.1.0
--   PD: v6.1.0
--   BR: v6.1.0
+-   TiDB: v6.1.2
+-   TiKV: v6.1.2
+-   PD: v6.1.2
+-   BR: v6.1.2
 
 > **ノート：**
 >

@@ -323,7 +323,7 @@ mysql> SELECT * FROM INFORMATION_SCHEMA.USER_PRIVILEGES WHERE grantee = "'root'@
 
 `CREATE USER`には`CREATE USER`の特権が必要です。
 
-### ロール/ユーザーのドロップ {#drop-role-user}
+### ロール/ユーザーの削除 {#drop-role-user}
 
 `DROP ROLE`には`DROP ROLE`の特権が必要です。
 

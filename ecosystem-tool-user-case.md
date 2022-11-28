@@ -11,7 +11,7 @@ summary: Learn the common use cases of TiDB tools and how to choose the tools.
 
 TiDB を物理マシンまたは仮想マシンにデプロイして操作する必要がある場合は、 [TiUP](/tiup/tiup-overview.md)をインストールしてから、TiUP を使用して TiDB、PD、TiKV などの TiDB コンポーネントを管理できます。
 
-## TiDB を Kubernetes にデプロイして運用する {#deploy-and-operate-tidb-in-kubernetes}
+## TiDB を Kubernetes にデプロイして運用する {#deploy-and-operate-tidb-on-kubernetes}
 
 TiDB を Kubernetes にデプロイして操作する必要がある場合は、Kubernetes クラスターをデプロイしてから[TiDB Operator](https://docs.pingcap.com/tidb-in-kubernetes/stable)をデプロイできます。その後、 TiDB Operatorを使用して TiDB クラスターをデプロイおよび操作できます。
 
@@ -39,8 +39,8 @@ TiDB クラスターをバックアップするか、バックアップしたデ
 
 TiDB クラスターから別の TiDB クラスターにデータを移行する必要がある場合は、 [Dumpling](/dumpling-overview.md)を使用して TiDB から完全なデータを SQL ダンプ ファイルとしてエクスポートし、 [TiDB Lightning](/tidb-lightning/tidb-lightning-overview.md)を使用してデータを別の TiDB クラスターにインポートします。
 
-増分データも移行する必要がある場合は、 [Binlog](/tidb-binlog/tidb-binlog-overview.md)を使用します。
+増分データも移行する必要がある場合は、 [TiCDC](/ticdc/ticdc-overview.md)を使用できます。
 
 ## TiDB 増分データ サブスクリプション {#tidb-incremental-data-subscription}
 
-TiDB の増分変更を購読する必要がある場合は、 [Binlog](/tidb-binlog/binlog-consumer-client.md)を使用します。
+TiDB の増分変更を購読する必要がある場合は、 [TiCDC](/ticdc/ticdc-overview.md)を使用できます。

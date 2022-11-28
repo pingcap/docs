@@ -72,7 +72,6 @@ server_configs:
     server.grpc-compression-type: gzip
   pd:
     replication.location-labels:  ["dc","zone","rack","host"]
-    schedule.tolerant-size-ratio: 20.0
 
 pd_servers:
   - host: 10.63.10.10
@@ -167,12 +166,6 @@ tikv_servers:
     server.grpc-compression-type: gzip
     ```
 
--   PD バランス バッファ サイズを調整し、PD の許容範囲を広げます。 PD はスケジューリングの基準としてノードの状況に応じて各オブジェクトのスコアを計算するため、2 つの店舗のリーダー (または地域) のスコアの差が、指定されたリージョンサイズの倍数よりも小さい場合、PD は、バランスが達成されます。
-
-    ```yaml
-    schedule.tolerant-size-ratio: 20.0
-    ```
-
 -   別の都市 (サンフランシスコ) の TiKV ノードのネットワーク構成を最適化します。サンフランシスコの IDC3 (単独) の次の TiKV パラメータを変更し、この TiKV ノードのレプリカがRaft選択に参加しないようにしてください。
 
     ```yaml
@@ -180,7 +173,7 @@ tikv_servers:
     raftstore.raft-max-election-timeout-ticks: 1200
     ```
 
--   スケジューリングを構成します。クラスターが有効になったら、 `tiup ctl pd`ツールを使用してスケジューリング ポリシーを変更します。 TiKV Raftレプリカの数を変更します。この数を計画どおりに構成します。この例では、レプリカの数は 5 です。
+-   スケジューリングを構成します。クラスターが有効になったら、 `tiup ctl:<cluster-version> pd`ツールを使用してスケジューリング ポリシーを変更します。 TiKV Raftレプリカの数を変更します。この数を計画どおりに構成します。この例では、レプリカの数は 5 です。
 
     ```yaml
     config set max-replicas 5

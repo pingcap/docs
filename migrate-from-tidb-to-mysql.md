@@ -158,7 +158,7 @@ summary: Learn how to migrate data from TiDB to MySQL-compatible databases.
     アップストリーム クラスターで、次のコマンドを実行して、アップストリーム クラスターからダウンストリーム クラスターへの変更フィードを作成します。
 
     ```shell
-    tiup ctl:v6.1.0 cdc changefeed create --pd=http://127.0.0.1:2379 --sink-uri="mysql://root:@127.0.0.1:3306" --changefeed-id="upstream-to-downstream" --start-ts="434217889191428107"
+    tiup ctl:<cluster-version> cdc changefeed create --pd=http://127.0.0.1:2379 --sink-uri="mysql://root:@127.0.0.1:3306" --changefeed-id="upstream-to-downstream" --start-ts="434217889191428107"
     ```
 
     このコマンドでは、パラメーターは次のとおりです。

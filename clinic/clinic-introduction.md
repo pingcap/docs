@@ -21,8 +21,8 @@ PingCAPクリニックは、クラスタの問題を診断するために次の 
 
     Clinic Server は、クラウドにデプロイされたクラウド サービスです。診断サービスを SaaS モデルで提供することにより、Clinic Server はアップロードされた診断データを受信するだけでなく、データの保存、データの表示、クラスター診断レポートの提供を行うオンライン診断環境としても機能します。 Clinic Server は、保存場所に応じて 2 つの独立したサービスを提供します。
 
-    -   [米国のクリニックサーバー](https://clinic.pingcap.com) : データは米国の AWS に保存されます。
-    -   [中国本土のクリニックサーバー](https://clinic.pingcap.com.cn) : データは中国 (北京) リージョンの AWS に保存されます。
+    -   [海外ユーザー向けクリニックサーバー](https://clinic.pingcap.com) : データは米国の AWS に保存されます。
+    -   [中国本土のユーザー向けクリニックサーバー](https://clinic.pingcap.com.cn) : データは中国 (北京) リージョンの AWS に保存されます。
 
 ## ユーザー シナリオ {#user-scenarios}
 
@@ -76,7 +76,7 @@ PingCAPクリニックは、クラスタの問題を診断するために次の 
 
 -   オンプレミス環境でPingCAPクリニックを使用する
     -   [PingCAPクリニックのクイック スタート](/clinic/quick-start-with-clinic.md)
-    -   [PingCAPクリニックを使用した TiDBクラスタのトラブルシューティング](/clinic/clinic-user-guide-for-tiup.md)
+    -   [PingCAPクリニックを使用したクラスターのトラブルシューティング](/clinic/clinic-user-guide-for-tiup.md)
     -   [PingCAPクリニックの診断データ](/clinic/clinic-data-instruction-for-tiup.md)
 
 -   Kubernetes でPingCAPクリニックを使用する

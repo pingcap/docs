@@ -77,7 +77,7 @@ TiDB のペシミスティック トランザクションは、MySQL のペシ�
 
 -   `Point Get`と`Batch Point Get`番目の演算子がデータを読み取らない場合でも、指定された主キーまたは一意のキーがロックされます。これにより、他のトランザクションが同じ主キーまたは一意のキーにデータをロックまたは書き込むことができなくなります。
 
--   TiDB は`FOR UPDATE OF TABLES`構文をサポートします。複数のテーブルを結合するステートメントの場合、TiDB は`OF TABLES`のテーブルに関連付けられている行に悲観的ロックのみを適用します。
+-   TiDB は`FOR UPDATE OF TABLES`構文をサポートしています。複数のテーブルを結合するステートメントの場合、TiDB は`OF TABLES`のテーブルに関連付けられている行に悲観的ロックのみを適用します。
 
 ## MySQL InnoDB との違い {#difference-with-mysql-innodb}
 
@@ -138,6 +138,20 @@ TiDB は、ペシミスティック トランザクション モードで次の 
 
 -   [コミットされた読み取り](/transaction-isolation-levels.md#read-committed-isolation-level) .この分離レベルは、 [`SET TRANSACTION`](/sql-statements/sql-statement-set-transaction.md)ステートメントを使用して設定できます。
 
+## ペシミスティック トランザクション コミット プロセス {#pessimistic-transaction-commit-process}
+
+トランザクションのコミット処理では、悲観的なトランザクションと楽観的なトランザクションは同じロジックを持ちます。どちらのトランザクションも、2 フェーズ コミット (2PC) モードを採用しています。悲観的なトランザクションの重要な適応は、DML の実行です。
+
+![TiDB pessimistic transaction commit process](/media/pessimistic-transaction-commit.png)
+
+悲観的なトランザクションは、2PC の前に`Acquire Pessimistic Lock`フェーズを追加します。このフェーズには、次の手順が含まれます。
+
+1.  (楽観的トランザクション モードと同じ) TiDB はクライアントから`begin`の要求を受け取り、現在のタイムスタンプはこのトランザクションの start_ts です。
+2.  TiDBサーバーがクライアントから書き込み要求を受け取ると、TiDB サーバーは TiKVサーバーに対してペシミスティック ロック要求を開始し、ロックは TiKVサーバーに永続化されサーバー。
+3.  (楽観的トランザクションモードと同じ) クライアントがコミット要求を送信すると、TiDB は楽観的トランザクションモードと同様に 2 フェーズコミットを実行し始めます。
+
+![Pessimistic transactions in TiDB](/media/pessimistic-transaction-in-tidb.png)
+
 ## パイプライン化されたロック プロセス {#pipelined-locking-process}
 
 悲観的ロックを追加するには、TiKV にデータを書き込む必要があります。ロックを正常に追加したという応答は、 Raftを介して commit および apply した後にのみ TiDB に返すことができます。したがって、楽観的なトランザクションと比較して、悲観的なトランザクション モードでは必然的にレイテンシーが高くなります。
@@ -161,7 +175,7 @@ TiDB は、ペシミスティック トランザクション モードで次の 
 pipelined = false
 ```
 
-TiKV クラスターが v4.0.9 以降の場合、この機能を[TiKV 構成をオンラインで変更する](/dynamic-config.md#modify-tikv-configuration-online)で動的に無効にすることもできます。
+TiKV クラスターが v4.0.9 以降の場合、この機能を[TiKV 構成を動的に変更する](/dynamic-config.md#modify-tikv-configuration-dynamically)で動的に無効にすることもできます。
 
 {{< copyable "" >}}
 
@@ -194,7 +208,7 @@ v6.0.0 では、TiKV はメモリ内ペシミスティック ロックの機能�
 in-memory = false
 ```
 
-この機能を動的に無効にするには、TiKV 構成をオンラインで変更します。
+この機能を動的に無効にするには、TiKV 構成を動的に変更します。
 
 {{< copyable "" >}}
 

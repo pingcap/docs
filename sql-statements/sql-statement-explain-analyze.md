@@ -257,7 +257,7 @@ commit_txn: {prewrite:48.564544ms, wait_prewrite_binlog:47.821579, get_commit_ts
 
 ## MySQL の互換性 {#mysql-compatibility}
 
-`EXPLAIN ANALYZE`は MySQL 8.0 の機能ですが、出力形式と TiDB の潜在的な実行プランの両方が MySQL とは大幅に異なります。
+`EXPLAIN ANALYZE`は MySQL 8.0 の機能ですが、出力形式と TiDB の潜在的な実行計画の両方が MySQL とは大幅に異なります。
 
 ## こちらもご覧ください {#see-also}
 

@@ -57,15 +57,9 @@ MySQL と同様に、TiDB にはシステム テーブルも含まれており�
 
 TiDB は現在、 [`wait_timeout`](/system-variables.md#wait_timeout)と[`interactive_timeout`](/system-variables.md#interactive_timeout)の 2 つのタイムアウトをサポートしています。
 
-### 実稼働環境における TiDB のバージョン管理戦略とは?頻繁なアップグレードを避けるには? {#what-is-the-tidb-version-management-strategy-for-production-environment-how-to-avoid-frequent-upgrade}
+### TiDB のバージョン管理戦略とは? {#what-is-the-tidb-version-management-strategy}
 
-現在、TiDB ではさまざまなバージョンを標準で管理しています。各リリースには、詳細な変更ログと[リリースノート](/releases/release-notes.md) .本番環境でのアップグレードが必要かどうかは、アプリケーション システムによって異なります。アップグレードする前に、以前のバージョンと新しいバージョンの機能の違いについて詳細を確認することをお勧めします。
-
-バージョン番号の説明の例として`Release Version: v1.0.3-1-ga80e796`を取り上げます。
-
--   `v1.0.3`は、標準の GA バージョンを示します。
--   `-1`は、現在のバージョンに 1 つのコミットがあることを示します。
--   `ga80e796`はバージョン`git-hash`を示します。
+TiDB のバージョン管理の詳細については、 [TiDB のバージョン管理](/releases/versioning.md)を参照してください。
 
 ### TiDB クラスターをデプロイして維持するための運用コストはどうですか? {#how-about-the-operating-cost-of-deploying-and-maintaining-a-tidb-cluster}
 
@@ -77,9 +71,9 @@ TiDB は、低コストで簡単にクラスターを管理できるいくつか
 
 ### さまざまな TiDB マスター バージョンの違いは何ですか? {#what-s-the-difference-between-various-tidb-master-versions}
 
-TiDB コミュニティは非常に活発です。エンジニアはバグの最適化と修正を続けています。したがって、TiDB のバージョンは非常に高速に更新されます。最新バージョンの情報を入手したい場合は、 [TiDB リリースのタイムライン](/releases/release-timeline.md)を参照してください。
+TiDB コミュニティは非常に活発です。エンジニアは、機能の最適化とバグの修正を続けています。したがって、TiDB のバージョンは非常に高速に更新されます。最新バージョンの情報を入手したい場合は、 [TiDB リリースのタイムライン](/releases/release-timeline.md)を参照してください。
 
-[TiUP を使用して TiDB をデプロイする](/production-deployment-using-tiup.md)を推奨します。 TiDB は、バージョン番号の管理が一元化されています。次の 2 つの方法を使用して、バージョン番号を表示できます。
+TiDB [TiUPの使用](/production-deployment-using-tiup.md)または[TiDB Operatorの使用](https://docs.pingcap.com/tidb-in-kubernetes/stable)をデプロイすることをお勧めします。 TiDB は、バージョン番号の管理が一元化されています。バージョン番号は、次のいずれかの方法で表示できます。
 
 -   `select tidb_version()`
 -   `tidb-server -V`
@@ -93,7 +87,7 @@ TiDB コミュニティは非常に活発です。エンジニアはバグの最
 オンライン サービスを中断することなく、TiDB クラスターをスケールアウトできます。
 
 -   [TiUP](/production-deployment-using-tiup.md)を使用してクラスターをデプロイする場合は、 [TiUP を使用して TiDBクラスタをスケーリングする](/scale-tidb-using-tiup.md)を参照してください。
--   Kubernetes で[TiDB Operator](/tidb-operator-overview.md)を使用してクラスターをデプロイする場合は、 [Kubernetes で TiDB を手動でスケーリングする](https://docs.pingcap.com/tidb-in-kubernetes/stable/scale-a-tidb-cluster)を参照してください。
+-   クラスターが[TiDB Operator](/tidb-operator-overview.md)を使用して Kubernetes にデプロイされている場合は、 [Kubernetes で TiDB を手動でスケーリングする](https://docs.pingcap.com/tidb-in-kubernetes/stable/scale-a-tidb-cluster)を参照してください。
 
 ### TiDB を水平方向にスケーリングするには? {#how-to-scale-tidb-horizontally}
 
@@ -340,7 +334,7 @@ TiKV は、RocksDB のカラムファミリー (CF) 機能を実装します。�
 ### TiKV チャンネルがいっぱいなのはなぜですか? {#why-is-the-tikv-channel-full}
 
 -   Raftstore スレッドが遅すぎるか、I/O によってブロックされています。 Raftstore の CPU 使用状況を確認できます。
--   TiKV はビジー状態 (CPU、ディスク I/O など) であり、処理できません。
+-   TiKV はビジー状態 (CPU やディスク I/O など) であり、処理できません。
 
 ### TiKV がリージョンリーダーを頻繁に切り替えるのはなぜですか? {#why-does-tikv-frequently-switch-region-leader}
 
@@ -425,7 +419,7 @@ TiKV のメモリ使用量は主に RocksDB のブロック キャッシュに�
 
 ### Sysbenchを使ったTiDBの性能テスト結果は？ {#what-is-the-performance-test-result-for-tidb-using-sysbench}
 
-多くのユーザーは、最初はベンチマーク テストや、TiDB と MySQL の比較テストを行う傾向にあります。同様の公式テストも実施しており、テスト データには多少の偏りがありますが、テスト結果は全体として一貫していることがわかりました。 TiDB のアーキテクチャは MySQL とは大きく異なるため、ベンチマーク ポイントを見つけるのは困難です。提案は次のとおりです。
+多くのユーザーは、最初はベンチマーク テストや、TiDB と MySQL の比較テストを行う傾向があります。同様の公式テストも実施しており、テスト データには多少の偏りがありますが、テスト結果は全体として一貫していることがわかりました。 TiDB のアーキテクチャは MySQL とは大きく異なるため、ベンチマーク ポイントを見つけるのは困難です。提案は次のとおりです。
 
 -   ベンチマーク テストに時間をかけすぎないでください。 TiDB を使用するシナリオの違いに注意してください。
 -   [Sysbenchを使ったTiDBの性能テスト結果](/benchmark/v3.0-performance-benchmarking-with-sysbench.md)を参照してください。

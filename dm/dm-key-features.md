@@ -1,9 +1,9 @@
 ---
-title: Key Features
+title: Key Features of TiDB Data Migration
 summary: Learn about the key features of DM and appropriate parameter configurations.
 ---
 
-# 主な機能 {#key-features}
+# TiDB データ移行の主な機能 {#key-features-of-tidb-data-migration}
 
 このドキュメントでは、TiDB Data Migration (DM) によって提供されるデータ移行機能について説明し、適切なパラメーター構成を紹介します。
 

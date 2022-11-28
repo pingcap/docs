@@ -9,7 +9,9 @@ summary: Learn the `PROCESSLIST` information_schema table.
 
 `PROCESSLIST`テーブルには、 `SHOW PROCESSLIST`には存在しない追加の列があります。
 
+-   SQL ステートメントのダイジェストを表示する`DIGEST`列。
 -   処理中のリクエストによって使用されたメモリをバイト単位で表示する`MEM`列。
+-   ディスク使用量をバイト単位で表示する`DISK`列。
 -   トランザクションの開始時刻を示す`TxnStart`列
 
 {{< copyable "" >}}
@@ -30,11 +32,13 @@ DESC processlist;
 | COMMAND  | varchar(16)         | NO   |      |         |       |
 | TIME     | int(7)              | NO   |      | 0       |       |
 | STATE    | varchar(7)          | YES  |      | NULL    |       |
-| INFO     | binary(512)         | YES  |      | NULL    |       |
+| INFO     | longtext            | YES  |      | NULL    |       |
+| DIGEST   | varchar(64)         | YES  |      |         |       |
 | MEM      | bigint(21) unsigned | YES  |      | NULL    |       |
+| DISK     | bigint(21) unsigned | YES  |      | NULL    |       |
 | TxnStart | varchar(64)         | NO   |      |         |       |
 +----------+---------------------+------+------+---------+-------+
-10 rows in set (0.00 sec)
+12 rows in set (0.00 sec)
 ```
 
 {{< copyable "" >}}
@@ -68,7 +72,9 @@ TxnStart:
 -   TIME: `PROCESS`の現在の実行時間 (秒単位)。
 -   STATE: 現在の接続状態。
 -   情報: 要求されたステートメントが処理されています。
+-   DIGEST: SQL ステートメントのダイジェスト。
 -   MEM: 処理中のリクエストが使用するメモリ (バイト単位)。
+-   DISK: ディスクの使用量 (バイト単位)。
 -   TxnStart: トランザクションの開始時刻。
 
 ## CLUSTER_PROCESSLIST {#cluster-processlist}

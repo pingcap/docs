@@ -249,7 +249,7 @@ SEVERITY  | critical
 DETAILS   | the cluster has 2 different tidb versions, execute the sql to see more detail: SELECT * FROM information_schema.cluster_info WHERE type='tidb'
 ```
 
-### <code>critical-error</code>診断ルール {#code-critical-error-code-diagnostic-rule}
+### <code>critical-error</code>診断規則 {#code-critical-error-code-diagnostic-rule}
 
 `critical-error`つの診断ルールで、次の 2 つの診断ルールが実行されます。
 

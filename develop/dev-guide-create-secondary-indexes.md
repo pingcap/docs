@@ -11,7 +11,7 @@ summary: Learn steps, rules, and examples to create a secondary index.
 
 セカンダリ インデックスを作成する前に、次の操作を行います。
 
--   [TiDB Cloud(開発者層) で TiDBクラスタを構築する](/develop/dev-guide-build-cluster-in-cloud.md) .
+-   [TiDB Cloud(サーバーレス層) で TiDBクラスタを構築する](/develop/dev-guide-build-cluster-in-cloud.md) .
 -   [スキーマ設計の概要](/develop/dev-guide-schema-design-overview.md)を読んでください。
 -   [データベースを作成する](/develop/dev-guide-create-database.md) .
 -   [テーブルを作成する](/develop/dev-guide-create-table.md) .

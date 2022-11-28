@@ -5,9 +5,29 @@ summary: Learn how to connect to TiDB.
 
 # TiDB に接続する {#connect-to-tidb}
 
-TiDB はMySQL 5.7プロトコルと高い互換性があります。クライアント リンク パラメータの完全なリストについては、 [MySQL クライアント オプション](https://dev.mysql.com/doc/refman/5.7/en/mysql-command-options.html)を参照してください。
+TiDB は MySQL プロトコルと高い互換性があります。クライアント リンク パラメータの完全なリストについては、 [MySQL クライアント オプション](https://dev.mysql.com/doc/refman/5.7/en/mysql-command-options.html)を参照してください。
 
 TiDB は[MySQL クライアント/サーバー プロトコル](https://dev.mysql.com/doc/internals/en/client-server-protocol.html)をサポートします。これにより、ほとんどのクライアント ドライバーと ORM フレームワークは、MySQL に接続するのと同じように TiDB に接続できます。
+
+個人の好みに応じて、MySQL クライアントまたは MySQL シェルを使用することを選択できます。
+
+## MySQL クライアント {#mysql-client}
+
+TiDB のコマンドライン ツールとして使用できる MySQL クライアントを使用して TiDB に接続できます。 MySQL クライアントをインストールするには、以下の YUM ベースの Linux ディストリビューションの手順に従ってください。
+
+{{< copyable "" >}}
+
+```shell
+sudo yum install mysql
+```
+
+インストール後、次のコマンドを使用して TiDB に接続できます。
+
+{{< copyable "" >}}
+
+```shell
+mysql --host <tidb_server_host> --port 4000 -u root -p --comments
+```
 
 ## MySQL シェル {#mysql-shell}
 
@@ -16,12 +36,8 @@ TiDB のコマンドライン ツールとして使用できる MySQL Shell を�
 {{< copyable "" >}}
 
 ```shell
-mysql --host <tidb_server_host> --port 4000 -u root -p --comments
+mysqlsh --sql mysql://root@<tidb_server_host>:4000
 ```
-
-> **ノート：**
->
-> バージョン 5.7.7 より前の MySQL Shell は、デフォルトで[オプティマイザーのヒント](/optimizer-hints.md#optimizer-hints)をクリアします。以前の MySQL Shell バージョンで Hint 構文を使用する必要がある場合は、クライアントの起動時に`--comments`オプションを追加します。
 
 ## JDBC {#jdbc}
 

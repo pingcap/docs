@@ -167,7 +167,7 @@ Query OK, 0 rows affected (2 min 10.23 sec)
 
 > **ノート：**
 >
-> [`ADMIN SHOW DDL JOBS`](/sql-statements/sql-statement-admin.md)コマンドを使用して、DDL ジョブの進行状況を監視できます。 TiDB のデフォルトは慎重に選択されているため、インデックスを追加しても本番環境のワークロードに大きな影響はありません。テスト環境では、 [`tidb_ddl_reorg_batch_size`](/system-variables.md#tidb_ddl_reorg_batch_size)と[`tidb_ddl_reorg_worker_cnt`](/system-variables.md#tidb_ddl_reorg_worker_cnt)の値を増やすことを検討してください。リファレンス システムでは、バッチ サイズが`10240`でワーカー数が`32`の場合、デフォルトの 10 倍のパフォーマンス向上を達成できます。
+> [`ADMIN SHOW DDL JOBS`](/sql-statements/sql-statement-admin-show-ddl.md)コマンドを使用して、DDL ジョブの進行状況を監視できます。 TiDB のデフォルトは慎重に選択されているため、インデックスを追加しても本番環境のワークロードに大きな影響はありません。テスト環境では、 [`tidb_ddl_reorg_batch_size`](/system-variables.md#tidb_ddl_reorg_batch_size)と[`tidb_ddl_reorg_worker_cnt`](/system-variables.md#tidb_ddl_reorg_worker_cnt)の値を増やすことを検討してください。リファレンス システムでは、バッチ サイズが`10240`でワーカー数が`32`の場合、デフォルトの 10 倍のパフォーマンス向上を達成できます。
 
 インデックスを追加したら、クエリを`EXPLAIN`で繰り返すことができます。次の出力では、新しい実行計画が選択され、 `TableFullScan`と`Selection`の演算子が削除されていることがわかります。
 

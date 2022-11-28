@@ -5,26 +5,23 @@ summary: Learn how to configure Amazon Simple Storage Service (Amazon S3) access
 
 # Amazon S3 アクセスと GCS アクセスの設定 {#configure-amazon-s3-access-and-gcs-access}
 
-ソース データが Amazon S3 または GCS バケットに保存されている場合は、データをTiDB Cloudにインポートまたは移行する前に、バケットへのクロスアカウント アクセスを構成する必要があります。このドキュメントでは、これを行う方法について説明します。
-
--   [Amazon S3 アクセスの構成](#configure-amazon-s3-access)
--   [GCS アクセスの構成](#configure-gcs-access)
+ソース データが Amazon S3 または Google Cloud Storage (GCS) バケットに保存されている場合は、データをTiDB Cloudにインポートまたは移行する前に、バケットへのクロスアカウント アクセスを構成する必要があります。このドキュメントでは、これを行う方法について説明します。
 
 ## Amazon S3 アクセスの構成 {#configure-amazon-s3-access}
 
-TiDB Cloudが Amazon S3 バケットのソース データにアクセスできるようにするには、次の手順TiDB Cloudのバケット アクセスを設定し、Role-ARN を取得します。プロジェクト内の 1 つの TiDB クラスターの設定が完了すると、そのプロジェクト内のすべての TiDB クラスターが同じ Role-ARN を使用して Amazon S3 バケットにアクセスできるようになります。
+TiDB Cloudが Amazon S3 バケットのソース データにアクセスできるようにするには、次の手順TiDB Cloudのバケット アクセスを設定し、Role-ARN を取得します。
 
 1.  TiDB Cloudコンソールで、ターゲット TiDB クラスターのTiDB Cloudアカウント ID と外部 ID を取得します。
 
     1.  TiDB Cloudコンソールで、ターゲット プロジェクトを選択し、[**クラスター**] ページに移動します。
 
-    2.  ターゲット クラスターを見つけて、クラスター領域の右上隅にある [**データのインポート**] をクリックします。 [<strong>データ インポート タスク]</strong>ページが表示されます。
+    2.  ターゲット クラスターを見つけて、クラスター領域の右上隅にある [ **...** ] をクリックし、 [<strong>データのインポート</strong>] を選択します。 [<strong>データのインポート]</strong>ページが表示されます。
 
         > **ヒント：**
         >
-        > または、[**クラスター**] ページでクラスターの名前をクリックし、右上隅にある [<strong>データのインポート</strong>] をクリックすることもできます。
+        > または、[**クラスター**] ページでクラスターの名前をクリックし、[インポート] 領域で [<strong>データ</strong>の<strong>インポート</strong>] をクリックすることもできます。
 
-    3.  [**データ インポート タスク**] ページで、[ <strong>AWS IAMポリシー設定を表示</strong>] をクリックして、 TiDB Cloudアカウント ID とTiDB Cloud外部 ID を取得します。後で使用するために、これらの ID をメモしておいてください。
+    3.  [**データのインポート**] ページで、[<strong>必要な Role-ARN を取得するためのガイド</strong>] をクリックして、 TiDB Cloudアカウント ID とTiDB Cloud外部 ID を取得します。後で使用するために、これらの ID をメモしておいてください。
 
 2.  AWS マネジメント コンソールで、Amazon S3 バケットの管理ポリシーを作成します。
 
@@ -92,7 +89,7 @@ TiDB Cloudが Amazon S3 バケットのソース データにアクセスでき�
 
         -   [**信頼されたエンティティ タイプ**] で、[ <strong>AWS アカウント]</strong>を選択します。
         -   **An AWS account**で、 <strong>Another AWS account</strong>を選択し、 TiDB Cloudアカウント ID を<strong>Account ID</strong>フィールドに貼り付けます。
-        -   [**オプション**] で、[<strong>外部 ID を要求する (サード パーティがこのロールを引き受ける場合のベスト プラクティス</strong>)] をクリックし、 TiDB Cloudの外部 ID を [<strong>外部 ID</strong> ] フィールドに貼り付けます。
+        -   [**オプション**] で、[<strong>外部 ID を要求する (サード パーティがこのロールを引き受ける場合のベスト プラクティス</strong>)] をクリックし、 TiDB Cloudの外部 ID を [<strong>外部 ID</strong> ] フィールドに貼り付けます。 「外部 ID が必要」なしでロールが作成された場合、プロジェクト内の 1 つの TiDB クラスターの設定が完了すると、そのプロジェクト内のすべての TiDB クラスターは同じ Role-ARN を使用して Amazon S3 バケットにアクセスできます。アカウント ID と外部 ID を使用してロールが作成された場合、対応する TiDB クラスターのみがバケットにアクセスできます。
 
     3.  [**次へ**] をクリックしてポリシー リストを開き、作成したポリシーを選択して、[<strong>次へ</strong>] をクリックします。
 
@@ -102,41 +99,72 @@ TiDB Cloudが Amazon S3 バケットのソース データにアクセスでき�
 
         ![Copy AWS role ARN](/media/tidb-cloud/aws-role-arn.png)
 
-4.  TiDB Cloudコンソールで、 TiDB Cloudアカウント ID と外部 ID を取得する**Data Import Task**ページに移動し、ロール ARN を<strong>Role ARN</strong>フィールドに貼り付けます。
+4.  TiDB Cloudコンソールで、 TiDB Cloudアカウント ID と外部 ID を取得する**データ インポート**ページに移動し、ロール ARN を<strong>ロール ARN</strong>フィールドに貼り付けます。
 
 ## GCS アクセスの構成 {#configure-gcs-access}
 
-TiDB クラウドが GCS バケット内のソース データにアクセスできるようにするには、GCP プロジェクトと GCS バケット ペアのサービスとして各TiDB Cloudの GCS アクセスを構成する必要があります。プロジェクト内の 1 つのクラスタの構成が完了すると、そのプロジェクト内のすべてのデータベース クラスタが GCS バケットにアクセスできるようになります。
+TiDB Cloudが GCS バケット内のソース データにアクセスできるようにするには、バケットの GCS アクセスを構成する必要があります。プロジェクト内の 1 つの TiDB クラスターの構成が完了すると、そのプロジェクト内のすべての TiDB クラスターが GCS バケットにアクセスできるようになります。
 
-1.  ターゲットの TiDB クラスターの Google Cloud サービス アカウント ID を取得します。
+1.  TiDB Cloudコンソールで、ターゲット TiDB クラスターの Google Cloud サービス アカウント ID を取得します。
 
-    1.  TiDB Cloud管理コンソールで、Google Cloud Platform にデプロイされたターゲット プロジェクトとターゲット クラスターを選択し、右上隅にある [**データのインポート**] をクリックします。
-    2.  [ **Google Cloud サービス アカウント ID を表示]**をクリックし、サービス アカウント ID をコピーします。
+    1.  TiDB Cloudコンソールで、ターゲット プロジェクトを選択し、[**クラスター**] ページに移動します。
 
-2.  Google Cloud Platform (GCP) 管理コンソールで、[ **IAM &amp; Admin** ] &gt; [ <strong>Roles</strong> ] に移動し、ストレージ コンテナーの次の読み取り専用権限を持つロールが存在するかどうかを確認します。
+    2.  ターゲット クラスターを見つけて、クラスター領域の右上隅にある [ **...** ] をクリックし、 [<strong>データのインポート</strong>] を選択します。 [<strong>データのインポート]</strong>ページが表示されます。
 
-    -   storage.buckets.get
-    -   storage.objects.get
-    -   storage.objects.list
+        > **ヒント：**
+        >
+        > または、[**クラスター**] ページでクラスターの名前をクリックし、[インポート] 領域で [<strong>データ</strong>の<strong>インポート</strong>] をクリックすることもできます。
 
-    はいの場合は、次の手順でターゲット TiDB クラスターに一致するロールを使用できます。そうでない場合は、[ **IAM &amp; Admin** ] &gt; [ <strong>Roles</strong> ] &gt; [ <strong>CREATE ROLE</strong> ] に移動して、ターゲットの TiDB クラスターの役割を定義します。
+    3.  [**データのインポート**] ページで、[ <strong>Google Cloud サービス アカウント ID を表示</strong>] をクリックし、後で使用できるようにサービス アカウント ID をコピーします。
 
-3.  **Cloud Storage** &gt; <strong>Browser</strong>に移動し、 TiDB Cloudがアクセスする GCS バケットを選択して、 <strong>SHOW INFO PANEL</strong>をクリックします。
+2.  Google Cloud Platform (GCP) 管理コンソールで、GCS バケットのIAMロールを作成します。
 
-    パネルが表示されます。
+    1.  [GCP 管理コンソール](https://console.cloud.google.com/)にサインインします。
 
-4.  パネルで、[**プリンシパル**を追加] をクリックします。
+    2.  [役割](https://console.cloud.google.com/iam-admin/roles)ページに移動し、[ **CREATE ROLE** ] をクリックします。
 
-    プリンシパルを追加するためのダイアログ ボックスが表示されます。
+        ![Create a role](/media/tidb-cloud/gcp-create-role.png)
 
-5.  ダイアログ ボックスで、次の手順を実行します。
+    3.  役割の名前、説明、ID、および役割の開始段階を入力します。ロールの作成後にロール名を変更することはできません。
 
-    1.  [ **New Principals** ] フィールドに、ターゲット TiDB クラスタの Google Cloud サービス アカウント ID を貼り付けます。
-    2.  [**役割**] ドロップダウン リストで、ターゲット TiDB クラスターの役割を選択します。
-    3.  [**保存]**をクリックします。
+    4.  [**権限**を追加] をクリックします。
 
-TiDB Cloudクラスターが GCS バケットにアクセスできるようになりました。
+    5.  次の読み取り専用アクセス許可を役割に追加し、[**追加**] をクリックします。
 
-> **ノート：**
->
-> TiDB Cloudへのアクセスを削除するには、追加したプリンシパルを削除するだけです。
+        -   storage.buckets.get
+        -   storage.objects.get
+        -   storage.objects.list
+
+        アクセス許可名をフィルター クエリとして [**プロパティ名または値を入力]**フィールドにコピーし、フィルター結果で名前を選択することができます。 3 つのアクセス許可を追加するには、アクセス許可名の間に<strong>OR</strong>を使用できます。
+
+        ![Add permissions](/media/tidb-cloud/gcp-add-permissions.png)
+
+3.  [バケツ](https://console.cloud.google.com/storage/browser)ページに移動し、 TiDB Cloudにアクセスさせたい GCS バケットの名前をクリックします。
+
+4.  **バケットの詳細**ページで、[ <strong>PERMISSIONS</strong> ] タブをクリックし、[ <strong>GRANT ACCESS</strong> ] をクリックします。
+
+    ![Grant Access to the bucket ](/media/tidb-cloud/gcp-bucket-permissions.png)
+
+5.  次の情報を入力してバケットへのアクセスを許可し、[**保存**] をクリックします。
+
+    -   [ **New Principals** ] フィールドに、ターゲット TiDB クラスタの Google Cloud サービス アカウント ID を貼り付けます。
+
+    -   **[ロールの選択]**ドロップダウン リストで、作成したばかりのIAMロールの名前を入力し、フィルター結果から名前を選択します。
+
+    > **ノート：**
+    >
+    > TiDB Cloudへのアクセスを削除するには、付与したアクセスを削除するだけです。
+
+6.  **バケットの詳細**ページで、[<strong>オブジェクト</strong>] タブをクリックします。
+
+    ファイルの gsutil URI をコピーする場合は、ファイルを選択し、[**オブジェクト オーバーフロー メニューを開く**] をクリックし、[ <strong>gsutil URI をコピー</strong>] をクリックします。
+
+    ![Get bucket URI](/media/tidb-cloud/gcp-bucket-uri01.png)
+
+    フォルダの gsutil URI を使用する場合は、フォルダを開き、フォルダ名に続く [コピー] ボタンをクリックしてフォルダ名をコピーします。その後、フォルダの正しい URI を取得するために、名前の先頭に`gs://`を、末尾に`/`を追加する必要があります。
+
+    たとえば、フォルダー名が`tidb-cloud-source-data`の場合、URI として`gs://tidb-cloud-source-data/`を使用する必要があります。
+
+    ![Get bucket URI](/media/tidb-cloud/gcp-bucket-uri02.png)
+
+7.  TiDB Cloudコンソールで、Google Cloud サービス アカウント ID を取得する**データ インポート**ページに移動し、GCS バケット gsutil URI を<strong>バケット gsutil URI</strong>フィールドに貼り付けます。たとえば、 `gs://tidb-cloud-source-data/`を貼り付けます。

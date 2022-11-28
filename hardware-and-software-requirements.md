@@ -18,14 +18,15 @@ v6.1.1 から、TiDB は、オペレーティング システムと CPU アー�
 
     | オペレーティングシステム                                                                         | サポートされている CPU アーキテクチャ           |
     | :----------------------------------------------------------------------------------- | :------------------------------ |
-    | <li>Red Hat Enterprise Linux 8.4 以降の 8.x バージョン</li><li>CentOS 8.4 以降の 8.x バージョン</li> | <li>x86\_64</li><li>アーム 64</li> |
+    | Red Hat Enterprise Linux 8.4 以降の 8.x バージョン                                           | <li>x86\_64</li><li>アーム 64</li> |
     | <li>Red Hat Enterprise Linux 7.3 以降の 7.x バージョン</li><li>CentOS 7.3 以降の 7.x バージョン</li> | <li>x86\_64</li><li>アーム 64</li> |
+    | アマゾンリナックス 2                                                                          | <li>x86\_64</li><li>アーム 64</li> |
     | キリン オイラー V10 SP1/SP2                                                                 | <li>x86\_64</li><li>アーム 64</li> |
     | UOS V20                                                                              | <li>x86\_64</li><li>アーム 64</li> |
 
     > **ノート：**
     >
-    > [CentOS Linux EOL](https://www.centos.org/centos-linux-eol/)によると、CentOS のアップストリーム サポートは 2021 年 12 月 31 日に終了しました。
+    > [CentOS Linux EOL](https://www.centos.org/centos-linux-eol/)によると、CentOS Linux 8 のアップストリーム サポートは 2021 年 12 月 31 日に終了しました。CentOS ストリーム 8 は、CentOS 組織によって引き続きサポートされます。
 
 -   次のオペレーティング システムと CPU アーキテクチャの組み合わせでは、TiDB をコンパイル、ビルド、および展開できます。さらに、OLTP、OLAP、およびデータ ツールの基本機能も使用できます。ただし、TiDB**はエンタープライズ レベルの製品品質を保証しません**。
 
@@ -34,6 +35,7 @@ v6.1.1 から、TiDB は、オペレーティング システムと CPU アー�
     | macOS Catalina 以降                         | <li>x86\_64</li><li>アーム 64</li> |
     | Oracle Enterprise Linux 7.3 以降の 7.x バージョン | x86_64                          |
     | Ubuntu LTS 18.04 以降                       | x86_64                          |
+    | CentOS 8 ストリーム                            | <li>x86\_64</li><li>アーム 64</li> |
     | Debian 9 (ストレッチ) 以降                       | x86_64                          |
     | Fedora 35 以降                              | x86_64                          |
     | v15.3 以降の openSUSE Leap (Tumbleweed を除く)  | x86_64                          |
@@ -175,7 +177,7 @@ TiCDC を展開する前に、1 TB を超える PCIe-SSD ディスクに TiCDC �
 |      Drainer      |    8249   | Drainer通信ポート                                          |
 |       TiCDC       |    8300   | TiCDC通信ポート                                            |
 |       モニタリング      |    9090   | Prometheus サービスの通信ポート                                 |
-|       モニタリング      |   20120   | NgMonitoring サービスの通信ポート                               |
+|       モニタリング      |   12020   | NgMonitoring サービスの通信ポート                               |
 |   Node_exporter   |    9100   | すべての TiDB クラスター ノードのシステム情報を報告するための通信ポート               |
 | Blackbox_exporter |    9115   | Blackbox_exporter 通信ポート。TiDB クラスター内のポートを監視するために使用されます |
 |       グラファナ       |    3000   | 外部 Web 監視サービスおよびクライアント (ブラウザ) アクセス用のポート               |

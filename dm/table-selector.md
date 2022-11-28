@@ -1,9 +1,9 @@
 ---
-title: Table Selector
+title: Table Selector of TiDB Data Migration
 summary: Learn about Table Selector used by the table routing, binlog event filtering, and column mapping rule of Data Migration.
 ---
 
-# テーブルセレクター {#table-selector}
+# TiDB データ移行のテーブル セレクター {#table-selector-of-tidb-data-migration}
 
 テーブル セレクターは、スキーマ/テーブルの[ワイルドカード文字](https://en.wikipedia.org/wiki/Wildcard_character)に基づく一致ルールを提供します。指定したテーブルに一致させるには、 `schema-pattern` / `table-pattern`を構成します。
 

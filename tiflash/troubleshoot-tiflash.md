@@ -78,12 +78,6 @@ summary: Learn common operations when you troubleshoot a TiFlash cluster.
 
 6.  マシンの残りのディスク容量 (TiFlash ノードの`store`がある場所) が十分かどうかを確認します。デフォルトでは、残りのディスク容量が`store`の容量の 20% 未満の場合 (これは`low-space-ratio`パラメーターによって制御されます)、PD はこの TiFlash ノードにデータをスケジュールできません。
 
-## TiFlash のクエリ時間が不安定で、エラー ログに多くの<code>Lock Exception</code>メッセージが出力される {#tiflash-query-time-is-unstable-and-the-error-log-prints-many-code-lock-exception-code-messages}
-
-これは、クラスターに大量のデータが書き込まれ、TiFlash クエリでロックが発生し、クエリの再試行が必要になるためです。
-
-TiDB では、クエリのタイムスタンプを 1 秒前に設定できます。たとえば、現在の時刻が「2020-04-08 20:15:01」の場合、クエリを実行する前に`set @@tidb_snapshot='2020-04-08 20:15:00';`を実行できます。これにより、TiFlash クエリがロックに遭遇することが少なくなり、不安定なクエリ時間のリスクが軽減されます。
-
 ## 一部のクエリが<code>Region Unavailable</code>エラーを返す {#some-queries-return-the-code-region-unavailable-code-error}
 
 TiFlash の負荷が重すぎて、TiFlash データのレプリケーションが遅れる原因となる場合、一部のクエリで`Region Unavailable`エラーが返されることがあります。

@@ -1,9 +1,9 @@
 ---
-title: Handle Alerts
+title: Handle Alerts in TiDB Data Migration
 summary: Understand how to deal with the alert information in DM.
 ---
 
-# アラートの処理 {#handle-alerts}
+# TiDB データ移行でアラートを処理する {#handle-alerts-in-tidb-data-migration}
 
 このドキュメントでは、DM でアラート情報を処理する方法を紹介します。
 

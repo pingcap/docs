@@ -67,12 +67,12 @@ tiup install tidb
 tiup install tidb:nightly
 ```
 
-例 3: TiUP を使用して TiKV v6.1.0 をインストールします。
+例 3: TiUP を使用して TiKV v6.1.2 をインストールします。
 
 {{< copyable "" >}}
 
 ```shell
-tiup install tikv:v6.1.0
+tiup install tikv:v6.1.2
 ```
 
 ## コンポーネントのアップグレード {#upgrade-components}
@@ -125,12 +125,12 @@ Flags:
 
 同じコンポーネントを複数回起動し、以前の作業ディレクトリを再利用する場合は、コンポーネントの起動時に`--tag`を使用して同じ名前を指定できます。タグを指定すると、インスタンスの終了時に作業ディレクトリが*自動的に削除されないため*、作業ディレクトリを再利用するのに便利です。
 
-例 1: TiDB v6.1.0 を操作します。
+例 1: TiDB v6.1.2 を操作します。
 
 {{< copyable "" >}}
 
 ```shell
-tiup tidb:v6.1.0
+tiup tidb:v6.1.2
 ```
 
 例 2: TiKV が動作するタグを指定します。
@@ -216,12 +216,12 @@ tiup uninstall [component][:version] [flags]
 -   バージョンが無視される場合、 `--all`を追加すると、このコンポーネントのすべてのバージョンがアンインストールされます。
 -   バージョンとコンポーネントの両方が無視される場合、 `--all`を追加すると、すべてのバージョンのすべてのコンポーネントがアンインストールされます。
 
-例 1: TiDB v6.1.0 をアンインストールします。
+例 1: TiDB v6.1.2 をアンインストールします。
 
 {{< copyable "" >}}
 
 ```shell
-tiup uninstall tidb:v6.1.0
+tiup uninstall tidb:v6.1.2
 ```
 
 例 2: すべてのバージョンの TiKV をアンインストールします。

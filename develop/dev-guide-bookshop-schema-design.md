@@ -58,10 +58,8 @@ tiup demo bookshop prepare
 
 たとえば、 TiDB Cloud上のデータベースに接続する場合は、次のように接続情報を指定できます。
 
-{{< copyable "" >}}
-
 ```shell
-tiup demo bookshop prepare -U root -H tidb.xxx.yyy.ap-northeast-1.prod.aws.tidbcloud.com -P 4000 -p
+tiup demo bookshop prepare -U <username> -H <endpoint> -P 4000 -p <password>
 ```
 
 #### データ量を設定する {#set-the-data-volume}
@@ -84,8 +82,6 @@ tiup demo bookshop prepare -U root -H tidb.xxx.yyy.ap-northeast-1.prod.aws.tidbc
 -   `--ratings`パラメータによる 1,000,000 行の評価レコード
 -   `--orders`パラメータによる 1,000,000 行の注文レコード
 
-{{< copyable "" >}}
-
 ```shell
 tiup demo bookshop prepare --users=200000 --books=500000 --authors=100000 --ratings=1000000 --orders=1000000 --drop-tables
 ```
@@ -94,25 +90,27 @@ tiup demo bookshop prepare --users=200000 --books=500000 --authors=100000 --rati
 
 ### 方法 2: TiDB Cloudインポート経由 {#method-2-via-tidb-cloud-import}
 
-TiDB Cloudのデータベースの詳細ページで、[**インポート**] ボタンをクリックして、[<strong>データのインポート タスク</strong>] ページに入ります。このページで、次の手順を実行して Bookshop サンプル データを AWS S3 からTiDB Cloudにインポートします。
+TiDB Cloudのクラスター詳細ページで、[インポート] 領域の [**データ**の<strong>インポート</strong>] をクリックして、[<strong>データのインポート</strong>] ページに入ります。このページで、次の手順を実行して Bookshop サンプル データを AWS S3 からTiDB Cloudにインポートします。
 
-1.  次の**バケット URL**と<strong>Role-ARN</strong>を対応する入力ボックスにコピーします。
+1.  [**データ形式]**で [ <strong>SQL ファイル</strong>] を選択します。
 
-    **バケット URL** :
+2.  次の**バケット URI**と<strong>ロール ARN</strong>を対応する入力ボックスにコピーします。
 
-    {{< copyable "" >}}
+    **バケット URI** :
 
     ```
     s3://developer.pingcap.com/bookshop/
     ```
 
-    **Role-ARN** :
-
-    {{< copyable "" >}}
+    **ロール ARN** :
 
     ```
     arn:aws:iam::494090988690:role/s3-tidb-cloud-developer-access
     ```
+
+3.  [**次へ**] をクリックして、 <strong>[ファイルとフィルター]</strong>の手順に進み、インポートするファイルの情報を確認します。
+
+4.  [**次へ]**を再度クリックして [<strong>プレビュー]</strong>手順に進み、インポートするデータのプレビューを確認します。
 
     この例では、次のデータが事前に生成されます。
 
@@ -122,31 +120,13 @@ TiDB Cloudのデータベースの詳細ページで、[**インポート**] ボ
     -   1,000,000 行の評価レコード
     -   1,000,000 行の注文レコード
 
-2.  **Bucket リージョン**に<strong>US West (Oregon)</strong>を選択します。
+5.  [**インポートの開始]**をクリックしてインポート プロセスを開始し、 TiDB Cloudがインポートを完了するまで待ちます。
 
-3.  **データ形式**に<strong>TiDB Dumpling</strong>を選択します。
-
-    ![Import Bookshop data in TiDB Cloud](/media/develop/tidb_cloud_import_bookshop_data.png)
-
-4.  データベースのログイン情報を入力します。
-
-5.  [**インポート**] ボタンをクリックして、インポートを確認します。
-
-6.  TiDB Cloudがインポートを完了するまで待ちます。
-
-    ![Bookshop data importing](/media/develop/importing_bookshop_data.png)
-
-    インポート プロセス中に次のエラー メッセージが表示された場合は、 `DROP DATABASE bookshop;`コマンドを実行して、以前に作成したサンプル データベースをクリアしてから、データを再度インポートします。
-
-    > テーブル [ `bookshop` . `authors` `bookshop` `book_authors` `bookshop` `books` `bookshop` `orders` `bookshop` `ratings` `bookshop` `users` ] は空ではありません。
-
-TiDB Cloudの詳細については、 [TiDB Cloudのドキュメント](https://docs.pingcap.com/tidbcloud)を参照してください。
+データをTiDB Cloudにインポートまたは移行する方法の詳細については、 [TiDB Cloud移行の概要](https://docs.pingcap.com/tidbcloud/tidb-cloud-migration-overview)を参照してください。
 
 ### データのインポート ステータスをビューする {#view-data-import-status}
 
 インポートが完了したら、次の SQL ステートメントを実行して、各テーブルのデータ ボリューム情報を表示できます。
-
-{{< copyable "" >}}
 
 ```sql
 SELECT
@@ -250,8 +230,6 @@ WHERE table_schema LIKE 'bookshop';
 ## データベース初期化スクリプト<code>dbinit.sql</code> {#database-initialization-script-code-dbinit-sql-code}
 
 Bookshop アプリケーションでデータベース テーブル構造を手動で作成する場合は、次の SQL ステートメントを実行します。
-
-{{< copyable "" >}}
 
 ```sql
 CREATE DATABASE IF NOT EXISTS `bookshop`;

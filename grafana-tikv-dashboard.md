@@ -7,13 +7,15 @@ summary: Learn some key metrics displayed on the Grafana TiKV dashboard.
 
 TiUP を使用して TiDB クラスターをデプロイすると、監視システム (Prometheus/Grafana) が同時にデプロイされます。詳細については、 [監視フレームワークの概要](/tidb-monitoring-framework.md)を参照してください。
 
-Grafana ダッシュボードは、Overview、PD、TiDB、TiKV、Node_exporter、Performance_overview などを含む一連のサブ ダッシュボードに分かれています。診断に役立つ多くの指標があります。
+Grafana ダッシュボードは、Overview、PD、TiDB、TiKV、Node_exporter、および Performance_overview を含む一連のサブ ダッシュボードに分かれています。診断に役立つ多くの指標があります。
+
+## TiKV-詳細ダッシュボード {#tikv-details-dashboard}
 
 主要なメトリックが表示される**TiKV-Details**ダッシュボードから、コンポーネントの TiKV ステータスの概要を取得できます。 [パフォーマンス マップ](https://asktug.com/_/tidb-performance-map/#/)に従って、クラスターのステータスが期待どおりであるかどうかを確認できます。
 
-このドキュメントでは、 **TiKV-Details**ダッシュボードでのこれらの主要なメトリックの詳細な説明を提供します。
+このセクションでは、 **TiKV-Details**ダッシュボードのこれらの主要な指標について詳しく説明します。
 
-## クラスタ {#cluster}
+### クラスタ {#cluster}
 
 -   ストア サイズ: TiKV インスタンスあたりのストレージ サイズ
 -   利用可能なサイズ: TiKV インスタンスあたりの利用可能な容量
@@ -30,10 +32,10 @@ Grafana ダッシュボードは、Overview、PD、TiDB、TiKV、Node_exporter�
 
 ![TiKV Dashboard - Cluster metrics](/media/tikv-dashboard-cluster.png)
 
-## エラー {#errors}
+### エラー {#errors}
 
 -   重大なエラー: 重大なエラーの数
--   サーバーがビジーです: 書き込み停止、チャネル フルなど、TiKV インスタンスを一時的に使用できなくするイベントの発生を示します。通常は`0`のはずです。
+-   サーバーがビジーです: 書き込みストールやチャネル フルなど、TiKV インスタンスを一時的に使用できなくするイベントの発生を示します。通常は`0`のはずです。
 -   サーバー レポートの失敗:サーバーによって報告されたエラー メッセージの数。通常は`0`のはずです。
 -   Raftstore エラー: 各 TiKV インスタンスのタイプごとの Raftstore エラーの数
 -   スケジューラ エラー: 各 TiKV インスタンスのタイプごとのスケジューラ エラーの数
@@ -45,7 +47,7 @@ Grafana ダッシュボードは、Overview、PD、TiDB、TiKV、Node_exporter�
 
 ![TiKV Dashboard - Errors metrics](/media/tikv-dashboard-errors-v610.png)
 
-## サーバ {#server}
+### サーバ {#server}
 
 -   CF サイズ: 各列ファミリーのサイズ
 -   ストア サイズ: TiKV インスタンスあたりのストレージ サイズ
@@ -58,7 +60,7 @@ Grafana ダッシュボードは、Overview、PD、TiDB、TiKV、Node_exporter�
 
 ![TiKV Dashboard - Server metrics](/media/tikv-dashboard-server.png)
 
-## gRPC {#grpc}
+### gRPC {#grpc}
 
 -   gRPC メッセージ数: タイプごとの gRPC メッセージの割合
 -   gRPC message failed: 失敗した gRPC メッセージの割合
@@ -67,7 +69,7 @@ Grafana ダッシュボードは、Overview、PD、TiDB、TiKV、Node_exporter�
 -   gRPC バッチ サイズ: TiDB と TiKV 間の gRPC メッセージのバッチ サイズ
 -   Raftメッセージ バッチ サイズ: TiKV インスタンス間のRaftメッセージのバッチ サイズ
 
-## スレッドCPU {#thread-cpu}
+### スレッドCPU {#thread-cpu}
 
 -   Raft store CPU: `raftstore`スレッドの CPU 使用率。通常、CPU 使用率は 80% * `raftstore.store-pool-size`未満である必要があります。
 -   非同期適用 CPU: `async apply`スレッドの CPU 使用率。通常、CPU 使用率は 90% * `raftstore.apply-pool-size`未満である必要があります。
@@ -80,14 +82,14 @@ Grafana ダッシュボードは、Overview、PD、TiDB、TiKV、Node_exporter�
 -   GC ワーカー CPU: `GC worker`スレッドの CPU 使用率
 -   バックグラウンド ワーカー CPU: `background worker`スレッドの CPU 使用率
 
-## PD {#pd}
+### PD {#pd}
 
 -   PD リクエスト: TiKV が PD に送信するレート
 -   PD リクエスト期間 (平均): TiKV が PD に送信するリクエストを処理する平均期間
 -   PD ハートビート: ハートビート メッセージが TiKV から PD に送信される速度
 -   PD 検証ピア: TiKV ピアを検証するためにメッセージが TiKV から PD に送信される速度
 
-## RaftIO {#raft-io}
+### RaftIO {#raft-io}
 
 -   Apply log duration: Raftがログを適用するのにかかった時間
 -   Apply log duration per サーバー: Raftが TiKV インスタンスごとにログを適用するのにかかった時間
@@ -98,7 +100,7 @@ Grafana ダッシュボードは、Overview、PD、TiDB、TiKV、Node_exporter�
 
 ![TiKV Dashboard - Raft IO metrics](/media/tikv-dashboard-raftio.png)
 
-## Raftプロセス {#raft-process}
+### Raftプロセス {#raft-process}
 
 -   処理済みの準備完了: 1 秒あたりの種類ごとに処理された準備完了操作の数
     -   count: 1 秒あたりに処理された準備完了操作の数
@@ -114,7 +116,7 @@ Grafana ダッシュボードは、Overview、PD、TiDB、TiKV、Node_exporter�
 
 ![TiKV Dashboard - Raft process metrics](/media/tikv-dashboard-raft-process.png)
 
-## Raftメッセージ {#raft-message}
+### Raftメッセージ {#raft-message}
 
 -   Sent messages per サーバー: 各 TiKV インスタンスによって 1 秒あたりに送信されるRaftメッセージの数
 -   Flush messages per サーバー : 各 TiKV インスタンスで 1 秒あたりにRaftクライアントによってフラッシュされたRaftメッセージの数
@@ -125,7 +127,7 @@ Grafana ダッシュボードは、Overview、PD、TiDB、TiKV、Node_exporter�
 
 ![TiKV Dashboard - Raft message metrics](/media/tikv-dashboard-raft-message.png)
 
-## Raftプロポーズ {#raft-propose}
+### Raftプロポーズ {#raft-propose}
 
 -   準備完了ごとのRaft適用提案: 提案の適用中に、各準備完了操作がバッチに含む提案の数のヒストグラム。
 -   Raft read/write プロポーザル: 1 秒あたりのタイプごとのプロポーザルの数
@@ -139,7 +141,7 @@ Grafana ダッシュボードは、Overview、PD、TiDB、TiKV、Node_exporter�
 
 ![TiKV Dashboard - Raft propose metrics](/media/tikv-dashboard-raft-propose.png)
 
-## Raft管理者 {#raft-admin}
+### Raft管理者 {#raft-admin}
 
 -   管理者の提案: 1 秒あたりの管理者の提案の数
 -   管理適用: 1 秒あたりに処理された適用コマンドの数
@@ -148,19 +150,19 @@ Grafana ダッシュボードは、Overview、PD、TiDB、TiKV、Node_exporter�
 
 ![TiKV Dashboard - Raft admin metrics](/media/tikv-dashboard-raft-admin.png)
 
-## ローカルリーダー {#local-reader}
+### ローカルリーダー {#local-reader}
 
 -   ローカル リーダー リクエスト: ローカル リード スレッドからの合計リクエスト数と拒否数
 
 ![TiKV Dashboard - Local reader metrics](/media/tikv-dashboard-local-reader.png)
 
-## 統合読み取りプール {#unified-read-pool}
+### 統合読み取りプール {#unified-read-pool}
 
 -   レベルごとに使用された時間: 統合読み取りプール内の各レベルで消費された時間。レベル 0 は小さなクエリを意味します。
 -   レベル 0 の可能性: 統合読み取りプール内のレベル 0 タスクの割合
 -   実行中のタスク: 統合読み取りプールで同時に実行されているタスクの数
 
-## 保管所 {#storage}
+### 保管所 {#storage}
 
 -   Storage command total: 1 秒あたりの種類別の受信コマンド数
 -   ストレージ非同期要求エラー: 1 秒あたりのエンジン非同期要求エラーの数
@@ -169,7 +171,7 @@ Grafana ダッシュボードは、Overview、PD、TiDB、TiKV、Node_exporter�
 
 ![TiKV Dashboard - Storage metrics](/media/tikv-dashboard-storage.png)
 
-## スケジューラー {#scheduler}
+### スケジューラー {#scheduler}
 
 -   スケジューラ ステージの合計: 1 秒あたりの各ステージでのコマンド数。短時間に多くのエラーが発生してはなりません。
 -   スケジューラの書き込みバイト数: 各 TiKV インスタンスで処理されたコマンドによって書き込まれた合計バイト数
@@ -178,7 +180,7 @@ Grafana ダッシュボードは、Overview、PD、TiDB、TiKV、Node_exporter�
 
 ![TiKV Dashboard - Scheduler metrics](/media/tikv-dashboard-scheduler.png)
 
-## スケジューラ - コミット {#scheduler-commit}
+### スケジューラ - コミット {#scheduler-commit}
 
 -   スケジューラ ステージの合計: commit コマンドを実行したときの各ステージでの 1 秒あたりのコマンド数。短時間に多くのエラーが発生してはなりません。
 -   スケジューラ コマンドの所要時間: commit コマンドの実行にかかった時間。 `1s`未満である必要があります。
@@ -192,7 +194,7 @@ Grafana ダッシュボードは、Overview、PD、TiDB、TiKV、Node_exporter�
 
 ![TiKV Dashboard - Scheduler commit metrics](/media/tikv-dashboard-scheduler-commit.png)
 
-## スケジューラ - pessimistic_rollback {#scheduler-pessimistic-rollback}
+### スケジューラ - pessimistic_rollback {#scheduler-pessimistic-rollback}
 
 -   スケジューラ ステージ合計: 1 つのコマンドを実行したときの、 `pessimistic_rollback`秒あたりの各ステージでのコマンドの数。短時間に多くのエラーが発生してはなりません。
 -   スケジューラーコマンド所要時間: `pessimistic_rollback`のコマンドの実行にかかった時間。 `1s`未満である必要があります。
@@ -204,7 +206,7 @@ Grafana ダッシュボードは、Overview、PD、TiDB、TiKV、Node_exporter�
 -   スケジューラ スキャンの詳細 [書き込み]: `pessimistic_rollback`コマンド実行時の書き込み CF のキー スキャンの詳細
 -   スケジューラ スキャンの詳細 [デフォルト]: `pessimistic_rollback`コマンド実行時のデフォルト CF のキー スキャンの詳細
 
-## スケジューラ - 事前書き込み {#scheduler-prewrite}
+### スケジューラ - 事前書き込み {#scheduler-prewrite}
 
 -   スケジューラ ステージ合計: プリライト コマンドを実行したときの各ステージでの 1 秒あたりのコマンド数。短時間に多くのエラーが発生してはなりません。
 -   スケジューラーコマンド時間: prewrite コマンドの実行にかかった時間。 `1s`未満である必要があります。
@@ -216,7 +218,7 @@ Grafana ダッシュボードは、Overview、PD、TiDB、TiKV、Node_exporter�
 -   スケジューラ スキャンの詳細 [write]: prewrite コマンドを実行するときの書き込み CF のキー スキャンの詳細
 -   スケジューラ スキャンの詳細 [デフォルト]: 事前書き込みコマンドの実行時に、デフォルト CF のキー スキャンの詳細
 
-## スケジューラ - ロールバック {#scheduler-rollback}
+### スケジューラ - ロールバック {#scheduler-rollback}
 
 -   スケジューラ ステージの合計: ロールバック コマンドを実行したときの、1 秒あたりの各ステージでのコマンドの数。短時間に多くのエラーが発生してはなりません。
 -   スケジューラ コマンドの所要時間: ロールバック コマンドの実行にかかった時間。 `1s`未満である必要があります。
@@ -228,7 +230,7 @@ Grafana ダッシュボードは、Overview、PD、TiDB、TiKV、Node_exporter�
 -   スケジューラ スキャンの詳細 [書き込み]: ロールバック コマンドの実行時に書き込み CF のキー スキャンの詳細
 -   スケジューラ スキャンの詳細 [デフォルト]: ロールバック コマンドを実行するときのデフォルト CF のキー スキャンの詳細
 
-## GC {#gc}
+### GC {#gc}
 
 -   GC タスク: gc_worker によって処理された GC タスクの数
 -   GC タスクの所要時間: GC タスクの実行にかかった時間
@@ -242,7 +244,7 @@ Grafana ダッシュボードは、Overview、PD、TiDB、TiKV、Node_exporter�
 -   GC 間隔: TiDB GC の間隔
 -   圧縮フィルターの GC: 書き込み CF の圧縮フィルターでフィルター処理されたバージョンの数。
 
-## スナップショット {#snapshot}
+### スナップショット {#snapshot}
 
 -   レート スナップショット メッセージ: Raftスナップショット メッセージが送信されるレート
 -   99% スナップショットの処理時間: スナップショットの処理にかかった時間 (P99)
@@ -250,14 +252,14 @@ Grafana ダッシュボードは、Overview、PD、TiDB、TiKV、Node_exporter�
 -   99.99% スナップショット サイズ: スナップショット サイズ (P99.99)
 -   99.99% スナップショット KV カウント: スナップショット内の KV の数 (P99.99)
 
-## 仕事 {#task}
+### 仕事 {#task}
 
 -   ワーカーが処理したタスク: ワーカーが 1 秒あたりに処理したタスクの数
 -   ワーカーの保留中のタスク: 1 秒あたりのワーカーの保留中および実行中のタスクの現在の数。通常は`1000`未満である必要があります。
 -   FuturePool で処理されたタスク: 1 秒あたりの Future プールによって処理されたタスクの数
 -   FuturePool の保留中のタスク: 1 秒あたりの将来のプールの保留中および実行中のタスクの現在の数
 
-## コプロセッサーの概要 {#coprocessor-overview}
+### コプロセッサーの概要 {#coprocessor-overview}
 
 -   リクエスト期間: コプロセッサーのリクエストを受信してからリクエストの処理が完了するまでの合計期間
 -   Total Requests: 1 秒あたりのタイプ別のリクエスト数
@@ -268,7 +270,7 @@ Grafana ダッシュボードは、Overview、PD、TiDB、TiKV、Node_exporter�
 -   Total RocksDB Perf 統計: RocksDB パフォーマンスの統計
 -   Total Response Size: コプロセッサー応答の合計サイズ
 
-## コプロセッサーの詳細 {#coprocessor-detail}
+### コプロセッサーの詳細 {#coprocessor-detail}
 
 -   処理時間: コプロセッサー要求の 1 分あたりの処理に実際に費やされた時間のヒストグラム
 -   ストアごとの 95% 処理時間: 1 秒あたりの TiKV インスタンスごとのコプロセッサ要求の処理にかかった時間 (P95)
@@ -281,14 +283,14 @@ Grafana ダッシュボードは、Overview、PD、TiDB、TiKV、Node_exporter�
 -   Total Ops Details by CF (Table Scan): コプロセッサーで選択スキャンを実行する際の 1 秒あたりの各 CF の RocksDB 内部操作の数
 -   Total Ops Details by CF (Index Scan): コプロセッサーでインデックススキャンを実行する際の 1 秒あたりの各 CF の RocksDB 内部操作の数
 
-## スレッド {#threads}
+### スレッド {#threads}
 
 -   スレッドの状態: TiKV スレッドの状態
 -   Threads IO: 各 TiKV スレッドの I/O トラフィック
 -   スレッドの自発的なコンテキスト スイッチ: TiKV スレッドの自発的なコンテキスト スイッチの数
 -   スレッドの非自発的コンテキスト スイッチ: TiKV スレッドの非自発的コンテキスト スイッチの数
 
-## RocksDB - kv/いかだ {#rocksdb-kv-raft}
+### RocksDB - kv/いかだ {#rocksdb-kv-raft}
 
 -   取得操作: 1 秒あたりの取得操作の数
 -   取得時間: 取得操作の実行にかかった時間
@@ -325,7 +327,7 @@ Grafana ダッシュボードは、Overview、PD、TiDB、TiKV、Node_exporter�
 -   取り込み SST duration seconds: SST ファイルの取り込みにかかった時間
 -   各 CF のストール条件が変更されました: 各カラム ファミリーのストール条件が変更されました
 
-## タイタン - すべて {#titan-all}
+### タイタン - すべて {#titan-all}
 
 -   BLOB ファイル数: Titan BLOB ファイルの数
 -   Blob file size: Titan blob ファイルの合計サイズ
@@ -339,7 +341,7 @@ Grafana ダッシュボードは、Overview、PD、TiDB、TiKV、Node_exporter�
 -   Blob get duration: Titan blob で get 操作を実行するときにかかった時間
 -   Blob iter 操作: Titan blob で iter 操作を実行するときにかかった時間
 -   BLOB のシーク時間: Titan BLOB でシーク操作を実行するときにかかった時間
--   Blob next duration: Titan blob で次の操作を実行するときに消費される時間
+-   Blob next duration: Titan blob で次の操作を実行するときにかかった時間
 -   Blob prev duration: Titan blob で前の操作を実行するときにかかった時間
 -   BLOB キー フロー: Titan BLOB キーの操作のフロー レート
 -   Blob バイト フロー: Titan blob キーのバイト フロー レート
@@ -355,7 +357,7 @@ Grafana ダッシュボードは、Overview、PD、TiDB、TiKV、Node_exporter�
 -   Blob GC 出力ファイル サイズ: Titan GC 出力ファイルのサイズ
 -   Blob GC file count: Titan GC に関係する blob ファイルの数
 
-## 悲観的ロック {#pessimistic-locking}
+### 悲観的ロック {#pessimistic-locking}
 
 -   ロック マネージャー スレッド CPU: ロック マネージャー スレッドの CPU 使用率
 -   ロック マネージャーによって処理されたタスク: ロック マネージャーによって処理されたタスクの数
@@ -367,11 +369,11 @@ Grafana ダッシュボードは、Overview、PD、TiDB、TiKV、Node_exporter�
 -   悲観的ロックの合計メモリ サイズ: メモリ内の悲観的ロックが占有するメモリ サイズ
 -   インメモリの悲観的ロックの結果: 悲観的ロックのみをメモリに保存した結果。 `full`は、メモリ制限を超えたためにペシミスティック ロックがメモリに保存されなかった回数を意味します。
 
-## メモリー {#memory}
+### メモリー {#memory}
 
 -   Allocator Stats: メモリ アロケータの統計
 
-## バックアップ {#backup}
+### バックアップ {#backup}
 
 -   バックアップ CPU: バックアップ スレッドの CPU 使用率
 -   範囲サイズ: バックアップ範囲サイズのヒストグラム
@@ -381,7 +383,7 @@ Grafana ダッシュボードは、Overview、PD、TiDB、TiKV、Node_exporter�
 -   バックアップ範囲期間: 範囲のバックアップにかかった時間
 -   バックアップ エラー: バックアップ中に発生したエラーの数
 
-## 暗号化 {#encryption}
+### 暗号化 {#encryption}
 
 -   暗号化データ キー: 暗号化されたデータ キーの総数
 -   暗号化されたファイル: 暗号化されたファイルの数
@@ -390,9 +392,9 @@ Grafana ダッシュボードは、Overview、PD、TiDB、TiKV、Node_exporter�
 -   データ ナノの暗号化/復号化: 毎回のデータの暗号化/復号化にかかる時間のヒストグラム
 -   読み取り/書き込み暗号化メタ期間: 暗号化メタ ファイルの読み取り/書き込みにかかった時間
 
-## 共通パラメータの説明 {#explanation-of-common-parameters}
+### 共通パラメータの説明 {#explanation-of-common-parameters}
 
-### gRPC メッセージ タイプ {#grpc-message-type}
+#### gRPC メッセージ タイプ {#grpc-message-type}
 
 1.  トランザクション API:
 
@@ -423,3 +425,15 @@ Grafana ダッシュボードは、Overview、PD、TiDB、TiKV、Node_exporter�
     -   raw_delete: キーと値のペアを削除するコマンド
     -   raw_batch_delete: キーと値のペアのバッチのコマンド
     -   raw_delete_range: データの範囲を削除するコマンド
+
+## TiKV-FastTune ダッシュボード {#tikv-fasttune-dashboard}
+
+QPS ジッター、レイテンシージッター、レイテンシー増加傾向など、TiKV のパフォーマンスの問題が発生した場合は、 **TiKV-FastTune**ダッシュボードを確認できます。このダッシュボードには、特にクラスター内の書き込みワークロードが中規模または大規模である場合に、診断に役立つ一連のパネルが含まれています。
+
+書き込み関連のパフォーマンスの問題が発生した場合、まず TiDB 関連のダッシュボードを確認できます。問題がストレージ側にある場合は、 **TiKV-FastTune**ページを開き、すべてのパネルを参照して確認します。
+
+**TiKV-FastTune**ダッシュボードで、パフォーマンスの問題の考えられる原因を示唆するタイトルを確認できます。提案された原因が正しいかどうかを確認するには、ページ上のグラフを確認します。
+
+グラフの左 Y 軸はストレージ側の書き込み RPC QPS を表し、右 Y 軸の一連のグラフは上下逆に描かれています。左のグラフの形状が右のグラフの形状と一致する場合、提案された原因は真です。
+
+詳細なメトリックと説明については、ダッシュボード[ユーザーマニュアル](https://docs.google.com/presentation/d/1aeBF2VCKf7eo4-3TMyP7oPzFWIih6UBA53UI8YQASCQ/edit#slide=id.gab6b984c2a_1_352)を参照してください。

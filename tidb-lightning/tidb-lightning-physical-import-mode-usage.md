@@ -48,7 +48,7 @@ password = ""
 status-port = 10080
 # Required. The address of any pd-server from the cluster.
 pd-addr = "172.16.31.4:2379"
-# tidb-lightning import the TiDB library, and generates some logs.
+# tidb-lightning imports the TiDB library, and generates some logs.
 # Set the log level of the TiDB library.
 log-level = "error"
 
@@ -73,7 +73,7 @@ analyze = "optional"
 
 完全な構成ファイルについては、 [構成ファイルとコマンド ライン パラメータ](/tidb-lightning/tidb-lightning-configuration.md)を参照してください。
 
-### 競合の検出 {#conflict-detection}
+## 競合の検出 {#conflict-detection}
 
 競合するデータとは、PK/UK 列のデータが同じである 2 つ以上のレコードを指します。データ ソースに競合するデータが含まれている場合、テーブル内の実際の行数は、一意のインデックスを使用したクエリによって返される合計行数とは異なります。
 
@@ -133,7 +133,7 @@ mysql> select table_name,index_name,key_data,row_data from conflict_error_v1 lim
 -   **Lightning がデプロイされているノードのハードウェア、特に CPU と`sorted-key-dir`のストレージ デバイスをアップグレードします。**
 -   **<a href="/tidb-lightning/tidb-lightning-distributed-import.md">並行インポート</a>機能を使用して、水平スケーリングを実現します。**
 
-Lightning には、物理インポートモードのインポートパフォーマンスに影響を与える同時実行関連の設定がいくつか用意されています。ただし、長年の経験から、次の 4 つの構成項目はデフォルト値のままにしておくことをお勧めします。 4 つの構成項目を調整しても、パフォーマンスが大幅に向上するわけではありません。
+TiDB Lightningは、物理インポート モードでのインポート パフォーマンスに影響を与える、いくつかの同時実行関連の構成を提供します。ただし、長年の経験から、次の 4 つの構成項目はデフォルト値のままにしておくことをお勧めします。 4 つの構成項目を調整しても、パフォーマンスが大幅に向上するわけではありません。
 
 ```
 [lightning]

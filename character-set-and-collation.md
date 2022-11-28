@@ -23,18 +23,31 @@ SELECT 'A' = 'a';
 ```
 
 ```sql
-mysql> SELECT 'A' = 'a';
+SELECT 'A' = 'a';
+```
+
+```sql
 +-----------+
 | 'A' = 'a' |
 +-----------+
 |         0 |
 +-----------+
 1 row in set (0.00 sec)
+```
 
-mysql> SET NAMES utf8mb4 COLLATE utf8mb4_general_ci;
+```sql
+SET NAMES utf8mb4 COLLATE utf8mb4_general_ci;
+```
+
+```sql
 Query OK, 0 rows affected (0.00 sec)
+```
 
-mysql> SELECT 'A' = 'a';
+```sql
+SELECT 'A' = 'a';
+```
+
+```sql
 +-----------+
 | 'A' = 'a' |
 +-----------+
@@ -72,18 +85,26 @@ SHOW CHARACTER SET;
 TiDB は次の照合順序をサポートしています。
 
 ```sql
-mysql> show collation;
-+-------------+---------+------+---------+----------+---------+
-| Collation   | Charset | Id   | Default | Compiled | Sortlen |
-+-------------+---------+------+---------+----------+---------+
-| utf8mb4_bin | utf8mb4 |   46 | Yes     | Yes      |       1 |
-| latin1_bin  | latin1  |   47 | Yes     | Yes      |       1 |
-| binary      | binary  |   63 | Yes     | Yes      |       1 |
-| ascii_bin   | ascii   |   65 | Yes     | Yes      |       1 |
-| utf8_bin    | utf8    |   83 | Yes     | Yes      |       1 |
-| gbk_bin     | gbk     |   87 | Yes     | Yes      |       1 |
-+-------------+---------+------+---------+----------+---------+
-6 rows in set (0.00 sec)
+SHOW COLLATION;
+```
+
+```sql
++--------------------+---------+------+---------+----------+---------+
+| Collation          | Charset | Id   | Default | Compiled | Sortlen |
++--------------------+---------+------+---------+----------+---------+
+| ascii_bin          | ascii   |   65 | Yes     | Yes      |       1 |
+| binary             | binary  |   63 | Yes     | Yes      |       1 |
+| gbk_bin            | gbk     |   87 |         | Yes      |       1 |
+| gbk_chinese_ci     | gbk     |   28 | Yes     | Yes      |       1 |
+| latin1_bin         | latin1  |   47 | Yes     | Yes      |       1 |
+| utf8_bin           | utf8    |   83 | Yes     | Yes      |       1 |
+| utf8_general_ci    | utf8    |   33 |         | Yes      |       1 |
+| utf8_unicode_ci    | utf8    |  192 |         | Yes      |       1 |
+| utf8mb4_bin        | utf8mb4 |   46 | Yes     | Yes      |       1 |
+| utf8mb4_general_ci | utf8mb4 |   45 |         | Yes      |       1 |
+| utf8mb4_unicode_ci | utf8mb4 |  224 |         | Yes      |       1 |
++--------------------+---------+------+---------+----------+---------+
+11 rows in set (0.00 sec)
 ```
 
 > **警告：**
@@ -124,25 +145,54 @@ MySQL では、文字セット`utf8`は最大 3 バイトに制限されてい�
 以下は、4 バイトの絵文字を表に挿入するときのデフォルトの動作を示しています。 `INSERT`ステートメントは`utf8`文字セットでは失敗しますが、 `utf8mb4`では成功します。
 
 ```sql
-mysql> CREATE TABLE utf8_test (
+CREATE TABLE utf8_test (
     ->  c char(1) NOT NULL
     -> ) CHARACTER SET utf8;
-Query OK, 0 rows affected (0.09 sec)
+```
 
-mysql> CREATE TABLE utf8m4_test (
+```sql
+Query OK, 0 rows affected (0.09 sec)
+```
+
+```sql
+CREATE TABLE utf8m4_test (
     ->  c char(1) NOT NULL
     -> ) CHARACTER SET utf8mb4;
+```
+
+```sql
 Query OK, 0 rows affected (0.09 sec)
+```
 
-mysql> INSERT INTO utf8_test VALUES ('😉');
+```sql
+INSERT INTO utf8_test VALUES ('😉');
+```
+
+```sql
 ERROR 1366 (HY000): incorrect utf8 value f09f9889(😉) for column c
-mysql> INSERT INTO utf8m4_test VALUES ('😉');
+```
+
+```sql
+INSERT INTO utf8m4_test VALUES ('😉');
+```
+
+```sql
 Query OK, 1 row affected (0.02 sec)
+```
 
-mysql> SELECT char_length(c), length(c), c FROM utf8_test;
+```sql
+SELECT char_length(c), length(c), c FROM utf8_test;
+```
+
+```sql
 Empty set (0.01 sec)
+```
 
-mysql> SELECT char_length(c), length(c), c FROM utf8m4_test;
+```sql
+SELECT char_length(c), length(c), c FROM utf8m4_test;
+```
+
+```sql
 +----------------+-----------+------+
 | char_length(c) | length(c) | c    |
 +----------------+-----------+------+
@@ -399,14 +449,39 @@ v4.0 より前では、TiDB でほとんどの MySQL 照合を指定でき、こ
 
 ```sql
 CREATE TABLE t(a varchar(20) charset utf8mb4 collate utf8mb4_general_ci PRIMARY KEY);
-Query OK, 0 rows affected
-INSERT INTO t VALUES ('A');
-Query OK, 1 row affected
-INSERT INTO t VALUES ('a');
-Query OK, 1 row affected # In TiDB, it is successfully executed. In MySQL, because utf8mb4_general_ci is case-insensitive, the `Duplicate entry 'a'` error is reported.
-INSERT INTO t1 VALUES ('a ');
-Query OK, 1 row affected # In TiDB, it is successfully executed. In MySQL, because comparison is performed after the spaces are filled in, the `Duplicate entry 'a '` error is returned.
 ```
+
+```sql
+Query OK, 0 rows affected
+```
+
+```sql
+INSERT INTO t VALUES ('A');
+```
+
+```sql
+Query OK, 1 row affected
+```
+
+```sql
+INSERT INTO t VALUES ('a');
+```
+
+```sql
+Query OK, 1 row affected
+```
+
+TiDB では、前述のステートメントが正常に実行されます。 MySQL では、 `utf8mb4_general_ci`は大文字と小文字が区別されないため、 `Duplicate entry 'a'`エラーが報告されます。
+
+```sql
+INSERT INTO t1 VALUES ('a ');
+```
+
+```sql
+Query OK, 1 row affected
+```
+
+TiDB では、前述のステートメントが正常に実行されます。 MySQL では、スペースを埋めてから比較を行うため、 `Duplicate entry 'a '`エラーが返されます。
 
 ### 照合のための新しいフレームワーク {#new-framework-for-collations}
 
@@ -447,12 +522,33 @@ SELECT VARIABLE_VALUE FROM mysql.tidb WHERE VARIABLE_NAME='new_collation_enabled
 
 ```sql
 CREATE TABLE t(a varchar(20) charset utf8mb4 collate utf8mb4_general_ci PRIMARY KEY);
+```
+
+```sql
 Query OK, 0 rows affected (0.00 sec)
+```
+
+```sql
 INSERT INTO t VALUES ('A');
+```
+
+```sql
 Query OK, 1 row affected (0.00 sec)
+```
+
+```sql
 INSERT INTO t VALUES ('a');
+```
+
+```sql
 ERROR 1062 (23000): Duplicate entry 'a' for key 'PRIMARY' # TiDB is compatible with the case-insensitive collation of MySQL.
+```
+
+```sql
 INSERT INTO t VALUES ('a ');
+```
+
+```sql
 ERROR 1062 (23000): Duplicate entry 'a ' for key 'PRIMARY' # TiDB modifies the `PADDING` behavior to be compatible with MySQL.
 ```
 

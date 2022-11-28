@@ -1,9 +1,9 @@
 ---
-title: Create a Data Source
+title: Create a Data Source for TiDB Data Migration
 summary: Learn how to create a data source for Data Migration (DM).
 ---
 
-# データ ソースを作成する {#create-a-data-source}
+# TiDB データ移行用のデータ ソースを作成する {#create-a-data-source-for-tidb-data-migration}
 
 > **ノート：**
 >

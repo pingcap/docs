@@ -22,9 +22,9 @@ aliases: ['/tidb/stable/dev-guide-outdated-for-go-sql-driver-mysql','/tidb/stabl
 
 以下にTiDBクラスターの起動方法を紹介します。
 
-**TiDB Cloudの無料クラスターを使用する**
+**TiDB Cloud Tier クラスターを使用する**
 
-詳細な手順については、 [無料のクラスターを作成する](/develop/dev-guide-build-cluster-in-cloud.md#step-1-create-a-free-cluster)を参照してください。
+詳細な手順については、 [サーバーレス層クラスターを作成する](/develop/dev-guide-build-cluster-in-cloud.md#step-1-create-a-serverless-tier-cluster)を参照してください。
 
 **ローカル クラスターを使用する**
 
@@ -34,7 +34,7 @@ aliases: ['/tidb/stable/dev-guide-outdated-for-go-sql-driver-mysql','/tidb/stabl
 
 <CustomContent platform="tidb-cloud">
 
-[無料のクラスターを作成する](/develop/dev-guide-build-cluster-in-cloud.md#step-1-create-a-free-cluster)を参照してください。
+[サーバーレス層クラスターを作成する](/develop/dev-guide-build-cluster-in-cloud.md#step-1-create-a-serverless-tier-cluster)を参照してください。
 
 </CustomContent>
 
@@ -47,6 +47,246 @@ git clone https://github.com/pingcap-inc/tidb-example-golang.git
 ```
 
 <SimpleTab groupId="language">
+
+<div label="Using GORM (Recommended)" value="gorm">
+
+GORM と比較すると、go-sql-driver/mysql の実装はベスト プラクティスではない可能性があります。これは、エラー処理ロジックを記述し、 `*sql.Rows`を手動で閉じる必要があり、コードを簡単に再利用できないため、コードがわずかに冗長になるためです。
+
+GORM は、Golang 向けの人気のあるオープンソース ORM ライブラリです。次の手順では、例として`v1.23.5`を取り上げます。
+
+TiDB トランザクションを適応させるには、次のコードに従ってツールキット[ユーティリティ](https://github.com/pingcap-inc/tidb-example-golang/tree/main/util)を作成します。
+
+{{< copyable "" >}}
+
+```go
+package util
+
+import (
+    "context"
+    "database/sql"
+)
+
+type TiDBSqlTx struct {
+    *sql.Tx
+    conn        *sql.Conn
+    pessimistic bool
+}
+
+func TiDBSqlBegin(db *sql.DB, pessimistic bool) (*TiDBSqlTx, error) {
+    ctx := context.Background()
+    conn, err := db.Conn(ctx)
+    if err != nil {
+        return nil, err
+    }
+    if pessimistic {
+        _, err = conn.ExecContext(ctx, "set @@tidb_txn_mode=?", "pessimistic")
+    } else {
+        _, err = conn.ExecContext(ctx, "set @@tidb_txn_mode=?", "optimistic")
+    }
+    if err != nil {
+        return nil, err
+    }
+    tx, err := conn.BeginTx(ctx, nil)
+    if err != nil {
+        return nil, err
+    }
+    return &TiDBSqlTx{
+        conn:        conn,
+        Tx:          tx,
+        pessimistic: pessimistic,
+    }, nil
+}
+
+func (tx *TiDBSqlTx) Commit() error {
+    defer tx.conn.Close()
+    return tx.Tx.Commit()
+}
+
+func (tx *TiDBSqlTx) Rollback() error {
+    defer tx.conn.Close()
+    return tx.Tx.Rollback()
+}
+```
+
+`gorm`ディレクトリに移動します。
+
+{{< copyable "" >}}
+
+```shell
+cd gorm
+```
+
+このディレクトリの構造は次のとおりです。
+
+```
+.
+├── Makefile
+├── go.mod
+├── go.sum
+└── gorm.go
+```
+
+`gorm.go`は`gorm`の本体です。 go-sql-driver/mysql と比較して、GORM は異なるデータベース間のデータベース作成の違いを回避します。また、AutoMigrate やオブジェクトの CRUD などの多くの操作を実装しているため、コードが大幅に簡素化されます。
+
+`Player`は、テーブルのマッピングであるデータ エンティティ構造体です。 `Player`の各プロパティは、 `player`テーブルのフィールドに対応します。 go-sql-driver/mysql と比較して、GORM の`Player`は`gorm:"primaryKey;type:VARCHAR(36);column:id"`などの詳細情報のマッピング関係を示す構造タグを追加します。
+
+{{< copyable "" >}}
+
+```go
+
+package main
+
+import (
+    "fmt"
+    "math/rand"
+
+    "github.com/google/uuid"
+    "github.com/pingcap-inc/tidb-example-golang/util"
+
+    "gorm.io/driver/mysql"
+    "gorm.io/gorm"
+    "gorm.io/gorm/clause"
+    "gorm.io/gorm/logger"
+)
+
+type Player struct {
+    ID    string `gorm:"primaryKey;type:VARCHAR(36);column:id"`
+    Coins int    `gorm:"column:coins"`
+    Goods int    `gorm:"column:goods"`
+}
+
+func (*Player) TableName() string {
+    return "player"
+}
+
+func main() {
+    // 1. Configure the example database connection.
+    db := createDB()
+
+    // AutoMigrate for player table
+    db.AutoMigrate(&Player{})
+
+    // 2. Run some simple examples.
+    simpleExample(db)
+
+    // 3. Explore more.
+    tradeExample(db)
+}
+
+func tradeExample(db *gorm.DB) {
+    // Player 1: id is "1", has only 100 coins.
+    // Player 2: id is "2", has 114514 coins, and 20 goods.
+    player1 := &Player{ID: "1", Coins: 100}
+    player2 := &Player{ID: "2", Coins: 114514, Goods: 20}
+
+    // Create two players "by hand", using the INSERT statement on the backend.
+    db.Clauses(clause.OnConflict{UpdateAll: true}).Create(player1)
+    db.Clauses(clause.OnConflict{UpdateAll: true}).Create(player2)
+
+    // Player 1 wants to buy 10 goods from player 2.
+    // It will cost 500 coins, but player 1 cannot afford it.
+    fmt.Println("\nbuyGoods:\n    => this trade will fail")
+    if err := buyGoods(db, player2.ID, player1.ID, 10, 500); err == nil {
+        panic("there shouldn't be success")
+    }
+
+    // So player 1 has to reduce the incoming quantity to two.
+    fmt.Println("\nbuyGoods:\n    => this trade will success")
+    if err := buyGoods(db, player2.ID, player1.ID, 2, 100); err != nil {
+        panic(err)
+    }
+}
+
+func simpleExample(db *gorm.DB) {
+    // Create a player, who has a coin and a goods.
+    if err := db.Clauses(clause.OnConflict{UpdateAll: true}).
+        Create(&Player{ID: "test", Coins: 1, Goods: 1}).Error; err != nil {
+        panic(err)
+    }
+
+    // Get a player.
+    var testPlayer Player
+    db.Find(&testPlayer, "id = ?", "test")
+    fmt.Printf("getPlayer: %+v\n", testPlayer)
+
+    // Create players with bulk inserts. Insert 1919 players totally, with 114 players per batch.
+    bulkInsertPlayers := make([]Player, 1919, 1919)
+    total, batch := 1919, 114
+    for i := 0; i < total; i++ {
+        bulkInsertPlayers[i] = Player{
+            ID:    uuid.New().String(),
+            Coins: rand.Intn(10000),
+            Goods: rand.Intn(10000),
+        }
+    }
+
+    if err := db.Session(&gorm.Session{Logger: db.Logger.LogMode(logger.Error)}).
+        CreateInBatches(bulkInsertPlayers, batch).Error; err != nil {
+        panic(err)
+    }
+
+    // Count players amount.
+    playersCount := int64(0)
+    db.Model(&Player{}).Count(&playersCount)
+    fmt.Printf("countPlayers: %d\n", playersCount)
+
+    // Print 3 players.
+    threePlayers := make([]Player, 3, 3)
+    db.Limit(3).Find(&threePlayers)
+    for index, player := range threePlayers {
+        fmt.Printf("print %d player: %+v\n", index+1, player)
+    }
+}
+
+func createDB() *gorm.DB {
+    dsn := "root:@tcp(127.0.0.1:4000)/test?charset=utf8mb4"
+    db, err := gorm.Open(mysql.Open(dsn), &gorm.Config{
+        Logger: logger.Default.LogMode(logger.Info),
+    })
+    if err != nil {
+        panic(err)
+    }
+
+    return db
+}
+
+func buyGoods(db *gorm.DB, sellID, buyID string, amount, price int) error {
+    return util.TiDBGormBegin(db, true, func(tx *gorm.DB) error {
+        var sellPlayer, buyPlayer Player
+        if err := tx.Clauses(clause.Locking{Strength: "UPDATE"}).
+            Find(&sellPlayer, "id = ?", sellID).Error; err != nil {
+            return err
+        }
+
+        if sellPlayer.ID != sellID || sellPlayer.Goods < amount {
+            return fmt.Errorf("sell player %s goods not enough", sellID)
+        }
+
+        if err := tx.Clauses(clause.Locking{Strength: "UPDATE"}).
+            Find(&buyPlayer, "id = ?", buyID).Error; err != nil {
+            return err
+        }
+
+        if buyPlayer.ID != buyID || buyPlayer.Coins < price {
+            return fmt.Errorf("buy player %s coins not enough", buyID)
+        }
+
+        updateSQL := "UPDATE player set goods = goods + ?, coins = coins + ? WHERE id = ?"
+        if err := tx.Exec(updateSQL, -amount, price, sellID).Error; err != nil {
+            return err
+        }
+
+        if err := tx.Exec(updateSQL, amount, -price, buyID).Error; err != nil {
+            return err
+        }
+
+        fmt.Println("\n[buyGoods]:\n    'trade success'")
+        return nil
+    })
+}
+```
+
+</div>
 
 <div label="Using go-sql-driver/mysql" value="sqldriver">
 
@@ -498,246 +738,6 @@ const (
 
 </div>
 
-<div label="Using GORM (Recommended)" value="gorm">
-
-GORM と比較すると、go-sql-driver/mysql の実装はベスト プラクティスではない可能性があります。これは、エラー処理ロジックを記述し、 `*sql.Rows`を手動で閉じる必要があり、コードを簡単に再利用できないため、コードがわずかに冗長になるためです。
-
-GORM は、Golang 向けの人気のあるオープンソース ORM ライブラリです。次の手順では、例として`v1.23.5`を取り上げます。
-
-TiDB トランザクションを適応させるには、次のコードに従ってツールキット[ユーティリティ](https://github.com/pingcap-inc/tidb-example-golang/tree/main/util)を作成します。
-
-{{< copyable "" >}}
-
-```go
-package util
-
-import (
-    "context"
-    "database/sql"
-)
-
-type TiDBSqlTx struct {
-    *sql.Tx
-    conn        *sql.Conn
-    pessimistic bool
-}
-
-func TiDBSqlBegin(db *sql.DB, pessimistic bool) (*TiDBSqlTx, error) {
-    ctx := context.Background()
-    conn, err := db.Conn(ctx)
-    if err != nil {
-        return nil, err
-    }
-    if pessimistic {
-        _, err = conn.ExecContext(ctx, "set @@tidb_txn_mode=?", "pessimistic")
-    } else {
-        _, err = conn.ExecContext(ctx, "set @@tidb_txn_mode=?", "optimistic")
-    }
-    if err != nil {
-        return nil, err
-    }
-    tx, err := conn.BeginTx(ctx, nil)
-    if err != nil {
-        return nil, err
-    }
-    return &TiDBSqlTx{
-        conn:        conn,
-        Tx:          tx,
-        pessimistic: pessimistic,
-    }, nil
-}
-
-func (tx *TiDBSqlTx) Commit() error {
-    defer tx.conn.Close()
-    return tx.Tx.Commit()
-}
-
-func (tx *TiDBSqlTx) Rollback() error {
-    defer tx.conn.Close()
-    return tx.Tx.Rollback()
-}
-```
-
-`gorm`ディレクトリに移動します。
-
-{{< copyable "" >}}
-
-```shell
-cd gorm
-```
-
-このディレクトリの構造は次のとおりです。
-
-```
-.
-├── Makefile
-├── go.mod
-├── go.sum
-└── gorm.go
-```
-
-`gorm.go`は`gorm`の本体です。 go-sql-driver/mysql と比較して、GORM は異なるデータベース間のデータベース作成の違いを回避します。また、AutoMigrate やオブジェクトの CRUD などの多くの操作を実装しているため、コードが大幅に簡素化されます。
-
-`Player`は、テーブルのマッピングであるデータ エンティティ構造体です。 `Player`の各プロパティは、 `player`テーブルのフィールドに対応します。 go-sql-driver/mysql と比較して、GORM の`Player`は`gorm:"primaryKey;type:VARCHAR(36);column:id"`などの詳細情報のマッピング関係を示す構造タグを追加します。
-
-{{< copyable "" >}}
-
-```go
-
-package main
-
-import (
-    "fmt"
-    "math/rand"
-
-    "github.com/google/uuid"
-    "github.com/pingcap-inc/tidb-example-golang/util"
-
-    "gorm.io/driver/mysql"
-    "gorm.io/gorm"
-    "gorm.io/gorm/clause"
-    "gorm.io/gorm/logger"
-)
-
-type Player struct {
-    ID    string `gorm:"primaryKey;type:VARCHAR(36);column:id"`
-    Coins int    `gorm:"column:coins"`
-    Goods int    `gorm:"column:goods"`
-}
-
-func (*Player) TableName() string {
-    return "player"
-}
-
-func main() {
-    // 1. Configure the example database connection.
-    db := createDB()
-
-    // AutoMigrate for player table
-    db.AutoMigrate(&Player{})
-
-    // 2. Run some simple examples.
-    simpleExample(db)
-
-    // 3. Explore more.
-    tradeExample(db)
-}
-
-func tradeExample(db *gorm.DB) {
-    // Player 1: id is "1", has only 100 coins.
-    // Player 2: id is "2", has 114514 coins, and 20 goods.
-    player1 := &Player{ID: "1", Coins: 100}
-    player2 := &Player{ID: "2", Coins: 114514, Goods: 20}
-
-    // Create two players "by hand", using the INSERT statement on the backend.
-    db.Clauses(clause.OnConflict{UpdateAll: true}).Create(player1)
-    db.Clauses(clause.OnConflict{UpdateAll: true}).Create(player2)
-
-    // Player 1 wants to buy 10 goods from player 2.
-    // It will cost 500 coins, but player 1 cannot afford it.
-    fmt.Println("\nbuyGoods:\n    => this trade will fail")
-    if err := buyGoods(db, player2.ID, player1.ID, 10, 500); err == nil {
-        panic("there shouldn't be success")
-    }
-
-    // So player 1 has to reduce the incoming quantity to two.
-    fmt.Println("\nbuyGoods:\n    => this trade will success")
-    if err := buyGoods(db, player2.ID, player1.ID, 2, 100); err != nil {
-        panic(err)
-    }
-}
-
-func simpleExample(db *gorm.DB) {
-    // Create a player, who has a coin and a goods.
-    if err := db.Clauses(clause.OnConflict{UpdateAll: true}).
-        Create(&Player{ID: "test", Coins: 1, Goods: 1}).Error; err != nil {
-        panic(err)
-    }
-
-    // Get a player.
-    var testPlayer Player
-    db.Find(&testPlayer, "id = ?", "test")
-    fmt.Printf("getPlayer: %+v\n", testPlayer)
-
-    // Create players with bulk inserts. Insert 1919 players totally, with 114 players per batch.
-    bulkInsertPlayers := make([]Player, 1919, 1919)
-    total, batch := 1919, 114
-    for i := 0; i < total; i++ {
-        bulkInsertPlayers[i] = Player{
-            ID:    uuid.New().String(),
-            Coins: rand.Intn(10000),
-            Goods: rand.Intn(10000),
-        }
-    }
-
-    if err := db.Session(&gorm.Session{Logger: db.Logger.LogMode(logger.Error)}).
-        CreateInBatches(bulkInsertPlayers, batch).Error; err != nil {
-        panic(err)
-    }
-
-    // Count players amount.
-    playersCount := int64(0)
-    db.Model(&Player{}).Count(&playersCount)
-    fmt.Printf("countPlayers: %d\n", playersCount)
-
-    // Print 3 players.
-    threePlayers := make([]Player, 3, 3)
-    db.Limit(3).Find(&threePlayers)
-    for index, player := range threePlayers {
-        fmt.Printf("print %d player: %+v\n", index+1, player)
-    }
-}
-
-func createDB() *gorm.DB {
-    dsn := "root:@tcp(127.0.0.1:4000)/test?charset=utf8mb4"
-    db, err := gorm.Open(mysql.Open(dsn), &gorm.Config{
-        Logger: logger.Default.LogMode(logger.Info),
-    })
-    if err != nil {
-        panic(err)
-    }
-
-    return db
-}
-
-func buyGoods(db *gorm.DB, sellID, buyID string, amount, price int) error {
-    return util.TiDBGormBegin(db, true, func(tx *gorm.DB) error {
-        var sellPlayer, buyPlayer Player
-        if err := tx.Clauses(clause.Locking{Strength: "UPDATE"}).
-            Find(&sellPlayer, "id = ?", sellID).Error; err != nil {
-            return err
-        }
-
-        if sellPlayer.ID != sellID || sellPlayer.Goods < amount {
-            return fmt.Errorf("sell player %s goods not enough", sellID)
-        }
-
-        if err := tx.Clauses(clause.Locking{Strength: "UPDATE"}).
-            Find(&buyPlayer, "id = ?", buyID).Error; err != nil {
-            return err
-        }
-
-        if buyPlayer.ID != buyID || buyPlayer.Coins < price {
-            return fmt.Errorf("buy player %s coins not enough", buyID)
-        }
-
-        updateSQL := "UPDATE player set goods = goods + ?, coins = coins + ? WHERE id = ?"
-        if err := tx.Exec(updateSQL, -amount, price, sellID).Error; err != nil {
-            return err
-        }
-
-        if err := tx.Exec(updateSQL, amount, -price, buyID).Error; err != nil {
-            return err
-        }
-
-        fmt.Println("\n[buyGoods]:\n    'trade success'")
-        return nil
-    })
-}
-```
-
-</div>
-
 </SimpleTab>
 
 ## ステップ 3. コードを実行する {#step-3-run-the-code}
@@ -747,6 +747,12 @@ func buyGoods(db *gorm.DB, sellID, buyID string, amount, price int) error {
 ### ステップ 3.1 テーブルの初期化 {#step-3-1-table-initialization}
 
 <SimpleTab groupId="language">
+
+<div label="Using GORM (Recommended)" value="gorm">
+
+テーブルを手動で初期化する必要はありません。
+
+</div>
 
 <div label="Using go-sql-driver/mysql" value="sqldriver">
 
@@ -780,21 +786,15 @@ go-sql-driver/mysql を使用する場合、クラスターに接続し、 `sql/
 
 </div>
 
-<div label="Using GORM (Recommended)" value="gorm">
-
-テーブルを手動で初期化する必要はありません。
-
-</div>
-
 </SimpleTab>
 
 ### ステップ 3.2 TiDB Cloudのパラメーターを変更する {#step-3-2-modify-parameters-for-tidb-cloud}
 
 <SimpleTab groupId="language">
 
-<div label="Using go-sql-driver/mysql" value="sqldriver">
+<div label="Using GORM (Recommended)" value="gorm">
 
-TiDB Cloudやその他のリモート クラスターなど、ローカル以外の既定のクラスターを使用している場合は、 `dsn` in `sqldriver.go`の値を変更します。
+TiDB Cloud Tier クラスターを使用している場合は、 `dsn` in `gorm.go`の値を変更します。
 
 {{< copyable "" >}}
 
@@ -802,44 +802,52 @@ TiDB Cloudやその他のリモート クラスターなど、ローカル以外
 dsn := "root:@tcp(127.0.0.1:4000)/test?charset=utf8mb4"
 ```
 
-設定したパスワードが`123456`で、 TiDB Cloudから取得した接続文字列が次のとおりであるとします。
+設定したパスワードが`123456`で、クラスターの詳細ページから取得した接続パラメーターが次のとおりであるとします。
 
-```
-mysql --connect-timeout 15 -u root -h xxx.tidbcloud.com -P 4000 -p
-```
+-   エンドポイント: `xxx.tidbcloud.com`
+-   ポート: `4000`
+-   ユーザー: `2aEp24QWEDLqRFs.root`
 
-この場合、次のようにパラメータを変更できます。
+この場合、次のように`mysql.RegisterTLSConfig`と`dsn`を変更できます。
 
 {{< copyable "" >}}
 
 ```go
-dsn := "root:123456@tcp(xxx.tidbcloud.com:4000)/test?charset=utf8mb4"
+mysql.RegisterTLSConfig("register-tidb-tls", &tls.Config {
+    MinVersion: tls.VersionTLS12,
+    ServerName: "xxx.tidbcloud.com",
+})
+
+dsn := "2aEp24QWEDLqRFs.root:123456@tcp(xxx.tidbcloud.com:4000)/test?charset=utf8mb4&tls=register-tidb-tls"
 ```
 
 </div>
 
-<div label="Using GORM (Recommended)" value="gorm">
+<div label="Using go-sql-driver/mysql" value="sqldriver">
 
-TiDB Cloudやその他のリモート クラスターなど、ローカル以外の既定のクラスターを使用している場合は、 `dsn` in `gorm.go`の値を変更します。
-
-{{< copyable "" >}}
+TiDB Cloud Tier クラスターを使用している場合は、 `dsn` in `sqldriver.go`の値を変更します。
 
 ```go
 dsn := "root:@tcp(127.0.0.1:4000)/test?charset=utf8mb4"
 ```
 
-設定したパスワードが`123456`で、 TiDB Cloudから取得した接続文字列が次のとおりであるとします。
+設定したパスワードが`123456`で、クラスターの詳細ページから取得した接続パラメーターが次のとおりであるとします。
 
-```
-mysql --connect-timeout 15 -u root -h xxx.tidbcloud.com -P 4000 -p
-```
+-   エンドポイント: `xxx.tidbcloud.com`
+-   ポート: `4000`
+-   ユーザー: `2aEp24QWEDLqRFs.root`
 
-この場合、次のようにパラメータを変更できます。
+この場合、次のように`mysql.RegisterTLSConfig`と`dsn`を変更できます。
 
 {{< copyable "" >}}
 
 ```go
-dsn := "root:123456@tcp(xxx.tidbcloud.com:4000)/test?charset=utf8mb4"
+mysql.RegisterTLSConfig("register-tidb-tls", &tls.Config {
+    MinVersion: tls.VersionTLS12,
+    ServerName: "xxx.tidbcloud.com",
+})
+
+dsn := "2aEp24QWEDLqRFs.root:123456@tcp(xxx.tidbcloud.com:4000)/test?charset=utf8mb4&tls=register-tidb-tls"
 ```
 
 </div>
@@ -849,6 +857,30 @@ dsn := "root:123456@tcp(xxx.tidbcloud.com:4000)/test?charset=utf8mb4"
 ### ステップ 3.3 実行 {#step-3-3-run}
 
 <SimpleTab groupId="language">
+
+<div label="Using GORM (Recommended)" value="gorm">
+
+コードを実行するには、それぞれ`make build`と`make run`を実行します。
+
+{{< copyable "" >}}
+
+```shell
+make build # this command executes `go build -o bin/gorm-example`
+make run # this command executes `./bin/gorm-example`
+```
+
+または、ネイティブ コマンドを使用できます。
+
+{{< copyable "" >}}
+
+```shell
+go build -o bin/gorm-example
+./bin/gorm-example
+```
+
+または、 `make build`と`make run`の組み合わせである`make`コマンドを直接実行します。
+
+</div>
 
 <div label="Using go-sql-driver/mysql" value="sqldriver">
 
@@ -876,45 +908,21 @@ go build -o bin/sql-driver-example
 
 </div>
 
-<div label="Using GORM (Recommended)" value="gorm">
-
-コードを実行するには、それぞれ`make build`と`make run`を実行します。
-
-{{< copyable "" >}}
-
-```shell
-make build # this command executes `go build -o bin/gorm-example`
-make run # this command executes `./bin/gorm-example`
-```
-
-または、ネイティブ コマンドを使用できます。
-
-{{< copyable "" >}}
-
-```shell
-go build -o bin/gorm-example
-./bin/gorm-example
-```
-
-または、 `make build`と`make run`の組み合わせである`make`コマンドを直接実行します。
-
-</div>
-
 </SimpleTab>
 
 ## ステップ 4. 期待される出力 {#step-4-expected-output}
 
 <SimpleTab groupId="language">
 
-<div label="Using go-sql-driver/mysql" value="sqldriver">
-
-[go-sql-driver/mysql 期待される出力](https://github.com/pingcap-inc/tidb-example-golang/blob/main/Expected-Output.md#sqldriver)
-
-</div>
-
 <div label="Using GORM (Recommended)" value="gorm">
 
 [GORM 期待される出力](https://github.com/pingcap-inc/tidb-example-golang/blob/main/Expected-Output.md#gorm)
+
+</div>
+
+<div label="Using go-sql-driver/mysql" value="sqldriver">
+
+[go-sql-driver/mysql 期待される出力](https://github.com/pingcap-inc/tidb-example-golang/blob/main/Expected-Output.md#sqldriver)
 
 </div>
 

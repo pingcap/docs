@@ -11,29 +11,35 @@ summary: Learn how to migrate data from Amazon Aurora MySQL to TiDB Cloud in bul
 
 データをインポートするには、次の手順を実行します。
 
-1.  [**クラスター]**ページに移動します。
+1.  [TiDB Cloudコンソール](https://tidbcloud.com/)にログインし、[ **Clusters** ] ページに移動します。
 
-2.  ターゲット クラスターを見つけて、クラスター領域の右上隅にある [**データのインポート**] をクリックします。 [<strong>データ インポート タスク]</strong>ページが表示されます。
+2.  ターゲット クラスターを見つけて、クラスター領域の右上隅にある [ **...** ] をクリックし、 [<strong>データのインポート</strong>] を選択します。 [<strong>データのインポート]</strong>ページが表示されます。
 
     > **ヒント：**
     >
-    > または、[**クラスター**] ページでターゲット クラスターの名前をクリックし、右上隅にある [<strong>データのインポート</strong>] をクリックすることもできます。
+    > または、[**クラスター**] ページでターゲット クラスターの名前をクリックし、[インポート] 領域で [<strong>データ</strong>の<strong>インポート</strong>] をクリックすることもできます。
 
 3.  [Amazon S3 バケットを作成し、ソース データ ファイルを準備する方法を学びます](#learn-how-to-create-an-amazon-s3-bucket-and-prepare-source-data-files)に従ってソース データを準備します。データの準備部分で、さまざまな**データ形式**の長所と短所を確認できます。
 
-4.  ソース データの仕様に従って、 **Data Source Type** 、 <strong>Bucket URL</strong> 、および<strong>Data Format</strong>フィールドに入力します。
+4.  ソースデータの仕様に従って、 **Data Format** 、 <strong>Location</strong> 、 <strong>Bucket URI</strong> 、および<strong>Role ARN</strong>フィールドを選択または入力します。クロスアカウント アクセス用のバケット ポリシーとロールを作成する方法の詳細については、 [Amazon S3 アクセスを構成する](/tidb-cloud/config-s3-and-gcs-access.md#configure-amazon-s3-access)を参照してください。
 
-5.  **ターゲットクラスタ**の<strong>[ユーザー名]</strong>フィールドと [<strong>パスワード</strong>] フィールドに入力します。
+5.  **ターゲットクラスタ**のクラスタ名とリージョン名を確認します。 [<strong>次へ</strong>] をクリックします。
 
-6.  [クロスアカウント アクセスを構成する方法を学ぶ](#learn-how-to-configure-cross-account-access)に従って、クロスアカウント アクセス用のバケット ポリシーとロールを作成します。
+    TiDB Cloudは、指定されたバケット URI でデータにアクセスできるかどうかの検証を開始します。検証後、 TiDB Cloudはデフォルトのファイル命名パターンを使用してデータ ソース内のすべてのファイルをスキャンしようとし、次のページの左側にスキャンの概要結果を返します。 `AccessDenied`エラーが発生した場合は、 [S3 からのデータ インポート中のアクセス拒否エラーのトラブルシューティング](/tidb-cloud/troubleshoot-import-access-denied-error.md)を参照してください。
 
-7.  [**インポート]**をクリックします。
+6.  必要に応じてテーブル フィルター ルールを追加します。 [**次へ**] をクリックします。
 
-    データベース リソースの消費に関する警告メッセージが表示されます。
+    -   **テーブル フィルター**: インポートするテーブルをフィルター処理する場合は、この領域でテーブル フィルター ルールを指定できます。
 
-8.  [**確認]**をクリックします。
+        例えば：
 
-    TiDB Cloudは、指定されたバケット URL のデータにアクセスできるかどうかの検証を開始します。検証が完了して成功すると、インポート タスクが自動的に開始されます。 `AccessDenied`エラーが発生した場合は、 [S3 からのデータ インポート中のアクセス拒否エラーのトラブルシューティング](/tidb-cloud/troubleshoot-import-access-denied-error.md)を参照してください。
+        -   `db01.*` : `db01`データベース内のすべてのテーブルがインポートされます。
+        -   `!db02.*` : `db02`データベースのテーブルを除き、他のすべてのテーブルがインポートされます。 `!`は、インポートする必要のないテーブルを除外するために使用されます。
+        -   `*.*` : すべてのテーブルがインポートされます。
+
+        詳細については、 [テーブル フィルタの構文](/table-filter.md#syntax)を参照してください。
+
+7.  [**プレビュー**] ページでインポートするデータを確認し、[<strong>インポートの開始</strong>] をクリックします。
 
 > **ノート：**
 >
@@ -92,7 +98,7 @@ TiDB が文字セットまたは照合順序をサポートしていない場合
     ```bash
     curl --proto '=https' --tlsv1.2 -sSf https://tiup-mirrors.pingcap.com/install.sh | sh
     source ~/.bash_profile
-    tiup install dumpling 
+    tiup install dumpling
     ```
 
     上記のコマンドでは、 `~/.bash_profile`をプロファイル ファイルのパスに変更する必要があります。
@@ -141,7 +147,7 @@ TiDB が文字セットまたは照合順序をサポートしていない場合
     -F 256MiB
     ```
 
-4.  TiDB Cloudのデータ インポート タスク パネルで、**データ形式**として<strong>TiDB Dumpling</strong>を選択します。
+4.  TiDB Cloudのデータ インポート タスク パネルで、[**データ形式]**として<strong>[SQL ファイル</strong>] を選択します。
 
 ### オプション 2: Amazon Auroraスナップショットを使用してソース データ ファイルを準備する {#option-2-prepare-source-data-files-using-amazon-aurora-snapshots}
 
@@ -181,7 +187,7 @@ Auroraからデータを移行するには、データベースのスキーマ�
     mysql -u ${dest_username} -h ${dest_endpoint} -P ${dest_port_number} -p -D${dest_database}<db.sql
     ```
 
-4.  TiDB Cloudのデータ インポート タスク パネルで、 **Aurora Backup Snapshot**を<strong>Data Format</strong>として選択します。
+4.  TiDB Cloudの [**データのインポート**] ページで、[<strong>データ形式]</strong>として [ <strong>Auroraスナップショット</strong>] を選択します。
 
 #### スナップショットを作成して S3 にエクスポートする {#take-a-snapshot-and-export-it-to-s3}
 
@@ -205,11 +211,15 @@ Auroraからデータを移行するには、データベースのスキーマ�
 
 10. タスク テーブルから、宛先バケットを記録します (たとえば、 `s3://snapshot-bucket/snapshot-samples-1` )。
 
-## クロスアカウント アクセスを構成する方法を学ぶ {#learn-how-to-configure-cross-account-access}
+## Amazon S3 へのアクセスを設定する方法を学ぶ {#learn-how-to-configure-access-to-amazon-s3}
 
 TiDB Cloudクラスターと S3 バケットは、別の AWS アカウントにあります。 TiDB Cloudクラスターが S3 バケット内のソース データ ファイルにアクセスできるようにするには、Amazon S3 へのクロスアカウント アクセスを構成する必要があります。詳細については、 [Amazon S3 アクセスの構成](/tidb-cloud/config-s3-and-gcs-access.md#configure-amazon-s3-access)を参照してください。
 
 完了すると、クロスアカウントのポリシーとロールが作成されます。その後、 TiDB Cloudのデータ インポート タスク パネルで構成を続行できます。
+
+> **ノート：**
+>
+> データの一貫性を確保するために、 TiDB Cloudでは CSV ファイルを空のテーブルにのみインポートできます。既にデータが含まれている既存のテーブルにデータをインポートするには、このドキュメントに従って、 TiDB Cloudを使用してデータを一時的な空のテーブルにインポートし、 `INSERT SELECT`ステートメントを使用してデータをターゲットの既存のテーブルにコピーします。
 
 ## フィルター ルールの設定方法を確認する {#learn-how-to-set-up-filter-rules}
 

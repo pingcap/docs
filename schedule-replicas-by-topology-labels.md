@@ -7,7 +7,7 @@ summary: Learn how to schedule replicas by topology labels.
 
 > **ノート：**
 >
-> TiDB v5.3.0 では、 [SQL の配置規則](/placement-rules-in-sql.md)の実験的サポートが導入されました。これにより、テーブルとパーティションの配置を構成するためのより便利な方法が提供されます。 SQL の配置ルールは、将来のリリースで配置構成を PD に置き換える可能性があります。
+> TiDB v5.3.0 では[SQL の配置規則](/placement-rules-in-sql.md)が導入されています。これにより、テーブルとパーティションの配置を構成するためのより便利な方法が提供されます。 SQL の配置ルールは、将来のリリースで配置構成を PD に置き換える可能性があります。
 
 TiDB クラスターの高可用性と災害復旧機能を向上させるには、TiKV ノードを物理的にできるだけ分散させることをお勧めします。たとえば、TiKV ノードは、異なるラックや異なるデータ センターに分散することもできます。 TiKV のトポロジー情報に従って、PD スケジューラーはバックグラウンドで自動的にスケジューリングを実行して、リージョンの各レプリカを可能な限り分離し、災害復旧の機能を最大化します。
 
@@ -17,25 +17,25 @@ TiDB クラスターの高可用性と災害復旧機能を向上させるには
 
 ### TiKV の<code>labels</code>を構成する {#configure-code-labels-code-for-tikv}
 
-コマンドライン フラグを使用するか、TiKV 構成ファイルを設定して、キーと値のペアの形式でいくつかの属性をバインドできます。これらの属性は`labels`と呼ばれます。 TiKV が開始されると、その`labels`が PD に報告されるため、ユーザーは TiKV ノードの場所を特定できます。
+コマンドライン フラグを使用するか、TiKV または TiFlash 構成ファイルを設定して、キーと値のペアの形式でいくつかの属性をバインドできます。これらの属性は`labels`と呼ばれます。 TiKV と TiFlash が開始されると、ユーザーは TiKV と TiFlash ノードの場所を特定できるように、 `labels`を PD に報告します。
 
-トポロジーにゾーン &gt; ラック &gt; ホストの 3 つのレイヤーがあり、これらのラベル (ゾーン、ラック、ホスト) を使用して、次のいずれかの方法で TiKV の場所を設定できるとします。
+トポロジーにゾーン &gt; データセンター (DC) &gt; ラック &gt; ホストの 4 つのレイヤーがあり、これらのラベル (ゾーン、DC、ラック、ホスト) を使用して TiKV および TiFlash の場所を設定できるとします。 TiKV および TiFlash のラベルを設定するには、次のいずれかの方法を使用できます。
 
 -   コマンドライン フラグを使用して、TiKV インスタンスを開始します。
 
-    {{< copyable "" >}}
-
-    ```
-    tikv-server --labels zone=<zone>,rack=<rack>,host=<host>
+    ```shell
+    tikv-server --labels zone=<zone>,dc=<dc>,rack=<rack>,host=<host>
     ```
 
 -   TiKV 構成ファイルで構成します。
 
-    {{< copyable "" >}}
-
     ```toml
     [server]
-    labels = "zone=<zone>,rack=<rack>,host=<host>"
+    [server.labels]
+    zone = "<zone>"
+    dc = "<dc>"
+    rack = "<rack>"
+    host = "<host>"
     ```
 
 ### PD <code>location-labels</code>を構成する {#configure-code-location-labels-code-for-pd}
@@ -99,9 +99,9 @@ pd-ctl config set isolation-level zone
 
 ### TiUP を使用してクラスターを構成する (推奨) {#configure-a-cluster-using-tiup-recommended}
 
-TiUP を使用してクラスターをデプロイする場合、TiKV の場所を[初期設定ファイル](/production-deployment-using-tiup.md#step-3-initialize-cluster-topology-file)で構成できます。 TiUP は、展開中に対応する TiKV および PD 構成ファイルを生成します。
+TiUP を使用してクラスターをデプロイする場合、TiKV の場所を[初期設定ファイル](/production-deployment-using-tiup.md#step-3-initialize-cluster-topology-file)で構成できます。 TiUP は、展開中に TiKV、PD、および TiFlash に対応する構成ファイルを生成します。
 
-次の例では、 `zone/host`の 2 層トポロジーが定義されています。クラスターの TiKV ノードは 3 つのゾーンに分散され、各ゾーンには 2 つのホストがあります。 z1 では、ホストごとに 2 つの TiKV インスタンスがデプロイされます。 z2 および z3 では、ホストごとに 1 つの TiKV インスタンスがデプロイされます。次の例では、 `tikv-n`は`n`番目の TiKV ノードの IP アドレスを表します。
+次の例では、 `zone/host`の 2 層トポロジーが定義されています。クラスターの TiKV ノードは、z1、z2、および z3 の 3 つのゾーンに分散され、各ゾーンには h1、h2、h3、および h4 の 4 つのホストがあります。 z1 では、4 つの TiKV インスタンスが 2 つのホスト (h1 に`tikv-1`と`tikv-2` 、h2 に`tikv-3`と`tikv-4` ) にデプロイされます。 h3 に`tiflash-1` 、h4 に`tiflash-2`の 2 つの TiFlash インスタンスが他の 2 つのホストにデプロイされます。 z2 と z3 では、2 つの TiKV インスタンスが 2 つのホストにデプロイされ、2 つの TiFlash インスタンスが他の 2 つのホストにデプロイされます。次の例では、 `tikv-n`は`n`番目の TiKV ノードの IP アドレスを表し、 `tiflash-n`は`n`番目の TiFlash ノードの IP アドレスを表します。
 
 ```
 server_configs:
@@ -152,6 +152,40 @@ tikv_servers:
       server.labels:
         zone: z3
         host: h2s
+tiflash_servers:
+# z1
+  - host: tiflash-1
+    learner_config:
+      server.labels:
+        zone: z1
+        host: h3
+   - host: tiflash-2
+    learner_config:
+      server.labels:
+        zone: z1
+        host: h4
+# z2
+  - host: tiflash-3
+    learner_config:
+      server.labels:
+        zone: z2
+        host: h3
+   - host: tiflash-4
+    learner_config:
+      server.labels:
+        zone: z2
+        host: h4
+# z3
+  - host: tiflash-5
+    learner_config:
+      server.labels:
+        zone: z3
+        host: h3
+  - host: tiflash-6
+    learner_config:
+      server.labels:
+        zone: z3
+        host: h4
 ```
 
 詳細については、 [地理的に分散された配置トポロジ](/geo-distributed-deployment-topology.md)を参照してください。

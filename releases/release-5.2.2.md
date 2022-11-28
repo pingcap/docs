@@ -79,7 +79,7 @@ TiDB バージョン: 5.2.2
 
 -   TiKV
 
-    -   Congest エラー[#11082](https://github.com/tikv/tikv/issues/11082)により、CDC が頻繁にスキャンの再試行を追加する問題を修正します。
+    -   Congest エラー[#11082](https://github.com/tikv/tikv/issues/11082)により、CDC がスキャンの再試行を頻繁に追加する問題を修正します。
     -   チャンネルがいっぱいになるといかだ接続が切断される問題を修正します[#11047](https://github.com/tikv/tikv/issues/11047)
     -   Raftクライアント実装[#9714](https://github.com/tikv/tikv/issues/9714)でバッチ メッセージが大きすぎる問題を修正
     -   `resolved_ts` [#10965](https://github.com/tikv/tikv/issues/10965)で一部のコルーチンがリークする問題を修正
@@ -115,4 +115,4 @@ TiDB バージョン: 5.2.2
 
     -   Binlog
 
-        -   ほとんどのテーブルが除外されると、特定の負荷がかかった状態でチェックポイントを更新できないという問題を修正します[#1075](https://github.com/pingcap/tidb-binlog/pull/1075)
+        -   ほとんどのテーブルが除外されている場合、特定の負荷がかかるとチェックポイントを更新できないという問題を修正します[#1075](https://github.com/pingcap/tidb-binlog/pull/1075)

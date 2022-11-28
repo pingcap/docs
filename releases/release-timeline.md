@@ -9,6 +9,10 @@ summary: Learn about the TiDB release timeline.
 
 | バージョン                                                         | リリース日      |
 | :------------------------------------------------------------ | :--------- |
+| [5.3.4](/releases/release-5.3.4.md)                           | 2022-11-24 |
+| [6.1.2](/releases/release-6.1.2.md)                           | 2022-10-24 |
+| [5.4.3](/releases/release-5.4.3.md)                           | 2022-10-13 |
+| [5.3.3](/releases/release-5.3.3.md)                           | 2022-09-14 |
 | [6.1.1](/releases/release-6.1.1.md)                           | 2022-09-01 |
 | [6.2.0-DMR](https://docs.pingcap.com/tidb/v6.2/release-6.2.0) | 2022-08-23 |
 | [5.4.2](/releases/release-5.4.2.md)                           | 2022-07-08 |

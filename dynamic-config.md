@@ -1,17 +1,17 @@
 ---
-title: Modify Configuration Online
-summary: Learn how to change the cluster configuration online.
+title: Modify Configuration Dynamically
+summary: Learn how to change the cluster configuration dynamically.
 ---
 
-# Configuration / コンフィグレーションをオンラインで変更する {#modify-configuration-online}
+# Configuration / コンフィグレーションを動的に変更する {#modify-configuration-dynamically}
 
-このドキュメントでは、クラスター構成をオンラインで変更する方法について説明します。
+このドキュメントでは、クラスター構成を動的に変更する方法について説明します。
 
-クラスター コンポーネントを再起動せずに、SQL ステートメントを使用してオンラインでコンポーネント (TiDB、TiKV、および PD を含む) の構成を更新できます。現在、TiDB インスタンスの構成を変更する方法は、他のコンポーネント (TiKV や PD など) の構成を変更する方法とは異なります。
+クラスター コンポーネントを再起動せずに、SQL ステートメントを使用して、コンポーネント (TiDB、TiKV、および PD を含む) の構成を動的に更新できます。現在、TiDB インスタンスの構成を変更する方法は、他のコンポーネント (TiKV や PD など) の構成を変更する方法とは異なります。
 
 ## 共通操作 {#common-operations}
 
-このセクションでは、構成をオンラインで変更する一般的な操作について説明します。
+このセクションでは、構成を動的に変更する一般的な操作について説明します。
 
 ### インスタンス構成のビュー {#view-instance-configuration}
 
@@ -49,11 +49,11 @@ show config where name like '%log%'
 show config where type='tikv' and name='log.level'
 ```
 
-### TiKV 構成をオンラインで変更する {#modify-tikv-configuration-online}
+### TiKV 構成を動的に変更する {#modify-tikv-configuration-dynamically}
 
 > **ノート：**
 >
-> -   TiKV 構成項目をオンラインで変更すると、TiKV 構成ファイルが自動的に更新されます。ただし、 `tiup edit-config`を実行して、対応する構成項目を変更する必要もあります。そうしないと、 `upgrade`や`reload`などの操作によって変更が上書きされます。設定項目の変更については[TiUP を使用して構成を変更する](/maintain-tidb-using-tiup.md#modify-the-configuration)を参照してください。
+> -   TiKV 構成項目を動的に変更した後、TiKV 構成ファイルは自動的に更新されます。ただし、 `tiup edit-config`を実行して、対応する構成項目を変更する必要もあります。そうしないと、 `upgrade`や`reload`などの操作によって変更が上書きされます。設定項目の変更については[TiUP を使用して構成を変更する](/maintain-tidb-using-tiup.md#modify-the-configuration)を参照してください。
 > -   `tiup edit-config`を実行した後、 `tiup reload`を実行する必要はありません。
 
 `set config`ステートメントを使用すると、インスタンス アドレスまたはコンポーネント タイプに従って、単一インスタンスまたはすべてのインスタンスの構成を変更できます。
@@ -67,7 +67,7 @@ show config where type='tikv' and name='log.level'
 {{< copyable "" >}}
 
 ```sql
-set config tikv `split.qps-threshold`=1000
+set config tikv `split.qps-threshold`=1000;
 ```
 
 -   単一の TiKV インスタンスの構成を変更します。
@@ -75,7 +75,7 @@ set config tikv `split.qps-threshold`=1000
     {{< copyable "" >}}
 
     ```sql
-    set config "127.0.0.1:20180" `split.qps-threshold`=1000
+    set config "127.0.0.1:20180" `split.qps-threshold`=1000;
     ```
 
 変更が成功すると、 `Query OK`が返されます。
@@ -117,7 +117,7 @@ show warnings;
 
 構成アイテムが正常に変更された場合、結果は構成ファイルに保持され、後続の操作で優先されます。一部の構成項目の名前は、 `limit`や`key`などの TiDB 予約語と競合する場合があります。これらの構成アイテムについては、バッククォート`` ` ``を使用して囲みます。たとえば、 `` `raftstore.raft-log-gc-size-limit` ``です。
 
-次の TiKV 構成アイテムは、オンラインで変更できます。
+次の TiKV 構成アイテムは、動的に変更できます。
 
 | Configuration / コンフィグレーション項目                              | 説明                                                                                                              |
 | :-------------------------------------------------------- | :-------------------------------------------------------------------------------------------------------------- |
@@ -221,7 +221,7 @@ show warnings;
 
 詳細なパラメーターの説明については、 [TiKVConfiguration / コンフィグレーションファイル](/tikv-configuration-file.md)を参照してください。
 
-### PD 構成をオンラインで変更する {#modify-pd-configuration-online}
+### PD 構成を動的に変更する {#modify-pd-configuration-dynamically}
 
 現在、PD はインスタンスごとに個別の構成をサポートしていません。すべての PD インスタンスは同じ構成を共有します。
 
@@ -230,7 +230,7 @@ show warnings;
 {{< copyable "" >}}
 
 ```sql
-set config pd `log.level`='info'
+set config pd `log.level`='info';
 ```
 
 変更が成功すると、 `Query OK`が返されます。
@@ -241,7 +241,7 @@ Query OK, 0 rows affected (0.01 sec)
 
 構成アイテムが正常に変更された場合、結果は構成ファイルではなく etcd に保持されます。以降の操作では、etcd の構成が優先されます。一部の構成項目の名前は、TiDB の予約語と競合する場合があります。これらの構成アイテムについては、バッククォート`` ` ``を使用して囲みます。たとえば、 `` `schedule.leader-schedule-limit` ``です。
 
-次の PD 構成アイテムは、オンラインで変更できます。
+次の PD 構成アイテムは、動的に変更できます。
 
 | Configuration / コンフィグレーション項目               | 説明                                       |
 | :----------------------------------------- | :--------------------------------------- |
@@ -284,11 +284,11 @@ Query OK, 0 rows affected (0.01 sec)
 
 詳細なパラメーターの説明については、 [PDConfiguration / コンフィグレーションファイル](/pd-configuration-file.md)を参照してください。
 
-### TiDB 構成をオンラインで変更する {#modify-tidb-configuration-online}
+### TiDB 構成を動的に変更する {#modify-tidb-configuration-dynamically}
 
 現在、TiDB 構成を変更する方法は、TiKV および PD 構成を変更する方法とは異なります。 [システム変数](/system-variables.md)を使用して TiDB 構成を変更できます。
 
-次の例は、 `tidb_slow_log_threshold`変数を使用して`slow-threshold`をオンラインで変更する方法を示しています。
+次の例は、 `tidb_slow_log_threshold`変数を使用して`slow-threshold`を動的に変更する方法を示しています。
 
 デフォルト値の`slow-threshold`は 300 ミリ秒です。 `tidb_slow_log_threshold`を使用して 200 ms に設定できます。
 
@@ -317,11 +317,11 @@ select @@tidb_slow_log_threshold;
 1 row in set (0.00 sec)
 ```
 
-次の TiDB 構成項目は、オンラインで変更できます。
+次の TiDB 構成項目は動的に変更できます。
 
 | |Configuration / コンフィグレーション項目 | SQL 変数 |説明 | | | :--- | :--- | | | `log.enable-slow-log` | `tidb_enable_slow_log` |スローログを有効にするかどうか | | | `log.slow-threshold` | `tidb_slow_log_threshold` |遅いログのしきい値 | | | `log.expensive-threshold` | `tidb_expensive_query_time_threshold` |高価なクエリのしきい値 |
 
-### TiFlash 構成をオンラインで変更する {#modify-tiflash-configuration-online}
+### TiFlash 構成を動的に変更する {#modify-tiflash-configuration-dynamically}
 
 現在、システム変数[`tidb_max_tiflash_threads`](/system-variables.md#tidb_max_tiflash_threads-new-in-v610)を使用して TiFlash 構成`max_threads`を変更できます。この変数は、TiFlash がリクエストを実行する最大同時実行数を指定します。
 

@@ -9,20 +9,24 @@ summary: This document describes best practices for configuration and usage of H
 
 ![HAProxy Best Practices in TiDB](/media/haproxy.jpg)
 
+> **ノート：**
+>
+> TiDB のすべてのバージョンで動作する HAProxy の最小バージョンは v1.5 です。 v1.5 と v2.1 の間では、 `post-41`オプションを`mysql-check`に設定する必要があります。 HAProxy v2.2 以降を使用することをお勧めします。
+
 ## HAProxy の概要 {#haproxy-overview}
 
 HAProxy は、C 言語で記述された無料のオープンソース ソフトウェアで、TCP および HTTP ベースのアプリケーションに高可用性のロード バランサーとプロキシサーバーを提供します。 CPU とメモリを高速かつ効率的に使用するため、HAProxy は現在、GitHub、Bitbucket、Stack Overflow、Reddit、Tumblr、Twitter、Tuenti、AWS (Amazon Web Services) など、多くの有名な Web サイトで広く使用されています。
 
-HAProxy は 2000 年に Linux カーネルの中心的貢献者である Willy Tarreau によって書かれました。Willy Tarreau は今でもプロジェクトの保守を担当しており、オープンソース コミュニティで無料のソフトウェア アップデートを提供しています。このガイドでは、HAProxy [2.5.0](https://www.haproxy.com/blog/announcing-haproxy-2-5/)を使用します。最新の安定版を使用することをお勧めします。詳細は[HAProxy のリリース バージョン](http://www.haproxy.org/)を参照してください。
+HAProxy は 2000 年に Linux カーネルの中心的貢献者である Willy Tarreau によって書かれました。Willy Tarreau は今でもプロジェクトの保守を担当しており、オープンソース コミュニティで無料のソフトウェア アップデートを提供しています。このガイドでは、HAProxy [2.6](https://www.haproxy.com/blog/announcing-haproxy-2-6/)を使用します。最新の安定版を使用することをお勧めします。詳細は[HAProxy のリリース バージョン](http://www.haproxy.org/)を参照してください。
 
 ## 基本的な機能 {#basic-features}
 
--   [高可用性](http://cbonte.github.io/haproxy-dconv/2.5/intro.html#3.3.4) : HAProxy は、グレースフル シャットダウンとシームレスな切り替えをサポートする高可用性を提供します。
--   [負荷分散](http://cbonte.github.io/haproxy-dconv/2.5/configuration.html#4.2-balance) : 2 つの主要なプロキシ モードがサポートされています。レイヤー4 とも呼ばれる TCP と、レイヤー7 とも呼ばれる HTTP です。roundrobin、leastconn、random など、9 つ以上の負荷分散アルゴリズムがサポートされています。
--   [健康診断](http://cbonte.github.io/haproxy-dconv/2.5/configuration.html#5.2-check) : HAProxy はサーバーの HTTP または TCP モードのステータスを定期的にチェックします。
--   [スティッキー セッション](http://cbonte.github.io/haproxy-dconv/2.5/intro.html#3.3.6) : HAProxy は、アプリケーションがスティッキー セッションをサポートしていない間、クライアントを特定のサーバーに固定できます。
--   [SSL](http://cbonte.github.io/haproxy-dconv/2.5/intro.html#3.3.2) : HTTPS 通信と解決がサポートされています。
--   [モニタリングと統計](http://cbonte.github.io/haproxy-dconv/2.5/intro.html#3.3.3) : Web ページを通じて、サービスの状態とトラフィック フローをリアルタイムで監視できます。
+-   [高可用性](http://cbonte.github.io/haproxy-dconv/2.6/intro.html#3.3.4) : HAProxy は、グレースフル シャットダウンとシームレスな切り替えをサポートする高可用性を提供します。
+-   [負荷分散](http://cbonte.github.io/haproxy-dconv/2.6/configuration.html#4.2-balance) : 2 つの主要なプロキシ モードがサポートされています。レイヤー4 とも呼ばれる TCP と、レイヤー7 とも呼ばれる HTTP です。roundrobin、leastconn、random など、9 つ以上の負荷分散アルゴリズムがサポートされています。
+-   [健康診断](http://cbonte.github.io/haproxy-dconv/2.6/configuration.html#5.2-check) : HAProxy はサーバーの HTTP または TCP モードのステータスを定期的にチェックします。
+-   [スティッキー セッション](http://cbonte.github.io/haproxy-dconv/2.6/intro.html#3.3.6) : HAProxy は、アプリケーションがスティッキー セッションをサポートしていない間、クライアントを特定のサーバーに固定できます。
+-   [SSL](http://cbonte.github.io/haproxy-dconv/2.6/intro.html#3.3.2) : HTTPS 通信と解決がサポートされます。
+-   [モニタリングと統計](http://cbonte.github.io/haproxy-dconv/2.6/intro.html#3.3.3) : Web ページを通じて、サービスの状態とトラフィック フローをリアルタイムで監視できます。
 
 ## あなたが始める前に {#before-you-begin}
 
@@ -72,24 +76,24 @@ yum -y install epel-release gcc systemd-devel
 
 ## HAProxy をデプロイ {#deploy-haproxy}
 
-HAProxy を使用すると、負荷分散されたデータベース環境を簡単に構成およびセットアップできます。このセクションでは、一般的な展開操作について説明します。実際のシナリオに基づいて[構成ファイル](http://cbonte.github.io/haproxy-dconv/2.5/configuration.html)をカスタマイズできます。
+HAProxy を使用すると、負荷分散されたデータベース環境を簡単に構成およびセットアップできます。このセクションでは、一般的な展開操作について説明します。実際のシナリオに基づいて[構成ファイル](http://cbonte.github.io/haproxy-dconv/2.6/configuration.html)をカスタマイズできます。
 
 ### HAProxy をインストールする {#install-haproxy}
 
-1.  HAProxy 2.5.0 ソース コードのパッケージをダウンロードします。
+1.  HAProxy 2.6.2 ソース コードのパッケージをダウンロードします。
 
     {{< copyable "" >}}
 
     ```bash
-    wget https://github.com/haproxy/haproxy/archive/refs/tags/v2.5.0.zip
+    wget https://www.haproxy.org/download/2.6/src/haproxy-2.6.2.tar.gz
     ```
 
-2.  パッケージを解凍します。
+2.  パッケージを抽出します。
 
     {{< copyable "" >}}
 
     ```bash
-    unzip v2.5.0.zip
+    tar zxf haproxy-2.6.2.tar.gz
     ```
 
 3.  ソース コードからアプリケーションをコンパイルします。
@@ -97,7 +101,7 @@ HAProxy を使用すると、負荷分散されたデータベース環境を簡
     {{< copyable "" >}}
 
     ```bash
-    cd haproxy-2.5.0
+    cd haproxy-2.6.2
     make clean
     make -j 8 TARGET=linux-glibc USE_THREAD=1
     make PREFIX=${/app/haproxy} SBINDIR=${/app/haproxy/bin} install  # Replace `${/app/haproxy}` and `${/app/haproxy/bin}` with your custom directories.
@@ -109,6 +113,7 @@ HAProxy を使用すると、負荷分散されたデータベース環境を簡
 
     ```bash
     echo 'export PATH=/app/haproxy/bin:$PATH' >> /etc/profile
+    . /etc/profile
     ```
 
 5.  インストールが成功したかどうかを確認します。
@@ -158,7 +163,7 @@ haproxy --help
 | `-x <unix_socket>`              | 指定されたソケットに接続し、古いプロセスからリッスンしているすべてのソケットを取得します。次に、新しいソケットをバインドする代わりに、これらのソケットが使用されます。                                                                             |
 | `-S <bind>[,<bind_options>...]` | マスター ワーカー モードで、マスター CLI を作成します。この CLI を使用すると、すべてのワーカーの CLI にアクセスできます。デバッグに便利で、終了プロセスにアクセスする便利な方法です。                                                             |
 
-HAProxy コマンド ライン オプションの詳細については、 [HAProxy管理ガイド](http://cbonte.github.io/haproxy-dconv/2.5/management.html)および[HAProxy の一般的なコマンド マニュアル](https://manpages.debian.org/buster-backports/haproxy/haproxy.1.en.html)を参照してください。
+HAProxy コマンド ライン オプションの詳細については、 [HAProxy管理ガイド](http://cbonte.github.io/haproxy-dconv/2.6/management.html)および[HAProxy の一般的なコマンド マニュアル](https://manpages.debian.org/buster-backports/haproxy/haproxy.1.en.html)を参照してください。
 
 ### HAProxy の構成 {#configure-haproxy}
 

@@ -158,7 +158,7 @@ PD が復旧計画を正常にディスパッチした後、TiKV が実行結果
 
 ### ステップ 3. データとインデックスの一貫性を確認する (RawKV では不要) {#step-3-check-the-consistency-of-data-and-index-not-required-for-rawkv}
 
-リカバリが完了した後、データとインデックスが矛盾している可能性があります。 SQL コマンド`ADMIN CHECK` 、 `ADMIN RECOVER` 、および`ADMIN CLEANUP`を使用して、データの一貫性とインデックスの一貫性について、影響を受けるテーブルの一貫性をチェックし ( `"Unsafe recovery finished"`の出力から ID を取得できます)、テーブルを復旧します。
+リカバリが完了した後、データとインデックスが矛盾している可能性があります。 SQL コマンド[`ADMIN CHECK`](/sql-statements/sql-statement-admin-check-table-index.md) 、 `ADMIN RECOVER` 、および`ADMIN CLEANUP`を使用して、データの一貫性とインデックスの一貫性について、影響を受けるテーブルの一貫性をチェックし ( `"Unsafe recovery finished"`の出力から ID を取得できます)、テーブルを復旧します。
 
 > **ノート：**
 >
@@ -169,11 +169,17 @@ PD が復旧計画を正常にディスパッチした後、TiKV が実行結果
 <SimpleTab>
 <div label="Stores deployed using TiUP">
 
-{{< copyable "" >}}
+1.  回復不能なノードを削除します。
 
-```bash
-tiup cluster prune <cluster-name>
-```
+    ```bash
+    tiup cluster scale-in <cluster-name> -N <host> --force
+    ```
+
+2.  Tombstone ノードをクリーンアップします。
+
+    ```bash
+    tiup cluster prune <cluster-name>
+    ```
 
 </div>
 <div label="Stores deployed using TiDB Operator">

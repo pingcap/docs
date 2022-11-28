@@ -76,13 +76,7 @@ summary: Learn how to troubleshoot common errors in TiDB.
 
 -   3.1.3 TiDB がログに`information schema is changed`のエラーを報告する
 
-    -   原因 1: DML 操作が、DDL の下にあるテーブルに触れています。 `admin show ddl job`を使用して、現在進行中の DDL を確認できます。
-
-    -   原因 2: 現在の DML 操作の実行時間が長すぎます。その間、多くの DDL 操作が実行されるため、 `schema version`の変更が 1024 を超えます。新しいバージョン`lock table`では、スキーマのバージョンも変更される可能性があります。
-
-    -   原因 3: 現在 DML ステートメントを実行している TiDB インスタンスは、新しい`schema information`をロードできません (PD または TiKV のネットワークの問題が原因である可能性があります)。この間に、多くの DDL ステートメント ( `lock table`を含む) が実行され、 `schema version`の変更が 1024 を超えます。
-
-    -   解決策: 最初の 2 つの原因は、関連する DML 操作が失敗後に再試行されるため、アプリケーションに影響しません。原因 3 については、TiDB と TiKV/PD 間のネットワークを確認する必要があります。
+    -   詳細な原因と解決策については、 [`Information schema is changed`た理由エラーが報告される](/faq/sql-faq.md#why-the-information-schema-is-changed-error-is-reported)を参照してください。
 
     -   背景: 増加した`schema version`の数は、各 DDL 変更操作の`schema state`の数と一致しています。たとえば、 `create table`操作には 1 つのバージョン変更があり、 `add column`操作には 4 つのバージョン変更があります。したがって、列の変更操作が多すぎると、 `schema version`が急速に増加する可能性があります。詳細は[オンラインスキーマ変更](https://static.googleusercontent.com/media/research.google.com/zh-CN//pubs/archive/41376.pdf)を参照してください。
 
@@ -140,6 +134,8 @@ summary: Learn how to troubleshoot common errors in TiDB.
 
     -   SQL には、 `Union`で接続された複数のサブクエリが含まれています。中国語で[ケース-1828](https://github.com/pingcap/tidb-map/blob/master/maps/diagnose-case-study/case1828.md)を参照してください。
 
+OOM のトラブルシューティングの詳細については、 [TiDB OOM の問題のトラブルシューティング](/troubleshoot-tidb-oom.md)を参照してください。
+
 ### 3.3 間違った実行計画 {#3-3-wrong-execution-plan}
 
 -   3.3.1 症状
@@ -190,7 +186,7 @@ summary: Learn how to troubleshoot common errors in TiDB.
 
     この問題は予期されたものです。 `tikv-ctl`を使用してリージョンを復元できます。
 
--   4.1.2 TiKV が仮想マシンにデプロイされている場合、仮想マシンが強制終了されるか物理マシンの電源がオフになると、 `entries[X, Y]  is unavailable from storage`エラーが報告されます。
+-   4.1.2 TiKV が仮想マシンにデプロイされている場合、仮想マシンが強制終了されるか物理マシンの電源がオフになると、 `entries[X, Y] is unavailable from storage`エラーが報告されます。
 
     この問題は予期されたものです。仮想マシンの`fsync`は信頼できないため、 `tikv-ctl`を使用してリージョンを復元する必要があります。
 
@@ -399,7 +395,7 @@ summary: Learn how to troubleshoot common errors in TiDB.
 
         詳細については、中国語の[ケース-789](https://github.com/pingcap/tidb-map/blob/master/maps/diagnose-case-study/case789.md)を参照してください。
 
--   6.1.5 アップストリームとダウンストリームのデータの不整合
+-   6.1.5 アップストリームとダウンストリームのデータの不一致
 
     -   一部の TiDB ノードは binlog を有効にしません。 v3.0.6 以降のバージョンでは、 [http://127.0.0.1:10080/info/all](http://127.0.0.1:10080/info/all)のインターフェースにアクセスすることで、すべてのノードの binlog ステータスを確認できます。 v3.0.6 より前のバージョンでは、構成ファイルを表示して binlog の状態を確認できます。
 
@@ -413,7 +409,7 @@ summary: Learn how to troubleshoot common errors in TiDB.
 
     -   その他の状況については、 [バグを報告](https://github.com/pingcap/tidb-binlog/issues/new?labels=bug&#x26;template=bug-report.md) .
 
--   6.1.6 遅い複製
+-   6.1.6 遅いレプリケーション
 
     -   ダウンストリームは TiDB/MySQL であり、アップストリームは頻繁な DDL 操作を実行します。中国語で[ケース-1023](https://github.com/pingcap/tidb-map/blob/master/maps/diagnose-case-study/case1023.md)を参照してください。
 
@@ -457,14 +453,14 @@ summary: Learn how to troubleshoot common errors in TiDB.
 
 -   6.2.3 `driver: bad connection`のエラーが返されてレプリケーション タスクが中断されます。
 
-    -   `driver: bad connection`エラーは、DM と下流の TiDB データベース間の接続に異常 (ネットワーク障害、TiDB の再起動など) が発生し、現在の要求のデータがまだ TiDB に送信されていないことを示します。
+    -   `driver: bad connection`エラーは、DM と下流の TiDB データベースとの間の接続に異常 (ネットワーク障害や TiDB の再起動など) が発生し、現在の要求のデータがまだ TiDB に送信されていないことを示します。
 
         -   DM 1.0.0 GA より前のバージョンの場合、 `stop-task`を実行してタスクを停止し、 `start-task`を実行してタスクを再開します。
         -   DM 1.0.0 GA 以降のバージョンでは、このタイプのエラーに対する自動再試行メカニズムが追加されています。 [#265](https://github.com/pingcap/dm/pull/265)を参照してください。
 
 -   6.2.4 レプリケーション タスクが`invalid connection`のエラーで中断されます。
 
-    -   `invalid connection`エラーは、DM と下流の TiDB データベース間の接続に異常 (ネットワーク障害、TiDB 再起動、TiKV ビジーなど) が発生し、現在の要求のデータの一部が に送信されたことを示します。 TiDB。 DM には、レプリケーション タスクでデータを下流に同時にレプリケートする機能があるため、タスクが中断されると、いくつかのエラーが発生する可能性があります。これらのエラーは、 `query-status`または`query-error`を実行して確認できます。
+    -   `invalid connection`エラーは、DM と下流の TiDB データベース間の接続に異常 (ネットワーク障害、TiDB 再起動、TiKV ビジーなど) が発生し、現在の要求のデータの一部が TiDB に送信されたことを示します。 DM には、レプリケーション タスクでデータを下流に同時にレプリケートする機能があるため、タスクが中断されると、いくつかのエラーが発生する可能性があります。これらのエラーは、 `query-status`または`query-error`を実行して確認できます。
 
         -   増分レプリケーション プロセス中にエラーが`invalid connection`だけ発生した場合、DM はタスクを自動的に再試行します。
         -   DM が再試行しないか、バージョンの問題が原因で自動再試行に失敗した場合 (自動再試行は v1.0.0-rc.1 で導入されました)、 `stop-task`を使用してタスクを停止し、 `start-task`を使用してタスクを再開します。
@@ -520,30 +516,30 @@ summary: Learn how to troubleshoot common errors in TiDB.
         -   `AUTO_INCREMENT`列は正である必要があり、値「0」が含まれていません。
         -   UNIQUE および PRIMARY KEY に重複するエントリがあってはなりません。
 
-    -   解決策: [トラブルシューティングの解決策](/tidb-lightning/tidb-lightning-faq.md#checksum-failed-checksum-mismatched-remote-vs-local)を参照してください。
+    -   解決策: [トラブルシューティングの解決策](/tidb-lightning/troubleshoot-tidb-lightning.md#checksum-failed-checksum-mismatched-remote-vs-local)を参照してください。
 
 -   6.3.4 `Checkpoint for … has invalid status:(error code)`
 
     -   原因: チェックポイントが有効になっていて、Lightning/Importer が以前に異常終了しました。偶発的なデータ破損を防ぐために、 TiDB Lightningはエラーが解決されるまで起動しません。エラー コードは 25 未満の整数で、可能な値は`0, 3, 6, 9, 12, 14, 15, 17, 18, 20 and 21`です。整数は、インポート プロセスで予期しない終了が発生したステップを示します。整数が大きいほど、終了が遅くなります。
 
-    -   解決策: [トラブルシューティングの解決策](/tidb-lightning/tidb-lightning-faq.md#checkpoint-for--has-invalid-status-error-code)を参照してください。
+    -   解決策: [トラブルシューティングの解決策](/tidb-lightning/troubleshoot-tidb-lightning.md#checkpoint-for--has-invalid-status-error-code)を参照してください。
 
 -   6.3.5 `ResourceTemporarilyUnavailable("Too many open engines …: 8")`
 
     -   原因: 同時エンジン ファイルの数が、tikv-importer で指定された制限を超えています。これは、設定ミスが原因である可能性があります。また、設定が正しい場合でも、以前に tidb-lightning が異常終了したことがあると、エンジン ファイルがダングリング オープン状態のままになる可能性があり、これも同様のエラーを引き起こす可能性があります。
-    -   解決策: [トラブルシューティングの解決策](/tidb-lightning/tidb-lightning-faq.md#resourcetemporarilyunavailabletoo-many-open-engines--)を参照してください。
+    -   解決策: [トラブルシューティングの解決策](/tidb-lightning/troubleshoot-tidb-lightning.md#resourcetemporarilyunavailabletoo-many-open-engines--)を参照してください。
 
 -   6.3.6 `cannot guess encoding for input file, please convert to UTF-8 manually`
 
     -   原因: TiDB Lightningは、UTF-8 および GB-18030 エンコーディングのみをサポートしています。このエラーは、ファイルがこれらのエンコーディングのいずれでもないことを意味します。過去の ALTER TABLE の実行により、UTF-8 の文字列と GB-18030 の別の文字列が含まれているなど、ファイルにエンコーディングが混在している可能性もあります。
 
-    -   解決策: [トラブルシューティングの解決策](/tidb-lightning/tidb-lightning-faq.md#cannot-guess-encoding-for-input-file-please-convert-to-utf-8-manually)を参照してください。
+    -   解決策: [トラブルシューティングの解決策](/tidb-lightning/troubleshoot-tidb-lightning.md#cannot-guess-encoding-for-input-file-please-convert-to-utf-8-manually)を参照してください。
 
 -   6.3.7 `[sql2kv] sql encode error = [types:1292]invalid time format: '{1970 1 1 0 45 0 0}'`
 
     -   原因: タイムスタンプ タイプのエントリに、存在しない時間値があります。これは、DST の変更が原因であるか、時間の値がサポートされている範囲 (1970 年 1 月 1 日から 2038 年 1 月 19 日まで) を超えたためです。
 
-    -   解決策: [トラブルシューティングの解決策](/tidb-lightning/tidb-lightning-faq.md#sql2kv-sql-encode-error--types1292invalid-time-format-1970-1-1-)を参照してください。
+    -   解決策: [トラブルシューティングの解決策](/tidb-lightning/troubleshoot-tidb-lightning.md#sql2kv-sql-encode-error--types1292invalid-time-format-1970-1-1-)を参照してください。
 
 ## 7. 共通ログ分析 {#7-common-log-analysis}
 
@@ -602,7 +598,7 @@ summary: Learn how to troubleshoot common errors in TiDB.
 
 -   7.2.3 `TxnLockNotFound` .
 
-    このトランザクション コミットは遅すぎるため、TTL (小さなトランザクションの場合、既定では 3 秒) 後に他のトランザクションによってロールバックされます。このトランザクションは自動的に再試行されるため、通常、ビジネスは影響を受けません。
+    このトランザクション コミットは遅すぎるため、Time To Live (TTL) 後に他のトランザクションによってロールバックされます。このトランザクションは自動的に再試行されるため、通常、ビジネスは影響を受けません。サイズが 0.25 MB 以下のトランザクションの場合、デフォルトの TTL は 3 秒です。
 
 -   7.2.4 `PessimisticLockNotFound` .
 

@@ -4,13 +4,13 @@ summary: Learn how to configure TiFlash.
 aliases: ['/docs/dev/tiflash/tiflash-configuration/','/docs/dev/reference/tiflash/configuration/']
 ---
 
-# TiFlash の設定 {#configure-tiflash}
+# TiFlash の構成 {#configure-tiflash}
 
 このドキュメントでは、TiFlash の展開と使用に関連する構成パラメーターを紹介します。
 
 ## PD スケジューリング パラメータ {#pd-scheduling-parameters}
 
-[pd-ctl](/pd-control.md)を使用して PD スケジューリング パラメータを調整できます。 tiup を使用してクラスターをデプロイおよび管理する場合、 `tiup ctl pd`を使用して`pd-ctl -u <pd_ip:pd_port>`を置き換えることができることに注意してください。
+[pd-ctl](/pd-control.md)を使用して PD スケジューリング パラメータを調整できます。 tiup を使用してクラスターをデプロイおよび管理する場合、 `tiup ctl:<cluster-version> pd`を使用して`pd-ctl -u <pd_ip:pd_port>`を置き換えることができることに注意してください。
 
 -   [`replica-schedule-limit`](/pd-configuration-file.md#replica-schedule-limit) : レプリカ関連のオペレーターが生成される速度を決定します。このパラメータは、ノードのオフライン化やレプリカの追加などの操作に影響します。
 
@@ -247,6 +247,10 @@ delta_index_cache_size = 0
 ```
 
 上記以外のパラメータはTiKVと同じです。キーが`engine`の`label`は予約済みであり、手動で設定することはできません。
+
+### トポロジ ラベルごとにレプリカをスケジュールする {#schedule-replicas-by-topology-labels}
+
+[利用可能なゾーンを設定する](/tiflash/create-tiflash-replicas.md#set-available-zones)を参照してください。
 
 ### マルチディスク展開 {#multi-disk-deployment}
 

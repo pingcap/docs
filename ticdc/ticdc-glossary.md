@@ -9,7 +9,7 @@ summary: Learn the terms about TiCDC and their definitions.
 
 TiDB 関連の用語と定義については、 [TiDB用語集](/glossary.md)を参照してください。
 
-## ハ {#c}
+## C {#c}
 
 ### 捕獲 {#capture}
 

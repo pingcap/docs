@@ -10,11 +10,11 @@ summary: Learn how to export snapshots of Grafana Dashboard, and how to visualiz
 
 # Grafana スナップショットのエクスポート {#export-grafana-snapshots}
 
-メトリクス データは、トラブルシューティングにおいて重要です。リモート アシスタンスを要求すると、サポート スタッフが Grafana ダッシュボードを表示して問題を診断することが必要になる場合があります。 [メトリクスツール](https://metricstool.pingcap.com/)は、Grafana ダッシュボードのスナップショットをローカル ファイルとしてエクスポートし、これらのスナップショットを視覚化するのに役立ちます。これらのスナップショットを部外者と共有し、Grafanaサーバー上の他の機密情報へのアクセスを許可することなく、部外者がグラフを正確に読み取れるようにすることができます。
+メトリクス データは、トラブルシューティングにおいて重要です。リモート アシスタンスを要求すると、サポート スタッフが Grafana ダッシュボードを表示して問題を診断することが必要になる場合があります。 [メトリクスツール](https://metricstool.pingcap.net/)は、Grafana ダッシュボードのスナップショットをローカル ファイルとしてエクスポートし、これらのスナップショットを視覚化するのに役立ちます。これらのスナップショットを部外者と共有し、Grafanaサーバー上の他の機密情報へのアクセスを許可することなく、部外者がグラフを正確に読み取れるようにすることができます。
 
 ## 使用法 {#usage}
 
-MetricsTool は[https://metricstool.pingcap.com/](https://metricstool.pingcap.com/)からアクセスできます。これは、次の 3 つのツール セットで構成されています。
+MetricsTool は[https://metricstool.pingcap.net/](https://metricstool.pingcap.net/)からアクセスできます。これは、次の 3 つのツール セットで構成されています。
 
 -   **エクスポート**: ブラウザーの開発者ツールで実行されるユーザー スクリプト。Grafana v6.xxサーバーの現在のダッシュボードに表示されているすべてのパネルのスナップショットをダウンロードできます。
 

@@ -20,12 +20,12 @@ tiup [flags] <component> [args...]      # Runs a component
 
 ## オプション {#options}
 
-### -B, --バイナリ {#b-binary}
+### - バイナリ {#binary}
 
 -   このオプションを有効にすると、指定したバイナリ ファイル パスが出力されます。
 
-    -   `tiup -B/--binary <component>`を実行すると、インストールされた最新の安定した`<component>`コンポーネントのパスが出力されます。 `<component>`がインストールされていない場合は、エラーが返されます。
-    -   `tiup -B/--binary <component>:<version>`を実行すると、インストールされた`<component>`コンポーネントの`<version>`のパスが出力されます。この`<version>`が出力されない場合、エラーが返されます。
+    -   `tiup --binary <component>`を実行すると、インストールされた最新の安定した`<component>`コンポーネントのパスが表示されます。 `<component>`がインストールされていない場合は、エラーが返されます。
+    -   `tiup --binary <component>:<version>`を実行すると、インストールされた`<component>`コンポーネントの`<version>`のパスが表示されます。この`<version>`が出力されない場合、エラーが返されます。
 
 -   データ型: `BOOLEAN`
 

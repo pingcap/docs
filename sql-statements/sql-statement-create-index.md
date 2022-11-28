@@ -256,7 +256,7 @@ CREATE UNIQUE INDEX c1 ON t1 (c1) INVISIBLE;
 
 ## MySQL の互換性 {#mysql-compatibility}
 
--   `FULLTEXT` 、 `HASH`および`SPATIAL`のインデックスはサポートされていません。
+-   TiDB は`FULLTEXT`および`SPATIAL`構文の解析をサポートしていますが、 `FULLTEXT` 、 `HASH` 、および`SPATIAL`インデックスの使用はサポートしていません。
 -   降順のインデックスはサポートされていません ( MySQL 5.7と同様)。
 -   `CLUSTERED`タイプの主キーをテーブルに追加することはサポートされていません。 `CLUSTERED`タイプの主キーの詳細については、 [クラスター化インデックス](/clustered-indexes.md)を参照してください。
 -   式インデックスはビューと互換性がありません。ビューを使用してクエリを実行する場合、式インデックスは同時に使用できません。

@@ -98,7 +98,7 @@ v4.0.8 以降、TiCDC は、タスク構成を変更することにより**、�
 -   RawKV のみを使用する TiKV クラスター。
 -   TiDB の[DDL 操作`CREATE SEQUENCE`](/sql-statements/sql-statement-create-sequence.md)と[SEQUENCE関数](/sql-statements/sql-statement-create-sequence.md#sequence-function) 。アップストリームの TiDB が`SEQUENCE`を使用する場合、TiCDC はアップストリームで実行された`SEQUENCE`の DDL 操作/関数を無視します。ただし、 `SEQUENCE`の関数を使用する DML 操作は正しくレプリケートできます。
 
-TiCDC は、アップストリームでの大規模なトランザクションのシナリオに対して部分的なサポートのみを提供します。詳細については、 [FAQ: TiCDC は大規模なトランザクションの複製をサポートしていますか?リスクはありますか？](/ticdc/ticdc-faq.md#does-ticdc-support-replicating-large-transactions-is-there-any-risk)を参照してください。
+TiCDC は、アップストリームでの大規模なトランザクションのシナリオに対して部分的なサポートのみを提供します。詳細については、 [TiCDC は大規模なトランザクションの複製をサポートしていますか?リスクはありますか？](/ticdc/ticdc-faq.md#does-ticdc-support-replicating-large-transactions-is-there-any-risk)を参照してください。
 
 > **ノート：**
 >
@@ -129,7 +129,9 @@ TiCDC v5.0.0-rc の`cdc cli`ツールを使用して v4.0.x の TiCDC クラス�
 
 -   TiCDC クラスターが v4.0.9 以降のバージョンの場合、v5.0.0-rc `cdc cli`ツールを使用してレプリケーション タスクを作成すると、古い値と統合ソーター機能が予期せずデフォルトで有効になります。
 
-解決策: TiCDC クラスターのバージョンに対応する`cdc`の実行可能ファイルを使用して、次の操作を実行します。
+ソリューション:
+
+TiCDC クラスターのバージョンに対応する`cdc`の実行可能ファイルを使用して、次の操作を実行します。
 
 1.  v5.0.0-rc `cdc cli`ツールを使用して作成された変更フィードを削除します。たとえば、 `tiup cdc:v4.0.9 cli changefeed remove -c xxxx --pd=xxxxx --force`コマンドを実行します。
 2.  レプリケーション タスクがスタックしている場合は、TiCDC クラスターを再起動します。たとえば、 `tiup cluster restart <cluster_name> -R cdc`コマンドを実行します。

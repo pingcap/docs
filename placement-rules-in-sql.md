@@ -262,5 +262,5 @@ PARTITION BY RANGE( YEAR(purchased) ) (
 
 -   一時テーブルは配置オプションをサポートしていません。
 -   設定`PRIMARY_REGION`および`REGIONS` 、構文糖衣規則が許可されます。今後、 `PRIMARY_RACK`・`PRIMARY_ZONE`・`PRIMARY_HOST`の品種追加を予定しております。 [問題 #18030](https://github.com/pingcap/tidb/issues/18030)を参照してください。
--   TiFlash 学習者は、配置規則の構文では構成できません。
+-   TiDB v6.1.0 および v6.1.1 では、TiFlash 学習者は配置規則の構文を介して構成できません。
 -   配置ルールは、保管中のデータが正しい TiKV ストアに存在することのみを保証します。ルールは、(ユーザー クエリまたは内部操作のいずれかを介して) 転送中のデータが特定のリージョンでのみ発生することを保証するものではありません。

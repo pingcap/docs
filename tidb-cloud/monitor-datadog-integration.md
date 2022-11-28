@@ -1,9 +1,9 @@
 ---
-title: Datadog Integration (Third-Party Monitoring Service)
+title: Integrate TiDB Cloud with Datadog
 summary: Learn how to monitor your TiDB cluster with the Datadog integration.
 ---
 
-# Datadog 統合 {#datadog-integration}
+# TiDB Cloudと Datadog の統合 {#integrate-tidb-cloud-with-datadog}
 
 TiDB クラスターに関するメトリック データを[データドッグ](https://www.datadoghq.com/)に送信するようにTiDB Cloudを構成できます。その後、これらのメトリクスを Datadog ダッシュボードで直接表示できます。
 
@@ -17,7 +17,7 @@ TiDB クラスターに関するメトリック データを[データドッグ]
 
 ## 制限 {#limitation}
 
-[開発者層のクラスター](/tidb-cloud/select-cluster-tier.md#developer-tier)で Datadog 統合を使用することはできません。
+[サーバーレス階層クラスター](/tidb-cloud/select-cluster-tier.md#serverless-tier-beta)で Datadog 統合を使用することはできません。
 
 ## 手順 {#steps}
 
@@ -52,15 +52,21 @@ TiDB クラスターに関するメトリック データを[データドッグ]
 
 Datadog は、TiDB クラスターの次のメトリクス データを追跡します。
 
-| 指標名                                    | 指標タイプ  | ラベル                                                                                                                  | 説明                              |
-| :------------------------------------- | :----- | :------------------------------------------------------------------------------------------------------------------- | :------------------------------ |
-| tidb_cloud.db_queries_total            | カウント   | sql_type: `Select\|Insert\|...`<br/>クラスタ名: `<cluster name>`<br/>インスタンス: `tidb-0\|tidb-1…`<br/>コンポーネント: `tidb`        | 実行されたステートメントの総数                 |
-| tidb_cloud.db_failed_queries_total     | カウント   | タイプ: `planner:xxx\|executor:2345\|...`<br/>クラスタ名: `<cluster name>`<br/>インスタンス: `tidb-0\|tidb-1…`<br/>コンポーネント: `tidb` | 実行エラーの総数                        |
-| tidb_cloud.db_connections              | ゲージ    | クラスタ名: `<cluster name>`<br/>インスタンス: `tidb-0\|tidb-1…`<br/>コンポーネント: `tidb`                                            | TiDBサーバーの現在の接続数                 |
-| tidb_cloud.db_query_duration_seconds   | ヒストグラム | sql_type: `Select\|Insert\|...`<br/>クラスタ名: `<cluster name>`<br/>インスタンス: `tidb-0\|tidb-1…`<br/>コンポーネント: `tidb`        | ステートメントの期間ヒストグラム                |
-| tidb_cloud.node_storage_used_bytes     | ゲージ    | クラスタ名: `<cluster name>`<br/>インスタンス: `tikv-0\|tikv-1…\|tiflash-0\|tiflash-1…`<br/>コンポーネント: `tikv\|tiflash`            | TiKV/TiFlash ノードのディスク使用量バイト     |
-| tidb_cloud.node_storage_capacity_bytes | ゲージ    | クラスタ名: `<cluster name>`<br/>インスタンス: `tikv-0\|tikv-1…\|tiflash-0\|tiflash-1…`<br/>コンポーネント: `tikv\|tiflash`            | TiKV/TiFlash ノードのディスク容量バイト      |
-| tidb_cloud.node_cpu_seconds_total      | カウント   | クラスタ名: `<cluster name>`<br/>インスタンス: `tidb-0\|tidb-1…\|tikv-0…\|tiflash-0…`<br/>コンポーネント: `tidb\|tikv\|tiflash`        | TiDB/TiKV/TiFlash ノードの CPU 使用率  |
-| tidb_cloud.node_cpu_capacity_cores     | ゲージ    | クラスタ名: `<cluster name>`<br/>インスタンス: `tidb-0\|tidb-1…\|tikv-0…\|tiflash-0…`<br/>コンポーネント: `tidb\|tikv\|tiflash`        | TiDB/TiKV/TiFlash ノードの CPU 制限コア |
-| tidb_cloud.node_memory_used_bytes      | ゲージ    | クラスタ名: `<cluster name>`<br/>インスタンス: `tidb-0\|tidb-1…\|tikv-0…\|tiflash-0…`<br/>コンポーネント: `tidb\|tikv\|tiflash`        | TiDB/TiKV/TiFlash ノードの使用メモリバイト数 |
-| tidb_cloud.node_memory_capacity_bytes  | ゲージ    | クラスタ名: `<cluster name>`<br/>インスタンス: `tidb-0\|tidb-1…\|tikv-0…\|tiflash-0…`<br/>コンポーネント: `tidb\|tikv\|tiflash`        | TiDB/TiKV/TiFlash ノードのメモリ容量バイト  |
+| 指標名                                        | 指標タイプ | ラベル                                                                                                               | 説明                                                                                                  |
+| :----------------------------------------- | :---- | :---------------------------------------------------------------------------------------------------------------- | :-------------------------------------------------------------------------------------------------- |
+| tidb_cloud.db_database_time                | ゲージ   | sql_type: 選択|挿入|...<br/>クラスタ名: `<cluster name>`<br/>インスタンス: tidb-0|tidb-1…<br/>コンポーネント: `tidb`                    | すべてのプロセスの CPU 時間と非アイドル待機時間を含む、TiDB で実行されているすべての SQL ステートメントによって消費された 1 秒あたりの合計時間。                   |
+| tidb_cloud.db_query_per_second             | ゲージ   | タイプ: 選択|挿入|...<br/>クラスタ名: `<cluster name>`<br/>インスタンス: tidb-0|tidb-1…<br/>コンポーネント: `tidb`                         | SELECT、INSERT、UPDATE、およびその他のタイプのステートメントに従ってカウントされる、すべての TiDB インスタンスで 1 秒あたりに実行される SQL ステートメントの数。    |
+| tidb_cloud.db_average_query_duration       | ゲージ   | sql_type: 選択|挿入|...<br/>クラスタ名: `<cluster name>`<br/>インスタンス: tidb-0|tidb-1…<br/>コンポーネント: `tidb`                    | クライアントのネットワーク要求が TiDB に送信されてから、TiDB が要求を実行した後に要求がクライアントに返されるまでの時間。                                  |
+| tidb_cloud.db_failed_queries               | ゲージ   | タイプ: エグゼキューター:xxxx|パーサー:xxxx|...<br/>クラスタ名: `<cluster name>`<br/>インスタンス: tidb-0|tidb-1…<br/>コンポーネント: `tidb`       | 各 TiDB インスタンスで 1 秒あたりに発生した SQL 実行エラーに基づく、エラーの種類 (構文エラーや主キーの競合など) の統計。                               |
+| tidb_cloud.db_total_connection             | ゲージ   | クラスタ名: `<cluster name>`<br/>インスタンス: tidb-0|tidb-1…<br/>コンポーネント: `tidb`                                            | TiDBサーバーの現在の接続数。                                                                                    |
+| tidb_cloud.db_active_connections           | ゲージ   | クラスタ名: `<cluster name>`<br/>インスタンス: tidb-0|tidb-1…<br/>コンポーネント: `tidb`                                            | アクティブな接続の数。                                                                                         |
+| tidb_cloud.db_disconnections               | ゲージ   | 結果: OK|エラー|不明<br/>クラスタ名: `<cluster name>`<br/>インスタンス: tidb-0|tidb-1…<br/>コンポーネント: `tidb`                          | 切断されたクライアントの数。                                                                                      |
+| tidb_cloud.db_command_per_second           | ゲージ   | タイプ: クエリ|StmtPrepare|...<br/>クラスタ名: `<cluster name>`<br/>インスタンス: tidb-0|tidb-1…<br/>コンポーネント: `tidb`               | コマンド実行結果の成否で分類した、1秒間にTiDBが処理したコマンド数。                                                                |
+| tidb_cloud.db_queries_using_plan_cache_ops | ゲージ   | クラスタ名: `<cluster name>`<br/>インスタンス: tidb-0|tidb-1…<br/>コンポーネント: `tidb`                                            | 1 秒あたり[プラン キャッシュ](/sql-prepared-plan-cache.md)件を使用したクエリの統計。実行プラン キャッシュは、プリペアドステートメントコマンドのみをサポートします。 |
+| tidb_cloud.db_transaction_per_second       | ゲージ   | txn_mode: 悲観的|楽観的<br/>タイプ: 中止|コミット|...<br/>クラスタ名: `<cluster name>`<br/>インスタンス: tidb-0|tidb-1…<br/>コンポーネント: `tidb` | 1 秒あたりに実行されたトランザクションの数。                                                                             |
+| tidb_cloud.node_storage_used_bytes         | ゲージ   | クラスタ名: `<cluster name>`<br/>インスタンス: tikv-0|tikv-1…|tiflash-0|tiflash-1…<br/>コンポーネント: tikv|tiflash                 | TiKV/TiFlash ノードのディスク使用量 (バイト単位)。                                                                   |
+| tidb_cloud.node_storage_capacity_bytes     | ゲージ   | クラスタ名: `<cluster name>`<br/>インスタンス: tikv-0|tikv-1…|tiflash-0|tiflash-1…<br/>コンポーネント: tikv|tiflash                 | TiKV/TiFlash ノードのディスク容量 (バイト単位)。                                                                    |
+| tidb_cloud.node_cpu_seconds_total          | カウント  | クラスタ名: `<cluster name>`<br/>インスタンス: tidb-0|tidb-1…|tikv-0…|tiflash-0…<br/>コンポーネント: tidb|tikv|tiflash              | TiDB/TiKV/TiFlash ノードの CPU 使用率。                                                                     |
+| tidb_cloud.node_cpu_capacity_cores         | ゲージ   | クラスタ名: `<cluster name>`<br/>インスタンス: tidb-0|tidb-1…|tikv-0…|tiflash-0…<br/>コンポーネント: tidb|tikv|tiflash              | TiDB/TiKV/TiFlash ノードの CPU コアの制限。                                                                   |
+| tidb_cloud.node_memory_used_bytes          | ゲージ   | クラスタ名: `<cluster name>`<br/>インスタンス: tidb-0|tidb-1…|tikv-0…|tiflash-0…<br/>コンポーネント: tidb|tikv|tiflash              | TiDB/TiKV/TiFlash ノードの使用メモリ (バイト単位)。                                                                |
+| tidb_cloud.node_memory_capacity_bytes      | ゲージ   | クラスタ名: `<cluster name>`<br/>インスタンス: tidb-0|tidb-1…|tikv-0…|tiflash-0…<br/>コンポーネント: tidb|tikv|tiflash              | TiDB/TiKV/TiFlash ノードのメモリ容量 (バイト単位)。                                                                |

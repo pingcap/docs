@@ -11,14 +11,14 @@ HTTP インターフェイス (TiCDC OpenAPI 機能) を使用して、TiCDC ク
 
 ## TiUP を使用して TiCDC をアップグレードする {#upgrade-ticdc-using-tiup}
 
-このセクションでは、TiUP を使用して TiCDC クラスターをアップグレードする方法を紹介します。次の例では、TiCDC と TiDB クラスター全体を v6.1.0 にアップグレードする必要があると想定しています。
+このセクションでは、TiUP を使用して TiCDC クラスターをアップグレードする方法を紹介します。次の例では、TiCDC と TiDB クラスター全体を v6.1.2 にアップグレードする必要があると想定しています。
 
 {{< copyable "" >}}
 
 ```shell
 tiup update --self && \
 tiup update --all && \
-tiup cluster upgrade <cluster-name> v6.1.0
+tiup cluster upgrade <cluster-name> v6.1.2
 ```
 
 ### バージョンアップ時の注意事項 {#notes-for-upgrade}
@@ -53,7 +53,7 @@ tiup cluster edit-config <cluster-name>
     gc-ttl: 3600
 ```
 
-変更後、 `tiup cluster reload -R cdc`コマンドを実行して設定をリロードします。
+変更後、 `tiup cluster reload -R cdc`コマンドを実行して構成をリロードします。
 
 ## TLS を使用する {#use-tls}
 
@@ -70,7 +70,7 @@ tiup cluster edit-config <cluster-name>
 >
 > PD が listen する IP アドレスとポートは、 `pd-server`始動時に指定された`advertise-client-urls`パラメーターに対応します。複数の`pd-server`には複数の`advertise-client-urls`パラメータがあり、1 つまたは複数のパラメータを指定できます。たとえば、 `--pd=http://10.0.10.25:2379`または`--pd=http://10.0.10.25:2379,http://10.0.10.26:2379,http://10.0.10.27:2379`です。
 
-TiUP を使用して TiCDC をデプロイする場合は、次のコマンドの`cdc cli`を`tiup ctl cdc`に置き換えます。
+TiUP を使用して TiCDC をデプロイする場合は、次のコマンドの`cdc cli`を`tiup ctl:<cluster-version> cdc`に置き換えます。
 
 ### TiCDC サービスの進行状況を管理する ( <code>capture</code> ) {#manage-ticdc-service-progress-code-capture-code}
 
@@ -119,11 +119,11 @@ TiUP を使用して TiCDC をデプロイする場合は、次のコマンド�
 
 上記の状態遷移図の番号は、次のように記述されます。
 
--   `changefeed pause`コマンド実行
--   ② `changefeed resume`コマンドを実行してレプリケーションタスクを再開する
+-   ① `changefeed pause`コマンドを実行します。
+-   ② `changefeed resume`コマンドを実行してレプリケーションタスクを再開します。
 -   ③ `changefeed`動作中に回復可能なエラーが発生し、自動的に動作が再開されます。
--   ④ `changefeed resume`コマンドを実行してレプリケーションタスクを再開する
--   ⑤ `changefeed`の動作中に回復可能なエラーが発生した場合
+-   ④ `changefeed resume`コマンドを実行してレプリケーションタスクを再開します。
+-   ⑤ `changefeed`目の操作で回復不可能なエラーが発生した。
 -   ⑥ `changefeed`がプリセット`TargetTs`に到達し、レプリケーションが自動的に停止されます。
 -   ⑦ `changefeed`は`gc-ttl`で指定された期間を超えて停止し、再開することはできません。
 -   ⑧ `changefeed`は、自動回復を実行しようとしたときに、回復不能なエラーが発生しました。
@@ -213,7 +213,7 @@ Info: {"sink-uri":"mysql://root:123456@127.0.0.1:3306/","opts":{},"create-time":
 | `127.0.0.1`                          | ダウンストリーム Kafka サービスの IP アドレス                                                                                                                                                                                           |
 | `9092`                               | 下流の Kafka のポート                                                                                                                                                                                                         |
 | `topic-name`                         | 変数。 Kafka トピックの名前                                                                                                                                                                                                      |
-| `kafka-version`                      | ダウンストリーム Kafka のバージョン (オプション、デフォルトでは`2.4.0`現在、サポートされている最も古い Kafka バージョンは`0.11.0.2`で、最新のものは`2.7.0`です。この値は、ダウンストリーム Kafka の実際のバージョンと一致する必要があります)                                                                         |
+| `kafka-version`                      | ダウンストリーム Kafka のバージョン (オプション、デフォルトでは`2.4.0`現在、サポートされている最も古い Kafka バージョンは`0.11.0.2`で、最新のものは`3.1.0`です。この値は、ダウンストリーム Kafka の実際のバージョンと一致する必要があります)                                                                         |
 | `kafka-client-id`                    | レプリケーション タスクの Kafka クライアント ID を指定します (オプション。既定では`TiCDC_sarama_producer_replication ID` )。                                                                                                                              |
 | `partition-num`                      | ダウンストリーム Kafka パーティションの数 (オプション。値は、実際のパーティション数を**超えてはなりません**。そうでない場合、レプリケーション タスクは正常に作成されません。デフォルトでは`3` )                                                                                                              |
 | `max-message-bytes`                  | 毎回 Kafka ブローカーに送信されるデータの最大サイズ (オプション、デフォルトでは`10MB` )。 v5.0.6 および v4.0.6 から、デフォルト値が 64MB および 256MB から 10MB に変更されました。                                                                                                    |

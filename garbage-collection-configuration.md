@@ -53,7 +53,7 @@ TiDB v6.1.0 では、システム変数[`tidb_gc_max_wait_time`](/system-variabl
 enable-compaction-filter = true
 ```
 
-オンラインで構成を変更して、この GC メカニズムを有効にすることもできます。次の例を参照してください。
+構成を動的に変更することで、この GC メカニズムを有効にすることもできます。次の例を参照してください。
 
 {{< copyable "" >}}
 

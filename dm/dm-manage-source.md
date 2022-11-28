@@ -1,9 +1,9 @@
 ---
-title: Manage Data Source Configurations
+title: Manage Data Source Configurations in TiDB Data Migration
 summary: Learn how to manage upstream MySQL instances in TiDB Data Migration.
 ---
 
-# データ ソース構成の管理 {#manage-data-source-configurations}
+# TiDB データ移行でデータ ソース構成を管理する {#manage-data-source-configurations-in-tidb-data-migration}
 
 このドキュメントでは、MySQL パスワードの暗号化、データ ソースの操作、および[dmctl](/dm/dmctl-introduction.md)を使用した上流の MySQL インスタンスと DM-worker 間のバインディングの変更など、データ ソース構成を管理する方法を紹介します。
 
@@ -32,7 +32,7 @@ help operate-source
 ```
 
 ```
-`create`/`update`/`stop`/`show` upstream MySQL/MariaDB source.
+`create`/`stop`/`show` upstream MySQL/MariaDB source.
 
 Usage:
   dmctl operate-source <operate-type> [config-file ...] [--print-sample-config] [flags]
@@ -48,8 +48,6 @@ Global Flags:
 ### フラグの説明 {#flags-description}
 
 -   `create` : 1 つ以上のアップストリーム データベース ソースを作成します。複数のデータソースの作成に失敗した場合、DM はコマンドが実行されていない状態にロールバックします。
-
--   `update` : アップストリーム データベース ソースを更新します。
 
 -   `stop` : 1 つ以上のアップストリーム データベース ソースを停止します。複数のデータ ソースの停止に失敗した場合、一部のデータ ソースが停止している可能性があります。
 

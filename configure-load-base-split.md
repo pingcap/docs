@@ -36,10 +36,11 @@ Load Base Split はデフォルトで有効になっていますが、パラメ�
 
 -   SQL ステートメントを使用します。
 
-    {{< copyable "" >}}
-
     ```sql
-    set config tikv split.qps-threshold=3000
+    # Set the QPS threshold to 1500
+    SET config tikv split.qps-threshold=1500;
+    # Set the byte threshold to 15 MiB (15 * 1024 * 1024)
+    SET config tikv split.byte-threshold=15728640;
     ```
 
 -   TiKV を使用:
@@ -47,7 +48,8 @@ Load Base Split はデフォルトで有効になっていますが、パラメ�
     {{< copyable "" >}}
 
     ```shell
-    curl -X POST "http://ip:status_port/config" -H "accept: application/json" -d '{"split.qps-threshold":"3000"}'
+    curl -X POST "http://ip:status_port/config" -H "accept: application/json" -d '{"split.qps-threshold":"1500"}'
+    curl -X POST "http://ip:status_port/config" -H "accept: application/json" -d '{"split.byte-threshold":"15728640"}'
     ```
 
 したがって、次の 2 つの方法のいずれかで構成を表示できます。
@@ -57,7 +59,7 @@ Load Base Split はデフォルトで有効になっていますが、パラメ�
     {{< copyable "" >}}
 
     ```sql
-    show config where type='tikv' and name like '%split.qps-threshold%'
+    show config where type='tikv' and name like '%split.qps-threshold%';
     ```
 
 -   TiKV を使用:

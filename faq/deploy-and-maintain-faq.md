@@ -116,7 +116,7 @@ PD は一意のタイムスタンプを配布する必要があるため、分�
 
 2.  スロー クエリが発生した場合、Grafana を使用してスロー クエリが発生した`tidb-server`つのインスタンスとスロー クエリの時点を特定し、該当するノードのログに記録された SQL ステートメント情報を見つけることができます。
 
-3.  ログに加えて、 `admin show slow`コマンドを使用してスロー クエリを表示することもできます。詳細については、 [`admin show slow`コマンド](/identify-slow-queries.md#admin-show-slow-command)を参照してください。
+3.  ログに加えて、 `ADMIN SHOW SLOW`コマンドを使用してスロー クエリを表示することもできます。詳細については、 [`ADMIN SHOW SLOW`コマンド](/identify-slow-queries.md#admin-show-slow-command)を参照してください。
 
 ### 初めて TiDB クラスターをデプロイしたときに TiKV の<code>label</code>が構成されていなかった場合、 <code>label</code>構成を追加する方法を教えてください。 {#how-to-add-the-code-label-code-configuration-if-code-label-code-of-tikv-was-not-configured-when-i-deployed-the-tidb-cluster-for-the-first-time}
 

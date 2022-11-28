@@ -58,7 +58,7 @@ PARTITION BY RANGE (store_id) (
 
 このパーティション・スキームでは、 `store_id`が 1 から 5 である従業員に対応するすべての行が`p0`パーティションに格納され、 `store_id`が 6 から 10 であるすべての従業員が`p1`に格納されます。レンジ・パーティション化では、パーティションを最低から最高の順に並べる必要があります。
 
-データ`(72, 'Tom', 'John', '2015-06-25', NULL, NULL, 15)`の行を挿入すると、それは`p2`パーティションに分類されます。しかし、 `store_id`が 20 より大きいレコードを挿入すると、エラーが報告されます。これは、TiDB がこのレコードを挿入する必要があるパーティションを認識できないためです。この場合、テーブルを作成するときに`MAXVALUE`を使用できます。
+データ`(72, 'Tom', 'John', '2015-06-25', NULL, NULL, 15)`の行を挿入すると、それは`p2`パーティションに分類されます。しかし、 `store_id`が 20 より大きいレコードを挿入すると、エラーが報告されます。これは、TiDB がこのレコードを挿入すべきパーティションを認識できないためです。この場合、テーブルを作成するときに`MAXVALUE`を使用できます。
 
 {{< copyable "" >}}
 
@@ -720,7 +720,7 @@ SELECT fname, lname, region_code, dob
 
 ### パーティションのプルーニングが有効になるケース {#some-cases-for-partition-pruning-to-take-effect}
 
-1.  パーティション プルーニングは、パーティション テーブルのクエリ条件を使用するため、プランナーの最適化ルールに従ってクエリ条件をパーティション テーブルにプッシュ ダウンできない場合、パーティション プルーニングはこのクエリには適用されません。
+1.  パーティションのプルーニングはパーティション化されたテーブルのクエリ条件を使用するため、プランナーの最適化ルールに従ってクエリ条件をパーティション化されたテーブルにプッシュ ダウンできない場合、パーティションのプルーニングはこのクエリには適用されません。
 
     例えば：
 
@@ -794,7 +794,7 @@ SELECT fname, lname, region_code, dob
     create table t (id int) partition by range (id) (
             partition p0 values less than (5),
             partition p1 values less than (10));
-    select * from t where t > 6;
+    select * from t where id > 6;
     ```
 
     または、パーティション式は`fn(col)`の形式で、 `fn`は`to_days`です。
@@ -805,7 +805,7 @@ SELECT fname, lname, region_code, dob
     create table t (dt datetime) partition by range (to_days(id)) (
             partition p0 values less than (to_days('2020-04-01')),
             partition p1 values less than (to_days('2020-05-01')));
-    select * from t where t > '2020-04-18';
+    select * from t where dt > '2020-04-18';
     ```
 
     例外は、パーティション式として`floor(unix_timestamp())`です。 TiDB はケースバイケースで最適化を行うため、パーティションのプルーニングによってサポートされます。
@@ -817,7 +817,7 @@ SELECT fname, lname, region_code, dob
     partition by range (floor(unix_timestamp(ts))) (
             partition p0 values less than (unix_timestamp('2020-04-01 00:00:00')),
             partition p1 values less than (unix_timestamp('2020-05-01 00:00:00')));
-    select * from t where t > '2020-04-18 02:00:42.123';
+    select * from t where ts > '2020-04-18 02:00:42.123';
     ```
 
 ## パーティションの選択 {#partition-selection}

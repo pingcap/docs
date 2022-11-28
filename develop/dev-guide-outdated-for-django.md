@@ -31,7 +31,7 @@ docker run -p 127.0.0.1:$LOCAL_PORT:4000 pingcap/tidb:v5.1.0
 > -   [TiUP for On-Premises を使用して TiDB をデプロイ](https://docs.pingcap.com/tidb/v5.1/production-deployment-using-tiup)
 > -   [TiDB を Kubernetes にデプロイ](https://docs.pingcap.com/tidb-in-kubernetes/stable)
 >
-> また、無料試用版を提供する[TiDB Cloudを使用する](https://pingcap.com/products/tidbcloud/) 、完全に管理された Database-as-a-Service (DBaaS) を使用することもできます。
+> [TiDB Cloudを使用する](https://pingcap.com/products/tidbcloud/) 、TiDB のフルマネージド Database-as-a-Service (DBaaS) も可能です。
 
 ## ステップ 2. データベースを作成する {#step-2-create-a-database}
 

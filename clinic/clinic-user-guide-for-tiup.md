@@ -1,15 +1,15 @@
 ---
-title: Troubleshoot TiDB Cluster Using PingCAP Clinic
-summary: Learn how to use the PingCAP Clinic Diagnostic Service to troubleshoot cluster problems remotely and perform a quick check of the cluster status on a cluster deployed using TiUP.
+title: Troubleshoot Clusters Using PingCAP Clinic
+summary: Learn how to use the PingCAP Clinic Diagnostic Service to troubleshoot cluster problems remotely and perform a quick check of the cluster status on a TiDB cluster or DM cluster deployed using TiUP.
 ---
 
-# PingCAPクリニックを使用した TiDBクラスタのトラブルシューティング {#troubleshoot-tidb-cluster-using-pingcap-clinic}
+# PingCAPクリニックを使用したクラスターのトラブルシューティング {#troubleshoot-clusters-using-pingcap-clinic}
 
 TiUP を使用してデプロイされた TiDB クラスターおよび DM クラスターの場合、 PingCAPクリニック Diagnostic Service (PingCAPクリニック) を使用してクラスターの問題をリモートでトラブルシューティングし、Diag クライアント (Diag) および Clinic Server を使用してローカルでクラスターの状態をすばやく確認できます。
 
 > **ノート：**
 >
-> -   このドキュメントは、オンプレミス環境で TiUP を使用してデプロイされたクラスターに**のみ**適用されます。 Kubernetes でTiDB Operatorを使用してデプロイされたクラスターについては、 [TiDB TiDB Operator環境向けのPingCAPクリニック](https://docs.pingcap.com/tidb-in-kubernetes/stable/clinic-user-guide)を参照してください。
+> -   このドキュメントは、オンプレミス環境で TiUP を使用してデプロイされたクラスターに**のみ**適用されます。 TiDB Operatorを使用して Kubernetes にデプロイされたクラスターについては、 [TiDB TiDB Operator環境向けのPingCAPクリニック](https://docs.pingcap.com/tidb-in-kubernetes/stable/clinic-user-guide)を参照してください。
 >
 > -   PingCAPクリニックは、TiDB Ansible を使用してデプロイされたクラスターからのデータ収集**をサポートしていません**。
 
@@ -56,14 +56,14 @@ PingCAPクリニックを利用する前に、Diag（ PingCAPクリニックが�
     -   クリニック サーバーにログインします。
 
         <SimpleTab groupId="clinicServer">
-          <div label="Clinic Server in the US" value="clinic-us">
+          <div label="Clinic Server for international users" value="clinic-us">
 
-        [米国のクリニックサーバー](https://clinic.pingcap.com) : データは米国の AWS に保存されます。
+        [海外ユーザー向けクリニックサーバー](https://clinic.pingcap.com) : データは米国の AWS に保存されます。
 
         </div>
-          <div label="Clinic Server in the Chinese mainland" value="clinic-cn">
+          <div label="Clinic Server for users in the Chinese mainland" value="clinic-cn">
 
-        [中国本土のクリニックサーバー](https://clinic.pingcap.com.cn) : データは中国 (北京) リージョンの AWS に保存されます。
+        [中国本土のユーザー向けクリニックサーバー](https://clinic.pingcap.com.cn) : データは中国 (北京) リージョンの AWS に保存されます。
 
         </div>
 
@@ -75,7 +75,7 @@ PingCAPクリニックを利用する前に、Diag（ PingCAPクリニックが�
 
     > **ノート：**
     >
-    > -   Clinic Server に初めてアクセスする場合、トークンを取得する前に、AskTUG アカウントを使用して[クリニックサーバー](https://clinic.pingcap.com.cn)にログインし、最初に組織を作成する必要があります。
+    > -   初めてクリニックサーバーにアクセスする場合、トークンを取得する前に、 [PingCAPクリニックのクイック スタート](/clinic/quick-start-with-clinic.md#prerequisites)を参照して環境を準備する必要があります。
     > -   データ セキュリティのため、TiDB はトークンの作成時にのみトークンを表示します。トークンを紛失した場合は、古いトークンを削除して新しいトークンを作成してください。
     > -   トークンは、データのアップロードにのみ使用されます。
 
@@ -95,18 +95,18 @@ PingCAPクリニックを利用する前に、Diag（ PingCAPクリニックが�
     > -   Diag v0.9.0 より前のバージョンでは、データはデフォルトで中国地域の Clinic Server にアップロードされます。これらのバージョンで`region`を設定するには、 `tiup update diag`コマンドを実行して Diag を最新バージョンにアップグレードしてから、Diag で`region`を設定します。
 
     <SimpleTab groupId="clinicServer">
-     <div label="Clinic Server in the US" value="clinic-us">
+     <div label="Clinic Server for international users" value="clinic-us">
 
-    米国の Clinic Server の場合、次のコマンドを使用して`region`から`US`を設定します。
+    海外ユーザー向けに Clinic Server を使用する場合は、次のコマンドを使用して`region` ～ `US`を設定します。
 
     ```bash
     tiup diag config clinic.region US
     ```
 
     </div>
-     <div label="Clinic Server in the Chinese mainland" value="clinic-cn">
+     <div label="Clinic Server for users in the Chinese mainland" value="clinic-cn">
 
-    中国本土の Clinic Server の場合、次のコマンドを使用して`region`から`CN`を設定します。
+    中国本土のユーザーに Clinic Server を使用する場合は、次のコマンドを使用して`region` ～ `CN`を設定します。
 
     ```bash
     tiup diag config clinic.region CN
@@ -128,21 +128,32 @@ Diag を使用すると、監視データや構成情報など、TiDB クラス�
 
 Diag で収集できるデータの完全なリストについては、 [PingCAPクリニックの診断データ](/clinic/clinic-data-instruction-for-tiup.md)を参照してください。
 
-その後の診断の効率を向上させるために、監視データや構成情報を含む完全な診断データを収集することをお勧めします。詳細については、 [TiDB クラスターからデータを収集する](#collect-data-from-tidb-clusters)を参照してください。
+その後の診断の効率を向上させるために、監視データや構成情報を含む完全な診断データを収集することをお勧めします。詳細については、 [クラスターからデータを収集する](#step-2-collect-data)を参照してください。
 
 ### ステップ 2. データを収集する {#step-2-collect-data}
 
 Diag を使用すると、TiUP を使用してデプロイされた TiDB クラスターおよび DM クラスターからデータを収集できます。
 
-#### TiDB クラスターからデータを収集する {#collect-data-from-tidb-clusters}
-
 1.  Diagのデータ収集コマンドを実行します。
 
     たとえば、現在の時刻に基づいて 4 時間前から 2 時間前までの診断データを収集するには、次のコマンドを実行します。
 
+    <SimpleTab>
+     <div label="TiDB Cluster">
+
     ```bash
     tiup diag collect ${cluster-name} -f="-4h" -t="-2h"
     ```
+
+    </div>
+     <div label="DM Cluster">
+
+    ```bash
+    tiup diag collectdm ${dm-cluster-name} -f="-4h" -t="-2h"
+    ```
+
+    </div>
+     </SimpleTab>
 
     データ収集のパラメーターの説明:
 
@@ -151,7 +162,7 @@ Diag を使用すると、TiUP を使用してデプロイされた TiDB クラ�
 
     パラメータの使用に関するヒント:
 
-    データ収集時間の指定に加えて、Diag を使用してさらにパラメーターを指定できます。すべてのパラメーターを取得するには、 `tiup diag collect -h`コマンドを実行します。
+    データ収集時間の指定に加えて、Diag を使用してさらにパラメーターを指定できます。すべてのパラメーターを取得するには、 `tiup diag collect -h`または`tiup diag collectdm -h`コマンドを実行します。
 
     > **ノート：**
     >
@@ -175,7 +186,7 @@ Diag を使用すると、TiUP を使用してデプロイされた TiDB クラ�
     ... ...
     172.16.7.179       325 B      /tidb-deploy/tikv-20160/conf/tikv.toml
     Total              2.01 GB    (inaccurate)
-    These data will be stored in /home/qiaodan/diag-fNTnz5MGhr6
+    These data will be stored in /home/user/diag-fNTnz5MGhr6
     Do you want to continue? [y/N]: (default=N)
     ```
 
@@ -186,31 +197,7 @@ Diag を使用すると、TiUP を使用してデプロイされた TiDB クラ�
     収集が完了すると、Diag は、収集されたデータが配置されているフォルダー パスを提供します。例えば：
 
     ```bash
-    Collected data are stored in /home/qiaodan/diag-fNTnz5MGhr6
-    ```
-
-#### DM クラスターからデータを収集する {#collect-data-from-dm-clusters}
-
-1.  Diagのデータ収集コマンドを実行します。
-
-    たとえば、現在の時刻に基づいて 4 時間前から 2 時間前までの診断データを収集するには、次のコマンドを実行します。
-
-    ```bash
-    tiup diag collectdm ${cluster-name} -f="-4h" -t="-2h"
-    ```
-
-    上記のコマンドで使用されるパラメーター、または Diag で使用される可能性のあるその他のパラメーターの説明については、 [TiDB クラスターからデータを収集する](#collect-data-from-tidb-clusters)を参照してください。
-
-    コマンドを実行した後、Diag はデータの収集をすぐには開始しません。代わりに、Diag は推定データ サイズとターゲット データ ストレージ パスを出力で提供し、続行するかどうかを確認します。
-
-2.  `Y`を入力して、データの収集を開始することを確認します。
-
-    データの収集には一定の時間がかかります。時間は、収集するデータ量によって異なります。たとえば、テスト環境では、1 GB のデータを収集するのに約 10 分かかります。
-
-    収集が完了すると、Diag は、収集されたデータが配置されているフォルダー パスを提供します。例えば：
-
-    ```bash
-    Collected data are stored in /home/qiaodan/diag-fNTnz5MGhr6
+    Collected data are stored in /home/user/diag-fNTnz5MGhr6
     ```
 
 ### ステップ 3. ローカルでデータをビューする (オプション) {#step-3-view-data-locally-optional}
@@ -265,7 +252,7 @@ tiup diag upload
 
     ```bash
     Starting component `diag`: /root/.tiup/components/diag/v0.7.0/diag package diag-fNTnz5MGhr6
-    packaged data set saved to /home/qiaodan/diag-fNTnz5MGhr6.diag
+    packaged data set saved to /home/user/diag-fNTnz5MGhr6.diag
     ```
 
     パッケージ化が完了すると、データは`.diag`形式にパッケージ化されます。 `.diag`ファイルは、クリニック サーバーにアップロードされた後にのみ復号化して表示できます。収集したデータをクリニックサーバーにアップロードせずに直接転送したい場合は、独自の方法でデータを圧縮して転送することができます。
@@ -279,8 +266,8 @@ tiup diag upload
     次に出力例を示します。
 
     ```bash
-    [root@Copy-of-VM-EE-CentOS76-v1 qiaodan]# tiup diag upload /home/qiaodan/diag-fNTnz5MGhr6
-    Starting component `diag`: /root/.tiup/components/diag/v0.7.0/diag upload /home/qiaodan/diag-fNTnz5MGhr6
+    [root@Copy-of-VM-EE-CentOS76-v1 user]# tiup diag upload /home/user/diag-fNTnz5MGhr6
+    Starting component `diag`: /root/.tiup/components/diag/v0.7.0/diag upload /home/user/diag-fNTnz5MGhr6
     >>>>>>>>>>>>>>>>>>>>>>>>>>>>>><>>>>>>>>>
     Completed!
     Download URL: "https://clinic.pingcap.com.cn/portal/#/orgs/4/clusters/XXXX"

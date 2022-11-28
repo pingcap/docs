@@ -28,7 +28,18 @@ summary: This document describes how to query data from a single table in a data
 </CustomContent>
 
 2.  [Bookshop アプリケーションのテーブル スキーマとサンプル データをインポートする](/develop/dev-guide-bookshop-schema-design.md#import-table-structures-and-data) .
+
+<CustomContent platform="tidb">
+
 3.  [TiDB に接続する](/develop/dev-guide-connect-to-tidb.md) .
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+3.  [TiDB に接続する](/tidb-cloud/connect-to-tidb-cluster.md) .
+
+</CustomContent>
 
 ## 簡単なクエリを実行する {#execute-a-simple-query}
 
@@ -38,8 +49,6 @@ Bookshop アプリケーションのデータベースでは、 `authors`テー�
 <div label="SQL" value="sql">
 
 MySQL クライアントで次の SQL ステートメントを実行します。
-
-{{< copyable "" >}}
 
 ```sql
 SELECT id, name FROM authors;
@@ -69,15 +78,12 @@ SELECT id, name FROM authors;
 </div>
 <div label="Java" value="java">
 
-Java では、クラス`Author`を宣言することで作成者の基本情報を格納できます。データベースの[タイプ](/data-type-overview.md)と[値の範囲](/data-type-numeric.md)に従って、適切な Java データ型を選択する必要があります。例えば：
+Java では、作成者の基本情報を格納するために、クラス`Author`を宣言できます。データベースの[データ型](/data-type-overview.md)と[値の範囲](/data-type-numeric.md)に従って、適切な Java データ型を選択する必要があります。例えば：
 
 -   タイプ`Int`の変数を使用して、タイプ`int`のデータを格納します。
 -   タイプ`Long`の変数を使用して、タイプ`bigint`のデータを格納します。
 -   タイプ`Short`の変数を使用して、タイプ`tinyint`のデータを格納します。
 -   タイプ`String`の変数を使用して、タイプ`varchar`のデータを格納します。
--   ...
-
-{{< copyable "" >}}
 
 ```java
 public class Author {
@@ -93,12 +99,10 @@ public class Author {
 }
 ```
 
-{{< copyable "" >}}
-
 ```java
 public class AuthorDAO {
 
-    // Omit initialization of instance variables...
+    // Omit initialization of instance variables.
 
     public List<Author> getAuthors() throws SQLException {
         List<Author> authors = new ArrayList<>();
@@ -108,7 +112,7 @@ public class AuthorDAO {
             ResultSet rs = stmt.executeQuery("SELECT id, name FROM authors");
             while (rs.next()) {
                 Author author = new Author();
-                author.setId( rs.getLong("id"));
+                author.setId(rs.getLong("id"));
                 author.setName(rs.getString("name"));
                 authors.add(author);
             }
@@ -118,7 +122,18 @@ public class AuthorDAO {
 }
 ```
 
+<CustomContent platform="tidb">
+
 -   [JDBC ドライバーを使用して TiDB に接続する](/develop/dev-guide-connect-to-tidb.md#jdbc)の後、 `conn.createStatus()`で`Statement`オブジェクトを作成できます。
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+-   [JDBC ドライバーを使用して TiDB に接続する](/develop/dev-guide-choose-driver-or-orm.md#java-drivers)の後、 `conn.createStatus()`で`Statement`オブジェクトを作成できます。
+
+</CustomContent>
+
 -   次に`stmt.executeQuery("query_sql")`を呼び出して、TiDB へのデータベース クエリ要求を開始します。
 -   クエリ結果は`ResultSet`のオブジェクトに格納されます。 `ResultSet`をトラバースすることで、返された結果を`Author`オブジェクトにマップできます。
 
@@ -127,7 +142,7 @@ public class AuthorDAO {
 
 ## 結果のフィルタリング {#filter-results}
 
-`WHERE`ステートメントを使用して、クエリ結果をフィルター処理できます。
+クエリ結果をフィルタリングするには、 `WHERE`ステートメントを使用できます。
 
 たとえば、次のコマンドは、すべての著者の中で 1998 年生まれの著者を照会します。
 
@@ -135,8 +150,6 @@ public class AuthorDAO {
 <div label="SQL" value="sql">
 
 `WHERE`ステートメントにフィルター条件を追加します。
-
-{{< copyable "" >}}
 
 ```sql
 SELECT * FROM authors WHERE birth_year = 1998;
@@ -147,11 +160,9 @@ SELECT * FROM authors WHERE birth_year = 1998;
 
 Java では、同じ SQL を使用して、動的パラメーターを使用したデータ クエリ要求を処理できます。
 
-これは、パラメーターを SQL ステートメントに連結することによって実行できます。ただし、この方法は、アプリケーションのセキュリティに潜在的な[SQL インジェクション](https://en.wikipedia.org/wiki/SQL_injection)のリスクをもたらします。
+これは、パラメーターを SQL ステートメントに連結することによって実行できます。ただし、この方法は、アプリケーションのセキュリティに[SQL インジェクション](https://en.wikipedia.org/wiki/SQL_injection)のリスクをもたらす可能性があります。
 
-このようなクエリを処理するには、通常のステートメントの代わりに[プリペアドステートメント](/develop/dev-guide-prepared-statement.md)を使用します。
-
-{{< copyable "" >}}
+このようなクエリを処理するには、通常のステートメントの代わりに[作成済みステートメント](/develop/dev-guide-prepared-statement.md)を使用します。
 
 ```java
 public List<Author> getAuthorsByBirthYear(Short birthYear) throws SQLException {
@@ -164,7 +175,7 @@ public List<Author> getAuthorsByBirthYear(Short birthYear) throws SQLException {
         ResultSet rs = stmt.executeQuery();
         while (rs.next()) {
             Author author = new Author();
-            author.setId( rs.getLong("id"));
+            author.setId(rs.getLong("id"));
             author.setName(rs.getString("name"));
             authors.add(author);
         }
@@ -178,17 +189,48 @@ public List<Author> getAuthorsByBirthYear(Short birthYear) throws SQLException {
 
 ## 結果の並べ替え {#sort-results}
 
-`ORDER BY`ステートメントを使用すると、クエリ結果を並べ替えることができます。
+クエリ結果を並べ替えるには、 `ORDER BY`ステートメントを使用できます。
 
 たとえば、次の SQL ステートメントは、 `birth_year`列に従って`authors`テーブルを降順 ( `DESC` ) に並べ替えることで、最年少の著者のリストを取得します。
 
-{{< copyable "" >}}
+<SimpleTab groupId="language">
+<div label="SQL" value="sql">
 
 ```sql
 SELECT id, name, birth_year
 FROM authors
 ORDER BY birth_year DESC;
 ```
+
+</div>
+
+<div label="Java" value="java">
+
+```java
+public List<Author> getAuthorsSortByBirthYear() throws SQLException {
+    List<Author> authors = new ArrayList<>();
+    try (Connection conn = ds.getConnection()) {
+        Statement stmt = conn.createStatement();
+        ResultSet rs = stmt.executeQuery("""
+            SELECT id, name, birth_year
+            FROM authors
+            ORDER BY birth_year DESC;
+            """);
+
+        while (rs.next()) {
+            Author author = new Author();
+            author.setId(rs.getLong("id"));
+            author.setName(rs.getString("name"));
+            author.setBirthYear(rs.getShort("birth_year"));
+            authors.add(author);
+        }
+    }
+    return authors;
+}
+```
+
+</div>
+</SimpleTab>
 
 結果は次のとおりです。
 
@@ -212,9 +254,10 @@ ORDER BY birth_year DESC;
 
 ## クエリ結果の数を制限する {#limit-the-number-of-query-results}
 
-`LIMIT`ステートメントを使用して、クエリ結果の数を制限できます。
+クエリ結果の数を制限するには、 `LIMIT`ステートメントを使用できます。
 
-{{< copyable "" >}}
+<SimpleTab groupId="language">
+<div label="SQL" value="sql">
 
 ```sql
 SELECT id, name, birth_year
@@ -222,6 +265,37 @@ FROM authors
 ORDER BY birth_year DESC
 LIMIT 10;
 ```
+
+</div>
+
+<div label="Java" value="java">
+
+```java
+public List<Author> getAuthorsWithLimit(Integer limit) throws SQLException {
+    List<Author> authors = new ArrayList<>();
+    try (Connection conn = ds.getConnection()) {
+        PreparedStatement stmt = conn.prepareStatement("""
+            SELECT id, name, birth_year
+            FROM authors
+            ORDER BY birth_year DESC
+            LIMIT ?;
+            """);
+        stmt.setInt(1, limit);
+        ResultSet rs = stmt.executeQuery();
+        while (rs.next()) {
+            Author author = new Author();
+            author.setId(rs.getLong("id"));
+            author.setName(rs.getString("name"));
+            author.setBirthYear(rs.getShort("birth_year"));
+            authors.add(author);
+        }
+    }
+    return authors;
+}
+```
+
+</div>
+</SimpleTab>
 
 結果は次のとおりです。
 
@@ -251,7 +325,8 @@ LIMIT 10;
 
 たとえば、より多くの著者が生まれた年を知りたい場合は、 `authors`のテーブルを`birth_year`列でグループ化し、各年をカウントできます。
 
-{{< copyable "" >}}
+<SimpleTab groupId="language">
+<div label="SQL" value="sql">
 
 ```sql
 SELECT birth_year, COUNT (DISTINCT id) AS author_count
@@ -259,6 +334,45 @@ FROM authors
 GROUP BY birth_year
 ORDER BY author_count DESC;
 ```
+
+</div>
+
+<div label="Java" value="java">
+
+```java
+public class AuthorCount {
+    private Short birthYear;
+    private Integer authorCount;
+
+    public AuthorCount() {}
+
+     // Skip the getters and setters.
+}
+
+public List<AuthorCount> getAuthorCountsByBirthYear() throws SQLException {
+    List<AuthorCount> authorCounts = new ArrayList<>();
+    try (Connection conn = ds.getConnection()) {
+        Statement stmt = conn.createStatement();
+        ResultSet rs = stmt.executeQuery("""
+            SELECT birth_year, COUNT(DISTINCT id) AS author_count
+            FROM authors
+            GROUP BY birth_year
+            ORDER BY author_count DESC;
+            """);
+
+        while (rs.next()) {
+            AuthorCount authorCount = new AuthorCount();
+            authorCount.setBirthYear(rs.getShort("birth_year"));
+            authorCount.setAuthorCount(rs.getInt("author_count"));
+            authorCounts.add(authorCount);
+        }
+    }
+    return authorCount;
+}
+```
+
+</div>
+</SimpleTab>
 
 結果は次のとおりです。
 

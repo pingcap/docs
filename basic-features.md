@@ -53,7 +53,7 @@ summary: Learn about the basic features of TiDB.
 | `INSERT ON DUPLICATE KEY UPDATE`                                                   |  よ  |  よ  | よ   |  よ  |  よ  |  よ  |  よ  |  よ  |
 | `LOAD DATA INFILE`                                                                 |  よ  |  よ  | よ   |  よ  |  よ  |  よ  |  よ  |  よ  |
 | `SELECT INTO OUTFILE`                                                              |  よ  |  よ  | よ   |  よ  |  よ  |  よ  |  よ  |  よ  |
-| `INNER JOIN` 、 `LEFT\|RIGHT [OUTER] JOIN`                                          |  よ  |  よ  | よ   |  よ  |  よ  |  よ  |  よ  |  よ  |
+| `INNER JOIN` , `LEFT|RIGHT [OUTER] JOIN`                                           |  よ  |  よ  | よ   |  よ  |  よ  |  よ  |  よ  |  よ  |
 | `UNION` 、 `UNION ALL`                                                              |  よ  |  よ  | よ   |  よ  |  よ  |  よ  |  よ  |  よ  |
 | [`EXCEPT`および<code>INTERSECT</code>演算子](/functions-and-operators/set-operators.md)  |  よ  |  よ  | よ   |  よ  |  よ  |  よ  |  よ  |  N  |
 | `GROUP BY` 、 `ORDER BY`                                                            |  よ  |  よ  | よ   |  よ  |  よ  |  よ  |  よ  |  よ  |
@@ -124,7 +124,7 @@ summary: Learn about the basic features of TiDB.
 | ----------------------------------------------------- | :------: | :------: | -------- | :------: | :-: | :-: | :-: | :-: |
 | [CMSketch](/statistics.md)                            | デフォルトで無効 | デフォルトで無効 | デフォルトで無効 | デフォルトで無効 |  よ  |  よ  |  よ  |  よ  |
 | [ヒストグラム](/statistics.md)                              |     よ    |     よ    | よ        |     よ    |  よ  |  よ  |  よ  |  よ  |
-| 拡張統計 (複数列)                                            |    実験的   |    実験的   | 実験的      |    実験的   | 実験的 | 実験的 | 実験的 |  N  |
+| [拡張統計](/extended-statistics.md)                       |    実験的   |    実験的   | 実験的      |    実験的   | 実験的 | 実験的 | 実験的 |  N  |
 | [統計フィードバック](/statistics.md#automatic-update)          |    非推奨   |    非推奨   | 非推奨      |    実験的   | 実験的 | 実験的 | 実験的 | 実験的 |
 | [統計を自動的に更新する](/statistics.md#automatic-update)        |     よ    |     よ    | よ        |     よ    |  よ  |  よ  |  よ  |  よ  |
 | [高速分析](/system-variables.md#tidb_enable_fast_analyze) |    実験的   |    実験的   | 実験的      |    実験的   | 実験的 | 実験的 | 実験的 | 実験的 |

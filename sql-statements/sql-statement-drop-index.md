@@ -10,11 +10,14 @@ summary: An overview of the usage of DROP INDEX for the TiDB database.
 ## あらすじ {#synopsis}
 
 ```ebnf+diagram
-AlterTableDropIndexStmt
-         ::= 'ALTER' 'IGNORE'? 'TABLE' AlterTableDropIndexSpec ( ',' AlterTableDropIndexSpec )*
+DropIndexStmt ::=
+    "DROP" "INDEX" IfExists Identifier "ON" TableName IndexLockAndAlgorithmOpt
 
-AlterTableDropIndexSpec
-         ::= 'DROP' ( 'FOREIGN'? 'KEY' | 'INDEX' ) ( 'IF' 'EXISTS' )? Identifier
+IfExists ::=
+    ( 'IF' 'EXISTS' )?
+
+IndexLockAndAlgorithmOpt ::=
+    ( LockClause AlgorithmClause? | AlgorithmClause LockClause? )?
 ```
 
 ## 例 {#examples}
@@ -49,7 +52,7 @@ mysql> EXPLAIN SELECT * FROM t1 WHERE c1 = 3;
 +------------------------+---------+-----------+------------------------+---------------------------------------------+
 2 rows in set (0.00 sec)
 
-mysql> ALTER TABLE t1 DROP INDEX c1;
+mysql> DROP INDEX c1 ON t1;
 Query OK, 0 rows affected (0.30 sec)
 ```
 

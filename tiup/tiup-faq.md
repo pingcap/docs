@@ -26,7 +26,7 @@ TiUP プレイグラウンド コンポーネントは、主に Linux または 
 
 ## TiUP クラスタ コンポーネントのトポロジ ファイルを作成するにはどうすればよいですか? {#how-do-i-write-the-topology-file-for-the-tiup-cluster-component}
 
-[これらのテンプレート](https://github.com/pingcap/tiup/tree/master/examples)を参照して、トポロジ ファイルを記述します。テンプレートには次のものがあります。
+[これらのテンプレート](https://github.com/pingcap/tiup/tree/master/embed/examples/cluster)を参照して、トポロジ ファイルを記述します。テンプレートには次のものがあります。
 
 -   マルチ DC 展開トポロジ
 -   最小限の展開トポロジ

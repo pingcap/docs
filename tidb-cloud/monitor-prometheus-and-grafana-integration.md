@@ -1,9 +1,9 @@
 ---
-title: Prometheus and Grafana Integration (Third-Party Monitoring Service)
+title: Integrate TiDB Cloud with Prometheus and Grafana
 summary: Learn how to monitor your TiDB cluster with the Prometheus and Grafana integration.
 ---
 
-# Prometheus と Grafana の統合 {#prometheus-and-grafana-integration}
+# TiDB Cloudを Prometheus および Grafana と統合する {#integrate-tidb-cloud-with-prometheus-and-grafana}
 
 TiDB Cloudは[プロメテウス](https://prometheus.io/)の API エンドポイントを提供します。 Prometheus サービスをお持ちの場合は、エンドポイントからTiDB Cloudの主要なメトリックを簡単に監視できます。
 
@@ -17,7 +17,7 @@ TiDB Cloudは[プロメテウス](https://prometheus.io/)の API エンドポイ
 
 ## 制限 {#limitation}
 
-[開発者層](/tidb-cloud/select-cluster-tier.md#developer-tier)で Prometheus と Grafana の統合を使用することはできません。
+[サーバーレス層](/tidb-cloud/select-cluster-tier.md#serverless-tier-beta)で Prometheus と Grafana の統合を使用することはできません。
 
 ## 手順 {#steps}
 

@@ -5,7 +5,7 @@ summary: Learn how to tune the TiKV parameters for optimal performance.
 
 # TiKV メモリ パラメータのパフォーマンスの調整 {#tune-tikv-memory-parameter-performance}
 
-このドキュメントでは、最適なパフォーマンスを得るために TiKV パラメーターを調整する方法について説明します。デフォルトの構成ファイルは[etc/config-template.toml](https://github.com/tikv/tikv/blob/master/etc/config-template.toml)にあります。構成を変更するには、限定された構成アイテムのセットに対して[TiUPを使う](/maintain-tidb-using-tiup.md#modify-the-configuration)または[TiKVをオンラインで変更する](/dynamic-config.md#modify-tikv-configuration-online)を実行できます。完全な構成については、 [TiKV 構成ファイル](/tikv-configuration-file.md)を参照してください。
+このドキュメントでは、最適なパフォーマンスを得るために TiKV パラメーターを調整する方法について説明します。デフォルトの構成ファイルは[etc/config-template.toml](https://github.com/tikv/tikv/blob/master/etc/config-template.toml)にあります。構成を変更するには、限定された構成アイテムのセットに対して[TiUPを使う](/maintain-tidb-using-tiup.md#modify-the-configuration)または[TiKV を動的に変更する](/dynamic-config.md#modify-tikv-configuration-dynamically)を実行できます。完全な構成については、 [TiKV 構成ファイル](/tikv-configuration-file.md)を参照してください。
 
 TiKV は、TiKVアーキテクチャの最下位レベルで永続ストレージに RocksDB を使用します。したがって、パフォーマンス パラメータの多くは RocksDB に関連しています。 TiKV は 2 つの RocksDB インスタンスを使用します。デフォルトの RocksDB インスタンスは KV データを格納し、 Raft RocksDB インスタンス (RaftDB) はRaftログを格納します。
 

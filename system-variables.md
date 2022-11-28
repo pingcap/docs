@@ -18,7 +18,7 @@ SET SESSION tidb_distsql_scan_concurrency = 10;
 
 # These two identical statements change a global variable
 SET @@global.tidb_distsql_scan_concurrency = 10;
-SET  GLOBAL tidb_distsql_scan_concurrency = 10;
+SET GLOBAL tidb_distsql_scan_concurrency = 10;
 ```
 
 > **ノート：**
@@ -108,8 +108,10 @@ mysql> SELECT * FROM t1;
 
 -   スコープ: セッション |グローバル
 -   クラスターに永続化: はい
+-   タイプ: 列挙
 -   デフォルト値: `aes-128-ecb`
--   `AES_ENCRYPT()`および`AES_DECRYPT()`関数の暗号化モードを定義します。
+-   値のオプション: `aes-128-ecb` 、 `aes-192-ecb` 、 `aes-256-ecb` 、 `aes-128-cbc` 、 `aes-192-cbc` 、 `aes-256-cbc` 、 `aes-128-ofb` 、 `aes-192-ofb` 、 `aes-256-ofb` 、 `aes-128-cfb` 、 `aes-192-cfb` 、 `aes-256-cfb`
+-   この変数は、組み込み関数`AES_ENCRYPT()`および`AES_DECRYPT()`の暗号化モードを設定します。
 
 ### character_set_client {#character-set-client}
 
@@ -151,21 +153,21 @@ mysql> SELECT * FROM t1;
 -   スコープ: セッション |グローバル
 -   クラスターに永続化: はい
 -   デフォルト値: `utf8mb4_bin`
--   この変数は、照合が指定されていない文字列リテラルの照合順序を示し照合順序。
+-   この変数は、現在の接続で使用される照合順序を示します。これは、MySQL 変数`collation_connection`と一致しています。
 
 ### collation_database {#collation-database}
 
 -   スコープ: セッション |グローバル
 -   クラスターに永続化: はい
 -   デフォルト値: `utf8mb4_bin`
--   この変数は、使用中のデフォルト データベースの照合順序を示します。**この変数を設定することはお勧めしません**。新しいデフォルト データベースが選択されると、サーバーは変数値を変更します。
+-   この変数は、使用中のデータベースのデフォルトの照合順序を示します。**この変数を設定することはお勧めしません**。新しいデータベースが選択されると、TiDB はこの変数の値を変更します。
 
 ### collation_server {#collation-server}
 
 -   スコープ: セッション |グローバル
 -   クラスターに永続化: はい
 -   デフォルト値: `utf8mb4_bin`
--   サーバーのデフォルトの照合順序。
+-   データベースの作成時に使用されるデフォルトの照合順序。
 
 ### cte_max_recursion_depth {#cte-max-recursion-depth}
 
@@ -223,6 +225,12 @@ mysql> SELECT * FROM t1;
 -   範囲: `[0, 7]`
 -   `WEEK()`関数で使用される週の形式を設定します。
 
+### error_count {#error-count}
+
+-   スコープ: なし
+-   タイプ: 整数
+-   メッセージを生成した最後のステートメントから発生したエラーの数を示す読み取り専用変数。
+
 ### Foreign_key_checks {#foreign-key-checks}
 
 -   スコープ: セッション |グローバル
@@ -258,9 +266,9 @@ mysql> SELECT * FROM t1;
 -   デフォルト値: (システムのホスト名)
 -   読み取り専用変数としての TiDBサーバーのホスト名。
 
-### 身元 {#identity}
+### ID <span class="version-mark">v5.3.0 の新機能</span> {#identity-span-class-version-mark-new-in-v5-3-0-span}
 
-この変数は`last_insert_id`のエイリアスです。
+この変数は[`last_insert_id`](#last_insert_id)のエイリアスです。
 
 ### init_connect {#init-connect}
 
@@ -323,15 +331,24 @@ mysql> SELECT * FROM t1;
 -   デフォルト値: `OFF`
 -   この変数は、 [Binlog](https://docs.pingcap.com/tidb/stable/tidb-binlog-overview)が使用されているかどうかを示します。
 
-### max_allowed_packet {#max-allowed-packet}
+### max_allowed_packet v6.1.0<span class="version-mark">の新機能</span> {#max-allowed-packet-span-class-version-mark-new-in-v6-1-0-span}
 
 -   スコープ: セッション |グローバル
 -   クラスターに永続化: はい
--   タイプ: 整数
 -   デフォルト値: `67108864`
--   範囲: `[1024, 1073741824]`
--   単位: バイト
--   MySQL プロトコルのパケットの最大サイズ。
+-   範囲: `[1024, 1073741824]` .値は 1024 の整数倍である必要があります。値が 1024 で割り切れない場合は、警告が表示され、値は切り捨てられます。たとえば、値が 1025 に設定されている場合、TiDB の実際の値は 1024 です。
+-   サーバーとクライアントが 1 回のパケット送信で許可する最大パケット サイズ (バイト単位)。
+-   この変数は MySQL と互換性があります。
+
+### 最大接続数 {#max-connections}
+
+-   範囲: グローバル
+-   クラスターに永続化: いいえ
+-   タイプ: 整数
+-   デフォルト値: `0`
+-   範囲: `[0, 100000]`
+-   1 つの TiDB インスタンスに許可される接続の最大数。
+-   値`0`は制限なしを意味します。
 
 ### max_execution_time {#max-execution-time}
 
@@ -346,6 +363,38 @@ mysql> SELECT * FROM t1;
 > **ノート：**
 >
 > MySQL とは異なり、システム変数`max_execution_time`は現在、TiDB のすべての種類のステートメントで機能し、 `SELECT`ステートメントに限定されません。タイムアウト値の精度は約 100ms です。これは、指定した正確なミリ秒でステートメントが終了しない可能性があることを意味します。
+
+### max_prepared_stmt_count {#max-prepared-stmt-count}
+
+-   範囲: グローバル
+-   クラスターに永続化: はい
+-   タイプ: 整数
+-   デフォルト値: `-1`
+-   範囲: `[-1, 1048576]`
+-   セッション内の[`PREPARE`](/sql-statements/sql-statement-prepare.md)ステートメントの最大数を指定します。
+-   値`-1`は、セッション内のステートメントの最大数`PREPARE`に制限がないことを意味します。
+-   変数を上限`1048576`を超える値に設定すると、代わりに`1048576`が使用されます。
+
+```sql
+mysql> SET GLOBAL max_prepared_stmt_count = 1048577;
+Query OK, 0 rows affected, 1 warning (0.01 sec)
+
+mysql> SHOW WARNINGS;
++---------+------+--------------------------------------------------------------+
+| Level   | Code | Message                                                      |
++---------+------+--------------------------------------------------------------+
+| Warning | 1292 | Truncated incorrect max_prepared_stmt_count value: '1048577' |
++---------+------+--------------------------------------------------------------+
+1 row in set (0.00 sec)
+
+mysql> SHOW GLOBAL VARIABLES LIKE 'max_prepared_stmt_count';
++-------------------------+---------+
+| Variable_name           | Value   |
++-------------------------+---------+
+| max_prepared_stmt_count | 1048576 |
++-------------------------+---------+
+1 row in set (0.00 sec)
+```
 
 ### plugin_dir {#plugin-dir}
 
@@ -465,21 +514,57 @@ mysql> SELECT * FROM t1;
 
 ### ssl_ca {#ssl-ca}
 
+<CustomContent platform="tidb">
+
 -   スコープ: なし
 -   デフォルト値: &quot;&quot;
--   認証局ファイルの場所 (存在する場合)。
+-   認証局ファイルの場所 (存在する場合)。この変数の値は、TiDB 構成項目[`ssl-ca`](/tidb-configuration-file.md#ssl-ca)によって定義されます。
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+-   スコープ: なし
+-   デフォルト値: &quot;&quot;
+-   認証局ファイルの場所 (存在する場合)。この変数の値は、TiDB 構成項目[`ssl-ca`](https://docs.pingcap.com/tidb/stable/tidb-configuration-file#ssl-ca)によって定義されます。
+
+</CustomContent>
 
 ### ssl_cert {#ssl-cert}
 
+<CustomContent platform="tidb">
+
 -   スコープ: なし
 -   デフォルト値: &quot;&quot;
--   SSL/TLS 接続に使用される証明書ファイルの場所 (ファイルがある場合)。
+-   SSL/TLS 接続に使用される証明書ファイルの場所 (ファイルがある場合)。この変数の値は、TiDB 構成項目[`ssl-cert`](/tidb-configuration-file.md#ssl-cert)によって定義されます。
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+-   スコープ: なし
+-   デフォルト値: &quot;&quot;
+-   SSL/TLS 接続に使用される証明書ファイルの場所 (ファイルがある場合)。この変数の値は、TiDB 構成項目[`ssl-cert`](https://docs.pingcap.com/tidb/stable/tidb-configuration-file#ssl-cert)によって定義されます。
+
+</CustomContent>
 
 ### ssl_key {#ssl-key}
 
+<CustomContent platform="tidb">
+
 -   スコープ: なし
 -   デフォルト値: &quot;&quot;
--   SSL/TLS 接続に使用される秘密鍵ファイル (存在する場合) の場所。
+-   SSL/TLS 接続に使用される秘密鍵ファイル (存在する場合) の場所。この変数の値は、TiDB 構成項目[`ssl-key`](/tidb-configuration-file.md#ssl-cert)によって定義されます。
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+-   スコープ: なし
+-   デフォルト値: &quot;&quot;
+-   SSL/TLS 接続に使用される秘密鍵ファイル (存在する場合) の場所。この変数の値は、TiDB 構成項目[`ssl-key`](https://docs.pingcap.com/tidb/stable/tidb-configuration-file#ssl-key)によって定義されます。
+
+</CustomContent>
 
 ### system_time_zone {#system-time-zone}
 
@@ -633,6 +718,50 @@ MPP は、TiFlash エンジンによって提供される分散コンピュー�
 
     ネットワーク環境が劣悪な場合、この変数の値を適切に増やすと、タイムアウトによってアプリケーション側に報告されるエラーを効果的に軽減できます。アプリケーション側でエラー情報をより迅速に受け取りたい場合は、この変数の値を最小限に抑えてください。
 
+### tidb_batch_commit {#tidb-batch-commit}
+
+> **警告：**
+>
+> この変数を有効にすることはお勧めし**ません**。
+
+-   スコープ: セッション
+-   クラスターに永続化: いいえ
+-   タイプ: ブール値
+-   デフォルト値: `OFF`
+-   この変数は、非推奨のバッチコミット機能を有効にするかどうかを制御するために使用されます。この変数を有効にすると、いくつかのステートメントをグループ化することでトランザクションが複数のトランザクションに分割され、非アトミックにコミットされる可能性がありますが、これはお勧めできません。
+
+### tidb_batch_delete {#tidb-batch-delete}
+
+> **警告：**
+>
+> この変数は非推奨の batch-dml 機能に関連付けられており、データが破損する可能性があります。したがって、batch-dml でこの変数を有効にすることはお勧めしません。代わりに、 [非トランザクション DML](/non-transactional-dml.md)を使用してください。
+
+-   スコープ: セッション
+-   クラスターに永続化: いいえ
+-   タイプ: ブール値
+-   デフォルト値: `OFF`
+-   この変数は、非推奨のバッチ dml 機能の一部であるバッチ削除機能を有効にするかどうかを制御するために使用されます。この変数を有効にすると、 `DELETE`のステートメントが複数のトランザクションに分割され、非アトミックにコミットされる可能性があります。これを機能させるには、 `tidb_enable_batch_dml`を有効にして`tidb_dml_batch_size`に正の値を設定する必要もありますが、これはお勧めできません。
+
+### tidb_batch_insert {#tidb-batch-insert}
+
+> **警告：**
+>
+> この変数は非推奨の batch-dml 機能に関連付けられており、データが破損する可能性があります。したがって、batch-dml でこの変数を有効にすることはお勧めしません。代わりに、 [非トランザクション DML](/non-transactional-dml.md)を使用してください。
+
+-   スコープ: セッション
+-   クラスターに永続化: いいえ
+-   タイプ: ブール値
+-   デフォルト値: `OFF`
+-   この変数は、非推奨のバッチ dml 機能の一部であるバッチ挿入機能を有効にするかどうかを制御するために使用されます。この変数を有効にすると、 `INSERT`のステートメントが複数のトランザクションに分割され、非アトミックにコミットされる可能性があります。これを機能させるには、 `tidb_enable_batch_dml`を有効にして`tidb_dml_batch_size`に正の値を設定する必要もありますが、これはお勧めできません。
+
+### tidb_batch_pending_tiflash_count <span class="version-mark">v6.0 の新</span>機能 {#tidb-batch-pending-tiflash-count-span-class-version-mark-new-in-v6-0-span}
+
+-   スコープ: セッション |グローバル
+-   クラスターに永続化: はい
+-   デフォルト値: `4000`
+-   スコープ: `[0, 2147483647]`
+-   `ALTER DATABASE SET TIFLASH REPLICA`を使用して TiFlash レプリカを追加する場合に、許容される使用不可テーブルの最大数を指定します。使用できないテーブルの数がこの制限を超えると、操作が停止するか、残りのテーブルの TiFlash レプリカの設定が非常に遅くなります。
+
 ### tidb_broadcast_join_threshold_count <span class="version-mark">v5.0 の新</span>機能 {#tidb-broadcast-join-threshold-count-span-class-version-mark-new-in-v5-0-span}
 
 -   スコープ: セッション |グローバル
@@ -693,7 +822,7 @@ MPP は、TiFlash エンジンによって提供される分散コンピュー�
 -   スコープ: セッション
 -   デフォルト値: `4`
 -   単位: スレッド
--   この変数は、 `ADMIN CHECKSUM TABLE`ステートメントを実行するスキャン インデックスの同時実行数を設定するために使用されます。
+-   この変数は、 [`ADMIN CHECKSUM TABLE`](/sql-statements/sql-statement-admin-checksum-table.md)ステートメントを実行するスキャン インデックスの同時実行数を設定するために使用されます。
 -   変数に大きな値を設定すると、他のクエリの実行パフォーマンスに影響します。
 
 ### tidb_committer_concurrency v6.1.0<span class="version-mark">の新機能</span> {#tidb-committer-concurrency-span-class-version-mark-new-in-v6-1-0-span}
@@ -837,6 +966,10 @@ MPP は、TiFlash エンジンによって提供される分散コンピュー�
 
 ### tidb_dml_batch_size {#tidb-dml-batch-size}
 
+> **警告：**
+>
+> この変数は非推奨の batch-dml 機能に関連付けられており、データが破損する可能性があります。したがって、batch-dml でこの変数を有効にすることはお勧めしません。代わりに、 [非トランザクション DML](/non-transactional-dml.md)を使用してください。
+
 -   スコープ: セッション |グローバル
 -   クラスターに永続化: はい
 -   タイプ: 整数
@@ -845,6 +978,7 @@ MPP は、TiFlash エンジンによって提供される分散コンピュー�
 -   単位: 行
 -   この値が`0`より大きい場合、TiDB は`INSERT`や`LOAD DATA`などの commit ステートメントを小さなトランザクションにバッチ処理します。これにより、メモリ使用量が削減され、一括変更によって`txn-total-size-limit`に到達しないことが保証されます。
 -   値`0`のみがACID準拠を提供します。これを他の値に設定すると、TiDB の原子性と分離の保証が壊れます。
+-   この変数を機能させるには、 `tidb_enable_batch_dml`と、少なくとも`tidb_batch_insert`と`tidb_batch_delete`の 1 つを有効にする必要もあります。
 
 ### tidb_enable_1pc <span class="version-mark">v5.0 の新</span>機能 {#tidb-enable-1pc-span-class-version-mark-new-in-v5-0-span}
 
@@ -906,6 +1040,18 @@ MPP は、TiFlash エンジンによって提供される分散コンピュー�
 -   タイプ: ブール値
 -   デフォルト値: `OFF`
 -   この変数は、生成された列または式インデックスを作成するときに`AUTO_INCREMENT`列を含めるかどうかを決定するために使用されます。
+
+### tidb_enable_batch_dml {#tidb-enable-batch-dml}
+
+> **警告：**
+>
+> この変数は非推奨の batch-dml 機能に関連付けられており、データが破損する可能性があります。したがって、batch-dml でこの変数を有効にすることはお勧めしません。代わりに、 [非トランザクション DML](/non-transactional-dml.md)を使用してください。
+
+-   範囲: グローバル
+-   クラスターに永続化: はい
+-   タイプ: ブール値
+-   デフォルト値: `OFF`
+-   この変数は、非推奨のバッチ dml 機能を有効にするかどうかを制御します。有効にすると、特定のステートメントが複数のトランザクションに分割される可能性がありますが、これはアトミックではないため、注意して使用する必要があります。 batch-dml を使用する場合は、操作対象のデータに対して同時操作がないことを確認する必要があります。これを機能させるには、 `tidb_batch_dml_size`に正の値を指定し、少なくとも`tidb_batch_insert`と`tidb_batch_delete`のいずれかを有効にする必要があります。
 
 ### tidb_enable_change_multi_schema {#tidb-enable-change-multi-schema}
 
@@ -1007,6 +1153,34 @@ MPP は、TiFlash エンジンによって提供される分散コンピュー�
     -   `RESTRICTED_VARIABLES_ADMIN` : `SHOW [GLOBAL] VARIABLES`および`SET`で機密変数を表示および設定する機能。
     -   `RESTRICTED_USER_ADMIN` : 他のユーザーがユーザー アカウントを変更したり削除したりできないようにする機能。
 
+### tidb_enable_exchange_partition {#tidb-enable-exchange-partition}
+
+-   スコープ: セッション |グローバル
+-   クラスターに永続化: はい
+-   タイプ: ブール値
+-   デフォルト値: `OFF`
+-   この変数は、 [`exchange partitions with tables`](/partitioned-table.md#partition-management)機能を有効にするかどうかを制御します。デフォルト値は`OFF`です。つまり、 `exchange partitions with tables`はデフォルトで無効になっています。
+
+### tidb_enable_extended_stats {#tidb-enable-extended-stats}
+
+<CustomContent platform="tidb-cloud">
+
+> **ノート：**
+>
+> この TiDB 変数はTiDB Cloudには適用されません。
+
+</CustomContent>
+
+<CustomContent platform="tidb">
+
+-   スコープ: セッション |グローバル
+-   クラスターに永続化: はい
+-   タイプ: ブール値
+-   デフォルト値: `OFF`
+-   この変数は、オプティマイザをガイドするために TiDB が拡張統計を収集できるかどうかを示します。詳細については、 [拡張統計の概要](/extended-statistics.md)を参照してください。
+
+</CustomContent>
+
 ### tidb_enable_fast_analyze {#tidb-enable-fast-analyze}
 
 > **警告：**
@@ -1019,6 +1193,14 @@ MPP は、TiFlash エンジンによって提供される分散コンピュー�
 -   デフォルト値: `OFF`
 -   この変数は、統計`Fast Analyze`機能を有効にするかどうかを設定するために使用されます。
 -   統計`Fast Analyze`機能が有効になっている場合、TiDB は統計として約 10,000 行のデータをランダムにサンプリングします。データが偏在している場合やデータサイズが小さい場合、統計精度は低くなります。これにより、不適切なインデックスを選択するなど、最適でない実行計画が発生する可能性があります。通常の`Analyze`ステートメントの実行時間が許容できる場合は、 `Fast Analyze`機能を無効にすることをお勧めします。
+
+### tidb_enable_historical_stats {#tidb-enable-historical-stats}
+
+-   範囲: グローバル
+-   クラスターに永続化: はい
+-   タイプ: ブール値
+-   デフォルト値: `OFF`
+-   この変数は、未リリースの機能に使用されます。**変数値を変更しないでください**。
 
 ### tidb_enable_index_merge <span class="version-mark">v4.0 の新</span>機能 {#tidb-enable-index-merge-span-class-version-mark-new-in-v4-0-span}
 
@@ -1035,6 +1217,15 @@ MPP は、TiFlash エンジンによって提供される分散コンピュー�
 -   タイプ: ブール値
 -   デフォルト値: `ON`
 -   この変数は、インデックス マージ機能を有効にするかどうかを制御するために使用されます。
+
+### tidb_enable_index_merge_join {#tidb-enable-index-merge-join}
+
+-   スコープ: セッション |グローバル
+-   クラスターに永続化: はい
+-   タイプ: ブール値
+-   デフォルト値: `OFF`
+-   `IndexMergeJoin`演算子を有効にするかどうかを指定します。
+-   この変数は、TiDB の内部操作にのみ使用されます。調整することは**お勧めしません**。そうしないと、データの正確性が影響を受ける可能性があります。
 
 ### tidb_enable_legacy_instance_scope v6.0.0<span class="version-mark">の新機能</span> {#tidb-enable-legacy-instance-scope-span-class-version-mark-new-in-v6-0-0-span}
 
@@ -1053,6 +1244,14 @@ MPP は、TiFlash エンジンによって提供される分散コンピュー�
 -   デフォルト値: `ON`
 -   この変数は、 `LIST (COLUMNS) TABLE PARTITION`機能を有効にするかどうかを設定するために使用されます。
 
+### tidb_enable_local_txn {#tidb-enable-local-txn}
+
+-   範囲: グローバル
+-   クラスターに永続化: はい
+-   タイプ: ブール値
+-   デフォルト値: `OFF`
+-   この変数は、未リリースの機能に使用されます。**変数値を変更しないでください**。
+
 ### tidb_enable_mutation_checker v6.0.0<span class="version-mark">の新機能</span> {#tidb-enable-mutation-checker-span-class-version-mark-new-in-v6-0-0-span}
 
 -   スコープ: セッション |グローバル
@@ -1061,6 +1260,10 @@ MPP は、TiFlash エンジンによって提供される分散コンピュー�
 -   デフォルト値: `ON`
 -   この変数は、DML ステートメントの実行中にデータとインデックス間の整合性をチェックするために使用されるツールである TiDB ミューテーション チェッカーを有効にするかどうかを制御するために使用されます。チェッカーがステートメントのエラーを返した場合、TiDB はステートメントの実行をロールバックします。この変数を有効にすると、CPU 使用率がわずかに増加します。詳細については、 [データとインデックス間の不一致のトラブルシューティング](/troubleshoot-data-inconsistency-errors.md)を参照してください。
 -   v6.0.0 以降のバージョンの新しいクラスターの場合、デフォルト値は`ON`です。 v6.0.0 より前のバージョンからアップグレードする既存のクラスターの場合、デフォルト値は`OFF`です。
+
+### tidb_enable_new_cost_interface {#tidb-enable-new-cost-interface}
+
+この変数は、v6.2.0 以降で利用可能で、v6.1 では使用できない機能に関連付けられています。詳細については、v6.2 のドキュメント[`tidb_enable_new_cost_interface`](https://docs.pingcap.com/tidb/v6.2/system-variables#tidb_enable_new_cost_interface-span-classversion-marknew-in-v620span)を参照してください。
 
 ### tidb_enable_new_only_full_group_by_check v6.1.0<span class="version-mark">の新機能</span> {#tidb-enable-new-only-full-group-by-check-span-class-version-mark-new-in-v6-1-0-span}
 
@@ -1098,6 +1301,14 @@ MPP は、TiFlash エンジンによって提供される分散コンピュー�
 -   v6.1.0 以降、TiDB の[結合したテーブルの再配置](/join-reorder.md)アルゴリズムは Outer Join をサポートしています。この変数は、サポートの動作を制御します。デフォルト値は`OFF`です。これは、Join Reorder の Outer Join のサポートがデフォルトで無効になっていることを意味します。
 -   v6.1.0 より前のバージョンからアップグレードされたクラスターの場合、デフォルト値は`OFF`です。 v6.1.0 からアップグレードされたクラスターの場合、デフォルト値は`ON`です。
 
+### tidb_enable_ordered_result_mode {#tidb-enable-ordered-result-mode}
+
+-   スコープ: セッション |グローバル
+-   クラスターに永続化: はい
+-   デフォルト値: `OFF`
+-   最終出力結果を自動的にソートするかどうかを指定します。
+-   たとえば、この変数を有効にすると、TiDB は`SELECT a, MAX(b) FROM t GROUP BY a`を`SELECT a, MAX(b) FROM t GROUP BY a ORDER BY a, MAX(b)`として処理します。
+
 ### tidb_enable_paging v5.4.0<span class="version-mark">の新機能</span> {#tidb-enable-paging-span-class-version-mark-new-in-v5-4-0-span}
 
 -   スコープ: セッション |グローバル
@@ -1115,6 +1326,14 @@ MPP は、TiFlash エンジンによって提供される分散コンピュー�
 -   タイプ: ブール値
 -   デフォルト値: `OFF`
 -   この変数は、 `Apply`オペレーターの並行性を有効にするかどうかを制御します。同時実行数は`tidb_executor_concurrency`変数によって制御されます。 `Apply`のオペレーターは相関サブクエリを処理し、デフォルトでは同時実行性がないため、実行速度が遅くなります。この変数の値を`1`に設定すると、同時実行性が向上し、実行速度が向上します。現在、 `Apply`の同時実行はデフォルトで無効になっています。
+
+### tidb_enable_pipelined_window_function {#tidb-enable-pipelined-window-function}
+
+-   スコープ: セッション |グローバル
+-   クラスターに永続化: はい
+-   タイプ: ブール値
+-   デフォルト値: `ON`
+-   この変数は、ウィンドウ関数にパイプライン実行アルゴリズムを使用するかどうかを指定します。
 
 ### tidb_enable_prepared_plan_cache v6.1.0<span class="version-mark">の新機能</span> {#tidb-enable-prepared-plan-cache-span-class-version-mark-new-in-v6-1-0-span}
 
@@ -1440,7 +1659,7 @@ v5.0 以降、上記のシステム変数を個別に変更することができ
 -   Persists to cluster: いいえ、接続している現在の TiDB インスタンスにのみ適用されます。
 -   デフォルト値: `NO_PRIORITY`
 -   この変数は、TiDBサーバーで実行されるステートメントのデフォルトの優先度を変更するために使用されます。使用例は、OLAP クエリを実行している特定のユーザーが OLTP クエリを実行しているユーザーよりも低い優先度を受け取るようにすることです。
--   この変数の値は`NO_PRIORITY` 、 `LOW_PRIORITY` 、 `DELAYED`または`HIGH_PRIORITY`に設定できます。
+-   デフォルト値`NO_PRIORITY`は、ステートメントの優先度が強制的に変更されないことを意味します。その他のオプションは、昇順で`LOW_PRIORITY` 、 `DELAYED` 、および`HIGH_PRIORITY`です。
 
 ### tidb_gc_concurrency <span class="version-mark">v5.0 の新</span>機能 {#tidb-gc-concurrency-span-class-version-mark-new-in-v5-0-span}
 
@@ -1545,7 +1764,7 @@ v5.0 以降、上記のシステム変数を個別に変更することができ
 
 -   この変数は、すべての SQL ステートメントを[ログ](/tidb-configuration-file.md#logfile)に記録するかどうかを設定するために使用されます。この機能はデフォルトで無効になっています。メンテナンス担当者が問題を特定するときにすべての SQL ステートメントをトレースする必要がある場合、この機能を有効にすることができます。
 
--   ログ内のこの機能のすべてのレコードを表示するには、 `"GENERAL_LOG"`文字列をクエリします。次の情報が記録されます。
+-   ログ内のこの機能のすべてのレコードを表示するには、TiDB 構成項目[`log.level`](/tidb-configuration-file.md#level)を`"info"`または`"debug"`に設定してから、 `"GENERAL_LOG"`文字列を照会する必要があります。次の情報が記録されます。
     -   `conn` : 現在のセッションの ID。
     -   `user` : 現在のセッション ユーザー。
     -   `schemaVersion` : 現在のスキーマ バージョン。
@@ -1557,6 +1776,25 @@ v5.0 以降、上記のシステム変数を個別に変更することができ
     -   `sql` : 現在のクエリに対応する SQL ステートメント。
 
 </CustomContent>
+
+### tidb_guarantee_linearizability <span class="version-mark">v5.0 の新</span>機能 {#tidb-guarantee-linearizability-span-class-version-mark-new-in-v5-0-span}
+
+-   スコープ: セッション |グローバル
+-   クラスターに永続化: はい
+-   タイプ: ブール値
+-   デフォルト値: `ON`
+-   この変数は、非同期コミットのコミット TS の計算方法を制御します。デフォルト (値`ON` ) では、2 フェーズ コミットは PDサーバーから新しい TS を要求し、TS を使用して最終的なコミット TS を計算します。この状況では、すべての同時トランザクションに対して線形化可能性が保証されます。
+-   この変数を`OFF`に設定すると、PDサーバーから TS をフェッチするプロセスがスキップされます。その代償として、因果的一貫性のみが保証されますが、線形化可能性は保証されません。詳細については、ブログ投稿[Async Commit、TiDB 5.0 のトランザクション コミットのアクセラレータ](https://en.pingcap.com/blog/async-commit-the-accelerator-for-transaction-commit-in-tidb-5-0/)を参照してください。
+-   因果関係のみが必要なシナリオでは、この変数を`OFF`に設定してパフォーマンスを向上させることができます。
+
+### tidb_hash_exchange_with_new_collation {#tidb-hash-exchange-with-new-collation}
+
+-   スコープ: セッション |グローバル
+-   クラスターに永続化: はい
+-   タイプ: ブール値
+-   デフォルト値: `ON`
+-   この変数は、MPP ハッシュ パーティション交換演算子が、新しい照合順序が有効になっているクラスターで生成されるかどうかを制御します。 `true`は演算子を生成することを意味し、 `false`は生成しないことを意味します。
+-   この変数は、TiDB の内部操作に使用されます。この変数を設定することは**お勧めしません**。
 
 ### tidb_hash_join_concurrency {#tidb-hash-join-concurrency}
 
@@ -1693,6 +1931,39 @@ v5.0 以降、上記のシステム変数を個別に変更することができ
 -   スコープ: セッション
 -   デフォルト値: `tikv,tiflash,tidb`
 -   この変数は、データの読み取り時に TiDB が使用できるストレージ エンジン リストを設定するために使用されます。
+
+### tidb_last_ddl_info v6.0.0<span class="version-mark">の新機能</span> {#tidb-last-ddl-info-span-class-version-mark-new-in-v6-0-0-span}
+
+-   スコープ: セッション
+-   クラスターに永続化: いいえ
+-   デフォルト値: &quot;&quot;
+-   タイプ: 文字列
+-   これは読み取り専用の変数です。現在のセッション内の最後の DDL 操作の情報を取得するために、TiDB で内部的に使用されます。
+    -   &quot;query&quot;: 最後の DDL クエリ文字列。
+    -   &quot;seq_num&quot;: 各 DDL 操作のシーケンス番号。 DDL操作の順序を識別するために使用されます。
+
+### tidb_last_query_info v4.0.14<span class="version-mark">の新機能</span> {#tidb-last-query-info-span-class-version-mark-new-in-v4-0-14-span}
+
+-   スコープ: セッション
+-   クラスターに永続化: いいえ
+-   デフォルト値: &quot;&quot;
+-   これは読み取り専用の変数です。最後の DML ステートメントのトランザクション情報を照会するために、TiDB で内部的に使用されます。情報には次が含まれます。
+    -   `txn_scope` : `global`または`local`のトランザクションのスコープ。
+    -   `start_ts` : トランザクションの開始タイムスタンプ。
+    -   `for_update_ts` : 以前に実行された DML ステートメントの`for_update_ts` 。これは、テスト用に使用される TiDB の内部用語です。通常、この情報は無視できます。
+    -   `error` : エラー メッセージ (存在する場合)。
+
+### tidb_last_txn_info v4.0.9<span class="version-mark">の新機能</span> {#tidb-last-txn-info-span-class-version-mark-new-in-v4-0-9-span}
+
+-   スコープ: セッション
+-   クラスターに永続化: いいえ
+-   タイプ: 文字列
+-   この変数は、現在のセッション内の最後のトランザクション情報を取得するために使用されます。これは読み取り専用の変数です。取引情報には以下が含まれます。
+    -   トランザクション スコープ。
+    -   TS の開始とコミット。
+    -   トランザクション コミット モード。2 フェーズ、1 フェーズ、または非同期コミットの可能性があります。
+    -   非同期コミットまたは 1 フェーズ コミットから 2 フェーズ コミットへのトランザクション フォールバックの情報。
+    -   発生したエラー。
 
 ### tidb_log_file_max_days v5.3.0<span class="version-mark">の新機能</span> {#tidb-log-file-max-days-span-class-version-mark-new-in-v5-3-0-span}
 
@@ -1853,6 +2124,14 @@ v5.0 以降、上記のシステム変数を個別に変更することができ
 
 </CustomContent>
 
+### tidb_merge_join_concurrency {#tidb-merge-join-concurrency}
+
+-   スコープ: セッション |グローバル
+-   クラスターに永続化: はい
+-   デフォルト値: `1`
+-   この変数は、クエリが実行されるときの`MergeJoin`演算子の同時実行数を設定します。
+-   この変数を設定することは**お勧めしません**。この変数の値を変更すると、データの正確性の問題が発生する可能性があります。
+
 ### tidb_metric_query_range_duration <span class="version-mark">v4.0 の新</span>機能 {#tidb-metric-query-range-duration-span-class-version-mark-new-in-v4-0-span}
 
 <CustomContent platform="tidb-cloud">
@@ -1912,7 +2191,7 @@ v5.0 以降、上記のシステム変数を個別に変更することができ
 >
 > -   [go-sql-ドライバー](https://github.com/go-sql-driver/mysql#multistatements) ( `multiStatements` )
 > -   [コネクタ/J](https://dev.mysql.com/doc/connector-j/8.0/en/connector-j-reference-configuration-properties.html) ( `allowMultiQueries` )
-> -   PHP [みずい](https://dev.mysql.com/doc/apis-php/en/apis-php-mysqli.quickstart.multiple-statement.html) ( `mysqli_multi_query` )
+> -   PHP [みずい](https://www.php.net/manual/en/mysqli.quickstart.multiple-statement.php) ( `mysqli_multi_query` )
 
 ### tidb_nontransactional_ignore_error v6.1.0<span class="version-mark">の新機能</span> {#tidb-nontransactional-ignore-error-span-class-version-mark-new-in-v6-1-0-span}
 
@@ -1930,6 +2209,35 @@ v5.0 以降、上記のシステム変数を個別に変更することができ
 -   デフォルト値: `OFF`
 -   この変数は、オプティマイザーが集約関数を Join、Projection、および UnionAll の前の位置に押し下げる最適化操作を実行するかどうかを設定するために使用されます。
 -   クエリで集計操作が遅い場合は、変数の値を ON に設定できます。
+
+### tidb_opt_broadcast_cartesian_join {#tidb-opt-broadcast-cartesian-join}
+
+-   スコープ: セッション |グローバル
+-   クラスターに永続化: はい
+-   タイプ: 整数
+-   デフォルト値: `1`
+-   範囲: `[0, 2]`
+-   ブロードキャストデカルト結合を許可するかどうかを示します。
+-   `0`は、ブロードキャストデカルト結合が許可されていないことを意味します。 `1`は[`tidb_broadcast_join_threshold_count`](#tidb_broadcast_join_threshold_count-new-in-v50)に基づいて許可されることを意味します。 `2`は、テーブル サイズがしきい値を超えても常に許可されることを意味します。
+-   この変数は TiDB で内部的に使用され、その値を変更することはお勧めし**ません**。
+
+### tidb_opt_concurrency_factor {#tidb-opt-concurrency-factor}
+
+-   スコープ: セッション |グローバル
+-   クラスターに永続化: はい
+-   タイプ: フロート
+-   範囲: `[0, 2147483647]`
+-   デフォルト値: `3.0`
+-   TiDB で Golang ゴルーチンを開始するための CPU コストを示します。この変数は[コストモデル](/cost-model.md)で内部的に使用され、その値を変更することはお勧めし**ません**。
+
+### tidb_opt_copcpu_factor {#tidb-opt-copcpu-factor}
+
+-   スコープ: セッション |グローバル
+-   クラスターに永続化: はい
+-   タイプ: フロート
+-   範囲: `[0, 2147483647]`
+-   デフォルト値: `3.0`
+-   TiKV コプロセッサーが 1 行を処理するための CPU コストを示します。この変数は[コストモデル](/cost-model.md)で内部的に使用され、その値を変更することはお勧めし**ません**。
 
 ### tidb_opt_correlation_exp_factor {#tidb-opt-correlation-exp-factor}
 
@@ -1952,6 +2260,33 @@ v5.0 以降、上記のシステム変数を個別に変更することができ
 -   デフォルト値: `0.9`
 -   範囲: `[0, 1]`
 -   この変数は、列順序相関を使用した行数の見積もりを有効にするかどうかを決定するしきい値を設定するために使用されます。現在の列と`handle`列の順序相関がしきい値を超える場合、このメソッドが有効になります。
+
+### tidb_opt_cpu_factor {#tidb-opt-cpu-factor}
+
+-   スコープ: セッション |グローバル
+-   クラスターに永続化: はい
+-   タイプ: フロート
+-   範囲: `[0, 2147483647]`
+-   デフォルト値: `3.0`
+-   TiDB が 1 行を処理するための CPU コストを示します。この変数は[コストモデル](/cost-model.md)で内部的に使用され、その値を変更することはお勧めし**ません**。
+
+### tidb_opt_desc_factor {#tidb-opt-desc-factor}
+
+-   スコープ: セッション |グローバル
+-   クラスターに永続化: はい
+-   タイプ: フロート
+-   範囲: `[0, 2147483647]`
+-   デフォルト値: `3.0`
+-   TiKV がディスクから 1 行を降順でスキャンするためのコストを示します。この変数は[コストモデル](/cost-model.md)で内部的に使用され、その値を変更することはお勧めし**ません**。
+
+### tidb_opt_disk_factor {#tidb-opt-disk-factor}
+
+-   スコープ: セッション |グローバル
+-   クラスターに永続化: はい
+-   タイプ: フロート
+-   範囲: `[0, 2147483647]`
+-   デフォルト値: `1.5`
+-   TiDB が一時ディスクとの間で 1 バイトのデータを読み書きするための I/O コストを示します。この変数は[コストモデル](/cost-model.md)で内部的に使用され、その値を変更することはお勧めし**ません**。
 
 ### tidb_opt_distinct_agg_push_down {#tidb-opt-distinct-agg-push-down}
 
@@ -2022,6 +2357,15 @@ mysql> desc select count(distinct a) from test.t;
     select t.* from t, t1 where t.a=t1.aa;
     ```
 
+### tidb_opt_join_reorder_threshold {#tidb-opt-join-reorder-threshold}
+
+-   スコープ: セッション |グローバル
+-   クラスターに永続化: はい
+-   デフォルト値: `0`
+-   範囲: `[0, 2147483647]`
+-   この変数は、TiDB 結合したテーブルの再配置 Reorder アルゴリズムの選択を制御するために使用されます。 結合したテーブルの再配置 Reorder に参加しているノードの数がこのしきい値より多い場合、TiDB は欲張りアルゴリズムを選択し、このしきい値より少ない場合、TiDB は動的計画法アルゴリズムを選択します。
+-   現在、OLTP クエリの場合、デフォルト値を維持することをお勧めします。 OLAP クエリの場合、変数値を 10 ～ 15 に設定して、OLAP シナリオでより適切な接続順序を取得することをお勧めします。
+
 ### tidb_opt_limit_push_down_threshold {#tidb-opt-limit-push-down-threshold}
 
 -   スコープ: セッション |グローバル
@@ -2031,6 +2375,32 @@ mysql> desc select count(distinct a) from test.t;
 -   範囲: `[0, 2147483647]`
 -   この変数は、Limit または TopN オペレーターを TiKV にプッシュするかどうかを決定するしきい値を設定するために使用されます。
 -   Limit または TopN オペレーターの値がこのしきい値以下の場合、これらのオペレーターは TiKV に強制的にプッシュ ダウンされます。この変数は、部分的に誤った推定が原因で、Limit または TopN オペレーターを TiKV にプッシュダウンできないという問題を解決します。
+
+### tidb_opt_memory_factor {#tidb-opt-memory-factor}
+
+-   スコープ: セッション |グローバル
+-   クラスターに永続化: はい
+-   タイプ: フロート
+-   範囲: `[0, 2147483647]`
+-   デフォルト値: `0.001`
+-   TiDB が 1 行を格納するためのメモリ コストを示します。この変数は[コストモデル](/cost-model.md)で内部的に使用され、その値を変更することはお勧めし**ません**。
+
+### tidb_opt_mpp_outer_join_fixed_build_side v5.1.0<span class="version-mark">の新機能</span> {#tidb-opt-mpp-outer-join-fixed-build-side-span-class-version-mark-new-in-v5-1-0-span}
+
+-   スコープ: セッション |グローバル
+-   クラスターに永続化: はい
+-   タイプ: ブール値
+-   デフォルト値: `OFF`
+-   変数値が`ON`の場合、左側の結合演算子は常にビルド側として内部テーブルを使用し、右側の結合演算子は常にビルド側として外部テーブルを使用します。値を`OFF`に設定すると、外部結合演算子はテーブルのいずれかの側を構築側として使用できます。
+
+### tidb_opt_network_factor {#tidb-opt-network-factor}
+
+-   スコープ: セッション |グローバル
+-   クラスターに永続化: はい
+-   タイプ: フロート
+-   範囲: `[0, 2147483647]`
+-   デフォルト値: `1.0`
+-   ネットワークを介して 1 バイトのデータを転送するための正味コストを示します。この変数は[コストモデル](/cost-model.md)で内部的に使用され、その値を変更することはお勧めし**ません**。
 
 ### tidb_opt_prefer_range_scan <span class="version-mark">v5.0 の新</span>機能 {#tidb-opt-prefer-range-scan-span-class-version-mark-new-in-v5-0-span}
 
@@ -2065,6 +2435,41 @@ explain select * from t where age=5;
 3 rows in set (0.00 sec)
 ```
 
+### tidb_opt_projection_push_down v6.1.0<span class="version-mark">の新機能</span> {#tidb-opt-projection-push-down-span-class-version-mark-new-in-v6-1-0-span}
+
+-   スコープ: セッション
+-   クラスターに永続化: いいえ
+-   タイプ: ブール値
+-   デフォルト値: `OFF`
+-   オプティマイザが TiKV または TiFlash コプロセッサに`Projection`をプッシュできるようにするかどうかを指定します。
+
+### tidb_opt_scan_factor {#tidb-opt-scan-factor}
+
+-   スコープ: セッション |グローバル
+-   クラスターに永続化: はい
+-   タイプ: フロート
+-   範囲: `[0, 2147483647]`
+-   デフォルト値: `1.5`
+-   TiKV がディスクから 1 行のデータを昇順にスキャンするためのコストを示します。この変数は[コストモデル](/cost-model.md)で内部的に使用され、その値を変更することはお勧めし**ません**。
+
+### tidb_opt_seek_factor {#tidb-opt-seek-factor}
+
+-   スコープ: セッション |グローバル
+-   クラスターに永続化: はい
+-   タイプ: フロート
+-   範囲: `[0, 2147483647]`
+-   デフォルト値: `20`
+-   TiDB が TiKV からデータを要求するための起動コストを示します。この変数は[コストモデル](/cost-model.md)で内部的に使用され、その値を変更することはお勧めし**ません**。
+
+### tidb_opt_tiflash_concurrency_factor {#tidb-opt-tiflash-concurrency-factor}
+
+-   スコープ: セッション |グローバル
+-   クラスターに永続化: はい
+-   タイプ: フロート
+-   範囲: `[0, 2147483647]`
+-   デフォルト値: `24.0`
+-   TiFlash 演算の同時実行数を示します。この変数は[コストモデル](/cost-model.md)で内部的に使用され、その値を変更することはお勧めし**ません**。
+
 ### tidb_opt_write_row_id {#tidb-opt-write-row-id}
 
 <CustomContent platform="tidb-cloud">
@@ -2078,6 +2483,14 @@ explain select * from t where age=5;
 -   スコープ: セッション
 -   デフォルト値: `OFF`
 -   この変数は、 `INSERT` 、 `REPLACE` 、および`UPDATE`ステートメントが`_tidb_rowid`列で操作できるようにするかどうかを制御するために使用されます。この変数は、TiDB ツールを使用してデータをインポートする場合にのみ使用できます。
+
+### tidb_optimizer_selectivity_level {#tidb-optimizer-selectivity-level}
+
+-   スコープ: セッション |グローバル
+-   クラスターに永続化: はい
+-   デフォルト値: `1`
+-   値のオプション: `1`および`2` (非推奨)
+-   この変数は、オプティマイザの推定ロジックの反復を制御します。この変数の値を変更すると、オプティマイザーの見積もりロジックが大幅に変更されます。現在、有効な値は`1`だけです。値を`2`に設定することはお勧めしません。
 
 ### tidb_partition_prune_mode <span class="version-mark">v5.1 の新</span>機能 {#tidb-partition-prune-mode-span-class-version-mark-new-in-v5-1-span}
 
@@ -2201,6 +2614,16 @@ explain select * from t where age=5;
 -   この変数は、タイムスタンプの取得を最適化するために使用されます。これは、読み取りと書き込みの競合がまれな読み取りコミット分離レベルのシナリオに適しています。この変数を有効にすると、グローバル タイムスタンプを取得する際のレイテンシーとコストを回避でき、トランザクション レベルの読み取りレイテンシーを最適化できます。
 -   読み取りと書き込みの競合が深刻な場合、この機能を有効にすると、グローバル タイムスタンプを取得するコストとレイテンシーが増加し、パフォーマンスが低下する可能性があります。詳細については、 [読み取りコミット分離レベル](/transaction-isolation-levels.md#read-committed-isolation-level)を参照してください。
 
+### tidb_read_consistency v5.4.0<span class="version-mark">の新機能</span> {#tidb-read-consistency-span-class-version-mark-new-in-v5-4-0-span}
+
+-   スコープ: セッション
+-   クラスターに永続化: いいえ
+-   タイプ: 文字列
+-   デフォルト値: `strict`
+-   この変数は、自動コミット読み取りステートメントの読み取り一貫性を制御するために使用されます。
+-   変数値が`weak`に設定されている場合、read ステートメントで検出されたロックは直接スキップされ、読み取り実行が高速になる可能性があります。これは、弱い一貫性の読み取りモードです。ただし、トランザクションのセマンティクス (原子性など) と分散一貫性 (線形化可能性など) は保証されません。
+-   自動コミット読み取りが高速で弱い一貫性の読み取り結果を返す必要があるユーザー シナリオでは、弱い一貫性の読み取りモードを使用できます。
+
 ### tidb_read_staleness v5.4.0<span class="version-mark">の新機能</span> {#tidb-read-staleness-span-class-version-mark-new-in-v5-4-0-span}
 
 -   スコープ: セッション
@@ -2250,6 +2673,14 @@ explain select * from t where age=5;
 -   デフォルト値: `ON`
 -   この変数は、オプティマイザが null 等価を含むクエリ条件をインデックス アクセスのプレフィックス条件として使用できるかどうかを制御します。
 -   この変数はデフォルトで有効になっています。有効にすると、オプティマイザーはアクセスするインデックス データの量を減らすことができるため、クエリの実行が高速化されます。たとえば、クエリに複数列インデックス`index(a, b)`が含まれ、クエリ条件に`a<=>null and b=1`が含まれている場合、オプティマイザはインデックス アクセスのクエリ条件で`a<=>null`と`b=1`の両方を使用できます。変数が無効になっている場合、 `a<=>null and b=1`には NULL 等価条件が含まれているため、オプティマイザーはインデックス アクセスに`b=1`を使用しません。
+
+### tidb_remove_orderby_in_subquery v6.1.0<span class="version-mark">の新機能</span> {#tidb-remove-orderby-in-subquery-span-class-version-mark-new-in-v6-1-0-span}
+
+-   スコープ: セッション |グローバル
+-   クラスターに永続化: はい
+-   タイプ: ブール値
+-   デフォルト値: `OFF`
+-   サブクエリで`ORDER BY`の句を削除するかどうかを指定します。
 
 ### tidb_replica_read <span class="version-mark">v4.0 の新</span>機能 {#tidb-replica-read-span-class-version-mark-new-in-v4-0-span}
 
@@ -2331,6 +2762,14 @@ explain select * from t where age=5;
 -   デフォルトでは、TiDB で作成された新しいテーブルのリージョンは分割されます。この変数を有効にすると、新しく分割されたリージョンは`CREATE TABLE`ステートメントの実行中にすぐに分散されます。これは、テーブルがバッチで作成された直後にデータをバッチで書き込む必要があるシナリオに適用されます。これは、新しく分割されたリージョンを事前に TiKV に分散させることができ、PD によってスケジュールされるのを待つ必要がないためです。バッチでのデータ書き込みの継続的な安定性を確保するために、 `CREATE TABLE`ステートメントは、リージョンが正常に分散された後にのみ成功を返します。これにより、ステートメントの実行時間が、この変数を無効にした場合よりも数倍長くなります。
 -   テーブルの作成時に`SHARD_ROW_ID_BITS`と`PRE_SPLIT_REGIONS`が設定されている場合、テーブルの作成後に指定された数のリージョンが均等に分割されます。
 
+### <code>tidb_shard_allocate_step</code> <span class="version-mark">v5.0 の新</span>機能 {#code-tidb-shard-allocate-step-code-span-class-version-mark-new-in-v5-0-span}
+
+-   スコープ: セッション |グローバル
+-   クラスターに永続化: はい
+-   デフォルト値: `9223372036854775807`
+-   範囲: `[1, 9223372036854775807]`
+-   この変数は、 [`AUTO_RANDOM`](/auto-random.md)または[`SHARD_ROW_ID_BITS`](/shard-row-id-bits.md)属性に割り当てられる連続 ID の最大数を制御します。通常、 `AUTO_RANDOM`の ID または`SHARD_ROW_ID_BITS`の注釈付き行 ID は、1 つのトランザクションで増分的かつ連続的です。この変数を使用して、大規模なトランザクション シナリオでホットスポットの問題を解決できます。
+
 ### tidb_skip_ascii_check <span class="version-mark">v5.0 の新</span>機能 {#tidb-skip-ascii-check-span-class-version-mark-new-in-v5-0-span}
 
 -   スコープ: セッション |グローバル
@@ -2396,6 +2835,14 @@ Query OK, 0 rows affected, 1 warning (0.00 sec)
 -   デフォルト値: `-1`
 -   範囲: `[-1, 256]`
 -   この変数は、TiFlash がリクエストを実行する最大同時実行数を設定するために使用されます。デフォルト値は`-1`で、このシステム変数が無効であることを示します。値が`0`の場合、スレッドの最大数は TiFlash によって自動的に構成されます。
+
+### tidb_mpp_store_fail_ttl {#tidb-mpp-store-fail-ttl}
+
+-   スコープ: セッション |グローバル
+-   クラスターに永続化: はい
+-   タイプ: 期間
+-   デフォルト値: `60s`
+-   新しく開始された TiFlash はサービスを提供しません。クエリが失敗しないようにするために、TiDB はクエリを送信する tidb サーバーを新しく開始された TiFlash ノードに制限します。この変数は、新しく開始された TiFlash にリクエストが送信されない時間範囲を示します。
 
 ### tidb_slow_query_file {#tidb-slow-query-file}
 
@@ -2516,6 +2963,14 @@ Query OK, 0 rows affected, 1 warning (0.00 sec)
 -   範囲: `[0, 9223372036854775807]`
 -   この変数は、TiDB が同時に TiKV に送信できるリクエストの最大数を制限するために使用されます。 0 は無制限を意味します。
 
+### tidb_streamagg_concurrency {#tidb-streamagg-concurrency}
+
+-   スコープ: セッション |グローバル
+-   クラスターに永続化: はい
+-   デフォルト値: `1`
+-   この変数は、クエリが実行されるときの`StreamAgg`演算子の同時実行を設定します。
+-   この変数を設定することは**お勧めしません**。変数値を変更すると、データの正確性の問題が発生する可能性があります。
+
 ### tidb_super_read_only v5.3.1<span class="version-mark">の新機能</span> {#tidb-super-read-only-span-class-version-mark-new-in-v5-3-1-span}
 
 -   範囲: グローバル
@@ -2621,6 +3076,18 @@ Query OK, 0 rows affected, 1 warning (0.00 sec)
 -   この変数は、負荷に最も寄与する SQL ステートメント (つまり、上位 N 個) を[Top SQL](https://docs.pingcap.com/tidb/stable/top-sql)分あたり 1 つずつ記録できる数を制御するために使用されます。
 
 </CustomContent>
+
+### tidb_track_aggregate_memory_usage {#tidb-track-aggregate-memory-usage}
+
+-   スコープ: セッション |グローバル
+-   クラスターに永続化: はい
+-   タイプ: ブール値
+-   デフォルト値: `ON`
+-   この変数は、TiDB が集計関数のメモリ使用量を追跡するかどうかを制御します。
+
+> **警告：**
+>
+> この変数を無効にすると、TiDB はメモリ使用量を正確に追跡できず、対応する SQL ステートメントのメモリ使用量を制御できなくなります。
 
 ### tidb_tso_client_batch_max_wait_time v5.3.0<span class="version-mark">の新機能</span> {#tidb-tso-client-batch-max-wait-time-span-class-version-mark-new-in-v5-3-0-span}
 
@@ -2744,6 +3211,31 @@ Query OK, 0 rows affected, 1 warning (0.00 sec)
 ### tx_isolation {#tx-isolation}
 
 この変数は`transaction_isolation`のエイリアスです。
+
+### tx_isolation_one_shot {#tx-isolation-one-shot}
+
+> **ノート：**
+>
+> この変数は、TiDB で内部的に使用されます。使用することは想定されていません。
+
+内部的に、TiDB パーサーは`SET TRANSACTION ISOLATION LEVEL [READ COMMITTED| REPEATABLE READ | ...]`ステートメントを`SET @@SESSION.TX_ISOLATION_ONE_SHOT = [READ COMMITTED| REPEATABLE READ | ...]`に変換します。
+
+### tx_read_ts {#tx-read-ts}
+
+-   スコープ: セッション
+-   クラスターに永続化: いいえ
+-   デフォルト値: `0`
+-   ステイル読み取りのシナリオでは、このセッション変数を使用して、安定した読み取りのタイムスタンプ値を記録します。
+-   この変数は、TiDB の内部操作に使用されます。この変数を設定することは**お勧めしません**。
+
+### txn_scope {#txn-scope}
+
+-   スコープ: セッション
+-   クラスターに永続化: いいえ
+-   デフォルト値: `global`
+-   値のオプション: `global`および`local`
+-   この変数は、現在のセッション トランザクションがグローバル トランザクションかローカル トランザクションかを設定するために使用されます。
+-   この変数は、TiDB の内部操作に使用されます。この変数を設定することは**お勧めしません**。
 
 ### バージョン {#version}
 

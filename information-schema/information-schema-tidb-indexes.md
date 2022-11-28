@@ -28,8 +28,10 @@ DESC tidb_indexes;
 | INDEX_COMMENT | varchar(2048) | YES  |      | NULL    |       |
 | Expression    | varchar(64)   | YES  |      | NULL    |       |
 | INDEX_ID      | bigint(21)    | YES  |      | NULL    |       |
+| IS_VISIBLE    | varchar(64)   | YES  |      | NULL    |       |
+| CLUSTERED     | varchar(64)   | YES  |      | NULL    |       |
 +---------------+---------------+------+------+---------+-------+
-10 rows in set (0.00 sec)
+12 rows in set (0.00 sec)
 ```
 
 `INDEX_ID`は、TiDB が各インデックスに割り当てる一意の ID です。別のテーブルまたは API から取得した`INDEX_ID`との結合操作を行うために使用できます。
@@ -60,3 +62,5 @@ WHERE
 -   `SUB_PART` : インデックスのプレフィックス長。列が部分的に索引付けされている場合、 `SUB_PART`の値は索引付けされた文字の数です。それ以外の場合、値は`NULL`です。
 -   `INDEX_COMMENT` : 索引の作成時に作成される索引のコメント。
 -   `INDEX_ID` : インデックス ID。
+-   `IS_VISIBLE` : インデックスが表示されるかどうか。
+-   `CLUSTERED` : [クラスター化インデックス](/clustered-indexes.md)かどうか。

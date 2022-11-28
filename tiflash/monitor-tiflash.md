@@ -9,7 +9,7 @@ summary: Learn the monitoring items of TiFlash.
 
 TiUP を使用して TiDB クラスターをデプロイすると、監視システム (Prometheus &amp; Grafana) が同時にデプロイされます。詳細については、 [監視フレームワークの概要](/tidb-monitoring-framework.md)を参照してください。
 
-Grafana ダッシュボードは、Overview、PD、TiDB、TiKV、Node_exporter などを含む一連のサブ ダッシュボードに分かれています。診断に役立つ多くの指標があります。
+Grafana ダッシュボードは、Overview、PD、TiDB、TiKV、および Node_exporter を含む一連のサブ ダッシュボードに分かれています。診断に役立つ多くの指標があります。
 
 TiFlash には、TiFlash **-Summary** 、 <strong>TiFlash-Proxy-Summary</strong> 、および<strong>TiFlash-Proxy-Details の</strong>3 つのダッシュボード パネルがあります。これらのパネルのメトリックは、TiFlash の現在のステータスを示します。 <strong>TiFlash-Proxy-Summary</strong>および<strong>TiFlash-Proxy-Details</strong>パネルは、主にRaftレイヤーの情報を表示し、メトリクスは[TiKV の主要な監視指標](/grafana-tikv-dashboard.md)に詳述されています。
 

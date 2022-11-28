@@ -5,153 +5,105 @@ summary: Learn the AUTO_RANDOM attribute.
 
 # AUTO_RANDOM v3.1.0<span class="version-mark">の新機能</span> {#auto-random-span-class-version-mark-new-in-v3-1-0-span}
 
-> **ノート：**
->
-> `AUTO_RANDOM`は v4.0.3 以降で一般提供されています。
-
 ## ユーザーシナリオ {#user-scenario}
 
-TiDB にデータを集中的に書き込み、TiDB に自動インクリメント整数型の主キーを持つテーブルがある場合、ホットスポットの問題が発生する可能性があります。ホットスポットの問題を解決するには、 `AUTO_RANDOM`属性を使用できます。
+`AUTO_RANDOM`の値はランダムで一意であるため、TiDB が連続した ID を割り当てることによって発生する単一ストレージ ノードでの書き込みホットスポットを回避するために、 [`AUTO_INCREMENT`](/auto-increment.md)の代わりに`AUTO_RANDOM`がよく使用されます。現在の`AUTO_INCREMENT`列が主キーで、タイプが`BIGINT`の場合、 `ALTER TABLE t MODIFY COLUMN id BIGINT AUTO_RANDOM(5);`ステートメントを実行して`AUTO_INCREMENT`から`AUTO_RANDOM`に切り替えることができます。
 
 <CustomContent platform="tidb">
 
-詳細については、 [高度な同時書き込みのベスト プラクティス](/best-practices/high-concurrency-best-practices.md#complex-hotspot-problems)を参照してください。
+TiDB で同時書き込み負荷の高いワークロードを処理する方法の詳細については、 [高度な同時書き込みのベスト プラクティス](/best-practices/high-concurrency-best-practices.md)を参照してください。
 
 </CustomContent>
 
-例として、次の作成済みテーブルを取り上げます。
+## 基本概念 {#basic-concepts}
 
-{{< copyable "" >}}
+`AUTO_RANDOM`は、 `BIGINT`列に値を自動的に割り当てるために使用される列属性です。自動的に割り当てられる値は**ランダム**で<strong>一意</strong>です。
 
-```sql
-CREATE TABLE t (a bigint PRIMARY KEY AUTO_INCREMENT, b varchar(255))
-```
-
-この`t`のテーブルで、次のように主キーの値を指定しない`INSERT`のステートメントを大量に実行します。
-
-{{< copyable "" >}}
+`AUTO_RANDOM`列のテーブルを作成するには、次のステートメントを使用できます。 `AUTO_RANDOM`列は主キーに含める必要があり、主キーには`AUTO_RANDOM`列のみを含める必要があります。
 
 ```sql
-INSERT INTO t(b) VALUES ('a'), ('b'), ('c')
+CREATE TABLE t (a BIGINT AUTO_RANDOM, b VARCHAR(255), PRIMARY KEY (a));
+CREATE TABLE t (a BIGINT PRIMARY KEY AUTO_RANDOM, b VARCHAR(255));
+CREATE TABLE t (a BIGINT AUTO_RANDOM(6), b VARCHAR(255), PRIMARY KEY (a));
 ```
 
-上記のステートメントでは、主キー (列`a` ) の値が指定されていないため、TiDB は連続自動インクリメント行の値を行 ID として使用します。これにより、単一の TiKV ノードで書き込みホットスポットが発生し、パフォーマンスに影響を与える可能性があります。このような書き込みホットスポットを回避するには、テーブルを作成するときに、列`a`に`AUTO_INCREMENT`属性ではなく`AUTO_RANDOM`属性を指定できます。次の例を参照してください。
-
-{{< copyable "" >}}
+実行可能なコメントでキーワード`AUTO_RANDOM`をラップできます。詳細については、 [TiDB 固有のコメント構文](/comment-syntax.md#tidb-specific-comment-syntax)を参照してください。
 
 ```sql
-CREATE TABLE t (a bigint PRIMARY KEY AUTO_RANDOM, b varchar(255))
+CREATE TABLE t (a bigint /*T![auto_rand] AUTO_RANDOM */, b VARCHAR(255), PRIMARY KEY (a));
+CREATE TABLE t (a bigint PRIMARY KEY /*T![auto_rand] AUTO_RANDOM */, b VARCHAR(255));
+CREATE TABLE t (a BIGINT /*T![auto_rand] AUTO_RANDOM(6) */, b VARCHAR(255), PRIMARY KEY (a));
 ```
 
-また
+`INSERT`ステートメントを実行すると、次のようになります。
 
-{{< copyable "" >}}
+-   `AUTO_RANDOM`列の値を明示的に指定すると、そのままテーブルに挿入されます。
+-   `AUTO_RANDOM`列の値を明示的に指定しない場合、TiDB はランダムな値を生成し、それをテーブルに挿入します。
 
 ```sql
-CREATE TABLE t (a bigint AUTO_RANDOM, b varchar(255), PRIMARY KEY (a))
+tidb> CREATE TABLE t (a BIGINT PRIMARY KEY AUTO_RANDOM, b VARCHAR(255));
+Query OK, 0 rows affected, 1 warning (0.01 sec)
+
+tidb> INSERT INTO t(a, b) VALUES (1, 'string');
+Query OK, 1 row affected (0.00 sec)
+
+tidb> SELECT * FROM t;
++---+--------+
+| a | b      |
++---+--------+
+| 1 | string |
++---+--------+
+1 row in set (0.01 sec)
+
+tidb> INSERT INTO t(b) VALUES ('string2');
+Query OK, 1 row affected (0.00 sec)
+
+tidb> INSERT INTO t(b) VALUES ('string3');
+Query OK, 1 row affected (0.00 sec)
+
+tidb> SELECT * FROM t;
++---------------------+---------+
+| a                   | b       |
++---------------------+---------+
+|                   1 | string  |
+| 1152921504606846978 | string2 |
+| 4899916394579099651 | string3 |
++---------------------+---------+
+3 rows in set (0.00 sec)
 ```
 
-次に、 `INSERT INTO t(b) VALUES...`などの`INSERT`ステートメントを実行します。結果は次のようになります。
+TiDB によって自動的に割り当てられる`AUTO_RANDOM(S)`列の値は、合計 64 ビットです。 `S`はシャード ビットの数です。値の範囲は`1` ～ `15`です。デフォルト値は`5`です。
 
--   暗黙的な値の割り当て: `INSERT`ステートメントで整数の主キー列 (列`a` ) の値が指定されていないか、値が`NULL`として指定されていない場合、TiDB はこの列に値を自動的に割り当てます。これらの値は必ずしも自動インクリメントまたは連続ではありませんが、一意であるため、連続する行 ID によって引き起こされるホットスポットの問題を回避できます。
--   明示的な値の挿入: `INSERT`ステートメントが整数の主キー列の値を明示的に指定する場合、TiDB はこれらの値を保存します。これは`AUTO_INCREMENT`属性と同様に機能します。 `@@sql_mode`システム変数に`NO_AUTO_VALUE_ON_ZERO`を設定しない場合、整数の主キー列の値を`0`として明示的に指定したとしても、TiDB は自動的にこの列に値を割り当てることに注意してください。
+`AUTO_RANDOM`値の構造は次のとおりです。
+
+| 総ビット数 | 符号ビット   | シャードビット | 自動インクリメント ビット |
+| ----- | ------- | ------- | ------------- |
+| 64ビット | 0/1 ビット | S ビット   | (64-1-S) ビット  |
+
+-   符号ビットの長さは、 `UNSIGNED`属性の存在によって決まります。 `UNSIGNED`属性がある場合、長さは`0`です。それ以外の場合、長さは`1`です。
+-   シャード ビットの内容は、現在のトランザクションの開始時刻のハッシュ値を計算することによって取得されます。別の長さのシャード ビット (10 など) を使用するには、テーブルの作成時に`AUTO_RANDOM(10)`を指定します。
+-   自動インクリメント ビットの値は、ストレージ エンジンに格納され、順番に割り当てられます。新しい値が割り当てられるたびに、値は 1 ずつインクリメントされます。自動インクリメント ビットは、 `AUTO_RANDOM`の値がグローバルに一意であることを保証します。自動インクリメント ビットが使い果たされると、値が再度割り当てられるときにエラー`Failed to read auto-increment value from storage engine`が報告されます。
 
 > **ノート：**
 >
-> v4.0.3 以降、値を明示的に挿入する場合は、システム変数`@@allow_auto_random_explicit_insert`の値を`1` (デフォルトでは`0` ) に設定します。この明示的な挿入はデフォルトではサポートされておらず、その理由は[制限](#restrictions)セクションに記載されています。
-
-TiDB は、次の方法で値を自動的に割り当てます。
-
-バイナリ (つまり、シャード ビット) の行値の上位 5 桁 (符号ビットを無視) は、現在のトランザクションの開始時間によって決定されます。残りの桁には、自動インクリメント順で値が割り当てられます。
-
-異なる数のシャード ビットを使用するには、括弧のペアを`AUTO_RANDOM`に追加し、括弧内に目的のシャード ビット数を指定します。次の例を参照してください。
-
-{{< copyable "" >}}
-
-```sql
-CREATE TABLE t (a bigint PRIMARY KEY AUTO_RANDOM(3), b varchar(255))
-```
-
-上記の`CREATE TABLE`のステートメントでは、 `3`のシャード ビットが指定されています。シャード ビット数の範囲は`[1, 16)`です。
-
-テーブルを作成したら、 `SHOW WARNINGS`ステートメントを使用して、現在のテーブルでサポートされている暗黙的な割り当ての最大数を確認します。
-
-{{< copyable "" >}}
-
-```sql
-SHOW WARNINGS
-```
-
-```sql
-+-------+------+----------------------------------------------------------+
-| Level | Code | Message                                                  |
-+-------+------+----------------------------------------------------------+
-| Note  | 1105 | Available implicit allocation times: 1152921504606846976 |
-+-------+------+----------------------------------------------------------+
-```
-
-> **ノート：**
+> シャード ビットの選択 ( `S` ):
 >
-> v4.0.3 以降、 `AUTO_RANDOM`列の型は`BIGINT`のみです。これは、暗黙的な割り当ての最大数を確保するためです。
+> -   合計 64 の使用可能なビットがあるため、シャード ビット長は自動インクリメント ビット長に影響します。つまり、シャード ビットの長さが増加すると、自動インクリメント ビットの長さが減少し、逆もまた同様です。したがって、割り当てられた値のランダム性と使用可能なスペースのバランスを取る必要があります。
+> -   ベスト プラクティスは、シャード ビットを`log(2, x)`に設定することです。ここで、 `x`はストレージ エンジンの現在の数です。たとえば、TiDB クラスターに 16 個の TiKV ノードがある場合、シャード ビットを`log(2, 16)` 、つまり`4`に設定できます。すべてのリージョンが各 TiKV ノードに均等にスケジュールされた後、バルク書き込みの負荷を異なる TiKV ノードに均等に分散して、リソースの使用率を最大化できます。
 
-さらに、 `AUTO_RANDOM`属性を持つテーブルのシャード ビット数を表示するには、 `information_schema.tables`システム テーブルの`TIDB_ROW_ID_SHARDING_INFO`列で`PK_AUTO_RANDOM_BITS=x`モードの値を確認できます。 `x`はシャード ビットの数です。
+`AUTO_RANDOM`列に暗黙的に割り当てられた値は`last_insert_id()`に影響します。 TiDB が最後に暗黙的に割り当てた ID を取得するには、 `SELECT last_insert_id ()`ステートメントを使用できます。
 
-`AUTO_RANDOM`列に割り当てられた値は`last_insert_id()`に影響します。 `SELECT last_insert_id ()`を使用して、TiDB が最後に暗黙的に割り当てた ID を取得できます。例えば：
-
-{{< copyable "" >}}
-
-```sql
-INSERT INTO t (b) VALUES ("b")
-SELECT * FROM t;
-SELECT last_insert_id()
-```
-
-次の結果が表示される場合があります。
-
-```
-+------------+---+
-| a          | b |
-+------------+---+
-| 1073741825 | b |
-+------------+---+
-+------------------+
-| last_insert_id() |
-+------------------+
-| 1073741825       |
-+------------------+
-```
-
-## 互換性 {#compatibility}
-
-TiDB は、バージョン コメント構文の解析をサポートしています。次の例を参照してください。
-
-{{< copyable "" >}}
-
-```sql
-CREATE TABLE t (a bigint PRIMARY KEY /*T![auto_rand] auto_random */)
-```
-
-{{< copyable "" >}}
-
-```sql
-CREATE TABLE t (a bigint PRIMARY KEY AUTO_RANDOM)
-```
-
-上記の 2 つのステートメントは同じ意味です。
-
-`SHOW CREATE TABLE`の結果では、 `AUTO_RANDOM`属性がコメントアウトされています。このコメントには、属性識別子 ( `/*T![auto_rand] auto_random */`など) が含まれます。ここで、 `auto_rand`は`AUTO_RANDOM`属性を表します。この識別子に対応する機能を実装する TiDB のバージョンのみが、SQL ステートメントのフラグメントを適切に解析できます。
-
-この属性は、前方互換性、つまりダウングレード互換性をサポートします。この機能を実装していない以前のバージョンの TiDB は、テーブルの`AUTO_RANDOM`属性 (上記のコメント付き) を無視し、属性を持つテーブルを使用することもできます。
+`AUTO_RANDOM`列のテーブルのシャード ビット数を表示するには、 `SHOW CREATE TABLE`ステートメントを実行できます。また、 `information_schema.tables`システム テーブルの`TIDB_ROW_ID_SHARDING_INFO`列で`PK_AUTO_RANDOM_BITS=x`モードの値を確認できます。 `x`はシャード ビットの数です。
 
 ## 制限 {#restrictions}
 
 `AUTO_RANDOM`を使用する場合は、次の制限に注意してください。
 
--   この属性は、 `bigint`型の主キー列**のみ**に指定します。そうしないと、エラーが発生します。また、主キーの属性が`NONCLUSTERED`の場合、整数の主キーでも`AUTO_RANDOM`はサポートされません。 `CLUSTERED`タイプの主キーの詳細については、 [クラスター化インデックス](/clustered-indexes.md)を参照してください。
+-   値を明示的に挿入するには、システム変数`@@allow_auto_random_explicit_insert`の値を`1` (デフォルトでは`0` ) に設定する必要があります。データを挿入するときに、属性`AUTO_RANDOM`を持つ列の値を明示的に指定することは**お**勧めしません。そうしないと、このテーブルに自動的に割り当てられる数値が事前に使い果たされる可能性があります。
+-   この属性は、 `BIGINT`型として主キー列**のみ**に指定します。そうしないと、エラーが発生します。また、主キーの属性が`NONCLUSTERED`の場合、整数の主キーでも`AUTO_RANDOM`はサポートされません。 `CLUSTERED`タイプの主キーの詳細については、 [クラスター化インデックス](/clustered-indexes.md)を参照してください。
 -   この属性の追加または削除を含め、 `ALTER TABLE`を使用して`AUTO_RANDOM`属性を変更することはできません。
 -   最大値が列タイプの最大値に近い場合、 `ALTER TABLE`を使用して`AUTO_INCREMENT`から`AUTO_RANDOM`に変更することはできません。
 -   `AUTO_RANDOM`属性で指定された主キー列の列型は変更できません。
 -   同じ列に`AUTO_RANDOM`と`AUTO_INCREMENT`を同時に指定することはできません。
 -   同じ列に`AUTO_RANDOM`と`DEFAULT` (列のデフォルト値) を同時に指定することはできません。
 -   列で`AUTO_RANDOM`を使用すると、自動生成された値が非常に大きくなる可能性があるため、列属性を`AUTO_INCREMENT`に戻すのは困難です。
--   データを挿入するときに、 `AUTO_RANDOM`属性を使用して列の値を明示的に指定することは**お**勧めしません。そうしないと、このテーブルに自動的に割り当てられる数値が事前に使い果たされる可能性があります。

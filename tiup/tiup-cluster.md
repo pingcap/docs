@@ -90,6 +90,11 @@ tikv_servers:
   - host: 172.16.5.139
   - host: 172.16.5.140
 
+tiflash_servers:
+  - host: 172.16.5.141
+  - host: 172.16.5.142
+  - host: 172.16.5.143
+
 grafana_servers:
   - host: 172.16.5.134
 
@@ -113,12 +118,12 @@ tidb_servers:
 ...
 ```
 
-ファイルを`/tmp/topology.yaml`として保存します。 TiDB v6.1.0 を使用する場合で、クラスター名が`prod-cluster`の場合は、次のコマンドを実行します。
+ファイルを`/tmp/topology.yaml`として保存します。 TiDB v6.1.2 を使用する場合で、クラスター名が`prod-cluster`の場合は、次のコマンドを実行します。
 
 {{< copyable "" >}}
 
 ```shell
-tiup cluster deploy -p prod-cluster v6.1.0 /tmp/topology.yaml
+tiup cluster deploy -p prod-cluster v6.1.2 /tmp/topology.yaml
 ```
 
 実行中、TiUP はトポロジを再度確認するように求め、ターゲット マシンの root パスワードを要求します ( `-p`フラグはパスワードの入力を意味します)。
@@ -126,7 +131,7 @@ tiup cluster deploy -p prod-cluster v6.1.0 /tmp/topology.yaml
 ```bash
 Please confirm your topology:
 TiDB Cluster: prod-cluster
-TiDB Version: v6.1.0
+TiDB Version: v6.1.2
 Type        Host          Ports        Directories
 ----        ----          -----        -----------
 pd          172.16.5.134  2379/2380    deploy/pd-2379,data/pd-2379
@@ -166,7 +171,7 @@ tiup cluster list
 Starting /root/.tiup/components/cluster/v1.10.0/cluster list
 Name          User  Version    Path                                               PrivateKey
 ----          ----  -------    ----                                               ----------
-prod-cluster  tidb  v6.1.0    /root/.tiup/storage/cluster/clusters/prod-cluster  /root/.tiup/storage/cluster/clusters/prod-cluster/ssh/id_rsa
+prod-cluster  tidb  v6.1.2    /root/.tiup/storage/cluster/clusters/prod-cluster  /root/.tiup/storage/cluster/clusters/prod-cluster/ssh/id_rsa
 ```
 
 ## クラスターを開始する {#start-the-cluster}
@@ -196,7 +201,7 @@ tiup cluster display prod-cluster
 ```
 Starting /root/.tiup/components/cluster/v1.10.0/cluster display prod-cluster
 TiDB Cluster: prod-cluster
-TiDB Version: v6.1.0
+TiDB Version: v6.1.2
 ID                  Role        Host          Ports        Status     Data Dir              Deploy Dir
 --                  ----        ----          -----        ------     --------              ----------
 172.16.5.134:3000   grafana     172.16.5.134  3000         Up         -                     deploy/grafana-3000
@@ -224,12 +229,12 @@ PD コンポーネントの場合、 `|L`または`|UI`が`Up`または`Down`に
 
 クラスターでのスケーリングとは、一部のノードをオフラインにすることを意味します。この操作は、クラスターから特定のノードを削除し、残りのファイルを削除します。
 
-TiKV および TiDB Binlogコンポーネントのオフライン プロセスは非同期であり (API を介してノードを削除する必要があります)、プロセスに時間がかかるため (ノードが正常にオフラインにされたかどうかを継続的に監視する必要があります)、特別な処理が行われます。 TiKV および TiDB Binlogコンポーネント。
+TiKV、TiFlash、および TiDB Binlogコンポーネントのオフライン プロセスは非同期であり (API を使用してノードを削除する必要があります)、プロセスに時間がかかるため (ノードが正常にオフラインにされたかどうかを継続的に監視する必要があります)、特別な処理が行われます。 TiKV、TiFlash、および TiDB Binlogコンポーネントに与えられます。
 
--   TiKV とBinlogの場合:
+-   TiKV、TiFlash、 Binlogの場合:
 
     -   TiUP クラスターは、API を介してノードをオフラインにし、プロセスの完了を待たずに直接終了します。
-    -   その後、クラスタ操作に関するコマンドが実行されると、TiUP クラスタは、オフラインになった TiKV/ Binlogノードがあるかどうかを調べます。そうでない場合、TiUP クラスターは指定された操作を続行します。存在する場合、TiUP クラスターは次の手順を実行します。
+    -   その後、クラスタ操作に関するコマンドが実行されると、TiUP クラスタは、オフラインになった TiKV、TiFlash、またはBinlogノードがあるかどうかを調べます。そうでない場合、TiUP クラスターは指定された操作を続行します。存在する場合、TiUP クラスターは次の手順を実行します。
 
         1.  オフラインになったノードのサービスを停止します。
         2.  ノードに関連するデータ ファイルをクリーンアップします。
@@ -267,7 +272,7 @@ tiup cluster display prod-cluster
 ```
 Starting /root/.tiup/components/cluster/v1.10.0/cluster display prod-cluster
 TiDB Cluster: prod-cluster
-TiDB Version: v6.1.0
+TiDB Version: v6.1.2
 ID                  Role        Host          Ports        Status     Data Dir              Deploy Dir
 --                  ----        ----          -----        ------     --------              ----------
 172.16.5.134:3000   grafana     172.16.5.134  3000         Up         -                     deploy/grafana-3000
@@ -375,12 +380,12 @@ Global Flags:
   -y, --yes               Skip all confirmations and assumes 'yes'
 ```
 
-たとえば、次のコマンドはクラスターを v6.1.0 にアップグレードします。
+たとえば、次のコマンドはクラスターを v6.1.2 にアップグレードします。
 
 {{< copyable "" >}}
 
 ```bash
-tiup cluster upgrade tidb-test v6.1.0
+tiup cluster upgrade tidb-test v6.1.2
 ```
 
 ## 構成の更新 {#update-configuration}
@@ -562,11 +567,11 @@ tiup cluster audit
 Starting component `cluster`: /home/tidb/.tiup/components/cluster/v1.10.0/cluster audit
 ID      Time                       Command
 --      ----                       -------
-4BLhr0  2022-06-10T13:25:09+08:00  /home/tidb/.tiup/components/cluster/v1.10.0/cluster deploy test v6.1.0 /tmp/topology.yaml
-4BKWjF  2022-06-08T23:36:57+08:00  /home/tidb/.tiup/components/cluster/v1.10.0/cluster deploy test v6.1.0 /tmp/topology.yaml
-4BKVwH  2022-06-08T23:02:08+08:00  /home/tidb/.tiup/components/cluster/v1.10.0/cluster deploy test v6.1.0 /tmp/topology.yaml
-4BKKH1  2022-06-08T16:39:04+08:00  /home/tidb/.tiup/components/cluster/v1.10.0/cluster destroy test
-4BKKDx  2022-06-08T16:36:57+08:00  /home/tidb/.tiup/components/cluster/v1.10.0/cluster deploy test v6.1.0 /tmp/topology.yaml
+4BLhr0  2022-09-02T13:25:09+08:00  /home/tidb/.tiup/components/cluster/v1.10.0/cluster deploy test v6.1.2 /tmp/topology.yaml
+4BKWjF  2022-09-02T23:36:57+08:00  /home/tidb/.tiup/components/cluster/v1.10.0/cluster deploy test v6.1.2 /tmp/topology.yaml
+4BKVwH  2022-09-02T23:02:08+08:00  /home/tidb/.tiup/components/cluster/v1.10.0/cluster deploy test v6.1.2 /tmp/topology.yaml
+4BKKH1  2022-09-02T16:39:04+08:00  /home/tidb/.tiup/components/cluster/v1.10.0/cluster destroy test
+4BKKDx  2022-09-02T16:36:57+08:00  /home/tidb/.tiup/components/cluster/v1.10.0/cluster deploy test v6.1.2 /tmp/topology.yaml
 ```
 
 最初の列は`audit-id`です。特定のコマンドの実行ログを表示するには、次のようにコマンドの`audit-id`をフラグとして渡します。
@@ -611,7 +616,7 @@ TiUP がリリースされる前は、 `tidb-ctl` 、 `tikv-ctl` 、 `pd-ctl` �
 
 ```bash
 Usage:
-  tiup ctl {tidb/pd/tikv/binlog/etcd} [flags]
+  tiup ctl:<cluster-version> {tidb/pd/tikv/binlog/etcd} [flags]
 
 Flags:
   -h, --help   help for tiup
@@ -632,7 +637,7 @@ etcdctl [args] = tiup ctl etcd [args]
 {{< copyable "" >}}
 
 ```bash
-tiup ctl pd -u http://127.0.0.1:2379 store
+tiup ctl:<cluster-version> pd -u http://127.0.0.1:2379 store
 ```
 
 ## ターゲット マシンの環境チェック {#environment-checks-for-target-machines}
@@ -718,3 +723,21 @@ TiUP データは、ユーザーのホーム ディレクトリの`.tiup`ディ�
 > **ノート：**
 >
 > 制御マシンのディスク破損などの異常による TiUP データの消失を防ぐため、 `.tiup`ディレクトリを定期的にバックアップすることをお勧めします。
+
+## クラスターの展開と O&amp;M のためのメタ ファイルのバックアップと復元 {#back-up-and-restore-meta-files-for-cluster-deployment-and-o-x26-m}
+
+運用保守 (O&amp;M) に使用するメタファイルが失われると、TiUP を使用したクラスターの管理に失敗します。次のコマンドを実行して、メタ ファイルを定期的にバックアップすることをお勧めします。
+
+```bash
+tiup cluster meta backup ${cluster_name}
+```
+
+メタ ファイルが失われた場合は、次のコマンドを実行して復元できます。
+
+```bash
+tiup cluster meta restore ${cluster_name} ${backup_file}
+```
+
+> **ノート：**
+>
+> 復元操作は、現在のメタ ファイルを上書きします。したがって、メタ ファイルが失われた場合にのみ復元することをお勧めします。

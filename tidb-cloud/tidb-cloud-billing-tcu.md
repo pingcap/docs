@@ -22,17 +22,18 @@ TiDB クラスターごとに、クラスター内のすべての TiKV ノード
 
 次の表に、各 TiCDC キャパシティ ユニット (TCU) のTiDB Cloudの価格を示します。
 
-| クラウド プロバイダー | リージョン                    | TCU 料金 ($/時間) |
-| ----------- | ------------------------ | ------------- |
-| AWS         | オレゴン (us-west-2)         | $0.1307       |
-| AWS         | 北バージニア (us-east-1)       | $0.1307       |
-| AWS         | ムンバイ (ap-south-1)        | $0.1393       |
-| AWS         | シンガポール (ap-southeast-1)  | $0.1623       |
-| AWS         | 東京 (ap-northeast-1)      | $0.1669       |
-| AWS         | フランクフルト (eu-central-1)   | $0.1564       |
-| GCP         | オレゴン (us-west1)          | $0.1452       |
-| GCP         | アイオワ (us-central1)       | $0.1452       |
-| GCP         | シンガポール (asia-southeast1) | $0.1746       |
-| GCP         | 台湾 (asia-east1)          | $0.1628       |
-| GCP         | 東京 (asia-northeast1)     | $0.1868       |
-| GCP         | 大阪 (asia-northeast2)     | $0.1868       |
+| クラウド プロバイダー | リージョン                    | TCU 料金 ($/時) |
+| ----------- | ------------------------ | ------------ |
+| AWS         | オレゴン (us-west-2)         | $0.1307      |
+| AWS         | 北バージニア (us-east-1)       | $0.1307      |
+| AWS         | ムンバイ (ap-south-1)        | $0.1393      |
+| AWS         | シンガポール (ap-southeast-1)  | $0.1623      |
+| AWS         | 東京 (ap-northeast-1)      | $0.1669      |
+| AWS         | フランクフルト (eu-central-1)   | $0.1564      |
+| GCP         | オレゴン (us-west1)          | $0.1452      |
+| GCP         | 北バージニア (us-east4)        | $0.1626      |
+| GCP         | アイオワ (us-central1)       | $0.1452      |
+| GCP         | シンガポール (asia-southeast1) | $0.1746      |
+| GCP         | 台湾 (asia-east1)          | $0.1628      |
+| GCP         | 東京 (asia-northeast1)     | $0.1868      |
+| GCP         | 大阪 (asia-northeast2)     | $0.1868      |

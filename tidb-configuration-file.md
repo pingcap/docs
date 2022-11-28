@@ -1,6 +1,7 @@
 ---
 title: TiDB Configuration File
 summary: Learn the TiDB configuration file options that are not involved in command line options.
+aliases: ['/docs/stable/reference/configuration/tidb-server/configuration-file/']
 ---
 
 <!-- markdownlint-disable MD001 -->
@@ -102,7 +103,7 @@ TiDB 構成ファイルは、コマンドライン パラメーターよりも�
 
 -   新しい照合順序サポートを有効または無効にします。
 -   デフォルト値: `true`
--   注: この構成は、最初に初期化された TiDB クラスターに対してのみ有効です。初期化後は、この構成項目を使用して新しい照合順序サポートを有効または無効にすることはできません。 TiDB クラスターが v4.0 以降にアップグレードされると、クラスターは以前に初期化されているため、この構成項目の`true`と`false`の値は両方とも`false`と見なされます。
+-   注: この構成は、最初に初期化された TiDB クラスターに対してのみ有効です。初期化後は、この構成項目を使用して新しい照合順序サポートを有効または無効にすることはできません。
 
 ### <code>max-server-connections</code> {#code-max-server-connections-code}
 
@@ -166,6 +167,16 @@ TiDB 構成ファイルは、コマンドライン パラメーターよりも�
 -   環境でネットワークが分離されている可能性がある場合、このパラメーターを有効にすると、サービスが利用できなくなる期間を短縮できます。
 -   分離、ネットワークの中断、またはダウンタイムが発生したかどうかを正確に判断できない場合、このメカニズムを使用すると判断を誤るリスクがあり、可用性とパフォーマンスが低下します。ネットワーク障害が発生したことがない場合は、このパラメーターを有効にすることはお勧めしません。
 
+### <code>enable-table-lock</code> <span class="version-mark">v4.0.0 の新機能</span> {#code-enable-table-lock-code-span-class-version-mark-new-in-v4-0-0-span}
+
+> **警告：**
+>
+> テーブル ロックは実験的機能です。本番環境で使用することはお勧めしません。
+
+-   テーブル ロック機能を有効にするかどうかを制御します。
+-   デフォルト値: `false`
+-   テーブル ロックは、複数のセッション間で同じテーブルへの同時アクセスを調整するために使用されます。現在、 `READ` 、 `WRITE` 、および`WRITE LOCAL`のロック タイプがサポートされています。構成項目が`false`に設定されている場合、 `LOCK TABLE`または`UNLOCK TABLE`ステートメントを実行しても効果がなく、「LOCK/UNLOCK TABLES is not supported」という警告が返されます。
+
 ## ログ {#log}
 
 ログに関するConfiguration / コンフィグレーション項目です。
@@ -210,7 +221,8 @@ TiDB 構成ファイルは、コマンドライン パラメーターよりも�
 ### <code>slow-threshold</code> {#code-slow-threshold-code}
 
 -   スローログの消費時間の閾値を出力します。
--   デフォルト値: `300ms`
+-   デフォルト値: `300`
+-   単位: ミリ秒
 -   クエリの値がデフォルト値より大きい場合、それはスロー クエリであり、スロー ログに出力されます。
 
 ### <code>record-plan-in-slow-log</code> {#code-record-plan-in-slow-log-code}
@@ -362,6 +374,8 @@ TiDB 構成ファイルは、コマンドライン パラメーターよりも�
 -   デフォルト値: `6291456` (バイト単位)
 -   トランザクション内の単一のキー値レコードのサイズ制限。サイズ制限を超えると、TiDB は`entry too large`エラーを返します。この構成アイテムの最大値は`125829120` (120 MB) を超えません。
 -   TiKV にも同様の制限があることに注意してください。 1 回の書き込みリクエストのデータ サイズが[`raft-entry-max-size`](/tikv-configuration-file.md#raft-entry-max-size)を超える場合 (デフォルトでは 8 MB)、TiKV はこのリクエストの処理を拒否します。テーブルに大きなサイズの行がある場合、両方の構成を同時に変更する必要があります。
+-   デフォルト値[`max_allowed_packet`](/system-variables.md#max_allowed_packet-new-in-v610) (MySQL プロトコルのパケットの最大サイズ) は 67108864 (64 MiB) です。行が`max_allowed_packet`より大きい場合、行は切り捨てられます。
+-   デフォルト値[`txn-total-size-limit`](#txn-total-size-limit) (TiDB での単一トランザクションのサイズ制限) は 100 MiB です。 `txn-entry-size-limit`の値を増やして 100 MiB を超える場合は、それに応じて`txn-total-size-limit`の値を増やす必要があります。
 
 ### <code>txn-total-size-limit</code> {#code-txn-total-size-limit-code}
 
@@ -418,9 +432,9 @@ TiDB 構成ファイルは、コマンドライン パラメーターよりも�
 
 ### <code>force-priority</code> {#code-force-priority-code}
 
--   すべてのステートメントの優先順位を設定します。
+-   すべてのステートメントの優先度を設定します。
 -   デフォルト値: `NO_PRIORITY`
--   オプションの値: `NO_PRIORITY` 、 `LOW_PRIORITY` 、 `HIGH_PRIORITY` 、および`DELAYED` 。
+-   値のオプション: デフォルト値`NO_PRIORITY`は、ステートメントの優先度が強制的に変更されないことを意味します。その他のオプションは、昇順で`LOW_PRIORITY` 、 `DELAYED` 、および`HIGH_PRIORITY`です。
 
 ### <code>distinct-agg-push-down</code> {#code-distinct-agg-push-down-code}
 
@@ -483,16 +497,16 @@ opentracing.sampler に関するConfiguration / コンフィグレーション�
 
 ### <code>type</code> {#code-type-code}
 
--   opentracing サンプラーのタイプを指定します。
+-   opentracing サンプラーのタイプを指定します。文字列値は大文字と小文字を区別しません。
 -   デフォルト値: `"const"`
--   値のオプション: `"const"` 、 `"probabilistic"` 、 `"rateLimiting"` 、 `"remote"`
+-   値のオプション: `"const"` 、 `"probabilistic"` 、 `"ratelimiting"` 、 `"remote"`
 
 ### <code>param</code> {#code-param-code}
 
 -   opentracing サンプラーのパラメーター。
     -   `const`タイプの場合、値は`0`または`1`で、 `const`サンプラーを有効にするかどうかを示します。
     -   `probabilistic`タイプの場合、パラメーターはサンプリング確率を指定します。これは、 `0`から`1`までの浮動小数点数にすることができます。
-    -   `rateLimiting`タイプの場合、パラメーターは 1 秒あたりにサンプリングされるスパンの数を指定します。
+    -   `ratelimiting`タイプの場合、パラメーターは 1 秒あたりにサンプリングされるスパンの数を指定します。
     -   `remote`タイプの場合、パラメーターはサンプリング確率を指定します。これは、 `0`から`1`までの浮動小数点数にすることができます。
 -   デフォルト値: `1.0`
 

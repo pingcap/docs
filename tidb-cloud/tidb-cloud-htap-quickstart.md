@@ -24,6 +24,9 @@ TiFlash ノードを持つクラスターが作成された後、TiKV はデフ�
 
 ```sql
 USE bikeshare;
+```
+
+```sql
 ALTER TABLE trips SET TIFLASH REPLICA 1;
 ```
 
@@ -33,10 +36,19 @@ ALTER TABLE trips SET TIFLASH REPLICA 1;
 SELECT * FROM information_schema.tiflash_replica WHERE TABLE_SCHEMA = 'bikeshare' and TABLE_NAME = 'trips';
 ```
 
+```sql
++--------------+------------+----------+---------------+-----------------+-----------+----------+------------+
+| TABLE_SCHEMA | TABLE_NAME | TABLE_ID | REPLICA_COUNT | LOCATION_LABELS | AVAILABLE | PROGRESS | TABLE_MODE |
++--------------+------------+----------+---------------+-----------------+-----------+----------+------------+
+| bikeshare    | trips      |       88 |             1 |                 |         1 |        1 | NORMAL     |
++--------------+------------+----------+---------------+-----------------+-----------+----------+------------+
+1 row in set (0.20 sec)
+```
+
 前述のステートメントの結果:
 
 -   `AVAILABLE`は、特定のテーブルの TiFlash レプリカが使用可能かどうかを示します。 `1`は利用可能であることを意味し、 `0`は利用できないことを意味します。レプリカが使用可能になると、このステータスは変更されなくなります。
--   `PROGRESS`は、レプリケーションの進行状況を意味します。値は`0.0` ～ `1.0`です。 `1.0`は、少なくとも 1 つのレプリカが複製されていることを意味します。
+-   `PROGRESS`は、レプリケーションの進行状況を意味します。値は`0` ～ `1`です。 `1`は、少なくとも 1 つのレプリカが複製されていることを意味します。
 
 ### ステップ 2. HTAP を使用してデータを照会する {#step-2-query-data-using-htap}
 

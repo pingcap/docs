@@ -28,7 +28,7 @@ summary: Learn how to migrate MySQL of large datasets to TiDB.
 
 **ディスク容量**:
 
--   Dumplingには、データ ソース全体を格納できる (またはエクスポートするすべてのアップストリーム テーブルを格納できる) ディスク領域が必要です。 SSD推奨です。必要なスペースを計算するには、 [ダウンストリームのストレージ容量要件](/tidb-lightning/tidb-lightning-requirements.md#downstream-storage-space-requirements)を参照してください。
+-   Dumplingには、データ ソース全体を格納できる (またはエクスポートするすべてのアップストリーム テーブルを格納できる) ディスク領域が必要です。 SSD推奨です。必要なスペースを計算するには、 [ダウンストリームのストレージ容量要件](/tidb-lightning/tidb-lightning-requirements.md#storage-space-of-the-target-database)を参照してください。
 -   インポート中、 TiDB Lightningはソートされたキーと値のペアを保存するための一時的なスペースを必要とします。ディスク領域は、データ ソースから最大の単一テーブルを保持するのに十分なはずです。
 -   完全なデータ ボリュームが大きい場合は、アップストリームでバイナリログの保存時間を増やすことができます。これは、増分レプリケーション中にバイナリログが失われないようにするためです。
 
@@ -78,7 +78,7 @@ SELECT table_name,table_schema,SUM(data_length)/1024/1024 AS data_length,SUM(ind
     | - `B`または`--database` | エクスポートするデータベースを指定します                                                                      |
     | `-f`または`--filter`    | パターンに一致するテーブルをエクスポートします。構文については、 [テーブルフィルター](/table-filter.md)を参照してください。                  |
 
-    エクスポートされたすべてのアップストリーム テーブルを格納するためのスペースが`${data-path}`にあることを確認してください。必要なスペースを計算するには、 [ダウンストリームのストレージ容量要件](/tidb-lightning/tidb-lightning-requirements.md#downstream-storage-space-requirements)を参照してください。すべてのスペースを消費する大きなテーブルによってエクスポートが中断されるのを防ぐために、 `-F`オプションを使用して 1 つのファイルのサイズを制限することを強くお勧めします。
+    エクスポートされたすべてのアップストリーム テーブルを格納するためのスペースが`${data-path}`にあることを確認してください。必要なスペースを計算するには、 [ダウンストリームのストレージ容量要件](/tidb-lightning/tidb-lightning-requirements.md#storage-space-of-the-target-database)を参照してください。すべてのスペースを消費する大きなテーブルによってエクスポートが中断されるのを防ぐために、 `-F`オプションを使用して 1 つのファイルのサイズを制限することを強くお勧めします。
 
 2.  `${data-path}`ディレクトリの`metadata`ファイルをビューします。これは Dumpling によって生成されたメタデータ ファイルです。ステップ 3 の増分レプリケーションに必要な binlog 位置情報を記録します。
 

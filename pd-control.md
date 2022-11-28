@@ -19,7 +19,15 @@ PD Controlを使用するには、 `tiup ctl:<cluster-version> pd -u http://<pd_
 
 ### インストール パッケージをダウンロードする {#download-the-installation-package}
 
-PD Controlインストール パッケージ ( `pd-ctl` ) は、 TiDB Toolkitに含まれています。 TiDB Toolkitをダウンロードするには、 [TiDB ツールをダウンロード](/download-ecosystem-tools.md)を参照してください。
+最新バージョンの`pd-ctl`を入手するには、TiDBサーバーのインストール パッケージをダウンロードします。 `pd-ctl`は`ctl-{version}-linux-amd64.tar.gz`パッケージに含まれています。
+
+| インストールパッケージ                                                                                | OS    | アーキテクチャ | SHA256 チェックサム                                                                     |
+| :----------------------------------------------------------------------------------------- | :---- | :------ | :-------------------------------------------------------------------------------- |
+| `https://download.pingcap.org/tidb-community-server-{version}-linux-amd64.tar.gz` (pd-ctl) | Linux | amd64   | `https://download.pingcap.org/tidb-community-server-{version}-linux-amd64.sha256` |
+
+> **ノート：**
+>
+> `{version}`は TiDB のバージョン番号を示します。たとえば、 `{version}`が`v6.1.2`の場合、パッケージのダウンロード リンクは`https://download.pingcap.org/tidb-community-server-v6.1.2-linux-amd64.tar.gz`です。
 
 ### ソースコードからコンパイル {#compile-from-source-code}
 
@@ -31,26 +39,26 @@ PD Controlインストール パッケージ ( `pd-ctl` ) は、 TiDB Toolkitに
 シングルコマンドモード:
 
 ```bash
-tiup ctl pd store -u http://127.0.0.1:2379
+tiup ctl:<cluster-version> pd store -u http://127.0.0.1:2379
 ```
 
 対話モード:
 
 ```bash
-tiup ctl pd -i -u http://127.0.0.1:2379
+tiup ctl:<cluster-version> pd -i -u http://127.0.0.1:2379
 ```
 
 環境変数を使用します。
 
 ```bash
 export PD_ADDR=http://127.0.0.1:2379
-tiup ctl pd
+tiup ctl:<cluster-version> pd
 ```
 
 TLS を使用して暗号化します。
 
 ```bash
-tiup ctl pd -u https://127.0.0.1:2379 --cacert="path/to/ca" --cert="path/to/cert" --key="path/to/key"
+tiup ctl:<cluster-version> pd -u https://127.0.0.1:2379 --cacert="path/to/ca" --cert="path/to/cert" --key="path/to/key"
 ```
 
 ## コマンド ライン フラグ {#command-line-flags}

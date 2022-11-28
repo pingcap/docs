@@ -16,7 +16,7 @@ SQL モードを`GLOBAL`レベルに設定するときは、 `SUPER`の特権を
 ## 重要な<code>sql_mode</code>値 {#important-code-sql-mode-code-values}
 
 -   `ANSI` : このモードは標準 SQL に準拠します。このモードでは、データがチェックされます。データが定義された型または長さに準拠していない場合、データ型は調整または削除され、 `warning`が返されます。
--   `STRICT_TRANS_TABLES` : Strict モード。データが厳密にチェックされます。テーブルに誤ったデータが挿入されると、エラーが返されます。
+-   `STRICT_TRANS_TABLES` : Strict モード。データが厳密にチェックされます。データに誤りがあると、テーブルに挿入できず、エラーが返されます。
 -   `TRADITIONAL` : このモードでは、TiDB は「従来の」SQL データベース システムのように動作します。不正な値が列に挿入されると、警告ではなくエラーが返されます。次に、 `INSERT`または`UPDATE`ステートメントがすぐに停止します。
 
 ## SQL モード テーブル {#sql-mode-table}

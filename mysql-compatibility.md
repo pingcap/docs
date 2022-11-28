@@ -11,9 +11,10 @@ TiDB は、 MySQL 5.7プロトコルおよびMySQL 5.7 5.7 の一般的な機能
 
 <CustomContent platform="tidb">
 
--   さらに、TiDB は MySQL レプリケーション プロトコルをサポートしていませんが、MySQL でデータをレプリケートするための特定のツールを提供します。
-    -   MySQL からのデータの複製: [TiDB データ移行 (DM)](/dm/dm-overview.md)は、MySQL/MariaDB から TiDB への完全なデータ移行と増分データ複製をサポートするツールです。
-    -   レプリケート データを MySQL に: [TiCDC](/ticdc/ticdc-overview.md)は、TiKV 変更ログをプルして、TiDB の増分データをレプリケートするためのツールです。 TiCDC は[MySQL シンク](/ticdc/ticdc-overview.md#sink-support)を使用して、TiDB の増分データを MySQL に複製します。
+さらに、TiDB は MySQL レプリケーション プロトコルをサポートしていませんが、MySQL でデータをレプリケートするための特定のツールを提供します。
+
+-   MySQL からのデータの複製: [TiDB データ移行 (DM)](/dm/dm-overview.md)は、MySQL/MariaDB から TiDB への完全なデータ移行と増分データ複製をサポートするツールです。
+-   レプリケート データを MySQL に: [TiCDC](/ticdc/ticdc-overview.md)は、TiKV 変更ログをプルして、TiDB の増分データをレプリケートするためのツールです。 TiCDC は[MySQL シンク](/ticdc/ticdc-overview.md#sink-support)を使用して、TiDB の増分データを MySQL に複製します。
 
 </CustomContent>
 
@@ -57,6 +58,7 @@ TiDB は、 MySQL 5.7プロトコルおよびMySQL 5.7 5.7 の一般的な機能
 -   `OPTIMIZE TABLE`構文
 -   `HANDLER`ステートメント
 -   `CREATE TABLESPACE`ステートメント
+-   「セッション トラッカー: GTID コンテキストを OK パケットに追加する」
 
 ## MySQL とは異なる機能 {#features-that-are-different-from-mysql}
 
@@ -119,7 +121,7 @@ TiDB は[プロメテウスとグラファナ](/tidb-monitoring-api.md)の組み
 
 <CustomContent platform="tidb-cloud">
 
-TiDB Cloudでパフォーマンス メトリックを確認するには、 TiDB Cloudコンソールでクラスターの概要ページを確認するか、または[サードパーティの監視統合](/tidb-cloud/monitor-tidb-cluster.md#third-party-integrations)を使用します。パフォーマンス スキーマ テーブルは、TiDB で空の結果を返します。
+TiDB Cloudでパフォーマンス メトリックを確認するには、 TiDB Cloudコンソールでクラスターの概要ページを確認するか、または[サードパーティの監視統合](/tidb-cloud/third-party-monitoring-integrations.md)を使用します。パフォーマンス スキーマ テーブルは、TiDB で空の結果を返します。
 
 </CustomContent>
 

@@ -5,9 +5,17 @@ summary: An overview of the usage of ADMIN for the TiDB database.
 
 # 管理者 {#admin}
 
-このステートメントは TiDB 拡張構文であり、TiDB のステータスを表示し、TiDB 内のテーブルのデータを確認するために使用されます。
+このステートメントは TiDB 拡張構文であり、TiDB のステータスを表示し、TiDB 内のテーブルのデータを確認するために使用されます。このドキュメントでは、次の`ADMIN`の関連ステートメントを紹介します。
+
+-   [`ADMIN RELOAD`](#admin-reload-statement)
+-   [`ADMIN PLUGINS`](#admin-plugins-related-statement)
+-   [`ADMIN ... BINDINGS`](#admin-bindings-related-statement)
+-   [`ADMIN REPAIR`](#admin-repair-statement)
+-   [`ADMIN SHOW SLOW`](#admin-show-slow-statement)
 
 ## DDL 関連ステートメント {#ddl-related-statement}
+
+<CustomContent platform="tidb-cloud">
 
 | 声明                                                                                      | 説明                                 |
 | --------------------------------------------------------------------------------------- | ---------------------------------- |
@@ -15,6 +23,20 @@ summary: An overview of the usage of ADMIN for the TiDB database.
 | [`ADMIN CHECKSUM TABLE`](/sql-statements/sql-statement-admin-checksum-table.md)         | テーブルのすべての行 + インデックスの CRC64 を計算します。 |
 | [`ADMIN CHECK [TABLE|INDEX]`](/sql-statements/sql-statement-admin-check-table-index.md) | テーブルまたはインデックスの整合性をチェックします。         |
 | [`ADMIN SHOW DDL [JOBS|QUERIES]`](/sql-statements/sql-statement-admin-show-ddl.md)      | 現在実行中または最近完了した DDL ジョブの詳細を表示します。   |
+
+</CustomContent>
+
+<CustomContent platform="tidb">
+
+| 声明                                                                                      | 説明                                   |
+| --------------------------------------------------------------------------------------- | ------------------------------------ |
+| [`ADMIN CANCEL DDL JOBS`](/sql-statements/sql-statement-admin-cancel-ddl.md)            | 現在実行中の DDL ジョブをキャンセルします。             |
+| [`ADMIN CHECKSUM TABLE`](/sql-statements/sql-statement-admin-checksum-table.md)         | テーブルのすべての行 + インデックスの CRC64 を計算します。   |
+| [`ADMIN CHECK [TABLE|INDEX]`](/sql-statements/sql-statement-admin-check-table-index.md) | テーブルまたはインデックスの整合性をチェックします。           |
+| [`ADMIN SHOW DDL [JOBS|QUERIES]`](/sql-statements/sql-statement-admin-show-ddl.md)      | 現在実行中または最近完了した DDL ジョブの詳細を表示します。     |
+| [`ADMIN SHOW TELEMETRY`](/sql-statements/sql-statement-admin-show-telemetry.md)         | テレメトリ機能の一部として PingCAP に報告される情報を示します。 |
+
+</CustomContent>
 
 ## <code>ADMIN RELOAD</code>ステートメント {#code-admin-reload-code-statement}
 
@@ -57,7 +79,7 @@ ADMIN PLUGINS DISABLE plugin_name [, plugin_name] ...;
 {{< copyable "" >}}
 
 ```sql
-ADMIN FLUSH bindings;
+ADMIN FLUSH BINDINGS;
 ```
 
 上記のステートメントは、SQL Plan バインディング情報を保持するために使用されます。
@@ -65,7 +87,7 @@ ADMIN FLUSH bindings;
 {{< copyable "" >}}
 
 ```sql
-ADMIN CAPTURE bindings;
+ADMIN CAPTURE BINDINGS;
 ```
 
 上記のステートメントは、複数回出現する`SELECT`のステートメントから SQL Plan のバインドを生成できます。
@@ -73,7 +95,7 @@ ADMIN CAPTURE bindings;
 {{< copyable "" >}}
 
 ```sql
-ADMIN EVOLVE bindings;
+ADMIN EVOLVE BINDINGS;
 ```
 
 自動バインディング機能が有効になると、SQL計画バインディング情報の展開が`bind-info-leave`ごとにトリガーされます(デフォルト値は`3s`です)。上記のステートメントは、この進化を積極的にトリガーするために使用されます。
@@ -81,7 +103,7 @@ ADMIN EVOLVE bindings;
 {{< copyable "" >}}
 
 ```sql
-ADMIN RELOAD bindings;
+ADMIN RELOAD BINDINGS;
 ```
 
 上記のステートメントは、SQL 計画バインディング情報を再ロードするために使用されます。
@@ -144,7 +166,7 @@ AdminStmt ::=
 {{< copyable "" >}}
 
 ```sql
-admin show ddl jobs;
+ADMIN SHOW DDL JOBS;
 ```
 
 ```
@@ -170,7 +192,7 @@ admin show ddl jobs;
 {{< copyable "" >}}
 
 ```sql
-admin show ddl jobs 5;
+ADMIN SHOW DDL JOBS 5;
 ```
 
 ```
@@ -191,7 +213,7 @@ admin show ddl jobs 5;
 {{< copyable "" >}}
 
 ```sql
-admin show ddl jobs 5 where state!='synced' and db_name='test';
+ADMIN SHOW DDL JOBS 5 WHERE state != 'synced' AND db_name = 'test';
 ```
 
 ```

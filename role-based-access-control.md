@@ -51,7 +51,7 @@ GRANT SELECT ON app_db.* TO 'app_read'@'%';
 {{< copyable "" >}}
 
 ```sql
-GRANT INSERT, UPDATE, DELETE ON app_db.* TO 'app_write'@'%';;
+GRANT INSERT, UPDATE, DELETE ON app_db.* TO 'app_write'@'%';
 ```
 
 次のステートメントを使用して、 `app_developer`ロールに`app_db`データベースに対するすべての権限を付与できます。

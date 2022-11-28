@@ -462,7 +462,7 @@ bin/br restore table --db batchmark --table order_line -s local:///home/tidb/bac
 
 ログのエラー メッセージ: `log - ["backup occur kv error"][error="{\"KvError\":{\"locked\":`
 
-バックアップ プロセス中にキーがロックされている場合、BR はロックを解決しようとします。少数のこのエラーは、バックアップの正確性には影響しません。
+バックアップ プロセス中にキーがロックされている場合、BR はロックの解決を試みます。少数のこのエラーは、バックアップの正確性には影響しません。
 
 ### バックアップの失敗 {#backup-failure}
 

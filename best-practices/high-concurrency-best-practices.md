@@ -17,7 +17,7 @@ summary: Learn best practices for highly-concurrent write-intensive workloads in
 
 ## 同時書き込みの多いシナリオ {#highly-concurrent-write-intensive-scenario}
 
-クリアリング、決済などのアプリケーションでバッチ タスクを実行するときに、高度な同時書き込みシナリオが発生することがよくあります。このシナリオには、次の機能があります。
+クリアリングや決済などのアプリケーションでバッチ タスクを実行する場合、高度な同時書き込みシナリオがよく発生します。このシナリオには、次の機能があります。
 
 -   膨大な量のデータ
 -   履歴データを短時間でデータベースにインポートする必要性

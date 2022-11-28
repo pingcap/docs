@@ -9,7 +9,7 @@ summary: A brief introduction to TiDB's CURD SQL.
 
 ## 始める前に {#before-you-start}
 
-TiDB クラスターに接続していることを確認してください。そうでない場合は、 [TiDB Cloud(開発者層) で TiDBクラスタを構築する](/develop/dev-guide-build-cluster-in-cloud.md#step-1-create-a-free-cluster)を参照して空きクラスターを作成します。
+TiDB クラスターに接続していることを確認してください。そうでない場合は、 [TiDB Cloud(サーバーレス層) で TiDBクラスタを構築する](/develop/dev-guide-build-cluster-in-cloud.md#step-1-create-a-serverless-tier-cluster)を参照して Serverless Tier クラスターを作成してください。
 
 ## TiDB で SQL を調べる {#explore-sql-with-tidb}
 

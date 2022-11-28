@@ -33,7 +33,7 @@ Binlogレプリケーション処理ユニットは、上流のバイナリ ロ�
 
 ブロック &amp; 許可テーブル リストは、一部のデータベースまたは一部のテーブルのすべての操作をフィルタリングまたは移行する機能です。詳細は[ブロック &amp; 許可テーブル リスト](/dm/dm-key-features.md#block-and-allow-table-lists)を参照してください。この機能は[MySQL レプリケーション フィルタリング](https://dev.mysql.com/doc/refman/5.6/en/replication-rules.html)および[MariaDB レプリケーション フィルター](https://mariadb.com/kb/en/replication-filters/)に似ています。
 
-## ハ {#c}
+## C {#c}
 
 ### チェックポイント {#checkpoint}
 
@@ -109,7 +109,7 @@ TiDB データ移行ツールを使用して、アップストリーム デー�
 
 シャード DDL ロックは、シャード DDL の移行を調整するロック メカニズムです。詳細は[ペシミスティック モードでのシャード テーブルからのデータのマージと移行の実装原則](/dm/feature-shard-merge-pessimistic.md#principles)を参照してください。現在のドキュメントでは、シャード DDL ロックはシャーディング DDL ロックとも呼ばれます。
 
-### シャードグループ {#shard-group}
+### シャード グループ {#shard-group}
 
 シャード グループは、マージされてダウンストリームの同じテーブルに移行されるすべてのアップストリーム シャード テーブルです。 TiDB DM の実装には、2 レベルのシャード グループが使用されます。詳細は[ペシミスティック モードでのシャード テーブルからのデータのマージと移行の実装原則](/dm/feature-shard-merge-pessimistic.md#principles)を参照してください。現在のドキュメントでは、シャード グループはシャーディング グループとも呼ばれます。
 

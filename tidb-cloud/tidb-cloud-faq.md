@@ -61,9 +61,7 @@ TiDB Cloudについて学ぶ最善の方法は、ステップバイステップ�
 
 ## アーキテクチャに関するよくある質問 {#architecture-faqs}
 
-### TiDB クラスターにはさまざまなコンポーネントがあります。 PD、TiDB、TiKV、TiFlash ノードとは何ですか? {#there-are-different-components-in-my-tidb-cluster-what-are-pd-tidb-tikv-and-tiflash-nodes}
-
-PD、配置Driverは、TiDB クラスター全体の「頭脳」であり、クラスターのメタデータを格納します。 TiKV ノードからリアルタイムで報告されるデータ配信状態に従って、特定の TiKV ノードにデータ スケジューリング コマンドを送信します。
+### TiDB クラスターにはさまざまなコンポーネントがあります。 TiDB、TiKV、および TiFlash ノードとは何ですか? {#there-are-different-components-in-my-tidb-cluster-what-are-tidb-tikv-and-tiflash-nodes}
 
 TiDB は、TiKV または TiFlash ストアから返されたクエリからのデータを集約する SQL コンピューティングレイヤーです。 TiDB は水平方向にスケーラブルです。 TiDB ノードの数を増やすと、クラスターが処理できる同時クエリの数が増えます。
 
@@ -71,9 +69,11 @@ TiKV は、OLTP データの保存に使用されるトランザクション ス
 
 TiFlash は、トランザクション ストア (TiKV) からリアルタイムでデータをレプリケートし、リアルタイム OLAP ワークロードをサポートする分析ストレージです。 TiKV とは異なり、TiFlash はデータを列に格納して分析処理を高速化します。 TiFlash は水平方向にもスケーラブルです。 TiFlash ノードを増やすと、OLAP ストレージとコンピューティング容量が増加します。
 
+PD、配置Driverは、TiDB クラスター全体の「頭脳」であり、クラスターのメタデータを格納します。 TiKV ノードからリアルタイムで報告されるデータ配信状態に従って、特定の TiKV ノードにデータ スケジューリング コマンドを送信します。 TiDB Cloudでは各クラスタの PD は PingCAP で管理されており、見ることも維持することもできません。
+
 ### TiDB は TiKV ノード間でデータをどのように複製しますか? {#how-does-tidb-replicate-data-between-the-tikv-nodes}
 
-TiKV はキーと値の空間をキー範囲に分割し、各キー範囲は「リージョン」として扱われます。 TiKV では、データはクラスター内のすべてのノードに分散され、リージョンが基本単位として使用されます。 PD は、クラスター内のすべてのノードにできるだけ均等にリージョンを分散 (スケジューリング) する役割を果たします。
+TiKV はキー値空間をキー範囲に分割し、各キー範囲は「リージョン」として扱われます。 TiKV では、データはクラスター内のすべてのノードに分散され、リージョンが基本単位として使用されます。 PD は、クラスター内のすべてのノードにできるだけ均等にリージョンを分散 (スケジューリング) する役割を果たします。
 
 TiDB は、 Raftコンセンサス アルゴリズムを使用して、リージョンごとにデータをレプリケートします。異なるノードに格納されたリージョンの複数のレプリカがRaftグループを形成します。
 
@@ -92,6 +92,12 @@ Software as a Service (SaaS) プロバイダーとして、当社はデータ �
 ### 別の RDBMS からTiDB Cloudへの簡単な移行パスはありますか? {#is-there-an-easy-migration-path-from-another-rdbms-to-tidb-cloud}
 
 TiDB は MySQL との互換性が高いです。データが自己ホスト型の MySQL インスタンスからのものであろうと、パブリック クラウドによって提供される RDS サービスからのものであろうと、MySQL 互換データベースから TiDB にデータをスムーズに移行できます。詳細については、 [MySQL 互換データベースからデータを移行する](/tidb-cloud/migrate-data-into-tidb.md)を参照してください。
+
+## バックアップと復元FAQ {#backup-and-restore-faq}
+
+### TiDB Cloudは増分バックアップをサポートしていますか? {#does-tidb-cloud-support-incremental-backups}
+
+いいえ。クラスターのバックアップ保持期間内の任意の時点にデータを復元する必要がある場合は、次のことができ[PITR (ポイントインタイム リカバリ) を使用する](/tidb-cloud/backup-and-restore.md#automatic-backup) 。
 
 ## HTAP に関するよくある質問 {#htap-faqs}
 

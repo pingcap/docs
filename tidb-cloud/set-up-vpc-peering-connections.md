@@ -195,13 +195,7 @@ AWS ダッシュボードを使用して、VPC ピアリング接続を構成す
 ### ステップ 3. TiDB Cloud上の TiDB クラスターに接続する {#step-3-connect-to-the-tidb-cluster-on-tidb-cloud}
 
 1.  [**クラスター]**ページに移動します。
-
 2.  ターゲット クラスターを見つけて、クラスター領域の右上隅にある [**接続**] をクリックします。接続ダイアログが表示されます。 VPC ピアリングの<strong>Status</strong>が<strong>active</strong>であることを確認できます。<strong>ステータス</strong>がまだ<strong>システム チェック</strong>中の場合は、約 5 分間待ってから、もう一度ダイアログを開きます。
-
-    > **ヒント：**
-    >
-    > または、[**クラスター**] ページでターゲット クラスターの名前をクリックし、右上隅にある [<strong>接続</strong>] をクリックすることもできます。
-
 3.  VPC 内のインスタンスから TiDBクラスタにアクセスします。 [TiDBクラスタに接続する](/tidb-cloud/connect-to-tidb-cluster.md)を参照してください。
 
 ## GCP 上 {#on-gcp}

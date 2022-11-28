@@ -34,6 +34,11 @@ TiDB クラスターを起動すると、コマンドライン オプション�
 -   TiDB HTTP ステータス サービスの Cross-Origin Request Sharing (CORS) リクエストに`Access-Control-Allow-Origin`の値を指定します
 -   デフォルト: `""`
 
+## <code>--enable-binlog</code> {#code-enable-binlog-code}
+
+-   TiDB バイナリログ生成を有効または無効にします
+-   デフォルト: `false`
+
 ## <code>--host</code> {#code-host-code}
 
 -   TiDBサーバーが監視するホスト アドレス
@@ -41,9 +46,14 @@ TiDB クラスターを起動すると、コマンドライン オプション�
 -   TiDBサーバーはこのアドレスを監視します。
 -   `"0.0.0.0"`のアドレスは、デフォルトですべてのネットワーク カードを監視します。複数のネットワーク カードがある場合は、サービスを提供するネットワーク カードを`192.168.100.113`などで指定します。
 
-## <code>--enable-binlog</code> {#code-enable-binlog-code}
+## <code>--initialize-insecure</code> {#code-initialize-insecure-code}
 
--   TiDB バイナリログ生成を有効または無効にします
+-   安全でないモードで tidb-server をブートストラップする
+-   デフォルト: `true`
+
+## <code>--initialize-secure</code> {#code-initialize-secure-code}
+
+-   セキュア モードで tidb-server をブートストラップします。
 -   デフォルト: `false`
 
 ## <code>-L</code> {#code-l-code}
@@ -152,6 +162,11 @@ TiDB クラスターを起動すると、コマンドライン オプション�
 -   最レイヤーで TiDB が使用するストレージ エンジンを指定します。
 -   デフォルト: `"unistore"`
 -   「unistore」または「tikv」を選択できます。 (「unistore」はローカル ストレージ エンジン、「tikv」は分散ストレージ エンジン)
+
+## <code>--temp-dir</code> {#code-temp-dir-code}
+
+-   TiDB の一時ディレクトリ
+-   デフォルト: `"/tmp/tidb"`
 
 ## <code>--token-limit</code> {#code-token-limit-code}
 

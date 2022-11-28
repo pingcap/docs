@@ -10,38 +10,32 @@ aliases: ['/tidbcloud/public-preview/developer-tier-cluster']
 
 TiDB Cloudは、クラスター層の次の 2 つのオプションを提供します。クラスターを作成する前に、どのオプションがニーズに適しているかを検討する必要があります。
 
--   [開発者層](#developer-tier)
+-   [サーバーレス層](#serverless-tier-beta)
 -   [専用ティア](#dedicated-tier)
 
-## 開発者層 {#developer-tier}
+## サーバーレス層 (ベータ) {#serverless-tier-beta}
 
-TiDB Cloud Developer Tier は、TiDB のフル マネージド サービスである 1 の[TiDB Cloud](https://pingcap.com/products/tidbcloud)年間の無料トライアルです。開発者層クラスターは、プロトタイプ アプリケーション、ハッカソン、アカデミック コースなどの非運用ワークロードに使用したり、非商用データセットに一時的なデータ サービスを提供したりするために使用できます。
+TiDB Cloud Tier (以前は Developer Tier と呼ばれていました) は、TiDB のフル マネージド サービスです。これはまだベータ版であり、本番環境では使用しないでください。ただし、サーバーレス層クラスターは、プロトタイプ アプリケーション、ハッカソン、アカデミック コースなどの非運用ワークロードに使用したり、データセットに一時的なデータ サービスを提供したりするために使用できます。
 
-各 Developer Tier クラスターはフル機能の TiDB クラスターであり、以下が付属しています。
-
--   1 つの TiDB 共有ノード
--   1 つの TiKV 共有ノード (1 GiB の OLTP ストレージを使用)
--   1 つの TiFlash 共有ノード (1 GiB の OLAP ストレージを使用)
-
-開発者層クラスターは共有ノードで実行されます。各ノードは仮想マシン (VM) 上の独自のコンテナーで実行されますが、その VM は他の TiDB、TiKV、または TiFlash ノードも実行しています。その結果、共有ノードは、標準の専用TiDB Cloudノードと比較してパフォーマンスが低下します。ただし、すべてのノードが個別のコンテナーで実行され、専用のクラウド ディスクがあるため、Developer Tier クラスターに格納されたデータは分離され、他の TiDB クラスターに公開されることはありません。
-
-TiDB Cloudアカウントごとに、無料の Developer Tier クラスターを 1 つ使用して 1 年間使用できます。一度に実行できる Developer Tier クラスターは 1 つだけですが、クラスターの削除と再作成は何度でも行うことができます。
-
-1 年間の無料トライアルは、最初の Developer Tier クラスターが作成された日から始まります。
+TiDB Cloudアカウントごとに、無料の Serverless Tier クラスターを作成して、ベータ フェーズで使用できます。一度に実行できる Serverless Tier クラスターは 1 つだけですが、クラスターの削除と再作成は何度でも実行できます。
 
 ### ユーザー名のプレフィックス {#user-name-prefix}
 
 <!--Important: Do not update the section name "User name prefix" because this section is referenced by TiDB backend error messages.-->
 
-各 Developer Tier クラスターに対して、 TiDB Cloudは一意のプレフィックスを生成して、他のクラスターと区別します。
+サーバーレス層クラスターごとに、 TiDB Cloudは一意のプレフィックスを生成して、他のクラスターと区別します。
 
 データベース ユーザー名を使用または設定するときは常に、ユーザー名にプレフィックスを含める必要があります。たとえば、クラスターのプレフィックスが`3pTAoNNegb47Uc8`であるとします。
 
 -   クラスターに接続するには:
 
     ```shell
-    mysql --connect-timeout 15 -u '3pTAoNNegb47Uc8.root' -h <host> -P 4000 -D test -p
+    mysql -u '3pTAoNNegb47Uc8.root' -h <host> -P 4000 -D test --ssl-mode=VERIFY_IDENTITY --ssl-ca=<CA_root_path> -p
     ```
+
+    > **ノート：**
+    >
+    > サーバーレス層には TLS 接続が必要です。システムの CA ルート パスを見つけるには、 [CA ルート パス リスト](/tidb-cloud/secure-connections-to-serverless-tier-clusters.md#where-is-the-ca-root-path-on-my-system)を参照してください。
 
 -   データベース ユーザーを作成するには:
 
@@ -53,39 +47,12 @@ TiDB Cloudアカウントごとに、無料の Developer Tier クラスターを
 
 1.  [**クラスター]**ページに移動します。
 2.  クラスター領域の右上隅にある [**接続]**をクリックします。接続ダイアログボックスが表示されます。
+3.  ダイアログで、[**ステップ 2: SQL クライアント**に接続し、接続文字列のプレフィックスを取得する] を見つけます。
 
-    > **ヒント：**
-    >
-    > または、[**クラスター**] ページでクラスターの名前をクリックし、右上隅にある [<strong>接続</strong>] をクリックすることもできます。
-3.  ダイアログで、[**ステップ 2: SQL クライアントに接続し**てプレフィックスを取得する] を見つけます。
+### サーバーレス ティアの特別利用規約 {#serverless-tier-special-terms-and-conditions}
 
-### 自動ハイバネーションとレジューム {#automatic-hibernation-and-resuming}
-
-Developer Tier クラスターが 24 時間アイドル状態になると、クラスターは自動的に休止状態になります。
-
-休止状態は、クラスターに保存されているデータには影響しませんが、監視情報の収集とコンピューティング リソースの消費を停止するだけです。
-
-ハイバネーション中、クラスターのステータスは引き続き**Normal**として表示され、 TiDB Cloudコンソールでハイバネーションに関するメッセージを確認できます。
-
-Developer Tier クラスターを再び使用したいときはいつでも、通常どおり MySQL クライアントドライバーまたは ORM フレームワークを使用するだけで済み[クラスターに接続する](/tidb-cloud/connect-to-tidb-cluster.md) 。クラスターは 50 秒以内に再開され、自動的にサービスに戻ります。
-
-または、 TiDB Cloudコンソールにログインし、[**クラスター**] ページでクラスターの [<strong>再開</strong>] をクリックすることもできます。
-
-### 開発者層の特別利用規約 {#developer-tier-special-terms-and-conditions}
-
--   アップタイム SLA 保証なし。
--   高可用性や自動フェイルオーバーはありません。
--   クラスターへのアップグレードでは、大幅なダウンタイムが発生する可能性があります。
--   バックアップおよび復元機能は使用できません。 [Dumpling](https://docs.pingcap.com/tidb/stable/dumpling-overview)を使用して、データをバックアップとしてエクスポートできます。
--   Developer Tier クラスターへの接続の最大数は 50 です。
--   変更フィード (Apache Kafka Sink および MySQL Sink) を作成したり、 [TiCDC](https://docs.pingcap.com/tidb/stable/ticdc-overview)を使用して増分データを複製したりすることはできません。
--   VPC ピアリングを使用してクラスターに接続することはできません。
--   クラスターをより大きなストレージや標準ノードにスケーリングしたり、ノード数を増やしたりすることはできません。
--   Developer Tier クラスターを[一時停止または再開](/tidb-cloud/pause-or-resume-tidb-cluster.md)にすることはできません。
--   [モニタリングページ](/tidb-cloud/built-in-monitoring.md)は表示できません。
--   サードパーティの監視サービスは使用できません。
--   TiDB クラスターのポート番号をカスタマイズすることはできません。
--   データ転送は、1 週間あたり合計 20 GiB に制限されています。 20 GiB の制限に達すると、ネットワーク トラフィックは 10 KB/秒に調整されます。
+-   Serverless Tier は現在ベータ版であり、ベータ フェーズ中のアップタイム SLA 保証はありません。 Serverless Tier ベータ版を使用して商用または実稼働データセットを保存する場合、使用に伴う潜在的なリスクはご自身で負う必要があり、PingCAP はいかなる損害についても責任を負わないものとします。
+-   一部のTiDB Cloud機能は、サーバーレス層では部分的にサポートされているか、サポートされていません。詳細は[サーバーレス層の制限](/tidb-cloud/serverless-tier-limitations.md)を参照してください。
 
 ## 専用ティア {#dedicated-tier}
 

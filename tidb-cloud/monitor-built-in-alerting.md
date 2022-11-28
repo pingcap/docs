@@ -56,5 +56,5 @@ TiDB Cloudの組み込みアラートをカスタマイズすることはでき�
 
 > **ノート：**
 >
-> -   [開発者層のクラスター](/tidb-cloud/select-cluster-tier.md#developer-tier)は、 **Condition**列で`*`とマークされているアラート条件のサブセットのみをサポートします。
+> -   [サーバーレス階層クラスター](/tidb-cloud/select-cluster-tier.md#serverless-tier-beta)は、 **Condition**列で`*`とマークされているアラート条件のサブセットのみをサポートします。
 > -   **推奨されるアクション**列の「クラスター ABC」と「プロジェクト XYZ」は、参照用の名前の例です。

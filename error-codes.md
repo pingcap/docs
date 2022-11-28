@@ -31,7 +31,7 @@ TiDB は MySQL のエラー コードと互換性があり、ほとんどの場�
 
 -   エラー番号: 8003
 
-    `ADMIN CHECK TABLE`コマンドの実行時に行のデータがインデックスと一致しない場合、TiDB はこのエラーを返します。このエラーは、テーブル内のデータ破損をチェックするときによく見られます。
+    [`ADMIN CHECK TABLE`](/sql-statements/sql-statement-admin-check-table-index.md)コマンドの実行時に行のデータがインデックスと一致しない場合、TiDB はこのエラーを返します。このエラーは、テーブル内のデータ破損をチェックするときによく見られます。
 
     あなたはサポートのために[お問い合わせ](mailto:info@pingcap.com)できます。
 
@@ -367,7 +367,7 @@ TiDB は MySQL のエラー コードと互換性があり、ほとんどの場�
 
 -   エラー番号: 8215
 
-    `ADMIN REPAIR TABLE`は失敗します。
+    [`ADMIN REPAIR TABLE`](/sql-statements/sql-statement-admin.md#admin-repair-statement)は失敗します。
 
     このエラーが発生した場合は、サポートのために[お問い合わせ](mailto:info@pingcap.com)を入力してください。
 

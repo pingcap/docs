@@ -7,7 +7,7 @@ summary: Learn key metrics displayed on the Performance Overview dashboard.
 
 TiUP を使用して TiDB クラスターをデプロイすると、監視システム (Prometheus &amp; Grafana) が同時にデプロイされます。詳細については、 [TiDB 監視フレームワークの概要](/tidb-monitoring-framework.md)を参照してください。
 
-Grafana ダッシュボードは、PD、TiDB、TiKV、Node_exporter、Overview、Performance Overview などを含む一連のサブ ダッシュボードに分かれています。診断に役立つ多くの指標があります。
+Grafana ダッシュボードは、PD、TiDB、TiKV、Node_exporter、Overview、および Performance Overview を含む一連のサブ ダッシュボードに分かれています。診断に役立つ多くの指標があります。
 
 Performance Overview ダッシュボードは、TiDB、PD、および TiKV のメトリックを調整し、それぞれを次のセクションに示します。
 
@@ -101,7 +101,7 @@ Performance Overview ダッシュボードは、TiDB、PD、および TiKV の�
 
 -   avg by type: すべての TiDB インスタンスですべてのリクエストを実行する平均時間。タイプ別に収集: `SELECT` 、 `INSERT` 、および`UPDATE`
 
-## 接続アイドル期間 {#connection-idle-duration}
+## 接続アイドル時間 {#connection-idle-duration}
 
 Connection Idle Duration は、接続がアイドル状態である期間を示します。
 

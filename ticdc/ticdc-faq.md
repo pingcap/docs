@@ -132,15 +132,15 @@ cdc cli changefeed create --pd=http://10.0.10.25:2379 --sink-uri="kafka://127.0.
     -   `server.properties`の`replica.fetch.max.bytes`の値を`1073741824` (1 GB) に増やします。
     -   `consumer.properties`の`fetch.message.max.bytes`の値を増やして`message.max.bytes`の値よりも大きくします。
 
-## TiCDC がデータを Kafka にレプリケートするとき、トランザクション内のすべての変更を 1 つのメッセージに書き込みますか?そうでない場合、どのような基準で変更を分割しますか? {#when-ticdc-replicates-data-to-kafka-does-it-write-all-the-changes-in-a-transaction-into-one-message-if-not-on-what-basis-does-it-divide-the-changes}
-
-いいえ。構成されたさまざまな配布戦略に従って、TiCDC は`default` 、 `row id` 、 `table` 、および`ts`を含むさまざまなベースで変更を分割します。
-
-詳細については、 [レプリケーション タスク構成ファイル](/ticdc/manage-ticdc.md#task-configuration-file)を参照してください。
-
 ## TiCDC がデータを Kafka にレプリケートする場合、TiDB で単一メッセージの最大サイズを制御できますか? {#when-ticdc-replicates-data-to-kafka-can-i-control-the-maximum-size-of-a-single-message-in-tidb}
 
-はい。 `max-message-bytes`パラメーターを設定して、毎回 Kafka ブローカーに送信されるデータの最大サイズを制御できます (オプション、デフォルトでは`10MB` )。 `max-batch-size`を設定して、各 Kafka メッセージの変更レコードの最大数を指定することもできます。現在、この設定は Kafka の`protocol`が`open-protocol` (オプション、デフォルトでは`16` ) の場合にのみ有効です。
+`protocol`が`avro`または`canal-json`に設定されている場合、行の変更ごとにメッセージが送信されます。 1 つの Kafka メッセージには 1 行の変更のみが含まれ、通常は Kafka の制限を超えません。したがって、1 つのメッセージのサイズを制限する必要はありません。 1 つの Kafka メッセージのサイズが Kafka の制限を超える場合は、 [TiCDC から Kafka へのレイテンシーがますます高くなるのはなぜですか?](/ticdc/ticdc-faq.md#why-does-the-latency-from-ticdc-to-kafka-become-higher-and-higher)を参照してください。
+
+`protocol`が`open-protocol`に設定されている場合、メッセージはバッチで送信されます。したがって、1 つの Kafka メッセージが過度に大きくなる可能性があります。この状況を回避するには、 `max-message-bytes`パラメータを設定して、毎回 Kafka ブローカに送信されるデータの最大サイズを制御できます (オプション、デフォルトでは`10MB` )。 `max-batch-size`パラメーター (オプション、デフォルトでは`16` ) を構成して、各 Kafka メッセージ内の変更レコードの最大数を指定することもできます。
+
+## トランザクションで行を複数回変更すると、TiCDC は複数の行変更イベントを出力しますか? {#if-i-modify-a-row-multiple-times-in-a-transaction-will-ticdc-output-multiple-row-change-events}
+
+いいえ。1 つのトランザクションで同じ行を複数回変更すると、TiDB は最新の変更のみを TiKV に送信します。したがって、TiCDC は最新の変更の結果しか取得できません。
 
 ## TiCDC がデータを Kafka にレプリケートする場合、メッセージには複数の種類のデータ変更が含まれますか? {#when-ticdc-replicates-data-to-kafka-does-a-message-contain-multiple-types-of-data-changes}
 
@@ -231,7 +231,7 @@ mysql root@127.0.0.1:test> show create table test;
 
 v5.0.1 または v4.0.13 以降、MySQL へのレプリケーションごとに、TiCDC は自動的に`explicit_defaults_for_timestamp = ON`を設定して、アップストリームとダウンストリームの間で時刻タイプが一致するようにします。 v5.0.1 または v4.0.13 より前のバージョンでは、TiCDC を使用して時間型データを複製するときに、 `explicit_defaults_for_timestamp`の値が一致しないために発生する互換性の問題に注意してください。
 
-## TiCDC レプリケーション タスクを作成すると、 <code>enable-old-value</code>が<code>true</code>に設定されますが、アップストリームからの<code>INSERT</code> / <code>UPDATE</code>ステートメントは、ダウンストリームにレプリケートされた後に<code>REPLACE INTO</code>になります {#code-enable-old-value-code-is-set-to-code-true-code-when-i-create-a-ticdc-replication-task-but-code-insert-code-code-update-code-statements-from-the-upstream-become-code-replace-into-code-after-being-replicated-to-the-downstream}
+## TiCDC レプリケーション タスクを作成するときに<code>enable-old-value</code>を<code>true</code>に設定すると、アップストリームからの<code>INSERT</code> / <code>UPDATE</code>ステートメントがダウンストリームにレプリケートされた後に<code>REPLACE INTO</code>になるのはなぜですか? {#why-do-code-insert-code-code-update-code-statements-from-the-upstream-become-code-replace-into-code-after-being-replicated-to-the-downstream-if-i-set-code-enable-old-value-code-to-code-true-code-when-i-create-a-ticdc-replication-task}
 
 TiCDC で changefeed が作成されると、 `safe-mode`設定のデフォルトは`true`になり、上流の`INSERT` / `UPDATE`ステートメントに対して実行する`REPLACE INTO`ステートメントが生成されます。
 
@@ -260,3 +260,7 @@ TiCDC で changefeed が作成されると、 `safe-mode`設定のデフォル�
 ## アップストリームからTiDB Lightningと BR を使用してデータを復元した後、TiCDC を使用したレプリケーションがストールしたり停止したりするのはなぜですか? {#why-does-replication-using-ticdc-stall-or-even-stop-after-data-restore-using-tidb-lightning-and-br-from-upstream}
 
 現在、TiCDC はまだTiDB Lightningおよび BR と完全に互換性がありません。したがって、TiCDC によって複製されたテーブルでTiDB Lightningおよび BR を使用することは避けてください。
+
+## 変更フィードが一時停止から再開した後、そのレプリケーションレイテンシーはますます高くなり、数分後にのみ通常に戻ります。なんで？ {#after-a-changefeed-resumes-from-pause-its-replication-latency-gets-higher-and-higher-and-returns-to-normal-only-after-a-few-minutes-why}
+
+変更フィードが再開されると、TiCDC は TiKV 内のデータの履歴バージョンをスキャンして、一時停止中に生成された増分データ ログに追いつく必要があります。レプリケーション プロセスは、スキャンが完了した後にのみ続行されます。スキャン処理には数分から数十分かかる場合があります。

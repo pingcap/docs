@@ -24,7 +24,7 @@ SELECT * FROM table_a t ORDER BY gmt_modified DESC LIMIT offset, row_count;
 <SimpleTab groupId="language">
 <div label="SQL" value="sql">
 
-たとえば、 [書店](/develop/dev-guide-bookshop-schema-design.md)アプリケーションのユーザーが最新の出版された書籍をページ分割された方法で表示できるようにするには、 `LIMIT 0, 10`ステートメントを使用できます。このステートメントは、結果リストの最初のページを返します。1 ページあたり最大 10 レコードです。 2 番目のページを取得するには、ステートメントを`LIMIT 10, 10`などに変更します。
+たとえば、 [書店](/develop/dev-guide-bookshop-schema-design.md)アプリケーションのユーザーが最新の出版された書籍をページ分割された方法で表示できるようにするには、 `LIMIT 0, 10`ステートメントを使用できます。このステートメントは、結果リストの最初のページを返します。1 ページあたり最大 10 レコードです。 2 ページ目を取得するには、ステートメントを`LIMIT 10, 10`に変更します。
 
 {{< copyable "" >}}
 
@@ -233,7 +233,7 @@ pageMetaList.forEach((pageMeta) -> {
 
 非クラスター化インデックス テーブル (「非インデックス構成テーブル」とも呼ばれます) の場合、内部フィールド`_tidb_rowid`をページ付けキーとして使用できます。ページ付け方法は、単一フィールド主キー テーブルの場合と同じです。
 
-> **チップ：**
+> **ヒント：**
 >
 > `SHOW CREATE TABLE users;`ステートメントを使用して、テーブルの主キーが[クラスター化インデックス](/clustered-indexes.md)を使用しているかどうかを確認できます。
 
@@ -303,6 +303,10 @@ GROUP BY page_num
 ORDER BY page_num;
 ```
 
+> **ノート：**
+>
+> 前の SQL ステートメントは`TableFullScan`として実行されます。データ量が多いとクエリが遅くなるため、高速化することができ[TiFlashを使う](/tiflash/tiflash-overview.md#use-tiflash) 。
+
 結果は次のとおりです。
 
 ```
@@ -328,7 +332,12 @@ ORDER BY page_num;
 ```sql
 SELECT * FROM ratings
 WHERE
-    (book_id, user_id) >= (268996, 92104804)
-    AND (book_id, user_id) <= (140982742, 374645100)
+    (book_id > 268996 AND book_id < 140982742)
+    OR (
+        book_id = 268996 AND user_id >= 92104804
+    )
+    OR (
+        book_id = 140982742 AND user_id <= 374645100
+    )
 ORDER BY book_id, user_id;
 ```

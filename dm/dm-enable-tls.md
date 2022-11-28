@@ -107,7 +107,7 @@ Common Name は発信者の確認に使用されます。一般に、呼び出�
             ssl-key: "/path/to/mysql-key.pem"
     ```
 
-### ダウンストリーム TiDB の暗号化データ転送を有効にする {#enable-encrypted-data-transmission-for-downstream-tidb}
+### ダウンストリーム TiDB の暗号化データ送信を有効にする {#enable-encrypted-data-transmission-for-downstream-tidb}
 
 1.  暗号化された接続を使用するように下流の TiDB を構成します。詳細な操作については、 [安全な接続を使用するように TiDBサーバーを構成する](/enable-tls-between-clients-and-servers.md#configure-tidb-server-to-use-secure-connections)を参照してください。
 

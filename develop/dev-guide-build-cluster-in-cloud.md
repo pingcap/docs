@@ -1,15 +1,15 @@
 ---
-title: Build a TiDB Cluster in TiDB Cloud (Developer Tier)
-summary: Learn how to build a TiDB cluster in TiDB Cloud (Developer Tier) and connect to a TiDB Cloud cluster.
+title: Build a TiDB Cluster in TiDB Cloud (Serverless Tier)
+summary: Learn how to build a TiDB cluster in TiDB Cloud (Serverless Tier) and connect to a TiDB Cloud cluster.
 ---
 
 <!-- markdownlint-disable MD029 -->
 
-# TiDB Cloud(開発者層) で TiDBクラスタを構築する {#build-a-tidb-cluster-in-tidb-cloud-developer-tier}
+# TiDB Cloud(サーバーレス層) で TiDBクラスタを構築する {#build-a-tidb-cluster-in-tidb-cloud-serverless-tier}
 
 <CustomContent platform="tidb">
 
-このドキュメントでは、TiDB を使い始める最も簡単な方法について説明します。 [TiDB Cloud](https://en.pingcap.com/tidb-cloud)を使用して、無料の TiDB クラスターを作成し、それに接続して、サンプル アプリケーションを実行します。
+このドキュメントでは、TiDB を使い始める最も簡単な方法について説明します。 [TiDB Cloud](https://en.pingcap.com/tidb-cloud)を使用して Serverless Tier クラスターを作成し、それに接続して、サンプル アプリケーションを実行します。
 
 ローカル マシンで TiDB を実行する必要がある場合は、 [TiDB をローカルで起動する](/quick-start-with-tidb.md)を参照してください。
 
@@ -17,41 +17,31 @@ summary: Learn how to build a TiDB cluster in TiDB Cloud (Developer Tier) and co
 
 <CustomContent platform="tidb-cloud">
 
-このドキュメントでは、 TiDB Cloudを開始するための最も簡単な方法について説明します。無料の TiDB クラスターを作成して接続し、サンプル アプリケーションを実行します。
+このドキュメントでは、 TiDB Cloudを開始するための最も簡単な方法について説明します。 TiDB クラスターを作成して接続し、サンプル アプリケーションを実行します。
 
 </CustomContent>
 
-## ステップ 1.無料のクラスターを作成する {#step-1-create-a-free-cluster}
+## ステップ 1. サーバーレス層クラスターを作成する {#step-1-create-a-serverless-tier-cluster}
 
-1.  TiDB Cloudアカウントを持っていない場合は、 [TiDB Cloud](https://tidbcloud.com/free-trial)をクリックしてアカウントにサインアップします。
+1.  TiDB Cloudアカウントを持っていない場合は、 [ここ](https://tidbcloud.com/free-trial)をクリックしてアカウントにサインアップします。
 
-2.  [ログイン](https://tidbcloud.com/)をTiDB Cloudアカウントで。
+2.  [ログイン](https://tidbcloud.com/)をTiDB Cloudアカウントに追加します。
 
-3.  Developer Tier クラスターを 1 年間無料で作成するには、 [プランページ](https://tidbcloud.com/console/plans)ページで**Developer Tier**プランを選択するか、 [**クラスター**](https://tidbcloud.com/console/clusters)ページで [<strong>クラスタの作成</strong>] をクリックします。
+3.  [**クラスター**] ページで、[<strong>クラスタの作成</strong>] をクリックします。
 
-4.  [**クラスタの作成]**ページで、クラスター名、クラウド プロバイダー (現時点では、開発者層で使用できるのは AWS のみ)、およびリージョン (近くのリージョンをお勧めします) を設定します。次に、[<strong>作成</strong>] をクリックしてクラスターを作成します。
+4.  [**クラスタの作成**] ページでは、<strong>サーバーレス層</strong>がデフォルトで選択されています。必要に応じてデフォルトのクラスター名を更新し、クラスターを作成するリージョンを選択します。
 
-    クラスターの作成プロセスが開始され、 **[セキュリティの設定**] ダイアログ ボックスが表示されます。
+    TiDB Cloudクラスターは約 30 秒で作成されます。
 
-5.  [**セキュリティ設定**] ダイアログ ボックスで、ルート パスワードと許可された IP アドレスを設定してクラスターに接続し、[<strong>適用</strong>] をクリックします。
+5.  TiDB Cloudクラスターが作成されたら、[**セキュリティ設定]**をクリックします。 [<strong>セキュリティ設定</strong>] ダイアログ ボックスで、クラスターに接続するためのルート パスワードを設定し、[<strong>送信</strong>] をクリックします。 root パスワードを設定しないと、クラスターに接続できません。
 
-    TiDB Cloudクラスターは、約 5 ～ 15 分で作成されます。
-
-6.  クラスターを作成したら、右上隅にある [**接続**] をクリックします。接続ダイアログボックスが表示されます。
-
-    > **ヒント：**
-    >
-    > または、新しく作成したクラスターの名前をクリックしてクラスターの詳細ページに移動し、右上隅にある [**接続**] をクリックすることもできます。
-
-7.  ダイアログ ボックスで、 [**ステップ 2: SQL クライアントに接続**する] を探し、文字列をコピーして SQL クライアントに接続し、後で使用できるようにします。
-
-    ![SQL string](/media/develop/tidb-cloud-connect.png)
+6.  [**接続]**をクリックします。接続ダイアログボックスが表示されます。ダイアログの [ <strong>SQL クライアントで接続</strong>] の下で、希望する接続方法のタブをクリックし、対応する接続文字列を保存します。次のセクションでは、MySQL クライアントを例として使用します。
 
     <CustomContent platform="tidb">
 
     > **ノート：**
     >
-    > [開発者層のクラスター](https://docs.pingcap.com/tidbcloud/select-cluster-tier#developer-tier)の場合、クラスターに接続するときに、ユーザー名にクラスターのプレフィックスを含め、名前を引用符で囲む必要があります。詳細については、 [ユーザー名のプレフィックス](https://docs.pingcap.com/tidbcloud/select-cluster-tier#user-name-prefix)を参照してください。
+    > [サーバーレス階層クラスター](https://docs.pingcap.com/tidbcloud/select-cluster-tier#serverless-tier)の場合、クラスターに接続するときに、ユーザー名にクラスターのプレフィックスを含め、名前を引用符で囲む必要があります。詳細については、 [ユーザー名のプレフィックス](https://docs.pingcap.com/tidbcloud/select-cluster-tier#user-name-prefix)を参照してください。
 
     </CustomContent>
 
@@ -59,7 +49,7 @@ summary: Learn how to build a TiDB cluster in TiDB Cloud (Developer Tier) and co
 
     > **ノート：**
     >
-    > [開発者層のクラスター](/tidb-cloud/select-cluster-tier.md#developer-tier)の場合、クラスターに接続するときに、ユーザー名にクラスターのプレフィックスを含め、名前を引用符で囲む必要があります。詳細については、 [ユーザー名のプレフィックス](/tidb-cloud/select-cluster-tier.md#user-name-prefix)を参照してください。
+    > [サーバーレス階層クラスター](/tidb-cloud/select-cluster-tier.md#serverless-tier-beta)の場合、クラスターに接続するときに、ユーザー名にクラスターのプレフィックスを含め、名前を引用符で囲む必要があります。詳細については、 [ユーザー名のプレフィックス](/tidb-cloud/select-cluster-tier.md#user-name-prefix)を参照してください。
 
     </CustomContent>
 
@@ -146,60 +136,50 @@ mysql  Ver 15.1 Distrib 5.5.68-MariaDB, for Linux (x86_64) using readline 5.1
 
 </SimpleTab>
 
-2.  [ステップ1](#step-1-create-a-free-cluster)で取得した接続文字列を実行します。
+2.  [ステップ1](#step-1-create-a-serverless-tier-cluster)で取得した接続文字列を実行します。
 
     {{< copyable "" >}}
 
     ```shell
-    mysql --connect-timeout 15 -u '<prefix>.root' -h <host> -P 4000 -p
+    mysql --connect-timeout 15 -u '<prefix>.root' -h <host> -P 4000 -D test --ssl-mode=VERIFY_IDENTITY --ssl-ca=/etc/ssl/cert.pem -p
     ```
+
+<CustomContent platform="tidb">
+
+> **ノート：**
+>
+> -   Serverless Tier クラスターに接続する場合は、 [TLS 接続を使用する](https://docs.pingcap.com/tidbcloud/secure-connections-to-serverless-tier-clusters) .
+> -   Serverless Tier クラスターへの接続時に問題が発生した場合は、詳細について[サーバーレス層クラスターへのセキュリティ接続](https://docs.pingcap.com/tidbcloud/secure-connections-to-serverless-tier-clusters)を参照してください。
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+> **ノート：**
+>
+> -   Serverless Tier クラスターに接続する場合は、 [TLS 接続を使用する](/tidb-cloud/secure-connections-to-serverless-tier-clusters.md) .
+> -   Serverless Tier クラスターへの接続時に問題が発生した場合は、詳細について[サーバーレス層クラスターへのセキュリティ接続](/tidb-cloud/secure-connections-to-serverless-tier-clusters.md)を参照してください。
+
+</CustomContent>
 
 3.  パスワードを入力してサインインします。
 
-## ステップ 3. サンプル アプリケーションを実行する {#step-3-run-the-sample-application}
+## ステップ 3. SQL ステートメントを実行する {#step-3-execute-a-sql-statement}
 
-1.  `tidb-example-java`のプロジェクトを複製します。
+TiDB Cloudで最初の SQL ステートメントを実行してみましょう。
 
-{{< copyable "" >}}
-
-```shell
-git clone https://github.com/pingcap-inc/tidb-example-java.git
+```sql
+SELECT 'Hello TiDB Cloud!';
 ```
 
-2.  接続パラメーターを変更します。
+期待される出力:
 
-    `plain-java-jdbc/src/main/java/com/pingcap/JDBCExample.java`で、ホスト、ポート、ユーザー、およびパスワードのパラメーターを変更します。
+```sql
++-------------------+
+| Hello TiDB Cloud! |
++-------------------+
+| Hello TiDB Cloud! |
++-------------------+
+```
 
-    {{< copyable "" >}}
-
-    ```java
-    mysqlDataSource.setServerName("localhost");
-    mysqlDataSource.setPortNumber(4000);
-    mysqlDataSource.setDatabaseName("test");
-    mysqlDataSource.setUser("root");
-    mysqlDataSource.setPassword("");
-    ```
-
-    設定したパスワードが`123456`で、 TiDB Cloudから取得した接続文字列が次のとおりであるとします。
-
-    {{< copyable "" >}}
-
-    ```shell
-    mysql --connect-timeout 15 -u '9ATyn6DhCXoo6U1.root' -h xxx.tidbcloud.com -P 4000 -D test -p
-    ```
-
-    この場合、次のようにパラメータを変更できます。
-
-    {{< copyable "" >}}
-
-    ```java
-    mysqlDataSource.setServerName("xxx.tidbcloud.com");
-    mysqlDataSource.setPortNumber(4000);
-    mysqlDataSource.setDatabaseName("test");
-    mysqlDataSource.setUser("9ATyn6DhCXoo6U1.root");
-    mysqlDataSource.setPassword("123456");
-    ```
-
-3.  `make plain-java-jdbc`を実行します。
-
-[期待される出力](https://github.com/pingcap-inc/tidb-example-java/blob/main/Expected-Output.md#plain-java-jdbc)の例を次に示します。
+実際の出力が予想される出力と似ている場合は、おめでとう、 TiDB Cloudで SQL ステートメントを正常に実行したことになります。

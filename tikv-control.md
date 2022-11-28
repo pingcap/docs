@@ -20,7 +20,7 @@ TiKV Control ( `tikv-ctl` ) は、クラスターを管理するために使用�
 {{< copyable "" >}}
 
 ```bash
-tiup ctl tikv
+tiup ctl:<cluster-version> tikv
 ```
 
 ```
@@ -85,7 +85,7 @@ SUBCOMMANDS:
     unsafe-recover        Unsafely recover the cluster when the majority replicas are failed
 ```
 
-`tiup ctl tikv`の後に、対応するパラメーターとサブコマンドを追加できます。
+`tiup ctl:<cluster-version> tikv`の後に、対応するパラメーターとサブコマンドを追加できます。
 
 ## 一般オプション {#general-options}
 
@@ -229,20 +229,32 @@ middle_key_by_approximate_size:
 
 ### 各 TiKV のデータを手動で圧縮する {#compact-data-of-each-tikv-manually}
 
-`compact`コマンドを使用して、各 TiKV のデータを手動で圧縮します。 `--from`と`--to`のオプションを指定すると、それらのフラグもエスケープされた raw キーの形式になります。
+`compact`コマンドを使用して、各 TiKV のデータを手動で圧縮します。
 
--   `--host`オプションを使用して、圧縮を実行する必要がある TiKV を指定します。
--   `-d`オプションを使用して、圧縮を実行する RocksDB を指定します。オプションの値は`kv`と`raft`です。
+-   `--from`および`--to`オプションを使用して、圧縮範囲をエスケープされた raw キーの形式で指定します。設定されていない場合、範囲全体が圧縮されます。
+
+-   特定の領域の範囲を圧縮するには、 `--region`オプションを使用します。設定すると、 `--from`と`--to`は無視されます。
+
+-   `--db`オプションを使用して、圧縮を実行する RocksDB を指定します。オプションの値は`kv`と`raft`です。
+
 -   `--threads`オプションを使用すると、TiKV 圧縮の同時実行数を指定できます。デフォルト値は`8`です。一般に、コンカレンシーが高いほど圧縮速度が速くなりますが、サービスに影響を与える可能性があります。シナリオに基づいて、適切な同時実行数を選択する必要があります。
+
 -   `--bottommost`オプションを使用して、TiKV が圧縮を実行するときに一番下のファイルを含めたり除外したりします。値のオプションは`default` 、 `skip` 、および`force`です。デフォルト値は`default`です。
     -   `default`は、圧縮フィルター機能が有効になっている場合にのみ、一番下のファイルが含まれることを意味します。
     -   `skip`は、TiKV が圧縮を実行するときに、一番下のファイルが除外されることを意味します。
     -   `force`は、TiKV が圧縮を実行するときに、一番下のファイルが常に含まれることを意味します。
 
-```bash
-$ tikv-ctl --data-dir /path/to/tikv compact -d kv
-success!
-```
+-   ローカル モードでデータを圧縮するには、次のコマンドを使用します。
+
+    ```shell
+    tikv-ctl --data-dir /path/to/tikv compact --db kv
+    ```
+
+-   リモート モードでデータを圧縮するには、次のコマンドを使用します。
+
+    ```shell
+    tikv-ctl --host ip:port compact --db kv
+    ```
 
 ### TiKV クラスター全体のデータを手動で圧縮する {#compact-data-of-the-whole-tikv-cluster-manually}
 
@@ -339,9 +351,9 @@ all regions are healthy
 
 ### TiKV 構成を動的に変更する {#modify-the-tikv-configuration-dynamically}
 
-`modify-tikv-config`コマンドを使用して、構成引数を動的に変更できます。現在、動的に変更できる TiKV の構成項目と詳細な変更は、SQL ステートメントを使用した構成の変更と一致しています。詳細については、 [TiKV 構成をオンラインで変更する](/dynamic-config.md#modify-tikv-configuration-online)を参照してください。
+`modify-tikv-config`コマンドを使用して、構成引数を動的に変更できます。現在、動的に変更できる TiKV の構成項目と詳細な変更は、SQL ステートメントを使用した構成の変更と一致しています。詳細については、 [TiKV 構成を動的に変更する](/dynamic-config.md#modify-tikv-configuration-dynamically)を参照してください。
 
--   `-n`は、構成アイテムの完全な名前を指定するために使用されます。オンラインで変更できる構成アイテムのリストについては、 [TiKV 構成をオンラインで変更する](/dynamic-config.md#modify-tikv-configuration-online)を参照してください。
+-   `-n`は、構成アイテムの完全な名前を指定するために使用されます。動的に変更できる構成アイテムのリストについては、 [TiKV 構成を動的に変更する](/dynamic-config.md#modify-tikv-configuration-dynamically)を参照してください。
 -   `-v`は、構成値を指定するために使用されます。
 
 `shared block cache`のサイズを設定します。
@@ -461,7 +473,7 @@ $ tikv-ctl --data-dir /path/to/tikv recover-mvcc -r 1001,1002 -p 127.0.0.1:2379
 success!
 ```
 
-> **注**:
+> **ノート：**
 >
 > -   このコマンドは、ローカル モードのみをサポートします。正常に実行されると`success!`が出力されます。
 > -   `-p`オプションの引数は、 `http`プレフィックスなしで PD エンドポイントを指定します。 PD エンドポイントを指定すると、指定された`region_id`が検証されているかどうかを照会します。
@@ -542,7 +554,7 @@ Type "I consent" to continue, anything else to exit: I consent
 9291156302549018620: key: 8B6B6B8F83D36BE2467ED55D72AE808B method: Aes128Ctr creation_time: 1592938357
 ```
 
-> **ノート**
+> **ノート：**
 >
 > このコマンドは、データ暗号化キーをプレーンテキストとして公開します。本番環境では、出力をファイルにリダイレクトしないでください。後で出力ファイルを削除しても、コンテンツがディスクから完全に消去されない場合があります。
 

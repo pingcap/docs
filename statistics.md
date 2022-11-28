@@ -25,18 +25,14 @@ TiDB Cloudの場合、この変数のデフォルト値は`1`です。
 >
 > -   `ANALYZE`ステートメントを手動で実行する場合は、分析するすべてのテーブルを手動で分析します。
 >
->     {{< copyable "" >}}
->
 >     ```sql
->     select distinct(concat('ANALYZE ',table_schema, '.', table_name,';')) from information_schema.tables, mysql.stats_histograms where stats_ver = 2 and table_id = tidb_table_id ;
+>     SELECT DISTINCT(CONCAT('ANALYZE TABLE ', table_schema, '.', table_name, ';')) FROM information_schema.tables, mysql.stats_histograms WHERE stats_ver = 2 AND table_id = tidb_table_id;
 >     ```
 >
 > -   自動分析が有効になっているために TiDB が`ANALYZE`ステートメントを自動的に実行する場合は、 `DROP STATS`ステートメントを生成する次のステートメントを実行します。
 >
->     {{< copyable "" >}}
->
 >     ```sql
->     select distinct(concat('DROP STATS ',table_schema, '.', table_name,';')) from information_schema.tables, mysql.stats_histograms where stats_ver = 2 and table_id = tidb_table_id ;
+>     SELECT DISTINCT(CONCAT('DROP STATS ', table_schema, '.', table_name, ';')) FROM information_schema.tables, mysql.stats_histograms WHERE stats_ver = 2 AND table_id = tidb_table_id;
 >     ```
 
 これら 2 つのバージョンには、TiDB に異なる情報が含まれています。
@@ -717,8 +713,8 @@ DROP STATS TableName GLOBAL;
 
 デフォルトでは、列統計のサイズに応じて、TiDB は次のように異なる方法で統計をロードします。
 
--   小さなスペースを消費する統計 (count、distinctCount、nullCount など) の場合、列データが更新されている限り、TiDB は対応する統計をメモリに自動的にロードして、SQL 最適化段階で使用します。
--   大きなスペースを消費する統計 (ヒストグラム、TopN、Count-Min Sketch など) の場合、SQL 実行のパフォーマンスを確保するために、TiDB は必要に応じて統計を非同期にロードします。ヒストグラムを例に取ります。 TiDB は、オプティマイザがその列のヒストグラム統計を使用する場合にのみ、列のヒストグラム統計をメモリにロードします。オンデマンドの非同期統計ロードは、SQL 実行のパフォーマンスには影響しませんが、SQL 最適化の不完全な統計を提供する場合があります。
+-   少量のメモリを消費する統計 (count、distinctCount、nullCount など) の場合、列データが更新されている限り、TiDB は対応する統計を自動的にメモリにロードして、SQL 最適化段階で使用します。
+-   大量のメモリを消費する統計 (ヒストグラム、TopN、Count-Min Sketch など) の場合、SQL 実行のパフォーマンスを確保するために、TiDB は必要に応じて統計を非同期にロードします。ヒストグラムを例に取ります。 TiDB は、オプティマイザがその列のヒストグラム統計を使用する場合にのみ、列のヒストグラム統計をメモリにロードします。オンデマンドの非同期統計ロードは、SQL 実行のパフォーマンスには影響しませんが、SQL 最適化の不完全な統計を提供する場合があります。
 
 v5.4.0 以降、TiDB は同期読み込み統計機能を導入しています。この機能により、TiDB は、SQL ステートメントの実行時に大規模な統計 (ヒストグラム、TopN、Count-Min Sketch 統計など) をメモリに同期的にロードできるようになり、SQL 最適化のための統計の完全性が向上します。
 
@@ -726,7 +722,7 @@ v5.4.0 以降、TiDB は同期読み込み統計機能を導入しています�
 >
 > 現在、統計の同期読み込みは実験的機能です。実稼働環境で使用することはお勧めしません。
 
-統計の同期読み込み機能は、デフォルトでは無効になっています。この機能を有効にするには、システム変数[`tidb_stats_load_sync_wait`](/system-variables.md#tidb_stats_load_sync_wait-new-in-v540)の値をタイムアウト (ミリ秒単位) に設定します。これは、SQL 最適化が完全な列統計を同期的にロードするまで最大で待機できる時間です。この変数のデフォルト値は`0`で、機能が無効になっていることを示します。
+統計の同期読み込み機能は、デフォルトで無効になっています。この機能を有効にするには、システム変数[`tidb_stats_load_sync_wait`](/system-variables.md#tidb_stats_load_sync_wait-new-in-v540)の値をタイムアウト (ミリ秒単位) に設定します。これは、SQL 最適化が完全な列統計を同期的にロードするまで最大で待機できる時間です。この変数のデフォルト値は`0`で、機能が無効になっていることを示します。
 
 <CustomContent platform="tidb">
 

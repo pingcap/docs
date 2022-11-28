@@ -5,6 +5,10 @@ summary: Learn how to migrate data from MySQL-compatible databases to TiDB Cloud
 
 # MySQL 互換データベースからデータを移行する {#migrate-data-from-mysql-compatible-databases}
 
+> **ノート：**
+>
+> データ移行機能を使用して、MySQL 互換データベースを移行することをお勧めします。 [データ移行を使用して MySQL 互換データベースをTiDB Cloudに移行する](/tidb-cloud/migrate-from-mysql-using-data-migration.md)を参照してください。
+
 TiDB は MySQL との互換性が高いです。データが自己ホスト型の MySQL インスタンスからのものであろうと、パブリック クラウドによって提供される RDS サービスからのものであろうと、MySQL 互換データベースから TiDB にデータをスムーズに移行できます。
 
 このドキュメントでは、 [Dumpling](/dumpling-overview.md)を使用して MySQL 互換データベースからデータをエクスポートする方法と、 [TiDB Lightning](https://docs.pingcap.com/tidb/stable/tidb-lightning-overview)論理インポート モードを使用してデータをTiDB Cloudにインポートする方法について説明します。
@@ -92,7 +96,7 @@ TiUP は TiDB エコシステムのパッケージ マネージャーであり�
 -   ソース データが Amazon S3 クラウド ストレージにある場合は、次の手順を実行します。
 
     1.  Amazon S3 アクセスを構成して、TiDB クラウドが Amazon S3 バケット内のソース データにアクセスできるようにします。詳細については、 [Amazon S3 アクセスを構成する](/tidb-cloud/config-s3-and-gcs-access.md#configure-amazon-s3-access)を参照してください。
-    2.  TiDB Cloudコンソールから TiDB クラスター ページに移動し、ターゲット クラスターの名前をクリックして、独自の概要ページに移動します。右上隅にある [**データのインポート**] をクリックし、[<strong>データのインポート タスク</strong>] ページでインポート関連の情報を入力します。
+    2.  [TiDB Cloudコンソール](https://tidbcloud.com/)から [**クラスター**] ページに移動し、ターゲット クラスターの名前をクリックして、独自の概要ページに移動します。 [<strong>データのインポート]</strong>をクリックし、[<strong>データのインポート]</strong>ページでインポート関連の情報を入力します。
 
 -   ソース データがローカル ファイルにある場合は、次のいずれかを実行します。
 
@@ -116,7 +120,7 @@ TiUP は TiDB エコシステムのパッケージ マネージャーであり�
         {{< copyable "" >}}
 
         ```shell
-        vim tidb-lighting.toml
+        vim tidb-lightning.toml
         ```
 
     2.  インポート情報を設定します。
@@ -124,32 +128,32 @@ TiUP は TiDB エコシステムのパッケージ マネージャーであり�
         {{< copyable "" >}}
 
         ```toml
-        [lightning] 
+        [lightning]
         # The address and port to check TiDB Lightning metrics.
         status-addr = '127.0.0.1:8289'
 
         [tidb]
-        # The target cluster information. Fill in one address of tidb-server. 
+        # The target cluster information. Fill in one address of tidb-server.
         # For example: 172.16.128.1
-        host = "${host}" 
+        host = "${host}"
         # The port number of the target cluster. For example: 4000
         port = ${port number}
         # The target database username. For example: root
-        user = "${user_name}" 
-        # The target database password. 
-        password = "${password}" 
+        user = "${user_name}"
+        # The target database password.
+        password = "${password}"
 
         [tikv-importer]
-        # The TiDB backend to be used for data importing. 
+        # The logical import mode to be used for data importing.
         backend = "tidb"
 
         [mydumper]
         # The data source directory, supporting local path and s3.
         # For example: `/data` for local path or `s3://bucket-name/data-path` for s3
-        data-source-dir = "${data_path}"  
+        data-source-dir = "${data_path}"
 
-        # When Dumpling is used to export data, the corresponding table schemas are exported too by default. 
-        # If you want TiDB Lightning to automatically create table schemas in TiDB Cloud according to the exported schemas, set no-schema to false. 
+        # When Dumpling is used to export data, the corresponding table schemas are exported too by default.
+        # If you want TiDB Lightning to automatically create table schemas in TiDB Cloud according to the exported schemas, set no-schema to false.
         no-schema = false
         ```
 

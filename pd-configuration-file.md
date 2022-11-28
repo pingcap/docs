@@ -1,6 +1,7 @@
 ---
 title: PD Configuration File
 summary: Learn the PD configuration file.
+aliases: ['/docs/stable/reference/configuration/pd-server/configuration-file/']
 ---
 
 # PDConfiguration / コンフィグレーションファイル {#pd-configuration-file}
@@ -310,7 +311,7 @@ PD 構成ファイルは、コマンドライン パラメーターよりも多�
 
 ### <code>max-replicas</code> {#code-max-replicas-code}
 
--   レプリカの数、つまりリーダーとフォロワーの数の合計。デフォルト値`3`は、1 人のリーダーと 2 人のフォロワーを意味します。この構成がオンラインで変更されると、PD はバックグラウンドでリージョンをスケジュールし、レプリカの数がこの構成と一致するようにします。
+-   レプリカの数、つまりリーダーとフォロワーの数の合計。デフォルト値`3`は、1 人のリーダーと 2 人のフォロワーを意味します。この構成が動的に変更されると、レプリカの数がこの構成と一致するように、PD はバックグラウンドでリージョンをスケジュールします。
 -   デフォルト値: `3`
 
 ### <code>location-labels</code> {#code-location-labels-code}
@@ -333,9 +334,8 @@ PD 構成ファイルは、コマンドライン パラメーターよりも多�
 ### <code>enable-placement-rules</code> {#code-enable-placement-rules-code}
 
 -   `placement-rules`を有効にします。
--   デフォルト値: `false`
+-   デフォルト値: `true`
 -   [配置ルール](/configure-placement-rules.md)を参照してください。
--   TiDB 4.0 の実験的機能。
 
 ### <code>flow-round-by-digit</code> <span class="version-mark">5.1 の新機能</span> {#code-flow-round-by-digit-code-span-class-version-mark-new-in-tidb-5-1-span}
 

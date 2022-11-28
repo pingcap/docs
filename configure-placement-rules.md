@@ -94,7 +94,7 @@ enable-placement-rules = true
 }
 ```
 
-ブートストラップされたクラスターの場合、pd-ctl を使用して配置ルールをオンラインで有効にすることもできます。
+ブートストラップされたクラスターの場合、pd-ctl を介して配置ルールを動的に有効にすることもできます。
 
 {{< copyable "" >}}
 
@@ -431,7 +431,7 @@ table ttt ranges: (NOTE: key range might be changed after DDL)
 
 ### シナリオ 4: 高性能ディスクを備えた北京ノードのテーブルに 2 つのフォロワー レプリカを追加する {#scenario-4-add-two-follower-replicas-for-a-table-in-the-beijing-node-with-high-performance-disks}
 
-次の例は、より複雑な`label_constraints`構成を示しています。このルールでは、レプリカは`bj1`または`bj2`のマシン ルームに配置する必要があり、ディスク タイプは`ssd`であってはなりません。
+次の例は、より複雑な`label_constraints`構成を示しています。このルールでは、レプリカは`bj1`または`bj2`のマシン ルームに配置する必要があり、ディスク タイプは`nvme`である必要があります。
 
 {{< copyable "" >}}
 
@@ -445,13 +445,13 @@ table ttt ranges: (NOTE: key range might be changed after DDL)
   "count": 2,
   "label_constraints": [
     {"key": "zone", "op": "in", "values": ["bj1", "bj2"]},
-    {"key": "disk", "op": "notIn", "values": ["ssd"]}
+    {"key": "disk", "op": "in", "values": ["nvme"]}
   ],
   "location_labels": ["host"]
 }
 ```
 
-### シナリオ 5: テーブルを TiFlash クラスターに移行する {#scenario-5-migrate-a-table-to-the-tiflash-cluster}
+### シナリオ 5: SSD ディスクを持つノードにテーブルを移行する {#scenario-5-migrate-a-table-to-the-nodes-with-ssd-disks}
 
 シナリオ 3 とは異なり、このシナリオでは、既存の構成に基づいて新しいレプリカを追加するのではなく、データ範囲の他の構成を強制的にオーバーライドします。したがって、既存のルールをオーバーライドするには、ルール グループの設定で十分な大きさの`index`値を指定し、 `override` ～ `true`を設定する必要があります。
 
@@ -461,16 +461,16 @@ table ttt ranges: (NOTE: key range might be changed after DDL)
 
 ```json
 {
-  "group_id": "tiflash-override",
-  "id": "learner-replica-table-ttt",
+  "group_id": "ssd-override",
+  "id": "ssd-table-45",
   "start_key": "7480000000000000ff2d5f720000000000fa",
   "end_key": "7480000000000000ff2e00000000000000f8",
   "role": "voter",
   "count": 3,
   "label_constraints": [
-    {"key": "engine", "op": "in", "values": ["tiflash"]}
+    {"key": "disk", "op": "in", "values": ["ssd"]}
   ],
-  "location_labels": ["host"]
+  "location_labels": ["rack", "host"]
 }
 ```
 
@@ -480,7 +480,7 @@ table ttt ranges: (NOTE: key range might be changed after DDL)
 
 ```json
 {
-  "id": "tiflash-override",
+  "id": "ssd-override",
   "index": 1024,
   "override": true,
 }

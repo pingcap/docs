@@ -12,7 +12,7 @@ aliases: ['/tidb-data-migration/']
 ![star](https://img.shields.io/github/stars/pingcap/tiflow?style=for-the-badge&logo=github) ![license](https://img.shields.io/github/license/pingcap/tiflow?style=for-the-badge) ![forks](https://img.shields.io/github/forks/pingcap/tiflow?style=for-the-badge)
 -->
 
-[TiDB データ移行](https://github.com/pingcap/dm) (DM) は統合されたデータ移行タスク管理プラットフォームであり、MySQL 互換データベース (MySQL、MariaDB、 Aurora MySQL など) から TiDB への完全なデータ移行と増分データ レプリケーションをサポートします。データ移行の運用コストを削減し、トラブルシューティング プロセスを簡素化するのに役立ちます。
+[TiDB データ移行](https://github.com/pingcap/tiflow/tree/master/dm) (DM) は統合されたデータ移行タスク管理プラットフォームであり、MySQL 互換データベース (MySQL、MariaDB、 Aurora MySQL など) から TiDB への完全なデータ移行と増分データ レプリケーションをサポートします。データ移行の運用コストを削減し、トラブルシューティング プロセスを簡素化するのに役立ちます。
 
 ## 基本的な機能 {#basic-features}
 

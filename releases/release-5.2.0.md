@@ -317,7 +317,7 @@ Apple M1 チップを搭載した Mac コンピュータでの`tiup playground`�
         -   テーブル スキーマの復元時にTiDB Lightningが「エラー 9007: 書き込み競合」エラーを報告するバグを修正します[#1290](https://github.com/pingcap/br/issues/1290)
         -   TiDB Lightningが int ハンドルのオーバーフローによりデータのインポートに失敗する不具合を修正[#1291](https://github.com/pingcap/br/issues/1291)
         -   ローカル バックエンド モード[#1403](https://github.com/pingcap/br/issues/1403)でのデータ損失により、 TiDB Lightningでチェックサムの不一致エラーが発生する可能性があるバグを修正
-        -   TiDB Lightningがテーブル スキーマを復元しているときに、クラスタ化されたインデックスでライティングの非互換性の問題を修正します[#1362](https://github.com/pingcap/br/issues/1362)
+        -   TiDB Lightningがテーブル スキーマを復元しているときに、クラスタ化されたインデックスでライトニングの非互換性の問題を修正します[#1362](https://github.com/pingcap/br/issues/1362)
 
     -   Dumpling
 

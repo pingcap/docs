@@ -48,7 +48,7 @@ BR は、次の種類のバックアップ ファイルを生成できます。
 
 ### SST ファイルの保存形式 {#storage-format-of-sst-files}
 
--   SST ファイルの保存形式の詳細については、 [Rocksdb BlockBasedTable 形式](https://github.com/facebook/rocksdb/wiki/Rocksdb-BlockBasedTable-Format)を参照してください。
+-   SST ファイルの保存形式の詳細については、 [Rocksdb BlockBasedTable フォーマット](https://github.com/facebook/rocksdb/wiki/Rocksdb-BlockBasedTable-Format)を参照してください。
 -   SST ファイルのバックアップ データのエンコード形式の詳細については、 [テーブル データの Key-Value へのマッピング](/tidb-computing.md#mapping-of-table-data-to-key-value)を参照してください。
 
 ### バックアップファイルの構造 {#backup-file-structure}

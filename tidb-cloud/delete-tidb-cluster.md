@@ -25,7 +25,7 @@ summary: Learn how to delete a TiDB cluster.
 
     > **ノート：**
     >
-    > [開発者層のクラスター](/tidb-cloud/select-cluster-tier.md#developer-tier)の場合、バックアップおよび復元機能は使用できません。 [Dumpling](https://docs.pingcap.com/tidb/stable/dumpling-overview)を使用して、データをバックアップとしてエクスポートできます。
+    > [サーバーレス階層クラスター](/tidb-cloud/select-cluster-tier.md#serverless-tier-beta)の場合、バックアップおよび復元機能は使用できません。 [Dumpling](https://docs.pingcap.com/tidb/stable/dumpling-overview)を使用して、データをバックアップとしてエクスポートできます。
 
 5.  **結果を理解した上で、このクラスターを削除して**ください をクリックします。
 

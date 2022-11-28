@@ -695,7 +695,7 @@ sudo yum -y install numactl
 1.  [TiUP を使用して TiDBクラスタをデプロイする](/production-deployment-using-tiup.md)に従ってクラスターをデプロイし`tidb-test` 。 TiDB クラスターをインストールしている場合は、この手順を省略できます。
 
     ```bash
-    tiup cluster deploy tidb-test v6.1.0 ./topology.yaml --user root [-p] [-i /home/root/.ssh/gcp_rsa]
+    tiup cluster deploy tidb-test v6.1.2 ./topology.yaml --user root [-p] [-i /home/root/.ssh/gcp_rsa]
     ```
 
 2.  `sudo`特権を使用して`tiup cluster exec`コマンドを実行し、 `tidb-test`クラスター内のすべてのターゲット マシンに NUMA をインストールします。

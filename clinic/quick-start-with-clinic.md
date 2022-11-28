@@ -16,7 +16,7 @@ PingCAPクリニックは、Diag クライアント (略して Diag) と Clinic 
 
 > **ノート：**
 >
-> -   データを収集してアップロードする次の方法は、 [TiUP を使用してデプロイされたクラスター](/production-deployment-using-tiup.md)に**のみ**適用されます。 Kubernetes でTiDB Operatorを使用してデプロイされたクラスターについては、 [TiDB TiDB Operator環境向けのPingCAPクリニック](https://docs.pingcap.com/tidb-in-kubernetes/stable/clinic-user-guide)を参照してください。
+> -   データを収集してアップロードする次の方法は、 [TiUP を使用してデプロイされたクラスター](/production-deployment-using-tiup.md)に**のみ**適用されます。 TiDB Operatorを使用して Kubernetes にデプロイされたクラスターについては、 [TiDB TiDB Operator環境向けのPingCAPクリニック](https://docs.pingcap.com/tidb-in-kubernetes/stable/clinic-user-guide)を参照してください。
 > -   PingCAPクリニックによって収集された診断データは、クラスターの問題のトラブルシューティングに**のみ**使用されます。
 
 ## 前提条件 {#prerequisites}
@@ -32,9 +32,9 @@ PingCAPクリニックを利用する前に、Diag をインストールし、�
 2.  クリニック サーバーにログインします。
 
     <SimpleTab groupId="clinicServer">
-     <div label="Clinic Server in the US" value="clinic-us">
+     <div label="Clinic Server for international users" value="clinic-us">
 
-    [米国のクリニックサーバー](https://clinic.pingcap.com)に移動し、[ **TiDB アカウントでサインイン]**を選択して、 TiDB Cloudのログイン ページに入ります。 TiDB Cloudアカウントをお持ちでない場合は、そのページで作成してください。
+    [海外ユーザー向けクリニックサーバー](https://clinic.pingcap.com)に移動し、[ **TiDB アカウントでサインイン]**を選択して、 TiDB Cloudのログイン ページに入ります。 TiDB Cloudアカウントをお持ちでない場合は、そのページで作成してください。
 
     > **ノート：**
     >
@@ -42,9 +42,9 @@ PingCAPクリニックを利用する前に、Diag をインストールし、�
 
     </div>
 
-    <div label="Clinic Server in the Chinese mainland" value="clinic-cn">
+    <div label="Clinic Server for users in the Chinese mainland" value="clinic-cn">
 
-    [中国本土のクリニックサーバー](https://clinic.pingcap.com.cn)に移動し、[ **AskTUG でサインイン] を**選択して、AskTUG コミュニティのログイン ページに入ります。 AskTUG アカウントをお持ちでない場合は、そのページでアカウントを作成してください
+    [中国本土のユーザー向けクリニックサーバー](https://clinic.pingcap.com.cn)に移動し、[ **AskTUG でサインイン] を**選択して、AskTUG コミュニティのログイン ページに入ります。 AskTUG アカウントをお持ちでない場合は、そのページでアカウントを作成してください
 
     </div>
      </SimpleTab>
@@ -80,18 +80,18 @@ PingCAPクリニックを利用する前に、Diag をインストールし、�
     > -   Diag v0.9.0 より前のバージョンでは、データはデフォルトで中国地域の Clinic Server にアップロードされます。これらのバージョンで`region`を設定するには、 `tiup update diag`コマンドを実行して Diag を最新バージョンにアップグレードしてから、Diag で`region`を設定します。
 
     <SimpleTab groupId="clinicServer">
-     <div label="Clinic Server in the US" value="clinic-us">
+     <div label="Clinic Server for international users" value="clinic-us">
 
-    米国の Clinic Server の場合、次のコマンドを使用して`region`から`US`を設定します。
+    海外ユーザー向けに Clinic Server を使用する場合は、次のコマンドを使用して`region` ～ `US`を設定します。
 
     ```bash
     tiup diag config clinic.region US
     ```
 
     </div>
-     <div label="Clinic Server in the Chinese mainland" value="clinic-cn">
+     <div label="Clinic Server for users in the Chinese mainland" value="clinic-cn">
 
-    中国本土の Clinic Server の場合、次のコマンドを使用して`region`から`CN`を設定します。
+    中国本土のユーザーに Clinic Server を使用する場合は、次のコマンドを使用して`region` ～ `CN`を設定します。
 
     ```bash
     tiup diag config clinic.region CN
@@ -154,5 +154,5 @@ PingCAPクリニックを利用する前に、Diag をインストールし、�
 ## 次は何ですか {#what-s-next}
 
 -   [PingCAPクリニックの概要](/clinic/clinic-introduction.md)
--   [PingCAPクリニックを使用した TiDBクラスタのトラブルシューティング](/clinic/clinic-user-guide-for-tiup.md)
+-   [PingCAPクリニックを使用したクラスターのトラブルシューティング](/clinic/clinic-user-guide-for-tiup.md)
 -   [PingCAPクリニックの診断データ](/clinic/clinic-data-instruction-for-tiup.md)

@@ -522,15 +522,15 @@ pt-query-digest --report tidb-slow.log
 
 `wait_time`が非常に大きく、 `process_time`が非常に小さいステートメントは、通常は問題になりません。これは、問題のある実際のステートメントによってステートメントがブロックされ、実行キューで待機する必要があり、応答時間が大幅に長くなるためです。
 
-### <code>admin show slow</code>コマンド {#code-admin-show-slow-code-command}
+### <code>ADMIN SHOW SLOW</code>コマンド {#code-admin-show-slow-code-command}
 
-TiDB ログ ファイルに加えて、次の`admin show slow`コマンドを実行して低速クエリを特定できます。
+TiDB ログ ファイルに加えて、次の`ADMIN SHOW SLOW`コマンドを実行して低速クエリを特定できます。
 
 {{< copyable "" >}}
 
 ```sql
-admin show slow recent N
-admin show slow top [internal | all] N
+ADMIN SHOW SLOW recent N
+ADMIN SHOW SLOW TOP [internal | all] N
 ```
 
 `recent N`は、最近の N 個のスロー クエリ レコードを示します。次に例を示します。
@@ -538,7 +538,7 @@ admin show slow top [internal | all] N
 {{< copyable "" >}}
 
 ```sql
-admin show slow recent 10
+ADMIN SHOW SLOW recent 10
 ```
 
 `top N`は、最近 (数日以内) に最も遅い N 個のクエリ レコードを示します。 `internal`オプションが指定されている場合、返される結果はシステムによって実行される内部 SQL になります。 `all`オプションが指定されている場合、返される結果は内部 SQL と結合されたユーザーの SQL になります。それ以外の場合、このコマンドはユーザーの SQL からスロー クエリ レコードのみを返します。
@@ -546,9 +546,9 @@ admin show slow recent 10
 {{< copyable "" >}}
 
 ```sql
-admin show slow top 3
-admin show slow top internal 3
-admin show slow top all 5
+ADMIN SHOW SLOW top 3
+ADMIN SHOW SLOW top internal 3
+ADMIN SHOW SLOW top all 5
 ```
 
 メモリが限られているため、TiDB は限られた数のスロー クエリ レコードしか保存しません。クエリ コマンドの値`N`がレコード数より大きい場合、返されるレコード数は`N`未満になります。

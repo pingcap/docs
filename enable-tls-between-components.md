@@ -134,7 +134,7 @@ summary: Learn how to enable TLS authentication between TiDB components.
     {{< copyable "" >}}
 
     ```bash
-    tiup ctl pd -u https://127.0.0.1:2379 --cacert /path/to/ca.pem --cert /path/to/client.pem --key /path/to/client-key.pem
+    tiup ctl:<cluster-version> pd -u https://127.0.0.1:2379 --cacert /path/to/ca.pem --cert /path/to/client.pem --key /path/to/client-key.pem
     ```
 
     {{< copyable "" >}}

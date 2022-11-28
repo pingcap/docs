@@ -49,7 +49,7 @@ hide_commit: true
 
 [TiDBクラスタを一時停止または再開する](https://docs.pingcap.com/tidbcloud/pause-or-resume-tidb-cluster)
 
-[API (ベータ) を使用する](https://docs.pingcap.com/tidbcloud/api/v1beta)
+[API (ベータ) を使用する](https://docs.pingcap.com/tidbcloud/api-overview)
 
 </LearningPath>
 
@@ -76,10 +76,6 @@ hide_commit: true
 [ビルトインモニタリング](https://docs.pingcap.com/tidbcloud/built-in-monitoring)
 
 [組み込みアラート](https://docs.pingcap.com/tidbcloud/monitor-built-in-alerting)
-
-[Datadog を使用する](https://docs.pingcap.com/tidbcloud/monitor-datadog-integration)
-
-[Prometheus と Grafana を使用する](https://docs.pingcap.com/tidbcloud/monitor-prometheus-and-grafana-integration)
 
 </LearningPath>
 
@@ -118,6 +114,32 @@ hide_commit: true
 [請求書](https://docs.pingcap.com/tidbcloud/tidb-cloud-billing#invoices)
 
 [クレジット](https://docs.pingcap.com/tidbcloud/tidb-cloud-billing#credits)
+
+</LearningPath>
+
+<LearningPath label="Integrations" icon="cloud4">
+
+[エアバイト](https://docs.pingcap.com/tidbcloud/integrate-tidbcloud-with-airbyte)
+
+[データドッグ](https://docs.pingcap.com/tidbcloud/monitor-datadog-integration)
+
+[dbt](https://docs.pingcap.com/tidbcloud/integrate-tidbcloud-with-dbt)
+
+[プロメテウスとグラファナ](https://docs.pingcap.com/tidbcloud/monitor-prometheus-and-grafana-integration)
+
+[テラフォーム](https://docs.pingcap.com/tidbcloud/terraform-tidbcloud-provider-overview)
+
+[ヴェルセル](https://docs.pingcap.com/tidbcloud/integrate-tidbcloud-with-vercel)
+
+</LearningPath>
+
+<LearningPath label="Reference" icon="cloud-dev">
+
+[システム変数](https://docs.pingcap.com/tidbcloud/system-variables)
+
+[リリースノート](https://docs.pingcap.com/tidbcloud/release-notes-2022)
+
+[SQL リファレンス](https://docs.pingcap.com/tidbcloud/basic-sql-operations)
 
 </LearningPath>
 

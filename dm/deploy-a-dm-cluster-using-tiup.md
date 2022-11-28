@@ -202,7 +202,7 @@ tiup dm display dm-test
 
 予想される出力には、インスタンス ID、ロール、ホスト、リスニング ポート、ステータス (クラスターがまだ開始されていないため、ステータスは`Down` / `inactive`です)、およびディレクトリ情報が含まれます。
 
-## ステップ 6: TiDB クラスターを開始する {#step-6-start-the-tidb-cluster}
+## ステップ 6: DM クラスターを開始する {#step-6-start-the-dm-cluster}
 
 {{< copyable "" >}}
 
@@ -212,7 +212,7 @@ tiup dm start dm-test
 
 出力ログに``Started cluster `dm-test` successfully``が含まれていれば、開始は成功しています。
 
-## ステップ 7: TiDB クラスターの実行ステータスを確認する {#step-7-verify-the-running-status-of-the-tidb-cluster}
+## ステップ 7: DM クラスターの実行ステータスを確認する {#step-7-verify-the-running-status-of-the-dm-cluster}
 
 TiUP を使用して DM クラスタのステータスを確認します。
 

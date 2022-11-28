@@ -31,11 +31,11 @@ TiDB Lightningは TiDB を介さずにデータをインポートするため、
 
 バックエンドは、 TiDB Lightningが解析結果を送信する宛先です。 「バックエンド」とも表記されます。
 
-詳細は[TiDB Lightningバックエンド](/tidb-lightning/tidb-lightning-backends.md)を参照してください。
+詳細は[TiDB Lightningアーキテクチャ](/tidb-lightning/tidb-lightning-overview.md)を参照してください。
 
 <!-- C -->
 
-## ハ {#c}
+## C {#c}
 
 ### チェックポイント {#checkpoint}
 
@@ -51,7 +51,7 @@ TiDB Lightningでは、テーブルのチェックサムは、そのテーブル
 
 すべてのテーブルの[ローカル](/tidb-lightning/tidb-lightning-glossary.md#local-checksum)と[リモート チェックサム](/tidb-lightning/tidb-lightning-glossary.md#remote-checksum)を比較することによるTiDB Lightning [インポートされたデータを検証します](/tidb-lightning/tidb-lightning-faq.md#how-to-ensure-the-integrity-of-the-imported-data) 。いずれかのペアが一致しない場合、プログラムは停止します。 `post-restore.checksum`構成を`false`に設定することで、このチェックをスキップできます。
 
-チェックサムの不一致を適切に処理する方法については、 [よくある質問](/tidb-lightning/tidb-lightning-faq.md#checksum-failed-checksum-mismatched-remote-vs-local)も参照してください。
+チェックサムの不一致を適切に処理する方法については、 [よくある質問](/tidb-lightning/troubleshoot-tidb-lightning.md#checksum-failed-checksum-mismatched-remote-vs-local)も参照してください。
 
 ### Chunk {#chunk}
 
@@ -113,7 +113,7 @@ TiDB Lightningは、エンジンを介してデータを TiKV Importer に転送
 
 読み取り速度とスペース使用量の低下を犠牲にして、書き込み用に TiKV を最適化する構成。
 
-TiDB Lightningは、実行中にインポート モードを自動的に切り替えます。ただし、TiKV がインポート モードで動かなくなった場合は、 `tidb-lightning-ctl` ～ [強制復帰](/tidb-lightning/tidb-lightning-faq.md#why-my-tidb-cluster-is-using-lots-of-cpu-resources-and-running-very-slowly-after-using-tidb-lightning) ～ [ノーマルモード](/tidb-lightning/tidb-lightning-glossary.md#normal-mode)を使用できます。
+TiDB Lightningは、実行中にインポート モードを自動的に切り替えます。ただし、TiKV がインポート モードで動かなくなった場合は、 `tidb-lightning-ctl` ～ [強制復帰](/tidb-lightning/troubleshoot-tidb-lightning.md#the-tidb-cluster-uses-lots-of-cpu-resources-and-runs-very-slowly-after-using-tidb-lightning) ～ [ノーマルモード](/tidb-lightning/tidb-lightning-glossary.md#normal-mode)を使用できます。
 
 ### 索引エンジン {#index-engine}
 

@@ -7,19 +7,9 @@ summary: Learn about what is TiDB Cloud API, its features, and how to use API to
 
 > **ノート：**
 >
-> TiDB Cloud API はまだベータ版であり、リクエストがあった場合にのみ利用できます。リクエストを送信して、API アクセスを申請できます。
->
-> -   TiDB Cloudコンソールの右下隅にある [**ヘルプ**] をクリックします。
-> -   ダイアログで、[**説明**] フィールドに「 TiDB Cloud API に申し込む」と入力し、[<strong>送信</strong>] をクリックします。
->
-> API が利用可能になると、通知用のメールが届きます。
+> [TiDB CloudAPI](https://docs.pingcap.com/tidbcloud/api/v1beta)はベータ版です。
 
-TiDB Cloud API は、 TiDB Cloud内の管理オブジェクトを管理するためのプログラムによるアクセスを提供する[REST インターフェイス](https://en.wikipedia.org/wiki/Representational_state_transfer)です。この API を使用すると、リソースを自動的かつ効率的に管理できます。
-
--   プロジェクト
--   クラスター
--   バックアップ
--   復元する
+TiDB Cloud API は、 TiDB Cloud内の管理オブジェクトを管理するためのプログラムによるアクセスを提供する[REST インターフェイス](https://en.wikipedia.org/wiki/Representational_state_transfer)です。この API を使用すると、プロジェクト、クラスター、バックアップ、復元などのリソースを自動的かつ効率的に管理できます。
 
 API には次の機能があります。
 
@@ -27,7 +17,7 @@ API には次の機能があります。
 -   **HTTPS のみ。** HTTPS 経由でのみ API にアクセスできるため、ネットワーク経由で送信されるすべてのデータは TLS で暗号化されます。
 -   **キーベースのアクセスとダイジェスト認証。** TiDB Cloud API にアクセスする前に、API キーを生成する必要があります。すべてのリクエストは[HTTP ダイジェスト認証](https://en.wikipedia.org/wiki/Digest_access_authentication)によって認証され、API キーがネットワーク経由で送信されないようにします。
 
-TiDB Cloud API の使用を開始するには、次のリソースを参照してください。
+TiDB Cloud API の使用を開始するには、 [TiDB CloudAPI ドキュメント](https://docs.pingcap.com/tidbcloud/api/v1beta)の次のリソースを参照してください。
 
 -   [始めましょう](https://docs.pingcap.com/tidbcloud/api/v1beta#section/Get-Started)
 -   [認証](https://docs.pingcap.com/tidbcloud/api/v1beta#section/Authentication)

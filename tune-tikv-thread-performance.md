@@ -9,7 +9,7 @@ summary: Learn how to tune TiKV thread pools for optimal performance.
 
 ## スレッドプールの紹介 {#thread-pool-introduction}
 
-TiKV スレッド プールは、主に gRPC、Scheduler、UnifyReadPool、Raftstore、StoreWriter、Apply、RocksDB、および CPU をあまり消費しないいくつかのスケジュールされたタスクと検出コンポーネントで構成されます。このドキュメントでは、読み取りおよび書き込み要求のパフォーマンスに影響を与える、CPU を集中的に使用するいくつかのスレッド プールを主に紹介します。
+TiKV スレッド プールは、主に gRPC、Scheduler、UnifyReadPool、Raftstore、StoreWriter、Apply、RocksDB、および CPU をあまり消費しないいくつかのスケジュールされたタスクと検出コンポーネントで構成されています。このドキュメントでは、読み取りおよび書き込み要求のパフォーマンスに影響を与える、CPU を集中的に使用するいくつかのスレッド プールを主に紹介します。
 
 -   gRPC スレッド プール: すべてのネットワーク リクエストを処理し、さまざまなタスク タイプのリクエストをさまざまなスレッド プールに転送します。
 

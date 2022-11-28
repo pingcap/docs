@@ -5,7 +5,7 @@ summary: Learn how to restore data using BR commands
 
 # BR を使用してクラスタデータを復元する {#use-br-to-restore-cluster-data}
 
-このドキュメントでは、次のシナリオで BR を使用してクラスター データを復元する方法について説明します。
+このドキュメントでは、次のシナリオで TiDB クラスター データを復元する方法について説明します。
 
 -   [TiDB クラスターのスナップショットを復元する](#restore-tidb-cluster-snapshots)
 -   [データベースを復元する](#restore-a-database)
@@ -16,10 +16,12 @@ summary: Learn how to restore data using BR commands
 -   [暗号化されたバックアップ データを復元する](#restore-encrypted-backup-data)
 -   [`mysql`スキーマで作成されたテーブルを復元する](#restore-tables-created-in-the-mysql-schema)
 
-バックアップと復元 (BR) に慣れていない場合は、次のドキュメントを読んで、BR の使用原理と方法を完全に理解することをお勧めします。
+バックアップ ツールと復元ツールに慣れていない場合は、次のドキュメントを読んで、これらのツールの使用原理と方法を完全に理解することをお勧めします。
 
 -   [BRの概要](/br/backup-and-restore-overview.md)
 -   [バックアップと復元に BR コマンドラインを使用する](/br/use-br-command-line-tool.md)
+
+Dumpling、CSV ファイル、または Amazon Auroraによって生成された Apache Parquet ファイルによってエクスポートされたデータを復元する必要がある場合は、 TiDB Lightningを使用してデータをインポートし、復元を実装できます。詳細については、 [TiDB Lightningを使用して完全なデータを復元する](/backup-and-restore-using-dumpling-lightning.md#use-tidb-lightning-to-restore-full-data)を参照してください。
 
 ## TiDB クラスターのスナップショットを復元する {#restore-tidb-cluster-snapshots}
 

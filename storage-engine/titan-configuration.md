@@ -20,7 +20,7 @@ Titan は RocksDB と互換性があるため、RocksDB を使用する既存の
         rocksdb.titan.enabled: true
     ```
 
-    構成をリロードすると、TiKV がオンラインでローリング再起動されます。
+    構成をリロードすると、TiKV が動的にローリング再起動されます。
 
     {{< copyable "" >}}
 
@@ -118,7 +118,31 @@ Titan を無効にするには、 `rocksdb.defaultcf.titan.blob-run-mode`オプ�
 -   このオプションが`read-only`に設定されている場合、値のサイズに関係なく、新しく書き込まれたすべての値が RocksDB に書き込まれます。
 -   このオプションが`fallback`に設定されている場合、値のサイズに関係なく、新しく書き込まれたすべての値が RocksDB に書き込まれます。また、Titan blob ファイルに保存されているすべての圧縮された値は、自動的に RocksDB に戻されます。
 
-Titan を無効にするには、 `blob-run-mode = "fallback"`を設定し、tikv-ctl を使用して完全な圧縮を実行します。その後、監視メトリックを確認し、blob ファイルのサイズが`0`に減少することを確認します。その後、 `rocksdb.titan.enabled` ～ `false`を設定して TiKV を再起動できます。
+Titan を無効にするには、次の手順を実行します。
+
+1.  Titan を無効にする TiKV ノードの構成ファイルを更新し、TiKV を再起動します。
+
+    ```toml
+    [rocksdb.defaultcf.titan]
+    blob-run-mode = "fallback"
+    discardable-ratio = 1.0
+    merge-small-file-threshold = "0KB"
+    ```
+
+2.  tikv-ctl を使用して完全な圧縮を実行します。このプロセスは、大量の I/O および CPU リソースを消費します。
+
+    ```shell
+    tikv-ctl --pd <PD_ADDR> compact-cluster --bottommost force
+    ```
+
+3.  圧縮が完了したら、 **TiKV-Details/Titan - kv の**下の<strong>BLOB ファイル数</strong>メトリックが`0`に減少するまで待ちます。
+
+4.  これらの TiKV ノードの構成を更新して、Titan を無効にします。
+
+    ```toml
+    [rocksdb.titan]
+    enabled = false
+    ```
 
 > **警告：**
 >

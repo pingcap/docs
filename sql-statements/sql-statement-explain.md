@@ -184,9 +184,14 @@ EXPLAIN DELETE FROM t1 WHERE c1=3;
 
 出力の内容と形式を指定するには、 `EXPLAIN`ステートメントで`FORMAT = xxx`構文を使用できます。
 
-`FORMAT` in `EXPLAIN`を指定しない場合、または`FORMAT = "row"`を指定する場合、 `EXPLAIN`ステートメントは結果を表形式で出力します。詳細については、 [クエリ実行計画を理解する](/explain-overview.md)を参照してください。
+| フォーマット  | 説明                                                                                                 |
+| ------- | -------------------------------------------------------------------------------------------------- |
+| 空の      | `row`と同じ                                                                                           |
+| `row`   | `EXPLAIN`ステートメントは結果を表形式で出力します。詳細については、 [クエリ実行計画を理解する](/explain-overview.md)を参照してください。              |
+| `brief` | `EXPLAIN`ステートメントの出力のオペレーター ID は、 `FORMAT`が指定されていない場合に比べて単純化されています。                                 |
+| `dot`   | `EXPLAIN`ステートメントは DOT 実行プランを出力します。これは、 `dot`プログラム ( `graphviz`パッケージ内) を介して PNG ファイルを生成するために使用できます。 |
 
-`FORMAT = "brief"` in `EXPLAIN`を指定すると、出力のオペレーター ID は、 `FORMAT`を指定しない場合に比べて単純化されます。
+以下は、 `FORMAT`が`"brief"` in `EXPLAIN`の場合の例です。
 
 {{< copyable "" >}}
 
@@ -211,8 +216,8 @@ MySQL 標準の結果形式に加えて、TiDB は DotGraph もサポートし�
 {{< copyable "" >}}
 
 ```sql
-create table t(a bigint, b bigint);
-desc format = "dot" select A.a, B.b from t A join t B on A.a > B.b where A.a < 10;
+CREATE TABLE t(a bigint, b bigint);
+EXPLAIN format = "dot" SELECT A.a, B.b FROM t A JOIN t B ON A.a > B.b WHERE A.a < 10;
 ```
 
 ```sql
@@ -250,7 +255,7 @@ label = "cop"
 1 row in set (0.00 sec)
 ```
 
-`dot`のプログラム ( `graphviz`パッケージ内) がコンピューターにインストールされている場合、次の方法を使用して PNG ファイルを生成できます。
+コンピュータに`dot`のプログラムがある場合、次の方法を使用して PNG ファイルを生成できます。
 
 ```bash
 dot xx.dot -T png -O
@@ -258,7 +263,7 @@ dot xx.dot -T png -O
 The xx.dot is the result returned by the above statement.
 ```
 
-`dot`のプログラムがコンピューターにインストールされていない場合は、結果を[このウェブサイト](http://www.webgraphviz.com/)にコピーしてツリー図を取得します。
+コンピューターに`dot`のプログラムがない場合は、結果を[このウェブサイト](http://www.webgraphviz.com/)にコピーしてツリー図を取得します。
 
 ![Explain Dot](/media/explain_dot.png)
 

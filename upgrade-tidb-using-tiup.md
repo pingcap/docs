@@ -171,12 +171,12 @@ tiup cluster check <cluster-name> --cluster
 tiup cluster upgrade <cluster-name> <version>
 ```
 
-たとえば、クラスターを v6.1.0 にアップグレードする場合:
+たとえば、クラスターを v6.1.2 にアップグレードする場合:
 
 {{< copyable "" >}}
 
 ```shell
-tiup cluster upgrade <cluster-name> v6.1.0
+tiup cluster upgrade <cluster-name> v6.1.2
 ```
 
 > **ノート：**
@@ -233,7 +233,7 @@ tiup cluster display <cluster-name>
 ```
 Cluster type:       tidb
 Cluster name:       <cluster-name>
-Cluster version:    v6.1.0
+Cluster version:    v6.1.2
 ```
 
 > **ノート：**
@@ -283,7 +283,7 @@ TiUP を使用して、対応するバージョンの`ctl`つのコンポーネ�
 {{< copyable "" >}}
 
 ```shell
-tiup install ctl:v6.1.0
+tiup install ctl:v6.1.2
 ```
 
 ## TiDB 6.1.0 の互換性の変更 {#tidb-6-1-0-compatibility-changes}

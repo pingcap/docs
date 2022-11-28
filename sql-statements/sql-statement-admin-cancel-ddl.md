@@ -6,7 +6,7 @@ category: reference
 
 # 管理者キャンセル DDL {#admin-cancel-ddl}
 
-`ADMIN CANCEL DDL`ステートメントを使用すると、実行中の DDL ジョブをキャンセルできます。 `job_id`は`ADMIN SHOW DDL JOBS`を実行することで見つけることができます。
+`ADMIN CANCEL DDL`ステートメントを使用すると、実行中の DDL ジョブをキャンセルできます。 `job_id`は[`ADMIN SHOW DDL JOBS`](/sql-statements/sql-statement-admin-show-ddl.md)を実行することで見つけることができます。
 
 ## あらすじ {#synopsis}
 
@@ -33,7 +33,7 @@ ADMIN CANCEL DDL JOBS job_id [, job_id] ...;
 > **ノート：**
 >
 > -   この操作のみが DDL ジョブをキャンセルできます。他のすべての操作と環境の変更 (マシンの再起動やクラスターの再起動など) では、これらのジョブをキャンセルできません。
-> -   この操作では、複数の DDL ジョブを同時にキャンセルできます。 `ADMIN SHOW DDL JOBS`ステートメントを使用して、DDL ジョブの ID を取得できます。
+> -   この操作では、複数の DDL ジョブを同時にキャンセルできます。 [`ADMIN SHOW DDL JOBS`](/sql-statements/sql-statement-admin-show-ddl.md)ステートメントを使用して、DDL ジョブの ID を取得できます。
 > -   キャンセルするジョブが終了している場合、キャンセル操作は失敗します。
 
 ## MySQL の互換性 {#mysql-compatibility}

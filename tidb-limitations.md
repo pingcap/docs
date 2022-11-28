@@ -52,9 +52,9 @@ summary: Learn the usage limitations of TiDB.
 
 ## 1 行の制限 {#limitation-on-a-single-row}
 
-| タイプ | 上限  |
-| :-- | :-- |
-| サイズ | 6MB |
+| タイプ | 上限（デフォルト値）                     |
+| :-- | :----------------------------- |
+| サイズ | デフォルトは 6 MiB で、120 MiB に調整できます |
 
 <CustomContent platform="tidb">
 
@@ -64,20 +64,26 @@ summary: Learn the usage limitations of TiDB.
 
 ## 単一列の制限 {#limitation-on-a-single-column}
 
-| タイプ | 上限  |
-| :-- | :-- |
-| サイズ | 6MB |
+| タイプ | 上限（デフォルト値）                     |
+| :-- | :----------------------------- |
+| サイズ | デフォルトは 6 MiB で、120 MiB に調整できます |
 
-## 文字列型の制限 {#limitations-on-string-types}
+<CustomContent platform="tidb">
 
-| タイプ       | 上限       |
-| :-------- | :------- |
-| CHAR      | 256文字    |
-| バイナリ      | 256文字    |
-| VARBINARY | 65535 文字 |
-| VARCHAR   | 16383 文字 |
-| 文章        | 6MB      |
-| BLOB      | 6MB      |
+[`txn-entry-size-limit`](/tidb-configuration-file.md#txn-entry-size-limit-new-in-v50)構成項目でサイズ制限を調整できます。
+
+</CustomContent>
+
+## データ型の制限 {#limitations-on-data-types}
+
+| タイプ       | 上限                             |
+| :-------- | :----------------------------- |
+| CHAR      | 256文字                          |
+| バイナリ      | 256文字                          |
+| VARBINARY | 65535 文字                       |
+| VARCHAR   | 16383 文字                       |
+| 文章        | デフォルトは 6 MiB で、120 MiB に調整できます |
+| BLOB      | デフォルトは 6 MiB で、120 MiB に調整できます |
 
 ## SQL ステートメントの制限 {#limitations-on-sql-statements}
 

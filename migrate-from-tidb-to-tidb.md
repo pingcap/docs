@@ -1,7 +1,7 @@
 ---
 title: Migrate from one TiDB cluster to another TiDB cluster
 summary: Learn how to migrate data from one TiDB cluster to another TiDB cluster.
-aliases: ['/tidb/v6.1/incremental-replication-between-clusters/']
+aliases: ['/tidb/stable/incremental-replication-between-clusters/','/tidb/v6.1/incremental-replication-between-clusters/']
 ---
 
 # ある TiDBクラスタから別の TiDBクラスタに移行する {#migrate-from-one-tidb-cluster-to-another-tidb-cluster}

@@ -7,6 +7,12 @@ summary: Learn about the string functions in TiDB.
 
 TiDB は、 MySQL 5.7で利用可能な[文字列関数](https://dev.mysql.com/doc/refman/5.7/en/string-functions.html)のほとんどと、Oracle 21 で利用可能な[関数](https://docs.oracle.com/en/database/oracle/oracle-database/21/sqlqr/SQL-Functions.html#GUID-93EC62F8-415D-4A7E-B050-5D5B2C127009)のいくつかをサポートしています。
 
+<CustomContent platform="tidb">
+
+Oracle と TiDB の関数と構文の比較については、 [Oracle と TiDB の関数と構文の比較](/oracle-functions-to-tidb.md)を参照してください。
+
+</CustomContent>
+
 ## 対応関数 {#supported-functions}
 
 | 名前                                                                                                                                            | 説明                                                                            |

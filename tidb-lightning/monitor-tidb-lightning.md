@@ -144,16 +144,16 @@ scrape_configs:
     RPC アクションの期間のバケット化されたヒストグラム。ラベル:
 
     -   **request** : 実行される RPC の種類
-        -   `switch_mode` — TiKV ノードをインポート/通常モードに切り替えました
-        -   `open_engine` — エンジン ファイルを開きました
-        -   `write_engine` — データを受信し、エンジンに書き込みました
-        -   `close_engine` — エンジン ファイルを閉じました
-        -   `import_engine` — エンジン ファイルを TiKV クラスターにインポートしました
-        -   `cleanup_engine` — エンジン ファイルを削除しました
-        -   `compact_cluster` — TiKV クラスターを明示的に圧縮
-        -   `upload` — SST ファイルをアップロードしました
-        -   `ingest` — SST ファイルを取り込んだ
-        -   `compact` — TiKV ノードを明示的に圧縮
+        -   `switch_mode` : TiKV ノードをインポート/通常モードに切り替えました
+        -   `open_engine` : エンジン ファイルを開きました
+        -   `write_engine` : データを受信し、エンジンに書き込む
+        -   `close_engine` : エンジン ファイルを閉じました
+        -   `import_engine` : エンジン ファイルを TiKV クラスターにインポートしました
+        -   `cleanup_engine` : エンジン ファイルを削除しました
+        -   `compact_cluster` : TiKV クラスターを明示的に圧縮しました
+        -   `upload` : SST ファイルをアップロードしました
+        -   `ingest` : SST ファイルを取り込みました
+        -   `compact` : TiKV ノードを明示的に圧縮
     -   **result** : RPC の実行結果
         -   `ok`
         -   `error`
@@ -231,11 +231,11 @@ scrape_configs:
     アイドル ワーカーをカウントします。ラベル:
 
     -   **名前**:
-        -   `table` — `table-concurrency`の余り、通常はプロセスが終了するまで 0
-        -   `index` — `index-concurrency`の余り、通常はプロセスが終了するまで 0
-        -   `region` — `region-concurrency`の余り、通常はプロセスが終了するまで 0
-        -   `io` — `io-concurrency`の余り。通常は構成された値 (デフォルトの 5) に近く、0 に近い場合はディスクが遅すぎることを意味します。
-        -   `closed-engine` — クローズされたがまだクリーンアップされていないエンジンの数。通常は index + table-concurrency (デフォルト 8) に近い値です。 0 に近い値は、 TiDB Lightningが TiKV Importer よりも高速であることを意味し、 TiDB Lightningが停止する可能性があります
+        -   `table` : `table-concurrency`の余り、通常はプロセスの最後まで 0
+        -   `index` : `index-concurrency`の余り、通常はプロセスの最後まで 0
+        -   `region` : `region-concurrency`の余り、通常はプロセスの最後まで 0
+        -   `io` : `io-concurrency`の余り。通常は構成された値 (デフォルトの 5) に近く、0 に近い場合はディスクが遅すぎることを意味します。
+        -   `closed-engine` : クローズされたがまだクリーンアップされていないエンジンの数。通常は index + table-concurrency (デフォルト 8) に近い値です。 0 に近い値は、 TiDB Lightningが TiKV Importer よりも高速であることを意味し、 TiDB Lightningが停止する可能性があります
 
 -   **`lightning_kv_encoder`** (カウンター)
 
@@ -252,31 +252,31 @@ scrape_configs:
     処理されたテーブルとそのステータスをカウントします。ラベル:
 
     -   **state** : どのフェーズを完了する必要があるかを示す、テーブルのステータス
-        -   `pending` — まだ処理されていません
-        -   `written` — エンコードされて送信されたすべてのデータ
-        -   `closed` — 対応するすべてのエンジン ファイルが閉じられている
-        -   `imported` — すべてのエンジン ファイルがターゲット クラスタにインポートされました
-        -   `altered_auto_inc` — AUTO_INCREMENT ID が変更されました
-        -   `checksum` — チェックサムが実行されました
-        -   `analyzed` — 統計分析が実行されました
-        -   `completed` — テーブルは完全にインポートされ、検証されました
+        -   `pending` : 未処理
+        -   `written` : すべてのデータをエンコードして送信
+        -   `closed` : 対応するすべてのエンジン ファイルが閉じられている
+        -   `imported` : すべてのエンジン ファイルがターゲット クラスターにインポートされました
+        -   `altered_auto_inc` : AUTO_INCREMENT ID が変更されました
+        -   `checksum` : チェックサムを実行
+        -   `analyzed` : 統計分析が実行されました
+        -   `completed` : テーブルは完全にインポートされ、検証されました
     -   **result** : 現在のフェーズの結果
-        -   `success` — フェーズは正常に完了しました
-        -   `failure` — フェーズは失敗しました (完了しませんでした)
+        -   `success` : フェーズは正常に完了しました
+        -   `failure` : フェーズは失敗しました (完了しませんでした)
 
 -   **`lightning_engines`** (カウンター)
 
     処理されたエンジン ファイルの数とそのステータスをカウントします。ラベル:
 
     -   **state** : エンジンのステータス。どのフェーズを完了する必要があるかを示します
-        -   `pending` — まだ処理されていません
-        -   `written` — エンコードされて送信されたすべてのデータ
-        -   `closed` — エンジン ファイルが閉じられています
-        -   `imported` — エンジン ファイルがターゲット クラスタにインポートされました
-        -   `completed` — エンジンは完全にインポートされました
+        -   `pending` : 未処理
+        -   `written` : すべてのデータをエンコードして送信
+        -   `closed` : エンジン ファイルが閉じられている
+        -   `imported` : エンジン ファイルはターゲット クラスタにインポートされました
+        -   `completed` : エンジンは完全にインポートされました
     -   **result** : 現在のフェーズの結果
-        -   `success` — フェーズは正常に完了しました
-        -   `failure` — フェーズは失敗しました (完了しませんでした)
+        -   `success` : フェーズは正常に完了しました
+        -   `failure` : フェーズは失敗しました (完了しませんでした)
 
 <!---->
 
@@ -285,11 +285,11 @@ scrape_configs:
     処理されたチャンクの数とそのステータスをカウントします。ラベル:
 
     -   **state** : チャンクのステータス。チャンクがどのフェーズにあるかを示します
-        -   `estimated` — (状態ではありません) この値は、現在のタスクのチャンクの総数を示します
-        -   `pending` — ロードされていますが、まだ処理されていません
-        -   `running` — データはエンコードされて送信されています
-        -   `finished` — チャンク全体が処理されました
-        -   `failed` — 処理中にエラーが発生しました
+        -   `estimated` : (状態ではありません) この値は、現在のタスクのチャンクの総数を示します
+        -   `pending` : ロードされていますが、まだ処理されていません
+        -   `running` : データはエンコードされて送信されています
+        -   `finished` : チャンク全体が処理されました
+        -   `failed` : 処理中にエラーが発生しました
 
 -   **`lightning_import_seconds`** (ヒストグラム)
 

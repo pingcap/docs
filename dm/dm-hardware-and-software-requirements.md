@@ -1,9 +1,9 @@
 ---
-title: Software and Hardware Requirements
+title: Software and Hardware Requirements for TiDB Data Migration
 summary: Learn the software and hardware requirements for DM cluster.
 ---
 
-# ソフトウェアとハードウェアの要件 {#software-and-hardware-requirements}
+# TiDB データ移行のソフトウェアおよびハードウェア要件 {#software-and-hardware-requirements-for-tidb-data-migration}
 
 TiDB データ移行 (DM) は、主流の Linux オペレーティング システムをサポートしています。特定のバージョン要件については、次の表を参照してください。
 
@@ -69,5 +69,5 @@ DM は、64 ビットの汎用ハードウェアサーバープラットフォ�
     {{< copyable "" >}}
 
     ```sql
-    select table_name,table_schema,sum(data_length)/1024/1024 as data_length,sum(index_length)/1024/1024 as index_length,sum(data_length+index_length)/1024/1024 as sum from information_schema.tables where table_schema = "${schema_name}" group by table_name,table_schema order by sum  desc limit 5;
+    select table_name,table_schema,sum(data_length)/1024/1024 as data_length,sum(index_length)/1024/1024 as index_length,sum(data_length+index_length)/1024/1024 as sum from information_schema.tables where table_schema = "${schema_name}" group by table_name,table_schema order by sum desc limit 5;
     ```

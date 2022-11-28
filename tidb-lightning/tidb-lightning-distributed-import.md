@@ -5,7 +5,7 @@ summary: Learn the concept, user scenarios, usages, and limitations of importing
 
 # TiDB Lightningを使用してデータを並行してインポートする {#use-tidb-lightning-to-import-data-in-parallel}
 
-v5.3.0 以降、 TiDB Lightningの[ローカル バックエンド モード](/tidb-lightning/tidb-lightning-backends.md#local-backend)は単一テーブルまたは複数テーブルの並列インポートをサポートしています。複数のTiDB Lightningインスタンスを同時に実行することで、異なる単一のテーブルまたは複数のテーブルからデータを並行してインポートできます。このように、 TiDB Lightningは水平方向にスケーリングする機能を提供し、大量のデータのインポートに必要な時間を大幅に短縮します。
+v5.3.0 以降、 TiDB Lightningの[物理インポート モード](/tidb-lightning/tidb-lightning-physical-import-mode.md)は単一テーブルまたは複数テーブルの並列インポートをサポートしています。複数のTiDB Lightningインスタンスを同時に実行することで、異なる単一のテーブルまたは複数のテーブルからデータを並行してインポートできます。このように、 TiDB Lightningは水平方向にスケーリングする機能を提供し、大量のデータのインポートに必要な時間を大幅に短縮します。
 
 技術的な実装では、 TiDB Lightningは各インスタンスのメタデータとインポートされた各テーブルのデータをターゲット TiDB に記録し、異なるインスタンスの Row ID 割り当て範囲、グローバル チェックサムの記録、および TiKV の構成変更と回復を調整します。とPD。
 
@@ -18,9 +18,9 @@ v5.3.0 以降、 TiDB Lightningの[ローカル バックエンド モード](/t
 >
 > -   並列インポートは、TiDB で初期化された空のテーブルのみをサポートし、既存のサービスによって書き込まれたデータを含むテーブルへのデータの移行はサポートしていません。そうしないと、データの不整合が発生する可能性があります。
 >
-> -   並列インポートは通常、ローカル バックエンド モードで使用されます。
+> -   並行輸入は、通常、現物輸入モードで使用されます。
 >
-> -   複数のTiDB Lightningインスタンスを使用して同じターゲットにデータをインポートする場合は、一度に 1 つのバックエンドのみを適用します。たとえば、ローカル バックエンド モードと TiDB バックエンド モードの両方で同時に同じ TiDB クラスターにデータをインポートすることはできません。
+> -   複数のTiDB Lightningインスタンスを使用して同じターゲットにデータをインポートする場合は、一度に 1 つのバックエンドのみを適用します。たとえば、物理インポート モードと論理インポート モードの両方で同時に同じ TiDB クラスターにデータをインポートすることはできません。
 
 ## 考慮事項 {#considerations}
 
@@ -33,7 +33,7 @@ TiDB Lightningを使用したパラレル インポートでは、追加の構�
 
 ### 主キーまたは一意のインデックス間の競合を処理する {#handle-conflicts-between-primary-keys-or-unique-indexes}
 
-[ローカル バックエンド モード](/tidb-lightning/tidb-lightning-backends.md#local-backend)を使用してデータを並行してインポートする場合は、データ ソース間、およびターゲット TiDB クラスター内のテーブル間に主キーまたは一意のインデックスの競合がないこと、およびインポート中にターゲット テーブルにデータが書き込まれないことを確認してください。そうしないと、 TiDB Lightningはインポートされたデータの正確性を保証できず、インポートの完了後にターゲット テーブルに一貫性のないインデックスが含まれます。
+[物理的なインポート モード](/tidb-lightning/tidb-lightning-physical-import-mode.md)を使用してデータを並行してインポートする場合は、データ ソース間、およびターゲット TiDB クラスター内のテーブル間に主キーまたは一意のインデックスの競合がないこと、およびインポート中にターゲット テーブルにデータが書き込まれないことを確認してください。そうしないと、 TiDB Lightningはインポートされたデータの正確性を保証できず、インポートの完了後にターゲット テーブルに一貫性のないインデックスが含まれます。
 
 ### インポートのパフォーマンスを最適化する {#optimize-import-performance}
 
@@ -102,13 +102,6 @@ backend = "local"
 
 # Specify the path for local sorting data.
 sorted-kv-dir = "/path/to/sorted-dir"
-
-# Specify the routes for shard schemas and tables.
-[[routes]]
-schema-pattern = "my_db"
-table-pattern = "my_table_*"
-target-schema = "my_db"
-target-table = "my_table"
 ```
 
 データ ソースが Amazon S3 や GCS などの外部ストレージに保存されている場合は、 [外部ストレージ](/br/backup-and-restore-storages.md)を参照してください。
@@ -126,7 +119,7 @@ nohup tiup tidb-lightning -config tidb-lightning.toml > nohup.out &
 
 並行インポート中、 TiDB Lightningはタスクの開始後に次のチェックを自動的に実行します。
 
--   ローカル ディスク ( `sort-kv-dir`構成で制御) と TiKV クラスターに、データをインポートするための十分なスペースがあるかどうかを確認します。必要なディスク容量については、 [ダウンストリームのストレージ容量要件](/tidb-lightning/tidb-lightning-requirements.md#downstream-storage-space-requirements)および[リソース要件](/tidb-lightning/tidb-lightning-requirements.md#resource-requirements)を参照してください。 TiDB Lightningはデータ ソースをサンプリングし、サンプル結果からインデックス サイズのパーセンテージを推定します。推定にはインデックスが含まれているため、ソース データのサイズがローカル ディスクの使用可能な領域よりも小さい場合がありますが、それでもチェックは失敗します。
+-   ローカル ディスク ( `sort-kv-dir`構成で制御) と TiKV クラスターに、データをインポートするための十分なスペースがあるかどうかを確認します。必要なディスク容量については、 [ダウンストリームのストレージ容量要件](/tidb-lightning/tidb-lightning-requirements.md#storage-space-of-the-target-database)および[リソース要件](/tidb-lightning/tidb-lightning-physical-import-mode.md#environment-requirements)を参照してください。 TiDB Lightningはデータ ソースをサンプリングし、サンプル結果からインデックス サイズのパーセンテージを推定します。推定にはインデックスが含まれているため、ソース データのサイズがローカル ディスクの使用可能な領域よりも小さい場合がありますが、それでもチェックは失敗します。
 -   TiKV クラスター内のリージョンが均等に分散されているかどうか、および空のリージョンが多すぎるかどうかを確認します。空の領域の数が max(1000, テーブル数 * 3) を超える場合、つまり、「1000」または「テーブル数の 3 倍」のいずれか大きい方より大きい場合、インポートは実行できません。
 -   データソースから順番にデータがインポートされているか確認してください。 `mydumper.batch-size`のサイズは、チェックの結果に基づいて自動的に調整されます。したがって、 `mydumper.batch-size`構成は使用できなくなりました。
 

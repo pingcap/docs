@@ -12,6 +12,7 @@ summary: Learn the experimental features of TiDB.
 -   [`PREDICATE COLUMNS`の統計収集のサポート](/statistics.md#collect-statistics-on-some-columns) (v5.4 で導入)
 -   [統計の同期ロードをサポート](/statistics.md#load-statistics) . (v5.4 で導入)
 -   [統計を収集するためのメモリ クォータを制御する](/statistics.md#the-memory-quota-for-collecting-statistics) . (v6.1.0 で導入)
+-   [拡張統計](/extended-statistics.md) . (v5.0.0 で導入)
 -   [統計をすばやく作成するために、約 10000 行のデータをランダムにサンプリングします](/system-variables.md#tidb_enable_fast_analyze) (v3.0 で導入)
 
 ## 安定性 {#stability}
@@ -30,6 +31,7 @@ summary: Learn the experimental features of TiDB.
 -   [ユーザー定義変数](/user-defined-variables.md) (v2.1 で導入)
 -   [JSON データ型](/data-type-json.md)と[JSON関数](/functions-and-operators/json-functions.md) (v2.1 で導入)
 -   [カスケード プランナー](/system-variables.md#tidb_enable_cascades_planner) : カスケード フレームワーク ベースのトップダウン クエリ オプティマイザー (v3.0 で導入)
+-   [テーブルロック](/tidb-configuration-file.md) (v4.0.0 で導入)
 -   [`ALTER TABLE ... COMPACT`](/sql-statements/sql-statement-alter-table-compact.md) (v6.1.0 で導入)
 -   [`ALTER TABLE`を使用して複数の列またはインデックスを変更する](/system-variables.md#tidb_enable_change_multi_schema) (v5.0.0 で導入)
 
@@ -56,3 +58,4 @@ summary: Learn the experimental features of TiDB.
 
 -   [SQL 診断](/information-schema/information-schema-sql-diagnostics.md) (v4.0 で導入)
 -   [クラスタ診断](/dashboard/dashboard-diagnostics-access.md) (v4.0 で導入)
+-   [TiKV-FastTune ダッシュボード](/grafana-tikv-dashboard.md#tikv-fasttune-dashboard) (v4.0 で導入)

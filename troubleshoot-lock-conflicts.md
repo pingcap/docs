@@ -5,21 +5,163 @@ summary: Learn to analyze and resolve lock conflicts in TiDB.
 
 # ロック競合のトラブルシューティング {#troubleshoot-lock-conflicts}
 
-TiDB は完全な分散トランザクションをサポートします。 v3.0 以降、TiDB は楽観的トランザクション モードと悲観的トランザクション モードを提供します。このドキュメントでは、TiDB でのロックの競合をトラブルシューティングして解決する方法を紹介します。
+TiDB は完全な分散トランザクションをサポートします。 v3.0 以降、TiDB は楽観的トランザクション モードと悲観的トランザクション モードを提供します。このドキュメントでは、Lock ビューを使用してロックの問題をトラブルシューティングする方法と、楽観的および悲観的なトランザクションにおける一般的なロック競合の問題に対処する方法について説明します。
 
-## 楽観的なトランザクション モード {#optimistic-transaction-mode}
+## Lock ビューを使用してロックの問題をトラブルシューティングする {#use-lock-view-to-troubleshoot-lock-issues}
 
-TiDB のトランザクションは、Prewrite フェーズと Commit フェーズを含む 2 フェーズ コミット (2PC) を使用します。手順は次のとおりです。
+v5.1 以降、TiDB は Lock ビュー機能をサポートしています。この機能には、 `information_schema`に組み込まれた複数のシステム テーブルがあり、ロックの競合とロックの待機に関する詳細情報を提供します。
 
-![two-phase commit in the optimistic transaction mode](/media/troubleshooting-lock-pic-01.png)
+> **ノート：**
+>
+> 現在、ロックビュー機能は、ペシミスティック ロックの競合および待機情報のみを提供します。
 
-Percolator と TiDB のトランザクションのアルゴリズムの詳細については、 [Google のパーコレーター](https://ai.google/research/pubs/pub36726)を参照してください。
+これらのテーブルの詳細な概要については、次のドキュメントを参照してください。
 
-### 事前書き込みフェーズ (楽観的) {#prewrite-phase-optimistic}
+-   [`TIDB_TRX`および<code>CLUSTER_TIDB_TRX</code>](/information-schema/information-schema-tidb-trx.md) : トランザクションがロック待機状態にあるかどうか、ロック待機時間、トランザクションで実行されたステートメントのダイジェストなど、現在の TiDB ノードまたはクラスター全体で実行中のすべてのトランザクションの情報を提供します。
+-   [`DATA_LOCK_WAITS`](/information-schema/information-schema-data-lock-waits.md) : ブロッキングおよびブロックされたトランザクションの`start_ts` 、ブロックされた SQL ステートメントのダイジェスト、および待機が発生したキーを含む、TiKV の悲観的ロック待機情報を提供します。
+-   [`DEADLOCKS`と<code>CLUSTER_DEADLOCKS</code>](/information-schema/information-schema-deadlocks.md) : 現在の TiDB ノードまたはクラスター全体で最近発生したいくつかのデッドロック イベントの情報を提供します。これには、デッドロック ループ内のトランザクション間の待機関係、トランザクションで現在実行されているステートメントのダイジェスト、およびキーが含まれます。待機が発生する場所。
 
-Prewrite フェーズでは、TiDB はプライマリ ロックとセカンダリ ロックをターゲット キーに追加します。同じターゲット キーにロックを追加する要求が多数ある場合、 出力は書き込み競合や`keyislocked`などのエラーをログに出力し、クライアントに報告します。具体的には、ロックに関連する次のエラーが Prewrite フェーズで発生する可能性があります。
+> **ノート：**
+>
+> ロック ビュー関連のシステム テーブルに示されている SQL ステートメントは、正規化された SQL ステートメント (つまり、形式と引数のない SQL ステートメント) であり、SQL ダイジェストに従って内部クエリによって取得されます。フォーマットと引数。 SQL ダイジェストと正規化された SQL ステートメントの詳細な説明については、 [ステートメント要約表](/statement-summary-tables.md)を参照してください。
 
-#### 読み取りと書き込みの競合 (楽観的) {#read-write-conflict-optimistic}
+次のセクションでは、これらの表を使用していくつかの問題をトラブルシューティングする例を示します。
+
+### デッドロック エラー {#deadlock-errors}
+
+最近のデッドロック エラーの情報を取得するには、 `DEADLOCKS`または`CLUSTER_DEADLOCKS`テーブルにクエリを実行できます。
+
+たとえば、 `DEADLOCKS`テーブルを照会するには、次の SQL ステートメントを実行できます。
+
+{{< copyable "" >}}
+
+```sql
+select * from information_schema.deadlocks;
+```
+
+次に出力例を示します。
+
+```sql
++-------------+----------------------------+-----------+--------------------+------------------------------------------------------------------+-----------------------------------------+----------------------------------------+----------------------------------------------------------------------------------------------------+--------------------+
+| DEADLOCK_ID | OCCUR_TIME                 | RETRYABLE | TRY_LOCK_TRX_ID    | CURRENT_SQL_DIGEST                                               | CURRENT_SQL_DIGEST_TEXT                 | KEY                                    | KEY_INFO                                                                                           | TRX_HOLDING_LOCK   |
++-------------+----------------------------+-----------+--------------------+------------------------------------------------------------------+-----------------------------------------+----------------------------------------+----------------------------------------------------------------------------------------------------+--------------------+
+|           1 | 2021-08-05 11:09:03.230341 |         0 | 426812829645406216 | 22230766411edb40f27a68dadefc63c6c6970d5827f1e5e22fc97be2c4d8350d | update `t` set `v` = ? where `id` = ? ; | 7480000000000000355F728000000000000002 | {"db_id":1,"db_name":"test","table_id":53,"table_name":"t","handle_type":"int","handle_value":"2"} | 426812829645406217 |
+|           1 | 2021-08-05 11:09:03.230341 |         0 | 426812829645406217 | 22230766411edb40f27a68dadefc63c6c6970d5827f1e5e22fc97be2c4d8350d | update `t` set `v` = ? where `id` = ? ; | 7480000000000000355F728000000000000001 | {"db_id":1,"db_name":"test","table_id":53,"table_name":"t","handle_type":"int","handle_value":"1"} | 426812829645406216 |
++-------------+----------------------------+-----------+--------------------+------------------------------------------------------------------+-----------------------------------------+----------------------------------------+----------------------------------------------------------------------------------------------------+--------------------+
+```
+
+上記のクエリ結果は、デッドロックエラーにおける複数のトランザクション間の待ち関係、各トランザクションで現在実行中の SQL 文の正規化された形式 (書式と引数のない文)、競合が発生したキー、および競合の情報を示しています。鍵。
+
+たとえば、上記の例では、最初の行は、ID `426812829645406216`のトランザクションが``update `t` set `v` =? Where `id` =? ;``のようなステートメントを実行しているが、ID `426812829645406217`の別のトランザクションによってブロックされていることを意味します。 ID `426812829645406217`のトランザクションも``update `t` set `v` =? Where `id` =? ;``の形式のステートメントを実行していますが、ID `426812829645406216`のトランザクションによってブロックされています。したがって、2 つのトランザクションはデッドロックを形成します。
+
+### いくつかのホット キーが原因でキューイング ロックが発生する {#a-few-hot-keys-cause-queueing-locks}
+
+`DATA_LOCK_WAITS`システム テーブルは、TiKV ノードのロック待機ステータスを提供します。このテーブルにクエリを実行すると、TiDB はすべての TiKV ノードからリアルタイムのロック待機情報を自動的に取得します。いくつかのホット キーが頻繁にロックされ、多くのトランザクションがブロックされる場合は、 `DATA_LOCK_WAITS`テーブルにクエリを実行し、キーごとに結果を集計して、問題が頻繁に発生するキーを見つけようとすることができます。
+
+{{< copyable "" >}}
+
+```sql
+select `key`, count(*) as `count` from information_schema.data_lock_waits group by `key` order by `count` desc;
+```
+
+次に出力例を示します。
+
+```sql
++----------------------------------------+-------+
+| key                                    | count |
++----------------------------------------+-------+
+| 7480000000000000415F728000000000000001 |     2 |
+| 7480000000000000415F728000000000000002 |     1 |
++----------------------------------------+-------+
+```
+
+不測の事態を避けるために、複数のクエリを作成する必要がある場合があります。
+
+頻繁に問題が発生しているキーがわかっている場合は、そのキーをロックしようとするトランザクションの情報を`TIDB_TRX`または`CLUSTER_TIDB_TRX`のテーブルから取得してみることができます。
+
+`TIDB_TRX`と`CLUSTER_TIDB_TRX`のテーブルに表示される情報は、クエリが実行された時点で実行されているトランザクションの情報でもあることに注意してください。これらのテーブルには、完了したトランザクションの情報は表示されません。多数の同時トランザクションがある場合、クエリの結果セットも大きくなる可能性があります。 `limit`句または`where`句を使用して、ロック待機時間が長いトランザクションをフィルタリングできます。 Lock ビューで複数のテーブルを結合すると、異なるテーブルのデータが同時に取得されない可能性があるため、異なるテーブルの情報が一致しない可能性があることに注意してください。
+
+たとえば、 `where`句を使用してロック待機時間が長いトランザクションをフィルタリングするには、次の SQL ステートメントを実行できます。
+
+{{< copyable "" >}}
+
+```sql
+select trx.* from information_schema.data_lock_waits as l left join information_schema.tidb_trx as trx on l.trx_id = trx.id where l.key = "7480000000000000415F728000000000000001"\G
+```
+
+次に出力例を示します。
+
+```sql
+*************************** 1. row ***************************
+                     ID: 426831815660273668
+             START_TIME: 2021-08-06 07:16:00.081000
+     CURRENT_SQL_DIGEST: 06da614b93e62713bd282d4685fc5b88d688337f36e88fe55871726ce0eb80d7
+CURRENT_SQL_DIGEST_TEXT: update `t` set `v` = `v` + ? where `id` = ? ;
+                  STATE: LockWaiting
+     WAITING_START_TIME: 2021-08-06 07:16:00.087720
+        MEM_BUFFER_KEYS: 0
+       MEM_BUFFER_BYTES: 0
+             SESSION_ID: 77
+                   USER: root
+                     DB: test
+        ALL_SQL_DIGESTS: ["0fdc781f19da1c6078c9de7eadef8a307889c001e05f107847bee4cfc8f3cdf3","06da614b93e62713bd282d4685fc5b88d688337f36e88fe55871726ce0eb80d7"]
+*************************** 2. row ***************************
+                     ID: 426831818019569665
+             START_TIME: 2021-08-06 07:16:09.081000
+     CURRENT_SQL_DIGEST: 06da614b93e62713bd282d4685fc5b88d688337f36e88fe55871726ce0eb80d7
+CURRENT_SQL_DIGEST_TEXT: update `t` set `v` = `v` + ? where `id` = ? ;
+                  STATE: LockWaiting
+     WAITING_START_TIME: 2021-08-06 07:16:09.290271
+        MEM_BUFFER_KEYS: 0
+       MEM_BUFFER_BYTES: 0
+             SESSION_ID: 75
+                   USER: root
+                     DB: test
+        ALL_SQL_DIGESTS: ["0fdc781f19da1c6078c9de7eadef8a307889c001e05f107847bee4cfc8f3cdf3","06da614b93e62713bd282d4685fc5b88d688337f36e88fe55871726ce0eb80d7"]
+2 rows in set (0.00 sec)
+```
+
+### 取引が長時間ブロックされている {#a-transaction-is-blocked-for-a-long-time}
+
+トランザクションが別のトランザクション (または複数のトランザクション) によってブロックされていることがわかっており、現在のトランザクションの`start_ts` (トランザクション ID) がわかっている場合は、次の方法を使用して、ブロックしているトランザクションの情報を取得できます。 Lock ビューで複数のテーブルを結合すると、異なるテーブルのデータが同時に取得されない可能性があるため、異なるテーブルの情報が一致しない可能性があることに注意してください。
+
+{{< copyable "" >}}
+
+```sql
+select l.key, trx.*, tidb_decode_sql_digests(trx.all_sql_digests) as sqls from information_schema.data_lock_waits as l join information_schema.cluster_tidb_trx as trx on l.current_holding_trx_id = trx.id where l.trx_id = 426831965449355272\G
+```
+
+次に出力例を示します。
+
+```sql
+*************************** 1. row ***************************
+                    key: 74800000000000004D5F728000000000000001
+               INSTANCE: 127.0.0.1:10080
+                     ID: 426832040186609668
+             START_TIME: 2021-08-06 07:30:16.581000
+     CURRENT_SQL_DIGEST: 06da614b93e62713bd282d4685fc5b88d688337f36e88fe55871726ce0eb80d7
+CURRENT_SQL_DIGEST_TEXT: update `t` set `v` = `v` + ? where `id` = ? ;
+                  STATE: LockWaiting
+     WAITING_START_TIME: 2021-08-06 07:30:16.592763
+        MEM_BUFFER_KEYS: 1
+       MEM_BUFFER_BYTES: 19
+             SESSION_ID: 113
+                   USER: root
+                     DB: test
+        ALL_SQL_DIGESTS: ["0fdc781f19da1c6078c9de7eadef8a307889c001e05f107847bee4cfc8f3cdf3","a4e28cc182bdd18288e2a34180499b9404cd0ba07e3cc34b6b3be7b7c2de7fe9","06da614b93e62713bd282d4685fc5b88d688337f36e88fe55871726ce0eb80d7"]
+                   sqls: ["begin ;","select * from `t` where `id` = ? for update ;","update `t` set `v` = `v` + ? where `id` = ? ;"]
+1 row in set (0.01 sec)
+```
+
+上記のクエリでは、 `CLUSTER_TIDB_TRX`テーブルの`ALL_SQL_DIGESTS`列に対して[`TIDB_DECODE_SQL_DIGESTS`](/functions-and-operators/tidb-functions.md#tidb_decode_sql_digests)関数が使用されています。この関数は、この列 (値は SQL ダイジェストのセット) を正規化された SQL ステートメントに変換しようとします。これにより、読みやすさが向上します。
+
+現在のトランザクションの`start_ts`が不明な場合は、 `TIDB_TRX` / `CLUSTER_TIDB_TRX`テーブルまたは[`PROCESSLIST` / <code>CLUSTER_PROCESSLIST</code>](/information-schema/information-schema-processlist.md)テーブルの情報から見つけることができます。
+
+## 楽観的ロックの競合のトラブルシューティング {#troubleshoot-optimistic-lock-conflicts}
+
+このセクションでは、オプティミスティック トランザクション モードでの一般的なロック競合の問題の解決策を示します。
+
+### 読み取りと書き込みの競合 {#read-write-conflicts}
 
 TiDBサーバーがクライアントから読み取り要求を受信すると、現在のトランザクションの start_ts として物理時間でグローバルに一意で増加するタイムスタンプを取得します。トランザクションは、start_ts より前の最新のデータ、つまり、start_ts より小さい最新の commit_ts のターゲット キーを読み取る必要があります。トランザクションが、ターゲット キーが別のトランザクションによってロックされていることを検出し、他のトランザクションがどのフェーズにあるかを認識できない場合、読み取りと書き込みの競合が発生します。回路図は以下の通りです：
 
@@ -33,7 +175,7 @@ Txn0 はプリライト フェーズを完了し、コミット フェーズに�
 
     -   Grafana によるデータの監視
 
-        TiDB ダッシュボードの`KV Errors`パネルには、トランザクションの読み取りと書き込みの競合をチェックするために使用できる 2 つのモニタリング メトリック`Lock Resolve OPS`と`KV Backoff OPS`があります。 `not_expired`と`resolve`の両方の値が`Lock Resolve OPS`未満で増加すると、多くの読み取りと書き込みの競合が発生する可能性があります。 `not_expired`の項目は、トランザクションのロックがタイムアウトしていないことを意味します。 `resolve`の項目は、他のトランザクションがロックをクリーンアップしようとしていることを意味します。 `KV Backoff OPS`の下の別の`txnLockFast`項目の値が増加すると、読み取りと書き込みの競合も発生する可能性があります。
+        TiDB ダッシュボードの`KV Errors`パネルでは、 `Lock Resolve OPS`の`not_expired` / `resolve`と`KV Backoff OPS`の`tikvLockFast`が、トランザクションでの読み取りと書き込みの競合を確認するために使用できるモニタリング メトリックです。すべてのメトリックの値が増加する場合は、多くの読み取りと書き込みの競合が発生している可能性があります。 `not_expired`の項目は、トランザクションのロックがタイムアウトしていないことを意味します。 `resolve`の項目は、他のトランザクションがロックをクリーンアップしようとしていることを意味します。 `tikvLockFast`の項目は、読み取りと書き込みの競合が発生することを意味します。
 
         ![KV-backoff-txnLockFast-optimistic](/media/troubleshooting-lock-pic-09.png) ![KV-Errors-resolve-optimistic](/media/troubleshooting-lock-pic-08.png)
 
@@ -79,7 +221,7 @@ Txn0 はプリライト フェーズを完了し、コミット フェーズに�
     row_id: -9223372036854775558
     ```
 
-#### KeyIsLocked エラー {#keyislocked-error}
+### KeyIsLocked エラー {#keyislocked-error}
 
 トランザクションの Prewrite フェーズでは、TiDB は書き込みと書き込みの競合があるかどうかをチェックし、次にターゲット キーが別のトランザクションによってロックされているかどうかをチェックします。キーがロックされている場合、TiKVサーバーは「KeyIsLocked」エラーを出力します。現在、エラー メッセージは TiDB および TiKV のログに出力されません。読み取りと書き込みの競合と同様に、「KeyIsLocked」が発生すると、TiDB は自動的にバックオフを実行し、トランザクションを再試行します。
 
@@ -95,11 +237,7 @@ TiDB ダッシュボードの`KV Errors`パネルには、2 つのモニタリ�
 -   `KV Backoff OPS`に「txnLock」操作が多すぎる場合は、アプリケーション側から書き込み競合の理由を分析することをお勧めします。
 -   アプリケーションが書き込みと書き込みの競合シナリオである場合は、ペシミスティック トランザクション モードを使用することを強くお勧めします。
 
-### コミットフェーズ (楽観的) {#commit-phase-optimistic}
-
-Prewrite フェーズが完了すると、クライアントは commit_ts を取得し、トランザクションは 2PC の次のフェーズである Commit フェーズに進みます。
-
-#### LockNotFound エラー {#locknotfound-error}
+### LockNotFound エラー {#locknotfound-error}
 
 「TxnLockNotFound」のエラー ログは、トランザクションのコミット時間が TTL 時間よりも長く、トランザクションがコミットしようとしているときに、そのロックが他のトランザクションによってロールバックされたことを意味します。 TiDBサーバーがトランザクション コミットの再試行を有効にしている場合、このトランザクションは[tidb_retry_limit](/system-variables.md#tidb_retry_limit)に従って再実行されます。 (明示的トランザクションと暗黙的トランザクションの違いに注意してください。)
 
@@ -131,47 +269,27 @@ Prewrite フェーズが完了すると、クライアントは commit_ts を取
     PD 制御ツールを使用した時間間隔の確認:
 
     ```shell
-    tiup ctl pd tso [start_ts]
-    tiup ctl pd tso [commit_ts]
+    tiup ctl:<cluster-version> pd tso [start_ts]
+    tiup ctl:<cluster-version> pd tso [commit_ts]
     ```
 
 -   トランザクションコミットの効率が悪く、ロックが解除されている可能性があるため、書き込みパフォーマンスが遅いかどうかを確認することをお勧めします。
 
 -   TiDB トランザクションの再試行を無効にする場合は、アプリケーション側で例外をキャッチして再試行する必要があります。
 
-## ペシミスティック トランザクション モード {#pessimistic-transaction-mode}
+## ペシミスティック ロックの競合のトラブルシューティング {#troubleshoot-pessimistic-lock-conflicts}
 
-v3.0.8 より前では、TiDB はデフォルトで楽観的トランザクション モードを使用します。このモードでは、トランザクションの競合がある場合、最新のトランザクションはコミットに失敗します。したがって、アプリケーションはトランザクションの再試行をサポートする必要があります。ペシミスティック トランザクション モードはこの問題を解決し、アプリケーションは回避策のためにロジックを変更する必要はありません。
+このセクションでは、ペシミスティック トランザクション モードでの一般的なロック競合の問題の解決策を示します。
 
-TiDB の悲観的トランザクション モードと楽観的トランザクション モードのコミット フェーズは同じロジックを持ち、両方のコミットは 2PC モードです。悲観的なトランザクションの重要な適応は、DML の実行です。
+> **ノート：**
+>
+> 悲観的トランザクション モードが設定されている場合でも、自動コミット トランザクションは、最初に楽観的モードを使用してコミットを試みます。競合が発生した場合、トランザクションは自動再試行中に悲観的トランザクション モードに切り替わります。
 
-![TiDB pessimistic transaction commit logic](/media/troubleshooting-lock-pic-05.png)
+### 読み取りと書き込みの競合 {#read-write-conflicts}
 
-悲観的なトランザクションは、2PC の前に`Acquire Pessimistic Lock`フェーズを追加します。このフェーズには、次の手順が含まれます。
+エラー メッセージと解決策は、楽観的ロックの競合の[読み取りと書き込みの競合](#read-write-conflicts)と同じです。
 
-1.  (楽観的トランザクション モードと同じ) クライアントから`begin`の要求を受け取り、現在のタイムスタンプがこのトランザクションの start_ts です。
-2.  TiDBサーバーがクライアントから`update`要求を受信すると、TiDB サーバーは TiKVサーバーに対してペシミスティック ロック要求を開始し、ロックは TiKVサーバーに保持されサーバー。
-3.  (楽観的トランザクションモードと同じ) クライアントがコミット要求を送信すると、TiDB は楽観的トランザクションモードと同様に 2PC の実行を開始します。
-
-![Pessimistic transactions in TiDB](/media/troubleshooting-lock-pic-06.png)
-
-詳細については、 [ペシミスティック トランザクション モード](/pessimistic-transaction.md)を参照してください。
-
-### プリライト フェーズ (悲観的) {#prewrite-phase-pessimistic}
-
-トランザクション ペシミスティック モードでは、コミット フェーズは 2PC と同じです。したがって、オプティミスティック トランザクション モードと同様に、読み取りと書き込みの競合も存在します。
-
-#### 読み取りと書き込みの競合 (悲観的) {#read-write-conflict-pessimistic}
-
-[読み取りと書き込みの競合 (楽観的)](#read-write-conflict-optimistic)と同じ。
-
-### コミットフェーズ (悲観的) {#commit-phase-pessimistic}
-
-悲観的なトランザクション モードでは、エラーは`TxnLockNotFound`もありません。代わりに、ペシミスティック ロックは、トランザクションの TTL を`txnheartbeat`まで自動的に更新して、2 番目のトランザクションが最初のトランザクションのロックをクリアしないようにします。
-
-### ロックに関連するその他のエラー {#other-errors-related-to-locks}
-
-#### 悲観的ロックの再試行制限に達しました {#pessimistic-lock-retry-limit-reached}
+### 悲観的ロックの再試行制限に達しました {#pessimistic-lock-retry-limit-reached}
 
 トランザクションの競合が非常に深刻な場合、または書き込みの競合が発生した場合、楽観的なトランザクションは直接終了され、悲観的なトランザクションは、書き込みの競合がなくなるまで、ストレージから最新のデータを使用してステートメントを再試行します。
 
@@ -187,7 +305,7 @@ err="pessimistic lock retry limit reached"
 
 -   上記エラーが多発する場合は、アプリ側からの調整をお勧めします。
 
-#### ロック待機タイムアウトを超えました {#lock-wait-timeout-exceeded}
+### ロック待機タイムアウトを超えました {#lock-wait-timeout-exceeded}
 
 ペシミスティック トランザクション モードでは、トランザクションは互いのロックを待ちます。ロック待ちのタイムアウトは、TiDB の[innodb_lock_wait_timeout](/pessimistic-transaction.md#behaviors)パラメータで定義されます。これは SQL ステートメント レベルでの最大待機ロック時間であり、SQL ステートメント ロックの予想ですが、ロックは取得されていません。この時間が経過すると、TiDB はロックを再試行せず、対応するエラー メッセージをクライアントに返します。
 
@@ -201,7 +319,7 @@ ERROR 1205 (HY000): Lock wait timeout exceeded; try restarting transaction
 
 -   上記エラーが多発する場合は、アプリケーションロジックの調整をお勧めします。
 
-#### TTL マネージャがタイムアウトしました {#ttl-manager-has-timed-out}
+### TTL マネージャがタイムアウトしました {#ttl-manager-has-timed-out}
 
 トランザクションの実行時間は、GC 時間制限を超えることはできません。また、悲観的トランザクションの TTL 時間には上限があり、デフォルト値は 1 時間です。したがって、1 時間以上実行されたペシミスティック トランザクションはコミットに失敗します。このタイムアウトしきい値は、TiDB パラメータ[performance.max-txn-ttl](https://github.com/pingcap/tidb/blob/master/config/config.toml.example)によって制御されます。
 
@@ -216,7 +334,7 @@ TTL manager has timed out, pessimistic locks may expire, please commit or rollba
 -   まず、アプリケーションのロジックが最適化できるか確認します。たとえば、大きなトランザクションは TiDB のトランザクション サイズ制限をトリガーする可能性があり、これは複数の小さなトランザクションに分割される可能性があります。
 -   また、関連するパラメータを適切に調整して、アプリケーションのトランザクション ロジックに適合させることもできます。
 
-#### ロックを取得しようとしたときにデッドロックが見つかりました {#deadlock-found-when-trying-to-get-lock}
+### ロックを取得しようとしたときにデッドロックが見つかりました {#deadlock-found-when-trying-to-get-lock}
 
 2 つ以上のトランザクション間のリソースの競合により、デッドロックが発生します。手動で処理しないと、お互いをブロックしているトランザクションは正常に実行できず、永遠にお互いを待ち合わせます。デッドロックを解決するには、トランザクションの 1 つを手動で終了して、他のトランザクション要求を再開する必要があります。
 
@@ -230,135 +348,3 @@ TTL manager has timed out, pessimistic locks may expire, please commit or rollba
 
 -   v5.1以降のバージョンでデッドロックの原因を確認することが難しい場合は、 `INFORMATION_SCHEMA.DEADLOCKS`または`INFORMATION_SCHEMA.CLUSTER_DEADLOCKS`のシステムテーブルをクエリして、デッドロック待ちチェーンの情報を取得することをお勧めします。詳細については、 [デッドロック エラー](#deadlock-errors)節および[`DEADLOCKS`テーブル](/information-schema/information-schema-deadlocks.md)文書を参照してください。
 -   デッドロックが頻繁に発生する場合は、アプリケーションのトランザクション クエリ ロジックを調整して、そのような発生を減らす必要があります。
-
-### Lock ビューを使用して悲観的ロックに関連する問題をトラブルシューティングする {#use-lock-view-to-troubleshoot-issues-related-to-pessimistic-locks}
-
-v5.1 以降、TiDB は Lock ビュー機能をサポートしています。この機能には、ペシミスティック ロックの競合とペシミスティック ロックの待機に関する詳細情報を提供する`information_schema`に組み込まれた複数のシステム テーブルがあります。これらのテーブルの詳細な概要については、次のドキュメントを参照してください。
-
--   [`TIDB_TRX`および<code>CLUSTER_TIDB_TRX</code>](/information-schema/information-schema-tidb-trx.md) : トランザクションがロック待機状態にあるかどうか、ロック待機時間、トランザクションで実行されたステートメントのダイジェストなど、現在の TiDB ノードまたはクラスター全体で実行中のすべてのトランザクションの情報を提供します。
--   [`DATA_LOCK_WAITS`](/information-schema/information-schema-data-lock-waits.md) : ブロッキングおよびブロックされたトランザクションの`start_ts` 、ブロックされた SQL ステートメントのダイジェスト、および待機が発生したキーを含む、TiKV の悲観的ロック待機情報を提供します。
--   [`DEADLOCKS`と<code>CLUSTER_DEADLOCKS</code>](/information-schema/information-schema-deadlocks.md) : 現在の TiDB ノードまたはクラスター全体で最近発生したいくつかのデッドロック イベントの情報を提供します。これには、デッドロック ループ内のトランザクション間の待機関係、トランザクションで現在実行されているステートメントのダイジェスト、およびキーが含まれます。待機が発生する場所。
-
-> **ノート：**
->
-> ロック ビュー関連のシステム テーブルに示されている SQL ステートメントは、正規化された SQL ステートメント (つまり、形式と引数のない SQL ステートメント) であり、SQL ダイジェストに従って内部クエリによって取得されます。フォーマットと引数。 SQL ダイジェストと正規化された SQL ステートメントの詳細な説明については、 [ステートメント要約表](/statement-summary-tables.md)を参照してください。
-
-次のセクションでは、これらの表を使用していくつかの問題をトラブルシューティングする例を示します。
-
-#### デッドロック エラー {#deadlock-errors}
-
-最近のデッドロック エラーの情報を取得するには、 `DEADLOCKS`または`CLUSTER_DEADLOCKS`テーブルにクエリを実行できます。例えば：
-
-{{< copyable "" >}}
-
-```sql
-select * from information_schema.deadlocks;
-```
-
-```sql
-+-------------+----------------------------+-----------+--------------------+------------------------------------------------------------------+-----------------------------------------+----------------------------------------+----------------------------------------------------------------------------------------------------+--------------------+
-| DEADLOCK_ID | OCCUR_TIME                 | RETRYABLE | TRY_LOCK_TRX_ID    | CURRENT_SQL_DIGEST                                               | CURRENT_SQL_DIGEST_TEXT                 | KEY                                    | KEY_INFO                                                                                           | TRX_HOLDING_LOCK   |
-+-------------+----------------------------+-----------+--------------------+------------------------------------------------------------------+-----------------------------------------+----------------------------------------+----------------------------------------------------------------------------------------------------+--------------------+
-|           1 | 2021-08-05 11:09:03.230341 |         0 | 426812829645406216 | 22230766411edb40f27a68dadefc63c6c6970d5827f1e5e22fc97be2c4d8350d | update `t` set `v` = ? where `id` = ? ; | 7480000000000000355F728000000000000002 | {"db_id":1,"db_name":"test","table_id":53,"table_name":"t","handle_type":"int","handle_value":"2"} | 426812829645406217 |
-|           1 | 2021-08-05 11:09:03.230341 |         0 | 426812829645406217 | 22230766411edb40f27a68dadefc63c6c6970d5827f1e5e22fc97be2c4d8350d | update `t` set `v` = ? where `id` = ? ; | 7480000000000000355F728000000000000001 | {"db_id":1,"db_name":"test","table_id":53,"table_name":"t","handle_type":"int","handle_value":"1"} | 426812829645406216 |
-+-------------+----------------------------+-----------+--------------------+------------------------------------------------------------------+-----------------------------------------+----------------------------------------+----------------------------------------------------------------------------------------------------+--------------------+
-```
-
-上記のクエリ結果は、デッドロックエラーにおける複数のトランザクション間の待ち関係、各トランザクションで現在実行中の SQL 文の正規化された形式 (書式と引数のない文)、競合が発生したキー、および競合の情報を示しています。鍵。
-
-たとえば、上記の例では、最初の行は、ID `426812829645406216`のトランザクションが``update `t` set `v` =? Where `id` =? ;``のようなステートメントを実行しているが、ID `426812829645406217`の別のトランザクションによってブロックされていることを意味します。 ID `426812829645406217`のトランザクションも``update `t` set `v` =? Where `id` =? ;``の形式のステートメントを実行していますが、ID `426812829645406216`のトランザクションによってブロックされています。したがって、2 つのトランザクションはデッドロックを形成します。
-
-#### いくつかのホット キーが原因でキューイング ロックが発生する {#a-few-hot-keys-cause-queueing-locks}
-
-`DATA_LOCK_WAITS`システム テーブルは、TiKV ノードのロック待機ステータスを提供します。このテーブルにクエリを実行すると、TiDB はすべての TiKV ノードからリアルタイムのロック待機情報を自動的に取得します。いくつかのホット キーが頻繁にロックされ、多くのトランザクションがブロックされる場合は、 `DATA_LOCK_WAITS`テーブルにクエリを実行し、キーごとに結果を集計して、問題が頻繁に発生するキーを見つけようとすることができます。
-
-{{< copyable "" >}}
-
-```sql
-select `key`, count(*) as `count` from information_schema.data_lock_waits group by `key` order by `count` desc;
-```
-
-```sql
-+----------------------------------------+-------+
-| key                                    | count |
-+----------------------------------------+-------+
-| 7480000000000000415F728000000000000001 |     2 |
-| 7480000000000000415F728000000000000002 |     1 |
-+----------------------------------------+-------+
-```
-
-不測の事態を避けるために、複数のクエリを作成する必要がある場合があります。
-
-頻繁に問題が発生しているキーがわかっている場合は、そのキーをロックしようとするトランザクションの情報を`TIDB_TRX`または`CLUSTER_TIDB_TRX`のテーブルから取得してみることができます。
-
-`TIDB_TRX`と`CLUSTER_TIDB_TRX`のテーブルに表示される情報は、クエリが実行された時点で実行されているトランザクションの情報でもあることに注意してください。これらのテーブルには、完了したトランザクションの情報は表示されません。多数の同時トランザクションがある場合、クエリの結果セットも大きくなる可能性があります。 `limit`句または`where`句を使用して、ロック待機時間が長いトランザクションを除外できます。 Lock ビューで複数のテーブルを結合すると、異なるテーブルのデータが同時に取得されない可能性があるため、異なるテーブルの情報が一致しない可能性があることに注意してください。
-
-{{< copyable "" >}}
-
-```sql
-select trx.* from information_schema.data_lock_waits as l left join information_schema.tidb_trx as trx on l.trx_id = trx.id where l.key = "7480000000000000415F728000000000000001"\G
-```
-
-```sql
-*************************** 1. row ***************************
-                     ID: 426831815660273668
-             START_TIME: 2021-08-06 07:16:00.081000
-     CURRENT_SQL_DIGEST: 06da614b93e62713bd282d4685fc5b88d688337f36e88fe55871726ce0eb80d7
-CURRENT_SQL_DIGEST_TEXT: update `t` set `v` = `v` + ? where `id` = ? ;
-                  STATE: LockWaiting
-     WAITING_START_TIME: 2021-08-06 07:16:00.087720
-        MEM_BUFFER_KEYS: 0
-       MEM_BUFFER_BYTES: 0
-             SESSION_ID: 77
-                   USER: root
-                     DB: test
-        ALL_SQL_DIGESTS: ["0fdc781f19da1c6078c9de7eadef8a307889c001e05f107847bee4cfc8f3cdf3","06da614b93e62713bd282d4685fc5b88d688337f36e88fe55871726ce0eb80d7"]
-*************************** 2. row ***************************
-                     ID: 426831818019569665
-             START_TIME: 2021-08-06 07:16:09.081000
-     CURRENT_SQL_DIGEST: 06da614b93e62713bd282d4685fc5b88d688337f36e88fe55871726ce0eb80d7
-CURRENT_SQL_DIGEST_TEXT: update `t` set `v` = `v` + ? where `id` = ? ;
-                  STATE: LockWaiting
-     WAITING_START_TIME: 2021-08-06 07:16:09.290271
-        MEM_BUFFER_KEYS: 0
-       MEM_BUFFER_BYTES: 0
-             SESSION_ID: 75
-                   USER: root
-                     DB: test
-        ALL_SQL_DIGESTS: ["0fdc781f19da1c6078c9de7eadef8a307889c001e05f107847bee4cfc8f3cdf3","06da614b93e62713bd282d4685fc5b88d688337f36e88fe55871726ce0eb80d7"]
-2 rows in set (0.00 sec)
-```
-
-#### 取引が長時間ブロックされている {#a-transaction-is-blocked-for-a-long-time}
-
-トランザクションが別のトランザクション (または複数のトランザクション) によってブロックされていることがわかっており、現在のトランザクションの`start_ts` (トランザクション ID) がわかっている場合は、次の方法を使用して、ブロックしているトランザクションの情報を取得できます。 Lock ビューで複数のテーブルを結合すると、異なるテーブルのデータが同時に取得されない可能性があるため、異なるテーブルの情報が一致しない可能性があることに注意してください。
-
-{{< copyable "" >}}
-
-```sql
-select l.key, trx.*, tidb_decode_sql_digests(trx.all_sql_digests) as sqls from information_schema.data_lock_waits as l join information_schema.cluster_tidb_trx as trx on l.current_holding_trx_id = trx.id where l.trx_id = 426831965449355272\G
-```
-
-```sql
-*************************** 1. row ***************************
-                    key: 74800000000000004D5F728000000000000001
-               INSTANCE: 127.0.0.1:10080
-                     ID: 426832040186609668
-             START_TIME: 2021-08-06 07:30:16.581000
-     CURRENT_SQL_DIGEST: 06da614b93e62713bd282d4685fc5b88d688337f36e88fe55871726ce0eb80d7
-CURRENT_SQL_DIGEST_TEXT: update `t` set `v` = `v` + ? where `id` = ? ;
-                  STATE: LockWaiting
-     WAITING_START_TIME: 2021-08-06 07:30:16.592763
-        MEM_BUFFER_KEYS: 1
-       MEM_BUFFER_BYTES: 19
-             SESSION_ID: 113
-                   USER: root
-                     DB: test
-        ALL_SQL_DIGESTS: ["0fdc781f19da1c6078c9de7eadef8a307889c001e05f107847bee4cfc8f3cdf3","a4e28cc182bdd18288e2a34180499b9404cd0ba07e3cc34b6b3be7b7c2de7fe9","06da614b93e62713bd282d4685fc5b88d688337f36e88fe55871726ce0eb80d7"]
-                   sqls: ["begin ;","select * from `t` where `id` = ? for update ;","update `t` set `v` = `v` + ? where `id` = ? ;"]
-1 row in set (0.01 sec)
-```
-
-上記のクエリでは、 `CLUSTER_TIDB_TRX`テーブルの`ALL_SQL_DIGESTS`列に対して[`TIDB_DECODE_SQL_DIGESTS`](/functions-and-operators/tidb-functions.md#tidb_decode_sql_digests)関数が使用されています。この関数は、この列 (値は SQL ダイジェストのセット) を正規化された SQL ステートメントに変換しようとします。これにより、読みやすさが向上します。
-
-現在のトランザクションの`start_ts`が不明な場合は、 `TIDB_TRX` / `CLUSTER_TIDB_TRX`テーブルまたは[`PROCESSLIST` / <code>CLUSTER_PROCESSLIST</code>](/information-schema/information-schema-processlist.md)テーブルの情報から見つけることができます。

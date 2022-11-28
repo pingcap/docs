@@ -50,7 +50,7 @@ TiDB アンシブル バージョン: 2.1.8
 ## ツール {#tools}
 
 -   Lightning 用にテーブルをインポートする順序を最適化して、インポート プロセス中にクラスターで`Checksum`と`Analyze`を実行する大きなテーブルの影響を減らし、 `Checksum`と`Analyze`の成功率を向上させます[#156](https://github.com/pingcap/tidb-lightning/pull/156)
--   KV エンコーダーの追加の解析作業を回避するために、データ ソース ファイルのコンテンツを TiDB の`types.Datum`に直接解析することにより、Lightning のエンコーディング SQL パフォーマンスを 50% 向上させ[#145](https://github.com/pingcap/tidb-lightning/pull/145) 。
+-   KV エンコーダーの追加の解析作業を回避するためにデータ ソース ファイルのコンテンツを TiDB の`types.Datum`に直接解析することにより、Lightning のエンコーディング SQL パフォーマンスを 50% 向上させます[#145](https://github.com/pingcap/tidb-lightning/pull/145)
 -   TiDB Binlog Pumpに`storage.sync-log`の構成項目を追加して、 Pump [#529](https://github.com/pingcap/tidb-binlog/pull/529)で非同期にローカル ストレージのディスクをフラッシュすることをサポートします。
 -   TiDB Binlog PumpとDrainer とDrainer [#530](https://github.com/pingcap/tidb-binlog/pull/530)間の通信のトラフィック圧縮をサポート
 -   TiDB Binlogに`syncer.sql-mode`の構成項目を追加して、異なる`sql-mode`を使用して DDL クエリを解析することをサポートします[#513](https://github.com/pingcap/tidb-binlog/pull/513)

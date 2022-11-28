@@ -24,7 +24,7 @@ DM ワーカー タスクには、リレー ログ、ダンプ処理ユニット
 
 その理論的根拠と機能は、MySQL のリレー ログに似ています。詳細については、 [MySQL リレー ログ](https://dev.mysql.com/doc/refman/5.7/en/replica-logs-relaylog.html)を参照してください。
 
-### ダンプ処理単位 {#dump-processing-unit}
+### ダンプ処理ユニット {#dump-processing-unit}
 
 ダンプ処理ユニットは、上流の MySQL/MariaDB からローカル ディスクに完全なデータをダンプします。
 
@@ -78,7 +78,7 @@ GRANT SELECT ON db1.* TO 'your_user'@'your_wildcard_of_host';
 移行する必要があるデータベースまたはテーブルに対して、次の`GRANT`のステートメントを実行します。
 
 ```sql
-GRANT SELECT,INSERT,UPDATE,DELETE,CREATE,DROP,ALTER,INDEX  ON db.table TO 'your_user'@'your_wildcard_of_host';
+GRANT SELECT,INSERT,UPDATE,DELETE,CREATE,DROP,ALTER,INDEX ON db.table TO 'your_user'@'your_wildcard_of_host';
 ```
 
 ### 各処理ユニットに必要な最小限の特権 {#minimal-privilege-required-by-each-processing-unit}

@@ -1,6 +1,7 @@
 ---
 title: Integrate TiDB with ProxySQL
 summary: Introduce how to integrate TiDB with ProxySQL step by step.
+aliases: ["/tidbcloud/dev-guide-proxysql-integration"]
 ---
 
 # TiDB を ProxySQL と統合する {#integrate-tidb-with-proxysql}
@@ -20,7 +21,7 @@ summary: Introduce how to integrate TiDB with ProxySQL step by step.
 
 <div label="TiDB Cloud" value="tidb-cloud">
 
-[TiDB Cloud(開発者層) で TiDB クラスターを構築する](/develop/dev-guide-build-cluster-in-cloud.md)を参照できます。
+[TiDB Cloud(サーバーレス層) で TiDB クラスターを構築する](/develop/dev-guide-build-cluster-in-cloud.md)を参照できます。
 
 </div>
 
@@ -241,7 +242,7 @@ mysql -u root -h 127.0.0.1 -P 6033 -e "SELECT VERSION()"
 +--------------------+
 | VERSION()          |
 +--------------------+
-| 5.7.25-TiDB-v6.1.0 |
+| 5.7.25-TiDB-v6.1.2 |
 +--------------------+
 ```
 

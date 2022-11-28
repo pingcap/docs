@@ -18,7 +18,7 @@ summary: An overview of the usage of SHOW PROFILES for the TiDB database.
 {{< copyable "" >}}
 
 ```sql
-SHOW PROFILES
+SHOW PROFILES;
 ```
 
 ```

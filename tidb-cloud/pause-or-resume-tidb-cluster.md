@@ -13,11 +13,11 @@ TiDB Cloudでは、常に稼働していないクラスターを簡単に一時�
 
 > **ノート：**
 >
-> [開発者層クラスター](/tidb-cloud/select-cluster-tier.md#developer-tier)を一時停止することはできません。開発者層については[自動ハイバネーションとレジューム](/tidb-cloud/select-cluster-tier.md#automatic-hibernation-and-resuming)を参照してください。
+> [サーバーレス階層クラスター](/tidb-cloud/select-cluster-tier.md#serverless-tier-beta)を一時停止することはできません。
 
 ## 制限事項 {#limitations}
 
--   クラスタが**Normal**状態の場合にのみ、クラスタを一時停止できます。クラスターが<strong>Scaling</strong>などの他の状態にある場合は、クラスターを一時停止する前に、現在の操作が完了するまで待機する必要があります。
+-   クラスターが**AVAILABLE**状態の場合にのみ一時停止できます。クラスターが<strong>MODIFYING</strong>などの他の状態にある場合は、クラスターを一時停止する前に、現在の操作が完了するまで待機する必要があります。
 -   データ インポート タスクの実行中は、クラスターを一時停止できません。インポート タスクが完了するのを待つか、インポート タスクをキャンセルすることができます。
 -   バックアップ ジョブの実行中は、クラスターを一時停止できません。現在のバックアップ ジョブが完了するまで待つか、または[実行中のバックアップ ジョブを削除する](/tidb-cloud/backup-and-restore.md#delete-a-running-backup-job) .
 
@@ -56,7 +56,7 @@ TiDB Cloudでは、常に稼働していないクラスターを簡単に一時�
 
 4.  ダイアログで、[**一時停止**] をクリックして選択を確定します。
 
-TiDB Cloud API を使用してクラスターを一時停止することもできます。現在、 TiDB Cloud API はまだベータ版であり、リクエストがあった場合にのみ利用できます。詳細については、 [TiDB CloudAPI ドキュメント](https://docs.pingcap.com/tidbcloud/api/v1beta)を参照してください。
+TiDB Cloud API を使用してクラスターを一時停止することもできます。現在、 TiDB Cloud API はまだベータ版です。詳細については、 [TiDB CloudAPI ドキュメント](https://docs.pingcap.com/tidbcloud/api/v1beta)を参照してください。
 
 ## TiDB クラスターを再開する {#resume-a-tidb-cluster}
 
@@ -74,8 +74,8 @@ TiDB Cloud API を使用してクラスターを一時停止することもで�
 
     [**クラスターの再開**] ダイアログが表示されます。
 
-3.  ダイアログで、[**再開**] をクリックして選択を確認します。
+3.  ダイアログで、[**再開**] をクリックして選択を確認します。クラスターのステータスは<strong>RESUMING</strong>になります。
 
-クラスターのサイズによっては、クラスターの再開に数分かかる場合があります。クラスターが再開されると、クラスターの状態は**Resuming**から<strong>Normal</strong>に変わります。
+クラスターのサイズによっては、クラスターの再開に数分かかる場合があります。クラスターが再開されると、クラスターの状態は**RESUMING**から<strong>AVAILABLE</strong>に変わります。
 
-TiDB Cloud API を使用してクラスターを再開することもできます。現在、 TiDB Cloud API はまだベータ版であり、リクエストがあった場合にのみ利用できます。詳細については、 [TiDB CloudAPI ドキュメント](https://docs.pingcap.com/tidbcloud/api/v1beta)を参照してください。
+TiDB Cloud API を使用してクラスターを再開することもできます。現在、 TiDB Cloud API はまだベータ版です。詳細については、 [TiDB CloudAPI ドキュメント](https://docs.pingcap.com/tidbcloud/api/v1beta)を参照してください。

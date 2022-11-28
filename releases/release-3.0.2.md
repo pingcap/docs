@@ -59,7 +59,7 @@ TiDB アンシブル バージョン: 3.0.2
     -   TiKV サーバーのポート[#11370](https://github.com/pingcap/tidb/pull/11370)を変更するときのストリーミング クライアントのログ情報の出力を減らします。
     -   ストリーミング クライアントが長時間ブロックされないように、ストリーミング クライアントを TiKVサーバーに再接続するロジックを最適化します[#11372](https://github.com/pingcap/tidb/pull/11372)
     -   `INFORMATION_SCHEMA.TIDB_HOT_REGIONS` [#11350](https://github.com/pingcap/tidb/pull/11350)に`REGION_ID`を加える
-    -   PD API からリージョン情報を取得する際のタイムアウト時間を解除し、リージョン数が多い場合に PD タイムアウトで TiDB API を呼び出した場合にリージョン情報の取得に失敗しないように`http://{TiDBIP}:10080/regions/hot` [#11383](https://github.com/pingcap/tidb/pull/11383)
+    -   リージョン数が多い場合に PD タイムアウトで TiDB API `http://{TiDBIP}:10080/regions/hot`を呼び出した際に、リージョン情報の取得に失敗しないように、PD API からのリージョン情報の取得のタイムアウト時間を解除[#11383](https://github.com/pingcap/tidb/pull/11383)
     -   HTTP API [#11466](https://github.com/pingcap/tidb/pull/11466)で、リージョン関連のリクエストが分割されたテーブル関連のリージョンを返さない問題を修正します。
     -   ユーザーがペシミスティック・ロックを手動で検証する際に、低速操作によってロック・タイムアウトが発生する可能性を減らすには、次の変更を行います[#11521](https://github.com/pingcap/tidb/pull/11521) :
         -   悲観的ロックのデフォルトの TTL を 30 秒から 40 秒に増やします

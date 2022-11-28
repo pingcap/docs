@@ -106,7 +106,7 @@ TiDB を使用して中規模の分析処理用の TiFlash レプリカを読み
 -   デプロイされたクラスターに TiFlash ノードを追加するには、 [TiFlash クラスターをスケールアウトする](/scale-tidb-using-tiup.md#scale-out-a-tiflash-cluster)を参照してください。
 -   [TiFlash クラスターを管理する](/tiflash/maintain-tiflash.md) .
 -   [TiFlash のパフォーマンスを調整する](/tiflash/tune-tiflash-performance.md) .
--   [TiFlash の設定](/tiflash/tiflash-configuration.md) .
+-   [TiFlash の構成](/tiflash/tiflash-configuration.md) .
 -   [TiFlash クラスターを監視する](/tiflash/monitor-tiflash.md) .
 -   学ぶ[TiFlash アラート ルール](/tiflash/tiflash-alert-rules.md) ．
 -   [TiFlash クラスターのトラブルシューティング](/tiflash/troubleshoot-tiflash.md) .

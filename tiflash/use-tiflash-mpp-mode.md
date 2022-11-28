@@ -25,8 +25,7 @@ TiFlash は、MPP モードを使用してクエリを実行することをサ�
 {{< copyable "" >}}
 
 ```sql
-set @@session.tidb_allow_mpp=1;
-set @@session.tidb_enforce_mpp=0;
+set @@session.tidb_allow_mpp=0;
 ```
 
 TiDB のコストベースのオプティマイザに、MPP モードを使用するかどうか (デフォルトで) を自動的に決定させたい場合は、次のステートメントを実行できます。
@@ -58,8 +57,6 @@ set @@session.tidb_enforce_mpp=1;
 > `tidb_enforce_mpp=1`が有効になると、TiDB オプティマイザーはコスト見積もりを無視して MPP モードを選択します。ただし、他の要因が MPP モードをブロックする場合、TiDB は MPP モードを選択しません。これらの要因には、TiFlash レプリカの不在、TiFlash レプリカの未完成の複製、および MPP モードでサポートされていない演算子または関数を含むステートメントが含まれます。
 >
 > コスト見積もり以外の理由で TiDB オプティマイザーが MPP モードを選択できない場合、 `EXPLAIN`ステートメントを使用して実行計画をチェックアウトすると、その理由を説明する警告が返されます。例えば：
->
-> {{< copyable "" >}}
 >
 > ```sql
 > set @@session.tidb_enforce_mpp=1;

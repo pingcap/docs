@@ -1,9 +1,9 @@
 ---
-title: Query Status
+title: Query Task Status in TiDB Data Migration
 summary: Learn how to query the status of a data replication task.
 ---
 
-# クエリのステータス {#query-status}
+# TiDB データ移行でのクエリ タスク ステータス {#query-task-status-in-tidb-data-migration}
 
 このドキュメントでは、 `query-status`コマンドを使用して、DM のタスク ステータスとサブタスク ステータスをクエリする方法を紹介します。
 

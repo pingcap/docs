@@ -32,7 +32,5 @@ TiDB は、 MySQL 5.7で利用可能な[その他の関数](https://dev.mysql.co
 
 | 名前                                                                                                                   | 説明                                                                                              |
 | :------------------------------------------------------------------------------------------------------------------- | :---------------------------------------------------------------------------------------------- |
-| [`GET_LOCK()`](https://dev.mysql.com/doc/refman/5.7/en/miscellaneous-functions.html#function_get-lock)               | 名前付きロックを取得する[TiDB #10929](https://github.com/pingcap/tidb/issues/14994)                         |
-| [`RELEASE_LOCK()`](https://dev.mysql.com/doc/refman/5.7/en/miscellaneous-functions.html#function_release-lock)       | 名前付きロックを解放します[TiDB #10929](https://github.com/pingcap/tidb/issues/14994)                        |
 | [`UUID_SHORT()`](https://dev.mysql.com/doc/refman/5.7/en/miscellaneous-functions.html#function_uuid-short)           | TiDB [TiDB #4620](https://github.com/pingcap/tidb/issues/4620)に存在しない特定の仮定を考慮して、一意の UUID を提供します。 |
 | [`MASTER_WAIT_POS()`](https://dev.mysql.com/doc/refman/5.7/en/miscellaneous-functions.html#function_master-pos-wait) | MySQL レプリケーションに関連                                                                               |

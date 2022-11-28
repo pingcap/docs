@@ -1,18 +1,9 @@
 ---
-title: TiDB Lightning Tutorial
+title: Get Started with TiDB Lightning
 summary: Learn how to deploy TiDB Lightning and import full backup data to TiDB.
 ---
 
-# TiDB Lightningチュートリアル {#tidb-lightning-tutorial}
-
-[TiDB Lightning](https://github.com/pingcap/tidb-lightning)は、大量のデータを TiDB クラスターに高速で完全にインポートするために使用されるツールです。現在、 TiDB Lightningは、SQL または CSV データ ソースを介してエクスポートされた SQL ダンプの読み取りをサポートしています。次の 2 つのシナリオで使用できます。
-
--   **大量**の<strong>新しい</strong>データ<strong>をすばやく</strong>インポート
--   すべてのデータのバックアップと復元
-
-![Architecture of TiDB Lightning tool set](/media/tidb-lightning-architecture.png)
-
-## 前提条件 {#prerequisites}
+# TiDB Lightningを始めよう {#get-started-with-tidb-lightning}
 
 このチュートリアルでは、いくつかの新しいクリーンな CentOS 7 インスタンスを使用することを前提としています。 VMware、VirtualBox、またはその他のツールを使用して、仮想マシンをローカルに展開するか、ベンダー提供のプラットフォームに小規模なクラウド仮想マシンを展開できます。 TiDB Lightningは大量のコンピューター リソースを消費するため、最高のパフォーマンスで実行するには、少なくとも 16 GB のメモリと 32 コアの CPU を割り当てることをお勧めします。
 
@@ -27,7 +18,7 @@ summary: Learn how to deploy TiDB Lightning and import full backup data to TiDB.
 {{< copyable "" >}}
 
 ```sh
-./dumpling -h 127.0.0.1 -P 3306 -u root -t 16 -F 256MB -B test -f 'test.t[12]' -o /data/my_database/
+tiup dumpling -h 127.0.0.1 -P 3306 -u root -t 16 -F 256MB -B test -f 'test.t[12]' -o /data/my_database/
 ```
 
 上記のコマンドで:
@@ -41,7 +32,7 @@ summary: Learn how to deploy TiDB Lightning and import full backup data to TiDB.
 
 ## TiDB Lightningをデプロイ {#deploy-tidb-lightning}
 
-### ステップ 1: TiDB クラスターをデプロイ {#step-1-deploy-tidb-cluster}
+### ステップ 1: TiDB クラスターをデプロイする {#step-1-deploy-a-tidb-cluster}
 
 データをインポートする前に、TiDB クラスターをデプロイする必要があります。このチュートリアルでは、TiDB v5.4.0 を例として使用します。配備方法については、 [TiUP を使用して TiDBクラスタをデプロイする](/production-deployment-using-tiup.md)を参照してください。
 
@@ -57,7 +48,7 @@ TiDB Lightningインストール パッケージはTiDB Toolkitに含まれて�
 
 1.  パッケージ内の`bin/tidb-lightning`と`bin/tidb-lightning-ctl`をTiDB Lightningがデプロイされているサーバーにアップロードします。
 
-2.  [準備されたデータソース](#prepare-full-backup-data)をサーバーにアップロードします。
+2.  [準備されたデータ ソース](#prepare-full-backup-data)をサーバーにアップロードします。
 
 3.  `tidb-lightning.toml`を次のように構成します。
 
@@ -68,7 +59,7 @@ TiDB Lightningインストール パッケージはTiDB Toolkitに含まれて�
     file = "tidb-lightning.log"
 
     [tikv-importer]
-    # Uses the Local-backend
+    # Configure the import mode
     backend = "local"
     # Sets the directory for temporarily storing the sorted key-value pairs.
     # The target directory must be empty.
@@ -99,7 +90,7 @@ TiDB Lightningインストール パッケージはTiDB Toolkitに含まれて�
 
     ```sh
     #!/bin/bash
-    nohup ./tidb-lightning -config tidb-lightning.toml > nohup.out &
+    nohup tiup tidb-lightning -config tidb-lightning.toml > nohup.out &
     ```
 
 ### ステップ 4: データの整合性を確認する {#step-4-check-data-integrity}

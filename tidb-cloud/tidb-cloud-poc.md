@@ -13,7 +13,7 @@ TiDB Cloudは、サービスとしてのデータベース (DBaaS) 製品であ�
 
 PoC に興味がある場合は、始める前に<a href="mailto:tidbcloud-support@pingcap.com">PingCAP</a>にお気軽にお問い合わせください。サポート チームは、テスト計画の作成を支援し、PoC 手順をスムーズに進めることができます。
 
-または、 [開発者層を作成する](/tidb-cloud/tidb-cloud-quickstart.md#step-1-create-a-tidb-cluster) (1 年間の無料試用版) を使用してTiDB Cloudに慣れ、簡単に評価することもできます。開発者層には[特別利用規約](/tidb-cloud/select-cluster-tier.md#developer-tier-special-terms-and-conditions)がいくつかあることに注意してください。
+または、簡単な評価のためにTiDB Cloudに慣れる[サーバーレス層を作成する](/tidb-cloud/tidb-cloud-quickstart.md#step-1-create-a-tidb-cluster)こともできます。サーバーレス層には[特別利用規約](/tidb-cloud/select-cluster-tier.md#serverless-tier-special-terms-and-conditions)があることに注意してください。
 
 ## PoC手順の概要 {#overview-of-the-poc-procedures}
 
@@ -62,8 +62,8 @@ PoC 用の専用クラスターを作成するには、次の手順を実行し�
 
 1.  次のいずれかを実行して、PoC アプリケーション フォームに入力します。
 
-    -   すでに[開発者層を作成しました](/tidb-cloud/tidb-cloud-quickstart.md#step-1-create-a-tidb-cluster)つ (1 年間の無料トライアル) をお持ちの場合は、PoC アプリケーションの送信に関するプロンプト バーがTiDB Cloudコンソールに表示されます。バーの PoC アプリケーション リンクをクリックして、PoC アプリケーション フォームに入力できます。
-    -   Developer Tier をまだ作成していない場合は、 [PoCに申し込む](https://en.pingcap.com/apply-for-poc/)ページに移動して PoC 申請書に記入してください。
+    -   PingCAP Web サイトの[PoCに申し込む](https://pingcap.com/apply-for-poc/)ページに移動して、PoC 申請フォームに記入します。
+    -   [TiDB Cloudコンソール](https://tidbcloud.com/)で、右上隅にある [ **Apply for PoC** ] をクリックして、PoC アプリケーション フォームに入力します。
 
     フォームを送信すると、 TiDB Cloudサポート チームがアプリケーションを確認して連絡し、アプリケーションが承認されたらアカウントにクレジットを転送します。 PingCAP サポート エンジニアに連絡して、PoC 手順をサポートし、PoC が可能な限りスムーズに実行されるようにすることもできます。
 
@@ -87,7 +87,7 @@ PoC 用の専用クラスターを作成するには、次の手順を実行し�
 
 次に、テーブルとインデックスを含むデータベース スキーマを TiDB クラスターにロードできます。
 
-PoC クレジットは数に限りがあるため、クレジットの価値を最大化するために、 TiDB Cloudでの互換性テストおよび事前分析用に[開発者層クラスター](/tidb-cloud/select-cluster-tier.md#developer-tier) (1 年間の無料トライアル) を作成することをお勧めします。
+PoC クレジットは数に限りがあるため、クレジットの価値を最大化するために、 TiDB Cloudでの互換性テストおよび事前分析用に[サーバーレス階層クラスター](/tidb-cloud/select-cluster-tier.md#serverless-tier-beta) (1 年間の無料トライアル) を作成することをお勧めします。
 
 TiDB CloudはMySQL 5.7と高い互換性があります。 MySQL と互換性がある場合、または MySQL と互換性があるように調整できる場合は、TiDB にデータを直接インポートできます。
 
@@ -116,7 +116,7 @@ SQL ステートメントの場合、データ ソースと TiDB との互換性
 
 さまざまな形式のデータをTiDB Cloudにインポートできます。
 
--   [サンプル データを TiDB Dumpling形式でインポートする](/tidb-cloud/import-sample-data.md)
+-   [サンプル データを SQL ファイル形式でインポートする](/tidb-cloud/import-sample-data.md)
 -   [Amazon Aurora MySQL からの移行](/tidb-cloud/migrate-from-aurora-bulk-import.md)
 -   [Amazon S3 または GCS から CSV ファイルをインポートする](/tidb-cloud/import-csv-files.md)
 -   [Apache Parquet ファイルのインポート](/tidb-cloud/import-parquet-files.md)
@@ -124,7 +124,7 @@ SQL ステートメントの場合、データ ソースと TiDB との互換性
 > **ノート：**
 >
 > -   TiDB Cloudでサポートされている文字照合については、 [MySQL 互換データベースからの移行](/tidb-cloud/migrate-data-into-tidb.md)を参照してください。データが元々どのように保存されているかを理解することは非常に役立ちます。
-> -   **[データ インポート タスク]**ページでのデータ インポートでは、追加の請求料金は発生しません。
+> -   データ**インポート**ページでのデータ インポートでは、追加の請求料金は発生しません。
 
 ## ステップ 6. ワークロードを実行して結果を評価する {#step-6-run-your-workload-and-evaluate-results}
 
@@ -137,7 +137,7 @@ SQL ステートメントの場合、データ ソースと TiDB との互換性
 -   クラスタの一般的に使用されるメトリクスは、クラスタの概要ページで確認できます。これには、合計 QPS、レイテンシ、接続、TiFlash リクエスト QPS、TiFlash リクエスト期間、TiFlash ストレージ サイズ、TiKV ストレージ サイズ、TiDB CPU、TiKV CPU、TiKV IO 読み取り、および TiKV IO 書き込み。 [TiDBクラスタを監視する](/tidb-cloud/monitor-tidb-cluster.md)を参照してください。
 -   **[診断] &gt; [ステートメント]**に移動します。ここでは、SQL の実行を観察し、システム テーブルにクエリを実行しなくてもパフォーマンスの問題を簡単に見つけることができます。 [ステートメント分析](/tidb-cloud/tune-performance.md)を参照してください。
 -   **[診断] &gt; [キー ビジュア**ライザー] に移動します。TiDB データ アクセス パターンとデータ ホットスポットを表示できます。 [キー ビジュアライザー](/tidb-cloud/tune-performance.md#key-visualizer)を参照してください。
--   これらのメトリックを独自の Datadog および Prometheus に統合することもできます。 [サードパーティの統合](/tidb-cloud/monitor-tidb-cluster.md#third-party-integrations)を参照してください。
+-   これらのメトリックを独自の Datadog および Prometheus に統合することもできます。 [サードパーティの監視統合](/tidb-cloud/third-party-monitoring-integrations.md)を参照してください。
 
 ここで、テスト結果を評価します。
 
@@ -195,7 +195,7 @@ TiDB Cloudを大規模に試してみたい場合は、 TiDB Cloudが提供す�
 
 TiDB Cloudは、自動バックアップと手動バックアップの 2 種類のデータベース バックアップを提供します。どちらの方法でも、データベース全体がバックアップされます。
 
-データのバックアップと復元にかかる時間は、テーブルの数、ミラー コピーの数、CPU を集中的に使用するレベルなどによって異なります。 1 つの TiKV ノードでのバックアップと復元の速度は、約 50 MB/秒です。
+データのバックアップと復元にかかる時間は、テーブルの数、ミラー コピーの数、および CPU を集中的に使用するレベルによって異なります。 1 つの TiKV ノードでのバックアップと復元の速度は、約 50 MB/秒です。
 
 通常、データベースのバックアップおよび復元操作は CPU を集中的に使用し、常に追加の CPU リソースを必要とします。この環境の CPU 使用率によっては、QPS とトランザクションレイテンシーに影響 (10% から 50%) が生じる可能性があります。
 
@@ -224,8 +224,8 @@ PoC プロセスが完了した後も未使用のクレジットがある場合�
 
 ### 4. PoC を完了するのに 2 週間以上かかることはありますか? {#4-can-i-take-more-than-2-weeks-to-complete-a-poc}
 
-PoC の試用期間を延長したい場合、またはクレジットが不足している場合は、 [PingCAP](https://en.pingcap.com/contact-us/)にお問い合わせください。
+PoC の試用期間を延長したい場合、またはクレジットが不足している場合は、 [お問い合わせ](https://www.pingcap.com/contact-us/)までお問い合わせください。
 
 ### 5. 技術的な問題で立ち往生しています。 PoC のサポートを受けるにはどうすればよいですか? {#5-i-m-stuck-with-a-technical-problem-how-do-i-get-help-for-my-poc}
 
-いつでも[PingCAP](/tidb-cloud/tidb-cloud-support.md)に連絡して助けを求めることができます。
+いつでも助けを求めることができ[TiDB Cloudサポートに連絡する](/tidb-cloud/tidb-cloud-support.md) 。

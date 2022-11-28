@@ -24,9 +24,9 @@ aliases: ['/appdev/dev/for-hibernate-orm','/tidb/stable/dev-guide-outdated-for-h
 
 以下にTiDBクラスターの起動方法を紹介します。
 
-**TiDB Cloudの無料クラスターを使用する**
+**TiDB Cloud Tier クラスターを使用する**
 
-詳細な手順については、 [無料のクラスターを作成する](/develop/dev-guide-build-cluster-in-cloud.md#step-1-create-a-free-cluster)を参照してください。
+詳細な手順については、 [サーバーレス層クラスターを作成する](/develop/dev-guide-build-cluster-in-cloud.md#step-1-create-a-serverless-tier-cluster)を参照してください。
 
 **ローカル クラスターを使用する**
 
@@ -36,7 +36,7 @@ aliases: ['/appdev/dev/for-hibernate-orm','/tidb/stable/dev-guide-outdated-for-h
 
 <CustomContent platform="tidb-cloud">
 
-[無料のクラスターを作成する](/develop/dev-guide-build-cluster-in-cloud.md#step-1-create-a-free-cluster)を参照してください。
+[サーバーレス層クラスターを作成する](/develop/dev-guide-build-cluster-in-cloud.md#step-1-create-a-serverless-tier-cluster)を参照してください。
 
 </CustomContent>
 
@@ -49,482 +49,6 @@ git clone https://github.com/pingcap-inc/tidb-example-java.git
 ```
 
 <SimpleTab groupId="language">
-
-<div label="Using JDBC" value="jdbc">
-
-`plain-java-jdbc`ディレクトリに移動します。
-
-{{< copyable "" >}}
-
-```shell
-cd plain-java-jdbc
-```
-
-このディレクトリの構造は次のとおりです。
-
-```
-.
-├── Makefile
-├── plain-java-jdbc.iml
-├── pom.xml
-└── src
-    └── main
-        ├── java
-        │   └── com
-        │       └── pingcap
-        │            └── JDBCExample.java
-        └── resources
-            └── dbinit.sql
-```
-
-テーブル作成の初期化ステートメントは`dbinit.sql`にあります。
-
-{{< copyable "" >}}
-
-```sql
-USE test;
-DROP TABLE IF EXISTS player;
-
-CREATE TABLE player (
-    `id` VARCHAR(36),
-    `coins` INTEGER,
-    `goods` INTEGER,
-   PRIMARY KEY (`id`)
-);
-```
-
-`JDBCExample.java`は`plain-java-jdbc`の本体です。 TiDB は MySQL プロトコルとの互換性が高いため、MySQL ソース インスタンス`MysqlDataSource`を初期化して TiDB に接続する必要があります。次に、オブジェクト管理用に`PlayerDAO`を初期化し、それを使用してデータの読み取り、編集、追加、および削除を行うことができます。
-
-`PlayerDAO`はデータを管理するためのクラスで、 `DAO`は[データ アクセス オブジェクト](https://en.wikipedia.org/wiki/Data_access_object)を意味します。このクラスは、データを書き込む機能を提供する一連のデータ操作メソッドを定義します。
-
-`PlayerBean`は、テーブルのマッピングであるデータ エンティティ クラスです。 `PlayerBean`の各プロパティは、 `player`テーブルのフィールドに対応します。
-
-{{< copyable "" >}}
-
-```java
-package com.pingcap;
-
-import com.mysql.cj.jdbc.MysqlDataSource;
-
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.*;
-
-/**
- * Main class for the basic JDBC example.
- **/
-public class JDBCExample
-{
-    public static class PlayerBean {
-        private String id;
-        private Integer coins;
-        private Integer goods;
-
-        public PlayerBean() {
-        }
-
-        public PlayerBean(String id, Integer coins, Integer goods) {
-            this.id = id;
-            this.coins = coins;
-            this.goods = goods;
-        }
-
-        public String getId() {
-            return id;
-        }
-
-        public void setId(String id) {
-            this.id = id;
-        }
-
-        public Integer getCoins() {
-            return coins;
-        }
-
-        public void setCoins(Integer coins) {
-            this.coins = coins;
-        }
-
-        public Integer getGoods() {
-            return goods;
-        }
-
-        public void setGoods(Integer goods) {
-            this.goods = goods;
-        }
-
-        @Override
-        public String toString() {
-            return String.format("    %-8s => %10s\n    %-8s => %10s\n    %-8s => %10s\n",
-                    "id", this.id, "coins", this.coins, "goods", this.goods);
-        }
-    }
-
-    /**
-     * Data access object used by 'ExampleDataSource'.
-     * Example for CURD and bulk insert.
-     */
-    public static class PlayerDAO {
-        private final MysqlDataSource ds;
-        private final Random rand = new Random();
-
-        PlayerDAO(MysqlDataSource ds) {
-            this.ds = ds;
-        }
-
-        /**
-         * Create players by passing in a List of PlayerBean.
-         *
-         * @param players Will create players list
-         * @return The number of create accounts
-         */
-        public int createPlayers(List<PlayerBean> players){
-            int rows = 0;
-
-            Connection connection = null;
-            PreparedStatement preparedStatement = null;
-            try {
-                connection = ds.getConnection();
-                preparedStatement = connection.prepareStatement("INSERT INTO player (id, coins, goods) VALUES (?, ?, ?)");
-            } catch (SQLException e) {
-                System.out.printf("[createPlayers] ERROR: { state => %s, cause => %s, message => %s }\n",
-                        e.getSQLState(), e.getCause(), e.getMessage());
-                e.printStackTrace();
-
-                return -1;
-            }
-
-            try {
-                for (PlayerBean player : players) {
-                    preparedStatement.setString(1, player.getId());
-                    preparedStatement.setInt(2, player.getCoins());
-                    preparedStatement.setInt(3, player.getGoods());
-
-                    preparedStatement.execute();
-                    rows += preparedStatement.getUpdateCount();
-                }
-            } catch (SQLException e) {
-                System.out.printf("[createPlayers] ERROR: { state => %s, cause => %s, message => %s }\n",
-                        e.getSQLState(), e.getCause(), e.getMessage());
-                e.printStackTrace();
-            } finally {
-                try {
-                    connection.close();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-            }
-
-            System.out.printf("\n[createPlayers]:\n    '%s'\n", preparedStatement);
-            return rows;
-        }
-
-        /**
-         * Buy goods and transfer funds between one player and another in one transaction.
-         * @param sellId Sell player id.
-         * @param buyId Buy player id.
-         * @param amount Goods amount, if sell player has not enough goods, the trade will break.
-         * @param price Price should pay, if buy player has not enough coins, the trade will break.
-         *
-         * @return The number of effected players.
-         */
-        public int buyGoods(String sellId, String buyId, Integer amount, Integer price) {
-            int effectPlayers = 0;
-
-            Connection connection = null;
-            try {
-                connection = ds.getConnection();
-            } catch (SQLException e) {
-                System.out.printf("[buyGoods] ERROR: { state => %s, cause => %s, message => %s }\n",
-                        e.getSQLState(), e.getCause(), e.getMessage());
-                e.printStackTrace();
-                return effectPlayers;
-            }
-
-            try {
-                connection.setAutoCommit(false);
-
-                PreparedStatement playerQuery = connection.prepareStatement("SELECT * FROM player WHERE id=? OR id=? FOR UPDATE");
-                playerQuery.setString(1, sellId);
-                playerQuery.setString(2, buyId);
-                playerQuery.execute();
-
-                PlayerBean sellPlayer = null;
-                PlayerBean buyPlayer = null;
-
-                ResultSet playerQueryResultSet = playerQuery.getResultSet();
-                while (playerQueryResultSet.next()) {
-                    PlayerBean player =  new PlayerBean(
-                            playerQueryResultSet.getString("id"),
-                            playerQueryResultSet.getInt("coins"),
-                            playerQueryResultSet.getInt("goods")
-                    );
-
-                    System.out.println("\n[buyGoods]:\n    'check goods and coins enough'");
-                    System.out.println(player);
-
-                    if (sellId.equals(player.getId())) {
-                        sellPlayer = player;
-                    } else {
-                        buyPlayer = player;
-                    }
-                }
-
-                if (sellPlayer == null || buyPlayer == null) {
-                    throw new SQLException("player not exist.");
-                }
-
-                if (sellPlayer.getGoods().compareTo(amount) < 0) {
-                    throw new SQLException(String.format("sell player %s goods not enough.", sellId));
-                }
-
-                if (buyPlayer.getCoins().compareTo(price) < 0) {
-                    throw new SQLException(String.format("buy player %s coins not enough.", buyId));
-                }
-
-                PreparedStatement transfer = connection.prepareStatement("UPDATE player set goods = goods + ?, coins = coins + ? WHERE id=?");
-                transfer.setInt(1, -amount);
-                transfer.setInt(2, price);
-                transfer.setString(3, sellId);
-                transfer.execute();
-                effectPlayers += transfer.getUpdateCount();
-
-                transfer.setInt(1, amount);
-                transfer.setInt(2, -price);
-                transfer.setString(3, buyId);
-                transfer.execute();
-                effectPlayers += transfer.getUpdateCount();
-
-                connection.commit();
-
-                System.out.println("\n[buyGoods]:\n    'trade success'");
-            } catch (SQLException e) {
-                System.out.printf("[buyGoods] ERROR: { state => %s, cause => %s, message => %s }\n",
-                        e.getSQLState(), e.getCause(), e.getMessage());
-
-                try {
-                    System.out.println("[buyGoods] Rollback");
-
-                    connection.rollback();
-                } catch (SQLException ex) {
-                    // do nothing
-                }
-            } finally {
-                try {
-                    connection.close();
-                } catch (SQLException e) {
-                    // do nothing
-                }
-            }
-
-            return effectPlayers;
-        }
-
-        /**
-         * Get the player info by id.
-         *
-         * @param id Player id.
-         * @return The player of this id.
-         */
-        public PlayerBean getPlayer(String id) {
-            PlayerBean player = null;
-
-            try (Connection connection = ds.getConnection()) {
-                PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM player WHERE id = ?");
-                preparedStatement.setString(1, id);
-                preparedStatement.execute();
-
-                ResultSet res = preparedStatement.executeQuery();
-                if(!res.next()) {
-                    System.out.printf("No players in the table with id %s", id);
-                } else {
-                    player = new PlayerBean(res.getString("id"), res.getInt("coins"), res.getInt("goods"));
-                }
-            } catch (SQLException e) {
-                System.out.printf("PlayerDAO.getPlayer ERROR: { state => %s, cause => %s, message => %s }\n",
-                        e.getSQLState(), e.getCause(), e.getMessage());
-            }
-
-            return player;
-        }
-
-        /**
-         * Insert randomized account data (id, coins, goods) using the JDBC fast path for
-         * bulk inserts.  The fastest way to get data into TiDB is using the
-         * TiDB Lightning(https://docs.pingcap.com/tidb/stable/tidb-lightning-overview).
-         * However, if you must bulk insert from the application using INSERT SQL, the best
-         * option is the method shown here. It will require the following:
-         *
-         *    Add `rewriteBatchedStatements=true` to your JDBC connection settings.
-         *    Setting rewriteBatchedStatements to true now causes CallableStatements
-         *    with batched arguments to be re-written in the form "CALL (...); CALL (...); ..."
-         *    to send the batch in as few client/server round trips as possible.
-         *    https://dev.mysql.com/doc/relnotes/connector-j/5.1/en/news-5-1-3.html
-         *
-         *    You can see the `rewriteBatchedStatements` param effect logic at
-         *    implement function: `com.mysql.cj.jdbc.StatementImpl.executeBatchUsingMultiQueries`
-         *
-         * @param total Add players amount.
-         * @param batchSize Bulk insert size for per batch.
-         *
-         * @return The number of new accounts inserted.
-         */
-        public int bulkInsertRandomPlayers(Integer total, Integer batchSize) {
-            int totalNewPlayers = 0;
-
-            try (Connection connection = ds.getConnection()) {
-                // We're managing the commit lifecycle ourselves, so we can
-                // control the size of our batch inserts.
-                connection.setAutoCommit(false);
-
-                // In this example we are adding 500 rows to the database,
-                // but it could be any number.  What's important is that
-                // the batch size is 128.
-                try (PreparedStatement pstmt = connection.prepareStatement("INSERT INTO player (id, coins, goods) VALUES (?, ?, ?)")) {
-                    for (int i=0; i<=(total/batchSize);i++) {
-                        for (int j=0; j<batchSize; j++) {
-                            String id = UUID.randomUUID().toString();
-                            pstmt.setString(1, id);
-                            pstmt.setInt(2, rand.nextInt(10000));
-                            pstmt.setInt(3, rand.nextInt(10000));
-                            pstmt.addBatch();
-                        }
-
-                        int[] count = pstmt.executeBatch();
-                        totalNewPlayers += count.length;
-                        System.out.printf("\nPlayerDAO.bulkInsertRandomPlayers:\n    '%s'\n", pstmt);
-                        System.out.printf("    => %s row(s) updated in this batch\n", count.length);
-                    }
-                    connection.commit();
-                } catch (SQLException e) {
-                    System.out.printf("PlayerDAO.bulkInsertRandomPlayers ERROR: { state => %s, cause => %s, message => %s }\n",
-                            e.getSQLState(), e.getCause(), e.getMessage());
-                }
-            } catch (SQLException e) {
-                System.out.printf("PlayerDAO.bulkInsertRandomPlayers ERROR: { state => %s, cause => %s, message => %s }\n",
-                        e.getSQLState(), e.getCause(), e.getMessage());
-            }
-            return totalNewPlayers;
-        }
-
-
-        /**
-         * Print a subset of players from the data store by limit.
-         *
-         * @param limit Print max size.
-         */
-        public void printPlayers(Integer limit) {
-            try (Connection connection = ds.getConnection()) {
-                PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM player LIMIT ?");
-                preparedStatement.setInt(1, limit);
-                preparedStatement.execute();
-
-                ResultSet res = preparedStatement.executeQuery();
-                while (!res.next()) {
-                    PlayerBean player = new PlayerBean(res.getString("id"),
-                            res.getInt("coins"), res.getInt("goods"));
-                    System.out.println("\n[printPlayers]:\n" + player);
-                }
-            } catch (SQLException e) {
-                System.out.printf("PlayerDAO.printPlayers ERROR: { state => %s, cause => %s, message => %s }\n",
-                        e.getSQLState(), e.getCause(), e.getMessage());
-            }
-        }
-
-
-        /**
-         * Count players from the data store.
-         *
-         * @return All players count
-         */
-        public int countPlayers() {
-            int count = 0;
-
-            try (Connection connection = ds.getConnection()) {
-                PreparedStatement preparedStatement = connection.prepareStatement("SELECT count(*) FROM player");
-                preparedStatement.execute();
-
-                ResultSet res = preparedStatement.executeQuery();
-                if(res.next()) {
-                    count = res.getInt(1);
-                }
-            } catch (SQLException e) {
-                System.out.printf("PlayerDAO.countPlayers ERROR: { state => %s, cause => %s, message => %s }\n",
-                        e.getSQLState(), e.getCause(), e.getMessage());
-            }
-
-            return count;
-        }
-    }
-
-    public static void main(String[] args) {
-        // 1. Configure the example database connection.
-
-        // 1.1 Create a mysql data source instance.
-        MysqlDataSource mysqlDataSource = new MysqlDataSource();
-
-        // 1.2 Set server name, port, database name, username and password.
-        mysqlDataSource.setServerName("localhost");
-        mysqlDataSource.setPortNumber(4000);
-        mysqlDataSource.setDatabaseName("test");
-        mysqlDataSource.setUser("root");
-        mysqlDataSource.setPassword("");
-
-        // Or you can use jdbc string instead.
-        // mysqlDataSource.setURL("jdbc:mysql://{host}:{port}/test?user={user}&password={password}");
-
-        // 2. And then, create DAO to manager your data.
-        PlayerDAO dao = new PlayerDAO(mysqlDataSource);
-
-        // 3. Run some simple example.
-
-        // Create a player, has a coin and a goods.
-        dao.createPlayers(Collections.singletonList(new PlayerBean("test", 1, 1)));
-
-        // Get a player.
-        PlayerBean testPlayer = dao.getPlayer("test");
-        System.out.printf("PlayerDAO.getPlayer:\n    => id: %s\n    => coins: %s\n    => goods: %s\n",
-                testPlayer.getId(), testPlayer.getCoins(), testPlayer.getGoods());
-
-        // Create players with bulk inserts, insert 1919 players totally, and per batch for 114 players.
-        int addedCount = dao.bulkInsertRandomPlayers(1919, 114);
-        System.out.printf("PlayerDAO.bulkInsertRandomPlayers:\n    => %d total inserted players\n", addedCount);
-
-        // Count players amount.
-        int count = dao.countPlayers();
-        System.out.printf("PlayerDAO.countPlayers:\n    => %d total players\n", count);
-
-        // Print 3 players.
-        dao.printPlayers(3);
-
-        // 4. Getting further.
-
-        // Player 1: id is "1", has only 100 coins.
-        // Player 2: id is "2", has 114514 coins, and 20 goods.
-        PlayerBean player1 = new PlayerBean("1", 100, 0);
-        PlayerBean player2 = new PlayerBean("2", 114514, 20);
-
-        // Create two players "by hand", using the INSERT statement on the backend.
-        addedCount = dao.createPlayers(Arrays.asList(player1, player2));
-        System.out.printf("PlayerDAO.createPlayers:\n    => %d total inserted players\n", addedCount);
-
-        // Player 1 wants to buy 10 goods from player 2.
-        // It will cost 500 coins, but player 1 can't afford it.
-        System.out.println("\nPlayerDAO.buyGoods:\n    => this trade will fail");
-        int updatedCount = dao.buyGoods(player2.getId(), player1.getId(), 10, 500);
-        System.out.printf("PlayerDAO.buyGoods:\n    => %d total update players\n", updatedCount);
-
-        // So player 1 have to reduce his incoming quantity to two.
-        System.out.println("\nPlayerDAO.buyGoods:\n    => this trade will success");
-        updatedCount = dao.buyGoods(player2.getId(), player1.getId(), 2, 100);
-        System.out.printf("PlayerDAO.buyGoods:\n    => %d total update players\n", updatedCount);
-    }
-}
-```
-
-</div>
 
 <div label="Using Mybatis (Recommended)" value="mybatis">
 
@@ -1412,6 +936,482 @@ public class HibernateExample
 
 </div>
 
+<div label="Using JDBC" value="jdbc">
+
+`plain-java-jdbc`ディレクトリに移動します。
+
+{{< copyable "" >}}
+
+```shell
+cd plain-java-jdbc
+```
+
+このディレクトリの構造は次のとおりです。
+
+```
+.
+├── Makefile
+├── plain-java-jdbc.iml
+├── pom.xml
+└── src
+    └── main
+        ├── java
+        │   └── com
+        │       └── pingcap
+        │            └── JDBCExample.java
+        └── resources
+            └── dbinit.sql
+```
+
+テーブル作成の初期化ステートメントは`dbinit.sql`にあります。
+
+{{< copyable "" >}}
+
+```sql
+USE test;
+DROP TABLE IF EXISTS player;
+
+CREATE TABLE player (
+    `id` VARCHAR(36),
+    `coins` INTEGER,
+    `goods` INTEGER,
+   PRIMARY KEY (`id`)
+);
+```
+
+`JDBCExample.java`は`plain-java-jdbc`の本体です。 TiDB は MySQL プロトコルとの互換性が高いため、MySQL ソース インスタンス`MysqlDataSource`を初期化して TiDB に接続する必要があります。次に、オブジェクト管理用に`PlayerDAO`を初期化し、それを使用してデータの読み取り、編集、追加、および削除を行うことができます。
+
+`PlayerDAO`はデータを管理するためのクラスで、 `DAO`は[データ アクセス オブジェクト](https://en.wikipedia.org/wiki/Data_access_object)を意味します。このクラスは、データを書き込む機能を提供する一連のデータ操作メソッドを定義します。
+
+`PlayerBean`は、テーブルのマッピングであるデータ エンティティ クラスです。 `PlayerBean`の各プロパティは、 `player`テーブルのフィールドに対応します。
+
+{{< copyable "" >}}
+
+```java
+package com.pingcap;
+
+import com.mysql.cj.jdbc.MysqlDataSource;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.*;
+
+/**
+ * Main class for the basic JDBC example.
+ **/
+public class JDBCExample
+{
+    public static class PlayerBean {
+        private String id;
+        private Integer coins;
+        private Integer goods;
+
+        public PlayerBean() {
+        }
+
+        public PlayerBean(String id, Integer coins, Integer goods) {
+            this.id = id;
+            this.coins = coins;
+            this.goods = goods;
+        }
+
+        public String getId() {
+            return id;
+        }
+
+        public void setId(String id) {
+            this.id = id;
+        }
+
+        public Integer getCoins() {
+            return coins;
+        }
+
+        public void setCoins(Integer coins) {
+            this.coins = coins;
+        }
+
+        public Integer getGoods() {
+            return goods;
+        }
+
+        public void setGoods(Integer goods) {
+            this.goods = goods;
+        }
+
+        @Override
+        public String toString() {
+            return String.format("    %-8s => %10s\n    %-8s => %10s\n    %-8s => %10s\n",
+                    "id", this.id, "coins", this.coins, "goods", this.goods);
+        }
+    }
+
+    /**
+     * Data access object used by 'ExampleDataSource'.
+     * Example for CURD and bulk insert.
+     */
+    public static class PlayerDAO {
+        private final MysqlDataSource ds;
+        private final Random rand = new Random();
+
+        PlayerDAO(MysqlDataSource ds) {
+            this.ds = ds;
+        }
+
+        /**
+         * Create players by passing in a List of PlayerBean.
+         *
+         * @param players Will create players list
+         * @return The number of create accounts
+         */
+        public int createPlayers(List<PlayerBean> players){
+            int rows = 0;
+
+            Connection connection = null;
+            PreparedStatement preparedStatement = null;
+            try {
+                connection = ds.getConnection();
+                preparedStatement = connection.prepareStatement("INSERT INTO player (id, coins, goods) VALUES (?, ?, ?)");
+            } catch (SQLException e) {
+                System.out.printf("[createPlayers] ERROR: { state => %s, cause => %s, message => %s }\n",
+                        e.getSQLState(), e.getCause(), e.getMessage());
+                e.printStackTrace();
+
+                return -1;
+            }
+
+            try {
+                for (PlayerBean player : players) {
+                    preparedStatement.setString(1, player.getId());
+                    preparedStatement.setInt(2, player.getCoins());
+                    preparedStatement.setInt(3, player.getGoods());
+
+                    preparedStatement.execute();
+                    rows += preparedStatement.getUpdateCount();
+                }
+            } catch (SQLException e) {
+                System.out.printf("[createPlayers] ERROR: { state => %s, cause => %s, message => %s }\n",
+                        e.getSQLState(), e.getCause(), e.getMessage());
+                e.printStackTrace();
+            } finally {
+                try {
+                    connection.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            System.out.printf("\n[createPlayers]:\n    '%s'\n", preparedStatement);
+            return rows;
+        }
+
+        /**
+         * Buy goods and transfer funds between one player and another in one transaction.
+         * @param sellId Sell player id.
+         * @param buyId Buy player id.
+         * @param amount Goods amount, if sell player has not enough goods, the trade will break.
+         * @param price Price should pay, if buy player has not enough coins, the trade will break.
+         *
+         * @return The number of effected players.
+         */
+        public int buyGoods(String sellId, String buyId, Integer amount, Integer price) {
+            int effectPlayers = 0;
+
+            Connection connection = null;
+            try {
+                connection = ds.getConnection();
+            } catch (SQLException e) {
+                System.out.printf("[buyGoods] ERROR: { state => %s, cause => %s, message => %s }\n",
+                        e.getSQLState(), e.getCause(), e.getMessage());
+                e.printStackTrace();
+                return effectPlayers;
+            }
+
+            try {
+                connection.setAutoCommit(false);
+
+                PreparedStatement playerQuery = connection.prepareStatement("SELECT * FROM player WHERE id=? OR id=? FOR UPDATE");
+                playerQuery.setString(1, sellId);
+                playerQuery.setString(2, buyId);
+                playerQuery.execute();
+
+                PlayerBean sellPlayer = null;
+                PlayerBean buyPlayer = null;
+
+                ResultSet playerQueryResultSet = playerQuery.getResultSet();
+                while (playerQueryResultSet.next()) {
+                    PlayerBean player =  new PlayerBean(
+                            playerQueryResultSet.getString("id"),
+                            playerQueryResultSet.getInt("coins"),
+                            playerQueryResultSet.getInt("goods")
+                    );
+
+                    System.out.println("\n[buyGoods]:\n    'check goods and coins enough'");
+                    System.out.println(player);
+
+                    if (sellId.equals(player.getId())) {
+                        sellPlayer = player;
+                    } else {
+                        buyPlayer = player;
+                    }
+                }
+
+                if (sellPlayer == null || buyPlayer == null) {
+                    throw new SQLException("player not exist.");
+                }
+
+                if (sellPlayer.getGoods().compareTo(amount) < 0) {
+                    throw new SQLException(String.format("sell player %s goods not enough.", sellId));
+                }
+
+                if (buyPlayer.getCoins().compareTo(price) < 0) {
+                    throw new SQLException(String.format("buy player %s coins not enough.", buyId));
+                }
+
+                PreparedStatement transfer = connection.prepareStatement("UPDATE player set goods = goods + ?, coins = coins + ? WHERE id=?");
+                transfer.setInt(1, -amount);
+                transfer.setInt(2, price);
+                transfer.setString(3, sellId);
+                transfer.execute();
+                effectPlayers += transfer.getUpdateCount();
+
+                transfer.setInt(1, amount);
+                transfer.setInt(2, -price);
+                transfer.setString(3, buyId);
+                transfer.execute();
+                effectPlayers += transfer.getUpdateCount();
+
+                connection.commit();
+
+                System.out.println("\n[buyGoods]:\n    'trade success'");
+            } catch (SQLException e) {
+                System.out.printf("[buyGoods] ERROR: { state => %s, cause => %s, message => %s }\n",
+                        e.getSQLState(), e.getCause(), e.getMessage());
+
+                try {
+                    System.out.println("[buyGoods] Rollback");
+
+                    connection.rollback();
+                } catch (SQLException ex) {
+                    // do nothing
+                }
+            } finally {
+                try {
+                    connection.close();
+                } catch (SQLException e) {
+                    // do nothing
+                }
+            }
+
+            return effectPlayers;
+        }
+
+        /**
+         * Get the player info by id.
+         *
+         * @param id Player id.
+         * @return The player of this id.
+         */
+        public PlayerBean getPlayer(String id) {
+            PlayerBean player = null;
+
+            try (Connection connection = ds.getConnection()) {
+                PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM player WHERE id = ?");
+                preparedStatement.setString(1, id);
+                preparedStatement.execute();
+
+                ResultSet res = preparedStatement.executeQuery();
+                if(!res.next()) {
+                    System.out.printf("No players in the table with id %s", id);
+                } else {
+                    player = new PlayerBean(res.getString("id"), res.getInt("coins"), res.getInt("goods"));
+                }
+            } catch (SQLException e) {
+                System.out.printf("PlayerDAO.getPlayer ERROR: { state => %s, cause => %s, message => %s }\n",
+                        e.getSQLState(), e.getCause(), e.getMessage());
+            }
+
+            return player;
+        }
+
+        /**
+         * Insert randomized account data (id, coins, goods) using the JDBC fast path for
+         * bulk inserts.  The fastest way to get data into TiDB is using the
+         * TiDB Lightning(https://docs.pingcap.com/tidb/stable/tidb-lightning-overview).
+         * However, if you must bulk insert from the application using INSERT SQL, the best
+         * option is the method shown here. It will require the following:
+         *
+         *    Add `rewriteBatchedStatements=true` to your JDBC connection settings.
+         *    Setting rewriteBatchedStatements to true now causes CallableStatements
+         *    with batched arguments to be re-written in the form "CALL (...); CALL (...); ..."
+         *    to send the batch in as few client/server round trips as possible.
+         *    https://dev.mysql.com/doc/relnotes/connector-j/5.1/en/news-5-1-3.html
+         *
+         *    You can see the `rewriteBatchedStatements` param effect logic at
+         *    implement function: `com.mysql.cj.jdbc.StatementImpl.executeBatchUsingMultiQueries`
+         *
+         * @param total Add players amount.
+         * @param batchSize Bulk insert size for per batch.
+         *
+         * @return The number of new accounts inserted.
+         */
+        public int bulkInsertRandomPlayers(Integer total, Integer batchSize) {
+            int totalNewPlayers = 0;
+
+            try (Connection connection = ds.getConnection()) {
+                // We're managing the commit lifecycle ourselves, so we can
+                // control the size of our batch inserts.
+                connection.setAutoCommit(false);
+
+                // In this example we are adding 500 rows to the database,
+                // but it could be any number.  What's important is that
+                // the batch size is 128.
+                try (PreparedStatement pstmt = connection.prepareStatement("INSERT INTO player (id, coins, goods) VALUES (?, ?, ?)")) {
+                    for (int i=0; i<=(total/batchSize);i++) {
+                        for (int j=0; j<batchSize; j++) {
+                            String id = UUID.randomUUID().toString();
+                            pstmt.setString(1, id);
+                            pstmt.setInt(2, rand.nextInt(10000));
+                            pstmt.setInt(3, rand.nextInt(10000));
+                            pstmt.addBatch();
+                        }
+
+                        int[] count = pstmt.executeBatch();
+                        totalNewPlayers += count.length;
+                        System.out.printf("\nPlayerDAO.bulkInsertRandomPlayers:\n    '%s'\n", pstmt);
+                        System.out.printf("    => %s row(s) updated in this batch\n", count.length);
+                    }
+                    connection.commit();
+                } catch (SQLException e) {
+                    System.out.printf("PlayerDAO.bulkInsertRandomPlayers ERROR: { state => %s, cause => %s, message => %s }\n",
+                            e.getSQLState(), e.getCause(), e.getMessage());
+                }
+            } catch (SQLException e) {
+                System.out.printf("PlayerDAO.bulkInsertRandomPlayers ERROR: { state => %s, cause => %s, message => %s }\n",
+                        e.getSQLState(), e.getCause(), e.getMessage());
+            }
+            return totalNewPlayers;
+        }
+
+
+        /**
+         * Print a subset of players from the data store by limit.
+         *
+         * @param limit Print max size.
+         */
+        public void printPlayers(Integer limit) {
+            try (Connection connection = ds.getConnection()) {
+                PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM player LIMIT ?");
+                preparedStatement.setInt(1, limit);
+                preparedStatement.execute();
+
+                ResultSet res = preparedStatement.executeQuery();
+                while (!res.next()) {
+                    PlayerBean player = new PlayerBean(res.getString("id"),
+                            res.getInt("coins"), res.getInt("goods"));
+                    System.out.println("\n[printPlayers]:\n" + player);
+                }
+            } catch (SQLException e) {
+                System.out.printf("PlayerDAO.printPlayers ERROR: { state => %s, cause => %s, message => %s }\n",
+                        e.getSQLState(), e.getCause(), e.getMessage());
+            }
+        }
+
+
+        /**
+         * Count players from the data store.
+         *
+         * @return All players count
+         */
+        public int countPlayers() {
+            int count = 0;
+
+            try (Connection connection = ds.getConnection()) {
+                PreparedStatement preparedStatement = connection.prepareStatement("SELECT count(*) FROM player");
+                preparedStatement.execute();
+
+                ResultSet res = preparedStatement.executeQuery();
+                if(res.next()) {
+                    count = res.getInt(1);
+                }
+            } catch (SQLException e) {
+                System.out.printf("PlayerDAO.countPlayers ERROR: { state => %s, cause => %s, message => %s }\n",
+                        e.getSQLState(), e.getCause(), e.getMessage());
+            }
+
+            return count;
+        }
+    }
+
+    public static void main(String[] args) {
+        // 1. Configure the example database connection.
+
+        // 1.1 Create a mysql data source instance.
+        MysqlDataSource mysqlDataSource = new MysqlDataSource();
+
+        // 1.2 Set server name, port, database name, username and password.
+        mysqlDataSource.setServerName("localhost");
+        mysqlDataSource.setPortNumber(4000);
+        mysqlDataSource.setDatabaseName("test");
+        mysqlDataSource.setUser("root");
+        mysqlDataSource.setPassword("");
+
+        // Or you can use jdbc string instead.
+        // mysqlDataSource.setURL("jdbc:mysql://{host}:{port}/test?user={user}&password={password}");
+
+        // 2. And then, create DAO to manager your data.
+        PlayerDAO dao = new PlayerDAO(mysqlDataSource);
+
+        // 3. Run some simple example.
+
+        // Create a player, has a coin and a goods.
+        dao.createPlayers(Collections.singletonList(new PlayerBean("test", 1, 1)));
+
+        // Get a player.
+        PlayerBean testPlayer = dao.getPlayer("test");
+        System.out.printf("PlayerDAO.getPlayer:\n    => id: %s\n    => coins: %s\n    => goods: %s\n",
+                testPlayer.getId(), testPlayer.getCoins(), testPlayer.getGoods());
+
+        // Create players with bulk inserts, insert 1919 players totally, and per batch for 114 players.
+        int addedCount = dao.bulkInsertRandomPlayers(1919, 114);
+        System.out.printf("PlayerDAO.bulkInsertRandomPlayers:\n    => %d total inserted players\n", addedCount);
+
+        // Count players amount.
+        int count = dao.countPlayers();
+        System.out.printf("PlayerDAO.countPlayers:\n    => %d total players\n", count);
+
+        // Print 3 players.
+        dao.printPlayers(3);
+
+        // 4. Getting further.
+
+        // Player 1: id is "1", has only 100 coins.
+        // Player 2: id is "2", has 114514 coins, and 20 goods.
+        PlayerBean player1 = new PlayerBean("1", 100, 0);
+        PlayerBean player2 = new PlayerBean("2", 114514, 20);
+
+        // Create two players "by hand", using the INSERT statement on the backend.
+        addedCount = dao.createPlayers(Arrays.asList(player1, player2));
+        System.out.printf("PlayerDAO.createPlayers:\n    => %d total inserted players\n", addedCount);
+
+        // Player 1 wants to buy 10 goods from player 2.
+        // It will cost 500 coins, but player 1 can't afford it.
+        System.out.println("\nPlayerDAO.buyGoods:\n    => this trade will fail");
+        int updatedCount = dao.buyGoods(player2.getId(), player1.getId(), 10, 500);
+        System.out.printf("PlayerDAO.buyGoods:\n    => %d total update players\n", updatedCount);
+
+        // So player 1 have to reduce his incoming quantity to two.
+        System.out.println("\nPlayerDAO.buyGoods:\n    => this trade will success");
+        updatedCount = dao.buyGoods(player2.getId(), player1.getId(), 2, 100);
+        System.out.printf("PlayerDAO.buyGoods:\n    => %d total update players\n", updatedCount);
+    }
+}
+```
+
+</div>
+
 </SimpleTab>
 
 ## ステップ 3. コードを実行する {#step-3-run-the-code}
@@ -1421,6 +1421,34 @@ public class HibernateExample
 ### ステップ 3.1 テーブルの初期化 {#step-3-1-table-initialization}
 
 <SimpleTab groupId="language">
+
+<div label="Using Mybatis (Recommended)" value="mybatis">
+
+Mybatis を使用する場合、データベース テーブルを手動で初期化する必要があります。ローカル クラスタを使用していて、MySQL クライアントがローカルにインストールされている場合は、 `plain-java-mybatis`ディレクトリで直接実行できます。
+
+{{< copyable "" >}}
+
+```shell
+make prepare
+```
+
+または、次のコマンドを実行できます。
+
+{{< copyable "" >}}
+
+```shell
+mysql --host 127.0.0.1 --port 4000 -u root < src/main/resources/dbinit.sql
+```
+
+非ローカル クラスターを使用している場合、または MySQL クライアントがインストールされていない場合は、クラスターに接続し、 `src/main/resources/dbinit.sql`ファイルのステートメントを実行します。
+
+</div>
+
+<div label="Using Hibernate (Recommended)" value="hibernate">
+
+テーブルを手動で初期化する必要はありません。
+
+</div>
 
 <div label="Using JDBC" value="jdbc">
 
@@ -1454,77 +1482,15 @@ JDBC を使用する場合、クラスターに接続し、 `src/main/resources/
 
 </div>
 
-<div label="Using Mybatis (Recommended)" value="mybatis">
-
-Mybatis を使用する場合、データベース テーブルを手動で初期化する必要があります。ローカル クラスタを使用していて、MySQL クライアントがローカルにインストールされている場合は、 `plain-java-mybatis`ディレクトリで直接実行できます。
-
-{{< copyable "" >}}
-
-```shell
-make prepare
-```
-
-または、次のコマンドを実行できます。
-
-{{< copyable "" >}}
-
-```shell
-mysql --host 127.0.0.1 --port 4000 -u root < src/main/resources/dbinit.sql
-```
-
-非ローカル クラスターを使用している場合、または MySQL クライアントがインストールされていない場合は、クラスターに接続し、 `src/main/resources/dbinit.sql`ファイルのステートメントを実行します。
-
-</div>
-
-<div label="Using Hibernate (Recommended)" value="hibernate">
-
-テーブルを手動で初期化する必要はありません。
-
-</div>
-
 </SimpleTab>
 
 ### ステップ 3.2 TiDB Cloudのパラメーターを変更する {#step-3-2-modify-parameters-for-tidb-cloud}
 
 <SimpleTab groupId="language">
 
-<div label="Using JDBC" value="jdbc">
-
-TiDB Cloudやその他のリモート クラスターなど、ローカル以外の既定のクラスターを使用している場合は、 `JDBCExample.java`でホスト、ポート、ユーザー、およびパスワードのパラメーターを変更します。
-
-{{< copyable "" >}}
-
-```java
-mysqlDataSource.setServerName("localhost");
-mysqlDataSource.setPortNumber(4000);
-mysqlDataSource.setDatabaseName("test");
-mysqlDataSource.setUser("root");
-mysqlDataSource.setPassword("");
-```
-
-設定したパスワードが`123456`で、 TiDB Cloudから取得した接続文字列が次のとおりであるとします。
-
-```
-mysql --connect-timeout 15 -u root -h xxx.tidbcloud.com -P 4000 -p
-```
-
-この場合、次のようにパラメータを変更できます。
-
-{{< copyable "" >}}
-
-```java
-mysqlDataSource.setServerName("xxx.tidbcloud.com");
-mysqlDataSource.setPortNumber(4000);
-mysqlDataSource.setDatabaseName("test");
-mysqlDataSource.setUser("root");
-mysqlDataSource.setPassword("123456");
-```
-
-</div>
-
 <div label="Using Mybatis (Recommended)" value="mybatis">
 
-TiDB Cloudやその他のリモート クラスターなど、ローカル以外の既定のクラスターを使用している場合は、 `mybatis-config.xml`の`dataSource.url` 、 `dataSource.username` 、 `dataSource.password`を変更します。
+TiDB Cloud Tier クラスターを使用している場合は、 `mybatis-config.xml`の`dataSource.url` 、 `dataSource.username` 、 `dataSource.password`を変更します。
 
 {{< copyable "" >}}
 
@@ -1569,13 +1535,11 @@ TiDB Cloudやその他のリモート クラスターなど、ローカル以外
 </configuration>
 ```
 
-設定したパスワードが`123456`で、 TiDB Cloudから取得した接続文字列が次のとおりであるとします。
+設定したパスワードが`123456`で、クラスターの詳細ページから取得した接続パラメーターが次のとおりであるとします。
 
-{{< copyable "" >}}
-
-```shell
-mysql --connect-timeout 15 -u root -h xxx.tidbcloud.com -P 4000 -p
-```
+-   エンドポイント: `xxx.tidbcloud.com`
+-   ポート: `4000`
+-   ユーザー: `2aEp24QWEDLqRFs.root`
 
 この場合、次のように`dataSource`のノードでパラメーターを変更できます。
 
@@ -1592,8 +1556,8 @@ mysql --connect-timeout 15 -u root -h xxx.tidbcloud.com -P 4000 -p
             <!-- Database pool -->
             <dataSource type="POOLED">
                 <property name="driver" value="com.mysql.jdbc.Driver"/>
-                <property name="url" value="jdbc:mysql://xxx.tidbcloud.com:4000/test"/>
-                <property name="username" value="root"/>
+                <property name="url" value="jdbc:mysql://xxx.tidbcloud.com:4000/test?sslMode=VERIFY_IDENTITY&amp;enabledTLSProtocols=TLSv1.2,TLSv1.3"/>
+                <property name="username" value="2aEp24QWEDLqRFs.root"/>
                 <property name="password" value="123456"/>
             </dataSource>
         ...
@@ -1605,7 +1569,7 @@ mysql --connect-timeout 15 -u root -h xxx.tidbcloud.com -P 4000 -p
 
 <div label="Using Hibernate (Recommended)" value="hibernate">
 
-TiDB Cloudやその他のリモート クラスターなど、ローカル以外の既定のクラスターを使用している場合は、 `hibernate.cfg.xml`の`hibernate.connection.url` 、 `hibernate.connection.username` 、 `hibernate.connection.password`を変更します。
+TiDB Cloud Tier クラスターを使用している場合は、 `hibernate.cfg.xml`の`hibernate.connection.url` 、 `hibernate.connection.username` 、 `hibernate.connection.password`を変更します。
 
 {{< copyable "" >}}
 
@@ -1635,13 +1599,11 @@ TiDB Cloudやその他のリモート クラスターなど、ローカル以外
 </hibernate-configuration>
 ```
 
-設定したパスワードが`123456`で、 TiDB Cloudから取得した接続文字列が次のとおりであるとします。
+設定したパスワードが`123456`で、クラスターの詳細ページから取得した接続パラメーターが次のとおりであるとします。
 
-{{< copyable "" >}}
-
-```shell
-mysql --connect-timeout 15 -u root -h xxx.tidbcloud.com -P 4000 -p
-```
+-   エンドポイント: `xxx.tidbcloud.com`
+-   ポート: `4000`
+-   ユーザー: `2aEp24QWEDLqRFs.root`
 
 この場合、次のようにパラメータを変更できます。
 
@@ -1658,8 +1620,8 @@ mysql --connect-timeout 15 -u root -h xxx.tidbcloud.com -P 4000 -p
         <!-- Database connection settings -->
         <property name="hibernate.connection.driver_class">com.mysql.cj.jdbc.Driver</property>
         <property name="hibernate.dialect">org.hibernate.dialect.TiDBDialect</property>
-        <property name="hibernate.connection.url">jdbc:mysql://xxx.tidbcloud.com:4000/test</property>
-        <property name="hibernate.connection.username">root</property>
+        <property name="hibernate.connection.url">jdbc:mysql://xxx.tidbcloud.com:4000/test?sslMode=VERIFY_IDENTITY&amp;enabledTLSProtocols=TLSv1.2,TLSv1.3</property>
+        <property name="hibernate.connection.username">2aEp24QWEDLqRFs.root</property>
         <property name="hibernate.connection.password">123456</property>
         <property name="hibernate.connection.autocommit">false</property>
 
@@ -1675,35 +1637,47 @@ mysql --connect-timeout 15 -u root -h xxx.tidbcloud.com -P 4000 -p
 
 </div>
 
+<div label="Using JDBC" value="jdbc">
+
+TiDB Cloud Tier クラスターを使用している場合は、 `JDBCExample.java`でホスト、ポート、ユーザー、およびパスワードのパラメーターを変更します。
+
+{{< copyable "" >}}
+
+```java
+mysqlDataSource.setServerName("localhost");
+mysqlDataSource.setPortNumber(4000);
+mysqlDataSource.setDatabaseName("test");
+mysqlDataSource.setUser("root");
+mysqlDataSource.setPassword("");
+```
+
+設定したパスワードが`123456`で、クラスターの詳細ページから取得した接続パラメーターが次のとおりであるとします。
+
+-   エンドポイント: `xxx.tidbcloud.com`
+-   ポート: `4000`
+-   ユーザー: `2aEp24QWEDLqRFs.root`
+
+この場合、次のようにパラメータを変更できます。
+
+{{< copyable "" >}}
+
+```java
+mysqlDataSource.setServerName("xxx.tidbcloud.com");
+mysqlDataSource.setPortNumber(4000);
+mysqlDataSource.setDatabaseName("test");
+mysqlDataSource.setUser("2aEp24QWEDLqRFs.root");
+mysqlDataSource.setPassword("123456");
+mysqlDataSource.setSslMode(PropertyDefinitions.SslMode.VERIFY_IDENTITY.name());
+mysqlDataSource.setEnabledTLSProtocols("TLSv1.2,TLSv1.3");
+```
+
+</div>
+
 </SimpleTab>
 
 ### ステップ 3.3 実行 {#step-3-3-run}
 
 <SimpleTab groupId="language">
-
-<div label="Using JDBC" value="jdbc">
-
-コードを実行するには、それぞれ`make build`と`make run`を実行します。
-
-{{< copyable "" >}}
-
-```shell
-make build # this command executes `mvn clean package`
-make run # this command executes `java -jar target/plain-java-jdbc-0.0.1-jar-with-dependencies.jar`
-```
-
-または、ネイティブ コマンドを使用できます。
-
-{{< copyable "" >}}
-
-```shell
-mvn clean package
-java -jar target/plain-java-jdbc-0.0.1-jar-with-dependencies.jar
-```
-
-または、 `make build`と`make run`の組み合わせである`make`コマンドを直接実行します。
-
-</div>
 
 <div label="Using Mybatis (Recommended)" value="mybatis">
 
@@ -1771,17 +1745,35 @@ java -jar target/plain-java-jdbc-0.0.1-jar-with-dependencies.jar
 
 </div>
 
+<div label="Using JDBC" value="jdbc">
+
+コードを実行するには、それぞれ`make build`と`make run`を実行します。
+
+{{< copyable "" >}}
+
+```shell
+make build # this command executes `mvn clean package`
+make run # this command executes `java -jar target/plain-java-jdbc-0.0.1-jar-with-dependencies.jar`
+```
+
+または、ネイティブ コマンドを使用できます。
+
+{{< copyable "" >}}
+
+```shell
+mvn clean package
+java -jar target/plain-java-jdbc-0.0.1-jar-with-dependencies.jar
+```
+
+または、 `make build`と`make run`の組み合わせである`make`コマンドを直接実行します。
+
+</div>
+
 </SimpleTab>
 
 ## ステップ 4. 期待される出力 {#step-4-expected-output}
 
 <SimpleTab groupId="language">
-
-<div label="Using JDBC" value="jdbc">
-
-[JDBC の期待される出力](https://github.com/pingcap-inc/tidb-example-java/blob/main/Expected-Output.md#plain-java-jdbc)
-
-</div>
 
 <div label="Using Mybatis (Recommended)" value="mybatis">
 
@@ -1792,6 +1784,12 @@ java -jar target/plain-java-jdbc-0.0.1-jar-with-dependencies.jar
 <div label="Using Hibernate (Recommended)" value="hibernate">
 
 [休止状態の期待される出力](https://github.com/pingcap-inc/tidb-example-java/blob/main/Expected-Output.md#plain-java-hibernate)
+
+</div>
+
+<div label="Using JDBC" value="jdbc">
+
+[JDBC の期待される出力](https://github.com/pingcap-inc/tidb-example-java/blob/main/Expected-Output.md#plain-java-jdbc)
 
 </div>
 

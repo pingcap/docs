@@ -12,13 +12,13 @@ summary: An overview of the usage of RECOVER TABLE for the TiDB database.
 {{< copyable "" >}}
 
 ```sql
-RECOVER TABLE table_name
+RECOVER TABLE table_name;
 ```
 
 {{< copyable "" >}}
 
 ```sql
-RECOVER TABLE BY JOB ddl_job_id
+RECOVER TABLE BY JOB ddl_job_id;
 ```
 
 ## あらすじ {#synopsis}
@@ -59,7 +59,7 @@ TiDB Binlogレプリケーション中に上流の TiDB で`RECOVER TABLE`を使
 
 -   アップストリーム データベースとダウンストリーム データベース間のレプリケーション中にレイテンシが発生します。エラー インスタンス: `snapshot is older than GC safe point 2019-07-10 13:45:57 +0800 CST` 。
 
-上記の 3 つの状況では、TiDB Binlogからのデータ複製を[削除されたテーブルの完全インポート](/ecosystem-tool-user-guide.md#backup-and-restore)で再開できます。
+上記の 3 つの状況では、TiDB Binlogからのデータ複製を[削除されたテーブルの完全インポート](/br/br-usage-restore.md#restore-a-table)で再開できます。
 
 </CustomContent>
 

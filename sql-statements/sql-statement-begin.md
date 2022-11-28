@@ -35,7 +35,7 @@ Query OK, 0 rows affected (0.01 sec)
 
 ## MySQL の互換性 {#mysql-compatibility}
 
-TiDB は、 `BEGIN PESSIMISTIC`または`BEGIN OPTIMISTIC`の構文拡張をサポートします。これにより、トランザクションのデフォルトのトランザクション モデルをオーバーライドできます。
+TiDB は`BEGIN PESSIMISTIC`または`BEGIN OPTIMISTIC`の構文拡張をサポートします。これにより、トランザクションのデフォルトのトランザクション モデルをオーバーライドできます。
 
 ## こちらもご覧ください {#see-also}
 

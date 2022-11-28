@@ -130,7 +130,7 @@ TiDB バージョン: 4.0.0-rc.2
     -   高価なログ[#16907](https://github.com/pingcap/tidb/pull/16907)の`WAIT_TIME`フィールドの誤った情報を修正します。
     -   ペシミスティック トランザクション モード[#16897](https://github.com/pingcap/tidb/pull/16897)でスロー ログに`SELECT FOR UPDATE`ステートメントが記録されない問題を修正
     -   `Enum`または`Set`タイプ[#16892](https://github.com/pingcap/tidb/pull/16892)の列で`SELECT DISTINCT`を実行したときに発生する誤った結果を修正します。
-    -   `SHOW CREATE  TABLE`ステートメント[#16864](https://github.com/pingcap/tidb/pull/16864)の`auto_random_base`の表示エラーを修正
+    -   `SHOW CREATE TABLE`ステートメント[#16864](https://github.com/pingcap/tidb/pull/16864)の`auto_random_base`の表示エラーを修正
     -   `WHERE`節[#16559](https://github.com/pingcap/tidb/pull/16559)の誤った値`string_value`を修正します。
     -   `GROUP BY`ウィンドウ関数のエラー メッセージが MySQL [#16165](https://github.com/pingcap/tidb/pull/16165)のエラー メッセージと一致しない問題を修正
     -   データベース名に大文字の[#17167](https://github.com/pingcap/tidb/pull/17167)が含まれている場合、 `FLASH TABLE`ステートメントの実行に失敗する問題を修正します。

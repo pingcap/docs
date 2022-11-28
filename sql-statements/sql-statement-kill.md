@@ -58,7 +58,7 @@ v6.1.0 以降、TiDB は Global Kill 機能をサポートします。これは�
 
 <CustomContent platform="tidb-cloud">
 
-v6.1.0 以降、TiDB はデフォルトで有効になっている Global Kill 機能をサポートします。
+v6.1.0 以降、TiDB はデフォルトで有効になっている Global Kill 機能をサポートしています。
 
 </CustomContent>
 

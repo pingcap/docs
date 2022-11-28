@@ -107,7 +107,7 @@ TiDB バージョン: 5.1.1
 
     -   特定のプラットフォームで継続時間の計算がpanicになる問題を修正[#10569](https://github.com/tikv/tikv/pull/10569)
     -   Load Base Split が`batch_get_command` [#10542](https://github.com/tikv/tikv/issues/10542)のエンコードされていないキーを誤って使用する問題を修正します。
-    -   `resolved-ts.advance-ts-interval`構成をオンラインで変更してもすぐに有効にならない問題を修正します[#10426](https://github.com/tikv/tikv/issues/10426)
+    -   `resolved-ts.advance-ts-interval`構成を動的に変更してもすぐに有効にならないという問題を修正します[#10426](https://github.com/tikv/tikv/issues/10426)
     -   レプリカが[#10225](https://github.com/tikv/tikv/issues/10225)つを超えると、まれにフォロワーのメタデータが破損する問題を修正します。
     -   暗号化が有効になっている場合にスナップショットを 2 回作成すると発生するpanicの問題を修正します[#9786](https://github.com/tikv/tikv/issues/9786) [#10407](https://github.com/tikv/tikv/issues/10407)
     -   間違った`tikv_raftstore_hibernated_peer_state`メトリクスを修正する[#10330](https://github.com/tikv/tikv/issues/10330)

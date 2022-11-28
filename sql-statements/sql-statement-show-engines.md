@@ -14,7 +14,7 @@ summary: An overview of the usage of SHOW ENGINES for the TiDB database.
 ![ShowEnginesStmt](/media/sqlgram/ShowEnginesStmt.png)
 
 ```sql
-SHOW ENGINES
+SHOW ENGINES;
 ```
 
 ## 例 {#examples}

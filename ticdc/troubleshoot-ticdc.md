@@ -128,11 +128,11 @@ Warning: Unable to load '/usr/share/zoneinfo/zone1970.tab' as time zone. Skippin
 
 [互換性に関する注意事項](/ticdc/manage-ticdc.md#notes-for-compatibility)を参照してください。
 
-## TiCDC タスクの<code>start-ts</code>タイムスタンプは、現在の時刻とはかなり異なります。このタスクの実行中に、レプリケーションが中断され、エラー<code>[CDC:ErrBufferReachLimit]</code>が発生します {#the-code-start-ts-code-timestamp-of-the-ticdc-task-is-quite-different-from-the-current-time-during-the-execution-of-this-task-replication-is-interrupted-and-an-error-code-cdc-errbufferreachlimit-code-occurs}
+## TiCDC タスクの<code>start-ts</code>タイムスタンプは、現在の時刻とはかなり異なります。このタスクの実行中にレプリケーションが中断され、エラー<code>[CDC:ErrBufferReachLimit]</code>が発生します。私は何をすべきか？ {#the-code-start-ts-code-timestamp-of-the-ticdc-task-is-quite-different-from-the-current-time-during-the-execution-of-this-task-replication-is-interrupted-and-an-error-code-cdc-errbufferreachlimit-code-occurs-what-should-i-do}
 
 v4.0.9 以降、レプリケーション タスクでユニファイド ソーター機能を有効にするか、BR ツールを使用して増分バックアップと復元を行ってから、新しい時間から TiCDC レプリケーション タスクを開始することができます。
 
-## 変更フィードの下流が MySQL に似たデータベースであり、TiCDC が時間のかかる DDL ステートメントを実行する場合、他のすべての変更フィードはブロックされます。問題をどのように処理すればよいですか? {#when-the-downstream-of-a-changefeed-is-a-database-similar-to-mysql-and-ticdc-executes-a-time-consuming-ddl-statement-all-other-changefeeds-are-blocked-how-should-i-handle-the-issue}
+## 変更フィードの下流が MySQL に似たデータベースであり、TiCDC が時間のかかる DDL ステートメントを実行する場合、他のすべての変更フィードはブロックされます。私は何をすべきか？ {#when-the-downstream-of-a-changefeed-is-a-database-similar-to-mysql-and-ticdc-executes-a-time-consuming-ddl-statement-all-other-changefeeds-are-blocked-what-should-i-do}
 
 1.  時間のかかる DDL ステートメントを含む changefeed の実行を一時停止します。その後、他の変更フィードがブロックされなくなっていることがわかります。
 2.  TiCDC ログで`apply job`フィールドを検索し、時間のかかる DDL ステートメントの`start-ts`を確認します。
@@ -140,7 +140,7 @@ v4.0.9 以降、レプリケーション タスクでユニファイド ソー�
 4.  changefeed の設定を変更し、上記の`start-ts`を`ignore-txn-start-ts`の設定項目に追加します。
 5.  一時停止した変更フィードを再開します。
 
-## TiCDC クラスターを v4.0.8 にアップグレードした後、changefeed を実行する<code>[CDC:ErrKafkaInvalidConfig]Canal requires old value to be enabled</code>エラーが報告されます。 {#after-i-upgrade-the-ticdc-cluster-to-v4-0-8-the-code-cdc-errkafkainvalidconfig-canal-requires-old-value-to-be-enabled-code-error-is-reported-when-i-execute-a-changefeed}
+## TiCDC クラスターを v4.0.8 にアップグレードした後、changefeed を実行すると、 <code>[CDC:ErrKafkaInvalidConfig]Canal requires old value to be enabled</code>エラーが報告されます。私は何をすべきか？ {#after-i-upgrade-the-ticdc-cluster-to-v4-0-8-the-code-cdc-errkafkainvalidconfig-canal-requires-old-value-to-be-enabled-code-error-is-reported-when-i-execute-a-changefeed-what-should-i-do}
 
 v4.0.8 以降、変更フィードの出力に`canal-json` 、 `canal`または`maxwell`プロトコルが使用されている場合、TiCDC は古い値機能を自動的に有効にします。ただし、TiCDC を以前のバージョンから v4.0.8 以降にアップグレードした場合、changefeed が`canal-json` 、 `canal`または`maxwell`プロトコルを使用し、古い値の機能が無効になっていると、このエラーが報告されます。
 
@@ -172,7 +172,7 @@ v4.0.8 以降、変更フィードの出力に`canal-json` 、 `canal`または`
     cdc cli changefeed resume -c test-cf --pd=http://10.0.10.25:2379
     ```
 
-## <code>[tikv:9006]GC life time is shorter than transaction duration, transaction starts at xx, GC safe point is yy</code>です TiCDC を使用して変更フィードを作成すると、エラーが報告されます {#the-code-tikv-9006-gc-life-time-is-shorter-than-transaction-duration-transaction-starts-at-xx-gc-safe-point-is-yy-code-error-is-reported-when-i-use-ticdc-to-create-a-changefeed}
+## <code>[tikv:9006]GC life time is shorter than transaction duration, transaction starts at xx, GC safe point is yy</code>あるというエラーが、TiCDC を使用して変更フィードを作成すると報告されます。私は何をすべきか？ {#the-code-tikv-9006-gc-life-time-is-shorter-than-transaction-duration-transaction-starts-at-xx-gc-safe-point-is-yy-code-error-is-reported-when-i-use-ticdc-to-create-a-changefeed-what-should-i-do}
 
 `pd-ctl service-gc-safepoint --pd <pd-addrs>`コマンドを実行して、現在の GC セーフポイントとサービス GC セーフポイントを照会する必要があります。 GC セーフポイントが TiCDC レプリケーション タスク (changefeed) の`start-ts`よりも小さい場合は、 `cdc cli create changefeed`コマンドに`--disable-gc-check`オプションを直接追加して、changefeed を作成できます。
 
@@ -181,7 +181,7 @@ v4.0.8 以降、変更フィードの出力に`canal-json` 、 `canal`または`
 -   PD バージョンが v4.0.8 以前の場合、詳細については[PDの問題＃3128](https://github.com/tikv/pd/issues/3128)を参照してください。
 -   PD が v4.0.8 以前のバージョンからそれ以降のバージョンにアップグレードされている場合は、詳細について[PDの問題＃3366](https://github.com/tikv/pd/issues/3366)を参照してください。
 
-## TiCDC を使用してメッセージを Kafka にレプリケートすると、Kafka は<code>Message was too large</code>エラーを返します {#when-i-use-ticdc-to-replicate-messages-to-kafka-kafka-returns-the-code-message-was-too-large-code-error}
+## TiCDC を使用してメッセージを Kafka にレプリケートすると、Kafka は<code>Message was too large</code>エラーを返します。なんで？ {#when-i-use-ticdc-to-replicate-messages-to-kafka-kafka-returns-the-code-message-was-too-large-code-error-why}
 
 TiCDC v4.0.8 以前のバージョンでは、Sink URI で Kafka の`max-message-bytes`設定を構成するだけでは、Kafka へのメッセージ出力のサイズを効果的に制御することはできません。メッセージ サイズを制御するには、Kafka が受信するメッセージのバイト数の制限も増やす必要があります。このような制限を追加するには、次の構成を Kafkaサーバー構成に追加します。
 
@@ -204,11 +204,11 @@ DDL ステートメントの実行に失敗した場合、レプリケーショ�
 cdc cli changefeed resume -c test-cf --pd=http://10.0.10.25:2379
 ```
 
-この失敗した DDL ステートメントをスキップする場合は、changefeed の start-ts を checkpoint-ts (DDL ステートメントが失敗したタイムスタンプ) に 1 を加えた値に設定します。たとえば、DDL ステートメントが失敗する checkpoint-ts が`415241823337054209`の場合、次のコマンドを実行して、この DDL ステートメントをスキップします。
+この失敗した DDL ステートメントをスキップする場合は、changefeed の start-ts を checkpoint-ts (DDL ステートメントが失敗したタイムスタンプ) に 1 を加えた値に設定し、 `cdc cli changefeed create`コマンドを実行して新しい changefeed を作成します。仕事。たとえば、DDL ステートメントが失敗する checkpoint-ts が`415241823337054209`の場合、次のコマンドを実行してこの DDL ステートメントをスキップします。
 
 {{< copyable "" >}}
 
 ```shell
-cdc cli changefeed update -c test-cf --pd=http://10.0.10.25:2379 --start-ts 415241823337054210
-cdc cli changefeed resume -c test-cf --pd=http://10.0.10.25:2379
+cdc cli changefeed remove --pd=http://10.0.10.25:2379 --changefeed-id simple-replication-task
+cdc cli changefeed create --pd=http://10.0.10.25:2379 --sink-uri="mysql://root:123456@127.0.0.1:3306/" --changefeed-id="simple-replication-task" --sort-engine="unified" --start-ts 415241823337054210
 ```

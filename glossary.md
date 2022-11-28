@@ -33,7 +33,7 @@ Baseline Capture は、キャプチャ条件を満たすクエリをキャプチ
 
 [リージョン](#regionpeerraft-group)は、バケットと呼ばれるいくつかの小さな範囲に論理的に分割されます。 TiKV はバケットごとにクエリ統計を収集し、バケットのステータスを PD に報告します。詳細は[バケット設計ドキュメント](https://github.com/tikv/rfcs/blob/master/text/0082-dynamic-size-region.md#bucket)を参照してください。
 
-## ハ {#c}
+## C {#c}
 
 ### キャッシュされたテーブル {#cached-table}
 

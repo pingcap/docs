@@ -8,7 +8,7 @@ aliases: ['/appdev/dev/for-sqlalchemy']
 
 > **ノート：**
 >
-> このドキュメントはアーカイブされました。これは、このドキュメントがその後更新されないことを示しています。詳細は[開発者ガイドの概要](/develop/dev-guide-overview.md)を参照してください。
+> このドキュメントはアーカイブされています。これは、このドキュメントがその後更新されないことを示しています。詳細は[開発者ガイドの概要](/develop/dev-guide-overview.md)を参照してください。
 
 このチュートリアルでは、TiDB と SQLAlchemy に基づいて単純な Python アプリケーションを構築する方法を示します。ここで構築するサンプル アプリケーションは、顧客情報と注文情報を追加、クエリ、および更新できるシンプルな CRM ツールです。
 
@@ -31,7 +31,7 @@ docker run -p 127.0.0.1:$LOCAL_PORT:4000 pingcap/tidb:v5.1.0
 > -   [TiUP for On-Premises を使用して TiDB をデプロイ](https://docs.pingcap.com/tidb/v5.1/production-deployment-using-tiup)
 > -   [TiDB を Kubernetes にデプロイ](https://docs.pingcap.com/tidb-in-kubernetes/stable)
 >
-> また、無料試用版を提供する[TiDB Cloudを使用する](https://pingcap.com/products/tidbcloud/) 、完全に管理された Database-as-a-Service (DBaaS) を使用することもできます。
+> [TiDB Cloudを使用する](https://pingcap.com/products/tidbcloud/) 、TiDB のフルマネージド Database-as-a-Service (DBaaS) も可能です。
 
 ## ステップ 2. データベースを作成する {#step-2-create-a-database}
 

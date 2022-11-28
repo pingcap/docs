@@ -72,7 +72,7 @@ TiDB アンシブル バージョン: 3.1.0-rc
     -   TiFlash レプリカ[#14884](https://github.com/pingcap/tidb/pull/14884)を頻繁に更新することによって発生する情報スキーマ エラーを修正します。
     -   `AUTO_RANDOM` [#15149](https://github.com/pingcap/tidb/pull/15149)適用時に`last_insert_id`が誤って生成される問題を修正
     -   TiFlash レプリカのステータスを更新すると、DDL 操作が停止する可能性がある問題を修正します[#15161](https://github.com/pingcap/tidb/pull/15161)
-    -   [#15141](https://github.com/pingcap/tidb/pull/15141)押し下げできない述語がある場合、 `Aggregation`押し下げ、 `TopN`押し下げを禁止する
+    -   [#15141](https://github.com/pingcap/tidb/pull/15141)プッシュダウンできない述語がある場合、 `Aggregation`プッシュダウンと`TopN`プッシュダウンを禁止する
     -   ネストされた`view`作成を禁止する[#15440](https://github.com/pingcap/tidb/pull/15440)
     -   `SET ROLE ALL` [#15570](https://github.com/pingcap/tidb/pull/15570)の後に`SELECT CURRENT_ROLE()`を実行するとエラーが発生するのを修正
     -   `select view_name.col_name from view_name`ステートメント[#15573](https://github.com/pingcap/tidb/pull/15573)の実行時に`view`名の識別に失敗する問題を修正

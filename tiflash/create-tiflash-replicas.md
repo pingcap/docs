@@ -131,6 +131,78 @@ SELECT * FROM information_schema.tiflash_replica WHERE TABLE_SCHEMA = '<db_name>
 SELECT TABLE_NAME FROM information_schema.tables where TABLE_SCHEMA = "<db_name>" and TABLE_NAME not in (SELECT TABLE_NAME FROM information_schema.tiflash_replica where TABLE_SCHEMA = "<db_name>");
 ```
 
+## TiFlash レプリケーションの高速化 {#speed-up-tiflash-replication}
+
+<CustomContent platform="tidb-cloud">
+
+> **ノート：**
+>
+> このセクションはTiDB Cloudには適用されません。
+
+</CustomContent>
+
+TiFlash レプリカが追加される前に、各 TiKV インスタンスはフル テーブル スキャンを実行し、スキャンされたデータを「スナップショット」として TiFlash に送信してレプリカを作成します。デフォルトでは、オンライン サービスへの影響を最小限に抑えるために、TiFlash レプリカはリソースの使用量を抑えてゆっくりと追加されます。 TiKV および TiFlash ノードに予備の CPU およびディスク IO リソースがある場合は、次の手順を実行して TiFlash レプリケーションを高速化できます。
+
+1.  TiFlash Proxy と TiKV の設定を調整して、各 TiKV と TiFlash インスタンスのスナップショット書き込み速度制限を一時的に上げます。たとえば、TiUP を使用して構成を管理する場合、構成は次のようになります。
+
+    ```yaml
+    tikv:
+      server.snap-max-write-bytes-per-sec: 300MiB  # Default to 100MiB.
+    tiflash-learner:
+      raftstore.snap-handle-pool-size: 10          # Default to 2. Can be adjusted to >= node's CPU num * 0.6.
+      raftstore.apply-low-priority-pool-size: 10   # Default to 1. Can be adjusted to >= node's CPU num * 0.6.
+      server.snap-max-write-bytes-per-sec: 300MiB  # Default to 100MiB.
+    ```
+
+    構成の変更は、TiFlash および TiKV インスタンスを再起動した後に有効になります。 TiKV 構成は、 [動的構成 SQL ステートメント](https://docs.pingcap.com/tidb/stable/dynamic-config)を使用してオンラインで変更することもできます。これは、TiKV インスタンスを再起動せずにすぐに有効になります。
+
+    ```sql
+    SET CONFIG tikv `server.snap-max-write-bytes-per-sec` = '300MiB';
+    ```
+
+    前述の構成を調整した後、レプリケーション速度はグローバルに PD 制限によってまだ制限されているため、現時点では加速を観察できません。
+
+2.  [PD Control](https://docs.pingcap.com/tidb/stable/pd-control)を使用して、新しいレプリカの速度制限を徐々に緩和します。
+
+    デフォルトの新しいレプリカの速度制限は 30 です。これは、毎分約 30 のリージョンが TiFlash レプリカを追加することを意味します。次のコマンドを実行すると、すべての TiFlash インスタンスの制限が 60 に調整され、元の速度の 2 倍になります。
+
+    ```shell
+    tiup ctl:v<CLUSTER_VERSION> pd -u http://<PD_ADDRESS>:2379 store limit all engine tiflash 60 add-peer
+    ```
+
+    > 上記のコマンドでは、 `<CLUSTER_VERSION>`を実際のクラスター バージョンに置き換え、 `<PD_ADDRESS>:2379`を任意の PD ノードのアドレスに置き換える必要があります。例えば：
+    >
+    > ```shell
+    > tiup ctl:v6.1.1 pd -u http://192.168.1.4:2379 store limit all engine tiflash 60 add-peer
+    > ```
+
+    数分以内に、TiFlash ノードの CPU およびディスク IO リソースの使用率が大幅に増加し、TiFlash はレプリカをより速く作成するはずです。同時に、TiKV ノードの CPU およびディスク IO リソースの使用率も増加します。
+
+    この時点で TiKV ノードと TiFlash ノードにまだ予備のリソースがあり、オンライン サービスのレイテンシーが大幅に増加しない場合は、制限をさらに緩和できます。たとえば、元の速度を 3 倍にします。
+
+    ```shell
+    tiup ctl:v<CLUSTER_VERSION> pd -u http://<PD_ADDRESS>:2379 store limit all engine tiflash 90 add-peer
+    ```
+
+3.  TiFlash の複製が完了したら、既定の構成に戻して、オンライン サービスへの影響を軽減します。
+
+    次のPD Controlコマンドを実行して、デフォルトの新しいレプリカの速度制限を復元します。
+
+    ```shell
+    tiup ctl:v<CLUSTER_VERSION> pd -u http://<PD_ADDRESS>:2379 store limit all engine tiflash 30 add-peer
+    ```
+
+    TiUP で変更された構成をコメントアウトして、デフォルトのスナップショットの書き込み速度制限を復元します。
+
+    ```yaml
+    # tikv:
+    #   server.snap-max-write-bytes-per-sec: 300MiB
+    # tiflash-learner:
+    #   raftstore.snap-handle-pool-size: 10
+    #   raftstore.apply-low-priority-pool-size: 10
+    #   server.snap-max-write-bytes-per-sec: 300MiB
+    ```
+
 ## 利用可能なゾーンを設定する {#set-available-zones}
 
 <CustomContent platform="tidb-cloud">
@@ -148,15 +220,25 @@ SELECT TABLE_NAME FROM information_schema.tables where TABLE_SCHEMA = "<db_name>
     ```
     tiflash_servers:
       - host: 172.16.5.81
-        config:
-          flash.proxy.labels: zone=z1
+          logger.level: "info"
+        learner_config:
+          server.labels:
+            zone: "z1"
       - host: 172.16.5.82
         config:
-          flash.proxy.labels: zone=z1
+          logger.level: "info"
+        learner_config:
+          server.labels:
+            zone: "z1"
       - host: 172.16.5.85
         config:
-          flash.proxy.labels: zone=z2
+          logger.level: "info"
+        learner_config:
+          server.labels:
+            zone: "z2"
     ```
+
+    以前のバージョンの`flash.proxy.labels`構成では、使用可能なゾーン名の特殊文字を正しく処理できないことに注意してください。 `server.labels` in `learner_config`を使用して、使用可能なゾーンの名前を構成することをお勧めします。
 
 2.  クラスターを開始した後、レプリカを作成するときにラベルを指定します。
 
@@ -177,7 +259,7 @@ SELECT TABLE_NAME FROM information_schema.tables where TABLE_SCHEMA = "<db_name>
 3.  PD は、ラベルに基づいてレプリカをスケジュールします。この例では、PD はそれぞれテーブル`t`の 2 つのレプリカを 2 つの使用可能なゾーンにスケジュールします。 pd-ctl を使用してスケジュールを表示できます。
 
     ```shell
-    > tiup ctl:<version> pd -u<pd-host>:<pd-port> store
+    > tiup ctl:v<CLUSTER_VERSION> pd -u http://<PD_ADDRESS>:2379 store
 
         ...
         "address": "172.16.5.82:23913",

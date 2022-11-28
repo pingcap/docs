@@ -99,7 +99,7 @@ select * from employee where id in (...) and salary between ? and ?;
 
 `statements_summary` 、および`statements_summary_history`の表は、単一の`statements_summary_evicted`サーバーのステートメントの要約のみを示しています。クラスター全体のデータをクエリするには、 `cluster_statements_summary` 、 `cluster_statements_summary_history` 、または`cluster_statements_summary_evicted`テーブルをクエリする必要があります。
 
-`cluster_statements_summary`は、各 TiDBサーバーの`statements_summary`のデータを表示します。 `cluster_statements_summary_history`は、各 TiDBサーバーの`statements_summary_history`のデータを表示します。 `cluster_statements_summary_evicted`は、各 TiDBサーバーの`statements_summary_evicted`のデータを表示します。これらのテーブルは、 `INSTANCE`フィールドを使用して TiDBサーバーのアドレスを表します。他のフィールドは`statements_summary`と同じです。
+`cluster_statements_summary`は、各 TiDBサーバーの`statements_summary`のデータを表示します。 `cluster_statements_summary_history`は、各 TiDBサーバーの`statements_summary_history`のデータを表示します。 `cluster_statements_summary_evicted`は、各 TiDBサーバーの`statements_summary_evicted`のデータを表示します。これらのテーブルは、 `INSTANCE`フィールドを使用して TiDBサーバーのアドレスを表します。その他のフィールドは`statements_summary`と同じです。
 
 ## パラメータ構成 {#parameter-configuration}
 
@@ -257,7 +257,7 @@ SELECT sum_latency, avg_latency, exec_count, query_sample_text
 -   `QUERY_SAMPLE_TEXT` : SQL カテゴリの元の SQL ステートメント。元のステートメントは 1 つだけ取得されます。
 -   `TABLE_NAMES` : SQL ステートメントに含まれるすべてのテーブル。複数のテーブルがある場合は、それぞれをカンマで区切ります。
 -   `INDEX_NAMES` : SQL ステートメントで使用されるすべての SQL インデックス。複数のインデックスがある場合は、それぞれをカンマで区切ります。
--   `SAMPLE_USER` : このカテゴリの SQL ステートメントを実行するユーザー。 1 人のユーザーのみが使用されます。
+-   `SAMPLE_USER` : このカテゴリの SQL ステートメントを実行するユーザー。 1 人のユーザーのみが取得されます。
 -   `PLAN_DIGEST` : 実行計画のダイジェスト。
 -   `PLAN` : 元の実行計画。複数のステートメントがある場合は、1 つのステートメントのみのプランが採用されます。
 -   `PLAN_CACHE_HITS` : このカテゴリの SQL ステートメントがプラン キャッシュにヒットした合計回数。

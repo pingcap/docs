@@ -179,7 +179,7 @@ BR を使用してバックアップされたクラスターに TiFlash があ�
 
 いいえ。BR は、一部の履歴バックアップのインプレース完全復元をサポートしていません。
 
-## Kubernetes 環境で増分バックアップに BR を使用するにはどうすればよいですか? {#how-can-i-use-br-for-incremental-backup-in-the-kubernetes-environment}
+## BR を Kubernetes の増分バックアップに使用するにはどうすればよいですか? {#how-can-i-use-br-for-incremental-backup-on-kubernetes}
 
 最後の BR バックアップの`commitTs`フィールドを取得するには、kubectl を使用して`kubectl -n ${namespace} get bk ${name}`コマンドを実行します。このフィールドの内容を`--lastbackupts`として使用できます。
 

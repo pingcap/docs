@@ -57,7 +57,7 @@ summary: Learn how to replicate TiDB data to Apache Kafka and Apache Flink using
 2.  増分データを Kafka にレプリケートする変更フィードを作成します。
 
     ```shell
-    tiup ctl:v6.2.0 cdc changefeed create --pd="http://127.0.0.1:2379" --sink-uri="kafka://127.0.0.1:9092/kafka-topic-name?protocol=canal-json" --changefeed-id="kafka-changefeed" --config="changefeed.conf"
+    tiup ctl:<cluster-version> cdc changefeed create --pd="http://127.0.0.1:2379" --sink-uri="kafka://127.0.0.1:9092/kafka-topic-name?protocol=canal-json" --changefeed-id="kafka-changefeed" --config="changefeed.conf"
     ```
 
     -   変更フィードが正常に作成されると、次のように、変更フィード ID などの変更フィード情報が表示されます。
@@ -73,13 +73,13 @@ summary: Learn how to replicate TiDB data to Apache Kafka and Apache Flink using
     本番環境では、Kafka クラスターに複数のブローカー ノードがあります。したがって、複数のブローカーのアドレスをシンク UIR に追加できます。これにより、Kafka クラスターへの安定したアクセスが保証されます。 Kafka クラスターがダウンしても、changefeed は引き続き機能します。 Kafka クラスターに 3 つのブローカー ノードがあり、IP アドレスがそれぞれ 127.0.0.1:9092、127.0.0.2:9092、127.0.0.3:9092 であるとします。次のシンク URI を使用して、変更フィードを作成できます。
 
     ```shell
-    tiup ctl:v6.2.0 cdc changefeed create --pd="http://127.0.0.1:2379" --sink-uri="kafka://127.0.0.1:9092,127.0.0.2:9092,127.0.0.3:9092/kafka-topic-name?protocol=canal-json&partition-num=3&replication-factor=1&max-message-bytes=1048576" --config="changefeed.conf"
+    tiup ctl:<cluster-version> cdc changefeed create --pd="http://127.0.0.1:2379" --sink-uri="kafka://127.0.0.1:9092,127.0.0.2:9092,127.0.0.3:9092/kafka-topic-name?protocol=canal-json&partition-num=3&replication-factor=1&max-message-bytes=1048576" --config="changefeed.conf"
     ```
 
 3.  変更フィードを作成したら、次のコマンドを実行して変更フィードのステータスを確認します。
 
     ```shell
-    tiup ctl:v6.2.0 cdc changefeed list --pd="http://127.0.0.1:2379"
+    tiup ctl:<cluster-version> cdc changefeed list --pd="http://127.0.0.1:2379"
     ```
 
     [TiCDCクラスタとレプリケーション タスクの管理](/ticdc/manage-ticdc.md)を参照して、変更フィードを管理できます。

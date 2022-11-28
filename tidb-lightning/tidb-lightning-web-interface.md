@@ -10,7 +10,7 @@ TiDB Lightningは、インポートの進行状況を表示し、いくつかの
 サーバーモードを有効にするには、 `tidb-lightning`を`--server-mode`フラグで開始します。
 
 ```sh
-./tidb-lightning --server-mode --status-addr :8289
+tiup tidb-lightning --server-mode --status-addr :8289
 ```
 
 または、構成ファイルで`lightning.server-mode`設定を設定します。
@@ -29,7 +29,7 @@ TiDB Lightningが起動したら、 `http://127.0.0.1:8289`にアクセスして
 
 ![Front page of the web interface](/media/lightning-web-frontpage.png)
 
-タイトルバーの機能、左から右へ：
+タイトルバーの機能、左から右へ:
 
 | アイコン             | 関数                                                               |
 | :--------------- | :--------------------------------------------------------------- |

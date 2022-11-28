@@ -5,7 +5,7 @@ summary: Learn about the release notes of TiDB Cloud in 2020.
 
 # 2020 年のTiDB Cloudリリースノート {#tidb-cloud-release-notes-in-2020}
 
-このページでは、2020 年の[TiDB Cloud](https://en.pingcap.com/tidb-cloud/)のリリース ノートを一覧表示します。
+このページでは、2020 年の[TiDB Cloud](https://www.pingcap.com/tidb-cloud/)のリリース ノートを一覧表示します。
 
 ## 2020年12月30日 {#december-30-2020}
 
