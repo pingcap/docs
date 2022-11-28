@@ -897,7 +897,7 @@ For a Range partitioned table, to modify the end of the range, the new end defin
 
 ```sql
 INSERT INTO members VALUES (313, "John", "Doe", "2022-11-22", NULL);
-ALTER TABLE members REORGANIZE PARTITION p2000 INTO (PARTITION p2000 VALUES LESS THAN (2050)); -- succeeds, since it covers the existing row
+ALTER TABLE members REORGANIZE PARTITION p2000 INTO (PARTITION p2000 VALUES LESS THAN (2050)); -- succeeds, since it covers the existing rows
 ALTER TABLE members REORGANIZE PARTITION p2000 INTO (PARTITION p2000 VALUES LESS THAN (2020)); -- fails
 ```
 
