@@ -8,12 +8,12 @@ aliases: ['/docs/dev/br/backup-and-restore-tool/','/docs/dev/reference/tools/br/
 
 Based on the Raft protocol and a reasonable topology, TiDB realizes high availability of clusters. When a few nodes in the cluster fail, the cluster can still provide services. On this basis, to further ensure the security of user data, TiDB provides the Backup & Restore (BR) feature. As the last resort to restore data from natural disasters and misuse, this feature provides the capability to restore service data from any misoperations.
 
-BR satisfies the following business requirements:
+BR satisfies the following requirements:
 
 - Back up cluster data to a disaster recovery (DR) system with an RPO of no more than 10 minutes, reducing data loss in disaster scenarios.
-- Handle the cases of incorrect writes from applications by rolling back data to a time point before the error event.
-- Perform history data auditing to meet the requirements of laws and regulations.
-- Clone the production environment, which is convenient for troubleshooting, performance tuning and verification, and simulation testing.
+- Handle the cases of misoperations from applications by rolling back data to a time point before the error event.
+- Perform history data auditing to meet the requirements of judicial supervision.
+- Clone the production environment, which is convenient for troubleshooting, performance tuning, and simulation testing.
 
 ## Use backup and restore
 
@@ -21,7 +21,7 @@ The way to use BR varies with the deployment method of TiDB. This document intro
 
 For information about how to use this feature in other deployment scenarios, see the following documents:
 
-- [Back Up and Restore TiDB Deployed on TiDB Cloud](https://docs.pingcap.com/tidbcloud/backup-and-restore): It is recommended that you create TiDB clusters on [TiDB Cloud](https://www.pingcap.com/tidb-cloud/?from=en). TiDB Cloud offers an easy way to deploy and manage databases to let you focus on your applications.
+- [Back Up and Restore TiDB Deployed on TiDB Cloud](https://docs.pingcap.com/tidbcloud/backup-and-restore): It is recommended that you create TiDB clusters on [TiDB Cloud](https://www.pingcap.com/tidb-cloud/?from=en). TiDB Cloud offers fully managed databases to let you focus on your applications.
 - [Back Up and Restore Data Using TiDB Operator](https://docs.pingcap.com/tidb-in-kubernetes/stable/backup-restore-overview): If you deploy a TiDB cluster using TiDB Operator on Kubernetes, it is recommended to back up and restore data using Kubernetes CustomResourceDefinition (CRD).
 
 ## BR features
@@ -32,14 +32,14 @@ TiDB BR provides the following features:
 
 - Restore backup data:
 
-    - You can **restore a full backup** or **specific databases or tables** in a full backup to the state when data is backed up.
+    - You can **restore a full backup** or **specific databases or tables** in a full backup.
     - Based on backup data (full backup and log backup), you can specify any time point to restore the target cluster to the state when it is backed up. This type of restore is called point-in-time recovery, or PITR for short.
 
 ### Back up cluster data
 
 Full backup backs up all data of a cluster at a specific time point. TiDB supports the following way of full backup:
 
-- Back up cluster snapshots: A snapshot of a TiDB cluster contains transactionally consistent data at a specific time. You can back up snapshot data of a TiDB cluster using br command-line tool. For details, see [Snapshot backup](/br/br-snapshot-guide.md#back-up-tidb-cluster-snapshots).
+- Back up cluster snapshots: A snapshot of a TiDB cluster contains transactionally consistent data at a specific time. For details, see [Snapshot backup](/br/br-snapshot-guide.md#back-up-tidb-cluster-snapshots).
 
 Full backup occupies much storage space and contains only cluster data at a specific time point. If you want to choose the restore point as required, that is, to perform point-in-time recovery (PITR), you can use the following two ways of backup at the same time:
 
@@ -61,11 +61,11 @@ Corresponding to the backup features, you can perform two types of restore: full
 
 - Restore data to any point in time (PITR)
 
-    - By running the `br restore point` command, you can restore the latest snapshot backup data and log backup data to a specified time. br command-line tool automatically determines the restore scope, accesses backup data, and restores data to the target cluster in turn.
+    - By running the `br restore point` command, you can restore the latest snapshot backup data before recovery time point and log backup data to a specified time. br command-line tool automatically determines the restore scope, accesses backup data, and restores data to the target cluster in turn.
 
 #### Restore performance and impact on TiDB clusters
 
-- Data restore is performed at a scalable speed. Generally, the speed is 100 MB/s per TiKV node. BR only supports restoring data to a new cluster and uses the resources of the target cluster as much as possible. For more details, see [Restore performance and impact](/br/br-snapshot-guide.md#restore-performance-and-impact).
+- Data restore is performed at a scalable speed. Generally, the speed is 100 MiB/s per TiKV node. `br` only supports restoring data to a new cluster and uses the resources of the target cluster as much as possible. For more details, see [Restore performance and impact](/br/br-snapshot-guide.md#restore-performance-and-impact).
 - On each TiKV node, PITR can restore log data at 30 GiB/h. For more details, see [PITR performance and impact](/br/br-pitr-guide.md#performance-and-impact).
 
 ## Backup storage
@@ -84,7 +84,7 @@ This section describes the prerequisites for using the TiDB backup and restore t
 Snapshot backup:
 
 - It is recommended that you perform the backup operation during off-peak hours to minimize the impact on applications.
-- It is recommended that you execute multiple backup or restore operations one by one. Running backup operations in parallel reduces performance and also affects online applications. Worse still, lack of collaboration between multiple tasks might result in task failures and affect cluster performance.
+- It is recommended that you execute multiple backup or restore operations one by one. Running backup operations in parallel leads to low performance. Worse still, lack of collaboration between multiple tasks might result in task failures and affect cluster performance.
 
 Snapshot restore:
 
@@ -110,7 +110,7 @@ Backup and restore might go wrong when some TiDB features are enabled or disable
 
 | Feature | Issue | Solution |
 |  ----  | ----  | ----- |
-|GBK charset|| br command-line tool of versions earlier than v5.4.0 does not support restoring `charset=GBK` tables. No version of br command-line tool supports recovering `charset=GBK` tables to TiDB clusters earlier than v5.4.0. |
+|GBK charset|| BR of versions earlier than v5.4.0 does not support restoring `charset=GBK` tables. No version of br command-line tool supports recovering `charset=GBK` tables to TiDB clusters earlier than v5.4.0. |
 | Clustered index | [#565](https://github.com/pingcap/br/issues/565) | Make sure that the value of the `tidb_enable_clustered_index` global variable during restore is consistent with that during backup. Otherwise, data inconsistency might occur, such as `default not found` error and inconsistent data index. |
 | New collation  | [#352](https://github.com/pingcap/br/issues/352)       | Make sure that the value of the `new_collations_enabled_on_first_bootstrap` variable during restore is consistent with that during backup. Otherwise, inconsistent data index might occur and checksum might fail to pass. For more information, see [FAQ - Why does br tool report `new_collations_enabled_on_first_bootstrap` mismatch?](/faq/backup-and-restore-faq.md#why-does-br-tool-report-new_collations_enabled_on_first_bootstrap-mismatch). |
 | Global temporary tables | | Make sure that you are using v5.3.0 or a later version of br command-line tool to back up and restore data. Otherwise, an error occurs in the definition of the backed global temporary tables. |
