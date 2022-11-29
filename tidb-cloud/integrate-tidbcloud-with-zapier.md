@@ -47,7 +47,7 @@ In the editor page, you can see the trigger and action. Click the trigger to set
 
 3. Set up trigger
 
-   The template has done all the things for you in this step. Just click **Continue** to enter the next step.
+   The template has set the trigger by default. Click **Continue**.
 
 4. Test trigger
 
