@@ -31,7 +31,7 @@ Before you start, you need:
 
 Go to [TiDB Cloud App on Zapier](https://zapier.com/apps/tidb-cloud/integrations). Choose a template and click **Try it**. Then you will enter the editor page. 
 
-Here we use `Add new Github global events to TiDB rows` template as an example. It will add a new row into TiDB Cloud cluster when a new global event is created on GitHub.
+In this tutorial, we use the **Add new Github global events to TiDB rows** template as an example. In this workflow, every time a new global event is created on GitHub, Zapier adds a new row to your TiDB Cloud cluster.
 
 ## Step 2: Set up the trigger
 
