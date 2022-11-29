@@ -21,7 +21,7 @@ Before using TiDB backup and restore features, it is recommended that you unders
 
 ### How to manage backup data?
 
-br command-line tool provides only basic backup and restore features, and does not support backup management. Therefore, you need to decide how to manage backup data on your own, which might involve the following questions?
+BR provides only basic backup and restore features, and does not support backup management. Therefore, you need to decide how to manage backup data on your own, which might involve the following questions?
 
 * Which backup storage system should I choose?
 * In which directory should I place the backup data during a backup task?
@@ -41,7 +41,7 @@ If the TiDB cluster is deployed in a self-built data center, the following pract
 
 > **Note:**
 >
-> If you do not choose NFS or a storage system that supports Amazon S3, GCS, or Azure Blob Storage protocols, the data backed up is generated at each TiKV node. **Note that this is not the recommended way to use BR**, because collecting the backup data might result in data redundancy and operation and maintenance problems. 
+> If you do not choose NFS or a storage system that supports Amazon S3, GCS, or Azure Blob Storage protocols, the data backed up is generated at each TiKV node. **Note that this is not the recommended way to use BR**, because collecting the backup data might result in data redundancy and operation and maintenance problems.
 
 **Organize the backup data directory**
 
@@ -61,14 +61,14 @@ Assume that you need to set the life cycle for each backup data, for example, 7 
 - To restore only full backup data, you can use `br restore` to perform a full restore of the specified backup.
 - If you have started log backup and regularly performed a full backup, you can run the `br restore point` command to restore data to any time point within the backup retention period.
 
-## Deploy and use br command-line tool
+## Deploy and use BR
 
-To deploy br command-line tool, ensure that the following requirements are met:
+To deploy BR, ensure that the following requirements are met:
 
-- br command-line tool, TiKV nodes, and the backup storage system provide network bandwidth that is greater than the backup speed. If the target cluster is particularly large, the threshold of backup and restore speed is limited by the bandwidth of the backup network.
+- BR, TiKV nodes, and the backup storage system provide network bandwidth that is greater than the backup speed. If the target cluster is particularly large, the threshold of backup and restore speed is limited by the bandwidth of the backup network.
 - The backup storage system provides sufficient read and write performance (IOPS). Otherwise, they might become a performance bottleneck during backup or restore.
 - TiKV nodes have at least two additional CPU cores and high performance disks for backups. Otherwise, the backup might have an impact on the services running on the cluster.
-- br command-line tool runs on a node with more than 8 cores and 16 GiB memory.
+- BR runs on a node with more than 8 cores and 16 GiB memory.
 
 You can use backup and restore features in several ways, such as via the command-line tool, by running SQL commands, and using TiDB Operator. The following sections describe these three methods in detail.
 

@@ -61,7 +61,7 @@ Corresponding to the backup features, you can perform two types of restore: full
 
 - Restore data to any point in time (PITR)
 
-    - By running the `br restore point` command, you can restore the latest snapshot backup data before recovery time point and log backup data to a specified time. br command-line tool automatically determines the restore scope, accesses backup data, and restores data to the target cluster in turn.
+    - By running the `br restore point` command, you can restore the latest snapshot backup data before recovery time point and log backup data to a specified time. BR automatically determines the restore scope, accesses backup data, and restores data to the target cluster in turn.
 
 #### Restore performance and impact on TiDB clusters
 
@@ -98,7 +98,7 @@ PITR:
 Backup storage and network configuration:
 
 - It is recommended that you store backup data to a storage system that is compatible with Amazon S3, GCS, or Azure Blob Storage.
-- You need to ensure that the br command-line tool, TiKV, and the backup storage system have enough network bandwidth, and the storage system can provide sufficient read and write performance (IOPS). Otherwise, they might become a performance bottleneck during backup and restore.
+- You need to ensure that BR, TiKV, and the backup storage system have enough network bandwidth, and the storage system can provide sufficient read and write performance (IOPS). Otherwise, they might become a performance bottleneck during backup and restore.
 
 ### Compatibility
 
@@ -108,22 +108,22 @@ Backup and restore might go wrong when some TiDB features are enabled or disable
 
 | Feature | Issue | Solution |
 |  ----  | ----  | ----- |
-|GBK charset|| BR of versions earlier than v5.4.0 does not support restoring `charset=GBK` tables. No version of br command-line tool supports recovering `charset=GBK` tables to TiDB clusters earlier than v5.4.0. |
+|GBK charset|| BR of versions earlier than v5.4.0 does not support restoring `charset=GBK` tables. No version of BR supports recovering `charset=GBK` tables to TiDB clusters earlier than v5.4.0. |
 | Clustered index | [#565](https://github.com/pingcap/br/issues/565) | Make sure that the value of the `tidb_enable_clustered_index` global variable during restore is consistent with that during backup. Otherwise, data inconsistency might occur, such as `default not found` error and inconsistent data index. |
-| New collation  | [#352](https://github.com/pingcap/br/issues/352)       | Make sure that the value of the `new_collations_enabled_on_first_bootstrap` variable during restore is consistent with that during backup. Otherwise, inconsistent data index might occur and checksum might fail to pass. For more information, see [FAQ - Why does br tool report `new_collations_enabled_on_first_bootstrap` mismatch?](/faq/backup-and-restore-faq.md#why-does-br-tool-report-new_collations_enabled_on_first_bootstrap-mismatch). |
-| Global temporary tables | | Make sure that you are using v5.3.0 or a later version of br command-line tool to back up and restore data. Otherwise, an error occurs in the definition of the backed global temporary tables. |
+| New collation  | [#352](https://github.com/pingcap/br/issues/352)       | Make sure that the value of the `new_collations_enabled_on_first_bootstrap` variable during restore is consistent with that during backup. Otherwise, inconsistent data index might occur and checksum might fail to pass. For more information, see [FAQ - Why does BR report `new_collations_enabled_on_first_bootstrap` mismatch?](/faq/backup-and-restore-faq.md#why-does-br-report-new_collations_enabled_on_first_bootstrap-mismatch). |
+| Global temporary tables | | Make sure that you are using v5.3.0 or a later version of BR to back up and restore data. Otherwise, an error occurs in the definition of the backed global temporary tables. |
 | TiDB Lightning Physical Import| | If the upstream database uses the physical import mode of TiDB Lightning, data cannot be backed up in log backup. It is recommended to perform a full backup after the data import. For more information, see [When the upstream database imports data using TiDB Lightning in the physical import mode, the log backup feature becomes unavailable. Why?](/faq/backup-and-restore-faq.md#when-the-upstream-database-imports-data-using-tidb-lightning-in-the-physical-import-mode-the-log-backup-feature-becomes-unavailable-why).|
 
 #### Version compatibility
 
-Before performing backup and restore, br command-line tool compares and checks the TiDB cluster version with its own. If there is a major-version mismatch, br command-line tool prompts a reminder to exit. To forcibly skip the version check, you can set `--check-requirements=false`. Note that skipping the version check might introduce incompatibility.
+Before performing backup and restore, BR compares and checks the TiDB cluster version with its own. If there is a major-version mismatch, BR prompts a reminder to exit. To forcibly skip the version check, you can set `--check-requirements=false`. Note that skipping the version check might introduce incompatibility.
 
 | Backup version (vertical) \ Restore version (horizontal) | Restore to TiDB v6.0 | Restore to TiDB v6.1 | Restore to TiDB v6.2 | Restore to TiDB v6.3 |
 |  ----  |  ----  | ---- | ---- | ---- |
 | TiDB v6.0 snapshot backup | Compatible | Compatible | Compatible | Compatible |
-| TiDB v6.1 snapshot backup | Compatible (A known issue [#36379](https://github.com/pingcap/tidb/issues/36379): if backup data contains an empty schema, br command-line tool might report an error.) | Compatible | Compatible | Compatible |
-| TiDB v6.2 snapshot backup | Compatible (A known issue [#36379](https://github.com/pingcap/tidb/issues/36379): if backup data contains an empty schema, br command-line tool might report an error.) | Compatible | Compatible | Compatible |
-| TiDB v6.3 snapshot backup | Compatible (A known issue [#36379](https://github.com/pingcap/tidb/issues/36379): if backup data contains an empty schema, br command-line tool might report an error.) | Compatible | Compatible | Compatible |
+| TiDB v6.1 snapshot backup | Compatible (A known issue [#36379](https://github.com/pingcap/tidb/issues/36379): if backup data contains an empty schema, BR might report an error.) | Compatible | Compatible | Compatible |
+| TiDB v6.2 snapshot backup | Compatible (A known issue [#36379](https://github.com/pingcap/tidb/issues/36379): if backup data contains an empty schema, BR might report an error.) | Compatible | Compatible | Compatible |
+| TiDB v6.3 snapshot backup | Compatible (A known issue [#36379](https://github.com/pingcap/tidb/issues/36379): if backup data contains an empty schema, BR might report an error.) | Compatible | Compatible | Compatible |
 | TiDB v6.3 log backup| N/A | N/A | Incompatible | Compatible |
 
 ## See also
