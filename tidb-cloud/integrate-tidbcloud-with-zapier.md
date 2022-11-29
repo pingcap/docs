@@ -99,7 +99,7 @@ In the editor page, you can see the trigger and action. Click the trigger to set
 
 2. Choose account
 
-   You can select the account you have created before. Click **Continue** to enter the next step.
+   Select the account you have chosen when you set up the `Find Table in TiDB Cloud` action. Click **Continue**.
 
    ![img.png](/media/tidb-cloud/zapier/tidbcloud_choose_account.png)
 
