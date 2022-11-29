@@ -89,7 +89,7 @@ In the editor page, you can see the trigger and action. Click the trigger to set
 
 4. Test action
 
-   Click **Test action**, and you will create the table in this step. You can also skip the test and create table when this template is running.
+   Click **Test action**, and Zapier will create the table. You can also skip the test, and the table will be created when this workflow is running for the first time.
 
 ## Step 4: Set up the `Create Row in TiDB Cloud` action
 
