@@ -25,7 +25,7 @@ System components and key concepts involved in the log backup process:
 * **local checkpoint ts** (in local metadata): indicates that all logs generated before local checkpoint ts in this TiKV node have been backed up to the target storage.
 * **global checkpoint ts**: indicates that all logs generated before global checkpoint ts in all TiKV nodes have been backed up to the target storage. TiDB Coordinator calculates this timestamp by collecting local checkpoint ts of all TiKV node and then reports it to PD.
 * **TiDB Coordinator**: a TiDB node is elected as the coordinator, which is responsible for collecting and calculating the progress of the entire log backup task (global checkpoint ts). This component is stateless in design, and after its failure, a new Coordinator is elected from the surviving TiDB nodes.
-* **TiKV log backup observer**: runs on each TiKV node in the TiDB cluster, which is responsible for backing up log data. If a TiKV node fails, backing up the data range on it will be taken by other TiKV nodes after region re-election, and these nodes will redo back up data of the failure range starting from global checkpoint ts.
+* **TiKV log backup observer**: runs on each TiKV node in the TiDB cluster, which is responsible for backing up log data. If a TiKV node fails, backing up the data range on it will be taken by other TiKV nodes after region re-election, and these nodes will back up data of the failure range starting from global checkpoint ts.
 
 The complete backup process is as follows:
 
@@ -68,7 +68,7 @@ The complete PITR process is as follows:
 
 2. `br` restores the full backup data.
 
-   * Performs snapshot data restoring. For more details about the process of snapshot backup data restore, refer to [Restore snapshot backup data](/br/br-snapshot-architecture.md#process-of-restore).
+   * Restores full backup data. For more details about the process of snapshot backup data restore, refer to [Restore snapshot backup data](/br/br-snapshot-architecture.md#process-of-restore).
 
 3. `br` restores the log backup data.
 
@@ -97,10 +97,10 @@ The complete PITR process is as follows:
 
 Log backup generates the following types of files:
 
-- `{min_ts}-{uuid}.log` file: stores the KV change log data of the backup task. The `{min_ts}` is the minimum timestamp of the KV change log data in the file, and the `{uuid}` is generated randomly when the file is created.
-- `{checkpoint_ts}-{uuid}.meta` file: is generated every time each TiKV node uploads the log backup data and stores all log backup data files uploaded this time. The `{checkpoint_ts}` is the log backup checkpoint of the TiKV node, and the global checkpoint is the minimum checkpoint of all TiKV nodes. The `{uuid}` is generated randomly when the file is created.
+- `{min_ts}-{uuid}.log` file: stores the KV change log data of the backup task. The `{min_ts}` is the minimum TSO timestamp of the KV change log data in the file, and the `{uuid}` is generated randomly when the file is created.
+- `{checkpoint_ts}-{uuid}.meta` file: is generated every time each TiKV node uploads the log backup data and stores metadata of all log backup data files uploaded this time. The `{checkpoint_ts}` is the log backup checkpoint of the TiKV node, and the global checkpoint is the minimum checkpoint of all TiKV nodes. The `{uuid}` is generated randomly when the file is created.
 - `{store_id}.ts` file: this file is updated with global checkpoint ts every time each TiKV node uploads the log backup data. The `{store_id}` is the store ID of the TiKV node.
-- `v1_stream_truncate_safepoint.txt` file: stores the timestamp corresponding to the earliest backup data in storage that deleted by `br log truncate`.
+- `v1_stream_truncate_safepoint.txt` file: stores the timestamp corresponding to the latest backup data in storage that deleted by `br log truncate`.
 
 ### Structure of backup files
 

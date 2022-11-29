@@ -107,7 +107,7 @@ The following steps describe how to clean up backup data that exceeds the backup
 
 > **Note:**
 >
-> The preceding functional specification is based on test results from the following two testing scenarios. The actual data might be different.
+> The preceding specifications are based on test results from the following two testing scenarios. The actual data might be different.
 >
 > - Snapshot data restore speed = Snapshot data size / (duration * the number of TiKV nodes)
 > - Log data restore speed = Restored log data size / (duration * the number of TiKV nodes)
