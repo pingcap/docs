@@ -15,11 +15,11 @@ Using the [TiDB Cloud app](https://zapier.com/apps/tidb-cloud/integrations) on Z
 
 This guide gives a high-level introduction to the TiDB Cloud app on Zapier and an example of how to use it.
 
-# Quick start with template
+## Quick start with template
 
 In this section, we will use the preset template as an example to try out TiDB Cloud App on Zapier.
 
-## Prerequisites
+### Prerequisites
 
 Before you start, you need:
 
@@ -27,13 +27,13 @@ Before you start, you need:
 - A [GitHub account](https://github.com/login).
 - A [TiDB Cloud account](https://tidbcloud.com/signup) and a Serverless Tier cluster on TiDB Cloud, See [TiDB Cloud Quick Start](https://docs.pingcap.com/tidbcloud/tidb-cloud-quickstart#step-1-create-a-tidb-cluster) for more details.
 
-## Step 1: Get the template
+### Step 1: Get the template
 
 Go to [TiDB Cloud App on Zapier](https://zapier.com/apps/tidb-cloud/integrations). Choose a template and click **Try it**. Then you will enter the editor page. 
 
 In this tutorial, we use the **Add new Github global events to TiDB rows** template as an example. In this workflow, every time a new global event is created on GitHub, Zapier adds a new row to your TiDB Cloud cluster.
 
-## Step 2: Set up the trigger
+### Step 2: Set up the trigger
 
 In the editor page, you can see the trigger and action. Click the trigger to set up the trigger.
     
@@ -53,7 +53,7 @@ In the editor page, you can see the trigger and action. Click the trigger to set
 
    Click **Test trigger**. If the trigger is successfully set up, you can see the data of a new global event from the GitHub account. Click **Continue**.
 
-## Step 3: Set up the `Find Table in TiDB Cloud` action
+### Step 3: Set up the `Find Table in TiDB Cloud` action
 
 1. Choose app & event
 
@@ -65,7 +65,7 @@ In the editor page, you can see the trigger and action. Click the trigger to set
    2. On the login page, fill in your public key and private key. To get the TiDB Cloud API key, follow the instructions in [TiDB Cloud API documentation](https://docs.pingcap.com/tidbcloud/api/v1beta#section/Authentication/API-Key-Management). 
    3. Click **Continue**.
     
-    ![img.png](/media/tidb-cloud/zapier/tidb_findtable_account.png)
+    ![Account](/media/tidb-cloud/zapier/zapier-tidbcloud-account.png)
 
 3. Set up action
 
@@ -85,13 +85,13 @@ In the editor page, you can see the trigger and action. Click the trigger to set
 
     4. In **The table you want to search** box, fill in `github_global_event`. If the table does not exist, the template uses the following DDL to create the table. Click **Continue**.
 
-        ![The create table DDL](/media/tidb-cloud/zapier/zapier-tidb-cloud-create-table-ddl.png)
+        ![The create table DDL](/media/tidb-cloud/zapier/zapier-tidbcloud-create-table-ddl.png)
 
 4. Test action
 
    Click **Test action**, and Zapier will create the table. You can also skip the test, and the table will be created when this workflow is running for the first time.
 
-## Step 4: Set up the `Create Row in TiDB Cloud` action
+### Step 4: Set up the `Create Row in TiDB Cloud` action
 
 1. Choose app & event
 
@@ -101,7 +101,7 @@ In the editor page, you can see the trigger and action. Click the trigger to set
 
    Select the account you have chosen when you set up the `Find Table in TiDB Cloud` action. Click **Continue**.
 
-   ![img.png](/media/tidb-cloud/zapier/tidbcloud_choose_account.png)
+   ![Choose account](/media/tidb-cloud/zapier/zapier-tidbcloud-choose-account.png)
 
 3. Set up action
 
@@ -109,11 +109,11 @@ In the editor page, you can see the trigger and action. Click the trigger to set
 
     2. In the **Table Name**, choose the **github_global_event** table from drop-down list. The columns of the table are displayed.
 
-        ![Table columns](/media/tidb-cloud/zapier/zapier-set-up-tidb-cloud-columns.png)
+        ![Table columns](/media/tidb-cloud/zapier/zapier-set-up-tidbcloud-columns.png)
 
     3. In the **Columns** box, choose the corresponding data from the trigger. Fill in all the columns, and click **Continue**.
 
-        ![Fill in Columns](/media/tidb-cloud/zapier/zapier-fill-in-tidb-cloud-triggers-data.png)
+        ![Fill in Columns](/media/tidb-cloud/zapier/zapier-fill-in-tidbcloud-triggers-data.png)
 
 4. Test action
 
@@ -129,15 +129,15 @@ In the editor page, you can see the trigger and action. Click the trigger to set
    1 row in set (0.17 sec)
    ```
 
-## Step 5: Publish your zap
+### Step 5: Publish your zap
 
 Click **Publish** to publish your zap. Then you can see the zap is running in the [home page](https://zapier.com/app/zaps).
 
-![Publish the zap](/media/tidb-cloud/zapier/zapier-tidb-cloud-publish.png)
+![Publish the zap](/media/tidb-cloud/zapier/zapier-tidbcloud-publish.png)
 
 Now, this zap will record all the global events on GitHub into TiDB Cloud automatically.
 
-# Trigger & Action
+## Trigger & Action
 
 [Trigger and action](https://zapier.com/how-it-works) are the key concepts in Zapier.
 
@@ -163,7 +163,7 @@ Actions
 - Find Row: Finds a row in a table via a lookup column.
 - Find Row (Custom Query): Finds a Row in a table via a custom query in your control.
 
-# TiDB Cloud App template
+## TiDB Cloud App template
 
 We also provide some templates for you to use directly. Here are some examples, you can find all the templates in the [TiDB Cloud App](https://zapier.com/apps/tidb-cloud/integrations) page.
 
@@ -173,15 +173,15 @@ We also provide some templates for you to use directly. Here are some examples, 
 - [Store new Salesforce contacts on TiDB rows](https://zapier.com/apps/salesforce/integrations/tidb-cloud/1134923/store-new-salesforce-contacts-on-tidb-rows).
 - [Create TiDB rows for new Gmail emails with resumes and send direct Slack notifications](https://zapier.com/apps/gmail/integrations/slack/1135456/create-tidb-rows-for-new-gmail-emails-with-resumes-and-send-direct-slack-notifications)
 
-# FAQ 
+## FAQ 
 
-## How to set TiDB Cloud account
+### How to set TiDB Cloud account
 
 TiDB Cloud account is not your TiDB Cloud login account. It is your TiDB Cloud API key.
 
 To get your TiDB Cloud API key, follow the [TiDB Cloud API documentation](https://docs.pingcap.com/tidbcloud/api/v1beta#section/Authentication/API-Key-Management).
 
-## How TiDB Cloud triggers de-duplication
+### How TiDB Cloud triggers de-duplication
 
 Zapier triggers can work with a polling API call to check for new data periodically (depends on Zapier plan).
 
@@ -191,7 +191,7 @@ Since we don’t want to trigger an action multiple times when an item in your A
 
 `New Cluster` and `New Table` can simply use the `cluster_id` and `table_id` as `id` field to do the deduplication. You need not do anything for them. Here I will introduce other triggers. 
 
-### New Row Trigger
+**New Row Trigger**
 
 First, `New Row` trigger limits 10,000 results in every fetch. This will cause the new rows will not be triggered for they may not be included in this 10000 results.
 
@@ -205,7 +205,7 @@ Second, `New Row` will use a flexible strategy to generate the `id` filed to do 
 4. unique key if the table has a unique key.
 5. the first column of the table.
 
-### New Row (Custom Query) Trigger
+**New Row (Custom Query) Trigger**
 
 `New Row (Custom Query)` trigger limits 1,000,000 results in every fetch. It is a large number, and we only set it to protect the whole system. So, Your query is desired to include order and limit.
 
@@ -213,7 +213,7 @@ As for deduplication, your query results must have a unique id field or you will
 
 Note that your custom query must run less than 30 seconds.
 
-## Resources required by TiDB Cloud actions
+### Resources required by TiDB Cloud actions
 
 Most of the TiDB Cloud actions require additional resources you need prepare.
 
@@ -244,7 +244,7 @@ Most of the TiDB Cloud actions require additional resources you need prepare.
    - Find Row: Finds a row in a table via a lookup column.
    - Find Row (Custom Query): Finds a Row in a table via a custom query in your control.
    
-## How to use `find or create` action
+### How to use `find or create` action
 
 `Find or create` action enables you create a resource when it is not exist. Here is an example:
 
@@ -252,6 +252,6 @@ Most of the TiDB Cloud actions require additional resources you need prepare.
 
 2. Click `Create TiDB Cloud Table if it doesn’t exist yet?` button to enable `find and create` in `set up action` step
 
-   ![img.png](/media/tidb-cloud/zapier/find-and-create.png)
+   ![Find and create](/media/tidb-cloud/zapier/zapier-tidbcloud-find-and-create.png)
 
 In this example, we will create a table if it does not exist yet. Note that the table will be created directly if you test your action.
