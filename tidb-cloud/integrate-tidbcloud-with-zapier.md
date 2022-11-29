@@ -105,7 +105,9 @@ In the editor page, you can see the trigger and action. Click the trigger to set
 
 3. Set up action
 
-   Fill in the `Project Name`, `Cluster Name`, `TiDB Password`, and `Database Name` just like you did in the previous step. Then choose the **github_global_event** table from drop-down list , and you will find the columns of the table will be shown.
+    1. Fill in the **Project Name**, **Cluster Name**, **TiDB Password**, and **Database Name** as in the previous step. 
+
+    2. In the **Table Name**, choose the **github_global_event** table from drop-down list. The columns of the table are displayed.
 
    ![img.png](/media/tidb-cloud/zapier/tidbcloud_columns.png)
 
