@@ -109,7 +109,7 @@ In the editor page, you can see the trigger and action. Click the trigger to set
 
 4. Test action
 
-    Click **Test action** to create a new row in the table. If you check the TiDB, you can find the data
+    Click **Test action** to create a new row in the table. If you check your TiDB Cloud cluster, you can find the data is written successfully.
 
    ```
    mysql> select * from test.github_global_event;
