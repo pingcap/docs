@@ -31,7 +31,7 @@ You can back up the latest or specified snapshot of the TiDB cluster using the `
 br backup full \
     --pd "${PD_IP}:2379" \
     --backupts '2022-09-08 13:30:00' \
-    --storage "s3://${backup_collection_addr}/snapshot-${date}?access_key=${access_key}&secret_access_key=${secret_access_key}" \
+    --storage "s3://${backup_collection_addr}/snapshot-${date}?access-key=${access-key}&secret-access-key=${secret-access-key}" \
     --ratelimit 128 \
     --log-file backupfull.log
 ```
@@ -50,7 +50,7 @@ Full Backup <---------/................................................> 17.12%.
 
 ## Back up a database or a table
 
-The `br` command-line tool supports backing up partial data of a specified database or table from a cluster snapshot or incremental data backup. This feature allows you to filter out unwanted data from snapshot backup and incremental data backup, and back up only business-critical data.
+Backup & Restore (BR) supports backing up partial data of a specified database or table from a cluster snapshot or incremental data backup. This feature allows you to filter out unwanted data from snapshot backup and incremental data backup, and back up only business-critical data.
 
 ### Back up a database
 
@@ -62,7 +62,7 @@ The following example backs up the `test` database to Amazon S3:
 br backup db \
     --pd "${PD_IP}:2379" \
     --db test \
-    --storage "s3://${backup_collection_addr}/snapshot-${date}?access_key=${access_key}&secret_access_key=${secret_access_key}" \
+    --storage "s3://${backup_collection_addr}/snapshot-${date}?access-key=${access-key}&secret-access-key=${secret-access-key}" \
     --ratelimit 128 \
     --log-file backuptable.log
 ```
@@ -80,7 +80,7 @@ br backup table \
     --pd "${PD_IP}:2379" \
     --db test \
     --table usertable \
-    --storage "s3://${backup_collection_addr}/snapshot-${date}?access_key=${access_key}&secret_access_key=${secret_access_key}" \
+    --storage "s3://${backup_collection_addr}/snapshot-${date}?access-key=${access-key}&secret-access-key=${secret-access-key}" \
     --ratelimit 128 \
     --log-file backuptable.log
 ```
@@ -97,7 +97,7 @@ The following example backs up tables that match the `db*.tbl*` filter rule to A
 br backup full \
     --pd "${PD_IP}:2379" \
     --filter 'db*.tbl*' \
-    --storage "s3://${backup_collection_addr}/snapshot-${date}?access_key=${access_key}&secret_access_key=${secret_access_key}" \
+    --storage "s3://${backup_collection_addr}/snapshot-${date}?access-key=${access-key}&secret-access-key=${secret-access-key}" \
     --ratelimit 128 \
     --log-file backupfull.log
 ```
@@ -108,7 +108,7 @@ br backup full \
 >
 > This is an experimental feature. It is not recommended that you use it in the production environment.
 
-`br` supports encrypting backup data at the backup side and [at the storage side when backing up to Amazon S3](/br/backup-and-restore-storages.md#amazon-s3-server-side-encryption). You can choose either encryption method as required.
+BR supports encrypting backup data at the backup side and [at the storage side when backing up to Amazon S3](/br/backup-and-restore-storages.md#amazon-s3-server-side-encryption). You can choose either encryption method as required.
 
 Since TiDB v5.3.0, you can encrypt backup data by configuring the following parameters:
 
@@ -121,7 +121,7 @@ The following is an example:
 ```shell
 br backup full\
     --pd ${PD_IP}:2379 \
-    --storage "s3://${backup_collection_addr}/snapshot-${date}?access_key=${access_key}&secret_access_key=${secret_access_key}" \
+    --storage "s3://${backup_collection_addr}/snapshot-${date}?access-key=${access-key}&secret-access-key=${secret-access-key}" \
     --crypter.method aes128-ctr \
     --crypter.key 0123456789abcdef0123456789abcdef
 ```
@@ -138,7 +138,7 @@ You can restore a TiDB cluster snapshot by running the `br restore full` command
 ```shell
 br restore full \
     --pd "${PD_IP}:2379" \
-    --storage "s3://${backup_collection_addr}/snapshot-${date}?access_key=${access_key}&secret_access_key=${secret_access_key}" \
+    --storage "s3://${backup_collection_addr}/snapshot-${date}?access-key=${access-key}&secret-access-key=${secret-access-key}" \
     --ratelimit 128 \
     --log-file restorefull.log
 ```
@@ -169,7 +169,7 @@ br restore db \
     --pd "${PD_IP}:2379" \
     --db "test" \
     --ratelimit 128 \
-    --storage "s3://${backup_collection_addr}/snapshot-${date}?access_key=${access_key}&secret_access_key=${secret_access_key}" \
+    --storage "s3://${backup_collection_addr}/snapshot-${date}?access-key=${access-key}&secret-access-key=${secret-access-key}" \
     --log-file restore_db.log
 ```
 
@@ -191,7 +191,7 @@ br restore table \
     --db "test" \
     --table "usertable" \
     --ratelimit 128 \
-    --storage "s3://${backup_collection_addr}/snapshot-${date}?access_key=${access_key}&secret_access_key=${secret_access_key}" \
+    --storage "s3://${backup_collection_addr}/snapshot-${date}?access-key=${access-key}&secret-access-key=${secret-access-key}" \
     --log-file restore_table.log
 ```
 
@@ -207,7 +207,7 @@ The following example restores tables that match the `db*.tbl*` filter rule from
 br restore full \
     --pd "${PD_IP}:2379" \
     --filter 'db*.tbl*' \
-    --storage "s3://${backup_collection_addr}/snapshot-${date}?access_key=${access_key}&secret_access_key=${secret_access_key}" \
+    --storage "s3://${backup_collection_addr}/snapshot-${date}?access-key=${access-key}&secret-access-key=${secret-access-key}" \
     --log-file restorefull.log
 ```
 
@@ -222,7 +222,7 @@ After encrypting the backup data, you need to pass in the corresponding decrypti
 ```shell
 br restore full\
     --pd "${PD_IP}:2379" \
-    --storage "s3://${backup_collection_addr}/snapshot-${date}?access_key=${access_key}&secret_access_key=${secret_access_key}" \
+    --storage "s3://${backup_collection_addr}/snapshot-${date}?access-key=${access-key}&secret-access-key=${secret-access-key}" \
     --crypter.method aes128-ctr \
     --crypter.key 0123456789abcdef0123456789abcdef
 ```
