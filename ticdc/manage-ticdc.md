@@ -178,7 +178,7 @@ The following are descriptions of parameters and parameter values that can be co
 | Parameter/Parameter Value    | Description                                             |
 | :------------ | :------------------------------------------------ |
 | `root`        | The username of the downstream database                              |
-| `123456`       | The password of the downstream database (can be encrypted using Base64)                                      |
+| `123456`       | The password of the downstream database (can be encoded using Base64)                                      |
 | `127.0.0.1`    | The IP address of the downstream database                               |
 | `3306`         | The port for the downstream data                                 |
 | `worker-count` | The number of SQL statements that can be concurrently executed to the downstream (optional, `16` by default)       |
