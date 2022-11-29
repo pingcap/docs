@@ -94,7 +94,7 @@ The complete restore process is as follows:
 Snapshot backup generates the following types of files:
 
 - `SST` file: stores the data that the TiKV node backs up. The size of an `SST` file equals to that of a Region.
-- `backupmeta` file: stores the metadata of a backup task, including the number of all backup files,  and the key range, the size, and the Hash (sha256) value of each backup file.
+- `backupmeta` file: stores the metadata of a backup task, including the number of all backup files, and the key range, the size, and the Hash (sha256) value of each backup file.
 - `backup.lock` file: prevents multiple backup tasks from storing data at the same directory.
 
 ### Naming format of SST files
