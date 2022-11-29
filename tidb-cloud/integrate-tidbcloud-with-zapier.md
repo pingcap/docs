@@ -61,7 +61,9 @@ In the editor page, you can see the trigger and action. Click the trigger to set
 
 2. Choose account
 
-   You will be redirected to a new login page once you click the **Sign in**. Fill in your `Public Key` and `Private Key`. To get API key, follow the [TiDB Cloud API documentation](https://docs.pingcap.com/tidbcloud/api/v1beta#section/Authentication/API-Key-Management). Click **Continue** after you finish.
+   1. Click the **Sign in** button, and you will be redirected to a new login page. 
+   2. On the login page, fill in your public key and private key. To get the TiDB Cloud API key, follow the instructions in [TiDB Cloud API documentation](https://docs.pingcap.com/tidbcloud/api/v1beta#section/Authentication/API-Key-Management). 
+   3. Click **Continue**.
     
     ![img.png](/media/tidb-cloud/zapier/tidb_findtable_account.png)
 
