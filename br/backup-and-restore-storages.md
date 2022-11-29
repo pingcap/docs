@@ -6,7 +6,7 @@ aliases: ['/docs/dev/br/backup-and-restore-storages/','/tidb/dev/backup-storage-
 
 # Backup Storages
 
-TiDB supports storing backup data to Amazon S3, Google Cloud Storage (GCS), Azure Blob Storage, and NFS. Specifically, you can specify the URL of backup storage in the `--storage` or `-s` parameter of `br`. This document introduces the [URL format](#url-format) and [authentication](#authentication) of different external storage services, and [server-side encryption](#server-side-encryption).
+TiDB supports storing backup data to Amazon S3, Google Cloud Storage (GCS), Azure Blob Storage, and NFS. Specifically, you can specify the URL of backup storage in the `--storage` or `-s` parameter of `br` commands. This document introduces the [URL format](#url-format) and [authentication](#authentication) of different external storage services, and [server-side encryption](#server-side-encryption).
 
 ## URL format
 
@@ -71,14 +71,14 @@ This section provides some URL examples by using `external` as the `host` parame
 
 ```shell
 ./br restore full -u "${PD_IP}:2379" \
---storage "s3://external/backup-20220915?access_key=${access_key}&secret_access_key=${secret_access_key}"
+--storage "s3://external/backup-20220915?access-key=${access-key}&secret-access-key=${secret-access-key}"
 ```
 
 **Restore snapshot data from Amazon S3**
 
 ```shell
 ./br restore full -u "${PD_IP}:2379" \
---storage "s3://external/backup-20220915?access_key=${access_key}&secret_access_key=${secret_access_key}"
+--storage "s3://external/backup-20220915?access-key=${access-key}&secret-access-key=${secret-access-key}"
 ```
 
 </div>
@@ -88,14 +88,14 @@ This section provides some URL examples by using `external` as the `host` parame
 
 ```shell
 ./br backup full --pd "${PD_IP}:2379" \
---storage 'gcs://external/backup-20220915?credentials-file=${credentials-file-path}'
+--storage "gcs://external/backup-20220915?credentials-file=${credentials-file-path}"
 ```
 
 **Restore snapshot data from GCS**
 
 ```shell
 ./br restore full --pd "${PD_IP}:2379" \
---storage 'gcs://external/backup-20220915?credentials-file=${credentials-file-path}'
+--storage "gcs://external/backup-20220915?credentials-file=${credentials-file-path}"
 ```
 
 </div>
@@ -105,14 +105,14 @@ This section provides some URL examples by using `external` as the `host` parame
 
 ```shell
 ./br backup full -u "${PD_IP}:2379" \
---storage "azure://external/backup-20220915?account-name=${account name}&account-key=${account key}"
+--storage "azure://external/backup-20220915?account-name=${account-name}&account-key=${account-key}"
 ```
 
 **Restore the `test` database from snapshot backup data in Azure Blob Storage**
 
 ```shell
 ./br restore db --db test -u "${PD_IP}:2379" \
---storage "azure://external/backup-20220915account-name=${account name}&account-key=${account key}"
+--storage "azure://external/backup-20220915account-name=${account-name}&account-key=${account-key}"
 ```
 
 </div>
@@ -127,7 +127,7 @@ When storing backup data in a cloud storage system, you need to configure authen
 
 Before backup, configure the following privileges to access the backup directory on S3.
 
-- Minimum privileges for TiKV and `br` to access the backup directories during backup: `s3:ListBucket`, `s3:PutObject`, and `s3:AbortMultipartUpload`
+- Minimum privileges for TiKV and br command-line tool (hereinafter referred to as `br`) to access the backup directories during backup: `s3:ListBucket`, `s3:PutObject`, and `s3:AbortMultipartUpload`
 - Minimum privileges for TiKV and `br` to access the backup directories during restore: `s3:ListBucket` and `s3:GetObject`
 
 If you have not yet created a backup directory, refer to [Create a bucket](https://docs.aws.amazon.com/AmazonS3/latest/userguide/create-bucket-overview.html) to create an S3 bucket in the specified region. If necessary, you can also create a folder in the bucket by referring to [Create a folder](https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-folders.html).
@@ -212,7 +212,7 @@ You can configure the account used to access GCS by specifying the access key. I
 
         ```shell
         ./br backup full -u "${PD_IP}:2379" \
-        --storage "azure://external/backup-20220915?account-name=${account name}"
+        --storage "azure://external/backup-20220915?account-name=${account-name}"
         ```
 
 </div>
