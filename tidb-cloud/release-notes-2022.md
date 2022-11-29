@@ -12,9 +12,9 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
 **General changes**
 
-- Improve the user experience from AWS Marketplace and GCP Marketplace.
+- Improve the user experience from AWS Marketplace and Google Cloud Marketplace.
 
-    No matter you are new to TiDB Cloud or you already have a TiDB Cloud account, now you can link with your AWS or GCP billing account, which makes it easier to complete AWS or GCP Marketplace subscriptions.
+    No matter whether you are new to TiDB Cloud or you already have a TiDB Cloud account, now you can link with your AWS or GCP billing account, which makes it easier to complete AWS or GCP Marketplace subscriptions.
 
     For how to make the link, see [Billing from AWS Marketplace or Google Cloud Marketplace](/tidb-cloud/tidb-cloud-billing.md#billing-from-aws-marketplace-or-google-cloud-marketplace).
 
