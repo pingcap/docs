@@ -95,7 +95,7 @@ In the editor page, you can see the trigger and action. Click the trigger to set
 
 1. Choose app & event
 
-   Keep the default value set by template. Click **Continue** to enter the next step.
+   Keep the default value set by the template. Click **Continue**.
 
 2. Choose account
 
