@@ -39,7 +39,7 @@ The TiDB Cloud roadmap brings you what's coming in the near future, so you can s
   </tr>
   <tr>
     <td>Cloud provider marketplace</td>
-    <td>Improve the user experience from AWS Marketplace and GCP Marketplace.</td>
+    <td>✅ Improve the user experience from AWS Marketplace and GCP Marketplace.</td>
     <td>Improve the user journey and experience of users who sign up from AWS Marketplace and GCP Marketplace.</td>
   </tr>
   <tr>
