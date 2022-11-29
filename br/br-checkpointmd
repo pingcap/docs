@@ -15,11 +15,11 @@ If your TiDB cluster is large and cannot tolerate backup again after a failure, 
 
 ## Usage limitations
 
-During the backup, `br` periodically updates the `gc-safe-point` of the backup snapshot in PD to avoid data being garbage collected. When `br` exits, the `gc-safe-point` cannot be updated in time. As a result, before the next backup retry, the data might have been garbage collected.
+During the backup, `br` periodically updates the `gc-safepoint` of the backup snapshot in PD to avoid data being garbage collected. When `br` exits, the `gc-safepoint` cannot be updated in time. As a result, before the next backup retry, the data might have been garbage collected.
 
-To avoid this situation, `br` keeps the `gc-safe-point` for about one hour by default when `gcttl` is not specified. If you need to extend this time, you can set the `gcttl` parameter.
+To avoid this situation, `br` keeps the `gc-safepoint` for about one hour by default when `gcttl` is not specified. If you need to extend this time, you can set the `gcttl` parameter.
 
-The following example sets `gcttl` to 15 hours to extend the retention period of `gc-safe-point`:
+The following example sets `gcttl` to 15 hours to extend the retention period of `gc-safepoint`:
 
 ```shell
 br backup full \
@@ -29,7 +29,7 @@ br backup full \
 
 > **Note:**
 >
-> `gc-safe-point` created before backup is deleted after the snapshot backup is completed and you do not need to delete it manually.
+> `gc-safepoint` created before backup is deleted after the snapshot backup is completed and you do not need to delete it manually.
 
 ## Implementation details
 
