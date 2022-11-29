@@ -127,8 +127,8 @@ When storing backup data in a cloud storage system, you need to configure authen
 
 Before backup, configure the following privileges to access the backup directory on S3.
 
-- Minimum privileges for TiKV and br command-line tool (hereinafter referred to as `br`) to access the backup directories during backup: `s3:ListBucket`, `s3:PutObject`, and `s3:AbortMultipartUpload`
-- Minimum privileges for TiKV and `br` to access the backup directories during restore: `s3:ListBucket` and `s3:GetObject`
+- Minimum privileges for TiKV and Backup & Restore (BR) to access the backup directories during backup: `s3:ListBucket`, `s3:PutObject`, and `s3:AbortMultipartUpload`
+- Minimum privileges for TiKV and BR to access the backup directories during restore: `s3:ListBucket` and `s3:GetObject`
 
 If you have not yet created a backup directory, refer to [Create a bucket](https://docs.aws.amazon.com/AmazonS3/latest/userguide/create-bucket-overview.html) to create an S3 bucket in the specified region. If necessary, you can also create a folder in the bucket by referring to [Create a folder](https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-folders.html).
 
@@ -138,14 +138,14 @@ It is recommended that you configure access to S3 using either of the following 
 
     If you specify an access key and a secret access key in the URL, authentication is performed using the specified access key and secret access key. Besides specifying the key in the URL, the following methods are also supported:
 
-    - `br` reads the environment variables `$AWS_ACCESS_KEY_ID` and `$AWS_SECRET_ACCESS_KEY`.
-    - `br` reads the environment variables `$AWS_ACCESS_KEY` and `$AWS_SECRET_KEY`.
-    - `br` reads the shared credentials file in the path specified by the environment variable `$AWS_SHARED_CREDENTIALS_FILE`.
-    - `br` reads the shared credentials file in the `~/.aws/credentials` path.
+    - BR reads the environment variables `$AWS_ACCESS_KEY_ID` and `$AWS_SECRET_ACCESS_KEY`.
+    - BR reads the environment variables `$AWS_ACCESS_KEY` and `$AWS_SECRET_KEY`.
+    - BR reads the shared credentials file in the path specified by the environment variable `$AWS_SHARED_CREDENTIALS_FILE`.
+    - BR reads the shared credentials file in the `~/.aws/credentials` path.
 
 - Method 2: Access based on the IAM role
 
-    Associate an IAM role that can access S3 with EC2 instances where the TiKV and `br` nodes run. After the association, `br` can directly access the backup directories in S3 without additional settings.
+    Associate an IAM role that can access S3 with EC2 instances where the TiKV and BR nodes run. After the association, BR can directly access the backup directories in S3 without additional settings.
 
     ```shell
     br backup full --pd "${PD_IP}:2379" \
@@ -157,20 +157,20 @@ It is recommended that you configure access to S3 using either of the following 
 
 You can configure the account used to access GCS by specifying the access key. If you specify the `credentials-file` parameter, the authentication is performed using the specified `credentials-file`. Besides specifying the key in the URL, the following methods are also supported:
 
-- `br` reads the file in the path specified by the environment variable `$GOOGLE_APPLICATION_CREDENTIALS`
-- `br` reads the file `~/.config/gcloud/application_default_credentials.json`.
-- `br` obtains the credentials from the metadata server when the cluster is running in GCE or GAE.
+- BR reads the file in the path specified by the environment variable `$GOOGLE_APPLICATION_CREDENTIALS`
+- BR reads the file `~/.config/gcloud/application_default_credentials.json`.
+- BR obtains the credentials from the metadata server when the cluster is running in GCE or GAE.
 
 </div>
 <div label="Azure Blob Storage" value="azure">
 
 - Method 1: Specify the access key
 
-    If you specify `account-name` and `account-key` in the URL, the authentication is performed using the specified access key and secret access key. Besides the method of specifying the key in the URL, `br` can also read the key from the environment variable `$AZURE_STORAGE_KEY`.
+    If you specify `account-name` and `account-key` in the URL, the authentication is performed using the specified access key and secret access key. Besides the method of specifying the key in the URL, BR can also read the key from the environment variable `$AZURE_STORAGE_KEY`.
 
 - Method 2: Use Azure AD for backup and restore
 
-    Configure the environment variables `$AZURE_CLIENT_ID`, `$AZURE_TENANT_ID`, and `$AZURE_CLIENT_SECRET` on the node where `br` is running.
+    Configure the environment variables `$AZURE_CLIENT_ID`, `$AZURE_TENANT_ID`, and `$AZURE_CLIENT_SECRET` on the node where BR is running.
 
     - When the cluster is started using TiUP, TiKV uses the systemd service. The following example shows how to configure the preceding three environment variables for TiKV:
 
@@ -200,7 +200,7 @@ You can configure the account used to access GCS by specifying the access key. I
             systemctl restart tikv-24000
             ```
 
-    - To configure the Azure AD information for TiKV and `br` started with command lines, you only need to check whether the environment variables `$AZURE_CLIENT_ID`, `$AZURE_TENANT_ID`, and `$AZURE_CLIENT_SECRET` are configured in the operating environment by running the following commands:
+    - To configure the Azure AD information for TiKV and BR started with command lines, you only need to check whether the environment variables `$AZURE_CLIENT_ID`, `$AZURE_TENANT_ID`, and `$AZURE_CLIENT_SECRET` are configured in the operating environment by running the following commands:
 
         ```shell
         echo $AZURE_CLIENT_ID
@@ -208,7 +208,7 @@ You can configure the account used to access GCS by specifying the access key. I
         echo $AZURE_CLIENT_SECRET
         ```
 
-    - Use `br` to back up data to Azure Blob Storage:
+    - Use BR to back up data to Azure Blob Storage:
 
         ```shell
         ./br backup full -u "${PD_IP}:2379" \
@@ -222,8 +222,8 @@ You can configure the account used to access GCS by specifying the access key. I
 
 ### Amazon S3 server-side encryption
 
-`br` supports server-side encryption when backing up data to Amazon S3. You can also use an AWS KMS key you create for S3 server-side encryption using `br`. For details, see [`br` S3 server-side encryption](/encryption-at-rest.md#br-s3-server-side-encryption).
+BR supports server-side encryption when backing up data to Amazon S3. You can also use an AWS KMS key you create for S3 server-side encryption using BR. For details, see [BR S3 server-side encryption](/encryption-at-rest.md#br-s3-server-side-encryption).
 
 ## Other features supported by the storage service
 
-`br` v6.3.0 supports AWS [S3 Object Lock](https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-lock.html). You can enable this feature to prevent backup data from being tampered with or deleted.
+BR v6.3.0 supports AWS [S3 Object Lock](https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-lock.html). You can enable this feature to prevent backup data from being tampered with or deleted.
