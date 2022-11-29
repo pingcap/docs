@@ -109,7 +109,7 @@ In the editor page, you can see the trigger and action. Click the trigger to set
 
     2. In the **Table Name**, choose the **github_global_event** table from drop-down list. The columns of the table are displayed.
 
-   ![img.png](/media/tidb-cloud/zapier/tidbcloud_columns.png)
+        ![Table columns](/media/tidb-cloud/zapier/zapier-set-up-tidb-cloud-columns.png)
 
     3. In the **Columns** box, choose the corresponding data from the trigger. Fill in all the columns, and click **Continue**.
 
