@@ -30,7 +30,7 @@ AWS DMS does not support replicating `DROP TABLE`.
 
 ## Step 1: Create an AWS DMS replication instance
 
-1. Log in to the [AWS console](https://us-west-2.console.aws.amazon.com/dms/v2/home) and switch to the corresponding region. It is recommended to use the same Region for AWS DMS and TiDB Cloud.
+1. Log in to the [AWS DMS console](https://us-west-2.console.aws.amazon.com/dms/v2/home) and switch to the corresponding region. It is recommended to use the same Region for AWS DMS and TiDB Cloud.
 
 2. Click **Create replication instance**. In this document, the upstream and downstream databases and DMS instance are all in the **us-west-2** region.
 
@@ -122,4 +122,40 @@ AWS DMS does not support replicating `DROP TABLE`.
 
     ![Click Create endpoint](/media/tidb-cloud/aws-dms-tidb-cloud/aws-dms-to-tidb-cloud-target-endpoint3.png)
 
-## Step 4：在 AWS DMS 上创建数据迁移任务
+## Step 4: Create a database migration task
+
+1. Go to the AWS DMS console](https://us-west-2.console.aws.amazon.com/dms/v2/home) and click **Database migration tasks** on the left sidebar. Then click **Create task** in the upper right corner of the window.
+
+    ![Create task](/media/tidb-cloud/aws-dms-tidb-cloud/aws-dms-to-tidb-cloud-create-task.png)
+
+2. Fill in the following task configurations:
+    - **Task identifier**: fill in a name for the task. It is recommended to use a name that is easy to remember.
+    - **Descriptive Amazon Resource Name (ARN) - optional**: create a friendly name for the default DMS ARN.
+    - **Replication instance**: select the AWS DMS instance that you just created.
+    - **Source database endpoint**: select the source database endpoint that you just created.
+    - **Target database endpoint**: select the target database endpoint that you just created.
+    - **Migration type**: select a migration type as needed. In this example, select **Migrate existing data and replicate ongoing changes**.
+
+    ![Task configurations](/media/tidb-cloud/aws-dms-tidb-cloud/aws-dms-to-tidb-cloud-task-config.png)
+
+3. Fill in the following task settings:
+    - **Editing mode**: select **Wizard**.
+    - Target table preparation mode: select **Do nothing** or other options as needed. In this example, select **Do nothing**.
+    - **Include LOB columns in replication**: select **Limited LOB mode**.
+    - **Maximum LOB size in (KB)**: use the default value 32.
+    - **Turn on validation**: leave it unchecked.
+    - **Task logs**: select **Turn on CloudWatch logs** for troubleshooting in future.
+
+    ![Task settings](/media/tidb-cloud/aws-dms-tidb-cloud/aws-dms-to-tidb-cloud-task-settings.png)
+
+4. In the **Table mappings** section, specify the database to be migrated. The schema name is the database name in the AWS RDS instance. The default value of the source name is "%", which means that all databases in the AWS RDS will be migrated to TiDB. It will cause the system databases such as `mysql` and `sys` in AWS RDS to be migrated to TiDB, and result in task failure. Therefore, it is recommended to fill in the specific database name, or filter out all system databases, as shown in the following screen shot, only the database named `franktest` and all the tables in that database will be migrated. Finally, click **Create task** in the lower right corner.
+
+    ![Table mappings](/media/tidb-cloud/aws-dms-tidb-cloud/aws-dms-to-tidb-cloud-table-mappings.png)
+
+5. Go back to the Data migration tasks page. You can see the status and progress of the task.
+
+    ![Tasks status](/media/tidb-cloud/aws-dms-tidb-cloud/aws-dms-to-tidb-cloud-task-status.png)
+
+If you encounter any issues or failures during the migration, you can check the log information in [Cloudwatch](https://us-west-2.console.aws.amazon.com/cloudwatch/home) to troubleshoot the issues.
+
+![Troubleshooting](/media/tidb-cloud/aws-dms-tidb-cloud/aws-dms-to-tidb-cloud-troubleshooting.png)
