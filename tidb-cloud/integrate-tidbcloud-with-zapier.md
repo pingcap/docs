@@ -43,7 +43,7 @@ In the editor page, you can see the trigger and action. Click the trigger to set
 
 2. Choose account
 
-   Connect to your GitHub account in `Choose account` page. You can create a new account with **Sign in** button or use an existing one. Then click **Continue** to enter the next step.
+   Choose a GitHub account that you want to connect with TiDB Cloud. You can either connect a new account or select an existing account. After you set up, click **Continue**.
 
 3. Set up trigger
 
