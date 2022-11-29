@@ -125,7 +125,7 @@ In the editor page, you can see the trigger and action. Click the trigger to set
 
 Click **Publish** to publish your zap. Then you can see the zap is running in the [home page](https://zapier.com/app/zaps).
 
-![img.png](/media/tidb-cloud/zapier/tidbcloud_publish.png)
+![Publish the zap](/media/tidb-cloud/zapier/zapier-tidb-cloud-publish.png)
 
 Now, this zap will record all the global events on GitHub into TiDB Cloud automatically.
 
