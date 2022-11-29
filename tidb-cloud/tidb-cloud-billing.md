@@ -198,7 +198,7 @@ If you are new to TiDB Cloud and do not have a TiDB Cloud account, you can sign 
 
 If you already have a TiDB Cloud account, you can link the account to an AWS or GCP billing account.
 
-The following sections introduce how to link your TiDB Cloud account to an AWS or GCP billing account to TiDB Cloud.
+The following sections introduce how to link your TiDB Cloud account to an AWS or GCP billing account.
 
 ### Link to an AWS billing account
 
@@ -214,7 +214,7 @@ To link your TiDB Cloud account to an AWS billing account, take the following st
 
 5. Sign in with your TiDB Cloud account. The **Link to Your AWS Billing Account** page is displayed.
 
-6. On the **Link to Your AWS Billing Account** page, select an existing organization and click **Link** to link to your AWS billing account.
+6. On the **Link to Your AWS Billing Account** page, select your target organization and click **Link** to link to your AWS billing account.
 
     > **Note:**
     >
@@ -228,13 +228,13 @@ To link your TiDB Cloud account to a Google Cloud billing account, take the foll
 
 2. On the TiDB Cloud product page, click **Subscribe**. A subscription page is displayed.
 
-3. On the subscription page, click **Subscribe**, and then click **GO TO PRODUCT PAGE**. You are directed to the TiDB Cloud sign-up page.
+3. On the subscription page, click **Subscribe**, and then click **Go to product page**. You are directed to the TiDB Cloud sign-up page.
 
 4. See the notification in the upper part of the sign-up page and click **Sign in**.
 
 5. Sign in with your TiDB Cloud account. The **Link to Your GCP Billing Account** page is displayed.
 
-6. On the **Link to Your GCP Billing Account** page, select an existing organization and click **Link** to link to your Google Cloud billing account.
+6. On the **Link to Your GCP Billing Account** page, select the target organization and click **Link** to link to your Google Cloud billing account.
 
     > **Note:**
     >
