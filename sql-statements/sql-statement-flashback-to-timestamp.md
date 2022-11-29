@@ -9,7 +9,7 @@ TiDB v6.4.0 introduces the `FLASHBACK CLUSTER TO TIMESTAMP` syntax. You can use 
 
 > **Note:**
 >
-> The principle of `FLASHBACK CLUSTER TO TIMESTAMP` is to rewrite an old data with the latest timestamp, and will not delete the data directly. So, you need to ensure that there is enough storage space before using it.
+> The working principle of `FLASHBACK CLUSTER TO TIMESTAMP` is to write the old data of a specific point in time with the latest timestamp, and will not delete the current data. So before using this feature, you need to ensure that there is enough storage space for the old data and the current data.
 
 ## Syntax
 
