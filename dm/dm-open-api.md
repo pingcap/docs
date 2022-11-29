@@ -25,7 +25,7 @@ OpenAPI を有効にするには、次の操作のいずれかを実行します
 
 > **ノート：**
 >
-> -   DM は、OpenAPI 3.0.0 標準を満たすものを提供し[仕様書](https://github.com/pingcap/tiflow/blob/master/dm/openapi/spec/dm.yaml) 。このドキュメントには、すべてのリクエスト パラメータと戻り値が含まれています。ドキュメント yaml をコピーして[Swagger エディター](https://editor.swagger.io/)でプレビューできます。
+> -   DM は、OpenAPI 3.0.0 規格を満たすものを提供し[仕様書](https://github.com/pingcap/tiflow/blob/master/dm/openapi/spec/dm.yaml) 。このドキュメントには、すべてのリクエスト パラメータと戻り値が含まれています。ドキュメント yaml をコピーして[Swagger エディター](https://editor.swagger.io/)でプレビューできます。
 >
 > -   DM-master ノードをデプロイした後、 `http://{master-addr}/api/v1/docs`にアクセスしてドキュメントをオンラインでプレビューできます。
 

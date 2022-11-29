@@ -8,6 +8,16 @@ aliases: ['/tidbcloud/beta/supported-tidb-versions','/tidbcloud/release-notes']
 
 このページでは、2022 年の[TiDB Cloud](https://www.pingcap.com/tidb-cloud/)のリリース ノートを一覧表示します。
 
+## 2022 年 11 月 29 日 {#november-29-2022}
+
+**一般的な変更**
+
+-   AWS Marketplace と Google Cloud Marketplace のユーザー エクスペリエンスを向上させます。
+
+    TiDB Cloudを初めて使用する場合でも、既にTiDB Cloudアカウントを持っている場合でも、AWS または GCP の請求先アカウントとリンクできるようになりました。これにより、AWS または GCP Marketplace のサブスクリプションを簡単に完了することができます。
+
+    リンクの作成方法については、 [AWS Marketplace または Google Cloud Marketplace からの請求](/tidb-cloud/tidb-cloud-billing.md#billing-from-aws-marketplace-or-google-cloud-marketplace)を参照してください。
+
 ## 2022 年 11 月 22 日 {#november-22-2022}
 
 **一般的な変更**
@@ -107,7 +117,7 @@ aliases: ['/tidbcloud/beta/supported-tidb-versions','/tidbcloud/release-notes']
     -   [`tidb_prepared_plan_cache_size`](/system-variables.md#tidb_prepared_plan_cache_size-new-in-v610)
     -   [`tidb_query_log_max_len`](/system-variables.md#tidb_query_log_max_len)
 
--   新しい[専用ティア](/tidb-cloud/select-cluster-tier.md#dedicated-tier)クラスターのデフォルトの TiDB バージョンを[v6.1.1](https://docs.pingcap.com/tidb/stable/release-6.1.1)から[v6.1.2](https://docs.pingcap.com/tidb/stable/release-6.1.2)にアップグレードします。
+-   新しい[専用層](/tidb-cloud/select-cluster-tier.md#dedicated-tier)クラスターのデフォルトの TiDB バージョンを[v6.1.1](https://docs.pingcap.com/tidb/stable/release-6.1.1)から[v6.1.2](https://docs.pingcap.com/tidb/stable/release-6.1.2)にアップグレードします。
 
 ## 2022 年 10 月 19 日 {#october-19-2022}
 
@@ -196,7 +206,7 @@ aliases: ['/tidbcloud/beta/supported-tidb-versions','/tidbcloud/release-notes']
 
 -   TLS を介したTiDB Cloud [専用ティア](/tidb-cloud/select-cluster-tier.md#dedicated-tier)クラスターへの接続をサポートします。
 
-    Dedicated Tier クラスターの場合、 [接続](/tidb-cloud/connect-to-tidb-cluster.md#connect-via-standard-connection)ダイアログの [**標準接続**] タブに、TiDB クラスター CA をダウンロードするためのリンクが表示され、TLS 接続の接続文字列とサンプル コードも表示されるようになりました。サードパーティの MySQL クライアント、MyCLI、および JDBC、Python、Go、Node.js などのアプリケーション用の複数の接続方法を使用でき[TLS 経由で Dedicated Tier クラスターに接続する](/tidb-cloud/connect-to-tidb-cluster.md#connect-via-standard-connection) 。この機能により、アプリケーションから TiDB クラスターへのデータ転送のセキュリティが確保されます。
+    Dedicated Tier クラスターの場合、 [接続](/tidb-cloud/connect-to-tidb-cluster.md#connect-via-standard-connection)ダイアログの [**標準接続**] タブに、TiDB クラスター CA をダウンロードするためのリンクが表示されるようになり、TLS 接続の接続文字列とサンプル コードも提供されます。サードパーティの MySQL クライアント、MyCLI、および JDBC、Python、Go、Node.js などのアプリケーション用の複数の接続方法を使用でき[TLS 経由で Dedicated Tier クラスターに接続する](/tidb-cloud/connect-to-tidb-cluster.md#connect-via-standard-connection) 。この機能により、アプリケーションから TiDB クラスターへのデータ転送のセキュリティが確保されます。
 
 ## 2022 年 9 月 14 日 {#september-14-2022}
 
@@ -316,7 +326,7 @@ aliases: ['/tidbcloud/beta/supported-tidb-versions','/tidbcloud/release-notes']
 
 -   [専用層クラスター](/tidb-cloud/select-cluster-tier.md#dedicated-tier)の [**診断**] タブに[モニタリングページ](/tidb-cloud/built-in-monitoring.md)を追加します。
 
-    [監視] ページには、全体的なパフォーマンス診断のためのシステム レベルのエントリが表示されます。トップダウンのパフォーマンス分析方法に従って、監視ページは、データベース時間の内訳に基づいて TiDB パフォーマンス メトリックを整理し、これらのメトリックを異なる色で表示します。これらの色をチェックすることで、システム全体のパフォーマンスのボトルネックを一目で特定できるため、パフォーマンスの診断時間が大幅に短縮され、パフォーマンスの分析と診断が簡素化されます。
+    [監視] ページには、全体的なパフォーマンス診断のためのシステム レベルのエントリが表示されます。トップダウンのパフォーマンス分析方法に従って、監視ページは、データベース時間の内訳に基づいて TiDB パフォーマンス メトリックを整理し、これらのメトリックを異なる色で表示します。これらの色を確認することで、システム全体のパフォーマンスのボトルネックを一目で特定できるため、パフォーマンスの診断時間が大幅に短縮され、パフォーマンスの分析と診断が簡素化されます。
 
 -   CSV および Parquet ソース ファイルの [**データ インポート]**ページで<strong>カスタム パターン</strong>を有効または無効にするスイッチを追加します。
 
@@ -500,7 +510,7 @@ TiDB Cloudは一般提供になりました。次のいずれかのオプショ�
 
 改善：
 
--   [CSV ファイル](/tidb-cloud/import-csv-files.md)または[Apache 寄木細工のファイル](/tidb-cloud/import-parquet-files.md)をTiDB Cloudにインポートする際のカスタム ファイル名の使用をサポートします。
+-   [CSVファイル](/tidb-cloud/import-csv-files.md)または[Apache 寄木細工のファイル](/tidb-cloud/import-parquet-files.md)をTiDB Cloudにインポートする際のカスタム ファイル名の使用をサポートします。
 
 ## 2022 年 1 月 11 日 {#january-11-2022}
 

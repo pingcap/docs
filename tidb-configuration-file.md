@@ -73,7 +73,7 @@ TiDB 構成ファイルは、コマンドライン パラメーターよりも�
 
 -   主キー制約を列に追加するか列から削除するかを決定します。
 -   デフォルト値: `false`
--   このデフォルト設定では、主キー制約の追加または削除はサポートされていません。 `alter-primary-key` ～ `true`を設定すると、この機能を有効にできます。ただし、スイッチがオンになる前にテーブルがすでに存在し、その主キー列のデータ型が整数である場合、この構成項目を`true`に設定しても、列から主キーを削除することはできません。
+-   このデフォルト設定では、主キー制約の追加または削除はサポートされていません。 `alter-primary-key` ～ `true`を設定すると、この機能を有効にできます。ただし、スイッチがオンになる前にテーブルが既に存在し、その主キー列のデータ型が整数である場合、この構成項目を`true`に設定しても、列から主キーを削除することはできません。
 
 > **ノート：**
 >
@@ -134,7 +134,7 @@ TiDB 構成ファイルは、コマンドライン パラメーターよりも�
 
 -   TiDB でのテレメトリ収集を有効または無効にします。
 -   デフォルト値: `true`
--   この構成がすべての TiDB インスタンスで`false`に設定されている場合、TiDB でのテレメトリ収集は無効になり、 [`tidb_enable_telemetry`](/system-variables.md#tidb_enable_telemetry-new-in-v402)システム変数は有効になりません。詳細は[テレメトリー](/telemetry.md)を参照してください。
+-   この構成がすべての TiDB インスタンスで`false`に設定されている場合、TiDB のテレメトリ収集は無効になり、 [`tidb_enable_telemetry`](/system-variables.md#tidb_enable_telemetry-new-in-v402)システム変数は有効になりません。詳細は[テレメトリー](/telemetry.md)を参照してください。
 
 ### <code>enable-tcp4-only</code> <span class="version-mark">v5.0 の新</span>機能 {#code-enable-tcp4-only-code-span-class-version-mark-new-in-v5-0-span}
 
@@ -152,7 +152,7 @@ TiDB 構成ファイルは、コマンドライン パラメーターよりも�
 
 -   サーバーをシャットダウンするときに TiDB が待機する秒数を指定します。これにより、クライアントは切断できるようになります。
 -   デフォルト値: `0`
--   TiDB が (猶予期間で) シャットダウンを待機している場合、HTTP ステータスは失敗を示し、ロード バランサーがトラフィックを再ルーティングできるようにします。
+-   TiDB がシャットダウンを待機している場合 (猶予期間中)、HTTP ステータスは失敗を示し、ロード バランサーがトラフィックを再ルーティングできるようにします。
 
 ### <code>enable-global-kill</code> <span class="version-mark">v6.1.0 の新機能</span> {#code-enable-global-kill-code-span-class-version-mark-new-in-v6-1-0-span}
 
@@ -432,7 +432,7 @@ TiDB 構成ファイルは、コマンドライン パラメーターよりも�
 
 ### <code>force-priority</code> {#code-force-priority-code}
 
--   すべてのステートメントの優先度を設定します。
+-   すべてのステートメントの優先順位を設定します。
 -   デフォルト値: `NO_PRIORITY`
 -   値のオプション: デフォルト値`NO_PRIORITY`は、ステートメントの優先度が強制的に変更されないことを意味します。その他のオプションは、昇順で`LOW_PRIORITY` 、 `DELAYED` 、および`HIGH_PRIORITY`です。
 

@@ -14,6 +14,7 @@ summary: Learn how to create your TiDB cluster.
     -   Google ユーザーの場合は、Google でサインアップすることもできます。これを行うには、 [サインアップ](https://tidbcloud.com/signup)ページで [ **Google にサインアップ**] をクリックします。メールアドレスとパスワードは Google によって管理され、 TiDB Cloudコンソールを使用して変更することはできません。
     -   GitHub ユーザーの場合は、GitHub にサインアップすることもできます。これを行うには、 [サインアップ](https://tidbcloud.com/signup)ページで [ **Sign up with GitHub** ] をクリックします。メールアドレスとパスワードは GitHub によって管理され、 TiDB Cloudコンソールを使用して変更することはできません。
     -   AWS Marketplace ユーザーは、AWS Marketplace からサインアップすることもできます。これを行うには、 `TiDB Cloud` in [AWS マーケットプレイス](https://aws.amazon.com/marketplace)を検索し、 TiDB Cloudにサブスクライブしてから、画面の指示に従ってTiDB Cloudアカウントをセットアップします。
+    -   Google Cloud Marketplace のユーザーは、Google Cloud Marketplace からサインアップすることもできます。これを行うには、 `TiDB Cloud` in [Google Cloud マーケットプレイス](https://console.cloud.google.com/marketplace)を検索し、 TiDB Cloudにサブスクライブしてから、画面の指示に従ってTiDB Cloudアカウントをセットアップします。
 
 2.  [ログイン](https://tidbcloud.com/)をTiDB Cloudアカウントに追加します。
 
@@ -96,7 +97,8 @@ Dedicated Tier クラスターを作成するには、次の手順を実行し�
 
     > **ノート：**
     >
-    > [AWS マーケットプレイス](https://aws.amazon.com/marketplace)からTiDB Cloudにサインアップした場合、クラウド プロバイダーは AWS であり、 TiDB Cloudで変更することはできません。
+    > -   [AWS マーケットプレイス](https://aws.amazon.com/marketplace)からTiDB Cloudにサインアップした場合、クラウド プロバイダーは AWS であり、 TiDB Cloudで変更することはできません。
+    > -   [Google Cloud マーケットプレイス](https://console.cloud.google.com/marketplace)からTiDB Cloudにサインアップした場合、クラウド プロバイダーは GCP であり、 TiDB Cloudで変更することはできません。
 
 3.  これが現在のプロジェクトの最初のクラスターであり、このプロジェクトに対して CIDR が構成されていない場合は、プロジェクトの CIDR を設定し、[**次へ**] をクリックする必要があります。<strong>プロジェクトの CIDR</strong>フィールドが表示されない場合は、このプロジェクトに対して CIDR が既に構成されていることを意味します。
 
@@ -112,7 +114,7 @@ Dedicated Tier クラスターを作成するには、次の手順を実行し�
 
     > **ノート：**
     >
-    > [AWS マーケットプレイス](https://aws.amazon.com/marketplace)からTiDB Cloudにサインアップした場合、AWS アカウントから直接支払うことはできますが、 TiDB Cloudポータルで支払い方法を追加したり、請求書をダウンロードしたりすることはできません。
+    > [AWS マーケットプレイス](https://aws.amazon.com/marketplace)または[Google Cloud マーケットプレイス](https://console.cloud.google.com/marketplace)でTiDB Cloudにサインアップした場合は、AWS アカウントまたは Google Cloud アカウントから直接支払うことができますが、支払い方法を追加したり、 TiDB Cloudコンソールで請求書をダウンロードしたりすることはできません。
 
 7.  [**作成]**をクリックします。
 
@@ -120,7 +122,7 @@ Dedicated Tier クラスターを作成するには、次の手順を実行し�
 
 8.  [**セキュリティ設定**] ダイアログ ボックスで、ルート パスワードと許可された IP アドレスを設定してクラスターに接続し、[<strong>適用</strong>] をクリックします。
 
-    TiDB Cloudクラスターは、約 5 ～ 15 分で作成されます。
+    TiDB Cloudクラスターは、約 20 ～ 30 分で作成されます。
 
 </div>
 </SimpleTab>
