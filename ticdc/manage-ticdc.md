@@ -595,9 +595,6 @@ ignore-txn-start-ts = [1, 2]
 # Filter syntax: https://docs.pingcap.com/tidb/stable/table-filter#syntax.
 rules = ['*.*', '!test.*']
 
-# Filter out data written by other changefeeds in the upstream. Set to `false` by default.
-ignore-rows-written-by-ticdc = false
-
 # Event filter rules.
 # The detailed syntax is described in the event filter rules section.
 # The first event filter rule.
