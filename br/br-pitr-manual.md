@@ -77,14 +77,14 @@ The example output only shows the common parameters. These parameters are descri
 - `--start-ts`: specifies the start timestamp for the log backup. If this parameter is not specified, the backup program uses the current time as `start-ts`.
 - `task-name`: specifies the task name for the log backup. This name is also used to query, pause, and resume the backup task.
 - `--ca`, `--cert`, `--key`: specifies the mTLS encryption method to communicate with TiKV and PD.
-- `--pd`: specifies the PD address for the backup cluster. `br` needs to access PD to start the log backup task.
-- `--storage`: specifies the backup storage address. Currently, `br` supports Amazon S3, Google Cloud Storage (GCS), or Azure Blob Storage as the storage for log backup. The preceding command uses Amazon S3 as an example. For details, see [URL format of backup storages](/br/backup-and-restore-storages.md#url-format).
+- `--pd`: specifies the PD address for the backup cluster. BR needs to access PD to start the log backup task.
+- `--storage`: specifies the backup storage address. Currently, BR supports Amazon S3, Google Cloud Storage (GCS), or Azure Blob Storage as the storage for log backup. The preceding command uses Amazon S3 as an example. For details, see [URL format of backup storages](/br/backup-and-restore-storages.md#url-format).
 
 Usage example:
 
 ```shell
 ./br log start --task-name=pitr --pd="${PD_IP}:2379" \
---storage='s3://backup-101/logbackup?access_key=${access_key}&secret_access_key=${secret_access_key}"'
+--storage='s3://backup-101/logbackup?access-key=${access-key}&secret-access-key=${secret-access-key}"'
 ```
 
 ### Query the backup status
@@ -202,7 +202,7 @@ Global Flags:
  -u, --pd strings             PD address (default [127.0.0.1:2379])
 ```
 
-After the backup task is paused for more than 24 hours, running `br log resume` reports an error, and `br` prompts that backup data is lost. To handle this error, refer to [Backup & Restore FAQs](/faq/backup-and-restore-faq.md#what-should-i-do-if-the-error-message-errbackupgcsafepointexceeded-is-returned-when-using-the-br-log-resume-command-to-resume-a-suspended-task).
+After the backup task is paused for more than 24 hours, running `br log resume` reports an error, and BR prompts that backup data is lost. To handle this error, refer to [Backup & Restore FAQs](/faq/backup-and-restore-faq.md#what-should-i-do-if-the-error-message-errbackupgcsafepointexceeded-is-returned-when-using-the-br-log-resume-command-to-resume-a-suspended-task).
 
 Usage example:
 
@@ -253,7 +253,7 @@ Usage example:
 After running the `br log stop` command to stop a log backup task, you can create a new log backup task in another `--storage` directory or restart the log backup task in the original `--storage` directory by running the `br log start` command. If you restart the task in the original `--storage` directory, pay attention to the following points:
 
 - Parameters of the `--storage` directory for restarting a task must be the same as the task that is stopped.
-- The `--start-ts` does not need to be specified. `br` automatically starts the backup from the last backup checkpoint.
+- The `--start-ts` does not need to be specified. BR automatically starts the backup from the last backup checkpoint.
 - If the task is stopped for a long time and multiple versions of the data have been garbage collected, the error `BR:Backup:ErrBackupGCSafepointExceeded` is reported when you attempt to restart the task. In this case, you have to create a new log backup task in another `--storage` directory.
 
 ### Clean up the backup data
@@ -284,13 +284,13 @@ This command only accesses the backup storage, but does not access the TiDB clus
 
 - `--dry-run`: run the command but do not really delete the files.
 - `--until`: delete all log backup data before the specified timestamp.
-- `--storage`: the backup storage address. Currently, `br` supports Amazon S3, GCS, or Azure Blob Storage as the storage for log backup. For details, see [URL format of backup storages](/br/backup-and-restore-storages.md#url-format).
+- `--storage`: the backup storage address. Currently, BR supports Amazon S3, GCS, or Azure Blob Storage as the storage for log backup. For details, see [URL format of backup storages](/br/backup-and-restore-storages.md#url-format).
 
 Usage example:
 
 ```shell
 ./br log truncate --until='2022-07-26 21:20:00+0800' \
-–-storage='s3://backup-101/logbackup?access_key=${access_key}&secret_access_key=${secret_access_key}"'
+–-storage='s3://backup-101/logbackup?access-key=${access-key}&secret-access-key=${secret-access-key}"'
 ```
 
 Expected output:
@@ -325,12 +325,12 @@ Global Flags:
 
 This command only accesses the backup storage, but does not access the TiDB cluster.
 
-The `--storage` parameter is used to specify the backup storage address. Currently, `br` supports Amazon S3, GCS, or Azure Blob Storage as the storage for log backup. For details, see [URL format of backup storages](/br/backup-and-restore-storages.md#url-format).
+The `--storage` parameter is used to specify the backup storage address. Currently, BR supports Amazon S3, GCS, or Azure Blob Storage as the storage for log backup. For details, see [URL format of backup storages](/br/backup-and-restore-storages.md#url-format).
 
 Usage example:
 
 ```shell
-./br log metadata –-storage='s3://backup-101/logbackup?access_key=${access_key}&secret_access_key=${secret_access_key}"'
+./br log metadata –-storage='s3://backup-101/logbackup?access-key=${access-key}&secret-access-key=${secret-access-key}"'
 ```
 
 Expected output:
@@ -369,19 +369,19 @@ Global Flags:
 
 The example output only shows the common parameters. These parameters are described as follows:
 
-- `--full-backup-storage`: the storage address for the snapshot (full) backup. If you need to use PITR, you must specify this parameter and choose the latest snapshot backup before the restore timestamp. If you only need to restore log backup data, you can omit this parameter. Currently, `br` supports Amazon S3, GCS, or Azure Blob Storage as the storage for log backup. For details, see [URL format of backup storages](/br/backup-and-restore-storages.md#url-format).
-- `--restored-ts`: the timestamp that you want to restore data to. If this parameter is not specified, `br` restores data to the latest timestamp available in the log backup, that is, the checkpoint of the backup data.
+- `--full-backup-storage`: the storage address for the snapshot (full) backup. If you need to use PITR, you must specify this parameter and choose the latest snapshot backup before the restore timestamp. If you only need to restore log backup data, you can omit this parameter. Currently, BR supports Amazon S3, GCS, or Azure Blob Storage as the storage for log backup. For details, see [URL format of backup storages](/br/backup-and-restore-storages.md#url-format).
+- `--restored-ts`: the timestamp that you want to restore data to. If this parameter is not specified, BR restores data to the latest timestamp available in the log backup, that is, the checkpoint of the backup data.
 - `--start-ts`: the start timestamp that you want to restore log backup data from. If you only need to restore log backup data and do not need snapshot backup data, you must specify this parameter.
 - `--pd`: the PD address of the restore cluster.
 - `--ca`, `--cert`, `--key`: specify the mTLS encryption method to communicate with TiKV and PD.
-- `--storage`: the storage address for the log backup. Currently, `br` supports Amazon S3, GCS, or Azure Blob Storage as the storage for log backup. For details, see [URL format of backup storages](/br/backup-and-restore-storages.md#url-format).
+- `--storage`: the storage address for the log backup. Currently, BR supports Amazon S3, GCS, or Azure Blob Storage as the storage for log backup. For details, see [URL format of backup storages](/br/backup-and-restore-storages.md#url-format).
 
 Usage example:
 
 ```shell
 ./br restore point --pd="${PD_IP}:2379"
---storage='s3://backup-101/logbackup?access_key=${access_key}&secret_access_key=${secret_access_key}"'
---full-backup-storage='s3://backup-101/snapshot-202205120000?access_key=${access_key}&secret_access_key=${secret_access_key}"'
+--storage='s3://backup-101/logbackup?access-key=${access-key}&secret-access-key=${secret-access-key}"'
+--full-backup-storage='s3://backup-101/snapshot-202205120000?access-key=${access-key}&secret-access-key=${secret-access-key}"'
 
 Full Restore <--------------------------------------------------------------------------------------------------------------------------------------------------------> 100.00%
 *** ***["Full Restore success summary"] ****** [total-take=3.112928252s] [restore-data-size(after-compressed)=5.056kB] [Size=5056] [BackupTS=434693927394607136] [total-kv=4] [total-kv-size=290B] [average-speed=93.16B/s]

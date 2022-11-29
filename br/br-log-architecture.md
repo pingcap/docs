@@ -5,7 +5,7 @@ summary: Learn about the architecture of TiDB log backup and point-in-time recov
 
 # TiDB Log Backup and PITR Architecture
 
-This document introduces the architecture and process of TiDB log backup and point-in-time recovery (PITR) using the br command-line tool (hereinafter referred to as `br`) as an example.
+This document introduces the architecture and process of TiDB log backup and point-in-time recovery (PITR) using a Backup & Restore (BR) tool as an example.
 
 ## Architecture
 
@@ -29,10 +29,10 @@ System components and key concepts involved in the log backup process:
 
 The complete backup process is as follows:
 
-1. `br` receives the `br log start` command.
+1. BR receives the `br log start` command.
 
-   * `br` parses the checkpoint ts (the start time of log backup) and storage path of the backup task.
-   * **Register log backup task**: `br` registers a log backup task in PD.
+   * BR parses the checkpoint ts (the start time of log backup) and storage path of the backup task.
+   * **Register log backup task**: BR registers a log backup task in PD.
 
 2. TiKV monitors the creation and update of the log backup task.
 
@@ -61,22 +61,22 @@ The process of PITR is as follows:
 
 The complete PITR process is as follows:
 
-1. `br` receives the `br restore point` command.
+1. BR receives the `br restore point` command.
 
-   * `br` parses the full backup data address, log backup data address, and the point-in-time recovery time.
+   * BR parses the full backup data address, log backup data address, and the point-in-time recovery time.
    * Queries the restore object (database or table) in the backup data and checks whether the table to be restored exists and meets the restore requirements.
 
-2. `br` restores the full backup data.
+2. BR restores the full backup data.
 
    * Restores full backup data. For more details about the process of snapshot backup data restore, refer to [Restore snapshot backup data](/br/br-snapshot-architecture.md#process-of-restore).
 
-3. `br` restores the log backup data.
+3. BR restores the log backup data.
 
    * **Read backup data**: reads the log backup data and calculates the log backup data that needs to be restored.
    * **Fetch Region info**: fetches all Regions distributions by accessing PD.
    * **Request TiKV to restore data**: creates a log restore request and sends it to the corresponding TiKV node. The log restore request contains the log backup data information to be restored.
 
-4. TiKV accepts the restore request from `br` and initiates a log restore worker.
+4. TiKV accepts the restore request from BR and initiates a log restore worker.
 
    * The log restore worker gets the log backup data that needs to be restored.
 
@@ -85,11 +85,11 @@ The complete PITR process is as follows:
    * **Download KVs**: the log restore worker downloads the corresponding backup data from the backup storage to a local directory according to the log restore request.
    * **Rewrite KVs**: the log restore worker rewrites the KV data of the backup data according to the table ID of the restore cluster table, that is, replace the original table ID in the [Key-Value](/tidb-computing.md#mapping-table-data-to-key-value) with the new table ID. The restore worker also rewrites the index ID in the same way.
    * **Apply KVs**: the log restore worker writes the processed KV data to the store (RocksDB) through the raft interface.
-   * **Report restore result**: the log restore worker returns the restore result to `br`.
+   * **Report restore result**: the log restore worker returns the restore result to BR.
 
-6. `br` receives the restore result from each TiKV node.
+6. BR receives the restore result from each TiKV node.
 
-   * If some data fails to be restored due to `RegionNotFound` or `EpochNotMatch`, for example, a TiKV node is down, `br` will retry the restore.
+   * If some data fails to be restored due to `RegionNotFound` or `EpochNotMatch`, for example, a TiKV node is down, BR will retry the restore.
    * If there is any data fails to be restored and cannot be retried, the restore task fails.
    * After all data is restored, the restore task succeeds.
 

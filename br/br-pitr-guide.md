@@ -18,7 +18,7 @@ To start a log backup, run `br log start`. A cluster can only run one log backup
 
 ```shell
 tiup br log start --task-name=pitr --pd "${PD_IP}:2379" \
---storage 's3://backup-101/logbackup?access_key=${access_key}&secret_access_key=${secret_access_key}"'
+--storage 's3://backup-101/logbackup?access-key=${access-key}&secret-access-key=${secret-access-key}"'
 ```
 
 After the log backup task starts, it runs in the background of the TiDB cluster until you stop it manually. During this process, the TiDB change logs are regularly backed up to the specified storage in small batches. To query the status of the log backup task, run the following command:
@@ -47,17 +47,17 @@ The snapshot backup can be used as a method of full backup. You can run `br back
 
 ```shell
 tiup br backup full --pd "${PD_IP}:2379" \
---storage 's3://backup-101/snapshot-${date}?access_key=${access_key}&secret_access_key=${secret_access_key}"'
+--storage 's3://backup-101/snapshot-${date}?access-key=${access-key}&secret-access-key=${secret-access-key}"'
 ```
 
 ## Run PITR
 
-To restore the cluster to any point in time within the backup retention period, you can use `br restore point`. When you run this command, you need to specify the **time point you want to restore**, **the latest snapshot backup data before the time point**, and the **log backup data**. `br` will automatically determine and read data needed for the restore, and then restore these data to the specified cluster in order.
+To restore the cluster to any point in time within the backup retention period, you can use `br restore point`. When you run this command, you need to specify the **time point you want to restore**, **the latest snapshot backup data before the time point**, and the **log backup data**. BR will automatically determine and read data needed for the restore, and then restore these data to the specified cluster in order.
 
 ```shell
 br restore point --pd "${PD_IP}:2379" \
---storage='s3://backup-101/logbackup?access_key=${access_key}&secret_access_key=${secret_access_key}"' \
---full-backup-storage='s3://backup-101/snapshot-${date}?access_key=${access_key}&secret_access_key=${secret_access_key}"' \
+--storage='s3://backup-101/logbackup?access-key=${access-key}&secret-access-key=${secret-access-key}"' \
+--full-backup-storage='s3://backup-101/snapshot-${date}?access-key=${access-key}&secret-access-key=${secret-access-key}"' \
 --restored-ts '2022-05-15 18:00:00+0800'
 ```
 
@@ -83,13 +83,13 @@ The following steps describe how to clean up backup data that exceeds the backup
 2. Use the `validate` command to get the time point corresponding to the backup. Assume that the backup data before 2022/09/01 needs to be cleaned, you should look for the last full backup before this time point and ensure that it will not be cleaned.
 
     ```shell
-    FULL_BACKUP_TS=`tiup br validate decode --field="end-version" --storage "s3://backup-101/snapshot-${date}?access_key=${access_key}&secret_access_key=${secret_access_key}"| tail -n1`
+    FULL_BACKUP_TS=`tiup br validate decode --field="end-version" --storage "s3://backup-101/snapshot-${date}?access-key=${access-key}&secret-access-key=${secret-access-key}"| tail -n1`
     ```
 
 3. Delete log backup data earlier than the snapshot backup `FULL_BACKUP_TS`:
 
     ```shell
-    tiup br log truncate --until=${FULL_BACKUP_TS} --storage='s3://backup-101/logbackup?access_key=${access_key}&secret_access_key=${secret_access_key}"'
+    tiup br log truncate --until=${FULL_BACKUP_TS} --storage='s3://backup-101/logbackup?access-key=${access-key}&secret-access-key=${secret-access-key}"'
     ```
 
 4. Delete snapshot data earlier than the snapshot backup `FULL_BACKUP_TS`:
@@ -103,7 +103,7 @@ The following steps describe how to clean up backup data that exceeds the backup
 ### Capabilities
 
 - On each TiKV node, PITR can restore snapshot data at a speed of 280 GB/h and log data 30 GB/h.
-- `br` deletes outdated log backup data at a speed of 600 GB/h.
+- BR deletes outdated log backup data at a speed of 600 GB/h.
 
 > **Note:**
 >
@@ -129,5 +129,5 @@ Testing scenario 2 (on-premises):
 ## See also
 
 * [TiDB Backup and Restore Use Cases](/br/backup-and-restore-use-cases.md)
-* [`br` Command-line Manual](/br/use-br-command-line-tool.md)
+* [br Command-line Manual](/br/use-br-command-line-tool.md)
 * [Log Backup and PITR Architecture](/br/br-log-architecture.md)
