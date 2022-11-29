@@ -69,7 +69,7 @@ In the editor page, you can see the trigger and action. Click the trigger to set
 
 3. Set up action
 
-   In this step, you need to find a table in your TiDB Cloud cluster. And create a new one if it is not exist.
+   In this step, you need to specify a table in your TiDB Cloud cluster to store the event data. If you do not already have a table, you can create one through this step.
 
    Choose the project and cluster from drop-down list. Then you will see the connection information of the database.
 
