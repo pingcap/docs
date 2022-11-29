@@ -105,7 +105,7 @@ In the editor page, you can see the trigger and action. Click the trigger to set
 
    ![img.png](/media/tidb-cloud/zapier/tidbcloud_columns.png)
 
-   Then click the text area, and you will find that you can choose the data from the trigger. Fill in all the columns with trigger's data. Then click **Continue** to enter the next step.
+    3. In the **Columns** box, choose the corresponding data from the trigger. Fill in all the columns, and click **Continue**.
 
         ![Fill in Columns](/media/tidb-cloud/zapier/zapier-fill-in-tidb-cloud-triggers-data.png)
 
