@@ -5,13 +5,13 @@ summary: Learn about the checkpoint backup feature, including its application sc
 
 # Checkpoint Backup <span class="version-mark">New in v6.5.0</span>
 
-Snapshot backup may end in advance due to recoverable errors, such as disk exhaustion and node down. Before TiDB v6.5.0, data that is backed up before the interruption would be invalidated after the error is addressed, and you need to start the backup again. For large clusters, this results in noticeable extra cost.
+Snapshot backup might end in advance due to recoverable errors, such as disk exhaustion and node crash. Before TiDB v6.5.0, data that is backed up before the interruption would be invalidated after the error is addressed, and you need to start the backup from scratch. For large clusters, this results in considerable extra cost.
 
 In TiDB v6.5.0, Backup & Restore (BR) introduces checkpoint backup feature to allow continuing an interrupted backup. This feature is enabled by default. After this feature is enabled, most data of the interrupted backup is retained after an unexpected exit.
 
 ## Application scenarios
 
-If your TiDB cluster is large and cannot tolerate backup again after a failure, you can enable the checkpoint backup feature. After this feature is enabled, br command-line tool (hereinafter referred to as `br`) periodically records the shards that have been backed up. In this way, the next backup retry can use the backup progress close to the abnormal exit.
+If your TiDB cluster is large and cannot afford to back up again after a failure, you can enable the checkpoint backup feature. After this feature is enabled, br command-line tool (hereinafter referred to as `br`) periodically records the shards that have been backed up. In this way, the next backup retry can use the backup progress close to the abnormal exit.
 
 ## Usage limitations
 
@@ -19,7 +19,7 @@ During the backup, `br` periodically updates the `gc-safepoint` of the backup sn
 
 To avoid this situation, `br` keeps the `gc-safepoint` for about one hour by default when `gcttl` is not specified. If you need to extend this time, you can set the `gcttl` parameter.
 
-The following example sets `gcttl` to 15 hours to extend the retention period of `gc-safepoint`:
+The following example sets `gcttl` to 15 hours (54000 seconds) to extend the retention period of `gc-safepoint`:
 
 ```shell
 br backup full \
@@ -29,7 +29,7 @@ br backup full \
 
 > **Note:**
 >
-> `gc-safepoint` created before backup is deleted after the snapshot backup is completed and you do not need to delete it manually.
+> `gc-safepoint` created before backup is deleted after the snapshot backup is completed. You do not need to delete it manually.
 
 ## Implementation details
 
