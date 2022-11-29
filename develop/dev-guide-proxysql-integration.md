@@ -7,7 +7,7 @@ summary:  Learn how to integrate TiDB Cloud and TiDB (self-hosted)  with ProxySQ
 
 ## Integrate TiDB with ProxySQL
 
-This document provides a high-level introduction to ProxySQL, describes how to [integrate ProxySQL with TiDB](#TODO), and demonstrates the key integration benefits through some [typical scenarios](#TODO).
+This document provides a high-level introduction to ProxySQL, describes how to [integrate ProxySQL with TiDB](#option-1---integrate-tidb-serverless-with-proxysql), and demonstrates the key integration benefits through some [typical scenarios](#typical-scenarios).
 Meanwhile, if you are interested in learning more about TiDB and ProxySQL, you can find some useful links as follows:
 
 - [TiDB Cloud](https://docs.pingcap.com/tidbcloud/select-cluster-tier)
@@ -21,8 +21,8 @@ ProxySQL is designed from the ground up to be fast, efficient, and easy to use. 
 
 ## Why ProxySQL integration?
 
-- ProxySQL can help boost application performance by reducing latency when interacting with TiDB.  Irrespective of what you are building, whether it is a scalable application using serverless functions like Lambda, where the workload is nondeterministic and can spike, or if you are building an application to execute queries that load tons of data. By leveraging powerful capabilities of ProxySQL such as [connection pooling](https://proxysql.com/documentation/detailed-answers-on-faq/), [load-balancing](#TODO), and [caching](https://proxysql.com/documentation/query-cache/) frequently-used queries, applications can gain immediate benefits.
-- ProxySQL can act as an additional layer of application security protection against SQL vulnerabilities such as SQL Injection with the help of [Query Rules](#TODO), an easy-to-configure feature available in ProxySQL.
+- ProxySQL can help boost application performance by reducing latency when interacting with TiDB.  Irrespective of what you are building, whether it is a scalable application using serverless functions like Lambda, where the workload is nondeterministic and can spike, or if you are building an application to execute queries that load tons of data. By leveraging powerful capabilities of ProxySQL such as [connection pooling](https://proxysql.com/documentation/detailed-answers-on-faq/), [load-balancing](#load-balancing), and [caching](https://proxysql.com/documentation/query-cache/) frequently-used queries, applications can gain immediate benefits.
+- ProxySQL can act as an additional layer of application security protection against SQL vulnerabilities such as SQL Injection with the help of [Query Rules](#query-rules), an easy-to-configure feature available in ProxySQL.
 - You can get the benefits of zero vendor lock-in as both [ProxySQL](https://github.com/sysown/proxysql) and [TiDB](https://github.com/pingcap/tidb) are open-source projects.
 
 ## Deployment architecture
@@ -40,8 +40,8 @@ While the most obvious way to deploy ProxySQL with TiDB would be to add ProxySQL
 This section describes how to integrate TiDB with ProxySQL in a development environment.
 To get started with the ProxySQL integration, you can choose either of the following options depending on your TiDB cluster type after you have all the required [prerequisites](#prerequisite) in place.
 
-- [Option 1 -  Integrate TiDB Serverless with ProxySQL](#TODO)
-- [Option 2 -  Integrate TiDB (self-hosted) with ProxySQL](#TODO)
+- [Option 1 - Integrate TiDB Serverless with ProxySQL](#option-1---integrate-tidb-serverless-with-proxysql)
+- [Option 2 - Integrate TiDB (self-hosted) with ProxySQL](#option-2---integrate-tidb-self-hosted-with-proxysql)
 
 ### Prerequisite
 
@@ -669,7 +669,7 @@ To learn more about the supported platforms of ProxySQL and their installation, 
 
 #### Step 3. Configure ProxySQL
 
-To use ProxySQL as a proxy for TiDB, you need to configure ProxySQL. To do so, you can either execute SQL statements inside ProxySQL Admin Interface (recommended) or use the [configuration file](#TODO).
+To use ProxySQL as a proxy for TiDB, you need to configure ProxySQL. To do so, you can either execute SQL statements inside ProxySQL Admin Interface (recommended) or use the [configuration file](#option-2-configure-proxysql-using-a-configuration-file).
 
 > **Note:**
 >
