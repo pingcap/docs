@@ -9,14 +9,14 @@ This document describes the usage scenarios, usage methods, and restrictions of 
 
 A non-transactional DML statement is a DML statement split into multiple SQL statements (which is, multiple batches) to be executed in sequence. It enhances the performance and ease of use in batch data processing at the expense of transactional atomicity and isolation.
 
-Usually, large transactions that consume too much memory need to be split into multiple SQL statements to bypass the transaction size limit. Non-transactional DML statements integrate this feature into the TiDB kernel to achieve the same effect. You can understand the effect of non-transactional DML statements by splitting SQL statements. The `DRY RUN` syntax can be used to preview the split statements.
+Usually, memory-consuming transactions need to be split into multiple SQL statements to bypass the transaction size limit. Non-transactional DML statements integrate this process into the TiDB kernel to achieve the same effect. You can understand the effect of non-transactional DML statements by splitting SQL statements. The `DRY RUN` syntax can be used to preview the split statements.
 
 Non-transactional DML statements include `INSERT`, `REPLACE`, `UPDATE`, and `DELETE`. For detailed syntax, see [`BATCH`](/sql-statements/sql-statement-batch.md).
 
 > **Note:**
 >
 > - A non-transactional DML statement does not guarantee the atomicity and isolation of the statement, and is not equivalent to the original DML statement.
-> - After a DML statement is rewritten into a non-transactional DML statement, you cannot assume that its behavior is consistent with the original one.
+> - After a DML statement is rewritten into a non-transactional DML statement, you cannot assume that its behavior is consistent with that of the original statement.
 > - Before using a non-transactional DML, you need to analyze whether the split statements will affect each other.
 
 ## Usage scenarios
@@ -35,11 +35,11 @@ Before using non-transactional DML statements, make sure that the following cond
 
 - The statement does not require atomicity, which permits some rows to be modified and some rows to remain unmodified in the execution result.
 - The statement is idempotent, or you are prepared to retry on a part of the data according to the error message. If the system variables are set to `tidb_redact_log = 1` and `tidb_nontransactional_ignore_error = 1`, this statement must be idempotent. Otherwise, when the statement partially fails, the failed part cannot be accurately located.
-- The data to be operated on has no other concurrent writes, which means it is not updated by other statements at the same time. Otherwise, unexpected results such as missing writing, wrong writing, and modifying the same line multiple times might occur.
+- The data to be operated on has no other concurrent writes, which means it is not updated by other statements at the same time. Otherwise, unexpected results such as missing writes, wrong writes, and modifying the same line multiple times might occur.
 - The statement does not modify the data to be read by the statement itself. Otherwise, the following batch will read the data written by the previous batch and easily causes unexpected results.
 
-    - The shard column should not be updated in the statement. For example, for a non-transactional `UPDATE` statement, the split SQL statements are executed in sequence. The modification of the previous batch is read by the next batch after it is committed, which causes the same line of data to be modified multiple times.
-    - The shard column should not be used as a Join key. For example, the following example uses the shard column `test.t.id` as a Join key, which causes a non-transactional `UPDATE` statement to modify the same line multiple times:
+    - The dividing column should not be updated in the statement. For example, for a non-transactional `UPDATE` statement, the split SQL statements are executed in sequence. The modification of the previous batch is read by the next batch after the previous batch is committed, which causes the same line of data to be modified multiple times.
+    - The dividing column should not be used as a Join key. For example, the following example uses the dividing column `test.t.id` as a Join key, which causes a non-transactional `UPDATE` statement to modify the same line multiple times:
 
         ```sql
         CREATE TABLE t(id int, v int, key(id));
@@ -128,7 +128,7 @@ CREATE TABLE t2(id int, v int, key(id));
 INSERT INTO t2 VALUES (1,1), (3,3), (5,5);
 ```
 
-Then, update the data of table `t2` by joining table `t` and `t2`. Note that the shard column needs to be specified with the complete database name, table name, and column name (`test.t.id`):
+Then, update the data of table `t2` by joining table `t` and `t2`. Note that the dividing column needs to be specified with the complete database name, table name, and column name (`test.t.id`):
 
 ```sql
 BATCH ON test.t.id LIMIT 1 UPDATE t JOIN t2 ON t.id = t2.id SET t2.id = t2.id+1;
@@ -232,7 +232,7 @@ To use a non-transactional DML statement, the following steps are recommended:
 
 1. Select an appropriate [dividing column](#parameter-description). Integer or string types are recommended.
 2. Add `DRY RUN QUERY` to the non-transactional DML statement, execute the query manually, and confirm whether the data range affected by the DML statement is roughly correct.
-3. Add `DRY RUN` to the non-transactional DML statement, execute the query manually, and check the split statements and the execution plans. You need to pay attention to whether the split statement can read the result written by the previous statement, which might cause abnormal phenomena. You also need to pay attention to the index selection efficiency.
+3. Add `DRY RUN` to the non-transactional DML statement, execute the query manually, and check the split statements and the execution plans. You need to pay attention to whether the split statement can read the result written by the previous statement, which might cause an anomaly. You also need to pay attention to index selection efficiency.
 4. Execute the non-transactional DML statement.
 5. If an error is reported, get the specific failed data range from the error message or log, and retry or handle it manually.
 
