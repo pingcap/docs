@@ -119,7 +119,7 @@ To create a Dedicated Tier cluster, take the following steps:
 
 8. In the **Security Settings** dialog box, set the root password and allowed IP addresses to connect to your cluster, and then click **Apply**.
 
-    Your TiDB Cloud cluster will be created in approximately 5 to 15 minutes.
+    Your TiDB Cloud cluster will be created in approximately 20 to 30 minutes.
 
 </div>
 </SimpleTab>
