@@ -15,9 +15,9 @@ Assume that you have deployed a TiDB production cluster on AWS and the business 
 
 With PITR, you can satisfy the preceding requirements.
 
-## Deploy the TiDB cluster and br command-line tool
+## Deploy the TiDB cluster and BR
 
-To use PITR, you need to deploy a TiDB cluster >= v6.4.0 and update br command-line tool to the same version as the TiDB cluster. This document uses v6.4.0 as an example.
+To use PITR, you need to deploy a TiDB cluster >= v6.4.0 and update BR to the same version as the TiDB cluster. This document uses v6.4.0 as an example.
 
 The following table shows the recommended hardware resources for using PITR in a TiDB cluster.
 
@@ -26,20 +26,20 @@ The following table shows the recommended hardware resources for using PITR in a
 | TiDB | 8 core+ | 16 GB+ | SAS | c5.2xlarge | 2 |
 | PD | 8 core+ | 16 GB+ | SSD | c5.2xlarge | 3 |
 | TiKV | 8 core+ | 32 GB+ | SSD | m5.2xlarge | 3 |
-| br command-line tool | 8 core+ | 16 GB+ | SAS | c5.2xlarge | 1 |
+| BR | 8 core+ | 16 GB+ | SAS | c5.2xlarge | 1 |
 | Monitor | 8 core+ | 16 GB+ | SAS | c5.2xlarge | 1 |
 
 > **Note:**
 >
-> - When br tool runs the backup and restore tasks, it needs to access PD and TiKV. Make sure that br tool can connect to all PD and TiKV nodes.
-> - br tool and PD servers must use the same time zone.
+> - When BR runs backup and restore tasks, it needs to access PD and TiKV. Make sure that BR can connect to all PD and TiKV nodes.
+> - BR and PD servers must use the same time zone.
 
 Deploy or upgrade a TiDB cluster using TiUP:
 
 - To deploy a new TiDB cluster, refer to [Deploy a TiDB cluster](/production-deployment-using-tiup.md).
 - If the TiDB cluster is earlier than v6.4.0, upgrade it by referring to [Upgrade a TiDB cluster](/upgrade-tidb-using-tiup.md).
 
-Install or upgrade br tool using TiUP:
+Install or upgrade BR using TiUP:
 
 - Install:
 
@@ -68,10 +68,10 @@ The detailed steps are as follows:
     1. Create a bucket. You can choose an existing S3 to store the backup data. If there is none, refer to [AWS documentation: Creating a bucket](https://docs.aws.amazon.com/AmazonS3/latest/userguide/create-bucket-overview.html) and create an S3 bucket. In this example, the bucket name is `tidb-pitr-bucket`.
     2. Create a directory for your backup data. In the bucket (`tidb-pitr-bucket`), create a directory named `backup-data`. For detailed steps, refer to [AWS documentation: Organizing objects in the Amazon S3 console using folders](https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-folders.html).
 
-2. Configure permissions for br command-line tool and TiKV to access the S3 directory. It is recommended to grant permissions using the IAM method, which is the most secure way to access the S3 bucket. For detailed steps, refer to [AWS documentation: Controlling access to a bucket with user policies](https://docs.aws.amazon.com/AmazonS3/latest/userguide/walkthrough1.html). The required permissions are as follows:
+2. Configure permissions for BR and TiKV to access the S3 directory. It is recommended to grant permissions using the IAM method, which is the most secure way to access the S3 bucket. For detailed steps, refer to [AWS documentation: Controlling access to a bucket with user policies](https://docs.aws.amazon.com/AmazonS3/latest/userguide/walkthrough1.html). The required permissions are as follows:
 
-    - TiKV and br tool in the backup cluster need `s3:ListBucket`, `s3:PutObject`, and `s3:AbortMultipartUpload` permissions of the `s3://tidb-pitr-bucket/backup-data` directory.
-    - TiKV and br tool in the restore cluster need `s3:ListBucket` and `s3:GetObject` permissions of the `s3://tidb-pitr-bucket/backup-data` directory.
+    - TiKV and BR in the backup cluster need `s3:ListBucket`, `s3:PutObject`, and `s3:AbortMultipartUpload` permissions of the `s3://tidb-pitr-bucket/backup-data` directory.
+    - TiKV and BR in the restore cluster need `s3:ListBucket` and `s3:GetObject` permissions of the `s3://tidb-pitr-bucket/backup-data` directory.
 
 3. Plan the directory structure that stores the backup data, including the snapshot (full) backup and the log backup.
 

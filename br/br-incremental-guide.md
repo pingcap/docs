@@ -16,14 +16,14 @@ Incremental data of a TiDB cluster is differentiated data between the starting s
 To back up incremental data, run the `br backup` command with **the last backup timestamp** `--lastbackupts` specified. In this way, br command-line tool automatically backs up incremental data generated between `lastbackupts` and the current time. To get `--lastbackupts`, run the `validate` command. The following is an example:
 
 ```shell
-LAST_BACKUP_TS=`tiup br validate decode --field="end-version" --storage "s3://backup-101/snapshot-202209081330?access_key=${access_key}&secret_access_key=${secret_access_key}"| tail -n1`
+LAST_BACKUP_TS=`tiup br validate decode --field="end-version" --storage "s3://backup-101/snapshot-202209081330?access-key=${access-key}&secret-access-key=${secret-access-key}"| tail -n1`
 ```
 
 The following command backs up the incremental data between `(LAST_BACKUP_TS, current PD timestamp]` and the DDLs generated during this time period:
 
 ```shell
 tiup br backup full --pd "${PD_IP}:2379" \
---storage "s3://backup-101/snapshot-202209081330/incr?access_key=${access_key}&secret_access_key=${secret_access_key}" \
+--storage "s3://backup-101/snapshot-202209081330/incr?access-key=${access-key}&secret-access-key=${secret-access-key}" \
 --lastbackupts ${LAST_BACKUP_TS} \
 --ratelimit 128
 ```
@@ -40,12 +40,12 @@ The following command restores the full backup data stored in the `backup-101/sn
 
 ```shell
 tiup br restore full --pd "${PD_IP}:2379" \
---storage "s3://backup-101/snapshot-202209081330?access_key=${access_key}&secret_access_key=${secret_access_key}"
+--storage "s3://backup-101/snapshot-202209081330?access-key=${access-key}&secret-access-key=${secret-access-key}"
 ```
 
 The following command restores the incremental backup data stored in the `backup-101/snapshot-202209081330/incr` directory:
 
 ```shell
 tiup br restore full --pd "${PD_IP}:2379" \
---storage "s3://backup-101/snapshot-202209081330/incr?access_key=${access_key}&secret_access_key=${secret_access_key}"
+--storage "s3://backup-101/snapshot-202209081330/incr?access-key=${access-key}&secret-access-key=${secret-access-key}"
 ```

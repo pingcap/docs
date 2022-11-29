@@ -6,7 +6,7 @@ aliases: ['/docs/dev/br/backup-and-restore-faq/','/tidb/dev/pitr-troubleshoot/',
 
 # Backup & Restore FAQs
 
-This document lists the frequently asked questions (FAQs) and the solutions of TiDB backup and restore.
+This document lists the frequently asked questions (FAQs) and the solutions of TiDB Backup & Restore (BR).
 
 ## Performance issues of backup and restore
 
@@ -138,24 +138,24 @@ To address this problem, delete the current task using `br log stop`, and then c
 
 ### Why does data restored using br command-line tool cannot be replicated to the upstream cluster of TiCDC or Drainer?
 
-+ **The data restored using `br` cannot be replicated to the downstream**. This is because `br` directly imports SST files but the downstream cluster currently cannot obtain these files from the upstream.
++ **The data restored using BR cannot be replicated to the downstream**. This is because BR directly imports SST files but the downstream cluster currently cannot obtain these files from the upstream.
 
 + Before v4.0.3, DDL jobs generated during the restore might cause unexpected DDL executions in TiCDC/Drainer. Therefore, if you need to perform restore on the upstream cluster of TiCDC/Drainer, add all tables restored using br command-line tool to the TiCDC/Drainer block list.
 
 You can use [`filter.rules`](https://github.com/pingcap/tiflow/blob/7c3c2336f98153326912f3cf6ea2fbb7bcc4a20c/cmd/changefeed.toml#L16) to configure the block list for TiCDC and use [`syncer.ignore-table`](/tidb-binlog/tidb-binlog-configuration-file.md#ignore-table) to configure the block list for Drainer.
 
-### Why does `br` report `new_collations_enabled_on_first_bootstrap` mismatch?
+### Why is `new_collations_enabled_on_first_bootstrap` mismatch reported during restore?
 
-Since TiDB v6.0.0, the default value of [`new_collations_enabled_on_first_bootstrap`](/tidb-configuration-file.md#new_collations_enabled_on_first_bootstrap) has changed from `false` to `true`. `br` backs up the `new_collations_enabled_on_first_bootstrap` configuration of the upstream cluster and then checks whether the value of this configuration is consistent between the upstream and downstream clusters. If the value is consistent, `br` safely restores the data backed up in the upstream cluster to the downstream cluster. If the value is inconsistent, `br` does not perform the data restore and reports an error.
+Since TiDB v6.0.0, the default value of [`new_collations_enabled_on_first_bootstrap`](/tidb-configuration-file.md#new_collations_enabled_on_first_bootstrap) has changed from `false` to `true`. BR backs up the `new_collations_enabled_on_first_bootstrap` configuration of the upstream cluster and then checks whether the value of this configuration is consistent between the upstream and downstream clusters. If the value is consistent, BR safely restores the data backed up in the upstream cluster to the downstream cluster. If the value is inconsistent, BR does not perform the data restore and reports an error.
 
 Suppose that you have backed up the data in a TiDB cluster of an earlier version of v6.0.0, and you want to restore this data to a TiDB cluster of v6.0.0 or later versions. In this situation, you need to manually check whether the value of `new_collations_enabled_on_first_bootstrap` is consistent between the upstream and downstream clusters:
 
 - If the value is consistent, you can add `--check-requirements=false` to the restore command to skip this configuration check.
-- If the value is inconsistent, and you forcibly perform the restore, `br` reports a data validation error.
+- If the value is inconsistent, and you forcibly perform the restore, BR reports a data validation error.
 
 ### Why does an error occur when I restore placement rules to a cluster?
 
-Before v6.0.0, `br` does not support [placement rules](/placement-rules-in-sql.md). Starting from v6.0.0, `br` supports placement rules and introduces a command-line option `--with-tidb-placement-mode=strict/ignore` to control the backup and restore mode of placement rules. With the default value `strict`, `br` imports and validates placement rules, but ignores all placement rules when the value is `ignore`.
+Before v6.0.0, BR does not support [placement rules](/placement-rules-in-sql.md). Starting from v6.0.0, BR supports placement rules and introduces a command-line option `--with-tidb-placement-mode=strict/ignore` to control the backup and restore mode of placement rules. With the default value `strict`, BR imports and validates placement rules, but ignores all placement rules when the value is `ignore`.
 
 ## Data restore issues
 
@@ -167,9 +167,9 @@ To address such problems, first check the mounting method and the file system of
 
 For example, you might encounter the `Code: 22(invalid argument)` error when backing up data to the network disk built by `samba`.
 
-### What should I do to handle the `rpc error: code = Unavailable desc =...` error occurred in `br`?
+### What should I do to handle the `rpc error: code = Unavailable desc =...` error occurred in restore?
 
-This error might occur when the capacity of the cluster to restore (using `br`) is insufficient. You can further confirm the cause by checking the monitoring metrics of this cluster or the TiKV log.
+This error might occur when the capacity of the cluster to restore is insufficient. You can further confirm the cause by checking the monitoring metrics of this cluster or the TiKV log.
 
 To handle this issue, you can try to scale out the cluster resources, reduce the concurrency during restore, and enable the `RATE_LIMIT` option.
 
@@ -177,15 +177,15 @@ To handle this issue, you can try to scale out the cluster resources, reduce the
 
 You can try to reduce the number of tables to be created in a batch by setting `--ddl-batch-size` to `128` or a smaller value.
 
-When using `br` to restore the backup data with the value of [`--ddl-batch-size`](/br/br-batch-create-table.md#how to use) greater than `1`, TiDB writes a DDL job of table creation to the DDL jobs queue that is maintained by TiKV. At this time, the total size of all tables schema sent by TiDB at one time should not exceed 6 MB, because the maximum value of job messages is `6 MB` by default (it is **not recommended** to modify this value. For details, see [`txn-entry-size-limit`](/tidb-configuration-file.md#txn-entry-size-limit-new-in-v50) and [`raft-entry-max-size`](/tikv-configuration-file.md#raft-entry-max-size)). Therefore, if you set `--ddl-batch-size` to an excessively large value, the schema size of the tables sent by TiDB in a batch at one time exceeds the specified value, which causes `br` to report the `entry too large, the max entry size is 6291456, the size of data is 7690800` error.
+When using BR to restore the backup data with the value of [`--ddl-batch-size`](/br/br-batch-create-table.md#how to use) greater than `1`, TiDB writes a DDL job of table creation to the DDL jobs queue that is maintained by TiKV. At this time, the total size of all tables schema sent by TiDB at one time should not exceed 6 MB, because the maximum value of job messages is `6 MB` by default (it is **not recommended** to modify this value. For details, see [`txn-entry-size-limit`](/tidb-configuration-file.md#txn-entry-size-limit-new-in-v50) and [`raft-entry-max-size`](/tikv-configuration-file.md#raft-entry-max-size)). Therefore, if you set `--ddl-batch-size` to an excessively large value, the schema size of the tables sent by TiDB in a batch at one time exceeds the specified value, which causes BR to report the `entry too large, the max entry size is 6291456, the size of data is 7690800` error.
 
 ### Where are the backed up files stored when I use `local` storage?
 
 > **Note:**
 >
-> If no Network File System (NFS) is mounted to a `br` or TiKV node, or if you use external storage that supports Amazon S3, GCS, or Azure Blob Storage protocols, the data backed up by `br` is generated at each TiKV node.**Note that this is not the recommended way to deploy `br`**, because the backup data are scattered in the local file system of each node. Collecting the backup data might result in data redundancy and operation and maintenance problems. Meanwhile, if you restore data directly before collecting the backup data, you will encounter the `SST file not found` error.
+> If no Network File System (NFS) is mounted to a BR or TiKV node, or if you use external storage that supports Amazon S3, GCS, or Azure Blob Storage protocols, the data backed up by BR is generated at each TiKV node.**Note that this is not the recommended way to deploy BR**, because the backup data are scattered in the local file system of each node. Collecting the backup data might result in data redundancy and operation and maintenance problems. Meanwhile, if you restore data directly before collecting the backup data, you will encounter the `SST file not found` error.
 
-When you use local storage, `backupmeta` is generated on the node where `br` is running, and backup files are generated on the Leader nodes of each Region.
+When you use local storage, `backupmeta` is generated on the node where BR is running, and backup files are generated on the Leader nodes of each Region.
 
 ### What should I do if the error message `could not read local://...:download sst failed` is returned during data restore?
 
@@ -274,9 +274,9 @@ Therefore, it is recommended to check the permission before data restore accordi
 
 ### Why are tables in the `mysql` schema not restored?
 
-Starting from `br` v5.1.0, when you perform a full backup, `br` backs up the **tables in the `mysql` schema**. Before `br` v6.2.0, under default configuration, `br` only restores user data, but does not restore tables in the **`mysql` schema**.
+Starting from BR v5.1.0, when you perform a full backup, BR backs up the **tables in the `mysql` schema**. Before BR v6.2.0, under default configuration, BR only restores user data, but does not restore tables in the **`mysql` schema**.
 
-To restore a table created by the user in the `mysql` schema (not system tables), you can explicitly include the table using [table filters](/table-filter.md#syntax). The following example shows how to restore the `mysql.usertable` table when `br` performs a normal restore.
+To restore a table created by the user in the `mysql` schema (not system tables), you can explicitly include the table using [table filters](/table-filter.md#syntax). The following example shows how to restore the `mysql.usertable` table when BR performs a normal restore.
 
 {{< copyable "shell-regular" >}}
 
@@ -287,7 +287,7 @@ br restore full -f '*.*' -f '!mysql.*' -f 'mysql.usertable' -s $external_storage
 In the preceding command,
 
 - `-f '*.*'` is used to override the default rules
-- `-f '!mysql.*'` instructs `br` not to restore tables in `mysql` unless otherwise stated.
+- `-f '!mysql.*'` instructs BR not to restore tables in `mysql` unless otherwise stated.
 - `-f 'mysql.usertable'` indicates that `mysql.usertable` should be restored.
 
 If you only need to restore `mysql.usertable`, run the following command:
@@ -298,7 +298,7 @@ If you only need to restore `mysql.usertable`, run the following command:
 br restore full -f 'mysql.usertable' -s $external_storage_url --with-sys-table
 ```
 
-Note that even if you configures [table filter](/table-filter.md#syntax), **`br` does not restore the following system tables**:
+Note that even if you configures [table filter](/table-filter.md#syntax), **BR does not restore the following system tables**:
 
 - Statistics tables (`mysql.stat_*`)
 - System variable tables (`mysql.tidb`, `mysql.global_variables`)
@@ -312,26 +312,26 @@ During data backup, backup files are generated on the Leader nodes of each Regio
 
 However, if you want to restore data from local storage, the number of replicas is equal to that of the TiKV nodes, because each TiKV must have access to all backup files.
 
-### Why is the disk usage shown on the monitoring node inconsistent after backup or restore using `br`?
+### Why is the disk usage shown on the monitoring node inconsistent after backup or restore using BR?
 
 This inconsistency is caused by the fact that the data compression rate used in backup is different from the default rate used in restore. If the checksum succeeds, you can ignore this issue.
 
-### After `br` restores the backup data, do I need to execute the `ANALYZE` statement on the table to update the statistics of TiDB on the tables and indexes?
+### After BR restores the backup data, do I need to execute the `ANALYZE` statement on the table to update the statistics of TiDB on the tables and indexes?
 
-`br` does not back up statistics (except in v4.0.9). Therefore, after restoring the backup data, you need to manually execute `ANALYZE TABLE` or wait for TiDB to automatically execute `ANALYZE`.
+BR does not back up statistics (except in v4.0.9). Therefore, after restoring the backup data, you need to manually execute `ANALYZE TABLE` or wait for TiDB to automatically execute `ANALYZE`.
 
-In v4.0.9, `br` backs up statistics by default, which consumes too much memory. To ensure that the backup process goes well, the backup for statistics is disabled by default starting from v4.0.10.
+In v4.0.9, BR backs up statistics by default, which consumes too much memory. To ensure that the backup process goes well, the backup for statistics is disabled by default starting from v4.0.10.
 
 If you do not execute `ANALYZE` on the table, TiDB will fail to select the optimal execution plan due to inaccurate statistics. If query performance is not a key concern, you can ignore `ANALYZE`.
 
-### Can I use multiple `br` processes at the same time to restore the data of a single cluster?
+### Can I start multiple restore tasks at the same time to restore the data of a single cluster?
 
-**It is strongly not recommended** to use multiple `br` processes at the same time to restore the data of a single cluster for the following reasons:
+**It is strongly not recommended** to start multiple restore tasks at the same time to restore the data of a single cluster for the following reasons:
 
-- When `br` restores data, it modifies some global configurations of PD. Therefore, if you use multiple `br` processes for data restore at the same time, these configurations might be mistakenly overwritten and cause abnormal cluster status.
-- `br` consumes a lot of cluster resources to restore data, so in fact, running `br` processes in parallel improves the restore speed only to a limited extent.
-- There has been no test for running multiple `br` processes in parallel for data restore, so it is not guaranteed to succeed.
+- When BR restores data, it modifies some global configurations of PD. Therefore, if you start multiple restore tasks for data restore at the same time, these configurations might be mistakenly overwritten and cause abnormal cluster status.
+- BR consumes a lot of cluster resources to restore data, so in fact, running restore tasks in parallel improves the restore speed only to a limited extent.
+- There has been no test for running multiple restore tasks in parallel for data restore, so it is not guaranteed to succeed.
 
-### Does `br` back up the `SHARD_ROW_ID_BITS` and `PRE_SPLIT_REGIONS` information of a table? Does the restored table have multiple Regions?
+### Does BR back up the `SHARD_ROW_ID_BITS` and `PRE_SPLIT_REGIONS` information of a table? Does the restored table have multiple Regions?
 
-Yes. `br` backs up the [`SHARD_ROW_ID_BITS` and `PRE_SPLIT_REGIONS`](/sql-statements/sql-statement-split-region.md#pre_split_regions) information of a table. The data of the restored table is also split into multiple Regions.
+Yes. BR backs up the [`SHARD_ROW_ID_BITS` and `PRE_SPLIT_REGIONS`](/sql-statements/sql-statement-split-region.md#pre_split_regions) information of a table. The data of the restored table is also split into multiple Regions.
