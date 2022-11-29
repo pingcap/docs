@@ -51,7 +51,7 @@ In the editor page, you can see the trigger and action. Click the trigger to set
 
 4. Test trigger
 
-   Click **Test trigger**. It will show the data from GitHub global event if nothing get wrong.
+   Click **Test trigger**. If the trigger is successfully set up, you can see the data of a new global event from the GitHub account. Click **Continue**.
 
 ## Step 3: Set up the `Find Table in TiDB Cloud` action
 
