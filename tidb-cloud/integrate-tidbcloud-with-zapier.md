@@ -71,17 +71,21 @@ In the editor page, you can see the trigger and action. Click the trigger to set
 
    In this step, you need to specify a table in your TiDB Cloud cluster to store the event data. If you do not already have a table, you can create one through this step.
 
-   Choose the project and cluster from drop-down list. Then you will see the connection information of the database.
+    1. From the drop-down list, choose the project name and cluster name. The connection information of your cluster will be displayed automatically.
 
-   ![img.png](/media/tidb-cloud/zapier/tidbcloud_project.png)
+        ![Set up project name and cluster name](/media/tidb-cloud/zapier/zapier-set-up-tidbcloud-project-and-cluster.png)
 
-   Enter your password and choose the database from drop-down list. 
+    2. Enter your password.
+    
+    3. From the drop-down list, choose the database.
 
-   ![img.png](/media/tidb-cloud/zapier/tibdcloud_databse.png)
+        ![Set up database name](/media/tidb-cloud/zapier/zapier-set-up-tidbcloud-databse.png)
 
-   The template has set the table name and the DDL which will be executed if the table is not exist. You just need to click **Continue** to enter the next step.
+        Zapier queries the databases from TiDB Cloud using the password you entered. If no database is found in your cluster, re-enter your password and refresh the page.
 
-   ![img.png](/media/tidb-cloud/zapier/tibdcloud_ddl.png)
+    4. In **The table you want to search** box, fill in `github_global_event`. If the table does not exist, the template uses the following DDL to create the table. Click **Continue**.
+
+        ![The create table DDL](/media/tidb-cloud/zapier/zapier-tidb-cloud-create-table-ddl.png)
 
 4. Test action
 
