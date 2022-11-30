@@ -328,7 +328,7 @@ For this integration, you will be using the [ProxySQL Docker image](https://hub.
     > 1. Adds a user using the username and password of your cluster.
     > 2. Assigns the user to the monitoring account.
     > 3. Adds your TiDB Serverless Tier cluster to the list of hosts.
-    > 4. Enables a secure connection between ProxySQL and TiDB Serverless.
+    > 4. Enables a secure connection between ProxySQL and the TiDB Serverless Tier cluster.
     >
     > To have a better understanding, it is strongly recommended that you confirm the `proxysql-prepare.sql` file. To learn more about ProxySQL configuration, see [ProxySQL documentation](https://proxysql.com/documentation/proxysql-configuration/).
 
@@ -630,7 +630,7 @@ For a production environment, it is recommended that you use [TiDB Cloud](https:
 
 - Download and install a MySQL client. For example, [MySQL Shell](https://dev.mysql.com/downloads/shell/).
 
-### Integrate TiDB Cluster with ProxySQL on CentOS
+### Integrate TiDB Cloud with ProxySQL on CentOS
 
 ProxySQL can be installed on many different platforms. The document takes CentOS as an example.
 
@@ -674,7 +674,7 @@ To use ProxySQL as a proxy for TiDB, you need to configure ProxySQL. To do so, y
 
 > **Note:**
 >
-> The following sections list only the required configuration items.
+> The following sections list only the required configuration items of ProxySQL.
 > For a comprehensive list of configurations, see [ProxySQL documentation](https://proxysql.com/documentation/proxysql-configuration/).
 
 ##### Option 1: Configure ProxySQL using the Admin Interface
@@ -687,7 +687,7 @@ To use ProxySQL as a proxy for TiDB, you need to configure ProxySQL. To do so, y
 
     The above step will take you to the ProxySQL admin prompt.
 
-2. Configure the TiDB servers to be used, where you can add one or multiple TiDB servers to ProxySQL. This example will add TiDB Cloud instance. Replace '*tidb cloud dedicated cluster host*' and '*tidb cloud dedicated cluster port*' with your actual TiDB Cloud endpoint and port (Default port is 4000).
+2. Configure the TiDB servers to be used, where you can add one or multiple TiDB servers to ProxySQL. This example will add a TiDB Cloud instance. Replace `<tidb cloud dedicated cluster host>` and `<tidb cloud dedicated cluster port>` with your actual TiDB Cloud endpoint and port (default port is `4000`).
 
     ```sql
     INSERT INTO mysql_servers(hostgroup_id, hostname, port) VALUES (0, '<tidb cloud dedicated cluster host>', <tidb cloud dedicated cluster port>);
@@ -715,7 +715,7 @@ To use ProxySQL as a proxy for TiDB, you need to configure ProxySQL. To do so, y
     > - `password`: TiDB password.
     > - `active`: controls whether the user is active. `1` indicates that the user is **active** and can be used for login, while `0` indicates that the user is inactive.
     > - `default_hostgroup`: the default hostgroup used by the user, where SQL traffic is distributed unless the query rule overrides the traffic to a specific hostgroup.
-    > - `transaction_persistent`: `1` indicates persistent transaction. When a user starts a transaction within a connection, all query statements are routed to the same hostgroup until the transaction is committed or rolled back.
+    > - `transaction_persistent`: `1` indicates a persistent transaction. When a user starts a transaction within a connection, all query statements are routed to the same hostgroup until the transaction is committed or rolled back.
 
 ##### Option 2: Configure ProxySQL using a configuration file
 
@@ -822,7 +822,7 @@ Databases can be overloaded by high traffic, faulty code, or malicious spam. Wit
 
     </SimpleTab>
 
-2. Navigate to the example directory for ProxySQL rules:
+2. Change to the example directory for ProxySQL rules:
 
     <SimpleTab groupId="os">
 
@@ -986,7 +986,7 @@ Databases can be overloaded by high traffic, faulty code, or malicious spam. Wit
     > - Adds the rule `^SELECT.*FOR UPDATE$` with `rule_id` as `1` and `destination_hostgroup` as `0`. If a SQL statement matches this rule, the request will be forwarded to the TiDB server with `hostgroup` as `0`.
     > - Adds the rule `^SELECT` with `rule_id` as `2` and `destination_hostgroup` as `1`. If SQL statements match this rule, it uses the TiDB server with `hostgroup` as `1`.
     >
-    > To have a better understanding, it is strongly recommended that you review the `proxysql-prepare.sql` file. To learn more about ProxySQL configuration, see [ProxySQL documentation](https://proxysql.com/documentation/proxysql-configuration/).
+    > To have a better understanding, it is strongly recommended that you confirm the `proxysql-prepare.sql` file. To learn more about ProxySQL configuration, see [ProxySQL documentation](https://proxysql.com/documentation/proxysql-configuration/).
 
     Here is some additional information about how ProxySQL patterns match query rules:
 
