@@ -7,7 +7,7 @@ summary:  Learn how to integrate TiDB Cloud and TiDB (self-hosted)  with ProxySQ
 
 ## Integrate TiDB with ProxySQL
 
-This document provides a high-level introduction to ProxySQL, describes how to [integrate ProxySQL with TiDB](#option-1---integrate-tidb-serverless-with-proxysql), and demonstrates the key integration benefits through some [typical scenarios](#typical-scenarios).
+This document provides a high-level introduction to ProxySQL, describes how to [integrate ProxySQL with TiDB](#option-1---integrate-tidb-serverless-with-proxysql), and demonstrates the key integration benefits through some [typical scenario](#typical-scenario).
 Meanwhile, if you are interested in learning more about TiDB and ProxySQL, you can find some useful links as follows:
 
 - [TiDB Cloud](https://docs.pingcap.com/tidbcloud/select-cluster-tier)
@@ -16,12 +16,12 @@ Meanwhile, if you are interested in learning more about TiDB and ProxySQL, you c
 
 ## What is ProxySQL?
 
-[ProxySQL](https://proxysql.com/) is a high-performance, open-source SQL proxy. It has a flexible architecture and can be deployed in several different ways, making it ideal for a variety of use cases. For example, ProxySQL can be used to improve performance by caching frequently-accessed data, or to scale out MySQL reads by load-balancing traffic across multiple servers.
+[ProxySQL](https://proxysql.com/) is a high-performance, open-source SQL proxy. It has a flexible architecture and can be deployed in several different ways, making it ideal for a variety of use cases. For example, ProxySQL can be used to improve performance by caching frequently-accessed data.
 ProxySQL is designed from the ground up to be fast, efficient, and easy to use. It is fully compatible with MySQL, and supports all of the features you would expect from a high-end SQL proxy. In addition, ProxySQL comes with a number of unique features that make it an ideal choice for a wide range of applications.
 
 ## Why ProxySQL integration?
 
-- ProxySQL can help boost application performance by reducing latency when interacting with TiDB.  Irrespective of what you are building, whether it is a scalable application using serverless functions like Lambda, where the workload is nondeterministic and can spike, or if you are building an application to execute queries that load tons of data. By leveraging powerful capabilities of ProxySQL such as [connection pooling](https://proxysql.com/documentation/detailed-answers-on-faq/), [load-balancing](https://proxysql.com/documentation/ProxySQL-Configuration/), and [caching](https://proxysql.com/documentation/query-cache/) frequently-used queries, applications can gain immediate benefits.
+- ProxySQL can help boost application performance by reducing latency when interacting with TiDB.  Irrespective of what you are building, whether it is a scalable application using serverless functions like Lambda, where the workload is nondeterministic and can spike, or if you are building an application to execute queries that load tons of data. By leveraging powerful capabilities of ProxySQL such as [connection pooling](https://proxysql.com/documentation/detailed-answers-on-faq/), and [caching](https://proxysql.com/documentation/query-cache/) frequently-used queries, applications can gain immediate benefits.
 - ProxySQL can act as an additional layer of application security protection against SQL vulnerabilities such as SQL Injection with the help of [Query Rules](#query-rules), an easy-to-configure feature available in ProxySQL.
 - You can get the benefits of zero vendor lock-in as both [ProxySQL](https://github.com/sysown/proxysql) and [TiDB](https://github.com/pingcap/tidb) are open-source projects.
 
@@ -777,11 +777,11 @@ This option should only be considered as an alternate method for configuring Pro
 >
 > Do not run ProxySQL with default credentials in production. Before starting the `proxysql` service, you can change the defaults in the `/etc/proxysql.cnf` file by changing the admin_credentials variable.
 
-## Typical scenarios
+## Typical scenario
 
-This section of the document discusses some of the benefits that we can leverage by integrating ProxySQL with TiDB Server, such as Loadbalancing and query routing with some examples.
+This section of the document discusses some of the benefits that we can leverage by integrating ProxySQL with TiDB Server, such as query routing with some examples.
 
-For these examples, we will be using the docker version of TiDB and ProxySQL to configure load balancing, so if you have been following along, the assumption is that you already have a setup installed and running, if not, visit our [getting started section](#option-2---integrate-tidb-self-hosted-with-proxysql) to learn more.
+For these examples, we will be using the docker version of TiDB and ProxySQL to configure query rules, so if you have been following along, the assumption is that you already have a setup installed and running, if not, visit our [getting started section](#option-2---integrate-tidb-self-hosted-with-proxysql) to learn more.
 
 ### Query rules
 
