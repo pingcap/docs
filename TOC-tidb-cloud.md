@@ -178,6 +178,7 @@
 - Integrations
   - [Datadog](/tidb-cloud/monitor-datadog-integration.md)
   - [Prometheus and Grafana](/tidb-cloud/monitor-prometheus-and-grafana-integration.md)
+  - [ProxySQL](/develop/dev-guide-proxysql-integration.md)
   - Terraform
     - [Terraform Integration Overview](/tidb-cloud/terraform-tidbcloud-provider-overview.md)
     - [Get TiDB Cloud Terraform Provider](/tidb-cloud/terraform-get-tidbcloud-provider.md)
@@ -185,7 +186,6 @@
     - [Use Backup Resource](/tidb-cloud/terraform-use-backup-resource.md)
     - [Use Restore Resource](/tidb-cloud/terraform-use-restore-resource.md)
   - [Vercel](/tidb-cloud/integrate-tidbcloud-with-vercel.md)
-  - [ProxySQL](/develop/dev-guide-proxysql-integration.md)
 - Reference
   - TiDB Cluster Architecture
     - [Overview](/tidb-architecture.md)
