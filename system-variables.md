@@ -381,7 +381,7 @@ This variable is an alias for [`last_insert_id`](#last_insert_id).
 - Type: Integer
 - Default value: `0`
 - Range: `[0, 4294967295]`
-- This variable is used to establish a password reuse policy that allows TiDB to limit password reuse based on the number of password changes. The default value `0` means disabling the password reuse policy based on the number of password changes. When this variable is set to an integer `N`, the reuse of the last `N` used passwords is not allowed.
+- This variable is used to establish a password reuse policy that allows TiDB to limit password reuse based on the number of password changes. The default value `0` means disabling the password reuse policy based on the number of password changes. When this variable is set to an integer `N`, the reuse of the last `N` passwords is not allowed.
 
 ### password_reuse_interval <span class="version-mark">New in v6.5.0</span>
 
@@ -390,7 +390,7 @@ This variable is an alias for [`last_insert_id`](#last_insert_id).
 - Type: Integer
 - Default value: `0`
 - Range: `[0, 4294967295]`
-- This variable is used to establish a password reuse policy that allows TiDB to limit password reuse based on elapsed time. The default value `0` means disabling password reuse policies based on password elapsed time. When this variable is set to an integer `N`, the reuse of any password used in the last `N` days is not allowed.
+- This variable is used to establish a password reuse policy that allows TiDB to limit password reuse based on time elapsed. The default value `0` means disabling password reuse policies based on time elapsed. When this variable is set to an integer `N`, the reuse of any password used in the last `N` days is not allowed.
 
 ### max_connections
 

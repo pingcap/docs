@@ -118,7 +118,7 @@ SELECT * FROM information_schema.user_attributes;
 Change the automatic password expiration policy for `newuser` to never expire via `ALTER USER ... PASSWORD EXPIRE NEVER`:
 
 ```sql
-ALTER USER 'newuser' PASSWORD EXPIRE DEFAULT;
+ALTER USER 'newuser' PASSWORD EXPIRE NEVER;
 ```
 
 ```
