@@ -27,7 +27,7 @@ ProxySQL is designed from the ground up to be fast, efficient, and easy to use. 
 
 ## Deployment architecture
 
-The most obvious way to deploy ProxySQL with TiDB is to add ProxySQL as a standalone intermediary between the application layer and TiDB. However, the scalability and failure tolerance are not guaranteed, and it also adds additional latency due to network hop. To solve these problems, an alternate deployment architecture is to deploy ProxySQL as a sidecar as below:
+The most obvious way to deploy ProxySQL with TiDB is to add ProxySQL as a standalone intermediary between the application layer and TiDB. However, the scalability and failure tolerance are not guaranteed, and it also adds additional latency due to network hop. To avoid these problems, an alternate deployment architecture is to deploy ProxySQL as a sidecar as below:
 
 ![proxysql-client-side-tidb-cloud](/media/develop/proxysql-client-side-tidb-cloud.png)
 
