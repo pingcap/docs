@@ -5,7 +5,7 @@ summary: Learn the deployment solution to multi-data centers in one city.
 
 # Multiple Data Centers in One City Deployment
 
-As a NewSQL database, TiDB combines the best features of the traditional relational database and the scalability of the NoSQL database, and is highly available across data centers (DC). This document introduces the deployment of multiple DCs in one city.
+As a distributed SQL database, TiDB combines the best features of the traditional relational database and the scalability of the NoSQL database, and is highly available across data centers (DC). This document introduces the deployment of multiple DCs in one city.
 
 ## Raft protocol
 
