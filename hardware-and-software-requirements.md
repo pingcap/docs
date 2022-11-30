@@ -3,16 +3,16 @@ title: Software and Hardware Recommendations
 summary: Learn the software and hardware recommendations for deploying and running TiDB.
 ---
 
-# ソフトウェアおよびハードウェアの推奨事項 {#software-and-hardware-recommendations}
+# ソフトウェアとハードウェアの推奨事項 {#software-and-hardware-recommendations}
 
-TiDB は、高性能なオープン ソースの分散型 NewSQL データベースとして、Intelアーキテクチャサーバー、ARMアーキテクチャサーバー、および主要な仮想化環境にデプロイでき、適切に動作します。 TiDB は、主要なハードウェア ネットワークと Linux オペレーティング システムのほとんどをサポートしています。
+TiDB は、高性能のオープンソース分散 SQL データベースとして、Intelアーキテクチャサーバー、ARMアーキテクチャサーバー、および主要な仮想化環境にデプロイでき、適切に動作します。 TiDB は、主要なハードウェア ネットワークと Linux オペレーティング システムのほとんどをサポートしています。
 
 ## OS とプラットフォームの要件 {#os-and-platform-requirements}
 
 <SimpleTab>
 <div label="For v6.1.1 and later v6.1.x versions">
 
-v6.1.1 から、TiDB は、オペレーティング システムと CPU アーキテクチャの組み合わせに関するさまざまな品質基準をマルチレベルでサポートします。
+v6.1.1 以降、TiDB は、オペレーティング システムと CPU アーキテクチャの組み合わせに関するさまざまな品質基準をマルチレベルでサポートします。
 
 -   次のオペレーティング システムと CPU アーキテクチャの組み合わせに対して、TiDB**はエンタープライズ レベルの製品品質を提供**し、製品の機能は包括的かつ体系的に検証されています。
 
@@ -151,13 +151,13 @@ TiFlash を展開する前に、次の項目に注意してください。
 -   TiFlash は[複数のディスクに展開](/tiflash/tiflash-configuration.md#multi-disk-deployment)にすることができます。
 -   TiFlash データ ディレクトリの最初のディスクとして高性能 SSD を使用して、TiKV データのリアルタイム レプリケーションをバッファリングすることをお勧めします。このディスクのパフォーマンスは、PCI-E SSD などの TiKV のパフォーマンスよりも低くなってはいけません。ディスク容量は、総容量の 10% 以上にする必要があります。そうしないと、このノードのボトルネックになる可能性があります。他のディスクに通常の SSD を展開できますが、PCI-E SSD が優れているほどパフォーマンスが向上することに注意してください。
 -   TiKV とは異なるノードに TiFlash をデプロイすることをお勧めします。 TiFlash と TiKV を同じノードに展開する必要がある場合は、CPU コアとメモリの数を増やし、TiFlash と TiKV を別のディスクに展開して相互に干渉しないようにしてください。
--   TiFlash ディスクの合計容量は、次のように計算され`the data volume of the entire TiKV cluster to be replicated / the number of TiKV replicas * the number of TiFlash replicas` 。たとえば、TiKV の全体的な計画容量が 1 TB、TiKV レプリカの数が 3、TiFlash レプリカの数が 2 の場合、TiFlash の推奨合計容量は`1024 GB / 3 * 2`です。一部のテーブルのデータのみを複製できます。その場合、複製するテーブルのデータ量に応じてTiFlashの容量を決定してください。
+-   TiFlash ディスクの合計容量は、次のように計算され`the data volume of the entire TiKV cluster to be replicated / the number of TiKV replicas * the number of TiFlash replicas` 。たとえば、TiKV の全体的な計画容量が 1 TB、TiKV レプリカの数が 3、TiFlash レプリカの数が 2 の場合、TiFlash の推奨合計容量は`1024 GB / 3 * 2`です。一部のテーブルのデータのみを複製できます。その場合、複製するテーブルのデータ量に合わせてTiFlashの容量を決定してください。
 
 TiCDC を展開する前に、1 TB を超える PCIe-SSD ディスクに TiCDC を展開することをお勧めします。
 
 ## ネットワーク要件 {#network-requirements}
 
-オープン ソースの分散型 NewSQL データベースである TiDB を実行するには、次のネットワーク ポート構成が必要です。実際の環境での TiDB の展開に基づいて、管理者はネットワーク側とホスト側で関連するポートを開くことができます。
+オープンソースの分散 SQL データベースとして、TiDB を実行するには次のネットワーク ポート構成が必要です。実際の環境での TiDB の展開に基づいて、管理者はネットワーク側とホスト側で関連するポートを開くことができます。
 
 |         成分        | デフォルトのポート | 説明                                                    |
 | :---------------: | :-------: | :---------------------------------------------------- |

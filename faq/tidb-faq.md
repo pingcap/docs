@@ -13,7 +13,7 @@ summary: Learn about the most frequently asked questions (FAQs) relating to TiDB
 
 ### TiDBとは？ {#what-is-tidb}
 
-[TiDB](https://github.com/pingcap/tidb)は、Hybrid Transactional and Analytical Processing (HTAP) ワークロードをサポートするオープンソースの NewSQL データベースです。 MySQL と互換性があり、水平方向のスケーラビリティ、強力な一貫性、および高可用性を備えています。 TiDB の目標は、OLTP (オンライン トランザクション処理)、OLAP (オンライン分析処理)、および HTAP サービスをカバーするワンストップ データベース ソリューションをユーザーに提供することです。 TiDB は、高可用性と大規模データとの強力な整合性を必要とするさまざまなユース ケースに適しています。
+[TiDB](https://github.com/pingcap/tidb)は、Hybrid Transactional and Analytical Processing (HTAP) ワークロードをサポートするオープンソースの分散 SQL データベースです。 MySQL と互換性があり、水平方向のスケーラビリティ、強力な一貫性、および高可用性を備えています。 TiDB の目標は、OLTP (オンライン トランザクション処理)、OLAP (オンライン分析処理)、および HTAP サービスをカバーするワンストップ データベース ソリューションをユーザーに提供することです。 TiDB は、高可用性と大規模データとの強力な整合性を必要とするさまざまなユース ケースに適しています。
 
 ### TiDB のアーキテクチャとは? {#what-is-tidb-s-architecture}
 
@@ -27,7 +27,7 @@ TiDB クラスターには、TiDBサーバー、PD (Placement Driver)サーバ�
 
 -   TiDB は SQL コンピューティングレイヤーとして機能し、主に SQL の解析、クエリ プランの指定、エグゼキューターの生成を担当します。
 -   TiKV は、実際のデータを格納するために使用される分散 Key-Value ストレージ エンジンとして機能します。つまり、TiKV は TiDB のストレージ エンジンです。
--   PD は、TiKV メタデータの管理、タイムスタンプの割り当て、データの配置と負荷分散の決定を行う TiDB のクラスター マネージャーとして機能します。
+-   PD は、TiKV メタデータを管理し、タイムスタンプを割り当て、データの配置と負荷分散を決定する TiDB のクラスター マネージャーとして機能します。
 
 ### TiDB は使いやすいですか？ {#is-it-easy-to-use-tidb}
 

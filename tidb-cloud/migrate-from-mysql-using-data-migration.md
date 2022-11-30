@@ -21,7 +21,7 @@ summary: Learn how to migrate data from MySQL-compatible databases hosted in Ama
 
 -   完全なデータの移行中に、移行対象のテーブルが重複したキーを持つターゲット データベースに既に存在する場合、重複したキーは置き換えられます。
 
--   増分データ移行中に、移行対象のテーブルが重複したキーを持つターゲット データベースに既に存在する場合、エラーが報告され、移行が中断されます。この状況では、アップストリーム データが正確かどうかを確認する必要があります。はいの場合は、移行ジョブの [再起動] ボタンをクリックすると、移行ジョブによって、競合するダウンストリーム レコードがアップストリーム レコードに置き換えられます。
+-   増分データ移行中に、移行対象のテーブルが重複したキーを持つターゲット データベースに既に存在する場合、エラーが報告され、移行が中断されます。この状況では、アップストリーム データが正確かどうかを確認する必要があります。はいの場合は、移行ジョブの [再開] ボタンをクリックすると、移行ジョブによって、競合するダウンストリーム レコードがアップストリーム レコードに置き換えられます。
 
 -   TiDB Cloudでクラスターを削除すると、そのクラスター内のすべての移行ジョブが自動的に削除され、回復できなくなります。
 
@@ -60,7 +60,7 @@ summary: Learn how to migrate data from MySQL-compatible databases hosted in Ama
 たとえば、次の`GRANT`のステートメントを使用して、対応する権限を付与できます。
 
 ```sql
-GRANT SELECT,LOCK TABLES,REPLICATION SLAVE,REPLICATION CLIENT, ON *.* TO 'your_user'@'your_IP_address_of_host'
+GRANT SELECT,LOCK TABLES,REPLICATION SLAVE,REPLICATION CLIENT ON *.* TO 'your_user'@'your_IP_address_of_host'
 ```
 
 ### 下流のTiDB Cloudクラスターに必要な権限を付与する {#grant-required-privileges-to-the-downstream-tidb-cloud-cluster}
@@ -91,7 +91,7 @@ GRANT CREATE,SELECT,INSERT,UPDATE,DELETE,ALTER,TRUNCATE,DROP,INDEX ON *.* TO 'yo
 
 移行ジョブを作成する前に、接続方法に従ってネットワーク接続をセットアップします。 [TiDBクラスタに接続する](/tidb-cloud/connect-to-tidb-cluster.md)を参照してください。
 
--   ネットワーク接続にパブリック IP (これが標準接続) を使用する場合は、上流および下流のデータベースがパブリック ネットワークを介して接続できることを確認してください。
+-   ネットワーク接続にパブリック IP (これは標準接続) を使用する場合は、上流のデータベースがパブリック ネットワーク経由で接続できることを確認してください。
 
 -   VPC ピアリングを使用する場合は、 [VPC ピアリング リクエストを追加する](/tidb-cloud/set-up-vpc-peering-connections.md#step-1-add-vpc-peering-requests)に従って設定します。
 
@@ -125,7 +125,10 @@ GRANT CREATE,SELECT,INSERT,UPDATE,DELETE,ALTER,TRUNCATE,DROP,INDEX ON *.* TO 'yo
     -   **Port** : データ ソースのポート。
     -   **Username** : データ ソースのユーザー名。
     -   **パスワード**: ユーザー名のパスワード。
-    -   **SSL/TLS** : データ ソースに SSL/TLS 接続を使用するかどうか。 SSL/TLS を有効にする場合は、CA 証明書、クライアント証明書、クライアント キーなど、データ ソースの証明書をアップロードする必要があります。
+    -   **SSL/TLS** : SSL/TLS を有効にする場合は、次のいずれかを含むデータ ソースの証明書をアップロードする必要があります。
+        -   CA証明書のみ
+        -   クライアント証明書とクライアント キー
+        -   CA 証明書、クライアント証明書、およびクライアント キー
 
 3.  ターゲット接続プロファイルを入力します。
 
@@ -137,7 +140,7 @@ GRANT CREATE,SELECT,INSERT,UPDATE,DELETE,ALTER,TRUNCATE,DROP,INDEX ON *.* TO 'yo
 5.  表示されるメッセージに従って対処してください。
 
     -   パブリック IP または VPC ピアリングを使用する場合は、データ移行サービスの IP アドレスをソース データベースとファイアウォール (存在する場合) の IP アクセス リストに追加する必要があります。
-    -   Private Link を使用する場合、アカウントでエンドポイント要求を受け入れるように求められます。
+    -   Private Link を使用する場合は、エンドポイント要求を受け入れるように求められます。 [AWS VPC コンソール](https://us-west-2.console.aws.amazon.com/vpc/home)に移動し、[**エンドポイント サービス**] をクリックしてエンドポイント要求を受け入れます。
 
 ## ステップ 3: 移行するオブジェクトを選択する {#step-3-choose-the-objects-to-be-migrated}
 
@@ -146,27 +149,27 @@ GRANT CREATE,SELECT,INSERT,UPDATE,DELETE,ALTER,TRUNCATE,DROP,INDEX ON *.* TO 'yo
     > **ヒント：**
     >
     > -   データをTiDB Cloudに完全に移行するには、**完全なデータの移行**と<strong>増分データの</strong>移行の両方を選択します。これにより、ソース データベースとターゲット データベース間のデータの一貫性が保証されます。
-    > -   ソース データベースの既存のデータのみをTiDB Cloudに移行するには、[**完全なデータ移行**] チェックボックスを選択します。
+    > -   ソース データベースの既存のデータのみをTiDB Cloudに移行するには、[**完全なデータの移行**] チェックボックスのみを選択します。
 
 2.  [移行するオブジェクトの**選択] ページで、移行**するオブジェクトを選択します。 [<strong>すべて</strong>] をクリックしてすべてのオブジェクトを選択するか、[<strong>カスタマイズ</strong>] をクリックしてからオブジェクト名の横にあるチェックボックスをクリックしてオブジェクトを選択します。
 
     -   **All**をクリックすると、移行ジョブは既存のデータをソース データベース インスタンス全体からTiDB Cloudに移行し、完全な移行後に進行中の変更をレプリケートします。前の手順で [<strong>完全なデータの</strong>移行] チェックボックスと [<strong>増分データの移行</strong>] チェックボックスを選択した場合にのみ発生することに注意してください。
 
-    ![Select All Objects](/media/tidb-cloud/migration-job-select-all.png)
+        <img src="https://download.pingcap.com/images/docs/tidb-cloud/migration-job-select-all.png" width="60%" />
 
     -   [**カスタマイズ**] をクリックしていくつかのデータベースを選択すると、移行ジョブは既存のデータを移行し、選択したデータベースの進行中の変更をTiDB Cloudにレプリケートします。前の手順で [<strong>完全なデータの</strong>移行] チェックボックスと [<strong>増分データの移行</strong>] チェックボックスを選択した場合にのみ発生することに注意してください。
 
-    ![Select Databases](/media/tidb-cloud/migration-job-select-db.png)
+        <img src="https://download.pingcap.com/images/docs/tidb-cloud/migration-job-select-db.png" width="60%" />
 
-    -   [**カスタマイズ**] をクリックしてデータセット名の下にあるいくつかのテーブルを選択すると、移行ジョブは既存のデータのみを移行し、選択したテーブルの進行中の変更をレプリケートします。後で同じデータベースに作成されたテーブルは移行されません。
+    -   [**カスタマイズ**] をクリックし、データセット名の下にあるいくつかのテーブルを選択すると、移行ジョブは既存のデータのみを移行し、選択したテーブルの進行中の変更をレプリケートします。後で同じデータベースに作成されたテーブルは移行されません。
 
-    ![Select Tables](/media/tidb-cloud/migration-job-select-tables.png)
+        <img src="https://download.pingcap.com/images/docs/tidb-cloud/migration-job-select-tables.png" width="60%" />
 
-    -   [**カスタマイズ**] をクリックしていくつかのデータベースを選択し、[選択した<strong>オブジェクト</strong>] 領域でいくつかのテーブルを選択して [<strong>ソース データベース</strong>] 領域に戻すと (たとえば、次のスクリーンショットの`username`テーブル)、テーブルは次のように扱われます。ブロックリスト。移行ジョブは既存のデータを移行しますが、除外されたテーブル (スクリーンショットの`username`テーブルなど) を除外し、選択したデータベースの進行中の変更を、除外されたテーブルを除いてTiDB Cloudにレプリケートします。
-
-    ![Select Databases and Deselect Some Tables](/media/tidb-cloud/migration-job-select-db-blacklist1.png)
-
-    ![Select Databases and Deselect Some Tables](/media/tidb-cloud/migration-job-select-db-blacklist2.png)
+    <!--
+     - If you click **Customize** and select some databases, and then select some tables in the **Selected Objects** area to move them back to the **Source Database** area, (for example the `username` table in the following screenshots), then the tables will be treated as in a blocklist. The migration job will migrate the existing data but filter out the excluded tables (such as the `username` table in the screenshots), and will replicate ongoing changes of the selected databases to TiDB Cloud except the filtered-out tables.
+         ![Select Databases and Deselect Some Tables](/media/tidb-cloud/migration-job-select-db-blacklist1.png)
+         ![Select Databases and Deselect Some Tables](/media/tidb-cloud/migration-job-select-db-blacklist2.png)
+     -->
 
 3.  [**次へ**] をクリックします。
 

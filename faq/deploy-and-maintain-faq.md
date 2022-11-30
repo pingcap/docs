@@ -17,11 +17,11 @@ summary: Learn about the FAQs related to TiDB deployment.
 |         CentOS        | 7.3 以降の 7.x リリース |
 |  オラクル エンタープライズ Linux  | 7.3 以降の 7.x リリース |
 |       アマゾン Linux      |         2        |
-|       Ubuntu LTS      |      16.04以降     |
+|       Ubuntu LTS      |     16.04 以降     |
 
 ### TiDB クラスターを CentOS 7 にデプロイすることが推奨されるのはなぜですか? {#why-it-is-recommended-to-deploy-the-tidb-cluster-on-centos-7}
 
-高性能のオープン ソース分散型 NewSQL データベースとして、TiDB は Intelアーキテクチャサーバーおよび主要な仮想化環境に展開でき、適切に動作します。 TiDB は、主要なハードウェア ネットワークと Linux オペレーティング システムのほとんどをサポートしています。詳細については、TiDB のデプロイに関する[正式な導入要件](/hardware-and-software-requirements.md)を参照してください。
+TiDB は、高性能のオープンソース分散 SQL データベースとして、Intelアーキテクチャサーバーおよび主要な仮想化環境に展開でき、適切に動作します。 TiDB は、主要なハードウェア ネットワークと Linux オペレーティング システムのほとんどをサポートしています。詳細については、TiDB のデプロイに関する[正式な導入要件](/hardware-and-software-requirements.md)を参照してください。
 
 CentOS 7.3 では多くの TiDB テストが実行され、多くの展開のベスト プラクティスが CentOS 7.3 に蓄積されています。したがって、TiDB を展開するときは、CentOS 7.3+ Linux オペレーティング システムを使用することをお勧めします。
 
