@@ -11,7 +11,7 @@ With TiDB Cloud Replication, you can perform quick disaster recovery of a databa
 
 > **Warning:**
 >
-> Currently, the **TiDB Cloud Replication** feature is in **Public Preview** with the following limitations:
+> Currently, the **TiDB Cloud Replication** feature is in beta with the following limitations:
 >
 > * One primary cluster can only have one replication.
 > * You cannot use a secondary cluster as a source of **TiDB Cloud Replication** to another cluster.
@@ -68,7 +68,7 @@ After **Planned Detach** is finished, the original primary cluster is set as rea
 
 To recover from an unplanned outage, use **Force Detach**. In the event of a catastrophic failure in the region where the primary cluster is located, you should use **Force Detach** so that the secondary cluster can serve the business as quickly as possible, ensuring business continuity. Because this operation makes the secondary cluster serve as an individual cluster immediately and does not wait for any unreplicated data, the RPO depends on the Primary-Secondary replication lag, while the RTO depends on how quickly **Force Detach** is triggered by you.
 
-**Force Detach** detaches the secondary cluster from the primary cluster into an individual cluster. When **Force Detach** is triggered, it performs the following steps：
+**Force Detach** detaches the secondary cluster from the primary cluster into an individual cluster. When **Force Detach** is triggered, it performs the following steps:
 
 1. Stops data replication from the primary to the secondary cluster immediately.
 2. Sets the original secondary cluster as writable so that it can start serving your workload.

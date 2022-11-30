@@ -8,6 +8,8 @@ Release date: September 30, 2022
 
 TiDB version: 6.3.0-DMR
 
+Quick access: [Quick start](https://docs.pingcap.com/tidb/v6.3/quick-start-with-tidb) | [Installation packages](https://www.pingcap.com/download/?version=v6.3.0#version-list)
+
 In v6.3.0-DMR, the key new features and improvements are as follows:
 
 - TiKV supports encryption at rest using the SM4 algorithm.
@@ -217,6 +219,7 @@ In v6.3.0-DMR, the key new features and improvements are as follows:
 | [`tidb_enable_unsafe_substitute`](/system-variables.md#tidb_enable_unsafe_substitute-new-in-v630) | Newly added | Controls whether to replace expressions with generated columns in an unsafe way. |
 | [`tidb_general_plan_cache_size`](/system-variables.md#tidb_general_plan_cache_size-new-in-v630) | Newly added | Controls the maximum number of execution plans that can be cached by General Plan Cache. The feature controlled by this variable is not fully functional in TiDB v6.3.0. Do not change the default value.  |
 | [`tidb_last_plan_replayer_token`](/system-variables.md#tidb_enable_unsafe_substitute-new-in-v630) | Newly added | Read-only and used to obtain the result of the last `PLAN REPLAYER DUMP` execution in the current session. |
+| [tidb_max_paging_size](/system-variables.md#tidb_max_paging_size-new-in-v630) | Newly added | This variable is used to set the minimum number of rows during the coprocessor paging request process. |
 | [`tidb_opt_force_inline_cte`](/system-variables.md#tidb_opt_force_inline_cte-new-in-v630) | Newly added | Controls whether common table expressions (CTEs) in the entire session are inlined or not. The default value is `OFF`, which means that inlining CTE is not enforced by default. |
 | [`tidb_opt_three_stage_distinct_agg`](/system-variables.md#tidb_opt_three_stage_distinct_agg-new-in-v630) | Newly added | Specifies whether to rewrite a `COUNT(DISTINCT)` aggregation into a three-stage aggregation in MPP mode. The default value is `ON`. |
 | [`tidb_partition_prune_mode`](/system-variables.md#tidb_partition_prune_mode-new-in-v51) | Modified | Specifies whether to enable dynamic pruning. Since v6.3.0, the default value changes to `dynamic`. |
@@ -249,6 +252,7 @@ In v6.3.0-DMR, the key new features and improvements are as follows:
 * Log backup is now compatible with the `exchange partition` DDL.
 * The SQL statement `ALTER TABLE ...SET TiFLASH MODE ...` previously used for enabling [fastscan](/develop/dev-guide-use-fastscan.md) is deprecated, and replaced by the system variable [`tiflash_fastscan`](/system-variables.md#tiflash_fastscan-new-in-v630). When you upgrade from v6.2.0 to v6.3.0, all FastScan settings in v6.2.0 will become invalid, but will not affect the normal reading of data. In this case, you need to configure the variable [`tiflash_fastscan`](/system-variables.md#tiflash_fastscan-new-in-v630) to enable or disable FastScan. When you upgrade from an earlier version to v6.3.0, the FastScan feature is not enabled by default for all sessions to keep data consistent.
 * To deploy TiFlash under the Linux AMD64 architecture, the CPU must support AVX2 instruction sets. Use `cat /proc/cpuinfo | grep avx2` to confirm that there is output. By using such CPU instruction sets, TiFlash's vectorization engine can deliver better performance.
+* The minimum version of HAProxy that works with TiDB is now v1.5. HAProxy versions between v1.5 and v2.1 now require the `post-41` configuration option to be set in `mysql-check`. It is recommended to use HAProxy v2.2 or newer.
 
 ## Removed feature
 

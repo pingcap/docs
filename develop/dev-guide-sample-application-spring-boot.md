@@ -21,9 +21,9 @@ You can build your own application based on this example.
 
 The following introduces how to start a TiDB cluster.
 
-**Use a TiDB Cloud free cluster**
+**Use a TiDB Cloud Serverless Tier cluster**
 
-For detailed steps, see [Create a free cluster](/develop/dev-guide-build-cluster-in-cloud.md#step-1-create-a-free-cluster).
+For detailed steps, see [Create a Serverless Tier cluster](/develop/dev-guide-build-cluster-in-cloud.md#step-1-create-a-serverless-tier-cluster).
 
 **Use a local cluster**
 
@@ -33,7 +33,7 @@ For detailed steps, see [Deploy a local test cluster](/quick-start-with-tidb.md#
 
 <CustomContent platform="tidb-cloud">
 
-See [Create a free cluster](/develop/dev-guide-build-cluster-in-cloud.md#step-1-create-a-free-cluster).
+See [Create a Serverless Tier cluster](/develop/dev-guide-build-cluster-in-cloud.md#step-1-create-a-serverless-tier-cluster).
 
 </CustomContent>
 
@@ -188,7 +188,7 @@ If you want to learn more about the code of this application, refer to [Implemen
 
 ### Step 5.1 Change parameters
 
-If you use a non-local default cluster, a TiDB Cloud cluster or a remote cluster, change the `spring.datasource.url`, `spring.datasource.username`, `spring.datasource.password` parameters in the `application.yml` (located in `src/main/resources`).
+If you are using a TiDB Cloud Serverless Tier cluster, change the `spring.datasource.url`, `spring.datasource.username`, `spring.datasource.password` parameters in the `application.yml` (located in `src/main/resources`).
 
 {{< copyable "" >}}
 
@@ -206,13 +206,11 @@ spring:
       ddl-auto: create-drop
 ```
 
-If you set the password to `123456`, the connection string you get in TiDB Cloud is as follows:
+Suppose that the password you set is `123456`, and the connection parameters you get from the cluster details page are the following:
 
-{{< copyable "shell-regular" >}}
-
-```shell
-mysql --connect-timeout 15 -u root -h xxx.tidbcloud.com -P 4000 -p
-```
+- Endpoint: `xxx.tidbcloud.com`
+- Port: `4000`
+- User: `2aEp24QWEDLqRFs.root`
 
 Accordingly, the parameters must be set as folows:
 
@@ -221,8 +219,8 @@ Accordingly, the parameters must be set as folows:
 ```yaml
 spring:
   datasource:
-    url: jdbc:mysql://xxx.tidbcloud.com:4000/test
-    username: root
+    url: jdbc:mysql://xxx.tidbcloud.com:4000/test?sslMode=VERIFY_IDENTITY&enabledTLSProtocols=TLSv1.2,TLSv1.3
+    username: 2aEp24QWEDLqRFs.root
     password: 123456
     driver-class-name: com.mysql.cj.jdbc.Driver
   jpa:

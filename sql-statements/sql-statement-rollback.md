@@ -6,7 +6,7 @@ aliases: ['/docs/dev/sql-statements/sql-statement-rollback/','/docs/dev/referenc
 
 # ROLLBACK
 
-This statement reverts all changes in the current transaction inside of TIDB.  It is the opposite of a `COMMIT` statement.
+This statement reverts all changes in the current transaction inside of TIDB. It is the opposite of a `COMMIT` statement.
 
 ## Synopsis
 
@@ -45,7 +45,12 @@ Empty set (0.01 sec)
 
 ## See also
 
+<CustomContent platform="tidb">
+
 * [SAVEPOINT](/sql-statements/sql-statement-savepoint.md)
+
+</CustomContent>
+
 * [COMMIT](/sql-statements/sql-statement-commit.md)
 * [BEGIN](/sql-statements/sql-statement-begin.md)
 * [START TRANSACTION](/sql-statements/sql-statement-start-transaction.md)
