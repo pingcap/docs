@@ -233,7 +233,7 @@ proxysql-connect.py generated successfully.
 [End] all files generated successfully and placed in the current folder.
 ```
 
-#### Step 3. Integrate TiDB with ProxySQL
+#### Step 3. Configure ProxySQL
 
 1. Start Docker. If Docker has already started, skip this step:
 
@@ -686,7 +686,7 @@ To use ProxySQL as a proxy for TiDB, you need to configure ProxySQL. To do so, y
 
     The above step will take you to the ProxySQL admin prompt.
 
-2. Configure the TiDB servers to be used, where you can add one or multiple TiDB servers to ProxySQL. In this example, one TiDB server is added as follows:
+2. Configure the TiDB servers to be used, you can add one or multiple TiDB servers to ProxySQL. In this example we will be add TiDBCloud instance. Replace '*tidb cloud dedicated cluster host*' and '*tidb cloud dedicated cluster port*' with the actual TiDB cloud endpoint and port that's been configured( Default port is 4000)
 
     ```sql
     INSERT INTO mysql_servers(hostgroup_id, hostname, port) VALUES (0, '<tidb cloud dedicated cluster host>', <tidb cloud dedicated cluster port>);
@@ -700,7 +700,7 @@ To use ProxySQL as a proxy for TiDB, you need to configure ProxySQL. To do so, y
     > `hostname`: The IP address or domain of the TiDB server.
     > `port`:  The port of TiDB server.
 
-3. Configure Proxy login users to make sure that the users have appropriate permissions on the TiDB server:
+3. Configure Proxy login users to make sure that the users have appropriate permissions on the TiDB server. In the code below Replace '*tidb cloud dedicated cluster username*' and 'tidb cloud dedicated cluster password' with the cluster `username` and `password` that's been configured.
 
     ```sql
     INSERT INTO mysql_users(username, password, active, default_hostgroup, transaction_persistent) VALUES ('<tidb cloud dedicated cluster username>', '<tidb cloud dedicated cluster password>', 1, 0, 1);
@@ -759,6 +759,12 @@ This option should only be considered as an alternate method for configuring Pro
     )
     ```
 
+    Replace:
+
+    - `tidb cloud dedicated cluster host` with the actual TiDB Cloud `endpoint`
+    - `tidb cloud dedicated cluster username` with TiDB Cloud `username`
+    - `tidb cloud dedicated cluster password` with TiDB Cloud `password`
+
 3. Restart ProxySQL:
 
     ```bash
@@ -778,6 +784,8 @@ This section of the document discusses some of the benefits that we can leverage
 For these examples, we will be using the docker version of TiDB and ProxySQL to configure load balancing, so if you have been following along, the assumption is that you already have a setup installed and running, if not, visit our [getting started section](#option-2---integrate-tidb-self-hosted-with-proxysql) to learn more.
 
 ### Load balancing
+
+This scenario is more appropriate and suited for self-hosted deployments of database server where scalability could be a challenge. TiDB Cloud and TiDB Serverless can process and scale with large number of requests eliminating this type of concern.
 
 One of the common questions often asked is "_How do I increase performance of the application?_".
 
