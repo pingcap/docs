@@ -6,6 +6,12 @@ aliases: ['/docs/dev/how-to/deploy/geographic-redundancy/overview/','/docs/dev/g
 
 # Multiple Data Centers in One City Deployment
 
+<!-- Localization note:
+English: Use distributed SQL, and start to emphasize HTAP
+Japanese: use NewSQL because it is well-received
+Chinese: keep "NewSQL" and emphasize one-stack real-time HTAP ("一栈式实时 HTAP")
+-->
+
 As a distributed SQL database, TiDB combines the best features of the traditional relational database and the scalability of the NoSQL database, and is highly available across data centers (DC). This document introduces the deployment of multiple DCs in one city.
 
 ## Raft protocol
@@ -72,7 +78,7 @@ member leader_priority pdName3 3
 ```
 
 > **Note:**
-> 
+>
 > Since TiDB 5.2, the `label-property` configuration is not supported by default. To set the replica policy, use the [placement rules](/configure-placement-rules.md).
 
 **Disadvantages:**

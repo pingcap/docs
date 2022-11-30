@@ -7,6 +7,12 @@ hide_commit: true
 
 <LearningPathContainer platform="tidb" title="TiDB" subTitle="TiDB is an open-source distributed SQL database that supports Hybrid Transactional and Analytical Processing (HTAP) workloads. Find the guide, samples, and references you need to use TiDB.">
 
+<!-- Localization note:
+English: Use distributed SQL, and start to emphasize HTAP
+Japanese: use NewSQL because it is well-received
+Chinese: keep "NewSQL" and emphasize one-stack real-time HTAP ("一栈式实时 HTAP")
+-->
+
 <LearningPath label="Learn" icon="cloud1">
 
 [What is TiDB](https://docs.pingcap.com/tidb/dev/overview)
