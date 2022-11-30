@@ -38,11 +38,11 @@ AWS DMS does not support replicating `DROP TABLE`.
 
 3. Fill in the instance name, and select an appropriate instance class. It is recommended to use dms.t3.large or a higher class to get better performance.
 
-    ![Fill name and choose class](/media/tidb-cloud/aws-dms-tidb-cloud/aws-dms-to-tidb-cloud-choose-class.png)
+    ![Fill name and choose class](/media/tidb-cloud/aws-dms-tidb-cloud/aws-dms-to-tidb-cloud-choose-class.PNG)
 
 4. Use default configurations. Select the VPC that you need. It is recommended to use the same VPC as the upstream database to simplify the network configuration. Select **Single-AZ** or **Multi-AZ** based on your business needs.
 
-    ![Choose VPC](/media/tidb-cloud/aws-dms-tidb-cloud/aws-dms-to-tidb-cloud-vpc.png)
+    ![Choose VPC](/media/tidb-cloud/aws-dms-tidb-cloud/aws-dms-to-tidb-cloud-vpc.PNG)
 
 5. Configure the **Advanced security and network configuration**, **Maintenance**, and **Tags** if needed. Click **Create** to finish the instance creation.
 
