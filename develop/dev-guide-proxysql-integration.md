@@ -352,7 +352,7 @@ For this integration, you will be using the [ProxySQL Docker image](https://hub.
 
 #### Step 4. Connect to your TiDB cluster through ProxySQL
 
-1. To connect to your TiDB cluster, run `proxysql-connect.py`. The script will automatically launch the MySQL client and use the username and password you specified in step 2 to connect.
+1. To connect to your TiDB cluster, run `proxysql-connect.py`. The script will automatically launch the MySQL client and use the username and password you specified in [Step 2](#step-2-generate-proxysql-configuration-files) for connection.
 
     <SimpleTab groupId="os">
 
@@ -897,7 +897,7 @@ Databases can be overloaded by high traffic, faulty code, or malicious spam. Wit
     If everything goes well, the following containers are started:
 
     - Two Docker containers of TiDB clusters exposed via ports `4001`, `4002`
-    - One ProxySQL Docker containers exposed via port `6034`.
+    - One ProxySQL Docker container exposed via port `6034`.
 
 4. In the two TiDB containers, using `mysql` to create a table with a similar schema definition and then insert different data (`'tidb-server01-port-4001'`, `'tidb-server02-port-4002'`) to identify these containers.
 
