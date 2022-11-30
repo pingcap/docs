@@ -339,7 +339,7 @@ ALTER USER 'test'@'localhost'
 >
 > - If you set the password reuse policy multiple times, the last set value takes effect.
 > - The default value of the `PASSWORD HISTORY` and `PASSWORD REUSE INTERVAL` options is 0, which means that the reuse policy is disabled.
-> - When you modify the username, the history password records in the `mysql.password_history` system table are migrated.
+> - When you modify the username, TiDB migrates the password history in the `mysql.password_history` system table from the original username to the new username.
 
 ## Failed-login tracking and temporary account locking
 
