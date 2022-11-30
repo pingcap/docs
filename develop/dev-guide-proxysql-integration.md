@@ -39,8 +39,8 @@ The most obvious way to deploy ProxySQL with TiDB is to add ProxySQL as a standa
 
 This section describes how to integrate TiDB with ProxySQL in a development environment. To get started with the ProxySQL integration, you can choose either of the following options depending on your TiDB cluster type after you have all the [prerequisites](#prerequisite) in place.
 
-- Option 1: [Integrate TiDB Cloud with ProxySQL](#option-1---integrate-tidb-serverless-with-proxysql)
-- Option 2: [Integrate TiDB (self-hosted) with ProxySQL](#option-2---integrate-tidb-self-hosted-with-proxysql)
+- Option 1: [Integrate TiDB Cloud with ProxySQL](#option-1-integrate-tidb-cloud-with-proxysql)
+- Option 2: [Integrate TiDB (self-hosted) with ProxySQL](#option-2-integrate-tidb-self-hosted-with-proxysql)
 
 ### Prerequisites
 
@@ -802,7 +802,7 @@ Databases can be overloaded by high traffic, faulty code, or malicious spam. Wit
 
 > **Note:**
 >
-> In the following steps, you will be using the container images of TiDB and ProxySQL to configure query rules. If you have not pulled them, you can check the [integration section](#option-2---integrate-tidb-self-hosted-with-proxysql) for detailed steps.
+> In the following steps, you will be using the container images of TiDB and ProxySQL to configure query rules. If you have not pulled them, you can check the [integration section](#option-2-integrate-tidb-self-hosted-with-proxysql) for detailed steps.
 
 1. Clone the [integration example code repository](https://github.com/pingcap-inc/tidb-proxysql-integration) for TiDB and ProxySQL. Skip this step if you have already cloned it in the previous steps.
 
