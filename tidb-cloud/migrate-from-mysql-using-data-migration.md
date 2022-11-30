@@ -125,7 +125,10 @@ On the **Create Migration Job** page, configure the source and target connection
    - **Port**: the port of the data source.
    - **Username**: the username of the data source.
    - **Password**: the password of the username.
-   - **SSL/TLS**: if you enable SSL/TLS, you need to upload the certificates of the data source, including any of the following: 1. only the CA certificate; 2. the client certificate and client key; 3 the CA certificate, client certificate and client key.
+   - **SSL/TLS**: if you enable SSL/TLS, you need to upload the certificates of the data source, including any of the following:
+        - only the CA certificate
+        - the client certificate and client key
+        - the CA certificate, client certificate and client key
 
 3. Fill in the target connection profile.
 
