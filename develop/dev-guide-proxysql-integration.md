@@ -1,12 +1,6 @@
 ---
-<<<<<<< HEAD
-title: Integrate TiDB with ProxySQL
-summary: Introduce how to integrate TiDB with ProxySQL step by step.
-aliases: ["/tidbcloud/dev-guide-proxysql-integration"]
-=======
 title: ProxySQL Integration Guide
 summary: Learn how to integrate TiDB Cloud and TiDB (self-hosted) with ProxySQL.
->>>>>>> 6bc6b7379 ([Rewrite] ProxySQL and TiDB In Integration Guide (#11461))
 ---
 
 # Integrate TiDB with ProxySQL
@@ -545,17 +539,7 @@ The following steps will set up ProxySQL and TiDB on ports `6033` and `4000` res
 
     </div>
 
-<<<<<<< HEAD
-```sql
-+--------------------+
-| VERSION()          |
-+--------------------+
-| 5.7.25-TiDB-v6.1.2 |
-+--------------------+
-```
-=======
     <div label="Windows (Git Bash)" value="Windows">
->>>>>>> 6bc6b7379 ([Rewrite] ProxySQL and TiDB In Integration Guide (#11461))
 
     ```bash
     docker compose up -d
