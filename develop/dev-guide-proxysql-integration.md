@@ -780,7 +780,7 @@ This option should only be considered as an alternate method for configuring Pro
 
 ## Typical scenario
 
-This section takes query routing as an example to show some of the benefits that you can leverage by integrating ProxySQL with TiDB Server.
+This section takes query routing as an example to show some of the benefits that you can leverage by integrating ProxySQL with TiDB.
 
 ### Query rules
 
