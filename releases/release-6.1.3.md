@@ -12,6 +12,17 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v6.1/quick-start-with-
 
 ## Improvements
 
+- PD
+
+    - Optimize the lock granularity and improve the processing ability of heartbeat under high concurrency [#5586](https://github.com/tikv/pd/issues/5586) @[rleungx](https://github.com/rleungx)
+
+- Tools
+
+    - TiCDC
+    
+        - Enable transaction split and disable safeMode of a changefeed in TiCDC by defult [#7505](https://github.com/pingcap/tiflow/issues/7505) @[asddongmen](https://github.com/asddongmen)
+        - Improve kakfa protocol encoder performance [#7540](https://github.com/pingcap/tiflow/issues/7540), [#7532](https://github.com/pingcap/tiflow/issues/7532), [#7543](https://github.com/pingcap/tiflow/issues/7543) @[sdojjy](https://github.com/sdojjy) @[3AceShowHand](https://github.com/3AceShowHand)
+    
 ## Bug fixes
 
 + TiDB
@@ -28,7 +39,8 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v6.1/quick-start-with-
 
     <!--executor owner: zanmato1984-->
 
-    <!--planner owner: qw4990-->
+    - Fix the issue that Projection may push expression down through Join wrongly [#38736](https://github.com/pingcap/tidb/issues/38736) @[winoros](https://github.com/winoros)
+    - Fix the issue that the background statistics collecting task may panic [#35421](https://github.com/pingcap/tidb/issues/35421) @[lilinghai](https://github.com/lilinghai)
 
     <!--transaction owner: cfzjywxk-->
 
