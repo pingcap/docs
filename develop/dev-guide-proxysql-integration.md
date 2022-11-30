@@ -5,7 +5,7 @@ summary:  Learn how to integrate TiDB Cloud and TiDB (self-hosted)  with ProxySQ
 
 # Integrate TiDB with ProxySQL
 
-This document provides a high-level introduction to ProxySQL, describes how to [integrate ProxySQL with TiDB](#option-1---integrate-tidb-serverless-with-proxysql), and demonstrates the key integration benefits through the [scenario of query rules](#typical-scenario).
+This document provides a high-level introduction to ProxySQL, describes how to [integrate ProxySQL with TiDB](#option-1---integrate-tidb-serverless-with-proxysql), and demonstrates the key integration benefits through the [scenario of query routing](#typical-scenario).
 
 If you are interested in learning more about TiDB and ProxySQL, you can find some useful links as follows:
 
@@ -59,7 +59,7 @@ You can follow the installation instructions as below:
 
 <div label="macOS" value="macOS">
 
-1. [Download]((https://docs.docker.com/get-docker/)) and start `Docker` (the Docker desktop already includes the docker-compose).
+1. [Download](https://docs.docker.com/get-docker/) and start `Docker` (the Docker desktop already includes the docker-compose).
 2. Run the following command to install `python` and `mysql-client`:
 
     ```bash
@@ -790,7 +790,7 @@ Databases can be overloaded by high traffic, faulty code, or malicious spam. Wit
 ![proxysql-client-side-rules](/media/develop/proxysql-client-side-rules.png)
 
 > **Note:**
-
+>
 > In the following steps, you will be using the Docker images of TiDB and ProxySQL to configure query rules. If you have not pulled down them, you can check the [integration section](#option-2---integrate-tidb-self-hosted-with-proxysql) for detailed steps.
 
 1. Clone the [integration example code repository](https://github.com/pingcap-inc/tidb-proxysql-integration) for TiDB and ProxySQL. Skip this step if you have already cloned it in the previous steps.
