@@ -7,9 +7,11 @@ aliases: ['/docs/dev/hardware-and-software-requirements/','/docs/dev/how-to/depl
 # Software and Hardware Recommendations
 
 <!-- Localization note:
-English: Use distributed SQL, and start to emphasize HTAP
-Japanese: use NewSQL because it is well-received
-Chinese: keep "NewSQL" and emphasize one-stack real-time HTAP ("一栈式实时 HTAP")
+
+- English: Use distributed SQL, and start to emphasize HTAP
+- Japanese: use NewSQL because it is well-received
+- Chinese: keep "NewSQL" and emphasize one-stack real-time HTAP ("一栈式实时 HTAP")
+
 -->
 
 As an open-source distributed SQL database with high performance, TiDB can be deployed in the Intel architecture server, ARM architecture server, and major virtualization environments and runs well. TiDB supports most of the major hardware networks and Linux operating systems.
@@ -112,9 +114,11 @@ Before you deploy TiCDC, note that it is recommended to deploy TiCDC on PCIe-SSD
 ## Network requirements
 
 <!-- Localization note:
-English: Use distributed SQL, and start to emphasize HTAP
-Japanese: use NewSQL because it is well-received
-Chinese: keep "NewSQL" and emphasize one-stack real-time HTAP ("一栈式实时 HTAP")
+
+- English: Use distributed SQL, and start to emphasize HTAP
+- Japanese: use NewSQL because it is well-received
+- Chinese: keep "NewSQL" and emphasize one-stack real-time HTAP ("一栈式实时 HTAP")
+
 -->
 
 As an open-source distributed SQL database, TiDB requires the following network port configuration to run. Based on the TiDB deployment in actual environments, the administrator can open relevant ports in the network side and host side.

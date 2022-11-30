@@ -42,10 +42,13 @@ Get the power of a cloud-native, distributed SQL database built for real-time an
 <DocHomeSection label="TiDB" anchor="tidb" id="tidb">
 
 <!-- Localization note:
-English: Use distributed SQL, and start to emphasize HTAP
-Japanese: use NewSQL because it is well-received
-Chinese: keep "NewSQL" and emphasize one-stack real-time HTAP ("一栈式实时 HTAP")
+
+- English: Use distributed SQL, and start to emphasize HTAP
+- Japanese: use NewSQL because it is well-received
+- Chinese: keep "NewSQL" and emphasize one-stack real-time HTAP ("一栈式实时 HTAP")
+
 -->
+
 TiDB is an open-source distributed SQL database that supports Hybrid Transactional and Analytical Processing (HTAP) workloads. It is MySQL compatible and features horizontal scalability, strong consistency, and high availability. You can deploy TiDB on premises or in the cloud.
 
 <DocHomeCardContainer>
