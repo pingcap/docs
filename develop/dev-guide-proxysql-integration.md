@@ -49,7 +49,7 @@ Depending on the option you choose, you might need the following packages:
 - [Git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git)
 - [Docker](https://docs.docker.com/get-docker/)
 - [Python 3](https://www.python.org/downloads/)
-- [Docker Compose](https://docker-docs.netlify.app/compose/install/)
+- [Docker Compose](https://docs.docker.com/compose/install/linux/)
 - [MySQL Client](https://dev.mysql.com/doc/refman/8.0/en/mysql.html)
 
 You can follow the installation instructions as below:
@@ -127,7 +127,7 @@ For this integration, you will be using the [ProxySQL Docker image](https://hub.
 2. Get your cluster hostname, port, and username for later use.
 
     1. On the [Clusters](https://tidbcloud.com/console/clusters) page, click your cluster name to go to the cluster overview page.
-2. On the cluster overview page, locate the **Connection** pane, and then copy the `Endpoint`, `Port`, and `User` fields, where the `Endpoint` is your cluster hostname.
+    2. On the cluster overview page, locate the **Connection** pane, and then copy the `Endpoint`, `Port`, and `User` fields, where the `Endpoint` is your cluster hostname.
 
 #### Step 2. Generate ProxySQL configuration files
 
@@ -223,9 +223,9 @@ For this integration, you will be using the [ProxySQL Docker image](https://hub.
 
     When prompted, enter the endpoint of your cluster for `Serverless Tier Host`, and then enter the username and the password of your cluster.
 
-The following is an example output. You will see that three configuration files are generated under the current `tidb-cloud-connect` folder.
+    The following is an example output. You will see that three configuration files are generated under the current `tidb-cloud-connect` folder.
 
-    ```bash
+    ```
     [Begin] generating configuration files..
     tidb-cloud-connect.cnf generated successfully.
     proxysql-prepare.sql generated successfully.
@@ -429,7 +429,7 @@ The following is an example output. You will see that three configuration files 
 
 ### Option 2: Integrate TiDB (self-hosted) with ProxySQL
 
-For this integration, you will set up an environment using container images of [TiDB](https://hub.docker.com/r/pingcap/tidb) and [ProxySQL](https://hub.docker.com/r/proxysql/proxysql). You are encouraged to try [other ways of installing TiDB (self-hosted)](https://docs.pingcap.com/tidb/stable/quick-start-with-tidb) in your own interest.
+For this integration, you will set up an environment using Docker images of [TiDB](https://hub.docker.com/r/pingcap/tidb) and [ProxySQL](https://hub.docker.com/r/proxysql/proxysql). You are encouraged to try [other ways of installing TiDB (self-hosted)](https://docs.pingcap.com/tidb/stable/quick-start-with-tidb) in your own interest.
 
 The following steps will set up ProxySQL and TiDB on ports `6033` and `4000` respectively, so make sure these ports are available.
 
