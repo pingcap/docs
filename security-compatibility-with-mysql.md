@@ -6,15 +6,14 @@ aliases: ['/docs/dev/security-compatibility-with-mysql/','/docs/dev/reference/se
 
 # Security Compatibility with MySQL
 
-TiDB is highly compatible with the MySQL 5.7 protocol and the common features and syntax of MySQL 5.7. However, TiDB does not support some MySQL security features for the following reasons:
+TiDB 支持与 MySQL 5.7 类似的安全特性，同时 TiDB 还支持 MySQL 8.0 的部分安全特性。 TiDB 的安全特性在实现上 与 MySQL 存在差异。
 
-- Some features are not highly demanded by TiDB users.
-- Some features are hard to implement in a distributed system.
+TiDB supports security features similar to MySQL 5.7, and also supports some security features of MySQL 8.0. The security features of TiDB are different from MySQL in implementation.
 
 ## Unsupported security features
 
-- Column level permissions are not supported
-- These permission attributes are not supported: `max_questions`, `max_updated`, and `max_user_connections`
+- Column level permissions.
+- These permission attributes: `max_questions`, `max_updated`, and `max_user_connections`.
 - Password verification policy. When you change the password, you must verify the current password.
 - Dual password policy.
 - Random password generation.
@@ -107,7 +106,7 @@ The implementation mechanisms are consistent between TiDB and MySQL. Both use th
 - Scenario: A user (`user01`) is not created in a normal way; instead, it is created by using the `INSERT INTO mysql.password_history VALUES (...)` statement to append a record of `user01` to the `mysql.password_history` system table. The record of `user01` does not exist in `mysql.user` system table. In such cases, when you run `DROP USER` on `user01`, TiDB and MySQL have different behaviors.
 
     - MySQL: When you run `DROP USER user01`, MySQL tries to find `user01` in `mysql.user` and `mysql.password_history`. If either system table contains `user01`, the `DROP USER` statement is executed successfully and no error is reported.
-    - TiDB: When you run `DROP USER user01`, TiDB tries to find `user01` only in `mysql.user`. If no related record is found, the `DROP USER` statement fails and an error is reported. If you want to the statement to execute successfully, use `DROP USER IF EXISTS user01` instead.
+    - TiDB: When you run `DROP USER user01`, TiDB tries to find `user01` only in `mysql.user`. If no related record is found, the `DROP USER` statement fails and an error is reported. If you want the statement to execute successfully and delete the `user01` record from `mysql.password_history`, use `DROP USER IF EXISTS user01` instead.
 
 ## Authentication plugin status
 
