@@ -137,9 +137,7 @@ On the **Create Migration Job** page, configure the source and target connection
 5. Take action according to the message you see:
 
     - If you use Public IP or VPC Peering, you need to add the Data Migration service's IP addresses to the IP Access List of your source database and firewall (if any).
-    - If you use Private Link, you are prompted to accept the endpoint request. Go to the [AWS VPC console](https://us-west-2.console.aws.amazon.com/vpc/home), and click **Endpoint services** to accept the endpoint request, as shown in the following screen shot.
-
-    ![Accept endpoint request](/media/tidb-cloud/migration-job-accept-endpoint-request.png)
+    - If you use Private Link, you are prompted to accept the endpoint request. Go to the [AWS VPC console](https://us-west-2.console.aws.amazon.com/vpc/home), and click **Endpoint services** to accept the endpoint request.
 
 ## Step 3: Choose the objects to be migrated
 
