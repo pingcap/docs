@@ -368,7 +368,11 @@ select /*+ READ_FROM_STORAGE(TIFLASH[t1], TIKV[t2]) */ t1.a from t t1, t t2 wher
 
 ### USE_INDEX_MERGE(t1_name, idx1_name [, idx2_name ...])
 
-The `USE_INDEX_MERGE(t1_name, idx1_name [, idx2_name ...])` hint tells the optimizer to access a specific table with the index merge method. The given list of indexes are optional parameters. If you explicitly specify the list, TiDB selects indexes from the list to build index merge; if you do not give the list of indexes, TiDB selects indexes from all available indexes to build index merge. For example:
+The `USE_INDEX_MERGE(t1_name, idx1_name [, idx2_name ...])` hint tells the optimizer to access a specific table with the index merge method. Index merge has two types: intersection type and union type. For details, see [Explain Statements Using Index Merge](/explain-index-merge.md)
+
+For the union type index merge, the given list of indexes are optional parameters in the hint. If you explicitly specify the list, TiDB selects indexes from the list to build index merge; if you do not give the list of indexes, TiDB selects indexes from all available indexes to build index merge. See the following example.
+
+For the intersection type index merge, the given list of indexes are required parameters in the hint.
 
 {{< copyable "sql" >}}
 
@@ -381,10 +385,6 @@ When multiple `USE_INDEX_MERGE` hints are made to the same table, the optimizer 
 > **Note:**
 >
 > The parameters of `USE_INDEX_MERGE` refer to index names, rather than column names. The index name of the primary key is `primary`.
-
-This hint takes effect on strict conditions, including:
-
-- If the query can select a single index scan in addition to full table scan, the optimizer does not select index merge.
 
 ### LEADING(t1_name [, tl_name ...])
 
