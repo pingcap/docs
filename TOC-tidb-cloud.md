@@ -190,6 +190,7 @@
   - [Datadog](/tidb-cloud/monitor-datadog-integration.md)
   - [dbt](/tidb-cloud/integrate-tidbcloud-with-dbt.md)
   - [Prometheus and Grafana](/tidb-cloud/monitor-prometheus-and-grafana-integration.md)
+  - [ProxySQL](/develop/dev-guide-proxysql-integration.md)
   - Terraform
     - [Terraform Integration Overview](/tidb-cloud/terraform-tidbcloud-provider-overview.md)
     - [Get TiDB Cloud Terraform Provider](/tidb-cloud/terraform-get-tidbcloud-provider.md)
