@@ -187,7 +187,7 @@ EXPLAIN DELETE FROM t1 WHERE c1=3;
 4 rows in set (0.01 sec)
 ```
 
-To specify the content and format of the output, you can use the `FORMAT = xxx` syntax in the `EXPLAIN` statement.
+To specify the content and format of the output, you can use the `FORMAT = xxx` syntax in the `EXPLAIN` statement. Currently, TiDB supports the following formats:
 
 | FORMAT | Description |
 | ------ | ------ |
@@ -195,6 +195,11 @@ To specify the content and format of the output, you can use the `FORMAT = xxx` 
 | `row`  | The `EXPLAIN` statement outputs results in a tabular format. See [Understand the Query Execution Plan](/explain-overview.md) for more information. |
 | `brief`  | The operator IDs in the output of the `EXPLAIN` statement are simplified, compared with those when `FORMAT` is left unspecified. |
 | `dot`    | The `EXPLAIN` statement outputs DOT execution plans, which can be used to generate PNG files through a `dot` program (in the `graphviz` package). |
+| `tidb_json` | The `EXPLAIN` statement outputs execution plans in JSON and stores the operator information in a JSON array. |
+
+<SimpleTab>
+
+<div label="brief">
 
 The following is an example when `FORMAT` is `"brief"` in `EXPLAIN`:
 
@@ -215,6 +220,10 @@ EXPLAIN FORMAT = "brief" DELETE FROM t1 WHERE c1 = 3;
 +-------------------------+---------+-----------+---------------+--------------------------------+
 4 rows in set (0.001 sec)
 ```
+
+</div>
+
+<div label="DotGraph">
 
 In addition to the MySQL standard result format, TiDB also supports DotGraph and you need to specify `FORMAT = "dot"` as in the following example:
 
@@ -271,6 +280,57 @@ The xx.dot is the result returned by the above statement.
 If your computer has no `dot` program, copy the result to [this website](http://www.webgraphviz.com/) to get a tree diagram:
 
 ![Explain Dot](/media/explain_dot.png)
+
+</div>
+
+<div label="JSON">
+
+To get the output in JSON, specify `FORMAT = "tidb_json"` in the `EXPLAIN` statement. The following is an example:
+
+```sql
+CREATE TABLE t(id int primary key, a int, b int, key(a));
+EXPLAIN FORMAT = "tidb_json" SELECT id FROM t WHERE a = 1;
+```
+
+```
++------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| TiDB_JSON                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
++------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| [
+    {
+        "id": "Projection_4",
+        "estRows": "10.00",
+        "taskType": "root",
+        "operatorInfo": "test.t.id",
+        "subOperators": [
+            {
+                "id": "IndexReader_6",
+                "estRows": "10.00",
+                "taskType": "root",
+                "operatorInfo": "index:IndexRangeScan_5",
+                "subOperators": [
+                    {
+                        "id": "IndexRangeScan_5",
+                        "estRows": "10.00",
+                        "taskType": "cop[tikv]",
+                        "accessObject": "table:t, index:a(a)",
+                        "operatorInfo": "range:[1,1], keep order:false, stats:pseudo"
+                    }
+                ]
+            }
+        ]
+    }
+]
+ |
++------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+1 row in set (0.01 sec)
+```
+
+In the output, `id`, `estRows`, `task`, `access object`, and `operator info` have the same meaning as in the default format. `subOperators` is an array that stores the sub-nodes. The fields and meanings of the sub-nodes are the same as the parent nodes. If a field is missing, it means that the field is empty.
+
+</div>
+
+</SimpleTab>
 
 ## MySQL compatibility
 
