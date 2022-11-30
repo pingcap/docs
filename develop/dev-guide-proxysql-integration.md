@@ -587,7 +587,7 @@ The following steps will set up ProxySQL and TiDB on ports `6033` and `4000` res
     SELECT VERSION();
     ```
 
-    If the TiDB version information is displayed, you are successfully connected to your TiDB container instances through ProxySQL.
+    If the TiDB version is displayed, you are successfully connected to your TiDB container instances through ProxySQL.
 
 7. To stop and remove containers, and go to the previous directory, run the following command:
 
