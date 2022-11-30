@@ -429,7 +429,7 @@ The following is an example output. You will see that three configuration files 
 
 ### Option 2: Integrate TiDB (self-hosted) with ProxySQL
 
-For this integration, you will set up an environment using Docker images of [TiDB](https://hub.docker.com/r/pingcap/tidb) and [ProxySQL](https://hub.docker.com/r/proxysql/proxysql). You are encouraged to try [other ways of installing TiDB (self-hosted)](https://docs.pingcap.com/tidb/stable/quick-start-with-tidb) in your own interest.
+For this integration, you will set up an environment using container images of [TiDB](https://hub.docker.com/r/pingcap/tidb) and [ProxySQL](https://hub.docker.com/r/proxysql/proxysql). You are encouraged to try [other ways of installing TiDB (self-hosted)](https://docs.pingcap.com/tidb/stable/quick-start-with-tidb) in your own interest.
 
 The following steps will set up ProxySQL and TiDB on ports `6033` and `4000` respectively, so make sure these ports are available.
 
