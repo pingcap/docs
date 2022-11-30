@@ -17,7 +17,7 @@ If you are interested in learning more about TiDB and ProxySQL, you can find som
 
 [ProxySQL](https://proxysql.com/) is a high-performance, open-source SQL proxy. It has a flexible architecture and can be deployed in several different ways, making it ideal for a variety of use cases. For example, ProxySQL can be used to improve performance by caching frequently-accessed data.
 
-ProxySQL is designed from the ground up to be fast, efficient, and easy to use. It is fully compatible with MySQL, and supports all of the features you would expect from a high-end SQL proxy. In addition, ProxySQL comes with a number of unique features that make it an ideal choice for a wide range of applications.
+ProxySQL is designed from the ground up to be fast, efficient, and easy to use. It is fully compatible with MySQL, and supports all of the features you would expect from a high quality SQL proxy. In addition, ProxySQL comes with a number of unique features that make it an ideal choice for a wide range of applications.
 
 ## Why ProxySQL integration?
 
@@ -27,30 +27,30 @@ ProxySQL is designed from the ground up to be fast, efficient, and easy to use. 
 
 ## Deployment architecture
 
-While the most obvious way to deploy ProxySQL with TiDB is to add ProxySQL as a standalone intermediary between the application layer and TiDB, this might work but might not be a scalable solution. In addition, it might end up being a single point of failure and also adding additional latency due to network hop. To overcome this challenge, an alternate deployment architecture is to deploy ProxySQL as a sidecar as below:
+The most obvious way to deploy ProxySQL with TiDB is to add ProxySQL as a standalone intermediary between the application layer and TiDB. However, the scalability and failure tolerance are not guaranteed, and it also adds additional latency due to network hop. To solve these problems, an alternate deployment architecture is to deploy ProxySQL as a sidecar as below:
 
 ![proxysql-client-side-tidb-cloud](/media/develop/proxysql-client-side-tidb-cloud.png)
 
 > **Note:**
 >
-> The preceding illustration is only for reference purposes. You must adapt it according to your current deployment architecture.
+> The preceding illustration is only for reference. You must adapt it according to your actual deployment architecture.
 
 ## Development environment
 
-This section describes how to integrate TiDB with ProxySQL in a development environment. To get started with the ProxySQL integration, you can choose either of the following options depending on your TiDB cluster type after you have all the required [prerequisites](#prerequisite) in place.
+This section describes how to integrate TiDB with ProxySQL in a development environment. To get started with the ProxySQL integration, you can choose either of the following options depending on your TiDB cluster type after you have all the [prerequisites](#prerequisite) in place.
 
 - Option 1: [Integrate TiDB Cloud with ProxySQL](#option-1---integrate-tidb-serverless-with-proxysql)
 - Option 2: [Integrate TiDB (self-hosted) with ProxySQL](#option-2---integrate-tidb-self-hosted-with-proxysql)
 
 ### Prerequisites
 
-Depending on the option you choose, you might proceed with downloading and installing the following packages:
+Depending on the option you choose, you might need the following packages:
 
 - [Git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git)
 - [Docker](https://docs.docker.com/get-docker/)
-- [Python3](https://www.python.org/downloads/)
+- [Python 3](https://www.python.org/downloads/)
 - [Docker Compose](https://docker-docs.netlify.app/compose/install/)
-- [MySQL client](https://dev.mysql.com/doc/refman/8.0/en/mysql.html)
+- [MySQL Client](https://dev.mysql.com/doc/refman/8.0/en/mysql.html)
 
 You can follow the installation instructions as below:
 
@@ -90,7 +90,7 @@ systemctl start docker
 - Download and install MySQL Shell.
 
     1. Download the ZIP file of MySQL Installer from the [MySQL Community Server Download](https://dev.mysql.com/downloads/mysql/) page.
-    2. Unzip the file, and locate `mysql.exe` in the bin folder. You need to add the path of the bin folder to the system variable and set it into the `PATH` variable at Git Bash:
+    2. Unzip the file, and locate `mysql.exe` in the `bin` folder. You need to add the path of the `bin` folder to the system variable and set it into the `PATH` variable at Git Bash:
 
         ```bash
         echo 'export PATH="(your bin folder)":$PATH' >>~/.bash_profile
@@ -111,7 +111,7 @@ systemctl start docker
 
         ![proxysql-windows-docker-install](/media/develop/proxysql-windows-docker-install.png)
 
-- Download the latest Python 3 package from the [Python Download](https://www.python.org/downloads/) page and install it.
+- Download the latest Python 3 installer from the [Python Download](https://www.python.org/downloads/) page and run it.
 
 </div>
 
@@ -124,10 +124,10 @@ For this integration, you will be using the [ProxySQL Docker image](https://hub.
 #### Step 1. Create a TiDB Cloud Serverless Tier cluster
 
 1. [Create a free TiDB Serverless Tier cluster](https://docs.pingcap.com/tidbcloud/tidb-cloud-quickstart#step-1-create-a-tidb-cluster). Remember the root password that you set for your cluster.
-2. Get your cluster hostname, username, and port for later use.
+2. Get your cluster hostname, port, and username for later use.
 
     1. On the [Clusters](https://tidbcloud.com/console/clusters) page, click your cluster name to go to the cluster overview page.
-    2. On the cluster overview page, locate the **Connection** pane, and then copy the `Endpoint`, `Port`, and `User` information, where the `Endpoint` is your cluster hostname.
+2. On the cluster overview page, locate the **Connection** pane, and then copy the `Endpoint`, `Port`, and `User` fields, where the `Endpoint` is your cluster hostname.
 
 #### Step 2. Generate ProxySQL configuration files
 
@@ -223,7 +223,7 @@ For this integration, you will be using the [ProxySQL Docker image](https://hub.
 
     When prompted, enter the endpoint of your cluster for `Serverless Tier Host`, and then enter the username and the password of your cluster.
 
-    The following is an example output. You will see that three configuration files are generated inside the current `tidb-cloud-connect` folder.
+The following is an example output. You will see that three configuration files are generated under the current `tidb-cloud-connect` folder.
 
     ```bash
     [Begin] generating configuration files..
@@ -330,7 +330,7 @@ For this integration, you will be using the [ProxySQL Docker image](https://hub.
     > 3. Adds your TiDB Serverless Tier cluster to the list of hosts.
     > 4. Enables a secure connection between ProxySQL and the TiDB Serverless Tier cluster.
     >
-    > To have a better understanding, it is strongly recommended that you confirm the `proxysql-prepare.sql` file. To learn more about ProxySQL configuration, see [ProxySQL documentation](https://proxysql.com/documentation/proxysql-configuration/).
+    > To have a better understanding, it is strongly recommended that you check the `proxysql-prepare.sql` file. To learn more about ProxySQL configuration, see [ProxySQL documentation](https://proxysql.com/documentation/proxysql-configuration/).
 
     The following is an example output. You will see that the hostname of your cluster is shown in the output, which means that the connectivity between ProxySQL and the TiDB Serverless Tier cluster is established.
 
@@ -392,7 +392,7 @@ For this integration, you will be using the [ProxySQL Docker image](https://hub.
 
     > **Note:**
     >
-    > ***For Debugging:*** If you are unable to connect to the cluster, confirm the files `tidb-cloud-connect.cnf`, `proxysql-prepare.sql`, and `proxysql-connect.py`. Make sure that the server information you provided is available and correct.
+    > ***For Debugging:*** If you are unable to connect to the cluster, check the files `tidb-cloud-connect.cnf`, `proxysql-prepare.sql`, and `proxysql-connect.py`. Make sure that the server information you provided is available and correct.
 
 3. To stop and remove containers, and go to the previous directory, run the following command:
 
@@ -431,7 +431,7 @@ For this integration, you will be using the [ProxySQL Docker image](https://hub.
 
 For this integration, you will set up an environment using Docker images of [TiDB](https://hub.docker.com/r/pingcap/tidb) and [ProxySQL](https://hub.docker.com/r/proxysql/proxysql). You are encouraged to try [other ways of installing TiDB (self-hosted)](https://docs.pingcap.com/tidb/stable/quick-start-with-tidb) in your own interest.
 
-The following steps will set up ProxySQL and TiDB on ports `6033` and `4000` respectively, so make sure these ports are not in use and are available.
+The following steps will set up ProxySQL and TiDB on ports `6033` and `4000` respectively, so make sure these ports are available.
 
 1. Start Docker. If Docker has already started, skip this step:
 
@@ -587,7 +587,7 @@ The following steps will set up ProxySQL and TiDB on ports `6033` and `4000` res
     SELECT VERSION();
     ```
 
-    If the TiDB version is displayed, you are successfully connected to your TiDB container instances through ProxySQL.
+    If the TiDB version is displayed, you are successfully connected to your TiDB containers through ProxySQL.
 
 7. To stop and remove containers, and go to the previous directory, run the following command:
 
@@ -690,7 +690,13 @@ To use ProxySQL as a proxy for TiDB, you need to configure ProxySQL. To do so, y
 2. Configure the TiDB clusters to be used, where you can add one or multiple TiDB clusters to ProxySQL. The following commands will add one TiDB Cloud Dedicated Tier cluster for example. You need to replace `<tidb cloud dedicated cluster host>` and `<tidb cloud dedicated cluster port>` with your TiDB Cloud endpoint and port (the default port is `4000`).
 
     ```sql
-    INSERT INTO mysql_servers(hostgroup_id, hostname, port) VALUES (0, '<tidb cloud dedicated cluster host>', <tidb cloud dedicated cluster port>);
+    INSERT INTO mysql_servers(hostgroup_id, hostname, port) 
+    VALUES 
+      (
+        0,
+        '<tidb cloud dedicated cluster host>', 
+        <tidb cloud dedicated cluster port>
+      );
     LOAD mysql servers TO runtime;
     SAVE mysql servers TO DISK;
     ```
@@ -704,7 +710,16 @@ To use ProxySQL as a proxy for TiDB, you need to configure ProxySQL. To do so, y
 3. Configure Proxy login users to make sure that the users have appropriate permissions on the TiDB cluster. In the following statements, you need to replace '*tidb cloud dedicated cluster username*' and '*tidb cloud dedicated cluster password*' with the actual username and password of your cluster.
 
     ```sql
-    INSERT INTO mysql_users(username, password, active, default_hostgroup, transaction_persistent) VALUES ('<tidb cloud dedicated cluster username>', '<tidb cloud dedicated cluster password>', 1, 0, 1);
+    INSERT INTO mysql_users(
+      username, password, active, default_hostgroup, 
+      transaction_persistent
+    ) 
+    VALUES 
+      (
+        '<tidb cloud dedicated cluster username>', 
+        '<tidb cloud dedicated cluster password>', 
+        1, 0, 1
+      );
     LOAD mysql users TO runtime;
     SAVE mysql users TO DISK;
     ```
@@ -731,9 +746,7 @@ This option should only be considered as an alternate method for configuring Pro
     >
     > If you delete the SQLite database file, any configuration changes made using ProxySQL Admin interface will be lost.
 
-2. Locate the configuration file in `/etc/proxysql.cnf` and modify it according to your need.
-
-    For example:
+2. Modify the configuration file `/etc/proxysql.cnf` according to your need. For example:
 
     ```
     mysql_servers:
@@ -760,11 +773,10 @@ This option should only be considered as an alternate method for configuring Pro
     )
     ```
 
-    In the preceding parameters:
+    In the preceding example:
 
-    - `tidb cloud dedicated cluster host`: use the endpoint of your TiDB Cloud cluster.
-    - `tidb cloud dedicated cluster username`: use the username of your TiDB Cloud cluster.
-    - `tidb cloud dedicated cluster password`: use the password of your TiDB Cloud cluster.
+    - `address` and `port`: specify the endpoint and port of your TiDB Cloud cluster.
+    - `username` and `password`: specify the username and password of your TiDB Cloud cluster.
 
 3. Restart ProxySQL:
 
@@ -790,7 +802,7 @@ Databases can be overloaded by high traffic, faulty code, or malicious spam. Wit
 
 > **Note:**
 >
-> In the following steps, you will be using the Docker images of TiDB and ProxySQL to configure query rules. If you have not pulled down them, you can check the [integration section](#option-2---integrate-tidb-self-hosted-with-proxysql) for detailed steps.
+> In the following steps, you will be using the container images of TiDB and ProxySQL to configure query rules. If you have not pulled them, you can check the [integration section](#option-2---integrate-tidb-self-hosted-with-proxysql) for detailed steps.
 
 1. Clone the [integration example code repository](https://github.com/pingcap-inc/tidb-proxysql-integration) for TiDB and ProxySQL. Skip this step if you have already cloned it in the previous steps.
 
@@ -852,7 +864,7 @@ Databases can be overloaded by high traffic, faulty code, or malicious spam. Wit
 
     </SimpleTab>
 
-3. Run the following command to start two Docker instances of TiDB cluster containers and a ProxySQL Docker instance:
+3. Run the following command to start two TiDB containers and a ProxySQL container:
 
     <SimpleTab groupId="os">
 
@@ -882,12 +894,12 @@ Databases can be overloaded by high traffic, faulty code, or malicious spam. Wit
 
     </SimpleTab>
 
-    If everything goes well, the following Docker instances are started:
+    If everything goes well, the following containers are started:
 
-    - Two Docker instances of TiDB clusters exposed via ports `4001`, `4002`
-    - One ProxySQL Docker instance exposed via port `6034`.
+    - Two Docker containers of TiDB clusters exposed via ports `4001`, `4002`
+    - One ProxySQL Docker containers exposed via port `6034`.
 
-4. In the two TiDB container instances, using `mysql client` to create a table with a similar schema definition and then insert different data (`'tidb-server01-port-4001'`, `'tidb-server02-port-4002'`) to identify these instances.
+4. In the two TiDB containers, using `mysql` to create a table with a similar schema definition and then insert different data (`'tidb-server01-port-4001'`, `'tidb-server02-port-4002'`) to identify these containers.
 
     <SimpleTab groupId="os">
 
@@ -947,7 +959,7 @@ Databases can be overloaded by high traffic, faulty code, or malicious spam. Wit
 
     </SimpleTab>
 
-5. Configure ProxySQL by running the following command, which will execute `proxysql-prepare.sql` inside ProxySQL Admin Interface to establish a proxy connection between the TiDB instances and ProxySQL.
+5. Configure ProxySQL by running the following command, which executes `proxysql-prepare.sql` inside ProxySQL Admin Interface to establish a proxy connection between the TiDB containers and ProxySQL.
 
     <SimpleTab groupId="os">
 
@@ -984,16 +996,16 @@ Databases can be overloaded by high traffic, faulty code, or malicious spam. Wit
     > - Adds the TiDB clusters in ProxySQL with `hostgroup_id` as `0` and `1`.
     > - Adds a user `root` with an empty password and sets `default_hostgroup` as `0`.
     > - Adds the rule `^SELECT.*FOR UPDATE$` with `rule_id` as `1` and `destination_hostgroup` as `0`. If a SQL statement matches this rule, the request will be forwarded to the TiDB cluster with `hostgroup` as `0`.
-    > - Adds the rule `^SELECT` with `rule_id` as `2` and `destination_hostgroup` as `1`. If SQL statements match this rule, it uses the TiDB cluster with `hostgroup` as `1`.
+    > - Adds the rule `^SELECT` with `rule_id` as `2` and `destination_hostgroup` as `1`. If a SQL statement matches this rule, the request will be forwarded to the TiDB cluster with `hostgroup` as `1`.
     >
-    > To have a better understanding, it is strongly recommended that you confirm the `proxysql-prepare.sql` file. To learn more about ProxySQL configuration, see [ProxySQL documentation](https://proxysql.com/documentation/proxysql-configuration/).
+    > To have a better understanding, it is strongly recommended that you check the `proxysql-prepare.sql` file. To learn more about ProxySQL configuration, see [ProxySQL documentation](https://proxysql.com/documentation/proxysql-configuration/).
 
     The following is some additional information about how ProxySQL patterns match query rules:
 
-    - ProxySQL tries to match the rules one by one in the order of `rule_id` from smallest to largest.
+    - ProxySQL tries to match the rules one by one in the ascending order of `rule_id`.
     - `^` symbol matches the beginning of a SQL statement and `$` matches the end.
 
-    For more information on ProxSQL regular expression and pattern matching, see [query_processor_regex](https://proxysql.com/documentation/global-variables/mysql-variables/#mysql-query_processor_regex) in ProxySQL documentation.
+    For more information about ProxySQL regular expression and pattern matching, see [mysql-query_processor_regex](https://proxysql.com/documentation/global-variables/mysql-variables/#mysql-query_processor_regex) in ProxySQL documentation.
 
     For a full list of parameters, see [mysql_query_rules](https://proxysql.com/documentation/main-runtime/#mysql_query_rules) in ProxySQL documentation.
 
