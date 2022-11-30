@@ -55,8 +55,8 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v6.1/quick-start-with-
 
     <!--storage owner: flowbehappy -->
 
-    - Fix too many column files under heavy write pressure. [#6361](https://github.com/pingcap/tiflash/issues/6361) @[lidezhu](https://github.com/lidezhu)
-    - Fix the issue that column files in delta layer cannot be compacted after restart tiflash [#6159] @[lidezhu](https://github.com/lidezhu)
+    - Fix the issue that heavy write pressure could generate too many column files in delta layer. [#6361](https://github.com/pingcap/tiflash/issues/6361) @[lidezhu](https://github.com/lidezhu)
+    - Fix the issue that column files in delta layer cannot be compacted after restart tiflash [#6159](https://github.com/pingcap/tiflash/issues/6159) @[lidezhu](https://github.com/lidezhu)
 
 + Tools
 
