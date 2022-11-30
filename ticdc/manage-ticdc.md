@@ -312,7 +312,7 @@ For detailed integration guide, see [Quick Start Guide on Integrating TiDB with 
 
 #### Configure `s3` in sink URI
 
-From v6.4.0, TiCDC supports saving row change events to Amazon S3.
+Since v6.5.0, TiCDC supports saving row change events to Amazon S3.
 
 Saving row change events to Amazon S3:
 
@@ -657,7 +657,7 @@ date-separator = 'none'
 # Whether to use partitions as the separation string.
 enable-partition-separator = false
 
-# Since v6.4.0, TiCDC supports saving data changes to cloud storage in CSV format.
+# Since v6.5.0, TiCDC supports saving data changes to cloud storage in CSV format.
 [sink.csv]
 # Delimiter between fields. The value must be an ASCII character and defaults to `,`.
 delimiter = ','
