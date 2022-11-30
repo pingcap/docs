@@ -157,11 +157,11 @@ In the command above:
 
 ### Compress the exported data files
 
-You can use `--compress <format>` to compress the CSV and SQL data and table structure files exported by Dumpling. This parameter supports the following compression algorithms: `gzip`, `snappy`, and `zstd`. The compression is disabled by default.
+You can use the `--compress <format>` option to compress the CSV and SQL data and table structure files exported by Dumpling. This parameter supports the following compression algorithms: `gzip`, `snappy`, and `zstd`. The compression is disabled by default.
 
-- This option only compresses each data and table structure file separately. It cannot directly compress the entire folder to generate a single compressed package.
-- This option can save disk space, but it also slows down the export speed and increases CPU consumption. Use it with caution in scenarios where the export speed is critical.
-- For TiDB Lightning v6.5 and later versions, you can directly use the compressed files exported by Dumpling as the data source without additional configuration.
+- This option only compresses individual data and table structure files. It cannot compress the entire folder and generate a single compressed package.
+- This option can save disk space, but it also slows down the export speed and increases CPU consumption. Use this option with caution in scenarios where the export speed is critical.
+- For TiDB Lightning v6.5.0 and later versions, you can use compressed files exported by Dumpling as the data source without additional configuration.
 
 ### Format of exported files
 
@@ -319,7 +319,7 @@ The exported file is stored in the `./export-<current local time>` directory by 
 
 - The `-t` option specifies the number of threads for the export. Increasing the number of threads improves the concurrency of Dumpling and the export speed, and also increases the database's memory consumption. Therefore, it is not recommended to set the number too large.
 - The `-r` option specifies the maximum number of records (or the number of rows in the database) for a single file. When it is enabled, Dumpling enables concurrency in the table to improve the speed of exporting large tables. When the upstream database is TiDB v3.0 or later versions, a value of this parameter greater than 0 indicates that the TiDB region information is used for splitting and the value specified here will no longer take effect.
-- The `--compress <format>` option specifies the compression format of the dump. It supports the following compression algorithms: `gzip`, `snappy`, and `zstd`. It can speed up dumping of data if storage is the bottleneck or if storage capacity is a concern. The drawback is an increase in CPU usage. Each file is compressed individually.
+- The `--compress <format>` option specifies the compression format of the dump. It supports the following compression algorithms: `gzip`, `snappy`, and `zstd`. This option can speed up dumping of data if storage is the bottleneck or if storage capacity is a concern. The drawback is an increase in CPU usage. Each file is compressed individually.
 
 With the above options specified, Dumpling can have a quicker speed of data export.
 

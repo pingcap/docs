@@ -293,10 +293,10 @@ TiDB Lightning currently supports compressed files exported by Dumpling or compr
 
 > **Note:**
 >
-> - Because TiDB Lightning cannot concurrently decompress a single large compressed file, the size of the compressed file directly will affect the import speed. It is recommended that the size of the source file after decompressing does not exceed 256 MiB.
-> - TiDB Lightning only supports importing data files that are compressed separately. It does not support importing a collection of compressed data files that are compressed together.
+> - Because TiDB Lightning cannot concurrently decompress a single large compressed file, the size of the compressed file affects the import speed. It is recommended that a source file is no greater than 256 MiB after decompression.
+> - TiDB Lightning only imports individually compressed data files and does not support importing a single compressed file with multiple data files included.
 > - TiDB Lightning does not support `parquet` files compressed through another compression tool, such as `db.table.parquet.snappy`. If you want to compress `parquet` files, you can configure the compression format for the `parquet` file writer.
-> - TiDB Lightning v6.4 and later versions only support `.bak` files and the following compressed data files: `gzip`, `snappy`, and `zstd`. Other types of files cause errors. For those unsupported files, you need to modify the file names in advance, or move those files out of the import data directory to avoid such errors.
+> - TiDB Lightning v6.4.0 and later versions only support `.bak` files and the following compressed data files: `gzip`, `snappy`, and `zstd`. Other types of files cause errors. For those unsupported files, you need to modify the file names in advance, or move those files out of the import data directory to avoid such errors.
 
 ## Match customized files
 
