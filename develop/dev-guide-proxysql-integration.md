@@ -687,7 +687,7 @@ To use ProxySQL as a proxy for TiDB, you need to configure ProxySQL. To do so, y
 
     The above step will take you to the ProxySQL admin prompt.
 
-2. Configure the TiDB clusters to be used, where you can add one or multiple TiDB clusters to ProxySQL. The following commands will add one TiDB Cloud Dedicated Tier cluster for example. You need to replace `<tidb cloud dedicated cluster host>` and `<tidb cloud dedicated cluster port>` with your TiDB Cloud endpoint and port (the default port is `4000`).
+2. Configure the TiDB clusters to be used, where you can add one or multiple TiDB clusters to ProxySQL. The following statement will add one TiDB Cloud Dedicated Tier cluster for example. You need to replace `<tidb cloud dedicated cluster host>` and `<tidb cloud dedicated cluster port>` with your TiDB Cloud endpoint and port (the default port is `4000`).
 
     ```sql
     INSERT INTO mysql_servers(hostgroup_id, hostname, port) 
@@ -703,7 +703,7 @@ To use ProxySQL as a proxy for TiDB, you need to configure ProxySQL. To do so, y
 
     > **Note:**
     >
-    > - `hostgroup_id`:  define the ID of the hostgroup. ProxySQL manages clusters using hostgroup. To distribute SQL traffic to these clusters evenly, you can configure several clusters that need load balancing to the same hostgroup. To distinguish the clusters, such as for read and write purposes, you can configure them to use different hostgroups.
+    > - `hostgroup_id`:  specify an ID of the hostgroup. ProxySQL manages clusters using hostgroup. To distribute SQL traffic to these clusters evenly, you can configure several clusters that need load balancing to the same hostgroup. To distinguish the clusters, such as for read and write purposes, you can configure them to use different hostgroups.
     > - `hostname`: the endpoint of the TiDB cluster.
     > - `port`: the port of the TiDB cluster.
 
