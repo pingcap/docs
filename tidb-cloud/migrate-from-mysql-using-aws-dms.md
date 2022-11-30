@@ -30,7 +30,7 @@ AWS DMS does not support replicating `DROP TABLE`.
 
 ## Step 1: Create an AWS DMS replication instance
 
-1. Log in to the [AWS DMS console](https://us-west-2.console.aws.amazon.com/dms/v2/home) and switch to the corresponding region. It is recommended to use the same region for AWS DMS and TiDB Cloud.
+1. Log in to the [AWS DMS console](https://us-west-2.console.aws.amazon.com/dms/v2/home) and switch to the corresponding region. It is recommended to use the same region for AWS DMS and TiDB cloud.
 
 2. Click **Create replication instance**. In this document, the upstream and downstream databases and DMS instance are all in the **us-west-2** region.
 
@@ -161,7 +161,7 @@ AWS DMS does not support replicating `DROP TABLE`.
     - **Target table preparation mode**: select **Do nothing** or other options as needed. In this example, select **Do nothing**.
     - **Include LOB columns in replication**: select **Limited LOB mode**.
     - **Maximum LOB size in (KB)**: use the default value **32**.
-    - **Turn on validation**: leave it unchecked.
+    - **Turn on validation**: select it according to your needs.
     - **Task logs**: select **Turn on CloudWatch logs** for troubleshooting in future.
 
     ![Task settings](/media/tidb-cloud/aws-dms-tidb-cloud/aws-dms-to-tidb-cloud-task-settings.png)
