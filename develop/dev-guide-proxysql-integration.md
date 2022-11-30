@@ -118,7 +118,7 @@ systemctl start docker
 
 </SimpleTab>
 
-### Option 1 -  Integrate TiDB Serverless with ProxySQL
+### Option 1 - Integrate TiDB Serverless with ProxySQL
 
 For this integration, you will be using the [ProxySQL Docker Image](https://hub.docker.com/r/proxysql/proxysql) along with TiDB Serverless Tier cluster. The following steps will set up ProxySQL on port `16033`, so make sure this port is not in use and is available.
 
@@ -428,7 +428,7 @@ For this integration, you will be using the [ProxySQL Docker Image](https://hub.
 
     </SimpleTab>
 
-### Option 2 -  Integrate TiDB (self-hosted) with ProxySQL
+### Option 2 - Integrate TiDB (self-hosted) with ProxySQL
 
 For this integration, you will set up an environment using Docker images of [TiDB](https://hub.docker.com/r/pingcap/tidb) and [ProxySQL](https://hub.docker.com/r/proxysql/proxysql). You are encouraged to try [other ways of installing TiDB (self-hosted)](https://docs.pingcap.com/tidb/stable/quick-start-with-tidb) in your own interest.
 
@@ -671,7 +671,7 @@ To learn more about the supported platforms of ProxySQL and their installation, 
 
 #### Step 3. Configure ProxySQL
 
-To use ProxySQL as a proxy for TiDB, you need to configure ProxySQL. To do so, you can either [execute SQL statements inside ProxySQL Admin Interface](#option-1-configuring-proxysql-using-the-admin-interface) (recommended) or use the [configuration file](#option-2-configure-proxysql-using-a-configuration-file).
+To use ProxySQL as a proxy for TiDB, you need to configure ProxySQL. To do so, you can either [execute SQL statements inside ProxySQL Admin Interface](#option-1-configure-proxysql-using-the-admin-interface) (recommended) or use the [configuration file](#option-2-configure-proxysql-using-a-configuration-file).
 
 > **Note:**
 >
