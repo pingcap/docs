@@ -7,7 +7,7 @@ summary: Learn how to save the query results of TiFlash in a transaction.
 
 > **Warning:**
 >
-> Currently, this feature is experimental and its form and usage might change in subsequent versions.
+> This is an experimental feature, which might be changed or removed without prior notice. The syntax and implementation might change before GA. If you find a bug, please open an issue in the [TiDB repository](https://github.com/pingcap/tidb/issues).
 
 This document introduces how to save the TiFlash query result to a specified TiDB table in an `INSERT INTO SELECT` transaction.
 
@@ -57,9 +57,9 @@ SELECT app_name, country FROM t1;
 
 ## Restrictions
 
-* TiDB has a hard limit of 1 GiB on the size of the results returned by the `SELECT` clause and the size of the transaction to be written with `INSERT`. The recommended size is less than 100 MiB.
+* In TiDB, the maximum size of the result set returned by the `SELECT` clause (that is, the result set to be written in the `INSERT` transaction) is limited by the total size of a transaction, which can be modified using the [performance.txn-total-size-limit](/tidb-configuration-file.md#txn-total-size-limit) parameter. The recommended size is less than 100 MiB.
 
-    If the size of results returned by `SELECT` exceeds 1 GiB, the statement is forced to be terminated and TiDB returns an error `The query produced a too large intermediate result and thus failed`.
+    If the size of result set returned by `SELECT` exceeds the total size of a transaction, the statement is forced to be terminated and TiDB returns an error as indicated in [performance.txn-total-size-limit](/tidb-configuration-file.md#txn-total-size-limit).
 
 * TiDB has no hard limit on the concurrency of the `INSERT INTO SELECT` statement, but it is recommended to consider the following practices:
 
