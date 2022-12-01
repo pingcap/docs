@@ -154,9 +154,9 @@ addr = "172.16.31.10:8287"
 # node in the physical import mode. 0 by default, which means no limit.
 # store-write-bwlimit = "128MiB"
 
-# Specifies the disk quota for the local temporary files when using the Physical Import Mode.
-# When the disk quota is insufficient, TiDB Lightning pauses the process of reading the source data and writing the temporary files,
-# and prioritizes writing the already sorted key-value pairs to TiKV.
+# Specifies the disk quota for local temporary files when physical import mode is used.
+# When the disk quota is insufficient, TiDB Lightning stops reading source data and writing temporary files,
+# but prioritizes writing the already sorted key-value pairs to TiKV.
 # After TiDB Lightning deletes the local temporary files, the import process continues.
 # This option takes effect only when you set the `backend` option to `local`.
 # The default value is `MaxInt64` bytes, that is, 9223372036854775807 bytes.
@@ -339,7 +339,7 @@ compact = false
 switch-mode = "5m"
 # Duration between which an import progress is printed to the log.
 log-progress = "5m"
-# When you use the Physical Import Mode, the time interval for checking the local disk quota.
+# The time interval for checking the local disk quota when you use the physical import mode.
 # The default value is 60 seconds.
 # check-disk-quota = "60s"
 ```
