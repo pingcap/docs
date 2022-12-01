@@ -81,9 +81,9 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v6.1/quick-start-with-
 
     + Backup & Restore (BR)
 
-    <!--owner: @3pointer-->
+        <!--owner: @3pointer-->
 
-        - Fix the issue that fail to restore when use old collation framework in databases or tables [#39150](https://github.com/pingcap/tidb/issues/39150) @[MoCuishle28](https://github.com/MoCuishle28)
+        - Fix the issue that restore task fails when using old framework for collations in databases or tables [#39150](https://github.com/pingcap/tidb/issues/39150) @[MoCuishle28](https://github.com/MoCuishle28)
 
     + Dumpling
 
@@ -91,9 +91,9 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v6.1/quick-start-with-
 
     + TiCDC
 
-    <!--owner: @nongfushanquan-->
+        <!--owner: @nongfushanquan-->
 
-        - Fix an issue that causes data lost when pause and resume changefeed while executing DDL. [#7682](https://github.com/pingcap/tiflow/issues/7682) @[asddongmen](https://github.com/asddongmen)
+        - Fix data loss when resuming changefeed during DDL is executed [#7682](https://github.com/pingcap/tiflow/issues/7682) @[asddongmen](https://github.com/asddongmen)
 
     + TiDB Binlog
 
@@ -101,12 +101,12 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v6.1/quick-start-with-
 
     + TiDB Data Migration (DM)
 
-    <!--owner: @niubell-->
+        <!--owner: @niubell-->
 
         - (dup) Fix the issue that when `collation_compatible` is set to `"strict"`, DM might generate SQL with duplicated collations [#6832](https://github.com/pingcap/tiflow/issues/6832) @[lance6716](https://github.com/lance6716)
-        - Fix sometime DM task is stopped with error "Unknown placement policy" [#7493](https://github.com/pingcap/tiflow/issues/7493) @[lance6716](https://github.com/lance6716)
-        - Fix in some cases relay log file may re-pull from upstream [#7719](https://github.com/pingcap/tiflow/pull/7719) @[liumengya94](https://github.com/liumengya94)
-        - Fix when DM worker exits a new worker may be scheduled too quickly and write duplicated data [#7745](https://github.com/pingcap/tiflow/pull/7745) @[GMHDBJD](https://github.com/GMHDBJD)
+        - Fix the issue that DM tasks might stop with an `Unknown placement policy` error [#7493](https://github.com/pingcap/tiflow/issues/7493) @[lance6716](https://github.com/lance6716)
+        - Fix the issue that relay logs might be pulled from upstream again in some cases [#7525](https://github.com/pingcap/tiflow/issues/7525) @[liumengya94](https://github.com/liumengya94)
+        - Fix the issue that data is replicated for multiple times when a new DM worker is scheduled before the existing worker exits [#7658](https://github.com/pingcap/tiflow/issues/7658) @[GMHDBJD](https://github.com/GMHDBJD)
 
     + TiDB Lightning
 
