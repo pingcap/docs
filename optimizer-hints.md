@@ -453,7 +453,7 @@ WITH CTE1 AS (SELECT * FROM t1), CTE2 AS (WITH CTE3 AS (SELECT /*+ MERGE() */ * 
 
 ## Hints that take effect globally
 
-The global hint is related to [views](/views.md), and enables hints defined in the query to be effective inside the view. To specify global hints, you can first use the `QB_NAME` hint to define a query block name, and then add hints in the form of `ViewName@QueryBlockName`.
+The global hint works in [views](/views.md). When specified as a global hint, the hint defined in a query can take effect inside the view. To specify a global hint, first use the `QB_NAME` hint to define a query block name, and then add the target hints in the form of `ViewName@QueryBlockName`.
 
 ### Step 1: Define the query block name of the view using the `QB_NAME` hint
 
@@ -491,18 +491,18 @@ Use the [`QB_NAME` hint](#qb_name) to define a new name for each query block of 
 
     ```sql
     CREATE VIEW v2 AS
-        SELECT * FROM t JOIN /* For view v2, the name of the current query block is the default @SEL_1. So, the current query block view list is v2@SEL_1 .@SEL_1 */
+        SELECT * FROM t JOIN /* Comment: For view v2, the name of the current query block is the default @SEL_1. So, the current query block view list is v2@SEL_1 .@SEL_1 */
         (
-            SELECT COUNT(*) FROM t1 JOIN v1 /* For view v2, the name of the current query block is the default @SEL_2. So, the current query block view list is v2@SEL_1 .@SEL_2 */
+            SELECT COUNT(*) FROM t1 JOIN v1 /* Comment: For view v2, the name of the current query block is the default @SEL_2. So, the current query block view list is v2@SEL_1 .@SEL_2 */
         ) tt;
     ```
 
     For view `v1`, the first view name in the list starting from the preceding statement is `v2@SEL_1 .v1@SEL_2`. The first query block in view `v1` can be declared as `QB_NAME(v1_1, v2@SEL_1 .v1@SEL_2 .@SEL_1)`, and the second query block in view `v1` can be declared as `QB_NAME(v1_2, v2@SEL_1 .v1@SEL_2 .@SEL_2)`:
 
     ```sql
-    CREATE VIEW v1 AS SELECT * FROM t JOIN /* For view `v1`, the name of the current query block is the default @SEL_1. So, the current query block view list is v2@SEL_1 .@SEL_2 .v1@SEL_1 */
+    CREATE VIEW v1 AS SELECT * FROM t JOIN /* Comment: For view `v1`, the name of the current query block is the default @SEL_1. So, the current query block view list is v2@SEL_1 .@SEL_2 .v1@SEL_1 */
         (
-            SELECT COUNT(*) FROM t1 JOIN t2 /* For view `v1`, the name of the current query block is the default @SEL_2. So, the current query block view list is v2@SEL_1 .@SEL_2 .v1@SEL_2 */
+            SELECT COUNT(*) FROM t1 JOIN t2 /* Comment: For view `v1`, the name of the current query block is the default @SEL_2. So, the current query block view list is v2@SEL_1 .@SEL_2 .v1@SEL_2 */
         ) tt;
     ```
 
@@ -522,7 +522,7 @@ Use the [`QB_NAME` hint](#qb_name) to define a new name for each query block of 
 >         - The first query block of the view `v1` can be declared as `QB_NAME(v1_1, v2.v1@SEL_2)`.
 >         - The second query block of the view `v1` can be declared as `QB_NAME(v1_2, v2.v1@SEL_2 .@SEL_2)`.
 
-### Step 2: Add required hints
+### Step 2: Add the target hints
 
 After defining the `QB_NAME` hint for query blocks of the view, you can add required [hints that take effect in query blocks](#hints-that-take-effect-in-query-blocks) in the form of `ViewName@QueryBlockName` to make them take effect inside the view. For example:
 
