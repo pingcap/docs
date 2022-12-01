@@ -237,7 +237,7 @@ tiflash_scan:{dtfile:{total_scanned_packs:2, total_skipped_packs:1, total_scanne
 + `dtfile`: the DTFile (DeltaTree File) related information during the table scan, which reflects the data reading of  the TiFlash Stable layer.
     - `total_scanned_packs`: the total number of packs that have been scanned in the DTFile. A pack is the minimum unit that can be read in the TiFlash DTFile. By default, every 8192 rows constitute a pack.
     - `total_skipped_packs`: the total number of packs that have been skipped by the scan in the DTFile. When a `WHERE` clause hits rough set indexes or matches the range filtering of a primary key, the irrelevant packs are skipped.
-    - `total_scanned_rows`: the total number of rows that have been scanned in the DTFile. If there are multiple versions of updates or deletions from MVCC, each version is counted independently.
+    - `total_scanned_rows`: the total number of rows that have been scanned in the DTFile. If there are multiple versions of updates or deletions because of MVCC, each version is counted independently.
     - `total_skipped_rows`: the total number of rows that are skipped by the scan in the DTFile.
     - `total_rs_index_load_time`: the total time used to read DTFile rough set indexes.
     - `total_read_time`:  the total time used to read DTFile data.
