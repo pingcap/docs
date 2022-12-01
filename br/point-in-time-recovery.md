@@ -9,7 +9,7 @@ Point-in-Time Recovery (PITR) allows you to restore a snapshot of a TiDB cluster
 
 You can use PITR to meet the following business requirements:
 
-- Reduce the Recovery Point Objective (RPO) of disaster recovery to less than 20 minutes.
+- Reduce the Recovery Point Objective (RPO) of disaster recovery to less than 5 minutes.
 - Handle the cases of incorrect writes from applications by rolling back data to a time point before the error event.
 - Perform history data auditing to meet the requirements of laws and regulations.
 
@@ -56,7 +56,7 @@ To manage backup data for PITR, you need to design a backup directory structure 
 - PITR log backup has a 5% impact on the cluster.
 - When you back up logs and snapshots at the same time, it has a less than 20% impact on the cluster.
 - On each TiKV node, PITR can restore snapshot data at 280 GB/h and log data at 30 GB/h.
-- With PITR, the RPO of disaster recovery is less than 20 minutes. Depending on the data size to be restored, the Recovery Time Objective (RTO) varies from several minutes to several hours.
+- With PITR, the RPO of disaster recovery is less than 5 minutes. Depending on the data size to be restored, the Recovery Time Objective (RTO) varies from several minutes to several hours.
 - BR deletes outdated log backup data at a speed of 600 GB/h.
 
 > **Note:**

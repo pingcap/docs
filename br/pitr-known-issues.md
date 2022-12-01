@@ -7,20 +7,6 @@ summary: Learn known issues in log backup.
 
 This document lists the known issues and corresponding workarounds when you use the log backup feature.
 
-## BR encounters the OOM problem after you run the `br log truncate` command
-
-Issue: [#36648](https://github.com/pingcap/tidb/issues/36648)
-
-Consider the following possible causes:
-
-- The range of logs to be deleted is too large.
-
-    To resolve this issue, reduce the range of logs to be deleted first and delete the target logs in several batches instead of deleting them once.
-
-- The memory allocation of the node where the BR process is located is too low.
-
-    It is recommended to scale up the node memory configuration to at least 16 GB to ensure that PITR has sufficient memory resources for recovery.
-
 ## The upstream database imports data using TiDB Lightning in the physical import mode, which makes it impossible to use the log backup feature
 
 Currently, the log backup feature is not fully adapted to TiDB Lightning. Therefore, data imported in the physical mode of TiDB Lightning cannot be backed up to logs.
