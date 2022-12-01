@@ -997,7 +997,7 @@ MPP is a distributed computing framework provided by the TiFlash engine, which a
 
 ### tidb_cost_model_version <span class="version-mark">New in v6.2.0</span>
 
-> **Warning:**
+> **Note:**
 >
 > - Since TiDB v6.5.0, the newly created cluster uses Cost Model Version 2 by default. If you upgrade from a TiDB version earlier than v6.5.0 to v6.5.0 or later, the `tidb_cost_model_version` does not changed.
 > - Switching the version of the cost model might cause changes to query plans.
