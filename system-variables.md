@@ -1371,7 +1371,7 @@ This variable is associated with a feature available since v6.2.0 and not usable
 
 > **Note:**
 >
-> This variable is enabled by default, which makes the memory usage not under the control of [`tidb_mem_quota_query`](#tidb_mem_quota_query) in some cases. Therefore, it is recommended to modify the variable value to `OFF`.
+> This variable is enabled by default, which makes the memory usage not under the control of [`tidb_mem_quota_query`](#tidb_mem_quota_query) in some cases. Therefore, it is recommended to disable `tidb_enable_rate_limit_action`.
 
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
