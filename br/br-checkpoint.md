@@ -33,7 +33,7 @@ br backup full \
 
 > **Note:**
 >
-> `gc-safepoint` created before backup is deleted after the snapshot backup is completed. You do not need to delete it manually.
+> The `gc-safepoint` created before backup is deleted after the snapshot backup is completed. You do not need to delete it manually.
 
 ### Some data needs to be backed up again
 
