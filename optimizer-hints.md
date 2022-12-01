@@ -481,8 +481,8 @@ Use the [`QB_NAME` hint](#qb_name) to define a new name for each query block of 
 - For a complex statement with nested views and subqueries, the following example specifies the names for each of two query blocks of the view `v1` and `v2`:
 
     ```sql
-    SELECT /* The name of the current query block is the default @SEL_1 */ * FROM v2 JOIN (
-        SELECT /* The name of the current query block is the default @SEL_2 */ * FROM v2) vv;
+    SELECT /* Comment: The name of the current query block is the default @SEL_1 */ * FROM v2 JOIN (
+        SELECT /* Comment: The name of the current query block is the default @SEL_2 */ * FROM v2) vv;
     ```
 
     For the first view `v2`, the first view name in the list starting from the first query statement is `v2@SEL_1`. For the second view `v2`, the first view name is `v2@SEL_2`. The following example only considers the first view `v2`.
