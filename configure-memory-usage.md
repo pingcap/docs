@@ -124,7 +124,7 @@ The following example constructs a memory-intensive SQL statement that triggers 
 
 - TiDB supports dynamic memory control for the operator that reads data. By default, this operator uses the maximum number of threads that [`tidb_disql_scan_concurrency`](/system-variables.md#tidb_distsql_scan_concurrency) allows to read data. When the memory usage of a single SQL execution exceeds [`tidb_mem_quota_query`](/system-variables.md#tidb_mem_quota_query) each time, the operator that reads data stops one thread.
 
-- This flow control behavior is controlled by the system variable [`tidb_enable_rate_limit_action`](/system-variables.md#tidb_enable_rate_limit_action). This variable is enabled by default, which makes the memory usage not under the control of [`tidb_mem_quota_query`](/system-variables.md#tidb_mem_quota_query) in some cases. Therefore, it is recommended to disable `tidb_enable_rate_limit_action`.
+- This flow control behavior is controlled by the system variable [`tidb_enable_rate_limit_action`](/system-variables.md#tidb_enable_rate_limit_action). This variable is enabled by default, which might make the memory usage not under the control of [`tidb_mem_quota_query`](/system-variables.md#tidb_mem_quota_query) in some cases. Therefore, it is recommended to set the value of `tidb_enable_rate_limit_action` to `OFF`.
 - When the flow control behavior is triggered, TiDB outputs a log containing the keywords `memory exceeds quota, destroy one token now`.
 
 ### Disk spill
