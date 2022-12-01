@@ -1020,6 +1020,10 @@ MPP モードの選択については、 [MPP モードを選択するかどう�
 
 ### tidb_enable_rate_limit_action {#tidb-enable-rate-limit-action}
 
+> **ノート：**
+>
+> この変数はデフォルトで有効になっているため、メモリ使用量が[`tidb_mem_quota_query`](#tidb_mem_quota_query)の制御下にない場合があります。したがって、 `tidb_enable_rate_limit_action` ～ `OFF`の値を設定することをお勧めします。
+
 -   スコープ: セッション |グローバル
 -   デフォルト値: `ON`
 -   この変数は、データを読み取るオペレーターの動的メモリー制御機能を有効にするかどうかを制御します。デフォルトでは、この演算子は、データの読み取りを許可するスレッドの最大数を有効にし[`tidb_distsql_scan_concurrency`](/system-variables.md#tidb_distsql_scan_concurrency) 。 1 つの SQL ステートメントのメモリ使用量が毎回[`tidb_mem_quota_query`](/system-variables.md#tidb_mem_quota_query)を超えると、データを読み取るオペレーターは 1 つのスレッドを停止します。
