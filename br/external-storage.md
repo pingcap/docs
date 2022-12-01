@@ -125,7 +125,7 @@ To ensure that TiKV and br use the same storage account, br determines the value
 > **Note:**
 >
 > - When using Azure Blob Storage as the external storage, you should set `send-credentials-to-tikv = true` (which is set by default). Otherwise, the backup task will fail.
-> - `$AZURE_CLIENT_ID`, `$AZURE_TENANT_ID`, and `$AZURE_CLIENT_SECRET` respectively refer to the application ID `client_id`, the tenant ID `tenant_id`, and the client password `client_secret` of the Azure application. For details about how to confirm the presence of the three environment variables, or how to configure the environment variables as parameters, see [Configure environment variables](/br/backup-storage-azblob.md#configure-environment-variables).
+> - `$AZURE_CLIENT_ID`, `$AZURE_TENANT_ID`, and `$AZURE_CLIENT_SECRET` respectively refer to the application ID `client_id`, the tenant ID `tenant_id`, and the client password `client_secret` of the Azure application. For details about how to confirm the presence of the three environment variables, or how to configure the environment variables as parameters, see [Authentication](/br/backup-and-restore-storages.md#authentication).
 
 ## Command-line parameters
 
