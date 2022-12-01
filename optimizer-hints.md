@@ -457,28 +457,28 @@ The global hint is related to [views](/views.md), and enables hints defined in t
 
 ### Step 1: Define the query block name of the view using the `QB_NAME` hint
 
-You can use the [`QB_NAME` hint](#qb_name) to define a new name for each query block of the view. The concept of the `QB_NAME` hint in the view is the same as that in [query blocks]((#qb_name)), but the syntax is extended from `QB_NAME(QB)` to `QB_NAME(QB, ViewName@QueryBlockName [.ViewName@QueryBlockName .ViewName@QueryBlockName ...])`.
+Use the [`QB_NAME` hint](#qb_name) to define a new name for each query block of the view. The definition of the `QB_NAME` hint for views is the same as that for [query blocks]((#qb_name)), but the syntax is extended from `QB_NAME(QB)` to `QB_NAME(QB, ViewName@QueryBlockName [.ViewName@QueryBlockName .ViewName@QueryBlockName ...])`.
 
 > **Note:**
 >
-> There is a white space between `@QueryBlockName` and the immediately followed `.ViewName@QueryBlockName`. Otherwise, the `.ViewName@QueryBlockName` will be treated as a part of the `QueryBlockName`. For example, `QB_NAME(v2_1, v2@SEL_1 .@SEL_1)` is valid, while `QB_NAME(v2_1, v2@SEL_1.@SEL_1)` cannot be parsed correctly.
+> There is a white space between `@QueryBlockName` and the immediately following `.ViewName@QueryBlockName`. Otherwise, the `.ViewName@QueryBlockName` will be treated as a part of the `QueryBlockName`. For example, `QB_NAME(v2_1, v2@SEL_1 .@SEL_1)` is valid, while `QB_NAME(v2_1, v2@SEL_1.@SEL_1)` cannot be parsed correctly.
 
 - For a simple statement with a single view and no subqueries, the following example specifies the first query block name of view `v`:
 
     ```sql
-    SELECT /* The name of the current query block is the default @SEL_1 */ * FROM v;
+    SELECT /* Comment: The name of the current query block is the default @SEL_1 */ * FROM v;
     ```
 
     For view `v`, the first view name in the list (`ViewName@QueryBlockName [.ViewName@QueryBlockName .ViewName@QueryBlockName ...]`) starting from the query statement is `v@SEL_1`. The first query block of the view `v` can be declared as `QB_NAME(v_1, v@SEL_1 .@SEL_1)`, or simply written as `QB_NAME(v_1, v)`, omitting `@SEL_1`:
 
     ```sql
-    CREATE VIEW v AS SELECT /* The name of the current query block is the default @SEL_1 */ * FROM t;
+    CREATE VIEW v AS SELECT /* Comment: The name of the current query block is the default @SEL_1 */ * FROM t;
 
-    -- Specify the global Hint
+    -- Specifies the global hint
     SELECT /*+ QB_NAME(v_1, v) USE_INDEX(t@v_1, idx) */ * FROM v;
     ```
 
-- For a complex statement with nested views and subqueries, the following example specifies the names for each two query blocks of the view `v1` and `v2`:
+- For a complex statement with nested views and subqueries, the following example specifies the names for each of two query blocks of the view `v1` and `v2`:
 
     ```sql
     SELECT /* The name of the current query block is the default @SEL_1 */ * FROM v2 JOIN (
