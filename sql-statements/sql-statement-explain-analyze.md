@@ -231,7 +231,17 @@ build_hash_table:{total:146.071334ms, fetch:110.338509ms, build:35.732825ms}, pr
 The `TableFullScan` operator executed on a TiFlash node contains the following execution information:
 
 ```sql
-tiflash_scan:{dtfile:{total_scanned_packs:2, total_skipped_packs:1, total_scanned_rows:16000, total_skipped_rows:8192, total_rough_set_index_load_time: 2ms, total_read_time: 20ms}, total_create_snapshot_time: 1ms}
+tiflash_scan:{
+  dtfile:{
+    total_scanned_packs:2, 
+    total_skipped_packs:1, 
+    total_scanned_rows:16000, 
+    total_skipped_rows:8192, 
+    total_rough_set_index_load_time: 2ms, 
+    total_read_time: 20ms
+  }, 
+  total_create_snapshot_time: 1ms
+}
 ```
 
 + `dtfile`: the DTFile (DeltaTree File) related information during the table scan, which reflects the data reading of  the TiFlash Stable layer.
