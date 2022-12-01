@@ -47,7 +47,6 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v6.1/quick-start-with-
 
     <!--planner owner: qw4990-->
 
-    - Fix the issue that Projection may push expression down through Join wrongly [#38736](https://github.com/pingcap/tidb/issues/38736) @[winoros](https://github.com/winoros)
     - Fix the issue that the background statistics collecting task may panic [#35421](https://github.com/pingcap/tidb/issues/35421) @[lilinghai](https://github.com/lilinghai)
 
     <!--transaction owner: cfzjywxk-->
