@@ -6,11 +6,11 @@ aliases: ['/docs/dev/hardware-and-software-requirements/','/docs/dev/how-to/depl
 
 # Software and Hardware Recommendations
 
-<!-- Localization note:
+<!-- Localization note for TiDB:
 
-- English: Use distributed SQL, and start to emphasize HTAP
-- Japanese: use NewSQL because it is well-received
-- Chinese: keep "NewSQL" and emphasize one-stack real-time HTAP ("一栈式实时 HTAP")
+- English: use distributed SQL, and start to emphasize HTAP
+- Chinese: can keep "NewSQL" and emphasize one-stop real-time HTAP ("一栈式实时 HTAP")
+- Japanese: use NewSQL because it is well-recognized
 
 -->
 
@@ -113,11 +113,11 @@ Before you deploy TiCDC, note that it is recommended to deploy TiCDC on PCIe-SSD
 
 ## Network requirements
 
-<!-- Localization note:
+<!-- Localization note for TiDB:
 
-- English: Use distributed SQL, and start to emphasize HTAP
-- Japanese: use NewSQL because it is well-received
-- Chinese: keep "NewSQL" and emphasize one-stack real-time HTAP ("一栈式实时 HTAP")
+- English: use distributed SQL, and start to emphasize HTAP
+- Chinese: can keep "NewSQL" and emphasize one-stop real-time HTAP ("一栈式实时 HTAP")
+- Japanese: use NewSQL because it is well-recognized
 
 -->
 

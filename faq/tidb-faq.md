@@ -14,11 +14,11 @@ This document lists the Most Frequently Asked Questions about TiDB.
 
 ### What is TiDB?
 
-<!-- Localization note:
+<!-- Localization note for TiDB:
 
-- English: Use distributed SQL, and start to emphasize HTAP
-- Japanese: use NewSQL because it is well-received
-- Chinese: keep "NewSQL" and emphasize one-stack real-time HTAP ("一栈式实时 HTAP")
+- English: use distributed SQL, and start to emphasize HTAP
+- Chinese: can keep "NewSQL" and emphasize one-stop real-time HTAP ("一栈式实时 HTAP")
+- Japanese: use NewSQL because it is well-recognized
 
 -->
 
