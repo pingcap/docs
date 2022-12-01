@@ -11,13 +11,13 @@ For details about the architecture of each backup and restore feature, see the f
 
 - Full data backup and restore
 
-    - [Back up snapshot data](/br/br-snapshot-architecture.md#backup-process)
-    - [Restore snapshot backup data](/br/br-snapshot-architecture.md#restore-process)
+    - [Back up snapshot data](/br/br-snapshot-architecture.md#process-of-backup)
+    - [Restore snapshot backup data](/br/br-snapshot-architecture.md#process-of-restore)
 
 - Data change log backup
 
-    - [Log backup: backup of KV data change](/br/br-log-architecture.md#log-backup)
+    - [Log backup: backup of KV data change](/br/br-log-architecture.md#process-of-log-backup)
 
 - Point-in-time recovery (PITR)
 
-    - [PITR](/br/br-log-architecture.md#pitr)
+    - [PITR](/br/br-log-architecture.md#process-of-pitr)
