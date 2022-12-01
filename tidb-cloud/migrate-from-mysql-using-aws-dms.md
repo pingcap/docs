@@ -30,9 +30,9 @@ AWS DMS does not support replicating `DROP TABLE`.
 
 ## Step 1: Create an AWS DMS replication instance
 
-1. Log in to the [AWS DMS console](https://us-west-2.console.aws.amazon.com/dms/v2/home) and switch to the corresponding region. It is recommended to use the same region for AWS DMS and TiDB cloud.
+1. Go to the [Replication instances](https://us-west-2.console.aws.amazon.com/dms/v2/home?region=us-west-2#replicationInstances) page in the AWS DMS console, and switch to the corresponding region. It is recommended to use the same region for AWS DMS and TiDB cloud. In this document, the upstream and downstream databases and DMS instance are all in the **us-west-2** region.
 
-2. Click **Create replication instance**. In this document, the upstream and downstream databases and DMS instance are all in the **us-west-2** region.
+2. Click **Create replication instance**.
 
     ![Create replication instance](/media/tidb-cloud/aws-dms-tidb-cloud/aws-dms-to-tidb-cloud-create-instance.png)
 
@@ -40,7 +40,7 @@ AWS DMS does not support replicating `DROP TABLE`.
 
     ![Fill name and choose class](/media/tidb-cloud/aws-dms-tidb-cloud/aws-dms-to-tidb-cloud-choose-class.PNG)
 
-4. Configure the following:
+4. Configure the following information:
     - **Engine version**: use the default configuration.
     - **Allocated storage (GiB)**: use the default configuration.
     - **VPC**: select the VPC that you need. It is recommended to use the same VPC as the upstream database to simplify the network configuration.
@@ -113,7 +113,7 @@ AWS DMS does not support replicating `DROP TABLE`.
 
     ![Fill in the VPC Peering information](/media/tidb-cloud/aws-dms-tidb-cloud/aws-dms-to-tidb-cloud-vpc-peering-info.png)
 
-7. Configure the target endpoint for TiDB.
+7. Configure the target endpoint for the TiDB Cloud cluster.
     - **Endpoint type**: select **Target endpoint**.
     - **Endpoint identifier**: fill in a name for the endpoint.
     - **Target engine**: select **MySQL**.
@@ -142,11 +142,11 @@ AWS DMS does not support replicating `DROP TABLE`.
 
 ## Step 4: Create a database migration task
 
-1. In the [AWS DMS console](https://us-west-2.console.aws.amazon.com/dms/v2/home), click **Database migration tasks** on the left navigation bar. Then click **Create task** in the upper right corner of the window.
+1. In the AWS DMS console, go to the [Data migration tasks](https://us-west-2.console.aws.amazon.com/dms/v2/home?region=us-west-2#tasks) page. Switch to your region. Then click **Create task** in the upper right corner of the window.
 
     ![Create task](/media/tidb-cloud/aws-dms-tidb-cloud/aws-dms-to-tidb-cloud-create-task.png)
 
-2. Configure the following:
+2. Configure the following information:
     - **Task identifier**: fill in a name for the task. It is recommended to use a name that is easy to remember.
     - **Descriptive Amazon Resource Name (ARN) - optional**: create a friendly name for the default DMS ARN.
     - **Replication instance**: select the AWS DMS instance that you just created.
@@ -156,7 +156,7 @@ AWS DMS does not support replicating `DROP TABLE`.
 
     ![Task configurations](/media/tidb-cloud/aws-dms-tidb-cloud/aws-dms-to-tidb-cloud-task-config.png)
 
-3. Configure the following task settings:
+3. Configure the following information:
     - **Editing mode**: select **Wizard**.
     - **Target table preparation mode**: select **Do nothing** or other options as needed. In this example, select **Do nothing**.
     - **Include LOB columns in replication**: select **Limited LOB mode**.
@@ -172,7 +172,7 @@ AWS DMS does not support replicating `DROP TABLE`.
 
     ![Table mappings](/media/tidb-cloud/aws-dms-tidb-cloud/aws-dms-to-tidb-cloud-table-mappings.png)
 
-6. Go back to the **Data migration tasks** page. You can see the status and progress of the task.
+6. Go back to the [Data migration tasks](https://us-west-2.console.aws.amazon.com/dms/v2/home?region=us-west-2#tasks) page. Switch to your region. You can see the status and progress of the task.
 
     ![Tasks status](/media/tidb-cloud/aws-dms-tidb-cloud/aws-dms-to-tidb-cloud-task-status.png)
 
