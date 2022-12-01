@@ -41,11 +41,11 @@ Get the power of a cloud-native, distributed SQL database built for real-time an
 
 <DocHomeSection label="TiDB" anchor="tidb" id="tidb">
 
-<!-- Localization note:
+<!-- Localization note for TiDB:
 
-- English: Use distributed SQL, and start to emphasize HTAP
-- Japanese: use NewSQL because it is well-received
-- Chinese: keep "NewSQL" and emphasize one-stack real-time HTAP ("一栈式实时 HTAP")
+- English: use distributed SQL, and start to emphasize HTAP
+- Chinese: can keep "NewSQL" and emphasize one-stop real-time HTAP ("一栈式实时 HTAP")
+- Japanese: use NewSQL because it is well-recognized
 
 -->
 
