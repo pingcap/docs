@@ -776,6 +776,10 @@ Constraint checking is always performed in place for pessimistic transactions (d
 
 ### tidb_enable_rate_limit_action
 
+> **Note:**
+>
+> This variable is enabled by default, which makes the memory usage not under the control of [`tidb_mem_quota_query`](#tidb_mem_quota_query) in some cases. Therefore, it is recommended to set the value of `tidb_enable_rate_limit_action` to `OFF`.
+
 - Scope: SESSION | GLOBAL
 - Default value: `ON`
 - This variable controls whether to enable the dynamic memory control feature for the operator that reads data. By default, this operator enables the maximum number of threads that [`tidb_disql_scan_concurrency`](/system-variables.md#tidb_distsql_scan_concurrency) allows to read data. When the memory usage of a single SQL statement exceeds [`tidb_mem_quota_query`](/system-variables.md#tidb_mem_quota_query) each time, the operator that reads data stops one thread.
