@@ -164,9 +164,11 @@
      - [Overview](/garbage-collection-overview.md)
      - [Configuration](/garbage-collection-configuration.md)
   - [Tune TiFlash performance](/tiflash/tune-tiflash-performance.md)
-- Manage User Access
+- Security
   - [Manage Console User Access](/tidb-cloud/manage-user-access.md)
   - [Configure Cluster Security Settings](/tidb-cloud/configure-security-settings.md)
+  - [Database Audit Logging](/tidb-cloud/tidb-cloud-auditing.md)
+  - [Secure Connections to Serverless Tier Clusters](/tidb-cloud/secure-connections-to-serverless-tier-clusters.md)
 - Billing
   - [Invoices](/tidb-cloud/tidb-cloud-billing.md#invoices)
   - [Billing Details](/tidb-cloud/tidb-cloud-billing.md#billing-details)
@@ -178,6 +180,7 @@
 - Integrations
   - [Datadog](/tidb-cloud/monitor-datadog-integration.md)
   - [Prometheus and Grafana](/tidb-cloud/monitor-prometheus-and-grafana-integration.md)
+  - [ProxySQL](/develop/dev-guide-proxysql-integration.md)
   - Terraform
     - [Terraform Integration Overview](/tidb-cloud/terraform-tidbcloud-provider-overview.md)
     - [Get TiDB Cloud Terraform Provider](/tidb-cloud/terraform-get-tidbcloud-provider.md)
@@ -422,7 +425,6 @@
   - [Dumpling](/dumpling-overview.md)
   - [Table Filter](/table-filter.md)
   - [Troubleshoot Inconsistency Between Data and Indexes](/troubleshoot-data-inconsistency-errors.md)
-  - [Secure Connections to Serverless Tier Clusters](/tidb-cloud/secure-connections-to-serverless-tier-clusters.md)
 - [FAQs](/tidb-cloud/tidb-cloud-faq.md)
 - Release Notes
   - [2022](/tidb-cloud/release-notes-2022.md)

@@ -175,7 +175,7 @@ You can detect the read-write conflict in your TiDB cluster by the following way
 
     * Monitoring data through Grafana
 
-        On the `KV Errors` panel in the TiDB dashboard, there are two monitoring metrics `Lock Resolve OPS` and `KV Backoff OPS` which can be used to check read-write conflicts in the transactions. If the values of both `not_expired` and `resolve` under `Lock Resolve OPS` increase, there might be many read-write conflicts. The `not_expired` item means that the transaction's lock has not timed out. The `resolve` item means that the other transaction tries to clean up the locks. If the value of another `txnLockFast` item under `KV Backoff OPS` increases, there might also be read-write conflicts.
+        In the `KV Errors` panel in the TiDB dashboard, `not_expired`/`resolve` in `Lock Resolve OPS` and `tikvLockFast` in `KV Backoff OPS` are monitoring metrics that can be used to check read-write conflicts in transactions. If the values of all the metrics increase, there might be many read-write conflicts. The `not_expired` item means that the transaction's lock has not timed out. The `resolve` item means that the other transaction tries to clean up the locks. The `tikvLockFast` item means that read-write conflicts occur.
 
         ![KV-backoff-txnLockFast-optimistic](/media/troubleshooting-lock-pic-09.png)
         ![KV-Errors-resolve-optimistic](/media/troubleshooting-lock-pic-08.png)
@@ -323,7 +323,7 @@ Solutions:
 
 ### TTL manager has timed out
 
-The transaction execution time can not exceed the GC time limit. In addition, the TTL time of pessimistic transactions has an upper limit, whose default value is 1 hour. Therefore, a pessimistic transaction executed for more than 1 hour will fail to commit. This timeout threshold is controlled by the TiDB parameter [performance.max-txn-ttl](https://github.com/pingcap/tidb/blob/master/config/config.toml.example).
+The transaction execution time cannot exceed the GC time limit. In addition, the TTL time of pessimistic transactions has an upper limit, whose default value is 1 hour. Therefore, a pessimistic transaction executed for more than 1 hour will fail to commit. This timeout threshold is controlled by the TiDB parameter [performance.max-txn-ttl](https://github.com/pingcap/tidb/blob/master/config/config.toml.example).
 
 When the execution time of a pessimistic transaction exceeds the TTL time, the following error message occurs in the TiDB log:
 

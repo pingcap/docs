@@ -4,7 +4,7 @@
 - [Docs Home](https://docs.pingcap.com/)
 - About TiDB
   - [TiDB Introduction](/overview.md)
-  - [TiDB 6.3 Release Notes](/releases/release-6.3.0.md)
+  - [TiDB 6.4 Release Notes](/releases/release-6.4.0.md)
   - [Basic Features](/basic-features.md)
   - [Experimental Features](/experimental-features.md)
   - [MySQL Compatibility](/mysql-compatibility.md)
@@ -83,7 +83,7 @@
   - Third-Party Support
     - [Third-Party Tools Supported by TiDB](/develop/dev-guide-third-party-support.md)
     - [Known Incompatibility Issues with Third-Party Tools](/develop/dev-guide-third-party-tools-compatibility.md)
-    - [Integrate with ProxySQL](/develop/dev-guide-proxysql-integration.md)
+    - [ProxySQL Integration Guide](/develop/dev-guide-proxysql-integration.md)
 - Deploy
   - [Software and Hardware Requirements](/hardware-and-software-requirements.md)
   - [Environment Configuration Checklist](/check-before-deployment.md)
@@ -97,7 +97,7 @@
     - [Hybrid Topology](/hybrid-deployment-topology.md)
   - Install and Start
     - [Use TiUP](/production-deployment-using-tiup.md)
-    - [Deploy in Kubernetes](/tidb-in-kubernetes.md)
+    - [Deploy on Kubernetes](/tidb-in-kubernetes.md)
   - [Verify Cluster Status](/post-installation-check.md)
   - Test Cluster Performance
     - [Test TiDB Using Sysbench](/benchmark/benchmark-tidb-using-sysbench.md)
@@ -162,7 +162,7 @@
   - [Daily Checklist](/daily-check.md)
   - [Maintain TiFlash](/tiflash/maintain-tiflash.md)
   - [Maintain TiDB Using TiUP](/maintain-tidb-using-tiup.md)
-  - [Modify Configuration Online](/dynamic-config.md)
+  - [Modify Configuration Dynamically](/dynamic-config.md)
   - [Online Unsafe Recovery](/online-unsafe-recovery.md)
   - [Replicate Data Between Primary and Secondary Clusters](/replicate-between-primary-and-secondary-clusters.md)
 - Monitor and Alert
@@ -627,6 +627,7 @@
       - [`EXPLAIN ANALYZE`](/sql-statements/sql-statement-explain-analyze.md)
       - [`EXPLAIN`](/sql-statements/sql-statement-explain.md)
       - [`FLASHBACK CLUSTER TO TIMESTAMP`](/sql-statements/sql-statement-flashback-to-timestamp.md)
+      - [`FLASHBACK DATABASE`](/sql-statements/sql-statement-flashback-database.md)
       - [`FLASHBACK TABLE`](/sql-statements/sql-statement-flashback-table.md)
       - [`FLUSH PRIVILEGES`](/sql-statements/sql-statement-flush-privileges.md)
       - [`FLUSH STATUS`](/sql-statements/sql-statement-flush-status.md)
@@ -895,6 +896,8 @@
   - [Release Timeline](/releases/release-timeline.md)
   - [TiDB Versioning](/releases/versioning.md)
   - [TiDB Installation Packages](/binary-package.md)
+  - v6.4
+    - [6.4.0-DMR](/releases/release-6.4.0.md)
   - v6.3
     - [6.3.0-DMR](/releases/release-6.3.0.md)
   - v6.2
@@ -911,6 +914,7 @@
     - [5.4.1](/releases/release-5.4.1.md)
     - [5.4.0](/releases/release-5.4.0.md)
   - v5.3
+    - [5.3.4](/releases/release-5.3.4.md)
     - [5.3.3](/releases/release-5.3.3.md)
     - [5.3.2](/releases/release-5.3.2.md)
     - [5.3.1](/releases/release-5.3.1.md)

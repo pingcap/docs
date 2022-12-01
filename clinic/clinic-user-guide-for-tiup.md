@@ -9,7 +9,7 @@ For TiDB clusters and DM clusters deployed using TiUP, you can use PingCAP Clini
 
 > **Note:**
 >
-> - This document **only** applies to clusters deployed using TiUP in an on-premises environment. For clusters deployed using TiDB Operator in Kubernetes, see [PingCAP Clinic for TiDB Operator environments](https://docs.pingcap.com/tidb-in-kubernetes/stable/clinic-user-guide).
+> - This document **only** applies to clusters deployed using TiUP in an on-premises environment. For clusters deployed using TiDB Operator on Kubernetes, see [PingCAP Clinic for TiDB Operator environments](https://docs.pingcap.com/tidb-in-kubernetes/stable/clinic-user-guide).
 >
 > - PingCAP Clinic **does not support** collecting data from clusters deployed using TiDB Ansible.
 
@@ -56,14 +56,14 @@ Before using PingCAP Clinic, you need to install Diag (a component to collect da
     - Log in to the Clinic Server.
 
         <SimpleTab groupId="clinicServer">
-        <div label="Clinic Server in the US" value="clinic-us">
+        <div label="Clinic Server for international users" value="clinic-us">
 
-        [Clinic Server in the US](https://clinic.pingcap.com): Data is stored in AWS in US.
+        [Clinic Server for international users](https://clinic.pingcap.com): Data is stored in AWS in US.
 
         </div>
-        <div label="Clinic Server in the Chinese mainland" value="clinic-cn">
+        <div label="Clinic Server for users in the Chinese mainland" value="clinic-cn">
 
-        [Clinic Server in the Chinese mainland](https://clinic.pingcap.com.cn): Data is stored in AWS in China (Beijing) regions.
+        [Clinic Server for users in the Chinese mainland](https://clinic.pingcap.com.cn): Data is stored in AWS in China (Beijing) regions.
 
         </div>
 
@@ -95,18 +95,18 @@ Before using PingCAP Clinic, you need to install Diag (a component to collect da
     > - For versions earlier than Diag v0.9.0, data is uploaded to Clinic Server in the Chinese region by default. To set `region` in these versions, run the `tiup update diag` command to upgrade Diag to the latest version and then set `region` in Diag.
 
     <SimpleTab groupId="clinicServer">
-    <div label="Clinic Server in the US" value="clinic-us">
+    <div label="Clinic Server for international users" value="clinic-us">
 
-    For Clinic Server in the US, set `region` to `US` using the following command:
+    When using Clinic Server for international users, set `region` to `US` using the following command:
 
     ```bash
     tiup diag config clinic.region US
     ```
 
     </div>
-    <div label="Clinic Server in the Chinese mainland" value="clinic-cn">
+    <div label="Clinic Server for users in the Chinese mainland" value="clinic-cn">
 
-    For Clinic Server in the Chinese mainland, set `region` to `CN` using the following command:
+    When using Clinic Server for users in the Chinese mainland, set `region` to `CN` using the following command:
 
     ```bash
     tiup diag config clinic.region CN

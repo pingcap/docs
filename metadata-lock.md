@@ -22,6 +22,7 @@ To solve the problem, TiDB v6.3.0 introduces metadata lock into the online DDL a
 The metadata lock in TiDB applies to all DDL statements, such as:
 
 - [`ADD INDEX`](/sql-statements/sql-statement-add-index.md)
+- [`ADD COLUMN`](/sql-statements/sql-statement-add-column.md)
 - [`DROP COLUMN`](/sql-statements/sql-statement-drop-column.md)
 - [`DROP INDEX`](/sql-statements/sql-statement-drop-index.md)
 - [`DROP PARTITION`](/partitioned-table.md#partition-management)
@@ -80,10 +81,10 @@ Metadata lock can ensure that the metadata versions used by all transactions in 
     | `INSERT INTO t VALUES(1);` |           |
     | `BEGIN;`                   |           |
     |                            | `ALTER TABLE t ADD COLUMN b INT;` |
-    | `SELECT * FROM t;`<br/>(Uses the current metadata version of table `t`. Returns `(a=1，b=NULL)` and locks table `t`.)         |           |
+    | `SELECT * FROM t;`<br/>(Uses the current metadata version of table `t`. Returns `(a=1, b=NULL)` and locks table `t`.)         |           |
     |                            | `ALTER TABLE t ADD COLUMN c INT;` (blocked by Session 1) |
 
-    At the repeatable read isolation level, from the transaction start to the timepoint of determining the metadata of a table,  if a DDL that requires data changes is performed, such as adding an index, or changing column types, the DDL returns an error as follows:
+    At the repeatable read isolation level, from the transaction start to the timepoint of determining the metadata of a table, if a DDL that requires data changes is performed, such as adding an index, or changing column types, the DDL returns an error as follows:
 
     | Session 1                  | Session 2                                 |
     |:---------------------------|:------------------------------------------|
