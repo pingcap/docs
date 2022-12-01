@@ -7,7 +7,7 @@ summary: Learn how to migrate data from MySQL-compatible databases hosted in Ama
 
 このドキュメントでは、 TiDB Cloudコンソールのデータ移行機能を使用して、クラウド プロバイダー (Amazon Aurora MySQL または Amazon Relational Database Service (RDS)) またはオンプレミスの MySQL 互換データベースからTiDB Cloudにデータを移行する方法について説明します。
 
-この機能は、データベースとその進行中の変更をTiDB Cloudに移行するのに役立ちます (同じリージョンまたは複数のリージョンで)。 DumplingやTiDB Lightningなどのツールを必要とする[MySQL 互換データベースからの移行](/tidb-cloud/migrate-data-into-tidb.md)および[MySQL 互換データベースからの増分データの移行](/tidb-cloud/migrate-incremental-data-from-mysql.md)で紹介したソリューションと比較して、この機能は使いやすくなっています。ソース データベースからデータを手動でダンプしてからTiDB Cloudにインポートする必要はありません。代わりに、ソース データベースから直接TiDB Cloudに一度にデータを移行できます。
+この機能は、データベースとその進行中の変更をTiDB Cloudに移行するのに役立ちます (同じリージョンまたは複数のリージョンで)。 DumplingやTiDB Lightningなどのツールを必要とする[MySQL 互換データベースからの移行](/tidb-cloud/migrate-data-into-tidb.md)および[MySQL 互換データベースからの増分データの移行](/tidb-cloud/migrate-incremental-data-from-mysql.md)で紹介したソリューションと比較して、この機能は使いやすくなっています。ソース データベースから手動でデータをダンプしてからTiDB Cloudにインポートする必要はありません。代わりに、ソース データベースからTiDB Cloudにデータを一度に直接移行できます。
 
 ## 制限事項 {#limitations}
 
@@ -21,7 +21,7 @@ summary: Learn how to migrate data from MySQL-compatible databases hosted in Ama
 
 -   完全なデータの移行中に、移行対象のテーブルが重複したキーを持つターゲット データベースに既に存在する場合、重複したキーは置き換えられます。
 
--   増分データ移行中に、移行対象のテーブルが重複したキーを持つターゲット データベースに既に存在する場合、エラーが報告され、移行が中断されます。この状況では、アップストリーム データが正確かどうかを確認する必要があります。はいの場合は、移行ジョブの [再開] ボタンをクリックすると、移行ジョブによって、競合するダウンストリーム レコードがアップストリーム レコードに置き換えられます。
+-   増分データ移行中に、移行対象のテーブルが重複したキーを持つターゲット データベースに既に存在する場合、エラーが報告され、移行が中断されます。この状況では、アップストリーム データが正確かどうかを確認する必要があります。はいの場合は、移行ジョブの [再起動] ボタンをクリックすると、移行ジョブによって、競合するダウンストリーム レコードがアップストリーム レコードに置き換えられます。
 
 -   TiDB Cloudでクラスターを削除すると、そのクラスター内のすべての移行ジョブが自動的に削除され、回復できなくなります。
 
@@ -140,7 +140,7 @@ GRANT CREATE,SELECT,INSERT,UPDATE,DELETE,ALTER,TRUNCATE,DROP,INDEX ON *.* TO 'yo
 5.  表示されるメッセージに従って対処してください。
 
     -   パブリック IP または VPC ピアリングを使用する場合は、データ移行サービスの IP アドレスをソース データベースとファイアウォール (存在する場合) の IP アクセス リストに追加する必要があります。
-    -   Private Link を使用する場合は、エンドポイント要求を受け入れるように求められます。 [AWS VPC コンソール](https://us-west-2.console.aws.amazon.com/vpc/home)に移動し、[**エンドポイント サービス**] をクリックしてエンドポイント要求を受け入れます。
+    -   Private Link を使用する場合、エンドポイント要求を受け入れるように求められます。 [AWS VPC コンソール](https://us-west-2.console.aws.amazon.com/vpc/home)に移動し、[**エンドポイント サービス**] をクリックしてエンドポイント要求を受け入れます。
 
 ## ステップ 3: 移行するオブジェクトを選択する {#step-3-choose-the-objects-to-be-migrated}
 
@@ -161,7 +161,7 @@ GRANT CREATE,SELECT,INSERT,UPDATE,DELETE,ALTER,TRUNCATE,DROP,INDEX ON *.* TO 'yo
 
         <img src="https://download.pingcap.com/images/docs/tidb-cloud/migration-job-select-db.png" width="60%" />
 
-    -   [**カスタマイズ**] をクリックし、データセット名の下にあるいくつかのテーブルを選択すると、移行ジョブは既存のデータのみを移行し、選択したテーブルの進行中の変更をレプリケートします。後で同じデータベースに作成されたテーブルは移行されません。
+    -   [**カスタマイズ**] をクリックしてデータセット名の下にあるいくつかのテーブルを選択すると、移行ジョブは既存のデータのみを移行し、選択したテーブルの進行中の変更をレプリケートします。後で同じデータベースに作成されたテーブルは移行されません。
 
         <img src="https://download.pingcap.com/images/docs/tidb-cloud/migration-job-select-tables.png" width="60%" />
 

@@ -84,7 +84,7 @@
         -   [SQL クライアント経由で接続する](/tidb-cloud/connect-to-tidb-cluster.md)
         -   [SQL シェル経由で接続](/tidb-cloud/connect-to-tidb-cluster.md#connect-via-sql-shell)
     -   [プライベート エンドポイント接続のセットアップ](/tidb-cloud/set-up-private-endpoint-connections.md)
-    -   [VPC ピアリング接続のセットアップ](/tidb-cloud/set-up-vpc-peering-connections.md)
+    -   [VPC ピアリング接続の設定](/tidb-cloud/set-up-vpc-peering-connections.md)
     -   TiFlash で HTAPクラスタを使用する
         -   [TiFlash の概要](/tiflash/tiflash-overview.md)
         -   [TiFlash レプリカの作成](/tiflash/create-tiflash-replicas.md)
@@ -191,6 +191,7 @@
     -   [データドッグ](/tidb-cloud/monitor-datadog-integration.md)
     -   [dbt](/tidb-cloud/integrate-tidbcloud-with-dbt.md)
     -   [プロメテウスとグラファナ](/tidb-cloud/monitor-prometheus-and-grafana-integration.md)
+    -   [プロキシSQL](/develop/dev-guide-proxysql-integration.md)
     -   テラフォーム
         -   [Terraform 統合の概要](/tidb-cloud/terraform-tidbcloud-provider-overview.md)
         -   [TiDB Cloud Terraform プロバイダーを入手する](/tidb-cloud/terraform-get-tidbcloud-provider.md)

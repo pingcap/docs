@@ -87,7 +87,7 @@
     -   サードパーティのサポート
         -   [TiDB がサポートするサードパーティ ツール](/develop/dev-guide-third-party-support.md)
         -   [サードパーティ製ツールとの既知の非互換性の問題](/develop/dev-guide-third-party-tools-compatibility.md)
-        -   [ProxySQL と統合する](/develop/dev-guide-proxysql-integration.md)
+        -   [ProxySQL 統合ガイド](/develop/dev-guide-proxysql-integration.md)
 -   デプロイ
     -   [ソフトウェアとハードウェアの要件](/hardware-and-software-requirements.md)
     -   [環境Configuration / コンフィグレーションチェックリスト](/check-before-deployment.md)
@@ -181,7 +181,7 @@
         -   [OLTP シナリオの性能チューニングプラクティス](/performance-tuning-practices.md)
     -   Configuration / コンフィグレーションのチューニング
         -   [オペレーティング システムのパフォーマンスを調整する](/tune-operating-system.md)
-        -   [TiDB メモリのチューニング](/configure-memory-usage.md)
+        -   [TiDB メモリの調整](/configure-memory-usage.md)
         -   [TiKV スレッドの調整](/tune-tikv-thread-performance.md)
         -   [TiKV メモリの調整](/tune-tikv-memory-performance.md)
         -   [TiKV Follower Readの調整](/follower-read.md)
@@ -215,7 +215,7 @@
                 -   [パーティションのプルーニング](/partition-pruning.md)
                 -   [TopN とリミット プッシュ ダウン](/topn-limit-push-down.md)
                 -   [結合したテーブルの再配置](/join-reorder.md)
-            -   物理的な最適化
+            -   物理的最適化
                 -   [概要](/sql-physical-optimization.md)
                 -   [インデックスの選択](/choose-index.md)
                 -   [統計](/statistics.md)
@@ -341,7 +341,7 @@
         -   [TiDBクラスタトポロジ リファレンス](/tiup/tiup-cluster-topology-reference.md)
         -   [DMクラスタトポロジ リファレンス](/tiup/tiup-dm-topology-reference.md)
         -   [ミラー リファレンス ガイド](/tiup/tiup-mirror-reference.md)
-        -   TiUPコンポーネント
+        -   TiUP コンポーネント
             -   [tiup-playground](/tiup/tiup-playground.md)
             -   [tiup-cluster](/tiup/tiup-cluster.md)
             -   [tiup-mirror](/tiup/tiup-mirror.md)
@@ -401,7 +401,7 @@
             -   [タスクの構成](/dm/dm-task-configuration-guide.md)
             -   [テーブル ルーティング](/dm/dm-key-features.md)
             -   [ブロックリストと許可リスト](/dm/dm-key-features.md#block-and-allow-table-lists)
-            -   [Binlogイベント フィルター](/dm/dm-key-features.md#binlog-event-filter)
+            -   [Binlogイベント フィルタ](/dm/dm-key-features.md#binlog-event-filter)
             -   [SQL 式を使用した DML のフィルタリング](/dm/feature-expression-filter.md)
             -   データ移行タスクの管理
                 -   [タスクの事前チェック](/dm/dm-precheck.md)
@@ -457,7 +457,7 @@
                 -   [DM 接続の TLS を有効にする](/dm/dm-enable-tls.md)
                 -   [自己署名証明書の生成](/dm/dm-generate-self-signed-certificates.md)
             -   モニタリングとアラート
-                -   [指標の監視](/dm/monitor-a-dm-cluster.md)
+                -   [指標のモニタリング](/dm/monitor-a-dm-cluster.md)
                 -   [アラート ルール](/dm/dm-alert-rules.md)
             -   [エラーコード](/dm/dm-error-handling.md#handle-common-errors)
             -   [用語集](/dm/dm-glossary.md)

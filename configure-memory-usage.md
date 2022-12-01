@@ -5,7 +5,7 @@ summary: Learn how to configure the memory quota of a query and avoid OOM (out o
 
 # TiDB メモリ制御 {#tidb-memory-control}
 
-現在、TiDB は単一の SQL クエリのメモリ クォータを追跡し、メモリ使用量が特定のしきい値を超えた場合に OOM (メモリ不足) を防止したり、OOM のトラブルシューティングを行ったりするためのアクションを実行できます。システム変数[`tidb_mem_oom_action`](/system-variables.md#tidb_mem_oom_action-new-in-v610)は、クエリがメモリ制限に達したときに実行するアクションを指定します。
+現在、TiDB は単一の SQL クエリのメモリ クォータを追跡し、メモリ使用量が特定のしきい値を超えたときに OOM (メモリ不足) を防止したり、OOM のトラブルシューティングを行ったりするためのアクションを実行できます。システム変数[`tidb_mem_oom_action`](/system-variables.md#tidb_mem_oom_action-new-in-v610)は、クエリがメモリ制限に達したときに実行するアクションを指定します。
 
 -   `LOG`の値は、 [`tidb_mem_quota_query`](/system-variables.md#tidb_mem_quota_query)の制限に達したときにクエリが引き続き実行されることを意味しますが、TiDB はログにエントリを出力します。
 -   値`CANCEL`は、TiDB が[`tidb_mem_quota_query`](/system-variables.md#tidb_mem_quota_query)制限に達した直後に SQL クエリの実行を停止し、クライアントにエラーを返すことを意味します。エラー情報には、SQL 実行プロセスでメモリを消費する各物理実行演算子のメモリ使用量が明確に示されます。
@@ -59,7 +59,7 @@ server-memory-quota = 34359738368
 
 デフォルトの構成では、マシンのメモリ使用量が合計メモリの 80% に達すると、tidb-server インスタンスはアラーム ログを出力し、関連するステータス ファイルを記録します。 `memory-usage-alarm-ratio`を構成することで、メモリ使用率のしきい値を設定できます。詳細なアラーム ルールについては、 [`memory-usage-alarm-ratio`](/tidb-configuration-file.md#memory-usage-alarm-ratio-new-in-v409)の説明を参照してください。
 
-アラームが一度トリガーされた後、メモリ使用率が 10 秒以上しきい値を下回り、再びしきい値に達した場合にのみ、アラームが再度トリガーされることに注意してください。さらに、アラームによって生成された過剰なステータス ファイルを保存しないようにするために、現在、TiDB は最近の 5 つのアラーム中に生成されたステータス ファイルのみを保持します。
+アラームが一度トリガーされた後、メモリ使用率が 10 秒以上しきい値を下回り、再びしきい値に達した場合にのみ、アラームが再度トリガーされることに注意してください。さらに、アラームによって生成された過剰なステータス ファイルを保存しないように、現在、TiDB は最近の 5 つのアラーム中に生成されたステータス ファイルのみを保持します。
 
 次の例では、アラームをトリガーするメモリ集約型の SQL ステートメントを作成します。
 
@@ -91,7 +91,7 @@ server-memory-quota = 34359738368
     -   `memory-usage-alarm-ratio`は[`memory-usage-alarm-ratio`](/tidb-configuration-file.md#memory-usage-alarm-ratio-new-in-v409)の値を示します。
     -   `record path`は、ステータス ファイルのディレクトリを示します。
 
-5.  ステータス ファイルのディレクトリ (上記の例では、ディレクトリは`/tmp/1000_tidb/MC4wLjAuMDo0MDAwLzAuMC4wLjA6MTAwODA=/tmp-storage/record`です) に、 `goroutinue` 、 `heap` 、および`running_sql`を含む一連のファイルが表示されます。これら 3 つのファイルの末尾には、ステータス ファイルがログに記録された時刻が付けられます。それぞれ、ゴルーチンのスタック情報、ヒープメモリの使用状況、アラーム発生時の実行中のSQL情報を記録します。 `running_sql`のログ内容の形式については、 [`expensive-queries`](/identify-expensive-queries.md)を参照してください。
+5.  ステータス ファイルのディレクトリ (上記の例では、ディレクトリは`/tmp/1000_tidb/MC4wLjAuMDo0MDAwLzAuMC4wLjA6MTAwODA=/tmp-storage/record`です) に、 `goroutinue` 、 `heap` 、および`running_sql`を含む一連のファイルが表示されます。これら 3 つのファイルの末尾には、ステータス ファイルがログに記録された時刻が付けられます。アラームがトリガーされたときに、ゴルーチン スタック情報、ヒープ メモリの使用状況、および実行中の SQL 情報をそれぞれ記録します。 `running_sql`のログ内容の形式については、 [`expensive-queries`](/identify-expensive-queries.md)を参照してください。
 
 ## tidb-server のその他のメモリ制御動作 {#other-memory-control-behaviors-of-tidb-server}
 
@@ -99,13 +99,13 @@ server-memory-quota = 34359738368
 
 -   TiDB は、データを読み取るオペレーターの動的メモリー制御をサポートしています。デフォルトでは、このオペレーターは、データの読み取りを許可するスレッドの最大数を使用し[`tidb_distsql_scan_concurrency`](/system-variables.md#tidb_distsql_scan_concurrency) 。 1 回の SQL 実行のメモリー使用量が毎回[`tidb_mem_quota_query`](/system-variables.md#tidb_mem_quota_query)を超えると、データを読み取るオペレーターは 1 つのスレッドを停止します。
 
--   このフロー制御動作は、システム変数[`tidb_enable_rate_limit_action`](/system-variables.md#tidb_enable_rate_limit_action)によって制御されます。
+-   このフロー制御動作は、システム変数[`tidb_enable_rate_limit_action`](/system-variables.md#tidb_enable_rate_limit_action)によって制御されます。この変数はデフォルトで有効になっているため、メモリ使用量が[`tidb_mem_quota_query`](/system-variables.md#tidb_mem_quota_query)の制御下にない場合があります。したがって、値を`tidb_enable_rate_limit_action` ～ `OFF`に設定することをお勧めします。
 
 -   フロー制御動作がトリガーされると、TiDB はキーワード`memory exceeds quota, destroy one token now`を含むログを出力します。
 
 ### ディスクこぼれ {#disk-spill}
 
-TiDB は、実行オペレーターのディスクスピルをサポートしています。 SQL 実行のメモリ使用量がメモリ クォータを超えると、tidb-server は実行オペレータの中間データをディスクにスピルして、メモリの負荷を軽減することができます。ディスク スピルをサポートする演算子には、Sort、MergeJoin、HashJoin、HashAgg などがあります。
+TiDB は、実行オペレーターのディスクスピルをサポートしています。 SQL 実行のメモリ使用量がメモリ クォータを超えると、tidb-server は実行オペレータの中間データをディスクにスピルして、メモリの負荷を軽減できます。ディスク スピルをサポートする演算子には、Sort、MergeJoin、HashJoin、HashAgg などがあります。
 
 -   ディスク スピルの動作は、 [`tidb_mem_quota_query`](/system-variables.md#tidb_mem_quota_query) 、 [`oom-use-tmp-storage`](/tidb-configuration-file.md#oom-use-tmp-storage) 、 [`tmp-storage-path`](/tidb-configuration-file.md#tmp-storage-path) 、および[`tmp-storage-quota`](/tidb-configuration-file.md#tmp-storage-quota)パラメータによって共同で制御されます。
 -   ディスク スピルがトリガーされると、TiDB はキーワード`memory exceeds quota, spill to disk now`または`memory exceeds quota, set aggregate mode to spill-mode`を含むログを出力します。

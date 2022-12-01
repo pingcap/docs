@@ -5,6 +5,14 @@ summary: Learn the deployment solution to multi-data centers in one city.
 
 # 1 つの地域展開における複数のデータセンター {#multiple-data-centers-in-one-city-deployment}
 
+<!-- Localization note for TiDB:
+
+- English: use distributed SQL, and start to emphasize HTAP
+- Chinese: can keep "NewSQL" and emphasize one-stop real-time HTAP ("一栈式实时 HTAP")
+- Japanese: use NewSQL because it is well-recognized
+
+-->
+
 分散型 SQL データベースである TiDB は、従来のリレーショナル データベースの優れた機能と NoSQL データベースのスケーラビリティを兼ね備えており、データ センター (DC) 全体で高い可用性を実現します。このドキュメントでは、1 つの都市に複数の DC を配置する方法について説明します。
 
 ## Raftプロトコル {#raft-protocol}

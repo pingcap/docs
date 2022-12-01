@@ -13,6 +13,14 @@ summary: Learn about the most frequently asked questions (FAQs) relating to TiDB
 
 ### TiDBとは？ {#what-is-tidb}
 
+<!-- Localization note for TiDB:
+
+- English: use distributed SQL, and start to emphasize HTAP
+- Chinese: can keep "NewSQL" and emphasize one-stop real-time HTAP ("一栈式实时 HTAP")
+- Japanese: use NewSQL because it is well-recognized
+
+-->
+
 [TiDB](https://github.com/pingcap/tidb)は、Hybrid Transactional and Analytical Processing (HTAP) ワークロードをサポートするオープンソースの分散 SQL データベースです。 MySQL と互換性があり、水平方向のスケーラビリティ、強力な一貫性、および高可用性を備えています。 TiDB の目標は、OLTP (オンライン トランザクション処理)、OLAP (オンライン分析処理)、および HTAP サービスをカバーするワンストップ データベース ソリューションをユーザーに提供することです。 TiDB は、高可用性と大規模データとの強力な整合性を必要とするさまざまなユース ケースに適しています。
 
 ### TiDB のアーキテクチャとは? {#what-is-tidb-s-architecture}

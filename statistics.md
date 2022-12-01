@@ -72,7 +72,7 @@ Count-Min Sketch はハッシュ構造です。等価クエリに`a = 1`つま�
 Count-Min Sketch はハッシュ構造であるため、ハッシュ衝突が発生する可能性があります。 `EXPLAIN`ステートメントにおいて、同等のクエリの見積もりが実際の値から大きく外れている場合は、大きい値と小さい値が一緒にハッシュされていると見なすことができます。この場合、次のいずれかの方法でハッシュの衝突を回避できます。
 
 -   `WITH NUM TOPN`パラメータを変更します。 TiDB は高頻度 (上位 x) データを個別に保存し、その他のデータは Count-Min Sketch に保存します。したがって、大きい値と小さい値が一緒にハッシュされるのを防ぐために、 `WITH NUM TOPN`の値を増やすことができます。 TiDB では、デフォルト値は 20 です。最大値は 1024 です。このパラメーターの詳細については、 [フルコレクション](#full-collection)を参照してください。
--   2 つのパラメーター`WITH NUM CMSKETCH DEPTH`と`WITH NUM CMSKETCH WIDTH`を変更します。どちらもハッシュ バケットの数と衝突確率に影響します。実際のシナリオに従って 2 つのパラメーターの値を適切に増やして、ハッシュ衝突の可能性を減らすことができますが、統計のメモリ使用量が高くなります。 TiDB では、5 のデフォルト値は`WITH NUM CMSKETCH DEPTH`で、 `WITH NUM CMSKETCH WIDTH`のデフォルト値は 2048 です。2 つのパラメーターの詳細については、 [フルコレクション](#full-collection)を参照してください。
+-   2 つのパラメーター`WITH NUM CMSKETCH DEPTH`と`WITH NUM CMSKETCH WIDTH`を変更します。どちらもハッシュ バケットの数と衝突確率に影響します。実際のシナリオに応じて 2 つのパラメーターの値を適切に増やして、ハッシュ衝突の可能性を減らすことができますが、統計のメモリ使用量が高くなります。 TiDB では、5 のデフォルト値は`WITH NUM CMSKETCH DEPTH`で、 `WITH NUM CMSKETCH WIDTH`のデフォルト値は 2048 です。2 つのパラメーターの詳細については、 [フルコレクション](#full-collection)を参照してください。
 
 ## 上位 N の値 {#top-n-values}
 
@@ -339,7 +339,7 @@ ANALYZE TABLE TableName INDEX [IndexNameList] [WITH NUM BUCKETS|TOPN|CMSKETCH DE
 > **ノート：**
 >
 > -   現在、増分コレクションはインデックスに対してのみ提供されています。
-> -   増分コレクションを使用する場合、テーブルに存在する操作が`INSERT`だけであること、およびインデックス列に新しく挿入された値が単調に減少しないことを確認する必要があります。そうしないと、統計情報が不正確になり、適切な実行計画を選択する TiDB オプティマイザに影響を与える可能性があります。
+> -   増分コレクションを使用する場合は、テーブルに`INSERT`の操作のみが存在すること、およびインデックス列に新しく挿入された値が単調に非減少であることを確認する必要があります。そうしないと、統計情報が不正確になり、適切な実行計画を選択する TiDB オプティマイザに影響を与える可能性があります。
 
 次の構文を使用して増分コレクションを実行できます。
 
@@ -371,7 +371,9 @@ ANALYZE TABLE TableName INDEX [IndexNameList] [WITH NUM BUCKETS|TOPN|CMSKETCH DE
 | `tidb_auto_analyze_start_time` | `00:00 +0000` | TiDBが自動更新できる1日の開始時刻 |
 | `tidb_auto_analyze_end_time`   | `23:59 +0000` | TiDBが自動更新できる1日の終了時刻 |
 
-テーブル内の`tbl`の行の総数に対する変更された行の数の比率が`tidb_auto_analyze_ratio`よりも大きく、現在の時刻が`tidb_auto_analyze_start_time`から`tidb_auto_analyze_end_time`の間にある場合、TiDB はバックグラウンドで`ANALYZE TABLE tbl`ステートメントを実行して、この統計を自動的に更新します。テーブル。
+テーブル内の`tbl`の行の総数に対する変更された行の数の比率が`tidb_auto_analyze_ratio`よりも大きく、現在の時刻が`tidb_auto_analyze_start_time`から`tidb_auto_analyze_end_time`の間である場合、TiDB はバックグラウンドで`ANALYZE TABLE tbl`ステートメントを実行して、この統計を自動的に更新します。テーブル。
+
+テーブルの行数が 1000 未満の場合、小さなテーブルで少量のデータを変更すると頻繁に自動更新がトリガーされるという状況を回避するために、TiDB ではそのようなデータ変更は自動更新をトリガーしません。 `SHOW STATS_META`ステートメントを使用して、テーブル内の行数を表示できます。
 
 > **ノート：**
 >
@@ -395,8 +397,8 @@ TiDB v6.0 以降、TiDB は`KILL`ステートメントを使用して、バッ�
 
     <CustomContent platform="tidb">
 
-    -   [`enable-global-kill`](/tidb-configuration-file.md#enable-global-kill-new-in-v610)が`true` (デフォルトでは`true` ) の場合、 `KILL TIDB ${id};`ステートメントを直接実行できます。ここで、 `${id}`は、前の手順で取得したバックグラウンド`ANALYZE`タスクの`ID`です。
-    -   `enable-global-kill`が`false`の場合、クライアントを使用して、バックエンド`ANALYZE`タスクを実行している TiDB インスタンスに接続し、 `KILL TIDB ${id};`ステートメントを実行する必要があります。クライアントを使用して別の TiDB インスタンスに接続する場合、またはクライアントと TiDB クラスターの間にプロキシがある場合、 `KILL`ステートメントはバックグラウンドの`ANALYZE`タスクを終了できません。
+    -   [`enable-global-kill`](/tidb-configuration-file.md#enable-global-kill-new-in-v610)が`true` (デフォルトでは`true` ) の場合、 `KILL TIDB ${id};`ステートメントを直接実行できます。ここで、 `${id}`は前の手順で取得したバックグラウンド`ANALYZE`タスクの`ID`です。
+    -   `enable-global-kill`が`false`の場合、クライアントを使用して、バックエンド`ANALYZE`タスクを実行している TiDB インスタンスに接続し、 `KILL TIDB ${id};`ステートメントを実行する必要があります。クライアントを使用して別の TiDB インスタンスに接続する場合、またはクライアントと TiDB クラスターの間にプロキシがある場合、 `KILL`ステートメントはバックグラウンド`ANALYZE`タスクを終了できません。
 
     </CustomContent>
 
@@ -722,7 +724,7 @@ v5.4.0 以降、TiDB は同期読み込み統計機能を導入しています�
 >
 > 現在、統計の同期読み込みは実験的機能です。実稼働環境で使用することはお勧めしません。
 
-統計の同期読み込み機能は、デフォルトで無効になっています。この機能を有効にするには、システム変数[`tidb_stats_load_sync_wait`](/system-variables.md#tidb_stats_load_sync_wait-new-in-v540)の値をタイムアウト (ミリ秒単位) に設定します。これは、SQL 最適化が完全な列統計を同期的にロードするまで最大で待機できる時間です。この変数のデフォルト値は`0`で、機能が無効になっていることを示します。
+統計の同期読み込み機能は、デフォルトでは無効になっています。この機能を有効にするには、システム変数[`tidb_stats_load_sync_wait`](/system-variables.md#tidb_stats_load_sync_wait-new-in-v540)の値をタイムアウト (ミリ秒単位) に設定します。これは、SQL 最適化が完全な列統計を同期的にロードするまで最大で待機できる時間です。この変数のデフォルト値は`0`で、機能が無効になっていることを示します。
 
 <CustomContent platform="tidb">
 
@@ -794,7 +796,7 @@ LOAD STATS 'file_name'
 
 <CustomContent platform="tidb">
 
--   [ロード統計](/sql-statements/sql-statement-load-stats.md)
+-   [負荷統計](/sql-statements/sql-statement-load-stats.md)
 -   [ドロップ統計](/sql-statements/sql-statement-drop-stats.md)
 
 </CustomContent>
