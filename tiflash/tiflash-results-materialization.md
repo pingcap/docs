@@ -11,11 +11,12 @@ summary: Learn how to save the query results of TiFlash in a transaction.
 
 This document introduces how to save the TiFlash query result to a specified TiDB table in an `INSERT INTO SELECT` transaction.
 
-Since v6.4.0, during the execution of the `INSERT INTO SELECT` statement, the query result of TiFlash can be saved to a specified TiDB table when TiDB pushes down the subquery in the `SELECT` clause to TiFlash, that is, the materialization of TiFlash query result. For TiDB versions earlier than v6.4.0, the query results of TiFlash are read-only, so if you want to save TiFlash query results, you have to obtain them from the application level, and then save them in a separate transaction or process.
+Since v6.5.0, during the execution of the `INSERT INTO SELECT` statement, the query result of TiFlash can be saved to a specified TiDB table when TiDB pushes down the subquery in the `SELECT` clause to TiFlash, that is, the materialization of TiFlash query result. For TiDB versions earlier than v6.5.0, the query results of TiFlash are read-only, so if you want to save TiFlash query results, you have to obtain them from the application level, and then save them in a separate transaction or process.
 
 > **Note:**
 >
-> By default ([`tidb_allow_mpp = ON`](/system-variables#tidb_allow_mpp-new-in-v50)), the TiDB optimizer intelligently chooses to push down queries to TiKV or TiFlash based on the query cost. To enforce that the queries are pushed down to TiFlash, you can set the system variable [`tidb_enforce_mpp = ON`](/system-variables#tidb_enforce_mpp-new-in-v51).
+> - By default ([`tidb_allow_mpp = ON`](/system-variables#tidb_allow_mpp-new-in-v50)), the TiDB optimizer intelligently chooses to push down queries to TiKV or TiFlash based on the query cost. To enforce that the queries are pushed down to TiFlash, you can set the system variable [`tidb_enforce_mpp = ON`](/system-variables#tidb_enforce_mpp-new-in-v51).
+> - During the experimental phase, this feature is disabled by default to avoid any impact on existing read and write hybrid transactions. To enable this feature, you can set the system variable [`tidb_enable_tiflash_read_for_write_stmt = ON`](/system-variables#tidb_enable_tiflash_read_for_write_stmt).
 
 The syntax of `INSERT INTO SELECT` is as follows.
 
@@ -48,7 +49,7 @@ SELECT app_name, country FROM t1;
 
 - Serving online applications with TiFlash
 
-    The number of concurrent requests supported by TiFlash depends on the volume of data and complexity of the queries, but it typically does not exceed 100 QPS. You can use `INSERT INTO SELECT` to save TiFlash query results, and then use the query result tables to support highly concurrent online requests. The data in result tables can be updated in the background at a low frequency (for example, at a interval of 0.5 second), which is well below the TiFlash concurrency limit, while still maintaining a high level of data freshness.
+    The number of concurrent requests supported by TiFlash depends on the volume of data and complexity of the queries, but it typically does not exceed 100 QPS. You can use `INSERT INTO SELECT` to save TiFlash query results, and then use the query result tables to support highly concurrent online requests. The data in result tables can be updated in the background at a low frequency (for example, at an interval of 0.5 second), which is well below the TiFlash concurrency limit, while still maintaining a high level of data freshness.
 
 ## Execution process
 
