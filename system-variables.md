@@ -1442,7 +1442,7 @@ Constraint checking is always performed in place for pessimistic transactions (d
 
 > **Note:**
 >
-> This variable is enabled by default. In this situation, the memory usage might not be under the control of [`tidb_mem_quota_query`]. Therefore, it is recommended to modify the variable value to `OFF`.
+> This variable is enabled by default, which makes the memory usage not under the control of [`tidb_mem_quota_query`](#tidb_mem_quota_query) in some cases. Therefore, it is recommended to modify the variable value to `OFF`.
 
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
