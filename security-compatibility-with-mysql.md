@@ -6,8 +6,6 @@ aliases: ['/docs/dev/security-compatibility-with-mysql/','/docs/dev/reference/se
 
 # Security Compatibility with MySQL
 
-TiDB 支持与 MySQL 5.7 类似的安全特性，同时 TiDB 还支持 MySQL 8.0 的部分安全特性。 TiDB 的安全特性在实现上 与 MySQL 存在差异。
-
 TiDB supports security features similar to MySQL 5.7, and also supports some security features of MySQL 8.0. The security features of TiDB are different from MySQL in implementation.
 
 ## Unsupported security features
@@ -31,7 +29,7 @@ The password expiration policies of TiDB and MySQL have the following difference
 The expiration mechanism of TiDB is different from MySQL in the following aspects:
 
 - In MySQL v5.7 and v8.0, the configuration of the client and the server combined together determines whether to enable "sandbox mode" for the client connection.
-- In TiDB, the server-side system variable [`disconnect_on_expired_password`](/system-variables.md#disconnect_on_expired_password-new-in-v650) alone determines whether to enable "sandbox mode" for the client connection.
+- In TiDB, the [`security.disconnect-on-expired-password`](/tidb-configuration-file.md#disconnect-on-expired-password-new-in-v650) configuration item alone determines whether to enable "sandbox mode" for the client connection.
 
 ### Password complexity policy
 
@@ -53,7 +51,7 @@ The feature implementation has the following differences:
 
     - In MySQL v5.7, you can specify a file path using the `validate_password_dictionary_file` variable. The file contains a list of words that are not allowed to be used as passwords.
     - In MySQL v8.0, you can specify a file path using the `validate_password.dictionary_file` variable. The file contains a list of words that are not allowed to be used as passwords.
-    - In TiDB, you can specify a string using the [`validate_password.dictionary`](/system-variables.md#validate_passworddictionary-new-in-v650) system variable. The string contains a list of words that are not allowed to be used as passwords.
+    - In TiDB, you can specify a string using the [`validate_password.dictionary`](/system-variables.md#validate_passworddictionary-new-in-v650) system variable. The string contains a list of words that cannot exist in passwords.
 
 ### Password failure tracking
 
@@ -101,7 +99,7 @@ The password reuse policies of TiDB and MySQL have the following differences:
 - MySQL v8.0 supports password reuse management.
 - TiDB v6.5.0 supports password reuse management.
 
-The implementation mechanisms are consistent between TiDB and MySQL. Both use the `mysql.password_history` system table to implement the password reuse management feature. However, when deleting a non-existent user from the `mysql.user` system table, TiDB and MySQL have different behaviors:
+The implementation mechanisms are consistent between TiDB and MySQL. Both use the `mysql.password_history` system table to implement the password reuse management feature. However, when deleting a user that does not exist in the `mysql.user` system table, TiDB and MySQL have different behaviors:
 
 - Scenario: A user (`user01`) is not created in a normal way; instead, it is created by using the `INSERT INTO mysql.password_history VALUES (...)` statement to append a record of `user01` to the `mysql.password_history` system table. The record of `user01` does not exist in `mysql.user` system table. In such cases, when you run `DROP USER` on `user01`, TiDB and MySQL have different behaviors.
 

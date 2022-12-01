@@ -5,10 +5,10 @@ summary: Learn the mechanism of user password management in TiDB.
 
 # TiDB Password Management
 
-To protect the security of user passwords, TiDB supports the following password management policies:
+To protect the security of user passwords, TiDB supports the following password management policies starting from v6.5.0:
 
 - Password complexity policy: require users to set strong passwords to prevent empty and weak passwords.
-- Password expiration policy: require users to change their passwords regularly.
+- Password expiration policy: require users to change their passwords periodically.
 - Password reuse policy: prevent users from reusing old passwords.
 - Failed-login tracking and temporary account locking: temporarily lock the user account and prevent the same user from trying to login after multiple login failures caused by wrong passwords.
 
@@ -33,12 +33,12 @@ Password complexity check is disabled by default in TiDB. By configuring system 
 The password complexity policy has the following features:
 
 - For SQL statements that sets user passwords in plaintext (including `CREATE USER`, `ALTER USER`, and `SET PASSWORD`), TiDB checks the passwords against the password complexity policy. If the password does not meet the requirements, the password is rejected.
-- You can use the SQL function [`VALIDATE_PASSWORD_STRENGTH()`](https://dev.mysql.com/doc/refman/5.7/en/encryption-functions.html#function_validate-password-strength) to validate the password strength. This function accepts a password parameter and returns an integer from 0 (weak) to 100 (strong). The evaluation result is based on the current password complexity policy; therefore, when the password complexity policy is changed, the same password might get different evaluation results.
+- You can use the SQL function [`VALIDATE_PASSWORD_STRENGTH()`](https://dev.mysql.com/doc/refman/5.7/en/encryption-functions.html#function_validate-password-strength) to validate the password strength.
 
 > **Note:**
 >
 > - For the `CREATE USER` statement, even if the account is locked upon creation, you must set an acceptable password. Otherwise, when the account is unlocked, the user can log in to TiDB using a password that does not comply with the password complexity policy.
-> - Changing the password complexity policy does not affect the passwords that already exist and only affects the newly set passwords.
+> - The modification to the password complexity policy does not affect the passwords that already exist and only affects the newly set passwords.
 
 You can view all system variables related to the password complexity policy by executing the following SQL statement:
 
@@ -64,7 +64,7 @@ For the detailed description of each system variable, see [System Variables](/sy
 
 ### Configure password complexity policy
 
-This section shows the examples of configuring the password complexity policy.
+This section shows the examples of configuring system variables related to the password complexity policy.
 
 Enable the password complexity check:
 
@@ -106,21 +106,21 @@ SET GLOBAL validate_password.dictionary = 'mysql;abcd';
 
 > **Note:**
 >
-> - The value of `validate_password.dictionary` is a string not longer than 1024. It contains a list of words that can be matched with the password. Each word is separated by semicolon (`;`).
+> - The value of `validate_password.dictionary` is a string not longer than 1024. It contains a list of words that must not exist in the password. Each word is separated by semicolon (`;`).
 > - The dictionary check is case-insensitive.
 
 ### Password complexity check examples
 
 When the system variable `validate_password.enable` is set to `ON`, TiDB enables the password complexity check. The following are examples of the check results:
 
-TiDB checks the user's plaintext password against the default password complexity policy. If a weak password is set, the password is rejected.
+TiDB checks the user's plaintext password against the default password complexity policy. If the set password does not meet the policy, the password is rejected.
 
 ```sql
 mysql> ALTER USER 'test'@'localhost' IDENTIFIED BY 'abc';
 ERROR 1819 (HY000): Require Password Length: 8
 ```
 
-TiDB does not check the hashed password.
+TiDB does not check the hashed password against the password complexity policy.
 
 ```sql
 mysql> ALTER USER 'test'@'localhost' IDENTIFIED WITH mysql_native_password AS '*0D3CED9BEC10A777AEC23CCC353A8C08A633045E';
@@ -134,10 +134,18 @@ mysql> CREATE USER 'user02'@'localhost' ACCOUNT LOCK;
 ERROR 1819 (HY000): Require Password Length: 8
 ```
 
-Use the `VALIDATE_PASSWORD_STRENGTH()` function to check the password strength.
+### Password strength validation function
+
+To check the password strength, you can use the `VALIDATE_PASSWORD_STRENGTH()` function. This function accepts a password parameter and returns an integer from 0 (weak) to 100 (strong).
+
+> **Note:**
+>
+> The password strength result is evaluated based on the current password complexity policy. If the password complexity policy is changed, the same password might get different evaluation results.
+
+The following example shows how to use the `VALIDATE_PASSWORD_STRENGTH()` function:
 
 ```sql
-mysql>SELECT VALIDATE_PASSWORD_STRENGTH('weak');
+mysql> SELECT VALIDATE_PASSWORD_STRENGTH('weak');
 +------------------------------------+
 | VALIDATE_PASSWORD_STRENGTH('weak') |
 +------------------------------------+
@@ -164,7 +172,7 @@ mysql> SELECT VALIDATE_PASSWORD_STRENGTH('N0Tweak$_@123!');
 
 ## Password expiration policy
 
-TiDB supports password expiration policy so that users must change their passwords regularly to improve password security. The database administrator with the `CREATE USER` privilege can manually make account passwords expire and establish a policy for automatic password expiration.
+TiDB supports password expiration policy so that users must change their passwords periodically to improve password security. The database administrator with the `CREATE USER` privilege can manually make account passwords expire and establish a policy for automatic password expiration.
 
 The automatic password expiration policy can be set globally or for individual accounts. The database administrator can establish a global password expiration policy or use an account-level policy to override the global policy.
 
@@ -250,16 +258,19 @@ When the client connects to the server, the server checks whether the password i
 
 ### Handle an expired password
 
-You can control the behavior of the TiDB server when a password is expired. When a password is expired, the server either disconnects the client or restricts the client to the "sandbox mode".
+You can control the behavior of the TiDB server when a password is expired. When a password is expired, the server either disconnects the client or restricts the client to the "sandbox mode". In a "sandbox mode", the TiDB server allows connections from the expired account. However, in such connections, the user is only allowed to reset the password.
 
-In a "sandbox mode", the TiDB server accepts connections from the expired account. However, in such connections, the user is only allowed to reset the password.
+To control the behavior of the TiDB server when a password is expired, configure the [`security.disconnect-on-expired-password`](/tidb-configuration-file.md#disconnect-on-expired-password-new-in-v650) configuration item in the TiDB configuration file:
 
-To control the behavior of the TiDB server when a password is expired, you can set the [`disconnect_on_expired_password`](/system-variables.md#disconnect_on_expired_password-new-in-v650) system variable.
+```toml
+[security]
+disconnect-on-expired-password = true
+```
 
-- `disconnect_on_expired_password` is set to `ON` by default, which means that the server disconnects the client when the password is expired.
-- If `disconnect_on_expired_password` is set to `OFF`, the server enables the "sandbox mode" and allows the user to connect to the server. However, the user can only reset the password. After the password is reset, the user can run SQL statements normally.
+- If `disconnect-on-expired-password` is set to `true` (default), which means that the server disconnects the client when the password is expired.
+- If `disconnect-on-expired-password` is set to `false`, the server enables the "sandbox mode" and allows the user to connect to the server. However, the user can only reset the password. After the password is reset, the user can run SQL statements normally.
 
-When `disconnect_on_expired_password` is enabled, if the account password is expired, you can handle the password expiration in the following ways:
+When `disconnect-on-expired-password` is enabled, if the account password is expired, TiDB rejects the connection from the account. In such cases, you can modify the password in the following ways:
 
 - If the password for a normal account is expired, the administrator can change the password for the account by using SQL statements.
 - If the password for an administrator account is expired, another administrator can change the password for the account by using SQL statements.
@@ -350,7 +361,7 @@ Failed-login means that the client fails to provide the correct password during 
 > **Note:**
 >
 > - TiDB only supports failed-login tracking and temporary account locking at the account level, but not at the global level.
-> - When you enable the failed-login tracking and temporary account locking policy for an account, the account is subject to additional checks when the account attempts to log in. This affects the performance of the login operation, especially in high-concurrency login scenarios.
+> - When you enable the failed-login tracking and temporary account locking for an account, the account is subject to additional checks when the account attempts to log in. This affects the performance of the login operation, especially in high-concurrency login scenarios.
 
 ### Configure the login failure tracking policy
 

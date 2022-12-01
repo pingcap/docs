@@ -239,14 +239,6 @@ For more possible values of this variable, see [Authentication plugin status](/s
 - Range: `[0, 7]`
 - Sets the week format used by the `WEEK()` function.
 
-### disconnect_on_expired_password <span class="version-mark">New in v6.5.0</span>
-
-- Scope: GLOBAL
-- Persists to cluster: Yes
-- Type: Boolean
-- Default value: `ON`
-- This variable is read-only and is configured by a command line parameter (`--disconnect-on-expired-password`) or a configuration item (`security.disconnect-on-expired-password`). It controls whether a user with an expired password will be disconnected.
-
 ### error_count
 
 - Scope: SESSION
@@ -4099,9 +4091,9 @@ Internally, the TiDB parser transforms the `SET TRANSACTION ISOLATION LEVEL [REA
 - Persists to cluster: Yes
 - Default value: `ON`
 - Type: Boolean
-- This variable is a check item in the password complexity check. It checks whether the password matches the username. This variable takes effect only when [`validate_password.enable`](/system-variables.md#password_reuse_interval-new-in-v650) is enabled.
+- This variable is a check item in the password complexity check. It checks whether the password matches the username. This variable takes effect only when [`validate_password.enable`](#validate_passwordenable-new-in-v650) is enabled.
 - When this variable is effective and set to `ON`, when you set password, TiDB compares the password with the username (excluding the hostname). If the password matches the username, the password is rejected.
-- This variable is not affected by [`validate_password.policy](/system-variables.md#validate_password_policy-new-in-v650)`.
+- This variable is independent of [`validate_password.policy](#validate_password_policy-new-in-v650)` and not affected by the password complexity check level.
 
 ### validate_password.dictionary <span class="version-mark">New in v6.5.0</span>
 
@@ -4109,8 +4101,8 @@ Internally, the TiDB parser transforms the `SET TRANSACTION ISOLATION LEVEL [REA
 - Persists to cluster: Yes
 - Default value: `""`
 - Type: String
-- This variable is a check item in the password complexity check. It checks whether the password matches the dictionary. This variable takes effect only when [`validate_password.enable`](/system-variables.md#password_reuse_interval-new-in-v650) is enabled. To enable this check, the password policy (`validate_password.policy`) must be set to 2 (STRONG).
-- This variable is a string not longer than 1024. It contains a list of words separated by semicolon (`;`).
+- This variable is a check item in the password complexity check. It checks whether the password matches the dictionary. This variable takes effect only when [`validate_password.enable`](#validate_passwordenable-new-in-v650) is enabled and [`validate_password.policy`](#validate_passwordpolicy-new-in-v650) is set to 2 (STRONG).
+- This variable is a string not longer than 1024. It contains a list of words that cannot exist in the password. Each word is separated by semicolon (`;`).
 - This variable is set to an empty string by default, which means no dictionary check is performed. To perform the dictionary check, you need to include the match words in the string. If this variable is configured, when you set a password, TiDB compares each substring of the password of length 4 to 100 with the words in the dictionary. If any substring of the password matches a word in the dictionary, the password is rejected. The comparison is case-insensitive.
 
 ### validate_password.enable <span class="version-mark">New in v6.5.0</span>
@@ -4128,7 +4120,7 @@ Internally, the TiDB parser transforms the `SET TRANSACTION ISOLATION LEVEL [REA
 - Type: Integer
 - Default value: `8`
 - Range: `[0, 2147483647]`
-- This variable is a check item in the password complexity check. It checks whether the password length is sufficient. By default, the minimum password length is 8. This variable takes effect only when [`validate_password.enable`](/system-variables.md#password_reuse_interval-new-in-v650) is enabled.
+- This variable is a check item in the password complexity check. It checks whether the password length is sufficient. By default, the minimum password length is 8. This variable takes effect only when [`validate_password.enable`](#validate_passwordenable-new-in-v650) is enabled.
 - The value of this variable must not be smaller than the expression: `validate_password.number_count + validate_password.special_char_count + (2 * validate_password.mixed_case_count)`.
 - If you change the value of `validate_password.number_count`, `validate_password.special_char_count`, or `validate_password.mixed_case_count` such that the expression value is larger than `validate_password.length`, the value of `validate_password.length` is automatically changed to match the expression value.
 
@@ -4139,8 +4131,8 @@ Internally, the TiDB parser transforms the `SET TRANSACTION ISOLATION LEVEL [REA
 - Type: Integer
 - Default value: `1`
 - Range: `[0, 2147483647]`
-- This variable is a check item in the password complexity check. It checks whether the password contains sufficient uppercase and lowercase letters. This variable takes effect only when [`validate_password.enable`](/system-variables.md#password_reuse_interval-new-in-v650) is enabled. To enable this check, the password policy (`validate_password.policy`) must be set to 1 (MEDIUM) or larger.
-- The password must contain at least `validate_password.mixed_case_count` uppercase and lowercase letters. For example, when the variable is set to 1, the password must contain at least one uppercase letter and one lowercase letter.
+- This variable is a check item in the password complexity check. It checks whether the password contains sufficient uppercase and lowercase letters. This variable takes effect only when [`validate_password.enable`](#validate_passwordenable-new-in-v650) is enabled and [`validate_password.policy`](#validate_passwordpolicy-new-in-v650) must be set to 1 (MEDIUM) or larger.
+- Neither the number of uppercase letters nor the number of lowercase letters in the password can be fewer than the value of `validate_password.mixed_case_count`. For example, when the variable is set to 1, the password must contain at least one uppercase letter and one lowercase letter.
 
 ### validate_password.number_count <span class="version-mark">New in v6.5.0</span>
 
@@ -4149,7 +4141,7 @@ Internally, the TiDB parser transforms the `SET TRANSACTION ISOLATION LEVEL [REA
 - Type: Integer
 - Default value: `1`
 - Range: `[0, 2147483647]`
-- This variable is a check item in the password complexity check. It checks whether the password contains sufficient numbers. This variable takes effect only when [`validate_password.enable`](/system-variables.md#password_reuse_interval-new-in-v650) is enabled. To enable this check, the password policy (`validate_password.policy`) must be set to 1 (MEDIUM) or larger.
+- This variable is a check item in the password complexity check. It checks whether the password contains sufficient numbers. This variable takes effect only when [`validate_password.enable`](#password_reuse_interval-new-in-v650) is enabled and [`validate_password.policy`](#validate_passwordpolicy-new-in-v650) is set to 1 (MEDIUM) or larger.
 
 ### validate_password.policy <span class="version-mark">New in v6.5.0</span>
 
@@ -4158,7 +4150,7 @@ Internally, the TiDB parser transforms the `SET TRANSACTION ISOLATION LEVEL [REA
 - Type: Enumeration
 - Default value: `1`
 - Value options: `0`, `1`, `2`
-- This variable controls the policy for the password complexity check. This variable takes effect only when [`validate_password.enable`](/system-variables.md#password_reuse_interval-new-in-v650) is enabled. The value of this variable determines whether other `validate-password` variables take effect in the password complexity check, except for `validate_password.check_user_name`.
+- This variable controls the policy for the password complexity check. This variable takes effect only when [`validate_password.enable`](#password_reuse_interval-new-in-v650) is enabled. The value of this variable determines whether other `validate-password` variables take effect in the password complexity check, except for `validate_password.check_user_name`.
 - This value of this variable can be 0, 1, or 2 (corresponds to LOW, MEDIUM, or STRONG). Different policy levels have different checks:
     - 0 or LOW: password length.
     - 1 or MEDIUM: password length, uppercase and lowercase letters, numbers, and special characters.
@@ -4171,7 +4163,7 @@ Internally, the TiDB parser transforms the `SET TRANSACTION ISOLATION LEVEL [REA
 - Type: Integer
 - Default value: `1`
 - Range: `[0, 2147483647]`
-- This variable is a check item in the password complexity check. It checks whether the password contains sufficient special characters. This variable takes effect only when [`validate_password.enable`](/system-variables.md#password_reuse_interval-new-in-v650) is enabled. To enable this check, the password policy (`validate_password.policy`) must be set to 1 (MEDIUM) or larger.
+- This variable is a check item in the password complexity check. It checks whether the password contains sufficient special characters. This variable takes effect only when [`validate_password.enable`](#password_reuse_interval-new-in-v650) is enabled and [`validate_password.policy`](#validate_passwordpolicy-new-in-v650) is set to 1 (MEDIUM) or larger.
 
 ### version
 
