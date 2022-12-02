@@ -1,0 +1,109 @@
+---
+title: Use Time to Live
+summary: Use Time to Live to automatically expire and delete old data.
+---
+
+# Use Time to Live
+
+Time to live (TTL) is a feature that provides row-level data lifetime management in TiDB. The TTL attribute of a table allows TiDB to automatically delete expired data to prevent the storage space from growing indefinitely. This feature can effectively save storage space in some scenarios, such as regularly deleting verification code records.
+
+> **Warning:**
+>
+> This is an experimental feature. It is not recommended that you use it in a production environment.
+
+## Syntax
+
+You can configure the TTL attribute of a table using the [`CREATE TABLE`](/sql-statements/sql-statement-create-table.md) or [`ALTER TABLE`](/sql-statements/sql-statement-alter-table.md) statement.
+
+### Create a table with a TTL attribute
+
+- Create a table with a TTL attribute:
+
+    ```sql
+    CREATE TABLE t1 (
+        id int PRIMARY KEY,
+        created_at TIMESTAMP
+    ) TTL = `created_at` + INTERVAL 3 MONTH;
+    ```
+
+    The preceding example creates a table `t1` and specifies `created_at` as the TTL timestamp column, which indicates the creation time of the data. The example also sets the longest time a row is allowed to live in the table to 3 months through `INTERVAL 3 MONTH`. Data that lives longer than this value will be deleted later.
+
+- Set the `TTL_ENABLE` attribute to enable or disable the feature of cleaning up expired data:
+
+    ```sql
+    CREATE TABLE t1 (
+        id int PRIMARY KEY,
+        created_at TIMESTAMP
+    ) TTL = `created_at` + INTERVAL 3 MONTH TTL_ENABLE = 'OFF';
+    ```
+
+    By default, `TTL_ENABLE` is set to `ON`. If `TTL_ENABLE` is set to `OFF`, even if other TTL options are set, TiDB does not automatically clean up expired data in this table.
+
+- To be compatible with MySQL, you can set a TTL attribute using a comment:
+
+    ```sql
+    CREATE TABLE t1 (
+        id int PRIMARY KEY,
+        created_at TIMESTAMP
+    ) /*T![ttl] TTL = `created_at` + INTERVAL 3 MONTH TTL_ENABLE = 'OFF'*/;
+    ```
+
+    In TiDB, using table options and comments to configure TTL is equivalent. In MySQL, the comment is ignored and an ordinary table is created.
+
+### Modify the TTL attribute of a table
+
+- Modify the TTL attribute of a table:
+
+    ```sql
+    ALTER TABLE t1 TTL = `created_at` + INTERVAL 1 MONTH;
+    ```
+
+    You can use the preceding statement to modify a table with an existing TTL attribute or to add a TTL attribute to a table.
+
+- Modify the value of `TTL_ENABLE` for a table with the TTL attribute:
+
+    ```sql
+    ALTER TABLE t1 TTL_ENABLE = 'OFF';
+    ```
+
+- To remove all TTL attributes of a table:
+
+    ```sql
+    ALTER TABLE t1 REMOVE TTL;
+    ```
+
+## TTL job
+
+For each table with a TTL attribute, TiDB internally schedules a background job to clean up expired data. You can customize the execution period of the job by setting the [`tidb_ttl_job_run_interval`](/system-variables.md#tidb_ttl_job_run_interval-new-in-v650) global variable. The following example sets the background cleanup job to run once every 24 hours:
+
+```sql
+SET @@global.tidb_ttl_job_run_interval = '24h';
+```
+
+To disable the execution of the TTL job, in addition to setting the `TTL_ENABLE='OFF'` table option, you can also disable the execution of the TTL job in the entire cluster by setting the [`tidb_ttl_job_enable`](/system-variables.md#tidb_ttl_job_enable-new-in-v650) global variable:
+
+```sql
+SET @@global.tidb_ttl_job_enable = OFF;
+```
+
+In some scenarios, you might want to allow the TTL job to run only in a certain time window. In this case, you can set the [`tidb_ttl_job_schedule_window_start_time`](/system-variables.md#tidb_ttl_job_schedule_window_start_time-new-in-v650) and [`tidb_ttl_job_schedule_window_end_time`](/system-variables.md#tidb_ttl_job_schedule_window_end_time-new-in-v650) global variables to specify the time window. For example:
+
+```sql
+SET @@global.tidb_ttl_job_schedule_window_start_time = '01:00 +0000';
+SET @@global.tidb_ttl_job_schedule_window_end_time = '05:00 +0000';
+```
+
+The preceding statement allows the TTL job to be scheduled only between 1:00 and 5:00 UTC. By default, the time window is set to `00:00 +0000` to `23:59 +0000`, which allows the job to be scheduled at any time.
+
+## Compatibility with tools
+
+As an experimental feature, the TTL feature is not compatible with data import and export tools, including BR, TiDB Lightning, and TiCDC.
+
+## Limitations
+
+Currently, the TTL feature has the following limitations:
+
+* The TTL attribute cannot be set on temporary tables, including local temporary tables and global temporary tables.
+* Tables with the TTL attribute do not support being referenced by other tables as the primary table in a foreign key constraint.
+* It is not guaranteed that all expired data is deleted immediately. The time when expired data is deleted depends on the scheduling interval and scheduling window of the background cleanup job.
+* Currently, a single table can only run a cleanup job on a single TiDB node at a given time. This might cause performance bottlenecks in some scenarios (for example, when the table is extremely large). This issue will be optimized in future releases.
