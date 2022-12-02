@@ -39,12 +39,12 @@ TiDB BR provides the following features:
 
 Full backup backs up all data of a cluster at a specific time point. TiDB supports the following way of full backup:
 
-- Back up cluster snapshots: A snapshot of a TiDB cluster contains transactionally consistent data at a specific time. For details, see [Snapshot backup](/br/br-snapshot-guide.md#back-up-tidb-cluster-snapshots).
+- Back up cluster snapshots: A snapshot of a TiDB cluster contains transactionally consistent data at a specific time. For details, see [Snapshot backup](/br/br-snapshot-guide.md#back-up-cluster-snapshots).
 
 Full backup occupies much storage space and contains only cluster data at a specific time point. If you want to choose the restore point as required, that is, to perform point-in-time recovery (PITR), you can use the following two ways of backup at the same time:
 
 - Start [log backup](/br/br-pitr-guide.md#start-log-backup). After log backup is started, the task keeps running on all TiKV nodes and backs up TiDB incremental data in small batches to the specified storage periodically.
-- Perform [snapshot backup](/br/br-snapshot-guide.md#back-up-tidb-cluster-snapshots) regularly. Back up the full cluster data to the backup storage, for example, perform cluster snapshot backup at 0:00 AM every day.
+- Perform snapshot backup regularly. Back up the full cluster data to the backup storage, for example, perform cluster snapshot backup at 0:00 AM every day.
 
 #### Backup performance and impact on TiDB clusters
 
@@ -57,7 +57,7 @@ Corresponding to the backup features, you can perform two types of restore: full
 
 - Restore a full backup
 
-    - Restore cluster snapshot backup: You can restore snapshot backup data to an empty cluster or a cluster that does not have data conflicts (with the same schema or tables). For details, see [Restore snapshot backup](/br/br-snapshot-guide.md#restore-tidb-cluster-snapshots). In addition, you can restore specific databases or tables from the backup data and filter out unwanted data. For details, see [Restore specific databases or tables from backup data](/br/br-snapshot-guide.md#restore-a-database-or-a-table).
+    - Restore cluster snapshot backup: You can restore snapshot backup data to an empty cluster or a cluster that does not have data conflicts (with the same schema or tables). For details, see [Restore snapshot backup](/br/br-snapshot-guide.md#restore-cluster-snapshots). In addition, you can restore specific databases or tables from the backup data and filter out unwanted data. For details, see [Restore specific databases or tables from backup data](/br/br-snapshot-guide.md#restore-a-database-or-a-table).
 
 - Restore data to any point in time (PITR)
 

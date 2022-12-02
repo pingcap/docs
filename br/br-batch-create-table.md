@@ -18,7 +18,7 @@ To speed up the table creation process and reduce the time for restoring data, t
 
 If you need to restore data with a massive amount of tables, for example, 50000 tables, you can use the Batch Create Table feature to speed up the restore process.
 
-For the detailed effect, see [Test for the Batch Create Table Feature](#test-for-the-batch-create-table-feature).
+For the detailed effect, see [Test for the Batch Create Table Feature](#feature-test).
 
 ## Use Batch Create Table
 
@@ -32,7 +32,7 @@ br restore full \
 --ddl-batch-size=0
 ```
 
-After this feature is disabled, BR uses the [serial execution implementation](#implementation-principles) instead.
+After this feature is disabled, BR uses the [serial execution implementation](#implementation) instead.
 
 ## Implementation
 

@@ -52,7 +52,7 @@ A `br` command consists of multiple layers of sub-commands. Currently, br comman
 
 To back up cluster data, run the `br backup` command. You can add the `full` or `table` sub-command to specify the scope of your backup operation: the whole cluster (`full`) or a single table (`table`).
 
-- [Back up TiDB cluster snapshots](/br/br-snapshot-manual.md#back-up-tidb-cluster-snapshots)
+- [Back up TiDB cluster snapshots](/br/br-snapshot-manual.md#back-up-cluster-snapshots)
 - [Back up a database](/br/br-snapshot-manual.md#back-up-a-database)
 - [Back up a table](/br/br-snapshot-manual.md#back-up-a-table)
 - [Back up multiple tables with table filter](/br/br-snapshot-manual.md#back-up-multiple-tables-with-table-filter)

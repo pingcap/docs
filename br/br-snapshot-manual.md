@@ -7,7 +7,7 @@ summary: Learn about the commands of TiDB snapshot backup and restore.
 
 This document describes the commands of TiDB snapshot backup and restore according to the application scenarios, including:
 
-- [Back up cluster snapshots](#back-up-tidb-cluster-snapshots)
+- [Back up cluster snapshots](#back-up-cluster-snapshots)
 - [Back up a database](#back-up-a-database)
 - [Back up a table](#back-up-a-table)
 - [Back up multiple tables with table filter](#back-up-multiple-tables-with-table-filter)
@@ -67,7 +67,7 @@ br backup db \
     --log-file backuptable.log
 ```
 
-In the preceding command, `--db` specifies the database name, and other parameters are the same as those in [Back up TiDB cluster snapshots](#back-up-tidb-cluster-snapshots).
+In the preceding command, `--db` specifies the database name, and other parameters are the same as those in [Back up TiDB cluster snapshots](#back-up-cluster-snapshots).
 
 ### Back up a table
 
@@ -85,7 +85,7 @@ br backup table \
     --log-file backuptable.log
 ```
 
-In the preceding command, `--db` and `--table` specify the database name and table name respectively, and other parameters are the same as those in [Back up TiDB cluster snapshots](#back-up-tidb-cluster-snapshots).
+In the preceding command, `--db` and `--table` specify the database name and table name respectively, and other parameters are the same as those in [Back up TiDB cluster snapshots](#back-up-cluster-snapshots).
 
 ### Back up multiple tables with table filter
 
