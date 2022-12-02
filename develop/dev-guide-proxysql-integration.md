@@ -39,7 +39,7 @@ The most obvious way to deploy ProxySQL with TiDB is to add ProxySQL as a standa
 
 This section describes how to integrate TiDB with ProxySQL in a development environment. To get started with the ProxySQL integration, you can choose either of the following options depending on your TiDB cluster type after you have all the [prerequisites](#prerequisite) in place.
 
-- Option 1: [Integrate TiDB Cloud with ProxySQL](#option-1-integrate-tidb-cloud-with-proxysql)
+- Option 1: [Integrate TiDB Cloud (Serverless) with ProxySQL](#option-1-integrate-tidb-cloud-serverless-with-proxysql)
 - Option 2: [Integrate TiDB (self-hosted) with ProxySQL](#option-2-integrate-tidb-self-hosted-with-proxysql)
 
 ### Prerequisites
@@ -117,7 +117,7 @@ systemctl start docker
 
 </SimpleTab>
 
-### Option 1: Integrate TiDB Cloud with ProxySQL
+### Option 1: Integrate TiDB Cloud (Serverless) with ProxySQL
 
 For this integration, you will be using the [ProxySQL Docker image](https://hub.docker.com/r/proxysql/proxysql) along with a TiDB Serverless Tier cluster. The following steps will set up ProxySQL on port `16033`, so make sure this port is available.
 
