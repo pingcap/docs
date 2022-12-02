@@ -27,6 +27,10 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v6.1/quick-start-with-
         - Enable transaction split and disable the safe mode of a changefeed in TiCDC by default to improve performance [#7505](https://github.com/pingcap/tiflow/issues/7505) @[asddongmen](https://github.com/asddongmen)
         - Improve the performance of Kafka protocol encoder [#7540](https://github.com/pingcap/tiflow/issues/7540), [#7532](https://github.com/pingcap/tiflow/issues/7532), [#7543](https://github.com/pingcap/tiflow/issues/7543) @[sdojjy](https://github.com/sdojjy) @[3AceShowHand](https://github.com/3AceShowHand)
 
+- Others
+
+    - Upgrade the Go compiler version of TiDB from gox.x.x to go1.9, which improves the TiDB performance. <!--more information is to be provided>
+
 ## Bug fixes
 
 + TiDB
