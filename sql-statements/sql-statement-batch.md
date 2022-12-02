@@ -16,14 +16,13 @@ For details about the usage and restrictions, see [Non-transactional DML stateme
 When you use multi-table join in a `BATCH` statement, you need to specify the full path of the column to avoid ambiguity:
 
 ```sql
-BATCH ON test.t2.id LIMIT 1 INSERT INTO t SELECT t2.id, t2.v, t3.v FROM t2 JOIN t3 ON t2.id = t3.id;
+BATCH ON test.t2.id LIMIT 1 INSERT INTO t SELECT t2.id, t2.v, t3.v FROM t2 JOIN t3 ON t2.k = t3.k;
 ```
 
 The preceding statement specifies the column to be split as `test.t2.id`, which is unambiguous. If you use the `id` as follows, an error is reported:
 
 ```sql
-BATCH ON id LIMIT 1 INSERT INTO t SELECT t2.id, t2.v, t3.v FROM t2 JOIN t3 ON t2.id = t3.id;
-
+BATCH ON id LIMIT 1 INSERT INTO t SELECT t2.id, t2.v, t3.v FROM t2 JOIN t3 ON t2.k = t3.k;
 Non-transactional DML, shard column must be fully specified
 ```
 

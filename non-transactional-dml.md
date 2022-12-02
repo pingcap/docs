@@ -38,7 +38,14 @@ Before using non-transactional DML statements, make sure that the following cond
 - The data to be operated on has no other concurrent writes, which means it is not updated by other statements at the same time. Otherwise, unexpected results such as missing writes, wrong writes, and modifying the same line multiple times might occur.
 - The statement does not modify the data to be read by the statement itself. Otherwise, the following batch will read the data written by the previous batch and easily causes unexpected results.
 
-    - The shard column should not be updated in the statement. For example, for a non-transactional `UPDATE` statement, the split SQL statements are executed in sequence. The modification of the previous batch is read by the next batch after the previous batch is committed, which causes the same line of data to be modified multiple times.
+    - The shard column should not be modified when selecting from and modifying the same table within an non-transactional `INSERT INTO ... SELECT` statement. Otherwise, multiple batches might read the same row and insert data multiple times:
+        - It is not recommended to use `BATCH ON test.t.id LIMIT 10000 INSERT INTO t SELECT id+1, value FROM t;`.
+        - It is recommended to use `BATCH ON test.t.id LIMIT 10000 INSERT INTO t SELECT id, value FROM t;`.
+        - If the shard column `id` has the `AUTO_INCREMENT` attribute, it is recommended to use `BATCH ON test.t.id LIMIT 10000 INSERT INTO t(value) SELECT value FROM t;`.
+    - The shard column should not be updated in the non-transactional `UPDATE`, `INSERT ... ON DUPLICATE KEY UPDATE`, or `REPLACE INTO` statement:
+        - For example, for a non-transactional `UPDATE` statement, the split SQL statements are executed in sequence. The modification of the previous batch is read by the next batch after the previous batch is committed, which causes the same line of data to be modified multiple times.
+        - These statements do not support `BATCH ON test.t.id LIMIT 10000 UPDATE t SET test.t.id = test.t.id-1;`.
+        - It is not recommended to use `BATCH ON test.t.id LIMIT 1 INSERT INTO t SELECT id+1, value FROM t ON DUPLICATE KEY UPDATE id = id + 1;`.
     - The shard column should not be used as a Join key. For example, the following example uses the shard column `test.t.id` as a Join key, which causes a non-transactional `UPDATE` statement to modify the same line multiple times:
 
         ```sql
@@ -131,7 +138,7 @@ INSERT INTO t2 VALUES (1,1), (3,3), (5,5);
 Then, update the data of table `t2` by joining table `t` and `t2`. Note that the shard column needs to be specified with the complete database name, table name, and column name (`test.t.id`):
 
 ```sql
-BATCH ON test.t.id LIMIT 1 UPDATE t JOIN t2 ON t.id = t2.id SET t2.id = t2.id+1;
+BATCH ON test.t._tidb_rowid LIMIT 1 UPDATE t JOIN t2 ON t.id = t2.id SET t2.id = t2.id+1;
 ```
 
 Query the results:
@@ -232,7 +239,12 @@ To use a non-transactional DML statement, the following steps are recommended:
 
 1. Select an appropriate [shard column](#parameter-description). Integer or string types are recommended.
 2. Add `DRY RUN QUERY` to the non-transactional DML statement, execute the query manually, and confirm whether the data range affected by the DML statement is roughly correct.
-3. Add `DRY RUN` to the non-transactional DML statement, execute the query manually, and check the split statements and the execution plans. You need to pay attention to whether the split statement can read the result written by the previous statement, which might cause an anomaly. You also need to pay attention to index selection efficiency.
+3. Add `DRY RUN` to the non-transactional DML statement, execute the query manually, and check the split statements and the execution plans. You need to pay attention to the following points:
+
+    - Whether the split statement can read the result written by the previous statement, which might cause an anomaly.
+    - The index selectivity.
+    - Whether the shard column automatically selected by TiDB will be modified.
+
 4. Execute the non-transactional DML statement.
 5. If an error is reported, get the specific failed data range from the error message or log, and retry or handle it manually.
 
@@ -240,7 +252,7 @@ To use a non-transactional DML statement, the following steps are recommended:
 
 | Parameter | Description | Default value | Required or not | Recommended value |
 | :-- | :-- | :-- | :-- | :-- |
-| Shard column | The column used to shard batches, such as the `id` column in the above non-transactional DML statement `BATCH ON id LIMIT 2 DELETE FROM t WHERE v < 6`. | TiDB tries to automatically select a shard column. | No | Select a column that can meet the `WHERE` condition in the most efficient way. |
+| Shard column | The column used to shard batches, such as the `id` column in the above non-transactional DML statement `BATCH ON id LIMIT 2 DELETE FROM t WHERE v < 6`. | TiDB tries to automatically select a shard column (not recommended). | No | Select a column that can meet the `WHERE` condition in the most efficient way. |
 | Batch size | Used to control the size of each batch. The number of batches is the number of SQL statements into which DML operations are split, such as `LIMIT 2` in the above non-transactional DML statement `BATCH ON id LIMIT 2 DELETE FROM t WHERE v < 6`. The more batches, the smaller the batch size. | N/A | Yes | 1000-1000000. Too small or too large a batch will lead to performance degradation. |
 
 ### How to select a shard column
