@@ -9,7 +9,7 @@ Before TiDB v5.4.0, when you back up data using Backup & Restore (BR), the numbe
 
 To reduce the impact of backup tasks on the cluster, TiDB v5.4.0 introduces the auto-tune feature, which is enabled by default. When the cluster resource utilization is high, BR automatically limits the resources used by backup tasks and thereby reduces their impact on the cluster. The auto-tune feature is enabled by default.
 
-## User scenario
+## Usage scenario
 
 If you want to reduce the impact of backup tasks on the cluster, you can enable the auto-tune feature. With this feature enabled, TiDB performs backup tasks as fast as possible without excessively affecting the cluster.
 

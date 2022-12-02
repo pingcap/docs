@@ -7,12 +7,12 @@ summary: Learn about the commands of TiDB snapshot backup and restore.
 
 This document describes the commands of TiDB snapshot backup and restore according to the application scenarios, including:
 
-- [Back up TiDB cluster snapshots](#back-up-tidb-cluster-snapshots)
+- [Back up cluster snapshots](#back-up-tidb-cluster-snapshots)
 - [Back up a database](#back-up-a-database)
 - [Back up a table](#back-up-a-table)
 - [Back up multiple tables with table filter](#back-up-multiple-tables-with-table-filter)
 - [Encrypt the backup data](#encrypt-the-backup-data)
-- [Restore TiDB cluster snapshots](#restore-tidb-cluster-snapshots)
+- [Restore cluster snapshots](#restore-cluster-snapshots)
 - [Restore a database](#restore-a-database)
 - [Restore a table](#restore-a-table)
 - [Restore multiple tables with table filter](#restore-multiple-tables-with-table-filter)
@@ -23,7 +23,7 @@ For more information about snapshot backup and restore, refer to:
 - [Snapshot Backup and Restore Guide](/br/br-snapshot-guide.md)
 - [Backup and Restore Use Cases](/br/backup-and-restore-use-cases.md)
 
-## Back up TiDB cluster snapshots
+## Back up cluster snapshots
 
 You can back up the latest or specified snapshot of the TiDB cluster using the `br backup full` command. For more information about the command, run the `br backup full --help` command.
 
@@ -131,7 +131,7 @@ br backup full\
 > - If the key is lost, the backup data cannot be restored to the cluster.
 > - The encryption feature needs to be used on `br` and TiDB clusters v5.3.0 or later versions. The encrypted backup data cannot be restored on clusters earlier than v5.3.0.
 
-## Restore TiDB cluster snapshots
+## Restore cluster snapshots
 
 You can restore a TiDB cluster snapshot by running the `br restore full` command.
 
@@ -173,7 +173,7 @@ br restore db \
     --log-file restore_db.log
 ```
 
-In the preceding command, `--db` specifies the name of the database to be restored and other parameters are the same as those in [Restore TiDB cluster snapshots](#restore-tidb-cluster-snapshots).
+In the preceding command, `--db` specifies the name of the database to be restored and other parameters are the same as those in [Restore TiDB cluster snapshots](#restore-cluster-snapshots).
 
 > **Note:**
 >

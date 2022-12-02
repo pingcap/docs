@@ -56,7 +56,7 @@ To back up cluster data, run the `br backup` command. You can add the `full` or 
 - [Back up a database](/br/br-snapshot-manual.md#back-up-a-database)
 - [Back up a table](/br/br-snapshot-manual.md#back-up-a-table)
 - [Back up multiple tables with table filter](/br/br-snapshot-manual.md#back-up-multiple-tables-with-table-filter)
-- [Encrypt the snapshot](/br/backup-and-restore-storages.md#server-side-encryption)
+- [Encrypt snapshots](/br/backup-and-restore-storages.md#server-side-encryption)
 
 ## Commands of log backup
 
@@ -66,7 +66,7 @@ To start log backup and manage log backup tasks, run the `br log` command.
 - [Query the backup status](/br/br-pitr-manual.md#query-the-backup-status)
 - [Pause and resume a log backup task](/br/br-pitr-manual.md#pause-and-resume-a-backup-task)
 - [Stop and restart a log backup task](/br/br-pitr-manual.md#stop-and-restart-a-backup-task)
-- [Clean up the backup data](/br/br-pitr-manual.md#clean-up-the-backup-data)
+- [Clean up the backup data](/br/br-pitr-manual.md#clean-up-backup-data)
 - [View the backup metadata](/br/br-pitr-manual.md#view-the-backup-metadata)
 
 ## Commands of restoring backup data
@@ -74,7 +74,7 @@ To start log backup and manage log backup tasks, run the `br log` command.
 To restore cluster data, run the `br restore` command. You can add the `full`, `db`, or `table` sub-command to specify the scope of your restore: the whole cluster (`full`), a single database (`db`), or a single table (`table`).
 
 - [Point-in-time recovery](/br/br-pitr-manual.md#restore-to-a-specified-point-in-time-pitr)
-- [Restore TiDB cluster snapshots](/br/br-snapshot-manual.md#restore-tidb-cluster-snapshots)
+- [Restore cluster snapshots](/br/br-snapshot-manual.md#restore-cluster-snapshots)
 - [Restore a database](/br/br-snapshot-manual.md#restore-a-database)
 - [Restore a table](/br/br-snapshot-manual.md#restore-a-table)
 - [Restore multiple tables with table filter](/br/br-snapshot-manual.md#restore-multiple-tables-with-table-filter)

@@ -55,7 +55,7 @@ The output is as follows, corresponding to the physical time `2022-09-08 13:30:0
 435844546560000000
 ```
 
-## Restore TiDB cluster snapshots
+## Restore cluster snapshots
 
 You can restore a snapshot backup by running the `br restore full` command. Run `br restore full --help` to see the help information:
 

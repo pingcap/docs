@@ -6,12 +6,12 @@ aliases: ['/tidb/dev/br-log-command-line/']
 
 # TiDB Log Backup and PITR Command Manual
 
-This document describes the commands used in TiDB log backup point-in-time recovery (PITR).
+This document describes the commands used in TiDB log backup and point-in-time recovery (PITR).
 
-For more information about log backup and PITR, you can refer to the following documents:
+For more information about log backup and PITR, refer to:
 
-- [TiDB Log Backup and PITR Guide](/br/br-pitr-guide.md)
-- [TiDB Back up and Restore Use Cases](/br/backup-and-restore-use-cases.md)
+- [Log Backup and PITR Guide](/br/br-pitr-guide.md)
+- [Back up and Restore Use Cases](/br/backup-and-restore-use-cases.md)
 
 ## Perform log backup
 
@@ -137,7 +137,7 @@ checkpoint[global]: 2022-07-25 22:52:15.518 +0800; gap=2m52s
 
 The output fields are described as follows:
 
-- `status`: the status of the backup task. The status can be `NORMAL`, `ERROR`, or `PAUSE`.
+- `status`: the status of the backup task, which can be `NORMAL`, `ERROR`, or `PAUSE`.
 - `start`: the start time of the backup task. It is the `start-ts` value specified when the backup task is started.
 - `storage`: the backup storage address.
 - `speed`: the total QPS of the backup task. QPS means the number of logs backed per second.
@@ -180,7 +180,7 @@ Usage example:
 ./br log pause --task-name=pitr --pd="${PD_IP}:2379"
 ```
 
-You can run the `br log resume` command to resume the paused backup task.
+You can run the `br log resume` command to resume a paused backup task.
 
 Run `br log resume --help` to see the help information:
 
@@ -256,7 +256,7 @@ After running the `br log stop` command to stop a log backup task, you can creat
 - The `--start-ts` does not need to be specified. BR automatically starts the backup from the last backup checkpoint.
 - If the task is stopped for a long time and multiple versions of the data have been garbage collected, the error `BR:Backup:ErrBackupGCSafepointExceeded` is reported when you attempt to restart the task. In this case, you have to create a new log backup task in another `--storage` directory.
 
-### Clean up the backup data
+### Clean up backup data
 
 You can run the `br log truncate` command to clean up the outdated or no longer needed log backup data.
 
@@ -280,7 +280,7 @@ Global Flags:
   -s, --storage string         specify the url where backup storage, eg, "s3://bucket/path/prefix"
 ```
 
-This command only accesses the backup storage, but does not access the TiDB cluster. Some parameters are described as follows:
+This command only accesses the backup storage and does not access the TiDB cluster. Some parameters are described as follows:
 
 - `--dry-run`: run the command but do not really delete the files.
 - `--until`: delete all log backup data before the specified timestamp.
@@ -305,7 +305,7 @@ Removing metadata... DONE; take = 24.038962ms
 
 ### View the backup metadata
 
-You can run the `br log metadata` command to view the metadata of the log backup in the backup storage, such as the earliest and latest timestamp that can be restored.
+You can run the `br log metadata` command to view the backup metadata in the storage system, such as the earliest and latest timestamp that can be restored.
 
 Run `br log metadata --help` to see the help information:
 
@@ -323,7 +323,7 @@ Global Flags:
   -s, --storage string         specify the url where backup storage, eg, "s3://bucket/path/prefix"
 ```
 
-This command only accesses the backup storage, but does not access the TiDB cluster.
+This command only accesses the backup storage and does not access the TiDB cluster.
 
 The `--storage` parameter is used to specify the backup storage address. Currently, BR supports Amazon S3, GCS, or Azure Blob Storage as the storage for log backup. For details, see [URL format of backup storages](/br/backup-and-restore-storages.md#url-format).
 
@@ -369,9 +369,9 @@ Global Flags:
 
 The example output only shows the common parameters. These parameters are described as follows:
 
-- `--full-backup-storage`: the storage address for the snapshot (full) backup. If you need to use PITR, you must specify this parameter and choose the latest snapshot backup before the restore timestamp. If you only need to restore log backup data, you can omit this parameter. Currently, BR supports Amazon S3, GCS, or Azure Blob Storage as the storage for log backup. For details, see [URL format of backup storages](/br/backup-and-restore-storages.md#url-format).
+- `--full-backup-storage`: the storage address for the snapshot (full) backup. To use PITR, specify this parameter and choose the latest snapshot backup before the restore timestamp. To restore only log backup data, you can omit this parameter. Currently, BR supports Amazon S3, GCS, or Azure Blob Storage as the storage for log backup. For details, see [URL format of backup storages](/br/backup-and-restore-storages.md#url-format).
 - `--restored-ts`: the timestamp that you want to restore data to. If this parameter is not specified, BR restores data to the latest timestamp available in the log backup, that is, the checkpoint of the backup data.
-- `--start-ts`: the start timestamp that you want to restore log backup data from. If you only need to restore log backup data and do not need snapshot backup data, you must specify this parameter.
+- `--start-ts`: the start timestamp that you want to restore log backup data from. If you only need to restore log backup data, you must specify this parameter.
 - `--pd`: the PD address of the restore cluster.
 - `--ca`, `--cert`, `--key`: specify the mTLS encryption method to communicate with TiKV and PD.
 - `--storage`: the storage address for the log backup. Currently, BR supports Amazon S3, GCS, or Azure Blob Storage as the storage for log backup. For details, see [URL format of backup storages](/br/backup-and-restore-storages.md#url-format).
