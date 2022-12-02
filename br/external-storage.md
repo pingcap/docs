@@ -209,6 +209,7 @@ To export data to non-AWS S3 cloud storage, specify the cloud provider and wheth
 ### Azblob command-line parameters
 
 | Command-line parameter | Description |
+|:----------|:------|
 | `--azblob.account-name` | The account name of the storage |
 | `--azblob.account-key` | The access key |
 | `--azblob.access-tier` | Access tier of the uploaded objects (for example, `Hot`, `Cool`, `Archive`). If `access-tier` is not set (the value is empty), the value is `Hot` by default. |

@@ -12,7 +12,7 @@ Snapshot backup is an implementation to back up the entire cluster. It is based 
 
 Besides basic backup and restore, snapshot backup and restore also provides the following features:
 
-* Backup data of a specified time point
+* [Backup data of a specified time point](#back-up-tidb-cluster-snapshots)
 * [Restore data of a specified database or table](#restore-a-database-or-a-table)
 
 ## Back up TiDB cluster snapshots
