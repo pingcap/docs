@@ -117,7 +117,7 @@ systemctl start docker
 
 </SimpleTab>
 
-### Option 1: Integrate TiDB Cloud with ProxySQL
+### Option 1: Integrate TiDB Cloud (Serverless) with ProxySQL
 
 For this integration, you will be using the [ProxySQL Docker image](https://hub.docker.com/r/proxysql/proxysql) along with a TiDB Serverless Tier cluster. The following steps will set up ProxySQL on port `16033`, so make sure this port is available.
 
