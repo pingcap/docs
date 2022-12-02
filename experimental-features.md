@@ -44,6 +44,10 @@ Elastic scheduling feature. It enables the TiDB cluster to dynamically scale out
 + [Titan Level Merge](/storage-engine/titan-configuration.md#level-merge-experimental) (Introduced in v4.0)
 + Divide Regions are divided into buckets. [Buckets are used as the unit of concurrent query](/tune-region-performance.md#use-bucket-to-increase-concurrency) to improve the scan concurrency. (Introduced in v6.1.0)
 
+## Backup and restoration
+
+- [Back up and restore RawKV](/br/rawkv-backup-and-restore.md) (Introduced in v3.1)
+
 ## Data migration
 
 + [Use WebUI](/dm/dm-webui-guide.md) to manage migration tasks in DM. (Introduced in v6.0)
