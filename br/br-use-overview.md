@@ -17,7 +17,7 @@ Before using TiDB backup and restore features, it is recommended that you unders
 **TiDB provides two types of backup. Which one should I use?** Full backup contains the full data of a cluster at a certain point in time. Log backup contains the data changes written to TiDB. It is recommended to use both types of backup at the same time:
 
 - **[Start log backup](/br/br-pitr-guide.md#start-log-backup)**: Run the `br log start` command to start the log backup task. After that, the task keeps running on all TiKV nodes and backs up TiDB data changes to the specified storage in small batches regularly.
-- **Perform [snapshot (full) backup](/br/br-snapshot-guide.md#back-up-tidb-cluster-snapshots) regularly**: Run the `br backup full` command to back up the snapshot of the cluster to the specified storage. For example, back up the cluster snapshot at 0:00 AM every day.
+- **Perform [snapshot (full) backup](/br/br-snapshot-guide.md#back-up-cluster-snapshots) regularly**: Run the `br backup full` command to back up the snapshot of the cluster to the specified storage. For example, back up the cluster snapshot at 0:00 AM every day.
 
 ### How to manage backup data?
 

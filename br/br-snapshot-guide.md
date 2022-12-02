@@ -15,7 +15,7 @@ Besides basic backup and restore, snapshot backup and restore also provides the 
 * [Backup data of a specified time point](#back-up-tidb-cluster-snapshots)
 * [Restore data of a specified database or table](#restore-a-database-or-a-table)
 
-## Back up TiDB cluster snapshots
+## Back up cluster snapshots
 
 You can back up a TiDB cluster snapshot by running the `br backup full` command. Run `br backup full --help` to see the help information:
 
