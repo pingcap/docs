@@ -12,7 +12,7 @@ Snapshot backup is an implementation to back up the entire cluster. It is based 
 
 Besides basic backup and restore, snapshot backup and restore also provides the following features:
 
-* [Backup data of a specified time point](#back-up-tidb-cluster-snapshots)
+* [Backup data of a specified time point](#back-up-cluster-snapshots)
 * [Restore data of a specified database or table](#restore-a-database-or-a-table)
 
 ## Back up cluster snapshots
@@ -59,7 +59,7 @@ The output is as follows, corresponding to the physical time `2022-09-08 13:30:0
 
 You can restore a snapshot backup by running the `br restore full` command. Run `br restore full --help` to see the help information:
 
-The following example restores the [preceding backup snapshot](#back-up-tidb-cluster-snapshots) to a target cluster:
+The following example restores the [preceding backup snapshot](#back-up-cluster-snapshots) to a target cluster:
 
 ```shell
 tiup br restore full --pd "${PD_IP}:2379" \
