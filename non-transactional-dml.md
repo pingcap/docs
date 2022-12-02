@@ -11,7 +11,14 @@ A non-transactional DML statement is a DML statement split into multiple SQL sta
 
 Usually, memory-consuming transactions need to be split into multiple SQL statements to bypass the transaction size limit. Non-transactional DML statements integrate this process into the TiDB kernel to achieve the same effect. You can understand the effect of non-transactional DML statements by splitting SQL statements. The `DRY RUN` syntax can be used to preview the split statements.
 
-Non-transactional DML statements include `INSERT`, `REPLACE`, `UPDATE`, and `DELETE`. For detailed syntax, see [`BATCH`](/sql-statements/sql-statement-batch.md).
+Non-transactional DML statements include:
+
+- `INSERT INTO ... SELECT`
+- `REPLACE INTO .. SELECT`
+- `UPDATE`
+- `DELETE`
+
+For detailed syntax, see [`BATCH`](/sql-statements/sql-statement-batch.md).
 
 > **Note:**
 >
