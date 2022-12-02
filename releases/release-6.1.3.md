@@ -47,11 +47,11 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v6.1/quick-start-with-
 
     <!--executor owner: zanmato1984-->
 
-    - Fix the issue that function `str_to_date` returns wrong result under the `NO_ZERO_DATE` SQL Mode [#39146](https://github.com/pingcap/tidb/issues/39146) @[mengxin9014](https://github.com/mengxin9014)
+    - Fix the issue that the function `str_to_date` returns wrong result in the `NO_ZERO_DATE` SQL mode [#39146](https://github.com/pingcap/tidb/issues/39146) @[mengxin9014](https://github.com/mengxin9014)
 
     <!--planner owner: qw4990-->
 
-    - Fix the issue that statistics collecting tasks in the background might panic [#35421](https://github.com/pingcap/tidb/issues/35421) @[lilinghai](https://github.com/lilinghai)
+    - Fix the issue that statistics collection tasks in the background might panic [#35421](https://github.com/pingcap/tidb/issues/35421) @[lilinghai](https://github.com/lilinghai)
 
     <!--transaction owner: cfzjywxk-->
 
