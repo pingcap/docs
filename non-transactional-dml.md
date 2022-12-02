@@ -285,6 +285,7 @@ The information of each batch is stored in memory, so too many batches can signi
 The following are hard restrictions on non-transactional DML statements. If these restrictions are not met, TiDB will report an error.
 
 - The DML statements cannot contain `ORDER BY` or `LIMIT` clauses.
+- Subqueries or set operations are not supported.
 - The shard column must be indexed. The index can be a single-column index, or the first column of a joint index.
 - Must be used in the [`autocommit`](/system-variables.md#autocommit) mode.
 - Cannot be used when batch-dml is enabled.
