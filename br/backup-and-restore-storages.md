@@ -1,12 +1,6 @@
 ---
-<<<<<<< HEAD
-title: External Storages
-summary: Describes the storage URL format used in BR, TiDB Lightning, and Dumpling.
-=======
 title: Backup Storages
 summary: Describes the storage URL format used in TiDB backup and restore.
-aliases: ['/docs/dev/br/backup-and-restore-storages/','/tidb/dev/backup-storage-S3/','/tidb/dev/backup-storage-azblob/','/tidb/dev/backup-storage-gcs/']
->>>>>>> e181b2701 (Refactor br (#11481))
 ---
 
 # Backup Storages
