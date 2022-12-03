@@ -1,12 +1,6 @@
 ---
-<<<<<<< HEAD
-title: BR Overview
-summary: Learn about the definition and functions of BR.
-=======
 title: TiDB Backup & Restore Overview
 summary: Learn about the definition and features of TiDB Backup & Restore.
-aliases: ['/docs/dev/br/backup-and-restore-tool/','/docs/dev/reference/tools/br/br/','/docs/dev/how-to/maintain/backup-and-restore/br/','/tidb/dev/backup-and-restore-tool/','/tidb/dev/point-in-time-recovery/']
->>>>>>> e181b2701 (Refactor br (#11481))
 ---
 
 # TiDB Backup & Restore Overview
