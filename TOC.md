@@ -521,7 +521,7 @@
     - [Deploy](/ticdc/deploy-ticdc.md)
     - [Maintain](/ticdc/manage-ticdc.md)
     - Create Changefeed
-      - [Replicate Data to Cloud Storage](/ticdc/ticdc-sink-to-cloud-storage.md)
+      - [Replicate Data to Storage Services](/ticdc/ticdc-sink-to-cloud-storage.md)
     - Monitor and Alert
       - [Monitoring Metrics](/ticdc/monitor-ticdc.md)
       - [Alert Rules](/ticdc/ticdc-alert-rules.md)

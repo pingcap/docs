@@ -1,11 +1,11 @@
 ---
-title: Replicate Data to Cloud Storage
-summary: Learn how to replicate data to cloud storage using TiCDC.
+title: Replicate Data to Storage Services
+summary: Learn how to replicate data to storage services using TiCDC.
 ---
 
-# Replicate Data to Cloud Storage
+# Replicate Data to Storage Services
 
-Since v6.5.0, TiCDC supports saving row change events to Amazon S3, Azure Blob Storage, and NFS. This document describes how to create a changefeed that replicates incremental data to these cloud storages using TiCDC.
+Since v6.5.0, TiCDC supports saving row change events to Amazon S3, Azure Blob Storage, and NFS. This document describes how to create a changefeed that replicates incremental data to cloud storages using TiCDC.
 
 ## Create a changefeed
 
@@ -14,45 +14,27 @@ Run the following command to create a changefeed task:
 ```shell
 cdc cli changefeed create \
     --server=http://10.0.10.25:8300 \
-    --sink-uri="s3://logbucket/storage_test?access-key=minioadmin&secret-access-key=minioadmin&endpoint=http://10.2.7.69:9000&force-path-style=true&protocol=canal-json" \
+    --sink-uri="s3://logbucket/storage_test?force-path-style=true&protocol=canal-json" \
     --changefeed-id="simple-replication-task"
 ```
 
 ```shell
-Info: {"upstream_id":7171388873935111376,"namespace":"default","id":"simple-replication-task","sink_uri":"s3://logbucket/storage_test?access-key=minioadmin\u0026secret-access-key=minioadmin\u0026endpoint=http://10.2.7.69:9000\u0026force-path-style=true\u0026protocol=canal-json","create_time":"2022-11-29T18:52:05.566016967+08:00","start_ts":437706850431664129,"engine":"unified","config":{"case_sensitive":true,"enable_old_value":true,"force_replicate":false,"ignore_ineligible_table":false,"check_gc_safe_point":true,"enable_sync_point":false,"sync_point_interval":600000000000,"sync_point_retention":86400000000000,"filter":{"rules":["*.*"],"event_filters":null},"mounter":{"worker_num":16},"sink":{"protocol":"canal-json","schema_registry":"","csv":{"delimiter":",","quote":"\"","null":"\\N","include_commit_ts":false},"column_selectors":null,"transaction_atomicity":"none","encoder_concurrency":16,"terminator":"\r\n","date_separator":"none","enable_partition_separator":false},"consistent":{"level":"none","max_log_size":64,"flush_interval":2000,"storage":""}},"state":"normal","creator_version":"v6.5.0-master-dirty"}
+Info: {"upstream_id":7171388873935111376,"namespace":"default","id":"simple-replication-task","sink_uri":"s3://logbucket/storage_test?force-path-style=true\u0026protocol=canal-json","create_time":"2022-11-29T18:52:05.566016967+08:00","start_ts":437706850431664129,"engine":"unified","config":{"case_sensitive":true,"enable_old_value":true,"force_replicate":false,"ignore_ineligible_table":false,"check_gc_safe_point":true,"enable_sync_point":false,"sync_point_interval":600000000000,"sync_point_retention":86400000000000,"filter":{"rules":["*.*"],"event_filters":null},"mounter":{"worker_num":16},"sink":{"protocol":"canal-json","schema_registry":"","csv":{"delimiter":",","quote":"\"","null":"\\N","include_commit_ts":false},"column_selectors":null,"transaction_atomicity":"none","encoder_concurrency":16,"terminator":"\r\n","date_separator":"none","enable_partition_separator":false},"consistent":{"level":"none","max_log_size":64,"flush_interval":2000,"storage":""}},"state":"normal","creator_version":"v6.5.0-master-dirty"}
 ```
 
 - `--changefeed-id`: The ID of the changefeed. The format must match the `^[a-zA-Z0-9]+(\-[a-zA-Z0-9]+)*$` regular expression. If this ID is not specified, TiCDC automatically generates a UUID (the version 4 format) as the ID.
-- `--sink-uri`: The downstream address of the changefeed. For details, see [Configure Cloud Storage in Sink URI](#configure-cloud-storage-in-sink-uri).
+- `--sink-uri`: The downstream address of the changefeed. For details, see [Configure Cloud Storage in Sink URI](#configure-sink-uri).
 - `--start-ts`: The starting TSO of the changefeed. From this TSO, the TiCDC cluster starts pulling data. The default value is the current time.
 - `--target-ts`: The ending TSO of the changefeed. To this TSO, the TiCDC cluster stops pulling data. The default value is empty, which means that TiCDC does not automatically stop pulling data.
 - `--config`: The configuration file of the `changefeed`. For details, see [TiCDC changefeed configuration parameters](/ticdc/ticdc-changefeed-config.md)
 
-## Configure cloud storage in sink URI
+## Configure sink URI
 
 This section describes how to configure cloud storage, including `S3`, `Azure Blob Storage`, and `NFS`, in the changefeed URI.
 
-### Configure S3 in sink URI
+### Configure S3 or Azure Blob Storage in sink URI
 
-The following configuration saves row change events to Amazon S3:
-
-```shell
---sink-uri="s3://my-bucket/prefix?region=us-west-2&worker-count=4"
-```
-
-The URI parameters of Amazon S3 in TiCDC are the same as the URL parameters of Amazon S3 in BR. For details, see [S3 URL parameters](/br/backup-and-restore-storages.md#s3-url-parameters).
-
-### Configure Azure Blob Storage in sink URI
-
-The following configuration saves row change events to Azure Blob Storage:
-
-```shell
---sink-uri="azblob://my-bucket/prefix"
-or
---sink-uri="azure://my-bucket/prefix"
-```
-
-The URI parameters of Azure Blob Storage in TiCDC are the same as the URL parameters of Azure Blob Storage in BR. For details, see [Azblob URL parameters](/br/backup-and-restore-storages.md#azblob-url-parameters).
+The URI parameters of Amazon S3 and Azure Blob Storage in TiCDC are the same as their URL parameters in BR. For details, see [Backup storage URL format](/br/backup-and-restore-storages#url-format-description).
 
 ### Configure NFS in sink URI
 
@@ -68,7 +50,7 @@ Other parameters optional in the URI are as follows:
 | Parameter         | Description                                             |
 | :------------ | :------------------------------------------------ |
 | `worker-count` | Concurrency for saving data changes to cloud storage in the downstream (optional, default value: `16`, value range: [`1`, `512`] |
-| `flush-interval` | Interval for saving data changes to cloud storage in the downstream (optional, default value: `5s`, value range: [`2s`, `10s`] |
+| `flush-interval` | Interval for saving data changes to cloud storage in the downstream (optional, default value: `5s`, value range: [`2s`, `10m`] |
 | `file-size` | A data change file is stored to cloud storage if its bytes exceed the value of this parameter (optional, default value: `67108864`, value range: [`67108864`, `536870912`]) |
 
 > **Note:**
