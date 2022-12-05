@@ -13,7 +13,7 @@ This feature helps you migrate your database and its ongoing changes to TiDB Clo
 
 - The Data Migration feature is available only for **Dedicated Tier** clusters.
 
-- The Data Migration feature is only available to clusters created in the AWS Oregon (us-west-2) and AWS Singapore (ap-southeast-1) regions after November 9, 2022. If your cluster was created before the date or if your cluster is in another region, this feature is not available to your cluster and the **Data Migration** tab will not be displayed on the cluster overview page in the TiDB Cloud console.
+- The Data Migration feature is only available to clusters in the projects that are created in the AWS Oregon (us-west-2) and AWS Singapore (ap-southeast-1) regions after November 9, 2022. If your cluster was created before the date or if your cluster is in another region, this feature is not available to your cluster and the **Data Migration** tab will not be displayed on the cluster overview page in the TiDB Cloud console.
 
 - Currently, the Data Migration feature is in beta, and you can create only one migration job **for free** for each organization. To create more migration jobs, you need to [file a support ticket](/tidb-cloud/tidb-cloud-support.md).
 
@@ -60,7 +60,7 @@ The username you use for the upstream database must have all the following privi
 For example, you can use the following `GRANT` statement to grant corresponding privileges:
 
 ```sql
-GRANT SELECT,LOCK TABLES,REPLICATION SLAVE,REPLICATION CLIENT, ON *.* TO 'your_user'@'your_IP_address_of_host'
+GRANT SELECT,LOCK TABLES,REPLICATION SLAVE,REPLICATION CLIENT ON *.* TO 'your_user'@'your_IP_address_of_host'
 ```
 
 ### Grant required privileges to the downstream TiDB Cloud cluster
@@ -91,7 +91,7 @@ To quickly test a migration job, you can use the `root` account of the TiDB Clou
 
 Before creating a migration job, set up the network connection according to your connection methods. See [Connect to Your TiDB Cluster](/tidb-cloud/connect-to-tidb-cluster.md).
 
-- If you use public IP (this is, standard connection) for network connection, make sure that the upstream and downstream databases can be connected through the public network.
+- If you use public IP (this is, standard connection) for network connection, make sure that the upstream database can be connected through the public network.
 
 - If you use VPC Peering, set it up according to [Add VPC peering requests](/tidb-cloud/set-up-vpc-peering-connections.md#step-1-add-vpc-peering-requests).
 
@@ -125,7 +125,10 @@ On the **Create Migration Job** page, configure the source and target connection
    - **Port**: the port of the data source.
    - **Username**: the username of the data source.
    - **Password**: the password of the username.
-   - **SSL/TLS**: whether to use SSL/TLS connection for the data source. If you enable SSL/TLS, you need to upload the certificates of the data source, including the CA certificate, client certificate, and client key.
+   - **SSL/TLS**: if you enable SSL/TLS, you need to upload the certificates of the data source, including any of the following:
+        - only the CA certificate
+        - the client certificate and client key
+        - the CA certificate, client certificate and client key
 
 3. Fill in the target connection profile.
 
@@ -137,7 +140,7 @@ On the **Create Migration Job** page, configure the source and target connection
 5. Take action according to the message you see:
 
     - If you use Public IP or VPC Peering, you need to add the Data Migration service's IP addresses to the IP Access List of your source database and firewall (if any).
-    - If you use Private Link, you are prompted to accept the endpoint request in your account.
+    - If you use Private Link, you are prompted to accept the endpoint request. Go to the [AWS VPC console](https://us-west-2.console.aws.amazon.com/vpc/home), and click **Endpoint services** to accept the endpoint request.
 
 ## Step 3: Choose the objects to be migrated
 
@@ -146,27 +149,27 @@ On the **Create Migration Job** page, configure the source and target connection
     > **Tip:**
     >
     > - To migrate data to TiDB Cloud once and for all, choose both **Full data migration** and **Incremental data migration**, which ensures data consistency between the source and target databases.
-    > - To migrate only the existing data of the source database to TiDB Cloud, choose the **Full data migration** checkbox.
+    > - To migrate only the existing data of the source database to TiDB Cloud, only choose the **Full data migration** checkbox.
 
 2. On the **Choose Objects to Migrate** page, select the objects to be migrated. You can click **All** to select all objects, or click **Customize** and then click the checkbox next to the object name to select the object.
 
     - If you click **All**, the migration job will migrate the existing data from the whole source database instance to TiDB Cloud and replicate ongoing changes after the full migration. Note that it happens only if you have selected the **Full data migration** and **Incremental data migration** checkboxes in the previous step.
 
-    ![Select All Objects](/media/tidb-cloud/migration-job-select-all.png)
+        <img src="https://download.pingcap.com/images/docs/tidb-cloud/migration-job-select-all.png" width="60%" />
 
     - If you click **Customize** and select some databases, the migration job will migrate the existing data and replicate ongoing changes of the selected databases to TiDB Cloud. Note that it happens only if you have selected the **Full data migration** and **Incremental data migration** checkboxes in the previous step.
 
-    ![Select Databases](/media/tidb-cloud/migration-job-select-db.png)
+        <img src="https://download.pingcap.com/images/docs/tidb-cloud/migration-job-select-db.png" width="60%" />
 
     - If you click **Customize** and select some tables under a dataset name, the migration job only will migrate the existing data and replicate ongoing changes of the selected tables. Tables created afterwards in the same database will not be migrated.
 
-    ![Select Tables](/media/tidb-cloud/migration-job-select-tables.png)
+        <img src="https://download.pingcap.com/images/docs/tidb-cloud/migration-job-select-tables.png" width="60%" />
 
+    <!--
     - If you click **Customize** and select some databases, and then select some tables in the **Selected Objects** area to move them back to the **Source Database** area, (for example the `username` table in the following screenshots), then the tables will be treated as in a blocklist. The migration job will migrate the existing data but filter out the excluded tables (such as the `username` table in the screenshots), and will replicate ongoing changes of the selected databases to TiDB Cloud except the filtered-out tables.
-
-    ![Select Databases and Deselect Some Tables](/media/tidb-cloud/migration-job-select-db-blacklist1.png)
-
-    ![Select Databases and Deselect Some Tables](/media/tidb-cloud/migration-job-select-db-blacklist2.png)
+        ![Select Databases and Deselect Some Tables](/media/tidb-cloud/migration-job-select-db-blacklist1.png)
+        ![Select Databases and Deselect Some Tables](/media/tidb-cloud/migration-job-select-db-blacklist2.png)
+    -->
 
 3. Click **Next**.
 
