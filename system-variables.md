@@ -245,7 +245,18 @@ For more possible values of this variable, see [Authentication plugin status](/s
 - Type: Boolean
 - Default value: `ON`
 - This variable is read-only. It indicates whether to disconnect the client connection when the password is expired. If the variable is set to `ON`, the client connection is disconnected when the password is expired. If the variable is set to `OFF`, the client connection is restricted to the "sandbox mode" and the user can only execute the password reset operation.
+
+<CustomContent platform="tidb">
+
 - If you need to change the behavior of the client connection for the expired password, modify the [`security.disconnect-on-expired-password`](/tidb-configuration-file.md#disconnect-on-expired-password-new-in-v650) configuration item in the configuration file.
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+- If you need to change the behavior of the client connection for the expired password, modify the [`security.disconnect-on-expired-password`](https://docs.pingcap.com/tidb/stable/tidb-configuration-file#disconnect-on-expired-password-new-in-v650) configuration item in the configuration file.
+
+</CustomContent>
 
 ### error_count
 
