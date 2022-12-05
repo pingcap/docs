@@ -75,21 +75,35 @@ The **Sink to MySQL** connector can only sink incremental data from your TiDB cl
 After completing the prerequisites, you can sink your data to MySQL.
 
 1. Navigate to the **Data Replication** > **Changefeed** tab of your TiDB cluster.
+
 2. Click **Sink to MySQL**.
-3. Fill in the MySQL Endpoints, user, and password in **MySQL Connection**, then click **Next** to test connectivity
+
+3. Fill in the MySQL Endpoints, user, and password in **MySQL Connection**.
+
+4. Optionally, if you need to configure the following advanced options, you can click on **Show advanced configuration**.
+    - In **Timezone**, you can select the timezone used to convert time type data, like `timestamp`.
+
+5. Click **Next** to test connectivity
     - If the connectivity of MySQL is fine, it will go to the next step of configuration.
     - Otherwise, it will display the connectivity error, which you need to deal with the error before clicking **Next** again.
 
-4. Filter the tables that do not need to be replicated and set the starting position of the sink
-    - **Table Filter** provides a simple way to filter the tables that need to be replicated by customing [table filter rules](/table-filter.md). Defaultlly there is a rule `*. *`, which stands for synchronizing all tables.
-        - Whenever you add a new rule, TiDB Cloud will query all the tables in TiDB and display the tables that can be synchronized in the list box on the right. Butthe list box on the right does not show the new tables that will also be replicated in the future, and the schema to be full replicated.
-    - In **Start Position**, Configure the starting position for this sink
-        - If you do [Full load data](#full-load-data), you must fill in the specific TSO  that Dumpling provides.
-        - If you do not have any data in your TiDB Cluster, you can choose **start replication from now on**.
-        - Otherwise, you can custom the start time point by choosing **Start replica from a specific time**.
+6. **Table Filter** provides a simple way to filter the tables that need to be replicated by customing [table filter rules](/table-filter.md).
+    - Defaultlly there is a rule `*. *`, which stands for replicating all tables. Whenever you add a new rule, TiDB Cloud will query all the tables in TiDB and display the tables that can be replicated in the list box on the right.  **Note:** The list box on the right does not show the new tables to be replicated in the future, and the schema to be full replicated.
+    - TiDB Cloud also lists tables that do not have unique and primary keys, and these tables may have inconsistent data in downstream during replication due to interrupt recovery. You can choose, not to replicate all tables that do not have unique and primary keys, or replicate these tables.
 
-5. Click **Next** and after a while, the sink will begin its work, and the status of the sink will be changed to "**Producing**".
-6. After the operation is complete, set the GC time back (the default value is `10m`):
+7. In **Start Position**, configure the starting position for your sink
+    - If you do [Full load data](#full-load-data), you must fill in the TSO that Dumpling provides in **Start replication from a specific TSO**.
+    - If you do not have any data in your TiDB Cluster, you can choose **Start replication from now on**.
+    - Otherwise, you can custom the start time point by choosing **Start replica from a specific time**.
+
+7. Click **Next** to Changefee Preview
+    - if you want to modify some configurations, click **Previous** to go back to the previous page.
+    - Othwise, Check the compliance of cross region replication prompt, and click **Create**.
+
+8. After a while, the sink will begin its work, and the status of the sink will be changed to "**Running**".
+    - Clicking on the Changefeed card, then you can see the Changfefeed running status in a pop-up window, including Checkpoint, replication latency, etc.
+
+9. Optionally, after the operation is complete, set the GC time back (the default value is `10m`):
 
 {{< copyable "sql" >}}
 
@@ -99,8 +113,18 @@ SET GLOBAL tidb_gc_life_time = '10m';
 
 ## Delete a Sink
 
-1. Navigate to the **Changefeed** tab of a cluster.
-2. Click the trash button of **Sink to MySQL**.
+1. Navigate to the **Data Replication** > **Changefeed** tab of a cluster.
+2. Clicking on the Changefeed card, then click **Delete**.
+
+## Puase or Resume a Sink
+
+1. Navigate to the **Data Replication** > **Changefeed** tab of a cluster.
+2. Clicking on the Changefeed card, then click **Pause** or **Resume**.
+
+## Query TCU
+
+1. Navigate to the **Data Replication** > **Changefeed** tab of a cluster.
+2. The current TiCDC Capacity Units are displayed in the upper right corner of the page.
 
 ## Restrictions
 
