@@ -886,39 +886,57 @@ In this command:
 
 Starting from v6.5.0, TiCDC supports bi-directional replication among multiple TiDB clusters. Based on this feature, you can create a multi-master TiDB solution using TiCDC.
 
-### Use bi-directional replication
+This section describes how to use bi-directional replication taking two TiDB clusters as an example.
 
-The following example shows how to use bi-directional replication between two TiDB clusters.
+### Deploy bi-directional replication
 
-#### Deploy bi-directional replication
+TiCDC only replicates incremental data changes that occur after a specified timestamp to the downstream cluster. Before starting the bi-directional replication, you need to take the following steps:
 
-1. Replicate data between two TiDB clusters using a data migration tool to make sure data in the two clusters is consistent.
+1. (Optional) According to your needs, import the data of the two TiDB clusters into each other using the data export tool [Dumpling](/dumpling-overview.md) and data import tool [TiDB Lightning](/tidb-lightning/tidb-lightning-overview.md).
 
 2. Deploy two TiCDC clusters between the two TiDB clusters. The cluster topology is as follows. The arrows in the diagram indicate the directions of data flow.
 
     ![TiCDC bidirectional replication](/media/ticdc/ticdc-bidirectional-replication.png)
 
-3. When you create each changefeed, add the following configuration in the configuration file specified by the `--config` parameter:
+3. Specify the starting timepoint of data replication for the upstream and downstream clusters.
+
+    1. Check the timepoint of the upstrema and downstream clusters. In the case of two TiDB clusters, make sure data in the two clusters are consistent at certain timepoints. For example, the data of TiDB A at `ts=1` and the data of TiDB B at `ts=2` are consistent.
+
+    2. When you create the changefeed, set the `--start-ts` of the changefeed for the upstream cluster to the corresponding `tso`. That is, if the upstream cluster is TiDB A, set `--start-ts=1`; if the upstream cluster is TiDB B, set `--start-ts=2`.
+
+4. In the configuration file specified by the `--config` parameter, add the following configuration:
 
     ```toml
     # Whether to enable the bi-directional replication mode
     bdr-mode = true
     ```
 
+5. (Optional) If you need to track the data source, set a unique data source ID for each cluster using the [`tidb_source_id`](/system-variables.md#tidb_source_id-new-in-v650) system variable.
+
 After the configuration takes effect, the clusters can perform bi-directional replication.
 
-#### Stop bi-directional replication
+### Execute DDL
 
-To stop the bi-directional replication, wait for all data replication to complete and stop the changefeed.
+Bi-directional replication does not support replicating DDL statements.
+
+If you need to execute DDL statements, take the following steps:
+
+1. Pause the write operations in the tables that need to execute DDL in all clusters. If the DDL statement is adding a non-unique index, skip this step.
+2. After the write operations of the correponding tables in all clusters have been replicated to other clusters, manually execute all DDL statements in each TiDB cluster.
+3. After the DDl statements are executed, resume the write operations.
+
+Note that a DDL statement that adds non-unique index does not break bi-direcional replication, so no need to pause the write operations in the corresponding table.
+
+### Stop bi-directional replication
+
+After the application has stopped writing data, you can insert a special record into each cluster. By checking the two special records, you can make sure that data in two clusters are consistent.
+
+After the check is completed, you can stop the changefeed to stop bi-direcional replication.
 
 ### Limitations
 
-- Bi-directional replication clusters do not support replicating DDL. To execute DDL statements, take the following steps:
-
-    1. Pause the write operations in the corresponding table.
-    2. After the data replication is completed, manually execute all DDL statements in each TiDB cluster.
-    3. After the DDl statements are executed, resume the write operations.
+- For the limitations of DDL, see [Execute DDL](#execute-ddl).
 
 - Bi-directional replication clusters cannot detect write conflict, which might cause undefined behaviors. Therefore, you must ensure there are no write conflicts from the application side.
 
-- Bi-directional replication can span multiple clusters. Each cluster must be connected with other clusters.
+- Bi-directional replication supports more than two clusters, but does not support multiple clusters in cascading mode, that is, a cyclic replication like TiDB A -> TiDB B -> TiDB C -> TiDB A. In such a topology, if one cluster fails, the whole data replication will be affected. Therefore, to enable bi-directional replication among multiple clusters, you need to connect each cluster with every other clusters, for example, `TiDB A <-> TiDB B`, `TiDB B <-> TiDB C`, `TiDB C <-> TiDB A`.
