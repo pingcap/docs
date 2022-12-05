@@ -168,9 +168,10 @@ AWS DMS does not support replicating `DROP TABLE`.
 
     The schema name is the database name in the Amazon RDS instance. The default value of the source name is "%", which means that all databases in the Amazon RDS will be migrated to TiDB. It will cause the system databases such as `mysql` and `sys` in Amazon RDS to be migrated to TiDB, and result in task failure. Therefore, it is recommended to fill in the specific database name, or filter out all system databases. For example, according to the settings in the following screenshot, only the database named `franktest` and all the tables in that database will be migrated.
 
+        ![Table mappings](/media/tidb-cloud/aws-dms-tidb-cloud/aws-dms-to-tidb-cloud-table-mappings.png)
+
 5. Click **Create task** in the lower-right corner.
 
-    ![Table mappings](/media/tidb-cloud/aws-dms-tidb-cloud/aws-dms-to-tidb-cloud-table-mappings.png)
 
 6. Go back to the [Data migration tasks](https://us-west-2.console.aws.amazon.com/dms/v2/home?region=us-west-2#tasks) page. Switch to your region. You can see the status and progress of the task.
 
