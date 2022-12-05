@@ -139,17 +139,65 @@ This section describes the subcommands that `tikv-ctl` supports in detail. Some 
 
 Use the `raft` subcommand to view the status of the Raft state machine at a specific moment. The status information includes two parts: three structs (**RegionLocalState**, **RaftLocalState**, and **RegionApplyState**) and the corresponding Entries of a certain piece of log.
 
-Use the `region` and `log` subcommands to obtain the above information respectively. The two subcommands both support the remote mode and the local mode at the same time. Their usage and output are as follows:
+Use the `region` and `log` subcommands to obtain the above information respectively. The two subcommands both support the remote mode and the local mode at the same time.
+
+For the `region` subcommand:
+
+- To specify the Regions to be viewed, use the `-r` option. Multiple Regions are separated by `,`. You can also use the `--all-regions` option to view all Regions (Note that `-r` and `--all-regions` cannot be used at the same time).
+- To limit the number of Regions to be printed, use the `--limit` option (default: `16`).
+- To query which Regions are included in a certain key range, use the `--start` and `--end` options (default: no range limit, in Hex format).
+
+To print the Region with id `1239`, use the following command:
 
 ```bash
-$ tikv-ctl --host 127.0.0.1:20160 raft region -r 2
-region id: 2
-region state key: \001\003\000\000\000\000\000\000\000\002\001
-region state: Some(region {id: 2 region_epoch {conf_ver: 3 version: 1} peers {id: 3 store_id: 1} peers {id: 5 store_id: 4} peers {id: 7 store_id: 6}})
-raft state key: \001\002\000\000\000\000\000\000\000\002\002
-raft state: Some(hard_state {term: 307 vote: 5 commit: 314617} last_index: 314617)
-apply state key: \001\002\000\000\000\000\000\000\000\002\003
-apply state: Some(applied_index: 314617 truncated_state {index: 313474 term: 151})
+tikv-ctl --host 127.0.0.1:20160 raft region -r 1239
+```
+
+The output is as follows:
+
+```
+"region id": 1239
+"region state": {
+    id: 1239,
+    start_key: 7480000000000000FF4E5F728000000000FF1443770000000000FA,
+    end_key: 7480000000000000FF4E5F728000000000FF21C4420000000000FA,
+    region_epoch: {conf_ver: 1 version: 43},
+    peers: [ {id: 1240 store_id: 1 role: Voter} ]
+}
+"raft state": {
+    hard_state {term: 8 vote: 5 commit: 7}
+    last_index: 8)
+}
+"apply state": {
+    applied_index: 8 commit_index: 8 commit_term: 8
+    truncated_state {index: 5 term: 5}
+}
+```
+
+To query which Regions are included in a certain key range, use the following command:
+
+```shell
+tikv-ctl --host 127.0.0.1:20160 raft region --start 7480000000000000FF4E5F728000000000FF1443770000000000FA --end 7480000000000000FF4E5F728000000000FF21C4420000000000FA
+```
+
+- If the key range is in a Region range, the Region information is output.
+- If the key range is the same as a Region range, for example, when the given key range is the same as the Region `1239`, because the Region range is a left-closed and right-open interval, and Region `1009` takes the `end_key` of Region `1239` as the `start_key`, the Region `1009` information is also output.
+
+The output is as follows:
+
+```
+"region state": {
+    id: 1009
+    start_key: 7480000000000000FF4E5F728000000000FF21C4420000000000FA,
+    end_key: 7480000000000000FF5000000000000000F8,
+    ...
+}
+"region state": {
+    id: 1239
+    start_key: 7480000000000000FF4E5F728000000000FF06C6D60000000000FA,
+    end_key: 7480000000000000FF4E5F728000000000FF1443770000000000FA,
+    ...
+}
 ```
 
 ### View the Region size
