@@ -187,7 +187,7 @@ EXPLAIN DELETE FROM t1 WHERE c1=3;
 4 rows in set (0.01 sec)
 ```
 
-To specify the content and format of the `EXPLAIN` output, you can use the `FORMAT = xxx` syntax. Currently, TiDB supports the following formats:
+To specify the format of the `EXPLAIN` output, you can use the `FORMAT = xxx` syntax. Currently, TiDB supports the following formats:
 
 | FORMAT | Description |
 | ------ | ------ |
@@ -326,7 +326,7 @@ EXPLAIN FORMAT = "tidb_json" SELECT id FROM t WHERE a = 1;
 1 row in set (0.01 sec)
 ```
 
-In the output, `id`, `estRows`, `taskType`, `accessObject`, and `operatorInfo` have the same meaning as in the default format. `subOperators` is an array that stores the sub-nodes. The fields and meanings of the sub-nodes are the same as the parent nodes. If a field is missing, it means that the field is empty.
+In the output, `id`, `estRows`, `taskType`, `accessObject`, and `operatorInfo` have the same meaning as the columns in the default format. `subOperators` is an array that stores the sub-nodes. The fields and meanings of the sub-nodes are the same as the parent nodes. If a field is missing, it means that the field is empty.
 
 </div>
 
