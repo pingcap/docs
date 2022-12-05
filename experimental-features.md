@@ -34,11 +34,9 @@ Elastic scheduling feature. It enables the TiDB cluster to dynamically scale out
 + [User-Defined Variables](/user-defined-variables.md) (Introduced in v2.1)
 + [Cascades Planner](/system-variables.md#tidb_enable_cascades_planner): a cascades framework-based top-down query optimizer (Introduced in v3.0)
 + [Table Lock](/tidb-configuration-file.md#enable-table-lock-new-in-v400) (Introduced in v4.0.0)
-+ [Metadata Lock](/metadata-lock.md) (Introduced in v6.3.0)
 + [Range INTERVAL partitioning](/partitioned-table.md#range-interval-partitioning) (Introduced in v6.3.0)
 + [Add index acceleration](/system-variables.md#tidb_ddl_enable_fast_reorg-new-in-v630) (Introduced in v6.3.0)
 + [Restore a cluster to a specific point in time using the `FLASHBACK CLUSTER TO TIMESTAMP` syntax](/sql-statements/sql-statement-flashback-to-timestamp.md) (Introduced in v6.4.0)
-+ [`AUTO_INCREMENT` MySQL compatibility mode](/auto-increment.md#mysql-compatibility-mode) (Introduced in v6.4.0)
 
 ## Storage
 
@@ -48,8 +46,6 @@ Elastic scheduling feature. It enables the TiDB cluster to dynamically scale out
 ## Data migration
 
 + [Use WebUI](/dm/dm-webui-guide.md) to manage migration tasks in DM. (Introduced in v6.0)
-+ [Configure disk quota](/tidb-lightning/tidb-lightning-physical-import-mode-usage.md#configure-disk-quota-new-in-v620) for TiDB Lightning. (Introduced in v6.2.0)
-+ [Continuous Data Validation in DM](/dm/dm-continuous-data-validation.md) (Introduced in v6.2.0)
 
 ## Data share subscription
 
