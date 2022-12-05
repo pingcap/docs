@@ -24,7 +24,7 @@ The following authentication plugin is related to TiDB password management:
 - `caching_sha2_password`
 - `tidb_sm3_password`
 
-For more information about TiDB authentication plugins, see [Security Compatibility with MySQL](/security-compatibility-with-mysql.md).
+For more information about TiDB authentication plugins, see [Authentication plugin status](/security-compatibility-with-mysql.md#authentication-plugin-status).
 
 ## Password complexity policy
 
@@ -37,7 +37,7 @@ The password complexity policy has the following features:
 
 > **Note:**
 >
-> - For the `CREATE USER` statement, even if the account is locked upon creation, you must set an acceptable password. Otherwise, when the account is unlocked, the user can log in to TiDB using a password that does not comply with the password complexity policy.
+> - For the `CREATE USER` statement, even if the account is locked upon creation, you must set an acceptable password. Otherwise, when the account is unlocked, this account can log in to TiDB using a password that does not comply with the password complexity policy.
 > - The modification to the password complexity policy does not affect the passwords that already exist and only affects the newly set passwords.
 
 You can view all system variables related to the password complexity policy by executing the following SQL statement:
@@ -172,9 +172,15 @@ mysql> SELECT VALIDATE_PASSWORD_STRENGTH('N0Tweak$_@123!');
 
 ## Password expiration policy
 
-TiDB supports password expiration policy so that users must change their passwords periodically to improve password security. The database administrator with the `CREATE USER` privilege can manually make account passwords expire and establish a policy for automatic password expiration.
+TiDB supports password expiration policy so that users must change their passwords periodically to improve password security. You can manually make account passwords expire or establish a policy for automatic password expiration.
 
 The automatic password expiration policy can be set globally or for individual accounts. The database administrator can establish a global password expiration policy or use an account-level policy to override the global policy.
+
+The privileges for setting the password expiration policy is as follows:
+
+- Database administrator with `SUPER` or `CREATE USER` privileges can manually make passwords expire.
+- Database administrator with `SUPER` or `CREATE USER` privileges can set the account-level password expiration policy.
+- Database administrator with `SUPER` or `SYSTEM_VARIABLES_ADMINR` privileges can set the global-level password expiration policy.
 
 ### Manual expiration
 
@@ -186,7 +192,7 @@ ALTER USER 'test'@'localhost' PASSWORD EXPIRE;
 
 When the account password is set to expire by a database administrator, you must change the password before you can log in to TiDB. The manual expiration cannot be revoked.
 
-For roles created using the `CREATE ROLE` statement, since the role does not require a password, the password field for the role is empty. In such case, TiDB sets the `password_expired` attribute to `'Y'`, which means that the role's password is manually expired. The purpose of this design is to prevent the role from being unlocked and logged into TiDB with an empty password. When the role is unlocked by the `ALTER USER ... ACCOUNT UNLOCK` statement, you can log in with this account even though the password is empty; However, because the password is manually expired, you must set a valid password before you log in.
+For roles created using the `CREATE ROLE` statement, since the role does not require a password, the password field for the role is empty. In such case, TiDB sets the `password_expired` attribute to `'Y'`, which means that the role's password is manually expired. The purpose of this design is to prevent the role from being unlocked and logged into TiDB with an empty password. When the role is unlocked by the `ALTER USER ... ACCOUNT UNLOCK` statement, you can log in with this account even though the password is empty. Therefore, TiDB make the password manually expired using the `password_expired` attribute so that the user must set a valid password for the account.
 
 ```sql
 mysql> CREATE ROLE testrole;
@@ -206,7 +212,7 @@ mysql> SELECT user,password_expired,Account_locked FROM mysql.user WHERE user = 
 Automatic password expiration is based on the **password age** and the **password lifetime**.
 
 - Password age: the time interval from the last password change date to the current date. The time of the last password change is recorded in the `mysql.user` system table.
-- Password lifetime: the number of days the password is allowed to live without being changed.
+- Password lifetime: the number of days the password can be used to log in to TiDB.
 
 If a password is used for a longer period than it is allowed to live, the server automatically marks the password as expired.
 
@@ -260,7 +266,7 @@ When the client connects to the server, the server checks whether the password i
 
 You can control the behavior of the TiDB server when a password is expired. When a password is expired, the server either disconnects the client or restricts the client to the "sandbox mode". In a "sandbox mode", the TiDB server allows connections from the expired account. However, in such connections, the user is only allowed to reset the password.
 
-To control the behavior of the TiDB server when a password is expired, configure the [`security.disconnect-on-expired-password`](/tidb-configuration-file.md#disconnect-on-expired-password-new-in-v650) configuration item in the TiDB configuration file:
+The TiDB server can control whether to restrict the user with an expired password in the "sandbox mode". To control the behavior of the TiDB server when a password is expired, configure the [`security.disconnect-on-expired-password`](/tidb-configuration-file.md#disconnect-on-expired-password-new-in-v650) configuration item in the TiDB configuration file:
 
 ```toml
 [security]
@@ -356,11 +362,10 @@ ALTER USER 'test'@'localhost'
 
 TiDB can track the number of failed login attempts for an account. To prevent the password from being cracked by brute force, TiDB can lock the account after a specified number of failed login attempts.
 
-Failed-login means that the client fails to provide the correct password during the connection attempt, and does not include connection failures due to unknown users or network issues.
-
 > **Note:**
 >
 > - TiDB only supports failed-login tracking and temporary account locking at the account level, but not at the global level.
+> - Failed-login means that the client fails to provide the correct password during the connection attempt, and does not include connection failures due to unknown users or network issues.
 > - When you enable the failed-login tracking and temporary account locking for an account, the account is subject to additional checks when the account attempts to log in. This affects the performance of the login operation, especially in high-concurrency login scenarios.
 
 ### Configure the login failure tracking policy

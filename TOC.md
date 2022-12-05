@@ -564,6 +564,7 @@
     - [Security Compatibility with MySQL](/security-compatibility-with-mysql.md)
     - [Privilege Management](/privilege-management.md)
     - [User Account Management](/user-account-management.md)
+    - [TiDB Password Management](/password-management.md)
     - [Role-Based Access Control](/role-based-access-control.md)
     - [Certificate-Based Authentication](/certificate-authentication.md)
   - SQL

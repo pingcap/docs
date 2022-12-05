@@ -49,9 +49,9 @@ The feature implementation has the following differences:
 
 - Dictionary check:
 
-    - In MySQL v5.7, you can specify a file path using the `validate_password_dictionary_file` variable. The file contains a list of words that are not allowed to be used as passwords.
-    - In MySQL v8.0, you can specify a file path using the `validate_password.dictionary_file` variable. The file contains a list of words that are not allowed to be used as passwords.
-    - In TiDB, you can specify a string using the [`validate_password.dictionary`](/system-variables.md#validate_passworddictionary-new-in-v650) system variable. The string contains a list of words that cannot exist in passwords.
+    - In MySQL v5.7, you can specify a file path using the `validate_password_dictionary_file` variable. The file contains a list of words that are not allowed to exist in passwords.
+    - In MySQL v8.0, you can specify a file path using the `validate_password.dictionary_file` variable. The file contains a list of words that are not allowed to exist in passwords.
+    - In TiDB, you can specify a string using the [`validate_password.dictionary`](/system-variables.md#validate_passworddictionary-new-in-v650) system variable. The string contains a list of words that are not allowed to exist in passwords.
 
 ### Password failure tracking
 
@@ -67,29 +67,29 @@ Because the number of failed attempts and lock status of accounts need to be glo
 
     + MySQL 8.0:
 
-        - When the server is restarted, the count of failed attempts for all accounts will be reset.
-        - When `FLUSH PRIVILEGES` is executed, the count of failed attempts for all accounts will be reset.
-        - When you run `ALTER USER ... ACCOUNT UNLOCK` to unlock the account, the count will be reset.
-        - When the account logs in successfully, the count will be reset.
+        - When the server is restarted, the count of failed attempts for all accounts is reset.
+        - When `FLUSH PRIVILEGES` is executed, the count of failed attempts for all accounts is reset.
+        - When you run `ALTER USER ... ACCOUNT UNLOCK` to unlock the account, the count is reset.
+        - When the account logs in successfully, the count is reset.
 
     + TiDB:
 
-        - When you run `ALTER USER ... ACCOUNT UNLOCK` to unlock the account, the count will be reset.
-        - When the account logs in successfully, the count will be reset.
+        - When you run `ALTER USER ... ACCOUNT UNLOCK` to unlock the account, the count is reset.
+        - When the account logs in successfully, the count is reset.
 
 - If the user is locked automatically, the count of failed attempts is reset in the following scenarios:
 
     + MySQL 8.0:
 
-        - When the server is restarted, the temporary locking for all accounts will be reset.
-        - When `FLUSH PRIVILEGES` is executed, the temporary locking for all accounts will be reset.
-        - If the lock time ends, the temporary locking for the account will be reset on the next login attempt.
-        - When you run `ALTER USER ... ACCOUNT UNLOCK` to unlock the account, the temporary locking for the account will be reset.
+        - When the server is restarted, the temporary locking for all accounts is reset.
+        - When `FLUSH PRIVILEGES` is executed, the temporary locking for all accounts is reset.
+        - If the lock time ends, the temporary locking for the account is reset on the next login attempt.
+        - When you run `ALTER USER ... ACCOUNT UNLOCK` to unlock the account, the temporary locking for the account is reset.
 
     + TiDB:
 
-        - If the lock time ends, the temporary locking for the account will be reset on the next login attempt.
-        - When you run `ALTER USER ... ACCOUNT UNLOCK` to unlock the account, the temporary locking for the account will be reset.
+        - If the lock time ends, the temporary locking for the account is reset on the next login attempt.
+        - When you run `ALTER USER ... ACCOUNT UNLOCK` to unlock the account, the temporary locking for the account is reset.
 
 ### Password reuse policy
 
