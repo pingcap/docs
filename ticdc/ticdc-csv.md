@@ -32,15 +32,15 @@ include-commit-ts = false
 
 ## Transactional constraints
 
-- `commit-ts` of the last row in a single CSV file must be greater than that in the previous row.
-- The same transaction of a single table cannot be stored in different CSV files.
+-  In a single CSV file, `commit-ts` of a row must be smaller than that in the subsequent row.
+- The same transactionds of a single table must be stored in the same CSV file.
 - Multiple tables of the same transaction can be stored in different CSV files.
 
 ## Definition of the data format
 
 Each column in a row of the CSV file is defined as follows:
 
-- Column 1: The operation-type indicator, including `I`, `D`, and `U`. `I` means `INSERT`, `U` means `UPDATE`, and `D` means `DELETE`.
+- Column 1: The operation-type indicator, including `I`,  `U`, and `D`. `I` means `INSERT`, `U` means `UPDATE`, and `D` means `DELETE`.
 - Column 2: Table name.
 - Column 3: Schema name.
 - Column 4: `commit-ts` of the source transaction. This column is configurable.

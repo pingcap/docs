@@ -45,13 +45,13 @@ shell
 --sink-uri="file:///my-directory/prefix"
 ```
 
-Other parameters optional in the URI are as follows:
+Other optional parameters in the URI are as follows:
 
 | Parameter         | Description                                             |
 | :------------ | :------------------------------------------------ |
 | `worker-count` | Concurrency for saving data changes to cloud storage in the downstream (optional, default value: `16`, value range: [`1`, `512`] |
 | `flush-interval` | Interval for saving data changes to cloud storage in the downstream (optional, default value: `5s`, value range: [`2s`, `10m`] |
-| `file-size` | A data change file is stored to cloud storage if its bytes exceed the value of this parameter (optional, default value: `67108864`, value range: [`67108864`, `536870912`]) |
+| `file-size` | A data change file is stored to cloud storage if its bytes exceed the value of this parameter (optional, default value: `67108864`, value range: [`1048576`, `536870912`]) |
 
 > **Note:**
 >
@@ -76,12 +76,12 @@ Data change records are saved to the following path:
 - `table-version-separator`: specifies the separator that separates the file path by the table version, for example, `s3://bucket/bbb/ccc/test/table1/9999`.
 - `partition-separator`: specifies the separator that separates the file path by the table partition, for example, `s3://bucket/bbb/ccc/test/table1/9999/20`
 - `date-separator`: classifies the files by the transaction commit date. Value options are:
-    - none: no date-separator. For example, all files with `test.table1` version being `9999` are saved to `s3://bucket/bbb/ccc/test/table1/9999`.
+    - `none`: no date-separator. For example, all files with `test.table1` version being `9999` are saved to `s3://bucket/bbb/ccc/test/table1/9999`.
     - `year`: the separator is the year a transaction is committed, for example, `s3://bucket/bbb/ccc/test/table1/9999/2022`.
     - `month`: the separator is the year and month a transaction is committed, for example,`s3://bucket/bbb/ccc/test/table1/9999/2022-01`.
     - `day`: the separator is the year, month, and day a transaction is committed, for example,`s3://bucket/bbb/ccc/test/table1/9999/2022-01-02`.
 - `num`: saves the serial number of the file that records the data change, for example, `s3://bucket/bbb/ccc/test/table1/9999/2022-01-02/CDC000005.csv`.
-- `extension`: specifies the extension of the file. TiDB v6.5.0 supports the CSV format only.
+- `extension`: specifies the extension of the file. TiDB v6.5.0 supports the CSV and canal-json formats.
 
 ### Metadata
 
@@ -164,7 +164,7 @@ The following is a `schema.json` file:
 
 ### Data type
 
-Data type is defined as `T(M[, D])`. For details, see [Data Types](/data-type-overview.md).
+The data type is defined as `T(M[, D])`. For details, see [Data Types](/data-type-overview.md).
 
 #### Integer types
 
