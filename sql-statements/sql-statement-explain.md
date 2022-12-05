@@ -336,6 +336,7 @@ In the output, `id`, `estRows`, `taskType`, `accessObject`, and `operatorInfo` h
 
 * Both the format of `EXPLAIN` and the potential execution plans in TiDB differ substaintially from MySQL.
 * TiDB does not support the `FORMAT=JSON` or `FORMAT=TREE` options.
+* `FORMAT=TIDB_JSON` in TiDB is the default `EXPLAIN` output encoded in JSON. The format and fields are different from the `FORMAT=JSON` output in MySQL.
 
 ### `EXPLAIN FOR CONNECTION`
 
