@@ -30,7 +30,7 @@ AWS DMS does not support replicating `DROP TABLE`.
 
 ## Step 1. Create an AWS DMS replication instance
 
-1. Go to the [Replication instances](https://us-west-2.console.aws.amazon.com/dms/v2/home?region=us-west-2#replicationInstances) page in the AWS DMS console, and switch to the corresponding region. It is recommended to use the same region for AWS DMS as TiDB Cloud. In this document, the upstream and downstream databases and the DMS instance are all in the **us-west-2** region.
+1. Go to the [Replication instances](https://console.aws.amazon.com/dms/v2/home#replicationInstances) page in the AWS DMS console, and switch to the corresponding region. It is recommended to use the same region for AWS DMS as TiDB Cloud. In this document, the upstream and downstream databases and the DMS instance are all in the **us-west-2** region.
 
 2. Click **Create replication instance**.
 
@@ -52,7 +52,7 @@ AWS DMS does not support replicating `DROP TABLE`.
 
 ## Step 2. Create the source database endpoint
 
-1. In the [AWS DMS console](https://us-west-2.console.aws.amazon.com/dms/v2/home), click the replication instance that you just created. Copy the public and private network IP addresses as shown in the following screenshot.
+1. In the [AWS DMS console](https://console.aws.amazon.com/dms/v2/home), click the replication instance that you just created. Copy the public and private network IP addresses as shown in the following screenshot.
 
     ![Copy the public and private network IP addresses](/media/tidb-cloud/aws-dms-tidb-cloud/aws-dms-to-tidb-cloud-copy-ip.png)
 
@@ -87,7 +87,7 @@ AWS DMS does not support replicating `DROP TABLE`.
 
 ## Step 3. Create the target database endpoint
 
-1. In the [AWS DMS console](https://us-west-2.console.aws.amazon.com/dms/v2/home), click the replication instance that you just created. Copy the public and private network IP addresses as shown in the following screenshot.
+1. In the [AWS DMS console](https://console.aws.amazon.com/dms/v2/home), click the replication instance that you just created. Copy the public and private network IP addresses as shown in the following screenshot.
 
     ![Copy the public and private network IP addresses](/media/tidb-cloud/aws-dms-tidb-cloud/aws-dms-to-tidb-cloud-copy-ip.png)
 
@@ -140,7 +140,7 @@ AWS DMS does not support replicating `DROP TABLE`.
 
 ## Step 4. Create a database migration task
 
-1. In the AWS DMS console, go to the [Data migration tasks](https://us-west-2.console.aws.amazon.com/dms/v2/home?region=us-west-2#tasks) page. Switch to your region. Then click **Create task** in the upper right corner of the window.
+1. In the AWS DMS console, go to the [Data migration tasks](https://console.aws.amazon.com/dms/v2/home#tasks) page. Switch to your region. Then click **Create task** in the upper right corner of the window.
 
     ![Create task](/media/tidb-cloud/aws-dms-tidb-cloud/aws-dms-to-tidb-cloud-create-task.png)
 
@@ -164,7 +164,7 @@ AWS DMS does not support replicating `DROP TABLE`.
 
     ![Task settings](/media/tidb-cloud/aws-dms-tidb-cloud/aws-dms-to-tidb-cloud-task-settings.png)
 
-4. In the **Table mappings** section, specify the database to be migrated. 
+4. In the **Table mappings** section, specify the database to be migrated.
 
     The schema name is the database name in the Amazon RDS instance. The default value of the source name is "%", which means that all databases in the Amazon RDS will be migrated to TiDB. It will cause the system databases such as `mysql` and `sys` in Amazon RDS to be migrated to TiDB, and result in task failure. Therefore, it is recommended to fill in the specific database name, or filter out all system databases. For example, according to the settings in the following screenshot, only the database named `franktest` and all the tables in that database will be migrated.
 
@@ -176,6 +176,6 @@ AWS DMS does not support replicating `DROP TABLE`.
 
     ![Tasks status](/media/tidb-cloud/aws-dms-tidb-cloud/aws-dms-to-tidb-cloud-task-status.png)
 
-If you encounter any issues or failures during the migration, you can check the log information in [CloudWatch](https://us-west-2.console.aws.amazon.com/cloudwatch/home) to troubleshoot the issues.
+If you encounter any issues or failures during the migration, you can check the log information in [CloudWatch](https://console.aws.amazon.com/cloudwatch/home) to troubleshoot the issues.
 
 ![Troubleshooting](/media/tidb-cloud/aws-dms-tidb-cloud/aws-dms-to-tidb-cloud-troubleshooting.png)
