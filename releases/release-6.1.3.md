@@ -25,7 +25,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v6.1/quick-start-with-
 
 - Others
 
-    - Upgrade the Go compiler version of TiDB from go1.18 to [go1.19](https://go.dev/doc/go1.19), which improves the TiDB stability. Specifically, a Go system variable [`GOMEMLIMIT`](https://pkg.go.dev/runtime@go1.19#hdr-Environment_Variables) is introduced to keep the memory usage of TiDB below a certain threshold. This helps mitigate most OOM issues. For more information, see [Mitigate OOM issues by configuring the `GOMEMLIMIT`](/configure-memory-usage.md#mitigate-oom-issues-by-configuring-the-gomemlimit).
+    - Upgrade the Go compiler version of TiDB from go1.18 to [go1.19](https://go.dev/doc/go1.19), which improves the TiDB stability. Specifically, a Go environment variable [`GOMEMLIMIT`](https://pkg.go.dev/runtime@go1.19#hdr-Environment_Variables) is introduced to keep the memory usage of TiDB below a certain threshold. This helps mitigate most OOM issues. For more information, see [Mitigate OOM issues by configuring the `GOMEMLIMIT`](/configure-memory-usage.md#mitigate-oom-issues-by-configuring-the-gomemlimit).
 
 ## Bug fixes
 
