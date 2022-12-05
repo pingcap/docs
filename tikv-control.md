@@ -94,14 +94,17 @@ You can add corresponding parameters and subcommands after `tiup ctl:<cluster-ve
 
     For this mode, if SSL is enabled in TiKV, `tikv-ctl` also needs to specify the related certificate file. For example:
 
-    ```
-    $ tikv-ctl --ca-path ca.pem --cert-path client.pem --key-path client-key.pem --host 127.0.0.1:20160 <subcommands>
+    ```shell
+    tikv-ctl --ca-path ca.pem --cert-path client.pem --key-path client-key.pem --host 127.0.0.1:20160 <subcommands>
     ```
 
     However, sometimes `tikv-ctl` communicates with PD instead of TiKV. In this case, you need to use the `--pd` option instead of `--host`. Here is an example:
 
+    ```shell
+    tikv-ctl --pd 127.0.0.1:2379 compact-cluster
     ```
-    $ tikv-ctl --pd 127.0.0.1:2379 compact-cluster
+
+    ```
     store:"127.0.0.1:20160" compact db:KV cf:default range:([], []) success!
     ```
 
@@ -119,9 +122,9 @@ Additionally, `tikv-ctl` has two simple commands `--to-hex` and `--to-escaped`, 
 Generally, use the `escaped` form of the key. For example:
 
 ```shell
-$ tikv-ctl --to-escaped 0xaaff
+tikv-ctl --to-escaped 0xaaff
 \252\377
-$ tikv-ctl --to-hex "\252\377"
+tikv-ctl --to-hex "\252\377"
 AAFF
 ```
 
@@ -203,7 +206,12 @@ The output is as follows:
 Use the `size` command to view the Region size:
 
 ```shell
-$ tikv-ctl --data-dir /path/to/tikv size -r 2
+tikv-ctl --data-dir /path/to/tikv size -r 2
+```
+
+The output is as follows:
+
+```
 region id: 2
 cf default region size: 799.703 MB
 cf write region size: 41.250 MB
@@ -215,7 +223,10 @@ cf lock region size: 27616
 The `--from` and `--to` options of the `scan` command accept two escaped forms of raw key, and use the `--show-cf` flag to specify the column families that you need to view.
 
 ```shell
-$ tikv-ctl --data-dir /path/to/tikv scan --from 'zm' --limit 2 --show-cf lock,default,write
+tikv-ctl --data-dir /path/to/tikv scan --from 'zm' --limit 2 --show-cf lock,default,write
+```
+
+```
 key: zmBootstr\377a\377pKey\000\000\377\000\000\373\000\000\000\000\000\377\000\000s\000\000\000\000\000\372
          write cf value: start_ts: 399650102814441473 commit_ts: 399650102814441475 short_value: "20"
 key: zmDB:29\000\000\377\000\374\000\000\000\000\000\000\377\000H\000\000\000\000\000\000\371
@@ -228,7 +239,10 @@ key: zmDB:29\000\000\377\000\374\000\000\000\000\000\000\377\000H\000\000\000\00
 Similar to the `scan` command, the `mvcc` command can be used to view MVCC of a given key.
 
 ```shell
-$ tikv-ctl --data-dir /path/to/tikv mvcc -k "zmDB:29\000\000\377\000\374\000\000\000\000\000\000\377\000H\000\000\000\000\000\000\371" --show-cf=lock,write,default
+tikv-ctl --data-dir /path/to/tikv mvcc -k "zmDB:29\000\000\377\000\374\000\000\000\000\000\000\377\000H\000\000\000\000\000\000\371" --show-cf=lock,write,default
+```
+
+```
 key: zmDB:29\000\000\377\000\374\000\000\000\000\000\000\377\000H\000\000\000\000\000\000\371
          write cf value: start_ts: 399650105239273474 commit_ts: 399650105239273475 short_value: "\000\000\000\000\000\000\000\002"
          write cf value: start_ts: 399650105199951882 commit_ts: 399650105213059076 short_value: "\000\000\000\000\000\000\000\001"
@@ -243,7 +257,10 @@ The `raw-scan` command scans directly from the RocksDB. Note that to scan data k
 Use `--from` and `--to` options to specify the range to scan (unbounded by default). Use `--limit` to limit at most how many keys to print out (30 by default). Use `--cf` to specify which cf to scan (can be `default`, `write` or `lock`).
 
 ```shell
-$ ./tikv-ctl --data-dir /var/lib/tikv raw-scan --from 'zt' --limit 2 --cf default
+./tikv-ctl --data-dir /var/lib/tikv raw-scan --from 'zt' --limit 2 --cf default
+```
+
+```
 key: "zt\200\000\000\000\000\000\000\377\005_r\200\000\000\000\000\377\000\000\001\000\000\000\000\000\372\372b2,^\033\377\364", value: "\010\002\002\002%\010\004\002\010root\010\006\002\000\010\010\t\002\010\n\t\002\010\014\t\002\010\016\t\002\010\020\t\002\010\022\t\002\010\024\t\002\010\026\t\002\010\030\t\002\010\032\t\002\010\034\t\002\010\036\t\002\010 \t\002\010\"\t\002\010s\t\002\010&\t\002\010(\t\002\010*\t\002\010,\t\002\010.\t\002\0100\t\002\0102\t\002\0104\t\002"
 key: "zt\200\000\000\000\000\000\000\377\025_r\200\000\000\000\000\377\000\000\023\000\000\000\000\000\372\372b2,^\033\377\364", value: "\010\002\002&slow_query_log_file\010\004\002P/usr/local/mysql/data/localhost-slow.log"
 
@@ -259,7 +276,10 @@ To print the value of a key, use the `print` command.
 In order to record Region state details, TiKV writes some statistics into the SST files of Regions. To view these properties, run `tikv-ctl` with the `region-properties` sub-command:
 
 ```shell
-$ tikv-ctl --host localhost:20160 region-properties -r 2
+tikv-ctl --host localhost:20160 region-properties -r 2
+```
+
+```
 num_files: 0
 num_entries: 0
 num_deletes: 0
@@ -345,9 +365,9 @@ success!
 Use the `consistency-check` command to execute a consistency check among replicas in the corresponding Raft of a specific Region. If the check fails, TiKV itself panics. If the TiKV instance specified by `--host` is not the Region leader, an error is reported.
 
 ```shell
-$ tikv-ctl --host 127.0.0.1:20160 consistency-check -r 2
+tikv-ctl --host 127.0.0.1:20160 consistency-check -r 2
 success!
-$ tikv-ctl --host 127.0.0.1:20161 consistency-check -r 2
+tikv-ctl --host 127.0.0.1:20161 consistency-check -r 2
 DebugClient::check_region_consistency: RpcFailure(RpcStatus { status: Unknown, details: Some("StringError(\"Leader is on store 1\")") })
 ```
 
@@ -366,7 +386,10 @@ This sub-command is used to parse a snapshot meta file at given path and print t
 To avoid checking the Regions while TiKV is started, you can use the `tombstone` command to set the Regions where the Raft state machine reports an error to Tombstone. Before running this command, use the `bad-regions` command to find out the Regions with errors, so as to combine multiple tools for automated processing.
 
 ```shell
-$ tikv-ctl --data-dir /path/to/tikv bad-regions
+tikv-ctl --data-dir /path/to/tikv bad-regions
+```
+
+```
 all regions are healthy
 ```
 
@@ -490,7 +513,7 @@ Use the `recover-mvcc` command in circumstances where TiKV cannot run normally c
 - Use the `-p` option to specify PD endpoints.
 
 ```shell
-$ tikv-ctl --data-dir /path/to/tikv recover-mvcc -r 1001,1002 -p 127.0.0.1:2379
+tikv-ctl --data-dir /path/to/tikv recover-mvcc -r 1001,1002 -p 127.0.0.1:2379
 success!
 ```
 
@@ -537,7 +560,10 @@ data-dir = "/path/to/tikv/data"
 The `--path` option can be used to specify an absolute or relative path to the data file of interest. The command might give empty output if the data file is not encrypted. If `--path` is not provided, encryption info for all data files will be printed.
 
 ```shell
-$ tikv-ctl --config=./conf.toml encryption-meta dump-file --path=/path/to/tikv/data/db/CURRENT
+tikv-ctl --config=./conf.toml encryption-meta dump-file --path=/path/to/tikv/data/db/CURRENT
+```
+
+```
 /path/to/tikv/data/db/CURRENT: key_id: 9291156302549018620 iv: E3C2FDBF63FC03BFC28F265D7E78283F method: Aes128Ctr
 ```
 
@@ -561,7 +587,10 @@ The `--ids` option can be used to specified a list of comma-separated data encry
 When using the command, you will see a prompt warning that the action will expose sensitive information. Type "I consent" to continue.
 
 ```shell
-$ ./tikv-ctl --config=./conf.toml encryption-meta dump-key
+./tikv-ctl --config=./conf.toml encryption-meta dump-key
+```
+
+```
 This action will expose encryption key(s) as plaintext. Do not output the result in file on disk.
 Type "I consent" to continue, anything else to exit: I consent
 current key id: 9291156302549018620
@@ -569,7 +598,10 @@ current key id: 9291156302549018620
 ```
 
 ```shell
-$ ./tikv-ctl --config=./conf.toml encryption-meta dump-key --ids=9291156302549018620
+./tikv-ctl --config=./conf.toml encryption-meta dump-key --ids=9291156302549018620
+```
+
+```
 This action will expose encryption key(s) as plaintext. Do not output the result in file on disk.
 Type "I consent" to continue, anything else to exit: I consent
 9291156302549018620: key: 8B6B6B8F83D36BE2467ED55D72AE808B method: Aes128Ctr creation_time: 1592938357
