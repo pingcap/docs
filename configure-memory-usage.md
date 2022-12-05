@@ -243,7 +243,7 @@ You can mitigate a typical category of OOM issues by manually setting `GOMEMLIMI
 
 To verify the performance of `GOMEMLIMIT`, a test is performed to compare the specific memory usage before and after `GOMEMLIMIT` configuration.
 
-- In TiDB v6.1.2, the TiDB server encounters OOM (system memory: 48 GiB) after the simulated workload runs for several minutes:
+- In TiDB v6.1.2, the TiDB server encounters OOM (system memory usage: 48 GiB) after the simulated workload runs for several minutes:
 
     ![v6.1.2 workload oom](/media/configure-memory-usage-612-oom.png)
 
