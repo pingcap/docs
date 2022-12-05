@@ -46,4 +46,6 @@ Cost Model Version 2 provides a more accurate regression calibration of the cost
 
 To switch the version of cost model, you can set the [`tidb_cost_model_version`](/system-variables.md#tidb_cost_model_version-new-in-v620) variable.
 
-Note that switching the version of the cost model might cause changes to query plans.
+> **Note:**
+>
+> Switching the version of the cost model might cause changes to query plans.
