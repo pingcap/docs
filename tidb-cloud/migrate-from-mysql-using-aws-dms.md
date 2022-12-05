@@ -19,7 +19,7 @@ Before you start the migration, make sure you have read the following:
 - The default collation for the utf8mb4 character set in TiDB is `utf8mb4_bin`. But in MySQL 8.0, the default collation is `utf8mb4_0900_ai_ci`. If the upstream MySQL uses the default collation, because TiDB is not compatible with `utf8mb4_0900_ai_ci`, AWS DMS cannot create the target table in TiDB and cannot migrate the data. To resolve this problem, you need to modify the collation of the source database to `utf8mb4_bin` before the migration.
 - TiDB contains the following system databases by default: `INFORMATION_SCHEMA`, `PERFORMANCE_SCHEMA`, `mysql`, `sys`, and `test`. When you create an AWS DMS migration task, you need to filter out these system databases instead of using the default `%` when selecting the migration object. It is recommended to fill in the specific database and table names. Otherwise, AWS DMS will try to migrate these system databases from the source database to the target TiDB, which will cause the task to fail.
 - Add the public and private network IP addresses of AWS DMS to the IP access lists of both source and target databases. Otherwise, the network connection might fail in some scenarios.
-- Use [VPC Peerings](/tidb-cloud/set-up-vpc-peering-connections.md#set-up-vpc-peering-connections) or [Private Endpoint connections](/tidb-cloud/set-up-private-endpoint-connections.md) to connect AWS DMS and the TiDB Cloud cluster.
+- Use [VPC Peerings](/tidb-cloud/set-up-vpc-peering-connections.md#set-up-vpc-peering-connections) or [Private Endpoint connections](/tidb-cloud/set-up-private-endpoint-connections.md) to connect AWS DMS and the TiDB cluster.
 - It is recommended to use the same region for AWS DMS and the TiDB cluster to get better data writing performance.
 - It is recommended to use AWS DMS t3.large (2 vCPUs and 8 GiB memory) or a higher instance class. Small instance classes will possibly cause out of memory (OOM) errors.
 - AWS will automatically create the `awsdms_control` database in the target database.
@@ -111,7 +111,7 @@ AWS DMS does not support replicating `DROP TABLE`.
 
     ![Fill in the VPC Peering information](/media/tidb-cloud/aws-dms-tidb-cloud/aws-dms-to-tidb-cloud-vpc-peering-info.png)
 
-7. Configure the target endpoint for the TiDB Cloud cluster.
+7. Configure the target endpoint for the TiDB cluster.
     - **Endpoint type**: select **Target endpoint**.
     - **Endpoint identifier**: fill in a name for the endpoint.
     - **Target engine**: select **MySQL**.
@@ -119,10 +119,10 @@ AWS DMS does not support replicating `DROP TABLE`.
     ![Configure the target endpoint](/media/tidb-cloud/aws-dms-tidb-cloud/aws-dms-to-tidb-cloud-target-endpoint.png)
 
 8. Configure the following information:
-    - Server name: fill in the hostname of your TiDB Cloud cluster, which is the `-h` information you have recorded.
-    - Port: enter the port of your TiDB Cloud cluster, which is the `-P` information you have recorded. The default port of a TiDB Cloud cluster is 4000.
-    - User name: enter the user name of your TiDB Cloud cluster, which is the `-u` information you have recorded.
-    - Password: enter the password of your TiDB Cloud cluster.
+    - Server name: fill in the hostname of your TiDB cluster, which is the `-h` information you have recorded.
+    - Port: enter the port of your TiDB cluster, which is the `-P` information you have recorded. The default port of a TiDB cluster is 4000.
+    - User name: enter the user name of your TiDB cluster, which is the `-u` information you have recorded.
+    - Password: enter the password of your TiDB cluster.
     - Secure Socket Layer (SSL) mode: select **Verify-ca**.
     - Click **Add new CA certificate** to import the CA file downloaded from the TiDB Cloud console in the previous steps.
 
