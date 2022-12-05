@@ -73,7 +73,7 @@ AWS DMS does not support replicating `DROP TABLE`.
    - **Descriptive Amazon Resource Name (ARN) - optional**: create a friendly name for the default DMS ARN.
    - **Source engine**: select **MySQL**.
    - **Access to endpoint database**: select **Provide access information manually**.
-   - **Server name**: fill in the name of the data server for the data provider. You can copy it from the database console. If the upstream is Amazon RDS or Amazon Aurora, the name will be automatically filled in. If it is a self-built MySQL without a domain name, you can fill in the IP address.
+   - **Server name**: fill in the name of the data server for the data provider. You can copy it from the database console. If the upstream is Amazon RDS or Amazon Aurora, the name will be automatically filled in. If it is a self-hosted MySQL without a domain name, you can fill in the IP address.
    - Fill in the source database **Port**, **Username**, and **Password**.
    - **Secure Socket Layer (SSL) mode**: you can enable SSL mode as needed.
 
@@ -119,11 +119,11 @@ AWS DMS does not support replicating `DROP TABLE`.
     ![Configure the target endpoint](/media/tidb-cloud/aws-dms-tidb-cloud/aws-dms-to-tidb-cloud-target-endpoint.png)
 
 8. Configure the following information:
-    - Server name: fill in the hostname of your TiDB cluster, which is the `-h` information you have recorded.
-    - Port: enter the port of your TiDB cluster, which is the `-P` information you have recorded. The default port of a TiDB cluster is 4000.
-    - User name: enter the user name of your TiDB cluster, which is the `-u` information you have recorded.
-    - Password: enter the password of your TiDB cluster.
-    - Secure Socket Layer (SSL) mode: select **Verify-ca**.
+    - **Server name**: fill in the hostname of your TiDB cluster, which is the `-h` information you have recorded.
+    - **Port**: enter the port of your TiDB cluster, which is the `-P` information you have recorded. The default port of a TiDB cluster is 4000.
+    - **User name**: enter the user name of your TiDB cluster, which is the `-u` information you have recorded.
+    - **Password**: enter the password of your TiDB cluster.
+    - **Secure Socket Layer (SSL) mode**: select **Verify-ca**.
     - Click **Add new CA certificate** to import the CA file downloaded from the TiDB Cloud console in the previous steps.
 
     ![Fill in the target endpoint information](/media/tidb-cloud/aws-dms-tidb-cloud/aws-dms-to-tidb-cloud-target-endpoint2.png)
