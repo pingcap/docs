@@ -50,8 +50,6 @@ AWS DMS does not support replicating `DROP TABLE`.
 
 5. Configure the **Advanced security and network configuration**, **Maintenance**, and **Tags** if needed. Click **Create** to finish the instance creation.
 
-    ![Click the Create button](/media/tidb-cloud/aws-dms-tidb-cloud/aws-dms-to-tidb-cloud-create-button.png)
-
 ## Step 2. Create the source database endpoint
 
 1. In the [AWS DMS console](https://us-west-2.console.aws.amazon.com/dms/v2/home), click the replication instance that you just created. Copy the public and private network IP addresses as shown in the following screenshot.
