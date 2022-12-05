@@ -25,7 +25,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v6.1/quick-start-with-
 
 - Others
 
-    - Upgrade the Go compiler version of TiDB from go1.18 to [go1.19](https://go.dev/doc/go1.19), which improves the TiDB stability. Specifically, a Go environment variable [`GOMEMLIMIT`](https://pkg.go.dev/runtime@go1.19#hdr-Environment_Variables) is introduced to keep the memory usage of TiDB below a certain threshold. This helps mitigate most OOM issues. For more information, see [Mitigate OOM issues by configuring the `GOMEMLIMIT`](/configure-memory-usage.md#mitigate-oom-issues-by-configuring-the-gomemlimit).
+    - Upgrade the Go compiler version of TiDB from go1.18 to [go1.19](https://go.dev/doc/go1.19), which improves the TiDB stability. Specifically, a Go environment variable [`GOMEMLIMIT`](https://pkg.go.dev/runtime@go1.19#hdr-Environment_Variables) is introduced to keep the memory usage of TiDB below a certain threshold. This helps mitigate most OOM issues. For more information, see [Mitigate OOM issues by configuring the `GOMEMLIMIT`](/configure-memory-usage.md#mitigate-oom-issues-by-configuring-gomemlimit).
 
 ## Bug fixes
 
@@ -52,7 +52,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v6.1/quick-start-with-
 
 + TiFlash
 
-    - Fix the issue that logical operators return wrong results when the argument type is UInt8 [#6127](https://github.com/pingcap/tiflash/issues/6127)
+    - Fix the issue that logical operators return wrong results when the argument type is `UInt8` [#6127](https://github.com/pingcap/tiflash/issues/6127) @[xzhangxian1008](https://github.com/xzhangxian1008)
     - Fix the issue that wrong data input for `CAST(value AS DATETIME)` causing high TiFlash sys CPU [#5097](https://github.com/pingcap/tiflash/issues/5097) @[xzhangxian1008](https://github.com/xzhangxian1008)
     - Fix the issue that heavy write pressure might generate too many column files in the delta layer [#6361](https://github.com/pingcap/tiflash/issues/6361) @[lidezhu](https://github.com/lidezhu)
     - Fix the issue that column files in the delta layer cannot be compacted after restarting TiFlash [#6159](https://github.com/pingcap/tiflash/issues/6159) @[lidezhu](https://github.com/lidezhu)
