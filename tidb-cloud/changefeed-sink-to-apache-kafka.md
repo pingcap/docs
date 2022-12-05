@@ -9,6 +9,8 @@ This document describes how to create a changefeed to stream data from TiDB Clou
 
 > **Note:**
 >
+> If you have want to use the Changefeed feature, make sure that your TiDB cluster version is at least v6.4.0 and the TiKV node size is at least 8 vCPU and 16 GiB.
+>
 > For [Serverless Tier clusters](/tidb-cloud/select-cluster-tier.md#serverless-tier-beta), the changefeed feature is unavailable.
 
 ## Prerequisites
