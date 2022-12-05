@@ -237,11 +237,11 @@ The following example uses a memory-consuming SQL statement to demonstrate the d
 
 GO 1.19 introduces an environment variable [`GOMEMLIMIT`](https://pkg.go.dev/runtime@go1.19#hdr-Environment_Variables) to set the memory limit that triggers GC.
 
-You can mitigate a typical category of OOM issues by manually setting `GOMEMLIMIT`. For v6.1.3 <= TiDB < v6.5.0,before OOM occurs, the estimated memory in use on Grafana occupies only half of the entire memory (TiDB-Runtime > Memory Usage > estimate-inuse), as shown in the following figure:
+For v6.1.3 <= TiDB < v6.5.0, you can mitigate a typical category of OOM issues by manually setting `GOMEMLIMIT`. The typical category of OOM issues is: before OOM occurs, the estimated memory in use on Grafana occupies only half of the entire memory (TiDB-Runtime > Memory Usage > estimate-inuse), as shown in the following figure:
 
 ![normal OOM case example](/media/configure-memory-usage-oom-example.png)
 
-To verify the performance of `GOMEMLIMIT`, a test is performed to compare the specific memory usage before and after `GOMEMLIMIT` configuration.
+To verify the performance of `GOMEMLIMIT`, a test is performed to compare the specific memory usage with and without `GOMEMLIMIT` configuration.
 
 - In TiDB v6.1.2, the TiDB server encounters OOM (system memory usage: 48 GiB) after the simulated workload runs for several minutes:
 
