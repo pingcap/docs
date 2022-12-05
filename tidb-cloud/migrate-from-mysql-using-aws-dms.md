@@ -1,9 +1,9 @@
 ---
-title: Migrate MySQL-Compatible Databases to TiDB Cloud Using AWS DMS
+title: Migrate from MySQL-Compatible Databases to TiDB Cloud Using AWS DMS
 summary: Learn how to migrate data from MySQL-compatible databases into TiDB Cloud using AWS Database Migration Service (AWS DMS).
 ---
 
-# Migrate MySQL-Compatible Databases to TiDB Cloud Using AWS DMS
+# Migrate from MySQL-Compatible Databases to TiDB Cloud Using AWS DMS
 
 AWS Database Migration Service (AWS DMS) is a cloud service that makes it easy to migrate relational databases, data warehouses, NoSQL databases, and other types of data stores. You can use AWS DMS to migrate your data into TiDB Cloud.
 
@@ -171,7 +171,6 @@ AWS DMS does not support replicating `DROP TABLE`.
     ![Table mappings](/media/tidb-cloud/aws-dms-tidb-cloud/aws-dms-to-tidb-cloud-table-mappings.png)
 
 5. Click **Create task** in the lower-right corner.
-
 
 6. Go back to the [Data migration tasks](https://console.aws.amazon.com/dms/v2/home#tasks) page. Switch to your region. You can see the status and progress of the task.
 
