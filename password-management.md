@@ -10,15 +10,15 @@ To protect the security of user passwords, TiDB supports the following password 
 - Password complexity policy: require users to set strong passwords to prevent empty and weak passwords.
 - Password expiration policy: require users to change their passwords periodically.
 - Password reuse policy: prevent users from reusing old passwords.
-- Failed-login tracking and temporary account locking: temporarily lock the user account and prevent the same user from trying to login after multiple login failures caused by wrong passwords.
+- Failed-login tracking and temporary account locking policy: temporarily lock a user account to prevent the same user from trying to log in after multiple login failures caused by wrong passwords.
 
 ## TiDB authentication credential storage
 
-To ensure the authenticity of user identify, TiDB uses password as a credential to authenticate users when they login in to the TiDB server.
+To ensure the authenticity of user identify, TiDB uses passwords as credentials to authenticate users when they log in to the TiDB server.
 
 The *password* described in this document refers to the internal credentials generated, stored, and verified by TiDB. TiDB stores user passwords in the `mysql.user` system table.
 
-The following authentication plugin is related to TiDB password management:
+The following authentication plugins are related to TiDB password management:
 
 - `mysql_native_password`
 - `caching_sha2_password`
@@ -32,12 +32,12 @@ Password complexity check is disabled by default in TiDB. By configuring system 
 
 The password complexity policy has the following features:
 
-- For SQL statements that sets user passwords in plaintext (including `CREATE USER`, `ALTER USER`, and `SET PASSWORD`), TiDB checks the passwords against the password complexity policy. If the password does not meet the requirements, the password is rejected.
+- For SQL statements that set user passwords in plaintext (including `CREATE USER`, `ALTER USER`, and `SET PASSWORD`), TiDB checks the passwords against the password complexity policy. If a password does not meet the requirements, the password is rejected.
 - You can use the SQL function [`VALIDATE_PASSWORD_STRENGTH()`](https://dev.mysql.com/doc/refman/5.7/en/encryption-functions.html#function_validate-password-strength) to validate the password strength.
 
 > **Note:**
 >
-> - For the `CREATE USER` statement, even if the account is locked upon creation, you must set an acceptable password. Otherwise, when the account is unlocked, this account can log in to TiDB using a password that does not comply with the password complexity policy.
+> - For the `CREATE USER` statement, even if you can lock the account upon creation, you must set an acceptable password. Otherwise, when the account is unlocked, this account can log in to TiDB using a password that does not comply with the password complexity policy.
 > - The modification to the password complexity policy does not affect the passwords that already exist and only affects the newly set passwords.
 
 You can view all system variables related to the password complexity policy by executing the following SQL statement:
@@ -90,7 +90,7 @@ Set the minimum password length to `10`:
 SET GLOBAL validate_password.length = 10;
 ```
 
-Require the password to contain at least two numbers, one uppercase letter, one lowercase letter, and one special character:
+Require a password to contain at least two numbers, one uppercase letter, one lowercase letter, and one special character:
 
 ```sql
 SET GLOBAL validate_password.number_count = 2;
@@ -98,7 +98,7 @@ SET GLOBAL validate_password.mixed_case_count = 1;
 SET GLOBAL validate_password.special_char_count = 1;
 ```
 
-Enable the dictionary check that requires the password to not contain words like `mysql` or `abcd`:
+Enable the dictionary check that prevents a password from containing words like `mysql` or `abcd`:
 
 ```sql
 SET GLOBAL validate_password.dictionary = 'mysql;abcd';
@@ -106,7 +106,7 @@ SET GLOBAL validate_password.dictionary = 'mysql;abcd';
 
 > **Note:**
 >
-> - The value of `validate_password.dictionary` is a string not longer than 1024. It contains a list of words that must not exist in the password. Each word is separated by semicolon (`;`).
+> - The value of `validate_password.dictionary` is a string, no longer than 1024 characters. It contains a list of words that must not exist in the password. Each word is separated by semicolon (`;`).
 > - The dictionary check is case-insensitive.
 
 ### Password complexity check examples
