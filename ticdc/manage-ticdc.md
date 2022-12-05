@@ -925,7 +925,7 @@ If you need to execute DDL statements, take the following steps:
 2. After the write operations of the correponding tables in all clusters have been replicated to other clusters, manually execute all DDL statements in each TiDB cluster.
 3. After the DDl statements are executed, resume the write operations.
 
-Note that a DDL statement that adds non-unique index does not break bi-direcional replication, so no need to pause the write operations in the corresponding table.
+Note that a DDL statement that adds non-unique index does not break bi-direcional replication, so you do not need to pause the write operations in the corresponding table.
 
 ### Stop bi-directional replication
 
@@ -937,6 +937,6 @@ After the check is completed, you can stop the changefeed to stop bi-direcional 
 
 - For the limitations of DDL, see [Execute DDL](#execute-ddl).
 
-- Bi-directional replication clusters cannot detect write conflict, which might cause undefined behaviors. Therefore, you must ensure there are no write conflicts from the application side.
+- Bi-directional replication clusters cannot detect write conflicts, which might cause undefined behaviors. Therefore, you must ensure there are no write conflicts from the application side.
 
 - Bi-directional replication supports more than two clusters, but does not support multiple clusters in cascading mode, that is, a cyclic replication like TiDB A -> TiDB B -> TiDB C -> TiDB A. In such a topology, if one cluster fails, the whole data replication will be affected. Therefore, to enable bi-directional replication among multiple clusters, you need to connect each cluster with every other clusters, for example, `TiDB A <-> TiDB B`, `TiDB B <-> TiDB C`, `TiDB C <-> TiDB A`.
