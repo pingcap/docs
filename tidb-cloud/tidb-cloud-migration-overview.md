@@ -9,7 +9,7 @@ You can migrate data from a wide variety of data sources to TiDB Cloud. This doc
 
 ## Migrate data from MySQL-Compatible databases
 
-When you migrate data from MySQL-compatible databases, you can perform full data migration and incremental data migration. The migration scenarios and methods are as follows:
+When you migrate data from a MySQL-compatible database, you can perform full data migration and incremental data migration. The migration scenarios and methods are as follows:
 
 - Migrate using Data Migration
 
