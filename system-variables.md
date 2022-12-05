@@ -3252,7 +3252,12 @@ For details, see [Identify Slow Queries](/identify-slow-queries.md).
 - Type: Integer
 - Default value: `1`
 - Range: `[1, 15]`
+
+<CustomContent platform="tidb">
+
 - This variable is used to configure the different cluster IDs in a [bi-direcional replication](/ticdc/manage-ticdc.md#bi-directional-replication) cluster.
+
+</CustomContent>
 
 ### tidb_stats_cache_mem_quota <span class="version-mark">New in v6.1.0</span>
 
