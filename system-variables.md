@@ -835,7 +835,7 @@ MPP is a distributed computing framework provided by the TiFlash engine, which a
 - This variable is used to control whether to enable the [baseline capturing](/sql-plan-management.md#baseline-capturing) feature. This feature depends on the statement summary, so you need to enable the statement summary before you use baseline capturing.
 - After this feature is enabled, the historical SQL statements in the statement summary are traversed periodically, and bindings are automatically created for SQL statements that appear at least twice.
 
-### `tidb_cdc_write_source` <span class="version-mark">New in v6.5.0</span>
+### tidb_cdc_write_source <span class="version-mark">New in v6.5.0</span>
 
 - Scope: SESSION
 - Persists to cluster: No
