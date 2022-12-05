@@ -173,7 +173,7 @@ AWS DMS does not support replicating `DROP TABLE`.
 5. Click **Create task** in the lower-right corner.
 
 
-6. Go back to the [Data migration tasks](https://us-west-2.console.aws.amazon.com/dms/v2/home?region=us-west-2#tasks) page. Switch to your region. You can see the status and progress of the task.
+6. Go back to the [Data migration tasks](https://console.aws.amazon.com/dms/v2/home#tasks) page. Switch to your region. You can see the status and progress of the task.
 
     ![Tasks status](/media/tidb-cloud/aws-dms-tidb-cloud/aws-dms-to-tidb-cloud-task-status.png)
 
