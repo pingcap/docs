@@ -647,7 +647,7 @@ delimiter = ','
 quote = '"'
 # The character displayed when the CSV column is null. The default value is `\N`.
 null = '\N'
-# Whether to include commit-ts in the CSV column. The default value is false.
+# Whether to include commit-ts in CSV rows. The default value is false.
 include-commit-ts = false
 ```
 
