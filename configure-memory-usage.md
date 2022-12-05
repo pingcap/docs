@@ -113,12 +113,12 @@ The following example constructs a memory-intensive SQL statement that triggers 
 4. Check the `tidb.log` file which records the total system memory, current system memory usage, memory usage of the tidb-server instance, and the directory of status files.
 
     ```
-    [2022/10/11 16:39:02.281 +08:00] [WARN] [memoryusagealarm.go:212] ["tidb-server has the risk of OOM because of memory usage exceeds alarm ratio. Running SQLs and heap profile will be recorded in record path"] ["is server-memory-quota set"=false] ["system memory total"=33682427904] ["system memory usage"=22120655360] ["tidb-server memory usage"=21468556992] [memory-usage-alarm-ratio=0.85] ["record path"=/tiup/deploy/tidb-4000/log/oom_record]
+    [2022/10/11 16:39:02.281 +08:00] [WARN] [memoryusagealarm.go:212] ["tidb-server has the risk of OOM because of memory usage exceeds alarm ratio. Running SQLs and heap profile will be recorded in record path"] ["is tidb_server_memory_limit set"=false] ["system memory total"=33682427904] ["system memory usage"=22120655360] ["tidb-server memory usage"=21468556992] [memory-usage-alarm-ratio=0.85] ["record path"=/tiup/deploy/tidb-4000/log/oom_record]
     ```
 
     The fields of the example log file above are described as follows:
 
-    * `is server-memory-quota set` indicates whether [`server-memory-quota`](/tidb-configuration-file.md#server-memory-quota-new-in-v409) is set.
+    * `is tidb_server_memory_limit set` indicates whether [`tidb_server_memory_limit`](/system-variables.md#tidb_server_memory_limit-new-in-v640) is set.
     * `system memory total` indicates the total memory of the current system.
     * `system memory usage` indicates the current system memory usage.
     * `tidb-server memory usage` indicates the memory usage of the tidb-server instance.
