@@ -257,7 +257,7 @@ The `raw-scan` command scans directly from the RocksDB. Note that to scan data k
 Use `--from` and `--to` options to specify the range to scan (unbounded by default). Use `--limit` to limit at most how many keys to print out (30 by default). Use `--cf` to specify which cf to scan (can be `default`, `write` or `lock`).
 
 ```shell
-./tikv-ctl --data-dir /var/lib/tikv raw-scan --from 'zt' --limit 2 --cf default
+tikv-ctl --data-dir /var/lib/tikv raw-scan --from 'zt' --limit 2 --cf default
 ```
 
 ```
@@ -587,7 +587,7 @@ The `--ids` option can be used to specified a list of comma-separated data encry
 When using the command, you will see a prompt warning that the action will expose sensitive information. Type "I consent" to continue.
 
 ```shell
-./tikv-ctl --config=./conf.toml encryption-meta dump-key
+tikv-ctl --config=./conf.toml encryption-meta dump-key
 ```
 
 ```
@@ -598,7 +598,7 @@ current key id: 9291156302549018620
 ```
 
 ```shell
-./tikv-ctl --config=./conf.toml encryption-meta dump-key --ids=9291156302549018620
+tikv-ctl --config=./conf.toml encryption-meta dump-key --ids=9291156302549018620
 ```
 
 ```
