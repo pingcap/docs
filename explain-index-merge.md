@@ -7,7 +7,7 @@ summary: Learn about the execution plan information returned by the `EXPLAIN` st
 
 Index merge is a method introduced in TiDB v4.0 to access tables. Using this method, the TiDB optimizer can use multiple indexes per table and merge the results returned by each index. In some scenarios, this method makes the query more efficient by avoiding full table scans.
 
-Index merge in TiDB has two types: the intersection type and the union type. The former is suitable for the `AND` expression, while the latter is suitable for the `OR` expression. The union-type index merge is introduced in TiDB v4.0 as an experimental feature and has become GA in v5.4.0. The intersection type is introduced in TiDB v6.5.0, and can be used only when the [`USE_INDEX_MERGE`](/optimizer-hints.md#use_index_merget1_name-idx1_name--idx2_name-) hint is specified.
+Index merge in TiDB has two types: the intersection type and the union type. The former is applied to the `AND` expression, while the latter is applied to the `OR` expression. The union-type index merge is introduced in TiDB v4.0 as an experimental feature and has become GA in v5.4.0. The intersection type is introduced in TiDB v6.5.0, and can be used only when the [`USE_INDEX_MERGE`](/optimizer-hints.md#use_index_merget1_name-idx1_name--idx2_name-) hint is specified.
 
 ## Enable index merge
 
@@ -24,7 +24,7 @@ CREATE TABLE t(a int, b int, c int, d int, INDEX idx_a(a), INDEX idx_b(b), INDEX
 ```
 
 ```sql
-EXPLAIN SELECT /*+ NO_INDEX_MERGE() */  * FROM t WHERE a = 1 OR b = 1;
+EXPLAIN SELECT /*+ NO_INDEX_MERGE() */ * FROM t WHERE a = 1 OR b = 1;
 
 +-------------------------+----------+-----------+---------------+--------------------------------------+
 | id                      | estRows  | task      | access object | operator info                        |
@@ -46,7 +46,7 @@ EXPLAIN SELECT /*+ USE_INDEX_MERGE(t) */ * FROM t WHERE a > 1 OR b > 1;
 
 In the preceding query, the filter condition is a `WHERE` clause that uses `OR` as the connector. Without index merge, you can use only one index per table. `a = 1` cannot be pushed down to the index `a`; neither can `b = 1` be pushed down to the index `b`. The full table scan is inefficient when a huge volume of data exists in `t`. To handle such a scenario, index merge is introduced in TiDB to access tables.
 
-For the preceding query, the optimizer chooses the intersection-type index merge to access the table. Index merge allows the optimizer to use multiple indexes per table, to merge the results returned by each index and to generate the latter execution plan in the preceding output.
+For the preceding query, the optimizer chooses the union-type index merge to access the table. Index merge allows the optimizer to use multiple indexes per table, to merge the results returned by each index, and to generate the latter execution plan in the preceding output.
 
 In the output, the `type: union` information in `operator info` of the `IndexMerge_8` operator indicates that this operator is a union-type index merge operator. It has three child nodes. `IndexRangeScan_5` and `IndexRangeScan_6` scan the `RowID`s that meet the condition according to the range, and then the `TableRowIDScan_7` operator accurately reads all the data that meets the condition according to these `RowID`s.
 
@@ -78,13 +78,13 @@ EXPLAIN SELECT /*+ USE_INDEX_MERGE(t, idx_a, idx_b, idx_c) */ * FROM t WHERE a >
 
 From the preceding example, you can see that the filter condition is a `WHERE` clause that uses `AND` as the connector. Before index merge is enabled, the optimizer can only choose one of the three indexes (`idx_a`, `idx_b`, or `idx_c`).
 
-If one of the filter conditions has a good filtering performance, the optimizer directly chooses the corresponding index to achieve the ideal execution efficiency. However, if the data distribution meets all of the following three conditions, the optimizer considers using the intersection-type index merge:
+If one of the filter conditions has a low selectivity, the optimizer directly chooses the corresponding index to achieve the ideal execution efficiency. However, if the data distribution meets all of the following three conditions, you can consider using the intersection-type index merge:
 
 - The data size of the whole table is large, and directly reading the whole table is inefficient.
-- For each one of the three filter conditions, the respective filtering performance is not poor, so the execution efficiency of `IndexLookUp` using a single index is not ideal.
-- The overall filtering performance of the three filter conditions is good.
+- For each one of the three filter conditions, the respective selectivity is very high, so the execution efficiency of `IndexLookUp` using a single index is not ideal.
+- The overall selectivity of the three filter conditions is low.
 
-When using the intersection-type index merge to access table, the optimizer can choose to use multiple indexes on a table, and merge the results returned by each index to generate the execution plan of the latter `IndexMerge` in the preceding example output. The `type: intersection` information in the `operator info` of the `IndexMerge_9` operator indicates that this operator is an intersection-type index merge. The other parts of the execution plan are similar to the preceding union-type index merge example.
+When using the intersection-type index merge to access tables, the optimizer can choose to use multiple indexes on a table, and merge the results returned by each index to generate the execution plan of the latter `IndexMerge` in the preceding example output. The `type: intersection` information in the `operator info` of the `IndexMerge_9` operator indicates that this operator is an intersection-type index merge. The other parts of the execution plan are similar to the preceding union-type index merge example.
 
 > **Note:**
 >
@@ -92,7 +92,7 @@ When using the intersection-type index merge to access table, the optimizer can 
 >
 > - You can use the SQL hint [`USE_INDEX_MERGE`](/optimizer-hints.md#use_index_merget1_name-idx1_name--idx2_name-) to force the optimizer to apply Index Merge, regardless of the setting of `tidb_enable_index_merge`. To enable Index Merge when the filtering conditions contain expressions that cannot be pushed down, you must use the SQL hint [`USE_INDEX_MERGE`](/optimizer-hints.md#use_index_merget1_name-idx1_name--idx2_name-).
 >
-> - If the optimizer can choose the single index scan method (other than full table scan) for a query plan, the optimizer will not automatically select `IndexMerge`. For the optimizer to use `IndexMerge`, you need to use the optimizer hint.
+> - If the optimizer can choose the single index scan method (other than full table scan) for a query plan, the optimizer will not automatically use index merge. For the optimizer to use index merge, you need to use the optimizer hint.
 >
 > - Index Merge is not supported in [tempoaray tables](/temporary-tables.md) for now.
 >
