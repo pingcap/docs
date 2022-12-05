@@ -59,7 +59,7 @@ server-memory-quota = 34359738368
 
 デフォルトの構成では、マシンのメモリ使用量が合計メモリの 80% に達すると、tidb-server インスタンスはアラーム ログを出力し、関連するステータス ファイルを記録します。 `memory-usage-alarm-ratio`を構成することで、メモリ使用率のしきい値を設定できます。詳細なアラーム ルールについては、 [`memory-usage-alarm-ratio`](/tidb-configuration-file.md#memory-usage-alarm-ratio-new-in-v409)の説明を参照してください。
 
-アラームが一度トリガーされた後、メモリ使用率が 10 秒以上しきい値を下回り、再びしきい値に達した場合にのみ、アラームが再度トリガーされることに注意してください。さらに、アラームによって生成された過剰なステータス ファイルを保存しないように、現在、TiDB は最近の 5 つのアラーム中に生成されたステータス ファイルのみを保持します。
+アラームが一度トリガーされた後、メモリ使用率が 10 秒以上しきい値を下回り、再びしきい値に達した場合にのみ、アラームが再度トリガーされることに注意してください。さらに、アラームによって生成された過剰なステータス ファイルを保存しないようにするために、現在、TiDB は最近の 5 つのアラーム中に生成されたステータス ファイルのみを保持します。
 
 次の例では、アラームをトリガーするメモリ集約型の SQL ステートメントを作成します。
 
@@ -105,7 +105,7 @@ server-memory-quota = 34359738368
 
 ### ディスクこぼれ {#disk-spill}
 
-TiDB は、実行オペレーターのディスクスピルをサポートしています。 SQL 実行のメモリ使用量がメモリ クォータを超えると、tidb-server は実行オペレータの中間データをディスクにスピルして、メモリの負荷を軽減できます。ディスク スピルをサポートする演算子には、Sort、MergeJoin、HashJoin、HashAgg などがあります。
+TiDB は、実行オペレーターのディスクスピルをサポートしています。 SQL 実行のメモリ使用量がメモリ クォータを超えると、tidb-server は実行オペレータの中間データをディスクにスピルして、メモリの負荷を軽減することができます。ディスク スピルをサポートする演算子には、Sort、MergeJoin、HashJoin、HashAgg などがあります。
 
 -   ディスク スピルの動作は、 [`tidb_mem_quota_query`](/system-variables.md#tidb_mem_quota_query) 、 [`oom-use-tmp-storage`](/tidb-configuration-file.md#oom-use-tmp-storage) 、 [`tmp-storage-path`](/tidb-configuration-file.md#tmp-storage-path) 、および[`tmp-storage-quota`](/tidb-configuration-file.md#tmp-storage-quota)パラメータによって共同で制御されます。
 -   ディスク スピルがトリガーされると、TiDB はキーワード`memory exceeds quota, spill to disk now`または`memory exceeds quota, set aggregate mode to spill-mode`を含むログを出力します。
@@ -174,3 +174,23 @@ TiDB は、実行オペレーターのディスクスピルをサポートして
     +---------------------------------+-------------+----------+-----------+---------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------+-----------------------------------------------------------------+-----------+----------+
     9 rows in set (1 min 37.428 sec)
     ```
+
+## その他 {#others}
+
+### <code>GOMEMLIMIT</code>を構成して OOM の問題を軽減する {#mitigate-oom-issues-by-configuring-code-gomemlimit-code}
+
+GO 1.19 では、GC をトリガーするメモリ制限を設定する環境変数[`GOMEMLIMIT`](https://pkg.go.dev/runtime@go1.19#hdr-Environment_Variables)が導入されています。
+
+v6.1.3 &lt;= TiDB &lt; v6.5.0 の場合、手動で`GOMEMLIMIT`を設定することにより、OOM の問題の典型的なカテゴリを軽減できます。 OOM の問題の典型的なカテゴリは次のとおりです。次の図に示すように、OOM が発生する前に、Grafana で使用中の推定メモリがメモリ全体の半分しか占めていません (TiDB ランタイム &gt; メモリ使用量 &gt; 推定使用中)。
+
+![normal OOM case example](/media/configure-memory-usage-oom-example.png)
+
+`GOMEMLIMIT`のパフォーマンスを検証するために、特定のメモリ使用量を構成ありと構成なしで比較するテストが実行され`GOMEMLIMIT` 。
+
+-   TiDB v6.1.2 では、シミュレートされたワークロードが数分間実行された後、TiDBサーバーで OOM (システム メモリ: 約 48 GiB) が発生します。
+
+    ![v6.1.2 workload oom](/media/configure-memory-usage-612-oom.png)
+
+-   TiDB v6.1.3 では、 `GOMEMLIMIT`は 40000 MiB に設定されます。シミュレートされたワークロードは長時間安定して動作し、TiDBサーバーで OOM は発生せず、プロセスの最大メモリ使用量は約 40.8 GiB で安定していることがわかりました。
+
+    ![v6.1.3 workload no oom with GOMEMLIMIT](/media/configure-memory-usage-613-no-oom.png)
