@@ -15,8 +15,8 @@ Since v6.5.0, during the execution of the `INSERT INTO SELECT` statement, the qu
 
 > **Note:**
 >
-> - By default ([`tidb_allow_mpp = ON`](/system-variables#tidb_allow_mpp-new-in-v50)), the TiDB optimizer intelligently chooses to push down queries to TiKV or TiFlash based on the query cost. To enforce that the queries are pushed down to TiFlash, you can set the system variable [`tidb_enforce_mpp`](/system-variables#tidb_enforce_mpp-new-in-v51) to `ON`.
-> - During the experimental phase, this feature is disabled by default. To enable this feature, you can set the system variable [`tidb_enable_tiflash_read_for_write_stmt`](/system-variables#tidb_enable_tiflash_read_for_write_stmt) to `ON`.
+> - By default ([`tidb_allow_mpp = ON`](/system-variables.md#tidb_allow_mpp-new-in-v50)), the TiDB optimizer intelligently chooses to push down queries to TiKV or TiFlash based on the query cost. To enforce that the queries are pushed down to TiFlash, you can set the system variable [`tidb_enforce_mpp`](/system-variables#tidb_enforce_mpp-new-in-v51) to `ON`.
+> - During the experimental phase, this feature is disabled by default. To enable this feature, you can set the system variable [`tidb_enable_tiflash_read_for_write_stmt`](/system-variables.md#tidb_enable_tiflash_read_for_write_stmt-new-in-v630) to `ON`.
 
 The syntax of `INSERT INTO SELECT` is as follows.
 
