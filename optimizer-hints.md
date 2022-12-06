@@ -524,7 +524,7 @@ Use the [`QB_NAME` hint](#qb_name) to define a new name for each query block of 
 
 ### Step 2: Add the target hints
 
-After defining the `QB_NAME` hint for query blocks of the view, you can add required [hints that take effect in query blocks](#hints-that-take-effect-in-query-blocks) in the form of `ViewName@QueryBlockName` to make them take effect inside the view. For example:
+After defining the `QB_NAME` hint for query blocks of the view, you can add required [hints that take effect in query blocks](#hints-that-take-effect-in-query-blocks) in the form of `ViewName@QueryBlockName` to make them effective inside the view. For example:
 
 - Specify the `MERGE_JOIN()` hint for the first query block of the view `v2`:
 
