@@ -2526,18 +2526,20 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 <CustomContent platform="tidb">
 
 - For versions earlier than TiDB v6.1.0, this is a session scope variable and uses the value of `mem-quota-query` from `tidb.toml` as an initial value. Starting from v6.1.0, `tidb_mem_quota_query` is a `SESSION | GLOBAL` scope variable.
+- For versions earlier than TiDB v6.5.0, this variable is used to set the threshold value of memory quota for **a query**. If the memory quota of a query during execution exceeds the threshold value, TiDB performs the operation defined by [`tidb_mem_oom_action`](#tidb_mem_oom_action-new-in-v610).
+- For TiDB v6.5.0 and later versions, this variable is used to set the threshold value of memory quota for **a session**. If the memory quota of a session during execution exceeds the threshold value, TiDB performs the operation defined by [`tidb_mem_oom_action`](#tidb_mem_oom_action-new-in-v610). Note that starting from TiDB v6.5.0, the memory usage of a session contains the memory consumed by the transactions in the session. For the control behavior of transaction memory usage in TiDB v6.5.0 and later versions, see [`txn-total-size-limit`](/tidb-configuration-file.md#txn-total-size-limit).
+- When you set the variable value to `0` or `-1`, the memory threshold is positive infinity. When you set a value smaller than 128, the value will be defaulted to `128`.
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
 - For versions earlier than TiDB v6.1.0, this is a session scope variable. Starting from v6.1.0, `tidb_mem_quota_query` is a `SESSION | GLOBAL` scope variable.
+- For versions earlier than TiDB v6.5.0, this variable is used to set the threshold value of memory quota for **a query**. If the memory quota of a query during execution exceeds the threshold value, TiDB performs the operation defined by [`tidb_mem_oom_action`](#tidb_mem_oom_action-new-in-v610).
+- For TiDB v6.5.0 and later versions, this variable is used to set the threshold value of memory quota for **a session**. If the memory quota of a session during execution exceeds the threshold value, TiDB performs the operation defined by [`tidb_mem_oom_action`](#tidb_mem_oom_action-new-in-v610). Note that starting from TiDB v6.5.0, the memory usage of a session contains the memory consumed by the transactions in the session. For the control behavior of transaction memory usage in TiDB v6.5.0 and later versions, see [`txn-total-size-limit`](https://docs.pingcap.com/tidb/stable/tidb-configuration-file#txn-total-size-limit).
+- When you set the variable value to `0` or `-1`, the memory threshold is positive infinity. When you set a value smaller than 128, the value will be defaulted to `128`.
 
 </CustomContent>
-
-- For versions earlier than TiDB v6.5.0, this variable is used to set the threshold value of memory quota for **a query**. If the memory quota of a query during execution exceeds the threshold value, TiDB performs the operation defined by [`tidb_mem_oom_action`](#tidb_mem_oom_action-new-in-v610).
-- For TiDB v6.5.0 and later versions, this variable is used to set the threshold value of memory quota for **a session**. If the memory quota of a session during execution exceeds the threshold value, TiDB performs the operation defined by [`tidb_mem_oom_action`](#tidb_mem_oom_action-new-in-v610). Note that starting from TiDB v6.5.0, the memory usage of a session contains the memory consumed by the transactions in the session. For the control behavior of transaction memory usage in TiDB v6.5.0 and later versions, see [`txn-total-size-limit`](/tidb-configuration-file.md#txn-total-size-limit).
-- When you set the variable value to `0` or `-1`, the memory threshold is positive infinity. When you set a value smaller than 128, the value will be defaulted to `128`.
 
 ### tidb_memory_debug_mode_alarm_ratio
 
