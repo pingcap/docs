@@ -9,7 +9,7 @@ This document describes the usage scenarios, usage methods, and restrictions of 
 
 A non-transactional DML statement is a DML statement split into multiple SQL statements (which is, multiple batches) to be executed in sequence. It enhances the performance and ease of use in batch data processing at the expense of transactional atomicity and isolation.
 
-Usually, memory-consuming transactions need to be split into multiple SQL statements to bypass the transaction size limit. Non-transactional DML statements integrate this process into the TiDB kernel to achieve the same effect. You can understand the effect of non-transactional DML statements by splitting SQL statements. The `DRY RUN` syntax can be used to preview the split statements.
+Usually, memory-consuming transactions need to be split into multiple SQL statements to bypass the transaction size limit. Non-transactional DML statements integrate this process into the TiDB kernel to achieve the same effect. It is helpful to understand the effect of non-transactional DML statements by splitting SQL statements. The `DRY RUN` syntax can be used to preview the split statements.
 
 Non-transactional DML statements include:
 
@@ -45,11 +45,11 @@ Before using non-transactional DML statements, make sure that the following cond
 - The data to be operated on has no other concurrent writes, which means it is not updated by other statements at the same time. Otherwise, unexpected results such as missing writes, wrong writes, and modifying the same line multiple times might occur.
 - The statement does not modify the data to be read by the statement itself. Otherwise, the following batch will read the data written by the previous batch and easily causes unexpected results.
 
-    - The shard column should not be modified when selecting from and modifying the same table within an non-transactional `INSERT INTO ... SELECT` statement. Otherwise, multiple batches might read the same row and insert data multiple times:
+    - Avoid modifying the shard column when you select from and modify the same table within a non-transactional `INSERT INTO ... SELECT` statement. Otherwise, multiple batches might read the same row and insert data multiple times:
         - It is not recommended to use `BATCH ON test.t.id LIMIT 10000 INSERT INTO t SELECT id+1, value FROM t;`.
         - It is recommended to use `BATCH ON test.t.id LIMIT 10000 INSERT INTO t SELECT id, value FROM t;`.
         - If the shard column `id` has the `AUTO_INCREMENT` attribute, it is recommended to use `BATCH ON test.t.id LIMIT 10000 INSERT INTO t(value) SELECT value FROM t;`.
-    - The shard column should not be updated in the non-transactional `UPDATE`, `INSERT ... ON DUPLICATE KEY UPDATE`, or `REPLACE INTO` statement:
+    - Avoid updating the shard column in the non-transactional `UPDATE`, `INSERT ... ON DUPLICATE KEY UPDATE`, or `REPLACE INTO` statement:
         - For example, for a non-transactional `UPDATE` statement, the split SQL statements are executed in sequence. The modification of the previous batch is read by the next batch after the previous batch is committed, which causes the same line of data to be modified multiple times.
         - These statements do not support `BATCH ON test.t.id LIMIT 10000 UPDATE t SET test.t.id = test.t.id-1;`.
         - It is not recommended to use `BATCH ON test.t.id LIMIT 1 INSERT INTO t SELECT id+1, value FROM t ON DUPLICATE KEY UPDATE id = id + 1;`.
@@ -142,7 +142,7 @@ CREATE TABLE t2(id int, v int, key(id));
 INSERT INTO t2 VALUES (1,1), (3,3), (5,5);
 ```
 
-Then, update the data of table `t2` by joining table `t` and `t2`. Note that the shard column needs to be specified with the complete database name, table name, and column name (`test.t.id`):
+Then, update the data of table `t2` by joining table `t` and `t2`. Note that you need to specify the shard column along with the complete database name, table name, and column name (`test.t.id`):
 
 ```sql
 BATCH ON test.t._tidb_rowid LIMIT 1 UPDATE t JOIN t2 ON t.id = t2.id SET t2.id = t2.id+1;

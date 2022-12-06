@@ -23,6 +23,7 @@ The preceding statement specifies the column to be split as `test.t2.id`, which 
 
 ```sql
 BATCH ON id LIMIT 1 INSERT INTO t SELECT t2.id, t2.v, t3.v FROM t2 JOIN t3 ON t2.k = t3.k;
+
 Non-transactional DML, shard column must be fully specified
 ```
 
