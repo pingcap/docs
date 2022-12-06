@@ -313,10 +313,6 @@ In v6.2.0-DMR, the key new features and improvements are as follows:
     - `INFORMATION_SCHEMA.VARIABLES_INFO`: used for viewing information about TiDB system variables.
     - `PERFORMANCE_SCHEMA.SESSION_VARIABLES`: used for viewing information about TiDB session-level system variables.
 
-## Removed feature
-
-Since TiDB v6.2.0, backing up and restoring RawKV using BR is deprecated.
-
 ## Improvements
 
 + TiDB
