@@ -180,7 +180,6 @@ This document lists the features supported in each TiDB version. Note that suppo
 | [Statements summary tables](/statement-summary-tables.md)    | Y | Y | Y | Y | Y | Y | Y            |      Y       |      Y       |      Y       |      Y       |      Y       |
 | [Slow query log](/identify-slow-queries.md)                 | Y | Y | Y | Y | Y | Y  | Y            |      Y       |      Y       |      Y       |      Y       |      Y       |
 | [TiUP deployment](/tiup/tiup-overview.md)                   | Y | Y | Y | Y | Y | Y  | Y            |      Y       |      Y       |      Y       |      Y       |      Y       |
-| Ansible deployment                                           | N | N | N | N | N | N | N            |      N       |      N       |      N       |      N       |  Deprecated  |
 | [Kubernetes operator](https://docs.pingcap.com/tidb-in-kubernetes/) | Y | Y | Y | Y | Y | Y | Y            |      Y       |      Y       |      Y       |      Y       |      Y       |
 | [Built-in physical backup](/br/backup-and-restore-use-cases.md) | Y | Y | Y | Y | Y | Y | Y            |      Y       |      Y       |      Y       |      Y       |      Y       |
 | [Global Kill](/sql-statements/sql-statement-kill.md)       | Y | Y | Y | Y | Y | Experimental | Experimental | Experimental | Experimental | Experimental | Experimental | Experimental |
