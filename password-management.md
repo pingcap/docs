@@ -136,11 +136,11 @@ ERROR 1819 (HY000): Require Password Length: 8
 
 ### Password strength validation function
 
-To check the password strength, you can use the `VALIDATE_PASSWORD_STRENGTH()` function. This function accepts a password parameter and returns an integer from 0 (weak) to 100 (strong).
+To check the password strength, you can use the `VALIDATE_PASSWORD_STRENGTH()` function. This function accepts a password argument and returns an integer from 0 (weak) to 100 (strong).
 
 > **Note:**
 >
-> The password strength result is evaluated based on the current password complexity policy. If the password complexity policy is changed, the same password might get different evaluation results.
+> This function evaluates the password strength based on the current password complexity policy. If the password complexity policy is changed, the same password might get different evaluation results.
 
 The following example shows how to use the `VALIDATE_PASSWORD_STRENGTH()` function:
 
@@ -172,9 +172,9 @@ mysql> SELECT VALIDATE_PASSWORD_STRENGTH('N0Tweak$_@123!');
 
 ## Password expiration policy
 
-TiDB supports password expiration policy so that users must change their passwords periodically to improve password security. You can manually make account passwords expire or establish a policy for automatic password expiration.
+TiDB supports configuring a password expiration policy so that users must change their passwords periodically to improve password security. You can manually make account passwords expire or establish a policy for automatic password expiration.
 
-The automatic password expiration policy can be set globally or for individual accounts. The database administrator can establish a global password expiration policy or use an account-level policy to override the global policy.
+The automatic password expiration policy can be set at the global level and at the account level. As a database administrator, you can establish an automatic password expiration policy at the global level, and also use an account-level policy to override the global policy.
 
 The privileges for setting the password expiration policy is as follows:
 
@@ -192,7 +192,7 @@ ALTER USER 'test'@'localhost' PASSWORD EXPIRE;
 
 When the account password is set to expire by a database administrator, you must change the password before you can log in to TiDB. The manual expiration cannot be revoked.
 
-For roles created using the `CREATE ROLE` statement, since the role does not require a password, the password field for the role is empty. In such case, TiDB sets the `password_expired` attribute to `'Y'`, which means that the role's password is manually expired. The purpose of this design is to prevent the role from being unlocked and logged into TiDB with an empty password. When the role is unlocked by the `ALTER USER ... ACCOUNT UNLOCK` statement, you can log in with this account even though the password is empty. Therefore, TiDB make the password manually expired using the `password_expired` attribute so that the user must set a valid password for the account.
+For roles created using the `CREATE ROLE` statement, since the role does not require a password, the password field for the role is empty. In such case, TiDB sets the `password_expired` attribute to `'Y'`, which means that the role's password is manually expired. The purpose of this design is to prevent the role from being unlocked and logged into TiDB with an empty password. When the role is unlocked by the `ALTER USER ... ACCOUNT UNLOCK` statement, you can log in with this account even though the password is empty. Therefore, TiDB makes the password manually expired using the `password_expired` attribute so that the user must set a valid password for the account.
 
 ```sql
 mysql> CREATE ROLE testrole;
@@ -214,15 +214,15 @@ Automatic password expiration is based on the **password age** and the **passwor
 - Password age: the time interval from the last password change date to the current date. The time of the last password change is recorded in the `mysql.user` system table.
 - Password lifetime: the number of days the password can be used to log in to TiDB.
 
-If a password is used for a longer period than it is allowed to live, the server automatically marks the password as expired.
+If a password is used for a longer period than it is allowed to live, the server automatically treats the password as expired.
 
 TiDB supports automatic password expiration at the global level and at the account level.
 
 - The global level
 
-    You can set the system variable [`default_password_lifetime`](/system-variables.md#default_password_lifetime-new-in-v650) to control the password lifetime. The default value `0` indicates that the password never expires. If this system variable is set to an integer `N`, it means that the password lifetime is `N` days, and you must change your password within `N` days.
+    You can set the system variable [`default_password_lifetime`](/system-variables.md#default_password_lifetime-new-in-v650) to control the password lifetime. The default value `0` indicates that the password never expires. If this system variable is set to a positive integer `N`, it means that the password lifetime is `N` days, and you must change your password every `N` days.
 
-    The global automatic password expiration policy applies to all accounts that do not have an account level override.
+    The global automatic password expiration policy applies to all accounts that do not have an account-level override.
 
     The following example establishes a global automatic password expiration policy with a password lifetime of 180 days:
 
@@ -232,23 +232,23 @@ TiDB supports automatic password expiration at the global level and at the accou
 
 - The account level
 
-    To establish an automatic password expiration policy for an individual account, use the `PASSWORD EXPIRE` option of the `CREATE USER` or `ALTER USER` statement.
+    To establish an automatic password expiration policy for an individual account, use the `PASSWORD EXPIRE` option in the `CREATE USER` or `ALTER USER` statement.
 
-    The following example requires that the user password be changed every 90 days:
+    The following examples require that the user password is changed every 90 days:
 
     ```sql
     CREATE USER 'test'@'localhost' PASSWORD EXPIRE INTERVAL 90 DAY;
     ALTER USER 'test'@'localhost' PASSWORD EXPIRE INTERVAL 90 DAY;
     ```
 
-    The following example disables the automatic password expiration policy for the individual account:
+    The following examples disable the automatic password expiration policy for an individual account:
 
     ```sql
     CREATE USER 'test'@'localhost' PASSWORD EXPIRE NEVER;
     ALTER USER 'test'@'localhost' PASSWORD EXPIRE NEVER;
     ```
 
-    Remove the account-level automatic password expiration policy for the specified account so that it follows the global automatic password expiration policy:
+    Remove the account-level automatic password expiration policy for a specified account so that it follows the global automatic password expiration policy:
 
     ```sql
     CREATE USER 'test'@'localhost' PASSWORD EXPIRE DEFAULT;
@@ -257,26 +257,26 @@ TiDB supports automatic password expiration at the global level and at the accou
 
 ### Password expiration check mechanism
 
-When the client connects to the server, the server checks whether the password is expired in the following order:
+When a client connects to the TiDB server, the server checks whether the password is expired in the following order:
 
-1. The server checks whether the password is made expired manually.
-2. If the password is not manually expired, the server checks whether the password age is longer than its configured lifetime. If so, the server marks the password as expired.
+1. The server checks whether the password has been set expired manually.
+2. If the password is not manually expired, the server checks whether the password age is longer than its configured lifetime. If so, the server treats the password as expired.
 
 ### Handle an expired password
 
-You can control the behavior of the TiDB server when a password is expired. When a password is expired, the server either disconnects the client or restricts the client to the "sandbox mode". In a "sandbox mode", the TiDB server allows connections from the expired account. However, in such connections, the user is only allowed to reset the password.
+You can control the behavior of the TiDB server for password expiration. When a password is expired, the server either disconnects the client or restricts the client to the "sandbox mode". In a "sandbox mode", the TiDB server allows connections from the expired account. However, in such connections, the user is only allowed to reset the password.
 
-The TiDB server can control whether to restrict the user with an expired password in the "sandbox mode". To control the behavior of the TiDB server when a password is expired, configure the [`security.disconnect-on-expired-password`](/tidb-configuration-file.md#disconnect-on-expired-password-new-in-v650) configuration item in the TiDB configuration file:
+The TiDB server can control whether to restrict the user with an expired password in the "sandbox mode". To control the behavior of the TiDB server when a password is expired, configure the [`security.disconnect-on-expired-password`](/tidb-configuration-file.md#disconnect-on-expired-password-new-in-v650) parameter in the TiDB configuration file:
 
 ```toml
 [security]
 disconnect-on-expired-password = true
 ```
 
-- If `disconnect-on-expired-password` is set to `true` (default), which means that the server disconnects the client when the password is expired.
-- If `disconnect-on-expired-password` is set to `false`, the server enables the "sandbox mode" and allows the user to connect to the server. However, the user can only reset the password. After the password is reset, the user can run SQL statements normally.
+- If `disconnect-on-expired-password` is set to `true` (default), the server disconnects the client when the password is expired.
+- If `disconnect-on-expired-password` is set to `false`, the server enables the "sandbox mode" and allows the user to connect to the server. However, the user can only reset the password. After the password is reset, the user can execute SQL statements normally.
 
-When `disconnect-on-expired-password` is enabled, if the account password is expired, TiDB rejects the connection from the account. In such cases, you can modify the password in the following ways:
+When `disconnect-on-expired-password` is enabled, if an account password is expired, TiDB rejects the connection from the account. In such cases, you can modify the password in the following ways:
 
 - If the password for a normal account is expired, the administrator can change the password for the account by using SQL statements.
 - If the password for an administrator account is expired, another administrator can change the password for the account by using SQL statements.
@@ -290,8 +290,8 @@ The password reuse policy can be set at the global level and at the account leve
 
 TiDB records the password history for an account and limits the selection of a new password from the history:
 
-- If a password reuse policy is based on the number of password changes, the new password must not be the same as any of the specified number of previous passwords. For example, if the minimum number of password changes is set to 3, the new password cannot be the same as any of the previous 3 passwords.
-- If a password reuse policy is based on time elapsed, the new password must not be the same as any of the passwords used within the specified number of days. For example, if the password reuse interval is set to 60, the new password cannot be the same as any of the passwords used within the last 60 days.
+- If a password reuse policy is based on the number of password changes, a new password must not be the same as any of the specified number of most recent passwords. For example, if the minimum number of password changes is set to `3`, the new password cannot be the same as any of the previous 3 passwords.
+- If a password reuse policy is based on time elapsed, a new password must not be the same as any of the passwords used within the specified number of days. For example, if the password reuse interval is set to `60`, the new password cannot be the same as any of the passwords used within the last 60 days.
 
 > **Note:**
 >
@@ -301,7 +301,7 @@ TiDB records the password history for an account and limits the selection of a n
 
 To establish a global password reuse policy, use the [`password_history`](/system-variables.md#password_history-new-in-v650) and [`password_reuse_interval`](/system-variables.md#password_reuse_interval-new-in-v650) system variables.
 
-For example, to establish a global password reuse policy that prohibits the reuse of the last 6 passwords or passwords used within the last 365 days:
+For example, to establish a global password reuse policy that prohibits the reuse of the last 6 passwords and passwords used within the last 365 days:
 
 ```sql
 SET GLOBAL password_history = 6;
@@ -312,7 +312,7 @@ The global password reuse policy applies to all accounts that do not have an acc
 
 ### Account-level password reuse policy
 
-To establish an account-level password reuse policy, use the `PASSWORD HISTORY` and `PASSWORD REUSE INTERVAL` options of the `CREATE USER` or `ALTER USER` statement.
+To establish an account-level password reuse policy, use the `PASSWORD HISTORY` and `PASSWORD REUSE INTERVAL` options in the `CREATE USER` or `ALTER USER` statement.
 
 For example:
 
@@ -341,7 +341,7 @@ ALTER USER 'test'@'localhost'
   PASSWORD REUSE INTERVAL 365 DAY;
 ```
 
-To remove the account-level password reuse policy for the specified account so that it follows the global password reuse policy:
+To remove the account-level password reuse policy for a specified account so that it follows the global password reuse policy:
 
 ```sql
 CREATE USER 'test'@'localhost'
@@ -356,9 +356,9 @@ ALTER USER 'test'@'localhost'
 >
 > - If you set the password reuse policy multiple times, the last set value takes effect.
 > - The default value of the `PASSWORD HISTORY` and `PASSWORD REUSE INTERVAL` options is 0, which means that the reuse policy is disabled.
-> - When you modify the username, TiDB migrates the password history in the `mysql.password_history` system table from the original username to the new username.
+> - When you modify a username, TiDB migrates the corresponding password history in the `mysql.password_history` system table from the original username to the new username.
 
-## Failed-login tracking and temporary account locking
+## Failed-login tracking and temporary account locking policy
 
 TiDB can track the number of failed login attempts for an account. To prevent the password from being cracked by brute force, TiDB can lock the account after a specified number of failed login attempts.
 
@@ -370,11 +370,11 @@ TiDB can track the number of failed login attempts for an account. To prevent th
 
 ### Configure the login failure tracking policy
 
-You can configure the number of failed login attempts and the lock time for each account by using the `FAILED_LOGIN_ATTEMPTS` and `PASSWORD_LOCK_TIME` options of the `CREATE USER` or `ALTER USER` statement. The available value options are as follows:
+You can configure the number of failed login attempts and the lock time for each account by using the `FAILED_LOGIN_ATTEMPTS` and `PASSWORD_LOCK_TIME` options in the `CREATE USER` or `ALTER USER` statement. The available value options are as follows:
 
 - `FAILED_LOGIN_ATTEMPTS`: N. The account is temporarily locked after `N` consecutive login failures. The value of N ranges from 0 to 32767.
 - `PASSWORD_LOCK_TIME`: N | UNBOUNDED.
-    - N means that the account will be temporarily locked for `N` days after consecutive failed login attempts.
+    - N means that the account will be temporarily locked for `N` days after consecutive failed login attempts. The value of N ranges from 0 to 32767.
     - `UNBOUNDED` means that the lock time is unlimited, and the account must be manually unlocked. The value of N ranges from 0 to 32767.
 
 > **Note:**
@@ -384,7 +384,7 @@ You can configure the number of failed login attempts and the lock time for each
 
 You can configure the account locking policy as follows:
 
-Create a new user and configure the account locking policy. When the password is entered incorrectly for 3 consecutive times, the account will be temporarily locked for 3 days:
+Create a user and configure the account locking policy. When the password is entered incorrectly for 3 consecutive times, the account will be temporarily locked for 3 days:
 
 ```sql
 CREATE USER 'test1'@'localhost' IDENTIFIED BY 'password' FAILED_LOGIN_ATTEMPTS 3 PASSWORD_LOCK_TIME 3;
@@ -411,12 +411,12 @@ In the following scenarios, the count of consecutive password errors can be rese
 
 In the following scenarios, the locked account can be unlocked:
 
-- When the lock time ends. In such cases, the automatic lock flag of the account will be reset at the next login attempt.
+- When the lock time ends, the automatic lock flag of the account will be reset at the next login attempt.
 - When you execute the `ALTER USER ... ACCOUNT UNLOCK` statement.
 
 > **Note:**
 >
-> When an account is locked due to consecutive login failure, modifying the account locking policy has the following effects:
+> When an account is locked due to consecutive login failures, modifying the account locking policy has the following effects:
 >
 > - When you modify `FAILED_LOGIN_ATTEMPTS`, the lock status of the account does not change. The modified `FAILED_LOGIN_ATTEMPTS` takes effect after the account is unlocked and attempts to log in again.
-> - When you modify `PASSWORD_LOCK_TIME`, the lock status of the account does not change. The modified `PASSWORD_LOCK_TIME` takes effect when the account attempts to log in again. At this time, TiDB checks whether the new lock time has been met.
+> - When you modify `PASSWORD_LOCK_TIME`, the lock status of the account does not change. The modified `PASSWORD_LOCK_TIME` takes effect when the account attempts to log in again. At that time, TiDB checks whether the new lock time has reached. If yes, TiDB will unlock the user.
