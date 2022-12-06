@@ -8,6 +8,12 @@ aliases: ['/tidbcloud/beta/supported-tidb-versions','/tidbcloud/release-notes']
 
 このページでは、2022 年の[TiDB Cloud](https://www.pingcap.com/tidb-cloud/)のリリース ノートを一覧表示します。
 
+## 2022 年 12 月 6 日 {#december-6-2022}
+
+**一般的な変更**
+
+-   新しい[専用ティア](/tidb-cloud/select-cluster-tier.md#dedicated-tier)クラスターのデフォルトの TiDB バージョンを[v6.1.2](https://docs.pingcap.com/tidb/stable/release-6.1.2)から[v6.1.3](https://docs.pingcap.com/tidb/stable/release-6.1.3)にアップグレードします。
+
 ## 2022 年 11 月 29 日 {#november-29-2022}
 
 **一般的な変更**
@@ -117,7 +123,7 @@ aliases: ['/tidbcloud/beta/supported-tidb-versions','/tidbcloud/release-notes']
     -   [`tidb_prepared_plan_cache_size`](/system-variables.md#tidb_prepared_plan_cache_size-new-in-v610)
     -   [`tidb_query_log_max_len`](/system-variables.md#tidb_query_log_max_len)
 
--   新しい[専用層](/tidb-cloud/select-cluster-tier.md#dedicated-tier)クラスターのデフォルトの TiDB バージョンを[v6.1.1](https://docs.pingcap.com/tidb/stable/release-6.1.1)から[v6.1.2](https://docs.pingcap.com/tidb/stable/release-6.1.2)にアップグレードします。
+-   新しい[専用ティア](/tidb-cloud/select-cluster-tier.md#dedicated-tier)クラスターのデフォルトの TiDB バージョンを[v6.1.1](https://docs.pingcap.com/tidb/stable/release-6.1.1)から[v6.1.2](https://docs.pingcap.com/tidb/stable/release-6.1.2)にアップグレードします。
 
 ## 2022 年 10 月 19 日 {#october-19-2022}
 
@@ -125,7 +131,7 @@ aliases: ['/tidbcloud/beta/supported-tidb-versions','/tidbcloud/release-notes']
 
 -   [TiDB Cloud Vercel 統合](https://vercel.com/integrations/tidb-cloud) in [Vercel 統合マーケットプレイス](https://vercel.com/integrations#databases)を公開します。
 
-    [ヴェルセル](https://vercel.com)はフロントエンド開発者向けのプラットフォームであり、イノベーターがひらめいた瞬間に作成するために必要なスピードと信頼性を提供します。 TiDB Cloud Vercel Integration を使用すると、Vercel プロジェクトをTiDB Cloudクラスターに簡単に接続できます。詳しくは資料[TiDB Cloudと Vercel の統合](/tidb-cloud/integrate-tidbcloud-with-vercel.md)をご覧ください。
+    [ヴェルセル](https://vercel.com)はフロントエンド開発者向けのプラットフォームであり、イノベーターがインスピレーションの瞬間に作成するために必要なスピードと信頼性を提供します。 TiDB Cloud Vercel Integration を使用すると、Vercel プロジェクトをTiDB Cloudクラスターに簡単に接続できます。詳しくは資料[TiDB Cloudと Vercel の統合](/tidb-cloud/integrate-tidbcloud-with-vercel.md)をご覧ください。
 
 -   [TiDB Cloudスターター テンプレート](https://vercel.com/templates/next.js/tidb-cloud-starter) in [ヴェルセル テンプレート一覧](https://vercel.com/templates)を公開します。
 
@@ -174,7 +180,7 @@ aliases: ['/tidbcloud/beta/supported-tidb-versions','/tidbcloud/release-notes']
 
     スロー クエリ ページでは、TiDB クラスター内のすべてのスロー クエリを検索して表示し、その[実行計画](https://docs.pingcap.com/tidbcloud/explain-overview) 、SQL 実行情報、およびその他の詳細を表示して、各スロー クエリのボトルネックを調べることができます。
 
--   アカウントのパスワードをリセットすると、 TiDB Cloudは新しいパスワードの入力を最近の 4 つのパスワードと照合してチェックし、それらのいずれも使用しないように通知します。 4 つの使用済みパスワードのいずれも許可されません。
+-   アカウントのパスワードをリセットすると、 TiDB Cloudは新しいパスワード入力を最近の 4 つのパスワードと照合してチェックし、それらのいずれも使用しないように通知します。 4 つの使用済みパスワードのいずれも許可されません。
 
     詳細については、 [ユーザーのパスワードを管理する](/tidb-cloud/manage-user-access.md#manage-user-passwords)を参照してください。
 
@@ -218,7 +224,7 @@ aliases: ['/tidbcloud/beta/supported-tidb-versions','/tidbcloud/release-notes']
 
 -   [開発者層](/tidb-cloud/select-cluster-tier.md#serverless-tier-beta)クラスタの Playground を導入します。
 
-    Playground には、事前にロードされた GitHub イベントのデータセットが含まれています。これにより、データをインポートしたり、クライアントに接続したりすることなく、クエリを即座に実行してTiDB Cloudを開始できます。
+    Playground には、事前に読み込まれた GitHub イベントのデータセットが含まれています。これにより、データをインポートしたり、クライアントに接続したりすることなく、即座にクエリを実行してTiDB Cloudを開始できます。
 
 ## 2022 年 9 月 13 日 {#september-13-2022}
 
@@ -347,7 +353,7 @@ aliases: ['/tidbcloud/beta/supported-tidb-versions','/tidbcloud/release-notes']
 
 ## 2022 年 7 月 26 日 {#july-26-2022}
 
--   新しい[開発者層のクラスター](/tidb-cloud/select-cluster-tier.md#serverless-tier-beta)の自動ハイバネーションと再開をサポートします。
+-   新しい[開発者層のクラスター](/tidb-cloud/select-cluster-tier.md#serverless-tier-beta)の自動ハイバネーションとレジュームをサポートします。
 
     Developer Tier クラスターは、7 日間非アクティブになった後も削除されないため、1 年間の無料試用期間が終了するまでいつでも使用できます。非アクティブ状態が 24 時間続くと、Developer Tier クラスターは自動的に休止状態になります。クラスターを再開するには、クラスターに新しい接続を送信するか、 TiDB Cloudコンソールの [**再開**] ボタンをクリックします。クラスターは 50 秒以内に再開され、自動的にサービスに戻ります。
 
@@ -525,4 +531,4 @@ TiDB Cloudは一般提供になりました。次のいずれかのオプショ�
 バグの修正：
 
 -   パスワードに一重引用符が含まれていると、ユーザーがクラスターを作成できないという問題を修正します。
--   組織に所有者が 1 人しかいない場合でも、所有者が削除されたり、別の役割に変更されたりする可能性があるという問題を修正します。
+-   組織に所有者が 1 人しかいない場合でも、所有者が削除されたり、別のロールに変更されたりする可能性があるという問題を修正します。

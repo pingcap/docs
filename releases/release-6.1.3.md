@@ -33,7 +33,7 @@ TiDB バージョン: 6.1.3
 
     -   `mysql.tables_priv`テーブル[#38293](https://github.com/pingcap/tidb/issues/38293) @ [Cbcウェストウルフ](https://github.com/CbcWestwolf)で`grantor`フィールドが欠落している問題を修正
     -   結合したテーブルの再配置 [#38736](https://github.com/pingcap/tidb/issues/38736) @ [ウィノロス](https://github.com/winoros)で誤ってプッシュダウンされた条件が破棄されると、間違ったクエリ結果が発生する問題を修正
-    -   `get_lock()`で取得したロックが 10 分以上保持できない問題を修正[#38706](https://github.com/pingcap/tidb/issues/38706) @ [接線](https://github.com/tangenta)
+    -   `get_lock()`が取得したロックが 10 分以上保持できない問題を修正[#38706](https://github.com/pingcap/tidb/issues/38706) @ [接線](https://github.com/tangenta)
     -   自動インクリメント列がチェック制約[#38894](https://github.com/pingcap/tidb/issues/38894) @ [ヤンケアオ](https://github.com/YangKeao)で使用できない問題を修正
     -   gPRC ログが間違ったファイルに出力される問題を修正[#38941](https://github.com/pingcap/tidb/issues/38941) @ [xhebox](https://github.com/xhebox)
     -   テーブルがトランケートまたはドロップされた場合、テーブルの TiFlash 同期ステータスが etcd から削除されない問題を修正します[#37168](https://github.com/pingcap/tidb/issues/37168) @ [カルバンネオ](https://github.com/CalvinNeo)
@@ -70,6 +70,7 @@ TiDB バージョン: 6.1.3
     -   TiCDC
 
         -   最初に DDL ステートメントを実行し、次に changefeed [#7682](https://github.com/pingcap/tiflow/issues/7682) @ [アスドンメン](https://github.com/asddongmen)を一時停止して再開するシナリオで発生したデータ損失を修正
+        -   ダウンストリーム ネットワークが使用できない場合にシンク コンポーネントがスタックする問題を修正します[#7706](https://github.com/pingcap/tiflow/issues/7706) @ [ヒック](https://github.com/hicqu)
 
     -   TiDB データ移行 (DM)
 

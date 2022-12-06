@@ -136,7 +136,7 @@ AAFF
 
 ### Raftステート マシンの情報をビューする {#view-information-of-the-raft-state-machine}
 
-`raft`サブコマンドを使用して、特定の時点でのRaftステート マシンのステータスを表示します。ステータス情報には、3 つの構造体 ( **RegionLocalState** 、 <strong>RaftLocalState</strong> 、および<strong>RegionApplyState</strong> ) と、特定のログ片の対応するエントリの 2 つの部分が含まれます。
+`raft`サブコマンドを使用して、特定の時点でのRaftステート マシンのステータスを表示します。ステータス情報には、3 つの構造体 ( **RegionLocalState** 、 <strong>RaftLocalState</strong> 、および<strong>RegionApplyState</strong> ) と、特定のログの対応するエントリの 2 つの部分が含まれます。
 
 `region`および`log`サブコマンドを使用して、上記の情報をそれぞれ取得します。 2 つのサブコマンドは両方とも、リモート モードとローカル モードを同時にサポートします。それらの使用法と出力は次のとおりです。
 
@@ -569,7 +569,7 @@ TiKV の破損した SST ファイルにより、TiKV プロセスがpanicに陥
 > このコマンドを実行する前に、実行中の TiKV インスタンスを停止してください。
 
 ```bash
-$ tikv-ctl bad-ssts --data-dir </path/to/tikv> --pd <endpoint>
+tikv-ctl --data-dir </path/to/tikv> bad-ssts --pd <endpoint>
 ```
 
 ```bash
