@@ -201,9 +201,9 @@ Since v6.2, TiCDC supports splitting a single-table transaction into multiple tr
 
 If you still encounter an error above, it is recommended to use BR to restore the incremental data of large transactions. The detailed operations are as follows:
 
-1. Record the `checkpoint-ts` of the changefeed that is terminated due to large transactions, use this TSO as the `--lastbackupts` of the BR incremental backup, and execute [incremental data backup](/br/br-usage-backup.md#back-up-incremental-data).
+1. Record the `checkpoint-ts` of the changefeed that is terminated due to large transactions, use this TSO as the `--lastbackupts` of the BR incremental backup, and execute [incremental data backup](/br/br-incremental-guide.md#back-up-incremental-data).
 2. After backing up the incremental data, you can find a log record similar to `["Full backup Failed summary : total backup ranges: 0, total success: 0, total failed: 0"] [BackupTS=421758868510212097]` in the BR log output. Record the `BackupTS` in this log.
-3. [Restore the incremental data](/br/br-usage-restore.md#restore-incremental-data).
+3. [Restore the incremental data](/br/br-incremental-guide.md#restore-incremental-data).
 4. Create a new changefeed and start the replication task from `BackupTS`.
 5. Delete the old changefeed.
 
@@ -231,7 +231,7 @@ From the result, you can see that the table schema before and after the replicat
 
 Since v5.0.1 or v4.0.13, for each replication to MySQL, TiCDC automatically sets `explicit_defaults_for_timestamp = ON` to ensure that the time type is consistent between the upstream and downstream. For versions earlier than v5.0.1 or v4.0.13, pay attention to the compatibility issue caused by the inconsistent `explicit_defaults_for_timestamp` value when using TiCDC to replicate the time type data.
 
-## `enable-old-value` is set to `true` when I create a TiCDC replication task, but `INSERT`/`UPDATE` statements from the upstream become `REPLACE INTO` after being replicated to the downstream
+## Why do `INSERT`/`UPDATE` statements from the upstream become `REPLACE INTO` after being replicated to the downstream if I set `enable-old-value` to `true` when I create a TiCDC replication task?
 
 When a changefeed is created in TiCDC, the `safe-mode` setting defaults to `true`, which generates the `REPLACE INTO` statement to execute for the upstream `INSERT`/`UPDATE` statements.
 

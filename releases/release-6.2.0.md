@@ -2,11 +2,13 @@
 title: TiDB 6.2.0 Release Notes
 ---
 
-# TiDB v6.2.0 Release Notes
+# TiDB 6.2.0 Release Notes
 
 Release date: August 23, 2022
 
 TiDB version: 6.2.0-DMR
+
+Quick access: [Quick start](https://docs.pingcap.com/tidb/v6.2/quick-start-with-tidb) | [Installation packages](https://www.pingcap.com/download/?version=v6.2.0#version-list)
 
 In v6.2.0-DMR, the key new features and improvements are as follows:
 
@@ -17,9 +19,9 @@ In v6.2.0-DMR, the key new features and improvements are as follows:
 * The [Fine Grained Shuffle feature](/system-variables.md#tiflash_fine_grained_shuffle_batch_size-new-in-v620) allows parallel execution of window functions in multiple threads.
 * A [new concurrent DDL framework](/system-variables.md#tidb_enable_concurrent_ddl-new-in-v620): Less DDL statements blocked and higher execution efficiency.
 * TiKV supports [automatically tuning the CPU usage](/tikv-configuration-file.md#background-quota-limiter), thus ensuring stable and efficient database operations.
-* [Point-in-time recovery (PITR)](/br/point-in-time-recovery.md) is introduced to restore a snapshot of a TiDB cluster to a new cluster from any given time point in the past.
+* [Point-in-time recovery (PITR)](/br/backup-and-restore-overview.md) is introduced to restore a snapshot of a TiDB cluster to a new cluster from any given time point in the past.
 * TiDB Lightning supports [importing data to production clusters in the physical import mode](/tidb-lightning/tidb-lightning-physical-import-mode-usage.md#import-data-into-a-cluster-in-production).
-* BR supports [restoring user and privilege data](/br/br-usage-restore.md#restore-tables-in-the-mysql-schema), making backup and restore smoother.
+* BR supports [restoring user and privilege data](/br/br-snapshot-guide.md#restore-tables-in-the-mysql-schema), making backup and restore smoother.
 * TiCDC unlocks more data replication scenarios by supporting [filtering specific types of DDL events](/ticdc/manage-ticdc.md).
 * The [`SAVEPOINT` mechanism](/sql-statements/sql-statement-savepoint.md) is supported, with which you can flexibly control the rollback points within a transaction.
 * TiDB supports [adding, dropping, and modifying multiple columns or indexes with only one `ALTER TABLE` statement](/sql-statements/sql-statement-alter-table.md).
@@ -165,7 +167,7 @@ In v6.2.0-DMR, the key new features and improvements are as follows:
 
 * Support setting savepoints in transactions
 
-    A transaction is a logical collection of a series of consecutive operations with which the database guarantees ACID properties. In some complex application scenarios, you might need to manage many operations in a transaction, and sometimes you might need to roll back some operations in the transaction. “Savepoint” is a nameable mechanism for the internal implementation of transactions. With this mechanism, you can flexibly control the rollback points within a transaction, thereby managing the more complex transactions and having more freedom in designing diverse applications.
+    A transaction is a logical collection of a series of consecutive operations with which the database guarantees ACID properties. In some complex application scenarios, you might need to manage many operations in a transaction, and sometimes you might need to roll back some operations in the transaction. "Savepoint" is a nameable mechanism for the internal implementation of transactions. With this mechanism, you can flexibly control the rollback points within a transaction, thereby managing the more complex transactions and having more freedom in designing diverse applications.
 
     [User document](/sql-statements/sql-statement-savepoint.md) [#6840](https://github.com/pingcap/tidb/issues/6840) @[crazycs520](https://github.com/crazycs520)
 
@@ -175,7 +177,7 @@ In v6.2.0-DMR, the key new features and improvements are as follows:
 
     BR supports restoring user and privilege data when it performs a normal restoration. You do not need any additional restoration plan to restore user and privilege data. To enable this feature, specify the `--with-sys-table` parameter when you use BR to restore data.
 
-    [User document](/br/br-usage-restore.md#restore-tables-in-the-mysql-schema) [#35395](https://github.com/pingcap/tidb/issues/35395) @[D3Hunter](https://github.com/D3Hunter)
+    [User document](/br/br-snapshot-guide.md#restore-tables-in-the-mysql-schema) [#35395](https://github.com/pingcap/tidb/issues/35395) @[D3Hunter](https://github.com/D3Hunter)
 
 * Support point-in-time recovery (PITR) based on backup and restoration of log and snapshot
 
@@ -187,7 +189,7 @@ In v6.2.0-DMR, the key new features and improvements are as follows:
 
     This feature has usage limitations. For details, refer to the user document.
 
-    [User document](/br/point-in-time-recovery.md) [#29501](https://github.com/pingcap/tidb/issues/29501) @[joccau](https://github.com/joccau)
+    [User document](/br/backup-and-restore-overview.md) [#29501](https://github.com/pingcap/tidb/issues/29501) @[joccau](https://github.com/joccau)
 
 * DM supports continuous data validation (experimental)
 
@@ -219,10 +221,10 @@ In v6.2.0-DMR, the key new features and improvements are as follows:
 
     [User document](/tidb-lightning/tidb-lightning-physical-import-mode-usage.md#import-data-into-a-cluster-in-production) [#35148](https://github.com/pingcap/tidb/issues/35148) @[gozssky](https://github.com/gozssky)
 
-* Refactor the [user documentation of TiDB Lightning](/tidb-lightning/tidb-lightning-overview.md) to make its structure more reasonable and clear. The terms for “backend” is also modified to lower the understanding barrier for new users:
+* Refactor the [user documentation of TiDB Lightning](/tidb-lightning/tidb-lightning-overview.md) to make its structure more reasonable and clear. The terms for "backend" is also modified to lower the understanding barrier for new users:
 
-    - Replace “local backend” with “physical import mode”.
-    - Replace “tidb backend” with “logical import mode”.
+    - Replace "local backend" with "physical import mode".
+    - Replace "tidb backend" with "logical import mode".
 
 ### TiDB data share subscription
 
@@ -296,11 +298,11 @@ In v6.2.0-DMR, the key new features and improvements are as follows:
 
 - TiFlash `format_version` cannot be downgraded from `4` to `3`. For details, see [TiFlash v6.2.0 Upgrade Guide](/tiflash-620-upgrade-guide.md).
 - In v6.2.0 and later versions, it is strongly recommended to keep the default value `false` of `dt_enable_logical_split` and not to change it to `true`. For details, see known issue [#5576](https://github.com/pingcap/tiflash/issues/5576).
-- If the backup cluster has a TiFlash replica, after you perform PITR, the restoration cluster does not contain the data in the TiFlash replica. To restore data from the TiFlash replica, you need to manually configure TiFlash replicas. Executing the `exchange partition` DDL statement might result in a failure of PITR. If the upstream database uses TiDB Lightning's physical import mode to import data, the data cannot be backed up in log backup. It is recommended to perform a full backup after the data import. For other compatibility issues of PITR, see [PITR limitations](/br/point-in-time-recovery.md#limitations).
+- If the backup cluster has a TiFlash replica, after you perform PITR, the restoration cluster does not contain the data in the TiFlash replica. To restore data from the TiFlash replica, you need to manually configure TiFlash replicas. Executing the `exchange partition` DDL statement might result in a failure of PITR. If the upstream database uses TiDB Lightning's physical import mode to import data, the data cannot be backed up in log backup. It is recommended to perform a full backup after the data import. For other compatibility issues of PITR, see [PITR limitations](/br/backup-and-restore-overview.md#before-you-use).
 - Since TiDB v6.2.0, you can restore table in `mysql` schema by specifying the parameter `--with-sys-table=true` when restoring data.
 - When you execute the `ALTER TABLE` statement to add, drop, or modify multiple columns or indexes, TiDB checks table consistency by comparing the table before and after statement execution, regardless of the change in the same DDL statement. The execution order of the DDLs is not fully compatible with MySQL in some scenarios.
 - If the TiDB component is v6.2.0 or later, the TiKV component should not be earlier than v6.2.0.
-- TiKV adds a configuration item `split.region-cpu-overload-threshold-ratio` that supports [online configuration](/dynamic-config.md#modify-tikv-configuration-online).
+- TiKV adds a configuration item `split.region-cpu-overload-threshold-ratio` that supports [dynamic configuration](/dynamic-config.md#modify-tikv-configuration-dynamically).
 - Slow query logs, `information_schema.statements_summary`, and `information_schema.slow_query`can export `binary_plan`, or execution plans encoded in the binary format.
 - Two columns are added to the `SHOW TABLE ... REGIONS` statement: `SCHEDULING_CONSTRAINTS` and `SCHEDULING_STATE`, which respectively indicate Region scheduling constraints in Placement in SQL and the current scheduling state.
 - Since TiDB v6.2.0, you can capture data changes of RawKV via [TiKV-CDC](https://github.com/tikv/migration/tree/main/cdc).
@@ -319,7 +321,7 @@ Since TiDB v6.2.0, backing up and restoring RawKV using BR is deprecated.
 
 + TiDB
 
-    - Support the  `SHOW COUNT(*) WARNINGS` and `SHOW COUNT(*) ERRORS` statements [#25068](https://github.com/pingcap/tidb/issues/25068) @[likzn](https://github.com/likzn)
+    - Support the `SHOW COUNT(*) WARNINGS` and `SHOW COUNT(*) ERRORS` statements [#25068](https://github.com/pingcap/tidb/issues/25068) @[likzn](https://github.com/likzn)
     - Add validation check for some system variables [#35048](https://github.com/pingcap/tidb/issues/35048) @[morgo](https://github.com/morgo)
     - Optimize the error messages for some type conversions [#32447](https://github.com/pingcap/tidb/issues/32744) @[fanrenhoo](https://github.com/fanrenhoo)
     - The `KILL` command now supports DDL operations [#24144](https://github.com/pingcap/tidb/issues/24144) @[morgo](https://github.com/morgo)
@@ -368,7 +370,7 @@ Since TiDB v6.2.0, backing up and restoring RawKV using BR is deprecated.
 
     - TiUP
 
-        - When a new cluster is deployed using TiUP,  node-exporter will use the [1.3.1](https://github.com/prometheus/node_exporter/releases/tag/v1.3.1) version, and blackbox-exporter will use the [0.21.1](https://github.com/prometheus/blackbox_exporter/releases/tag/v0.21.1) version, which ensures successful deployment in different systems and environments
+        - When a new cluster is deployed using TiUP, node-exporter will use the [1.3.1](https://github.com/prometheus/node_exporter/releases/tag/v1.3.1) version, and blackbox-exporter will use the [0.21.1](https://github.com/prometheus/blackbox_exporter/releases/tag/v0.21.1) version, which ensures successful deployment in different systems and environments
 
 ## Bug fixes
 

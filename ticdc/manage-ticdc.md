@@ -12,14 +12,14 @@ You can also use the HTTP interface (the TiCDC OpenAPI feature) to manage the Ti
 
 ## Upgrade TiCDC using TiUP
 
-This section introduces how to upgrade the TiCDC cluster using TiUP. In the following example, assume that you need to upgrade TiCDC and the entire TiDB cluster to v6.3.0.
+This section introduces how to upgrade the TiCDC cluster using TiUP. In the following example, assume that you need to upgrade TiCDC and the entire TiDB cluster to v6.4.0.
 
 {{< copyable "shell-regular" >}}
 
 ```shell
 tiup update --self && \
 tiup update --all && \
-tiup cluster upgrade <cluster-name> v6.3.0
+tiup cluster upgrade <cluster-name> v6.4.0
 ```
 
 ### Notes for upgrade
@@ -31,7 +31,7 @@ tiup cluster upgrade <cluster-name> v6.3.0
 
 This section introduces how to modify the configuration of TiCDC cluster using the  [`tiup cluster edit-config`](/tiup/tiup-component-cluster-edit-config.md) command of TiUP. The following example changes the value of `gc-ttl` from the default `86400` to `3600`, namely, one hour.
 
-First, execute the following command. You need to replace `<cluster-name>` with your actual cluster name.
+First, run the following command. You need to replace `<cluster-name>` with your actual cluster name.
 
 {{< copyable "shell-regular" >}}
 
@@ -54,7 +54,7 @@ Then, enter the vi editor page and modify the `cdc` configuraion under [`server-
     gc-ttl: 3600
 ```
 
-After the modification, execute the `tiup cluster reload -R cdc` command to reload the configuration.
+After the modification, run the `tiup cluster reload -R cdc` command to reload the configuration.
 
 ## Use TLS
 
@@ -71,7 +71,7 @@ This section introduces how to use `cdc cli` to manage a TiCDC cluster and data 
 >
 > The IP address and port that TiCDC listens on correspond to the `advertise-client-urls` parameter specified during the `cdc-server` startup. Starting from TiCDC v6.2.0, the `cdc cli` command can directly interact with TiCDC server via TiCDC Open API. You can specify the address of TiCDC server using the `--server` parameter. `--pd` is deprecated and no longer recommended.
 
-If you deploy TiCDC using TiUP, replace `cdc cli` in the following commands with `tiup ctl cdc`.
+If you deploy TiCDC using TiUP, replace `cdc cli` in the following commands with `tiup ctl:<cluster-version> cdc`.
 
 ### Manage TiCDC service progress (`capture`)
 
@@ -118,18 +118,18 @@ The states in the above state transfer diagram are described as follows:
 
 The numbers in the above state transfer diagram are described as follows.
 
-- ① Execute the `changefeed pause` command
-- ② Execute the `changefeed resume` command to resume the replication task
+- ① Run the `changefeed pause` command.
+- ② Run the `changefeed resume` command to resume the replication task.
 - ③ Recoverable errors occur during the `changefeed` operation, and the operation is resumed automatically.
-- ④ Execute the `changefeed resume` command to resume the replication task
-- ⑤ Recoverable errors occur during the `changefeed` operation
+- ④ Run the `changefeed resume` command to resume the replication task.
+- ⑤ Unrecoverable errors occur during the `changefeed` operation.
 - ⑥ `changefeed` has reached the preset `TargetTs`, and the replication is automatically stopped.
 - ⑦ `changefeed` suspended longer than the duration specified by `gc-ttl`, and cannot be resumed.
 - ⑧ `changefeed` experienced an unrecoverable error when trying to execute automatic recovery.
 
 #### Create a replication task
 
-Execute the following commands to create a replication task:
+Run the following commands to create a replication task:
 
 ```shell
 cdc cli changefeed create --server=http://10.0.10.25:8300 --sink-uri="mysql://root:123456@127.0.0.1:3306/" --changefeed-id="simple-replication-task" --sort-engine="unified"
@@ -178,7 +178,7 @@ The following are descriptions of parameters and parameter values that can be co
 | Parameter/Parameter Value    | Description                                             |
 | :------------ | :------------------------------------------------ |
 | `root`        | The username of the downstream database                              |
-| `123456`       | The password of the downstream database                                      |
+| `123456`       | The password of the downstream database (can be encoded using Base64)                                      |
 | `127.0.0.1`    | The IP address of the downstream database                               |
 | `3306`         | The port for the downstream data                                 |
 | `worker-count` | The number of SQL statements that can be concurrently executed to the downstream (optional, `16` by default)       |
@@ -187,7 +187,23 @@ The following are descriptions of parameters and parameter values that can be co
 | `ssl-cert` | The path of the certificate file needed to connect to the downstream MySQL instance (optional) |
 | `ssl-key` | The path of the certificate key file needed to connect to the downstream MySQL instance (optional) |
 | `time-zone` | The time zone used when connecting to the downstream MySQL instance, which is effective since v4.0.8. This is an optional parameter. If this parameter is not specified, the time zone of TiCDC service processes is used. If this parameter is set to an empty value, no time zone is specified when TiCDC connects to the downstream MySQL instance and the default time zone of the downstream is used. |
-| `transaction-atomicity`  |  The atomicity level of a transaction. This is an optional parameter, with the default value of `table`. When the value is `table`, TiCDC ensures the atomicity of a single-table transaction. When the value is `none`, TiCDC splits the single-table transaction.  |
+| `transaction-atomicity`  |  The atomicity level of a transaction. This is an optional parameter, with the default value of `none`. When the value is `table`, TiCDC ensures the atomicity of a single-table transaction. When the value is `none`, TiCDC splits the single-table transaction.  |
+
+To encode the database password in the Sink URI using Base64, use the following command:
+
+```shell
+echo -n '123456' | base64  # '123456' is the password to be encoded.
+```
+
+The encoded password is `MTIzNDU2`:
+
+```shell
+MTIzNDU2
+```
+
+> **Note:**
+>
+> When the sink URI contains special characters such as `! * ' ( ) ; : @ & = + $ , / ? % # [ ]`, you need to escape the special characters, for example, in [URI Encoder](https://meyerweb.com/eric/tools/dencoder/).
 
 #### Configure sink URI with `kafka`
 
@@ -324,7 +340,7 @@ In the command above, `changefeed.toml` is the configuration file for the replic
 
 #### Query the replication task list
 
-Execute the following command to query the replication task list:
+Run the following command to query the replication task list:
 
 {{< copyable "shell-regular" >}}
 
@@ -349,12 +365,12 @@ cdc cli changefeed list --server=http://10.0.10.25:8300
     - `normal`: The replication task runs normally.
     - `stopped`: The replication task is stopped (manually paused).
     - `error`: The replication task is stopped (by an error).
-    - `removed`: The replication task is removed. Tasks of this state are displayed only when you have specified the `--all` option. To see these tasks when this option is not specified, execute the `changefeed query` command.
-    - `finished`: The replication task is finished (data is replicated to the `target-ts`). Tasks of this state are displayed only when you have specified the `--all` option. To see these tasks when this option is not specified, execute the `changefeed query` command.
+    - `removed`: The replication task is removed. Tasks of this state are displayed only when you have specified the `--all` option. To see these tasks when this option is not specified, run the `changefeed query` command.
+    - `finished`: The replication task is finished (data is replicated to the `target-ts`). Tasks of this state are displayed only when you have specified the `--all` option. To see these tasks when this option is not specified, run the `changefeed query` command.
 
 #### Query a specific replication task
 
-To query a specific replication task, execute the `changefeed query` command. The query result includes the task information and the task state. You can specify the `--simple` or `-s` argument to simplify the query result that will only include the basic replication state and the checkpoint information. If you do not specify this argument, detailed task configuration, replication states, and replication table information are output.
+To query a specific replication task, run the `changefeed query` command. The query result includes the task information and the task state. You can specify the `--simple` or `-s` argument to simplify the query result that will only include the basic replication state and the checkpoint information. If you do not specify this argument, detailed task configuration, replication states, and replication table information are output.
 
 ```shell
 cdc cli changefeed query -s --server=http://10.0.10.25:8300 --changefeed-id=simple-replication-task
@@ -454,7 +470,7 @@ In the command and result above:
 
 #### Pause a replication task
 
-Execute the following command to pause a replication task:
+Run the following command to pause a replication task:
 
 ```shell
 cdc cli changefeed pause --server=http://10.0.10.25:8300 --changefeed-id simple-replication-task
@@ -466,7 +482,7 @@ In the above command:
 
 #### Resume a replication task
 
-Execute the following command to resume a paused replication task:
+Run the following command to resume a paused replication task:
 
 ```shell
 cdc cli changefeed resume --server=http://10.0.10.25:8300 --changefeed-id simple-replication-task
@@ -483,7 +499,7 @@ cdc cli changefeed resume --server=http://10.0.10.25:8300 --changefeed-id simple
 
 #### Remove a replication task
 
-Execute the following command to remove a replication task:
+Run the following command to remove a replication task:
 
 {{< copyable "shell-regular" >}}
 
@@ -574,22 +590,27 @@ case-sensitive = true
 # Specifies whether to output the old value. New in v4.0.5. Since v5.0, the default value is `true`.
 enable-old-value = true
 
-# Specifies whether to enable the Syncpoint feature, which is supported since v6.3.0.
-enable-sync-point = true
+# Specifies whether to enable the Syncpoint feature, which is supported since v6.3.0 and is disabled by default.
+# Since v6.4.0, only the changefeed with the SYSTEM_VARIABLES_ADMIN or SUPER privilege can use the TiCDC Syncpoint feature.
+enable-sync-point = false
 
 # Specifies the interval at which Syncpoint aligns the upstream and downstream snapshots.
 # The format is in h m s. For example, "1h30m30s".
 # The default value is "10m" and the minimum value is "30s".
-sync-point-interval = "5m"
+# sync-point-interval = "5m"
 
 # Specifies how long the data is retained by Syncpoint in the downstream table. When this duration is exceeded, the data is cleaned up.
 # The format is in h m s. For example, "24h30m30s".
 # The default value is "24h".
-sync-point-retention = "1h"
+# sync-point-retention = "1h"
+
+[mounter]
+# The number of threads with which the mounter decodes KV data. The default value is 16.
+# worker-num = 16
 
 [filter]
 # Ignores the transaction of specified start_ts.
-ignore-txn-start-ts = [1, 2]
+# ignore-txn-start-ts = [1, 2]
 
 # Filter rules.
 # Filter syntax: https://docs.pingcap.com/tidb/stable/table-filter#syntax.
@@ -692,6 +713,7 @@ Description of configuration parameters :
 * In TiCDC v4.0.0, `ignore-txn-commit-ts` is removed and `ignore-txn-start-ts` is added, which uses start_ts to filter transactions.
 * In TiCDC v4.0.2, `db-dbs`/`db-tables`/`ignore-dbs`/`ignore-tables` are removed and `rules` is added, which uses new filter rules for databases and tables. For detailed filter syntax, see [Table Filter](/table-filter.md).
 * In TiCDC v6.1.0, `mounter` is removed. If you configure `mounter`, TiCDC does not report an error, but the configuration does not take effect.
+* Since v6.4.0, only the changefeed with the `SYSTEM_VARIABLES_ADMIN` or `SUPER` privilege can use the TiCDC Syncpoint feature.
 
 ## Customize the rules for Topic and Partition dispatchers of Kafka Sink
 
@@ -814,7 +836,7 @@ Unified sorter is the sorting engine in TiCDC. It can mitigate OOM problems caus
 
 For the changefeeds created using `cdc cli` after v4.0.13, Unified Sorter is enabled by default; for the changefeeds that have existed before v4.0.13, the previous configuration is used.
 
-To check whether or not the Unified Sorter feature is enabled on a changefeed, you can execute the following example command (assuming the IP address of the PD instance is `http://10.0.10.25:2379`):
+To check whether or not the Unified Sorter feature is enabled on a changefeed, you can run the following example command (assuming the IP address of the PD instance is `http://10.0.10.25:2379`):
 
 ```shell
 cdc cli --server="http://10.0.10.25:8300" changefeed query --changefeed-id=simple-replication-task | grep 'sort-engine'

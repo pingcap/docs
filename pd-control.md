@@ -29,7 +29,7 @@ To obtain `pd-ctl` of the latest version, download the TiDB server installation 
 
 > **Note:**
 >
-> `{version}` in the link indicates the version number of TiDB. For example, the download link for `v6.3.0` in the `amd64` architecture is `https://download.pingcap.org/tidb-community-server-v6.3.0-linux-amd64.tar.gz`.
+> `{version}` in the link indicates the version number of TiDB. For example, the download link for `v6.4.0` in the `amd64` architecture is `https://download.pingcap.org/tidb-community-server-v6.4.0-linux-amd64.tar.gz`.
 
 ### Compile from source code
 
@@ -41,26 +41,26 @@ To obtain `pd-ctl` of the latest version, download the TiDB server installation 
 Single-command mode:
 
 ```bash
-tiup ctl pd store -u http://127.0.0.1:2379
+tiup ctl:<cluster-version> pd store -u http://127.0.0.1:2379
 ```
 
 Interactive mode:
 
 ```bash
-tiup ctl pd -i -u http://127.0.0.1:2379
+tiup ctl:<cluster-version> pd -i -u http://127.0.0.1:2379
 ```
 
 Use environment variables:
 
 ```bash
 export PD_ADDR=http://127.0.0.1:2379
-tiup ctl pd
+tiup ctl:<cluster-version> pd
 ```
 
 Use TLS to encrypt:
 
 ```bash
-tiup ctl pd -u https://127.0.0.1:2379 --cacert="path/to/ca" --cert="path/to/cert" --key="path/to/key"
+tiup ctl:<cluster-version> pd -u https://127.0.0.1:2379 --cacert="path/to/ca" --cert="path/to/cert" --key="path/to/key"
 ```
 
 ## Command line flags

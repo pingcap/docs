@@ -370,6 +370,8 @@ Three system variables related to automatic update of statistics are as follows:
 
 When the ratio of the number of modified rows to the total number of rows of `tbl` in a table is greater than `tidb_auto_analyze_ratio`, and the current time is between `tidb_auto_analyze_start_time` and `tidb_auto_analyze_end_time`, TiDB executes the `ANALYZE TABLE tbl` statement in the background to automatically update the statistics on this table.
 
+To avoid the situation that modifying a small amount of data on a small table frequently triggers the automatic update, when a table has less than 1000 rows, such data modifying does not trigger the automatic update in TiDB. You can use the `SHOW STATS_META` statement to view the number of rows in a table.
+
 > **Note:**
 >
 > Currently, the automatic update does not record the configuration items input at manual `ANALYZE`. Therefore, when you use the `WITH` syntax to control the collecting behavior of `ANALYZE`, you need to manually set scheduled tasks to collect statistics.
@@ -710,22 +712,18 @@ The preceding statement only deletes GlobalStats generated in dynamic pruning mo
 
 By default, depending on the size of column statistics, TiDB loads statistics differently as follows:
 
-- For statistics that consume small space (such as count, distinctCount, and nullCount), as long as the column data is updated, TiDB automatically loads the corresponding statistics into memory for use in the SQL optimization stage.
-- For statistics that consume large space (such as histograms, TopN, and Count-Min Sketch), to ensure the performance of SQL execution, TiDB loads the statistics asynchronously on demand. Take histograms as an example. TiDB loads histogram statistics on a column into memory only when the optimizer uses the histogram statistics on that column. On-demand asynchronous statistics loading does not affect the performance of SQL execution but might provide incomplete statistics for SQL optimization.
+- For statistics that consume small amounts of memory (such as count, distinctCount, and nullCount), as long as the column data is updated, TiDB automatically loads the corresponding statistics into memory for use in the SQL optimization stage.
+- For statistics that consume large amounts of memory (such as histograms, TopN, and Count-Min Sketch), to ensure the performance of SQL execution, TiDB loads the statistics asynchronously on demand. Take histograms as an example. TiDB loads histogram statistics on a column into memory only when the optimizer uses the histogram statistics on that column. On-demand asynchronous statistics loading does not affect the performance of SQL execution but might provide incomplete statistics for SQL optimization.
 
 Since v5.4.0, TiDB introduces the synchronously loading statistics feature. This feature allows TiDB to synchronously load large-sized statistics (such as histograms, TopN, and Count-Min Sketch statistics) into memory when you execute SQL statements, which improves the completeness of statistics for SQL optimization.
 
-> **Warning:**
->
-> Currently, synchronously loading statistics is an experimental feature. It is not recommended that you use it in production environments.
-
-The synchronously loading statistics feature is disabled by default. To enable this feature, set the value of the [`tidb_stats_load_sync_wait`](/system-variables.md#tidb_stats_load_sync_wait-new-in-v540) system variable to a timeout (in milliseconds) that SQL optimization can wait for at most to synchronously load complete column statistics. The default value of this variable is `0`, indicating that the feature is disabled.
+To enable this feature, set the value of the [`tidb_stats_load_sync_wait`](/system-variables.md#tidb_stats_load_sync_wait-new-in-v540) system variable to a timeout (in milliseconds) that SQL optimization can wait for at most to synchronously load complete column statistics. The default value of this variable is `100`, indicating that the feature is enabled.
 
 <CustomContent platform="tidb">
 
 After enabling the synchronously loading statistics feature, you can further configure the feature as follows:
 
-- To control how TiDB behaves when the waiting time of SQL optimization reaches the timeout, modify the value of the [`tidb_stats_load_pseudo_timeout`](/system-variables.md#tidb_stats_load_pseudo_timeout-new-in-v540) system variable. The default value of this variable is `OFF`, indicating that the SQL execution fails after the timeout. If you set this variable to `ON`, after the timeout, the SQL optimization process does not use any histogram, TopN, or CMSketch statistics on any columns, but gets back to using pseudo statistics.
+- To control how TiDB behaves when the waiting time of SQL optimization reaches the timeout, modify the value of the [`tidb_stats_load_pseudo_timeout`](/system-variables.md#tidb_stats_load_pseudo_timeout-new-in-v540) system variable. The default value of this variable is `ON`, indicating that after the timeout, the SQL optimization process does not use any histogram, TopN, or CMSketch statistics on any columns. If this variable is set to `OFF`, after the timeout, SQL execution fails.
 - To specify the maximum number of columns that the synchronously loading statistics feature can process concurrently, modify the value of the [`stats-load-concurrency`](/tidb-configuration-file.md#stats-load-concurrency-new-in-v540) option in the TiDB configuration file. The default value is `5`.
 - To specify the maximum number of column requests that the synchronously loading statistics feature can cache, modify the value of the [`stats-load-queue-size`](/tidb-configuration-file.md#stats-load-queue-size-new-in-v540) option in the TiDB configuration file. The default value is `1000`.
 
