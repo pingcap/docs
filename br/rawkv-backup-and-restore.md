@@ -7,7 +7,7 @@ summary: Learn how to back up and restore RawKV using BR.
 
 > **Warning:**
 >
-> This feature is in the experiment, without being thoroughly tested. It is NOT recommended that you use it in the production environment.
+> This feature is experimental, without being thoroughly tested. It is NOT recommended that you use it in the production environment.
 
 TiKV and PD can constitute a KV database when used without TiDB, which is called RawKV. Backup & Restore (BR) supports data backup and restore for products that use RawKV. This document describes how to back up and restore RawKV.
 
