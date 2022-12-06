@@ -3883,31 +3883,31 @@ For details, see [Identify Slow Queries](/identify-slow-queries.md).
 
 > **Warning:**
 >
-> TTL is an experimental feature. This system variable might be changed or removed in future releases.
+> [TTL](/time-to-live.md) is an experimental feature. This system variable might be changed or removed in future releases.
 
 - Scope: GLOBAL
 - Persists to cluster: Yes
 - Default value: `0`
 - Range: `[0, 9223372036854775807]`
-- This variable is used to limit the rate of `DELETE` statements in TTL jobs on each node. The value represents the maximum number of `DELETE` statements allowed per second in a single node in a TTL job. When this variable is set to `0`, no limit is applied.
+- This variable is used to limit the rate of `DELETE` statements in TTL jobs on each TiDB node. The value represents the maximum number of `DELETE` statements allowed per second in a single node in a TTL job. When this variable is set to `0`, no limit is applied.
 
 ### tidb_ttl_delete_batch_size <span class="version-mark">New in v6.5.0</span>
 
 > **Warning:**
 >
-> TTL is an experimental feature. This system variable might be changed or removed in future releases.
+> [TTL](/time-to-live.md) is an experimental feature. This system variable might be changed or removed in future releases.
 
 - Scope: GLOBAL
 - Persists to cluster: Yes
 - Default value: `100`
 - Range: `[1, 10240]`
-- This variable is used to set the maximum number of rows in a single `DELETE` transaction in a TTL job.
+- This variable is used to set the maximum number of rows that can be deleted in a single `DELETE` transaction in a TTL job.
 
 ### tidb_ttl_delete_worker_count <span class="version-mark">New in v6.5.0</span>
 
 > **Warning:**
 >
-> TTL is an experimental feature. This system variable might be changed or removed in future releases.
+> [TTL](/time-to-live.md) is an experimental feature. This system variable might be changed or removed in future releases.
 
 - Scope: GLOBAL
 - Persists to cluster: Yes
@@ -3919,7 +3919,7 @@ For details, see [Identify Slow Queries](/identify-slow-queries.md).
 
 > **Warning:**
 >
-> TTL is an experimental feature. This system variable might be changed or removed in future releases.
+> [TTL](/time-to-live.md) is an experimental feature. This system variable might be changed or removed in future releases.
 
 - Scope: GLOBAL
 - Persists to cluster: Yes
@@ -3931,7 +3931,7 @@ For details, see [Identify Slow Queries](/identify-slow-queries.md).
 
 > **Warning:**
 >
-> TTL is an experimental feature. This system variable might be changed or removed in future releases.
+> [TTL](/time-to-live.md) is an experimental feature. This system variable might be changed or removed in future releases.
 
 - Scope: GLOBAL
 - Persists to cluster: Yes
@@ -3943,7 +3943,7 @@ For details, see [Identify Slow Queries](/identify-slow-queries.md).
 
 > **Warning:**
 >
-> TTL is an experimental feature. This system variable might be changed or removed in future releases.
+> [TTL](/time-to-live.md) is an experimental feature. This system variable might be changed or removed in future releases.
 
 - Scope: GLOBAL
 - Persists to cluster: Yes
@@ -3955,37 +3955,37 @@ For details, see [Identify Slow Queries](/identify-slow-queries.md).
 
 > **Warning:**
 >
-> TTL is an experimental feature. This system variable might be changed or removed in future releases.
+> [TTL](/time-to-live.md) is an experimental feature. This system variable might be changed or removed in future releases.
 
 - Scope: GLOBAL
 - Persists to cluster: Yes
 - Default value: `1h0m0s`
 - Range: `[10m0s, 8760h0m0s]`
-- This variable is used to control the scheduling interval of the TTL job in the background. For example, if the current value is set to `1h0m0s`, each table or partition with TTL attributes will clean up expired data once every hour.
+- This variable is used to control the scheduling interval of the TTL job in the background. For example, if the current value is set to `1h0m0s`, each table with TTL attributes will clean up expired data once every hour.
 
 ### tidb_ttl_job_schedule_window_start_time <span class="version-mark">New in v6.5.0</span>
 
 > **Warning:**
 >
-> TTL is an experimental feature. This system variable might be changed or removed in future releases.
+> [TTL](/time-to-live.md) is an experimental feature. This system variable might be changed or removed in future releases.
 
 - Scope: GLOBAL
 - Type: Time
 - Persists to cluster: Yes
 - Default value: `00:00 +0000`
-- This variable is used to control the start time of the scheduling window of the TTL job in the background.
+- This variable is used to control the start time of the scheduling window of the TTL job in the background. When you modify the value of this variable, be cautious that a small window might cause the cleanup of expired data to fail.
 
 ### tidb_ttl_job_schedule_window_end_time <span class="version-mark">New in v6.5.0</span>
 
 > **Warning:**
 >
-> TTL is an experimental feature. This system variable might be changed or removed in future releases.
+> [TTL](/time-to-live.md) is an experimental feature. This system variable might be changed or removed in future releases.
 
 - Scope: GLOBAL
 - Type: Time
 - Persists to cluster: Yes
 - Default value: `23:59 +0000`
-- This variable is used to control the end time of the scheduling window of the TTL job in the background.
+- This variable is used to control the end time of the scheduling window of the TTL job in the background. When you modify the value of this variable, be cautious that a small window might cause the cleanup of expired data to fail.
 
 ### tidb_txn_assertion_level <span class="version-mark">New in v6.0.0</span>
 

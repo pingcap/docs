@@ -1,11 +1,19 @@
 ---
-title: Use Time to Live
+title: Time to Live (TTL)
 summary: Use Time to Live to automatically expire and delete old data.
 ---
 
-# Use Time to Live
+# Time to Live (TTL)
 
-Time to live (TTL) is a feature that provides row-level data lifetime management in TiDB. The TTL attribute of a table allows TiDB to automatically delete expired data to prevent the storage space from growing indefinitely. This feature can effectively save storage space in some scenarios, such as regularly deleting verification code records.
+Time to live (TTL) is a feature that provides row-level data lifetime management in TiDB. In TiDB, a table with the TTL attribute automatically checks data lifetime and deletes expired data at the row level. This feature can effectively save storage space and enhance performance in some scenarios.
+
+The following are some common scenarios for TTL:
+
+* Regularly delete verification codes and short URLs.
+* Regularly delete unnecessary historical orders.
+* Automatically delete intermediate results of calculations.
+
+TTL is designed to help users clean up unnecessary data periodically and in a timely manner without affecting the online read and write workloads. TTL does not guarantee that all expired data is deleted immediately. The time when expired data is deleted depends on the scheduling interval and scheduling window of the background cleanup task.
 
 > **Warning:**
 >
@@ -37,7 +45,7 @@ You can configure the TTL attribute of a table using the [`CREATE TABLE`](/sql-s
     ) TTL = `created_at` + INTERVAL 3 MONTH TTL_ENABLE = 'OFF';
     ```
 
-    By default, `TTL_ENABLE` is set to `ON`. If `TTL_ENABLE` is set to `OFF`, even if other TTL options are set, TiDB does not automatically clean up expired data in this table.
+    If `TTL_ENABLE` is set to `OFF`, even if other TTL options are set, TiDB does not automatically clean up expired data in this table. For a table with the TTL attribute, `TTL_ENABLE` is set to `ON` by default.
 
 - To be compatible with MySQL, you can set a TTL attribute using a comment:
 
@@ -48,7 +56,7 @@ You can configure the TTL attribute of a table using the [`CREATE TABLE`](/sql-s
     ) /*T![ttl] TTL = `created_at` + INTERVAL 3 MONTH TTL_ENABLE = 'OFF'*/;
     ```
 
-    In TiDB, using table options and comments to configure TTL is equivalent. In MySQL, the comment is ignored and an ordinary table is created.
+    In TiDB, using the table TTL attribute or using comments to configure TTL is equivalent. In MySQL, the comment is ignored and an ordinary table is created.
 
 ### Modify the TTL attribute of a table
 
@@ -58,7 +66,7 @@ You can configure the TTL attribute of a table using the [`CREATE TABLE`](/sql-s
     ALTER TABLE t1 TTL = `created_at` + INTERVAL 1 MONTH;
     ```
 
-    You can use the preceding statement to modify a table with an existing TTL attribute or to add a TTL attribute to a table.
+    You can use the preceding statement to modify a table with an existing TTL attribute or to add a TTL attribute to a table without a TTL attribute.
 
 - Modify the value of `TTL_ENABLE` for a table with the TTL attribute:
 
