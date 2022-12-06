@@ -1714,12 +1714,12 @@ Query OK, 0 rows affected (0.09 sec)
 
 > **Warning:**
 >
-> The feature controlled by this variable is not fully functional in the current TiDB version. Do not change the default value.
+> Currently, TiFlash query result materialization is an experimental feature, which might be changed or removed without prior notice.
 
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
 - Default value: `OFF`
-- This variable controls whether read requests in SQL write statements can be pushed down to TiFlash.
+- This variable controls whether to enable the [TiFlash query result materialization](/tiflash/tiflash-results-materialization.md) feature.
 
 ### tidb_enable_top_sql <span class="version-mark">New in v5.4.0</span>
 
