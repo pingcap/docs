@@ -554,7 +554,7 @@ Damaged SST files in TiKV might cause the TiKV process to panic. To clean up the
 > Before running this command, stop the running TiKV instance.
 
 ```bash
-$ tikv-ctl --data-dir </path/to/tikv> bad-ssts --pd <endpoint>
+tikv-ctl --data-dir </path/to/tikv> bad-ssts --pd <endpoint>
 ```
 
 ```bash
