@@ -144,11 +144,11 @@ Use the `region` and `log` subcommands to obtain the above information respectiv
 
 For the `region` subcommand:
 
-- To specify the Regions to be viewed, use the `-r` option. Multiple Regions are separated by `,`. You can also use the `--all-regions` option to view all Regions (Note that `-r` and `--all-regions` cannot be used at the same time).
+- To specify the Regions to be viewed, use the `-r` option. Multiple Regions are separated by `,`. You can also use the `--all-regions` option to view all Regions. Note that `-r` and `--all-regions` cannot be used at the same time.
 - To limit the number of Regions to be printed, use the `--limit` option (default: `16`).
 - To query which Regions are included in a certain key range, use the `--start` and `--end` options (default: no range limit, in Hex format).
 
-To print the Region with id `1239`, use the following command:
+For example, to print the Region with the ID `1239`, use the following command:
 
 ```shell
 tikv-ctl --host 127.0.0.1:20160 raft region -r 1239
@@ -177,12 +177,12 @@ The output is as follows:
 
 To query which Regions are included in a certain key range, use the following command:
 
+- If the key range is in a Region range, the Region information is output.
+- If the key range is the same as a Region range, for example, when the given key range is the same as the Region `1239`, because the Region range is a left-closed and right-open interval, and Region `1009` takes the `end_key` of Region `1239` as the `start_key`, the Region `1009` information is also output.
+
 ```shell
 tikv-ctl --host 127.0.0.1:20160 raft region --start 7480000000000000FF4E5F728000000000FF1443770000000000FA --end 7480000000000000FF4E5F728000000000FF21C4420000000000FA
 ```
-
-- If the key range is in a Region range, the Region information is output.
-- If the key range is the same as a Region range, for example, when the given key range is the same as the Region `1239`, because the Region range is a left-closed and right-open interval, and Region `1009` takes the `end_key` of Region `1239` as the `start_key`, the Region `1009` information is also output.
 
 The output is as follows:
 
