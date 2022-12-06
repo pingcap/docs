@@ -7,7 +7,7 @@ summary: Learn how to save the query results of TiFlash in a transaction.
 
 > **Warning:**
 >
-> This is an experimental feature, which might be changed or removed without prior notice. The syntax and implementation might change before GA. If you find a bug, please open an issue in the [TiDB repository](https://github.com/pingcap/tidb/issues).
+> This is an experimental feature, which might be changed or removed without prior notice. The syntax and implementation might change before GA. If you find a bug, you can report an [issue](https://github.com/pingcap/tidb/issues) in GitHub.
 
 This document introduces how to save the TiFlash query result to a specified TiDB table in an `INSERT INTO SELECT` transaction.
 
@@ -15,8 +15,8 @@ Since v6.5.0, during the execution of the `INSERT INTO SELECT` statement, the qu
 
 > **Note:**
 >
-> - By default ([`tidb_allow_mpp = ON`](/system-variables#tidb_allow_mpp-new-in-v50)), the TiDB optimizer intelligently chooses to push down queries to TiKV or TiFlash based on the query cost. To enforce that the queries are pushed down to TiFlash, you can set the system variable [`tidb_enforce_mpp = ON`](/system-variables#tidb_enforce_mpp-new-in-v51).
-> - During the experimental phase, this feature is disabled by default to avoid any impact on existing read and write hybrid transactions. To enable this feature, you can set the system variable [`tidb_enable_tiflash_read_for_write_stmt = ON`](/system-variables#tidb_enable_tiflash_read_for_write_stmt).
+> - By default ([`tidb_allow_mpp = ON`](/system-variables#tidb_allow_mpp-new-in-v50)), the TiDB optimizer intelligently chooses to push down queries to TiKV or TiFlash based on the query cost. To enforce that the queries are pushed down to TiFlash, you can set the system variable [`tidb_enforce_mpp`](/system-variables#tidb_enforce_mpp-new-in-v51) to `ON`.
+> - During the experimental phase, this feature is disabled by default. To enable this feature, you can set the system variable [`tidb_enable_tiflash_read_for_write_stmt`](/system-variables#tidb_enable_tiflash_read_for_write_stmt) to `ON`.
 
 The syntax of `INSERT INTO SELECT` is as follows.
 
@@ -58,9 +58,9 @@ SELECT app_name, country FROM t1;
 
 ## Restrictions
 
-* In TiDB, the maximum size of the result set returned by the `SELECT` clause (that is, the result set to be written in the `INSERT` transaction) is limited by the total size of a transaction, which can be modified using the [performance.txn-total-size-limit](/tidb-configuration-file.md#txn-total-size-limit) parameter. The recommended size is less than 100 MiB.
+* TiDB has a memory limit on the `INSERT INTO SELECT` statement. You can adjust the limit using the system variable [`tidb_mem_quota_query`](/system-variables#tidb_mem_quota_query).
 
-    If the size of result set returned by `SELECT` exceeds the total size of a transaction, the statement is forced to be terminated and TiDB returns an error as indicated in [performance.txn-total-size-limit](/tidb-configuration-file.md#txn-total-size-limit).
+    For more information, see [TiDB memory control](/configure-memory-usage.md).
 
 * TiDB has no hard limit on the concurrency of the `INSERT INTO SELECT` statement, but it is recommended to consider the following practices:
 
