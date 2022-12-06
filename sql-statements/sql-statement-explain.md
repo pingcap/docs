@@ -326,7 +326,7 @@ EXPLAIN FORMAT = "tidb_json" SELECT id FROM t WHERE a = 1;
 1 row in set (0.01 sec)
 ```
 
-In the output, `id`, `estRows`, `taskType`, `accessObject`, and `operatorInfo` have the same meaning as the columns in the default format. `subOperators` is an array that stores the sub-nodes. The fields and meanings of the sub-nodes are the same as the parent nodes. If a field is missing, it means that the field is empty.
+In the output, `id`, `estRows`, `taskType`, `accessObject`, and `operatorInfo` have the same meaning as the columns in the default format. `subOperators` is an array that stores the sub-nodes. The fields and meanings of the sub-nodes are the same as the parent node. If a field is missing, it means that the field is empty.
 
 </div>
 
@@ -336,7 +336,7 @@ In the output, `id`, `estRows`, `taskType`, `accessObject`, and `operatorInfo` h
 
 * Both the format of `EXPLAIN` and the potential execution plans in TiDB differ substaintially from MySQL.
 * TiDB does not support the `FORMAT=JSON` or `FORMAT=TREE` options.
-* `FORMAT=tidb_json` in TiDB is the default `EXPLAIN` output encoded in JSON. The format and fields are different from the `FORMAT=JSON` output in MySQL.
+* `FORMAT=tidb_json` in TiDB is the JSON format output of the default `EXPLAIN` result. The format and fields are different from the `FORMAT=JSON` output in MySQL.
 
 ### `EXPLAIN FOR CONNECTION`
 
