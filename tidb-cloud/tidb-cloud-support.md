@@ -60,7 +60,7 @@ To check or upgrade your support plan, perform the following steps:
 
     4. Click **Confirm and Start Using Support** in the lower-right corner of the page.
 
-    After the payment is finished, you have upgraded you plan to **Standard**.
+    After the payment is finished, you have upgraded your plan to **Standard**.
 
     </div>
     <div label="Upgrade to Enterprise or Premium">
