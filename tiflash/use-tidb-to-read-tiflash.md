@@ -42,7 +42,7 @@ explain analyze select count(*) from test.t;
 +--------------------------+---------+---------+--------------+---------------+----------------------------------------------------------------------+--------------------------------+-----------+------+
 | StreamAgg_9              | 1.00    | 1       | root         |               | time:83.8372ms, loops:2                                              | funcs:count(1)->Column#4       | 372 Bytes | N/A  |
 | └─TableReader_17         | 1.00    | 1       | root         |               | time:83.7776ms, loops:2, rpc num: 1, rpc time:83.5701ms, proc keys:0 | data:TableFullScan_16          | 152 Bytes | N/A  |
-|   └─TableFullScan_16     | 1.00    | 1       | cop[tiflash] | table:t       | time:43ms, loops:1                                                   | keep order:false, stats:pseudo | N/A       | N/A  |
+|   └─TableFullScan_16     | 1.00    | 1       | cop[tiflash] | table:t       | tiflash_task:{time:43ms, loops:1, threads:1}, tiflash_scan:{...}     | keep order:false, stats:pseudo | N/A       | N/A  |
 +--------------------------+---------+---------+--------------+---------------+----------------------------------------------------------------------+--------------------------------+-----------+------+
 ```
 
@@ -52,7 +52,11 @@ Note that if a table has only a single TiFlash replica and the related node cann
 
 ## Engine isolation
 
-Engine isolation is to specify that all queries use a replica of the specified engine by configuring the corresponding variable. The optional engines are "tikv", "tidb" (indicates the internal memory table area of TiDB, which stores some TiDB system tables and cannot be actively used by users), and "tiflash", with the following two configuration levels:
+Engine isolation is to specify that all queries use a replica of the specified engine by configuring the corresponding variable. The optional engines are "tikv", "tidb" (indicates the internal memory table area of TiDB, which stores some TiDB system tables and cannot be actively used by users), and "tiflash".
+
+<CustomContent platform="tidb">
+
+You can specify the engines at the following two configuration levels:
 
 * TiDB instance-level, namely, INSTANCE level. Add the following configuration item in the TiDB configuration file:
 
@@ -86,6 +90,24 @@ The final engine configuration is the session-level configuration, that is, the 
 > **Note:**
 >
 > Because [TiDB Dashboard](/dashboard/dashboard-intro.md) and other components need to read some system tables stored in the TiDB memory table area, it is recommended to always add the "tidb" engine to the instance-level engine configuration.
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+You can specify the engines using the following statement:
+
+```sql
+set @@session.tidb_isolation_read_engines = "engine list separated by commas";
+```
+
+or
+
+```sql
+set SESSION tidb_isolation_read_engines = "engine list separated by commas";
+```
+
+</CustomContent>
 
 If the queried table does not have a replica of the specified engine (for example, the engine is configured as "tiflash" but the table does not have a TiFlash replica), the query returns an error.
 

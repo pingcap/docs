@@ -125,13 +125,13 @@ driver = "file"
 
 # The listening address of tikv-importer when backend is "importer". Change it to the actual address.
 addr = "172.16.31.10:8287"
-# Action to do when trying to insert a duplicated entry in logical import mode.
+# Action to do when trying to insert a duplicated entry in the logical import mode.
 #  - replace: use new entry to replace the existing entry
 #  - ignore: keep the existing entry, and ignore the new entry
 #  - error: report error and quit the program
 # on-duplicate = "replace"
 
-# Whether to detect and resolve duplicate records (unique key conflict) in physical import mode.
+# Whether to detect and resolve duplicate records (unique key conflict) in the physical import mode.
 # The following resolution algorithms are supported:
 #  - record: only records duplicate records to the `lightning_task_info.conflict_error_v1` table on the target TiDB. Note that the
 #    required version of the target TiKV is no earlier than v5.2.0; otherwise it falls back to 'none'.
@@ -140,19 +140,27 @@ addr = "172.16.31.10:8287"
 #  - remove: records all duplicate records to the lightning_task_info database, like the 'record' algorithm. But it removes all duplicate records from the target table to ensure a consistent
 #    state in the target TiDB.
 # duplicate-resolution = 'none'
-# The number of KV pairs sent in one request in physical import mode.
+# The number of KV pairs sent in one request in the physical import mode.
 # send-kv-pairs = 32768
-# The directory of local KV sorting in physical import mode. If the disk
+# The directory of local KV sorting in the physical import mode. If the disk
 # performance is low (such as in HDD), it is recommended to set the directory
 # on a different disk from `data-source-dir` to improve import speed.
 # sorted-kv-dir = ""
-# The concurrency that TiKV writes KV data in physical import mode.
+# The concurrency that TiKV writes KV data in the physical import mode.
 # When the network transmission speed between TiDB Lightning and TiKV
 # exceeds 10 Gigabit, you can increase this value accordingly.
 # range-concurrency = 16
 # Limits the bandwidth in which TiDB Lightning writes data into each TiKV
-# node in physical import mode. 0 by default, which means no limit.
+# node in the physical import mode. 0 by default, which means no limit.
 # store-write-bwlimit = "128MiB"
+
+# Specifies the disk quota for local temporary files when physical import mode is used.
+# When the disk quota is insufficient, TiDB Lightning stops reading source data and writing temporary files,
+# but prioritizes writing the already sorted key-value pairs to TiKV.
+# After TiDB Lightning deletes the local temporary files, the import process continues.
+# This option takes effect only when you set the `backend` option to `local`.
+# The default value is `MaxInt64` bytes, that is, 9223372036854775807 bytes.
+# disk-quota = "10GB"
 
 [mydumper]
 # Block size for file reading. Keep it longer than the longest string of the data source.
@@ -293,11 +301,11 @@ max-allowed-packet = 67_108_864
 # Private key of this service. Default to copy of `security.key-path`
 # key-path = "/path/to/lightning.key"
 
-# In physical import mode, when data importing is complete, tidb-lightning can
+# In the physical import mode, when data importing is complete, tidb-lightning can
 # automatically perform the Checksum and Analyze operations. It is recommended
 # to leave these as true in the production environment.
 # The execution order: Checksum -> Analyze.
-# In logical import mode, Checksum and Analyze is not needed, and they are always
+# In the logical import mode, Checksum and Analyze is not needed, and they are always
 # skipped in the actual operation.
 [post-restore]
 # Specifies whether to perform `ADMIN CHECKSUM TABLE <table>` for each table to verify data integrity after importing.
@@ -331,6 +339,9 @@ compact = false
 switch-mode = "5m"
 # Duration between which an import progress is printed to the log.
 log-progress = "5m"
+# The time interval for checking the local disk quota when you use the physical import mode.
+# The default value is 60 seconds.
+# check-disk-quota = "60s"
 ```
 
 ## Command line parameters
@@ -344,7 +355,7 @@ log-progress = "5m"
 | -d *directory* | Directory or [external storage URL](/br/backup-and-restore-storages.md) of the data dump to read from | `mydumper.data-source-dir` |
 | -L *level* | Log level: debug, info, warn, error, fatal (default = info) | `lightning.log-level` |
 | -f *rule* | [Table filter rules](/table-filter.md) (can be specified multiple times) | `mydumper.filter` |
-| --backend *[backend](/tidb-lightning/tidb-lightning-overview.md)* | Select an import mode. `local` refers to physical import mode; `tidb` refers to logical import mode. | `local` |
+| --backend *[backend](/tidb-lightning/tidb-lightning-overview.md)* | Select an import mode. `local` refers to the physical import mode; `tidb` refers to the logical import mode. | `local` |
 | --log-file *file* | Log file path. By default, it is `/tmp/lightning.log.{timestamp}`. If set to '-', it means that the log files will be output to stdout. | `lightning.log-file` |
 | --status-addr *ip:port* | Listening address of the TiDB Lightning server | `lightning.status-port` |
 | --importer *host:port* | Address of TiKV Importer | `tikv-importer.addr` |

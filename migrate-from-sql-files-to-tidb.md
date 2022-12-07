@@ -15,7 +15,7 @@ This document describes how to migrate data from MySQL SQL files to TiDB using T
 
 ## Step 1. Prepare SQL files
 
-Put all the SQL files in the same directory, like `/data/my_datasource/` or `s3://my-bucket/sql-backup?region=us-west-2`. TiDB Lighting recursively searches for all `.sql` files in this directory and its subdirectories.
+Put all the SQL files in the same directory, like `/data/my_datasource/` or `s3://my-bucket/sql-backup`. TiDB Lightning recursively searches for all `.sql` files in this directory and its subdirectories.
 
 ## Step 2. Define the target table schema
 
@@ -54,7 +54,7 @@ sorted-kv-dir = "${sorted-kv-dir}"
 
 [mydumper]
 # Directory of the data source
-data-source-dir = "${data-path}" # Local or S3 path, such as 's3://my-bucket/sql-backup?region=us-west-2'
+data-source-dir = "${data-path}" # Local or S3 path, such as 's3://my-bucket/sql-backup'
 
 [tidb]
 # The information of target cluster
@@ -90,7 +90,7 @@ After the import is started, you can check the progress in one of the following 
 - Use the Grafana dashboard. For details, see [TiDB Lightning Monitoring](/tidb-lightning/monitor-tidb-lightning.md).
 - Use web interface. For details, see [TiDB Lightning Web Interface](/tidb-lightning/tidb-lightning-web-interface.md).
 
-After the import is completed, TiDB Lightning automatically exits. If `the whole procedure completed` is in the last 5 lines of the log, it means that the import is successfully completed.
+After the import is completed, TiDB Lightning automatically exits. Check whether `tidb-lightning.log` contains `the whole procedure completed` in the last lines. If yes, the import is successful. If no, the import encounters an error. Address the error as instructed in the error message.
 
 > **Note:**
 >

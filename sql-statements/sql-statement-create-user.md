@@ -12,7 +12,7 @@ This statement creates a new user, specified with a password. In the MySQL privi
 
 ```ebnf+diagram
 CreateUserStmt ::=
-    'CREATE' 'USER' IfNotExists UserSpecList RequireClauseOpt ConnectionOptions PasswordOrLockOptions
+    'CREATE' 'USER' IfNotExists UserSpecList RequireClauseOpt ConnectionOptions LockOption AttributeOption
 
 IfNotExists ::=
     ('IF' 'NOT' 'EXISTS')?
@@ -29,6 +29,10 @@ AuthOption ::=
 StringName ::=
     stringLit
 |   Identifier
+
+LockOption ::= ( 'ACCOUNT' 'LOCK' | 'ACCOUNT' 'UNLOCK' )?
+
+AttributeOption ::= ( 'COMMENT' CommentString | 'ATTRIBUTE' AttributeString )?
 ```
 
 ## Examples
@@ -61,6 +65,48 @@ CREATE USER 'newuser4'@'%' REQUIRE ISSUER '/C=US/ST=California/L=San Francisco/O
 Query OK, 1 row affected (0.02 sec)
 ```
 
+Create a user who is locked upon creation.
+
+```sql
+CREATE USER 'newuser5'@'%' ACCOUNT LOCK;
+```
+
+```
+Query OK, 1 row affected (0.02 sec)
+```
+
+Create a user with a comment.
+
+```sql
+CREATE USER 'newuser6'@'%' COMMENT 'This user is created only for test';
+SELECT * FROM information_schema.user_attributes;
+```
+
+```
++-----------+------+---------------------------------------------------+
+| USER      | HOST | ATTRIBUTE                                         |
++-----------+------+---------------------------------------------------+
+| newuser6  | %    | {"comment": "This user is created only for test"} |
++-----------+------+---------------------------------------------------+
+1 rows in set (0.00 sec)
+```
+
+Create a user with an `email` attribute.
+
+```sql
+CREATE USER 'newuser7'@'%' ATTRIBUTE '{"email": "user@pingcap.com"}';
+SELECT * FROM information_schema.user_attributes;
+```
+
+```sql
++-----------+------+---------------------------------------------------+
+| USER      | HOST | ATTRIBUTE                                         |
++-----------+------+---------------------------------------------------+
+| newuser7  | %    | {"email": "user@pingcap.com"} |
++-----------+------+---------------------------------------------------+
+1 rows in set (0.00 sec)
+```
+
 ## MySQL compatibility
 
 The following `CREATE USER` options are not yet supported by TiDB, and will be parsed but ignored:
@@ -68,12 +114,16 @@ The following `CREATE USER` options are not yet supported by TiDB, and will be p
 * TiDB does not support `WITH MAX_QUERIES_PER_HOUR`, `WITH MAX_UPDATES_PER_HOUR`, and `WITH MAX_USER_CONNECTIONS` options.
 * TiDB does not support the `DEFAULT ROLE` option.
 * TiDB does not support `PASSWORD EXPIRE`, `PASSWORD HISTORY` or other options related to password.
-* TiDB does not support the `ACCOUNT LOCK` and `ACCOUNT UNLOCK` options.
 
 ## See also
 
+<CustomContent platform="tidb">
+
 * [Security Compatibility with MySQL](/security-compatibility-with-mysql.md)
+* [Privilege Management](/privilege-management.md)
+
+</CustomContent>
+
 * [DROP USER](/sql-statements/sql-statement-drop-user.md)
 * [SHOW CREATE USER](/sql-statements/sql-statement-show-create-user.md)
 * [ALTER USER](/sql-statements/sql-statement-alter-user.md)
-* [Privilege Management](/privilege-management.md)

@@ -17,15 +17,25 @@ You can build your own application based on this example.
 
 ## Step 1: Launch your TiDB cluster
 
-This step describes how to start a TiDB cluster.
+<CustomContent platform="tidb">
 
-### Using a TiDB Cloud free cluster
+The following introduces how to start a TiDB cluster.
 
-[Create a free cluster](/develop/dev-guide-build-cluster-in-cloud.md#step-1-create-a-free-cluster).
+**Use a TiDB Cloud Serverless Tier cluster**
 
-### Using a local cluster
+For detailed steps, see [Create a Serverless Tier cluster](/develop/dev-guide-build-cluster-in-cloud.md#step-1-create-a-serverless-tier-cluster).
 
-You can start a local cluster by either [deploying a local testing cluster](/quick-start-with-tidb.md) or [deploying a TiDB cluster in production](/production-deployment-using-tiup.md).
+**Use a local cluster**
+
+For detailed steps, see [Deploy a local test cluster](/quick-start-with-tidb.md#deploy-a-local-test-cluster) or [Deploy a TiDB Cluster Using TiUP](/production-deployment-using-tiup.md).
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+See [Create a Serverless Tier cluster](/develop/dev-guide-build-cluster-in-cloud.md#step-1-create-a-serverless-tier-cluster).
+
+</CustomContent>
 
 ## Step 2: Install JDK
 
@@ -145,14 +155,14 @@ After the configuration, the project can be used normally, but only in the same 
 
     ```xml
     <dependency>
-    <groupId>org.springframework.boot</groupId>
-    <artifactId>spring-boot-starter-data-jpa</artifactId>
-    <exclusions>
-        <exclusion>
-            <groupId>org.hibernate</groupId>
-            <artifactId>hibernate-core-jakarta</artifactId>
-        </exclusion>
-    </exclusions>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-data-jpa</artifactId>
+        <exclusions>
+            <exclusion>
+                <groupId>org.hibernate</groupId>
+                <artifactId>hibernate-core-jakarta</artifactId>
+            </exclusion>
+        </exclusions>
     </dependency>
     ```
 
@@ -178,7 +188,7 @@ If you want to learn more about the code of this application, refer to [Implemen
 
 ### Step 5.1 Change parameters
 
-If you use a non-local default cluster, a TiDB Cloud cluster or a remote cluster, change the `spring.datasource.url`, `spring.datasource.username`, `spring.datasource.password` parameters in the `application.yml` (located in `src/main/resources`).
+If you are using a TiDB Cloud Serverless Tier cluster, change the `spring.datasource.url`, `spring.datasource.username`, `spring.datasource.password` parameters in the `application.yml` (located in `src/main/resources`).
 
 {{< copyable "" >}}
 
@@ -196,13 +206,11 @@ spring:
       ddl-auto: create-drop
 ```
 
-If you set the password to `123456`, the connection string you get in TiDB Cloud is as follows:
+Suppose that the password you set is `123456`, and the connection parameters you get from the cluster details page are the following:
 
-{{< copyable "shell-regular" >}}
-
-```shell
-mysql --connect-timeout 15 -u root -h xxx.tidbcloud.com -P 4000 -p
-```
+- Endpoint: `xxx.tidbcloud.com`
+- Port: `4000`
+- User: `2aEp24QWEDLqRFs.root`
 
 Accordingly, the parameters must be set as folows:
 
@@ -211,8 +219,8 @@ Accordingly, the parameters must be set as folows:
 ```yaml
 spring:
   datasource:
-    url: jdbc:mysql://xxx.tidbcloud.com:4000/test
-    username: root
+    url: jdbc:mysql://xxx.tidbcloud.com:4000/test?sslMode=VERIFY_IDENTITY&enabledTLSProtocols=TLSv1.2,TLSv1.3
+    username: 2aEp24QWEDLqRFs.root
     password: 123456
     driver-class-name: com.mysql.cj.jdbc.Driver
   jpa:

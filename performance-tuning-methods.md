@@ -52,7 +52,7 @@ The Performance Overview dashboard orchestrates the metrics of TiDB, PD, and TiK
 
 - Database time and SQL execution time overview: Color-coded SQL types, database time by SQL execution phase, and database time of different requests help you quickly identify database workload characteristics and performance bottlenecks.
 - Key metrics and resource utilization: Contains database QPS, connection information, request command types between the applications and the database, database internal TSO and KV request OPS, and TiDB/TiKV resource usage.
-- Top-down latency breakdown: Contains a comparison of query latency and connection idle time, breakdown of query latency, latency of TSO requests and KV requests in SQL execution, and breakdown of TiKV internal write latency, etc.
+- Top-down latency breakdown: Contains a comparison of query latency and connection idle time, breakdown of query latency, latency of TSO requests and KV requests in SQL execution, and breakdown of TiKV internal write latency.
 
 ### Database time and SQL execution time overview
 
@@ -137,7 +137,7 @@ By checking the following three panels in Performance Overview, you can learn th
 
     - No prepared plan cache is hit: The number of plan cache hit per second is 0. The application is using the query interface, or cached plans are cleaned up by calling the StmtClose command after each StmtExecute execution.
     - All prepared plan cache is hit: The number of hits per second is equal to the number of StmtExecute commands per second.
-    - Some prepared plan cache is hit: The number of hits per second is fewer than the number of StmtExecute commands per second. Prepared plan cache has known limitations, for example, it does not support subqueries,  SQL statements with subqueries can not utilize prepared plan cache.
+    - Some prepared plan cache is hit: The number of hits per second is fewer than the number of StmtExecute commands per second. Prepared plan cache has known limitations, for example, it does not support subqueries, SQL statements with subqueries cannot utilize prepared plan cache.
 
 **Example 1: TPC-C workload**
 
@@ -251,7 +251,7 @@ In real customer scenarios, it is not rare that the bottleneck is outside the da
 
 In this TPC-C workload:
 
-- The average latency and P99 latency of all SQL statements are 477 us and 3.13 ms, respectively. The average latencies of the commit statement, insert statement, and query statement are 2.02 ms, 609 ms, and 468 us, respectively.
+- The average latency and P99 latency of all SQL statements are 477 us and 3.13 ms, respectively. The average latencies of the commit statement, insert statement, and query statement are 2.02 ms, 609 us, and 468 us, respectively.
 - The average connection idle time in transactions `avg-in-txn` is 171 us.
 
 The average query latency is significantly greater than `avg-in-txn`, which means the main bottleneck in transactions is inside the database.
@@ -324,7 +324,7 @@ The relationship between `Avg TiDB KV Request Duration` and `Avg TiKV GRPC Durat
 Avg TiDB KV Request Duration = Avg TiKV GRPC Duration + Network latency between TiDB and TiKV + TiKV gRPC processing time + TiDB gRPC processing time and scheduling latency
 ```
 
-The difference between `Avg TiDB KV Request Duration` and `Avg TiKV GRPC Duration` is closely related to the network traffic, network latency, and resouce usage by TiDB and TiKV.
+The difference between `Avg TiDB KV Request Duration` and `Avg TiKV GRPC Duration` is closely related to the network traffic, network latency, and resource usage by TiDB and TiKV.
 
 - In the same data center: The difference is generally less than 2 ms.
 - In different availability zones in the same region: The difference is generally less than 5 ms.
@@ -409,7 +409,7 @@ Common scenarios where `Commit Log Duration` is long:
 - `raftstore.store-pool-size` is either excessively small or large (an excessively large value might also cause performance degradation)
 - The I/O latency is high, resulting in high `Append Log Duration` latency
 - The network latency between TiKV nodes is high
-- The number of the gRPC threads are too small,  CPU usage is uneven among the GRPC threads.
+- The number of the gRPC threads are too small, CPU usage is uneven among the GRPC threads.
 
 Common scenarios where `Apply Log Duration` is long:
 

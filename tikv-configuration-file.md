@@ -90,6 +90,13 @@ This document only describes the parameters that are not included in command-lin
     + If the configuration item is set to a value other than `0`, TiKV keeps at most the number of old log files specified by `max-backups`. For example, if the value is set to `7`, TiKV keeps up to 7 old log files.
 + Default value: `0`
 
+### `pd.enable-forwarding` <span class="version-mark">New in v5.0.0</span>
+
++ Controls whether the PD client in TiKV forwards requests to the leader via the followers in the case of possible network isolation.
++ Default value: `false`
++ If the environment might have isolated network, enabling this parameter can reduce the window of service unavailability.
++ If you cannot accurately determine whether isolation, network interruption, or downtime has occurred, using this mechanism has the risk of misjudgment and causes reduced availability and performance. If network failure has never occurred, it is not recommended to enable this parameter.
+
 ## server
 
 + Configuration items related to the server.
@@ -204,6 +211,11 @@ This document only describes the parameters that are not included in command-lin
 + Specifies whether to simplify the returned monitoring metrics. After you set the value to `true`, TiKV reduces the amount of data returned for each request by filtering out some metrics.
 + Default value: `false`
 
+### `forward-max-connections-per-address` <span class="version-mark">New in v5.0.0</span>
+
++ Sets the size of the connection pool for service and forwarding requests to the server. Setting it to too small a value affects the request latency and load balancing.
++ Default value: `4`
+
 ## readpool.unified
 
 Configuration items related to the single thread pool serving read requests. This thread pool supersedes the original storage thread pool and coprocessor thread pool since the 4.0 version.
@@ -233,6 +245,11 @@ Configuration items related to the single thread pool serving read requests. Thi
 + The maximum number of tasks allowed for a single thread in the unified read pool. `Server Is Busy` is returned when the value is exceeded.
 + Default value: `2000`
 + Minimum value: `2`
+
+### `auto-adjust-pool-size` <span class="version-mark">New in v6.3.0</span>
+
++ Controls whether to automatically adjust the thread pool size. When it is enabled, the read performance of TiKV is optimized by automatically adjusting the UnifyReadPool thread pool size based on the current CPU usage. The possible range of the thread pool is `[max-thread-count, MAX(4, CPU)]`. The maximum value is the same as the one of [`max-thread-count`](#max-thread-count).
++ Default value: `false`
 
 ## readpool.storage
 
@@ -370,7 +387,7 @@ Configuration items related to storage.
 + The name of the temporary file is `space_placeholder_file`, located in the `storage.data-dir` directory. When TiKV goes offline because its disk space ran out, if you restart TiKV, the temporary file is automatically deleted and TiKV tries to reclaim the space.
 + When the remaining space is insufficient, TiKV does not create the temporary file. The effectiveness of the protection is related to the size of the reserved space. The size of the reserved space is the larger value between 5% of the disk capacity and this configuration value. When the value of this configuration item is `"0MB"`, TiKV disables this disk protection feature.
 + Default value: `"5GB"`
-+ Unite: MB|GB
++ Unit: MB|GB
 
 ### `enable-ttl`
 
@@ -397,21 +414,21 @@ Configuration items related to storage.
 
 ### `api-version` <span class="version-mark">New in v6.1.0</span>
 
-+ The storage format and interface version used by TiKV when TiKV serves as the raw key-value store.
++ The storage format and interface version used by TiKV when TiKV serves as the RawKV store.
 + Value options:
     + `1`: Uses API V1, does not encode the data passed from the client, and stores data as it is. In versions earlier than v6.1.0, TiKV uses API V1 by default.
     + `2`: Uses API V2:
-        + The data is stored in the MVCC (Multi-Version Concurrency Control) format, where the timestamp is obtained from PD (which is TSO) by tikv-server.
+        + The data is stored in the Multi-Version Concurrency Control (MVCC) format, where the timestamp is obtained from PD (which is TSO) by tikv-server.
+        + Data is scoped according to different usage and API V2 supports co-existence of TiDB, Transactional KV, and RawKV applications in a single cluster.
         + When API V2 is used, you are expected to set `storage.enable-ttl = true` at the same time. Because API V2 supports the TTL feature, you must turn on `enable-ttl` explicitly. Otherwise, it will be in conflict because `storage.enable-ttl` defaults to `false`.
-        + When API V2 is enabled, you need to deploy at least one tidb-server instance to reclaim expired data. Note that this tidb-server instance cannot provide read or write services. To ensure high availability, you can deploy multiple tidb-server instances.
+        + When API V2 is enabled, you need to deploy at least one tidb-server instance to reclaim obsolete data. This tidb-server instance can provide read and write services at the same time. To ensure high availability, you can deploy multiple tidb-server instances.
         + Client support is required for API V2. For details, see the corresponding instruction of the client for the API V2.
-        + Since v6.2.0, Change Data Capture (CDC) for RawKV is supported using the component [TiKV-CDC](https://github.com/tikv/migration/tree/main/cdc).
+        + Since v6.2.0, Change Data Capture (CDC) for RawKV is supported. Refer to [RawKV CDC](https://tikv.org/docs/latest/concepts/explore-tikv-features/cdc/cdc).
 + Default value: `1`
 
 > **Warning:**
 
-> - TiKV API V2 is still an experimental feature. It is not recommended to use it in production environments.
-> - You can set the value of `api-version` to `2` **only when** deploying a new TiKV cluster. **Do not** modify the value of this configuration item in an existing TiKV cluster. TiKV clusters with different `api-version` values use different data formats. Therefore, if you modify the value of this item in an existing TiKV cluster, the cluster will store data in different formats and causes data corruption. It will raise the "unable to switch storage.api_version" error when you start the TiKV cluster.
+> - API V1 and API V2 are different from each other in the storage format. You can enable or disable API V2 directly **only** when TiKV contains only TiDB data. In other scenarios, you need to deploy a new cluster, and migrate data using [RawKV Backup & Restore](https://tikv.org/docs/latest/concepts/explore-tikv-features/backup-restore/).
 > - After API V2 is enabled, you **cannot** downgrade the TiKV cluster to a version earlier than v6.1.0. Otherwise, data corruption might occur.
 
 ## storage.block-cache
@@ -470,7 +487,7 @@ Configuration items related to the I/O rate limiter.
 ### `mode`
 
 + Determines which types of I/O operations are counted and restrained below the `max-bytes-per-sec` threshold. Currently, only the write-only mode is supported.
-+ Optional value: `"write-only"`
++ Value options: `"read-only"`, `"write-only"`, and `"all-io"`
 + Default value: `"write-only"`
 
 ## raftstore
@@ -802,6 +819,13 @@ Configuration items related to Raftstore.
 + Default value: `1024`
 + Minimum value: greater than `0`
 
+### `apply-yield-write-size` <span class="version-mark">New in v6.4.0</span>
+
++ The maximum number of bytes that the Apply thread can write for one FSM (Finite-state Machine) in one round of poll. This is a soft limit.
++ Default value: `"32KiB"`
++ Minimum value: greater than `0`
++ Unit: KiB|MiB|GiB
+
 ### `apply-max-batch-size`
 
 + Raft state machines process data write requests in batches by the BatchSystem. This configuration item specifies the maximum number of Raft state machines that can process the requests in one batch.
@@ -857,12 +881,6 @@ Configuration items related to Raftstore.
 + Determines the threshold at which Raft data is written into the disk. If the data size is larger than the value of this configuration item, the data is written to the disk. When the value of `store-io-pool-size` is `0`, this configuration item does not take effect.
 + Default value: `1MB`
 + Minimum value: `0`
-
-### `report-min-resolved-ts-interval` <span class="version-mark">New in v6.2.0</span>
-
-+ If you set this configuration value greater than `0`, TiKV checks the minimum ResolvedTS regularly for all Regions on the current node and reports the information to PD.
-+ Default value: `0s`
-+ Minimum value: `0s`
 
 ## Coprocessor
 
@@ -1489,6 +1507,31 @@ Configuration items related to Raft Engine.
 + When this configuration value is not set, 15% of the available system memory is used.
 + Default value: `Total machine memory * 15%`
 
+### `format-version` <span class="version-mark">New in v6.3.0</span>
+
+> **Note:**
+>
+> After `format-version` is set to `2`, if you need to downgrade a TiKV cluster from v6.3.0 to an earlier version, take the following steps **before** the downgrade:
+>
+> 1. Disable Raft Engine by setting [`enable`](/tikv-configuration-file.md#enable-1) to `false` and restart TiKV to make the configuration take effect.
+> 2. Set `format-version` to `1`.
+> 3. Enable Raft Engine by setting `enable` to `true` and restart TiKV to make the configuration take effect.
+
++ Specifies the version of log files in Raft Engine.
++ Value Options:
+    + `1`: Default log file version for TiKV earlier than v6.3.0. Can be read by TiKV >= v6.1.0.
+    + `2`: Supports log recycling. Can be read by TiKV >= v6.3.0.
++ Default value: `2`
+
+### `enable-log-recycle` <span class="version-mark">New in v6.3.0</span>
+
+> **Note:**
+>
+> This configuration item is only available when [`format-version`](#format-version-new-in-v630) >= 2.
+
++ Determines whether to recycle stale log files in Raft Engine. When it is enabled, logically purged log files will be reserved for recycling. This reduces the long tail latency on write workloads.
++ Default value: `false`
+
 ## security
 
 Configuration items related to security.
@@ -1525,7 +1568,7 @@ Configuration items related to [encryption at rest](/encryption-at-rest.md) (TDE
 ### `data-encryption-method`
 
 + The encryption method for data files
-+ Value options: "plaintext", "aes128-ctr", "aes192-ctr", and "aes256-ctr"
++ Value options: "plaintext", "aes128-ctr", "aes192-ctr", "aes256-ctr", and "sm4-ctr" (supported since v6.3.0)
 + A value other than "plaintext" means that encryption is enabled, in which case the master key must be specified.
 + Default value: `"plaintext"`
 
@@ -1581,6 +1624,57 @@ Configuration items related to BR backup.
 + Controls whether to limit the resources used by backup tasks to reduce the impact on the cluster when the cluster resource utilization is high. For more information, refer to [BR Auto-Tune](/br/br-auto-tune.md).
 + Default value: `true`
 
+### `s3-multi-part-size` <span class="version-mark">New in v5.3.2</span>
+
+> **Note:**
+>
+> This configuration is introduced to address backup failures caused by S3 rate limiting. This problem has been fixed by [refining the backup data storage structure](/br/br-snapshot-architecture.md#structure-of-backup-files). Therefore, this configuration is deprecated from v6.1.1 and is no longer recommended.
+
++ The part size used when you perform multipart upload to S3 during backup. You can adjust the value of this configuration to control the number of requests sent to S3.
++ If data is backed up to S3 and the backup file is larger than the value of this configuration item, [multipart upload](https://docs.aws.amazon.com/AmazonS3/latest/API/API_UploadPart.html) is automatically enabled. Based on the compression ratio, the backup file generated by a 96-MiB Region is approximately 10 MiB to 30 MiB.
++ Default value: 5MiB
+
+## log-backup
+
+Configuration items related to log backup.
+
+### `enable` <span class="version-mark">New in v6.2.0</span>
+
++ Determines whether to enable log backup.
++ Default value: `true`
+
+### `file-size-limit` <span class="version-mark">New in v6.2.0</span>
+
++ The size limit on backup log data to be stored.
++ Default value: 256MiB
++ Note: Generally, the value of `file-size-limit` is greater than the backup file size displayed in external storage. This is because the backup files are compressed before being uploaded to external storage.
+
+### `initial-scan-pending-memory-quota` <span class="version-mark">New in v6.2.0</span>
+
++ The quota of cache used for storing incremental scan data during log backup.
++ Default value: `min(Total machine memory * 10%, 512 MB)`
+
+### `initial-scan-rate-limit` <span class="version-mark">New in v6.2.0</span>
+
++ The rate limit on throughput in an incremental data scan during log backup.
++ Default value: 60, indicating that the rate limit is 60 MB/s by default.
+
+### `max-flush-interval` <span class="version-mark">New in v6.2.0</span>
+
++ The maximum interval for writing backup data to external storage in log backup.
++ Default value: 3min
+
+### `num-threads` <span class="version-mark">New in v6.2.0</span>
+
++ The number of threads used in log backup.
++ Default value: CPU * 0.5
++ Value range: [2, 12]
+
+### `temp-path` <span class="version-mark">New in v6.2.0</span>
+
++ The temporary path to which log files are written before being flushed to external storage.
++ Default value: `${deploy-dir}/data/log-backup-temp`
+
 ## cdc
 
 Configuration items related to TiCDC.
@@ -1588,7 +1682,7 @@ Configuration items related to TiCDC.
 ### `min-ts-interval`
 
 + The interval at which Resolved TS is calculated and forwarded.
-+ Default value: `"1s"`
++ Default value: `"200ms"`
 
 ### `old-value-cache-memory-quota`
 
@@ -1615,17 +1709,6 @@ Configuration items related to TiCDC.
 + The maximum number of concurrent executions for the tasks of incrementally scanning historical data.
 + Default value: `6`, which means 6 tasks can be concurrent executed at most.
 + Note: The value of `incremental-scan-concurrency` must be greater than or equal to that of `incremental-scan-threads`; otherwise, TiKV will report an error at startup.
-
-### `raw-min-ts-outlier-threshold` <span class="version-mark">New in v6.2.0</span>
-
-+ The threshold at which TiKV checks whether the Resolved TS of RawKV is abnormal.
-+ If the Resolved TS latency of a Region exceeds this threshold, the anomaly detection process is triggered. At this time, the Region whose Resolved TS latency exceeds 3 x [interquartile range](https://en.wikipedia.org/wiki/Interquartile_range) is considered as slow in lock resolution, and triggers TiKV-CDC to re-subscribe the data changes of the Region, which resets the lock resource status.
-+ Default value: `60s`
-
-> **Warning:**
->
-> - This configuration item will be deprecated in a future release. To avoid upgrade compatibility issues, it is **NOT** recommended to set this configuration item.
-> - In most scenarios, you do not need to modify this configuration, because the slow lock resolution rarely happens. If this configuration value is set too small, the anomaly detection process might trigger false alarms, which causes data replication jitter.
 
 ## resolved-ts
 
@@ -1705,7 +1788,7 @@ Suppose that your machine on which TiKV is deployed has limited resources, for e
 
 + The soft limit on the bandwidth with which transactions and the Coprocessor read data.
 + Default value: `0KB` (which means no limit)
-+ + Recommended setting: Use the default value `0` in most cases unless the `foreground-cpu-time` setting is not enough to limit the read bandwidth. For such an exception, it is recommended to set the value smaller than `20MB` in the instance with 4 or less cores.
++ Recommended setting: Use the default value `0` in most cases unless the `foreground-cpu-time` setting is not enough to limit the read bandwidth. For such an exception, it is recommended to set the value smaller than `20MB` in the instance with 4 or less cores.
 
 ### Background Quota Limiter
 
@@ -1751,21 +1834,36 @@ Suppose that your machine on which TiKV is deployed has limited resources, for e
 
 Configuration items related to getting the timestamp when TiKV API V2 is enabled (`storage.api-version = 2`).
 
-To reduce write latency and avoid frequent access to PD, TiKV periodically fetches and caches a batch of timestamps in the local. When the locally cached timestamps are exhausted, TiKV immediately makes a timestamp request. In this situation, the latency of some write requests are increased. To reduce the occurrence of this situation, TiKV dynamically adjusts the size of the locally cached timestamps according to the workload. For most of the time, you do not need to adjust the following parameters.
+To reduce write latency, TiKV periodically fetches and caches a batch of timestamps locally. Cached timestamps help avoid frequent access to PD and allow short-term TSO service failure.
 
-> **Warning:**
->
-> TiKV API V2 is still an experimental feature. It is not recommended to use it in production environments.
+### `alloc-ahead-buffer` <span class="version-mark">New in v6.4.0</span>
+
++ The pre-allocated TSO cache size (in duration).
++ Indicates that TiKV pre-allocates the TSO cache based on the duration specified by this configuration item. TiKV estimates the TSO usage based on the previous period, and requests and caches TSOs satisfying `alloc-ahead-buffer` locally.
++ This configuration item is often used to increase the tolerance of PD failures when TiKV API V2 is enabled (`storage.api-version = 2`).
++ Increasing the value of this configuration item might result in more TSO consumption and memory overhead of TiKV. To obtain enough TSOs, it is recommended to decrease the [`tso-update-physical-interval`](/pd-configuration-file.md#tso-update-physical-interval) configuration item of PD.
++ According to the test, when `alloc-ahead-buffer` is in its default value, and the PD leader fails and switches to another node, the write request will experience a short-term increase in latency and a decrease in QPS (about 15%).
++ To avoid the impact on the business, you can configure `tso-update-physical-interval = "1ms"` in PD and the following configuration items in TiKV:
+    + `causal-ts.alloc-ahead-buffer = "6s"`
+    + `causal-ts.renew-batch-max-size = 65536`
+    + `causal-ts.renew-batch-min-size = 2048`
++ Default value: `3s`
 
 ### `renew-interval`
 
-+ The interval at which the locally cached timestamps are refreshed.
-+ At an interval of `renew-interval`, TiKV starts a batch of timestamp refresh and adjusts the number of cached timestamps according to the timestamp consumption in the previous period. If you set this parameter to too large a value, the latest TiKV workload changes are not reflected in time. If you set this parameter to too small a value, the load of PD increases. If the write traffic is strongly fluctuating, if timestamps are frequently exhausted, and if write latency increases, you can set this parameter to a smaller value. At the same time, you should also consider the load of PD.
++ The interval at which the locally cached timestamps are updated.
++ At an interval of `renew-interval`, TiKV starts a batch of timestamp refresh and adjusts the number of cached timestamps according to the timestamp consumption in the previous period and the setting of [`alloc-ahead-buffer`](#alloc-ahead-buffer-new-in-v640). If you set this parameter to too large a value, the latest TiKV workload changes are not reflected in time. If you set this parameter to too small a value, the load of PD increases. If the write traffic is strongly fluctuating, if timestamps are frequently exhausted, and if write latency increases, you can set this parameter to a smaller value. At the same time, you should also consider the load of PD.
 + Default value: `"100ms"`
 
 ### `renew-batch-min-size`
 
-+ The minimum number of locally cached timestamps.
-+ TiKV adjusts the number of cached timestamps according to the timestamp consumption in the previous period. If the usage of locally cached timestamps is low, TiKV gradually reduces the number of cached timestamps until it reaches `renew-batch-min-size`. If large bursty write traffic often occurs in your application, you can set this parameter to a larger value as appropriate. Note that this parameter is the cache size for a single tikv-server. If you set the parameter to too large a value and the cluster contains many tikv-servers, the TSO consumption will be too fast.
++ The minimum number of TSOs in a timestamp request.
++ TiKV adjusts the number of cached timestamps according to the timestamp consumption in the previous period. If only a few TSOs are required, TiKV reduces the TSOs requested until the number reaches `renew-batch-min-size`. If large bursty write traffic often occurs in your application, you can set this parameter to a larger value as appropriate. Note that this parameter is the cache size for a single tikv-server. If you set the parameter to too large a value and the cluster contains many tikv-servers, the TSO consumption will be too fast.
 + In the **TiKV-RAW** \> **Causal timestamp** panel in Grafana, **TSO batch size** is the number of locally cached timestamps that has been dynamically adjusted according to the application workload. You can refer to this metric to adjust `renew-batch-min-size`.
 + Default value: `100`
+
+### `renew-batch-max-size` <span class="version-mark">New in v6.4.0</span>
+
++ The maximum number of TSOs in a timestamp request.
++ In a default TSO physical time update interval (`50ms`), PD provides at most 262144 TSOs. When requested TSOs exceed this number, PD provides no more TSOs. This configuration item is used to avoid exhausting TSOs and the reverse impact of TSO exhaustion on other businesses. If you increase the value of this configuration item to improve high availability, you need to decrease the value of [`tso-update-physical-interval`](/pd-configuration-file.md#tso-update-physical-interval) at the same time to get enough TSOs.
++ Default value: `8192`

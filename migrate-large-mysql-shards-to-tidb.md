@@ -31,8 +31,8 @@ Before getting started, see the following documents to prepare for the migration
 - [Deploy a DM Cluster Using TiUP](/dm/deploy-a-dm-cluster-using-tiup.md)
 - [Use TiUP to Deploy Dumpling and Lightning](/migration-tools.md)
 - [Downstream privilege requirements for Dumpling](/dumpling-overview.md#export-data-from-tidbmysql)
-- [Downstream privilege requirements for TiDB Lightning](/tidb-lightning/tidb-lightning-requirements.md#downstream-privilege-requirements)
-- [Downstream storage space for TiDB Lightning](/tidb-lightning/tidb-lightning-requirements.md#downstream-storage-space-requirements)
+- [Downstream privilege requirements for TiDB Lightning](/tidb-lightning/tidb-lightning-requirements.md)
+- [Downstream storage space for TiDB Lightning](/tidb-lightning/tidb-lightning-requirements.md)
 - [Privileges required by DM-worker](/dm/dm-worker-intro.md)
 
 ### Check conflicts for Sharded Tables
@@ -98,7 +98,7 @@ The following table describes parameters in the command above. For more informat
 | `-r` or `--row`        | Specifies the maximum number of rows in a single file. If you use this parameter, Dumpling enables the in-table concurrency to speed up the export and reduce the memory usage.|
 | `-F` |  Specifies the maximum size of a single file. The unit is `MiB`. It is recommended to keep the value to 256 MiB. |
 | `-B` or `--database`   | Specifies databases to be exported. |
-| `-f` or `--filter`     |  Sexport tables that match the filter pattern. For the filter syntax, see [table-filter](/table-filter.md) |
+| `-f` or `--filter`     |  Exports tables that match the filter pattern. For the filter syntax, see [table-filter](/table-filter.md). |
 
 Ensure that there is enough free space in `${data-path}`. It is strongly recommended to use the `-F` option to avoid interruptions in the backup process due to oversized single tables.
 
@@ -219,7 +219,7 @@ Follow these steps to start `tidb-lightning`:
    - View progress via the monitoring dashboard. For more information, see [TiDB Lightning Monitoring]( /tidb-lightning/monitor-tidb-lightning.md).
    - View the progress via the Web page. See [Web Interface](/tidb-lightning/tidb-lightning-web-interface.md).
 
-After the importing finishes, TiDB Lightning will exit automatically. To make sure that the data is imported successfully, check for `the whole procedure completed` among the last 5 lines in the log.
+After TiDB Lightning completes the import, it exits automatically. Check whether `tidb-lightning.log` contains `the whole procedure completed` in the last lines. If yes, the import is successful. If no, the import encounters an error. Address the error as instructed in the error message.
 
 > **Note:**
 >
@@ -265,8 +265,8 @@ The parameters are described as follows.
 
 |Parameter      | Description |
 |-              |-            |
-|--master-addr         | {advertise-addr} of any DM-master node in the cluster that dmctl connects to. For example: 172.16.10.71:8261|
-| operate-source create | Load data sources to DM clusters. |
+|`--master-addr`         | {advertise-addr} of any DM-master node in the cluster that dmctl connects to. For example: 172.16.10.71:8261|
+| `operate-source create` | Load data sources to DM clusters. |
 
 Repeat the above steps until all MySQL upstream instances are added to the DM as data sources.
 
@@ -316,7 +316,7 @@ mysql-instances:
     block-allow-list: "bw-rule-1"     # Use the block and allow list configuration above. Replicate `my_db1` in instance 1.
     route-rules: ["route-rule-1"]     # Use the configured routing rule above to merge upstream tables.
 #       syncer-config-name: "global"  # Use the syncers configuration below.
-    meta:                             # The migration starting point of binlog when task-mode is incremental and there is no checkpoint in the downstream database. If there is a checkpoint, the checkpoint will be used.
+    meta:                             # The position where the binlog replication starts when `task-mode` is `incremental` and the downstream database checkpoint does not exist. If the checkpoint exists, the checkpoint is used. If neither the `meta` configuration item nor the downstream database checkpoint exists, the migration starts from the latest binlog position of the upstream.
       binlog-name: "${binlog-name}"   # The log location recorded in ${data-path}/my_db1/metadata in Step 1. You can either specify binlog-name + binlog-pos or binlog-gtid. When the upstream database service is configured to switch master between different nodes automatically, use binlog GTID here.
       binlog-pos: ${binlog-position}
       # binlog-gtid:                  " For example: 09bec856-ba95-11ea-850a-58f2b4af5188:1-9"

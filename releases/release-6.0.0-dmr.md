@@ -306,7 +306,7 @@ TiDB v6.0.0 is a DMR, and its version is 6.0.0-DMR.
 | TiDB | [`new_collations_enabled_on_first_bootstrap`](/tidb-configuration-file.md#new_collations_enabled_on_first_bootstrap) | Modified | Controls whether to enable support for the new collation. Since v6.0, the default value is changed from `false` to `true`. This configuration item only takes effect when the cluster is initialized for the first time. After the first bootstrap, you cannot enable or disable the new collation framework using this configuration item. |
 | TiKV | [`backup.num-threads`](/tikv-configuration-file.md#num-threads-1) | Modified | The value range is modified to `[1, CPU]`.  |
 | TiKV | [`raftstore.apply-max-batch-size`](/tikv-configuration-file.md#apply-max-batch-size) | Modified | The maximum value is changed to `10240`. |
-| TiKV | [`raftstore.raft-max-size-per-msg`](/tikv-configuration-file.md#raft-max-size-per-msg) | Modified | <ul><li>The minimum value is changed from `0` to larger than `0`.</li><li>The maximum value is set to `3GB`.</li><li>The unit is changed from `MB` to `KB\|MB\|GB`.</li></ul> |
+| TiKV | [`raftstore.raft-max-size-per-msg`](/tikv-configuration-file.md#raft-max-size-per-msg) | Modified | <ul><li>The minimum value is changed from `0` to larger than `0`.</li><li>The maximum value is set to `3GB`.</li><li>The unit is changed from `MB` to <code>KB\|MB\|GB</code>.</li></ul> |
 | TiKV | [`raftstore.store-max-batch-size`](/tikv-configuration-file.md#store-max-batch-size) | Modified | The maximum value is set to `10240`. |
 | TiKV | [`readpool.unified.max-thread-count`](/tikv-configuration-file.md#max-thread-count) | Modified | The adjustable range is changed to `[min-thread-count, MAX(4, CPU)]`. |
 | TiKV | [`rocksdb.enable-pipelined-write`](/tikv-configuration-file.md#enable-pipelined-write) | Modified | The default value is changed from `true` to `false`. When this configuration is enabled, the previous Pipelined Write is used. When this configuration is disabled, the new Pipelined Commit mechanism is used. |
@@ -402,7 +402,7 @@ TiDB v6.0.0 is a DMR, and its version is 6.0.0-DMR.
     - Support dynamically modifying `raftstore.apply_max_batch_size` and `raftstore.store_max_batch_size` [#11982](https://github.com/tikv/tikv/issues/11982)
     - RawKV V2 returns the latest version upon receiving the `raw_get` or `raw_scan` request [#11965](https://github.com/tikv/tikv/issues/11965)
     - Support the RCCheckTS consistency reads [#12097](https://github.com/tikv/tikv/issues/12097)
-    - Support dynamically modifying  `storage.scheduler-worker-pool-size`(the thread count of the Scheduler pool) [#12067](https://github.com/tikv/tikv/issues/12067)
+    - Support dynamically modifying `storage.scheduler-worker-pool-size`(the thread count of the Scheduler pool) [#12067](https://github.com/tikv/tikv/issues/12067)
     - Control the use of CPU and bandwidth by using the global foreground flow controller to improve the performance stability of TiKV [#11855](https://github.com/tikv/tikv/issues/11855)
     - Support dynamically modifying `readpool.unified.max-thread-count` (the thread count of the UnifyReadPool) [#11781](https://github.com/tikv/tikv/issues/11781)
     - Use the TiKV internal pipeline to replace the RocksDB pipeline and deprecate the `rocksdb.enable-multibatch-write` parameter [#12059](https://github.com/tikv/tikv/issues/12059)
@@ -453,7 +453,7 @@ TiDB v6.0.0 is a DMR, and its version is 6.0.0-DMR.
 
 + TiDB
 
-    - Fix a bug that TiDB fails to create tables with placement rules  when `SCHEDULE = majority_in_primary`, and `PrimaryRegion` and `Regions` are of the same value [#31271](https://github.com/pingcap/tidb/issues/31271)
+    - Fix a bug that TiDB fails to create tables with placement rules when `SCHEDULE = majority_in_primary`, and `PrimaryRegion` and `Regions` are of the same value [#31271](https://github.com/pingcap/tidb/issues/31271)
     - Fix the `invalid transaction` error when executing a query using index lookup join [#30468](https://github.com/pingcap/tidb/issues/30468)
     - Fix a bug that `show grants` returns incorrect results when two or more privileges are granted [#30855](https://github.com/pingcap/tidb/issues/30855)
     - Fix a bug that `INSERT INTO t1 SET timestamp_col = DEFAULT` would set the timestamp to the zero timestamp for the field defaulted to `CURRENT_TIMESTAMP` [#29926](https://github.com/pingcap/tidb/issues/29926)

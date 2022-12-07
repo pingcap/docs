@@ -52,7 +52,7 @@ Refer to [5 PD issues](#5-pd-issues).
 
 ### 3.1 DDL
 
-- 3.1.1  An error `ERROR 1105 (HY000): unsupported modify decimal column precision` is reported when you modify the length of the `decimal` field.<!--See [case-1004](https://github.com/pingcap/tidb-map/blob/master/maps/diagnose-case-study/case517.md) in Chinese.--> TiDB does not support changing the length of the `decimal` field.
+- 3.1.1 An error `ERROR 1105 (HY000): unsupported modify decimal column precision` is reported when you modify the length of the `decimal` field.<!--See [case-1004](https://github.com/pingcap/tidb-map/blob/master/maps/diagnose-case-study/case517.md) in Chinese.--> TiDB does not support changing the length of the `decimal` field.
 
 - 3.1.2 TiDB DDL job hangs or executes slowly (use `admin show ddl jobs` to check DDL progress)
 
@@ -77,13 +77,7 @@ Refer to [5 PD issues](#5-pd-issues).
 
 - 3.1.3 TiDB reports `information schema is changed` error in log
 
-    - Cause 1: The DML operation touches a table that is under DDL. You can use `admin show ddl job` to check the DDLs that are currently in progress.
-
-    - Cause 2: The current DML operation is executed too long. During the time, many DDL operations are executed, which causes `schema version` changes to be more than 1024. The new version `lock table` might also cause schema version changes.
-
-    - Cause 3: The TiDB instance that is currently executing DML statements cannot load the new `schema information` (maybe caused by network issues with PD or TiKV). During this time, many DDL statements are executed (including `lock table`), which causes `schema version` changes to be more than 1024.
-
-    - Solution: The first two causes do not impact the application, as the related DML operations retry after failure. For cause 3, you need to check the network between TiDB and TiKV/PD.
+    - For the detailed causes and solution, see [Why the `Information schema is changed` error is reported](/faq/sql-faq.md#why-the-information-schema-is-changed-error-is-reported).
 
     - Background: The increased number of `schema version` is consistent with the number of `schema state` of each DDL change operation. For example, the `create table` operation has 1 version change, and the `add column` operation has 4 version changes. Therefore, too many column change operations might cause `schema version` to increase fast. For details, refer to [online schema change](https://static.googleusercontent.com/media/research.google.com/zh-CN//pubs/archive/41376.pdf).
 
@@ -140,6 +134,8 @@ Refer to [5 PD issues](#5-pd-issues).
 
     - The SQL contains multiple sub-queries connected by `Union`. See [case-1828](https://github.com/pingcap/tidb-map/blob/master/maps/diagnose-case-study/case1828.md) in Chinese.
 
+For more information about troubleshooting OOM, see [Troubleshoot TiDB OOM Issues](/troubleshoot-tidb-oom.md).
+
 ### 3.3 Wrong execution plan
 
 - 3.3.1 Symptom
@@ -190,7 +186,7 @@ Refer to [5 PD issues](#5-pd-issues).
 
     This issue is expected. You can restore the Region using `tikv-ctl`.
 
-- 4.1.2 If TiKV is deployed on a virtual machine, when the virtual machine is killed or the physical machine is powered off, the `entries[X, Y]  is unavailable from storage` error is reported.
+- 4.1.2 If TiKV is deployed on a virtual machine, when the virtual machine is killed or the physical machine is powered off, the `entries[X, Y] is unavailable from storage` error is reported.
 
     This issue is expected. The `fsync` of virtual machines is not reliable, so you need to restore the Region using `tikv-ctl`.
 
@@ -457,14 +453,14 @@ Check the specific cause for busy by viewing the monitor **Grafana** -> **TiKV**
 
 - 6.2.3 A replication task is interrupted with the `driver: bad connection` error returned.
 
-    - The `driver: bad connection` error indicates that an anomaly has occurred in the connection between DM and the downstream TiDB database (such as network failure, TiDB restart and so on), and that the data of the current request has not yet been sent to TiDB.
+    - The `driver: bad connection` error indicates that an anomaly has occurred in the connection between DM and the downstream TiDB database (such as network failure and TiDB restart), and that the data of the current request has not yet been sent to TiDB.
 
         - For versions earlier than DM 1.0.0 GA, stop the task by running `stop-task` and then restart the task by running `start-task`.
         - For DM 1.0.0 GA or later versions, an automatic retry mechanism for this type of error is added. See [#265](https://github.com/pingcap/dm/pull/265).
 
 - 6.2.4 A replication task is interrupted with the `invalid connection` error.
 
-    - The `invalid connection` error indicates that an anomaly has occurred in the connection between DM and the downstream TiDB database (such as network failure, TiDB restart, TiKV busy and so on), and that a part of the data for the current request has been sent to TiDB. Because DM has the feature of concurrently replicating data to the downstream in replication tasks, several errors might occur when a task is interrupted. You can check these errors by running `query-status` or `query-error`.
+    - The `invalid connection` error indicates that an anomaly has occurred in the connection between DM and the downstream TiDB database (such as network failure, TiDB restart, and TiKV busy), and that a part of the data for the current request has been sent to TiDB. Because DM has the feature of concurrently replicating data to the downstream in replication tasks, several errors might occur when a task is interrupted. You can check these errors by running `query-status` or `query-error`.
 
         - If only the `invalid connection` error occurs during the incremental replication process, DM retries the task automatically.
         - If DM does not retry or fails to retry automatically because of version problems (automatic retry is introduced in v1.0.0-rc.1), use `stop-task` to stop the task and then use `start-task` to restart the task.
@@ -519,30 +515,30 @@ Check the specific cause for busy by viewing the monitor **Grafana** -> **TiKV**
         - `AUTO_INCREMENT` columns need to be positive, and do not contain the value "0".
         - UNIQUE and PRIMARY KEYs must not have duplicate entries.
 
-    - Solution: See [Troubleshooting Solution](/tidb-lightning/tidb-lightning-faq.md#checksum-failed-checksum-mismatched-remote-vs-local).
+    - Solution: See [Troubleshooting Solution](/tidb-lightning/troubleshoot-tidb-lightning.md#checksum-failed-checksum-mismatched-remote-vs-local).
 
 - 6.3.4 `Checkpoint for … has invalid status:(error code)`
 
     - Cause: Checkpoint is enabled, and Lightning/Importer has previously abnormally exited. To prevent accidental data corruption, TiDB Lightning will not start until the error is addressed. The error code is an integer less than 25, with possible values as `0, 3, 6, 9, 12, 14, 15, 17, 18, 20 and 21`. The integer indicates the step where the unexpected exit occurs in the import process. The larger the integer is, the later the exit occurs.
 
-    - Solution: See [Troubleshooting Solution](/tidb-lightning/tidb-lightning-faq.md#checkpoint-for--has-invalid-status-error-code).
+    - Solution: See [Troubleshooting Solution](/tidb-lightning/troubleshoot-tidb-lightning.md#checkpoint-for--has-invalid-status-error-code).
 
 - 6.3.5 `ResourceTemporarilyUnavailable("Too many open engines …: 8")`
 
     - Cause: The number of concurrent engine files exceeds the limit specified by tikv-importer. This could be caused by misconfiguration. In addition, even when the configuration is correct, if tidb-lightning has exited abnormally before, an engine file might be left at a dangling open state, which could cause this error as well.
-    - Solution: See [Troubleshooting Solution](/tidb-lightning/tidb-lightning-faq.md#resourcetemporarilyunavailabletoo-many-open-engines--).
+    - Solution: See [Troubleshooting Solution](/tidb-lightning/troubleshoot-tidb-lightning.md#resourcetemporarilyunavailabletoo-many-open-engines--).
 
 - 6.3.6 `cannot guess encoding for input file, please convert to UTF-8 manually`
 
     - Cause: TiDB Lightning only supports the UTF-8 and GB-18030 encodings. This error means the file is not in any of these encodings. It is also possible that the file has mixed encoding, such as containing a string in UTF-8 and another string in GB-18030, due to historical ALTER TABLE executions.
 
-    - Solution: See [Troubleshooting Solution](/tidb-lightning/tidb-lightning-faq.md#cannot-guess-encoding-for-input-file-please-convert-to-utf-8-manually).
+    - Solution: See [Troubleshooting Solution](/tidb-lightning/troubleshoot-tidb-lightning.md#cannot-guess-encoding-for-input-file-please-convert-to-utf-8-manually).
 
 - 6.3.7 `[sql2kv] sql encode error = [types:1292]invalid time format: '{1970 1 1 0 45 0 0}'`
 
     - Cause: A timestamp type entry has a time value that does not exist. This is either because of DST changes or because the time value has exceeded the supported range (from Jan 1, 1970 to Jan 19, 2038).
 
-    - Solution: See [Troubleshooting Solution](/tidb-lightning/tidb-lightning-faq.md#sql2kv-sql-encode-error--types1292invalid-time-format-1970-1-1-).
+    - Solution: See [Troubleshooting Solution](/tidb-lightning/troubleshoot-tidb-lightning.md#sql2kv-sql-encode-error--types1292invalid-time-format-1970-1-1-).
 
 ## 7. Common log analysis
 
@@ -601,9 +597,9 @@ Check the specific cause for busy by viewing the monitor **Grafana** -> **TiKV**
 
 - 7.2.3 `TxnLockNotFound`.
 
-    This transaction commit is too slow, which is rolled back by other transactions after TTL (3 seconds for a small transaction by default). This transaction will automatically retry, so the business is usually not affected.
+    This transaction commit is too slow, causing it to be rolled back by other transactions after Time To Live (TTL). This transaction will automatically retry, so the business is usually not affected. For a transaction with a size of 0.25 MB or smaller, the default TTL is 3 seconds.
 
-- 7.2.4  `PessimisticLockNotFound`.
+- 7.2.4 `PessimisticLockNotFound`.
 
     Similar to `TxnLockNotFound`. The pessimistic transaction commit is too slow and thus rolled back by other transactions.
 

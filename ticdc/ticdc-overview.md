@@ -1,12 +1,12 @@
 ---
 title: TiCDC Overview
-summary: Learn what TiCDC is, what features TiCDC provides, etc.
+summary: Learn what TiCDC is, what features TiCDC provides, and how to install and deploy TiCDC.
 aliases: ['/docs/dev/ticdc/ticdc-overview/','/docs/dev/reference/tools/ticdc/overview/']
 ---
 
 # TiCDC Overview
 
-[TiCDC](https://github.com/pingcap/tiflow/tree/master/cdc) is a tool used for replicating incremental data of TiDB. Specifically, TiCDC pulls TiKV change logs, sorts captured data, and exports row-based incremental data to downstream databases. 
+[TiCDC](https://github.com/pingcap/tiflow/tree/master/cdc) is a tool used for replicating incremental data of TiDB. Specifically, TiCDC pulls TiKV change logs, sorts captured data, and exports row-based incremental data to downstream databases.
 
 ## Usage scenarios
 
@@ -64,6 +64,10 @@ Currently, the TiCDC sink component supports replicating data to the following d
     - TiCDC splits cross-table transactions in the unit of table and does **not ensure** the atomicity of cross-table transactions.
     - TiCDC **ensures** that the order of single-row updates is consistent with that in the upstream.
 
+    > **Note:**
+    >
+    > Since v6.2, you can use the sink uri parameter [`transaction-atomicity`](/ticdc/manage-ticdc.md#configure-sink-uri-with-mysqltidb) to control whether to split single-table transactions. Splitting single-table transactions can greatly reduce the latency and memory consumption of replicating large transactions.
+
 - Kafka sink
 
     - TiCDC provides different strategies for data distribution. You can distribute data to different Kafka partitions based on the table, primary key, or timestamp.
@@ -92,7 +96,7 @@ Currently, the following scenarios are not supported:
 - The TiKV cluster that uses RawKV alone.
 - The [DDL operation `CREATE SEQUENCE`](/sql-statements/sql-statement-create-sequence.md) and the [SEQUENCE function](/sql-statements/sql-statement-create-sequence.md#sequence-function) in TiDB. When the upstream TiDB uses `SEQUENCE`, TiCDC ignores `SEQUENCE` DDL operations/functions performed upstream. However, DML operations using `SEQUENCE` functions can be correctly replicated.
 
-TiCDC only provides partial support for scenarios of large transactions in the upstream. For details, refer to [FAQ: Does TiCDC support replicating large transactions? Is there any risk?](/ticdc/ticdc-faq.md#does-ticdc-support-replicating-large-transactions-is-there-any-risk).
+TiCDC only provides partial support for scenarios of large transactions in the upstream. For details, refer to [Does TiCDC support replicating large transactions? Is there any risk?](/ticdc/ticdc-faq.md#does-ticdc-support-replicating-large-transactions-is-there-any-risk).
 
 > **Note:**
 >
@@ -123,7 +127,9 @@ When using the `cdc cli` tool of TiCDC v5.0.0-rc to operate a v4.0.x TiCDC clust
 
 - If the TiCDC cluster is v4.0.9 or a later version, using the v5.0.0-rc `cdc cli` tool to create a replication task will cause the old value and unified sorter features to be unexpectedly enabled by default.
 
-Solutions: Use the `cdc` executable file corresponding to the TiCDC cluster version to perform the following operations:
+Solutions:
+
+Use the `cdc` executable file corresponding to the TiCDC cluster version to perform the following operations:
 
 1. Delete the changefeed created using the v5.0.0-rc `cdc cli` tool. For example, run the `tiup cdc:v4.0.9 cli changefeed remove -c xxxx --pd=xxxxx --force` command.
 2. If the replication task is stuck, restart the TiCDC cluster. For example, run the `tiup cluster restart <cluster_name> -R cdc` command.

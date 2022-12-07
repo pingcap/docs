@@ -21,10 +21,10 @@ SELECT * FROM table_a t ORDER BY gmt_modified DESC LIMIT offset, row_count;
 
 When pagination is used, it is recommended that you sort query results with the `ORDER BY` statement unless there is a need to display data randomly.
 
-<SimpleTab>
-<div label="SQL">
+<SimpleTab groupId="language">
+<div label="SQL" value="sql">
 
-For example, to let users of the [Bookshop](/develop/dev-guide-bookshop-schema-design.md) application view the latest published books in a paginated manner, you can use the `LIMIT 0, 10` statement, which returns the first page of the result list, with a maximum of 10 records per page. To get the second page, you can change the statement to `LIMIT 10, 10`, and so on.
+For example, to let users of the [Bookshop](/develop/dev-guide-bookshop-schema-design.md) application view the latest published books in a paginated manner, you can use the `LIMIT 0, 10` statement, which returns the first page of the result list, with a maximum of 10 records per page. To get the second page, you can change the statement to `LIMIT 10, 10`.
 
 {{< copyable "sql" >}}
 
@@ -36,7 +36,7 @@ LIMIT 0, 10;
 ```
 
 </div>
-<div label="Java">
+<div label="Java" value="java">
 
 In application development, the backend program receives the `page_number` parameter (which means the number of the page being requested) and the `page_size` parameter (which controls how many records per page) from the frontend instead of the `offset` parameter. Therefore, some conversions needed to be done before querying.
 
@@ -80,8 +80,8 @@ Usually, you can write a pagination SQL statement using a primary key or unique 
 
 The following introduces a more efficient paging batching method:
 
-<SimpleTab>
-<div label="SQL">
+<SimpleTab groupId="language">
+<div label="SQL" value="sql">
 
 First, sort the data by primary key and call the window function `row_number()` to generate a row number for each row. Then, call the aggregation function to group row numbers by the specified page size and calculate the minimum and maximum values of each page.
 
@@ -132,7 +132,7 @@ ORDER BY id;
 ```
 
 </div>
-<div label="Java">
+<div label="Java" value="java">
 
 In Java, define a `PageMeta` class to store page meta information.
 
@@ -233,7 +233,7 @@ This method significantly improves the efficiency of batch processing by avoidin
 
 For non-clustered index tables (also known as "non-index-organized tables"), the internal field `_tidb_rowid` can be used as a pagination key, and the pagination method is the same as that of single-field primary key tables.
 
-> **Tips:**
+> **Tip:**
 >
 > You can use the `SHOW CREATE TABLE users;` statement to check whether the table primary key uses [clustered index](/clustered-indexes.md).
 
@@ -303,6 +303,10 @@ GROUP BY page_num
 ORDER BY page_num;
 ```
 
+> **Note:**
+>
+> The preceding SQL statement is executed as `TableFullScan`. When the data volume is large, the query will be slow, and you can [use TiFlash](/tiflash/tiflash-overview.md#use-tiflash) to speed up it.
+
 The result is as follows:
 
 ```
@@ -328,7 +332,12 @@ To delete all rating records on page 1, replace the `start_key` and `end_key` wi
 ```sql
 SELECT * FROM ratings
 WHERE
-    (book_id, user_id) >= (268996, 92104804)
-    AND (book_id, user_id) <= (140982742, 374645100)
+    (book_id > 268996 AND book_id < 140982742)
+    OR (
+        book_id = 268996 AND user_id >= 92104804
+    )
+    OR (
+        book_id = 140982742 AND user_id <= 374645100
+    )
 ORDER BY book_id, user_id;
 ```

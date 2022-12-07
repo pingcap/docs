@@ -1,9 +1,9 @@
 ---
-title: Cluster Management FAQs
+title: TiDB Cluster Management FAQs
 summary: Learn about the FAQs related to TiDB cluster management.
 ---
 
-# Cluster Management FAQs
+# TiDB Cluster Management FAQs
 
 This document summarizes the FAQs related to TiDB cluster management.
 
@@ -21,7 +21,7 @@ mysql -h 127.0.0.1 -uroot -P4000
 
 ### How to modify the system variables in TiDB?
 
-Similar to MySQL, TiDB includes static and solid parameters. You can directly modify static parameters using `set global xxx = n`, but the new value of a parameter is only effective within the life cycle in this instance.
+Similar to MySQL, TiDB includes static and solid parameters. You can directly modify static parameters using `SET GLOBAL xxx = n`, but the new value of a parameter is only effective within the life cycle in this instance.
 
 ### Where and what are the data directories in TiDB (TiKV)?
 
@@ -57,21 +57,23 @@ By default, TiDB/PD/TiKV outputs standard error in the logs. If a log file is sp
 
 TiDB currently supports two timeouts, [`wait_timeout`](/system-variables.md#wait_timeout) and [`interactive_timeout`](/system-variables.md#interactive_timeout).
 
-### What is the TiDB version management strategy for production environment? How to avoid frequent upgrade?
+### What is the TiDB version management strategy?
 
-Currently, TiDB has a standard management of various versions. Each release contains a detailed change log and [release notes](/releases/release-notes.md). Whether it is necessary to upgrade in the production environment depends on the application system. It is recommended to learn the details about the functional differences between the previous and later versions before upgrading.
+For details about TiDB version management, see [TiDB versioning](/releases/versioning.md).
 
-Take `Release Version: v1.0.3-1-ga80e796` as an example of version number description:
+### How about the operating cost of deploying and maintaining a TiDB cluster?
 
-- `v1.0.3` indicates the standard GA version.
-- `-1` indicates the current version has one commit.
-- `ga80e796` indicates the version `git-hash`.
+TiDB provides a few features and [tools](/ecosystem-tool-user-guide.md), with which you can manage the clusters easily at a low cost:
+
+- For maintenance operations, [TiUP](/tiup/tiup-documentation-guide.md) works as the package manager, which simplifies the deployment, scaling, upgrade, and other maintenance tasks.
+- For monitoring, the [TiDB monitoring framework](/tidb-monitoring-framework.md) uses [Prometheus](https://prometheus.io/) to store the monitoring and performance metrics, and uses [Grafana](https://grafana.com/grafana/) to visualize these metrics. Dozens of built-in panels are available with hundreds of metrics.
+- For troubleshooting, the [TiDB Troubleshooting Map](/tidb-troubleshooting-map.md) summarizes common issues of the TiDB server and other components. You can use this map to diagnose and resolve issues when you encounter related problems.
 
 ### What's the difference between various TiDB master versions?
 
-The TiDB community is highly active. After the 1.0 GA release, the engineers have been keeping optimizing and fixing bugs. Therefore, the TiDB version is updated quite fast. If you want to keep informed of the latest version, see [TiDB Weekly update](https://pingcap.com/weekly/).
+The TiDB community is highly active. The engineers have been keeping optimizing features and fixing bugs. Therefore, the TiDB version is updated quite fast. If you want to keep informed of the latest version, see [TiDB Release Timeline](/releases/release-timeline.md).
 
-It is recommeneded to [deploy TiDB using TiUP](/production-deployment-using-tiup.md). TiDB has a unified management of the version number after the 1.0 GA release. You can view the version number using the following two methods:
+It is recommeneded to deploy TiDB [using TiUP](/production-deployment-using-tiup.md) or [using TiDB Operator](https://docs.pingcap.com/tidb-in-kubernetes/stable). TiDB has a unified management of the version number. You can view the version number using one of the following methods:
 
 - `select tidb_version()`
 - `tidb-server -V`
@@ -79,6 +81,13 @@ It is recommeneded to [deploy TiDB using TiUP](/production-deployment-using-tiup
 ### Is there a graphical deployment tool for TiDB?
 
 Currently no.
+
+### How to scale out a TiDB cluster?
+
+You can scale out your TiDB cluster without interrupting the online services.
+
+- If your cluster is deployed using [TiUP](/production-deployment-using-tiup.md), refer to [Scale a TiDB Cluster Using TiUP](/scale-tidb-using-tiup.md).
+- If your cluster is deployed using [TiDB Operator](/tidb-operator-overview.md) on Kubernetes, refer to [Manually Scale TiDB on Kubernetes](https://docs.pingcap.com/tidb-in-kubernetes/stable/scale-a-tidb-cluster).
 
 ### How to scale TiDB horizontally?
 
@@ -217,7 +226,7 @@ The TiClient Region Error indicator describes the error types and metrics that a
 
 ### What's the maximum number of concurrent connections that TiDB supports?
 
-By default, there is no limit on the maximum number of connections per TiDB server. If too large concurrency leads to an increase of response time, it is recommended to increase the capacity by adding TiDB nodes.
+By default, there is no limit on the maximum number of connections per TiDB server. If needed, you can limit the maximum number of connections by setting `instance.max_connections` in the `config.toml` file, or changing the value of the system variable [`max_connections`](/system-variables.md#max_connections). If too large concurrency leads to an increase of response time, it is recommended to increase the capacity by adding TiDB nodes.
 
 ### How to view the creation time of a table?
 
@@ -287,6 +296,12 @@ In addition, in the above statement:
 
 This section describes common problems you might encounter during TiKV server management, their causes, and solutions.
 
+### How to specify the location of data for compliance or multi-tenant applications?
+
+You can use [Placement Rules](/placement-rules-in-sql.md) to specify the location of data for compliance or multi-tenant applications.
+
+Placement Rules in SQL is designed to control the attributes of any continuous data range, such as the number of replicas, the Raft role, the placement location, and the key ranges in which the rules take effect.
+
 ### What is the recommended number of replicas in the TiKV cluster? Is it better to keep the minimum number for high availability?
 
 3 replicas for each Region is sufficient for a testing environment. However, you should never operate a TiKV cluster with under 3 nodes in a production scenario. Depending on infrastructure, workload, and resiliency needs, you may wish to increase this number. It is worth noting that the higher the copy, the lower the performance, but the higher the security.
@@ -319,7 +334,7 @@ TiKV implements the Column Family (CF) feature of RocksDB. By default, the KV da
 ### Why is the TiKV channel full?
 
 - The Raftstore thread is too slow or blocked by I/O. You can view the CPU usage status of Raftstore.
-- TiKV is too busy (CPU, disk I/O, etc.) and cannot manage to handle it.
+- TiKV is too busy (such as CPU and disk I/O) and cannot manage to handle it.
 
 ### Why does TiKV frequently switch Region leader?
 
@@ -427,6 +442,10 @@ This section describes common problems you may encounter during backup and resto
 
 ### How to back up data in TiDB?
 
-Currently, for the backup of a large volume of data (more than 1 TB), the preferred method is using [BR](/br/backup-and-restore-overview.md). Otherwise, the recommended tool is [Dumpling](/dumpling-overview.md). Although the official MySQL tool `mysqldump` is also supported in TiDB to back up and restore data, its performance is no better than BR and it needs much more time to back up and restore large volumes of data.
+Currently, for the backup of a large volume of data (more than 1 TB), the preferred method is using [Backup & Restore (BR)](/br/backup-and-restore-overview.md). Otherwise, the recommended tool is [Dumpling](/dumpling-overview.md). Although the official MySQL tool `mysqldump` is also supported in TiDB to back up and restore data, its performance is no better than BR and it needs much more time to back up and restore large volumes of data.
 
-For more FAQs about BR, see [BR FAQs](/br/backup-and-restore-faq.md).
+For more FAQs about BR, see [BR FAQs](/faq/backup-and-restore-faq.md).
+
+### How is the speed of backup and restore?
+
+When [BR](/br/backup-and-restore-overview.md) is used to perform backup and restore tasks, the backup is processed at about 40 MB/s per TiKV instance, and restore is processed at about 100 MB/s per TiKV instance.
