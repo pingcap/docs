@@ -52,6 +52,7 @@ DELETE FROM {table} WHERE {filter}
 
 -   テーブル内のすべてのデータを削除する場合は、 `DELETE`ステートメントを使用しないでください。代わりに、 [`TRUNCATE`](/sql-statements/sql-statement-truncate.md)ステートメントを使用してください。
 -   パフォーマンスに関する考慮事項については、 [パフォーマンスに関する考慮事項](#performance-considerations)を参照してください。
+-   大量のデータ バッチを削除する必要があるシナリオでは、 [非トランザクションの一括削除](#non-transactional-bulk-delete)を使用するとパフォーマンスが大幅に向上します。ただし、これにより削除のトランザクションが失われるため、ロールバックでき**ません**。正しい操作を選択していることを確認してください。
 
 ## 例 {#example}
 
@@ -148,7 +149,7 @@ func main() {
 
 <CustomContent platform="tidb">
 
-`rated_at`フィールドは[日付と時刻の種類](/data-type-date-and-time.md)の`DATETIME`タイプです。タイムゾーンに関係なく、文字どおりの量として TiDB に格納されていると想定できます。一方、 `TIMESTAMP`タイプはタイムスタンプを格納するため、別の[タイムゾーン](/configure-time-zone.md)には別の時間文字列が表示されます。
+`rated_at`フィールドは[日付と時刻の種類](/data-type-date-and-time.md)の`DATETIME`タイプです。タイムゾーンに関係なく、文字どおりの数量として TiDB に格納されていると想定できます。一方、 `TIMESTAMP`タイプはタイムスタンプを格納するため、別の[タイムゾーン](/configure-time-zone.md)には別の時間文字列が表示されます。
 
 </CustomContent>
 
@@ -182,13 +183,13 @@ TiDB は[統計情報](/statistics.md)を使用してインデックスの選択
 
 <CustomContent platform="tidb">
 
-ただし、多数の行 (1 万行以上) を削除する必要がある場合は、データを繰り返し削除することをお勧めします。つまり、削除が完了するまで繰り返しごとにデータの一部を削除します。これは、TiDB が[`txn-total-size-limit`](/tidb-configuration-file.md#txn-total-size-limit)つのトランザクションのサイズを制限しているためです (デフォルトでは 1、100 MB)。プログラムまたはスクリプトでループを使用して、このような操作を実行できます。
+ただし、多数の行 (1 万行以上) を削除する必要がある場合は、データを反復的に削除することをお勧めします。つまり、削除が完了するまで、繰り返しごとにデータの一部を削除します。これは、TiDB が[`txn-total-size-limit`](/tidb-configuration-file.md#txn-total-size-limit)つのトランザクションのサイズを制限しているためです (デフォルトでは 1、100 MB)。プログラムまたはスクリプトでループを使用して、このような操作を実行できます。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-ただし、多数の行 (1 万行以上) を削除する必要がある場合は、データを繰り返し削除することをお勧めします。つまり、削除が完了するまで繰り返しごとにデータの一部を削除します。これは、TiDB がデフォルトで 1 つのトランザクションのサイズを 100 MB に制限しているためです。プログラムまたはスクリプトでループを使用して、このような操作を実行できます。
+ただし、多数の行 (1 万行以上) を削除する必要がある場合は、データを反復的に削除することをお勧めします。つまり、削除が完了するまで、繰り返しごとにデータの一部を削除します。これは、TiDB がデフォルトで 1 つのトランザクションのサイズを 100 MB に制限しているためです。プログラムまたはスクリプトでループを使用して、このような操作を実行できます。
 
 </CustomContent>
 
@@ -323,3 +324,39 @@ func deleteBatch(db *sql.DB, startTime, endTime time.Time) (int64, error) {
 </div>
 
 </SimpleTab>
+
+## 非トランザクションの一括削除 {#non-transactional-bulk-delete}
+
+> **ノート：**
+>
+> v6.1.0 以降、TiDB は[非トランザクション DML ステートメント](/non-transactional-dml.md)をサポートしています。この機能は、TiDB v6.1.0 より前のバージョンでは使用できません。
+
+### 非トランザクション一括削除の前提条件 {#prerequisites-of-non-transactional-bulk-delete}
+
+非トランザクションの一括削除を使用する前に、最初に[非トランザクション DML ステートメントのドキュメント](/non-transactional-dml.md)を読んでいることを確認してください。非トランザクション一括削除は、バッチ データ処理シナリオでのパフォーマンスと使いやすさを向上させますが、トランザクションの原子性と分離性を犠牲にします。
+
+したがって、誤った取り扱いによる重大な結果 (データ損失など) を避けるために、慎重に使用する必要があります。
+
+### 非トランザクション一括削除の SQL 構文 {#sql-syntax-for-non-transactional-bulk-delete}
+
+非トランザクション一括削除ステートメントの SQL 構文は次のとおりです。
+
+```sql
+BATCH ON {shard_column} LIMIT {batch_size} {delete_statement};
+```
+
+|        パラメータ名        |         説明         |
+| :------------------: | :----------------: |
+|   `{shard_column}`   | バッチを分割するために使用される列。 |
+|    `{batch_size}`    |   各バッチのサイズを制御します。  |
+| `{delete_statement}` |  `DELETE`ステートメント。  |
+
+前の例は、非トランザクションの一括削除ステートメントの単純な使用例のみを示しています。詳細については、 [非トランザクション DML ステートメント](/non-transactional-dml.md)を参照してください。
+
+### 非トランザクション一括削除の例 {#example-of-non-transactional-bulk-delete}
+
+[一括削除の例](#bulk-delete-example)と同じシナリオで、次の SQL ステートメントは非トランザクションの一括削除を実行する方法を示しています。
+
+```sql
+BATCH ON `rated_at` LIMIT 1000 DELETE FROM `ratings` WHERE `rated_at` >= "2022-04-15 00:00:00" AND  `rated_at` <= "2022-04-15 00:15:00";
+```
