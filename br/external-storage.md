@@ -3,7 +3,7 @@ title: External Storages
 summary: Describes the storage URL format used in BR, TiDB Lightning, and Dumpling.
 ---
 
-<!--This doc is temporarily removed from TOC because it duplicate with backup-and-restore-storages.md but some descriptions about Lightning and Dumpling should be remained for successful references. Will extract Lightning and Dumpling content and add it to Lightning and Dumpling docs when bandwidth is sufficient.-->
+<!--This doc is temporarily removed from TOC because it duplicates with backup-and-restore-storages.md but some descriptions about Lightning and Dumpling should be remained for successful references. Will extract Lightning and Dumpling content and add it to Lightning and Dumpling docs when bandwidth is sufficient.-->
 
 # External Storages
 
