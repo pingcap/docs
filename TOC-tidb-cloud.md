@@ -114,7 +114,7 @@
         - [Naming Conventions for Data Import](/tidb-cloud/naming-conventions-for-data-import.md)
         - [Troubleshoot Access Denied Errors during Data Import from Amazon S3](/tidb-cloud/troubleshoot-import-access-denied-error.md)
   - [Export Data from TiDB](/tidb-cloud/export-data-from-tidb-cloud.md)
-- Streaming your TiDB data
+- Stream data
   - [To MySQL sink](/tidb-cloud/changefeed-sink-to-mysql.md)
 - Back Up and Restore
   - [Automatic Backup](/tidb-cloud/backup-and-restore.md)

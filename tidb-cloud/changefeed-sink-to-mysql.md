@@ -9,7 +9,7 @@ This document describes how to stream data from TiDB Cloud to MySQL using the **
 
 > **Note:**
 >
-> If you have want to use the Changefeed feature, make sure that your TiDB cluster version is at least v6.4.0 and the TiKV node size is at least 8 vCPU and 16 GiB.
+> To use the Changefeed feature, make sure that your TiDB cluster version is v6.4.0 or later and the TiKV node size is at least 8 vCPU and 16 GiB.
 >
 > For [Serverless Tier clusters](/tidb-cloud/select-cluster-tier.md#serverless-tier-beta), the changefeed feature is unavailable.
 
@@ -80,30 +80,37 @@ After completing the prerequisites, you can sink your data to MySQL.
 
 3. Fill in the MySQL Endpoints, user, and password in **MySQL Connection**.
 
-4. Optionally, if you need to configure the following advanced options, you can click on **Show advanced configuration**.
+4. (Optional) If you need to configure the following advanced options, click on **Show advanced configuration**.
     - In **Timezone**, you can select the timezone used to convert time type data, like `timestamp`.
 
-5. Click **Next** to test connectivity
-    - If the connectivity of MySQL is fine, it will go to the next step of configuration.
-    - Otherwise, it will display the connectivity error, which you need to deal with the error before clicking **Next** again.
+5. Click **Next** to test whether TiDB connects to MySQL successfully:
 
-6. **Table Filter** provides a simple way to filter the tables that need to be replicated by customing [table filter rules](/table-filter.md).
-    - Defaultlly there is a rule `*. *`, which stands for replicating all tables. Whenever you add a new rule, TiDB Cloud will query all the tables in TiDB and display the tables that can be replicated in the list box on the right.  **Note:** The list box on the right does not show the new tables to be replicated in the future, and the schema to be full replicated.
-    - TiDB Cloud also lists tables that do not have unique and primary keys, and these tables may have inconsistent data in downstream during replication due to interrupt recovery. You can choose, not to replicate all tables that do not have unique and primary keys, or replicate these tables.
+    - If yes, you are directed to the next step of configuration.
+    - If not, the connectivity error is displayed, and you need to handle the error. After the error is removed, click **Next** again.
 
-7. In **Start Position**, configure the starting position for your sink
-    - If you do [Full load data](#full-load-data), you must fill in the TSO that Dumpling provides in **Start replication from a specific TSO**.
-    - If you do not have any data in your TiDB Cluster, you can choose **Start replication from now on**.
-    - Otherwise, you can custom the start time point by choosing **Start replica from a specific time**.
+6. Customize **Table Filter** to filter the tables that you want to replicate. For the rule syntax, refer to [table filter rules](/table-filter.md)
 
-7. Click **Next** to Changefee Preview
-    - if you want to modify some configurations, click **Previous** to go back to the previous page.
-    - Othwise, Check the compliance of cross region replication prompt, and click **Create**.
+    - By default, there is a rule `*. *`, which stands for replicating all tables. When you add a new rule, TiDB Cloud queries all the tables in TiDB and displays the tables that can be replicated in the list box on the right.  
+        - The list box on the right does not show the new tables to be replicated in the future or the schema to be fully replicated.
+    - TiDB Cloud also lists tables that do not have unique and primary keys. These tables may have inconsistent data in the downstream cluster during replication due to interrupt recovery. You can choose whether or not to replicate tables that do not have unique and primary keys.
 
-8. After a while, the sink will begin its work, and the status of the sink will be changed to "**Running**".
-    - Clicking on the Changefeed card, then you can see the Changfefeed running status in a pop-up window, including Checkpoint, replication latency, etc.
+7. In **Start Position**, configure the starting position for your sink.
 
-9. Optionally, after the operation is complete, set the GC time back (the default value is `10m`):
+    - If you do [full load data](#full-load-data), you must fill in the TSO that Dumpling provides in **Start replication from a specific TSO**.
+    - If you do not have any data in your TiDB cluster, you can choose **Start replication from now on**.
+    - Otherwise, you can customize the start time point by choosing **Start replication from a specific time**.
+
+7. Click **Next** to preview the changefeed.
+
+    Check the compliance of cross-region replication prompt, and click **Create**.
+    
+    If you want to modify some configurations, click **Previous** to go back to the previous page.
+
+8. The sink starts its work soon, and you can see the status of the sink change to "**Running**".
+
+    Click on the **Changefeed** card, and you can see the Changfeed running status in a pop-up window, including Checkpoint, replication latency, and other metrics.
+
+9. (Optional) After the operation is completed, restore the GC time to its original value (the default value is `10m`):
 
 {{< copyable "sql" >}}
 
@@ -114,17 +121,17 @@ SET GLOBAL tidb_gc_life_time = '10m';
 ## Delete a Sink
 
 1. Navigate to the **Data Replication** > **Changefeed** tab of a cluster.
-2. Clicking on the Changefeed card, then click **Delete**.
+2. Click on the **Changefeed** card, and click **Delete**.
 
-## Puase or Resume a Sink
+## Pause or resume a Sink
 
 1. Navigate to the **Data Replication** > **Changefeed** tab of a cluster.
-2. Clicking on the Changefeed card, then click **Pause** or **Resume**.
+2. Click on the **Changefeed** card, and click **Pause** or **Resume**.
 
 ## Query TCU
 
 1. Navigate to the **Data Replication** > **Changefeed** tab of a cluster.
-2. The current TiCDC Capacity Units are displayed in the upper right corner of the page.
+2. You can see the current TiCDC Capacity Units in the upper right corner of the page.
 
 ## Restrictions
 
