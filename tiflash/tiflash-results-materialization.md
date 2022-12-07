@@ -11,7 +11,7 @@ summary: Learn how to save the query results of TiFlash in a transaction.
 
 This document introduces how to save the TiFlash query result to a specified TiDB table in an `INSERT INTO SELECT` transaction.
 
-Since v6.5.0, during the execution of the `INSERT INTO SELECT` statement, the query result of TiFlash can be saved to a specified TiDB table when TiDB pushes down the subquery in the `SELECT` clause to TiFlash, that is, the materialization of TiFlash query result. For TiDB versions earlier than v6.5.0, the query results of TiFlash are read-only, so if you want to save TiFlash query results, you have to obtain them from the application level, and then save them in a separate transaction or process.
+Starting from v6.5.0, TiDB supports saving TiFlash query results in tables, that is, TiFlash query result  materialization. During the execution of the `INSERT INTO SELECT` statement, if TiDB pushes down the `SELECT` subquery to TiFlash, the TiFlash query result can be saved to a TiDB table specified in `INSERT INTO`. For TiDB versions earlier than v6.5.0, the TiFlash query results are read-only, so if you want to save TiFlash query results, you have to obtain them from the application level, and then save them in a separate transaction or process.
 
 > **Note:**
 >
