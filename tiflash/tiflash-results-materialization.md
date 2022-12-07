@@ -58,9 +58,21 @@ SELECT app_name, country FROM t1;
 
 ## Restrictions
 
+<CustomContent platform="tidb-cloud">
+
 * The TiDB memory limit on the `INSERT INTO SELECT` statement can be adjusted using the system variable [`tidb_mem_quota_query`](/system-variables.md#tidb_mem_quota_query). Starting from v6.5.0, it is not recommended to use [txn-total-size-limit](/tidb-configuration-file.md#txn-total-size-limit) to control transaction memory size.
 
     For more information, see [TiDB memory control](/configure-memory-usage.md).
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+* The TiDB memory limit on the `INSERT INTO SELECT` statement can be adjusted using the system variable [`tidb_mem_quota_query`](/system-variables.md#tidb_mem_quota_query). Starting from v6.5.0, it is not recommended to use [txn-total-size-limit](https://docs.pingcap.com/tidb/stable/tidb-configuration-file#txn-total-size-limit) to control transaction memory size.
+
+    For more information, see [TiDB memory control](https://docs.pingcap.com/tidb/stable/configure-memory-usage).
+
+</CustomContent>
 
 * TiDB has no hard limit on the concurrency of the `INSERT INTO SELECT` statement, but it is recommended to consider the following practices:
 
