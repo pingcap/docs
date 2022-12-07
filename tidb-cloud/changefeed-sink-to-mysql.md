@@ -80,31 +80,28 @@ After completing the prerequisites, you can sink your data to MySQL.
 
 3. Fill in the MySQL Endpoints, user, and password in **MySQL Connection**.
 
-4. (Optional) If you need to configure the following advanced options, click on **Show advanced configuration**.
-    - In **Timezone**, you can select the timezone used to convert time type data, like `timestamp`.
-
-5. Click **Next** to test whether TiDB connects to MySQL successfully:
+4. Click **Next** to test whether TiDB connects to MySQL successfully:
 
     - If yes, you are directed to the next step of configuration.
-    - If not, the connectivity error is displayed, and you need to handle the error. After the error is removed, click **Next** again.
+    - If not, the connectivity error is displayed, and you need to handle the error. After the error is resolved, click **Next** again.
 
-6. Customize **Table Filter** to filter the tables that you want to replicate. For the rule syntax, refer to [table filter rules](/table-filter.md)
+5. Customize **Table Filter** to filter the tables that you want to replicate. For the rule syntax, refer to [table filter rules](/table-filter.md)
 
-    - By default, there is a rule `*. *`, which stands for replicating all tables. When you add a new rule, TiDB Cloud queries all the tables in TiDB and displays the tables that can be replicated in the list box on the right.  
+    - By default, there is a rule `*. *`, which stands for replicating all tables. When you add a new rule, TiDB Cloud queries all the tables in TiDB and displays the tables that can be replicated in the list box on the right.  Instructions for use:
         - The list box on the right does not show the new tables to be replicated in the future or the schema to be fully replicated.
-    - TiDB Cloud also lists tables that do not have unique and primary keys. These tables may have inconsistent data in the downstream cluster during replication due to interrupt recovery. You can choose whether or not to replicate tables that do not have unique and primary keys.
+        - TiDB Cloud also lists tables that do not have unique and primary keys. These tables may have inconsistent data in the downstream cluster during replication due to Changefeed interrupt recovery. We recommend that you add unique keys or primary keys to these tables, or set filter rules, such as filtering out the table `test`. `tbl1` using rule "!test.tbl1"
 
-7. In **Start Position**, configure the starting position for your sink.
+6. In **Start Position**, configure the starting position for your MySQL sink.
 
-    - If you do [full load data](#full-load-data), you must fill in the TSO that Dumpling provides in **Start replication from a specific TSO**.
-    - If you do not have any data in your TiDB cluster, you can choose **Start replication from now on**.
+    - If you do [full load data](#full-load-data), please fill in the TSO that Dumpling provides in **Start replication from a specific TSO**.
+    - If you do not have any data in your upstreaming TiDB cluster, you can choose **Start replication from now on**.
     - Otherwise, you can customize the start time point by choosing **Start replication from a specific time**.
 
 7. Click **Next** to preview the changefeed.
 
     Check the compliance of cross-region replication prompt, and click **Create**.
     
-    If you want to modify some configurations, click **Previous** to go back to the previous page.
+    If you want to modify some configurations, click **Previous** to go back to the previous configuration page.
 
 8. The sink starts its work soon, and you can see the status of the sink change to "**Running**".
 
@@ -121,12 +118,12 @@ SET GLOBAL tidb_gc_life_time = '10m';
 ## Delete a Sink
 
 1. Navigate to the **Data Replication** > **Changefeed** tab of a cluster.
-2. Click on the **Changefeed** card, and click **Delete**.
+2. Click on the corresponding **Changefeed** card, and click **Delete**.
 
 ## Pause or resume a Sink
 
 1. Navigate to the **Data Replication** > **Changefeed** tab of a cluster.
-2. Click on the **Changefeed** card, and click **Pause** or **Resume**.
+2. Click on the corresponding **Changefeed** card, and click **Pause** or **Resume**.
 
 ## Query TCU
 
