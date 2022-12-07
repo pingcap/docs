@@ -1823,13 +1823,17 @@ Query OK, 0 rows affected (0.09 sec)
 
 > **Warning:**
 >
-> Currently, TiFlash query result materialization is an experimental feature, which might be changed or removed without prior notice.
+> The feature controlled by this variable is experimental in the current TiDB version. It is not recommended that you use it for production environments.
 
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
 - Type: Boolean
 - Default value: `OFF`
-- This variable controls whether to enable the [TiFlash query result materialization](/tiflash/tiflash-results-materialization.md) feature.
+- This variable controls whether read operations in SQL statements containing `INSERT`, `DELETE`, and `UPDATE` can be pushed down to TiFlash. For example:
+
+    - `SELECT` queries in `INSERT INTO SELECT` statements (typical usage scenario: [TiFlash query result materialization](/tiflash/tiflash-results-materialization.md))
+    - `WHERE` condition filtering in `UPDATE` and `DELETE` statements
+    - Subqueries in `INSERT`, `UPDATE`, and `DELETE` statements
 
 ### tidb_enable_top_sql <span class="version-mark">New in v5.4.0</span>
 
