@@ -1833,7 +1833,6 @@ Query OK, 0 rows affected (0.09 sec)
 
     - `SELECT` queries in `INSERT INTO SELECT` statements (typical usage scenario: [TiFlash query result materialization](/tiflash/tiflash-results-materialization.md))
     - `WHERE` condition filtering in `UPDATE` and `DELETE` statements
-    - Subqueries in `INSERT`, `UPDATE`, and `DELETE` statements
 
 ### tidb_enable_top_sql <span class="version-mark">New in v5.4.0</span>
 
