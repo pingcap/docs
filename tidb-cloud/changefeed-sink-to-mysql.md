@@ -125,10 +125,10 @@ SET GLOBAL tidb_gc_life_time = '10m';
 1. Navigate to the **Data Replication** > **Changefeed** tab of a cluster.
 2. Click on the corresponding **Changefeed** card, and click **Pause** or **Resume**.
 
-## Query TCU
+## Query TICDC RCUs
 
 1. Navigate to the **Data Replication** > **Changefeed** tab of a cluster.
-2. You can see the current TiCDC Capacity Units in the upper right corner of the page.
+2. You can see the current TiCDC Replication Capacity Units in the upper right corner of the page.
 
 ## Restrictions
 
