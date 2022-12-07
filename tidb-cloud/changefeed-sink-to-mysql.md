@@ -56,7 +56,7 @@ The **Sink to MySQL** connector can only sink incremental data from your TiDB cl
     SET GLOBAL tidb_gc_life_time = '720h';
     ```
 
-2. Use [Dumpling](/dumpling-overview.md#export-data-from-tidbmysql) to export data from your TiDB cluster, then use [TiDB Lightning logical import](/tidb-lightning/tidb-lightning-logical-import-mode-usage.md) to load data to the MySQL service.
+2. Use [Dumpling](/dumpling-overview.md) to export data from your TiDB cluster, then use community tools such as [mydumper/myloader](https://centminmod.com/mydumper.html) to load data to the MySQL service.
 
 3. From the [exported files of Dumpling](/dumpling-overview.md#format-of-exported-files), get the start position of MySQL sink from the metadata file:
 
