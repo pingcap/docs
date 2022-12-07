@@ -48,11 +48,11 @@ TiDB 6.5.0 is a Long-Term Support Release (LTS).
 
     更多信息，请参考[非事务 DML 语句](/non-transactional-dml.md) 和 [BATCH](/sql-statements/sql-statement-batch.md)。
 
-* 支持 Time to live (TTL)（实验特性）[#39262](https://github.com/pingcap/tidb/issues/39262)  @[lcwangchao](https://github.com/lcwangchao) **tw@ran-huang**
+* Support time to live (TTL) (experimental feature) [#39262](https://github.com/pingcap/tidb/issues/39262)  @[lcwangchao](https://github.com/lcwangchao) **tw@ran-huang**
 
-    TTL 提供了行级别的生命周期控制策略。在 TiDB 中，设置了 TTL 属性的表会根据配置自动检查并删除过期的行数据。TTL 设计的目标是在不影响在线读写负载的前提下，帮助用户周期性且及时地清理不需要的数据。
+    TTL provides row-level data lifetime management. In TiDB, a table with the TTL attribute automatically checks data lifetime and deletes expired data at the row level. TTL is designed to help users clean up unnecessary data periodically and in a timely manner without affecting the online read and write workloads.
 
-    更多信息请参考[Time to live(TTL)](/time-to-live.md)
+    For more information, refer to [user document](/time-to-live.md)
 
 * TiFlash 支持 `INSERT SELECT` 语句（实验功能） [#37515](https://github.com/pingcap/tidb/issues/37515) @[gengliqi](https://github.com/gengliqi) **tw@qiancai**
 
@@ -68,13 +68,13 @@ TiDB 6.5.0 is a Long-Term Support Release (LTS).
 
 ### Security
 
-* 支持密码复杂度策略 [#38928](https://github.com/pingcap/tidb/issues/38928) @[CbcWestwolf](https://github.com/CbcWestwolf) **tw@ran-huang**
+* Support the password complexity policy [#38928](https://github.com/pingcap/tidb/issues/38928) @[CbcWestwolf](https://github.com/CbcWestwolf) **tw@ran-huang**
 
-    TiDB 启用密码复杂度策略功能后，在为用户设置密码时，会检查密码长度、大写/小写字符个数、数字字符个数、特殊字符个数、密码字典、是否与用户名相同，以此确保为用户设置一个安全的密码。
+    After you enable the password complexity policy for TiDB, when you set a password, TiDB checks the password length, the number of uppercase and lowercase letters, numbers, and special characters, whether the password matches the dictionary, and whether the password matches the username. This ensures that you set a secure password.
 
-    TiDB 支持密码强度检查函数 `VALIDATE_PASSWORD_STRENGTH()`，用于判定一个给定密码的强度。
+    TiDB provides the SQL function [`VALIDATE_PASSWORD_STRENGTH()`](https://dev.mysql.com/doc/refman/5.7/en/encryption-functions.html#function_validate-password-strength) to validate the password strength.
 
-    更多信息，请参考[用户文档](/password-management.md#密码复杂度策略)。
+    For more information, refer to [user document](/password-management.md#password-complexity-policy).
 
 * 支持密码过期策略 [#38936](https://github.com/pingcap/tidb/issues/38936) @[CbcWestwolf](https://github.com/CbcWestwolf) **tw@ran-huang**
 
