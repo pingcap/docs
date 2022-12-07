@@ -7,9 +7,15 @@ summary: Learn about the FAQs related to TiDB deployment.
 
 This document summarizes the FAQs related to TiDB deployment.
 
-To learn the hardware configuration required for running TiDB in test environments and production environments, and the TiDB-supported operating systems, see [Software and Hardware Recommendations](/hardware-and-software-requirements.md).
+## Software and hardware requirements
 
-## Server requirements
+### What operating systems does TiDB support?
+
+For the TiDB-supported operating systems, see [Software and Hardware Recommendations](/hardware-and-software-requirements.md).
+
+### What is the recommended hardware configuration for a TiDB cluster in the development, test, or production environment?
+
+You can deploy and run TiDB on the 64-bit generic hardware server platform in the Intel x86-64 architecture or on the hardware server platform in the ARM architecture. For the requirements and recommendations about server hardware configuration for development, test, and production environments, see [Software and Hardware Recommendations - Server recommendations](/hardware-and-software-requirements.md#server-recommendations).
 
 ### What's the purposes of 2 network cards of 10 gigabit?
 
