@@ -342,7 +342,7 @@ Therefore, you should use it carefully to avoid serious consequences (such as da
 The SQL syntax for non-transactional bulk-delete statement is as follows:
 
 ```sql
-BATCH ON {dividing_column} LIMIT {batch_size} {delete_statement};
+BATCH ON {shard_column} LIMIT {batch_size} {delete_statement};
 ```
 
 | Parameter Name | Description |
