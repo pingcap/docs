@@ -325,11 +325,11 @@ In each iteration, `DELETE` deletes up to 1000 rows from `2022-04-15 00:00:00` t
 
 </SimpleTab>
 
-## Non-Transactional bulk-delete
+## Non-transactional bulk-delete
 
 > **Note:**
 >
-> Since v6.1.0, TiDB supports the [Non-Transactional DML statements](/non-transactional-dml.md). This feature is not available for versions earlier than TiDB v6.1.0.
+> Since v6.1.0, TiDB supports the [non-transactional DML statements](/non-transactional-dml.md). This feature is not available for versions earlier than TiDB v6.1.0.
 
 ### Prerequisites of non-transactional bulk-delete
 
@@ -351,7 +351,7 @@ BATCH ON {dividing_column} LIMIT {batch_size} {delete_statement};
 | `{batch_size}`   | Control the size of each batch. |
 | `{delete_statement}` | The `DELETE` statement. |
 
-The preceding example only shows a simple use case of a non-transactional bulk-delete statement. For detailed information, see [Non-Transactional DML statements](/non-transactional-dml.md).
+The preceding example only shows a simple use case of a non-transactional bulk-delete statement. For detailed information, see [Non-transactional DML Statements](/non-transactional-dml.md).
 
 ### Example of non-transactional bulk-delete
 
