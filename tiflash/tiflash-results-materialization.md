@@ -58,7 +58,7 @@ SELECT app_name, country FROM t1;
 
 ## Restrictions
 
-<CustomContent platform="tidb-cloud">
+<CustomContent platform="tidb">
 
 * The TiDB memory limit on the `INSERT INTO SELECT` statement can be adjusted using the system variable [`tidb_mem_quota_query`](/system-variables.md#tidb_mem_quota_query). Starting from v6.5.0, it is not recommended to use [txn-total-size-limit](/tidb-configuration-file.md#txn-total-size-limit) to control transaction memory size.
 
