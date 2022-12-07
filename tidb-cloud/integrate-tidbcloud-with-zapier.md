@@ -183,7 +183,7 @@ Zapier requires your **TiDB Cloud API key** to connect with your TiDB Cloud acco
 
 To get your TiDB Cloud API key, follow the [TiDB Cloud API documentation](https://docs.pingcap.com/tidbcloud/api/v1beta#section/Authentication/API-Key-Management).
 
-### How does TiDB Cloud trigger de-duplication?
+### How TiDB Cloud triggers de-duplication
 
 Zapier triggers can work with a polling API call to check for new data periodically (depends on Zapier plan).
 
