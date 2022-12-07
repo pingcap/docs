@@ -76,23 +76,23 @@ TiDB 6.5.0 is a Long-Term Support Release (LTS).
 
     For more information, refer to [user document](/password-management.md#password-complexity-policy).
 
-* 支持密码过期策略 [#38936](https://github.com/pingcap/tidb/issues/38936) @[CbcWestwolf](https://github.com/CbcWestwolf) **tw@ran-huang**
+* Support the password expiration policy [#38936](https://github.com/pingcap/tidb/issues/38936) @[CbcWestwolf](https://github.com/CbcWestwolf) **tw@ran-huang**
 
-    TiDB 支持密码过期策略，包括：手动密码过期、全局级别自动密码过期、账户级别自动密码过期。启用密码过期策略功能后，用户必须定期修改密码，防止密码长期使用带来的泄露风险，提高密码安全性。
+    TiDB supports the password expiration policy, including manual expiration, global-level automatic expiration, and account-level automatic expiration. After this policy is enabled, you must change your passwords periodically. This reduces the risk of password leakage due to long-term use and improve password security.
 
-    更多信息，请参考[用户文档](/password-management.md#密码过期策略)
+    For more information, refer to [user document](/password-management.md#password-expiration-policy).
 
-* 支持密码重用策略 [#38937](https://github.com/pingcap/tidb/issues/38937) @[keeplearning20221](https://github.com/keeplearning20221) **tw@ran-huang**
+* Support the password reuse policy [#38937](https://github.com/pingcap/tidb/issues/38937) @[keeplearning20221](https://github.com/keeplearning20221) **tw@ran-huang**
 
-    TiDB 支持密码重用策略，包括：全局级别密码重用策略、账户级别密码重用策略。启用密码重用策略功能后，用户不允许使用最近一段时间使用过的密码，不允许使用最近几次使用过的密码，以此降低密码的重复使用带来的泄漏风险，提高密码安全性。
+    TiDB supports the password reuse policy, including global-level password reuse policy and account-level password reuse policy. After this policy is enabled, you cannot use the passwords that you have used within a period or the most recent several passwords that you have used. This reduces the risk of password leakage due to repeated use of passwords and improves password security.
 
-    更多信息，请参考[用户文档](/password-management.md#密码重用策略)
+    For more information, refer to [user document](/password-management.md#password-reuse-policy).
 
-* 支持密码连续错误限制登录策略 [#38938](https://github.com/pingcap/tidb/issues/38938) @[lastincisor](https://github.com/lastincisor) **tw@ran-huang**
+* Support failed-login tracking and temporary account locking policy [#38938](https://github.com/pingcap/tidb/issues/38938) @[lastincisor](https://github.com/lastincisor) **tw@ran-huang**
 
-    TiDB 启用密码连续错误限制登录策略功能后，当用户登录时密码连续多次错误，此时该账户将被临时锁定，达到锁定时间后将自动解锁。
+    After this policy is enabled, if you log in to TiDB with incorrect passwords multiple times consecutively, the account is temporarily locked. After the lock time ends, the account is automatically unlocked.
 
-    更多信息，请参考[用户文档](/password-management.md#密码连续错误限制登录策略)
+    For more information, refer to [user document](/password-management.md#failed-login-tracking-and-temporary-account-locking-policy).
 
 ### Observability
 
@@ -182,11 +182,11 @@ TiDB 6.5.0 is a Long-Term Support Release (LTS).
 
     更多信息，请参考[用户文档](sql-statements/sql-statement-explain-analyze.md)。
 
-* 执行计划支持 JSON 格式的打印 [#39261](https://github.com/pingcap/tidb/issues/39261) @[fzzf678](https://github.com/fzzf678) **tw@ran-huang**
+* Support the output of execution plans in JSON format [#39261](https://github.com/pingcap/tidb/issues/39261) @[fzzf678](https://github.com/fzzf678) **tw@ran-huang**
 
-    在新版本中，TiDB 扩展了执行计划的打印格式。 通过 `explain format = tidb_json <SQL语句> ` 能够将 SQL 的执行计划以 JSON 格式输出。借助这个能力，SQL 调试工具和诊断工具能够更方便准确地解读执行计划，进而提升 SQL 诊断调优的易用性。
+    In v6.5, TiDB extends the output format of the execution plan. By using `EXPLAIN FORMAT=tidb_json <SQL_statement>`, you can output the SQL execution plan in JSON format. With this capability, SQL debugging tools and diagnostic tools can read the execution plan more conveniently and accurately, thus improving the ease of use of SQL diagnosis and tuning.
 
-    更多信息，请参考[用户文档](/sql-statements/sql-statement-explain.md)。
+    For more information, see [user document](/sql-statements/sql-statement-explain.md).
 
 ### MySQL compatibility
 
