@@ -230,7 +230,7 @@ Most of the TiDB Cloud actions require additional resources you need prepare.
    - Find Row: Finds a row in a table via a lookup column.
    - Find Row (Custom Query): Finds a Row in a table via a custom query in your control.
 
-2. Actions need an existing database in TiDB:
+* Actions that require an existing database in TiDB:
 
    - Find Table: Finds an existing Table.
    - Create Table: Creates a new table.
