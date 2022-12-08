@@ -14,7 +14,7 @@ To protect the security of user passwords, TiDB supports the following password 
 
 ## TiDB authentication credential storage
 
-To ensure the authenticity of user identify, TiDB uses passwords as credentials to authenticate users when they log in to the TiDB server.
+To ensure the authenticity of user identity, TiDB uses passwords as credentials to authenticate users when they log in to the TiDB server.
 
 The *password* described in this document refers to the internal credentials generated, stored, and verified by TiDB. TiDB stores user passwords in the `mysql.user` system table.
 
@@ -60,11 +60,11 @@ mysql> SHOW VARIABLES LIKE 'validate_password.%';
 8 rows in set (0.00 sec)
 ```
 
-For the detailed description of each system variable, see [System Variables](/system-variables.md#validate_passwordcheck_user_name-new-in-v650).
+For a detailed description of each system variable, see [System Variables](/system-variables.md#validate_passwordcheck_user_name-new-in-v650).
 
 ### Configure password complexity policy
 
-This section shows the examples of configuring system variables related to the password complexity policy.
+This section shows examples of configuring system variables related to the password complexity policy.
 
 Enable the password complexity check:
 
@@ -176,7 +176,7 @@ TiDB supports configuring a password expiration policy so that users must change
 
 The automatic password expiration policy can be set at the global level and at the account level. As a database administrator, you can establish an automatic password expiration policy at the global level, and also use an account-level policy to override the global policy.
 
-The privileges for setting the password expiration policy is as follows:
+The privileges for setting the password expiration policy are as follows:
 
 - Database administrator with `SUPER` or `CREATE USER` privileges can manually make passwords expire.
 - Database administrator with `SUPER` or `CREATE USER` privileges can set the account-level password expiration policy.
@@ -259,7 +259,7 @@ TiDB supports automatic password expiration at the global level and at the accou
 
 When a client connects to the TiDB server, the server checks whether the password is expired in the following order:
 
-1. The server checks whether the password has been set expired manually.
+1. The server checks whether the password has been set as expired manually.
 2. If the password is not manually expired, the server checks whether the password age is longer than its configured lifetime. If so, the server treats the password as expired.
 
 ### Handle an expired password
@@ -375,7 +375,7 @@ You can configure the number of failed login attempts and the lock time for each
 - `FAILED_LOGIN_ATTEMPTS`: N. The account is temporarily locked after `N` consecutive login failures. The value of N ranges from 0 to 32767.
 - `PASSWORD_LOCK_TIME`: N | UNBOUNDED.
     - N means that the account will be temporarily locked for `N` days after consecutive failed login attempts. The value of N ranges from 0 to 32767.
-    - `UNBOUNDED` means that the lock time is unlimited, and the account must be manually unlocked. The value of N ranges from 0 to 32767.
+    - `UNBOUNDED` means that the lock time is unlimited and the account must be manually unlocked. The value of N ranges from 0 to 32767.
 
 > **Note:**
 >
