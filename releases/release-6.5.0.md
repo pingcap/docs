@@ -56,17 +56,21 @@ TiDB 6.5.0 is a Long-Term Support Release (LTS).
 
     For more information, refer to [user document](/time-to-live.md)
 
-* TiFlash 支持 `INSERT SELECT` 语句（实验功能） [#37515](https://github.com/pingcap/tidb/issues/37515) @[gengliqi](https://github.com/gengliqi) **tw@qiancai**
+* Support saving TiFlash query results using the `INSERT INTO SELECT` statement (experimental) [#37515](https://github.com/pingcap/tidb/issues/37515) @[gengliqi](https://github.com/gengliqi) **tw@qiancai**
 
-    用户可以指定 TiFlash 执行 `INSERT SELECT` 中的 `SELECT` 子句（分析查询），并将结果在此事务中写回到 TIDB 表中:
+    Starting from v6.5.0, TiDB supports pushing down the `SELECT` clause (analysis query) of the `INSERT INTO SELECT` statement to TiFlash. In this way, you can easily save the TiFlash query result to a TiDB table specified by `INSERT INTO` for further analysis, which takes effect as result caching (that is, result materialization). For example:
 
     ```sql
-    insert into t2 select mod(x,y) from t1;
+    INSERT INTO t2 SELECT Mod(x,y) FROM t1;
     ```
 
-    用户可以方便地保存（物化）TiFlash 的计算结果以供下游步骤使用，可以起到结果缓存（物化）的效果。适用于以下场景：使用 TiFlash 做复杂分析，需重复使用计算结果或响应高并发的在线请求，计算性质本身聚合性好（相对输入数据，计算得出的结果集比较小，推荐 100MB 以内）。作为写入对象的 结果表本身没有特别限制，可以任意选择是否添加 TiFlash 副本。
+    During the experimental phase, this feature is disabled by default. To enable it, you can set the [`tidb_enable_tiflash_read_for_write_stmt`](/system-variables.md#tidb_enable_tiflash_read_for_write_stmt-new-in-v630) system variable to `ON`. There are no special restrictions on the result table specified by `INSERT INTO` for this feature, and you are free to add a TiFlash replica to that result table or not. Typical usage scenarios of this feature include:
 
-    更多信息，请参考[用户文档](/tiflash/tiflash-results-materialization.md)。
+    - Run complex analysis queries using TiFlash
+    - Reuse TiFlash query results or deal with highly concurrent online requests
+    - Need a relatively small result set comparing with the input data size, recommended to be within 100MiB.
+
+    For more information, see the [user documentation](/tiflash/tiflash-results-materialization.md).
 
 ### Security
 
@@ -114,15 +118,15 @@ TiDB 6.5.0 is a Long-Term Support Release (LTS).
 
     关于“索引合并”功能的介绍请参阅 [v5.4 release note](/release-5.4.0#性能), 以及优化器相关的[用户文档](/explain-index-merge.md)
 
-* 新增支持下推[JSON 函数](/tiflash/tiflash-supported-pushdown-calculations.md) 至 TiFlash [#39458](https://github.com/pingcap/tidb/issues/39458) @[yibin87](https://github.com/yibin87) **tw@qiancai**
+* Support pushing down the following [JSON functions](/tiflash/tiflash-supported-pushdown-calculations.md) to TiFlash [#39458](https://github.com/pingcap/tidb/issues/39458) @[yibin87](https://github.com/yibin87) **tw@qiancai**
 
     * `->`
     * `->>`
     * `JSON_EXTRACT()`
 
-    JSON 格式为应用设计提供了更灵活的建模方式，目前越来越多的应用采用 JSON 格式进行数据交换和数据存储。 把 JSON 函数下推至 TiFlash 可以加速对 JSON 类型数据的分析效率，拓展 TiDB 实时分析的应用场景。TiDB 将持续完善，在未来版本支持更多的 JSON 函数下推至 TiFlash。
+    The JSON format provides a flexible way to model application design. Therefore, more and more applications are using the JSON format for data exchange and data storage. By pushing down JSON functions to TiFlash, you can improve the efficiency of analyzing data in the JSON type and use TiDB for more real-time analytics scenarios.
 
-* 新增支持下推[字符串函数](/tiflash/tiflash-supported-pushdown-calculations.md) 至 TiFlash [#6115](https://github.com/pingcap/tiflash/issues/6115) @[xzhangxian1008](https://github.com/xzhangxian1008) **tw@qiancai**
+* Support pushing down the following [string functions](/tiflash/tiflash-supported-pushdown-calculations.md) to TiFlash [#6115](https://github.com/pingcap/tiflash/issues/6115) @[xzhangxian1008](https://github.com/xzhangxian1008) **tw@qiancai**
 
     * `regexp_like`
     * `regexp_instr`
@@ -134,9 +138,9 @@ TiDB 6.5.0 is a Long-Term Support Release (LTS).
 
     更多信息，请参考[用户文档](/optimizer-hints.md#全局生效的-Hint)。
 
-* [分区表](/partitioned-table.md)的排序操作下推至 TiKV [#26166](https://github.com/pingcap/tidb/issues/26166) @[winoros](https://github.com/winoros) **tw@qiancai**
+* Support pushing down the sorting operation of [partitioned-table](/partitioned-table.md) to TiKV [#26166](https://github.com/pingcap/tidb/issues/26166) @[winoros](https://github.com/winoros) **tw@qiancai**
 
-    [分区表](/partitioned-table.md)在 v6.1.0 正式 GA， TiDB 持续提升分区表相关的性能。 在 v6.5.0 中， 排序操作如 `ORDER BY`, `LIMIT` 能够下推至 TiKV 进行计算和过滤，降低网络 I/O 的开销，提升了使用分区表时 SQL 的性能。
+   Although [partitioned table](/partitioned-table.md) has been GA since v6.1.0, TiDB is continually improving its performance. In v6.5.0, TiDB supports pushing down sort operations such as `ORDER BY` and `LIMIT` to TiKV for computation and filtering, which reduces network I/O overhead and improves SQL performance when you use partitioned tables.
 
 * 优化器代价模型 Cost Model Version 2 GA [#35240](https://github.com/pingcap/tidb/issues/35240) @[qw4990](https://github.com/qw4990) **tw@Oreoxmt**
 
@@ -178,11 +182,11 @@ TiDB 6.5.0 is a Long-Term Support Release (LTS).
 
 ### Ease of use
 
-* 完善 EXPLAIN ANALYZE 输出的 TiFlash 的 TableFullScan 算子的统计信息 [#5926](https://github.com/pingcap/tiflash/issues/5926) @[hongyunyan](https://github.com/hongyunyan) **tw@qiancai**
+* Refine the execution information of the TiFlash `TableFullScan` operator in the `EXPLAIN ANALYZE` output   [#5926](https://github.com/pingcap/tiflash/issues/5926) @[hongyunyan](https://github.com/hongyunyan) **tw@qiancai**
 
-    [`EXPLAIN ANALYZE`] 语句可以输出执行计划及运行时的统计信息。现有版本的统计信息中，TiFlash 的 TableFullScan 算子统计信息不完善。v6.5.0 版本对 TableFullScan 算子的统计信息进行完善，补充了 dmfile 相关的执行信息，可以更加清晰的展示 TiFlash 的数据扫描状态信息，方便进行性能分析。
+    The `EXPLAIN ANALYZE` statement is used to print execution plans and runtime statistics. In v6.5.0, TiFlash has refined the execution information of the `TableFullScan` operator by adding the DMFile-related execution information. Now the TiFlash data scan status information is presented more intuitively, which helps you analyze TiFlash performance more easily.
 
-    更多信息，请参考[用户文档](sql-statements/sql-statement-explain-analyze.md)。
+    For more information, see [user documentation](sql-statements/sql-statement-explain-analyze.md).
 
 * Support the output of execution plans in JSON format [#39261](https://github.com/pingcap/tidb/issues/39261) @[fzzf678](https://github.com/fzzf678) **tw@ran-huang**
 
