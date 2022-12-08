@@ -847,6 +847,15 @@ MPP is a distributed computing framework provided by the TiFlash engine, which a
 - This variable is used to control whether to enable the [baseline capturing](/sql-plan-management.md#baseline-capturing) feature. This feature depends on the statement summary, so you need to enable the statement summary before you use baseline capturing.
 - After this feature is enabled, the historical SQL statements in the statement summary are traversed periodically, and bindings are automatically created for SQL statements that appear at least twice.
 
+### tidb_cdc_write_source <span class="version-mark">New in v6.5.0</span>
+
+- Scope: SESSION
+- Persists to cluster: No
+- Type: Integer
+- Default value: `0`
+- Range: `[0, 15]`
+- When this variable is set to a value other than 0, data written in this session is considered to be written by TiCDC. This variable can only be modified by TiCDC. Do not manually modify this variable in any case.
+
 ### tidb_check_mb4_value_in_utf8
 
 <CustomContent platform="tidb-cloud">
@@ -997,18 +1006,18 @@ MPP is a distributed computing framework provided by the TiFlash engine, which a
 
 ### tidb_cost_model_version <span class="version-mark">New in v6.2.0</span>
 
-> **Warning:**
+> **Note:**
 >
-> - Cost Model Version 2 is currently an experimental feature. It is not recommended that you use it for production environments.
+> - Since TiDB v6.5.0, the newly created cluster uses Cost Model Version 2 by default. If you upgrade from a TiDB version earlier than v6.5.0 to v6.5.0 or later, the `tidb_cost_model_version` value does not change.
 > - Switching the version of the cost model might cause changes to query plans.
 
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
 - Type: Integer
-- Default value: `1`
-- Range: `[1, 2]`
-- TiDB v6.2.0 introduces the [Cost Model Version 2](/cost-model.md#cost-model-version-2), which is more accurate than the previous version in internal tests.
-- To enable the Cost Model Version 2, you can set the `tidb_cost_model_version` to `2`. If you set this variable to `1`, the Cost Model Version 1 will be used.
+- Default value: `2`
+- Value options:
+    - `1`: enables the Cost Model Version 1, which is used by default in TiDB v6.4.0 and earlier versions.
+    - `2`: enables the [Cost Model Version 2](/cost-model.md#cost-model-version-2), which is generally available in TiDB v6.5.0 and is more accurate than the version 1 in internal tests.
 - The version of cost model affects the plan decision of optimizer. For more details, see [Cost Model](/cost-model.md).
 
 ### tidb_current_ts
@@ -1034,18 +1043,17 @@ MPP is a distributed computing framework provided by the TiFlash engine, which a
 - Scope: GLOBAL
 - Persists to cluster: Yes
 - Type: Boolean
-- Default value: `OFF`
-- This variable controls whether to enable the acceleration of `ADD INDEX` and `CREATE INDEX` DDl operations to improve the speed of backfilling when creating an index. If this variable is enabled, TiDB uses a more effective way to create an index.
+- Default value: `ON`
+- This variable controls whether to enable the acceleration of `ADD INDEX` and `CREATE INDEX` to improve the speed of backfilling for index creation. Setting this variable value to `ON` can bring performance improvement for index creation on tables with a large amount of data.
+- To verify whether a completed `ADD INDEX` operation is accelerated, you can execute the [`ADMIN SHOW DDL JOBS`](/sql-statements/sql-statement-admin-show-ddl.md#admin-show-ddl-jobs) statement to see whether `ingest` is displayed in the `JOB_TYPE` column.
 
 <CustomContent platform="tidb">
 
 > **Warning:**
 >
-> Acceleration of `ADD INDEX` and `CREATE INDEX` is an experimental feature. It is not recommended that you use it in production environments.
+> Currently, this feature is not compatible with [PITR (Point-in-time recovery)](/br/backup-and-restore-overview.md). When using index acceleration, you need to ensure that there are no PITR log backup tasks running in the background. Otherwise, unexpected behaviors might occur, including:
 >
-> Currently, this feature is not compatible with [PITR (Point-in-time recovery)](/br/point-in-time-recovery.md). When using index acceleration, you need to ensure that there are no PITR log backup tasks running in the background. Otherwise, unexpected behaviors might occur, including:
->
-> - If you start a log backup task first, and then add an index. The adding index process is not accelerated even if index acceleration is enabled. But the index is added in a slow way. Since the log backup task keeps running after being started, it means that the index acceleration feature is disabled in this case.
+> - If you start a log backup task before adding an index, the adding index process is not accelerated even if index acceleration is enabled. But the index is added in a slow way. Because the log backup task keeps running after being started, it means that the index acceleration feature is disabled in this case. To accelerate the process of adding an index, you can stop the log backup background task first, start and complete the index adding task, and then restart the log backup task and perform a full backup.
 > - If you start an index acceleration task first, and then start a log backup task. The log backup task returns an error. But the index acceleration is not affected.
 > - If you start a log backup task and an index acceleration task at the same time, the two tasks might not be aware of each other. This might result in PITR failing to back up the newly added index.
 
@@ -1823,13 +1831,16 @@ Query OK, 0 rows affected (0.09 sec)
 
 > **Warning:**
 >
-> The feature controlled by this variable is not fully functional in the current TiDB version. Do not change the default value.
+> The feature controlled by this variable is experimental in the current TiDB version. It is not recommended that you use it for production environments.
 
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
 - Type: Boolean
 - Default value: `OFF`
-- This variable controls whether read requests in SQL write statements can be pushed down to TiFlash.
+- This variable controls whether read operations in SQL statements containing `INSERT`, `DELETE`, and `UPDATE` can be pushed down to TiFlash. For example:
+
+    - `SELECT` queries in `INSERT INTO SELECT` statements (typical usage scenario: [TiFlash query result materialization](/tiflash/tiflash-results-materialization.md))
+    - `WHERE` condition filtering in `UPDATE` and `DELETE` statements
 
 ### tidb_enable_top_sql <span class="version-mark">New in v5.4.0</span>
 
@@ -2291,6 +2302,15 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 - This variable is used to set the concurrency of the `index lookup join` algorithm.
 - A value of `-1` means that the value of `tidb_executor_concurrency` will be used instead.
 
+### tidb_index_merge_intersection_concurrency <span class="version-mark">New in v6.5.0</span>
+
+- Scope: SESSION | GLOBAL
+- Persists to cluster: Yes
+- Default value: `-1`
+- Range: `[1, 256]`
+- This variable sets the maximum concurrency for the intersection operations that index merge performs. It is effective only when TiDB accesses partitioned tables in the dynamic pruning mode. The actual concurrency is the smaller value of `tidb_index_merge_intersection_concurrency` and the number of partitions of the partitioned table.
+- The default value `-1` means that the value of `tidb_executor_concurrency` is used.
+
 ### tidb_index_lookup_size
 
 - Scope: SESSION | GLOBAL
@@ -2513,18 +2533,22 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 - Default value: `1073741824` (1 GiB)
 - Range: `[-1, 9223372036854775807]`
 - Unit: Bytes
-- This variable is used to set the threshold value of memory quota for a query.
-- If the memory quota of a query during execution exceeds the threshold value, TiDB performs the operation designated by `tidb_mem_oom_action`.
 
 <CustomContent platform="tidb">
 
 - For versions earlier than TiDB v6.1.0, this is a session scope variable and uses the value of `mem-quota-query` from `tidb.toml` as an initial value. Starting from v6.1.0, `tidb_mem_quota_query` is a `SESSION | GLOBAL` scope variable.
+- For versions earlier than TiDB v6.5.0, this variable is used to set the threshold value of memory quota for **a query**. If the memory quota of a query during execution exceeds the threshold value, TiDB performs the operation defined by [`tidb_mem_oom_action`](#tidb_mem_oom_action-new-in-v610).
+- For TiDB v6.5.0 and later versions, this variable is used to set the threshold value of memory quota for **a session**. If the memory quota of a session during execution exceeds the threshold value, TiDB performs the operation defined by [`tidb_mem_oom_action`](#tidb_mem_oom_action-new-in-v610). Note that starting from TiDB v6.5.0, the memory usage of a session contains the memory consumed by the transactions in the session. For the control behavior of transaction memory usage in TiDB v6.5.0 and later versions, see [`txn-total-size-limit`](/tidb-configuration-file.md#txn-total-size-limit).
+- When you set the variable value to `0` or `-1`, the memory threshold is positive infinity. When you set a value smaller than 128, the value will be defaulted to `128`.
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
 - For versions earlier than TiDB v6.1.0, this is a session scope variable. Starting from v6.1.0, `tidb_mem_quota_query` is a `SESSION | GLOBAL` scope variable.
+- For versions earlier than TiDB v6.5.0, this variable is used to set the threshold value of memory quota for **a query**. If the memory quota of a query during execution exceeds the threshold value, TiDB performs the operation defined by [`tidb_mem_oom_action`](#tidb_mem_oom_action-new-in-v610).
+- For TiDB v6.5.0 and later versions, this variable is used to set the threshold value of memory quota for **a session**. If the memory quota of a session during execution exceeds the threshold value, TiDB performs the operation defined by [`tidb_mem_oom_action`](#tidb_mem_oom_action-new-in-v610). Note that starting from TiDB v6.5.0, the memory usage of a session contains the memory consumed by the transactions in the session.
+- When you set the variable value to `0` or `-1`, the memory threshold is positive infinity. When you set a value smaller than 128, the value will be defaulted to `128`.
 
 </CustomContent>
 
@@ -2566,9 +2590,8 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 - When this variable is configured to `0` or `1`, it means the memory threshold alarm feature is disabled.
 - When this variable is configured to a value greater than `0` and less than `1`, it means that the memory threshold alarm feature is enabled.
 
-    - If the system variable [`tidb_server_memory_limit`](#tidb_server_memory_limit-new-in-v640) is `0` and the [`server-memory-quota`](/tidb-configuration-file.md#server-memory-quota-new-in-v409) configuration item is not set, the memory alarm threshold is `tidb_memory-usage-alarm-ratio * system memory size`.
-    - If the system variable `tidb_server_memory_limit` is `0` and the `server-memory-quota` configuration item is set to greater than 0, the memory alarm threshold is `tidb_memory-usage-alarm-ratio * server-memory-quota`.
-    - If the system variable `tidb_server_memory_limit` is set to greater than 0, the memory alarm threshold is `tidb_memory-usage-alarm-ratio * tidb_server_memory_limit`.
+    - If the value of the system variable [`tidb_server_memory_limit`](#tidb_server_memory_limit-new-in-v640) is `0`, the memory alarm threshold is `tidb_memory-usage-alarm-ratio * system memory size`.
+    - If the value of the system variable `tidb_server_memory_limit` is set to greater than 0, the memory alarm threshold is `tidb_memory-usage-alarm-ratio * tidb_server_memory_limit`.
 
 </CustomContent>
 
@@ -3507,13 +3530,9 @@ SHOW WARNINGS;
 
 ### tidb_server_memory_limit <span class="version-mark">New in v6.4.0</span>
 
-> **Warning:**
->
-> Currently, `tidb_server_memory_limit` is still experimental. It is not recommended to use it in the production environment.
-
 - Scope: GLOBAL
 - Persists to cluster: Yes
-- Default value: `0`
+- Default value: `80%`
 - Range:
     - You can set the value in the percentage format, which means the percentage of the memory usage relative to the total memory. The value range is `[1%, 99%]`.
     - You can also set the value in memory size in bytes. The value range is `[0, 9223372036854775807]`. The memory format with the units "KB|MB|GB|TB" is supported. The `0` value means no memory limit.
@@ -3523,10 +3542,6 @@ SHOW WARNINGS;
 
 ### tidb_server_memory_limit_gc_trigger <span class="version-mark">New in v6.4.0</span>
 
-> **Warning:**
->
-> Currently, `tidb_server_memory_limit_gc_trigger` is still experimental. It is not recommended to use it in the production environment.
-
 - Scope: GLOBAL
 - Persists to cluster: Yes
 - Default value: `70%`
@@ -3535,14 +3550,10 @@ SHOW WARNINGS;
 
 ### tidb_server_memory_limit_sess_min_size <span class="version-mark">New in v6.4.0</span>
 
-> **Warning:**
->
-> Currently, `tidb_server_memory_limit_sess_min_size` is still experimental. It is not recommended to use it in the production environment.
-
 - Scope: GLOBAL
 - Persists to cluster: Yes
 - Default value: `134217728` (which is 128 MB)
-- Range: `[128, 9223372036854775807]`, in bytes
+- Range: `[128, 9223372036854775807]`, in bytes. The memory format with the units "KB|MB|GB|TB" is also supported.
 - After you enable the memory limit, TiDB will terminate the SQL statement with the highest memory usage on the current instance. This variable specifies the minimum memory usage of the SQL statement to be terminated. If the memory usage of a TiDB instance that exceeds the limit is caused by too many sessions with low memory usage, you can properly lower the value of this variable to allow more sessions to be canceled.
 
 ### tidb_shard_allocate_step <span class="version-mark">New in v5.0</span>
@@ -3645,6 +3656,20 @@ For details, see [Identify Slow Queries](/identify-slow-queries.md).
 - Scope: SESSION
 - Default value: ""
 - This variable is used to set the time point at which the data is read by the session. For example, when you set the variable to "2017-11-11 20:20:20" or a TSO number like "400036290571534337", the current session reads the data of this moment.
+
+### tidb_source_id <span class="version-mark">New in v6.5.0</span>
+
+- Scope: GLOBAL
+- Persists to cluster: Yes
+- Type: Integer
+- Default value: `1`
+- Range: `[1, 15]`
+
+<CustomContent platform="tidb">
+
+- This variable is used to configure the different cluster IDs in a [bi-directional replication](/ticdc/manage-ticdc.md#bi-directional-replication) cluster.
+
+</CustomContent>
 
 ### tidb_stats_cache_mem_quota <span class="version-mark">New in v6.1.0</span>
 

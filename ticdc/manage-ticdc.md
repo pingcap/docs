@@ -178,7 +178,7 @@ The following are descriptions of parameters and parameter values that can be co
 | Parameter/Parameter Value    | Description                                             |
 | :------------ | :------------------------------------------------ |
 | `root`        | The username of the downstream database                              |
-| `123456`       | The password of the downstream database                                      |
+| `123456`       | The password of the downstream database (can be encoded using Base64)                                      |
 | `127.0.0.1`    | The IP address of the downstream database                               |
 | `3306`         | The port for the downstream data                                 |
 | `worker-count` | The number of SQL statements that can be concurrently executed to the downstream (optional, `16` by default)       |
@@ -187,7 +187,23 @@ The following are descriptions of parameters and parameter values that can be co
 | `ssl-cert` | The path of the certificate file needed to connect to the downstream MySQL instance (optional) |
 | `ssl-key` | The path of the certificate key file needed to connect to the downstream MySQL instance (optional) |
 | `time-zone` | The time zone used when connecting to the downstream MySQL instance, which is effective since v4.0.8. This is an optional parameter. If this parameter is not specified, the time zone of TiCDC service processes is used. If this parameter is set to an empty value, no time zone is specified when TiCDC connects to the downstream MySQL instance and the default time zone of the downstream is used. |
-| `transaction-atomicity`  |  The atomicity level of a transaction. This is an optional parameter, with the default value of `table`. When the value is `table`, TiCDC ensures the atomicity of a single-table transaction. When the value is `none`, TiCDC splits the single-table transaction.  |
+| `transaction-atomicity`  |  The atomicity level of a transaction. This is an optional parameter, with the default value of `none`. When the value is `table`, TiCDC ensures the atomicity of a single-table transaction. When the value is `none`, TiCDC splits the single-table transaction.  |
+
+To encode the database password in the Sink URI using Base64, use the following command:
+
+```shell
+echo -n '123456' | base64  # '123456' is the password to be encoded.
+```
+
+The encoded password is `MTIzNDU2`:
+
+```shell
+MTIzNDU2
+```
+
+> **Note:**
+>
+> When the sink URI contains special characters such as `! * ' ( ) ; : @ & = + $ , / ? % # [ ]`, you need to escape the special characters, for example, in [URI Encoder](https://meyerweb.com/eric/tools/dencoder/).
 
 #### Configure sink URI with `kafka`
 
@@ -574,23 +590,27 @@ case-sensitive = true
 # Specifies whether to output the old value. New in v4.0.5. Since v5.0, the default value is `true`.
 enable-old-value = true
 
-# Specifies whether to enable the Syncpoint feature, which is supported since v6.3.0.
+# Specifies whether to enable the Syncpoint feature, which is supported since v6.3.0 and is disabled by default.
 # Since v6.4.0, only the changefeed with the SYSTEM_VARIABLES_ADMIN or SUPER privilege can use the TiCDC Syncpoint feature.
-enable-sync-point = true
+enable-sync-point = false
 
 # Specifies the interval at which Syncpoint aligns the upstream and downstream snapshots.
 # The format is in h m s. For example, "1h30m30s".
 # The default value is "10m" and the minimum value is "30s".
-sync-point-interval = "5m"
+# sync-point-interval = "5m"
 
 # Specifies how long the data is retained by Syncpoint in the downstream table. When this duration is exceeded, the data is cleaned up.
 # The format is in h m s. For example, "24h30m30s".
 # The default value is "24h".
-sync-point-retention = "1h"
+# sync-point-retention = "1h"
+
+[mounter]
+# The number of threads with which the mounter decodes KV data. The default value is 16.
+# worker-num = 16
 
 [filter]
 # Ignores the transaction of specified start_ts.
-ignore-txn-start-ts = [1, 2]
+# ignore-txn-start-ts = [1, 2]
 
 # Filter rules.
 # Filter syntax: https://docs.pingcap.com/tidb/stable/table-filter#syntax.
@@ -883,3 +903,62 @@ In this command:
 - `tmp-dir`: Specifies the temporary directory for downloading TiCDC incremental data backup files.
 - `storage`: Specifies the address for storing the TiCDC incremental data backup files, either an Amazon S3 storage or an NFS directory.
 - `sink-uri`: Specifies the secondary cluster address to restore the data to. Scheme can only be `mysql`.
+
+## Bi-directional replication
+
+Starting from v6.5.0, TiCDC supports bi-directional replication among multiple TiDB clusters. Based on this feature, you can create a multi-master TiDB solution using TiCDC.
+
+This section describes how to use bi-directional replication taking two TiDB clusters as an example.
+
+### Deploy bi-directional replication
+
+TiCDC only replicates incremental data changes that occur after a specified timestamp to the downstream cluster. Before starting the bi-directional replication, you need to take the following steps:
+
+1. (Optional) According to your needs, import the data of the two TiDB clusters into each other using the data export tool [Dumpling](/dumpling-overview.md) and data import tool [TiDB Lightning](/tidb-lightning/tidb-lightning-overview.md).
+
+2. Deploy two TiCDC clusters between the two TiDB clusters. The cluster topology is as follows. The arrows in the diagram indicate the directions of data flow.
+
+    ![TiCDC bidirectional replication](/media/ticdc/ticdc-bidirectional-replication.png)
+
+3. Specify the starting timepoint of data replication for the upstream and downstream clusters.
+
+    1. Check the timepoint of the upstrema and downstream clusters. In the case of two TiDB clusters, make sure data in the two clusters are consistent at certain timepoints. For example, the data of TiDB A at `ts=1` and the data of TiDB B at `ts=2` are consistent.
+
+    2. When you create the changefeed, set the `--start-ts` of the changefeed for the upstream cluster to the corresponding `tso`. That is, if the upstream cluster is TiDB A, set `--start-ts=1`; if the upstream cluster is TiDB B, set `--start-ts=2`.
+
+4. In the configuration file specified by the `--config` parameter, add the following configuration:
+
+    ```toml
+    # Whether to enable the bi-directional replication mode
+    bdr-mode = true
+    ```
+
+5. (Optional) If you need to track the data source, set a unique data source ID for each cluster using the [`tidb_source_id`](/system-variables.md#tidb_source_id-new-in-v650) system variable.
+
+After the configuration takes effect, the clusters can perform bi-directional replication.
+
+### Execute DDL
+
+Bi-directional replication does not support replicating DDL statements.
+
+If you need to execute DDL statements, take the following steps:
+
+1. Pause the write operations in the tables that need to execute DDL in all clusters. If the DDL statement is adding a non-unique index, skip this step.
+2. After the write operations of the correponding tables in all clusters have been replicated to other clusters, manually execute all DDL statements in each TiDB cluster.
+3. After the DDl statements are executed, resume the write operations.
+
+Note that a DDL statement that adds non-unique index does not break bi-directional replication, so you do not need to pause the write operations in the corresponding table.
+
+### Stop bi-directional replication
+
+After the application has stopped writing data, you can insert a special record into each cluster. By checking the two special records, you can make sure that data in two clusters are consistent.
+
+After the check is completed, you can stop the changefeed to stop bi-directional replication.
+
+### Limitations
+
+- For the limitations of DDL, see [Execute DDL](#execute-ddl).
+
+- Bi-directional replication clusters cannot detect write conflicts, which might cause undefined behaviors. Therefore, you must ensure there are no write conflicts from the application side.
+
+- Bi-directional replication supports more than two clusters, but does not support multiple clusters in cascading mode, that is, a cyclic replication like TiDB A -> TiDB B -> TiDB C -> TiDB A. In such a topology, if one cluster fails, the whole data replication will be affected. Therefore, to enable bi-directional replication among multiple clusters, you need to connect each cluster with every other clusters, for example, `TiDB A <-> TiDB B`, `TiDB B <-> TiDB C`, `TiDB C <-> TiDB A`.
