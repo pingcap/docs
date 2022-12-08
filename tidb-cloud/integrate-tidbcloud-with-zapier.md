@@ -199,7 +199,7 @@ The `New Row` trigger limits 10,000 results in every fetch. Therefore, if some n
 
 One way to avoid this is to specify the `Order By` configuration in the trigger. For example, once you sort the rows by their creation time, the new rows will always be included in the 10,000 results.
 
-Second, `New Row` will use a flexible strategy to generate the `id` filed to do the deduplication. Here are the priority:
+The `New Row` trigger also uses a flexible strategy to generate the `id` field to do the deduplication. The trigger generates the `id` field in the following order:
 
 1. `id` column if the result contains `id` column.
 2. `Dedupe Key` if you specify it in the trigger configuration.
