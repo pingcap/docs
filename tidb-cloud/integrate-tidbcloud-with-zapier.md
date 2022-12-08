@@ -248,7 +248,7 @@ Most of the TiDB Cloud actions require additional resources you need prepare.
 
 ### How to use `find or create` action
 
-`Find or create` action enables you create a resource when it is not exist. Here is an example:
+`Find or create` action enables you to create a resource if it does not exist. Here is an example:
 
 1. Choose `Find Table` action
 
