@@ -3744,7 +3744,7 @@ For details, see [Identify Slow Queries](/identify-slow-queries.md).
 - Unit: Seconds
 - This variable is used to set the refresh time of [statement summary tables](/statement-summary-tables.md).
 
-### `tidb_store_batch_size` <span class="version-mark">New in v6.5.0</span>
+### `tidb_store_batch_size`
 
 > **Warning:**
 >
