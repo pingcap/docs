@@ -195,7 +195,7 @@ Since we don’t want to trigger an action multiple times when an item in your A
 
 **New Row Trigger**
 
-First, `New Row` trigger limits 10,000 results in every fetch. This will cause the new rows will not be triggered for they may not be included in this 10000 results.
+The `New Row` trigger limits 10,000 results in every fetch. Therefore, if some new rows are not included in the 10,000 results, they cannot trigger Zapier.
 
 One way to avoid this is to specify `Order By` configuration in the trigger. For example, once you orderby create time, the new rows will always be included in the 10000 results.
 
