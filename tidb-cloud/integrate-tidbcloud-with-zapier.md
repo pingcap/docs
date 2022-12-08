@@ -202,10 +202,10 @@ One way to avoid this is to specify the `Order By` configuration in the trigger.
 The `New Row` trigger also uses a flexible strategy to generate the `id` field to do the deduplication. The trigger generates the `id` field in the following order:
 
 1. If the result contains an `id` column, use the `id` column.
-2. `Dedupe Key` if you specify it in the trigger configuration.
-3. primary key if the table has a primary key (use the first column if there are multiple primary keys).
-4. unique key if the table has a unique key.
-5. the first column of the table.
+2. If you specify a `Dedupe Key` in the trigger configuration, use the `Dedupe Key`.
+3. If the table has a primary key, use the primary key. If there are multiple primary keys, use the first column.
+4. If the table has a unique key, use the unique key.
+5. Use the first column of the table.
 
 **New Row (Custom Query) Trigger**
 
