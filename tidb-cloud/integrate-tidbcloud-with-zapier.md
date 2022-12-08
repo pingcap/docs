@@ -209,7 +209,7 @@ The `New Row` trigger also uses a flexible strategy to generate the `id` field t
 
 **New Row (Custom Query) Trigger**
 
-`New Row (Custom Query)` trigger limits 1,000,000 results in every fetch. It is a large number, and we only set it to protect the whole system. So, Your query is desired to include order and limit.
+The `New Row (Custom Query)` trigger limits 1,000,000 results in every fetch. 1,000,000 is a large number, and it is only set so as to protect the whole system. It is recommended that your query includes `ORDER BY` and `LIMIT`.
 
 As for deduplication, your query results must have a unique id field or you will get the `You must return the results with id field` error.
 
