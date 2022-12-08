@@ -13,7 +13,7 @@ To allow TiDB Cloud to access the source data in your Amazon S3 bucket, take the
 
 1. In the TiDB Cloud console, get the TiDB Cloud account ID and external ID of the target TiDB cluster.
 
-    1. In the TiDB Cloud console, choose your target project, and navigate to the **Clusters** page.
+    1. In the TiDB Cloud console, choose your target project, and navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page.
 
     2. Locate your target cluster, click **...** in the upper-right corner of the cluster area, and select **Import Data**. The **Data Import** page is displayed.
 
@@ -103,7 +103,7 @@ To allow TiDB Cloud to access the source data in your GCS bucket, you need to co
 
 1. In the TiDB Cloud console, get the Google Cloud Service Account ID of the target TiDB cluster.
 
-    1. In the TiDB Cloud console, choose your target project, and navigate to the **Clusters** page.
+    1. In the TiDB Cloud console, choose your target project, and navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page.
 
     2. Locate your target cluster, click **...** in the upper-right corner of the cluster area, and select **Import Data**. The **Data Import** page is displayed.
 

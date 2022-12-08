@@ -47,7 +47,7 @@ For example, if your Kafka cluster is in Confluent Cloud, you can see [Resources
 
 ## Step 1. Open the changefeed page for Apache Kafka
 
-1. In the TiDB Cloud console, navigate to the **Clusters** page for your project.
+1. In the TiDB Cloud console, navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page for your project.
 2. Click the name of the cluster that you want to create a changefeed for.
 3. Click the **Changefeed** tab.
 4. Click **Sink to Apache Kafka**.

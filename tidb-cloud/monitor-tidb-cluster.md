@@ -67,7 +67,7 @@ The cluster overview page provides general metrics of a cluster, including total
 
 To view metrics on the cluster overview page, take the following steps:
 
-1. Navigate to the **Clusters** page.
+1. Navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page.
 
 2. Click the name of a cluster to go to its cluster overview page.
 

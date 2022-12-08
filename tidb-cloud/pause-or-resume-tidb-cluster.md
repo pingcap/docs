@@ -39,7 +39,7 @@ When a cluster is paused, note the following:
 
 To pause a cluster, take the following steps:
 
-1. In the TiDB Cloud console, navigate to the **Clusters** page of your project.
+1. In the TiDB Cloud console, navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page of your project.
 2. For the cluster that you want to pause, click **...** in the upper-right corner of the cluster area.
 
     > **Tip:**
@@ -64,7 +64,7 @@ After a paused cluster is resumed, note the following:
 
 To resume a paused cluster, take the following steps:
 
-1. In the TiDB Cloud console, navigate to the **Clusters** page of your project.
+1. In the TiDB Cloud console, navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page of your project.
 2. For the cluster that you want to resume, click **Resume**.
 
     The **Resume your cluster** dialog is displayed.

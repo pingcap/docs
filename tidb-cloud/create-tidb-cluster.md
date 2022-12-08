@@ -65,7 +65,7 @@ If you are a project member, you can access only the specific projects to which 
 
 To create a Serverless Tier cluster, take the following steps:
 
-1. On the **Clusters** page, click **Create Cluster**.
+1. On the [**Clusters**](https://tidbcloud.com/console/clusters) page, click **Create Cluster**.
 
 2. On the **Create Cluster** page, update the default cluster name if necessary.
 
@@ -90,7 +90,7 @@ To create a Serverless Tier cluster, take the following steps:
 
 To create a Dedicated Tier cluster, take the following steps:
 
-1. On the **Clusters** page, click **Create Cluster**.
+1. On the [**Clusters**](https://tidbcloud.com/console/clusters) page, click **Create Cluster**.
 
 2. On the **Create Cluster** page, select **Dedicated Tier**, update the default cluster name and port number if necessary, choose a cloud provider and a region, and then click **Next**.
 
