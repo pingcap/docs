@@ -7,58 +7,15 @@ summary: Learn about the FAQs related to TiDB deployment.
 
 このドキュメントは、TiDB の展開に関連する FAQ をまとめたものです。
 
-## オペレーティング システム要件 {#operating-system-requirements}
+## ソフトウェアおよびハードウェア要件 {#software-and-hardware-requirements}
 
-### 必要なオペレーティング システムのバージョンは何ですか? {#what-are-the-required-operating-system-versions}
+### TiDB はどのオペレーティング システムをサポートしていますか? {#what-operating-systems-does-tidb-support}
 
-|        Linux OS       |       バージョン      |
-| :-------------------: | :--------------: |
-| レッドハット エンタープライズ リナックス | 7.3 以降の 7.x リリース |
-|         CentOS        | 7.3 以降の 7.x リリース |
-|  オラクル エンタープライズ Linux  | 7.3 以降の 7.x リリース |
-|       アマゾン Linux      |         2        |
-|       Ubuntu LTS      |      16.04以降     |
+TiDB がサポートするオペレーティング システムについては、 [ソフトウェアおよびハードウェアの推奨事項](/hardware-and-software-requirements.md)を参照してください。
 
-### TiDB クラスターを CentOS 7 にデプロイすることが推奨されるのはなぜですか? {#why-it-is-recommended-to-deploy-the-tidb-cluster-on-centos-7}
+### 開発、テスト、または実稼働環境で TiDB クラスターに推奨されるハードウェア構成は何ですか? {#what-is-the-recommended-hardware-configuration-for-a-tidb-cluster-in-the-development-test-or-production-environment}
 
-<!-- Localization note for TiDB:
-
-- English: use distributed SQL, and start to emphasize HTAP
-- Chinese: can keep "NewSQL" and emphasize one-stop real-time HTAP ("一栈式实时 HTAP")
-- Japanese: use NewSQL because it is well-recognized
-
--->
-
-TiDB は、高性能のオープンソース分散 SQL データベースとして、Intelアーキテクチャサーバーおよび主要な仮想化環境に展開でき、適切に動作します。 TiDB は、主要なハードウェア ネットワークと Linux オペレーティング システムのほとんどをサポートしています。詳細については、TiDB のデプロイに関する[正式な導入要件](/hardware-and-software-requirements.md)を参照してください。
-
-CentOS 7.3 では多くの TiDB テストが実行され、多くの展開のベスト プラクティスが CentOS 7.3 に蓄積されています。したがって、TiDB を展開するときは、CentOS 7.3+ Linux オペレーティング システムを使用することをお勧めします。
-
-## サーバー要件 {#server-requirements}
-
-Intel x86-64アーキテクチャの 64 ビット汎用ハードウェアサーバープラットフォームに TiDB を展開して実行できます。開発、テスト、および本番環境のサーバーハードウェア構成に関する要件と推奨事項は次のとおりです。
-
-### 開発およびテスト環境 {#development-and-testing-environments}
-
-|    成分   |  CPU  |  メモリー  |  ローカルストレージ |        通信網       |     インスタンス番号 (最小要件)    |
-| :-----: | :---: | :----: | :--------: | :--------------: | :--------------------: |
-|   TiDB  |  8コア+ | 16GB以上 | SAS、200GB+ | ギガビット ネットワーク カード |  1 (PD と同じマシンにデプロイ可能)  |
-|    PD   |  4コア+ |  8GB以上 | SAS、200GB+ | ギガビット ネットワーク カード | 1 (TiDB と同じマシンにデプロイ可能) |
-|   TiKV  |  8コア+ | 32GB以上 | SAS、200GB+ | ギガビット ネットワーク カード |            3           |
-| ティフラッシュ | 32コア+ | 64GB以上 | SSD、200GB+ | ギガビット ネットワーク カード |            1           |
-|  TiCDC  |  8コア+ | 16GB以上 | SAS、200GB+ | ギガビット ネットワーク カード |            1           |
-|         |       |        |            |      総サーバー数      |            6           |
-
-### 本番環境 {#production-environment}
-
-|    成分   |   CPU  |   メモリー  | ハードディスクの種類 |             通信網             | インスタンス番号 (最小要件) |
-| :-----: | :----: | :-----: | :--------: | :-------------------------: | :-------------: |
-|   TiDB  |  16コア+ |  48GB以上 |     SAS    | 10 ギガビット ネットワーク カード (2 枚推奨) |        2        |
-|    PD   |  8コア+  |  16GB以上 |     SSD    | 10 ギガビット ネットワーク カード (2 枚推奨) |        3        |
-|   TiKV  |  16コア+ |  64GB以上 |     SSD    | 10 ギガビット ネットワーク カード (2 枚推奨) |        3        |
-| ティフラッシュ | 48コア以上 | 128GB以上 | 1 つ以上の SSD | 10 ギガビット ネットワーク カード (2 枚推奨) |        2        |
-|  TiCDC  |  16コア+ |  64GB以上 |     SSD    | 10 ギガビット ネットワーク カード (2 枚推奨) |        2        |
-|   モニター  |  8コア+  |  16GB以上 |     SAS    |       ギガビット ネットワーク カード      |        1        |
-|         |        |         |            |            総サーバー数           |        13       |
+TiDB は、Intel x86-64アーキテクチャの 64 ビット汎用ハードウェアサーバープラットフォーム、または ARMアーキテクチャのハードウェアサーバープラットフォームにデプロイして実行できます。開発、テスト、および実稼働環境のサーバーハードウェア構成に関する要件と推奨事項については、 [ソフトウェアおよびハードウェアの推奨事項 - サーバーの推奨事項](/hardware-and-software-requirements.md#server-recommendations)を参照してください。
 
 ### 10 ギガビットの 2 枚のネットワーク カードの目的は何ですか? {#what-s-the-purposes-of-2-network-cards-of-10-gigabit}
 
@@ -74,7 +31,7 @@ PD は一意のタイムスタンプを配布する必要があるため、分�
 -   PD はクラスター メタデータを格納し、頻繁な読み取りおよび書き込み要求を行います。高 I/O ディスクが必要です。パフォーマンスの低いディスクは、クラスター全体のパフォーマンスに影響します。 SSD ディスクの使用をお勧めします。さらに、リージョンの数が多いほど、CPU とメモリの要件が高くなります。
 -   TiKV には、CPU、メモリ、およびディスクに対する高い要件があります。 SSDを使用するために必要です。
 
-詳細については、 [ソフトウェアおよびハードウェアの推奨事項](/hardware-and-software-requirements.md)を参照してください。
+詳細については、 [ソフトウェアとハードウェアの推奨事項](/hardware-and-software-requirements.md)を参照してください。
 
 ## インストールと展開 {#installation-and-deployment}
 
@@ -82,7 +39,7 @@ PD は一意のタイムスタンプを配布する必要があるため、分�
 
 ### TiKV/PD の変更された<code>toml</code>構成が有効にならないのはなぜですか? {#why-the-modified-code-toml-code-configuration-for-tikv-pd-does-not-take-effect}
 
-`toml`の設定を有効にするには、TiKV/PD で`--config`のパラメータを設定する必要があります。デフォルトでは、TiKV/PD は構成を読み取りません。現在、この問題は Binary を使用してデプロイする場合にのみ発生します。 TiKV の場合は、構成を編集してサービスを再起動します。 PD の場合、設定ファイルは PD が初めて起動されたときにのみ読み込まれます。その後、pd-ctl を使用して設定を変更できます。詳細については、 [PD Controlユーザー ガイド](/pd-control.md)を参照してください。
+`toml`の設定を有効にするには、TiKV/PD で`--config`のパラメータを設定する必要があります。デフォルトでは、TiKV/PD は構成を読み取りません。現在、この問題は Binary を使用してデプロイする場合にのみ発生します。 TiKV の場合は、構成を編集してサービスを再起動します。 PD の場合、構成ファイルは PD が初めて開始されたときにのみ読み取られ、その後は pd-ctl を使用して構成を変更できます。詳細については、 [PD Controlユーザー ガイド](/pd-control.md)を参照してください。
 
 ### TiDB 監視フレームワーク (Prometheus + Grafana) をスタンドアロン マシンまたは複数のマシンにデプロイする必要がありますか?推奨CPUとメモリは？ {#should-i-deploy-the-tidb-monitoring-framework-prometheus-grafana-on-a-standalone-machine-or-on-multiple-machines-what-is-the-recommended-cpu-and-memory}
 
@@ -158,4 +115,4 @@ TiDB `label`の構成は、クラスター展開アーキテクチャに関連�
 
 TiDB は[Google GKE](https://docs.pingcap.com/tidb-in-kubernetes/stable/deploy-on-gcp-gke) 、 [AWS EKS](https://docs.pingcap.com/tidb-in-kubernetes/stable/deploy-on-aws-eks) 、および[アリババクラウド ACK](https://docs.pingcap.com/tidb-in-kubernetes/stable/deploy-on-alibaba-cloud)での展開をサポートしています。
 
-さらに、TiDB は現在 JD Cloud と UCloud で利用可能であり、それらには第 1 レベルのデータベース エントリがあります。
+さらに、TiDB は現在、JD Cloud と UCloud で利用できます。

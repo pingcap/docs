@@ -49,14 +49,14 @@ Query OK, 1 row affected (0.02 sec)
 TLS 接続を使用してログインすることが強制されるユーザーを作成します。
 
 ```sql
-CREATE USER 'newuser3'@'%' REQUIRE SSL IDENTIFIED BY 'newuserpassword';
+CREATE USER 'newuser3'@'%' IDENTIFIED BY 'newuserpassword' REQUIRE SSL;
 Query OK, 1 row affected (0.02 sec)
 ```
 
 ログイン時に X.509 証明書を使用する必要があるユーザーを作成します。
 
 ```sql
-CREATE USER 'newuser4'@'%' REQUIRE ISSUER '/C=US/ST=California/L=San Francisco/O=PingCAP' IDENTIFIED BY 'newuserpassword';
+CREATE USER 'newuser4'@'%' IDENTIFIED BY 'newuserpassword' REQUIRE ISSUER '/C=US/ST=California/L=San Francisco/O=PingCAP';
 Query OK, 1 row affected (0.02 sec)
 ```
 
@@ -64,7 +64,7 @@ Query OK, 1 row affected (0.02 sec)
 
 次の`CREATE USER`のオプションは TiDB ではまだサポートされておらず、解析されますが無視されます。
 
--   TiDB は、 `WITH MAX_QUERIES_PER_HOUR` 、 `WITH MAX_UPDATES_PER_HOUR` 、および`WITH MAX_USER_CONNECTIONS`のオプションをサポートしていません。
+-   TiDB は`WITH MAX_QUERIES_PER_HOUR` 、 `WITH MAX_UPDATES_PER_HOUR` 、および`WITH MAX_USER_CONNECTIONS`オプションをサポートしていません。
 -   TiDB は`DEFAULT ROLE`オプションをサポートしていません。
 -   TiDB は、パスワードに関連する`PASSWORD EXPIRE` 、 `PASSWORD HISTORY`またはその他のオプションをサポートしていません。
 -   TiDB は`ACCOUNT LOCK`と`ACCOUNT UNLOCK`のオプションをサポートしていません。

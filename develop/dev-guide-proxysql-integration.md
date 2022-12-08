@@ -39,7 +39,7 @@ ProxySQL を TiDB と共に展開する最も明白な方法は、ProxySQL を�
 
 このセクションでは、開発環境で TiDB を ProxySQL と統合する方法について説明します。 ProxySQL 統合を開始するには、TiDB クラスターの種類に応じて、次のいずれかのオプションを選択でき[前提条件](#prerequisite) 。
 
--   オプション 1: [TiDB Cloud(サーバーレス) を ProxySQL と統合する](#option-1-integrate-tidb-cloud-serverless-with-proxysql)
+-   オプション 1: [TiDB Cloudサーバーレス層を ProxySQL と統合する](#option-1-integrate-tidb-cloud-serverless-tier-with-proxysql)
 -   オプション 2: [TiDB (自己ホスト型) を ProxySQL と統合する](#option-2-integrate-tidb-self-hosted-with-proxysql)
 
 ### 前提条件 {#prerequisites}
@@ -117,7 +117,7 @@ systemctl start docker
 
 </SimpleTab>
 
-### オプション 1: TiDB Cloud(サーバーレス) を ProxySQL と統合する {#option-1-integrate-tidb-cloud-serverless-with-proxysql}
+### オプション 1: TiDB Cloudサーバーレス層を ProxySQL と統合する {#option-1-integrate-tidb-cloud-serverless-tier-with-proxysql}
 
 この統合では、TiDB Serverless Tier クラスターと共に[ProxySQL Docker イメージ](https://hub.docker.com/r/proxysql/proxysql)を使用します。次の手順では、ポート`16033`で ProxySQL をセットアップするため、このポートが使用可能であることを確認してください。
 
@@ -1010,7 +1010,7 @@ ProxySQL を TiDB のプロキシとして使用するには、ProxySQL を構�
 
 6.  構成を確認し、クエリ ルールが機能するかどうかを確認します。
 
-    1.  `root`人のユーザーとして ProxySQL MySQL Interface にログインします。
+    1.  `root`人のユーザーとして ProxySQL MySQL インターフェイスにログインします。
 
         <SimpleTab groupId="os">
 
