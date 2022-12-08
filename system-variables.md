@@ -3744,6 +3744,19 @@ For details, see [Identify Slow Queries](/identify-slow-queries.md).
 - Unit: Seconds
 - This variable is used to set the refresh time of [statement summary tables](/statement-summary-tables.md).
 
+### `tidb_store_batch_size` <span class="version-mark">New in v6.5.0</span>
+
+> **Warning:**
+>
+> Currently,`tidb_store_batch_size` is an experimental feature. It is not recommended that you use it in production environments.
+
+- Scope: SESSION | GLOBAL
+- Persists to cluster: Yes
+- Type: Integer
+- Default value: `0`
+- Range: `[0, 25000]`
+- This variable is used to control the batch size of table reader Coprocessor Tasks of `IndexLookUp` executor. `0` means disable batch, you can increase it to optimize the extremely slow queries.
+
 ### tidb_store_limit <span class="version-mark">New in v3.0.4 and v4.0</span>
 
 - Scope: GLOBAL
