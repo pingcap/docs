@@ -163,6 +163,14 @@ This section introduces the triggers and actions provided by TiDB Cloud App on Z
 - Find Row: finds a row in a table via a lookup column.
 - Find Row (Custom Query): finds a row in a table via a custom query the you provide.
 
+Some actions need extra resources, refer to the table below:
+
+| actions                                   | resources                                   |
+| ----------------------------------------- | ------------------------------------------- |
+| Find/Create Database                      | Serverless Tier cluster                     |
+| Find/Create Table                         | Serverless Tier cluster and database        |
+| Find/Create/Update/Find(Custom Query) Row | Serverless Tier cluster, database and table |
+
 ## TiDB Cloud App templates
 
 TiDB Cloud provides some templates for you to use in Zapier directly. You can find all the templates in the [TiDB Cloud App](https://zapier.com/apps/tidb-cloud/integrations) page.
@@ -213,38 +221,7 @@ The `New Row (Custom Query)` trigger limits 1,000,000 results in every fetch. 1,
 
 To perform deduplication, your query results must have a unique id field. Otherwise, you will get the `You must return the results with id field` error.
 
-Note that your custom query must run less than 30 seconds.
-
-### Resources required by TiDB Cloud actions
-
-TiDB Cloud actions might require additional resources. You need to prepare the resources as follows.
-
-* Actions that require an existing Serverless Tier cluster in TiDB Cloud:
-
-   - Find Database: Finds an existing Database.
-   - Create Database: Creates a new database.
-   - Find Table: Finds an existing Table.
-   - Create Table: Creates a new table.
-   - Create Row: Creates a new row.
-   - Update Row: Updates an existing row.
-   - Find Row: Finds a row in a table via a lookup column.
-   - Find Row (Custom Query): Finds a Row in a table via a custom query in your control.
-
-* Actions that require an existing database in TiDB:
-
-   - Find Table: Finds an existing Table.
-   - Create Table: Creates a new table.
-   - Create Row: Creates a new row.
-   - Update Row: Updates an existing row.
-   - Find Row: Finds a row in a table via a lookup column.
-   - Find Row (Custom Query): Finds a Row in a table via a custom query in your control.
-
-* Actions that require an existing table (including the schema) in TiDB:
-
-   - Create Row: Creates a new row.
-   - Update Row: Updates an existing row.
-   - Find Row: Finds a row in a table via a lookup column.
-   - Find Row (Custom Query): Finds a Row in a table via a custom query in your control.
+Note that your custom query must run less than 30 seconds, or you will get the timeout error.
 
 ### How to use `find or create` action
 
