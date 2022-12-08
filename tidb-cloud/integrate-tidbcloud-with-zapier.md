@@ -152,24 +152,20 @@ This section introduces the triggers and actions provided by TiDB Cloud App on Z
 
 ### Actions
 
-- Find Cluster: finds an existing Serverless tier or Dedicated tier.
-- Create Cluster: creates a new cluster. Only supports creating a free Serverless Tier cluster.
-- Find Database: finds an existing database.
-- Create Database: creates a new database.
-- Find Table: finds an existing Table.
-- Create Table: creates a new table.
-- Create Row: creates a new row.
-- Update Row: updates an existing row.
-- Find Row: finds a row in a table via a lookup column.
-- Find Row (Custom Query): finds a row in a table via a custom query the you provide.
+The following table lists the actions supported by TiDB Cloud App. Note that some actions need extra resources and you need to prepare the corresponding resources before using the action.
 
-Some actions need extra resources, refer to the table below:
-
-| actions                                   | resources                                   |
-| ----------------------------------------- | ------------------------------------------- |
-| Find/Create Database                      | Serverless Tier cluster                     |
-| Find/Create Table                         | Serverless Tier cluster and database        |
-| Find/Create/Update/Find(Custom Query) Row | Serverless Tier cluster, database and table |
+| Action | Description | Resource |
+|---|---|---|
+| Find Cluster | Finds an existing Serverless tier or Dedicated tier. | None |
+| Create Cluster | Creates a new cluster. Only supports creating a free Serverless Tier cluster. | None |
+| Find Database | Finds an existing database. | A Serverless Tier cluster |
+| Create Database | Creates a new database. | A Serverless Tier cluster |
+| Find Table | Finds an existing Table. | A Serverless Tier cluster and a database |
+| Create Table | Creates a new table. | A Serverless Tier cluster and a database |
+| Create Row | Creates a new row. | A Serverless Tier cluster, a database, and a table |
+| Update Row | Updates an existing row. | A Serverless Tier cluster, a database, and a table |
+| Find Row | Finds a row in a table via a lookup column. | A Serverless Tier cluster, a database, and a table |
+| Find Row (Custom Query) | Finds a row in a table via a custom query the you provide. | A Serverless Tier cluster, a database, and a table |
 
 ## TiDB Cloud App templates
 
@@ -221,7 +217,7 @@ The `New Row (Custom Query)` trigger limits 1,000,000 results in every fetch. 1,
 
 To perform deduplication, your query results must have a unique id field. Otherwise, you will get the `You must return the results with id field` error.
 
-Note that your custom query must run less than 30 seconds, or you will get the timeout error.
+Make sure that your custom query executes in less than 30 seconds. Otherwise, you will get the timeout error.
 
 ### How to use `find or create` action
 
