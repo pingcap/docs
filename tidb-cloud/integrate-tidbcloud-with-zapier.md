@@ -185,7 +185,7 @@ To get your TiDB Cloud API key, follow the [TiDB Cloud API documentation](https:
 
 ### How TiDB Cloud triggers de-duplication
 
-Zapier triggers can work with a polling API call to check for new data periodically (depends on Zapier plan).
+Zapier triggers can work with a polling API call to check for new data periodically (the interval depends on your Zapier plan).
 
 TiDB Cloud triggers provide the polling API call which will return a lot of results, most of which Zapier has seen before.
 
