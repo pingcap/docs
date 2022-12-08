@@ -743,6 +743,14 @@ MPP is a distributed computing framework provided by the TiFlash engine, which a
 - Default value: `00:00 +0000`
 - This variable is used to restrict the time window that the automatic update of statistics is permitted. For example, to only allow automatic statistics updates between 1 AM and 3 AM, set `tidb_auto_analyze_start_time='01:00 +0000'` and `tidb_auto_analyze_end_time='03:00 +0000'`.
 
+### tidb_auto_build_stats_concurrency <span class="version-mark">New in v6.5.0</span>
+
+- Scope: GLOBAL
+- Persists to cluster: Yes
+- Default value: `1`
+- Range: `[1, 256]`
+- This variable sets the concurrency of the statistics automatic update.
+
 ### tidb_backoff_lock_fast
 
 - Scope: SESSION | GLOBAL
@@ -3790,6 +3798,14 @@ For details, see [Identify Slow Queries](/identify-slow-queries.md).
 - Type: Boolean
 - Default value: `OFF`
 - This variable is used to control whether the `SYSDATE` function can be replaced by the `NOW` function. This configuration item has the same effect as the MySQL option [`sysdate-is-now`](https://dev.mysql.com/doc/refman/8.0/en/server-options.html#option_mysqld_sysdate-is-now).
+
+### tidb_sysproc_scan_concurrency <span class="version-mark">New in v6.5.0</span>
+
+- Scope: GLOBAL
+- Persists to cluster: Yes
+- Default value: `1`
+- Range: `[1, 256]`
+- This variable sets the concurrency of the scan operations when the internal SQL statements (such as automatic update of statistics) are executed in TiDB.
 
 ### tidb_table_cache_lease <span class="version-mark">New in v6.0.0</span>
 
