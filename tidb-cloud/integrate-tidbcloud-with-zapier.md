@@ -197,7 +197,7 @@ Since we don’t want to trigger an action multiple times when an item in your A
 
 The `New Row` trigger limits 10,000 results in every fetch. Therefore, if some new rows are not included in the 10,000 results, they cannot trigger Zapier.
 
-One way to avoid this is to specify `Order By` configuration in the trigger. For example, once you orderby create time, the new rows will always be included in the 10000 results.
+One way to avoid this is to specify the `Order By` configuration in the trigger. For example, once you sort the rows by their creation time, the new rows will always be included in the 10,000 results.
 
 Second, `New Row` will use a flexible strategy to generate the `id` filed to do the deduplication. Here are the priority:
 
