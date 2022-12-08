@@ -160,6 +160,14 @@ The following lists the CA root paths on common platforms.
 /etc/ssl/ca-bundle.pem
 ```
 
+**Windows**
+
+Windows does not offer a specific path to CA root, instead, it uses [registry](https://learn.microsoft.com/en-us/windows-hardware/drivers/install/local-machine-and-current-user-certificate-stores) to store certificates. For this reason, we recommend downloading [Mozilla CA Certificate bundle](https://curl.se/docs/caextract.html) as the CA certificates and point at this file for the driver.
+
+```
+path_to_mozilla_ca_certificate_bundle
+```
+
 ## Can TiDB Serverless Tier verify the client's identity?
 
 No.
