@@ -219,7 +219,7 @@ Note that your custom query must run less than 30 seconds.
 
 TiDB Cloud actions might require additional resources. You need to prepare the resources as follows.
 
-1. Actions need an existing TiDB Cloud serverless tier (TiDB database):
+* Actions that require an existing Serverless Tier cluster in TiDB Cloud:
 
    - Find Database: Finds an existing Database.
    - Create Database: Creates a new database.
