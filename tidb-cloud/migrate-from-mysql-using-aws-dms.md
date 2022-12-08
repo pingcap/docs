@@ -4,10 +4,12 @@ summary: Learn how to migrate data from MySQL-compatible databases into TiDB Clo
 ---
 
 # Migrate from MySQL-Compatible Databases to TiDB Cloud Using AWS DMS
+If you want to migrate heterogeneous databases, such as PostgreSQL, Oracle, and SQL Server to TiDB Cloud, it is recommended to use AWS DMS.
 
+If you want to migrate from MySQL-compatible databases, such as Aurora MySQL and Amazon Relational Database Service (RDS), to TiDB Cloud, it is recommended to use [Data Migration](/tidb-cloud/migrate-from-mysql-using-data-migration.md).
 AWS Database Migration Service (AWS DMS) is a cloud service that makes it easy to migrate relational databases, data warehouses, NoSQL databases, and other types of data stores. You can use AWS DMS to migrate your data into TiDB Cloud.
 
-This document uses Amazon Relational Database Service (RDS) as an example to show how to migrate data to TiDB Cloud using AWS DMS. The procedure also applies to migrating data from self-hosted MySQL databases or Amazon Aurora to TiDB Cloud.
+This document uses Amazon RDS as an example to show how to migrate data to TiDB Cloud using AWS DMS. The procedure also applies to migrating data from self-hosted MySQL databases or Amazon Aurora to TiDB Cloud.
 
 In this example, the data source is Amazon RDS, and the data destination is a Dedicated Tier cluster in TiDB Cloud. Both upstream and downstream databases are in the same region.
 
