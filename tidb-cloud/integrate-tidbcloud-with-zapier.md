@@ -217,7 +217,7 @@ Note that your custom query must run less than 30 seconds.
 
 ### Resources required by TiDB Cloud actions
 
-Most of the TiDB Cloud actions require additional resources you need prepare.
+TiDB Cloud actions might require additional resources. You need to prepare the resources as follows.
 
 1. Actions need an existing TiDB Cloud serverless tier (TiDB database):
 
