@@ -256,4 +256,4 @@ Most of the TiDB Cloud actions require additional resources you need prepare.
 
    ![Find and create](/media/tidb-cloud/zapier/zapier-tidbcloud-find-and-create.png)
 
-In this example, we will create a table if it does not exist yet. Note that the table will be created directly if you test your action.
+This workflow creates a table if it does not exist yet. Note that the table will be created directly if you test your action.
