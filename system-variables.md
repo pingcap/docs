@@ -3755,7 +3755,7 @@ For details, see [Identify Slow Queries](/identify-slow-queries.md).
 - Type: Integer
 - Default value: `0`
 - Range: `[0, 25000]`
-- This variable is used to control the batch size of table reader Coprocessor Tasks of the `IndexLookUp` executor. `0` means disable batch. When the number of tasks is relatively large and slow queries occur, you can increase this variable to optimize the query.
+- This variable is used to control the batch size of the Coprocessor Tasks of the `IndexLookUp` operator. `0` means to disable batch. When the number of tasks is relatively large and slow queries occur, you can increase this variable to optimize the query.
 
 ### tidb_store_limit <span class="version-mark">New in v3.0.4 and v4.0</span>
 
