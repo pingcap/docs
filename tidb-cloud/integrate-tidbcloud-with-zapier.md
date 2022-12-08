@@ -252,7 +252,7 @@ Most of the TiDB Cloud actions require additional resources you need prepare.
 
 1. Choose `Find Table` action
 
-2. Click `Create TiDB Cloud Table if it doesn’t exist yet?` button to enable `find and create` in `set up action` step
+2. In the`set up action` step, tick the `Create TiDB Cloud Table if it doesn’t exist yet?` box to enable `find and create`.
 
    ![Find and create](/media/tidb-cloud/zapier/zapier-tidbcloud-find-and-create.png)
 
