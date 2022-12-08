@@ -12,7 +12,7 @@ TiDB supports security features similar to MySQL 5.7, and also supports some sec
 
 - Column level permissions.
 - These permission attributes: `max_questions`, `max_updated`, and `max_user_connections`.
-- Password verification policy. When you change the password, you must verify the current password.
+- Password verification policy, which requires you to verify the current password when you change it.
 - Dual password policy.
 - Random password generation.
 - Multi-factor authentication.
@@ -24,7 +24,7 @@ TiDB supports security features similar to MySQL 5.7, and also supports some sec
 The password expiration policies of TiDB and MySQL have the following differences:
 
 - MySQL supports password expiration policy in v5.7 and v8.0.
-- TiDB supports password expiration policy in v6.5.0.
+- TiDB supports password expiration policy starting from v6.5.0.
 
 The expiration mechanism of TiDB is different from MySQL in the following aspects:
 
@@ -37,7 +37,7 @@ The password complexity policies of TiDB and MySQL have the following difference
 
 - MySQL v5.7 implements the password complexity policy by using the `validate_password` plugin.
 - MySQL v8.0 re-implements the password complexity policy by using the `validate_password` component.
-- TiDB v6.5.0 introduces a built-in the password complexity management feature.
+- TiDB introduces a built-in password complexity management feature starting from v6.5.0.
 
 The feature implementation has the following differences:
 
@@ -45,7 +45,7 @@ The feature implementation has the following differences:
 
     - In MySQL v5.7, the feature is implemented by using the `validate_password` plugin. You can enable the feature by installing the plugin.
     - In MySQL v8.0, the feature is implemented by using the `validate_password` component. You can enable the feature by installing the component.
-    - TiDB has a built-in feature. You can enable the feature using the system variable [`validate_password.enable`](/system-variables.md#validate_passwordenable-new-in-v650).
+    - For TiDB, this feature is built-in. You can enable the feature using the system variable [`validate_password.enable`](/system-variables.md#validate_passwordenable-new-in-v650).
 
 - Dictionary check:
 
@@ -59,37 +59,37 @@ The password failure tracking policies of TiDB and MySQL have the following diff
 
 - MySQL v5.7 does not support password failure tracking.
 - MySQL v8.0 supports password failure tracking.
-- TiDB v6.5.0 supports password failure tracking.
+- TiDB supports password failure tracking starting from v6.5.0.
 
 Because the number of failed attempts and lock status of accounts need to be globally consistent, and as a distributed database, TiDB cannot record the number of failed attempts and lock status in the server memory like MySQL, so the implementation mechanisms are different between TiDB and MySQL.
 
-- If the user is not locked automatically, the count of failed attempts is reset in the following scenarios:
+- For users that are not locked automatically, the count of failed attempts is reset in the following scenarios:
 
     + MySQL 8.0:
 
         - When the server is restarted, the count of failed attempts for all accounts is reset.
         - When `FLUSH PRIVILEGES` is executed, the count of failed attempts for all accounts is reset.
-        - When you run `ALTER USER ... ACCOUNT UNLOCK` to unlock the account, the count is reset.
-        - When the account logs in successfully, the count is reset.
+        - When you run `ALTER USER ... ACCOUNT UNLOCK` to unlock an account, the count is reset.
+        - When an account logs in successfully, the count is reset.
 
     + TiDB:
 
-        - When you run `ALTER USER ... ACCOUNT UNLOCK` to unlock the account, the count is reset.
-        - When the account logs in successfully, the count is reset.
+        - When you run `ALTER USER ... ACCOUNT UNLOCK` to unlock an account, the count is reset.
+        - When an account logs in successfully, the count is reset.
 
-- If the user is locked automatically, the count of failed attempts is reset in the following scenarios:
+- For users that are locked automatically, the count of failed attempts is reset in the following scenarios:
 
     + MySQL 8.0:
 
         - When the server is restarted, the temporary locking for all accounts is reset.
         - When `FLUSH PRIVILEGES` is executed, the temporary locking for all accounts is reset.
-        - If the lock time ends, the temporary locking for the account is reset on the next login attempt.
-        - When you run `ALTER USER ... ACCOUNT UNLOCK` to unlock the account, the temporary locking for the account is reset.
+        - If the lock time of an account ends, the temporary locking for the account is reset on the next login attempt.
+        - When you run `ALTER USER ... ACCOUNT UNLOCK` to unlock an account, the temporary locking for the account is reset.
 
     + TiDB:
 
-        - If the lock time ends, the temporary locking for the account is reset on the next login attempt.
-        - When you run `ALTER USER ... ACCOUNT UNLOCK` to unlock the account, the temporary locking for the account is reset.
+        - If the lock time of an account ends, the temporary locking for the account is reset on the next login attempt.
+        - When you run `ALTER USER ... ACCOUNT UNLOCK` to unlock an account, the temporary locking for the account is reset.
 
 ### Password reuse policy
 
@@ -97,14 +97,14 @@ The password reuse policies of TiDB and MySQL have the following differences:
 
 - MySQL v5.7 does not support password reuse management.
 - MySQL v8.0 supports password reuse management.
-- TiDB v6.5.0 supports password reuse management.
+- TiDB supports password reuse management starting from v6.5.0.
 
 The implementation mechanisms are consistent between TiDB and MySQL. Both use the `mysql.password_history` system table to implement the password reuse management feature. However, when deleting a user that does not exist in the `mysql.user` system table, TiDB and MySQL have different behaviors:
 
-- Scenario: A user (`user01`) is not created in a normal way; instead, it is created by using the `INSERT INTO mysql.password_history VALUES (...)` statement to append a record of `user01` to the `mysql.password_history` system table. The record of `user01` does not exist in `mysql.user` system table. In such cases, when you run `DROP USER` on `user01`, TiDB and MySQL have different behaviors.
+- Scenario: A user (`user01`) is not created in a normal way; instead, it is created by using the `INSERT INTO mysql.password_history VALUES (...)` statement to append a record of `user01` to the `mysql.password_history` system table. In such cases, because the record of `user01` does not exist in the `mysql.user` system table, when you run `DROP USER` on `user01`, TiDB and MySQL have different behaviors.
 
     - MySQL: When you run `DROP USER user01`, MySQL tries to find `user01` in `mysql.user` and `mysql.password_history`. If either system table contains `user01`, the `DROP USER` statement is executed successfully and no error is reported.
-    - TiDB: When you run `DROP USER user01`, TiDB tries to find `user01` only in `mysql.user`. If no related record is found, the `DROP USER` statement fails and an error is reported. If you want the statement to execute successfully and delete the `user01` record from `mysql.password_history`, use `DROP USER IF EXISTS user01` instead.
+    - TiDB: When you run `DROP USER user01`, TiDB tries to find `user01` only in `mysql.user`. If no related record is found, the `DROP USER` statement fails and an error is reported. If you want to execute the statement successfully and delete the `user01` record from `mysql.password_history`, use `DROP USER IF EXISTS user01` instead.
 
 ## Authentication plugin status
 

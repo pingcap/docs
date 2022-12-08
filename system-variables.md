@@ -228,7 +228,7 @@ For more possible values of this variable, see [Authentication plugin status](/s
 - Type: Integer
 - Default value: `0`
 - Range: `[0, 65535]`
-- Sets the global policy for automatic password expiration. The default value `0` indicates that the password never expires. If this system variable is set to an integer `N`, it means that the password lifetime is `N` days, and you must change your password within `N` days.
+- Sets the global policy for automatic password expiration. The default value `0` indicates that the password never expires. If this system variable is set to a positive integer `N`, it means that the password lifetime is `N` days, and you must change your password within `N` days.
 
 ### default_week_format
 
@@ -244,7 +244,7 @@ For more possible values of this variable, see [Authentication plugin status](/s
 - Scope: GLOBAL
 - Type: Boolean
 - Default value: `ON`
-- This variable is read-only. It indicates whether to disconnect the client connection when the password is expired. If the variable is set to `ON`, the client connection is disconnected when the password is expired. If the variable is set to `OFF`, the client connection is restricted to the "sandbox mode" and the user can only execute the password reset operation.
+- This variable is read-only. It indicates whether TiDB disconnects the client connection when the password is expired. If the variable is set to `ON`, the client connection is disconnected when the password is expired. If the variable is set to `OFF`, the client connection is restricted to the "sandbox mode" and the user can only execute the password reset operation.
 
 <CustomContent platform="tidb">
 
@@ -392,7 +392,7 @@ This variable is an alias for [`last_insert_id`](#last_insert_id).
 - Type: Integer
 - Default value: `0`
 - Range: `[0, 4294967295]`
-- This variable is used to establish a password reuse policy that allows TiDB to limit password reuse based on the number of password changes. The default value `0` means disabling the password reuse policy based on the number of password changes. When this variable is set to an integer `N`, the reuse of the last `N` passwords is not allowed.
+- This variable is used to establish a password reuse policy that allows TiDB to limit password reuse based on the number of password changes. The default value `0` means disabling the password reuse policy based on the number of password changes. When this variable is set to a positive integer `N`, the reuse of the last `N` passwords is not allowed.
 
 ### password_reuse_interval <span class="version-mark">New in v6.5.0</span>
 
