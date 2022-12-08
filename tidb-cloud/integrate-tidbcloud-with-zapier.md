@@ -191,7 +191,7 @@ TiDB Cloud triggers provide a polling API call that returns a lot of results. Ho
 
 Since we don’t want to trigger an action multiple times when an item in your API exists in multiple distinct polls, we will deduplicate the data with the `id` field.
 
-`New Cluster` and `New Table` can simply use the `cluster_id` and `table_id` as `id` field to do the deduplication. You need not do anything for them. Here I will introduce other triggers.
+`New Cluster` and `New Table` triggers simply use the `cluster_id` or `table_id` as the `id` field to do the deduplication. You do not need to do anything for the two triggers.
 
 **New Row Trigger**
 
