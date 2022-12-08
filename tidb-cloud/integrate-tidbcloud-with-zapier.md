@@ -189,7 +189,7 @@ Zapier triggers can work with a polling API call to check for new data periodica
 
 TiDB Cloud triggers provide a polling API call that returns a lot of results. However, most of the results have been seen by Zapier before, that is, most of the results are duplication.
 
-Since we don’t want to trigger an action multiple times when an item in your API exists in multiple distinct polls, we will deduplicate the data with the `id` field.
+Since we don’t want to trigger an action multiple times when an item in your API exists in multiple distinct polls, TiDB Cloud triggers deduplicate the data with the `id` field.
 
 `New Cluster` and `New Table` triggers simply use the `cluster_id` or `table_id` as the `id` field to do the deduplication. You do not need to do anything for the two triggers.
 
