@@ -30,6 +30,8 @@ However, some drivers and ORMs do not use the system root CA stores. In those ca
 > However, TiDB Serverless Tier ensures always using a CA root certificate that is commonly available, which is provided in all common systems.
 >
 > If you really need the CA certificate of a TiDB Serverless Tier cluster, it is recommended that you download the [Mozilla CA Certificate bundle](https://curl.se/docs/caextract.html) instead of the single CA certificate in case we change the CA in the future.
+>
+> If you are using some GUI clients, like DBeaver, which does not accept a cert file with multiple certs inside. In such a case, you have to download the ([ISRG Root X1](https://letsencrypt.org/certs/isrgrootx1.pem.txt)) certificate. Please note that we may change CA in the future.
 
 ## How do I connect to a TiDB Serverless Tier cluster in TLS connection?
 
