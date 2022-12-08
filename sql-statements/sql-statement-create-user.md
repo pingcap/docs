@@ -54,7 +54,7 @@ Query OK, 1 row affected (0.02 sec)
 Create a user who is enforced to log in using TLS connection.
 
 ```sql
-CREATE USER 'newuser3'@'%' REQUIRE SSL IDENTIFIED BY 'newuserpassword';
+CREATE USER 'newuser3'@'%' IDENTIFIED BY 'newuserpassword' REQUIRE SSL;
 Query OK, 1 row affected (0.02 sec)
 ```
 
