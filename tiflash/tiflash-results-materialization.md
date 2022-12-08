@@ -7,11 +7,11 @@ summary: Learn how to save the query results of TiFlash in a transaction.
 
 > **Warning:**
 >
-> This is an experimental feature, which might be changed or removed without prior notice. The syntax and implementation might change before GA. If you find a bug, you can report an [issue](https://github.com/pingcap/tidb/issues) in GitHub.
+> This is an experimental feature, which might be changed or removed without prior notice. The syntax and implementation might be modified before GA. If you encounter any problems, you can report an [issue](https://github.com/pingcap/tidb/issues) on GitHub.
 
 This document introduces how to save the TiFlash query result to a specified TiDB table in an `INSERT INTO SELECT` transaction.
 
-Starting from v6.5.0, TiDB supports saving TiFlash query results in tables, that is, TiFlash query result materialization. During the execution of the `INSERT INTO SELECT` statement, if TiDB pushes down the `SELECT` subquery to TiFlash, the TiFlash query result can be saved to a TiDB table specified in `INSERT INTO`. For TiDB versions earlier than v6.5.0, the TiFlash query results are read-only, so if you want to save TiFlash query results, you have to obtain them from the application level, and then save them in a separate transaction or process.
+Starting from v6.5.0, TiDB supports saving TiFlash query results in a table, that is, TiFlash query result materialization. During the execution of the `INSERT INTO SELECT` statement, if TiDB pushes down the `SELECT` subquery to TiFlash, the TiFlash query result can be saved to a TiDB table specified in the `INSERT INTO` clause. For TiDB versions earlier than v6.5.0, the TiFlash query results are read-only, so if you want to save TiFlash query results, you have to obtain them from the application level, and then save them in a separate transaction or process.
 
 > **Note:**
 >
@@ -34,7 +34,7 @@ assignment:
     assignment [, assignment] ...
 ```
 
-For example, you can save the query result from table `t1` in the `SELECT` clause to table `t2` with the following `INSERT INTO SELECT` statement:
+For example, you can save the query result from table `t1` in the `SELECT` clause to table `t2` using the following `INSERT INTO SELECT` statement:
 
 ```sql
 INSERT INTO t2 (name, country)
@@ -49,18 +49,18 @@ SELECT app_name, country FROM t1;
 
 - Serving online applications with TiFlash
 
-    The number of concurrent requests supported by TiFlash depends on the volume of data and complexity of the queries, but it typically does not exceed 100 QPS. You can use `INSERT INTO SELECT` to save TiFlash query results, and then use the query result tables to support highly concurrent online requests. The data in result tables can be updated in the background at a low frequency (for example, at an interval of 0.5 second), which is well below the TiFlash concurrency limit, while still maintaining a high level of data freshness.
+    The number of concurrent requests supported by TiFlash depends on the volume of data and complexity of the queries, but it typically does not exceed 100 QPS. You can use `INSERT INTO SELECT` to save TiFlash query results, and then use the query result table to support highly concurrent online requests. The data in the result table can be updated in the background at a low frequency (for example, at an interval of 0.5 second), which is well below the TiFlash concurrency limit, while still maintaining a high level of data freshness.
 
 ## Execution process
 
-* During the execution of the `INSERT INTO SELECT` statement, TiFlash first returns the query results of the `SELECT` clause to a TiDB server node in the cluster, and then writes the results to the target table (which can have a TiFlash replica).
+* During the execution of the `INSERT INTO SELECT` statement, TiFlash first returns the query results of the `SELECT` clause to a TiDB server in the cluster, and then writes the results to the target table, which can have a TiFlash replica.
 * The execution of the `INSERT INTO SELECT` statement guarantees ACID properties.
 
 ## Restrictions
 
 <CustomContent platform="tidb">
 
-* The TiDB memory limit on the `INSERT INTO SELECT` statement can be adjusted using the system variable [`tidb_mem_quota_query`](/system-variables.md#tidb_mem_quota_query). Starting from v6.5.0, it is not recommended to use [txn-total-size-limit](/tidb-configuration-file.md#txn-total-size-limit) to control transaction memory size.
+* The TiDB memory limit on the `INSERT INTO SELECT` statement can be adjusted using the system variable [`tidb_mem_quota_query`](/system-variables.md#tidb_mem_quota_query). Starting from v6.5.0, it is not recommended to use [`txn-total-size-limit`](/tidb-configuration-file.md#txn-total-size-limit) to control transaction memory size.
 
     For more information, see [TiDB memory control](/configure-memory-usage.md).
 
@@ -68,7 +68,7 @@ SELECT app_name, country FROM t1;
 
 <CustomContent platform="tidb-cloud">
 
-* The TiDB memory limit on the `INSERT INTO SELECT` statement can be adjusted using the system variable [`tidb_mem_quota_query`](/system-variables.md#tidb_mem_quota_query). Starting from v6.5.0, it is not recommended to use [txn-total-size-limit](https://docs.pingcap.com/tidb/stable/tidb-configuration-file#txn-total-size-limit) to control transaction memory size.
+* The TiDB memory limit on the `INSERT INTO SELECT` statement can be adjusted using the system variable [`tidb_mem_quota_query`](/system-variables.md#tidb_mem_quota_query). Starting from v6.5.0, it is not recommended to use [`txn-total-size-limit`](https://docs.pingcap.com/tidb/stable/tidb-configuration-file#txn-total-size-limit) to control transaction memory size.
 
     For more information, see [TiDB memory control](https://docs.pingcap.com/tidb/stable/configure-memory-usage).
 
