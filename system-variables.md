@@ -3748,8 +3748,7 @@ For details, see [Identify Slow Queries](/identify-slow-queries.md).
 
 > **Warning:**
 >
-> Currently,`tidb_store_batch_size` is not stable yet. This variable may be removed in the future, it is not recommended that you use it in production environments.
-> Suggest to use the default value.
+> Currently, `tidb_store_batch_size` is not stable yet. This variable might be removed in a future release. It is not recommended that you use it in production environments. It is not recommended to change the default value.
 
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
