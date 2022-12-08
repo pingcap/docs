@@ -3748,7 +3748,7 @@ For details, see [Identify Slow Queries](/identify-slow-queries.md).
 
 > **Warning:**
 >
-> Currently,`tidb_store_batch_size` is an experimental feature. It is not recommended that you use it in production environments.
+> Currently,`tidb_store_batch_size` is an experimental feature. This variable may be removed in the future, it is not recommended that you use it in production environments.
 
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
