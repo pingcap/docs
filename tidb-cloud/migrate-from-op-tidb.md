@@ -10,8 +10,10 @@ This document describes how to migrate data from your on-premises (OP) TiDB clus
 The overall procedure is as follows:
 
 1. Build the environment and prepare the tools
-2. Perform full data migration: OP TiDB (Dumpling) --> Amazon S3 --> (Import) TiDB Cloud
-3. Perform incremental data replication: OP TiDB --> TiCDC --> TiDB Cloud
+2. Perform full data migration. The process is as follows:
+   1. Use Dumpling to export data from OP TiDB to Amazon S3.
+   2. Import from Amazon S3 to TiDB Cloud.
+3. Perform incremental data replication by using TiCDC.
 4. Verify the migrated data
 
 ## Prerequisites
