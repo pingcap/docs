@@ -49,7 +49,7 @@ For instructions about how to create a VPC, see [Creating a VPC](https://docs.aw
 
 ![Create VPC](/media/tidb-cloud/aws-dms-from-oracle-to-tidb-1.png)
 
-## Step 2. Create Oracle DB instanc
+## Step 2. Create Oracle DB instance
 
 Create an Oracle DB instance in VPC, and remember the password and give it public access. You must enable public access to use the AWS Schema Conversion Tool. Note that giving public access in the product environment is not a best practice.
 
