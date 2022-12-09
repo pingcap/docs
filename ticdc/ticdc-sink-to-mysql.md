@@ -1,15 +1,15 @@
 ---
-title: 同步数据到 MySQL 兼容数据库
-summary: 了解如何使用 TiCDC 将数据同步到 TiDB 或 MySQL
+title: Replicate Data to MySQL-compatible Databases
+summary: Learn how to replicate data to TiDB or MySQL using TiCDC.
 ---
 
-# 同步数据到 MySQL 兼容数据库
+# Replicate Data to MySQL-compatible Databases
 
-本文介绍如何使用 TiCDC 创建一个将增量数据复制到下游 TiDB 数据库，或其他兼容 MySQL 协议数据库的 Changefeed。同时介绍了如何使用 TiCDC 灾难场景的最终一致性复制功能。
+This document describes how to replicate incremental data to the downstream TiDB database or other MySQL-compatible databases using TiCDC. It also introduces how to use the eventually consistent replication feature in disaster scenarios.
 
-## 创建同步任务，复制增量数据到 MySQL 兼容数据库
+## Create a replication task
 
-使用以下命令来创建同步任务：
+Create a replication task by running the following command:
 
 ```shell
 cdc cli changefeed create \
@@ -24,100 +24,100 @@ ID: simple-replication-task
 Info: {"sink-uri":"mysql://root:123456@127.0.0.1:3306/","opts":{},"create-time":"2020-03-12T22:04:08.103600025+08:00","start-ts":415241823337054209,"target-ts":0,"admin-job-type":0,"sort-engine":"unified","sort-dir":".","config":{"case-sensitive":true,"filter":{"rules":["*.*"],"ignore-txn-start-ts":null,"ddl-allow-list":null},"mounter":{"worker-num":16},"sink":{"dispatchers":null},"scheduler":{"type":"table-number","polling-time":-1}},"state":"normal","history":null,"error":null}
 ```
 
-- `--changefeed-id`：同步任务的 ID，格式需要符合正则表达式 `^[a-zA-Z0-9]+(\-[a-zA-Z0-9]+)*$`。如果不指定该 ID，TiCDC 会自动生成一个 UUID（version 4 格式）作为 ID。
-- `--sink-uri`：同步任务下游的地址，详见 [Sink URI 配置 `mysql`/`tidb`](#sink-uri-配置-mysqltidb)。
-- `--start-ts`：指定 changefeed 的开始 TSO。TiCDC 集群将从这个 TSO 开始拉取数据。默认为当前时间。
-- `--target-ts`：指定 changefeed 的目标 TSO。TiCDC 集群拉取数据直到这个 TSO 停止。默认为空，即 TiCDC 不会自动停止。
-- `--config`：指定 changefeed 配置文件，详见：[TiCDC Changefeed 配置参数](/ticdc/ticdc-changefeed-config.md)。
+- `--changefeed-id`: The ID of the replication task. The format must match the `^[a-zA-Z0-9]+(\-[a-zA-Z0-9]+)*$` regular expression. If this ID is not specified, TiCDC automatically generates a UUID (the version 4 format) as the ID.
+- `--sink-uri`: The downstream address of the replication task. For details, see [Configure sink URI with `mysql`/`tidb`](#configure-sink-uri-with-mysqltidb).
+- `--start-ts`: Specifies the starting TSO of the changefeed. From this TSO, the TiCDC cluster starts pulling data. The default value is the current time.
+- `--target-ts`: Specifies the ending TSO of the changefeed. To this TSO, the TiCDC cluster stops pulling data. The default value is empty, which means that TiCDC does not automatically stop pulling data.
+- `--config`: Specifies the changefeed configuration file. For details, see [TiCDC Changefeed Configuration Parameters](/ticdc/ticdc-changefeed-config.md).
 
-## Sink URI 配置 `mysql`/`tidb`
+## Configure sink URI with `mysql`/`tidb`
 
-Sink URI 用于指定 TiCDC 目标系统的连接信息，遵循以下格式：
+Sink URI is used to specify the connection information of the target system of TiCDC. The format is as follows:
 
 ```
 [scheme]://[userinfo@][host]:[port][/path]?[query_parameters]
 ```
 
-一个通用的配置样例如下所示：
+Sample configuration:
 
 ```shell
 --sink-uri="mysql://root:123456@127.0.0.1:3306/?worker-count=16&max-txn-row=5000&transaction-atomicity=table"
 ```
 
-URI 中可配置的参数如下：
+The following are descriptions of parameters and parameter values that can be configured for the sink URI with `mysql`/`tidb`:
 
-| 参数         | 描述                                             |
+| Parameter/Parameter Value    | Description                                             |
 | :------------ | :------------------------------------------------ |
-| `root`        | 下游数据库的用户名。                             |
-| `123456`       | 下游数据库密码。（可采用 Base64 进行编码）                                     |
-| `127.0.0.1`    | 下游数据库的 IP。                                |
-| `3306`         | 下游数据的连接端口。                                 |
-| `worker-count` | 向下游执行 SQL 的并发度（可选，默认值为 `16`）。       |
-| `max-txn-row`  | 向下游执行 SQL 的 batch 大小（可选，默认值为 `256`）。 |
-| `ssl-ca`       | 连接下游 MySQL 实例所需的 CA 证书文件路径（可选）。 |
-| `ssl-cert`     | 连接下游 MySQL 实例所需的证书文件路径（可选）。 |
-| `ssl-key`      | 连接下游 MySQL 实例所需的证书密钥文件路径（可选）。 |
-| `time-zone`    | 连接下游 MySQL 实例时使用的时区名称，从 v4.0.8 开始生效。（可选。如果不指定该参数，使用 TiCDC 服务进程的时区；如果指定该参数但使用空值，则表示连接 MySQL 时不指定时区，使用下游默认时区）。 |
-| `transaction-atomicity`      | 指定事务的原子性级别（可选，默认值为 `none`）。当该值为 `table` 时 TiCDC 保证单表事务的原子性，当该值为 `none` 时 TiCDC 会拆分单表事务。 |
+| `root`        | The username of the downstream database                              |
+| `123456`       | The password of the downstream database (can be encoded using Base64)                                      |
+| `127.0.0.1`    | The IP address of the downstream database                               |
+| `3306`         | The port for the downstream data                                 |
+| `worker-count` | The number of SQL statements that can be concurrently executed to the downstream (optional, `16` by default)       |
+| `max-txn-row`  | The size of a transaction batch that can be executed to the downstream (optional, `256` by default) |
+| `ssl-ca` | The path of the CA certificate file needed to connect to the downstream MySQL instance (optional)  |
+| `ssl-cert` | The path of the certificate file needed to connect to the downstream MySQL instance (optional) |
+| `ssl-key` | The path of the certificate key file needed to connect to the downstream MySQL instance (optional) |
+| `time-zone` | The time zone used when connecting to the downstream MySQL instance, which is effective since v4.0.8. This is an optional parameter. If this parameter is not specified, the time zone of TiCDC service processes is used. If this parameter is set to an empty value, no time zone is specified when TiCDC connects to the downstream MySQL instance and the default time zone of the downstream is used. |
+| `transaction-atomicity`  |  The atomicity level of a transaction. This is an optional parameter, with the default value of `none`. When the value is `table`, TiCDC ensures the atomicity of a single-table transaction. When the value is `none`, TiCDC splits the single-table transaction.  |
 
-若需要对 Sink URI 中的数据库密码使用 Base64 进行编码，可以参考如下命令：
+To encode the database password in the Sink URI using Base64, use the following command:
 
 ```shell
-echo -n '123456' | base64   # 假设待编码的密码为 123456
+echo -n '123456' | base64   # '123456' is the password to be encoded.
 ```
 
-编码后的密码如下：
+The encoded password is `MTIzNDU2`:
 
 ```shell
 MTIzNDU2
 ```
 
-> **注意：**
+> **Note:**
 >
-> 当 Sink URI 中包含特殊字符时，如 `! * ' ( ) ; : @ & = + $ , / ? % # [ ]`，需要对 URI 特殊字符进行转义处理。你可以使用 [URI Encoder](https://meyerweb.com/eric/tools/dencoder/) 工具对 URI 进行转义。
+> When the sink URI contains special characters such as `! * ' ( ) ; : @ & = + $ , / ? % # [ ]`, you need to escape the special characters, for example, in [URI Encoder](https://meyerweb.com/eric/tools/dencoder/).
 
-## 灾难场景的最终一致性复制
+## Eventually consistent replication in disaster scenarios
 
-从 v6.1.1 版本开始容灾场景下的最终一致性复制功能 GA。TiCDC 支持将上游 TiDB 的增量数据备份到下游集群的 S3 存储或 NFS 文件系统。当上游集群出现了灾难，完全无法使用时，TiCDC 可以将下游集群恢复到最近的一致状态，即提供灾备场景的最终一致性复制能力，确保应用可以快速切换到下游集群，避免数据库长时间不可用，提高业务连续性。
+Starting from v6.1.1, this feature becomes GA. Starting from v5.3.0, TiCDC supports backing up incremental data from an upstream TiDB cluster to S3 storage or an NFS file system of a downstream cluster. When the upstream cluster encounters a disaster and becomes unavailable, TiCDC can restore the downstream data to the recent eventually consistent state. This is the eventually consistent replication capability provided by TiCDC. With this capability, you can switch applications to the downstream cluster quickly, avoiding long-time downtime and improving service continuity.
 
-目前，TiCDC 支持将 TiDB 集群的增量数据复制到 TiDB 或兼容 MySQL 的数据库系统（包括 Aurora、MySQL 和 MariaDB）。当上游发生灾难时，如果 TiCDC 正常运行且上游 TiDB 集群没有出现数据复制延迟大幅度增加的情况，下游集群可以在 5 分钟之内恢复集群，并且最多丢失出现问题前 10 秒钟的数据，即 RTO <= 5 mins, P95 RPO <= 10s。
+Currently, TiCDC can replicate incremental data from a TiDB cluster to another TiDB cluster or a MySQL-compatible database system (including Aurora, MySQL, and MariaDB). In case the upstream cluster crashes, TiCDC can restore data in the downstream cluster within 5 minutes, given the conditions that before the disaster the replication status of TiCDC is normal and the replication lag is small. It allows data loss of 10s at most, that is, RTO <= 5 min, and P95 RPO <= 10s.
 
-当上游 TiDB 集群出现以下情况时，会导致 TiCDC 延迟上升，进而影响 RPO：
+TiCDC replication lag increases in the following scenarios:
 
-- TPS 短时间内大幅度上升
-- 上游出现大事务或者长事务
-- Reload 或 Upgrade 上游 TiKV 集群或 TiCDC 集群
-- 执行耗时很长的 DDL 语句，例如：add index
-- 使用过于激进的 PD 调度策略，导致频繁 region leader 迁移或 region merge/split
+- The TPS increases significantly in a short time.
+- Large or long transactions occur in the upstream.
+- The TiKV or TiCDC cluster in the upstream is reloaded or upgraded.
+- Time-consuming DDL statements, such as `add index`, are executed in the upstream.
+- The PD is configured with aggressive scheduling strategies, resulting in frequent transfer of Region leaders, or frequent Region merge or Region split.
 
-### 使用前提
+### Prerequisites
 
-- 准备好具有高可用的 S3 存储或 NFS 系统，用于存储 TiCDC 的实时增量数据备份文件，在上游发生灾难情况下该文件存储可以访问。
-- TiCDC 对需要具备灾难场景最终一致性的 changefeed 开启该功能，开启方式是在 changefeed 配置文件中增加以下配置：
+- Prepare a highly available Amazon S3 storage or NFS system for storing TiCDC's real-time incremental data backup files. These files can be accessed in case of an primary cluster disaster.
+- Enable this feature for changefeeds that need to have eventual consistency in disaster scenarios. To enable it, you can add the following configuration to the changefeed configuration file.
 
 ```toml
 [consistent]
-# 一致性级别，选项有：
-# - none： 默认值，非灾难场景，只有在任务指定 finished-ts 情况下保证最终一致性。
-# - eventual： 使用 redo log，提供上游灾难情况下的最终一致性。
+# Consistency level. Options include:
+# - none: the default value. In a non-disaster scenario, eventual consistency is only guaranteed if and only if finished-ts is specified.
+# - eventual: Uses redo log to guarantee eventual consistency in case of the primary cluster disasters.
 level = "eventual"
 
-# 单个 redo log 文件大小，单位 MiB，默认值 64，建议该值不超过 128。
+# Individual redo log file size, in MiB. By default, it's 64. It is recommended to be no more than 128.
 max-log-size = 64
 
-# 刷新或上传 redo log 至 S3 的间隔，单位毫秒，默认 1000，建议范围 500-2000。
+# The interval for flushing or uploading redo logs to S3, in milliseconds. By default, it's 1000. The recommended range is 500-2000.
 flush-interval = 1000
 
-# 存储 redo log 的形式，包括 nfs（NFS 目录），S3（上传至S3）
+# Form of storing redo log, including nfs (NFS directory) and S3 (uploading to S3).
 storage = "s3://logbucket/test-changefeed?endpoint=http://$S3_ENDPOINT/"
 ```
 
-### 灾难恢复
+### Disaster recovery
 
-当上游发生灾难后，需要通过 `cdc redo` 命令在下游手动恢复。恢复流程如下：
+When a disaster happens in the primary cluster, you need to recover manually in the secondary cluster by running the `cdc redo` command. The recovery process is as follows.
 
-1. 确保 TiCDC 进程已经退出，防止在数据恢复过程中上游恢复服务，TiCDC 重新开始同步数据。
-2. 使用 cdc binary 进行数据恢复，具体命令如下：
+1. Ensure that all the TiCDC processes have exited. This is to prevent the primary cluster from resuming service during data recovery and prevent TiCDC from restarting data synchronization.
+2. Use cdc binary for data recovery. Run the following command:
 
 ```shell
 cdc redo apply --tmp-dir="/tmp/cdc/redo/apply" \
@@ -125,8 +125,8 @@ cdc redo apply --tmp-dir="/tmp/cdc/redo/apply" \
     --sink-uri="mysql://normal:123456@10.0.10.55:3306/"
 ```
 
-以上命令中：
+In this command:
 
-- `tmp-dir`：指定用于下载 TiCDC 增量数据备份文件的临时目录。
-- `storage`：指定存储 TiCDC 增量数据备份文件的地址，为 S3 或者 NFS 目录。
-- `sink-uri`：数据恢复的目标地址。scheme 仅支持 `mysql`。
+- `tmp-dir`: Specifies the temporary directory for downloading TiCDC incremental data backup files.
+- `storage`: Specifies the address for storing the TiCDC incremental data backup files, either an Amazon S3 storage or an NFS directory.
+- `sink-uri`: Specifies the secondary cluster address to restore the data to. Scheme can only be `mysql`.

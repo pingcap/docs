@@ -241,10 +241,10 @@ In v6.3.0-DMR, the key new features and improvements are as follows:
 | PD | [enable-diagnostic](/pd-configuration-file.md#enable-diagnostic-new-in-v630) | Newly added | Controls whether to enable the diagnostic feature. The default value is `false`. |
 | TiFlash | [`dt_enable_read_thread`](/tiflash/tiflash-configuration.md#configure-the-tiflash-learnertoml-file) | Deprecated | Since v6.3.0, this configuration item is deprecated. The thread pool is used to handle read requests from the storage engine by default and cannot be disabled. |
 | DM | [`safe-mode-duration`](/dm/task-configuration-file-full.md#task-configuration-file-template-advanced) | Newly added | Specifies the duration of the automatic safe mode. |
-| TiCDC | [`enable-sync-point`](/ticdc/manage-ticdc.md#task-configuration-file) | Newly added | Specifies whether to enable the Syncpoint feature. |
-| TiCDC | [`sync-point-interval`](/ticdc/manage-ticdc.md#task-configuration-file) | Newly added | Specifies the interval at which Syncpoint aligns the upstream and downstream snapshots. |
-| TiCDC | [`sync-point-retention`](/ticdc/manage-ticdc.md#task-configuration-file) | Newly added | Specifies how long the data is retained by Syncpoint in the downstream table. When this duration is exceeded, the data is cleaned up. |
-| TiCDC | [`sink-uri.memory`](/ticdc/manage-ticdc.md#create-a-replication-task) | Deprecated | The `memory` sorting is deprecated. It is not recommended to use it in any situation. You can use the `unified` sorting instead. |
+| TiCDC | [`enable-sync-point`](/ticdc/ticdc-changefeed-config.md#changefeed-configuration-parameters) | Newly added | Specifies whether to enable the Syncpoint feature. |
+| TiCDC | [`sync-point-interval`](/ticdc/ticdc-changefeed-config.md#changefeed-configuration-parameters) | Newly added | Specifies the interval at which Syncpoint aligns the upstream and downstream snapshots. |
+| TiCDC | [`sync-point-retention`](/ticdc/ticdc-changefeed-config.md#changefeed-configuration-parameters) | Newly added | Specifies how long the data is retained by Syncpoint in the downstream table. When this duration is exceeded, the data is cleaned up. |
+| TiCDC | [`sink-uri.memory`](/ticdc/ticdc-changefeed-config.md#changefeed-cli-parameters) | Deprecated | The `memory` sorting is deprecated. It is not recommended to use it in any situation. You can use the `unified` sorting instead. |
 
 ### Others
 

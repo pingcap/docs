@@ -66,7 +66,7 @@ Currently, the TiCDC sink component supports replicating data to the following d
 
     > **Note:**
     >
-    > Since v6.2, you can use the sink uri parameter [`transaction-atomicity`](/ticdc/manage-ticdc.md#configure-sink-uri-with-mysqltidb) to control whether to split single-table transactions. Splitting single-table transactions can greatly reduce the latency and memory consumption of replicating large transactions.
+    > Since v6.2, you can use the sink uri parameter [`transaction-atomicity`](/ticdc/ticdc-sink-to-mysql.md.md#configure-sink-uri-with-mysqltidb) to control whether to split single-table transactions. Splitting single-table transactions can greatly reduce the latency and memory consumption of replicating large transactions.
 
 - Kafka sink
 
@@ -87,7 +87,7 @@ TiCDC only replicates the table that has at least one **valid index**. A **valid
     - Every column of the index is explicitly defined as non-nullable (`NOT NULL`).
     - The index does not have the virtual generated column (`VIRTUAL GENERATED COLUMNS`).
 
-Since v4.0.8, TiCDC supports replicating tables **without a valid index** by modifying the task configuration. However, this compromises the guarantee of data consistency to some extent. For more details, see [Replicate tables without a valid index](/ticdc/manage-ticdc.md#replicate-tables-without-a-valid-index).
+Since v4.0.8, TiCDC supports replicating tables **without a valid index** by modifying the task configuration. However, this compromises the guarantee of data consistency to some extent. For more details, see [Replicate tables without a valid index](/ticdc/ticdc-manage-changefeed.md#replicate-tables-without-a-valid-index).
 
 ### Unsupported scenarios
 
