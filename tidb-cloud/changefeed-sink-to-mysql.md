@@ -78,7 +78,7 @@ The **Sink to MySQL** connector can only sink incremental data from your TiDB cl
 
 After completing the prerequisites, you can sink your data to MySQL.
 
-1. Navigate to the **Changefeed** tab of your TiDB cluster.
+1. Navigate to the **Data Replication** tab of your TiDB cluster and click the **Changefeed** tab.
 2. Click **Sink to MySQL**.
 3. Fill in the MySQL URL, user, and password.
     - If you already have data in your TiDB Cluster, you must fill in a specific TSO number that Dumpling provides.

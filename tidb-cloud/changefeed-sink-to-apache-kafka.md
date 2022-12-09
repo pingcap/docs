@@ -49,8 +49,9 @@ For example, if your Kafka cluster is in Confluent Cloud, you can see [Resources
 
 1. In the TiDB Cloud console, navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page for your project.
 2. Click the name of the cluster that you want to create a changefeed for.
-3. Click the **Changefeed** tab.
-4. Click **Sink to Apache Kafka**.
+3. Click the **Data Replication** tab.
+4. Click the **Changefeed** tab.
+5. Click **Sink to Apache Kafka**.
 
 ## Step 2. Configure the changefeed target
 
@@ -128,7 +129,7 @@ If you find any error, you can go back to fix the error. If there is no error, y
 
 ## Manage the changefeed
 
-After a changefeed is created, you can navigate to the **Changefeed** tab of your TiDB cluster and click **Sink to Apache Kafka** to open the **Changefeed Detail** dialog.
+After a changefeed is created, you can navigate to the **Data Replication** tab of your TiDB cluster, click the **Changefeed** tab, and click **Sink to Apache Kafka** to open the **Changefeed Detail** dialog.
 
 In the **Changefeed Detail** dialog, you can manage the changefeed as follows:
 

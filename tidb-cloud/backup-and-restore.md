@@ -22,7 +22,7 @@ Automatic backups are scheduled for your TiDB clusters according to the backup s
 
 By the automatic backup, you can back up the cluster data every day at the backup time you have set. To set the backup time, perform the following steps:
 
-1. Navigate to the **Backup** tab of a cluster.
+1. Navigate to the **Backup** tab (on the left navigation) of a cluster.
 
 2. Click **Backup Settings**. The setting window displays.
 
@@ -72,7 +72,7 @@ Manual backups are user-initiated backups that enable you to back up your data t
 
 To apply a manual backup to your TiDB cluster, perform the following steps:
 
-1. Navigate to the **Backup** tab of a cluster.
+1. Navigate to the **Backup** tab (on the left navigation) of a cluster.
 
 2. Click **Manual** on the upper right.
 
@@ -84,7 +84,7 @@ To apply a manual backup to your TiDB cluster, perform the following steps:
 
 To delete an existing backup file, perform the following steps:
 
-1. Navigate to the **Backup** tab of a cluster.
+1. Navigate to the **Backup** tab (on the left navigation) of a cluster.
 
 2. Click **Delete** for the backup file that you want to delete.
 
@@ -92,7 +92,7 @@ To delete an existing backup file, perform the following steps:
 
 To delete a running backup job, it is similar as [**Delete backup files**](#delete-backup-files).
 
-1. Navigate to the **Backup** tab of a cluster.
+1. Navigate to the **Backup** tab (on the left navigation) of a cluster.
 
 2. Click **Delete** for the backup file that is in the **Pending** or **Running** state.
 
@@ -113,7 +113,7 @@ TiDB Cloud provides two types of data restoration:
 
 To restore your TiDB cluster data from a backup to a new cluster, take the following steps:
 
-1. Navigate to the **Backup** tab of a cluster.
+1. Navigate to the **Backup** tab (on the left navigation) of a cluster.
 
 2. Click **Restore**. The setting window displays.
 

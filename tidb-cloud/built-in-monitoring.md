@@ -15,9 +15,8 @@ TiDB Cloud collects and displays a full set of standard metrics of your cluster 
 
 To view the metrics on the Monitoring page, take the following steps:
 
-1. Navigate to the **Diagnosis** tab of a cluster.
-
-2. Click the **Monitoring** tab.
+1. On the [**Clusters**](https://tidbcloud.com/console/clusters) page, click the name of the target cluster. The cluster overview page is displayed.
+2. Click the **Monitoring** tab on the left navigation.
 
 ## Monitoring metrics
 
