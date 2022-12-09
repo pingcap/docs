@@ -123,7 +123,7 @@
     -   [概要](/tidb-cloud/monitor-tidb-cluster.md)
     -   [ビルトインモニタリング](/tidb-cloud/built-in-monitoring.md)
     -   [組み込みアラート](/tidb-cloud/monitor-built-in-alerting.md)
-    -   [サードパーティの監視統合](/tidb-cloud/third-party-monitoring-integrations.md)
+    -   [サードパーティ監視の統合](/tidb-cloud/third-party-monitoring-integrations.md)
 -   パフォーマンスの調整
     -   [概要](/tidb-cloud/tidb-cloud-tune-performance-overview.md)
     -   パフォーマンスを分析する
@@ -153,7 +153,7 @@
                 -   [パーティションのプルーニング](/partition-pruning.md)
                 -   [TopN とリミット プッシュ ダウン](/topn-limit-push-down.md)
                 -   [結合したテーブルの再配置](/join-reorder.md)
-            -   物理的最適化
+            -   物理的な最適化
                 -   [概要](/sql-physical-optimization.md)
                 -   [インデックスの選択](/choose-index.md)
                 -   [統計](/statistics.md)
@@ -199,6 +199,7 @@
         -   [バックアップ リソースを使用する](/tidb-cloud/terraform-use-backup-resource.md)
         -   [復元リソースを使用](/tidb-cloud/terraform-use-restore-resource.md)
     -   [ヴェルセル](/tidb-cloud/integrate-tidbcloud-with-vercel.md)
+    -   [ザピア](/tidb-cloud/integrate-tidbcloud-with-zapier.md)
 -   参照
     -   TiDBクラスタのアーキテクチャ
         -   [概要](/tidb-architecture.md)

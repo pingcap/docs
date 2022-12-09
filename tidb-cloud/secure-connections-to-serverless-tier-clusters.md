@@ -25,11 +25,13 @@ TiDB Serverless Tier は、クライアントと TiDB Serverless Tier クラス�
 
 > **ノート：**
 >
-> TiDB Serverless Tier は CA ルート証明書のダウンロードを提供しません。これは、同じ CA が将来証明書を発行するために使用されることを保証しないためです。これにより、CA ルート証明書が変更されます。
+> TiDB Serverless Tier は CA ルート証明書のダウンロードを提供しません。これは、同じ CA が将来証明書を発行するために使用され、CA ルート証明書が変更されることを保証しないためです。
 >
 > ただし、TiDB Serverless Tier は、すべての一般的なシステムで提供されている一般的に利用可能な CA ルート証明書を常に使用することを保証します。
 >
 > TiDB Serverless Tier クラスターの CA 証明書が本当に必要な場合は、将来 CA を変更する場合に備えて、単一の CA 証明書ではなく[Mozilla CA 証明書バンドル](https://curl.se/docs/caextract.html)をダウンロードすることをお勧めします。
+>
+> 内部に複数の証明書を含む証明書ファイルを受け入れない DBeaver などの GUI クライアントを使用している場合は、 [ISRGルートX1](https://letsencrypt.org/certs/isrgrootx1.pem.txt)の証明書をダウンロードする必要があります。
 
 ## TLS 接続で TiDB Serverless Tier クラスターに接続するにはどうすればよいですか? {#how-do-i-connect-to-a-tidb-serverless-tier-cluster-in-tls-connection}
 
@@ -160,8 +162,15 @@ host: '<host>', port: 4000,user: '<username>', password: '<your_password>', data
 /etc/ssl/ca-bundle.pem
 ```
 
+**ウィンドウズ**
+
+Windows は、CA ルートへの特定のパスを提供しません。代わりに、 [レジストリ](https://learn.microsoft.com/en-us/windows-hardware/drivers/install/local-machine-and-current-user-certificate-stores)を使用して証明書を保存します。このため、Windows で CA ルート パスを指定するには、次の手順を実行します。
+
+1.  [Mozilla CA 証明書バンドル](https://curl.se/docs/caextract.html)をダウンロードし、 `<path_to_mozilla_ca_cert_bundle>`などの任意のパスに保存します。
+2.  Serverless Tier クラスターに接続するときは、パス ( `<path_to_mozilla_ca_cert_bundle>` ) を CA ルート パスとして使用します。
+
 ## TiDB Serverless Tier はクライアントの身元を確認できますか? {#can-tidb-serverless-tier-verify-the-client-s-identity}
 
 いいえ。
 
-現在、TiDB Serverless Tier は一方向 TLS 認証を使用しています。つまり、クライアントのみがパブリック証明書ペアを使用してサーバーを検証し、サーバーはクライアントを検証しません。たとえば、MySQL CLI クライアントを使用する場合、接続文字列で`--ssl-cert`または`--ssl-key`を構成することはできません。
+現在、TiDB Serverless Tier は一方向の TLS 認証を使用しています。つまり、クライアントのみがパブリック証明書ペアを使用してサーバーを検証し、サーバーはクライアントを検証しません。たとえば、MySQL CLI クライアントを使用する場合、接続文字列で`--ssl-cert`または`--ssl-key`を構成することはできません。
