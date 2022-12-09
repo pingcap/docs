@@ -13,11 +13,9 @@ If you are interested in learning more about TiDB and AWS DMS, you can find some
 - [TiDB Developer Guide](https://docs.pingcap.com/tidbcloud/dev-guide-overview)
 - [AWS DMS Documentation](https://docs.aws.amazon.com/dms/latest/userguide/CHAP_GettingStarted.html)
 
-## What is AWS DMS?
+## Why use AWS DMS?
 
 AWS Database Migration Service (AWS DMS) is a cloud service that makes it possible to migrate relational databases, data warehouses, NoSQL databases, and other types of data stores.
-
-## Why use AWS DMS?
 
 If you want to migrate data from from heterogeneous databases, such as PostgreSQL, Oracle, and SQL Server to TiDB Cloud, it is recommended to use AWS Database Migration Service (AWS DMS).
 
@@ -41,89 +39,107 @@ You might need the following prerequisites:
 - [TiDB Cloud Account](https://tidbcloud.com)
 - [DBeaver](https://dbeaver.io/)
 
-Next, you will learn how to use DMS tools to migrateAmazon RDS for Oracle data to TiDB.
+Next, you will learn how to use DMS tools to migrate data from Amazon RDS for Oracle into TiDB Cloud.
 
 ## Step 1. Create a VPC
 
-Create an AWS VPC. You will need to create Oracle RDS and DMS instances in this VPC later.
+Log in to the [AWS console](https://console.aws.amazon.com/vpc/home#vpcs:) and create an AWS VPC. You will need to create Oracle RDS and DMS instances in this VPC later.
+
+For instructions about how to create a VPC, see [Creating a VPC](https://docs.aws.amazon.com/vpc/latest/userguide/working-with-vpcs.html#Create-VPC).
 
 ![Create VPC](/media/tidb-cloud/aws-dms-from-oracle-to-tidb-1.png)
 
 ## Step 2. Create Oracle RDS
 
-Create an AWS Oracle RDS in VPC, and remember the password and give it public access. You must enable public access to use the AWS Schema Conversion Tool. Note that giving public access in the product environment is not a best practice.
+Create an Oracle DB instance in VPC, and remember the password and give it public access. You must enable public access to use the AWS Schema Conversion Tool. Note that giving public access in the product environment is not a best practice.
+
+For instructions about how to create an Oracle DB instance, see [Creating an Oracle DB instance and connecting to a database on an Oracle DB instance](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_GettingStarted.CreatingConnecting.Oracle.html).
 
 ![Create Oracle RDS](/media/tidb-cloud/aws-dms-from-oracle-to-tidb-2.png)
 
 ## Step 3. Prepare table data in Oracle
 
-In this step, insert some data into Oracle RDS. Use the github event dataset, and you can download the data from [GH Archive](https://gharchive.org/). It contains 10000 rows of data and you can use following SQL script to execute in Oracle.
+In this step, insert some data into Oracle DB instance. Use the github event dataset, and you can download the data from [GH Archive](https://gharchive.org/). It contains 10000 rows of data. You can use following SQL script to execute in Oracle.
 
 - [table_schema_oracle.sql](https://github.com/pingcap-inc/tidb-integration-script/blob/main/aws-dms/oracle_table_schema.sql)
 - [oracle_data.sql](https://github.com/pingcap-inc/tidb-integration-script/blob/main/aws-dms/oracle_data.sql)
 
-After you finish executed the SQL script, you can check the data in Oracle, Here we use [DBeaver](https://dbeaver.io/) to query the data:
+After you finish executing the SQL script, check the data in Oracle. The following example uses [DBeaver](https://dbeaver.io/) to query the data:
 
 ![Oracle RDS Data](/media/tidb-cloud/aws-dms-from-oracle-to-tidb-3.png)
 
-## Step 4. Create TiDB Cloud Serverless Tier
+## Step 4. Create a TiDB Cloud Serverless Tier cluster
 
-After registering and logging in, you can create a free serverless TiDB tier.
+1. Log in to the [TiDB Cloud console](https://tidbcloud.com/console/clusters). Navigate to the **Clusters** page for your project.
 
-![Create TiDB Cloud Serverless Tier](/media/tidb-cloud/aws-dms-from-oracle-to-tidb-4.png)
+2. Create a free serverless TiDB tier.
 
-After the cluster is created, you will see the following, and then click **Security Settings** to set the user password.
+    ![Create TiDB Cloud Serverless Tier](/media/tidb-cloud/aws-dms-from-oracle-to-tidb-4.png)
 
-![Set TiDB Cloud Serverless Tier Password](/media/tidb-cloud/aws-dms-from-oracle-to-tidb-5.png)
+3. After the cluster is created, click **Security Settings** to set the user password.
 
-![Set TiDB Cloud Serverless Tier Password](/media/tidb-cloud/aws-dms-from-oracle-to-tidb-6.png)
+    ![Set TiDB Cloud Serverless Tier Password](/media/tidb-cloud/aws-dms-from-oracle-to-tidb-5.png)
 
-After you fill the password, click the generate and copy to generate password, and importantly remember the generated password. Then, click the submit button.
+    ![Set TiDB Cloud Serverless Tier Password](/media/tidb-cloud/aws-dms-from-oracle-to-tidb-6.png)
 
-Next, click the Connect button, you can see how to connect the serverless TiDB:
+4. Click the **Generate** button and copy to generate the password. Note down the generated password. Then click the **Submit** button.
 
-![Connect to TiDB Cloud Serverless Tier](/media/tidb-cloud/aws-dms-from-oracle-to-tidb-7.png)
+5. Click the **Connect** button to connect the serverless TiDB:
 
-## Step 5. Create AWS DMS Replication Instance
+    ![Connect to TiDB Cloud Serverless Tier](/media/tidb-cloud/aws-dms-from-oracle-to-tidb-7.png)
 
-Create AWS DMS Replication instance with `dms.t3.large` in VPC.
+## Step 5. Create AWS DMS replication instance
 
-![Create AWS DMS Instance](/media/tidb-cloud/aws-dms-from-oracle-to-tidb-8.png)
+1. Go to the [Replication instances](https://console.aws.amazon.com/dms/v2/home#replicationInstances) page in the AWS DMS console, and switch to the corresponding region.
 
-## Step 6. Create DMS Endpoint
+2. Create AWS DMS replication instance with `dms.t3.large` in VPC.
 
-Create Oracle source endpoint and TiDB target endpoint.
+    ![Create AWS DMS Instance](/media/tidb-cloud/aws-dms-from-oracle-to-tidb-8.png)
 
-![Create AWS DMS Source endpoint](/media/tidb-cloud/aws-dms-from-oracle-to-tidb-9.png)
+## Step 6. Create DMS endpoint
 
-![Create AWS DMS Source endpoint](/media/tidb-cloud/aws-dms-from-oracle-to-tidb-10.png)
+1. In the [AWS DMS console](https://console.aws.amazon.com/dms/v2/home), click the replication instance that you just created. 
 
-## Step 7. Migrating Schema
+2. Create the Oracle source endpoint and TiDB target endpoint.
 
-As the [DMS official documentation](https://docs.aws.amazon.com/dms/latest/userguide/CHAP_GettingStarted.SCT.html), we may need to migrate schema using [AWS Schema Conversion Tool](https://docs.aws.amazon.com/SchemaConversionTool/latest/userguide/CHAP_Installing.html#CHAP_Installing.Procedure), but in this example we will let DMS auto handle the schema, since the schema definition is pretty simple.
+    ![Create AWS DMS Source endpoint](/media/tidb-cloud/aws-dms-from-oracle-to-tidb-9.png)
 
-## Step 8. Create DMS Database Migration Task
+    ![Create AWS DMS Source endpoint](/media/tidb-cloud/aws-dms-from-oracle-to-tidb-10.png)
 
-On AWS Management Console, Create DMS Migration Task and specify the **Selection rules**:
+## Step 7. Migrate the schema
 
-![Create AWS DMS migration task](/media/tidb-cloud/aws-dms-from-oracle-to-tidb-11.png)
+In this example, AWS DMS automatically handles the schema, since the schema definition is simple.
 
-![AWS DMS migration task selection rules](/media/tidb-cloud/aws-dms-from-oracle-to-tidb-12.png)
+If you decide to migrate schema using the AWS Schema Conversion Tool, see [Installing AWS SCT](https://docs.aws.amazon.com/SchemaConversionTool/latest/userguide/CHAP_Installing.html#CHAP_Installing.Procedure).
 
-Then create the task, start it, and then wait for the task to finish.
+For more information, see [Migrating your source schema to your target database using AWS SCT](https://docs.aws.amazon.com/dms/latest/userguide/CHAP_GettingStarted.SCT.html).
 
-Then click the **Table statistics** to see the synced table, remember the schema name is ADMIN:
+## Step 8. Create a database migration task
 
-![Check AWS DMS migration task](/media/tidb-cloud/aws-dms-from-oracle-to-tidb-13.png)
+1. In the AWS DMS console, go to the [Data migration tasks](https://console.aws.amazon.com/dms/v2/home#tasks) page. Switch to your region. Then click **Create task** in the upper right corner of the window.
 
-## Step 9. Check data In Downstream TiDB Cloud Serverless Tier
+    ![Create task](/media/tidb-cloud/aws-dms-tidb-cloud/aws-dms-to-tidb-cloud-create-task.png)
 
-Connect to [TiDB Cloud Serverless Tier](https://tidbcloud.com/console/clusters/create-cluster) and check the `admin.github_event` table data, as you can see, DMS successfully synced table github_events and 10000 rows data.
+2. Create a database migration task and specify the **Selection rules**:
+
+    ![Create AWS DMS migration task](/media/tidb-cloud/aws-dms-from-oracle-to-tidb-11.png)
+
+    ![AWS DMS migration task selection rules](/media/tidb-cloud/aws-dms-from-oracle-to-tidb-12.png)
+
+3. Create the task, start it, and then wait for the task to finish.
+
+4. Click the **Table statistics** to see the synced table. The schema name is ADMIN.
+
+    ![Check AWS DMS migration task](/media/tidb-cloud/aws-dms-from-oracle-to-tidb-13.png)
+
+## Step 9. Check data in the downstream TiDB cluster
+
+Connect to [TiDB Cloud Serverless Tier](https://tidbcloud.com/console/clusters/create-cluster) and check the `admin.github_event` table data. As shown in the following screenshot, DMS successfully migrated table `github_events` and 10000 rows of data.
 
 ![Check Data In TiDB](/media/tidb-cloud/aws-dms-from-oracle-to-tidb-14.png)
 
-## Conclusion
+## Limitation
 
-With AWS DMS, you can successfully migrate data from ANY upstream AWS RDS database in this case we used Oracle to [TiDB Cloud Serverless Tier](https://tidbcloud.com/console/clusters/create-cluster) With the following exceptions:
+With AWS DMS, you can successfully migrate data from any upstream AWS RDS database following the example in this document. There is a limitation:
 
-- when you migrate your schema, some charset/collation is not supported in TiDB, such as `utf8mb4_0900_ai_ci`. A complete list of [TiDB supported charset/collation doc can be found here](https://docs.pingcap.com/tidb/v6.3/character-set-and-collation).
+- When you migrate your schema, some character sets or collations are not supported in TiDB, such as `utf8mb4_0900_ai_ci`. For a complete list of TiDB supported charset/collation, see [Character Set and Collation](https://docs.pingcap.com/tidb/stable/character-set-and-collation).
