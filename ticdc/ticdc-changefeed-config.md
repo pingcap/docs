@@ -10,7 +10,7 @@ summary: Learn the definition of CLI and configuration parameters of TiCDC chang
 This section introduces the command-line parameters of TiCDC changefeeds by illustrating how to create a replication (changefeed) task:
 
 ```shell
-cdc cli changefeed create --server=http://10.0.10.25:8300 --sink-uri="mysql://root:123456@127.0.0.1:3306/" --changefeed-id="simple-replication-task" --sort-engine="unified"
+cdc cli changefeed create --server=http://10.0.10.25:8300 --sink-uri="mysql://root:123456@127.0.0.1:3306/" --changefeed-id="simple-replication-task"
 ```
 
 ```shell
