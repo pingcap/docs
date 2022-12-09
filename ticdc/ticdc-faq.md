@@ -121,7 +121,7 @@ cdc cli changefeed create --pd=http://10.0.10.25:2379 --sink-uri="kafka://127.0.
 > * This feature is introduced in TiCDC 4.0.2.
 > * TiCDC currently supports outputting data changes in the Canal format only to MQ sinks such as Kafka.
 
-For more information, refer to [TiCDC changefeed configurations](/ticdc/ticdc-changefeed-config).
+For more information, refer to [TiCDC changefeed configurations](/ticdc/ticdc-changefeed-config.md).
 
 ## Why does the latency from TiCDC to Kafka become higher and higher?
 

@@ -30,7 +30,7 @@ Common filter rules:
 - `rules = ['scm1.tidb_*']`
     - Replicate all tables in the `scm1` database whose names start with `tidb_`
 
-For more information, see [Table filter syntax](table-filter.md#syntax).
+For more information, see [Table filter syntax](/table-filter.md#syntax).
 
 ## Event filter rules <span class="version-mark">New in v6.2.0</span>
 

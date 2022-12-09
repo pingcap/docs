@@ -500,6 +500,7 @@
         - [Replicate Data to Kafka](/ticdc/ticdc-sink-to-kafka.md)
       - [Manage Changefeeds](/ticdc/ticdc-manage-changefeed.md)
       - [Log Filter](/ticdc/ticdc-filter.md)
+      - [Bidirectional Replication](/ticdc/ticdc-bidirectional-replication.md)
     - Monitor and Alert
       - [Monitoring Metrics](/ticdc/monitor-ticdc.md)
       - [Alert Rules](/ticdc/ticdc-alert-rules.md)

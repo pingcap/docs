@@ -7,7 +7,7 @@ summary: Learn how to use the OpenAPI interface to manage the cluster status and
 
 <!-- markdownlint-disable MD024 -->
 
-TiCDC provides the OpenAPI feature for querying and operating the TiCDC cluster, which is similar to the feature of [`cdc cli` tool](/ticdc/ticdc-manage-changefeed).
+TiCDC provides the OpenAPI feature for querying and operating the TiCDC cluster, which is similar to the feature of [`cdc cli` tool](/ticdc/ticdc-manage-changefeed.md).
 
 You can use the APIs to perform the following maintenance operations on the TiCDC cluster:
 

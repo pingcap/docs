@@ -94,7 +94,7 @@ The preceding steps are performed in a lab environment. You can also deploy a cl
     ]
     ```
 
-    For detailed description of `dispatchers` in the configuration file, see [Customize the rules for Topic and Partition dispatchers of Kafka Sink](/ticdc/ticdc-sink-to-kafka.md.md#customize-the-rules-for-topic-and-partition-dispatchers-of-kafka-sink).
+    For detailed description of `dispatchers` in the configuration file, see [Customize the rules for Topic and Partition dispatchers of Kafka Sink](/ticdc/ticdc-sink-to-kafka.md#customize-the-rules-for-topic-and-partition-dispatchers-of-kafka-sink).
 
 2. Create a changefeed to replicate incremental data to Confluent Cloud:
 
