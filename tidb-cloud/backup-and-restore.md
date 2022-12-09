@@ -80,7 +80,7 @@ To apply a manual backup to your TiDB cluster, perform the following steps:
 
 1. Navigate to the **Backup** tab of a cluster.
 
-2. Click **Manual** on the upper right.
+2. Click **Manual Backup** on the upper right.
 
 3. Enter a **Name**.
 
