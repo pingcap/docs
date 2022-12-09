@@ -339,23 +339,40 @@ TiDB 6.5.0 is a Long-Term Support Release (LTS).
 + TiDB
 
     - 对于 `bit` and `char` 类型的列，使 `INFORMATION_SCHEMA.COLUMNS` 的显示结果与 MySQL 一致 [#25472](https://github.com/pingcap/tidb/issues/25472) @[hawkingrei](https://github.com/hawkingrei)
-    - note [#issue](链接) @[贡献者 GitHub ID](链接)
 
 + TiKV
 
-    - note [#issue](链接) @[贡献者 GitHub ID](链接)
+    - `cdc.min-ts-interval` 默认值从 1s 改为 200ms 以降低 CDC 延迟 [#12840](https://github.com/tikv/tikv/issues/12840) @[hicqu](https://github.com/hicqu)
+    - 引入 witness peer [#12876](https://github.com/tikv/tikv/issues/12876) @[Connor1996](https://github.com/Connor1996)
+    - 当剩余空间不足时停止 Raft Engine 的写入以避免硬盘空间耗尽 [#13642](https://github.com/tikv/tikv/issues/13642) @[jiayang-zheng](https://github.com/jiayang-zheng)
+    - 实现 `json_valid` 函数下推 [#13571](https://github.com/tikv/tikv/issues/13571) @[lizhenhuan](https://github.com/lizhenhuan)
+    - 支持在一个备份请求中同时备份多个范围的数据 [#13701](https://github.com/tikv/tikv/issues/13701) @[Leavrth](https://github.com/Leavrth)
+    - 更新 rusoto 库以支持备份到 ap-southeast-3 [#13751](https://github.com/tikv/tikv/issues/13751) @[3pointer](https://github.com/3pointer)
+    - 减少悲观事务冲突 [#13298](https://github.com/tikv/tikv/issues/13298) @[MyonKeminta](https://github.com/MyonKeminta)
+    - 缓存外部存储对象以提升恢复性能 [#13798](https://github.com/tikv/tikv/issues/13798) @[YuJuncen](https://github.com/YuJuncen)
+    - 在专用线程中运行 CheckLeader 以缩短 TiCDC 的复制延迟 [#13774](https://github.com/tikv/tikv/issues/13774) @[overvenus](https://github.com/overvenus)
+    - Checkpoint 支持拉取模式 [#13824](https://github.com/tikv/tikv/issues/13824) @[YuJuncen](https://github.com/YuJuncen)
+    - 升级 crossbeam-channel 以优化发送端的自旋问题 [#13815](https://github.com/tikv/tikv/issues/13815) @[sticnarf](https://github.com/sticnarf)
+    - Coprocessor 支持批量处理 [#13849](https://github.com/tikv/tikv/issues/13849) @[cfzjywxk](https://github.com/cfzjywxk)
+    - 故障恢复时通知 TiKV 唤醒休眠的 region 以减少等待时间 [#13648](https://github.com/tikv/tikv/issues/13648) @[LykxSassinator](https://github.com/LykxSassinator)
+    - 通过代码优化减少内存申请 [#13836](https://github.com/tikv/tikv/pull/13836) @[BusyJay](https://github.com/BusyJay)
+    - 引入 raft extension 以提升代码可扩展性 [#13864](https://github.com/tikv/tikv/pull/13864) @[BusyJay](https://github.com/BusyJay)
+    - 通过引入 `hint_min_ts` 加速 flashback [#13842](https://github.com/tikv/tikv/pull/13842)  @[JmPotato](https://github.com/JmPotato)
     - tikv-ctl 支持查询某个 key 范围中包含哪些 Region  [#13768](https://github.com/tikv/tikv/pull/13768) [@HuSharp](https://github.com/HuSharp)
     - 改进持续对特定行只加锁但不更新情况下的读写性能 [#13694](https://github.com/tikv/tikv/issues/13694) [@sticnarf](https://github.com/sticnarf)
+
 + PD
 
-    - note [#issue](链接) @[贡献者 GitHub ID](链接)
-    - note [#issue](链接) @[贡献者 GitHub ID](链接)
+    - 优化锁的粒度以减少锁争用，提升高并发下心跳的处理能力 [#5586](https://github.com/tikv/pd/issues/5586) @[rleungx](https://github.com/rleungx)
+    - 优化调度器在大规模集群下的性能问题，提升调度策略生产速度 [#5473](https://github.com/tikv/pd/issues/5473) @[bufferflies](https://github.com/bufferflies)
+    - 增加 btree 的泛型性支持 [#5606](https://github.com/tikv/pd/issues/5606) @[rleungx](https://github.com/rleungx)
+    - 优化心跳处理过程，减少一些不要的开销 [#5648](https://github.com/tikv/pd/issues/5648)@[rleungx](https://github.com/rleungx)
+    - 增加了自动清理 tombstone store 的功能 [#5348](https://github.com/tikv/pd/issues/5348) @[nolouch](https://github.com/nolouch)
 
 + TiFlash
 
     - 提升了 TiFlash 在 SQL 端没有攒批的场景的写入性能 [#6404](https://github.com/pingcap/tiflash/issues/6404) @[lidezhu](https://github.com/lidezhu)
     - 增加了 TableFullScan 的输出信息 [#5926](https://github.com/pingcap/tiflash/issues/5926) @[hongyunyan](https://github.com/hongyunyan)
-    - note [#issue](链接) @[贡献者 GitHub ID](链接)
 
 + Tools
 
@@ -365,28 +382,20 @@ TiDB 6.5.0 is a Long-Term Support Release (LTS).
 
     + Backup & Restore (BR)
 
-        - note [#issue](链接) @[贡献者 GitHub ID](链接)
-        - note [#issue](链接) @[贡献者 GitHub ID](链接)
+        - 优化清理备份日志数据是 BR 的内存使用 [#38869](https://github.com/pingcap/tidb/issues/38869) @[Leavrth](https://github.com/Leavrth)
+        - 提升在恢复时的稳定性，允许 PD leader 切换的情况发生 [#36910](https://github.com/pingcap/tidb/issues/36910) @[MoCuishle28](https://github.com/MoCuishle28)
+        - 日志备份的 tls 功能使用 openssl 协议，提升 tls 兼容性。[#13867](https://github.com/tikv/tikv/issues/13867) @[YuJuncen](https://github.com/YuJuncen)
 
     + TiCDC
 
-        - note [#issue](链接) @[贡献者 GitHub ID](链接)
-        - note [#issue](链接) @[贡献者 GitHub ID](链接)
+        - 采用并发的方式对数据进行编码，极大提升了同步到 kafka 的吞吐能力 [#7532](https://github.com/pingcap/tiflow/issues/7532) [#7543](https://github.com/pingcap/tiflow/issues/7543) [#7540](https://github.com/pingcap/tiflow/issues/7540) @[3AceShowHand](https://github.com/3AceShowHand) @[sdojjy](https://github.com/sdojjy)
 
     + TiDB Data Migration (DM)
 
-        - note [#issue](链接) @[贡献者 GitHub ID](链接)
-        - note [#issue](链接) @[贡献者 GitHub ID](链接)
-
-    + TiDB Lightning
-
-        - note [#issue](链接) @[贡献者 GitHub ID](链接)
-        - note [#issue](链接) @[贡献者 GitHub ID](链接)
-
-    + TiUP
-
-        - note [#issue](链接) @[贡献者 GitHub ID](链接)
-        - note [#issue](链接) @[贡献者 GitHub ID](链接)
+        - 通过不再解析黑名单表的数据提升了 dm 同步数据的性能 [#7622](https://github.com/pingcap/tiflow/pull/7622) @[GMHDBJD](https://github.com/GMHDBJD)
+        - 通过异步写与批量写的方式提升 dm relay 写数据效率 [#7580](https://github.com/pingcap/tiflow/pull/7580) @[GMHDBJD](https://github.com/GMHDBJD)
+        - 改进 DM 前置检查的错误提示信息 [#7696](https://github.com/pingcap/tiflow/pull/7696) @[buchuitoudegou](https://github.com/buchuitoudegou)
+        - 改进 DM 针对老版本 MySQL 使用 `SHOW SLAVE HOSTS` 获取结果时的兼容性 [#7373](https://github.com/pingcap/tiflow/pull/7372) @[lyzx2001](https://github.com/lyzx2001)
 
 ## Bug fixes
 
@@ -401,49 +410,54 @@ TiDB 6.5.0 is a Long-Term Support Release (LTS).
     - 修复了从 v4.0 升级到 v6.4 后 'admin show job' 操作崩溃的问题 [#38980](https://github.com/pingcap/tidb/issues/38980) @[tangenta](https://github.com/tangenta)
     - 修复了 `tidb_decode_key` 函数未正确处理分区表编码的问题 [#39304](https://github.com/pingcap/tidb/issues/39304) @[Defined2014](https://github.com/Defined2014)
     - 修复了 log rotate 时，grpc 的错误日志信息未被重定向到正确的日志文件的问题 [#38941](https://github.com/pingcap/tidb/issues/38941) @[xhebox](https://github.com/xhebox)
+    - 修复了 `begin; select... for update;` 点查在 read engines 未配置 TiKV 时生成非预期执行计划的问题 [#39344](https://github.com/pingcap/tidb/issues/39344) @[Yisaer](https://github.com/Yisaer)
+    - 修复了错误地下推 `StreamAgg` 到 TiFlash 导致结果错误的问题 [#39266](https://github.com/pingcap/tidb/issues/39266) @[fixdb](https://github.com/fixdb)
 
 + TiKV
 
-    - note [#issue](链接) @[贡献者 GitHub ID](链接)
-    - note [#issue](链接) @[贡献者 GitHub ID](链接)
+    - 修复 raft engine ctl 中的错误 [#13108](https://github.com/tikv/tikv/issues/13108) @[tabokie](https://github.com/tabokie)
+    - 修复 tikv-ctl 中 compact raft 命令的错误 [#13515](https://github.com/tikv/tikv/issues/13515) @[guoxiangCN](https://github.com/guoxiangCN)
+    - 修复当启用 TLS 时 log backup 无法使用的问题 [#13851](https://github.com/tikv/tikv/issues/13851) @[YuJuncen](https://github.com/YuJuncen)
+    - 修复对 Geometry 字段类型的支持 [#13651](https://github.com/tikv/tikv/issues/13651) @[dveeden](https://github.com/dveeden)
+    - 修复当未使用 new collation 时 `like` 无法处理 `_` 中非 ASCII 字符的问题 [#13769](https://github.com/tikv/tikv/issues/13769) @[YangKeao](https://github.com/YangKeao)
+    - 修复 tikv-ctl 执行 reset-to-version 时出现 segfault 的问题 [#13829](https://github.com/tikv/tikv/issues/13829) @[tabokie](https://github.com/tabokie)
 
 + PD
 
-    - note [#issue](链接) @[贡献者 GitHub ID](链接)
-    - note [#issue](链接) @[贡献者 GitHub ID](链接)
+    - 修复热点调度配置在没有修改的情况下不持久化的问题 [#5701](https://github.com/tikv/pd/issues/5701)  @[HunDunDM](https://github.com/HunDunDM)
+    - 修复 rank-formula-version 在升级过程中没有保持升级前的配置的问题 [#5699](https://github.com/tikv/pd/issues/5698) @[HunDunDM](https://github.com/HunDunDM)
 
 + TiFlash
 
     - 修复 TiFlash 重启不能正确合并小文件的问题 [#6159](https://github.com/pingcap/tiflash/issues/6159) @[lidezhu](https://github.com/lidezhu)
     - 修复 TiFlash Open File OPS 过高的问题 [#6345](https://github.com/pingcap/tiflash/issues/6345) @[JaySon-Huang](https://github.com/JaySon-Huang)
-    - note [#issue](链接) @[贡献者 GitHub ID](链接)
 
 + Tools
 
     + Backup & Restore (BR)
 
-        - note [#issue](链接) @[贡献者 GitHub ID](链接)
-        - note [#issue](链接) @[贡献者 GitHub ID](链接)
+        - 修复清理备份日志数据时错误删除数据导致数据丢失的问题 [#38939](https://github.com/pingcap/tidb/issues/38939) @[Leavrth](https://github.com/Leavrth)
+        - 修复在大于 6.1 版本关闭 new_collation 设置，仍然恢复失败的问题 [#39150](https://github.com/pingcap/tidb/issues/39150) @[MoCuishle28](https://github.com/MoCuishle28)
+        - 修复因非 s3 存储的不兼容请求导致备份 panic 的问题 [39545](https://github.com/pingcap/tidb/issues/39545) @[3pointer](https://github.com/3pointer)
 
     + TiCDC
 
-        - note [#issue](链接) @[贡献者 GitHub ID](链接)
-        - note [#issue](链接) @[贡献者 GitHub ID](链接)
+        - 修复 PD leader crash时 CDC 卡住的问题 [#7470](https://github.com/pingcap/tiflow/issues/7470) @[zeminzhou](https://github.com/zeminzhou)
+        - 修复在执行drop table 时用户快速暂停恢复同步任务导致可能的数据丢失问题 [#7682](https://github.com/pingcap/tiflow/issues/7682) @[asddongmen](https://github.com/asddongmen)
+        - 兼容上游开启 TiFlash 时版本兼容性问题 [#7744](https://github.com/pingcap/tiflow/issues/7744) @[overvenus](https://github.com/overvenus)
+        - 修复下游网络出现故障导致cdc 卡住的问题 [#7706](https://github.com/pingcap/tiflow/issues/7706) @[hicqu](https://github.com/hicqu)
+        - 修复用户快速删除、创建同名同步任务可能导致的数据丢失问题 [#7657](https://github.com/pingcap/tiflow/issues/7657) @[overvenus](https://github.com/overvenus)
 
     + TiDB Data Migration (DM)
 
-        - note [#issue](链接) @[贡献者 GitHub ID](链接)
-        - note [#issue](链接) @[贡献者 GitHub ID](链接)
+        - 修复无法在上游开启 gtid mode 且无数据时启动 all mode 任务的错误 [#7037](https://github.com/pingcap/tiflow/issues/7037) @[liumengya94](https://github.com/liumengya94)
+        - 修复 DM-worker 异常重启可能引起的多 worker 写同一下游同张表的错误 [#7658](https://github.com/pingcap/tiflow/issues/7658) @[GMHDBJD](https://github.com/GMHDBJD)
+        - 修复上游数据库使用正则匹配授权时 DM 前置检查不通过的错误[#7645](https://github.com/pingcap/tiflow/issues/7645) @[lance6716](https://github.com/lance6716)
 
     + TiDB Lightning
 
-        - note [#issue](链接) @[贡献者 GitHub ID](链接)
-        - note [#issue](链接) @[贡献者 GitHub ID](链接)
-
-    + TiUP
-
-        - note [#issue](链接) @[贡献者 GitHub ID](链接)
-        - note [#issue](链接) @[贡献者 GitHub ID](链接)
+        - 修复 TiDB Lightning 导入巨大数据源文件时的内存泄漏问题 [#39331](https://github.com/pingcap/tidb/issues/39331) @[dsdashun](https://github.com/dsdashun)
+        - 修复 TiDB Lightning 在并行导入冲突检测时无法正确检测的问题 [#39476](https://github.com/pingcap/tidb/issues/39476) @[dsdashun](https://github.com/dsdashun)
 
 ## Contributors
 
