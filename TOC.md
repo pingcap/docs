@@ -492,7 +492,6 @@
       - [Handle Errors](/dm/dm-error-handling.md)
     - [Release Notes](/dm/dm-release-notes.md)
   - TiCDC
-    - [Overview](/ticdc/ticdc-overview.md)
     - [Deploy and Maintain](/ticdc/deploy-ticdc.md)
     - Changefeed
       - [Overview](/ticdc/ticdc-changefeed-overview.md)
