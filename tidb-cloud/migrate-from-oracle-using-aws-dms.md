@@ -49,7 +49,7 @@ For instructions about how to create a VPC, see [Creating a VPC](https://docs.aw
 
 ![Create VPC](/media/tidb-cloud/aws-dms-from-oracle-to-tidb-1.png)
 
-## Step 2. Create Oracle RDS
+## Step 2. Create Oracle DB instanc
 
 Create an Oracle DB instance in VPC, and remember the password and give it public access. You must enable public access to use the AWS Schema Conversion Tool. Note that giving public access in the product environment is not a best practice.
 
@@ -57,7 +57,7 @@ For instructions about how to create an Oracle DB instance, see [Creating an Ora
 
 ![Create Oracle RDS](/media/tidb-cloud/aws-dms-from-oracle-to-tidb-2.png)
 
-## Step 3. Prepare table data in Oracle
+## Step 3. Prepare the table data in Oracle
 
 In this step, insert some data into Oracle DB instance. Use the github event dataset, and you can download the data from [GH Archive](https://gharchive.org/). It contains 10000 rows of data. You can use following SQL script to execute in Oracle.
 
@@ -96,15 +96,15 @@ After you finish executing the SQL script, check the data in Oracle. The followi
 
     ![Create AWS DMS Instance](/media/tidb-cloud/aws-dms-from-oracle-to-tidb-8.png)
 
-## Step 6. Create DMS endpoint
+## Step 6. Create DMS endpoints
 
 1. In the [AWS DMS console](https://console.aws.amazon.com/dms/v2/home), click the replication instance that you just created. 
 
-2. Create the Oracle source endpoint and TiDB target endpoint.
+2. Create the Oracle source endpoint and the TiDB target endpoint.
 
     ![Create AWS DMS Source endpoint](/media/tidb-cloud/aws-dms-from-oracle-to-tidb-9.png)
 
-    ![Create AWS DMS Source endpoint](/media/tidb-cloud/aws-dms-from-oracle-to-tidb-10.png)
+    ![Create AWS DMS Target endpoint](/media/tidb-cloud/aws-dms-from-oracle-to-tidb-10.png)
 
 ## Step 7. Migrate the schema
 
