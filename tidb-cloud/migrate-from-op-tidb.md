@@ -16,7 +16,7 @@ The overall procedure is as follows:
 
 ## Prerequisites
 
-It is recommended that you put the S3 bucket and TiDB Cloud in the same region. Cross-region migration might incur additional data conversion cost.
+It is recommended that you put the S3 bucket and the TiDB Cloud cluster in the same region. Cross-region migration might incur additional cost for data conversion.
 
 Before migration, you need to prepare the following:
 
@@ -33,13 +33,12 @@ You need to prepare the following tools:
 
 ### Dumpling
 
-[Dumpling](https://docs.pingcap.com/tidb/dev/dumpling-overview) is a tool that exports data from TiDB/MySQL into SQL or CSV files. You can use Dumpling to export full data from TiDB Cloud.
+[Dumpling](https://docs.pingcap.com/tidb/dev/dumpling-overview) is a tool that exports data from TiDB or MySQL into SQL or CSV files. You can use Dumpling to export full data from on-premises TiDB.
 
 Before you deploy Dumpling, note the following:
 
-- It is recommended to deploy Dumpling on a new EC2 instance in the same VPC as the TiDB cluster.
-- The EC2 instance must have at least 16 cores and 32 GB of memory to guarantee a good export performance.
-- The recommended EC2 instance type is c6g.4xlarge. You can choose other EC2 instance types based on your needs. The AMI can be Amazon Linux, Ubuntu, or Red Hat.
+- It is recommended to deploy Dumpling on a new EC2 instance in the same VPC as the TiDB cluster in TiDB Cloud.
+- The recommended EC2 instance type is **c6g.4xlarge** (16 vCPU and 32 GiB memory). You can choose other EC2 instance types based on your needs. The AMI can be Amazon Linux, Ubuntu, or Red Hat.
 
 You can deploy Dumpling by using TiUP or using the binary package.
 
@@ -78,11 +77,11 @@ You need the following privileges to export data from the upstream database:
 
 You need to [deploy TiCDC](https://docs.pingcap.com/tidb/dev/deploy-ticdc) to replicate incremental data from the upstream TiDB cluster to TiDB Cloud.
 
-1. First confirm whether the current TiDB version supports TiCDC. You can check the TiDB version by executing `select tidb_version();` in the TiDB cluster. If the TiDB version is earlier than v4.0.8.rc.1, you need to upgrade first. See [Upgrade TiDB Using TiUP](https://docs.pingcap.com/tidb/dev/upgrade-tidb-using-tiup).
+1. Confirm whether the current TiDB version supports TiCDC. TiDB v4.0.8.rc.1 and later versions support TiCDC. You can check the TiDB version by executing `select tidb_version();` in the TiDB cluster. If you need to upgrade it, see [Upgrade TiDB Using TiUP](https://docs.pingcap.com/tidb/dev/upgrade-tidb-using-tiup).
 
 2. Add the TiCDC component to the TiDB cluster. See [Scale a TiDB Cluster Using TiUP](https://docs.pingcap.com/tidb/dev/scale-tidb-using-tiup).
 
-  1. Edit the `scale-out.yaml` file to add TiCDC:
+    1.Edit the `scale-out.yaml` file to add TiCDC:
 
       ```yaml
       cdc_servers:
@@ -94,12 +93,12 @@ You need to [deploy TiCDC](https://docs.pingcap.com/tidb/dev/deploy-ticdc) to re
         data_dir: /data/deploy/install/data/cdc-8300
       ```
 
-  2. Add the TiCDC component and check the status.
+    2.Add the TiCDC component and check the status.
 
-        ```shell
-        tiup cluster scale-out <cluster-name> scale-out.yaml
-        tiup cluster display <cluster-name>
-        ```
+      ```shell
+      tiup cluster scale-out <cluster-name> scale-out.yaml
+      tiup cluster display <cluster-name>
+      ```
 
 ## Perform full data migration
 
@@ -114,7 +113,7 @@ You need to migrate data from the on-premises TiDB cluster to Amazon S3 using Du
 
 If your TiDB cluster is in a local IDC, or the network between the Dumpling server and Amazon S3 is not connected, you can export the files to the local storage first, and then upload them to Amazon S3 later.
 
-#### Step 1: Disable the GC mechanism of the upstream OP TiDB cluster temporarily
+#### Step 1. Disable the GC mechanism of the upstream OP TiDB cluster temporarily
 
 To ensure that newly written data is not lost during incremental migration, you need to disable the upstream cluster's garbage collection (GC) mechanism before starting the backup to ensure that the system does not clean up historical data.
 
@@ -130,21 +129,21 @@ mysql > SELECT @@global.tidb_gc_enable;
 1 row in set (0.01 sec)
 ```
 
-#### Step 2: Configure access permissions to the Amazon S3 bucket for Dumpling
+#### Step 2. Configure access permissions to the Amazon S3 bucket for Dumpling
 
 Create an access key in the AWS console. See [Create an access key](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html#Using_CreateAccessKey) for details.
 
-1. Use your AWS account ID or account alias, your IAM user name, and your password to sign in to the IAM console.
+1. Use your AWS account ID or account alias, your IAM user name, and your password to sign in to [the IAM console](https://console.aws.amazon.com/iam/home#/security_credentials).
 
 2. In the navigation bar on the upper right, choose your user name, and then click **My Security Credentials**.
 
-3. To create an access key, click **Create access key**. Then choose **Download .csv file** to save the access key ID and secret access key to a CSV file on your computer. Store the file in a secure location. You will not have access to the secret access key again after this dialog box closes. After you download the CSV file, choose Close. When you create an access key, the key pair is active by default, and you can use the pair right away.
+3. To create an access key, click **Create access key**. Then choose **Download .csv file** to save the access key ID and secret access key to a CSV file on your computer. Store the file in a secure location. You will not have access to the secret access key again after this dialog box closes. After you download the CSV file, choose **Close**. When you create an access key, the key pair is active by default, and you can use the pair right away.
 
     ![Create access key](/media/tidb-cloud/op-to-cloud-create-access-key01.png)
 
     ![Download CSV file](/media/tidb-cloud/op-to-cloud-create-access-key02.png)
 
-#### Step 3: Export data from the upstream TiDB cluster to Amazon S3 using Dumpling
+#### Step 3. Export data from the upstream TiDB cluster to Amazon S3 using Dumpling
 
 Do the following to export data from the upstream TiDB cluster to Amazon S3 using Dumpling:
 
@@ -175,13 +174,14 @@ Do the following to export data from the upstream TiDB cluster to Amazon S3 usin
     -r 20000 \
     --filetype {sql|csv}  \
     -F 256MiB  \
+    -t 8 \
     -o "${S3 URI}" \
     --s3.region "${s3.region}"
     ```
 
     The `-t` option specifies the number of threads for the export. Increasing the number of threads improves the concurrency of Dumpling and the export speed, and also increases the database's memory consumption. Therefore, do not set a too large number for this parameter.
 
-    For mor information, see [Dumpling](https://docs.pingcap.com/tidb/dev/dumpling-overview).
+    For mor information, see [Dumpling](https://docs.pingcap.com/tidb/stable/dumpling-overview#export-to-sql-files).
 
 4. Check the export data. Usually the exported data includes the following:
 
@@ -203,7 +203,7 @@ If your TiDB cluster is in a local IDC, or the network between the Dumpling serv
 
     ![Get the Account ID and External ID](/media/tidb-cloud/op-to-cloud-get-role-arn.png)
 
-2. Configure access permissions for Amazon s3. Usually you need the following read-only permissions:
+2. Configure access permissions for Amazon S3. Usually you need the following read-only permissions:
     - s3:GetObject
     - s3:GetObjectVersion
     - s3:ListBucket
@@ -213,7 +213,7 @@ If your TiDB cluster is in a local IDC, or the network between the Dumpling serv
 
     - kms:Decrypt
 
-3. Configure the access policy. Go to the **AWS Console > IAM > Access Management > Policies** to check if the access policy for TiDB Cloud exists already. If it does not exist, create a policy following this document [Creating policies on the JSON tab](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_create-console.html).
+3. Configure the access policy. Go to the [AWS Console > IAM > Access Management > Policies](https://console.aws.amazon.com/iamv2/home#/policies) and switch to your region to check if the access policy for TiDB Cloud exists already. If it does not exist, create a policy following this document [Creating policies on the JSON tab](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_create-console.html).
 
     The following is an example template for the json policy.
 
@@ -262,7 +262,7 @@ If your TiDB cluster is in a local IDC, or the network between the Dumpling serv
 
 4. Configure the role. See [Creating an IAM role (console)](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create_for-user.html). In the Account ID field, enter the TiDB Cloud Account ID and  TiDB Cloud External ID you have noted down in Step 1.
 
-5. Get the Role-ARN. Go to **AWS Console > IAM > Access Management > Roles**. Click the role you have created, and note down the ARN. You will use it when importing data into TiDB Cloud.
+5. Get the Role-ARN. Go to [AWS Console > IAM > Access Management > Roles](https://console.aws.amazon.com/iamv2/home#/roles). Switch to your region. Click the role you have created, and note down the ARN. You will use it when importing data into TiDB Cloud.
 
 6. Import data to TiDB Cloud. See [Step 3. Import data into TiDB Cloud](/tidb-cloud/migrate-from-amazon-s3-or-gcs.md#step-3-import-data-into-tidb-cloud).
 
@@ -274,11 +274,11 @@ To perform incremental data migration, do the following:
 
     ![Start Time in Metadata](/media/tidb-cloud/start_ts_in_metadata.png)
 
-2. Grant TiCDC to connect to TiDB Cloud. On the TiDB Cloud console, locate the cluster, and then go to **Overview** > **Connect** > **Standard Connection** > **Create traffic filter**. Click **Edit** > **Add Item**. Fill in the public IP address of the TiCDC component in the **IP Address** field, and click **Update Filter** to save it. Now TiCDC can access TiDB Cloud.
+2. Grant TiCDC to connect to TiDB Cloud. In the [TiDB Cloud console](https://tidbcloud.com/console/clusters), locate the cluster, and then go to **Overview** > **Connect** > **Standard Connection** > **Create traffic filter**. Click **Edit** > **Add Item**. Fill in the public IP address of the TiCDC component in the **IP Address** field, and click **Update Filter** to save it. Now TiCDC can access TiDB Cloud.
 
     ![Update Filter](/media/tidb-cloud/edit_traffic_filter_rules.png)
 
-3. Get the connection information of the downstream TiDB Cloud cluster. In the TiDB Cloud console, go to **Overview** > **Connect** > **Standard Connection** > **Connect with a SQL client**. From the connection information, you can get the host IP address and port of the cluster. For more information, see [Connect via standard connection](/tidb-cloud/connect-to-tidb-cluster.md#connect-via-standard-connection).
+3. Get the connection information of the downstream TiDB Cloud cluster. In the [TiDB Cloud console](https://tidbcloud.com/console/clusters), go to **Overview** > **Connect** > **Standard Connection** > **Connect with a SQL client**. From the connection information, you can get the host IP address and port of the cluster. For more information, see [Connect via standard connection](/tidb-cloud/connect-to-tidb-cluster.md#connect-via-standard-connection).
 
 4. Create and run the incremental replication task. In the upstream cluster, run the following:
 
@@ -290,15 +290,15 @@ To perform incremental data migration, do the following:
     --start-ts="431434047157698561"
     ```
 
-    - `--pd`: the PD address of the upstream cluster. The format is: [upstream_pd_ip]:[pd_port]
+    - `--pd`: the PD address of the upstream cluster. The format is: `[upstream_pd_ip]:[pd_port]`
     - `--sink-uri`: the downstream address of the replication task. Configure `--sink-uri` according to the following format. Currently, the scheme supports `mysql/tidb/kafka/pulsar/s3/local`.
 
-        ```
+        ```shell
         [scheme]://[userinfo@][host]:[port][/path]?[query_parameters]
         ```
 
-    - `--changefeed-id`: The ID of the replication task. The format must match the ^[a-zA-Z0-9]+(\-[a-zA-Z0-9]+)*$ regular expression. If this ID is not specified, TiCDC automatically generates a UUID (the version 4 format) as the ID.
-    - `--start-ts`: Specifies the starting TSO of the changefeed. From this TSO, the TiCDC cluster starts pulling data. The default value is the current time.
+    - `--changefeed-id`: the ID of the replication task. The format must match the ^[a-zA-Z0-9]+(\-[a-zA-Z0-9]+)*$ regular expression. If this ID is not specified, TiCDC automatically generates a UUID (the version 4 format) as the ID.
+    - `--start-ts`: specifies the starting TSO of the changefeed. From this TSO, the TiCDC cluster starts pulling data. The default value is the current time.
 
     For more information, see [Manage TiCDC Cluster and Replication Tasks](https://docs.pingcap.com/tidb/stable/manage-ticdc).
 
