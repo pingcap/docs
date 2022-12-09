@@ -109,6 +109,7 @@
         - [Import or Migrate from Amazon S3 or GCS to TiDB Cloud](/tidb-cloud/migrate-from-amazon-s3-or-gcs.md)
         - [Import CSV Files from Amazon S3 or GCS into TiDB Cloud](/tidb-cloud/import-csv-files.md)
         - [Import Apache Parquet Files from Amazon S3 or GCS into TiDB Cloud](/tidb-cloud/import-parquet-files.md)
+        - [Using AWS DMS To Migrate From AWS RDS To TiDB Cloud Serverless Tier](/tidb-cloud/migrate-from-oracle-using-aws-dms.md)
     - Reference
         - [Configure Amazon S3 Access and GCS Access](/tidb-cloud/config-s3-and-gcs-access.md)
         - [Naming Conventions for Data Import](/tidb-cloud/naming-conventions-for-data-import.md)
