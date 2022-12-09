@@ -78,7 +78,7 @@ After completing the prerequisites, you can sink your data to MySQL.
 
 2. Click **Sink to MySQL**.
 
-3. Fill in the MySQL Endpoints, user, and password in **MySQL Connection**.
+3. Fill in the MySQL Endpoints, user name, and password in **MySQL Connection**.
 
 4. Click **Next** to test whether TiDB connects to MySQL successfully:
 
@@ -87,25 +87,25 @@ After completing the prerequisites, you can sink your data to MySQL.
 
 5. Customize **Table Filter** to filter the tables that you want to replicate. For the rule syntax, refer to [table filter rules](/table-filter.md)
 
-    - By default, there is a rule `*. *`, which stands for replicating all tables. When you add a new rule, TiDB Cloud queries all the tables in TiDB and displays the tables that can be replicated in the list box on the right.  Instructions for use:
-        - The list box on the right does not show the new tables to be replicated in the future or the schema to be fully replicated.
-        - TiDB Cloud also lists tables that do not have unique and primary keys. These tables may have inconsistent data in the downstream cluster during replication due to Changefeed interrupt recovery. We recommend that you add unique keys or primary keys to these tables, or set filter rules, such as filtering out the table `test`. `tbl1` using rule "!test.tbl1"
+    - **Add filter rules**: you can set filter rules in this column. By default, there is a rule `*. *`, which stands for replicating all tables. When you add a new rule, TiDB Cloud queries all the tables in TiDB and displays the tables that can be replicated in the list box on the right.  Instructions for use:
+    - **Tables to be replicated**: this column shows the tables to be replicated. But it does not show the new tables to be replicated in the future or the schema to be fully replicated.
+    - **Tables without valid keys**: this column shows tables that do not have unique and primary keys. Because no unique identifier can be used by the downstream system to handle duplicate events, the data might be inconsistent during replication. We recommend that you add unique keys or primary keys to these tables, or set filter rules, such as filtering out the table `test`.`tbl1` using "!test.tbl1".
 
 6. In **Start Position**, configure the starting position for your MySQL sink.
 
-    - If you do [full load data](#full-load-data), please fill in the TSO that Dumpling provides in **Start replication from a specific TSO**.
-    - If you do not have any data in your upstreaming TiDB cluster, you can choose **Start replication from now on**.
+    - If you have performed [full load data](#full-load-data) using Dumpling, select **Start replication from a specific TSO** and fill in the TSO that you have obtained in Dumpling exported files.
+    - If you do not have any data in the upstream TiDB cluster, select **Start replication from now on**.
     - Otherwise, you can customize the start time point by choosing **Start replication from a specific time**.
 
-7. Click **Next** to preview the changefeed.
+7. Click **Next** to review the Changefeed configuration.
 
-    Check the compliance of cross-region replication prompt, and click **Create**.
+    If you confirm all configurations are correct, check the compliance of cross-region replication, and click **Create**.
     
     If you want to modify some configurations, click **Previous** to go back to the previous configuration page.
 
-8. The sink starts its work soon, and you can see the status of the sink change to "**Running**".
+8. The sink starts its work soon, and you can see the status of the sink change from "**Creating**" to "**Running**".
 
-    Click on the **Changefeed** card, and you can see the Changfeed running status in a pop-up window, including Checkpoint, replication latency, and other metrics.
+    Click on the **Sink to MySQL** card, and you can see the Changfeed running status in a pop-up window, including Checkpoint, replication latency, and other metrics.
 
 9. (Optional) After the operation is completed, restore the GC time to its original value (the default value is `10m`):
 
