@@ -116,6 +116,7 @@
   - [Export Data from TiDB](/tidb-cloud/export-data-from-tidb-cloud.md)
 - Stream data
   - [To MySQL sink](/tidb-cloud/changefeed-sink-to-mysql.md)
+  - [To Kafka sink](/tidb-cloud/changefeed-sink-to-apache-kafka.md)
 - Back Up and Restore
   - [Automatic Backup](/tidb-cloud/backup-and-restore.md)
   - [Manual Backup](/tidb-cloud/backup-and-restore.md#manual-backup)

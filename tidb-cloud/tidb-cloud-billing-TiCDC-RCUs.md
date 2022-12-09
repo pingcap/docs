@@ -5,11 +5,11 @@ summary: Learn about billing for changefeeds in TiDB Cloud.
 
 # Changefeed Billing
 
-TiDB Cloud measures the capacity of changefeeds in TiCDC Capacity Units (TCUs). When you create the first changefeed for a cluster, TiDB Cloud automatically sets up TiCDC Capacity Units (TCUs) for you, and you will be charged for these TiCDC Capacity Units. All changefeeds that are created in a single cluster share the same TiCDC Capacity Units. 
+TiDB Cloud measures the capacity of changefeeds in TiCDC Replication Capacity Units (TiCDC RCUs). When you create the first changefeed for a cluster, TiDB Cloud automatically sets up TiCDC Replication Capacity Units (TiCDC RCUs) for you, and you will be charged for these TiCDC Replication Capacity Units. All changefeeds that are created in a single cluster share the same TiCDC Replication Capacity Units. 
 
 ## Number of TiCDC Capacity Units
 
-For each TiDB cluster, the number of TiCDC Capacity Units is set up by TiDB Cloud according to the total vCPU count of all TiKV nodes in your cluster as follows:
+For each TiDB cluster, the number of TiCDC Replication Capacity Units is set up by TiDB Cloud according to the total vCPU count of all TiKV nodes in your cluster as follows:
 
 | Total vCPUs of all TiKV nodes | Number of TCUs |
 |------------------------------|----------------|
@@ -20,7 +20,7 @@ For each TiDB cluster, the number of TiCDC Capacity Units is set up by TiDB Clou
 
 ## Price
 
-The following table lists the price of TiDB Cloud for each TiCDC Capacity Unit (TCU):
+The following table lists the price of TiDB Cloud for each TiCDC Replication Capacity Units (TiCDC RCUs):
 
 | Cloud provider | Region                      | TCU Price ($/hr) |
 |----------------|-----------------------------|------------------|
