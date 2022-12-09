@@ -31,7 +31,7 @@ However, some drivers and ORMs do not use the system root CA stores. In those ca
 >
 > If you really need the CA certificate of a TiDB Serverless Tier cluster, it is recommended that you download the [Mozilla CA Certificate bundle](https://curl.se/docs/caextract.html) instead of the single CA certificate in case we change the CA in the future.
 >
-> If you are using some GUI clients, like DBeaver, which does not accept a cert file with multiple certs inside. In such a case, you have to download the [ISRG Root X1](https://letsencrypt.org/certs/isrgrootx1.pem.txt) certificate.
+> If you are using a GUI client, such as DBeaver, which does not accept a certificate file with multiple certificates inside, you must download the [ISRG Root X1](https://letsencrypt.org/certs/isrgrootx1.pem.txt) certificate.
 
 ## How do I connect to a TiDB Serverless Tier cluster in TLS connection?
 
@@ -164,7 +164,7 @@ The following lists the CA root paths on common platforms.
 
 **Windows**
 
-Windows does not offer a specific path to CA root, instead, it uses [registry](https://learn.microsoft.com/en-us/windows-hardware/drivers/install/local-machine-and-current-user-certificate-stores) to store certificates. For this reason, we recommend downloading [Mozilla CA Certificate bundle](https://curl.se/docs/caextract.html) as the CA certificates and pointing at this file for the drivers.
+Windows does not offer a specific path to the CA root. Instead, it uses the [registry](https://learn.microsoft.com/en-us/windows-hardware/drivers/install/local-machine-and-current-user-certificate-stores) to store certificates. For this reason, we recommend downloading the [Mozilla CA Certificate bundle](https://curl.se/docs/caextract.html) as the CA certificates and pointing at this file for the drivers.
 
 ## Can TiDB Serverless Tier verify the client's identity?
 
