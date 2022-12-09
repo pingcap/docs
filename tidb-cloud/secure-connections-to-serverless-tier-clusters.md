@@ -164,7 +164,10 @@ The following lists the CA root paths on common platforms.
 
 **Windows**
 
-Windows does not offer a specific path to the CA root. Instead, it uses the [registry](https://learn.microsoft.com/en-us/windows-hardware/drivers/install/local-machine-and-current-user-certificate-stores) to store certificates. For this reason, we recommend downloading the [Mozilla CA Certificate bundle](https://curl.se/docs/caextract.html) as the CA certificates and pointing at this file for the drivers.
+Windows does not offer a specific path to the CA root. Instead, it uses the [registry](https://learn.microsoft.com/en-us/windows-hardware/drivers/install/local-machine-and-current-user-certificate-stores) to store certificates. For this reason, to specify the CA root path on Windows, take the following steps:
+
+1. Download the [Mozilla CA Certificate bundle](https://curl.se/docs/caextract.html) and save it in a path you prefer, such as `<path_to_mozilla_ca_cert_bundle>`.
+2. Use the path (`<path_to_mozilla_ca_cert_bundle>`) as your CA root path when you connect to a Serverless Tier cluster.
 
 ## Can TiDB Serverless Tier verify the client's identity?
 
