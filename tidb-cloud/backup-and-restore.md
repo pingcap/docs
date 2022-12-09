@@ -12,10 +12,11 @@ This document describes how to back up and restore your TiDB cluster data on TiD
 >
 > For [Serverless Tier clusters](/tidb-cloud/select-cluster-tier.md#serverless-tier-beta), the backup and restore feature is unavailable. You can use [Dumpling](https://docs.pingcap.com/tidb/stable/dumpling-overview) to export your data as a backup.
 >
-> Currently, TiDB backup and restore has the following restrictions:
-> 1. Temporarily TiDB Cloud does not support restoring table data under the mysql schema, including user permissions and system variables. Users in need are recommended to use dumplings & lightning to manually backup and restore these data, refer to [document](https://docs.pingcap.com/tidb/dev/backup-and-restore-using-dumpling-lightning).
-> 2. If turning on and off PITR multiple times, temporarily you can only choose the time point in the recoverable range after latest PITR enabled , and the earlier recoverable range is not supported.
-> 3. You cannot disable automatic backup.
+> Currently, the backup and restore feature has the following restrictions:
+>
+> - TiDB Cloud does not support restoring tables in the `mysql` schema, including user permissions and system variables. You can use [Dumpling and Lightning](https://docs.pingcap.com/tidb/dev/backup-and-restore-using-dumpling-lightning) to manually back up and restore these data.
+> - If you turn on and off PITR (Point-in-time Recovery) multiple times, you can only choose a time point within the recoverable range after the most recent PITR is enabled. The earlier recoverable range is not accessible.
+> - You cannot disable automatic backup.
 
 ## Backup
 
@@ -53,9 +54,9 @@ By the automatic backup, you can back up the cluster data every day at the backu
 
         TiDB Cloud stores your backup data in the current region of your cluster by default, and cannot be modified. In addition, you can add another remote region, and TiDB Cloud will copy all new backup data to the remote region, which facilitates data safety and faster recovery. After adding a remote region as a backup data storage, you cannot remove the region.
 
-4. Click **Confirm** to Backup Settings changed preview page.
+4. Click **Confirm** to preview the configuration change.
 
-    If you turn on PITR, it will prompt you whether to perform a backup immediately cause of PITR must use a backup as the base data for recovery, otherwise PITR will not be available until the next backup is completed.
+    If you turn on PITR, you can select the **Perform a backup immediately and use it as recovery starting point in PITR.** checkbox, and PITR will use the backup time as recovery starting point. Otherwise, PITR will not be available until the next backup is completed.
 
 5. Click **Confirm**.
 
