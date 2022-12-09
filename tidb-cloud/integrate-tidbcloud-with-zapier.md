@@ -219,7 +219,7 @@ To perform deduplication, your query results must have a unique id field. Otherw
 
 Make sure that your custom query executes in less than 30 seconds. Otherwise, you will get the timeout error.
 
-### How to use `find or create` action
+### How do I use the `find or create` action?
 
 `Find or create` action enables you to create a resource if it does not exist. Here is an example:
 
