@@ -69,82 +69,52 @@ After trying **Plaground**, you can load sample data to your TiDB Cloud cluster.
 
 The data import process will take several minutes. When the data import progress shows **Finished**, you have successfully imported the sample data and the database schema to your database in TiDB Cloud.
 
-## Step 4. Connect to your TiDB cluster
+## Step 4. Try TiDB SQL
 
-After loading data to the cluster, you can connect to your cluster from the command line or with a programming language.
+After loading data to the cluster, you can try running SQL statements directly from the console.
 
 1. Navigate to the **Clusters** page.
 
-2. In the area of your newly created cluster, click **Connect** in the upper-right corner. A connection dialog is displayed.
+2. Click the name of your cluster to enter the cluster details page.
 
-3. Follow the instructions in the dialog to connect to your TiDB cluster.
+3. Hover on the left navigation bar and click **SQL Editor**. The SQL Editor page is displayed.
 
-    1. Create traffic filter for your connection.
+    In the SQL editor, you can edit and run SQL queries directly against your cluster without using a terminal.
 
-    2. Use a SQL client to connect to your cluster. Click the tab of your preferred connection method, and then connect to your cluster with the connection string.
-
-    > **Tip:**
+    > **Note:**
     >
-    > TiDB Cloud is MySQL-compatible, so you can connect to your cluster using any MySQL client tool. We recommend using [mysql — The MySQL Command-Line Client](https://dev.mysql.com/doc/refman/8.0/en/mysql.html) or [mysql — The MySQL Command-Line Client from MariaDB](https://mariadb.com/kb/en/mysql-command-line-client/).
+    > The SQL editor currently has limited support on SQL. DDLs such as `CREATE TABLE` or `DROP TABLE` are not supported yet.
 
-4. After logging into your TiDB cluster, you can use the following SQL statement to validate the connection:
+4. In the drop-down list, select `bikeshare`. This is the database where the sample data is imported.
 
-    {{< copyable "sql" >}}
-
-    ```sql
-    SELECT TiDB_version();
-    ```
-
-    If you see the release version information, you are ready to use your TiDB cluster.
-
-## Step 5. Query data
-
-After connecting to your TiDB cluster, you can run some queries in your Terminal.
-
-1. Use the `bikeshare` database and tables:
-
-    {{< copyable "sql" >}}
+5. To view the tables in the `bikeshare` database, type in the following SQL statement in the editor:
 
     ```sql
-    USE bikeshare;
     SHOW tables;
     ```
 
-2. Check the structure of the `trip` table:
+    To run the query, press **Ctrl + Enter** or click **Run**. You can see the query log and results immediately on the bottom of the page.
 
-    {{< copyable "sql" >}}
+6. To check the structure of the `trip` table and see how many records the table contains, type in the two following SQL statements in the editor:
 
     ```sql
     DESCRIBE trips;
-    ```
-
-3. Check how many records exist in the `trips` table:
-
-    {{< copyable "sql" >}}
-
-    ```sql
     SELECT COUNT(*) FROM trips;
     ```
 
-4. Check the entire trip history where the start station is "8th & D St NW":
+    To run the two queries sequentially, you can do one of the following:
 
-    {{< copyable "sql" >}}
+    * Press **Ctrl + Shift + Enter**.
+    * Select the two queries with your cursor and click **Run**.
 
-    ```sql
-    SELECT * FROM trips WHERE start_station_name = '8th & D St NW';
-    ```
+    In the query log box, you can see the two queries are executed one by one.
 
-5. Show the least ten popular bicycle stations for picking up:
+    If there are two or more queries in the editor, pressing **Ctrl + Enter** or clicking **Run** only runs the query that is being highlighted in the editor.
 
-    {{< copyable "sql" >}}
+You are now ready to use TiDB to build your applications.
 
-    ```sql
-    SELECT start_station_name, COUNT(ride_id) as count from `trips`
-    GROUP BY start_station_name
-    ORDER BY count ASC
-    LIMIT 10;
-    ```
+## What's next
 
-For more details on TiDB SQL usage, see [Explore SQL with TiDB](/basic-sql-operations.md).
-
-For production use with the benefits of cross-zone high availability, horizontal scaling, and [HTAP](https://en.wikipedia.org/wiki/Hybrid_transactional/analytical_processing), refer to [Create a TiDB Cluster](/tidb-cloud/create-tidb-cluster.md) and create a Dedicated Tier cluster.
+- For more details on TiDB SQL usage, see [Explore SQL with TiDB](/basic-sql-operations.md).
+- For production use with the benefits of cross-zone high availability, horizontal scaling, and [HTAP](https://en.wikipedia.org/wiki/Hybrid_transactional/analytical_processing), refer to [Create a TiDB Cluster](/tidb-cloud/create-tidb-cluster.md) and create a Dedicated Tier cluster.
+- For how to connect to your cluster via a SQL client, refer to [Connect to a TiDB Cluster](/tidb-cloud/connect-to-tidb-cluster.md).
