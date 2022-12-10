@@ -71,7 +71,7 @@ The method of scaling out the TiCDC cluster is similar to that of deploying one.
     tiup cluster scale-out <cluster-name> scale-out.yaml
     ```
 
-For more use cases, see [Scale out a TiCDC cluster](/scale-tidb-using-tiup.md#scale-tidb-using-tiup#scale-out-a-ticdc-cluster).
+For more use cases, see [Scale out a TiCDC cluster](/scale-tidb-using-tiup.md#scale-out-a-ticdc-cluster).
 
 ## Delete or scale in TiCDC from an existing TiDB cluster using TiUP
 
@@ -101,7 +101,7 @@ tiup cluster upgrade <cluster-name> <cluster-version> --transfer-timeout 600
 
 When you upgrade a TiCDC cluster, you need to pay attention to the following:
 
-- TiCDC v4.0.2 reconfigured `changefeed`. For details, see [Configuration file compatibility notes](/ticdc/ticdc-compatibility.md#compatibility-of-cli-parameters-and-configuration-file).
+- TiCDC v4.0.2 reconfigured `changefeed`. For details, see [Configuration file compatibility notes](/ticdc/ticdc-compatibility.md#cli-and-configuration-file-compatibility).
 - If you encounter any problem during the upgrade, you can refer to [upgrade FAQs](/upgrade-tidb-using-tiup.md#faq) for solutions.
 - Since v6.3.0, TiCDC supports rolling upgrade. During the upgrade, the replication latency is stable and does not fluctuate significantly. Rolling upgrade is effective automatically if the following conditions are met:
 
