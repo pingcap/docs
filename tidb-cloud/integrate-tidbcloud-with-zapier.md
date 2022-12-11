@@ -17,7 +17,7 @@ This guide gives a high-level introduction to the TiDB Cloud app on Zapier and a
 
 ## Quick start with template
 
-In this section, we will use the preset template as an example to try out TiDB Cloud App on Zapier.
+In this section, we will use the **Add new Github global events to TiDB rows** template as an example to create a workflow. In this workflow, every time a new global event is created from your GitHub account, Zapier adds a new row to your TiDB Cloud cluster.
 
 ### Prerequisites
 
@@ -30,8 +30,6 @@ Before you start, you need:
 ### Step 1: Get the template
 
 Go to [TiDB Cloud App on Zapier](https://zapier.com/apps/tidb-cloud/integrations). Choose a template and click **Try it**. Then you will enter the editor page.
-
-In this tutorial, we use the **Add new Github global events to TiDB rows** template as an example to create a workflow. In this workflow, every time a new global event is created from your GitHub account, Zapier adds a new row to your TiDB Cloud cluster.
 
 ### Step 2: Set up the trigger
 
@@ -145,14 +143,18 @@ This section introduces the triggers and actions provided by TiDB Cloud App on Z
 
 ### Triggers
 
-- New Cluster: triggers when a new cluster is created.
-- New Table: triggers when a new table is created.
-- New Row: triggers when new rows are created. Only fetches the recent 10000 new rows.
-- New Row (Custom Query): triggers when new rows are returned from a custom query that you provide.
+The following table lists the triggers supported by TiDB Cloud App.
+
+| Trigger                | Description                                                                 |
+| ---------------------- | --------------------------------------------------------------------------- |
+| New Cluster            | triggers when a new cluster is created.                                     |
+| New Table              | triggers when a new table is created.                                       |
+| New Row                | triggers when new rows are created. Only fetches the recent 10000 new rows. |
+| New Row (Custom Query) | triggers when new rows are returned from a custom query that you provide.   |
 
 ### Actions
 
-The following table lists the actions supported by TiDB Cloud App. Note that some actions need extra resources and you need to prepare the corresponding resources before using the action.
+The following table lists the actions supported by TiDB Cloud App. Note that some actions need extra resources, and you need to prepare the corresponding resources before using the action.
 
 | Action | Description | Resource |
 |---|---|---|
