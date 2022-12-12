@@ -244,7 +244,7 @@ In v6.3.0-DMR, the key new features and improvements are as follows:
 | TiCDC | [`enable-sync-point`](/ticdc/ticdc-changefeed-config.md#changefeed-configuration-parameters) | Newly added | Specifies whether to enable the Syncpoint feature. |
 | TiCDC | [`sync-point-interval`](/ticdc/ticdc-changefeed-config.md#changefeed-configuration-parameters) | Newly added | Specifies the interval at which Syncpoint aligns the upstream and downstream snapshots. |
 | TiCDC | [`sync-point-retention`](/ticdc/ticdc-changefeed-config.md#changefeed-configuration-parameters) | Newly added | Specifies how long the data is retained by Syncpoint in the downstream table. When this duration is exceeded, the data is cleaned up. |
-| TiCDC | [`sink-uri.memory`](/ticdc/ticdc-changefeed-config.md#changefeed-cli-parameters) | Deprecated | The `memory` sorting is deprecated. It is not recommended to use it in any situation. You can use the `unified` sorting instead. |
+| TiCDC | [`sink-uri.memory`](/ticdc/ticdc-changefeed-config.md#changefeed-cli-parameters) | Deprecated | The `memory` sorting is deprecated. It is not recommended to use it in any situation. |
 
 ### Others
 
