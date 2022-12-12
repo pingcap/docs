@@ -30,7 +30,7 @@ To connect to a Serverless Tier cluster via standard connection, perform the fol
 
 2. Locate your cluster, and click **Connect** in the upper-right corner of the cluster area. A connection dialog box is displayed.
 
-3. Under **Connect with a SQL client** in the dialog, click the tab of your preferred connection method, and then connect to your cluster with the connection string.
+3. Under **Connect with a SQL Client** in the dialog, click the tab of your preferred connection method, and then connect to your cluster with the connection string.
 
     > **Note:**
     >
