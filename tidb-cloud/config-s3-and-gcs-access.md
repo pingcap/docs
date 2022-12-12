@@ -11,7 +11,7 @@ If your source data is stored in Amazon S3 or Google Cloud Storage (GCS) buckets
 
 To allow TiDB Cloud to access the source data in your Amazon S3 bucket, take the following steps to configure the bucket access for TiDB Cloud and get the Role-ARN.
 
-1. In the TiDB Cloud console, get the TiDB Cloud account ID and external ID of the target TiDB cluster.
+1. In the [TiDB Cloud console](https://tidbcloud.com/), get the TiDB Cloud account ID and external ID of the target TiDB cluster.
 
     1. In the TiDB Cloud console, navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page and choose your target project on the top of the left navigation bar.
 
