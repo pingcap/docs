@@ -25,7 +25,7 @@ This document walks you through the quickest way to get started with TiDB Cloud.
 
 1. If you do not have a TiDB Cloud account, click [here](https://tidbcloud.com/free-trial) to sign up for an account.
 
-2. [Log in](https://tidbcloud.com/) to your TiDB Cloud account.
+2. [Log in](https://tidbcloud.com/) to your TiDB Cloud account and choose the target project.
 
 3. On the [**Clusters**](https://tidbcloud.com/console/clusters) page, click **Create Cluster**.
 
