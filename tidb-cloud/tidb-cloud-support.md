@@ -22,7 +22,7 @@ To request support for your organization, project, or cluster, perform the follo
 
 3. Click **Send**.
 
-Alternatively, you can click **Support** in the upper-right corner and click **Create New Case** to request support. If you go with this way, you need to provide your Organization ID in the request form as well. To get the Organization ID, click your account name in the upper-right corner of the TiDB Cloud console and click **Organization Settings**.
+Alternatively, you can click the earphone icon in the upper-right corner and click **Create New Case** to request support. If you go with this way, you need to provide your Organization ID in the request form as well. To get the Organization ID, click the building icon in the upper-right corner of the TiDB Cloud console and click **Organization Settings**.
 
 After the support team receives your request, they will reply to you via email.
 
@@ -41,7 +41,7 @@ Alternatively, you can also access the [Customer Support](https://support.pingca
 
 To check or upgrade your support plan, perform the following steps:
 
-1. On your TiDB Cloud console, click **Support** in the upper-right corner of the top navigation bar, and click **View Support Plan**.
+1. On your TiDB Cloud console, click the earphone icon in the upper-right corner of the top navigation bar, and click **Know Support Plan**.
 
     The support page is displayed. On this page, you can see your **Current Plan**. By default, the **Basic** free plan is selected.
 
@@ -77,5 +77,5 @@ To check or upgrade your support plan, perform the following steps:
 
 To downgrade your support plan to **Basic**, perform the following steps:
 
-1. On your TiDB Cloud console, click **Support** in the upper-right corner of the top navigation bar, and click **View Support Plan**.
+1. On your TiDB Cloud console, click the earphone icon in the upper-right corner of the top navigation bar, and click **Know Support Plan**.
 2. At the bottom of the **Support** page, click **Downgrade to basic plan**.
