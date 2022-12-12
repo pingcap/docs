@@ -36,10 +36,10 @@ You can use the tool [Dumpling](/dumpling-overview.md) for data export.
     {{< copyable "shell-regular" >}}
 
     ```shell
-    tiup install dumpling:v6.1.1
+    tiup install dumpling:v6.1.3
     ```
 
-4. Export your data using Dumpling from TiDB. 
+4. Export your data using Dumpling from TiDB.
 
     You can get the following connection parameters `${tidb_endpoint}`, `${port}`, and `${user}` from the **Connection** section on the **Clusters** page.
 
@@ -48,14 +48,14 @@ You can use the tool [Dumpling](/dumpling-overview.md) for data export.
     <div label="Serverless Tier">
 
     ```shell
-    tiup dumpling:v6.1.1 -h ${tidb_endpoint} -P 4000 -u ${user} -p ${password} --ca=${ca_path} -F 67108864MiB -t 4 -o ${export_dir} --filetype sql
+    tiup dumpling:v6.1.3 -h ${tidb_endpoint} -P 4000 -u ${user} -p ${password} --ca=${ca_path} -F 67108864MiB -t 4 -o ${export_dir} --filetype sql
     ```
 
     </div>
     <div label="Dedicated Tier">
 
     ```shell
-    tiup dumpling:v6.1.1 -h ${tidb_endpoint} -P ${port} -u ${user} -p ${password} -F 67108864MiB -t 4 -o ${export_dir} --filetype sql
+    tiup dumpling:v6.1.3 -h ${tidb_endpoint} -P ${port} -u ${user} -p ${password} -F 67108864MiB -t 4 -o ${export_dir} --filetype sql
     ```
 
     </div>
