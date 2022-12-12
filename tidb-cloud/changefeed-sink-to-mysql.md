@@ -74,7 +74,7 @@ The **Sink to MySQL** connector can only sink incremental data from your TiDB cl
 
 After completing the prerequisites, you can sink your data to MySQL.
 
-1. Navigate to the **Data Replication** > **Changefeed** tab of your TiDB cluster.
+1. Navigate to the **Changefeed** tab of your TiDB cluster.
 
 2. Click **Sink to MySQL**.
 
@@ -117,17 +117,17 @@ SET GLOBAL tidb_gc_life_time = '10m';
 
 ## Delete a Sink
 
-1. Navigate to the **Data Replication** > **Changefeed** tab of a cluster.
+1. Navigate to the **Changefeed** tab of a cluster.
 2. Click the corresponding **Changefeed** card, and click **Delete**.
 
 ## Pause or resume a Sink
 
-1. Navigate to the **Data Replication** > **Changefeed** tab of a cluster.
+1. Navigate to the **Changefeed** tab of a cluster.
 2. Click the corresponding **Changefeed** card, and click **Pause** or **Resume**.
 
 ## Query TiCDC RCUs
 
-1. Navigate to the **Data Replication** > **Changefeed** tab of a cluster.
+1. Navigate to the **Changefeed** tab of a cluster.
 2. You can see the current TiCDC Replication Capacity Units (RCUs) in the upper-right corner of the page.
 
 ## Restrictions
