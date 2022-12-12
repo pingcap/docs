@@ -1,6 +1,6 @@
 ---
 title: Deploy and Maintain TiCDC
-summary: Learn the hardware and software recommendations for deploying and running it, and how to deploy and maintain TiCDC.
+summary: Learn the hardware and software recommendations for deploying and running TiCDC, and how to deploy and maintain it.
 ---
 
 # Deploy and Maintain TiCDC
@@ -81,7 +81,7 @@ It is recommended that you use TiUP to scale in TiCDC nodes. The following is th
 tiup cluster scale-in <cluster-name> --node 10.0.1.4:8300
 ```
 
-For more use cases, see [Scale in a TiCDC cluster](/scale-tidb-using-tiup.md#scale-in-a-ticdc-cluster)
+For more use cases, see [Scale in a TiCDC cluster](/scale-tidb-using-tiup.md#scale-in-a-ticdc-cluster).
 
 ## Upgrade TiCDC using TiUP
 
@@ -97,13 +97,13 @@ tiup cluster upgrade <cluster-name> <cluster-version> --transfer-timeout 600
 >
 > In the preceding command, you need to replace `<cluster-name>` and `<cluster-version>` with the actual cluster name and cluster version. For example, the version can be v6.4.0.
 
-### Upgrade Cautions
+### Upgrade cautions
 
 When you upgrade a TiCDC cluster, you need to pay attention to the following:
 
 - TiCDC v4.0.2 reconfigured `changefeed`. For details, see [Configuration file compatibility notes](/ticdc/ticdc-compatibility.md#cli-and-configuration-file-compatibility).
 - If you encounter any problem during the upgrade, you can refer to [upgrade FAQs](/upgrade-tidb-using-tiup.md#faq) for solutions.
-- Since v6.3.0, TiCDC supports rolling upgrade. During the upgrade, the replication latency is stable and does not fluctuate significantly. Rolling upgrade is effective automatically if the following conditions are met:
+- Since v6.3.0, TiCDC supports rolling upgrade. During the upgrade, the replication latency is stable and does not fluctuate significantly. Rolling upgrade takes effect automatically if the following conditions are met:
 
 - TiCDC is v6.3.0 or later.
     - TiUP is v1.11.0 or later.

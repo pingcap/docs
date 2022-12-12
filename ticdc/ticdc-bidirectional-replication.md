@@ -19,9 +19,9 @@ TiCDC only replicates incremental data changes that occur after a specified time
 
     ![TiCDC bidirectional replication](/media/ticdc/ticdc-bidirectional-replication.png)
 
-3. Specify the starting timepoint of data replication for the upstream and downstream clusters.
+3. Specify the starting time point of data replication for the upstream and downstream clusters.
 
-    1. Check the timepoint of the upstrema and downstream clusters. In the case of two TiDB clusters, make sure that data in the two clusters are consistent at certain timepoints. For example, the data of TiDB A at `ts=1` and the data of TiDB B at `ts=2` are consistent.
+    1. Check the time point of the upstream and downstream clusters. In the case of two TiDB clusters, make sure that data in the two clusters are consistent at certain time points. For example, the data of TiDB A at `ts=1` and the data of TiDB B at `ts=2` are consistent.
 
     2. When you create the changefeed, set the `--start-ts` of the changefeed for the upstream cluster to the corresponding `tso`. That is, if the upstream cluster is TiDB A, set `--start-ts=1`; if the upstream cluster is TiDB B, set `--start-ts=2`.
 
@@ -43,8 +43,8 @@ Bi-directional replication does not support replicating DDL statements.
 If you need to execute DDL statements, take the following steps:
 
 1. Pause the write operations in the tables that need to execute DDL in all clusters. If the DDL statement is adding a non-unique index, skip this step.
-2. After the write operations of the correponding tables in all clusters have been replicated to other clusters, manually execute all DDL statements in each TiDB cluster.
-3. After the DDl statements are executed, resume the write operations.
+2. After the write operations of the corresponding tables in all clusters have been replicated to other clusters, manually execute all DDL statements in each TiDB cluster.
+3. After the DDL statements are executed, resume the write operations.
 
 Note that a DDL statement that adds non-unique index does not break bi-directional replication, so you do not need to pause the write operations in the corresponding table.
 

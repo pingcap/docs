@@ -48,19 +48,19 @@ The following are descriptions of parameters and parameter values that can be co
 
 | Parameter/Parameter Value    | Description                                             |
 | :------------ | :------------------------------------------------ |
-| `root`        | The username of the downstream database                              |
-| `123456`       | The password of the downstream database (can be encoded using Base64)                                      |
-| `127.0.0.1`    | The IP address of the downstream database                               |
-| `3306`         | The port for the downstream data                                 |
-| `worker-count` | The number of SQL statements that can be concurrently executed to the downstream (optional, `16` by default)       |
-| `max-txn-row`  | The size of a transaction batch that can be executed to the downstream (optional, `256` by default) |
-| `ssl-ca` | The path of the CA certificate file needed to connect to the downstream MySQL instance (optional)  |
-| `ssl-cert` | The path of the certificate file needed to connect to the downstream MySQL instance (optional) |
-| `ssl-key` | The path of the certificate key file needed to connect to the downstream MySQL instance (optional) |
+| `root`        | The username of the downstream database.                              |
+| `123456`       | The password of the downstream database (can be encoded using Base64).                                      |
+| `127.0.0.1`    | The IP address of the downstream database.                               |
+| `3306`         | The port for the downstream data.                                 |
+| `worker-count` | The number of SQL statements that can be concurrently executed to the downstream (optional, `16` by default).       |
+| `max-txn-row`  | The size of a transaction batch that can be executed to the downstream (optional, `256` by default). |
+| `ssl-ca` | The path of the CA certificate file needed to connect to the downstream MySQL instance (optional).  |
+| `ssl-cert` | The path of the certificate file needed to connect to the downstream MySQL instance (optional). |
+| `ssl-key` | The path of the certificate key file needed to connect to the downstream MySQL instance (optional). |
 | `time-zone` | The time zone used when connecting to the downstream MySQL instance, which is effective since v4.0.8. This is an optional parameter. If this parameter is not specified, the time zone of TiCDC service processes is used. If this parameter is set to an empty value, no time zone is specified when TiCDC connects to the downstream MySQL instance and the default time zone of the downstream is used. |
 | `transaction-atomicity`  |  The atomicity level of a transaction. This is an optional parameter, with the default value of `none`. When the value is `table`, TiCDC ensures the atomicity of a single-table transaction. When the value is `none`, TiCDC splits the single-table transaction.  |
 
-To encode the database password in the Sink URI using Base64, use the following command:
+To encode the database password in the sink URI using Base64, use the following command:
 
 ```shell
 echo -n '123456' | base64   # '123456' is the password to be encoded.

@@ -1,10 +1,10 @@
 ---
-title: Manage Changefeed
+title: Manage Changefeeds
 summary: Learn how to manage TiCDC changefeeds.
 aliases: ['/tidb/dev/manage-ticdc']
 ---
 
-# Manage Changefeed
+# Manage Changefeeds
 
 This document describes how to create and manage TiCDC changefeeds by using the TiCDC command-line tool `cdc cli`. You can also manage changefeeds via the HTTP interface of TiCDC. For details, see [TiCDC OpenAPI](/ticdc/ticdc-open-api.md).
 
@@ -257,7 +257,7 @@ Currently, you can modify the following configuration items:
     - `resolved-ts`: The largest TSO among the sorted data in the current processor.
     - `checkpoint-ts`: The largest TSO that has been successfully written to the downstream in the current processor.
 
-## Output the historical value of a Row Changed Event <span class="version-mark">New in v4.0.5</span>
+## Output the historical value of a Row Changed Event
 
 In the default configuration, the Row Changed Event of TiCDC Open Protocol output in a replication task only contains the changed value, not the value before the change. Therefore, the output value cannot be used by the consumer ends of TiCDC Open Protocol as the historical value of a Row Changed Event.
 

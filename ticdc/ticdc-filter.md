@@ -32,7 +32,7 @@ Common filter rules:
 
 For more information, see [Table filter syntax](/table-filter.md#syntax).
 
-## Event filter rules <span class="version-mark">New in v6.2.0</span>
+## Event filter rules
 
 Starting in v6.2.0, TiCDC supports event filter. You can configure event filter rules to filter out the DML and DDL events that meet the specified conditions.
 
