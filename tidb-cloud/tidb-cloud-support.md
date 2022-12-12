@@ -41,7 +41,7 @@ Alternatively, you can also access the [Customer Support](https://support.pingca
 
 To check or upgrade your support plan, perform the following steps:
 
-1. On your TiDB Cloud console, click the <MDSvgIcon name="icon-top-support" /> icon in the upper-right corner of the top navigation bar, and click **Know Support Plan**.
+1. On your TiDB Cloud console, click the <MDSvgIcon name="icon-top-support" /> icon in the upper-right corner of the top navigation bar, and click **View Support Plan**.
 
     The support page is displayed. On this page, you can see your **Current Plan**. By default, the **Basic** free plan is selected.
 
@@ -77,5 +77,5 @@ To check or upgrade your support plan, perform the following steps:
 
 To downgrade your support plan to **Basic**, perform the following steps:
 
-1. On your TiDB Cloud console, click the <MDSvgIcon name="icon-top-support" /> icon in the upper-right corner of the top navigation bar, and click **Know Support Plan**.
+1. On your TiDB Cloud console, click the <MDSvgIcon name="icon-top-support" /> icon in the upper-right corner of the top navigation bar, and click **View Support Plan**.
 2. At the bottom of the **Support** page, click **Downgrade to basic plan**.
