@@ -9,7 +9,7 @@ aliases: ['/tidbcloud/beta/tidb-cloud-quickstart']
 
 *Estimated completion time: 20 minutes*
 
-This tutorial guides you through an easy way to get started with your TiDB Cloud. The content includes how to create a cluster, try playground, load your data, and connect to your cluster.
+This tutorial guides you through an easy way to get started with your TiDB Cloud. The content includes how to create a cluster, try Playground, load your data, and try running SQL statements in the TiDB Cloud console.
 
 ## Step 1. Create a TiDB cluster
 
@@ -31,7 +31,7 @@ TiDB Cloud [Serverless Tier](/tidb-cloud/select-cluster-tier.md#serverless-tier-
 
     Your TiDB Cloud cluster will be created in several minutes.
 
-6. During the creation process, perform security settings for your cluster:
+6. After the creation is completed, perform security settings for your cluster:
 
     1. Click **Security Settings** in the upper-right corner of the cluster area.
     2. In the **Security Settings** dialog box, set a root password to connect to your cluster, and then click **Apply**. If you do not set a root password, you cannot connect to the cluster.
@@ -57,7 +57,7 @@ After trying **Plaground**, you can load sample data to your TiDB Cloud cluster.
 3. Fill in the import parameters:
 
     - **Data Format**: select **SQL File**
-    - **Location**: `AWS`
+    - **Location**: select **AWS**
     - **Bucket URI**: `s3://tidbcloud-samples/data-ingestion/`
     - **Role ARN**: `arn:aws:iam::385595570414:role/import-sample-access`
 
@@ -73,11 +73,7 @@ The data import process will take several minutes. When the data import progress
 
 After loading data to the cluster, you can try running SQL statements directly from the console.
 
-1. Navigate to the **Clusters** page.
-
-2. Click the name of your cluster to enter the cluster details page.
-
-3. Hover on the left navigation bar and click **SQL Editor**. The SQL Editor page is displayed.
+1. Hover on the left navigation bar and click **SQL Editor**. The SQL Editor page is displayed.
 
     In the SQL editor, you can edit and run SQL queries directly against your cluster without using a terminal.
 
@@ -85,9 +81,9 @@ After loading data to the cluster, you can try running SQL statements directly f
     >
     > The SQL editor currently has limited support on SQL statements. DDLs such as `CREATE TABLE` or `DROP TABLE` are not supported yet.
 
-4. In the drop-down list, select `bikeshare`. This is the database where the sample data is imported.
+2. In the drop-down list, select `bikeshare`. This is the database where the sample data is imported.
 
-5. To view the tables in the `bikeshare` database, type in the following SQL statement in the editor:
+3. To view the tables in the `bikeshare` database, type in the following SQL statement in the editor:
 
     ```sql
     SHOW tables;
@@ -95,7 +91,7 @@ After loading data to the cluster, you can try running SQL statements directly f
 
     To run the query, press **Ctrl + Enter** or click **Run**. You can see the query log and results immediately on the bottom of the page.
 
-6. To show the structure of the `trip` table and count how many records the table contains, type in the two following SQL statements in the editor:
+4. To show the structure of the `trip` table and count how many records the table contains, type in the two following SQL statements in the editor:
 
     ```sql
     DESCRIBE trips;
