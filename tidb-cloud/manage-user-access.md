@@ -72,7 +72,7 @@ To access a cluster in a project under an organization, a user must be both a me
 
 To view which organizations you belong to, perform these steps:
 
-1. Click the account name in the upper-right corner of the TiDB Cloud console.
+1. Click the <MDSvgIcon name="icon-top-organization" /> icon in the upper-right corner of the TiDB Cloud console.
 2. Select **Switch Organization** in the drop-down menu, and you can see all the organizations you belong to in the submenu.
 
 To check which project you belong to, perform these steps:
