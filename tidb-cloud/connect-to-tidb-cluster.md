@@ -103,7 +103,7 @@ To connect to your TiDB cluster via private endpoint, perform the following step
 
 To connect to your TiDB cluster via VPC peering, perform the following steps:
 
-1. Choose your target project and navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page.
+1. Navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page and choose your target project on the top of the left navigation bar.
 
 2. Locate your cluster, click **Connect** in the upper-right corner of the cluster area, and select the **VPC Peering** tab in the connection dialog.
 
