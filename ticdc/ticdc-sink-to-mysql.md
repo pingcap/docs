@@ -46,7 +46,7 @@ Sample configuration for MySQL:
 
 The following are descriptions of sink URI parameters and parameter values that can be configured for MySQL or TiDB:
 
-| Parameter/Parameter Value    | Description                                             |
+| Parameter/Parameter value    | Description                                             |
 | :------------ | :------------------------------------------------ |
 | `root`        | The username of the downstream database.                              |
 | `123456`       | The password of the downstream database (can be encoded using Base64).                                      |
