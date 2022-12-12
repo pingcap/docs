@@ -87,7 +87,7 @@ After completing the prerequisites, you can sink your data to MySQL.
 
 5. Customize **Table Filter** to filter the tables that you want to replicate. For the rule syntax, refer to [table filter rules](/table-filter.md)
 
-    - **Add filter rules**: you can set filter rules in this column. By default, there is a rule `*. *`, which stands for replicating all tables. When you add a new rule, TiDB Cloud queries all the tables in TiDB and displays the tables that can be replicated in the list box on the right.  Instructions for use:
+    - **Add filter rules**: you can set filter rules in this column. By default, there is a rule `*. *`, which stands for replicating all tables. When you add a new rule, TiDB Cloud queries all the tables in TiDB and displays the tables that can be replicated in the list box on the right. Instructions for use:
     - **Tables to be replicated**: this column shows the tables to be replicated. But it does not show the new tables to be replicated in the future or the schema to be fully replicated.
     - **Tables without valid keys**: this column shows tables that do not have unique and primary keys. Because no unique identifier can be used by the downstream system to handle duplicate events, the data might be inconsistent during replication. We recommend that you add unique keys or primary keys to these tables, or set filter rules, such as filtering out the table `test`.`tbl1` using "!test.tbl1".
 
