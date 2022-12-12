@@ -69,7 +69,7 @@ To create a Serverless Tier cluster, take the following steps:
 
 2. Click **Create Cluster**.
 
-3. On the **Create Cluster** page, update the default cluster name if necessary.
+3. On the **Create Cluster** page, select **Serverless Tier**, and update the default cluster name if necessary.
 
 4. Note that the cloud provider of Serverless Tier is AWS, and then select the region where you want to create your cluster.
 
