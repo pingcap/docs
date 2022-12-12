@@ -119,13 +119,39 @@ No. TiFlash data cannot be exported.
 
 ## Security FAQs
 
-### How does TiDB protect data privacy and ensure security?
+### How secure is TiDB Cloud?
 
-Transport Layer Security (TLS) and Transparent Data Encryption (TDE) are included for encryption at rest. There are two different network planes: the application to the TiDB server and the plane for data communication. We include extended syntax to compare Subject Alternative Name for verification of certificates and TLS context for internal communication.
+In TiDB Cloud, all data at rest is always encrypted and all network traffic is encrypted using Transport Layer Security (TLS). Encryption for data at rest is automoated using encrypted storage volumes.Encryption for data in transit is automoated using TiDB Cloud Web server TLS and TiDB Cluster's TLS between your client and your database cluster.
 
-### Can TiDB Cloud run in our VPC?
+### How does TiDB Cloud encrypt your business data?
 
-No. TiDB Cloud runs on the PingCAP VPC, but the data and traffic are encrypted by default. So you do not need to worry about data privacy issues.
+TiDB Cloud uses storage volume encryption by default for your business data at rest,including your database data and backups data. TiDB Cloud requires TLS encryption for your business data in transit and using component TLS encryption your business data in your Database Cluster between TiDB,PD ,TiKV and Tiflash.
+If your organization requires more specific business data encryption information in TiDB Cloud,please contact [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md).
+
+### Can TiDB Cloud run in your VPC?
+
+No. TiDB Cloud is Database as a service(DBaaS) and runs only on the TiDB Cloud VPC, which is a cloud computing managed service offering that provides access to a database without requiring the setup of physical hardware, the installation of software.
+
+### How secure is your TiDB Cluster?
+
+In TiDB Cloud, we offer dedicated Tier and Serverless Tier for different customers.
+In dedicated Cluster, we created independent sub-accounts and VPCs for each cluster, set up firewall rules to isolate external connections, create server-side TLS certificates and component TLS certificates for each cluster to encrypted cluster data in transit, and provide IP access rules for each cluster to protect that only allowed source IPs can access your cluster.
+In the serverless cluster, we created independent sub-accounts for each cluster, and also set up firewall rules to isolate external connections, and provided cluster server TLS certificates to encrypt cluster data in transit.
+All connections to the cluster over the internet use TLS 1.2 or 1.3.
+
+### How do you connect to your database cluster?
+
+In your dedicated cluster,you need to do four steps to connect to your cluster: 1. Authorize your network; 2. Set up your database users and login credentials; 3. Download and config your cluster server TLS; 4. Select the type of SQL client and execute an auto-generated command,and then you can connect to your cluster through SQL client.
+For  more details, see [Connect to Your TiDB Cluster](/tidb-cloud/connect-to-tidb-cluster.md).
+
+In your serverless cluster, the steps to connect  your cluster are simplified as follows: 1. Set the database user and login credentials; 2. Select the type of SQL client and execute an auto-generated command, and then you can connect to your cluster easily. 
+For  more details, see [Connect to Your TiDB Cluster](/tidb-cloud/connect-to-tidb-cluster.md).
+
+### Who has access to your business data in your database cluster?
+
+In TiDB Cloud, our technical support cannot directly access the table data in your database cluster.In order to improve products and solve cluster operation problems, our technical support  needs to access the cluster operation data after obtaining internal temporary authorization. 
+All authorization and access records are audited annually by a third-party auditor,including: PCI-DSS, SOC2, ISO27701.
+TiDB Cloud operational data is described in TiDB Cloud [Privacy Policy](https://www.pingcap.com/privacy-policy/) and [Data Processing Agreement](https://www.pingcap.com/legal/data-processing-agreement-for-tidb-cloud-services/).
 
 ## Support FAQ
 
