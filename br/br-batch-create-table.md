@@ -29,13 +29,7 @@ To disable this feature, you can set `--ddl-batch-size` to `1`. See the followin
 {{< copyable "shell-regular" >}}
 
 ```shell
-<<<<<<< HEAD
-br restore full -s local:///br_data/ --pd 172.16.5.198:2379 --log-file restore.log --ddl-batch-size=0
-=======
-br restore full \
---storage local:///br_data/ --pd "${PD_IP}:2379" --log-file restore.log \
---ddl-batch-size=1
->>>>>>> d633f2bb9 (br: incorrect description of batch create table (#11580))
+br restore full -s local:///br_data/ --pd 172.16.5.198:2379 --log-file restore.log --ddl-batch-size=1
 ```
 
 After this feature is disabled, BR uses the [serial execution implementation](#implementation-principles) instead.
