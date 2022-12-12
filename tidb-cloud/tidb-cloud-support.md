@@ -22,7 +22,7 @@ To request support for your organization, project, or cluster, perform the follo
 
 3. Click **Send**.
 
-Alternatively, you can click the earphone icon in the upper-right corner and click **Create New Case** to request support. If you go with this way, you need to provide your Organization ID in the request form as well. To get the Organization ID, click the building icon in the upper-right corner of the TiDB Cloud console and click **Organization Settings**.
+Alternatively, you can click the earphone icon in the upper-right corner and click **Create New Case** to request support. If you go with this way, you need to provide your Organization ID in the request form as well. To get the Organization ID, click the <MDSvgIcon name="icon-top-organization" /> icon in the upper-right corner of the TiDB Cloud console and click **Organization Settings**.
 
 After the support team receives your request, they will reply to you via email.
 
@@ -30,7 +30,7 @@ After the support team receives your request, they will reply to you via email.
 
 After you have submitted a request, to check the status of your request, perform the following steps:
 
-1. On your TiDB Cloud console, click **Support** in the upper-right corner of the top navigation bar, and click **View Support Plan**. The support page is displayed.
+1. On your TiDB Cloud console, click the <MDSvgIcon name="icon-top-support" /> icon in the upper-right corner of the top navigation bar, and click **View Support Plan**. The support page is displayed.
 2. In the **Request Support** area, click **View Support Portal**. The **My request** page is displayed.
 
     On the **My request** page, you can view the status of your request.
