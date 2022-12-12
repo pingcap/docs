@@ -73,7 +73,7 @@ The data import process will take several minutes. When the data import progress
 
 After loading data to the cluster, you can try running SQL statements directly from the console.
 
-1. Hover on the left navigation bar and click **SQL Editor**. The SQL Editor page is displayed.
+1. Click **SQL Editor** on the left navigation bar. The SQL Editor page is displayed.
 
     In the SQL editor, you can edit and run SQL queries directly against your cluster without using a terminal.
 
