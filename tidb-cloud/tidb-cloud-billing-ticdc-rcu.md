@@ -23,7 +23,7 @@ For each TiDB cluster, the number of TiCDC RCUs is set up by TiDB Cloud accordin
 
 The following table lists the price of TiDB Cloud for each TiCDC RCUs:
 
-| Cloud provider | Region                      | RCUs Price ($/hr) |
+| Cloud provider | Region                      | RCU price ($/hr) |
 |----------------|-----------------------------|------------------|
 | AWS            | Oregon (us-west-2)          |          $0.1307 |
 | AWS            | N. Virginia (us-east-1)     |          $0.1307 |
