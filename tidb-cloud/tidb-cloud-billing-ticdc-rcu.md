@@ -11,7 +11,7 @@ TiDB Cloud measures the capacity of changefeeds in TiCDC Replication Capacity Un
 
 For each TiDB cluster, the number of TiCDC RCUs is set up by TiDB Cloud according to the total vCPU count of all TiKV nodes in your cluster as follows:
 
-| Total vCPUs of all TiKV nodes | Number of TCUs |
+| Total vCPUs of all TiKV nodes | Number of RCUs |
 |------------------------------|----------------|
 | < 48                         | 16             |
 | >= 48, and < 120             | 24             |
