@@ -520,6 +520,7 @@
       - [Alert Rules](/ticdc/ticdc-alert-rules.md)
     - [Troubleshoot](/ticdc/troubleshoot-ticdc.md)
     - Reference
+      - [Architecture](/ticdc/ticdc-architecture.md)
       - [TiCDC OpenAPI](/ticdc/ticdc-open-api.md)
       - [TiCDC Open Protocol](/ticdc/ticdc-open-protocol.md)
       - [TiCDC Avro Protocol](/ticdc/ticdc-avro-protocol.md)
