@@ -81,21 +81,19 @@ After loading data to the cluster, you can try running SQL statements directly f
     >
     > The SQL editor currently has limited support on SQL statements. DDLs such as `CREATE TABLE` or `DROP TABLE` are not supported yet.
 
-2. In the drop-down list, select `bikeshare`. This is the database where the sample data is imported.
-
-3. To view the tables in the `bikeshare` database, type in the following SQL statement in the editor:
+2. In the editor, type in the following SQL statement:
 
     ```sql
-    SHOW tables;
+    SHOW databases;
     ```
 
     To run the query, press **Control + Enter** or click <path d="M6.70001 20.7756C6.01949 20.3926 6.00029 19.5259 6.00034 19.0422L6.00034 12.1205L6 5.33028C6 4.75247 6.00052 3.92317 6.38613 3.44138C6.83044 2.88625 7.62614 2.98501 7.95335 3.05489C8.05144 3.07584 8.14194 3.12086 8.22438 3.17798L19.2865 10.8426C19.2955 10.8489 19.304 10.8549 19.3126 10.8617C19.4069 10.9362 20 11.4314 20 12.1205C20 12.7913 19.438 13.2784 19.3212 13.3725C19.307 13.3839 19.2983 13.3902 19.2831 13.4002C18.8096 13.7133 8.57995 20.4771 8.10002 20.7756C7.60871 21.0812 7.22013 21.0683 6.70001 20.7756Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"></path> **Run**. You can see the query log and results immediately on the bottom of the page.
 
-4. To show the structure of the `trip` table and count how many records the table contains, type in the two following SQL statements in the editor:
+3. To view the tables in the `bikeshare` database, type in the following SQL statements:
 
     ```sql
-    DESCRIBE trips;
-    SELECT COUNT(*) FROM trips;
+    USE bikeshare;
+    SHOW tables;
     ```
 
     To run the two queries sequentially, you can do one of the following:
@@ -106,6 +104,13 @@ After loading data to the cluster, you can try running SQL statements directly f
     In the query log panel, you can see the two queries are executed one by one.
 
     If there are two or more queries in the editor, pressing **Control + Enter** or clicking **Run** only runs the query that is being highlighted in the editor.
+
+4. To show the structure of the `trip` table and count how many records the table contains, run the two following SQL statements in the editor:
+
+    ```sql
+    DESCRIBE trips;
+    SELECT COUNT(*) FROM trips;
+    ```
 
 You are now ready to use TiDB Cloud to build your applications.
 
