@@ -134,7 +134,7 @@ For detailed steps, see [Configure GCS access](/tidb-cloud/config-s3-and-gcs-acc
         gsutil rsync -r ./tidbcloud-samples-us-west-2/ gs://target-url-in-gcs
         ```
 
-2. From the TiDB Cloud console, navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page, choose your target project on the top of the left navigation bar, and then click the name of your target cluster to go to its own overview page. In the **Import** area, click **Import Data**, and then fill in the importing related information on the **Data Import** page.
+2. In the TiDB Cloud console, navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page, choose your target project on the top of the left navigation bar, and then click the name of your target cluster to go to its own overview page. In the **Import** area, click **Import Data**, and then fill in the importing related information on the **Data Import** page.
 
 > **Note:**
 >
