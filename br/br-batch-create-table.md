@@ -24,12 +24,12 @@ For the detailed effect, see [Test for the Batch Create Table Feature](#test-for
 
 BR enables the Batch Create Table feature by default, with the default configuration of `--ddl-batch-size=128` in v6.0.0 or later to speed up the restore process. Therefore, you do not need to configure this parameter. `--ddl-batch-size=128` means that BR creates tables in batches, each batch with 128 tables.
 
-To disable this feature, you can set `--ddl-batch-size` to `0`. See the following example command:
+To disable this feature, you can set `--ddl-batch-size` to `1`. See the following example command:
 
 {{< copyable "shell-regular" >}}
 
 ```shell
-br restore full -s local:///br_data/ --pd 172.16.5.198:2379 --log-file restore.log --ddl-batch-size=0
+br restore full -s local:///br_data/ --pd 172.16.5.198:2379 --log-file restore.log --ddl-batch-size=1
 ```
 
 After this feature is disabled, BR uses the [serial execution implementation](#implementation-principles) instead.
