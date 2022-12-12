@@ -148,11 +148,11 @@ This section introduces the triggers and actions provided by TiDB Cloud App on Z
 The following table lists the triggers supported by TiDB Cloud App.
 
 | Trigger                | Description                                                                 |
-| ---------------------- | --------------------------------------------------------------------------- |
-| New Cluster            | triggers when a new cluster is created.                                     |
-| New Table              | triggers when a new table is created.                                       |
-| New Row                | triggers when new rows are created. Only fetches the recent 10000 new rows. |
-| New Row (Custom Query) | triggers when new rows are returned from a custom query that you provide.   |
+| ---------------------- |-----------------------------------------------------------------------------|
+| New Cluster            | Triggers when a new cluster is created.                                     |
+| New Table              | Triggers when a new table is created.                                       |
+| New Row                | Triggers when new rows are created. Only fetches the recent 10000 new rows. |
+| New Row (Custom Query) | Triggers when new rows are returned from a custom query that you provide.   |
 
 ### Actions
 
