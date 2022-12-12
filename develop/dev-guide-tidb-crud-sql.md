@@ -23,7 +23,19 @@ To experiment with SQL and test out TiDB compatibility with MySQL queries, you c
 
 > **Note:**
 >
-> The SQL editor currently has limited support on SQL. DDLs such as `CREATE TABLE` or `DROP TABLE` are not supported yet. If you want to explore all SQL statements with TiDB, you can deploy a TiDB cluster and then run SQL statements in it.
+> The SQL editor currently has limited support on SQL. DDLs such as `CREATE TABLE` or `DROP TABLE` are not supported yet.
+>
+> <CustomContent platform="tidb">
+>
+> If you want to explore all SQL statements with TiDB, you can deploy a TiDB cluster and then run SQL statements in it.
+>
+> </CustomContent>
+>
+> <CustomContent platform="tidb-cloud">
+>
+> If you want to explore all SQL statements with TiDB, you can [connect to your TiDB Cloud cluster](/tidb-cloud/connect-to-tidb-cluster.md) and then run SQL statements from a SQL client.
+>
+> </CustomContent>
 
 This page walks you through the basic TiDB SQL statements such as DDL, DML, and CRUD operations. For a complete list of TiDB statements, see [TiDB SQL Syntax Diagram](https://pingcap.github.io/sqlgram/).
 
