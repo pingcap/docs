@@ -83,13 +83,11 @@ Support password expiration reminder function. If you sign up for TiDB Cloud wit
     >
     > If your password is not changed within 90 days, you will get a prompt to change your password when you login to TiDB Cloud. It is recommended that you follow the prompt to change password.
 
-
 ## Setp5: Enables MFA (optional)
 
 After signing in, you can enable multi-factor authentication(MFA ) in accordance with laws and regulations.
 
 Two factor authentication adds additional security by requiring an Authenticator app to generate a one-time password to log in. You may use any Authenticator app from the iOS or Android App Store to generate this password, for example: Google Authenticator, Authy.
-
 
 ### Enable MFA
 
