@@ -140,6 +140,7 @@ In TiDB Cloud, we offer dedicated Tier and Serverless Tier for different custome
 In dedicated Cluster, we created independent sub-accounts and VPCs for each cluster, set up firewall rules to isolate external connections, create server-side TLS certificates and component TLS certificates for each cluster to encrypted cluster data in transit, and provide IP access rules for each cluster to protect that only allowed source IPs can access your cluster.
 
 In the serverless cluster, we created independent sub-accounts for each cluster, and also set up firewall rules to isolate external connections, and provided cluster server TLS certificates to encrypt cluster data in transit.
+
 All connections to the cluster over the internet use TLS 1.2 or 1.3.
 
 ### How do you connect to your database cluster?
