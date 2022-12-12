@@ -71,7 +71,7 @@ If you forget your password, you can reset it by email. The steps are as follows
 
 ### Change Password
 
-Support password expiration reminder function. If you sign up for TiDB Cloud with email and password, it is recommended that you reset your password every 90 days.To change the password, take the following steps:
+Support password expiration reminder function. If you sign up for TiDB Cloud with email and password, it is recommended that you reset your password every 90 days. To change the password take the following steps: 
 
 1. Click the account name in the upper-right corner of the TiDB Cloud console
 
