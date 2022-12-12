@@ -26,7 +26,7 @@ After your TiDB cluster is created on TiDB Cloud, you can use one of the followi
 
 To connect to a Serverless Tier cluster via standard connection, perform the following steps:
 
-1. Choose your target project and navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page.
+1. Navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page and choose your target project on the top of the left navigation bar.
 
 2. Locate your cluster, and click **Connect** in the upper-right corner of the cluster area. A connection dialog box is displayed.
 
@@ -43,7 +43,7 @@ To connect to a Serverless Tier cluster via standard connection, perform the fol
 
 To connect to a Dedicated Tier cluster via standard connection, perform the following steps:
 
-1. Choose your target project and navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page.
+1. Navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page and choose your target project on the top of the left navigation bar.
 
 2. Locate your cluster, and click **Connect** in the upper-right corner of the cluster area. A connection dialog box is displayed.
 
@@ -82,7 +82,7 @@ To connect to a Dedicated Tier cluster via standard connection, perform the foll
 
 To connect to your TiDB cluster via private endpoint, perform the following steps:
 
-1. In the TiDB Cloud console, choose your target project and navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page.
+1. Navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page and choose your target project on the top of the left navigation bar.
 2. Locate your cluster, and click **Connect** in the upper-right corner of the cluster area. A connection dialog box is displayed.
 3. Select the **Private Endpoint** tab.
 4. Set up a private endpoint. See [Set Up Private Endpoint Connections](/tidb-cloud/set-up-private-endpoint-connections.md#set-up-a-private-endpoint-with-aws).
@@ -117,7 +117,7 @@ To connect to your TiDB cluster via VPC peering, perform the following steps:
 
 To connect to your TiDB cluster using SQL shell, perform the following steps:
 
-1. Choose your target project and navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page.
+1. Navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page and choose your target project on the top of the left navigation bar.
 
 2. Locate your cluster, click **Connect** in the upper-right corner of the cluster area, and select the **Web SQL Shell** tab in the connection dialog.
 

@@ -65,17 +65,19 @@ If you are a project member, you can access only the specific projects to which 
 
 To create a Serverless Tier cluster, take the following steps:
 
-1. On the [**Clusters**](https://tidbcloud.com/console/clusters) page, click **Create Cluster**.
+1. Navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page and choose your target project on the top of the left navigation bar.
 
-2. On the **Create Cluster** page, update the default cluster name if necessary.
+2. Click **Create Cluster**.
 
-3. Note that the cloud provider of Serverless Tier is AWS, and then select the region where you want to create your cluster.
+3. On the **Create Cluster** page, update the default cluster name if necessary.
 
-4. Click **Create**.
+4. Note that the cloud provider of Serverless Tier is AWS, and then select the region where you want to create your cluster.
+
+5. Click **Create**.
 
     The cluster creation process starts and your TiDB Cloud cluster will be created in approximately 30 seconds.
 
-5. During the creation process, perform security settings for your cluster:
+6. During the creation process, perform security settings for your cluster:
 
     1. Click **Security Settings** in the upper-right corner of the cluster area.
     2. In the **Security Settings** dialog box, set the root password to connect to your cluster, and then click **Apply**.
@@ -90,9 +92,9 @@ To create a Serverless Tier cluster, take the following steps:
 
 To create a Dedicated Tier cluster, take the following steps:
 
-1. Choose the target project.
+1. Navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page and choose your target project on the top of the left navigation bar.
 
-2. On the [**Clusters**](https://tidbcloud.com/console/clusters) page, click **Create Cluster**.
+2. Click **Create Cluster**.
 
 3. On the **Create Cluster** page, select **Dedicated Tier**, update the default cluster name and port number if necessary, choose a cloud provider and a region, and then click **Next**.
 
