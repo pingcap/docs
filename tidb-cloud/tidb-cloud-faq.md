@@ -141,17 +141,14 @@ All connections to the cluster over the internet use TLS 1.2 or 1.3.
 
 ### How do you connect to your database cluster?
 
-In your dedicated cluster,you need to do four steps to connect to your cluster: 1. Authorize your network; 2. Set up your database users and login credentials; 3. Download and config your cluster server TLS; 4. Select the type of SQL client and execute an auto-generated command,and then you can connect to your cluster through SQL client.
-For  more details, see [Connect to Your TiDB Cluster](/tidb-cloud/connect-to-tidb-cluster.md).
-
-In your serverless cluster, the steps to connect  your cluster are simplified as follows: 1. Set the database user and login credentials; 2. Select the type of SQL client and execute an auto-generated command, and then you can connect to your cluster easily. 
+In your dedicated cluster,you need to do four steps to connect to your cluster: Authorize your network; Set up your database users and login credentials;Download and config your cluster server TLS; Select the type of SQL client and execute an auto-generated command,and then you can connect to your cluster through SQL client.
+For more details, see [Connect to Your TiDB Cluster](/tidb-cloud/connect-to-tidb-cluster.md).
+In your serverless cluster,the steps to connect  your cluster are simplified as follows: Set the database user and login credentials; Select the type of SQL client and execute an auto-generated command, and then you can connect to your cluster easily. 
 For  more details, see [Connect to Your TiDB Cluster](/tidb-cloud/connect-to-tidb-cluster.md).
 
 ### Who has access to your business data in your database cluster?
 
-In TiDB Cloud, our technical support cannot directly access the table data in your database cluster.In order to improve products and solve cluster operation problems, our technical support  needs to access the cluster operation data after obtaining internal temporary authorization. 
-All authorization and access records are audited annually by a third-party auditor,including: PCI-DSS, SOC2, ISO27701.
-TiDB Cloud operational data is described in TiDB Cloud [Privacy Policy](https://www.pingcap.com/privacy-policy/) and [Data Processing Agreement](https://www.pingcap.com/legal/data-processing-agreement-for-tidb-cloud-services/).
+In TiDB Cloud, our technical support cannot directly access the table data in your database cluster.In order to improve products and solve cluster operation problems, our technical support needs to access the cluster operation data after obtaining internal temporary authorization. All authorization and access records are audited annually by a third-party auditor,including: PCI-DSS, SOC2, ISO27701.TiDB Cloud operational data is described in TiDB Cloud [Privacy Policy](https://www.pingcap.com/privacy-policy/) and [Data Processing Agreement](https://www.pingcap.com/legal/data-processing-agreement-for-tidb-cloud-services/).
 
 ## Support FAQ
 
