@@ -210,7 +210,7 @@ If you are the organization owner, you can modify the system display time accord
 
 To change the local timezone setting, perform the following steps:
 
-1. Click the buildng icon in the upper-right corner of the TiDB Cloud console.
+1. Click the <MDSvgIcon name="icon-top-organization" /> icon in the upper-right corner of the TiDB Cloud console.
 
 2. Click **Organization Settings**. The organization settings page is displayed.
 
