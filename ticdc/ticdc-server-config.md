@@ -5,11 +5,11 @@ summary: Learn the CLI and configuration parameters used in TiCDC.
 
 # TiCDC Server Configurations
 
-This document describes the CLI and configuration parameters used in TiCDC.
+This document describes the CLI and configuration file parameters used in TiCDC.
 
 ## `cdc server` CLI parameters
 
-The following are descriptions of options available in `cdc server` commands:
+The following are descriptions of options available in a `cdc server` command:
 
 - `addr`: The listening address of TiCDC, the HTTP API address, and the Prometheus address of the TiCDC service. The default value is `127.0.0.1:8300`.
 - `advertise-addr`: The advertised address via which clients access TiCDC. If unspecified, the value is the same as that of `addr`.

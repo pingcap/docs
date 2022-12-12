@@ -9,7 +9,7 @@ TiCDC supports filtering data by tables and events. This document introduces how
 
 ## Table filter
 
-Table filter is a feature that allows you to keep or filter out specific tables by specifying configurations as shown below:
+Table filter is a feature that allows you to keep or filter out specific databases and tables by specifying the following configurations:
 
 ```toml
 [filter]

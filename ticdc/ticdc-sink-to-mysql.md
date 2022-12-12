@@ -30,21 +30,21 @@ Info: {"sink-uri":"mysql://root:123456@127.0.0.1:3306/","opts":{},"create-time":
 - `--target-ts`: Specifies the ending TSO of the changefeed. To this TSO, the TiCDC cluster stops pulling data. The default value is empty, which means that TiCDC does not automatically stop pulling data.
 - `--config`: Specifies the changefeed configuration file. For details, see [TiCDC Changefeed Configuration Parameters](/ticdc/ticdc-changefeed-config.md).
 
-## Configure sink URI with `mysql`/`tidb`
+## Configure sink URI for MySQL or TiDB
 
-Sink URI is used to specify the connection information of the target system of TiCDC. The format is as follows:
+Sink URI is used to specify the connection information of the TiCDC target system. The format is as follows:
 
 ```
 [scheme]://[userinfo@][host]:[port][/path]?[query_parameters]
 ```
 
-Sample configuration:
+Sample configuration for MySQL:
 
 ```shell
 --sink-uri="mysql://root:123456@127.0.0.1:3306/?worker-count=16&max-txn-row=5000&transaction-atomicity=table"
 ```
 
-The following are descriptions of parameters and parameter values that can be configured for the sink URI with `mysql`/`tidb`:
+The following are descriptions of sink URI parameters and parameter values that can be configured for MySQL or TiDB:
 
 | Parameter/Parameter Value    | Description                                             |
 | :------------ | :------------------------------------------------ |

@@ -1,11 +1,11 @@
 ---
 title: Changefeed Overview
-summary: Learn basic concepts, and state definitions and transfer of changefeeds.
+summary: Learn basic concepts, state definitions, and state transfer of changefeeds.
 ---
 
 # Changefeed Overview
 
-A changefeed is a replication task in TiCDC, which outputs the data change logs of several tables in a TiDB cluster to the designated downstream. You can run and manage multiple changefeeds in a TiCDC cluster.
+A changefeed is a replication task in TiCDC, which replicates the data change logs of specified tables in a TiDB cluster to the designated downstream. You can run and manage multiple changefeeds in a TiCDC cluster.
 
 ## Changefeed state transfer
 
@@ -34,8 +34,8 @@ The numbers in the preceding state transfer diagram are described as follows.
 
 ## Operate changefeeds
 
-You can manage the TiCDC cluster and replication tasks using the command-line tool `cdc cli`. For details, see [Manage TiCDC changefeeds](/ticdc/ticdc-manage-changefeed.md).
+You can manage a TiCDC cluster and its replication tasks using the command-line tool `cdc cli`. For details, see [Manage TiCDC changefeeds](/ticdc/ticdc-manage-changefeed.md).
 
-You can also use the HTTP interface (the TiCDC OpenAPI feature) to manage the TiCDC cluster and replication tasks. For details, see [TiCDC OpenAPI](/ticdc/ticdc-open-api.md).
+You can also use the HTTP interface (the TiCDC OpenAPI feature) to manage a TiCDC cluster and its replication tasks. For details, see [TiCDC OpenAPI](/ticdc/ticdc-open-api.md).
 
-If you deploy TiCDC using TiUP, you can start `cdc cli` by running the `tiup ctl:<version> cdc` command. Replace `<version>` with the TiCDC cluster version. You can also run `cdc cli` directly.
+If your TiCDC is deployed using TiUP, you can start `cdc cli` by running the `tiup ctl:<version> cdc` command. Replace `<version>` with the TiCDC cluster version. You can also run `cdc cli` directly.

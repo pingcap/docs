@@ -1,6 +1,6 @@
 ---
 title: CLI and Configuration Parameters of TiCDC Changefeeds
-summary: Learn the definition of CLI and configuration parameters of TiCDC changefeeds.
+summary: Learn the definitions of CLI and configuration parameters of TiCDC changefeeds.
 ---
 
 # CLI and Configuration Parameters of TiCDC Changefeeds

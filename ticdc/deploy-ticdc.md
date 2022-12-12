@@ -48,7 +48,7 @@ More references:
 
 ## Add or scale out TiCDC to an existing TiDB cluster using TiUP
 
-The method of scaling out the TiCDC cluster is similar to that of deploying one. It is recommended to use TiUP to perform the scale-out.
+The method of scaling out a TiCDC cluster is similar to that of deploying one. It is recommended to use TiUP to perform the scale-out.
 
 1. Create a `scale-out.yaml` file to add the TiCDC node information. The following is an example:
 
@@ -85,7 +85,7 @@ For more use cases, see [Scale in a TiCDC cluster](/scale-tidb-using-tiup.md#sca
 
 ## Upgrade TiCDC using TiUP
 
-You can upgrade TiDB clusters using TiUP, during which TiCDC is upgraded as well. After you execute the upgrade command, TiUP automatically upgrades the TiCDC component without requiring manual operations. The following is an example:
+You can upgrade TiDB clusters using TiUP, during which TiCDC is upgraded as well. After you execute the upgrade command, TiUP automatically upgrades the TiCDC component. The following is an example:
 
 ```shell
 tiup update --self && \
