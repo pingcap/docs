@@ -135,20 +135,23 @@ No. TiDB Cloud is Database as a service(DBaaS) and runs only on the TiDB Cloud V
 ### How secure is your TiDB Cluster?
 
 In TiDB Cloud, we offer dedicated Tier and Serverless Tier for different customers.
+
 In dedicated Cluster, we created independent sub-accounts and VPCs for each cluster, set up firewall rules to isolate external connections, create server-side TLS certificates and component TLS certificates for each cluster to encrypted cluster data in transit, and provide IP access rules for each cluster to protect that only allowed source IPs can access your cluster.
+
 In the serverless cluster, we created independent sub-accounts for each cluster, and also set up firewall rules to isolate external connections, and provided cluster server TLS certificates to encrypt cluster data in transit.
 All connections to the cluster over the internet use TLS 1.2 or 1.3.
 
 ### How do you connect to your database cluster?
 
-In your dedicated cluster,you need to do four steps to connect to your cluster: Authorize your network; Set up your database users and login credentials;Download and config your cluster server TLS; Select the type of SQL client and execute an auto-generated command,and then you can connect to your cluster through SQL client.
-For more details, see [Connect to Your TiDB Cluster](/tidb-cloud/connect-to-tidb-cluster.md).
-In your serverless cluster,the steps to connect  your cluster are simplified as follows: Set the database user and login credentials; Select the type of SQL client and execute an auto-generated command, and then you can connect to your cluster easily. 
-For  more details, see [Connect to Your TiDB Cluster](/tidb-cloud/connect-to-tidb-cluster.md).
+In your dedicated cluster,you need to do four steps to connect to your cluster: Authorize your network; Set up your database users and login credentials;Download and config your cluster server TLS; Select the type of SQL client and execute an auto-generated command,and then you can connect to your cluster through SQL client.For more details, see [Connect to Your TiDB Cluster](/tidb-cloud/connect-to-tidb-cluster.md).
+
+In your serverless cluster,the steps to connect  your cluster are simplified as follows: Set the database user and login credentials; Select the type of SQL client and execute an auto-generated command, and then you can connect to your cluster easily. For  more details, see [Connect to Your TiDB Cluster](/tidb-cloud/connect-to-tidb-cluster.md).
 
 ### Who has access to your business data in your database cluster?
 
-In TiDB Cloud, TiDB Cloud support can't directly access the table data in your database cluster. In order to improve products and solve cluster operation problems, TiDB Cloud support needs to access the cluster operation data after obtaining internal temporary authorization. All authorization and access records are audited annually by a third-party audit,for example: PCI-DSS,SOC2,ISO27701. TiDB Cloud operational data is described in [TiDB Cloud Privacy Policy](https://www.pingcap.com/privacy-policy/) and [TiDB Cloud Data Processing Agreement](https://www.pingcap.com/legal/data-processing-agreement-for-tidb-cloud-services/).
+In TiDB Cloud, TiDB Cloud support can't directly access the table data in your database cluster. In order to improve products and solve cluster operation problems, TiDB Cloud support needs to access the cluster operation data after obtaining internal temporary authorization. All authorization and access records are audited annually by a third-party audit,for example: PCI-DSS,SOC2,ISO27701. 
+
+TiDB Cloud operational data is described in [TiDB Cloud Privacy Policy](https://www.pingcap.com/privacy-policy/) and [TiDB Cloud Data Processing Agreement](https://www.pingcap.com/legal/data-processing-agreement-for-tidb-cloud-services/).
 
 ## Support FAQ
 
