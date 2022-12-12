@@ -19,11 +19,11 @@ Please make sure you are connected to a TiDB cluster. If not, refer to [Build a 
 
 TiDB is compatible with MySQL, you can use MySQL statements directly in most cases. For unsupported features, see [Compatibility with MySQL](/mysql-compatibility.md#unsupported-features).
 
-To experiment with SQL and test out TiDB compatibility with MySQL queries, you can try the SQL editor in your TiDB Cloud console. Navigate to the **Cluster Details** page and click **SQL Editor** on the left navigation bar. In the SQL editor, you can edit and run SQL queries directly against your cluster without using a terminal.
+To experiment with SQL and test out TiDB compatibility with MySQL queries, you can try the SQL editor in your [TiDB Cloud console](https://tidbcloud.com/). Navigate to the **Cluster Details** page and click **SQL Editor** on the left navigation bar. In the SQL editor, you can edit and run SQL queries directly against your cluster without using a terminal.
 
 > **Note:**
 >
-> The SQL editor currently has limited support on SQL. DDLs such as `CREATE TABLE` or `DROP TABLE` are not supported yet.
+> The SQL editor currently has limited support on SQL statements. DDLs such as `CREATE TABLE` or `DROP TABLE` are not supported yet.
 >
 > <CustomContent platform="tidb">
 >

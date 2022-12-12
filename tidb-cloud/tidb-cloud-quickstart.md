@@ -69,7 +69,7 @@ After trying **Plaground**, you can load sample data to your TiDB Cloud cluster.
 
 The data import process will take several minutes. When the data import progress shows **Finished**, you have successfully imported the sample data and the database schema to your database in TiDB Cloud.
 
-## Step 4. Try TiDB SQL
+## Step 4. Try TiDB SQL editor
 
 After loading data to the cluster, you can try running SQL statements directly from the console.
 
@@ -83,7 +83,7 @@ After loading data to the cluster, you can try running SQL statements directly f
 
     > **Note:**
     >
-    > The SQL editor currently has limited support on SQL. DDLs such as `CREATE TABLE` or `DROP TABLE` are not supported yet.
+    > The SQL editor currently has limited support on SQL statements. DDLs such as `CREATE TABLE` or `DROP TABLE` are not supported yet.
 
 4. In the drop-down list, select `bikeshare`. This is the database where the sample data is imported.
 
@@ -95,7 +95,7 @@ After loading data to the cluster, you can try running SQL statements directly f
 
     To run the query, press **Ctrl + Enter** or click **Run**. You can see the query log and results immediately on the bottom of the page.
 
-6. To check the structure of the `trip` table and see how many records the table contains, type in the two following SQL statements in the editor:
+6. To show the structure of the `trip` table and count how many records the table contains, type in the two following SQL statements in the editor:
 
     ```sql
     DESCRIBE trips;
@@ -104,17 +104,17 @@ After loading data to the cluster, you can try running SQL statements directly f
 
     To run the two queries sequentially, you can do one of the following:
 
-    * Press **Ctrl + Shift + Enter**.
+    * Press **Control + Shift + Enter**.
     * Select the two queries with your cursor and click **Run**.
 
-    In the query log box, you can see the two queries are executed one by one.
+    In the query log panel, you can see the two queries are executed one by one.
 
-    If there are two or more queries in the editor, pressing **Ctrl + Enter** or clicking **Run** only runs the query that is being highlighted in the editor.
+    If there are two or more queries in the editor, pressing **Control + Enter** or clicking **Run** only runs the query that is being highlighted in the editor.
 
-You are now ready to use TiDB to build your applications.
+You are now ready to use TiDB Cloud to build your applications.
 
 ## What's next
 
+- For how to connect to your cluster via a SQL client, refer to [Connect to a TiDB Cluster](/tidb-cloud/connect-to-tidb-cluster.md).
 - For more details on TiDB SQL usage, see [Explore SQL with TiDB](/basic-sql-operations.md).
 - For production use with the benefits of cross-zone high availability, horizontal scaling, and [HTAP](https://en.wikipedia.org/wiki/Hybrid_transactional/analytical_processing), refer to [Create a TiDB Cluster](/tidb-cloud/create-tidb-cluster.md) and create a Dedicated Tier cluster.
-- For how to connect to your cluster via a SQL client, refer to [Connect to a TiDB Cluster](/tidb-cloud/connect-to-tidb-cluster.md).
