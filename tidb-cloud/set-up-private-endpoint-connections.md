@@ -198,7 +198,7 @@ Make sure that your service spans across the availability zones (AZs) in which t
 aws ec2 describe-subnets --filter Name=availability-zone-id,Values=<endpoint_service_az_1>,<endpoint_service_az_2>,<endpoint_service_az_3> --output text --query 'Subnets[].SubnetId' --subnet-ids <your_application_subnet_ids>
 ```
 
-Remove the unsupported subnet IDs and retry.
+Remove the unsupported subnet IDs from the private endpoint creation page and retry.
 
 ### I cannot connect to a TiDB cluster via a private endpoint after enabling private DNS. Why?
 
