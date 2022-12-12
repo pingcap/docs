@@ -22,14 +22,14 @@ summary: Learn how to use the Batch Create Table feature. When restoring data, B
 
 ## テーブルの一括作成機能を使用する {#use-the-batch-create-table-feature}
 
-BR は、デフォルトで Batch Create Table 機能を有効にします。v6.0.0 以降では、リストア プロセスを高速化するためにデフォルト設定が`--ddl-batch-size=128`になっています。したがって、このパラメーターを構成する必要はありません。 `--ddl-batch-size=128`は、BR がバッチでテーブルを作成し、各バッチに 128 個のテーブルがあることを意味します。
+BR は、デフォルトで Batch Create Table 機能を有効にします。v6.0.0 以降では、リストア プロセスを高速化するためにデフォルト設定が`--ddl-batch-size=128`になっています。したがって、このパラメーターを構成する必要はありません。 `--ddl-batch-size=128` BR がバッチでテーブルを作成し、各バッチに 128 個のテーブルがあることを意味します。
 
-この機能を無効にするには、 `--ddl-batch-size` ～ `0`を設定します。次のコマンド例を参照してください。
+この機能を無効にするには、 `--ddl-batch-size` ～ `1`を設定します。次のコマンド例を参照してください。
 
 {{< copyable "" >}}
 
 ```shell
-br restore full -s local:///br_data/ --pd 172.16.5.198:2379 --log-file restore.log --ddl-batch-size=0
+br restore full -s local:///br_data/ --pd 172.16.5.198:2379 --log-file restore.log --ddl-batch-size=1
 ```
 
 この機能を無効にすると、BR は代わりに[シリアル実行の実装](#implementation-principles)を使用します。
@@ -38,11 +38,11 @@ br restore full -s local:///br_data/ --pd 172.16.5.198:2379 --log-file restore.l
 
 -   v6.0.0 より前のシリアル実行の実装:
 
-    データを復元するとき、BR はターゲットの TiDB クラスターにデータベースとテーブルを作成し、バックアップ データをテーブルに復元します。テーブルを作成するために、BR は最初に TiDB 内部 API を呼び出し、次にテーブル作成タスクを処理します。これは、BR が`Create Table`のステートメントを実行するのと同様に機能します。 TiDB DDL 所有者はテーブルを順次作成します。 DDL 所有者がテーブルを作成すると、それに応じて DDL スキーマのバージョンが変更され、各バージョンの変更が他の TiDB DDL ワーカー (BR を含む) に同期されます。したがって、BR が多数のテーブルを復元する場合、シリアル実行の実装には時間がかかります。
+    データを復元するとき、BR はターゲットの TiDB クラスターにデータベースとテーブルを作成し、バックアップ データをテーブルに復元します。テーブルを作成するために、BR は最初に TiDB 内部 API を呼び出し、次にテーブル作成タスクを処理します。これは、BR が`Create Table`ステートメントを実行するのと同様に機能します。 TiDB DDL 所有者はテーブルを順次作成します。 DDL 所有者がテーブルを作成すると、それに応じて DDL スキーマのバージョンが変更され、各バージョンの変更が他の TiDB DDL ワーカー (BR を含む) に同期されます。したがって、BR が多数のテーブルを復元する場合、シリアル実行の実装には時間がかかります。
 
 -   v6.0.0 以降のバッチ作成テーブルの実装:
 
-    デフォルトでは、BR は複数のバッチでテーブルを作成し、各バッチには 128 個のテーブルがあります。この実装を使用すると、BR がテーブルのバッチを 1 つ作成するときに、TiDB スキーマのバージョンが 1 回だけ変更されます。この実装により、テーブル作成の速度が大幅に向上します。
+    デフォルトでは、BR は複数のバッチでテーブルを作成し、各バッチには 128 個のテーブルがあります。この実装を使用すると、BR がテーブルの 1 つのバッチを作成するときに、TiDB スキーマのバージョンが 1 回だけ変更されます。この実装により、テーブル作成の速度が大幅に向上します。
 
 ## バッチ作成テーブル機能のテスト {#test-for-the-batch-create-table-feature}
 
@@ -62,4 +62,4 @@ br restore full -s local:///br_data/ --pd 172.16.5.198:2379 --log-file restore.l
 '[2022/03/12 22:37:49.060 +08:00] [INFO] [collector.go:67] ["Full restore success summary"] [total-ranges=751760] [ranges-succeed=751760] [ranges-failed=0] [split-region=1h33m18.078448449s] [restore-ranges=542693] [total-take=1h41m35.471476438s] [restore-data-size(after-compressed)=8.337TB] [Size=8336694965072] [BackupTS=431773933856882690] [total-kv=148015861383] [total-kv-size=16.16TB] [average-speed=2.661GB/s]'
 ```
 
-テスト結果から、1 つの TiKV インスタンスを復元する平均速度は 181.65 MB/秒 ( `average-speed`に等しい) であることがわかり`tikv_count` 。
+テスト結果から、 `tikv_count`つの TiKV インスタンスを復元する平均速度は 181.65 MB/秒 ( `average-speed`に等しい) であることがわかります。
