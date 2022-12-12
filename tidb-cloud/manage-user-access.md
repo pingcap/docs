@@ -15,7 +15,7 @@ This document describes how to manage user access of the [TiDB Cloud console](ht
 
 ## Sign out
 
-In the upper-right corner of the TiDB Cloud console, click your account name and select **Logout**.
+In the upper-right corner of the TiDB Cloud console, click the <MDSvgIcon name="icon-top-account-settings" /> icon and select **Logout**.
 
 ## Manage user passwords
 
@@ -32,7 +32,7 @@ To improve your system security, if you sign up for TiDB Cloud with email and pa
 
 To change the password, take the following steps:
 
-1. Click the account name in the upper-right corner of the TiDB Cloud console.
+1. Click the <MDSvgIcon name="icon-top-account-settings" /> icon in the upper-right corner of the TiDB Cloud console.
 
 2. Click **Account**.
 
@@ -50,7 +50,7 @@ If your password is not changed within 90 days, you will get a prompt to reset y
 
 In TiDB Cloud, you can easily manage your profile, including your first name, last name, and phone number.
 
-1. Click the account name in the upper-right corner of the TiDB Cloud console.
+1. Click the <MDSvgIcon name="icon-top-account-settings" /> icon in the upper-right corner of the TiDB Cloud console.
 
 2. Click **Account**. The **Profile** tab is selected by default.
 
@@ -86,7 +86,7 @@ If you are a member of multiple organizations, you can switch your account betwe
 
 To switch between organizations, perform these steps:
 
-1. Click the account name in the upper-right corner of the TiDB Cloud console.
+1. Click the <MDSvgIcon name="icon-top-organization" /> icon in the upper-right corner of the TiDB Cloud console.
 2. Select **Switch Organization** in the drop-down menu, and click the organization you want to switch to.
 
 ## Invite an organization member

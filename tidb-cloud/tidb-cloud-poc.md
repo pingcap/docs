@@ -63,7 +63,7 @@ To create a dedicated cluster for the PoC, take the following steps:
 1. Fill in the PoC application form by doing one of the following:
 
     - On the PingCAP website, go to the [Apply for PoC](https://pingcap.com/apply-for-poc/) page to fill in the PoC application form.
-    - In the [TiDB Cloud console](https://tidbcloud.com/), click the hand icon in the upper-right corner to fill in the PoC application form.
+    - In the [TiDB Cloud console](https://tidbcloud.com/), click the <MDSvgIcon name="icon-top-apply-for-poc" /> in the upper-right corner to fill in the PoC application form.
 
     Once you submit the form, the TiDB Cloud support team will review your application, contact you, and transfer credits to your account once the application is approved. You can also contact a PingCAP support engineer to assist with your PoC procedures to ensure the PoC runs as smoothly as possible.
 
