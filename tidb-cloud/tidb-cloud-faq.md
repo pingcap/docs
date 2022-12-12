@@ -148,7 +148,7 @@ For  more details, see [Connect to Your TiDB Cluster](/tidb-cloud/connect-to-tid
 
 ### Who has access to your business data in your database cluster?
 
-In TiDB Cloud, our technical support cannot directly access the table data in your database cluster.In order to improve products and solve cluster operation problems, our technical support needs to access the cluster operation data after obtaining internal temporary authorization. All authorization and access records are audited annually by a third-party auditor,including: PCI-DSS, SOC2, ISO27701.TiDB Cloud operational data is described in TiDB Cloud [Privacy Policy](https://www.pingcap.com/privacy-policy/) and [Data Processing Agreement](https://www.pingcap.com/legal/data-processing-agreement-for-tidb-cloud-services/).
+In TiDB Cloud, TiDB Cloud support can't directly access the table data in your database cluster. In order to improve products and solve cluster operation problems, TiDB Cloud support needs to access the cluster operation data after obtaining internal temporary authorization. All authorization and access records are audited annually by a third-party audit,for example: PCI-DSS,SOC2,ISO27701. TiDB Cloud operational data is described in [TiDB Cloud Privacy Policy](https://www.pingcap.com/privacy-policy/) and [TiDB Cloud Data Processing Agreement](https://www.pingcap.com/legal/data-processing-agreement-for-tidb-cloud-services/).
 
 ## Support FAQ
 
