@@ -95,7 +95,7 @@ A separate database that can be located in the same or different region and cont
 
 ### Replication Capacity Unit
 
-TiCDC Replication Capacity Unit (RCU) is ...
+The replication of changefeed is charged according to the computing resources, which is the TiCDC replication capacity unit.
 
 ## T
 
