@@ -77,7 +77,7 @@ To create a Serverless Tier cluster, take the following steps:
 
     The cluster creation process starts and your TiDB Cloud cluster will be created in approximately 30 seconds.
 
-6. During the creation process, perform security settings for your cluster:
+6. After the creation is completed, perform security settings for your cluster:
 
     1. Click **Security Settings** in the upper-right corner of the cluster area.
     2. In the **Security Settings** dialog box, set the root password to connect to your cluster, and then click **Apply**.
