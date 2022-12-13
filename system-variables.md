@@ -1245,7 +1245,7 @@ MPP is a distributed computing framework provided by the TiFlash engine, which a
 
 > **Warning:**
 >
-> Starting from v6.6.0, this variable will be deprecated, and TiDB will use the [Metadata Lock](/metadata-lock.md) feature by default to resolve the `Information schema is changed` error.
+> Starting from v6.6.0, this variable will be deprecated, and TiDB will use the [Metadata Lock](/metadata-lock.md) feature by default to avoid the `Information schema is changed` error.
 
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
