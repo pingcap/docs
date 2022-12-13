@@ -14,7 +14,7 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
 - Introduce TiDB Cloud SQL Editor (Beta) for Serverless Tier.
 
-    This is a web-based SQL editor that allows customers to directly edit and run SQL queries against databases of Serverless Tier.
+    This is a web-based SQL editor that allows you to directly edit and run SQL queries against databases of Serverless Tier.
 
     For Serverless Tier, the Web SQL Shell is replaced by the SQL Editor.
 
@@ -26,11 +26,11 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
     - Support streaming data change logs to Apache Kafka (Beta).
 
-      Streaming TiDB data to the message queue is a very common requirement for data integration scenarios. You can use Kafka sink to realize integration with other data processing systems (such as snowflake), or support business consuming.
+      Streaming TiDB data to the message queue is a very common requirement for data integration scenarios. You can use Kafka sink to realize integration with other data processing systems (such as Snowflake), or support business consuming.
 
     For more information, refer to [Changefeed Overview](https://docs.pingcap.com/tidbcloud/changefeed-overview).
 
-- Organization owners can edit the organization's name.
+- Organization owners can edit the organization's name in **Organization Settings**.
 
 **Console changes**
 
