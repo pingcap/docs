@@ -35,7 +35,7 @@ However, some drivers and ORMs do not use the system root CA stores. In those ca
 
 ## How do I connect to a TiDB Serverless Tier cluster in TLS connection?
 
-TiDB Cloud provides some connection examples in the **Connect** dialog. You can follow the instructions in [Connect via standard connection](/tidb-cloud/connect-to-tidb-cluster.md#connect-via-standard-connection) to connect to a TiDB Serverless Tier cluster.
+TiDB Cloud provides some connection examples in the **Connect** > **Dev Tools** dialog. You can follow the instructions in [Connect via standard connection](/tidb-cloud/connect-to-tidb-cluster.md#connect-via-standard-connection) to connect to a TiDB Serverless Tier cluster.
 
 Generally, enabling TLS and offering a CA root path to authenticate the server is a good practice to prevent a man-in-the-middle attack. Different clients have different operations in the TLS connection. Enable TLS and verify the server according to your actual use of the client.
 
