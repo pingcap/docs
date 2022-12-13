@@ -11,13 +11,12 @@ summary: Learn how to choose a driver or ORM framework to connect to TiDB.
 >
 > - **Full**: indicates that using this driver or ORM does not have any known issues.
 > - **Verified**: indicates that using this driver or ORM might get errors because of compatibility differences between TiDB and MySQL.
-
-<CustomContent platform="tidb">
-
+>
+> <CustomContent platform="tidb">
 >
 > For more information, refer to [Third-Party Tools Supported by TiDB](/develop/dev-guide-third-party-support.md).
-
-</CustomContent>
+>
+> </CustomContent>
 
 TiDB is highly compatible with the MySQL protocol but some features are incompatible with MySQL.
 
@@ -109,12 +108,12 @@ implementation group: 'org.bouncycastle', name: 'bcpkix-jdk15on', version: '1.67
 > **Note:**
 >
 > - Currently, Hibernate does [not support nested transactions](https://stackoverflow.com/questions/37927208/nested-transaction-in-spring-app-with-jpa-postgres).
-
-<CustomContent platform="tidb">
-
+>
+> <CustomContent platform="tidb">
+>
 > - Since v6.2.0, TiDB supports [savepoint](/sql-statements/sql-statement-savepoint.md). To use the `Propagation.NESTED` transaction propagation option in `@Transactional`, that is, to set `@Transactional(propagation = Propagation.NESTED)`, make sure that your TiDB is v6.2.0 or later.
-
-</CustomContent>
+>
+> </CustomContent>
 
 <SimpleTab>
 <div label="Hibernate">
