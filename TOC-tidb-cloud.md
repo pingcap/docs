@@ -102,8 +102,7 @@
       - [Migrate from MySQL-Compatible Databases Using AWS DMS](/tidb-cloud/migrate-from-mysql-using-aws-dms.md)
       - [Migrate and Merge MySQL Shards of Large Datasets](/tidb-cloud/migrate-sql-shards.md)
   - Import Data into TiDB Cloud
-      - [Import Sample Data](/tidb-cloud/import-sample-data.md)
-      - [Import from Amazon S3 or GCS to TiDB Cloud](/tidb-cloud/migrate-from-amazon-s3-or-gcs.md)
+      - [Import Sample Data (SQL Files)](/tidb-cloud/import-sample-data.md)
       - [Import CSV Files from Amazon S3 or GCS](/tidb-cloud/import-csv-files.md)
       - [Import Apache Parquet Files from Amazon S3 or GCS](/tidb-cloud/import-parquet-files.md)
   - [Export Data from TiDB](/tidb-cloud/export-data-from-tidb-cloud.md)
