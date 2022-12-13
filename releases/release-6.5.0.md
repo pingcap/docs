@@ -219,7 +219,7 @@ TiDB 6.5.0 is a Long-Term Support Release (LTS).
 * Optimize binlog parsing capability [#924](https://github.com/pingcap/dm/issues/924) @[gmhdbjd](https://github.com/GMHDBJD) **tw@hfxsd**
 
     TiDB can filter out binlog events of the schemas and tables that are not in the migration task, thus improving the parsing efficiency and stability. This policy takes effect by default in v6.5.0. No additional configuration is required.
-    
+
     Previously, even if only a few tables were migrated, the entire binlog file upstream had to be parsed. The binlog events of the tables in the binlog file that did not need to be migrated still had to be parsed, which was not efficient. Meanwhile, if the binlog events of the schemas and tables that are not in the migration task do not support parsing, the task will fail. By only parsing the binlog events of the tables in the migration task, the binlog parsing efficiency can be greatly improved and the task stability can be enhanced.
 
 * The disk quota in TiDB Lightning is GA. It can prevent TiDB Lightning tasks from overwriting local disks [#446](https://github.com/pingcap/tidb-lightning/issues/446) @[buchuitoudegou](https://github.com/buchuitoudegou) **tw@hfxsd**
@@ -391,10 +391,10 @@ TiDB 6.5.0 is a Long-Term Support Release (LTS).
 
     + TiDB Data Migration (DM)
 
-        - 通过不再解析黑名单表的数据提升了 dm 同步数据的性能 [#7622](https://github.com/pingcap/tiflow/pull/7622) @[GMHDBJD](https://github.com/GMHDBJD)
-        - 通过异步写与批量写的方式提升 dm relay 写数据效率 [#7580](https://github.com/pingcap/tiflow/pull/7580) @[GMHDBJD](https://github.com/GMHDBJD)
-        - 改进 DM 前置检查的错误提示信息 [#7696](https://github.com/pingcap/tiflow/pull/7696) @[buchuitoudegou](https://github.com/buchuitoudegou)
-        - 改进 DM 针对老版本 MySQL 使用 `SHOW SLAVE HOSTS` 获取结果时的兼容性 [#7373](https://github.com/pingcap/tiflow/pull/7372) @[lyzx2001](https://github.com/lyzx2001)
+        - Improve the data replication performance for DM by not parsing the data of tables in the block list [#4287](https://github.com/pingcap/tiflow/issues/4287) @[GMHDBJD](https://github.com/GMHDBJD)
+        - Improve the write efficiency of DM relay by using asynchronous write and batch write [#4287](https://github.com/pingcap/tiflow/issues/4287) @[GMHDBJD](https://github.com/GMHDBJD)
+        - Optimize the error messages in DM precheck [#7621](https://github.com/pingcap/tiflow/issues/7621) @[buchuitoudegou](https://github.com/buchuitoudegou)
+        - Improve the compatibility of `SHOW SLAVE HOSTS` for old MySQL versions [#5017](https://github.com/pingcap/tiflow/issues/5017) @[lyzx2001](https://github.com/lyzx2001)
 
 ## Bug fixes
 
@@ -449,14 +449,14 @@ TiDB 6.5.0 is a Long-Term Support Release (LTS).
 
     + TiDB Data Migration (DM)
 
-        - 修复无法在上游开启 gtid mode 且无数据时启动 all mode 任务的错误 [#7037](https://github.com/pingcap/tiflow/issues/7037) @[liumengya94](https://github.com/liumengya94)
-        - 修复 DM-worker 异常重启可能引起的多 worker 写同一下游同张表的错误 [#7658](https://github.com/pingcap/tiflow/issues/7658) @[GMHDBJD](https://github.com/GMHDBJD)
-        - 修复上游数据库使用正则匹配授权时 DM 前置检查不通过的错误[#7645](https://github.com/pingcap/tiflow/issues/7645) @[lance6716](https://github.com/lance6716)
+        - Fix the issue that a `task-mode:all` task cannot be started when the upstream database enables GTID mode but does not have any data [#7037](https://github.com/pingcap/tiflow/issues/7037) @[liumengya94](https://github.com/liumengya94)
+        - Fix the issue that data is replicated for multiple times when a new DM worker is scheduled before the existing worker exits [#7658](https://github.com/pingcap/tiflow/issues/7658) @[GMHDBJD](https://github.com/GMHDBJD)
+        - Fix the issue that DM precheck is not passed when the upstream database uses regular expression to grant privileges [#7645](https://github.com/pingcap/tiflow/issues/7645) @[lance6716](https://github.com/lance6716)
 
     + TiDB Lightning
 
-        - 修复 TiDB Lightning 导入巨大数据源文件时的内存泄漏问题 [#39331](https://github.com/pingcap/tidb/issues/39331) @[dsdashun](https://github.com/dsdashun)
-        - 修复 TiDB Lightning 在并行导入冲突检测时无法正确检测的问题 [#39476](https://github.com/pingcap/tidb/issues/39476) @[dsdashun](https://github.com/dsdashun)
+        - Fix the memory leakage issue when TiDB Lightning imports a huge source data file [#39331](https://github.com/pingcap/tidb/issues/39331) @[dsdashun](https://github.com/dsdashun)
+        - Fix the issue that TiDB Lightning cannot detect conflict correctly when importing data in parallel [#39476](https://github.com/pingcap/tidb/issues/39476) @[dsdashun](https://github.com/dsdashun)
 
 ## Contributors
 
