@@ -11,13 +11,12 @@ summary: Learn how to choose a driver or ORM framework to connect to TiDB.
 >
 > - **Full**: indicates that using this driver or ORM does not have any known issues.
 > - **Verified**: indicates that using this driver or ORM might get errors because of compatibility differences between TiDB and MySQL.
-
-<CustomContent platform="tidb">
-
+>
+> <CustomContent platform="tidb">
 >
 > For more information, refer to [Third-Party Tools Supported by TiDB](/develop/dev-guide-third-party-support.md).
-
-</CustomContent>
+>
+> </CustomContent>
 
 TiDB is highly compatible with the MySQL protocol but some features are incompatible with MySQL.
 
