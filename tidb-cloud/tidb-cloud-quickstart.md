@@ -69,7 +69,7 @@ After trying **Plaground**, you can load sample data to your TiDB Cloud cluster.
 
 The data import process will take several minutes. When the data import progress shows **Finished**, you have successfully imported the sample data and the database schema to your database in TiDB Cloud.
 
-## Step 4. Try TiDB SQL editor
+## Step 4. Try TiDB SQL editor (Beta)
 
 After loading data to the cluster, you can try running SQL statements directly from the console.
 
