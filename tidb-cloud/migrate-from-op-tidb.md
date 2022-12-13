@@ -123,6 +123,7 @@ Run the following command to verify whether the setting is successful.
 
 ```sql
 SET GLOBAL tidb_gc_enable = FALSE;
+```
 
 The following is an example output, in which `0` indicates that it is disabled.
 
