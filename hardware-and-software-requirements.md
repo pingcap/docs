@@ -5,7 +5,15 @@ summary: Learn the software and hardware recommendations for deploying and runni
 
 # Software and Hardware Recommendations
 
-As an open source distributed NewSQL database with high performance, TiDB can be deployed in the Intel architecture server, ARM architecture server, and major virtualization environments and runs well. TiDB supports most of the major hardware networks and Linux operating systems.
+<!-- Localization note for TiDB:
+
+- English: use distributed SQL, and start to emphasize HTAP
+- Chinese: can keep "NewSQL" and emphasize one-stop real-time HTAP ("一栈式实时 HTAP")
+- Japanese: use NewSQL because it is well-recognized
+
+-->
+
+As an open-source distributed SQL database with high performance, TiDB can be deployed in the Intel architecture server, ARM architecture server, and major virtualization environments and runs well. TiDB supports most of the major hardware networks and Linux operating systems.
 
 ## OS and platform requirements
 
@@ -19,7 +27,6 @@ Starting from v6.1.1, TiDB provides multi-level support for different quality st
     |  Operating systems   |   Supported CPU architectures   |
     |   :---   |   :---   |
     | Red Hat Enterprise Linux 8.4 or a later 8.x version  |  <ul><li>x86_64</li><li>ARM 64</li></ul>  |
-    | CentOS 8 Stream | <ul><li>x86_64</li><li>ARM 64</li></ul> |
     | <ul><li>Red Hat Enterprise Linux 7.3 or a later 7.x version</li><li>CentOS 7.3 or a later 7.x version</li></ul>  |  <ul><li>x86_64</li><li>ARM 64</li></ul>   |
     | Amazon Linux 2 | <ul><li>x86_64</li><li>ARM 64</li></ul> |
     | Kylin Euler V10 SP1/SP2   |   <ul><li>x86_64</li><li>ARM 64</li></ul>   |
@@ -27,7 +34,7 @@ Starting from v6.1.1, TiDB provides multi-level support for different quality st
 
     > **Note:**
     >
-    > According to [CentOS Linux EOL](https://www.centos.org/centos-linux-eol/), the upstream support for CentOS ended on December 31, 2021.
+    > According to [CentOS Linux EOL](https://www.centos.org/centos-linux-eol/), the upstream support for CentOS Linux 8 ended on December 31, 2021. CentOS Stream 8 continues to be supported by the CentOS organization.
 
 + For the following combinations of operating systems and CPU architectures, you can compile, build, and deploy TiDB. In addition, you can also use the basic features of OLTP, OLAP, and the data tools. However, TiDB **does not guarantee enterprise-level production quality**:
 
@@ -36,6 +43,7 @@ Starting from v6.1.1, TiDB provides multi-level support for different quality st
     |   macOS Catalina or later   |  <ul><li>x86_64</li><li>ARM 64</li></ul>  |
     |  Oracle Enterprise Linux 7.3 or a later 7.x version  |  x86_64           |
     |   Ubuntu LTS 18.04 or later   |  x86_64           |
+    | CentOS 8 Stream | <ul><li>x86_64</li><li>ARM 64</li></ul> |
     |  Debian 9 (Stretch) or later |  x86_64           |
     |  Fedora 35 or later   |  x86_64           |
     |  openSUSE Leap later than v15.3 (not including Tumbleweed) |  x86_64           |
@@ -79,7 +87,7 @@ Other Linux OS versions such as Debian Linux and Fedora Linux might work but are
 
 |  Libraries required for compiling and building TiDB   |  Version   |
 |   :---   |   :---   |
-|   Golang  |  1.18.5 or later  |
+|   Golang  |  <ul><li>For TiDB v6.1.0, v6.1.1, and v6.1.2: 1.18 or later</li><li>For TiDB v6.1.3: 1.19.3 or later</li></ul> |
 |   Rust    |   nightly-2022-07-31 or later  |
 |  GCC      |   7.x      |
 |  LLVM     |  13.0 or later  |
@@ -157,7 +165,15 @@ Before you deploy TiCDC, note that it is recommended to deploy TiCDC on PCIe-SSD
 
 ## Network requirements
 
-As an open source distributed NewSQL database, TiDB requires the following network port configuration to run. Based on the TiDB deployment in actual environments, the administrator can open relevant ports in the network side and host side.
+<!-- Localization note for TiDB:
+
+- English: use distributed SQL, and start to emphasize HTAP
+- Chinese: can keep "NewSQL" and emphasize one-stop real-time HTAP ("一栈式实时 HTAP")
+- Japanese: use NewSQL because it is well-recognized
+
+-->
+
+As an open-source distributed SQL database, TiDB requires the following network port configuration to run. Based on the TiDB deployment in actual environments, the administrator can open relevant ports in the network side and host side.
 
 | Component | Default Port | Description |
 | :--:| :--: | :-- |
@@ -177,7 +193,7 @@ As an open source distributed NewSQL database, TiDB requires the following netwo
 | Drainer | 8249 | the Drainer communication port |
 | TiCDC | 8300 | the TiCDC communication port |
 | Monitoring | 9090 | the communication port for the Prometheus service|
-| Monitoring | 20120 | the communication port for the NgMonitoring service|
+| Monitoring | 12020 | the communication port for the NgMonitoring service|
 | Node_exporter | 9100 | the communication port to report the system information of every TiDB cluster node |
 | Blackbox_exporter | 9115 | the Blackbox_exporter communication port, used to monitor the ports in the TiDB cluster |
 | Grafana | 3000 | the port for the external Web monitoring service and client (Browser) access|

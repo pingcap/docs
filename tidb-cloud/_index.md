@@ -77,10 +77,6 @@ hide_commit: true
 
 [Built-in Alerting](https://docs.pingcap.com/tidbcloud/monitor-built-in-alerting)
 
-[Use Datadog](https://docs.pingcap.com/tidbcloud/monitor-datadog-integration)
-
-[Use Prometheus and Grafana](https://docs.pingcap.com/tidbcloud/monitor-prometheus-and-grafana-integration)
-
 </LearningPath>
 
 <LearningPath label="Tune" icon="tidb-cloud-tune">
@@ -118,6 +114,22 @@ hide_commit: true
 [Invoices](https://docs.pingcap.com/tidbcloud/tidb-cloud-billing#invoices)
 
 [Credits](https://docs.pingcap.com/tidbcloud/tidb-cloud-billing#credits)
+
+</LearningPath>
+
+<LearningPath label="Integrations" icon="cloud4">
+
+[Airbyte](https://docs.pingcap.com/tidbcloud/integrate-tidbcloud-with-airbyte)    
+
+[Datadog](https://docs.pingcap.com/tidbcloud/monitor-datadog-integration)
+
+[dbt](https://docs.pingcap.com/tidbcloud/integrate-tidbcloud-with-dbt)
+
+[Prometheus and Grafana](https://docs.pingcap.com/tidbcloud/monitor-prometheus-and-grafana-integration)
+
+[Terraform](https://docs.pingcap.com/tidbcloud/terraform-tidbcloud-provider-overview)
+
+[Vercel](https://docs.pingcap.com/tidbcloud/integrate-tidbcloud-with-vercel)
 
 </LearningPath>
 

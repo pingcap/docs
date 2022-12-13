@@ -17,7 +17,7 @@ This guide walks you through the quickest way to get started with TiDB. For non-
 > - The deployment method provided in this guide is **ONLY FOR** quick start, **NOT FOR** production.
 >
 >     - To deploy an on-premises production cluster, see [production installation guide](/production-deployment-using-tiup.md).
->     - To deploy TiDB in Kubernetes, see [Get Started with TiDB in Kubernetes](https://docs.pingcap.com/tidb-in-kubernetes/stable/get-started).
+>     - To deploy TiDB on Kubernetes, see [Get Started with TiDB on Kubernetes](https://docs.pingcap.com/tidb-in-kubernetes/stable/get-started).
 >     - To manage TiDB in the cloud, see [TiDB Cloud Quick Start](https://docs.pingcap.com/tidbcloud/tidb-cloud-quickstart).
 
 ## Deploy a local test cluster
@@ -80,10 +80,10 @@ As a distributed system, a basic TiDB test cluster usually consists of 2 TiDB in
         {{< copyable "shell-regular" >}}
 
         ```shell
-        tiup playground v6.1.1 --db 2 --pd 3 --kv 3
+        tiup playground v6.1.3 --db 2 --pd 3 --kv 3
         ```
 
-        The command downloads a version cluster to the local machine and starts it, such as v6.1.1. To view the latest version, run `tiup list tidb`.
+        The command downloads a version cluster to the local machine and starts it, such as v6.1.3. To view the latest version, run `tiup list tidb`.
 
         This command returns the access methods of the cluster:
 
@@ -201,10 +201,10 @@ As a distributed system, a basic TiDB test cluster usually consists of 2 TiDB in
         {{< copyable "shell-regular" >}}
 
         ```shell
-        tiup playground v6.1.1 --db 2 --pd 3 --kv 3
+        tiup playground v6.1.3 --db 2 --pd 3 --kv 3
         ```
 
-        The command downloads a version cluster to the local machine and starts it, such as v6.1.1. To view the latest version, run `tiup list tidb`.
+        The command downloads a version cluster to the local machine and starts it, such as v6.1.3. To view the latest version, run `tiup list tidb`.
 
         This command returns the access methods of the cluster:
 
@@ -321,7 +321,7 @@ Other requirements for the target machine:
 
     > **Note:**
     >
-    > After the installation, TiUP displays the absolute path of the corresponding Shell profile file. You need to modify  `${your_shell_profile}` in the following `source` command according to the path.
+    > After the installation, TiUP displays the absolute path of the corresponding Shell profile file. You need to modify `${your_shell_profile}` in the following `source` command according to the path.
 
     {{< copyable "shell-regular" >}}
 

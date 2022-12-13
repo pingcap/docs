@@ -1,6 +1,7 @@
 ---
 title: PD Configuration File
 summary: Learn the PD configuration file.
+aliases: ['/docs/stable/reference/configuration/pd-server/configuration-file/']
 ---
 
 # PD Configuration File
@@ -212,7 +213,7 @@ Configuration items related to scheduling
 
 ### `max-store-down-time`
 
-+ The downtime after which PD judges that the disconnected store can not be recovered. When PD fails to receive the heartbeat from a store after the specified period of time, it adds replicas at other nodes.
++ The downtime after which PD judges that the disconnected store cannot be recovered. When PD fails to receive the heartbeat from a store after the specified period of time, it adds replicas at other nodes.
 + Default value: `30m`
 
 ### `max-store-preparing-time` <span class="version-mark">New in v6.1.0</span>
@@ -310,7 +311,7 @@ Configuration items related to replicas
 
 ### `max-replicas`
 
-+ The number of replicas, that is, the sum of the number of leaders and followers. The default value `3` means 1 leader and 2 followers. When this configuration is modified online, PD will schedule Regions in the background so that the number of replicas matches this configuration.
++ The number of replicas, that is, the sum of the number of leaders and followers. The default value `3` means 1 leader and 2 followers. When this configuration is modified dynamically, PD will schedule Regions in the background so that the number of replicas matches this configuration.
 + Default value: `3`
 
 ### `location-labels`
@@ -333,9 +334,8 @@ Configuration items related to replicas
 ### `enable-placement-rules`
 
 + Enables `placement-rules`.
-+ Default value: `false`
++ Default value: `true`
 + See [Placement Rules](/configure-placement-rules.md).
-+ An experimental feature of TiDB 4.0.
 
 ### `flow-round-by-digit` <span class="version-mark">New in TiDB 5.1</span>
 
@@ -344,7 +344,7 @@ Configuration items related to replicas
 
 > **Note:**
 >
-> If you have upgraded your cluster from a TiDB 4.0 version to the current version, the behavior of `flow-round-by-digit` after the upgrading and the behavior of `trace-region-flow` before the upgrading are consistent by default. This means that if the value of  `trace-region-flow` is false before the upgrading, the value of `flow-round-by-digit` after the upgrading is 127; if the value of `trace-region-flow` is `true` before the upgrading, the value of `flow-round-by-digit` after the upgrading is `3`.
+> If you have upgraded your cluster from a TiDB 4.0 version to the current version, the behavior of `flow-round-by-digit` after the upgrading and the behavior of `trace-region-flow` before the upgrading are consistent by default. This means that if the value of `trace-region-flow` is false before the upgrading, the value of `flow-round-by-digit` after the upgrading is 127; if the value of `trace-region-flow` is `true` before the upgrading, the value of `flow-round-by-digit` after the upgrading is `3`.
 
 ## `label-property`
 

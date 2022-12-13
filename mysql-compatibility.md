@@ -11,9 +11,10 @@ However, some features of MySQL are not supported. This could be because there i
 
 <CustomContent platform="tidb">
 
-- In addition, TiDB does not support the MySQL replication protocol, but provides specific tools to replicate data with MySQL.
-    - Replicate data from MySQL: [TiDB Data Migration (DM)](/dm/dm-overview.md) is a tool that supports the full data migration and the incremental data replication from MySQL/MariaDB into TiDB.
-    - Replicate data to MySQL: [TiCDC](/ticdc/ticdc-overview.md) is a tool for replicating the incremental data of TiDB by pulling TiKV change logs. TiCDC uses the [MySQL sink](/ticdc/ticdc-overview.md#sink-support) to replicate the incremental data of TiDB to MySQL.
+In addition, TiDB does not support the MySQL replication protocol, but provides specific tools to replicate data with MySQL:
+
+- Replicate data from MySQL: [TiDB Data Migration (DM)](/dm/dm-overview.md) is a tool that supports the full data migration and the incremental data replication from MySQL/MariaDB into TiDB.
+- Replicate data to MySQL: [TiCDC](/ticdc/ticdc-overview.md) is a tool for replicating the incremental data of TiDB by pulling TiKV change logs. TiCDC uses the [MySQL sink](/ticdc/ticdc-overview.md#sink-support) to replicate the incremental data of TiDB to MySQL.
 
 </CustomContent>
 
@@ -21,7 +22,7 @@ However, some features of MySQL are not supported. This could be because there i
 
 > **Note:**
 >
-> This page refers to general differences between MySQL and TiDB. Refer to the dedicated pages for [Security](/security-compatibility-with-mysql.md) and [Pessimistic Transaction Mode](/pessimistic-transaction.md#difference-with-mysql-innodb) compatibility.
+> This page describes general differences between MySQL and TiDB. See the dedicated pages for [Security](/security-compatibility-with-mysql.md) and [Pessimistic Transaction Mode](/pessimistic-transaction.md#difference-with-mysql-innodb) compatibility.
 
 </CustomContent>
 
@@ -57,6 +58,7 @@ However, some features of MySQL are not supported. This could be because there i
 + `OPTIMIZE TABLE` syntax
 + `HANDLER` statement
 + `CREATE TABLESPACE` statement
++ "Session Tracker: Add GTIDs context to the OK packet"
 
 ## Features that are different from MySQL
 
@@ -119,7 +121,7 @@ TiDB uses a combination of [Prometheus and Grafana](/tidb-monitoring-api.md) to 
 
 <CustomContent platform="tidb-cloud">
 
-To check performance metrics in TiDB Cloud, you can either check the cluster overview page on the TiDB Cloud console or use [third-party monitoring integrations](/tidb-cloud/monitor-tidb-cluster.md#third-party-integrations). Performance schema tables return empty results in TiDB.
+To check performance metrics in TiDB Cloud, you can either check the cluster overview page on the TiDB Cloud console or use [third-party monitoring integrations](/tidb-cloud/third-party-monitoring-integrations.md). Performance schema tables return empty results in TiDB.
 
 </CustomContent>
 

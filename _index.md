@@ -4,7 +4,15 @@ hide_sidebar: true
 hide_commit: true
 ---
 
-<LearningPathContainer platform="tidb" title="TiDB" subTitle="TiDB is an open-source NewSQL database that supports Hybrid Transactional and Analytical Processing (HTAP) workloads. Find the guide, samples, and references you need to use TiDB.">
+<LearningPathContainer platform="tidb" title="TiDB" subTitle="TiDB is an open-source distributed SQL database that supports Hybrid Transactional and Analytical Processing (HTAP) workloads. Find the guide, samples, and references you need to use TiDB.">
+
+<!-- Localization note for TiDB:
+
+- English: use distributed SQL, and start to emphasize HTAP
+- Chinese: can keep "NewSQL" and emphasize one-stop real-time HTAP ("一栈式实时 HTAP")
+- Japanese: use NewSQL because it is well-recognized
+
+-->
 
 <LearningPath label="Learn" icon="cloud1">
 
@@ -40,9 +48,9 @@ hide_commit: true
 
 [Software and Hardware Requirements](https://docs.pingcap.com/tidb/v6.1/hardware-and-software-requirements)
 
-[Deploy a TiDB Cluster Using TiUP (Recommended)](https://docs.pingcap.com/tidb/v6.1/production-deployment-using-tiup)
+[Deploy a TiDB Cluster Using TiUP](https://docs.pingcap.com/tidb/v6.1/production-deployment-using-tiup)
 
-[Deploy a TiDB Cluster in Kubernetes](https://docs.pingcap.com/tidb/v6.1/tidb-in-kubernetes)
+[Deploy a TiDB Cluster on Kubernetes](https://docs.pingcap.com/tidb/v6.1/tidb-in-kubernetes)
 
 </LearningPath>
 
@@ -116,7 +124,7 @@ hide_commit: true
 
 [TiDB Operator](https://docs.pingcap.com/tidb/v6.1/tidb-operator-overview)
 
-[TiSpark](https://docs.pingcap.com/tidb/v6.1/tispark-overview) 
+[TiSpark](https://docs.pingcap.com/tidb/v6.1/tispark-overview)
 
 </LearningPath>
 

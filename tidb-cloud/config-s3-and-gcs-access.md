@@ -147,12 +147,16 @@ To allow TiDB Cloud to access the source data in your GCS bucket, you need to co
     >
     > To remove the access to TiDB Cloud, you can simply remove the access that you have granted.
 
-6. On the **Bucket details** page, click the **CONFIGURATION** tab, and then copy your GCS bucket URL from the **gsutil URI** field.
+6. On the **Bucket details** page, click the **OBJECTS** tab.
 
-    ![Get bucket URL](/media/tidb-cloud/gcp-bucket-url.png)
+    If you want to copy a file's gsutil URI, select the file, click **Open object overflow menu**, and then click **Copy gsutil URI**.
 
-7. In the TiDB Cloud console, go to the **Data Import** page where you get the Google Cloud Service Account ID, and then paste the GCS bucket URL to the **Bucket URL** field. Note that you must add `/` to the end of the URL.
+    ![Get bucket URI](/media/tidb-cloud/gcp-bucket-uri01.png)
 
-    For example, if your bucket URL is `gs://tidb-cloud-source-data`, you need to fill in `gs://tidb-cloud-source-data/`.
+    If you want to use a folder's gsutil URI, open the folder, and then click the copy button following the folder name to copy the folder name. After that, you need to add `gs://` to the beginning and `/` to the end of the name to get a correct URI of the folder.
 
-    ![Fill in bucket URL in the TiDB Cloud console](/media/tidb-cloud/gcp-bucket-url-field.png)
+    For example, if the folder name is `tidb-cloud-source-data`, you need to use `gs://tidb-cloud-source-data/` as the URI.
+
+    ![Get bucket URI](/media/tidb-cloud/gcp-bucket-uri02.png)
+
+7. In the TiDB Cloud console, go to the **Data Import** page where you get the Google Cloud Service Account ID, and then paste the GCS bucket gsutil URI to the **Bucket gsutil URI** field. For example, paste `gs://tidb-cloud-source-data/`.

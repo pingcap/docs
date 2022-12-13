@@ -10,7 +10,7 @@ You can learn how to create a restore task with the `tidbcloud_restore` resource
 ## Prerequisites
 
 - [Get TiDB Cloud Terraform Provider](/tidb-cloud/terraform-get-tidbcloud-provider.md).
-- The backup and restore feature is unavailable for Developer Tier clusters. To use restore resources, make sure that you have created a Dedicated Tier cluster.
+- The backup and restore feature is unavailable for Serverless Tier clusters. To use restore resources, make sure that you have created a Dedicated Tier cluster.
 
 ## Create a restore task with the restore resource
 
@@ -31,7 +31,7 @@ After creating a backup of a cluster, you can restore the cluster by creating a 
      required_providers {
        tidbcloud = {
          source = "tidbcloud/tidbcloud"
-         version = "~> 0.0.1"
+         version = "~> 0.1.0"
        }
      }
      required_version = ">= 1.0.0"

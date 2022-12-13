@@ -61,9 +61,7 @@ The best way to learn about TiDB Cloud is to follow our step-by-step tutorial. C
 
 ## Architecture FAQs
 
-### There are different components in my TiDB cluster. What are PD, TiDB, TiKV, and TiFlash nodes?
-
-PD, the Placement Driver is “the brain” of the entire TiDB cluster, as it stores the metadata of the cluster. It sends data scheduling commands to specific TiKV nodes according to the data distribution state reported by TiKV nodes in real-time.
+### There are different components in my TiDB cluster. What are TiDB, TiKV, and TiFlash nodes?
 
 TiDB is the SQL computing layer that aggregates data from queries returned from TiKV or TiFlash stores. TiDB is horizontally scalable; increasing the number of TiDB nodes will increase the number of concurrent queries the cluster can handle.
 
@@ -71,9 +69,11 @@ TiKV is the transactional store used to store OLTP data. All the data in TiKV is
 
 TiFlash is the analytical storage that replicates data from the transactional store (TiKV) in real-time and supports real-time OLAP workloads. Unlike TiKV, TiFlash stores data in columns to accelerate analytical processing. TiFlash is also horizontally scalable; increasing TiFlash nodes will increase OLAP storage and computing capacity.
 
+PD, the Placement Driver is "the brain" of the entire TiDB cluster, as it stores the metadata of the cluster. It sends data scheduling commands to specific TiKV nodes according to the data distribution state reported by TiKV nodes in real-time. On TiDB Cloud, PD of each cluster is managed by PingCAP and you can not see or maintain it.
+
 ### How does TiDB replicate data between the TiKV nodes?
 
-TiKV divides the key-value space into key ranges, and each key range is treated as a “Region”. In TiKV, data is distributed among all nodes in a cluster and uses the Region as the basic unit. PD is responsible for spreading (scheduling) Regions as evenly as possible across all nodes in a cluster.
+TiKV divides the key-value space into key ranges, and each key range is treated as a "Region". In TiKV, data is distributed among all nodes in a cluster and uses the Region as the basic unit. PD is responsible for spreading (scheduling) Regions as evenly as possible across all nodes in a cluster.
 
 TiDB uses the Raft consensus algorithm to replicate data by Regions. Multiple replicas of a Region stored in different nodes form a Raft Group.
 
@@ -92,6 +92,12 @@ As a Software as a Service (SaaS) provider, we take data security seriously. We 
 ### Is there an easy migration path from another RDBMS to TiDB Cloud?
 
 TiDB is highly compatible with MySQL. You can migrate data from any MySQL-compatible databases to TiDB smoothly, whether the data is from a self-hosted MySQL instance or RDS service provided by the public cloud. For more information, see [Migrate Data from MySQL-Compatible Databases](/tidb-cloud/migrate-data-into-tidb.md).
+
+## Backup and restore FAQ
+
+### Does TiDB Cloud support incremental backups?
+
+No. If you need to restore data to any point in time within the cluster's backup retention, you can [use PITR (Point-in-time Recovery)](/tidb-cloud/backup-and-restore.md#automatic-backup).
 
 ## HTAP FAQs
 

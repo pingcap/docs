@@ -14,6 +14,7 @@ This tutorial guides you through signing up and creating a TiDB cluster.
     - For Google users, you can also sign up with Google. To do that, click **Sign up with Google** on the [sign up](https://tidbcloud.com/signup) page. Your email address and password will be managed by Google and cannot be changed using TiDB Cloud console.
     - For GitHub users, you can also sign up with GitHub. To do that, click **Sign up with GitHub** on the [sign up](https://tidbcloud.com/signup) page. Your email address and password will be managed by GitHub and cannot be changed using TiDB Cloud console.
     - For AWS Marketplace users, you can also sign up through AWS Marketplace. To do that, search for `TiDB Cloud` in [AWS Marketplace](https://aws.amazon.com/marketplace), subscribe to TiDB Cloud, and then follow the onscreen instructions to set up your TiDB Cloud account.
+    - For Google Cloud Marketplace users, you can also sign up through Google Cloud Marketplace. To do that, search for `TiDB Cloud` in [Google Cloud Marketplace](https://console.cloud.google.com/marketplace), subscribe to TiDB Cloud, and then follow the onscreen instructions to set up your TiDB Cloud account.
 
 2. [Log in](https://tidbcloud.com/) to your TiDB Cloud account.
 
@@ -21,9 +22,9 @@ This tutorial guides you through signing up and creating a TiDB cluster.
 
 TiDB Cloud provides the following two cluster tier options. Before creating a TiDB cluster, consider which option suits your need better:
 
-- Developer Tier
+- Serverless Tier (Beta)
 
-    The TiDB Cloud Developer Tier is a one-year free trial of [TiDB Cloud](https://www.pingcap.com/tidb-cloud/), the fully managed service of TiDB. You can use Developer Tier clusters for non-production workloads such as prototype applications, hackathons, academic courses, or to provide a temporary data service for your datasets.
+    The TiDB Cloud Serverless Tier is a fully managed service of TiDB. It is still in the beta phase and cannot be used in production. However, you can use Serverless Tier clusters for non-production workloads such as prototype applications, hackathons, academic courses, or to provide a temporary data service for your datasets.
 
 - Dedicated Tier
 
@@ -60,24 +61,24 @@ If you are a project member, you can access only the specific projects to which 
 ## Step 4. Create a TiDB cluster
 
 <SimpleTab>
-<div label="Developer Tier">
+<div label="Serverless Tier">
 
-To create a Developer Tier cluster, take the following steps:
+To create a Serverless Tier cluster, take the following steps:
 
 1. On the **Clusters** page, click **Create Cluster**.
 
 2. On the **Create Cluster** page, update the default cluster name if necessary.
 
-3. Note that the cloud provider of Developer Tier is AWS, and then select the region where you want to create your cluster.
+3. Note that the cloud provider of Serverless Tier is AWS, and then select the region where you want to create your cluster.
 
-4. View the cluster size of the Developer Tier, and then click **Create**.
+4. Click **Create**.
 
-    The cluster creation process starts and your TiDB Cloud cluster will be created in approximately 5 to 15 minutes.
+    The cluster creation process starts and your TiDB Cloud cluster will be created in approximately 30 seconds.
 
 5. During the creation process, perform security settings for your cluster:
 
     1. Click **Security Settings** in the upper-right corner of the cluster area.
-    2. In the **Security Settings** dialog box, set the root password and allowed IP addresses to connect to your cluster, and then click **Apply**.
+    2. In the **Security Settings** dialog box, set the root password to connect to your cluster, and then click **Apply**.
 
     > **Note:**
     >
@@ -95,7 +96,8 @@ To create a Dedicated Tier cluster, take the following steps:
 
     > **Note:**
     >
-    > If you signed up TiDB Cloud through [AWS Marketplace](https://aws.amazon.com/marketplace), the cloud provider is AWS, and you cannot change it in TiDB Cloud.
+    > - If you signed up TiDB Cloud through [AWS Marketplace](https://aws.amazon.com/marketplace), the cloud provider is AWS, and you cannot change it in TiDB Cloud.
+    > - If you signed up TiDB Cloud through [Google Cloud Marketplace](https://console.cloud.google.com/marketplace), the cloud provider is GCP, and you cannot change it in TiDB Cloud.
 
 3. If this is the first cluster of your current project and CIDR has not been configured for this project, you need to set the project CIDR, and then click **Next**. If you do not see the **project CIDR** field, it means that CIDR has already been configured for this project.
 
@@ -111,7 +113,7 @@ To create a Dedicated Tier cluster, take the following steps:
 
     > **Note:**
     >
-    > If you signed up TiDB Cloud through [AWS Marketplace](https://aws.amazon.com/marketplace), you can pay through your AWS account directly but cannot add payment methods or download invoices in the TiDB Cloud portal.
+    > If you signed up TiDB Cloud through [AWS Marketplace](https://aws.amazon.com/marketplace) or [Google Cloud Marketplace](https://console.cloud.google.com/marketplace), you can pay through your AWS account or Google Cloud account directly but cannot add payment methods or download invoices in the TiDB Cloud console.
 
 7. Click **Create**.
 
@@ -119,7 +121,7 @@ To create a Dedicated Tier cluster, take the following steps:
 
 8. In the **Security Settings** dialog box, set the root password and allowed IP addresses to connect to your cluster, and then click **Apply**.
 
-    Your TiDB Cloud cluster will be created in approximately 5 to 15 minutes.
+    Your TiDB Cloud cluster will be created in approximately 20 to 30 minutes.
 
 </div>
 </SimpleTab>

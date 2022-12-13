@@ -36,7 +36,7 @@ Before using non-transactional DML statements, make sure that the following cond
 - The statement meets the [restrictions](#restrictions).
 - It is not recommended to perform concurrent DDL operations on the table to be read or written by this DML statement.
 
-> **WARNING:**
+> **Warning:**
 >
 > If `tidb_redact_log` and `tidb_nontransactional_ignore_error` are enabled at the same time, you might not get the complete error information of each batch, and you cannot retry the failed batch only. Therefore, if both of the system variables are turned on, the non-transactional DML statement must be idempotent.
 
@@ -125,7 +125,9 @@ SHOW PROCESSLIST;
 
 ### Terminate a non-transactional DML statement
 
-To terminate a non-transactional DML statement, you can use `KILL TIDB`. Then TiDB will cancel all batches after the batch that is currently being executed. You can get the execution result from the log.
+To terminate a non-transactional DML statement, you can use `KILL TIDB <processlist_id>`. Then TiDB will cancel all batches after the batch that is currently being executed. You can get the execution result from the log.
+
+For more information about `KILL TIDB`, see the reference [`KILL`](/sql-statements/sql-statement-kill.md).
 
 ### Query the batch-dividing statement
 
@@ -251,7 +253,7 @@ batch-dml is a mechanism for splitting a transaction into multiple transaction c
 
 > **Note:**
 >
-> It is not recommended to use batch-dml. When the batch-dml feature is not properly used, there is a risk of data index inconsistency. batch-dml will be deprecated in a later release of TiDB.
+> It is not recommended to use batch-dml which has been deprecated. When the batch-dml feature is not properly used, there is a risk of data index inconsistency.
 
 Non-transactional DML statements are not yet a replacement for all batch-dml usage scenarios. Their main differences are as follows:
 

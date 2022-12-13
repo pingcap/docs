@@ -21,11 +21,11 @@ To import data, perform the following steps:
 
 3. Prepare source data according to [Learn how to create an Amazon S3 Bucket and prepare source data files](#learn-how-to-create-an-amazon-s3-bucket-and-prepare-source-data-files). You can see the advantages and disadvantages of different **Data Format** in the preparing data part.
 
-4. Select or fill in the **Data Format**, **Location**, **Bucket URL**, and **Role-ARN** fields according to the specification of your source data. For more information about how to create the bucket policy and role for cross-account access, see [configure Amazon S3 access](/tidb-cloud/config-s3-and-gcs-access.md#configure-amazon-s3-access).
+4. Select or fill in the **Data Format**, **Location**, **Bucket URI**, and **Role ARN** fields according to the specification of your source data. For more information about how to create the bucket policy and role for cross-account access, see [configure Amazon S3 access](/tidb-cloud/config-s3-and-gcs-access.md#configure-amazon-s3-access).
 
 5. Check the cluster name and the region name in the **Target Cluster**. Click **Next**.
 
-    TiDB Cloud starts validating whether it can access your data in the specified bucket URL. After validation, TiDB Cloud tries to scan all the files in the data source using the default file naming pattern, and returns a scan summary result on the left side of the next page. If you get the `AccessDenied` error, see [Troubleshoot Access Denied Errors during Data Import from S3](/tidb-cloud/troubleshoot-import-access-denied-error.md).
+    TiDB Cloud starts validating whether it can access your data in the specified bucket URI. After validation, TiDB Cloud tries to scan all the files in the data source using the default file naming pattern, and returns a scan summary result on the left side of the next page. If you get the `AccessDenied` error, see [Troubleshoot Access Denied Errors during Data Import from S3](/tidb-cloud/troubleshoot-import-access-denied-error.md).
 
 6. Add the table filter rules if needed. Click **Next**.
 
@@ -147,7 +147,7 @@ You need to prepare an EC2 to run the following data export task. It's better to
     -F 256MiB
     ```
 
-4. On the data import task panel of TiDB Cloud, choose **TiDB Dumpling** as the **Data Format**.
+4. On the data import task panel of TiDB Cloud, choose **SQL File** as the **Data Format**.
 
 ### Option 2: Prepare source data files using Amazon Aurora snapshots
 
@@ -216,6 +216,10 @@ To migrate data from Aurora, you need to back up the schema of the database.
 The TiDB Cloud cluster and the S3 bucket are in different AWS accounts. To allow the TiDB Cloud cluster to access the source data files in the S3 bucket, you need to configure the cross-account access to Amazon S3. For more information, see [Configure Amazon S3 access](/tidb-cloud/config-s3-and-gcs-access.md#configure-amazon-s3-access).
 
 Once finished, you will have created a policy and role for cross-account. You can then continue with the configuration on the data import task panel of TiDB Cloud.
+
+> **Note:**
+>
+> To ensure data consistency, TiDB Cloud allows to import CSV files into empty tables only. To import data into an existing table that already contains data, you can use TiDB Cloud to import the data into a temporary empty table by following this document, and then use the `INSERT SELECT` statement to copy the data to the target existing table.
 
 ## Learn how to set up filter rules
 

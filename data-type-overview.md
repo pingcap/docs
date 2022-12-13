@@ -5,7 +5,7 @@ summary: Learn about the data types supported in TiDB.
 
 # Data Types
 
-TiDB supports all the data types in MySQL except the `SPATIAL` type.  This includes all the [numeric types](/data-type-numeric.md), [string types](/data-type-string.md), [date & time types](/data-type-date-and-time.md), and [the JSON type](/data-type-json.md).
+TiDB supports all the data types in MySQL except the `SPATIAL` type. This includes all the [numeric types](/data-type-numeric.md), [string types](/data-type-string.md), [date & time types](/data-type-date-and-time.md), and [the JSON type](/data-type-json.md).
 
 The definitions used for datatypes are specified as `T(M[, D])`. Where by:
 

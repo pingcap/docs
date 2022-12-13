@@ -83,7 +83,7 @@ In the `WHERE`/`HAVING`/`ON` conditions, the TiDB optimizer analyzes the result 
 
 > **Note:**
 >
-> - In order to use an index, the condition must be _sargable_. For example, the condition `YEAR(date_column) < 1992` can not use an index, but `date_column < '1992-01-01` can.
+> - In order to use an index, the condition must be _sargable_. For example, the condition `YEAR(date_column) < 1992` cannot use an index, but `date_column < '1992-01-01` can.
 > - It is recommended to compare data of the same type and [character set and collation](/character-set-and-collation.md). Mixing types may require additional `cast` operations, or prevent indexes from being used.
 > - You can also use `AND` (intersection) and `OR` (union) to combine the range query conditions of one column. For a multi-dimensional composite index, you can use conditions in multiple columns. For example, regarding the composite index `(a, b, c)`:
 >     - When `a` is an equivalent query, continue to figure out the query range of `b`; when `b` is also an equivalent query, continue to figure out the query range of `c`.
@@ -93,7 +93,7 @@ In the `WHERE`/`HAVING`/`ON` conditions, the TiDB optimizer analyzes the result 
 
 Currently, calculation tasks of TiDB can be divided into two categories: cop tasks and root tasks. A `cop[tikv]` task indicates that the operator is performed inside the TiKV coprocessor. A `root` task indicates that it will be completed inside of TiDB.
 
-One of the goals of SQL optimization is to push the calculation down to TiKV as much as possible. The Coprocessor in TiKV supports most of the built-in SQL functions (including the aggregate functions and the scalar functions), SQL `LIMIT` operations, index scans, and table scans. However, all `Join` operations can only be performed as root tasks in TiDB.
+One of the goals of SQL optimization is to push the calculation down to TiKV as much as possible. The Coprocessor in TiKV supports most of the built-in SQL functions (including the aggregate functions and the scalar functions), SQL `LIMIT` operations, index scans, and table scans.
 
 ### Operator info overview
 

@@ -18,7 +18,7 @@ SET SESSION tidb_distsql_scan_concurrency = 10;
 
 # These two identical statements change a global variable
 SET @@global.tidb_distsql_scan_concurrency = 10;
-SET  GLOBAL tidb_distsql_scan_concurrency = 10;
+SET GLOBAL tidb_distsql_scan_concurrency = 10;
 ```
 
 > **Note:**
@@ -108,8 +108,10 @@ mysql> SELECT * FROM t1;
 
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
+- Type: Enumeration
 - Default value: `aes-128-ecb`
-- Defines the encryption mode for the `AES_ENCRYPT()` and `AES_DECRYPT()` functions.
+- Value options: `aes-128-ecb`, `aes-192-ecb`, `aes-256-ecb`, `aes-128-cbc`, `aes-192-cbc`, `aes-256-cbc`, `aes-128-ofb`, `aes-192-ofb`, `aes-256-ofb`, `aes-128-cfb`, `aes-192-cfb`, `aes-256-cfb`
+- This variable sets the encryption mode for the built-in functions `AES_ENCRYPT()` and `AES_DECRYPT()`.
 
 ### character_set_client
 
@@ -716,6 +718,42 @@ MPP is a distributed computing framework provided by the TiFlash engine, which a
 
     In the case of a poor network environment, appropriately increasing the value of this variable can effectively alleviate error reporting to the application end caused by timeout. If the application end wants to receive the error information more quickly, minimize the value of this variable.
 
+### tidb_batch_commit
+
+> **Warning:**
+>
+> It is **NOT** recommended to enable this variable.
+
+- Scope: SESSION
+- Persists to cluster: No
+- Type: Boolean
+- Default value: `OFF`
+- The variable is used to control whether to enable the deprecated batch-commit feature. When this variable is enabled, a transaction might be split into multiple transactions by grouping a few statements and committed non-atomically, which is not recommended.
+
+### tidb_batch_delete
+
+> **Warning:**
+>
+> This variable is associated with the deprecated batch-dml feature, which might cause data corruption. Therefore, it is not recommended to enable this variable for batch-dml. Instead, use [non-transactional DML](/non-transactional-dml.md).
+
+- Scope: SESSION
+- Persists to cluster: No
+- Type: Boolean
+- Default value: `OFF`
+- This variable is used to control whether to enable the batch-delete feature, which is a part of the deprecated batch-dml feature. When this variable is enabled, `DELETE` statements might be split into multiple transactions and committed non-atomically. To make it work, you also need to enable `tidb_enable_batch_dml` and set a positive value for `tidb_dml_batch_size`, which is not recommended.
+
+### tidb_batch_insert
+
+> **Warning:**
+>
+> This variable is associated with the deprecated batch-dml feature, which might cause data corruption. Therefore, it is not recommended to enable this variable for batch-dml. Instead, use [non-transactional DML](/non-transactional-dml.md).
+
+- Scope: SESSION
+- Persists to cluster: No
+- Type: Boolean
+- Default value: `OFF`
+- This variable is used to control whether to enable the batch-insert feature, which is a part of the deprecated batch-dml feature. When this variable is enabled, `INSERT` statements might be split into multiple transactions and committed non-atomically. To make it work, you also need to enable `tidb_enable_batch_dml` and set a positive value for `tidb_dml_batch_size`, which is not recommended.
+
 ### tidb_batch_pending_tiflash_count <span class="version-mark">New in v6.0</span>
 
 - Scope: SESSION | GLOBAL
@@ -784,7 +822,7 @@ MPP is a distributed computing framework provided by the TiFlash engine, which a
 - Scope: SESSION
 - Default value: `4`
 - Unit: Threads
-- This variable is used to set the scan index concurrency of executing the `ADMIN CHECKSUM TABLE` statement.
+- This variable is used to set the scan index concurrency of executing the [`ADMIN CHECKSUM TABLE`](/sql-statements/sql-statement-admin-checksum-table.md) statement.
 - When the variable is set to a larger value, the execution performance of other queries is affected.
 
 ### tidb_committer_concurrency <span class="version-mark">New in v6.1.0</span>
@@ -928,6 +966,10 @@ Constraint checking is always performed in place for pessimistic transactions (d
 
 ### tidb_dml_batch_size
 
+> **Warning:**
+>
+> This variable is associated with the deprecated batch-dml feature, which might cause data corruption. Therefore, it is not recommended to enable this variable for batch-dml. Instead, use [non-transactional DML](/non-transactional-dml.md).
+
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
 - Type: Integer
@@ -936,6 +978,7 @@ Constraint checking is always performed in place for pessimistic transactions (d
 - Unit: Rows
 - When this value is greater than `0`, TiDB will batch commit statements such as `INSERT` or `LOAD DATA` into smaller transactions. This reduces memory usage and helps ensure that the `txn-total-size-limit` is not reached by bulk modifications.
 - Only the value `0` provides ACID compliance. Setting this to any other value will break the atomicity and isolation guarantees of TiDB.
+- To make this variable work, you also need to enable `tidb_enable_batch_dml` and at least one of `tidb_batch_insert` and `tidb_batch_delete`.
 
 ### tidb_enable_1pc <span class="version-mark">New in v5.0</span>
 
@@ -997,6 +1040,18 @@ Constraint checking is always performed in place for pessimistic transactions (d
 - Type: Boolean
 - Default value: `OFF`
 - This variable is used to determine whether to include the `AUTO_INCREMENT` columns when creating a generated column or an expression index.
+
+### tidb_enable_batch_dml
+
+> **Warning:**
+>
+> This variable is associated with the deprecated batch-dml feature, which might cause data corruption. Therefore, it is not recommended to enable this variable for batch-dml. Instead, use [non-transactional DML](/non-transactional-dml.md).
+
+- Scope: GLOBAL
+- Persists to cluster: Yes
+- Type: Boolean
+- Default value: `OFF`
+- This variable controls whether to enable the deprecated batch-dml feature. When it is enabled, certain statements might be split into multiple transactions, which is non-atomic and should be used with care. When using batch-dml, you must ensure that there are no concurrent operations on the data you are operating on. To make it work, you must also specify a positive value for `tidb_batch_dml_size` and enable at least one of `tidb_batch_insert` and `tidb_batch_delete`.
 
 ### tidb_enable_change_multi_schema
 
@@ -1313,6 +1368,10 @@ This variable is associated with a feature available since v6.2.0 and not usable
 - If the data on a table is frequently modified without executing `ANALYZE` on this table in time, to keep the execution plan stable, you can set the variable value to `OFF`.
 
 ### tidb_enable_rate_limit_action
+
+> **Note:**
+>
+> This variable is enabled by default, which makes the memory usage not under the control of [`tidb_mem_quota_query`](#tidb_mem_quota_query) in some cases. Therefore, it is recommended to set the value of `tidb_enable_rate_limit_action` to `OFF`.
 
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
@@ -1709,7 +1768,7 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 
 - This variable is used to set whether to record all SQL statements in the [log](/tidb-configuration-file.md#logfile). This feature is disabled by default. If maintenance personnel needs to trace all SQL statements when locating issues, they can enable this feature.
 
-- To see all records of this feature in the log, query the `"GENERAL_LOG"` string. The following information is recorded:
+- To see all records of this feature in the log, you need to set the TiDB configuration item [`log.level`](/tidb-configuration-file.md#level) to `"info"` or `"debug"` and then query the `"GENERAL_LOG"` string. The following information is recorded:
     - `conn`: The ID of the current session.
     - `user`: The current session user.
     - `schemaVersion`: The current schema version.
@@ -1728,9 +1787,9 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 - Persists to cluster: Yes
 - Type: Boolean
 - Default value: `ON`
-- This variable controls the way commit TS is calculated for async commit. By default (with the `OFF` value), the two-phase commit requests a new TS from the PD server and uses the TS to calculate the final commit TS. In this situation, linearizability is guaranteed for all the concurrent transactions.
-- If you set this variable to `ON`, the process of fetching TS from the PD server is skipped, with the cost that only causal consistency is guaranteed but not linearizability. For more details, see the blog post [Async Commit, the Accelerator for Transaction Commit in TiDB 5.0](https://en.pingcap.com/blog/async-commit-the-accelerator-for-transaction-commit-in-tidb-5-0/).
-- For scenarios that require only causal consistency, you can set this variable to `ON` to improve performance.
+- This variable controls the way commit TS is calculated for async commit. By default (with the `ON` value), the two-phase commit requests a new TS from the PD server and uses the TS to calculate the final commit TS. In this situation, linearizability is guaranteed for all the concurrent transactions.
+- If you set this variable to `OFF`, the process of fetching TS from the PD server is skipped, with the cost that only causal consistency is guaranteed but not linearizability. For more details, see the blog post [Async Commit, the Accelerator for Transaction Commit in TiDB 5.0](https://en.pingcap.com/blog/async-commit-the-accelerator-for-transaction-commit-in-tidb-5-0/).
+- For scenarios that require only causal consistency, you can set this variable to `OFF` to improve performance.
 
 ### tidb_hash_exchange_with_new_collation
 
@@ -2406,6 +2465,15 @@ explain select * from t where age=5;
 - Default value: `20`
 - Indicates the start-up cost for TiDB to request data from TiKV. This variable is internally used in the [Cost Model](/cost-model.md), and it is **NOT** recommended to modify its value.
 
+### tidb_opt_tiflash_concurrency_factor
+
+- Scope: SESSION | GLOBAL
+- Persists to cluster: YES
+- Type: Float
+- Range: `[0, 2147483647]`
+- Default value: `24.0`
+- Indicates the concurrency number of TiFlash computation. This variable is internally used in the [Cost Model](/cost-model.md), and it is **NOT** recommended to modify its value.
+
 ### tidb_opt_write_row_id
 
 <CustomContent platform="tidb-cloud">
@@ -3015,7 +3083,7 @@ For details, see [Identify Slow Queries](/identify-slow-queries.md).
 
 ### tidb_track_aggregate_memory_usage
 
-- Scope: SESSION ｜ GLOBAL
+- Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
 - Type: Boolean
 - Default value: `ON`

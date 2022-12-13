@@ -13,7 +13,7 @@ This document is targeted for the following upgrade paths:
 
 > **Warning:**
 >
-> - You cannot upgrade TiFlash online from versions earlier than 5.3 to 5.3 or later. Instead, you must first stop all the TiFlash instances of the early version, and then upgrade the cluster offline. If other components (such as TiDB and  TiKV) do not support an online upgrade, follow the instructions in warnings in [Online upgrade](#online-upgrade).
+> - You cannot upgrade TiFlash online from versions earlier than 5.3 to 5.3 or later. Instead, you must first stop all the TiFlash instances of the early version, and then upgrade the cluster offline. If other components (such as TiDB and TiKV) do not support an online upgrade, follow the instructions in warnings in [Online upgrade](#online-upgrade).
 > - **DO NOT** upgrade a TiDB cluster when a DDL statement is being executed in the cluster (usually for the time-consuming DDL statements such as `ADD INDEX` and the column type changes).
 > - Before the upgrade, it is recommended to use the [`ADMIN SHOW DDL`](/sql-statements/sql-statement-admin-show-ddl.md) command to check whether the TiDB cluster has an ongoing DDL job. If the cluster has a DDL job, to upgrade the cluster, wait until the DDL execution is finished or use the [`ADMIN CANCEL DDL`](/sql-statements/sql-statement-admin-cancel-ddl.md) command to cancel the DDL job before you upgrade the cluster.
 > - In addition, during the cluster upgrade, **DO NOT** execute any DDL statement. Otherwise, the issue of undefined behavior might occur.
@@ -171,12 +171,12 @@ If your application has a maintenance window for the database to be stopped for 
 tiup cluster upgrade <cluster-name> <version>
 ```
 
-For example, if you want to upgrade the cluster to v6.1.1:
+For example, if you want to upgrade the cluster to v6.1.3:
 
 {{< copyable "shell-regular" >}}
 
 ```shell
-tiup cluster upgrade <cluster-name> v6.1.1
+tiup cluster upgrade <cluster-name> v6.1.3
 ```
 
 > **Note:**
@@ -231,7 +231,7 @@ tiup cluster display <cluster-name>
 ```
 Cluster type:       tidb
 Cluster name:       <cluster-name>
-Cluster version:    v6.1.1
+Cluster version:    v6.1.3
 ```
 
 > **Note:**
@@ -281,7 +281,7 @@ You can upgrade the tool version by using TiUP to install the `ctl` component of
 {{< copyable "shell-regular" >}}
 
 ```shell
-tiup install ctl:v6.1.1
+tiup install ctl:v6.1.3
 ```
 
 ## TiDB 6.1.0 compatibility changes
