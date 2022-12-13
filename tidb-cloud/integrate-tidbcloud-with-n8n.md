@@ -129,8 +129,8 @@ After building up the workflow, you can click the **Execute Workflow** button to
 
 ## Support Operations of TiDB Cloud Node
 
-- Create TiDB Serverless clusters
-- Execute SQL in TiDB Cloud
-- Delete rows in TiDB Cloud
-- Insert rows in TiDB Cloud
-- Update rows in TiDB Cloud
+- Create TiDB Cloud Serverless Tier clusters
+- Execute SQL in TiDB
+- Delete rows in TiDB
+- Insert rows in TiDB
+- Update rows in TiDB
