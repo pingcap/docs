@@ -1,11 +1,19 @@
 ---
 title: Identity Access Management
+<<<<<<< Updated upstream
 summary: Learn how to manage identity access of TiDB Cloud.
+=======
+summary: Learn how to manage user identity access of TiDB Cloud.
+>>>>>>> Stashed changes
 ---
 
 # Identity Access Management
 
+<<<<<<< Updated upstream
 To access your TiDB cloud, you must have a TiDB cloud user account. You may choose to register and login to TiDB Cloud, see [Password Authentication](/tidb-cloud/tidb-cloud-security-password-authentication.md), or choose your Google Workspace and GitHub accounts to single sign-on(SSO) to TiDB Cloud.
+=======
+To access your TiDB cloud, you must have a TiDB cloud user account. You may choose to register and login to TiDB Cloud, see [Password Authentication](/tidb-cloud/tidb-cloud-security-password-authentication.md), or choose your Google Workspace and GitHub accounts to single sign-on(SSO) to TiDB Cloud, see  [SSO Authentication](/tidb-cloud/manage-user-access.md).
+>>>>>>> Stashed changes
 
 ## single sign-on(SSO) for TiDB Cloud Organization 
 
@@ -51,7 +59,11 @@ Under this structure:
 
 - You can also view all members in your project.
 
+<<<<<<< Updated upstream
 ## Manage Organization Access
+=======
+## Organization Settings
+>>>>>>> Stashed changes
 
 ### View Organizations
 
@@ -74,6 +86,7 @@ If you are a member of multiple organizations, you can switch your account betwe
 If you are the organization owner, you can modify the system display time according to your time zone.To change the local timezone setting, perform the following steps:
 
 1. Click the account name in the upper-right corner of the TiDB Cloud console.
+<<<<<<< Updated upstream
 
 2. Click **Organization Settings**. The organization settings page is displayed.
 
@@ -85,6 +98,19 @@ If you are the organization owner, you can modify the system display time accord
 
 ### Invite an organization member
 
+=======
+
+2. Click **Organization Settings**. The organization settings page is displayed.
+
+3. Click **Time Zone**.
+
+4. Click the drop-down list and select your time zone.
+
+5. Click **Confirm**.
+
+### Invite an organization member
+
+>>>>>>> Stashed changes
 If you are the owner of an organization, you can invite organization members. Otherwise, skip this section.To invite a member to an organization, perform the following steps:
 
 1. Click the account name in the upper-right corner of the TiDB Cloud console.
@@ -111,7 +137,11 @@ If you are the owner of an organization, you can invite organization members. Ot
 >
 > The verification link in the email will expire in 24 hours. If your user doesn't receive the email, click **Resend**.
 
+<<<<<<< Updated upstream
 ### Remove an organization member
+=======
+## Remove an organization member
+>>>>>>> Stashed changes
 
 If you are the owner of an organization, you can remove organization members. Otherwise, skip this section.To remove a member from an organization, perform the following steps:
 
@@ -127,7 +157,11 @@ If you are the owner of an organization, you can remove organization members. Ot
 
 4. Click **Delete** in the user row that you want to delete.
 
+<<<<<<< Updated upstream
 ## Manage Project Access
+=======
+## Project Settings
+>>>>>>> Stashed changes
 
 ### Create a Project
 
@@ -207,7 +241,11 @@ If you are the owner of an organization, you can remove project members. Otherwi
 
 4. Click **Delete** in the user row that you want to delete.
 
+<<<<<<< Updated upstream
 ## Manage Roles Access
+=======
+## Configure member roles
+>>>>>>> Stashed changes
 
 If you are the owner of an organization, you can perform the following steps to configure roles for your organization members:
 
