@@ -5,20 +5,20 @@ summary: Learn how to connect your TiDB Cloud clusters to Netlify projects.
 
 # Integrate TiDB Cloud with Netlify
 
-[Netlify](https://netlify.com/) is an all-in-one platform for automating modern web projects. Replace your hosting infrastructure, continuous integration, and deployment pipeline with a single workflow. Integrate dynamic functionality like serverless functions, user authentication, and form handling as your projects grow.
+[Netlify](https://netlify.com/) is an all-in-one platform for automating modern web projects. It replaces your hosting infrastructure, continuous integration, and deployment pipeline with a single workflow and integrates dynamic functionality like serverless functions, user authentication, and form handling as your projects grow.
 
 This guide describes how to connect your TiDB Cloud clusters to Netlify projects.
 
 ## Prerequisites
 
-Before connection, make sure the following prerequisites are met.
+Before connecting, make sure the following prerequisites are met.
 
 ### A Netlify account and a deployed site
 
 You are expected to have an account and a site in Netlify. If you do not have any, refer to the following links to create one:
 
 * [Sign up a new account](https://app.netlify.com/signup).
-* [Adding a site](https://docs.netlify.com/welcome/add-new-site/) in Netlify, or if you do not have an application to deploy, you can use the [TiDB Cloud Starter Template](https://github.com/pingcap/tidb-prisma-vercel-demo#deploy-on-netlify) to have a try.
+* [Add a site](https://docs.netlify.com/welcome/add-new-site/) in Netlify. If you do not have an application to deploy, you can use the [TiDB Cloud Starter Template](https://github.com/pingcap/tidb-prisma-vercel-demo#deploy-on-netlify) to have a try.
 
 ### A TiDB Cloud account and a TiDB cluster
 
