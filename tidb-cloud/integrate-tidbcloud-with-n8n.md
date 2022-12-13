@@ -103,6 +103,7 @@ If you haven't got a TiDB Cloud Serverless Tier cluster, you can use this node t
 8. Enter `test` in the **Database** field.
 9. Enter your database password.
 10. Enter the following SQL in the ***SQL*** field:`CREATE TABLE IF NOT EXISTS execute_workflow (id INT AUTO_INCREMENT PRIMARY KEY, name VARCHAR(200), update_time TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP)`.
+11. Click on **Execute Node** to run the node.
 
 #### Build data to insert
 
@@ -119,7 +120,7 @@ If you haven't got a TiDB Cloud Serverless Tier cluster, you can use this node t
 4. Choose your project from the **Project** list.
 5. Select `Insert` from the **Operation** list.
 6. Enter the value in **Cluster**, **User**, **Database** and **Password** fields.
-7. Choose the `execute_workflow` table in the **Table** list.
+7. Enter the `execute_workflow` table in the **Table** field.
 8. Enter `name` in the **Columns** field.
 
 ## Step 4: Run Your Workflow
