@@ -91,7 +91,7 @@ The data replication topology between primary and secondary clusters does not ex
 
 To configure TiDB Cloud Replication, do the following:
 
-1. Navigate to the **Data Replication** tab of your TiDB cluster and click the **Changefeed** tab.
+1. Navigate to the cluster overview page of your TiDB cluster and click the **Changefeed** tab on the left navigation bar.
 2. Click **Create a replica of your TiDB Cluster**.
 3. Fill in the username and password of your database.
 4. Choose the region of the secondary cluster.
