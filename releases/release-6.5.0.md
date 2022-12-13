@@ -353,12 +353,11 @@ TiDB 6.5.0 is a Long-Term Support Release (LTS).
     - Support pull model for Checkpoints [#13824](https://github.com/tikv/tikv/issues/13824) @[YuJuncen](https://github.com/YuJuncen)
     - Avoid spinning issues on the sender side by updating crossbeam-channel [#13815](https://github.com/tikv/tikv/issues/13815) @[sticnarf](https://github.com/sticnarf)
     - Support batch Coprocessor tasks processing in TiKV [#13849](https://github.com/tikv/tikv/issues/13849) @[cfzjywxk](https://github.com/cfzjywxk)
-    - 故障恢复时通知 TiKV 唤醒休眠的 region 以减少等待时间 [#13648](https://github.com/tikv/tikv/issues/13648) @[LykxSassinator](https://github.com/LykxSassinator)
-    - 通过代码优化减少内存申请 [#13836](https://github.com/tikv/tikv/pull/13836) @[BusyJay](https://github.com/BusyJay)
-    - 引入 raft extension 以提升代码可扩展性 [#13864](https://github.com/tikv/tikv/pull/13864) @[BusyJay](https://github.com/BusyJay)
-    - 通过引入 `hint_min_ts` 加速 flashback [#13842](https://github.com/tikv/tikv/pull/13842)  @[JmPotato](https://github.com/JmPotato)
-    - tikv-ctl 支持查询某个 key 范围中包含哪些 Region  [#13768](https://github.com/tikv/tikv/pull/13768) [@HuSharp](https://github.com/HuSharp)
-    - 改进持续对特定行只加锁但不更新情况下的读写性能 [#13694](https://github.com/tikv/tikv/issues/13694) [@sticnarf](https://github.com/sticnarf)
+    - Reduce waiting time on failure recovery by notifying TiKV to wake up Regions [#13648](https://github.com/tikv/tikv/issues/13648) @[LykxSassinator](https://github.com/LykxSassinator)
+    - Reduce the requested size of memory usage by code optimization [#13827](https://github.com/tikv/tikv/issues/13827) @[BusyJay](https://github.com/BusyJay)
+    - Introduce the raft extension to improve code extensibility [#13827](https://github.com/tikv/tikv/issues/13827) @[BusyJay](https://github.com/BusyJay)
+    - Support using tikv-ctl to query which Regions are included in a certain key range [#13760](https://github.com/tikv/tikv/issues/13760) [@HuSharp](https://github.com/HuSharp)
+    - Improve read and write performance for rows that are not updated but locked continuously [#13694](https://github.com/tikv/tikv/issues/13694) [@sticnarf](https://github.com/sticnarf)
 
 + PD
 
@@ -414,12 +413,12 @@ TiDB 6.5.0 is a Long-Term Support Release (LTS).
 
 + TiKV
 
-    - 修复 raft engine ctl 中的错误 [#13108](https://github.com/tikv/tikv/issues/13108) @[tabokie](https://github.com/tabokie)
-    - 修复 tikv-ctl 中 compact raft 命令的错误 [#13515](https://github.com/tikv/tikv/issues/13515) @[guoxiangCN](https://github.com/guoxiangCN)
-    - 修复当启用 TLS 时 log backup 无法使用的问题 [#13851](https://github.com/tikv/tikv/issues/13851) @[YuJuncen](https://github.com/YuJuncen)
-    - 修复对 Geometry 字段类型的支持 [#13651](https://github.com/tikv/tikv/issues/13651) @[dveeden](https://github.com/dveeden)
-    - 修复当未使用 new collation 时 `like` 无法处理 `_` 中非 ASCII 字符的问题 [#13769](https://github.com/tikv/tikv/issues/13769) @[YangKeao](https://github.com/YangKeao)
-    - 修复 tikv-ctl 执行 reset-to-version 时出现 segfault 的问题 [#13829](https://github.com/tikv/tikv/issues/13829) @[tabokie](https://github.com/tabokie)
+    - Fix an error in Raft Engine ctl [#11119](https://github.com/tikv/tikv/issues/11119) @[tabokie](https://github.com/tabokie)
+    - Fix the `Get raft db is not allowed` error when executing the `compact raft` command in tikv-ctl [#13515](https://github.com/tikv/tikv/issues/13515) @[guoxiangCN](https://github.com/guoxiangCN)
+    - Fix the issue that log backup does not work when TLS is enabled [#13867](https://github.com/tikv/tikv/issues/13867) @[YuJuncen](https://github.com/YuJuncen)
+    - Fix the support issue of the Geometry field type [#13651](https://github.com/tikv/tikv/issues/13651) @[dveeden](https://github.com/dveeden)
+    - Fix the issue that  `_` in the `LIKE` operator cannot match non-ASCII characters when new collation is not enabled [#13769](https://github.com/tikv/tikv/issues/13769) @[YangKeao](https://github.com/YangKeao)
+    - Fix the issue that tikv-ctl is terminated unexpectedly when executing the `reset-to-version` command [#13829](https://github.com/tikv/tikv/issues/13829) @[tabokie](https://github.com/tabokie)
 
 + PD
 
