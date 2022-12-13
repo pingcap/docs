@@ -9,7 +9,7 @@ summary: Learn how to build a TiDB cluster in TiDB Cloud (Serverless Tier) and c
 
 <CustomContent platform="tidb">
 
-このドキュメントでは、TiDB を使い始める最も簡単な方法について説明します。 [TiDB Cloud](https://en.pingcap.com/tidb-cloud)を使用して Serverless Tier クラスターを作成し、それに接続して、サンプル アプリケーションを実行します。
+このドキュメントでは、TiDB を開始するための最も簡単な方法について説明します。 [TiDB Cloud](https://en.pingcap.com/tidb-cloud)を使用して Serverless Tier クラスターを作成し、それに接続して、サンプル アプリケーションを実行します。
 
 ローカル マシンで TiDB を実行する必要がある場合は、 [TiDB をローカルで起動する](/quick-start-with-tidb.md)を参照してください。
 
@@ -23,19 +23,21 @@ summary: Learn how to build a TiDB cluster in TiDB Cloud (Serverless Tier) and c
 
 ## ステップ 1. サーバーレス層クラスターを作成する {#step-1-create-a-serverless-tier-cluster}
 
-1.  TiDB Cloudアカウントを持っていない場合は、 [ここ](https://tidbcloud.com/free-trial)をクリックしてアカウントにサインアップします。
+1.  TiDB Cloudアカウントを持っていない場合は、 [ここ](https://tidbcloud.com/free-trial)クリックしてアカウントにサインアップします。
 
 2.  [ログイン](https://tidbcloud.com/)をTiDB Cloudアカウントに追加します。
 
-3.  [**クラスター**] ページで、[<strong>クラスタの作成</strong>] をクリックします。
+3.  [**クラスター**](https://tidbcloud.com/console/clusters)ページで、 **[Create クラスタ]**をクリックします。
 
-4.  [**クラスタの作成**] ページでは、<strong>サーバーレス層</strong>がデフォルトで選択されています。必要に応じてデフォルトのクラスター名を更新し、クラスターを作成するリージョンを選択します。
+4.  **[クラスタの作成]**ページでは、<strong>サーバーレス層が</strong>デフォルトで選択されています。必要に応じてデフォルトのクラスター名を更新し、クラスターを作成するリージョンを選択します。
+
+5.  **[作成]**をクリックして、サーバーレス層クラスターを作成します。
 
     TiDB Cloudクラスターは約 30 秒で作成されます。
 
-5.  TiDB Cloudクラスターが作成されたら、[**セキュリティ設定]**をクリックします。 [<strong>セキュリティ設定</strong>] ダイアログ ボックスで、クラスターに接続するためのルート パスワードを設定し、[<strong>送信</strong>] をクリックします。 root パスワードを設定しないと、クラスターに接続できません。
+6.  TiDB Cloudクラスターが作成されたら、 **[セキュリティ設定]**をクリックします。 <strong>[セキュリティ設定]</strong>ダイアログ ボックスで、クラスターに接続するためのルート パスワードを設定し、 <strong>[適用]</strong>をクリックします。 root パスワードを設定しないと、クラスターに接続できません。
 
-6.  [**接続]**をクリックします。接続ダイアログボックスが表示されます。ダイアログの [ <strong>SQL クライアントで接続</strong>] の下で、希望する接続方法のタブをクリックし、対応する接続文字列を保存します。次のセクションでは、MySQL クライアントを例として使用します。
+7.  **[接続]**をクリックします。接続ダイアログボックスが表示されます。ダイアログの<strong>[SQL クライアントで接続]</strong>の下で、希望する接続方法のタブをクリックし、対応する接続文字列を保存します。次のセクションでは、MySQL クライアントを例として使用します。
 
     <CustomContent platform="tidb">
 

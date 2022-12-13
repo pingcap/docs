@@ -39,14 +39,14 @@ TiDB と[TiKV](https://tikv.org/)の基本的な知識が必要です。
 
 ### クラスタのバージョン {#cluster-versions}
 
--   TiDB: v6.1.2
--   TiKV: v6.1.2
--   PD: v6.1.2
--   BR: v6.1.2
+-   TiDB: v6.1.3
+-   TiKV: v6.1.3
+-   PD: v6.1.3
+-   BR: v6.1.3
 
 > **ノート：**
 >
-> [TiDB/TiKV/PD/BR](/releases/release-notes.md)の最新バージョンを使用し、BR バージョンが TiDB バージョンと**一致して**いることを確認することをお勧めします。
+> [TiDB/TiKV/PD/BR](/releases/release-notes.md)の最新バージョンを使用し、BR バージョンが TiDB バージョン**と一致して**いることを確認することをお勧めします。
 
 ### TiKV ハードウェア情報 {#tikv-hardware-information}
 
@@ -80,7 +80,7 @@ BR は直接 TiKV クラスターにコマンドを送信し、TiDBサーバー�
 
 ## 1 つのテーブルをネットワーク ディスクにバックアップする (運用環境に推奨) {#back-up-a-single-table-to-a-network-disk-recommended-for-production-environments}
 
-`br backup`コマンドを実行して、単一テーブル データ`--db batchmark --table order_line`をネットワーク ディスクの指定されたパス`local:///br_data`にバックアップします。
+`br backup`コマンドを実行して、単一テーブル データ`--db batchmark --table order_line`ネットワーク ディスクの指定されたパス`local:///br_data`にバックアップします。
 
 ### バックアップの前提条件 {#backup-prerequisites}
 
@@ -333,7 +333,7 @@ bin/br restore table --db batchmark --table order_line -s local:///br_data/ --pd
 
 -   [バックアップ前の確認](#check-before-backup)
 -   各 TiKV ノードには、backupSST ファイルを格納するための個別のディスクがあります。
--   `backup_endpoint`のノードには、 `backupmeta`のファイルを格納するための個別のディスクがあります。
+-   `backup_endpoint`ノードには、 `backupmeta`ファイルを格納するための個別のディスクがあります。
 -   TiKV と`backup_endpoint`ノードは、バックアップ用に同じディレクトリ (たとえば、 `/home/tidb/backup_local` ) を共有します。
 
 ### トポロジー {#topology}
@@ -395,7 +395,7 @@ bin/br backup table \
 -   [復元前の確認](#check-before-restoration)
 -   TiKV クラスターとバックアップ データには、重複するデータベースまたはテーブルがありません。現在、BR はテーブル ルートをサポートしていません。
 -   各 TiKV ノードには、backupSST ファイルを格納するための個別のディスクがあります。
--   `restore_endpoint`のノードには、 `backupmeta`のファイルを格納するための個別のディスクがあります。
+-   `restore_endpoint`ノードには、 `backupmeta`ファイルを格納するための個別のディスクがあります。
 -   TiKV と`restore_endpoint`ノードは、復元のために同じディレクトリ (たとえば、 `/home/tidb/backup_local/` ) を共有します。
 
 復元する前に、次の手順に従います。

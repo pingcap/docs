@@ -12,11 +12,7 @@ summary: Learn how to choose a driver or ORM framework to connect to TiDB.
 > -   **完全**: このドライバーまたは ORM を使用しても、既知の問題がないことを示します。
 > -   **検証済み**: TiDB と MySQL の互換性の違いにより、このドライバーまたは ORM を使用するとエラーが発生する可能性があることを示します。
 >
-> <CustomContent platform="tidb">
->
 > 詳細については、 [TiDB がサポートするサードパーティ ツール](/develop/dev-guide-third-party-support.md)を参照してください。
->
-> </CustomContent>
 
 TiDB は MySQL プロトコルと高い互換性がありますが、一部の機能は MySQL と互換性がありません。
 
@@ -30,7 +26,7 @@ TiDB は MySQL プロトコルと高い互換性がありますが、一部の�
 
 -   MySQL とは異なる機能:
 
-    -   自動インクリメント ID: 自動インクリメント列は、TiDB 内でグローバルに一意です。それらは単一の TiDBサーバー上では増分ですが***、必ずしも***複数の TiDB サーバー間で増分されたり、順次割り当てられるとは限りません。
+    -   自動インクリメント ID: 自動インクリメント列は、TiDB 内でグローバルに一意です。それらは単一の TiDBサーバー上では増分ですが、必ずしも複数の TiDB サーバー間で増分されたり、順次割り当てられるとは限り***ません***。
 
 互換性の相違点の完全なリストについては、 [MySQL の互換性](/mysql-compatibility.md)を参照してください。
 
@@ -49,7 +45,7 @@ TiDB は MySQL プロトコルと高い互換性がありますが、一部の�
 
 > **ノート：**
 >
-> JDBC 5.1 の最新バージョンであるバージョン 5.1.49 を使用することを強くお勧めします。現在のバージョン 8.0.29 には[未解決のバグ](https://bugs.mysql.com/bug.php?id=106252)があるため、TiDB の使用時にスレッドがハングする可能性があります。 MySQL JDBC 8.0 がこの修正をマージするまで、バージョン 8.0 にアップグレードしないことをお勧めします。
+> JDBC 5.1 の最新バージョンであるバージョン 5.1.49 を使用することを強くお勧めします。現在のバージョン 8.0.29 には[未解決のバグ](https://bugs.mysql.com/bug.php?id=106252)あるため、TiDB の使用時にスレッドがハングする可能性があります。 MySQL JDBC 8.0 がこの修正をマージするまで、バージョン 8.0 にアップグレードしないことをお勧めします。
 
 完全なアプリケーションを構築する方法の例については、 [TiDB と JDBC を使用して単純な CRUD アプリを構築する](/develop/dev-guide-sample-application-java.md)を参照してください。
 
@@ -109,11 +105,7 @@ implementation group: 'org.bouncycastle', name: 'bcpkix-jdk15on', version: '1.67
 >
 > -   現在、Hibernate は[ネストされたトランザクションをサポートしない](https://stackoverflow.com/questions/37927208/nested-transaction-in-spring-app-with-jpa-postgres)を実行します。
 >
-> <CustomContent platform="tidb">
->
 > -   v6.2.0 以降、TiDB は[セーブポイント](https://docs.pingcap.com/tidb/v6.2/sql-statement-savepoint)をサポートしています。 `@Transactional`で`Propagation.NESTED`トランザクション伝播オプションを使用する、つまり`@Transactional(propagation = Propagation.NESTED)`を設定するには、TiDB が v6.2.0 以降であることを確認してください。
->
-> </CustomContent>
 
 <SimpleTab>
 <div label="Hibernate">
@@ -122,7 +114,7 @@ implementation group: 'org.bouncycastle', name: 'bcpkix-jdk15on', version: '1.67
 
 アプリケーションの異なる依存関係間の複雑な関係を手動で管理することを避けるために、 [グラドル](https://gradle.org/install)または[メイヴン](https://maven.apache.org/install.html)を使用して、間接的なものを含むアプリケーションのすべての依存関係を取得できます。 Hibernate `6.0.0.Beta2`以降のみが TiDB ダイアレクトをサポートすることに注意してください。
 
-**Maven**を使用している場合は、次を`<dependencies></dependencies>`に追加します。
+**Maven を**使用している場合は、次を`<dependencies></dependencies>`に追加します。
 
 {{< copyable "" >}}
 
@@ -140,7 +132,7 @@ implementation group: 'org.bouncycastle', name: 'bcpkix-jdk15on', version: '1.67
 </dependency>
 ```
 
-**Gradle**を使用している場合は、以下を`dependencies`に追加します。
+**Gradle を**使用している場合は、以下を`dependencies`に追加します。
 
 ```gradle
 implementation 'org.hibernate:hibernate-core:6.0.0.CR2'
@@ -260,6 +252,6 @@ GORM を使用して TiDB アプリケーションを構築する例について
 
 <CustomContent platform="tidb-cloud">
 
-ドライバーまたは ORM を決定したら、次のことができ[TiDB クラスターに接続する](https://docs.pingcap.com/tidbcloud/connect-to-tidb-cluster) 。
+ドライバーまたは ORM を決定したら、 [TiDB クラスターに接続する](https://docs.pingcap.com/tidbcloud/connect-to-tidb-cluster)ができます。
 
 </CustomContent>

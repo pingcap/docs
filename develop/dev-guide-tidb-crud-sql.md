@@ -15,11 +15,27 @@ TiDB クラスターに接続していることを確認してください。そ
 
 > **ノート：**
 >
-> このドキュメントでは、 [TiDB で SQL を調べる](/basic-sql-operations.md)を参照して簡略化しています。詳細については、 [TiDB で SQL を調べる](/basic-sql-operations.md)を参照してください。
+> このドキュメントでは、 [TiDB で SQL を調べる](/basic-sql-operations.md)参照して簡略化しています。詳細については、 [TiDB で SQL を調べる](/basic-sql-operations.md)を参照してください。
 
 TiDB は MySQL と互換性があり、ほとんどの場合、MySQL ステートメントを直接使用できます。サポートされていない機能については、 [MySQL との互換性](/mysql-compatibility.md#unsupported-features)を参照してください。
 
-SQL を試して、TiDB と MySQL クエリとの互換性をテストするには、次のことができ[TiDB をインストールせずに Web ブラウザーで直接実行する](https://tour.tidb.io/) 。最初に TiDB クラスターをデプロイしてから、そこで SQL ステートメントを実行することもできます。
+SQL を試し、TiDB と MySQL クエリとの互換性をテストするには、 [TiDB Cloudコンソール](https://tidbcloud.com/)で SQL エディター (ベータ) を試すことができます。 **[クラスタの詳細]**ページに移動し、左側のナビゲーション バーで<strong>[SQL エディター]</strong>をクリックします。 SQL エディターでは、ターミナルを使用せずにクラスターに対して直接 SQL クエリを編集および実行できます。
+
+> **ノート：**
+>
+> SQL エディタは現在、SQL ステートメントのサポートが制限されています。 `CREATE TABLE`や`DROP TABLE`などの DDL はまだサポートされていません。
+>
+> <CustomContent platform="tidb">
+>
+> TiDB ですべての SQL ステートメントを調べたい場合は、TiDB クラスターをデプロイしてから、その中で SQL ステートメントを実行できます。
+>
+> </CustomContent>
+>
+> <CustomContent platform="tidb-cloud">
+>
+> TiDB ですべての SQL ステートメントを調べたい場合は、SQL クライアントから SQL ステートメントを[TiDB Cloudクラスターに接続する](/tidb-cloud/connect-to-tidb-cluster.md)できます。
+>
+> </CustomContent>
 
 このページでは、DDL、DML、CRUD 操作などの基本的なTiDB SQLステートメントについて説明します。 TiDB ステートメントの完全なリストについては、 [TiDB SQL構文図](https://pingcap.github.io/sqlgram/)を参照してください。
 
@@ -41,7 +57,7 @@ SQL は、その関数によって次の 4 つのタイプに分けられます�
 
 一般的な DML 機能は、テーブル レコードの追加、変更、および削除です。対応するコマンドは`INSERT` 、 `UPDATE` 、および`DELETE`です。
 
-テーブルにデータを挿入するには、次の`INSERT`ステートメントを使用します。
+テーブルにデータを挿入するには、 `INSERT`ステートメントを使用します。
 
 {{< copyable "" >}}
 
@@ -65,7 +81,7 @@ INSERT INTO person(id,name) VALUES('2','bob');
 UPDATE person SET birthday='20180808' WHERE id=2;
 ```
 
-テーブル内のデータを削除するには、次の`DELETE`ステートメントを使用します。
+テーブル内のデータを削除するには、 `DELETE`ステートメントを使用します。
 
 {{< copyable "" >}}
 

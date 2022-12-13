@@ -9,7 +9,7 @@ TiDB Cloudでは、常に稼働していないクラスターを簡単に一時�
 
 一時停止は、クラスターに保存されているデータには影響しませんが、監視情報の収集とコンピューティング リソースの消費を停止するだけです。一時停止後、いつでもクラスターを再開できます。
 
-バックアップと復元と比較して、クラスターの一時停止と再開にかかる時間は短く、クラスターの状態情報 (クラスターのバージョン、クラスター構成、TiDB ユーザー アカウントなど) を保持します。
+バックアップと復元と比較すると、クラスターの一時停止と再開にかかる時間は短く、クラスターの状態情報 (クラスターのバージョン、クラスター構成、TiDB ユーザー アカウントなど) を保持できます。
 
 > **ノート：**
 >
@@ -20,14 +20,13 @@ TiDB Cloudでは、常に稼働していないクラスターを簡単に一時�
 -   クラスターが**AVAILABLE**状態の場合にのみ一時停止できます。クラスターが<strong>MODIFYING</strong>などの他の状態にある場合は、クラスターを一時停止する前に、現在の操作が完了するまで待機する必要があります。
 -   データ インポート タスクの実行中は、クラスターを一時停止できません。インポート タスクが完了するのを待つか、インポート タスクをキャンセルすることができます。
 -   バックアップ ジョブの実行中は、クラスターを一時停止できません。現在のバックアップ ジョブが完了するまで待つか、または[実行中のバックアップ ジョブを削除する](/tidb-cloud/backup-and-restore.md#delete-a-running-backup-job) .
-
-<!--- - You cannot pause your cluster if it has any [Changefeeds](/tidb-cloud/changefeed-overview.md). You need to delete the existing Changefeeds ([Delete Sink to Apache Kafka](/tidb-cloud/changefeed-sink-to-apache-kafka.md#delete-a-sink) or [Delete Sink to MySQL](/tidb-cloud/changefeed-sink-to-mysql.md#delete-a-sink)) before pausing the cluster. --->
+-   クラスターに[チェンジフィード](/tidb-cloud/changefeed-overview.md)がある場合、クラスターを一時停止することはできません。クラスターを一時停止する前に、既存の Changefeeds ( [Apache Kafka へのシンクの削除](/tidb-cloud/changefeed-sink-to-apache-kafka.md#manage-the-changefeed)または[MySQL へのシンクの削除](/tidb-cloud/changefeed-sink-to-mysql.md#delete-a-sink) ) を削除する必要があります。
 
 ## TiDB クラスターを一時停止する {#pause-a-tidb-cluster}
 
 クラスターが一時停止されている場合は、次の点に注意してください。
 
--   TiDB Cloudがクラスターの監視情報の収集を停止します。
+-   TiDB Cloud がクラスターの監視情報の収集を停止します。
 
 -   クラスターからデータを読み取ったり、クラスターにデータを書き込んだりすることはできません。
 
@@ -38,23 +37,23 @@ TiDB Cloudでは、常に稼働していないクラスターを簡単に一時�
     -   ノード ストレージ コスト
     -   データ バックアップのコスト
 
--   TiDB Cloudはクラスターの[自動バックアップ](/tidb-cloud/backup-and-restore.md#automatic-backup)を停止します。
+-   TiDB Cloud はクラスターの[自動バックアップ](/tidb-cloud/backup-and-restore.md#automatic-backup)を停止します。
 
 クラスターを一時停止するには、次の手順を実行します。
 
-1.  TiDB Cloudコンソールで、プロジェクトの [**クラスター**] ページに移動します。
+1.  TiDB Cloudコンソールで、プロジェクトの[**クラスター**](https://tidbcloud.com/console/clusters)ページに移動します。
 
-2.  一時停止するクラスターについて、クラスター領域の右上隅にある [ **...** ] をクリックします。
+2.  一時停止するクラスターについて、クラスター領域の右上隅にある**[...]**をクリックします。
 
     > **ヒント：**
     >
-    > または、[クラスター] ページで一時停止する**クラスター**の名前をクリックし、右上隅にある [ <strong>...</strong> ] をクリックすることもできます。
+    > または、 **[クラスター]**ページで一時停止するクラスターの名前をクリックし、右上隅にある<strong>[...]</strong>をクリックすることもできます。
 
-3.  ドロップダウン メニューで [**一時停止**] をクリックします。
+3.  ドロップダウン メニューで**[一時停止]**をクリックします。
 
-    [**クラスターの一時停止**] ダイアログが表示されます。
+    **[クラスターの一時停止]**ダイアログが表示されます。
 
-4.  ダイアログで、[**一時停止**] をクリックして選択を確定します。
+4.  ダイアログで、 **[一時停止]**をクリックして選択を確認します。
 
 TiDB Cloud API を使用してクラスターを一時停止することもできます。現在、 TiDB Cloud API はまだベータ版です。詳細については、 [TiDB CloudAPI ドキュメント](https://docs.pingcap.com/tidbcloud/api/v1beta)を参照してください。
 
@@ -62,19 +61,19 @@ TiDB Cloud API を使用してクラスターを一時停止することもで�
 
 一時停止したクラスターが再開されたら、次の点に注意してください。
 
--   TiDB Cloudがクラスターの監視情報の収集を再開し、クラスターからデータを読み書きできるようになります。
--   TiDB Cloudは、コンピューティングとストレージの両方のコストの請求を再開します。
--   TiDB Cloudがクラスターの[自動バックアップ](/tidb-cloud/backup-and-restore.md#automatic-backup)を再開します。
+-   TiDB Cloud がクラスターの監視情報の収集を再開し、クラスターからデータを読み書きできるようになります。
+-   TiDB Cloud は、コンピューティングとストレージの両方のコストの請求を再開します。
+-   TiDB Cloud がクラスターの[自動バックアップ](/tidb-cloud/backup-and-restore.md#automatic-backup)を再開します。
 
 一時停止したクラスターを再開するには、次の手順を実行します。
 
-1.  TiDB Cloudコンソールで、プロジェクトの [**クラスター**] ページに移動します。
+1.  TiDB Cloudコンソールで、プロジェクトの[**クラスター**](https://tidbcloud.com/console/clusters)ページに移動します。
 
-2.  再開するクラスターの [ **Resume** ] をクリックします。
+2.  再開するクラスターの**[Resume]**をクリックします。
 
-    [**クラスターの再開**] ダイアログが表示されます。
+    **[クラスターの再開]**ダイアログが表示されます。
 
-3.  ダイアログで、[**再開**] をクリックして選択を確認します。クラスターのステータスは<strong>RESUMING</strong>になります。
+3.  ダイアログで、 **[再開]**をクリックして選択を確認します。クラスターのステータスは<strong>RESUMING</strong>になります。
 
 クラスターのサイズによっては、クラスターの再開に数分かかる場合があります。クラスターが再開されると、クラスターの状態は**RESUMING**から<strong>AVAILABLE</strong>に変わります。
 

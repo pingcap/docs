@@ -31,11 +31,11 @@ TiDB Serverless Tier は、クライアントと TiDB Serverless Tier クラス�
 >
 > TiDB Serverless Tier クラスターの CA 証明書が本当に必要な場合は、将来 CA を変更する場合に備えて、単一の CA 証明書ではなく[Mozilla CA 証明書バンドル](https://curl.se/docs/caextract.html)をダウンロードすることをお勧めします。
 >
-> 内部に複数の証明書を含む証明書ファイルを受け入れない DBeaver などの GUI クライアントを使用している場合は、 [ISRGルートX1](https://letsencrypt.org/certs/isrgrootx1.pem.txt)の証明書をダウンロードする必要があります。
+> 内部に複数の証明書を含む証明書ファイルを受け入れない DBeaver などの GUI クライアントを使用している場合は、 [ISRGルートX1](https://letsencrypt.org/certs/isrgrootx1.pem.txt)証明書をダウンロードする必要があります。
 
 ## TLS 接続で TiDB Serverless Tier クラスターに接続するにはどうすればよいですか? {#how-do-i-connect-to-a-tidb-serverless-tier-cluster-in-tls-connection}
 
-TiDB Cloudは、**接続**ダイアログでいくつかの接続例を提供します。 [標準接続で接続](/tidb-cloud/connect-to-tidb-cluster.md#connect-via-standard-connection)の手順に従って、TiDB Serverless Tier クラスターに接続できます。
+TiDB Cloud は、 **Connect** &gt; <strong>Dev Tools</strong>ダイアログでいくつかの接続例を提供します。 [標準接続で接続](/tidb-cloud/connect-to-tidb-cluster.md#connect-via-standard-connection)の手順に従って、TiDB Serverless Tier クラスターに接続できます。
 
 一般に、TLS を有効にし、サーバーを認証するための CA ルート パスを提供することは、中間者攻撃を防ぐための良い方法です。クライアントが異なれば、TLS 接続での操作も異なります。 TLS を有効にし、クライアントの実際の使用に応じてサーバーを検証します。
 
@@ -57,7 +57,7 @@ mysql --connect-timeout 15 -u <username> -h <host> -P 4000 --ssl-mode=VERIFY_IDE
 
 <div label="MyCLI client">
 
-[MyCLI](https://www.mycli.net/)は、TLS 関連のパラメーターを使用するときに TLS を自動的に有効にします。 TiDB Serverless Tier クラスターに接続する場合は、 `ssl-ca`と`ssl-verify-server-cert`を設定する必要があります。
+[MyCLI](https://www.mycli.net/) TLS 関連のパラメーターを使用するときに TLS を自動的に有効にします。 TiDB Serverless Tier クラスターに接続する場合は、 `ssl-ca`と`ssl-verify-server-cert`を設定する必要があります。
 
 ```shell
 mycli -u <username> -h <host> -P 4000 -D test --ssl-ca=<CA_root_path> --ssl-verify-server-cert
@@ -107,7 +107,7 @@ mysql.RegisterTLSConfig("tidb", &tls.Config{
 db, err := sql.Open("mysql", "<usename>:<your_password>@tcp(<host>:4000)/test?tls=tidb")
 ```
 
--   接続に`tls.Config`を登録して、TLS を有効にし、TiDB Serverless Tier クラスターを検証します。 Go-MySQL-Driver はデフォルトでシステム CA ルート証明書を使用するため、証明書を構成する必要はありません。
+-   接続に`tls.Config`登録して、TLS を有効にし、TiDB Serverless Tier クラスターを検証します。 Go-MySQL-Driver はデフォルトでシステム CA ルート証明書を使用するため、証明書を構成する必要はありません。
 -   TLS プロトコルのバージョンを制限するには、 `MinVersion: tls.VersionTLS12`を設定します。
 -   TiDB サーバーレス層のホスト名を確認するには、 `ServerName: "<host>"`を設定します。
 -   新しい TLS 構成を登録したくない場合は、接続文字列に`tls=true`を設定するだけです。
@@ -166,7 +166,7 @@ host: '<host>', port: 4000,user: '<username>', password: '<your_password>', data
 
 Windows は、CA ルートへの特定のパスを提供しません。代わりに、 [レジストリ](https://learn.microsoft.com/en-us/windows-hardware/drivers/install/local-machine-and-current-user-certificate-stores)を使用して証明書を保存します。このため、Windows で CA ルート パスを指定するには、次の手順を実行します。
 
-1.  [Mozilla CA 証明書バンドル](https://curl.se/docs/caextract.html)をダウンロードし、 `<path_to_mozilla_ca_cert_bundle>`などの任意のパスに保存します。
+1.  [Mozilla CA 証明書バンドル](https://curl.se/docs/caextract.html)ダウンロードし、 `<path_to_mozilla_ca_cert_bundle>`などの任意のパスに保存します。
 2.  Serverless Tier クラスターに接続するときは、パス ( `<path_to_mozilla_ca_cert_bundle>` ) を CA ルート パスとして使用します。
 
 ## TiDB Serverless Tier はクライアントの身元を確認できますか? {#can-tidb-serverless-tier-verify-the-client-s-identity}

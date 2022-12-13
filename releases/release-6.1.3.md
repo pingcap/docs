@@ -10,6 +10,14 @@ TiDB バージョン: 6.1.3
 
 クイック アクセス: [クイックスタート](https://docs.pingcap.com/tidb/v6.1/quick-start-with-tidb) | [本番展開](https://docs.pingcap.com/tidb/v6.1/production-deployment-using-tiup) | [インストール パッケージ](https://www.pingcap.com/download/?version=v6.1.3#version-list)
 
+## 互換性の変更 {#compatibility-changes}
+
+-   ツール
+
+    -   TiCDC
+
+        -   安定性を向上させるために、デフォルト値の[`transaction-atomicity`](/ticdc/manage-ticdc.md#configure-sink-uri-with-mysqltidb)を`table`から`none`に変更します[#7505](https://github.com/pingcap/tiflow/issues/7505) @ [アスドンメン](https://github.com/asddongmen)
+
 ## 改良点 {#improvements}
 
 -   PD

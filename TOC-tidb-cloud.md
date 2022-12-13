@@ -115,6 +115,10 @@
             -   [データ インポートの命名規則](/tidb-cloud/naming-conventions-for-data-import.md)
             -   [Amazon S3 からのデータ インポート中のアクセス拒否エラーのトラブルシューティング](/tidb-cloud/troubleshoot-import-access-denied-error.md)
     -   [TiDB からのデータのエクスポート](/tidb-cloud/export-data-from-tidb-cloud.md)
+-   ストリームデータ
+    -   [チェンジフィードの概要](/tidb-cloud/changefeed-overview.md)
+    -   [MySQL シンクへ](/tidb-cloud/changefeed-sink-to-mysql.md)
+    -   [Kafka シンクへ](/tidb-cloud/changefeed-sink-to-apache-kafka.md)
 -   バックアップと復元
     -   [自動バックアップ](/tidb-cloud/backup-and-restore.md)
     -   [手動バックアップ](/tidb-cloud/backup-and-restore.md#manual-backup)
@@ -123,7 +127,7 @@
     -   [概要](/tidb-cloud/monitor-tidb-cluster.md)
     -   [ビルトインモニタリング](/tidb-cloud/built-in-monitoring.md)
     -   [組み込みアラート](/tidb-cloud/monitor-built-in-alerting.md)
-    -   [サードパーティ監視の統合](/tidb-cloud/third-party-monitoring-integrations.md)
+    -   [サードパーティの監視統合](/tidb-cloud/third-party-monitoring-integrations.md)
 -   パフォーマンスの調整
     -   [概要](/tidb-cloud/tidb-cloud-tune-performance-overview.md)
     -   パフォーマンスを分析する
@@ -153,7 +157,7 @@
                 -   [パーティションのプルーニング](/partition-pruning.md)
                 -   [TopN とリミット プッシュ ダウン](/topn-limit-push-down.md)
                 -   [結合したテーブルの再配置](/join-reorder.md)
-            -   物理的な最適化
+            -   物理的最適化
                 -   [概要](/sql-physical-optimization.md)
                 -   [インデックスの選択](/choose-index.md)
                 -   [統計](/statistics.md)
@@ -183,6 +187,7 @@
     -   [クレジット](/tidb-cloud/tidb-cloud-billing.md#credits)
     -   [お支払い方法の設定](/tidb-cloud/tidb-cloud-billing.md#payment-method)
     -   [AWS または GCP Marketplace からの請求](/tidb-cloud/tidb-cloud-billing.md#billing-from-aws-marketplace-or-google-cloud-marketplace)
+    -   [Changefeed の請求](/tidb-cloud/tidb-cloud-billing-ticdc-rcu.md)
 -   API
     -   [API の概要](/tidb-cloud/api-overview.md)
     -   [API リファレンス](https://docs.pingcap.com/tidbcloud/api/v1beta)
@@ -386,7 +391,7 @@
             -   ステイル読み取りを使用する (推奨)
                 -   [ステイル読み取りの使用シナリオ](/stale-read.md)
                 -   [`As OF TIMESTAMP`を使用してステイル読み取りを実行する](/as-of-timestamp.md)
-                -   [`tidb_read_staleness`を使用して古いステイル読み取りを実行する](/tidb-read-staleness.md)
+                -   [`tidb_read_staleness`を使用してステイル読み取りを実行する](/tidb-read-staleness.md)
             -   [`tidb_snapshot`システム変数を使用する](/read-historical-data.md)
         -   システム テーブル
             -   [`mysql`](/mysql-schema.md)
@@ -439,7 +444,7 @@
     -   [データとインデックス間の不一致のトラブルシューティング](/troubleshoot-data-inconsistency-errors.md)
     -   [サーバーレス層の制限](/tidb-cloud/serverless-tier-limitations.md)
 -   よくある質問
-    -   [TiDB Cloudに関するよくある質問](/tidb-cloud/tidb-cloud-faq.md)
+    -   [TiDB Cloudよくある質問](/tidb-cloud/tidb-cloud-faq.md)
     -   [サーバーレス層に関するよくある質問](/tidb-cloud/serverless-tier-faqs.md)
 -   リリースノート
     -   [2022年](/tidb-cloud/release-notes-2022.md)

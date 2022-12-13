@@ -3,7 +3,7 @@ title: Quickly Deploy a Local TiDB Cluster
 summary: Learn how to quickly deploy a local TiDB cluster using the playground component of TiUP.
 ---
 
-# ローカル TiDBクラスタをすばやくデプロイする {#quickly-deploy-a-local-tidb-cluster}
+# ローカル TiDBクラスタをすばやくデプロイ {#quickly-deploy-a-local-tidb-cluster}
 
 TiDB クラスターは、複数のコンポーネントで構成される分散システムです。一般的な TiDB クラスターは、少なくとも 3 つの PD ノード、3 つの TiKV ノード、および 2 つの TiDB ノードで構成されます。 TiDB を手早く体験したい場合、非常に多くのコンポーネントを手動で展開するのは時間がかかり、複雑であることに気付くかもしれません。このドキュメントでは、TiUP のプレイグラウンド コンポーネントと、それを使用してローカルの TiDB テスト環境をすばやく構築する方法を紹介します。
 
@@ -21,7 +21,7 @@ tiup playground ${version} [flags]
 
 -   このコマンドはプレイグラウンド コンポーネントのバージョンを指定しないため、TiUP はインストールされているプレイグラウンド コンポーネントの最新バージョンを最初にチェックします。最新バージョンが v1.10.0 であると仮定すると、このコマンドは`tiup playground:v1.10.0`と同じように機能します。
 -   TiUP プレイグラウンドを使用して TiDB、TiKV、および PD コンポーネントをインストールしていない場合、プレイグラウンド コンポーネントはこれらのコンポーネントの最新の安定したバージョンをインストールしてから、これらのインスタンスを起動します。
--   このコマンドは TiDB、PD、および TiKV コンポーネントのバージョンを指定しないため、TiUP プレイグラウンドはデフォルトで各コンポーネントの最新バージョンを使用します。最新バージョンが v6.1.2 であると仮定すると、このコマンドは`tiup playground:v1.10.0 v6.1.2`と同じように機能します。
+-   このコマンドは TiDB、PD、および TiKV コンポーネントのバージョンを指定しないため、TiUP プレイグラウンドはデフォルトで各コンポーネントの最新バージョンを使用します。最新バージョンが v6.1.3 であると仮定すると、このコマンドは`tiup playground:v1.10.0 v6.1.3`と同じように機能します。
 -   このコマンドは各コンポーネントの数を指定しないため、TiUP プレイグラウンドはデフォルトで、1 つの TiDB インスタンス、1 つの TiKV インスタンス、1 つの PD インスタンス、および 1 つの TiFlash インスタンスで構成される最小のクラスターを開始します。
 -   各 TiDB コンポーネントを開始した後、TiUP プレイグラウンドは、クラスターが正常に開始されたことを通知し、MySQL クライアントを介して TiDB クラスターに接続する方法や[TiDB ダッシュボード](/dashboard/dashboard-intro.md)にアクセスする方法など、いくつかの有用な情報を提供します。
 
@@ -81,7 +81,7 @@ tiup list tidb
 tiup playground ${version}
 ```
 
-`${version}`をターゲットのバージョン番号に置き換えます。
+`${version}`ターゲットのバージョン番号に置き換えます。
 
 ### ナイトリー版の TiDB クラスターを起動する {#start-a-tidb-cluster-of-the-nightly-version}
 
@@ -91,7 +91,7 @@ tiup playground ${version}
 tiup playground nightly
 ```
 
-上記のコマンドで、 `nightly`は TiDB の最新の開発バージョンを示します。
+上記のコマンドで、 `nightly` TiDB の最新の開発バージョンを示します。
 
 ### PD のデフォルト設定をオーバーライドする {#override-pd-s-default-configuration}
 
@@ -125,7 +125,7 @@ tiup playground --db 3 --pd 3 --kv 3
 
 ## プレイグラウンドで開始された TiDB クラスターにすばやく接続する {#quickly-connect-to-the-tidb-cluster-started-by-playground}
 
-TiUP は`client`つのコンポーネントを提供します。これは、プレイグラウンドによって開始されたローカル TiDB クラスターを自動的に見つけて接続するために使用されます。使用方法は次のとおりです。
+TiUP は`client`コンポーネントを提供します。これは、プレイグラウンドによって開始されたローカル TiDB クラスターを自動的に見つけて接続するために使用されます。使用方法は次のとおりです。
 
 {{< copyable "" >}}
 
@@ -166,9 +166,9 @@ Pid    Role     Uptime
 tiup playground scale-out --db 2
 ```
 
-## クラスターでのスケーリング {#scale-in-a-cluster}
+## クラスターでスケールイン {#scale-in-a-cluster}
 
-`tiup playground scale-in`コマンドで`pid`を指定して、対応するインスタンスにスケーリングできます。 `pid`を表示するには、 `tiup playground display`を実行します。
+`tiup playground scale-in`コマンドで`pid`指定して、対応するインスタンスにスケーリングできます。 `pid`表示するには、 `tiup playground display`を実行します。
 
 {{< copyable "" >}}
 

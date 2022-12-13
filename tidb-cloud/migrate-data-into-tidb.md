@@ -11,7 +11,7 @@ summary: Learn how to migrate data from MySQL-compatible databases to TiDB Cloud
 
 TiDB は MySQL との互換性が高いです。データが自己ホスト型の MySQL インスタンスからのものであろうと、パブリック クラウドによって提供される RDS サービスからのものであろうと、MySQL 互換データベースから TiDB にデータをスムーズに移行できます。
 
-このドキュメントでは、 [Dumpling](/dumpling-overview.md)を使用して MySQL 互換データベースからデータをエクスポートする方法と、 [TiDB Lightning](https://docs.pingcap.com/tidb/stable/tidb-lightning-overview)論理インポート モードを使用してデータをTiDB Cloudにインポートする方法について説明します。
+このドキュメントでは[Dumpling](/dumpling-overview.md)使用して MySQL 互換データベースからデータをエクスポートし、 [TiDB Lightning](https://docs.pingcap.com/tidb/stable/tidb-lightning-overview)論理インポート モードを使用してデータをTiDB Cloudにインポートする方法について説明します。
 
 > **ノート：**
 >
@@ -21,7 +21,7 @@ TiDB は MySQL との互換性が高いです。データが自己ホスト型�
 
 MySQL 互換データベースから TiDB にデータを移行する前に、サポートされているTiDB Cloudの照合順序が要件を満たしていることを確認してください。
 
-デフォルトでは、 TiDB Cloudは次の CI 照合をサポートしています。
+デフォルトでは、 TiDB Cloud は次の CI 照合をサポートしています。
 
 -   ascii_bin
 -   バイナリ
@@ -49,7 +49,7 @@ TiUP は TiDB エコシステムのパッケージ マネージャーであり�
 
     > **ノート：**
     >
-    > インストール後、TiUP は対応する`profile`ファイルの絶対パスを表示します。次のコマンドでは、 `.bash_profile`を`profile`ファイルのパスに変更する必要があります。
+    > インストール後、TiUP は対応する`profile`ファイルの絶対パスを表示します。次のコマンドでは、 `.bash_profile` `profile`ファイルのパスに変更する必要があります。
 
     {{< copyable "" >}}
 
@@ -96,7 +96,7 @@ TiUP は TiDB エコシステムのパッケージ マネージャーであり�
 -   ソース データが Amazon S3 クラウド ストレージにある場合は、次の手順を実行します。
 
     1.  Amazon S3 アクセスを構成して、TiDB クラウドが Amazon S3 バケット内のソース データにアクセスできるようにします。詳細については、 [Amazon S3 アクセスを構成する](/tidb-cloud/config-s3-and-gcs-access.md#configure-amazon-s3-access)を参照してください。
-    2.  [TiDB Cloudコンソール](https://tidbcloud.com/)から [**クラスター**] ページに移動し、ターゲット クラスターの名前をクリックして、独自の概要ページに移動します。 [<strong>データのインポート]</strong>をクリックし、[<strong>データのインポート]</strong>ページでインポート関連の情報を入力します。
+    2.  [TiDB Cloudコンソール](https://tidbcloud.com/)にログインして[**クラスター**](https://tidbcloud.com/console/clusters)ページに移動し、左側のナビゲーション バーの上部でターゲット プロジェクトを選択します。次に、ターゲット クラスターを見つけて、クラスター領域の右上隅にある**[...]**をクリックし、 [<strong>データのインポート]</strong>を選択して、 <strong>[データのインポート]</strong>ページでインポート関連の情報を入力します。
 
 -   ソース データがローカル ファイルにある場合は、次のいずれかを実行します。
 
@@ -169,7 +169,7 @@ TiUP は TiDB エコシステムのパッケージ マネージャーであり�
 
     インポート タスクが開始されたら、次のいずれかの方法でインポートの進行状況を表示できます。
 
-    -   コマンド ラインを使用して進行状況を取得するには、ログにキーワード`grep`を入力します。これは、デフォルトで`progress`分ごとに更新されます。
+    -   コマンド ラインを使用して進行状況を取得するには、ログにキーワード`progress` `grep`します。これは、デフォルトで 5 分ごとに更新されます。
     -   TiDB モニタリング フレームワークを使用してさらにモニタリング メトリックを取得するには、 [TiDB Lightningモニタリング](https://docs.pingcap.com/tidb/stable/monitor-tidb-lightning)を参照してください。
 
 ## こちらもご覧ください {#see-also}

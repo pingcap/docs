@@ -7,20 +7,20 @@ summary: Learn how to quickly get started with the TiDB platform and see if TiDB
 
 このガイドでは、TiDB の使用を開始するための最も簡単な方法について説明します。非本番環境では、次のいずれかの方法で TiDB データベースをデプロイできます。
 
--   [ローカル テスト クラスターをデプロイする](#deploy-a-local-test-cluster) (macOS および Linux の場合)
+-   [ローカル テスト クラスターをデプロイ](#deploy-a-local-test-cluster) (macOS および Linux の場合)
 -   [1 台のマシンで本番環境のデプロイをシミュレートする](#simulate-production-deployment-on-a-single-machine) (Linux のみ)
 
 > **ノート：**
 >
 > -   TiDB、TiUP、および TiDB ダッシュボードは、使用状況の詳細を PingCAP と共有して、製品の改善方法を理解するのに役立ちます。共有される内容と共有を無効にする方法の詳細については、 [テレメトリー](/telemetry.md)を参照してください。
 >
-> -   このガイドで提供されている展開方法は、**本番**用ではなく、クイック スタート<strong>専用</strong>です。
+> -   このガイドで提供されている展開方法は、本番**用ではなく**、クイック スタート<strong>専用</strong>です。
 >
 >     -   オンプレミスの本番クラスターをデプロイするには、 [プロダクション インストール ガイド](/production-deployment-using-tiup.md)を参照してください。
 >     -   TiDB を Kubernetes にデプロイするには、 [Kubernetes で TiDB を使い始める](https://docs.pingcap.com/tidb-in-kubernetes/stable/get-started)を参照してください。
 >     -   クラウドで TiDB を管理するには、 [TiDB Cloudクイック スタート](https://docs.pingcap.com/tidbcloud/tidb-cloud-quickstart)を参照してください。
 
-## ローカル テスト クラスターをデプロイする {#deploy-a-local-test-cluster}
+## ローカル テスト クラスターをデプロイ {#deploy-a-local-test-cluster}
 
 -   シナリオ: 単一の macOS または Linuxサーバーを使用して、テスト用にローカル TiDB クラスターをすばやく展開します。このようなクラスターをデプロイすることで、TiDB の基本的なアーキテクチャと、TiDB、TiKV、PD、および監視コンポーネントなどのコンポーネントの操作を学習できます。
 
@@ -57,7 +57,7 @@ summary: Learn how to quickly get started with the TiDB platform and see if TiDB
 
     > **ノート：**
     >
-    > インストール後、TiUP は対応するシェル プロファイル ファイルの絶対パスを表示します。パスに応じて、次の`source`のコマンドの`${your_shell_profile}`を変更する必要があります。この場合、ステップ 1 の出力から`${your_shell_profile}`は`/Users/user/.zshrc`です。
+    > インストール後、TiUP は対応するシェル プロファイル ファイルの絶対パスを表示します。パスに応じて、次の`source`コマンドの`${your_shell_profile}`を変更する必要があります。この場合、ステップ 1 の出力から`${your_shell_profile}`は`/Users/user/.zshrc`です。
 
     {{< copyable "" >}}
 
@@ -80,10 +80,10 @@ summary: Learn how to quickly get started with the TiDB platform and see if TiDB
         {{< copyable "" >}}
 
         ```shell
-        tiup playground v6.1.2 --db 2 --pd 3 --kv 3
+        tiup playground v6.1.3 --db 2 --pd 3 --kv 3
         ```
 
-        このコマンドは、v6.1.2 などのバージョン クラスターをローカル マシンにダウンロードして起動します。最新バージョンを表示するには、 `tiup list tidb`を実行します。
+        このコマンドは、v6.1.3 などのバージョン クラスターをローカル マシンにダウンロードして起動します。最新バージョンを表示するには、 `tiup list tidb`を実行します。
 
         このコマンドは、クラスターのアクセス方法を返します。
 
@@ -99,7 +99,7 @@ summary: Learn how to quickly get started with the TiDB platform and see if TiDB
 
         > **ノート：**
         >
-        > -   v5.2.0 以降、TiDB は Apple M1 チップを使用するマシンでの`tiup playground`の実行をサポートしています。
+        > -   v5.2.0 以降、TiDB は Apple M1 チップを使用するマシンでの`tiup playground`実行をサポートしています。
         > -   このように運用されているプレイグラウンドの場合、テスト デプロイが終了した後、TiUP は元のクラスター データをクリーンアップします。コマンドを再実行すると、新しいクラスターが取得されます。
         > -   データをストレージに保持する場合は、 `tiup --tag <your-tag> playground ...`を実行します。詳細は[TiUPリファレンスガイド](/tiup/tiup-reference.md#-t---tag)を参照してください。
 
@@ -178,7 +178,7 @@ summary: Learn how to quickly get started with the TiDB platform and see if TiDB
 
     > **ノート：**
     >
-    > インストール後、TiUP は対応するシェル プロファイル ファイルの絶対パスを表示します。パスに応じて、次の`source`のコマンドの`${your_shell_profile}`を変更する必要があります。
+    > インストール後、TiUP は対応するシェル プロファイル ファイルの絶対パスを表示します。パスに応じて、次の`source`コマンドの`${your_shell_profile}`を変更する必要があります。
 
     {{< copyable "" >}}
 
@@ -201,10 +201,10 @@ summary: Learn how to quickly get started with the TiDB platform and see if TiDB
         {{< copyable "" >}}
 
         ```shell
-        tiup playground v6.1.2 --db 2 --pd 3 --kv 3
+        tiup playground v6.1.3 --db 2 --pd 3 --kv 3
         ```
 
-        このコマンドは、v6.1.2 などのバージョン クラスターをローカル マシンにダウンロードして起動します。最新バージョンを表示するには、 `tiup list tidb`を実行します。
+        このコマンドは、v6.1.3 などのバージョン クラスターをローカル マシンにダウンロードして起動します。最新バージョンを表示するには、 `tiup list tidb`を実行します。
 
         このコマンドは、クラスターのアクセス方法を返します。
 
@@ -306,7 +306,7 @@ summary: Learn how to quickly get started with the TiDB platform and see if TiDB
 
 > **ノート：**
 >
-> 通常のユーザーまたは`root`ユーザーとしてターゲット マシンにログインできます。次の手順では、例として`root`のユーザーを使用します。
+> 通常のユーザーまたは`root`ユーザーとしてターゲット マシンにログインできます。次の手順では、例として`root`人のユーザーを使用します。
 
 1.  TiUP をダウンロードしてインストールします。
 
@@ -320,7 +320,7 @@ summary: Learn how to quickly get started with the TiDB platform and see if TiDB
 
     > **ノート：**
     >
-    > インストール後、TiUP は対応するシェル プロファイル ファイルの絶対パスを表示します。パスに応じて、次の`source`のコマンドの`${your_shell_profile}`を変更する必要があります。
+    > インストール後、TiUP は対応するシェル プロファイル ファイルの絶対パスを表示します。パスに応じて、次の`source`コマンドの`${your_shell_profile}`を変更する必要があります。
 
     {{< copyable "" >}}
 
@@ -347,7 +347,7 @@ summary: Learn how to quickly get started with the TiDB platform and see if TiDB
 5.  `sshd`サービスの接続制限を増やすには、root ユーザー権限を使用します。これは、TiUP が複数のマシンで展開をシミュレートする必要があるためです。
 
     1.  `/etc/ssh/sshd_config`を変更し、 `MaxSessions`を`20`に設定します。
-    2.  `sshd`のサービスを再起動します。
+    2.  `sshd`サービスを再起動します。
 
         {{< copyable "" >}}
 
@@ -504,8 +504,8 @@ summary: Learn how to quickly get started with the TiDB platform and see if TiDB
 
 -   本番環境用に TiDB クラスターをデプロイする準備ができている場合:
 
-    -   [TiUP を使用して TiDB をデプロイ](/production-deployment-using-tiup.md)
-    -   [TiDB Operatorを使用して TiDB on Cloud をデプロイ](https://docs.pingcap.com/tidb-in-kubernetes/stable)
+    -   [TiUP を使用して TiDBをデプロイ](/production-deployment-using-tiup.md)
+    -   [TiDB Operatorを使用して TiDB on Cloudをデプロイ](https://docs.pingcap.com/tidb-in-kubernetes/stable)
 
 -   TiFlash を使用した分析ソリューションをお探しの場合:
 

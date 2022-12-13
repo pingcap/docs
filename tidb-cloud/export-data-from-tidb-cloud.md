@@ -9,7 +9,7 @@ summary: This page has instructions for exporting data from your TiDB cluster in
 
 TiDB はデータをロックしません。 TiDB から他のデータ プラットフォームにデータを移行できるようにしたい場合があります。 TiDB は MySQL との互換性が高いため、MySQL に適したエクスポート ツールはすべて TiDB にも使用できます。
 
-ツール[Dumpling](/dumpling-overview.md)を使用してデータをエクスポートできます。
+ツール[Dumpling](/dumpling-overview.md)使用してデータをエクスポートできます。
 
 1.  TiUP をダウンロードしてインストールします。
 
@@ -23,7 +23,7 @@ TiDB はデータをロックしません。 TiDB から他のデータ プラ�
 
     > **ノート：**
     >
-    > インストール後、TiUP は対応する`profile`ファイルの絶対パスを表示します。次のコマンドの`.bash_profile`を`profile`ファイルのパスに変更する必要があります。
+    > インストール後、TiUP は対応する`profile`ファイルの絶対パスを表示します。次のコマンドの`.bash_profile` `profile`ファイルのパスに変更する必要があります。
 
     {{< copyable "" >}}
 
@@ -39,9 +39,9 @@ TiDB はデータをロックしません。 TiDB から他のデータ プラ�
     tiup install dumpling:v6.1.1
     ```
 
-4.  TiDB からDumplingを使用してデータをエクスポートします。
+4.  TiDB からDumpling を使用してデータをエクスポートします。
 
-    [**クラスター]**ページの [<strong>接続]</strong>セクションから、次の接続パラメーター`${tidb_endpoint}` 、 `${port}` 、および`${user}`を取得できます。
+    次の接続パラメーター`${tidb_endpoint}` 、 `${port}` 、および`${user}`は、 **[クラスタの概要]**ページの<strong>[接続]</strong>セクションから取得できます。
 
     <SimpleTab>
 
@@ -81,4 +81,4 @@ TiDB はデータをロックしません。 TiDB から他のデータ プラ�
     -   `LOCK TABLES`
     -   `REPLICATION CLIENT`
 
-Dumplingを使用してデータをエクスポートした後、 [TiDB Lightning](https://docs.pingcap.com/tidb/stable/tidb-lightning-overview)を使用して MySQL 互換データベースにデータをインポートできます。
+Dumplingを使用してデータをエクスポートした後、 [TiDB Lightning](https://docs.pingcap.com/tidb/stable/tidb-lightning-overview)を使用してデータを MySQL 互換データベースにインポートできます。

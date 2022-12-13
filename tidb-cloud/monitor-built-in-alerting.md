@@ -5,24 +5,24 @@ summary: Learn how to monitor your TiDB cluster by getting alert notification em
 
 # TiDB Cloudの組み込みアラート {#tidb-cloud-built-in-alerting}
 
-TiDB Cloud組み込みアラート機能を使用すると、プロジェクト内のTiDB CloudクラスターがTiDB Cloud組み込みアラート条件のいずれかをトリガーするたびに、電子メールで簡単に通知を受けることができます。
+TiDB Cloud組み込みアラート機能を使用すると、プロジェクト内のTiDB CloudクラスターがTiDB Cloud Cloud 組み込みアラート条件のいずれかをトリガーするたびに、電子メールで簡単に通知を受けることができます。
 
 このドキュメントでは、 TiDB Cloudからのアラート通知メールをサブスクライブする方法について説明し、参照用にTiDB Cloud組み込みのアラート条件も提供します。
 
 ## 制限 {#limitation}
 
-TiDB Cloudの組み込みアラートをカスタマイズすることはできません。さまざまなトリガー条件、しきい値、または頻度を構成する場合、または[PagerDuty](https://www.pagerduty.com/docs/guides/datadog-integration-guide/)のようなダウンストリーム サービスでアラートが自動的にアクションをトリガーするようにする場合は、サードパーティの監視およびアラート統合の使用を検討してください。現在、 TiDB Cloudは[Datadog の統合](/tidb-cloud/monitor-datadog-integration.md)と[Prometheus と Grafana の統合](/tidb-cloud/monitor-prometheus-and-grafana-integration.md)をサポートしています。
+TiDB Cloudの組み込みアラートをカスタマイズすることはできません。さまざまなトリガー条件、しきい値、または頻度を構成したい場合、または[PagerDuty](https://www.pagerduty.com/docs/guides/datadog-integration-guide/)のようなダウンストリーム サービスでアラートが自動的にアクションをトリガーするようにしたい場合は、サードパーティの監視およびアラート統合の使用を検討してください。現在、 TiDB Cloud は[Datadog 統合](/tidb-cloud/monitor-datadog-integration.md)と[Prometheus と Grafana の統合](/tidb-cloud/monitor-prometheus-and-grafana-integration.md)をサポートしています。
 
 ## アラート通知メールを購読する {#subscribe-to-alert-notification-emails}
 
 プロジェクトのメンバーであり、プロジェクト内のクラスターのアラート通知メールを受け取りたい場合は、次の手順を実行します。
 
-1.  TiDB Cloudコンソールにログインします。
-2.  TiDB Cloudコンソールで、アラート通知メールを受信するターゲット プロジェクトを選択し、[**プロジェクト設定**] タブをクリックします。
-3.  左ペインで、[**アラート**] をクリックします。
-4.  電子メール アドレスを入力し、[**購読**] をクリックします。
+1.  [TiDB Cloudコンソール](https://tidbcloud.com/)にログインします。
+2.  TiDB Cloudコンソールで、アラート通知メールを受信するターゲット プロジェクトを選択します。
+3.  左ペインで、 **[アラート]**をクリックします。
+4.  電子メール アドレスを入力し、 **[購読]**をクリックします。
 
-サブスクライバーに送信されるアラート電子メールの数を最小限に抑えるために、 TiDB Cloudはアラートを 1 つの電子メールに集約し、3 時間ごとに送信します。
+サブスクライバーに送信されるアラート電子メールの数を最小限に抑えるために、 TiDB Cloud はアラートを 1 つの電子メールに集約し、3 時間ごとに送信します。
 
 ## アラート通知メールの登録を解除する {#unsubscribe-from-alert-notification-emails}
 
@@ -30,12 +30,12 @@ TiDB Cloudの組み込みアラートをカスタマイズすることはでき�
 
 1.  TiDB Cloudコンソールにログインします。
 2.  TiDB Cloudコンソールで、アラート通知メールを受け取りたくないプロジェクトを選択します。
-3.  左ペインで、[**アラート**] をクリックします。
-4.  右側のペインで、電子メール アドレスを見つけて [**削除**] をクリックします。
+3.  左ペインで、 **[アラート]**をクリックします。
+4.  右側のペインで、電子メール アドレスを見つけて**[削除]**をクリックします。
 
 ## TiDB Cloud組み込みアラート条件 {#tidb-cloud-built-in-alert-conditions}
 
-次の表は、 TiDB Cloudの組み込みアラート条件と、対応する推奨アクションを示しています。
+次の表は、 TiDB Cloud の組み込みアラート条件と、対応する推奨アクションを示しています。
 
 > **ノート：**
 >
@@ -56,5 +56,5 @@ TiDB Cloudの組み込みアラートをカスタマイズすることはでき�
 
 > **ノート：**
 >
-> -   [サーバーレス階層クラスター](/tidb-cloud/select-cluster-tier.md#serverless-tier-beta)は、 **Condition**列で`*`とマークされているアラート条件のサブセットのみをサポートします。
+> -   [サーバーレス階層クラスター](/tidb-cloud/select-cluster-tier.md#serverless-tier-beta) **Condition**列で`*`とマークされているアラート条件のサブセットのみをサポートします。
 > -   **推奨されるアクション**列の「クラスター ABC」と「プロジェクト XYZ」は、参照用の名前の例です。

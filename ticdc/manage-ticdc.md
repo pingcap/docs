@@ -11,26 +11,26 @@ HTTP インターフェイス (TiCDC OpenAPI 機能) を使用して、TiCDC ク
 
 ## TiUP を使用して TiCDC をアップグレードする {#upgrade-ticdc-using-tiup}
 
-このセクションでは、TiUP を使用して TiCDC クラスターをアップグレードする方法を紹介します。次の例では、TiCDC と TiDB クラスター全体を v6.1.2 にアップグレードする必要があると想定しています。
+このセクションでは、TiUP を使用して TiCDC クラスターをアップグレードする方法を紹介します。次の例では、TiCDC と TiDB クラスター全体を v6.1.3 にアップグレードする必要があると想定しています。
 
 {{< copyable "" >}}
 
 ```shell
 tiup update --self && \
 tiup update --all && \
-tiup cluster upgrade <cluster-name> v6.1.2
+tiup cluster upgrade <cluster-name> v6.1.3
 ```
 
 ### バージョンアップ時の注意事項 {#notes-for-upgrade}
 
--   `changefeed`の構成は、TiCDC v4.0.2 で変更されました。詳細は[構成ファイルの互換性に関する注意事項](/production-deployment-using-tiup.md#step-3-initialize-cluster-topology-file)を参照してください。
+-   `changefeed`構成は、TiCDC v4.0.2 で変更されました。詳細は[構成ファイルの互換性に関する注意事項](/production-deployment-using-tiup.md#step-3-initialize-cluster-topology-file)参照してください。
 -   問題が発生した場合は、 [TiUP を使用して TiDB をアップグレードする -FAQ](/upgrade-tidb-using-tiup.md#faq)を参照してください。
 
 ## TiUP を使用して TiCDC 構成を変更する {#modify-ticdc-configuration-using-tiup}
 
 このセクションでは、TiUP の[`tiup cluster edit-config`](/tiup/tiup-component-cluster-edit-config.md)コマンドを使用して、TiCDC クラスターの構成を変更する方法を紹介します。次の例では、値`gc-ttl`をデフォルトの`86400`から`3600` 、つまり 1 時間に変更します。
 
-まず、次のコマンドを実行します。 `<cluster-name>`を実際のクラスター名に置き換える必要があります。
+まず、次のコマンドを実行します。 `<cluster-name>`実際のクラスター名に置き換える必要があります。
 
 {{< copyable "" >}}
 
@@ -59,9 +59,9 @@ tiup cluster edit-config <cluster-name>
 
 暗号化データ転送 (TLS) の使用について詳しくは、 [TiDB コンポーネント間の TLS を有効にする](/enable-tls-between-components.md)を参照してください。
 
-## <code>cdc cli</code>を使用してクラスターのステータスとデータ複製タスクを管理する {#use-code-cdc-cli-code-to-manage-cluster-status-and-data-replication-task}
+## <code>cdc cli</code>使用してクラスターのステータスとデータ複製タスクを管理する {#use-code-cdc-cli-code-to-manage-cluster-status-and-data-replication-task}
 
-このセクションでは、 `cdc cli`を使用して TiCDC クラスターとデータ複製タスクを管理する方法を紹介します。 `cdc cli`は、 `cdc`バイナリを使用して実行される`cli`サブコマンドです。以下の説明では、次のことを前提としています。
+このセクションでは、 `cdc cli`使用して TiCDC クラスターとデータ複製タスクを管理する方法を紹介します。 `cdc cli`は、 `cdc`バイナリを使用して実行される`cli`サブコマンドです。以下の説明では、次のことを前提としています。
 
 -   `cli`コマンドは`cdc`バイナリを使用して直接実行されます。
 -   PD は`10.0.10.25`でリッスンし、ポートは`2379`です。
@@ -70,11 +70,11 @@ tiup cluster edit-config <cluster-name>
 >
 > PD が listen する IP アドレスとポートは、 `pd-server`始動時に指定された`advertise-client-urls`パラメーターに対応します。複数の`pd-server`には複数の`advertise-client-urls`パラメータがあり、1 つまたは複数のパラメータを指定できます。たとえば、 `--pd=http://10.0.10.25:2379`または`--pd=http://10.0.10.25:2379,http://10.0.10.26:2379,http://10.0.10.27:2379`です。
 
-TiUP を使用して TiCDC をデプロイする場合は、次のコマンドの`cdc cli`を`tiup ctl:<cluster-version> cdc`に置き換えます。
+TiUP を使用して TiCDC をデプロイする場合は、次のコマンドの`cdc cli` `tiup ctl:<cluster-version> cdc`に置き換えます。
 
 ### TiCDC サービスの進行状況を管理する ( <code>capture</code> ) {#manage-ticdc-service-progress-code-capture-code}
 
--   `capture`のリストをクエリします。
+-   `capture`リストをクエリします。
 
     {{< copyable "" >}}
 
@@ -123,10 +123,10 @@ TiUP を使用して TiCDC をデプロイする場合は、次のコマンド�
 -   ② `changefeed resume`コマンドを実行してレプリケーションタスクを再開します。
 -   ③ `changefeed`動作中に回復可能なエラーが発生し、自動的に動作が再開されます。
 -   ④ `changefeed resume`コマンドを実行してレプリケーションタスクを再開します。
--   ⑤ `changefeed`目の操作で回復不可能なエラーが発生した。
--   ⑥ `changefeed`がプリセット`TargetTs`に到達し、レプリケーションが自動的に停止されます。
--   ⑦ `changefeed`は`gc-ttl`で指定された期間を超えて停止し、再開することはできません。
--   ⑧ `changefeed`は、自動回復を実行しようとしたときに、回復不能なエラーが発生しました。
+-   ⑤ `changefeed`回目の操作で回復不可能なエラーが発生した。
+-   ⑥ `changefeed`プリセット`TargetTs`に到達し、レプリケーションが自動的に停止されます。
+-   ⑦ `changefeed` `gc-ttl`で指定された期間を超えて停止し、再開することはできません。
+-   ⑧ `changefeed`自動回復を実行しようとしたときに、回復不能なエラーが発生しました。
 
 #### レプリケーション タスクを作成する {#create-a-replication-task}
 
@@ -144,9 +144,9 @@ ID: simple-replication-task
 Info: {"sink-uri":"mysql://root:123456@127.0.0.1:3306/","opts":{},"create-time":"2020-03-12T22:04:08.103600025+08:00","start-ts":415241823337054209,"target-ts":0,"admin-job-type":0,"sort-engine":"unified","sort-dir":".","config":{"case-sensitive":true,"filter":{"rules":["*.*"],"ignore-txn-start-ts":null,"ddl-allow-list":null},"mounter":{"worker-num":16},"sink":{"dispatchers":null},"scheduler":{"type":"table-number","polling-time":-1}},"state":"normal","history":null,"error":null}
 ```
 
--   `--changefeed-id` : レプリケーション タスクの ID。形式は`^[a-zA-Z0-9]+(\-[a-zA-Z0-9]+)*$`の正規表現と一致する必要があります。この ID が指定されていない場合、TiCDC は ID として UUID (バージョン 4 形式) を自動的に生成します。
+-   `--changefeed-id` : レプリケーション タスクの ID。形式は`^[a-zA-Z0-9]+(\-[a-zA-Z0-9]+)*$`正規表現と一致する必要があります。この ID が指定されていない場合、TiCDC は ID として UUID (バージョン 4 形式) を自動的に生成します。
 
--   `--sink-uri` : レプリケーション タスクのダウンストリーム アドレス。 `--sink-uri`を次の形式に従って構成します。現在、スキームは`mysql` / `tidb` / `kafka` / `pulsar` / `s3` / `local`をサポートしています。
+-   `--sink-uri` : レプリケーション タスクのダウンストリーム アドレス。 `--sink-uri`次の形式に従って構成します。現在、スキームは`mysql` / `tidb` / `kafka` / `pulsar` / `s3` / `local`をサポートしています。
 
     {{< copyable "" >}}
 
@@ -164,7 +164,7 @@ Info: {"sink-uri":"mysql://root:123456@127.0.0.1:3306/","opts":{},"create-time":
 
     -   `unified` : `unified`を使用すると、TiCDC はメモリ内でのデータの並べ替えを優先します。メモリが不足している場合、TiCDC は自動的にディスクを使用して一時データを保存します。これはデフォルト値の`--sort-engine`です。
     -   `memory` : メモリ内のデータ変更をソートします。大量のデータをレプリケートすると OOM が簡単にトリガーされるため、この並べ替えエンジンの使用は**お勧めしません**。
-    -   `file` : ディスクを完全に使用して一時データを格納します。この機能は**非推奨です**。<strong>どの</strong>ような状況でも使用することは<strong>お勧めしません</strong>。
+    -   `file` : ディスクを完全に使用して一時データを格納します。この機能は**非推奨**です。<strong>どのような</strong>状況でも使用することは<strong>お勧めし</strong>ません。
 
 -   `--config` : `changefeed`の構成ファイルを指定します。
 
@@ -194,7 +194,7 @@ Info: {"sink-uri":"mysql://root:123456@127.0.0.1:3306/","opts":{},"create-time":
 | `ssl-cert`              | ダウンストリームの MySQL インスタンスに接続するために必要な証明書ファイルのパス (オプション)                                                                                                                                                                                    |
 | `ssl-key`               | ダウンストリームの MySQL インスタンスに接続するために必要な証明書キー ファイルのパス (オプション)                                                                                                                                                                                 |
 | `time-zone`             | ダウンストリームの MySQL インスタンスに接続するときに使用されるタイム ゾーン。v4.0.8 以降で有効です。これはオプションのパラメーターです。このパラメーターが指定されていない場合、TiCDC サービス プロセスのタイム ゾーンが使用されます。このパラメータが空の値に設定されている場合、TiCDC がダウンストリームの MySQL インスタンスに接続するときにタイム ゾーンが指定されず、ダウンストリームのデフォルトのタイム ゾーンが使用されます。 |
-| `transaction-atomicity` | トランザクションの原子性レベル。これはオプションのパラメーターで、デフォルト値は`table`です。値が`table`の場合、TiCDC は単一テーブル トランザクションの原子性を保証します。値が`none`の場合、TiCDC は単一テーブル トランザクションを分割します。                                                                                              |
+| `transaction-atomicity` | トランザクションの原子性レベル。これはオプションのパラメーターで、デフォルト値は`none`です。値が`table`場合、TiCDC は単一テーブル トランザクションの原子性を保証します。値が`none`の場合、TiCDC は単一テーブル トランザクションを分割します。                                                                                                |
 
 #### <code>kafka</code>でシンク URI を構成する {#configure-sink-uri-with-code-kafka-code}
 
@@ -208,50 +208,50 @@ Info: {"sink-uri":"mysql://root:123456@127.0.0.1:3306/","opts":{},"create-time":
 
 以下は、 `kafka`のシンク URI に構成できるパラメーターとパラメーター値の説明です。
 
-| パラメータ/パラメータ値                         | 説明                                                                                                                                                                                                                     |
-| :----------------------------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `127.0.0.1`                          | ダウンストリーム Kafka サービスの IP アドレス                                                                                                                                                                                           |
-| `9092`                               | 下流の Kafka のポート                                                                                                                                                                                                         |
-| `topic-name`                         | 変数。 Kafka トピックの名前                                                                                                                                                                                                      |
-| `kafka-version`                      | ダウンストリーム Kafka のバージョン (オプション、デフォルトでは`2.4.0`現在、サポートされている最も古い Kafka バージョンは`0.11.0.2`で、最新のものは`3.1.0`です。この値は、ダウンストリーム Kafka の実際のバージョンと一致する必要があります)                                                                         |
-| `kafka-client-id`                    | レプリケーション タスクの Kafka クライアント ID を指定します (オプション。既定では`TiCDC_sarama_producer_replication ID` )。                                                                                                                              |
-| `partition-num`                      | ダウンストリーム Kafka パーティションの数 (オプション。値は、実際のパーティション数を**超えてはなりません**。そうでない場合、レプリケーション タスクは正常に作成されません。デフォルトでは`3` )                                                                                                              |
-| `max-message-bytes`                  | 毎回 Kafka ブローカーに送信されるデータの最大サイズ (オプション、デフォルトでは`10MB` )。 v5.0.6 および v4.0.6 から、デフォルト値が 64MB および 256MB から 10MB に変更されました。                                                                                                    |
-| `replication-factor`                 | 保存できる Kafka メッセージ レプリカの数 (オプション、既定では`1` )                                                                                                                                                                              |
-| `protocol`                           | メッセージが Kafka に出力されるプロトコル。値のオプションは`canal-json` 、 `open-protocol` 、 `canal` 、 `avro` 、および`maxwell`です。                                                                                                                    |
-| `auto-create-topic`                  | 渡された`topic-name`が Kafka クラスターに存在しない場合に、TiCDC がトピックを自動的に作成するかどうかを決定します (オプション、デフォルトでは`true` )。                                                                                                                          |
-| `enable-tidb-extension`              | オプション。デフォルトでは`false`です。出力プロトコルが`canal-json`の場合、値が`true`の場合、TiCDC は Resolved イベントを送信し、TiDB 拡張フィールドを Kafka メッセージに追加します。 v6.1.0 から、このパラメーターは`avro`プロトコルにも適用されます。値が`true`の場合、TiCDC は 3 つの TiDB 拡張フィールドを Kafka メッセージに追加します。 |
-| `max-batch-size`                     | v4.0.9 の新機能。メッセージ プロトコルが 1 つの Kafka メッセージへの複数のデータ変更の出力をサポートしている場合、このパラメーターは 1 つの Kafka メッセージ内のデータ変更の最大数を指定します。現在、Kafka の`protocol`が`open-protocol`の場合にのみ有効です。 (オプション、デフォルトで`16` )                                      |
-| `enable-tls`                         | TLS を使用してダウンストリーム Kafka インスタンスに接続するかどうか (オプション、デフォルトでは`false` )                                                                                                                                                        |
-| `ca`                                 | ダウンストリーム Kafka インスタンスに接続するために必要な CA 証明書ファイルのパス (オプション)                                                                                                                                                                 |
-| `cert`                               | ダウンストリームの Kafka インスタンスに接続するために必要な証明書ファイルのパス (オプション)                                                                                                                                                                    |
-| `key`                                | ダウンストリーム Kafka インスタンスに接続するために必要な証明書キー ファイルのパス (オプション)                                                                                                                                                                  |
-| `sasl-user`                          | ダウンストリームの Kafka インスタンスに接続するために必要な SASL/PLAIN または SASL/SCRAM 認証の ID (authcid) (オプション)                                                                                                                                   |
-| `sasl-password`                      | ダウンストリーム Kafka インスタンスに接続するために必要な SASL/PLAIN または SASL/SCRAM 認証のパスワード (オプション)                                                                                                                                            |
-| `sasl-mechanism`                     | ダウンストリーム Kafka インスタンスに接続するために必要な SASL 認証の名前。値は`plain` 、 `scram-sha-256` 、 `scram-sha-512` 、または`gssapi`です。                                                                                                              |
-| `sasl-gssapi-auth-type`              | gssapi 認証タイプ。値は`user`または`keytab`です (オプション)                                                                                                                                                                             |
-| `sasl-gssapi-keytab-path`            | gssapi キータブ パス (オプション)                                                                                                                                                                                                 |
-| `sasl-gssapi-kerberos-config-path`   | gssapi kerberos 構成パス (オプション)                                                                                                                                                                                           |
-| `sasl-gssapi-service-name`           | gssapi サービス名 (オプション)                                                                                                                                                                                                   |
-| `sasl-gssapi-user`                   | gssapi 認証のユーザー名 (オプション)                                                                                                                                                                                                |
-| `sasl-gssapi-password`               | gssapi 認証のパスワード (オプション)                                                                                                                                                                                                |
-| `sasl-gssapi-realm`                  | gssapi レルム名 (オプション)                                                                                                                                                                                                    |
-| `sasl-gssapi-disable-pafxfast`       | gssapi PA-FX-FAST を無効にするかどうか (オプション)                                                                                                                                                                                   |
-| `dial-timeout`                       | ダウンストリーム Kafka との接続を確立する際のタイムアウト。デフォルト値は`10s`です                                                                                                                                                                        |
-| `read-timeout`                       | ダウンストリーム Kafka から返された応答を取得する際のタイムアウト。デフォルト値は`10s`です                                                                                                                                                                    |
-| `write-timeout`                      | ダウンストリーム Kafka にリクエストを送信する際のタイムアウト。デフォルト値は`10s`です                                                                                                                                                                      |
-| `avro-decimal-handling-mode`         | `avro`プロトコルでのみ有効です。 Avro が DECIMAL フィールドを処理する方法を決定します。値は`string`または`precise`で、DECIMAL フィールドを文字列または正確な浮動小数点数にマッピングすることを示します。                                                                                            |
-| `avro-bigint-unsigned-handling-mode` | `avro`プロトコルでのみ有効です。 Avro が BIGINT UNSIGNED フィールドを処理する方法を決定します。値は`string`または`long`で、BIGINT UNSIGNED フィールドを 64 ビットの符号付き数値または文字列にマッピングすることを示します。                                                                          |
+| パラメータ/パラメータ値                         | 説明                                                                                                                                                                                                                    |
+| :----------------------------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `127.0.0.1`                          | ダウンストリーム Kafka サービスの IP アドレス                                                                                                                                                                                          |
+| `9092`                               | 下流の Kafka のポート                                                                                                                                                                                                        |
+| `topic-name`                         | 変数。 Kafka トピックの名前                                                                                                                                                                                                     |
+| `kafka-version`                      | ダウンストリーム Kafka のバージョン (オプション、デフォルトでは`2.4.0`現在、サポートされている最も古い Kafka バージョンは`0.11.0.2`で、最新のものは`3.1.0`です。この値は、ダウンストリーム Kafka の実際のバージョンと一致する必要があります)                                                                        |
+| `kafka-client-id`                    | レプリケーション タスクの Kafka クライアント ID を指定します (オプション。既定では`TiCDC_sarama_producer_replication ID` )。                                                                                                                             |
+| `partition-num`                      | ダウンストリーム Kafka パーティションの数 (オプション。値は実際のパーティション数**を超えてはなり**ません。そうでない場合、レプリケーション タスクは正常に作成されません。デフォルトでは`3` )                                                                                                              |
+| `max-message-bytes`                  | 毎回 Kafka ブローカーに送信されるデータの最大サイズ (オプション、デフォルトでは`10MB` )。 v5.0.6 および v4.0.6 から、デフォルト値が 64MB および 256MB から 10MB に変更されました。                                                                                                   |
+| `replication-factor`                 | 保存できる Kafka メッセージ レプリカの数 (オプション、既定では`1` )                                                                                                                                                                             |
+| `protocol`                           | メッセージが Kafka に出力されるプロトコル。値のオプションは`canal-json` 、 `open-protocol` 、 `canal` 、 `avro`および`maxwell`です。                                                                                                                     |
+| `auto-create-topic`                  | 渡された`topic-name` Kafka クラスターに存在しない場合に、TiCDC がトピックを自動的に作成するかどうかを決定します (オプション、デフォルトでは`true` )。                                                                                                                          |
+| `enable-tidb-extension`              | オプション。デフォルトでは`false` 。出力プロトコルが`canal-json`の場合、値が`true`の場合、TiCDC は Resolved イベントを送信し、TiDB 拡張フィールドを Kafka メッセージに追加します。 v6.1.0 から、このパラメーターは`avro`プロトコルにも適用されます。値が`true`の場合、TiCDC は 3 つの TiDB 拡張フィールドを Kafka メッセージに追加します。 |
+| `max-batch-size`                     | v4.0.9 の新機能。メッセージ プロトコルが 1 つの Kafka メッセージへの複数のデータ変更の出力をサポートしている場合、このパラメーターは 1 つの Kafka メッセージ内のデータ変更の最大数を指定します。現在、Kafka の`protocol`が`open-protocol`の場合にのみ有効です。 (オプション、デフォルトで`16` )                                     |
+| `enable-tls`                         | TLS を使用してダウンストリーム Kafka インスタンスに接続するかどうか (オプション、デフォルトでは`false` )                                                                                                                                                       |
+| `ca`                                 | ダウンストリーム Kafka インスタンスに接続するために必要な CA 証明書ファイルのパス (オプション)                                                                                                                                                                |
+| `cert`                               | ダウンストリームの Kafka インスタンスに接続するために必要な証明書ファイルのパス (オプション)                                                                                                                                                                   |
+| `key`                                | ダウンストリーム Kafka インスタンスに接続するために必要な証明書キー ファイルのパス (オプション)                                                                                                                                                                 |
+| `sasl-user`                          | ダウンストリームの Kafka インスタンスに接続するために必要な SASL/PLAIN または SASL/SCRAM 認証の ID (authcid) (オプション)                                                                                                                                  |
+| `sasl-password`                      | ダウンストリーム Kafka インスタンスに接続するために必要な SASL/PLAIN または SASL/SCRAM 認証のパスワード (オプション)                                                                                                                                           |
+| `sasl-mechanism`                     | ダウンストリーム Kafka インスタンスに接続するために必要な SASL 認証の名前。値は`plain` 、 `scram-sha-256` 、 `scram-sha-512` 、または`gssapi`です。                                                                                                             |
+| `sasl-gssapi-auth-type`              | gssapi 認証タイプ。値は`user`または`keytab`です (オプション)                                                                                                                                                                            |
+| `sasl-gssapi-keytab-path`            | gssapi キータブ パス (オプション)                                                                                                                                                                                                |
+| `sasl-gssapi-kerberos-config-path`   | gssapi kerberos 構成パス (オプション)                                                                                                                                                                                          |
+| `sasl-gssapi-service-name`           | gssapi サービス名 (オプション)                                                                                                                                                                                                  |
+| `sasl-gssapi-user`                   | gssapi 認証のユーザー名 (オプション)                                                                                                                                                                                               |
+| `sasl-gssapi-password`               | gssapi 認証のパスワード (オプション)                                                                                                                                                                                               |
+| `sasl-gssapi-realm`                  | gssapi レルム名 (オプション)                                                                                                                                                                                                   |
+| `sasl-gssapi-disable-pafxfast`       | gssapi PA-FX-FAST を無効にするかどうか (オプション)                                                                                                                                                                                  |
+| `dial-timeout`                       | ダウンストリーム Kafka との接続を確立する際のタイムアウト。デフォルト値は`10s`です                                                                                                                                                                       |
+| `read-timeout`                       | ダウンストリーム Kafka から返された応答を取得する際のタイムアウト。デフォルト値は`10s`です                                                                                                                                                                   |
+| `write-timeout`                      | ダウンストリーム Kafka にリクエストを送信する際のタイムアウト。デフォルト値は`10s`です                                                                                                                                                                     |
+| `avro-decimal-handling-mode`         | `avro`プロトコルでのみ有効です。 Avro が DECIMAL フィールドを処理する方法を決定します。値は`string`または`precise`で、DECIMAL フィールドを文字列または正確な浮動小数点数にマッピングすることを示します。                                                                                           |
+| `avro-bigint-unsigned-handling-mode` | `avro`プロトコルでのみ有効です。 Avro が BIGINT UNSIGNED フィールドを処理する方法を決定します。値は`string`または`long`で、BIGINT UNSIGNED フィールドを 64 ビットの符号付き数値または文字列にマッピングすることを示します。                                                                         |
 
 ベストプラクティス：
 
 -   独自の Kafka トピックを作成することをお勧めします。少なくとも、トピックが Kafka ブローカーに送信できる各メッセージの最大データ量と、ダウンストリーム Kafka パーティションの数を設定する必要があります。 changefeed を作成すると、これら 2 つの設定はそれぞれ`max-message-bytes`と`partition-num`に対応します。
--   まだ存在しないトピックで変更フィードを作成すると、TiCDC は`partition-num`と`replication-factor`のパラメーターを使用してトピックを作成しようとします。これらのパラメーターを明示的に指定することをお勧めします。
+-   まだ存在しないトピックで変更フィードを作成すると、TiCDC は`partition-num`と`replication-factor`パラメーターを使用してトピックを作成しようとします。これらのパラメーターを明示的に指定することをお勧めします。
 -   ほとんどの場合、 `canal-json`プロトコルを使用することをお勧めします。
 
 > **ノート：**
 >
-> `protocol`が`open-protocol`の場合、TiCDC は長さが`max-message-bytes`を超えるメッセージの生成を回避しようとします。ただし、1 つの変更だけで長さが`max-message-bytes`を超える行が非常に大きい場合、TiCDC はサイレント エラーを回避するために、このメッセージを出力しようとし、ログに警告を出力します。
+> `protocol`が`open-protocol`の場合、TiCDC は長さが`max-message-bytes`を超えるメッセージの生成を回避しようとします。ただし、1 つの変更だけで長さが`max-message-bytes`を超えるほど行が大きい場合、サイレント エラーを回避するために、TiCDC はこのメッセージを出力しようとし、ログに警告を出力。
 
 #### TiCDC は Kafka の認証と承認を使用します {#ticdc-uses-the-authentication-and-authorization-of-kafka}
 
@@ -275,7 +275,7 @@ Info: {"sink-uri":"mysql://root:123456@127.0.0.1:3306/","opts":{},"create-time":
     --sink-uri="kafka://127.0.0.1:9092/topic-name?kafka-version=2.4.0&sasl-mechanism=gssapi&sasl-gssapi-auth-type=user&sasl-gssapi-kerberos-config-path=/etc/krb5.conf&sasl-gssapi-service-name=kafka&sasl-gssapi-user=alice/for-kafka&sasl-gssapi-password=alice-secret&sasl-gssapi-realm=example.com"
     ```
 
-    `sasl-gssapi-user`と`sasl-gssapi-realm`の値は、kerberos で指定された[原理](https://web.mit.edu/kerberos/krb5-1.5/krb5-1.5.4/doc/krb5-user/What-is-a-Kerberos-Principal_003f.html)に関連しています。たとえば、原則が`alice/for-kafka@example.com`に設定されている場合、 `sasl-gssapi-user`と`sasl-gssapi-realm`はそれぞれ`alice/for-kafka`と`example.com`として指定されます。
+    `sasl-gssapi-user`と`sasl-gssapi-realm`の値は、kerberos で指定された[原理](https://web.mit.edu/kerberos/krb5-1.5/krb5-1.5.4/doc/krb5-user/What-is-a-Kerberos-Principal_003f.html)に関連しています。たとえば、原則が`alice/for-kafka@example.com`に設定されている場合、 `sasl-gssapi-user`と`sasl-gssapi-realm`それぞれ`alice/for-kafka`と`example.com`として指定されます。
 
     SASL/GSSAPI `keytab`認証:
 
@@ -293,12 +293,12 @@ Info: {"sink-uri":"mysql://root:123456@127.0.0.1:3306/","opts":{},"create-time":
 
     TiCDC が適切に機能するために必要な最小限のアクセス許可セットは次のとおりです。
 
-    -   トピック[リソースタイプ](https://docs.confluent.io/platform/current/kafka/authorization.html#resources)の`Create`と`Write`のアクセス許可。
-    -   クラスタリソース タイプの`DescribeConfigs`のアクセス許可。
+    -   トピック[リソースタイプ](https://docs.confluent.io/platform/current/kafka/authorization.html#resources)の`Create`と`Write`アクセス許可。
+    -   クラスタリソース タイプの`DescribeConfigs`アクセス許可。
 
 #### TiCDC を Kafka Connect (コンフルエント プラットフォーム) と統合する {#integrate-ticdc-with-kafka-connect-confluent-platform}
 
-Confluent が提供する[データ コネクタ](https://docs.confluent.io/current/connect/managing/connectors.html)を使用してデータをリレーショナル データベースまたは非リレーショナル データベースにストリーミングするには、 `avro`プロトコルを使用して[コンフルエント スキーマ レジストリ](https://www.confluent.io/product/confluent-platform/data-compatibility/) in `schema-registry`の URL を提供する必要があります。
+Confluent が提供する[データ コネクタ](https://docs.confluent.io/current/connect/managing/connectors.html)使用してデータをリレーショナル データベースまたは非リレーショナル データベースにストリーミングするには、 `avro`プロトコルを使用して[コンフルエント スキーマ レジストリ](https://www.confluent.io/product/confluent-platform/data-compatibility/) in `schema-registry`の URL を提供する必要があります。
 
 サンプル構成:
 
@@ -321,7 +321,7 @@ dispatchers = [
 
 > **警告：**
 >
-> これはまだ実験的機能です。本番環境では使用し**ない**でください。
+> これはまだ実験的機能です。本番環境では使用**しない**でください。
 
 サンプル構成:
 
@@ -390,8 +390,8 @@ cdc cli changefeed list --pd=http://10.0.10.25:2379
 }]
 ```
 
--   `checkpoint`は、この時点より前に TiCDC が既にデータをダウンストリームにレプリケートしたことを示します。
--   `state`は、レプリケーション タスクの状態を示します。
+-   `checkpoint` 、この時点より前に TiCDC が既にデータをダウンストリームにレプリケートしたことを示します。
+-   `state`レプリケーション タスクの状態を示します。
     -   `normal` : レプリケーション タスクは正常に実行されます。
     -   `stopped` : レプリケーション タスクは停止しています (手動で一時停止)。
     -   `error` : レプリケーション タスクは (エラーにより) 停止されました。
@@ -420,9 +420,9 @@ cdc cli changefeed query -s --pd=http://10.0.10.25:2379 --changefeed-id=simple-r
 上記のコマンドと結果:
 
 -   `state`は、現在の`changefeed`の複製状態です。各状態は`changefeed list`の状態と一致している必要があります。
--   `tso`は、現在の`changefeed`でダウンストリームに正常に複製された最大のトランザクション TSO を表します。
--   `checkpoint`は、ダウンストリームに正常に複製された現在の`changefeed`の最大トランザクション TSO の対応する時間を表します。
--   `error`は、現在の`changefeed`でエラーが発生したかどうかを記録します。
+-   `tso`現在の`changefeed`でダウンストリームに正常に複製された最大のトランザクション TSO を表します。
+-   `checkpoint`ダウンストリームに正常に複製された現在の`changefeed`最大トランザクション TSO の対応する時間を表します。
+-   `error`現在の`changefeed`でエラーが発生したかどうかを記録します。
 
 {{< copyable "" >}}
 
@@ -493,14 +493,14 @@ cdc cli changefeed query --pd=http://10.0.10.25:2379 --changefeed-id=simple-repl
 
 -   `info`は、照会された`changefeed`の複製構成です。
 -   `status`は、照会された`changefeed`の複製状態です。
-    -   `resolved-ts` : 現在の`changefeed`の中で最大のトランザクション`TS` 。この`TS`は TiKV から TiCDC に正常に送信されていることに注意してください。
-    -   `checkpoint-ts` : 現在の`changefeed`の中で最大のトランザクション`TS` 。この`TS`はダウンストリームに正常に書き込まれていることに注意してください。
+    -   `resolved-ts` : 現在の`changefeed`の中で最大のトランザクション`TS` 。この`TS` TiKV から TiCDC に正常に送信されていることに注意してください。
+    -   `checkpoint-ts` : 現在の`changefeed`の中で最大のトランザクション`TS` 。この`TS`ダウンストリームに正常に書き込まれていることに注意してください。
     -   `admin-job-type` : `changefeed`のステータス:
         -   `0` : 状態は正常です。
         -   `1` : タスクは一時停止されています。タスクが一時停止すると、レプリケートされたすべての`processor`が終了します。タスクの構成とレプリケーション ステータスが保持されるため、タスクを`checkpiont-ts`から再開できます。
         -   `2` : タスクは再開されます。レプリケーション タスクは`checkpoint-ts`から再開します。
         -   `3` : タスクは削除されます。タスクが削除されると、複製されたすべての`processor`が終了し、複製タスクの構成情報がクリアされます。以降のクエリでは、レプリケーション ステータスのみが保持されます。
--   `task-status`は、照会された`changefeed`の各複製サブタスクの状態を示します。
+-   `task-status`照会された`changefeed`各複製サブタスクの状態を示します。
 
 #### レプリケーション タスクを一時停止する {#pause-a-replication-task}
 
@@ -514,7 +514,7 @@ cdc cli changefeed pause --pd=http://10.0.10.25:2379 --changefeed-id simple-repl
 
 上記のコマンドで:
 
--   `--changefeed-id=uuid`は、一時停止するレプリケーション タスクに対応する`changefeed`の ID を表します。
+-   `--changefeed-id=uuid`一時停止するレプリケーション タスクに対応する`changefeed`の ID を表します。
 
 #### レプリケーション タスクを再開する {#resume-a-replication-task}
 
@@ -528,7 +528,7 @@ cdc cli changefeed resume --pd=http://10.0.10.25:2379 --changefeed-id simple-rep
 
 上記のコマンドで:
 
--   `--changefeed-id=uuid`は、再開するレプリケーション タスクに対応する`changefeed`の ID を表します。
+-   `--changefeed-id=uuid`再開するレプリケーション タスクに対応する`changefeed`の ID を表します。
 
 #### レプリケーション タスクを削除する {#remove-a-replication-task}
 
@@ -542,7 +542,7 @@ cdc cli changefeed remove --pd=http://10.0.10.25:2379 --changefeed-id simple-rep
 
 上記のコマンドで:
 
--   `--changefeed-id=uuid`は、削除するレプリケーション タスクに対応する`changefeed`の ID を表します。
+-   `--changefeed-id=uuid`削除するレプリケーション タスクに対応する`changefeed`の ID を表します。
 
 ### タスク構成の更新 {#update-task-configuration}
 
@@ -559,13 +559,13 @@ cdc cli changefeed resume -c test-cf --pd=http://10.0.10.25:2379
 現在、次の構成項目を変更できます。
 
 -   `changefeed`の`sink-uri` 。
--   `changefeed`の構成ファイルと、ファイル内のすべての構成アイテム。
+-   `changefeed`構成ファイルと、ファイル内のすべての構成アイテム。
 -   ファイルの並べ替え機能と並べ替えディレクトリを使用するかどうか。
 -   `changefeed`の`target-ts` 。
 
 ### レプリケーション サブタスクの処理単位を管理する ( <code>processor</code> ) {#manage-processing-units-of-replication-sub-tasks-code-processor-code}
 
--   `processor`のリストをクエリします。
+-   `processor`リストをクエリします。
 
     {{< copyable "" >}}
 
@@ -583,7 +583,7 @@ cdc cli changefeed resume -c test-cf --pd=http://10.0.10.25:2379
     ]
     ```
 
--   特定のレプリケーション タスクのステータスに対応する特定の`changefeed`を照会します。
+-   特定のレプリケーション タスクのステータスに対応する特定の`changefeed`照会します。
 
     {{< copyable "" >}}
 
@@ -669,9 +669,9 @@ protocol = "canal-json"
 前のセクションの例では:
 
 -   マッチャー ルールに一致するテーブルについては、対応するトピック式で指定されたポリシーに従ってディスパッチされます。たとえば、 `test3.aa`テーブルは「トピック式 2」に従ってディスパッチされます。 `test5.aa`テーブルは「トピック式 3」に従ってディスパッチされます。
--   複数のマッチャー ルールに一致するテーブルの場合、最初に一致したトピック式に従ってディスパッチされます。たとえば、「トピック表現 1」に従って、 `test1.aa`のテーブルが分散されます。
+-   複数のマッチャー ルールに一致するテーブルの場合、最初に一致したトピック式に従ってディスパッチされます。たとえば、「トピック表現 1」に従って、 `test1.aa`テーブルが分散されます。
 -   どのマッチャー ルールにも一致しないテーブルの場合、対応するデータ変更イベントが`--sink-uri`で指定されたデフォルト トピックに送信されます。たとえば、 `test10.aa`テーブルはデフォルト トピックに送信されます。
--   マッチャー ルールに一致するが、トピック ディスパッチャーが指定されていないテーブルの場合、対応するデータ変更は`--sink-uri`で指定されたデフォルト トピックに送信されます。たとえば、 `test6.aa`テーブルはデフォルト トピックに送信されます。
+-   マッチャー ルールに一致するがトピック ディスパッチャーを指定しないテーブルの場合、対応するデータ変更は`--sink-uri`で指定されたデフォルト トピックに送信されます。たとえば、 `test6.aa`テーブルはデフォルト トピックに送信されます。
 
 ### トピック ディスパッチャ {#topic-dispatchers}
 
@@ -685,7 +685,7 @@ Topic 式の形式は`[prefix]{schema}[middle][{table}][suffix]`です。
 -   `{table}` : オプション。テーブル名と一致させるために使用されます。
 -   `suffix` : オプション。トピック名のサフィックスを示します。
 
-`prefix` 、 `middle` 、および`suffix`には、次の文字のみを含めることができます: `a-z` 、 `A-Z` 、 `0-9` 、 `.` 、 `_` 、および`-` 。 `{schema}`と`{table}`は両方とも小文字です。 `{Schema}`や`{TABLE}`などのプレースホルダーは無効です。
+`prefix` 、 `middle`および`suffix`には、次の文字のみを含めることができます: `a-z` 、 `A-Z` 、 `0-9` 、 `.` 、 `_` 、および`-` 。 `{schema}`と`{table}`は両方とも小文字です。 `{Schema}`や`{TABLE}`などのプレースホルダーは無効です。
 
 いくつかの例：
 
@@ -711,11 +711,11 @@ Topic 式の形式は`[prefix]{schema}[middle][{table}][suffix]`です。
 たとえば、 `matcher = ['test.*'], topic = {schema}_{table}`のようなディスパッチャーの場合、DDL イベントは次のようにディスパッチされます。
 
 -   DDL イベントに含まれるテーブルが 1 つの場合、DDL イベントは対応するトピックにそのまま送信されます。たとえば、DDL イベント`drop table test.table1`の場合、イベントは`test_table1`という名前のトピックに送信されます。
--   DDL イベントに複数のテーブルが含まれる場合 ( `rename table` / `drop table` / `drop view`は複数のテーブルが含まれる場合があります)、DDL イベントは複数のイベントに分割され、対応するトピックに送信されます。たとえば、DDL イベント`rename table test.table1 to test.table10, test.table2 to test.table20`の場合、イベント`rename table test.table1 to test.table10`は`test_table1`という名前のトピックに送信され、イベント`rename table test.table2 to test.table20`は`test.table2`という名前のトピックに送信されます。
+-   DDL イベントに複数のテーブルが含まれる場合 ( `rename table` / `drop table` / `drop view`は複数のテーブルが含まれる場合があります)、DDL イベントは複数のイベントに分割され、対応するトピックに送信されます。たとえば、DDL イベント`rename table test.table1 to test.table10, test.table2 to test.table20`の場合、イベント`rename table test.table1 to test.table10` `test_table1`という名前のトピックに送信され、イベント`rename table test.table2 to test.table20` `test.table2`という名前のトピックに送信されます。
 
 ### 区画ディスパッチャー {#partition-dispatchers}
 
-`partition = "xxx"`を使用して、パーティション ディスパッチャーを指定できます。デフォルト、ts、インデックス値、およびテーブルの 4 つのディスパッチャがサポートされています。ディスパッチャのルールは次のとおりです。
+`partition = "xxx"`使用して、パーティション ディスパッチャーを指定できます。デフォルト、ts、インデックス値、およびテーブルの 4 つのディスパッチャがサポートされています。ディスパッチャのルールは次のとおりです。
 
 -   デフォルト: 複数の一意のインデックス (主キーを含む) が存在する場合、または古い値機能が有効になっている場合、イベントはテーブル モードでディスパッチされます。一意のインデックス (または主キー) が 1 つだけ存在する場合、イベントはインデックス値モードで送出されます。
 -   ts: 行変更の commitTs を使用して、イベントをハッシュおよびディスパッチします。
@@ -724,7 +724,7 @@ Topic 式の形式は`[prefix]{schema}[middle][{table}][suffix]`です。
 
 > **ノート：**
 >
-> v6.1 以降、構成の意味を明確にするために、パーティション ディスパッチャーを指定するために使用される構成が`dispatcher`から`partition`に変更されました`partition`は`dispatcher`のエイリアスです。たとえば、次の 2 つのルールはまったく同じです。
+> v6.1 `dispatcher` 、構成の意味を明確にするために、パーティション ディスパッチャーを指定するために使用される構成が`dispatcher`から`partition`に変更されました。5 は`partition`のエイリアスです。たとえば、次の 2 つのルールはまったく同じです。
 >
 > ```
 > [sink]
@@ -734,7 +734,7 @@ Topic 式の形式は`[prefix]{schema}[middle][{table}][suffix]`です。
 > ]
 > ```
 >
-> ただし、 `dispatcher`と`partition`を同じルールに含めることはできません。たとえば、次のルールは無効です。
+> ただし、 `dispatcher`と`partition`同じルールに含めることはできません。たとえば、次のルールは無効です。
 >
 > ```
 > {matcher = ['*.*'], dispatcher = "ts", partition = "table"},
@@ -744,7 +744,7 @@ Topic 式の形式は`[prefix]{schema}[middle][{table}][suffix]`です。
 
 デフォルトの構成では、レプリケーション タスクの TiCDC Open Protocol 出力の Row Changed Event には、変更前の値ではなく、変更された値のみが含まれます。したがって、出力値は、TiCDC Open Protocol のコンシューマー側で行変更イベントの履歴値として使用することはできません。
 
-v4.0.5 以降、TiCDC は行変更イベントの履歴値の出力をサポートしています。この機能を有効にするには、ルート レベルの`changefeed`の構成ファイルで次の構成を指定します。
+v4.0.5 以降、TiCDC は行変更イベントの履歴値の出力をサポートしています。この機能を有効にするには、ルート レベルの`changefeed`構成ファイルで次の構成を指定します。
 
 {{< copyable "" >}}
 
@@ -780,7 +780,7 @@ force-replicate = true
 -   TiCDC のデータ レプリケーション タスクは長時間一時停止されます。その間、大量の増分データが蓄積され、レプリケートする必要があります。
 -   データ複製タスクは早いタイムスタンプから開始されるため、大量の増分データを複製する必要があります。
 
-v4.0.13 以降の`cdc cli`を使用して作成された変更フィードの場合、Unified Sorter はデフォルトで有効になっています。 v4.0.13 より前に存在していた変更フィードについては、以前の構成が使用されます。
+v4.0.13 以降の`cdc cli`使用して作成された変更フィードの場合、Unified Sorter はデフォルトで有効になっています。 v4.0.13 より前に存在していた変更フィードについては、以前の構成が使用されます。
 
 ユニファイド ソーター機能が変更フィードで有効になっているかどうかを確認するには、次のコマンド例を実行します (PD インスタンスの IP アドレスが`http://10.0.10.25:2379`であると仮定します)。
 
@@ -796,7 +796,7 @@ cdc cli --pd="http://10.0.10.25:2379" changefeed query --changefeed-id=simple-re
 >
 > -   サーバーが機械式ハード ドライブまたはその他のストレージ デバイスを使用しており、レイテンシーが大きいか帯域幅が限られている場合は、統合ソーターを慎重に使用してください。
 > -   デフォルトでは、Unified Sorter は`data_dir`を使用して一時ファイルを保存します。空きディスク容量が 500 GiB 以上であることを確認することをお勧めします。実稼働環境では、各ノードの空きディスク容量が (ビジネスで許容される最大`checkpoint-ts`遅延) * (ビジネス ピーク時のアップストリーム書き込みトラフィック) より大きいことを確認することをお勧めします。また、 `changefeed`の作成後に大量の履歴データをレプリケートする予定がある場合は、各ノードの空き容量がレプリケートされたデータの量よりも多いことを確認してください。
-> -   統合ソーターはデフォルトで有効になっています。サーバーが上記の要件に一致せず、統合ソーターを無効にする場合は、changefeed の`sort-engine`から`memory`を手動で設定する必要があります。
+> -   統合ソーターはデフォルトで有効になっています。サーバーが上記の要件に一致せず、統合ソーターを無効にする場合は、changefeed の`sort-engine`から`memory`手動で設定する必要があります。
 > -   `memory`を使用してソートする既存の変更フィードでユニファイド ソーターを有効にするには、 [タスクの中断後に TiCDC が再起動された後に発生する OOM を処理するにはどうすればよいですか?](/ticdc/troubleshoot-ticdc.md#what-should-i-do-to-handle-the-oom-that-occurs-after-ticdc-is-restarted-after-a-task-interruption)で提供されているメソッドを参照してください。
 
 ## 災害シナリオにおける結果整合性レプリケーション {#eventually-consistent-replication-in-disaster-scenarios}

@@ -14,9 +14,9 @@ summary: Learn how to upgrade TiDB using TiUP.
 > **警告：**
 >
 > -   TiFlash を 5.3 より前のバージョンから 5.3 以降にオンラインでアップグレードすることはできません。代わりに、最初に初期バージョンのすべての TiFlash インスタンスを停止してから、クラスターをオフラインでアップグレードする必要があります。他のコンポーネント (TiDB や TiKV など) がオンライン アップグレードをサポートしていない場合は、 [オンラインアップグレード](#online-upgrade)の警告の指示に従ってください。
-> -   DDL ステートメントがクラスターで実行されているときは、 **TiDB**クラスターをアップグレードしないでください (通常、 `ADD INDEX`のような時間のかかる DDL ステートメントや列の型の変更のため)。
+> -   DDL ステートメントがクラスターで実行されているときは、TiDB クラスターをアップグレード**しないでください**(通常、 `ADD INDEX`のような時間のかかる DDL ステートメントや列の型の変更のため)。
 > -   アップグレードの前に、 [`ADMIN SHOW DDL`](/sql-statements/sql-statement-admin-show-ddl.md)コマンドを使用して、TiDB クラスターに進行中の DDL ジョブがあるかどうかを確認することをお勧めします。クラスターに DDL ジョブがある場合、クラスターをアップグレードするには、DDL の実行が完了するまで待つか、 [`ADMIN CANCEL DDL`](/sql-statements/sql-statement-admin-cancel-ddl.md)コマンドを使用して DDL ジョブをキャンセルしてからクラスターをアップグレードします。
-> -   また、クラスターのアップグレード中は、DDL ステートメントを実行し**ない**でください。そうしないと、未定義の動作の問題が発生する可能性があります。
+> -   また、クラスターのアップグレード中は、DDL ステートメントを実行し**ないでください**。そうしないと、未定義の動作の問題が発生する可能性があります。
 
 > **ノート：**
 >
@@ -58,7 +58,7 @@ TiDB クラスターをアップグレードする前に、まず TiUP または
     tiup --version
     ```
 
-2.  TiUPクラスタのバージョンをアップグレードします。 TiUP クラスタのバージョンは`1.10.0`以降を推奨します。
+2.  TiUPクラスタのバージョンをアップグレードします。 TiUP クラスタ のバージョンは`1.10.0`以降を推奨します。
 
     {{< copyable "" >}}
 
@@ -73,7 +73,7 @@ TiDB クラスターをアップグレードする前に、まず TiUP または
 >
 > アップグレードするクラスターがオフラインの方法を使用せずにデプロイされた場合は、この手順をスキップしてください。
 
-[TiUP を使用して TiDBクラスタをデプロイする - TiUP をオフラインでデプロイ](/production-deployment-using-tiup.md#deploy-tiup-offline)を参照して、新しいバージョンの TiUP ミラーをダウンロードし、制御マシンにアップロードします。 `local_install.sh`を実行すると、TiUP は上書きアップグレードを完了します。
+[TiUP を使用して TiDBクラスタをデプロイ- TiUP をオフラインでデプロイ](/production-deployment-using-tiup.md#deploy-tiup-offline)を参照して、新しいバージョンの TiUP ミラーをダウンロードし、制御マシンにアップロードします。 `local_install.sh`を実行すると、TiUP は上書きアップグレードを完了します。
 
 {{< copyable "" >}}
 
@@ -171,12 +171,12 @@ tiup cluster check <cluster-name> --cluster
 tiup cluster upgrade <cluster-name> <version>
 ```
 
-たとえば、クラスターを v6.1.2 にアップグレードする場合:
+たとえば、クラスターを v6.1.3 にアップグレードする場合:
 
 {{< copyable "" >}}
 
 ```shell
-tiup cluster upgrade <cluster-name> v6.1.2
+tiup cluster upgrade <cluster-name> v6.1.3
 ```
 
 > **ノート：**
@@ -185,7 +185,7 @@ tiup cluster upgrade <cluster-name> v6.1.2
 >
 > -   `--force`パラメーターを使用して、リーダーを削除せずにすぐにクラスターをアップグレードできます。ただし、アップグレード中に発生するエラーは無視されます。つまり、アップグレードの失敗は通知されません。したがって、 `--force`パラメータは注意して使用してください。
 >
-> -   安定したパフォーマンスを維持するには、インスタンスを停止する前に、TiKV インスタンス内のすべてのリーダーが削除されていることを確認してください。 `--transfer-timeout`を`--transfer-timeout 3600` (単位: 秒) など、より大きな値に設定できます。
+> -   安定したパフォーマンスを維持するには、インスタンスを停止する前に、TiKV インスタンス内のすべてのリーダーが削除されていることを確認してください。 `--transfer-timeout` `--transfer-timeout 3600` (単位: 秒) など、より大きな値に設定できます。
 >
 > <!---->
 >
@@ -233,7 +233,7 @@ tiup cluster display <cluster-name>
 ```
 Cluster type:       tidb
 Cluster name:       <cluster-name>
-Cluster version:    v6.1.2
+Cluster version:    v6.1.3
 ```
 
 > **ノート：**
@@ -256,7 +256,7 @@ Cluster version:    v6.1.2
     tiup cluster audit
     ```
 
-    失敗したアップグレード操作レコードを見つけて、この操作レコードの ID を保持します。 ID は、次のステップの`<audit-id>`の値です。
+    失敗したアップグレード操作レコードを見つけて、この操作レコードの ID を保持します。 ID は、次のステップの`<audit-id>`値です。
 
 2.  `tiup cluster replay <audit-id>`を実行して、対応する操作を再試行します。
 
@@ -278,12 +278,12 @@ tiup cluster upgrade <cluster-name> <version> --force
 
 ### TiDB クラスターをアップグレードした後、pd-ctl などのツールのバージョンを更新する方法を教えてください。 {#how-to-update-the-version-of-tools-such-as-pd-ctl-after-upgrading-the-tidb-cluster}
 
-TiUP を使用して、対応するバージョンの`ctl`つのコンポーネントをインストールすることで、ツールのバージョンをアップグレードできます。
+TiUP を使用して、対応するバージョンの`ctl`のコンポーネントをインストールすることで、ツールのバージョンをアップグレードできます。
 
 {{< copyable "" >}}
 
 ```shell
-tiup install ctl:v6.1.2
+tiup install ctl:v6.1.3
 ```
 
 ## TiDB 6.1.0 の互換性の変更 {#tidb-6-1-0-compatibility-changes}

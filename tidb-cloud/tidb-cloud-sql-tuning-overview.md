@@ -15,31 +15,31 @@ summary: Learn about how to tune SQL performance in TiDB Cloud.
 SQL ステートメントのパフォーマンスを向上させるには、次の原則を考慮してください。
 
 -   スキャンしたデータの範囲を最小限に抑えます。最小限の範囲のデータのみをスキャンし、すべてのデータをスキャンしないようにすることが常にベスト プラクティスです。
--   適切な索引を使用してください。 SQL ステートメントの`WHERE`句の各列について、対応するインデックスがあることを確認してください。そうしないと、 `WHERE`句がテーブル全体をスキャンし、パフォーマンスが低下します。
+-   適切な索引を使用してください。 SQL ステートメントの`WHERE`句の各列には、対応するインデックスがあることを確認してください。そうしないと、 `WHERE`句がテーブル全体をスキャンし、パフォーマンスが低下します。
 -   適切な結合タイプを使用してください。クエリ内の各テーブルのサイズと相関関係に応じて、適切な結合タイプを選択することが非常に重要です。一般に、TiDB のコストベースのオプティマイザは、最適な Join タイプを自動的に選択します。ただし、場合によっては、結合タイプを手動で指定する必要があります。詳細については、 [テーブル結合を使用するステートメントの説明](/explain-joins.md)を参照してください。
 -   適切なストレージ エンジンを使用します。 Hybrid Transactional and Analytical Processing (HTAP) ワークロードには、TiFlash ストレージ エンジンを使用することをお勧めします。 [HTAP クエリ](/develop/dev-guide-hybrid-oltp-and-olap-queries.md)を参照してください。
 
-TiDB Cloudは、クラスター上の低速クエリを分析するのに役立ついくつかのツールを提供します。次のセクションでは、スロー クエリを最適化するためのいくつかのアプローチについて説明します。
+TiDB Cloud は、クラスター上の低速クエリを分析するのに役立ついくつかのツールを提供します。次のセクションでは、スロー クエリを最適化するためのいくつかのアプローチについて説明します。
 
 ### [診断] タブでステートメントを使用する {#use-statement-on-the-diagnosis-tab}
 
-TiDB Cloudコンソールには、[**診断**] タブに [<strong><a href="/tidb-cloud/tune-performance.md#statement-analysis">ステートメント</a></strong>] サブタブがあります。クラスター上のすべてのデータベースの SQL ステートメントの実行統計を収集します。これを使用して、合計または 1 回の実行で長い時間を消費する SQL ステートメントを特定して分析できます。
+TiDB Cloudコンソールは、 **SQL 診断**タブに<strong><a href="/tidb-cloud/tune-performance.md#statement-analysis">SQL ステートメント</a></strong>サブタブを提供します。クラスター上のすべてのデータベースの SQL ステートメントの実行統計を収集します。これを使用して、合計または 1 回の実行で長い時間を消費する SQL ステートメントを特定して分析できます。
 
 このサブタブでは、(クエリ パラメータが一致しない場合でも) 同じ構造を持つ SQL クエリが同じ SQL ステートメントにグループ化されることに注意してください。たとえば、 `SELECT * FROM employee WHERE id IN (1, 2, 3)`と`select * from EMPLOYEE where ID in (4, 5)`はどちらも同じ SQL ステートメント`select * from employee where id in (...)`の一部です。
 
 **Statement**でいくつかの重要な情報を確認できます。
 
--   SQL ステートメントの概要: SQL ダイジェスト、SQL テンプレート ID、現在表示されている時間範囲、実行計画の数、および実行が行われるデータベースを含みます。
+-   SQL ステートメントの概要: SQL ダイジェスト、SQL テンプレート ID、現在表示されている時間範囲、実行計画の数、実行が行われるデータベースが含まれます。
 -   実行計画リスト: SQL ステートメントに複数の実行計画がある場合、リストが表示されます。さまざまな実行計画を選択でき、選択した実行計画の詳細がリストの下部に表示されます。実行計画が 1 つしかない場合、リストは表示されません。
--   実行計画の詳細: 選択した実行計画の詳細を表示します。このような SQL タイプの実行計画と対応する実行時間をいくつかの観点から収集して、より多くの情報を取得できるようにします。 [実行計画の詳細](https://docs.pingcap.com/tidb/stable/dashboard-statement-details#statement-execution-details-of-tidb-dashboard)を参照してください (下の画像の領域 3)。
+-   実行計画の詳細: 選択した実行計画の詳細を表示します。このような SQL タイプの実行計画と対応する実行時間をいくつかの観点から収集して、より多くの情報を取得できるようにします。 [実行計画の詳細](https://docs.pingcap.com/tidb/stable/dashboard-statement-details#statement-execution-details-of-tidb-dashboard) (下の画像の領域 3) を参照してください。
 
 ![Details](/media/dashboard/dashboard-statement-detail.png)
 
-**Statement**ダッシュボードの情報に加えて、次のセクションで説明するように、 TiDB Cloudの SQL ベスト プラクティスもいくつかあります。
+**Statement**ダッシュボードの情報に加えて、次のセクションで説明するように、 TiDB Cloudの SQL のベスト プラクティスもいくつかあります。
 
 ### 実行計画を確認する {#check-the-execution-plan}
 
-[`EXPLAIN`](/explain-overview.md)を使用して、コンパイル中に TiDB によって計算されたステートメントの実行計画を確認できます。つまり、TiDB は数百または数千の実行計画を推定し、リソースの消費が最も少なく、実行速度が最も速い最適な実行計画を選択します。
+[`EXPLAIN`](/explain-overview.md)使用して、コンパイル中にステートメントに対して TiDB によって計算された実行計画を確認できます。つまり、TiDB は数百または数千の実行計画を推定し、リソースの消費が最も少なく、実行速度が最も速い最適な実行計画を選択します。
 
 TiDB によって選択された実行計画が最適でない場合は、 EXPLAINまたは[`EXPLAIN ANALYZE`](/sql-statements/sql-statement-explain-analyze.md)を使用して診断できます。
 
@@ -47,7 +47,7 @@ TiDB によって選択された実行計画が最適でない場合は、 EXPLA
 
 元のクエリ テキストを`parser`で解析し、基本的な有効性を検証した後、TiDB は最初に論理的に同等の変更をクエリに加えます。詳細については、 [SQL 論理最適化](/sql-logical-optimization.md)を参照してください。
 
-これらの等価性の変更により、クエリは論理実行プランで処理しやすくなります。同等性が変化した後、TiDB は元のクエリと同等のクエリ プラン構造を取得し、データ分散とオペレーターの特定の実行オーバーヘッドに基づいて最終的な実行プランを取得します。詳細については、 [SQL 物理最適化](/sql-physical-optimization.md)を参照してください。
+これらの等価性の変更により、論理実行プランでのクエリの処理が容易になります。同等性が変更された後、TiDB は元のクエリと同等のクエリ プラン構造を取得し、データ分散とオペレーターの特定の実行オーバーヘッドに基づいて最終的な実行プランを取得します。詳細については、 [SQL 物理最適化](/sql-physical-optimization.md)を参照してください。
 
 また、TiDB は、実行計画キャッシュを有効にして、 `PREPARE`ステートメントを実行するときの実行計画の作成オーバーヘッドを削減することもできます ( [実行計画キャッシュの準備](/sql-prepared-plan-cache.md)で紹介)。
 
@@ -69,9 +69,9 @@ SQL クエリが遅くなる最も一般的な理由は、 `SELECT`ステート�
 
 ### インデックスのベスト プラクティス {#index-best-practices}
 
-[インデックス作成のベスト プラクティス](/develop/dev-guide-index-best-practice.md)には、インデックスの作成とインデックスの使用に関するベスト プラクティスが含まれています。
+[インデックス作成のベスト プラクティス](/develop/dev-guide-index-best-practice.md)は、インデックスの作成とインデックスの使用に関するベスト プラクティスが含まれています。
 
-インデックス作成の速度はデフォルトでは控えめであり、一部のシナリオではインデックス作成プロセスを[変数の変更](/develop/dev-guide-optimize-sql-best-practices.md#add-index-best-practices)倍高速化できます。
+インデックス作成の速度はデフォルトでは控えめであり、一部のシナリオではインデックス作成プロセスを[変数の変更](/develop/dev-guide-optimize-sql-best-practices.md#add-index-best-practices)高速化できます。
 
 <!--
 ### Use the slow log memory mapping table
@@ -87,7 +87,7 @@ The recommended analysis process for slow queries is as follows.
 
 ## スキーマ設計の最適化 {#optimize-schema-design}
 
-それでも SQL パフォーマンス チューニングに基づいてパフォーマンスを向上できない場合は、スキーマの設計とデータ読み取りモデルを確認して、トランザクションの競合とホットスポットを回避する必要があります。
+それでも SQL パフォーマンス チューニングに基づいてパフォーマンスを向上できない場合は、スキーマ設計とデータ読み取りモデルを確認して、トランザクションの競合とホットスポットを回避する必要がある場合があります。
 
 ### トランザクションの競合 {#transaction-conflicts}
 
@@ -99,7 +99,7 @@ The recommended analysis process for slow queries is as follows.
 
 Key Visualizer を使用して、TiDB クラスターの使用パターンを分析し、トラフィックのホットスポットをトラブルシューティングできます。このページでは、TiDB クラスターのトラフィックを経時的に視覚的に表現しています。
 
-Key Visualizer で次の情報を確認できます。最初にいくつかの[基本概念](https://docs.pingcap.com/tidb/stable/dashboard-key-visualizer#basic-concepts)を理解する必要があるかもしれません。
+Key Visualizer で次の情報を確認できます。最初にいくつかの[基本概念](https://docs.pingcap.com/tidb/stable/dashboard-key-visualizer#basic-concepts)理解する必要があるかもしれません。
 
 -   時間の経過に伴う全体的なトラフィックを示す大きなヒート マップ
 -   ヒートマップの座標に関する詳細情報

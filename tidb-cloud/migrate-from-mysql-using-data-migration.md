@@ -7,15 +7,15 @@ summary: Learn how to migrate data from MySQL-compatible databases hosted in Ama
 
 このドキュメントでは、 TiDB Cloudコンソールのデータ移行機能を使用して、クラウド プロバイダー (Amazon Aurora MySQL または Amazon Relational Database Service (RDS)) またはオンプレミスの MySQL 互換データベースからTiDB Cloudにデータを移行する方法について説明します。
 
-この機能は、データベースとその進行中の変更をTiDB Cloudに移行するのに役立ちます (同じリージョンまたは複数のリージョンで)。 DumplingやTiDB Lightningなどのツールを必要とする[MySQL 互換データベースからの移行](/tidb-cloud/migrate-data-into-tidb.md)および[MySQL 互換データベースからの増分データの移行](/tidb-cloud/migrate-incremental-data-from-mysql.md)で紹介したソリューションと比較して、この機能は使いやすくなっています。ソース データベースから手動でデータをダンプしてからTiDB Cloudにインポートする必要はありません。代わりに、ソース データベースからTiDB Cloudにデータを一度に直接移行できます。
+この機能は、データベースとその進行中の変更をTiDB Cloudに移行するのに役立ちます (同じリージョンまたは複数のリージョンで)。 DumplingやTiDB Lightningなどのツールを必要とする[MySQL 互換データベースからの移行](/tidb-cloud/migrate-data-into-tidb.md)および[MySQL 互換データベースからの増分データの移行](/tidb-cloud/migrate-incremental-data-from-mysql.md)で紹介したソリューションと比較して、この機能は使いやすくなっています。ソース データベースからデータを手動でダンプしてからTiDB Cloudにインポートする必要はありません。代わりに、ソース データベースから直接TiDB Cloudに一度にデータを移行できます。
 
 ## 制限事項 {#limitations}
 
 -   データ移行機能は、 **Dedicated Tier**クラスターでのみ使用できます。
 
--   データ移行機能は、2022 年 11 月 9 日以降に AWS オレゴン (us-west-2) および AWS シンガポール (ap-southeast-1) リージョンで作成されたプロジェクトのクラスターでのみ使用できます。日付またはクラスターが別の地域にある場合、この機能はクラスターで使用できず、**データ移行**タブはTiDB Cloudコンソールのクラスター概要ページに表示されません。
+-   データ移行機能は、2022 年 11 月 9 日以降に AWS オレゴン (us-west-2) および AWS シンガポール (ap-southeast-1) リージョンで作成されたプロジェクトのクラスターでのみ使用できます。日付またはクラスターが別の地域にある場合、この機能はクラスターで使用できず、**データ移行は**TiDB Cloudコンソールのクラスター概要ページに表示されません。
 
--   現在、データ移行機能はベータ版であり、組織ごとに移行ジョブ**を 1 つだけ無料**で作成できます。さらに移行ジョブを作成するには、 [サポート チケットを提出する](/tidb-cloud/tidb-cloud-support.md) .
+-   現在、データ移行機能はベータ版であり、組織ごとに移行ジョブを 1 つだけ**無料で**作成できます。さらに移行ジョブを作成するには、 [サポート チケットを提出する](/tidb-cloud/tidb-cloud-support.md) .
 
 -   移行するすべてのデータベースを選択した場合でも、システム データベースは除外され、 TiDB Cloudに移行されません。つまり、 `mysql` 、 `information_schema` 、 `information_schema` 、および`sys`は、この機能を使用して移行されません。
 
@@ -32,7 +32,7 @@ summary: Learn how to migrate data from MySQL-compatible databases hosted in Ama
 -   次のシナリオでは、移行ジョブに 24 時間以上かかる場合は、ソース データベースの binlog を消去しないで、Data Migration が増分レプリケーション用の連続した binlog を取得できるようにします。
 
     -   完全なデータ移行中。
-    -   完全なデータ移行が完了した後、増分データ移行が初めて開始されるとき、レイテンシーは 0 ミリ秒ではありません。
+    -   完全なデータ移行が完了した後、増分データ移行が初めて開始されるとき、レイテンシーは0 ミリ秒ではありません。
 
 ## 前提条件 {#prerequisites}
 
@@ -42,7 +42,7 @@ summary: Learn how to migrate data from MySQL-compatible databases hosted in Ama
 
 データ移行では、次のデータ ソースとバージョンがサポートされています。
 
--   MySQL 5.6、5.7、および 8.0 ローカル インスタンスまたはパブリック クラウド プロバイダー。 MySQL 8.0 はTiDB Cloudまだ実験的段階であり、非互換性の問題がある可能性があることに注意してください。
+-   MySQL 5.6、5.7、および 8.0 ローカル インスタンスまたはパブリック クラウド プロバイダー。 MySQL 8.0 はTiDB Cloudではまだ実験的であり、非互換性の問題がある可能性があることに注意してください。
 -   アマゾンAurora(MySQL 5.6 および 5.7)
 -   アマゾン RDS (MySQL 5.7)
 
@@ -57,7 +57,7 @@ summary: Learn how to migrate data from MySQL-compatible databases hosted in Ama
 | `REPLICATION SLAVE`  | グローバル |
 | `REPLICATION CLIENT` | グローバル |
 
-たとえば、次の`GRANT`のステートメントを使用して、対応する権限を付与できます。
+たとえば、次の`GRANT`ステートメントを使用して、対応する権限を付与できます。
 
 ```sql
 GRANT SELECT,LOCK TABLES,REPLICATION SLAVE,REPLICATION CLIENT ON *.* TO 'your_user'@'your_IP_address_of_host'
@@ -79,7 +79,7 @@ GRANT SELECT,LOCK TABLES,REPLICATION SLAVE,REPLICATION CLIENT ON *.* TO 'your_us
 | `INDEX`    | テーブル        |
 | `TRUNCATE` | テーブル        |
 
-たとえば、次の`GRANT`のステートメントを実行して、対応する権限を付与できます。
+たとえば、次の`GRANT`ステートメントを実行して、対応する権限を付与できます。
 
 ```sql
 GRANT CREATE,SELECT,INSERT,UPDATE,DELETE,ALTER,TRUNCATE,DROP,INDEX ON *.* TO 'your_user'@'your_IP_address_of_host'
@@ -87,7 +87,7 @@ GRANT CREATE,SELECT,INSERT,UPDATE,DELETE,ALTER,TRUNCATE,DROP,INDEX ON *.* TO 'yo
 
 移行ジョブをすばやくテストするには、 TiDB Cloudクラスターの`root`アカウントを使用できます。
 
-### ネットワーク接続の設定 {#set-up-network-connection}
+### ネットワーク接続のセットアップ {#set-up-network-connection}
 
 移行ジョブを作成する前に、接続方法に従ってネットワーク接続をセットアップします。 [TiDBクラスタに接続する](/tidb-cloud/connect-to-tidb-cluster.md)を参照してください。
 
@@ -103,15 +103,15 @@ GRANT CREATE,SELECT,INSERT,UPDATE,DELETE,ALTER,TRUNCATE,DROP,INDEX ON *.* TO 'yo
 
 ## ステップ 1:<strong>データ移行</strong>ページに移動します {#step-1-go-to-the-strong-data-migration-strong-page}
 
-1.  [TiDB Cloudコンソール](https://tidbcloud.com/console/clusters)にログインします。プロジェクトの [**クラスター]**ページに移動します。
+1.  [TiDB Cloudコンソール](https://tidbcloud.com/)にログインして[**クラスター**](https://tidbcloud.com/console/clusters)ページに移動し、左側のナビゲーション バーの上部でターゲット プロジェクトを選択します。
 
-2.  [**クラスター**] ページで、クラスターの名前をクリックし、[<strong>データ移行</strong>] タブをクリックします。<strong>データ移行</strong>ページが表示されます。
+2.  **[クラスター]**ページで、クラスターの名前をクリックし、 <strong>[データ移行]</strong>タブをクリックします。<strong>データ移行</strong>ページが表示されます。
 
-3.  [**データ移行**] ページで、[<strong>移行ジョブの作成</strong>] をクリックします。<strong>移行ジョブの作成</strong>ページが表示されます。
+3.  **[データ移行]**ページで、 <strong>[移行ジョブの作成]</strong>をクリックします。<strong>移行ジョブの作成</strong>ページが表示されます。
 
 ## ステップ 2: ソースとターゲットの接続を構成する {#step-2-configure-the-source-and-target-connection}
 
-[**移行ジョブの作成]**ページで、ソース接続とターゲット接続を構成します。
+**[移行ジョブの作成]**ページで、ソース接続とターゲット接続を構成します。
 
 1.  ジョブ名を入力します。この名前は文字で始まり、60 文字未満である必要があります。文字 (AZ、az)、数字 (0-9)、アンダースコア (_)、およびハイフン (-) を使用できます。
 
@@ -132,15 +132,15 @@ GRANT CREATE,SELECT,INSERT,UPDATE,DELETE,ALTER,TRUNCATE,DROP,INDEX ON *.* TO 'yo
 
 3.  ターゲット接続プロファイルを入力します。
 
-    -   **ユーザー**名 : TiDB Cloudのターゲット クラスターのユーザー名を入力します。
+    -   **ユーザー名**: TiDB Cloudのターゲット クラスターのユーザー名を入力します。
     -   **パスワード**: TiDB Cloudユーザー名のパスワードを入力します。
 
-4.  [**接続を検証して次へ]**をクリックして、入力した情報を検証します。
+4.  **[接続を検証して次へ]**をクリックして、入力した情報を検証します。
 
 5.  表示されるメッセージに従って対処してください。
 
     -   パブリック IP または VPC ピアリングを使用する場合は、データ移行サービスの IP アドレスをソース データベースとファイアウォール (存在する場合) の IP アクセス リストに追加する必要があります。
-    -   Private Link を使用する場合、エンドポイント要求を受け入れるように求められます。 [AWS VPC コンソール](https://us-west-2.console.aws.amazon.com/vpc/home)に移動し、[**エンドポイント サービス**] をクリックしてエンドポイント要求を受け入れます。
+    -   Private Link を使用する場合は、エンドポイント要求を受け入れるように求められます。 [AWS VPC コンソール](https://us-west-2.console.aws.amazon.com/vpc/home)に移動し、 **[エンドポイント サービス]**をクリックしてエンドポイント要求を受け入れます。
 
 ## ステップ 3: 移行するオブジェクトを選択する {#step-3-choose-the-objects-to-be-migrated}
 
@@ -148,20 +148,20 @@ GRANT CREATE,SELECT,INSERT,UPDATE,DELETE,ALTER,TRUNCATE,DROP,INDEX ON *.* TO 'yo
 
     > **ヒント：**
     >
-    > -   データをTiDB Cloudに完全に移行するには、**完全なデータの移行**と<strong>増分データの</strong>移行の両方を選択します。これにより、ソース データベースとターゲット データベース間のデータの一貫性が保証されます。
-    > -   ソース データベースの既存のデータのみをTiDB Cloudに移行するには、[**完全なデータの移行**] チェックボックスのみを選択します。
+    > -   データをTiDB Cloudに完全に移行するには、**完全なデータの移行**と<strong>増分データの移行</strong>の両方を選択します。これにより、ソース データベースとターゲット データベース間のデータの一貫性が保証されます。
+    > -   ソース データベースの既存のデータのみをTiDB Cloudに移行するには、 **[完全なデータの移行]**チェックボックスのみを選択します。
 
-2.  [移行するオブジェクトの**選択] ページで、移行**するオブジェクトを選択します。 [<strong>すべて</strong>] をクリックしてすべてのオブジェクトを選択するか、[<strong>カスタマイズ</strong>] をクリックしてからオブジェクト名の横にあるチェックボックスをクリックしてオブジェクトを選択します。
+2.  **[移行するオブジェクトの選択]**ページで、移行するオブジェクトを選択します。 <strong>[すべて]</strong>をクリックしてすべてのオブジェクトを選択するか、 <strong>[カスタマイズ]</strong>をクリックしてからオブジェクト名の横にあるチェックボックスをクリックしてオブジェクトを選択します。
 
-    -   **All**をクリックすると、移行ジョブは既存のデータをソース データベース インスタンス全体からTiDB Cloudに移行し、完全な移行後に進行中の変更をレプリケートします。前の手順で [<strong>完全なデータの</strong>移行] チェックボックスと [<strong>増分データの移行</strong>] チェックボックスを選択した場合にのみ発生することに注意してください。
+    -   **All**をクリックすると、移行ジョブは既存のデータをソース データベース インスタンス全体からTiDB Cloudに移行し、完全な移行後に進行中の変更をレプリケートします。前の手順で<strong>[完全なデータの移行]</strong>チェックボックスと<strong>[増分データの移行]</strong>チェックボックスを選択した場合にのみ発生することに注意してください。
 
         <img src="https://download.pingcap.com/images/docs/tidb-cloud/migration-job-select-all.png" width="60%" />
 
-    -   [**カスタマイズ**] をクリックしていくつかのデータベースを選択すると、移行ジョブは既存のデータを移行し、選択したデータベースの進行中の変更をTiDB Cloudにレプリケートします。前の手順で [<strong>完全なデータの</strong>移行] チェックボックスと [<strong>増分データの移行</strong>] チェックボックスを選択した場合にのみ発生することに注意してください。
+    -   **[カスタマイズ]**をクリックしていくつかのデータベースを選択すると、移行ジョブは既存のデータを移行し、選択したデータベースの進行中の変更をTiDB Cloudにレプリケートします。前の手順で<strong>[完全なデータの移行]</strong>チェックボックスと<strong>[増分データの移行]</strong>チェックボックスを選択した場合にのみ発生することに注意してください。
 
         <img src="https://download.pingcap.com/images/docs/tidb-cloud/migration-job-select-db.png" width="60%" />
 
-    -   [**カスタマイズ**] をクリックしてデータセット名の下にあるいくつかのテーブルを選択すると、移行ジョブは既存のデータのみを移行し、選択したテーブルの進行中の変更をレプリケートします。後で同じデータベースに作成されたテーブルは移行されません。
+    -   **[カスタマイズ]**をクリックしてデータセット名の下にあるいくつかのテーブルを選択すると、移行ジョブは既存のデータのみを移行し、選択したテーブルの進行中の変更をレプリケートします。後で同じデータベースに作成されたテーブルは移行されません。
 
         <img src="https://download.pingcap.com/images/docs/tidb-cloud/migration-job-select-tables.png" width="60%" />
 
@@ -171,27 +171,27 @@ GRANT CREATE,SELECT,INSERT,UPDATE,DELETE,ALTER,TRUNCATE,DROP,INDEX ON *.* TO 'yo
          ![Select Databases and Deselect Some Tables](/media/tidb-cloud/migration-job-select-db-blacklist2.png)
      -->
 
-3.  [**次へ**] をクリックします。
+3.  **[次へ]**をクリックします。
 
 ## ステップ 4: 事前チェック {#step-4-precheck}
 
-[事前チェック**]**ページで、事前チェックの結果を表示できます。事前チェックに失敗した場合は、<strong>失敗</strong>または<strong>警告</strong>の詳細に従って操作し、<strong>再度チェック</strong>をクリックして再チェックする必要があります。
+**[事前チェック]**ページで、事前チェックの結果を表示できます。事前チェックに失敗した場合は、<strong>失敗</strong>または<strong>警告の</strong>詳細に従って操作し、<strong>再度チェックを</strong>クリックして再チェックする必要があります。
 
 一部のチェック項目に警告しかない場合は、リスクを評価し、警告を無視するかどうかを検討できます。すべての警告が無視された場合、移行ジョブは自動的に次のステップに進みます。
 
 事前チェック項目の詳細については、 [移行タスクの事前チェック](https://docs.pingcap.com/tidb/stable/dm-precheck)を参照してください。
 
-すべてのチェック項目が**Pass**と表示されたら、[ <strong>Next</strong> ] をクリックします。
+すべてのチェック項目が**Pass**と表示されたら、 <strong>[Next]</strong>をクリックします。
 
 ## ステップ 5: 仕様を選択して移行を開始する {#step-5-choose-a-spec-and-start-migration}
 
-[仕様を選択して移行**を開始]**ページで、移行仕様を選択します。パブリック ベータ期間中、無料の移行ジョブは 4 つの RCU (レプリケーション キャパシティ ユニット) に制限されています。
+**[仕様を選択して移行を開始]**ページで、移行仕様を選択します。パブリック ベータ期間中、無料の移行ジョブは 4 つの RCU (レプリケーション キャパシティ ユニット) に制限されています。
 
-スペックを選択したら、[ **Create Job and Start** ] をクリックして移行を開始します。
+スペックを選択したら、 **[Create Job and Start]**をクリックして移行を開始します。
 
-## ステップ 6: 移行の進行状況をビューする {#step-6-view-the-migration-progress}
+## ステップ 6: 移行の進行状況をビュー {#step-6-view-the-migration-progress}
 
-移行ジョブが作成されたら、[**移行ジョブの詳細]**ページで移行の進行状況を確認できます。移行の進行状況は、[<strong>ステージとステータス]</strong>領域に表示されます。
+移行ジョブが作成されたら、 **[移行ジョブの詳細]**ページで移行の進行状況を確認できます。移行の進行状況は、 <strong>[ステージとステータス]</strong>領域に表示されます。
 
 実行中の移行ジョブを一時停止または削除できます。
 
