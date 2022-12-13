@@ -49,7 +49,7 @@ For instructions about how to create a VPC, see [Creating a VPC](https://docs.aw
 
 ![Create VPC](/media/tidb-cloud/aws-dms-from-oracle-to-tidb-1.png)
 
-## Step 2. Create Oracle DB instance
+## Step 2. Create an Oracle DB instance
 
 Create an Oracle DB instance in VPC, and remember the password and give it public access. You must enable public access to use the AWS Schema Conversion Tool. Note that giving public access in the product environment is not a best practice.
 
@@ -88,7 +88,7 @@ After you finish executing the SQL script, check the data in Oracle. The followi
 
     ![Connect to TiDB Cloud Serverless Tier](/media/tidb-cloud/aws-dms-from-oracle-to-tidb-7.png)
 
-## Step 5. Create AWS DMS replication instance
+## Step 5. Create an AWS DMS replication instance
 
 1. Go to the [Replication instances](https://console.aws.amazon.com/dms/v2/home#replicationInstances) page in the AWS DMS console, and switch to the corresponding region.
 
@@ -98,7 +98,7 @@ After you finish executing the SQL script, check the data in Oracle. The followi
 
 ## Step 6. Create DMS endpoints
 
-1. In the [AWS DMS console](https://console.aws.amazon.com/dms/v2/home), click the replication instance that you just created. 
+1. In the [AWS DMS console](https://console.aws.amazon.com/dms/v2/home), click the replication instance that you just created.
 
 2. Create the Oracle source endpoint and the TiDB target endpoint.
 
