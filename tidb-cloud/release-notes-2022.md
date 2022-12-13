@@ -8,6 +8,43 @@ aliases: ['/tidbcloud/beta/supported-tidb-versions','/tidbcloud/release-notes']
 
 This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-cloud/) in 2022.
 
+## December 13, 2022
+
+**General changes**
+
+- Introduce TiDB Cloud SQL Editor (Beta) for Serverless Tier.
+
+    This is a web-based SQL editor that allows customers to directly edit and run SQL queries against databases of Serverless Tier.
+
+    For Serverless Tier, the Web SQL Shell is replaced by the SQL Editor.
+
+- Support using Changefeed to stream data for Dedicated Tier.
+
+    - Support streaming data change logs to MySQL.
+
+      When data is migrated from MySQL/Aurora to TiDB, it is often necessary to use MySQL as a stand-by database to prevent unexpected data migration problems. In this case, you can use MySQL sink to stream data from TiDB to MySQL.
+
+    - Support streaming data change logs to Apache Kafka (Beta).
+
+      Streaming TiDB data to the message queue is a very common requirement for data integration scenarios. You can use Kafka sink to realize integration with other data processing systems (such as snowflake), or support business consuming.
+
+    For more information, refer to [Changefeed Overview](https://docs.pingcap.com/tidbcloud/changefeed-overview).
+
+- Organization owners can edit the organization's name.
+
+**Console changes**
+
+- Optimize the navigation layout of the TiDB Cloud console to provide users with a new navigation experience.
+
+    The new layout includes the following changes:
+
+    - Introduce the left navigation bar to maximize screen usage efficiency.
+    - Adopt a flatter navigation hierarchy.
+
+- Improve the **Connect** experience for Serverless Tier users.
+
+    Now developers can connect to SQL editor or with their preferred tools in just a few clicks without context switching.
+
 ## December 6, 2022
 
 **General changes**
