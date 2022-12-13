@@ -37,7 +37,7 @@ For each monthly invoice:
 
 To view the list of invoices, perform the following steps:
 
-1. Click the account name in the upper-right corner of the TiDB Cloud console.
+1. Click <MDSvgIcon name="icon-top-account-settings" /> **Account** in the upper-right corner of the TiDB Cloud console.
 
     > **Note:**
     >
@@ -57,7 +57,7 @@ After setting the payment method, TiDB Cloud will generate the invoice and billi
 
 To view the billing details, perform the following steps:
 
-1. Click the account name in the upper-right corner of the TiDB Cloud console.
+1. Click <MDSvgIcon name="icon-top-account-settings" /> **Account** in the upper-right corner of the TiDB Cloud console.
 
     > **Note:**
     >
@@ -87,7 +87,7 @@ The detailed information of your credits is available on the **Credits** page, i
 
 To view this page, perform the following steps:
 
-1. Click the account name in the upper-right corner of the TiDB Cloud console.
+1. Click <MDSvgIcon name="icon-top-account-settings" /> **Account** in the upper-right corner of the TiDB Cloud console.
 
     > **Note:**
     >
@@ -128,7 +128,7 @@ The fee is deducted from a bound credit card according to your cluster usage. To
 
 - Anytime in the billing console:
 
-    1. Click the account name in the upper-right corner of the TiDB Cloud console.
+    1. Click <MDSvgIcon name="icon-top-account-settings" /> **Account** in the upper-right corner of the TiDB Cloud console.
 
         > **Note:**
         >
@@ -146,7 +146,7 @@ You can bind multiple credit cards, and set one of them as the default credit ca
 
 To set the default credit card, perform the following steps:
 
-1. Click the account name in the upper-right corner of the TiDB Cloud console.
+1. Click <MDSvgIcon name="icon-top-account-settings" /> **Account** in the upper-right corner of the TiDB Cloud console.
 
     > **Note:**
     >
@@ -162,7 +162,7 @@ The billing profile information includes the business legal address and tax regi
 
 To edit the billing profile information, perform the following steps:
 
-1. Click the account name in the upper-right corner of the TiDB Cloud console.
+1. Click <MDSvgIcon name="icon-top-account-settings" /> **Account** in the upper-right corner of the TiDB Cloud console.
 
     > **Note:**
     >
@@ -178,7 +178,7 @@ If you are the owner or billing administrator of your organization, you can mana
 
 If you have agreed with our sales on a contract and received an email to review and accept the contract online, you can do the following:
 
-1. Click the account name in the upper-right corner of the TiDB Cloud console.
+1. Click <MDSvgIcon name="icon-top-account-settings" /> **Account** in the upper-right corner of the TiDB Cloud console.
 
     > **Note:**
     >
