@@ -119,10 +119,17 @@ If your TiDB cluster is in a local IDC, or the network between the Dumpling serv
 
 To ensure that newly written data is not lost during incremental migration, you need to disable the upstream cluster's garbage collection (GC) mechanism before starting the migration to prevent the system from cleaning up historical data.
 
+Run the following command to verify whether the setting is successful.
+
 ```sql
-mysql > SET GLOBAL tidb_gc_enable = FALSE;
-## Verify whether the setting is successful. 0 indicates that it is disabled.
-mysql > SELECT @@global.tidb_gc_enable;
+SET GLOBAL tidb_gc_enable = FALSE;
+
+```
+
+The following is an example output, in which `0` indicates that it is disabled.
+
+```sql
+SELECT @@global.tidb_gc_enable;
 +-------------------------+
 | @@global.tidb_gc_enable |
 +-------------------------+
@@ -307,10 +314,16 @@ To replicate incremental data, do the following:
 
 5. Enable the GC mechanism again in the upstream cluster. If no error or delay is found in incremental replication, enable the GC mechanism to resume garbage collection of the cluster.
 
+    Run the following command to verify whether the setting works.
+
     ```sql
-    mysql > SET GLOBAL tidb_gc_enable = TRUE;
-    ## Verify whether the setting works. 1 indicates that the GC mechanism is enabled.
-    mysql > SELECT @@global.tidb_gc_enable;
+    SET GLOBAL tidb_gc_enable = TRUE;
+    ```
+
+    The following is an example output, in which `1` indicates that it is disabled.
+
+    ```sql
+    SELECT @@global.tidb_gc_enable;
     +-------------------------+
     | @@global.tidb_gc_enable |
     +-------------------------+
