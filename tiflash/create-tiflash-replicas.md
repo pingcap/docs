@@ -159,7 +159,7 @@ Before TiFlash replicas are added, each TiKV instance performs a full table scan
    ```sql
    SET CONFIG tikv `server.snap-max-write-bytes-per-sec` = '300MiB';
    ```
-   
+
    After adjusting the preceding configurations, you cannot observe the acceleration for now, as the replication speed is still restricted by the PD limit globally.
 
 2. Use [PD Control](https://docs.pingcap.com/tidb/stable/pd-control) to progressively ease the new replica speed limit.
@@ -173,7 +173,7 @@ Before TiFlash replicas are added, each TiKV instance performs a full table scan
    > In the preceding command, you need to replace `<CLUSTER_VERSION>` with the actual cluster version and `<PD_ADDRESS>:2379` with the address of any PD node. For example:
    >
    > ```shell
-   > tiup ctl:v6.1.1 pd -u http://192.168.1.4:2379 store limit all engine tiflash 60 add-peer
+   > tiup ctl:v6.1.3 pd -u http://192.168.1.4:2379 store limit all engine tiflash 60 add-peer
    > ```
 
    Within a few minutes, you will observe a significant increase in CPU and disk IO resource usage of the TiFlash nodes, and TiFlash should create replicas faster. At the same time, the TiKV nodes' CPU and disk IO resource usage increases as well.
