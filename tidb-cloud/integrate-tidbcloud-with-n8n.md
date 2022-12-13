@@ -120,7 +120,7 @@ If you haven't got a TiDB Cloud Serverless Tier cluster, you can use this node t
 5. Select `Insert` from the **Operation** list.
 6. Enter the value in **Cluster**, **User**, **Database** and **Password** fields.
 7. Choose the `execute_workflow` table in the **Table** list.
-8. Enter `id,name` in the **Columns** field.
+8. Enter `name` in the **Columns** field.
 
 ## Step 4: Run Your Workflow
 
