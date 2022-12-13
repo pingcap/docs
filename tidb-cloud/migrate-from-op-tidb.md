@@ -204,8 +204,6 @@ Do the following to export data from the upstream TiDB cluster to Amazon S3 usin
 
 After you export data from the OP TiDB cluster to Amazon S3, you need to migrate the data to TiDB Cloud.
 
-If your TiDB cluster is in a local IDC, or the network between the Dumpling server and Amazon S3 is not connected, you can export the files to the local storage first, and then upload them to Amazon S3 later.
-
 1. Get the Account ID and External ID of the cluster in the TiDB Cloud console. For more information, see [Step 2. Configure Amazon S3 access](/tidb-cloud/tidb-cloud-auditing.md#step-2-configure-amazon-s3-access).
 
     The following screenshot shows how to get the Account ID and External ID:
