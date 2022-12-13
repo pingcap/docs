@@ -12,7 +12,7 @@ The overall procedure is as follows:
 1. Build the environment and prepare the tools.
 2. Migrate full data. The process is as follows:
    1. Export data from OP TiDB to Amazon S3 using Dumpling.
-   2. Import from Amazon S3 to TiDB Cloud.
+   2. Import data from Amazon S3 to TiDB Cloud.
 3. Replicate incremental data by using TiCDC.
 4. Verify the migrated data.
 
@@ -24,7 +24,7 @@ Before migration, you need to prepare the following:
 
 - An [AWS account](https://docs.aws.amazon.com/AmazonS3/latest/userguide/setting-up-s3.html#sign-up-for-aws-gsg) with administrator access
 - An [AWS S3 bucket](https://docs.aws.amazon.com/AmazonS3/latest/userguide/creating-bucket.html)
-- [A TiDB Cloud account with the administrator access and create a TiDB Cloud (AWS) cluster](/tidb-cloud/tidb-cloud-quickstart.md)
+- [A TiDB Cloud account with the administrator access and a TiDB Cloud (AWS) cluster](/tidb-cloud/tidb-cloud-quickstart.md)
 
 ## Prepare tools
 
@@ -104,9 +104,9 @@ You need to [deploy TiCDC](https://docs.pingcap.com/tidb/dev/deploy-ticdc) to re
 
 ## Migrate full data
 
-To migrate data from the on-premises TiDB cluster to TiDB Cloud, perform a full data migration as follows:
+To migrate data from the OP TiDB cluster to TiDB Cloud, perform a full data migration as follows:
 
-1. Migrate data from the on-premises TiDB cluster to Amazon S3.
+1. Migrate data from the OP TiDB cluster to Amazon S3.
 2. Migrate data from Amazon S3 to TiDB Cloud.
 
 ### Migrate data from the OP TiDB cluster to Amazon S3
@@ -123,8 +123,6 @@ Run the following command to verify whether the setting is successful.
 
 ```sql
 SET GLOBAL tidb_gc_enable = FALSE;
-
-```
 
 The following is an example output, in which `0` indicates that it is disabled.
 
@@ -318,7 +316,7 @@ To replicate incremental data, do the following:
     SET GLOBAL tidb_gc_enable = TRUE;
     ```
 
-    The following is an example output, in which `1` indicates that it is disabled.
+    The following is an example output, in which `1` indicates that GC is disabled.
 
     ```sql
     SELECT @@global.tidb_gc_enable;
