@@ -208,35 +208,35 @@ TiDB 6.5.0 is a Long-Term Support Release (LTS).
 
 ### Data migration
 
-* 支持导出和导入压缩后的 CSV、SQL 文件 [#38514](https://github.com/pingcap/tidb/issues/38514) @[lichunzhu](https://github.com/lichunzhu) **tw@hfxsd**
+* Support exporting and importing SQL and CSV files in the following compression formats: gzip, snappy and zstd [#38514](https://github.com/pingcap/tidb/issues/38514) @[lichunzhu](https://github.com/lichunzhu) **tw@hfxsd**
 
-    Dumpling 支持将数据导出为 SQL、CSV 的压缩文件，支持 gzip/snappy/zstd 三种压缩格式。Lightning 支持导入压缩后的 SQL、CSV 文件，支持gzip/snappy/zstd 三种压缩格式。
+    Dumpling supports exporting data to compressed SQL and CSV files in the following compression formats: gzip, snappy, and zstd. TiDB Lightning also supports importing compressed files in these formats.
 
-    之前用户导出数据或者导入数据都需要提供较大的存储空间，用于存储导出或者即将导入的非压缩后的 csv 、sql文件，导致存储成本增加。该功能发布后，通过压缩存储空间，可以大大降低用户的存储成本。
+    Previously, you had to provide large storage space for exporting or importing data to store the uncompressed CSV and SQL files, resulting in high storage costs. With the release of this feature, you can greatly reduce your storage costs by compressing the storage space.
 
-    更多信息，请参考[用户文档](https://github.com/pingcap/tidb/issues/38514)。
+    For more information, see [User document](/dumpling-overview.md#improve-export-efficiency-through-concurrency).
 
-* 优化了 binlog 解析能力 [#无](无) @[gmhdbjd](https://github.com/GMHDBJD) **tw@hfxsd**
+* Optimize binlog parsing capability [#924](https://github.com/pingcap/dm/issues/924) @[gmhdbjd](https://github.com/GMHDBJD) **tw@hfxsd**
 
-    可将不在迁移任务里的库、表对象的 binlog event 过滤掉不做解析，从而提升解析效率和稳定性。该策略在 6.5 版本默认生效，用户无需额外操作。
+    TiDB can filter out binlog events of the schemas and tables that are not in the migration task, thus improving the parsing efficiency and stability. This policy takes effect by default in v6.5.0. No additional configuration is required.
+    
+    Previously, even if only a few tables were migrated, the entire binlog file upstream had to be parsed. The binlog events of the tables in the binlog file that did not need to be migrated still had to be parsed, which was not efficient. Meanwhile, if the binlog events of the schemas and tables that are not in the migration task do not support parsing, the task will fail. By only parsing the binlog events of the tables in the migration task, the binlog parsing efficiency can be greatly improved and the task stability can be enhanced.
 
-    原先用户仅迁移少数几张表，也需要解析上游整个 binlog 文件，即仍需要解析该 binlog 文件中不需要迁移的表的 binlog event，效率会比较低，同时如果不在迁移任务里的库表的 binlog event 不支持解析，还会导致任务失败。通过只解析在迁移任务里的库表对象的 binlog event 可以大大提升 binlog 解析效率，提升任务稳定性。
+* The disk quota in TiDB Lightning is GA. It can prevent TiDB Lightning tasks from overwriting local disks [#446](https://github.com/pingcap/tidb-lightning/issues/446) @[buchuitoudegou](https://github.com/buchuitoudegou) **tw@hfxsd**
 
-* TiDB Lightning 支持  disk quota 特性 GA，可避免 TiDB Lightning 任务写满本地磁盘 [#无](无) @[buchuitoudegou](https://github.com/buchuitoudegou) **tw@hfxsd**
+    You can configure disk quota for TiDB Lightning. When there is not enough disk quota, TiDB Lightning pauses the process of reading the source data and writing temporary files, and writes the sorted key-values to TiKV first, and then continues the import process after TiDB Lightning deletes the local temporary files.
 
-    你可以为 TiDB Lightning 配置磁盘配额 (disk quota)。当磁盘配额不足时，TiDB Lightning 会暂停读取源数据以及写入临时文件的过程，优先将已经完成排序的 key-value 写入到 TiKV。TiDB Lightning 删除本地临时文件后，再继续导入过程。
+    Previously, when TiDB Lightning imported data using physical mode, it would create a large number of temporary files on the local disk for encoding, sorting, and splitting the raw data. When your local disk ran out of space, TiDB Lightning would exit with an error due to failing to write to the file. With this feature, TiDB Lightning tasks can avoid overwriting the local disk.
 
-    有这个功能之前，TiDB Lightning 在使用物理模式导入数据时，会在本地磁盘创建大量的临时文件，用来对原始数据进行编码、排序、分割。当用户本地磁盘空间不足时，TiDB Lightning 会由于写入文件失败而报错退出。
+    For more information, see [User document](/tidb-lightning/tidb-lightning-physical-import-mode-usage.md#configure-disk-quota-new-in-v620).
 
-    更多信息，请参考[用户文档]( https://docs.pingcap.com/tidb/v6.4/tidb-lightning-physical-import-mode-usage#configure-disk-quota-new-in-v620)。
+* Continuous data validation in DM is GA [#4426](https://github.com/pingcap/tiflow/issues/4426) @[D3Hunter](https://github.com/D3Hunter) **tw@hfxsd**
 
-* GA DM 增量数据校验的功能 [#4426](https://github.com/pingcap/tiflow/issues/4426) @[D3Hunter](https://github.com/D3Hunter) **tw@hfxsd**
+    In the process of migrating incremental data from upstream to downstream databases, there is a small probability that the flow of data causes errors or data loss. In scenarios that rely on strong data consistency, such as credit and securities businesses, you can perform a full volume checksum on the data after the data migration is complete to ensure data consistency. However, in some scenarios with incremental replication, upstream and downstream writes are continuous and uninterrupted because the upstream and downstream data is constantly changing, making it difficult to perform consistency checks on all the data in the tables.
 
-    在将增量数据从上游迁移到下游数据库的过程中，数据的流转有小概率导致错误或者丢失的情况。对于需要依赖于强数据一致的场景，如信贷、证券等业务，你可以在数据迁移完成之后对数据进行全量校验，确保数据的一致性。然而，在某些增量复制的业务场景下，上游和下游的写入是持续的、不会中断的，因为上下游的数据在不断变化，导致用户难以对表里面的全部数据进行一致性校验。
+    Previously, you needed to interrupt the business to do the full data verification, which would affect your business. Now, with this feature, you can perform incremental data verification without interrupting the business.
 
-    过去，需要中断业务，做全量数据校验，会影响用户业务。现在推出该功能后，在一些不可中断的业务场景，无需中断业务，通过该功能就可以实现增量数据校验。
-
-    更多信息，请参考[用户文档]( https://docs.pingcap.com/tidb/v6.4/dm-continuous-data-validation)。
+    For more information, see [User document](/dm/dm-continuous-data-validation.md).
 
 ### TiDB data share subscription
 
@@ -363,22 +363,22 @@ TiDB 6.5.0 is a Long-Term Support Release (LTS).
 
 + PD
 
-    - 优化锁的粒度以减少锁争用，提升高并发下心跳的处理能力 [#5586](https://github.com/tikv/pd/issues/5586) @[rleungx](https://github.com/rleungx)
-    - 优化调度器在大规模集群下的性能问题，提升调度策略生产速度 [#5473](https://github.com/tikv/pd/issues/5473) @[bufferflies](https://github.com/bufferflies)
-    - 增加 btree 的泛型性支持 [#5606](https://github.com/tikv/pd/issues/5606) @[rleungx](https://github.com/rleungx)
-    - 优化心跳处理过程，减少一些不要的开销 [#5648](https://github.com/tikv/pd/issues/5648)@[rleungx](https://github.com/rleungx)
-    - 增加了自动清理 tombstone store 的功能 [#5348](https://github.com/tikv/pd/issues/5348) @[nolouch](https://github.com/nolouch)
+    - Optimize the granularity of locks to reduce lock contention and improve the handling capability of heartbeats under high concurrency [#5586](https://github.com/tikv/pd/issues/5586) @[rleungx](https://github.com/rleungx)
+    - Optimize scheduler performance for large-scale clusters and improve production speed of the scheduling policy [#5473](https://github.com/tikv/pd/issues/5473) @[bufferflies](https://github.com/bufferflies)
+    - Improve the speed of loading Regions [#5606](https://github.com/tikv/pd/issues/5606) @[rleungx](https://github.com/rleungx)
+    - Improve the performance of handling Region heartbeats [#5648](https://github.com/tikv/pd/issues/5648)@[rleungx](https://github.com/rleungx)
+    - Add the function to automatically GC the tombstone store [#5348](https://github.com/tikv/pd/issues/5348) @[nolouch](https://github.com/nolouch)
 
 + TiFlash
 
-    - 提升了 TiFlash 在 SQL 端没有攒批的场景的写入性能 [#6404](https://github.com/pingcap/tiflash/issues/6404) @[lidezhu](https://github.com/lidezhu)
-    - 增加了 TableFullScan 的输出信息 [#5926](https://github.com/pingcap/tiflash/issues/5926) @[hongyunyan](https://github.com/hongyunyan)
+    - Improve write performance in scenarios where there is no batch processing on the SQL side [#6404](https://github.com/pingcap/tiflash/issues/6404) @[lidezhu](https://github.com/lidezhu)
+    - Add more details for TableFullScan in the `explain analyze` output [#5926](https://github.com/pingcap/tiflash/issues/5926) @[hongyunyan](https://github.com/hongyunyan)
 
 + Tools
 
     + TiDB Dashboard
 
-        - 在慢查询页面新增三个字段 `是否由 prepare 语句生成`，`查询计划是否来自缓存`，`查询计划是否来自绑定` 的描述。 [#1445](https://github.com/pingcap/tidb-dashboard/pull/1445/files) @[shhdgit](https://github.com/shhdgit)
+        - Add three new fields to the slow query page: "Is Prepared?"，"Is Plan from Cache?"，"Is Plan from Binding?" [#1451](https://github.com/pingcap/tidb-dashboard/issues/1451) @[shhdgit](https://github.com/shhdgit)
 
     + Backup & Restore (BR)
 
@@ -424,13 +424,13 @@ TiDB 6.5.0 is a Long-Term Support Release (LTS).
 
 + PD
 
-    - 修复热点调度配置在没有修改的情况下不持久化的问题 [#5701](https://github.com/tikv/pd/issues/5701)  @[HunDunDM](https://github.com/HunDunDM)
-    - 修复 rank-formula-version 在升级过程中没有保持升级前的配置的问题 [#5699](https://github.com/tikv/pd/issues/5698) @[HunDunDM](https://github.com/HunDunDM)
+    - Fix the issue that the `balance-hot-region-scheduler` configuration is not persisted if not modified [#5701](https://github.com/tikv/pd/issues/5701)  @[HunDunDM](https://github.com/HunDunDM)
+    - Fix the issue that `rank-formula-version` does not retain the pre-upgrade configuration during the upgrade process [#5698](https://github.com/tikv/pd/issues/5698) @[HunDunDM](https://github.com/HunDunDM)
 
 + TiFlash
 
-    - 修复 TiFlash 重启不能正确合并小文件的问题 [#6159](https://github.com/pingcap/tiflash/issues/6159) @[lidezhu](https://github.com/lidezhu)
-    - 修复 TiFlash Open File OPS 过高的问题 [#6345](https://github.com/pingcap/tiflash/issues/6345) @[JaySon-Huang](https://github.com/JaySon-Huang)
+    - Fix the issue that minor compaction does not work as expected after TiFlash restarts [#6159](https://github.com/pingcap/tiflash/issues/6159) @[lidezhu](https://github.com/lidezhu)
+    - Fix the issue that TiFlash Open File OPS is too high [#6345](https://github.com/pingcap/tiflash/issues/6345) @[JaySon-Huang](https://github.com/JaySon-Huang)
 
 + Tools
 
