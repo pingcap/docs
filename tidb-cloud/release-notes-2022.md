@@ -8,6 +8,43 @@ aliases: ['/tidbcloud/beta/supported-tidb-versions','/tidbcloud/release-notes']
 
 This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-cloud/) in 2022.
 
+## December 13, 2022
+
+**General changes**
+
+- Introduce TiDB Cloud SQL Editor (Beta) for Serverless Tier.
+
+    This is a web-based SQL editor that allows you to directly edit and run SQL queries against databases of Serverless Tier. You can locate it easily in the left navigation bar of your Serverless Tier cluster.
+
+    For Serverless Tier, the Web SQL Shell is replaced by the SQL Editor.
+
+- Support using [Changefeeds](/tidb-cloud/changefeed-overview.md) to stream data for Dedicated Tier.
+
+    - Support [streaming data change logs to MySQL](/tidb-cloud/changefeed-sink-to-mysql.md).
+
+      When data is migrated from MySQL/Aurora to TiDB, it is often necessary to use MySQL as a stand-by database to prevent unexpected data migration problems. In this case, you can use MySQL sink to stream data from TiDB to MySQL.
+
+    - Support [streaming data change logs to Apache Kafka](/tidb-cloud/changefeed-sink-to-apache-kafka.md) (Beta).
+
+      Streaming TiDB data to the message queue is a very common requirement for data integration scenarios. You can use Kafka sink to realize integration with other data processing systems (such as Snowflake), or support business consuming.
+
+    For more information, refer to [Changefeed Overview](/tidb-cloud/changefeed-overview.md).
+
+- Organization owners can edit the organization's name in **Organization Settings**.
+
+**Console changes**
+
+- Optimize the navigation layout of the [TiDB Cloud console](https://tidbcloud.com) to provide users with a new navigation experience.
+
+    The new layout includes the following changes:
+
+    - Introduce the left navigation bar to maximize screen usage efficiency.
+    - Adopt a flatter navigation hierarchy.
+
+- Improve the [**Connect**](/tidb-cloud/connect-to-tidb-cluster.md) experience for Serverless Tier users.
+
+    Now developers can connect to SQL editor or with their preferred tools in just a few clicks without context switching.
+
 ## December 6, 2022
 
 **General changes**
