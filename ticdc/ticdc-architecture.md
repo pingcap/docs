@@ -13,7 +13,7 @@ Consisting of multiple TiCDC nodes, a TiCDC cluster uses a distributed and state
 
 ## TiCDC components
 
-In the preceding diagram, a TiCDC cluster consists of multiple nodes running TiCDC instances. Each TiCDC instance carries a Capture process. One of the Capture processes is elected as the owner Capture, which is responsible for scheduling workload, replicating DDL statements, and performing other management tasks.
+In the preceding diagram, a TiCDC cluster consists of multiple nodes running TiCDC instances. Each TiCDC instance carries a Capture process. One of the Capture processes is elected as the owner Capture, which is responsible for scheduling workload, replicating DDL statements, and performing management tasks.
 
 Each Capture process contains one or multiple Processor threads for replicating data from tables in the upstream TiDB. Because table is the minimum unit of data replication in TiCDC, a Processor is composed of multiple table pipelines.
 
@@ -25,7 +25,7 @@ These components are connected in serial and interwork with each other to comple
 
 - Puller: pulls DDL and row changes from TiKV nodes.
 - Sorter: sorts the changes received from TiKV nodes in ascending order of timestamps.
-- Mounter: converts the changes into a format that TiCDC can process based on the schema information.
+- Mounter: converts the changes into a format that TiCDC sink can process based on the schema information.
 - Sink: replicates the changes to the downstream system.
 
 To realize high availability, each TiCDC cluster runs multiple TiCDC nodes. These nodes regularly report their status to the etcd cluster in PD, and elect one of the nodes as the owner of the TiCDC cluster. The owner node schedules data based on the status stored in etcd and writes the scheduling results to etcd. The Processor completes tasks according to the status in etcd. If the node running the Processor fails, the cluster schedules tables to other nodes. If the owner node fails, the Capture processes in other nodes will elect a new owner. See the following figure:
