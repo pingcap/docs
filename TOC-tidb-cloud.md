@@ -114,6 +114,10 @@
         - [Naming Conventions for Data Import](/tidb-cloud/naming-conventions-for-data-import.md)
         - [Troubleshoot Access Denied Errors during Data Import from Amazon S3](/tidb-cloud/troubleshoot-import-access-denied-error.md)
   - [Export Data from TiDB](/tidb-cloud/export-data-from-tidb-cloud.md)
+- Stream data
+  - [Changefeed Overview](/tidb-cloud/changefeed-overview.md)
+  - [To MySQL sink](/tidb-cloud/changefeed-sink-to-mysql.md)
+  - [To Kafka sink](/tidb-cloud/changefeed-sink-to-apache-kafka.md)
 - Back Up and Restore
   - [Automatic Backup](/tidb-cloud/backup-and-restore.md)
   - [Manual Backup](/tidb-cloud/backup-and-restore.md#manual-backup)
@@ -182,6 +186,7 @@
   - [Credits](/tidb-cloud/tidb-cloud-billing.md#credits)
   - [Payment Method Setting](/tidb-cloud/tidb-cloud-billing.md#payment-method)
   - [Billing from AWS or GCP Marketplace](/tidb-cloud/tidb-cloud-billing.md#billing-from-aws-marketplace-or-google-cloud-marketplace)
+  - [Billing for Changefeeed](/tidb-cloud/tidb-cloud-billing-ticdc-rcu.md)
 - API
   - [API Overview](/tidb-cloud/api-overview.md)
   - [API Reference](https://docs.pingcap.com/tidbcloud/api/v1beta)
