@@ -32,7 +32,7 @@ To connect to a Serverless Tier cluster via standard connection, perform the fol
 
 3. In the dialog, select your preferred connection method and operating system, and then connect to your cluster with the connection string.
 
-    If you have not set a password yet, click **Generate password**. TiDB Cloud generates a random password for you. The generated password will not show again, so save your password in a secure location.
+    If you have not set a password yet, click **Create password** to generate a random password. The generated password will not show again, so save your password in a secure location.
 
     > **Note:**
     >
