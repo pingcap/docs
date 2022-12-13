@@ -128,7 +128,7 @@ If you find any error, you can go back to fix the error. If there is no error, y
 
 ## Manage the changefeed
 
-After a changefeed is created, you can navigate to the **Data Replication** tab of your TiDB cluster, click the **Changefeed** tab, and click **Sink to Apache Kafka** to open the **Changefeed Detail** dialog.
+After a changefeed is created, you can navigate to the **Changefeed** tab of your TiDB cluster and click **Sink to Apache Kafka** to open the **Changefeed Detail** dialog.
 
 In the **Changefeed Detail** dialog, you can manage the changefeed as follows:
 
