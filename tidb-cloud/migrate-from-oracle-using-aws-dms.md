@@ -35,6 +35,7 @@ The following diagram illustrates the high-level architecture.
 
 You might need the following prerequisites:
 
+- [AWS DMS Prerequisites](/tidb-cloud/migrate-from-mysql-using-aws-dms.md#Prerequisites)
 - [AWS Cloud Account](https://aws.amazon.com)
 - [TiDB Cloud Account](https://tidbcloud.com)
 - [DBeaver](https://dbeaver.io/)
@@ -138,8 +139,10 @@ Connect to [TiDB Cloud Serverless Tier](https://tidbcloud.com/console/clusters/c
 
 ![Check Data In TiDB](/media/tidb-cloud/aws-dms-from-oracle-to-tidb-14.png)
 
-## Limitation
+## Summary
 
-With AWS DMS, you can successfully migrate data from any upstream AWS RDS database following the example in this document. There is a limitation:
+With AWS DMS, you can successfully migrate data from any upstream AWS RDS database following the example in this document.
 
-- When you migrate your schema, some character sets or collations are not supported in TiDB, such as `utf8mb4_0900_ai_ci`. For a complete list of TiDB supported charset/collation, see [Character Set and Collation](https://docs.pingcap.com/tidb/stable/character-set-and-collation).
+If you encounter any issues or failures during the migration, you can check the log information in [CloudWatch](https://console.aws.amazon.com/cloudwatch/home) to troubleshoot the issues.
+
+![Troubleshooting](/media/tidb-cloud/aws-dms-tidb-cloud/aws-dms-to-tidb-cloud-troubleshooting.png)
