@@ -40,13 +40,13 @@ TiDB Cloud [Serverless Tier](/tidb-cloud/select-cluster-tier.md#serverless-tier-
 
 After your TiDB Cloud cluster is created, you can quickly start experimenting with TiDB using the pre-loaded sample data on TiDB Cloud.
 
-On the **Clusters** page, click **Playground** to run queries instantly on TiDB Cloud.
+On the [**Clusters**](https://tidbcloud.com/console/clusters) page, click **Playground** to run queries instantly on TiDB Cloud.
 
 ## Step 3. Load sample data
 
 After trying **Plaground**, you can load sample data to your TiDB Cloud cluster. We provide Capital Bikeshare sample data for you to easily import data and run sample queries.
 
-1. Navigate to the **Clusters** page.
+1. Navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page.
 
 2. In the area of your newly created cluster, click **...** in the upper-right corner and select **Import Data**. The **Data Import** page is displayed.
 
