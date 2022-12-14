@@ -5,7 +5,7 @@ summary: Learn how to connect TiDB Cloud to 5000+ Apps with Zapier.
 
 # Integrate TiDB Cloud with Zapier
 
-![Zapier overview](/media/tidb-cloud/zapier/zapier-overview.png)![img.png](img.png)
+![Zapier overview](/media/tidb-cloud/zapier/zapier-overview.png)
 
 
 [Zapier](https://zapier.com) is a no-code automation tool that lets you easily create workflows that involve thousands of apps and services.
