@@ -200,7 +200,7 @@ You can also use the AWS dashboard to configure the VPC peering connection.
 
     5. From the setting drop-down list, click **Edit DNS resolution**. Enable DNS resolution and click **Save**.
 
-Now you have successfully set up the VPC peering connection. Next, [connect to the TiDB cluster  via VPC peering](#connect-to-the-tidb-cluster).
+Now you have successfully set up the VPC peering connection. Next, [connect to the TiDB cluster via VPC peering](#connect-to-the-tidb-cluster).
 
 ## Set up VPC peering on GCP
 

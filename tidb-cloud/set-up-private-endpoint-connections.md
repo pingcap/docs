@@ -1,6 +1,6 @@
 ---
 title: Connect via Private Endpoint
-summary:  Learn how to connect to your TiDB Cloud cluster via private endpoint.
+summary: Learn how to connect to your TiDB Cloud cluster via private endpoint.
 ---
 
 # Connect via Private Endpoint
