@@ -13,7 +13,7 @@ This feature helps you migrate your database and its ongoing changes to TiDB Clo
 
 - The Data Migration feature is available only for **Dedicated Tier** clusters.
 
-- The Data Migration feature is only available to clusters in the projects that are created in the AWS Oregon (us-west-2) and AWS Singapore (ap-southeast-1) regions after November 9, 2022. If your cluster was created before the date or if your cluster is in another region, this feature is not available to your cluster and the **Data Migration** tab will not be displayed on the cluster overview page in the TiDB Cloud console.
+- The Data Migration feature is only available to clusters in the projects that are created in the AWS Oregon (us-west-2) and AWS Singapore (ap-southeast-1) regions after November 9, 2022. If your cluster was created before the date or if your cluster is in another region, this feature is not available to your cluster and the **Data Migration** will not be displayed on the cluster overview page in the TiDB Cloud console.
 
 - Currently, the Data Migration feature is in beta, and you can create only one migration job **for free** for each organization. To create more migration jobs, you need to [file a support ticket](/tidb-cloud/tidb-cloud-support.md).
 
@@ -103,7 +103,7 @@ To perform incremental data migration, make sure you have enabled binlogs of the
 
 ## Step 1: Go to the **Data Migration** page
 
-1. Log in to the [TiDB Cloud console](https://tidbcloud.com/console/clusters). Navigate to the **Clusters** page for your project.
+1. Log in to the [TiDB Cloud console](https://tidbcloud.com/), navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page, and choose your target project on the top of the left navigation bar.
 
 2. On the **Clusters** page, click the name of your cluster, and click the **Data Migration** tab. The **Data Migration** page is displayed.
 

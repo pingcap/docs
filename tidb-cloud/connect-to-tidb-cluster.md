@@ -10,10 +10,10 @@ After your TiDB cluster is created on TiDB Cloud, you can use one of the followi
 + Connect via a SQL client
 
     - [Connect via standard connection](#connect-via-standard-connection): The standard connection exposes a public endpoint with traffic filters, so you can connect to your TiDB cluster from your laptop. You can connect to your TiDB clusters using TLS, which ensures the security of data transmission from your applications to TiDB clusters.
-    - [Connect via private endpoint](#connect-via-private-endpoint-recommended): Private endpoint connection provides a private endpoint to allow clients in your VPC to securely access services over AWS PrivateLink, which provides highly secure and one-way access to database services with simplified network management. Note that you cannot connect to [Serverless Tier clusters](/tidb-cloud/select-cluster-tier.md#serverless-tier-beta) using the private endpoint.
-    - [Connect via VPC peering](#connect-via-vpc-peering): If you want lower latency and more security, set up VPC peering and connect via a private endpoint using a VM instance on the corresponding cloud provider in your cloud account. Note that you cannot connect to [Serverless Tier clusters](/tidb-cloud/select-cluster-tier.md#serverless-tier-beta) using VPC peering.
+    - [Connect via private endpoint](#connect-via-private-endpoint-recommended) (only available for Dedicated Tier): Private endpoint connection provides a private endpoint to allow clients in your VPC to securely access services over AWS PrivateLink, which provides highly secure and one-way access to database services with simplified network management.
+    - [Connect via VPC peering](#connect-via-vpc-peering) (only available for Dedicated Tier): If you want lower latency and more security, set up VPC peering and connect via a private endpoint using a VM instance on the corresponding cloud provider in your cloud account.
 
-- [Connect via SQL shell](#connect-via-sql-shell): to try TiDB SQL and test out TiDB's compatibility with MySQL quickly, or administer user privileges
+- [Connect via SQL Shell](#connect-via-sql-shell) (only available for Dedicated Tier): to try TiDB SQL and test out TiDB's compatibility with MySQL quickly, or administer user privileges
 
 > **Tip:**
 >
@@ -26,11 +26,13 @@ After your TiDB cluster is created on TiDB Cloud, you can use one of the followi
 
 To connect to a Serverless Tier cluster via standard connection, perform the following steps:
 
-1. Navigate to the **Clusters** page.
+1. Navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page and choose your target project on the top of the left navigation bar.
 
-2. Locate your cluster, and click **Connect** in the upper-right corner of the cluster area. A connection dialog box is displayed.
+2. Locate your cluster, and click **Connect** in the upper-right corner of the cluster area. In the drop-down list, select **Dev Tools**. A connection dialog is displayed.
 
-3. Under **Connect with a SQL client** in the dialog, click the tab of your preferred connection method, and then connect to your cluster with the connection string.
+3. In the dialog, select your preferred connection method and operating system, and then connect to your cluster with the connection string.
+
+    If you have not set a password yet, click **Create password** to generate a random password. The generated password will not show again, so save your password in a secure location.
 
     > **Note:**
     >
@@ -43,7 +45,7 @@ To connect to a Serverless Tier cluster via standard connection, perform the fol
 
 To connect to a Dedicated Tier cluster via standard connection, perform the following steps:
 
-1. Navigate to the **Clusters** page.
+1. Navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page and choose your target project on the top of the left navigation bar.
 
 2. Locate your cluster, and click **Connect** in the upper-right corner of the cluster area. A connection dialog box is displayed.
 
@@ -82,7 +84,7 @@ To connect to a Dedicated Tier cluster via standard connection, perform the foll
 
 To connect to your TiDB cluster via private endpoint, perform the following steps:
 
-1. In the TiDB Cloud console, navigate to the **Clusters** page.
+1. Navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page and choose your target project on the top of the left navigation bar.
 2. Locate your cluster, and click **Connect** in the upper-right corner of the cluster area. A connection dialog box is displayed.
 3. Select the **Private Endpoint** tab.
 4. Set up a private endpoint. See [Set Up Private Endpoint Connections](/tidb-cloud/set-up-private-endpoint-connections.md#set-up-a-private-endpoint-with-aws).
@@ -103,7 +105,7 @@ To connect to your TiDB cluster via private endpoint, perform the following step
 
 To connect to your TiDB cluster via VPC peering, perform the following steps:
 
-1. Navigate to the **Clusters** page.
+1. Navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page and choose your target project on the top of the left navigation bar.
 
 2. Locate your cluster, click **Connect** in the upper-right corner of the cluster area, and select the **VPC Peering** tab in the connection dialog.
 
@@ -115,9 +117,13 @@ To connect to your TiDB cluster via VPC peering, perform the following steps:
 
 ## Connect via SQL Shell
 
-To connect to your TiDB cluster using SQL shell, perform the following steps:
+> **Note:**
+>
+> This method does not work for Serverless Tier clusters because you cannot connect to [Serverless Tier clusters](/tidb-cloud/select-cluster-tier.md#serverless-tier-beta) using SQL Shell.
 
-1. Navigate to the **Clusters** page.
+To connect to your TiDB cluster using SQL Shell, perform the following steps:
+
+1. Navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page and choose your target project on the top of the left navigation bar.
 
 2. Locate your cluster, click **Connect** in the upper-right corner of the cluster area, and select the **Web SQL Shell** tab in the connection dialog.
 
