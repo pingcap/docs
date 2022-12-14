@@ -1,13 +1,13 @@
 ---
 title: Integrate TiDB Cloud with n8n
-summary: Learn the use TiDB Cloud node in n8n.
+summary: Learn the use of TiDB Cloud node in n8n.
 ---
 
 # Integrate TiDB Cloud with n8n
 
 [n8n](https://n8n.io/) is an extendable workflow automation tool. With a [fair-code](https://faircode.io/) distribution model, n8n will always have visible source code, be available to self-host, and allow you to add your custom functions, logic ,and apps. 
 
-This document introduces how to build an auto-workflow, create a TiDB Serverless cluster and write some data into TiDB.
+This document introduces how to build an auto-workflow, create a TiDB Serverless Tier cluster and write some data into TiDB.
 
 ## Prerequisites: Get TiDB Cloud API Key
 
