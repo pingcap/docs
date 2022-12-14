@@ -58,7 +58,7 @@ TiDB 6.5.0 is a Long-Term Support Release (LTS).
 
 * Support saving TiFlash query results using the `INSERT INTO SELECT` statement (experimental) [#37515](https://github.com/pingcap/tidb/issues/37515) @[gengliqi](https://github.com/gengliqi) **tw@qiancai**
 
-    Starting from v6.5.0, TiDB supports pushing down the `SELECT` clause (analysis query) of the `INSERT INTO SELECT` statement to TiFlash. In this way, you can easily save the TiFlash query result to a TiDB table specified by `INSERT INTO` for further analysis, which takes effect as result caching (that is, result materialization). For example:
+    Starting from v6.5.0, TiDB supports pushing down the `SELECT` clause (analytical query) of the `INSERT INTO SELECT` statement to TiFlash. In this way, you can easily save the TiFlash query result to a TiDB table specified by `INSERT INTO` for further analysis, which takes effect as result caching (that is, result materialization). For example:
 
     ```sql
     INSERT INTO t2 SELECT Mod(x,y) FROM t1;
@@ -66,9 +66,9 @@ TiDB 6.5.0 is a Long-Term Support Release (LTS).
 
     During the experimental phase, this feature is disabled by default. To enable it, you can set the [`tidb_enable_tiflash_read_for_write_stmt`](/system-variables.md#tidb_enable_tiflash_read_for_write_stmt-new-in-v630) system variable to `ON`. There are no special restrictions on the result table specified by `INSERT INTO` for this feature, and you are free to add a TiFlash replica to that result table or not. Typical usage scenarios of this feature include:
 
-    - Run complex analysis queries using TiFlash
+    - Run complex analytical queries using TiFlash
     - Reuse TiFlash query results or deal with highly concurrent online requests
-    - Need a relatively small result set comparing with the input data size, recommended to be within 100MiB.
+    - Need a relatively small result set comparing with the input data size, preferably smaller than 100MiB.
 
     For more information, see the [user documentation](/tiflash/tiflash-results-materialization.md).
 
@@ -132,7 +132,7 @@ TiDB 6.5.0 is a Long-Term Support Release (LTS).
     * `->>`
     * `JSON_EXTRACT()`
 
-    The JSON format provides a flexible way to model application design. Therefore, more and more applications are using the JSON format for data exchange and data storage. By pushing down JSON functions to TiFlash, you can improve the efficiency of analyzing data in the JSON type and use TiDB for more real-time analytics scenarios.
+    The JSON format provides a flexible way for application data modeling. Therefore, more and more applications are using the JSON format for data exchange and data storage. By pushing down JSON functions to TiFlash, you can improve the efficiency of analyzing data in the JSON type and use TiDB for more real-time analytics scenarios.
 
 * Support pushing down the following [string functions](/tiflash/tiflash-supported-pushdown-calculations.md) to TiFlash [#6115](https://github.com/pingcap/tiflash/issues/6115) @[xzhangxian1008](https://github.com/xzhangxian1008) **tw@qiancai**
 
@@ -146,9 +146,9 @@ TiDB 6.5.0 is a Long-Term Support Release (LTS).
 
     For more information, see [User document](/optimizer-hints.md#hints-that-take-effect-globally).
 
-* Support pushing down sorting operations of [partitioned-table](/partitioned-table.md) to TiKV [#26166](https://github.com/pingcap/tidb/issues/26166) @[winoros](https://github.com/winoros) **tw@qiancai**
+* Support pushing down sorting operations of [partitioned tables](/partitioned-table.md) to TiKV [#26166](https://github.com/pingcap/tidb/issues/26166) @[winoros](https://github.com/winoros) **tw@qiancai**
 
-   Although [partitioned table](/partitioned-table.md) has been GA since v6.1.0, TiDB is continually improving its performance. In v6.5.0, TiDB supports pushing down sort operations such as `ORDER BY` and `LIMIT` to TiKV for computation and filtering, which reduces network I/O overhead and improves SQL performance when you use partitioned tables.
+   Although the [partitioned table](/partitioned-table.md) feature has been GA since v6.1.0, TiDB is continually improving its performance. In v6.5.0, TiDB supports pushing down sorting operations such as `ORDER BY` and `LIMIT` to TiKV for computation and filtering, which reduces network I/O overhead and improves SQL performance when you use partitioned tables.
 
 * Optimizer introduces a more accurate Cost Model Version 2 [#35240](https://github.com/pingcap/tidb/issues/35240) @[qw4990](https://github.com/qw4990) **tw@Oreoxmt**
 
@@ -190,7 +190,7 @@ TiDB 6.5.0 is a Long-Term Support Release (LTS).
 
 ### Ease of use
 
-* Refine the execution information of the TiFlash `TableFullScan` operator in the `EXPLAIN ANALYZE` output   [#5926](https://github.com/pingcap/tiflash/issues/5926) @[hongyunyan](https://github.com/hongyunyan) **tw@qiancai**
+* Refine the execution information of the TiFlash `TableFullScan` operator in the `EXPLAIN ANALYZE` output [#5926](https://github.com/pingcap/tiflash/issues/5926) @[hongyunyan](https://github.com/hongyunyan) **tw@qiancai**
 
     The `EXPLAIN ANALYZE` statement is used to print execution plans and runtime statistics. In v6.5.0, TiFlash has refined the execution information of the `TableFullScan` operator by adding the DMFile-related execution information. Now the TiFlash data scan status information is presented more intuitively, which helps you analyze TiFlash performance more easily.
 
@@ -363,7 +363,7 @@ TiDB 6.5.0 is a Long-Term Support Release (LTS).
     - Support batch Coprocessor tasks processing in TiKV [#13849](https://github.com/tikv/tikv/issues/13849) @[cfzjywxk](https://github.com/cfzjywxk)
     - Reduce waiting time on failure recovery by notifying TiKV to wake up Regions [#13648](https://github.com/tikv/tikv/issues/13648) @[LykxSassinator](https://github.com/LykxSassinator)
     - Reduce the requested size of memory usage by code optimization [#13827](https://github.com/tikv/tikv/issues/13827) @[BusyJay](https://github.com/BusyJay)
-    - Introduce the raft extension to improve code extensibility [#13827](https://github.com/tikv/tikv/issues/13827) @[BusyJay](https://github.com/BusyJay)
+    - Introduce the Raft extension to improve code extensibility [#13827](https://github.com/tikv/tikv/issues/13827) @[BusyJay](https://github.com/BusyJay)
     - Support using tikv-ctl to query which Regions are included in a certain key range [#13760](https://github.com/tikv/tikv/issues/13760) [@HuSharp](https://github.com/HuSharp)
     - Improve read and write performance for rows that are not updated but locked continuously [#13694](https://github.com/tikv/tikv/issues/13694) [@sticnarf](https://github.com/sticnarf)
 
