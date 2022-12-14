@@ -7,10 +7,6 @@ summary: Introduce the concept, principles, and implementation details of metada
 
 This document introduces the metadata lock in TiDB.
 
-> **Warning:**
->
-> This is still an experimental feature. It is **NOT** recommended that you use it in the production environment.
-
 ## Concept
 
 TiDB uses the online asynchronous schema change algorithm to support changing metadata objects. When a transaction is executed, it obtains the corresponding metadata snapshot at the transaction start. If the metadata is changed during a transaction, to ensure data consistency, TiDB returns an `Information schema is changed` error and the transaction fails to commit.
@@ -22,6 +18,7 @@ To solve the problem, TiDB v6.3.0 introduces metadata lock into the online DDL a
 The metadata lock in TiDB applies to all DDL statements, such as:
 
 - [`ADD INDEX`](/sql-statements/sql-statement-add-index.md)
+- [`ADD COLUMN`](/sql-statements/sql-statement-add-column.md)
 - [`DROP COLUMN`](/sql-statements/sql-statement-drop-column.md)
 - [`DROP INDEX`](/sql-statements/sql-statement-drop-index.md)
 - [`DROP PARTITION`](/partitioned-table.md#partition-management)
@@ -37,7 +34,7 @@ Enabling metadata lock might have some performance impact on the execution of th
 
 ## Usage
 
-To control whether to enable metadata lock or not, you can use the system variable [`tidb_enable_metadata_lock`](/system-variables.md#tidb_enable_metadata_lock-new-in-v630).
+Starting from v6.5.0, TiDB enables metadata lock by default. When you upgrade your existing cluster from v6.4.0 or earlier to v6.5.0 or later, TiDB automatically enables metadata lock. To disable metadata, you can set the system variable [`tidb_enable_metadata_lock`](/system-variables.md#tidb_enable_metadata_lock-new-in-v630) to `OFF`.
 
 ## Principles
 

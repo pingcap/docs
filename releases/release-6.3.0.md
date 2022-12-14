@@ -83,7 +83,7 @@ In v6.3.0-DMR, the key new features and improvements are as follows:
 
     In v6.2.0, TiFlash introduces the FastScan feature, which brings expected performance improvements but lacks flexibility in use. Therefore, in v6.3.0, TiFlash changes [the way of using FastScan](/develop/dev-guide-use-fastscan.md): the `ALTER TABLE ... SET TIFLASH MODE ...` syntax to enable or disable FastScan is deprecated. Instead, you can use the system variable [`tiflash_fastscan`](/system-variables.md#tiflash_fastscan-new-in-v630) to easily control whether to enable FastScan.
 
-    When you upgrade from v6.2.0 to v6.3.0, all FastScan settings in v6.2.0 will become invalid, but will not affect the normal reading of data. You need to set the variable [`tiflash_fastscan`]. When you upgrade from v6.2.0 or an earlier version to v6.3.0, the FastScan feature is not enabled by default for all sessions to keep data consistency.
+    When you upgrade from v6.2.0 to v6.3.0, all FastScan settings in v6.2.0 will become invalid, but will not affect the normal reading of data. You need to set the variable `tiflash_fastscan`. When you upgrade from v6.2.0 or an earlier version to v6.3.0, the FastScan feature is not enabled by default for all sessions to keep data consistency.
 
 * TiFlash optimizes data scanning performance in scenarios of multiple concurrency tasks [#5376](https://github.com/pingcap/tiflash/issues/5376) @[JinheLin](https://github.com/JinheLin)
 
@@ -165,7 +165,7 @@ In v6.3.0-DMR, the key new features and improvements are as follows:
 
 ### Backup and restore
 
-* PITR supports [GCS](/br/backup-storage-gcs.md) and [Azure Blob Storage](/br/backup-storage-azblob.md) as backup storages @[joccau](https://github.com/joccau)
+* PITR supports [GCS and Azure Blob Storage](/br/backup-and-restore-storages.md) as backup storages @[joccau](https://github.com/joccau)
 
     If your TiDB cluster is deployed on GCP or Azure, you can use the PITR feature after upgrading your cluster to v6.3.0.
 
@@ -193,7 +193,7 @@ In v6.3.0-DMR, the key new features and improvements are as follows:
 
 * TiCDC supports graceful upgrade [#4757](https://github.com/pingcap/tiflow/issues/4757) @[overvenus](https://github.com/overvenus) @[3AceShowHand](https://github.com/3AceShowHand)
 
-    When TiCDC is deployed using [TiUP](/ticdc/deploy-ticdc.md#rolling-upgrade-ticdc-using-tiup) (>=v1.11.0) or [TiDB Operator](https://docs.pingcap.com/tidb-in-kubernetes/v1.3/configure-a-tidb-cluster#configure-graceful-upgrade-for-ticdc-cluster) (>=v1.3.8), you can gracefully upgrade the TiCDC cluster. During the upgrade, data replication latency is kept as low as 30 seconds. This improves stability, empowering TiCDC to better support latency-sensitive applications.
+    When TiCDC is deployed using [TiUP](/ticdc/deploy-ticdc.md#upgrade-cautions) (>=v1.11.0) or [TiDB Operator](https://docs.pingcap.com/tidb-in-kubernetes/v1.3/configure-a-tidb-cluster#configure-graceful-upgrade-for-ticdc-cluster) (>=v1.3.8), you can gracefully upgrade the TiCDC cluster. During the upgrade, data replication latency is kept as low as 30 seconds. This improves stability, empowering TiCDC to better support latency-sensitive applications.
 
 ## Compatibility changes
 
@@ -241,10 +241,10 @@ In v6.3.0-DMR, the key new features and improvements are as follows:
 | PD | [enable-diagnostic](/pd-configuration-file.md#enable-diagnostic-new-in-v630) | Newly added | Controls whether to enable the diagnostic feature. The default value is `false`. |
 | TiFlash | [`dt_enable_read_thread`](/tiflash/tiflash-configuration.md#configure-the-tiflash-learnertoml-file) | Deprecated | Since v6.3.0, this configuration item is deprecated. The thread pool is used to handle read requests from the storage engine by default and cannot be disabled. |
 | DM | [`safe-mode-duration`](/dm/task-configuration-file-full.md#task-configuration-file-template-advanced) | Newly added | Specifies the duration of the automatic safe mode. |
-| TiCDC | [`enable-sync-point`](/ticdc/manage-ticdc.md#task-configuration-file) | Newly added | Specifies whether to enable the Syncpoint feature. |
-| TiCDC | [`sync-point-interval`](/ticdc/manage-ticdc.md#task-configuration-file) | Newly added | Specifies the interval at which Syncpoint aligns the upstream and downstream snapshots. |
-| TiCDC | [`sync-point-retention`](/ticdc/manage-ticdc.md#task-configuration-file) | Newly added | Specifies how long the data is retained by Syncpoint in the downstream table. When this duration is exceeded, the data is cleaned up. |
-| TiCDC | [`sink-uri.memory`](/ticdc/manage-ticdc.md#create-a-replication-task) | Deprecated | The `memory` sorting is deprecated. It is not recommended to use it in any situation. You can use the `unified` sorting instead. |
+| TiCDC | [`enable-sync-point`](/ticdc/ticdc-changefeed-config.md#changefeed-configuration-parameters) | Newly added | Specifies whether to enable the Syncpoint feature. |
+| TiCDC | [`sync-point-interval`](/ticdc/ticdc-changefeed-config.md#changefeed-configuration-parameters) | Newly added | Specifies the interval at which Syncpoint aligns the upstream and downstream snapshots. |
+| TiCDC | [`sync-point-retention`](/ticdc/ticdc-changefeed-config.md#changefeed-configuration-parameters) | Newly added | Specifies how long the data is retained by Syncpoint in the downstream table. When this duration is exceeded, the data is cleaned up. |
+| TiCDC | [`sink-uri.memory`](/ticdc/ticdc-changefeed-config.md#changefeed-cli-parameters) | Deprecated | The `memory` sorting is deprecated. It is not recommended to use it in any situation. |
 
 ### Others
 
@@ -304,7 +304,7 @@ Since v6.3.0, TiCDC no longer supports configuring Pulsar sink. [kop](https://gi
 
     + TiCDC
 
-        - Improve compatibility for MySQL 8.0 upstream [#6506](https://github.com/pingcap/tiflow/issues/6506) @[lance6716](https://github.com/lance6716)
+        - Improve TiCDC's compatibility with the concurrent DDL framework introduced in the upstream TiDB [#6506](https://github.com/pingcap/tiflow/issues/6506) @[lance6716](https://github.com/lance6716)
         - Support logging `start ts` of DML statements when MySQL sink gets an error [#6460](https://github.com/pingcap/tiflow/issues/6460) @[overvenus](https://github.com/overvenus)
         - Enhance the `api/v1/health` API to return a more accurate health state of a TiCDC cluster [#4757](https://github.com/pingcap/tiflow/issues/4757) @[overvenus](https://github.com/overvenus)
         - Implement MQ sink and MySQL sink in the asynchronous mode to improve the sink throughput [#5928](https://github.com/pingcap/tiflow/issues/5928) @[hicqu](https://github.com/hicqu) @[hi-rustin](https://github.com/hi-rustin)
