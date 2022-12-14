@@ -33,14 +33,14 @@ The following diagram illustrates the high-level architecture.
 
 ## Prerequisites
 
-You might need the following prerequisites:
+Read the following prerequisites before you get started:
 
 - [AWS DMS Prerequisites](/tidb-cloud/migrate-from-mysql-using-aws-dms.md#Prerequisites)
 - [AWS Cloud Account](https://aws.amazon.com)
 - [TiDB Cloud Account](https://tidbcloud.com)
 - [DBeaver](https://dbeaver.io/)
 
-Next, you will learn how to use DMS tools to migrate data from Amazon RDS for Oracle into TiDB Cloud.
+Next, you will learn how to use AWS DMS to migrate data from Amazon RDS for Oracle into TiDB Cloud.
 
 ## Step 1. Create a VPC
 
@@ -52,7 +52,7 @@ For instructions about how to create a VPC, see [Creating a VPC](https://docs.aw
 
 ## Step 2. Create an Oracle DB instance
 
-Create an Oracle DB instance in VPC, and remember the password and give it public access. You must enable public access to use the AWS Schema Conversion Tool. Note that giving public access in the production environment is not a best practice.
+Create an Oracle DB instance in the VPC you just created, and remember the password and grant it public access. You must enable public access to use the AWS Schema Conversion Tool. Note that granting public access in the production environment is not recommended.
 
 For instructions about how to create an Oracle DB instance, see [Creating an Oracle DB instance and connecting to a database on an Oracle DB instance](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_GettingStarted.CreatingConnecting.Oracle.html).
 
@@ -60,7 +60,7 @@ For instructions about how to create an Oracle DB instance, see [Creating an Ora
 
 ## Step 3. Prepare the table data in Oracle
 
-Insert some data into Oracle DB instance. You can use the github event dataset and download it from [GH Archive](https://gharchive.org/). It contains 10000 rows of data. Use the following SQL script to execute it in Oracle.
+Insert some data into the Oracle DB instance. You can use the github event dataset and download it from [GH Archive](https://gharchive.org/). It contains 10000 rows of data. Use the following SQL script to execute it in Oracle.
 
 - [table_schema_oracle.sql](https://github.com/pingcap-inc/tidb-integration-script/blob/main/aws-dms/oracle_table_schema.sql)
 - [oracle_data.sql](https://github.com/pingcap-inc/tidb-integration-script/blob/main/aws-dms/oracle_data.sql)
@@ -93,7 +93,7 @@ After you finish executing the SQL script, check the data in Oracle. The followi
 
 1. Go to the [Replication instances](https://console.aws.amazon.com/dms/v2/home#replicationInstances) page in the AWS DMS console, and switch to the corresponding region.
 
-2. Create an AWS DMS replication instance with `dms.t3.large` in VPC.
+2. Create an AWS DMS replication instance with `dms.t3.large` in the VPC.
 
     ![Create AWS DMS Instance](/media/tidb-cloud/aws-dms-from-oracle-to-tidb-8.png)
 
@@ -103,7 +103,11 @@ After you finish executing the SQL script, check the data in Oracle. The followi
 
 2. Create the Oracle source endpoint and the TiDB target endpoint.
 
+    The following screenshot shows the configurations of the source endpoint.
+
     ![Create AWS DMS Source endpoint](/media/tidb-cloud/aws-dms-from-oracle-to-tidb-9.png)
+
+    The following screenshot shows the configurations of the target endpoint.
 
     ![Create AWS DMS Target endpoint](/media/tidb-cloud/aws-dms-from-oracle-to-tidb-10.png)
 
@@ -135,7 +139,7 @@ For more information, see [Migrating your source schema to your target database 
 
 ## Step 9. Check data in the downstream TiDB cluster
 
-Connect to [TiDB Cloud Serverless Tier](https://tidbcloud.com/console/clusters/create-cluster) and check the `admin.github_event` table data. As shown in the following screenshot, DMS successfully migrated table `github_events` and 10000 rows of data.
+Connect to the [Serverless Tier cluster](https://tidbcloud.com/console/clusters/create-cluster) and check the `admin.github_event` table data. As shown in the following screenshot, DMS successfully migrated table `github_events` and 10000 rows of data.
 
 ![Check Data In TiDB](/media/tidb-cloud/aws-dms-from-oracle-to-tidb-14.png)
 
