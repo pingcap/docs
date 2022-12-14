@@ -11,22 +11,24 @@ This document describes how to connect to your TiDB Cloud cluster via standard c
 
 To connect to a Serverless Tier cluster via standard connection, perform the following steps:
 
-1. Navigate to the **Clusters** page.
+1. Navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page and choose your target project on the top of the left navigation bar.
 
-2. Locate your cluster, and click **Connect** in the upper-right corner of the cluster area. A connection dialog box is displayed.
+2. Locate your cluster, and click **Connect** in the upper-right corner of the cluster area. In the drop-down list, select **Dev Tools**. A connection dialog is displayed.
 
-3. Under **Connect with a SQL client** in the dialog, click the tab of your preferred connection method, and then connect to your cluster with the connection string.
+3. In the dialog, select your preferred connection method and operating system, and then connect to your cluster with the connection string.
 
-> **Note:**
->
-> - When you connect to a Serverless Tier cluster, you must include the prefix for your cluster in the user name and wrap the name with quotation marks. For more information, see [User name prefix](/tidb-cloud/select-cluster-tier.md#user-name-prefix).
-> - Serverless Tier clusters only support TLS connection. For more information, see [Secure Connections to Serverless Tier Clusters](/tidb-cloud/secure-connections-to-serverless-tier-clusters.md).
+    If you have not set a password yet, click **Create password** to generate a random password. The generated password will not show again, so save your password in a secure location.
+
+    > **Note:**
+    >
+    > - When you connect to a Serverless Tier cluster, you must include the prefix for your cluster in the user name and wrap the name with quotation marks. For more information, see [User name prefix](/tidb-cloud/select-cluster-tier.md#user-name-prefix).
+    > - Serverless Tier clusters only support TLS connection. For more information, see [Secure Connections to Serverless Tier Clusters](/tidb-cloud/secure-connections-to-serverless-tier-clusters.md).
 
 ## Dedicated Tier
 
 To connect to a Dedicated Tier cluster via standard connection, perform the following steps:
 
-1. Navigate to the **Clusters** page.
+1. Navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page and choose your target project on the top of the left navigation bar.
 
 2. Locate your cluster, and click **Connect** in the upper-right corner of the cluster area. A connection dialog box is displayed.
 

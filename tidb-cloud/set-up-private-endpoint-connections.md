@@ -34,27 +34,6 @@ In most scenarios, you are recommended to use private endpoint connection over V
 - You are using a TiCDC cluster to replicate data to a downstream cluster (such as Amazon Aurora, MySQL, and Kafka) but you cannot maintain the endpoint service on your own.
 - You are connecting to PD or TiKV nodes directly.
 
-## Steps
-
-> **Note:**
->
-> This method does not work for Serverless Tier clusters because you cannot connect to [Serverless Tier clusters](/tidb-cloud/select-cluster-tier.md#serverless-tier-beta) using private endpoint.
-
-To connect to your TiDB cluster via private endpoint, perform the following steps:
-
-1. In the TiDB Cloud console, navigate to the **Clusters** page.
-2. Locate your cluster, and click **Connect** in the upper-right corner of the cluster area. A connection dialog box is displayed.
-3. Select the **Private Endpoint** tab.
-4. Set up a private endpoint. See [Set Up Private Endpoint Connections](/tidb-cloud/set-up-private-endpoint-connections.md#set-up-a-private-endpoint-with-aws).
-
-    If you have created a private endpoint, it is displayed under **Step 1: Create Private Endpoint**.
-
-5. Under **Step 2: Connect your application**, click the tab of your preferred connection method, and then connect to your cluster with the connection string. The placeholders `<cluster_endpoint_name>:<port>` in the connection string are automatically replaced with the real values.
-
-> **Tip:**
->
-> If you cannot connect to the cluster, the reason might be that the security group of your VPC endpoint in AWS is not properly set. See [this FAQ](/tidb-cloud/set-up-private-endpoint-connections.md#troubleshooting) for solutions.
-
 ## Set up a private endpoint with AWS
 
 This section describes how to set up a private endpoint with AWS PrivateLink.
@@ -189,7 +168,19 @@ aws ec2 modify-vpc-endpoint --vpc-endpoint-id <your_vpc_endpoint_id> --private-d
 
 Click **Create** in the TiDB Cloud console to finalize the creation of the private endpoint.
 
-Then you can connect to the endpoint service. See [Connect to TiDB cluster via private endpoint](/tidb-cloud/connect-to-tidb-cluster.md#connect-via-private-endpoint-recommended) for details.
+Then you can connect to the endpoint service.
+
+### Step 6: Connect to your TiDB cluster
+
+After you have enabled the private DNS, go back to the TiDB Cloud console and take the following steps:
+
+1. Locate your cluster, and click **Connect** in the upper-right corner of the cluster area. A connection dialog box is displayed.
+2. Select the **Private Endpoint** tab. The private endpoint you just created is displayed under **Step 1: Create Private Endpoint**.
+3. Under **Step 2: Connect your application**, click the tab of your preferred connection method, and then connect to your cluster with the connection string. The placeholders `<cluster_endpoint_name>:<port>` in the connection string are automatically replaced with the real values.
+
+> **Tip:**
+>
+> If you cannot connect to the cluster, the reason might be that the security group of your VPC endpoint in AWS is not properly set. See [this FAQ](#troubleshooting) for solutions.
 
 ## Private endpoint status reference
 
