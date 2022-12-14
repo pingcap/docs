@@ -34,7 +34,12 @@ Here are some of the benefits of using Amazon QuickSight for analytics, data vis
 ## Create TiDB Cluster
 
 TiDB (/’taɪdiːbi:/, "Ti" stands for Titanium) is an open-source NewSQL database that supports Hybrid Transactional and Analytical Processing (HTAP) workloads. It is MySQL compatible and features horizontal scalability, strong consistency, and high availability.
+
+<CustomContent platform="tidb">
+
 If you don't have a TiDB cluster, you can follow the [Quick Start Guide for the TiDB Database Platform](/quick-start-with-tidb.md) to create a TiDB cluster.
+
+</CustomContent>
 
 Here is the way to create a playground TiDB cluster. I’ll create a TiDB cluster using [TiDB Cloud Dedicated Tier](https://docs.pingcap.com/tidbcloud/select-cluster-tier#dedicated-tier). But you can create your TiDB cluster anywhere. Just ensure that Amazon QuickSight can connect to your TiDB cluster.
 
