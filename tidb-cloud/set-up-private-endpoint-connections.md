@@ -45,6 +45,7 @@ In addition to the [prerequisites](#prerequisites), there are 5 steps to set up 
 3. [Create an AWS interface endpoint](#step-3-create-an-aws-interface-endpoint)
 4. [Accept the endpoint connection](#step-4-accept-the-endpoint-connection)
 5. [Enable private DNS](#step-5-enable-private-dns)
+6. [Connect to your TiDB cluster](#step-6-connect-to-your-tidb-cluster)
 
 If you have multiple clusters, you need to repeat these steps for each cluster that you want to connect to using AWS PrivateLink.
 
