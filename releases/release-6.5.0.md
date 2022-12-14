@@ -346,7 +346,7 @@ TiDB 6.5.0 is a Long-Term Support Release (LTS).
 
 + TiDB
 
-    - 对于 `bit` and `char` 类型的列，使 `INFORMATION_SCHEMA.COLUMNS` 的显示结果与 MySQL 一致 [#25472](https://github.com/pingcap/tidb/issues/25472) @[hawkingrei](https://github.com/hawkingrei)
+    - For `BIT` and `CHAR` columns, make the result of `INFORMATION_SCHEMA.COLUMNS` consistent with MySQL [#25472](https://github.com/pingcap/tidb/issues/25472) @[hawkingrei](https://github.com/hawkingrei)
 
 + TiKV
 
@@ -407,17 +407,17 @@ TiDB 6.5.0 is a Long-Term Support Release (LTS).
 
 + TiDB
 
-    - 修复 chunk reuse 功能部分情况下内存 chunk 被错误使用的问题 [#38917](https://github.com/pingcap/tidb/issues/38917) @[keeplearning20221](https://github.com/keeplearning20221)
-    - 修复 `tidb_constraint_check_in_place_pessimistic` 可能被全局设置影响内部 session 的问题 [#38766](https://github.com/pingcap/tidb/issues/38766) @[ekexium](https://github.com/ekexium)
-    - 修复了 AUTO_INCREMENT 列无法和 Check 约束一起使用的问题 [#38894](https://github.com/pingcap/tidb/issues/38894) @[YangKeao](https://github.com/YangKeao)
-    - 修复使用 'insert ignore into' 往 smallint 类型 auto increment 的列插入 string 类型数据会报错的问题 [#38483](https://github.com/pingcap/tidb/issues/38483) @[hawkingrei](https://github.com/hawkingrei)
-    - 修复了重命名分区表的分区列操作出现空指针报错的问题 [#38932](https://github.com/pingcap/tidb/issues/38932) @[mjonss](https://github.com/mjonss)
-    - 修复了一个修改分区表的分区列导致 DDL 卡死的问题 [#38530](https://github.com/pingcap/tidb/issues/38530) @[mjonss](https://github.com/mjonss)
-    - 修复了从 v4.0 升级到 v6.4 后 'admin show job' 操作崩溃的问题 [#38980](https://github.com/pingcap/tidb/issues/38980) @[tangenta](https://github.com/tangenta)
-    - 修复了 `tidb_decode_key` 函数未正确处理分区表编码的问题 [#39304](https://github.com/pingcap/tidb/issues/39304) @[Defined2014](https://github.com/Defined2014)
-    - 修复了 log rotate 时，grpc 的错误日志信息未被重定向到正确的日志文件的问题 [#38941](https://github.com/pingcap/tidb/issues/38941) @[xhebox](https://github.com/xhebox)
-    - 修复了 `begin; select... for update;` 点查在 read engines 未配置 TiKV 时生成非预期执行计划的问题 [#39344](https://github.com/pingcap/tidb/issues/39344) @[Yisaer](https://github.com/Yisaer)
-    - 修复了错误地下推 `StreamAgg` 到 TiFlash 导致结果错误的问题 [#39266](https://github.com/pingcap/tidb/issues/39266) @[fixdb](https://github.com/fixdb)
+    - Fix the issue of memory chunk misuse for the chunk reuse feature that occurs in some cases [#38917](https://github.com/pingcap/tidb/issues/38917) @[keeplearning20221](https://github.com/keeplearning20221)
+    - Fix the issue that the internal sessions of `tidb_constraint_check_in_place_pessimistic` might be affected by the global setting [#38766](https://github.com/pingcap/tidb/issues/38766) @[ekexium](https://github.com/ekexium)
+    - Fix the issue that the `AUTO_INCREMENT` column cannot be used together with the `Check` constraint [#38894](https://github.com/pingcap/tidb/issues/38894) @[YangKeao](https://github.com/YangKeao)
+    - Fix the issue that using `INSERT IGNORE INTO` to insert data of the `STRING` type into an auto-increment column of the `SMALLINT` type will raise an error [#38483](https://github.com/pingcap/tidb/issues/38483) @[hawkingrei](https://github.com/hawkingrei)
+    - Fix the issue that the null pointer error occurs in the operation of renaming the partition column of a partitioned table [#38932](https://github.com/pingcap/tidb/issues/38932) @[mjonss](https://github.com/mjonss)
+    - Fix the issue that modifying the partition column of a partitioned table causes DDL to hang [#38530](https://github.com/pingcap/tidb/issues/38530) @[mjonss](https://github.com/mjonss)
+    - Fix the issue that the `ADMIN SHOW JOB` operation panics after upgrading from v4.0 to v6.4 [#38980](https://github.com/pingcap/tidb/issues/38980) @[tangenta](https://github.com/tangenta)
+    - Fix the issue that the `tidb_decode_key` function fails to correctly parse the encoding of partitioned tables [#39304](https://github.com/pingcap/tidb/issues/39304) @[Defined2014](https://github.com/Defined2014)
+    - Fixe the issue that gRPC error log messages are not redirected to the correct log file during log rotation [#38941](https://github.com/pingcap/tidb/issues/38941) @[xhebox](https://github.com/xhebox)
+    - Fix the issue that TiDB generates an unexpected query plan for the `BEGIN; SELECT... FOR UPDATE;` point query when TiKV is not configured for the read engine [#39344](https://github.com/pingcap/tidb/issues/39344) @[Yisaer](https://github.com/Yisaer)
+    - Fix the issue that mistakenly pushing down `StreamAgg` to TiFlash causes wrong result [#39266](https://github.com/pingcap/tidb/issues/39266) @[fixdb](https://github.com/fixdb)
 
 + TiKV
 
