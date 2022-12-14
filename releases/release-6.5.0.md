@@ -50,7 +50,7 @@ TiDB 6.5.0 is a Long-Term Support Release (LTS).
 
     For more information, see [Non-Transactional DML statements](/non-transactional-dml.md) and [`BATCH` syntax](/sql-statements/sql-statement-batch.md).
 
-* Support time to live (TTL) (experimental feature) [#39262](https://github.com/pingcap/tidb/issues/39262)  @[lcwangchao](https://github.com/lcwangchao) **tw@ran-huang**
+* Support time to live (TTL) (experimental) [#39262](https://github.com/pingcap/tidb/issues/39262)  @[lcwangchao](https://github.com/lcwangchao) **tw@ran-huang**
 
     TTL provides row-level data lifetime management. In TiDB, a table with the TTL attribute automatically checks data lifetime and deletes expired data at the row level. TTL is designed to help users clean up unnecessary data periodically and in a timely manner without affecting the online read and write workloads.
 
@@ -84,29 +84,29 @@ TiDB 6.5.0 is a Long-Term Support Release (LTS).
 
 * Support the password complexity policy [#38928](https://github.com/pingcap/tidb/issues/38928) @[CbcWestwolf](https://github.com/CbcWestwolf) **tw@ran-huang**
 
-    After you enable the password complexity policy for TiDB, when you set a password, TiDB checks the password length, the number of uppercase and lowercase letters, numbers, and special characters, whether the password matches the dictionary, and whether the password matches the username. This ensures that you set a secure password.
+    After this policy is enabled, when you set a password, TiDB checks the password length, whether uppercase and lowercase letters, numbers, and special characters in the password are sufficient, whether the password matches the dictionary, and whether the password matches the username. This ensures that you set a secure password.
 
     TiDB provides the SQL function [`VALIDATE_PASSWORD_STRENGTH()`](https://dev.mysql.com/doc/refman/5.7/en/encryption-functions.html#function_validate-password-strength) to validate the password strength.
 
-    For more information, refer to [user document](/password-management.md#password-complexity-policy).
+    For more information, see [User document](/password-management.md#password-complexity-policy).
 
 * Support the password expiration policy [#38936](https://github.com/pingcap/tidb/issues/38936) @[CbcWestwolf](https://github.com/CbcWestwolf) **tw@ran-huang**
 
-    TiDB supports the password expiration policy, including manual expiration, global-level automatic expiration, and account-level automatic expiration. After this policy is enabled, you must change your passwords periodically. This reduces the risk of password leakage due to long-term use and improve password security.
+    TiDB supports configuring the password expiration policy, including manual expiration, global-level automatic expiration, and account-level automatic expiration. After this policy is enabled, you must change your passwords periodically. This reduces the risk of password leakage due to long-term use and improves password security.
 
-    For more information, refer to [user document](/password-management.md#password-expiration-policy).
+    For more information, see [User document](/password-management.md#password-expiration-policy).
 
 * Support the password reuse policy [#38937](https://github.com/pingcap/tidb/issues/38937) @[keeplearning20221](https://github.com/keeplearning20221) **tw@ran-huang**
 
-    TiDB supports the password reuse policy, including global-level password reuse policy and account-level password reuse policy. After this policy is enabled, you cannot use the passwords that you have used within a period or the most recent several passwords that you have used. This reduces the risk of password leakage due to repeated use of passwords and improves password security.
+    TiDB supports configuring the password reuse policy, including global-level password reuse policy and account-level password reuse policy. After this policy is enabled, you cannot use the passwords that you have used within a specified period or the most recent several passwords that you have used. This reduces the risk of password leakage due to repeated use of passwords and improves password security.
 
-    For more information, refer to [user document](/password-management.md#password-reuse-policy).
+    For more information, see [User document](/password-management.md#password-reuse-policy).
 
 * Support failed-login tracking and temporary account locking policy [#38938](https://github.com/pingcap/tidb/issues/38938) @[lastincisor](https://github.com/lastincisor) **tw@ran-huang**
 
     After this policy is enabled, if you log in to TiDB with incorrect passwords multiple times consecutively, the account is temporarily locked. After the lock time ends, the account is automatically unlocked.
 
-    For more information, refer to [user document](/password-management.md#failed-login-tracking-and-temporary-account-locking-policy).
+    For more information, see [User document](/password-management.md#failed-login-tracking-and-temporary-account-locking-policy).
 
 ### Observability
 
@@ -196,9 +196,9 @@ TiDB 6.5.0 is a Long-Term Support Release (LTS).
 
     For more information, see [user documentation](sql-statements/sql-statement-explain-analyze.md).
 
-* Support the output of execution plans in JSON format [#39261](https://github.com/pingcap/tidb/issues/39261) @[fzzf678](https://github.com/fzzf678) **tw@ran-huang**
+* Support the output of execution plans in the JSON format [#39261](https://github.com/pingcap/tidb/issues/39261) @[fzzf678](https://github.com/fzzf678) **tw@ran-huang**
 
-    In v6.5, TiDB extends the output format of the execution plan. By using `EXPLAIN FORMAT=tidb_json <SQL_statement>`, you can output the SQL execution plan in JSON format. With this capability, SQL debugging tools and diagnostic tools can read the execution plan more conveniently and accurately, thus improving the ease of use of SQL diagnosis and tuning.
+    In v6.5.0, TiDB extends the output format of execution plans. By using `EXPLAIN FORMAT=tidb_json <SQL_statement>`, you can output SQL execution plans in the JSON format. With this capability, SQL debugging tools and diagnostic tools can read execution plans more conveniently and accurately, thus improving the ease of use of SQL diagnosis and tuning.
 
     For more information, see [user document](/sql-statements/sql-statement-explain.md).
 
