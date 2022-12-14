@@ -72,6 +72,13 @@ TiDB 6.5.0 is a Long-Term Support Release (LTS).
 
     For more information, see the [user documentation](/tiflash/tiflash-results-materialization.md).
 
+* Support binding history execution plans (experimental) [#39199](https://github.com/pingcap/tidb/issues/39199) @[fzzf678](https://github.com/fzzf678) **tw@qiancai**
+
+    For a SQL statement, due to various factors during execution, the optimizer might occasionally choose a new execution plan instead of its previous optimal execution plan, and the SQL performance is impacted. In this case, if the optimal execution plan has not been cleared yet, it still exists in the SQL execution history.
+
+    In v6.5.0, TiDB supports binding historical execution plans by extending the binding object in the [`CREATE [GLOBAL | SESSION] BINDING`](/sql-statements/sql-statement-create-binding.md) statement. When the execution plan of a SQL statement changes, you can bind the original execution plan by specifying `plan_digest` in the `CREATE [GLOBAL | SESSION] BINDING` statement to quickly recover SQL performance, as long as the original execution plan is still in the SQL execution history memory table (for example, `statements_summary`). This feature can simplify the process of handling execution plan change issues and improve your maintenance efficiency.
+
+    For more information, see [user documentation](/sql-plan-management.md#bind-historical-execution-plans).
 ### Security
 
 * Support the password complexity policy [#38928](https://github.com/pingcap/tidb/issues/38928) @[CbcWestwolf](https://github.com/CbcWestwolf) **tw@ran-huang**
