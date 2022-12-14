@@ -17,11 +17,11 @@ In the preceding diagram, a TiCDC cluster consists of multiple nodes running TiC
 
 Each Capture process contains one or multiple Processor threads for replicating data from tables in the upstream TiDB. Because table is the minimum unit of data replication in TiCDC, a Processor is composed of multiple table pipelines.
 
-Each pipeline contains the following components: Puller, Sorter, Mounter, and Sink, as shown in the following figure:
+Each pipeline contains the following components: Puller, Sorter, Mounter, and Sink.
 
 ![TiCDC architecture](/media/ticdc/ticdc-architecture-2.jpg)
 
-These components are connected in serial and interwork with each other to complete the replication process, including pulling data, sorting data, loading data, and replicating data from the upstream to the downstream. The components are described as follows:
+These components work in serial with each other to complete the replication process, including pulling data, sorting data, loading data, and replicating data from the upstream to the downstream. The components are described as follows:
 
 - Puller: pulls DDL and row changes from TiKV nodes.
 - Sorter: sorts the changes received from TiKV nodes in ascending order of timestamps.
@@ -34,9 +34,9 @@ To realize high availability, each TiCDC cluster runs multiple TiCDC nodes. Thes
 
 ## Changefeeds and tasks
 
-Changefeed and Task in TiCDC are two logical concepts. The former is the way to assign replication tasks. The latter is the subtask name of a split replication task. The specific description is as follows:
+Changefeed and Task in TiCDC are two logical concepts. The specific description is as follows:
 
-- Changefeed: Represents a replication task. It carries the information of the tables to be replicated, the downstream information, and other configuration information.
+- Changefeed: Represents a replication task. It carries the information about the tables to be replicated and the downstream.
 - Task: After TiCDC receives a replication task, it splits this task into several subtasks. Such a subtask is called Task. These Tasks are assigned to the Capture processes of the TiCDC nodes for processing.
 
 For example:
@@ -52,9 +52,9 @@ dispatchers = [
 ]
 ```
 
-For detailed description of the parameters in the preceding command, see [TiCDC Changefeed Configuration Parameters](/ticdc/ticdc-changefeed-config.md).
+For a detailed description of the parameters in the preceding `cdc cli changefeed create` command, see [TiCDC Changefeed Configuration Parameters](/ticdc/ticdc-changefeed-config.md).
 
-The preceding command creates a changefeed  task that replicates `test1.tab1`, `test1.tab2`, `test3.tab3`, and `test4.tab4` to the Kafka cluster. The processing flow after TiCDC receives this command is as follows:
+The preceding `cdc cli changefeed create` command creates a changefeed task that replicates `test1.tab1`, `test1.tab2`, `test3.tab3`, and `test4.tab4` to the Kafka cluster. The processing flow after TiCDC receives this command is as follows:
 
 1. TiCDC sends this task to the owner Capture process.
 2. The owner Capture process saves information about this replication task in etcd in PD.
@@ -65,13 +65,13 @@ The following is the TiCDC architecture diagram with Changefeed and Task include
 
 ![TiCDC architecture](/media/ticdc/ticdc-architecture-4.jpg)
 
-The preceding figure creates a changefeed to replicate four tables to downstream. This changefeed is split into three Tasks, which are sent to the three Capture processes respectively in the TiCDC cluster. After TiCDC processes the data, the data is replicated to the downstream system.
+In the preceding diagram, a changefeed is created to replicate four tables to downstream. This changefeed is split into three Tasks, which are sent to the three Capture processes respectively in the TiCDC cluster. After TiCDC processes the data, the data is replicated to the downstream system.
 
-TiCDC supports replicating data to MySQL, TiDB, and Kafka databases. The preceding process only profiles the process of data transfer at the changefeed level. The following sections describe in detail how TiCDC processes data, using Task1 that replicates table `table1` as an example.
+TiCDC supports replicating data to MySQL, TiDB, and Kafka databases. The preceding diagram only illustrates the process of data transfer at the changefeed level. The following sections describe in detail how TiCDC processes data, using Task1 that replicates table `table1` as an example.
 
 ![TiCDC architecture](/media/ticdc/ticdc-architecture-5.jpg)
 
-1. Push data: When data change occurs, TiKV pushes data to the Puller module.
+1. Push data: When a data change occurs, TiKV pushes data to the Puller module.
 2. Scan incremental data: The Puller module pulls data from TiKV when it finds the data changes received not continuous.
 3. Sort data: The Sorter module sorts the data received from TiKV based on the timestamps and sends the sorted data to the Mounter module.
 4. Mount data: After receiving the data changes, the Mounter module loads the data in a format that TiCDC sink can understand.
@@ -81,12 +81,12 @@ The upstream of TiCDC is the distributed relational database TiDB that supports 
 
 ## Key concepts of TiCDC
 
-TiCDC ensures the consistency of transactions in a single table and eventual transaction consistency in multiple tables. In addition, TiCDC ensures that any data change that has occurred in the upstream TiDB cluster can be replicated to the downstream at least once. To achieve ths, TiCDC introduces some technologies and concepts.
+For the downstream relational databases, TiCDC ensures the consistency of transactions in a single table and eventual transaction consistency in multiple tables. In addition, TiCDC ensures that any data change that has occurred in the upstream TiDB cluster can be replicated to the downstream at least once.
 
 ### Architecture-related concepts
 
-- Capture: The process that runs the TiCDC node. Multiple Capture processes form a TiCDC cluster. The Capture process is responsible for replicating data changes in TiKV, including receiving and actively pulling data changes, and replicating the data to the downstream.
-- Cpature Owner: The owner Capture among multiple Capture processes. Only one such role exists in a TiCDC cluster at a time. The Capture Owner is responsible for scheduling data within the cluster.
+- Capture: The process that runs the TiCDC node. Multiple Capture processes constitute a TiCDC cluster. Each Capture process is responsible for replicating data changes in TiKV, including receiving and actively pulling data changes, and replicating the data to the downstream.
+- Capture Owner: The owner Capture among multiple Capture processes. Only one owner role exists in a TiCDC cluster at a time. The Capture Owner is responsible for scheduling data within the cluster.
 - Processor: The logical thread inside Capture. Each Processor is responsible for processing the data of one or more tables in the same replication stream. A Capture node can run multiple Processors.
 - Changefeed: A task that replicates data from an upstream TiDB cluster to a downstream system. A changefeed contains multiple Tasks, and each Task is processed by a Capture node.
 
@@ -131,9 +131,9 @@ Because TiCDC can only replication data smaller than global Resolved TS to the d
 table resolved TS >= global Resolved TS >= table checkpoint TS >= global checkpoint TS
 ```
 
-After data changes and transactions are committed, the resolvedTS on the TiKV node will continue to advance, and the Puller module on the TiCDC node keeps receiving data pushed by TiKV. The Puller module also decides whether to scan incremental data based on the received information, which ensures that all data changes are sent to the TiCDC node.
+After data changes and transactions are committed, the resolvedTS on the TiKV node will continue to advance, and the Puller module on the TiCDC node keeps receiving data pushed by TiKV. The Puller module also decides whether to scan incremental data based on the received data changes, which ensures that all data changes are sent to the TiCDC node.
 
-The Sorter module sorts data received by the Puller module in ascending order according to the timestamp. This process ensures data consistency at the table level. Next, the Mounter module assembles the data changes from the upstream into the format that the Sink module can consume, and sends it to the Sink module. The Sink module replicates the data changes between the checkpointTS and the ResolvedTS to the downstream in the order of the TS, and advancing the checkpointTS.
+The Sorter module sorts data received by the Puller module in ascending order according to the timestamp. This process ensures data consistency at the table level. Next, the Mounter module assembles the data changes from the upstream into the format that the Sink module can consume, and sends it to the Sink module. The Sink module replicates the data changes between the checkpointTS and the ResolvedTS to the downstream in the order of the timestamp, and advances the checkpointTS after the downstream receives the data changes.
 
 The preceding sections only cover data changes of DML statements and do not include DDL statements. The following sections introduce the timestamp related to DDL statements.
 
@@ -141,33 +141,33 @@ The preceding sections only cover data changes of DML statements and do not incl
 
 Barrier TS is generated when a DDL statement is executed or a Syncpoint is used.
 
-- This timestamp ensures that all changes before this DDL statement are replicated to the downstream. After this DDL is executed, data changes are replicated again. Because DDL statements are processed by the Capture Owner, the Barrier TS corresponding to the DDL statement is only generated by the Processor thread of the owner node.
+- This timestamp ensures that all changes before this DDL statement are replicated to the downstream. After this DDL statement is executed and replicated, TiCDC starts replicating other data changes. Because DDL statements are processed by the Capture Owner, the Barrier TS corresponding to a DDL statement is only generated by the Processor thread of the owner node.
 - sync point Barrier TS is also a timestamp. When you enable the Syncpoint feature of TiCDC, a Barrier TS is generated by TiCDC according to the interval you specified. When all tables are replicated to this Barrier TS, record the time point, from which data replication continues next time.
 
 TiCDC determines whether data has been replicated to Barrier TS by comparing the global checkpoint TS and Barrier TS. If global checkpoint TS equals to Barrier TS, all tables have advanced to Barrier TS. If global checkpoint TS does not equal to Barrier TS, there are tables that have not advanced to the Barrier TS. In this case, the Barrier TS will not be updated, and no resolved TS of a table will exceed Barrier TS, that is, no table's check point TS will exceed Barrier TS.
 
 ## Major processes
 
-This section describes the major processes of TiCDC to help you better understand its working principles.
+This section describes the major processes of TiCDC to help you better understand its principles.
 
 ### Start TiCDC
 
-- Start a TiCDC node that is not an owner:
+- For a TiCDC node that is not an owner, it works as follows:
 
-    1. Start the Capture process.
-    2. Start the Processor.
-    3. Receive the Task scheduling command executed by the Owner.
-    4. Start or stop tablePipeline according to the scheduling command.
+    1. Starts the Capture process.
+    2. Starts the Processor.
+    3. Receives the Task scheduling command executed by the Owner.
+    4. Starts or stops tablePipeline according to the scheduling command.
 
-- Start an owner TiCDC node:
+- For an owner TiCDC node, it works as follows:
 
-    1. Start the Capture process.
-    2. A node is elected as the Owner and the corresponding thread is started.
-    3. Read the changefeed information.
-    4. Start changefeed management logic.
-    5. Read the schema information in TiKV according to the changefeed configuration and the latest checkpointTS to determine the tables to be replicated.
-    6. Read the list of tables currently replicated by each Processor and distribute the tables to be added.
-    7. Update the replication progress.
+    1. Starts the Capture process.
+    2. The node is elected as the Owner and the corresponding thread is started.
+    3. Reads the changefeed information.
+    4. Starts the changefeed management process.
+    5. Reads the schema information in TiKV according to the changefeed configuration and the latest checkpointTS to determine the tables to be replicated.
+    6. Reads the list of tables currently replicated by each Processor and distributes the tables to be added.
+    7. Updates the replication progress.
 
 ### Stop TiCDC
 
@@ -176,5 +176,5 @@ Usually, you stop a TiCDC node when you need to upgrade it or perform some plann
 1. The node receives the command to stop itself.
 2. The node sets its service status to unavailable.
 3. The node stops receiving new replication tasks.
-4. Notifies the Owner node to transfer its data replication tasks to other nodes.
+4. The node notifies the Owner node to transfer its data replication tasks to other nodes.
 5. The node stops after the replication tasks are transferred to other nodes.
