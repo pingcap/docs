@@ -19,7 +19,7 @@ For Serverless Tier clusters, you can connect to your cluster via a SQL client o
 
 - Connect via SQL editor
 
-    SQL editor is a web-based SQL editor that allows you to directly edit and run SQL queries against databases of Serverless Tier. To access SQL editor, click the **Connect** button on your TiDB Cloud console and then click **SQL Editor**.
+    SQL editor is a web-based SQL editor that allows you to directly edit and run SQL queries against databases of Serverless Tier. To access SQL editor, in the [TiDB Cloud console](https://tidbcloud.com/), navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page, locate your cluster, click **Connect** and then select **SQL Editor** in the drop-down list.
 
 ## Dedicated Tier
 
@@ -31,7 +31,7 @@ For Dedicated Tier clusters, you can connect to your cluster via a SQL client or
     - [Connect via private endpoint](/tidb-cloud/set-up-private-endpoint-connections.md) (recommended): Private endpoint connection provides a private endpoint to allow clients in your VPC to securely access services over AWS PrivateLink, which provides highly secure and one-way access to database services with simplified network management.
     - [Connect via VPC peering](/tidb-cloud/set-up-vpc-peering-connections.md): If you want lower latency and more security, set up VPC peering and connect via a private endpoint using a VM instance on the corresponding cloud provider in your cloud account.
 
-+ [Connect via SQL Shell](/tidb-cloud/connect-via-sql-shell.md): to try TiDB SQL and test out TiDB's compatibility with MySQL quickly, or administer user privileges.
++ [Connect via SQL Shell](/tidb-cloud/connect-via-sql-shell.md): to try TiDB SQL and test out TiDB's compatibility with MySQL quickly, or administer user privileges
 
 ## What's next
 

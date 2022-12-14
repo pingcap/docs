@@ -7,7 +7,7 @@ summary:
 
 > **Note:**
 >
-> You cannot connect to [Serverless Tier clusters](/tidb-cloud/select-cluster-tier.md#serverless-tier-beta) using SQL Shell.
+> You cannot connect to [Serverless Tier clusters](/tidb-cloud/select-cluster-tier.md#serverless-tier-beta) using SQL Shell. To connect to your Serverless Tier cluster, see [Connect to Serverless Tier clusters](/tidb-cloud/connect-to-tidb-cluster.md#serverless-tier).
 
 To connect to your TiDB cluster using SQL shell, perform the following steps:
 
