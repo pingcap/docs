@@ -79,6 +79,7 @@ TiDB 6.5.0 is a Long-Term Support Release (LTS).
     In v6.5.0, TiDB supports binding historical execution plans by extending the binding object in the [`CREATE [GLOBAL | SESSION] BINDING`](/sql-statements/sql-statement-create-binding.md) statement. When the execution plan of a SQL statement changes, you can bind the original execution plan by specifying `plan_digest` in the `CREATE [GLOBAL | SESSION] BINDING` statement to quickly recover SQL performance, as long as the original execution plan is still in the SQL execution history memory table (for example, `statements_summary`). This feature can simplify the process of handling execution plan change issues and improve your maintenance efficiency.
 
     For more information, see [user documentation](/sql-plan-management.md#bind-historical-execution-plans).
+
 ### Security
 
 * Support the password complexity policy [#38928](https://github.com/pingcap/tidb/issues/38928) @[CbcWestwolf](https://github.com/CbcWestwolf) **tw@ran-huang**
@@ -145,7 +146,7 @@ TiDB 6.5.0 is a Long-Term Support Release (LTS).
 
     For more information, see [User document](/optimizer-hints.md#hints-that-take-effect-globally).
 
-* Support pushing down the sorting operation of [partitioned-table](/partitioned-table.md) to TiKV [#26166](https://github.com/pingcap/tidb/issues/26166) @[winoros](https://github.com/winoros) **tw@qiancai**
+* Support pushing down sorting operations of [partitioned-table](/partitioned-table.md) to TiKV [#26166](https://github.com/pingcap/tidb/issues/26166) @[winoros](https://github.com/winoros) **tw@qiancai**
 
    Although [partitioned table](/partitioned-table.md) has been GA since v6.1.0, TiDB is continually improving its performance. In v6.5.0, TiDB supports pushing down sort operations such as `ORDER BY` and `LIMIT` to TiKV for computation and filtering, which reduces network I/O overhead and improves SQL performance when you use partitioned tables.
 
