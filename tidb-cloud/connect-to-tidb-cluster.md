@@ -1,6 +1,6 @@
 ---
 title: Connect to Your TiDB Cluster
-summary: Learn how to connect to your TiDB cluster via a SQL client or SQL shell.
+summary: Learn how to connect to your TiDB cluster via different methods.
 ---
 
 # Connect to Your TiDB Cluster

@@ -1,6 +1,6 @@
 ---
 title: Connect via SQL Shell
-summary:
+summary: Learn how to connect to your TiDB cluster via SQL Shell.
 ---
 
 # Connect via SQL Shell
