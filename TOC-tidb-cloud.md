@@ -100,17 +100,25 @@
   - [Import Sample Data](/tidb-cloud/import-sample-data.md)
   - Migrate Data into TiDB
     - [Overview](/tidb-cloud/tidb-cloud-migration-overview.md)
-    - [Configure Amazon S3 Access and GCS Access](/tidb-cloud/config-s3-and-gcs-access.md)
-    - [Naming Conventions for Data Import](/tidb-cloud/naming-conventions-for-data-import.md)
-    - [Migrate from MySQL-Compatible Databases](/tidb-cloud/migrate-data-into-tidb.md)
-    - [Migrate Incremental Data from MySQL-Compatible Databases](/tidb-cloud/migrate-incremental-data-from-mysql.md)
-    - [Migrate and Merge MySQL Shards of Large Datasets](/tidb-cloud/migrate-sql-shards.md)
-    - [Migrate from Amazon Aurora MySQL in Bulk](/tidb-cloud/migrate-from-aurora-bulk-import.md)
-    - [Import or Migrate from Amazon S3 or GCS to TiDB Cloud](/tidb-cloud/migrate-from-amazon-s3-or-gcs.md)
-    - [Import CSV Files from Amazon S3 or GCS into TiDB Cloud](/tidb-cloud/import-csv-files.md)
-    - [Import Apache Parquet Files from Amazon S3 or GCS into TiDB Cloud](/tidb-cloud/import-parquet-files.md)
-    - [Troubleshoot Access Denied Errors during Data Import from Amazon S3](/tidb-cloud/troubleshoot-import-access-denied-error.md)
+    - [Migrate from MySQL-Compatible Databases Using Data Migration](/tidb-cloud/migrate-from-mysql-using-data-migration.md)
+    - Migrate from MySQL-Compatible On-Premises Databases Using Data Import
+        - [Migrate from MySQL-Compatible Databases](/tidb-cloud/migrate-data-into-tidb.md)
+        - [Migrate Incremental Data from MySQL-Compatible Databases](/tidb-cloud/migrate-incremental-data-from-mysql.md)
+        - [Migrate and Merge MySQL Shards of Large Datasets](/tidb-cloud/migrate-sql-shards.md)
+    - Migrate from Public Cloud Storage
+        - [Migrate from Amazon Aurora MySQL in Bulk](/tidb-cloud/migrate-from-aurora-bulk-import.md)
+        - [Import or Migrate from Amazon S3 or GCS to TiDB Cloud](/tidb-cloud/migrate-from-amazon-s3-or-gcs.md)
+        - [Import CSV Files from Amazon S3 or GCS into TiDB Cloud](/tidb-cloud/import-csv-files.md)
+        - [Import Apache Parquet Files from Amazon S3 or GCS into TiDB Cloud](/tidb-cloud/import-parquet-files.md)
+    - Reference
+        - [Configure Amazon S3 Access and GCS Access](/tidb-cloud/config-s3-and-gcs-access.md)
+        - [Naming Conventions for Data Import](/tidb-cloud/naming-conventions-for-data-import.md)
+        - [Troubleshoot Access Denied Errors during Data Import from Amazon S3](/tidb-cloud/troubleshoot-import-access-denied-error.md)
   - [Export Data from TiDB](/tidb-cloud/export-data-from-tidb-cloud.md)
+- Stream data
+  - [Changefeed Overview](/tidb-cloud/changefeed-overview.md)
+  - [To MySQL sink](/tidb-cloud/changefeed-sink-to-mysql.md)
+  - [To Kafka sink](/tidb-cloud/changefeed-sink-to-apache-kafka.md)
 - Back Up and Restore
   - [Automatic Backup](/tidb-cloud/backup-and-restore.md)
   - [Manual Backup](/tidb-cloud/backup-and-restore.md#manual-backup)
@@ -178,6 +186,8 @@
   - [Billing Details](/tidb-cloud/tidb-cloud-billing.md#billing-details)
   - [Credits](/tidb-cloud/tidb-cloud-billing.md#credits)
   - [Payment Method Setting](/tidb-cloud/tidb-cloud-billing.md#payment-method)
+  - [Billing from AWS or GCP Marketplace](/tidb-cloud/tidb-cloud-billing.md#billing-from-aws-marketplace-or-google-cloud-marketplace)
+  - [Billing for Changefeeed](/tidb-cloud/tidb-cloud-billing-ticdc-rcu.md)
 - API
   - [API Overview](/tidb-cloud/api-overview.md)
   - [API Reference](https://docs.pingcap.com/tidbcloud/api/v1beta)
@@ -186,6 +196,7 @@
   - [Datadog](/tidb-cloud/monitor-datadog-integration.md)
   - [dbt](/tidb-cloud/integrate-tidbcloud-with-dbt.md)
   - [Prometheus and Grafana](/tidb-cloud/monitor-prometheus-and-grafana-integration.md)
+  - [ProxySQL](/develop/dev-guide-proxysql-integration.md)
   - Terraform
     - [Terraform Integration Overview](/tidb-cloud/terraform-tidbcloud-provider-overview.md)
     - [Get TiDB Cloud Terraform Provider](/tidb-cloud/terraform-get-tidbcloud-provider.md)
@@ -193,6 +204,7 @@
     - [Use Backup Resource](/tidb-cloud/terraform-use-backup-resource.md)
     - [Use Restore Resource](/tidb-cloud/terraform-use-restore-resource.md)
   - [Vercel](/tidb-cloud/integrate-tidbcloud-with-vercel.md)
+  - [Zapier](/tidb-cloud/integrate-tidbcloud-with-zapier.md)
 - Reference
   - TiDB Cluster Architecture
     - [Overview](/tidb-architecture.md)
@@ -430,7 +442,10 @@
   - [Dumpling](/dumpling-overview.md)
   - [Table Filter](/table-filter.md)
   - [Troubleshoot Inconsistency Between Data and Indexes](/troubleshoot-data-inconsistency-errors.md)
-- [FAQs](/tidb-cloud/tidb-cloud-faq.md)
+  - [Serverless Tier Limitations](/tidb-cloud/serverless-tier-limitations.md)
+- FAQs
+  - [TiDB Cloud FAQs](/tidb-cloud/tidb-cloud-faq.md)
+  - [Serverless Tier FAQs](/tidb-cloud/serverless-tier-faqs.md)
 - Release Notes
   - [2022](/tidb-cloud/release-notes-2022.md)
   - [2021](/tidb-cloud/release-notes-2021.md)

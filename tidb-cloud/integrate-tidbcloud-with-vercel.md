@@ -51,13 +51,16 @@ The detailed steps are as follows:
 2. Select the scope of your integration in the drop-down list and click **CONTINUE**.
 3. Select the Vercel Projects to which the integration will be added and click **CONTINUE**.
 4. Confirm the required permissions for integration and click **ADD INTEGRATION**. Then you are directed to an integration page of the TiDB Cloud console.
-5. On the integration page, select the target Vercel projects, and select the target TiDB Cloud cluster after providing the cluster information. Each TiDB Cloud cluster belongs to [an organization and a project](/tidb-cloud/manage-user-access.md#view-the-organization-and-project).
-6. Click **Add Integration and Return to Vercel**.
-7. Back to your Vercel dashboard, go to your Vercel project, click **Settings** > **Environment Variables**, and confirm that the environment variables have been automatically added.
+5. On the left side, select the target Vercel projects and framework your Vercel projects using. If the framework isn't listed, select **General**. Different frameworks determine different environment variables.
+6. On the right side, select the target TiDB Cloud cluster after providing the cluster information. Each TiDB Cloud cluster belongs to [an organization and a project](/tidb-cloud/manage-user-access.md#view-the-organization-and-project).
+7. Click **Add Integration and Return to Vercel**.
+8. Back to your Vercel dashboard, go to your Vercel project, click **Settings** > **Environment Variables**, and confirm that the environment variables have been automatically added.
 
     If the variables have been added, the connection is completed.
 
-After you have completed the integration setup and successfully connected a TiDB Cloud cluster to your Vercel projects, the information necessary for the connection is automatically set in the projects' environment variables. The following are some common variables:
+After you have completed the integration setup and successfully connected a TiDB Cloud cluster to your Vercel projects, the information necessary for the connection is automatically set in the projects' environment variables.
+
+**General**
 
 ```
 TIDB_HOST
@@ -70,6 +73,12 @@ For Dedicated Tier clusters, the root CA is set in this variable:
 
 ```
 TIDB_SSL_CA
+```
+
+**Prisma**
+
+```
+DATABASE_URL
 ```
 
 ## Connect via manually setting environment variables

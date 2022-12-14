@@ -5,7 +5,15 @@ summary: Learn the software and hardware recommendations for deploying and runni
 
 # Software and Hardware Recommendations
 
-As an open source distributed NewSQL database with high performance, TiDB can be deployed in the Intel architecture server, ARM architecture server, and major virtualization environments and runs well. TiDB supports most of the major hardware networks and Linux operating systems.
+<!-- Localization note for TiDB:
+
+- English: use distributed SQL, and start to emphasize HTAP
+- Chinese: can keep "NewSQL" and emphasize one-stop real-time HTAP ("一栈式实时 HTAP")
+- Japanese: use NewSQL because it is well-recognized
+
+-->
+
+As an open-source distributed SQL database with high performance, TiDB can be deployed in the Intel architecture server, ARM architecture server, and major virtualization environments and runs well. TiDB supports most of the major hardware networks and Linux operating systems.
 
 ## OS and platform requirements
 
@@ -79,7 +87,7 @@ Other Linux OS versions such as Debian Linux and Fedora Linux might work but are
 
 |  Libraries required for compiling and building TiDB   |  Version   |
 |   :---   |   :---   |
-|   Golang  |  1.18.5 or later  |
+|   Golang  |  <ul><li>For TiDB v6.1.0, v6.1.1, and v6.1.2: 1.18 or later</li><li>For TiDB v6.1.3: 1.19.3 or later</li></ul> |
 |   Rust    |   nightly-2022-07-31 or later  |
 |  GCC      |   7.x      |
 |  LLVM     |  13.0 or later  |
@@ -157,7 +165,15 @@ Before you deploy TiCDC, note that it is recommended to deploy TiCDC on PCIe-SSD
 
 ## Network requirements
 
-As an open source distributed NewSQL database, TiDB requires the following network port configuration to run. Based on the TiDB deployment in actual environments, the administrator can open relevant ports in the network side and host side.
+<!-- Localization note for TiDB:
+
+- English: use distributed SQL, and start to emphasize HTAP
+- Chinese: can keep "NewSQL" and emphasize one-stop real-time HTAP ("一栈式实时 HTAP")
+- Japanese: use NewSQL because it is well-recognized
+
+-->
+
+As an open-source distributed SQL database, TiDB requires the following network port configuration to run. Based on the TiDB deployment in actual environments, the administrator can open relevant ports in the network side and host side.
 
 | Component | Default Port | Description |
 | :--:| :--: | :-- |

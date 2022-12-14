@@ -86,7 +86,7 @@
   - Third-Party Support
     - [Third-Party Tools Supported by TiDB](/develop/dev-guide-third-party-support.md)
     - [Known Incompatibility Issues with Third-Party Tools](/develop/dev-guide-third-party-tools-compatibility.md)
-    - [Integrate with ProxySQL](/develop/dev-guide-proxysql-integration.md)
+    - [ProxySQL Integration Guide](/develop/dev-guide-proxysql-integration.md)
 - Deploy
   - [Software and Hardware Requirements](/hardware-and-software-requirements.md)
   - [Environment Configuration Checklist](/check-before-deployment.md)
@@ -883,6 +883,7 @@
   - [TiDB Versioning](/releases/versioning.md)
   - [TiDB Installation Packages](/binary-package.md)
   - v6.1
+    - [6.1.3](/releases/release-6.1.3.md)
     - [6.1.2](/releases/release-6.1.2.md)
     - [6.1.1](/releases/release-6.1.1.md)
     - [6.1.0](/releases/release-6.1.0.md)
@@ -894,6 +895,7 @@
     - [5.4.1](/releases/release-5.4.1.md)
     - [5.4.0](/releases/release-5.4.0.md)
   - v5.3
+    - [5.3.4](/releases/release-5.3.4.md)
     - [5.3.3](/releases/release-5.3.3.md)
     - [5.3.2](/releases/release-5.3.2.md)
     - [5.3.1](/releases/release-5.3.1.md)

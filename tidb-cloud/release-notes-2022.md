@@ -8,6 +8,73 @@ aliases: ['/tidbcloud/beta/supported-tidb-versions','/tidbcloud/release-notes']
 
 This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-cloud/) in 2022.
 
+## December 13, 2022
+
+**General changes**
+
+- Introduce TiDB Cloud SQL Editor (Beta) for Serverless Tier.
+
+    This is a web-based SQL editor that allows you to directly edit and run SQL queries against databases of Serverless Tier. You can locate it easily in the left navigation bar of your Serverless Tier cluster.
+
+    For Serverless Tier, the Web SQL Shell is replaced by the SQL Editor.
+
+- Support using [Changefeeds](/tidb-cloud/changefeed-overview.md) to stream data for Dedicated Tier.
+
+    - Support [streaming data change logs to MySQL](/tidb-cloud/changefeed-sink-to-mysql.md).
+
+      When data is migrated from MySQL/Aurora to TiDB, it is often necessary to use MySQL as a stand-by database to prevent unexpected data migration problems. In this case, you can use MySQL sink to stream data from TiDB to MySQL.
+
+    - Support [streaming data change logs to Apache Kafka](/tidb-cloud/changefeed-sink-to-apache-kafka.md) (Beta).
+
+      Streaming TiDB data to the message queue is a very common requirement for data integration scenarios. You can use Kafka sink to realize integration with other data processing systems (such as Snowflake), or support business consuming.
+
+    For more information, refer to [Changefeed Overview](/tidb-cloud/changefeed-overview.md).
+
+- Organization owners can edit the organization's name in **Organization Settings**.
+
+**Console changes**
+
+- Optimize the navigation layout of the [TiDB Cloud console](https://tidbcloud.com) to provide users with a new navigation experience.
+
+    The new layout includes the following changes:
+
+    - Introduce the left navigation bar to maximize screen usage efficiency.
+    - Adopt a flatter navigation hierarchy.
+
+- Improve the [**Connect**](/tidb-cloud/connect-to-tidb-cluster.md) experience for Serverless Tier users.
+
+    Now developers can connect to SQL editor or with their preferred tools in just a few clicks without context switching.
+
+## December 6, 2022
+
+**General changes**
+
+- Upgrade the default TiDB version of new [Dedicated Tier](/tidb-cloud/select-cluster-tier.md#dedicated-tier) clusters from [v6.1.2](https://docs.pingcap.com/tidb/stable/release-6.1.2) to [v6.1.3](https://docs.pingcap.com/tidb/stable/release-6.1.3).
+
+## November 29, 2022
+
+**General changes**
+
+- Improve the user experience from AWS Marketplace and Google Cloud Marketplace.
+
+    No matter whether you are new to TiDB Cloud or you already have a TiDB Cloud account, now you can link with your AWS or GCP billing account, which makes it easier to complete AWS or GCP Marketplace subscriptions.
+
+    For how to make the link, see [Billing from AWS Marketplace or Google Cloud Marketplace](/tidb-cloud/tidb-cloud-billing.md#billing-from-aws-marketplace-or-google-cloud-marketplace).
+
+## November 22, 2022
+
+**General changes**
+
+* Support directly migrating data from Amazon Aurora MySQL, Amazon Relational Database Service (RDS) MySQL, or self-hosted MySQL-compatible databases to TiDB Cloud online (beta).
+
+    Previously, you needed to pause your business and import data offline, or use third-party tools to migrate data to TiDB Cloud, which was complicated. Now, with the **Data Migration** feature, you only need to perform operations on your TiDB Cloud console and securely migrate your data to TiDB Cloud with minimal downtime.
+
+    In addition, Data Migration provides full and incremental data migration capabilities to migrate both existing data and ongoing changes from your data source to TiDB Cloud.
+
+    Currently, the Data Migration feature is still **in beta**. It is available only for [Dedicated Tier](/tidb-cloud/select-cluster-tier.md#dedicated-tier) clusters and only in the AWS Oregon (us-west-2) and AWS Singapore (ap-southeast-1) regions. You can create one migration job for free for each organization. To create multiple migration jobs for an organization, you need to [file a ticket](/tidb-cloud/tidb-cloud-support.md).
+
+    For detailed information, see [Migrate MySQL-Compatible Databases to TiDB Cloud Using Data Migration](/tidb-cloud/migrate-from-mysql-using-data-migration.md).
+
 ## November 15, 2022
 
 **General changes**
