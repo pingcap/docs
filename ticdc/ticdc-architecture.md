@@ -108,7 +108,7 @@ This timestamp exists in both TiKV and TiCDC.
     For TiCDC, the ResolvedTS sent by TiKV is a special event in the format of `<resolvedTS: timestamp>`. In general, the ResolvedTS satisfies the following constraints:
 
     ```
-    table resolved TS >= local resolved TS >= global Resolved TS
+    table resolved TS >= global Resolved TS
     ```
 
 #### CheckpointTS
@@ -116,19 +116,19 @@ This timestamp exists in both TiKV and TiCDC.
 This timestamp only exists in TiCDC. It indicates the minimum data changes that have been replicated to the downstream. That is, for TiCDC, the data before this timestamp has been replicated to the downstream system.
 
 - Table checkpointTS: Because TiCDC replicates data in tables, the table checkpointTS indicates the minimum data that has been replicated at the table level.
-- Processor checkpointTS: Indicates the minimum checkpointTS among all Processors.
-- Global checkpointTS: Indicates the minimum checkpointTS among all Processor checkpointTS.
+- Processor checkpointTS: Indicates the minimum table checkpointTS on the Processor.
+- Global checkpointTS: Indicates the minimum checkpointTS among all Processors .
 
 Generally, a checkpoint TS satisfies the following constraint:
 
 ```
-table checkpoint TS >= local checkpoint TS >= global checkpoint TS
+table checkpoint TS >= global checkpoint TS
 ```
 
-The complete constraint is as follows if we also include ResolvedTS:
+Because TiCDC can only replication data smaller than global Resolved TS to the downstream, so the complete constraint is as follows if we also include ResolvedTS:
 
 ```
-table resolved TS >= local resolved TS >= global Resolved TS >= table checkpoint TS >= local checkpoint TS >= global checkpoint TS
+table resolved TS >= global Resolved TS >= table checkpoint TS >= global checkpoint TS
 ```
 
 After data changes and transactions are committed, the resolvedTS on the TiKV node will continue to advance, and the Puller module on the TiCDC node keeps receiving data pushed by TiKV. The Puller module also decides whether to scan incremental data based on the received information, which ensures that all data changes are sent to the TiCDC node.
