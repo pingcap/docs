@@ -209,7 +209,7 @@ If you encounter any problems during the migration, you can refer to the followi
 
     Ensure that the binlogs required for incremental migration exist. It is recommended to configure `expire_logs_days` to extend the duration of binlogs. Do not use `purge binary log` to clean up binlogs.
 
-- Error message: "Failed to dial the source database using given parameters. Please make sure the source database is up and can be connected using the given parameters."
+- Error message: "Failed to connect to the source database using given parameters. Please make sure the source database is up and can be connected using the given parameters."
 
     This error means that the connection to the upstream database failed. Check whether the upstream database is started and can be connected to using the specified parameters. After confirming that the upstream database is available, you can try to recover the task by using `restart`.
 
