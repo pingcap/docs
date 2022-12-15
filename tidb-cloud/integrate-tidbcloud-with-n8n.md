@@ -7,7 +7,7 @@ summary: Learn the use TiDB Cloud node in n8n.
 
 [n8n](https://n8n.io/) is an extendable workflow automation tool. With a [fair-code](https://faircode.io/) distribution model, n8n will always have visible source code, be available to self-host, and allow you to add your custom functions, logic ,and apps. 
 
-This document introduces how to build an auto-workflow, create a TiDB Serverless cluster and write some data into TiDB.
+This document introduces how to build an auto-workflow: create a TiDB Serverless cluster, gather Hack News RSS, store it to TiDB and send a briefing email.
 
 ## Prerequisites: Get TiDB Cloud API Key
 
@@ -58,13 +58,15 @@ In this step, you will create a new workflow to insert some data to TiDB when yo
 
 This example usage workflow would use the following nodes.
 
-- [Manual Trigger node](https://docs.n8n.io/integrations/builtin/core-nodes/n8n-nodes-base.manualworkflowtrigger/)
-- [Set node](https://docs.n8n.io/integrations/builtin/core-nodes/n8n-nodes-base.set/)
+- [Schedule Trigger](https://docs.n8n.io/integrations/builtin/core-nodes/n8n-nodes-base.scheduletrigger/)
+- [RSS Read](https://docs.n8n.io/integrations/builtin/core-nodes/n8n-nodes-base.rssfeedread/)
+- [Code](https://docs.n8n.io/integrations/builtin/core-nodes/n8n-nodes-base.code/)
+- [Gmail](https://docs.n8n.io/integrations/builtin/app-nodes/n8n-nodes-base.gmail/)
 - [TiDB Cloud node](https://www.npmjs.com/package/n8n-nodes-tidb-cloud)
 
 The final workflow should look like the following image.
 
-![img](/media/tidb-cloud/integration-n8n-workflow.jpg)
+![img](/media/tidb-cloud/integration-n8n-workflow-rss.jpg)
 
 ### (Optional) Create a TiDB Cloud Serverless Tier cluster
 
@@ -83,13 +85,19 @@ If you haven't got a TiDB Cloud Serverless Tier cluster, you can use this node t
 
 > Note: The step takes some 1 minute to create a new TiDB Serverless cluster.
 
-### Create an insert operation workflow
+### Create a workflow
 
 #### Use a manual trigger as the workflow's starter
 
 1. If you don't have a workflow. Please navigate to **Workflows** panel, and click **Add workflow**. Otherwise, skip this point.
-2. Click **+** in the top right corner and search `manual trigger`.
+2. Click **+** in the top right corner and search `schedule trigger`.
 3. Drag the manual trigger node to your workspace.
+4. Choose `Days` in the **Trigger Interval**.
+5. Set **Days Between Triggers** as `1`.
+6. Choose `8am` in the T**rigger at Hour**.
+7. Set **Trigger at Minute** as `0`.
+
+This trigger will enable your workflow every morning at 8am. 
 
 #### Create a table used to insert data
 
@@ -102,30 +110,83 @@ If you haven't got a TiDB Cloud Serverless Tier cluster, you can use this node t
 7. Choose a user in the **User** list. You needn't worry about creating users as TiDB always creates a default user for you.
 8. Enter `test` in the **Database** field.
 9. Enter your database password.
-10. Enter the following SQL in the ***SQL*** field:`CREATE TABLE IF NOT EXISTS execute_workflow (id INT AUTO_INCREMENT PRIMARY KEY, name VARCHAR(200), update_time TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP)`.
-11. Click on **Execute Node** to run the node.
+10. Enter the following SQL in the ***SQL*** field:
+   ```   
+   CREATE TABLE IF NOT EXISTS hack_news_briefing (creator VARCHAR (200), title TEXT,  link VARCHAR(200), pubdate VARCHAR(200), comments VARCHAR(200), content TEXT, guid VARCHAR (200), isodate VARCHAR(200));
+   ```
+11. Click on **Execute Node** to create the table.
 
-#### Build data to insert
+#### Get the Hack News RSS
 
 1. Click **+** to the right of the TiDB Cloud node.
-2. Click the **Add Value** button and select `String` from the dropdown list.
-3. Enter `name` in the **Name** field.
-4. Enter a name string in the **Value** field. For example, `n8n-tidb-workflow`.
+2. Search `rss feed read` and add it to the workspace.
+3. Enter `https://hnrss.org/frontpage` to the **URL**.
 
 #### Insert data to TiDB
 
-1. Click **+** to the right of the set node.
+1. Click **+** to the right of the RSS Feed Read node.
 2. Search `TiDB Cloud` and add it to the workspace.
 3. Select the credentials that you entered in the previous node.
 4. Choose your project from the **Project** list.
 5. Select `Insert` from the **Operation** list.
 6. Enter the value in **Cluster**, **User**, **Database** and **Password** fields.
-7. Enter the `execute_workflow` table in the **Table** field.
-8. Enter `name` in the **Columns** field.
+7. Enter the `hack_news_briefing` table in the **Table** field.
+8. Enter `creator, title, link, pubdate, comments, content, guid, isodate` in the **Columns** field.
+
+#### Build message
+
+1. Click **+** to the right of the RSS Feed Read node.
+2. Search `code` and add it to the workspace.
+3. Copy the following code to the **JavaScript Code**.
+```javascript
+let message = "";
+
+// Loop the input items
+for (item of items) {
+  message += `
+       <h3>${item.json.title}</h3>
+       <br>
+       ${item.json.content}
+       <br>
+       `
+}
+
+let response =
+    `
+       <!DOCTYPE html> 
+       <html> 
+       <head> 
+       <title>Hack News Briefing</title> 
+    </head> 
+    <body>  
+        ${message} 
+    </body> 
+    </html>
+    `
+// Return our message
+return [{json: {response}}];
+```
+
+#### Send message by Gmail
+
+1. Click **+** to the right of the code node.
+2. Search `gmail` and add it to the workspace.
+3. Enter credentials for the Gmail node, you can find out how to do that [here](https://docs.n8n.io/integrations/builtin/credentials/google/oauth-single-service/).
+4. Choose `Message` in the **Resource**. 
+5. Choose `Send` in the **Operation**.
+6. Enter your email in the **To**.
+7. Enter `Hack News Briefing` in the **Subject**.
+8. Choose `HTML` in the **Email Type**.
+9. Set **Message** field mode to `Expression`
+10. Enter `{{ $json["response"] }}` in the **Message**.
+
+> Note: It is very important to mouse over the Message field and select the Expression pattern.
 
 ## Step 4: Run Your Workflow
 
-After building up the workflow, you can click the **Execute Workflow** button to run it. This workflow will help you to create a new TiDB Cloud Serverless Tier cluster and record the execution times of the workflow.
+After building up the workflow, you can click the **Execute Workflow** button to test run it. You'll get Hack News briefing emails ,and these news will be logged to your TiDB Cloud Serverless Tier. So don't be worry about losing them.
+
+Now you can activate this workflow in the **Workflows** panel. This workflow will help you get the first page articles on Hack News every day.
 
 ## Support Operations of TiDB Cloud Node
 
