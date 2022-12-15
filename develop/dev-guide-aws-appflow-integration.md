@@ -25,10 +25,6 @@ This document describes how to integrate TiDB with Amazon AppFlow and takes a Ti
         - `AWSLambda_FullAccess`: currently, [AWS Lambda](https://aws.amazon.com/lambda/?nc2=h_ql_prod_fs_lbd) is the only way to implement a new connector for Amazon AppFlow.
         - `IAMFullAccess`: SAM CLI needs to create a `ConnectorFunctionRole` to the connector.
 
-    - Permissions Preview:
-
-        ![aws auth](/media/develop/aws-appflow-step-auth.png)
-
 - A [SalesForce](https://developer.salesforce.com) account.
 
 ## Step 1. Register a TiDB connector
@@ -62,10 +58,10 @@ git clone https://github.com/pingcap-inc/tidb-appflow-integration
 
     > **Note:**
     >
-    > - `--guided` option will ask you some questions at the terminal. The answer will be stored in a file. The default name is `samconfig.toml`.
-    > - `stack_name` refers to the name of AWS Lambda. You can type what you want to call this service.
+    > - `--guided` option uses prompts to guide you through the deployment. Your input will be stored in a file， which is `samconfig.toml` by default.
+    > - `stack_name` specifies the name of AWS Lambda that you're deploying.
     > - If you want to use AWS S3 as the source or destination, you need to set the `region` of AWS Lambda as the same as AWS S3.
-    > - If you already run the `sam deploy --guided`. Next time, you can just run `sam deploy` instead, SAM CLI will use the config file `samconfig.toml` to simplify the interaction.
+    > - If you have already run the `sam deploy --guided` before, you can just run `sam deploy` instead, and SAM CLI will use the configuration file `samconfig.toml` to simplify the interaction.
 
     If you see a similar output as follows, this Lambda is successfully deployed.
 
@@ -73,7 +69,7 @@ git clone https://github.com/pingcap-inc/tidb-appflow-integration
     Successfully created/updated stack - <stack_name> in <region>
     ```
 
-    Then you can see the [Lambda Dashboard](https://us-west-2.console.aws.amazon.com/lambda/home). It will appear you uploaded Lambda just now (Don't forget to select the correct region).
+    Then you can see the [Lambda Dashboard](https://us-west-2.console.aws.amazon.com/lambda/home). It shows the Lambda that you just uploaded. Note that do not forget to select the correct region.
 
     ![lambda dashboard](/media/develop/aws-appflow-step-lambda-dashboard.png)
 
@@ -83,15 +79,15 @@ git clone https://github.com/pingcap-inc/tidb-appflow-integration
 >
 > The following operations are on [AWS Console](https://console.aws.amazon.com), which is super handy.
 
-Navigate to [Amazon AppFlow > Connectors](https://console.aws.amazon.com/appflow/home#/gallery) and click **Register new connector**.
+1. Navigate to [Amazon AppFlow > Connectors](https://console.aws.amazon.com/appflow/home#/gallery) and click **Register new connector**.
 
-![register connector](/media/develop/aws-appflow-step-register-connector.png)
+    ![register connector](/media/develop/aws-appflow-step-register-connector.png)
 
-In the **Register a new connector** dialog, choose the Lambda function you uploaded and specify the connector label, which is the name of the connector.
+2. In the **Register a new connector** dialog, choose the Lambda function you uploaded and specify the connector label, which is the name of the connector.
 
-![register connector dialog](/media/develop/aws-appflow-step-register-connector-dialog.png)
+    ![register connector dialog](/media/develop/aws-appflow-step-register-connector-dialog.png)
 
-Click **Register** and then a TiDB connector is registered successfully.
+3. Click **Register** and then a TiDB connector is registered successfully.
 
 ## Step 2. Using the TiDB connector to create a flow
 
@@ -129,42 +125,43 @@ In **Step 2**, you need to choose the **Source details** and **Destination detai
 >
 > If your company already used the Professional Edition of Salesforce, the REST API is not enabled by default. You might need to register a new Developer Edition to use the REST API. For more information, refer to [Salesforce Forum Topic](https://developer.salesforce.com/forums/?id=906F0000000D9Y2IAK).
 
-- In the **Destination details** tab, choose the TiDB-Connector as the destination and the **Connect** will appear.
+- In the **Destination details** tab, choose **TiDB-Connector** as the destination and the **Connect** is displayed.
 
     ![tidb dest](/media/develop/aws-appflow-step-tidb-dest.png)
 
 > **Note:**
 >
-> If you do not have a TiDB cluster, you can create a [Serverless Tier](https://tidbcloud.com/console/clusters) cluster, which is free and can be created in approximately 30 seconds. This guide uses AWS as the cloud provider of TiDB Cloud Serverless Tier. To speed up the connection, you can choose the same region as Lambda.
+> - If you do not have a TiDB cluster, you can create a [Serverless Tier](https://tidbcloud.com/console/clusters) cluster, which is free and can be created in approximately 30 seconds.
+> - This guide uses AWS as the cloud provider of TiDB Cloud Serverless Tier. To speed up the connection, you can choose the same region as Lambda.
 
-- Before connecting, you need to create a table at TiDB. Let’s run a SQL at TiDB Serverless Tier (This table schema from the sample data in [Tutorial of Amazon AppFlow](https://docs.aws.amazon.com/appflow/latest/userguide/flow-tutorial-set-up-source.html)).
+- Before connecting, you need to create a table at TiDB. Note that this table schema is different from the sample data in [Tutorial of Amazon AppFlow](https://docs.aws.amazon.com/appflow/latest/userguide/flow-tutorial-set-up-source.html).
 
-```sql
-CREATE TABLE `sf_account` (
-    `id` varchar(255) NOT NULL,
-    `name` varchar(150) NOT NULL DEFAULT '',
-    `type` varchar(150) NOT NULL DEFAULT '',
-    `billing_state` varchar(255) NOT NULL DEFAULT '',
-    `rating` varchar(255) NOT NULL DEFAULT '',
-    `industry` varchar(255) NOT NULL DEFAULT '',
-    PRIMARY KEY (`id`)
-);
-```
+    ```sql
+    CREATE TABLE `sf_account` (
+        `id` varchar(255) NOT NULL,
+        `name` varchar(150) NOT NULL DEFAULT '',
+        `type` varchar(150) NOT NULL DEFAULT '',
+        `billing_state` varchar(255) NOT NULL DEFAULT '',
+        `rating` varchar(255) NOT NULL DEFAULT '',
+        `industry` varchar(255) NOT NULL DEFAULT '',
+        PRIMARY KEY (`id`)
+    );
+    ```
 
-- After executing the preceding statement and creating the `sf_account` table, you can click **Connect**.
-- In this dialog, you need to enter the connection properties of the TiDB cluster. If you use a TiDB Cloud Serverless Tier cluster, you need to enable the **TLS** option and set it to `Yes`, which lets the TiDB connector use the TLS connection. Then, click **Connect**.
+1. After executing the preceding statement and creating the `sf_account` table, you can click **Connect**. A connection page is displayed.
+2. In the **Connect to TiDB-Connector** dialog, you need to enter the connection properties of the TiDB cluster. If you use a TiDB Cloud Serverless Tier cluster, you need to enable the **TLS** option and set it to `Yes`, which lets the TiDB connector use the TLS connection. Then, click **Connect**.
 
     ![tidb connection message](/media/develop/aws-appflow-step-tidb-connection-message.png)
 
-- Then, you can get all tables in the database that you specified in the last step.
+3. Then, you can get all tables in the database that you specified in the last step.
 
     ![database](/media/develop/aws-appflow-step-database.png)
 
-- The following configuration shows transferring data from the Salesforce **Account** objects to the `sf_account` table in TiDB:
+4. The following configuration shows transferring data from the Salesforce **Account** objects to the `sf_account` table in TiDB:
 
     ![complete flow](/media/develop/aws-appflow-step-complete-flow.png)
 
-- In the **Error handling** tab, choose **Stop the current flow run**. In the **Flow trigger** tab, choose the **Run on demand** trigger type, which means you need to run the flow manually.
+5. In the **Error handling** tab, choose **Stop the current flow run**. In the **Flow trigger** tab, choose the **Run on demand** trigger type, which means you need to run the flow manually.
 
     ![complete step1](/media/develop/aws-appflow-step-complete-step1.png)
 
@@ -205,7 +202,7 @@ In **Step 4**, there is no filter needed in this documentation. But if you want,
 
 ![filters](/media/develop/aws-appflow-step-filters.png)
 
-### Review and Create the Flow
+### Confirm and create the Flow
 
 This step is to confirm the information of the flow to be created. After confirming, click **Create flow**.
 
@@ -217,11 +214,11 @@ Click **Run flow** in the upper-right corner of the newly created flow page.
 
 ![run flow](/media/develop/aws-appflow-step-run-flow.png)
 
-The following diagram shows an example when the flow runs successfully:
+The following diagram shows an example that the flow runs successfully:
 
 ![run success](/media/develop/aws-appflow-step-run-success.png)
 
-Query the `sf_account` table and you can see that the records have been written to it.
+Query the `sf_account` table and you can see that the records have been written to it:
 
 ```sql
 test> SELECT * FROM sf_account;
@@ -244,9 +241,9 @@ test> SELECT * FROM sf_account;
 +--------------------+-------------------------------------+--------------------+---------------+--------+----------------+
 ```
 
-## Noteworthy Things
+## Noteworthy things
 
-- If something goes wrong, you can navigate to [CloudWatch](https://console.aws.amazon.com/cloudwatch/home) page on the AWS Management console to get logs.
+- If something goes wrong, you can navigate to the [CloudWatch](https://console.aws.amazon.com/cloudwatch/home) page on the AWS Management Console to get logs.
 - These steps are based on [Building custom connectors using the Amazon AppFlow Custom Connector SDK](https://aws.amazon.com/blogs/compute/building-custom-connectors-using-the-amazon-appflow-custom-connector-sdk/).
 - [TiDB Cloud Serverless Tier](https://docs.pingcap.com/tidbcloud/select-cluster-tier#serverless-tier-beta) is **NOT** a production environment.
 - To prevent excessive length, the preceding examples only show the `Insert` strategy, but `Update` and `Upsert` strategies are also tested.
