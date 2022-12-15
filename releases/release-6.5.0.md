@@ -206,11 +206,11 @@ TiDB 6.5.0 is a Long-Term Support Release (LTS).
 
 ### Data migration
 
-* Support exporting and importing SQL and CSV files in the following compression formats: gzip, snappy and zstd [#38514](https://github.com/pingcap/tidb/issues/38514) @[lichunzhu](https://github.com/lichunzhu) **tw@hfxsd**
+* Support exporting and importing SQL and CSV files in gzip, snappy, and zstd compression formats [#38514](https://github.com/pingcap/tidb/issues/38514) @[lichunzhu](https://github.com/lichunzhu) **tw@hfxsd**
 
     Dumpling supports exporting data to compressed SQL and CSV files in the following compression formats: gzip, snappy, and zstd. TiDB Lightning also supports importing compressed files in these formats.
 
-    Previously, you had to provide large storage space for exporting or importing data to store the uncompressed CSV and SQL files, resulting in high storage costs. With the release of this feature, you can greatly reduce your storage costs by compressing the storage space.
+    Previously, you had to provide large storage space for exporting or importing data to store CSV and SQL files, resulting in high storage costs. With the release of this feature, you can greatly reduce your storage costs by compressing the data files.
 
     For more information, see [User document](/dumpling-overview.md#improve-export-efficiency-through-concurrency).
 
@@ -218,11 +218,11 @@ TiDB 6.5.0 is a Long-Term Support Release (LTS).
 
     TiDB can filter out binlog events of the schemas and tables that are not in the migration task, thus improving the parsing efficiency and stability. This policy takes effect by default in v6.5.0. No additional configuration is required.
 
-    Previously, even if only a few tables were migrated, the entire binlog file upstream had to be parsed. The binlog events of the tables in the binlog file that did not need to be migrated still had to be parsed, which was not efficient. Meanwhile, if the binlog events of the schemas and tables that are not in the migration task do not support parsing, the task will fail. By only parsing the binlog events of the tables in the migration task, the binlog parsing efficiency can be greatly improved and the task stability can be enhanced.
+    Previously, even if only a few tables were migrated, the entire binlog file upstream had to be parsed. The binlog events of the tables in the binlog file that did not need to be migrated still had to be parsed, which was not efficient. Meanwhile, if these binlog events do not support parsing, the task will fail. By only parsing the binlog events of the tables in the migration task, the binlog parsing efficiency can be greatly improved and the task stability can be enhanced.
 
-* The disk quota in TiDB Lightning is GA. It can prevent TiDB Lightning tasks from overwriting local disks [#446](https://github.com/pingcap/tidb-lightning/issues/446) @[buchuitoudegou](https://github.com/buchuitoudegou) **tw@hfxsd**
+* Disk quota in TiDB Lightning is GA [#446](https://github.com/pingcap/tidb-lightning/issues/446) @[buchuitoudegou](https://github.com/buchuitoudegou) **tw@hfxsd**
 
-    You can configure disk quota for TiDB Lightning. When there is not enough disk quota, TiDB Lightning pauses the process of reading the source data and writing temporary files, and writes the sorted key-values to TiKV first, and then continues the import process after TiDB Lightning deletes the local temporary files.
+    You can configure disk quota for TiDB Lightning. When there is not enough disk quota, TiDB Lightning stops reading source data and writing temporary files. Instead, it writes the sorted key-values to TiKV first, and then continues the import process after TiDB Lightning deletes the local temporary files.
 
     Previously, when TiDB Lightning imported data using physical mode, it would create a large number of temporary files on the local disk for encoding, sorting, and splitting the raw data. When your local disk ran out of space, TiDB Lightning would exit with an error due to failing to write to the file. With this feature, TiDB Lightning tasks can avoid overwriting the local disk.
 
@@ -230,9 +230,9 @@ TiDB 6.5.0 is a Long-Term Support Release (LTS).
 
 * Continuous data validation in DM is GA [#4426](https://github.com/pingcap/tiflow/issues/4426) @[D3Hunter](https://github.com/D3Hunter) **tw@hfxsd**
 
-    In the process of migrating incremental data from upstream to downstream databases, there is a small probability that the flow of data causes errors or data loss. In scenarios that rely on strong data consistency, such as credit and securities businesses, you can perform a full volume checksum on the data after the data migration is complete to ensure data consistency. However, in some scenarios with incremental replication, upstream and downstream writes are continuous and uninterrupted because the upstream and downstream data is constantly changing, making it difficult to perform consistency checks on all the data in the tables.
+    In the process of migrating incremental data from upstream to downstream databases, there is a small probability that data flow might cause errors or data loss. In scenarios where strong data consistency is required, such as credit and securities businesses, you can perform a full volume checksum on the data after migration to ensure data consistency. However, in some incremental replication scenarios, upstream and downstream writes are continuous and uninterrupted because the upstream and downstream data is constantly changing, making it difficult to perform consistency checks on all data.
 
-    Previously, you needed to interrupt the business to do the full data verification, which would affect your business. Now, with this feature, you can perform incremental data verification without interrupting the business.
+    Previously, you needed to interrupt the business to validate the full data, which would affect your business. Now, with this feature, you can perform incremental data validation without interrupting the business.
 
     For more information, see [User document](/dm/dm-continuous-data-validation.md).
 
@@ -358,10 +358,10 @@ Starting from v6.5.0, the [`AMEND TRANSACTION`](/system-variables.md#tidb_enable
 + PD
 
     - Optimize the granularity of locks to reduce lock contention and improve the handling capability of heartbeats under high concurrency [#5586](https://github.com/tikv/pd/issues/5586) @[rleungx](https://github.com/rleungx)
-    - Optimize scheduler performance for large-scale clusters and improve production speed of the scheduling policy [#5473](https://github.com/tikv/pd/issues/5473) @[bufferflies](https://github.com/bufferflies)
+    - Optimize scheduler performance for large-scale clusters and accelerate the production of scheduling policies [#5473](https://github.com/tikv/pd/issues/5473) @[bufferflies](https://github.com/bufferflies)
     - Improve the speed of loading Regions [#5606](https://github.com/tikv/pd/issues/5606) @[rleungx](https://github.com/rleungx)
-    - Improve the performance of handling Region heartbeats [#5648](https://github.com/tikv/pd/issues/5648)@[rleungx](https://github.com/rleungx)
-    - Add the function to automatically GC the tombstone store [#5348](https://github.com/tikv/pd/issues/5348) @[nolouch](https://github.com/nolouch)
+    - Reduce unnecessary overhead by optimized handling of Region heartbeats [#5648](https://github.com/tikv/pd/issues/5648)@[rleungx](https://github.com/rleungx)
+    - Add the feature of automatically garbage collecting tombstone stores [#5348](https://github.com/tikv/pd/issues/5348) @[nolouch](https://github.com/nolouch)
 
 + TiFlash
 
@@ -423,8 +423,8 @@ Starting from v6.5.0, the [`AMEND TRANSACTION`](/system-variables.md#tidb_enable
 
 + TiFlash
 
-    - Fix the issue that minor compaction does not work as expected after TiFlash restarts [#6159](https://github.com/pingcap/tiflash/issues/6159) @[lidezhu](https://github.com/lidezhu)
-    - Fix the issue that TiFlash Open File OPS is too high [#6345](https://github.com/pingcap/tiflash/issues/6345) @[JaySon-Huang](https://github.com/JaySon-Huang)
+    - Fix the issue that column files in the delta layer cannot be compacted after restarting TiFlash [#6159](https://github.com/pingcap/tiflash/issues/6159) @[lidezhu](https://github.com/lidezhu)
+    - Fix the issue that TiFlash File Open OPS is too high [#6345](https://github.com/pingcap/tiflash/issues/6345) @[JaySon-Huang](https://github.com/JaySon-Huang)
 
 + Tools
 
