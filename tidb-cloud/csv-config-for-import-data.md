@@ -7,6 +7,10 @@ summary: Learn how to use CSV configurations for the Import Data service on TiDB
 
 ## Separator 
 
+The following is the CSV Configuration window when you use the Import Data service on TiDB Cloud.
+
+![CSV Configurations](/media/tidb-cloud/import-data-csv-config.png)
+
 Definition：指定字段分隔符。可以为一个或多个字符，不能为空。常用值：CSV 用 ','
 TSV 用 "\t"用于分隔不同字段的记录，如上图所示 1,"Michael","male" 表示 3 个字段的数据。
 Default：,

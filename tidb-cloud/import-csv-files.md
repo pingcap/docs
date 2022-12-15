@@ -142,6 +142,8 @@ To import the CSV files to TiDB Cloud, take the following steps:
     >
     > For the configurations of separator, delimiter, and null, you can use both alphanumeric characters and certain special characters. The supported special characters include `\t`, `\b`, `\n`, `\r`, `\f`, and `\u0001`.
 
+    ![CSV Configurations](/media/tidb-cloud/import-data-csv-config.png)
+
 7. Click **Start Import**.
 
 8. When the import progress shows **Finished**, check the imported tables.
