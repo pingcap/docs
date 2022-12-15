@@ -207,7 +207,7 @@ If you encounter any problems during the migration, you can refer to the followi
 
     This error means that the binlogs to be migrated has been cleaned up and can only be restored by creating a new task.
 
-    Ensure that the binlogs required for incremental migration exist. It is recommended to configure `expire_logs_days` to extend the duration of binlogs. Do not use `purge binary log` to clean up binlogs.
+    Ensure that the binlogs required for incremental migration exist. It is recommended to configure `expire_logs_days` to extend the duration of binlogs. Do not use `purge binary log` to clean up binlogs if it's needed by some migration job.
 
 - Error message: "Failed to connect to the source database using given parameters. Please make sure the source database is up and can be connected using the given parameters."
 
