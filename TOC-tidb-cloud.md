@@ -95,7 +95,7 @@
   - [Pause or Resume a TiDB Cluster](/tidb-cloud/pause-or-resume-tidb-cluster.md)
   - [Upgrade a TiDB Cluster](/tidb-cloud/upgrade-tidb-cluster.md)
   - [Delete a TiDB Cluster](/tidb-cloud/delete-tidb-cluster.md)
-- Migrate Data
+- Migrate or Import Data
   - [Overview](/tidb-cloud/tidb-cloud-migration-overview.md)
   - Migrate Data into TiDB Cloud
       - [Migrate from MySQL-Compatible Databases Using Data Migration](/tidb-cloud/migrate-from-mysql-using-data-migration.md)
