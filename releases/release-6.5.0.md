@@ -294,19 +294,19 @@ TiDB 6.5.0 is a Long-Term Support Release (LTS).
 
 ### System variables
 
-| 变量名  | 修改类型（包括新增/修改/删除）    | 描述 |
+| Variable name | Change type | Description |
 |--------|------------------------------|------|
-| [`tidb_cost_model_version`](/system-variables.md#tidb_cost_model_version-从-v620-版本开始引入) | 修改 | 该变量默认值从 `1` 修改为 `2`，表示默认使用 Cost Model Version 2 进行索引选择和算子选择。 |
-| [`tidb_enable_metadata_lock`](/system-variables.md#tidb_enable_metadata_lock-从-v630-版本开始引入) | 修改 | 该变量默认值从 `OFF` 修改为 `ON`，表示默认开启元数据锁。 |
-| [`tidb_ddl_enable_fast_reorg`](/system-variables.md#tidb_ddl_enable_fast_reorg-从-v630-版本开始引入) | 修改 | 该变量默认值从 `OFF` 修改为 `ON`，表示默认开启创建索引加速功能。 |
-| [`tidb_server_memory_limit`](/system-variables.md#tidb_server_memory_limit-从-v640-版本开始引入) |  修改 | 该变量默认值由 `0` 修改为 `80%`，表示默认将 TiDB 实例的内存限制设为总内存的 80%。|
+| [`tidb_cost_model_version`](/system-variables.md#tidb_cost_model_version-introduced-new-in-v620) | Modified | Change the default value from `1` to `2`, meaning that Cost Model Version 2 is used for index selection and operator selection by default.  |
+| [`tidb_enable_metadata_lock`](/system-variables.md#tidb_enable_metadata_lock-new-in-v630) | Modified | Change the default value from `OFF` to `ON`, meaning that the metadata lock feature is enabled by default. |
+| [`tidb_ddl_enable_fast_reorg`](/system-variables.md#tidb_ddl_enable_fast_reorg-new-in-v630) | Modified | Change the default value from `OFF` to `ON`, meaning that the acceleration of `ADD INDEX` and `CREATE INDEX` is enabled by default. |
+| [`tidb_server_memory_limit`](/system-variables.md#tidb_server_memory_limit-new-in-v640) | Modified | Change the default value from `0` to `80%`, meaning that the memory limit for a TiDB instance is 80% of the total memory by default. |
 | [`default_password_lifetime`](/system-variables.md#default_password_lifetime-new-in-v650) | Newly added | Sets the global policy for automatic password expiration to require the user to change passwords periodically. The default value `0` indicates that the password never expires. |
 | [`disconnect_on_expired_password`](/system-variables.md#disconnect_on_expired_password-new-in-v650) | Newly added | This variable is read-only. It indicates whether to disconnect the client connection when the password is expired.|
 | [`password_history`](/system-variables.md#password_history-new-in-v650) | Newly added | This variable is used to establish a password reuse policy that allows TiDB to limit password reuse based on the number of password changes. The default value `0` means disabling the password reuse policy based on the number of password changes. |
 | [`password_reuse_interval`](/system-variables.md#password_reuse_interval-new-in-v650) | Newly added | This variable is used to establish a password reuse policy that allows TiDB to limit password reuse based on time elapsed. The default value `0` means disabling the password reuse policy based on time elapsed. |
 | [`tidb_cdc_write_source`](/system-variables.md#tidb_cdc_write_source-new-in-v650) | Newly added | When this variable is set to a value other than 0, data written in this session is considered to be written by TiCDC. This variable can only be modified by TiCDC. Do not manually modify this variable in any case. |
-| [`tidb_index_merge_intersection_concurrency`](/system-variables.md#tidb_index_merge_intersection_concurrency-从-v650-版本开始引入) | 新增 | 这个变量用来设置索引合并进行交集操作时的最大并发度，仅在以动态裁剪模式访问分区表时有效。 |
-| [`tidb_mem_quota_query`](/system-variables.md#tidb_mem_quota_query) | 修改 | 在 v6.5.0 之前的版本中，该变量用来设置单条查询的内存使用限制。在 v6.5.0 及之后的版本中，该变量用来设置单个会话整体的内存使用限制。 |
+| [`tidb_index_merge_intersection_concurrency`](/system-variables.md#tidb_index_merge_intersection_concurrency-new-in-v650) | Newly added | Sets the maximum concurrency for the intersection operations that index merge performs. It is effective only when TiDB accesses partitioned tables in the dynamic pruning mode. |
+| [`tidb_mem_quota_query`](/system-variables.md#tidb_mem_quota_query) | Modified | For versions earlier than TiDB v6.5.0, this variable is used to set the threshold value of memory quota for a query. For TiDB v6.5.0 and later versions, this variable is used to set the threshold value of memory quota for a session.  |
 | [`tidb_source_id`](/system-variables.md#tidb_source_id-new-in-v650) | Newly added | This variable is used to configure the different cluster IDs in a [bi-directional replication](/ticdc/manage-ticdc.md#bi-directional-replication) cluster.|
 | [`tidb_ttl_delete_batch_size`](/system-variables.md#tidb_ttl_delete_batch_size-new-in-v650) | Newly added | This variable is used to set the maximum number of rows that can be deleted in a single `DELETE` transaction in a TTL job. |
 | [`tidb_ttl_delete_rate_limit`](/system-variables.md#tidb_ttl_delete_rate_limit-new-in-v650) | Newly added | This variable is used to limit the rate of `DELETE` statements in TTL jobs on each TiDB node. The value represents the maximum number of `DELETE` statements allowed per second in a single node in a TTL job. When this variable is set to `0`, no limit is applied. |
@@ -325,20 +325,19 @@ TiDB 6.5.0 is a Long-Term Support Release (LTS).
 | [`validate_password.number_count`](/system-variables.md#validate_passwordnumber_count-new-in-v650) | Newly added | A check item in the password complexity check. It checks whether the password contains sufficient numbers. This variable takes effect only when [`validate_password.enable`](/system-variables.md#password_reuse_interval-new-in-v650) is enabled and [`validate_password.policy`](/system-variables.md#validate_passwordpolicy-new-in-v650) is set to `1` (MEDIUM) or larger. The default value is `1`. |
 | [`validate_password.policy`](/system-variables.md#validate_passwordpolicy-new-in-v650) | Newly added | This variable controls the policy for the password complexity check. This variable takes effect only when [`validate_password.enable`](/system-variables.md#password_reuse_interval-new-in-v650) is enabled. The default value is `1`. |
 | [`validate_password.special_char_count`](/system-variables.md#validate_passwordspecial_char_count-new-in-v650) | Newly added | A check item in the password complexity check. It checks whether the password contains sufficient special characters. This variable takes effect only when [`validate_password.enable`](/system-variables.md#password_reuse_interval-new-in-v650) is enabled and [`validate_password.policy`](/system-variables.md#validate_passwordpolicy-new-in-v650) is set to `1` (MEDIUM) or larger. The default value is `1`. |
-|        |                              |      |
-|        |                              |      |
 
 ### Configuration file parameters
 
-| 配置文件 | 配置项 | 修改类型 | 描述 |
+| Configuration file | Configuration parameter | Change type | Description |
 | -------- | -------- | -------- | -------- |
 | TiDB | [`disconnect-on-expired-password`](/tidb-configuration-file.md#disconnect-on-expired-password-new-in-v650) | Newly added | Determines whether TiDB disconnects the client connection when the password is expired. The default value is `true`, which means the client connection is disconnected when the password is expired. |
-| TiDB | [`server-memory-quota`](/tidb-configuration-file.md#server-memory-quota-从-v409-版本开始引入) | 废弃 | 自 v6.5.0 起，该配置项被废弃。请使用 [`tidb_server_memory_limit`](/system-variables.md#tidb_server_memory_limit-从-v640-版本开始引入) 系统变量进行设置。 |
-| TiKV | [`cdc.min-ts-interval`](/tikv-configuration-file.md#min-ts-interval) | 修改 | 默认值从 `1s` 修改为 `200ms` |
-|          |          |          |          |
-|          |          |          |          |
+| TiDB | [`server-memory-quota`](/tidb-configuration-file.md#server-memory-quota-new-in-v409) | Deprecated | Since v6.5.0, this configuration item is deprecated. Instead, use the system variable [`tidb_server_memory_limit`](/system-variables.md#tidb_server_memory_limit-new-in-v640) for setting.  |
+| TiKV | [`cdc.min-ts-interval`](/tikv-configuration-file.md#min-ts-interval)  | Modified | The default value changes from `1s` to `200ms`. |
 
 ### Others
+
+- Starting from v6.4.0, the mysql.user table adds two new columns: `Password_reuse_history` and `Password_reuse_time`. 
+- The [index acceleration](/system-variables.md#tidb_ddl_enable_fast_reorg-new-in-v630) feature is enabled by default and is not compatible with the [PITR (Point-in-time recovery)](/br/br-pitr-guide.md) feature. When using the index acceleration feature, you need to make sure that no PITR backup task is running in the background, otherwise unexpected results might occur. For more information, see [tidb_ddl_enable_fast_reorg](/system-variables.md#tidb_ddl_enable_fast_reorg-new-in-v630).
 
 ## 废弃功能
 
