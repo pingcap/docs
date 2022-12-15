@@ -400,8 +400,8 @@ TiDB 6.5.0 is a Long-Term Support Release (LTS).
 
     + TiDB Data Migration (DM)
 
-        - Improve the data replication performance for DM by not parsing the data of tables in the block list [#4287](https://github.com/pingcap/tiflow/issues/4287) @[GMHDBJD](https://github.com/GMHDBJD)
-        - Improve the write efficiency of DM relay by using asynchronous write and batch write [#4287](https://github.com/pingcap/tiflow/issues/4287) @[GMHDBJD](https://github.com/GMHDBJD)
+        - Improve the data replication performance for DM by not parsing the data of tables in the block list [#7622](https://github.com/pingcap/tiflow/pull/7622) @[GMHDBJD](https://github.com/GMHDBJD)
+        - Improve the write efficiency of DM relay by using asynchronous write and batch write [#7580](https://github.com/pingcap/tiflow/pull/7580) @[GMHDBJD](https://github.com/GMHDBJD)
         - Optimize the error messages in DM precheck [#7621](https://github.com/pingcap/tiflow/issues/7621) @[buchuitoudegou](https://github.com/buchuitoudegou)
         - Improve the compatibility of `SHOW SLAVE HOSTS` for old MySQL versions [#5017](https://github.com/pingcap/tiflow/issues/5017) @[lyzx2001](https://github.com/lyzx2001)
 
