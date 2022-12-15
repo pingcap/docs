@@ -52,11 +52,11 @@ By the automatic backup, you can back up the cluster data every day at the backu
 
     - In **Backup Storage Region**, select the regions where you want to store your backup data.
 
-        TiDB Cloud stores your backup data in the current region of your cluster by default, and cannot be modified. In addition, you can add another remote region, and TiDB Cloud will copy all new backup data to the remote region, which facilitates data safety and faster recovery. After adding a remote region as a backup data storage, you cannot remove the region.
+        TiDB Cloud stores your backup data in the current region of your cluster by default. This behavior cannot be changed. In addition, you can add another remote region, and TiDB Cloud will copy all new backup data to the remote region, which facilitates data safety and faster recovery. After adding a remote region as a backup data storage, you cannot remove the region.
 
 4. Click **Confirm** to preview the configuration change.
 
-    If you turn on PITR, you can select the **Perform a backup immediately and use it as recovery starting point in PITR.** checkbox, and PITR will use the backup time as recovery starting point. Otherwise, PITR will not be available until the next backup is completed.
+    If you turn on PITR, you can select the **Perform a backup immediately and use it as recovery starting point in PITR.** checkbox. Otherwise, PITR will not be available until the next backup is completed.
 
 5. Click **Confirm**.
 
