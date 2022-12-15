@@ -52,9 +52,9 @@ TiDB 6.5.0 is a Long-Term Support Release (LTS).
 
 * Support time to live (TTL) (experimental) [#39262](https://github.com/pingcap/tidb/issues/39262)  @[lcwangchao](https://github.com/lcwangchao) **tw@ran-huang**
 
-    TTL provides row-level data lifetime management. In TiDB, a table with the TTL attribute automatically checks data lifetime and deletes expired data at the row level. TTL is designed to help users clean up unnecessary data periodically and in a timely manner without affecting the online read and write workloads.
+    TTL provides row-level data lifetime management. In TiDB, a table with the TTL attribute automatically checks data lifetime and deletes expired data at the row level. TTL is designed to help you clean up unnecessary data periodically and in a timely manner without affecting the online read and write workloads.
 
-    For more information, refer to [user document](/time-to-live.md)
+    For more information, see [User document](/time-to-live.md).
 
 * Support saving TiFlash query results using the `INSERT INTO SELECT` statement (experimental) [#37515](https://github.com/pingcap/tidb/issues/37515) @[gengliqi](https://github.com/gengliqi) **tw@qiancai**
 
@@ -254,9 +254,11 @@ TiDB 6.5.0 is a Long-Term Support Release (LTS).
 
     Storage sink 支持 changed log 格式位 canal-json/csv，此外 changed log 从 TiCDC 同步到 storage 的延迟可以达到 xx，支持更多信息，请参考[用户文档](https://github.com/pingcap/docs-cn/pull/12151/files)。
 
-* TiCDC 支持两个或者多个 TiDB 集群之间相互复制 @[asddongmen](https://github.com/asddongmen) **tw@shichun-0415**
+* TiCDC supports bidirectional replication across multiple clusters  @[asddongmen](https://github.com/asddongmen) **tw@shichun-0415**
 
-    TiCDC 支持在多个 TiDB 集群之间进行双向复制。 如果业务上需要 TiDB 多活，尤其是异地多活的场景，可以使用该功能作为 TiDB 多活的解决方案。只要为每个 TiDB 集群到其他 TiDB 集群的 TiCDC changefeed 同步任务配置 `bdr-mode = true` 参数，就可以实现多个 TIDB 集群之间的数据相互复制。更多信息，请参考[用户文档](/ticdc/ticdc/ticdc-bidirectional-replication.md).
+    TiCDC supports bidirectional replication across multiple TiDB clusters. If you need a multi-master TiDB solution for your application, especially a multi-master solution in multiple regions, you can use this feature to build one. By configuring the `bdr-mode = true` parameter for the TiCDC changefeeds from each TiDB cluster to other TiDB clusters, you can achieve bidirectional data replication across multiple TiDB clusters.
+
+    For more information, refer to [user document](/ticdc/ticdc-bidirectional-replication.md).
 
 * TiCDC 性能提升 **tw@shichun-0415
 
@@ -456,14 +458,14 @@ TiDB 6.5.0 is a Long-Term Support Release (LTS).
 
     + TiDB Data Migration (DM)
 
-        - Fix the issue that a `task-mode:all` task cannot be started when the upstream database enables GTID mode but does not have any data [#7037](https://github.com/pingcap/tiflow/issues/7037) @[liumengya94](https://github.com/liumengya94)
+        - Fix the issue that a `task-mode:all` task cannot be started when the upstream database enables the GTID mode but does not have any data [#7037](https://github.com/pingcap/tiflow/issues/7037) @[liumengya94](https://github.com/liumengya94)
         - Fix the issue that data is replicated for multiple times when a new DM worker is scheduled before the existing worker exits [#7658](https://github.com/pingcap/tiflow/issues/7658) @[GMHDBJD](https://github.com/GMHDBJD)
-        - Fix the issue that DM precheck is not passed when the upstream database uses regular expression to grant privileges [#7645](https://github.com/pingcap/tiflow/issues/7645) @[lance6716](https://github.com/lance6716)
+        - Fix the issue that DM precheck is not passed when the upstream database uses regular expressions to grant privileges [#7645](https://github.com/pingcap/tiflow/issues/7645) @[lance6716](https://github.com/lance6716)
 
     + TiDB Lightning
 
         - Fix the memory leakage issue when TiDB Lightning imports a huge source data file [#39331](https://github.com/pingcap/tidb/issues/39331) @[dsdashun](https://github.com/dsdashun)
-        - Fix the issue that TiDB Lightning cannot detect conflict correctly when importing data in parallel [#39476](https://github.com/pingcap/tidb/issues/39476) @[dsdashun](https://github.com/dsdashun)
+        - Fix the issue that TiDB Lightning cannot detect conflicts correctly when importing data in parallel [#39476](https://github.com/pingcap/tidb/issues/39476) @[dsdashun](https://github.com/dsdashun)
 
 ## Contributors
 
