@@ -9,7 +9,7 @@ summary: Learn about the FAQs related to TiDB SQL.
 
 ## TiDB はセカンダリ キーをサポートしていますか? {#does-tidb-support-the-secondary-key}
 
-はい。一意の[副次索引](/develop/dev-guide-create-secondary-indexes.md)を持つ非主キー列に[`NOT NULL`制約](/constraints.md#not-null)を持つことができます。この場合、列は 2 次キーとして機能します。
+はい。一意の[副次索引](/develop/dev-guide-create-secondary-indexes.md)を持つ非主キー列に[`NOT NULL`制約](/constraints.md#not-null)を持つことができます。この場合、列はセカンダリ キーとして機能します。
 
 ## 大きなテーブルで DDL 操作を実行するとき、TiDB はどのように動作しますか? {#how-does-tidb-perform-when-executing-ddl-operations-on-a-large-table}
 
@@ -138,7 +138,7 @@ TiDB はデフォルトで UTF-8 文字セットを使用し、現在は UTF-8 �
 
 トランザクション内のステートメントの最大数は、デフォルトで 5000 です。
 
-オプティミスティック トランザクション モードでは、トランザクションの再試行が有効になっている場合、デフォルトの上限は 5000 です[`stmt-count-limit`](/tidb-configuration-file.md#stmt-count-limit)パラメータを使用して制限を調整できます。
+オプティミスティック トランザクション モードでは、トランザクションの再試行が有効になっている場合、既定の上限は 5000 です[`stmt-count-limit`](/tidb-configuration-file.md#stmt-count-limit)パラメーターを使用して制限を調整できます。
 
 ## 後で挿入されたデータの自動インクリメント ID が、以前に TiDB に挿入されたデータよりも小さいのはなぜですか? {#why-does-the-auto-increment-id-of-the-later-inserted-data-is-smaller-than-that-of-the-earlier-inserted-data-in-tidb}
 
@@ -184,7 +184,7 @@ Sqoop では、 `--batch`は各バッチで 100 個のステートメントを�
 
 ## データが削除された後、クエリの速度が遅くなるのはなぜですか? {#why-does-the-query-speed-get-slow-after-data-is-deleted}
 
-大量のデータを削除すると、多くの不要なキーが残り、クエリの効率に影響します。この問題を解決するには、 [リージョンマージ](/best-practices/massive-regions-best-practices.md#method-3-enable-region-merge)の機能を使用できます。詳細は[TiDB ベスト プラクティスのデータ セクションの削除](https://en.pingcap.com/blog/tidb-best-practice/#write)を参照してください。
+大量のデータを削除すると、多くの役に立たないキーが残り、クエリの効率に影響します。この問題を解決するには、 [リージョンマージ](/best-practices/massive-regions-best-practices.md#method-3-enable-region-merge)の機能を使用できます。詳細は[TiDB ベスト プラクティスのデータ セクションの削除](https://en.pingcap.com/blog/tidb-best-practice/#write)を参照してください。
 
 ## データを削除した後、ストレージ スペースを再利用するのが遅い場合はどうすればよいですか? {#what-should-i-do-if-it-is-slow-to-reclaim-storage-space-after-deleting-data}
 
@@ -194,12 +194,12 @@ TiDB はマルチバージョン同時実行制御 (MVCC) を使用するため�
 
 TiDB `SHOW PROCESSLIST`の表示内容は MySQL `SHOW PROCESSLIST`とほぼ同じです。 TiDB `SHOW PROCESSLIST`はシステム プロセス ID を表示しません。表示される ID は、現在のセッション ID です。 TiDB `SHOW PROCESSLIST`と MySQL `SHOW PROCESSLIST`の違いは次のとおりです。
 
--   TiDB は分散データベースであるため、 `tidb-server`つのインスタンスは SQL ステートメントを解析および実行するためのステートレス エンジンです (詳細については、 [TiDBアーキテクチャ](/tidb-architecture.md)を参照してください)。 `SHOW PROCESSLIST`は、クラスターで実行されているすべてのセッションのリストではなく、ユーザーが MySQL クライアントからログインする`tidb-server`インスタンスで実行されたセッションのリストを表示します。しかし、MySQL はスタンドアロン データベースであり、その`SHOW PROCESSLIST`には MySQL で実行されたすべての SQL ステートメントが表示されます。
+-   TiDB は分散データベースであるため、 `tidb-server`つのインスタンスは SQL ステートメントを解析および実行するためのステートレス エンジンです (詳細については、 [TiDBアーキテクチャ](/tidb-architecture.md)を参照してください)。 `SHOW PROCESSLIST`は、クラスターで実行されているすべてのセッションのリストではなく、ユーザーが MySQL クライアントからログインした`tidb-server`インスタンスで実行されたセッションのリストを表示します。しかし、MySQL はスタンドアロン データベースであり、その`SHOW PROCESSLIST`には MySQL で実行されたすべての SQL ステートメントが表示されます。
 -   TiDB の`State`列は、クエリの実行中に継続的に更新されるわけではありません。 TiDB は並列クエリをサポートしているため、各ステートメントは一度に複数の*状態*になる可能性があるため、単一の値に単純化することは困難です。
 
 ## SQLコミットの実行優先度を制御または変更する方法は? {#how-to-control-or-change-the-execution-priority-of-sql-commits}
 
-[グローバル](/tidb-configuration-file.md#force-priority) [セッションごと](/system-variables.md#tidb_force_priority)または個々のステートメント単位での優先度の変更をサポートしています。プライオリティには次の意味があります。
+TiDB は、 [グローバル](/system-variables.md#tidb_force_priority)つまたは個々のステートメント単位での優先度の変更をサポートしています。プライオリティには次の意味があります。
 
 -   `HIGH_PRIORITY` : このステートメントの優先度が高い。つまり、TiDB はこのステートメントに優先順位を与え、最初に実行します。
 
@@ -286,7 +286,7 @@ DML ステートメントの実行時に、TiDB が DDL リース (デフォル�
 推奨事項:
 
 -   ハードウェア構成を改善します。 [ソフトウェアとハードウェアの要件](/hardware-and-software-requirements.md)を参照してください。
--   同時性を改善します。デフォルト値は 10 です。50 に改善して試してみることができます。ただし、通常、改善はデフォルト値の 2 ～ 4 倍です。
+-   並行性を向上させます。デフォルト値は 10 です。50 に改善して試してみることができます。ただし、通常、改善はデフォルト値の 2 ～ 4 倍です。
 -   大量のデータの場合は`count`をテストします。
 -   TiKV 構成を最適化します。 [TiKV スレッドのパフォーマンスを調整する](/tune-tikv-thread-performance.md)と[TiKV メモリ パフォーマンスの調整](/tune-tikv-memory-performance.md)を参照してください。
 -   [コプロセッサ キャッシュ](/coprocessor-cache.md)を有効にします。

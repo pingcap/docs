@@ -84,7 +84,7 @@
         -   [SQL クライアント経由で接続する](/tidb-cloud/connect-to-tidb-cluster.md)
         -   [SQL シェル経由で接続](/tidb-cloud/connect-to-tidb-cluster.md#connect-via-sql-shell)
     -   [プライベート エンドポイント接続のセットアップ](/tidb-cloud/set-up-private-endpoint-connections.md)
-    -   [VPC ピアリング接続の設定](/tidb-cloud/set-up-vpc-peering-connections.md)
+    -   [VPC ピアリング接続のセットアップ](/tidb-cloud/set-up-vpc-peering-connections.md)
     -   TiFlash で HTAPクラスタを使用する
         -   [TiFlash の概要](/tiflash/tiflash-overview.md)
         -   [TiFlash レプリカの作成](/tiflash/create-tiflash-replicas.md)
@@ -96,25 +96,21 @@
     -   [TiDBクラスタを一時停止または再開する](/tidb-cloud/pause-or-resume-tidb-cluster.md)
     -   [TiDBクラスタをアップグレードする](/tidb-cloud/upgrade-tidb-cluster.md)
     -   [TiDBクラスタを削除する](/tidb-cloud/delete-tidb-cluster.md)
--   データの移行
-    -   [サンプル データのインポート](/tidb-cloud/import-sample-data.md)
-    -   データを TiDB に移行する
-        -   [概要](/tidb-cloud/tidb-cloud-migration-overview.md)
+-   データの移行またはインポート
+    -   [概要](/tidb-cloud/tidb-cloud-migration-overview.md)
+    -   データをTiDB Cloudに移行する
         -   [データ移行を使用して MySQL 互換データベースから移行する](/tidb-cloud/migrate-from-mysql-using-data-migration.md)
-        -   データ インポートを使用して MySQL 互換のオンプレミス データベースから移行する
-            -   [MySQL 互換データベースからの移行](/tidb-cloud/migrate-data-into-tidb.md)
-            -   [MySQL 互換データベースからの増分データの移行](/tidb-cloud/migrate-incremental-data-from-mysql.md)
-            -   [大規模なデータセットの MySQL シャードを移行およびマージする](/tidb-cloud/migrate-sql-shards.md)
-        -   パブリック クラウド ストレージからの移行
-            -   [Amazon Aurora MySQL から一括で移行する](/tidb-cloud/migrate-from-aurora-bulk-import.md)
-            -   [Amazon S3 または GCS からTiDB Cloudへのインポートまたは移行](/tidb-cloud/migrate-from-amazon-s3-or-gcs.md)
-            -   [Amazon S3 または GCS からTiDB Cloudに CSV ファイルをインポートする](/tidb-cloud/import-csv-files.md)
-            -   [Amazon S3 または GCS からTiDB Cloudに Apache Parquet ファイルをインポートする](/tidb-cloud/import-parquet-files.md)
-        -   参照
-            -   [Amazon S3 アクセスと GCS アクセスの設定](/tidb-cloud/config-s3-and-gcs-access.md)
-            -   [データ インポートの命名規則](/tidb-cloud/naming-conventions-for-data-import.md)
-            -   [Amazon S3 からのデータ インポート中のアクセス拒否エラーのトラブルシューティング](/tidb-cloud/troubleshoot-import-access-denied-error.md)
+        -   [オンプレミス TiDB からTiDB Cloudへの移行](/tidb-cloud/migrate-from-op-tidb.md)
+        -   [大規模なデータセットの MySQL シャードを移行およびマージする](/tidb-cloud/migrate-sql-shards.md)
+    -   TiDB Cloudへのデータのインポート
+        -   [サンプルデータのインポート (SQL ファイル)](/tidb-cloud/import-sample-data.md)
+        -   [Amazon S3 または GCS から CSV ファイルをインポートする](/tidb-cloud/import-csv-files.md)
+        -   [Amazon S3 または GCS から Apache Parquet ファイルをインポートする](/tidb-cloud/import-parquet-files.md)
     -   [TiDB からのデータのエクスポート](/tidb-cloud/export-data-from-tidb-cloud.md)
+    -   参照
+        -   [Amazon S3 アクセスと GCS アクセスの設定](/tidb-cloud/config-s3-and-gcs-access.md)
+        -   [データ インポートの命名規則](/tidb-cloud/naming-conventions-for-data-import.md)
+        -   [Amazon S3 からのデータ インポート中のアクセス拒否エラーのトラブルシューティング](/tidb-cloud/troubleshoot-import-access-denied-error.md)
 -   ストリームデータ
     -   [チェンジフィードの概要](/tidb-cloud/changefeed-overview.md)
     -   [MySQL シンクへ](/tidb-cloud/changefeed-sink-to-mysql.md)
@@ -391,7 +387,7 @@
             -   ステイル読み取りを使用する (推奨)
                 -   [ステイル読み取りの使用シナリオ](/stale-read.md)
                 -   [`As OF TIMESTAMP`を使用してステイル読み取りを実行する](/as-of-timestamp.md)
-                -   [`tidb_read_staleness`を使用してステイル読み取りを実行する](/tidb-read-staleness.md)
+                -   [`tidb_read_staleness`を使用して古いステイル読み取りを実行する](/tidb-read-staleness.md)
             -   [`tidb_snapshot`システム変数を使用する](/read-historical-data.md)
         -   システム テーブル
             -   [`mysql`](/mysql-schema.md)
@@ -444,7 +440,7 @@
     -   [データとインデックス間の不一致のトラブルシューティング](/troubleshoot-data-inconsistency-errors.md)
     -   [サーバーレス層の制限](/tidb-cloud/serverless-tier-limitations.md)
 -   よくある質問
-    -   [TiDB Cloudよくある質問](/tidb-cloud/tidb-cloud-faq.md)
+    -   [TiDB Cloudに関するよくある質問](/tidb-cloud/tidb-cloud-faq.md)
     -   [サーバーレス層に関するよくある質問](/tidb-cloud/serverless-tier-faqs.md)
 -   リリースノート
     -   [2022年](/tidb-cloud/release-notes-2022.md)
