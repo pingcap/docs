@@ -338,7 +338,6 @@ Starting from v6.5.0, the [`AMEND TRANSACTION`](/system-variables.md#tidb_enable
 
 + TiKV
 
-    - The default value of `cdc.min-ts-interval` has been changed from `1s` to `200ms` to reduce CDC latency [#12840](https://github.com/tikv/tikv/issues/12840) @[hicqu](https://github.com/hicqu)
     - Stop writing to Raft Engine when there is insufficient space to avoid exhausting disk space [#13642](https://github.com/tikv/tikv/issues/13642) @[jiayang-zheng](https://github.com/jiayang-zheng)
     - Support pushing down the `json_valid` function to TiKV [#13571](https://github.com/tikv/tikv/issues/13571) @[lizhenhuan](https://github.com/lizhenhuan)
     - Support backing up multiple ranges of data in a single backup request [#13701](https://github.com/tikv/tikv/issues/13701) @[Leavrth](https://github.com/Leavrth)
