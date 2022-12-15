@@ -242,7 +242,7 @@ TiDB 6.5.0 is a Long-Term Support Release (LTS).
 
      TiCDC supports replicating changed logs to Amazon S3, Azure Blob Storage, NFS, and other S3-compatible storage services. Cloud storage is reasonably priced and easy to use. If you do not want to use Kafka, you can use storage sinks. TiCDC saves the changed logs to a file and then sends it to the storage system. From the storage system, the consumer program reads the newly generated changed log files periodically.
 
-    The storage sink supports changed logs in the canal-json and CSV formats. Noticeably, the latency of replicating changed logs from TiCDC to storage can be xx. For more information, see [User document](/ticdc/ticdc-sink-to-cloud-storage.md).
+    The storage sink supports changed logs in the canal-json and CSV formats. Noticeably, the latency of replicating changed logs from TiCDC to storage can be as short as xx. For more information, see [User document](/ticdc/ticdc-sink-to-cloud-storage.md).
 
 * TiCDC supports bidirectional replication across multiple clusters  @[asddongmen](https://github.com/asddongmen) **tw@shichun-0415**
 
@@ -252,7 +252,7 @@ TiDB 6.5.0 is a Long-Term Support Release (LTS).
 
 * TiCDC performance improves significantly **tw@shichun-0415
 
-    In a test scenario of the TiDB cluster, the performance of TiCDC improved significantly. Specifically, the maximum row changes that a single TiCDC can process reaches 30K rows/s, and the replication latency is reduced to 10s. Even in TiKV and TiCDC rolling upgrade, the replication latency is less than 30s. In a disaster recovery (DR) scenario, when the throughput is xx rows/s, the replication latency in DR can be maintained at x s.
+    In a test scenario of the TiDB cluster, the performance of TiCDC has improved significantly. Specifically, the maximum row changes that a single TiCDC can process reaches 30K rows/s, and the replication latency is reduced to 10s. Even during TiKV and TiCDC rolling upgrade, the replication latency is less than 30s. In a disaster recovery (DR) scenario, when the throughput is xx rows/s, the replication latency in DR can be maintained at x s.
 
 ### Backup and restore
 
@@ -438,7 +438,7 @@ Starting from v6.5.0, the [`AMEND TRANSACTION`](/system-variables.md#tidb_enable
 
         - Fix the issue that TiCDC gets stuck when the PD leader crashes [#7470](https://github.com/pingcap/tiflow/issues/7470) @[zeminzhou](https://github.com/zeminzhou)
         - (dup) Fix data loss occurred in the scenario of executing DDL statements first and then pausing and resuming the changefeed [#7682](https://github.com/pingcap/tiflow/issues/7682) @[asddongmen](https://github.com/asddongmen)
-        - Fix the issue that TiCDC mistakenly reports an error when there is a higher version of TiFlash [#7744](https://github.com/pingcap/tiflow/issues/7744) @[overvenus](https://github.com/overvenus)
+        - Fix the issue that TiCDC mistakenly reports an error when there is a later version of TiFlash [#7744](https://github.com/pingcap/tiflow/issues/7744) @[overvenus](https://github.com/overvenus)
         - (dup) Fix the issue that the sink component gets stuck if the downstream network is unavailable [#7706](https://github.com/pingcap/tiflow/issues/7706) @[hicqu](https://github.com/hicqu)
         - Fix the issue that data is lost when a user quickly deletes a replication task and then creates another one with the same task name [#7657](https://github.com/pingcap/tiflow/issues/7657) @[overvenus](https://github.com/overvenus)
 
