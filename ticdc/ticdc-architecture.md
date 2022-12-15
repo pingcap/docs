@@ -98,7 +98,7 @@ TiCDC introduces a series of timestamps (TS) to indicate the status of data repl
 
 This timestamp exists in both TiKV and TiCDC.
 
-- ResolvedTS in TiKV: Represents the start time of the earliest transaction in a Region leader, that is, `ResolvedTS` = max(`ResolvedTS`, min(`StartTS`)). Because a TiDB cluster contains multiple TiKV nodes, the minimum ResolvedTS of the Region leader on all TiKV nodes is called the Global ResolvedTS. The TiDB cluster ensures that all transactions before the Global ResolvedTS are committed. Alternatively, you can assume that there are no uncommitted transactions before this timestamp.
+- ResolvedTS in TiKV: Represents the start time of the earliest transaction in a Region leader, that is, `ResolvedTS` = max(`ResolvedTS`, min(`StartTS`)). Because a TiDB cluster contains multiple TiKV nodes, the minimum ResolvedTS of the Region leader on all TiKV nodes is called the global ResolvedTS. The TiDB cluster ensures that all transactions before the global ResolvedTS are committed. Alternatively, you can assume that there are no uncommitted transactions before this timestamp.
 
 - ResolvedTS in TiCDC:
 
@@ -108,32 +108,32 @@ This timestamp exists in both TiKV and TiCDC.
     For TiCDC, the ResolvedTS sent by TiKV is a special event in the format of `<resolvedTS: timestamp>`. In general, the ResolvedTS satisfies the following constraints:
 
     ```
-    table resolved TS >= global Resolved TS
+    table ResolvedTS >= global ResolvedTS
     ```
 
 #### CheckpointTS
 
-This timestamp only exists in TiCDC. It indicates all data changes that are smaller than the CheckpointTS have been replicated to the downstream. That is, for TiCDC, the data before this timestamp has been replicated to the downstream system.
+This timestamp exists only in TiCDC. It means that the data changes occur before this timestamp have been replicated to the downstream system.
 
-- Table checkpointTS: Because TiCDC replicates data in tables, the table checkpointTS indicates all data that smaller than checkpointTS has been replicated at the table level.
-- Processor checkpointTS: Indicates the minimum table checkpointTS on the Processor.
-- Global checkpointTS: Indicates the minimum checkpointTS among all Processors .
+- table CheckpointTS: Because TiCDC replicates data in tables, the table checkpointTS indicates all data that smaller than CheckpointTS has been replicated at the table level.
+- processor CheckpointTS: Indicates the minimum table CheckpointTS on the Processor.
+- global CheckpointTS: Indicates the minimum CheckpointTS among all Processors .
 
-Generally, a checkpoint TS satisfies the following constraint:
-
-```
-table checkpoint TS >= global checkpoint TS
-```
-
-Because TiCDC can only replication data smaller than global Resolved TS to the downstream, so the complete constraint is as follows if we also include ResolvedTS:
+Generally, a checkpointTS satisfies the following constraint:
 
 ```
-table resolved TS >= global Resolved TS >= table checkpoint TS >= global checkpoint TS
+table CheckpointTS >= global CheckpointTS
 ```
 
-After data changes and transactions are committed, the resolvedTS on the TiKV node will continue to advance, and the Puller module on the TiCDC node keeps receiving data pushed by TiKV. The Puller module also decides whether to scan incremental data based on the received data changes, which ensures that all data changes are sent to the TiCDC node.
+Because TiCDC only replicates data smaller than the global ResolvedTS to the downstream, the complete constraint is as follows:
 
-The Sorter module sorts data received by the Puller module in ascending order according to the timestamp. This process ensures data consistency at the table level. Next, the Mounter module assembles the data changes from the upstream into the format that the Sink module can consume, and sends it to the Sink module. The Sink module replicates the data changes between the checkpointTS and the ResolvedTS to the downstream in the order of the timestamp, and advances the checkpointTS after the downstream receives the data changes.
+```
+table ResolvedTS >= global ResolvedTS >= table CheckpointTS >= global CheckpointTS
+```
+
+After data changes and transactions are committed, the ResolvedTS on the TiKV node will continue to advance, and the Puller module on the TiCDC node keeps receiving data pushed by TiKV. The Puller module also decides whether to scan incremental data based on the data changes it has received, which ensures that all data changes are sent to the TiCDC node.
+
+The Sorter module sorts data received by the Puller module in ascending order according to the timestamp. This process ensures data consistency at the table level. Next, the Mounter module assembles the data changes from the upstream into a format that the Sink module can consume, and sends it to the Sink module. The Sink module replicates the data changes between the CheckpointTS and the ResolvedTS to the downstream in the order of the timestamp, and advances the checkpointTS after the downstream receives the data changes.
 
 The preceding sections only cover data changes of DML statements and do not include DDL statements. The following sections introduce the timestamp related to DDL statements.
 
@@ -142,13 +142,13 @@ The preceding sections only cover data changes of DML statements and do not incl
 Barrier TS is generated when a DDL statement is executed or a Syncpoint is used.
 
 - This timestamp ensures that all changes before this DDL statement are replicated to the downstream. After this DDL statement is executed and replicated, TiCDC starts replicating other data changes. Because DDL statements are processed by the Capture Owner, the Barrier TS corresponding to a DDL statement is only generated by the Processor thread of the owner node.
-- Syncpoint Barrier TS is also a timestamp. When you enable the Syncpoint feature of TiCDC, a Barrier TS is generated by TiCDC according to the `sync-point-interval` you specified. When all table changes before this Barrier TS are replicated, TiCDC will record the time point, from which data replication continues next time.
+- Syncpoint Barrier TS is also a timestamp. When you enable the Syncpoint feature of TiCDC, a Barrier TS is generated by TiCDC according to the `sync-point-interval` you specified. When all table changes before this Barrier TS are replicated, TiCDC records the global Checkpoint downstream, from which data replication continues next time.
 
-TiCDC determines whether data has been replicated to Barrier TS by comparing the global checkpoint TS and Barrier TS. If global checkpoint TS equals to Barrier TS, all tables have advanced to Barrier TS. If global checkpoint TS does not equal to Barrier TS, there are tables that have not advanced to the Barrier TS. In this case, the Barrier TS will not be updated, and no resolved TS of a table will exceed Barrier TS, that is, no table's check point TS will exceed Barrier TS.
+After a Barrier TS is generated, TiCDC only replicates data changes that occur before this Barrier TS to downstream. Then TiCDC checks whether all target data has been replicated by comparing the global CheckpointTS and Barrier TS. If global CheckpointTS equals to Barrier TS, TiCDC continues replication after performing a designated operation (such as executing a DDL statement or recording the global CheckpointTS downstream). Otherwise, TiCDC waits for all data changes that occur before Barrier TS to be replicated to the downstream.
 
 ## Major processes
 
-This section describes the major processes of TiCDC to help you better understand its principles.
+This section describes the major processes of TiCDC to help you better understand its working principles.
 
 ### Start TiCDC
 
@@ -165,7 +165,7 @@ This section describes the major processes of TiCDC to help you better understan
     2. The node is elected as the Owner and the corresponding thread is started.
     3. Reads the changefeed information.
     4. Starts the changefeed management process.
-    5. Reads the schema information in TiKV according to the changefeed configuration and the latest checkpointTS to determine the tables to be replicated.
+    5. Reads the schema information in TiKV according to the changefeed configuration and the latest CheckpointTS to determine the tables to be replicated.
     6. Reads the list of tables currently replicated by each Processor and distributes the tables to be added.
     7. Updates the replication progress.
 
