@@ -5,7 +5,7 @@ summary: Learn the use of TiDB Cloud node in n8n.
 
 # Integrate TiDB Cloud with n8n
 
-[n8n](https://n8n.io/) is an extendable workflow automation tool. With a [fair-code](https://faircode.io/) distribution model, n8n will always have visible source code, be available to self-host, and allow you to add your custom functions, logic ,and apps. 
+[n8n](https://n8n.io/) is an extendable workflow automation tool. With a [fair-code](https://faircode.io/) distribution model, n8n will always have visible source code, be available to self-host, and allow you to add your custom functions, logic, and apps. 
 
 This document introduces how to build an auto-workflow: create a TiDB Cloud Serverless Tier cluster, gather Hack News RSS, store it to TiDB and send a briefing email.
 
@@ -184,7 +184,7 @@ return [{json: {response}}];
 
 ## Step 4: Run Your Workflow
 
-After building up the workflow, you can click the **Execute Workflow** button to test run it. You'll get Hack News briefing emails ,and these news will be logged to your TiDB Cloud Serverless Tier. So don't be worry about losing them.
+After building up the workflow, you can click the **Execute Workflow** button to test run it. You'll get Hack News briefing emails, and this news will be logged to your TiDB Cloud Serverless Tier. So don't worry about losing them.
 
 Now you can activate this workflow in the **Workflows** panel. This workflow will help you get the first page articles on Hack News every day.
 
