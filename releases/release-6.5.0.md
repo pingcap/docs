@@ -166,21 +166,7 @@ TiDB 6.5.0 is a Long-Term Support Release (LTS).
 
     在数据分析的场景中，通过无过滤条件的 `count(*)` 获取表的实际行数是一个常见操作。 TiFlash 在新版本中优化了 `count(*)` 的改写，自动选择带有“非空”属性的数据类型最短的列进行计数， 可以有效降低 TiFlash 上发生的 I/O 数量，进而提升获取表行数的执行效率。
 
-### Transaction
-
-* 功能标题 [#issue号](链接) @[贡献者 GitHub ID](链接)
-
-    功能描述（需要包含这个功能是什么、在什么场景下对用户有什么价值、怎么用）
-
-    更多信息，请参考[用户文档](链接)。
-
 ### Stability
-
-* 功能标题 [#issue号](链接) @[贡献者 GitHub ID](链接)
-
-    功能描述（需要包含这个功能是什么、在什么场景下对用户有什么价值、怎么用）
-
-    更多信息，请参考[用户文档](链接)。
 
 * The global memory control feature is now GA.  [#37816](https://github.com/pingcap/tidb/issues/37816) @[wshwsh12](https://github.com/wshwsh12) **tw@TomShawn**
 
@@ -268,14 +254,6 @@ TiDB 6.5.0 is a Long-Term Support Release (LTS).
 
     In a test scenario of the TiDB cluster, the performance of TiCDC improved significantly. Specifically, the maximum row changes that a single TiCDC can process reaches 30K rows/s, and the replication latency is reduced to 10s. Even in TiKV and TiCDC rolling upgrade, the replication latency is less than 30s. In a disaster recovery (DR) scenario, when the throughput is xx rows/s, the replication latency in DR can be maintained at x s.
 
-### 部署及运维
-
-* 功能标题 [#issue号](链接) @[贡献者 GitHub ID](链接)
-
-    功能描述（需要包含这个功能是什么、在什么场景下对用户有什么价值、怎么用）
-
-    更多信息，请参考[用户文档](链接)。
-
 ### Backup and restore
 
 * TiDB Backup & Restore supports snapshot checkpoint backup [#38647](https://github.com/pingcap/tidb/issues/38647) @[Leavrth](https://github.com/Leavrth) **tw@shichun-0415
@@ -300,13 +278,13 @@ TiDB 6.5.0 is a Long-Term Support Release (LTS).
 
 | Variable name | Change type | Description |
 |--------|------------------------------|------|
-| [`tidb_cost_model_version`](/system-variables.md#tidb_cost_model_version-introduced-new-in-v620) | Modified | Change the default value from `1` to `2`, meaning that Cost Model Version 2 is used for index selection and operator selection by default.  |
-| [`tidb_enable_metadata_lock`](/system-variables.md#tidb_enable_metadata_lock-new-in-v630) | Modified | Change the default value from `OFF` to `ON`, meaning that the metadata lock feature is enabled by default. |
+| [`tidb_cost_model_version`](/system-variables.md#tidb_cost_model_version-introduced-new-in-v620) | Modified | Changes the default value from `1` to `2`, meaning that Cost Model Version 2 is used for index selection and operator selection by default.  |
+| [`tidb_enable_metadata_lock`](/system-variables.md#tidb_enable_metadata_lock-new-in-v630) | Modified | Changes the default value from `OFF` to `ON`, meaning that the metadata lock feature is enabled by default. |
 | [`tidb_enable_tiflash_read_for_write_stmt`](/system-variables.md#tidb_enable_tiflash_read_for_write_stmt-new-in-v630) | Modified | Takes effect starting from v6.5.0. It controls whether read operations in SQL statements containing `INSERT`, `DELETE`, and `UPDATE` can be pushed down to TiFlash. The default value is `OFF`. |
-| [`tidb_ddl_enable_fast_reorg`](/system-variables.md#tidb_ddl_enable_fast_reorg-new-in-v630) | Modified | Change the default value from `OFF` to `ON`, meaning that the acceleration of `ADD INDEX` and `CREATE INDEX` is enabled by default. |
+| [`tidb_ddl_enable_fast_reorg`](/system-variables.md#tidb_ddl_enable_fast_reorg-new-in-v630) | Modified | Changes the default value from `OFF` to `ON`, meaning that the acceleration of `ADD INDEX` and `CREATE INDEX` is enabled by default. |
 | [`tidb_mem_quota_query`](/system-variables.md#tidb_mem_quota_query) | Modified | For versions earlier than TiDB v6.5.0, this variable is used to set the threshold value of memory quota for a query. For TiDB v6.5.0 and later versions, this variable is used to set the threshold value of memory quota for a session.  |
-| [`tidb_replica_read`](/system-variables.md#tidb_replica_read-new-in-v40) | Modified | Starting from v6.5.0, when this variable is set to`closest-adaptive` and the estimated result of a read request is greater than or equal to [`tidb_adaptive_closest _read_threshold`](/system-variables.md#tidb_adaptive_closest_read_threshold-new-in-v630), the number of TiDB nodes whose `closest-adaptive` configuration takes effect is limited in each availability zone, which is always the same as the number of TiDB nodes in the availability zone with the fewest TiDB nodes, and the other TiDB nodes automatically read from the leader replica. |
-| [`tidb_server_memory_limit`](/system-variables.md#tidb_server_memory_limit-new-in-v640) | Modified | Change the default value from `0` to `80%`, meaning that the memory limit for a TiDB instance is 80% of the total memory by default. |
+| [`tidb_replica_read`](/system-variables.md#tidb_replica_read-new-in-v40) | Modified | Starting from v6.5.0, when this variable is set to`closest-adaptive` and the estimated result of a read request is greater than or equal to [`tidb_adaptive_closest_read_threshold`](/system-variables.md#tidb_adaptive_closest_read_threshold-new-in-v630), the number of TiDB nodes whose `closest-adaptive` configuration takes effect is limited in each availability zone, which is always the same as the number of TiDB nodes in the availability zone with the fewest TiDB nodes, and the other TiDB nodes automatically read from the leader replica. |
+| [`tidb_server_memory_limit`](/system-variables.md#tidb_server_memory_limit-new-in-v640) | Modified | Changes the default value from `0` to `80%`, meaning that the memory limit for a TiDB instance is 80% of the total memory by default. |
 | [`default_password_lifetime`](/system-variables.md#default_password_lifetime-new-in-v650) | Newly added | Sets the global policy for automatic password expiration to require the user to change passwords periodically. The default value `0` indicates that the password never expires. |
 | [`disconnect_on_expired_password`](/system-variables.md#disconnect_on_expired_password-new-in-v650) | Newly added | This variable is read-only. It indicates whether to disconnect the client connection when the password is expired.|
 | [`password_history`](/system-variables.md#password_history-new-in-v650) | Newly added | This variable is used to establish a password reuse policy that allows TiDB to limit password reuse based on the number of password changes. The default value `0` means disabling the password reuse policy based on the number of password changes. |
