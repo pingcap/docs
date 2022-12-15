@@ -1,6 +1,6 @@
 ---
 title: Migrate from MySQL-Compatible Databases to TiDB Cloud Using AWS DMS
-summary: Learn how to migrate data from MySQL-compatible databases into TiDB Cloud using AWS Database Migration Service (AWS DMS).
+summary: Learn how to migrate data from MySQL-compatible databases to TiDB Cloud using AWS Database Migration Service (AWS DMS).
 ---
 
 # Migrate from MySQL-Compatible Databases to TiDB Cloud Using AWS DMS
@@ -18,12 +18,12 @@ In this example, the data source is Amazon RDS, and the data destination is a De
 Before you start the migration, make sure you have read the following:
 
 - If the source database is Amazon RDS or Amazon Aurora, you need to set the `binlog_format` parameter to `ROW`. If the database uses the default parameter group, the `binlog_format` parameter is `MIXED` by default and cannot be modified. In this case, you need to [create a new parameter group](https://docs.aws.amazon.com/dms/latest/userguide/CHAP_GettingStarted.Prerequisites.html#CHAP_GettingStarted.Prerequisites.params), for example `newset`, and set its `binlog_format` to `ROW`. Then, [modify the default parameter group](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_WorkingWithDBInstanceParamGroups.html#USER_WorkingWithParamGroups.Associating) to `newset`. Note that modifying the parameter group will restart the database.
-- The default collation for the utf8mb4 character set in TiDB is `utf8mb4_bin`. But in MySQL 8.0, the default collation is `utf8mb4_0900_ai_ci`. If the upstream MySQL uses the default collation, because TiDB is not compatible with `utf8mb4_0900_ai_ci`, AWS DMS cannot create the target table in TiDB and cannot migrate the data. To resolve this problem, you need to modify the collation of the source database to `utf8mb4_bin` before the migration. For a complete list of TiDB supported charset/collation, see [Character Set and Collation](https://docs.pingcap.com/tidb/stable/character-set-and-collation).
+- The default collation for the utf8mb4 character set in TiDB is `utf8mb4_bin`. But in MySQL 8.0, the default collation is `utf8mb4_0900_ai_ci`. If the upstream MySQL uses the default collation, because TiDB is not compatible with `utf8mb4_0900_ai_ci`, AWS DMS cannot create the target table in TiDB and cannot migrate the data. To resolve this problem, you need to modify the collation of the source database to `utf8mb4_bin` before the migration. For a complete list of TiDB supported character set and collation, see [Character Set and Collation](https://docs.pingcap.com/tidb/stable/character-set-and-collation).
 - TiDB contains the following system databases by default: `INFORMATION_SCHEMA`, `PERFORMANCE_SCHEMA`, `mysql`, `sys`, and `test`. When you create an AWS DMS migration task, you need to filter out these system databases instead of using the default `%` when selecting the migration object. It is recommended to fill in the specific database and table names. Otherwise, AWS DMS will try to migrate these system databases from the source database to the target TiDB, which will cause the task to fail.
 - Add the public and private network IP addresses of AWS DMS to the IP access lists of both source and target databases. Otherwise, the network connection might fail in some scenarios.
 - Use [VPC Peerings](/tidb-cloud/set-up-vpc-peering-connections.md#set-up-vpc-peering-connections) or [Private Endpoint connections](/tidb-cloud/set-up-private-endpoint-connections.md) to connect AWS DMS and the TiDB cluster.
 - It is recommended to use the same region for AWS DMS and the TiDB cluster to get better data writing performance.
-- It is recommended to use AWS DMS t3.large (2 vCPUs and 8 GiB memory) or a higher instance class. Small instance classes will possibly cause out of memory (OOM) errors.
+- It is recommended to use AWS DMS `dms.t3.large` (2 vCPUs and 8 GiB memory) or a higher instance class. Small instance classes will possibly cause out of memory (OOM) errors.
 - AWS will automatically create the `awsdms_control` database in the target database.
 
 ## Limitation
@@ -116,6 +116,7 @@ AWS DMS does not support replicating `DROP TABLE`.
 7. Configure the target endpoint for the TiDB cluster.
     - **Endpoint type**: select **Target endpoint**.
     - **Endpoint identifier**: fill in a name for the endpoint.
+    - **Descriptive Amazon Resource Name (ARN) - optional**: create a friendly name for the default DMS ARN.
     - **Target engine**: select **MySQL**.
 
     ![Configure the target endpoint](/media/tidb-cloud/aws-dms-tidb-cloud/aws-dms-to-tidb-cloud-target-endpoint.png)
@@ -142,7 +143,7 @@ AWS DMS does not support replicating `DROP TABLE`.
 
 ## Step 4. Create a database migration task
 
-1. In the AWS DMS console, go to the [Data migration tasks](https://console.aws.amazon.com/dms/v2/home#tasks) page. Switch to your region. Then click **Create task** in the upper right corner of the window.
+1. In the AWS DMS console, go to the [Data migration tasks](https://console.aws.amazon.com/dms/v2/home#tasks) page. Switch to your region. Then click **Create task** in the upper-right corner of the window.
 
     ![Create task](/media/tidb-cloud/aws-dms-tidb-cloud/aws-dms-to-tidb-cloud-create-task.png)
 
@@ -168,7 +169,7 @@ AWS DMS does not support replicating `DROP TABLE`.
 
 4. In the **Table mappings** section, specify the database to be migrated.
 
-    The schema name is the database name in the Amazon RDS instance. The default value of the source name is "%", which means that all databases in the Amazon RDS will be migrated to TiDB. It will cause the system databases such as `mysql` and `sys` in Amazon RDS to be migrated to TiDB, and result in task failure. Therefore, it is recommended to fill in the specific database name, or filter out all system databases. For example, according to the settings in the following screenshot, only the database named `franktest` and all the tables in that database will be migrated.
+    The schema name is the database name in the Amazon RDS instance. The default value of the **Source name** is "%", which means that all databases in the Amazon RDS will be migrated to TiDB. It will cause the system databases such as `mysql` and `sys` in Amazon RDS to be migrated to the TiDB cluster, and result in task failure. Therefore, it is recommended to fill in the specific database name, or filter out all system databases. For example, according to the settings in the following screenshot, only the database named `franktest` and all the tables in that database will be migrated.
 
     ![Table mappings](/media/tidb-cloud/aws-dms-tidb-cloud/aws-dms-to-tidb-cloud-table-mappings.png)
 
@@ -184,6 +185,6 @@ If you encounter any issues or failures during the migration, you can check the 
 
 ## See also
 
-- If you want to migrate from MySQL-compatible databases, such as Aurora MySQL and Amazon Relational Database Service (RDS), to TiDB Cloud, it is recommended to use [Data Migration](/tidb-cloud/migrate-from-mysql-using-data-migration.md).
+- If you want to migrate from MySQL-compatible databases, such as Aurora MySQL and Amazon Relational Database Service (RDS), to TiDB Cloud, it is recommended to use [Data Migration on TiDB Cloud](/tidb-cloud/migrate-from-mysql-using-data-migration.md).
 
 - If you want to migrate from Amazon RDS for Oracle to TiDB Cloud Serverless Tier Using AWS DMS, see [Migrate from Amazon RDS for Oracle to TiDB Cloud Serverless Tier Using AWS DMS](/tidb-cloud/migrate-from-oracle-using-aws-dms.md).
