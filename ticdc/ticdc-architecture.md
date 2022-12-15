@@ -113,9 +113,9 @@ This timestamp exists in both TiKV and TiCDC.
 
 #### CheckpointTS
 
-This timestamp only exists in TiCDC. It indicates the minimum data changes that have been replicated to the downstream. That is, for TiCDC, the data before this timestamp has been replicated to the downstream system.
+This timestamp only exists in TiCDC. It indicates all data changes that are smaller than the CheckpointTS have been replicated to the downstream. That is, for TiCDC, the data before this timestamp has been replicated to the downstream system.
 
-- Table checkpointTS: Because TiCDC replicates data in tables, the table checkpointTS indicates the minimum data that has been replicated at the table level.
+- Table checkpointTS: Because TiCDC replicates data in tables, the table checkpointTS indicates all data that smaller than checkpointTS has been replicated at the table level.
 - Processor checkpointTS: Indicates the minimum table checkpointTS on the Processor.
 - Global checkpointTS: Indicates the minimum checkpointTS among all Processors .
 
