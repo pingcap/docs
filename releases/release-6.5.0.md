@@ -30,23 +30,23 @@ TiDB 6.5.0 is a Long-Term Support Release (LTS).
 
 * The performance of TiDB adding indexes is improved by 10 times [#35983](https://github.com/pingcap/tidb/issues/35983) @[benjamin2037](https://github.com/benjamin2037) @[tangenta](https://github.com/tangenta) **tw@Oreoxmt**
 
-    TiDB v6.3.0 introduces the [Add index acceleration](/system-variables.md#tidb_ddl_enable_fast_reorg-new-in-v630) as an experimental feature to improve the speed of backfilling when creating an index. In v6.5.0, this feature becomes GA and is enabled by default and the performance improvement is expected to be 10 times faster than before. The acceleration feature is suitable for scenarios where a single SQL statement adds an index serially. When multiple SQL statements add indexes in parallel, only one of the SQL statements will be accelerated.
+    TiDB v6.3.0 introduces the [Add index acceleration](/system-variables.md#tidb_ddl_enable_fast_reorg-new-in-v630) as an experimental feature to improve the speed of backfilling when creating an index. In v6.5.0, this feature becomes GA and is enabled by default, and the performance on large tables is expected to be 10 times faster. The acceleration feature is suitable for scenarios where a single SQL statement adds an index serially. When multiple SQL statements add indexes in parallel, only one of the SQL statements will be accelerated.
 
 * Provide lightweight metadata lock to improve the DML success rate during DDL change [#37275](https://github.com/pingcap/tidb/issues/37275) @[wjhuang2016](https://github.com/wjhuang2016) **tw@Oreoxmt**
 
-    TiDB v6.3.0 introduces [Metadata lock](/metadata-lock.md) as an experimental feature. To avoid the `Information schema is changed` error caused by DML statements, TiDB coordinates the priority of DMLs and DDLs during table metadata change, and makes executing DDLs wait for the DMLs with old metadata to commit. In v6.5.0, this feature becomes GA and is enabled by default. It is suitable for all types of DDLs change scenarios.
+    TiDB v6.3.0 introduces [Metadata lock](/metadata-lock.md) as an experimental feature. To avoid the `Information schema is changed` error caused by DML statements, TiDB coordinates the priority of DMLs and DDLs during table metadata change, and makes the ongoing DDLs wait for the DMLs with old metadata to commit. In v6.5.0, this feature becomes GA and is enabled by default. It is suitable for various types of DDLs change scenarios.
 
     For more information, see [User document](/metadata-lock.md).
 
 * Support restoring a cluster to a specific point in time by using `FLASHBACK CLUSTER TO TIMESTAMP` [#37197](https://github.com/pingcap/tidb/issues/37197) [#13303](https://github.com/tikv/tikv/issues/13303) @[Defined2014](https://github.com/Defined2014) @[bb7133](https://github.com/bb7133) @[JmPotato](https://github.com/JmPotato) @[Connor1996](https://github.com/Connor1996) @[HuSharp](https://github.com/HuSharp) @[CalvinNeo](https://github.com/CalvinNeo)  **tw@Oreoxmt**
 
-    TiDB v6.4.0 introduces the [`FLASHBACK CLUSTER TO TIMESTAMP`](/sql-statements/sql-statement-flashback-to-timestamp.md) statement as an experimental feature. You can use this statement to restore a cluster to a specific point in time within the Garbage Collection (GC) life time. In v6.5.0, this statement becomes GA. This feature helps you to easily undo DML misoperations, restore the original cluster in minutes, rollback data at different time points to determine the exact time when data changes, and it is compatible with PITR and TiCDC.
+    TiDB v6.4.0 introduces the [`FLASHBACK CLUSTER TO TIMESTAMP`](/sql-statements/sql-statement-flashback-to-timestamp.md) statement as an experimental feature. You can use this statement to restore a cluster to a specific point in time within the Garbage Collection (GC) life time. In v6.5.0, this statement becomes GA. This feature helps you to easily undo DML misoperations, restore the original cluster in minutes, roll back data at different time points to determine the exact time when data changes, and it is compatible with PITR and TiCDC.
 
-    For more information, see [User document](/sql-statements/sql-statement-flashback-to-timestamp.md).
+    For more information, see [user document](/sql-statements/sql-statement-flashback-to-timestamp.md).
 
 * Fully support non-transactional DML statements including `INSERT`, `REPLACE`, `UPDATE`, and `DELETE` [#33485](https://github.com/pingcap/tidb/issues/33485) @[ekexium](https://github.com/ekexium) **tw@Oreoxmt**
 
-    In the scenarios of large data processing, a single SQL statement with a large transaction might have a negative impact on the cluster stability and performance. A non-transactional DML statement is a DML statement split into multiple SQL statements for internal execution. The split statements compromise transaction atomicity and isolation but greatly improve the cluster stability. TiDB supports non-transactional `DELETE` statements since v6.1.0, and v6.5.0 adds support for non-transactional `INSERT`, `REPLACE`, and `UPDATE` statements.
+    In the scenarios of large data processing, a single SQL statement with a large transaction might have a negative impact on the cluster stability and performance. A non-transactional DML statement is a DML statement split into multiple SQL statements for internal execution. The split statements compromise transaction atomicity and isolation but greatly improve the cluster stability. TiDB supports non-transactional `DELETE` statements since v6.1.0, and supports non-transactional `INSERT`, `REPLACE`, and `UPDATE` statements since v6.5.0.
 
     For more information, see [Non-Transactional DML statements](/non-transactional-dml.md) and [`BATCH` syntax](/sql-statements/sql-statement-batch.md).
 
@@ -140,9 +140,9 @@ TiDB 6.5.0 is a Long-Term Support Release (LTS).
     * `regexp_instr`
     * `regexp_substr`
 
-* Support the global Hint to interfere with the execution plan generation in [Views](/views.md) [#37887](https://github.com/pingcap/tidb/issues/37887) @[Reminiscent](https://github.com/Reminiscent) **tw@Oreoxmt**
+* Support the global optimizer hint to interfere with the execution plan generation in [Views](/views.md) [#37887](https://github.com/pingcap/tidb/issues/37887) @[Reminiscent](https://github.com/Reminiscent) **tw@Oreoxmt**
 
-    In some view access scenarios, you need to use Hints to interfere with the execution plan of the query in the view to achieve best performances. In v6.5.0, TiDB supports adding global Hints for the query blocks in the view, thus the Hints defined in the query can be effective in the view. This feature provides a way to inject Hints into complex SQL statements that contain nested views, enhances the execution plan control, and stabilizes the performance of complex statements. To use global Hints, you need to [name the query blocks](/optimizer-hints.md#step-1-define-the-query-block-name-of-the-view-using-the-qb_name-hint) and [specify Hint references](/optimizer-hints.md#step-2-add-the-target-hints).
+    In some view access scenarios, you need to use optimizer hints to interfere with the execution plan of the query in the view to achieve the best performance. Since v6.5.0, TiDB supports adding global hints for the query blocks in the view, thus the hints defined in the query can be effective in the view. This feature provides a way to inject hints into complex SQL statements that contain nested views, enhances the execution plan control, and stabilizes the performance of complex statements. To use global hints, you need to [name the query blocks](/optimizer-hints.md#step-1-define-the-query-block-name-of-the-view-using-the-qb_name-hint) and [specify hint references](/optimizer-hints.md#step-2-add-the-target-hints).
 
     For more information, see [User document](/optimizer-hints.md#hints-that-take-effect-globally).
 
@@ -152,9 +152,9 @@ TiDB 6.5.0 is a Long-Term Support Release (LTS).
 
 * Optimizer introduces a more accurate Cost Model Version 2 [#35240](https://github.com/pingcap/tidb/issues/35240) @[qw4990](https://github.com/qw4990) **tw@Oreoxmt**
 
-    TiDB v6.2.0 introduces the [Cost Model Version 2](/cost-model.md#cost-model-version-2) as an experimental feature. This model uses a more accurate cost estimation method to help the optimizer choose the optimal execution plan. Especially when TiFlash is deployed, Cost Model Version 2 automatically chooses the appropriate storage engine and avoids manual intervention. After real scene testing for a period of time, this model becomes GA in v6.5.0. The newly created cluster uses Cost Model Version 2 by default. For clusters upgrade to v6.5.0, because Cost Model Version 2 might cause changes to query plans, you can set the [`tidb_cost_model_version = 2`](/system-variables.md#tidb_cost_model_version-new-in-v620) variable to use the new cost model after sufficient performance testing.
+    TiDB v6.2.0 introduces the [Cost Model Version 2](/cost-model.md#cost-model-version-2) as an experimental feature. This model uses a more accurate cost estimation method to help the optimizer choose the optimal execution plan. Especially when TiFlash is deployed, Cost Model Version 2 automatically helps choose the appropriate storage engine and avoids much manual intervention. After real-scene testing for a period of time, this model becomes GA in v6.5.0. SInce v6.5.0, newly-created clusters use Cost Model Version 2 by default. For clusters upgrade to v6.5.0, because Cost Model Version 2 might cause changes to query plans, you can set the [`tidb_cost_model_version = 2`](/system-variables.md#tidb_cost_model_version-new-in-v620) variable to use the new cost model after sufficient performance testing.
 
-    Cost Model Version 2 becomes a generally available feature that significantly improves the overall capability of the TiDB optimizer and evolves towards a more powerful HTAP database.
+    Cost Model Version 2 becomes a generally available feature that significantly improves the overall capability of the TiDB optimizer and helps TiDB evolve towards a more powerful HTAP database.
 
     For more information, see [User document](/cost-model.md#cost-model-version-2).
 
@@ -212,7 +212,7 @@ TiDB 6.5.0 is a Long-Term Support Release (LTS).
     CREATE TABLE t(a int AUTO_INCREMENT key) AUTO_ID_CACHE 1;
     ```
 
-    For more information, see [User document](/auto-increment.md#mysql-compatibility-mode).
+    For more information, see [user document](/auto-increment.md#mysql-compatibility-mode).
 
 ### Data migration
 
@@ -359,7 +359,7 @@ TiDB 6.5.0 is a Long-Term Support Release (LTS).
     - Support backing up data to the Asia Pacific region (ap-southeast-3) of AWS by updating the rusoto library [#13751](https://github.com/tikv/tikv/issues/13751) @[3pointer](https://github.com/3pointer)
     - Reduce pessimistic transaction conflicts [#13298](https://github.com/tikv/tikv/issues/13298) @[MyonKeminta](https://github.com/MyonKeminta)
     - Improve recovery performance by caching external storage objects [#13798](https://github.com/tikv/tikv/issues/13798) @[YuJuncen](https://github.com/YuJuncen)
-    - The CheckLeader is run in a dedicated thread to reduce TiCDC replication latency [#13774](https://github.com/tikv/tikv/issues/13774) @[overvenus](https://github.com/overvenus)
+    - Run the CheckLeader in a dedicated thread to reduce TiCDC replication latency [#13774](https://github.com/tikv/tikv/issues/13774) @[overvenus](https://github.com/overvenus)
     - Support pull model for Checkpoints [#13824](https://github.com/tikv/tikv/issues/13824) @[YuJuncen](https://github.com/YuJuncen)
     - Avoid spinning issues on the sender side by updating crossbeam-channel [#13815](https://github.com/tikv/tikv/issues/13815) @[sticnarf](https://github.com/sticnarf)
     - Support batch Coprocessor tasks processing in TiKV [#13849](https://github.com/tikv/tikv/issues/13849) @[cfzjywxk](https://github.com/cfzjywxk)
