@@ -12,7 +12,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v6.5/quick-start-with-
 
 TiDB 6.5.0 is a Long-Term Support Release (LTS).
 
-Compared with the previous LTS 6.1.0, 6.5.0 not only includes new features, improvements, and bug fixes released in [6.2.0-DMR](/releases/release-6.2.0.md), [6.3.0-DMR](/releases/release-6.3.0.md), [6.4.0-DMR](/releases/release -6.4.0.md), but also introduces the following key features and improvements:
+Compared with the previous LTS 6.1.0, 6.5.0 not only includes new features, improvements, and bug fixes released in [6.2.0-DMR](/releases/release-6.2.0.md), [6.3.0-DMR](/releases/release-6.3.0.md), [6.4.0-DMR](/releases/release-6.4.0.md), but also introduces the following key features and improvements:
 
 - Enable [index acceleration](/system-variables.md#tidb_ddl_enable_fast_reorg-new-in-v630) by default, which improves the performance of adding indexes by 10 times compared with v6.1.
 - Support TiDB global memory control via [`tidb_server_memory_limit`](/system-variables.md#tidb_server_memory_limit-new-in-v640).
@@ -20,14 +20,14 @@ Compared with the previous LTS 6.1.0, 6.5.0 not only includes new features, impr
 - Support a high-performance and globally monotonic [`AUTO_INCREMENT`](/auto-increment.md#mysql-compatible-mode) column attribute, compatible with MySQL.
 - Enhance the [optimizer cost model](/cost-model.md#cost-model-version-2) and further enhance the [INDEX MERGE](/glossary.md#index-merge) feature.
 - Support [pushing down the `JSON_EXTRACT()` function](/tiflash/tiflash-supported-pushdown-calculations.md) to TiFlash.
-- TiDB Lightning and Dumpling support [importing](tidb-lightning/tidb-lightning-data-source.md) and [exporting](/dumpling-overview.md#improve-export-efficiency-through-concurrency) compressed SQL and CSV files files.
+- TiDB Lightning and Dumpling support [importing](tidb-lightning/tidb-lightning-data-source.md) and [exporting](/dumpling-overview.md#improve-export-efficiency-through-concurrency) compressed SQL and CSV files.
 - TiDB Data Migration (DM) supports [continuous data validation](/dm/dm-continuous-data-validation.md).
 - Support [password management](/password-management.md) policies that meet password compliance auditing requirements.
 - Provide row-level [Time to live (TTL)](/time-to-live.md) to manage data lifecycle (experimental).
-- Supports [non-transactional DML statements](/non-transactional-dml.md) to improve cluster stability.
+- Support [non-transactional DML statements](/non-transactional-dml.md) to improve cluster stability.
 - TiCDC supports [replicating changed logs to storage services](ticdc/ticdc-sink-to-cloud-storage.md) such as Amazon S3, Azure Blob Storage, and NFS.
 - Support [bidirectional replication](/ticdc/ticdc-bidirectional-replication.md) between two or more TiDB clusters.
-- Improve the recovery performance of [PITR](/br-pitr-guide.md#carry-pitr) by x times and reduce RPO to x min.
+- Improve the recovery performance of [PITR](/br-pitr-guide.md#carry-pitr) by x times and reduce RPO to x minutes.
 - Improve the TiCDC throughput of [replicating data to Kafka](/replicate-data-to-kafka.md) by x times and reduces replication latency to x seconds.
 
 ## New features
