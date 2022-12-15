@@ -110,13 +110,17 @@ TiDB 6.5.0 is a Long-Term Support Release (LTS).
 
 ### Observability
 
-* TiDB Dashboard 在 Kubernetes 环境支持独立 Pod 部署 [#1447](https://github.com/pingcap/tidb-dashboard/issues/1447) @[SabaPing](https://github.com/SabaPing) **tw@shichun-0415
+* TiDB Dashboard can be deployed on Kubernetes as an independent Pod [#1447](https://github.com/pingcap/tidb-dashboard/issues/1447) @[SabaPing](https://github.com/SabaPing) **tw@shichun-0415
 
-    TiDB v6.5.0 且 TiDB Operator v1.4.0 之后，在 Kubernetes 上支持将 TiDB Dashboard 作为独立的 Pod 部署。在 TiDB Operator 环境，可直接访问该 Pod 的 IP 来打开 TiDB Dashboard。
+    TiDB v6.5.0 (and later) and TiDB Operator v1.4.0 (and later) support deploying TiDB Dashboard as an independent Pod on Kubernetes. Using TiDB Operator, you can access the IP address of this Pod to start TiDB Dashboard.
 
-    独立部署 TiDB Dashboard 后，用户将获得这些收益：1. 该组件的计算将不会再对 PD 节点有压力，更好的保障集群运行；2. 如果 PD 节点因异常不可访问，也还可以继续使用 Dashboard 进行集群诊断；3. 在开放 TiDB Dashboard 到外网时，不用担心 PD 中的特权端口的权限问题，降低集群的安全风险。
+    Independently deploying TiDB Dashboard provides the following benefits:
 
-    具体信息，参考 [TiDB Operator 部署独立的 TiDB Dashboard](https://docs.pingcap.com/zh/tidb-in-kubernetes/dev/get-started#部署独立的-tidb-dashboard)
+    - The compute work of TiDB Dashboard does not pose pressure on PD nodes. This ensures more stable cluster operation.
+    - The user can still access TiDB Dashboard for diagnosis even if the PD node is unavailable.
+    - Accessing TiDB Dashboard in Internet does not involve the privileged interfaces of PD. Therefore, the security risk of the cluster is mitigated.
+
+    For more information, see [Deploy TiDB Dashboard independently in TiDB Operator](https://docs.pingcap.com/tidb-in-kubernetes/dev/get-started#deploy-tidb-dashboard-independently).
 
 ### Performance
 
@@ -248,11 +252,11 @@ TiDB 6.5.0 is a Long-Term Support Release (LTS).
 
 ### TiDB data share subscription
 
-* TiCDC 支持输出 storage sink [tiflow#6797](https://github.com/pingcap/tiflow/issues/6797) @[zhaoxinyu](https://github.com/zhaoxinyu) **tw@shichun-0415**
+* TiCDC supports replicating changed logs to storage sinks [tiflow#6797](https://github.com/pingcap/tiflow/issues/6797) @[zhaoxinyu](https://github.com/zhaoxinyu) **tw@shichun-0415**
 
-    TiCDC 支持将 changed log 输出到 S3/Azure Blob Storage/NFS，以及兼容 S3 协议的存储服务中。Cloud Storage 价格便宜，使用方便。对于不希望使用 Kafka 的用户，可以选择使用 storage sink。 TiCDC 将 changed log 保存到文件，然后发送到 storage 中；消费程序定时从 storage 读取新产生的 changed log files 进行处理。
+     TiCDC supports replicating changed logs to Amazon S3, Azure Blob Storage, NFS, and other S3-compatible storage services. Cloud storage is reasonably priced and easy to use. If you do not want to use Kafka, you can use storage sinks. TiCDC saves the changed logs to a file and then sends it to the storage system. From the storage system, the consumer program reads the newly generated changed log files periodically.
 
-    Storage sink 支持 changed log 格式位 canal-json/csv，此外 changed log 从 TiCDC 同步到 storage 的延迟可以达到 xx，支持更多信息，请参考[用户文档](https://github.com/pingcap/docs-cn/pull/12151/files)。
+    The storage sink supports changed logs in the canal-json and CSV formats. Noticeably, the latency of replicating changed logs from TiCDC to storage can be xx. For more information, see [User document](/ticdc/ticdc-sink-to-cloud-storage.md).
 
 * TiCDC supports bidirectional replication across multiple clusters  @[asddongmen](https://github.com/asddongmen) **tw@shichun-0415**
 
@@ -260,9 +264,9 @@ TiDB 6.5.0 is a Long-Term Support Release (LTS).
 
     For more information, refer to [user document](/ticdc/ticdc-bidirectional-replication.md).
 
-* TiCDC 性能提升 **tw@shichun-0415
+* TiCDC performance improves significantly **tw@shichun-0415
 
-    在 TiDB 场景测试验证中， TiCDC 的性能得到了比较大提升，单台 TiCDC 节点能处理的最大行变更吞吐可以达到 30K rows/s，同步延迟降低到 10s，即使在常规的 TiKV/TiCDC 滚动升级场景同步延迟也小于 30s；在容灾场景测试中，打开 TiCDC Redo log 和 Sync point 后，吞吐 xx rows/s 时，容灾复制延迟可以保持在 x s。
+    In a test scenario of the TiDB cluster, the performance of TiCDC improved significantly. Specifically, the maximum row changes that a single TiCDC can process reaches 30K rows/s, and the replication latency is reduced to 10s. Even in TiKV and TiCDC rolling upgrade, the replication latency is less than 30s. In a disaster recovery (DR) scenario, when the throughput is xx rows/s, the replication latency in DR can be maintained at x s.
 
 ### 部署及运维
 
@@ -274,21 +278,21 @@ TiDB 6.5.0 is a Long-Term Support Release (LTS).
 
 ### Backup and restore
 
-* TiDB 快照备份支持断点续传 [#38647](https://github.com/pingcap/tidb/issues/38647) @[Leavrth](https://github.com/Leavrth) **tw@shichun-0415
+* TiDB Backup & Restore supports snapshot checkpoint backup [#38647](https://github.com/pingcap/tidb/issues/38647) @[Leavrth](https://github.com/Leavrth) **tw@shichun-0415
 
-    TiDB 快照备份功能支持断点续传。当 BR 遇到对可恢复的错误时会进行重试，但是超过固定重试次数之后会备份退出。断点续传功能允许对持续更长时间的可恢复故障进行重试恢复，比如几十分钟的的网络故障。
+    TiDB snapshot backup supports resuming backup from a checkpoint. When Backup & Restore (BR) encounters a recoverable error, it retries backup. However, BR exits if the retry fails for several times. The checkpoint backup feature allows for longer recoverable failures to be retried, for example, a network failure of tens of minutes.
 
-    需要注意的是，如果你没有在 BR 退出后一个小时内完成故障恢复，那么还未备份的快照数据可能会被 GC 机制回收，而造成备份失败。更多信息，请参考[用户文档](/br/br-checkpoint.md)。
+    Note that if you do not recover the system from a failure within one hour after BR exits, the snapshot data to be backed up might be recycled by the GC mechanism, causing the backup to fail. For more information, see [User document](/br/br-checkpoint.md).
 
-* PITR 性能大幅提升提升 **tw@shichun-0415
+* PITR performance improved remarkably **tw@shichun-0415
 
-  PITR 恢复的日志恢复阶单台 TiKV 的恢复速度可以达到 xx MB/s，提升了 x 倍，恢复速度可扩展，有效地降低容灾场景的 RTO 指标；容灾场景的 RPO 优化到 5 min，在常规的集群运维，如滚动升级，单 TiKV 故障等场景下，可以达到 RPO = 5 min 目标。
+  In the log restore stage, the restore speed of one TiKV can reach xx MB/s, which is x times faster than before. The restore speed is scalable and the RTO in DR scenarios is reduced greatly. The RPO in DR scenarios can be as short as 5 minutes. In normal cluster operation and maintenance (OM), for example, a rolling upgrade is performed or only one TiKV is down, the RPO can be 5 minutes.
 
-* TiKV-BR 工具 GA, 支持 RawKV 的备份和恢复 [#67](https://github.com/tikv/migration/issues/67) @[pingyu](https://github.com/pingyu) @[haojinming](https://github.com/haojinming) **tw@shichun-0415**
+* TiKV-BR GA: Supports backing up and restoring RawKV [#67](https://github.com/tikv/migration/issues/67) @[pingyu](https://github.com/pingyu) @[haojinming](https://github.com/haojinming) **tw@shichun-0415**
 
-    TiKV-BR 是一个 TiKV 集群的备份和恢复工具。TiKV 可以独立于 TiDB，与 PD 构成 KV 数据库，此时的产品形态为 RawKV。TiKV-BR 工具支持对使用 RawKV 的产品进行备份和恢复，也支持将 TiKV 集群中的数据从 `API V1` 备份为 `API V2` 数据， 以实现 TiKV 集群 [`api-version`](/tikv-configuration-file.md#api-version-从-v610-版本开始引入) 的升级。
+    TiKV-BR is a backup and restore tool used in TiKV clusters. TiKV and PD can constitute a KV database when used without TiDB, which is called RawKV. TiKV-BR supports data backup and restore for products that use RawKV. TiKV-BR can also upgrade the [`api-version`](/tikv-configuration-file.md#api-version-new-in-v610) from `API V1` to `API V2` for TiKV cluster.
 
-    更多信息，请参考[用户文档](https://tikv.org/docs/latest/concepts/explore-tikv-features/backup-restore/)。
+    For more information, see [User document](https://tikv.org/docs/latest/concepts/explore-tikv-features/backup-restore/).
 
 ## Compatibility changes
 
@@ -336,7 +340,6 @@ TiDB 6.5.0 is a Long-Term Support Release (LTS).
 | TiDB | [`disconnect-on-expired-password`](/tidb-configuration-file.md#disconnect-on-expired-password-new-in-v650) | Newly added | Determines whether TiDB disconnects the client connection when the password is expired. The default value is `true`, which means the client connection is disconnected when the password is expired. |
 | TiKV | [`cdc.min-ts-interval`](/tikv-configuration-file.md#min-ts-interval)  | Modified | Change the default value from `1s` to `200ms`. |
 | TiKV | [`memory-use-ratio`](/tikv-configuration-file.md#memory-use-ratio-introduced-new-in-v650) | Newly added | Indicates the ratio of available memory to total system memory in PITR log recovery. | 
-
 
 ### Others
 
