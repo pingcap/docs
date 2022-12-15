@@ -16,7 +16,7 @@ Default：,
 Definition：是否所有 CSV 文件都包含表头行。如为 true，第一行会被用作列名。如为 false，第一行并无特殊性，按普通的数据行处理。
 Default:True
 
-## Delimiter 
+## Delimiter
 
 Definition：指定引用定界符。如果 delimiter 为空，所有字段都会被取消引用。常用值：'"' 使用双引号引用字段，'' 不引用。如上图中的 "Michael" ,"male" 表示两个字段，注意，中间需要用 "," ，举例，如果 "Michael""male"，会导致 import 任务解析报错。如果是"Michael,male" 则表示 1 个字段的数据，
 Default:"
