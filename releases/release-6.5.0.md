@@ -12,17 +12,23 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v6.5/quick-start-with-
 
 TiDB 6.5.0 is a Long-Term Support Release (LTS).
 
-相比于前一个 LTS (即 6.1.0 版本)，6.5.0 版本包含 [6.2.0-DMR](/releases/release-6.2.0.md)、[6.3.0-DMR](/releases/release-6.3.0.md)、[6.4.0-DMR](/releases/release-6.4.0.md) 中已发布的新功能、提升改进和错误修复，并引入了以下关键特性：
+Compared with the previous LTS 6.1.0, 6.5.0 not only includes new features, improvements, and bug fixes released in [6.2.0-DMR](/releases/release-6.2.0.md), [6.3.0-DMR](/releases/release-6.3.0.md), [6.4.0-DMR](/releases/release -6.4.0.md), but also introduces the following key features and improvements:
 
-- 优化器代价模型 V2 GA
-- TiDB 全局内存控制 GA
-- 全局 hint 干预视图内查询的计划生成
-- 满足密码合规审计需求 [密码管理](/password-management.md)
-- TiDB 添加索引的速度提升为原来的 10 倍
-- Flashback Cluster 功能兼容 TiCDC 和 PiTR
-- 支持通过 `INSERT INTO SELECT` 语句[保存 TiFlash 查询结果](/tiflash/tiflash-results-materialization.md)（实验特性）
-- 支持下推 JSON 抽取函数下推至 TiFlash
-- 进一步增强索引合并[INDEX MERGE](/glossary.md#index-merge)功能
+- Enable [index acceleration](/system-variables.md#tidb_ddl_enable_fast_reorg-new-in-v630) by default, which improves the performance of adding indexes by 10 times compared with v6.1.
+- Support TiDB global memory control via [`tidb_server_memory_limit`](/system-variables.md#tidb_server_memory_limit-new-in-v640).
+- Support [`FLASHBACK CLUSTER TO TIMESTAMP`](/sql-statements/sql-statement-flashback-to-timestamp.md), compatible with TiCDC and PITR.
+- Support a high-performance and globally monotonic [`AUTO_INCREMENT`](/auto-increment.md#mysql-compatible-mode) column attribute, compatible with MySQL.
+- Enhance the [optimizer cost model](/cost-model.md#cost-model-version-2) and further enhance the [INDEX MERGE](/glossary.md#index-merge) feature.
+- Support [pushing down the `JSON_EXTRACT()` function](/tiflash/tiflash-supported-pushdown-calculations.md) to TiFlash.
+- TiDB Lightning and Dumpling support [importing](tidb-lightning/tidb-lightning-data-source.md) and [exporting](/dumpling-overview.md#improve-export-efficiency-through-concurrency) compressed SQL and CSV files files.
+- TiDB Data Migration (DM) supports [continuous data validation](/dm/dm-continuous-data-validation.md).
+- Support [password management](/password-management.md) policies that meet password compliance auditing requirements.
+- Provide row-level [Time to live (TTL)](/time-to-live.md) to manage data lifecycle (experimental).
+- Supports [non-transactional DML statements](/non-transactional-dml.md) to improve cluster stability.
+- TiCDC supports [replicating changed logs to storage services](ticdc/ticdc-sink-to-cloud-storage.md) such as Amazon S3, Azure Blob Storage, and NFS.
+- Support [bidirectional replication](/ticdc/ticdc-bidirectional-replication.md) between two or more TiDB clusters.
+- Improve the recovery performance of [PITR](/br-pitr-guide.md#carry-pitr) by x times and reduce RPO to x min.
+- Improve the TiCDC throughput of [replicating data to Kafka](/replicate-data-to-kafka.md) by x times and reduces replication latency to x seconds.
 
 ## New features
 
