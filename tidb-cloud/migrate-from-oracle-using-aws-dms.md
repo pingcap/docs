@@ -1,6 +1,6 @@
 ---
 title:  Migrate from Amazon RDS for Oracle to TiDB Cloud Serverless Tier Using AWS DMS
-summary: Learn how to migrate data from Amazon RDS for Oracle into TiDB Cloud using AWS Database Migration Service (AWS DMS).
+summary: Learn how to migrate data from Amazon RDS for Oracle into TiDB Cloud Serverless Tier using AWS Database Migration Service (AWS DMS).
 ---
 
 # Migrate from Amazon RDS for Oracle to TiDB Cloud Serverless Tier Using AWS DMS
@@ -60,7 +60,7 @@ For instructions about how to create an Oracle DB instance, see [Creating an Ora
 
 ## Step 3. Prepare the table data in Oracle
 
-Insert some data into the Oracle DB instance. You can use the github event dataset and download it from [GH Archive](https://gharchive.org/). It contains 10000 rows of data. Use the following SQL script to execute it in Oracle.
+Using the scripts below, create and populate 10000 rows of data in github_events table. You can also download the sample data set from [GH Archive](https://gharchive.org/)
 
 - [table_schema_oracle.sql](https://github.com/pingcap-inc/tidb-integration-script/blob/main/aws-dms/oracle_table_schema.sql)
 - [oracle_data.sql](https://github.com/pingcap-inc/tidb-integration-script/blob/main/aws-dms/oracle_data.sql)
@@ -99,7 +99,7 @@ After you finish executing the SQL script, check the data in Oracle. The followi
 
 ## Step 6. Create DMS endpoints
 
-1. In the [AWS DMS console](https://console.aws.amazon.com/dms/v2/home), click the replication instance that you just created.
+1. In the [AWS DMS console](https://console.aws.amazon.com/dms/v2/home), click the `Endpoints` page.
 
 2. Create the Oracle source endpoint and the TiDB target endpoint.
 
