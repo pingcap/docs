@@ -298,7 +298,10 @@ TiDB 6.5.0 is a Long-Term Support Release (LTS).
 |--------|------------------------------|------|
 | [`tidb_cost_model_version`](/system-variables.md#tidb_cost_model_version-introduced-new-in-v620) | Modified | Change the default value from `1` to `2`, meaning that Cost Model Version 2 is used for index selection and operator selection by default.  |
 | [`tidb_enable_metadata_lock`](/system-variables.md#tidb_enable_metadata_lock-new-in-v630) | Modified | Change the default value from `OFF` to `ON`, meaning that the metadata lock feature is enabled by default. |
+| [`tidb_enable_tiflash_read_for_write_stmt`](/system-variables.md#tidb_enable_tiflash_read_for_write_stmt-new-in-v630) | Modified | Takes effect starting from v6.5.0. It controls whether read operations in SQL statements containing `INSERT`, `DELETE`, and `UPDATE` can be pushed down to TiFlash. The default value is `OFF`. |
 | [`tidb_ddl_enable_fast_reorg`](/system-variables.md#tidb_ddl_enable_fast_reorg-new-in-v630) | Modified | Change the default value from `OFF` to `ON`, meaning that the acceleration of `ADD INDEX` and `CREATE INDEX` is enabled by default. |
+| [`tidb_mem_quota_query`](/system-variables.md#tidb_mem_quota_query) | Modified | For versions earlier than TiDB v6.5.0, this variable is used to set the threshold value of memory quota for a query. For TiDB v6.5.0 and later versions, this variable is used to set the threshold value of memory quota for a session.  |
+| [`tidb_replica_read`](/system-variables.md#tidb_replica_read-new-in-v40) | Modified | Starting from v6.5.0, when this variable is set to`closest-adaptive` and the estimated result of a read request is greater than or equal to [`tidb_adaptive_closest _read_threshold`](/system-variables.md#tidb_adaptive_closest_read_threshold-new-in-v630), the number of TiDB nodes whose `closest-adaptive` configuration takes effect is limited in each availability zone, which is always the same as the number of TiDB nodes in the availability zone with the fewest TiDB nodes, and the other TiDB nodes automatically read from the leader replica. |
 | [`tidb_server_memory_limit`](/system-variables.md#tidb_server_memory_limit-new-in-v640) | Modified | Change the default value from `0` to `80%`, meaning that the memory limit for a TiDB instance is 80% of the total memory by default. |
 | [`default_password_lifetime`](/system-variables.md#default_password_lifetime-new-in-v650) | Newly added | Sets the global policy for automatic password expiration to require the user to change passwords periodically. The default value `0` indicates that the password never expires. |
 | [`disconnect_on_expired_password`](/system-variables.md#disconnect_on_expired_password-new-in-v650) | Newly added | This variable is read-only. It indicates whether to disconnect the client connection when the password is expired.|
@@ -306,7 +309,6 @@ TiDB 6.5.0 is a Long-Term Support Release (LTS).
 | [`password_reuse_interval`](/system-variables.md#password_reuse_interval-new-in-v650) | Newly added | This variable is used to establish a password reuse policy that allows TiDB to limit password reuse based on time elapsed. The default value `0` means disabling the password reuse policy based on time elapsed. |
 | [`tidb_cdc_write_source`](/system-variables.md#tidb_cdc_write_source-new-in-v650) | Newly added | When this variable is set to a value other than 0, data written in this session is considered to be written by TiCDC. This variable can only be modified by TiCDC. Do not manually modify this variable in any case. |
 | [`tidb_index_merge_intersection_concurrency`](/system-variables.md#tidb_index_merge_intersection_concurrency-new-in-v650) | Newly added | Sets the maximum concurrency for the intersection operations that index merge performs. It is effective only when TiDB accesses partitioned tables in the dynamic pruning mode. |
-| [`tidb_mem_quota_query`](/system-variables.md#tidb_mem_quota_query) | Modified | For versions earlier than TiDB v6.5.0, this variable is used to set the threshold value of memory quota for a query. For TiDB v6.5.0 and later versions, this variable is used to set the threshold value of memory quota for a session.  |
 | [`tidb_source_id`](/system-variables.md#tidb_source_id-new-in-v650) | Newly added | This variable is used to configure the different cluster IDs in a [bi-directional replication](/ticdc/manage-ticdc.md#bi-directional-replication) cluster.|
 | [`tidb_ttl_delete_batch_size`](/system-variables.md#tidb_ttl_delete_batch_size-new-in-v650) | Newly added | This variable is used to set the maximum number of rows that can be deleted in a single `DELETE` transaction in a TTL job. |
 | [`tidb_ttl_delete_rate_limit`](/system-variables.md#tidb_ttl_delete_rate_limit-new-in-v650) | Newly added | This variable is used to limit the rate of `DELETE` statements in TTL jobs on each TiDB node. The value represents the maximum number of `DELETE` statements allowed per second in a single node in a TTL job. When this variable is set to `0`, no limit is applied. |
@@ -330,9 +332,11 @@ TiDB 6.5.0 is a Long-Term Support Release (LTS).
 
 | Configuration file | Configuration parameter | Change type | Description |
 | -------- | -------- | -------- | -------- |
-| TiDB | [`disconnect-on-expired-password`](/tidb-configuration-file.md#disconnect-on-expired-password-new-in-v650) | Newly added | Determines whether TiDB disconnects the client connection when the password is expired. The default value is `true`, which means the client connection is disconnected when the password is expired. |
 | TiDB | [`server-memory-quota`](/tidb-configuration-file.md#server-memory-quota-new-in-v409) | Deprecated | Since v6.5.0, this configuration item is deprecated. Instead, use the system variable [`tidb_server_memory_limit`](/system-variables.md#tidb_server_memory_limit-new-in-v640) for setting.  |
-| TiKV | [`cdc.min-ts-interval`](/tikv-configuration-file.md#min-ts-interval)  | Modified | The default value changes from `1s` to `200ms`. |
+| TiDB | [`disconnect-on-expired-password`](/tidb-configuration-file.md#disconnect-on-expired-password-new-in-v650) | Newly added | Determines whether TiDB disconnects the client connection when the password is expired. The default value is `true`, which means the client connection is disconnected when the password is expired. |
+| TiKV | [`cdc.min-ts-interval`](/tikv-configuration-file.md#min-ts-interval)  | Modified | Change the default value from `1s` to `200ms`. |
+| TiKV | [`memory-use-ratio`](/tikv-configuration-file.md#memory-use-ratio-introduced-new-in-v650) | Newly added | Indicates the ratio of available memory to total system memory in PITR log recovery. | 
+
 
 ### Others
 
@@ -470,4 +474,12 @@ TiDB 6.5.0 is a Long-Term Support Release (LTS).
 
 We would like to thank the following contributors from the TiDB community:
 
-- [贡献者 GitHub ID](链接)
+- [e1ijah1](https://github.com/e1ijah1)
+- [guoxiangCN](https://github.com/guoxiangCN) (First-time contributor)
+- [jiayang-zheng](https://github.com/jiayang-zheng)
+- [jiyfhust](https://github.com/jiyfhust)
+- [mikechengwei](https://github.com/mikechengwei)
+- [pingandb](https://github.com/pingandb)
+- [sashashura](https://github.com/sashashura)
+- [sourcelliu](https://github.com/sourcelliu)
+- [wxbty](https://github.com/wxbty)
