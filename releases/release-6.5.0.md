@@ -278,6 +278,7 @@ TiDB 6.5.0 is a Long-Term Support Release (LTS).
 
 | Variable name | Change type | Description |
 |--------|------------------------------|------|
+|[`tidb_enable_amend_pessimistic_txn`](/system-variables.md#tidb_enable_amend_pessimistic_txn-new-in-v407)| Deprecated | Starting from v6.5.0, this variable is deprecated, and TiDB uses the [Metadata Lock](/metadata-lock.md) feature by default to avoid the `Information schema is changed` error. |
 | [`tidb_cost_model_version`](/system-variables.md#tidb_cost_model_version-introduced-new-in-v620) | Modified | Changes the default value from `1` to `2`, meaning that Cost Model Version 2 is used for index selection and operator selection by default.  |
 | [`tidb_enable_metadata_lock`](/system-variables.md#tidb_enable_metadata_lock-new-in-v630) | Modified | Changes the default value from `OFF` to `ON`, meaning that the metadata lock feature is enabled by default. |
 | [`tidb_enable_tiflash_read_for_write_stmt`](/system-variables.md#tidb_enable_tiflash_read_for_write_stmt-new-in-v630) | Modified | Takes effect starting from v6.5.0. It controls whether read operations in SQL statements containing `INSERT`, `DELETE`, and `UPDATE` can be pushed down to TiFlash. The default value is `OFF`. |
@@ -314,19 +315,20 @@ TiDB 6.5.0 is a Long-Term Support Release (LTS).
 
 | Configuration file | Configuration parameter | Change type | Description |
 | -------- | -------- | -------- | -------- |
-| TiDB | [`server-memory-quota`](/tidb-configuration-file.md#server-memory-quota-new-in-v409) | Deprecated | Since v6.5.0, this configuration item is deprecated. Instead, use the system variable [`tidb_server_memory_limit`](/system-variables.md#tidb_server_memory_limit-new-in-v640) for setting.  |
+| TiDB | [`server-memory-quota`](/tidb-configuration-file.md#server-memory-quota-new-in-v409) | Deprecated | Since v6.5.0, this configuration item is deprecated. Instead, use the system variable [`tidb_server_memory_limit`](/system-variables.md#tidb_server_memory_limit-new-in-v640) to manage memory globally. |
 | TiDB | [`disconnect-on-expired-password`](/tidb-configuration-file.md#disconnect-on-expired-password-new-in-v650) | Newly added | Determines whether TiDB disconnects the client connection when the password is expired. The default value is `true`, which means the client connection is disconnected when the password is expired. |
+| TiKV | `raw-min-ts-outlier-threshold` | Deleted | Since v6.4.0, this configuration item was deprecated. Since v6.5.0, this configuration item is deleted. |
 | TiKV | [`cdc.min-ts-interval`](/tikv-configuration-file.md#min-ts-interval)  | Modified | Change the default value from `1s` to `200ms`. |
 | TiKV | [`memory-use-ratio`](/tikv-configuration-file.md#memory-use-ratio-introduced-new-in-v650) | Newly added | Indicates the ratio of available memory to total system memory in PITR log recovery. | 
 
 ### Others
 
-- Starting from v6.4.0, the mysql.user table adds two new columns: `Password_reuse_history` and `Password_reuse_time`. 
-- The [index acceleration](/system-variables.md#tidb_ddl_enable_fast_reorg-new-in-v630) feature is enabled by default and is not compatible with the [PITR (Point-in-time recovery)](/br/br-pitr-guide.md) feature. When using the index acceleration feature, you need to make sure that no PITR backup task is running in the background, otherwise unexpected results might occur. For more information, see [tidb_ddl_enable_fast_reorg](/system-variables.md#tidb_ddl_enable_fast_reorg-new-in-v630).
+- Starting from v6.5.0, the `mysql.user` table adds two new columns: `Password_reuse_history` and `Password_reuse_time`. 
+- The [index acceleration](/system-variables.md#tidb_ddl_enable_fast_reorg-new-in-v630) feature is enabled by default and is not compatible with the [PITR (Point-in-time recovery)](/br/br-pitr-guide.md) feature. When using the index acceleration feature, you need to make sure that no PITR backup task is running in the background; otherwise, unexpected results might occur. For more information, see [tidb_ddl_enable_fast_reorg](/system-variables.md#tidb_ddl_enable_fast_reorg-new-in-v630).
 
-## 废弃功能
+## Deprecated feature
 
-即将于 v6.6.0 版本废弃 v4.0.7 版本引入的 Amending Transaction 机制，并使用[元数据锁](/metadata-lock.md) 替代。
+Starting from v6.5.0, the [`AMEND TRANSACTION`](/system-variables.md#tidb_enable_amend_pessimistic_txn-new-in-v407) mechanism introduced in v4.0.7 is deprecated and replaced by [Metadata Lock](/metadata-lock.md).
 
 ## Improvements
 
