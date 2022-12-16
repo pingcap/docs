@@ -130,11 +130,11 @@ Compared with the previous LTS 6.1.0, 6.5.0 not only includes new features, impr
 
 ### Performance
 
-* Further enhance the [INDEX MERGE](/glossary.md#index-merge) feature. [#39333](https://github.com/pingcap/tidb/issues/39333) @[guo-shaoge](https://github.com/guo-shaoge) @[time-and-fate](https://github.com/time-and-fate) @[hailanwhu](https://github.com/hailanwhu) **tw@TomShawn**
+* [INDEX MERGE](/glossary.md#index-merge) supports conjunctive normal form (expressions connected by `AND`) [#39333](https://github.com/pingcap/tidb/issues/39333) @[guo-shaoge](https://github.com/guo-shaoge) @[time-and-fate](https://github.com/time-and-fate) @[hailanwhu](https://github.com/hailanwhu) **tw@TomShawn**
 
-    Before v6.5.0, TiDB only supported using index merge for the filter conditions connected by `OR`. Starting from v6.5.0, TiDB has supported using index merge for filter conditions connected by`AND` in the `WHERE` clause. In this way, the index merge of TiDB can now cover more general combinations of query filter conditions and is no longer limited to Union (`OR`) relationship. The current v6.5.0 version only supports index merge under `OR` conditions as automatically selected by the optimizer. To enable index merge for `AND` conditions, you need to use the [`USE_INDEX_MERGE`](/optimizer-hints.md#use_index_merget1_name-idx1_name--idx2_name-) hint.
+    Before v6.5.0, TiDB only supported using index merge for the filter conditions connected by `OR`. Starting from v6.5.0, TiDB has supported using index merge for filter conditions connected by `AND` in the `WHERE` clause. In this way, the index merge of TiDB can now cover more general combinations of query filter conditions and is no longer limited to union (`OR`) relationship. The current v6.5.0 version only supports index merge under `OR` conditions as automatically selected by the optimizer. To enable index merge for `AND` conditions, you need to use the [`USE_INDEX_MERGE`](/optimizer-hints.md#use_index_merget1_name-idx1_name--idx2_name-) hint.
 
-    For more details about index merge, see [v5.4 release notes](/release-5.4.0#performance) and [Explain Index Merge](/explain-index-merge.md).
+    For more details about index merge, see [v5.4.0 Release Notes](/release-5.4.0#performance) and [Explain Index Merge](/explain-index-merge.md).
 
 * Support pushing down the following [JSON functions](/tiflash/tiflash-supported-pushdown-calculations.md) to TiFlash [#39458](https://github.com/pingcap/tidb/issues/39458) @[yibin87](https://github.com/yibin87) **tw@qiancai**
 
@@ -168,21 +168,21 @@ Compared with the previous LTS 6.1.0, 6.5.0 not only includes new features, impr
 
     For more information, see [User document](/cost-model.md#cost-model-version-2).
 
-* TiFlash 对获取表行数的操作进行针对优化 [#37165](https://github.com/pingcap/tidb/issues/37165) @[elsa0520](https://github.com/elsa0520)
+* TiFlash optimizes the operations of getting the number of table rows [#37165](https://github.com/pingcap/tidb/issues/37165) @[elsa0520](https://github.com/elsa0520)
 
-    在数据分析的场景中，通过无过滤条件的 `count(*)` 获取表的实际行数是一个常见操作。 TiFlash 在新版本中优化了 `count(*)` 的改写，自动选择带有“非空”属性的数据类型最短的列进行计数， 可以有效降低 TiFlash 上发生的 I/O 数量，进而提升获取表行数的执行效率。
+    In the scenarios of data analysis, It is a common operation to get the actual number of rows of a table through `COUNT(*)` without filter conditions. In v6.5.0, TiFlash optimizes the rewriting of `COUNT(*)` and automatically selects the not-null columns with the shortest column definition to count the number of rows, which can effectively reduce the number of I/O operations in TiFlash and improve the execution efficiency of getting row count.
 
 ### Stability
 
-* The global memory control feature is now GA.  [#37816](https://github.com/pingcap/tidb/issues/37816) @[wshwsh12](https://github.com/wshwsh12) **tw@TomShawn**
+* The global memory control feature is now GA [#37816](https://github.com/pingcap/tidb/issues/37816) @[wshwsh12](https://github.com/wshwsh12) **tw@TomShawn**
 
-    Since v6.5.0, the global memory control feature can track the main memory consumption in TiDB. When the global memory consumption reaches the preset value defined by [`tidb_server_memory_limit`](/system-variables.md#tidb_server_memory_limit-new-in-v640), TiDB tries to limit the memory usage by GC or canceling SQL operations, to ensure stability.
+    TiDB v6.4.0 introduces global memory control as an experimental feature. Since v6.5.0, the global memory control feature becomes GA and can track the main memory consumption in TiDB. When the global memory consumption reaches the threshold defined by [`tidb_server_memory_limit`](/system-variables.md#tidb_server_memory_limit-new-in-v640), TiDB tries to limit the memory usage by GC or canceling SQL operations, to ensure stability.
 
-    Note that the memory consumed by the transaction in a session (the maximum value was previously set by the configuration item [`txn-total-size-limit`](/tidb-configuration-file.md#txn-total-size-limit)) is now tracked by the memory management module: when the memory consumption of a single session reaches the threshold defined by the system variable [`tidb_mem_quota_query`](/system-variables.md#tidb_mem_quota_query), the behavior defined by the system variable [`tidb_mem_oom_action`](/system-variables.md#tidb_mem_oom_action-new-in-v610) will be triggered (the default is `CANCEL`, that is, canceling operations). To ensure forward compatibility, when [`txn-total-size-limit`](/tidb-configuration-file.md#txn-total-size-limit) is configured as a non-default value, TiDB will still ensure that transactions can use the memory size set by `txn-total-size-limit`.
+    Note that the memory consumed by the transaction in a session (the maximum value was previously set by the configuration item [`txn-total-size-limit`](/tidb-configuration-file.md#txn-total-size-limit)) is now tracked by the memory management module: when the memory consumption of a single session reaches the threshold defined by the system variable [`tidb_mem_quota_query`](/system-variables.md#tidb_mem_quota_query), the behavior defined by the system variable [`tidb_mem_oom_action`](/system-variables.md#tidb_mem_oom_action-new-in-v610) will be triggered (the default is `CANCEL`, that is, canceling operations). To ensure forward compatibility, when [`txn-total-size-limit`](/tidb-configuration-file.md#txn-total-size-limit) is configured as a non-default value, TiDB will still ensure that transactions can use the memory set by `txn-total-size-limit`.
 
-    If you are running TiDB v6.5.0 or later, it is recommended to remove [`txn-total-size-limit`](/tidb-configuration-file.md#txn-total-size-limit) and not to set a separate limit on the memory usage of transactions. Instead, use the system variables [`tidb_mem_quota_query`](/system-variables.md#tidb_mem_quota_query) and [`tidb_server_memory_limit`](/system-variables.md#tidb_server_memory_limit-new-in-v640) to manage memory globally, which can improve memory efficiency.
+    If you are using TiDB v6.5.0 or later, it is recommended to remove [`txn-total-size-limit`](/tidb-configuration-file.md#txn-total-size-limit) and not to set a separate limit on the memory usage of transactions. Instead, use the system variables [`tidb_mem_quota_query`](/system-variables.md#tidb_mem_quota_query) and [`tidb_server_memory_limit`](/system-variables.md#tidb_server_memory_limit-new-in-v640) to manage global memory, which can improve the efficiency of memory usage.
 
-    For more info, see the [user document](/configure-memory-usage.md).
+    For more information, see the [user document](/configure-memory-usage.md).
 
 ### Ease of use
 
@@ -402,15 +402,15 @@ Starting from v6.5.0, the [`AMEND TRANSACTION`](/system-variables.md#tidb_enable
 
     - Fix the issue of memory chunk misuse for the chunk reuse feature that occurs in some cases [#38917](https://github.com/pingcap/tidb/issues/38917) @[keeplearning20221](https://github.com/keeplearning20221)
     - Fix the issue that the internal sessions of `tidb_constraint_check_in_place_pessimistic` might be affected by the global setting [#38766](https://github.com/pingcap/tidb/issues/38766) @[ekexium](https://github.com/ekexium)
-    - Fix the issue that the `AUTO_INCREMENT` column cannot be used together with the `Check` constraint [#38894](https://github.com/pingcap/tidb/issues/38894) @[YangKeao](https://github.com/YangKeao)
-    - Fix the issue that using `INSERT IGNORE INTO` to insert data of the `STRING` type into an auto-increment column of the `SMALLINT` type will raise an error [#38483](https://github.com/pingcap/tidb/issues/38483) @[hawkingrei](https://github.com/hawkingrei)
+    - Fix the issue that the `AUTO_INCREMENT` column cannot work with the `CHECK` constraint [#38894](https://github.com/pingcap/tidb/issues/38894) @[YangKeao](https://github.com/YangKeao)
+    - Fix the issue that using `INSERT IGNORE INTO` to insert data of the `STRING` type into an auto-increment column of the `SMALLINT` type will cause an error [#38483](https://github.com/pingcap/tidb/issues/38483) @[hawkingrei](https://github.com/hawkingrei)
     - Fix the issue that the null pointer error occurs in the operation of renaming the partition column of a partitioned table [#38932](https://github.com/pingcap/tidb/issues/38932) @[mjonss](https://github.com/mjonss)
     - Fix the issue that modifying the partition column of a partitioned table causes DDL to hang [#38530](https://github.com/pingcap/tidb/issues/38530) @[mjonss](https://github.com/mjonss)
-    - Fix the issue that the `ADMIN SHOW JOB` operation panics after upgrading from v4.0 to v6.4 [#38980](https://github.com/pingcap/tidb/issues/38980) @[tangenta](https://github.com/tangenta)
+    - Fix the issue that the `ADMIN SHOW JOB` operation panics after upgrading from v4.0.16 to v6.4.0 [#38980](https://github.com/pingcap/tidb/issues/38980) @[tangenta](https://github.com/tangenta)
     - Fix the issue that the `tidb_decode_key` function fails to correctly parse the encoding of partitioned tables [#39304](https://github.com/pingcap/tidb/issues/39304) @[Defined2014](https://github.com/Defined2014)
-    - Fixe the issue that gRPC error log messages are not redirected to the correct log file during log rotation [#38941](https://github.com/pingcap/tidb/issues/38941) @[xhebox](https://github.com/xhebox)
-    - Fix the issue that TiDB generates an unexpected query plan for the `BEGIN; SELECT... FOR UPDATE;` point query when TiKV is not configured for the read engine [#39344](https://github.com/pingcap/tidb/issues/39344) @[Yisaer](https://github.com/Yisaer)
-    - Fix the issue that mistakenly pushing down `StreamAgg` to TiFlash causes wrong result [#39266](https://github.com/pingcap/tidb/issues/39266) @[fixdb](https://github.com/fixdb)
+    - Fixe the issue that gRPC error logs are not redirected to the correct log file during log rotation [#38941](https://github.com/pingcap/tidb/issues/38941) @[xhebox](https://github.com/xhebox)
+    - Fix the issue that TiDB generates an unexpected execution plan for the `BEGIN; SELECT... FOR UPDATE;` point query when TiKV is not configured as a read engine [#39344](https://github.com/pingcap/tidb/issues/39344) @[Yisaer](https://github.com/Yisaer)
+    - Fix the issue that mistakenly pushing down `StreamAgg` to TiFlash causes wrong results [#39266](https://github.com/pingcap/tidb/issues/39266) @[fixdb](https://github.com/fixdb)
 
 + TiKV
 
