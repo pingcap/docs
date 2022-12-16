@@ -99,7 +99,7 @@ After you finish executing the SQL script, check the data in Oracle. The followi
 
 ## Step 6. Create DMS endpoints
 
-1. In the [AWS DMS console](https://console.aws.amazon.com/dms/v2/home), click the `Endpoints` page.
+1. In the [AWS DMS console](https://console.aws.amazon.com/dms/v2/home), click the `Endpoints` menu item on the left pane.
 
 2. Create the Oracle source endpoint and the TiDB target endpoint.
 
