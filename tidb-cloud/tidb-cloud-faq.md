@@ -138,7 +138,7 @@ No. TiDB Cloud is Database-as-a-Service (DBaaS) and runs only on the TiDB Cloud 
 
 ### How secure is your TiDB Cluster?
 
-In TiDB Cloud, we offer dedicated Tier and Serverless Tier for different customers.
+In TiDB Cloud, you can use either a Dedicated Tier cluster or a Serverless Tier cluster according to your needs.
 
 For Dedicated Tier clusters, TiDB Cloud ensures cluster security with the following measures:
 
