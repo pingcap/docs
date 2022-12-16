@@ -242,7 +242,7 @@ Compared with the previous LTS 6.1.0, 6.5.0 not only includes new features, impr
 
 ### TiDB data share subscription
 
-* TiCDC supports replicating changed logs to storage sinks [tiflow#6797](https://github.com/pingcap/tiflow/issues/6797) @[zhaoxinyu](https://github.com/zhaoxinyu) **tw@shichun-0415**
+* TiCDC supports replicating changed logs to storage sinks (experimental) [tiflow#6797](https://github.com/pingcap/tiflow/issues/6797) @[zhaoxinyu](https://github.com/zhaoxinyu) **tw@shichun-0415**
 
      TiCDC supports replicating changed logs to Amazon S3, Azure Blob Storage, NFS, and other S3-compatible storage services. Cloud storage is reasonably priced and easy to use. If you do not want to use Kafka, you can use storage sinks. TiCDC saves the changed logs to a file and then sends it to the storage system. From the storage system, the consumer program reads the newly generated changed log files periodically.
 
