@@ -16,8 +16,8 @@ Compared with the previous LTS 6.1.0, 6.5.0 not only includes new features, impr
 
 - Enable [index acceleration](/system-variables.md#tidb_ddl_enable_fast_reorg-new-in-v630) by default, which improves the performance of adding indexes by about 10 times compared with v6.1.0.
 - Support TiDB global memory control via [`tidb_server_memory_limit`](/system-variables.md#tidb_server_memory_limit-new-in-v640).
-- Support a high-performance and globally monotonic [`AUTO_INCREMENT`](/auto-increment.md#mysql-compatible-mode) column attribute, compatible with MySQL.
-- Support restoring a cluster to a specific point in time by using [`FLASHBACK CLUSTER TO TIMESTAMP`](/sql-statements/sql-statement-flashback-to-timestamp.md), compatible with TiCDC and PITR.
+- Support a high-performance and globally monotonic [`AUTO_INCREMENT`](/auto-increment.md#mysql-compatible-mode) column attribute, which is compatible with MySQL.
+- Support restoring a cluster to a specific point in time by using [`FLASHBACK CLUSTER TO TIMESTAMP`](/sql-statements/sql-statement-flashback-to-timestamp.md), which is compatible with TiCDC and PITR.
 - Optimizer further enhances the more accurate [Cost Model] version 2](/cost-model.md#cost-model-version-2) and further enhance the [INDEX MERGE](/glossary.md#index-merge) feature to support conjunctive normal form.
 - Support pushing down the `JSON_EXTRACT()` function to TiFlash.
 - Support [password management](/password-management.md) policies that meet password compliance auditing requirements.
