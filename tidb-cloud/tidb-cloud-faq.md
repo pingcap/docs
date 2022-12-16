@@ -147,7 +147,11 @@ For Dedicated Tier clusters, TiDB Cloud ensures cluster security with the follow
 - Creates server-side TLS certificates and component-level TLS certificates for each cluster to encrypt cluster data in transit.
 - Provide IP access rules for each cluster to ensure that only allowed source IPs can access your cluster.
 
-In the serverless cluster, we created independent sub-accounts for each cluster, and also set up firewall rules to isolate external connections, and provided cluster server TLS certificates to encrypt cluster data in transit.
+For Serverless Tier clusters, TiDB Cloud ensures cluster security with the following measures:
+
+- Creates independent sub-accounts for each cluster.
+- Sets up firewall rules to isolate external connections.
+- Provides cluster server TLS certificates to encrypt cluster data in transit.
 
 All connections to the cluster over the internet use TLS 1.2 or 1.3.
 
