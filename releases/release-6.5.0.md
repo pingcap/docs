@@ -250,7 +250,7 @@ Compared with the previous LTS 6.1.0, 6.5.0 not only includes new features, impr
 
 * TiCDC supports bidirectional replication across multiple clusters  @[asddongmen](https://github.com/asddongmen) **tw@shichun-0415**
 
-    TiCDC supports bidirectional replication across multiple TiDB clusters. If you need a multi-master TiDB solution for your application, especially a multi-master solution in multiple regions, you can use this feature to build one. By configuring the `bdr-mode = true` parameter for the TiCDC changefeeds from each TiDB cluster to other TiDB clusters, you can achieve bidirectional data replication across multiple TiDB clusters.
+    TiCDC supports bidirectional replication across multiple TiDB clusters. If you need a multi-master TiDB solution for your application, especially a multi-master solution across multiple regions, you can use this feature to build one. By configuring the `bdr-mode = true` parameter for the TiCDC changefeeds from each TiDB cluster to the other TiDB clusters, you can achieve bidirectional data replication across multiple TiDB clusters.
 
     For more information, refer to [user document](/ticdc/ticdc-bidirectional-replication.md).
 
