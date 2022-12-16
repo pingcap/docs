@@ -10,9 +10,6 @@ aliases: ['/docs/dev/ticdc/ticdc-overview/','/docs/dev/reference/tools/ticdc/ove
 
 ## Usage scenarios
 
-- Database disaster recovery: TiCDC can be used for disaster recovery between homogeneous databases to ensure eventual data consistency of primary and secondary databases after a disaster event. This function works only with TiDB primary and secondary clusters.
-- Data integration: TiCDC provides [TiCDC Canal-JSON Protocol](/ticdc/ticdc-canal-json.md), which allows other systems to subscribe data changes from TiCDC. In this way, TiCDC provides data sources for various scenarios such as monitoring, caching, global indexing, data analysis, and primary-secondary replication between heterogeneous databases.
-
 - Provides data high availability and disaster recovery solutions for multiple TiDB clusters, ensuring eventual data consistency between primary and secondary clusters in case of disaster.
 - Replicates real-time data changes to homogeneous systems so as to provide data sources for various scenarios such as monitoring, caching, global indexing, data analysis, and primary-secondary replication between heterogeneous databases.
 
@@ -24,19 +21,19 @@ aliases: ['/docs/dev/ticdc/ticdc-overview/','/docs/dev/reference/tools/ticdc/ove
 - Replicate incremental data from a TiDB cluster to a MySQL database (or other MySQL-compatible databases) with low latency.
 - Replicate incremental data from a TiDB cluster to a Kafka cluster. The recommended data format includes [Canal-JSON](/ticdc/ticdc-canal-json.md) and [Avro](/ticdc/ticdc-avro-protocol.md).
 - Replicate tables with the ability to filter databases, tables, DMLs, and DDLs.
-- Highly available with no single point of failure. Supports dynamically adding and deleting TiCDC nodes.
-- Support cluster management through [Open API](/ticdc/ticdc-open-api.md), including querying task status, and dynamically modifying task configuration and creating or deleting tasks.
+- Be highly available with no single point of failure. Supports dynamically adding and deleting TiCDC nodes.
+- Support cluster management through [Open API](/ticdc/ticdc-open-api.md), including querying task status, dynamically modifying task configuration, and creating or deleting tasks.
 
 ### Replication order
 
 - For all DDL or DML statements, TiCDC outputs them **at least once**.
-- When the TiKV or TiCDC cluster encounters failure, TiCDC might send the same DDL/DML statement repeatedly. For duplicated DDL/DML statements:
+- When the TiKV or TiCDC cluster encounters a failure, TiCDC might send the same DDL/DML statement repeatedly. For duplicated DDL/DML statements:
 
     - MySQL sink can execute DDL statements repeatedly. For DDL statements that can be executed repeatedly in the downstream, such as `truncate table`, the statement is executed successfully. For those that cannot be executed repeatedly, such as `create table`, the execution fails, and TiCDC ignores the error and continues the replication.
     - Kafka sink
-        - Kafka sink provides different strategies for data distribution. You can distribute data to different Kafka partitions based on the table, primary key, or timestamp. This ensures that the update data of a row is sent to the same partition in order.
-        - All these distribution strategies send Resolved TS messages to all topics and partitions periodically. This indicates that all messages earlier than the Resolved TS have been sent to the topics and partitions. The consumer can use the Resolved TS to sort the messages received.
-        - Kafka sink sends messages repeatedly, but the duplicate messages do not affect the constraints of `Resolved Ts`. For example, if a changefeed is paused and then resumed, msg1, msg2, msg3, msg2, and msg3 will be sent in order. You can filter the duplicated messages from Kafka consumers.
+        - Kafka sink provides different strategies for data distribution. You can distribute data to different Kafka partitions based on the table, primary key, or timestamp. This ensures that the updated data of a row is sent to the same partition in order.
+        - All these distribution strategies send Resolved TS messages to all topics and partitions periodically. This indicates that all messages earlier than the Resolved TS have been sent to the topics and partitions. The Kafka consumer can use the Resolved TS to sort the messages received.
+        - Kafka sink sends duplicated messages sometimes, but these duplicated messages do not affect the constraints of `Resolved Ts`. For example, if a changefeed is paused and then resumed, Kafka sink might send  `msg1`, `msg2`, `msg3`, `msg2`, and `msg3` in order. You can filter the duplicated messages from Kafka consumers.
 
 ### Replication consistency
 
@@ -52,7 +49,7 @@ aliases: ['/docs/dev/ticdc/ticdc-overview/','/docs/dev/reference/tools/ticdc/ove
 
 ## TiCDC architecture
 
-An incremental data replication tool for TiDB, TiCDC is highly available through PD's etcd. The replication process is as follows:
+As an incremental data replication tool for TiDB, TiCDC is highly available through PD's etcd. The replication process is as follows:
 
 1. Multiple TiCDC processes pull data changes from TiKV nodes.
 2. Data changes pulled from TiKV are sorted and merged internally.
@@ -64,11 +61,11 @@ The architecture of TiCDC is shown in the following figure:
 
 The components in the preceding architecture diagram are described as follows:
 
-- TiKV Server: When data changes, TiKV nodes send the changes as change logs (KV change logs) to TiCDC nodes. If TiCDC nodes find the change logs not continuous, they will actively request the TiKV nodes to provide change logs.
+- TiKV Server: TiKV nodes in a TiDB cluster. When data changes, TiKV nodes send the changes as change logs (KV change logs) to TiCDC nodes. If TiCDC nodes find the change logs not continuous, they will actively request the TiKV nodes to provide change logs.
 - TiCDC: TiCDC nodes where the TiCDC processes run. Each node runs a TiCDC process. Each process pulls data changes from one or more tables in TiKV nodes, and replicates the changes to the downstream system through the sink component.
-- PD: The scheduling module in the TiDB cluster. This module is in charge of scheduling cluster data and usually consists of three PD nodes. PD provides high availability through the etcd cluster. In the etcd cluster, TiCDC stores metadata, such as node status information and changefeed configurations.
+- PD: The scheduling module in a TiDB cluster. This module is in charge of scheduling cluster data and usually consists of three PD nodes. PD provides high availability through the etcd cluster. In the etcd cluster, TiCDC stores its metadata, such as node status information and changefeed configurations.
 
-As can be seen from the preceding architecture diagram, TiCDC supports replicating data to TiDB, MySQL, and Kafka databases.
+As shown in the preceding architecture diagram, TiCDC supports replicating data to TiDB, MySQL, and Kafka databases.
 
 ## Restrictions
 
