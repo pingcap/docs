@@ -380,12 +380,12 @@ Starting from v6.5.0, the [`AMEND TRANSACTION`](/system-variables.md#tidb_enable
     + Backup & Restore (BR)
 
         - Optimize BR memory usage during the process of cleaning backup log data [#38869](https://github.com/pingcap/tidb/issues/38869) @[Leavrth](https://github.com/Leavrth)
-        - (dup) Fix the restoration failure issue caused by PD leader switch during the restoration process [#36910](https://github.com/pingcap/tidb/issues/36910) @[MoCuishle28](https://github.com/MoCuishle28)
+        - Fix the restoration failure issue caused by PD leader switch during the restoration process [#36910](https://github.com/pingcap/tidb/issues/36910) @[MoCuishle28](https://github.com/MoCuishle28)
         - Improve TLS compatibility by using the OpenSSL protocol in log backup [#13867](https://github.com/tikv/tikv/issues/13867) @[YuJuncen](https://github.com/YuJuncen)
 
     + TiCDC
 
-        - (dup) Improve the performance of Kafka protocol encoder [#7540](https://github.com/pingcap/tiflow/issues/7540) [#7532](https://github.com/pingcap/tiflow/issues/7532) [#7543](https://github.com/pingcap/tiflow/issues/7543) @[3AceShowHand](https://github.com/3AceShowHand) @[sdojjy](https://github.com/sdojjy)
+        - Improve the performance of Kafka protocol encoder [#7540](https://github.com/pingcap/tiflow/issues/7540) [#7532](https://github.com/pingcap/tiflow/issues/7532) [#7543](https://github.com/pingcap/tiflow/issues/7543) @[3AceShowHand](https://github.com/3AceShowHand) @[sdojjy](https://github.com/sdojjy)
 
     + TiDB Data Migration (DM)
 
@@ -433,16 +433,16 @@ Starting from v6.5.0, the [`AMEND TRANSACTION`](/system-variables.md#tidb_enable
 
     + Backup & Restore (BR)
 
-        - (dup) Fix the issue that when BR deletes log backup data, it mistakenly deletes data that should not be deleted  [#38939](https://github.com/pingcap/tidb/issues/38939) @[Leavrth](https://github.com/Leavrth)
-        - (dup) Fix the issue that restore tasks fail when using old framework for collations in databases or tables [#39150](https://github.com/pingcap/tidb/issues/39150) @[MoCuishle28](https://github.com/MoCuishle28)
+        - Fix the issue that when BR deletes log backup data, it mistakenly deletes data that should not be deleted  [#38939](https://github.com/pingcap/tidb/issues/38939) @[Leavrth](https://github.com/Leavrth)
+        - Fix the issue that restore tasks fail when using old framework for collations in databases or tables [#39150](https://github.com/pingcap/tidb/issues/39150) @[MoCuishle28](https://github.com/MoCuishle28)
         - Fix the issue that backup fails because Alibaba Cloud and Huawei Cloud are not fully compatible with Amazon S3 storage [#39545](https://github.com/pingcap/tidb/issues/39545) @[3pointer](https://github.com/3pointer)
 
     + TiCDC
 
         - Fix the issue that TiCDC gets stuck when the PD leader crashes [#7470](https://github.com/pingcap/tiflow/issues/7470) @[zeminzhou](https://github.com/zeminzhou)
-        - (dup) Fix data loss occurred in the scenario of executing DDL statements first and then pausing and resuming the changefeed [#7682](https://github.com/pingcap/tiflow/issues/7682) @[asddongmen](https://github.com/asddongmen)
+        - Fix data loss occurred in the scenario of executing DDL statements first and then pausing and resuming the changefeed [#7682](https://github.com/pingcap/tiflow/issues/7682) @[asddongmen](https://github.com/asddongmen)
         - Fix the issue that TiCDC mistakenly reports an error when there is a later version of TiFlash [#7744](https://github.com/pingcap/tiflow/issues/7744) @[overvenus](https://github.com/overvenus)
-        - (dup) Fix the issue that the sink component gets stuck if the downstream network is unavailable [#7706](https://github.com/pingcap/tiflow/issues/7706) @[hicqu](https://github.com/hicqu)
+        - Fix the issue that the sink component gets stuck if the downstream network is unavailable [#7706](https://github.com/pingcap/tiflow/issues/7706) @[hicqu](https://github.com/hicqu)
         - Fix the issue that data is lost when a user quickly deletes a replication task and then creates another one with the same task name [#7657](https://github.com/pingcap/tiflow/issues/7657) @[overvenus](https://github.com/overvenus)
 
     + TiDB Data Migration (DM)
