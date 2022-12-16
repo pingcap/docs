@@ -132,7 +132,7 @@ TiDB Cloud uses storage volume encryption by default for your business data at r
 
 If you require more specific information about business data encryption in TiDB Cloud, contact [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md).
 
-### Can TiDB Cloud run in your VPC?
+### Can I run TiDB Cloud in my VPC?
 
 No. TiDB Cloud is Database as a service(DBaaS) and runs only on the TiDB Cloud VPC, which is a cloud computing managed service offering that provides access to a database without requiring the setup of physical hardware, the installation of software.
 
