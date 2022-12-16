@@ -140,7 +140,12 @@ No. TiDB Cloud is Database-as-a-Service (DBaaS) and runs only on the TiDB Cloud 
 
 In TiDB Cloud, we offer dedicated Tier and Serverless Tier for different customers.
 
-In dedicated Cluster, we created independent sub-accounts and VPCs for each cluster, set up firewall rules to isolate external connections, create server-side TLS certificates and component TLS certificates for each cluster to encrypted cluster data in transit, and provide IP access rules for each cluster to protect that only allowed source IPs can access your cluster.
+For Dedicated Tier clusters, TiDB Cloud ensures cluster security with the following measures:
+
+- Creates independent sub-accounts and VPCs for each cluster.
+- Sets up firewall rules to isolate external connections.
+- Creates server-side TLS certificates and component-level TLS certificates for each cluster to encrypt cluster data in transit.
+- Provide IP access rules for each cluster to ensure that only allowed source IPs can access your cluster.
 
 In the serverless cluster, we created independent sub-accounts for each cluster, and also set up firewall rules to isolate external connections, and provided cluster server TLS certificates to encrypt cluster data in transit.
 
