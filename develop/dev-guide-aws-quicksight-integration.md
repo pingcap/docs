@@ -31,6 +31,11 @@ Here are some of the benefits of using Amazon QuickSight for analytics, data vis
 - Control features available in a dashboard.
 - No need to manage granular database permissions—dashboard viewers can see only what you share.
 
+## Prerequisites
+
+- [TiDB Cluster](#create-tidb-cluster)
+- [Amazon QuickSight Account](https://portal.aws.amazon.com/billing/signup?client=quicksight&fid=441BE2A63D1F1F56-313F2AF2462BDF3C&redirect_url=https%3A%2F%2Fquicksight.aws.amazon.com%2Fsn%2Fconsole%2Fsignup#/start&refid=ha_awssm-evergreen-free_tier)
+
 ## Create TiDB Cluster
 
 TiDB (/’taɪdiːbi:/, "Ti" stands for Titanium) is an open-source NewSQL database that supports Hybrid Transactional and Analytical Processing (HTAP) workloads. It is MySQL compatible and features horizontal scalability, strong consistency, and high availability.
@@ -41,7 +46,7 @@ If you don't have a TiDB cluster, you can follow the [Quick Start Guide for the 
 
 </CustomContent>
 
-Here is the way to create a playground TiDB cluster. I’ll create a TiDB cluster using [TiDB Cloud Dedicated Tier](https://docs.pingcap.com/tidbcloud/select-cluster-tier#dedicated-tier). But you can create your TiDB cluster anywhere. Just ensure that Amazon QuickSight can connect to your TiDB cluster.
+Here is the way to create a playground TiDB cluster. In this section, create a TiDB cluster using [TiDB Cloud Dedicated Tier](https://docs.pingcap.com/tidbcloud/select-cluster-tier#dedicated-tier). But you can create your TiDB cluster anywhere. Just ensure that Amazon QuickSight can connect to your TiDB cluster.
 
 You can follow the document to [Create a TiDB Cluster](https://docs.pingcap.com/tidbcloud/create-tidb-cluster), to create a TiDB Cloud Dedicated Tier cluster.
 
@@ -71,11 +76,11 @@ It shows validated, then clicks **Create data source** (If some errors occur, pl
 
 ![aws quicksight tidb checked](/media/develop//aws-quicksight-tidb-checked.png)
 
-Then you can see the tables in the database you specify. Here I just click **Select** for demonstration. You can edit/preview it, or use SQL to retrieve a result set. For example, we would choose Commercial Open Source Software (COSS) [publicly announced global VC Funding Investments dataset](https://docs.google.com/spreadsheets/d/1Bz0lxWzwW8q9AUSO5HgRrUyfR47em6YQW4h8PF_vRmE/edit#gid=666389338) that we store in `coss_invest` table within TiDB Cluster (We don't offer this data, just for a demonstrate).
+Then you can see the tables in the database you specify. In this section, just click **Select** for demonstration. You can edit/preview it, or use SQL to retrieve a result set. For example, you can choose Commercial Open Source Software (COSS) [publicly announced global VC Funding Investments dataset](https://docs.google.com/spreadsheets/d/1Bz0lxWzwW8q9AUSO5HgRrUyfR47em6YQW4h8PF_vRmE/edit#gid=666389338) that stored in `coss_invest` table within TiDB Cluster (PingCAP don't offer this data, just for a demonstrate).
 
 ![aws quicksight table](/media/develop/aws-quicksight-table.png)
 
-In this case, I select **Directly query your data** and click **Visualize**.
+In this case, select **Directly query your data** and click **Visualize**.
 
 ![aws quicksight dataset creation finish](/media/develop/aws-quicksight-dataset-finish.png)
 
