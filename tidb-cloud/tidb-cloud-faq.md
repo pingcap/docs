@@ -171,7 +171,7 @@ For a Serverless Tier cluster, the steps to connect your cluster are simplified 
 1. Set a database user and login credentials. 
 2. Choose a SQL client, execute an auto-generated command displayed on the TiDB Cloud UI, and then connect to your cluster easily. For more information, see [Connect to Your TiDB Cluster](/tidb-cloud/connect-to-tidb-cluster.md).
 
-### Who has access to your business data in your database cluster?
+### Who has access to my business data of a database cluster?
 
 TiDB Cloud support cannot directly access the data in your database cluster. The only exception is that when you need to improve products and solve cluster operation problems, TiDB Cloud support can access the cluster operation data after you provide your internal temporary authorization. All authorization and access records are audited annually by third-party audit organizations. For example, PCI-DSS, SOC2, and ISO27701. 
 
