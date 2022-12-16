@@ -215,16 +215,16 @@ If you encounter any problems during the migration, you can refer to the followi
 
 - The migration task is interrupted and contains the error "driver: bad connection" or "invalid connection"
 
-    This error means that the connection to the downstream TiDB cluster failed. Check whether the downstream TiDB cluster is in `normal` state and can be connected with the username and password specified by the job. After confirming that the downstream TiDB cluster is available, you can try to resume the task by clicking `Restart`.
+    This error means that the connection to the downstream TiDB cluster failed. Check whether the downstream TiDB cluster is in `normal` state and can be connected with the username and password specified by the job. After confirming that the downstream TiDB cluster is available, you can try to resume the task by clicking **Restart**.
 
 - Error message: "Failed to connect to the TiDB cluster using the given user and password. Please make sure TiDB Cluster is up and can be connected to using the given user and password."
 
-    Failed to connect to TiDB cluster. It is recommended to check whether the TiDB cluster is in `normal` state and you can connect with the username and password specified by the job. After confirming that the TiDB cluster is available, you can try to resume the task by clicking `Restart`.
+    Failed to connect to TiDB cluster. It is recommended to check whether the TiDB cluster is in `normal` state and you can connect with the username and password specified by the job. After confirming that the TiDB cluster is available, you can try to resume the task by clicking **Restart**.
 
 - Error message: "TiDB cluster storage is not enough. Please increase the node storage of TiKV."
 
-    The TiDB cluster storage is running low. It is recommended to [increase the TiKV node storage](/tidb-cloud/scale-tidb-cluster.md#increase-node-storage) and then resume the task by clicking `Restart`.
+    The TiDB cluster storage is running low. It is recommended to [increase the TiKV node storage](/tidb-cloud/scale-tidb-cluster.md#increase-node-storage) and then resume the task by clicking **Restart**.
 
 - Error message: "Failed to connect to the source database. Please check whether the database is available or the maximum connections have been reached."
 
-    Failed to connect to the source database. It is recommended to check whether the source database is started, the number of database connections has not reached the upper limit, and you can connect using the parameters specified by the job. After confirming that the source database is available, you can try to resume the job by clicking `Restart`.
+    Failed to connect to the source database. It is recommended to check whether the source database is started, the number of database connections has not reached the upper limit, and you can connect using the parameters specified by the job. After confirming that the source database is available, you can try to resume the job by clicking **Restart**.
