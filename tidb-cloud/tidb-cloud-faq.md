@@ -157,7 +157,14 @@ All connections to the cluster over the internet use TLS 1.2 or 1.3.
 
 ### How do I connect to my database in a TiDB cluster?
 
-In your dedicated cluster,you need to do four steps to connect to your cluster: Authorize your network; Set up your database users and login credentials;Download and config your cluster server TLS; Select the type of SQL client and execute an auto-generated command,and then you can connect to your cluster through SQL client.For more details, see [Connect to Your TiDB Cluster](/tidb-cloud/connect-to-tidb-cluster.md).
+For a Dedicated Tier cluster, the steps to connect your cluster are simplified as follows:
+
+1. Authorize your network.
+2. Set up your database users and login credentials.
+3. Download and configure TLS for your cluster server.
+4. Choose a SQL client and execute an auto-generated command displayed on the TiDB Cloud UI, and then connect to your cluster through the SQL client.
+
+For detailed steps, see [Connect to Your TiDB Cluster](/tidb-cloud/connect-to-tidb-cluster.md).
 
 For a Serverless Tier cluster, the steps to connect your cluster are simplified as follows: 
 
