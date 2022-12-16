@@ -21,7 +21,7 @@ To view the metrics on the Monitoring page, take the following steps:
 
 ## Metrics Retention Policy
 
-All monitoring data are kept for 15 days.
+All monitoring data are kept for 2 days.
 
 ## Monitoring Metrics
 
