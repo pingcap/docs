@@ -22,7 +22,7 @@ Compared with the previous LTS 6.1.0, 6.5.0 not only includes new features, impr
 - Support pushing down the `JSON_EXTRACT()` function to TiFlash.
 - Support [password management](/password-management.md) policies that meet password compliance auditing requirements.
 - TiDB Lightning and Dumpling support [importing](tidb-lightning/tidb-lightning-data-source.md) and [exporting](/dumpling-overview.md#improve-export-efficiency-through-concurrency) compressed SQL and CSV files.
-- TiDB Data Migration (DM) supports [continuous data validation](/dm/dm-continuous-data-validation.md).
+- TiDB Data Migration (DM) [continuous data validation](/dm/dm-continuous-data-validation.md) is now in General Availability (GA).
 - TiDB Backup & Restore supports snapshot checkpoint backup, improves the recovery performance of [PITR](/br-pitr-guide.md#carry-pitr) by x times, and reduces RPO to x minutes.
 - Improve the TiCDC throughput of [replicating data to Kafka](/replicate-data-to-kafka.md) by x times and reduces replication latency to x seconds.
 - Provide row-level [Time to live (TTL)](/time-to-live.md) to manage data lifecycle (experimental).
