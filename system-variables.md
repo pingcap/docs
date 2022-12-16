@@ -3870,7 +3870,7 @@ For details, see [Identify Slow Queries](/identify-slow-queries.md).
 - Type: Integer
 - Default value: `1`
 - Range: `[1, 256]`
-- This variable is used to set the concurrent of scan operations performed when TiDB executes internal SQL statements (such as automatic update of statistics).
+- This variable is used to set the concurrency of scan operations performed when TiDB executes internal SQL statements (such as an automatic update of statistics).
 
 ### tidb_table_cache_lease <span class="version-mark">New in v6.0.0</span>
 

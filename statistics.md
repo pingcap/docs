@@ -791,7 +791,7 @@ LOAD STATS 'file_name'
 >
 > Locking statistics is an experimental feature for the current version. It is not recommended to use it in the production environment.
 
-Since v6.5.0, TiDB supports locking statistics. After the statistics of a table is locked, the statistics of the table cannot be modified and the `ANALYZE` statement cannot be executed on the table. For example:
+Since v6.5.0, TiDB supports locking statistics. After the statistics of a table are locked, the statistics of the table cannot be modified and the `ANALYZE` statement cannot be executed on the table. For example:
 
 Create table `t`, and insert data into table `t`. When the statistics of table `t` are not locked, the `ANALYZE` statement can be successfully executed.
 
@@ -815,7 +815,7 @@ mysql> show warnings;
 1 row in set (0.00 sec)
 ```
 
-Lock the statistics of table `t` and execute `ANALYZE`. From the output of `SHOW STATS_LOCKED`, you can see that the statistics of table `t` have been locked. The warning message shows that the `ANALYZE` has skipped table `t`.
+Lock the statistics of table `t` and execute `ANALYZE`. From the output of `SHOW STATS_LOCKED`, you can see that the statistics of table `t` have been locked. The warning message shows that the `ANALYZE` statement has skipped table `t`.
 
 ```sql
 mysql> lock stats t;

@@ -21,7 +21,7 @@ ShowLikeOrWhereOpt ::= 'LIKE' SimpleExpr | 'WHERE' Expression
 
 ## Examples
 
-Create table `t`, and insert data into table `t`. When the statistics of table `t` are not locked, the `ANALYZE` statement can be successfully executed.
+Create table `t`, and insert data into it. When the statistics of table `t` are not locked, the `ANALYZE` statement can be successfully executed.
 
 ```sql
 mysql> create table t(a int, b int);
@@ -43,7 +43,7 @@ mysql> show warnings;
 1 row in set (0.00 sec)
 ```
 
-Lock the statistics of table `t` and execute `ANALYZE`. From the output of `SHOW STATS_LOCKED`, you can see that the statistics of table `t` have been locked. The warning message shows that the `ANALYZE` has skipped table `t`.
+Lock the statistics of table `t` and execute `ANALYZE`. From the output of `SHOW STATS_LOCKED`, you can see that the statistics of table `t` have been locked. The warning message shows that the `ANALYZE` statement has skipped table `t`.
 
 ```sql
 mysql> lock stats t;
