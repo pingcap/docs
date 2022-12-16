@@ -136,7 +136,7 @@ If you require more specific information about business data encryption in TiDB 
 
 No. TiDB Cloud is Database-as-a-Service (DBaaS) and runs only on the TiDB Cloud VPC. As a cloud computing managed service, TiDB Cloud provides access to a database without requiring the setup of physical hardware and the installation of software.
 
-### How secure is your TiDB Cluster?
+### Is my TiDB cluster secure?
 
 In TiDB Cloud, you can use either a Dedicated Tier cluster or a Serverless Tier cluster according to your needs.
 
