@@ -1023,11 +1023,6 @@ Configuration items related to RocksDB
 + Minimum value: `0`
 + Unit: B|KB|MB|GB
 
-### `enable-statistics`
-
-+ Determines whether to enable the statistics of RocksDB
-+ Default value: `true`
-
 ### `stats-dump-period`
 
 + The interval at which statistics are output to the log.
