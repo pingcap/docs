@@ -5,15 +5,15 @@ summary: Learn how to integrate TiDB Cloud Dedicated Tier with Amazon QuickSight
 
 # Integrate TiDB with Amazon QuickSight
 
-This document provides a high-level introduction to Amazon QuickSight and describes how to integrate Amazon QuickSight with TiDB.
+This document provides a general introduction to Amazon QuickSight and describes how to integrate Amazon QuickSight with TiDB.
 
-If you are interested in learning more about TiDB and ProxySQL, you can find some useful links as follows:
+If you are interested in learning more about TiDB and Amazon QuickSight, you can find some useful links as follows:
 
 - [TiDB Cloud](https://docs.pingcap.com/tidbcloud)
 - [TiDB Developer Guide](/develop/dev-guide-overview.md)
 - [Amazon QuickSight Documentation](https://docs.aws.amazon.com/quicksight/latest/user/welcome.html)
 
-## What is ProxySQL?
+## What is Amazon QuickSight?
 
 [Amazon QuickSight](https://aws.amazon.com/quicksight/) is a cloud-scale business intelligence (BI) service that you can use to deliver easy-to-understand insights to the people who you work with, wherever they are. Amazon QuickSight connects to your data in the cloud and combines data from many different sources. In a single data dashboard, QuickSight can include AWS data, third-party data, big data, spreadsheet data, SaaS data, B2B data, and more. As a fully managed cloud-based service, Amazon QuickSight provides enterprise-grade security, global availability, and built-in redundancy. It also provides the user-management tools that you need to scale from 10 users to 10,000, all with no infrastructure to deploy or manage.
 
@@ -83,4 +83,4 @@ Data is successfully imported. And you can just click these buttons. You can see
 
 ![aws quicksight pie chart](/media/develop/aws-quicksight-pie-chart.png)
 
-You can see the [Amazon QuickSight User Guide](https://docs.aws.amazon.com/quicksight/latest/user/welcome.html) to get more Amazon QuickSight usage information.
+For more Amazon QuickSight usage, refer to [Amazon QuickSight User Guide](https://docs.aws.amazon.com/quicksight/latest/user/welcome.html).
