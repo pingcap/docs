@@ -282,6 +282,6 @@ Different operations require different fields to be filled in. The following sho
 
 ### Limitations 
  
-1. Execute SQL 操作通常只允许执行一条 SQL 语句，如果想要在一次操作中执行多条语句，需要手动在 TiDB 中开启 tidb_multi_statement_mode （https://docs.pingcap.com/tidb/dev/system-variables）。
+1. Normally only one SQL statement is allowed in the Execute operation. If you want to execute more than one statement in a single operation, you need to manually enable [tidb_multi_statement_mode](https://docs.pingcap.com/tidb/dev/system-variables).
 2. The Delete and Update operation need to specify one field as a key, for example, the `Delete Key` is set to `id`, which is equivalent to executing `delete from table where id = ${item.id}`. Currently, it is only support specify one key.
-3. Insert rows 和 Update rows 操作需要指定写入的字段，用逗号分割，且字段名称必须和输入 item 保持一样。
+3. The Insert and Update operations need to specify the comma-separated field to write, and the field name must be the same as the input item's property.
