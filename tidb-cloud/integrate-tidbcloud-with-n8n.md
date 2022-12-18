@@ -94,7 +94,7 @@ If you haven't got a TiDB Cloud Serverless Tier cluster, you can use this node t
 3. Drag the manual trigger node to your workspace.
 4. Choose `Days` in the **Trigger Interval**.
 5. Set **Days Between Triggers** as `1`.
-6. Choose `8am` in the T**rigger at Hour**.
+6. Choose `8am` in the **Trigger at Hour**.
 7. Set **Trigger at Minute** as `0`.
 
 This trigger will enable your workflow every morning at 8am. 
@@ -184,7 +184,7 @@ return [{json: {response}}];
 
 ## Step 4: Run Your Workflow
 
-After building up the workflow, you can click the **Execute Workflow** button to test run it. You'll get Hack News briefing emails, and this news will be logged to your TiDB Cloud Serverless Tier. So don't worry about losing them.
+After building up the workflow, you can click the **Execute Workflow** button to test run it. You'll get Hack News briefing emails, and these news will be logged to your TiDB Cloud Serverless Tier cluster. So don't worry about losing them.
 
 Now you can activate this workflow in the **Workflows** panel. This workflow will help you get the first page articles on Hack News every day.
 
