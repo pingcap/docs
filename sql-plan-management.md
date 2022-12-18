@@ -222,7 +222,7 @@ To use this binding method, you need to first get the `plan_digest` correspondin
     CREATE BINDING FROM HISTORY USING PLAN DIGEST '4e3159169cc63c14b139a4e7d72eae1759875c9a9581f94bb2079aae961189cb';
     ```
 
-To verify whether the created binding takes effect, you can [view bindings](sql-plan-management#view-bindings):
+To verify whether the created binding takes effect, you can [view bindings](#view-bindings):
 
 ```sql
 SHOW BINDINGS\G;
