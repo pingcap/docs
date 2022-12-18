@@ -90,7 +90,9 @@ If you haven't got a TiDB Cloud Serverless Tier cluster, you can use this node t
 9. Enter a password used to log in to your TiDB clusters in the **Password** field.
 10. Click on **Execute Node** to run the node.
 
-> Note: The step takes some 1 minute to create a new TiDB Serverless cluster.
+> **Note:** 
+> 
+> This step takes some 1 minute to create a new TiDB Serverless cluster.
 
 ### Create a workflow
 
@@ -187,7 +189,9 @@ return [{json: {response}}];
 9. Set **Message** field mode to `Expression`
 10. Enter `{{ $json["response"] }}` in the **Message**.
 
-> Note: It is very important to mouse over the Message field and select the Expression pattern.
+> **Note:** 
+> 
+> It is very important to mouse over the Message field and select the Expression pattern.
 
 ## Step 4: Run Your Workflow
 
@@ -195,10 +199,89 @@ After building up the workflow, you can click the **Execute Workflow** button to
 
 Now you can activate this workflow in the **Workflows** panel. This workflow will help you get the first page articles on Hacker News every day.
 
-## Support Operations of TiDB Cloud Node
+## TiDB Cloud Node 核心
 
-- Create TiDB Cloud Serverless Tier clusters
-- Execute SQL in TiDB
-- Delete rows in TiDB
-- Insert rows in TiDB
-- Update rows in TiDB
+### Support Operation
+
+TiDB Cloud 目前只有 Regular Node （https://docs.n8n.io/workflows/nodes/），没有 Trigger Node。目前 TiDB Cloud Node 支持以下5种操作。
+
+- **Create Serverless Cluster**: Create a TiDB Cloud Serverless Tier cluster.
+- **Execute SQL**: Execute an SQL statement in TiDB.
+- **Delete**：Delete rows in TiDB.
+- **Insert**: Insert rows in TiDB.
+- **Update**: Update rows in TiDB.
+
+### Fields Description
+
+Different operations require different fields to be filled in. The following shows the respective field descriptions according to the operation.
+
+<SimpleTab>
+<div label="Create Serverless Cluster">
+
+- **Credential for TiDB Cloud API**: Only supports TiDB CLoud API key authentication. Refer to [Get TiDB Cloud API Key](#prerequisites-get-tidb-cloud-api-key).
+- **Project**: The TiDB Cloud project name. 
+- **Operation**: The operation of this node. Refer to [Support Operation](#support-operation).
+- **Cluster**: The TiDB Cloud cluster name. Enter one name for your new cluster.
+- **Region**: The region name. Choose a region where your cluster will be deployed. Usually, choose the region closest to your product cluster.
+- **Password**: The root password. Set a password for your new cluster.
+
+</div>
+<div label="Execute SQL">
+
+- **Credential for TiDB Cloud API**: Only supports TiDB CLoud API key authentication. Refer to [Get TiDB Cloud API Key](#prerequisites-get-tidb-cloud-api-key).
+- **Project**: The TiDB Cloud project name.
+- **Operation**: The operation of this node. Refer to [Support Operation](#support-operation).
+- **Cluster**: The TiDB Cloud cluster name.
+- **Password**: The password of TiDB Cloud cluster.
+- **User**: The username of your TiDB Cloud cluster.
+- **Database**: The database name.
+- **SQL**: The SQL statement to execute.
+
+</div>
+<div label="Delete">
+
+- **Credential for TiDB Cloud API**: Only supports TiDB CLoud API key authentication. Refer to [Get TiDB Cloud API Key](#prerequisites-get-tidb-cloud-api-key).
+- **Project**: The TiDB Cloud project name.
+- **Operation**: The operation of this node. Refer to [Support Operation](#support-operation).
+- **Cluster**: The TiDB Cloud cluster name. In the Create Serverless Cluster operation, you need to enter one name for your new cluster . While in other operations, you should choose one existed cluster.
+- **Password**: The password of TiDB Cloud cluster.
+- **User**: The username of your TiDB Cloud cluster.
+- **Database**: The database name.
+- **Table**: The table name. You can use `From list` mode to choose one or `Name` mode to type input manually.
+- **Delete Key**: The Name of the item's property which decides which rows in the database should be deleted. Item is the data sent from one node to another. A node performs its action on each item of incoming data. For more information about item in n8n, see [n8n documentation](https://docs.n8n.io/workflows/items/).
+
+</div>
+<div label="Insert">
+
+- **Credential for TiDB Cloud API**: Only supports TiDB CLoud API key authentication. Refer to [Get TiDB Cloud API Key](#prerequisites-get-tidb-cloud-api-key).
+- **Project**: The TiDB Cloud project name.
+- **Operation**: The operation of this node. Refer to [Support Operation](#support-operation).
+- **Cluster**: The TiDB Cloud cluster name. In the Create Serverless Cluster operation, you need to enter one name for your new cluster . While in other operations, you should choose one existed cluster.
+- **Password**: The password of TiDB Cloud cluster.
+- **User**: The username of your TiDB Cloud cluster.
+- **Database**: The database name.
+- **Table**: The table name. You can use `From list` mode to choose one or `Name` mode to type input manually.
+- **Columns**: The comma-separated list of the input item's property which should used as columns for the new rows. Item is the data sent from one node to another. A node performs its action on each item of incoming data. For more information about item in n8n, see [n8n documentation](https://docs.n8n.io/workflows/items/).
+
+</div>
+<div label="Update">
+
+- **Credential for TiDB Cloud API**: Only supports TiDB CLoud API key authentication. Refer to [Get TiDB Cloud API Key](#prerequisites-get-tidb-cloud-api-key).
+- **Project**: The TiDB Cloud project name.
+- **Operation**: The operation of this node. Refer to [Support Operation](#support-operation).
+- **Cluster**: The TiDB Cloud cluster name. In the Create Serverless Cluster operation, you need to enter one name for your new cluster . While in other operations, you should choose one existed cluster.
+- **Password**: The password of TiDB Cloud cluster.
+- **User**: The username of your TiDB Cloud cluster.
+- **Database**: The database name.
+- **Table**: The table name. You can use `From list` mode to choose one or `Name` mode to type input manually.
+- **Update Key**: The name of the item's property which decides which rows in the database should be updated. Item is the data sent from one node to another. A node performs its action on each item of incoming data. For more information about item in n8n, see [n8n documentation](https://docs.n8n.io/workflows/items/).
+- **Columns**: The comma-separated list of the input item which should used as columns for the new rows.
+
+</div>
+</SimpleTab>
+
+### Limitations 
+ 
+1. Execute SQL 操作通常只允许执行一条 SQL 语句，如果想要在一次操作中执行多条语句，需要手动在 TiDB 中开启 tidb_multi_statement_mode （https://docs.pingcap.com/tidb/dev/system-variables）。
+2. The Delete and Update operation need to specify one field as a key, for example, the `Delete Key` is set to `id`, which is equivalent to executing `delete from table where id = ${item.id}`. Currently, it is only support specify one key.
+3. Insert rows 和 Update rows 操作需要指定写入的字段，用逗号分割，且字段名称必须和输入 item 保持一样。
