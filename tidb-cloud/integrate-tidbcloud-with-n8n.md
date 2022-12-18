@@ -49,7 +49,7 @@ After starting n8n, you can visit [localhost:5678](http://localhost:5678) to tas
 
 ## Step 2: Install TiDB Cloud Node in n8n
 
-TiDB Cloud node names `n8n-nodes-tidb-cloud` in npm repository. You need to install this node manually to control TiDB Cloud with n8n.
+TiDB Cloud node names `n8n-nodes-tidb-cloud` in the npm repository. You need to install this node manually to control TiDB Cloud with n8n.
 
 1. Sign up for self-hosting n8n.
 2. Go to **Settings** > **Community Nodes**.
@@ -106,7 +106,7 @@ If you haven't got a TiDB Cloud Serverless Tier cluster, you can use this node t
 6. Choose `8am` in the **Trigger at Hour**.
 7. Set **Trigger at Minute** as `0`.
 
-This trigger will enable your workflow every morning at 8am. 
+This trigger will enable your workflow every morning at 8 am. 
 
 #### Create a table used to insert data
 
@@ -199,11 +199,11 @@ After building up the workflow, you can click the **Execute Workflow** button to
 
 Now you can activate this workflow in the **Workflows** panel. This workflow will help you get the first page articles on Hacker News every day.
 
-## TiDB Cloud Node 核心
+## TiDB Cloud Node Core
 
 ### Support Operation
 
-TiDB Cloud 目前只有 Regular Node （https://docs.n8n.io/workflows/nodes/），没有 Trigger Node。目前 TiDB Cloud Node 支持以下5种操作。
+TiDB Cloud Node acts as a [regular node](https://docs.n8n.io/workflows/nodes/#regular-nodes), and only supports the following five operations.
 
 - **Create Serverless Cluster**: Create a TiDB Cloud Serverless Tier cluster.
 - **Execute SQL**: Execute an SQL statement in TiDB.
@@ -218,7 +218,7 @@ Different operations require different fields to be filled in. The following sho
 <SimpleTab>
 <div label="Create Serverless Cluster">
 
-- **Credential for TiDB Cloud API**: Only supports TiDB CLoud API key authentication. Refer to [Get TiDB Cloud API Key](#prerequisites-get-tidb-cloud-api-key).
+- **Credential for TiDB Cloud API**: Only supports TiDB Cloud API key authentication. Refer to [Get TiDB Cloud API Key](#prerequisites-get-tidb-cloud-api-key).
 - **Project**: The TiDB Cloud project name. 
 - **Operation**: The operation of this node. Refer to [Support Operation](#support-operation).
 - **Cluster**: The TiDB Cloud cluster name. Enter one name for your new cluster.
@@ -228,7 +228,7 @@ Different operations require different fields to be filled in. The following sho
 </div>
 <div label="Execute SQL">
 
-- **Credential for TiDB Cloud API**: Only supports TiDB CLoud API key authentication. Refer to [Get TiDB Cloud API Key](#prerequisites-get-tidb-cloud-api-key).
+- **Credential for TiDB Cloud API**: Only supports TiDB Cloud API key authentication. Refer to [Get TiDB Cloud API Key](#prerequisites-get-tidb-cloud-api-key).
 - **Project**: The TiDB Cloud project name.
 - **Operation**: The operation of this node. Refer to [Support Operation](#support-operation).
 - **Cluster**: The TiDB Cloud cluster name.
@@ -240,10 +240,10 @@ Different operations require different fields to be filled in. The following sho
 </div>
 <div label="Delete">
 
-- **Credential for TiDB Cloud API**: Only supports TiDB CLoud API key authentication. Refer to [Get TiDB Cloud API Key](#prerequisites-get-tidb-cloud-api-key).
+- **Credential for TiDB Cloud API**: Only supports TiDB Cloud API key authentication. Refer to [Get TiDB Cloud API Key](#prerequisites-get-tidb-cloud-api-key).
 - **Project**: The TiDB Cloud project name.
 - **Operation**: The operation of this node. Refer to [Support Operation](#support-operation).
-- **Cluster**: The TiDB Cloud cluster name. In the Create Serverless Cluster operation, you need to enter one name for your new cluster . While in other operations, you should choose one existed cluster.
+- **Cluster**: The TiDB Cloud cluster name. In the Create Serverless Cluster operation, you need to enter one name for your new cluster . While in other operations, you should choose one existing cluster.
 - **Password**: The password of TiDB Cloud cluster.
 - **User**: The username of your TiDB Cloud cluster.
 - **Database**: The database name.
@@ -253,10 +253,10 @@ Different operations require different fields to be filled in. The following sho
 </div>
 <div label="Insert">
 
-- **Credential for TiDB Cloud API**: Only supports TiDB CLoud API key authentication. Refer to [Get TiDB Cloud API Key](#prerequisites-get-tidb-cloud-api-key).
+- **Credential for TiDB Cloud API**: Only supports TiDB Cloud API key authentication. Refer to [Get TiDB Cloud API Key](#prerequisites-get-tidb-cloud-api-key).
 - **Project**: The TiDB Cloud project name.
 - **Operation**: The operation of this node. Refer to [Support Operation](#support-operation).
-- **Cluster**: The TiDB Cloud cluster name. In the Create Serverless Cluster operation, you need to enter one name for your new cluster . While in other operations, you should choose one existed cluster.
+- **Cluster**: The TiDB Cloud cluster name. In the Create Serverless Cluster operation, you need to enter one name for your new cluster . While in other operations, you should choose one existing cluster.
 - **Password**: The password of TiDB Cloud cluster.
 - **User**: The username of your TiDB Cloud cluster.
 - **Database**: The database name.
@@ -266,10 +266,10 @@ Different operations require different fields to be filled in. The following sho
 </div>
 <div label="Update">
 
-- **Credential for TiDB Cloud API**: Only supports TiDB CLoud API key authentication. Refer to [Get TiDB Cloud API Key](#prerequisites-get-tidb-cloud-api-key).
+- **Credential for TiDB Cloud API**: Only supports TiDB Cloud API key authentication. Refer to [Get TiDB Cloud API Key](#prerequisites-get-tidb-cloud-api-key).
 - **Project**: The TiDB Cloud project name.
 - **Operation**: The operation of this node. Refer to [Support Operation](#support-operation).
-- **Cluster**: The TiDB Cloud cluster name. In the Create Serverless Cluster operation, you need to enter one name for your new cluster . While in other operations, you should choose one existed cluster.
+- **Cluster**: The TiDB Cloud cluster name. In the Create Serverless Cluster operation, you need to enter one name for your new cluster. While in other operations, you should choose one existing cluster.
 - **Password**: The password of TiDB Cloud cluster.
 - **User**: The username of your TiDB Cloud cluster.
 - **Database**: The database name.
@@ -283,5 +283,5 @@ Different operations require different fields to be filled in. The following sho
 ### Limitations 
  
 1. Normally only one SQL statement is allowed in the Execute operation. If you want to execute more than one statement in a single operation, you need to manually enable [tidb_multi_statement_mode](https://docs.pingcap.com/tidb/dev/system-variables).
-2. The Delete and Update operation need to specify one field as a key, for example, the `Delete Key` is set to `id`, which is equivalent to executing `delete from table where id = ${item.id}`. Currently, it is only support specify one key.
+2. The Delete and Update operation need to specify one field as a key, for example, the `Delete Key` is set to `id`, which is equivalent to executing `delete from table where id = ${item.id}`. Currently, it only supports specifying one key.
 3. The Insert and Update operations need to specify the comma-separated field to write, and the field name must be the same as the input item's property.
