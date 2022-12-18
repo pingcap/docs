@@ -7,7 +7,7 @@ summary: Learn the use of TiDB Cloud node in n8n.
 
 [n8n](https://n8n.io/) is an extendable workflow automation tool. With a [fair-code](https://faircode.io/) distribution model, n8n will always have visible source code, be available to self-host, and allow you to add your custom functions, logic, and apps. 
 
-This document introduces how to build an auto-workflow: create a TiDB Cloud Serverless Tier cluster, gather Hack News RSS, store it to TiDB and send a briefing email.
+This document introduces how to build an auto-workflow: create a TiDB Cloud Serverless Tier cluster, gather Hacker News RSS, store it to TiDB and send a briefing email.
 
 ## Prerequisites: Get TiDB Cloud API Key
 
@@ -24,19 +24,26 @@ For more information, see [TiDB Cloud API Overview](https://docs.pingcap.com/tid
 
 There are two ways to install your self-hosting n8n, choose whichever works for you.
 
-- **Install by npm**
-  1. Install [node.js](https://nodejs.org/en/download/) on your workspace.
-  2. Download and start n8n by `npx`.
-     ```shell
-     npx n8n
-     ```
-     
-- **Install by docker**
-  1. Install [Docker](https://www.docker.com/products/docker-desktop) on your workspace.
-  2. Download and start n8n by `docker`
-     ```shell
-     docker run -it --rm --name n8n -p 5678:5678 -v ~/.n8n:/home/node/.n8n n8nio/n8n
-     ```
+<SimpleTab>
+<div label="npm">
+
+1. Install [node.js](https://nodejs.org/en/download/) on your workspace.
+2. Download and start n8n by `npx`.
+   ```shell
+   npx n8n
+   ```
+   
+</div>
+<div label="Docker">
+
+1. Install [Docker](https://www.docker.com/products/docker-desktop) on your workspace.
+2. Download and start n8n by `docker`
+   ```shell
+   docker run -it --rm --name n8n -p 5678:5678 -v ~/.n8n:/home/node/.n8n n8nio/n8n
+   ```
+
+</div>
+</SimpleTab>
 
 After starting n8n, you can visit [localhost:5678](http://localhost:5678) to taste n8n.
 
@@ -44,7 +51,7 @@ After starting n8n, you can visit [localhost:5678](http://localhost:5678) to tas
 
 TiDB Cloud node names `n8n-nodes-tidb-cloud` in npm repository. You need to install this node manually to control TiDB Cloud with n8n.
 
-1. Sign up [self-hosting n8n](http://localhost:5678).
+1. Sign up for self-hosting n8n.
 2. Go to **Settings** > **Community Nodes**.
 3. Select **Install a community node**.
 4. Enter `n8n-nodes-tidb-cloud` in **npm Package Name** field.
@@ -116,7 +123,7 @@ This trigger will enable your workflow every morning at 8am.
    ```
 11. Click on **Execute Node** to create the table.
 
-#### Get the Hack News RSS
+#### Get the Hacker News RSS
 
 1. Click **+** to the right of the TiDB Cloud node.
 2. Search `rss feed read` and add it to the workspace.
@@ -130,7 +137,7 @@ This trigger will enable your workflow every morning at 8am.
 4. Choose your project from the **Project** list.
 5. Select `Insert` from the **Operation** list.
 6. Enter the value in **Cluster**, **User**, **Database** and **Password** fields.
-7. Enter the `hack_news_briefing` table in the **Table** field.
+7. Enter the `hacker_news_briefing` table in the **Table** field.
 8. Enter `creator, title, link, pubdate, comments, content, guid, isodate` in the **Columns** field.
 
 #### Build message
@@ -156,7 +163,7 @@ let response =
        <!DOCTYPE html> 
        <html> 
        <head> 
-       <title>Hack News Briefing</title> 
+       <title>Hacker News Briefing</title> 
     </head> 
     <body>  
         ${message} 
@@ -175,7 +182,7 @@ return [{json: {response}}];
 4. Choose `Message` in the **Resource**. 
 5. Choose `Send` in the **Operation**.
 6. Enter your email in the **To**.
-7. Enter `Hack News Briefing` in the **Subject**.
+7. Enter `Hacker News Briefing` in the **Subject**.
 8. Choose `HTML` in the **Email Type**.
 9. Set **Message** field mode to `Expression`
 10. Enter `{{ $json["response"] }}` in the **Message**.
@@ -184,9 +191,9 @@ return [{json: {response}}];
 
 ## Step 4: Run Your Workflow
 
-After building up the workflow, you can click the **Execute Workflow** button to test run it. You'll get Hack News briefing emails, and these news will be logged to your TiDB Cloud Serverless Tier cluster. So don't worry about losing them.
+After building up the workflow, you can click the **Execute Workflow** button to test run it. You'll get Hacker News briefing emails, and these news will be logged to your TiDB Cloud Serverless Tier cluster. So don't worry about losing them.
 
-Now you can activate this workflow in the **Workflows** panel. This workflow will help you get the first page articles on Hack News every day.
+Now you can activate this workflow in the **Workflows** panel. This workflow will help you get the first page articles on Hacker News every day.
 
 ## Support Operations of TiDB Cloud Node
 
