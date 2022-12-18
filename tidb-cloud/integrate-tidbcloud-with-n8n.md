@@ -275,7 +275,7 @@ Different operations require different fields to be filled in. The following sho
 - **Database**: The database name.
 - **Table**: The table name. You can use `From list` mode to choose one or `Name` mode to type input manually.
 - **Update Key**: The name of the item's property which decides which rows in the database should be updated. Item is the data sent from one node to another. A node performs its action on each item of incoming data. For more information about item in n8n, see [n8n documentation](https://docs.n8n.io/workflows/items/).
-- **Columns**: The comma-separated list of the input item which should used as columns for the new rows.
+- **Columns**: The comma-separated list of the input item which should used as columns for the rows to update.
 
 </div>
 </SimpleTab>
