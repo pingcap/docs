@@ -26,7 +26,7 @@ TableName ::=
 
 ## Examples
 
-Create table `t`, and insert data into table `t`. When the statistics of table `t` are not locked, the `ANALYZE` statement can be successfully executed.
+Create table `t`, and insert data into it. When the statistics of table `t` are not locked, the `ANALYZE` statement can be successfully executed.
 
 ```sql
 mysql> create table t(a int, b int);

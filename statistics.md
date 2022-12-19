@@ -793,7 +793,7 @@ LOAD STATS 'file_name'
 
 Since v6.5.0, TiDB supports locking statistics. After the statistics of a table are locked, the statistics of the table cannot be modified and the `ANALYZE` statement cannot be executed on the table. For example:
 
-Create table `t`, and insert data into table `t`. When the statistics of table `t` are not locked, the `ANALYZE` statement can be successfully executed.
+Create table `t`, and insert data into it. When the statistics of table `t` are not locked, the `ANALYZE` statement can be successfully executed.
 
 ```sql
 mysql> create table t(a int, b int);
