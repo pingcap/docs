@@ -9,7 +9,6 @@ This document describes how to connect to your TiDB Cloud cluster via standard c
 
 The standard connection is available to both Serverless Tier and Dedicated Tier.
 
-
 ## Serverless Tier
 
 To connect to a Serverless Tier cluster via standard connection, perform the following steps:
