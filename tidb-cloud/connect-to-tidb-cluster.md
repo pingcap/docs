@@ -5,31 +5,30 @@ summary: Learn how to connect to your TiDB cluster via different methods.
 
 # Connect to Your TiDB Cluster
 
-After your TiDB cluster is created on TiDB Cloud, you can use one of the following methods to connect to your TiDB cluster. Different Tiers of TiDB Cloud clusters have different connection methods.
+After your TiDB cluster is created on TiDB Cloud, you can connect to your TiDB cluster. Depending on whether you are using a Serverless Tier cluster or a Dedicated Tier cluster, you can find the available connection methods as follows:
 
 ## Serverless Tier
 
-For Serverless Tier clusters, you can connect to your cluster via a SQL client or via SQL editor in the TiDB Cloud console.
+For Serverless Tier clusters, you can connect to your cluster via standard connection or via SQL editor in the TiDB Cloud console.
 
 - [Connect via standard connection](/tidb-cloud/connect-via-standard-connection.md#serverless-tier)
 
-    The standard connection exposes a public endpoint with traffic filters, so you can connect to your TiDB cluster from your laptop.
+    The standard connection exposes a public endpoint with traffic filters, so you can connect to your TiDB cluster via a SQL client from your laptop.
 
     Serverless Tier only [supports TLS connections](/tidb-cloud/secure-connections-to-serverless-tier-clusters.md), which ensures the security of data transmission from your applications to TiDB clusters.
 
 - Connect via SQL editor
 
-    SQL editor is a web-based SQL editor that allows you to directly edit and run SQL queries against databases of Serverless Tier. To access SQL editor, in the [TiDB Cloud console](https://tidbcloud.com/), navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page, locate your cluster, click **Connect** and then select **SQL Editor** in the drop-down list.
+    SQL editor is a web-based SQL editor in the [TiDB Cloud console](https://tidbcloud.com/), which allows you to directly edit and run SQL queries against databases of Serverless Tier. To access SQL editor, navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page, locate your cluster, click **Connect**, and then select **SQL Editor** in the drop-down list.
 
 ## Dedicated Tier
 
-For Dedicated Tier clusters, you can connect to your cluster via a SQL client or via SQL Shell in the TiDB Cloud console.
+For Dedicated Tier clusters, you can connect to your cluster via one of the following methods:
 
-+ Connect via a SQL client
 
-    - [Connect via standard connection](/tidb-cloud/connect-via-standard-connection.md#dedicated-tier): The standard connection exposes a public endpoint with traffic filters, so you can connect to your TiDB cluster from your laptop. You can connect to your TiDB clusters using TLS, which ensures the security of data transmission from your applications to TiDB clusters.
-    - [Connect via private endpoint](/tidb-cloud/set-up-private-endpoint-connections.md) (recommended): Private endpoint connection provides a private endpoint to allow clients in your VPC to securely access services over AWS PrivateLink, which provides highly secure and one-way access to database services with simplified network management.
-    - [Connect via VPC peering](/tidb-cloud/set-up-vpc-peering-connections.md): If you want lower latency and more security, set up VPC peering and connect via a private endpoint using a VM instance on the corresponding cloud provider in your cloud account.
+- [Connect via standard connection](/tidb-cloud/connect-via-standard-connection.md#dedicated-tier): The standard connection exposes a public endpoint with traffic filters, so you can connect to your TiDB cluster via a SQL client from your laptop. You can connect to your TiDB clusters using TLS, which ensures the security of data transmission from your applications to TiDB clusters.
+- [Connect via private endpoint](/tidb-cloud/set-up-private-endpoint-connections.md) (recommended): Private endpoint connection provides a private endpoint to allow SQL clients in your VPC to securely access services over AWS PrivateLink, which provides highly secure and one-way access to database services with simplified network management.
+- [Connect via VPC peering](/tidb-cloud/set-up-vpc-peering-connections.md): If you want lower latency and more security, set up VPC peering and connect via a private endpoint using a VM instance on the corresponding cloud provider in your cloud account.
 
 + [Connect via SQL Shell](/tidb-cloud/connect-via-sql-shell.md): to try TiDB SQL and test out TiDB's compatibility with MySQL quickly, or administer user privileges
 

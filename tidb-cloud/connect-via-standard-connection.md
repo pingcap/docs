@@ -5,7 +5,10 @@ summary: Learn how to connect to your TiDB Cloud cluster via standard connection
 
 # Connect via Standard Connection
 
-This document describes how to connect to your TiDB Cloud cluster via standard connection. Standard connection is available to both Serverless Tier and Dedicated Tier.
+This document describes how to connect to your TiDB Cloud cluster via standard connection. The standard connection exposes a public endpoint with traffic filters, so you can connect to your TiDB cluster via a SQL client from your laptop.
+
+Standard connection is available to both Serverless Tier and Dedicated Tier.
+
 
 ## Serverless Tier
 

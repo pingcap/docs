@@ -1,15 +1,15 @@
 ---
-title: Connect via VPC Peering Connections
-summary: Learn how to connect to TiDB Cloud via VPC peering connections.
+title: Connect via VPC Peering
+summary: Learn how to connect to TiDB Cloud via VPC peering.
 ---
 
-# Connect via VPC Peering Connections
+# Connect via VPC Peering
 
 > **Note:**
 >
 > VPC peering connection is only available for Dedicated Tier clusters. You cannot connect to [Serverless Tier clusters](/tidb-cloud/select-cluster-tier.md#serverless-tier-beta) using VPC peering.
 
-To connect your application to TiDB Cloud, you need to set up [VPC peering](/tidb-cloud/tidb-cloud-glossary.md#vpc-peering) with TiDB Cloud. This document walks you through setting up VPC peering connections [on AWS](#on-aws) and [on GCP](#on-gcp) and connect to TiDB Cloud via a VPC peering connection.
+To connect your application to TiDB Cloud via VPC peering, you need to set up [VPC peering](/tidb-cloud/tidb-cloud-glossary.md#vpc-peering) with TiDB Cloud. This document walks you through setting up VPC peering connections [on AWS](#set-up-vpc-peering-on-aws) and [on GCP](#set-up-vpc-peering-on-gcp) and connecting to TiDB Cloud via a VPC peering.
 
 VPC peering connection is a networking connection between two VPCs that enables you to route traffic between them using private IP addresses. Instances in either VPC can communicate with each other as if they are within the same network.
 
@@ -204,7 +204,6 @@ Now you have successfully set up the VPC peering connection. Next, [connect to t
 
 ## Set up VPC peering on GCP
 
-### Steps
 
 1. On the TiDB Cloud console, choose a target project for VPC peering, and then click the **Network Access** tab.
 
@@ -237,7 +236,7 @@ Now you have successfully set up the VPC peering connection. Next, [connect to t
     >
     > You can name `<your-peer-name>` as you like.
 
-Now you have successfully set up the VPC peering connection. Next, [connect to the TiDB cluster  via VPC peering](#connect-to-the-tidb-cluster).
+Now you have successfully set up the VPC peering connection. Next, [connect to the TiDB cluster via VPC peering](#connect-to-the-tidb-cluster).
 
 ## Connect to the TiDB cluster
 
