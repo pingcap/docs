@@ -32,17 +32,17 @@ Compared with the previous LTS 6.1.0, 6.5.0 not only includes new features, impr
 
 ### SQL
 
-* The performance of TiDB adding indexes is improved by 10 times [#35983](https://github.com/pingcap/tidb/issues/35983) @[benjamin2037](https://github.com/benjamin2037) @[tangenta](https://github.com/tangenta) **tw@Oreoxmt**
+* The performance of TiDB adding indexes is improved by 10 times (GA) [#35983](https://github.com/pingcap/tidb/issues/35983) @[benjamin2037](https://github.com/benjamin2037) @[tangenta](https://github.com/tangenta) **tw@Oreoxmt**
 
     TiDB v6.3.0 introduces the [Add index acceleration](/system-variables.md#tidb_ddl_enable_fast_reorg-new-in-v630) as an experimental feature to improve the speed of backfilling when creating an index. In v6.5.0, this feature becomes GA and is enabled by default, and the performance on large tables is expected to be 10 times faster. The acceleration feature is suitable for scenarios where a single SQL statement adds an index serially. When multiple SQL statements add indexes in parallel, only one of the SQL statements will be accelerated.
 
-* Provide lightweight metadata lock to improve the DML success rate during DDL change [#37275](https://github.com/pingcap/tidb/issues/37275) @[wjhuang2016](https://github.com/wjhuang2016) **tw@Oreoxmt**
+* Provide lightweight metadata lock to improve the DML success rate during DDL change (GA) [#37275](https://github.com/pingcap/tidb/issues/37275) @[wjhuang2016](https://github.com/wjhuang2016) **tw@Oreoxmt**
 
     TiDB v6.3.0 introduces [Metadata lock](/metadata-lock.md) as an experimental feature. To avoid the `Information schema is changed` error caused by DML statements, TiDB coordinates the priority of DMLs and DDLs during table metadata change, and makes the ongoing DDLs wait for the DMLs with old metadata to commit. In v6.5.0, this feature becomes GA and is enabled by default. It is suitable for various types of DDLs change scenarios.
 
     For more information, see [User document](/metadata-lock.md).
 
-* Support restoring a cluster to a specific point in time by using `FLASHBACK CLUSTER TO TIMESTAMP` [#37197](https://github.com/pingcap/tidb/issues/37197) [#13303](https://github.com/tikv/tikv/issues/13303) @[Defined2014](https://github.com/Defined2014) @[bb7133](https://github.com/bb7133) @[JmPotato](https://github.com/JmPotato) @[Connor1996](https://github.com/Connor1996) @[HuSharp](https://github.com/HuSharp) @[CalvinNeo](https://github.com/CalvinNeo)  **tw@Oreoxmt**
+* Support restoring a cluster to a specific point in time by using `FLASHBACK CLUSTER TO TIMESTAMP` (GA) [#37197](https://github.com/pingcap/tidb/issues/37197) [#13303](https://github.com/tikv/tikv/issues/13303) @[Defined2014](https://github.com/Defined2014) @[bb7133](https://github.com/bb7133) @[JmPotato](https://github.com/JmPotato) @[Connor1996](https://github.com/Connor1996) @[HuSharp](https://github.com/HuSharp) @[CalvinNeo](https://github.com/CalvinNeo) **tw@Oreoxmt**
 
     TiDB v6.4.0 introduces the [`FLASHBACK CLUSTER TO TIMESTAMP`](/sql-statements/sql-statement-flashback-to-timestamp.md) statement as an experimental feature. You can use this statement to restore a cluster to a specific point in time within the Garbage Collection (GC) life time. In v6.5.0, this statement becomes GA. This feature helps you to easily undo DML misoperations, restore the original cluster in minutes, roll back data at different time points to determine the exact time when data changes, and it is compatible with PITR and TiCDC.
 
@@ -54,7 +54,7 @@ Compared with the previous LTS 6.1.0, 6.5.0 not only includes new features, impr
 
     For more information, see [Non-Transactional DML statements](/non-transactional-dml.md) and [`BATCH` syntax](/sql-statements/sql-statement-batch.md).
 
-* Support time to live (TTL) (experimental) [#39262](https://github.com/pingcap/tidb/issues/39262)  @[lcwangchao](https://github.com/lcwangchao) **tw@ran-huang**
+* Support time to live (TTL) (experimental) [#39262](https://github.com/pingcap/tidb/issues/39262) @[lcwangchao](https://github.com/lcwangchao) **tw@ran-huang**
 
     TTL provides row-level data lifetime management. In TiDB, a table with the TTL attribute automatically checks data lifetime and deletes expired data at the row level. TTL is designed to help you clean up unnecessary data periodically and in a timely manner without affecting the online read and write workloads.
 
@@ -74,7 +74,7 @@ Compared with the previous LTS 6.1.0, 6.5.0 not only includes new features, impr
     - Reuse TiFlash query results or deal with highly concurrent online requests
     - Need a relatively small result set comparing with the input data size, preferably smaller than 100MiB.
 
-    For more information, see the [user documentation](/tiflash/tiflash-results-materialization.md).
+  For more information, see the [user documentation](/tiflash/tiflash-results-materialization.md).
 
 * Support binding history execution plans (experimental) [#39199](https://github.com/pingcap/tidb/issues/39199) @[fzzf678](https://github.com/fzzf678) **tw@qiancai**
 
@@ -124,11 +124,11 @@ Compared with the previous LTS 6.1.0, 6.5.0 not only includes new features, impr
     - The user can still access TiDB Dashboard for diagnosis even if the PD node is unavailable.
     - Accessing TiDB Dashboard in Internet does not involve the privileged interfaces of PD. Therefore, the security risk of the cluster is mitigated.
 
-    For more information, see [Deploy TiDB Dashboard independently in TiDB Operator](https://docs.pingcap.com/tidb-in-kubernetes/dev/get-started#deploy-tidb-dashboard-independently).
+  For more information, see [Deploy TiDB Dashboard independently in TiDB Operator](https://docs.pingcap.com/tidb-in-kubernetes/dev/get-started#deploy-tidb-dashboard-independently).
 
 ### Performance
 
-* [INDEX MERGE](/glossary.md#index-merge) supports conjunctive normal form (expressions connected by `AND`) [#39333](https://github.com/pingcap/tidb/issues/39333) @[guo-shaoge](https://github.com/guo-shaoge) @[time-and-fate](https://github.com/time-and-fate) @[hailanwhu](https://github.com/hailanwhu) **tw@TomShawn**
+* [INDEX MERGE](/glossary.md#index-merge) supports expressions connected by `AND` [#39333](https://github.com/pingcap/tidb/issues/39333) @[guo-shaoge](https://github.com/guo-shaoge) @[time-and-fate](https://github.com/time-and-fate) @[hailanwhu](https://github.com/hailanwhu) **tw@TomShawn**
 
     Before v6.5.0, TiDB only supported using index merge for the filter conditions connected by `OR`. Starting from v6.5.0, TiDB has supported using index merge for filter conditions connected by `AND` in the `WHERE` clause. In this way, the index merge of TiDB can now cover more general combinations of query filter conditions and is no longer limited to union (`OR`) relationship. The current v6.5.0 version only supports index merge under `OR` conditions as automatically selected by the optimizer. To enable index merge for `AND` conditions, you need to use the [`USE_INDEX_MERGE`](/optimizer-hints.md#use_index_merget1_name-idx1_name--idx2_name-) hint.
 
@@ -140,7 +140,7 @@ Compared with the previous LTS 6.1.0, 6.5.0 not only includes new features, impr
     * `->>`
     * `JSON_EXTRACT()`
 
-    The JSON format provides a flexible way for application data modeling. Therefore, more and more applications are using the JSON format for data exchange and data storage. By pushing down JSON functions to TiFlash, you can improve the efficiency of analyzing data in the JSON type and use TiDB for more real-time analytics scenarios.
+  The JSON format provides a flexible way for application data modeling. Therefore, more and more applications are using the JSON format for data exchange and data storage. By pushing down JSON functions to TiFlash, you can improve the efficiency of analyzing data in the JSON type and use TiDB for more real-time analytics scenarios.
 
 * Support pushing down the following [string functions](/tiflash/tiflash-supported-pushdown-calculations.md) to TiFlash [#6115](https://github.com/pingcap/tiflash/issues/6115) @[xzhangxian1008](https://github.com/xzhangxian1008) **tw@qiancai**
 
@@ -156,7 +156,7 @@ Compared with the previous LTS 6.1.0, 6.5.0 not only includes new features, impr
 
 * Support pushing down sorting operations of [partitioned tables](/partitioned-table.md) to TiKV [#26166](https://github.com/pingcap/tidb/issues/26166) @[winoros](https://github.com/winoros) **tw@qiancai**
 
-   Although the [partitioned table](/partitioned-table.md) feature has been GA since v6.1.0, TiDB is continually improving its performance. In v6.5.0, TiDB supports pushing down sorting operations such as `ORDER BY` and `LIMIT` to TiKV for computation and filtering, which reduces network I/O overhead and improves SQL performance when you use partitioned tables.
+    Although the [partitioned table](/partitioned-table.md) feature has been GA since v6.1.0, TiDB is continually improving its performance. In v6.5.0, TiDB supports pushing down sorting operations such as `ORDER BY` and `LIMIT` to TiKV for computation and filtering, which reduces network I/O overhead and improves SQL performance when you use partitioned tables.
 
 * Optimizer introduces a more accurate Cost Model Version 2 [#35240](https://github.com/pingcap/tidb/issues/35240) @[qw4990](https://github.com/qw4990) **tw@Oreoxmt**
 
@@ -198,7 +198,7 @@ Compared with the previous LTS 6.1.0, 6.5.0 not only includes new features, impr
 
 ### MySQL compatibility
 
-* Support a high-performance and globally monotonic `AUTO_INCREMENT` [#38442](https://github.com/pingcap/tidb/issues/38442) @[tiancaiamao](https://github.com/tiancaiamao) **tw@Oreoxmt**
+* Support a high-performance and globally monotonic `AUTO_INCREMENT` (GA) [#38442](https://github.com/pingcap/tidb/issues/38442) @[tiancaiamao](https://github.com/tiancaiamao) **tw@Oreoxmt**
 
     TiDB v6.4.0 introduces the `AUTO_INCREMENT` MySQL compatibility mode as an experimental feature. This mode introduces a centralized auto-increment ID allocating service that ensures IDs monotonically increase on all TiDB instances. This feature makes it easier to sort query results by auto-increment IDs. In v6.5.0, this feature becomes GA. The insert TPS of a table using this feature is expected to exceed 20,000, and this feature supports elastic scaling to improve the write throughput of a single table and entire clusters. To use the MySQL compatibility mode, you need to set `AUTO_ID_CACHE` to `1` when creating a table. The following is an example:
 
@@ -268,7 +268,7 @@ Compared with the previous LTS 6.1.0, 6.5.0 not only includes new features, impr
 
 * PITR performance improved remarkably **tw@shichun-0415
 
-  In the log restore stage, the restore speed of one TiKV can reach xx MB/s, which is x times faster than before. The restore speed is scalable and the RTO in DR scenarios is reduced greatly. The RPO in DR scenarios can be as short as 5 minutes. In normal cluster operation and maintenance (OM), for example, a rolling upgrade is performed or only one TiKV is down, the RPO can be 5 minutes.
+    In the log restore stage, the restore speed of one TiKV can reach xx MB/s, which is x times faster than before. The restore speed is scalable and the RTO in DR scenarios is reduced greatly. The RPO in DR scenarios can be as short as 5 minutes. In normal cluster operation and maintenance (OM), for example, a rolling upgrade is performed or only one TiKV is down, the RPO can be 5 minutes.
 
 * TiKV-BR GA: Supports backing up and restoring RawKV [#67](https://github.com/tikv/migration/issues/67) @[pingyu](https://github.com/pingyu) @[haojinming](https://github.com/haojinming) **tw@shichun-0415**
 
@@ -416,12 +416,12 @@ Starting from v6.5.0, the [`AMEND TRANSACTION`](/system-variables.md#tidb_enable
     - Fix the `Get raft db is not allowed` error when executing the `compact raft` command in tikv-ctl [#13515](https://github.com/tikv/tikv/issues/13515) @[guoxiangCN](https://github.com/guoxiangCN)
     - Fix the issue that log backup does not work when TLS is enabled [#13867](https://github.com/tikv/tikv/issues/13867) @[YuJuncen](https://github.com/YuJuncen)
     - Fix the support issue of the Geometry field type [#13651](https://github.com/tikv/tikv/issues/13651) @[dveeden](https://github.com/dveeden)
-    - Fix the issue that  `_` in the `LIKE` operator cannot match non-ASCII characters when new collation is not enabled [#13769](https://github.com/tikv/tikv/issues/13769) @[YangKeao](https://github.com/YangKeao)
+    - Fix the issue that `_` in the `LIKE` operator cannot match non-ASCII characters when new collation is not enabled [#13769](https://github.com/tikv/tikv/issues/13769) @[YangKeao](https://github.com/YangKeao)
     - Fix the issue that tikv-ctl is terminated unexpectedly when executing the `reset-to-version` command [#13829](https://github.com/tikv/tikv/issues/13829) @[tabokie](https://github.com/tabokie)
 
 + PD
 
-    - Fix the issue that the `balance-hot-region-scheduler` configuration is not persisted if not modified [#5701](https://github.com/tikv/pd/issues/5701)  @[HunDunDM](https://github.com/HunDunDM)
+    - Fix the issue that the `balance-hot-region-scheduler` configuration is not persisted if not modified [#5701](https://github.com/tikv/pd/issues/5701) @[HunDunDM](https://github.com/HunDunDM)
     - Fix the issue that `rank-formula-version` does not retain the pre-upgrade configuration during the upgrade process [#5698](https://github.com/tikv/pd/issues/5698) @[HunDunDM](https://github.com/HunDunDM)
 
 + TiFlash
@@ -433,7 +433,7 @@ Starting from v6.5.0, the [`AMEND TRANSACTION`](/system-variables.md#tidb_enable
 
     + Backup & Restore (BR)
 
-        - Fix the issue that when BR deletes log backup data, it mistakenly deletes data that should not be deleted  [#38939](https://github.com/pingcap/tidb/issues/38939) @[Leavrth](https://github.com/Leavrth)
+        - Fix the issue that when BR deletes log backup data, it mistakenly deletes data that should not be deleted [#38939](https://github.com/pingcap/tidb/issues/38939) @[Leavrth](https://github.com/Leavrth)
         - Fix the issue that restore tasks fail when using old framework for collations in databases or tables [#39150](https://github.com/pingcap/tidb/issues/39150) @[MoCuishle28](https://github.com/MoCuishle28)
         - Fix the issue that backup fails because Alibaba Cloud and Huawei Cloud are not fully compatible with Amazon S3 storage [#39545](https://github.com/pingcap/tidb/issues/39545) @[3pointer](https://github.com/3pointer)
 
