@@ -1720,6 +1720,16 @@ MPP is a distributed computing framework provided by the TiFlash engine, which a
 - Default value: `ON`
 - This variables specifies whether to use the pipeline execution algorithm for window functions.
 
+### tidb_enable_plan_replayer_capture
+
+> Warning:
+>
+> The feature controlled by this variable is not fully functional in the current TiDB version. Do not change the default value.
+
+- Scope: SESSION | GLOBAL
+- Persists to cluster: Yes
+- Default value: `FALSE`
+
 ### tidb_enable_prepared_plan_cache <span class="version-mark">New in v6.1.0</span>
 
 - Scope: SESSION | GLOBAL
