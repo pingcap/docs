@@ -14,10 +14,10 @@ TiDB 6.5.0 is a Long-Term Support Release (LTS).
 
 Compared with the previous LTS 6.1.0, 6.5.0 not only includes new features, improvements, and bug fixes released in [6.2.0-DMR](/releases/release-6.2.0.md), [6.3.0-DMR](/releases/release-6.3.0.md), [6.4.0-DMR](/releases/release-6.4.0.md), but also introduces the following key features and improvements:
 
-- Enable [index acceleration](/system-variables.md#tidb_ddl_enable_fast_reorg-new-in-v630) by default, which improves the performance of adding indexes by about 10 times compared with v6.1.0.
-- Support TiDB global memory control via [`tidb_server_memory_limit`](/system-variables.md#tidb_server_memory_limit-new-in-v640).
-- Support a high-performance and globally monotonic [`AUTO_INCREMENT`](/auto-increment.md#mysql-compatible-mode) column attribute, which is compatible with MySQL.
-- Support restoring a cluster to a specific point in time by using [`FLASHBACK CLUSTER TO TIMESTAMP`](/sql-statements/sql-statement-flashback-to-timestamp.md), which is compatible with TiCDC and PITR.
+- The [index acceleration](/system-variables.md#tidb_ddl_enable_fast_reorg-new-in-v630) feature becomes generally available (GA), which improves the performance of adding indexes by about 10 times compared with v6.1.0.
+- The TiDB global memory control becomes GA, and you can control the memory consumption threshold via [`tidb_server_memory_limit`](/system-variables.md#tidb_server_memory_limit-new-in-v640).
+- The high-performance and globally monotonic [`AUTO_INCREMENT`](/auto-increment.md#mysql-compatible-mode) column attribute becomes GA, which is compatible with MySQL.
+- Support restoring a cluster to a specific point in time by using [`FLASHBACK CLUSTER TO TIMESTAMP`](/sql-statements/sql-statement-flashback-to-timestamp.md) (GA), which is compatible with TiCDC and PITR.
 - Optimizer further enhances the more accurate [Cost Model] version 2](/cost-model.md#cost-model-version-2) and further enhance the [INDEX MERGE](/glossary.md#index-merge) feature to support the expressions connected by `AND`.
 - Support pushing down the `JSON_EXTRACT()` function to TiFlash.
 - Support [password management](/password-management.md) policies that meet password compliance auditing requirements.
