@@ -18,7 +18,7 @@ Compared with the previous LTS 6.1.0, 6.5.0 not only includes new features, impr
 - The TiDB global memory control becomes GA, and you can control the memory consumption threshold via [`tidb_server_memory_limit`](/system-variables.md#tidb_server_memory_limit-new-in-v640).
 - The high-performance and globally monotonic [`AUTO_INCREMENT`](/auto-increment.md#mysql-compatible-mode) column attribute becomes GA, which is compatible with MySQL.
 - Support restoring a cluster to a specific point in time by using [`FLASHBACK CLUSTER TO TIMESTAMP`](/sql-statements/sql-statement-flashback-to-timestamp.md) (GA), which is compatible with TiCDC and PITR.
-- Optimizer further enhances the more accurate [Cost Model] version 2](/cost-model.md#cost-model-version-2) and further enhance the [INDEX MERGE](/glossary.md#index-merge) feature to support the expressions connected by `AND`.
+- Enhance TiDB optimizer by making the more accurate [Cost Model version 2](/cost-model.md#cost-model-version-2) generally available and supporting expressions connected by `AND` for [INDEX MERGE](/explain-index-merge.md).
 - Support pushing down the `JSON_EXTRACT()` function to TiFlash.
 - Support [password management](/password-management.md) policies that meet password compliance auditing requirements.
 - TiDB Lightning and Dumpling support [importing](tidb-lightning/tidb-lightning-data-source.md) and [exporting](/dumpling-overview.md#improve-export-efficiency-through-concurrency) compressed SQL and CSV files.
@@ -134,7 +134,7 @@ Compared with the previous LTS 6.1.0, 6.5.0 not only includes new features, impr
 
     For more details about index merge, see [v5.4.0 Release Notes](/release-5.4.0#performance) and [Explain Index Merge](/explain-index-merge.md).
 
-* Support pushing down the following [JSON functions](/tiflash/tiflash-supported-pushdown-calculations.md) to TiFlash [#39458](https://github.com/pingcap/tidb/issues/39458) @[yibin87](https://github.com/yibin87) **tw@qiancai**
+* Support pushing down the following JSON functions to TiFlash [#39458](https://github.com/pingcap/tidb/issues/39458) @[yibin87](https://github.com/yibin87) **tw@qiancai**
 
     * `->`
     * `->>`
@@ -142,7 +142,7 @@ Compared with the previous LTS 6.1.0, 6.5.0 not only includes new features, impr
 
   The JSON format provides a flexible way for application data modeling. Therefore, more and more applications are using the JSON format for data exchange and data storage. By pushing down JSON functions to TiFlash, you can improve the efficiency of analyzing data in the JSON type and use TiDB for more real-time analytics scenarios.
 
-* Support pushing down the following [string functions](/tiflash/tiflash-supported-pushdown-calculations.md) to TiFlash [#6115](https://github.com/pingcap/tiflash/issues/6115) @[xzhangxian1008](https://github.com/xzhangxian1008) **tw@qiancai**
+* Support pushing down the following string functions to TiFlash [#6115](https://github.com/pingcap/tiflash/issues/6115) @[xzhangxian1008](https://github.com/xzhangxian1008) **tw@qiancai**
 
     * `regexp_like`
     * `regexp_instr`
