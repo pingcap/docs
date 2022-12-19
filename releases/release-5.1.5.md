@@ -12,18 +12,6 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v5.1/quick-start-with-
 
 ## Compatibility changes
 
-### System variables
-
-| Variable name | Change type | Description |
-|--------|------------------------------|------|
-| xx | xx | xx |
-
-### Configuration file parameters
-
-| Configuration file | Configuration parameter | Change type | Description |
-| -------- | -------- | -------- | -------- |
-| xx | xx | xx | xx |
-
 ## Improvements
 
 + TiDB
