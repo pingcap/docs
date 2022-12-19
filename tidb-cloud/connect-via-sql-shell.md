@@ -5,6 +5,7 @@ summary: Learn how to connect to your TiDB cluster via SQL Shell.
 
 # Connect via SQL Shell
 
+In TiDB Cloud SQL Shell, you can try TiDB SQL, test out TiDB's compatibility with MySQL quickly, and administer database user privileges.
 > **Note:**
 >
 > You cannot connect to [Serverless Tier clusters](/tidb-cloud/select-cluster-tier.md#serverless-tier-beta) using SQL Shell. To connect to your Serverless Tier cluster, see [Connect to Serverless Tier clusters](/tidb-cloud/connect-to-tidb-cluster.md#serverless-tier).
