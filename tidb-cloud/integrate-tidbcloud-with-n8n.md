@@ -121,7 +121,7 @@ This trigger will enable your workflow every morning at 8 am.
 9. Enter your database password.
 10. Enter the following SQL in the ***SQL*** field:
    ```   
-   CREATE TABLE IF NOT EXISTS hack_news_briefing (creator VARCHAR (200), title TEXT,  link VARCHAR(200), pubdate VARCHAR(200), comments VARCHAR(200), content TEXT, guid VARCHAR (200), isodate VARCHAR(200));
+   CREATE TABLE IF NOT EXISTS hacker_news_briefing (creator VARCHAR (200), title TEXT,  link VARCHAR(200), pubdate VARCHAR(200), comments VARCHAR(200), content TEXT, guid VARCHAR (200), isodate VARCHAR(200));
    ```
 11. Click on **Execute Node** to create the table.
 
