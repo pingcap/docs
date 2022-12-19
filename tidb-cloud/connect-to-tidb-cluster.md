@@ -5,7 +5,7 @@ summary: Connect to your TiDB cluster via a SQL client or SQL shell.
 
 # Connect to Your TiDB Cluster
 
-After your TiDB cluster is created on TiDB Cloud, you can use one of the following methods to connect to your TiDB cluster. You can access your cluster via a SQL client, or quickly via SQL Shell in the TiDB Cloud Console.
+After your TiDB cluster is created on TiDB Cloud, you can use one of the following methods to connect to your TiDB cluster. You can access your cluster via a SQL client, or quickly via SQL Shell in the TiDB Cloud console.
 
 + Connect via a SQL client
 

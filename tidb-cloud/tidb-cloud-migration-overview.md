@@ -25,7 +25,7 @@ TiDB Cloud provides the Data Migration feature, which supports full migration an
 
 ### Migrate from Amazon Aurora MySQL to TiDB Cloud in bulk
 
-You can migrate data from Amazon Aurora MySQL to TiDB Cloud in bulk using the import tools on TiDB Cloud console.
+You can migrate data from Amazon Aurora MySQL to TiDB Cloud in bulk using the import tools in the TiDB Cloud console.
 
 For more information, see [Migrate from Amazon Aurora MySQL to TiDB Cloud in Bulk](/tidb-cloud/migrate-from-aurora-bulk-import.md).
 

@@ -18,7 +18,7 @@ You cannot customize the TiDB Cloud built-in alerting. If you would like to conf
 If you are a member of a project and you want to get alert notification emails of clusters in your project, take the following steps:
 
 1. Log in to [TiDB Cloud console](https://tidbcloud.com/).
-2. On the TiDB Cloud console, choose a target project on which you want to receive alert notification emails.
+2. In the TiDB Cloud console, choose a target project on which you want to receive alert notification emails.
 3. In the left pane, click **Alerts**.
 4. Enter your email address, and then click **Subscribe**.
 
@@ -29,7 +29,7 @@ To minimize the number of alert emails sent to subscribers, TiDB Cloud aggregate
 If you no longer want to receive alert notification emails of clusters in your project, take the following steps:
 
 1. Log into TiDB Cloud console.
-2. On the TiDB Cloud console, choose the project on which you no longer want to receive alert notification emails.
+2. In the TiDB Cloud console, choose the project on which you no longer want to receive alert notification emails.
 3. In the left pane, click **Alerts**.
 4. In the right pane, locate your email address and click **Delete**.
 

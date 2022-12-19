@@ -23,7 +23,7 @@ Before adding VPC Peering requests to a region, you need to set a project CIDR f
 
 You can set the project CIDR when creating the first Dedicated Tier of your project. If you want to set the project CIDR before creating the tier, perform the following operations:
 
-1. On the TiDB Cloud console, choose a target project, and then click the **Network Access** tab.
+1. In the TiDB Cloud console, choose a target project, and then click the **Network Access** tab.
 
 2. Click the **Project CIDR** tab.
 
@@ -52,7 +52,7 @@ You can set the project CIDR when creating the first Dedicated Tier of your proj
 
 ### Step 1. Add VPC peering requests
 
-1. On the TiDB Cloud console, choose a target project for VPC peering, and then click the **Network Access** tab.
+1. In the TiDB Cloud console, choose a target project for VPC peering, and then click the **Network Access** tab.
 
 2. Click the **VPC Peering** tab.
 
@@ -204,7 +204,7 @@ You can also use the AWS dashboard to configure the VPC peering connection.
 
 ### Steps
 
-1. On the TiDB Cloud console, choose a target project for VPC peering, and then click the **Network Access** tab.
+1. In the TiDB Cloud console, choose a target project for VPC peering, and then click the **Network Access** tab.
 
 2. Click the **VPC Peering** tab.
 
