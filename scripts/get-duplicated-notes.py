@@ -1,5 +1,3 @@
-#!/usr/bin/env python
-
 # This script compares an on-going release notes file with published release notes files.
 # If the ongoing release notes file has a duplicate note with the published one, the script reports the note and replaces it with the published one.
 
