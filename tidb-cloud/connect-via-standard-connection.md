@@ -15,7 +15,7 @@ To connect to a Serverless Tier cluster via standard connection, perform the fol
 
 1. Navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page and choose your target project on the top of the left navigation bar.
 
-2. Locate your cluster, and click **Connect** in the upper-right corner of the cluster area. In the drop-down list, select **Dev Tools**. A connection dialog is displayed.
+2. Locate your cluster, and click **Connect** in the upper-right corner of the cluster area. A connection dialog is displayed.
 
 3. In the dialog, select your preferred connection method and operating system, and then connect to your cluster with the connection string.
 
