@@ -1728,6 +1728,7 @@ MPP is a distributed computing framework provided by the TiFlash engine, which a
 
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
+- Type: Boolean
 - Default value: `FALSE`
 
 ### tidb_enable_prepared_plan_cache <span class="version-mark">New in v6.1.0</span>
