@@ -161,6 +161,8 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v5.1/quick-start-with-
     (dup: release-5.3.4.md > Bug fixes> TiFlash)- Fix the issue that TiFlash bootstrap fails when `0.0` is used as the default value for integers, for example, `` `i` int(11) NOT NULL DEFAULT '0.0'`` [#3157](https://github.com/pingcap/tiflash/issues/3157)
 
 + Tools
+   + TiDB-Binlog
+        - Fix the bug that Drainer can't send request correctly to Pump when setting `compressor=gzip` [#1152](https://github.com/pingcap/tidb-binlog/issues/1152)
 
     + Backup & Restore (BR)
 
