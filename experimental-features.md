@@ -15,6 +15,7 @@ This document introduces the experimental features of TiDB in different versions
 + [FastScan](/develop/dev-guide-use-fastscan.md). (Introduced in v6.2.0)
 + [Extended statistics](/extended-statistics.md). (Introduced in v5.0.0)
 + [Randomly sample about 10000 rows of data to quickly build statistics](/system-variables.md#tidb_enable_fast_analyze) (Introduced in v3.0)
++ [Support locking statistics](/statistics.md#lock-statistics) (Introduced in v6.5.0)
 
 ## Stability
 
@@ -33,7 +34,6 @@ Elastic scheduling feature. It enables the TiDB cluster to dynamically scale out
 + [Cascades Planner](/system-variables.md#tidb_enable_cascades_planner): a cascades framework-based top-down query optimizer (Introduced in v3.0)
 + [Table Lock](/tidb-configuration-file.md#enable-table-lock-new-in-v400) (Introduced in v4.0.0)
 + [Range INTERVAL partitioning](/partitioned-table.md#range-interval-partitioning) (Introduced in v6.3.0)
-+ [Restore a cluster to a specific point in time using the `FLASHBACK CLUSTER TO TIMESTAMP` syntax](/sql-statements/sql-statement-flashback-to-timestamp.md) (Introduced in v6.4.0)
 + [TiFlash Query Result Materialization](/tiflash/tiflash-results-materialization.md) (Introduced in v6.5.0)
 
 ## Storage
