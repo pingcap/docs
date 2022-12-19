@@ -204,7 +204,6 @@ Now you have successfully set up the VPC peering connection. Next, [connect to t
 
 ## Set up VPC peering on GCP
 
-
 1. On the TiDB Cloud console, choose a target project for VPC peering, and then click the **Network Access** tab.
 
 2. Click the **VPC Peering** tab.
