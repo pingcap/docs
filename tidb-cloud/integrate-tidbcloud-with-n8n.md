@@ -247,7 +247,7 @@ Different operations require different fields to be filled in. The following sho
 - **Password**: The password of TiDB Cloud cluster.
 - **User**: The username of your TiDB Cloud cluster.
 - **Database**: The database name.
-- **Table**: The table name. You can use `From list` mode to choose one or `Name` mode to type input manually.
+- **Table**: The table name. You can use `From list` mode to choose one or `Name` mode to type table name manually.
 - **Delete Key**: The Name of the item's property which decides which rows in the database should be deleted. Item is the data sent from one node to another. A node performs its action on each item of incoming data. For more information about item in n8n, see [n8n documentation](https://docs.n8n.io/workflows/items/).
 
 </div>
@@ -260,7 +260,7 @@ Different operations require different fields to be filled in. The following sho
 - **Password**: The password of TiDB Cloud cluster.
 - **User**: The username of your TiDB Cloud cluster.
 - **Database**: The database name.
-- **Table**: The table name. You can use `From list` mode to choose one or `Name` mode to type input manually.
+- **Table**: The table name. You can use `From list` mode to choose one or `Name` mode to type table name manually.
 - **Columns**: The comma-separated list of the input item's property which should used as columns for the new rows. Item is the data sent from one node to another. A node performs its action on each item of incoming data. For more information about item in n8n, see [n8n documentation](https://docs.n8n.io/workflows/items/).
 
 </div>
@@ -273,7 +273,7 @@ Different operations require different fields to be filled in. The following sho
 - **Password**: The password of TiDB Cloud cluster.
 - **User**: The username of your TiDB Cloud cluster.
 - **Database**: The database name.
-- **Table**: The table name. You can use `From list` mode to choose one or `Name` mode to type input manually.
+- **Table**: The table name. You can use `From list` mode to choose one or `Name` mode to type table manually.
 - **Update Key**: The name of the item's property which decides which rows in the database should be updated. Item is the data sent from one node to another. A node performs its action on each item of incoming data. For more information about item in n8n, see [n8n documentation](https://docs.n8n.io/workflows/items/).
 - **Columns**: The comma-separated list of the input item which should used as columns for the rows to update.
 
@@ -283,5 +283,5 @@ Different operations require different fields to be filled in. The following sho
 ### Limitations 
  
 1. Normally only one SQL statement is allowed in the Execute operation. If you want to execute more than one statement in a single operation, you need to manually enable [tidb_multi_statement_mode](https://docs.pingcap.com/tidb/dev/system-variables).
-2. The Delete and Update operation need to specify one field as a key, for example, the `Delete Key` is set to `id`, which is equivalent to executing `delete from table where id = ${item.id}`. Currently, it only supports specifying one key.
+2. The Delete and Update operation need to specify one field as a key. For example, the `Delete Key` is set to `id`, which is equivalent to executing `delete from table where id = ${item.id}`. Currently, it only supports specifying one key.
 3. The Insert and Update operations need to specify the comma-separated field to write, and the field name must be the same as the input item's property.
