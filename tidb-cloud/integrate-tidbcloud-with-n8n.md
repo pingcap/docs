@@ -94,7 +94,7 @@ If you haven't got a TiDB Cloud Serverless Tier cluster, you can use this node t
 
 > **Note:** 
 > 
-> This step takes some 1 minute to create a new TiDB Serverless cluster.
+> This step takes seconds to create a new TiDB Serverless cluster.
 
 ### Create a workflow
 
