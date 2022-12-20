@@ -132,6 +132,10 @@ TiDB Cloud uses storage volume encryption by default for your business data at r
 
 If you require more specific information about business data encryption in TiDB Cloud, contact [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md).
 
+### What versions of TLS does TiDB Cloud support?
+
+All connections to the cluster over the internet use TLS 1.2 or 1.3.
+
 ### Can I run TiDB Cloud in my VPC?
 
 No. TiDB Cloud is Database-as-a-Service (DBaaS) and runs only on the TiDB Cloud VPC. As a cloud computing managed service, TiDB Cloud provides access to a database without requiring the setup of physical hardware and the installation of software.
@@ -153,8 +157,6 @@ For Serverless Tier clusters, TiDB Cloud ensures cluster security with the follo
 - Sets up firewall rules to isolate external connections.
 - Provides cluster server TLS certificates to encrypt cluster data in transit.
 
-All connections to the cluster over the internet use TLS 1.2 or 1.3.
-
 ### How do I connect to my database in a TiDB cluster?
 
 For a Dedicated Tier cluster, the steps to connect your cluster are simplified as follows:
@@ -173,7 +175,7 @@ For more information, see [Connect to Your TiDB Cluster](/tidb-cloud/connect-to-
 
 ### Who has access to my business data of a database cluster?
 
-TiDB Cloud support cannot directly access the data in your database cluster. The only exception is that when you need to improve products and solve cluster operation problems, TiDB Cloud support can access the cluster operation data after you provide your internal temporary authorization. All authorization and access records are audited annually by third-party audit organizations. For example, PCI-DSS, SOC2, and ISO27701. 
+TiDB Cloud Support cannot directly access the data in your database cluster. The only exception is that when you need to improve products and solve cluster operation problems, TiDB Cloud Support can access the cluster operation data after you provide your internal temporary authorization. All authorization and access records are audited annually by third-party audit organizations. For example, PCI-DSS, SOC2, and ISO27701. 
 
 TiDB Cloud operational data is described in [TiDB Cloud Privacy Policy](https://www.pingcap.com/privacy-policy/) and [TiDB Cloud Data Processing Agreement](https://www.pingcap.com/legal/data-processing-agreement-for-tidb-cloud-services/).
 
