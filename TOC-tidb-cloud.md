@@ -192,8 +192,7 @@
     - [Use Backup Resource](/tidb-cloud/terraform-use-backup-resource.md)
     - [Use Restore Resource](/tidb-cloud/terraform-use-restore-resource.md)
   - [Vercel](/tidb-cloud/integrate-tidbcloud-with-vercel.md)
-  - AWS
-    - [Amazon AppFlow](/develop/dev-guide-aws-appflow-integration.md)
+  - [Amazon AppFlow](/develop/dev-guide-aws-appflow-integration.md)
 - Reference
   - TiDB Cluster Architecture
     - [Overview](/tidb-architecture.md)
