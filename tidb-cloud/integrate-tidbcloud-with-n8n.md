@@ -282,6 +282,6 @@ Different operations require different fields to be filled in. The following sho
 
 ### Limitations 
  
-1. Normally only one SQL statement is allowed in the Execute operation. If you want to execute more than one statement in a single operation, you need to manually enable [tidb_multi_statement_mode](https://docs.pingcap.com/tidb/dev/system-variables).
-2. The Delete and Update operation need to specify one field as a key. For example, the `Delete Key` is set to `id`, which is equivalent to executing `delete from table where id = ${item.id}`. Currently, it only supports specifying one key.
-3. The Insert and Update operations need to specify the comma-separated field to write, and the field name must be the same as the input item's property.
+1. Normally only one SQL statement is allowed in the **Execute SQL** operation. If you want to execute more than one statement in a single operation, you need to manually enable [`tidb_multi_statement_mode`](https://docs.pingcap.com/tidb/dev/system-variables).
+2. The **Delete** and **Update** operation need to specify one field as a key. For example, the `Delete Key` is set to `id`, which is equivalent to executing `delete from table where id = ${item.id}`. Currently, it only supports specifying one key.
+3. The **Insert** and **Update** operation need to specify the comma-separated list in the **Columns** field, and the field name must be the same as the input item's property.
