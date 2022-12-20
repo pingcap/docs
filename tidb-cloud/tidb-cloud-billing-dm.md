@@ -39,14 +39,14 @@ The following table lists the price of TiDB Cloud for each Data Migration RCU:
 | AWS            | Tokyo (ap-northeast-1)      |          $0.1669 |
 | AWS            | Frankfurt (eu-central-1)    |          $0.1564 |
 
-The Data Migration job should be in the same region as the target TiDB Cluster.
+The Data Migration job is in the same region as the target TiDB Cluster.
 
-Note that if the source database and the Data Migration job is not in the same region, collecting upstream data to the Data Migration job and writing data from the Data Migration job to the target TiDB cluster incurs two traffic charges: cross-region and cross-availability-zone traffic charges.
+Note that if the source database and the TiDB cluster are not in the same region or not in the same availability zone (AZ), two additional traffic charges will be incured: cross-region and cross-AZ traffic charges.
 
-- If the source database and the Data Migration job is not in the same region, cross-region traffic charges are incurred.
-- If the source database and the Data Migration job are in the same region but in different availability zones, cross-availability-zone traffic charges are incurred when the Data Migration job writes data to the target TiDB cluster.
+- If the source database and the TiDB cluster are not in the same region, cross-region traffic charges are incurred when the Data Migration job collecting data from the source database. In addition, if the Data Migration job and the TiDB cluster are not in the same AZ, cross-AZ traffic charges are also incurred when the Data Migration job writes data to the target TiDB cluster.
+- If the source database and the TiDB cluster are in the same region but in different AZs, cross-AZ traffic charges are incurred when the Data Migration job collects data from the source database. In addition, cross-AZ traffic charges are incurred when the Data Migration job writes data to the target TiDB cluster.
 
-The cross-region and cross-availability-zone traffic prices are the same as the traffic prices for TiDB Cloud. For more information, see [TiDB Cloud Pricing Details](https://en.pingcap.com/tidb-cloud-pricing-details/).
+The cross-region and cross-AZ traffic prices are the same as those for TiDB Cloud. For more information, see [TiDB Cloud Pricing Details](https://en.pingcap.com/tidb-cloud-pricing-details/).
 
 ## See also
 
