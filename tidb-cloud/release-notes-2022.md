@@ -12,9 +12,9 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
 **General changes**
 
-- Add the label `project name` to the DataDog Dashboard as a filter to provide project information.
+- Add the label `project name` to the Datadog Dashboard as a filter to provide project information.
 
-    You can use the filter `project name` to quickly find the cluster you want. For more information, see [DataDog Integration](/tidb-cloud/monitor-datadog-integration.md).
+    You can use the filter `project name` to quickly find the cluster you want. For more information, see [Datadog Integration](/tidb-cloud/monitor-datadog-integration.md).
 
 ## December 13, 2022
 
