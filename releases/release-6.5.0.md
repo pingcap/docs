@@ -267,7 +267,7 @@ Compared with the previous LTS 6.1.0, 6.5.0 not only includes new features, impr
 
 * TiCDC supports updating TLS online [#7908](https://github.com/pingcap/tiflow/issues/7908) @[CharlesCheung96](https://github.com/CharlesCheung96) **tw@shichun-0415**
 
-    TiCDC supports online updates of TLS certificates. To keep data secure, you will set an expiration policy for the certificate used by the system. After the expiration period, the system uses a new certificate. TiCDC v6.5.0 supports online updates of TLS certificates. Without interrupting the replication tasks, TiCDC can automatically detect and update the certificate, without the need for manual intervention.
+    To keep data secure, you need to set an expiration policy for the certificate used by the system. After the expiration period, the system needs a new certificate. TiCDC v6.5.0 supports online updates of TLS certificates. Without interrupting the replication tasks, TiCDC can automatically detect and update the certificate, without the need for manual intervention.
 
 * TiCDC performance improves significantly **tw@shichun-0415
 
