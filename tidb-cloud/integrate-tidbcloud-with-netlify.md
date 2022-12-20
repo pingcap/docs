@@ -37,7 +37,10 @@ Serverless Tier clusters allow all IP addresses for connection by default, so yo
 To use this method, make sure that your TiDB Cloud cluster [allows all IP addresses access](#all-ip-addresses-allowed-for-traffic-filter-in-tidb-cloud) and save your root password in the [Security Settings](/tidb-cloud/configure-security-settings.md) dialog.
 
 1. Follow the steps in [Connect to a TiDB Cloud cluster via standard connection](/tidb-cloud/connect-to-tidb-cluster.md#connect-via-standard-connection) to get the connection information of your TiDB cluster.
-2. Go to your **Netlify dashboard** > **Netlify project** > **Site settings** > **Environment Variables**, and then [Update variables](https://docs.netlify.com/environment-variables/get-started/#update-variables-with-the-netlify-ui) according to the connection information of your TiDB cluster.
+2. Go to your **Netlify dashboard** > **Netlify project** > **Site settings** > **Environment Variables**, and then [update variables](https://docs.netlify.com/environment-variables/get-started/#update-variables-with-the-netlify-ui) according to the connection information of your TiDB cluster.
+
+    - **Key**: `DATABASE_URL` 
+    - **Values**: `mysql://<User>:<Password>@<Endpoint>:<Port>/<Database>?sslaccept=strict`
 
 The following is a datasource example in the Prisma schema file for a TiDB Cloud Serverless Tier cluster:
 
