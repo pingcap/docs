@@ -126,7 +126,7 @@ In TiDB Cloud, all data at rest is encrypted, and all network traffic is encrypt
 - Encryption of data at rest is automated using encrypted storage volumes. 
 - Encryption of data in transit between your client and your cluster is automated using TiDB Cloud web server TLS and TiDB cluster TLS.
 
-### How does TiDB Cloud encrypt your business data?
+### How does TiDB Cloud encrypt my business data?
 
 TiDB Cloud uses storage volume encryption by default for your business data at rest, including your database data and backup data. TiDB Cloud requires TLS encryption for your business data in transit and uses component-level TLS encryption for your business data in your database cluster between TiDB, PD, TiKV, and TiFlash.
 
