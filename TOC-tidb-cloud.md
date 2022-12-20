@@ -64,7 +64,7 @@
         -   [SQL またはトランザクションの問題](/develop/dev-guide-troubleshoot-overview.md)
         -   [不安定な結果セット](/develop/dev-guide-unstable-result-set.md)
         -   [タイムアウト](/develop/dev-guide-timeouts-in-tidb.md)
-    -   参照
+    -   リファレンス
         -   [書店のサンプル アプリケーション](/develop/dev-guide-bookshop-schema-design.md)
         -   ガイドライン
             -   [オブジェクト命名規則](/develop/dev-guide-object-naming-guidelines.md)
@@ -84,7 +84,7 @@
         -   [SQL クライアント経由で接続する](/tidb-cloud/connect-to-tidb-cluster.md)
         -   [SQL シェル経由で接続](/tidb-cloud/connect-to-tidb-cluster.md#connect-via-sql-shell)
     -   [プライベート エンドポイント接続のセットアップ](/tidb-cloud/set-up-private-endpoint-connections.md)
-    -   [VPC ピアリング接続のセットアップ](/tidb-cloud/set-up-vpc-peering-connections.md)
+    -   [VPC ピアリング接続の設定](/tidb-cloud/set-up-vpc-peering-connections.md)
     -   TiFlash で HTAPクラスタを使用する
         -   [TiFlash の概要](/tiflash/tiflash-overview.md)
         -   [TiFlash レプリカの作成](/tiflash/create-tiflash-replicas.md)
@@ -107,9 +107,10 @@
         -   [Amazon S3 または GCS から CSV ファイルをインポートする](/tidb-cloud/import-csv-files.md)
         -   [Amazon S3 または GCS から Apache Parquet ファイルをインポートする](/tidb-cloud/import-parquet-files.md)
     -   [TiDB からのデータのエクスポート](/tidb-cloud/export-data-from-tidb-cloud.md)
-    -   参照
+    -   リファレンス
         -   [Amazon S3 アクセスと GCS アクセスの設定](/tidb-cloud/config-s3-and-gcs-access.md)
         -   [データ インポートの命名規則](/tidb-cloud/naming-conventions-for-data-import.md)
+        -   [データをインポートするための CSV 構成](/tidb-cloud/csv-config-for-import-data.md)
         -   [Amazon S3 からのデータ インポート中のアクセス拒否エラーのトラブルシューティング](/tidb-cloud/troubleshoot-import-access-denied-error.md)
 -   ストリームデータ
     -   [チェンジフィードの概要](/tidb-cloud/changefeed-overview.md)
@@ -153,7 +154,7 @@
                 -   [パーティションのプルーニング](/partition-pruning.md)
                 -   [TopN とリミット プッシュ ダウン](/topn-limit-push-down.md)
                 -   [結合したテーブルの再配置](/join-reorder.md)
-            -   物理的最適化
+            -   物理的な最適化
                 -   [概要](/sql-physical-optimization.md)
                 -   [インデックスの選択](/choose-index.md)
                 -   [統計](/statistics.md)
@@ -201,10 +202,10 @@
         -   [復元リソースを使用](/tidb-cloud/terraform-use-restore-resource.md)
     -   [ヴェルセル](/tidb-cloud/integrate-tidbcloud-with-vercel.md)
     -   [ザピア](/tidb-cloud/integrate-tidbcloud-with-zapier.md)
--   参照
+-   リファレンス
     -   TiDBクラスタのアーキテクチャ
         -   [概要](/tidb-architecture.md)
-        -   [保管所](/tidb-storage.md)
+        -   [ストレージ](/tidb-storage.md)
         -   [コンピューティング](/tidb-computing.md)
         -   [スケジューリング](/tidb-scheduling.md)
     -   [TiDB Cloudクラスタの制限とクォータ](/tidb-cloud/limitations-and-quotas.md)

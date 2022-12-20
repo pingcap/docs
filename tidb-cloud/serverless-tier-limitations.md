@@ -9,7 +9,7 @@ summary: Learn about the limitations of TiDB Cloud Serverless Tier.
 
 このドキュメントでは、サーバーレス層の制限について説明します。
 
-サーバーレス層と専用層の間の機能のギャップを常に埋めています。ギャップ内でこれらの機能が必要な場合は、機能リクエストに[専用ティア](/tidb-cloud/select-cluster-tier.md#dedicated-tier)または[お問い合わせ](https://www.pingcap.com/contact-us/?from=en)を使用してください。
+サーバーレス層と専用層の間の機能のギャップを常に埋めています。ギャップでこれらの機能が必要な場合は、機能リクエストに[専用ティア](/tidb-cloud/select-cluster-tier.md#dedicated-tier)または[お問い合わせ](https://www.pingcap.com/contact-us/?from=en)を使用します。
 
 ## 一般的な制限 {#general-limitations}
 
@@ -17,7 +17,11 @@ summary: Learn about the limitations of TiDB Cloud Serverless Tier.
 -   各サーバーレス層クラスターには次の制限があります。
     -   ストレージ サイズは、OLTP ストレージの 5 GiB (論理サイズ) と OLAP ストレージの 5 GiB (論理サイズ) に制限されています。
     -   コンピューティング リソースは、1 つの vCPU と 1 GiB RAM に制限されています。
-    -   **注**: 今後数か月以内に、無料のスターター プランの提供を継続しながら、リソースの追加とパフォーマンスの向上のために使用量ベースの課金プランを提供する予定です。今後のリリースでは、無料のサーバーレス層の制限が変更される可能性があります。
+    -   **注**: 今後数か月以内に、無料のスターター プランの提供を維持しながら、追加のリソースとパフォーマンスの向上のために使用量ベースの課金プランを提供する予定です。今後のリリースでは、無料のサーバーレス層の制限が変更される可能性があります。
+
+## 取引 {#transaction}
+
+-   ベータ フェーズ中のサーバーレス ティアでは、1 つのトランザクションの合計サイズが 10 MB を超えないように設定されています。
 
 ## 繋がり {#connection}
 
