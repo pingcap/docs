@@ -20,7 +20,7 @@ The following is the CSV Configuration window when you use the Import Data servi
     * `,` for CSV (comma-separated values). As shown in the above screenshot, "1", "Michael", and "male" represent three fields.
     * `"\t"` for TSV (tab-separated values).
 
-- Default：`,`
+- Default: `,`
 
 ## Header
 
