@@ -8,6 +8,14 @@ aliases: ['/tidbcloud/beta/supported-tidb-versions','/tidbcloud/release-notes']
 
 This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-cloud/) in 2022.
 
+## December 20, 2022
+
+**General changes**
+
+- Add the label `project name` to the [Datadog](/tidb-cloud/monitor-datadog-integration.md) Dashboard as a filter to provide project information.
+
+    You can use the filter `project name` to quickly find the cluster you want.
+
 ## December 13, 2022
 
 **General changes**
