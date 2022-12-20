@@ -29,18 +29,20 @@ There are two ways to install your self-hosting n8n, choose whichever works for 
 
 1. Install [node.js](https://nodejs.org/en/download/) on your workspace.
 2. Download and start n8n by `npx`.
-   ```shell
-   npx n8n
-   ```
-   
+
+    ```shell
+    npx n8n
+    ```
+
 </div>
 <div label="Docker">
 
 1. Install [Docker](https://www.docker.com/products/docker-desktop) on your workspace.
 2. Download and start n8n by `docker`
-   ```shell
-   docker run -it --rm --name n8n -p 5678:5678 -v ~/.n8n:/home/node/.n8n n8nio/n8n
-   ```
+
+    ```shell
+    docker run -it --rm --name n8n -p 5678:5678 -v ~/.n8n:/home/node/.n8n n8nio/n8n
+    ```
 
 </div>
 </SimpleTab>
@@ -120,9 +122,11 @@ This trigger will enable your workflow every morning at 8 am.
 8. Enter `test` in the **Database** field.
 9. Enter your database password.
 10. Enter the following SQL in the ***SQL*** field:
-   ```   
-   CREATE TABLE IF NOT EXISTS hacker_news_briefing (creator VARCHAR (200), title TEXT,  link VARCHAR(200), pubdate VARCHAR(200), comments VARCHAR(200), content TEXT, guid VARCHAR (200), isodate VARCHAR(200));
-   ```
+
+    ```sql
+    CREATE TABLE IF NOT EXISTS hacker_news_briefing (creator VARCHAR (200), title TEXT,  link VARCHAR(200), pubdate VARCHAR(200), comments VARCHAR(200), content TEXT, guid VARCHAR (200), isodate VARCHAR(200));
+    ```
+
 11. Click on **Execute Node** to create the table.
 
 #### Get the Hacker News RSS
@@ -147,6 +151,7 @@ This trigger will enable your workflow every morning at 8 am.
 1. Click **+** to the right of the RSS Feed Read node.
 2. Search `code` and add it to the workspace.
 3. Copy the following code to the **JavaScript Code**.
+
 ```javascript
 let message = "";
 
@@ -191,7 +196,7 @@ return [{json: {response}}];
 
 > **Note:** 
 > 
-> It is very important to mouse over the Message field and select the Expression pattern.
+> It is very important to mouse hover the Message field and select the Expression pattern.
 
 ## Step 4: Run Your Workflow
 
