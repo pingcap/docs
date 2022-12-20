@@ -108,7 +108,7 @@ If you haven't got a TiDB Cloud Serverless Tier cluster, you can use this node t
 6. Choose `8am` in the **Trigger at Hour**.
 7. Set **Trigger at Minute** as `0`.
 
-This trigger will enable your workflow every morning at 8 am. 
+This trigger will enable your workflow every morning at 8 AM. 
 
 #### Create a table used to insert data
 
