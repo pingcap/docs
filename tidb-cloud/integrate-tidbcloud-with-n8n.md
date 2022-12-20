@@ -227,7 +227,7 @@ Different operations require different fields to be filled in. The following sho
 - **Project**: The TiDB Cloud project name. 
 - **Operation**: The operation of this node. Refer to [Support Operation](#support-operation).
 - **Cluster**: The TiDB Cloud cluster name. Enter one name for your new cluster.
-- **Region**: The region name. Choose a region where your cluster will be deployed. Usually, choose the region closest to your product cluster.
+- **Region**: The region name. Choose a region where your cluster will be deployed. Usually, choose the region closest to your application deployment.
 - **Password**: The root password. Set a password for your new cluster.
 
 </div>
@@ -287,6 +287,6 @@ Different operations require different fields to be filled in. The following sho
 
 ### Limitations 
  
-1. Normally only one SQL statement is allowed in the **Execute SQL** operation. If you want to execute more than one statement in a single operation, you need to manually enable [`tidb_multi_statement_mode`](https://docs.pingcap.com/tidb/dev/system-variables).
+1. Normally only one SQL statement is allowed in the **Execute SQL** operation. If you want to execute more than one statement in a single operation, you need to manually enable [`tidb_multi_statement_mode`](https://docs.pingcap.com/tidb/dev/system-variables#tidb_multi_statement_mode-new-in-v4011).
 2. The **Delete** and **Update** operation need to specify one field as a key. For example, the `Delete Key` is set to `id`, which is equivalent to executing `delete from table where id = ${item.id}`. Currently, it only supports specifying one key.
 3. The **Insert** and **Update** operation need to specify the comma-separated list in the **Columns** field, and the field name must be the same as the input item's property.
