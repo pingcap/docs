@@ -34,7 +34,7 @@ Serverless Tier clusters allow all IP addresses for connection by default, so yo
 
 ## Connect via manually setting environment variables
 
-To use this method, make sure that you have set the **Allow Access from Anywhere** traffic filter in the [**Security Settings**](/tidb-cloud/configure-security-settings.md) dialog and save the password.
+To use this method, make sure that your TiDB Cloud cluster [allows all IP addresses access](#all-ip-addresses-allowed-for-traffic-filter-in-tidb-cloud).
 
 1. Follow the steps in [Connect to a TiDB Cloud cluster via standard connection](/tidb-cloud/connect-to-tidb-cluster.md#connect-via-standard-connection) to get the connection information of your TiDB cluster.
 2. Go to your **Netlify dashboard** > **Netlify project** > **Site settings** > **Environment Variables**, and then [Update variables](https://docs.netlify.com/environment-variables/get-started/#update-variables-with-the-netlify-ui) according to the connection information of your TiDB cluster.
