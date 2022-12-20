@@ -248,11 +248,15 @@ Compared with the previous LTS 6.1.0, 6.5.0 not only includes new features, impr
 
     The storage sink supports changed logs in the canal-json and CSV formats. Noticeably, the latency of replicating changed logs from TiCDC to storage can be as short as xx. For more information, see [User document](/ticdc/ticdc-sink-to-cloud-storage.md).
 
-* TiCDC supports bidirectional replication across multiple clusters  @[asddongmen](https://github.com/asddongmen) **tw@shichun-0415**
+* TiCDC supports bidirectional replication across multiple clusters @[asddongmen](https://github.com/asddongmen) **tw@shichun-0415**
 
     TiCDC supports bidirectional replication across multiple TiDB clusters. If you need a multi-master TiDB solution for your application, especially a multi-master solution across multiple regions, you can use this feature to build one. By configuring the `bdr-mode = true` parameter for the TiCDC changefeeds from each TiDB cluster to the other TiDB clusters, you can achieve bidirectional data replication across multiple TiDB clusters.
 
-    For more information, refer to [user document](/ticdc/ticdc-bidirectional-replication.md).
+    For more information, see [user document](/ticdc/ticdc-bidirectional-replication.md).
+
+* TiCDC supports updating TLS online [#7908](https://github.com/pingcap/tiflow/issues/7908) @[CharlesCheung96](https://github.com/CharlesCheung96) **tw@shichun-0415**
+
+    TiCDC supports online updates of TLS certificates. To keep data secure, you will set an expiration policy for the certificate used by the system. After the expiration period, the system uses a new certificate. TiCDC v6.5.0 supports online updates of TLS certificates. Without interrupting the replication tasks, TiCDC can automatically detect and update the certificate, without the need for manual intervention.
 
 * TiCDC performance improves significantly **tw@shichun-0415
 
