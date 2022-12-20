@@ -100,8 +100,6 @@ To verify that this setting already takes effect, you can do:
 - Go to TiDB monitoring dashboard and view the request command type through **Query Summary** > **CPS By Instance**.
 - If the number of `COM_STMT_EXECUTE` in the request is far more than the number of `COM_STMT_PREPARE`, it means this setting already takes effect.
 
-![QPS By Instance](/media/java-practice-2.png)
-
 In addition, configuring `useConfigs=maxPerformance` will configure multiple parameters at the same time, including `cachePrepStmts=true`.
 
 ##### `prepStmtCacheSqlLimit`
