@@ -24,8 +24,6 @@ You are expected to have an account and a site in Netlify. If you do not have an
 
 You are expected to have an account and a cluster in TiDB Cloud. If you do not have any, refer to [Create a TiDB cluster](/tidb-cloud/create-tidb-cluster.md).
 
-To integrate with Netlify, you are expected to have the "Owner" access to your organization or the "Member" access to the target project in TiDB Cloud. For more information, see [Configure member roles](/tidb-cloud/manage-user-access.md#configure-member-roles).
-
 One TiDB Cloud cluster can connect to multiple Netlify sites.
 
 ### All IP addresses allowed for traffic filter in TiDB Cloud
