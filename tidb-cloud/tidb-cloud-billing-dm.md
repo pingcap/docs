@@ -9,7 +9,7 @@ This document describes the billing for Data Migration in TiDB Cloud.
 
 ## Specifications for Data Migration
 
-All the following performance values are maximum performances. Note that the performance values are for reference only and will vary in different scenarios.
+All the following performance values are maximum performances. Note that the performance values are for reference only and might vary in different scenarios.
 
 The following table lists the specifications for Data Migration:
 
