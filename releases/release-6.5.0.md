@@ -126,6 +126,17 @@ Compared with the previous LTS 6.1.0, 6.5.0 not only includes new features, impr
 
   For more information, see [Deploy TiDB Dashboard independently in TiDB Operator](https://docs.pingcap.com/tidb-in-kubernetes/dev/get-started#deploy-tidb-dashboard-independently).
 
+* Performance Overview dashboard adds TiFlash and CDC (Change Data Capture) panels
+
+    Since v6.1.0, TiDB has introduced the Performance Overview dashboard in Grafana, which provides a system-level entry for overall performance diagnosis of TiDB, TiKV, and PD. In v6.5.0, the Performance Overview dashboard adds TiFlash and CDC (Change Data Capture) panels. With these panels, starting from v6.5.0, you can use the Performance Overview dashboard to analyze the performance of all components in a TiDB cluster.
+
+    The TiFlash and CDC panels reorganize with TiFlash and TiCDC monitoring related information, which can help you grealty improve the efficiency of performance analysis and troubleshooting for TiFlash and TiCDC.
+
+    - On the [TiFlash panels](/grafana-performance-overview-dashboard.md#tiflash), you can easily view the request types, latency analysis, and resource usage overview of your TiFlash cluster.
+    - On the [CDC panels](/grafana-performance-overview-dashboard.md#cdc), you can easily view the health, synchronization latency, data flow, and downstream write latency of your TiCDC cluster.
+
+  For more information, see [user document](performance-tuning-method.md/).
+
 ### Performance
 
 * [INDEX MERGE](/glossary.md#index-merge) supports expressions connected by `AND` [#39333](https://github.com/pingcap/tidb/issues/39333) @[guo-shaoge](https://github.com/guo-shaoge) @[time-and-fate](https://github.com/time-and-fate) @[hailanwhu](https://github.com/hailanwhu) **tw@TomShawn**
