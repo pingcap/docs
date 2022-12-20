@@ -41,7 +41,7 @@ The following table lists the price of TiDB Cloud for each Data Migration RCU:
 
 The Data Migration job is in the same region as the target TiDB Cluster.
 
-Note that if the source database and the TiDB cluster are not in the same region or not in the same availability zone (AZ), two additional traffic charges will be incured: cross-region and cross-AZ traffic charges.
+Note that if the source database and the TiDB cluster are not in the same region or not in the same availability zone (AZ), two additional traffic charges will be incurred: cross-region and cross-AZ traffic charges.
 
 - If the source database and the TiDB cluster are not in the same region, cross-region traffic charges are incurred when the Data Migration job collecting data from the source database. In addition, if the Data Migration job and the TiDB cluster are not in the same AZ, cross-AZ traffic charges are also incurred when the Data Migration job writes data to the target TiDB cluster.
 - If the source database and the TiDB cluster are in the same region but in different AZs, cross-AZ traffic charges are incurred when the Data Migration job collects data from the source database. In addition, cross-AZ traffic charges are incurred when the Data Migration job writes data to the target TiDB cluster.
