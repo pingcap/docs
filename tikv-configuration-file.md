@@ -1605,7 +1605,7 @@ Configuration items related to TiDB Lightning import and BR restore.
 
 > **Note:**
 >
-> In versions earlier than v6.5.0, point-in-time recovery (PITR) only supports restoring data by downloading backup files to a local directory. Starting from v6.5.0, PITR supports directly accessing backup log files and restoring data in memory. This configuration item specifies the memory usage ratio for PITR in TiKV.
+> In versions earlier than v6.5.0, point-in-time recovery (PITR) only supports restoring data by downloading backup files to a local directory. Starting from v6.5.0, PITR supports directly accessing backup log files in memory and restoring data. This configuration item specifies the memory usage ratio for PITR in TiKV.
 
 + The ratio of memory available for PITR to the total memory of TiKV.
 + Value range: [0.0, 0.5]
