@@ -82,21 +82,6 @@ As shown in the preceding architecture diagram, TiCDC supports replicating data 
 >
 > Since v4.0.8, TiCDC supports replicating tables **without a valid index** by modifying the task configuration. However, this compromises the guarantee of data consistency to some extent. For more details, see [Replicate tables without a valid index](/ticdc/ticdc-manage-changefeed.md#replicate-tables-without-a-valid-index).
 
-## Restrictions
-
-There are some restrictions when using TiCDC.
-
-### Requirements for valid index
-
-TiCDC only replicates the table that has at least one **valid index**. A **valid index** is defined as follows:
-
-- The primary key (`PRIMARY KEY`) is a valid index.
-- The unique index (`UNIQUE INDEX`) that meets the following conditions at the same time is a valid index:
-    - Every column of the index is explicitly defined as non-nullable (`NOT NULL`).
-    - The index does not have the virtual generated column (`VIRTUAL GENERATED COLUMNS`).
-
-Since v4.0.8, TiCDC supports replicating tables **without a valid index** by modifying the task configuration. However, this compromises the guarantee of data consistency to some extent. For more details, see [Replicate tables without a valid index](/ticdc/ticdc-manage-changefeed.md#replicate-tables-without-a-valid-index).
-
 ### Unsupported scenarios
 
 Currently, the following scenarios are not supported:
