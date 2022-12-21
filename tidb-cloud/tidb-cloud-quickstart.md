@@ -44,7 +44,7 @@ On the **Clusters** page, click **Playground** to run queries instantly on TiDB 
 
 > **Tip:**
 >
-> If the preloaded sample data in Playground is deleted, click **Load Sample Data** in the upper-right corner to reload the sample data to continue trying Playground. 
+> If the preloaded sample data in Playground is deleted, click **Load Sample Data** in the upper-right corner to reload the sample data to continue trying Playground.  
 
 ## Step 3. Load sample data
 
