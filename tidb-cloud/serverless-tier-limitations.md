@@ -7,7 +7,7 @@ summary: Learn about the limitations of TiDB Cloud Serverless Tier.
 
 <!-- markdownlint-disable MD026 -->
 
-This document describes the limitations of Serverless Tier. 
+This document describes the limitations of Serverless Tier.
 
 We are constantly filling in the feature gaps between Serverless Tier and Dedicated Tier. If you require these features or capabilities in the gap, use [Dedicated Tier](/tidb-cloud/select-cluster-tier.md#dedicated-tier) or [contact us](https://www.pingcap.com/contact-us/?from=en) for a feature request.
 
@@ -25,7 +25,7 @@ We are constantly filling in the feature gaps between Serverless Tier and Dedica
 
 ## Connection
 
-- Only [Standard Connection](/tidb-cloud/connect-to-tidb-cluster.md#connect-via-standard-connection) can be used. You cannot use [Private Endpoint](/tidb-cloud/set-up-private-endpoint-connections.md) or [VPC Peering](/tidb-cloud/set-up-vpc-peering-connections.md) to connect to Serverless Tier clusters. 
+- Only [Standard Connection](/tidb-cloud/connect-via-standard-connection.md) can be used. You cannot use [Private Endpoint](/tidb-cloud/set-up-private-endpoint-connections.md) or [VPC Peering](/tidb-cloud/set-up-vpc-peering-connections.md) to connect to Serverless Tier clusters. 
 - No "IP Access List" support.
 
 ## Backup and Restore
