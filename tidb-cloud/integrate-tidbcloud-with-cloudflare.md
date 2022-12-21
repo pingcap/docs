@@ -42,7 +42,6 @@ wrangler init prisma-tidb-cloudflare
 
 In your terminal, you will be asked a series of questions related to your project. Choose the default values for all of them.
 
-
 ## Step 2: Set up Prisma
 
 Enter your project:
