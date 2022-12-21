@@ -20,9 +20,9 @@ The following table lists the specifications and corresponding performances for 
 | 8 RCUs  | 40 MiB/s | 40,000 rows/s|
 | 16 RCUs | 45 MiB/s | 80,000 rows/s|
 
-Note that all the performance values in this table are maximum performances. The performance values are for reference only and might vary in different scenarios.
+Note that all the performance values in this table are maximum performances. It is assumed that there are no performance, network bandwidth, or other bottlenecks in the upstream and downstream databases. The performance values are for reference only and might vary in different scenarios.
 
-TiDB Cloud measures full data migration in MiB/s. This unit indicates the amount of data (in MiB) that is migrated per second by the Data Migration job.
+The Data Migration job measures full data migration performance in MiB/s. This unit indicates the amount of data (in MiB) that is migrated per second by the Data Migration job.
 
 The Data Migration job measures incremental data migration performance in rows/s. This unit indicates the number of rows that are migrated to the target database per second. For example, if the upstream database executes `INSERT`, `UPDATE`, or `DELETE` statements of 10,000 rows in about 1 second, the Data Migration job of the corresponding specification can replicate the 10,000 rows to the downstream in about 1 second.
 
