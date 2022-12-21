@@ -43,6 +43,10 @@ To connect to a Serverless Tier cluster via standard connection, perform the fol
 
 <div label="Dedicated Tier">
 
+> **Note:**
+>
+> If [**Public Access**](/tidb-cloud/configure-security-settings.md) is disabled, you cannot connect to the cluster via standard connection.
+
 To connect to a Dedicated Tier cluster via standard connection, perform the following steps:
 
 1. Navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page and choose your target project on the top of the left navigation bar.

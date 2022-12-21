@@ -11,11 +11,13 @@ If you do not configure the root password or allowed IP addresses at that time, 
 
 1. In the TiDB Cloud console, navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page and choose your target project on the top of the left navigation bar.
 2. Locate your cluster, and click **Security Settings** in the upper-right corner of the cluster area. The **Security Settings** dialog is displayed.
-3. In the dialog, configure the root password and allowed IP addresses.
+3. Configure the root password.
+4. Configure the allowed IP addresses to connect to your cluster.
 
-    To allow your cluster to be accessible by any IP addresses, click **Allow Access from Anywhere**.
+    * For Dedicated Tier clusters, you can enable or disable public access to the cluster by clicking the **Public Access** toggle.
+    * To allow your cluster to be accessible by any IP addresses, click **Allow Access from Anywhere**.
 
-4. Click **Apply**.
+5. Click **Submit**.
 
 > **Tip:**
 >
