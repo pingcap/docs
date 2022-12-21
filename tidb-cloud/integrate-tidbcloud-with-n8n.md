@@ -132,12 +132,12 @@ This trigger will execute your workflow every morning at 8 AM.
 #### Get the Hacker News RSS
 
 1. Click **+** to the right of the TiDB Cloud node.
-2. Search `rss feed read` and add it to the workspace.
+2. Search `RSS Read` and add it to the workspace.
 3. Enter `https://hnrss.org/frontpage` to the **URL**.
 
 #### Insert data to TiDB
 
-1. Click **+** to the right of the RSS Feed Read node.
+1. Click **+** to the right of the RSS Read node.
 2. Search `TiDB Cloud` and add it to the workspace.
 3. Select the credentials that you entered in the previous node.
 4. Choose your project from the **Project** list.
