@@ -298,6 +298,7 @@ Compared with the previous LTS 6.1.0, 6.5.0 not only includes new features, impr
 | Variable name | Change type | Description |
 |--------|------------------------------|------|
 |[`tidb_enable_amend_pessimistic_txn`](/system-variables.md#tidb_enable_amend_pessimistic_txn-new-in-v407)| Deprecated | Starting from v6.5.0, this variable is deprecated, and TiDB uses the [Metadata Lock](/metadata-lock.md) feature by default to avoid the `Information schema is changed` error. |
+| [`tidb_enable_outer_join_reorder`](/system-variables.md#tidb_enable_outer_join_reorder-new-in-v610) | Modified | Changes the default value from `OFF` to `ON`, meaning that the support of Outer Join for the [Join Reorder](/join-reorder.md) algorithm is enabled by default. |
 | [`tidb_cost_model_version`](/system-variables.md#tidb_cost_model_version-introduced-new-in-v620) | Modified | Changes the default value from `1` to `2`, meaning that Cost Model Version 2 is used for index selection and operator selection by default.  |
 | [`tidb_enable_metadata_lock`](/system-variables.md#tidb_enable_metadata_lock-new-in-v630) | Modified | Changes the default value from `OFF` to `ON`, meaning that the metadata lock feature is enabled by default. |
 | [`tidb_enable_tiflash_read_for_write_stmt`](/system-variables.md#tidb_enable_tiflash_read_for_write_stmt-new-in-v630) | Modified | Takes effect starting from v6.5.0. It controls whether read operations in SQL statements containing `INSERT`, `DELETE`, and `UPDATE` can be pushed down to TiFlash. The default value is `OFF`. |
@@ -354,6 +355,7 @@ Starting from v6.5.0, the [`AMEND TRANSACTION`](/system-variables.md#tidb_enable
 + TiDB
 
     - For `BIT` and `CHAR` columns, make the result of `INFORMATION_SCHEMA.COLUMNS` consistent with MySQL [#25472](https://github.com/pingcap/tidb/issues/25472) @[hawkingrei](https://github.com/hawkingrei)
+    - Optimize the TiDB probing mechanism for TiFlash nodes in the TiFlash MPP mode to mitigate the performance impact when nodes are abnormal [#39686](https://github.com/pingcap/tidb/issues/39686) @[hackersean](https://github.com/hackersean)
 
 + TiKV
 
