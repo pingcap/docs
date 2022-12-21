@@ -130,12 +130,12 @@ Compared with the previous LTS 6.1.0, 6.5.0 not only includes new features, impr
 
     Since v6.1.0, TiDB has introduced the Performance Overview dashboard in Grafana, which provides a system-level entry for overall performance diagnosis of TiDB, TiKV, and PD. In v6.5.0, the Performance Overview dashboard adds TiFlash and CDC panels. With these panels, starting from v6.5.0, you can use the Performance Overview dashboard to analyze the performance of all components in a TiDB cluster.
 
-    The TiFlash and CDC panels reorganize with TiFlash and TiCDC monitoring information, which can help you greatly improve the efficiency of analyzing and troubleshooting TiFlash and TiCDC performance issues.
+    The TiFlash and CDC panels reorganize the TiFlash and TiCDC monitoring information, which can help you greatly improve the efficiency of analyzing and troubleshooting TiFlash and TiCDC performance issues.
 
     - On the [TiFlash panels](/grafana-performance-overview-dashboard.md#tiflash), you can easily view the request types, latency analysis, and resource usage overview of your TiFlash cluster.
-    - On the [CDC panels](/grafana-performance-overview-dashboard.md#cdc), you can easily view the health, synchronization latency, data flow, and downstream write latency of your TiCDC cluster.
+    - On the [CDC panels](/grafana-performance-overview-dashboard.md#cdc), you can easily view the health, replication latency, data flow, and downstream write latency of your TiCDC cluster.
 
-  For more information, see [user document](performance-tuning-method.md).
+  For more information, see [user document](/performance-tuning-method.md).
 
 ### Performance
 
