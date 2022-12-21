@@ -168,7 +168,7 @@ For a Dedicated Tier cluster, the steps to connect your cluster are simplified a
 
 For a Serverless Tier cluster, the steps to connect your cluster are simplified as follows: 
 
-1. Set a database user and login credentials. 
+1. Set a database user and login credential. 
 2. Choose a SQL client, execute an auto-generated command displayed on the TiDB Cloud UI, and then connect to your cluster easily.
 
 For more information, see [Connect to Your TiDB Cluster](/tidb-cloud/connect-to-tidb-cluster.md).
