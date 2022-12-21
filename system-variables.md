@@ -4009,7 +4009,7 @@ For details, see [Identify Slow Queries](/identify-slow-queries.md).
 - Persists to cluster: Yes
 - Default value: `ON`
 - Type: Boolean
-- This variable is used to control whether the TTL job is enabled. If it is set to `OFF`, all tables with TTL attributes automatically stops cleaning up expired data.
+- This variable is used to control whether TTL jobs are enabled. If it is set to `OFF`, all tables with TTL attributes automatically stop cleaning up expired data.
 
 ### tidb_ttl_scan_batch_size <span class="version-mark">New in v6.5.0</span>
 
@@ -4045,7 +4045,7 @@ For details, see [Identify Slow Queries](/identify-slow-queries.md).
 - Persists to cluster: Yes
 - Default value: `1h0m0s`
 - Range: `[10m0s, 8760h0m0s]`
-- This variable is used to control the scheduling interval of the TTL job in the background. For example, if the current value is set to `1h0m0s`, each table with TTL attributes will clean up expired data once every hour.
+- This variable is used to control the scheduling interval of TTL jobs in the background. For example, if the current value is set to `1h0m0s`, each table with TTL attributes cleans up expired data once every hour.
 
 ### tidb_ttl_job_schedule_window_start_time <span class="version-mark">New in v6.5.0</span>
 
@@ -4057,7 +4057,7 @@ For details, see [Identify Slow Queries](/identify-slow-queries.md).
 - Type: Time
 - Persists to cluster: Yes
 - Default value: `00:00 +0000`
-- This variable is used to control the start time of the scheduling window of the TTL job in the background. When you modify the value of this variable, be cautious that a small window might cause the cleanup of expired data to fail.
+- This variable is used to control the start time of the scheduling window of TTL jobs in the background. When you modify the value of this variable, be cautious that a small window might cause the cleanup of expired data to fail.
 
 ### tidb_ttl_job_schedule_window_end_time <span class="version-mark">New in v6.5.0</span>
 
@@ -4069,7 +4069,7 @@ For details, see [Identify Slow Queries](/identify-slow-queries.md).
 - Type: Time
 - Persists to cluster: Yes
 - Default value: `23:59 +0000`
-- This variable is used to control the end time of the scheduling window of the TTL job in the background. When you modify the value of this variable, be cautious that a small window might cause the cleanup of expired data to fail.
+- This variable is used to control the end time of the scheduling window of TTL jobs in the background. When you modify the value of this variable, be cautious that a small window might cause the cleanup of expired data to fail.
 
 ### tidb_txn_assertion_level <span class="version-mark">New in v6.0.0</span>
 
