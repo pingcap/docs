@@ -150,7 +150,8 @@ This trigger will execute your workflow every morning at 8 AM.
 
 1. Click **+** to the right of the RSS Feed Read node.
 2. Search `code` and add it to the workspace.
-3. Copy the following code to the **JavaScript Code**.
+3. Choose `Run Once for All Items` mode.
+4. Copy the following code to the **JavaScript** field.
 
 ```javascript
 let message = "";
