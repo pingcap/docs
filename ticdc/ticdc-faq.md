@@ -104,7 +104,7 @@ If you use the `cdc cli changefeed create` command without specifying the `-conf
 
 - Replicates all tables except system tables
 - Enables the Old Value feature
-- Skips replicating tables that do not contain [valid indexes](/ticdc/ticdc-overview.md#best-practices)
+- Only replicates tables that contain [valid indexes](/ticdc/ticdc-overview.md#best-practices)
 
 ## Does TiCDC support outputting data changes in the Canal format?
 
@@ -267,20 +267,20 @@ When a changefeed is resumed, TiCDC needs to scan the historical versions of dat
 
 ## How should I deploy TiCDC to replicate data between two TiDB cluster located in different regions?
 
-It is recommended that you deploy TiCDC in the downstream TiDB cluster. If the network latency between the upstream and downstream is large, for example, more than 100 ms, the latency produced when TiCDC executes SQL statements to the downstream might increase dramatically due to issues of the MySQL transmission protocol. This results in a decrease in system throughput. However, deploying TiCDC in the downstream can greatly ease this problem.
+It is recommended that you deploy TiCDC in the downstream TiDB cluster. If the network latency between the upstream and downstream is high, for example, more than 100 ms, the latency produced when TiCDC executes SQL statements to the downstream might increase dramatically due to the MySQL transmission protocol issues. This results in a decrease in system throughput. However, deploying TiCDC in the downstream can greatly ease this problem.
 
 ## What is the order of executing DML and DDL statements?
 
-The execution order is: DML -> DDL -> DML. To ensure that the table structure is correct when DML events are executed downstream during data replication, it is necessary to coordinate the execution order of DDL and DML statements. Currently, TiCDC adopts a simple approach: It replicates all DML statements before the DDL ts to downstream first, and then replicates DDL statements.
+The execution order is: DML -> DDL -> DML. To ensure that the table schema is correct when DML events are executed downstream during data replication, it is necessary to coordinate the execution order of DDL and DML statements. Currently, TiCDC adopts a simple approach: it replicates all DML statements before the DDL ts to downstream first, and then replicates DDL statements.
 
-## How should I check whether the upstream and downstream data are consistent?
+## How should I check whether the upstream and downstream data is consistent?
 
-If the downstream is a TiDB or MySQL cluster, it is recommended that you compare the data by using [sync diff inspector](/sync-diff-inspector/sync-diff-inspector-overview.md).
+If the downstream is a TiDB cluster or MySQL instance, it is recommended that you compare the data using [sync-diff-inspector](/sync-diff-inspector/sync-diff-inspector-overview.md).
 
 ## Replication of a single table can only be run on a single TiCDC node. Will it be possible to use multiple TiCDC nodes to replicate data of multiple tables?
 
-This feature is under development. In the future, TiCDC can replicate data change logs by TiKV Region, which means scalable processing capability.
+This feature is currently not supported, which might be supported in a future release. By then, TiCDC might replicate data change logs by TiKV Region, which means scalable processing capability.
 
 ## Does TiCDC replication get stuck if the upstream has long-running uncommitted transactions?
 
-TiDB has a transaction timeout mechanism. When a transaction runs for a period longer than [`max-txn-ttl`](/tidb-configuration-file.md#max-txn-ttl), TiDB forcibly rolls it back. TiCDC waits for the transaction to be committed before proceeding the replication. That's why there is replication delay.
+TiDB has a transaction timeout mechanism. When a transaction runs for a period longer than [`max-txn-ttl`](/tidb-configuration-file.md#max-txn-ttl), TiDB forcibly rolls it back. TiCDC waits for the transaction to be committed before proceeding with the replication, which causes replication delay.
