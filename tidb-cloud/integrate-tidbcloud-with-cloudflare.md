@@ -9,7 +9,8 @@ However, you may find it is hard to connect to TiDB Cloud from Cloudflare Worker
 
 Fortunately, Prisma has your back with the [Data Proxy](https://www.prisma.io/docs/data-platform/data-proxy). It can build a layer that sits between a TCP connection and an HTTP(S) connection. This allows you to use Cloudflare Workers to process and manipulate the data being transmitted over a TCP connection.
 
-Through this article, you will learn：
+Through this article, you will learn:
+
 1. How to establish a connection to the TiDB Cloud and then proxying all database requests through the HTTP connection by prisma data proxy.
 2. How to deploy serverless function which will access and manipulate data stored in your TiDB Cloud to Cloudflare Workers.
 
@@ -108,7 +109,7 @@ With Cloudflare Workers, you can't directly access your database because there i
 
 4. Fill in the **Connection string** with this pattern `mysql://USER:PASSWORD@HOST:PORT/DATABASE?sslaccept=strict`. You can find the connection information in your [TiDB Cloud dashboard](https://tidbcloud.com/console/clusters).
 5. Under **Location**, select a Data Proxy location that is geographically close to your TiDB Cloud cluster location.
-6. You need not enable **Static IPs** if you use serverless tier which is accessible from any IP address.
+6. You need not enable **Static IPs** because TiDB Cloud Serverless Tier is accessible from any IP address.
 
    ![img.png](/media/tidb-cloud/cloudflare/cloudflare-env.png)
 
@@ -196,7 +197,7 @@ npx wrangler publish
 
 ## Step 9: Try your Cloudflare Workers
 
-Go to [cloudflare dashboard](https://dash.cloudflare.com/), and find your worker. You can find the URL of your worker in the overview page.
+Go to [cloudflare dashboard](https://dash.cloudflare.com) to find your worker. You can find the URL of your worker in the overview page.
 
 Visit the URL with your table name: `https://your-worker-url/?table={table_name}`, you will get the result from the corresponding TiDB table.
 
@@ -211,11 +212,8 @@ If you create a new table and want to query it. You need to:
 3. Generate the Prisma Client again. `npx prisma generate --data-proxy`.
 4. Publish the cloudflare worker again. `npx wrangler publish`.
 
-
 # Summary
 
 This article shows you how to use Prisma Data Proxy as a bridge to connect TiDB Cloud and Cloudflare Workers.
 
 If you want to connect a locally built TiDB to Cloudflare Workers, you can try [worker-tidb](https://github.com/shiyuhang0/worker-tidb) which use Cloudflare tunnels as a proxy. But it is not recommended for production use.
-
-
