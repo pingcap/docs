@@ -138,7 +138,7 @@ All connections to the cluster over the internet use TLS 1.2 or 1.3.
 
 ### Can I run TiDB Cloud in my VPC?
 
-No. TiDB Cloud is Database-as-a-Service (DBaaS) and runs only on the TiDB Cloud VPC. As a cloud computing managed service, TiDB Cloud provides access to a database without requiring the setup of physical hardware and the installation of software.
+No. TiDB Cloud is Database-as-a-Service (DBaaS) and runs only in the TiDB Cloud VPC. As a cloud computing managed service, TiDB Cloud provides access to a database without requiring the setup of physical hardware and the installation of software.
 
 ### Is my TiDB cluster secure?
 
