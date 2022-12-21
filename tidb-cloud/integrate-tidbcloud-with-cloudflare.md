@@ -18,8 +18,9 @@ This article will show how to deploy Cloudflare Workers with TiDB Cloud and Pris
 Before you try the steps in this article, you need to prepare the following things: 
 
 - Free TiDB Cloud account and a Serverless Tier on TiDB Cloud, See [TiDB Cloud Quick Start](https://docs.pingcap.com/tidbcloud/tidb-cloud-quickstart#step-1-create-a-tidb-cluster) for more details.
-- Free Cloudflare Workers account
-- Free GitHub account
+- Free [Cloudflare Workers account](https://dash.cloudflare.com/login)
+- Free [Prisma Data Platform account](https://cloud.prisma.io/).
+- Free [GitHub account](https://github.com/login)
 - Node.js & NPM installed
 - Install dependencies with `npm install -D prisma typescript wrangler`
 
@@ -55,7 +56,7 @@ npx prisma init
 
 This creates a Prisma schema in prisma/schema.prisma.
 
-Inside prisma/schema.prisma, add the schema according to your table in TiDB. Assume that you have `table1` and `table1` in TiDB, you can add the following schema:
+Inside prisma/schema.prisma, add the schema according to your table in TiDB. Assume that you have `table1` and `table2` in TiDB, you can add the following schema:
 
 ```
 generator client {
@@ -97,7 +98,7 @@ git push -u origin main
 
 With Cloudflare Workers, you can't directly access your database because there is no TCP support. Fortunately, You can use Prisma Data Proxy as described above.
 
-1. To get started, sign up for a free [Prisma Data Platform account](https://cloud.prisma.io/).
+1. To get started, sign in the [Prisma Data Platform](https://cloud.prisma.io/).
 2. Click **New Project** and then select **Import a Prisma repository**.
 3. Fill in the repository and project details, and click **Next**.
 
