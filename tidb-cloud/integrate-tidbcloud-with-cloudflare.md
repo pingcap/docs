@@ -5,7 +5,7 @@ summary: Learn how deploy Cloudflare Workers with TiDB Cloud.
 
 [Cloudflare Workers](https://workers.cloudflare.com/) is a platform that allows you to run code in response to specific events, such as HTTP requests or changes to a database. Cloudflare Workers is easy to use and can be used to build a variety of applications, including custom APIs, serverless functions, and microservices. It is particularly useful for applications that require low-latency performance or need to scale quickly.
 
-However, you may find it is hard to connect to TiDB Cloud from Cloudflare Workers. Because Cloudflare Workers runs on V8 engine which lakes the support fot TCP protocol.
+However, you may find it is hard to connect to TiDB Cloud from Cloudflare Workers. Because Cloudflare Workers runs on V8 engine which can not make direct TCP connection
 
 Fortunately, Prisma has your back with the [Data Proxy](https://www.prisma.io/docs/data-platform/data-proxy). It can help us to use Cloudflare Workers to process and manipulate the data being transmitted over a TCP connection.
 
