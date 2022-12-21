@@ -17,7 +17,7 @@ summary: Learn about the limitations of TiDB Cloud Serverless Tier.
 -   各サーバーレス層クラスターには次の制限があります。
     -   ストレージ サイズは、OLTP ストレージの 5 GiB (論理サイズ) と OLAP ストレージの 5 GiB (論理サイズ) に制限されています。
     -   コンピューティング リソースは、1 つの vCPU と 1 GiB RAM に制限されています。
-    -   **注**: 今後数か月以内に、無料のスターター プランの提供を維持しながら、追加のリソースとパフォーマンスの向上のために使用量ベースの課金プランを提供する予定です。今後のリリースでは、無料のサーバーレス層の制限が変更される可能性があります。
+    -   **注**: 今後数か月以内に、無料のスターター プランの提供を継続しながら、リソースの追加とパフォーマンスの向上のために使用量ベースの課金プランを提供する予定です。今後のリリースでは、無料のサーバーレス層の制限が変更される可能性があります。
 
 ## 取引 {#transaction}
 
@@ -25,7 +25,7 @@ summary: Learn about the limitations of TiDB Cloud Serverless Tier.
 
 ## 繋がり {#connection}
 
--   使用できるのは[標準接続](/tidb-cloud/connect-to-tidb-cluster.md#connect-via-standard-connection)だけです。 [プライベート エンドポイント](/tidb-cloud/set-up-private-endpoint-connections.md)または[VPC ピアリング](/tidb-cloud/set-up-vpc-peering-connections.md)を使用して Serverless Tier クラスターに接続することはできません。
+-   使用できるのは[標準接続](/tidb-cloud/connect-via-standard-connection.md)だけです。 [プライベート エンドポイント](/tidb-cloud/set-up-private-endpoint-connections.md)または[VPC ピアリング](/tidb-cloud/set-up-vpc-peering-connections.md)を使用して Serverless Tier クラスターに接続することはできません。
 -   「IP アクセス リスト」はサポートされていません。
 
 ## バックアップと復元 {#backup-and-restore}

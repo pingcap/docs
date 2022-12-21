@@ -81,10 +81,11 @@
         -   [TiDB Cloudパフォーマンス リファレンス](/tidb-cloud/tidb-cloud-performance-reference.md)
     -   [TiDBクラスタを作成する](/tidb-cloud/create-tidb-cluster.md)
     -   TiDBクラスタに接続する
-        -   [SQL クライアント経由で接続する](/tidb-cloud/connect-to-tidb-cluster.md)
-        -   [SQL シェル経由で接続](/tidb-cloud/connect-to-tidb-cluster.md#connect-via-sql-shell)
-    -   [プライベート エンドポイント接続のセットアップ](/tidb-cloud/set-up-private-endpoint-connections.md)
-    -   [VPC ピアリング接続の設定](/tidb-cloud/set-up-vpc-peering-connections.md)
+        -   [接続方法の概要](/tidb-cloud/connect-to-tidb-cluster.md)
+        -   [標準接続で接続する](/tidb-cloud/connect-via-standard-connection.md)
+        -   [プライベート エンドポイント経由で接続する](/tidb-cloud/set-up-private-endpoint-connections.md)
+        -   [VPC ピアリング経由で接続](/tidb-cloud/set-up-vpc-peering-connections.md)
+        -   [SQL シェル経由で接続](/tidb-cloud/connect-via-sql-shell.md)
     -   TiFlash で HTAPクラスタを使用する
         -   [TiFlash の概要](/tiflash/tiflash-overview.md)
         -   [TiFlash レプリカの作成](/tiflash/create-tiflash-replicas.md)

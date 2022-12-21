@@ -46,7 +46,7 @@ airbyte-server      | --------------------------------------
 
 1.  サイドバーの [**ソース**] または [<strong>宛先]</strong>をクリックし、TiDB タイプを選択して新しい TiDB コネクタを作成します。
 
-2.  次のパラメータを入力します。接続情報を取得するには、 [標準接続で接続](/tidb-cloud/connect-to-tidb-cluster.md#connect-via-standard-connection)を参照してください。
+2.  次のパラメータを入力します。接続情報を取得するには、 [標準接続で接続](/tidb-cloud/connect-via-standard-connection.md)を参照してください。
 
     -   ホスト: TiDB Cloudクラスターのエンドポイント
     -   ポート: データベースのポート
@@ -60,7 +60,7 @@ airbyte-server      | --------------------------------------
     >
     > -   TiDB Cloudは TLS 接続をサポートしています。 **TLSv1.2**および<strong>TLSv1.3</strong>で TLS プロトコルを選択できます (例: `enabledTLSProtocols=TLSv1.2` )。
     > -   JDBC 経由でTiDB Cloudへの TLS 接続を無効にする場合は、特に JDBC URL Params で useSSL を`false`に設定し、SSL 接続を閉じる必要があります (例: `useSSL=false` )。
-    > -   TiDB サーバーレス層は TLS 接続のみをサポートします。
+    > -   TiDB Serverless Tier は TLS 接続のみをサポートします。
 
 4.  [ソースまたは**宛先**の<strong>セットアップ] を</strong>クリックして、コネクタの作成を完了します。次のスクリーンショットは、ソースとしての TiDB の構成を示しています。
 
@@ -93,7 +93,7 @@ TiDB コネクタの詳細については、 [TiDB ソース](https://docs.airby
     > TiDB コネクタは、増分同期と完全更新同期の両方をサポートしています。
     >
     > -   増分モードでは、Airbyte は最後の同期ジョブ以降にソースに追加されたレコードのみを読み取ります。増分モードを使用した最初の同期は、完全更新モードと同等です。
-    > -   フル リフレッシュ モードでは、Airbyte はすべての同期タスクでソースのすべてのレコードを読み取り、宛先にレプリケートします。 Airbyte の**Namespace**という名前のテーブルごとに同期モードを個別に設定できます。
+    > -   完全更新モードでは、Airbyte はすべての同期タスクでソースのすべてのレコードを読み取り、宛先に複製します。 Airbyte の**Namespace**という名前のテーブルごとに同期モードを個別に設定できます。
 
     ![Set up connection](/media/tidb-cloud/integration-airbyte-connection.jpg)
 

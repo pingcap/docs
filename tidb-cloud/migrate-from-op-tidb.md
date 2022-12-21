@@ -42,9 +42,9 @@ Dumplingをデプロイする前に、次の点に注意してください。
 -   TiDB Cloudの TiDB クラスターと同じ VPC 内の新しい EC2 インスタンスにDumplingをデプロイすることをお勧めします。
 -   推奨される EC2 インスタンス タイプは**c6g.4xlarge** (16 vCPU および 32 GiB メモリ) です。必要に応じて、他の EC2 インスタンス タイプを選択できます。 Amazon マシン イメージ (AMI) には、Amazon Linux、Ubuntu、または Red Hat を使用できます。
 
-Dumplingは、TiUP またはインストール パッケージを使用して展開できます。
+Dumplingは、TiUP またはインストール パッケージを使用してデプロイできます。
 
-#### TiUP を使用してDumplingをデプロイ {#deploy-dumpling-using-tiup}
+#### デプロイを使用してDumplingを展開する {#deploy-dumpling-using-tiup}
 
 [TiUP](https://docs.pingcap.com/tidb/stable/tiup-overview)を使用してDumplingをデプロイします。
 
@@ -283,7 +283,7 @@ OP TiDB クラスターから Amazon S3 にデータをエクスポートした�
 
     ![Update Filter](/media/tidb-cloud/edit_traffic_filter_rules.png)
 
-3.  下流のTiDB Cloudクラスターの接続情報を取得します。 [TiDB Cloudコンソール](https://tidbcloud.com/console/clusters)で、[ **Overview]** &gt; [ <strong>Connect]</strong> &gt; [ <strong>Standard Connection]</strong> &gt; [ <strong>Connect with a SQL Client] に</strong>移動します。接続情報から、クラスターのホスト IP アドレスとポートを取得できます。詳細については、 [標準接続で接続](/tidb-cloud/connect-to-tidb-cluster.md#connect-via-standard-connection)を参照してください。
+3.  下流のTiDB Cloudクラスターの接続情報を取得します。 [TiDB Cloudコンソール](https://tidbcloud.com/console/clusters)で、[ **Overview]** &gt; [ <strong>Connect]</strong> &gt; [ <strong>Standard Connection]</strong> &gt; [ <strong>Connect with a SQL Client] に</strong>移動します。接続情報から、クラスターのホスト IP アドレスとポートを取得できます。詳細については、 [標準接続で接続](/tidb-cloud/connect-via-standard-connection.md)を参照してください。
 
 4.  増分レプリケーション タスクを作成して実行します。アップストリーム クラスターで、次を実行します。
 
