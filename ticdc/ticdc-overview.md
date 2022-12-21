@@ -69,7 +69,7 @@ As shown in the preceding architecture diagram, TiCDC supports replicating data 
 
 ## Best practices
 
-- When using TiCDC to replicate data between two TiDB clusters and the latency between them is greater than 100 ms, it is recommended that you deploy TiCDC in the region (IDC) where the downstream TiDB cluster is located.
+- When using TiCDC to replicate data between two TiDB clusters and the network latency between them is greater than 100 ms, it is recommended that you deploy TiCDC in the region (IDC) where the downstream TiDB cluster is located.
 - TiCDC only replicates the table that has at least one **valid index**. A **valid index** is defined as follows:
 
     - A primary key (`PRIMARY KEY`) is a valid index.
