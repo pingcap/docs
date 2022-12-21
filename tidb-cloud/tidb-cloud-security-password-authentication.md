@@ -1,6 +1,6 @@
 ---
 title: Password Authentication
-summary: Learn how to sign up, sign in and sign out.
+summary: Learn how to manage TiDB Cloud console passwords and how to enable multi-factor authentication (MFA).
 ---
 
 # Password Authentication
