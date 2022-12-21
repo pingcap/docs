@@ -200,6 +200,7 @@
     - [Use Restore Resource](/tidb-cloud/terraform-use-restore-resource.md)
   - [Vercel](/tidb-cloud/integrate-tidbcloud-with-vercel.md)
   - [Zapier](/tidb-cloud/integrate-tidbcloud-with-zapier.md)
+  - [Cloudflare](/tidb-cloud/integrate-tidbcloud-with-cloudflare.md)
 - Reference
   - TiDB Cluster Architecture
     - [Overview](/tidb-architecture.md)
