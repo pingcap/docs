@@ -159,7 +159,7 @@ For Serverless Tier clusters, TiDB Cloud ensures cluster security with the follo
 
 ### How do I connect to my database in a TiDB cluster?
 
-For a Dedicated Tier cluster, the steps to connect your cluster are simplified as follows:
+For a Dedicated Tier cluster, the steps to connect to your cluster are simplified as follows:
 
 1. Authorize your network.
 2. Set up your database users and login credentials.
