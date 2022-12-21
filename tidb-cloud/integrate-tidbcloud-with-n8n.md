@@ -12,13 +12,12 @@ This document introduces how to build an auto-workflow: create a TiDB Cloud Serv
 ## Prerequisites: Get TiDB Cloud API Key
 
 1. Access your TiDB Cloud dashboard.
-2. Click on the **account** tab in the top right.
-3. Click **Organization Settings**.
-4. Click **API Keys** tab.
-5. Click on the **Create API Key** button to create a new API Key.
-6. Use these **API Keys** with your TiDB Cloud node credentials in n8n.
+2. Click <MDSvgIcon name="icon-top-organization" /> **Organization** >  **Organization Settings** in the upper-right corner.
+3. Click the **API Keys** tab.
+4. Click the **Create API Key** button to create a new API Key.
+5. Save the created API key for later use in n8n.
 
-For more information, see [TiDB Cloud API Overview](https://docs.pingcap.com/tidbcloud/api-overview/).
+For more information, see [TiDB Cloud API Overview](/tidb-cloud/api-overview.md).
 
 ## Step 1: Install n8n
 
@@ -51,11 +50,11 @@ After starting n8n, you can visit [localhost:5678](http://localhost:5678) to tas
 
 ## Step 2: Install TiDB Cloud Node in n8n
 
-TiDB Cloud node names `n8n-nodes-tidb-cloud` in the npm repository. You need to install this node manually to control TiDB Cloud with n8n.
+TiDB Cloud node is named `n8n-nodes-tidb-cloud` in the npm repository. You need to install this node manually to control TiDB Cloud with n8n.
 
-1. Sign up for self-hosting n8n.
-2. Go to **Settings** > **Community Nodes**.
-3. Select **Install a community node**.
+1. In the [localhost:5678](http://localhost:5678) page, create an owner account for self-hosting n8n.
+2. Go to **Settings** > **Community nodes**.
+3. Click **Install a community node**.
 4. Enter `n8n-nodes-tidb-cloud` in **npm Package Name** field.
 5. Click **Install**.
 
@@ -100,25 +99,26 @@ If you haven't got a TiDB Cloud Serverless Tier cluster, you can use this node t
 
 #### Use a manual trigger as the workflow's starter
 
-1. If you don't have a workflow. Please navigate to **Workflows** panel, and click **Add workflow**. Otherwise, skip this point.
+1. If you don't have a workflow yet, navigate to the **Workflows** panel, and click **Start from scratch**. Otherwise, skip this step.
 2. Click **+** in the top right corner and search `schedule trigger`.
-3. Drag the manual trigger node to your workspace.
-4. Choose `Days` in the **Trigger Interval**.
-5. Set **Days Between Triggers** as `1`.
-6. Choose `8am` in the **Trigger at Hour**.
-7. Set **Trigger at Minute** as `0`.
+3. Drag the manual trigger node to your workspace, and double-click on the node. The **Parameters** dialog is displayed.
+4. Configure the rule as follows:
+    - **Trigger Interval**: `Days`
+    - **Days Between Triggers**: `1`
+    - **Trigger at Hour**: `8am`
+    - **Trigger at Minute**:`0`
 
-This trigger will enable your workflow every morning at 8 AM. 
+This trigger will execute your workflow every morning at 8 AM. 
 
 #### Create a table used to insert data
 
 1. Click **+** to the right of the manual trigger node.
 2. Search `TiDB Cloud` and add it to the workspace.
-3. Enter credentials, which is the TiDB Cloud API key, for the TiDB Cloud node.
+3. In the **Parameters** dialog, enter the credential for the TiDB Cloud node. The credential is your TiDB Cloud API key.
 4. Choose your project from the **Project** list.
 5. Select `Execute SQL` from the **Operation** list.
-6. Select the cluster. If you have not seen your new cluster, you need to wait a few minutes until the creating cluster mission is completed.
-7. Choose a user in the **User** list. You needn't worry about creating users as TiDB always creates a default user for you.
+6. Select the cluster. If you have not seen your new cluster in the list, you need to wait a few minutes until the cluster creation is completed.
+7. Choose a user in the **User** list. TiDB Cloud always creates a default user, so you don't have to manually create one.
 8. Enter `test` in the **Database** field.
 9. Enter your database password.
 10. Enter the following SQL in the ***SQL*** field:
@@ -127,7 +127,7 @@ This trigger will enable your workflow every morning at 8 AM.
     CREATE TABLE IF NOT EXISTS hacker_news_briefing (creator VARCHAR (200), title TEXT,  link VARCHAR(200), pubdate VARCHAR(200), comments VARCHAR(200), content TEXT, guid VARCHAR (200), isodate VARCHAR(200));
     ```
 
-11. Click on **Execute Node** to create the table.
+11. Click on **Execute node** to create the table.
 
 #### Get the Hacker News RSS
 
@@ -185,14 +185,13 @@ return [{json: {response}}];
 
 1. Click **+** to the right of the code node.
 2. Search `gmail` and add it to the workspace.
-3. Enter credentials for the Gmail node, you can find out how to do that [here](https://docs.n8n.io/integrations/builtin/credentials/google/oauth-single-service/).
+3. Enter the credential for the Gmail node. For detailed instructions, refer to [n8n documentation](https://docs.n8n.io/integrations/builtin/credentials/google/oauth-single-service/).
 4. Choose `Message` in the **Resource**. 
 5. Choose `Send` in the **Operation**.
 6. Enter your email in the **To**.
 7. Enter `Hacker News Briefing` in the **Subject**.
 8. Choose `HTML` in the **Email Type**.
-9. Set **Message** field mode to `Expression`
-10. Enter `{{ $json["response"] }}` in the **Message**.
+9. In the **Message** field mode, click `Expression` and enter `{{ $json["response"] }}`.
 
 > **Note:** 
 > 
@@ -200,9 +199,11 @@ return [{json: {response}}];
 
 ## Step 4: Run Your Workflow
 
-After building up the workflow, you can click the **Execute Workflow** button to test run it. You'll get Hacker News briefing emails, and these news will be logged to your TiDB Cloud Serverless Tier cluster. So don't worry about losing them.
+After building up the workflow, you can click the **Execute Workflow** button to test run it. 
 
-Now you can activate this workflow in the **Workflows** panel. This workflow will help you get the first page articles on Hacker News every day.
+If the workflow runs as expected, you'll get Hacker News briefing emails. These news contents will be logged to your TiDB Cloud Serverless Tier cluster so you don't have to worry about losing them.
+
+Now you can activate this workflow in the **Workflows** panel. This workflow will help you get the front-page articles on Hacker News every day.
 
 ## TiDB Cloud Node Core
 
