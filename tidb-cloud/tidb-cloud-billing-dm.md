@@ -41,7 +41,7 @@ The following table lists the price of TiDB Cloud for each Data Migration RCU:
 
 The Data Migration job is in the same region as the target TiDB cluster.
 
-Note that if the source database and the TiDB cluster are not in the same region or not in the same availability zone (AZ), two additional traffic charges will be incurred: cross-region and cross-AZ traffic charges.
+Note that if you are using private endpoint or VPC peering connections, and if the source database and the TiDB cluster are not in the same region or not in the same availability zone (AZ), two additional traffic charges will be incurred: cross-region and cross-AZ traffic charges.
 
 - If the source database and the TiDB cluster are not in the same region, cross-region traffic charges are incurred when the Data Migration job collects data from the source database.
 
@@ -57,7 +57,7 @@ Note that if the source database and the TiDB cluster are not in the same region
 
 The cross-region and cross-AZ traffic prices are the same as those for TiDB Cloud. For more information, see [TiDB Cloud Pricing Details](https://en.pingcap.com/tidb-cloud-pricing-details/).
 
-If the data between the upstream database and the Data Migration job is incoming through the public network, TiDB Cloud will not charge for the traffic, regardless of whether the upstream database and the Data Migration job are across regions or across AZs.
+If the data between the upstream database and the Data Migration job is through the public internet, TiDB Cloud will not charge for that traffic, regardless of whether the upstream database and the Data Migration job are in different regions or AZs.
 
 ## See also
 
