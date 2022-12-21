@@ -7,12 +7,9 @@ summary: Learn how deploy Cloudflare Workers with TiDB Cloud.
 
 However, you may find it is hard to connect to TiDB Cloud from Cloudflare Workers. Because Cloudflare Workers is primarily designed to handle HTTP(S) requests and establish TCP connection to TiDB is not allowed.
 
-Fortunately, Prisma has your back with the [Data Proxy](https://www.prisma.io/docs/data-platform/data-proxy). It can build a layer that sits between a TCP connection and an HTTP(S) connection. This allows you to use Cloudflare Workers to process and manipulate the data being transmitted over a TCP connection.
+Fortunately, Prisma has your back with the [Data Proxy](https://www.prisma.io/docs/data-platform/data-proxy). It can help us to use Cloudflare Workers to process and manipulate the data being transmitted over a TCP connection.
 
-Through this article, you will learn:
-
-1. How to establish a connection to the TiDB Cloud and then proxying all database requests through the HTTP connection by prisma data proxy.
-2. How to deploy serverless function which will access and manipulate data stored in your TiDB Cloud to Cloudflare Workers.
+This article will show how to deploy Cloudflare Workers with TiDB Cloud and Prisma Data Proxy step by step.
 
 # Integrate TiDB Cloud with Cloudflare Workers
 
@@ -85,7 +82,7 @@ This data model will be used to store incoming requests from your Worker.
 
 ## Step 3: Push your project to GitHub
 
-We recommend you create a [private repository](https://github.com/new) named prisma-tidb-cloudflare on GitHub.
+Create a [repository](https://github.com/new) named prisma-tidb-cloudflare on GitHub.
 
 After you create the repository, you can push your project to GitHub:
 
@@ -124,23 +121,20 @@ Add the Data Proxy connection string to your local environment .env file.
 prisma://aws-us-east-1.prisma-data.com/?api_key=•••••••••••••••••"
 ```
 
-Add the connection string in the wrangler.toml file. Create one if you don't have the file.
+Add the Data Proxy connection to Cloudflare Workers with secret
 
 ```
-name = "prisma-cloud-cloudflare"
-main = "src/main.ts"
-compatibility_date = "2022-11-30"
-
-[vars]
-DATABASE_URL = "prisma://aws-us-east-1.prisma-data.com/?api_key=•••••••••••••••••"
+wrangler secret put DATABASE_URL
 ```
+
+Then, enter the Data Proxy connection string.
 
 > Note
-> Don't push your DATABASE_URL id your repository is public.
+> You can also edit the DATABASE_URL via the Cloudflare Workers dashboard.
 
 ## Step 6: Generate a Prisma Client
 
-Next, you'll generate a Prisma Client that connects through the [Data Proxy](https://www.prisma.io/docs/data-platform/data-proxy) over HTTP.
+Next, you'll generate a Prisma Client that connects through the [Data Proxy](https://www.prisma.io/docs/data-platform/data-proxy).
 
 ```
 npx prisma generate --data-proxy 
