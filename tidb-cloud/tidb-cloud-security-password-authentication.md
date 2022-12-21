@@ -95,7 +95,7 @@ The steps to enable MFA are as follows:
 
 1. Click the account name in the upper-right corner of the TiDB Cloud console
 
-2. Click **Account**
+2. Click **Account settings**.
 
 3. Click the **Two Factor Authentication** tab
 
