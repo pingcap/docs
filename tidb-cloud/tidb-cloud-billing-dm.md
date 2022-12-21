@@ -11,20 +11,20 @@ This document describes the billing for Data Migration in TiDB Cloud.
 
 TiDB Cloud measures the capacity of Data Migration in Replication Capacity Units (RCUs). When you create a data migration job, you can select an appropriate specification. The higher the RCU, the better the migration performance. You will be charged for these Data Migration RCUs.
 
-The following table lists the specifications for Data Migration.
+The following table lists the specifications and corresponding performances for Data Migration.
 
 | Specification | Full data migration | Incremental data migration |
 |---------------|---------------------|----------------------------|
-| 2 RCUs  | 25 MiB/s | 10000 rows/s|
-| 4 RCUs  | 35 MiB/s | 20000 rows/s|
-| 8 RCUs  | 40 MiB/s | 40000 rows/s|
-| 16 RCUs | 45 MiB/s | 80000 rows/s|
+| 2 RCUs  | 25 MiB/s | 10,000 rows/s|
+| 4 RCUs  | 35 MiB/s | 20,000 rows/s|
+| 8 RCUs  | 40 MiB/s | 40,000 rows/s|
+| 16 RCUs | 45 MiB/s | 80,000 rows/s|
 
 Note that all the performance values in this table are maximum performances. The performance values are for reference only and might vary in different scenarios.
 
-TiDB Cloud measures full data migration in MiB/s. This unit indicates how much data (in MiB) per second is migrated by the Data Migration job.
+TiDB Cloud measures full data migration in MiB/s. This unit indicates the amount of data (in MiB) that is migrated per second by the Data Migration job.
 
-Data Migration job measures incremental data migration performance in rows/s. This unit indicates the number of rows be migrated to target database per second. For example, if the upstream database executes INSERT, UPDATE, or DELETE statements of 10000 rows in about 1 second, the Data Migration job of corresponding specification can replicate the 10000 rows to the downstream in about 1 second.
+The Data Migration job measures incremental data migration performance in rows/s. This unit indicates the number of rows that are migrated to the target database per second. For example, if the upstream database executes `INSERT`, `UPDATE`, or `DELETE` statements of 10,000 rows in about 1 second, the Data Migration job of the corresponding specification can replicate the 10,000 rows to the downstream in about 1 second.
 
 ## Price
 
@@ -39,7 +39,7 @@ The following table lists the price of TiDB Cloud for each Data Migration RCU:
 | AWS            | Tokyo (ap-northeast-1)      |          $0.1669 |
 | AWS            | Frankfurt (eu-central-1)    |          $0.1564 |
 
-The Data Migration job is in the same region as the target TiDB Cluster.
+The Data Migration job is in the same region as the target TiDB cluster.
 
 Note that if the source database and the TiDB cluster are not in the same region or not in the same availability zone (AZ), two additional traffic charges will be incurred: cross-region and cross-AZ traffic charges.
 
@@ -56,6 +56,8 @@ Note that if the source database and the TiDB cluster are not in the same region
     ![Cross-region and cross-AZ traffic charges](/media/tidb-cloud/dm-billing-cross-region-and-az-fees.png)
 
 The cross-region and cross-AZ traffic prices are the same as those for TiDB Cloud. For more information, see [TiDB Cloud Pricing Details](https://en.pingcap.com/tidb-cloud-pricing-details/).
+
+If the data between the upstream database and the Data Migration job is incoming through the public network, TiDB Cloud will not charge for the traffic, regardless of whether the upstream database and the Data Migration job are across regions or across AZs.
 
 ## See also
 
