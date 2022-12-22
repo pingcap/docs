@@ -10,22 +10,20 @@ You can upload local files to TiDB Cloud directly. You only need to select the l
 This feature now supports the following:
 
 - Uploading one CSV file within 50 MiB for one task
-- Both Serverless Tier and Dedicated Tier clusters
+- Serverless Tier clusters
 
 ## Upload local files
 
 1. Log in to the [TiDB Cloud console](https://tidbcloud.com/console/clusters), and choose your target project on the top of the left navigation bar.
 
-2. Locate your target cluster, click ... in the upper-right corner of the cluster area, and select **Data Replication**.
+2. Locate your target cluster, click ... in the upper-right corner of the cluster area, and select **Import Data**.
 
-3. Click the **Import** tab, and then click **Create Import Task** in the upper-right corner of the page. The **Create Import Task** page is displayed.
+3. Click **Import Data** in the upper-right corner of the page, and then select **From local**.
 
-4. In the **Task Name**, create a task name.
+4. Click the **Upload File** button to select and upload the local file. One task only supports uploading one file within 50 MiB.
 
-5. In the **Source** section, click **Local**. Select **CSV** as the data format.
+5. In the **Target Cluster** section, select the target database and the target table. Click **Next**.
 
-6. Click **Click to upload** button to select the local file. One task only supports uploading one file within 50 MiB.
+6. Configure the table schema. If you want to use the first row as the column names, select **Use the first row as Column Name**. You can click **Edit CSV configuration** to edit the CSV configuration. For more information about the CSV configuration, see [CSV Configurations for Importing Data](/tidb-cloud/naming-conventions-for-data-import.md).
 
-7. In the **Target** section, select the target database and the target table. Click **Next**.
-
-8. On the **Define Table** page, you can define the table schema.
+7. Click **Start Import**. You can view the import progress on the **Import Progress** section. If there are warnings or failed tasks, you can check to view the details and solve them.
