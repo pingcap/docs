@@ -768,9 +768,75 @@ Usage:
 For the usage of `store limit`, see [Store Limit](/configure-store-limit.md).
 
 > **Note:**
+<<<<<<< HEAD
 > 
 > - The original `region-add` and `region-remove` parameters of the `store limit` command are deprecated and are replaced with `add-peer` and `remove-peer`.
 > - You can use `pd-ctl` to check the status (Up, Disconnect, Offline, Down, or Tombstone) of a TiKV store. For the relationship between each status, refer to [Relationship between each status of a TiKV store](/tidb-scheduling.md#information-collection).
+=======
+>
+> If the PD leader changes during store deletion, you need to modify the store limit manually using the [`store limit`](#configure-store-scheduling-speed) command.
+
+#### Manage store labels
+
+To manage the labels of a store, run the `store label` command.
+
+- To set a label with the key being `"zone"` and value being `"cn"` to the store with id of 1, run the following command:
+
+    ```bash
+    store label 1 zone=cn
+    ```
+
+- To update the label of a store, for example, changing the value of the key `"zone"` from `"cn"` to `"us"` for the store with id of 1, run the following command:
+
+    ```bash
+    store label 1 zone=us
+    ```
+
+- To rewrite all labels of a store with id of 1, use the `--rewrite` option. Note that this option overwrites all existing labels:
+
+    ```bash
+    store label 1 region=us-est-1 disk=ssd --rewrite
+    ```
+
+- To delete the `"disk"` label for the store with id of 1, use the `--delete` option:
+
+    ```bash
+    store label 1 disk --delete
+    ```
+
+> **Note:**
+>
+> - The label of a store is updated by merging the label in TiKV and that in PD. Specifically, after you modify a store label in the TiKV configuration file and restart the cluster, PD merges its own store label with the TiKV store label, updates the label, and persists the merged result.
+> - To manage labels of a store using TiUP, you can run the `store label <id> --force` command to empty the labels stored in PD before restarting the cluster.
+
+#### Configure store weight
+
+To set the leader weight to 5 and Region weight to 10 for the store with id of 1, run the following command:
+
+```bash
+store weight 1 5 10
+```
+
+#### Configure store scheduling speed
+
+You can set the scheduling speed of stores by using `store limit`. For more details about the principles and usage of `store limit`, see [`store limit`](/configure-store-limit.md).
+
+```bash
+>> store limit                         // Show the speed limit of adding-peer operations and the limit of removing-peer operations per minute in all stores
+>> store limit add-peer                // Show the speed limit of adding-peer operations per minute in all stores
+>> store limit remove-peer             // Show the limit of removing-peer operations per minute in all stores
+>> store limit all 5                   // Set the limit of adding-peer operations to 5 and the limit of removing-peer operations to 5 per minute for all stores
+>> store limit 1 5                     // Set the limit of adding-peer operations to 5 and the limit of removing-peer operations to 5 per minute for store 1
+>> store limit all 5 add-peer          // Set the limit of adding-peer operations to 5 per minute for all stores
+>> store limit 1 5 add-peer            // Set the limit of adding-peer operations to 5 per minute for store 1
+>> store limit 1 5 remove-peer         // Set the limit of removing-peer operations to 5 per minute for store 1
+>> store limit all 5 remove-peer       // Set the limit of removing-peer operations to 5 per minute for all stores
+```
+
+> **Note:**
+>
+> You can use `pd-ctl` to check the state (`Up`, `Disconnect`, `Offline`, `Down`, or `Tombstone`) of a TiKV store. For the relationship between each state, refer to [Relationship between each state of a TiKV store](/tidb-scheduling.md#information-collection).
+>>>>>>> aed6bc711 (Delete 2 pd parameters that have been deleted in code (#11644))
 
 ### `log [fatal | error | warn | info | debug]`
 
