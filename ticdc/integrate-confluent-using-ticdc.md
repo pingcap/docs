@@ -7,7 +7,7 @@ summary: Learn how to stream TiDB data to Confluent Cloud, Snowflake, ksqlDB, an
 
 Confluent は、強力なデータ統合機能を提供する Apache Kafka 互換のストリーミング データ プラットフォームです。このプラットフォームでは、ノンストップのリアルタイム ストリーミング データにアクセス、保存、および管理できます。
 
-TiDB v6.1.0 以降、TiCDC は、増分データを Avro 形式で Confluent に複製することをサポートしています。このドキュメントでは、 [TiCDC](/ticdc/ticdc-overview.md)を使用して TiDB の増分データを Confluent にレプリケートし、さらに Confluent Cloud を介して Snowflake、ksqlDB、および SQL Server にデータをレプリケートする方法を紹介します。このドキュメントの構成は次のとおりです。
+TiDB v6.1.0 以降、TiCDC は、増分データを Avro 形式で Confluent に複製することをサポートしています。このドキュメントでは、 [TiCDC](/ticdc/ticdc-overview.md)を使用して TiDB の増分データを Confluent に複製し、さらに Confluent Cloud を介して Snowflake、ksqlDB、および SQL Server にデータを複製する方法を紹介します。このドキュメントの構成は次のとおりです。
 
 1.  TiCDC を含む TiDB クラスターをすばやくデプロイします。
 2.  TiDB から Confluent Cloud にデータをレプリケートする変更フィードを作成します。
@@ -189,7 +189,130 @@ Snowflake は、クラウド ネイティブのデータ ウェアハウスで�
 
     ![Data preview](/media/integrate/data-preview.png)
 
-6.  Snowflake コンソールで、 [**データ**] &gt; [<strong>データベース</strong>] &gt; [ <strong>TPCC]</strong> &gt; [ <strong>TiCDC</strong> ] を選択します。 TiDB の増分データが Snowflake にレプリケートされていることがわかります。 Snowflake とのデータ統合が完了しました。
+6.  Snowflake コンソールで、 [**データ**] &gt; [<strong>データベース</strong>] &gt; [ <strong>TPCC]</strong> &gt; [ <strong>TiCDC</strong> ] を選択します。 TiDB の増分データが Snowflake にレプリケートされていることがわかります。 Snowflake とのデータ統合が完了しました (前の図を参照)。ただし、Snowflake のテーブル構造は TiDB とは異なり、データは Snowflake に段階的に挿入されます。ほとんどのシナリオでは、Snowflake のデータは TiDB の変更ログを保存するのではなく、TiDB のデータのレプリカであると予想されます。この問題については、次のセクションで説明します。
+
+### Snowflake で TiDB テーブルのデータ レプリカを作成する {#create-data-replicas-of-tidb-tables-in-snowflake}
+
+前のセクションでは、TiDB の増分データの変更ログが Snowflake に複製されました。このセクションでは、これらの変更ログを Snowflake の TASK および STREAM 機能を使用してイベント タイプ`INSERT` 、 `UPDATE` 、および`DELETE`に従って処理し、上流と同じ構造のテーブルに書き込み、データを作成する方法について説明します。 Snowflake の TiDB テーブルのレプリカ。以下は、例として`ITEM`テーブルを取り上げます。
+
+`ITEM`テーブルの構造は次のとおりです。
+
+```
+CREATE TABLE `item` (
+  `i_id` int(11) NOT NULL,
+  `i_im_id` int(11) DEFAULT NULL,
+  `i_name` varchar(24) DEFAULT NULL,
+  `i_price` decimal(5,2) DEFAULT NULL,
+  `i_data` varchar(50) DEFAULT NULL,
+  PRIMARY KEY (`i_id`)
+);
+```
+
+Snowflake には、Confluent Snowflake Sink Connector によって自動的に作成される`TIDB_TEST_ITEM`という名前のテーブルがあります。テーブル構造は次のとおりです。
+
+```
+create or replace TABLE TIDB_TEST_ITEM (
+        RECORD_METADATA VARIANT,
+        RECORD_CONTENT VARIANT
+);
+```
+
+1.  Snowflake で、TiDB と同じ構造のテーブルを作成します。
+
+    ```
+    create or replace table TEST_ITEM (
+        i_id INTEGER primary key,
+        i_im_id INTEGER,
+        i_name VARCHAR,
+        i_price DECIMAL(36,2),
+        i_data VARCHAR
+    );
+    ```
+
+2.  `TIDB_TEST_ITEM`のストリームを作成し、次のように`append_only` ～ `true`を設定します。
+
+    ```
+    create or replace stream TEST_ITEM_STREAM on table TIDB_TEST_ITEM append_only=true;
+    ```
+
+    このように、作成されたストリームはリアルタイムで`INSERT`のイベントのみをキャプチャします。具体的には、TiDB で`ITEM`の新しい変更ログが生成されると、その変更ログが`TIDB_TEST_ITEM`に挿入され、ストリームによってキャプチャされます。
+
+3.  ストリーム内のデータを処理します。イベントの種類に応じて、 `TEST_ITEM`テーブルのストリーム データを挿入、更新、または削除します。
+
+    ```
+    --Merge data into the TEST_ITEM table
+    merge into TEST_ITEM n
+      using
+          -- Query TEST_ITEM_STREAM
+          (SELECT RECORD_METADATA:key as k, RECORD_CONTENT:val as v from TEST_ITEM_STREAM) stm
+          -- Match the stream with table on the condition that i_id is equal
+          on k:i_id = n.i_id
+      -- If the TEST_ITEM table contains a record that matches i_id and v is empty, delete this record
+      when matched and IS_NULL_VALUE(v) = true then
+          delete
+
+      -- If the TEST_ITEM table contains a record that matches i_id and v is not empty, update this record
+      when matched and IS_NULL_VALUE(v) = false then
+          update set n.i_data = v:i_data, n.i_im_id = v:i_im_id, n.i_name = v:i_name, n.i_price = v:i_price
+
+      -- If the TEST_ITEM table does not contain a record that matches i_id, insert this record
+      when not matched then
+          insert
+              (i_data, i_id, i_im_id, i_name, i_price)
+          values
+              (v:i_data, v:i_id, v:i_im_id, v:i_name, v:i_price)
+    ;
+    ```
+
+    前の例では、Snowflake の`MERGE INTO`ステートメントを使用して、特定の条件でストリームとテーブルを照合し、レコードの削除、更新、挿入などの対応する操作を実行します。この例では、次の 3 つのシナリオに対して 3 つの`WHERE`句が使用されています。
+
+    -   ストリームとテーブルが一致し、ストリーム内のデータが空の場合、テーブル内のレコードを削除します。
+    -   ストリームとテーブルが一致し、ストリーム内のデータが空でない場合、テーブル内のレコードを更新します。
+    -   ストリームとテーブルが一致しない場合、テーブルにレコードを挿入します。
+
+4.  手順 3 のステートメントを定期的に実行して、データが常に最新であることを確認します。 Snowflakeの`SCHEDULED TASK`つの機能を使用することもできます。
+
+    ```
+    -- Create a TASK to periodically execute the MERGE INTO statement
+    create or replace task STREAM_TO_ITEM
+        warehouse = test
+        -- Execute the TASK every minute
+        schedule = '1 minute'
+    when
+        -- Skip the TASK when there is no data in TEST_ITEM_STREAM
+        system$stream_has_data('TEST_ITEM_STREAM')
+    as
+    -- Merge data into the TEST_ITEM table. The statement is the same as that in the preceding example
+    merge into TEST_ITEM n
+      using
+          (select RECORD_METADATA:key as k, RECORD_CONTENT:val as v from TEST_ITEM_STREAM) stm
+          on k:i_id = n.i_id
+      when matched and IS_NULL_VALUE(v) = true then
+          delete
+      when matched and IS_NULL_VALUE(v) = false then
+          update set n.i_data = v:i_data, n.i_im_id = v:i_im_id, n.i_name = v:i_name, n.i_price = v:i_price
+      when not matched then
+          insert
+              (i_data, i_id, i_im_id, i_name, i_price)
+          values
+              (v:i_data, v:i_id, v:i_im_id, v:i_name, v:i_price)
+    ;
+    ```
+
+この時点で、特定の ETL 機能を備えたデータ チャネルが確立されました。このデータ チャネルを通じて、TiDB の増分データ変更ログを Snowflake にレプリケートし、TiDB のデータ レプリカを維持し、Snowflake でデータを使用できます。
+
+最後のステップは、 `TIDB_TEST_ITEM`テーブルの不要なデータを定期的にクリーンアップすることです。
+
+```
+-- Clean up the TIDB_TEST_ITEM table every two hours
+create or replace task TRUNCATE_TIDB_TEST_ITEM
+    warehouse = test
+    schedule = '120 minute'
+when
+    system$stream_has_data('TIDB_TEST_ITEM')
+as
+    TRUNCATE table TIDB_TEST_ITEM;
+```
 
 ## データを ksqlDB と統合する {#integrate-data-with-ksqldb}
 

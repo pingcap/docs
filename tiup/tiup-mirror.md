@@ -7,7 +7,7 @@ summary: Learn how to create a private mirror.
 
 プライベート クラウドを作成する場合、通常、TiUP の公式ミラーにアクセスできない分離されたネットワーク環境を使用する必要があります。したがって、主に`mirror`コマンドで実装されるプライベート ミラーを作成できます。 `mirror`コマンドを使用してオフラインで展開することもできます。プライベート ミラーを使用すると、自分でビルドしてパッケージ化したコンポーネントを使用することもできます。
 
-## TiUP <code>mirror</code>概要 {#tiup-code-mirror-code-overview}
+## TiUP <code>mirror</code>の概要 {#tiup-code-mirror-code-overview}
 
 次のコマンドを実行して、 `mirror`コマンドのヘルプ情報を取得します。
 
@@ -43,7 +43,6 @@ Available Commands:
 
 Global Flags:
       --help                 Help for this command
-      --skip-version-check   Skip the strict version check, by default a version must be a valid SemVer string
 
 Use "tiup mirror [command] --help" for more information about a command.
 ```
@@ -95,7 +94,7 @@ tiup mirror clone <target-dir> [global-version] [flags]
 
 ### プライベート リポジトリを管理する {#manage-the-private-repository}
 
-SCP、NFS を介してファイルを共有するか、HTTP または HTTPS プロトコルを介してリポジトリを利用できるようにすることで、ホスト間で`tiup mirror clone`を使用して複製されたリポジトリを共有できます。 `tiup mirror set <location>`使用して、リポジトリの場所を指定します。
+SCP、NFS を介してファイルを共有するか、HTTP または HTTPS プロトコルを介してリポジトリを利用できるようにすることで、ホスト間で`tiup mirror clone`を使用して複製されたリポジトリを共有できます。 `tiup mirror set <location>`を使用して、リポジトリの場所を指定します。
 
 ```bash
 tiup mirror set /shared_data/tiup
@@ -107,7 +106,7 @@ tiup mirror set https://tiup-mirror.example.com/
 
 > **ノート：**
 >
-> `tiup mirror clone`を実行するマシンで`tiup mirror set...`を実行すると、次に`tiup mirror clone...`実行すると、マシンはリモート ミラーではなくローカル ミラーからクローンを作成します。したがって、プライベート ミラーを更新する前に、 `tiup mirror set --reset`を実行してミラーをリセットする必要があります。
+> `tiup mirror clone`を実行するマシンで`tiup mirror set...`を実行すると、次に`tiup mirror clone...`を実行すると、マシンはリモート ミラーではなくローカル ミラーからクローンを作成します。したがって、プライベート ミラーを更新する前に、 `tiup mirror set --reset`を実行してミラーをリセットする必要があります。
 
 ミラーを使用する別の方法は、 `TIUP_MIRRORS`環境変数を使用することです。プライベート リポジトリで`tiup list`を実行する例を次に示します。
 
@@ -116,7 +115,7 @@ export TIUP_MIRRORS=/shared_data/tiup
 tiup list
 ```
 
-`TIUP_MIRRORS`設定は、ミラー構成を永続的に変更できます (例: `tiup mirror set` 。詳細については、 [ティアップ号 #651](https://github.com/pingcap/tiup/issues/651)を参照してください。
+`TIUP_MIRRORS`設定は、ミラー構成を永続的に変更できます (例: `tiup mirror set` )。詳細については、 [ティアップ号 #651](https://github.com/pingcap/tiup/issues/651)を参照してください。
 
 ### プライベート リポジトリを更新する {#update-the-private-repository}
 
@@ -148,7 +147,7 @@ tiup mirror init /data/mirror
 tiup mirror genkey
 ```
 
-`/data/mirror`の秘密鍵`~/.tiup/keys/private.json`所有権で`jdoe`付与します。
+`/data/mirror`の秘密鍵`~/.tiup/keys/private.json`所有権で`jdoe`を付与します。
 
 ```bash
 tiup mirror set /data/mirror

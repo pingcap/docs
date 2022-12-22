@@ -9,7 +9,7 @@ PD Recover は PD のディザスタリカバリツールであり、正常に�
 
 ## ソースコードからコンパイル {#compile-from-source-code}
 
--   [行け](https://golang.org/) Go モジュールを使用するため、バージョン 1.16 以降が必要です。
+-   [行け](https://golang.org/) Go モジュールを使用するため、バージョン 1.19 以降が必要です。
 -   [PDプロジェクト](https://github.com/pingcap/pd)のルート ディレクトリで、 `make pd-recover`コマンドを使用して`bin/pd-recover`をコンパイルおよび生成します。
 
 > **ノート：**

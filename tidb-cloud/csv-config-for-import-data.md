@@ -88,7 +88,7 @@ summary: Learn how to use CSV configurations for the Import Data service on TiDB
 
     デフォルト設定 ( `Not-null = False; Null = '\N'` ) では、列`column_A`と`column_B`は両方とも、TiDB にインポートされた後に NULL に変換されます。列`column_C`は空の文字列`''`ですが、NULL ではありません。
 
--   デフォルト：非 null=False、Null=\N
+-   デフォルト: Not-null=False、Null=\N
 
 ## トリムラストセパレーター {#trim-last-separator}
 
@@ -103,4 +103,4 @@ summary: Learn how to use CSV configurations for the Import Data service on TiDB
     -   `Trim-last-separator = False`の場合、これは 5 つのフィールド`('A', '', 'B', '', '')`の行として解釈されます。
     -   `Trim-last-separator = True`の場合、これは 3 つのフィールド`('A', '', 'B')`の行として解釈されます。
 
--   デフォルト: 偽
+-   デフォルト: `False`
