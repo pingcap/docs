@@ -37,7 +37,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v5.1/quick-start-with-
     (dup: release-5.4.0.md > Bug fixes> TiDB)- Fix the issue that the result of `concat(ifnull(time(3)))` in TiDB is different from that in MySQL [#29498](https://github.com/pingcap/tidb/issues/29498)
     (dup: release-5.0.6.md > Bug fixes> TiDB)- Fix the issue that the SQL statements that contain `cast(integer as char) union string` return wrong results [#29513](https://github.com/pingcap/tidb/issues/29513)
     (dup: release-6.1.1.md > Bug fixes> TiDB)- Fix the issue that `INL_HASH_JOIN` might hang when used with `LIMIT` [#35638](https://github.com/pingcap/tidb/issues/35638) @[guo-shaoge](https://github.com/guo-shaoge)
-    - Fix wrong `any_value` result when there are regions returning empty result [#30923](https://github.com/pingcap/tidb/issues/30923) @[ti-srebot](https://github.com/ti-srebot)
+    - Fix wrong `ANY_VALUE` result when there are regions returning empty data [#30923](https://github.com/pingcap/tidb/issues/30923)
     (dup: release-5.2.4.md > Bug fixes> TiDB)- Fix wrong results of index join caused by an innerWorker panic [#31494](https://github.com/pingcap/tidb/issues/31494)
 
     <!--planner owner: winoros-->
