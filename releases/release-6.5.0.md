@@ -40,13 +40,13 @@ Compared with the previous LTS 6.1.0, 6.5.0 not only includes new features, impr
 
     TiDB v6.3.0 introduces [Metadata lock](/metadata-lock.md) as an experimental feature. To avoid the `Information schema is changed` error caused by DML statements, TiDB coordinates the priority of DMLs and DDLs during table metadata change, and makes the ongoing DDLs wait for the DMLs with old metadata to commit. In v6.5.0, this feature becomes GA and is enabled by default. It is suitable for various types of DDLs change scenarios.
 
-    For more information, see [user document](/metadata-lock.md).
+    For more information, see [documentation](/metadata-lock.md).
 
 * Support restoring a cluster to a specific point in time by using `FLASHBACK CLUSTER TO TIMESTAMP` (GA) [#37197](https://github.com/pingcap/tidb/issues/37197) [#13303](https://github.com/tikv/tikv/issues/13303) @[Defined2014](https://github.com/Defined2014) @[bb7133](https://github.com/bb7133) @[JmPotato](https://github.com/JmPotato) @[Connor1996](https://github.com/Connor1996) @[HuSharp](https://github.com/HuSharp) @[CalvinNeo](https://github.com/CalvinNeo) **tw@Oreoxmt**
 
     TiDB v6.4.0 introduces the [`FLASHBACK CLUSTER TO TIMESTAMP`](/sql-statements/sql-statement-flashback-to-timestamp.md) statement as an experimental feature. You can use this statement to restore a cluster to a specific point in time within the Garbage Collection (GC) life time. In v6.5.0, this statement becomes GA. This feature helps you to easily undo DML misoperations, restore the original cluster in minutes, roll back data at different time points to determine the exact time when data changes, and it is compatible with PITR and TiCDC.
 
-    For more information, see [user document](/sql-statements/sql-statement-flashback-to-timestamp.md).
+    For more information, see [documentation](/sql-statements/sql-statement-flashback-to-timestamp.md).
 
 * Fully support non-transactional DML statements including `INSERT`, `REPLACE`, `UPDATE`, and `DELETE` [#33485](https://github.com/pingcap/tidb/issues/33485) @[ekexium](https://github.com/ekexium) **tw@Oreoxmt**
 
@@ -58,7 +58,7 @@ Compared with the previous LTS 6.1.0, 6.5.0 not only includes new features, impr
 
     TTL provides row-level data lifetime management. In TiDB, a table with the TTL attribute automatically checks data lifetime and deletes expired data at the row level. TTL is designed to help you clean up unnecessary data periodically and in a timely manner without affecting the online read and write workloads.
 
-    For more information, see [User document](/time-to-live.md).
+    For more information, see [documentation](/time-to-live.md).
 
 * Support saving TiFlash query results using the `INSERT INTO SELECT` statement (experimental) [#37515](https://github.com/pingcap/tidb/issues/37515) @[gengliqi](https://github.com/gengliqi) **tw@qiancai**
 
@@ -74,7 +74,7 @@ Compared with the previous LTS 6.1.0, 6.5.0 not only includes new features, impr
     - Reuse TiFlash query results or deal with highly concurrent online requests
     - Need a relatively small result set compared with the input data size, preferably smaller than 100 MiB.
 
-  For more information, see the [user documentation](/tiflash/tiflash-results-materialization.md).
+  For more information, see [documentation](/tiflash/tiflash-results-materialization.md).
 
 * Support binding history execution plans (experimental) [#39199](https://github.com/pingcap/tidb/issues/39199) @[fzzf678](https://github.com/fzzf678) **tw@qiancai**
 
@@ -82,7 +82,7 @@ Compared with the previous LTS 6.1.0, 6.5.0 not only includes new features, impr
 
     In v6.5.0, TiDB supports binding historical execution plans by extending the binding object in the [`CREATE [GLOBAL | SESSION] BINDING`](/sql-statements/sql-statement-create-binding.md) statement. When the execution plan of a SQL statement changes, you can bind the original execution plan by specifying `plan_digest` in the `CREATE [GLOBAL | SESSION] BINDING` statement to quickly recover SQL performance, as long as the original execution plan is still in the SQL execution history memory table (for example, `statements_summary`). This feature can simplify the process of handling execution plan change issues and improve your maintenance efficiency.
 
-    For more information, see [user document](/sql-plan-management.md#bind-historical-execution-plans).
+    For more information, see [documentation](/sql-plan-management.md#bind-historical-execution-plans).
 
 ### Security
 
@@ -92,25 +92,25 @@ Compared with the previous LTS 6.1.0, 6.5.0 not only includes new features, impr
 
     TiDB provides the SQL function [`VALIDATE_PASSWORD_STRENGTH()`](https://dev.mysql.com/doc/refman/5.7/en/encryption-functions.html#function_validate-password-strength) to validate the password strength.
 
-    For more information, see [user document](/password-management.md#password-complexity-policy).
+    For more information, see [documentation](/password-management.md#password-complexity-policy).
 
 * Support the password expiration policy [#38936](https://github.com/pingcap/tidb/issues/38936) @[CbcWestwolf](https://github.com/CbcWestwolf) **tw@ran-huang**
 
     TiDB supports configuring the password expiration policy, including manual expiration, global-level automatic expiration, and account-level automatic expiration. After this policy is enabled, you must change your passwords periodically. This reduces the risk of password leakage due to long-term use and improves password security.
 
-    For more information, see [user document](/password-management.md#password-expiration-policy).
+    For more information, see [documentation](/password-management.md#password-expiration-policy).
 
 * Support the password reuse policy [#38937](https://github.com/pingcap/tidb/issues/38937) @[keeplearning20221](https://github.com/keeplearning20221) **tw@ran-huang**
 
     TiDB supports configuring the password reuse policy, including global-level password reuse policy and account-level password reuse policy. After this policy is enabled, you cannot use the passwords that you have used within a specified period or the most recent several passwords that you have used. This reduces the risk of password leakage due to repeated use of passwords and improves password security.
 
-    For more information, see [user document](/password-management.md#password-reuse-policy).
+    For more information, see [documentation](/password-management.md#password-reuse-policy).
 
 * Support failed-login tracking and temporary account locking policy [#38938](https://github.com/pingcap/tidb/issues/38938) @[lastincisor](https://github.com/lastincisor) **tw@ran-huang**
 
     After this policy is enabled, if you log in to TiDB with incorrect passwords multiple times consecutively, the account is temporarily locked. After the lock time ends, the account is automatically unlocked.
 
-    For more information, see [user document](/password-management.md#failed-login-tracking-and-temporary-account-locking-policy).
+    For more information, see [documentation](/password-management.md#failed-login-tracking-and-temporary-account-locking-policy).
 
 ### Observability
 
@@ -124,7 +124,7 @@ Compared with the previous LTS 6.1.0, 6.5.0 not only includes new features, impr
     - The user can still access TiDB Dashboard for diagnosis even if the PD node is unavailable.
     - Accessing TiDB Dashboard in Internet does not involve the privileged interfaces of PD. Therefore, the security risk of the cluster is reduced.
 
-  For more information, see [Deploy TiDB Dashboard independently in TiDB Operator](https://docs.pingcap.com/tidb-in-kubernetes/dev/get-started#deploy-tidb-dashboard-independently).
+  For more information, see [documentation](https://docs.pingcap.com/tidb-in-kubernetes/dev/get-started#deploy-tidb-dashboard-independently).
 
 * Performance Overview dashboard adds TiFlash and CDC (Change Data Capture) panels [#39230](https://github.com/pingcap/tidb/issues/39230) @[dbsid](https://github.com/dbsid) **tw@qiancai**
 
@@ -135,7 +135,7 @@ Compared with the previous LTS 6.1.0, 6.5.0 not only includes new features, impr
     - On the [TiFlash panels](/grafana-performance-overview-dashboard.md#tiflash), you can easily view the request types, latency analysis, and resource usage overview of your TiFlash cluster.
     - On the [CDC panels](/grafana-performance-overview-dashboard.md#cdc), you can easily view the health, replication latency, data flow, and downstream write latency of your TiCDC cluster.
 
-  For more information, see [user document](/performance-tuning-method.md).
+  For more information, see [documentation](/performance-tuning-method.md).
 
 ### Performance
 
@@ -163,7 +163,7 @@ Compared with the previous LTS 6.1.0, 6.5.0 not only includes new features, impr
 
     In some view access scenarios, you need to use optimizer hints to interfere with the execution plan of the query in the view to achieve the best performance. Since v6.5.0, TiDB supports adding global hints for the query blocks in the view, thus the hints defined in the query can be effective in the view. This feature provides a way to inject hints into complex SQL statements that contain nested views, enhances the execution plan control, and stabilizes the performance of complex statements. To use global hints, you need to [name the query blocks](/optimizer-hints.md#step-1-define-the-query-block-name-of-the-view-using-the-qb_name-hint) and [specify hint references](/optimizer-hints.md#step-2-add-the-target-hints).
 
-    For more information, see [user document](/optimizer-hints.md#hints-that-take-effect-globally).
+    For more information, see [documentation](/optimizer-hints.md#hints-that-take-effect-globally).
 
 * Support pushing down sorting operations of [partitioned tables](/partitioned-table.md) to TiKV [#26166](https://github.com/pingcap/tidb/issues/26166) @[winoros](https://github.com/winoros) **tw@qiancai**
 
@@ -175,7 +175,7 @@ Compared with the previous LTS 6.1.0, 6.5.0 not only includes new features, impr
 
     Cost Model Version 2 becomes a generally available feature that significantly improves the overall capability of the TiDB optimizer and helps TiDB evolve towards a more powerful HTAP database.
 
-    For more information, see [User document](/cost-model.md#cost-model-version-2).
+    For more information, see [documentation](/cost-model.md#cost-model-version-2).
 
 * TiFlash optimizes the operations of getting the number of table rows [#37165](https://github.com/pingcap/tidb/issues/37165) @[elsa0520](https://github.com/elsa0520)
 
@@ -191,7 +191,7 @@ Compared with the previous LTS 6.1.0, 6.5.0 not only includes new features, impr
 
     If you are using TiDB v6.5.0 or later, it is recommended to remove [`txn-total-size-limit`](/tidb-configuration-file.md#txn-total-size-limit) and not to set a separate limit on the memory usage of transactions. Instead, use the system variables [`tidb_mem_quota_query`](/system-variables.md#tidb_mem_quota_query) and [`tidb_server_memory_limit`](/system-variables.md#tidb_server_memory_limit-new-in-v640) to manage global memory, which can improve the efficiency of memory usage.
 
-    For more information, see the [user document](/configure-memory-usage.md).
+    For more information, see [documentation](/configure-memory-usage.md).
 
 ### Ease of use
 
@@ -199,13 +199,13 @@ Compared with the previous LTS 6.1.0, 6.5.0 not only includes new features, impr
 
     The `EXPLAIN ANALYZE` statement is used to print execution plans and runtime statistics. In v6.5.0, TiFlash has refined the execution information of the `TableFullScan` operator by adding the DMFile-related execution information. Now the TiFlash data scan status information is presented more intuitively, which helps you analyze TiFlash performance more easily.
 
-    For more information, see [user documentation](sql-statements/sql-statement-explain-analyze.md).
+    For more information, see [documentation](sql-statements/sql-statement-explain-analyze.md).
 
 * Support the output of execution plans in the JSON format [#39261](https://github.com/pingcap/tidb/issues/39261) @[fzzf678](https://github.com/fzzf678) **tw@ran-huang**
 
     In v6.5.0, TiDB extends the output format of execution plans. By using `EXPLAIN FORMAT=tidb_json <SQL_statement>`, you can output SQL execution plans in the JSON format. With this capability, SQL debugging tools and diagnostic tools can read execution plans more conveniently and accurately, thus improving the ease of use of SQL diagnosis and tuning.
 
-    For more information, see [user document](/sql-statements/sql-statement-explain.md).
+    For more information, see [documentation](/sql-statements/sql-statement-explain.md).
 
 ### MySQL compatibility
 
@@ -217,7 +217,7 @@ Compared with the previous LTS 6.1.0, 6.5.0 not only includes new features, impr
     CREATE TABLE t(a int AUTO_INCREMENT key) AUTO_ID_CACHE 1;
     ```
 
-    For more information, see [user document](/auto-increment.md#mysql-compatibility-mode).
+    For more information, see [documentation](/auto-increment.md#mysql-compatibility-mode).
 
 ### Data migration
 
@@ -227,7 +227,7 @@ Compared with the previous LTS 6.1.0, 6.5.0 not only includes new features, impr
 
     Previously, you had to provide large storage space for exporting or importing data to store CSV and SQL files, resulting in high storage costs. With the release of this feature, you can greatly reduce your storage costs by compressing the data files.
 
-    For more information, see [User document](/dumpling-overview.md#improve-export-efficiency-through-concurrency).
+    For more information, see [documentation](/dumpling-overview.md#improve-export-efficiency-through-concurrency).
 
 * Optimize binlog parsing capability [#924](https://github.com/pingcap/dm/issues/924) @[gmhdbjd](https://github.com/GMHDBJD) **tw@hfxsd**
 
@@ -241,7 +241,7 @@ Compared with the previous LTS 6.1.0, 6.5.0 not only includes new features, impr
 
     Previously, when TiDB Lightning imported data using physical mode, it would create a large number of temporary files on the local disk for encoding, sorting, and splitting the raw data. When your local disk ran out of space, TiDB Lightning would exit with an error due to failing to write to the file. With this feature, TiDB Lightning tasks can avoid overwriting the local disk.
 
-    For more information, see [User document](/tidb-lightning/tidb-lightning-physical-import-mode-usage.md#configure-disk-quota-new-in-v620).
+    For more information, see [documentation](/tidb-lightning/tidb-lightning-physical-import-mode-usage.md#configure-disk-quota-new-in-v620).
 
 * Continuous data validation in DM is GA [#4426](https://github.com/pingcap/tiflow/issues/4426) @[D3Hunter](https://github.com/D3Hunter) **tw@hfxsd**
 
@@ -249,7 +249,7 @@ Compared with the previous LTS 6.1.0, 6.5.0 not only includes new features, impr
 
     Previously, you needed to interrupt the business to validate the full data, which would affect your business. Now, with this feature, you can perform incremental data validation without interrupting the business.
 
-    For more information, see [User document](/dm/dm-continuous-data-validation.md).
+    For more information, see [documentation](/dm/dm-continuous-data-validation.md).
 
 ### TiDB data share subscription
 
@@ -257,13 +257,13 @@ Compared with the previous LTS 6.1.0, 6.5.0 not only includes new features, impr
 
      TiCDC supports replicating changed logs to Amazon S3, Azure Blob Storage, NFS, and other S3-compatible storage services. Cloud storage is reasonably priced and easy to use. If you do not want to use Kafka, you can use storage sinks. TiCDC saves the changed logs to a file and then sends it to the storage system. From the storage system, the consumer program reads the newly generated changed log files periodically.
 
-    The storage sink supports changed logs in the canal-json and CSV formats. Noticeably, the latency of replicating changed logs from TiCDC to storage can be as short as xx. For more information, see [User document](/ticdc/ticdc-sink-to-cloud-storage.md).
+    The storage sink supports changed logs in the canal-json and CSV formats. Noticeably, the latency of replicating changed logs from TiCDC to storage can be as short as xx. For more information, see [documentation](/ticdc/ticdc-sink-to-cloud-storage.md).
 
 * TiCDC supports bidirectional replication across multiple clusters @[asddongmen](https://github.com/asddongmen) **tw@shichun-0415**
 
     TiCDC supports bidirectional replication across multiple TiDB clusters. If you need a multi-master TiDB solution for your application, especially a multi-master solution across multiple regions, you can use this feature to build one. By configuring the `bdr-mode = true` parameter for the TiCDC changefeeds from each TiDB cluster to the other TiDB clusters, you can achieve bidirectional data replication across multiple TiDB clusters.
 
-    For more information, see [user document](/ticdc/ticdc-bidirectional-replication.md).
+    For more information, see [documentation](/ticdc/ticdc-bidirectional-replication.md).
 
 * TiCDC supports updating TLS online [#7908](https://github.com/pingcap/tiflow/issues/7908) @[CharlesCheung96](https://github.com/CharlesCheung96) **tw@shichun-0415**
 
@@ -279,7 +279,7 @@ Compared with the previous LTS 6.1.0, 6.5.0 not only includes new features, impr
 
     TiDB snapshot backup supports resuming backup from a checkpoint. When Backup & Restore (BR) encounters a recoverable error, it retries backup. However, BR exits if the retry fails for several times. The checkpoint backup feature allows for longer recoverable failures to be retried, for example, a network failure of tens of minutes.
 
-    Note that if you do not recover the system from a failure within one hour after BR exits, the snapshot data to be backed up might be recycled by the GC mechanism, causing the backup to fail. For more information, see [User document](/br/br-checkpoint.md).
+    Note that if you do not recover the system from a failure within one hour after BR exits, the snapshot data to be backed up might be recycled by the GC mechanism, causing the backup to fail. For more information, see [documentation](/br/br-checkpoint.md).
 
 * PITR performance improved remarkably **tw@shichun-0415
 
@@ -289,7 +289,7 @@ Compared with the previous LTS 6.1.0, 6.5.0 not only includes new features, impr
 
     TiKV-BR is a backup and restore tool used in TiKV clusters. TiKV and PD can constitute a KV database when used without TiDB, which is called RawKV. TiKV-BR supports data backup and restore for products that use RawKV. TiKV-BR can also upgrade the [`api-version`](/tikv-configuration-file.md#api-version-new-in-v610) from `API V1` to `API V2` for TiKV cluster.
 
-    For more information, see [User document](https://tikv.org/docs/latest/concepts/explore-tikv-features/backup-restore/).
+    For more information, see [documentation](https://tikv.org/docs/latest/concepts/explore-tikv-features/backup-restore/).
 
 ## Compatibility changes
 
@@ -339,12 +339,12 @@ Compared with the previous LTS 6.1.0, 6.5.0 not only includes new features, impr
 | TiDB | [`disconnect-on-expired-password`](/tidb-configuration-file.md#disconnect-on-expired-password-new-in-v650) | Newly added | Determines whether TiDB disconnects the client connection when the password is expired. The default value is `true`, which means the client connection is disconnected when the password is expired. |
 | TiKV | `raw-min-ts-outlier-threshold` | Deleted | Since v6.4.0, this configuration item was deprecated. Since v6.5.0, this configuration item is deleted. |
 | TiKV | [`cdc.min-ts-interval`](/tikv-configuration-file.md#min-ts-interval)  | Modified | To reduce CDC latency, the default value is changed from `1s` to `200ms`. |
-| TiKV | [`memory-use-ratio`](/tikv-configuration-file.md#memory-use-ratio-introduced-new-in-v650) | Newly added | Indicates the ratio of available memory to total system memory in PITR log recovery. | 
+| TiKV | [`memory-use-ratio`](/tikv-configuration-file.md#memory-use-ratio-introduced-new-in-v650) | Newly added | Indicates the ratio of available memory to total system memory in PITR log recovery. |
 
 ### Others
 
-- Starting from v6.5.0, the `mysql.user` table adds two new columns: `Password_reuse_history` and `Password_reuse_time`. 
-- The [index acceleration](/system-variables.md#tidb_ddl_enable_fast_reorg-new-in-v630) feature is enabled by default and is not compatible with the [PITR (Point-in-time recovery)](/br/br-pitr-guide.md) feature. When using the index acceleration feature, you need to make sure that no PITR backup task is running in the background; otherwise, unexpected results might occur. For more information, see [tidb_ddl_enable_fast_reorg](/system-variables.md#tidb_ddl_enable_fast_reorg-new-in-v630).
+- Starting from v6.5.0, the `mysql.user` table adds two new columns: `Password_reuse_history` and `Password_reuse_time`.
+- The [index acceleration](/system-variables.md#tidb_ddl_enable_fast_reorg-new-in-v630) feature is enabled by default and is not compatible with the [PITR (Point-in-time recovery)](/br/br-pitr-guide.md) feature. When using the index acceleration feature, you need to make sure that no PITR backup task is running in the background; otherwise, unexpected results might occur. For more information, see [documentation](/system-variables.md#tidb_ddl_enable_fast_reorg-new-in-v630).
 
 ## Deprecated feature
 
