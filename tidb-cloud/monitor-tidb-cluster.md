@@ -79,7 +79,7 @@ For Serverless Tier:
 | QPS | total | The number of SQL statements executed per second in Serverless Tier. |
 | Query Duration | avg | The duration from the time TiDB receives a client request to the time TiDB executes the request and returns the result to the client. |
 | Active Connection | active connections | The number of connections that are actively executing SQL statements to Serverless Tier. |
-| Used Storage Size | total-tikv, total-tiflash | The total storage size on TiKV or TiFlash instances. |
+| Used Storage Size | total-tikv | The total storage size on TiKV instances. |
 
 To view metrics on the cluster overview page, take the following steps:
 
