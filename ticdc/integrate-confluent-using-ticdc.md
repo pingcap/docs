@@ -222,10 +222,10 @@ create or replace TABLE TIDB_TEST_ITEM (
     ```
     create or replace table TEST_ITEM (
         i_id INTEGER primary key,
-        i_data VARCHAR,
         i_im_id INTEGER,
         i_name VARCHAR,
-        i_price DECIMAL(36,2)
+        i_price DECIMAL(36,2),
+        i_data VARCHAR
     );
     ```
 
