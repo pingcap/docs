@@ -189,7 +189,7 @@ Snowflake is a cloud native data warehouse. With Confluent, you can replicate Ti
 
     ![Data preview](/media/integrate/data-preview.png)
 
-6. In the Snowflake console, choose **Data** > **Database** > **TPCC** > **TiCDC**. You can see that TiDB incremental data has been replicated to Snowflake. Data integration with Snowflake is done (see the preceding figure). However, the table structure in Snowflake is different from that in TiDB, and data is inserted into Snowflake incrementally. In most scenarios, you expect the data in Snowflake to be a replica of the data in TiDB, rather than change logs. This problem will be addressed in the next section.
+6. In the Snowflake console, choose **Data** > **Database** > **TPCC** > **TiCDC**. You can see that TiDB incremental data has been replicated to Snowflake. Data integration with Snowflake is done (see the preceding figure). However, the table structure in Snowflake is different from that in TiDB, and data is inserted into Snowflake incrementally. In most scenarios, you expect the data in Snowflake to be a replica of the data in TiDB, rather than storing TiDB change logs. This problem will be addressed in the next section.
 
 ### Create data replicas of TiDB tables in Snowflake
 
@@ -229,11 +229,13 @@ create or replace TABLE TIDB_TEST_ITEM (
     );
     ```
 
-2. Create a stream for `TIDB_TEST_ITEM` and set `append_only` to `true`. In this way, the stream created captures only `INSERT` events in real time. Specifically, when a new change log is generated for `ITEM` in TiDB, the change log will be inserted into `TIDB_TEST_ITEM` and be captured by the stream.
+2. Create a stream for `TIDB_TEST_ITEM` and set `append_only` to `true` as follows. 
 
     ```
     create or replace stream TEST_ITEM_STREAM on table TIDB_TEST_ITEM append_only=true;
     ```
+
+    In this way, the created stream captures only `INSERT` events in real time. Specifically, when a new change log is generated for `ITEM` in TiDB, the change log will be inserted into `TIDB_TEST_ITEM` and be captured by the stream.
 
 3. Process the data in the stream. According to the event type, insert, update, or delete the stream data in the `TEST_ITEM` table.
 
@@ -262,7 +264,7 @@ create or replace TABLE TIDB_TEST_ITEM (
     ;
     ```
 
-    In the preceding example, the `MERGE INTO` statement of Snowflake is used to match stream and the table according to a specific condition, and then execute corresponding operations, such as deleting, updating, or inserting a record. In this example, three `WHERE` clauses are used for the following three scenarios:
+    In the preceding example, the `MERGE INTO` statement of Snowflake is used to match the stream and the table on a specific condition, and then execute corresponding operations, such as deleting, updating, or inserting a record. In this example, three `WHERE` clauses are used for the following three scenarios:
 
     - Delete the record in the table when the stream and the table match and the data in the stream is empty.
     - Update the record in the table when the stream and the table match and the data in the stream is not empty.
