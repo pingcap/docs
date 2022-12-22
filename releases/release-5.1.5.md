@@ -135,7 +135,6 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v5.1/quick-start-with-
     (dup: release-5.4.1.md > Bug Fixes> TiFlash)- Fix the issue that expired data is recycled slowly [#4146](https://github.com/pingcap/tiflash/issues/4146)
     (dup: release-5.4.1.md > Bug Fixes> TiFlash)- Fix the overflow that occurs when casting `FLOAT` to `DECIMAL` [#3998](https://github.com/pingcap/tiflash/issues/3998)
     (dup: release-5.3.4.md > Bug fixes> TiFlash)- Fix the issue that logical operators return wrong results when the argument type is UInt8 [#6127](https://github.com/pingcap/tiflash/issues/6127)
-    - None [#5849](https://github.com/pingcap/tiflash/issues/5849) @[ti-chi-bot](https://github.com/ti-chi-bot)
     (dup: release-5.3.2.md > Bug Fixes> TiFlash)- Fix the potential `index out of bounds` error if calling `json_length` with empty string [#2705](https://github.com/pingcap/tiflash/issues/2705)
     (dup: release-5.3.2.md > Bug Fixes> TiFlash)- Fix wrong decimal comparison results in corner cases [#4512](https://github.com/pingcap/tiflash/issues/4512)
     (dup: release-5.3.2.md > Bug Fixes> TiFlash)- Fix `TiFlash_schema_error` reported when `NOT NULL` columns are added [#4596](https://github.com/pingcap/tiflash/issues/4596)
