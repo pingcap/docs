@@ -1678,7 +1678,7 @@ MPP is a distributed computing framework provided by the TiFlash engine, which a
 - Since v6.1.0, the [Join Reorder](/join-reorder.md) algorithm of TiDB supports Outer Join. This variable controls whether TiDB enables the Join Reorder's support for Outer Join.
 - If your cluster is upgraded from an earlier version of TiDB, note the following:
 
-    - If the TiDB version before the upgrade is lower than v6.1.0, the default value of this variable after the upgrade is `ON`.
+    - If the TiDB version before the upgrade is earlier than v6.1.0, the default value of this variable after the upgrade is `ON`.
     - If the TiDB version before the upgrade is v6.1.0 or later, the default value of the variable after the upgrade follows the value before the upgrade.
 
 ### tidb_enable_ordered_result_mode
