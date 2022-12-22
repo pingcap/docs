@@ -290,7 +290,7 @@ force-replicate = true
 
 > **Note:**
 >
-> Starting from v6.0.0, TiCDC uses the DB sorter engine by default, and no longer uses the Unified Sorter. It is recommended that you do not configure the `sort engine` item.
+> Starting from v6.0.0, TiCDC uses the DB Sorter engine by default, and no longer uses the Unified Sorter. It is recommended that you do not configure the `sort engine` item.
 
 Unified sorter is the sorting engine in TiCDC. It can mitigate OOM problems caused by the following scenarios:
 
