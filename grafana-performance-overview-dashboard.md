@@ -40,7 +40,7 @@ The SQL execution phase is in green and other phases are in red on general. If n
 - execute time: Database time consumed during SQL execution per second
 - tso_wait: Concurrent TSO waiting time per second during SQL execution
 - kv request type: Time waiting for each KV request type per second during SQL execution. The total KV request wait time might exceed SQL execution time, because KV requests are concurrent.
-- tiflash_mpp: TiFlash request processing time per second during SQL execution.
+- tiflash_mpp: Time of processing TiFlash requests per second during SQL execution.
 
 Green metrics stand for common KV write requests (such as prewrite and commit), blue metrics stand for common read requests, purple metrics stand for TiFlash MPP requests, and metrics in other colors stand for unexpected situations which you need to pay attention to. For example, pessimistic lock KV requests are marked red and TSO waiting is marked dark brown.
 
@@ -59,8 +59,8 @@ Number of commands processed by all TiDB instances per second based on type
 
 ### Queries Using Plan Cache OPS
 
-- avg-hit: the number of queries using the execution plan cache per second for all TiDB instances
-- avg-miss: the number of queries not using the execution plan cache per second for all TiDB instances
+- avg-hit: The number of queries using the execution plan cache per second for all TiDB instances
+- avg-miss: The number of queries not using the execution plan cache per second for all TiDB instances
 
 `avg-hit + avg-miss` is equal to `StmtExecute`, which is the number of all queries executed per second.
 
@@ -115,7 +115,6 @@ Connection Idle Duration indicates the duration of a connection being idle.
 - avg-in-txn: Average connection idle duration when the connection is within a transaction
 - avg-not-in-txn: Average connection idle duration when the connection is not within a transaction
 - 99-in-txn: P99 connection idle duration when the connection is within a transaction
-
 
 ### Connection Count
 
@@ -182,11 +181,11 @@ All these three metrics include the average duration and P99 duration in all TiK
     - `batch_cop`: Number of coprocessor requests in the batch requests.
     - `cop`: Number of coprocessor requests that are sent directly via the coprocessor interface.
     - `cop_dag`: Number of dag requests in all coprocessor requests.
-    - `super_batch`: number of requests that enable the Super Batch feature.
+    - `super_batch`: Number of requests that enable the Super Batch feature.
 - Executor QPS: The number of each type of dag executors in the requests received by all TiFlash instances. `table_scan` is the table scan executor. `selection` is the selection executor. `aggregation` is the aggregation executor. `top_n` is the `TopN` executor. `limit` is the limit executor.
 - Request Duration Overview: Provides a stacked graph of total processing time per second for all request types in all TiFlash instances.
-- Request Duration: The total processing duration for each MPP type and coprocessor request type in all TiFlash instances. The total processing duration is from the time that the coprocessor request is received to the time that the response of the request is completed, which includes the average and p99 latency.
-- Request Handle Duration: The actual processing duration for each MPP type and coprocessor request type in all TiFlash instances. The actual processing duration is from starting to execute the coprocessor request to completing the execution, which includes the average and p99 latency.
+- Request Duration: The total processing duration for each MPP and coprocessor request type in all TiFlash instances. It is from the time that the coprocessor request is received to the time that the response of the request is completed, which includes the average latency and p99 latency.
+- Request Handle Duration: The actual processing duration for each MPP and coprocessor request type in all TiFlash instances. It is from the start of executing the coprocessor request to the completion of the execution, which includes the average latency and p99 latency.
 - Raft Wait Index Duration: The time used by `wait_index` for all TiFlash instances, namely the time used to wait until Region index >= `read_index` after the `read_index` request is received.
 - Raft Batch Read Index Duration: The time used by `read_index` for all TiFlash instances. Most time is used for interaction with the Region leader and retry.
 - Write Throughput By Instance: The throughput of write by instance. It includes the throughput by applying the Raft write commands and Raft snapshots.
@@ -196,7 +195,7 @@ All these three metrics include the average duration and P99 duration in all TiK
 ## CDC
 
 - CPU usage: The CPU usage per TiCDC node.
-- Memory usage: The memory usage per TiFlash node.
+- Memory usage: The memory usage per TiCDC node.
 - Goroutine count: The number of goroutines of per TiCDC node.
 - Changefeed checkpoint lag: The progress lag of data replication (the unit is second) between the upstream and the downstream.
 - Changefeed resolved ts lag: The progress lag of data replication (the unit is second) between the upstream and TiCDC nodes.
@@ -208,11 +207,11 @@ All these three metrics include the average duration and P99 duration in all TiK
     - 3: Stopped
     - 4: Finished
     - -1: Unknown
-- Puller output events/s: The number of events that the Puller module of TiCDC nodes sends to the Sorter module per second.
+- Puller output events/s: The number of rows that the Puller module of TiCDC nodes sends to the Sorter module per second.
 - Sorter output events/s: The number of rows that the Sorter module of TiCDC nodes sends to the Mounter module per second.
 - Mounter output events/s: The number of rows that the Mounter module of TiCDC nodes sends to the Sink module per second.
-- Table sink output events/s: The number of rows that the Table Sorter module of the TiCDC nodes send to the Sink module per second.
+- Table sink output events/s: The number of rows that the Table Sorter module of the TiCDC nodes sends to the Sink module per second.
 - SinkV2 - Sink flush rows/s: The number of rows that the Sink module in the TiCDC node sends to the downstream per second.
-- Transaction Sink Full Flush Duration: The average latency and p999 latency that is taken by the MySQL Sink of TiCDC nodes to writing downstream transactions.
+- Transaction Sink Full Flush Duration: The average latency and p999 latency of writing downstream transactions by the MySQL Sink of TiCDC nodes.
 - MQ Worker Send Message Duration Percentile: The latency of sending messages by MQ worker when the downstream is Kafka.
-- Kafka Outgoing Bytes: The bytes of writing transactions to downstream for MQ Workload.
+- Kafka Outgoing Bytes: The traffic of writing downstream transactions in MQ Workload.
