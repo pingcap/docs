@@ -392,7 +392,7 @@ Starting from v6.5.0, the [`AMEND TRANSACTION`](/system-variables.md#tidb_enable
 
     + TiDB Dashboard
 
-        - Add three new fields to the slow query page: "Is Prepared?"，"Is Plan from Cache?"，"Is Plan from Binding?" [#1451](https://github.com/pingcap/tidb-dashboard/issues/1451) @[shhdgit](https://github.com/shhdgit)
+        - Add three new fields to the slow query page: "Is Prepared?", "Is Plan from Cache?", "Is Plan from Binding?" [#1451](https://github.com/pingcap/tidb-dashboard/issues/1451) @[shhdgit](https://github.com/shhdgit)
 
     + Backup & Restore (BR)
 
@@ -423,7 +423,7 @@ Starting from v6.5.0, the [`AMEND TRANSACTION`](/system-variables.md#tidb_enable
     - Fix the issue that modifying the partition column of a partitioned table causes DDL to hang [#38530](https://github.com/pingcap/tidb/issues/38530) @[mjonss](https://github.com/mjonss)
     - Fix the issue that the `ADMIN SHOW JOB` operation panics after upgrading from v4.0.16 to v6.4.0 [#38980](https://github.com/pingcap/tidb/issues/38980) @[tangenta](https://github.com/tangenta)
     - Fix the issue that the `tidb_decode_key` function fails to correctly parse the encoding of partitioned tables [#39304](https://github.com/pingcap/tidb/issues/39304) @[Defined2014](https://github.com/Defined2014)
-    - Fixe the issue that gRPC error logs are not redirected to the correct log file during log rotation [#38941](https://github.com/pingcap/tidb/issues/38941) @[xhebox](https://github.com/xhebox)
+    - Fix the issue that gRPC error logs are not redirected to the correct log file during log rotation [#38941](https://github.com/pingcap/tidb/issues/38941) @[xhebox](https://github.com/xhebox)
     - Fix the issue that TiDB generates an unexpected execution plan for the `BEGIN; SELECT... FOR UPDATE;` point query when TiKV is not configured as a read engine [#39344](https://github.com/pingcap/tidb/issues/39344) @[Yisaer](https://github.com/Yisaer)
     - Fix the issue that mistakenly pushing down `StreamAgg` to TiFlash causes wrong results [#39266](https://github.com/pingcap/tidb/issues/39266) @[fixdb](https://github.com/fixdb)
 
