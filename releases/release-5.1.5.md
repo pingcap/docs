@@ -139,7 +139,6 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v5.1/quick-start-with-
     (dup: release-5.3.2.md > Bug Fixes> TiFlash)- Fix the potential `index out of bounds` error if calling `json_length` with empty string [#2705](https://github.com/pingcap/tiflash/issues/2705)
     (dup: release-5.3.2.md > Bug Fixes> TiFlash)- Fix wrong decimal comparison results in corner cases [#4512](https://github.com/pingcap/tiflash/issues/4512)
     (dup: release-5.3.2.md > Bug Fixes> TiFlash)- Fix `TiFlash_schema_error` reported when `NOT NULL` columns are added [#4596](https://github.com/pingcap/tiflash/issues/4596)
-    - [#4091](https://github.com/pingcap/tiflash/issues/4091) @[ti-chi-bot](https://github.com/ti-chi-bot)
     (dup: release-5.3.4.md > Bug fixes> TiFlash)- Fix the issue that TiFlash bootstrap fails when `0.0` is used as the default value for integers, for example, `` `i` int(11) NOT NULL DEFAULT '0.0'`` [#3157](https://github.com/pingcap/tiflash/issues/3157)
 
 + Tools
