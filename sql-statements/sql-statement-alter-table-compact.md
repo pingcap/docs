@@ -70,7 +70,7 @@ To obtain greater table-level concurrency with higher resource usage, you can mo
 You can observe the progress of data compaction or determine whether to initiate compaction for a table by checking the `TOTAL_DELTA_ROWS` column in the `INFORMATION_SCHEMA.TIFLASH_TABLES` table. The larger the value of `TOTAL_DELTA_ROWS`, the more data that can be compacted. If `TOTAL_DELTA_ROWS` is `0`, all data in the table is in the best state and does not need to be compacted.
 
 <details>
-  <summary>Example: Check the compaction state of a common table</summary>
+  <summary>Example: Check the compaction state of a non-partitioned table</summary>
 
 ```sql
 USE test;
@@ -103,7 +103,7 @@ SELECT TOTAL_DELTA_ROWS, TOTAL_STABLE_ROWS FROM INFORMATION_SCHEMA.TIFLASH_TABLE
 +------------------+-------------------+
 |                0 |                 3 |
 +------------------+-------------------+
--- All data is in the best state and no compaction is required
+-- All data is in the best state and no compaction is needed
 ```
 
 </details>
@@ -135,7 +135,7 @@ SELECT PARTITION_NAME, TOTAL_DELTA_ROWS, TOTAL_STABLE_ROWS
 | pWest          |                0 |                 0 |
 | pCentral       |                0 |                 0 |
 +----------------+------------------+-------------------+
--- Some partitioned tables can be compacted
+-- Some partitions can be compacted
 ALTER TABLE employees COMPACT TIFLASH REPLICA;
 SELECT PARTITION_NAME, TOTAL_DELTA_ROWS, TOTAL_STABLE_ROWS
     FROM INFORMATION_SCHEMA.TIFLASH_TABLES t, INFORMATION_SCHEMA.PARTITIONS p
@@ -149,7 +149,7 @@ SELECT PARTITION_NAME, TOTAL_DELTA_ROWS, TOTAL_STABLE_ROWS
 | pWest          |                0 |                 0 |
 | pCentral       |                0 |                 0 |
 +----------------+------------------+-------------------+
--- Data in al partitions is in the best state and no compaction is required
+-- Data in all partitions is in the best state and no compaction is needed
 ```
 
 </details>
