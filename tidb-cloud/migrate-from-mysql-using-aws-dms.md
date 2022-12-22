@@ -38,19 +38,22 @@ AWS DMS does not support replicating `DROP TABLE`.
 
     ![Create replication instance](/media/tidb-cloud/aws-dms-tidb-cloud/aws-dms-to-tidb-cloud-create-instance.png)
 
-3. Fill in an instance name, and select an appropriate instance class. It is recommended to use `dms.t3.large` or a higher instance class to get better performance.
+3. Fill in an instance name, ARN, and description. 
 
-    ![Fill name and choose class](/media/tidb-cloud/aws-dms-tidb-cloud/aws-dms-to-tidb-cloud-choose-class.PNG)
-
-4. Configure the following information:
+4. Fill in the instance configuration:
+    - **Instance class**: select an appropriate instance class. It is recommended to use `dms.t3.large` or a higher instance class to get better performance.
     - **Engine version**: use the default configuration.
-    - **Allocated storage (GiB)**: use the default configuration.
-    - **VPC**: select the VPC that you need. It is recommended to use the same VPC as the upstream database to simplify the network configuration.
     - **Multi-AZ**: select **Single-AZ** or **Multi-AZ** based on your business needs.
 
-    ![Choose VPC](/media/tidb-cloud/aws-dms-tidb-cloud/aws-dms-to-tidb-cloud-vpc.PNG)
+5. Configure the storage in the **Allocated storage (GiB)** field. Use the default configuration.
 
-5. Configure the **Advanced security and network configuration**, **Maintenance**, and **Tags** if needed. Click **Create** to finish the instance creation.
+6. Configure connectivity and security. 
+    - **Network type - new**: Select **IPv4**. 
+    - **Virtual private cloud (VPC) for IPv4**: select the VPC that you need. It is recommended to use the same VPC as the upstream database to simplify the network configuration.
+    - **Replication subnet group**: Choose a subnet group for your replication instance. 
+    - **Public accessible**: Use the default configuration.
+
+7. Configure the **Advanced settings**, **Maintenance**, and **Tags** if needed. Click **Create replication instance** to finish the instance creation.
 
 ## Step 2. Create the source database endpoint
 
@@ -111,8 +114,6 @@ AWS DMS does not support replicating `DROP TABLE`.
 
 6. Configure the corresponding information. See [Set Up VPC Peering Connections](/tidb-cloud/set-up-vpc-peering-connections.md).
 
-    ![Fill in the VPC Peering information](/media/tidb-cloud/aws-dms-tidb-cloud/aws-dms-to-tidb-cloud-vpc-peering-info.png)
-
 7. Configure the target endpoint for the TiDB cluster.
     - **Endpoint type**: select **Target endpoint**.
     - **Endpoint identifier**: fill in a name for the endpoint.
@@ -159,11 +160,13 @@ AWS DMS does not support replicating `DROP TABLE`.
 
 3. Configure the following information:
     - **Editing mode**: select **Wizard**.
+    - **Custom CDC stop mode for source transactions**: use the default setting.
     - **Target table preparation mode**: select **Do nothing** or other options as needed. In this example, select **Do nothing**.
+    - **Stop task after full load completes**: use the default setting.
     - **Include LOB columns in replication**: select **Limited LOB mode**.
     - **Maximum LOB size in (KB)**: use the default value **32**.
     - **Turn on validation**: select it according to your needs.
-    - **Task logs**: select **Turn on CloudWatch logs** for troubleshooting in future.
+    - **Task logs**: select **Turn on CloudWatch logs** for troubleshooting in future. Use the default settings for the related configurations.
 
     ![Task settings](/media/tidb-cloud/aws-dms-tidb-cloud/aws-dms-to-tidb-cloud-task-settings.png)
 
