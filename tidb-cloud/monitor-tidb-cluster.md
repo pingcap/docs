@@ -61,22 +61,23 @@ In TiDB Cloud, you can view the commonly used metrics of a cluster from the foll
 
 The cluster overview page provides general metrics of a cluster.
 
-For dedicated Tier:
+For Dedicated Tier clusters:
+
 | Metric name  | Labels | Description                                   |
 | :------------| :------| :-------------------------------------------- |
 | QPS | total | The number of SQL statements executed per second in all TiDB instances. |
-| Query Duration | avg | The duration from receiving a request from the client to TiDB till TiDB executing the request and returning the result to the client. |
+| Query Duration | avg | The duration from the time TiDB receives a client request to the time TiDB executes the request and returns the result to the client. |
 | Active Connection | active connections | The number of active connections to all TiDB instances. |
 | CPU | avg-tidb, avg-tikv, avg-tiflash | The average statistics of CPU usage for all TiDB instances. |
 | Memory | avg-tidb, avg-tikv, avg-tiflash | TThe average statistics of Memory usage for all TiDB instances. |
 | Used Storage Size | total-tikv, total-tiflash | The total storage size on TiKV or TiFlash instances. |
 
-
 For Serverless Tier:
+
 | Metric name  | Labels | Description                                   |
 | :------------| :------| :-------------------------------------------- |
 | QPS | total | The number of SQL statements executed per second in Serverless Tier. |
-| Query Duration | avg | The duration from receiving a request from the client to TiDB till TiDB executing the request and returning the result to the client. |
+| Query Duration | avg | The duration from the time TiDB receives a client request to the time TiDB executes the request and returns the result to the client. |
 | Active Connection | active connections | The number of active connections to Serverless Tier. |
 | Used Storage Size | total-tikv, total-tiflash | The total storage size on TiKV or TiFlash instances. |
 
