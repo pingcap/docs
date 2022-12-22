@@ -288,7 +288,7 @@ tiup ctl:<cluster-version> pd -u https://127.0.0.1:2379 --cacert="path/to/ca" --
     config set low-space-ratio 0.9              // Set the threshold value of insufficient space to 0.9
     ```
 
--   `high-space-ratio`は、十分なストア スペースと見なされるしきい値を制御します。この構成は、 `region-score-formula-version`が`v1`に設定されている場合にのみ有効です。ノードが占有する容量の比率が指定された値よりも小さい場合、PD は残りの容量を無視し、主に実際のデータ ボリュームをスケジュールします。
+-   `high-space-ratio`は、十分なストア スペースと見なされるしきい値を制御します。この構成は、 `region-score-formula-version`が`v1`に設定されている場合にのみ有効です。ノードが占有する容量の比率が指定された値よりも小さい場合、PD は残りの容量を無視し、主に実際のデータ量をスケジュールします。
 
     ```bash
     config set high-space-ratio 0.5             // Set the threshold value of sufficient space to 0.5
@@ -478,7 +478,7 @@ Success!
 >> operator check 1                                     // Check the status of the operators related to Region 1
 ```
 
-リージョンの分割は、できるだけ中央に近い位置から開始します。この位置は、「スキャン」と「概算」という 2 つの戦略を使用して見つけることができます。それらの違いは、前者はリージョンをスキャンして中間キーを決定し、後者は SST ファイルに記録された統計をチェックしておおよその位置を取得することです。一般に、前者はより正確ですが、後者はより少ない I/O を消費し、より速く完了することができます。
+リージョンの分割は、できるだけ中央に近い位置から開始します。この位置は、「スキャン」と「概算」という 2 つの戦略を使用して見つけることができます。それらの違いは、前者はリージョンをスキャンして中間キーを決定するのに対し、後者は SST ファイルに記録された統計をチェックしておおよその位置を取得することです。一般に、前者はより正確ですが、後者はより少ない I/O を消費し、より速く完了することができます。
 
 ### <code>ping</code> {#code-ping-code}
 
@@ -857,7 +857,7 @@ Raw フォーマットの使用法:
     scheduler config balance-hot-region-scheduler set read-priorities query,byte
     ```
 
--   `strict-picking-store`は、ホットリージョンスケジューリングの検索スペースを制御します。通常は有効になっています。有効にすると、ホットリージョンスケジューリングにより、構成された 2 つのディメンションでホットスポットのバランスが確保されます。無効にすると、ホットリージョンスケジューリングは優先順位が最も高いディメンションのバランスのみを確保するため、他のディメンションのバランスが低下する可能性があります。通常、この構成を変更する必要はありません。
+-   `strict-picking-store`は、ホットリージョンスケジューリングの検索スペースを制御します。通常は有効になっています。有効にすると、ホットリージョンスケジューリングにより、構成された 2 つのディメンションでホットスポットのバランスが確保されます。無効にすると、ホットリージョンスケジューリングは優先度が最も高いディメンションのバランスのみを確保するため、他のディメンションのバランスが低下する可能性があります。通常、この構成を変更する必要はありません。
 
     ```bash
     scheduler config balance-hot-region-scheduler set strict-picking-store true
@@ -901,8 +901,7 @@ Raw フォーマットの使用法:
 
 > **ノート：**
 >
-> -   `store limit`コマンドの元の`region-add`および`region-remove`パラメータは廃止され、 `add-peer`および`remove-peer`に置き換えられました。
-> -   `pd-ctl`を使用して、TiKV ストアのステータス (アップ、切断、オフライン、ダウン、または廃棄) を確認できます。各ステータスの関係は[TiKV店舗の各ステータスの関係](/tidb-scheduling.md#information-collection)を参照してください。
+> `pd-ctl`を使用して、TiKV ストアのステータス (アップ、切断、オフライン、ダウン、または廃棄) を確認できます。各ステータスの関係は[TiKV店舗の各ステータスの関係](/tidb-scheduling.md#information-collection)を参照してください。
 
 ### <code>log [fatal | error | warn | info | debug]</code> {#code-log-fatal-error-warn-info-debug-code}
 
