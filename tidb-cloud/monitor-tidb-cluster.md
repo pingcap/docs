@@ -80,9 +80,6 @@ For Serverless Tier:
 | Active Connection | active connections | The number of active connections to Serverless Tier. |
 | Used Storage Size | total-tikv, total-tiflash | The total storage size on TiKV or TiFlash instances. |
 
-
-including total QPS, query duration, active connections, TiDB CPU, TiKV CPU, TiFlash CPU, TiDB memory, TiKV memory, TiFlash memory, TiKV used storage size, and TiFlash used storage size.
-
 To view metrics on the cluster overview page, take the following steps:
 
 1. Navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page.
