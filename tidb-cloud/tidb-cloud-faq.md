@@ -121,7 +121,7 @@ No. TiFlash data cannot be exported.
 
 ### Is TiDB Cloud secure?
 
-In TiDB Cloud, all data at rest is encrypted, and all network traffic is encrypted using Transport Layer Security(TLS). 
+In TiDB Cloud, all data at rest is encrypted, and all network traffic is encrypted using Transport Layer Security (TLS). 
 
 - Encryption of data at rest is automated using encrypted storage volumes. 
 - Encryption of data in transit between your client and your cluster is automated using TiDB Cloud web server TLS and TiDB cluster TLS.
