@@ -899,8 +899,12 @@ Usage:
 
 > **Note:**
 >
+<<<<<<< HEAD
 > - The original `region-add` and `region-remove` parameters of the `store limit` command are deprecated and are replaced with `add-peer` and `remove-peer`.
 > - You can use `pd-ctl` to check the status (Up, Disconnect, Offline, Down, or Tombstone) of a TiKV store. For the relationship between each status, refer to [Relationship between each status of a TiKV store](/tidb-scheduling.md#information-collection).
+=======
+> You can use `pd-ctl` to check the state (`Up`, `Disconnect`, `Offline`, `Down`, or `Tombstone`) of a TiKV store. For the relationship between each state, refer to [Relationship between each state of a TiKV store](/tidb-scheduling.md#information-collection).
+>>>>>>> aed6bc711 (Delete 2 pd parameters that have been deleted in code (#11644))
 
 ### `log [fatal | error | warn | info | debug]`
 
