@@ -35,7 +35,7 @@ For more information about handling hotspot, see [TiDB Hotspot Problem Handling]
 
 If read hotspots are unavoidable or the changing cost is very high, you can try using the Follower Read feature to better load the balance of reading requests to the follower Region.
 
-### Reduce latency for cross-datacenter deployments
+### Reduce latency for geo-distributed deployments
 
 If your TiDB cluster is deployed across districts or data centers, different replicas of a Region are distributed in different districts or data centers. In this case, you can configure Follower Read as `closest-adaptive` or `closest-replicas` to allow TiDB to prioritize reading from the current data center, which can significantly reduce the latency and traffic overhead of read operations. For implementation details, see [Follower Read](/follower-read.md).
 
