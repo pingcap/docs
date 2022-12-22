@@ -125,7 +125,7 @@ The diagrams of database time breakdown and execution time overview present both
 - Database Time by SQL Phase: Most time is consumed in the execute phase in green.
 - SQL Execute Time Overview: The KV request PessimisticLock shown in red consumes the most time during SQL execution, and the execution time is obviously longer than the total time of KV requests. This is caused by serious lock conflicts in write statements and frequent lock retries prolong `Retried execution time`. Currently, TiDB does not measure `Retried execution time`.
 
-**Example 5: HTAP CH-Benchmark Load**
+**Example 5: HTAP CH-Benchmark workload**
 
 ![HTAP](/media/performance/htap_tiflash_mpp.png)
 
@@ -183,24 +183,22 @@ In this workload, `Commit QPS` = `Rollback QPS` = `Select QPS`. The application 
 
 **Example 4: Prepared statements have a resource leak**
 
-The number of `StmtExecute` commands per second is much greater than that of `StmtClose` per second, which indicates that the application has a object leak for prepared statements.
+The number of `StmtPrepare` commands per second is much greater than that of `StmtClose` per second, which indicates that the application has an object leak for prepared statements.
 
 ![OLTP-Query](/media/performance/prepared_statement_leaking.png)
 
 - In the QPS panel, the red bold line indicates the number of failed queries, and the Y axis on the right indicates the coordinate value of the number. In this example, the number of failed quries per second is 74.6.
-- In the CPS By Type panel, the number of `StmtExecute` commands per second is much greater than that of `StmtClose` per second, which indicates that a object leak occurs in the application for prepared statements.
+- In the CPS By Type panel, the number of `StmtPrepare` commands per second is much greater than that of `StmtClose` per second, which indicates that an object leak occurs in the application for prepared statements.
 - In the Queries Using Plan Cache OPS panel, `avg-miss` is almost equal to `StmtExecute` in the CPS By Type panel, which indicates that almost all SQL executions miss the execution plan cache.
 
 #### KV/TSO Request OPS and KV Request Time By Source
 
 - In the KV/TSO Request OPS panel, you can view the statistics of KV and TSO requests per second. Among the statistics, `kv request total` represents the sum of all requests from TiDB to TiKV. By observing the types of requests from TiDB to PD and TiKV, you can get an idea of the workload profile within the cluster.
-- In the KV Request Time By Source panel, you can view the time ratio of each KV request and all request sources.
+- In the KV Request Time By Source panel, you can view the time ratio of each KV request type and all request sources.
     - kv request total time: The total time of processing KV and TiFlash requests per second.
     - Each KV request and the corresponding request source form a columnar stacked graph, in which `external` identifies normal business requests and `internal` identifies internal activity requests (such as DDL and auto analyze requests).
 
 In the KV Request Time By Source panel, you can view the total number of connections and the number of connections per TiDB. 
-
-The counts help you determine whether the total number of connections is normal and the number of connections per TiDB is even. `active connections` records the number of active connections, which is equal to the database time per second.
 
 **Example 1: Busy workload**
 
@@ -215,10 +213,10 @@ In this TPC-C workload:
 
 ![OLTP](/media/performance/internal_stats.png)
 
-In this workload:
+In this workload, only `ANALYZE` statements are running in the cluster:
 
-- The total number of KV requests per second is 3050 and the number of Cop requests per second is 1100.
-- Most of the KV processing time is spent on `Cop-internal_stats`, which indicates that the most time-consuming KV request is `Cop` from internal analyze operations.
+- The total number of KV requests per second is 35.5 and the number of Cop requests per second is 9.3.
+- Most of the KV processing time is spent on `Cop-internal_stats`, which indicates that the most time-consuming KV request is `Cop` from internal `ANALYZE` operations.
 
 #### TiDB CPU, TiKV CPU, and IO usage
 
@@ -273,7 +271,7 @@ In real customer scenarios, it is not rare that the bottleneck is outside the da
 - The network latency from the application server to the database is high. For example, the network latency is high because in public-cloud deployments the applications and the TiDB cluster are not in the same region, or the dns workload balancer and the TiDB cluster are not in the same region.
 - The bottleneck is in client applications. The application server's CPU cores and Numa resources cannot be fully utilized. For example, only one JVM is used to establish thousands of JDBC connections to TiDB.
 
-In the Connection Count panel, you can check the total number of connections and also the number of connections on each TiDB node, which helps you evaluate whether the total number of connections is normal and whether the number of connections on each TiDB node is unbalanced. `active connections` indicates the number of active connections, which is equal to the database time per second. The Y axis on the right indicates `disconnection/s`, which indicates the number of disconnections per second in a cluster, which can be used to determine whether the application uses short connections.
+In the Connection Count panel, you can check the total number of connections and also the number of connections on each TiDB node, which helps you determine whether the total number of connections is normal and whether the number of connections on each TiDB node is unbalanced. `active connections` indicates the number of active connections, which is equal to the database time per second. The Y axis on the right is for `disconnection/s`, which indicates the number of disconnections per second in a cluster, which can be used to determine whether the application uses short connections.
 
 **Example 1: The number of disconnection/s is too high**
 
