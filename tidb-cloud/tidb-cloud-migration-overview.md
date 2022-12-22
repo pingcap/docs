@@ -13,7 +13,7 @@ When you migrate data from a MySQL-compatible database, you can perform full dat
 
 - Migrate using Data Migration
 
-    TiDB is highly compatible with MySQL. You can migrate data from any MySQL-compatible databases to TiDB Cloud smoothly. For more information, [Migrate MySQL-Compatible Databases to TiDB Cloud Using Data Migration](/tidb-cloud/migrate-from-mysql-using-data-migration.md).
+    TiDB is highly compatible with MySQL. You can use Data Migration in the TiDB Cloud console to migrate data from any MySQL-compatible databases to TiDB Cloud smoothly. For more information, see [Migrate MySQL-Compatible Databases to TiDB Cloud Using Data Migration](/tidb-cloud/migrate-from-mysql-using-data-migration.md).
 
 - Migrate using AWS DMS
 
@@ -45,9 +45,9 @@ If you have data files in CSV, Parquet, Aurora Snapshot, or SQL formats, you can
 
 If your source data is stored in Amazon S3 or Google Cloud Storage (GCS) buckets, before importing or migrating the data to TiDB Cloud, you need to configure access to the buckets. For more information, see [Configure Amazon S3 access and GCS access](/tidb-cloud/config-s3-and-gcs-access.md).
 
-### Naming Conventions for Data Import
+### Naming conventions for data import
 
-To make sure that your data is imported successfully, you need to prepare schema files and data files that conforms to the naming conventions. For more information, see [Naming Conventions for Data Import](/tidb-cloud/naming-conventions-for-data-import.md).
+To make sure that your data can be imported successfully, you need to prepare schema files and data files that conform to the naming conventions. For more information, see [Naming Conventions for Data Import](/tidb-cloud/naming-conventions-for-data-import.md).
 
 ### Troubleshoot access denied errors during data import from Amazon S3
 

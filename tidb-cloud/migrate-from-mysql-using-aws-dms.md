@@ -48,10 +48,10 @@ AWS DMS does not support replicating `DROP TABLE`.
 5. Configure the storage in the **Allocated storage (GiB)** field. Use the default configuration.
 
 6. Configure connectivity and security. 
-    - **Network type - new**: Select **IPv4**. 
+    - **Network type - new**: select **IPv4**. 
     - **Virtual private cloud (VPC) for IPv4**: select the VPC that you need. It is recommended to use the same VPC as the upstream database to simplify the network configuration.
-    - **Replication subnet group**: Choose a subnet group for your replication instance. 
-    - **Public accessible**: Use the default configuration.
+    - **Replication subnet group**: choose a subnet group for your replication instance. 
+    - **Public accessible**: use the default configuration.
 
 7. Configure the **Advanced settings**, **Maintenance**, and **Tags** if needed. Click **Create replication instance** to finish the instance creation.
 
