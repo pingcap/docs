@@ -1659,7 +1659,7 @@ Configuration items related to `raftdb`
 ### `info-log-roll-time`
 
 + The interval at which Info logs are truncated. If the value is `0s`, logs are not truncated.
-+ Default value: `"0s"`(which means logs are not truncated)
++ Default value: `"0s"` (which means logs are not truncated)
 
 ### `info-log-keep-log-file-num`
 
@@ -1894,7 +1894,8 @@ Configuration items related to BR backup.
 
 ### `sst-max-size`
 
-+ When the size of a backup file in the Region of `[a,e)` is larger than `sst-max-size`, the file is backed up to several files with regions `[a,b)`, `[b,c)`, `[c,d)` and `[d,e)`, and the size of `[a,b)`, `[b,c)`, `[c,d)` is the same as that of `sst-max-size` (or slightly larger).
++ The threshold of the backup SST file size. If the size of a backup file in a TiKV Region exceeds this threshold, the file is backed up to several files with the TiKV Region split into multiple Region ranges. Each of the files in the split Regions is the same size as `sst-max-size` (or slightly larger).
++ For example, when the size of a backup file in the Region of `[a,e)` is larger than `sst-max-size`, the file is backed up to several files with regions `[a,b)`, `[b,c)`, `[c,d)` and `[d,e)`, and the size of `[a,b)`, `[b,c)`, `[c,d)` is the same as that of `sst-max-size` (or slightly larger).
 + Default value: `"144MB"`
 
 ### `enable-auto-tune` <span class="version-mark">New in v5.4.0</span>
@@ -1916,7 +1917,7 @@ Configuration items related to BR backup.
 
 ### `home`
 
-+ Allows TiKV to find the HDFS shell command. This configuration item has the same effect to the environment variable `$HADOOP_HOME`.
++ Specifies the location of the HDFS shell command and allows TiKV to find the shell command. This configuration item has the same effect as the environment variable `$HADOOP_HOME`.
 + Default value: `""`
 
 ### `linux-user`
