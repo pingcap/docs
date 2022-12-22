@@ -51,7 +51,7 @@ Note that if you are using AWS PrivateLink or VPC peering connections, and if th
 
     ![Cross-AZ traffic charges](/media/tidb-cloud/dm-billing-cross-az-fees.png)
 
-- If the Data Migration job and the TiDB cluster are not in the same AZ, cross-AZ traffic charges are incurred when the Data Migration job writes data to the target TiDB cluster. In addition, if the Data Migration job and TiDB cluster are not in the same AZ (or region) with the source database, cross-AZ (or cross-region) traffic charges are incurred when the Data Migration job collects data from the source database.
+- If the Data Migration job and the TiDB cluster are not in the same AZ, cross-AZ traffic charges are incurred when the Data Migration job writes data to the target TiDB cluster. In addition, if the Data Migration job and the TiDB cluster are not in the same AZ (or region) with the source database, cross-AZ (or cross-region) traffic charges are incurred when the Data Migration job collects data from the source database.
 
     ![Cross-region and cross-AZ traffic charges](/media/tidb-cloud/dm-billing-cross-region-and-az-fees.png)
 
