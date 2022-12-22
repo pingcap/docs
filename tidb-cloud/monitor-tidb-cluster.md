@@ -59,7 +59,7 @@ In TiDB Cloud, you can view the commonly used metrics of a cluster from the foll
 
 ### Metrics on the cluster overview page
 
-The cluster overview page provides general metrics of a cluster。
+The cluster overview page provides general metrics of a cluster.
 
 For dedicated Tier:
 | Metric name  | Labels | Description                                   |
