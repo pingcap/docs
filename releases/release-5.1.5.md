@@ -128,7 +128,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v5.1/quick-start-with-
 '` as an invalid separator [#4036](https://github.com/pingcap/tiflash/issues/4036)
     (dup: release-5.4.1.md > Bug Fixes> TiFlash)- Fix the wrong result that occurs when casting `DATETIME` to `DECIMAL` [#4151](https://github.com/pingcap/tiflash/issues/4151)
     (dup: release-5.4.1.md > Bug Fixes> TiFlash)- Fix the bug that some exceptions are not handled properly [#4101](https://github.com/pingcap/tiflash/issues/4101)
-    - Fix the metadata corruption issue when `Prepare Merge` is triggered after a new election is finished but the isolated peer is not informed [#3435](https://github.com/pingcap/tiflash/issues/3435) @[solotzg](https://github.com/solotzg)
+    - Fix the issue that `Prepare Merge` may cause the metadata of the raft store to be damaged and cause TiFlash to restart [#3435](https://github.com/pingcap/tiflash/issues/3435) @[solotzg](https://github.com/solotzg)
     (dup: release-5.3.2.md > Bug Fixes> TiFlash)- Fix a bug that an MPP query might fail due to random gRPC keepalive timeout [#4662](https://github.com/pingcap/tiflash/issues/4662)
     (dup: release-5.4.1.md > Bug Fixes> TiFlash)- Fix the issue that the result of `IN` is incorrect in multi-value expressions [#4016](https://github.com/pingcap/tiflash/issues/4016)
     (dup: release-5.4.1.md > Bug Fixes> TiFlash)- Fix a bug that MPP tasks might leak threads forever [#4238](https://github.com/pingcap/tiflash/issues/4238)
