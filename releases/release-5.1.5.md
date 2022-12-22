@@ -115,7 +115,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v5.1/quick-start-with-
     (dup: release-5.4.1.md > Bug Fixes> TiFlash)- Fix the panic issue that occurs when TLS is enabled [#4196](https://github.com/pingcap/tiflash/issues/4196)
     (dup: release-6.1.1.md > Bug fixes> TiFlash)- Fix a bug that TiFlash might crash due to an error in parallel aggregation [#5356](https://github.com/pingcap/tiflash/issues/5356) @[gengliqi](https://github.com/gengliqi)
     (dup: release-5.4.1.md > Bug Fixes> TiFlash)- Fix the issue that a query containing `JOIN` might be hung if an error occurs [#4195](https://github.com/pingcap/tiflash/issues/4195)
-
+- None [#5849](https://github.com/pingcap/tiflash/issues/5849) @[ti-chi-bot](https://github.com/ti-chi-bot)
     <!--storage owner: flowbehappy -->
 
     (dup: release-5.4.1.md > Bug Fixes> TiFlash)- Fix the bug that invalid storage directory configurations lead to unexpected behaviors [#4093](https://github.com/pingcap/tiflash/issues/4093)
