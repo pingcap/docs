@@ -224,7 +224,7 @@ To view the values of monitoring items with different granularities, you can mod
     {{< copyable "sql" >}}
 
     ```sql
-    select * from metrics_schema.tidb_query_duration where value is not null and time>='2020-03-25 23:40:00' and time <= '2020-03-25 23:42:00' and quantile=0.99;
+    SELECT * from metrics_schema.tidb_query_duration where value is not null and time>='2020-03-25 23:40:00' and time <= '2020-03-25 23:42:00' and quantile=0.99;
     ```
 
     ```sql
