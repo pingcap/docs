@@ -134,7 +134,7 @@ To get more specific information about business data encryption in TiDB Cloud, c
 
 ### What versions of TLS does TiDB Cloud support?
 
-All connections to the cluster over the internet use TLS 1.2 or 1.3.
+TiDB Cloud supports TLS 1.2 or TLS 1.3.
 
 ### Can I run TiDB Cloud in my VPC?
 
