@@ -68,11 +68,11 @@ Compared with the previous LTS 6.1.0, 6.5.0 not only includes new features, impr
     INSERT INTO t2 SELECT Mod(x,y) FROM t1;
     ```
 
-    During the experimental phase, this feature is disabled by default. To enable it, you can set the [`tidb_enable_tiflash_read_for_write_stmt`](/system-variables.md#tidb_enable_tiflash_read_for_write_stmt-new-in-v630) system variable to `ON`. There are no special restrictions on the result table specified by `INSERT INTO` for this feature, and you are free to add a TiFlash replica to that result table or not. Typical usage scenarios of this feature include:
+    During the experimental phase, this feature is disabled by default. To enable it, you can set the [`tidb_enable_tiflash_read_for_write_stmt`](/system-variables.md#tidb_enable_tiflash_read_for_write_stmt-new-in-v630) system variable to `ON`. There are no special restrictions on the result table specified by `INSERT INTO` for this feature, and you are free to add or not add a TiFlash replica to that result table. Typical usage scenarios of this feature include:
 
     - Run complex analytical queries using TiFlash
     - Reuse TiFlash query results or deal with highly concurrent online requests
-    - Need a relatively small result set comparing with the input data size, preferably smaller than 100MiB.
+    - Need a relatively small result set compared with the input data size, preferably smaller than 100 MiB.
 
   For more information, see the [user documentation](/tiflash/tiflash-results-materialization.md).
 
@@ -82,7 +82,7 @@ Compared with the previous LTS 6.1.0, 6.5.0 not only includes new features, impr
 
     In v6.5.0, TiDB supports binding historical execution plans by extending the binding object in the [`CREATE [GLOBAL | SESSION] BINDING`](/sql-statements/sql-statement-create-binding.md) statement. When the execution plan of a SQL statement changes, you can bind the original execution plan by specifying `plan_digest` in the `CREATE [GLOBAL | SESSION] BINDING` statement to quickly recover SQL performance, as long as the original execution plan is still in the SQL execution history memory table (for example, `statements_summary`). This feature can simplify the process of handling execution plan change issues and improve your maintenance efficiency.
 
-    For more information, see [user documentation](/sql-plan-management.md#bind-historical-execution-plans).
+    For more information, see [user document](/sql-plan-management.md#bind-historical-execution-plans).
 
 ### Security
 
@@ -92,25 +92,25 @@ Compared with the previous LTS 6.1.0, 6.5.0 not only includes new features, impr
 
     TiDB provides the SQL function [`VALIDATE_PASSWORD_STRENGTH()`](https://dev.mysql.com/doc/refman/5.7/en/encryption-functions.html#function_validate-password-strength) to validate the password strength.
 
-    For more information, see [User document](/password-management.md#password-complexity-policy).
+    For more information, see [user document](/password-management.md#password-complexity-policy).
 
 * Support the password expiration policy [#38936](https://github.com/pingcap/tidb/issues/38936) @[CbcWestwolf](https://github.com/CbcWestwolf) **tw@ran-huang**
 
     TiDB supports configuring the password expiration policy, including manual expiration, global-level automatic expiration, and account-level automatic expiration. After this policy is enabled, you must change your passwords periodically. This reduces the risk of password leakage due to long-term use and improves password security.
 
-    For more information, see [User document](/password-management.md#password-expiration-policy).
+    For more information, see [user document](/password-management.md#password-expiration-policy).
 
 * Support the password reuse policy [#38937](https://github.com/pingcap/tidb/issues/38937) @[keeplearning20221](https://github.com/keeplearning20221) **tw@ran-huang**
 
     TiDB supports configuring the password reuse policy, including global-level password reuse policy and account-level password reuse policy. After this policy is enabled, you cannot use the passwords that you have used within a specified period or the most recent several passwords that you have used. This reduces the risk of password leakage due to repeated use of passwords and improves password security.
 
-    For more information, see [User document](/password-management.md#password-reuse-policy).
+    For more information, see [user document](/password-management.md#password-reuse-policy).
 
 * Support failed-login tracking and temporary account locking policy [#38938](https://github.com/pingcap/tidb/issues/38938) @[lastincisor](https://github.com/lastincisor) **tw@ran-huang**
 
     After this policy is enabled, if you log in to TiDB with incorrect passwords multiple times consecutively, the account is temporarily locked. After the lock time ends, the account is automatically unlocked.
 
-    For more information, see [User document](/password-management.md#failed-login-tracking-and-temporary-account-locking-policy).
+    For more information, see [user document](/password-management.md#failed-login-tracking-and-temporary-account-locking-policy).
 
 ### Observability
 
@@ -122,7 +122,7 @@ Compared with the previous LTS 6.1.0, 6.5.0 not only includes new features, impr
 
     - The compute work of TiDB Dashboard does not pose pressure on PD nodes. This ensures more stable cluster operation.
     - The user can still access TiDB Dashboard for diagnosis even if the PD node is unavailable.
-    - Accessing TiDB Dashboard in Internet does not involve the privileged interfaces of PD. Therefore, the security risk of the cluster is mitigated.
+    - Accessing TiDB Dashboard in Internet does not involve the privileged interfaces of PD. Therefore, the security risk of the cluster is reduced.
 
   For more information, see [Deploy TiDB Dashboard independently in TiDB Operator](https://docs.pingcap.com/tidb-in-kubernetes/dev/get-started#deploy-tidb-dashboard-independently).
 
@@ -298,13 +298,13 @@ Compared with the previous LTS 6.1.0, 6.5.0 not only includes new features, impr
 | Variable name | Change type | Description |
 |--------|------------------------------|------|
 |[`tidb_enable_amend_pessimistic_txn`](/system-variables.md#tidb_enable_amend_pessimistic_txn-new-in-v407)| Deprecated | Starting from v6.5.0, this variable is deprecated, and TiDB uses the [Metadata Lock](/metadata-lock.md) feature by default to avoid the `Information schema is changed` error. |
-| [`tidb_enable_outer_join_reorder`](/system-variables.md#tidb_enable_outer_join_reorder-new-in-v610) | Modified | Changes the default value from `OFF` to `ON`, meaning that the support of Outer Join for the [Join Reorder](/join-reorder.md) algorithm is enabled by default. |
+| [`tidb_enable_outer_join_reorder`](/system-variables.md#tidb_enable_outer_join_reorder-new-in-v610) | Modified | Changes the default value from `OFF` to `ON` after further tests, meaning that the support of Outer Join for the [Join Reorder](/join-reorder.md) algorithm is enabled by default. |
 | [`tidb_cost_model_version`](/system-variables.md#tidb_cost_model_version-introduced-new-in-v620) | Modified | Changes the default value from `1` to `2` after further tests, meaning that Cost Model Version 2 is used for index selection and operator selection by default.  |
 | [`tidb_enable_metadata_lock`](/system-variables.md#tidb_enable_metadata_lock-new-in-v630) | Modified | Changes the default value from `OFF` to `ON` after further tests, meaning that the metadata lock feature is enabled by default. |
 | [`tidb_enable_tiflash_read_for_write_stmt`](/system-variables.md#tidb_enable_tiflash_read_for_write_stmt-new-in-v630) | Modified | Takes effect starting from v6.5.0. It controls whether read operations in SQL statements containing `INSERT`, `DELETE`, and `UPDATE` can be pushed down to TiFlash. The default value is `OFF`. |
 | [`tidb_ddl_enable_fast_reorg`](/system-variables.md#tidb_ddl_enable_fast_reorg-new-in-v630) | Modified | Changes the default value from `OFF` to `ON` after further tests, meaning that the acceleration of `ADD INDEX` and `CREATE INDEX` is enabled by default. |
 | [`tidb_mem_quota_query`](/system-variables.md#tidb_mem_quota_query) | Modified | For versions earlier than TiDB v6.5.0, this variable is used to set the threshold value of memory quota for a query. For TiDB v6.5.0 and later versions, this variable is used to set the threshold value of memory quota for a session.  |
-| [`tidb_replica_read`](/system-variables.md#tidb_replica_read-new-in-v40) | Modified | Starting from v6.5.0, when this variable is set to`closest-adaptive` and the estimated result of a read request is greater than or equal to [`tidb_adaptive_closest_read_threshold`](/system-variables.md#tidb_adaptive_closest_read_threshold-new-in-v630), the number of TiDB nodes whose `closest-adaptive` configuration takes effect is limited in each availability zone, which is always the same as the number of TiDB nodes in the availability zone with the fewest TiDB nodes, and the other TiDB nodes automatically read from the leader replica. |
+| [`tidb_replica_read`](/system-variables.md#tidb_replica_read-new-in-v40) | Modified | Starting from v6.5.0, to optimize load balancing across TiDB nodes, when this variable is set to`closest-adaptive` and the estimated result of a read request is greater than or equal to [`tidb_adaptive_closest_read_threshold`](/system-variables.md#tidb_adaptive_closest_read_threshold-new-in-v630), the number of TiDB nodes whose `closest-adaptive` configuration takes effect is limited in each availability zone, which is always the same as the number of TiDB nodes in the availability zone with the fewest TiDB nodes, and the other TiDB nodes automatically read from the leader replica. |
 | [`tidb_server_memory_limit`](/system-variables.md#tidb_server_memory_limit-new-in-v640) | Modified | Changes the default value from `0` to `80%`, meaning that the memory limit for a TiDB instance is 80% of the total memory by default. |
 | [`default_password_lifetime`](/system-variables.md#default_password_lifetime-new-in-v650) | Newly added | Sets the global policy for automatic password expiration to require users to change passwords periodically. The default value `0` indicates that passwords never expire. |
 | [`disconnect_on_expired_password`](/system-variables.md#disconnect_on_expired_password-new-in-v650) | Newly added | Indicates whether TiDB disconnects the client connection when the password is expired. This variable is read-only. |
