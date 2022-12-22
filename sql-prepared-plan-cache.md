@@ -125,11 +125,32 @@ MySQL [test]> select @@last_plan_from_cache;
 
 ## Memory management of Prepared Plan Cache
 
+<CustomContent platform="tidb">
+
+Using Prepared Plan Cache incurs memory overhead. To view the total memory consumption by the cached execution plans of all sessions in each TiDB instance, you can use the [**Plan Cache Memory Usage** monitoring panel](/grafana-tidb-dashboard.md) in Grafana.
+
+> **Note:**
+>
+> Because of the the memory reclaim mechanism of Golang and some uncounted memory structures, the memory displayed in Grafana is not equal to the actual heap memory usage. It is tested that there is a deviation of about ±20% between the memory displayed in Grafana and the actual heap memory usage.
+
+To view the total number of execution plans cached in each TiDB instance, you can use the [**Plan Cache Plan Num** panel](/grafana-tidb-dashboard.md) in Grafana.
+
+The following is an example of the **Plan Cache Memory Usage** and **Plan Cache Plan Num** panels in Grafana:
+
+![grafana_panels](/media/planCache-memoryUsage-planNum-panels.png)
+
+You can control the maximum number of plans that can be cached in each session by configuring the system variable `tidb_prepared_plan_cache_size`. For different environments, the recommended value is as follows and you can adjust it according to the monitoring panels:
+
+</CustomContent>
+<CustomContent platform="tidb-cloud">
+
 Using Prepared Plan Cache has some memory overhead. In internal tests, each cached plan consumes an average of 100 KiB of memory. Because Plan Cache is currently at the `SESSION` level, the total memory consumption is approximately `the number of sessions * the average number of cached plans in a session * 100 KiB`.
 
 For example, the current TiDB instance has 50 sessions in concurrency and each session has approximately 100 cached plans. The total memory consumption is approximately `50 * 100 * 100 KiB` = `512 MB`.
 
 You can control the maximum number of plans that can be cached in each session by configuring the system variable `tidb_prepared_plan_cache_size`. For different environments, the recommended value is as follows:
+
+</CustomContent>
 
 - When the memory threshold of the TiDB server instance is <= 64 GiB, set `tidb_prepared_plan_cache_size` to `50`.
 - When the memory threshold of the TiDB server instance is > 64 GiB, set `tidb_prepared_plan_cache_size` to `100`.
@@ -265,3 +286,13 @@ mysql> select @@last_plan_from_cache;       -- Reuse the last plan
 +------------------------+
 1 row in set (0.00 sec)
 ```
+
+<CustomContent platform="tidb">
+
+### Monitoring
+
+In [the Grafana dashboard](/grafana-tidb-dashboard.md) on the TiDB page in the **Executor** section, there are the "Queries Using Plan Cache OPS" and "Plan Cache Miss OPS" graphs. These graphs can be used to check if both TiDB and the application are configured correctly to allow the SQL Plan Cache to work correctly. The **Server** section on the same page provides the "Prepared Statement Count" graph. This graph shows a non-zero value if the application uses prepared statements, which is required for the SQL Plan Cache to function correctly.
+
+![`sql_plan_cache`](/media/performance/sql_plan_cache.png)
+
+</CustomContent>

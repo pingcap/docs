@@ -38,6 +38,10 @@ ExplainableStmt ::=
 >
 > When you use the MySQL client to connect to TiDB, to read the output result in a clearer way without line wrapping, you can use the `pager less -S` command. Then, after the `EXPLAIN` result is output, you can press the right arrow <kbd>→</kbd> button on your keyboard to horizontally scroll through the output.
 
+> **Note:**
+>
+> In the returned execution plan, for all probe-side child nodes of `IndexJoin` and `Apply` operators, the meaning of `estRows` since v6.4.0 is different from that before v6.4.0. You can find details in [TiDB Query Execution Plan Overview](/explain-overview.md#understand-explain-output).
+
 Currently, `EXPLAIN` in TiDB outputs 5 columns: `id`, `estRows`, `task`, `access object`, `operator info`. Each operator in the execution plan is described by these attributes, with each row in the `EXPLAIN` output describing an operator. The description of each attribute is as follows:
 
 | Attribute name          | Description |
@@ -183,14 +187,19 @@ EXPLAIN DELETE FROM t1 WHERE c1=3;
 4 rows in set (0.01 sec)
 ```
 
-To specify the content and format of the output, you can use the `FORMAT = xxx` syntax in the `EXPLAIN` statement.
+To specify the format of the `EXPLAIN` output, you can use the `FORMAT = xxx` syntax. Currently, TiDB supports the following formats:
 
 | FORMAT | Description |
 | ------ | ------ |
-| Empty  | Same as `row` |
+| Not specified  | If the format is not specified, `EXPLAIN` uses the default format `row`. |
 | `row`  | The `EXPLAIN` statement outputs results in a tabular format. See [Understand the Query Execution Plan](/explain-overview.md) for more information. |
 | `brief`  | The operator IDs in the output of the `EXPLAIN` statement are simplified, compared with those when `FORMAT` is left unspecified. |
 | `dot`    | The `EXPLAIN` statement outputs DOT execution plans, which can be used to generate PNG files through a `dot` program (in the `graphviz` package). |
+| `tidb_json` | The `EXPLAIN` statement outputs execution plans in JSON and stores the operator information in a JSON array. |
+
+<SimpleTab>
+
+<div label="brief">
 
 The following is an example when `FORMAT` is `"brief"` in `EXPLAIN`:
 
@@ -211,6 +220,10 @@ EXPLAIN FORMAT = "brief" DELETE FROM t1 WHERE c1 = 3;
 +-------------------------+---------+-----------+---------------+--------------------------------+
 4 rows in set (0.001 sec)
 ```
+
+</div>
+
+<div label="DotGraph">
 
 In addition to the MySQL standard result format, TiDB also supports DotGraph and you need to specify `FORMAT = "dot"` as in the following example:
 
@@ -268,10 +281,62 @@ If your computer has no `dot` program, copy the result to [this website](http://
 
 ![Explain Dot](/media/explain_dot.png)
 
+</div>
+
+<div label="JSON">
+
+To get the output in JSON, specify `FORMAT = "tidb_json"` in the `EXPLAIN` statement. The following is an example:
+
+```sql
+CREATE TABLE t(id int primary key, a int, b int, key(a));
+EXPLAIN FORMAT = "tidb_json" SELECT id FROM t WHERE a = 1;
+```
+
+```
++------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| TiDB_JSON                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
++------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| [
+    {
+        "id": "Projection_4",
+        "estRows": "10.00",
+        "taskType": "root",
+        "operatorInfo": "test.t.id",
+        "subOperators": [
+            {
+                "id": "IndexReader_6",
+                "estRows": "10.00",
+                "taskType": "root",
+                "operatorInfo": "index:IndexRangeScan_5",
+                "subOperators": [
+                    {
+                        "id": "IndexRangeScan_5",
+                        "estRows": "10.00",
+                        "taskType": "cop[tikv]",
+                        "accessObject": "table:t, index:a(a)",
+                        "operatorInfo": "range:[1,1], keep order:false, stats:pseudo"
+                    }
+                ]
+            }
+        ]
+    }
+]
+ |
++------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+1 row in set (0.01 sec)
+```
+
+In the output, `id`, `estRows`, `taskType`, `accessObject`, and `operatorInfo` have the same meaning as the columns in the default format. `subOperators` is an array that stores the sub-nodes. The fields and meanings of the sub-nodes are the same as the parent node. If a field is missing, it means that the field is empty.
+
+</div>
+
+</SimpleTab>
+
 ## MySQL compatibility
 
 * Both the format of `EXPLAIN` and the potential execution plans in TiDB differ substaintially from MySQL.
-* TiDB does not support the `FORMAT=JSON`  or `FORMAT=TREE` options.
+* TiDB does not support the `FORMAT=JSON` or `FORMAT=TREE` options.
+* `FORMAT=tidb_json` in TiDB is the JSON format output of the default `EXPLAIN` result. The format and fields are different from the `FORMAT=JSON` output in MySQL.
 
 ### `EXPLAIN FOR CONNECTION`
 

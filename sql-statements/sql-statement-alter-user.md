@@ -12,7 +12,7 @@ This statement changes an existing user inside the TiDB privilege system. In the
 
 ```ebnf+diagram
 AlterUserStmt ::=
-    'ALTER' 'USER' IfExists (UserSpecList RequireClauseOpt ConnectionOptions LockOption | 'USER' '(' ')' 'IDENTIFIED' 'BY' AuthString)
+    'ALTER' 'USER' IfExists (UserSpecList RequireClauseOpt ConnectionOptions PasswordOption LockOption AttributeOption | 'USER' '(' ')' 'IDENTIFIED' 'BY' AuthString)
 
 UserSpecList ::=
     UserSpec ( ',' UserSpec )*
@@ -26,7 +26,11 @@ Username ::=
 AuthOption ::=
     ( 'IDENTIFIED' ( 'BY' ( AuthString | 'PASSWORD' HashString ) | 'WITH' StringName ( 'BY' AuthString | 'AS' HashString )? ) )?
 
+PasswordOption ::= ( 'PASSWORD' 'EXPIRE' ( 'DEFAULT' | 'NEVER' | 'INTERVAL' 'N' 'DAY' )? | 'PASSWORD' 'HISTORY' ( 'DEFAULT' | 'N' ) ｜ 'PASSWORD' 'REUSE' 'INTERVAL' ( 'DEFAULT' | 'N' 'DAY' ) | 'FAILED_LOGIN_ATTEMPTS' 'N' | 'PASSWORD_LOCK_TIME' ( 'N' | 'UNBOUNDED' ) )?
+
 LockOption ::= ( 'ACCOUNT' 'LOCK' | 'ACCOUNT' 'UNLOCK' )?
+
+AttributeOption ::= ( 'COMMENT' CommentString | 'ATTRIBUTE' AttributeString )?
 ```
 
 ## Examples
@@ -63,13 +67,73 @@ ALTER USER 'newuser' ACCOUNT LOCK;
 Query OK, 0 rows affected (0.02 sec)
 ```
 
-> **Note:**
->
-> Do not use `ACCOUNT UNLOCK` to unlock a [role](/sql-statements/sql-statement-create-role.md). Otherwise, the unlocked role can be used to log in to TiDB without password.
+Modify the attributes of `newuser`:
 
-## MySQL compatibility
+```sql
+ALTER USER 'newuser' ATTRIBUTE '{"newAttr": "value", "deprecatedAttr": null}';
+SELECT * FROM information_schema.user_attributes;
+```
 
-* In MySQL this statement is used to change attributes such as to expire a password. This functionality is not yet supported by TiDB.
+```sql
++-----------+------+--------------------------+
+| USER      | HOST | ATTRIBUTE                |
++-----------+------+--------------------------+
+| newuser   | %    | {"newAttr": "value"}     |
++-----------+------+--------------------------+
+1 rows in set (0.00 sec)
+```
+
+Modify the comment of `newuser` using `ALTER USER ... COMMENT`:
+
+```sql
+ALTER USER 'newuser' COMMENT 'Here is the comment';
+SELECT * FROM information_schema.user_attributes;
+```
+
+```sql
++-----------+------+--------------------------------------------------------+
+| USER      | HOST | ATTRIBUTE                                              |
++-----------+------+--------------------------------------------------------+
+| newuser   | %    | {"comment": "Here is the comment", "newAttr": "value"} |
++-----------+------+--------------------------------------------------------+
+1 rows in set (0.00 sec)
+```
+
+Remove the comment of `newuser` using `ALTER USER ... ATTRIBUTE`:
+
+```sql
+ALTER USER 'newuser' ATTRIBUTE '{"comment": null}';
+SELECT * FROM information_schema.user_attributes;
+```
+
+```sql
++-----------+------+---------------------------+
+| USER      | HOST | ATTRIBUTE                 |
++-----------+------+---------------------------+
+| newuser   | %    | {"newAttr": "value"}      |
++-----------+------+---------------------------+
+1 rows in set (0.00 sec)
+```
+
+Change the automatic password expiration policy for `newuser` to never expire via `ALTER USER ... PASSWORD EXPIRE NEVER`:
+
+```sql
+ALTER USER 'newuser' PASSWORD EXPIRE NEVER;
+```
+
+```
+Query OK, 0 rows affected (0.02 sec)
+```
+
+Modify the password reuse policy for `newuser` to disallow the reuse of any password used within the last 90 days using `ALTER USER ... PASSWORD REUSE INTERVAL ... DAY`:
+
+```sql
+ALTER USER 'newuser' PASSWORD REUSE INTERVAL 90 DAY;
+```
+
+```
+Query OK, 0 rows affected (0.02 sec)
+```
 
 ## See also
 
