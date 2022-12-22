@@ -789,6 +789,15 @@ MPP is a distributed computing framework provided by the TiFlash engine, which a
 - Default value: `00:00 +0000`
 - This variable is used to restrict the time window that the automatic update of statistics is permitted. For example, to only allow automatic statistics updates between 1 AM and 3 AM, set `tidb_auto_analyze_start_time='01:00 +0000'` and `tidb_auto_analyze_end_time='03:00 +0000'`.
 
+### tidb_auto_build_stats_concurrency <span class="version-mark">New in v6.5.0</span>
+
+- Scope: GLOBAL
+- Persists to cluster: Yes
+- Type: Integer
+- Default value: `1`
+- Range: `[1, 256]`
+- This variable is used to set the concurrency of executing the automatic update of statistics.
+
 ### tidb_backoff_lock_fast
 
 - Scope: SESSION | GLOBAL
@@ -1245,7 +1254,7 @@ MPP is a distributed computing framework provided by the TiFlash engine, which a
 
 > **Warning:**
 >
-> Starting from v6.6.0, this variable will be deprecated, and TiDB will use the [Metadata Lock](/metadata-lock.md) feature by default to avoid the `Information schema is changed` error.
+> Starting from v6.5.0, this variable is deprecated, and TiDB uses the [Metadata Lock](/metadata-lock.md) feature by default to avoid the `Information schema is changed` error. Note that this variable is planned to be removed in v6.6.0.
 
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
@@ -1710,6 +1719,17 @@ MPP is a distributed computing framework provided by the TiFlash engine, which a
 - Type: Boolean
 - Default value: `ON`
 - This variables specifies whether to use the pipeline execution algorithm for window functions.
+
+### tidb_enable_plan_replayer_capture
+
+> Warning:
+>
+> This variable controls a feature that is not fully functional in the current TiDB version. Do not change the default value.
+
+- Scope: SESSION | GLOBAL
+- Persists to cluster: Yes
+- Type: Boolean
+- Default value: `OFF`
 
 ### tidb_enable_prepared_plan_cache <span class="version-mark">New in v6.1.0</span>
 
@@ -3853,6 +3873,15 @@ For details, see [Identify Slow Queries](/identify-slow-queries.md).
 - Type: Boolean
 - Default value: `OFF`
 - This variable is used to control whether the `SYSDATE` function can be replaced by the `NOW` function. This configuration item has the same effect as the MySQL option [`sysdate-is-now`](https://dev.mysql.com/doc/refman/8.0/en/server-options.html#option_mysqld_sysdate-is-now).
+
+### tidb_sysproc_scan_concurrency <span class="version-mark">New in v6.5.0</span>
+
+- Scope: GLOBAL
+- Persists to cluster: Yes
+- Type: Integer
+- Default value: `1`
+- Range: `[1, 256]`
+- This variable is used to set the concurrency of scan operations performed when TiDB executes internal SQL statements (such as an automatic update of statistics).
 
 ### tidb_table_cache_lease <span class="version-mark">New in v6.0.0</span>
 

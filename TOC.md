@@ -492,6 +492,7 @@
       - [Handle Errors](/dm/dm-error-handling.md)
     - [Release Notes](/dm/dm-release-notes.md)
   - TiCDC
+    - [Overview](/ticdc/ticdc-overview.md)
     - [Deploy and Maintain](/ticdc/deploy-ticdc.md)
     - Changefeed
       - [Overview](/ticdc/ticdc-changefeed-overview.md)
@@ -505,6 +506,7 @@
       - [Monitoring Metrics](/ticdc/monitor-ticdc.md)
       - [Alert Rules](/ticdc/ticdc-alert-rules.md)
     - Reference
+      - [Architecture](/ticdc/ticdc-architecture.md)
       - [TiCDC Server Configurations](/ticdc/ticdc-server-config.md)
       - [TiCDC Changefeed Configurations](/ticdc/ticdc-changefeed-config.md)
       - Output Protocols
@@ -649,6 +651,7 @@
       - [`KILL [TIDB]`](/sql-statements/sql-statement-kill.md)
       - [`LOAD DATA`](/sql-statements/sql-statement-load-data.md)
       - [`LOAD STATS`](/sql-statements/sql-statement-load-stats.md)
+      - [`LOCK STATS`](/sql-statements/sql-statement-lock-stats.md)
       - [`MODIFY COLUMN`](/sql-statements/sql-statement-modify-column.md)
       - [`PREPARE`](/sql-statements/sql-statement-prepare.md)
       - [`RECOVER TABLE`](/sql-statements/sql-statement-recover-table.md)
@@ -702,6 +705,7 @@
       - [`SHOW SCHEMAS`](/sql-statements/sql-statement-show-schemas.md)
       - [`SHOW STATS_HEALTHY`](/sql-statements/sql-statement-show-stats-healthy.md)
       - [`SHOW STATS_HISTOGRAMS`](/sql-statements/sql-statement-show-histograms.md)
+      - [`SHOW STATS_LOCKED`](/sql-statements/sql-statement-show-stats-locked.md)
       - [`SHOW STATS_META`](/sql-statements/sql-statement-show-stats-meta.md)
       - [`SHOW STATUS`](/sql-statements/sql-statement-show-status.md)
       - [`SHOW TABLE NEXT_ROW_ID`](/sql-statements/sql-statement-show-table-next-rowid.md)
@@ -716,6 +720,7 @@
       - [`TABLE`](/sql-statements/sql-statement-table.md)
       - [`TRACE`](/sql-statements/sql-statement-trace.md)
       - [`TRUNCATE`](/sql-statements/sql-statement-truncate.md)
+      - [`UNLOCK STATS`](/sql-statements/sql-statement-unlock-stats.md)
       - [`UPDATE`](/sql-statements/sql-statement-update.md)
       - [`USE`](/sql-statements/sql-statement-use.md)
       - [`WITH`](/sql-statements/sql-statement-with.md)
