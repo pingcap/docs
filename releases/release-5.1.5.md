@@ -37,7 +37,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v5.1/quick-start-with-
     (dup: release-5.4.0.md > Bug fixes> TiDB)- Fix the issue that the result of `concat(ifnull(time(3)))` in TiDB is different from that in MySQL [#29498](https://github.com/pingcap/tidb/issues/29498)
     (dup: release-5.0.6.md > Bug fixes> TiDB)- Fix the issue that the SQL statements that contain `cast(integer as char) union string` return wrong results [#29513](https://github.com/pingcap/tidb/issues/29513)
     (dup: release-6.1.1.md > Bug fixes> TiDB)- Fix the issue that `INL_HASH_JOIN` might hang when used with `LIMIT` [#35638](https://github.com/pingcap/tidb/issues/35638) @[guo-shaoge](https://github.com/guo-shaoge)
-    - Fix wrong `ANY_VALUE` result when there are regions returning empty data [#30923](https://github.com/pingcap/tidb/issues/30923)
+    - Fix the wrong `ANY_VALUE` result that occurs when a Region returns empty data [#30923](https://github.com/pingcap/tidb/issues/30923)
     (dup: release-5.2.4.md > Bug fixes> TiDB)- Fix wrong results of index join caused by an innerWorker panic [#31494](https://github.com/pingcap/tidb/issues/31494)
 
     <!--planner owner: winoros-->
@@ -49,9 +49,9 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v5.1/quick-start-with-
     (dup: release-5.2.4.md > Bug fixes> TiDB)- Fix the issue that the background HTTP service of TiDB might not exit successfully and makes the cluster in an abnormal state [#30571](https://github.com/pingcap/tidb/issues/30571)
     (dup: release-5.4.0.md > Bug fixes> TiDB)- Fix the issue that concurrent column type change causes inconsistency between the schema and the data [#31048](https://github.com/pingcap/tidb/issues/31048)
     (dup: release-5.3.4.md > Bug fixes> TiDB)- Fix the issue that `KILL TIDB` cannot take effect immediately on idle connections [#24031](https://github.com/pingcap/tidb/issues/24031)
-    - Fix the bug that setting any session variable will make `tidb_snapshot` unwork. [#35515](https://github.com/pingcap/tidb/issues/35515)
+    - Fix the bug that setting any session variable will make `tidb_snapshot` not working [#35515](https://github.com/pingcap/tidb/issues/35515)
     (dup: release-5.3.4.md > Bug fixes> TiDB)- Fix the issue that the Region cache is not cleaned up in time when the Region is merged [#37141](https://github.com/pingcap/tidb/issues/37141)
-    - Fix the panic issue caused by the connection array race. [#33773](https://github.com/pingcap/tidb/issues/33773)
+    - Fix the panic issue caused by the connection array race in the KV client [#33773](https://github.com/pingcap/tidb/issues/33773)
     (dup: release-6.1.1.md > Bug fixes> TiDB)- Fix the issue that when TiDB Binlog is enabled, executing the `ALTER SEQUENCE` statement might cause a wrong metadata version and cause Drainer to exit [#36276](https://github.com/pingcap/tidb/issues/36276) @[AilinKid](https://github.com/AilinKid)
     (dup: release-5.3.2.md > Bug Fixes> TiDB)- Fix the bug that TiDB may panic when querying statement summary tables [#35340](https://github.com/pingcap/tidb/issues/35340)
     (dup: release-5.4.1.md > Bug Fixes> TiDB)- Fix the issue that TiDB gets the wrong result when using TiFlash to scan tables with empty range although TiFlash does not support reading tables with empty range yet [#33083](https://github.com/pingcap/tidb/issues/33083)
@@ -62,7 +62,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v5.1/quick-start-with-
     (dup: release-5.3.4.md > Bug fixes> TiDB)- Fix the issue that the `EXECUTE` statement might throw an unexpected error in specific scenarios [#37187](https://github.com/pingcap/tidb/issues/37187)
     (dup: release-5.4.2.md > Bug Fixes> TiDB)- Fix the planner wrong behaviors that occur when `tidb_opt_agg_push_down` and `tidb_enforce_mpp` are enabled [#34465](https://github.com/pingcap/tidb/issues/34465)
     (dup: release-6.1.1.md > Bug fixes> TiDB)- Fix a bug that TiDB might send coprocessor requests when executing the `SHOW COLUMNS` statement [#36496](https://github.com/pingcap/tidb/issues/36496) @[tangenta](https://github.com/tangenta)
-    - Add warnings for `lock tables` and `unlock tables` when `enable-table-lock` flag is not enabled [#28967](https://github.com/pingcap/tidb/issues/28967)
+    - Add warnings for `lock tables` and `unlock tables` when the `enable-table-lock` flag is not enabled [#28967](https://github.com/pingcap/tidb/issues/28967)
     - Fix the issue that range partitions allow multiple `MAXVALUE` partitions [#36329](https://github.com/pingcap/tidb/issues/36329)
 
 + TiKV
