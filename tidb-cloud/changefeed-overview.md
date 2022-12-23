@@ -4,7 +4,7 @@ title: Changefeed
 
 # Changefeed
 
-TiDB Cloud Changefeed help you stream data from TiDB Cloud.
+TiDB Cloud Changefeed help you stream data from TiDB Cloud to your MySQL/Kafka.
 
 > **Note:**
 >
