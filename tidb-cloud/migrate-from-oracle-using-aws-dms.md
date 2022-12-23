@@ -35,7 +35,7 @@ The following diagram illustrates the high-level architecture.
 
 Read the following prerequisites before you get started:
 
-- [AWS DMS Prerequisites](/tidb-cloud/migrate-from-mysql-using-aws-dms.md#Prerequisites)
+- [AWS DMS Prerequisites](/tidb-cloud/migrate-from-mysql-using-aws-dms.md#prerequisites)
 - [AWS Cloud Account](https://aws.amazon.com)
 - [TiDB Cloud Account](https://tidbcloud.com)
 - [DBeaver](https://dbeaver.io/)
