@@ -20,7 +20,6 @@ When you migrate data from a MySQL-compatible database, you can perform full dat
     If you want to migrate heterogeneous databases, such as PostgreSQL, Oracle, and SQL Server to TiDB Cloud, it is recommended to use AWS Database Migration Service (AWS DMS).
 
     - [Migrate MySQL-Compatible Databases to TiDB Cloud Using AWS DMS](/tidb-cloud/migrate-from-mysql-using-aws-dms.md)
-    - [Migrate from Amazon RDS for Oracle to TiDB Cloud Serverless Tier Using AWS DMS](/tidb-cloud/migrate-from-oracle-using-aws-dms.md)
 
 - Migrate and merge MySQL shards
 
