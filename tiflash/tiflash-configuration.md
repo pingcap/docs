@@ -68,9 +68,6 @@ tmp_path = "/tidb-data/tiflash-9000/tmp"
 
 ## Storage paths settings take effect starting from v4.0.9
 [storage]
-    ## This configuration item is deprecated since v5.2.0. You can use the [storage.io_rate_limit] settings below instead.
-
-    # bg_task_io_rate_limit = 0
 
     [storage.main]
     ## The list of directories to store the main data. More than 90% of the total data is stored in
