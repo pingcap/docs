@@ -342,13 +342,29 @@ This variable is an alias for [`last_insert_id`](#last_insert_id).
 
 ### max_connections
 
+<CustomContent platform="tidb">
+
 - Scope: GLOBAL
 - Persists to cluster: No
 - Type: Integer
-- Default value: `0`
+- Default value: `151`
 - Range: `[0, 100000]`
-- The maximum number of connections permitted for a single TiDB instance.
+- The maximum number of connections permitted for a single TiDB instance (not effective). This is a noop variable and does not take effect in the current TiDB version. To set the maximum number of connections permitted for a single TiDB instance in the current version, use the TiDB configuration item [`max-server-connections`](/tidb-configuration-file.md#max-server-connections).
 - The value of `0` means no limit.
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+- Scope: GLOBAL d
+- Persists to cluster: No
+- Type: Integer
+- Default value: `151`
+- Range: `[0, 100000]`
+- The maximum number of connections permitted for a single TiDB instance (not effective). This is a noop variable and does not take effect in the current TiDB version.
+- The value of `0` means no limit.
+
+</CustomContent>
 
 ### max_execution_time
 
