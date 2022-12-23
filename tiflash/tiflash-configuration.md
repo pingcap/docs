@@ -68,12 +68,8 @@ tmp_path = "/tidb-data/tiflash-9000/tmp"
 
 ## Storage paths settings take effect starting from v4.0.9
 [storage]
-    ## This configuration item is deprecated since v5.2.0. You can use the [storage.io_rate_limit] settings below instead.
-
-    # bg_task_io_rate_limit = 0
 
     ## DTFile format
-    ## * format_version = 1, the old format, deprecated.
     ## * format_version = 2, the default format.
     ## * format_version = 3, the new format, which provides more data validation features.
     # format_version = 2
