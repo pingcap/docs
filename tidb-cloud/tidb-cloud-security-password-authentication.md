@@ -9,7 +9,7 @@ This document describes how to manage TiDB Cloud console passwords and how to en
 
 ## Sign up
 
-To sign up for a TiDB Cloud account, please click on the [TiDB Cloud homepage](https://tidbcloud.com/signup).
+If you want to manage your TiDB Cloud passwords using the TiDB Cloud console, you can sign up for a TiDB Cloud account using your email and password. 
 
 1. Enter the following information:
 
