@@ -5,16 +5,16 @@ summary: Learn how to upload local files to TiDB Cloud.
 
 # Import Local Files to TiDB Cloud
 
-You can upload local files to TiDB Cloud directly. You only need to select a local file, select the target cluster and table, make changes if needed, and then directly import the data into TiDB Cloud.
+You can import local files to TiDB Cloud directly. You only need to select a local file, select the target cluster and table, make changes if needed, and then directly import the data into TiDB Cloud.
 
 This feature now supports the following:
 
-- Uploading one CSV file within 50 MiB for one task
+- Importing one CSV file within 50 MiB for one task
 - Only Serverless Tier clusters
 
 ## Prerequisites
 
-- Prepare the local file to be uploaded. The file must be in CSV format within 50 MiB.
+- Prepare the local file to be imported. The file must be in CSV format within 50 MiB.
 - Use [SQL Editor](/develop/dev-guide-tidb-crud-sql.md#explore-sql-with-tidb) to create a table in the target database in advance. The table schema must be consistent with the local file. Alternatively, you can enter the table name in the import task and let TiDB Cloud help you automatically create the target table.
 
 ## Upload local files
@@ -31,7 +31,7 @@ This feature now supports the following:
 
     ![Upload local files](/media/tidb-cloud/tidb-cloud-upload-local-files.png)
 
-6. Configure the table schema.
+6. Configure the table.
 
     If you want to use the first row the CSV file as the column names, select **Use the first row as Column Name**. You can click **Edit CSV configuration** to edit the CSV configuration. For more information about the CSV configuration, see [CSV Configurations for Importing Data](/tidb-cloud/csv-config-for-import-data.md).
 
