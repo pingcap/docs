@@ -15,7 +15,7 @@ If you want to manage your TiDB Cloud passwords using the TiDB Cloud console, yo
 
 2. Read Privacy Policy and Services Agreement.
 
-3. Check the box to agree **I agree to the Privacy Policy and Services Agreement**
+3. Check the box to agree **I agree to the Privacy Policy and Services Agreement**.
 
 4. Click **Sign up** to complete your account registration
 
