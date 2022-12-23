@@ -1,9 +1,9 @@
 ---
-title: Migration Overview
-summary: Learn an overview of data migration scenarios and the solutions for TiDB Cloud.
+title: Migration and Import Overview
+summary: Learn an overview of data migration and import scenarios for TiDB Cloud.
 ---
 
-# Migration Overview
+# Migration and Import Overview
 
 You can migrate data from a wide variety of data sources to TiDB Cloud. This document gives an overview of the data migration scenarios.
 
@@ -17,7 +17,10 @@ When you migrate data from a MySQL-compatible database, you can perform full dat
 
 - Migrate using AWS DMS
 
-    You can also use AWS DMS to migrate data from MySQL-compatible databases to TiDB Cloud. For more information, see [Migrate MySQL-Compatible Databases to TiDB Cloud Using AWS DMS](/tidb-cloud/migrate-from-mysql-using-aws-dms.md).
+    If you want to migrate heterogeneous databases, such as PostgreSQL, Oracle, and SQL Server to TiDB Cloud, it is recommended to use AWS Database Migration Service (AWS DMS).
+
+    - [Migrate MySQL-Compatible Databases to TiDB Cloud Using AWS DMS](/tidb-cloud/migrate-from-mysql-using-aws-dms.md)
+    - [Migrate from Amazon RDS for Oracle to TiDB Cloud Serverless Tier Using AWS DMS](/tidb-cloud/migrate-from-oracle-using-aws-dms.md)
 
 - Migrate and merge MySQL shards
 
@@ -25,11 +28,11 @@ When you migrate data from a MySQL-compatible database, you can perform full dat
 
 ## Import data from files to TiDB Cloud
 
-If you have data files in CSV, Parquet, Aurora Snapshot, or SQL formats, you can import these files to TiDB Cloud in one go. The import scenarios and methods are as follows:
+If you have data files in SQL, CSV, Parquet, or Aurora Snapshot formats, you can import these files to TiDB Cloud in one go. The import scenarios and methods are as follows:
 
-- Import sample data to TiDB Cloud
+- Import sample data (SQL file) to TiDB Cloud
 
-    You can import sample data to TiDB Cloud to quickly get familiar with the TiDB Cloud interface and the import process. For more information, see [Import Sample Data to TiDB Cloud](/tidb-cloud/import-sample-data.md).
+    You can import sample data (SQL file) to TiDB Cloud to quickly get familiar with the TiDB Cloud interface and the import process. For more information, see [Import Sample Data to TiDB Cloud](/tidb-cloud/import-sample-data.md).
 
 - Import CSV files from Amazon S3 or GCS into TiDB Cloud
 
