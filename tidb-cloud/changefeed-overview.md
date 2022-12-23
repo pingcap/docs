@@ -34,7 +34,7 @@ TiDB Cloud provides the following changefeeds to help you stream data from TiDB 
 1. Navigate to the **Changefeed** tab of a cluster.
 2. Click the **Action... > Pause/Resume** of the corresponding Changefeed in Changefeed list.
 
-## Edit a MySQL sink
+## Edit a sink
 
 > **Note:**
 >
