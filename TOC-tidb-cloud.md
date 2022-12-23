@@ -101,8 +101,10 @@
     -   [概要](/tidb-cloud/tidb-cloud-migration-overview.md)
     -   データをTiDB Cloudに移行する
         -   [データ移行を使用して MySQL 互換データベースから移行する](/tidb-cloud/migrate-from-mysql-using-data-migration.md)
-        -   [オンプレミス TiDB からTiDB Cloudへの移行](/tidb-cloud/migrate-from-op-tidb.md)
         -   [大規模なデータセットの MySQL シャードを移行およびマージする](/tidb-cloud/migrate-sql-shards.md)
+        -   [オンプレミス TiDB からTiDB Cloudへの移行](/tidb-cloud/migrate-from-op-tidb.md)
+        -   [AWS DMS を使用して MySQL 互換データベースから移行する](/tidb-cloud/migrate-from-mysql-using-aws-dms.md)
+        -   [AWS DMS を使用して Amazon RDS for Oracle から移行する](/tidb-cloud/migrate-from-oracle-using-aws-dms.md)
     -   TiDB Cloudへのデータのインポート
         -   [サンプルデータのインポート (SQL ファイル)](/tidb-cloud/import-sample-data.md)
         -   [Amazon S3 または GCS から CSV ファイルをインポートする](/tidb-cloud/import-csv-files.md)

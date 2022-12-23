@@ -4,7 +4,7 @@ summary: Learn how to configure TiFlash.
 aliases: ['/docs/dev/tiflash/tiflash-configuration/','/docs/dev/reference/tiflash/configuration/']
 ---
 
-# TiFlash の構成 {#configure-tiflash}
+# TiFlash を構成する {#configure-tiflash}
 
 このドキュメントでは、TiFlash の展開と使用に関連する構成パラメーターを紹介します。
 
@@ -69,12 +69,8 @@ delta_index_cache_size = 0
 
 ## Storage paths settings take effect starting from v4.0.9
 [storage]
-    ## This configuration item is deprecated since v5.2.0. You can use the [storage.io_rate_limit] settings below instead.
-
-    # bg_task_io_rate_limit = 0
 
     ## DTFile format
-    ## * format_version = 1, the old format, deprecated.
     ## * format_version = 2, the default format for versions < v6.0.0.
     ## * format_version = 3, the default format for versions >= v6.0.0, which provides more data validation features.
     # format_version = 3
@@ -254,7 +250,7 @@ delta_index_cache_size = 0
 
 ### マルチディスク展開 {#multi-disk-deployment}
 
-TiFlash はマルチディスク展開をサポートしています。 TiFlash ノードに複数のディスクがある場合は、次のセクションで説明するパラメーターを構成することで、それらのディスクを最大限に活用できます。 TiUP に使用する TiFlash の構成テンプレートについては、 [TiFlash トポロジの複雑なテンプレート](https://github.com/pingcap/docs/blob/master/config-templates/complex-tiflash.yaml)を参照してください。
+TiFlash はマルチディスク配置をサポートしています。 TiFlash ノードに複数のディスクがある場合は、次のセクションで説明するパラメーターを構成することで、それらのディスクを最大限に活用できます。 TiUP に使用する TiFlash の構成テンプレートについては、 [TiFlash トポロジの複雑なテンプレート](https://github.com/pingcap/docs/blob/master/config-templates/complex-tiflash.yaml)を参照してください。
 
 #### v4.0.9 より前のバージョンの TiDB を使用したマルチディスク展開 {#multi-disk-deployment-with-tidb-version-earlier-than-v4-0-9}
 
@@ -262,13 +258,13 @@ v4.0.9 より前の TiDB クラスターの場合、TiFlash はストレージ �
 
 `path`に複数のデータ格納ディレクトリがある場合は、それぞれをカンマで区切ります。たとえば、 `/nvme_ssd_a/data/tiflash,/sata_ssd_b/data/tiflash,/sata_ssd_c/data/tiflash`です。環境内に複数のディスクがある場合は、各ディレクトリを 1 つのディスクに対応させ、すべてのディスクのパフォーマンスを最大化するために、最高のパフォーマンスを持つディスクを前面に配置することをお勧めします。
 
-TiFlash ノードに同様の I/O メトリクスを持つディスクが複数ある場合は、 `path_realtime_mode`パラメータをデフォルト値のままにしておくことができます (または明示的に`false`に設定できます)。これは、データがすべてのストレージ ディレクトリに均等に分散されることを意味します。ただし、最新のデータは最初のディレクトリにのみ書き込まれるため、対応するディスクは他のディスクよりもビジーです。
+TiFlash ノードに同様の I/O メトリクスを持つディスクが複数ある場合は、 `path_realtime_mode`パラメータをデフォルト値のままにしておくことができます (または、明示的に`false`に設定できます)。これは、データがすべてのストレージ ディレクトリに均等に分散されることを意味します。ただし、最新のデータは最初のディレクトリにのみ書き込まれるため、対応するディスクは他のディスクよりもビジーです。
 
 TiFlash ノードに異なる I/O メトリックを持つ複数のディスクがある場合は、 `path_realtime_mode`から`true`に設定し、最高の I/O メトリックを持つディスクを`path`の前に配置することをお勧めします。つまり、最初のディレクトリには最新のデータのみが格納され、古いデータは他のディレクトリに均等に分散されます。この場合、最初のディレクトリの容量は、すべてのディレクトリの合計容量の 10% として計画する必要があることに注意してください。
 
 #### TiDB v4.0.9 以降を使用したマルチディスク展開 {#multi-disk-deployment-with-tidb-v4-0-9-or-later}
 
-v4.0.9 以降のバージョンの TiDB クラスターの場合、TiFlash はストレージ エンジンのメイン データと最新データを複数のディスクに保存することをサポートします。複数のディスクに TiFlash ノードをデプロイする場合は、ノードを最大限に活用するために、 `[storage]`セクションでストレージ ディレクトリを指定することをお勧めします。 v4.0.9 ( `path`および`path_realtime_mode` ) より前の構成は引き続きサポートされることに注意してください。
+v4.0.9 以降のバージョンの TiDB クラスターの場合、TiFlash はストレージ エンジンのメイン データと最新データを複数のディスクに格納することをサポートします。複数のディスクに TiFlash ノードをデプロイする場合は、ノードを最大限に活用するために、 `[storage]`セクションでストレージ ディレクトリを指定することをお勧めします。 v4.0.9 ( `path`および`path_realtime_mode` ) より前の構成は引き続きサポートされることに注意してください。
 
 TiFlash ノードに同様の I/O メトリックを持つ複数のディスクがある場合は、 `storage.main.dir`のリストで対応するディレクトリを指定し、 `storage.latest.dir`を空のままにすることをお勧めします。 TiFlash は、I/O プレッシャーとデータをすべてのディレクトリに分散します。
 

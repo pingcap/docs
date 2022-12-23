@@ -15,7 +15,7 @@ TiDB サーバーレス層は、TLS 接続のみを許可し、非 TLS 接続を
 
 ## どの TLS バージョンを使用できますか? {#what-tls-versions-can-i-use}
 
-TiDB サーバーレス層は、TLS 1.2 および TLS 1.3 のみをサポートします。
+TiDB サーバーレス層は、TLS 1.2 および TLS 1.3 をサポートしています。
 
 ## どのような証明書が必要ですか? {#what-certificates-do-i-need}
 
