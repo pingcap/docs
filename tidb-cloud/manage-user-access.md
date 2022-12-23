@@ -29,7 +29,7 @@ Under this structure:
 
 To check which organizations you belong to, perform these steps:
 
-1. Click the account name in the upper-right corner of the TiDB Cloud console.
+1. Click <MDSvgIcon name="icon-top-organization" /> **Organization** in the upper-right corner of the TiDB Cloud console.
 
 2. Click **Organization Settings**. You can view your organization.
 
@@ -40,7 +40,6 @@ If you are a member of multiple organizations, you can switch your account betwe
 To switch between organizations, perform these steps:
 
 1. Click <MDSvgIcon name="icon-top-organization" /> **Organization** in the upper-right corner of the TiDB Cloud console.
-
 2. Select **Switch Organization** in the drop-down menu, and click the organization you want to switch to.
 
 ### Set the time zone for your organization
@@ -49,7 +48,7 @@ If you are the organization owner, you can modify the system display time accord
 
 To change the local timezone setting, perform the following steps:
 
-1. Click the account name in the upper-right corner of the TiDB Cloud console.
+1. Click <MDSvgIcon name="icon-top-organization" /> **Organization** in the upper-right corner of the TiDB Cloud console.
 
 2. Click **Organization Settings**. The organization settings page is displayed.
 
@@ -181,7 +180,7 @@ If you are the owner of an organization, you can remove project members. Otherwi
 
 To remove a member from a project, perform the following steps:
 
-1. Click the account name in the upper-right corner of the TiDB Cloud console.
+1. Click <MDSvgIcon name="icon-top-organization" /> **Organization** in the upper-right corner of the TiDB Cloud console.
 
 2. Click **Organization Settings**. The organization settings page is displayed.
 
@@ -193,7 +192,7 @@ To remove a member from a project, perform the following steps:
 
 If you are the owner of an organization, you can perform the following steps to configure roles for your organization members:
 
-1. Click the account name in the upper-right corner of the TiDB Cloud console.
+1. Click <MDSvgIcon name="icon-top-organization" /> **Organization** in the upper-right corner of the TiDB Cloud console.
 
 2. Click **Organization Settings**. The organization settings page is displayed.
 
