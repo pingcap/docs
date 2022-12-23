@@ -61,7 +61,7 @@ If you are the organization owner, you can modify the system display time accord
 
 If you are the owner of an organization, you can invite organization members. Otherwise, skip this section.To invite a member to an organization, perform the following steps:
 
-1. Click the account name in the upper-right corner of the TiDB Cloud console.
+1. Click <MDSvgIcon name="icon-top-organization" /> **Organization** in the upper-right corner of the TiDB Cloud console.
 
 2. Click **Organization Settings**. The organization settings page is displayed.
 
@@ -87,7 +87,9 @@ If you are the owner of an organization, you can invite organization members. Ot
 
 ### Remove an organization member
 
-If you are the owner of an organization, you can remove organization members. Otherwise, skip this section.To remove a member from an organization, perform the following steps:
+If you are the owner of an organization, you can remove organization members. Otherwise, skip this section.
+
+To remove a member from an organization, perform the following steps:
 
 > **Note:**
 >
@@ -97,19 +99,19 @@ If you are the owner of an organization, you can remove organization members. Ot
 
 2. Click **Organization Settings**. The organization settings page is displayed.
 
-3. Click **By All Users**.
+3. Click **User Management**, and then select the **By All Users** tab.
 
 4. Click **Delete** in the user row that you want to delete.
 
-## Manage Project Access
+## Manage project access
 
-### Create a Project
+### Create a project
 
 To create a new project, perform the following steps:
 
 1. Click the account name in the upper-right corner of the TiDB Cloud console.
 
-2. Click **Organization Settings**. The Projects tab is displayed by default.
+2. Click **Organization Settings**. The **Projects** tab is displayed by default.
 
 3. Click **Create New Project**.
 
@@ -117,25 +119,25 @@ To create a new project, perform the following steps:
 
 5. Click **Confirm**.
 
-### View a Projects
+### View projects
 
 To check which project you belong to, perform the following steps:
 
-1. Click the account name in the upper-right corner of the TiDB Cloud console.
+1. Click <MDSvgIcon name="icon-top-organization" /> **Organization** in the upper-right corner of the TiDB Cloud console.
 
-2. Click **Organization Settings**. The Projects tab is displayed by default.
+2. Click **Organization Settings**. The **Projects** tab is displayed by default.
 
-### Rename a Project Name
+### Rename a project
 
-To create a new project, perform the following steps:
+To rename a project, perform the following steps:
 
-1. Click the account name in the upper-right corner of the TiDB Cloud console.
+1. Click <MDSvgIcon name="icon-top-organization" /> **Organization** in the upper-right corner of the TiDB Cloud console.
 
-2. Click **Organization Settings**. The Projects tab is displayed by default.
+2. Click **Organization Settings**. The **Projects** tab is displayed by default.
 
-3. Select your project to be renamed, and Click **Rename**.
+3. In the row of your project to be renamed, click **Rename**.
 
-4. Enter your project name.
+4. Enter a new project name.
 
 5. Click **Confirm**.
 
@@ -171,13 +173,15 @@ To invite a member to a project, perform the following steps:
 
 ## Remove a project member
 
-If you are the owner of an organization, you can remove project members. Otherwise, skip this section.To remove a member from a project, perform the following steps:
+If you are the owner of an organization, you can remove project members. Otherwise, skip this section.
+
+To remove a member from a project, perform the following steps:
 
 1. Click the account name in the upper-right corner of the TiDB Cloud console.
 
 2. Click **Organization Settings**. The organization settings page is displayed.
 
-3. Click **By Project**.
+3. Click the **User Management** tab, and then select the **By Project**.
 
 4. Click **Delete** in the user row that you want to delete.
 
@@ -211,8 +215,8 @@ There are four roles in an organization. The permissions of each role are as fol
 
 In TiDB Cloud, you can easily manage your profile, including your first name, last name, and phone number.
 
-1. Click the account name in the upper-right corner of the TiDB Cloud console.
+1. Click <MDSvgIcon name="icon-top-account-settings" /> **Account** in the upper-right corner of the TiDB Cloud console.
 
-2. Click **Account**. The **Profile** tab is selected by default.
+2. Click **Account Settings**. The **Profile** tab is displayed by default.
 
 3. Update the profile information, and then click **Save**.
