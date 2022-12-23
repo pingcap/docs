@@ -96,7 +96,7 @@ To import the Parquet files to TiDB Cloud, take the following steps:
 
 1. Log in to the [TiDB Cloud console](https://tidbcloud.com/), navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page and choose your target project on the top of the left navigation bar.
 
-2. Locate your target cluster, click **...** in the upper-right corner of the cluster area, and select **Import Data**. The **Data Import** page is displayed.
+2. Locate your cluster, click **...** in the upper-right corner of the cluster area, and select **Import Data**. On the **Import** page, click the **Import Data** button in the upper-right corner, and then select **From S3**.
 
     > **Tip:**
     >
@@ -105,7 +105,6 @@ To import the Parquet files to TiDB Cloud, take the following steps:
 3. On the **Data Import** page, provide the following information.
 
     - **Data Format**: select **Parquet**.
-    - **Location**: select the location where your Parquet files are located.
     - **Bucket URI**: select the bucket URI where your Parquet files are located.
     - **Role ARN**: (This field is visible only for AWS S3): enter the Role ARN value for **Role ARN**.
     - **Target Cluster**: shows the cluster name and the region name.
