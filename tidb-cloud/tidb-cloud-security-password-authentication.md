@@ -7,7 +7,7 @@ summary: Learn how to manage TiDB Cloud console passwords and how to enable mult
 
 This document describes how to manage TiDB Cloud console passwords and how to enable multi-factor authentication (MFA). It is applicable to users who [sign up](https://tidbcloud.com/free-trial) for TiDB Cloud with emails and passwords.
 
-## Setp1: sign up
+## Sign up
 
 To sign up for a TiDB Cloud account, please click on the [TiDB Cloud homepage](https://tidbcloud.com/signup).
 
