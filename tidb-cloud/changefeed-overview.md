@@ -4,6 +4,8 @@ title: Changefeed
 
 # Changefeed
 
+TiDB Cloud provides the following changefeeds to help you stream data from TiDB Cloud.
+
 > **Note:**
 >
 > To use the Changefeed feature, make sure that your TiDB cluster version is v6.4.0 or later and the TiKV node size is at least 8 vCPU and 16 GiB.
@@ -19,7 +21,7 @@ Navigate to the **Changefeed** tab of your TiDB cluster and you can see the chan
 
 ## Create Changefeed
 
-TiDB Cloud provides the following changefeeds to help you stream data from TiDB Cloud. To create a changefeed, please refer to the tutorial:
+To create a changefeed, please refer to the tutorial:
 
 - [Sink to Apache Kafka](/tidb-cloud/changefeed-sink-to-apache-kafka.md) (Beta)
 - [Sink to MySQL](/tidb-cloud/changefeed-sink-to-mysql.md)
