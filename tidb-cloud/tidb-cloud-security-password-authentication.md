@@ -43,7 +43,7 @@ If the login is successful, you will be directed to the TiDB Cloud console page.
 
 TiDB Cloud sets a default password policy for registered users. If your password does not meet the policy, you will get a prompt when you set the password.
 
-A strong password policy is as follows:
+The default password policy is as follows:
 
 - At least 8 characters in length.
 - At least 1 uppercase letter(A-Z).
