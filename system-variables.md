@@ -1254,7 +1254,7 @@ MPP is a distributed computing framework provided by the TiFlash engine, which a
 
 > **Warning:**
 >
-> Starting from v6.6.0, this variable will be deprecated, and TiDB will use the [Metadata Lock](/metadata-lock.md) feature by default to avoid the `Information schema is changed` error.
+> Starting from v6.5.0, this variable is deprecated, and TiDB uses the [Metadata Lock](/metadata-lock.md) feature by default to avoid the `Information schema is changed` error. Note that this variable is planned to be removed in v6.6.0.
 
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
@@ -1719,6 +1719,17 @@ MPP is a distributed computing framework provided by the TiFlash engine, which a
 - Type: Boolean
 - Default value: `ON`
 - This variables specifies whether to use the pipeline execution algorithm for window functions.
+
+### tidb_enable_plan_replayer_capture
+
+> Warning:
+>
+> This variable controls a feature that is not fully functional in the current TiDB version. Do not change the default value.
+
+- Scope: SESSION | GLOBAL
+- Persists to cluster: Yes
+- Type: Boolean
+- Default value: `OFF`
 
 ### tidb_enable_prepared_plan_cache <span class="version-mark">New in v6.1.0</span>
 

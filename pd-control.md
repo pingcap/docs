@@ -33,7 +33,7 @@ To obtain `pd-ctl` of the latest version, download the TiDB server installation 
 
 ### Compile from source code
 
-1. [Go](https://golang.org/) Version 1.13 or later because the Go modules are used.
+1. [Go](https://golang.org/) Version 1.19 or later because the Go modules are used.
 2. In the root directory of the [PD project](https://github.com/pingcap/pd), use the `make` or `make pd-ctl` command to compile and generate `bin/pd-ctl`.
 
 ## Usage
@@ -1031,8 +1031,7 @@ You can set the scheduling speed of stores by using `store limit`. For more deta
 
 > **Note:**
 >
-> - The original `region-add` and `region-remove` parameters of the `store limit` command are deprecated and are replaced with `add-peer` and `remove-peer`.
-> - You can use `pd-ctl` to check the state (`Up`, `Disconnect`, `Offline`, `Down`, or `Tombstone`) of a TiKV store. For the relationship between each state, refer to [Relationship between each state of a TiKV store](/tidb-scheduling.md#information-collection).
+> You can use `pd-ctl` to check the state (`Up`, `Disconnect`, `Offline`, `Down`, or `Tombstone`) of a TiKV store. For the relationship between each state, refer to [Relationship between each state of a TiKV store](/tidb-scheduling.md#information-collection).
 
 ### `log [fatal | error | warn | info | debug]`
 
