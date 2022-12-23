@@ -41,7 +41,6 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v5.1/quick-start-with-
     - Fix the issue that TiDB gets the wrong result when using TiFlash to scan tables with empty range although TiFlash does not support reading tables with empty range yet [#33083](https://github.com/pingcap/tidb/issues/33083)
     - Fix the issue that the `avg()` function returns `ERROR 1105 (HY000): other error for mpp stream: Could not convert to the target type - -value is out of range.` when queried from TiFlash [#29952](https://github.com/pingcap/tidb/issues/29952)
     - Fix the issue that `ERROR 1105 (HY000): close of nil channel` is returned when using `HashJoinExec` [#30289](https://github.com/pingcap/tidb/issues/30289)
-    - Fix the issue that `ERROR 1105 (HY000): close of nil channel` is returned when using `HashJoinExec` [#30289](https://github.com/pingcap/tidb/issues/30289)
     - Fix the issue that TiKV and TiFlash return different results when querying logical operations [#37258](https://github.com/pingcap/tidb/issues/37258)
     - Fix the issue that the `EXECUTE` statement might throw an unexpected error in specific scenarios [#37187](https://github.com/pingcap/tidb/issues/37187)
     - Fix the planner wrong behaviors that occur when `tidb_opt_agg_push_down` and `tidb_enforce_mpp` are enabled [#34465](https://github.com/pingcap/tidb/issues/34465)
