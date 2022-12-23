@@ -137,7 +137,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v5.1/quick-start-with-
 
     + TiDB-Binlog
 
-        - Fix the bug that Drainer can't send request correctly to Pump when setting `compressor=gzip` [#1152](https://github.com/pingcap/tidb-binlog/issues/1152)
+        - Fix the issue that Drainer cannot send requests to Pump correctly when `compressor` is set to `zip` [#1152](https://github.com/pingcap/tidb-binlog/issues/1152)
 
     + Backup & Restore (BR)
 
@@ -146,5 +146,5 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v5.1/quick-start-with-
     + TiCDC
 
         (dup: release-6.1.0.md > Bug fixes> Tools> TiCDC)- Fix data loss that occurs in special incremental scanning scenarios [#5468](https://github.com/pingcap/tiflow/issues/5468)
-        - Add some metrics in the sorter component [#5690](https://github.com/pingcap/tiflow/issues/5690)
+        - Fix the issue that there are no sorter metrics [#5690](https://github.com/pingcap/tiflow/issues/5690)
         (dup: release-6.1.0.md > Bug fixes> Tools> TiCDC)- Fix excessive memory usage by optimizing the way DDL schemas are buffered [#1386](https://github.com/pingcap/tiflow/issues/1386)
