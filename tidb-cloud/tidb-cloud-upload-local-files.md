@@ -27,7 +27,7 @@ This feature now supports the following:
 
 4. Click the **Upload File** button to select and upload the local file. One task only supports uploading one file within 50 MiB.
 
-5. In the **Target Cluster** section, select the target database and the target table. If the table does not exist yet, you can directly enter a table to create one, as shown in the following screenshot. Click **Next**.
+5. In the **Target Cluster** section, select the target database and the target table. If the table does not exist yet, you can directly enter a table name to create one, as shown in the following screenshot. Click **Next**.
 
     ![Upload local files](/media/tidb-cloud/tidb-cloud-upload-local-files.png)
 
@@ -40,5 +40,3 @@ This feature now supports the following:
     Click **Next**.
 
 7. Click **Start Import**. You can view the import progress on the **Import Progress** section. If there are warnings or failed tasks, you can check to view the details and solve them.
-
-If you encounter any problems, you can solve them according to the error messages.
