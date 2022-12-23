@@ -5,7 +5,9 @@ summary: Learn how to manage identity access of TiDB Cloud.
 
 # Identity Access Management
 
-To access your TiDB cloud, you must have a TiDB cloud user account. You may choose to register and login to TiDB Cloud, see [Password Authentication](/tidb-cloud/tidb-cloud-security-password-authentication.md), or choose your Google Workspace and GitHub accounts to single sign-on(SSO) to TiDB Cloud.
+This document describes how to manage access to organizations, projects, roles, and user profiles in TiDB Cloud.
+
+To access your TiDB cloud, you must [create a TiDB cloud account](https://tidbcloud.com/free-trial). You can either sign up with email and password to [manage your password using the TiDB Cloud](/tidb-cloud/tidb-cloud-security-password-authentication.md), or choose your Google Workspace or GitHub account for single sign-on (SSO) to TiDB Cloud.
 
 ## Organizations and Projects
 
