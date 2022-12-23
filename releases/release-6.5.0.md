@@ -23,7 +23,7 @@ Compared with the previous LTS 6.1.0, 6.5.0 not only includes new features, impr
 - Support [password management](/password-management.md) policies that meet password compliance auditing requirements.
 - TiDB Lightning and Dumpling support [importing](tidb-lightning/tidb-lightning-data-source.md) and [exporting](/dumpling-overview.md#improve-export-efficiency-through-concurrency) compressed SQL and CSV files.
 - TiDB Data Migration (DM) [continuous data validation](/dm/dm-continuous-data-validation.md) becomes GA.
-- TiDB Backup & Restore supports snapshot checkpoint backup, improves the recovery performance of [PITR](/br-pitr-guide.md#carry-pitr) by x times, and reduces RPO to x minutes.
+- TiDB Backup & Restore supports snapshot checkpoint backup, improves the recovery performance of [PITR](/br-pitr-guide.md#carry-pitr) by 50%, and reduces the RPO to as short as 5 minutes.
 - Improve the TiCDC throughput of [replicating data to Kafka](/replicate-data-to-kafka.md) by x times and reduces replication latency to x seconds.
 - Provide row-level [Time to live (TTL)](/time-to-live.md) to manage data lifecycle (experimental).
 - TiCDC supports [replicating changed logs to object storage ](ticdc/ticdc-sink-to-cloud-storage.md) such as Amazon S3, Azure Blob Storage, and NFS (experimental).
@@ -283,7 +283,7 @@ Compared with the previous LTS 6.1.0, 6.5.0 not only includes new features, impr
 
 * PITR performance improved remarkably **tw@shichun-0415
 
-    In the log restore stage, the restore speed of one TiKV can reach xx MB/s, which is x times faster than before. The restore speed is scalable and the RTO in DR scenarios is reduced greatly. The RPO in DR scenarios can be as short as 5 minutes. In normal cluster operation and maintenance (OM), for example, a rolling upgrade is performed or only one TiKV is down, the RPO can be 5 minutes.
+    In the log restore stage, the restore speed of one TiKV can reach 9 MiB/s, which is 50% faster than before. The restore speed is scalable and the RTO in DR scenarios is reduced greatly. The RPO in DR scenarios can be as short as 5 minutes. In normal cluster operation and maintenance (OM), for example, a rolling upgrade is performed or only one TiKV is down, the RPO can be 5 minutes.
 
 * TiKV-BR GA: Supports backing up and restoring RawKV [#67](https://github.com/tikv/migration/issues/67) @[pingyu](https://github.com/pingyu) @[haojinming](https://github.com/haojinming) **tw@shichun-0415**
 
