@@ -23,7 +23,7 @@ Under this structure:
 
 - You can also view all members in your project.
 
-## Manage Organization Access
+## Manage organization access
 
 ### View organizations
 
