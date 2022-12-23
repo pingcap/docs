@@ -1,13 +1,13 @@
 ---
-title:  Migrate from Amazon RDS for Oracle to TiDB Cloud Serverless Tier Using AWS DMS
+title:  Migrate from Amazon RDS for Oracle to TiDB Cloud Using AWS DMS
 summary: Learn how to migrate data from Amazon RDS for Oracle into TiDB Cloud Serverless Tier using AWS Database Migration Service (AWS DMS).
 ---
 
-# Migrate from Amazon RDS for Oracle to TiDB Cloud Serverless Tier Using AWS DMS
+# Migrate from Amazon RDS for Oracle to TiDB Cloud Using AWS DMS
 
 This document describes a step-by-step example of how to migrate data from Amazon RDS for Oracle to [TiDB Cloud Serverless Tier](https://tidbcloud.com/console/clusters/create-cluster) using AWS Database Migration Service (AWS DMS).
 
-If you are interested in learning more about TiDB and AWS DMS, you can find some useful links as follows:
+If you are interested in learning more about TiDB Cloud and AWS DMS, see the following:
 
 - [TiDB Cloud](https://docs.pingcap.com/tidbcloud/)
 - [TiDB Developer Guide](https://docs.pingcap.com/tidbcloud/dev-guide-overview)
@@ -15,16 +15,16 @@ If you are interested in learning more about TiDB and AWS DMS, you can find some
 
 ## Why use AWS DMS?
 
-AWS Database Migration Service (AWS DMS) is a cloud service that makes it possible to migrate relational databases, data warehouses, NoSQL databases, and other types of data stores.
+AWS DMS is a cloud service that makes it possible to migrate relational databases, data warehouses, NoSQL databases, and other types of data stores.
 
-If you want to migrate data from from heterogeneous databases, such as PostgreSQL, Oracle, and SQL Server to TiDB Cloud, it is recommended to use AWS Database Migration Service (AWS DMS).
+If you want to migrate data from heterogeneous databases, such as PostgreSQL, Oracle, and SQL Server to TiDB Cloud, it is recommended to use AWS DMS.
 
 ## Deployment architecture
 
 At a high level, follow the following steps:
 
-1. Set up source Amazon RDS for Oracle.
-2. Set up the target [TiDB Cloud (Serverless) Tier](https://tidbcloud.com/console/clusters/create-cluster).
+1. Set up the source Amazon RDS for Oracle.
+2. Set up the target [TiDB Cloud Serverless Tier](https://tidbcloud.com/console/clusters/create-cluster).
 3. Set up data migration (full load) using AWS DMS.
 
 The following diagram illustrates the high-level architecture.
@@ -44,7 +44,7 @@ Next, you will learn how to use AWS DMS to migrate data from Amazon RDS for Orac
 
 ## Step 1. Create a VPC
 
-Log in to the [AWS console](https://console.aws.amazon.com/vpc/home#vpcs:) and create an AWS VPC. You will need to create Oracle RDS and DMS instances in this VPC later.
+Log in to the [AWS console](https://console.aws.amazon.com/vpc/home#vpcs:) and create an AWS VPC. You need to create Oracle RDS and DMS instances in this VPC later.
 
 For instructions about how to create a VPC, see [Creating a VPC](https://docs.aws.amazon.com/vpc/latest/userguide/working-with-vpcs.html#Create-VPC).
 
@@ -60,7 +60,7 @@ For instructions about how to create an Oracle DB instance, see [Creating an Ora
 
 ## Step 3. Prepare the table data in Oracle
 
-Using the scripts below, create and populate 10000 rows of data in github_events table. You can also download the sample data set from [GH Archive](https://gharchive.org/)
+Using the following scripts to create and populate 10000 rows of data in the github_events table. You can use the github event dataset and download it from [GH Archive](https://gharchive.org/). It contains 10000 rows of data. Use the following SQL script to execute it in Oracle.
 
 - [table_schema_oracle.sql](https://github.com/pingcap-inc/tidb-integration-script/blob/main/aws-dms/oracle_table_schema.sql)
 - [oracle_data.sql](https://github.com/pingcap-inc/tidb-integration-script/blob/main/aws-dms/oracle_data.sql)
@@ -150,3 +150,7 @@ With AWS DMS, you can successfully migrate data from any upstream AWS RDS databa
 If you encounter any issues or failures during the migration, you can check the log information in [CloudWatch](https://console.aws.amazon.com/cloudwatch/home) to troubleshoot the issues.
 
 ![Troubleshooting](/media/tidb-cloud/aws-dms-to-tidb-cloud-troubleshooting.png)
+
+## See also
+
+- [Migrate from MySQL-Compatible Databases Using AWS DMS](/tidb-cloud/migrate-from-mysql-using-aws-dms.md)

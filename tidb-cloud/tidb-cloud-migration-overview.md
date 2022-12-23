@@ -11,7 +11,7 @@ You can migrate data from a wide variety of data sources to TiDB Cloud. This doc
 
 When you migrate data from a MySQL-compatible database, you can perform full data migration and incremental data migration. The migration scenarios and methods are as follows:
 
-- Migrate using Data Migration
+- Migrate MySQL-compatible databases using Data Migration
 
     TiDB is highly compatible with MySQL. You can use Data Migration in the TiDB Cloud console to migrate data from any MySQL-compatible databases to TiDB Cloud smoothly. For more information, see [Migrate MySQL-Compatible Databases to TiDB Cloud Using Data Migration](/tidb-cloud/migrate-from-mysql-using-data-migration.md).
 
@@ -19,11 +19,16 @@ When you migrate data from a MySQL-compatible database, you can perform full dat
 
     If you want to migrate heterogeneous databases, such as PostgreSQL, Oracle, and SQL Server to TiDB Cloud, it is recommended to use AWS Database Migration Service (AWS DMS).
 
-    - [Migrate MySQL-Compatible Databases to TiDB Cloud Using AWS DMS](/tidb-cloud/migrate-from-mysql-using-aws-dms.md)
+    - [Migrate from MySQL-Compatible Databases to TiDB Cloud Using AWS DMS](/tidb-cloud/migrate-from-mysql-using-aws-dms.md)
+    - [Migrate from Amazon RDS for Oracle Using AWS DMS](/tidb-cloud/migrate-from-oracle-using-aws-dms.md)
 
 - Migrate and merge MySQL shards
 
     If your application uses MySQL shards for data storage, you can migrate these shards into TiDB Cloud as one table. For more information, see [Migrate and Merge MySQL Shards of Large Datasets to TiDB Cloud](/tidb-cloud/migrate-sql-shards.md).
+
+- Migrate from on-premises TiDB
+
+    You can migrate data from your on-premises (OP) TiDB clusters to TiDB Cloud (AWS) through Dumpling and TiCDC. For more information, see [Migrate from On-Premises TiDB to TiDB Cloud](/tidb-cloud/migrate-from-op-tidb.md).
 
 ## Import data from files to TiDB Cloud
 
