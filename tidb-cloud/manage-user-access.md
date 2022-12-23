@@ -45,7 +45,9 @@ To switch between organizations, perform these steps:
 
 ### Set the time zone for your organization
 
-If you are the organization owner, you can modify the system display time according to your time zone.To change the local timezone setting, perform the following steps:
+If you are the organization owner, you can modify the system display time according to your time zone.
+
+To change the local timezone setting, perform the following steps:
 
 1. Click the account name in the upper-right corner of the TiDB Cloud console.
 
@@ -59,7 +61,9 @@ If you are the organization owner, you can modify the system display time accord
 
 ### Invite an organization member
 
-If you are the owner of an organization, you can invite organization members. Otherwise, skip this section.To invite a member to an organization, perform the following steps:
+If you are the owner of an organization, you can invite organization members. Otherwise, skip this section.
+
+To invite a member to an organization, perform the following steps:
 
 1. Click <MDSvgIcon name="icon-top-organization" /> **Organization** in the upper-right corner of the TiDB Cloud console.
 
@@ -109,7 +113,7 @@ To remove a member from an organization, perform the following steps:
 
 To create a new project, perform the following steps:
 
-1. Click the account name in the upper-right corner of the TiDB Cloud console.
+1. Click <MDSvgIcon name="icon-top-organization" /> **Organization** in the upper-right corner of the TiDB Cloud console.
 
 2. Click **Organization Settings**. The **Projects** tab is displayed by default.
 
