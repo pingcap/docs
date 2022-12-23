@@ -47,7 +47,7 @@ AWS DMS does not support replicating `DROP TABLE`.
 
 5. Configure the storage in the **Allocated storage (GiB)** field. Use the default configuration.
 
-6. Configure connectivity and security. 
+6. Configure connectivity and security.
     - **Network type - new**: select **IPv4**. 
     - **Virtual private cloud (VPC) for IPv4**: select the VPC that you need. It is recommended to use the same VPC as the upstream database to simplify the network configuration.
     - **Replication subnet group**: choose a subnet group for your replication instance. 
