@@ -9,7 +9,7 @@ This document describes how to manage access to organizations, projects, roles, 
 
 To access your TiDB cloud, you must [create a TiDB cloud account](https://tidbcloud.com/free-trial). You can either sign up with email and password to [manage your password using the TiDB Cloud](/tidb-cloud/tidb-cloud-security-password-authentication.md), or choose your Google Workspace or GitHub account for single sign-on (SSO) to TiDB Cloud.
 
-## Organizations and Projects
+## Organizations and projects
 
 TiDB Cloud provides a hierarchical structure based on organizations and projects to facilitate the management of your TiDB cluster. In the hierarchy of organizations and projects, an organization can contain multiple projects and organization members, and a project can contain multiple clusters and project members.
 
