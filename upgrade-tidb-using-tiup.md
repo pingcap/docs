@@ -114,6 +114,7 @@ Now, the offline mirror has been upgraded successfully. If an error occurs durin
 
 > **Note:**
 >
+<<<<<<< HEAD
 > Before you upgrade the cluster to v6.0, make sure that the parameters you have modified in v4.0 are compatible in v6.0. For details, see [TiKV Configuration File](/tikv-configuration-file.md).
 >
 > The following three TiKV parameters are obsolete in TiDB v5.0. If the following parameters have been configured in your original cluster, you need to delete these parameters through `edit-config`:
@@ -121,6 +122,9 @@ Now, the offline mirror has been upgraded successfully. If an error occurs durin
 > - pessimistic-txn.enabled
 > - server.request-batch-enable-cross-command
 > - server.request-batch-wait-duration
+=======
+> Before you upgrade the cluster to v6.4.0, make sure that the parameters you have modified in v4.0 are compatible in v6.4.0. For details, see [TiKV Configuration File](/tikv-configuration-file.md).
+>>>>>>> 288076c20 (Delete 3 tidb configs that have been deleted in code (#11645))
 
 ### Step 3: Check the health status of the current cluster
 
