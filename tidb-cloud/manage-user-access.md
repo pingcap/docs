@@ -27,7 +27,7 @@ Under this structure:
 
 ### View organizations
 
-To check which project you belong to, perform these steps:
+To check which organizations you belong to, perform these steps:
 
 1. Click the account name in the upper-right corner of the TiDB Cloud console.
 
@@ -99,7 +99,7 @@ To remove a member from an organization, perform the following steps:
 >
 > If a member is removed from an organization, the member is removed from the belonged projects either.
 
-1. Click the account name in the upper-right corner of the TiDB Cloud console.
+1. Click <MDSvgIcon name="icon-top-organization" /> **Organization** in the upper-right corner of the TiDB Cloud console.
 
 2. Click **Organization Settings**. The organization settings page is displayed.
 
