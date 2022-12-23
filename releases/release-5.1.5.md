@@ -108,7 +108,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v5.1/quick-start-with-
     (dup: release-5.4.1.md > Bug Fixes> TiFlash)- Fix the panic issue that occurs when TLS is enabled [#4196](https://github.com/pingcap/tiflash/issues/4196)
     (dup: release-6.1.1.md > Bug fixes> TiFlash)- Fix a bug that TiFlash might crash due to an error in parallel aggregation [#5356](https://github.com/pingcap/tiflash/issues/5356) @[gengliqi](https://github.com/gengliqi)
     (dup: release-5.4.1.md > Bug Fixes> TiFlash)- Fix the issue that a query containing `JOIN` might be hung if an error occurs [#4195](https://github.com/pingcap/tiflash/issues/4195)
-    - Fix the issue that function `OR` returns wrong result [#5849](https://github.com/pingcap/tiflash/issues/5849) @[xzhangxian1008](https://github.com/xzhangxian1008)
+    - Fix the issue that the function `OR` returns wrong results [#5849](https://github.com/pingcap/tiflash/issues/5849)
     <!--storage owner: flowbehappy -->
 
     (dup: release-5.4.1.md > Bug Fixes> TiFlash)- Fix the bug that invalid storage directory configurations lead to unexpected behaviors [#4093](https://github.com/pingcap/tiflash/issues/4093)
@@ -121,7 +121,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v5.1/quick-start-with-
 '` as an invalid separator [#4036](https://github.com/pingcap/tiflash/issues/4036)
     (dup: release-5.4.1.md > Bug Fixes> TiFlash)- Fix the wrong result that occurs when casting `DATETIME` to `DECIMAL` [#4151](https://github.com/pingcap/tiflash/issues/4151)
     (dup: release-5.4.1.md > Bug Fixes> TiFlash)- Fix the bug that some exceptions are not handled properly [#4101](https://github.com/pingcap/tiflash/issues/4101)
-    - Fix the issue that `Prepare Merge` may cause the metadata of the raft store to be damaged and cause TiFlash to restart [#3435](https://github.com/pingcap/tiflash/issues/3435) @[solotzg](https://github.com/solotzg)
+    - Fix the issue that `Prepare Merge` might damage the metadata of the raft store and cause TiFlash to restart [#3435](https://github.com/pingcap/tiflash/issues/3435)
     (dup: release-5.3.2.md > Bug Fixes> TiFlash)- Fix a bug that an MPP query might fail due to random gRPC keepalive timeout [#4662](https://github.com/pingcap/tiflash/issues/4662)
     (dup: release-5.4.1.md > Bug Fixes> TiFlash)- Fix the issue that the result of `IN` is incorrect in multi-value expressions [#4016](https://github.com/pingcap/tiflash/issues/4016)
     (dup: release-5.4.1.md > Bug Fixes> TiFlash)- Fix a bug that MPP tasks might leak threads forever [#4238](https://github.com/pingcap/tiflash/issues/4238)
