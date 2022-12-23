@@ -35,7 +35,7 @@ If the login is successful, you will be directed to the TiDB Cloud console page.
 
 ### Sign out
 
-1. Click the account name in the upper-right corner of the TiDB Cloud console.
+1. Click the <MDSvgIcon name="icon-top-account-settings" /> **Account** in the upper-right corner of the TiDB Cloud console.
 
 2. Click **Logout**.
 
