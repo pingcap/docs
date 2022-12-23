@@ -179,7 +179,7 @@ If you are the owner of an organization, you can remove project members. Otherwi
 
 4. Click **Delete** in the user row that you want to delete.
 
-## Manage Roles Access
+## Manage roles access
 
 If you are the owner of an organization, you can perform the following steps to configure roles for your organization members:
 
