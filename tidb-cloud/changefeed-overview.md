@@ -8,14 +8,14 @@ title: Changefeed
 >
 > To use the Changefeed feature, make sure that your TiDB cluster version is v6.4.0 or later and the TiKV node size is at least 8 vCPU and 16 GiB.
 >
-> Currently, tidb cloud only allows up to 10 changefeeds per cluster, regardless of kafka and mysql sink types.
+> Currently, TiDB Cloud only allows up to 10 changefeeds per cluster.
 >
 > For [Serverless Tier clusters](/tidb-cloud/select-cluster-tier.md#serverless-tier-beta), the changefeed feature is unavailable.
 
-Navigate to the **Changefeed** tab of your TiDB cluster and you can see the changefeed list. In the changefeed list, you can
+Navigate to the **Changefeed** tab of your TiDB cluster and you can see the changefeed list. In the changefeed list, you can:
 
 - View the information of the created changefeed, including changefeed's id, checkpoint, status.
-- Operate the changefeed, including pause, resume, edit, and delete the changefeed.
+- Operate the changefeed, including creating, pausing, resuming, editing, and deleting the changefeed.
 
 ## Create Changefeed
 
