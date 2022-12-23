@@ -61,7 +61,7 @@ It is recommended that you allocate CPU more than 32 cores and memory greater th
 
 - Do not use physical import mode to import data to TiDB clusters in production. It has severe performance implications.
 - Do not use multiple TiDB Lightning instances to import data to the same TiDB cluster by default. Use [Parallel Import](/tidb-lightning/tidb-lightning-distributed-import.md) instead.
-- When you use multiple TiDB Lightning to import data to the same target, do not mix the backends. That is, do not use the physical import mode and the logical import mode at the same time.
+- When you use multiple TiDB Lightning to import data to the same target table, do not mix the import modes. That is, do not use the physical import mode and the logical import mode at the same time.
 - A single Lightning process can import a single table of 10 TB at most. Parallel import can use 10 Lightning instances at most.
 
 ### Tips for using with other components
