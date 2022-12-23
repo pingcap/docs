@@ -43,7 +43,7 @@ To switch between organizations, perform these steps:
 
 2. Select **Switch Organization** in the drop-down menu, and click the organization you want to switch to.
 
-### Set time zone for Organization
+### Set the time zone for your organization
 
 If you are the organization owner, you can modify the system display time according to your time zone.To change the local timezone setting, perform the following steps:
 
