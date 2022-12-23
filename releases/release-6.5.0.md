@@ -171,7 +171,7 @@ Compared with the previous LTS 6.1.0, 6.5.0 not only includes new features, impr
 
 * Optimizer introduces a more accurate Cost Model Version 2 [#35240](https://github.com/pingcap/tidb/issues/35240) @[qw4990](https://github.com/qw4990) **tw@Oreoxmt**
 
-    TiDB v6.2.0 introduces the [Cost Model Version 2](/cost-model.md#cost-model-version-2) as an experimental feature. This model uses a more accurate cost estimation method to help the optimizer choose the optimal execution plan. Especially when TiFlash is deployed, Cost Model Version 2 automatically helps choose the appropriate storage engine and avoids much manual intervention. After real-scene testing for a period of time, this model becomes GA in v6.5.0. Since v6.5.0, newly-created clusters use Cost Model Version 2 by default. For clusters upgrade to v6.5.0, because Cost Model Version 2 might cause changes to query plans, you can set the [`tidb_cost_model_version = 2`](/system-variables.md#tidb_cost_model_version-new-in-v620) variable to use the new cost model after sufficient performance testing.
+    TiDB v6.2.0 introduces the [Cost Model Version 2](/cost-model.md#cost-model-version-2) as an experimental feature. This model uses a more accurate cost estimation method to help the optimizer choose the optimal execution plan. Especially when TiFlash is deployed, Cost Model Version 2 automatically helps choose the appropriate storage engine and avoids much manual intervention. After real-scene testing for a period of time, this model becomes GA in v6.5.0. Since v6.5.0, newly created clusters use Cost Model Version 2 by default. For clusters upgrade to v6.5.0, because Cost Model Version 2 might cause changes to query plans, you can set the [`tidb_cost_model_version = 2`](/system-variables.md#tidb_cost_model_version-new-in-v620) variable to use the new cost model after sufficient performance testing.
 
     Cost Model Version 2 becomes a generally available feature that significantly improves the overall capability of the TiDB optimizer and helps TiDB evolve towards a more powerful HTAP database.
 
@@ -223,7 +223,7 @@ Compared with the previous LTS 6.1.0, 6.5.0 not only includes new features, impr
 
 * Support exporting and importing SQL and CSV files in gzip, snappy, and zstd compression formats [#38514](https://github.com/pingcap/tidb/issues/38514) @[lichunzhu](https://github.com/lichunzhu) **tw@hfxsd**
 
-    Dumpling supports exporting data to compressed SQL and CSV files in the following compression formats: gzip, snappy, and zstd. TiDB Lightning also supports importing compressed files in these formats.
+    Dumpling supports exporting data to compressed SQL and CSV files in these compression formats: gzip, snappy, and zstd. TiDB Lightning also supports importing compressed files in these formats.
 
     Previously, you had to provide large storage space for exporting or importing data to store CSV and SQL files, resulting in high storage costs. With the release of this feature, you can greatly reduce your storage costs by compressing the data files.
 
