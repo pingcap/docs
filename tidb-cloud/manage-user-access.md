@@ -33,7 +33,7 @@ To check which project you belong to, perform these steps:
 
 2. Click **Organization Settings**. You can view your organization.
 
-### Switch Organizations
+### Switch between organizations
 
 If you are a member of multiple organizations, you can switch your account between organizations.To switch between organizations, perform these steps:
 
