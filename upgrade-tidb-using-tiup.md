@@ -27,7 +27,7 @@ summary: Learn how to upgrade TiDB using TiUP.
 ## アップグレードの注意事項 {#upgrade-caveat}
 
 -   TiDB は現在、バージョンのダウングレードまたはアップグレード後の以前のバージョンへのロールバックをサポートしていません。
--   TiDB Ansible を使用して管理されている v4.0 クラスターの場合、 [TiUP (v4.0) を使用して TiDB をアップグレードする](https://docs.pingcap.com/tidb/v4.0/upgrade-tidb-using-tiup#import-tidb-ansible-and-the-inventoryini-configuration-to-tiup)に従って新しい管理のためにクラスターを TiUP ( `tiup cluster` ) にインポートする必要があります。その後、このドキュメントに従ってクラスターを v5.4 またはそのパッチ バージョンにアップグレードできます。
+-   TiDB Ansible を使用して管理される v4.0 クラスターの場合、クラスターを TiUP ( `tiup cluster` ) にインポートして、 [TiUP (v4.0) を使用して TiDB をアップグレードする](https://docs.pingcap.com/tidb/v4.0/upgrade-tidb-using-tiup#import-tidb-ansible-and-the-inventoryini-configuration-to-tiup)に従って新しい管理を行う必要があります。その後、このドキュメントに従ってクラスターを v5.4 またはそのパッチ バージョンにアップグレードできます。
 -   3.0 より前のバージョンを 5.4 に更新するには:
     1.  [TiDB アンシブル](https://docs.pingcap.com/tidb/v3.0/upgrade-tidb-using-ansible)を使用して、このバージョンを 3.0 に更新します。
     2.  TiUP ( `tiup cluster` ) を使用して、TiDB Ansible 構成をインポートします。
@@ -119,12 +119,6 @@ tiup update cluster
 > **ノート：**
 >
 > クラスターを v5.4 にアップグレードする前に、v4.0 で変更したパラメーターが v5.4 で互換性があることを確認してください。詳細については、 [TiKVConfiguration / コンフィグレーションファイル](/tikv-configuration-file.md)を参照してください。
->
-> 次の 3 つの TiKV パラメータは、TiDB v5.0 で廃止されました。元のクラスターで次のパラメーターが構成されている場合は、これらのパラメーターを`edit-config`から削除する必要があります。
->
-> -   ペシミスティック-txn.enabled
-> -   サーバー.request-batch-enable-cross-command
-> -   サーバー.request-batch-wait-duration
 
 ### ステップ 3: 現在のクラスターのヘルス ステータスを確認する {#step-3-check-the-health-status-of-the-current-cluster}
 
