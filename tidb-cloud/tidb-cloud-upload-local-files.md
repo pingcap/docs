@@ -33,7 +33,7 @@ This feature now supports the following:
 
 6. Configure the table schema.
 
-    If you want to use the first row the CSV file as the column names, select **Use the first row as Column Name**. You can click **Edit CSV configuration** to edit the CSV configuration. For more information about the CSV configuration, see [CSV Configurations for Importing Data](/tidb-cloud/naming-conventions-for-data-import.md).
+    If you want to use the first row the CSV file as the column names, select **Use the first row as Column Name**. You can click **Edit CSV configuration** to edit the CSV configuration. For more information about the CSV configuration, see [CSV Configurations for Importing Data](/tidb-cloud/csv-config-for-import-data.md).
 
     If you want to let TiDB Cloud create the table for you, you can change the column names and data types here.
 
