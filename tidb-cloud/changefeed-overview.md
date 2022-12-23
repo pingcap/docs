@@ -4,7 +4,7 @@ title: Changefeed
 
 # Changefeed
 
-TiDB Cloud provides the following changefeeds to help you stream data from TiDB Cloud.
+TiDB Cloud Changefeed help you stream data from TiDB Cloud.
 
 > **Note:**
 >
