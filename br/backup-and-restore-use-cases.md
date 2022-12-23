@@ -39,14 +39,14 @@ It is recommended that you deploy the TiDB cluster using [TiUP](/tiup/tiup-clust
 
 ### Cluster versions
 
-* TiDB: v5.0.0
-* TiKV: v5.0.0
-* PD: v5.0.0
-* BR: v5.0.0
+* TiDB: v5.1.5
+* TiKV: v5.1.5
+* PD: v5.1.5
+* BR: v5.1.5
 
 > **Note:**
 >
-> v5.0.0 was the latest version at the time this document was written. It is recommended that you use the latest version of [TiDB/TiKV/PD/BR](/releases/release-notes.md) and make sure that the BR version is **consistent with** the TiDB version.
+> It is recommended that you use the latest version of [TiDB/TiKV/PD/BR](/releases/release-notes.md) and make sure that the BR version is **consistent with** the TiDB version.
 
 ### TiKV hardware information
 

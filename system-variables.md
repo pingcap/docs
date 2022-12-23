@@ -283,7 +283,7 @@ MPP is a distributed computing framework provided by the TiFlash engine, which a
 | Version | Default value |
 | :- | :- |
 | v5.1.0 - v5.1.3 | `2`, which serves as an experimental feature |
-| v5.1.4 and later v5.1.x versions | `1` |
+| v5.1.5 and later v5.1.x versions | `1` |
 
 ### tidb_auto_analyze_end_time
 

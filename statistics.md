@@ -10,7 +10,7 @@ TiDB uses statistics to decide [which index to choose](/choose-index.md). The `t
 | Version | Default value |
 | :- | :- |
 | v5.1.0 - v5.1.3 | `2`, which serves as an experimental feature |
-| v5.1.4 and later v5.1.x versions | `1` |
+| v5.1.5 and later v5.1.x versions | `1` |
 
 > **Note:**
 >
