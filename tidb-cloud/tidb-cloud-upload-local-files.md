@@ -5,7 +5,7 @@ summary: Learn how to upload local files to TiDB Cloud.
 
 # Upload Local Files to TiDB Cloud
 
-You can upload local files to TiDB Cloud directly. You only need to select the local file, select the the target cluster, and directly import the data after the validation is passed.
+You can upload local files to TiDB Cloud directly. You only need to select the local file and the target cluster, make changes if needed, and then directly import the data into TiDB Cloud.
 
 This feature now supports the following:
 
@@ -41,4 +41,4 @@ This feature now supports the following:
 
 7. Click **Start Import**. You can view the import progress on the **Import Progress** section. If there are warnings or failed tasks, you can check to view the details and solve them.
 
-If you encouter any problems, you can solve them according to the error messages.
+If you encounter any problems, you can solve them according to the error messages.
