@@ -192,7 +192,7 @@ If all check items show **Pass**, click **Next**.
 
 ## Step 5: Choose a spec and start migration
 
-On the **Choose a Spec and Start Migration** page, select an appropriate migration specification according to your performance requirements. For more information about the specifications, see [Specifications for Data Migration](/tidb-cloud/tidb-cloud-billing-dm.md).
+On the **Choose a Spec and Start Migration** page, select an appropriate migration specification according to your performance requirements. For more information about the specifications, see [Specifications for Data Migration](/tidb-cloud/tidb-cloud-billing-dm.md#specifications-for-data-migration).
 
 After selecting the spec, click **Create Job and Start** to start the migration.
 
