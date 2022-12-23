@@ -70,17 +70,9 @@ tmp_path = "/tidb-data/tiflash-9000/tmp"
 [storage]
 
     ## DTFile format
-<<<<<<< HEAD
-    ## * format_version = 1, the old format, deprecated.
     ## * format_version = 2, the default format.
     ## * format_version = 3, the new format, which provides more data validation features.
     # format_version = 2
-=======
-    ## * format_version = 2, the default format for versions < v6.0.0.
-    ## * format_version = 3, the default format for v6.0.0 and v6.1.x, which provides more data validation features.
-    ## * format_version = 4, the default format for v6.2.0 and later versions, which reduces write amplification and background task resource consumption
-    # format_version = 4
->>>>>>> 3d62a27d9 (Delete deprecated tiflash configs (#11646))
 
     [storage.main]
     ## The list of directories to store the main data. More than 90% of the total data is stored in
