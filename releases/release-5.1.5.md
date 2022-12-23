@@ -135,7 +135,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v5.1/quick-start-with-
 
 + Tools
 
-    + TiDB-Binlog
+    + TiDB Binlog
 
         - Fix the issue that Drainer cannot send requests to Pump correctly when `compressor` is set to `zip` [#1152](https://github.com/pingcap/tidb-binlog/issues/1152)
 
