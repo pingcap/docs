@@ -39,7 +39,7 @@ You will receive a verification email for TiDB Cloud, when you check your Email 
 
 2. Click **Logout**
 
-## Setp3: Password Policy
+## Password Policy
 
 TiDB Cloud sets a default password policy for registered users, and automatically detects the complexity of the entered password and prompts it. A strong password policy is as follows:
 
