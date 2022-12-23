@@ -25,7 +25,7 @@ Under this structure:
 
 ## Manage Organization Access
 
-### View Organizations
+### View organizations
 
 To check which project you belong to, perform these steps:
 
