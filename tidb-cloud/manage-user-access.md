@@ -187,7 +187,7 @@ If you are the owner of an organization, you can perform the following steps to 
 
 2. Click **Organization Settings**. The organization settings page is displayed.
 
-3. Click **User Management**, and then select the **By All Users** tab.
+3. Click the **User Management** tab, and then select **By All Users**.
 
 4. Click the role of the target member, and then modify the role.
 
