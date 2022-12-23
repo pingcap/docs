@@ -7,36 +7,6 @@ summary: Learn how to manage identity access of TiDB Cloud.
 
 To access your TiDB cloud, you must have a TiDB cloud user account. You may choose to register and login to TiDB Cloud, see [Password Authentication](/tidb-cloud/tidb-cloud-security-password-authentication.md), or choose your Google Workspace and GitHub accounts to single sign-on(SSO) to TiDB Cloud.
 
-## single sign-on(SSO) for TiDB Cloud Organization 
-
-### Sign in with Google 
-
-To Sign in with your Google Workspace, perform these steps:
-
-1. Go to the TiDB Cloud login page: [www.tidbcloud.com](https://tidbcloud.com/).
-
-2. In TiDB Cloud Console, click **Sign in With Google**.
-
-3. Jump to Google Workspace Console, enter your Google **Username** and **Password** to login.
-
-4. Login is successful, jump back to your TiDB Cloud Console.
-
-### Sign in with Gothub 
-
-To Sign in with your Github, perform these steps:
-
-1. Go to the TiDB Cloud login page: [www.tidbcloud.com](https://tidbcloud.com/).
-
-2. In TiDB Cloud Console, click **Sign in With Github**.
-
-3. Jump to Github Console, enter your Github **Username** and **Password** to login.
-
-4. Login is successful, jump back to your TiDB Cloud Console.
-
-> **Note:**
->
-> If MFA is enabled on your Google Workspace or GitHub account, please enter your MFA Code to log in successfully.
-
 ## Organizations and Projects
 
 TiDB Cloud provides a hierarchical structure based on organizations and projects to facilitate the management of your TiDB cluster. In the hierarchy of organizations and projects, an organization can contain multiple projects and organization members, and a project can contain multiple clusters and project members.
