@@ -1,19 +1,19 @@
 ---
 title: Identity Access Management
-summary: Learn how to manage identity access of TiDB Cloud.
+summary: Learn how to manage identity access in TiDB Cloud.
 ---
 
 # Identity Access Management
 
 This document describes how to manage access to organizations, projects, roles, and user profiles in TiDB Cloud.
 
-To access your TiDB cloud, you must [create a TiDB cloud account](https://tidbcloud.com/free-trial). You can either sign up with email and password to [manage your password using TiDB Cloud](/tidb-cloud/tidb-cloud-security-password-authentication.md), or choose your Google Workspace or GitHub account for single sign-on (SSO) to TiDB Cloud.
+Before accessing TiDB cloud, [create a TiDB cloud account](https://tidbcloud.com/free-trial). You can either sign up with email and password so that you can [manage your password using TiDB Cloud](/tidb-cloud/tidb-cloud-security-password-authentication.md), or choose your Google Workspace or GitHub account for single sign-on (SSO) to TiDB Cloud.
 
 ## Organizations and projects
 
-TiDB Cloud provides a hierarchical structure based on organizations and projects to facilitate the management of your TiDB cluster. In the hierarchy of organizations and projects, an organization can contain multiple projects and organization members, and a project can contain multiple clusters and project members.
+TiDB Cloud provides a hierarchical structure based on organizations and projects to facilitate the management of your TiDB cluster. An organization in TiDB Cloud can contain multiple projects and organization members, and a project can contain multiple clusters and project members.
 
-To access a cluster in a project under an organization, a user must be both a member of the organization and a member of the project. Organization owners can invite users to join the project to create and manage clusters in the project.
+To access a cluster in a project under an organization, a user must be a member of both the organization and the project. Organization owners can invite users to join the project to create and manage clusters in the project.
 
 Under this structure:
 
@@ -27,17 +27,17 @@ Under this structure:
 
 ### View organizations
 
-To check which organizations you belong to, perform these steps:
+To check which organizations you belong to, perform the following steps:
 
 1. Click <MDSvgIcon name="icon-top-organization" /> **Organization** in the upper-right corner of the TiDB Cloud console.
 
-2. Click **Organization Settings**. You can view your organization.
+2. Click **Organization Settings**. You can view your organization on the page that is displayed.
 
 ### Switch between organizations
 
 If you are a member of multiple organizations, you can switch your account between organizations.
 
-To switch between organizations, perform these steps:
+To switch between organizations, perform the following steps:
 
 1. Click <MDSvgIcon name="icon-top-organization" /> **Organization** in the upper-right corner of the TiDB Cloud console.
 2. Select **Switch Organization** in the drop-down menu, and click the organization you want to switch to.
@@ -90,7 +90,7 @@ To invite a member to an organization, perform the following steps:
 
 ### Remove an organization member
 
-If you are the owner of an organization, you can remove organization members. Otherwise, skip this section.
+If you are the owner of an organization, you can remove organization members.
 
 To remove a member from an organization, perform the following steps:
 
@@ -176,7 +176,7 @@ To invite a member to a project, perform the following steps:
 
 ## Remove a project member
 
-If you are the owner of an organization, you can remove project members. Otherwise, skip this section.
+If you are the owner of an organization, you can remove project members.
 
 To remove a member from a project, perform the following steps:
 
@@ -204,10 +204,10 @@ There are four roles in an organization. The permissions of each role are as fol
 
 |  Permission                                                                           | Owner | Member | Billing Admin | Audit Admin |
 |---------------------------------------------------------------------------------------|-------|--------|---------------|-------------|
-| Invite members to join the organization, and remove members from the organization     | ✅     | ❌      | ❌             | ❌           |
+| Invite members to or remove members from an organization     | ✅     | ❌      | ❌             | ❌           |
 | Set roles for an organization member                                                  | ✅     | ❌      | ❌             | ❌           |
 | Create and rename projects                                                            | ✅     | ❌      | ❌             | ❌           |
-| Invite members to join a project, and remove members from a project                   | ✅     | ❌      | ❌             | ❌           |
+| Invite members to or remove members from a project          | ✅     | ❌      | ❌             | ❌           |
 | Edit time zone                                                                        | ✅     | ❌      | ❌             | ❌           |
 | View bills and edit payment information                                               | ✅     | ❌      | ✅             | ❌           |
 | View and configure audit logging                                                      | ❌     | ❌      | ❌             | ✅           |
