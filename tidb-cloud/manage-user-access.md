@@ -211,7 +211,7 @@ There are four roles in an organization. The permissions of each role are as fol
 | Edit time zone                                                                        | ✅     | ❌      | ❌             | ❌           |
 | View bills and edit payment information                                               | ✅     | ❌      | ✅             | ❌           |
 | View and configure audit logging                                                      | ❌     | ❌      | ❌             | ✅           |
-| Obtain project instance management rights                                             | ✅     | ✅      | ✅             | ✅           |
+| Obtain project instance management permissions                                             | ✅     | ✅      | ✅             | ✅           |
 | Manage an API key                                                                     | ✅     | ❌      | ❌             | ❌           |
 
 ## Manage user profiles
