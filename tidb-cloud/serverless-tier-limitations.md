@@ -17,7 +17,7 @@ summary: Learn about the limitations of TiDB Cloud Serverless Tier.
 -   各サーバーレス層クラスターには次の制限があります。
     -   ストレージ サイズは、OLTP ストレージの 5 GiB (論理サイズ) と OLAP ストレージの 5 GiB (論理サイズ) に制限されています。
     -   コンピューティング リソースは、1 つの vCPU と 1 GiB RAM に制限されています。
-    -   **注**: 今後数か月以内に、無料のスターター プランの提供を維持しながら、追加のリソースとパフォーマンスの向上のために使用量ベースの課金プランを提供する予定です。今後のリリースでは、無料のサーバーレス層の制限が変更される可能性があります。
+    -   **注**: 今後数か月以内に、無料のスターター プランの提供を継続しながら、リソースの追加とパフォーマンスの向上のために使用量ベースの課金プランを提供する予定です。今後のリリースでは、無料のサーバーレス層の制限が変更される可能性があります。
 
 ## 取引 {#transaction}
 
@@ -36,7 +36,3 @@ summary: Learn about the limitations of TiDB Cloud Serverless Tier.
 
 -   [ビルトインモニタリング](/tidb-cloud/built-in-monitoring.md)は現在、サーバーレス ティアでは使用できません。
 -   [サードパーティのモニタリング統合](/tidb-cloud/third-party-monitoring-integrations.md)は現在、サーバーレス ティアでは使用できません。
-
-## その他 {#others}
-
--   [TiDB CloudAPI](/tidb-cloud/api-overview.md)と[Terraform 統合](/tidb-cloud/terraform-tidbcloud-provider-overview.md)は現在、サーバーレス ティアでは使用できません。
