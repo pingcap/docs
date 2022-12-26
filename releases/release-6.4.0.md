@@ -312,11 +312,7 @@ In v6.4.0-DMR, the key new features and improvements are as follows:
 | DM | [`routes.route-rule-1.extract-table`](/dm/task-configuration-file-full.md#task-configuration-file-template-advanced) | Newly added | Optional. Used in the sharding scenario for extracting the source information of sharded tables. The extracted information will be written to the merged table in the downstream to identify the data source. If this parameter is configured, you need to manually create a merged table in the downstream in advance. |
 | DM | [`routes.route-rule-1.extract-schema`](/dm/task-configuration-file-full.md#task-configuration-file-template-advanced) | Newly added | Optional. Used in the sharding scenario for extracting the source information of sharded schemas. The extracted information will be written to the merged table in the downstream to identify the data source. If this parameter is configured, you need to manually create a merged table in the downstream in advance. |
 | DM | [`routes.route-rule-1.extract-source`](/dm/task-configuration-file-full.md#task-configuration-file-template-advanced) | Newly added | Optional. Used in the sharding scenario for extracting the source instance information. The extracted information will be written to the merged table in the downstream to identify the data source. If this parameter is configured, you need to manually create a merged table in the downstream in advance. |
-<<<<<<< HEAD
-| TiCDC | [`transaction-atomicity`](/ticdc/manage-ticdc.md#configure-sink-uri-with-mysqltidb) | Modified | Changes the default value from `table` to `none`. |
-=======
-| TiCDC | [`transaction-atomicity`](/ticdc/ticdc-sink-to-mysql.md#configure-sink-uri-for-mysql-or-tidb) | Modified | Changes the default value from `table` to `none`. This change helps reduce replication latency and OOM risks. In addition, TiCDC now only splits a few transactions (the size of a single transaction exceeds 1024 rows), instead of all transactions. |
->>>>>>> 26fdcd8a1 (add the reason for changing the default value (#11658))
+| TiCDC | [`transaction-atomicity`](/ticdc/manage-ticdc.md#configure-sink-uri-with-mysqltidb) | Modified | Changes the default value from `table` to `none`. This change helps reduce replication latency and OOM risks. In addition, TiCDC now only splits a few transactions (the size of a single transaction exceeds 1024 rows), instead of all transactions. |
 
 ### Others
 
