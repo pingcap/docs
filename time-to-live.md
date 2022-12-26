@@ -18,6 +18,7 @@ TTL is designed to help users clean up unnecessary data periodically and in a ti
 > **Warning:**
 >
 > This is an experimental feature. It is not recommended that you use it in a production environment.
+> TTL is not available for [TiDB Cloud Serverless Tier](https://docs.pingcap.com/tidbcloud/select-cluster-tier#serverless-tier-beta).
 
 ## Syntax
 
@@ -152,6 +153,10 @@ SET @@global.tidb_ttl_job_schedule_window_end_time = '05:00 +0000';
 ```
 
 The preceding statement allows TTL jobs to be scheduled only between 1:00 and 5:00 UTC. By default, the time window is set to `00:00 +0000` to `23:59 +0000`, which allows the jobs to be scheduled at any time.
+
+## Monitoring metrics and charts
+
+TiDB collects runtime information about TTL periodically and provides visualized charts of these metrics in Grafana. You can see these metrics in the TiDB -> TTL panel in Grafana. For details of the metrics, see the TTL section in [TiDB Monitoring Metrics](/grafana-tidb-dashboard.md).
 
 ## Compatibility with TiDB tools
 
