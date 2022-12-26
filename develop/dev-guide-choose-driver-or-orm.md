@@ -10,7 +10,7 @@ summary: Learn how to choose a driver or ORM framework to connect to TiDB.
 > TiDB provides the following two support levels for drivers and ORMs:
 >
 > - **Full**: indicates that using this driver or ORM does not have any known issues.
-> - **Verified**: indicates that using this driver or ORM might get errors because of compatibility differences between TiDB and MySQL.
+> - **Compatible**: indicates that using this driver or ORM might get errors because of compatibility differences between TiDB and MySQL.
 >
 > For more information, refer to [Third-Party Tools Supported by TiDB](/develop/dev-guide-third-party-support.md).
 
@@ -249,3 +249,62 @@ go get -u gorm.io/driver/mysql
 ```
 
 For an example of using GORM to build a TiDB application, see [Build a Simple CRUD App with TiDB and Golang](/develop/dev-guide-sample-application-golang.md).
+
+## Python
+
+This section describes how to use drivers and ORM frameworks in Python.
+
+### Python drivers
+
+<SimpleTab>
+<div label="PyMySQL">
+
+Support level: **Compatible**
+
+Follow the instructions in the [PyMySQL documentation](https://pypi.org/project/PyMySQL/) to download and configure the driver for use. Version **1.0.2** and above is recommended.
+
+For an example of building a TiDB application with **PyMySQL**, see [Build a Simple CRUD App with TiDB and Python](/develop/dev-guide-sample-application-python.md).
+
+</div>
+<div label="mysqlclient">
+
+Support level: **Compatible**
+
+Follow the instructions in the [mysqlclient documentation](https://pypi.org/project/mysqlclient/) to download and configure the driver for use. Version **2.1.1** and above is recommended.
+
+For an example of building a TiDB application with **mysqlclient**, see [Build a Simple CRUD App with TiDB and Python](/develop/dev-guide-sample-application-python.md).
+
+</div>
+<div label="mysql-connector-python">
+
+Support level: **Compatible**
+
+Follow the instructions in the [mysql-connector-python documentation](https://dev.mysql.com/doc/connector-python/en/connector-python-installation-binary.html) to download and configure the driver for use. Version **8.0.31** and above is recommended.
+
+For an example of building a TiDB application with **mysql-connector-python**, see [Build a Simple CRUD App with TiDB and Python](/develop/dev-guide-sample-application-python.md).
+
+</div>
+</SimpleTab>
+
+### Python ORM frameworks
+
+<SimpleTab>
+<div label="SQLAlchemy">
+
+Support level: **Compatible**
+
+[SQLAlchemy](https://www.sqlalchemy.org/) is a popular ORM framework for Python, you can use `pip install SQLAlchemy==1.4.44` to get all the dependencies for your application. We recommend using version **1.4.44** and above.
+
+For an example of building a TiDB application with **SQLAlchemy**, see [Build a Simple CRUD App with TiDB and Python](/develop/dev-guide-sample-application-python.md).
+
+</div>
+<div label="peewee">
+
+Support level: **Compatible**
+
+[peewee](http://docs.peewee-orm.com/en/latest/) is a popular ORM framework for Python, you can use `pip install peewee==3.15.4` to get all the dependencies for your application. We recommend using **3.15.4** and above.
+
+For an example of building a TiDB application with **peewee**, see [Build a Simple CRUD App with TiDB and Python](/develop/dev-guide-sample-application-python.md).
+
+</div>
+</SimpleTab>
