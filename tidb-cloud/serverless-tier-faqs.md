@@ -25,7 +25,7 @@ TiDB Cloud Tier は、完全な HTAP 機能を備えた TiDB データベース�
 
 ### ベータ版リリースとはどういう意味ですか? {#what-does-it-mean-for-beta-release}
 
-Serverless Tier はベータ版ですが、一般公開される前に新しい機能を継続的に追加し、既存の機能を改善しています。ベータ版製品には SLA を提供しません。したがって、サーバーレス層は現在、本番環境で使用し**ない**でください。
+Serverless Tier はベータ版であり、一般公開される前に新しい機能を継続的に追加し、既存の機能を改善しています。ベータ版製品には SLA を提供しません。したがって、サーバーレス層は現在、本番環境では使用し**ない**でください。
 
 ### 無料ベータ版の Serverless Tier クラスターにはどのような制限がありますか? {#what-are-the-limitations-of-a-serverless-tier-cluster-in-free-beta}
 
@@ -43,7 +43,7 @@ Serverless Tier はベータ版ですが、一般公開される前に新しい�
 
 ### Serverless Tier が利用可能になる前に、Developer Tier クラスターを作成しました。クラスターを引き続き使用できますか? {#i-created-a-developer-tier-cluster-before-serverless-tier-was-available-can-i-still-use-my-cluster}
 
-はい。無料の Developer Tier クラスターは、まもなく Serverless Tier クラスターに自動的に移行されます。クラスターを使用する機能に影響はなく、同じようにサーバーレス層のユーザー エクスペリエンスが向上します。
+はい、無料の Developer Tier クラスターは、まもなく Serverless Tier クラスターに自動的に移行されます。クラスターを使用する機能に影響はなく、同じようにサーバーレス層のユーザー エクスペリエンスが向上します。
 
 ## セキュリティに関するよくある質問 {#security-faqs}
 

@@ -16,6 +16,14 @@ summary: Learn about GC configuration parameters.
 
 ## GC I/O 制限 {#gc-i-o-limit}
 
+<CustomContent platform="tidb-cloud">
+
+> **ノート：**
+>
+> このセクションは、オンプレミスの TiDB にのみ適用されます。 TiDB Cloudにはデフォルトで GC I/O 制限がありません。
+
+</CustomContent>
+
 TiKV は GC I/O 制限をサポートしています。 `gc.max-write-bytes-per-sec`を設定して 1 秒あたりの GC ワーカーの書き込みを制限し、通常のリクエストへの影響を減らすことができます。
 
 `0`は、この機能を無効にすることを示します。
@@ -30,7 +38,7 @@ tikv-ctl --host=ip:port modify-tikv-config -n gc.max-write-bytes-per-sec -v 10MB
 
 ## TiDB 5.0 の変更点 {#changes-in-tidb-5-0}
 
-TiDB の以前のリリースでは、ガベージ コレクションは`mysql.tidb`システム テーブルを介して構成されていました。この表への変更は引き続きサポートされますが、提供されているシステム変数を使用することをお勧めします。これにより、構成への変更を検証し、予期しない動作を防ぐことができます ( [#20655](https://github.com/pingcap/tidb/issues/20655) )。
+TiDB の以前のリリースでは、ガベージ コレクションは`mysql.tidb`システム テーブルを介して構成されていました。このテーブルへの変更は引き続きサポートされますが、提供されているシステム変数を使用することをお勧めします。これにより、構成への変更を検証し、予期しない動作を防ぐことができます ( [#20655](https://github.com/pingcap/tidb/issues/20655) )。
 
 `CENTRAL`ガベージ コレクション モードはサポートされなくなりました。代わりに`DISTRIBUTED` GC モード (TiDB 3.0 以降のデフォルト) が自動的に使用されます。このモードは、ガベージ コレクションをトリガーするために TiDB が各 TiKV リージョンにリクエストを送信する必要がなくなるため、より効率的です。
 
@@ -44,7 +52,17 @@ TiDB v6.1.0 では、システム変数[`tidb_gc_max_wait_time`](/system-variabl
 
 ### 圧縮フィルターでの GC {#gc-in-compaction-filter}
 
-`DISTRIBUTED` GC モードに基づいて、Compaction Filter の GC のメカニズムは、別の GC ワーカー スレッドではなく、RocksDB の圧縮プロセスを使用して GC を実行します。この新しい GC メカニズムは、GC による余分なディスク読み取りを回避するのに役立ちます。また、古いデータを消去した後、シーケンシャル スキャンのパフォーマンスを低下させる多数の廃棄マークが残されることを回避します。次の例は、TiKV 構成ファイルでメカニズムを有効にする方法を示しています。
+`DISTRIBUTED` GC モードに基づいて、Compaction Filter の GC のメカニズムは、別の GC ワーカー スレッドではなく、RocksDB の圧縮プロセスを使用して GC を実行します。この新しい GC メカニズムは、GC による余分なディスク読み取りを回避するのに役立ちます。また、古いデータを消去した後、シーケンシャル スキャンのパフォーマンスを低下させる多数の廃棄マークが残されることを回避します。
+
+<CustomContent platform="tidb-cloud">
+
+> **ノート：**
+>
+> 次の TiKV 構成の変更例は、オンプレミスの TiDB にのみ適用されます。 TiDB Cloudでは、圧縮フィルターの GC のメカニズムがデフォルトで有効になっています。
+
+</CustomContent>
+
+次の例は、TiKV 構成ファイルでメカニズムを有効にする方法を示しています。
 
 {{< copyable "" >}}
 

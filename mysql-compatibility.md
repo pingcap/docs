@@ -7,14 +7,14 @@ summary: Learn about the compatibility of TiDB with MySQL, and the unsupported a
 
 TiDB は、 MySQL 5.7プロトコルおよびMySQL 5.7 5.7 の一般的な機能と構文と高度な互換性があります。 MySQL 5.7のエコシステム ツール (PHPMyAdmin、Navicat、MySQL Workbench、mysqldump、および Mydumper/myloader) と MySQL クライアントを TiDB に使用できます。
 
-ただし、MySQL の一部の機能はサポートされていません。これは、問題を解決するためのより良い方法 (JSON に取って代わられた XML関数など) があるか、現在の需要と必要な労力 (ストアド プロシージャや関数など) の不足が原因である可能性があります。一部の機能は、分散システムとして実装するのが難しい場合もあります。
+ただし、MySQL の一部の機能はサポートされていません。これは、問題を解決するためのより良い方法 (JSON に取って代わられた XML関数など) があるか、必要な労力に対して現在の需要が不足している (ストアド プロシージャや関数など) ためである可能性があります。一部の機能は、分散システムとして実装するのが難しい場合もあります。
 
 <CustomContent platform="tidb">
 
 さらに、TiDB は MySQL レプリケーション プロトコルをサポートしていませんが、MySQL でデータをレプリケートするための特定のツールを提供します。
 
 -   MySQL からのデータの複製: [TiDB データ移行 (DM)](/dm/dm-overview.md)は、MySQL/MariaDB から TiDB への完全なデータ移行と増分データ複製をサポートするツールです。
--   レプリケート データを MySQL に: [TiCDC](/ticdc/ticdc-overview.md)は、TiKV 変更ログをプルして、TiDB の増分データをレプリケートするためのツールです。 TiCDC は[MySQL シンク](/ticdc/ticdc-overview.md#sink-support)を使用して、TiDB の増分データを MySQL に複製します。
+-   レプリケート データを MySQL: [TiCDC](/ticdc/ticdc-overview.md)は、TiKV 変更ログをプルして、TiDB の増分データをレプリケートするためのツールです。 TiCDC は[MySQL シンク](/ticdc/ticdc-overview.md#sink-support)を使用して、TiDB の増分データを MySQL に複製します。
 
 </CustomContent>
 
@@ -125,7 +125,7 @@ TiDB Cloudでパフォーマンス メトリックを確認するには、 TiDB 
 
 </CustomContent>
 
-### クエリ実行計画 {#query-execution-plan}
+### クエリ実行プラン {#query-execution-plan}
 
 `EXPLAIN FOR`の Query Execution Plan ( `EXPLAIN` ) の出力形式、出力内容、権限設定は、MySQL と大きく異なります。
 

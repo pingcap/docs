@@ -13,12 +13,12 @@ TiDB Cloudをサードパーティの監視サービスと統合して、 TiDB C
 
 ## 必要なアクセス {#required-access}
 
-サードパーティの統合設定を編集するには、組織への`Owner`アクセス権またはターゲット プロジェクトへの`Member`アクセス権が必要です。
+サードパーティの統合設定を編集するには、組織への`Owner`つのアクセス権またはターゲット プロジェクトへの`Member`のアクセス権が必要です。
 
 ## サードパーティの統合をビューまたは変更する {#view-or-modify-third-party-integrations}
 
 1.  TiDB Cloudコンソールで、表示または変更するターゲット プロジェクトを選択します。
-2.  左側のナビゲーションで、 **[統合]**をクリックします。利用可能なサードパーティ統合が表示されます。
+2.  左側のナビゲーションで、[**統合**] をクリックします。利用可能なサードパーティ統合が表示されます。
 
 ## 利用可能な統合 {#available-integrations}
 
@@ -32,4 +32,4 @@ Datadog 統合により、TiDB クラスターに関するメトリクス デー
 
 Prometheus と Grafana の統合により、 TiDB Cloudから Prometheus の Scrape_config ファイルを取得し、そのファイルの内容を使用して Prometheus を構成できます。これらのメトリックは、Grafana ダッシュボードで表示できます。
 
-詳細な統合手順と Prometheus が追跡するメトリクスのリストについては、 [TiDB CloudをPrometheus および Grafana と統合する](/tidb-cloud/monitor-prometheus-and-grafana-integration.md)を参照してください。
+詳細な統合手順と Prometheus が追跡するメトリクスのリストについては、 [TiDB Cloudを Prometheus および Grafana と統合する](/tidb-cloud/monitor-prometheus-and-grafana-integration.md)を参照してください。

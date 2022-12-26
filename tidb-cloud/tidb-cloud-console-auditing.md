@@ -1,6 +1,6 @@
 ---
 title: Console Audit Logging
-summary: Learn about the log auditing feature for the TiDB Cloud Console.
+summary: Learn about the log auditing feature for the TiDB Cloud console.
 ---
 
 # コンソール監査ログ {#console-audit-logging}
@@ -21,11 +21,11 @@ TiDB Cloudは、 TiDB Cloudコンソール操作の監査ログ機能を提供�
 
 ## 監査イベントの種類 {#audit-event-types}
 
-TiDB Cloud Console でのすべてのユーザー操作は、イベントとして監査ログに記録されます。監査ログは、次のイベント タイプを対象としています。
+TiDB Cloudコンソールでのすべてのユーザー操作は、イベントとして監査ログに記録されます。監査ログは、次のイベント タイプを対象としています。
 
 | 監査イベントの種類                            | 説明                                |
 | ------------------------------------ | --------------------------------- |
-| AuditEventSignIn                     | ログイン                              |
+| AuditEventSignIn                     | サインイン                             |
 | AuditEventSignOut                    | サインアウト                            |
 | AuditEventUpdateUserProfile          | ユーザーの姓名を更新する                      |
 | AuditEventUpdateMFA                  | MFA を有効または無効にする                   |
@@ -114,9 +114,9 @@ TiDB Cloud Console でのすべてのユーザー操作は、イベントとし�
 | AuditEventAddNewPaymentMethod   | カード番号                    | ストリング           | 支払いカード番号 (情報が鈍感化されています)                               |
 | AuditEventUpdatePaymentMethod   | カード番号                    | ストリング           | 支払いカード番号 (情報が鈍感化されています)<br/> (現在、完全なフィールド情報を取得していません) |
 | AuditEventDeletePaymentMethod   |                          |                 | (現在、完全なフィールド情報を取得していません)                              |
-| AuditEventCreateCluster         | クラスタ名                    | ストリング           | クラスタ名                                                 |
-| AuditEventDeleteCluster         | クラスタ名                    | ストリング           | クラスタ名                                                 |
+| AuditEventCreateCluster         | クラスター名                   | ストリング           | クラスタ名                                                 |
+| AuditEventDeleteCluster         | クラスター名                   | ストリング           | クラスタ名                                                 |
 | AuditEventCreateBackup          | バックアップ名                  | ストリング           | バックアップ名                                               |
-| AuditEventRestoreBackup         | クラスター名                   | ストリング           | クラスタ名                                                 |
+| AuditEventRestoreBackup         | クラスタ名                    | ストリング           | クラスタ名                                                 |
 | AuditEventUpdateAuditLogStatus  | enableAuditLog           | ブール             | データベース監査ログを有効または無効にする                                 |
 | AuditEventUpdateUserRole        | 古い役割<br/>新しい役割           | ストリング<br/>ストリング | 旧ロール名<br/>新しいロール名                                     |

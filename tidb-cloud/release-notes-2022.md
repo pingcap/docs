@@ -14,7 +14,7 @@ aliases: ['/tidbcloud/beta/supported-tidb-versions','/tidbcloud/release-notes']
 
 -   ラベル`project name`をフィルターとして[データドッグ](/tidb-cloud/monitor-datadog-integration.md)ダッシュボードに追加して、プロジェクト情報を提供します。
 
-    フィルター`project name`を使用して、目的のクラスターをすばやく見つけることができます。
+    フィルター`project name`を使用して、必要なクラスターをすばやく見つけることができます。
 
 ## 2022 年 12 月 13 日 {#december-13-2022}
 
@@ -176,7 +176,7 @@ aliases: ['/tidbcloud/beta/supported-tidb-versions','/tidbcloud/release-notes']
 
 -   [TiDB Cloud Vercel 統合](https://vercel.com/integrations/tidb-cloud) in [Vercel 統合マーケットプレイス](https://vercel.com/integrations#databases)を公開します。
 
-    [ヴェルセル](https://vercel.com)はフロントエンド開発者向けのプラットフォームであり、イノベーターがひらめいた瞬間に作成するために必要なスピードと信頼性を提供します。 TiDB Cloud Vercel Integration を使用すると、Vercel プロジェクトをTiDB Cloudクラスターに簡単に接続できます。詳しくは資料[TiDB Cloudを Vercel と統合する](/tidb-cloud/integrate-tidbcloud-with-vercel.md)をご覧ください。
+    [ヴェルセル](https://vercel.com)はフロントエンド開発者向けのプラットフォームであり、イノベーターがひらめいた瞬間に作成するために必要なスピードと信頼性を提供します。 TiDB Cloud Vercel Integration を使用すると、Vercel プロジェクトをTiDB Cloudクラスターに簡単に接続できます。詳しくは資料[TiDB Cloudと Vercel の統合](/tidb-cloud/integrate-tidbcloud-with-vercel.md)をご覧ください。
 
 -   [TiDB Cloudスターター テンプレート](https://vercel.com/templates/next.js/tidb-cloud-starter) in [ヴェルセル テンプレート一覧](https://vercel.com/templates)を公開します。
 
@@ -457,7 +457,7 @@ aliases: ['/tidbcloud/beta/supported-tidb-versions','/tidbcloud/release-notes']
 ## 2022 年 6 月 21 日 {#june-21-2022}
 
 -   GCP リージョン`Taiwan` for [専用ティア](/tidb-cloud/select-cluster-tier.md#dedicated-tier)クラスタ作成のサポートを追加します。
--   TiDB Cloudコンソールでサポート[ユーザー プロファイルの更新](/tidb-cloud/manage-user-access.md#manage-user-profiles) (名、最終時間、会社名、国、電話番号を含む)。
+-   TiDB Cloudコンソールで[ユーザー プロファイルの更新](/tidb-cloud/manage-user-access.md#manage-user-profiles)をサポートします。これには、名、最終時間、会社名、国、電話番号が含まれます。
 -   [**TiDB に接続する**](/tidb-cloud/connect-via-standard-connection.md)ダイアログで MySQL、MyCLI、JDBC、Python、Go、および Node.js の接続文字列を指定して、TiDB クラスターに簡単に接続できるようにします。
 -   データのインポート中にバケット URI からバケット領域を自動的に取得することをサポートして、そのような情報を入力する手間を省きます。
 
@@ -499,7 +499,7 @@ aliases: ['/tidbcloud/beta/supported-tidb-versions','/tidbcloud/release-notes']
 
 ## 2022 年 5 月 1 日 {#may-1-2022}
 
--   [作成](/tidb-cloud/create-tidb-cluster.md)または[戻す](/tidb-cloud/backup-and-restore.md#restore) a [専用ティア](/tidb-cloud/select-cluster-tier.md#dedicated-tier)クラスターの場合、TiDB、TiKV、および TiFlash の vCPU サイズの構成をサポートします。
+-   [作成](/tidb-cloud/create-tidb-cluster.md)または[戻す](/tidb-cloud/backup-and-restore.md#restore) a [専用層](/tidb-cloud/select-cluster-tier.md#dedicated-tier)クラスターの場合、TiDB、TiKV、および TiFlash の vCPU サイズの構成をサポートします。
 -   クラスター作成のための AWS リージョン`Mumbai`のサポートを追加します。
 -   [TiDB Cloud請求](/tidb-cloud/tidb-cloud-billing.md)のコンピューティング、ストレージ、およびデータ転送のコストを更新します。
 
@@ -513,7 +513,7 @@ TiDB Cloudは一般提供になりました。次のいずれかのオプショ�
 
 -   [開発者層](/tidb-cloud/select-cluster-tier.md#serverless-tier-beta)から無料で始めましょう。
 -   [14 日間の無料 PoC トライアル](https://en.pingcap.com/apply-for-poc/)に申し込む。
--   [専用層](/tidb-cloud/select-cluster-tier.md#dedicated-tier)でフル アクセスを取得します。
+-   [専用ティア](/tidb-cloud/select-cluster-tier.md#dedicated-tier)でフル アクセスを取得します。
 
 ## 2022 年 3 月 25 日 {#march-25-2022}
 
@@ -561,7 +561,7 @@ TiDB Cloudは一般提供になりました。次のいずれかのオプショ�
 
 改善：
 
--   [CSV ファイル](/tidb-cloud/import-csv-files.md)または[Apache 寄木細工のファイル](/tidb-cloud/import-parquet-files.md)をTiDB Cloudにインポートする際のカスタム ファイル名の使用をサポートします。
+-   [CSVファイル](/tidb-cloud/import-csv-files.md)または[Apache 寄木細工のファイル](/tidb-cloud/import-parquet-files.md)をTiDB Cloudにインポートする際のカスタム ファイル名の使用をサポートします。
 
 ## 2022 年 1 月 11 日 {#january-11-2022}
 

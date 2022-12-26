@@ -65,11 +65,119 @@ ALTER TABLE employees COMPACT TIFLASH REPLICA;
 
 </CustomContent>
 
-## MySQL の互換性 {#mysql-compatibility}
+## データ圧縮の進行状況を観察する {#observe-data-compaction-progress}
+
+`INFORMATION_SCHEMA.TIFLASH_TABLES`テーブルの`TOTAL_DELTA_ROWS`列を確認することで、データ圧縮の進行状況を観察したり、テーブルの圧縮を開始するかどうかを決定したりできます。 `TOTAL_DELTA_ROWS`の値が大きいほど、圧縮できるデータが多くなります。 `TOTAL_DELTA_ROWS`が`0`の場合、テーブル内のすべてのデータは最適な状態にあり、圧縮する必要はありません。
+
+<details><summary>例: パーティション化されていないテーブルの圧縮状態を確認する</summary>
+
+```sql
+USE test;
+
+CREATE TABLE foo(id INT);
+
+ALTER TABLE foo SET TIFLASH REPLICA 1;
+
+SELECT TOTAL_DELTA_ROWS, TOTAL_STABLE_ROWS FROM INFORMATION_SCHEMA.TIFLASH_TABLES
+    WHERE IS_TOMBSTONE = 0 AND
+    `TIDB_DATABASE` = "test" AND `TIDB_TABLE` = "foo";
++------------------+-------------------+
+| TOTAL_DELTA_ROWS | TOTAL_STABLE_ROWS |
++------------------+-------------------+
+|                0 |                 0 |
++------------------+-------------------+
+
+INSERT INTO foo VALUES (1), (3), (7);
+
+SELECT TOTAL_DELTA_ROWS, TOTAL_STABLE_ROWS FROM INFORMATION_SCHEMA.TIFLASH_TABLES
+    WHERE IS_TOMBSTONE = 0 AND
+    `TIDB_DATABASE` = "test" AND `TIDB_TABLE` = "foo";
++------------------+-------------------+
+| TOTAL_DELTA_ROWS | TOTAL_STABLE_ROWS |
++------------------+-------------------+
+|                3 |                 0 |
++------------------+-------------------+
+-- Newly written data can be compacted
+
+ALTER TABLE foo COMPACT TIFLASH REPLICA;
+
+SELECT TOTAL_DELTA_ROWS, TOTAL_STABLE_ROWS FROM INFORMATION_SCHEMA.TIFLASH_TABLES
+    WHERE IS_TOMBSTONE = 0 AND
+    `TIDB_DATABASE` = "test" AND `TIDB_TABLE` = "foo";
++------------------+-------------------+
+| TOTAL_DELTA_ROWS | TOTAL_STABLE_ROWS |
++------------------+-------------------+
+|                0 |                 3 |
++------------------+-------------------+
+-- All data is in the best state and no compaction is needed
+```
+
+</details>
+
+<details><summary>例: 分割されたテーブルの圧縮状態を確認する</summary>
+
+```sql
+USE test;
+
+CREATE TABLE employees
+    (id INT NOT NULL, store_id INT)
+    PARTITION BY LIST (store_id) (
+        PARTITION pNorth VALUES IN (1, 2, 3, 4, 5),
+        PARTITION pEast VALUES IN (6, 7, 8, 9, 10),
+        PARTITION pWest VALUES IN (11, 12, 13, 14, 15),
+        PARTITION pCentral VALUES IN (16, 17, 18, 19, 20)
+    );
+
+ALTER TABLE employees SET TIFLASH REPLICA 1;
+
+INSERT INTO employees VALUES (1, 1), (6, 6), (10, 10);
+
+SELECT PARTITION_NAME, TOTAL_DELTA_ROWS, TOTAL_STABLE_ROWS
+    FROM INFORMATION_SCHEMA.TIFLASH_TABLES t, INFORMATION_SCHEMA.PARTITIONS p
+    WHERE t.IS_TOMBSTONE = 0 AND t.TABLE_ID = p.TIDB_PARTITION_ID AND
+    p.TABLE_SCHEMA = "test" AND p.TABLE_NAME = "employees";
++----------------+------------------+-------------------+
+| PARTITION_NAME | TOTAL_DELTA_ROWS | TOTAL_STABLE_ROWS |
++----------------+------------------+-------------------+
+| pNorth         |                1 |                 0 |
+| pEast          |                2 |                 0 |
+| pWest          |                0 |                 0 |
+| pCentral       |                0 |                 0 |
++----------------+------------------+-------------------+
+-- Some partitions can be compacted
+
+ALTER TABLE employees COMPACT TIFLASH REPLICA;
+
+SELECT PARTITION_NAME, TOTAL_DELTA_ROWS, TOTAL_STABLE_ROWS
+    FROM INFORMATION_SCHEMA.TIFLASH_TABLES t, INFORMATION_SCHEMA.PARTITIONS p
+    WHERE t.IS_TOMBSTONE = 0 AND t.TABLE_ID = p.TIDB_PARTITION_ID AND
+    p.TABLE_SCHEMA = "test" AND p.TABLE_NAME = "employees";
++----------------+------------------+-------------------+
+| PARTITION_NAME | TOTAL_DELTA_ROWS | TOTAL_STABLE_ROWS |
++----------------+------------------+-------------------+
+| pNorth         |                0 |                 1 |
+| pEast          |                0 |                 2 |
+| pWest          |                0 |                 0 |
+| pCentral       |                0 |                 0 |
++----------------+------------------+-------------------+
+-- Data in all partitions is in the best state and no compaction is needed
+```
+
+</details>
+
+> **ノート：**
+>
+> -   圧縮中にデータが更新された場合、圧縮が完了した後も`TOTAL_DELTA_ROWS`はゼロ以外の値である可能性があります。これは正常な動作であり、これらの更新が圧縮されていないことを示しています。これらの更新を圧縮するには、 `ALTER TABLE ... COMPACT`ステートメントを再度実行します。
+>
+> -   `TOTAL_DELTA_ROWS`は行数ではなく、データのバージョンを示します。たとえば、行を挿入してから削除すると、 `TOTAL_DELTA_ROWS`が 2 増加します。
+
+## 互換性 {#compatibility}
+
+### MySQL の互換性 {#mysql-compatibility}
 
 `ALTER TABLE ... COMPACT`構文は TiDB 固有のもので、標準 SQL 構文の拡張です。同等の MySQL 構文はありませんが、MySQL クライアントまたは MySQL プロトコルに準拠するさまざまなデータベース ドライバーを使用して、このステートメントを実行できます。
 
-## TiDB Binlogと TiCDC の互換性 {#tidb-binlog-and-ticdc-compatibility}
+### TiDB Binlogと TiCDC の互換性 {#tidb-binlog-and-ticdc-compatibility}
 
 `ALTER TABLE ... COMPACT`ステートメントは論理データの変更をもたらさないため、TiDB Binlogまたは TiCDC によってダウンストリームに複製されません。
 

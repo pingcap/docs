@@ -33,7 +33,7 @@ Amazon S3 からTiDB Cloudにデータを移行する前に、企業所有の AW
 
     詳細については、 [MySQL 互換データベースからデータを移行する](/tidb-cloud/migrate-data-into-tidb.md)を参照してください。
 
-3.  ソース データがローカル ファイルにある場合は、Amazon S3 コンソールまたは AWS CLI を使用してファイルを Amazon S3 バケットにアップロードできます。
+3.  ソース データがローカル ファイルにある場合は、Amazon S3 コンソールまたは AWS CLI を使用して、ファイルを Amazon S3 バケットにアップロードできます。
 
     -   Amazon S3 コンソールを使用してファイルをアップロードするには、AWS ユーザーガイドの[オブジェクトのアップロード](https://docs.aws.amazon.com/AmazonS3/latest/userguide/upload-objects.html)を参照してください。
     -   AWS CLI を使用してファイルをアップロードするには、次のコマンドを使用します。
@@ -51,11 +51,11 @@ Amazon S3 からTiDB Cloudにデータを移行する前に、企業所有の AW
 > **ノート：**
 >
 > -   ソース データをTiDB Cloudでサポートされているファイル形式にコピーできることを確認してください。サポートされている形式には、CSV、Dumpling、およびAuroraバックアップ スナップショットが含まれます。ソース ファイルが CSV 形式の場合は、 [TiDB がサポートする命名規則](https://docs.pingcap.com/tidb/stable/migrate-from-csv-using-tidb-lightning#file-name)に従う必要があります。
-> -   可能な場合は、大きなソース ファイルを最大サイズ 256 MB の小さなファイルに分割することをお勧めします。これにより、 TiDB Cloud はスレッド間でファイルを並行して読み取ることができるため、インポートのパフォーマンスが向上する可能性があります。
+> -   可能な場合は、大きなソース ファイルを最大サイズ 256 MB の小さなファイルに分割することをお勧めします。これにより、 TiDB Cloudはスレッド間でファイルを並行して読み取ることができるため、インポートのパフォーマンスが向上する可能性があります。
 
 ### ステップ 2.Amazon S3 アクセスを構成する {#step-2-configure-amazon-s3-access}
 
-TiDB Cloud がAmazon S3 バケットのソース データにアクセスできるようにするには、 TiDB Cloudのバケット アクセスを設定し、Role-ARN を取得する必要があります。プロジェクト内の 1 つの TiDB クラスターの設定が完了すると、そのプロジェクト内のすべての TiDB クラスターが同じ Role-ARN を使用して Amazon S3 バケットにアクセスできるようになります。
+TiDB Cloudが Amazon S3 バケットのソース データにアクセスできるようにするには、 TiDB Cloudのバケット アクセスを設定し、Role-ARN を取得する必要があります。プロジェクト内の 1 つの TiDB クラスターの設定が完了すると、そのプロジェクト内のすべての TiDB クラスターが同じ Role-ARN を使用して Amazon S3 バケットにアクセスできるようになります。
 
 詳細な手順については、 [Amazon S3 アクセスの構成](/tidb-cloud/config-s3-and-gcs-access.md#configure-amazon-s3-access)を参照してください。
 
@@ -63,9 +63,9 @@ TiDB Cloud がAmazon S3 バケットのソース データにアクセスでき�
 
 1.  [TiDB Cloudコンソール](https://tidbcloud.com/)にログインして[**クラスター**](https://tidbcloud.com/console/clusters)ページに移動し、左側のナビゲーション バーの上部でターゲット プロジェクトを選択します。
 
-2.  ターゲット クラスターを見つけて、クラスター領域の右上隅にある**[...]**をクリックし、 <strong>[データのインポート]</strong>を選択します。 <strong>[データのインポート]</strong>ページが表示されます。
+2.  ターゲット クラスターを見つけて、クラスター領域の右上隅にある [ **...** ] をクリックし、 [<strong>データのインポート</strong>] を選択します。 [<strong>データのインポート]</strong>ページが表示されます。
 
-3.  **[データのインポート]**ページで、次の情報を入力します。
+3.  [**データのインポート**] ページで、次の情報を入力します。
 
     -   **データ形式**: データの形式を選択します。
     -   **場所**: `AWS`
@@ -73,15 +73,15 @@ TiDB Cloud がAmazon S3 バケットのソース データにアクセスでき�
     -   **Role ARN** : [ステップ2](#step-2-configure-amazon-s3-access)で取得した Role-ARN を入力します。
     -   **ターゲットクラスタ**: クラスター名とリージョン名が表示されます。
 
-    バケットのリージョンがクラスターと異なる場合は、クロス リージョンのコンプライアンスを確認します。 **[次へ]**をクリックします。
+    バケットのリージョンがクラスターと異なる場合は、クロス リージョンのコンプライアンスを確認します。 [**次へ**] をクリックします。
 
-    TiDB Cloud は、指定されたバケット URI でデータにアクセスできるかどうかの検証を開始します。検証後、 TiDB Cloud はデフォルトのファイル命名パターンを使用してデータ ソース内のすべてのファイルをスキャンしようとし、次のページの左側にスキャンの概要結果を返します。 `AccessDenied`エラーが発生した場合は、 [S3 からのデータ インポート中のアクセス拒否エラーのトラブルシューティング](/tidb-cloud/troubleshoot-import-access-denied-error.md)を参照してください。
+    TiDB Cloudは、指定されたバケット URI でデータにアクセスできるかどうかの検証を開始します。検証後、 TiDB Cloudはデフォルトのファイル命名パターンを使用してデータ ソース内のすべてのファイルをスキャンしようとし、次のページの左側にスキャンの概要結果を返します。 `AccessDenied`エラーが発生した場合は、 [S3 からのデータ インポート中のアクセス拒否エラーのトラブルシューティング](/tidb-cloud/troubleshoot-import-access-denied-error.md)を参照してください。
 
 4.  ファイル パターンを変更し、必要に応じてテーブル フィルター ルールを追加します。
 
-5.  **[次へ]**をクリックします。
+5.  [**次へ**] をクリックします。
 
-6.  **[プレビュー]**ページでインポートするデータを確認し、 <strong>[インポートの開始]</strong>をクリックします。
+6.  [**プレビュー**] ページでインポートするデータを確認し、[<strong>インポートの開始</strong>] をクリックします。
 
 データがインポートされた後、 TiDB Cloudの Amazon S3 アクセスを削除する場合は、 [ステップ 2.Amazon S3 アクセスを構成する](#step-2-configure-amazon-s3-access)で追加したポリシーを削除するだけです。
 
@@ -109,7 +109,7 @@ GCS からTiDB Cloudにデータを移行する前に、次のことを確認し
 > **ノート：**
 >
 > -   ソース データをTiDB Cloudでサポートされているファイル形式にコピーできることを確認してください。サポートされている形式には、CSV、Dumpling、およびAuroraバックアップ スナップショットが含まれます。ソース ファイルが CSV 形式の場合は、 [TiDB がサポートする命名規則](https://docs.pingcap.com/tidb/stable/migrate-from-csv-using-tidb-lightning#file-name)に従う必要があります。
-> -   可能な場合は、大きなソース ファイルを最大サイズ 256 MB の小さなファイルに分割することをお勧めします。これにより、 TiDB Cloud がスレッド間でファイルを並行して読み取ることができるようになり、インポートのパフォーマンスが向上します。
+> -   可能な場合は、大きなソース ファイルを最大サイズ 256 MB の小さなファイルに分割することをお勧めします。これにより、 TiDB Cloudがスレッド間でファイルを並行して読み取ることができるようになり、インポートのパフォーマンスが向上します。
 
 ### ステップ 2.GCS アクセスを構成する {#step-2-configure-gcs-access}
 
@@ -119,9 +119,9 @@ TiDB クラウドが GCS バケット内のソース データにアクセスで
 
 ### ステップ 3. ソース データ ファイルを GCS にコピーし、データをTiDB Cloudにインポートする {#step-3-copy-source-data-files-to-gcs-and-import-data-into-tidb-cloud}
 
-1.  ソース データ ファイルを GCS バケットにコピーするには、Google Cloud Console または gsutil を使用してデータを GCS バケットにアップロードします。
+1.  ソース データ ファイルを GCS バケットにコピーするには、Google Cloud コンソールまたは gsutil を使用してデータを GCS バケットにアップロードします。
 
-    -   Google Cloud Console を使用してデータをアップロードするには、Google Cloud Storage ドキュメントの[ストレージ バケットの作成](https://cloud.google.com/storage/docs/creating-buckets)を参照してください。
+    -   Google Cloud コンソールを使用してデータをアップロードするには、Google Cloud Storage ドキュメントの[ストレージ バケットの作成](https://cloud.google.com/storage/docs/creating-buckets)を参照してください。
     -   gsutil を使用してデータをアップロードするには、次のコマンドを使用します。
 
         ```shell
@@ -134,7 +134,7 @@ TiDB クラウドが GCS バケット内のソース データにアクセスで
         gsutil rsync -r ./tidbcloud-samples-us-west-2/ gs://target-url-in-gcs
         ```
 
-2.  TiDB Cloudコンソールで[**クラスター**](https://tidbcloud.com/console/clusters)ページに移動し、左側のナビゲーション バーの上部でターゲット プロジェクトを選択してから、ターゲット クラスターの名前をクリックして、独自の概要ページに移動します。 **[インポート]**領域で<strong>[データのインポート]</strong>をクリックし、 <strong>[データのインポート]</strong>ページでインポート関連の情報を入力します。
+2.  TiDB Cloudコンソールで[**クラスター**](https://tidbcloud.com/console/clusters)ページに移動し、左側のナビゲーション バーの上部でターゲット プロジェクトを選択してから、ターゲット クラスターの名前をクリックして、独自の概要ページに移動します。 [**インポート**] 領域で [<strong>データのインポート</strong>] をクリックし、[<strong>データのインポート</strong>] ページでインポート関連の情報を入力します。
 
 > **ノート：**
 >

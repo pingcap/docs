@@ -3,17 +3,17 @@ title: Integrate TiDB Cloud with Prometheus and Grafana
 summary: Learn how to monitor your TiDB cluster with the Prometheus and Grafana integration.
 ---
 
-# TiDB CloudをPrometheus および Grafana と統合する {#integrate-tidb-cloud-with-prometheus-and-grafana}
+# TiDB Cloudを Prometheus および Grafana と統合する {#integrate-tidb-cloud-with-prometheus-and-grafana}
 
-TiDB Cloud は[プロメテウス](https://prometheus.io/) API エンドポイントを提供します。 Prometheus サービスをお持ちの場合は、 TiDB Cloudの主要なメトリックをエンドポイントから簡単に監視できます。
+TiDB Cloudは[プロメテウス](https://prometheus.io/)の API エンドポイントを提供します。 Prometheus サービスをお持ちの場合は、エンドポイントからTiDB Cloudの主要なメトリックを簡単に監視できます。
 
-このドキュメントでは、Prometheus サービスを構成してTiDB Cloudエンドポイントから主要なメトリクスを読み取る方法と、 [グラファナ](https://grafana.com/)使用してメトリクスを表示する方法について説明します。
+このドキュメントでは、Prometheus サービスを構成してTiDB Cloudエンドポイントから主要なメトリクスを読み取る方法と、 [グラファナ](https://grafana.com/)を使用してメトリクスを表示する方法について説明します。
 
 ## 前提条件 {#prerequisites}
 
 -   TiDB Cloudを Prometheus と統合するには、自己ホスト型または管理型の Prometheus サービスが必要です。
 
--   TiDB Cloudのサードパーティ統合設定を編集するには、組織への`Organization Owner`アクセス権またはTiDB Cloudのターゲット プロジェクトへの`Project Member`アクセス権が必要です。
+-   TiDB Cloudのサードパーティ統合設定を編集するには、組織への`Organization Owner`つのアクセス権またはTiDB Cloudのターゲット プロジェクトへの`Project Member`のアクセス権が必要です。
 
 ## 制限 {#limitation}
 
@@ -23,23 +23,23 @@ TiDB Cloud は[プロメテウス](https://prometheus.io/) API エンドポイ�
 
 ### ステップ 1. Prometheus 用の Scrape_config ファイルを取得する {#step-1-get-a-scrape-config-file-for-prometheus}
 
-Prometheus サービスを構成してTiDB Cloudのメトリクスを読み取る前に、まずTiDB Cloudで Scrape_config YAML ファイルを生成する必要があります。 Scrape_config ファイルには、Prometheus サービスが現在のプロジェクト内のデータベース クラスターを監視できるようにする一意のベアラー トークンが含まれています。
+Prometheus サービスを構成してTiDB CloudでScrape_config YAML ファイルを生成する必要があります。 Scrape_config ファイルには、Prometheus サービスが現在のプロジェクト内のデータベース クラスターを監視できるようにする一意のベアラー トークンが含まれています。
 
 Prometheus の Scrape_config ファイルを取得するには、次の手順を実行します。
 
 1.  TiDB Cloudコンソールで、Prometheus 統合のターゲット プロジェクトを選択します。
 
-2.  左ペインで**[統合]**をクリックします。
+2.  左ペインで [**統合**] をクリックします。
 
 3.  **Integration to Prometheus を**クリックします。
 
-4.  **[ファイルを追加]**をクリックして、現在のプロジェクトの Scrape_config ファイルを生成して表示します。
+4.  [ファイルを**追加**] をクリックして、現在のプロジェクトの Scrape_config ファイルを生成して表示します。
 
 5.  後で使用するために、scrape_config ファイルの内容のコピーを作成します。
 
     > **ノート：**
     >
-    > セキュリティ上の理由から、 TiDB Cloud は新しく生成された Scrape_config ファイルを 1 回だけ表示します。ファイル ウィンドウを閉じる前に、必ずコンテンツをコピーしてください。そうするのを忘れた場合は、 TiDB Cloudの Scrape_config ファイルを削除して、新しいファイルを生成する必要があります。 Scrape_config ファイルを削除するには、ファイルを選択して**[...]**をクリックし、 <strong>[削除]</strong>をクリックします。
+    > セキュリティ上の理由から、 TiDB Cloudは新しく生成された Scrape_config ファイルを 1 回だけ表示します。ファイル ウィンドウを閉じる前に、必ずコンテンツをコピーしてください。そうするのを忘れた場合は、 TiDB Cloudの Scrape_config ファイルを削除して、新しいファイルを生成する必要があります。 Scrape_config ファイルを削除するには、ファイルを選択して [ **...** ] をクリックし、[<strong>削除</strong>] をクリックします。
 
 ### ステップ 2. Prometheus と統合する {#step-2-integrate-with-prometheus}
 
@@ -49,7 +49,7 @@ Prometheus の Scrape_config ファイルを取得するには、次の手順を
 
 2.  Prometheus 構成ファイルで`scrape_configs`セクションを見つけ、 TiDB Cloudから取得した Scrape_config ファイルの内容をそのセクションにコピーします。
 
-3.  Prometheus サービスで、 **[ステータス]** &gt; <strong>[ターゲット]</strong>をチェックして、新しい Scrape_config ファイルが読み込まれたことを確認します。そうでない場合は、Prometheus サービスを再起動する必要がある場合があります。
+3.  Prometheus サービスで、[**ステータス**] &gt; [<strong>ターゲット</strong>] をチェックして、新しい Scrape_config ファイルが読み込まれたことを確認します。そうでない場合は、Prometheus サービスを再起動する必要がある場合があります。
 
 ### ステップ 3.Grafana GUI ダッシュボードを使用してメトリックを視覚化する {#step-3-use-grafana-gui-dashboards-to-visualize-the-metrics}
 
@@ -64,7 +64,7 @@ Grafana の使用方法について詳しくは、 [グラファナのドキュ�
 1.  [ステップ1](#step-1-get-a-scrape_config-file-for-prometheus)に従って、Prometheus用の新しいscrape_configファイルを作成します。
 2.  新しいファイルの内容を Prometheus 構成ファイルに追加します。
 3.  Prometheus サービスがまだTiDB Cloudから読み取ることができることを確認したら、Prometheus 構成ファイルから古い Scrape_config ファイルの内容を削除します。
-4.  プロジェクトの**統合**ページで、対応する古い Scrape_config ファイルを削除して、他のユーザーがそのファイルを使用してTiDB Cloud Prometheus エンドポイントから読み取れないようにします。
+4.  プロジェクトの**統合**ページで、対応する古い Scrape_config ファイルを削除して、他のユーザーがそのファイルを使用してTiDB Cloud Prometheus エンドポイントから読み取るのをブロックします。
 
 ## Prometheus で利用可能なメトリクス {#metrics-available-to-prometheus}
 
