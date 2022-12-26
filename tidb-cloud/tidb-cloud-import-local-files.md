@@ -21,13 +21,13 @@ This feature now supports importing one CSV file for one task into either an exi
 
 2. Locate your target cluster, click **...** in the upper-right corner of the cluster area, and select **Import Data**.
 
-3. On the **Import** page, click **Import Data** in the upper-right corner, and then select **From local**.
+3. On the **Import** page, click **Import Data** in the upper-right corner, and then select **From local file**.
 
 4. Click **Upload File** to select and upload the target local file. Note that the file name must have a ".csv" suffix and must be no more than 50 MiB.
 
 5. In the **Target Cluster** section, select the target database and the target table, or create a new database or new table. Then click **Next**.
 
-    To create a new database or a new table, click **+ Create a new database** or **+ Create a new table**, directly enter a database name or a table name to create one, as shown in the following screenshot. TiDB Cloud will automatically create the database and the table according to the CSV data and the configured column name. The name must start with letters (a-z and A-Z), and can contain numbers (0-9), letters (a-z and A-Z), the underscore (_), and the hyphen (-) characters.
+    To create a new database or a new table, click **+ Create a new database** or **+ Create a new table**, directly enter a database name or a table name to create one, as shown in the following screenshot. TiDB Cloud will automatically create the database and the table according to the CSV data and the configured column name. The name must start with letters (a-z and A-Z) or numbers (0-9), and can contain letters (a-z and A-Z), numbers (0-9), the underscore (_), and the hyphen (-) characters.
 
     ![Upload local files](/media/tidb-cloud/tidb-cloud-upload-local-files.png)
 
@@ -47,7 +47,7 @@ This feature now supports importing one CSV file for one task into either an exi
 
     - If the table already exists, make sure the order of the columns is the same as the column list of the target table.
 
-    - If the table is not created yet, input the names for each column. The name must start with letters (a-z and A-Z), and can contain numbers (0-9), letters (a-z and A-Z), the underscore (_), and the hyphen (-) characters. You can also change the data type if needed.
+    - If the table is not created yet, input the names for each column. The name must start with letters (a-z and A-Z) or numbers (0-9), and can contain letters (a-z and A-Z), numbers (0-9), the underscore (_), and the hyphen (-) characters. You can also change the data type if needed.
 
 8. Edit the CSV configuration if needed.
 
