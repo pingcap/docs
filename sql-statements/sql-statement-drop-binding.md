@@ -26,7 +26,7 @@ BindableStmt ::=
 
 ## Examples
 
-You can remove a binding according to a SQL statement or `plan_digest`.
+You can remove a binding according to a SQL statement or `sql_digest`.
 
 The following example shows how to remove a binding according to a SQL statement.
 
@@ -135,7 +135,7 @@ mysql> SHOW SESSION BINDINGS\G
 Empty set (0.00 sec)
 ```
 
-The following example shows how to remove a binding according to `plan_digest`.
+The following example shows how to remove a binding according to `sql_digest`.
 
 ```sql
 mysql> CREATE TABLE t(id INT PRIMARY KEY , a INT, KEY(a));
