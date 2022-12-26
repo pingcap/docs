@@ -36,7 +36,7 @@ This document lists the features supported in each TiDB version. Note that suppo
 
 | Indexing and constraints                                    | 6.5 | 6.4 | 6.3 | 6.2 | 6.1 | 6.0 | 5.4          |   5.3    |   5.2    |   5.1    |   5.0    |   4.0    |
 | ------------------------------------------------------------ | :--: | :--: | :--: | :--: | :--: | :--: | ------------ | :----------: | :----------: | :----------: | :----------: | :----------: |
-| [Expression indexes](/sql-statements/sql-statement-create-index.md#expression-index) | Experimental | Experimental | Experimental | Experimental | Experimental | Experimental | Experimental | Experimental | Experimental | Experimental | Experimental |
+| [Expression indexes](/sql-statements/sql-statement-create-index.md#expression-index) [^2] | Y | Experimental | Experimental | Experimental | Experimental | Experimental | Experimental | Experimental | Experimental | Experimental | Experimental |
 | [Columnar storage (TiFlash)](/tiflash/tiflash-overview.md)   | Y | Y | Y | Y | Y | Y | Y            |      Y       |      Y       |      Y       |      Y       |      Y       |
 | [RocksDB engine](/storage-engine/rocksdb-overview.md)        | Y | Y | Y | Y | Y | Y | Y            |      Y       |      Y       |      Y       |      Y       |      Y       |
 | [Titan plugin](/storage-engine/titan-overview.md)            | Y | Y | Y | Y | Y | Y | Y            |      Y       |      Y       |      Y       |      Y       |      Y       |
@@ -48,7 +48,7 @@ This document lists the features supported in each TiDB version. Note that suppo
 
 ## SQL statements
 
-| SQL statements [^2]                                      | 6.5 | 6.4 | 6.3 | 6.2 | 6.1 | 6.0 | 5.4          |   5.3    |   5.2    |   5.1    |   5.0    |   4.0    |
+| SQL statements [^3]                                      | 6.5 | 6.4 | 6.3 | 6.2 | 6.1 | 6.0 | 5.4          |   5.3    |   5.2    |   5.1    |   5.0    |   4.0    |
 | -------------------------------------------------------- | :--: | :--: | :--: | :--: | :--:| :--: | :--: | :--: | :--: | :----------: | :------: | :------:|
 | Basic `SELECT`, `INSERT`, `UPDATE`, `DELETE`, `REPLACE`     | Y | Y | Y | Y | Y | Y  | Y            |      Y       |      Y       |      Y       |      Y       |      Y       |
 | `INSERT ON DUPLICATE KEY UPDATE`                             | Y | Y | Y | Y | Y | Y | Y            |      Y       |      Y       |      Y       |      Y       |      Y       |
@@ -90,8 +90,9 @@ This document lists the features supported in each TiDB version. Note that suppo
 | [Generated columns](/generated-columns.md)                  | Experimental | Experimental | Experimental | Experimental | Experimental | Experimental| Experimental | Experimental | Experimental | Experimental | Experimental | Experimental |
 | [Views](/views.md)                                          | Y  | Y  | Y  | Y | Y | Y  | Y            |      Y       |      Y       |      Y       |      Y       |      Y       |
 | [Sequences](/sql-statements/sql-statement-create-sequence.md) | Y | Y | Y | Y | Y | Y  | Y            |      Y       |      Y       |      Y       |      Y       |      Y       |
-| [Auto increment](/auto-increment.md)                         | Y | Y[^3] | Y | Y | Y | Y  | Y            |      Y       |      Y       |      Y       |      Y       |      Y       |
+| [Auto increment](/auto-increment.md)                         | Y | Y [^4] | Y | Y | Y | Y  | Y            |      Y       |      Y       |      Y       |      Y       |      Y       |
 | [Auto random](/auto-random.md)                               | Y | Y | Y | Y | Y | Y  | Y            |      Y       |      Y       |      Y       |      Y       |      Y       |
+| [TTL (Time to Live)](/time-to-live.md) | Experimental | N | N | N | N | N | N | N | N | N | N | N |
 | [DDL algorithm assertions](/sql-statements/sql-statement-alter-table.md) | Y | Y | Y | Y | Y | Y  | Y            |      Y       |      Y       |      Y       |      Y       |      Y       |
 | Multi-schema change: add columns                           | Y | Y | Y | Y | Experimental | Experimental | Experimental | Experimental | Experimental | Experimental | Experimental | Experimental |
 | [Change column type](/sql-statements/sql-statement-modify-column.md) | Y | Y | Y | Y | Y | Y  | Y            |      Y       |      Y       |      Y       |      N       |      N       |
@@ -149,6 +150,7 @@ This document lists the features supported in each TiDB version. Note that suppo
 | [`caching_sha2_password` authentication](/system-variables.md#default_authentication_plugin)        | Y | Y | Y | Y | Y | Y | Y    |    Y    |    Y    |    N    |    N    |    N    |
 | [`tidb_sm3_password` authentication](/system-variables.md#default_authentication_plugin)             | Y | Y | Y | N | N | N | N | N | N |    N    |    N    |    N    |
 | [`tidb_auth_token` authentication](/system-variables.md#default_authentication_plugin)             | Y | Y | N | N | N | N | N | N | N |    N    |    N    |    N    |
+| [Password management](/password-management.md) | Y | N | N | N | N | N | N | N | N | N | N | N |
 | [MySQL compatible `GRANT` system](/privilege-management.md)  | Y | Y | Y | Y | Y | Y | Y    |    Y    |    Y    |    Y    |    Y    |    Y    |
 | [Dynamic Privileges](/privilege-management.md#dynamic-privileges) | Y | Y | Y | Y | Y | Y | Y    |    Y    |    Y    |    Y    |    N    |    N    |
 | [Security Enhanced Mode](/system-variables.md#tidb_enable_enhanced_security) | Y | Y | Y | Y | Y | Y | Y    |    Y    |    Y    |    Y    |    N    |    N    |
@@ -161,10 +163,11 @@ This document lists the features supported in each TiDB version. Note that suppo
 | [Fast Importer (TiDB Lightning)](/tidb-lightning/tidb-lightning-overview.md)                             | Y | Y | Y | Y | Y | Y  | Y           | Y            | Y            | Y            | Y            | Y            |
 | mydumper logical dumper                                                                                 | Deprecated  | Deprecated  | Deprecated  | Deprecated | Deprecated | Deprecated | Deprecated | Deprecated   | Deprecated   | Deprecated   | Deprecated   | Deprecated   |
 | [Dumpling logical dumper](/dumpling-overview.md)                                                         | Y | Y | Y | Y | Y | Y | Y           | Y            | Y            | Y            | Y            | Y            |
-| [Transactional `LOAD DATA`](/sql-statements/sql-statement-load-data.md)                                 | Y | Y | Y | Y | Y | Y  | Y           | Y            | Y            | Y            | Y            | N [^4]       |
+| [Transactional `LOAD DATA`](/sql-statements/sql-statement-load-data.md)                                 | Y | Y | Y | Y | Y | Y  | Y           | Y            | Y            | Y            | Y            | N [^5]       |
 | [Database migration toolkit (DM)](/migration-overview.md)                                               | Y | Y | Y | Y | Y | Y  | Y           | Y            | Y            | Y            | Y            | Y            |
 | [TiDB Binlog](/tidb-binlog/tidb-binlog-overview.md)                                                     | Y | Y | Y | Y | Y | Y  | Y   | Y    | Y    | Y    | Y    | Y    |
 | [Change data capture (CDC)](/ticdc/ticdc-overview.md)                                                   | Y | Y | Y | Y | Y | Y  | Y           | Y            | Y            | Y            | Y            | Y            |
+| Stream data to Amazon S3, Azure Blob Storage, and NFS through [TiCDC](/ticdc/ticdc-overview.md) | Experimental | N | N | N | N | N | N | N | N | N | N | N |
 
 ## Management, observability, and tools
 
@@ -193,8 +196,10 @@ This document lists the features supported in each TiDB version. Note that suppo
 
 [^1]: TiDB incorrectly treats latin1 as a subset of utf8. See [TiDB #18955](https://github.com/pingcap/tidb/issues/18955) for more details.
 
-[^2]: See [Statement Reference](/sql-statements/sql-statement-select.md) for a full list of SQL statements supported.
+[^2]: Starting from v6.5.0, the functions listed by querying the [tidb_allow_function_for_expression_index](/system-variables#tidb_allow_function_for_expression_index-new-in-v520) system variable have been tested and can be used for creating expression indexes in production environments, and more functions will be supported in future releases. For functions not listed by this variable, they are not recommended for use in a production environment. See [expression indexes](/sql-statements/sql-statement-create-index.md#expression-index) for details.
 
-[^3]: Starting from v6.4.0, TiDB supports [high-performance and globally monotonic `AUTO_INCREMENT` columns](/auto-increment.md#mysql-compatibility-mode)
+[^3]: See [Statement Reference](/sql-statements/sql-statement-select.md) for a full list of SQL statements supported.
 
-[^4]: For TiDB v4.0, the `LOAD DATA` transaction does not guarantee atomicity.
+[^4]: Starting from v6.4.0, TiDB supports [high-performance and globally monotonic `AUTO_INCREMENT` columns](/auto-increment.md#mysql-compatibility-mode)
+
+[^5]: For TiDB v4.0, the `LOAD DATA` transaction does not guarantee atomicity.
