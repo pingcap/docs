@@ -71,23 +71,15 @@ After you finish executing the SQL script, check the data in Oracle. The followi
 
 ## Step 4. Create a TiDB Cloud Serverless Tier cluster
 
-1. Log in to the [TiDB Cloud console](https://tidbcloud.com/console/clusters). Navigate to the **Clusters** page for your project.
+1. Log in to the [TiDB Cloud console](https://tidbcloud.com/console/clusters). Navigate to the **Clusters** page of your project.
 
 2. Create a free Serverless Tier cluster.
 
-    ![Create TiDB Cloud Serverless Tier](/media/tidb-cloud/aws-dms-from-oracle-to-tidb-4.png)
+3. After the cluster is created, click **...** in the upper-right corner of the cluster area, and then click **Security Settings** in the drop-down menu to set the user password.
 
-3. After the cluster is created, click **Security Settings** to set the user password.
+4. In the **Security Settings** dialog box, click **Generate** to generate a password. Note down the generated password. Click **Apply**.
 
-    ![Set TiDB Cloud Serverless Tier Password](/media/tidb-cloud/aws-dms-from-oracle-to-tidb-5.png)
-
-    ![Set TiDB Cloud Serverless Tier Password](/media/tidb-cloud/aws-dms-from-oracle-to-tidb-6.png)
-
-4. Click the **Generate** button generate the password. Note down the generated password. Click the **Submit** button.
-
-5. Click the **Connect** button to connect your TiDB cluster:
-
-    ![Connect to TiDB Cloud Serverless Tier](/media/tidb-cloud/aws-dms-from-oracle-to-tidb-7.png)
+5. Click **Connect** to connect your TiDB cluster.
 
 ## Step 5. Create an AWS DMS replication instance
 
