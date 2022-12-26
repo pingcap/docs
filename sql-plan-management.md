@@ -167,7 +167,7 @@ The original SQL statement and the bound statement must have the same text after
 
 #### Create a binding according to a historical execution plan
 
-To fix a SQL statement to use a historical execution plan, you can use `plan_digest` to bind that historical execution plan to the SQL statement, which is more convenient than using a SQL statement to bind it.
+To fix a SQL statement to use a historical execution plan, you can use `plan_digest` to bind that historical execution plan to the SQL statement, which is more convenient than binding it according to a SQL statement.
 
 > **Warning:**
 >
