@@ -17,7 +17,7 @@ This feature now supports the following:
 - Prepare the local file to be imported. The file must be in CSV format within 50 MiB.
 - Use [SQL Editor](/develop/dev-guide-tidb-crud-sql.md#explore-sql-with-tidb) to create a table in the target database in advance. The table schema must be consistent with the local file. Alternatively, you can enter the table name in the import task and let TiDB Cloud help you automatically create the target table.
 
-## Upload local files
+## Import local files
 
 1. Log in to the [TiDB Cloud console](https://tidbcloud.com/console/clusters), and choose your target project on the top of the left navigation bar.
 
