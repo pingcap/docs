@@ -160,7 +160,7 @@ The preceding statement allows TTL jobs to be scheduled only between 1:00 and 5:
 
 > **Note:**
 >
-> This section is only applicable to on-premises TiDB. Currently, TiDB Cloud does not support TTL metrics.
+> This section is only applicable to on-premises TiDB. Currently, TiDB Cloud does not provide TTL metrics.
 
 </CustomContent>
 
