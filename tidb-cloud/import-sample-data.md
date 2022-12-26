@@ -11,7 +11,7 @@ This document describes how to import sample data into TiDB Cloud via the UI. Th
 
 2. Locate your cluster, click **...** in the upper-right corner of the cluster area, and select **Import Data**.
 
-3. On the **Import** page, click the **Import Data** button in the upper-right corner, and then select **From S3**.
+3. On the **Import** page, click **Import Data** in the upper-right corner, and then select **From S3**.
 
     > **Tip:**
     >
