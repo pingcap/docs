@@ -19,7 +19,7 @@ Garbage collection is configured via the following system variables:
 
 <CustomContent platform="tidb-cloud">
 
-This section is only applicable to TiDB on-premises. To limit writes of a GC worker per second for TiDB Cloud, you need to contact [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md).
+This section is only applicable to TiDB on-premises. For TiDB Cloud, there is no GC I/O limit by default.
 
 </CustomContent>
 
