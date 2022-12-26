@@ -21,7 +21,7 @@ Garbage collection is configured via the following system variables:
 
 > **Note:**
 >
-> This section is only applicable to TiDB on-premises. For TiDB Cloud, there is no GC I/O limit by default.
+> This section is only applicable to TiDB on-premises. TiDB Cloud does not have GC I/O limit by default.
 
 </CustomContent>
 
