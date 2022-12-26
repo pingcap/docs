@@ -41,7 +41,7 @@ This section describes how to configure cloud storage, including `S3`, `Azure Bl
 
 ### Configure S3 or Azure Blob Storage in sink URI
 
-The URI parameters of Amazon S3 and Azure Blob Storage in TiCDC are the same as their URL parameters in BR. For details, see [Backup storage URL format](/br/backup-and-restore-storages#url-format-description).
+The URI parameters of Amazon S3 and Azure Blob Storage in TiCDC are the same as their URL parameters in BR. For details, see [Backup storage URL format](/br/backup-and-restore-storages.md#url-format-description).
 
 ### Configure NFS in sink URI
 
