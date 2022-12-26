@@ -147,10 +147,10 @@ By checking the following three panels in Performance Overview, you can learn th
 
     - No prepared plan cache is hit: `avg-hit` (the number of hits per second) is 0, and `avg-miss` equal to the number of `StmtExecute` commands per second. The possible reasons include:
         - The application is using the query interface.
-        - The cached plans are cleaned up by calling the `StmtClose` command after each `StmtExecute` execution.
+        - The cached plans are cleaned up because the application calls the `StmtClose` command after each `StmtExecute` execution.
         - All statements executed by `StmtExecute` do not meet the [cache conditions](sql-prepared-plan-cache.md) so the execution plan cache cannot be hit.
     - All prepared plan cache is hit: `avg-hit` (the number of hits per second) is equal to the number of `StmtExecute` commands per second, and `avg-miss` (the number without hits per second) is 0.
-    - Some prepared plan cache is hit: `avg-hit` (the number of hits per second) is fewer than the number of `StmtExecute` commands per second. Prepared plan cache has known limitations: for example, it does not support subqueries, so SQL statements with subqueries cannot use prepared plan cache.
+    - Some prepared plan cache is hit: `avg-hit` (the number of hits per second) is fewer than the number of `StmtExecute` commands per second. Prepared plan cache has known limitations. For example, it does not support subqueries, so SQL statements with subqueries cannot use prepared plan cache.
 
 **Example 1: TPC-C workload**
 
@@ -196,7 +196,7 @@ The number of `StmtPrepare` commands per second is much greater than that of `St
 - In the KV/TSO Request OPS panel, you can view the statistics of KV and TSO requests per second. Among the statistics, `kv request total` represents the sum of all requests from TiDB to TiKV. By observing the types of requests from TiDB to PD and TiKV, you can get an idea of the workload profile within the cluster.
 - In the KV Request Time By Source panel, you can view the time ratio of each KV request type and all request sources.
     - kv request total time: The total time of processing KV and TiFlash requests per second.
-    - Each KV request and the corresponding request source form a columnar stacked graph, in which `external` identifies normal business requests and `internal` identifies internal activity requests (such as DDL and auto analyze requests).
+    - Each KV request and the corresponding request source form a stacked bar chart, in which `external` identifies normal business requests and `internal` identifies internal activity requests (such as DDL and auto analyze requests).
 
 In the KV Request Time By Source panel, you can view the total number of connections and the number of connections per TiDB. 
 
@@ -206,7 +206,7 @@ In the KV Request Time By Source panel, you can view the total number of connect
 
 In this TPC-C workload:
 
-- The total number of KV requests per second is 7,970. The top request types are `Prewrite`, `Commit`, `PessimisticsLock`, and `BatchGet` in order of number of requests.
+- The total number of KV requests per second is 79,700. The top request types are `Prewrite`, `Commit`, `PessimisticsLock`, and `BatchGet` in order of number of requests.
 - Most of the KV processing time is spent on `Commit-external_Commit` and `Prewrite-external_Commit`, which indicates that the most time-consuming KV requests are `Commit` and `Prewrite` from external commit statements.
 
 **Example 2: Analyze workload**
@@ -281,7 +281,7 @@ In this workload:
 
 - The average latency and P99 latency of all SQL statements are 10.8 ms and 84.1 ms, respectively.
 - The average connection idle time in transactions `avg-in-txn` is 9.4 ms.
-- The total number of connections to the cluster is 3700, and the number of connections to each TiDB node is 1800. The average number of active connections is 40.3, which indicates that most of connections are idle. The average number of `disonnnection/s` is 55.8, which indicates that the application is connecting and disconnecting frequently. The behavior of short connections will have a certain impact on TiDB resources and response time.
+- The total number of connections to the cluster is 3,700, and the number of connections to each TiDB node is 1,800. The average number of active connections is 40.3, which indicates that most of the connections are idle. The average number of `disonnnection/s` is 55.8, which indicates that the application is connecting and disconnecting frequently. The behavior of short connections will have a certain impact on TiDB resources and response time.
 
 **Example 2: TiDB is the bottleneck of user response time**
 
@@ -294,7 +294,7 @@ In this TPC-C workload:
 
 The average query latency is significantly greater than `avg-in-txn`, which means the main bottleneck in transactions is inside the database.
 
-**Example 3: The bottleneck of user response time is not in TiDB**
+**Example 3: TiDB is not the bottleneck of user response time**
 
 ![TiDB is not Bottleneck](/media/performance/cloud_query_long_idle.png)
 

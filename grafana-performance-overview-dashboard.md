@@ -80,7 +80,7 @@ Generally, dividing `tso - cmd` by `tso - request` yields the average batch size
 ### KV Request Time By Source
 
 - kv request total time: Total time of processing KV and TiFlash requests per second in all TiDB instances.
-- Each KV request and the corresponding request source form a columnar stacked graph, in which `external` identifies normal business requests and `internal` identifies internal activity requests (such as DDL and auto analyze requests).
+- Each KV request and the corresponding request source form a stacked bar chart, in which `external` identifies normal business requests and `internal` identifies internal activity requests (such as DDL and auto analyze requests).
 
 ### TiDB CPU
 
@@ -183,7 +183,7 @@ All these three metrics include the average duration and P99 duration in all TiK
     - `cop_dag`: Number of dag requests in all coprocessor requests.
     - `super_batch`: Number of requests that enable the Super Batch feature.
 - Executor QPS: The number of each type of dag executors in the requests received by all TiFlash instances. `table_scan` is the table scan executor. `selection` is the selection executor. `aggregation` is the aggregation executor. `top_n` is the `TopN` executor. `limit` is the limit executor.
-- Request Duration Overview: Provides a stacked graph of total processing time per second for all request types in all TiFlash instances.
+- Request Duration Overview: Provides a stacked chart of total processing time per second for all request types in all TiFlash instances.
 - Request Duration: The total processing duration for each MPP and coprocessor request type in all TiFlash instances. It is from the time that the coprocessor request is received to the time that the response of the request is completed, which includes the average latency and p99 latency.
 - Request Handle Duration: The actual processing duration for each MPP and coprocessor request type in all TiFlash instances. It is from the start of executing the coprocessor request to the completion of the execution, which includes the average latency and p99 latency.
 - Raft Wait Index Duration: The time used by `wait_index` for all TiFlash instances, namely the time used to wait until Region index >= `read_index` after the `read_index` request is received.
@@ -196,7 +196,7 @@ All these three metrics include the average duration and P99 duration in all TiK
 
 - CPU usage: The CPU usage per TiCDC node.
 - Memory usage: The memory usage per TiCDC node.
-- Goroutine count: The number of goroutines of per TiCDC node.
+- Goroutine count: The number of goroutines per TiCDC node.
 - Changefeed checkpoint lag: The progress lag of data replication (the unit is second) between the upstream and the downstream.
 - Changefeed resolved ts lag: The progress lag of data replication (the unit is second) between the upstream and TiCDC nodes.
 - The status of changefeeds:
