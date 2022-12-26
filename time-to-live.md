@@ -85,7 +85,7 @@ You can configure the TTL attribute of a table using the [`CREATE TABLE`](/sql-s
 
 You can use TTL together with [default values of the data types](/data-type-default-values.md). The following are two common usage examples:
 
-* Use `DEFAULT CURRENT_TIMESTAMP` to specify the default value of a column as the current creation time and use this column as the TTL timestamp column:
+* Use `DEFAULT CURRENT_TIMESTAMP` to specify the default value of a column as the current creation time and use this column as the TTL timestamp column. Records that were created 3 months ago are expired:
 
     ```sql
     CREATE TABLE t1 (
@@ -94,7 +94,7 @@ You can use TTL together with [default values of the data types](/data-type-defa
     ) TTL = `created_at` + INTERVAL 3 MONTH;
     ```
 
-* Specify the default value of a column as the current creation time and update time:
+* Specify the default value of a column as the creation time or the latest update time and use this column as the TTL timestamp column. Records that have not been updated for 3 months are expired:
 
     ```sql
     CREATE TABLE t1 (
