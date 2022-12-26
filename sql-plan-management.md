@@ -13,9 +13,9 @@ An SQL binding is the basis of SPM. The [Optimizer Hints](/optimizer-hints.md) d
 
 ### Create a binding
 
-You can create a binding for a SQL statement according to a SQL hint or a historical execution plan.
+You can create a binding for a SQL statement according to a SQL statement or a historical execution plan.
 
-#### Create a binding according to a SQL hint
+#### Create a binding according to a SQL statement
 
 {{< copyable "sql" >}}
 
@@ -167,7 +167,7 @@ The original SQL statement and the bound statement must have the same text after
 
 #### Create a binding according to a historical execution plan
 
-To fix a SQL statement to use a historical execution plan, you can use `plan_digest` to bind that historical execution plan to the SQL statement, which is more convenient than using a SQL hint to bind it.
+To fix a SQL statement to use a historical execution plan, you can use `plan_digest` to bind that historical execution plan to the SQL statement, which is more convenient than using a SQL statement to bind it.
 
 > **Warning:**
 >
@@ -185,7 +185,7 @@ The SQL statement of this binding method is as follows:
 CREATE [GLOBAL | SESSION] BINDING FROM HISTORY USING PLAN DIGEST 'plan_digest';
 ```
 
-This statement binds a execution plan to a SQL statement using `plan_digest`. The default scope is SESSION. For the applicable SQL statements, priorities, scopes, and effective conditions of the created bindings, they are the same as that of [bindings created using SQL hints](#create-a-binding-according-to-a-sql-hint).
+This statement binds a execution plan to a SQL statement using `plan_digest`. The default scope is SESSION. For the applicable SQL statements, priorities, scopes, and effective conditions of the created bindings, they are the same as that of [bindings created using SQL hints](#create-a-binding-according-to-a-sql-statement).
 
 To use this binding method, you need to first get the `plan_digest` corresponding to the target historical execution plan in `statements_summary`, and then create a binding using the `plan_digest`. The detailed steps are as follows:
 

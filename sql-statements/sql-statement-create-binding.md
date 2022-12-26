@@ -29,9 +29,9 @@ BindableStmt ::=
 
 ## Examples
 
-You can create a binding according to a SQL hint or a historical execution plan.
+You can create a binding according to a SQL statement or a historical execution plan.
 
-The following example shows how to create a binding according to a SQL hint.
+The following example shows how to create a binding according to a SQL statement.
 
 {{< copyable "sql" >}}
 
