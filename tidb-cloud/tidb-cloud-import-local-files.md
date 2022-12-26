@@ -12,7 +12,7 @@ This feature now supports importing one CSV file for one task into either an exi
 ## Limitations
 
 - Currently TiDB Cloud only supports importing a local file in CSV format within 50 MiB for one task.
-- This feature only support Serverless Tier clusters.
+- Importing local files is supported only for Serverless Tier clusters, not for Dedicated Tier clusters.
 - If you import a CSV file into an existing table in TiDB Cloud, make sure that the order of the columns in the CSV file is the same as that in the target table.
 
 ## Import local files
@@ -23,7 +23,7 @@ This feature now supports importing one CSV file for one task into either an exi
 
 3. On the **Import** page, click **Import Data** in the upper-right corner, and then select **From local**.
 
-4. Click **Upload File** to select and upload the local file. Note that the file name must have a ".csv" suffix and must be no more than 50 MiB.
+4. Click **Upload File** to select and upload the target local file. Note that the file name must have a ".csv" suffix and must be no more than 50 MiB.
 
 5. In the **Target Cluster** section, select the target database and the target table, or create a new database or new table. Then click **Next**.
 
@@ -35,9 +35,10 @@ This feature now supports importing one CSV file for one task into either an exi
 
     Here you can see a list of configurable table columns. Each line shows the table column name (if it can be inferred by TiDB Cloud), the table column type inferred, and the previewed data from the CSV file.
 
-    - If you import data into an existing table, the column list is extracted from the table definition, and the previewed data is mapped to the corresponding columns by column names.
-
-    - If you want to create a new table, the column list is extracted from the CSV file, and the column type is inferred by TiDB Cloud. For example, if the previewed data is all integers, the inferred column type will be **int** (integer).
+    > **Note:**
+    >
+    > - If you import data into an existing table, the column list is extracted from the table definition, and the previewed data is mapped to the corresponding columns by column names.
+    > - If you want to create a new table, the column list is extracted from the CSV file, and the column type is inferred by TiDB Cloud. For example, if the previewed data is all integers, the inferred column type will be **int** (integer).
 
     - If your first row in the CSV file is column names, make sure that **Use the first row as Column Name** is selected, which is selected by default.
 
