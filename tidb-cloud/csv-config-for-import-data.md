@@ -88,7 +88,7 @@ The following is the CSV Configuration window when you use the Import Data servi
 
     In the default settings (`Not-null = False; Null = '\N'`), the columns `column_A` and `column_B` are both converted to NULL after being imported to TiDB. The column `column_C` is an empty string `''` but not NULL.
 
-- Default：Not-null=False, Null=\N
+- Default: Not-null=False, Null=\\N
 
 ## Trim-last-separator
 
@@ -103,4 +103,4 @@ The following is the CSV Configuration window when you use the Import Data servi
     - When `Trim-last-separator = False`, this is interpreted as a row of 5 fields `('A', '', 'B', '', '')`.
     - When `Trim-last-separator = True`, this is interpreted as a row of 3 fields `('A', '', 'B')`.
 
-- Default: False
+- Default: `False`
