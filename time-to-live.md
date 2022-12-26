@@ -164,7 +164,13 @@ The preceding statement allows TTL jobs to be scheduled only between 1:00 and 5:
 
 </CustomContent>
 
-TiDB collects runtime information about TTL periodically and provides visualized charts of these metrics in Grafana. You can see these metrics in the TiDB -> TTL panel in Grafana. For details of the metrics, see the TTL section in [TiDB Monitoring Metrics](/grafana-tidb-dashboard.md).
+TiDB collects runtime information about TTL periodically and provides visualized charts of these metrics in Grafana. You can see these metrics in the TiDB -> TTL panel in Grafana.
+
+<CustomContent platform="tidb">
+
+For details of the metrics, see the TTL section in [TiDB Monitoring Metrics](/grafana-tidb-dashboard.md).
+
+</CustomContent>
 
 ## Compatibility with TiDB tools
 
