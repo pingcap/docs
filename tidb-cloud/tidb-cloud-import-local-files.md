@@ -29,7 +29,7 @@ This feature now supports the following:
 
 5. In the **Target Cluster** section, select the target database and the target table, or create a new database or new table. Then click **Next**.
 
-    To create a new database or a new table, directly enter a database name or a table name to create one, as shown in the following screenshot. TiDB Cloud will automatically create the database and the table according to the CSV data and the configured column name. The name must start with letters (a-z and A-Z), and can contain numbers (0-9), letters (a-z and A-Z), the underscore (_), and the hyphen (-) characters.
+    To create a new database or a new table, click **+ Create a new database** or **+ Create a new table**, directly enter a database name or a table name to create one, as shown in the following screenshot. TiDB Cloud will automatically create the database and the table according to the CSV data and the configured column name. The name must start with letters (a-z and A-Z), and can contain numbers (0-9), letters (a-z and A-Z), the underscore (_), and the hyphen (-) characters.
 
     ![Upload local files](/media/tidb-cloud/tidb-cloud-upload-local-files.png)
 
