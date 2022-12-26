@@ -1,6 +1,6 @@
 ---
 title: Import Local Files to TiDB Cloud
-summary: Learn how to upload local files to TiDB Cloud.
+summary: Learn how to import local files to TiDB Cloud.
 ---
 
 # Import Local Files to TiDB Cloud
