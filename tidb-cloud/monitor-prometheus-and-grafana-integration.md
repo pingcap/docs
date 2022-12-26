@@ -56,7 +56,6 @@ After your Prometheus service is reading metrics from TiDB Cloud, you can downlo
 >
 > Click to download the [Grafana dashboard JSON](/tidb-cloud/monitor-prometheus-and-grafana-integration-grafana-dashboard-UI.json).
 
-
 For more information about how to use Grafana, see [Grafana documentation](https://grafana.com/docs/grafana/latest/getting-started/getting-started-prometheus/).
 
 ## Best practice of rotating scrape_config
