@@ -185,7 +185,7 @@ The SQL statement of this binding method is as follows:
 CREATE [GLOBAL | SESSION] BINDING FROM HISTORY USING PLAN DIGEST 'plan_digest';
 ```
 
-This statement binds a execution plan to a SQL statement using `plan_digest`. The default scope is SESSION. For the applicable SQL statements, priorities, scopes, and effective conditions of the created bindings, they are the same as that of [bindings created using SQL hints](#create-a-binding-according-to-a-sql-statement).
+This statement binds an execution plan to a SQL statement using `plan_digest`. The default scope is SESSION. For the applicable SQL statements, priorities, scopes, and effective conditions of the created bindings, they are the same as that of [bindings created according to SQL statements](#create-a-binding-according-to-a-sql-statement).
 
 To use this binding method, you need to first get the `plan_digest` corresponding to the target historical execution plan in `statements_summary`, and then create a binding using the `plan_digest`. The detailed steps are as follows:
 
@@ -329,7 +329,7 @@ This statement outputs the execution plan bindings at the GLOBAL or SESSION leve
 | update_time | Updating time |
 | charset | Character set |
 | collation | Ordering rule |
-| source | The way in which a binding is created, including `manual` (created according to a SQL hint), `history` (created according to a historical execution plan), `capture` (captured automatically by TiDB), and `evolve` (evolved automatically by TiDB) |
+| source | The way in which a binding is created, including `manual` (created according to a SQL statement), `history` (created according to a historical execution plan), `capture` (captured automatically by TiDB), and `evolve` (evolved automatically by TiDB) |
 | sql_digest | Digest of normalized SQL statement |
 | plan_digest | Digest of execution plan |
 
