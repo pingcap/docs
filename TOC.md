@@ -83,7 +83,7 @@
   - Third-Party Support
     - [Third-Party Tools Supported by TiDB](/develop/dev-guide-third-party-support.md)
     - [Known Incompatibility Issues with Third-Party Tools](/develop/dev-guide-third-party-tools-compatibility.md)
-    - [Integrate with ProxySQL](/develop/dev-guide-proxysql-integration.md)
+    - [ProxySQL Integration Guide](/develop/dev-guide-proxysql-integration.md)
 - Deploy
   - [Software and Hardware Requirements](/hardware-and-software-requirements.md)
   - [Environment Configuration Checklist](/check-before-deployment.md)
@@ -135,9 +135,29 @@
     - [Use TiUP (Recommended)](/scale-tidb-using-tiup.md)
     - [Use TiDB Operator](https://docs.pingcap.com/tidb-in-kubernetes/stable/scale-a-tidb-cluster)
   - Backup and Restore
-    - [Use BR to Back Up Cluster Data](/br-usage-backup-for-maintain.md)
-    - [Use BR to Restore Cluster Data](/br-usage-restore-for-maintain.md)
-    - [BR Use Cases](/backup-and-restore-use-cases-for-maintain.md)
+    - [Overview](/br/backup-and-restore-overview.md)
+    - Architecture
+      - [Architecture Overview](/br/backup-and-restore-design.md)
+      - [Snapshot Backup and Restore Architecture](/br/br-snapshot-architecture.md)
+      - [Log Backup and PITR Architecture](/br/br-log-architecture.md)
+    - Use BR
+      - [Use Overview](/br/br-use-overview.md)
+      - [Snapshot Backup and Restore Guide](/br/br-snapshot-guide.md)
+      - [Log Backup and PITR Guide](/br/br-pitr-guide.md)
+      - [Use Cases](/br/backup-and-restore-use-cases.md)
+      - [Backup Storages](/br/backup-and-restore-storages.md)
+    - BR CLI Manuals
+      - [Overview](/br/use-br-command-line-tool.md)
+      - [Snapshot Backup and Restore Command Manual](/br/br-snapshot-manual.md)
+      - [Log Backup and PITR Command Manual](/br/br-pitr-manual.md)
+    - References
+      - BR Features
+        - [Backup Auto-Tune](/br/br-auto-tune.md)
+        - [Batch Create Table](/br/br-batch-create-table.md)
+        - [Checkpoint Backup](/br/br-checkpoint.md)
+      - [Back up and Restore Data Using Dumpling and TiDB Lightning](/backup-and-restore-using-dumpling-lightning.md)
+      - [Back Up and Restore RawKV](/br/rawkv-backup-and-restore.md)
+      - [Incremental Backup and Restore](/br/br-incremental-guide.md)
   - [Configure Time Zone](/configure-time-zone.md)
   - [Daily Checklist](/daily-check.md)
   - [Maintain TiFlash](/tiflash/maintain-tiflash.md)
@@ -153,6 +173,7 @@
   - [TiDB Cluster Alert Rules](/alert-rules.md)
   - [TiFlash Alert Rules](/tiflash/tiflash-alert-rules.md)
   - [Customize Configurations of Monitoring Servers](/tiup/customized-montior-in-tiup-environment.md)
+  - [BR Monitoring and Alert](/br/br-monitoring-and-alert.md)
 - Troubleshoot
   - [TiDB Troubleshooting Map](/tidb-troubleshooting-map.md)
   - [Identify Slow Queries](/identify-slow-queries.md)
@@ -470,32 +491,35 @@
       - [FAQ](/dm/dm-faq.md)
       - [Handle Errors](/dm/dm-error-handling.md)
     - [Release Notes](/dm/dm-release-notes.md)
-  - Backup & Restore (BR)
-    - [BR Overview](/br/backup-and-restore-overview.md)
-    - [Deploy and Use BR](/br/br-deployment.md)
-    - [Use BR to Back Up Cluster Data](/br/br-usage-backup.md)
-    - [Use BR to Restore Cluster Data](/br/br-usage-restore.md)
-    - [BR Use Cases](/br/backup-and-restore-use-cases.md)
-    - BR Features
-      - [Auto Tune](/br/br-auto-tune.md)
-      - [Batch Create Table](/br/br-batch-create-table.md)
-    - References
-      - [BR Design Principles](/br/backup-and-restore-design.md)
-      - [BR Command-line](/br/use-br-command-line-tool.md)
-      - [External Storages](/br/backup-and-restore-storages.md)
-      - [Back Up and Restore Data on Amazon S3 Using BR](/br/backup-storage-S3.md)
-      - [Back Up and Restore Data on Azure Blob Storage Using BR](/br/backup-storage-azblob.md)
-      - [Back Up and Restore Data on Google Cloud Storage Using BR](/br/backup-storage-gcs.md)
-      - [Back Up and Restore RawKV](/br/rawkv-backup-and-restore.md)
-      - [Back up and Restore Data Using Dumpling and TiDB Lightning](/backup-and-restore-using-dumpling-lightning.md)
-      - [BR FAQs](/br/backup-and-restore-faq.md)
-  - Point-in-Time Recovery
-    - [PITR Overview](/br/point-in-time-recovery.md)
-    - [Use PITR via CLI](/br/br-log-command-line.md)
-    - [Usage Scenarios](/br/pitr-usage.md)
-    - [Monitoring and Alert](/br/pitr-monitoring-and-alert.md)
-    - [Troubleshooting](/br/pitr-troubleshoot.md)
-    - [Known Issues](/br/pitr-known-issues.md)
+  - TiCDC
+    - [Overview](/ticdc/ticdc-overview.md)
+    - [Deploy and Maintain](/ticdc/deploy-ticdc.md)
+    - Changefeed
+      - [Overview](/ticdc/ticdc-changefeed-overview.md)
+      - Create Changefeeds
+        - [Replicate Data to MySQL-compatible Databases](/ticdc/ticdc-sink-to-mysql.md)
+        - [Replicate Data to Kafka](/ticdc/ticdc-sink-to-kafka.md)
+        - [Replicate Data to Storage Services](/ticdc/ticdc-sink-to-cloud-storage.md)
+      - [Manage Changefeeds](/ticdc/ticdc-manage-changefeed.md)
+      - [Log Filter](/ticdc/ticdc-filter.md)
+      - [Bidirectional Replication](/ticdc/ticdc-bidirectional-replication.md)
+    - Monitor and Alert
+      - [Monitoring Metrics](/ticdc/monitor-ticdc.md)
+      - [Alert Rules](/ticdc/ticdc-alert-rules.md)
+    - Reference
+      - [Architecture](/ticdc/ticdc-architecture.md)
+      - [TiCDC Server Configurations](/ticdc/ticdc-server-config.md)
+      - [TiCDC Changefeed Configurations](/ticdc/ticdc-changefeed-config.md)
+      - Output Protocols
+        - [TiCDC Avro Protocol](/ticdc/ticdc-avro-protocol.md)
+        - [TiCDC Canal-JSON Protocol](/ticdc/ticdc-canal-json.md)
+        - [TiCDC Open Protocol](/ticdc/ticdc-open-protocol.md)
+        - [TiCDC CSV Protocol](/ticdc/ticdc-csv.md)
+      - [TiCDC Open API](/ticdc/ticdc-open-api.md)
+      - [Compatibility](/ticdc/ticdc-compatibility.md)
+    - [Troubleshoot](/ticdc/troubleshoot-ticdc.md)
+    - [FAQs](/ticdc/ticdc-faq.md)
+    - [Glossary](/ticdc/ticdc-glossary.md)
   - TiDB Binlog
     - [Overview](/tidb-binlog/tidb-binlog-overview.md)
     - [Quick Start](/tidb-binlog/get-started-with-tidb-binlog.md)
@@ -516,24 +540,6 @@
       - [Troubleshoot](/tidb-binlog/troubleshoot-tidb-binlog.md)
       - [Handle Errors](/tidb-binlog/handle-tidb-binlog-errors.md)
     - [FAQ](/tidb-binlog/tidb-binlog-faq.md)
-  - TiCDC
-    - [Overview](/ticdc/ticdc-overview.md)
-    - [Deploy](/ticdc/deploy-ticdc.md)
-    - [Maintain](/ticdc/manage-ticdc.md)
-    - Create Changefeed
-      - [Replicate Data to Storage Services](/ticdc/ticdc-sink-to-cloud-storage.md)
-    - Monitor and Alert
-      - [Monitoring Metrics](/ticdc/monitor-ticdc.md)
-      - [Alert Rules](/ticdc/ticdc-alert-rules.md)
-    - [Troubleshoot](/ticdc/troubleshoot-ticdc.md)
-    - Reference
-      - [TiCDC OpenAPI](/ticdc/ticdc-open-api.md)
-      - [TiCDC Open Protocol](/ticdc/ticdc-open-protocol.md)
-      - [TiCDC Avro Protocol](/ticdc/ticdc-avro-protocol.md)
-      - [TiCDC Canal-JSON Protocol](/ticdc/ticdc-canal-json.md)
-      - [TiCDC CSV Protocol](/ticdc/ticdc-csv.md)
-    - [FAQs](/ticdc/ticdc-faq.md)
-    - [Glossary](/ticdc/ticdc-glossary.md)
   - sync-diff-inspector
     - [Overview](/sync-diff-inspector/sync-diff-inspector-overview.md)
     - [Data Check for Tables with Different Schema/Table Names](/sync-diff-inspector/route-diff.md)
@@ -567,6 +573,7 @@
     - [Security Compatibility with MySQL](/security-compatibility-with-mysql.md)
     - [Privilege Management](/privilege-management.md)
     - [User Account Management](/user-account-management.md)
+    - [TiDB Password Management](/password-management.md)
     - [Role-Based Access Control](/role-based-access-control.md)
     - [Certificate-Based Authentication](/certificate-authentication.md)
   - SQL
@@ -646,6 +653,7 @@
       - [`KILL [TIDB]`](/sql-statements/sql-statement-kill.md)
       - [`LOAD DATA`](/sql-statements/sql-statement-load-data.md)
       - [`LOAD STATS`](/sql-statements/sql-statement-load-stats.md)
+      - [`LOCK STATS`](/sql-statements/sql-statement-lock-stats.md)
       - [`MODIFY COLUMN`](/sql-statements/sql-statement-modify-column.md)
       - [`PREPARE`](/sql-statements/sql-statement-prepare.md)
       - [`RECOVER TABLE`](/sql-statements/sql-statement-recover-table.md)
@@ -699,6 +707,7 @@
       - [`SHOW SCHEMAS`](/sql-statements/sql-statement-show-schemas.md)
       - [`SHOW STATS_HEALTHY`](/sql-statements/sql-statement-show-stats-healthy.md)
       - [`SHOW STATS_HISTOGRAMS`](/sql-statements/sql-statement-show-histograms.md)
+      - [`SHOW STATS_LOCKED`](/sql-statements/sql-statement-show-stats-locked.md)
       - [`SHOW STATS_META`](/sql-statements/sql-statement-show-stats-meta.md)
       - [`SHOW STATUS`](/sql-statements/sql-statement-show-status.md)
       - [`SHOW TABLE NEXT_ROW_ID`](/sql-statements/sql-statement-show-table-next-rowid.md)
@@ -713,6 +722,7 @@
       - [`TABLE`](/sql-statements/sql-statement-table.md)
       - [`TRACE`](/sql-statements/sql-statement-trace.md)
       - [`TRUNCATE`](/sql-statements/sql-statement-truncate.md)
+      - [`UNLOCK STATS`](/sql-statements/sql-statement-unlock-stats.md)
       - [`UPDATE`](/sql-statements/sql-statement-update.md)
       - [`USE`](/sql-statements/sql-statement-use.md)
       - [`WITH`](/sql-statements/sql-statement-with.md)
@@ -881,6 +891,7 @@
       - [Use TiSpark to Read TiFlash Replicas](/tiflash/use-tispark-to-read-tiflash.md)
       - [Use MPP Mode](/tiflash/use-tiflash-mpp-mode.md)
       - [Supported Push-down Calculations](/tiflash/tiflash-supported-pushdown-calculations.md)
+      - [TiFlash Query Result Materialization](/tiflash/tiflash-results-materialization.md)
       - [Data Validation](/tiflash/tiflash-data-validation.md)
       - [Compatibility](/tiflash/tiflash-compatibility.md)
   - [Telemetry](/telemetry.md)
@@ -898,6 +909,7 @@
   - [Cluster Management FAQs](/faq/manage-cluster-faq.md)
   - [High Availability FAQs](/faq/high-availability-faq.md)
   - [High Reliability FAQs](/faq/high-reliability-faq.md)
+  - [Backup and Restore FAQs](/faq/backup-and-restore-faq.md)
 - Release Notes
   - [All Releases](/releases/release-notes.md)
   - [Release Timeline](/releases/release-timeline.md)
@@ -910,6 +922,7 @@
   - v6.2
     - [6.2.0-DMR](/releases/release-6.2.0.md)
   - v6.1
+    - [6.1.3](/releases/release-6.1.3.md)
     - [6.1.2](/releases/release-6.1.2.md)
     - [6.1.1](/releases/release-6.1.1.md)
     - [6.1.0](/releases/release-6.1.0.md)
