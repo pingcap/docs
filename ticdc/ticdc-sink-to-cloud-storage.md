@@ -1,32 +1,39 @@
 ---
 title: Replicate Data to Storage Services
-summary: Learn how to replicate data to storage services using TiCDC.
+summary: Learn how to replicate data to storage services using TiCDC, and learn how data is stored.
 ---
 
 # Replicate Data to Storage Services
 
-Since v6.5.0, TiCDC supports saving row change events to Amazon S3, Azure Blob Storage, and NFS. This document describes how to create a changefeed that replicates incremental data to cloud storages using TiCDC.
+> **Warning:**
+>
+> This feature is experimental. It is not recommended to use it in the production environment.
 
-## Create a changefeed
+Since v6.5.0, TiCDC supports saving row change events to Amazon S3, Azure Blob Storage, and NFS. This document describes how to create a changefeed that replicates incremental data to cloud storages using TiCDC. The organization of this document is as follows:
+
+- How to replicate data to storage services.
+- How data is stored in storage services.
+
+## Replicate change data to storage services
 
 Run the following command to create a changefeed task:
 
 ```shell
 cdc cli changefeed create \
     --server=http://10.0.10.25:8300 \
-    --sink-uri="s3://logbucket/storage_test?force-path-style=true&protocol=canal-json" \
+    --sink-uri="s3://logbucket/storage_test?protocol=canal-json" \
     --changefeed-id="simple-replication-task"
 ```
 
 ```shell
-Info: {"upstream_id":7171388873935111376,"namespace":"default","id":"simple-replication-task","sink_uri":"s3://logbucket/storage_test?force-path-style=true\u0026protocol=canal-json","create_time":"2022-11-29T18:52:05.566016967+08:00","start_ts":437706850431664129,"engine":"unified","config":{"case_sensitive":true,"enable_old_value":true,"force_replicate":false,"ignore_ineligible_table":false,"check_gc_safe_point":true,"enable_sync_point":false,"sync_point_interval":600000000000,"sync_point_retention":86400000000000,"filter":{"rules":["*.*"],"event_filters":null},"mounter":{"worker_num":16},"sink":{"protocol":"canal-json","schema_registry":"","csv":{"delimiter":",","quote":"\"","null":"\\N","include_commit_ts":false},"column_selectors":null,"transaction_atomicity":"none","encoder_concurrency":16,"terminator":"\r\n","date_separator":"none","enable_partition_separator":false},"consistent":{"level":"none","max_log_size":64,"flush_interval":2000,"storage":""}},"state":"normal","creator_version":"v6.5.0-master-dirty"}
+Info: {"upstream_id":7171388873935111376,"namespace":"default","id":"simple-replication-task","sink_uri":"s3://logbucket/storage_test?protocol=canal-json","create_time":"2022-11-29T18:52:05.566016967+08:00","start_ts":437706850431664129,"engine":"unified","config":{"case_sensitive":true,"enable_old_value":true,"force_replicate":false,"ignore_ineligible_table":false,"check_gc_safe_point":true,"enable_sync_point":false,"sync_point_interval":600000000000,"sync_point_retention":86400000000000,"filter":{"rules":["*.*"],"event_filters":null},"mounter":{"worker_num":16},"sink":{"protocol":"canal-json","schema_registry":"","csv":{"delimiter":",","quote":"\"","null":"\\N","include_commit_ts":false},"column_selectors":null,"transaction_atomicity":"none","encoder_concurrency":16,"terminator":"\r\n","date_separator":"none","enable_partition_separator":false},"consistent":{"level":"none","max_log_size":64,"flush_interval":2000,"storage":""}},"state":"normal","creator_version":"v6.5.0-master-dirty"}
 ```
 
 - `--changefeed-id`: The ID of the changefeed. The format must match the `^[a-zA-Z0-9]+(\-[a-zA-Z0-9]+)*$` regular expression. If this ID is not specified, TiCDC automatically generates a UUID (the version 4 format) as the ID.
-- `--sink-uri`: The downstream address of the changefeed. For details, see [Configure Cloud Storage in Sink URI](#configure-sink-uri).
+- `--sink-uri`: The downstream address of the changefeed. For details, see [Configure sink URI](#configure-sink-uri).
 - `--start-ts`: The starting TSO of the changefeed. From this TSO, the TiCDC cluster starts pulling data. The default value is the current time.
 - `--target-ts`: The ending TSO of the changefeed. To this TSO, the TiCDC cluster stops pulling data. The default value is empty, which means that TiCDC does not automatically stop pulling data.
-- `--config`: The configuration file of the `changefeed`. For details, see [TiCDC changefeed configuration parameters](/ticdc/ticdc-changefeed-config.md)
+- `--config`: The configuration file of the changefeed. For details, see [TiCDC changefeed configuration parameters](/ticdc/ticdc-changefeed-config.md).
 
 ## Configure sink URI
 
@@ -52,10 +59,11 @@ Other optional parameters in the URI are as follows:
 | `worker-count` | Concurrency for saving data changes to cloud storage in the downstream (optional, default value: `16`, value range: [`1`, `512`] |
 | `flush-interval` | Interval for saving data changes to cloud storage in the downstream (optional, default value: `5s`, value range: [`2s`, `10m`] |
 | `file-size` | A data change file is stored to cloud storage if its bytes exceed the value of this parameter (optional, default value: `67108864`, value range: [`1048576`, `536870912`]) |
+| `protocol` | The protocol format of the messages sent to the downstream. Value options are `canal-json` and `csv`. |
 
 > **Note:**
 >
-> Data change files are saved to cloud storage in the downstream when either `flush-interval` or `file-size` meets the requirements.
+> Data change files are saved to the downstream when either `flush-interval` or `file-size` meets the requirements.
 
 ## Storage path structure
 
@@ -66,10 +74,10 @@ This section describes the storage path structure of data change records, metada
 Data change records are saved to the following path:
 
 ```shell
-{protocol}://{prefix}/{schema}/{table}/{table-version-separator}/{partition-separator}/{date-separator}/CDC{num}.{extension}
+{scheme}://{prefix}/{schema}/{table}/{table-version-separator}/{partition-separator}/{date-separator}/CDC{num}.{extension}
 ```
 
-- `protocol`: specifies the data transmission protocol, or the storage type, for example, `s3://xxxxx`.
+- `scheme`: specifies the data transmission protocol, or the storage type, for example, `s3://xxxxx`.
 - `prefix`: specifies the user-defined parent directory, for example, `s3://bucket/bbb/ccc`.
 - `schema`: specifies the schema name, for example, `s3://bucket/bbb/ccc/test`.
 - `table`: specifies the table name, for example, `s3://bucket/bbb/ccc/test/table1`.
@@ -82,6 +90,13 @@ Data change records are saved to the following path:
     - `day`: the separator is the year, month, and day a transaction is committed, for example,`s3://bucket/bbb/ccc/test/table1/9999/2022-01-02`.
 - `num`: saves the serial number of the file that records the data change, for example, `s3://bucket/bbb/ccc/test/table1/9999/2022-01-02/CDC000005.csv`.
 - `extension`: specifies the extension of the file. TiDB v6.5.0 supports the CSV and canal-json formats.
+
+> **Note:**
+>
+> The table version changes in the following two cases:
+>
+> - DDL operations are performed on this table. The table version is the TSO when the DDL is executed in the upstream TiDB. However, the change of the table version does not mean the change of the table schema. For example, adding a comment to a column does not cause the `schema.json` file content to change compared with the earlier version.
+> - The changefeed process restarts. The table version is the checkpoint TSO when the process restarts. This is because when there are many tables and the process restarts, it takes a long time to traverse all directories and find the position where each table was written last time. Therefore, data is written to a new directory with the version being the checkpoint TSO, instead of to the earlier directory.
 
 ### Metadata
 
@@ -103,21 +118,23 @@ Metadata is a JSON-formatted file, for example:
 
 ### DDL events
 
-When DDL events cause the table version to change, TiCDC switches to the new path to write data change records. For example, when the version of `test.table1` changes from `9999` to `10000`, data will be written to the path `s3://bucket/bbb/ccc/test/table1/10000/2022-01-02/CDC000001.csv`. In addition, when DDL events occur, TiCDC generates a `schema.json` file to save the table structure information.
+When DDL events cause the table version to change, TiCDC switches to the new path to write data change records. For example, when the version of `test.table1` changes from `9999` to `10000`, data will be written to the path `s3://bucket/bbb/ccc/test/table1/10000/2022-01-02/CDC000001.csv`. In addition, when DDL events occur, TiCDC generates a `schema.json` file to save the table schema information.
 
-Table structure information is saved in the following path:
+Table  schema information is saved in the following path:
 
 ```shell
-{protocol}://{prefix}/{schema}/{table}/{table-version-separator}/schema.json
+{scheme}://{prefix}/{schema}/{table}/{table-version-separator}/schema.json
 ```
 
 The following is a `schema.json` file:
 
 ```shell
 {
-    "Table":"employee",
-    "Schema":"hr",
-    "Version":123123,
+    "Table":"table1",
+    "Schema":"test",
+    "Version":1,
+    "TableVersion":10000,
+    "Query": "ALTER TABLE test.table1 ADD OfficeLocation blob(20)",
     "TableColumns":[
         {
             "ColumnName":"Id",
@@ -151,7 +168,9 @@ The following is a `schema.json` file:
 
 - `Table`: Table name.
 - `Schema`: Schema name.
-- `Version`: Table version.
+- `Version`: Protocol version of the storage sink.
+- `TableVersion`: Table version.
+- `Query`：DDL statement.
 - `TableColumns`: An array of one or more maps, each of which describes a column in the source table.
     - `ColumnName`: Column name.
     - `ColumnType`: Column type. For details, see [Data type](#data-type).
@@ -164,7 +183,7 @@ The following is a `schema.json` file:
 
 ### Data type
 
-The data type is defined as `T(M[, D])`. For details, see [Data Types](/data-type-overview.md).
+This section describes the data types used in the `schema.json` file. The data types are defined as `T(M[, D])`. For details, see [Data Types](/data-type-overview.md).
 
 #### Integer types
 
