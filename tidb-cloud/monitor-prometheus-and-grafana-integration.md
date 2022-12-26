@@ -52,9 +52,9 @@ To get the scrape_config file for Prometheus, do the following:
 
 After your Prometheus service is reading metrics from TiDB Cloud, you can download the Grafana dashboard JSON from here and [import this JSON to your own Grafana GUI](https://grafana.com/docs/grafana/v8.5/dashboards/export-import/) to visualize the metrics.
 
-    > **Note:**
-    >
-    > Click to download the [Grafana dashboard json](tidb-cloud/monitor-prometheus-and-grafana-integration-grafana-dashboard-UI.json).
+> **Note:**
+>
+> Click to download the [Grafana dashboard JSON](/tidb-cloud/monitor-prometheus-and-grafana-integration-grafana-dashboard-UI.json).
 
 
 For more information about how to use Grafana, see [Grafana documentation](https://grafana.com/docs/grafana/latest/getting-started/getting-started-prometheus/).
