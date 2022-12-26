@@ -64,10 +64,6 @@ Number of commands processed by all TiDB instances per second based on type
 
 `avg-hit + avg-miss` is equal to `StmtExecute`, which is the number of all queries executed per second.
 
-### Queries Using Plan Cache OPS
-
-Number of queries using plan cache per second in all TiDB instances
-
 ### KV/TSO Request OPS
 
 - kv request total: Total number of KV requests per second in all TiDB instances
@@ -79,8 +75,8 @@ Generally, dividing `tso - cmd` by `tso - request` yields the average batch size
 
 ### KV Request Time By Source
 
-- kv request total time: Total time of processing KV and TiFlash requests per second in all TiDB instances.
-- Each KV request and the corresponding request source form a stacked bar chart, in which `external` identifies normal business requests and `internal` identifies internal activity requests (such as DDL and auto analyze requests).
+- kv request total time: Total time of processing KV and TiFlash requests per second in all TiDB instances
+- Each KV request and the corresponding request source form a stacked bar chart, in which `external` identifies normal business requests and `internal` identifies internal activity requests (such as DDL and auto analyze requests)
 
 ### TiDB CPU
 
