@@ -54,7 +54,7 @@ After your Prometheus service is reading metrics from TiDB Cloud, you can downlo
 
 > **Note:**
 >
-> Click to download the [Grafana dashboard JSON](https://raw.githubusercontent.com/pingcap/docs/release-6.1/tidb-cloud/monitor-prometheus-and-grafana-integration-grafana-dashboard-UI.json).
+> Click to get the [Grafana dashboard JSON](https://github.com/pingcap/docs/release-6.1/tidb-cloud/monitor-prometheus-and-grafana-integration-grafana-dashboard-UI.json).
 
 For more information about how to use Grafana, see [Grafana documentation](https://grafana.com/docs/grafana/latest/getting-started/getting-started-prometheus/).
 
