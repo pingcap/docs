@@ -291,7 +291,7 @@ In addition to removing a binding according to a SQL statement, you can also rem
 DROP [GLOBAL | SESSION] BINDING FOR SQL DIGEST 'sql_digest';
 ```
 
-This statement removes a execution plan binding corresponding to `sql_digest` at the GLOBAL or SESSION level. The default scope is SESSION. You can get the `sql_digest` by [viewing bindings](#view-bindings).
+This statement removes an execution plan binding corresponding to `sql_digest` at the GLOBAL or SESSION level. The default scope is SESSION. You can get the `sql_digest` by [viewing bindings](#view-bindings).
 
 > **Note:**
 >
