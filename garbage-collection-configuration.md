@@ -20,7 +20,7 @@ Garbage collection is configured via the following system variables:
 
 > **Note:**
 >
-> This section is only applicable to TiDB on-premises. TiDB Cloud does not have GC I/O limit by default.
+> This section is only applicable to on-premises TiDB. TiDB Cloud does not have GC I/O limit by default.
 
 </CustomContent>
 
@@ -58,7 +58,7 @@ Based on the `DISTRIBUTED` GC mode, the mechanism of GC in Compaction Filter use
 
 > **Note:**
 >
-> The following examples of modifying TiKV configurations are only applicable to TiDB on-premises. For TiDB Cloud, the mechanism of GC in Compaction Filter is enabled by default.
+> The following examples of modifying TiKV configurations are only applicable to on-premises TiDB. For TiDB Cloud, the mechanism of GC in Compaction Filter is enabled by default.
 
 </CustomContent>
 
