@@ -100,7 +100,28 @@ dispatchers = [
     {matcher = ['test6.*'], partition = "ts"}
 ]
 
-# For the sink of MQ type, you can specify the protocol format of the message.
-# Currently the following protocols are supported: canal-json, open-protocol, canal, avro, and maxwell.
+# protocol is used to specify the protocol format of the message sent to the downstream.
+# When the downstream is Kafka, the protocol can be canal-json or avro.
+# When the downstream is a storage service, the protocol can only be set to canal-json and csv.
 protocol = "canal-json"
+
+# The following three configuration items are only used when you replicate data to storage sinks. You can ignore them when replicating data to MQ and MySQL sinks.
+# Row terminator, used for separating two data change events. The value is empty by default, which means "\r\n" is used.
+
+terminator = ''
+# Date separator type of the file directory. Value options are `none`, `year`, `month`, and `day`. `none` is the default value and means that the date is not separated. For details, see <https://docs.pingcap.com/zh/tidb/dev/ticdc-sink-to-cloud-storage#data-change-records>.
+date-separator = 'none'
+# Whether to use partitions as the separation string. The default value is false, which means that partitions in a table are not stored in separate directories. For details, see <https://docs.pingcap.com/zh/tidb/dev/ticdc-sink-to-cloud-storage#data-change-records)>
+enable-partition-separator = false
+
+# Since v6.5.0, TiCDC supports saving data changes to cloud storage in CSV format. Ignore the following configurations if you replicate data to MQ and MySQL sinks.
+[sink.csv]
+# Delimiter between fields. The value must be an ASCII character and defaults to `,`.
+delimiter = ','
+# The quotation that surrounds the fields. The default value is `"`, which means no quotation is used.
+quote = '"'
+# The character displayed when the CSV column is null. The default value is `\N`.
+null = '\N'
+# Whether to include commit-ts in CSV rows. The default value is false.
+include-commit-ts = false
 ```
