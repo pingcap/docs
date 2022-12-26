@@ -198,8 +198,6 @@ The number of `StmtPrepare` commands per second is much greater than that of `St
     - kv request total time: The total time of processing KV and TiFlash requests per second.
     - Each KV request and the corresponding request source form a stacked bar chart, in which `external` identifies normal business requests and `internal` identifies internal activity requests (such as DDL and auto analyze requests).
 
-In the KV Request Time By Source panel, you can view the total number of connections and the number of connections per TiDB. 
-
 **Example 1: Busy workload**
 
 ![TPC-C](/media/performance/tpcc_source_sql.png)
@@ -271,7 +269,7 @@ In real customer scenarios, it is not rare that the bottleneck is outside the da
 - The network latency from the application server to the database is high. For example, the network latency is high because in public-cloud deployments the applications and the TiDB cluster are not in the same region, or the dns workload balancer and the TiDB cluster are not in the same region.
 - The bottleneck is in client applications. The application server's CPU cores and Numa resources cannot be fully utilized. For example, only one JVM is used to establish thousands of JDBC connections to TiDB.
 
-In the Connection Count panel, you can check the total number of connections and also the number of connections on each TiDB node, which helps you determine whether the total number of connections is normal and whether the number of connections on each TiDB node is unbalanced. `active connections` indicates the number of active connections, which is equal to the database time per second. The Y axis on the right indicates the number of `disconnection/s` per second in a cluster, which can be used to determine whether the application uses short connections.
+In the Connection Count panel, you can check the total number of connections and also the number of connections on each TiDB node, which helps you determine whether the total number of connections is normal and whether the number of connections on each TiDB node is unbalanced. `active connections` indicates the number of active connections, which is equal to the database time per second. The Y axis on the right (`disconnection/s`) indicates the number of disconnections per second in a cluster, which can be used to determine whether the application uses short connections.
 
 **Example 1: The number of disconnection/s is too high**
 
