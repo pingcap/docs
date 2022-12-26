@@ -249,7 +249,7 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
 * The TiDB Cloud API (beta) is now available to all users.
 
-    You can start using the API by creating an API key on the TiDB Cloud console. For more information, refer to [API documentation](/tidb-cloud/api-overview.md).
+    You can start using the API by creating an API key in the TiDB Cloud console. For more information, refer to [API documentation](/tidb-cloud/api-overview.md).
 
 ## September 15, 2022
 
@@ -453,7 +453,7 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 ## June 21, 2022
 
 * Add the support of the GCP region `Taiwan` for [Dedicated Tier](/tidb-cloud/select-cluster-tier.md#dedicated-tier) cluster creation.
-* Support [updating user profiles](/tidb-cloud/manage-user-access.md#manage-user-profiles) on the TiDB Cloud console, including first name, last time, company name, country, and phone number.
+* Support [updating user profiles](/tidb-cloud/manage-user-access.md#manage-user-profiles) in the TiDB Cloud console, including first name, last time, company name, country, and phone number.
 * Provide the connection strings for MySQL, MyCLI, JDBC, Python, Go, and Node.js in the [**Connect to TiDB**](/tidb-cloud/connect-via-standard-connection.md) dialog so you can easily connect to your TiDB cluster.
 * Support obtaining bucket regions from bucket URIs automatically during data import to save your effort to fill in such information.
 

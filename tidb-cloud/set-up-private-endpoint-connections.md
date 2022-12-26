@@ -55,7 +55,7 @@ TiDB Cloud supports private endpoints only for Dedicated Tier clusters. You are 
 
 To start setting up a private endpoint, open the private endpoint creation page:
 
-1. On the TiDB Cloud console, choose a target project, and then click the **Network Access** tab.
+1. In the TiDB Cloud console, choose a target project, and then click the **Network Access** tab.
 2. Click the **Private Endpoint** tab.
 3. Click **Add** in the upper-right corner.
 
