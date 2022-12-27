@@ -5,7 +5,7 @@ summary: Learn how to import local files to TiDB Cloud.
 
 # Import Local Files to TiDB Cloud
 
-You can import local files to TiDB Cloud directly. It only takes a few seconds to complete the task configuration, and then the data will be imported to TiDB immediately. You no longer need to configure the cloud storage bucket path, ARN Role authorization or other complicated operations. Importing data to TiDB Cloud becomes quick and smooth.
+You can import local files to TiDB Cloud directly. It only takes a few seconds to complete the task configuration, and then the data will be imported to TiDB immediately. You no longer need to perform complicated operations such as the cloud storage bucket path and Role ARN. Importing data to TiDB Cloud becomes quick and smooth.
 
 This feature now supports importing one CSV file for one task into either an existing table or a new table.
 
