@@ -60,7 +60,7 @@ To change the local timezone setting, perform the following steps:
 
 ### Invite an organization member
 
-If you are the owner of an organization, you can invite organization members. Otherwise, skip this section.
+If you are the owner of an organization, you can invite organization members.
 
 To invite a member to an organization, perform the following steps:
 
@@ -86,7 +86,7 @@ To invite a member to an organization, perform the following steps:
 
 > **Note:**
 >
-> The verification link in the email will expire in 24 hours. If your user doesn't receive the email, click **Resend**.
+> The verification link in the email expires in 24 hours. If the user you want to invite does not receive the email, click **Resend**.
 
 ### Remove an organization member
 
@@ -146,7 +146,7 @@ To rename a project, perform the following steps:
 
 ### Invite a project member
 
-If you are the owner of an organization, you can invite project members. Otherwise, skip this section.
+If you are the owner of an organization, you can invite project members.
 
 To invite a member to a project, perform the following steps:
 
