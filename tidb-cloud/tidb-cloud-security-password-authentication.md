@@ -69,7 +69,7 @@ TiDB Cloud sends password expiration reminders. If you sign up for TiDB Cloud wi
 
 To change the password, take the following steps: 
 
-1. Click the <MDSvgIcon name="icon-top-account-settings" /> **Account** in the upper-right corner of the TiDB Cloud console.
+1. Click <MDSvgIcon name="icon-top-account-settings" /> **Account** in the upper-right corner of the TiDB Cloud console.
 
 2. Click **Account Settings**.
 
