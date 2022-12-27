@@ -33,12 +33,12 @@ To create a changefeed, refer to the tutorials:
 1. Navigate to the **Changefeed** tab of a cluster.
 2. Locate the corresponding changefeed you want to delete, and click **...** > **Delete** in the **Action** column.
 
-## Pause or resume a sink
+## Pause or resume a changefeed
 
 1. Navigate to the **Changefeed** tab of a cluster.
 2. Click **Action...** > **Pause/Resume** on the corresponding changefeed in the changefeed list.
 
-## Edit a sink
+## Edit a changefeed
 
 > **Note:**
 >
@@ -59,5 +59,7 @@ To create a changefeed, refer to the tutorials:
 
 1. Navigate to the **Changefeed** tab of a cluster.
 2. You can see the current TiCDC Replication Capacity Units (RCUs) in the upper-right corner of the page.
+
+## Changefeed billing
 
 To learn the billing for changefeeds in TiDB Cloud, see [Changefeed billing](/tidb-cloud/tidb-cloud-billing-ticdc-rcu.md).
