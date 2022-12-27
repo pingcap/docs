@@ -4,11 +4,11 @@ title: Changefeed
 
 # Changefeed
 
-TiDB Cloud Changefeed helps you stream data from TiDB Cloud to other data services. Currently, TiDB Cloud supports streaming data to MySQL and Kafka.
+TiDB Cloud changefeed helps you stream data from TiDB Cloud to other data services. Currently, TiDB Cloud supports streaming data to MySQL and Kafka.
 
 > **Note:**
 >
-> To use the Changefeed feature, make sure that your TiDB cluster version is v6.4.0 or later and the TiKV node size is at least 8 vCPU and 16 GiB.
+> To use the changefeed feature, make sure that your TiDB cluster version is v6.4.0 or later and the TiKV node size is at least 8 vCPU and 16 GiB.
 >
 > Currently, TiDB Cloud only allows up to 10 changefeeds per cluster.
 >
@@ -21,7 +21,7 @@ Navigate to the **Changefeed** tab of your TiDB cluster, and you can see the cha
 
 ## Create Changefeed
 
-To create a changefeed, please refer to the tutorial:
+To create a changefeed, refer to the tutorials:
 
 - [Sink to Apache Kafka](/tidb-cloud/changefeed-sink-to-apache-kafka.md) (Beta)
 - [Sink to MySQL](/tidb-cloud/changefeed-sink-to-mysql.md)
@@ -29,12 +29,12 @@ To create a changefeed, please refer to the tutorial:
 ## Delete a Sink
 
 1. Navigate to the **Changefeed** tab of a cluster.
-2. Click **Action...** > **Delete** on the corresponding Changefeed in the Changefeed list.
+2. Click **Action...** > **Delete** on the corresponding changefeed in the changefeed list.
 
 ## Pause or resume a Sink
 
 1. Navigate to the **Changefeed** tab of a cluster.
-2. Click **Action...** > **Pause/Resume** on the corresponding Changefeed in the Changefeed list.
+2. Click **Action...** > **Pause/Resume** on the corresponding changefeed in the changefeed list.
 
 ## Edit a sink
 
@@ -43,15 +43,15 @@ To create a changefeed, please refer to the tutorial:
 > TiDB Cloud currently only allows editing changefeeds in the paused status.
 
 1. Navigate to the **Changefeed** tab of a cluster.
-2. Click **Action...** > **Pause** to pause the corresponding Changefeed.
-3. When the changefeed status changes to `paused`, click **Action...** > **Edit**  to edit the corresponding Changefeed.
+2. Click **Action...** > **Pause** to pause the corresponding changefeed.
+3. When the changefeed status changes to `Paused`, click **Action...** > **Edit**  to edit the corresponding changefeed.
 
     TiDB Cloud populates the changefeed configuration by default. You can modify the following configurations:
 
     - MySQL sink: **MySQL Connection** and **Table Filter**.
     - Kafka sink: all configurations.
 
-4. After editing the configuration, click **Action...** > **Resume**  to resume the corresponding Changefeed.
+4. After editing the configuration, click **Action...** > **Resume** to resume the corresponding changefeed.
 
 ## Query TiCDC RCUs
 
