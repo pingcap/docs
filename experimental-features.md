@@ -48,6 +48,7 @@ Elastic scheduling feature. It enables the TiDB cluster to dynamically scale out
 ## Data share subscription
 
 + [Cross-cluster RawKV replication](/tikv-configuration-file.md#api-version-new-in-v610) (Introduced in v6.2.0)
++ [Stream data to Amazon S3, Azure Blob Storage, and NFS through TiCDC](/ticdc/ticdc-sink-to-cloud-storage.md) (Introduced in v6.5.0)
 
 ## Garbage collection
 

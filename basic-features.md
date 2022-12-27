@@ -168,7 +168,7 @@ This document lists the features supported in each TiDB version. Note that suppo
 | [Database migration toolkit (DM)](/migration-overview.md)                                               | Y | Y | Y | Y | Y | Y  | Y           | Y            | Y            | Y            | Y            | Y            |
 | [TiDB Binlog](/tidb-binlog/tidb-binlog-overview.md)                                                     | Y | Y | Y | Y | Y | Y  | Y   | Y    | Y    | Y    | Y    | Y    |
 | [Change data capture (CDC)](/ticdc/ticdc-overview.md)                                                   | Y | Y | Y | Y | Y | Y  | Y           | Y            | Y            | Y            | Y            | Y            |
-| Stream data to Amazon S3, Azure Blob Storage, and NFS through [TiCDC](/ticdc/ticdc-overview.md) | Experimental | N | N | N | N | N | N | N | N | N | N | N |
+| [Stream data to Amazon S3, Azure Blob Storage, and NFS through TiCDC](/ticdc/ticdc-sink-to-cloud-storage.md) | Experimental | N | N | N | N | N | N | N | N | N | N | N |
 
 ## Management, observability, and tools
 
