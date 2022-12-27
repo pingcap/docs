@@ -9,6 +9,8 @@ This document describes how to create a changefeed to stream data from TiDB Clou
 
 > **Note:**
 >
+> Currently, Kafka sink is in **beta**. To use the Changefeed feature, make sure that your TiDB cluster version is v6.4.0 or later and the TiKV node size is at least 8 vCPU and 16 GiB.
+>
 > For [Serverless Tier clusters](/tidb-cloud/select-cluster-tier.md#serverless-tier-beta), the changefeed feature is unavailable.
 
 ## Prerequisites
@@ -47,10 +49,8 @@ For example, if your Kafka cluster is in Confluent Cloud, you can see [Resources
 
 ## Step 1. Open the changefeed page for Apache Kafka
 
-1. In the TiDB Cloud console, navigate to the **Clusters** page for your project.
-2. Click the name of the cluster that you want to create a changefeed for.
-3. Click the **Changefeed** tab.
-4. Click **Sink to Apache Kafka**.
+1. In the TiDB Cloud console, navigate to the **Changefeed** tab of your TiDB cluster.
+2. Click **Sink to Apache Kafka**.
 
 ## Step 2. Configure the changefeed target
 

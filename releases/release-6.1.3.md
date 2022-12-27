@@ -10,6 +10,14 @@ TiDB version: 6.1.3
 
 Quick access: [Quick start](https://docs.pingcap.com/tidb/v6.1/quick-start-with-tidb) | [Production deployment](https://docs.pingcap.com/tidb/v6.1/production-deployment-using-tiup) | [Installation packages](https://www.pingcap.com/download/?version=v6.1.3#version-list)
 
+## Compatibility changes
+
+- Tools
+
+    - TiCDC
+
+        - Change the default value of [`transaction-atomicity`](/ticdc/manage-ticdc.md#configure-sink-uri-with-mysqltidb) from `table` to `none`, which helps reduce replication latency and reduce OOM risks, and ensures that only a few transactions (the size of a single transaction exceeds 1024 rows) are split, instead of all transactions [#7505](https://github.com/pingcap/tiflow/issues/7505) [#5231](https://github.com/pingcap/tiflow/issues/5231) @[asddongmen](https://github.com/asddongmen)
+
 ## Improvements
 
 - PD
