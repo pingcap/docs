@@ -4,7 +4,7 @@ title: Changefeed
 
 # Changefeed
 
-TiDB Cloud changefeed helps you stream data from TiDB Cloud to other data services. Currently, TiDB Cloud supports streaming data to MySQL and Kafka.
+TiDB Cloud changefeed helps you stream data from TiDB Cloud to other data services. Currently, TiDB Cloud supports streaming data to Apache Kafka and MySQL.
 
 > **Note:**
 >
@@ -14,14 +14,14 @@ TiDB Cloud changefeed helps you stream data from TiDB Cloud to other data servic
 >
 > For [Serverless Tier clusters](/tidb-cloud/select-cluster-tier.md#serverless-tier-beta), the changefeed feature is unavailable.
 
-To access the changefeed feature, navigate to the **Cluster Overview** page of your TiDB cluster and click **Changefeed** on the left navigation bar. The changefeed list is displayed. 
+To access the changefeed feature, navigate to the cluster overview page of your TiDB cluster and click the **Changefeed** tab on the left navigation bar. The changefeed list is displayed. 
 
 In the changefeed list, you can:
 
 - View the information of the created changefeed, including changefeed's id, checkpoint, and status.
 - Operate the changefeed, including creating, pausing, resuming, editing, and deleting the changefeed.
 
-## Create Changefeed
+## Create a changefeed
 
 To create a changefeed, refer to the tutorials:
 
@@ -46,7 +46,7 @@ To create a changefeed, refer to the tutorials:
 
 1. Navigate to the **Changefeed** tab of a cluster.
 2. Click **Action...** > **Pause** to pause the corresponding changefeed.
-3. When the changefeed status changes to `Paused`, click **Action...** > **Edit**  to edit the corresponding changefeed.
+3. When the changefeed status changes to `Paused`, click **Action...** > **Edit** to edit the corresponding changefeed.
 
     TiDB Cloud populates the changefeed configuration by default. You can modify the following configurations:
 

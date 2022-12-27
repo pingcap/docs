@@ -72,7 +72,7 @@ The **Sink to MySQL** connector can only sink incremental data from your TiDB cl
     Finished dump at: 2020-11-10 10:40:20
     ``` 
 
-## Create a MySQL Sink
+## Create a MySQL sink
 
 After completing the prerequisites, you can sink your data to MySQL.
 
