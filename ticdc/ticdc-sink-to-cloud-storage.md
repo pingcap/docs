@@ -58,7 +58,7 @@ Other optional parameters in the URI are as follows:
 | :------------ | :------------------------------------------------ |
 | `worker-count` | Concurrency for saving data changes to cloud storage in the downstream (optional, default value: `16`, value range: [`1`, `512`] |
 | `flush-interval` | Interval for saving data changes to cloud storage in the downstream (optional, default value: `5s`, value range: [`2s`, `10m`] |
-| `file-size` | A data change file is stored to cloud storage if its bytes exceed the value of this parameter (optional, default value: `67108864`, value range: [`1048576`, `536870912`]) |
+| `file-size` | A data change file is stored to cloud storage if the number of bytes exceeds the value of this parameter (optional, default value: `67108864`, value range: [`1048576`, `536870912`]) |
 | `protocol` | The protocol format of the messages sent to the downstream. Value options are `canal-json` and `csv`. |
 
 > **Note:**

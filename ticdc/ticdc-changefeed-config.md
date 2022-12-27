@@ -69,7 +69,7 @@ enable-old-value = true
 
 # Filter rules.
 # Filter syntax: <https://docs.pingcap.com/tidb/stable/table-filter#syntax>.
-rules = ['*.*When the downstream is a storage service, the protocol can only be set to canal-json or csv.', '!test.*']
+rules = ['*.*', '!test.*']
 
 # Event filter rules.
 # The detailed syntax is described in the event filter rules section.
@@ -117,7 +117,7 @@ enable-partition-separator = false
 [sink.csv]
 # Delimiter between fields. The value must be an ASCII character and defaults to `,`.
 delimiter = ','
-# The quotation that surrounds the fields. The default value is `"`, which means no quotation is used.
+# The quotation that surrounds the fields. The default value is `"`. When the value is empty, no quotation is used.
 quote = '"'
 # The character displayed when the CSV column is null. The default value is `\N`.
 null = '\N'
