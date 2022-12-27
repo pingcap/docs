@@ -105,6 +105,7 @@
       - [Migrate from MySQL-Compatible Databases Using AWS DMS](/tidb-cloud/migrate-from-mysql-using-aws-dms.md)
       - [Migrate from Amazon RDS for Oracle Using AWS DMS](/tidb-cloud/migrate-from-oracle-using-aws-dms.md)
   - Import Data into TiDB Cloud
+      - [Import Local Files](/tidb-cloud/tidb-cloud-import-local-files.md)
       - [Import Sample Data (SQL File)](/tidb-cloud/import-sample-data.md)
       - [Import CSV Files from Amazon S3 or GCS](/tidb-cloud/import-csv-files.md)
       - [Import Apache Parquet Files from Amazon S3 or GCS](/tidb-cloud/import-parquet-files.md)

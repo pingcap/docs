@@ -9,13 +9,15 @@ This document describes how to import sample data into TiDB Cloud via the UI. Th
 
 1. Log in to the [TiDB Cloud console](https://tidbcloud.com/), navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page, and choose your target project on the top of the left navigation bar.
 
-2. Locate your cluster, click **...** in the upper-right corner of the cluster area, and select **Import Data**. The **Data Import** page is displayed.
+2. Locate your cluster, click **...** in the upper-right corner of the cluster area, and select **Import Data**.
+
+3. On the **Import** page, click **Import Data** in the upper-right corner, and then select **From S3**.
 
     > **Tip:**
     >
     > Alternatively, you can also click the name of your cluster on the **Clusters** page and click **Import Data** in the **Import** area.
 
-3. Fill in the import parameters:
+4. Fill in the import parameters:
 
     <SimpleTab>
     <div label="AWS">
@@ -23,7 +25,6 @@ This document describes how to import sample data into TiDB Cloud via the UI. Th
     If your TiDB cluster is hosted by AWS (the Serverless Tier is hosted by AWS by default), fill in the following parameters:
 
     - **Data Format**: select **SQL File**.
-    - **Location**: `AWS`
     - **Bucket URI**: enter the sample data URI `s3://tidbcloud-samples/data-ingestion/`
     - **Role ARN**: enter `arn:aws:iam::385595570414:role/import-sample-access`
     - **Target Cluster**: shows the cluster name and the region name.
@@ -46,9 +47,9 @@ This document describes how to import sample data into TiDB Cloud via the UI. Th
     </div>
     </SimpleTab>
 
-4. Add the table filter rules if needed. For the sample data, you can safely skip this step and click **Next**.
+5. Add the table filter rules if needed. For the sample data, you can safely skip this step and click **Next**.
 
-5. On the **Preview** page, confirm the data to be imported and then click **Start Import**.
+6. On the **Preview** page, confirm the data to be imported and then click **Start Import**.
 
 The data import process will take 5 to 10 minutes. When the data import progress shows **Finished**, you have successfully imported the sample data and the database schema to your database in TiDB Cloud.
 

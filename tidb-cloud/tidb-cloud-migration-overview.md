@@ -34,6 +34,10 @@ When you migrate data from a MySQL-compatible database, you can perform full dat
 
 If you have data files in SQL, CSV, Parquet, or Aurora Snapshot formats, you can import these files to TiDB Cloud in one go. The import scenarios and methods are as follows:
 
+- Import a local CSV file to TiDB Cloud
+
+    You can import a local CSV file to TiDB Cloud. For more information, see [Import Local Files to TiDB Cloud](/tidb-cloud/tidb-cloud-import-local-files.md).
+
 - Import sample data (SQL file) to TiDB Cloud
 
     You can import sample data (SQL file) to TiDB Cloud to quickly get familiar with the TiDB Cloud interface and the import process. For more information, see [Import Sample Data to TiDB Cloud](/tidb-cloud/import-sample-data.md).
