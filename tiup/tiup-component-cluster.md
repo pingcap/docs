@@ -82,7 +82,7 @@ tiup cluster [command] [flags]
 - [replay](/tiup/tiup-component-cluster-replay.md): retries the specified command
 - [enable](/tiup/tiup-component-cluster-enable.md): enables the auto-enabling of the cluster service after a machine is restarted
 - [disable](/tiup/tiup-component-cluster-disable.md): disables the auto-enabling of the cluster service after a machine is restarted
-- [meta backup](/tiup/tiup-component-cluster-meta-backup.md): backs up the TiUP meta file required for the operation and maintenance a the specified cluster
+- [meta backup](/tiup/tiup-component-cluster-meta-backup.md): backs up the TiUP meta file required for the operation and maintenance of a specified cluster
 - [meta restore](/tiup/tiup-component-cluster-meta-restore.md): restores the TiUP meta file of a specified cluster
 - [help](/tiup/tiup-component-cluster-help.md): prints the help information
 
