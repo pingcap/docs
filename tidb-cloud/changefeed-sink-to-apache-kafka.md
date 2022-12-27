@@ -132,18 +132,8 @@ On this page, you can review all the changefeed configurations that you set.
 
 If you find any error, you can go back to fix the error. If there is no error, you can click the check box at the bottom, and then click **Create** to create the changefeed.
 
-## Manage the changefeed
-
-After a changefeed is created, you can navigate to the **Changefeed** tab of your TiDB cluster and click **Sink to Apache Kafka** to open the **Changefeed Detail** dialog.
-
-In the **Changefeed Detail** dialog, you can manage the changefeed as follows:
-
-- Check the running state of the changefeed.
-- Delete the changefeed by clicking **Delete**.
-- Pause or resume the changefeed by clicking **Pause** or **Resume**.
-
 ## Restrictions
 
-- For each TiDB Cloud cluster, you can create only one Kafka changefeed.
+- For each TiDB Cloud cluster, you can create up to 10 Kafka changefeeds.
 - Currently, TiDB Cloud does not support uploading self-signed TLS certificates to connect to Kafka brokers.
 - Because TiDB Cloud uses TiCDC to establish changefeeds, it has the same [restrictions as TiCDC](https://docs.pingcap.com/tidb/stable/ticdc-overview#restrictions).
