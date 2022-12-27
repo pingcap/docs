@@ -91,7 +91,7 @@ hide_commit: true
 
 </LearningPath>
 
-<LearningPath label="Manage Access" icon="users">
+<LearningPath label="Security" icon="users">
 
 [Manage Passwords](https://docs.pingcap.com/tidbcloud/manage-user-access#manage-user-passwords)
 
@@ -119,7 +119,7 @@ hide_commit: true
 
 <LearningPath label="Integrations" icon="cloud4">
 
-[Airbyte](https://docs.pingcap.com/tidbcloud/integrate-tidbcloud-with-airbyte)    
+[Airbyte](https://docs.pingcap.com/tidbcloud/integrate-tidbcloud-with-airbyte)
 
 [Datadog](https://docs.pingcap.com/tidbcloud/monitor-datadog-integration)
 
