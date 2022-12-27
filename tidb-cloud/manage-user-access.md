@@ -30,7 +30,6 @@ Under this structure:
 To check which organizations you belong to, perform the following steps:
 
 1. Click <MDSvgIcon name="icon-top-organization" /> **Organization** in the upper-right corner of the TiDB Cloud console.
-
 2. Click **Organization Settings**. You can view your organization on the page that is displayed.
 
 ### Switch between organizations
@@ -150,7 +149,7 @@ If you are the owner of an organization, you can invite project members.
 
 To invite a member to a project, perform the following steps:
 
-1. Click the account name in the upper-right corner of the TiDB Cloud console.
+1. Click <MDSvgIcon name="icon-top-organization" /> **Organization** in the upper-right corner of the TiDB Cloud console.
 
 2. Click **Organization Settings**. The organization settings page is displayed.
 
@@ -174,7 +173,7 @@ To invite a member to a project, perform the following steps:
 >
 > The verification link in the email will expire in 24 hours. If your user doesn't receive the email, click **Resend**.
 
-## Remove a project member
+### Remove a project member
 
 If you are the owner of an organization, you can remove project members.
 
