@@ -176,6 +176,7 @@
      - [Configuration](/garbage-collection-configuration.md)
   - [Tune TiFlash performance](/tiflash/tune-tiflash-performance.md)
 - Security
+  - [Password Authentication](/tidb-cloud/tidb-cloud-password-authentication.md)
   - [Identity Access Management](/tidb-cloud/manage-user-access.md)
   - [Configure Cluster Security Settings](/tidb-cloud/configure-security-settings.md)
   - [Database Audit Logging](/tidb-cloud/tidb-cloud-auditing.md)
