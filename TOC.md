@@ -77,8 +77,6 @@
       - [SQL Development Specifications](/develop/dev-guide-sql-development-specification.md)
     - Archived Docs
       - [For Django](/develop/dev-guide-outdated-for-django.md)
-      - [For SQLAlchemy](/develop/dev-guide-outdated-for-sqlalchemy.md)
-      - [For mysql-connector-python](/develop/dev-guide-outdated-for-python-mysql-connector.md)
   - Cloud Native Development Environment
     - [Gitpod](/develop/dev-guide-playground-gitpod.md)
   - Third-Party Support
