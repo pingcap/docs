@@ -9,7 +9,7 @@ This document describes the billing for Data Migration in TiDB Cloud.
 
 ## Specifications for Data Migration
 
-TiDB Cloud measures the capacity of Data Migration in Replication Capacity Units (RCUs). When you create a data migration job, you can select an appropriate specification. The higher the RCU, the better the migration performance. You will be charged for these Data Migration RCUs.
+TiDB Cloud measures the capacity of Data Migration in Replication Capacity Units (RCUs). When you create a Data Migration job, you can select an appropriate specification. The higher the RCU, the better the migration performance. You will be charged for these Data Migration RCUs.
 
 The following table lists the specifications and corresponding performances for Data Migration.
 
@@ -51,7 +51,7 @@ Note that if you are using AWS PrivateLink or VPC peering connections, and if th
 
     ![Cross-AZ traffic charges](/media/tidb-cloud/dm-billing-cross-az-fees.png)
 
-- If the Data Migration job and the TiDB cluster are not in the same AZ, cross-AZ traffic charges are incurred when the Data Migration job writes data to the target TiDB cluster.
+- If the Data Migration job and the TiDB cluster are not in the same AZ, cross-AZ traffic charges are incurred when the Data Migration job writes data to the target TiDB cluster. In addition, if the Data Migration job and the TiDB cluster are not in the same AZ (or region) with the source database, cross-AZ (or cross-region) traffic charges are incurred when the Data Migration job collects data from the source database.
 
     ![Cross-region and cross-AZ traffic charges](/media/tidb-cloud/dm-billing-cross-region-and-az-fees.png)
 
