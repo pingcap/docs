@@ -53,12 +53,12 @@ To create a changefeed, refer to the tutorials:
     - MySQL sink: **MySQL Connection** and **Table Filter**.
     - Kafka sink: all configurations.
 
-4. After editing the configuration, click **Action...** > **Resume** to resume the corresponding changefeed.
+4. After editing the configuration, click **...** > **Resume** to resume the corresponding changefeed.
 
 ## Query TiCDC RCUs
 
 1. Navigate to the **Changefeed** tab of a cluster.
-2. You can see the current TiCDC Replication Capacity Units (RCUs) in the upper-right corner of the page.
+2. You can see the current TiCDC Replication Capacity Units (RCUs) in the upper-left corner of the page.
 
 ## Changefeed billing
 
