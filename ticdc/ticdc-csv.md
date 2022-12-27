@@ -31,7 +31,7 @@ include-commit-ts = true
 
 ## Transactional constraints
 
-- In a single CSV file, `commit-ts` of a row is smaller than that in the subsequent row.
+- In a single CSV file, `commit-ts` of a row is equal to or smaller than that in the subsequent row.
 - The same transactions of a single table are stored in the same CSV file.
 - Multiple tables of the same transaction can be stored in different CSV files.
 
