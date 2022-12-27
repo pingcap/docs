@@ -25,7 +25,7 @@ Currently, this method supports importing one CSV file for one task into either 
 
 4. Click **Upload File** to select and upload the target local file. Note that the file name must have a ".csv" suffix and must be no more than 50 MiB.
 
-5. In the **Target Cluster** section, select the target database and the target table, or create a new database or new table. Then click **Next**.
+5. In the **Target** section, select the target database and the target table, or create a new database or new table. Then click **Next**.
 
     To create a new database or a new table, click **+ Create a new database** or **+ Create a new table**, directly enter a database name or a table name to create one, as shown in the following screenshot. TiDB Cloud will automatically create the database and the table according to the CSV data and the configured column name. The name must start with letters (a-z and A-Z) or numbers (0-9), and can contain letters (a-z and A-Z), numbers (0-9), and the underscore (_) characters.
 
