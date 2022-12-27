@@ -1,6 +1,6 @@
 ---
 title: Password Authentication
-summary: Learn how to manage TiDB Cloud console passwords and how to enable multi-factor authentication (MFA).
+summary: Learn how to manage passwords and enable multi-factor authentication (MFA) in the TiDB Cloud console.
 ---
 
 # Password Authentication
