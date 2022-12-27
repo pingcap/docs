@@ -167,7 +167,7 @@ The original SQL statement and the bound statement must have the same text after
 
 #### Create a binding according to a historical execution plan
 
-To fix a SQL statement to use a historical execution plan, you can use `plan_digest` to bind that historical execution plan to the SQL statement, which is more convenient than binding it according to a SQL statement.
+To make the execution plan of a SQL statement fixed to a historical execution plan, you can use `plan_digest` to bind that historical execution plan to the SQL statement, which is more convenient than binding it according to a SQL statement.
 
 > **Warning:**
 >
@@ -330,8 +330,8 @@ This statement outputs the execution plan bindings at the GLOBAL or SESSION leve
 | charset | Character set |
 | collation | Ordering rule |
 | source | The way in which a binding is created, including `manual` (created according to a SQL statement), `history` (created according to a historical execution plan), `capture` (captured automatically by TiDB), and `evolve` (evolved automatically by TiDB) |
-| sql_digest | Digest of normalized SQL statement |
-| plan_digest | Digest of execution plan |
+| sql_digest | Digest of a normalized SQL statement |
+| plan_digest | Digest of an execution plan |
 
 ### Troubleshoot a binding
 
