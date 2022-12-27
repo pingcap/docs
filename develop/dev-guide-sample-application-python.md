@@ -7,13 +7,13 @@ aliases: ['/tidb/dev/dev-guide-outdated-for-python-mysql-connector','/tidb/dev/d
 <!-- markdownlint-disable MD024 -->
 <!-- markdownlint-disable MD029 -->
 
-# Build a Simple CRUD App with TiDB and Golang
+# Build a Simple CRUD App with TiDB and Python
 
-This document describes how to use TiDB and Golang to build a simple CRUD application.
+This document describes how to use TiDB and Python to build a simple CRUD application.
 
 > **Note:**
 >
-> It is recommended to use Golang 1.16 or a later version.
+> It is recommended to use Python 3.10 or a later Python version.
 
 ## Step 1. Launch your TiDB cluster
 
@@ -39,701 +39,753 @@ See [Create a Serverless Tier cluster](/develop/dev-guide-build-cluster-in-cloud
 
 ## Step 2. Get the code
 
-{{< copyable "shell-regular" >}}
-
 ```shell
-git clone https://github.com/pingcap-inc/tidb-example-golang.git
+git clone https://github.com/pingcap-inc/tidb-example-python.git
 ```
 
 <SimpleTab groupId="language">
 
-<div label="Using GORM (Recommended)" value="gorm">
+<div label="Using SQLAlchemy (Recommended)" value="SQLAlchemy">
 
-Compared with GORM, the go-sql-driver/mysql implementation might be not a best practice, because you need to write error handling logic, close `*sql.Rows` manually and cannot reuse code easily, which makes your code slightly redundant.
+[SQLAlchemy](https://www.sqlalchemy.org/) is a popular open-source ORM library for Python. The following instructions take `1.4.44` version as an example.
 
-GORM is a popular open-source ORM library for Golang. The following instructions take `v1.23.5` as an example.
+```python
+import uuid
+from typing import List
 
-To adapt TiDB transactions, write a toolkit [util](https://github.com/pingcap-inc/tidb-example-golang/tree/main/util) according to the following code:
+from sqlalchemy import create_engine, String, Column, Integer, select, func
+from sqlalchemy.orm import declarative_base, sessionmaker
 
-{{< copyable "" >}}
+engine = create_engine('mysql://root:@127.0.0.1:4000/test')
+Base = declarative_base()
+Base.metadata.create_all(engine)
+Session = sessionmaker(bind=engine)
 
-```go
-package util
 
-import (
-    "context"
-    "database/sql"
-)
+class Player(Base):
+    __tablename__ = "player"
 
-type TiDBSqlTx struct {
-    *sql.Tx
-    conn        *sql.Conn
-    pessimistic bool
-}
+    id = Column(String(36), primary_key=True)
+    coins = Column(Integer)
+    goods = Column(Integer)
 
-func TiDBSqlBegin(db *sql.DB, pessimistic bool) (*TiDBSqlTx, error) {
-    ctx := context.Background()
-    conn, err := db.Conn(ctx)
-    if err != nil {
-        return nil, err
-    }
-    if pessimistic {
-        _, err = conn.ExecContext(ctx, "set @@tidb_txn_mode=?", "pessimistic")
-    } else {
-        _, err = conn.ExecContext(ctx, "set @@tidb_txn_mode=?", "optimistic")
-    }
-    if err != nil {
-        return nil, err
-    }
-    tx, err := conn.BeginTx(ctx, nil)
-    if err != nil {
-        return nil, err
-    }
-    return &TiDBSqlTx{
-        conn:        conn,
-        Tx:          tx,
-        pessimistic: pessimistic,
-    }, nil
-}
+    def __repr__(self):
+        return f'Player(id={self.id!r}, coins={self.coins!r}, goods={self.goods!r})'
 
-func (tx *TiDBSqlTx) Commit() error {
-    defer tx.conn.Close()
-    return tx.Tx.Commit()
-}
 
-func (tx *TiDBSqlTx) Rollback() error {
-    defer tx.conn.Close()
-    return tx.Tx.Rollback()
-}
+def random_player(amount: int) -> List[Player]:
+    players = []
+    for _ in range(amount):
+        players.append(Player(id=uuid.uuid4(), coins=10000, goods=10000))
+
+    return players
+
+
+def simple_example() -> None:
+    with Session() as session:
+        # create a player, who has a coin and a goods.
+        session.add(Player(id="test", coins=1, goods=1))
+
+        # get this player, and print it.
+        get_test_stmt = select(Player).where(Player.id == "test")
+        for player in session.scalars(get_test_stmt):
+            print(player)
+
+        # create players with bulk inserts.
+        # insert 1919 players totally, with 114 players per batch.
+        # each player has a random UUID
+        player_list = random_player(1919)
+        for idx in range(0, len(player_list), 114):
+            session.bulk_save_objects(player_list[idx:idx + 114])
+
+        # print the number of players
+        count = session.query(func.count(Player.id)).scalar()
+        print(f'number of players: {count}')
+
+        # print 3 players.
+        three_players = session.query(Player).limit(3).all()
+        for player in three_players:
+            print(player)
+
+        session.commit()
+
+
+def trade_check(session: Session, sell_id: str, buy_id: str, amount: int, price: int) -> bool:
+    # sell player goods check
+    sell_player = session.query(Player.goods).filter(Player.id == sell_id).with_for_update().one()
+    if sell_player.goods < amount:
+        print(f'sell player {sell_id} goods not enough')
+        return False
+
+    # buy player coins check
+    buy_player = session.query(Player.coins).filter(Player.id == buy_id).with_for_update().one()
+    if buy_player.coins < price:
+        print(f'buy player {buy_id} coins not enough')
+        return False
+
+
+def trade(sell_id: str, buy_id: str, amount: int, price: int) -> None:
+    with Session() as session:
+        if trade_check(session, sell_id, buy_id, amount, price) is False:
+            return
+
+        # deduct the goods of seller, and raise his/her the coins
+        session.query(Player).filter(Player.id == sell_id). \
+            update({'goods': Player.goods - amount, 'coins': Player.coins + price})
+        # deduct the coins of buyer, and raise his/her the goods
+        session.query(Player).filter(Player.id == buy_id). \
+            update({'goods': Player.goods + amount, 'coins': Player.coins - price})
+
+        session.commit()
+        print("trade success")
+
+
+def trade_example() -> None:
+    with Session() as session:
+        # create two players
+        # player 1: id is "1", has only 100 coins.
+        # player 2: id is "2", has 114514 coins, and 20 goods.
+        session.add(Player(id="1", coins=100, goods=0))
+        session.add(Player(id="2", coins=114514, goods=20))
+        session.commit()
+
+    # player 1 wants to buy 10 goods from player 2.
+    # it will cost 500 coins, but player 1 cannot afford it.
+    # so this trade will fail, and nobody will lose their coins or goods
+    trade(sell_id="2", buy_id="1", amount=10, price=500)
+
+    # then player 1 has to reduce the incoming quantity to 2.
+    # this trade will be successful
+    trade(sell_id="2", buy_id="1", amount=2, price=100)
+
+    with Session() as session:
+        traders = session.query(Player).filter(Player.id.in_(("1", "2"))).all()
+        for player in traders:
+            print(player)
+        session.commit()
+
+
+simple_example()
+trade_example()
 ```
 
-Change to the `gorm` directory:
+**SQLAlchemy** offered a lot of operations such as session management, CRUD of basic objects, etc. That greatly simplifies the amount of code compared to using drivers directly.
 
-{{< copyable "shell-regular" >}}
+The `Player` class is a mapping of database tables to the application. Each attribute of `Player` corresponds to a field in the `player` table. And **SQLAlchemy** uses the `Player` class to provide more information to using type definitions like `id = Column(String(36), primary_key=True)`. In the above example to indicate the field type and its additional attributes. That means that the `id` field is of type `String`, corresponding to database type `VARCHAR`, length `36`, and it is **primary key**.
 
-```shell
-cd gorm
-```
-
-The structure of this directory is as follows:
-
-```
-.
-├── Makefile
-├── go.mod
-├── go.sum
-└── gorm.go
-```
-
-`gorm.go` is the main body of the `gorm`. Compared with go-sql-driver/mysql, GORM avoids differences in database creation between different databases. It also implements a lot of operations, such as AutoMigrate and CRUD of objects, which greatly simplifies the code.
-
-`Player` is a data entity struct that is a mapping for tables. Each property of a `Player` corresponds to a field in the `player` table. Compared with go-sql-driver/mysql, `Player` in GORM adds struct tags to indicate mapping relationships for more information, such as `gorm:"primaryKey;type:VARCHAR(36);column:id"`.
-
-{{< copyable "" >}}
-
-```go
-
-package main
-
-import (
-    "fmt"
-    "math/rand"
-
-    "github.com/google/uuid"
-    "github.com/pingcap-inc/tidb-example-golang/util"
-
-    "gorm.io/driver/mysql"
-    "gorm.io/gorm"
-    "gorm.io/gorm/clause"
-    "gorm.io/gorm/logger"
-)
-
-type Player struct {
-    ID    string `gorm:"primaryKey;type:VARCHAR(36);column:id"`
-    Coins int    `gorm:"column:coins"`
-    Goods int    `gorm:"column:goods"`
-}
-
-func (*Player) TableName() string {
-    return "player"
-}
-
-func main() {
-    // 1. Configure the example database connection.
-    db := createDB()
-
-    // AutoMigrate for player table
-    db.AutoMigrate(&Player{})
-
-    // 2. Run some simple examples.
-    simpleExample(db)
-
-    // 3. Explore more.
-    tradeExample(db)
-}
-
-func tradeExample(db *gorm.DB) {
-    // Player 1: id is "1", has only 100 coins.
-    // Player 2: id is "2", has 114514 coins, and 20 goods.
-    player1 := &Player{ID: "1", Coins: 100}
-    player2 := &Player{ID: "2", Coins: 114514, Goods: 20}
-
-    // Create two players "by hand", using the INSERT statement on the backend.
-    db.Clauses(clause.OnConflict{UpdateAll: true}).Create(player1)
-    db.Clauses(clause.OnConflict{UpdateAll: true}).Create(player2)
-
-    // Player 1 wants to buy 10 goods from player 2.
-    // It will cost 500 coins, but player 1 cannot afford it.
-    fmt.Println("\nbuyGoods:\n    => this trade will fail")
-    if err := buyGoods(db, player2.ID, player1.ID, 10, 500); err == nil {
-        panic("there shouldn't be success")
-    }
-
-    // So player 1 has to reduce the incoming quantity to two.
-    fmt.Println("\nbuyGoods:\n    => this trade will success")
-    if err := buyGoods(db, player2.ID, player1.ID, 2, 100); err != nil {
-        panic(err)
-    }
-}
-
-func simpleExample(db *gorm.DB) {
-    // Create a player, who has a coin and a goods.
-    if err := db.Clauses(clause.OnConflict{UpdateAll: true}).
-        Create(&Player{ID: "test", Coins: 1, Goods: 1}).Error; err != nil {
-        panic(err)
-    }
-
-    // Get a player.
-    var testPlayer Player
-    db.Find(&testPlayer, "id = ?", "test")
-    fmt.Printf("getPlayer: %+v\n", testPlayer)
-
-    // Create players with bulk inserts. Insert 1919 players totally, with 114 players per batch.
-    bulkInsertPlayers := make([]Player, 1919, 1919)
-    total, batch := 1919, 114
-    for i := 0; i < total; i++ {
-        bulkInsertPlayers[i] = Player{
-            ID:    uuid.New().String(),
-            Coins: rand.Intn(10000),
-            Goods: rand.Intn(10000),
-        }
-    }
-
-    if err := db.Session(&gorm.Session{Logger: db.Logger.LogMode(logger.Error)}).
-        CreateInBatches(bulkInsertPlayers, batch).Error; err != nil {
-        panic(err)
-    }
-
-    // Count players amount.
-    playersCount := int64(0)
-    db.Model(&Player{}).Count(&playersCount)
-    fmt.Printf("countPlayers: %d\n", playersCount)
-
-    // Print 3 players.
-    threePlayers := make([]Player, 3, 3)
-    db.Limit(3).Find(&threePlayers)
-    for index, player := range threePlayers {
-        fmt.Printf("print %d player: %+v\n", index+1, player)
-    }
-}
-
-func createDB() *gorm.DB {
-    dsn := "root:@tcp(127.0.0.1:4000)/test?charset=utf8mb4"
-    db, err := gorm.Open(mysql.Open(dsn), &gorm.Config{
-        Logger: logger.Default.LogMode(logger.Info),
-    })
-    if err != nil {
-        panic(err)
-    }
-
-    return db
-}
-
-func buyGoods(db *gorm.DB, sellID, buyID string, amount, price int) error {
-    return util.TiDBGormBegin(db, true, func(tx *gorm.DB) error {
-        var sellPlayer, buyPlayer Player
-        if err := tx.Clauses(clause.Locking{Strength: "UPDATE"}).
-            Find(&sellPlayer, "id = ?", sellID).Error; err != nil {
-            return err
-        }
-
-        if sellPlayer.ID != sellID || sellPlayer.Goods < amount {
-            return fmt.Errorf("sell player %s goods not enough", sellID)
-        }
-
-        if err := tx.Clauses(clause.Locking{Strength: "UPDATE"}).
-            Find(&buyPlayer, "id = ?", buyID).Error; err != nil {
-            return err
-        }
-
-        if buyPlayer.ID != buyID || buyPlayer.Coins < price {
-            return fmt.Errorf("buy player %s coins not enough", buyID)
-        }
-
-        updateSQL := "UPDATE player set goods = goods + ?, coins = coins + ? WHERE id = ?"
-        if err := tx.Exec(updateSQL, -amount, price, sellID).Error; err != nil {
-            return err
-        }
-
-        if err := tx.Exec(updateSQL, amount, -price, buyID).Error; err != nil {
-            return err
-        }
-
-        fmt.Println("\n[buyGoods]:\n    'trade success'")
-        return nil
-    })
-}
-```
+For more information about how to use **SQLAlchemy**, you can read the [SQLAlchemy document](https://www.sqlalchemy.org/).
 
 </div>
 
-<div label="Using go-sql-driver/mysql" value="sqldriver">
+<div label="Using peewee (Recommended)" value="peewee">
 
-Change to the `sqldriver` directory:
+[peewee](http://docs.peewee-orm.com/en/latest/) is a popular open-source ORM library for Python. The following instructions take `3.15.4` version as an example.
 
-{{< copyable "shell-regular" >}}
+```python
+import os
+import uuid
+from typing import List
 
-```shell
-cd sqldriver
-```
+from peewee import *
 
-The structure of this directory is as follows:
+from playhouse.db_url import connect
 
-```
-.
-├── Makefile
-├── dao.go
-├── go.mod
-├── go.sum
-├── sql
-│   └── dbinit.sql
-├── sql.go
-└── sqldriver.go
-```
+db = connect('mysql://root:@127.0.0.1:4000/test')
 
-You can find initialization statements for the table creation in `dbinit.sql`:
 
-{{< copyable "sql" >}}
+class Player(Model):
+    id = CharField(max_length=36, primary_key=True)
+    coins = IntegerField()
+    goods = IntegerField()
 
-```sql
-USE test;
-DROP TABLE IF EXISTS player;
+    class Meta:
+        database = db
+        table_name = "player"
 
-CREATE TABLE player (
-    `id` VARCHAR(36),
-    `coins` INTEGER,
-    `goods` INTEGER,
-   PRIMARY KEY (`id`)
-);
-```
 
-`sqldriver.go` is the main body of the `sqldriver`. TiDB is highly compatible with the MySQL protocol, so you need to initialize a MySQL source instance `db, err := sql.Open("mysql", dsn)` to connect to TiDB. Then, you can use `dao.go` to read, edit, add, and delete data.
-
-{{< copyable "" >}}
-
-```go
-package main
-
-import (
-    "database/sql"
-    "fmt"
-
-    _ "github.com/go-sql-driver/mysql"
-)
-
-func main() {
-    // 1. Configure the example database connection.
-    dsn := "root:@tcp(127.0.0.1:4000)/test?charset=utf8mb4"
-    openDB("mysql", dsn, func(db *sql.DB) {
-        // 2. Run some simple examples.
-        simpleExample(db)
-
-        // 3. Explore more.
-        tradeExample(db)
-    })
-}
-
-func simpleExample(db *sql.DB) {
-    // Create a player, who has a coin and a goods.
-    err := createPlayer(db, Player{ID: "test", Coins: 1, Goods: 1})
-    if err != nil {
-        panic(err)
-    }
-
-    // Get a player.
-    testPlayer, err := getPlayer(db, "test")
-    if err != nil {
-        panic(err)
-    }
-    fmt.Printf("getPlayer: %+v\n", testPlayer)
-
-    // Create players with bulk inserts. Insert 1919 players totally, with 114 players per batch.
-
-    err = bulkInsertPlayers(db, randomPlayers(1919), 114)
-    if err != nil {
-        panic(err)
-    }
-
-    // Count players amount.
-    playersCount, err := getCount(db)
-    if err != nil {
-        panic(err)
-    }
-    fmt.Printf("countPlayers: %d\n", playersCount)
-
-    // Print 3 players.
-    threePlayers, err := getPlayerByLimit(db, 3)
-    if err != nil {
-        panic(err)
-    }
-    for index, player := range threePlayers {
-        fmt.Printf("print %d player: %+v\n", index+1, player)
-    }
-}
-
-func tradeExample(db *sql.DB) {
-    // Player 1: id is "1", has only 100 coins.
-    // Player 2: id is "2", has 114514 coins, and 20 goods.
-    player1 := Player{ID: "1", Coins: 100}
-    player2 := Player{ID: "2", Coins: 114514, Goods: 20}
-
-    // Create two players "by hand", using the INSERT statement on the backend.
-    if err := createPlayer(db, player1); err != nil {
-        panic(err)
-    }
-    if err := createPlayer(db, player2); err != nil {
-        panic(err)
-    }
-
-    // Player 1 wants to buy 10 goods from player 2.
-    // It will cost 500 coins, but player 1 cannot afford it.
-    fmt.Println("\nbuyGoods:\n    => this trade will fail")
-    if err := buyGoods(db, player2.ID, player1.ID, 10, 500); err == nil {
-        panic("there shouldn't be success")
-    }
-
-    // So player 1 has to reduce the incoming quantity to two.
-    fmt.Println("\nbuyGoods:\n    => this trade will success")
-    if err := buyGoods(db, player2.ID, player1.ID, 2, 100); err != nil {
-        panic(err)
-    }
-}
-
-func openDB(driverName, dataSourceName string, runnable func(db *sql.DB)) {
-    db, err := sql.Open(driverName, dataSourceName)
-    if err != nil {
-        panic(err)
-    }
-    defer db.Close()
-
-    runnable(db)
-}
-```
-
-To adapt TiDB transactions, write a toolkit [util](https://github.com/pingcap-inc/tidb-example-golang/tree/main/util) according to the following code:
-
-{{< copyable "" >}}
-
-```go
-package util
-
-import (
-    "context"
-    "database/sql"
-)
-
-type TiDBSqlTx struct {
-    *sql.Tx
-    conn        *sql.Conn
-    pessimistic bool
-}
-
-func TiDBSqlBegin(db *sql.DB, pessimistic bool) (*TiDBSqlTx, error) {
-    ctx := context.Background()
-    conn, err := db.Conn(ctx)
-    if err != nil {
-        return nil, err
-    }
-    if pessimistic {
-        _, err = conn.ExecContext(ctx, "set @@tidb_txn_mode=?", "pessimistic")
-    } else {
-        _, err = conn.ExecContext(ctx, "set @@tidb_txn_mode=?", "optimistic")
-    }
-    if err != nil {
-        return nil, err
-    }
-    tx, err := conn.BeginTx(ctx, nil)
-    if err != nil {
-        return nil, err
-    }
-    return &TiDBSqlTx{
-        conn:        conn,
-        Tx:          tx,
-        pessimistic: pessimistic,
-    }, nil
-}
-
-func (tx *TiDBSqlTx) Commit() error {
-    defer tx.conn.Close()
-    return tx.Tx.Commit()
-}
-
-func (tx *TiDBSqlTx) Rollback() error {
-    defer tx.conn.Close()
-    return tx.Tx.Rollback()
-}
-```
-
-`dao.go` defines a set of data manipulation methods to provide the ability to write data. This is also the core part of this example.
-
-{{< copyable "" >}}
-
-```go
-package main
-
-import (
-    "database/sql"
-    "fmt"
-    "math/rand"
-    "strings"
-
-    "github.com/google/uuid"
-    "github.com/pingcap-inc/tidb-example-golang/util"
-)
-
-type Player struct {
-    ID    string
-    Coins int
-    Goods int
-}
-
-// createPlayer create a player
-func createPlayer(db *sql.DB, player Player) error {
-    _, err := db.Exec(CreatePlayerSQL, player.ID, player.Coins, player.Goods)
-    return err
-}
-
-// getPlayer get a player
-func getPlayer(db *sql.DB, id string) (Player, error) {
-    var player Player
-
-    rows, err := db.Query(GetPlayerSQL, id)
-    if err != nil {
-        return player, err
-    }
-    defer rows.Close()
-
-    if rows.Next() {
-        err = rows.Scan(&player.ID, &player.Coins, &player.Goods)
-        if err == nil {
-            return player, nil
-        } else {
-            return player, err
-        }
-    }
-
-    return player, fmt.Errorf("can not found player")
-}
-
-// getPlayerByLimit get players by limit
-func getPlayerByLimit(db *sql.DB, limit int) ([]Player, error) {
-    var players []Player
-
-    rows, err := db.Query(GetPlayerByLimitSQL, limit)
-    if err != nil {
-        return players, err
-    }
-    defer rows.Close()
-
-    for rows.Next() {
-        player := Player{}
-        err = rows.Scan(&player.ID, &player.Coins, &player.Goods)
-        if err == nil {
-            players = append(players, player)
-        } else {
-            return players, err
-        }
-    }
-
-    return players, nil
-}
-
-// bulk-insert players
-func bulkInsertPlayers(db *sql.DB, players []Player, batchSize int) error {
-    tx, err := util.TiDBSqlBegin(db, true)
-    if err != nil {
-        return err
-    }
-
-    stmt, err := tx.Prepare(buildBulkInsertSQL(batchSize))
-    if err != nil {
-        return err
-    }
-
-    defer stmt.Close()
-
-    for len(players) > batchSize {
-        if _, err := stmt.Exec(playerToArgs(players[:batchSize])...); err != nil {
-            tx.Rollback()
-            return err
-        }
-
-        players = players[batchSize:]
-    }
-
-    if len(players) != 0 {
-        if _, err := tx.Exec(buildBulkInsertSQL(len(players)), playerToArgs(players)...); err != nil {
-            tx.Rollback()
-            return err
-        }
-    }
-
-    if err := tx.Commit(); err != nil {
-        tx.Rollback()
-        return err
-    }
-
-    return nil
-}
-
-func getCount(db *sql.DB) (int, error) {
-    count := 0
-
-    rows, err := db.Query(GetCountSQL)
-    if err != nil {
-        return count, err
-    }
-
-    defer rows.Close()
-
-    if rows.Next() {
-        if err := rows.Scan(&count); err != nil {
-            return count, err
-        }
-    }
-
-    return count, nil
-}
-
-func buyGoods(db *sql.DB, sellID, buyID string, amount, price int) error {
-    var sellPlayer, buyPlayer Player
-
-    tx, err := util.TiDBSqlBegin(db, true)
-    if err != nil {
-        return err
-    }
-
-    buyExec := func() error {
-        stmt, err := tx.Prepare(GetPlayerWithLockSQL)
-        if err != nil {
-            return err
-        }
-        defer stmt.Close()
-
-        sellRows, err := stmt.Query(sellID)
-        if err != nil {
-            return err
-        }
-        defer sellRows.Close()
-
-        if sellRows.Next() {
-            if err := sellRows.Scan(&sellPlayer.ID, &sellPlayer.Coins, &sellPlayer.Goods); err != nil {
-                return err
-            }
-        }
-        sellRows.Close()
-
-        if sellPlayer.ID != sellID || sellPlayer.Goods < amount {
-            return fmt.Errorf("sell player %s goods not enough", sellID)
-        }
-
-        buyRows, err := stmt.Query(buyID)
-        if err != nil {
-            return err
-        }
-        defer buyRows.Close()
-
-        if buyRows.Next() {
-            if err := buyRows.Scan(&buyPlayer.ID, &buyPlayer.Coins, &buyPlayer.Goods); err != nil {
-                return err
-            }
-        }
-        buyRows.Close()
-
-        if buyPlayer.ID != buyID || buyPlayer.Coins < price {
-            return fmt.Errorf("buy player %s coins not enough", buyID)
-        }
-
-        updateStmt, err := tx.Prepare(UpdatePlayerSQL)
-        if err != nil {
-            return err
-        }
-        defer updateStmt.Close()
-
-        if _, err := updateStmt.Exec(-amount, price, sellID); err != nil {
-            return err
-        }
-
-        if _, err := updateStmt.Exec(amount, -price, buyID); err != nil {
-            return err
-        }
-
-        return nil
-    }
-
-    err = buyExec()
-    if err == nil {
-        fmt.Println("\n[buyGoods]:\n    'trade success'")
-        tx.Commit()
-    } else {
-        tx.Rollback()
-    }
-
-    return err
-}
-
-func playerToArgs(players []Player) []interface{} {
-    var args []interface{}
-    for _, player := range players {
-        args = append(args, player.ID, player.Coins, player.Goods)
-    }
-    return args
-}
-
-func buildBulkInsertSQL(amount int) string {
-    return CreatePlayerSQL + strings.Repeat(",(?,?,?)", amount-1)
-}
-
-func randomPlayers(amount int) []Player {
-    players := make([]Player, amount, amount)
-    for i := 0; i < amount; i++ {
-        players[i] = Player{
-            ID:    uuid.New().String(),
-            Coins: rand.Intn(10000),
-            Goods: rand.Intn(10000),
-        }
-    }
+def random_player(amount: int) -> List[Player]:
+    players = []
+    for _ in range(amount):
+        players.append(Player(id=uuid.uuid4(), coins=10000, goods=10000))
 
     return players
-}
+
+
+def simple_example() -> None:
+    # create a player, who has a coin and a goods.
+    Player.create(id="test", coins=1, goods=1)
+
+    # get this player, and print it.
+    test_player = Player.select().where(Player.id == "test").get()
+    print(f'id:{test_player.id}, coins:{test_player.coins}, goods:{test_player.goods}')
+
+    # create players with bulk inserts.
+    # insert 1919 players totally, with 114 players per batch.
+    # each player has a random UUID
+    player_list = random_player(1919)
+    Player.bulk_create(player_list, 114)
+
+    # print the number of players
+    count = Player.select().count()
+    print(f'number of players: {count}')
+    
+    # print 3 players.
+    three_players = Player.select().limit(3)
+    for player in three_players:
+        print(f'id:{player.id}, coins:{player.coins}, goods:{player.goods}')
+
+
+def trade_check(sell_id: str, buy_id: str, amount: int, price: int) -> bool:
+    sell_goods = Player.select(Player.goods).where(Player.id == sell_id).get().goods
+    if sell_goods < amount:
+        print(f'sell player {sell_id} goods not enough')
+        return False
+
+    buy_coins = Player.select(Player.coins).where(Player.id == buy_id).get().coins
+    if buy_coins < price:
+        print(f'buy player {buy_id} coins not enough')
+        return False
+
+    return True
+
+
+def trade(sell_id: str, buy_id: str, amount: int, price: int) -> None:
+    with db.atomic() as txn:
+        try:
+            if trade_check(sell_id, buy_id, amount, price) is False:
+                txn.rollback()
+                return
+
+            # deduct the goods of seller, and raise his/her the coins
+            Player.update(goods=Player.goods - amount, coins=Player.coins + price).where(Player.id == sell_id).execute()
+            # deduct the coins of buyer, and raise his/her the goods
+            Player.update(goods=Player.goods + amount, coins=Player.coins - price).where(Player.id == buy_id).execute()
+
+        except Exception as err:
+            txn.rollback()
+            print(f'something went wrong: {err}')
+        else:
+            txn.commit()
+            print("trade success")
+
+
+def trade_example() -> None:
+    # create two players
+    # player 1: id is "1", has only 100 coins.
+    # player 2: id is "2", has 114514 coins, and 20 goods.
+    Player.create(id="1", coins=100, goods=0)
+    Player.create(id="2", coins=114514, goods=20)
+
+    # player 1 wants to buy 10 goods from player 2.
+    # it will cost 500 coins, but player 1 cannot afford it.
+    # so this trade will fail, and nobody will lose their coins or goods
+    trade(sell_id="2", buy_id="1", amount=10, price=500)
+
+    # then player 1 has to reduce the incoming quantity to 2.
+    # this trade will be successful
+    trade(sell_id="2", buy_id="1", amount=2, price=100)
+
+    # let's take a look for player 1 and player 2 currently
+    after_trade_players = Player.select().where(Player.id.in_(["1", "2"]))
+    for player in after_trade_players:
+        print(f'id:{player.id}, coins:{player.coins}, goods:{player.goods}')
+
+
+db.connect()
+
+# recreate the player table
+db.drop_tables([Player])
+db.create_tables([Player])
+
+simple_example()
+trade_example()
 ```
 
-`sql.go` defines SQL statements as constants:
+**peewee** offered a lot of operations such as session management, CRUD of basic objects, etc. That greatly simplifies the amount of code compared to using drivers directly.
 
-{{< copyable "" >}}
+The `Player` class is a mapping of database tables to the application. Each attribute of `Player` corresponds to a field in the `player` table. And **peewee** uses the `Player` class to provide more information to using type definitions like `id = CharField(max_length=36, primary_key=True)`. In the above example to indicate the field type and its additional attributes. That means that the `id` field is of type `String`, corresponding to database type `VARCHAR`, length `36`, and it is **primary key**.
 
-```go
-package main
+For more information about how to use **peewee**, you can read the [peewee document](http://docs.peewee-orm.com/en/latest/).
 
-const (
-    CreatePlayerSQL      = "INSERT INTO player (id, coins, goods) VALUES (?, ?, ?)"
-    GetPlayerSQL         = "SELECT id, coins, goods FROM player WHERE id = ?"
-    GetCountSQL          = "SELECT count(*) FROM player"
-    GetPlayerWithLockSQL = GetPlayerSQL + " FOR UPDATE"
-    UpdatePlayerSQL      = "UPDATE player set goods = goods + ?, coins = coins + ? WHERE id = ?"
-    GetPlayerByLimitSQL  = "SELECT id, coins, goods FROM player LIMIT ?"
-)
+</div>
+
+<div label="Using mysqlclient" value="mysqlclient">
+
+[mysqlclient](https://pypi.org/project/mysqlclient/) is a popular open-source driver for Python. The following instructions take `2.1.1` version as an example. Python's driver is extremely easy to use compared to other languages. However, because it cannot shield the underlying implementation and requires manual control of transactions, it is still recommended to use ORM for programming if you don't have a lot of scenarios where you have to use SQL. This can reduce the coupling of the program.
+
+```python
+import uuid
+from typing import List
+
+import MySQLdb
+from MySQLdb import Connection
+from MySQLdb.cursors import Cursor
+
+def get_connection(autocommit: bool = True) -> MySQLdb.Connection:
+    return MySQLdb.connect(
+        host="127.0.0.1",
+        port=4000,
+        user="root",
+        password="",
+        database="test",
+        autocommit=autocommit
+    )
+
+
+def create_player(cursor: Cursor, player: tuple) -> None:
+    cursor.execute("INSERT INTO player (id, coins, goods) VALUES (%s, %s, %s)", player)
+
+
+def get_player(cursor: Cursor, player_id: str) -> tuple:
+    cursor.execute("SELECT id, coins, goods FROM player WHERE id = %s", (player_id,))
+    return cursor.fetchone()
+
+
+def get_players_with_limit(cursor: Cursor, limit: int) -> List[tuple]:
+    cursor.execute("SELECT id, coins, goods FROM player LIMIT %s", (limit,))
+    return cursor.fetchall()
+
+
+def random_player(amount: int) -> List[tuple]:
+    players = []
+    for _ in range(amount):
+        players.append((uuid.uuid4(), 10000, 10000))
+
+    return players
+
+
+def bulk_create_player(cursor: Cursor, players: List[tuple]) -> None:
+    cursor.executemany("INSERT INTO player (id, coins, goods) VALUES (%s, %s, %s)", players)
+
+
+def get_count(cursor: Cursor) -> None:
+    cursor.execute("SELECT count(*) FROM player")
+    return cursor.fetchone()[0]
+
+
+def trade_check(cursor: Cursor, sell_id: str, buy_id: str, amount: int, price: int) -> bool:
+    get_player_with_lock_sql = "SELECT coins, goods FROM player WHERE id = %s FOR UPDATE"
+
+    # sell player goods check
+    cursor.execute(get_player_with_lock_sql, (sell_id,))
+    _, sell_goods = cursor.fetchone()
+    if sell_goods < amount:
+        print(f'sell player {sell_id} goods not enough')
+        return False
+
+    # buy player coins check
+    cursor.execute(get_player_with_lock_sql, (buy_id,))
+    buy_coins, _ = cursor.fetchone()
+    if buy_coins < price:
+        print(f'buy player {buy_id} coins not enough')
+        return False
+
+
+def trade_update(cursor: Cursor, sell_id: str, buy_id: str, amount: int, price: int) -> None:
+    update_player_sql = "UPDATE player set goods = goods + %s, coins = coins + %s WHERE id = %s"
+
+    # deduct the goods of seller, and raise his/her the coins
+    cursor.execute(update_player_sql, (-amount, price, sell_id))
+    # deduct the coins of buyer, and raise his/her the goods
+    cursor.execute(update_player_sql, (amount, -price, buy_id))
+
+
+def trade(connection: Connection, sell_id: str, buy_id: str, amount: int, price: int) -> None:
+    with connection.cursor() as cursor:
+        if trade_check(cursor, sell_id, buy_id, amount, price) is False:
+            connection.rollback()
+            return
+
+        try:
+            trade_update(cursor, sell_id, buy_id, amount, price)
+        except Exception as err:
+            connection.rollback()
+            print(f'something went wrong: {err}')
+        else:
+            connection.commit()
+            print("trade success")
+
+
+def simple_example() -> None:
+    with get_connection(autocommit=True) as conn:
+        with conn.cursor() as cur:
+            # create a player, who has a coin and a goods.
+            create_player(cur, ("test", 1, 1))
+
+            # get this player, and print it.
+            test_player = get_player(cur, "test")
+            print(f'id:{test_player[0]}, coins:{test_player[1]}, goods:{test_player[2]}')
+
+            # create players with bulk inserts.
+            # insert 1919 players totally, with 114 players per batch.
+            # each player has a random UUID
+            player_list = random_player(1919)
+            for idx in range(0, len(player_list), 114):
+                bulk_create_player(cur, player_list[idx:idx + 114])
+
+            # print the number of players
+            count = get_count(cur)
+            print(f'number of players: {count}')
+
+            # print 3 players.
+            three_players = get_players_with_limit(cur, 3)
+            for player in three_players:
+                print(f'id:{player[0]}, coins:{player[1]}, goods:{player[2]}')
+
+
+def trade_example() -> None:
+    with get_connection(autocommit=False) as conn:
+        with conn.cursor() as cur:
+            # create two players
+            # player 1: id is "1", has only 100 coins.
+            # player 2: id is "2", has 114514 coins, and 20 goods.
+            create_player(cur, ("1", 100, 0))
+            create_player(cur, ("2", 114514, 20))
+            conn.commit()
+
+        # player 1 wants to buy 10 goods from player 2.
+        # it will cost 500 coins, but player 1 cannot afford it.
+        # so this trade will fail, and nobody will lose their coins or goods
+        trade(conn, sell_id="2", buy_id="1", amount=10, price=500)
+
+        # then player 1 has to reduce the incoming quantity to 2.
+        # this trade will be successful
+        trade(conn, sell_id="2", buy_id="1", amount=2, price=100)
+
+        # let's take a look for player 1 and player 2 currently
+        with conn.cursor() as cur:
+            _, player1_coin, player1_goods = get_player(cur, "1")
+            print(f'id:1, coins:{player1_coin}, goods:{player1_goods}')
+            _, player2_coin, player2_goods = get_player(cur, "2")
+            print(f'id:2, coins:{player2_coin}, goods:{player2_goods}')
+
+
+simple_example()
+trade_example()
 ```
+
+The driver has a much lower level of encapsulation, so we can see a lot of SQL inside the program. `Player`, which is queried inside the program, will be represented as a tuple, unlike ORM, because there is no data object.
+
+For more information on how to use mysqlclient, you can read the [mysqlclient documentation](https://mysqlclient.readthedocs.io/).
+
+</div>
+
+<div label="Using PyMySQL" value="PyMySQL">
+
+[PyMySQL](https://pypi.org/project/PyMySQL/) is a popular open-source driver for Python. The following instructions take `1.0.2` version as an example. Python's driver is extremely easy to use compared to other languages. However, because it cannot shield the underlying implementation and requires manual control of transactions, it is still recommended to use ORM for programming if you don't have a lot of scenarios where you have to use SQL. This can reduce the coupling of the program.
+
+```python
+import uuid
+from typing import List
+
+import pymysql.cursors
+from pymysql import Connection
+from pymysql.cursors import DictCursor
+
+
+def get_connection(autocommit: bool = False) -> Connection:
+    return pymysql.connect(host='127.0.0.1',
+                           port=4000,
+                           user='root',
+                           password='',
+                           database='test',
+                           cursorclass=DictCursor,
+                           autocommit=autocommit)
+
+
+def create_player(cursor: DictCursor, player: tuple) -> None:
+    cursor.execute("INSERT INTO player (id, coins, goods) VALUES (%s, %s, %s)", player)
+
+
+def get_player(cursor: DictCursor, player_id: str) -> dict:
+    cursor.execute("SELECT id, coins, goods FROM player WHERE id = %s", (player_id,))
+    return cursor.fetchone()
+
+
+def get_players_with_limit(cursor: DictCursor, limit: int) -> tuple:
+    cursor.execute("SELECT id, coins, goods FROM player LIMIT %s", (limit,))
+    return cursor.fetchall()
+
+
+def random_player(amount: int) -> List[tuple]:
+    players = []
+    for _ in range(amount):
+        players.append((uuid.uuid4(), 10000, 10000))
+
+    return players
+
+
+def bulk_create_player(cursor: DictCursor, players: List[tuple]) -> None:
+    cursor.executemany("INSERT INTO player (id, coins, goods) VALUES (%s, %s, %s)", players)
+
+
+def get_count(cursor: DictCursor) -> int:
+    cursor.execute("SELECT count(*) as count FROM player")
+    return cursor.fetchone()['count']
+
+
+def trade_check(cursor: DictCursor, sell_id: str, buy_id: str, amount: int, price: int) -> bool:
+    get_player_with_lock_sql = "SELECT coins, goods FROM player WHERE id = %s FOR UPDATE"
+
+    # sell player goods check
+    cursor.execute(get_player_with_lock_sql, (sell_id,))
+    seller = cursor.fetchone()
+    if seller['goods'] < amount:
+        print(f'sell player {sell_id} goods not enough')
+        return False
+
+    # buy player coins check
+    cursor.execute(get_player_with_lock_sql, (buy_id,))
+    buyer = cursor.fetchone()
+    if buyer['coins'] < price:
+        print(f'buy player {buy_id} coins not enough')
+        return False
+
+
+def trade_update(cursor: DictCursor, sell_id: str, buy_id: str, amount: int, price: int) -> None:
+    update_player_sql = "UPDATE player set goods = goods + %s, coins = coins + %s WHERE id = %s"
+
+    # deduct the goods of seller, and raise his/her the coins
+    cursor.execute(update_player_sql, (-amount, price, sell_id))
+    # deduct the coins of buyer, and raise his/her the goods
+    cursor.execute(update_player_sql, (amount, -price, buy_id))
+
+
+def trade(connection: Connection, sell_id: str, buy_id: str, amount: int, price: int) -> None:
+    with connection.cursor() as cursor:
+        if trade_check(cursor, sell_id, buy_id, amount, price) is False:
+            connection.rollback()
+            return
+
+        try:
+            trade_update(cursor, sell_id, buy_id, amount, price)
+        except Exception as err:
+            connection.rollback()
+            print(f'something went wrong: {err}')
+        else:
+            connection.commit()
+            print("trade success")
+
+
+def simple_example() -> None:
+    with get_connection(autocommit=True) as connection:
+        with connection.cursor() as cur:
+            # create a player, who has a coin and a goods.
+            create_player(cur, ("test", 1, 1))
+
+            # get this player, and print it.
+            test_player = get_player(cur, "test")
+            print(test_player)
+
+            # create players with bulk inserts.
+            # insert 1919 players totally, with 114 players per batch.
+            # each player has a random UUID
+            player_list = random_player(1919)
+            for idx in range(0, len(player_list), 114):
+                bulk_create_player(cur, player_list[idx:idx + 114])
+
+            # print the number of players
+            count = get_count(cur)
+            print(f'number of players: {count}')
+
+            # print 3 players.
+            three_players = get_players_with_limit(cur, 3)
+            for player in three_players:
+                print(player)
+
+
+def trade_example() -> None:
+    with get_connection(autocommit=False) as connection:
+        with connection.cursor() as cur:
+            # create two players
+            # player 1: id is "1", has only 100 coins.
+            # player 2: id is "2", has 114514 coins, and 20 goods.
+            create_player(cur, ("1", 100, 0))
+            create_player(cur, ("2", 114514, 20))
+            connection.commit()
+
+        # player 1 wants to buy 10 goods from player 2.
+        # it will cost 500 coins, but player 1 cannot afford it.
+        # so this trade will fail, and nobody will lose their coins or goods
+        trade(connection, sell_id="2", buy_id="1", amount=10, price=500)
+
+        # then player 1 has to reduce the incoming quantity to 2.
+        # this trade will be successful
+        trade(connection, sell_id="2", buy_id="1", amount=2, price=100)
+
+        # let's take a look for player 1 and player 2 currently
+        with connection.cursor() as cur:
+            print(get_player(cur, "1"))
+            print(get_player(cur, "2"))
+
+
+simple_example()
+trade_example()
+```
+
+The driver has a much lower level of encapsulation, so we can see a lot of SQL inside the program. `Player`, which is queried inside the program, will be represented as a dict, unlike ORM, because there is no data object.
+
+For more information on how to use PyMySQL, you can read the [PyMySQL documentation](https://pymysql.readthedocs.io/en/latest/).
+
+</div>
+
+<div label="Using mysql-connector-python" value="mysql-connector-python">
+
+[mysql-connector-python](https://dev.mysql.com/doc/connector-python/en/) is a popular open-source driver for Python. The following instructions take `8.0.31` version as an example. Python's driver is extremely easy to use compared to other languages. However, because it cannot shield the underlying implementation and requires manual control of transactions, it is still recommended to use ORM for programming if you don't have a lot of scenarios where you have to use SQL. This can reduce the coupling of the program.
+
+```python
+import uuid
+from typing import List
+
+from mysql.connector import connect, MySQLConnection
+from mysql.connector.cursor import MySQLCursor
+
+
+def get_connection(autocommit: bool = True) -> MySQLConnection:
+    connection = connect(host='127.0.0.1',
+                         port=4000,
+                         user='root',
+                         password='',
+                         database='test')
+    connection.autocommit = autocommit
+    return connection
+
+
+def create_player(cursor: MySQLCursor, player: tuple) -> None:
+    cursor.execute("INSERT INTO player (id, coins, goods) VALUES (%s, %s, %s)", player)
+
+
+def get_player(cursor: MySQLCursor, player_id: str) -> tuple:
+    cursor.execute("SELECT id, coins, goods FROM player WHERE id = %s", (player_id,))
+    return cursor.fetchone()
+
+
+def get_players_with_limit(cursor: MySQLCursor, limit: int) -> List[tuple]:
+    cursor.execute("SELECT id, coins, goods FROM player LIMIT %s", (limit,))
+    return cursor.fetchall()
+
+
+def random_player(amount: int) -> List[tuple]:
+    players = []
+    for _ in range(amount):
+        players.append((str(uuid.uuid4()), 10000, 10000))
+
+    return players
+
+
+def bulk_create_player(cursor: MySQLCursor, players: List[tuple]) -> None:
+    cursor.executemany("INSERT INTO player (id, coins, goods) VALUES (%s, %s, %s)", players)
+
+
+def get_count(cursor: MySQLCursor) -> int:
+    cursor.execute("SELECT count(*) FROM player")
+    return cursor.fetchone()[0]
+
+
+def trade_check(cursor: MySQLCursor, sell_id: str, buy_id: str, amount: int, price: int) -> bool:
+    get_player_with_lock_sql = "SELECT coins, goods FROM player WHERE id = %s FOR UPDATE"
+
+    # sell player goods check
+    cursor.execute(get_player_with_lock_sql, (sell_id,))
+    _, sell_goods = cursor.fetchone()
+    if sell_goods < amount:
+        print(f'sell player {sell_id} goods not enough')
+        return False
+
+    # buy player coins check
+    cursor.execute(get_player_with_lock_sql, (buy_id,))
+    buy_coins, _ = cursor.fetchone()
+    if buy_coins < price:
+        print(f'buy player {buy_id} coins not enough')
+        return False
+
+
+def trade_update(cursor: MySQLCursor, sell_id: str, buy_id: str, amount: int, price: int) -> None:
+    update_player_sql = "UPDATE player set goods = goods + %s, coins = coins + %s WHERE id = %s"
+
+    # deduct the goods of seller, and raise his/her the coins
+    cursor.execute(update_player_sql, (-amount, price, sell_id))
+    # deduct the coins of buyer, and raise his/her the goods
+    cursor.execute(update_player_sql, (amount, -price, buy_id))
+
+
+def trade(connection: MySQLConnection, sell_id: str, buy_id: str, amount: int, price: int) -> None:
+    with connection.cursor() as cursor:
+        if trade_check(cursor, sell_id, buy_id, amount, price) is False:
+            connection.rollback()
+            return
+
+        try:
+            trade_update(cursor, sell_id, buy_id, amount, price)
+        except Exception as err:
+            connection.rollback()
+            print(f'something went wrong: {err}')
+        else:
+            connection.commit()
+            print("trade success")
+
+
+def simple_example() -> None:
+    with get_connection(autocommit=True) as connection:
+        with connection.cursor() as cur:
+            # create a player, who has a coin and a goods.
+            create_player(cur, ("test", 1, 1))
+
+            # get this player, and print it.
+            test_player = get_player(cur, "test")
+            print(f'id:{test_player[0]}, coins:{test_player[1]}, goods:{test_player[2]}')
+
+            # create players with bulk inserts.
+            # insert 1919 players totally, with 114 players per batch.
+            # each player has a random UUID
+            player_list = random_player(1919)
+            for idx in range(0, len(player_list), 114):
+                bulk_create_player(cur, player_list[idx:idx + 114])
+
+            # print the number of players
+            count = get_count(cur)
+            print(f'number of players: {count}')
+
+            # print 3 players.
+            three_players = get_players_with_limit(cur, 3)
+            for player in three_players:
+                print(f'id:{player[0]}, coins:{player[1]}, goods:{player[2]}')
+
+
+def trade_example() -> None:
+    with get_connection(autocommit=False) as conn:
+        with conn.cursor() as cur:
+            # create two players
+            # player 1: id is "1", has only 100 coins.
+            # player 2: id is "2", has 114514 coins, and 20 goods.
+            create_player(cur, ("1", 100, 0))
+            create_player(cur, ("2", 114514, 20))
+            conn.commit()
+
+        # player 1 wants to buy 10 goods from player 2.
+        # it will cost 500 coins, but player 1 cannot afford it.
+        # so this trade will fail, and nobody will lose their coins or goods
+        trade(conn, sell_id="2", buy_id="1", amount=10, price=500)
+
+        # then player 1 has to reduce the incoming quantity to 2.
+        # this trade will be successful
+        trade(conn, sell_id="2", buy_id="1", amount=2, price=100)
+
+        # let's take a look for player 1 and player 2 currently
+        with conn.cursor() as cur:
+            _, player1_coin, player1_goods = get_player(cur, "1")
+            print(f'id:1, coins:{player1_coin}, goods:{player1_goods}')
+            _, player2_coin, player2_goods = get_player(cur, "2")
+            print(f'id:2, coins:{player2_coin}, goods:{player2_goods}')
+
+
+simple_example()
+trade_example()
+```
+
+The driver has a much lower level of encapsulation, so we can see a lot of SQL inside the program. `Player`, which is queried inside the program, will be represented as a tuple, unlike ORM, because there is no data object.
+
+For more information on how to use mysql-connector-python, you can read the [mysql-connector-python documentation](https://dev.mysql.com/doc/connector-python/en/).
 
 </div>
 
@@ -745,60 +797,72 @@ The following content introduces how to run the code step by step.
 
 ### Step 3.1 Table initialization
 
-<SimpleTab groupId="language">
+This example requires manual initialization of the table, or if you are using a local cluster, you can simply run:
 
-<div label="Using GORM (Recommended)" value="gorm">
+<SimpleTab groupId="cli">
 
-No need to initialize tables manually.
+<div label="MySQL CLI" value="mysql-client">
+
+```shell
+mysql --host 127.0.0.1 --port 4000 -u root < player_init.sql
+```
 
 </div>
 
-<div label="Using go-sql-driver/mysql" value="sqldriver">
-
-<CustomContent platform="tidb">
-
-When using go-sql-driver/mysql, you need to initialize the database tables manually. If you are using a local cluster, and MySQL client has been installed locally, you can run it directly in the `sqldriver` directory:
-
-{{< copyable "shell-regular" >}}
+<div label="MyCLI" value="mycli">
 
 ```shell
-make mysql
+mycli --host 127.0.0.1 --port 4000 -u root --no-warn < player_init.sql
 ```
-
-Or you can execute the following command:
-
-{{< copyable "shell-regular" >}}
-
-```shell
-mysql --host 127.0.0.1 --port 4000 -u root<sql/dbinit.sql
-```
-
-If you are using a non-local cluster or MySQL client has not been installed, connect to your cluster and run the statement in the `sql/dbinit.sql` file.
-
-</CustomContent>
-
-<CustomContent platform="tidb-cloud">
-
-When using go-sql-driver/mysql, you need to connect to your cluster and run the statement in the `sql/dbinit.sql` file to initialize the database tables manually.
-
-</CustomContent>
 
 </div>
 
 </SimpleTab>
 
+If you are not using a local cluster, or do not have a command line client installed, please use your preferred method (e.g. GUI tools such as **Navicat**, **DBeaver**, etc.) to log in to the cluster directly and run the SQL statements in the `player_init.sql` file.
+
 ### Step 3.2 Modify parameters for TiDB Cloud
+
+If you are using a **TiDB Cloud Serverless Tier** cluster, you will need to use the system local CA here and note the certificate path as `<ca_path>` for subsequent reference. Please refer to the following system-related certificate path addresses:
+
+<SimpleTab groupId="ca">
+
+<div label="MacOS / Alpine" value="MacOS / Alpine">
+
+`/etc/ssl/cert.pem`
+
+</div>
+
+<div label="Debian / Ubuntu / Arch" value="Debian / Ubuntu / Arch">
+
+`/etc/ssl/certs/ca-certificates.crt`
+
+</div>
+
+<div label="RedHat / Fedora / CentOS / Mageia" value="RedHat / Fedora / CentOS / Mageia">
+
+`/etc/pki/tls/certs/ca-bundle.crt`
+
+</div>
+
+<div label="OpenSUSE" value="OpenSUSE">
+
+`/etc/ssl/ca-bundle.pem`
+
+</div>
+
+</SimpleTab>
+
+If you still have certificate errors after setting, please read [Secure Connections to Serverless Tier Clusters](https://docs.pingcap.com/tidbcloud/secure-connections-to-serverless-tier-clusters)。
 
 <SimpleTab groupId="language">
 
-<div label="Using GORM (Recommended)" value="gorm">
+<div label="Using SQLAlchemy (Recommended)" value="SQLAlchemy">
 
-If you are using a TiDB Cloud Serverless Tier cluster, modify the value of the `dsn` in `gorm.go`:
+If you are using a **TiDB Cloud Serverless Tier** cluster, change the input to the `create_engine` function in `sqlalchemy_example.py`:
 
-{{< copyable "" >}}
-
-```go
-dsn := "root:@tcp(127.0.0.1:4000)/test?charset=utf8mb4"
+```python
+engine = create_engine('mysql://root:@127.0.0.1:4000/test')
 ```
 
 Suppose that the password you set is `123456`, and the connection parameters you get from the cluster details page are the following:
@@ -807,27 +871,25 @@ Suppose that the password you set is `123456`, and the connection parameters you
 - Port: `4000`
 - User: `2aEp24QWEDLqRFs.root`
 
-In this case, you can modify the `mysql.RegisterTLSConfig` and `dsn` as follows:
+In this case, you can modify the `create_engine` as follows:
 
-{{< copyable "" >}}
-
-```go
-mysql.RegisterTLSConfig("register-tidb-tls", &tls.Config {
-    MinVersion: tls.VersionTLS12,
-    ServerName: "xxx.tidbcloud.com",
+```python
+engine = create_engine('mysql://2aEp24QWEDLqRFs.root:123456@xxx.tidbcloud.com:4000/test', connect_args={
+    "ssl_mode": "VERIFY_IDENTITY",
+    "ssl": {
+        "ca": "<ca_path>"
+    }
 })
-
-dsn := "2aEp24QWEDLqRFs.root:123456@tcp(xxx.tidbcloud.com:4000)/test?charset=utf8mb4&tls=register-tidb-tls"
 ```
 
 </div>
 
-<div label="Using go-sql-driver/mysql" value="sqldriver">
+<div label="Using peewee (Recommended)" value="peewee">
 
-If you are using a TiDB Cloud Serverless Tier cluster, modify the value of the `dsn` in `sqldriver.go`:
+If you are using a **TiDB Cloud Serverless Tier** cluster, change the input to the `connect` function in `peewee_example.py`:
 
-```go
-dsn := "root:@tcp(127.0.0.1:4000)/test?charset=utf8mb4"
+```python
+db = connect('mysql://root:@127.0.0.1:4000/test')
 ```
 
 Suppose that the password you set is `123456`, and the connection parameters you get from the cluster details page are the following:
@@ -836,17 +898,144 @@ Suppose that the password you set is `123456`, and the connection parameters you
 - Port: `4000`
 - User: `2aEp24QWEDLqRFs.root`
 
-In this case, you can modify the `mysql.RegisterTLSConfig` and `dsn` as follows:
+In this case, you can modify the `connect` as follows:
 
-{{< copyable "" >}}
+- When peewee uses **PyMySQL** as driver:
 
-```go
-mysql.RegisterTLSConfig("register-tidb-tls", &tls.Config {
-    MinVersion: tls.VersionTLS12,
-    ServerName: "xxx.tidbcloud.com",
-})
+    ```python
+    db = connect('mysql://2aEp24QWEDLqRFs.root:123456@xxx.tidbcloud.com:4000/test', 
+        ssl_verify_cert=True, ssl_ca="<ca_path>")
+    ```
 
-dsn := "2aEp24QWEDLqRFs.root:123456@tcp(xxx.tidbcloud.com:4000)/test?charset=utf8mb4&tls=register-tidb-tls"
+- When peewee uses **mysqlclient** as driver:
+
+    ```python
+    db = connect('mysql://2aEp24QWEDLqRFs.root:123456@xxx.tidbcloud.com:4000/test',
+        ssl_mode="VERIFY_IDENTITY", ssl={"ca": "<ca_path>"})
+    ```
+
+Since peewee will pass parameters to driver, please pay attention to the type of driver used when using peewee.
+
+</div>
+
+<div label="Using mysqlclient" value="mysqlclient">
+
+If you are using a **TiDB Cloud Serverless Tier** cluster, change the the `get_connection` function in `mysqlclient_example.py`:
+
+```python
+def get_connection(autocommit: bool = True) -> MySQLdb.Connection:
+    return MySQLdb.connect(
+        host="127.0.0.1",
+        port=4000,
+        user="root",
+        password="",
+        database="test",
+        autocommit=autocommit
+    )
+```
+
+Suppose that the password you set is `123456`, and the connection parameters you get from the cluster details page are the following:
+
+- Endpoint: `xxx.tidbcloud.com`
+- Port: `4000`
+- User: `2aEp24QWEDLqRFs.root`
+
+In this case, you can modify the `get_connection` as follows:
+
+```python
+def get_connection(autocommit: bool = True) -> MySQLdb.Connection:
+    return MySQLdb.connect(
+        host="xxx.tidbcloud.com",
+        port=4000,
+        user="2aEp24QWEDLqRFs.root",
+        password="123456",
+        database="test",
+        autocommit=autocommit,
+        ssl_mode="VERIFY_IDENTITY",
+        ssl={
+            "ca": "<ca_path>"
+        }
+    )
+```
+
+</div>
+
+<div label="Using PyMySQL" value="PyMySQL">
+
+If you are using a **TiDB Cloud Serverless Tier** cluster, change the the `get_connection` function in `pymysql_example.py`:
+
+```python
+def get_connection(autocommit: bool = False) -> Connection:
+    return pymysql.connect(host='127.0.0.1',
+                           port=4000,
+                           user='root',
+                           password='',
+                           database='test',
+                           cursorclass=DictCursor,
+                           autocommit=autocommit)
+```
+
+Suppose that the password you set is `123456`, and the connection parameters you get from the cluster details page are the following:
+
+- Endpoint: `xxx.tidbcloud.com`
+- Port: `4000`
+- User: `2aEp24QWEDLqRFs.root`
+
+In this case, you can modify the `get_connection` as follows:
+
+```python
+def get_connection(autocommit: bool = False) -> Connection:
+    return pymysql.connect(host='xxx.tidbcloud.com',
+                           port=4000,
+                           user='2aEp24QWEDLqRFs.root',
+                           password='123546',
+                           database='test',
+                           cursorclass=DictCursor,
+                           autocommit=autocommit,
+                           ssl_ca='<ca_path>',
+                           ssl_verify_cert=True,
+                           ssl_verify_identity=True)
+```
+
+</div>
+
+<div label="Using mysql-connector-python" value="mysql-connector-python">
+
+If you are using a **TiDB Cloud Serverless Tier** cluster, change the the `get_connection` function in `mysql_connector_python_example.py`:
+
+```python
+def get_connection(autocommit: bool = True) -> MySQLConnection:
+    connection = connect(host='127.0.0.1',
+                         port=4000,
+                         user='root',
+                         password='',
+                         database='test')
+    connection.autocommit = autocommit
+    return connection
+```
+
+Suppose that the password you set is `123456`, and the connection parameters you get from the cluster details page are the following:
+
+- Endpoint: `xxx.tidbcloud.com`
+- Port: `4000`
+- User: `2aEp24QWEDLqRFs.root`
+
+In this case, you can modify the `get_connection` as follows:
+
+```python
+def get_connection(autocommit: bool = True) -> MySQLConnection:
+    connection = connect(
+        host="xxx.tidbcloud.com",
+        port=4000,
+        user="2aEp24QWEDLqRFs.root",
+        password="123456",
+        database="test",
+        autocommit=autocommit,
+        ssl_ca='<ca_path>',
+        ssl_verify_identity=True
+    )
+    connection.autocommit = autocommit
+    return connection
 ```
 
 </div>
@@ -855,55 +1044,53 @@ dsn := "2aEp24QWEDLqRFs.root:123456@tcp(xxx.tidbcloud.com:4000)/test?charset=utf
 
 ### Step 3.3 Run
 
+Please install the following dependencies before running:
+
+```bash
+pip3 install -r requirement.txt
+```
+
+When you need to run the script several times later, please follow the [Table initialization](#step-31-table-initialization) section again before each run.
+
 <SimpleTab groupId="language">
 
-<div label="Using GORM (Recommended)" value="gorm">
+<div label="Using SQLAlchemy (Recommended)" value="SQLAlchemy">
 
-To run the code, you can run `make build` and `make run` respectively:
-
-{{< copyable "shell" >}}
-
-```shell
-make build # this command executes `go build -o bin/gorm-example`
-make run # this command executes `./bin/gorm-example`
+```bash
+python3 sqlalchemy_example.py
 ```
-
-Or you can use the native commands:
-
-{{< copyable "shell" >}}
-
-```shell
-go build -o bin/gorm-example
-./bin/gorm-example
-```
-
-Or run the `make` command directly, which is a combination of `make build` and `make run`.
 
 </div>
 
-<div label="Using go-sql-driver/mysql" value="sqldriver">
+<div label="Using peewee (Recommended)" value="peewee">
 
-To run the code, you can run `make mysql`, `make build` and `make run` respectively:
-
-{{< copyable "shell" >}}
-
-```shell
-make mysql # this command executes `mysql --host 127.0.0.1 --port 4000 -u root<sql/dbinit.sql`
-make build # this command executes `go build -o bin/sql-driver-example`
-make run # this command executes `./bin/sql-driver-example`
+```bash
+python3 peewee_example.py
 ```
 
-Or you can use the native commands:
+</div>
 
-{{< copyable "shell" >}}
+<div label="使用 mysqlclient" value="mysqlclient">
 
-```shell
-mysql --host 127.0.0.1 --port 4000 -u root<sql/dbinit.sql
-go build -o bin/sql-driver-example
-./bin/sql-driver-example
+```bash
+python3 mysqlclient_example.py
 ```
 
-Or run the `make all` command directly, which is a combination of `make mysql`, `make build` and `make run`.
+</div>
+
+<div label="Using PyMySQL" value="PyMySQL">
+
+```bash
+python3 pymysql_example.py
+```
+
+</div>
+
+<div label="Using mysql-connector-python" value="mysql-connector-python">
+
+```bash
+python3 mysql_connector_python_example.py
+```
 
 </div>
 
@@ -913,15 +1100,33 @@ Or run the `make all` command directly, which is a combination of `make mysql`, 
 
 <SimpleTab groupId="language">
 
-<div label="Using GORM (Recommended)" value="gorm">
+<div label="Using SQLAlchemy (Recommended)" value="SQLAlchemy">
 
-[GORM Expected Output](https://github.com/pingcap-inc/tidb-example-golang/blob/main/Expected-Output.md#gorm)
+[SQLAlchemy Expected Output](https://github.com/pingcap-inc/tidb-example-python/blob/main/Expected-Output.md#SQLAlchemy)
 
 </div>
 
-<div label="Using go-sql-driver/mysql" value="sqldriver">
+<div label="Using peewee (Recommended)" value="peewee">
 
-[go-sql-driver/mysql Expected Output](https://github.com/pingcap-inc/tidb-example-golang/blob/main/Expected-Output.md#sqldriver)
+[peewee Expected Output](https://github.com/pingcap-inc/tidb-example-python/blob/main/Expected-Output.md#peewee)
+
+</div>
+
+<div label="Using mysqlclient" value="mysqlclient">
+
+[mysqlclient Expected Output](https://github.com/pingcap-inc/tidb-example-python/blob/main/Expected-Output.md#mysqlclient)
+
+</div>
+
+<div label="Using PyMySQL" value="PyMySQL">
+
+[PyMySQL Expected Output](https://github.com/pingcap-inc/tidb-example-python/blob/main/Expected-Output.md#PyMySQL)
+
+</div>
+
+<div label="Using mysql-connector-python" value="mysql-connector-python">
+
+[mysql-connector-python Expected Output](https://github.com/pingcap-inc/tidb-example-python/blob/main/Expected-Output.md#mysql-connector-python)
 
 </div>
 
