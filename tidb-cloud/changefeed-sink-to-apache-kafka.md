@@ -134,6 +134,6 @@ If you find any error, you can go back to fix the error. If there is no error, y
 
 ## Restrictions
 
-- For each TiDB Cloud cluster, you can create up to 10 Kafka changefeeds.
+- For each TiDB Cloud cluster, you can create up to 10 changefeeds.
 - Currently, TiDB Cloud does not support uploading self-signed TLS certificates to connect to Kafka brokers.
 - Because TiDB Cloud uses TiCDC to establish changefeeds, it has the same [restrictions as TiCDC](https://docs.pingcap.com/tidb/stable/ticdc-overview#restrictions).

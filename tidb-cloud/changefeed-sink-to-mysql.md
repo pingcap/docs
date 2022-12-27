@@ -119,4 +119,5 @@ SET GLOBAL tidb_gc_life_time = '10m';
 
 ## Restrictions
 
-Because TiDB Cloud uses TiCDC to establish changefeeds, it has the same [restrictions as TiCDC](https://docs.pingcap.com/tidb/stable/ticdc-overview#restrictions).
+- For each TiDB Cloud cluster, you can create up to 10 changefeeds.
+- Because TiDB Cloud uses TiCDC to establish changefeeds, it has the same [restrictions as TiCDC](https://docs.pingcap.com/tidb/stable/ticdc-overview#restrictions).
