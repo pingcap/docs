@@ -21,9 +21,9 @@ Compared with the previous LTS 6.1.0, 6.5.0 not only includes new features, impr
 - Enhance TiDB optimizer by making the more accurate [Cost Model version 2](/cost-model.md#cost-model-version-2) generally available and supporting expressions connected by `AND` for [INDEX MERGE](/explain-index-merge.md).
 - Support pushing down the `JSON_EXTRACT()` function to TiFlash.
 - Support [password management](/password-management.md) policies that meet password compliance auditing requirements.
-- TiDB Lightning and Dumpling support [importing](tidb-lightning/tidb-lightning-data-source.md) and [exporting](/dumpling-overview.md#improve-export-efficiency-through-concurrency) compressed SQL and CSV files.
+- TiDB Lightning and Dumpling support [importing](/tidb-lightning/tidb-lightning-data-source.md) and [exporting](/dumpling-overview.md#improve-export-efficiency-through-concurrency) compressed SQL and CSV files.
 - TiDB Data Migration (DM) [continuous data validation](/dm/dm-continuous-data-validation.md) becomes GA.
-- TiDB Backup & Restore supports snapshot checkpoint backup, improves the recovery performance of [PITR](/br-pitr-guide.md#carry-pitr) by 50%, and reduces the RPO to as short as 5 minutes.
+- TiDB Backup & Restore supports snapshot checkpoint backup, improves the recovery performance of [PITR](/br/br-pitr-guide.md#carry-pitr) by 50%, and reduces the RPO to as short as 5 minutes.
 - Improve the TiCDC throughput of [replicating data to Kafka](/replicate-data-to-kafka.md) by x times and reduces replication latency to x seconds.
 - Provide row-level [Time to live (TTL)](/time-to-live.md) to manage data lifecycle (experimental).
 - TiCDC supports [replicating changed logs to object storage](/ticdc/ticdc-sink-to-cloud-storage.md) such as Amazon S3, Azure Blob Storage, and NFS (experimental).
@@ -143,7 +143,7 @@ Compared with the previous LTS 6.1.0, 6.5.0 not only includes new features, impr
 
     Before v6.5.0, TiDB only supported using index merge for the filter conditions connected by `OR`. Starting from v6.5.0, TiDB has supported using index merge for filter conditions connected by `AND` in the `WHERE` clause. In this way, the index merge of TiDB can now cover more general combinations of query filter conditions and is no longer limited to union (`OR`) relationship. The current v6.5.0 version only supports index merge under `OR` conditions as automatically selected by the optimizer. To enable index merge for `AND` conditions, you need to use the [`USE_INDEX_MERGE`](/optimizer-hints.md#use_index_merget1_name-idx1_name--idx2_name-) hint.
 
-    For more details about index merge, see [v5.4.0 Release Notes](/release-5.4.0#performance) and [Explain Index Merge](/explain-index-merge.md).
+    For more details about index merge, see [v5.4.0 Release Notes](/release-5.4.0.md#performance) and [Explain Index Merge](/explain-index-merge.md).
 
 * Support pushing down the following JSON functions to TiFlash [#39458](https://github.com/pingcap/tidb/issues/39458) @[yibin87](https://github.com/yibin87) **tw@qiancai**
 
@@ -199,7 +199,7 @@ Compared with the previous LTS 6.1.0, 6.5.0 not only includes new features, impr
 
     The `EXPLAIN ANALYZE` statement is used to print execution plans and runtime statistics. In v6.5.0, TiFlash has refined the execution information of the `TableFullScan` operator by adding the DMFile-related execution information. Now the TiFlash data scan status information is presented more intuitively, which helps you analyze TiFlash performance more easily.
 
-    For more information, see [documentation](sql-statements/sql-statement-explain-analyze.md).
+    For more information, see [documentation](/sql-statements/sql-statement-explain-analyze.md).
 
 * Support the output of execution plans in the JSON format [#39261](https://github.com/pingcap/tidb/issues/39261) @[fzzf678](https://github.com/fzzf678) **tw@ran-huang**
 
@@ -313,7 +313,7 @@ Compared with the previous LTS 6.1.0, 6.5.0 not only includes new features, impr
 | [`tidb_auto_build_stats_concurrency`](/system-variables.md#tidb_auto_build_stats_concurrency-new-in-v650) | Newly added | This variable is used to set the concurrency of executing the automatic update of statistics. The default value is `1`.  |
 | [`tidb_cdc_write_source`](/system-variables.md#tidb_cdc_write_source-new-in-v650) | Newly added | When this variable is set to a value other than 0, data written in this session is considered to be written by TiCDC. This variable can only be modified by TiCDC. Do not manually modify this variable in any case. |
 | [`tidb_index_merge_intersection_concurrency`](/system-variables.md#tidb_index_merge_intersection_concurrency-new-in-v650) | Newly added | Sets the maximum concurrency for the intersection operations that index merge performs. It is effective only when TiDB accesses partitioned tables in the dynamic pruning mode. |
-| [`tidb_source_id`](/system-variables.md#tidb_source_id-new-in-v650) | Newly added | This variable is used to configure the different cluster IDs in a [bi-directional replication](/ticdc/manage-ticdc.md#bi-directional-replication) cluster.|
+| [`tidb_source_id`](/system-variables.md#tidb_source_id-new-in-v650) | Newly added | This variable is used to configure the different cluster IDs in a [bi-directional replication](/ticdc/ticdc-bidirectional-replication.md) cluster.|
 | [`tidb_sysproc_scan_concurrency`](/system-variables.md#tidb_sysproc_scan_concurrency-new-in-v650) | Newly added | This variable is used to set the concurrency of scan operations performed when TiDB executes internal SQL statements (such as an automatic update of statistics). The default value is `1`. |
 | [`tidb_ttl_delete_batch_size`](/system-variables.md#tidb_ttl_delete_batch_size-new-in-v650) | Newly added | This variable is used to set the maximum number of rows that can be deleted in a single `DELETE` transaction in a TTL job. |
 | [`tidb_ttl_delete_rate_limit`](/system-variables.md#tidb_ttl_delete_rate_limit-new-in-v650) | Newly added | This variable is used to limit the maximum number of `DELETE` statements allowed per second in a single node in a TTL job. When this variable is set to `0`, no limit is applied. |
