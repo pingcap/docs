@@ -257,7 +257,7 @@ Compared with the previous LTS 6.1.0, 6.5.0 not only includes new features, impr
 
      TiCDC supports replicating changed logs to Amazon S3, Azure Blob Storage, NFS, and other S3-compatible storage services. Cloud storage is reasonably priced and easy to use. If you do not want to use Kafka, you can use storage sinks. TiCDC saves the changed logs to a file and then sends it to the storage system. From the storage system, the consumer program reads the newly generated changed log files periodically.
 
-    The storage sink supports changed logs in the canal-json and CSV formats. Noticeably, the latency of replicating changed logs from TiCDC to storage can be as short as xx. For more information, see [documentation](/ticdc/ticdc-sink-to-cloud-storage.md).
+    The storage sink supports changed logs in the canal-json and CSV formats. For more information, see [documentation](/ticdc/ticdc-sink-to-cloud-storage.md).
 
 * TiCDC supports bidirectional replication across multiple clusters [#38587](https://github.com/pingcap/tidb/issues/38587) @[xiongjiwei](https://github.com/xiongjiwei) @[asddongmen](https://github.com/asddongmen) **tw@ran-huang**
 
@@ -269,7 +269,7 @@ Compared with the previous LTS 6.1.0, 6.5.0 not only includes new features, impr
 
     To keep data secure, you need to set an expiration policy for the certificate used by the system. After the expiration period, the system needs a new certificate. TiCDC v6.5.0 supports online updates of TLS certificates. Without interrupting the replication tasks, TiCDC can automatically detect and update the certificate, without the need for manual intervention.
 
-* TiCDC performance improves significantly **tw@shichun-0415
+* TiCDC performance improves significantly [#7540](https://github.com/pingcap/tiflow/issues/7540) [#7478](https://github.com/pingcap/tiflow/issues/7478) [#7532](https://github.com/pingcap/tiflow/issues/7532) @[sdojjy](https://github.com/sdojjy) [@3AceShowHand](https://github.com/3AceShowHand) **tw@shichun-0415
 
     In a test scenario of the TiDB cluster, the performance of TiCDC has improved significantly. Specifically, the maximum row changes that a single TiCDC can process reaches 30K rows/s, and the replication latency is reduced to 10s. Even during TiKV and TiCDC rolling upgrade, the replication latency is less than 30s. In a disaster recovery (DR) scenario, when the throughput is xx rows/s, the replication latency in DR can be maintained at x s.
 
@@ -281,7 +281,7 @@ Compared with the previous LTS 6.1.0, 6.5.0 not only includes new features, impr
 
     Note that if you do not recover the system from a failure within one hour after BR exits, the snapshot data to be backed up might be recycled by the GC mechanism, causing the backup to fail. For more information, see [documentation](/br/br-checkpoint.md).
 
-* PITR performance improved remarkably **tw@shichun-0415
+* PITR performance improved remarkably [@joccau](https://github.com/joccau) **tw@shichun-0415
 
     In the log restore stage, the restore speed of one TiKV can reach 9 MiB/s, which is 50% faster than before. The restore speed is scalable and the RTO in DR scenarios is reduced greatly. The RPO in DR scenarios can be as short as 5 minutes. In normal cluster operation and maintenance (OM), for example, a rolling upgrade is performed or only one TiKV is down, the RPO can be 5 minutes.
 
@@ -342,6 +342,13 @@ Compared with the previous LTS 6.1.0, 6.5.0 not only includes new features, impr
 | TiKV | `raw-min-ts-outlier-threshold` | Deleted | Since v6.4.0, this configuration item was deprecated. Since v6.5.0, this configuration item is deleted. |
 | TiKV | [`cdc.min-ts-interval`](/tikv-configuration-file.md#min-ts-interval)  | Modified | To reduce CDC latency, the default value is changed from `1s` to `200ms`. |
 | TiKV | [`memory-use-ratio`](/tikv-configuration-file.md#memory-use-ratio-introduced-new-in-v650) | Newly added | Indicates the ratio of available memory to total system memory in PITR log recovery. |
+| TiCDC | [`sink.terminator`](/ticdc/ticdc-changefeed-config.md#changefeed-configuration-parameters) | Newly added | Indicates the row terminator, which is used for separating two data change events. The value is empty by default, which means "\r\n" is used. |
+| TiCDC | [`sink.date-separator`](/ticdc/ticdc-changefeed-config.md#changefeed-configuration-parameters) | Newly added | Indicates the date separator type of the file directory. Value options are `none`, `year`, `month`, and `day`. `none` is the default value and means that the date is not separated. |
+| TiCDC | [`sink.enable-partition-separator`](/ticdc/ticdc-changefeed-config.md#changefeed-configuration-parameters) | Newly added | Specifies whether to use partitions as the separation string. The default value is `false`, which means that partitions in a table are not stored in separate directories. |
+| TiCDC | [`sink.csv.delimiter`](/ticdc/ticdc-changefeed-config.md#changefeed-configuration-parameters) | Newly added | Indicates the delimiter between fields. The value must be an ASCII character and defaults to `,`. |
+| TiCDC | [`sink.csv.quote`](/ticdc/ticdc-changefeed-config.md#changefeed-configuration-parameters) | Newly added | The quotation that surrounds the fields. The default value is `"`. When the value is empty, no quotation is used. |
+| TiCDC | [`sink.csv.null`](/ticdc/ticdc-changefeed-config.md#changefeed-configuration-parameters) | Newly added | Specifies the character displayed when the CSV column is null. The default value is `\N`.|
+| TiCDC | [`sink.csv.include-commit-ts`](/ticdc/ticdc-changefeed-config.md#changefeed-configuration-parameters) | Newly added| Specifies whether to include commit-ts in CSV rows. The default value is `false`. |
 
 ### Others
 
