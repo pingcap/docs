@@ -16,14 +16,14 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
     PITR supports restoring data of any point in time to a new cluster. To use the PITR feature, make sure that your TiDB cluster version is at least v6.4.0 and the TiKV node size is at least 8 vCPU and 16 GiB.
 
-    You can turn on or off the PITR feature in the **Backup Settings** of the [TiDB Cloud console](https://tidbcloud.com).
+    You can enable or disable the PITR feature in the **Backup Settings** of the [TiDB Cloud console](https://tidbcloud.com).
 
     For more information, see [Back up and restore TiDB cluster data](/tidb-cloud/backup-and-restore.md).
 
-- Support managing multiple changefeeds and editing existing changefeeds in the TiDB Cloud console.
+- Support managing multiple changefeeds and editing existing changefeeds.
 
-    - You can now create as many changefeeds as needed to manage different replicated data. Currently, each cluster can have up to 10 changefeeds. For more details, refer to [Changefeed overview](/tidb-cloud/changefeed-overview.md).
-    - You can edit the configuration of an existing changefeed in the paused status. For more details, refer to [Edit a changefeed](/tidb-cloud/changefeed-overview.md#edit-a-changefeed).
+    - You can now create as many changefeeds as needed to manage different data replication tasks. Currently, each cluster can have up to 10 changefeeds. For more details, refer to [Changefeed overview](/tidb-cloud/changefeed-overview.md).
+    - You can edit the configuration of an existing changefeed in the paused status. For more information, see [Edit a changefeed](/tidb-cloud/changefeed-overview.md#edit-a-changefeed).
 
 - Support directly migrating data from Amazon Aurora MySQL, Amazon Relational Database Service (RDS) MySQL, or self-hosted MySQL-compatible databases to TiDB Cloud online. This feature is now in General Availability.
 
@@ -36,13 +36,13 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
         - AWS Frankfurt (eu-central-1)
     - Support multiple specifications. You can choose an appropriate specification according to the required performance to achieve optimal data migration experience.
 
-    For how to migrate data to TiDB Cloud, refer to [user documentation](/tidb-cloud/migrate-from-mysql-using-data-migration.md). For billing details, refer to [Data Migration Billing](/tidb-cloud/tidb-cloud-billing-dm.md).
+  For how to migrate data to TiDB Cloud, refer to [user documentation](/tidb-cloud/migrate-from-mysql-using-data-migration.md). For billing details, refer to [Data Migration billing](/tidb-cloud/tidb-cloud-billing-dm.md).
 
 - Support importing local CSV files to TiDB Cloud.
 
-    It only takes a few clicks to complete the task configuration, and then your local CSV data will be quickly imported into your TiDB cluster. When using this method, you do not need to provide the cloud storage bucket path and Role ARN. The whole importing process is quick and smooth.
+    It only takes a few clicks to complete the task configuration, and then your local CSV data can be quickly imported into your TiDB cluster. When using this method, you do not need to provide the cloud storage bucket path and Role ARN. The whole importing process is quick and smooth.
 
-    For more information, refer to [Import local files to TiDB Cloud](/tidb-cloud/tidb-cloud-import-local-files.md).
+    For more information, see [Import local files to TiDB Cloud](/tidb-cloud/tidb-cloud-import-local-files.md).
 
 ## December 20, 2022
 
