@@ -11,6 +11,8 @@ This document describes how to stream data from TiDB Cloud to MySQL using the **
 >
 > To use the Changefeed feature, make sure that your TiDB cluster version is v6.4.0 or later and the TiKV node size is at least 8 vCPU and 16 GiB.
 >
+> Currently, TiDB Cloud only allows up to 10 changefeeds per cluster.
+>
 > For [Serverless Tier clusters](/tidb-cloud/select-cluster-tier.md#serverless-tier-beta), the changefeed feature is unavailable.
 
 ## Prerequisites
@@ -70,13 +72,13 @@ The **Sink to MySQL** connector can only sink incremental data from your TiDB cl
     Finished dump at: 2020-11-10 10:40:20
     ``` 
 
-## Create a Sink
+## Create a MySQL sink
 
 After completing the prerequisites, you can sink your data to MySQL.
 
 1. Navigate to the **Changefeed** tab of your TiDB cluster.
 
-2. Click **Sink to MySQL**.
+2. Click **Create Changefeed**, and select **MySQL** as **Target Type**.
 
 3. Fill in the MySQL endpoints, user name, and password in **MySQL Connection**.
 
@@ -115,21 +117,7 @@ After completing the prerequisites, you can sink your data to MySQL.
 SET GLOBAL tidb_gc_life_time = '10m';
 ```
 
-## Delete a Sink
-
-1. Navigate to the **Changefeed** tab of a cluster.
-2. Click the corresponding **Changefeed** card, and click **Delete**.
-
-## Pause or resume a Sink
-
-1. Navigate to the **Changefeed** tab of a cluster.
-2. Click the corresponding **Changefeed** card, and click **Pause** or **Resume**.
-
-## Query TiCDC RCUs
-
-1. Navigate to the **Changefeed** tab of a cluster.
-2. You can see the current TiCDC Replication Capacity Units (RCUs) in the upper-right corner of the page.
-
 ## Restrictions
 
-Because TiDB Cloud uses TiCDC to establish changefeeds, it has the same [restrictions as TiCDC](https://docs.pingcap.com/tidb/stable/ticdc-overview#restrictions).
+- For each TiDB Cloud cluster, you can create up to 10 changefeeds.
+- Because TiDB Cloud uses TiCDC to establish changefeeds, it has the same [restrictions as TiCDC](https://docs.pingcap.com/tidb/stable/ticdc-overview#restrictions).
