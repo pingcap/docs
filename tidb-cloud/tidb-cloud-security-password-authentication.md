@@ -81,7 +81,7 @@ To change the password, take the following steps:
 
 ## Enable or disable MFA (optional)
 
-After logging in to TiDB Cloud, you can enable multi-factor authentication (MFA) in accordance with laws and regulations.
+After logging in to TiDB Cloud, you can enable MFA in accordance with laws and regulations.
 
 Two-factor authentication adds additional security by requiring an Authenticator app to generate a one-time password for login. You can use any Authenticator app from the iOS or Android App Store to generate this password, such as Google Authenticator and Authy.
 
