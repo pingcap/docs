@@ -87,7 +87,7 @@ Two-factor authentication adds additional security by requiring an Authenticator
 
 > **Note:**
 >
-> Only users who [sign up](https://tidbcloud.com/free-trial) for TiDB Cloud with emails and passwords can enable MFA in TiDB Cloud, and SSO login users are not supported to enable that. If you log in with Google SSO or GitHub SSO, you can enable MFA on your identity management platform, such as GitHub or Google Workspace.
+> This section applies only when you [sign up](https://tidbcloud.com/free-trial) for TiDB Cloud with emails and passwords. If you sign up for TiDB Cloud with Google SSO or GitHub SSO, you can enable MFA on your identity management platform, such as GitHub or Google Workspace.
 
 ### Enable MFA
 
