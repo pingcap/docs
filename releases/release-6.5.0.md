@@ -135,7 +135,7 @@ Compared with the previous LTS 6.1.0, 6.5.0 not only includes new features, impr
     - On the [TiFlash panels](/grafana-performance-overview-dashboard.md#tiflash), you can easily view the request types, latency analysis, and resource usage overview of your TiFlash cluster.
     - On the [CDC panels](/grafana-performance-overview-dashboard.md#cdc), you can easily view the health, replication latency, data flow, and downstream write latency of your TiCDC cluster.
 
-  For more information, see [documentation](/performance-tuning-method.md).
+  For more information, see [documentation](/performance-tuning-methods.md).
 
 ### Performance
 
@@ -143,7 +143,7 @@ Compared with the previous LTS 6.1.0, 6.5.0 not only includes new features, impr
 
     Before v6.5.0, TiDB only supported using index merge for the filter conditions connected by `OR`. Starting from v6.5.0, TiDB has supported using index merge for filter conditions connected by `AND` in the `WHERE` clause. In this way, the index merge of TiDB can now cover more general combinations of query filter conditions and is no longer limited to union (`OR`) relationship. The current v6.5.0 version only supports index merge under `OR` conditions as automatically selected by the optimizer. To enable index merge for `AND` conditions, you need to use the [`USE_INDEX_MERGE`](/optimizer-hints.md#use_index_merget1_name-idx1_name--idx2_name-) hint.
 
-    For more details about index merge, see [v5.4.0 Release Notes](/release-5.4.0.md#performance) and [Explain Index Merge](/explain-index-merge.md).
+    For more details about index merge, see [v5.4.0 Release Notes](/releases/release-5.4.0.md#performance) and [Explain Index Merge](/explain-index-merge.md).
 
 * Support pushing down the following JSON functions to TiFlash [#39458](https://github.com/pingcap/tidb/issues/39458) @[yibin87](https://github.com/yibin87) **tw@qiancai**
 
