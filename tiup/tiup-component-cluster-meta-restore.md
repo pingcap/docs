@@ -17,7 +17,7 @@ tiup cluster meta restore <cluster-name> <backup-file> [flags]
 
 > **Note:**
 >
-> The restore operation overwrites the current meta file. It is recommended to restore only when the meta file is lost.
+> The restore operation overwrites the current meta file. It is recommended to restore the meta file only when it is lost.
 
 ## Options
 
