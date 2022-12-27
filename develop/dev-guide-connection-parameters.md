@@ -55,7 +55,7 @@ The last packet sent successfully to the server was 3600000 milliseconds ago. Th
 
 ### 経験に基づく公式 {#formulas-based-on-experience}
 
-HikariCP の[プールのサイジングについて](https://github.com/brettwooldridge/HikariCP/wiki/About-Pool-Sizing)の記事によると、データベース接続プールの適切なサイズを設定する方法がわからない場合は、 [経験に基づく公式](https://github.com/brettwooldridge/HikariCP/wiki/About-Pool-Sizing#connections--core_count--2--effective_spindle_count)から始めることができます。次に、式から計算されたプール サイズのパフォーマンス結果に基づいて、最適なパフォーマンスを実現するためにサイズをさらに調整できます。
+HikariCP の[プールのサイジングについて](https://github.com/brettwooldridge/HikariCP/wiki/About-Pool-Sizing)の記事によると、データベース接続プールの適切なサイズを設定する方法がわからない場合は、 [経験に基づく公式](https://github.com/brettwooldridge/HikariCP/wiki/About-Pool-Sizing#connections--core_count--2--effective_spindle_count)から始めることができます。次に、式から計算されたプール サイズのパフォーマンス結果に基づいて、サイズをさらに調整して、最高のパフォーマンスを実現できます。
 
 経験に基づいた式は次のとおりです。
 
@@ -67,7 +67,7 @@ connections = ((core_count * 2) + effective_spindle_count)
 
 -   **connections** : 取得した接続のサイズ。
 -   **core_count** : CPU コアの数。
--   **effective_spindle_count** : ハード ドライブの数 ( [SSD](https://en.wikipedia.org/wiki/Solid-state_drive)ではありません)。回転する各ハードディスクをスピンドルと呼ぶことができるからです。たとえば、16 ディスクの RAID を備えたサーバーを使用している場合、 <strong>effective_spindle_count</strong>は 16 にする必要があります<strong>。HDD</strong>は通常、一度に 1 つの要求しか処理できないため、ここでの式は、サーバーが同時に処理できる I/O 要求の数を実際に測定しています。管理。
+-   **effective_spindle_count** : ハード ドライブの数 ( [SSD](https://en.wikipedia.org/wiki/Solid-state_drive)ではありません)。回転する各ハードディスクをスピンドルと呼ぶことができるからです。たとえば、16 ディスクの RAID を備えたサーバーを使用している場合、 <strong>effective_spindle_count</strong>は 16 にする必要があります。通常、 <strong>HDD</strong>は一度に 1 つの要求しか処理できないため、ここでの式は、サーバーが同時に処理できる I/O 要求の数を実際に測定しています。管理。
 
 特に、 [方式](https://github.com/brettwooldridge/HikariCP/wiki/About-Pool-Sizing#the-formula)の下の次の注意事項に注意してください。
 
@@ -125,7 +125,7 @@ OLTP (オンライン トランザクション処理) シナリオの場合、�
 
 #### バッチ API を使用する {#use-batch-api}
 
-バッチ挿入の場合は、 [`addBatch` / <code>executeBatch</code> API](https://www.tutorialspoint.com/jdbc/jdbc-batch-processing)を使用できます。メソッド`addBatch()`は、最初に複数の SQL ステートメントをクライアントにキャッシュし、次にメソッド`executeBatch`を呼び出すときにそれらを一緒にデータベースサーバーに送信するために使用されます。
+バッチ挿入の場合は、 [`addBatch` / <code>executeBatch</code> API](https://www.tutorialspoint.com/jdbc/jdbc-batch-processing)を使用できます。 `addBatch()`メソッドは、複数の SQL ステートメントを最初にクライアントにキャッシュし、次に`executeBatch`メソッドを呼び出すときにそれらを一緒にデータベースサーバーに送信するために使用されます。
 
 > **ノート：**
 >
@@ -163,7 +163,7 @@ JDBC は通常、JDBC URL パラメータの形式で実装関連の構成を提
 
     この設定が既に有効になっていることを確認するには、次のようにします。
 
-    -   TiDB モニタリング ダッシュボードに移動し、 [ **Query Summary** ] &gt; [ <strong>QPS By Instance</strong> ] からリクエスト コマンド タイプを表示します。
+    -   TiDB モニタリング ダッシュボードに移動し、 [ **Query Summary** ] &gt; [ <strong>CPS By Instance</strong> ] からリクエスト コマンド タイプを表示します。
     -   リクエストで`COM_QUERY`が`COM_STMT_EXECUTE`または`COM_STMT_PREPARE`に置き換えられている場合は、この設定がすでに有効になっていることを意味します。
 
 -   **cachePrepStmts**
@@ -172,10 +172,8 @@ JDBC は通常、JDBC URL パラメータの形式で実装関連の構成を提
 
     この設定が既に有効になっていることを確認するには、次のようにします。
 
-    -   TiDB モニタリング ダッシュボードに移動し、 [ **Query Summary** ] &gt; [ <strong>QPS By Instance</strong> ] からリクエスト コマンド タイプを表示します。
+    -   TiDB モニタリング ダッシュボードに移動し、 [ **Query Summary** ] &gt; [ <strong>CPS By Instance</strong> ] からリクエスト コマンド タイプを表示します。
     -   リクエスト内の`COM_STMT_EXECUTE`の数が`COM_STMT_PREPARE`の数よりはるかに多い場合、この設定はすでに有効になっていることを意味します。
-
-    ![QPS By Instance](/media/java-practice-2.png)
 
     さらに、 `useConfigs=maxPerformance`を構成すると、 `cachePrepStmts=true`を含む複数のパラメーターが同時に構成されます。
 
@@ -187,7 +185,7 @@ JDBC は通常、JDBC URL パラメータの形式で実装関連の構成を提
 
     次の場合は、この設定が小さすぎるかどうかを確認する必要があります。
 
-    -   TiDB モニタリング ダッシュボードに移動し、 [ **Query Summary** ] &gt; [ <strong>QPS By Instance</strong> ] からリクエスト コマンド タイプを表示します。
+    -   TiDB モニタリング ダッシュボードに移動し、 [ **Query Summary** ] &gt; [ <strong>CPS By Instance</strong> ] からリクエスト コマンド タイプを表示します。
     -   `cachePrepStmts=true`が構成されていることを確認しますが、 `COM_STMT_PREPARE`はまだ`COM_STMT_EXECUTE`とほぼ等しく、 `COM_STMT_CLOSE`が存在します。
 
 -   **prepStmtCacheSize**
@@ -196,7 +194,7 @@ JDBC は通常、JDBC URL パラメータの形式で実装関連の構成を提
 
     この設定が既に有効になっていることを確認するには、次のようにします。
 
-    -   TiDB モニタリング ダッシュボードに移動し、 [ **Query Summary** ] &gt; [ <strong>QPS By Instance</strong> ] からリクエスト コマンド タイプを表示します。
+    -   TiDB モニタリング ダッシュボードに移動し、 [ **Query Summary** ] &gt; [ <strong>CPS By Instance</strong> ] からリクエスト コマンド タイプを表示します。
     -   リクエスト内の`COM_STMT_EXECUTE`の数が`COM_STMT_PREPARE`の数よりはるかに多い場合、この設定はすでに有効になっていることを意味します。
 
 #### バッチ関連のパラメーター {#batch-related-parameters}
@@ -281,6 +279,6 @@ UPDATE `t` SET `a` = 10 WHERE `id` = 1; UPDATE `t` SET `a` = 11 WHERE `id` = 2; 
 
 #### タイムアウト関連のパラメーター {#timeout-related-parameters}
 
-TiDB は、タイムアウトを制御する 2 つの MySQL 互換パラメーターを提供します: [`wait_timeout`](/system-variables.md#wait_timeout)と[`max_execution_time`](/system-variables.md#max_execution_time) 。これら 2 つのパラメータは、Java アプリケーションとの接続アイドル タイムアウトと、接続での SQL 実行のタイムアウトをそれぞれ制御します。つまり、これらのパラメータは、TiDB と Java アプリケーション間の接続の最長アイドル時間と最長ビジー時間を制御します。 TiDB v5.4 以降、デフォルト値の`wait_timeout`は`28800`秒、つまり 8 時間です。 v5.4 より前のバージョンの TiDB の場合、デフォルト値は`0`です。これは、タイムアウトが無制限であることを意味します。デフォルト値`max_execution_time`は`0`です。これは、SQL ステートメントの最大実行時間が無制限であることを意味します。
+TiDB は、タイムアウトを制御する 2 つの MySQL 互換パラメーターを提供します: [`wait_timeout`](/system-variables.md#wait_timeout)と[`max_execution_time`](/system-variables.md#max_execution_time) 。これらの 2 つのパラメータは、Java アプリケーションとの接続アイドル タイムアウトと、接続での SQL 実行のタイムアウトをそれぞれ制御します。つまり、これらのパラメータは、TiDB と Java アプリケーション間の接続の最長アイドル時間と最長ビジー時間を制御します。 TiDB v5.4 以降、デフォルト値の`wait_timeout`は`28800`秒、つまり 8 時間です。 v5.4 より前のバージョンの TiDB の場合、デフォルト値は`0`です。これは、タイムアウトが無制限であることを意味します。デフォルト値`max_execution_time`は`0`です。これは、SQL ステートメントの最大実行時間が無制限であることを意味します。
 
-ただし、実際の本番環境では、アイドル接続や実行時間が過度に長い SQL ステートメントは、データベースやアプリケーションに悪影響を及ぼします。アイドル状態の接続と長時間実行される SQL ステートメントを回避するために、アプリケーションの接続文字列でこれら 2 つのパラメーターを構成できます。たとえば、 `sessionVariables=wait_timeout=3600` (1 時間) と`sessionVariables=max_execution_time=300000` (5 分) を設定します。
+ただし、実際の運用環境では、アイドル接続や実行時間が過度に長い SQL ステートメントは、データベースやアプリケーションに悪影響を及ぼします。アイドル状態の接続と長時間実行される SQL ステートメントを回避するために、アプリケーションの接続文字列でこれら 2 つのパラメーターを構成できます。たとえば、 `sessionVariables=wait_timeout=3600` (1 時間) と`sessionVariables=max_execution_time=300000` (5 分) を設定します。

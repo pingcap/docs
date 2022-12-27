@@ -13,7 +13,7 @@ Java アプリケーションで TiDB データベースと対話する一般的
 
 -   ネットワーク プロトコル: クライアントは、標準[MySQL プロトコル](https://dev.mysql.com/doc/internals/en/client-server-protocol.html)を介して TiDBサーバーと対話します。
 -   JDBC API および JDBC ドライバー: Java アプリケーションは通常、標準[JDBC (Java データベース接続)](https://docs.oracle.com/javase/8/docs/technotes/guides/jdbc/) API を使用してデータベースにアクセスします。 TiDB に接続するには、JDBC API を介して MySQL プロトコルを実装する JDBC ドライバーを使用できます。このような MySQL 用の一般的な JDBC ドライバーには、 [MySQL コネクタ/J](https://github.com/mysql/mysql-connector-j)および[MariaDB コネクタ/J](https://mariadb.com/kb/en/library/about-mariadb-connector-j/#about-mariadb-connectorj)が含まれます。
--   データベース接続プール: 要求されるたびに接続を作成するオーバーヘッドを削減するために、アプリケーションは通常、接続プールを使用して接続をキャッシュし、再利用します。 JDBC [情報源](https://docs.oracle.com/javase/8/docs/api/javax/sql/DataSource.html)は接続プール API を定義します。必要に応じて、さまざまなオープンソース接続プールの実装から選択できます。
+-   データベース接続プール: 要求されるたびに接続を作成するオーバーヘッドを削減するために、アプリケーションは通常、接続プールを使用して接続をキャッシュし、再利用します。 JDBC [情報元](https://docs.oracle.com/javase/8/docs/api/javax/sql/DataSource.html)は接続プール API を定義します。必要に応じて、さまざまなオープンソース接続プールの実装から選択できます。
 -   データ アクセス フレームワーク: 通常、アプリケーションは[マイバティス](https://mybatis.org/mybatis-3/index.html)や[休止状態](https://hibernate.org/)などのデータ アクセス フレームワークを使用して、データベース アクセス操作をさらに簡素化し、管理します。
 -   アプリケーションの実装: アプリケーション ロジックは、どのコマンドをいつデータベースに送信するかを制御します。一部のアプリケーションは、 [春の取引](https://docs.spring.io/spring/docs/4.2.x/spring-framework-reference/html/transaction.html)の側面を使用して、トランザクションの開始およびコミット ロジックを管理します。
 
@@ -49,7 +49,7 @@ OLTP (オンライン トランザクション処理) シナリオの場合、�
 
 #### バッチ API を使用する {#use-batch-api}
 
-バッチ挿入の場合は、 [`addBatch` / <code>executeBatch</code> API](https://www.tutorialspoint.com/jdbc/jdbc-batch-processing)を使用できます。メソッド`addBatch()`は、最初に複数の SQL ステートメントをクライアントにキャッシュし、次にメソッド`executeBatch`を呼び出すときにそれらを一緒にデータベースサーバーに送信するために使用されます。
+バッチ挿入の場合は、 [`addBatch` / <code>executeBatch</code> API](https://www.tutorialspoint.com/jdbc/jdbc-batch-processing)を使用できます。 `addBatch()`メソッドは、複数の SQL ステートメントを最初にクライアントにキャッシュし、次に`executeBatch`メソッドを呼び出すときにそれらを一緒にデータベースサーバーに送信するために使用されます。
 
 > **ノート：**
 >
@@ -87,19 +87,17 @@ JDBC は通常、JDBC URL パラメータの形式で実装関連の構成を提
 
 この設定が既に有効になっていることを確認するには、次のようにします。
 
--   TiDB モニタリング ダッシュボードに移動し、 [ **Query Summary** ] &gt; [ <strong>QPS By Instance</strong> ] からリクエスト コマンド タイプを表示します。
+-   TiDB モニタリング ダッシュボードに移動し、 [ **Query Summary** ] &gt; [ <strong>CPS By Instance</strong> ] からリクエスト コマンド タイプを表示します。
 -   リクエストで`COM_QUERY`が`COM_STMT_EXECUTE`または`COM_STMT_PREPARE`に置き換えられている場合は、この設定がすでに有効になっていることを意味します。
 
 ##### <code>cachePrepStmts</code> {#code-cacheprepstmts-code}
 
-`useServerPrepStmts=true`を指定すると、サーバーはプリペアド ステートメントを実行できますが、デフォルトでは、クライアントは各実行後にプリペアド ステートメントを閉じ、それらを再利用しません。これは、「準備」操作がテキスト ファイルの実行ほど効率的ではないことを意味します。これを解決するには、 `useServerPrepStmts=true`を設定した後、 `cachePrepStmts=true`も設定することをお勧めします。これにより、クライアントはプリペアド ステートメントをキャッシュできます。
+`useServerPrepStmts=true`を指定すると、サーバーはプリペアド ステートメントを実行できますが、デフォルトでは、クライアントは実行ごとにプリペアド ステートメントを閉じ、それらを再利用しません。これは、「準備」操作がテキスト ファイルの実行ほど効率的ではないことを意味します。これを解決するには、 `useServerPrepStmts=true`を設定した後、 `cachePrepStmts=true`も設定することをお勧めします。これにより、クライアントはプリペアド ステートメントをキャッシュできます。
 
 この設定が既に有効になっていることを確認するには、次のようにします。
 
--   TiDB モニタリング ダッシュボードに移動し、 [ **Query Summary** ] &gt; [ <strong>QPS By Instance</strong> ] からリクエスト コマンド タイプを表示します。
+-   TiDB モニタリング ダッシュボードに移動し、 [ **Query Summary** ] &gt; [ <strong>CPS By Instance</strong> ] からリクエスト コマンド タイプを表示します。
 -   リクエスト内の`COM_STMT_EXECUTE`の数が`COM_STMT_PREPARE`の数よりはるかに多い場合、この設定はすでに有効になっていることを意味します。
-
-![QPS By Instance](/media/java-practice-2.png)
 
 さらに、 `useConfigs=maxPerformance`を構成すると、 `cachePrepStmts=true`を含む複数のパラメーターが同時に構成されます。
 
@@ -111,7 +109,7 @@ JDBC は通常、JDBC URL パラメータの形式で実装関連の構成を提
 
 次の場合は、この設定が小さすぎるかどうかを確認する必要があります。
 
--   TiDB モニタリング ダッシュボードに移動し、 [ **Query Summary** ] &gt; [ <strong>QPS By Instance</strong> ] からリクエスト コマンド タイプを表示します。
+-   TiDB モニタリング ダッシュボードに移動し、 [ **Query Summary** ] &gt; [ <strong>CPS By Instance</strong> ] からリクエスト コマンド タイプを表示します。
 -   `cachePrepStmts=true`が構成されていることを確認しますが、 `COM_STMT_PREPARE`はまだ`COM_STMT_EXECUTE`とほぼ等しく、 `COM_STMT_CLOSE`が存在します。
 
 ##### <code>prepStmtCacheSize</code> {#code-prepstmtcachesize-code}
@@ -120,7 +118,7 @@ JDBC は通常、JDBC URL パラメータの形式で実装関連の構成を提
 
 この設定が既に有効になっていることを確認するには、次のようにします。
 
--   TiDB モニタリング ダッシュボードに移動し、 [ **Query Summary** ] &gt; [ <strong>QPS By Instance</strong> ] からリクエスト コマンド タイプを表示します。
+-   TiDB モニタリング ダッシュボードに移動し、 [ **Query Summary** ] &gt; [ <strong>CPS By Instance</strong> ] からリクエスト コマンド タイプを表示します。
 -   リクエスト内の`COM_STMT_EXECUTE`の数が`COM_STMT_PREPARE`の数よりはるかに多い場合、この設定はすでに有効になっていることを意味します。
 
 #### バッチ関連のパラメーター {#batch-related-parameters}
@@ -232,9 +230,9 @@ Java アプリケーションで次のエラーが頻繁に表示される場合
 The last packet sent successfully to the server was 3600000 milliseconds ago. The driver has not received any packets from the server. com.mysql.jdbc.exceptions.jdbc4.CommunicationsException: Communications link failure
 ```
 
-`n`が`n milliseconds ago`または非常に小さい値である場合、通常は、実行された SQL 操作によって`0`が異常終了するためです。原因を特定するには、TiDB の stderr ログを確認することをお勧めします。
+`n`が`n milliseconds ago`または非常に小さい値である場合は、通常、実行された SQL 操作によって`0`が異常終了するためです。原因を特定するには、TiDB の stderr ログを確認することをお勧めします。
 
-`n`が非常に大きな値 (上記の例の`3600000`など) である場合、この接続が長時間アイドル状態であり、その後中間プロキシによって閉じられた可能性があります。通常の解決策は、プロキシのアイドル構成の値を増やし、接続プールで次のことができるようにすることです。
+`n`が非常に大きな値 (上記の例の`3600000`など) である場合、この接続が長時間アイドル状態であり、その後中間プロキシによって閉じられた可能性があります。通常の解決策は、プロキシのアイドル構成の値を増やし、接続プールが次のことを行えるようにすることです。
 
 -   毎回接続を使用する前に、接続が利用可能かどうかを確認してください
 -   別のスレッドを使用して、接続が利用可能かどうかを定期的に確認してください。
@@ -348,7 +346,7 @@ jstack を複数回使用することで、スタックした問題 (たとえ�
 
 #### jmap &amp; マット {#jmap-x26-mat}
 
-Go の pprof/heap とは異なり、 [jmap](https://docs.oracle.com/javase/7/docs/technotes/tools/share/jmap.html)プロセス全体のメモリ スナップショットをダンプし (Go では、ディストリビューターのサンプリング)、スナップショットを別のツールで分析できます[マット](https://www.eclipse.org/mat/) 。
+Go の pprof/heap とは異なり、 [jmap](https://docs.oracle.com/javase/7/docs/technotes/tools/share/jmap.html)プロセス全体のメモリ スナップショットをダンプし (Go ではディストリビューターのサンプリング)、スナップショットを別のツールで分析できます[マット](https://www.eclipse.org/mat/) 。
 
 マットを介して、プロセス内のすべてのオブジェクトの関連情報と属性を確認でき、スレッドの実行ステータスも観察できます。たとえば、mat を使用して、現在のアプリケーションに存在する MySQL 接続オブジェクトの数、および各接続オブジェクトのアドレスとステータス情報を確認できます。
 

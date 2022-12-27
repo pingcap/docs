@@ -106,6 +106,7 @@
         -   [AWS DMS を使用して MySQL 互換データベースから移行する](/tidb-cloud/migrate-from-mysql-using-aws-dms.md)
         -   [AWS DMS を使用して Amazon RDS for Oracle から移行する](/tidb-cloud/migrate-from-oracle-using-aws-dms.md)
     -   TiDB Cloudへのデータのインポート
+        -   [ローカル ファイルのインポート](/tidb-cloud/tidb-cloud-import-local-files.md)
         -   [サンプルデータのインポート (SQL ファイル)](/tidb-cloud/import-sample-data.md)
         -   [Amazon S3 または GCS から CSV ファイルをインポートする](/tidb-cloud/import-csv-files.md)
         -   [Amazon S3 または GCS から Apache Parquet ファイルをインポートする](/tidb-cloud/import-parquet-files.md)
@@ -115,10 +116,10 @@
         -   [データ インポートの命名規則](/tidb-cloud/naming-conventions-for-data-import.md)
         -   [データをインポートするための CSV 構成](/tidb-cloud/csv-config-for-import-data.md)
         -   [Amazon S3 からのデータ インポート中のアクセス拒否エラーのトラブルシューティング](/tidb-cloud/troubleshoot-import-access-denied-error.md)
--   ストリームデータ
+-   ストリーム データ
     -   [チェンジフィードの概要](/tidb-cloud/changefeed-overview.md)
     -   [MySQL シンクへ](/tidb-cloud/changefeed-sink-to-mysql.md)
-    -   [Kafka シンクへ](/tidb-cloud/changefeed-sink-to-apache-kafka.md)
+    -   [カフカシンクへ](/tidb-cloud/changefeed-sink-to-apache-kafka.md)
 -   バックアップと復元
     -   [自動バックアップ](/tidb-cloud/backup-and-restore.md)
     -   [手動バックアップ](/tidb-cloud/backup-and-restore.md#manual-backup)
@@ -157,7 +158,7 @@
                 -   [パーティションのプルーニング](/partition-pruning.md)
                 -   [TopN とリミット プッシュ ダウン](/topn-limit-push-down.md)
                 -   [結合したテーブルの再配置](/join-reorder.md)
-            -   物理的な最適化
+            -   物理的最適化
                 -   [概要](/sql-physical-optimization.md)
                 -   [インデックスの選択](/choose-index.md)
                 -   [統計](/statistics.md)
@@ -188,6 +189,7 @@
     -   [お支払い方法の設定](/tidb-cloud/tidb-cloud-billing.md#payment-method)
     -   [AWS または GCP Marketplace からの請求](/tidb-cloud/tidb-cloud-billing.md#billing-from-aws-marketplace-or-google-cloud-marketplace)
     -   [Changefeed の請求](/tidb-cloud/tidb-cloud-billing-ticdc-rcu.md)
+    -   [データ移行の課金](/tidb-cloud/tidb-cloud-billing-dm.md)
 -   API
     -   [API の概要](/tidb-cloud/api-overview.md)
     -   [API リファレンス](https://docs.pingcap.com/tidbcloud/api/v1beta)
@@ -196,7 +198,7 @@
     -   [データドッグ](/tidb-cloud/monitor-datadog-integration.md)
     -   [dbt](/tidb-cloud/integrate-tidbcloud-with-dbt.md)
     -   [プロメテウスとグラファナ](/tidb-cloud/monitor-prometheus-and-grafana-integration.md)
-    -   [プロキシSQL](/develop/dev-guide-proxysql-integration.md)
+    -   [ProxySQL](/develop/dev-guide-proxysql-integration.md)
     -   テラフォーム
         -   [Terraform 統合の概要](/tidb-cloud/terraform-tidbcloud-provider-overview.md)
         -   [TiDB Cloud Terraform プロバイダーを入手する](/tidb-cloud/terraform-get-tidbcloud-provider.md)

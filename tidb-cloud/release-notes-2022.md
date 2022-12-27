@@ -8,13 +8,51 @@ aliases: ['/tidbcloud/beta/supported-tidb-versions','/tidbcloud/release-notes']
 
 このページでは、2022 年の[TiDB Cloud](https://www.pingcap.com/tidb-cloud/)のリリース ノートを一覧表示します。
 
+## 2022 年 12 月 27 日 {#december-27-2022}
+
+**一般的な変更**
+
+-   すべての[サーバーレス層](/tidb-cloud/select-cluster-tier.md#serverless-tier-beta)クラスターのデフォルトの TiDB バージョンを[v6.3.0](https://docs.pingcap.com/tidb/v6.3/release-6.3.0)から[v6.4.0](https://docs.pingcap.com/tidb/v6.4/release-6.4.0)にアップグレードします。
+
+-   Dedicated Tier クラスターのポイント イン タイム リカバリ (PITR) が一般提供 (GA) になりました。
+
+    PITR は、任意の時点のデータを新しいクラスターに復元することをサポートしています。 PITR 機能を使用するには、TiDB クラスターのバージョンが少なくとも v6.4.0 であり、TiKV ノードのサイズが少なくとも 8 vCPU および 16 GiB であることを確認してください。
+
+    [TiDB Cloudコンソール](https://tidbcloud.com)の**バックアップ設定**で PITR 機能を有効または無効にできます。
+
+    詳細については、 [TiDB クラスター データのバックアップと復元](/tidb-cloud/backup-and-restore.md)を参照してください。
+
+-   複数の変更フィードの管理と既存の変更フィードの編集をサポートします。
+
+    -   さまざまなデータ レプリケーション タスクを管理するために必要な数の変更フィードを作成できるようになりました。現在、各クラスターは最大 10 個の変更フィードを持つことができます。詳細については、 [チェンジフィードの概要](/tidb-cloud/changefeed-overview.md)を参照してください。
+    -   一時停止状態の既存の変更フィードの構成を編集できます。詳細については、 [チェンジフィードを編集する](/tidb-cloud/changefeed-overview.md#edit-a-changefeed)を参照してください。
+
+-   Amazon Aurora MySQL、Amazon Relational Database Service (RDS) MySQL、または自己ホスト型の MySQL 互換データベースからTiDB Cloudオンラインへのデータの直接移行をサポートします。この機能は現在一般提供されています。
+
+    -   次の 6 つのリージョンでサービスを提供します。
+        -   AWS オレゴン (us-west-2)
+        -   AWS 北バージニア (us-east-1)
+        -   AWS ムンバイ (ap-south-1)
+        -   AWS シンガポール (ap-southeast-1)
+        -   AWS 東京 (ap-northeast-1)
+        -   AWS フランクフルト (eu-central-1)
+    -   複数の仕様をサポートします。必要なパフォーマンスに応じて適切な仕様を選択して、最適なデータ移行エクスペリエンスを実現できます。
+
+    TiDB Cloudへのデータの移行方法については、 [ユーザー文書](/tidb-cloud/migrate-from-mysql-using-data-migration.md)を参照してください。請求の詳細については、 [データ移行の請求](/tidb-cloud/tidb-cloud-billing-dm.md)を参照してください。
+
+-   TiDB Cloudへのローカル CSV ファイルのインポートをサポートします。
+
+    数回クリックするだけでタスクの構成が完了し、ローカルの CSV データを TiDB クラスターにすばやくインポートできます。この方法を使用する場合、クラウド ストレージ バケット パスとロール ARN を指定する必要はありません。インポートプロセス全体が迅速かつスムーズです。
+
+    詳細については、 [ローカル ファイルをTiDB Cloudにインポートする](/tidb-cloud/tidb-cloud-import-local-files.md)を参照してください。
+
 ## 2022 年 12 月 20 日 {#december-20-2022}
 
 **一般的な変更**
 
 -   ラベル`project name`をフィルターとして[データドッグ](/tidb-cloud/monitor-datadog-integration.md)ダッシュボードに追加して、プロジェクト情報を提供します。
 
-    フィルター`project name`を使用して、必要なクラスターをすばやく見つけることができます。
+    フィルター`project name`を使用して、目的のクラスターをすばやく見つけることができます。
 
 ## 2022 年 12 月 13 日 {#december-13-2022}
 
@@ -478,7 +516,7 @@ aliases: ['/tidbcloud/beta/supported-tidb-versions','/tidbcloud/release-notes']
 ## 2022 年 6 月 7 日 {#june-7-2022}
 
 -   [無料で試す](https://tidbcloud.com/free-trial)登録ページを追加して、 TiDB Cloudにすばやくサインアップします。
--   プラン選択ページから**概念実証プラン**オプションを削除します。 14日間のPoC無料トライアルを申し込む場合は、 [PoCに申し込む](https://en.pingcap.com/apply-for-poc/)ページへ。詳細については、 [TiDB Cloudで概念実証 (PoC) を実行する](/tidb-cloud/tidb-cloud-poc.md)を参照してください。
+-   プラン選択ページから**概念実証プラン**オプションを削除します。 14日間の無料PoCトライアルを申し込む場合は、 [PoCに申し込む](https://en.pingcap.com/apply-for-poc/)ページへ。詳細については、 [TiDB Cloudで概念実証 (PoC) を実行する](/tidb-cloud/tidb-cloud-poc.md)を参照してください。
 -   電子メールとパスワードを使用してTiDB Cloudにサインアップするユーザーに、90 日ごとにパスワードをリセットするよう求めることで、システムのセキュリティを向上させます。詳細については、 [ユーザーのパスワードを管理する](/tidb-cloud/manage-user-access.md#manage-user-passwords)を参照してください。
 
 ## 2022 年 5 月 24 日 {#may-24-2022}
@@ -499,7 +537,7 @@ aliases: ['/tidbcloud/beta/supported-tidb-versions','/tidbcloud/release-notes']
 
 ## 2022 年 5 月 1 日 {#may-1-2022}
 
--   [作成](/tidb-cloud/create-tidb-cluster.md)または[戻す](/tidb-cloud/backup-and-restore.md#restore) a [専用層](/tidb-cloud/select-cluster-tier.md#dedicated-tier)クラスターの場合、TiDB、TiKV、および TiFlash の vCPU サイズの構成をサポートします。
+-   [作成](/tidb-cloud/create-tidb-cluster.md)または[戻す](/tidb-cloud/backup-and-restore.md#restore) a [専用ティア](/tidb-cloud/select-cluster-tier.md#dedicated-tier)クラスターの場合、TiDB、TiKV、および TiFlash の vCPU サイズの構成をサポートします。
 -   クラスター作成のための AWS リージョン`Mumbai`のサポートを追加します。
 -   [TiDB Cloud請求](/tidb-cloud/tidb-cloud-billing.md)のコンピューティング、ストレージ、およびデータ転送のコストを更新します。
 

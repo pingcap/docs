@@ -34,6 +34,10 @@ MySQL 互換データベースからデータを移行する場合、完全デ�
 
 SQL、CSV、Parquet、またはAuroraスナップショット形式のデータ ファイルがある場合、これらのファイルを一度にTiDB Cloudにインポートできます。インポートのシナリオと方法は次のとおりです。
 
+-   ローカル CSV ファイルをTiDB Cloudにインポートする
+
+    ローカルの CSV ファイルをTiDB Cloudにインポートできます。詳細については、 [ローカル ファイルをTiDB Cloudにインポートする](/tidb-cloud/tidb-cloud-import-local-files.md)を参照してください。
+
 -   サンプルデータ (SQL ファイル) をTiDB Cloudにインポートする
 
     サンプル データ (SQL ファイル) をTiDB Cloudにインポートして、 TiDB Cloudインターフェイスとインポート プロセスにすぐに慣れることができます。詳細については、 [サンプルデータをTiDB Cloudにインポートする](/tidb-cloud/import-sample-data.md)を参照してください。
