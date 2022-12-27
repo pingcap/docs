@@ -36,7 +36,7 @@ To create a changefeed, refer to the tutorials:
 ## Pause or resume a changefeed
 
 1. Navigate to the **Changefeed** tab of a cluster.
-2. Click **Action...** > **Pause/Resume** on the corresponding changefeed in the changefeed list.
+2. Locate the corresponding changefeed you want to pause or resume, and click **...** > **Pause/Resume** in the **Action** column.
 
 ## Edit a changefeed
 
@@ -45,8 +45,8 @@ To create a changefeed, refer to the tutorials:
 > TiDB Cloud currently only allows editing changefeeds in the paused status.
 
 1. Navigate to the **Changefeed** tab of a cluster.
-2. Click **Action...** > **Pause** to pause the corresponding changefeed.
-3. When the changefeed status changes to `Paused`, click **Action...** > **Edit** to edit the corresponding changefeed.
+2. Locate the changefeed you want to pause, and click **...** > **Pause** in the **Action** column.
+3. When the changefeed status changes to `Paused`, click **...** > **Edit** to edit the corresponding changefeed.
 
     TiDB Cloud populates the changefeed configuration by default. You can modify the following configurations:
 
