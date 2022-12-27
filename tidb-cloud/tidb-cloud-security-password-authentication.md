@@ -46,9 +46,9 @@ TiDB Cloud sets a default password policy for registered users. If your password
 The default password policy is as follows:
 
 - At least 8 characters in length.
-- At least 1 uppercase letter(A-Z).
-- At least 1 lowercase letter(a-z).
-- At least 1 numbers(0-9).
+- At least 1 uppercase letter (A-Z).
+- At least 1 lowercase letter (a-z).
+- At least 1 number (0-9).
 - A new password must not be the same as any of the previous four passwords.
 
 ## Reset a password
