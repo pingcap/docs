@@ -21,8 +21,7 @@ This feature helps you migrate your database and its ongoing changes to TiDB Clo
     - AWS Singapore (ap-southeast-1)
     - AWS Tokyo (ap-northeast-1)
     - AWS Frankfurt (eu-central-1)
-
-- Currently, the Data Migration feature is in beta, and you can create only one migration job **for free** for each organization. To create more migration jobs, you need to [file a support ticket](/tidb-cloud/tidb-cloud-support.md).
+- You can create up to 200 migration jobs for each organization. To create more migration jobs, you need to [file a support ticket](/tidb-cloud/tidb-cloud-support.md).
 
 - The system databases will be filtered out and not migrated to TiDB Cloud even if you select all of the databases to migrate. That is, `mysql`, `information_schema`, `information_schema`, and `sys` will not be migrated using this feature.
 
