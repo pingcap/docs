@@ -4,7 +4,7 @@ title: tiup cluster meta backup
 
 # tiup cluster meta backup
 
-If the TiUP meta file which is required for the operation and maintenance is lost, you cannot continue to use TiUP to manage the cluster. You can use the `tiup cluster meta backup` command to back up the TiUP meta file regularly.
+The TiUP meta file is used for cluster operation and maintenance (OM). If this file is lost, you cannot use TiUP to manage the cluster. To avoid this situation, you can use the `tiup cluster meta backup` command to back up the TiUP meta file regularly.
 
 ## Syntax
 
@@ -16,7 +16,7 @@ tiup cluster meta backup <cluster-name> [flags]
 
 ## Options
 
-### --file (string, default is the current directory)
+### --file (string, defaults to the current directory)
 
 Specifies the target directory to store the TiUP meta backup file.
 
