@@ -116,7 +116,7 @@ Connection Idle Duration indicates the duration of a connection being idle.
 
 - total: Number of connections to all TiDB instances
 - active connections: Number of active connections to all TiDB instances
-- tidb-\<node-number\>-peer: Number of connections to each TiDB instance
+- tidb-{node-number}-peer: Number of connections to each TiDB instance
 - disconnection/s: Number of disconnections in a TiDB cluster
 - 99-not-in-txn: P99 connection idle duration when the connection is not within a transaction
 
