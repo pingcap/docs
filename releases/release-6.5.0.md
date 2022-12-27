@@ -253,7 +253,7 @@ Compared with the previous LTS 6.1.0, 6.5.0 not only includes new features, impr
 
 ### TiDB data share subscription
 
-* TiCDC supports replicating changed logs to storage sinks (experimental) [tiflow#6797](https://github.com/pingcap/tiflow/issues/6797) @[zhaoxinyu](https://github.com/zhaoxinyu) **tw@shichun-0415**
+* TiCDC supports replicating changed logs to storage sinks (experimental) [#6797](https://github.com/pingcap/tiflow/issues/6797) @[zhaoxinyu](https://github.com/zhaoxinyu) **tw@shichun-0415**
 
      TiCDC supports replicating changed logs to Amazon S3, Azure Blob Storage, NFS, and other S3-compatible storage services. Cloud storage is reasonably priced and easy to use. If you do not want to use Kafka, you can use storage sinks. TiCDC saves the changed logs to a file and then sends it to the storage system. From the storage system, the consumer program reads the newly generated changed log files periodically.
 
@@ -389,7 +389,7 @@ Starting from v6.5.0, the [`AMEND TRANSACTION`](/system-variables.md#tidb_enable
     - Optimize the granularity of locks to reduce lock contention and improve the handling capability of heartbeats under high concurrency [#5586](https://github.com/tikv/pd/issues/5586) @[rleungx](https://github.com/rleungx)
     - Optimize scheduler performance for large-scale clusters and accelerate the production of scheduling policies [#5473](https://github.com/tikv/pd/issues/5473) @[bufferflies](https://github.com/bufferflies)
     - Improve the speed of loading Regions [#5606](https://github.com/tikv/pd/issues/5606) @[rleungx](https://github.com/rleungx)
-    - Reduce unnecessary overhead by optimized handling of Region heartbeats [#5648](https://github.com/tikv/pd/issues/5648)@[rleungx](https://github.com/rleungx)
+    - Reduce unnecessary overhead by optimized handling of Region heartbeats [#5648](https://github.com/tikv/pd/issues/5648) @[rleungx](https://github.com/rleungx)
     - Add the feature of automatically garbage collecting tombstone stores [#5348](https://github.com/tikv/pd/issues/5348) @[nolouch](https://github.com/nolouch)
 
 + TiFlash
