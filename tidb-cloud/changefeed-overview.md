@@ -28,7 +28,7 @@ To create a changefeed, refer to the tutorials:
 - [Sink to Apache Kafka](/tidb-cloud/changefeed-sink-to-apache-kafka.md) (Beta)
 - [Sink to MySQL](/tidb-cloud/changefeed-sink-to-mysql.md)
 
-## Delete a Sink
+## Delete a changefeed
 
 1. Navigate to the **Changefeed** tab of a cluster.
 2. Locate the corresponding changefeed you want to delete, and click **...** > **Delete** in the **Action** column.
