@@ -14,7 +14,9 @@ TiDB Cloud changefeed helps you stream data from TiDB Cloud to other data servic
 >
 > For [Serverless Tier clusters](/tidb-cloud/select-cluster-tier.md#serverless-tier-beta), the changefeed feature is unavailable.
 
-Navigate to the **Changefeed** tab of your TiDB cluster, and you can see the changefeed list. In the changefeed list, you can:
+To access the changefeed feature, navigate to the **Cluster Overview** page of your TiDB cluster and click **Changefeed** on the left navigation bar. The changefeed list is displayed. 
+
+In the changefeed list, you can:
 
 - View the information of the created changefeed, including changefeed's id, checkpoint, and status.
 - Operate the changefeed, including creating, pausing, resuming, editing, and deleting the changefeed.
