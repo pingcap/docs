@@ -101,7 +101,7 @@ hide_commit: true
 
 [Manage project access](https://docs.pingcap.com/tidbcloud/manage-user-access#manage-project-access)
 
-[Configure Roles](https://docs.pingcap.com/tidbcloud/manage-user-access#manage-roles-access)
+[Configure Roles](https://docs.pingcap.com/tidbcloud/manage-user-access#manage-role-access)
 
 [Configure Security Settings](https://docs.pingcap.com/tidbcloud/configure-security-settings)
 
