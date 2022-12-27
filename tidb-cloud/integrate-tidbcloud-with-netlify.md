@@ -56,4 +56,4 @@ In Netlify, you can declare the environment variables as follows. You can custom
 - **Key** = DATABASE_URL 
 - **Values** = `mysql://<User>:<Password>@<Endpoint>:<Port>/<Database>?sslaccept=strict`
 
-![img](/media/tidb-cloud/integration-netlify-environment-variables.jpg)
+![Set an environment variable in Netlify](/media/tidb-cloud/integration-netlify-environment-variables.jpg)
