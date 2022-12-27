@@ -148,7 +148,7 @@ By checking the following three panels in Performance Overview, you can learn th
     - No prepared plan cache is hit: `avg-hit` (the number of hits per second) is 0, and `avg-miss` is equal to the number of `StmtExecute` commands per second. The possible reasons include:
         - The application is using the query interface.
         - The cached plans are cleaned up because the application calls the `StmtClose` command after each `StmtExecute` execution.
-        - All statements executed by `StmtExecute` do not meet the [cache conditions](sql-prepared-plan-cache.md) so the execution plan cache cannot be hit.
+        - All statements executed by `StmtExecute` do not meet the [cache conditions](/sql-prepared-plan-cache.md) so the execution plan cache cannot be hit.
     - All prepared plan cache is hit: `avg-hit` (the number of hits per second) is equal to the number of `StmtExecute` commands per second, and `avg-miss` (the number without hits per second) is 0.
     - Some prepared plan cache is hit: `avg-hit` (the number of hits per second) is fewer than the number of `StmtExecute` commands per second. Prepared plan cache has known limitations. For example, it does not support subqueries, so SQL statements with subqueries cannot use prepared plan cache.
 
