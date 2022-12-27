@@ -5,7 +5,7 @@ summary: Learn how to import local files to TiDB Cloud.
 
 # Import Local Files to TiDB Cloud
 
-You can import local files to TiDB Cloud directly. It only takes a few seconds to complete the task configuration, and then the data will be imported to TiDB immediately. You no longer need to perform complicated operations such as the cloud storage bucket path and Role ARN. Importing data to TiDB Cloud becomes quick and smooth.
+You can import local files to TiDB Cloud directly. It only takes a few seconds to complete the task configuration, and then the data will be imported to TiDB immediately. You no longer need to perform operations such as providing the cloud storage bucket path and Role ARN. Importing data to TiDB Cloud can be quick and smooth.
 
 This feature now supports importing one CSV file for one task into either an existing table or a new table.
 
@@ -33,7 +33,7 @@ This feature now supports importing one CSV file for one task into either an exi
 
 6. Check the table.
 
-    Here you can see a list of configurable table columns. Each line shows the table column name (if it can be inferred by TiDB Cloud), the table column type inferred, and the previewed data from the CSV file.
+    Here you can see a list of configurable table columns. Each line shows the table column name inferred by TiDB Cloud, the table column type inferred, and the previewed data from the CSV file.
 
     - If you import data into an existing table, the column list is extracted from the table definition, and the previewed data is mapped to the corresponding columns by column names.
 
@@ -41,9 +41,9 @@ This feature now supports importing one CSV file for one task into either an exi
 
  7. Configure the column names and data types.
 
-    If your first row in the CSV file is column names, make sure that **Use the first row as Column Name** is selected, which is selected by default.
+    If the first row in the CSV file records the column names, make sure that **Use the first row as Column Name** is selected, which is selected by default.
 
-    If the CSV file has no columns, do not select **Use the first row as Column Name**. In this case:
+    If the CSV file has no column names, do not select **Use the first row as Column Name**. In this case:
 
     - If the table already exists, make sure the order of the columns is the same as the column list of the target table.
 
