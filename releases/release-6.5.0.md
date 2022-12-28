@@ -122,7 +122,7 @@ Compared with the previous LTS 6.1.0, 6.5.0 not only includes new features, impr
 
     - The compute work of TiDB Dashboard does not pose pressure on PD nodes. This ensures more stable cluster operation.
     - The user can still access TiDB Dashboard for diagnosis even if the PD node is unavailable.
-    - Accessing TiDB Dashboard in Internet does not involve the privileged interfaces of PD. Therefore, the security risk of the cluster is reduced.
+    - Accessing TiDB Dashboard on the internet does not involve the privileged interfaces of PD. Therefore, the security risk of the cluster is reduced.
 
   For more information, see [documentation](https://docs.pingcap.com/tidb-in-kubernetes/dev/get-started#deploy-tidb-dashboard-independently).
 
@@ -255,7 +255,7 @@ Compared with the previous LTS 6.1.0, 6.5.0 not only includes new features, impr
 
 * TiCDC supports replicating changed logs to storage sinks (experimental) [#6797](https://github.com/pingcap/tiflow/issues/6797) @[zhaoxinyu](https://github.com/zhaoxinyu)
 
-     TiCDC supports replicating changed logs to Amazon S3, Azure Blob Storage, NFS, and other S3-compatible storage services. Cloud storage is reasonably priced and easy to use. If you do not want to use Kafka, you can use storage sinks. TiCDC saves the changed logs to a file and then sends it to the storage system. From the storage system, the consumer program reads the newly generated changed log files periodically.
+     TiCDC supports replicating changed logs to Amazon S3, Azure Blob Storage, NFS, and other S3-compatible storage services. Cloud storage is reasonably priced and easy to use. If you are not using Kafka, you can use storage sinks. TiCDC saves the changed logs to a file and then sends it to the storage system. From the storage system, the consumer program reads the newly generated changed log files periodically.
 
     The storage sink supports changed logs in the canal-json and CSV formats. For more information, see [documentation](/ticdc/ticdc-sink-to-cloud-storage.md).
 
@@ -267,7 +267,7 @@ Compared with the previous LTS 6.1.0, 6.5.0 not only includes new features, impr
 
 * TiCDC supports updating TLS online [#7908](https://github.com/pingcap/tiflow/issues/7908) @[CharlesCheung96](https://github.com/CharlesCheung96)
 
-    To keep data secure, you need to set an expiration policy for the certificate used by the system. After the expiration period, the system needs a new certificate. TiCDC v6.5.0 supports online updates of TLS certificates. Without interrupting the replication tasks, TiCDC can automatically detect and update the certificate, without the need for manual intervention.
+    To keep security of the database system, you need to set an expiration policy for the certificate used by the system. After the expiration period, the system needs a new certificate. TiCDC v6.5.0 supports online updates of TLS certificates. Without interrupting the replication tasks, TiCDC can automatically detect and update the certificate, without the need for manual intervention.
 
 * TiCDC performance improves significantly [#7540](https://github.com/pingcap/tiflow/issues/7540) [#7478](https://github.com/pingcap/tiflow/issues/7478) [#7532](https://github.com/pingcap/tiflow/issues/7532) @[sdojjy](https://github.com/sdojjy) [@3AceShowHand](https://github.com/3AceShowHand)
 
