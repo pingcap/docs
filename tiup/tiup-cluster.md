@@ -112,12 +112,12 @@ tidb_servers:
 ...
 ```
 
-Save the file as `/tmp/topology.yaml`. If you want to use TiDB v5.1.4 and your cluster name is `prod-cluster`, run the following command:
+Save the file as `/tmp/topology.yaml`. If you want to use TiDB v5.1.5 and your cluster name is `prod-cluster`, run the following command:
 
 {{< copyable "shell-regular" >}}
 
 ```shell
-tiup cluster deploy -p prod-cluster v5.1.4 /tmp/topology.yaml
+tiup cluster deploy -p prod-cluster v5.1.5 /tmp/topology.yaml
 ```
 
 During the execution, TiUP asks you to confirm your topology again and requires the root password of the target machine (the `-p` flag means inputting password):
@@ -125,7 +125,7 @@ During the execution, TiUP asks you to confirm your topology again and requires 
 ```bash
 Please confirm your topology:
 TiDB Cluster: prod-cluster
-TiDB Version: v5.1.4
+TiDB Version: v5.1.5
 Type        Host          Ports        Directories
 ----        ----          -----        -----------
 pd          172.16.5.134  2379/2380    deploy/pd-2379,data/pd-2379
@@ -193,7 +193,7 @@ tiup cluster display prod-cluster
 ```
 Starting /root/.tiup/components/cluster/v1.5.2/cluster display prod-cluster
 TiDB Cluster: prod-cluster
-TiDB Version: v5.1.4
+TiDB Version: v5.1.5
 ID                  Role        Host          Ports        Status     Data Dir              Deploy Dir
 --                  ----        ----          -----        ------     --------              ----------
 172.16.5.134:3000   grafana     172.16.5.134  3000         Up         -                     deploy/grafana-3000
@@ -372,12 +372,12 @@ Global Flags:
   -y, --yes               Skip all confirmations and assumes 'yes'
 ```
 
-For example, the following command upgrades the cluster to v5.1.4:
+For example, the following command upgrades the cluster to v5.1.5:
 
 {{< copyable "shell-regular" >}}
 
 ```bash
-tiup cluster upgrade tidb-test v5.1.4
+tiup cluster upgrade tidb-test v5.1.5
 ```
 
 ## Update configuration
@@ -559,11 +559,11 @@ tiup cluster audit
 Starting component `cluster`: /home/tidb/.tiup/components/cluster/v1.5.2/cluster audit
 ID      Time                       Command
 --      ----                       -------
-4BLhr0  2022-03-01T13:25:09+08:00  /home/tidb/.tiup/components/cluster/v1.5.2/cluster deploy test v5.1.4 /tmp/topology.yaml
-4BKWjF  2022-02-28T23:36:57+08:00  /home/tidb/.tiup/components/cluster/v1.5.2/cluster deploy test v5.1.4 /tmp/topology.yaml
-4BKVwH  2022-02-28T23:02:08+08:00  /home/tidb/.tiup/components/cluster/v1.5.2/cluster deploy test v5.1.4 /tmp/topology.yaml
+4BLhr0  2022-03-01T13:25:09+08:00  /home/tidb/.tiup/components/cluster/v1.5.2/cluster deploy test v5.1.5 /tmp/topology.yaml
+4BKWjF  2022-02-28T23:36:57+08:00  /home/tidb/.tiup/components/cluster/v1.5.2/cluster deploy test v5.1.5 /tmp/topology.yaml
+4BKVwH  2022-02-28T23:02:08+08:00  /home/tidb/.tiup/components/cluster/v1.5.2/cluster deploy test v5.1.5 /tmp/topology.yaml
 4BKKH1  2022-02-28T16:39:04+08:00  /home/tidb/.tiup/components/cluster/v1.5.2/cluster destroy test
-4BKKDx  2022-02-28T16:36:57+08:00  /home/tidb/.tiup/components/cluster/v1.5.2/cluster deploy test v5.1.4 /tmp/topology.yaml
+4BKKDx  2022-02-28T16:36:57+08:00  /home/tidb/.tiup/components/cluster/v1.5.2/cluster deploy test v5.1.5 /tmp/topology.yaml
 ```
 
 The first column is `audit-id`. To view the execution log of a certain command, pass the `audit-id` of a command as the flag as follows:
