@@ -80,7 +80,7 @@ As a distributed system, a basic TiDB test cluster usually consists of 2 TiDB in
         {{< copyable "shell-regular" >}}
 
         ```shell
-        tiup playground v6.4.0 --db 2 --pd 3 --kv 3
+        tiup playground v6.5.0 --db 2 --pd 3 --kv 3
         ```
 
         The command downloads a version cluster to the local machine and starts it, such as v6.4.0. To view the latest version, run `tiup list tidb`.
@@ -201,7 +201,7 @@ As a distributed system, a basic TiDB test cluster usually consists of 2 TiDB in
         {{< copyable "shell-regular" >}}
 
         ```shell
-        tiup playground v6.4.0 --db 2 --pd 3 --kv 3
+        tiup playground v6.5.0 --db 2 --pd 3 --kv 3
         ```
 
         The command downloads a version cluster to the local machine and starts it, such as v6.4.0. To view the latest version, run `tiup list tidb`.
