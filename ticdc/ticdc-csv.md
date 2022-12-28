@@ -43,9 +43,9 @@ Each column in a row of the CSV file is defined as follows:
 - Column 2: Table name.
 - Column 3: Schema name.
 - Column 4: `commit-ts` of the source transaction. This column is configurable.
-- Column 5- Column n: One or more columns that represent data to be changed.
+- Column 5- the last olumn n: One or more columns that represent data to be changed.
 
-Assume that table `hr`.`employee` is defined as follows:
+Assume that table `hr.employee` is defined as follows:
 
 ```sql
 CREATE TABLE `employee` (
@@ -71,16 +71,16 @@ The DML events of this table are stored in the CSV format as follows:
 
 | MySQL type                                          | CSV type | Example                          | Description                                   |
 |-----------------------------------------------------|----------|------------------------------|---------------------------------------|
-| BOOLEAN/TINYINT/SMALLINT/INT/MEDIUMINT/BIGINT | Integer | 123 | - |
-| FLOAT/DOUBLE                                        | Float    | 153.123                      |  -                                     |
-| NULL                                                | Null     | \N                           | -                                      |
-| TIMESTAMP/DATETIME                                  | String   | "1973-12-30 15:30:00.123456" | Format: yyyy-MM-dd HH:mm:ss.%06d         |
-| DATE                                                | String   | "2000-01-01"                 | Format: yyyy-MM-dd                       |
-| TIME                                                | String   | "23:59:59"                   | Format: yyyy-MM-dd                         |
-| YEAR                                                | Integer  | 1970                         |  -                                     |
-| VARCHAR/JSON/TINYTEXT/MEDIUMTEXT/LONGTEXT/TEXT/CHAR | String   | "test"                       | UTF-8 encoded                       |
-| VARBINARY/TINYBLOB/MEDIUMBLOB/LONGBLOB/BLOB/BINARY  | String   | "6Zi/5pav"                   | base64 encoded                      |
-| BIT                                                 | Integer  | 81                           | -                                      |
-| DECIMAL                                             | String   | "129012.1230000"             | -                                      |
-| ENUM                                                | String   | "a"                          | -                                     |
-| SET                                                 | String   | "a,b"                        | -                                     |
+| `BOOLEAN`/`TINYINT`/`SMALLINT`/`INT`/`MEDIUMINT`/`BIGINT` | Integer | `123` | - |
+| `FLOAT`/`DOUBLE`                                        | Float    | `153.123`                      |  -                                     |
+| `NULL`                                                | Null     | `\N`                          | -                                      |
+| `TIMESTAMP`/`DATETIME`                                  | String   | `"1973-12-30 15:30:00.123456"` | Format: `yyyy-MM-dd HH:mm:ss.%06d`         |
+| `DATE`                                                | String   | `"2000-01-01"`                 | Format: `yyyy-MM-dd`                       |
+| `TIME`                                                | String   | `"23:59:59"`                   | Format: `yyyy-MM-dd`                         |
+| `YEAR`                                                | Integer  | `1970`                         |  -                                     |
+| `VARCHAR`/`JSON`/`TINYTEXT`/`MEDIUMTEXT`/`LONGTEXT`/`TEXT`/`CHAR` | String   | `"test"`                       | UTF-8 encoded                       |
+| `VARBINARY`/`TINYBLOB`/`MEDIUMBLOB`/`LONGBLOB`/`BLOB`/`BINARY`  | String   | `"6Zi/5pav"`                   | base64 encoded                      |
+| `BIT`                                                 | Integer  | `81`                           | -                                      |
+| `DECIMAL`                                             | String   | `"129012.1230000"`             | -                                      |
+| `ENUM`                                                | String   | `"a"`                          | -                                     |
+| `SET`                                                 | String   | `"a,b"`                        | -                                     |

@@ -1,6 +1,6 @@
 ---
 title: Replicate Data to Storage Services
-summary: Learn how to replicate data to storage services using TiCDC, and learn how data is stored.
+summary: Learn how to replicate data to storage services using TiCDC, and learn about the storage path of the replicated data.
 ---
 
 # Replicate Data to Storage Services
@@ -9,10 +9,10 @@ summary: Learn how to replicate data to storage services using TiCDC, and learn 
 >
 > This feature is experimental. It is not recommended to use it in the production environment.
 
-Since v6.5.0, TiCDC supports saving row change events to Amazon S3, Azure Blob Storage, and NFS. This document describes how to create a changefeed that replicates incremental data to cloud storages using TiCDC. The organization of this document is as follows:
+Since v6.5.0, TiCDC supports saving row change events to Amazon S3, Azure Blob Storage, and NFS. This document describes how to create a changefeed that replicates incremental data to cloud storages using TiCDC, and how data is stored. The organization of this document is as follows:
 
-- How to replicate data to storage services.
-- How data is stored in storage services.
+- [How to replicate data to storage services](#replicate-change-data-to-storage-services)
+- [How data is stored in storage services](#storage-path-structure)
 
 ## Replicate change data to storage services
 
@@ -37,7 +37,7 @@ Info: {"upstream_id":7171388873935111376,"namespace":"default","id":"simple-repl
 
 ## Configure sink URI
 
-This section describes how to configure cloud storage, including `S3`, `Azure Blob Storage`, and `NFS`, in the changefeed URI.
+This section describes how to configure cloud storage, including Amazon S3, Azure Blob Storage, and NFS, in the changefeed URI.
 
 ### Configure S3 or Azure Blob Storage in sink URI
 
@@ -47,19 +47,18 @@ The URI parameters of Amazon S3 and Azure Blob Storage in TiCDC are the same as 
 
 The following configuration saves row change events to NFS:
 
-```
-shell
+```shell
 --sink-uri="file:///my-directory/prefix"
 ```
 
 Other optional parameters in the URI are as follows:
 
-| Parameter         | Description                                             |
-| :------------ | :------------------------------------------------ |
-| `worker-count` | Concurrency for saving data changes to cloud storage in the downstream (optional, default value: `16`, value range: [`1`, `512`] |
-| `flush-interval` | Interval for saving data changes to cloud storage in the downstream (optional, default value: `5s`, value range: [`2s`, `10m`] |
-| `file-size` | A data change file is stored to cloud storage if the number of bytes exceeds the value of this parameter (optional, default value: `67108864`, value range: [`1048576`, `536870912`]) |
-| `protocol` | The protocol format of the messages sent to the downstream. Value options are `canal-json` and `csv`. |
+| Parameter | Description | Default value | Value range |
+| :---------| :---------- | :------------ | :---------- |
+| `worker-count` | Concurrency for saving data changes to cloud storage in the downstream  | `16` | [`1`, `512`] |
+| `flush-interval` | Interval for saving data changes to cloud storage in the downstream   | `5s` | [`2s`, `10m`] |
+| `file-size` | A data change file is stored to cloud storage if the number of bytes exceeds the value of this parameter | `67108864` | [`1048576`, `536870912`] |
+| `protocol` | The protocol format of the messages sent to the downstream.  | N/A |  `canal-json` and `csv` |
 
 > **Note:**
 >
@@ -77,26 +76,26 @@ Data change records are saved to the following path:
 {scheme}://{prefix}/{schema}/{table}/{table-version-separator}/{partition-separator}/{date-separator}/CDC{num}.{extension}
 ```
 
-- `scheme`: specifies the data transmission protocol, or the storage type, for example, `s3://xxxxx`.
-- `prefix`: specifies the user-defined parent directory, for example, `s3://bucket/bbb/ccc`.
-- `schema`: specifies the schema name, for example, `s3://bucket/bbb/ccc/test`.
-- `table`: specifies the table name, for example, `s3://bucket/bbb/ccc/test/table1`.
-- `table-version-separator`: specifies the separator that separates the file path by the table version, for example, `s3://bucket/bbb/ccc/test/table1/9999`.
-- `partition-separator`: specifies the separator that separates the file path by the table partition, for example, `s3://bucket/bbb/ccc/test/table1/9999/20`
+- `scheme`: specifies the data transmission protocol, or the storage type, for example, <code>**s3**://xxxxx</code>.
+- `prefix`: specifies the user-defined parent directory, for example, <code>s3://**bucket/bbb/ccc**</code>.
+- `schema`: specifies the schema name, for example, <code>s3://bucket/bbb/ccc/**test**</code>.
+- `table`: specifies the table name, for example, <code>s3://bucket/bbb/ccc/test/**table1**</code>.
+- `table-version-separator`: specifies the separator that separates the file path by the table version, for example, <code>s3://bucket/bbb/ccc/test/table1/**9999**</code>.
+- `partition-separator`: specifies the separator that separates the file path by the table partition, for example, <code>s3://bucket/bbb/ccc/test/table1/9999/**20**</code>.
 - `date-separator`: classifies the files by the transaction commit date. Value options are:
-    - `none`: no date-separator. For example, all files with `test.table1` version being `9999` are saved to `s3://bucket/bbb/ccc/test/table1/9999`.
-    - `year`: the separator is the year a transaction is committed, for example, `s3://bucket/bbb/ccc/test/table1/9999/2022`.
-    - `month`: the separator is the year and month a transaction is committed, for example,`s3://bucket/bbb/ccc/test/table1/9999/2022-01`.
-    - `day`: the separator is the year, month, and day a transaction is committed, for example,`s3://bucket/bbb/ccc/test/table1/9999/2022-01-02`.
-- `num`: saves the serial number of the file that records the data change, for example, `s3://bucket/bbb/ccc/test/table1/9999/2022-01-02/CDC000005.csv`.
+    - `none`: no `date-separator`. For example, all files with `test.table1` version being `9999` are saved to `s3://bucket/bbb/ccc/test/table1/9999`.
+    - `year`: the separator is the year a transaction is committed, for example, <code>s3://bucket/bbb/ccc/test/table1/9999/**2022**</code>.
+    - `month`: the separator is the year and month a transaction is committed, for example, <code>s3://bucket/bbb/ccc/test/table1/9999/**2022-01**</code>.
+    - `day`: the separator is the year, month, and day a transaction is committed, for example, <code>s3://bucket/bbb/ccc/test/table1/9999/**2022-01-02**</code>.
+- `num`: saves the serial number of the file that records the data change, for example, <code>s3://bucket/bbb/ccc/test/table1/9999/2022-01-02/CDC**000005**.csv</code>.
 - `extension`: specifies the extension of the file. TiDB v6.5.0 supports the CSV and canal-json formats.
 
 > **Note:**
 >
 > The table version changes in the following two cases:
 >
-> - DDL operations are performed on this table. The table version is the TSO when the DDL is executed in the upstream TiDB. However, the change of the table version does not mean the change of the table schema. For example, adding a comment to a column does not cause the `schema.json` file content to change compared with the earlier version.
-> - The changefeed process restarts. The table version is the checkpoint TSO when the process restarts. This is because when there are many tables and the process restarts, it takes a long time to traverse all directories and find the position where each table was written last time. Therefore, data is written to a new directory with the version being the checkpoint TSO, instead of to the earlier directory.
+> - After DDL operations are performed, the table version is the TSO when the DDL is executed in the upstream TiDB. However, the change of the table version does not mean the change of the table schema. For example, adding a comment to a column does not cause the `schema.json` file content to change.
+> - The changefeed process restarts. The table version is the checkpoint TSO when the process restarts. When there are many tables and the process restarts, it takes a long time to traverse all directories and find the position where each table was written last time. Therefore, data is written to a new directory with the version being the checkpoint TSO, instead of to the earlier directory.
 
 ### Metadata
 
@@ -114,7 +113,7 @@ Metadata is a JSON-formatted file, for example:
 }
 ```
 
-- checkpoint-ts: Transactions with `commit-ts` smaller than `checkpoint-ts` are written to the target storage in the downstream.
+- `checkpoint-ts`: Transactions with `commit-ts` smaller than `checkpoint-ts` are written to the target storage in the downstream.
 
 ### DDL events
 
@@ -128,7 +127,7 @@ Table  schema information is saved in the following path:
 
 The following is a `schema.json` file:
 
-```shell
+```json
 {
     "Table":"table1",
     "Schema":"test",
@@ -194,7 +193,7 @@ Integer types in TiDB are defined as `IT[(M)] [UNSIGNED]`, where
 
 Integer types are defined as follows in `schema.json`:
 
-```shell
+```json
 {
     "ColumnName":"COL1",
     "ColumnType":"{IT} [UNSIGNED]",
@@ -212,7 +211,7 @@ Decimal types in TiDB are defined as `DT[(M,D)][UNSIGNED]`, where
 
 Decimal types are defined as follows in `schema.json`:
 
-```shell
+```json
 {
     "ColumnName":"COL1",
     "ColumnType":"{DT} [UNSIGNED]",
@@ -229,7 +228,7 @@ Date types in TiDB are defined as `DT`, where
 
 The date types are defined as follows in `schema.json`:
 
-```shell
+```json
 {
     "ColumnName":"COL1",
     "ColumnType":"{DT}"
@@ -243,7 +242,7 @@ The time types in TiDB are defined as `TT[(M)]`, where
 
 The time types are defined as follows in `schema.json`:
 
-```shell
+```json
 {
     "ColumnName":"COL1",
     "ColumnType":"{TT}",
@@ -260,7 +259,7 @@ The string types in TiDB are defined as `ST[(M)]`, where
 
 The string types are defined as follows in `schema.json`:
 
-```shell
+```json
 {
     "ColumnName":"COL1",
     "ColumnType":"{ST}",
@@ -272,7 +271,7 @@ The string types are defined as follows in `schema.json`:
 
 The `ENUM` and `SET` types are defined as follows in `schema.json`:
 
-```shell
+```json
 {
     "ColumnName":"COL1",
     "ColumnType":"{ENUM/SET}",
