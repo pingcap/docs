@@ -38,7 +38,7 @@ Compared with the previous LTS 6.1.0, 6.5.0 not only includes new features, impr
 
 * Provide lightweight metadata lock to improve the DML success rate during DDL change (GA) [#37275](https://github.com/pingcap/tidb/issues/37275) @[wjhuang2016](https://github.com/wjhuang2016)
 
-    TiDB v6.3.0 introduces [Metadata lock](/metadata-lock.md) as an experimental feature. To avoid the `Information schema is changed` error caused by DML statements, TiDB coordinates the priority of DMLs and DDLs during table metadata change, and makes the ongoing DDLs wait for the DMLs with old metadata to commit. In v6.5.0, this feature becomes GA and is enabled by default. It is suitable for various types of DDLs change scenarios.
+    TiDB v6.3.0 introduces [Metadata lock](/metadata-lock.md) as an experimental feature. To avoid the `Information schema is changed` error caused by DML statements, TiDB coordinates the priority of DMLs and DDLs during table metadata change, and makes the ongoing DDLs wait for the DMLs with old metadata to commit. In v6.5.0, this feature becomes GA and is enabled by default. It is suitable for various types of DDLs change scenarios. When you upgrade your existing cluster from versions earlier than v6.5.0 to v6.5.0 or later, TiDB automatically enables metadata lock. To disable this feature, you can set the system variable [`tidb_enable_metadata_lock`](/system-variables.md#tidb_enable_metadata_lock-new-in-v630) to `OFF`.
 
     For more information, see [documentation](/metadata-lock.md).
 
@@ -179,7 +179,7 @@ Compared with the previous LTS 6.1.0, 6.5.0 not only includes new features, impr
 
 * TiFlash optimizes the operations of getting the number of table rows [#37165](https://github.com/pingcap/tidb/issues/37165) @[elsa0520](https://github.com/elsa0520)
 
-    In the scenarios of data analysis, It is a common operation to get the actual number of rows of a table through `COUNT(*)` without filter conditions. In v6.5.0, TiFlash optimizes the rewriting of `COUNT(*)` and automatically selects the not-null columns with the shortest column definition to count the number of rows, which can effectively reduce the number of I/O operations in TiFlash and improve the execution efficiency of getting row count.
+    In the scenarios of data analysis, It is a common operation to get the actual number of rows of a table through `COUNT(*)` without filter conditions. In v6.5.0, TiFlash optimizes the rewriting of `COUNT(*)` and automatically selects the not-null columns with the shortest column definition to count the number of rows, which can effectively reduce the number of I/O operations in TiFlash and improve the execution efficiency of getting row counts.
 
 ### Stability
 
@@ -203,7 +203,7 @@ Compared with the previous LTS 6.1.0, 6.5.0 not only includes new features, impr
 
 * Support the output of execution plans in the JSON format [#39261](https://github.com/pingcap/tidb/issues/39261) @[fzzf678](https://github.com/fzzf678)
 
-    In v6.5.0, TiDB extends the output format of execution plans. By using `EXPLAIN FORMAT=tidb_json <SQL_statement>`, you can output SQL execution plans in the JSON format. With this capability, SQL debugging tools and diagnostic tools can read execution plans more conveniently and accurately, thus improving the ease of use of SQL diagnosis and tuning.
+    In v6.5.0, TiDB extends the output format of execution plans. By specifying `FORMAT = "tidb_json"` in the `EXPLAIN` statement, you can output SQL execution plans in the JSON format. With this capability, SQL debugging tools and diagnostic tools can read execution plans more conveniently and accurately, thus improving the ease of use of SQL diagnosis and tuning.
 
     For more information, see [documentation](/sql-statements/sql-statement-explain.md).
 
