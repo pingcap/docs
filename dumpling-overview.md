@@ -1,7 +1,6 @@
 ---
 title: Dumpling Overview
 summary: Use the Dumpling tool to export data from TiDB.
-aliases: ['/docs/dev/mydumper-overview/','/docs/dev/reference/tools/mydumper/','/tidb/dev/mydumper-overview/']
 ---
 
 # Dumpling Overview

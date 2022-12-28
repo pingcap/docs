@@ -1,7 +1,6 @@
 ---
 title: Two Data Centers in One City Deployment
 summary: Learn the deployment solution of two data centers in one city.
-aliases: ['/tidb/dev/synchronous-replication']
 ---
 
 # Two Data Centers in One City Deployment

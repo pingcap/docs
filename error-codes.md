@@ -1,7 +1,6 @@
 ---
 title: Error Codes and Troubleshooting
 summary: Learn about the error codes and solutions in TiDB.
-aliases: ['/docs/dev/error-codes/','/docs/dev/reference/error-codes/']
 ---
 
 # Error Codes and Troubleshooting

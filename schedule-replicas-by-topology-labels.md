@@ -1,7 +1,6 @@
 ---
 title: Schedule Replicas by Topology Labels
 summary: Learn how to schedule replicas by topology labels.
-aliases: ['/docs/dev/location-awareness/','/docs/dev/how-to/deploy/geographic-redundancy/location-awareness/','/tidb/dev/location-awareness']
 ---
 
 # Schedule Replicas by Topology Labels
