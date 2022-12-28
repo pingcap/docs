@@ -11,8 +11,8 @@ summary: Learn how to replicate data to storage services using TiCDC, and learn 
 
 Since v6.5.0, TiCDC supports saving row change events to storage services, including Amazon S3, Azure Blob Storage, and NFS. This document describes how to create a changefeed that replicates incremental data to such storage services using TiCDC, and how data is stored. The organization of this document is as follows:
 
-- [How to replicate data to storage services](#replicate-change-data-to-storage-services)
-- [How data is stored in storage services](#storage-path-structure)
+- [How to replicate data to storage services](#replicate-change-data-to-storage-services).
+- [How data is stored in storage services](#storage-path-structure).
 
 ## Replicate change data to storage services
 
@@ -41,11 +41,11 @@ Info: {"upstream_id":7171388873935111376,"namespace":"default","id":"simple-repl
 
 This section describes how to configure storage services in the changefeed URI, including Amazon S3, Azure Blob Storage, and NFS.
 
-### Configure S3 or Azure Blob Storage in sink URI
+### Configure Amazon S3 or Azure Blob Storage
 
 The URI parameters of Amazon S3 and Azure Blob Storage in TiCDC are the same as their URL parameters in BR. For details, see [Backup storage URL format](/br/backup-and-restore-storages.md#url-format-description).
 
-### Configure NFS in sink URI
+### Configure NFS
 
 The following configuration saves row change events to NFS:
 
@@ -273,7 +273,7 @@ The string types are defined as follows in `schema.json`:
 
 #### Enum and Set types
 
-The `ENUM` and `SET` types are defined as follows in `schema.json`:
+The Enum and Set types are defined as follows in `schema.json`:
 
 ```json
 {
