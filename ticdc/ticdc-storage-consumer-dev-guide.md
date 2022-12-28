@@ -9,7 +9,7 @@ This document describes how to design and implement a TiDB data change consumer.
 
 > **Note:**
 >
-> The storage sink cannot handle the `DROP SCHEMA` DDL. Avoid executing this DDL. If you do need to execute this DDL, execute it manually in the downstream MySQL.
+> The storage sink cannot handle the `DROP DATABASE` DDL. Therefore, avoid executing this DDL. If you do need to execute this DDL, execute it manually in the downstream MySQL.
 
 TiCDC does not provide any standard way for implementing a consumer. Therefore, this document provides a consumer example program written in Golang. This program reads data from the storage service and writes it to a MySQL-compatible database. You can refer to the data format and instructions provided in this example to implement a consumer on your own.
 
@@ -110,13 +110,12 @@ The consumer traverses the directory for the first time. The following is an exa
 
 The consumer parses the table schema of the `schema.json` file and obtains the DDL query statements:
 
-- If no query statement is found, the consumer skips this step.
-- If `TableVersion` is less than the consumer checkpoint, the consumer ignores the query statements.
-- If none of the above is met, the consumer executes the query statements in the downstream MySQL.
+- If no query statement is found or `TableVersion` is less than the consumer checkpoint, the consumer skips this step.
+- If query statements exist or `TableVersion` is equal to or greater than the consumer checkpoint, the consumer executes the query statements in the downstream MySQL.
 
 Then the consumer starts replicating the `CDC000001.json` file.
 
-For example, the content of the `test/tbl_1/437752935075545091/schema.json` file is as follows:
+In the following example, DDL query result in the `test/tbl_1/437752935075545091/schema.json` file is not empty:
 
 ```
 {
@@ -172,8 +171,8 @@ When the consumer traverses the directory again, it finds another new version di
 
 The consumption logic is consistent. Specifically, the consumer parses the table schema of the `schema.json` file and obtains DL query statements. Three cases are handled as described in the previous section. Then the consumer starts replicating the `CDC000001.json` file.
 
-## Process data events
+## Process DML events
 
-After DDL events are properly processed according to the `{schema}/{table}/{table-version-separator}/schema.json` file, you can process data change events in the `{schema}/{table}/{table-version-separator}/` directory based on the specific file format and file number.
+After DDL events are properly processed, you can process DML events in the `{schema}/{table}/{table-version-separator}/` directory based on the specific file format (CSV or Canal-JSON) and file number.
 
 TiCDC ensures that data is replicated at least once. Therefore, there might be duplicate data. You need to compare the commit ts of the change data with the consumer checkpoint. If the commit ts is less than the consumer checkpoint, you need to perform deduplication.
