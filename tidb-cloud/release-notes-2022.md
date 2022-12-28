@@ -10,7 +10,9 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
 ## December 28, 2022
 
-- Currently, after the TiDB 6.4.0 update, the cold start becomes slower in certain circumstances. We plan to rollback the default TiDB version of all [Serverless Tier](/tidb-cloud/select-cluster-tier.md#serverless-tier-beta) clusters from [v6.4.0](https://docs.pingcap.com/tidb/v6.4/release-6.4.0) to [v6.3.0](https://docs.pingcap.com/tidb/v6.3/release-6.3.0), and then fix the problem as soon as possible and update again.
+**General changes**
+
+- Currently, after upgrading the default TiDB version of all [Serverless Tier](/tidb-cloud/select-cluster-tier.md#serverless-tier-beta) clusters from [v6.3.0](https://docs.pingcap.com/tidb/v6.3/release-6.3.0) to [v6.4.0](https://docs.pingcap.com/tidb/v6.4/release-6.4.0), the cold start becomes slower in certain circumstances. So we roll back the default TiDB version of all Serverless Tier clusters from v6.4.0 to v6.3.0, then fix the problem as soon as possible, and upgrade it later again.
 
 ## December 27, 2022
 
