@@ -4,7 +4,7 @@ title: TiDB 6.5.0 Release Notes
 
 # TiDB 6.5.0 Release Notes
 
-Release date: xx xx, 2022
+Release date: December 29, 2022
 
 TiDB version: 6.5.0
 
@@ -32,35 +32,35 @@ Compared with the previous LTS 6.1.0, 6.5.0 not only includes new features, impr
 
 ### SQL
 
-* The performance of TiDB adding indexes is improved by 10 times (GA) [#35983](https://github.com/pingcap/tidb/issues/35983) @[benjamin2037](https://github.com/benjamin2037) @[tangenta](https://github.com/tangenta) **tw@Oreoxmt**
+* The performance of TiDB adding indexes is improved by 10 times (GA) [#35983](https://github.com/pingcap/tidb/issues/35983) @[benjamin2037](https://github.com/benjamin2037) @[tangenta](https://github.com/tangenta)
 
     TiDB v6.3.0 introduces the [Add index acceleration](/system-variables.md#tidb_ddl_enable_fast_reorg-new-in-v630) as an experimental feature to improve the speed of backfilling when creating an index. In v6.5.0, this feature becomes GA and is enabled by default, and the performance on large tables is expected to be 10 times faster. The acceleration feature is suitable for scenarios where a single SQL statement adds an index serially. When multiple SQL statements add indexes in parallel, only one of the SQL statements will be accelerated.
 
-* Provide lightweight metadata lock to improve the DML success rate during DDL change (GA) [#37275](https://github.com/pingcap/tidb/issues/37275) @[wjhuang2016](https://github.com/wjhuang2016) **tw@Oreoxmt**
+* Provide lightweight metadata lock to improve the DML success rate during DDL change (GA) [#37275](https://github.com/pingcap/tidb/issues/37275) @[wjhuang2016](https://github.com/wjhuang2016)
 
     TiDB v6.3.0 introduces [Metadata lock](/metadata-lock.md) as an experimental feature. To avoid the `Information schema is changed` error caused by DML statements, TiDB coordinates the priority of DMLs and DDLs during table metadata change, and makes the ongoing DDLs wait for the DMLs with old metadata to commit. In v6.5.0, this feature becomes GA and is enabled by default. It is suitable for various types of DDLs change scenarios.
 
     For more information, see [documentation](/metadata-lock.md).
 
-* Support restoring a cluster to a specific point in time by using `FLASHBACK CLUSTER TO TIMESTAMP` (GA) [#37197](https://github.com/pingcap/tidb/issues/37197) [#13303](https://github.com/tikv/tikv/issues/13303) @[Defined2014](https://github.com/Defined2014) @[bb7133](https://github.com/bb7133) @[JmPotato](https://github.com/JmPotato) @[Connor1996](https://github.com/Connor1996) @[HuSharp](https://github.com/HuSharp) @[CalvinNeo](https://github.com/CalvinNeo) **tw@Oreoxmt**
+* Support restoring a cluster to a specific point in time by using `FLASHBACK CLUSTER TO TIMESTAMP` (GA) [#37197](https://github.com/pingcap/tidb/issues/37197) [#13303](https://github.com/tikv/tikv/issues/13303) @[Defined2014](https://github.com/Defined2014) @[bb7133](https://github.com/bb7133) @[JmPotato](https://github.com/JmPotato) @[Connor1996](https://github.com/Connor1996) @[HuSharp](https://github.com/HuSharp) @[CalvinNeo](https://github.com/CalvinNeo)
 
     TiDB v6.4.0 introduces the [`FLASHBACK CLUSTER TO TIMESTAMP`](/sql-statements/sql-statement-flashback-to-timestamp.md) statement as an experimental feature. You can use this statement to restore a cluster to a specific point in time within the Garbage Collection (GC) life time. In v6.5.0, this feature is now compatible with TiCDC and PITR and becomes GA. This feature helps you to easily undo DML misoperations, restore the original cluster in minutes, and roll back data at different time points to determine the exact time when data changes.
 
     For more information, see [documentation](/sql-statements/sql-statement-flashback-to-timestamp.md).
 
-* Fully support non-transactional DML statements including `INSERT`, `REPLACE`, `UPDATE`, and `DELETE` [#33485](https://github.com/pingcap/tidb/issues/33485) @[ekexium](https://github.com/ekexium) **tw@Oreoxmt**
+* Fully support non-transactional DML statements including `INSERT`, `REPLACE`, `UPDATE`, and `DELETE` [#33485](https://github.com/pingcap/tidb/issues/33485) @[ekexium](https://github.com/ekexium)
 
     In the scenarios of large data processing, a single SQL statement with a large transaction might have a negative impact on the cluster stability and performance. A non-transactional DML statement is a DML statement split into multiple SQL statements for internal execution. The split statements compromise transaction atomicity and isolation but greatly improve the cluster stability. TiDB supports non-transactional `DELETE` statements since v6.1.0, and supports non-transactional `INSERT`, `REPLACE`, and `UPDATE` statements since v6.5.0.
 
     For more information, see [Non-Transactional DML statements](/non-transactional-dml.md) and [`BATCH` syntax](/sql-statements/sql-statement-batch.md).
 
-* Support time to live (TTL) (experimental) [#39262](https://github.com/pingcap/tidb/issues/39262) @[lcwangchao](https://github.com/lcwangchao) **tw@ran-huang**
+* Support time to live (TTL) (experimental) [#39262](https://github.com/pingcap/tidb/issues/39262) @[lcwangchao](https://github.com/lcwangchao)
 
     TTL provides row-level data lifetime management. In TiDB, a table with the TTL attribute automatically checks data lifetime and deletes expired data at the row level. TTL is designed to help you clean up unnecessary data periodically and in a timely manner without affecting the online read and write workloads.
 
     For more information, see [documentation](/time-to-live.md).
 
-* Support saving TiFlash query results using the `INSERT INTO SELECT` statement (experimental) [#37515](https://github.com/pingcap/tidb/issues/37515) @[gengliqi](https://github.com/gengliqi) **tw@qiancai**
+* Support saving TiFlash query results using the `INSERT INTO SELECT` statement (experimental) [#37515](https://github.com/pingcap/tidb/issues/37515) @[gengliqi](https://github.com/gengliqi)
 
     Starting from v6.5.0, TiDB supports pushing down the `SELECT` clause (analytical query) of the `INSERT INTO SELECT` statement to TiFlash. In this way, you can easily save the TiFlash query result to a TiDB table specified by `INSERT INTO` for further analysis, which takes effect as result caching (that is, result materialization). For example:
 
@@ -76,7 +76,7 @@ Compared with the previous LTS 6.1.0, 6.5.0 not only includes new features, impr
 
   For more information, see [documentation](/tiflash/tiflash-results-materialization.md).
 
-* Support binding history execution plans (experimental) [#39199](https://github.com/pingcap/tidb/issues/39199) @[fzzf678](https://github.com/fzzf678) **tw@qiancai**
+* Support binding history execution plans (experimental) [#39199](https://github.com/pingcap/tidb/issues/39199) @[fzzf678](https://github.com/fzzf678)
 
     For a SQL statement, due to various factors during execution, the optimizer might occasionally choose a new execution plan instead of its previous optimal execution plan, and the SQL performance is impacted. In this case, if the optimal execution plan has not been cleared yet, it still exists in the SQL execution history.
 
@@ -86,7 +86,7 @@ Compared with the previous LTS 6.1.0, 6.5.0 not only includes new features, impr
 
 ### Security
 
-* Support the password complexity policy [#38928](https://github.com/pingcap/tidb/issues/38928) @[CbcWestwolf](https://github.com/CbcWestwolf) **tw@ran-huang**
+* Support the password complexity policy [#38928](https://github.com/pingcap/tidb/issues/38928) @[CbcWestwolf](https://github.com/CbcWestwolf)
 
     After this policy is enabled, when you set a password, TiDB checks the password length, whether uppercase and lowercase letters, numbers, and special characters in the password are sufficient, whether the password matches the dictionary, and whether the password matches the username. This ensures that you set a secure password.
 
@@ -94,19 +94,19 @@ Compared with the previous LTS 6.1.0, 6.5.0 not only includes new features, impr
 
     For more information, see [documentation](/password-management.md#password-complexity-policy).
 
-* Support the password expiration policy [#38936](https://github.com/pingcap/tidb/issues/38936) @[CbcWestwolf](https://github.com/CbcWestwolf) **tw@ran-huang**
+* Support the password expiration policy [#38936](https://github.com/pingcap/tidb/issues/38936) @[CbcWestwolf](https://github.com/CbcWestwolf)
 
     TiDB supports configuring the password expiration policy, including manual expiration, global-level automatic expiration, and account-level automatic expiration. After this policy is enabled, you must change your passwords periodically. This reduces the risk of password leakage due to long-term use and improves password security.
 
     For more information, see [documentation](/password-management.md#password-expiration-policy).
 
-* Support the password reuse policy [#38937](https://github.com/pingcap/tidb/issues/38937) @[keeplearning20221](https://github.com/keeplearning20221) **tw@ran-huang**
+* Support the password reuse policy [#38937](https://github.com/pingcap/tidb/issues/38937) @[keeplearning20221](https://github.com/keeplearning20221)
 
     TiDB supports configuring the password reuse policy, including global-level password reuse policy and account-level password reuse policy. After this policy is enabled, you cannot use the passwords that you have used within a specified period or the most recent several passwords that you have used. This reduces the risk of password leakage due to repeated use of passwords and improves password security.
 
     For more information, see [documentation](/password-management.md#password-reuse-policy).
 
-* Support failed-login tracking and temporary account locking policy [#38938](https://github.com/pingcap/tidb/issues/38938) @[lastincisor](https://github.com/lastincisor) **tw@ran-huang**
+* Support failed-login tracking and temporary account locking policy [#38938](https://github.com/pingcap/tidb/issues/38938) @[lastincisor](https://github.com/lastincisor)
 
     After this policy is enabled, if you log in to TiDB with incorrect passwords multiple times consecutively, the account is temporarily locked. After the lock time ends, the account is automatically unlocked.
 
@@ -114,7 +114,7 @@ Compared with the previous LTS 6.1.0, 6.5.0 not only includes new features, impr
 
 ### Observability
 
-* TiDB Dashboard can be deployed on Kubernetes as an independent Pod [#1447](https://github.com/pingcap/tidb-dashboard/issues/1447) @[SabaPing](https://github.com/SabaPing) **tw@shichun-0415
+* TiDB Dashboard can be deployed on Kubernetes as an independent Pod [#1447](https://github.com/pingcap/tidb-dashboard/issues/1447) @[SabaPing](https://github.com/SabaPing)
 
     TiDB v6.5.0 (and later) and TiDB Operator v1.4.0 (and later) support deploying TiDB Dashboard as an independent Pod on Kubernetes. Using TiDB Operator, you can access the IP address of this Pod to start TiDB Dashboard.
 
@@ -126,7 +126,7 @@ Compared with the previous LTS 6.1.0, 6.5.0 not only includes new features, impr
 
   For more information, see [documentation](https://docs.pingcap.com/tidb-in-kubernetes/dev/get-started#deploy-tidb-dashboard-independently).
 
-* Performance Overview dashboard adds TiFlash and CDC (Change Data Capture) panels [#39230](https://github.com/pingcap/tidb/issues/39230) @[dbsid](https://github.com/dbsid) **tw@qiancai**
+* Performance Overview dashboard adds TiFlash and CDC (Change Data Capture) panels [#39230](https://github.com/pingcap/tidb/issues/39230) @[dbsid](https://github.com/dbsid)
 
     Since v6.1.0, TiDB has introduced the Performance Overview dashboard in Grafana, which provides a system-level entry for overall performance diagnosis of TiDB, TiKV, and PD. In v6.5.0, the Performance Overview dashboard adds TiFlash and CDC panels. With these panels, starting from v6.5.0, you can use the Performance Overview dashboard to analyze the performance of all components in a TiDB cluster.
 
@@ -139,13 +139,13 @@ Compared with the previous LTS 6.1.0, 6.5.0 not only includes new features, impr
 
 ### Performance
 
-* [INDEX MERGE](/glossary.md#index-merge) supports expressions connected by `AND` [#39333](https://github.com/pingcap/tidb/issues/39333) @[guo-shaoge](https://github.com/guo-shaoge) @[time-and-fate](https://github.com/time-and-fate) @[hailanwhu](https://github.com/hailanwhu) **tw@TomShawn**
+* [INDEX MERGE](/glossary.md#index-merge) supports expressions connected by `AND` [#39333](https://github.com/pingcap/tidb/issues/39333) @[guo-shaoge](https://github.com/guo-shaoge) @[time-and-fate](https://github.com/time-and-fate) @[hailanwhu](https://github.com/hailanwhu)
 
     Before v6.5.0, TiDB only supported using index merge for the filter conditions connected by `OR`. Starting from v6.5.0, TiDB has supported using index merge for filter conditions connected by `AND` in the `WHERE` clause. In this way, the index merge of TiDB can now cover more general combinations of query filter conditions and is no longer limited to union (`OR`) relationship. The current v6.5.0 version only supports index merge under `OR` conditions as automatically selected by the optimizer. To enable index merge for `AND` conditions, you need to use the [`USE_INDEX_MERGE`](/optimizer-hints.md#use_index_merget1_name-idx1_name--idx2_name-) hint.
 
     For more details about index merge, see [v5.4.0 Release Notes](/releases/release-5.4.0.md#performance) and [Explain Index Merge](/explain-index-merge.md).
 
-* Support pushing down the following JSON functions to TiFlash [#39458](https://github.com/pingcap/tidb/issues/39458) @[yibin87](https://github.com/yibin87) **tw@qiancai**
+* Support pushing down the following JSON functions to TiFlash [#39458](https://github.com/pingcap/tidb/issues/39458) @[yibin87](https://github.com/yibin87)
 
     * `->`
     * `->>`
@@ -153,23 +153,23 @@ Compared with the previous LTS 6.1.0, 6.5.0 not only includes new features, impr
 
   The JSON format provides a flexible way for application data modeling. Therefore, more and more applications are using the JSON format for data exchange and data storage. By pushing down JSON functions to TiFlash, you can improve the efficiency of analyzing data in the JSON type and use TiDB for more real-time analytics scenarios.
 
-* Support pushing down the following string functions to TiFlash [#6115](https://github.com/pingcap/tiflash/issues/6115) @[xzhangxian1008](https://github.com/xzhangxian1008) **tw@qiancai**
+* Support pushing down the following string functions to TiFlash [#6115](https://github.com/pingcap/tiflash/issues/6115) @[xzhangxian1008](https://github.com/xzhangxian1008)
 
     * `regexp_like`
     * `regexp_instr`
     * `regexp_substr`
 
-* Support the global optimizer hint to interfere with the execution plan generation in [Views](/views.md) [#37887](https://github.com/pingcap/tidb/issues/37887) @[Reminiscent](https://github.com/Reminiscent) **tw@Oreoxmt**
+* Support the global optimizer hint to interfere with the execution plan generation in [Views](/views.md) [#37887](https://github.com/pingcap/tidb/issues/37887) @[Reminiscent](https://github.com/Reminiscent)
 
     In some view access scenarios, you need to use optimizer hints to interfere with the execution plan of the query in the view to achieve the best performance. Since v6.5.0, TiDB supports adding global hints for the query blocks in the view, thus the hints defined in the query can be effective in the view. This feature provides a way to inject hints into complex SQL statements that contain nested views, enhances the execution plan control, and stabilizes the performance of complex statements. To use global hints, you need to [name the query blocks](/optimizer-hints.md#step-1-define-the-query-block-name-of-the-view-using-the-qb_name-hint) and [specify hint references](/optimizer-hints.md#step-2-add-the-target-hints).
 
     For more information, see [documentation](/optimizer-hints.md#hints-that-take-effect-globally).
 
-* Support pushing down sorting operations of [partitioned tables](/partitioned-table.md) to TiKV [#26166](https://github.com/pingcap/tidb/issues/26166) @[winoros](https://github.com/winoros) **tw@qiancai**
+* Support pushing down sorting operations of [partitioned tables](/partitioned-table.md) to TiKV [#26166](https://github.com/pingcap/tidb/issues/26166) @[winoros](https://github.com/winoros)
 
     Although the [partitioned table](/partitioned-table.md) feature has been GA since v6.1.0, TiDB is continually improving its performance. In v6.5.0, TiDB supports pushing down sorting operations such as `ORDER BY` and `LIMIT` to TiKV for computation and filtering, which reduces network I/O overhead and improves SQL performance when you use partitioned tables.
 
-* Optimizer introduces a more accurate Cost Model Version 2 [#35240](https://github.com/pingcap/tidb/issues/35240) @[qw4990](https://github.com/qw4990) **tw@Oreoxmt**
+* Optimizer introduces a more accurate Cost Model Version 2 [#35240](https://github.com/pingcap/tidb/issues/35240) @[qw4990](https://github.com/qw4990)
 
     TiDB v6.2.0 introduces the [Cost Model Version 2](/cost-model.md#cost-model-version-2) as an experimental feature. This model uses a more accurate cost estimation method to help the optimizer choose the optimal execution plan. Especially when TiFlash is deployed, Cost Model Version 2 automatically helps choose the appropriate storage engine and avoids much manual intervention. After real-scene testing for a period of time, this model becomes GA in v6.5.0. Since v6.5.0, newly created clusters use Cost Model Version 2 by default. For clusters upgrade to v6.5.0, because Cost Model Version 2 might cause changes to query plans, you can set the [`tidb_cost_model_version = 2`](/system-variables.md#tidb_cost_model_version-new-in-v620) variable to use the new cost model after sufficient performance testing.
 
@@ -183,7 +183,7 @@ Compared with the previous LTS 6.1.0, 6.5.0 not only includes new features, impr
 
 ### Stability
 
-* The global memory control feature is now GA [#37816](https://github.com/pingcap/tidb/issues/37816) @[wshwsh12](https://github.com/wshwsh12) **tw@TomShawn**
+* The global memory control feature is now GA [#37816](https://github.com/pingcap/tidb/issues/37816) @[wshwsh12](https://github.com/wshwsh12)
 
     TiDB v6.4.0 introduces global memory control as an experimental feature. Since v6.5.0, the global memory control feature becomes GA and can track the main memory consumption in TiDB. When the global memory consumption reaches the threshold defined by [`tidb_server_memory_limit`](/system-variables.md#tidb_server_memory_limit-new-in-v640), TiDB tries to limit the memory usage by GC or canceling SQL operations, to ensure stability.
 
@@ -195,13 +195,13 @@ Compared with the previous LTS 6.1.0, 6.5.0 not only includes new features, impr
 
 ### Ease of use
 
-* Refine the execution information of the TiFlash `TableFullScan` operator in the `EXPLAIN ANALYZE` output [#5926](https://github.com/pingcap/tiflash/issues/5926) @[hongyunyan](https://github.com/hongyunyan) **tw@qiancai**
+* Refine the execution information of the TiFlash `TableFullScan` operator in the `EXPLAIN ANALYZE` output [#5926](https://github.com/pingcap/tiflash/issues/5926) @[hongyunyan](https://github.com/hongyunyan)
 
     The `EXPLAIN ANALYZE` statement is used to print execution plans and runtime statistics. In v6.5.0, TiFlash has refined the execution information of the `TableFullScan` operator by adding the DMFile-related execution information. Now the TiFlash data scan status information is presented more intuitively, which helps you analyze TiFlash performance more easily.
 
     For more information, see [documentation](/sql-statements/sql-statement-explain-analyze.md).
 
-* Support the output of execution plans in the JSON format [#39261](https://github.com/pingcap/tidb/issues/39261) @[fzzf678](https://github.com/fzzf678) **tw@ran-huang**
+* Support the output of execution plans in the JSON format [#39261](https://github.com/pingcap/tidb/issues/39261) @[fzzf678](https://github.com/fzzf678)
 
     In v6.5.0, TiDB extends the output format of execution plans. By using `EXPLAIN FORMAT=tidb_json <SQL_statement>`, you can output SQL execution plans in the JSON format. With this capability, SQL debugging tools and diagnostic tools can read execution plans more conveniently and accurately, thus improving the ease of use of SQL diagnosis and tuning.
 
@@ -209,7 +209,7 @@ Compared with the previous LTS 6.1.0, 6.5.0 not only includes new features, impr
 
 ### MySQL compatibility
 
-* Support a high-performance and globally monotonic `AUTO_INCREMENT` column attribute (GA) [#38442](https://github.com/pingcap/tidb/issues/38442) @[tiancaiamao](https://github.com/tiancaiamao) **tw@Oreoxmt**
+* Support a high-performance and globally monotonic `AUTO_INCREMENT` column attribute (GA) [#38442](https://github.com/pingcap/tidb/issues/38442) @[tiancaiamao](https://github.com/tiancaiamao)
 
     TiDB v6.4.0 introduces the `AUTO_INCREMENT` MySQL compatibility mode as an experimental feature. This mode introduces a centralized auto-increment ID allocating service that ensures IDs monotonically increase on all TiDB instances. This feature makes it easier to sort query results by auto-increment IDs. In v6.5.0, this feature becomes GA. The insert TPS of a table using this feature is expected to exceed 20,000, and this feature supports elastic scaling to improve the write throughput of a single table and entire clusters. To use the MySQL compatibility mode, you need to set `AUTO_ID_CACHE` to `1` when creating a table. The following is an example:
 
@@ -221,7 +221,7 @@ Compared with the previous LTS 6.1.0, 6.5.0 not only includes new features, impr
 
 ### Data migration
 
-* Support exporting and importing SQL and CSV files in gzip, snappy, and zstd compression formats [#38514](https://github.com/pingcap/tidb/issues/38514) @[lichunzhu](https://github.com/lichunzhu) **tw@hfxsd**
+* Support exporting and importing SQL and CSV files in gzip, snappy, and zstd compression formats [#38514](https://github.com/pingcap/tidb/issues/38514) @[lichunzhu](https://github.com/lichunzhu)
 
     Dumpling supports exporting data to compressed SQL and CSV files in these compression formats: gzip, snappy, and zstd. TiDB Lightning also supports importing compressed files in these formats.
 
@@ -229,13 +229,13 @@ Compared with the previous LTS 6.1.0, 6.5.0 not only includes new features, impr
 
     For more information, see [documentation](/dumpling-overview.md#improve-export-efficiency-through-concurrency).
 
-* Optimize binlog parsing capability [#924](https://github.com/pingcap/dm/issues/924) @[gmhdbjd](https://github.com/GMHDBJD) **tw@hfxsd**
+* Optimize binlog parsing capability [#924](https://github.com/pingcap/dm/issues/924) @[gmhdbjd](https://github.com/GMHDBJD)
 
     TiDB can filter out binlog events of the schemas and tables that are not in the migration task, thus improving the parsing efficiency and stability. This policy takes effect by default in v6.5.0. No additional configuration is required.
 
     Previously, even if only a few tables were migrated, the entire binlog file upstream had to be parsed. The binlog events of the tables in the binlog file that did not need to be migrated still had to be parsed, which was not efficient. Meanwhile, if these binlog events do not support parsing, the task will fail. By only parsing the binlog events of the tables in the migration task, the binlog parsing efficiency can be greatly improved and the task stability can be enhanced.
 
-* Disk quota in TiDB Lightning is GA [#446](https://github.com/pingcap/tidb-lightning/issues/446) @[buchuitoudegou](https://github.com/buchuitoudegou) **tw@hfxsd**
+* Disk quota in TiDB Lightning is GA [#446](https://github.com/pingcap/tidb-lightning/issues/446) @[buchuitoudegou](https://github.com/buchuitoudegou)
 
     You can configure disk quota for TiDB Lightning. When there is not enough disk quota, TiDB Lightning stops reading source data and writing temporary files. Instead, it writes the sorted key-values to TiKV first, and then continues the import process after TiDB Lightning deletes the local temporary files.
 
@@ -243,7 +243,7 @@ Compared with the previous LTS 6.1.0, 6.5.0 not only includes new features, impr
 
     For more information, see [documentation](/tidb-lightning/tidb-lightning-physical-import-mode-usage.md#configure-disk-quota-new-in-v620).
 
-* Continuous data validation in DM is GA [#4426](https://github.com/pingcap/tiflow/issues/4426) @[D3Hunter](https://github.com/D3Hunter) **tw@hfxsd**
+* Continuous data validation in DM is GA [#4426](https://github.com/pingcap/tiflow/issues/4426) @[D3Hunter](https://github.com/D3Hunter)
 
     In the process of migrating incremental data from upstream to downstream databases, there is a small probability that data flow might cause errors or data loss. In scenarios where strong data consistency is required, such as credit and securities businesses, you can perform a full volume checksum on the data after migration to ensure data consistency. However, in some incremental replication scenarios, upstream and downstream writes are continuous and uninterrupted because the upstream and downstream data is constantly changing, making it difficult to perform consistency checks on all data.
 
@@ -253,39 +253,39 @@ Compared with the previous LTS 6.1.0, 6.5.0 not only includes new features, impr
 
 ### TiDB data share subscription
 
-* TiCDC supports replicating changed logs to storage sinks (experimental) [#6797](https://github.com/pingcap/tiflow/issues/6797) @[zhaoxinyu](https://github.com/zhaoxinyu) **tw@shichun-0415**
+* TiCDC supports replicating changed logs to storage sinks (experimental) [#6797](https://github.com/pingcap/tiflow/issues/6797) @[zhaoxinyu](https://github.com/zhaoxinyu)
 
      TiCDC supports replicating changed logs to Amazon S3, Azure Blob Storage, NFS, and other S3-compatible storage services. Cloud storage is reasonably priced and easy to use. If you do not want to use Kafka, you can use storage sinks. TiCDC saves the changed logs to a file and then sends it to the storage system. From the storage system, the consumer program reads the newly generated changed log files periodically.
 
     The storage sink supports changed logs in the canal-json and CSV formats. For more information, see [documentation](/ticdc/ticdc-sink-to-cloud-storage.md).
 
-* TiCDC supports bidirectional replication across multiple clusters [#38587](https://github.com/pingcap/tidb/issues/38587) @[xiongjiwei](https://github.com/xiongjiwei) @[asddongmen](https://github.com/asddongmen) **tw@ran-huang**
+* TiCDC supports bidirectional replication across multiple clusters [#38587](https://github.com/pingcap/tidb/issues/38587) @[xiongjiwei](https://github.com/xiongjiwei) @[asddongmen](https://github.com/asddongmen)
 
     TiCDC supports bidirectional replication across multiple TiDB clusters. If you need a multi-master TiDB solution for your application, especially a multi-master solution across multiple regions, you can use this feature to build one. By configuring the `bdr-mode = true` parameter for the TiCDC changefeeds from each TiDB cluster to the other TiDB clusters, you can achieve bidirectional data replication across multiple TiDB clusters.
 
     For more information, see [documentation](/ticdc/ticdc-bidirectional-replication.md).
 
-* TiCDC supports updating TLS online [#7908](https://github.com/pingcap/tiflow/issues/7908) @[CharlesCheung96](https://github.com/CharlesCheung96) **tw@shichun-0415**
+* TiCDC supports updating TLS online [#7908](https://github.com/pingcap/tiflow/issues/7908) @[CharlesCheung96](https://github.com/CharlesCheung96)
 
     To keep data secure, you need to set an expiration policy for the certificate used by the system. After the expiration period, the system needs a new certificate. TiCDC v6.5.0 supports online updates of TLS certificates. Without interrupting the replication tasks, TiCDC can automatically detect and update the certificate, without the need for manual intervention.
 
-* TiCDC performance improves significantly [#7540](https://github.com/pingcap/tiflow/issues/7540) [#7478](https://github.com/pingcap/tiflow/issues/7478) [#7532](https://github.com/pingcap/tiflow/issues/7532) @[sdojjy](https://github.com/sdojjy) [@3AceShowHand](https://github.com/3AceShowHand) **tw@shichun-0415
+* TiCDC performance improves significantly [#7540](https://github.com/pingcap/tiflow/issues/7540) [#7478](https://github.com/pingcap/tiflow/issues/7478) [#7532](https://github.com/pingcap/tiflow/issues/7532) @[sdojjy](https://github.com/sdojjy) [@3AceShowHand](https://github.com/3AceShowHand)
 
     In a test scenario of the TiDB cluster, the performance of TiCDC has improved significantly. Specifically, the maximum row changes that a single TiCDC can process reaches 30K rows/s, and the replication latency is reduced to 10s. Even during TiKV and TiCDC rolling upgrade, the replication latency is less than 30s. In a disaster recovery (DR) scenario, when the throughput is xx rows/s, the replication latency in DR can be maintained at x s.
 
 ### Backup and restore
 
-* TiDB Backup & Restore supports snapshot checkpoint backup [#38647](https://github.com/pingcap/tidb/issues/38647) @[Leavrth](https://github.com/Leavrth) **tw@shichun-0415
+* TiDB Backup & Restore supports snapshot checkpoint backup [#38647](https://github.com/pingcap/tidb/issues/38647) @[Leavrth](https://github.com/Leavrth)
 
     TiDB snapshot backup supports resuming backup from a checkpoint. When Backup & Restore (BR) encounters a recoverable error, it retries backup. However, BR exits if the retry fails for several times. The checkpoint backup feature allows for longer recoverable failures to be retried, for example, a network failure of tens of minutes.
 
     Note that if you do not recover the system from a failure within one hour after BR exits, the snapshot data to be backed up might be recycled by the GC mechanism, causing the backup to fail. For more information, see [documentation](/br/br-checkpoint.md).
 
-* PITR performance improved remarkably [@joccau](https://github.com/joccau) **tw@shichun-0415
+* PITR performance improved remarkably [@joccau](https://github.com/joccau)
 
     In the log restore stage, the restore speed of one TiKV can reach 9 MiB/s, which is 50% faster than before. The restore speed is scalable and the RTO in DR scenarios is reduced greatly. The RPO in DR scenarios can be as short as 5 minutes. In normal cluster operation and maintenance (OM), for example, a rolling upgrade is performed or only one TiKV is down, the RPO can be 5 minutes.
 
-* TiKV-BR GA: Supports backing up and restoring RawKV [#67](https://github.com/tikv/migration/issues/67) @[pingyu](https://github.com/pingyu) @[haojinming](https://github.com/haojinming) **tw@shichun-0415**
+* TiKV-BR GA: Supports backing up and restoring RawKV [#67](https://github.com/tikv/migration/issues/67) @[pingyu](https://github.com/pingyu) @[haojinming](https://github.com/haojinming)
 
     TiKV-BR is a backup and restore tool used in TiKV clusters. TiKV and PD can constitute a KV database when used without TiDB, which is called RawKV. TiKV-BR supports data backup and restore for products that use RawKV. TiKV-BR can also upgrade the [`api-version`](/tikv-configuration-file.md#api-version-new-in-v610) from `API V1` to `API V2` for TiKV cluster.
 
