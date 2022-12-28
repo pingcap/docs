@@ -51,13 +51,15 @@ The following configuration saves row change events to NFS:
 --sink-uri="file:///my-directory/prefix"
 ```
 
+### Optional parameters
+
 Other optional parameters in the URI are as follows:
 
 | Parameter | Description | Default value | Value range |
 | :---------| :---------- | :------------ | :---------- |
-| `worker-count` | Concurrency for saving data changes to cloud storage in the downstream  | `16` | [`1`, `512`] |
-| `flush-interval` | Interval for saving data changes to cloud storage in the downstream   | `5s` | [`2s`, `10m`] |
-| `file-size` | A data change file is stored to cloud storage if the number of bytes exceeds the value of this parameter | `67108864` | [`1048576`, `536870912`] |
+| `worker-count` | Concurrency for saving data changes to cloud storage in the downstream  | `16` | `[1, 512]` |
+| `flush-interval` | Interval for saving data changes to cloud storage in the downstream   | `5s` | `[2s, 10m]` |
+| `file-size` | A data change file is stored to cloud storage if the number of bytes exceeds the value of this parameter | `67108864` | `[1048576, 536870912]` |
 | `protocol` | The protocol format of the messages sent to the downstream.  | N/A |  `canal-json` and `csv` |
 
 > **Note:**
