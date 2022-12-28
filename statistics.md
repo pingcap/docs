@@ -338,40 +338,7 @@ To avoid the situation that modifying a small amount of data on a small table fr
 >
 > Currently, the automatic update does not record the configuration items input at manual `ANALYZE`. Therefore, when you use the `WITH` syntax to control the collecting behavior of `ANALYZE`, you need to manually set scheduled tasks to collect statistics.
 
-<<<<<<< HEAD
-Before v5.0, when you execute a query, TiDB collects feedback with `feedback-probability` and updates the histogram and Count-Min Sketch based on the feedback. **Since v5.0, this feature is disabled by default, and it is not recommended to enable this feature.**
-=======
 Before TiDB v5.0, when you execute a query, TiDB collects feedback with `feedback-probability` and updates the histogram and Count-Min Sketch based on the feedback. **Since v5.0, this feature is disabled by default. Since v5.4, this feature has been deprecated, and it is not recommended to enable this feature.**
-
-Since TiDB v6.0, TiDB supports using the `KILL` statement to terminate an `ANALYZE` task running in the background. If you find that an `ANALYZE` task running in the background consumes a lot of resources and affects your application, you can terminate the `ANALYZE` task by taking the following steps:
-
-1. Execute the following SQL statement:
-
-    {{< copyable "sql" >}}
-
-    ```sql
-    SHOW ANALYZE STATUS
-    ```
-
-    By checking the `instance` column and the `process_id` column in the result, you can get the TiDB instance address and the task `ID` of the background `ANALYZE` task.
-
-2. Terminate the `ANALYZE` task that is running in the background.
-
-    <CustomContent platform="tidb">
-
-    - If [`enable-global-kill`](/tidb-configuration-file.md#enable-global-kill-new-in-v610) is `true` (`true` by default), you can execute the `KILL TIDB ${id};` statement directly, where `${id}` is the `ID` of the background `ANALYZE` task obtained from the previous step.
-    - If `enable-global-kill` is `false`, you need to use a client to connect to the TiDB instance that is executing the backend `ANALYZE` task, and then execute the `KILL TIDB ${id};` statement. If you use a client to connect to another TiDB instance, or if there is a proxy between the client and the TiDB cluster, the `KILL` statement cannot terminate the background `ANALYZE` task.
-
-    </CustomContent>
-
-    <CustomContent platform="tidb-cloud">
-
-    To terminate the `ANALYZE` task, you can execute the `KILL TIDB ${id};` statement, where `${id}` is the `ID` of the background `ANALYZE` task obtained from the previous step.
-
-    </CustomContent>
-
-For more information on the `KILL` statement, see [`KILL`](/sql-statements/sql-statement-kill.md).
->>>>>>> 7900fbfdc (v6.1-v5.4: emphasize deprecation for stats feedback (#11749))
 
 ### Control `ANALYZE` concurrency
 
