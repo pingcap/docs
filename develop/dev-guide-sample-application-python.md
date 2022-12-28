@@ -1070,7 +1070,7 @@ python3 peewee_example.py
 
 </div>
 
-<div label="使用 mysqlclient" value="mysqlclient">
+<div label="Using mysqlclient" value="mysqlclient">
 
 ```bash
 python3 mysqlclient_example.py
