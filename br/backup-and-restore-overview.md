@@ -1,7 +1,6 @@
 ---
 title: TiDB Backup & Restore Overview
 summary: Learn about the definition and features of TiDB Backup & Restore.
-aliases: ['/docs/dev/br/backup-and-restore-tool/','/docs/dev/reference/tools/br/br/','/docs/dev/how-to/maintain/backup-and-restore/br/','/tidb/dev/backup-and-restore-tool/','/tidb/dev/point-in-time-recovery/']
 ---
 
 # TiDB Backup & Restore Overview
