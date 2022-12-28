@@ -450,6 +450,10 @@ Configuration items related to performance.
 
 ### `feedback-probability`
 
+> **Warning:**
+>
+> This feature has been deprecated since v5.4. It is not recommended to enable this feature.
+
 - The probability that TiDB collects the feedback statistics of each query.
 - Default value: `0`
 - This feature is disabled by default, and it is not recommended to enable this feature. If it is enabled, TiDB collects the feedback of each query at the probability of `feedback-probability`, to update statistics.
