@@ -16,6 +16,7 @@ These system tables contain grant information about user accounts and their priv
 - `db`: database-level privileges
 - `tables_priv`: table-level privileges
 - `columns_priv`: column-level privileges
+- `password_history`: password change history
 
 ## Server-side help system tables
 
@@ -31,6 +32,10 @@ Currently, the `help_topic` is NULL.
 ## GC worker system tables
 
 - `gc_delete_range`: to record the data to be deleted
+
+## System tables related to cached tables
+
+* `table_cache_meta` stores the metadata of cached tables.
 
 ## Miscellaneous system tables
 
