@@ -169,7 +169,7 @@ This document lists the features supported in each TiDB version. Note that suppo
 | [TiDB Binlog](/tidb-binlog/tidb-binlog-overview.md)                                                     | Y | Y | Y | Y | Y | Y  | Y   | Y    | Y    | Y    | Y    | Y    |
 | [Change data capture (CDC)](/ticdc/ticdc-overview.md)                                                   | Y | Y | Y | Y | Y | Y  | Y           | Y            | Y            | Y            | Y            | Y            |
 | [Stream data to Amazon S3, Azure Blob Storage, and NFS through TiCDC](/ticdc/ticdc-sink-to-cloud-storage.md) | Experimental | N | N | N | N | N | N | N | N | N | N | N |
-| [TiCDC supports bidirectional replication across multiple clusters](/ticdc/ticdc-bidirectional-replication.md) | Y | N | N | N | N | N | N | N | N | N | N | N |
+| [TiCDC supports bidirectional replication between two clusters](/ticdc/ticdc-bidirectional-replication.md) | Y | N | N | N | N | N | N | N | N | N | N | N |
 
 ## Management, observability, and tools
 
