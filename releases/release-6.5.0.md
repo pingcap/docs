@@ -16,14 +16,14 @@ Compared with the previous LTS 6.1.0, 6.5.0 not only includes new features, impr
 
 - The [index acceleration](/system-variables.md#tidb_ddl_enable_fast_reorg-new-in-v630) feature becomes generally available (GA), which improves the performance of adding indexes by about 10 times compared with v6.1.0.
 - The TiDB global memory control becomes GA, and you can control the memory consumption threshold via [`tidb_server_memory_limit`](/system-variables.md#tidb_server_memory_limit-new-in-v640).
-- The high-performance and globally monotonic [`AUTO_INCREMENT`](/auto-increment.md#mysql-compatible-mode) column attribute becomes GA, which is compatible with MySQL.
+- The high-performance and globally monotonic [`AUTO_INCREMENT`](/auto-increment.md#mysql-compatibility-mode) column attribute becomes GA, which is compatible with MySQL.
 - [`FLASHBACK CLUSTER TO TIMESTAMP`](/sql-statements/sql-statement-flashback-to-timestamp.md) is now compatible with TiCDC and PITR and becomes GA.
 - Enhance TiDB optimizer by making the more accurate [Cost Model version 2](/cost-model.md#cost-model-version-2) generally available and supporting expressions connected by `AND` for [INDEX MERGE](/explain-index-merge.md).
 - Support pushing down the `JSON_EXTRACT()` function to TiFlash.
 - Support [password management](/password-management.md) policies that meet password compliance auditing requirements.
 - TiDB Lightning and Dumpling support [importing](/tidb-lightning/tidb-lightning-data-source.md) and [exporting](/dumpling-overview.md#improve-export-efficiency-through-concurrency) compressed SQL and CSV files.
 - TiDB Data Migration (DM) [continuous data validation](/dm/dm-continuous-data-validation.md) becomes GA.
-- TiDB Backup & Restore supports snapshot checkpoint backup, improves the recovery performance of [PITR](/br/br-pitr-guide.md#carry-pitr) by 50%, and reduces the RPO to as short as 5 minutes.
+- TiDB Backup & Restore supports snapshot checkpoint backup, improves the recovery performance of [PITR](/br/br-pitr-guide.md#run-pitr) by 50%, and reduces the RPO to as short as 5 minutes.
 - Improve the TiCDC throughput of [replicating data to Kafka](/replicate-data-to-kafka.md) from 4000 rows/s to 35000 rows/s, and reduce the replication latency to 2s.
 - Provide row-level [Time to live (TTL)](/time-to-live.md) to manage data lifecycle (experimental).
 - TiCDC supports [replicating changed logs to object storage](/ticdc/ticdc-sink-to-cloud-storage.md) such as Amazon S3, Azure Blob Storage, and NFS (experimental).
@@ -82,7 +82,7 @@ Compared with the previous LTS 6.1.0, 6.5.0 not only includes new features, impr
 
     In v6.5.0, TiDB supports binding historical execution plans by extending the binding object in the [`CREATE [GLOBAL | SESSION] BINDING`](/sql-statements/sql-statement-create-binding.md) statement. When the execution plan of a SQL statement changes, you can bind the original execution plan by specifying `plan_digest` in the `CREATE [GLOBAL | SESSION] BINDING` statement to quickly recover SQL performance, as long as the original execution plan is still in the SQL execution history memory table (for example, `statements_summary`). This feature can simplify the process of handling execution plan change issues and improve your maintenance efficiency.
 
-    For more information, see [documentation](/sql-plan-management.md#bind-historical-execution-plans).
+    For more information, see [documentation](/sql-plan-management.md#create-a-binding-according-to-a-historical-execution-plan).
 
 ### Security
 
@@ -299,7 +299,7 @@ Compared with the previous LTS 6.1.0, 6.5.0 not only includes new features, impr
 |--------|------------------------------|------|
 |[`tidb_enable_amend_pessimistic_txn`](/system-variables.md#tidb_enable_amend_pessimistic_txn-new-in-v407)| Deprecated | Starting from v6.5.0, this variable is deprecated, and TiDB uses the [Metadata Lock](/metadata-lock.md) feature by default to avoid the `Information schema is changed` error. |
 | [`tidb_enable_outer_join_reorder`](/system-variables.md#tidb_enable_outer_join_reorder-new-in-v610) | Modified | Changes the default value from `OFF` to `ON` after further tests, meaning that the support of Outer Join for the [Join Reorder](/join-reorder.md) algorithm is enabled by default. |
-| [`tidb_cost_model_version`](/system-variables.md#tidb_cost_model_version-introduced-new-in-v620) | Modified | Changes the default value from `1` to `2` after further tests, meaning that Cost Model Version 2 is used for index selection and operator selection by default.  |
+| [`tidb_cost_model_version`](/system-variables.md#tidb_cost_model_version-new-in-v620) | Modified | Changes the default value from `1` to `2` after further tests, meaning that Cost Model Version 2 is used for index selection and operator selection by default.  |
 | [`tidb_enable_gc_aware_memory_track`](/system-variables.md#tidb_enable_gc_aware_memory_track)  |  Modified |   Changes the default value from `ON` to `OFF`. Because the GC-aware memory track is found inaccurate in tests and causes too large analyzed memory size tracked, the memory track is disabled. In addition, in Golang 1.19, the memory tracked by the GC-aware memory track does not have much impact on the overall memory.  |
 | [`tidb_enable_metadata_lock`](/system-variables.md#tidb_enable_metadata_lock-new-in-v630) | Modified | Changes the default value from `OFF` to `ON` after further tests, meaning that the metadata lock feature is enabled by default. |
 | [`tidb_enable_tiflash_read_for_write_stmt`](/system-variables.md#tidb_enable_tiflash_read_for_write_stmt-new-in-v630) | Modified | Takes effect starting from v6.5.0. It controls whether read operations in SQL statements containing `INSERT`, `DELETE`, and `UPDATE` can be pushed down to TiFlash. The default value is `OFF`. |
@@ -342,7 +342,7 @@ Compared with the previous LTS 6.1.0, 6.5.0 not only includes new features, impr
 | TiDB | [`disconnect-on-expired-password`](/tidb-configuration-file.md#disconnect-on-expired-password-new-in-v650) | Newly added | Determines whether TiDB disconnects the client connection when the password is expired. The default value is `true`, which means the client connection is disconnected when the password is expired. |
 | TiKV | `raw-min-ts-outlier-threshold` | Deleted | Since v6.4.0, this configuration item was deprecated. Since v6.5.0, this configuration item is deleted. |
 | TiKV | [`cdc.min-ts-interval`](/tikv-configuration-file.md#min-ts-interval)  | Modified | To reduce CDC latency, the default value is changed from `1s` to `200ms`. |
-| TiKV | [`memory-use-ratio`](/tikv-configuration-file.md#memory-use-ratio-introduced-new-in-v650) | Newly added | Indicates the ratio of available memory to total system memory in PITR log recovery. |
+| TiKV | [`memory-use-ratio`](/tikv-configuration-file.md#memory-use-ratio-new-in-v650) | Newly added | Indicates the ratio of available memory to total system memory in PITR log recovery. |
 | TiCDC | [`sink.terminator`](/ticdc/ticdc-changefeed-config.md#changefeed-configuration-parameters) | Newly added | Indicates the row terminator, which is used for separating two data change events. The value is empty by default, which means "\r\n" is used. |
 | TiCDC | [`sink.date-separator`](/ticdc/ticdc-changefeed-config.md#changefeed-configuration-parameters) | Newly added | Indicates the date separator type of the file directory. Value options are `none`, `year`, `month`, and `day`. `none` is the default value and means that the date is not separated. |
 | TiCDC | [`sink.enable-partition-separator`](/ticdc/ticdc-changefeed-config.md#changefeed-configuration-parameters) | Newly added | Specifies whether to use partitions as the separation string. The default value is `false`, which means that partitions in a table are not stored in separate directories. |
