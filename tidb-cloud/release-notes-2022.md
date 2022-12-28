@@ -8,6 +8,10 @@ aliases: ['/tidbcloud/beta/supported-tidb-versions','/tidbcloud/release-notes']
 
 This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-cloud/) in 2022.
 
+## December 28, 2022
+
+- Currently, after the TiDB 6.4.0 update, the cold start becomes slower in certain circumstances. We plan to rollback the default TiDB version of all [Serverless Tier](/tidb-cloud/select-cluster-tier.md#serverless-tier-beta) clusters from [v6.4.0](https://docs.pingcap.com/tidb/v6.4/release-6.4.0) to [v6.3.0](https://docs.pingcap.com/tidb/v6.3/release-6.3.0), and then fix the problem as soon as possible and update again.
+
 ## December 27, 2022
 
 **General changes**
