@@ -423,6 +423,10 @@ Configuration items related to performance.
 
 ### `feedback-probability`
 
+> **Warning:**
+>
+> `feedback-probability` is an experimental feature in the current version. It is not recommended to use it in the production environment.
+
 - The probability that TiDB collects the feedback statistics of each query.
 - Default value: `0`
 - This feature is disabled by default, and it is not recommended to enable this feature. If it is enabled, TiDB collects the feedback of each query at the probability of `feedback-probability`, to update statistics.
