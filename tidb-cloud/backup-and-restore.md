@@ -177,6 +177,6 @@ To restore a deleted cluster from recycle bin, take the following steps:
 
 6. In the **Security Settings** dialog box, set the root password and allowed IP addresses to connect to your cluster, and then click **Apply**.
 
-> **Note:** 
-> 
+> **Note:**
+>
 > You cannot restore a deleted cluster to any point in time. You can only select an automatic or manual backup to restore.

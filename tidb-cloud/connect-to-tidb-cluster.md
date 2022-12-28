@@ -19,7 +19,7 @@ For Serverless Tier clusters, you can connect to your cluster via standard conne
 
 - Connect via SQL editor (Beta)
 
-    SQL editor is a web-based SQL editor in the [TiDB Cloud console](https://tidbcloud.com/), which allows you to directly edit and run SQL queries against databases of Serverless Tier. To access SQL editor, navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page, locate your cluster, click **Connect**, and then select **SQL Editor** in the drop-down list.
+    SQL editor is a web-based SQL editor in the [TiDB Cloud console](https://tidbcloud.com/), which allows you to directly edit and run SQL queries against databases of Serverless Tier. To access SQL editor, navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page, click your cluster name, and select **SQL Editor** on the left navigation bar.
 
 ## Dedicated Tier
 
