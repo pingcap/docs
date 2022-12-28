@@ -42,7 +42,7 @@ TiDB 構成ファイルは、コマンドライン パラメーターよりも�
 ### <code>tmp-storage-path</code> {#code-tmp-storage-path-code}
 
 -   1 つの SQL ステートメントが`mem-quota-query`で指定されたメモリ クォータを超える場合に、一部の演算子の一時ストレージ パスを指定します。
--   デフォルト値: `<temporary directory of OS>/<OS user ID>_tidb/MC4wLjAuMDo0MDAwLzAuMC4wLjA6MTAwODA=/tmp-storage` 。 `MC4wLjAuMDo0MDAwLzAuMC4wLjA6MTAwODA=`は`Base64`の`<host>:<port>/<statusHost>:<statusPort>`のエンコード結果です。
+-   デフォルト値: `<temporary directory of OS>/<OS user ID>_tidb/MC4wLjAuMDo0MDAwLzAuMC4wLjA6MTAwODA=/tmp-storage` 。 `MC4wLjAuMDo0MDAwLzAuMC4wLjA6MTAwODA=`は`<host>:<port>/<statusHost>:<statusPort>`の`Base64`エンコード結果です。
 -   この構成は、 `oom-use-tmp-storage`が`true`の場合にのみ有効です。
 
 ### <code>tmp-storage-quota</code> {#code-tmp-storage-quota-code}
@@ -450,6 +450,10 @@ TiDB 構成ファイルは、コマンドライン パラメーターよりも�
 -   デフォルト値: `true`
 
 ### <code>feedback-probability</code> {#code-feedback-probability-code}
+
+> **警告：**
+>
+> この機能は、v5.4 以降廃止されました。この機能を有効にすることはお勧めしません。
 
 -   TiDB が各クエリのフィードバック統計を収集する確率。
 -   デフォルト値: `0`

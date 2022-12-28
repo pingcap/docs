@@ -335,7 +335,7 @@ ANALYZE TABLE TableName INDEX [IndexNameList] [WITH NUM BUCKETS|TOPN|CMSKETCH DE
 | `tidb_auto_analyze_start_time` | `00:00 +0000` | TiDBが自動更新できる1日の開始時刻 |
 | `tidb_auto_analyze_end_time`   | `23:59 +0000` | TiDBが自動更新できる1日の終了時刻 |
 
-テーブル内の`tbl`の行の総数に対する変更された行の数の比率が`tidb_auto_analyze_ratio`よりも大きく、現在の時刻が`tidb_auto_analyze_start_time`から`tidb_auto_analyze_end_time`の間にある場合、TiDB はバックグラウンドで`ANALYZE TABLE tbl`ステートメントを実行して、この統計を自動的に更新します。テーブル。
+テーブル内の`tbl`の行の総数に対する変更された行の数の比率が`tidb_auto_analyze_ratio`よりも大きく、現在の時刻が`tidb_auto_analyze_start_time`から`tidb_auto_analyze_end_time`の間である場合、TiDB はバックグラウンドで`ANALYZE TABLE tbl`ステートメントを実行して、この統計を自動的に更新します。テーブル。
 
 小さなテーブルで少量のデータを変更すると自動更新が頻繁にトリガーされるという状況を回避するために、テーブルの行数が 1000 未満の場合、そのようなデータ変更は TiDB で自動更新をトリガーしません。 `SHOW STATS_META`ステートメントを使用して、テーブル内の行数を表示できます。
 
@@ -343,7 +343,7 @@ ANALYZE TABLE TableName INDEX [IndexNameList] [WITH NUM BUCKETS|TOPN|CMSKETCH DE
 >
 > 現在、自動更新では、手動`ANALYZE`で入力された設定項目は記録されません。したがって、 `WITH`構文を使用して`ANALYZE`の収集動作を制御する場合は、スケジュールされたタスクを手動で設定して統計を収集する必要があります。
 
-v5.0 より前では、クエリを実行すると、TiDB はフィードバックを`feedback-probability`で収集し、フィードバックに基づいてヒストグラムと Count-Min Sketch を更新します。 **v5.0 以降、この機能はデフォルトで無効になっており、この機能を有効にすることはお勧めしません。**
+TiDB v5.0 より前では、クエリを実行すると、TiDB はフィードバックを`feedback-probability`で収集し、フィードバックに基づいてヒストグラムと Count-Min Sketch を更新します。 **v5.0 以降、この機能はデフォルトで無効になっています。 v5.4 以降、この機能は廃止されたため、この機能を有効にすることはお勧めしません。**
 
 ### <code>ANALYZE</code>同時実行の制御 {#control-code-analyze-code-concurrency}
 
