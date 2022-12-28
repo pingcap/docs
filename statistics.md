@@ -217,7 +217,7 @@ When the ratio of the number of modified rows to the total number of rows of `tb
 >
 > Currently, the automatic update does not record the configuration items input at manual `ANALYZE`. Therefore, when you use the `WITH` syntax to control the collecting behavior of `ANALYZE`, you need to manually set scheduled tasks to collect statistics.
 
-Before v5.0, when the query is executed, TiDB collects feedback with the probability of `feedback-probability` and uses it to update the histogram and Count-Min Sketch. **In v5.0, this feature is disabled by default, and it is not recommended to enable this feature.**
+Before v5.0, when the query is executed, TiDB collects feedback with the probability of `feedback-probability` and uses it to update the histogram and Count-Min Sketch. **In the current version, this feature is experimental and disabled by default, and it is not recommended to enable this feature in the production environment.**
 
 ### Control `ANALYZE` concurrency
 
