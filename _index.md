@@ -70,9 +70,7 @@ hide_commit: true
 
 [Scale a Cluster](https://docs.pingcap.com/tidb/v6.5/scale-tidb-using-tiup)
 
-[Back Up Cluster Data](https://docs.pingcap.com/tidb/v6.5/br-usage-backup)
-
-[Restore Cluster Data](https://docs.pingcap.com/tidb/v6.5/br-usage-restore)
+[Backup and Restore](https://docs.pingcap.com/tidb/v6.5/backup-and-restore-overview)
 
 [Daily Check](https://docs.pingcap.com/tidb/v6.5/daily-check)
 
