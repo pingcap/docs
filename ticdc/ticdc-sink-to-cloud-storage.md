@@ -9,7 +9,7 @@ summary: Learn how to replicate data to storage services using TiCDC, and learn 
 >
 > This feature is experimental. It is not recommended to use it in the production environment.
 
-Since v6.5.0, TiCDC supports saving row change events to Amazon S3, Azure Blob Storage, and NFS. This document describes how to create a changefeed that replicates incremental data to cloud storage using TiCDC, and how data is stored. The organization of this document is as follows:
+Since v6.5.0, TiCDC supports saving row change events to storage services, including Amazon S3, Azure Blob Storage, and NFS. This document describes how to create a changefeed that replicates incremental data to such storage services using TiCDC, and how data is stored. The organization of this document is as follows:
 
 - [How to replicate data to storage services](#replicate-change-data-to-storage-services)
 - [How data is stored in storage services](#storage-path-structure)
@@ -34,12 +34,12 @@ Info: {"upstream_id":7171388873935111376,"namespace":"default","id":"simple-repl
 - `--changefeed-id`: The ID of the changefeed. The format must match the `^[a-zA-Z0-9]+(\-[a-zA-Z0-9]+)*$` regular expression. If this ID is not specified, TiCDC automatically generates a UUID (the version 4 format) as the ID.
 - `--sink-uri`: The downstream address of the changefeed. For details, see [Configure sink URI](#configure-sink-uri).
 - `--start-ts`: The starting TSO of the changefeed. TiCDC starts pulling data from this TSO. The default value is the current time.
-- `--target-ts`: The ending TSO of the changefeed. The TiCDC cluster stops pulling data until this TSO. The default value is empty, which means that TiCDC does not automatically stop pulling data.
+- `--target-ts`: The ending TSO of the changefeed. TiCDC stops pulling data until this TSO. The default value is empty, which means that TiCDC does not automatically stop pulling data.
 - `--config`: The configuration file of the changefeed. For details, see [TiCDC changefeed configuration parameters](/ticdc/ticdc-changefeed-config.md).
 
 ## Configure sink URI
 
-This section describes how to configure cloud storage services in the changefeed URI, including Amazon S3, Azure Blob Storage, and NFS.
+This section describes how to configure storage services in the changefeed URI, including Amazon S3, Azure Blob Storage, and NFS.
 
 ### Configure S3 or Azure Blob Storage in sink URI
 
@@ -59,9 +59,9 @@ Other optional parameters in the URI are as follows:
 
 | Parameter | Description | Default value | Value range |
 | :---------| :---------- | :------------ | :---------- |
-| `worker-count` | Concurrency for saving data changes to cloud storage in the downstream  | `16` | `[1, 512]` |
-| `flush-interval` | Interval for saving data changes to cloud storage in the downstream   | `5s` | `[2s, 10m]` |
-| `file-size` | A data change file is stored to cloud storage if the number of bytes exceeds the value of this parameter | `67108864` | `[1048576, 536870912]` |
+| `worker-count` | Concurrency for saving data changes to cloud storage in the downstream.  | `16` | `[1, 512]` |
+| `flush-interval` | Interval for saving data changes to cloud storage in the downstream.   | `5s` | `[2s, 10m]` |
+| `file-size` | A data change file is stored to cloud storage if the number of bytes exceeds the value of this parameter. | `67108864` | `[1048576, 536870912]` |
 | `protocol` | The protocol format of the messages sent to the downstream.  | N/A |  `canal-json` and `csv` |
 
 > **Note:**
