@@ -1,6 +1,6 @@
 ---
 title: Guide for Developing a Storage Sink Consumer
-summary: Learn how to design and implement a storage sink consumer.
+summary: Learn how to design and implement a consumer to consume data changes in storage sinks.
 ---
 
 # Guide for Developing a Storage Sink Consumer
@@ -11,7 +11,7 @@ This document describes how to design and implement a TiDB data change consumer.
 >
 > The storage sink cannot handle the `DROP DATABASE` DDL. Therefore, avoid executing this DDL. If you do need to execute this DDL, execute it manually in the downstream MySQL.
 
-TiCDC does not provide any standard way for implementing a consumer. Therefore, this document provides a consumer example program written in Golang. This program reads data from the storage service and writes it to a MySQL-compatible database. You can refer to the data format and instructions provided in this example to implement a consumer on your own.
+TiCDC does not provide any standard way for implementing a consumer. This document provides a consumer example program written in Golang. This program can read data from the storage service and write the data to a MySQL-compatible database. You can refer to the data format and instructions provided in this example to implement a consumer on your own.
 
 [Consumer program written in Golang](https://github.com/pingcap/tiflow/tree/master/cmd/storage-consumer)
 
@@ -108,16 +108,16 @@ The consumer traverses the directory for the first time. The following is an exa
     │       └── schema.json
 ```
 
-The consumer parses the table schema of the `schema.json` file and obtains the DDL query statements:
+The consumer parses the table schema of the `schema.json` file and obtains the DDL Query statements:
 
-- If no query statement is found or `TableVersion` is less than the consumer checkpoint, the consumer skips this step.
-- If query statements exist or `TableVersion` is equal to or greater than the consumer checkpoint, the consumer executes the query statements in the downstream MySQL.
+- If no Query statement is found or `TableVersion` is less than the consumer checkpoint, the consumer skips this step.
+- If Query statements exist or `TableVersion` is equal to or greater than the consumer checkpoint, the consumer executes the DDL statements in the downstream MySQL.
 
 Then the consumer starts replicating the `CDC000001.json` file.
 
 In the following example, DDL query result in the `test/tbl_1/437752935075545091/schema.json` file is not empty:
 
-```
+```json
 {
     "Table":"test",
     "Schema":"tbl_1",
@@ -169,7 +169,7 @@ When the consumer traverses the directory again, it finds another new version di
     │   │   └── schema.json
 ```
 
-The consumption logic is consistent. Specifically, the consumer parses the table schema of the `schema.json` file and obtains DL query statements. Three cases are handled as described in the previous section. Then the consumer starts replicating the `CDC000001.json` file.
+The consumption logic is consistent. Specifically, the consumer parses the table schema of the `schema.json` file and obtains and processes DDL query statements accordingly. Then the consumer starts replicating the `CDC000001.json` file.
 
 ## Process DML events
 
