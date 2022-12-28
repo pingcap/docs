@@ -9,7 +9,7 @@ summary: Learn how to replicate data to storage services using TiCDC, and learn 
 >
 > This feature is experimental. It is not recommended to use it in the production environment.
 
-Since v6.5.0, TiCDC supports saving row change events to Amazon S3, Azure Blob Storage, and NFS. This document describes how to create a changefeed that replicates incremental data to cloud storages using TiCDC, and how data is stored. The organization of this document is as follows:
+Since v6.5.0, TiCDC supports saving row change events to Amazon S3, Azure Blob Storage, and NFS. This document describes how to create a changefeed that replicates incremental data to cloud storage using TiCDC, and how data is stored. The organization of this document is as follows:
 
 - [How to replicate data to storage services](#replicate-change-data-to-storage-services)
 - [How data is stored in storage services](#storage-path-structure)
@@ -25,19 +25,21 @@ cdc cli changefeed create \
     --changefeed-id="simple-replication-task"
 ```
 
+The output is as follows:
+
 ```shell
 Info: {"upstream_id":7171388873935111376,"namespace":"default","id":"simple-replication-task","sink_uri":"s3://logbucket/storage_test?protocol=canal-json","create_time":"2022-11-29T18:52:05.566016967+08:00","start_ts":437706850431664129,"engine":"unified","config":{"case_sensitive":true,"enable_old_value":true,"force_replicate":false,"ignore_ineligible_table":false,"check_gc_safe_point":true,"enable_sync_point":false,"sync_point_interval":600000000000,"sync_point_retention":86400000000000,"filter":{"rules":["*.*"],"event_filters":null},"mounter":{"worker_num":16},"sink":{"protocol":"canal-json","schema_registry":"","csv":{"delimiter":",","quote":"\"","null":"\\N","include_commit_ts":false},"column_selectors":null,"transaction_atomicity":"none","encoder_concurrency":16,"terminator":"\r\n","date_separator":"none","enable_partition_separator":false},"consistent":{"level":"none","max_log_size":64,"flush_interval":2000,"storage":""}},"state":"normal","creator_version":"v6.5.0-master-dirty"}
 ```
 
 - `--changefeed-id`: The ID of the changefeed. The format must match the `^[a-zA-Z0-9]+(\-[a-zA-Z0-9]+)*$` regular expression. If this ID is not specified, TiCDC automatically generates a UUID (the version 4 format) as the ID.
 - `--sink-uri`: The downstream address of the changefeed. For details, see [Configure sink URI](#configure-sink-uri).
-- `--start-ts`: The starting TSO of the changefeed. From this TSO, the TiCDC cluster starts pulling data. The default value is the current time.
-- `--target-ts`: The ending TSO of the changefeed. To this TSO, the TiCDC cluster stops pulling data. The default value is empty, which means that TiCDC does not automatically stop pulling data.
+- `--start-ts`: The starting TSO of the changefeed. TiCDC starts pulling data from this TSO. The default value is the current time.
+- `--target-ts`: The ending TSO of the changefeed. The TiCDC cluster stops pulling data until this TSO. The default value is empty, which means that TiCDC does not automatically stop pulling data.
 - `--config`: The configuration file of the changefeed. For details, see [TiCDC changefeed configuration parameters](/ticdc/ticdc-changefeed-config.md).
 
 ## Configure sink URI
 
-This section describes how to configure cloud storage, including Amazon S3, Azure Blob Storage, and NFS, in the changefeed URI.
+This section describes how to configure cloud storage services in the changefeed URI, including Amazon S3, Azure Blob Storage, and NFS.
 
 ### Configure S3 or Azure Blob Storage in sink URI
 
@@ -55,10 +57,10 @@ Other optional parameters in the URI are as follows:
 
 | Parameter | Description | Default value | Value range |
 | :---------| :---------- | :------------ | :---------- |
-| `worker-count` | Concurrency for saving data changes to cloud storage in the downstream  | `16` | [`1`, `512`] |
-| `flush-interval` | Interval for saving data changes to cloud storage in the downstream   | `5s` | [`2s`, `10m`] |
-| `file-size` | A data change file is stored to cloud storage if the number of bytes exceeds the value of this parameter | `67108864` | [`1048576`, `536870912`] |
-| `protocol` | The protocol format of the messages sent to the downstream.  | N/A |  `canal-json` and `csv` |
+| `worker-count` | Concurrency for saving data changes to the downstream cloud storage service  | `16` | `[1, 512]` |
+| `flush-interval` | Interval for saving data changes to the downstream cloud storage service. | `5s` | `[2s, 10m]` |
+| `file-size` | A data change file is stored to cloud storage if the number of bytes exceeds the value of this parameter. | `67108864` | `[1048576, 536870912]` |
+| `protocol` | The protocol format of the messages sent to the downstream. | N/A |  `canal-json` and `csv` |
 
 > **Note:**
 >
@@ -80,21 +82,21 @@ Data change records are saved to the following path:
 - `prefix`: specifies the user-defined parent directory, for example, <code>s3://**bucket/bbb/ccc**</code>.
 - `schema`: specifies the schema name, for example, <code>s3://bucket/bbb/ccc/**test**</code>.
 - `table`: specifies the table name, for example, <code>s3://bucket/bbb/ccc/test/**table1**</code>.
-- `table-version-separator`: specifies the separator that separates the file path by the table version, for example, <code>s3://bucket/bbb/ccc/test/table1/**9999**</code>.
-- `partition-separator`: specifies the separator that separates the file path by the table partition, for example, <code>s3://bucket/bbb/ccc/test/table1/9999/**20**</code>.
+- `table-version-separator`: specifies the separator that separates the path by the table version, for example, <code>s3://bucket/bbb/ccc/test/table1/**9999**</code>.
+- `partition-separator`: specifies the separator that separates the path by the table partition, for example, <code>s3://bucket/bbb/ccc/test/table1/9999/**20**</code>.
 - `date-separator`: classifies the files by the transaction commit date. Value options are:
     - `none`: no `date-separator`. For example, all files with `test.table1` version being `9999` are saved to `s3://bucket/bbb/ccc/test/table1/9999`.
-    - `year`: the separator is the year a transaction is committed, for example, <code>s3://bucket/bbb/ccc/test/table1/9999/**2022**</code>.
-    - `month`: the separator is the year and month a transaction is committed, for example, <code>s3://bucket/bbb/ccc/test/table1/9999/**2022-01**</code>.
-    - `day`: the separator is the year, month, and day a transaction is committed, for example, <code>s3://bucket/bbb/ccc/test/table1/9999/**2022-01-02**</code>.
+    - `year`: the separator is the year of the transaction commit date, for example, <code>s3://bucket/bbb/ccc/test/table1/9999/**2022**</code>.
+    - `month`: the separator is the year and month of the transaction commit date, for example, <code>s3://bucket/bbb/ccc/test/table1/9999/**2022-01**</code>.
+    - `day`: the separator is the year, month, and day of the transaction commit date, for example, <code>s3://bucket/bbb/ccc/test/table1/9999/**2022-01-02**</code>.
 - `num`: saves the serial number of the file that records the data change, for example, <code>s3://bucket/bbb/ccc/test/table1/9999/2022-01-02/CDC**000005**.csv</code>.
-- `extension`: specifies the extension of the file. TiDB v6.5.0 supports the CSV and canal-json formats.
+- `extension`: specifies the extension of the file. TiDB v6.5.0 supports the CSV and Canal-JSON formats.
 
 > **Note:**
 >
 > The table version changes in the following two cases:
 >
-> - After DDL operations are performed, the table version is the TSO when the DDL is executed in the upstream TiDB. However, the change of the table version does not mean the change of the table schema. For example, adding a comment to a column does not cause the `schema.json` file content to change.
+> - After a DDL operation is performed, the table version is the TSO when the DDL is executed in the upstream TiDB. However, the change of the table version does not mean the change of the table schema. For example, adding a comment to a column does not cause the `schema.json` file content to change.
 > - The changefeed process restarts. The table version is the checkpoint TSO when the process restarts. When there are many tables and the process restarts, it takes a long time to traverse all directories and find the position where each table was written last time. Therefore, data is written to a new directory with the version being the checkpoint TSO, instead of to the earlier directory.
 
 ### Metadata
@@ -107,7 +109,7 @@ Metadata is saved in the following path:
 
 Metadata is a JSON-formatted file, for example:
 
-```shell
+```json
 {
     "checkpoint-ts":433305438660591626
 }
@@ -117,9 +119,9 @@ Metadata is a JSON-formatted file, for example:
 
 ### DDL events
 
-When DDL events cause the table version to change, TiCDC switches to the new path to write data change records. For example, when the version of `test.table1` changes from `9999` to `10000`, data will be written to the path `s3://bucket/bbb/ccc/test/table1/10000/2022-01-02/CDC000001.csv`. In addition, when DDL events occur, TiCDC generates a `schema.json` file to save the table schema information.
+When DDL events cause the table version to change, TiCDC switches to a new path to write data change records. For example, when the version of `test.table1` changes from `9999` to `10000`, data will be written to the path `s3://bucket/bbb/ccc/test/table1/10000/2022-01-02/CDC000001.csv`. In addition, when DDL events occur, TiCDC generates a `schema.json` file to save the table schema information.
 
-Table  schema information is saved in the following path:
+Table schema information is saved in the following path:
 
 ```shell
 {scheme}://{prefix}/{schema}/{table}/{table-version-separator}/schema.json
@@ -176,7 +178,7 @@ The following is a `schema.json` file:
     - `ColumnLength`: Column length. For details, see [Data type](#data-type).
     - `ColumnPrecision`: Column precision. For details, see [Data type](#data-type).
     - `ColumnScale`: The number of digits following the decimal point (the scale). For details, see [Data type](#data-type).
-    - `ColumnNullable`: The column can be null when the value of this option is `true`.
+    - `ColumnNullable`: The column can be NULL when the value of this option is `true`.
     - `ColumnIsPk`: The column is part of the primary key when the value of this option is `true`.
 - `TableColumnsTotal`: The size of the `TableColumns` array.
 

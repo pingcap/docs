@@ -5,7 +5,7 @@ summary: Learn the concept of TiCDC CSV Protocol and how to use it.
 
 # TiCDC CSV Protocol
 
-When using a cloud storage as the sink, you can send DML events to the cloud storage in the CSV format.
+When using a cloud storage service as the downstream sink, you can send DML events to the cloud storage service in CSV format.
 
 ## Use CSV
 
@@ -31,19 +31,19 @@ include-commit-ts = true
 
 ## Transactional constraints
 
-- In a single CSV file, `commit-ts` of a row is equal to or smaller than that in the subsequent row.
+- In a single CSV file, the `commit-ts` of a row is equal to or smaller than that of the subsequent row.
 - The same transactions of a single table are stored in the same CSV file.
 - Multiple tables of the same transaction can be stored in different CSV files.
 
 ## Definition of the data format
 
-Each column in a row of the CSV file is defined as follows:
+In the CSV file, each column is defined as follows:
 
-- Column 1: The operation-type indicator, including `I`,  `U`, and `D`. `I` means `INSERT`, `U` means `UPDATE`, and `D` means `DELETE`.
+- Column 1: The operation-type indicator, including `I`, `U`, and `D`. `I` means `INSERT`, `U` means `UPDATE`, and `D` means `DELETE`.
 - Column 2: Table name.
 - Column 3: Schema name.
-- Column 4: `commit-ts` of the source transaction. This column is configurable.
-- Column 5- the last olumn n: One or more columns that represent data to be changed.
+- Column 4: The `commit-ts` of the source transaction. This column is optional.
+- Column 5 to the last column: One or more columns that represent data to be changed.
 
 Assume that table `hr.employee` is defined as follows:
 
