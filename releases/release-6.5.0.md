@@ -259,9 +259,9 @@ Compared with the previous LTS 6.1.0, 6.5.0 not only includes new features, impr
 
     The storage sink supports changed logs in the canal-json and CSV formats. For more information, see [documentation](/ticdc/ticdc-sink-to-cloud-storage.md).
 
-* TiCDC supports bidirectional replication across multiple clusters [#38587](https://github.com/pingcap/tidb/issues/38587) @[xiongjiwei](https://github.com/xiongjiwei) @[asddongmen](https://github.com/asddongmen)
+* TiCDC supports bidirectional replication between two clusters [#38587](https://github.com/pingcap/tidb/issues/38587) @[xiongjiwei](https://github.com/xiongjiwei) @[asddongmen](https://github.com/asddongmen)
 
-    TiCDC supports bidirectional replication across multiple TiDB clusters. If you need a multi-master TiDB solution for your application, especially a multi-master solution across multiple regions, you can use this feature to build one. By configuring the `bdr-mode = true` parameter for the TiCDC changefeeds from each TiDB cluster to the other TiDB clusters, you can achieve bidirectional data replication across multiple TiDB clusters.
+    TiCDC supports bidirectional replication between two TiDB clusters. If you need a multi-master TiDB solution for your application, especially a multi-master solution across multiple regions, you can use this feature to build one. By configuring the `bdr-mode = true` parameter for the TiCDC changefeeds from one TiDB cluster to another TiDB cluster, you can achieve bidirectional data replication between the two TiDB clusters.
 
     For more information, see [documentation](/ticdc/ticdc-bidirectional-replication.md).
 
