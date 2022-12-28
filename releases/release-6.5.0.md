@@ -38,7 +38,7 @@ Compared with the previous LTS 6.1.0, 6.5.0 not only includes new features, impr
 
 * Provide lightweight metadata lock to improve the DML success rate during DDL change (GA) [#37275](https://github.com/pingcap/tidb/issues/37275) @[wjhuang2016](https://github.com/wjhuang2016)
 
-    TiDB v6.3.0 introduces [Metadata lock](/metadata-lock.md) as an experimental feature. To avoid the `Information schema is changed` error caused by DML statements, TiDB coordinates the priority of DMLs and DDLs during table metadata change, and makes the ongoing DDLs wait for the DMLs with old metadata to commit. In v6.5.0, this feature becomes GA and is enabled by default. It is suitable for various types of DDLs change scenarios.
+    TiDB v6.3.0 introduces [Metadata lock](/metadata-lock.md) as an experimental feature. To avoid the `Information schema is changed` error caused by DML statements, TiDB coordinates the priority of DMLs and DDLs during table metadata change, and makes the ongoing DDLs wait for the DMLs with old metadata to commit. In v6.5.0, this feature becomes GA and is enabled by default. It is suitable for various types of DDLs change scenarios. When you upgrade your existing cluster from versions earlier than v6.5.0 to v6.5.0 or later, TiDB automatically enables metadata lock. To disable this feature, you can set the system variable [`tidb_enable_metadata_lock`](/system-variables.md#tidb_enable_metadata_lock-new-in-v630) to `OFF`.
 
     For more information, see [documentation](/metadata-lock.md).
 
@@ -179,7 +179,7 @@ Compared with the previous LTS 6.1.0, 6.5.0 not only includes new features, impr
 
 * TiFlash optimizes the operations of getting the number of table rows [#37165](https://github.com/pingcap/tidb/issues/37165) @[elsa0520](https://github.com/elsa0520)
 
-    In the scenarios of data analysis, It is a common operation to get the actual number of rows of a table through `COUNT(*)` without filter conditions. In v6.5.0, TiFlash optimizes the rewriting of `COUNT(*)` and automatically selects the not-null columns with the shortest column definition to count the number of rows, which can effectively reduce the number of I/O operations in TiFlash and improve the execution efficiency of getting row count.
+    In the scenarios of data analysis, It is a common operation to get the actual number of rows of a table through `COUNT(*)` without filter conditions. In v6.5.0, TiFlash optimizes the rewriting of `COUNT(*)` and automatically selects the not-null columns with the shortest column definition to count the number of rows, which can effectively reduce the number of I/O operations in TiFlash and improve the execution efficiency of getting row counts.
 
 ### Stability
 
@@ -203,7 +203,7 @@ Compared with the previous LTS 6.1.0, 6.5.0 not only includes new features, impr
 
 * Support the output of execution plans in the JSON format [#39261](https://github.com/pingcap/tidb/issues/39261) @[fzzf678](https://github.com/fzzf678)
 
-    In v6.5.0, TiDB extends the output format of execution plans. By using `EXPLAIN FORMAT=tidb_json <SQL_statement>`, you can output SQL execution plans in the JSON format. With this capability, SQL debugging tools and diagnostic tools can read execution plans more conveniently and accurately, thus improving the ease of use of SQL diagnosis and tuning.
+    In v6.5.0, TiDB extends the output format of execution plans. By specifying `FORMAT = "tidb_json"` in the `EXPLAIN` statement, you can output SQL execution plans in the JSON format. With this capability, SQL debugging tools and diagnostic tools can read execution plans more conveniently and accurately, thus improving the ease of use of SQL diagnosis and tuning.
 
     For more information, see [documentation](/sql-statements/sql-statement-explain.md).
 
@@ -261,7 +261,7 @@ Compared with the previous LTS 6.1.0, 6.5.0 not only includes new features, impr
 
 * TiCDC supports bidirectional replication between two clusters [#38587](https://github.com/pingcap/tidb/issues/38587) @[xiongjiwei](https://github.com/xiongjiwei) @[asddongmen](https://github.com/asddongmen)
 
-    TiCDC supports bidirectional replication between two TiDB clusters. If you need a multi-master TiDB solution for your application, especially a multi-master solution across multiple regions, you can use this feature to build one. By configuring the `bdr-mode = true` parameter for the TiCDC changefeeds from one TiDB cluster to another TiDB cluster, you can achieve bidirectional data replication between the two TiDB clusters.
+    TiCDC supports bidirectional replication between two TiDB clusters. If you need to build geo-distributed and multiple active data centers for your application, you can use this feature as a solution. By configuring the `bdr-mode = true` parameter for the TiCDC changefeeds from one TiDB cluster to another TiDB cluster, you can achieve bidirectional data replication between the two TiDB clusters.
 
     For more information, see [documentation](/ticdc/ticdc-bidirectional-replication.md).
 
@@ -300,7 +300,7 @@ Compared with the previous LTS 6.1.0, 6.5.0 not only includes new features, impr
 |[`tidb_enable_amend_pessimistic_txn`](/system-variables.md#tidb_enable_amend_pessimistic_txn-new-in-v407)| Deprecated | Starting from v6.5.0, this variable is deprecated, and TiDB uses the [Metadata Lock](/metadata-lock.md) feature by default to avoid the `Information schema is changed` error. |
 | [`tidb_enable_outer_join_reorder`](/system-variables.md#tidb_enable_outer_join_reorder-new-in-v610) | Modified | Changes the default value from `OFF` to `ON` after further tests, meaning that the support of Outer Join for the [Join Reorder](/join-reorder.md) algorithm is enabled by default. |
 | [`tidb_cost_model_version`](/system-variables.md#tidb_cost_model_version-introduced-new-in-v620) | Modified | Changes the default value from `1` to `2` after further tests, meaning that Cost Model Version 2 is used for index selection and operator selection by default.  |
-| [`tidb_enable_gc_aware_memory_track`](/system-variables#tidb_enable_gc_aware_memory_track)  |  Modified |   Changes the default value from `ON` to `OFF`. Because the GC-aware memory track is found inaccurate in tests and causes too large analyzed memory size tracked, the memory track is disabled. In addition, in Golang 1.19, the memory tracked by the GC-aware memory track does not have much impact on the overall memory.  |
+| [`tidb_enable_gc_aware_memory_track`](/system-variables.md#tidb_enable_gc_aware_memory_track)  |  Modified |   Changes the default value from `ON` to `OFF`. Because the GC-aware memory track is found inaccurate in tests and causes too large analyzed memory size tracked, the memory track is disabled. In addition, in Golang 1.19, the memory tracked by the GC-aware memory track does not have much impact on the overall memory.  |
 | [`tidb_enable_metadata_lock`](/system-variables.md#tidb_enable_metadata_lock-new-in-v630) | Modified | Changes the default value from `OFF` to `ON` after further tests, meaning that the metadata lock feature is enabled by default. |
 | [`tidb_enable_tiflash_read_for_write_stmt`](/system-variables.md#tidb_enable_tiflash_read_for_write_stmt-new-in-v630) | Modified | Takes effect starting from v6.5.0. It controls whether read operations in SQL statements containing `INSERT`, `DELETE`, and `UPDATE` can be pushed down to TiFlash. The default value is `OFF`. |
 | [`tidb_ddl_enable_fast_reorg`](/system-variables.md#tidb_ddl_enable_fast_reorg-new-in-v630) | Modified | Changes the default value from `OFF` to `ON` after further tests, meaning that the acceleration of `ADD INDEX` and `CREATE INDEX` is enabled by default. |
