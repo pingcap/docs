@@ -185,7 +185,7 @@ The SQL statement of this binding method is as follows:
 CREATE [GLOBAL | SESSION] BINDING FROM HISTORY USING PLAN DIGEST 'plan_digest';
 ```
 
-This statement binds an execution plan to a SQL statement using `plan_digest`. The default scope is SESSION. For the applicable SQL statements, priorities, scopes, and effective conditions of the created bindings, they are the same as that of [bindings created according to SQL statements](#create-a-binding-according-to-a-sql-statement).
+This statement binds an execution plan to a SQL statement using `plan_digest`. The default scope is SESSION. The applicable SQL statements, priorities, scopes, and effective conditions of the created bindings are the same as that of [bindings created according to SQL statements](#create-a-binding-according-to-a-sql-statement).
 
 To use this binding method, you need to first get the `plan_digest` corresponding to the target historical execution plan in `statements_summary`, and then create a binding using the `plan_digest`. The detailed steps are as follows:
 
