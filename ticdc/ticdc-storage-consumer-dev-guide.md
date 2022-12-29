@@ -23,7 +23,7 @@ The following diagram shows the overall consumption process of the consumer:
 
 The components of the consumer and their features are described as follows:
 
-```
+```go
 type StorageReader struct {
 }
 // Read the files from storage.
@@ -110,7 +110,7 @@ The consumer traverses the directory for the first time. The following is an exa
 
 The consumer parses the table schema of the `schema.json` file and obtains the DDL Query statements:
 
-- If no Query statement is found or `TableVersion` is less than the consumer checkpoint, the consumer skips this step.
+- If no Query statement is found or `TableVersion` is less than the consumer checkpoint, the consumer skips this statement.
 - If Query statements exist or `TableVersion` is equal to or greater than the consumer checkpoint, the consumer executes the DDL statements in the downstream MySQL.
 
 Then the consumer starts replicating the `CDC000001.json` file.
@@ -155,7 +155,7 @@ In the following example, DDL query result in the `test/tbl_1/437752935075545091
 }
 ```
 
-When the consumer traverses the directory again, it finds another new version directory of the table. Note that you can consume data in the new directory only after all files in the `test/tbl_1/437752935075545091` directory have been consumed.
+When the consumer traverses the directory again, it finds a new version directory of the table. Note that the consumer can consume data in the new directory only after all files in the `test/tbl_1/437752935075545091` directory have been consumed.
 
 ```
 ├── metadata
@@ -169,7 +169,7 @@ When the consumer traverses the directory again, it finds another new version di
     │   │   └── schema.json
 ```
 
-The consumption logic is consistent. Specifically, the consumer parses the table schema of the `schema.json` file and obtains and processes DDL query statements accordingly. Then the consumer starts replicating the `CDC000001.json` file.
+The consumption logic is consistent. Specifically, the consumer parses the table schema of the `schema.json` file and obtains and processes DDL Query statements accordingly. Then the consumer starts replicating the `CDC000001.json` file.
 
 ## Process DML events
 
