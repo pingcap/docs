@@ -115,7 +115,7 @@ The consumer parses the table schema of the `schema.json` file and obtains the D
 
 Then the consumer starts replicating the `CDC000001.json` file.
 
-In the following example, DDL query result in the `test/tbl_1/437752935075545091/schema.json` file is not empty:
+In the following example, the DDL Query statement in the `test/tbl_1/437752935075545091/schema.json` file is not empty:
 
 ```json
 {
