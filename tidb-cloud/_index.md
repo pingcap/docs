@@ -95,7 +95,7 @@ hide_commit: true
 
 [Password Authentication](https://docs.pingcap.com/tidbcloud/tidb-cloud-password-authentication)
 
-[Manage Profiles](https://docs.pingcap.com/tidbcloud/manage-user-access#manage-user-profiles)
+[Manage User Profiles](https://docs.pingcap.com/tidbcloud/manage-user-access#manage-user-profiles)
 
 [Manage organization access](https://docs.pingcap.com/tidbcloud/manage-user-access#manage-organization-access)
 
