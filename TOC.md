@@ -38,6 +38,7 @@
     - [Insert Data](/develop/dev-guide-insert-data.md)
     - [Update Data](/develop/dev-guide-update-data.md)
     - [Delete Data](/develop/dev-guide-delete-data.md)
+    - [Periodically Delete Data Using Time to Live](/time-to-live.md)
     - [Prepared Statements](/develop/dev-guide-prepared-statement.md)
   - Read Data
     - [Query Data from a Single Table](/develop/dev-guide-get-data-from-single-table.md)
@@ -323,6 +324,8 @@
         - [tiup cluster help](/tiup/tiup-component-cluster-help.md)
         - [tiup cluster import](/tiup/tiup-component-cluster-import.md)
         - [tiup cluster list](/tiup/tiup-component-cluster-list.md)
+        - [tiup cluster meta backup](/tiup/tiup-component-cluster-meta-backup.md)
+        - [tiup cluster meta restore](/tiup/tiup-component-cluster-meta-restore.md)
         - [tiup cluster patch](/tiup/tiup-component-cluster-patch.md)
         - [tiup cluster prune](/tiup/tiup-component-cluster-prune.md)
         - [tiup cluster reload](/tiup/tiup-component-cluster-reload.md)
@@ -499,6 +502,7 @@
       - Create Changefeeds
         - [Replicate Data to MySQL-compatible Databases](/ticdc/ticdc-sink-to-mysql.md)
         - [Replicate Data to Kafka](/ticdc/ticdc-sink-to-kafka.md)
+        - [Replicate Data to Storage Services](/ticdc/ticdc-sink-to-cloud-storage.md)
       - [Manage Changefeeds](/ticdc/ticdc-manage-changefeed.md)
       - [Log Filter](/ticdc/ticdc-filter.md)
       - [Bidirectional Replication](/ticdc/ticdc-bidirectional-replication.md)
@@ -513,6 +517,7 @@
         - [TiCDC Avro Protocol](/ticdc/ticdc-avro-protocol.md)
         - [TiCDC Canal-JSON Protocol](/ticdc/ticdc-canal-json.md)
         - [TiCDC Open Protocol](/ticdc/ticdc-open-protocol.md)
+        - [TiCDC CSV Protocol](/ticdc/ticdc-csv.md)
       - [TiCDC Open API](/ticdc/ticdc-open-api.md)
       - [Compatibility](/ticdc/ticdc-compatibility.md)
     - [Troubleshoot](/ticdc/troubleshoot-ticdc.md)
@@ -944,6 +949,7 @@
     - [5.2.1](/releases/release-5.2.1.md)
     - [5.2.0](/releases/release-5.2.0.md)
   - v5.1
+    - [5.1.5](/releases/release-5.1.5.md)
     - [5.1.4](/releases/release-5.1.4.md)
     - [5.1.3](/releases/release-5.1.3.md)
     - [5.1.2](/releases/release-5.1.2.md)
