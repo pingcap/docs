@@ -5,7 +5,7 @@ summary: Introduce how to integrate TiDB with Amazon AppFlow step by step.
 
 # Integrate TiDB with Amazon AppFlow
 
-Amazon AppFlow is a fully managed API integration service that you use to connect your software as a service (SaaS) applications to AWS services, and securely transfer data. With Amazon AppFlow, you can import and export data from and to TiDB into many types of data providers. Such as Salesforce, Amazon S3, LinkedIn, GitHub, etc. You can read the AWS document [Supported source and destination applications](https://docs.aws.amazon.com/appflow/latest/userguide/app-specific.html) to get more infomation.
+Amazon AppFlow is a fully managed API integration service that you use to connect your software as a service (SaaS) applications to AWS services, and securely transfer data. With Amazon AppFlow, you can import and export data from and to TiDB into many types of data providers, such as Salesforce, Amazon S3, LinkedIn, and GitHub. For more information, refer to the AWS document [Supported source and destination applications](https://docs.aws.amazon.com/appflow/latest/userguide/app-specific.html).
 
 This document describes how to integrate TiDB with Amazon AppFlow and takes a TiDB Cloud Serverless Tier cluster as an example.
 
@@ -75,7 +75,7 @@ git clone https://github.com/pingcap-inc/tidb-appflow-integration
     Successfully created/updated stack - <stack_name> in <region>
     ```
 
-    Then, go to the [AWS Lambda console](https://console.aws.amazon.com/lambda/home), and you can see the Lambda that you just uploaded. Note that you need to select the correct region in the upper-right corner of the window.
+4. Then, go to the [AWS Lambda console](https://console.aws.amazon.com/lambda/home), and you can see the Lambda that you just uploaded. Note that you need to select the correct region in the upper-right corner of the window.
 
     ![lambda dashboard](/media/develop/aws-appflow-step-lambda-dashboard.png)
 
@@ -91,7 +91,7 @@ git clone https://github.com/pingcap-inc/tidb-appflow-integration
 
 3. Click **Register**. Then, a TiDB connector is registered successfully.
 
-## Step 2. Use the TiDB connector to create a flow
+## Step 2. Create a flow
 
 Navigate to [Amazon AppFlow > Flows](https://console.aws.amazon.com/appflow/home#/list) and click **Create flow**.
 
@@ -115,7 +115,7 @@ Choose the **Source details** and **Destination details**. TiDB connector can be
 
     ![salesforce data](/media/develop/aws-appflow-step-salesforce-data.png)
 
-2. Click **Connect**. 
+2. Click **Connect**.
 
     1. In the **Connect to Salesforce** dialog, specify the name of this connection, and then click **Continue**.
 
