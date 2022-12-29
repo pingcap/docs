@@ -21,7 +21,7 @@ This document describes how to integrate TiDB with Amazon AppFlow and takes a Ti
 
         - `AWSCertificateManagerFullAccess`: used for reading and writing the [AWS Secrets Manager](https://aws.amazon.com/secrets-manager/).
         - `AWSCloudFormationFullAccess`: SAM CLI uses [AWS CloudFormation](https://aws.amazon.com/cloudformation/) to proclaim the AWS resources.
-        - `AmazonS3FullAccess`: AWS CloudFormation uses [AWS S3](https://aws.amazon.com/s3/?nc2=h_ql_prod_fs_s3) to publish.
+        - `AmazonS3FullAccess`: AWS CloudFormation uses [Amazon S3](https://aws.amazon.com/s3/?nc2=h_ql_prod_fs_s3) to publish.
         - `AWSLambda_FullAccess`: currently, [AWS Lambda](https://aws.amazon.com/lambda/?nc2=h_ql_prod_fs_lbd) is the only way to implement a new connector for Amazon AppFlow.
         - `IAMFullAccess`: SAM CLI needs to create a `ConnectorFunctionRole` for the connector.
 
@@ -30,6 +30,8 @@ This document describes how to integrate TiDB with Amazon AppFlow and takes a Ti
 ## Step 1. Register a TiDB connector
 
 ### Clone the code
+
+Clone the [integration example code repository](https://github.com/pingcap-inc/tidb-appflow-integration) for TiDB and Amazon AppFlow:
 
 ```bash
 git clone https://github.com/pingcap-inc/tidb-appflow-integration
@@ -60,7 +62,7 @@ git clone https://github.com/pingcap-inc/tidb-appflow-integration
     >
     > - The `--guided` option uses prompts to guide you through the deployment. Your input will be stored in a configuration file, which is `samconfig.toml` by default.
     > - `stack_name` specifies the name of AWS Lambda that you're deploying.
-    > - This guide uses AWS as the cloud provider of TiDB Cloud Serverless Tier. To use AWS S3 as the source or destination, you need to set the `region` of AWS Lambda as the same as that of AWS S3.
+    > - This guide uses AWS as the cloud provider of TiDB Cloud Serverless Tier. To use Amazon S3 as the source or destination, you need to set the `region` of AWS Lambda as the same as that of Amazon S3.
     > - If you have already run `sam deploy --guided` before, you can just run `sam deploy` instead, and SAM CLI will use the configuration file `samconfig.toml` to simplify the interaction.
 
     If you see a similar output as follows, this Lambda is successfully deployed.
@@ -75,7 +77,7 @@ git clone https://github.com/pingcap-inc/tidb-appflow-integration
 
 ### Use Lambda to register a connector
 
-1. In the [AWS Console](https://console.aws.amazon.com), navigate to [Amazon AppFlow > Connectors](https://console.aws.amazon.com/appflow/home#/gallery) and click **Register new connector**.
+1. In the [AWS Management Console](https://console.aws.amazon.com), navigate to [Amazon AppFlow > Connectors](https://console.aws.amazon.com/appflow/home#/gallery) and click **Register new connector**.
 
     ![register connector](/media/develop/aws-appflow-step-register-connector.png)
 
@@ -109,7 +111,9 @@ Choose the **Source details** and **Destination details**. TiDB connector can be
 
     ![salesforce data](/media/develop/aws-appflow-step-salesforce-data.png)
 
-- Click **Connect**. In the **Connect to Salesforce** dialog, specify the name of this connection and then click **Continue**.
+2. Click **Connect**. 
+
+    1. In the **Connect to Salesforce** dialog, specify the name of this connection, and then click **Continue**.
 
         ![connect to salesforce](/media/develop/aws-appflow-step-connect-to-salesforce.png)
 
@@ -200,7 +204,7 @@ If you want to add some filters to your data fields, you can set them here. Othe
 
 ### Confirm and create the flow
 
-Review the information of the flow to be created. If everything looks fine, click **Create flow**.
+Confirm the information of the flow to be created. If everything looks fine, click **Create flow**.
 
 ![review](/media/develop/aws-appflow-step-review.png)
 
