@@ -38,19 +38,19 @@ Serverless Tier clusters allow all IP addresses for connection by default, so yo
 2. Follow the steps in [Connect to a TiDB Cloud cluster via standard connection](/tidb-cloud/connect-to-tidb-cluster.md#connect-via-standard-connection) to get the connection information of your TiDB cluster.
 3. Go to your **Netlify dashboard** > **Netlify project** > **Site settings** > **Environment Variables**, and then [update variables](https://docs.netlify.com/environment-variables/get-started/#update-variables-with-the-netlify-ui) according to the connection information of your TiDB cluster.
 
-Here we use a Prisma application as an example. The following is a datasource setting in the Prisma schema file for a TiDB Cloud Serverless Tier cluster:
+    Here we use a Prisma application as an example. The following is a datasource setting in the Prisma schema file for a TiDB Cloud Serverless Tier cluster:
 
-```
-datasource db {
-  provider = "mysql"
-  url      = env("DATABASE_URL")
-}
-```
+    ```
+    datasource db {
+      provider = "mysql"
+      url      = env("DATABASE_URL")
+    }
+    ```
 
-In Netlify, you can declare the environment variables as follows.
+    In Netlify, you can declare the environment variables as follows.
 
-- **Key** = DATABASE_URL 
-- **Values** = `mysql://<User>:<Password>@<Endpoint>:<Port>/<Database>?sslaccept=strict`
+    - **Key** = DATABASE_URL 
+    - **Values** = `mysql://<User>:<Password>@<Endpoint>:<Port>/<Database>?sslaccept=strict`
 
 ![Set an environment variable in Netlify](/media/tidb-cloud/integration-netlify-environment-variables.jpg)
 
