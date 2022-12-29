@@ -11,6 +11,10 @@ Fortunately, Prisma has your back with the [Data Proxy](https://www.prisma.io/do
 
 This article will show how to deploy Cloudflare Workers with TiDB Cloud and Prisma Data Proxy step by step.
 
+> **Note:**
+>
+> If you want to connect a locally built TiDB to Cloudflare Workers, you can try [worker-tidb](https://github.com/shiyuhang0/worker-tidb) which use Cloudflare tunnels as a proxy. But it is not recommended for production use.
+
 # Integrate TiDB Cloud with Cloudflare Workers
 
 ## Before you begin
@@ -205,9 +209,3 @@ If you create a new table and want to query it. You need to:
 2. Push the changes to your repository. `git add prisma && git commit -m "add new model" && git push`.
 3. Generate the Prisma Client again. `npx prisma generate --data-proxy`.
 4. Publish the cloudflare worker again. `npx wrangler publish`.
-
-# Summary
-
-This article shows you how to use Prisma Data Proxy as a bridge to connect TiDB Cloud and Cloudflare Workers.
-
-If you want to connect a locally built TiDB to Cloudflare Workers, you can try [worker-tidb](https://github.com/shiyuhang0/worker-tidb) which use Cloudflare tunnels as a proxy. But it is not recommended for production use.
