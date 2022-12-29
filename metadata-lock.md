@@ -38,7 +38,6 @@ Enabling metadata lock might have some performance impact on the execution of th
 
 ## Usage
 
-<<<<<<< HEAD
 To control whether to enable metadata lock or not, you can use the system variable [`tidb_enable_metadata_lock`](/system-variables.md#tidb_enable_metadata_lock-new-in-v630).
 
 ## Principles
@@ -69,9 +68,6 @@ Metadata lock can ensure that the metadata versions used by all transactions in 
 
 - When executing a DML, TiDB records metadata objects accessed by the DML in the transaction context, such as tables, views, and corresponding metadata versions. These records are cleaned up when the transaction is committed.
 - When a DDL statement changes state, the latest version of metadata is pushed to all TiDB nodes. If the difference between the metadata version used by all transactions related to this state change on a TiDB node and the current metadata version is less than two, the TiDB node is considered to acquire the metadata lock of the metadata object. The next state change can only be executed after all TiDB nodes in the cluster have obtained the metadata lock of the metadata object.
-=======
-Starting from v6.5.0, TiDB enables metadata lock by default. When you upgrade your existing cluster from v6.4.0 or earlier to v6.5.0 or later, TiDB automatically enables metadata lock. To disable metadata lock, you can set the system variable [`tidb_enable_metadata_lock`](/system-variables.md#tidb_enable_metadata_lock-new-in-v630) to `OFF`.
->>>>>>> d2a8d10ea (refine the document of metadata lock (#11728))
 
 ## Impact
 
