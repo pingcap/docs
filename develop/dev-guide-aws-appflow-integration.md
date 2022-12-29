@@ -5,7 +5,11 @@ summary: Introduce how to integrate TiDB with Amazon AppFlow step by step.
 
 # Integrate TiDB with Amazon AppFlow
 
+Amazon AppFlow is a fully managed API integration service that you use to connect your software as a service (SaaS) applications to AWS services, and securely transfer data. With Amazon AppFlow, you can import and export data from and to TiDB into many types of data providers. Such as Salesforce, Amazon S3, LinkedIn, GitHub, etc. You can read the AWS document [Supported source and destination applications](https://docs.aws.amazon.com/appflow/latest/userguide/app-specific.html) to get more infomation.
+
 This document describes how to integrate TiDB with Amazon AppFlow and takes a TiDB Cloud Serverless Tier cluster as an example.
+
+If you do not have a TiDB cluster, you can create a [Serverless Tier](https://tidbcloud.com/console/clusters) cluster, which is free and can be created in approximately 30 seconds.
 
 ## Prerequisites
 
@@ -128,11 +132,6 @@ Choose the **Source details** and **Destination details**. TiDB connector can be
 3. In the **Destination details** area, choose **TiDB-Connector** as the destination. The **Connect** button is displayed.
 
     ![tidb dest](/media/develop/aws-appflow-step-tidb-dest.png)
-
-> **Note:**
->
-> - If you do not have a TiDB cluster, you can create a [Serverless Tier](https://tidbcloud.com/console/clusters) cluster, which is free and can be created in approximately 30 seconds.
-> - This guide uses AWS as the cloud provider of TiDB Cloud Serverless Tier. To speed up the connection, you can choose the same region as Lambda.
 
 4. Before clicking **Connect**, you need to create a `sf_account` table in TiDB for the Salesforce **Account** object. Note that this table schema is different from the sample data in [Tutorial of Amazon AppFlow](https://docs.aws.amazon.com/appflow/latest/userguide/flow-tutorial-set-up-source.html).
 
