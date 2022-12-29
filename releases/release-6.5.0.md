@@ -74,7 +74,7 @@ Compared with the previous LTS 6.1.0, 6.5.0 not only includes new features, impr
     - Reuse TiFlash query results or deal with highly concurrent online requests
     - Need a relatively small result set compared with the input data size, preferably smaller than 100 MiB.
 
-    For more information, see [documentation](/tiflash/tiflash-results-materialization.md).
+  For more information, see [documentation](/tiflash/tiflash-results-materialization.md).
 
 * Support binding history execution plans (experimental) [#39199](https://github.com/pingcap/tidb/issues/39199) @[fzzf678](https://github.com/fzzf678)
 
