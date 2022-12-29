@@ -52,6 +52,8 @@ Serverless Tier clusters allow all IP addresses for connection by default, so yo
     - **Key** = DATABASE_URL 
     - **Values** = `mysql://<User>:<Password>@<Endpoint>:<Port>/<Database>?sslaccept=strict`
 
+    You can get the information of `<User>`, `<Password>`, `<Endpoint>`, `<Port>`, and `<Database>` in the TiDB Cloud console.
+
 ![Set an environment variable in Netlify](/media/tidb-cloud/integration-netlify-environment-variables.jpg)
 
-Then you can use this new environment variable to connect to your TiDB Cloud cluster after re-deploying the site.
+After re-deploying the site, you can use this new environment variable to connect to your TiDB Cloud cluster.
