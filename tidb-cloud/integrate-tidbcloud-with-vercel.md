@@ -31,7 +31,7 @@ One Vercel project can only connect to one TiDB Cloud cluster. To change the int
 
 You are expected to have an account and a cluster in TiDB Cloud. If you do not have any, refer to [Create a TiDB cluster](/tidb-cloud/create-tidb-cluster.md).
 
-To integrate with Vercel, you are expected to have the "Owner" access to your organization or the "Member" access to the target project in TiDB Cloud. For more information, see [Configure member roles](/tidb-cloud/manage-user-access.md#configure-member-roles).
+To integrate with Vercel, you are expected to have the "Owner" access to your organization or the "Member" access to the target project in TiDB Cloud. For more information, see [Manage role access](/tidb-cloud/manage-user-access.md#manage-role-access).
 
 One TiDB Cloud cluster can connect to multiple Vercel projects.
 
@@ -52,7 +52,7 @@ The detailed steps are as follows:
 3. Select the Vercel Projects to which the integration will be added and click **CONTINUE**.
 4. Confirm the required permissions for integration and click **ADD INTEGRATION**. Then you are directed to an integration page of the TiDB Cloud console.
 5. On the left side, select the target Vercel projects and framework your Vercel projects using. If the framework isn't listed, select **General**. Different frameworks determine different environment variables.
-6. On the right side, select the target TiDB Cloud cluster after providing the cluster information. Each TiDB Cloud cluster belongs to [an organization and a project](/tidb-cloud/manage-user-access.md#view-the-organization-and-project).
+6. On the right side, select the target TiDB Cloud cluster after providing the cluster information. Each TiDB Cloud cluster belongs to [an organization and a project](/tidb-cloud/manage-user-access.md#organizations-and-projects).
 7. Click **Add Integration and Return to Vercel**.
 8. Back to your Vercel dashboard, go to your Vercel project, click **Settings** > **Environment Variables**, and confirm that the environment variables have been automatically added.
 
