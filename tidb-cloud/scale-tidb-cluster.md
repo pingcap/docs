@@ -111,7 +111,8 @@ For a running cluster, AWS and Google Cloud do not allow in-place storage capaci
 
 > **Note:**
 >
-> Increasing ndoe size is only available to clusters that are created in AWS after 2022/yy/mm.
+> - Increasing node size is only available to clusters that are created in AWS after 2022/yy/mm.
+> - AWS has a cooldown period of node storage or size changes. If your TiDB cluster is hosted by AWS, after changing the node storage or node size of TiKV or TiFlash, you must wait at least six hours before you can change it again.
 
 You can increase the node size for TiDB, TiKV, and TiFlash. Decreasing the node size is not supported.
 
