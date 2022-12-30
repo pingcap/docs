@@ -9,11 +9,8 @@ This document shows all the released TiDB versions in reverse chronological orde
 
 | Version | Release Date |
 | :--- | :--- |
-<<<<<<< HEAD
-=======
 | [5.1.5](/releases/release-5.1.5.md) | 2022-12-28 |
 | [6.1.3](/releases/release-6.1.3.md) | 2022-12-05 |
->>>>>>> 82d75cb65 (add v5.1.5 release notes (#11629))
 | [5.3.4](/releases/release-5.3.4.md) | 2022-11-24 |
 | [5.3.3](/releases/release-5.3.3.md) | 2022-09-14 |
 | [6.1.1](https://docs.pingcap.com/tidb/v6.1/release-6.1.1) | 2022-09-01 |
