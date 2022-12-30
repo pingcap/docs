@@ -4,7 +4,7 @@
 - [Docs Home](https://docs.pingcap.com/)
 - About TiDB
   - [TiDB Introduction](/overview.md)
-  - [TiDB 6.4 Release Notes](/releases/release-6.4.0.md)
+  - [TiDB 6.5 Release Notes](/releases/release-6.5.0.md)
   - [Basic Features](/basic-features.md)
   - [Experimental Features](/experimental-features.md)
   - [MySQL Compatibility](/mysql-compatibility.md)
@@ -38,6 +38,7 @@
     - [Insert Data](/develop/dev-guide-insert-data.md)
     - [Update Data](/develop/dev-guide-update-data.md)
     - [Delete Data](/develop/dev-guide-delete-data.md)
+    - [Periodically Delete Data Using Time to Live](/time-to-live.md)
     - [Prepared Statements](/develop/dev-guide-prepared-statement.md)
   - Read Data
     - [Query Data from a Single Table](/develop/dev-guide-get-data-from-single-table.md)
@@ -501,6 +502,7 @@
       - Create Changefeeds
         - [Replicate Data to MySQL-compatible Databases](/ticdc/ticdc-sink-to-mysql.md)
         - [Replicate Data to Kafka](/ticdc/ticdc-sink-to-kafka.md)
+        - [Replicate Data to Storage Services](/ticdc/ticdc-sink-to-cloud-storage.md)
       - [Manage Changefeeds](/ticdc/ticdc-manage-changefeed.md)
       - [Log Filter](/ticdc/ticdc-filter.md)
       - [Bidirectional Replication](/ticdc/ticdc-bidirectional-replication.md)
@@ -515,7 +517,9 @@
         - [TiCDC Avro Protocol](/ticdc/ticdc-avro-protocol.md)
         - [TiCDC Canal-JSON Protocol](/ticdc/ticdc-canal-json.md)
         - [TiCDC Open Protocol](/ticdc/ticdc-open-protocol.md)
+        - [TiCDC CSV Protocol](/ticdc/ticdc-csv.md)
       - [TiCDC Open API](/ticdc/ticdc-open-api.md)
+      - [Guide for Developing a Storage Sink Consumer](/ticdc/ticdc-storage-consumer-dev-guide.md)
       - [Compatibility](/ticdc/ticdc-compatibility.md)
     - [Troubleshoot](/ticdc/troubleshoot-ticdc.md)
     - [FAQs](/ticdc/ticdc-faq.md)
@@ -915,6 +919,8 @@
   - [Release Timeline](/releases/release-timeline.md)
   - [TiDB Versioning](/releases/versioning.md)
   - [TiDB Installation Packages](/binary-package.md)
+  - v6.5
+    - [6.5.0](/releases/release-6.5.0.md)
   - v6.4
     - [6.4.0-DMR](/releases/release-6.4.0.md)
   - v6.3
