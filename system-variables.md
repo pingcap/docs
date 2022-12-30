@@ -1106,7 +1106,7 @@ MPP is a distributed computing framework provided by the TiFlash engine, which a
 > **Warning:**
 >
 >
-> Currently, this feature is not fully compatible with the [altering multiple columns or indexes in a single `ALTER TABLE` statement](/sql-statements/sql-statement-alter-table.md) feature. When adding a unique index with the index acceleration, you need to avoid altering other columns or indexes in the same statement.
+> Currently, this feature is not fully compatible with [altering multiple columns or indexes in a single `ALTER TABLE` statement](/sql-statements/sql-statement-alter-table.md). When adding a unique index with the index acceleration, you need to avoid altering other columns or indexes in the same statement.
 >
 > Currently, this feature is not compatible with [PITR (Point-in-time recovery)](/br/backup-and-restore-overview.md). When using index acceleration, you need to ensure that there are no PITR log backup tasks running in the background. Otherwise, unexpected behaviors might occur, including:
 >
