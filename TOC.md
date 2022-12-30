@@ -127,6 +127,7 @@
             -   [集計](/explain-aggregation.md)
             -   [ビュー](/explain-views.md)
             -   [パーティション](/explain-partitions.md)
+            -   [インデックス マージ](/explain-index-merge.md)
         -   SQL 最適化プロセス
             -   [概要](/sql-optimization-concepts.md)
             -   ロジックの最適化
@@ -139,7 +140,7 @@
                 -   [パーティションのプルーニング](/partition-pruning.md)
                 -   [TopN とリミット プッシュ ダウン](/topn-limit-push-down.md)
                 -   [結合したテーブルの再配置](/join-reorder.md)
-            -   物理的最適化
+            -   物理的な最適化
                 -   [概要](/sql-physical-optimization.md)
                 -   [インデックスの選択](/choose-index.md)
                 -   [統計](/statistics.md)
@@ -262,7 +263,7 @@
         -   [TiDBクラスタトポロジ リファレンス](/tiup/tiup-cluster-topology-reference.md)
         -   [DMクラスタトポロジ リファレンス](/tiup/tiup-dm-topology-reference.md)
         -   [ミラー リファレンス ガイド](/tiup/tiup-mirror-reference.md)
-        -   TiUP コンポーネント
+        -   TiUPコンポーネント
             -   [tiup-playground](/tiup/tiup-playground.md)
             -   [tiup-cluster](/tiup/tiup-cluster.md)
             -   [tiup-mirror](/tiup/tiup-mirror.md)
@@ -319,7 +320,7 @@
             -   基本的な機能
                 -   [テーブル ルーティング](/dm/dm-key-features.md)
                 -   [ブロックリストと許可リスト](/dm/dm-key-features.md#block-and-allow-table-lists)
-                -   [Binlogイベント フィルター](/dm/dm-key-features.md#binlog-event-filter)
+                -   [Binlogイベント フィルタ](/dm/dm-key-features.md#binlog-event-filter)
             -   高度な機能
                 -   シャード テーブルからのデータのマージと移行
                     -   [概要](/dm/feature-shard-merge.md)
@@ -372,7 +373,7 @@
             -   [パフォーマンスの問題を処理する](/dm/dm-handle-performance-issues.md)
         -   性能チューニング
             -   [Configuration / コンフィグレーションの最適化](/dm/dm-tune-configuration.md)
-        -   参照
+        -   リファレンス
             -   アーキテクチャ
                 -   [DMアーキテクチャの概要](/dm/dm-overview.md)
                 -   [DMワーカー](/dm/dm-worker-intro.md)
@@ -389,7 +390,7 @@
         -   セキュリティ
             -   [DM 接続の TLS を有効にする](/dm/dm-enable-tls.md)
             -   [自己署名証明書の生成](/dm/dm-generate-self-signed-certificates.md)
-        -   [指標の監視](/dm/monitor-a-dm-cluster.md)
+        -   [指標のモニタリング](/dm/monitor-a-dm-cluster.md)
         -   [アラート ルール](/dm/dm-alert-rules.md)
         -   [エラーコード](/dm/dm-error-handling.md#handle-common-errors)
         -   [FAQ](/dm/dm-faq.md)
@@ -419,10 +420,10 @@
         -   [DM レプリケーション シナリオでのデータ チェック](/sync-diff-inspector/dm-diff.md)
     -   ティスパーク
         -   [ユーザーガイド](/tispark-overview.md)
--   参照
+-   リファレンス
     -   クラスタアーキテクチャ
         -   [概要](/tidb-architecture.md)
-        -   [保管所](/tidb-storage.md)
+        -   [ストレージ](/tidb-storage.md)
         -   [コンピューティング](/tidb-computing.md)
         -   [スケジューリング](/tidb-scheduling.md)
     -   主な監視指標
@@ -777,6 +778,7 @@
         -   [5.2.1](/releases/release-5.2.1.md)
         -   [5.2.0](/releases/release-5.2.0.md)
     -   v5.1
+        -   [5.1.5](/releases/release-5.1.5.md)
         -   [5.1.4](/releases/release-5.1.4.md)
         -   [5.1.3](/releases/release-5.1.3.md)
         -   [5.1.2](/releases/release-5.1.2.md)
