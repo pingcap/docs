@@ -96,7 +96,7 @@ Depending on the location and size of your source data, the importing methods ar
 - If your source data is located in Amazon S3 cloud storage, take the following steps:
 
     1. Configure Amazon S3 access to allow TiDB cloud to access the source data in your Amazon S3 bucket. For more information, see [configure Amazon S3 access](/tidb-cloud/config-s3-and-gcs-access.md#configure-amazon-s3-access).
-    2. From the [TiDB Cloud console](https://tidbcloud.com/), navigate to the **Clusters** page, and then click the name of your target cluster to go to its own overview page. Click **Import Data**, and then fill in the importing related information on the **Data Import** page.
+    2. Log in to the [TiDB Cloud console](https://tidbcloud.com/), navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page, choose your target project on the top of the left navigation bar. Then, locate your target cluster, click **...** in the upper-right corner of the cluster area, select **Import Data**, and then fill in the importing related information on the **Data Import** page.
 
 - If your source data is in local files, do one of the following:
 

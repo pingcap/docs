@@ -129,12 +129,6 @@ Now, the offline mirror has been upgraded successfully. If an error occurs durin
 > **Note:**
 >
 > Before you upgrade the cluster to v6.1.0, make sure that the parameters you have modified in v4.0 are compatible in v6.1.0. For details, see [TiKV Configuration File](/tikv-configuration-file.md).
->
-> The following three TiKV parameters are obsolete in TiDB v5.0. If the following parameters have been configured in your original cluster, you need to delete these parameters through `edit-config`:
->
-> - pessimistic-txn.enabled
-> - server.request-batch-enable-cross-command
-> - server.request-batch-wait-duration
 
 ### Step 3: Check the health status of the current cluster
 
@@ -171,12 +165,12 @@ If your application has a maintenance window for the database to be stopped for 
 tiup cluster upgrade <cluster-name> <version>
 ```
 
-For example, if you want to upgrade the cluster to v6.1.2:
+For example, if you want to upgrade the cluster to v6.1.3:
 
 {{< copyable "shell-regular" >}}
 
 ```shell
-tiup cluster upgrade <cluster-name> v6.1.2
+tiup cluster upgrade <cluster-name> v6.1.3
 ```
 
 > **Note:**
@@ -231,7 +225,7 @@ tiup cluster display <cluster-name>
 ```
 Cluster type:       tidb
 Cluster name:       <cluster-name>
-Cluster version:    v6.1.2
+Cluster version:    v6.1.3
 ```
 
 > **Note:**
@@ -281,7 +275,7 @@ You can upgrade the tool version by using TiUP to install the `ctl` component of
 {{< copyable "shell-regular" >}}
 
 ```shell
-tiup install ctl:v6.1.2
+tiup install ctl:v6.1.3
 ```
 
 ## TiDB 6.1.0 compatibility changes

@@ -107,7 +107,7 @@ On the cluster detail page of TiDB Cloud, click **Import Data** in the **Import*
     arn:aws:iam::494090988690:role/s3-tidb-cloud-developer-access
     ```
 
-3. Click **Next** to go to the **File and filter** step to confirm the information of the files to be imported.
+3. Click **Next** to go to the **Choose the tables to be imported** step to confirm the information of the files to be imported.
 
 4. Click **Next** again to go to the **Preview** step to confirm the preview of the data to be imported.
 
