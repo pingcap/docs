@@ -47,7 +47,7 @@ Connect to TiDB as the `jennifer` user:
 mysql -h 127.0.0.1 -P 4000 -u jennifer
 ```
 
-Note that by default `jennifer` needs to `SET ROLE analyticsteam` in order to be able to use the privileges associated with the `analyticsteam` role:
+Note that by default `jennifer` needs to execute `SET ROLE analyticsteam` in order to be able to use the privileges associated with the `analyticsteam` role:
 
 ```sql
 SHOW GRANTS;
@@ -102,7 +102,7 @@ Connect to TiDB as the `jennifer` user:
 mysql -h 127.0.0.1 -P 4000 -u jennifer
 ```
 
-After this, the user `jennifer` has the privileges associated with the role `analyticsteam` and you do not have to execute the statement `SET ROLE`:
+After this, the user `jennifer` has the privileges associated with the role `analyticsteam` and `jennifer` does not have to execute the statement `SET ROLE`:
 
 ```sql
 SHOW GRANTS;
@@ -137,7 +137,7 @@ DROP ROLE analyticsteam;
 Query OK, 0 rows affected (0.02 sec)
 ```
 
-`jennifer` no longer has the default role of `analyticsteam` associated, or can set the role to `analyticsteam`.
+`jennifer` no longer has the default role of `analyticsteam` associated, nor can set the role to `analyticsteam`.
 
 Connect to TiDB as the `jennifer` user:
 
