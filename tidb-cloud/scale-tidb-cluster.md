@@ -101,7 +101,7 @@ You can also increase the storage of a TiKV or TiFlash node using TiDB Cloud API
 
 > **Note:**
 >
-> AWS has a cooldown period of node storage or size changes. If your TiDB cluster is hosted by AWS, after changing the node storage or node size of TiKV or TiFlash, you must wait at least six hours before you can change it again.
+> AWS has a cooldown period of node storage changes. If your TiDB cluster is hosted on AWS, after changing the node storage or node size of TiKV or TiFlash, you must wait at least six hours before you can change it again.
 
 ### Decrease node storage
 
