@@ -5,9 +5,9 @@ summary: Introduce how to integrate TiDB with Amazon AppFlow step by step.
 
 # Integrate TiDB with Amazon AppFlow
 
-Amazon AppFlow is a fully managed API integration service that you use to connect your software as a service (SaaS) applications to AWS services, and securely transfer data. With Amazon AppFlow, you can import and export data from and to TiDB into many types of data providers, such as Salesforce, Amazon S3, LinkedIn, and GitHub. For more information, refer to the AWS document [Supported source and destination applications](https://docs.aws.amazon.com/appflow/latest/userguide/app-specific.html).
+[Amazon AppFlow](https://aws.amazon.com/appflow/) is a fully managed API integration service that you use to connect your software as a service (SaaS) applications to AWS services, and securely transfer data. With Amazon AppFlow, you can import and export data from and to TiDB into many types of data providers, such as Salesforce, Amazon S3, LinkedIn, and GitHub. For more information, see [Supported source and destination applications](https://docs.aws.amazon.com/appflow/latest/userguide/app-specific.html) in AWS documentation.
 
-This document describes how to integrate TiDB with Amazon AppFlow and takes a TiDB Cloud Serverless Tier cluster as an example.
+This document describes how to integrate TiDB with Amazon AppFlow and takes integrating a TiDB Cloud Serverless Tier cluster as an example.
 
 If you do not have a TiDB cluster, you can create a [Serverless Tier](https://tidbcloud.com/console/clusters) cluster, which is free and can be created in approximately 30 seconds.
 
@@ -50,7 +50,7 @@ git clone https://github.com/pingcap-inc/tidb-appflow-integration
     mvn clean package
     ```
 
-2. (Optional) You need to configure your AWS access key ID and secret access key if you haven't.
+2. (Optional) Configure your AWS access key ID and secret access key if you have not.
 
     ```bash
     aws configure
@@ -65,8 +65,8 @@ git clone https://github.com/pingcap-inc/tidb-appflow-integration
     > **Note:**
     >
     > - The `--guided` option uses prompts to guide you through the deployment. Your input will be stored in a configuration file, which is `samconfig.toml` by default.
-    > - `stack_name` specifies the name of AWS Lambda that you're deploying.
-    > - This guide uses AWS as the cloud provider of TiDB Cloud Serverless Tier. To use Amazon S3 as the source or destination, you need to set the `region` of AWS Lambda as the same as that of Amazon S3.
+    > - `stack_name` specifies the name of AWS Lambda that you are deploying.
+    > - This prompted guide uses AWS as the cloud provider of TiDB Cloud Serverless Tier. To use Amazon S3 as the source or destination, you need to set the `region` of AWS Lambda as the same as that of Amazon S3.
     > - If you have already run `sam deploy --guided` before, you can just run `sam deploy` instead, and SAM CLI will use the configuration file `samconfig.toml` to simplify the interaction.
 
     If you see a similar output as follows, this Lambda is successfully deployed.
@@ -75,7 +75,7 @@ git clone https://github.com/pingcap-inc/tidb-appflow-integration
     Successfully created/updated stack - <stack_name> in <region>
     ```
 
-4. Then, go to the [AWS Lambda console](https://console.aws.amazon.com/lambda/home), and you can see the Lambda that you just uploaded. Note that you need to select the correct region in the upper-right corner of the window.
+4. Go to the [AWS Lambda console](https://console.aws.amazon.com/lambda/home), and you can see the Lambda that you just uploaded. Note that you need to select the correct region in the upper-right corner of the window.
 
     ![lambda dashboard](/media/develop/aws-appflow-step-lambda-dashboard.png)
 
@@ -85,7 +85,7 @@ git clone https://github.com/pingcap-inc/tidb-appflow-integration
 
     ![register connector](/media/develop/aws-appflow-step-register-connector.png)
 
-2. In the **Register a new connector** dialog, choose the Lambda function you uploaded and specify the connector label, which is the name of the connector.
+2. In the **Register a new connector** dialog, choose the Lambda function you uploaded and specify the connector label using the connector name.
 
     ![register connector dialog](/media/develop/aws-appflow-step-register-connector-dialog.png)
 
@@ -127,7 +127,7 @@ Choose the **Source details** and **Destination details**. TiDB connector can be
 
     > **Note:**
     >
-    > If your company already used the Professional Edition of Salesforce, the REST API is not enabled by default. You might need to register a new Developer Edition to use the REST API. For more information, refer to [Salesforce Forum Topic](https://developer.salesforce.com/forums/?id=906F0000000D9Y2IAK).
+    > If your company has already used the Professional Edition of Salesforce, the REST API is not enabled by default. You might need to register a new Developer Edition to use the REST API. For more information, refer to [Salesforce Forum Topic](https://developer.salesforce.com/forums/?id=906F0000000D9Y2IAK).
 
 3. In the **Destination details** area, choose **TiDB-Connector** as the destination. The **Connect** button is displayed.
 
@@ -147,7 +147,7 @@ Choose the **Source details** and **Destination details**. TiDB connector can be
     );
     ```
 
-5. After the `sf_account` table is created, click **Connect**. A connection page is displayed.
+5. After the `sf_account` table is created, click **Connect**. A connection dialog is displayed.
 6. In the **Connect to TiDB-Connector** dialog, enter the connection properties of the TiDB cluster. If you use a TiDB Cloud Serverless Tier cluster, you need to set the **TLS** option to `Yes`, which lets the TiDB connector use the TLS connection. Then, click **Connect**.
 
     ![tidb connection message](/media/develop/aws-appflow-step-tidb-connection-message.png)
@@ -156,7 +156,7 @@ Choose the **Source details** and **Destination details**. TiDB connector can be
 
     ![database](/media/develop/aws-appflow-step-database.png)
 
-    The following configuration shows transferring data from the Salesforce **Account** object to the `sf_account` table in TiDB:
+    The following screenshot shows the configurations to transfer data from the Salesforce **Account** object to the `sf_account` table in TiDB:
 
     ![complete flow](/media/develop/aws-appflow-step-complete-flow.png)
 
@@ -168,7 +168,7 @@ Choose the **Source details** and **Destination details**. TiDB connector can be
 
 Map the fields of the **Account** object in Salesforce to the `sf_account` table in TiDB, and then click **Next**.
 
-- The `sf_account` table is newly created and it is empty.
+- The `sf_account` table is newly created in TiDB and it is empty.
 
     ```sql
     test> SELECT * FROM sf_account;
@@ -178,7 +178,7 @@ Map the fields of the **Account** object in Salesforce to the `sf_account` table
     +----+------+------+---------------+--------+----------+
     ```
 
-- To set a mapping rule, you can select a source field name on the left, and select a destination field name on the right. Then click **Map fields** and a rule is set.
+- To set a mapping rule, you can select a source field name on the left, and select a destination field name on the right. Then, click **Map fields**, and a rule is set.
 
     ![add mapping rule](/media/develop/aws-appflow-step-add-mapping-rule.png)
 
