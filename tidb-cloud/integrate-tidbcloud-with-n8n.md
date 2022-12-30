@@ -21,7 +21,7 @@ For more information, see [TiDB Cloud API Overview](/tidb-cloud/api-overview.md)
 
 ## Step 1: Install n8n
 
-There are two ways to install your self-hosting n8n, choose whichever works for you.
+There are two ways to install your self-hosting n8n. Choose whichever works for you.
 
 <SimpleTab>
 <div label="npm">
@@ -37,7 +37,7 @@ There are two ways to install your self-hosting n8n, choose whichever works for 
 <div label="Docker">
 
 1. Install [Docker](https://www.docker.com/products/docker-desktop) on your workspace.
-2. Download and start n8n by `docker`
+2. Download and start n8n by `docker`.
 
     ```shell
     docker run -it --rm --name n8n -p 5678:5678 -v ~/.n8n:/home/node/.n8n n8nio/n8n
@@ -48,7 +48,7 @@ There are two ways to install your self-hosting n8n, choose whichever works for 
 
 After starting n8n, you can visit [localhost:5678](http://localhost:5678) to taste n8n.
 
-## Step 2: Install TiDB Cloud Node in n8n
+## Step 2: Install TiDB Cloud node in n8n
 
 TiDB Cloud node is named `n8n-nodes-tidb-cloud` in the npm repository. You need to install this node manually to control TiDB Cloud with n8n.
 
@@ -58,13 +58,13 @@ TiDB Cloud node is named `n8n-nodes-tidb-cloud` in the npm repository. You need 
 4. Enter `n8n-nodes-tidb-cloud` in **npm Package Name** field.
 5. Click **Install**.
 
-Then you can search **TiDB Cloud** node in the search bar and use it by dragging it to a workspace.
+Then you can search the **TiDB Cloud** node in **Workflow** > search bar and use it by dragging it to a workspace.
 
 ## Step 3: Build Your Workflow
 
 In this step, you will create a new workflow to insert some data to TiDB when you click **Execute** button.
 
-This example usage workflow would use the following nodes.
+This example usage workflow would use the following nodes:
 
 - [Schedule Trigger](https://docs.n8n.io/integrations/builtin/core-nodes/n8n-nodes-base.scheduletrigger/)
 - [RSS Read](https://docs.n8n.io/integrations/builtin/core-nodes/n8n-nodes-base.rssfeedread/)
@@ -115,43 +115,43 @@ This trigger will execute your workflow every morning at 8 AM.
 1. Click **+** to the right of the manual trigger node.
 2. Search `TiDB Cloud` and add it to the workspace.
 3. In the **Parameters** dialog, enter the credential for the TiDB Cloud node. The credential is your TiDB Cloud API key.
-4. Choose your project from the **Project** list.
-5. Select `Execute SQL` from the **Operation** list.
+4. From the **Project** list, choose your project.
+5. From the **Operation** list, select `Execute SQL`.
 6. Select the cluster. If you have not seen your new cluster in the list, you need to wait a few minutes until the cluster creation is completed.
-7. Choose a user in the **User** list. TiDB Cloud always creates a default user, so you don't have to manually create one.
-8. Enter `test` in the **Database** field.
+7. From the **User** list, choose a user. TiDB Cloud always creates a default user, so you don't have to manually create one.
+8. In the **Database** field, enter `test`.
 9. Enter your database password.
-10. Enter the following SQL in the ***SQL*** field:
+10. In the **SQL** field, enter the following SQL:
 
     ```sql
     CREATE TABLE IF NOT EXISTS hacker_news_briefing (creator VARCHAR (200), title TEXT,  link VARCHAR(200), pubdate VARCHAR(200), comments VARCHAR(200), content TEXT, guid VARCHAR (200), isodate VARCHAR(200));
     ```
 
-11. Click on **Execute node** to create the table.
+11. Click **Execute node** to create the table.
 
 #### Get the Hacker News RSS
 
 1. Click **+** to the right of the TiDB Cloud node.
 2. Search `RSS Read` and add it to the workspace.
-3. Enter `https://hnrss.org/frontpage` to the **URL**.
+3. In the **URL** field, enter `https://hnrss.org/frontpage`.
 
 #### Insert data to TiDB
 
 1. Click **+** to the right of the RSS Read node.
 2. Search `TiDB Cloud` and add it to the workspace.
-3. Select the credentials that you entered in the previous node.
-4. Choose your project from the **Project** list.
-5. Select `Insert` from the **Operation** list.
-6. Enter the value in **Cluster**, **User**, **Database** and **Password** fields.
-7. Enter the `hacker_news_briefing` table in the **Table** field.
-8. Enter `creator, title, link, pubdate, comments, content, guid, isodate` in the **Columns** field.
+3. Select the credentials that you entered in the previous TiDB Cloud node.
+4. From the **Project** list, choose your project.
+5. From the **Operation** list, select `Insert`.
+6. In **Cluster**, **User**, **Database** and **Password** fields, enter the corresponding values.
+7. In the **Table** field, enter the `hacker_news_briefing` table.
+8. In the **Columns** field, enter `creator, title, link, pubdate, comments, content, guid, isodate`.
 
 #### Build message
 
 1. Click **+** to the right of the RSS Feed Read node.
 2. Search `code` and add it to the workspace.
 3. Choose `Run Once for All Items` mode.
-4. Copy the following code to the **JavaScript** field.
+4. Copy the following code and paste into the **JavaScript** field.
 
 ```javascript
 let message = "";
@@ -187,18 +187,18 @@ return [{json: {response}}];
 1. Click **+** to the right of the code node.
 2. Search `gmail` and add it to the workspace.
 3. Enter the credential for the Gmail node. For detailed instructions, refer to [n8n documentation](https://docs.n8n.io/integrations/builtin/credentials/google/oauth-single-service/).
-4. Choose `Message` in the **Resource**. 
-5. Choose `Send` in the **Operation**.
-6. Enter your email in the **To**.
-7. Enter `Hacker News Briefing` in the **Subject**.
-8. Choose `HTML` in the **Email Type**.
+4. From the **Resource** list, choose `Message`. 
+5. From the **Operation** list, choose `Send`.
+6. In the **To** field, enter your email.
+7. In the **Subject**, enter `Hacker News Briefing`.
+8. In the **Email Type**, choose `HTML`.
 9. In the **Message** field mode, click `Expression` and enter `{{ $json["response"] }}`.
 
 > **Note:** 
 > 
-> It is very important to mouse hover the Message field and select the Expression pattern.
+> You must hover over the **Message** field and select the **Expression** pattern.
 
-## Step 4: Run Your Workflow
+## Step 4: Run your workflow
 
 After building up the workflow, you can click the **Execute Workflow** button to test run it. 
 
@@ -206,11 +206,11 @@ If the workflow runs as expected, you'll get Hacker News briefing emails. These 
 
 Now you can activate this workflow in the **Workflows** panel. This workflow will help you get the front-page articles on Hacker News every day.
 
-## TiDB Cloud Node Core
+## TiDB Cloud node core
 
-### Support Operation
+### Supported operations
 
-TiDB Cloud Node acts as a [regular node](https://docs.n8n.io/workflows/nodes/#regular-nodes), and only supports the following five operations.
+TiDB Cloud node acts as a [regular node](https://docs.n8n.io/workflows/nodes/#regular-nodes), and only supports the following five operations.
 
 - **Create Serverless Cluster**: Create a TiDB Cloud Serverless Tier cluster.
 - **Execute SQL**: Execute an SQL statement in TiDB.
@@ -218,7 +218,7 @@ TiDB Cloud Node acts as a [regular node](https://docs.n8n.io/workflows/nodes/#re
 - **Insert**: Insert rows in TiDB.
 - **Update**: Update rows in TiDB.
 
-### Fields Description
+### Fields
 
 Different operations require different fields to be filled in. The following shows the respective field descriptions according to the operation.
 
@@ -227,7 +227,7 @@ Different operations require different fields to be filled in. The following sho
 
 - **Credential for TiDB Cloud API**: Only supports TiDB Cloud API key authentication. Refer to [Get TiDB Cloud API Key](#prerequisites-get-tidb-cloud-api-key).
 - **Project**: The TiDB Cloud project name. 
-- **Operation**: The operation of this node. Refer to [Support Operation](#support-operation).
+- **Operation**: The operation of this node. Refer to [Supported operations](#supported-operations).
 - **Cluster**: The TiDB Cloud cluster name. Enter one name for your new cluster.
 - **Region**: The region name. Choose a region where your cluster will be deployed. Usually, choose the region closest to your application deployment.
 - **Password**: The root password. Set a password for your new cluster.
@@ -237,12 +237,12 @@ Different operations require different fields to be filled in. The following sho
 
 - **Credential for TiDB Cloud API**: Only supports TiDB Cloud API key authentication. Refer to [Get TiDB Cloud API Key](#prerequisites-get-tidb-cloud-api-key).
 - **Project**: The TiDB Cloud project name.
-- **Operation**: The operation of this node. Refer to [Support Operation](#support-operation).
+- **Operation**: The operation of this node. Refer to [Supported operations](#supported-operations).
 - **Cluster**: The TiDB Cloud cluster name.
 - **Password**: The password of TiDB Cloud cluster.
 - **User**: The username of your TiDB Cloud cluster.
 - **Database**: The database name.
-- **SQL**: The SQL statement to execute.
+- **SQL**: The SQL statement to be executed.
 
 </div>
 <div label="Delete">
@@ -275,20 +275,20 @@ Different operations require different fields to be filled in. The following sho
 
 - **Credential for TiDB Cloud API**: Only supports TiDB Cloud API key authentication. Refer to [Get TiDB Cloud API Key](#prerequisites-get-tidb-cloud-api-key).
 - **Project**: The TiDB Cloud project name.
-- **Operation**: The operation of this node. Refer to [Support Operation](#support-operation).
-- **Cluster**: The TiDB Cloud cluster name. In the Create Serverless Cluster operation, you need to enter one name for your new cluster. While in other operations, you should choose one existing cluster.
+- **Operation**: The operation of this node. Refer to [Supported operation](#supported-operations).
+- **Cluster**: The name of an existing TiDB Cloud cluster.
 - **Password**: The password of TiDB Cloud cluster.
 - **User**: The username of your TiDB Cloud cluster.
 - **Database**: The database name.
 - **Table**: The table name. You can use `From list` mode to choose one or `Name` mode to type table manually.
-- **Update Key**: The name of the item's property which decides which rows in the database should be updated. Item is the data sent from one node to another. A node performs its action on each item of incoming data. For more information about item in n8n, see [n8n documentation](https://docs.n8n.io/workflows/items/).
-- **Columns**: The comma-separated list of the input item which should used as columns for the rows to update.
+- **Update Key**: The name of the item's property that decides which rows in the database should be updated. The item is the data sent from one node to another. A node performs its action on each item of the incoming data. For more information about items in n8n, see [n8n documentation](https://docs.n8n.io/workflows/items/).
+- **Columns**: The comma-separated list of the input item that should be used as columns for the rows to update.
 
 </div>
 </SimpleTab>
 
 ### Limitations 
  
-1. Normally only one SQL statement is allowed in the **Execute SQL** operation. If you want to execute more than one statement in a single operation, you need to manually enable [`tidb_multi_statement_mode`](https://docs.pingcap.com/tidb/dev/system-variables#tidb_multi_statement_mode-new-in-v4011).
-2. The **Delete** and **Update** operation need to specify one field as a key. For example, the `Delete Key` is set to `id`, which is equivalent to executing `delete from table where id = ${item.id}`. Currently, it only supports specifying one key.
-3. The **Insert** and **Update** operation need to specify the comma-separated list in the **Columns** field, and the field name must be the same as the input item's property.
+- Normally only one SQL statement is allowed in the **Execute SQL** operation. If you want to execute more than one statement in a single operation, you need to manually enable [`tidb_multi_statement_mode`](https://docs.pingcap.com/tidbcloud/system-variables#tidb_multi_statement_mode-new-in-v4011).
+- The **Delete** and **Update** operations need to specify one field as a key. For example, the `Delete Key` is set to `id`, which is equivalent to executing `DELETE FROM table WHERE id = ${item.id}`. Currently, the **Delete** and **Update** operations only support specifying one key.
+- The **Insert** and **Update** operations need to specify the comma-separated list in the **Columns** field, and the field name must be the same as the input item's property.
