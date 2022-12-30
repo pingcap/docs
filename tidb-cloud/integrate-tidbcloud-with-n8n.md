@@ -220,7 +220,7 @@ TiDB Cloud node acts as a [regular node](https://docs.n8n.io/workflows/nodes/#re
 
 ### Fields
 
-Different operations require different fields to be filled in. The following shows the respective field descriptions according to the operation.
+To use different operations, you need to fill in the different required fields. The following shows the respective field descriptions for the corresponding operation.
 
 <SimpleTab>
 <div label="Create Serverless Cluster">
