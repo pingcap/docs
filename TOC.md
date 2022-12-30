@@ -184,14 +184,14 @@
     - Slow Queries
       - [Identify Slow Queries](/identify-slow-queries.md)
       - [Analyze Slow Queries](/analyze-slow-queries.md)
-    - [Troubleshoot TiDB OOM Issues](/troubleshoot-tidb-oom.md)
-    - [Troubleshoot Hotspot Issues](/troubleshoot-hot-spot-issues.md)
-    - [Troubleshoot Increased Read and Write Latency](/troubleshoot-cpu-issues.md)
-    - [Troubleshoot Write Conflicts in Optimistic Transactions](/troubleshoot-write-conflicts.md)
-    - [Troubleshoot High Disk I/O Usage](/troubleshoot-high-disk-io.md)
-    - [Troubleshoot Lock Conflicts](/troubleshoot-lock-conflicts.md)
-    - [Troubleshoot Inconsistency Between Data and Indexes](/troubleshoot-data-inconsistency-errors.md)
-  - Diagnostic methods
+    - [TiDB OOM](/troubleshoot-tidb-oom.md)
+    - [Hotspot](/troubleshoot-hot-spot-issues.md)
+    - [Increased Read and Write Latency](/troubleshoot-cpu-issues.md)
+    - [Write Conflicts in Optimistic Transactions](/troubleshoot-write-conflicts.md)
+    - [High Disk I/O Usage](/troubleshoot-high-disk-io.md)
+    - [Lock Conflicts](/troubleshoot-lock-conflicts.md)
+    - [Inconsistency Between Data and Indexes](/troubleshoot-data-inconsistency-errors.md)
+  - Diagnostic Methods
     - [SQL Diagnostics](/information-schema/information-schema-sql-diagnostics.md)
     - [Statement Summary Tables](/statement-summary-tables.md)
     - [Identify Expensive Queries Using Top SQL](/dashboard/top-sql.md)

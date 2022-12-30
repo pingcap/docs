@@ -178,9 +178,9 @@ For more information about troubleshooting OOM, see [Troubleshoot TiDB OOM Issue
 
     - Solution: You can bypass this issue by manually adding `Cast(xx as decimal(a, b))`, in which `a` and `b` are the target precisions.
 
-### Slow query issues
+### 3.5 Slow query issues
 
-To identify slow queries, see [Identify Slow Queries](/identify-slow-queries.md). To analyze and handle slow queries, see [Analyze Slow Queries](/analyze-slow-queries.md).
+To identify slow queries, see [Identify slow queries](/identify-slow-queries.md). To analyze and handle slow queries, see [Analyze slow queries](/analyze-slow-queries.md).
 
 ## 4. TiKV issues
 
