@@ -36,7 +36,7 @@ By the automatic backup, you can back up the cluster data every day at the backu
         - Resolve cases of data write errors by restoring point-in-time that is before the error event.
         - Audit the historical data of the business.
 
-        If you have one of the preceding needs and want to use the PITR feature, make sure that your TiDB cluster version is at least v6.3.0 and the TiKV node size is at least 8 vCPU and 16 GiB. Currently, PITR is in **beta**. To enable it, [file a ticket](/tidb-cloud/tidb-cloud-support.md).
+        If you have one of the preceding needs and want to use the PITR feature, make sure that your TiDB cluster version is at least v6.4.0 and the TiKV node size is at least 8 vCPU and 16 GiB. Currently, PITR is in **beta**. To enable it, [file a ticket](/tidb-cloud/tidb-cloud-support.md).
 
     - In **Backup Time**, schedule a start time for the daily cluster backup.
 
@@ -74,7 +74,7 @@ To apply a manual backup to your TiDB cluster, perform the following steps:
 
 1. Navigate to the **Backup** tab of a cluster.
 
-2. Click **Manual** on the upper right.
+2. Click **Manual Backup**. The setting window displays.
 
 3. Enter a **Name**.
 

@@ -15,7 +15,7 @@ This document describes how to manage user access of the [TiDB Cloud console](ht
 
 ## Sign out
 
-In the upper-right corner of the TiDB Cloud console, click your account name and select **Logout**.
+In the upper-right corner of the TiDB Cloud console, click <MDSvgIcon name="icon-top-account-settings" /> **Account** and select **Logout**.
 
 ## Manage user passwords
 
@@ -32,7 +32,7 @@ To improve your system security, if you sign up for TiDB Cloud with email and pa
 
 To change the password, take the following steps:
 
-1. Click the account name in the upper-right corner of the TiDB Cloud console.
+1. Click <MDSvgIcon name="icon-top-account-settings" /> **Account** in the upper-right corner of the TiDB Cloud console.
 
 2. Click **Account**.
 
@@ -50,7 +50,7 @@ If your password is not changed within 90 days, you will get a prompt to reset y
 
 In TiDB Cloud, you can easily manage your profile, including your first name, last name, and phone number.
 
-1. Click the account name in the upper-right corner of the TiDB Cloud console.
+1. Click <MDSvgIcon name="icon-top-account-settings" /> **Account** in the upper-right corner of the TiDB Cloud console.
 
 2. Click **Account**. The **Profile** tab is selected by default.
 
@@ -72,12 +72,12 @@ To access a cluster in a project under an organization, a user must be both a me
 
 To view which organizations you belong to, perform these steps:
 
-1. Click the account name in the upper-right corner of the TiDB Cloud console.
+1. Click <MDSvgIcon name="icon-top-organization" /> **Organization** in the upper-right corner of the TiDB Cloud console.
 2. Select **Switch Organization** in the drop-down menu, and you can see all the organizations you belong to in the submenu.
 
 To check which project you belong to, perform these steps:
 
-1. Click the account name in the upper-right corner of the TiDB Cloud console.
+1. Click <MDSvgIcon name="icon-top-organization" /> **Organization** in the upper-right corner of the TiDB Cloud console.
 2. Click **Organization Settings**. The **Projects** tab is displayed by default.
 
 ## Switch between organizations
@@ -86,7 +86,7 @@ If you are a member of multiple organizations, you can switch your account betwe
 
 To switch between organizations, perform these steps:
 
-1. Click the account name in the upper-right corner of the TiDB Cloud console.
+1. Click <MDSvgIcon name="icon-top-organization" /> **Organization** in the upper-right corner of the TiDB Cloud console.
 2. Select **Switch Organization** in the drop-down menu, and click the organization you want to switch to.
 
 ## Invite an organization member
@@ -95,7 +95,7 @@ If you are the owner of an organization, you can invite organization members. Ot
 
 To invite a member to an organization, perform the following steps:
 
-1. Click the account name in the upper-right corner of the TiDB Cloud console.
+1. Click <MDSvgIcon name="icon-top-organization" /> **Organization** in the upper-right corner of the TiDB Cloud console.
 
 2. Click **Organization Settings**. The organization settings page is displayed.
 
@@ -125,7 +125,7 @@ If you are the owner of an organization, you can invite project members. Otherwi
 
 To invite a member to a project, perform the following steps:
 
-1. Click the account name in the upper-right corner of the TiDB Cloud console.
+1. Click <MDSvgIcon name="icon-top-organization" /> **Organization** in the upper-right corner of the TiDB Cloud console.
 
 2. Click **Organization Settings**. The organization settings page is displayed.
 
@@ -153,7 +153,7 @@ To invite a member to a project, perform the following steps:
 
 If you are the owner of an organization, you can perform the following steps to configure roles for your organization members:
 
-1. Click the account name in the upper-right corner of the TiDB Cloud console.
+1. Click <MDSvgIcon name="icon-top-organization" /> **Organization** in the upper-right corner of the TiDB Cloud console.
 2. Click **Organization Settings**. The organization settings page is displayed.
 3. Click **User Management**, and then select the **By All Users** tab.
 4. Click the role of the target member, and then modify the role.
@@ -182,7 +182,7 @@ To remove a member from an organization, perform the following steps:
 >
 > If a member is removed from an organization, the member is removed from the belonged projects either.
 
-1. Click the account name in the upper-right corner of the TiDB Cloud console.
+1. Click <MDSvgIcon name="icon-top-organization" /> **Organization** in the upper-right corner of the TiDB Cloud console.
 
 2. Click **Organization Settings**. The organization settings page is displayed.
 
@@ -196,7 +196,7 @@ If you are the owner of an organization, you can remove project members. Otherwi
 
 To remove a member from a project, perform the following steps:
 
-1. Click the account name in the upper-right corner of the TiDB Cloud console.
+1. Click <MDSvgIcon name="icon-top-organization" /> **Organization** in the upper-right corner of the TiDB Cloud console.
 
 2. Click **Organization Settings**. The organization settings page is displayed.
 
@@ -210,7 +210,7 @@ If you are the organization owner, you can modify the system display time accord
 
 To change the local timezone setting, perform the following steps:
 
-1. Click the account name in the upper-right corner of the TiDB Cloud console.
+1. Click <MDSvgIcon name="icon-top-organization" /> **Organization** in the upper-right corner of the TiDB Cloud console.
 
 2. Click **Organization Settings**. The organization settings page is displayed.
 

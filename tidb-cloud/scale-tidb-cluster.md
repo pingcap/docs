@@ -36,7 +36,7 @@ You can change the number of TiDB, TiKV, or TiFlash nodes.
 
 To increase the number of TiDB, TiKV, or TiFlash nodes, take the following steps:
 
-1. In the TiDB Cloud console, navigate to the **Clusters** page for your project.
+1. In the TiDB Cloud console, navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page of your project.
 2. Locate the cluster that you want to scale, and click **...** in the upper-right corner of the cluster area.
 
     > **Tip:**
@@ -53,7 +53,7 @@ You can also increase the number of TiDB, TiKV, or TiFlash nodes using TiDB Clou
 
 To decrease the number of TiDB nodes, take the following steps:
 
-1. In the TiDB Cloud console, navigate to the **Clusters** page for your project.
+1. In the TiDB Cloud console, navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page of your project.
 2. Locate the cluster that you want to scale, and click **...** in the upper-right corner of the cluster area.
 
     > **Tip:**
@@ -86,7 +86,7 @@ You can change the node storage of TiKV or TiFlash.
 
 To increase the node storage of TiKV or TiFlash, take the following steps:
 
-1. In the TiDB Cloud console, navigate to the **Clusters** page for your project.
+1. In the TiDB Cloud console, navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page of your project.
 2. Locate the cluster that you want to scale, and click **...** in the upper-right corner of the cluster area.
 
     > **Tip:**

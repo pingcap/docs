@@ -69,12 +69,8 @@ delta_index_cache_size = 0
 
 ## Storage paths settings take effect starting from v4.0.9
 [storage]
-    ## This configuration item is deprecated since v5.2.0. You can use the [storage.io_rate_limit] settings below instead.
-
-    # bg_task_io_rate_limit = 0
 
     ## DTFile format
-    ## * format_version = 1, the old format, deprecated.
     ## * format_version = 2, the default format for versions < v6.0.0.
     ## * format_version = 3, the default format for versions >= v6.0.0, which provides more data validation features.
     # format_version = 3

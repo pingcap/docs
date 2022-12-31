@@ -9,13 +9,13 @@ This document describes how to manage passwords and enable multi-factor authenti
 
 ## Sign up
 
-After you sign up an account on TiDB Cloud console, you can manage the password, including reseting and changing the password.
+After you sign up an account in the TiDB Cloud console, you can manage the password, including reseting and changing the password.
 
 1. Go to the TiDB Cloud [sign up](https://tidbcloud.com/signup) page and fill in the registration information. 
 
 2. Read Privacy Policy and Services Agreement.
 
-3. Check the box to agree **I agree to the Privacy Policy and Services Agreement**.
+3. Select **I agree to the Privacy Policy and Services Agreement**.
 
 4. Click **Sign up**.
 
@@ -35,7 +35,7 @@ If the login is successful, you will be directed to the TiDB Cloud console page.
 
 ### Sign out
 
-1. Click the <MDSvgIcon name="icon-top-account-settings" /> **Account** in the upper-right corner of the TiDB Cloud console.
+1. Click <MDSvgIcon name="icon-top-account-settings" /> **Account** in the upper-right corner of the TiDB Cloud console.
 
 2. Click **Logout**.
 

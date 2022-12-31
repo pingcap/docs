@@ -5,7 +5,7 @@ summary: Learn how to connect TiDB Cloud to 5000+ Apps with Zapier.
 
 # Integrate TiDB Cloud with Zapier
 
-[Zapier](https://zapier.com/app/dashboard) is an automation tool that lets you easily create workflows that involve thousands of apps and services.
+[Zapier](https://zapier.com) is a no-code automation tool that lets you easily create workflows that involve thousands of apps and services.
 
 Using the [TiDB Cloud app](https://zapier.com/apps/tidb-cloud/integrations) on Zapier enables you to:
 
@@ -17,7 +17,9 @@ This guide gives a high-level introduction to the TiDB Cloud app on Zapier and a
 
 ## Quick start with template
 
-In this section, we will use the preset template as an example to try out TiDB Cloud App on Zapier.
+[Zap Templates](https://platform.zapier.com/partners/zap-templates) are ready made integrations or Zaps with the apps and core fields pre-selected, for publicly available Zapier integrations.
+
+In this section, we will use the **Add new Github global events to TiDB rows** template as an example to create a workflow. In this workflow, every time a new global event (any [GitHub event](https://docs.github.com/en/developers/webhooks-and-events/events/github-event-types) happens from or to you, on any repo) is created from your GitHub account, Zapier adds a new row to your TiDB Cloud cluster.
 
 ### Prerequisites
 
@@ -29,9 +31,7 @@ Before you start, you need:
 
 ### Step 1: Get the template
 
-Go to [TiDB Cloud App on Zapier](https://zapier.com/apps/tidb-cloud/integrations). Choose a template and click **Try it**. Then you will enter the editor page.
-
-In this tutorial, we use the **Add new Github global events to TiDB rows** template as an example to create a workflow. In this workflow, every time a new global event is created from your GitHub account, Zapier adds a new row to your TiDB Cloud cluster.
+Go to [TiDB Cloud App on Zapier](https://zapier.com/apps/tidb-cloud/integrations). Choose the **Add new Github global events to TiDB rows** template and click **Try it**. Then you will enter the editor page.
 
 ### Step 2: Set up the trigger
 
@@ -145,14 +145,18 @@ This section introduces the triggers and actions provided by TiDB Cloud App on Z
 
 ### Triggers
 
-- New Cluster: triggers when a new cluster is created.
-- New Table: triggers when a new table is created.
-- New Row: triggers when new rows are created. Only fetches the recent 10000 new rows.
-- New Row (Custom Query): triggers when new rows are returned from a custom query that you provide.
+The following table lists the triggers supported by TiDB Cloud App.
+
+| Trigger                | Description                                                                 |
+| ---------------------- |-----------------------------------------------------------------------------|
+| New Cluster            | Triggers when a new cluster is created.                                     |
+| New Table              | Triggers when a new table is created.                                       |
+| New Row                | Triggers when new rows are created. Only fetches the recent 10000 new rows. |
+| New Row (Custom Query) | Triggers when new rows are returned from a custom query that you provide.   |
 
 ### Actions
 
-The following table lists the actions supported by TiDB Cloud App. Note that some actions need extra resources and you need to prepare the corresponding resources before using the action.
+The following table lists the actions supported by TiDB Cloud App. Note that some actions need extra resources, and you need to prepare the corresponding resources before using the action.
 
 | Action | Description | Resource |
 |---|---|---|

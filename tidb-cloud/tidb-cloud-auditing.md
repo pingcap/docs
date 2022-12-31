@@ -47,7 +47,7 @@ For more information, see [Creating a bucket](https://docs.aws.amazon.com/Amazon
     3. In the **Audit Logging** dialog, click **Show AWS IAM policy settings**. The corresponding TiDB Cloud Account ID and TiDB Cloud External ID of the TiDB cluster are displayed.
     4. Record the TiDB Cloud Account ID and the External ID for later use.
 
-2. In the AWS Management console, go to **IAM** > **Access Management** > **Policies**, and then check whether there is a storage bucket policy with the `s3:PutObject` write-only permission.
+2. In the AWS Management Console, go to **IAM** > **Access Management** > **Policies**, and then check whether there is a storage bucket policy with the `s3:PutObject` write-only permission.
 
     - If yes, record the matched storage bucket policy for later use.
     - If not, go to **IAM** > **Access Management** > **Policies** > **Create Policy**, and define a bucket policy according to the following policy template.

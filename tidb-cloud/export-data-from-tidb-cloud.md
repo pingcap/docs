@@ -39,9 +39,9 @@ You can use the tool [Dumpling](/dumpling-overview.md) for data export.
     tiup install dumpling:v6.1.1
     ```
 
-4. Export your data using Dumpling from TiDB. 
+4. Export your data using Dumpling from TiDB.
 
-    You can get the following connection parameters `${tidb_endpoint}`, `${port}`, and `${user}` from the **Connection** section on the **Clusters** page.
+    You can get the following connection parameters `${tidb_endpoint}`, `${port}`, and `${user}` from the **Connection** section on the **Cluster Overview** page.
 
     <SimpleTab>
 
