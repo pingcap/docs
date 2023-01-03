@@ -101,15 +101,13 @@ To allow TiDB Cloud to access the source data in your GCS bucket, you need to co
 
 1. In the TiDB Cloud console, get the Google Cloud Service Account ID of the target TiDB cluster.
 
-    1. Navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page and choose your target project on the top of the left navigation bar.
+    1. Navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page.
 
-    2. Locate your target cluster, click **...** in the upper-right corner of the cluster area, and select **Import Data**. The **Data Import** page is displayed.
+    2. If you have multiple projects, choose a target project in the left navigation pane. Otherwise, skip this step.
 
-        > **Tip:**
-        >
-        > Alternatively, you can also click the name of your cluster on the **Clusters** page and click **Import Data** in the **Import** area.
+    3. In the row of your target cluster, click the cluster name to go to its cluster overview page, and then click **Import** in the left navigation pane.
 
-    3. On the **Data Import** page, click **Show Google Cloud Service Account ID**, and then copy the Service Account ID for later use.
+    4. Click **Import Data** in the upper-right corner, click **Show Google Cloud Service Account ID**, and then copy the Service Account ID for later use.
 
 2. In the Google Cloud Platform (GCP) Management Console, create an IAM role for your GCS bucket.
 
