@@ -141,7 +141,7 @@ For detailed steps, see [Configure GCS access](/tidb-cloud/config-s3-and-gcs-acc
 2. Log in to the [TiDB Cloud console](https://tidbcloud.com/) and navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page.
 3. If you have multiple projects, choose a target project in the left navigation pane. Otherwise, skip this step.
 4. In the row of your target cluster, click the cluster name to go to its cluster overview page, and then click **Import** in the left navigation pane.
-5. On the **Import** page, click **Import Data** in the upper-right corner, select **From GCS**, and then fill in the importing related information.
+5. On the **Import** page, click **Import Data** in the upper-right corner, and then fill in the importing related information.
 
 > **Note:**
 >

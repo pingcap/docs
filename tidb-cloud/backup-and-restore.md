@@ -170,7 +170,7 @@ To restore a deleted cluster from recycle bin, take the following steps:
     - If you only have one project, click **Admin** > **Recycle Bin**.
 
 3. Locate the cluster you want to restore, and then click **Backups** in the **Action** column.
-4. Locate your desired backup time, and then click **Restore**.
+4. Locate your desired backup time, and then click **Restore** in the **Action** column.
 5. In the **Restore** window, make the following changes if necessary:
 
     - Update the port number of the cluster.

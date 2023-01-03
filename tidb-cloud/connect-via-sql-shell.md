@@ -23,4 +23,4 @@ To connect to your TiDB cluster using SQL shell, perform the following steps:
 
 3. In the dialog, select the **Web SQL Shell** tab, and then click **Open SQL Shell**.
 
-4. On the prompted **TiDB password** line, enter the root password of the current cluster. Then your application is connected to the TiDB cluster.
+4. On the prompted **Enter password** line, enter the root password of the current cluster. Then your application is connected to the TiDB cluster.
