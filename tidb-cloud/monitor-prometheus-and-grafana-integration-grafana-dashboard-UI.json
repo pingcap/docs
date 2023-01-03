@@ -198,7 +198,7 @@
         "type": "prometheus",
         "uid": "${DS_PROMETHEUS}"
       },
-      "description": "The number of SQL statements executed per second in all TiDB instances, which are collected by SQL types, such as SELECT, INSERT, and UPDATE.",
+      "description": "The number of SQL statements executed per second in all TiDB instances, which is collected by SQL types, such as SELECT, INSERT, and UPDATE.",
       "fieldConfig": {
         "defaults": {
           "color": {
