@@ -1509,7 +1509,7 @@ MPP is a distributed computing framework provided by the TiFlash engine, which a
 - Scope: GLOBAL
 - Persists to cluster: Yes
 - Type: Boolean
-- Default value: `ON`
+- Default value: `OFF`
 - This variable controls whether to enable GC-Aware memory track.
 
 ### `tidb_enable_general_plan_cache` <span class="version-mark">New in v6.3.0</span>
@@ -1674,9 +1674,12 @@ MPP is a distributed computing framework provided by the TiFlash engine, which a
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
 - Type: Boolean
-- Default value: In v6.1.0, the default value is `ON`. After v6.1.0, the default value is `OFF`.
-- Since v6.1.0, the [Join Reorder](/join-reorder.md) algorithm of TiDB supports Outer Join. This variable controls the support behavior. The default value is `OFF`, which means the Join Reorder's support for Outer Join is disabled by default.
-- For a cluster upgraded from a version earlier than v6.1.0, the default value is `OFF`. For a cluster upgraded from v6.1.0, the default value is `ON`.
+- Default value: `ON`
+- Since v6.1.0, the [Join Reorder](/join-reorder.md) algorithm of TiDB supports Outer Join. This variable controls whether TiDB enables the Join Reorder's support for Outer Join.
+- If your cluster is upgraded from an earlier version of TiDB, note the following:
+
+    - If the TiDB version before the upgrade is earlier than v6.1.0, the default value of this variable after the upgrade is `ON`.
+    - If the TiDB version before the upgrade is v6.1.0 or later, the default value of the variable after the upgrade follows the value before the upgrade.
 
 ### tidb_enable_ordered_result_mode
 
@@ -3995,6 +3998,114 @@ For details, see [Identify Slow Queries](/identify-slow-queries.md).
 > **Note:**
 >
 > Suppose that the TSO RPC latency increases for reasons other than a CPU usage bottleneck of the PD leader (such as network issues). In this case, increasing the value of `tidb_tso_client_batch_max_wait_time` might increase the execution latency in TiDB and affect the QPS performance of the cluster.
+
+### tidb_ttl_delete_rate_limit <span class="version-mark">New in v6.5.0</span>
+
+> **Warning:**
+>
+> [TTL](/time-to-live.md) is an experimental feature. This system variable might be changed or removed in future releases.
+
+- Scope: GLOBAL
+- Persists to cluster: Yes
+- Default value: `0`
+- Range: `[0, 9223372036854775807]`
+- This variable is used to limit the rate of `DELETE` statements in TTL jobs on each TiDB node. The value represents the maximum number of `DELETE` statements allowed per second in a single node in a TTL job. When this variable is set to `0`, no limit is applied.
+
+### tidb_ttl_delete_batch_size <span class="version-mark">New in v6.5.0</span>
+
+> **Warning:**
+>
+> [TTL](/time-to-live.md) is an experimental feature. This system variable might be changed or removed in future releases.
+
+- Scope: GLOBAL
+- Persists to cluster: Yes
+- Default value: `100`
+- Range: `[1, 10240]`
+- This variable is used to set the maximum number of rows that can be deleted in a single `DELETE` transaction in a TTL job.
+
+### tidb_ttl_delete_worker_count <span class="version-mark">New in v6.5.0</span>
+
+> **Warning:**
+>
+> [TTL](/time-to-live.md) is an experimental feature. This system variable might be changed or removed in future releases.
+
+- Scope: GLOBAL
+- Persists to cluster: Yes
+- Default value: `4`
+- Range: `[1, 256]`
+- This variable is used to set the maximum concurrency of TTL jobs on each TiDB node.
+
+### tidb_ttl_job_enable <span class="version-mark">New in v6.5.0</span>
+
+> **Warning:**
+>
+> [TTL](/time-to-live.md) is an experimental feature. This system variable might be changed or removed in future releases.
+
+- Scope: GLOBAL
+- Persists to cluster: Yes
+- Default value: `ON`
+- Type: Boolean
+- This variable is used to control whether TTL jobs are enabled. If it is set to `OFF`, all tables with TTL attributes automatically stop cleaning up expired data.
+
+### tidb_ttl_scan_batch_size <span class="version-mark">New in v6.5.0</span>
+
+> **Warning:**
+>
+> [TTL](/time-to-live.md) is an experimental feature. This system variable might be changed or removed in future releases.
+
+- Scope: GLOBAL
+- Persists to cluster: Yes
+- Default value: `500`
+- Range: `[1, 10240]`
+- This variable is used to set the `LIMIT` value of each `SELECT` statement used to scan expired data in a TTL job.
+
+### tidb_ttl_scan_worker_count <span class="version-mark">New in v6.5.0</span>
+
+> **Warning:**
+>
+> [TTL](/time-to-live.md) is an experimental feature. This system variable might be changed or removed in future releases.
+
+- Scope: GLOBAL
+- Persists to cluster: Yes
+- Default value: `4`
+- Range: `[1, 256]`
+- This variable is used to set the maximum concurrency of TTL scan jobs on each TiDB node.
+
+### tidb_ttl_job_run_interval <span class="version-mark">New in v6.5.0</span>
+
+> **Warning:**
+>
+> [TTL](/time-to-live.md) is an experimental feature. This system variable might be changed or removed in future releases.
+
+- Scope: GLOBAL
+- Persists to cluster: Yes
+- Default value: `1h0m0s`
+- Range: `[10m0s, 8760h0m0s]`
+- This variable is used to control the scheduling interval of TTL jobs in the background. For example, if the current value is set to `1h0m0s`, each table with TTL attributes cleans up expired data once every hour.
+
+### tidb_ttl_job_schedule_window_start_time <span class="version-mark">New in v6.5.0</span>
+
+> **Warning:**
+>
+> [TTL](/time-to-live.md) is an experimental feature. This system variable might be changed or removed in future releases.
+
+- Scope: GLOBAL
+- Type: Time
+- Persists to cluster: Yes
+- Default value: `00:00 +0000`
+- This variable is used to control the start time of the scheduling window of TTL jobs in the background. When you modify the value of this variable, be cautious that a small window might cause the cleanup of expired data to fail.
+
+### tidb_ttl_job_schedule_window_end_time <span class="version-mark">New in v6.5.0</span>
+
+> **Warning:**
+>
+> [TTL](/time-to-live.md) is an experimental feature. This system variable might be changed or removed in future releases.
+
+- Scope: GLOBAL
+- Type: Time
+- Persists to cluster: Yes
+- Default value: `23:59 +0000`
+- This variable is used to control the end time of the scheduling window of TTL jobs in the background. When you modify the value of this variable, be cautious that a small window might cause the cleanup of expired data to fail.
 
 ### tidb_txn_assertion_level <span class="version-mark">New in v6.0.0</span>
 
