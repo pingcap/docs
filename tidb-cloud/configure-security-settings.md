@@ -11,14 +11,18 @@ For Dedicated Tier clusters, you can configure the root password and allowed IP 
 >
 > For Serverless Tier clusters, this document is inapplicable and you can refer to [Secure Connections to Serverless Tier Clusters](/tidb-cloud/secure-connections-to-serverless-tier-clusters.md) instead.
 
-1. In the TiDB Cloud console, navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page.
-2. If you have multiple projects, choose a target project in the left navigation pane. Otherwise, skip this step.
-3. In the row of your target cluster, click **...** and select **Security Settings**.
-4. In the **Security Settings** dialog, configure the root password and allowed IP addresses.
+1. In the TiDB Cloud console, navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page of your project.
+
+    > **Tip:**
+    >
+    > If you have multiple projects, you can switch to the target project in the left navigation pane of the **Clusters** page.
+
+2. In the row of your target cluster, click **...** and select **Security Settings**.
+3. In the **Security Settings** dialog, configure the root password and allowed IP addresses.
 
     To allow your cluster to be accessible by any IP addresses, click **Allow Access from Anywhere**.
 
-5. Click **Apply**.
+4. Click **Apply**.
 
 > **Tip:**
 >

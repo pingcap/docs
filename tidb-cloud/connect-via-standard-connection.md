@@ -34,9 +34,13 @@ To connect to a Dedicated Tier cluster via standard connection, perform the foll
 
 1. Open the overview page of the target cluster.
 
-    1. Log in to the [TiDB Cloud console](https://tidbcloud.com/).
-    2. If you have multiple projects, choose a target project in the left navigation pane. Otherwise, skip this step.
-    3. In the row of your target cluster, click the cluster name.
+    1. Log in to the [TiDB Cloud console](https://tidbcloud.com/) and navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page of your project.
+
+        > **Tip:**
+        >
+        > If you have multiple projects, you can switch to the target project in the left navigation pane of the **Clusters** page.
+
+    2. Click the name of your target cluster to go to its overview page.
 
 2. Click **Connect** in the upper-right corner. A connection dialog is displayed.
 
