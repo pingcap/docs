@@ -91,17 +91,17 @@ hide_commit: true
 
 </LearningPath>
 
-<LearningPath label="Manage Access" icon="users">
+<LearningPath label="Security" icon="users">
 
-[Manage Passwords](https://docs.pingcap.com/tidbcloud/manage-user-access#manage-user-passwords)
+[Password Authentication](https://docs.pingcap.com/tidbcloud/tidb-cloud-password-authentication)
 
-[Manage Profiles](https://docs.pingcap.com/tidbcloud/manage-user-access#manage-user-profiles)
+[Manage User Profiles](https://docs.pingcap.com/tidbcloud/manage-user-access#manage-user-profiles)
 
-[View Organization and Project](https://docs.pingcap.com/tidbcloud/manage-user-access#view-the-organization-and-project)
+[Manage organization access](https://docs.pingcap.com/tidbcloud/manage-user-access#manage-organization-access)
 
-[Invite a Member](https://docs.pingcap.com/tidbcloud/manage-user-access#invite-an-organization-member)
+[Manage project access](https://docs.pingcap.com/tidbcloud/manage-user-access#manage-project-access)
 
-[Configure Roles](https://docs.pingcap.com/tidbcloud/manage-user-access#configure-member-roles)
+[Configure Roles](https://docs.pingcap.com/tidbcloud/manage-user-access#manage-role-access)
 
 [Configure Security Settings](https://docs.pingcap.com/tidbcloud/configure-security-settings)
 
@@ -119,7 +119,7 @@ hide_commit: true
 
 <LearningPath label="Integrations" icon="cloud4">
 
-[Airbyte](https://docs.pingcap.com/tidbcloud/integrate-tidbcloud-with-airbyte)    
+[Airbyte](https://docs.pingcap.com/tidbcloud/integrate-tidbcloud-with-airbyte)
 
 [Datadog](https://docs.pingcap.com/tidbcloud/monitor-datadog-integration)
 

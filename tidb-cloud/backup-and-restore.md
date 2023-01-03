@@ -11,6 +11,12 @@ This document describes how to back up and restore your TiDB cluster data on TiD
 > **Note:**
 >
 > For [Serverless Tier clusters](/tidb-cloud/select-cluster-tier.md#serverless-tier-beta), the backup and restore feature is unavailable. You can use [Dumpling](https://docs.pingcap.com/tidb/stable/dumpling-overview) to export your data as a backup.
+>
+> Currently, the backup and restore feature has the following restrictions:
+>
+> - TiDB Cloud does not support restoring tables in the `mysql` schema, including user permissions and system variables. You can use [Dumpling and Lightning](https://docs.pingcap.com/tidb/dev/backup-and-restore-using-dumpling-lightning) to manually back up and restore these data.
+> - If you turn on and off PITR (Point-in-time Recovery) multiple times, you can only choose a time point within the recoverable range after the most recent PITR is enabled. The earlier recoverable range is not accessible.
+> - You cannot disable automatic backup.
 
 ## Backup
 
@@ -28,7 +34,7 @@ By the automatic backup, you can back up the cluster data every day at the backu
 
 3. In the setting window, configure the automatic backup:
 
-    - (Optional) Check whether the PITR (**Point-in-time Recovery**) feature is on.
+    - Turn on or off the PITR (**Point-in-time Recovery**) feature.
 
         PITR supports restoring data of any point in time to a new cluster. You can use it to:
 
@@ -36,7 +42,7 @@ By the automatic backup, you can back up the cluster data every day at the backu
         - Resolve cases of data write errors by restoring point-in-time that is before the error event.
         - Audit the historical data of the business.
 
-        If you have one of the preceding needs and want to use the PITR feature, make sure that your TiDB cluster version is at least v6.4.0 and the TiKV node size is at least 8 vCPU and 16 GiB. Currently, PITR is in **beta**. To enable it, [file a ticket](/tidb-cloud/tidb-cloud-support.md).
+        If you have one of the preceding needs and want to use the PITR feature, make sure that your TiDB cluster version is at least v6.4.0 and the TiKV node size is at least 8 vCPU and 16 GiB.
 
     - In **Backup Time**, schedule a start time for the daily cluster backup.
 
@@ -46,13 +52,13 @@ By the automatic backup, you can back up the cluster data every day at the backu
 
     - In **Backup Storage Region**, select the regions where you want to store your backup data.
 
-        TiDB Cloud stores your backup data in the current region of your cluster by default. In addition, you can add another remote region, and TiDB Cloud will copy all new backup data to the remote region, which facilitates data safety and faster recovery. After adding a remote region as a backup data storage, you cannot remove the region.
+        TiDB Cloud stores your backup data in the current region of your cluster by default. This behavior cannot be changed. In addition, you can add another remote region, and TiDB Cloud will copy all new backup data to the remote region, which facilitates data safety and faster recovery. After adding a remote region as a backup data storage, you cannot remove the region.
 
-4. Click **Confirm**.
+4. Click **Confirm** to preview the configuration change.
 
-> **Note:**
->
-> You cannot disable automatic backup.
+    If you turn on PITR, you can select the **Perform a backup immediately and use it as recovery starting point in PITR.** checkbox. Otherwise, PITR will not be available until the next backup is completed.
+
+5. Click **Confirm**.
 
 ### Backup storage region support
 
@@ -171,6 +177,6 @@ To restore a deleted cluster from recycle bin, take the following steps:
 
 6. In the **Security Settings** dialog box, set the root password and allowed IP addresses to connect to your cluster, and then click **Apply**.
 
-> **Note:** 
-> 
+> **Note:**
+>
 > You cannot restore a deleted cluster to any point in time. You can only select an automatic or manual backup to restore.

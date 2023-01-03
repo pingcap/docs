@@ -33,9 +33,9 @@ Before migrating data from Amazon S3 to TiDB Cloud, ensure you have administrato
 
     For more information, see [Migrate Data from MySQL-Compatible Databases](/tidb-cloud/migrate-data-into-tidb.md).
 
-3. If your source data is in local files, you can upload the files to the Amazon S3 bucket using either the Amazon S3 Console or the AWS CLI.
+3. If your source data is in local files, you can upload the files to the Amazon S3 bucket using either the Amazon S3 console or the AWS CLI.
 
-    - To upload files using the Amazon S3 Console, see [Uploading objects](https://docs.aws.amazon.com/AmazonS3/latest/userguide/upload-objects.html) in the AWS User Guide.
+    - To upload files using the Amazon S3 console, see [Uploading objects](https://docs.aws.amazon.com/AmazonS3/latest/userguide/upload-objects.html) in the AWS User Guide.
     - To upload files using the AWS CLI, use the following command:
 
         ```shell
@@ -119,9 +119,9 @@ For detailed steps, see [Configure GCS access](/tidb-cloud/config-s3-and-gcs-acc
 
 ### Step 3. Copy source data files to GCS and import data into TiDB Cloud
 
-1. To copy your source data files to your GCS bucket, you can upload the data to the GCS bucket using either Google Cloud Console or gsutil.
+1. To copy your source data files to your GCS bucket, you can upload the data to the GCS bucket using either Google Cloud console or gsutil.
 
-    - To upload data using Google Cloud Console, see [Creating storage buckets](https://cloud.google.com/storage/docs/creating-buckets) in Google Cloud Storage documentation.
+    - To upload data using Google Cloud console, see [Creating storage buckets](https://cloud.google.com/storage/docs/creating-buckets) in Google Cloud Storage documentation.
     - To upload data using gsutil, use the following command:
 
         ```shell

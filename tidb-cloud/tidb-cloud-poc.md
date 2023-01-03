@@ -80,7 +80,7 @@ Once a dedicated PoC cluster is created, you are ready to load data and perform 
 
 For a newly created cluster, note the following configurations:
 
-- The default time zone (the **Create Time** column on the Dashboard) is UTC. You can change it to your local time zone by following [Set the Local Time Zone](/tidb-cloud/manage-user-access.md#set-the-local-time-zone).
+- The default time zone (the **Create Time** column on the Dashboard) is UTC. You can change it to your local time zone by following [Set the Local Time Zone](/tidb-cloud/manage-user-access.md#set-the-time-zone-for-your-organization).
 - The default backup setting on a new cluster is full database backup on a daily basis. You can specify a preferred backup time or back up data manually. For the default backup time and more details, see [Back up and Restore TiDB Cluster Data](/tidb-cloud/backup-and-restore.md#backup).
 
 ## Step 4. Adapt your schemas and SQL

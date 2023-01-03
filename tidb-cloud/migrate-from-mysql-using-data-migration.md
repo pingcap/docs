@@ -13,9 +13,15 @@ This feature helps you migrate your database and its ongoing changes to TiDB Clo
 
 - The Data Migration feature is available only for **Dedicated Tier** clusters.
 
-- The Data Migration feature is only available to clusters in the projects that are created in the AWS Oregon (us-west-2), AWS Singapore (ap-southeast-1), and AWS Tokyo (ap-northeast-1) regions after November 9, 2022. If your **project** was created before the date or if your cluster is in another region, this feature is not available to your cluster and the **Data Migration** tab will not be displayed on the cluster overview page in the TiDB Cloud console.
+- The Data Migration feature is only available to clusters in the projects that are created in the following regions after November 9, 2022. If your **project** was created before the date or if your cluster is in another region, this feature is not available to your cluster and the **Data Migration** tab will not be displayed on the cluster overview page in the TiDB Cloud console.
 
-- Currently, the Data Migration feature is in beta, and you can create only one migration job **for free** for each organization. To create more migration jobs, you need to [file a support ticket](/tidb-cloud/tidb-cloud-support.md).
+    - AWS Oregon (us-west-2)
+    - AWS N. Virginia (us-east-1)
+    - AWS Mumbai (ap-south-1)
+    - AWS Singapore (ap-southeast-1)
+    - AWS Tokyo (ap-northeast-1)
+    - AWS Frankfurt (eu-central-1)
+- You can create up to 200 migration jobs for each organization. To create more migration jobs, you need to [file a support ticket](/tidb-cloud/tidb-cloud-support.md).
 
 - The system databases will be filtered out and not migrated to TiDB Cloud even if you select all of the databases to migrate. That is, `mysql`, `information_schema`, `information_schema`, and `sys` will not be migrated using this feature.
 
@@ -185,7 +191,7 @@ If all check items show **Pass**, click **Next**.
 
 ## Step 5: Choose a spec and start migration
 
-On the **Choose a Spec and Start Migration** page, select the migration spec. During the public beta, the free migration job is limited to 4 RCUs (Replication Capacity Unit).
+On the **Choose a Spec and Start Migration** page, select an appropriate migration specification according to your performance requirements. For more information about the specifications, see [Specifications for Data Migration](/tidb-cloud/tidb-cloud-billing-dm.md#specifications-for-data-migration).
 
 After selecting the spec, click **Create Job and Start** to start the migration.
 

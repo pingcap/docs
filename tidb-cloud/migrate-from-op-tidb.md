@@ -283,7 +283,7 @@ To replicate incremental data, do the following:
 
     ![Update Filter](/media/tidb-cloud/edit_traffic_filter_rules.png)
 
-3. Get the connection information of the downstream TiDB Cloud cluster. In the [TiDB Cloud console](https://tidbcloud.com/console/clusters), go to **Overview** > **Connect** > **Standard Connection** > **Connect with a SQL Client**. From the connection information, you can get the host IP address and port of the cluster. For more information, see [Connect via standard connection](/tidb-cloud/connect-to-tidb-cluster.md#connect-via-standard-connection).
+3. Get the connection information of the downstream TiDB Cloud cluster. In the [TiDB Cloud console](https://tidbcloud.com/console/clusters), go to **Overview** > **Connect** > **Standard Connection** > **Connect with a SQL Client**. From the connection information, you can get the host IP address and port of the cluster. For more information, see [Connect via standard connection](/tidb-cloud/connect-via-standard-connection.md).
 
 4. Create and run the incremental replication task. In the upstream cluster, run the following:
 

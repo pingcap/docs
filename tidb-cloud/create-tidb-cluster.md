@@ -79,7 +79,7 @@ To create a Serverless Tier cluster, take the following steps:
 
 6. After the creation is completed, perform security settings for your cluster:
 
-    1. Click **Security Settings** in the upper-right corner of the cluster area.
+    1. Click **...** in the upper-right corner of the cluster area, and then click **Security Settings** in the drop-down menu.
     2. In the **Security Settings** dialog box, set the root password to connect to your cluster, and then click **Apply**.
 
     > **Note:**

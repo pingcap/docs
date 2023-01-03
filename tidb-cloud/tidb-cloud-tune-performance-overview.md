@@ -42,7 +42,7 @@ For example, for a database system running OLTP loads, after its CPU utilization
 
 ## Troubleshoot bottlenecks in user response time
 
-There are several pages on the TiDB Cloud console that help you troubleshoot user response time.
+There are several pages in the TiDB Cloud console that help you troubleshoot user response time.
 
 - **Overview**: on this tab, you can view TiDB metrics such as total QPS, latency, connections, request QPS, request duration, storage size, CPU, IO Read, and IO Write.
 - **SQL Diagnosis**:

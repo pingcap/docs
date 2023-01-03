@@ -194,8 +194,8 @@ For the roadmap of TiDB kernel, refer to [TiDB Roadmap](https://github.com/pingc
   </tr>
   <tr>
     <td>Console audit logging</td>
-    <td>Support auditing TiDB Cloud Console operations.</td>
-    <td>Support reliable auditing capabilities for various operations in the TiDB Cloud Console.</td>
+    <td>Support auditing TiDB Cloud console operations.</td>
+    <td>Support reliable auditing capabilities for various operations in the TiDB Cloud console.</td>
   </tr>
 </tbody>
 </table>

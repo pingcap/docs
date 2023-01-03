@@ -20,7 +20,7 @@ Comparing with backup and restore, pausing and resuming a cluster takes less tim
 - You can pause your cluster only when it is in the **AVAILABLE** state. If your cluster is in other states such as **MODIFYING**, you must wait for the current operation to be completed before pausing the cluster.
 - You cannot pause your cluster when a data import task is going on. You can either wait for the import task to be completed or cancel the import task.
 - You cannot pause your cluster when a backup job is going on. You can either wait for the current backup job to be completed or [delete the running backup job](/tidb-cloud/backup-and-restore.md#delete-a-running-backup-job).
-- You cannot pause your cluster if it has any [Changefeeds](/tidb-cloud/changefeed-overview.md). You need to delete the existing Changefeeds ([Delete Sink to Apache Kafka](/tidb-cloud/changefeed-sink-to-apache-kafka.md#manage-the-changefeed) or [Delete Sink to MySQL](/tidb-cloud/changefeed-sink-to-mysql.md#delete-a-sink)) before pausing the cluster.
+- You cannot pause your cluster if it has any [changefeeds](/tidb-cloud/changefeed-overview.md). You need to [delete the existing changefeeds](/tidb-cloud/changefeed-overview.md#delete-a-changefeed) before pausing the cluster.
 
 ## Pause a TiDB cluster
 

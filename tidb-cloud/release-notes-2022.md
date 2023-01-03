@@ -8,6 +8,58 @@ aliases: ['/tidbcloud/beta/supported-tidb-versions','/tidbcloud/release-notes']
 
 This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-cloud/) in 2022.
 
+## December 28, 2022
+
+**General changes**
+
+- Currently, after upgrading the default TiDB version of all [Serverless Tier](/tidb-cloud/select-cluster-tier.md#serverless-tier-beta) clusters from [v6.3.0](https://docs.pingcap.com/tidb/v6.3/release-6.3.0) to [v6.4.0](https://docs.pingcap.com/tidb/v6.4/release-6.4.0), the cold start becomes slower in certain circumstances. So we roll back the default TiDB version of all Serverless Tier clusters from v6.4.0 to v6.3.0, then fix the problem as soon as possible, and upgrade it later again.
+
+## December 27, 2022
+
+**General changes**
+
+- Upgrade the default TiDB version of all [Serverless Tier](/tidb-cloud/select-cluster-tier.md#serverless-tier-beta) clusters from [v6.3.0](https://docs.pingcap.com/tidb/v6.3/release-6.3.0) to [v6.4.0](https://docs.pingcap.com/tidb/v6.4/release-6.4.0).
+
+- The point-in-time recovery (PITR) for Dedicated Tier clusters is now in General Availability (GA).
+
+    PITR supports restoring data of any point in time to a new cluster. To use the PITR feature, make sure that your TiDB cluster version is at least v6.4.0 and the TiKV node size is at least 8 vCPU and 16 GiB.
+
+    You can enable or disable the PITR feature in the **Backup Settings** of the [TiDB Cloud console](https://tidbcloud.com).
+
+    For more information, see [Back up and restore TiDB cluster data](/tidb-cloud/backup-and-restore.md).
+
+- Support managing multiple changefeeds and editing existing changefeeds.
+
+    - You can now create as many changefeeds as needed to manage different data replication tasks. Currently, each cluster can have up to 10 changefeeds. For more details, refer to [Changefeed overview](/tidb-cloud/changefeed-overview.md).
+    - You can edit the configuration of an existing changefeed in the paused status. For more information, see [Edit a changefeed](/tidb-cloud/changefeed-overview.md#edit-a-changefeed).
+
+- Support directly migrating data from Amazon Aurora MySQL, Amazon Relational Database Service (RDS) MySQL, or self-hosted MySQL-compatible databases to TiDB Cloud online. This feature is now in General Availability.
+
+    - Provide services in the following 6 regions:
+        - AWS Oregon (us-west-2)
+        - AWS N. Virginia (us-east-1)
+        - AWS Mumbai (ap-south-1)
+        - AWS Singapore (ap-southeast-1)
+        - AWS Tokyo (ap-northeast-1)
+        - AWS Frankfurt (eu-central-1)
+    - Support multiple specifications. You can choose an appropriate specification according to the required performance to achieve optimal data migration experience.
+
+  For how to migrate data to TiDB Cloud, refer to [user documentation](/tidb-cloud/migrate-from-mysql-using-data-migration.md). For billing details, refer to [Data Migration billing](/tidb-cloud/tidb-cloud-billing-dm.md).
+
+- Support importing local CSV files to TiDB Cloud.
+
+    It only takes a few clicks to complete the task configuration, and then your local CSV data can be quickly imported into your TiDB cluster. When using this method, you do not need to provide the cloud storage bucket path and Role ARN. The whole importing process is quick and smooth.
+
+    For more information, see [Import local files to TiDB Cloud](/tidb-cloud/tidb-cloud-import-local-files.md).
+
+## December 20, 2022
+
+**General changes**
+
+- Add the label `project name` to the [Datadog](/tidb-cloud/monitor-datadog-integration.md) Dashboard as a filter to provide project information.
+
+    You can use the filter `project name` to quickly find the cluster you want.
+
 ## December 13, 2022
 
 **General changes**
@@ -219,7 +271,7 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
 * When you reset the password for your account, TiDB Cloud will check your new password input against your last four passwords, and remind you to avoid using any of them. Any of the four used passwords will not be permitted.
 
-    For details, see [Manage user passwords](/tidb-cloud/manage-user-access.md#manage-user-passwords).
+    For details, see [Password Authentication](/tidb-cloud/tidb-cloud-password-authentication.md).
 
 ## September 20, 2022
 
@@ -241,7 +293,7 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
 * The TiDB Cloud API (beta) is now available to all users.
 
-    You can start using the API by creating an API key on the TiDB Cloud console. For more information, refer to [API documentation](/tidb-cloud/api-overview.md).
+    You can start using the API by creating an API key in the TiDB Cloud console. For more information, refer to [API documentation](/tidb-cloud/api-overview.md).
 
 ## September 15, 2022
 
@@ -249,7 +301,7 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
 * Support connecting to TiDB Cloud [Dedicated Tier](/tidb-cloud/select-cluster-tier.md#dedicated-tier) clusters via TLS.
 
-    For Dedicated Tier clusters, the **Standard Connection** tab in the [Connect](/tidb-cloud/connect-to-tidb-cluster.md#connect-via-standard-connection) dialog now provides a link to download the TiDB cluster CA and also provides the connection string and sample code for TLS connection. You can [connect to your Dedicated Tier cluster via TLS](/tidb-cloud/connect-to-tidb-cluster.md#connect-via-standard-connection) using third-party MySQL clients, MyCLI, and multiple connection methods for your applications, such as JDBC, Python, Go, and Node.js. This feature ensures the security of data transmission from your applications to TiDB clusters.
+    For Dedicated Tier clusters, the **Standard Connection** tab in the [Connect](/tidb-cloud/connect-via-standard-connection.md) dialog now provides a link to download the TiDB cluster CA and also provides the connection string and sample code for TLS connection. You can [connect to your Dedicated Tier cluster via TLS](/tidb-cloud/connect-via-standard-connection.md) using third-party MySQL clients, MyCLI, and multiple connection methods for your applications, such as JDBC, Python, Go, and Node.js. This feature ensures the security of data transmission from your applications to TiDB clusters.
 
 ## September 14, 2022
 
@@ -410,7 +462,7 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 ## July 19, 2022
 
 * Provide a new option for [TiKV node size](/tidb-cloud/size-your-cluster.md#tikv-node-size): `8 vCPU, 32 GiB`. You can choose either `8 vCPU, 32 GiB` or `8 vCPU, 64 GiB` for an 8 vCPU TiKV node.
-* Support syntax highlighting in sample code provided in the [**Connect to TiDB**](/tidb-cloud/connect-to-tidb-cluster.md#connect-via-standard-connection) dialog to improve code readability. You can easily identify the parameters that you need to replace in the sample code.
+* Support syntax highlighting in sample code provided in the [**Connect to TiDB**](/tidb-cloud/connect-via-standard-connection.md) dialog to improve code readability. You can easily identify the parameters that you need to replace in the sample code.
 * Support automatically validating whether TiDB Cloud can access your source data after you confirm the import task on the [**Data Import Task**](/tidb-cloud/import-sample-data.md) page.
 * Change the theme color of the TiDB Cloud console to make it consistent with that of [PingCAP website](https://en.pingcap.com/).
 
@@ -445,8 +497,8 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 ## June 21, 2022
 
 * Add the support of the GCP region `Taiwan` for [Dedicated Tier](/tidb-cloud/select-cluster-tier.md#dedicated-tier) cluster creation.
-* Support [updating user profiles](/tidb-cloud/manage-user-access.md#manage-user-profiles) on the TiDB Cloud console, including first name, last time, company name, country, and phone number.
-* Provide the connection strings for MySQL, MyCLI, JDBC, Python, Go, and Node.js in the [**Connect to TiDB**](/tidb-cloud/connect-to-tidb-cluster.md#connect-via-standard-connection) dialog so you can easily connect to your TiDB cluster.
+* Support [updating user profiles](/tidb-cloud/manage-user-access.md#manage-user-profiles) in the TiDB Cloud console, including first name, last time, company name, country, and phone number.
+* Provide the connection strings for MySQL, MyCLI, JDBC, Python, Go, and Node.js in the [**Connect to TiDB**](/tidb-cloud/connect-via-standard-connection.md) dialog so you can easily connect to your TiDB cluster.
 * Support obtaining bucket regions from bucket URIs automatically during data import to save your effort to fill in such information.
 
 ## June 16, 2022
@@ -467,7 +519,7 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
 * Add the [Try Free](https://tidbcloud.com/free-trial) registration page to quickly sign up for TiDB Cloud.
 * Remove the **Proof of Concept plan** option from the plan selection page. If you want to apply for a 14-day PoC trial for free, go to the [Apply for PoC](https://en.pingcap.com/apply-for-poc/) page. For more information, see [Perform a Proof of Concept (PoC) with TiDB Cloud](/tidb-cloud/tidb-cloud-poc.md).
-* Improve the system security by prompting users who sign up for TiDB Cloud with emails and passwords to reset their passwords every 90 days. For more information, see [Manage user passwords](/tidb-cloud/manage-user-access.md#manage-user-passwords).
+* Improve the system security by prompting users who sign up for TiDB Cloud with emails and passwords to reset their passwords every 90 days. For more information, see [Password Authentication](/tidb-cloud/tidb-cloud-password-authentication.md).
 
 ## May 24, 2022
 
@@ -559,7 +611,7 @@ General change:
 
 Improvement:
 
-* Add a suggested option `--connect-timeout 15` to the MySQL client on the [**Connect**](/tidb-cloud/connect-to-tidb-cluster.md#connect-via-standard-connection) page.
+* Add a suggested option `--connect-timeout 15` to the MySQL client on the [**Connect**](/tidb-cloud/connect-via-standard-connection.md) page.
 
 Bug fixes:
 
