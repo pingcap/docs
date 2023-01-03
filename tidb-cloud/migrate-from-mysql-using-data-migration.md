@@ -7,15 +7,21 @@ summary: Learn how to migrate data from MySQL-compatible databases hosted in Ama
 
 This document describes how to migrate data from a MySQL-compatible database on a cloud provider (Amazon Aurora MySQL or Amazon Relational Database Service (RDS)) or on-premises to TiDB Cloud using the Data Migration feature of the TiDB Cloud console.
 
-This feature helps you migrate your database and its ongoing changes to TiDB Cloud (either in the same region or cross regions). Compared with solutions introduced in [Migrate from MySQL-Compatible Databases](/tidb-cloud/migrate-data-into-tidb.md) and [Migrate Incremental Data from MySQL-Compatible Databases](/tidb-cloud/migrate-incremental-data-from-mysql.md) that require tools such as Dumpling and TiDB Lightning, this feature is easier to use. You do not need to manually dump data from the source database and then import it to TiDB Cloud. Instead, you can migrate data directly from the source database to TiDB Cloud in one go.
+This feature helps you migrate your database and its ongoing changes to TiDB Cloud (either in the same region or cross regions). Compared with solutions that require tools such as Dumpling and TiDB Lightning, this feature is easier to use. You do not need to manually dump data from the source database and then import it to TiDB Cloud. Instead, you can migrate data directly from the source database to TiDB Cloud in one go.
 
 ## Limitations
 
 - The Data Migration feature is available only for **Dedicated Tier** clusters.
 
-- The Data Migration feature is only available to clusters in the projects that are created in the AWS Oregon (us-west-2) and AWS Singapore (ap-southeast-1) regions after November 9, 2022. If your cluster was created before the date or if your cluster is in another region, this feature is not available to your cluster and the **Data Migration** tab will not be displayed on the cluster overview page in the TiDB Cloud console.
+- The Data Migration feature is only available to clusters in the projects that are created in the following regions after November 9, 2022. If your **project** was created before the date or if your cluster is in another region, this feature is not available to your cluster and the **Data Migration** tab will not be displayed on the cluster overview page in the TiDB Cloud console.
 
-- Currently, the Data Migration feature is in beta, and you can create only one migration job **for free** for each organization. To create more migration jobs, you need to [file a support ticket](/tidb-cloud/tidb-cloud-support.md).
+    - AWS Oregon (us-west-2)
+    - AWS N. Virginia (us-east-1)
+    - AWS Mumbai (ap-south-1)
+    - AWS Singapore (ap-southeast-1)
+    - AWS Tokyo (ap-northeast-1)
+    - AWS Frankfurt (eu-central-1)
+- You can create up to 200 migration jobs for each organization. To create more migration jobs, you need to [file a support ticket](/tidb-cloud/tidb-cloud-support.md).
 
 - The system databases will be filtered out and not migrated to TiDB Cloud even if you select all of the databases to migrate. That is, `mysql`, `information_schema`, `information_schema`, and `sys` will not be migrated using this feature.
 
@@ -103,7 +109,7 @@ To perform incremental data migration, make sure you have enabled binlogs of the
 
 ## Step 1: Go to the **Data Migration** page
 
-1. Log in to the [TiDB Cloud console](https://tidbcloud.com/console/clusters). Navigate to the **Clusters** page for your project.
+1. Log in to the [TiDB Cloud console](https://tidbcloud.com/), navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page, and choose your target project on the top of the left navigation bar.
 
 2. On the **Clusters** page, click the name of your cluster, and click the **Data Migration** tab. The **Data Migration** page is displayed.
 
@@ -185,7 +191,7 @@ If all check items show **Pass**, click **Next**.
 
 ## Step 5: Choose a spec and start migration
 
-On the **Choose a Spec and Start Migration** page, select the migration spec. During the public beta, the free migration job is limited to 4 RCUs (Replication Capacity Unit).
+On the **Choose a Spec and Start Migration** page, select an appropriate migration specification according to your performance requirements. For more information about the specifications, see [Specifications for Data Migration](/tidb-cloud/tidb-cloud-billing-dm.md#specifications-for-data-migration).
 
 After selecting the spec, click **Create Job and Start** to start the migration.
 
@@ -198,3 +204,33 @@ You can pause or delete a migration job when it is running.
 If a migration job has failed, you can restart it after solving the problem.
 
 You can delete a migration job in any status.
+
+## Troubleshooting
+
+If you encounter any problems during the migration, you can refer to the following solutions.
+
+- Error message: "The required binary log for migration no longer exists on the source database. Please make sure binary log files are kept for long enough time for migration to succeed."
+
+    This error means that the binlogs to be migrated has been cleaned up and can only be restored by creating a new task.
+
+    Ensure that the binlogs required for incremental migration exist. It is recommended to configure `expire_logs_days` to extend the duration of binlogs. Do not use `purge binary log` to clean up binlogs if it's needed by some migration job.
+
+- Error message: "Failed to connect to the source database using given parameters. Please make sure the source database is up and can be connected using the given parameters."
+
+    This error means that the connection to the source database failed. Check whether the source database is started and can be connected to using the specified parameters. After confirming that the source database is available, you can try to recover the task by clicking **Restart**.
+
+- The migration task is interrupted and contains the error "driver: bad connection" or "invalid connection"
+
+    This error means that the connection to the downstream TiDB cluster failed. Check whether the downstream TiDB cluster is in `normal` state and can be connected with the username and password specified by the job. After confirming that the downstream TiDB cluster is available, you can try to resume the task by clicking **Restart**.
+
+- Error message: "Failed to connect to the TiDB cluster using the given user and password. Please make sure TiDB Cluster is up and can be connected to using the given user and password."
+
+    Failed to connect to TiDB cluster. It is recommended to check whether the TiDB cluster is in `normal` state and you can connect with the username and password specified by the job. After confirming that the TiDB cluster is available, you can try to resume the task by clicking **Restart**.
+
+- Error message: "TiDB cluster storage is not enough. Please increase the node storage of TiKV."
+
+    The TiDB cluster storage is running low. It is recommended to [increase the TiKV node storage](/tidb-cloud/scale-tidb-cluster.md#increase-node-storage) and then resume the task by clicking **Restart**.
+
+- Error message: "Failed to connect to the source database. Please check whether the database is available or the maximum connections have been reached."
+
+    Failed to connect to the source database. It is recommended to check whether the source database is started, the number of database connections has not reached the upper limit, and you can connect using the parameters specified by the job. After confirming that the source database is available, you can try to resume the job by clicking **Restart**.

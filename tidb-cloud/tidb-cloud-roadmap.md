@@ -30,7 +30,7 @@ The TiDB Cloud roadmap brings you what's coming in the near future, so you can s
     <td>Support loading sample datasets into a cluster. You can use this data to quickly get started with testing the features of TiDB Cloud.</td>
   </tr>
   <tr>
-    <td>Add SQL Editor.</td>
+    <td>✅ Add SQL Editor.</td>
     <td>Write and run SQL queries, and view the results in the TiDB console.</td>
   </tr>
   <tr>
@@ -57,7 +57,7 @@ The TiDB Cloud roadmap brings you what's coming in the near future, so you can s
     <td>Users can quickly get help with and give feedback on the product.</td>
   </tr>
   <tr>
-    <td>Add left navigation.</td>
+    <td>✅ Add left navigation.</td>
     <td>Present the TiDB Cloud console in the structure of organizations, projects, and users to simplify the layout logic and improve user experience.</td>
   </tr>
   <tr>
@@ -141,7 +141,7 @@ For the roadmap of TiDB kernel, refer to [TiDB Roadmap](https://github.com/pingc
 <tbody>
   <tr>
     <td>Data replication to Kafka/MySQL</td>
-    <td>TiDB Cloud supports replicating data to Kafka/MySQL.</td>
+    <td>✅ TiDB Cloud supports replicating data to Kafka/MySQL.</td>
     <td>TiDB Cloud supports TiCDC-based data replication to Kafka and MySQL compatible databases.</td>
   </tr>
   <tr>
@@ -194,8 +194,8 @@ For the roadmap of TiDB kernel, refer to [TiDB Roadmap](https://github.com/pingc
   </tr>
   <tr>
     <td>Console audit logging</td>
-    <td>Support auditing TiDB Cloud Console operations.</td>
-    <td>Support reliable auditing capabilities for various operations in the TiDB Cloud Console.</td>
+    <td>Support auditing TiDB Cloud console operations.</td>
+    <td>Support reliable auditing capabilities for various operations in the TiDB Cloud console.</td>
   </tr>
 </tbody>
 </table>

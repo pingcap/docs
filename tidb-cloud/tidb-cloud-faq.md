@@ -119,13 +119,65 @@ No. TiFlash data cannot be exported.
 
 ## Security FAQs
 
-### How does TiDB protect data privacy and ensure security?
+### Is TiDB Cloud secure?
 
-Transport Layer Security (TLS) and Transparent Data Encryption (TDE) are included for encryption at rest. There are two different network planes: the application to the TiDB server and the plane for data communication. We include extended syntax to compare Subject Alternative Name for verification of certificates and TLS context for internal communication.
+In TiDB Cloud, all data at rest is encrypted, and all network traffic is encrypted using Transport Layer Security (TLS). 
 
-### Can TiDB Cloud run in our VPC?
+- Encryption of data at rest is automated using encrypted storage volumes. 
+- Encryption of data in transit between your client and your cluster is automated using TiDB Cloud web server TLS and TiDB cluster TLS.
 
-No. TiDB Cloud runs on the PingCAP VPC, but the data and traffic are encrypted by default. So you do not need to worry about data privacy issues.
+### How does TiDB Cloud encrypt my business data?
+
+TiDB Cloud uses storage volume encryption by default for your business data at rest, including your database data and backup data. TiDB Cloud requires TLS encryption for data in transit, and also requires component-level TLS encryption for data in your database cluster between TiDB, PD, TiKV, and TiFlash.
+
+To get more specific information about business data encryption in TiDB Cloud, contact [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md).
+
+### What versions of TLS does TiDB Cloud support?
+
+TiDB Cloud supports TLS 1.2 or TLS 1.3.
+
+### Can I run TiDB Cloud in my VPC?
+
+No. TiDB Cloud is Database-as-a-Service (DBaaS) and runs only in the TiDB Cloud VPC. As a cloud computing managed service, TiDB Cloud provides access to a database without requiring the setup of physical hardware and the installation of software.
+
+### Is my TiDB cluster secure?
+
+In TiDB Cloud, you can use either a Dedicated Tier cluster or a Serverless Tier cluster according to your needs.
+
+For Dedicated Tier clusters, TiDB Cloud ensures cluster security with the following measures:
+
+- Creates independent sub-accounts and VPCs for each cluster.
+- Sets up firewall rules to isolate external connections.
+- Creates server-side TLS certificates and component-level TLS certificates for each cluster to encrypt cluster data in transit.
+- Provide IP access rules for each cluster to ensure that only allowed source IP addresses can access your cluster.
+
+For Serverless Tier clusters, TiDB Cloud ensures cluster security with the following measures:
+
+- Creates independent sub-accounts for each cluster.
+- Sets up firewall rules to isolate external connections.
+- Provides cluster server TLS certificates to encrypt cluster data in transit.
+
+### How do I connect to my database in a TiDB cluster?
+
+For a Dedicated Tier cluster, the steps to connect to your cluster are simplified as follows:
+
+1. Authorize your network.
+2. Set up your database users and login credentials.
+3. Download and configure TLS for your cluster server.
+4. Choose a SQL client, get an auto-generated connection string displayed on the TiDB Cloud UI, and then connect to your cluster through the SQL client using the string.
+
+For a Serverless Tier cluster, the steps to connect to your cluster are simplified as follows: 
+
+1. Set a database user and login credential. 
+2. Choose a SQL client, get an auto-generated connection string displayed on the TiDB Cloud UI, and then connect to your cluster through the SQL client using the string.
+
+For more information, see [Connect to Your TiDB Cluster](/tidb-cloud/connect-to-tidb-cluster.md).
+
+### Who has access to my business data of a database cluster?
+
+Only you can access your table data in your own TiDB cluster. TiDB Cloud Support cannot directly access the data in your TiDB cluster. The only exception is that when you need to improve products and solve cluster operation problems, TiDB Cloud Support can access the cluster operation data after you provide your internal temporary authorization. All authorization and access records are audited annually by third-party audit organizations, for example, PCI-DSS, SOC2, and ISO27701. 
+
+TiDB Cloud operational data is described in [TiDB Cloud Privacy Policy](https://www.pingcap.com/privacy-policy/) and [TiDB Cloud Data Processing Agreement](https://www.pingcap.com/legal/data-processing-agreement-for-tidb-cloud-services/).
 
 ## Support FAQ
 
