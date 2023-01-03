@@ -68,8 +68,7 @@ After trying **Plaground**, you can load sample data to your TiDB Cloud cluster.
 
 3. Fill in the import parameters:
 
-    - **Data Format**: select **SQL File**
-    - **Location**: select **AWS**
+    - **Data format**: select **SQL File**
     - **Bucket URI**: `s3://tidbcloud-samples/data-ingestion/`
     - **Role ARN**: `arn:aws:iam::385595570414:role/import-sample-access`
 

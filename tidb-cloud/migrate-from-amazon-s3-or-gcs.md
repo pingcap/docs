@@ -69,13 +69,11 @@ For detailed steps, see [Configure Amazon S3 access](/tidb-cloud/config-s3-and-g
 
     3. In the row of your target cluster, click the cluster name to go to its cluster overview page, and then click **Import** in the left navigation pane.
 
-2. On the **Import** page, fill in the following information:
+2. On the **Import** page, click **Import Data** in the upper-right corner, select **From S3**, and then fill in the following parameters:
 
-    - **Data Format**: choose the format of your data.
-    - **Location**: `AWS`
+    - **Data format**: choose the format of your data.
     - **Bucket URI**: fill in the bucket URI of your source data.
     - **Role ARN**: enter the Role-ARN you obtained in [Step 2](#step-2-configure-amazon-s3-access).
-    - **Target Cluster**: shows the cluster name and the region name.
 
     If the region of the bucket is different from your cluster, confirm the compliance of cross region. Click **Next**.
 

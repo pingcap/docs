@@ -187,11 +187,9 @@ After configuring the Amazon S3 access, you can perform the data import task in 
 
 3. On the **Import from S3** page, fill in the following information:
 
-    - **Data Format**: select **CSV**.
-    - **Location**: `AWS`
+    - **Data format**: select **CSV**.
     - **Bucket URI**: fill in the bucket URI of your source data. You can use the second-level directory corresponding to tables, `s3://dumpling-s3/store/sales` in this example, so that TiDB Cloud can import and merge the data in all MySQL instances into `store.sales` in one go.
     - **Role ARN**: enter the Role-ARN you obtained.
-    - **Target Cluster**: shows the cluster name and the region name.
 
     If the location of the bucket is different from your cluster, confirm the compliance of cross region. Click **Next**.
 
