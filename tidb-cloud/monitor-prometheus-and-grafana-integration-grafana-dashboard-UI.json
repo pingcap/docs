@@ -76,7 +76,7 @@
         "type": "prometheus",
         "uid": "${DS_PROMETHEUS}"
       },
-      "description": "database time consumed by SQL statements per second, which are collected by SQL types, such as SELECT, INSERT, and UPDATE.",
+      "description": "database time consumed by SQL statements per second, which is collected by SQL types, such as SELECT, INSERT, and UPDATE.",
       "fieldConfig": {
         "defaults": {
           "color": {
