@@ -9,7 +9,7 @@ After your TiDB cluster is created on TiDB Cloud, you can connect to your TiDB c
 
 ## Serverless Tier
 
-For Serverless Tier clusters, you can connect to your cluster via standard connection or via SQL editor (Beta) in the TiDB Cloud console.
+For Serverless Tier clusters, you can connect to your cluster via standard connection or via Chat2Query (Beta) in the TiDB Cloud console.
 
 - [Connect via standard connection](/tidb-cloud/connect-via-standard-connection.md#serverless-tier)
 

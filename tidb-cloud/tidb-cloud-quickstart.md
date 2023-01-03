@@ -39,7 +39,7 @@ Chat2Query is a web-based SQL editor that allows you to directly edit and run SQ
 
     > **Note:**
     >
-    > The SQL editor currently has limited support on SQL statements. DDLs such as `CREATE TABLE` or `DROP TABLE` are not supported yet.
+    > Currently, Chat2Query has limited support on SQL statements. DDLs such as `CREATE TABLE` or `DROP TABLE` are not supported yet.
 
 2. In the editor, you can either type a SQL statement manually or follow the on-screen instructions to let AI generate a SQL statement for you.
 
