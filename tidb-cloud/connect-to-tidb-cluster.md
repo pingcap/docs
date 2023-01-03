@@ -17,9 +17,9 @@ For Serverless Tier clusters, you can connect to your cluster via standard conne
 
     Serverless Tier only [supports TLS connections](/tidb-cloud/secure-connections-to-serverless-tier-clusters.md), which ensures the security of data transmission from your applications to TiDB clusters.
 
-- Connect via SQL editor (Beta)
+- Chat2Query (Beta)
 
-    SQL editor is a web-based SQL editor in the [TiDB Cloud console](https://tidbcloud.com/), which allows you to directly edit and run SQL queries against databases of Serverless Tier. To access SQL editor, navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page, click your cluster name, and select **SQL Editor** on the left navigation bar.
+    Chat2Query is a web-based SQL editor in the [TiDB Cloud console](https://tidbcloud.com/), which allows you to directly edit and run SQL queries against databases of Serverless Tier. In Chat2Query, you can use AI to generate SQL queries automatically. To access Chat2Query, go to the [**Clusters**](https://tidbcloud.com/console/clusters) page, click your cluster name, and select **Chat2Query** on the left navigation bar.
 
 ## Dedicated Tier
 
