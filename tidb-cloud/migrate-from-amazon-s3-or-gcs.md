@@ -61,11 +61,15 @@ For detailed steps, see [Configure Amazon S3 access](/tidb-cloud/config-s3-and-g
 
 ### Step 3. Import data into TiDB Cloud
 
-1. Log in to the [TiDB Cloud console](https://tidbcloud.com/), navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page, and choose your target project on the top of the left navigation bar.
+1. Open the **Import** page in the TiDB Cloud console.
 
-2. Locate your target cluster, click **...** in the upper-right corner of the cluster area, and select **Import Data**. The **Data Import** page is displayed.
+    1. Log in to the [TiDB Cloud console](https://tidbcloud.com/) and navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page.
 
-3. On the **Data Import** page, fill in the following information:
+    2. If you have multiple projects, choose a target project in the left navigation pane. Otherwise, skip this step.
+
+    3. In the row of your target cluster, click the cluster name to go to its cluster overview page, and then click **Import** in the left navigation pane.
+
+2. On the **Import** page, fill in the following information:
 
     - **Data Format**: choose the format of your data.
     - **Location**: `AWS`
@@ -77,11 +81,11 @@ For detailed steps, see [Configure Amazon S3 access](/tidb-cloud/config-s3-and-g
 
     TiDB Cloud starts validating whether it can access your data in the specified bucket URI. After validation, TiDB Cloud tries to scan all the files in the data source using the default file naming pattern, and returns a scan summary result on the left side of the next page. If you get the `AccessDenied` error, see [Troubleshoot Access Denied Errors during Data Import from S3](/tidb-cloud/troubleshoot-import-access-denied-error.md).
 
-4. Modify the file patterns and add the table filter rules if needed.
+3. Modify the file patterns and add the table filter rules if needed.
 
-5. Click **Next**.
+4. Click **Next**.
 
-6. On the **Preview** page, confirm the data to be imported and then click **Start Import**.
+5. On the **Preview** page, confirm the data to be imported and then click **Start Import**.
 
 After the data is imported, if you want to remove the Amazon S3 access of TiDB Cloud, simply delete the policy that you added in [Step 2. Configure Amazon S3 access](#step-2-configure-amazon-s3-access).
 
@@ -134,7 +138,10 @@ For detailed steps, see [Configure GCS access](/tidb-cloud/config-s3-and-gcs-acc
         gsutil rsync -r ./tidbcloud-samples-us-west-2/ gs://target-url-in-gcs
         ```
 
-2. In the TiDB Cloud console, navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page, choose your target project on the top of the left navigation bar, and then click the name of your target cluster to go to its own overview page. In the **Import** area, click **Import Data**, and then fill in the importing related information on the **Data Import** page.
+2. Log in to the [TiDB Cloud console](https://tidbcloud.com/) and navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page.
+3. If you have multiple projects, choose a target project in the left navigation pane. Otherwise, skip this step.
+4. In the row of your target cluster, click the cluster name to go to its cluster overview page, and then click **Import** in the left navigation pane.
+5. On the **Import** page, click **Import Data** in the upper-right corner, select **From GCS**, and then fill in the importing related information.
 
 > **Note:**
 >

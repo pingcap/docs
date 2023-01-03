@@ -175,11 +175,17 @@ The following example only lists key policy configurations. Replace the Amazon S
 
 After configuring the Amazon S3 access, you can perform the data import task in the TiDB Cloud console as follows:
 
-1. Log in to the [TiDB Cloud console](https://tidbcloud.com/), navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page, and choose your target project on the top of the left navigation bar.
+1. Open the **Import** page in the TiDB Cloud console.
 
-2. Locate your target cluster, click **...** in the upper-right corner of the cluster area, and select **Import Data**. The **Data Import** page is displayed.
+    1. Log in to the [TiDB Cloud console](https://tidbcloud.com/) and navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page.
 
-3. On the **Data Import** page, fill in the following information:
+    2. If you have multiple projects, choose a target project in the left navigation pane. Otherwise, skip this step.
+
+    3. In the row of your target cluster, click the cluster name to go to its cluster overview page, and then click **Import** in the left navigation pane.
+
+2. On the **Import** page, click **Import Data** in the upper-right corner, and then select **From S3**.
+
+3. On the **Import from S3** page, fill in the following information:
 
     - **Data Format**: select **CSV**.
     - **Location**: `AWS`

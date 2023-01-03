@@ -11,13 +11,15 @@ This document describes how to migrate data from Amazon Aurora MySQL to TiDB Clo
 
 To import data, perform the following steps:
 
-1. Log in to the [TiDB Cloud console](https://tidbcloud.com/), navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page and choose your target project on the top of the left navigation bar.
+1. Open the **Import** page in the TiDB Cloud console.
 
-2. Locate your target cluster, click **...** in the upper-right corner of the cluster area, and select **Import Data**. The **Data Import** page is displayed.
+    1. Log in to the [TiDB Cloud console](https://tidbcloud.com/) and navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page.
 
-    > **Tip:**
-    >
-    > Alternatively, you can also click the name of your target cluster on the **Clusters** page and click **Import Data** in the **Import** area.
+    2. If you have multiple projects, choose a target project in the left navigation pane. Otherwise, skip this step.
+
+    3. In the row of your target cluster, click the cluster name to go to its cluster overview page, and then click **Import** in the left navigation pane.
+
+2. On the **Import** page, click **Import Data** in the upper-right corner, and then select **From S3**.
 
 3. Prepare source data according to [Learn how to create an Amazon S3 Bucket and prepare source data files](#learn-how-to-create-an-amazon-s3-bucket-and-prepare-source-data-files). You can see the advantages and disadvantages of different **Data Format** in the preparing data part.
 

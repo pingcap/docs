@@ -13,9 +13,13 @@ The standard connection is available to both Serverless Tier and Dedicated Tier.
 
 To connect to a Serverless Tier cluster via standard connection, perform the following steps:
 
-1. Navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page and choose your target project on the top of the left navigation bar.
+1. Open the overview page of the target cluster.
 
-2. Locate your cluster, and click **Connect** in the upper-right corner of the cluster area. A connection dialog is displayed.
+    1. Log in to the [TiDB Cloud console](https://tidbcloud.com/).
+    2. If you have multiple projects, choose a target project in the left navigation pane. Otherwise, skip this step.
+    3. In the row of your target cluster, click the cluster name.
+
+2. Click **Connect** in the upper-right corner. A connection dialog is displayed.
 
 3. In the dialog, select your preferred connection method and operating system, and then connect to your cluster with the connection string.
 
@@ -30,9 +34,13 @@ To connect to a Serverless Tier cluster via standard connection, perform the fol
 
 To connect to a Dedicated Tier cluster via standard connection, perform the following steps:
 
-1. Navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page and choose your target project on the top of the left navigation bar.
+1. Open the overview page of the target cluster.
 
-2. Locate your cluster, and click **Connect** in the upper-right corner of the cluster area. A connection dialog box is displayed.
+    1. Log in to the [TiDB Cloud console](https://tidbcloud.com/).
+    2. If you have multiple projects, choose a target project in the left navigation pane. Otherwise, skip this step.
+    3. In the row of your target cluster, click the cluster name.
+
+2. Click **Connect** in the upper-right corner. A connection dialog is displayed.
 
 3. Create a traffic filter for the cluster. Traffic filter is a list of IPs and CIDR addresses that are allowed to access TiDB Cloud via a SQL client.
 

@@ -55,9 +55,14 @@ TiDB Cloud supports private endpoints only for Dedicated Tier clusters. You are 
 
 To start setting up a private endpoint, open the private endpoint creation page:
 
-1. In the TiDB Cloud console, choose a target project, and then click the **Network Access** tab.
-2. Click the **Private Endpoint** tab.
-3. Click **Add** in the upper-right corner.
+1. Log in to the [TiDB Cloud console](https://tidbcloud.com).
+2. In the left navigation pane, do one of the following:
+
+    - If you have multiple projects, choose a target project, and then click **Admin** > **Network Access**.
+    - If you only have one project, click **Admin** > **Network Access**.
+
+3. Click the **Private Endpoint** tab.
+4. Click **Add** in the upper-right corner.
 
 ### Step 1. Choose a TiDB cluster
 
@@ -175,9 +180,10 @@ Then you can connect to the endpoint service.
 
 After you have enabled the private DNS, go back to the TiDB Cloud console and take the following steps:
 
-1. Locate your cluster, and click **Connect** in the upper-right corner of the cluster area. A connection dialog box is displayed.
-2. Select the **Private Endpoint** tab. The private endpoint you just created is displayed under **Step 1: Create Private Endpoint**.
-3. Under **Step 2: Connect your application**, click the tab of your preferred connection method, and then connect to your cluster with the connection string. The placeholders `<cluster_endpoint_name>:<port>` in the connection string are automatically replaced with the real values.
+1. On the [**Clusters**](https://tidbcloud.com/console/clusters) page, click the name of your target cluster to go to its overview page.
+2. Click **Connect** in the upper-right corner. A connection dialog is displayed.
+3. Select the **Private Endpoint** tab. The private endpoint you just created is displayed under **Step 1: Create Private Endpoint**.
+4. Under **Step 2: Connect your application**, click the tab of your preferred connection method, and then connect to your cluster with the connection string. The placeholders `<cluster_endpoint_name>:<port>` in the connection string are automatically replaced with the real values.
 
 > **Tip:**
 >

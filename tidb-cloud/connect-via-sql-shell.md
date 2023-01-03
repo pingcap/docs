@@ -13,10 +13,14 @@ In TiDB Cloud SQL Shell, you can try TiDB SQL, test out TiDB's compatibility wit
 
 To connect to your TiDB cluster using SQL shell, perform the following steps:
 
-1. Navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page and choose your target project on the top of the left navigation bar.
+1. Open the overview page of the target cluster.
 
-2. Locate your cluster, click **Connect** in the upper-right corner of the cluster area, and select the **Web SQL Shell** tab in the connection dialog.
+    1. Log in to the [TiDB Cloud console](https://tidbcloud.com/).
+    2. If you have multiple projects, choose a target project in the left navigation pane. Otherwise, skip this step.
+    3. In the row of your target cluster, click the cluster name.
 
-3. Click **Open SQL Shell**.
+2. Click **Connect** in the upper-right corner. A connection dialog is displayed.
+
+3. In the dialog, select the **Web SQL Shell** tab, and then click **Open SQL Shell**.
 
 4. On the prompted **TiDB password** line, enter the root password of the current cluster. Then your application is connected to the TiDB cluster.

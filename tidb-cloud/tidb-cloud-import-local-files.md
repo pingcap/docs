@@ -18,21 +18,25 @@ Currently, this method supports importing one CSV file for one task into either 
 
 ## Import local files
 
-1. Log in to the [TiDB Cloud console](https://tidbcloud.com/console/clusters), and choose your target project on the top of the left navigation bar.
+1. Open the **Import** page in the TiDB Cloud console.
 
-2. Locate your target cluster, click **...** in the upper-right corner of the cluster area, and select **Import Data**.
+    1. Log in to the [TiDB Cloud console](https://tidbcloud.com/) and navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page.
 
-3. On the **Import** page, click **Import Data** in the upper-right corner, and then select **From local file**.
+    2. If you have multiple projects, choose a target project in the left navigation pane. Otherwise, skip this step.
 
-4. Click **Upload File** to select and upload the target local file. Note that the file name must have a ".csv" suffix and must be no more than 50 MiB.
+    3. In the row of your target cluster, click the cluster name to go to its cluster overview page, and then click **Import** in the left navigation pane.
 
-5. In the **Target** section, select the target database and the target table, or create a new database or new table. Then click **Next**.
+2. On the **Import** page, click **Import Data** in the upper-right corner, and then select **From local file**.
+
+3. Click **Upload File** to select and upload the target local file. Note that the file name must have a ".csv" suffix and must be no more than 50 MiB.
+
+4. In the **Target** section, select the target database and the target table, or create a new database or new table. Then click **Next**.
 
     To create a new database or a new table, click **+ Create a new database** or **+ Create a new table**, directly enter a database name or a table name to create one, as shown in the following screenshot. TiDB Cloud will automatically create the database and the table according to the CSV data and the configured column name. The name must start with letters (a-z and A-Z) or numbers (0-9), and can contain letters (a-z and A-Z), numbers (0-9), and the underscore (_) characters.
 
     ![Upload local files](/media/tidb-cloud/tidb-cloud-upload-local-files.png)
 
-6. Check the table.
+5. Check the table.
 
     Here you can see a list of configurable table columns. Each line shows the table column name inferred by TiDB Cloud, the table column type inferred, and the previewed data from the CSV file.
 
@@ -40,7 +44,7 @@ Currently, this method supports importing one CSV file for one task into either 
 
     - If you want to create a new table, the column list is extracted from the CSV file, and the column type is inferred by TiDB Cloud. For example, if the previewed data is all integers, the inferred column type will be **int** (integer).
 
-7. Configure the column names and data types.
+6. Configure the column names and data types.
 
     If the first row in the CSV file records the column names, make sure that **Use the first row as Column Name** is selected, which is selected by default.
 
@@ -50,10 +54,10 @@ Currently, this method supports importing one CSV file for one task into either 
 
     - If the CSV table is not created yet, input the names for each column. The column name must start with letters (a-z and A-Z) or numbers (0-9), and can contain letters (a-z and A-Z), numbers (0-9), and the underscore (_) characters. You can also change the data type if needed.
 
-8. Edit the CSV configuration if needed.
+7. Edit the CSV configuration if needed.
 
    To edit the CSV configuration for more fine-grained control, you can also click **Edit CSV configuration**. For more information about the CSV configuration, see [CSV Configurations for Importing Data](/tidb-cloud/csv-config-for-import-data.md).
 
-9. Click **Start Import**.
+8. Click **Start Import**.
 
     You can view the import progress in the **Import Progress** section. If there are warnings or failed tasks, you can check to view the details and solve them.
