@@ -109,11 +109,13 @@ To perform incremental data migration, make sure you have enabled binlogs of the
 
 ## Step 1: Go to the **Data Migration** page
 
-1. Log in to the [TiDB Cloud console](https://tidbcloud.com/), navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page, and choose your target project on the top of the left navigation bar.
+1. Log in to the [TiDB Cloud console](https://tidbcloud.com/) and navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page.
 
-2. On the **Clusters** page, click the name of your cluster, and click the **Data Migration** tab. The **Data Migration** page is displayed.
+2. If you have multiple projects, choose a target project in the left navigation pane. Otherwise, skip this step.
 
-3. On the **Data Migration** page, click **Create Migration Job**. The **Create Migration Job** page is displayed.
+3. In the row of your target cluster, click the cluster name to go to its overview page, and then click **Data Migration** in the left navigation pane.
+
+4. On the **Data Migration** page, click **Create Migration Job** in the upper-right corner. The **Create Migration Job** page is displayed.
 
 ## Step 2: Configure the source and target connection
 
