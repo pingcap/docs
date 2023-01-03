@@ -90,10 +90,13 @@ You can delete the original table structure through the `--drop-tables` paramete
 
 ### Method 2: Via TiDB Cloud Import
 
-On the cluster detail page of TiDB Cloud, click **Import Data** in the **Import** area to enter the **Data Import** page. On this page, perform the following steps to import the Bookshop sample data from AWS S3 to TiDB Cloud.
+Perform the following steps to import the Bookshop sample data from AWS S3 to TiDB Cloud.
 
-1. Select **SQL File** for **Data Format**.
-2. Copy the following **Bucket URI** and **Role ARN** to the corresponding input boxes:
+1. In the TiDB Cloud console, go to the page for data import.
+    1. Log in to the [TiDB Cloud console](https://tidbcloud.com/) and navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page.
+    2. In the row of your target cluster, click the cluster name to go to its cluster overview page, and then click **Import** in the left navigation pane.
+    3. click **Import Data** in the upper-right corner, and then select **From S3**.
+2. Select **SQL File** for **Data format**, and copy the following **Bucket URI** and **Role ARN** to the corresponding input boxes:
 
     **Bucket URI**:
 

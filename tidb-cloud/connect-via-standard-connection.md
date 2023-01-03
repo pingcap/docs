@@ -17,9 +17,11 @@ To connect to a Serverless Tier cluster via standard connection, perform the fol
 
 2. Click **Connect** in the upper-right corner. A connection dialog is displayed.
 
-3. In the dialog, select your preferred connection method and operating system, and then connect to your cluster with the connection string.
+3. In the dialog, select your preferred connection method and operating system to get the corresponding connection string.
 
-    If you have not set a password yet, click **Create password** to generate a random password. The generated password will not show again, so save your password in a secure location.
+4. If you have not set a password yet, click **Create password** to generate a random password. The generated password will not show again, so save your password in a secure location.
+
+5. Connect to your cluster with the connection string.
 
     > **Note:**
     >
