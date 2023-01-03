@@ -199,7 +199,7 @@ If TiDB's response slows down after you have troubleshot the CPU bottleneck and 
 
 TiDB supports complete distributed transactions. Starting from v3.0, TiDB provides optimistic transaction mode and pessimistic transaction mode. To learn how to troubleshoot lock-related issues and how to handle optimistic and pessimistic lock conflicts, see [Troubleshoot Lock Conflicts](/troubleshoot-lock-conflicts.md).
 
-### 3.9 Inconsistency Between Data and Indexes
+### 3.9 Inconsistency between data and indexes
 
 TiDB checks consistency between data and indexes when it executes transactions or the [`ADMIN CHECK [TABLE|INDEX]`](/sql-statements/sql-statement-admin-check-table-index.md) statement. If the check finds that a record key-value and the corresponding index key-value are inconsistent, that is, a key-value pair storing row data and the corresponding key-value pair storing its index are inconsistent (for example, more indexes or missing indexes), TiDB reports a data inconsistency error and prints the related errors in error logs.
 
