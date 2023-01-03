@@ -13,7 +13,7 @@ This article will show how to deploy Cloudflare Workers with TiDB Cloud and Pris
 
 > **Note:**
 >
-> If you want to connect a locally built TiDB to Cloudflare Workers, you can try [worker-tidb](https://github.com/shiyuhang0/worker-tidb) which use Cloudflare tunnels as a proxy. But it is not recommended for production use.
+> If you want to connect a locally deployed TiDB to Cloudflare Workers, you can try [worker-tidb](https://github.com/shiyuhang0/worker-tidb) which use Cloudflare tunnels as a proxy. But it is not recommended for production use.
 
 # Integrate TiDB Cloud with Cloudflare Workers
 
