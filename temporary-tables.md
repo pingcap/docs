@@ -3,52 +3,52 @@ title: Temporary Tables
 summary: Learn the temporary tables feature in TiDB, and learn how to use temporary tables to store intermediate data of an application, which helps reduce table management overhead and improve performance.
 ---
 
-# Temporary Tables
+# 一時テーブル {#temporary-tables}
 
-The temporary tables feature is introduced in TiDB v5.3.0. This feature solves the issue of temporarily storing the intermediate results of an application, which frees you from frequently creating and dropping tables. You can store the intermediate calculation data in temporary tables. When the intermediate data is no longer needed, TiDB automatically cleans up and recycles the temporary tables. This avoids user applications being too complicated, reduces table management overhead, and improves performance.
+一時テーブル機能は、TiDB v5.3.0 で導入されました。この機能により、アプリケーションの中間結果を一時的に保管するという問題が解決され、頻繁にテーブルを作成および削除する必要がなくなります。中間計算データを一時テーブルに格納できます。中間データが不要になると、TiDB は一時テーブルを自動的にクリーンアップしてリサイクルします。これにより、ユーザー アプリケーションが複雑になりすぎず、テーブル管理のオーバーヘッドが削減され、パフォーマンスが向上します。
 
-This document introduces the user scenarios and the types of temporary tables, provides usage examples and instruction on how to limit the memory usage of temporary tables, and explains compatibility restrictions with other TiDB features.
+このドキュメントでは、ユーザー シナリオと一時テーブルの種類を紹介し、使用例と一時テーブルのメモリ使用量を制限する方法について説明し、他の TiDB 機能との互換性の制限について説明します。
 
-## User scenarios
+## ユーザー シナリオ {#user-scenarios}
 
-You can use TiDB temporary tables in the following scenarios:
+次のシナリオでは、TiDB 一時テーブルを使用できます。
 
-- Cache the intermediate temporary data of an application. After the calculation is completed, the data is dumped to the ordinary table, and the temporary table is automatically released.
-- Perform multiple DML operations on the same data in a short period of time. For example, in an e-commerce shopping cart application, add, modify, and delete products, complete the payment, and remove the shopping cart information.
-- Quickly import intermediate temporary data in batches to improve the performance of importing temporary data.
-- Update data in batches. Import data into temporary tables in the database in batches, and export the data to files after finishing modify the data.
+-   アプリケーションの中間一時データをキャッシュします。計算が完了すると、データは通常のテーブルにダンプされ、一時テーブルは自動的に解放されます。
+-   短期間に同じデータに対して複数の DML 操作を実行します。たとえば、e コマースのショッピング カート アプリケーションでは、商品の追加、変更、削除、支払いの完了、ショッピング カート情報の削除を行います。
+-   中間一時データをバッチですばやくインポートして、一時データのインポートのパフォーマンスを向上させます。
+-   バッチでデータを更新します。データベースの一時テーブルにデータを一括でインポートし、データの変更が完了したら、データをファイルにエクスポートします。
 
-## Types of temporary tables
+## 一時テーブルの種類 {#types-of-temporary-tables}
 
-Temporary tables in TiDB are divided into two types: local temporary tables and global temporary tables.
+TiDB の一時テーブルは、ローカル一時テーブルとグローバル一時テーブルの 2 種類に分けられます。
 
-- For a local temporary table, the table definition and data in the table are visible only to the current session. This type is suitable for temporarily storing intermediate data in the session.
-- For a global temporary table, the table definition is visible to the entire TiDB cluster, and the data in the table is visible only to the current transaction. This type is suitable for temporarily storing intermediate data in the transaction.
+-   ローカル一時テーブルの場合、テーブルの定義とテーブル内のデータは、現在のセッションにのみ表示されます。このタイプは、セッション内の中間データを一時的に格納するのに適しています。
+-   グローバル一時テーブルの場合、テーブル定義は TiDB クラスター全体に表示され、テーブル内のデータは現在のトランザクションにのみ表示されます。このタイプは、トランザクションの中間データを一時的に格納するのに適しています。
 
-## Local temporary tables
+## ローカル一時テーブル {#local-temporary-tables}
 
-The semantics of the local temporary table in TiDB is consistent with that of the MySQL temporary table. The characteristics are as follows:
+TiDB のローカル一時テーブルのセマンティクスは、MySQL 一時テーブルのセマンティクスと一致しています。特徴は次のとおりです。
 
-- The table definition of a local temporary table is not persistent. A local temporary table is visible only to the session in which the table is created, and other sessions cannot access the table.
-- You can create local temporary tables with the same name in different sessions, and each session reads only from and writes only to the local temporary table created in the session.
-- The data of a local temporary table is visible to all transactions in the session.
-- After a session ends, the local temporary table created in the session is automatically dropped.
-- A local temporary table can have the same name as an ordinary table. In this case, in the DDL and DML statements, the ordinary table is hidden until the local temporary table is dropped.
+-   ローカル一時テーブルのテーブル定義は永続的ではありません。ローカル一時テーブルは、テーブルが作成されたセッションにのみ表示され、他のセッションはテーブルにアクセスできません。
+-   異なるセッションで同じ名前のローカル一時テーブルを作成できます。各セッションは、セッションで作成されたローカル一時テーブルに対してのみ読み取りと書き込みのみを行います。
+-   ローカル一時テーブルのデータは、セッション内のすべてのトランザクションに表示されます。
+-   セッションが終了すると、セッションで作成されたローカル一時テーブルは自動的に削除されます。
+-   ローカル一時テーブルには、通常のテーブルと同じ名前を付けることができます。この場合、DDL および DML ステートメントでは、ローカル一時テーブルが削除されるまで、通常のテーブルは非表示になります。
 
-To create a local temporary table, you can use the `CREATE TEMPORARY TABLE` statement. To drop a local temporary table, you can use the `DROP TABLE` or `DROP TEMPORARY TABLE` statement.
+ローカル一時テーブルを作成するには、 `CREATE TEMPORARY TABLE`ステートメントを使用できます。ローカル一時テーブルを削除するには、 `DROP TABLE`または`DROP TEMPORARY TABLE`ステートメントを使用できます。
 
-Different from MySQL, the local temporary tables in TiDB are all external tables, and no internal temporary tables will be created automatically when SQL statements are executed.
+MySQL とは異なり、TiDB のローカル一時テーブルはすべて外部テーブルであり、SQL ステートメントの実行時に内部一時テーブルが自動的に作成されることはありません。
 
-### Usage examples of local temporary tables
+### ローカル一時テーブルの使用例 {#usage-examples-of-local-temporary-tables}
 
-> **Note:**
+> **ノート：**
 >
-> - Before you use the temporary table in TiDB, pay attention to the [compatibility restrictions with other TiDB features](#compatibility-restrictions-with-other-tidb-features) and the [compatibility with MySQL temporary tables](#compatibility-with-mysql-temporary-tables).
-> - If you have created local temporary tables on a cluster earlier than TiDB v5.3.0, these tables are actually ordinary tables, and treated as ordinary tables after the cluster is upgraded to TiDB v5.3.0 or a later version.
+> -   TiDB で一時テーブルを使用する前に、 [他の TiDB 機能との互換性の制限](#compatibility-restrictions-with-other-tidb-features)と[MySQL 一時テーブルとの互換性](#compatibility-with-mysql-temporary-tables)に注意してください。
+> -   TiDB v5.3.0 より前のクラスターでローカル一時テーブルを作成した場合、これらのテーブルは実際には通常のテーブルであり、クラスターが TiDB v5.3.0 以降のバージョンにアップグレードされた後は通常のテーブルとして扱われます。
 
-Assume that there is an ordinary table `users`:
+通常のテーブル`users`があるとします。
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 CREATE TABLE users (
@@ -58,9 +58,9 @@ CREATE TABLE users (
 );
 ```
 
-In session A, creating a local temporary table `users` does not conflict with the ordinary table `users`. When session A accesses the `users` table, it accesses the local temporary table `users`.
+セッション A では、ローカル一時表の作成`users`は通常の表と競合しません`users` 。セッション A が`users`テーブルにアクセスすると、ローカル一時テーブル`users`にアクセスします。
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 CREATE TEMPORARY TABLE users (
@@ -75,9 +75,9 @@ CREATE TEMPORARY TABLE users (
 Query OK, 0 rows affected (0.01 sec)
 ```
 
-If you insert data into `users`, data is inserted to the local temporary table `users` in session A.
+`users`にデータを挿入すると、データはセッション A のローカル一時テーブル`users`に挿入されます。
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 INSERT INTO users(id, name, city) VALUES(1001, 'Davis', 'LosAngeles');
@@ -87,7 +87,7 @@ INSERT INTO users(id, name, city) VALUES(1001, 'Davis', 'LosAngeles');
 Query OK, 1 row affected (0.00 sec)
 ```
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 SELECT * FROM users;
@@ -102,9 +102,9 @@ SELECT * FROM users;
 1 row in set (0.00 sec)
 ```
 
-In session B, creating a local temporary table `users` does not conflict with the ordinary table `users` or the local temporary table `users` in session A. When session B accesses the `users` table, it accesses the local temporary table `users` in session B.
+セッション B では、ローカル一時テーブル`users`の作成は、セッション A の通常テーブル`users`またはローカル一時テーブル`users`と競合しません。セッション B が`users`テーブルにアクセスすると、セッション B のローカル一時テーブル`users`にアクセスします。
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 CREATE TEMPORARY TABLE users (
@@ -119,9 +119,9 @@ CREATE TEMPORARY TABLE users (
 Query OK, 0 rows affected (0.01 sec)
 ```
 
-If you insert data into `users`, data is inserted to the local temporary table `users` in session B.
+`users`にデータを挿入すると、データはセッション B のローカル一時テーブル`users`に挿入されます。
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 INSERT INTO users(id, name, city) VALUES(1001, 'James', 'NewYork');
@@ -131,7 +131,7 @@ INSERT INTO users(id, name, city) VALUES(1001, 'James', 'NewYork');
 Query OK, 1 row affected (0.00 sec)
 ```
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 SELECT * FROM users;
@@ -146,47 +146,47 @@ SELECT * FROM users;
 1 row in set (0.00 sec)
 ```
 
-### Compatibility with MySQL temporary tables
+### MySQL 一時テーブルとの互換性 {#compatibility-with-mysql-temporary-tables}
 
-The following features and limitations of TiDB local temporary tables are the same with those of MySQL temporary tables:
+TiDB ローカル一時テーブルの次の機能と制限は、MySQL 一時テーブルと同じです。
 
-- When you create or drop local temporary tables, the current transaction is not automatically committed.
-- After dropping the schema where a local temporary table is located, the temporary table is not dropped and is still readable and writable.
-- Creating a local temporary table requires the `CREATE TEMPORARY TABLES` permission. All subsequent operations on the table do not require any permission.
-- Local temporary tables do not support foreign keys and partitioned tables.
-- Does not support creating views based on local temporary tables.
-- `SHOW [FULL] TABLES` does not show local temporary tables.
+-   ローカル一時テーブルを作成または削除すると、現在のトランザクションは自動的にコミットされません。
+-   ローカル一時テーブルが配置されているスキーマを削除した後、一時テーブルは削除されず、引き続き読み取りと書き込みが可能です。
+-   ローカル一時テーブルを作成するには、 `CREATE TEMPORARY TABLES`権限が必要です。テーブルに対する後続のすべての操作には、権限は必要ありません。
+-   ローカル一時テーブルは、外部キーとパーティション テーブルをサポートしていません。
+-   ローカル一時テーブルに基づくビューの作成はサポートされていません。
+-   `SHOW [FULL] TABLES`は、ローカル一時テーブルを表示しません。
 
-Local temporary tables in TiDB are incompatible with MySQL temporary tables in the following aspects:
+TiDB のローカル一時テーブルは、次の点で MySQL 一時テーブルと互換性がありません。
 
-- TiDB local temporary tables do not support `ALTER TABLE`.
-- TiDB local temporary tables ignore the `ENGINE` table option, and always store temporary table data in TiDB memory with a [memory limit](#limit-the-memory-usage-of-temporary-tables).
-- When `MEMORY` is declared as the storage engine, TiDB local temporary tables are not restricted by the `MEMORY` storage engine.
-- When `INNODB` or `MYISAM` is declared as the storage engine, TiDB local temporary tables ignore the system variables specific to the InnoDB temporary tables.
-- MySQL does not permit referencing to the same temporary table multiple times in the same SQL statement. TiDB local temporary tables do not have this restriction.
-- The system table `information_schema.INNODB_TEMP_TABLE_INFO` that shows temporary tables in MySQL does not exist in TiDB. Currently, TiDB does not have a system table that shows local temporary tables.
-- TiDB does not have internal temporary tables. The MySQL system variables for internal temporary tables do not take effect for TiDB.
+-   TiDB ローカル一時テーブルは`ALTER TABLE`をサポートしていません。
+-   TiDB ローカル一時テーブルは`ENGINE`テーブル オプションを無視し、常に一時テーブル データを TiDB メモリに[メモリ制限](#limit-the-memory-usage-of-temporary-tables)で格納します。
+-   `MEMORY`がストレージ エンジンとして宣言されている場合、TiDB ローカル一時テーブルは`MEMORY`ストレージ エンジンによって制限されません。
+-   `INNODB`または`MYISAM`がストレージ エンジンとして宣言されている場合、TiDB ローカル一時テーブルは InnoDB 一時テーブルに固有のシステム変数を無視します。
+-   MySQL では、同じ SQL ステートメントで同じ一時テーブルを複数回参照することは許可されていません。 TiDB ローカル一時テーブルには、この制限はありません。
+-   MySQL の一時テーブルを示すシステム テーブル`information_schema.INNODB_TEMP_TABLE_INFO`は、TiDB には存在しません。現在、TiDB には、ローカルの一時テーブルを表示するシステム テーブルがありません。
+-   TiDB には内部一時テーブルがありません。内部一時テーブルの MySQL システム変数は、TiDB では有効になりません。
 
-## Global temporary tables
+## グローバル一時テーブル {#global-temporary-tables}
 
-The global temporary table is an extension of TiDB. The characteristics are as follows:
+グローバル一時テーブルは TiDB の拡張です。特徴は次のとおりです。
 
-- The table definition of a global temporary table is persistent and visible to all sessions.
-- The data of a global temporary table is visible only in the current transaction. When the transaction ends, the data is automatically cleared.
-- A global temporary table cannot have the same name as an ordinary table.
+-   グローバル一時テーブルのテーブル定義は永続的で、すべてのセッションに表示されます。
+-   グローバル一時テーブルのデータは、現在のトランザクションでのみ表示されます。取引が終了すると、データは自動的に消去されます。
+-   グローバル一時テーブルは、通常のテーブルと同じ名前を持つことはできません。
 
-To create a global temporary table, you can use the `CREATE GLOBAL TEMPORARY TABLE` statement ended with `ON COMMIT DELETE ROWS`. To drop a global temporary table, you can use the `DROP TABLE` or `DROP GLOBAL TEMPORARY TABLE` statement.
+グローバル一時テーブルを作成するには、 `ON COMMIT DELETE ROWS`で終わる`CREATE GLOBAL TEMPORARY TABLE`ステートメントを使用できます。グローバル一時テーブルを削除するには、 `DROP TABLE`または`DROP GLOBAL TEMPORARY TABLE`ステートメントを使用できます。
 
-### Usage examples of global temporary tables
+### グローバル一時テーブルの使用例 {#usage-examples-of-global-temporary-tables}
 
-> **Note:**
+> **ノート：**
 >
-> - Before you use the temporary table in TiDB, pay attention to the [compatibility restrictions with other TiDB features](#compatibility-restrictions-with-other-tidb-features).
-> - If you have created global temporary tables on a TiDB cluster of v5.3.0 or later, when the cluster is downgraded to a version earlier than v5.3.0, these tables are handled as ordinary tables. In this case, a data error occurs.
+> -   TiDB で一時テーブルを使用する前に、 [他の TiDB 機能との互換性の制限](#compatibility-restrictions-with-other-tidb-features)に注意してください。
+> -   v5.3.0以降のTiDBクラスターにグローバル一時テーブルを作成した場合、クラスターをv5.3.0より前のバージョンにダウングレードすると、これらのテーブルは通常のテーブルとして扱われます。この場合、データエラーが発生します。
 
-Create a global temporary table `users` in session A:
+セッション A にグローバル一時テーブル`users`を作成します。
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 CREATE GLOBAL TEMPORARY TABLE users (
@@ -201,9 +201,9 @@ CREATE GLOBAL TEMPORARY TABLE users (
 Query OK, 0 rows affected (0.01 sec)
 ```
 
-The data written to `users` is visible to the current transaction:
+`users`に書き込まれたデータは、現在のトランザクションに表示されます。
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 BEGIN;
@@ -213,7 +213,7 @@ BEGIN;
 Query OK, 0 rows affected (0.00 sec)
 ```
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 INSERT INTO users(id, name, city) VALUES(1001, 'Davis', 'LosAngeles');
@@ -223,7 +223,7 @@ INSERT INTO users(id, name, city) VALUES(1001, 'Davis', 'LosAngeles');
 Query OK, 1 row affected (0.00 sec)
 ```
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 SELECT * FROM users;
@@ -238,9 +238,9 @@ SELECT * FROM users;
 1 row in set (0.00 sec)
 ```
 
-After the transaction ends, the data is automatically cleared:
+トランザクションが終了すると、データは自動的に消去されます。
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 COMMIT;
@@ -250,7 +250,7 @@ COMMIT;
 Query OK, 0 rows affected (0.00 sec)
 ```
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 SELECT * FROM users;
@@ -260,9 +260,9 @@ SELECT * FROM users;
 Empty set (0.00 sec)
 ```
 
-After `users` is created in session A, session B can also read from and write to the `users` table:
+セッション A で`users`が作成された後、セッション B も`users`テーブルの読み取りと書き込みを行うことができます。
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 SELECT * FROM users;
@@ -272,61 +272,61 @@ SELECT * FROM users;
 Empty set (0.00 sec)
 ```
 
-> **Note:**
+> **ノート：**
 >
-> If the transaction is automatically committed, after the SQL statement is executed, the inserted data is automatically cleared and unavailable to subsequent SQL executions. Therefore, you should use non-autocommit transactions to read from and write to global temporary tables.
+> トランザクションが自動的にコミットされる場合、SQL ステートメントの実行後、挿入されたデータは自動的にクリアされ、後続の SQL 実行では使用できなくなります。したがって、非自動コミット トランザクションを使用して、グローバル一時テーブルの読み取りと書き込みを行う必要があります。
 
-## Limit the memory usage of temporary tables
+## 一時テーブルのメモリ使用量を制限する {#limit-the-memory-usage-of-temporary-tables}
 
-No matter which storage engine is declared as `ENGINE` when you define a table, the data of local temporary tables and global temporary tables is only stored in the memory of TiDB instances. This data is not persisted.
+テーブルを定義するときにどのストレージ エンジンが`ENGINE`として宣言されても、ローカル一時テーブルとグローバル一時テーブルのデータは TiDB インスタンスのメモリにのみ格納されます。このデータは保持されません。
 
-To avoid memory overflow, you can limit the size of each temporary table using the [`tidb_tmp_table_max_size`](/system-variables.md#tidb_tmp_table_max_size-new-in-v530) system variable. Once a temporary table is larger than the `tidb_tmp_table_max_size` threshold value, TiDB reports an error. The default value of `tidb_tmp_table_max_size` is `64MB`.
+メモリ オーバーフローを回避するために、 [`tidb_tmp_table_max_size`](/system-variables.md#tidb_tmp_table_max_size-new-in-v530)システム変数を使用して各一時テーブルのサイズを制限できます。一時テーブルが`tidb_tmp_table_max_size`のしきい値を超えると、TiDB はエラーを報告します。デフォルト値の`tidb_tmp_table_max_size`は`64MB`です。
 
-For example, set the maximum size of a temporary table to `256MB`:
+たとえば、一時テーブルの最大サイズを`256MB`に設定します。
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 SET GLOBAL tidb_tmp_table_max_size=268435456;
 ```
 
-## Compatibility restrictions with other TiDB features
+## 他の TiDB 機能との互換性の制限 {#compatibility-restrictions-with-other-tidb-features}
 
-Local temporary tables and global temporary tables in TiDB are **NOT** compatible with the following TiDB features:
+TiDB のローカル一時テーブルとグローバル一時テーブルは、次の TiDB 機能と互換性があり**ません**。
 
-- `AUTO_RANDOM` columns
-- `SHARD_ROW_ID_BITS` and `PRE_SPLIT_REGIONS` table options
-- Partitioned tables
-- `SPLIT REGION` statements
-- `ADMIN CHECK TABLE` and `ADMIN CHECKSUM TABLE` statements
-- `FLASHBACK TABLE` and `RECOVER TABLE` statements
-- Executing `CREATE TABLE LIKE` statements based on a temporary table
-- Stale Read
-- Foreign keys
-- SQL bindings
-- TiFlash replicas
-- Creating views on a temporary table
-- Placement Rules
-- Execution plans involving a temporary table are not cached by `prepare plan cache`.
+-   `AUTO_RANDOM`列
+-   `SHARD_ROW_ID_BITS`および`PRE_SPLIT_REGIONS`テーブル オプション
+-   分割されたテーブル
+-   `SPLIT REGION`ステートメント
+-   `ADMIN CHECK TABLE`および`ADMIN CHECKSUM TABLE`ステートメント
+-   `FLASHBACK TABLE`および`RECOVER TABLE`ステートメント
+-   一時テーブルに基づいて`CREATE TABLE LIKE`ステートメントを実行する
+-   ステイル読み取り
+-   外部キー
+-   SQL バインディング
+-   TiFlashレプリカ
+-   一時テーブルでのビューの作成
+-   配置ルール
+-   一時テーブルを含む実行プランは`prepare plan cache`によってキャッシュされません。
 
-Local temporary tables in TiDB do **NOT** support the following feature:
+TiDB のローカル一時テーブルは、次の機能をサポートしてい**ません**。
 
-- Reading historical data using the `tidb_snapshot` system variable.
+-   `tidb_snapshot`システム変数を使用した履歴データの読み取り。
 
-## TiDB migration tool support
+## TiDB 移行ツールのサポート {#tidb-migration-tool-support}
 
-Local temporary tables are not exported, backed up or replicated by TiDB migration tools, because these tables are visible only to the current session.
+ローカルの一時テーブルは、TiDB 移行ツールによってエクスポート、バックアップ、または複製されません。これは、これらのテーブルが現在のセッションにのみ表示されるためです。
 
-Global temporary tables are exported, backed up, and replicated by TiDB migration tools, because the table definition is globally visible. Note that the data on the tables are not exported.
+テーブル定義はグローバルに表示されるため、グローバル一時テーブルは TiDB 移行ツールによってエクスポート、バックアップ、および複製されます。テーブルのデータはエクスポートされないことに注意してください。
 
-> **Note:**
+> **ノート：**
 >
-> - Replicating temporary tables using TiCDC requires TiCDC v5.3.0 or later. Otherwise, the table definition of the downstream table is wrong.
-> - Backing up temporary tables using BR requires BR v5.3.0 or later. Otherwise, the table definitions of the backed temporary tables are wrong.
-> - The cluster to export, the cluster after data restore, and the downstream cluster of a replication should support global temporary tables. Otherwise, an error is reported.
+> -   TiCDC を使用して一時テーブルを複製するには、TiCDC v5.3.0 以降が必要です。そうでない場合は、下流のテーブルのテーブル定義が間違っています。
+> -   BRを使用して一時テーブルをバックアップするには、 BR v5.3.0 以降が必要です。それ以外の場合は、バッキングされた一時テーブルのテーブル定義が間違っています。
+> -   エクスポートするクラスター、データ復元後のクラスター、およびレプリケーションのダウンストリーム クラスターは、グローバル一時テーブルをサポートする必要があります。それ以外の場合、エラーが報告されます。
 
-## See also
+## こちらもご覧ください {#see-also}
 
-* [CREATE TABLE](/sql-statements/sql-statement-create-table.md)
-* [CREATE TABLE LIKE](/sql-statements/sql-statement-create-table-like.md)
-* [DROP TABLE](/sql-statements/sql-statement-drop-table.md)
+-   [テーブルを作成](/sql-statements/sql-statement-create-table.md)
+-   [次のようなテーブルを作成](/sql-statements/sql-statement-create-table-like.md)
+-   [ドロップテーブル](/sql-statements/sql-statement-drop-table.md)

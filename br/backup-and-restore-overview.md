@@ -3,130 +3,130 @@ title: TiDB Backup & Restore Overview
 summary: Learn about the definition and features of TiDB Backup & Restore.
 ---
 
-# TiDB Backup & Restore Overview
+# TiDB のバックアップと復元の概要 {#tidb-backup-x26-restore-overview}
 
-Based on the Raft protocol and a reasonable deployment topology, TiDB realizes high availability of clusters. When a few nodes in the cluster fail, the cluster can still be available. On this basis, to further ensure data safety, TiDB provides the Backup & Restore (BR) feature as the last resort to recover data from natural disasters and misoperations.
+Raftプロトコルと合理的な展開トポロジに基づいて、TiDB はクラスターの高可用性を実現します。クラスター内のいくつかのノードに障害が発生した場合でも、クラスターは引き続き使用できます。これに基づいて、データの安全性をさらに確保するために、TiDB は、自然災害や誤操作からデータを回復するための最後の手段として、バックアップと復元 (BR) 機能を提供します。
 
-BR satisfies the following requirements:
+BRは次の要件を満たしています。
 
-- Back up cluster data to a disaster recovery (DR) system with an RPO as short as 5 minutes, reducing data loss in disaster scenarios.
-- Handle the cases of misoperations from applications by rolling back data to a time point before the error event.
-- Perform history data auditing to meet the requirements of judicial supervision.
-- Clone the production environment, which is convenient for troubleshooting, performance tuning, and simulation testing.
+-   最短 5 分の RPO でクラスター データをディザスター リカバリー (DR) システムにバックアップし、災害シナリオでのデータ損失を減らします。
+-   エラー イベントの前の時点にデータをロールバックすることにより、アプリケーションからの誤操作のケースを処理します。
+-   司法監督の要件を満たすために履歴データの監査を実行します。
+-   本番環境のクローンを作成します。これは、トラブルシューティング、パフォーマンス チューニング、およびシミュレーション テストに便利です。
 
-## Use backup and restore
+## バックアップと復元を使用する {#use-backup-and-restore}
 
-The way to use BR varies with the deployment method of TiDB. This document introduces how to use the br command-line tool to back up and restore TiDB cluster data in an on-premise deployment.
+BRの使用方法は、TiDB のデプロイ方法によって異なります。このドキュメントでは、br コマンドライン ツールを使用して、オンプレミス展開で TiDB クラスター データをバックアップおよび復元する方法を紹介します。
 
-For information about how to use this feature in other deployment scenarios, see the following documents:
+他の展開シナリオでこの機能を使用する方法については、次のドキュメントを参照してください。
 
-- [Back Up and Restore TiDB Deployed on TiDB Cloud](https://docs.pingcap.com/tidbcloud/backup-and-restore): It is recommended that you create TiDB clusters on [TiDB Cloud](https://www.pingcap.com/tidb-cloud/?from=en). TiDB Cloud offers fully managed databases to let you focus on your applications.
-- [Back Up and Restore Data Using TiDB Operator](https://docs.pingcap.com/tidb-in-kubernetes/stable/backup-restore-overview): If you deploy a TiDB cluster using TiDB Operator on Kubernetes, it is recommended to back up and restore data using Kubernetes CustomResourceDefinition (CRD).
+-   [TiDB Cloudにデプロイされた TiDB のバックアップと復元](https://docs.pingcap.com/tidbcloud/backup-and-restore) : [TiDB Cloud](https://www.pingcap.com/tidb-cloud/?from=en)で TiDB クラスターを作成することをお勧めします。 TiDB Cloudは完全に管理されたデータベースを提供し、アプリケーションに集中できるようにします。
+-   [TiDB Operatorを使用したデータのバックアップと復元](https://docs.pingcap.com/tidb-in-kubernetes/stable/backup-restore-overview) : Kubernetes でTiDB Operatorを使用して TiDB クラスターをデプロイする場合は、Kubernetes CustomResourceDefinition (CRD) を使用してデータをバックアップおよび復元することをお勧めします。
 
-## BR features
+## BRの特徴 {#br-features}
 
-TiDB BR provides the following features:
+TiDB BRは次の機能を提供します。
 
-- Back up cluster data: You can back up full data (**full backup**) of the cluster at a certain time point, or back up the data changes in TiDB (**log backup**, in which log means KV changes in TiKV).
+-   クラスター データのバックアップ: 特定の時点でクラスターの完全なデータをバックアップする (**フル バックアップ**)、または TiDB のデータ変更をバックアップする (<strong>ログ バックアップ</strong>、ログは TiKV の KV 変更を意味します) ことができます。
 
-- Restore backup data:
+-   バックアップ データを復元します。
 
-    - You can **restore a full backup** or **specific databases or tables** in a full backup.
-    - Based on backup data (full backup and log backup), you can restore the target cluster to any time point of the backup cluster. This type of restore is called point-in-time recovery, or PITR for short.
+    -   完全バックアップ、または完全バックアップ内の**特定のデータベースまたはテーブル**を<strong>復元</strong>できます。
+    -   バックアップ データ (完全バックアップとログ バックアップ) に基づいて、ターゲット クラスターをバックアップ クラスターの任意の時点に復元できます。このタイプのリストアは、ポイント イン タイム リカバリ、略して PITR と呼ばれます。
 
-### Back up cluster data
+### クラスタ データのバックアップ {#back-up-cluster-data}
 
-Full backup backs up all data of a cluster at a specific time point. TiDB supports the following way of full backup:
+完全バックアップは、特定の時点でのクラスターのすべてのデータをバックアップします。 TiDB は、次の完全バックアップの方法をサポートしています。
 
-- Back up cluster snapshots: A snapshot of a TiDB cluster contains transactionally consistent data at a specific time. For details, see [Snapshot backup](/br/br-snapshot-guide.md#back-up-cluster-snapshots).
+-   クラスターのスナップショットをバックアップする: TiDB クラスターのスナップショットには、特定の時点でトランザクション的に一貫性のあるデータが含まれています。詳細については、 [スナップショット バックアップ](/br/br-snapshot-guide.md#back-up-cluster-snapshots)を参照してください。
 
-Full backup occupies much storage space and contains only cluster data at a specific time point. If you want to choose the restore point as required, that is, to perform point-in-time recovery (PITR), you can use the following two ways of backup at the same time:
+フル バックアップは多くのストレージ スペースを占有し、特定の時点のクラスタ データのみを含みます。必要に応じて復元ポイントを選択する場合、つまりポイント イン タイム リカバリ (PITR) を実行する場合は、次の 2 つのバックアップ方法を同時に使用できます。
 
-- Start [log backup](/br/br-pitr-guide.md#start-log-backup). After log backup is started, the task keeps running on all TiKV nodes and backs up TiDB incremental data in small batches to the specified storage periodically.
-- Perform snapshot backup regularly. Back up the full cluster data to the backup storage, for example, perform cluster snapshot backup at 0:00 AM every day.
+-   [ログのバックアップ](/br/br-pitr-guide.md#start-log-backup)を開始します。ログ バックアップが開始された後、タスクはすべての TiKV ノードで実行され続け、TiDB の増分データを小さなバッチで定期的に指定されたストレージにバックアップします。
+-   スナップショット バックアップを定期的に実行します。クラスタ データ全体をバックアップ ストレージにバックアップします。たとえば、毎日午前 0 時にクラスタ スナップショット バックアップを実行します。
 
-#### Backup performance and impact on TiDB clusters
+#### バックアップのパフォーマンスと TiDB クラスターへの影響 {#backup-performance-and-impact-on-tidb-clusters}
 
-- The impact of backup on a TiDB cluster is kept below 20%, and this value can be reduced to 10% or less with the proper configuration of the TiDB cluster. The backup speed of a TiKV node is scalable and ranges from 50 MB/s to 100 MB/s. For more information, see [Backup performance and impact](/br/br-snapshot-guide.md#performance-and-impact-of-snapshot-backup).
-- When there are only log backup tasks, the impact on the cluster is about 5%. Log backup flushes all the changes generated after the last refresh every 3-5 minutes to the backup storage, which can **achieve a Recovery Point Objective (RPO) as short as five minutes**.
+-   TiDB クラスターに対するバックアップの影響は 20% 未満に抑えられており、TiDB クラスターを適切に構成することで、この値を 10% 以下に減らすことができます。 TiKV ノードのバックアップ速度はスケーラブルで、50 MB/秒から 100 MB/秒の範囲です。詳細については、 [バックアップのパフォーマンスと影響](/br/br-snapshot-guide.md#performance-and-impact-of-snapshot-backup)を参照してください。
+-   ログ バックアップ タスクのみの場合、クラスターへの影響は約 5% です。ログ バックアップは、最後の更新後に生成されたすべての変更を 3 ～ 5 分ごとにバックアップ ストレージにフラッシュします。これ**により、目標復旧時点 (RPO) を 5 分で達成**できます。
 
-### Restore backup data
+### バックアップデータの復元 {#restore-backup-data}
 
-Corresponding to the backup features, you can perform two types of restore: full restore and PITR.
+バックアップ機能に対応して、フル リストアと PITR の 2 種類のリストアを実行できます。
 
-- Restore a full backup
+-   完全バックアップを復元する
 
-    - Restore cluster snapshot backup: You can restore snapshot backup data to an empty cluster or a cluster that does not have data conflicts (with the same schema or tables). For details, see [Restore snapshot backup](/br/br-snapshot-guide.md#restore-cluster-snapshots). In addition, you can restore specific databases or tables from the backup data and filter out unwanted data. For details, see [Restore specific databases or tables from backup data](/br/br-snapshot-guide.md#restore-a-database-or-a-table).
+    -   クラスター スナップショット バックアップの復元: スナップショット バックアップ データを、空のクラスター、またはデータの競合がない (同じスキーマまたはテーブルを持つ) クラスターに復元できます。詳細については、 [スナップショット バックアップの復元](/br/br-snapshot-guide.md#restore-cluster-snapshots)を参照してください。さらに、バックアップ データから特定のデータベースまたはテーブルを復元し、不要なデータを除外することができます。詳細については、 [バックアップ データから特定のデータベースまたはテーブルを復元する](/br/br-snapshot-guide.md#restore-a-database-or-a-table)を参照してください。
 
-- Restore data to any point in time (PITR)
+-   データを任意の時点に復元 (PITR)
 
-    - By running the `br restore point` command, you can restore the latest snapshot backup data before recovery time point and log backup data to a specified time. BR automatically determines the restore scope, accesses backup data, and restores data to the target cluster in turn.
+    -   `br restore point`コマンドを実行することで、復旧時点より前の最新のスナップショット バックアップ データを復元し、バックアップ データを指定した時点にログすることができます。 BRは、リストア スコープを自動的に決定し、バックアップ データにアクセスして、ターゲット クラスタにデータをリストアします。
 
-#### Restore performance and impact on TiDB clusters
+#### TiDB クラスターのパフォーマンスと影響を復元する {#restore-performance-and-impact-on-tidb-clusters}
 
-- Data restore is performed at a scalable speed. Generally, the speed is 100 MiB/s per TiKV node. `br` only supports restoring data to a new cluster and uses the resources of the target cluster as much as possible. For more details, see [Restore performance and impact](/br/br-snapshot-guide.md#performance-and-impact-of-snapshot-restore).
-- On each TiKV node, PITR can restore log data at 30 GiB/h. For more details, see [PITR performance and impact](/br/br-pitr-guide.md#performance-and-impact-of-pitr).
+-   データの復元は、スケーラブルな速度で実行されます。通常、速度は TiKV ノードあたり 100 MiB/秒です。 `br`は、新しいクラスターへのデータの復元のみをサポートし、ターゲット クラスターのリソースを可能な限り使用します。詳細については、 [パフォーマンスと影響を回復する](/br/br-snapshot-guide.md#performance-and-impact-of-snapshot-restore)を参照してください。
+-   各 TiKV ノードで、PITR は 30 GiB/h でログ データを復元できます。詳細については、 [PITRのパフォーマンスと影響](/br/br-pitr-guide.md#performance-and-impact-of-pitr)を参照してください。
 
-## Backup storage
+## バックアップ ストレージ {#backup-storage}
 
-TiDB supports backing up data to Amazon S3, Google Cloud Storage (GCS), Azure Blob Storage, NFS, and other S3-compatible file storage services. For details, see the following documents:
+TiDB は、Amazon S3、Google Cloud Storage (GCS)、Azure Blob Storage、NFS、およびその他の S3 互換ファイル ストレージ サービスへのデータのバックアップをサポートしています。詳細については、次のドキュメントを参照してください。
 
-- [Specify backup storage in URL](/br/backup-and-restore-storages.md#url-format)
-- [Configure access privileges to backup storages](/br/backup-and-restore-storages.md#authentication)
+-   [URL でバックアップ ストレージを指定する](/br/backup-and-restore-storages.md#url-format)
+-   [バックアップ ストレージへのアクセス権限を設定する](/br/backup-and-restore-storages.md#authentication)
 
-## Before you use
+## ご使用になる前に {#before-you-use}
 
-This section describes the prerequisites for using TiDB backup and restore, including the usage tips and compatibility issues.
+このセクションでは、使用上のヒントや互換性の問題など、TiDB のバックアップと復元を使用するための前提条件について説明します。
 
-### Some tips
+### いくつかのヒント {#some-tips}
 
-Snapshot backup:
+スナップショット バックアップ:
 
-- It is recommended that you perform the backup operation during off-peak hours to minimize the impact on applications.
-- It is recommended that you execute multiple backup or restore operations one by one. Running backup operations in parallel leads to low performance. Worse still, lack of collaboration between multiple tasks might result in task failures and affect cluster performance.
+-   アプリケーションへの影響を最小限に抑えるために、オフピーク時にバックアップ操作を実行することをお勧めします。
+-   複数のバックアップまたは復元操作を 1 つずつ実行することをお勧めします。バックアップ操作を並行して実行すると、パフォーマンスが低下します。さらに悪いことに、複数のタスク間のコラボレーションが不足していると、タスクが失敗し、クラスターのパフォーマンスに影響を与える可能性があります。
 
-Snapshot restore:
+スナップショットの復元:
 
-- BR uses resources of the target cluster as much as possible. Therefore, it is recommended that you restore data to a new cluster or an offline cluster. Avoid restoring data to a production cluster. Otherwise, your application might be affected. PITR only supports restoring data to an empty cluster.
+-   BRは、ターゲット クラスタのリソースを可能な限り使用します。したがって、新しいクラスターまたはオフラインのクラスターにデータを復元することをお勧めします。データを本番クラスターに復元することは避けてください。そうしないと、アプリケーションが影響を受ける可能性があります。 PITR は、空のクラスターへのデータの復元のみをサポートします。
 
-PITR:
+ピット:
 
-- You can only perform cluster-level PITR. Database-level and table-level PITR are not supported.
-- You cannot restore data in the user tables or the privilege tables.
+-   クラスター レベルの PITR のみを実行できます。データベース レベルおよびテーブル レベルの PITR はサポートされていません。
+-   ユーザー テーブルまたは権限テーブルのデータを復元することはできません。
 
-Backup storage and network configuration:
+バックアップ ストレージとネットワーク構成:
 
-- It is recommended that you store backup data to a storage system that is compatible with Amazon S3, GCS, or Azure Blob Storage.
-- You need to ensure that BR, TiKV, and the backup storage system have enough network bandwidth, and the storage system can provide sufficient read and write performance (IOPS). Otherwise, they might become a performance bottleneck during backup and restore.
+-   Amazon S3、GCS、または Azure Blob Storage と互換性のあるストレージ システムにバックアップ データを保存することをお勧めします。
+-   BR、TiKV、およびバックアップ ストレージ システムに十分なネットワーク帯域幅があり、ストレージ システムが十分な読み取りおよび書き込みパフォーマンス (IOPS) を提供できることを確認する必要があります。そうしないと、バックアップおよび復元中にパフォーマンスのボトルネックになる可能性があります。
 
-### Compatibility
+### 互換性 {#compatibility}
 
-#### Compatibility with other features
+#### 他の機能との互換性 {#compatibility-with-other-features}
 
-Backup and restore might go wrong when some TiDB features are enabled or disabled. If these features are not consistently enabled or disabled during backup and restore, compatibility issues might occur.
+一部の TiDB 機能が有効または無効になっていると、バックアップと復元がうまくいかないことがあります。これらの機能がバックアップと復元中に一貫して有効または無効にされない場合、互換性の問題が発生する可能性があります。
 
-| Feature | Issue | Solution |
-|  ----  | ----  | ----- |
-|GBK charset|| BR of versions earlier than v5.4.0 does not support restoring `charset=GBK` tables. No version of BR supports recovering `charset=GBK` tables to TiDB clusters earlier than v5.4.0. |
-| Clustered index | [#565](https://github.com/pingcap/br/issues/565) | Make sure that the value of the `tidb_enable_clustered_index` global variable during restore is consistent with that during backup. Otherwise, data inconsistency might occur, such as `default not found` error and inconsistent data index. |
-| New collation  | [#352](https://github.com/pingcap/br/issues/352)       | Make sure that the value of the `new_collations_enabled_on_first_bootstrap` variable during restore is consistent with that during backup. Otherwise, inconsistent data index might occur and checksum might fail to pass. For more information, see [FAQ - Why does BR report `new_collations_enabled_on_first_bootstrap` mismatch?](/faq/backup-and-restore-faq.md#why-is-new_collations_enabled_on_first_bootstrap-mismatch-reported-during-restore). |
-| Global temporary tables | | Make sure that you are using v5.3.0 or a later version of BR to back up and restore data. Otherwise, an error occurs in the definition of the backed global temporary tables. |
-| TiDB Lightning Physical Import| | If the upstream database uses the physical import mode of TiDB Lightning, data cannot be backed up in log backup. It is recommended to perform a full backup after the data import. For more information, see [When the upstream database imports data using TiDB Lightning in the physical import mode, the log backup feature becomes unavailable. Why?](/faq/backup-and-restore-faq.md#when-the-upstream-database-imports-data-using-tidb-lightning-in-the-physical-import-mode-the-log-backup-feature-becomes-unavailable-why).|
+| 特徴                    | 問題                                               | 解決                                                                                                                                                                                                                                                                                                                                                                                           |
+| --------------------- | ------------------------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| GBK 文字セット             |                                                  | v5.4.0 より前のバージョンのBRは、 `charset=GBK`テーブルの復元をサポートしていません。 v5.4.0 より前の TiDB クラスターへの`charset=GBK`のテーブルの復元をサポートするBRのバージョンはありません。                                                                                                                                                                                                                                                                   |
+| クラスタ化されたインデックス        | [#565](https://github.com/pingcap/br/issues/565) | リストア中の`tidb_enable_clustered_index`グローバル変数の値がバックアップ中の値と一致していることを確認してください。そうしないと、 `default not found`エラーやデータ インデックスの不整合など、データの不整合が発生する可能性があります。                                                                                                                                                                                                                                               |
+| 新しい照合順序               | [#352](https://github.com/pingcap/br/issues/352) | 復元中の`new_collations_enabled_on_first_bootstrap`変数の値がバックアップ中の値と一致していることを確認してください。そうしないと、不整合なデータ インデックスが発生し、チェックサムが渡されない可能性があります。詳細については、 [FAQ - BRが`new_collations_enabled_on_first_bootstrap`不一致を報告するのはなぜですか?](/faq/backup-and-restore-faq.md#why-is-new_collations_enabled_on_first_bootstrap-mismatch-reported-during-restore)を参照してください。                                                   |
+| グローバル一時テーブル           |                                                  | v5.3.0 以降のバージョンのBRを使用してデータをバックアップおよび復元していることを確認してください。そうしないと、バッキングされたグローバル一時テーブルの定義でエラーが発生します。                                                                                                                                                                                                                                                                                               |
+| TiDB Lightning物理インポート |                                                  | 上流のデータベースがTiDB Lightningの物理インポートモードを使用している場合、ログバックアップでデータをバックアップできません。データのインポート後に完全バックアップを実行することをお勧めします。詳細については、 [アップストリーム データベースが物理インポート モードでTiDB Lightningを使用してデータをインポートすると、ログ バックアップ機能が使用できなくなります。なんで？](/faq/backup-and-restore-faq.md#when-the-upstream-database-imports-data-using-tidb-lightning-in-the-physical-import-mode-the-log-backup-feature-becomes-unavailable-why)を参照してください。 |
 
-#### Version compatibility
+#### バージョンの互換性 {#version-compatibility}
 
-Before performing backup and restore, BR compares and checks the TiDB cluster version with its own. If there is a major-version mismatch, BR prompts a reminder to exit. To forcibly skip the version check, you can set `--check-requirements=false`. Note that skipping the version check might introduce incompatibility.
+バックアップとリストアを実行する前に、 BRは TiDB クラスターのバージョンを自身のものと比較して確認します。メジャー バージョンの不一致がある場合、 BRは終了するよう促します。バージョン チェックを強制的にスキップするには、 `--check-requirements=false`を設定します。バージョン チェックをスキップすると、互換性が失われる可能性があることに注意してください。
 
-| Backup version (vertical) \ Restore version (horizontal) | Restore to TiDB v6.0 | Restore to TiDB v6.1 | Restore to TiDB v6.2 | Restore to TiDB v6.3 |
-|  ----  |  ----  | ---- | ---- | ---- |
-| TiDB v6.0 snapshot backup | Compatible | Compatible | Compatible | Compatible |
-| TiDB v6.1 snapshot backup | Compatible (A known issue [#36379](https://github.com/pingcap/tidb/issues/36379): if backup data contains an empty schema, BR might report an error.) | Compatible | Compatible | Compatible |
-| TiDB v6.2 snapshot backup | Compatible (A known issue [#36379](https://github.com/pingcap/tidb/issues/36379): if backup data contains an empty schema, BR might report an error.) | Compatible | Compatible | Compatible |
-| TiDB v6.3 snapshot backup | Compatible (A known issue [#36379](https://github.com/pingcap/tidb/issues/36379): if backup data contains an empty schema, BR might report an error.) | Compatible | Compatible | Compatible |
-| TiDB v6.3 log backup| N/A | N/A | Incompatible | Compatible |
+| バックアップ版（縦）\ 復元版（横）        | TiDB v6.0 に復元する                                                                                                       | TiDB v6.1 に復元する | TiDB v6.2 に復元する | TiDB v6.3 に復元する |
+| ------------------------- | --------------------------------------------------------------------------------------------------------------------- | --------------- | --------------- | --------------- |
+| TiDB v6.0 スナップショット バックアップ | 互換性                                                                                                                   | 互換性             | 互換性             | 互換性             |
+| TiDB v6.1 スナップショット バックアップ | 互換性あり (既知の問題[#36379](https://github.com/pingcap/tidb/issues/36379) : バックアップ データに空のスキーマが含まれている場合、 BRがエラーを報告する場合があります。) | 互換性             | 互換性             | 互換性             |
+| TiDB v6.2 スナップショット バックアップ | 互換性あり (既知の問題[#36379](https://github.com/pingcap/tidb/issues/36379) : バックアップ データに空のスキーマが含まれている場合、 BRがエラーを報告する場合があります。) | 互換性             | 互換性             | 互換性             |
+| TiDB v6.3 スナップショット バックアップ | 互換性あり (既知の問題[#36379](https://github.com/pingcap/tidb/issues/36379) : バックアップ データに空のスキーマが含まれている場合、 BRがエラーを報告する場合があります。) | 互換性             | 互換性             | 互換性             |
+| TiDB v6.3 ログ バックアップ       | なし                                                                                                                    | なし              | 非互換             | 互換性             |
 
-## See also
+## こちらもご覧ください {#see-also}
 
-- [TiDB Snapshot Backup and Restore Guide](/br/br-snapshot-guide.md)
-- [TiDB Log Backup and PITR Guide](/br/br-pitr-guide.md)
-- [Backup Storages](/br/backup-and-restore-storages.md)
+-   [TiDB スナップショットのバックアップと復元ガイド](/br/br-snapshot-guide.md)
+-   [TiDB ログのバックアップと PITR ガイド](/br/br-pitr-guide.md)
+-   [バックアップ ストレージ](/br/backup-and-restore-storages.md)

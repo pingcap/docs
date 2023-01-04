@@ -3,59 +3,59 @@ title: Integrate TiDB Cloud with Vercel
 summary: Learn how to connect your TiDB Cloud clusters to Vercel projects.
 ---
 
-# Integrate TiDB Cloud with Vercel
+# TiDB Cloudと Vercel の統合 {#integrate-tidb-cloud-with-vercel}
 
-[Vercel](https://vercel.com/) is the platform for frontend developers, providing the speed and reliability innovators need to create at the moment of inspiration.
+[ヴェルセル](https://vercel.com/)はフロントエンド開発者向けのプラットフォームであり、イノベーターがひらめいた瞬間に作成するために必要なスピードと信頼性を提供します。
 
-Using TiDB Cloud with Vercel enables you to build new frontend applications faster with a MySQL-compatible relational model and grow your app with confidence with a platform built for resilience, scale, and the highest levels of data privacy and security.
+Vercel でTiDB Cloudを使用すると、MySQL 互換のリレーショナル モデルを使用して新しいフロントエンド アプリケーションをより迅速に構築し、回復力、拡張性、および最高レベルのデータ プライバシーとセキュリティのために構築されたプラットフォームで自信を持ってアプリを成長させることができます。
 
-This guide describes how to connect your TiDB Cloud clusters to Vercel projects using one of the following methods:
+このガイドでは、次のいずれかの方法を使用して、 TiDB Cloudクラスターを Vercel プロジェクトに接続する方法について説明します。
 
-* [Connect via the TiDB Cloud Vercel integration](#connect-via-the-tidb-cloud-vercel-integration)
-* [Connect via manually configuring environment variables](#connect-via-manually-setting-environment-variables)
+-   [TiDB Cloud Vercel 統合を介して接続する](#connect-via-the-tidb-cloud-vercel-integration)
+-   [環境変数を手動で構成して接続する](#connect-via-manually-setting-environment-variables)
 
-## Prerequisites
+## 前提条件 {#prerequisites}
 
-Before connection, make sure the following prerequisites are met.
+接続する前に、次の前提条件が満たされていることを確認してください。
 
-### A Vercel account and a Vercel project
+### Vercel アカウントと Vercel プロジェクト {#a-vercel-account-and-a-vercel-project}
 
-You are expected to have an account and a project in Vercel. If you do not have any, refer to the following Vercel documents to create one:
+Vercel にアカウントとプロジェクトが必要です。持っていない場合は、次の Vercel ドキュメントを参照して作成してください。
 
-* [Creating a new personal account](https://vercel.com/docs/teams-and-accounts#creating-a-personal-account) or [Creating a new team](https://vercel.com/docs/teams-and-accounts/create-or-join-a-team#creating-a-team).
-* [Creating a project](https://vercel.com/docs/concepts/projects/overview#creating-a-project) in Vercel, or if you do not have an application to deploy, you can use the [TiDB Cloud Starter Template](https://vercel.com/templates/next.js/tidb-cloud-starter) to have a try.
+-   [新しい個人アカウントの作成](https://vercel.com/docs/teams-and-accounts#creating-a-personal-account)または[新しいチームの作成](https://vercel.com/docs/teams-and-accounts/create-or-join-a-team#creating-a-team) 。
+-   Vercel で[プロジェクトの作成](https://vercel.com/docs/concepts/projects/overview#creating-a-project)を使用するか、デプロイするアプリケーションがない場合は、 [TiDB Cloudスターター テンプレート](https://vercel.com/templates/next.js/tidb-cloud-starter)を使用して試すことができます。
 
-One Vercel project can only connect to one TiDB Cloud cluster. To change the integration, you need to first disconnect the current cluster and then connect to a new cluster.
+1 つの Vercel プロジェクトは、1 つのTiDB Cloudクラスターにのみ接続できます。統合を変更するには、まず現在のクラスターを切断してから、新しいクラスターに接続する必要があります。
 
-### A TiDB Cloud account and a TiDB cluster
+### TiDB Cloudアカウントと TiDB クラスター {#a-tidb-cloud-account-and-a-tidb-cluster}
 
-You are expected to have an account and a cluster in TiDB Cloud. If you do not have any, refer to [Create a TiDB cluster](/tidb-cloud/create-tidb-cluster.md).
+TiDB Cloudにアカウントとクラスターが必要です。持っていない場合は、 [TiDB クラスターを作成する](/tidb-cloud/create-tidb-cluster.md)を参照してください。
 
-To integrate with Vercel, you are expected to have the "Owner" access to your organization or the "Member" access to the target project in TiDB Cloud. For more information, see [Configure member roles](/tidb-cloud/manage-user-access.md#configure-member-roles).
+Vercel と統合するには、組織への「所有者」アクセス、またはTiDB Cloudのターゲット プロジェクトへの「メンバー」アクセスが必要です。詳細については、 [メンバーの役割を構成する](/tidb-cloud/manage-user-access.md#configure-member-roles)を参照してください。
 
-One TiDB Cloud cluster can connect to multiple Vercel projects.
+1 つのTiDB Cloudクラスターで複数の Vercel プロジェクトに接続できます。
 
-### All IP addresses allowed for traffic filter in TiDB Cloud
+### TiDB Cloudでトラフィック フィルターに許可されているすべての IP アドレス {#all-ip-addresses-allowed-for-traffic-filter-in-tidb-cloud}
 
-Make sure that the traffic filter of your TiDB Cloud cluster allows all IP addresses (set to `0.0.0.0/0`) for connection, this is because Vercel deployments use [dynamic IP addresses](https://vercel.com/guides/how-to-allowlist-deployment-ip-address). If you use the TiDB Cloud Vercel integration, TiDB Cloud automatically adds a `0.0.0.0/0` traffic filter to your cluster in the integration workflow if there is none.
+TiDB Cloudクラスターのトラフィック フィルターで、接続にすべての IP アドレス ( `0.0.0.0/0`に設定) が許可されていることを確認してください。これは、Vercel のデプロイで[動的 IP アドレス](https://vercel.com/guides/how-to-allowlist-deployment-ip-address)が使用されているためです。 TiDB Cloud Vercel 統合を使用する場合、TiDB TiDB Cloudは、統合ワークフローでクラスターに`0.0.0.0/0`トラフィック フィルターを自動的に追加します (存在しない場合)。
 
-## Connect via the TiDB Cloud Vercel integration
+## TiDB Cloud Vercel 統合を介して接続する {#connect-via-the-tidb-cloud-vercel-integration}
 
-To connect via the TiDB Cloud Vercel integration, go to the [TiDB Cloud integration](https://vercel.com/integrations/tidb-cloud) page from the [Vercel's Integrations Marketplace](https://vercel.com/integrations). Using this method, you can choose which cluster to connect to, and TiDB Cloud will automatically generate all the necessary environment variables for your Vercel projects.
+TiDB Cloud Vercel インテグレーション経由で接続するには、 [Vercel の統合マーケットプレイス](https://vercel.com/integrations)から[TiDB Cloud統合](https://vercel.com/integrations/tidb-cloud)ページに移動します。この方法を使用すると、接続するクラスターを選択でき、 TiDB Cloudは Vercel プロジェクトに必要なすべての環境変数を自動的に生成します。
 
-The detailed steps are as follows:
+詳細な手順は次のとおりです。
 
-1. Click **Add Integration** in the upper-right area of the [TiDB Cloud Vercel integration](https://vercel.com/integrations/tidb-cloud) page. The **Add TiDB Cloud** dialog is displayed.
-2. Select the scope of your integration in the drop-down list and click **CONTINUE**.
-3. Select the Vercel Projects to which the integration will be added and click **CONTINUE**.
-4. Confirm the required permissions for integration and click **ADD INTEGRATION**. Then you are directed to an integration page of the TiDB Cloud console.
-5. On the integration page, select the target Vercel projects, and select the target TiDB Cloud cluster after providing the cluster information. Each TiDB Cloud cluster belongs to [an organization and a project](/tidb-cloud/manage-user-access.md#view-the-organization-and-project).
-6. Click **Add Integration and Return to Vercel**.
-7. Back to your Vercel dashboard, go to your Vercel project, click **Settings** > **Environment Variables**, and confirm that the environment variables have been automatically added.
+1.  [TiDB Cloud Vercel 統合](https://vercel.com/integrations/tidb-cloud)ページの右上にある [**統合の追加] を**クリックします。 [ <strong>TiDB Cloudの追加</strong>] ダイアログが表示されます。
+2.  ドロップダウン リストで統合の範囲を選択し、[**続行**] をクリックします。
+3.  統合を追加する**Vercel**プロジェクトを選択し、[続行] をクリックします。
+4.  統合に必要な権限を確認し、 **ADD INTEGRATION**をクリックします。次に、 TiDB Cloudコンソールの統合ページに移動します。
+5.  統合ページで、対象の Vercel プロジェクトを選択し、クラスター情報を提供した後、対象のTiDB Cloudクラスターを選択します。各TiDB Cloudクラスターは[組織とプロジェクト](/tidb-cloud/manage-user-access.md#view-the-organization-and-project)に属します。
+6.  [**統合を追加して Vercel に戻る] を**クリックします。
+7.  Vercel ダッシュボードに戻り、Vercel プロジェクトに移動し、[**設定]** &gt; [<strong>環境変数</strong>] をクリックして、環境変数が自動的に追加されていることを確認します。
 
-    If the variables have been added, the connection is completed.
+    変数が追加されていれば、接続は完了です。
 
-After you have completed the integration setup and successfully connected a TiDB Cloud cluster to your Vercel projects, the information necessary for the connection is automatically set in the projects' environment variables. The following are some common variables:
+統合セットアップを完了し、 TiDB Cloudクラスターを Vercel プロジェクトに正常に接続すると、接続に必要な情報がプロジェクトの環境変数に自動的に設定されます。以下は、いくつかの一般的な変数です。
 
 ```
 TIDB_HOST
@@ -64,20 +64,20 @@ TIDB_USER
 TIDB_PASSWORD
 ```
 
-For Dedicated Tier clusters, the root CA is set in this variable:
+Dedicated Tierクラスターの場合、ルート CA はこの変数に設定されます。
 
 ```
 TIDB_SSL_CA
 ```
 
-## Connect via manually setting environment variables
+## 環境変数を手動で設定して接続する {#connect-via-manually-setting-environment-variables}
 
-To use this method, make sure that you have set the **Allow Access from Anywhere** traffic filter in the [**Security Settings**](/tidb-cloud/configure-security-settings.md) dialog and save the password.
+この方法を使用するには、 [**セキュリティ設定**](/tidb-cloud/configure-security-settings.md)ダイアログで [**どこからでもアクセスを許可**する] トラフィック フィルタを設定していることを確認し、パスワードを保存します。
 
-1. Follow the steps in [Connect to a TiDB Cloud cluster via standard connection](/tidb-cloud/connect-to-tidb-cluster.md#connect-via-standard-connection) to get the connection information of your TiDB cluster. 
-2. Go to your Vercel dashboard > Vercel project > **Settings** > **Environment Variables**, and then [declare each environment variable value](https://vercel.com/docs/concepts/projects/environment-variables#declare-an-environment-variable) according to the connection information of your TiDB cluster.
+1.  [標準接続を介してTiDB Cloudクラスターに接続する](/tidb-cloud/connect-to-tidb-cluster.md#connect-via-standard-connection)の手順に従って、TiDB クラスターの接続情報を取得します。
+2.  Vercel ダッシュボード &gt; Vercel プロジェクト &gt;**設定**&gt;<strong>環境変数</strong>に移動し、TiDB クラスターの接続情報に従って[各環境変数値を宣言する](https://vercel.com/docs/concepts/projects/environment-variables#declare-an-environment-variable)に進みます。
 
-The following is an example of the connection variables for a TiDB Cloud Dedicated Tier cluster:
+以下は、 TiDB Cloud Dedicated Tierクラスターの接続変数の例です。
 
 ```
 var connection = mysql.createConnection({
@@ -94,21 +94,21 @@ var connection = mysql.createConnection({
 });
 ```
 
-In Vercel, you can declare the variables as follows. You can customize the name according to your project need.
+Vercel では、次のように変数を宣言できます。プロジェクトの必要に応じて名前をカスタマイズできます。
 
-* **NAME** = TIDB\_HOST **VALUE** = `<your_host>`
-* **NAME** = TIDB\_PORT **VALUE** = 4000
-* **NAME** = TIDB\_USER **VALUE** = root
-* **NAME** = TIDB\_PASSWORD **VALUE** = `<your_password>`
-* **NAME** = TIDB\_SSL\_CA **VALUE** = `<content_of_ca.pem>`
+-   **名前**= <strong>TIDB_HOST</strong>値 = `<your_host>`
+-   **名前**= <strong>TIDB_PORT</strong>値 = 4000
+-   **名前**= <strong>TIDB_USER</strong>値 = ルート
+-   **名前**= <strong>TIDB_PASSWORD</strong>値 = `<your_password>`
+-   **名前**= <strong>TIDB_SSL_CA</strong>値 = `<content_of_ca.pem>`
 
-## Configure connections
+## 接続の構成 {#configure-connections}
 
-If you have installed [TiDB Cloud Vercel integration](https://vercel.com/integrations/tidb-cloud), you can add or remove connections inside the integration.
+[TiDB Cloud Vercel 統合](https://vercel.com/integrations/tidb-cloud)をインストールしている場合は、統合内で接続を追加または削除できます。
 
-1. In your Vercel dashboard, click **Integrations**.
-2. Click **Manage** in the TiDB Cloud entry.
-3. Click **Configure**.
-4. Click **Add Project** or **Remove** to add or remove connections.
+1.  Vercel ダッシュボードで、[**統合**] をクリックします。
+2.  TiDB Cloudエントリで [**管理**] をクリックします。
+3.  [**構成]**をクリックします。
+4.  [**プロジェクトの追加]**または [<strong>削除]</strong>をクリックして、接続を追加または削除します。
 
-When you remove a connection, environment variables set by the integration workflow are removed from the Vercel project either. The traffic filter and the data of the TiDB Cloud cluster are not affected.
+接続を削除すると、統合ワークフローによって設定された環境変数も Vercel プロジェクトから削除されます。トラフィック フィルターとTiDB Cloudクラスターのデータは影響を受けません。

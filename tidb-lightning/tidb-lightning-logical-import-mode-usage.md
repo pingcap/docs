@@ -3,13 +3,13 @@ title: Use Logical Import Mode
 summary: Learn how to use the logical import mode in TiDB Lightning.
 ---
 
-# Use Logical Import Mode
+# 論理インポート モードを使用する {#use-logical-import-mode}
 
-This document introduces how to use the [logical import mode](/tidb-lightning/tidb-lightning-logical-import-mode.md) in TiDB Lightning, including writing the configuration file and tuning performance.
+このドキュメントでは、設定ファイルの記述やパフォーマンスのチューニングなど、 TiDB Lightningでの[論理インポート モード](/tidb-lightning/tidb-lightning-logical-import-mode.md)の使用方法を紹介します。
 
-## Configure and use the logical import mode
+## 論理インポート モードの構成と使用 {#configure-and-use-the-logical-import-mode}
 
-You can use the logical import mode via the following configuration file to import data:
+次の構成ファイルを介して論理インポート モードを使用して、データをインポートできます。
 
 ```toml
 [lightning]
@@ -49,31 +49,31 @@ password = ""
 log-level = "error"
 ```
 
-For the complete configuration file, refer to [TiDB Lightning Configuration](/tidb-lightning/tidb-lightning-configuration.md).
+完全な構成ファイルについては、 [TiDB LightningConfiguration / コンフィグレーション](/tidb-lightning/tidb-lightning-configuration.md)を参照してください。
 
-## Conflict detection
+## 競合の検出 {#conflict-detection}
 
-Conflicting data refers to two or more records with the same data in the PK or UK column. When the data source contains conflicting data, the actual number of rows in the table is different from the total number of rows returned by the query using the unique index.
+競合するデータとは、PK または UK 列に同じデータを持つ 2 つ以上のレコードを指します。データ ソースに競合するデータが含まれている場合、テーブル内の実際の行数は、一意のインデックスを使用したクエリによって返される合計行数とは異なります。
 
-In the logical import mode, you can configure the strategy for resolving conflicting data by setting the `on-duplicate` configuration item. Based on the strategy, TiDB Lightning imports data with different SQL statements.
+論理インポート モードでは、 `on-duplicate`の構成アイテムを設定することで、競合するデータを解決するための戦略を構成できます。この戦略に基づいて、 TiDB Lightningはさまざまな SQL ステートメントでデータをインポートします。
 
-| Strategy | Default behavior of conflicting data | The corresponding SQL statement |
-| :-- | :-- | :-- |
-| `replace` | Replacing existing data with new data. | `REPLACE INTO ...` |
-| `ignore` | Keeping existing data and ignoring new data. | `INSERT IGNORE INTO ...` |
-| `error` | Pausing the import and reporting an error. | `INSERT INTO ...` |
+| ストラテジー    | 競合するデータのデフォルトの動作         | 対応する SQL ステートメント         |
+| :-------- | :----------------------- | :----------------------- |
+| `replace` | 既存のデータを新しいデータに置き換える。     | `REPLACE INTO ...`       |
+| `ignore`  | 既存のデータを保持し、新しいデータを無視します。 | `INSERT IGNORE INTO ...` |
+| `error`   | インポートを一時停止し、エラーを報告します。   | `INSERT INTO ...`        |
 
-## Performance tuning
+## 性能調整 {#performance-tuning}
 
-- In the logical import mode, the performance of TiDB Lightning largely depends on the write performance of the target TiDB cluster. If the cluster hits a performance bottleneck, refer to [Highly Concurrent Write Best Practices](/best-practices/high-concurrency-best-practices.md).
+-   論理インポートモードでは、 TiDB Lightningのパフォーマンスは対象の TiDB クラスターの書き込みパフォーマンスに大きく依存します。クラスターがパフォーマンスのボトルネックに達した場合は、 [高度な同時書き込みのベスト プラクティス](/best-practices/high-concurrency-best-practices.md)を参照してください。
 
-- If the target TiDB cluster does not hit a write bottleneck, consider increasing the value of `region-concurrency` in TiDB Lightning configuration. The default value of `region-concurrency` is the number of CPU cores. The meaning of `region-concurrency` is different between the physical import mode and the logical import mode. In the logical import mode, `region-concurrency` is the write concurrency.
+-   ターゲットの TiDB クラスターが書き込みのボトルネックに達しない場合は、 TiDB Lightning構成で値`region-concurrency`を増やすことを検討してください。デフォルト値の`region-concurrency`は、CPU コアの数です。物理インポートモードと論理インポートモードでは、 `region-concurrency`の意味が異なります。論理インポート モードでは、 `region-concurrency`は書き込み同時実行数です。
 
-    Example configuration:
+    構成例:
 
     ```toml
     [lightning]
     region-concurrency = 32
     ```
 
-- Adjusting the `raftstore.apply-pool-size` and `raftstore.store-pool-size` configuration items in the target TiDB cluster might improve the import speed.
+-   ターゲットの TiDB クラスターで`raftstore.apply-pool-size`と`raftstore.store-pool-size`の構成項目を調整すると、インポート速度が向上する場合があります。

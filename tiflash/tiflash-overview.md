@@ -3,122 +3,122 @@ title: TiFlash Overview
 summary: Learn the architecture and key features of TiFlash.
 ---
 
-# TiFlash Overview
+# TiFlash の概要 {#tiflash-overview}
 
-[TiFlash](https://github.com/pingcap/tiflash) is the key component that makes TiDB essentially an Hybrid Transactional/Analytical Processing (HTAP) database. As a columnar storage extension of TiKV, TiFlash provides both good isolation level and strong consistency guarantee.
+[TiFlash](https://github.com/pingcap/tiflash)は、TiDB を本質的に Hybrid Transactional/Analytical Processing (HTAP) データベースにする重要なコンポーネントです。 TiKV の柱状ストレージ拡張機能として、 TiFlashは優れた分離レベルと強力な一貫性保証の両方を提供します。
 
-In TiFlash, the columnar replicas are asynchronously replicated according to the Raft Learner consensus algorithm. When these replicas are read, the Snapshot Isolation level of consistency is achieved by validating Raft index and multi-version concurrency control (MVCC).
+TiFlashでは、カラムナー レプリカはRaft Learnerコンセンサス アルゴリズムに従って非同期的に複製されます。これらのレプリカが読み取られると、 Raftインデックスとマルチバージョン同時実行制御 (MVCC) を検証することによって、一貫性のスナップショット分離レベルが達成されます。
 
 <CustomContent platform="tidb-cloud">
 
-With TiDB Cloud, you can create an HTAP cluster easily by specifying one or more TiFlash nodes according to your HTAP workload. If the TiFlash node count is not specified when you create the cluster or you want to add more TiFlash nodes, you can change the node count by [scaling the cluster](/tidb-cloud/scale-tidb-cluster.md).
+TiDB Cloudを使用すると、HTAP ワークロードに応じて 1 つ以上のTiFlashノードを指定することで、HTAP クラスターを簡単に作成できます。クラスターの作成時にTiFlashノード数が指定されていない場合、またはさらにTiFlashノードを追加する場合は、ノード数を[クラスターのスケーリング](/tidb-cloud/scale-tidb-cluster.md)ずつ変更できます。
 
 </CustomContent>
 
-## Architecture
+## アーキテクチャ {#architecture}
 
 ![TiFlash Architecture](/media/tidb-storage-architecture-1.png)
 
-The above figure is the architecture of TiDB in its HTAP form, including TiFlash nodes.
+上の図は、 TiFlashノードを含む、HTAP 形式の TiDB のアーキテクチャです。
 
-TiFlash provides the columnar storage, with a layer of coprocessors efficiently implemented by ClickHouse. Similar to TiKV, TiFlash also has a Multi-Raft system, which supports replicating and distributing data in the unit of Region (see [Data Storage](https://en.pingcap.com/blog/tidb-internal-data-storage/) for details).
+TiFlashは、ClickHouse によって効率的に実装されたコプロセッサのレイヤーを備えた柱状ストレージを提供します。 TiKV と同様に、 TiFlashにも Multi-Raft システムがあり、リージョン単位でのデータの複製と配布をサポートしています (詳細は[データストレージ](https://en.pingcap.com/blog/tidb-internal-data-storage/)を参照)。
 
-TiFlash conducts real-time replication of data in the TiKV nodes at a low cost that does not block writes in TiKV. Meanwhile, it provides the same read consistency as in TiKV and ensures that the latest data is read. The Region replica in TiFlash is logically identical to those in TiKV, and is split and merged along with the Leader replica in TiKV at the same time.
+TiFlashは、TiKV での書き込みをブロックしない低コストで、TiKV ノード内のデータのリアルタイム レプリケーションを実行します。一方、TiKV と同じ読み取り一貫性を提供し、最新のデータが読み取られるようにします。 TiFlash のリージョンレプリカは、 TiFlashのリージョン レプリカと論理的に同一であり、TiKV のLeaderレプリカと同時に分割およびマージされます。
 
-TiFlash is compatible with both TiDB and TiSpark, which enables you to freely choose between these two computing engines.
+TiFlashは TiDB と TiSpark の両方と互換性があるため、これら 2 つのコンピューティング エンジンを自由に選択できます。
 
-It is recommended that you deploy TiFlash in different nodes from TiKV to ensure workload isolation. It is also acceptable to deploy TiFlash and TiKV in the same node if no business isolation is required.
+ワークロードの分離を確実にするために、TiKV とは異なるノードにTiFlashをデプロイすることをお勧めします。ビジネスの分離が必要ない場合は、 TiFlashと TiKV を同じノードに展開することもできます。
 
-Currently, data cannot be written directly into TiFlash. You need to write data in TiKV and then replicate it to TiFlash, because it connects to the TiDB cluster as a Learner role. TiFlash supports data replication in the unit of table, but no data is replicated by default after deployment. To replicate data of a specified table, see [Create TiFlash replicas for tables](/tiflash/create-tiflash-replicas.md#create-tiflash-replicas-for-tables).
+現在、データを直接TiFlashに書き込むことはできません。 TiDB クラスターにLearnerロールとして接続するため、TiKV にデータを書き込んでからTiFlashに複製する必要があります。 TiFlashはテーブル単位でのデータ レプリケーションをサポートしますが、デプロイ後のデフォルトではデータはレプリケートされません。指定したテーブルのデータをレプリケートするには、 [テーブルのTiFlashレプリカを作成する](/tiflash/create-tiflash-replicas.md#create-tiflash-replicas-for-tables)を参照してください。
 
-TiFlash has three components: the columnar storage module, `tiflash proxy`, and `pd buddy`. `tiflash proxy` is responsible for the communication using the Multi-Raft consensus algorithm. `pd buddy` works with PD to replicate data from TiKV to TiFlash in the unit of table.
+TiFlashには、カラムナ ストレージ モジュール`tiflash proxy`と`pd buddy`の 3 つのコンポーネントがあります。 `tiflash proxy`は、Multi-Raft コンセンサス アルゴリズムを使用した通信を担当します。 `pd buddy`は PD と連携して、テーブル単位で TiKV からTiFlashにデータを複製します。
 
-When TiDB receives the DDL command to create replicas in TiFlash, the `pd buddy` component acquires the information of the table to be replicated via the status port of TiDB, and sends the information to PD. Then PD performs the corresponding data scheduling according to the information provided by `pd buddy`.
+TiDB がTiFlashにレプリカを作成する DDL コマンドを受信すると、 `pd buddy`コンポーネントは TiDB のステータス ポートを介して複製対象のテーブルの情報を取得し、その情報を PD に送信します。次に、PD は、 `pd buddy`によって提供される情報に従って、対応するデータ スケジューリングを実行します。
 
-## Key features
+## 主な機能 {#key-features}
 
-TiFlash has the following key features:
+TiFlashには次の主要な機能があります。
 
-- [Asynchronous replication](#asynchronous-replication)
-- [Consistency](#consistency)
-- [Intelligent choice](#intelligent-choice)
-- [Computing acceleration](#computing-acceleration)
+-   [非同期レプリケーション](#asynchronous-replication)
+-   [一貫性](#consistency)
+-   [賢い選択](#intelligent-choice)
+-   [コンピューティング アクセラレーション](#computing-acceleration)
 
-### Asynchronous replication
+### 非同期レプリケーション {#asynchronous-replication}
 
-The replica in TiFlash is asynchronously replicated as a special role, Raft Learner. This means when the TiFlash node is down or high network latency occurs, applications in TiKV can still proceed normally.
+TiFlashのレプリカは、特別なロールRaft Learnerとして非同期的に複製されます。これは、 TiFlashノードがダウンしたり、ネットワークレイテンシーが発生したりした場合でも、TiKV のアプリケーションは正常に続行できることを意味します。
 
-This replication mechanism inherits two advantages of TiKV: automatic load balancing and high availability.
+このレプリケーション メカニズムは、自動負荷分散と高可用性という TiKV の 2 つの利点を継承しています。
 
-- TiFlash does not rely on additional replication channels, but directly receives data from TiKV in a many-to-many manner.
-- As long as the data is not lost in TiKV, you can restore the replica in TiFlash at any time.
+-   TiFlashは、追加のレプリケーション チャネルに依存しませんが、多対多の方法で TiKV から直接データを受信します。
+-   TiKV でデータが失われない限り、いつでもTiFlashでレプリカを復元できます。
 
-### Consistency
+### 一貫性 {#consistency}
 
-TiFlash provides the same Snapshot Isolation level of consistency as TiKV, and ensures that the latest data is read, which means that you can read the data previously written in TiKV. Such consistency is achieved by validating the data replication progress.
+TiFlashは、TiKV と同じスナップショット分離レベルの一貫性を提供し、最新のデータが読み取られることを保証します。つまり、以前に TiKV に書き込まれたデータを読み取ることができます。このような一貫性は、データ レプリケーションの進行状況を検証することによって達成されます。
 
-Every time TiFlash receives a read request, the Region replica sends a progress validation request (a lightweight RPC request) to the Leader replica. TiFlash performs the read operation only after the current replication progress includes the data covered by the timestamp of the read request.
+TiFlashが読み取りリクエストを受信するたびに、リージョンレプリカは進行状況検証リクエスト (軽量の RPC リクエスト) をLeaderレプリカに送信します。 TiFlashは、現在のレプリケーションの進行状況に読み取り要求のタイムスタンプでカバーされたデータが含まれた後にのみ、読み取り操作を実行します。
 
-### Intelligent choice
+### 賢い選択 {#intelligent-choice}
 
-TiDB can automatically choose to use TiFlash (column-wise) or TiKV (row-wise), or use both of them in one query to ensure the best performance.
+TiDB は自動的にTiFlash (列方向) または TiKV (行方向) を使用するか、または 1 つのクエリで両方を使用して最高のパフォーマンスを確保するかを選択できます。
 
-This selection mechanism is similar to that of TiDB which chooses different indexes to execute query. TiDB optimizer makes the appropriate choice based on statistics of the read cost.
+この選択メカニズムは、クエリを実行するために異なるインデックスを選択する TiDB のメカニズムと似ています。 TiDB オプティマイザーは、読み取りコストの統計に基づいて適切な選択を行います。
 
-### Computing acceleration
+### コンピューティング アクセラレーション {#computing-acceleration}
 
-TiFlash accelerates the computing of TiDB in two ways:
+TiFlashは、次の 2 つの方法で TiDB のコンピューティングを高速化します。
 
-- The columnar storage engine is more efficient in performing read operation.
-- TiFlash shares part of the computing workload of TiDB.
+-   カラムナ ストレージ エンジンは、読み取り操作の実行においてより効率的です。
+-   TiFlashは、TiDB のコンピューティング ワークロードの一部を共有します。
 
-TiFlash shares the computing workload in the same way as the TiKV Coprocessor does: TiDB pushes down the computing that can be completed in the storage layer. Whether the computing can be pushed down depends on the support of TiFlash. For details, see [Supported pushdown calculations](/tiflash/tiflash-supported-pushdown-calculations.md).
+TiFlashは、TiKVCoprocessorと同じ方法でコンピューティング ワークロードを共有します。TiDB は、ストレージレイヤーで完了できるコンピューティングをプッシュ ダウンします。コンピューティングを押し下げることができるかどうかは、 TiFlashのサポートに依存します。詳細については、 [サポートされているプッシュダウン計算](/tiflash/tiflash-supported-pushdown-calculations.md)を参照してください。
 
-## Use TiFlash
+## TiFlashを使用する {#use-tiflash}
 
-After TiFlash is deployed, data replication does not automatically begin. You need to manually specify the tables to be replicated.
+TiFlashが展開された後、データの複製は自動的に開始されません。レプリケートするテーブルを手動で指定する必要があります。
 
-You can either use TiDB to read TiFlash replicas for medium-scale analytical processing, or use TiSpark to read TiFlash replicas for large-scale analytical processing, which is based on your own needs. See the following sections for details:
+TiDB を使用して中規模の分析処理用のTiFlashレプリカを読み取るか、TiSpark を使用して大規模な分析処理用のTiFlashレプリカを読み取ることができます。これは、独自のニーズに基づいています。詳細については、次のセクションを参照してください。
 
-- [Create TiFlash Replicas](/tiflash/create-tiflash-replicas.md)
-- [Use TiDB to Read TiFlash Replicas](/tiflash/use-tidb-to-read-tiflash.md)
+-   [TiFlashレプリカの作成](/tiflash/create-tiflash-replicas.md)
+-   [TiDB を使用してTiFlashレプリカを読み取る](/tiflash/use-tidb-to-read-tiflash.md)
 
 <CustomContent platform="tidb">
 
-- [Use TiSpark to Read TiFlash Replicas](/tiflash/use-tispark-to-read-tiflash.md)
+-   [TiSpark を使用してTiFlashレプリカを読み取る](/tiflash/use-tispark-to-read-tiflash.md)
 
 </CustomContent>
 
-- [Use MPP Mode](/tiflash/use-tiflash-mpp-mode.md)
+-   [MPP モードを使用する](/tiflash/use-tiflash-mpp-mode.md)
 
 <CustomContent platform="tidb">
 
-To experience the whole process from importing data to querying in a TPC-H dataset, refer to [Quick Start Guide for TiDB HTAP](/quick-start-with-htap.md).
+データのインポートから TPC-H データセットでのクエリまでのプロセス全体を体験するには、 [TiDB HTAPのクイック スタート ガイド](/quick-start-with-htap.md)を参照してください。
 
 </CustomContent>
 
-## See also
+## こちらもご覧ください {#see-also}
 
 <CustomContent platform="tidb">
 
-- To deploy a new cluster with TiFlash nodes, see [Deploy a TiDB cluster using TiUP](/production-deployment-using-tiup.md).
-- To add a TiFlash node in a deployed cluster, see [Scale out a TiFlash cluster](/scale-tidb-using-tiup.md#scale-out-a-tiflash-cluster).
-- [Maintain a TiFlash cluster](/tiflash/maintain-tiflash.md).
-- [Tune TiFlash performance](/tiflash/tune-tiflash-performance.md).
-- [Configure TiFlash](/tiflash/tiflash-configuration.md).
-- [Monitor the TiFlash cluster](/tiflash/monitor-tiflash.md).
-- Learn [TiFlash alert rules](/tiflash/tiflash-alert-rules.md).
-- [Troubleshoot a TiFlash cluster](/tiflash/troubleshoot-tiflash.md).
-- [Supported push-down calculations in TiFlash](/tiflash/tiflash-supported-pushdown-calculations.md)
-- [Data validation in TiFlash](/tiflash/tiflash-data-validation.md)
-- [TiFlash compatibility](/tiflash/tiflash-compatibility.md)
+-   TiFlashノードを使用して新しいクラスターをデプロイするには、 [TiUP を使用してTiUPクラスターをデプロイする](/production-deployment-using-tiup.md)を参照してください。
+-   デプロイされたクラスターにTiFlashノードを追加するには、 [TiFlashクラスターをスケールアウトする](/scale-tidb-using-tiup.md#scale-out-a-tiflash-cluster)を参照してください。
+-   [TiFlashクラスターを管理する](/tiflash/maintain-tiflash.md) .
+-   [TiFlashのパフォーマンスを調整する](/tiflash/tune-tiflash-performance.md) .
+-   [TiFlash の設定](/tiflash/tiflash-configuration.md) .
+-   [TiFlashクラスターを監視する](/tiflash/monitor-tiflash.md) .
+-   学ぶ[TiFlashアラート ルール](/tiflash/tiflash-alert-rules.md) 。
+-   [TiFlashクラスターのトラブルシューティング](/tiflash/troubleshoot-tiflash.md) .
+-   [TiFlashでサポートされているプッシュダウン計算](/tiflash/tiflash-supported-pushdown-calculations.md)
+-   [TiFlashでのデータ検証](/tiflash/tiflash-data-validation.md)
+-   [TiFlash の互換性](/tiflash/tiflash-compatibility.md)
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-- [Tune TiFlash performance](/tiflash/tune-tiflash-performance.md).
-- [Supported push-down calculations in TiFlash](/tiflash/tiflash-supported-pushdown-calculations.md)
-- [TiFlash compatibility](/tiflash/tiflash-compatibility.md)
+-   [TiFlashのパフォーマンスを調整する](/tiflash/tune-tiflash-performance.md) .
+-   [TiFlashでサポートされているプッシュダウン計算](/tiflash/tiflash-supported-pushdown-calculations.md)
+-   [TiFlash の互換性](/tiflash/tiflash-compatibility.md)
 
 </CustomContent>

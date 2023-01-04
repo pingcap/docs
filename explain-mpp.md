@@ -3,13 +3,13 @@ title: Explain Statements in the MPP Mode
 summary: Learn about the execution plan information returned by the EXPLAIN statement in TiDB.
 ---
 
-# Explain Statements in the MPP Mode
+# MPP モードの Explain ステートメント {#explain-statements-in-the-mpp-mode}
 
-TiDB supports using the [MPP mode](/tiflash/use-tiflash-mpp-mode.md) to execute queries. In the MPP mode, the TiDB optimizer generates execution plans for MPP. Note that the MPP mode is only available for tables that have replicas on [TiFlash](/tiflash/tiflash-overview.md).
+TiDB は、 [MPP モード](/tiflash/use-tiflash-mpp-mode.md)を使用してクエリを実行することをサポートしています。 MPP モードでは、TiDB オプティマイザーが MPP の実行計画を生成します。 MPP モードは、レプリカが[TiFlash](/tiflash/tiflash-overview.md)にあるテーブルでのみ使用できることに注意してください。
 
-The examples in this document are based on the following sample data:
+このドキュメントの例は、次のサンプル データに基づいています。
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 CREATE TABLE t1 (id int, value int);
@@ -19,25 +19,25 @@ ANALYZE TABLE t1;
 SET tidb_allow_mpp = 1;
 ```
 
-## MPP query fragments and MPP tasks
+## MPP クエリ フラグメントと MPP タスク {#mpp-query-fragments-and-mpp-tasks}
 
-In the MPP mode, a query is logically sliced into multiple query fragments. Take the following statement as an example:
+MPP モードでは、クエリは複数のクエリ フラグメントに論理的にスライスされます。例として、次のステートメントを取り上げます。
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 EXPLAIN SELECT COUNT(*) FROM t1 GROUP BY id;
 ```
 
-This query is divided into two fragments in the MPP mode. One for the first-stage aggregation and the other for the second-stage aggregation, also the final aggregation. When this query is executed, each query fragment is instantiated into one or more MPP tasks.
+このクエリは、MPP モードで 2 つのフラグメントに分割されます。 1 つは第 1 段階の集計用で、もう 1 つは第 2 段階の集計用であり、最終的な集計でもあります。このクエリが実行されると、各クエリ フラグメントが 1 つ以上の MPP タスクにインスタンス化されます。
 
-## Exchange operators
+## 交換業者 {#exchange-operators}
 
-`ExchangeReceiver` and `ExchangeSender`are two exchange operators specific for MPP execution plans. The `ExchangeReceiver` operator reads data from downstream query fragments and the `ExchangeSender` operator sends data from downstream query fragments to upstream query fragments. In the MPP mode, the root operator of each MPP query fragment is `ExchangeSender`, meaning that query fragments are delimited by the `ExchangeSender` operator.
+`ExchangeReceiver`と`ExchangeSender`は、MPP 実行計画に固有の 2 つの交換演算子です。 `ExchangeReceiver`オペレーターはダウンストリーム クエリ フラグメントからデータを読み取り、 `ExchangeSender`オペレーターはダウンストリーム クエリ フラグメントからアップストリーム クエリ フラグメントにデータを送信します。 MPP モードでは、各 MPP クエリ フラグメントのルート演算子は`ExchangeSender`です。これは、クエリ フラグメントが`ExchangeSender`演算子で区切られていることを意味します。
 
-The following is a simple MPP execution plan:
+以下は、単純な MPP 実行計画です。
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 EXPLAIN SELECT COUNT(*) FROM t1 GROUP BY id;
@@ -58,27 +58,27 @@ EXPLAIN SELECT COUNT(*) FROM t1 GROUP BY id;
 +------------------------------------+---------+-------------------+---------------+----------------------------------------------------+
 ```
 
-The above execution plan contains two query fragments:
+上記の実行計画には、次の 2 つのクエリ フラグメントが含まれています。
 
-* The first is `[TableFullScan_25, HashAgg_9, ExchangeSender_28]`, which is mainly responsible for the first-stage aggregation.
-* The second is `[ExchangeReceiver_29, HashAgg_27, Projection_26, ExchangeSender_30]`, which is mainly responsible for the second-stage aggregation.
+-   1 つ目は`[TableFullScan_25, HashAgg_9, ExchangeSender_28]`で、主に第 1 段階の集計を担当します。
+-   2 番目は`[ExchangeReceiver_29, HashAgg_27, Projection_26, ExchangeSender_30]`で、これは主に第 2 段階の集計を担当します。
 
-The `operator info` column of the `ExchangeSender` operator shows the exchange type information. Currently, there are three exchange types. See the following:
+`ExchangeSender`演算子の`operator info`列は、交換タイプ情報を示します。現在、3つの交換タイプがあります。以下を参照してください。
 
-* HashPartition: The `ExchangeSender` operator firstly partitions data according to the Hash values and then distributes data to the `ExchangeReceiver` operator of upstream MPP tasks. This exchange type is often used for Hash Aggregation and Shuffle Hash Join algorithms.
-* Broadcast: The `ExchangeSender` operator distributes data to upstream MPP tasks through broadcast. This exchange type is often used for Broadcast Join.
-* PassThrough: The `ExchangeSender` operator sends data to the only upstream MPP task, which is different from the Broadcast type. This exchange type is often used when returning data to TiDB.
+-   HashPartition: `ExchangeSender`オペレーターは、最初にハッシュ値に従ってデータを分割し、次に上流の MPP タスクの`ExchangeReceiver`オペレーターにデータを分配します。この交換タイプは、ハッシュ集計およびシャッフル ハッシュ結合アルゴリズムによく使用されます。
+-   ブロードキャスト: `ExchangeSender`オペレーターは、ブロードキャストを介して上流の MPP タスクにデータを配布します。この交換タイプは、Broadcast Join によく使用されます。
+-   PassThrough: `ExchangeSender`オペレーターは、ブロードキャスト タイプとは異なる唯一のアップストリーム MPP タスクにデータを送信します。この交換タイプは、データを TiDB に返すときによく使用されます。
 
-In the example execution plan, the exchange type of the operator `ExchangeSender_28` is HashPartition, meaning that it performs the Hash Aggregation algorithm. The exchange type of the operator `ExchangeSender_30` is PassThrough, meaning that it is used to return data to TiDB.
+実行計画の例では、オペレーター`ExchangeSender_28`の交換タイプは HashPartition であり、ハッシュ集計アルゴリズムを実行することを意味します。オペレータ`ExchangeSender_30`の交換タイプは PassThrough で、TiDB にデータを返すために使用されます。
 
-MPP is also often applied to join operations. The MPP mode in TiDB supports the following two join algorithms:
+MPP は結合操作にもよく適用されます。 TiDB の MPP モードは、次の 2 つの結合アルゴリズムをサポートしています。
 
-* Shuffle Hash Join: Shuffle the data input from the join operation using the HashPartition exchange type. Then, upstream MPP tasks join data within the same partition.
-* Broadcast Join: Broadcast data of the small table in the join operation to each node, after which each node joins the data separately.
+-   Shuffle Hash Join: HashPartition 交換タイプを使用して、結合操作からのデータ入力をシャッフルします。次に、上流の MPP タスクが同じパーティション内のデータを結合します。
+-   ブロードキャスト結合: 結合操作で小さなテーブルのデータを各ノードにブロードキャストし、その後、各ノードがデータを個別に結合します。
 
-The following is a typical execution plan for Shuffle Hash Join:
+以下は、シャッフル ハッシュ結合の一般的な実行計画です。
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 SET tidb_broadcast_join_threshold_count=0;
@@ -106,15 +106,15 @@ EXPLAIN SELECT COUNT(*) FROM t1 a JOIN t1 b ON a.id = b.id;
 12 rows in set (0.00 sec)
 ```
 
-In the above execution plan:
+上記の実行計画では:
 
-* The query fragment `[TableFullScan_20, Selection_21, ExchangeSender_22]` reads data from table b and shuffles data to upstream MPP tasks.
-* The query fragment `[TableFullScan_16, Selection_17, ExchangeSender_18]` reads data from table a and shuffles data to upstream MPP tasks.
-* The query fragment `[ExchangeReceiver_19, ExchangeReceiver_23, HashJoin_44, ExchangeSender_47]` joins all data and returns it to TiDB.
+-   クエリ フラグメント`[TableFullScan_20, Selection_21, ExchangeSender_22]`は、テーブル b からデータを読み取り、上流の MPP タスクにデータをシャッフルします。
+-   クエリ フラグメント`[TableFullScan_16, Selection_17, ExchangeSender_18]`は、テーブル a からデータを読み取り、上流の MPP タスクにデータをシャッフルします。
+-   クエリ フラグメント`[ExchangeReceiver_19, ExchangeReceiver_23, HashJoin_44, ExchangeSender_47]`は、すべてのデータを結合して TiDB に返します。
 
-A typical execution plan for Broadcast Join is as follows:
+ブロードキャスト ジョインの一般的な実行計画は次のとおりです。
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 EXPLAIN SELECT COUNT(*) FROM t1 a JOIN t1 b ON a.id = b.id;
@@ -137,18 +137,18 @@ EXPLAIN SELECT COUNT(*) FROM t1 a JOIN t1 b ON a.id = b.id;
 +----------------------------------------+---------+--------------+---------------+------------------------------------------------+
 ```
 
-In the above execution plan:
+上記の実行計画では:
 
-* The query fragment `[TableFullScan_17, Selection_18, ExchangeSender_19]` reads data from the small table (table a) and broadcasts the data to each node that contains data from the large table (table b).
-* The query fragment `[TableFullScan_21, Selection_22, ExchangeReceiver_20, HashJoin_43, ExchangeSender_46]` joins all data and returns it to TiDB.
+-   クエリ フラグメント`[TableFullScan_17, Selection_18, ExchangeSender_19]`は、小さなテーブル (テーブル a) からデータを読み取り、大きなテーブル (テーブル b) からのデータを含む各ノードにデータをブロードキャストします。
+-   クエリ フラグメント`[TableFullScan_21, Selection_22, ExchangeReceiver_20, HashJoin_43, ExchangeSender_46]`は、すべてのデータを結合して TiDB に返します。
 
-## `EXPLAIN ANALYZE` statements in the MPP mode
+## MPP モードでの<code>EXPLAIN ANALYZE</code>ステートメント {#code-explain-analyze-code-statements-in-the-mpp-mode}
 
-The `EXPLAIN ANALYZE` statement is similar to `EXPLAIN`, but it also outputs some runtime information.
+`EXPLAIN ANALYZE`ステートメントは`EXPLAIN`に似ていますが、ランタイム情報も出力します。
 
-The following is the output of a simple `EXPLAIN ANALYZE` example:
+以下は、単純な`EXPLAIN ANALYZE`の例の出力です。
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 EXPLAIN ANALYZE SELECT COUNT(*) FROM t1 GROUP BY id;
@@ -169,4 +169,4 @@ EXPLAIN ANALYZE SELECT COUNT(*) FROM t1 GROUP BY id;
 +------------------------------------+---------+---------+-------------------+---------------+---------------------------------------------------------------------------------------------------+----------------------------------------------------------------+--------+------+
 ```
 
-Compared to the output of `EXPLAIN`, the `operator info` column of the operator `ExchangeSender` also shows `tasks`, which records the id of the MPP task that the query fragment instantiates into. In addition, each MPP operator has a `threads` field in the `execution info` column, which records the concurrency of operations when TiDB executes this operator. If the cluster consists of multiple nodes, this concurrency is the result of adding up the concurrency of all nodes.
+`EXPLAIN`の出力と比較すると、演算子`ExchangeSender`の`operator info`列にも`tasks`が表示されます。これは、クエリ フラグメントがインスタンス化される MPP タスクの ID を記録します。さらに、各 MPP オペレーターには`execution info`列に`threads`フィールドがあり、TiDB がこのオペレーターを実行するときの操作の並行性を記録します。クラスターが複数のノードで構成されている場合、この同時実行数は、すべてのノードの同時実行数を合計した結果です。

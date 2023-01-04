@@ -3,124 +3,124 @@ title: ADMIN | TiDB SQL Statement Reference
 summary: An overview of the usage of ADMIN for the TiDB database.
 ---
 
-# ADMIN
+# 管理者 {#admin}
 
-This statement is a TiDB extension syntax, used to view the status of TiDB and check the data of tables in TiDB. This document introduces the following `ADMIN` related statements:
+このステートメントは TiDB 拡張構文であり、TiDB のステータスを表示し、TiDB 内のテーブルのデータを確認するために使用されます。このドキュメントでは、次の`ADMIN`の関連ステートメントを紹介します。
 
-- [`ADMIN RELOAD`](#admin-reload-statement)
-- [`ADMIN PLUGINS`](#admin-plugins-related-statement)
-- [`ADMIN ... BINDINGS`](#admin-bindings-related-statement)
-- [`ADMIN REPAIR`](#admin-repair-statement)
-- [`ADMIN SHOW SLOW`](#admin-show-slow-statement)
+-   [`ADMIN RELOAD`](#admin-reload-statement)
+-   [`ADMIN PLUGINS`](#admin-plugins-related-statement)
+-   [`ADMIN ... BINDINGS`](#admin-bindings-related-statement)
+-   [`ADMIN REPAIR`](#admin-repair-statement)
+-   [`ADMIN SHOW SLOW`](#admin-show-slow-statement)
 
-## DDL related statement
+## DDL 関連ステートメント {#ddl-related-statement}
 
 <CustomContent platform="tidb-cloud">
 
-| Statement                                                                                | Description                 |
-|------------------------------------------------------------------------------------------|-----------------------------|
-| [`ADMIN CANCEL DDL JOBS`](/sql-statements/sql-statement-admin-cancel-ddl.md)             | Cancels a currently running DDL jobs. |
-| [`ADMIN CHECKSUM TABLE`](/sql-statements/sql-statement-admin-checksum-table.md)          | Calculates the CRC64 of all rows + indexes of a table. |
-| [<code>ADMIN CHECK [TABLE\|INDEX]</code>](/sql-statements/sql-statement-admin-check-table-index.md) | Checks for consistency of a table or index. |
-| [<code>ADMIN SHOW DDL [JOBS\|QUERIES]</code>](/sql-statements/sql-statement-admin-show-ddl.md)      | Shows details about currently running or recently completed DDL jobs. |
+| 声明                                                                                      | 説明                                 |
+| --------------------------------------------------------------------------------------- | ---------------------------------- |
+| [`ADMIN CANCEL DDL JOBS`](/sql-statements/sql-statement-admin-cancel-ddl.md)            | 現在実行中の DDL ジョブをキャンセルします。           |
+| [`ADMIN CHECKSUM TABLE`](/sql-statements/sql-statement-admin-checksum-table.md)         | テーブルのすべての行 + インデックスの CRC64 を計算します。 |
+| [`ADMIN CHECK [TABLE|INDEX]`](/sql-statements/sql-statement-admin-check-table-index.md) | テーブルまたはインデックスの整合性をチェックします。         |
+| [`ADMIN SHOW DDL [JOBS|QUERIES]`](/sql-statements/sql-statement-admin-show-ddl.md)      | 現在実行中または最近完了した DDL ジョブの詳細を表示します。   |
 
 </CustomContent>
 
 <CustomContent platform="tidb">
 
-| Statement                                                                                | Description                 |
-|------------------------------------------------------------------------------------------|-----------------------------|
-| [`ADMIN CANCEL DDL JOBS`](/sql-statements/sql-statement-admin-cancel-ddl.md)             | Cancels a currently running DDL jobs. |
-| [`ADMIN CHECKSUM TABLE`](/sql-statements/sql-statement-admin-checksum-table.md)          | Calculates the CRC64 of all rows + indexes of a table. |
-| [<code>ADMIN CHECK [TABLE\|INDEX]</code>](/sql-statements/sql-statement-admin-check-table-index.md) | Checks for consistency of a table or index. |
-| [<code>ADMIN SHOW DDL [JOBS\|QUERIES]</code>](/sql-statements/sql-statement-admin-show-ddl.md)      | Shows details about currently running or recently completed DDL jobs. |
-| [`ADMIN SHOW TELEMETRY`](/sql-statements/sql-statement-admin-show-telemetry.md)      | Shows information that will be reported back to PingCAP as part of the telemetry feature. |
+| 声明                                                                                      | 説明                                   |
+| --------------------------------------------------------------------------------------- | ------------------------------------ |
+| [`ADMIN CANCEL DDL JOBS`](/sql-statements/sql-statement-admin-cancel-ddl.md)            | 現在実行中の DDL ジョブをキャンセルします。             |
+| [`ADMIN CHECKSUM TABLE`](/sql-statements/sql-statement-admin-checksum-table.md)         | テーブルのすべての行 + インデックスの CRC64 を計算します。   |
+| [`ADMIN CHECK [TABLE|INDEX]`](/sql-statements/sql-statement-admin-check-table-index.md) | テーブルまたはインデックスの整合性をチェックします。           |
+| [`ADMIN SHOW DDL [JOBS|QUERIES]`](/sql-statements/sql-statement-admin-show-ddl.md)      | 現在実行中または最近完了した DDL ジョブの詳細を表示します。     |
+| [`ADMIN SHOW TELEMETRY`](/sql-statements/sql-statement-admin-show-telemetry.md)         | テレメトリ機能の一部として PingCAP に報告される情報を示します。 |
 
 </CustomContent>
 
-## `ADMIN RELOAD` statement
+## <code>ADMIN RELOAD</code>ステートメント {#code-admin-reload-code-statement}
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 ADMIN RELOAD expr_pushdown_blacklist;
 ```
 
-The above statement is used to reload the blocklist pushed down by the expression.
+上記のステートメントは、式によってプッシュされたブロックリストをリロードするために使用されます。
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 ADMIN RELOAD opt_rule_blacklist;
 ```
 
-The above statement is used to reload the blocklist of logic optimization rules.
+上記のステートメントは、ロジック最適化ルールのブロックリストをリロードするために使用されます。
 
-## `ADMIN PLUGINS` related statement
+## <code>ADMIN PLUGINS</code>関連ステートメント {#code-admin-plugins-code-related-statement}
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 ADMIN PLUGINS ENABLE plugin_name [, plugin_name] ...;
 ```
 
-The above statement is used to enable the `plugin_name` plugin.
+上記のステートメントは、 `plugin_name`プラグインを有効にするために使用されます。
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 ADMIN PLUGINS DISABLE plugin_name [, plugin_name] ...;
 ```
 
-The above statement is used to disable the `plugin_name` plugin.
+上記のステートメントは、 `plugin_name`プラグインを無効にするために使用されます。
 
-## `ADMIN BINDINGS` related statement
+## <code>ADMIN BINDINGS</code>関連ステートメント {#code-admin-bindings-code-related-statement}
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 ADMIN FLUSH BINDINGS;
 ```
 
-The above statement is used to persist SQL Plan binding information.
+上記のステートメントは、SQL Plan バインディング情報を保持するために使用されます。
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 ADMIN CAPTURE BINDINGS;
 ```
 
-The above statement can generate the binding of SQL Plan from the `SELECT` statement that occurs more than once.
+上記のステートメントは、複数回出現する`SELECT`のステートメントから SQL Plan のバインドを生成できます。
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 ADMIN EVOLVE BINDINGS;
 ```
 
-After the automatic binding feature is enabled, the evolution of SQL Plan binding information is triggered every `bind-info-leave` (the default value is `3s`). The above statement is used to proactively trigger this evolution.
+自動バインディング機能が有効になると、SQL計画バインディング情報の展開が`bind-info-leave`ごとにトリガーされます(デフォルト値は`3s`です)。上記のステートメントは、この進化を積極的にトリガーするために使用されます。
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 ADMIN RELOAD BINDINGS;
 ```
 
-The above statement is used to reload SQL Plan binding information.
+上記のステートメントは、SQL 計画バインディング情報を再ロードするために使用されます。
 
-## `ADMIN REPAIR` statement
+## <code>ADMIN REPAIR</code>ステートメント {#code-admin-repair-code-statement}
 
 <CustomContent platform="tidb-cloud">
 
-> **Note:**
+> **ノート：**
 >
-> This TiDB statement is not applicable to TiDB Cloud.
+> この TiDB ステートメントはTiDB Cloudには適用されません。
 
 </CustomContent>
 
-To overwrite the metadata of the stored table in an untrusted way in extreme cases, use `ADMIN REPAIR TABLE`:
+極端な場合に、格納されたテーブルのメタデータを信頼できない方法で上書きするには、 `ADMIN REPAIR TABLE`を使用します。
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 ADMIN REPAIR TABLE tbl_name CREATE TABLE STATEMENT;
@@ -128,19 +128,19 @@ ADMIN REPAIR TABLE tbl_name CREATE TABLE STATEMENT;
 
 <CustomContent platform="tidb">
 
-Here "untrusted" means that you need to manually ensure that the metadata of the original table can be covered by the `CREATE TABLE STATEMENT` operation. To use this `REPAIR` statement, enable the [`repair-mode`](/tidb-configuration-file.md#repair-mode) configuration item, and make sure that the tables to be repaired are listed in the [`repair-table-list`](/tidb-configuration-file.md#repair-table-list).
+ここで「信頼できない」とは、元のテーブルのメタデータが`CREATE TABLE STATEMENT`の操作でカバーできることを手動で確認する必要があることを意味します。この`REPAIR`ステートメントを使用するには、 [`repair-mode`](/tidb-configuration-file.md#repair-mode)構成項目を有効にし、修復するテーブルが[`repair-table-list`](/tidb-configuration-file.md#repair-table-list)にリストされていることを確認します。
 
 </CustomContent>
 
-## `ADMIN SHOW SLOW` statement
+## <code>ADMIN SHOW SLOW</code>ステートメント {#code-admin-show-slow-code-statement}
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 ADMIN SHOW SLOW RECENT N;
 ```
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 ADMIN SHOW SLOW TOP [INTERNAL | ALL] N;
@@ -148,22 +148,22 @@ ADMIN SHOW SLOW TOP [INTERNAL | ALL] N;
 
 <CustomContent platform="tidb">
 
-For details, refer to [admin show slow statement](/identify-slow-queries.md#admin-show-slow-command)
+詳細は[管理者は遅いステートメントを表示します](/identify-slow-queries.md#admin-show-slow-command)参照
 
 </CustomContent>
 
-## Synopsis
+## あらすじ {#synopsis}
 
 ```ebnf+diagram
 AdminStmt ::=
     'ADMIN' ( 'SHOW' ( 'DDL' ( 'JOBS' Int64Num? WhereClauseOptional | 'JOB' 'QUERIES' NumList )? | TableName 'NEXT_ROW_ID' | 'SLOW' AdminShowSlow ) | 'CHECK' ( 'TABLE' TableNameList | 'INDEX' TableName Identifier ( HandleRange ( ',' HandleRange )* )? ) | 'RECOVER' 'INDEX' TableName Identifier | 'CLEANUP' ( 'INDEX' TableName Identifier | 'TABLE' 'LOCK' TableNameList ) | 'CHECKSUM' 'TABLE' TableNameList | 'CANCEL' 'DDL' 'JOBS' NumList | 'RELOAD' ( 'EXPR_PUSHDOWN_BLACKLIST' | 'OPT_RULE_BLACKLIST' | 'BINDINGS' ) | 'PLUGINS' ( 'ENABLE' | 'DISABLE' ) PluginNameList | 'REPAIR' 'TABLE' TableName CreateTableStmt | ( 'FLUSH' | 'CAPTURE' | 'EVOLVE' ) 'BINDINGS' )
 ```
 
-## Examples
+## 例 {#examples}
 
-Run the following command to view the last 10 completed DDL jobs in the currently running DDL job queue. When `NUM` is not specified, only the last 10 completed DDL jobs is presented by default.
+次のコマンドを実行して、現在実行中の DDL ジョブ キューで完了した最新の 10 個の DDL ジョブを表示します。 `NUM`が指定されていない場合、デフォルトでは、完了した最後の 10 個の DDL ジョブのみが表示されます。
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 ADMIN SHOW DDL JOBS;
@@ -187,9 +187,9 @@ ADMIN SHOW DDL JOBS;
 +--------+---------+------------+---------------------+----------------+-----------+----------+-----------+-----------------------------------+-----------------------------------+---------------+
 ```
 
-Run the following command to view the last 5 completed DDL jobs in the currently running DDL job queue:
+次のコマンドを実行して、現在実行中の DDL ジョブ キューで完了した最後の 5 つの DDL ジョブを表示します。
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 ADMIN SHOW DDL JOBS 5;
@@ -208,9 +208,9 @@ ADMIN SHOW DDL JOBS 5;
 +--------+---------+------------+---------------------+----------------+-----------+----------+-----------+-----------------------------------+-----------------------------------+---------------+
 ```
 
-Run the following command to view the uncompleted DDL jobs in the test database. The results include the DDL jobs that are running and the last 5 DDL jobs that are completed but failed.
+次のコマンドを実行して、テスト データベース内の未完了の DDL ジョブを表示します。結果には、実行中の DDL ジョブと、完了したが失敗した最後の 5 つの DDL ジョブが含まれます。
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 ADMIN SHOW DDL JOBS 5 WHERE state != 'synced' AND db_name = 'test';
@@ -225,27 +225,27 @@ ADMIN SHOW DDL JOBS 5 WHERE state != 'synced' AND db_name = 'test';
 +--------+---------+------------+---------------------+----------------+-----------+----------+-----------+-----------------------------------+-----------------------------------+---------------+
 ```
 
-* `JOB_ID`: each DDL operation corresponds to one DDL job. `JOB_ID` is globally unique.
-* `DB_NAME`: the name of the database on which the DDL operations are performed.
-* `TABLE_NAME`: the name of the table on which the DDL operations are performed.
-* `JOB_TYPE`: the type of the DDL operations.
-* `SCHEMA_STATE`: the current state of the schema. If the `JOB_TYPE` is `add index`, it is the state of the index; if the `JOB_TYPE` is `add column`, it is the state of the column; if the `JOB_TYPE` is `create table`, it is the state of the table. The common states include:
-    * `none`: it indicates not existing. When the `drop` or `create` operation fails and rolls back, it usually becomes the `none` state.
-    * `delete only`, `write only`, `delete reorganization`, `write reorganization`: these four states are intermediate states. These states are not visible in common operations, because the conversion from the intermediate states is so quick. You can see the `write reorganization` state only in `add index` operations, which means that the index data is being added.
-    * `public`: it indicates existing and usable. When operations like `create table` and `add index/column` are finished, it usually becomes the `public` state, which means that the created table/column/index can be normally read and written now.
-* `SCHEMA_ID`: the ID of the database on which the DDL operations are performed.
-* `TABLE_ID`: the ID of the table on which the DDL operations are performed.
-* `ROW_COUNT`: the number of the data rows that have been added when running the `add index` operation.
-* `START_TIME`: the start time of the DDL operations.
-* `END_TIME`: the end time of the DDL operations.
-* `STATE`: the state of the DDL operations. The common states include:
-    * `none`: it indicates that the operation task has been put in the DDL job queue but has not been performed yet, because it is waiting for the previous tasks to complete. Another reason might be that it becomes the `none` state after running the drop operation, but it will soon be updated to the `synced` state, which means that all TiDB instances have been synced to this state.
-    * `running`: it indicates that the operation is being performed.
-    * `synced`: it indicates that the operation has been performed successfully and all TiDB instances have been synced to this state.
-    * `rollback done`: it indicates that the operation has failed and has finished rolling back.
-    * `rollingback`: it indicates that the operation has failed and is rolling back.
-    * `cancelling`: it indicates that the operation is being cancelled. This state only occurs when you cancel DDL jobs using the `ADMIN CANCEL DDL JOBS` command.
+-   `JOB_ID` : 各 DDL 操作は 1 つの DDL ジョブに対応します。 `JOB_ID`は世界的にユニークです。
+-   `DB_NAME` : DDL 操作が実行されるデータベースの名前。
+-   `TABLE_NAME` : DDL 操作が実行されるテーブルの名前。
+-   `JOB_TYPE` : DDL 操作のタイプ。
+-   `SCHEMA_STATE` : スキーマの現在の状態。 `JOB_TYPE`が`add index`の場合、それはインデックスの状態です。 `JOB_TYPE`が`add column`の場合、それは列の状態です。 `JOB_TYPE`が`create table`の場合、それはテーブルの状態です。一般的な状態には次のものがあります。
+    -   `none` : 存在しないことを示します。 `drop`または`create`の操作が失敗してロールバックすると、通常は`none`の状態になります。
+    -   `delete only` 、 `write only` 、 `delete reorganization` 、 `write reorganization` : これら 4 つの状態は中間状態です。これらの状態は、中間状態からの変換が非常に迅速であるため、一般的な操作では表示されません。 `write reorganization`の状態は`add index`の操作でのみ確認できます。これは、インデックス データが追加されていることを意味します。
+    -   `public` : 既存で使用可能であることを示します。 `create table`と`add index/column`のような操作が完了すると、通常は`public`の状態になります。これは、作成されたテーブル/列/インデックスが正常に読み書きできるようになったことを意味します。
+-   `SCHEMA_ID` : DDL 操作が実行されるデータベースの ID。
+-   `TABLE_ID` : DDL 操作が実行されるテーブルの ID。
+-   `ROW_COUNT` : `add index`操作の実行時に追加されたデータ行の数。
+-   `START_TIME` : DDL 操作の開始時刻。
+-   `END_TIME` : DDL 操作の終了時刻。
+-   `STATE` : DDL 操作の状態。一般的な状態には次のものがあります。
+    -   `none` : 操作タスクが DDL ジョブ キューに入れられましたが、前のタスクが完了するのを待っているため、まだ実行されていないことを示します。もう 1 つの理由は、ドロップ操作を実行した後に`none`の状態になる可能性がありますが、すぐに`synced`の状態に更新されます。これは、すべての TiDB インスタンスがこの状態に同期されたことを意味します。
+    -   `running` : 操作が実行されていることを示します。
+    -   `synced` : 操作が正常に実行され、すべての TiDB インスタンスがこの状態に同期されたことを示します。
+    -   `rollback done` : 操作が失敗し、ロールバックが完了したことを示します。
+    -   `rollingback` : 操作が失敗し、ロールバックしていることを示します。
+    -   `cancelling` : 操作がキャンセル中であることを示します。この状態は、 `ADMIN CANCEL DDL JOBS`コマンドを使用して DDL ジョブをキャンセルした場合にのみ発生します。
 
-## MySQL compatibility
+## MySQL の互換性 {#mysql-compatibility}
 
-This statement is a TiDB extension to MySQL syntax.
+このステートメントは、MySQL 構文に対する TiDB 拡張です。

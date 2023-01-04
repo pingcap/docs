@@ -3,36 +3,36 @@ title: Avoid Implicit Type Conversions
 summary: Introduces the possible consequences of implicit type conversions in TiDB and ways to avoid them.
 ---
 
-# Avoid Implicit Type Conversions
+# 暗黙の型変換を避ける {#avoid-implicit-type-conversions}
 
-This document introduces the rules and possible consequences of implicit type conversions in TiDB and how to avoid implicit type conversions.
+このドキュメントでは、TiDB での暗黙的な型変換のルールと考えられる結果、および暗黙的な型変換を回避する方法を紹介します。
 
-## Conversion rules
+## 変換規則 {#conversion-rules}
 
-When the data types on the two sides of the predicate in a SQL statement do not match, TiDB implicitly convert the data types on one or both sides to a compatible data type for predicate operations.
+SQL ステートメントの述語の両側のデータ型が一致しない場合、TiDB は一方または両方の側のデータ型を述語操作用の互換性のあるデータ型に暗黙的に変換します。
 
-The rules for implicit type conversion in TiDB are as follows:
+TiDB での暗黙的な型変換のルールは次のとおりです。
 
-- If one or both arguments are `NULL`, the result of the comparison is `NULL`. The NULL-safe `<=>` equivalent comparison operator does not require conversion, because NULL `<=>` NULL results in `true`.
-- If both arguments in the comparison operation are strings, they are compared as strings.
-- If both arguments are integers, they are compared as integers.
-- If no comparison is made with numbers, the hexadecimal value is treated as a binary string.
-- If one of the arguments is a decimal value, the comparison depends on the other argument. If the other argument is a decimal or integer value, the argument is compared with the decimal value. If the other argument is a floating-point value, the argument is compared with the floating-point value.
-- If one of the arguments is a `TIMESTAMP` or `DATETIME` column and the other argument is a constant, the constant is converted to a timestamp before the comparison is performed.
-- In all other cases, the arguments are compared as floating-point numbers (the `DOUBLE` type).
+-   一方または両方の引数が`NULL`の場合、比較の結果は`NULL`です。 NULL `<=>` NULL は`true`になるため、NULL セーフな`<=>`同等の比較演算子は変換を必要としません。
+-   比較演算の両方の引数が文字列の場合、それらは文字列として比較されます。
+-   両方の引数が整数の場合、それらは整数として比較されます。
+-   数値との比較が行われない場合、16 進値はバイナリ文字列として扱われます。
+-   引数の 1 つが 10 進数値の場合、比較は他の引数に依存します。他の引数が 10 進数または整数値の場合、引数は 10 進数値と比較されます。他の引数が浮動小数点値の場合、引数は浮動小数点値と比較されます。
+-   引数の 1 つが 1 列または`DATETIME`列で、もう`TIMESTAMP`つの引数が定数の場合、定数は比較が実行される前にタイムスタンプに変換されます。
+-   それ以外の場合、引数は浮動小数点数 ( `DOUBLE`型) として比較されます。
 
-## Consequences caused by implicit type conversion
+## 暗黙の型変換による結果 {#consequences-caused-by-implicit-type-conversion}
 
-Implicit type conversions increase the usability of human-computer interaction. However, avoid using implicit type conversions in application code, because they might lead to the following issues:
+暗黙的な型変換により、人間とコンピューターの対話の使いやすさが向上します。ただし、アプリケーション コードで暗黙的な型変換を使用しないでください。次の問題が発生する可能性があります。
 
-- Index invalidity
-- Loss of precision
+-   索引の無効性
+-   精度の低下
 
-### Index invalidity
+### 索引の無効性 {#index-invalidity}
 
-In the following case, `account_id` is the primary key and its data type is `varchar`. In the execution plan, this SQL statement has an implicit type conversion and cannot use the index.
+次の場合、 `account_id`が主キーで、そのデータ型は`varchar`です。実行計画では、この SQL ステートメントには暗黙的な型変換があり、インデックスを使用できません。
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 DESC SELECT * FROM `account` WHERE `account_id`=6010000000009801;
@@ -46,13 +46,13 @@ DESC SELECT * FROM `account` WHERE `account_id`=6010000000009801;
 3 rows in set (0.00 sec)
 ```
 
-**Brief description of run results**: From the above execution plan, the `Cast` operator is visible.
+**実行結果の簡単な説明**: 上記の実行計画から、 `Cast`演算子が表示されます。
 
-### Loss of precision
+### 精度の低下 {#loss-of-precision}
 
-In the following case, the data type of the `a` field is `decimal(32,0)`. In the execution plan, an implicit type conversion occurs, and both the decimal field and the string constant are converted to the double type. Because the precision of the double type is not as high as decimal, there is a loss of precision. In this case, the SQL statement incorrectly filters the result set out of range.
+次の場合、 `a`フィールドのデータ型は`decimal(32,0)`です。実行計画では、暗黙的な型変換が発生し、decimal フィールドと文字列定数の両方が double 型に変換されます。 double 型の精度は decimal ほど高くないため、精度が失われます。この場合、SQL ステートメントは結果セットを範囲外に誤ってフィルター処理します。
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 DESC SELECT * FROM `t1` WHERE `a` BETWEEN '12123123' AND '1111222211111111200000';
@@ -66,9 +66,9 @@ DESC SELECT * FROM `t1` WHERE `a` BETWEEN '12123123' AND '1111222211111111200000
 3 rows in set (0.00 sec)
 ```
 
-**Brief description of run results**: From the above execution plan, the `Cast` operator is visible.
+**実行結果の簡単な説明**: 上記の実行計画から、 `Cast`演算子が表示されます。
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 SELECT * FROM `t1` WHERE `a` BETWEEN '12123123' AND '1111222211111111200000';
@@ -81,4 +81,4 @@ SELECT * FROM `t1` WHERE `a` BETWEEN '12123123' AND '1111222211111111200000';
 
 ```
 
-**Brief description of run results**: The above execution gives a wrong result.
+**実行結果の簡単な説明**: 上記の実行は間違った結果をもたらします。

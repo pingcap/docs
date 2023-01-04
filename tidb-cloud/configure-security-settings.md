@@ -3,20 +3,22 @@ title: Configure Cluster Security Settings
 summary: Learn how to configure the root password and allowed IP addresses to connect to your cluster.
 ---
 
-# Configure Cluster Security Settings
+# クラスタセキュリティ設定の構成 {#configure-cluster-security-settings}
 
-When you create a cluster, the TiDB Cloud console will automatically guide you to configure the root password and allowed IP addresses to connect to your cluster.
+クラスターを作成すると、 TiDB Cloudコンソールは、クラスターに接続するための root パスワードと許可された IP アドレスを構成するように自動的に案内します。
 
-If you do not configure the root password or allowed IP addresses at that time, or if you want to modify the cluster security settings, take the following steps:
+その時点で root パスワードまたは許可された IP アドレスを構成しない場合、またはクラスターのセキュリティ設定を変更する場合は、次の手順を実行します。
 
-1. In the TiDB Cloud console, navigate to the **Clusters** page of your project.
-2. Locate your cluster, and click **Security Settings** in the upper-right corner of the cluster area. The **Security Settings** dialog is displayed.
-3. In the dialog, configure the root password and allowed IP addresses.
+1.  TiDB Cloudコンソールで、プロジェクトの [**クラスター**] ページに移動します。
 
-    To allow your cluster to be accessible by any IP addresses, click **Allow Access from Anywhere**.
+2.  クラスターを見つけて、クラスター領域の右上隅にある [**セキュリティ設定]**をクリックします。<strong>セキュリティ設定</strong>ダイアログが表示されます。
 
-4. Click **Apply**.
+3.  ダイアログで、ルート パスワードと許可された IP アドレスを設定します。
 
-> **Tip:**
+    任意の IP アドレスからクラスターにアクセスできるようにするには、[**どこからでもアクセスを許可する]**をクリックします。
+
+4.  [**適用]**をクリックします。
+
+> **ヒント：**
 >
-> If you are viewing the overview page of your cluster, you can click the **...** in the upper-right corner of the page, select **Security Settings**, and configure these settings, too.
+> クラスターの概要ページを表示している場合は、ページの右上隅にある [ **...** ] をクリックし、 [<strong>セキュリティ設定]</strong>を選択して、これらの設定を構成することもできます。

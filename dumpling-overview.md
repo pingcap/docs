@@ -3,52 +3,52 @@ title: Dumpling Overview
 summary: Use the Dumpling tool to export data from TiDB.
 ---
 
-# Dumpling Overview
+# Dumplingの概要 {#dumpling-overview}
 
-This document introduces the data export tool - [Dumpling](https://github.com/pingcap/dumpling). Dumpling exports data stored in TiDB/MySQL as SQL or CSV data files and can be used to make a logical full backup or export.
+このドキュメントでは、データ エクスポート ツール - [Dumpling](https://github.com/pingcap/dumpling)を紹介します。 Dumplingは、TiDB/MySQL に保存されているデータを SQL または CSV データ ファイルとしてエクスポートし、論理的なフル バックアップまたはエクスポートの作成に使用できます。
 
 <CustomContent platform="tidb">
 
-For backups of SST files (key-value pairs) or backups of incremental data that are not sensitive to latency, refer to [BR](/br/backup-and-restore-overview.md). For real-time backups of incremental data, refer to [TiCDC](/ticdc/ticdc-overview.md).
+レイテンシーの影響を受けない SST ファイル (キーと値のペア) のバックアップまたは増分データのバックアップについては、 [BR](/br/backup-and-restore-overview.md)を参照してください。増分データのリアルタイム バックアップについては、 [TiCDC](/ticdc/ticdc-overview.md)を参照してください。
 
 </CustomContent>
 
-> **Note:**
+> **ノート：**
 >
-> PingCAP previously maintained a fork of the [mydumper project](https://github.com/maxbube/mydumper) with enhancements specific to TiDB. This fork has since been replaced by [Dumpling](/dumpling-overview.md), which has been rewritten in Go, and supports more optimizations that are specific to TiDB. It is strongly recommended that you use Dumpling instead of mydumper.
+> PingCAP は以前、TiDB に固有の拡張機能を備えた[mydumper プロジェクト](https://github.com/maxbube/mydumper)のフォークを維持していました。このフォークはその後、Go で書き直された[Dumpling](/dumpling-overview.md)に置き換えられ、TiDB に固有のより多くの最適化をサポートしています。 mydumper の代わりにDumplingを使用することを強くお勧めします。
 >
-> For the overview of Mydumper, refer to [v4.0 Mydumper documentation](https://docs.pingcap.com/tidb/v4.0/backup-and-restore-using-mydumper-lightning).
+> Mydumperの概要については、 [v4.0 Mydumper ドキュメント](https://docs.pingcap.com/tidb/v4.0/backup-and-restore-using-mydumper-lightning)を参照してください。
 
-## Improvements of Dumpling compared with Mydumper
+## Mydumper と比較したDumplingの改善点 {#improvements-of-dumpling-compared-with-mydumper}
 
-1. Support exporting data in multiple formats, including SQL and CSV
-2. Support the [table-filter](https://github.com/pingcap/tidb-tools/blob/master/pkg/table-filter/README.md) feature, which makes it easier to filter data
-3. Support exporting data to Amazon S3 cloud storage.
-4. More optimizations are made for TiDB:
-    - Support configuring the memory limit of a single TiDB SQL statement
-    - Support automatic adjustment of TiDB GC time for TiDB v4.0.0 and above
-    - Use TiDB's hidden column `_tidb_rowid` to optimize the performance of concurrent data export from a single table
-    - For TiDB, you can set the value of [`tidb_snapshot`](/read-historical-data.md#how-tidb-reads-data-from-history-versions) to specify the time point of the data backup. This ensures the consistency of the backup, instead of using `FLUSH TABLES WITH READ LOCK` to ensure the consistency.
+1.  SQL や CSV など、複数の形式でのデータのエクスポートをサポート
+2.  データのフィルタリングを容易にする[テーブルフィルター](https://github.com/pingcap/tidb-tools/blob/master/pkg/table-filter/README.md)つの機能をサポート
+3.  Amazon S3 クラウド ストレージへのデータのエクスポートをサポートします。
+4.  TiDB に対してさらに最適化が行われます。
+    -   単一のTiDB SQLステートメントのメモリ制限の構成をサポート
+    -   TiDB v4.0.0 以降の TiDB GC 時間の自動調整をサポート
+    -   TiDB の隠し列`_tidb_rowid`を使用して、単一のテーブルからの同時データ エクスポートのパフォーマンスを最適化する
+    -   TiDB の場合、値[`tidb_snapshot`](/read-historical-data.md#how-tidb-reads-data-from-history-versions)を設定して、データ バックアップの時点を指定できます。これにより、一貫性を確保するために`FLUSH TABLES WITH READ LOCK`を使用する代わりに、バックアップの一貫性が確保されます。
 
-## Dumpling introduction
+## Dumpling紹介 {#dumpling-introduction}
 
-Dumpling is written in Go. The Github project is [pingcap/dumpling](https://github.com/pingcap/dumpling).
+Dumplingは Go で書かれています。 Github プロジェクトは[ピンキャップ/餃子](https://github.com/pingcap/dumpling)です。
 
-For detailed usage of Dumpling, use the `--help` option or refer to [Option list of Dumpling](#option-list-of-dumpling).
+Dumplingの詳細な使用方法については、 `--help`オプションを使用するか、 [Dumplingのオプション一覧](#option-list-of-dumpling)を参照してください。
 
-When using Dumpling, you need to execute the export command on a running cluster. This document assumes that there is a TiDB instance on the `127.0.0.1:4000` host and that this TiDB instance has a root user without a password.
+Dumplingを使用する場合は、実行中のクラスターで export コマンドを実行する必要があります。このドキュメントでは、 `127.0.0.1:4000`のホストに TiDB インスタンスがあり、この TiDB インスタンスにはパスワードのない root ユーザーがいると想定しています。
 
 <CustomContent platform="tidb">
 
-You can get Dumpling using [TiUP](/tiup/tiup-overview.md) by running `tiup install dumpling`. Afterwards, you can use `tiup dumpling ...` to run Dumpling.
+`tiup install dumpling`を実行すると、 [TiUP](/tiup/tiup-overview.md)を使用してDumplingを取得できます。その後、 `tiup dumpling ...`を使用してDumplingを実行できます。
 
-The Dumpling installation package is included in the TiDB Toolkit. To download the TiDB Toolkit, see [Download TiDB Tools](/download-ecosystem-tools.md).
+Dumplingインストール パッケージはTiDB Toolkitに含まれています。 TiDB Toolkitをダウンロードするには、 [TiDB ツールをダウンロード](/download-ecosystem-tools.md)を参照してください。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-You can install Dumpling using the following commands:
+次のコマンドを使用してDumplingをインストールできます。
 
 ```bash
 curl --proto '=https' --tlsv1.2 -sSf https://tiup-mirrors.pingcap.com/install.sh | sh
@@ -56,25 +56,25 @@ source ~/.bash_profile
 tiup install dumpling
 ```
 
-In the above commands, you need to modify `~/.bash_profile` to the path of your profile file.
+上記のコマンドでは、 `~/.bash_profile`をプロファイル ファイルのパスに変更する必要があります。
 
 </CustomContent>
 
-## Export data from TiDB/MySQL
+## TiDB/MySQL からのデータのエクスポート {#export-data-from-tidb-mysql}
 
-### Required privileges
+### 必要な権限 {#required-privileges}
 
-- SELECT
-- RELOAD
-- LOCK TABLES
-- REPLICATION CLIENT
-- PROCESS
+-   選択する
+-   リロード
+-   ロックテーブル
+-   複製クライアント
+-   処理する
 
-### Export to SQL files
+### SQL ファイルへのエクスポート {#export-to-sql-files}
 
-Dumpling exports data to SQL files by default. You can also export data to SQL files by adding the `--filetype sql` flag:
+Dumplingは、デフォルトでデータを SQL ファイルにエクスポートします。 `--filetype sql`フラグを追加して、データを SQL ファイルにエクスポートすることもできます。
 
-{{< copyable "shell-regular" >}}
+{{< copyable "" >}}
 
 ```shell
 dumpling \
@@ -88,37 +88,37 @@ dumpling \
   -F 256MiB
 ```
 
-In the command above:
+上記のコマンドでは:
 
-+ The `-h`, `-P`, and `-u` option respectively mean the address, the port, and the user. If a password is required for authentication, you can use `-p $YOUR_SECRET_PASSWORD` to pass the password to Dumpling.
+-   `-h` 、 `-P` 、および`-u`オプションは、それぞれアドレス、ポート、およびユーザーを意味します。認証にパスワードが必要な場合は、 `-p $YOUR_SECRET_PASSWORD`を使用してパスワードをDumplingに渡すことができます。
 
 <CustomContent platform="tidb">
 
-+ The `-o` option specifies the export directory of the storage, which supports a local file path or a [URL of an external storage](/br/backup-and-restore-storages.md).
+-   `-o`オプションは、ローカル ファイル パスまたは[外部ストレージの URL](/br/backup-and-restore-storages.md)をサポートするストレージのエクスポート ディレクトリを指定します。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-+ The `-o` option specifies the export directory of the storage, which supports a local file path or a [URL of an external storage](https://docs.pingcap.com/tidb/stable/backup-and-restore-storages).
+-   `-o`オプションは、ローカル ファイル パスまたは[外部ストレージの URL](https://docs.pingcap.com/tidb/stable/backup-and-restore-storages)をサポートするストレージのエクスポート ディレクトリを指定します。
 
 </CustomContent>
 
-+ The `-t` option specifies the number of threads for the export. Increasing the number of threads improves the concurrency of Dumpling and the export speed, and also increases the database's memory consumption. Therefore, it is not recommended to set the number too large. Usually, it's less than 64.
-+ The `-r` option specifies the maximum number of rows in a single file. With this option specified, Dumpling enables the in-table concurrency to speed up the export and reduce the memory usage. When the upstream database is TiDB v3.0 or later versions, a value of this parameter greater than 0 indicates that the TiDB region information is used for splitting and the value specified here will no longer take effect.
-+ The `-F` option is used to specify the maximum size of a single file (the unit here is `MiB`; inputs like `5GiB` or `8KB` are also acceptable). It is recommended to keep its value to 256 MiB or less if you plan to use TiDB Lightning to load this file into a TiDB instance.
+-   `-t`オプションは、エクスポートのスレッド数を指定します。スレッドの数を増やすと、Dumplingの同時実行性とエクスポート速度が向上しますが、データベースのメモリ消費も増加します。そのため、あまり大きな数値を設定することはお勧めしません。通常は 64 未満です。
+-   `-r`オプションは、1 つのファイル内の最大行数を指定します。このオプションを指定すると、 Dumplingはテーブル内の同時実行性を有効にして、エクスポートを高速化し、メモリ使用量を削減します。アップストリーム データベースが TiDB v3.0 以降のバージョンの場合、このパラメーターの値が 0 より大きい場合、TiDB リージョン情報が分割に使用され、ここで指定した値が無効になることを示します。
+-   `-F`オプションは、単一ファイルの最大サイズを指定するために使用されます (ここでの単位は`MiB`です`5GiB`や`8KB`などの入力も受け入れられます)。 TiDB Lightningを使用してこのファイルを TiDB インスタンスにロードする予定がある場合は、その値を 256 MiB 以下に保つことをお勧めします。
 
-> **Note:**
+> **ノート：**
 >
-> If the size of a single exported table exceeds 10 GB, it is **strongly recommended to use** the `-r` and `-F` options.
+> 1 つのエクスポートされたテーブルのサイズが 10 GB を超える場合は、オプション`-r`および`-F`**を使用することを強くお勧めし**ます。
 
-### Export to CSV files
+### CSV ファイルにエクスポート {#export-to-csv-files}
 
-You can export data to CSV files by adding the `--filetype csv` argument.
+`--filetype csv`引数を追加することで、データを CSV ファイルにエクスポートできます。
 
-When you export data to CSV files, you can use `--sql <SQL>` to filter the records with the SQL statements. For example, you can export all records that match `id < 100` in `test.sbtest1` using the following command:
+データを CSV ファイルにエクスポートする場合、 `--sql <SQL>`を使用して SQL ステートメントでレコードをフィルタリングできます。たとえば、次のコマンドを使用して、 `id < 100` in `test.sbtest1`に一致するすべてのレコードをエクスポートできます。
 
-{{< copyable "shell-regular" >}}
+{{< copyable "" >}}
 
 ```shell
 ./dumpling \
@@ -132,41 +132,41 @@ When you export data to CSV files, you can use `--sql <SQL>` to filter the recor
   --output-filename-template 'test.sbtest1.{{.Index}}'
 ```
 
-In the command above:
+上記のコマンドでは:
 
-- The `--sql` option can be used only for exporting to CSV files. The command above executes the `SELECT * FROM <table-name> WHERE id <100` statement on all tables to be exported. If a table does not have the specified field, the export fails.
+-   `--sql`オプションは、CSV ファイルへのエクスポートにのみ使用できます。上記のコマンドは、エクスポートするすべてのテーブルで`SELECT * FROM <table-name> WHERE id <100`ステートメントを実行します。テーブルに指定されたフィールドがない場合、エクスポートは失敗します。
 
 <CustomContent platform="tidb">
 
-- When you use the `--sql` option, Dumpling cannot obtain the exported table and schema information. You can specify the file name format of the CSV files using the `--output-filename-template` option, which facilitates the subsequent use of [TiDB Lightning](/tidb-lightning/tidb-lightning-overview.md) to import the data file. For example, `--output-filename-template='test.sbtest1.{{.Index}}'` specifies that the exported CSV files are named as `test.sbtest1.000000000` or `test.sbtest1.000000001`.
+-   `--sql`オプションを使用すると、Dumplingはエクスポートされたテーブルとスキーマの情報を取得できません。 `--output-filename-template`オプションを使用して CSV ファイルのファイル名形式を指定できます。これにより、後で[TiDB Lightning](/tidb-lightning/tidb-lightning-overview.md)を使用してデータ ファイルをインポートすることが容易になります。たとえば、 `--output-filename-template='test.sbtest1.{{.Index}}'`は、エクスポートされた CSV ファイルの名前が`test.sbtest1.000000000`または`test.sbtest1.000000001`であることを指定します。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-- When you use the `--sql` option, Dumpling cannot obtain the exported table and schema information. You can specify the file name format of the CSV files using the `--output-filename-template` option. For example, `--output-filename-template='test.sbtest1.{{.Index}}'` specifies that the exported CSV files are named as `test.sbtest1.000000000` or `test.sbtest1.000000001`.
+-   `--sql`オプションを使用すると、Dumplingはエクスポートされたテーブルとスキーマの情報を取得できません。 `--output-filename-template`オプションを使用して、CSV ファイルのファイル名形式を指定できます。たとえば、 `--output-filename-template='test.sbtest1.{{.Index}}'`は、エクスポートされた CSV ファイルの名前が`test.sbtest1.000000000`または`test.sbtest1.000000001`であることを指定します。
 
 </CustomContent>
 
-- You can use options like `--csv-separator` and `--csv-delimiter` to configure the CSV file format. For details, refer to the [Dumpling option list](#option-list-of-dumpling).
+-   `--csv-separator`や`--csv-delimiter`などのオプションを使用して、CSV ファイル形式を構成できます。詳細は[Dumplingのオプション一覧](#option-list-of-dumpling)を参照してください。
 
-> **Note:**
+> **ノート：**
 >
-> *Strings* and *keywords* are not distinguished by Dumpling. If the imported data is the Boolean type, the value of `true` is converted to `1` and the value of `false` is converted to `0`.
+> Dumplingでは、*文字列*と<em>キーワード</em>は区別されません。インポートされたデータがブール型の場合、値`true`は`1`に変換され、値`false`は`0`に変換されます。
 
-### Compress the exported data files
+### エクスポートされたデータ ファイルを圧縮する {#compress-the-exported-data-files}
 
-You can use the `--compress <format>` option to compress the CSV and SQL data and table structure files exported by Dumpling. This parameter supports the following compression algorithms: `gzip`, `snappy`, and `zstd`. The compression is disabled by default.
+`--compress <format>`オプションを使用して、 Dumplingによってエクスポートされた CSV および SQL データとテーブル構造ファイルを圧縮できます。このパラメーターは、次の圧縮アルゴリズムをサポートしています: `gzip` 、 `snappy` 、および`zstd` 。圧縮はデフォルトで無効になっています。
 
-- This option only compresses individual data and table structure files. It cannot compress the entire folder and generate a single compressed package.
-- This option can save disk space, but it also slows down the export speed and increases CPU consumption. Use this option with caution in scenarios where the export speed is critical.
-- For TiDB Lightning v6.5.0 and later versions, you can use compressed files exported by Dumpling as the data source without additional configuration.
+-   このオプションは、個々のデータおよびテーブル構造ファイルのみを圧縮します。フォルダー全体を圧縮して、単一の圧縮パッケージを生成することはできません。
+-   このオプションはディスク容量を節約できますが、エクスポート速度が遅くなり、CPU 消費が増加します。エクスポート速度が重要なシナリオでは、このオプションを慎重に使用してください。
+-   TiDB Lightning v6.5.0 以降のバージョンでは、追加の構成なしでDumplingによってエクスポートされた圧縮ファイルをデータ ソースとして使用できます。
 
-### Format of exported files
+### エクスポートされたファイルの形式 {#format-of-exported-files}
 
-- `metadata`: The start time of the exported files and the position of the master binary log.
+-   `metadata` : エクスポートされたファイルの開始時刻とマスター バイナリ ログの位置。
 
-    {{< copyable "shell-regular" >}}
+    {{< copyable "" >}}
 
     ```shell
     cat metadata
@@ -180,9 +180,9 @@ You can use the `--compress <format>` option to compress the CSV and SQL data an
     Finished dump at: 2020-11-10 10:40:20
     ```
 
-- `{schema}-schema-create.sql`: The SQL file used to create the schema
+-   `{schema}-schema-create.sql` : スキーマの作成に使用される SQL ファイル
 
-    {{< copyable "shell-regular" >}}
+    {{< copyable "" >}}
 
     ```shell
     cat test-schema-create.sql
@@ -192,9 +192,9 @@ You can use the `--compress <format>` option to compress the CSV and SQL data an
     CREATE DATABASE `test` /*!40100 DEFAULT CHARACTER SET utf8mb4 */;
     ```
 
-- `{schema}.{table}-schema.sql`: The SQL file used to create the table
+-   `{schema}.{table}-schema.sql` : テーブルの作成に使用される SQL ファイル
 
-    {{< copyable "shell-regular" >}}
+    {{< copyable "" >}}
 
     ```shell
     cat test.t1-schema.sql
@@ -206,9 +206,9 @@ You can use the `--compress <format>` option to compress the CSV and SQL data an
     ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
     ```
 
-- `{schema}.{table}.{0001}.{sql|csv`}: The date source file
+-   `{schema}.{table}.{0001}.{sql|csv` }: 日付ソース ファイル
 
-    {{< copyable "shell-regular" >}}
+    {{< copyable "" >}}
 
     ```shell
     cat test.t1.0.sql
@@ -220,17 +220,17 @@ You can use the `--compress <format>` option to compress the CSV and SQL data an
     (1);
     ```
 
-- `*-schema-view.sql`、`*-schema-trigger.sql`、`*-schema-post.sql`: Other exported files
+-   `*-schema-view.sql` 、 `*-schema-trigger.sql` 、 `*-schema-post.sql` : その他のエクスポートされたファイル
 
-### Export data to Amazon S3 cloud storage
+### データを Amazon S3 クラウド ストレージにエクスポートする {#export-data-to-amazon-s3-cloud-storage}
 
-Since v4.0.8, Dumpling supports exporting data to cloud storages. If you need to back up data to Amazon's S3 backend storage, you need to specify the S3 storage path in the `-o` parameter.
+v4.0.8 以降、 Dumplingはクラウド ストレージへのデータのエクスポートをサポートしています。データを Amazon の S3 バックエンド ストレージにバックアップする必要がある場合は、 `-o`パラメーターで S3 ストレージ パスを指定する必要があります。
 
-You need to create an S3 bucket in the specified region (see the [Amazon documentation - How do I create an S3 Bucket](https://docs.aws.amazon.com/AmazonS3/latest/user-guide/create-bucket.html)). If you also need to create a folder in the bucket, see the [Amazon documentation - Creating a folder](https://docs.aws.amazon.com/AmazonS3/latest/user-guide/create-folder.html).
+指定されたリージョンに S3 バケットを作成する必要があります ( [Amazon ドキュメント - S3 バケットを作成する方法](https://docs.aws.amazon.com/AmazonS3/latest/user-guide/create-bucket.html)を参照)。バケットにフォルダーも作成する必要がある場合は、 [Amazon ドキュメント - フォルダーの作成](https://docs.aws.amazon.com/AmazonS3/latest/user-guide/create-folder.html)を参照してください。
 
-Pass `SecretKey` and `AccessKey` of the account with the permission to access the S3 backend storage to the Dumpling node as environment variables.
+S3 バックエンド ストレージへのアクセス権限を持つアカウントの`SecretKey`と`AccessKey`を環境変数としてDumplingノードに渡します。
 
-{{< copyable "shell-regular" >}}
+{{< copyable "" >}}
 
 ```shell
 export AWS_ACCESS_KEY_ID=${AccessKey}
@@ -239,17 +239,17 @@ export AWS_SECRET_ACCESS_KEY=${SecretKey}
 
 <CustomContent platform="tidb">
 
-Dumpling also supports reading credential files from `~/.aws/credentials`. For more Dumpling configuration, see the configuration of [External storages](/br/backup-and-restore-storages.md).
+Dumplingは、 `~/.aws/credentials`からの資格情報ファイルの読み取りもサポートしています。 Dumplingの構成の詳細については、 [外部ストレージ](/br/backup-and-restore-storages.md)の構成を参照してください。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-Dumpling also supports reading credential files from `~/.aws/credentials`. For more Dumpling configuration, see the configuration of [External storages](https://docs.pingcap.com/tidb/stable/backup-and-restore-storages).
+Dumplingは、 `~/.aws/credentials`からの資格情報ファイルの読み取りもサポートしています。 Dumplingの構成の詳細については、 [外部ストレージ](https://docs.pingcap.com/tidb/stable/backup-and-restore-storages)の構成を参照してください。
 
 </CustomContent>
 
-{{< copyable "shell-regular" >}}
+{{< copyable "" >}}
 
 ```shell
 ./dumpling \
@@ -260,13 +260,13 @@ Dumpling also supports reading credential files from `~/.aws/credentials`. For m
   -o "s3://${Bucket}/${Folder}"
 ```
 
-### Filter the exported data
+### エクスポートされたデータをフィルタリングする {#filter-the-exported-data}
 
-#### Use the `--where` option to filter data
+#### <code>--where</code>オプションを使用してデータをフィルタリングする {#use-the-code-where-code-option-to-filter-data}
 
-By default, Dumpling exports all databases except system databases (including `mysql`, `sys`, `INFORMATION_SCHEMA`, `PERFORMANCE_SCHEMA`, `METRICS_SCHEMA`, and `INSPECTION_SCHEMA`). You can use `--where <SQL where expression>` to select the records to be exported.
+Dumplingはデフォルトで、システム データベース ( `mysql` 、 `sys` 、 `INFORMATION_SCHEMA` 、 `PERFORMANCE_SCHEMA` 、 `METRICS_SCHEMA` 、および`INSPECTION_SCHEMA`を含む) を除くすべてのデータベースをエクスポートします。 `--where <SQL where expression>`を使用して、エクスポートするレコードを選択できます。
 
-{{< copyable "shell-regular" >}}
+{{< copyable "" >}}
 
 ```shell
 ./dumpling \
@@ -277,13 +277,13 @@ By default, Dumpling exports all databases except system databases (including `m
   --where "id < 100"
 ```
 
-The above command exports the data that matches `id < 100` from each table. Note that you cannot use the `--where` parameter together with `--sql`.
+上記のコマンドは、各テーブルから`id < 100`に一致するデータをエクスポートします。 `--where`パラメータを`--sql`と一緒に使用できないことに注意してください。
 
-#### Use the `--filter` option to filter data
+#### <code>--filter</code>オプションを使用してデータをフィルタリングする {#use-the-code-filter-code-option-to-filter-data}
 
-Dumpling can filter specific databases or tables by specifying the table filter with the `--filter` option. The syntax of table filters is similar to that of `.gitignore`. For details, see [Table Filter](/table-filter.md).
+Dumplingは、 `--filter`オプションでテーブル フィルターを指定することにより、特定のデータベースまたはテーブルをフィルター処理できます。テーブル フィルターの構文は`.gitignore`の構文と似ています。詳細については、 [テーブル フィルター](/table-filter.md)を参照してください。
 
-{{< copyable "shell-regular" >}}
+{{< copyable "" >}}
 
 ```shell
 ./dumpling \
@@ -296,49 +296,49 @@ Dumpling can filter specific databases or tables by specifying the table filter 
   --filter "*.WorkOrder"
 ```
 
-The above command exports all the tables in the `employees` database and the `WorkOrder` tables in all databases.
+上記のコマンドは、 `employees`のデータベース内のすべてのテーブルと、すべてのデータベース内の`WorkOrder`のテーブルをエクスポートします。
 
-#### Use the `-B` or `-T` option to filter data
+#### <code>-B</code>または<code>-T</code>オプションを使用してデータをフィルタリングする {#use-the-code-b-code-or-code-t-code-option-to-filter-data}
 
-Dumpling can also export specific databases with the `-B` option or specific tables with the `-T` option.
+Dumplingは、オプション`-B`を使用して特定のデータベースをエクスポートしたり、オプション`-T`を使用して特定のテーブルをエクスポートしたりすることもできます。
 
-> **Note:**
+> **ノート：**
 >
-> - The `--filter` option and the `-T` option cannot be used at the same time.
-> - The `-T` option can only accept a complete form of inputs like `database-name.table-name`, and inputs with only the table name are not accepted. Example: Dumpling cannot recognize `-T WorkOrder`.
+> -   オプション`--filter`とオプション`-T`を同時に使用することはできません。
+> -   `-T`オプションは、 `database-name.table-name`のような完全な形式の入力のみを受け入れることができ、テーブル名のみの入力は受け入れられません。例:Dumplingは`-T WorkOrder`を認識できません。
 
-Examples:
+例:
 
-- `-B employees` exports the `employees` database.
-- `-T employees.WorkOrder` exports the `employees.WorkOrder` table.
+-   `-B employees`は`employees`データベースをエクスポートします。
+-   `-T employees.WorkOrder`は`employees.WorkOrder`テーブルをエクスポートします。
 
-### Improve export efficiency through concurrency
+### 同時実行によるエクスポート効率の向上 {#improve-export-efficiency-through-concurrency}
 
-The exported file is stored in the `./export-<current local time>` directory by default. Commonly used options are as follows:
+エクスポートされたファイルは、デフォルトで`./export-<current local time>`ディレクトリに保存されます。一般的に使用されるオプションは次のとおりです。
 
-- The `-t` option specifies the number of threads for the export. Increasing the number of threads improves the concurrency of Dumpling and the export speed, and also increases the database's memory consumption. Therefore, it is not recommended to set the number too large.
-- The `-r` option specifies the maximum number of records (or the number of rows in the database) for a single file. When it is enabled, Dumpling enables concurrency in the table to improve the speed of exporting large tables. When the upstream database is TiDB v3.0 or later versions, a value of this parameter greater than 0 indicates that the TiDB region information is used for splitting and the value specified here will no longer take effect.
-- The `--compress <format>` option specifies the compression format of the dump. It supports the following compression algorithms: `gzip`, `snappy`, and `zstd`. This option can speed up dumping of data if storage is the bottleneck or if storage capacity is a concern. The drawback is an increase in CPU usage. Each file is compressed individually.
+-   `-t`オプションは、エクスポートのスレッド数を指定します。スレッドの数を増やすと、Dumplingの同時実行性とエクスポート速度が向上しますが、データベースのメモリ消費も増加します。そのため、あまり大きな数値を設定することはお勧めしません。
+-   `-r`オプションは、1 つのファイルの最大レコード数 (またはデータベース内の行数) を指定します。 Dumplingを有効にすると、テーブルの同時実行性が有効になり、大きなテーブルのエクスポート速度が向上します。アップストリーム データベースが TiDB v3.0 以降のバージョンの場合、このパラメーターの値が 0 より大きい場合、TiDB リージョン情報が分割に使用され、ここで指定した値が無効になることを示します。
+-   `--compress <format>`オプションは、ダンプの圧縮形式を指定します。次の圧縮アルゴリズムをサポートしています: `gzip` 、 `snappy` 、および`zstd` 。ストレージがボトルネックである場合、またはストレージ容量が懸念される場合、このオプションはデータのダンプを高速化できます。欠点は、CPU 使用率の増加です。各ファイルは個別に圧縮されます。
 
-With the above options specified, Dumpling can have a quicker speed of data export.
+上記のオプションを指定すると、 Dumplingのデータ エクスポート速度が向上します。
 
-### Adjust Dumpling's data consistency options
+### Dumpling のデータ整合性オプションを調整する {#adjust-dumpling-s-data-consistency-options}
 
-> **Note:**
+> **ノート：**
 >
-> In most scenarios, you do not need to adjust the default data consistency options of Dumpling (the default value is `auto`).
+> ほとんどのシナリオでは、Dumplingの既定のデータ整合性オプションを調整する必要はありません (既定値は`auto`です)。
 
-Dumpling uses the `--consistency <consistency level>` option to control the way in which data is exported for "consistency assurance". When using snapshot for consistency, you can use the `--snapshot` option to specify the timestamp to be backed up. You can also use the following levels of consistency:
+Dumplingは`--consistency <consistency level>`オプションを使用して、「一貫性保証」のためにデータをエクスポートする方法を制御します。一貫性のためにスナップショットを使用する場合、 `--snapshot`オプションを使用して、バックアップするタイムスタンプを指定できます。次のレベルの一貫性を使用することもできます。
 
-- `flush`: Use [`FLUSH TABLES WITH READ LOCK`](https://dev.mysql.com/doc/refman/8.0/en/flush.html#flush-tables-with-read-lock) to temporarily interrupt the DML and DDL operations of the replica database, to ensure the global consistency of the backup connection, and to record the binlog position (POS) information. The lock is released after all backup connections start transactions. It is recommended to perform full backups during off-peak hours or on the MySQL replica database.
-- `snapshot`: Get a consistent snapshot of the specified timestamp and export it.
-- `lock`: Add read locks on all tables to be exported.
-- `none`: No guarantee for consistency.
-- `auto`: Use `flush` for MySQL and `snapshot` for TiDB.
+-   `flush` : [`FLUSH TABLES WITH READ LOCK`](https://dev.mysql.com/doc/refman/8.0/en/flush.html#flush-tables-with-read-lock)を使用して、レプリカ データベースの DML および DDL 操作を一時的に中断し、バックアップ接続のグローバルな一貫性を確保し、binlog 位置 (POS) 情報を記録します。すべてのバックアップ接続がトランザクションを開始した後、ロックは解放されます。オフピーク時または MySQL レプリカ データベースでフル バックアップを実行することをお勧めします。
+-   `snapshot` : 指定されたタイムスタンプの一貫したスナップショットを取得してエクスポートします。
+-   `lock` : エクスポートするすべてのテーブルに読み取りロックを追加します。
+-   `none` : 一貫性を保証しません。
+-   `auto` : MySQL には`flush` 、TiDB には`snapshot`を使用します。
 
-After everything is done, you can see the exported file in `/tmp/test`:
+すべてが完了すると、エクスポートされたファイルが`/tmp/test`に表示されます。
 
-{{< copyable "shell-regular" >}}
+{{< copyable "" >}}
 
 ```shell
 ls -lh /tmp/test | awk '{print $5 "\t" $9}'
@@ -355,44 +355,44 @@ ls -lh /tmp/test | awk '{print $5 "\t" $9}'
 190K  test.sbtest3.0.sql
 ```
 
-### Export historical data snapshot of TiDB
+### TiDB の履歴データのスナップショットをエクスポートする {#export-historical-data-snapshot-of-tidb}
 
-Dumpling can export the data of a certain [tidb_snapshot](/read-historical-data.md#how-tidb-reads-data-from-history-versions) with the `--snapshot` option specified.
+Dumplingは`--snapshot`オプション指定で特定の[tidb_snapshot](/read-historical-data.md#how-tidb-reads-data-from-history-versions)のデータをエクスポートできます。
 
-The `--snapshot` option can be set to a TSO (the `Position` field output by the `SHOW MASTER STATUS` command) or a valid time of the `datetime` data type (in the form of `YYYY-MM-DD hh:mm:ss`), for example:
+`--snapshot`オプションは、TSO ( `SHOW MASTER STATUS`コマンドによる`Position`フィールド出力) または`datetime`データ型の有効時間 ( `YYYY-MM-DD hh:mm:ss`の形式) に設定できます。次に例を示します。
 
-{{< copyable "shell-regular" >}}
+{{< copyable "" >}}
 
 ```shell
 ./dumpling --snapshot 417773951312461825
 ./dumpling --snapshot "2020-07-02 17:12:45"
 ```
 
-The TiDB historical data snapshots when the TSO is `417773951312461825` and the time is `2020-07-02 17:12:45` are exported.
+TSO が`417773951312461825`で時刻が`2020-07-02 17:12:45`のときの TiDB ヒストリカル データ スナップショットがエクスポートされます。
 
-### Control the memory usage of exporting large tables
+### 大きなテーブルのエクスポートのメモリ使用量を制御する {#control-the-memory-usage-of-exporting-large-tables}
 
-When Dumpling is exporting a large single table from TiDB, Out of Memory (OOM) might occur because the exported data size is too large, which causes connection abort and export failure. You can use the following parameters to reduce the memory usage of TiDB:
+Dumplingが TiDB から大きな単一テーブルをエクスポートしている場合、エクスポートされたデータのサイズが大きすぎるためにメモリ不足 (OOM) が発生し、接続が中止され、エクスポートが失敗することがあります。次のパラメータを使用して、TiDB のメモリ使用量を削減できます。
 
-+ Setting `-r` to split the data to be exported into chunks. This reduces the memory overhead of TiDB's data scan and enables concurrent table data dump to improve export efficiency. When the upstream database is TiDB v3.0 or later versions, a value of this parameter greater than 0 indicates that the TiDB region information is used for splitting and the value specified here will no longer take effect.
-+ Reduce the value of `--tidb-mem-quota-query` to `8589934592` (8 GB) or lower. `--tidb-mem-quota-query` controls the memory usage of a single query statement in TiDB.
-+ Adjust the `--params "tidb_distsql_scan_concurrency=5"` parameter. [`tidb_distsql_scan_concurrency`](/system-variables.md#tidb_distsql_scan_concurrency) is a session variable which controls the concurrency of the scan operations in TiDB.
+-   エクスポートするデータをチャンクに分割するには、 `-r`を設定します。これにより、TiDB のデータ スキャンのメモリ オーバーヘッドが削減され、同時テーブル データ ダンプが可能になり、エクスポートの効率が向上します。アップストリーム データベースが TiDB v3.0 以降のバージョンの場合、このパラメーターの値が 0 より大きい場合、TiDB リージョン情報が分割に使用され、ここで指定した値が無効になることを示します。
+-   `--tidb-mem-quota-query`の値を`8589934592` (8 GB) 以下に減らします。 `--tidb-mem-quota-query`は、TiDB での単一のクエリ ステートメントのメモリ使用量を制御します。
+-   `--params "tidb_distsql_scan_concurrency=5"`パラメータを調整します。 [`tidb_distsql_scan_concurrency`](/system-variables.md#tidb_distsql_scan_concurrency)は、TiDB でのスキャン操作の同時実行性を制御するセッション変数です。
 
-### TiDB GC settings when exporting a large volume of data (more than 1 TB)
+### 大容量データ（1TB以上）エクスポート時のTiDB GC設定 {#tidb-gc-settings-when-exporting-a-large-volume-of-data-more-than-1-tb}
 
-When exporting data from TiDB (more than 1 TB), if the TiDB version is later than or equal to v4.0.0 and Dumpling can access the PD address of the TiDB cluster, Dumpling automatically extends the GC time without affecting the original cluster.
+TiDB からデータをエクスポートする (1 TB を超える) 場合、TiDB のバージョンが v4.0.0 以降で、かつDumplingが TiDB クラスターの PD アドレスにアクセスできる場合、 Dumplingは元のクラスターに影響を与えずに GC 時間を自動的に延長します。
 
-In other scenarios, if the data size is very large, to avoid export failure due to GC during the export process, you can extend the GC time in advance:
+他のシナリオでは、データ サイズが非常に大きい場合、エクスポート プロセス中の GC によるエクスポートの失敗を回避するために、事前に GC 時間を延長できます。
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 SET GLOBAL tidb_gc_life_time = '720h';
 ```
 
-After your operation is completed, set the GC time back (the default value is `10m`):
+操作が完了したら、GC 時間を元に戻します (デフォルト値は`10m`です)。
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 SET GLOBAL tidb_gc_life_time = '10m';
@@ -400,56 +400,56 @@ SET GLOBAL tidb_gc_life_time = '10m';
 
 <CustomContent platform="tidb">
 
-Finally, all the exported data can be imported back to TiDB using [TiDB Lightning](/tidb-lightning/tidb-lightning-overview.md).
+最後に、エクスポートされたすべてのデータは、 [TiDB Lightning](/tidb-lightning/tidb-lightning-overview.md)を使用して TiDB にインポートして戻すことができます。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-Finally, all the exported data can be imported back to TiDB.
+最後に、エクスポートされたすべてのデータを TiDB にインポートして戻すことができます。
 
 </CustomContent>
 
-## Option list of Dumpling
+## Dumplingのオプション一覧 {#option-list-of-dumpling}
 
-| Options                      | Usage                                                                                                                                                                                                                                                                                                                              | Default value                              |
-| ---------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------ |
-| `-V` or `--version`          | Output the Dumpling version and exit directly                                                                                                                                                                                                                                                                                      |
-| `-B` or `--database`         | Export specified databases                                                                                                                                                                                                                                                                                                         |
-| `-T` or `--tables-list`      | Export specified tables                                                                                                                                                                                                                                                                                                            |
-| `-f` or `--filter`           | Export tables that match the filter pattern. For the filter syntax, see [table-filter](/table-filter.md).                                                                                                                                                                                                                          |    `[\*.\*,!/^(mysql&#124;sys&#124;INFORMATION_SCHEMA&#124;PERFORMANCE_SCHEMA&#124;METRICS_SCHEMA&#124;INSPECTION_SCHEMA)$/.\*]` (export all databases or tables excluding system schemas) |
-| `--case-sensitive`           | whether table-filter is case-sensitive                                                                                                                                                                                                                                                                                             | false (case-insensitive)                   |
-| `-h` or `--host`             | The IP address of the connected database host                                                                                                                                                                                                                                                                                      | "127.0.0.1"                                |
-| `-t` or `--threads`          | The number of concurrent backup threads                                                                                                                                                                                                                                                                                            | 4                                          |
-| `-r` or `--rows`             | Split the table into rows with a specified number of rows (generally applicable for concurrent operations of splitting a large table into multiple files. When the upstream database is TiDB v3.0 or later versions, a value of this parameter greater than 0 indicates that the TiDB region information is used for splitting and the value specified here will no longer take effect.                                                                                                                                                                                 |
-| `-L` or `--logfile`          | Log output address. If it is empty, the log will be output to the console                                                                                                                                                                                                                                                          | ""                                         |
-| `--loglevel`                 | Log level {debug,info,warn,error,dpanic,panic,fatal}                                                                                                                                                                                                                                                                               | "info"                                     |
-| `--logfmt`                   | Log output format {text,json}                                                                                                                                                                                                                                                                                                      | "text"                                     |
-| `-d` or `--no-data`          | Do not export data (suitable for scenarios where only the schema is exported)                                                                                                                                                                                                                                                      |
-| `--no-header`                | Export CSV files of the tables without generating header                                                                                                                                                                                                                                                                           |
-| `-W` or `--no-views`         | Do not export the views                                                                                                                                                                                                                                                                                                            | true                                       |
-| `-m` or `--no-schemas`       | Do not export the schema with only the data exported                                                                                                                                                                                                                                                                               |
-| `-s` or `--statement-size`   | Control the size of the `INSERT` statements; the unit is bytes                                                                                                                                                                                                                                                                     |
-| `-F` or `--filesize`         | The file size of the divided tables. The unit must be specified such as `128B`, `64KiB`, `32MiB`, and `1.5GiB`.                                                                                                                                                                                                                    |
-| `--filetype`                 | Exported file type (csv/sql)                                                                                                                                                                                                                                                                                                       | "sql"                                      |
-| `-o` or `--output`           | The path of exported local files or [the URL of the external storage](https://docs.pingcap.com/tidb/stable/backup-and-restore-storages)                                                                                                                                                                                                                                                                                                    | "./export-${time}"                         |
-| `-S` or `--sql`              | Export data according to the specified SQL statement. This command does not support concurrent export.                                                                                                                                                                                                                             |
-| `--consistency`              | flush: use FTWRL before the dump <br/> snapshot: dump the TiDB data of a specific snapshot of a TSO <br/> lock: execute `lock tables read` on all tables to be dumped <br/> none: dump without adding locks, which cannot guarantee consistency <br/> auto: use --consistency flush for MySQL; use --consistency snapshot for TiDB | "auto"                                     |
-| `--snapshot`                 | Snapshot TSO; valid only when `consistency=snapshot`                                                                                                                                                                                                                                                                               |
-| `--where`                    | Specify the scope of the table backup through the `where` condition                                                                                                                                                                                                                                                                |
-| `-p` or `--password`         | The password of the connected database host                                                                                                                                                                                                                                                                                        |
-| `-P` or `--port`             | The port of the connected database host                                                                                                                                                                                                                                                                                            | 4000                                       |
-| `-u` or `--user`             | The username of the connected database host                                                                                                                                                                                                                                                                                        | "root"                                     |
-| `--dump-empty-database`      | Export the `CREATE DATABASE` statements of the empty databases                                                                                                                                                                                                                                                                     | true                                       |
-| `--ca`                       | The address of the certificate authority file for TLS connection                                                                                                                                                                                                                                                                   |
-| `--cert`                     | The address of the client certificate file for TLS connection                                                                                                                                                                                                                                                                      |
-| `--key`                      | The address of the client private key file for TLS connection                                                                                                                                                                                                                                                                      |
-| `--csv-delimiter`            | Delimiter of character type variables in CSV files                                                                                                                                                                                                                                                                                 | '"'                                        |
-| `--csv-separator`            | Separator of each value in CSV files. It is not recommended to use the default ','. It is recommended to use '\|+\|' or other uncommon character combinations| ','                                                                                                                                                                                                                                                                                               | ','                                        |
-| `--csv-null-value`           | Representation of null values in CSV files                                                                                                                                                                                                                                                                                         | "\\N"                                      |
-| `--escape-backslash`         | Use backslash (`\`) to escape special characters in the export file                                                                                                                                                                                                                                                                | true                                       |
-| `--output-filename-template` | The filename templates represented in the format of [golang template](https://golang.org/pkg/text/template/#hdr-Arguments) <br/> Support the `{{.DB}}`, `{{.Table}}`, and `{{.Index}}` arguments <br/> The three arguments represent the database name, table name, and chunk ID of the data file                                  | '{{.DB}}.{{.Table}}.{{.Index}}'            |
-| `--status-addr`              | Dumpling's service address, including the address for Prometheus to pull metrics and pprof debugging                                                                                                                                                                                                                               | ":8281"                                    |
-| `--tidb-mem-quota-query`     | The memory limit of exporting SQL statements by a single line of Dumpling command, and the unit is byte. For v4.0.10 or later versions, if you do not set this parameter, TiDB uses the value of the `mem-quota-query` configuration item as the memory limit value by default. For versions earlier than v4.0.10, the parameter value defaults to 32 GB.  | 34359738368 |
-| `--params`                   | Specifies the session variable for the connection of the database to be exported. The required format is `"character_set_client=latin1,character_set_connection=latin1"`                                                                                                                                                           |
-|  `-c` or `--compress` |  Compresses the CSV and SQL data and table structure files exported by Dumpling. It supports the following compression algorithms: `gzip`, `snappy`, and `zstd`.  | "" | 
+| オプション                        | 使用法                                                                                                                                                                                                                                                | デフォルト値                                                                                                                                                                  |             |
+| ---------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------- |
+| `-V`または`--version`           | Dumplingバージョンを出力し、直接終了します                                                                                                                                                                                                                          |                                                                                                                                                                         |             |
+| `-B`または`--database`          | 指定したデータベースをエクスポートする                                                                                                                                                                                                                                |                                                                                                                                                                         |             |
+| `-T`または`--tables-list`       | 指定したテーブルをエクスポートする                                                                                                                                                                                                                                  |                                                                                                                                                                         |             |
+| `-f`または`--filter`            | フィルター パターンに一致するテーブルをエクスポートします。フィルター構文については、 [テーブルフィルター](/table-filter.md)を参照してください。                                                                                                                                                                | `[\*.\*,!/^(mysql&#124;sys&#124;INFORMATION_SCHEMA&#124;PERFORMANCE_SCHEMA&#124;METRICS_SCHEMA&#124;INSPECTION_SCHEMA)$/.\*]` (システム スキーマを除くすべてのデータベースまたはテーブルをエクスポートします) |             |
+| `--case-sensitive`           | table-filter で大文字と小文字を区別するかどうか                                                                                                                                                                                                                     | false (大文字と小文字を区別しない)                                                                                                                                                   |             |
+| `-h`または`--host`              | 接続されたデータベース ホストの IP アドレス                                                                                                                                                                                                                           | 「127.0.0.1」                                                                                                                                                             |             |
+| `-t`または`--threads`           | 同時バックアップ スレッドの数                                                                                                                                                                                                                                    | 4                                                                                                                                                                       |             |
+| `-r`または`--rows`              | 指定された行数でテーブルを行に分割します (通常、大きなテーブルを複数のファイルに分割する同時操作に適用されます。アップストリーム データベースが TiDB v3.0 以降のバージョンである場合、0 より大きいこのパラメーターの値は、 TiDB リージョン情報は分割に使用され、ここで指定した値は無効になります。                                                                                       |                                                                                                                                                                         |             |
+| `-L`または`--logfile`           | ログ出力アドレス。空の場合、コンソールにログが出力されます                                                                                                                                                                                                                      | &quot;&quot;                                                                                                                                                            |             |
+| `--loglevel`                 | ログレベル {debug,info,warn,error,dpanic, panic,fatal}                                                                                                                                                                                                  | &quot;情報&quot;                                                                                                                                                          |             |
+| `--logfmt`                   | ログ出力形式 {text,json}                                                                                                                                                                                                                                 | &quot;文章&quot;                                                                                                                                                          |             |
+| `-d`または`--no-data`           | データをエクスポートしない (スキーマのみがエクスポートされるシナリオに適しています)                                                                                                                                                                                                        |                                                                                                                                                                         |             |
+| `--no-header`                | ヘッダーを生成せずにテーブルの CSV ファイルをエクスポートする                                                                                                                                                                                                                  |                                                                                                                                                                         |             |
+| `-W`または`--no-views`          | ビューをエクスポートしない                                                                                                                                                                                                                                      | 真実                                                                                                                                                                      |             |
+| `-m`または`--no-schemas`        | データのみがエクスポートされたスキーマをエクスポートしないでください                                                                                                                                                                                                                 |                                                                                                                                                                         |             |
+| `-s`または`--statement-size`    | `INSERT`ステートメントのサイズを制御します。単位はバイトです                                                                                                                                                                                                                 |                                                                                                                                                                         |             |
+| `-F`または`--filesize`          | 分割されたテーブルのファイル サイズ。単位は`128B` 、 `64KiB` 、 `32MiB` 、および`1.5GiB`のように指定する必要があります。                                                                                                                                                                      |                                                                                                                                                                         |             |
+| `--filetype`                 | エクスポートされるファイルの種類 (csv/sql)                                                                                                                                                                                                                         | &quot;SQL&quot;                                                                                                                                                         |             |
+| `-o`または`--output`            | エクスポートされたローカル ファイルのパスまたは[外部ストレージの URL](https://docs.pingcap.com/tidb/stable/backup-and-restore-storages)                                                                                                                                           | &quot;./export-${time}&quot;                                                                                                                                            |             |
+| `-S`または`--sql`               | 指定された SQL ステートメントに従ってデータをエクスポートします。このコマンドは、同時エクスポートをサポートしていません。                                                                                                                                                                                    |                                                                                                                                                                         |             |
+| `--consistency`              | フラッシュ: ダンプの前に FTWRL を使用します<br/>スナップショット: TSO の特定のスナップショットの TiDB データをダンプします<br/>lock: ダンプするすべてのテーブルで`lock tables read`を実行します<br/>none: 一貫性を保証できないロックを追加せずにダンプします。<br/> auto: MySQL には --consistency フラッシュを使用します。 --consistency スナップショットを TiDB に使用する | 「オート」                                                                                                                                                                   |             |
+| `--snapshot`                 | スナップショット TSO。 `consistency=snapshot`のときのみ有効                                                                                                                                                                                                        |                                                                                                                                                                         |             |
+| `--where`                    | `where`条件でテーブル バックアップの範囲を指定します                                                                                                                                                                                                                     |                                                                                                                                                                         |             |
+| `-p`または`--password`          | 接続されたデータベース ホストのパスワード                                                                                                                                                                                                                              |                                                                                                                                                                         |             |
+| `-P`または`--port`              | 接続されたデータベース ホストのポート                                                                                                                                                                                                                                | 4000                                                                                                                                                                    |             |
+| `-u`または`--user`              | 接続されたデータベース ホストのユーザー名                                                                                                                                                                                                                              | &quot;根&quot;                                                                                                                                                           |             |
+| `--dump-empty-database`      | 空のデータベースの`CREATE DATABASE`のステートメントをエクスポートします                                                                                                                                                                                                       | 真実                                                                                                                                                                      |             |
+| `--ca`                       | TLS接続用の認証局ファイルのアドレス                                                                                                                                                                                                                                |                                                                                                                                                                         |             |
+| `--cert`                     | TLS接続用のクライアント証明書ファイルのアドレス                                                                                                                                                                                                                          |                                                                                                                                                                         |             |
+| `--key`                      | TLS接続用のクライアント秘密鍵ファイルのアドレス                                                                                                                                                                                                                          |                                                                                                                                                                         |             |
+| `--csv-delimiter`            | CSVファイルの文字型変数の区切り文字                                                                                                                                                                                                                                | &#39;&quot;&#39;                                                                                                                                                        |             |
+| `--csv-separator`            | CSV ファイルの各値の区切り記号。デフォルトの「,」を使用することはお勧めしません。 「|+|」を使用することをお勧めしますまたは他の珍しい文字の組み合わせ                                                                                                                                                                    | &#39;、&#39;                                                                                                                                                             | &#39;、&#39; |
+| `--csv-null-value`           | CSV ファイルでの null 値の表現                                                                                                                                                                                                                               | 「\N」                                                                                                                                                                    |             |
+| `--escape-backslash`         | バックスラッシュ ( `\` ) を使用して、エクスポート ファイル内の特殊文字をエスケープします                                                                                                                                                                                                  | 真実                                                                                                                                                                      |             |
+| `--output-filename-template` | [golang テンプレート](https://golang.org/pkg/text/template/#hdr-Arguments)の形式で表されるファイル名テンプレート<br/>`{{.DB}}` 、 `{{.Table}}` 、および`{{.Index}}`の引数をサポート<br/>3 つの引数は、データ ファイルのデータベース名、テーブル名、およびチャンク ID を表します。                                                 | &#39;{{.DB}}.{{.Table}}.{{.Index}}&#39;                                                                                                                                 |             |
+| `--status-addr`              | Dumpling のサービス アドレス (Prometheus がメトリクスをプルし、デバッグを pprof するためのアドレスを含む)                                                                                                                                                                               | &quot;:8281&quot;                                                                                                                                                       |             |
+| `--tidb-mem-quota-query`     | Dumplingコマンドの 1 行で SQL ステートメントをエクスポートする際のメモリ制限で、単位はバイトです。 v4.0.10 以降のバージョンでは、このパラメータを設定しない場合、TiDB はデフォルトで`mem-quota-query`構成項目の値をメモリ制限値として使用します。 v4.0.10 より前のバージョンでは、パラメーター値のデフォルトは 32 GB です。                                                      | 34359738368                                                                                                                                                             |             |
+| `--params`                   | エクスポートするデータベースの接続のセッション変数を指定します。必要な形式は`"character_set_client=latin1,character_set_connection=latin1"`です                                                                                                                                            |                                                                                                                                                                         |             |
+| `-c`または`--compress`          | Dumplingによってエクスポートされた CSV および SQL データとテーブル構造ファイルを圧縮します。次の圧縮アルゴリズムがサポートされています: `gzip` 、 `snappy` 、および`zstd` 。                                                                                                                                       | &quot;&quot;                                                                                                                                                            |             |

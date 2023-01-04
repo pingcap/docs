@@ -3,19 +3,19 @@ title: Performance Tuning Best Practices
 summary: Introduces the best practices for tuning TiDB performance.
 ---
 
-# Performance Tuning Best Practices
+# 性能チューニングのベスト プラクティス {#performance-tuning-best-practices}
 
-This document introduces some best practices for using TiDB databases.
+このドキュメントでは、TiDB データベースを使用するためのいくつかのベスト プラクティスを紹介します。
 
-## DML best practices
+## DML のベスト プラクティス {#dml-best-practices}
 
-This section describes the best practices involved when you use DML with TiDB.
+このセクションでは、TiDB で DML を使用する際のベスト プラクティスについて説明します。
 
-### Use multi-row statements
+### 複数行ステートメントを使用する {#use-multi-row-statements}
 
-When you need to modify multiple rows of table, it is recommended to use multi-row statements:
+テーブルの複数の行を変更する必要がある場合は、複数行のステートメントを使用することをお勧めします。
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 INSERT INTO t VALUES (1, 'a'), (2, 'b'), (3, 'c');
@@ -23,9 +23,9 @@ INSERT INTO t VALUES (1, 'a'), (2, 'b'), (3, 'c');
 DELETE FROM t WHERE id IN (1, 2, 3);
 ```
 
-It is not recommended to use multiple single-row statements:
+複数の単一行ステートメントを使用することはお勧めしません。
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 INSERT INTO t VALUES (1, 'a');
@@ -37,9 +37,9 @@ DELETE FROM t WHERE id = 2;
 DELETE FROM t WHERE id = 3;
 ```
 
-### Use `PREPARE`
+### <code>PREPARE</code>を使用する {#use-code-prepare-code}
 
-When you need to execute a SQL statement for multiple times, it is recommended to use the `PREPARE` statement to avoid the overhead of repeatedly parsing the SQL syntax.
+SQL ステートメントを複数回実行する必要がある場合は、SQL 構文を繰り返し解析するオーバーヘッドを回避するために、 `PREPARE`ステートメントを使用することをお勧めします。
 
 <SimpleTab>
 <div label="Golang">
@@ -86,127 +86,127 @@ public void batchInsert(Connection connection) throws SQLException {
 </div>
 </SimpleTab>
 
-Do not execute the `PREPARE` statement repeatedly. Otherwise, the execution efficiency cannot be improved.
+`PREPARE`ステートメントを繰り返し実行しないでください。そうしないと、実行効率を向上させることができません。
 
-### Only query the columns you need
+### 必要な列のみをクエリする {#only-query-the-columns-you-need}
 
-If you do not need data from all columns, do not use `SELECT *` to return all columns data. The following query is inefficient:
+すべての列のデータが必要ない場合は、 `SELECT *`を使用してすべての列のデータを返さないでください。次のクエリは非効率的です。
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 SELECT * FROM books WHERE title = 'Marian Yost';
 ```
 
-You should only query the columns you need. For example:
+必要な列のみをクエリする必要があります。例えば：
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 SELECT title, price FROM books WHERE title = 'Marian Yost';
 ```
 
-### Use bulk delete
+### 一括削除を使用する {#use-bulk-delete}
 
-When you delete a large amount of data, it is recommended to use [bulk delete](/develop/dev-guide-delete-data.md#bulk-delete).
+大量のデータを削除する場合は、 [一括削除](/develop/dev-guide-delete-data.md#bulk-delete)を使用することをお勧めします。
 
-### Use bulk update
+### 一括更新を使用する {#use-bulk-update}
 
-When you update a large amount of data, it is recommended to use [bulk update](/develop/dev-guide-update-data.md#bulk-update).
+大量のデータを更新する場合は、 [一括更新](/develop/dev-guide-update-data.md#bulk-update)を使用することをお勧めします。
 
-### Use `TRUNCATE` instead of `DELETE` for full table data
+### 完全なテーブル データには、 <code>DELETE</code>の代わりに<code>TRUNCATE</code>を使用します {#use-code-truncate-code-instead-of-code-delete-code-for-full-table-data}
 
-When you need to delete all data from a table, it is recommended to use the `TRUNCATE` statement:
+テーブルからすべてのデータを削除する必要がある場合は、次の`TRUNCATE`ステートメントを使用することをお勧めします。
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 TRUNCATE TABLE t;
 ```
 
-It is not recommended to use `DELETE` for full table data:
+完全なテーブル データに`DELETE`を使用することはお勧めしません。
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 DELETE FROM t;
 ```
 
-## DDL best practices
+## DDL のベスト プラクティス {#ddl-best-practices}
 
-This section describes the best practices involved when using TiDB's DDL.
+このセクションでは、TiDB の DDL を使用する際のベスト プラクティスについて説明します。
 
-### Primary key best practices
+### 主キーのベスト プラクティス {#primary-key-best-practices}
 
-See the [rules to follow when selecting the primary key](/develop/dev-guide-create-table.md#guidelines-to-follow-when-selecting-primary-key).
+[主キーを選択するときに従う規則](/develop/dev-guide-create-table.md#guidelines-to-follow-when-selecting-primary-key)を参照してください。
 
-## Index best practices
+## インデックスのベスト プラクティス {#index-best-practices}
 
-See [Index Best Practices](/develop/dev-guide-index-best-practice.md).
+[インデックスのベスト プラクティス](/develop/dev-guide-index-best-practice.md)を参照してください。
 
-### Add index best practices
+### インデックスのベスト プラクティスを追加する {#add-index-best-practices}
 
-TiDB supports the online index add operation. You can use [ADD INDEX](/sql-statements/sql-statement-add-index.md) or [CREATE INDEX](/sql-statements/sql-statement-create-index.md) statement to add an index. It does not block data reads and writes in the table. You can adjust the concurrency and the batch size during the `re-organize` phase of the index add operation by modifying the following system variables:
+TiDB は、オンラインのインデックス追加操作をサポートしています。 [インデックスを追加](/sql-statements/sql-statement-add-index.md)つまたは[インデックスを作成](/sql-statements/sql-statement-create-index.md)のステートメントを使用してインデックスを追加できます。テーブルでのデータの読み取りと書き込みはブロックされません。次のシステム変数を変更することで、インデックス追加操作の`re-organize`フェーズ中に同時実行数とバッチ サイズを調整できます。
 
-* [`tidb_ddl_reorg_worker_cnt`](/system-variables.md#tidb_ddl_reorg_worker_cnt)
-* [`tidb_ddl_reorg_batch_size`](/system-variables.md#tidb_ddl_reorg_batch_size)
+-   [`tidb_ddl_reorg_worker_cnt`](/system-variables.md#tidb_ddl_reorg_worker_cnt)
+-   [`tidb_ddl_reorg_batch_size`](/system-variables.md#tidb_ddl_reorg_batch_size)
 
-To reduce the impact on the online application, the default speed of add index operation is slow. When the target column of add index operation only involves read load or is not directly related to online workload, you can appropriately increase the value of the above variables to speed up the add index operation:
+オンライン アプリケーションへの影響を軽減するために、インデックスの追加操作の既定の速度は低速です。インデックスの追加操作のターゲット列が読み取り負荷のみを含むか、オンライン ワークロードに直接関係しない場合、上記の変数の値を適切に増やして、インデックスの追加操作を高速化できます。
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 SET @@global.tidb_ddl_reorg_worker_cnt = 16;
 SET @@global.tidb_ddl_reorg_batch_size = 4096;
 ```
 
-When the target column of the add index operation is updated frequently (including `UPDATE`, `INSERT` and `DELETE`), increasing the above variables causes more write conflicts, which impacts the online workload. Accordingly, the add index operation might take a long time to complete due to constant retries. In this case, it is recommended to decrease the value of the above variables to avoid write conflicts with the online application:
+インデックスの追加操作のターゲット列が頻繁に更新される場合 ( `UPDATE` 、 `INSERT` 、および`DELETE`を含む)、上記の変数を増やすと、より多くの書き込み競合が発生し、オンライン ワークロードに影響します。したがって、インデックスの追加操作は、一定の再試行により完了するまでに長い時間がかかる場合があります。この場合、上記の変数の値を減らして、オンライン アプリケーションとの書き込み競合を回避することをお勧めします。
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 SET @@global.tidb_ddl_reorg_worker_cnt = 4;
 SET @@global.tidb_ddl_reorg_batch_size = 128;
 ```
 
-## Transaction conflicts
+## トランザクションの競合 {#transaction-conflicts}
 
 <CustomContent platform="tidb">
 
-For how to locate and resolve transaction conflicts, see [Troubleshoot Lock Conflicts](/troubleshoot-lock-conflicts.md).
+トランザクションの競合を特定して解決する方法については、 [ロック競合のトラブルシューティング](/troubleshoot-lock-conflicts.md)を参照してください。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-For how to locate and resolve transaction conflicts, see [Troubleshoot Lock Conflicts](https://docs.pingcap.com/tidb/stable/troubleshoot-lock-conflicts).
+トランザクションの競合を特定して解決する方法については、 [ロック競合のトラブルシューティング](https://docs.pingcap.com/tidb/stable/troubleshoot-lock-conflicts)を参照してください。
 
 </CustomContent>
 
-## Best practices for developing Java applications with TiDB
+## TiDB でJavaアプリケーションを開発するためのベスト プラクティス {#best-practices-for-developing-java-applications-with-tidb}
 
 <CustomContent platform="tidb">
 
-See [Best Practices for Developing Java Applications with TiDB](/best-practices/java-app-best-practices.md).
+[TiDB でJavaアプリケーションを開発するためのベスト プラクティス](/best-practices/java-app-best-practices.md)を参照してください。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-See [Best Practices for Developing Java Applications with TiDB](https://docs.pingcap.com/tidb/stable/java-app-best-practices).
+[TiDB でJavaアプリケーションを開発するためのベスト プラクティス](https://docs.pingcap.com/tidb/stable/java-app-best-practices)を参照してください。
 
 </CustomContent>
 
-### See also
+### こちらもご覧ください {#see-also}
 
 <CustomContent platform="tidb">
 
-- [Highly Concurrent Write Best Practices](/best-practices/high-concurrency-best-practices.md)
+-   [高度な同時書き込みのベスト プラクティス](/best-practices/high-concurrency-best-practices.md)
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-- [Highly Concurrent Write Best Practices](https://docs.pingcap.com/tidb/stable/high-concurrency-best-practices)
+-   [高度な同時書き込みのベスト プラクティス](https://docs.pingcap.com/tidb/stable/high-concurrency-best-practices)
 
 </CustomContent>

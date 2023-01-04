@@ -3,11 +3,11 @@ title: REVOKE <privileges> | TiDB SQL Statement Reference
 summary: An overview of the usage of REVOKE <privileges> for the TiDB database.
 ---
 
-# `REVOKE <privileges>`
+# <code>REVOKE &#x3C;privileges></code> {#code-revoke-x3c-privileges-code}
 
-This statement removes privileges from an existing user. Executing this statement requires the `GRANT OPTION` privilege and all privileges you revoke.
+このステートメントは、既存のユーザーから権限を削除します。このステートメントを実行するには、 `GRANT OPTION`の特権と、取り消すすべての権限が必要です。
 
-## Synopsis
+## あらすじ {#synopsis}
 
 ```ebnf+diagram
 GrantStmt ::=
@@ -56,7 +56,7 @@ UserSpecList ::=
     UserSpec ( ',' UserSpec )*
 ```
 
-## Examples
+## 例 {#examples}
 
 ```sql
 mysql> CREATE USER 'newuser' IDENTIFIED BY 'mypassword';
@@ -92,17 +92,17 @@ mysql> SHOW GRANTS FOR 'newuser';
 ERROR 1141 (42000): There is no such grant defined for user 'newuser' on host '%'
 ```
 
-## MySQL compatibility
+## MySQL の互換性 {#mysql-compatibility}
 
-This statement is understood to be fully compatible with MySQL. Any compatibility differences should be [reported via an issue](https://github.com/pingcap/tidb/issues/new/choose) on GitHub.
+このステートメントは、MySQL と完全に互換性があると理解されています。互換性の違いは、GitHub で[問題を介して報告された](https://github.com/pingcap/tidb/issues/new/choose)にする必要があります。
 
-## See also
+## こちらもご覧ください {#see-also}
 
-* [`GRANT <privileges>`](/sql-statements/sql-statement-grant-privileges.md)
-* [SHOW GRANTS](/sql-statements/sql-statement-show-grants.md)
+-   [`GRANT &#x3C;privileges>`](/sql-statements/sql-statement-grant-privileges.md)
+-   [助成金を表示](/sql-statements/sql-statement-show-grants.md)
 
 <CustomContent platform="tidb">
 
-* [Privilege Management](/privilege-management.md)
+-   [権限管理](/privilege-management.md)
 
 </CustomContent>

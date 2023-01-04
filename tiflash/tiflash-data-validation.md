@@ -3,42 +3,42 @@ title: TiFlash Data Validation
 summary: Learn the data validation mechanism and tools for TiFlash.
 ---
 
-# TiFlash Data validation
+# TiFlashデータ検証 {#tiflash-data-validation}
 
-This document introduces the data validation mechanism and tools for TiFlash.
+このドキュメントでは、 TiFlashのデータ検証メカニズムとツールを紹介します。
 
-Data corruptions are usually caused by serious hardware failures. In such cases, even if you attempt to manually recover data, your data become less reliable.
+通常、データの破損は深刻なハードウェア障害によって引き起こされます。このような場合、手動でデータを回復しようとしても、データの信頼性が低下します。
 
-To ensure data integrity, by default, TiFlash performs basic data validation on data files, using the `City128` algorithm. In the event of any data validation failure, TiFlash immediately reports an error and exits, avoiding secondary disasters caused by inconsistent data. At this time, you need to manually intervene and replicate the data again before you can restore the TiFlash node.
+データの整合性を確保するために、デフォルトでは、 TiFlashは`City128`アルゴリズムを使用して、データ ファイルに対して基本的なデータ検証を実行します。データの検証に失敗した場合、 TiFlashはすぐにエラーを報告して終了し、データの不一致による二次災害を回避します。この時点で、 TiFlashノードを復元する前に、手動で介入してデータを再度複製する必要があります。
 
-Starting from v5.4.0, TiFlash introduces more advanced data validation features. TiFlash uses the `XXH3` algorithm by default and allows you to customize the validation frame and algorithm.
+v5.4.0 から、 TiFlashはより高度なデータ検証機能を導入しています。 TiFlashはデフォルトで`XXH3`アルゴリズムを使用し、検証フレームとアルゴリズムをカスタマイズできます。
 
-## Validation mechanism
+## 検証メカニズム {#validation-mechanism}
 
-The validation mechanism builds upon the DeltaTree File (DTFile). DTFile is the storage file that persists TiFlash data. DTFile has three formats:
+検証メカニズムは、DeltaTree ファイル (DTFile) に基づいています。 DTFile は、 TiFlashデータを保持するストレージ ファイルです。 DTFile には次の 3 つの形式があります。
 
-| Version | State | Validation mechanism | Notes |
-| :-- | :-- | :-- |:-- |
-| V1 | Deprecated | Hashes are embedded in data files. | |
-| V2 | Default for versions < v6.0.0 | Hashes are embedded in data files. | Compared to V1, V2 adds statistics of column data. |
-| V3 | Default for versions >= v6.0.0 | V3 contains metadata and token data checksum, and supports multiple hash algorithms. | New in v5.4.0. |
+| バージョン | 州                         | 検証メカニズム                                                      | ノート                         |
+| :---- | :------------------------ | :----------------------------------------------------------- | :-------------------------- |
+| V1    | 非推奨                       | ハッシュはデータ ファイルに埋め込まれます。                                       |                             |
+| V2    | バージョン &lt; v6.0.0 のデフォルト  | ハッシュはデータ ファイルに埋め込まれます。                                       | V1 と比較して、V2 は列データの統計を追加します。 |
+| V3    | バージョン &gt;= v6.0.0 のデフォルト | V3 には、メタデータとトークン データのチェックサムが含まれており、複数のハッシュ アルゴリズムをサポートしています。 | v5.4.0 の新機能。                |
 
-DTFile is stored in the `stable` folder in the data file directory. All formats currently enabled are in folder format, which means the data is stored in multiple files under a folder with a name like `dmf_<file id>`.
+DTFile はデータファイルディレクトリの`stable`フォルダに格納されています。現在有効になっている形式はすべてフォルダー形式です。つまり、データは`dmf_<file id>`のような名前のフォルダーの下にある複数のファイルに保存されます。
 
-### Use data validation
+### データ検証を使用する {#use-data-validation}
 
-TiFlash supports both automatic and manual data validation:
+TiFlashは、自動データ検証と手動データ検証の両方をサポートしています。
 
-* Automatic data validation:
-    * v6.0.0 and later versions use the V3 validation mechanism by default.
-    * Versions earlier than v6.0.0 use the V2 validation mechanism by default.
-    * To manually switch the validation mechanism, refer to [TiFlash configuration file](/tiflash/tiflash-configuration.md#configure-the-tiflashtoml-file). However, the default configuration is verified by tests and therefore recommended.
-* Manual data validation. Refer to [`DTTool inspect`](/tiflash/tiflash-command-line-flags.md#dttool-inspect).
+-   自動データ検証:
+    -   v6.0.0 以降のバージョンでは、デフォルトで V3 検証メカニズムが使用されます。
+    -   v6.0.0 より前のバージョンでは、デフォルトで V2 検証メカニズムが使用されます。
+    -   検証メカニズムを手動で切り替えるには、 [TiFlash構成ファイル](/tiflash/tiflash-configuration.md#configure-the-tiflashtoml-file)を参照してください。ただし、デフォルト構成はテストによって検証されているため、推奨されます。
+-   手動データ検証。 [`DTTool inspect`](/tiflash/tiflash-command-line-flags.md#dttool-inspect)を参照してください。
 
-> **Warning:**
+> **警告：**
 >
-> After you enable the V3 validation mechanism, the newly generated DTFile cannot be directly read by TiFlash earlier than v5.4.0. Since v5.4.0, TiFlash supports both V2 and V3 and does not actively upgrade or downgrade versions. If you need to upgrade or downgrade versions for existing files, you need to manually [switch versions](/tiflash/tiflash-command-line-flags.md#dttool-migrate).
+> V3 検証メカニズムを有効にすると、新しく生成された DTFile をTiFlashで直接読み取ることができなくなります。 v5.4.0 以降、 TiFlashは V2 と V3 の両方をサポートし、積極的にバージョンをアップグレードまたはダウングレードしません。既存のファイルのバージョンをアップグレードまたはダウングレードする必要がある場合は、手動で行う必要があります[バージョンを切り替える](/tiflash/tiflash-command-line-flags.md#dttool-migrate) 。
 
-### Validation tool
+### 検証ツール {#validation-tool}
 
-In addition to automatic data validation performed when TiFlash reads data, a tool for manually checking data integrity is introduced in v5.4.0. For details, refer to [DTTool](/tiflash/tiflash-command-line-flags.md#dttool-inspect).
+TiFlashがデータを読み取るときに実行される自動データ検証に加えて、データの整合性を手動でチェックするツールが v5.4.0 で導入されました。詳細については、 [DTツール](/tiflash/tiflash-command-line-flags.md#dttool-inspect)を参照してください。

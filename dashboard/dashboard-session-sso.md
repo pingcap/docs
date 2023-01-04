@@ -3,238 +3,237 @@ title: Configure SSO for TiDB Dashboard
 summary: Learn how to enable SSO to sign into TiDB Dashboard.
 ---
 
-# Configure SSO for TiDB Dashboard
+# TiDB ダッシュボードの SSO を構成する {#configure-sso-for-tidb-dashboard}
 
-TiDB Dashboard supports [OIDC](https://openid.net/connect/)-based Single Sign-On (SSO). After enabling the SSO feature of TiDB Dashboard, the configured SSO service is used for your sign-in authentication and then you can access TiDB Dashboard without entering the SQL user password.
+TiDB ダッシュボードは、 [OIDC](https://openid.net/connect/)ベースのシングル サインオン (SSO) をサポートしています。 TiDB ダッシュボードの SSO 機能を有効にすると、構成された SSO サービスがサインイン認証に使用され、SQL ユーザー パスワードを入力せずに TiDB ダッシュボードにアクセスできるようになります。
 
-## Configure OIDC SSO
+## OIDC SSO の構成 {#configure-oidc-sso}
 
-### Enable SSO
+### SSO を有効にする {#enable-sso}
 
-1. Sign into TiDB Dashboard.
+1.  TiDB ダッシュボードにサインインします。
 
-2. Click the username in the left sidebar to access the configuration page.
+2.  左側のサイドバーでユーザー名をクリックして、構成ページにアクセスします。
 
-3. In the **Single Sign-On** section, select **Enable to use SSO when sign into TiDB Dashboard**.
+3.  [**シングル サインオン**] セクションで、[有効にする] を選択<strong>して、TiDB ダッシュボードにサインインするときに SSO を使用します</strong>。
 
-4. Fill the **OIDC Client ID** and the **OIDC Discovery URL** fields in the form.
+4.  フォームの**OIDC クライアント ID**と<strong>OIDC 検出 URL</strong>フィールドに入力します。
 
-   Generally, you can obtain the two fields from the SSO service provider:
+    通常、SSO サービス プロバイダーから次の 2 つのフィールドを取得できます。
 
-   - OIDC Client ID is also called OIDC Token Issuer.
-   - OIDC Discovery URL is also called OIDC Token Audience.
+    -   OIDC クライアント ID は、OIDC トークン発行者とも呼ばれます。
+    -   OIDC Discovery URL は、OIDC Token Audience とも呼ばれます。
 
-5. Click **Authorize Impersonation** and input the SQL password.
+5.  **Authorize Impersonation**をクリックし、SQL パスワードを入力します。
 
-   TiDB Dashboard will store this SQL password and use it to impersonate a normal SQL sign-in after an SSO sign-in is finished.
+    TiDB ダッシュボードはこの SQL パスワードを保存し、SSO サインインが完了した後に通常の SQL サインインを偽装するために使用します。
 
-   ![Sample Step](/media/dashboard/dashboard-session-sso-enable-1.png)
+    ![Sample Step](/media/dashboard/dashboard-session-sso-enable-1.png)
 
-   > **Note:**
-   >
-   > The password you have entered will be encrypted and stored. The SSO sign-in will fail after the password of the SQL user is changed. In this case, you can re-enter the password to bring SSO back.
+    > **ノート：**
+    >
+    > 入力したパスワードは暗号化されて保存されます。 SQL ユーザーのパスワードが変更されると、SSO サインインは失敗します。この場合、パスワードを再入力して SSO を元に戻すことができます。
 
-6. Click **Authorize and Save**.
+6.  [**認証して保存] を**クリックします。
 
-   ![Sample Step](/media/dashboard/dashboard-session-sso-enable-2.png)
+    ![Sample Step](/media/dashboard/dashboard-session-sso-enable-2.png)
 
-7. Click **Update** (Update) to save the configuration.
+7.  **更新**(更新) をクリックして構成を保存します。
 
-   ![Sample Step](/media/dashboard/dashboard-session-sso-enable-3.png)
+    ![Sample Step](/media/dashboard/dashboard-session-sso-enable-3.png)
 
-Now SSO sign-in has been enabled for TiDB Dashboard.
+これで、TiDB ダッシュボードで SSO サインインが有効になりました。
 
-> **Note:**
+> **ノート：**
 >
-> For security reasons, some SSO services require additional configuration for the SSO service, such as the trusted sign-in and sign-out URIs. Refer to the documentation of the SSO service for further information.
+> セキュリティ上の理由から、一部の SSO サービスでは、信頼できるサインイン URI やサインアウト URI など、SSO サービスの追加構成が必要です。詳細については、SSO サービスのドキュメントを参照してください。
 
-### Disable SSO
+### SSO を無効にする {#disable-sso}
 
-You can disable the SSO, which will completely erase the stored SQL password:
+SSO を無効にすると、保存されている SQL パスワードが完全に消去されます。
 
-1. Sign into TiDB Dashboard.
+1.  TiDB ダッシュボードにサインインします。
 
-2. Click the username in the left sidebar to access the configuration page.
+2.  左側のサイドバーでユーザー名をクリックして、構成ページにアクセスします。
 
-3. In the **Single Sign-On** section, deselect **Enable to use SSO when sign into TiDB Dashboard**.
+3.  [**シングル サインオン**] セクションで、 <strong>[TiDB ダッシュボードにサインインするときに SSO を使用するには有効にする]</strong>の選択を解除します。
 
-4. Click **Update** (Update) to save the configuration.
+4.  **更新**(更新) をクリックして構成を保存します。
 
-   ![Sample Step](/media/dashboard/dashboard-session-sso-disable.png)
+    ![Sample Step](/media/dashboard/dashboard-session-sso-disable.png)
 
-### Re-enter the password after a password change
+### パスワード変更後のパスワード再入力 {#re-enter-the-password-after-a-password-change}
 
-The SSO sign-in will fail once the password of the SQL user is changed. In this case, you can bring back the SSO sign-in by re-entering the SQL password:
+SQL ユーザーのパスワードが変更されると、SSO サインインは失敗します。この場合、SQL パスワードを再入力することで、SSO サインインを元に戻すことができます。
 
-1. Sign into TiDB Dashboard.
+1.  TiDB ダッシュボードにサインインします。
 
-2. Click the username in the left sidebar to access the configuration page.
+2.  左側のサイドバーでユーザー名をクリックして、構成ページにアクセスします。
 
-3. In the **Single Sign-On** section, Click **Authorize Impersonation** and input the updated SQL password.
+3.  [ **Single Sign-On** ] セクションで、[ <strong>Authorize Impersonation]</strong>をクリックし、更新された SQL パスワードを入力します。
 
-   ![Sample Step](/media/dashboard/dashboard-session-sso-reauthorize.png)
+    ![Sample Step](/media/dashboard/dashboard-session-sso-reauthorize.png)
 
-4. Click **Authorize and Save**.
+4.  [**認証して保存] を**クリックします。
 
-## Sign in via SSO
+## SSO 経由でサインインする {#sign-in-via-sso}
 
-Once SSO is configured for TiDB Dashboard, you can sign in via SSO by taking following steps:
+SSO が TiDB ダッシュボード用に構成されたら、次の手順を実行して SSO 経由でサインインできます。
 
-1. In the sign-in page of TiDB Dashboard, click **Sign in via Company Account**.
+1.  TiDB ダッシュボードのサインイン ページで、 [ **Sign in via Company Account** ] をクリックします。
 
-   ![Sample Step](/media/dashboard/dashboard-session-sso-signin.png)
+    ![Sample Step](/media/dashboard/dashboard-session-sso-signin.png)
 
-2. Sign into the system with SSO service configured.
+2.  SSO サービスが構成されたシステムにサインインします。
 
-3. You are redirected back to TiDB Dashboard to finish the sign-in.
+3.  サインインを完了するために、TiDB ダッシュボードにリダイレクトされます。
 
-## Example 1: Use Okta for TiDB Dashboard SSO sign-in
+## 例 1: TiDB ダッシュボードの SSO サインインに Okta を使用する {#example-1-use-okta-for-tidb-dashboard-sso-sign-in}
 
-[Okta](https://www.okta.com/) is an OIDC SSO identity service, which is compatible with the SSO feature of TiDB Dashboard. The steps below demonstrate how to configure Okta and TiDB Dashboard so that Okta can be used as the TiDB Dashboard SSO provider.
+[オクタ](https://www.okta.com/)は、TiDB ダッシュボードの SSO 機能と互換性のある OIDC SSO ID サービスです。以下の手順は、Okta を TiDB ダッシュボード SSO プロバイダーとして使用できるように、Okta と TiDB ダッシュボードを構成する方法を示しています。
 
-### Step 1: Configure Okta
+### ステップ 1: Okta を構成する {#step-1-configure-okta}
 
-First, create an Okta Application Integration to integrate SSO.
+まず、Okta アプリケーション統合を作成して SSO を統合します。
 
-1. Access the Okta administration site.
+1.  Okta 管理サイトにアクセスします。
 
-2. Navigate from the left sidebar **Applications** > **Applications**.
+2.  左側のサイドバーから [**アプリケーション**] &gt; [<strong>アプリケーション</strong>] に移動します。
 
-3. Click **Create App Integration**.
+3.  [**アプリ統合の作成]**をクリックします。
 
-   ![Sample Step](/media/dashboard/dashboard-session-sso-okta-1.png)
+    ![Sample Step](/media/dashboard/dashboard-session-sso-okta-1.png)
 
-4. In the poped up dialog, choose **OIDC - OpenID Connect** in **Sign-in method**.
+4.  ポップアップしたダイアログで、 **OIDC - OpenID Connect** in <strong>Sign-in method</strong>を選択します。
 
-5. Choose **Single-Page Application** in **Application Type**.
+5.  **Application Type**で<strong>Single-Page Application</strong>を選択します。
 
-6. Click the **Next** button.
+6.  [**次へ**] ボタンをクリックします。
 
-   ![Sample Step](/media/dashboard/dashboard-session-sso-okta-2.png)
+    ![Sample Step](/media/dashboard/dashboard-session-sso-okta-2.png)
 
-7. Fill **Sign-in redirect URIs** as follows:
+7.  **サインイン リダイレクト URI**を次のように入力します。
 
-   ```
-   http://DASHBOARD_IP:PORT/dashboard/?sso_callback=1
-   ```
-
-   Substitute `DASHBOARD_IP:PORT` with the actual domain (or IP address) and port that you use to access the TiDB Dashboard in the browser.
-
-8. Fill **Sign-out redirect URIs** as follows:
-
-   ```
-   http://DASHBOARD_IP:PORT/dashboard/
-   ```
-
-   Similarly, substitute `DASHBOARD_IP:PORT` with the actual domain (or IP address) and port.
-
-   ![Sample Step](/media/dashboard/dashboard-session-sso-okta-3.png)
-
-9. Configure what type of users in your organization is allowed for SSO sign-in in the **Assignments** field, and then click **Save** to save the configuration.
-
-   ![Sample Step](/media/dashboard/dashboard-session-sso-okta-4.png)
-
-### Step 2: Obtain OIDC information and fill in TiDB Dashboard
-
-1. In the Application Integration just created in Okta, click **Sign On**.
-
-   ![Sample Step 1](/media/dashboard/dashboard-session-sso-okta-info-1.png)
-
-2. Copy values of the **Issuer** and **Audience** fields from the **OpenID Connect ID Token** section.
-
-   ![Sample Step 2](/media/dashboard/dashboard-session-sso-okta-info-2.png)
-
-3. Open the TiDB Dashboard configuration page, fill **OIDC Client ID** with **Issuer** obtained from the last step and fill **OIDC Discovery URL** with **Audience**. Then finish the authorization and save the configuration. For example:
-
-   ![Sample Step 3](/media/dashboard/dashboard-session-sso-okta-info-3.png)
-
-Now TiDB Dashboard has been configured to use Okta SSO for sign-in.
-
-## Example 2: Use Auth0 for TiDB Dashboard SSO sign-in
-
-Similar to Okta, [Auth0](https://auth0.com/) also provides OIDC SSO identity service. The following steps describe how to configure Auth0 and TiDB Dashboard so that Auth0 can be used as the TiDB Dashboard SSO provider.
-
-### Step 1: Configure Auth0
-
-1. Access the Auth0 administration site.
-
-2. Navigate on the left sidebar **Applications** > **Applications**.
-
-3. Click **Create App Integration**. 
-
-   ![Create Application](/media/dashboard/dashboard-session-sso-auth0-create-app.png)
-
-    In the popped-up dialog, fill **Name**, for example, "TiDB Dashboard". Choose **Single Page Web Applications** in **Choose an application type**. Click **Create**.
-
-4. Click **Settings**.
-
-   ![Settings](/media/dashboard/dashboard-session-sso-auth0-settings-1.png)
-
-5. Fill **Allowed Callback URLs** as follows:
-
-   ```
-   http://DASHBOARD_IP:PORT/dashboard/?sso_callback=1
-   ```
-
-   Replace `DASHBOARD_IP:PORT` with the actual domain (or IP address) and port that you use to access the TiDB Dashboard in your browser.
-
-6. Fill **Allowed Logout URLs** as follows:
-
-   ```
-   http://DASHBOARD_IP:PORT/dashboard/
+    ```
+    http://DASHBOARD_IP:PORT/dashboard/?sso_callback=1
     ```
 
-   Similarly, replace `DASHBOARD_IP:PORT` with the actual domain (or IP address) and port.
+    `DASHBOARD_IP:PORT`を、ブラウザーで TiDB ダッシュボードにアクセスするために使用する実際のドメイン (または IP アドレス) とポートに置き換えます。
 
-   ![Settings](/media/dashboard/dashboard-session-sso-auth0-settings-2.png)
+8.  **サインアウト リダイレクト URI**を次のように入力します。
 
-7. Keep the default values for other settings and click **Save Changes**.
+    ```
+    http://DASHBOARD_IP:PORT/dashboard/
+    ```
 
-### Step 2: Obtain OIDC information and fill in TiDB Dashboard
+    同様に、 `DASHBOARD_IP:PORT`を実際のドメイン (または IP アドレス) とポートに置き換えます。
 
-1. Fill **OIDC Client ID** of TiDB Dashboard with **Client ID** in **Basic Information** under the **Settings** tab of Auth0.
+    ![Sample Step](/media/dashboard/dashboard-session-sso-okta-3.png)
 
-2. Fill **OIDC Discovery URL** with the **Domain** field value prefixed with `https://` and suffixed with `/`, for example, `https://example.us.auth0.com/`. Complete authorization and save the configuration.
+9.  [**割り当て**] フィールドで SSO サインインを許可する組織内のユーザーのタイプを構成し、[<strong>保存</strong>] をクリックして構成を保存します。
 
-   ![Settings](/media/dashboard/dashboard-session-sso-auth0-settings-3.png)
+    ![Sample Step](/media/dashboard/dashboard-session-sso-okta-4.png)
 
-Now TiDB Dashboard has been configured to use Auth0 SSO for sign-in.
+### ステップ 2: OIDC 情報を取得し、TiDB ダッシュボードに入力する {#step-2-obtain-oidc-information-and-fill-in-tidb-dashboard}
 
-## Example 3: Use Casdoor for TiDB Dashboard SSO sign-in
+1.  Okta で作成した Application Integration で、 **Sign On**をクリックします。
 
-[Casdoor](https://casdoor.org/) is an open-source SSO platform that can be deployed in your own hosts. It is compatible with the SSO feature of TiDB Dashboard. The following steps describe how to configure Casdoor and TiDB Dashboard so that Casdoor can be used as the TiDB Dashboard SSO provider.
+    ![Sample Step 1](/media/dashboard/dashboard-session-sso-okta-info-1.png)
 
-### Step 1: Configure Casdoor
+2.  **OpenID Connect ID Token**セクションから<strong>Issuer</strong>フィールドと<strong>Audience</strong>フィールドの値をコピーします。
 
-1. Deploy and access the Casdoor administration site.
+    ![Sample Step 2](/media/dashboard/dashboard-session-sso-okta-info-2.png)
 
-2. Navigate from the top sidebar **Applications**.
+3.  TiDB ダッシュボードの構成ページを開き、 **OIDC クライアント ID**に最後の手順で取得した<strong>発行者</strong>を入力し、 <strong>OIDC 検出 URL</strong>に<strong>Audience</strong>を入力します。次に、承認を完了し、構成を保存します。例えば：
 
-3. Click **Applications - Add**.
-   ![Settings](/media/dashboard/dashboard-session-sso-casdoor-settings-1.png)
+    ![Sample Step 3](/media/dashboard/dashboard-session-sso-okta-info-3.png)
 
-4. Fill **Name** and **Display name**, for example, **TiDB Dashboard**.
+これで、サインインに Okta SSO を使用するように TiDB ダッシュボードが構成されました。
 
-5. Add **Redirect URLs** as follows:
+## 例 2: TiDB ダッシュボードの SSO サインインに Auth0 を使用する {#example-2-use-auth0-for-tidb-dashboard-sso-sign-in}
 
-   ```
-   http://DASHBOARD_IP:PORT/dashboard/?sso_callback=1
-   ```
+Okta と同様に、 [Auth0](https://auth0.com/)も OIDC SSO ID サービスを提供します。次の手順では、Auth0 を TiDB ダッシュボード SSO プロバイダーとして使用できるように、Auth0 と TiDB ダッシュボードを構成する方法について説明します。
 
-   Replace `DASHBOARD_IP:PORT` with the actual domain (or IP address) and port that you use to access the TiDB Dashboard in your browser.
-   
-   ![Settings](/media/dashboard/dashboard-session-sso-casdoor-settings-2.png)
+### ステップ 1: Auth0 を構成する {#step-1-configure-auth0}
 
-6. Keep the default values for other settings and click **Save & Exit**.
+1.  Auth0 管理サイトにアクセスします。
 
-7. Save the **Client ID** seen on the page.
+2.  左側のサイドバーの [**アプリケーション**] &gt; [<strong>アプリケーション</strong>] に移動します。
 
-### Step 2: Obtain OIDC information and fill in TiDB Dashboard
+3.  [**アプリ統合の作成]**をクリックします。
 
-1. Fill **OIDC Client ID** of TiDB dashboard with **Client ID** saved in the previous step.
+    ![Create Application](/media/dashboard/dashboard-session-sso-auth0-create-app.png)
 
-2. Fill **OIDC Discovery URL** with the **Domain** field value prefixed with `https://` and suffixed with `/`, for example, `https://casdoor.example.com/`. Complete authorization and save the configuration.
+    ポップアップしたダイアログで、「TiDB ダッシュボード」などの**名前**を入力します。 Choose <strong>an application type</strong>で<strong>Single Page Web Applications</strong>を選択します。 [<strong>作成]</strong>をクリックします。
 
-      ![Settings](/media/dashboard/dashboard-session-sso-casdoor-settings-3.png)
+4.  [**設定]**をクリックします。
 
-Now TiDB Dashboard has been configured to use Casdoor SSO for sign-in.
+    ![Settings](/media/dashboard/dashboard-session-sso-auth0-settings-1.png)
+
+5.  **許可されたコールバック URL**を次のように入力します。
+
+    ```
+    http://DASHBOARD_IP:PORT/dashboard/?sso_callback=1
+    ```
+
+    `DASHBOARD_IP:PORT`を、ブラウザで TiDB ダッシュボードにアクセスするために使用する実際のドメイン (または IP アドレス) とポートに置き換えます。
+
+6.  **許可されたログアウト URL**を次のように入力します。
+
+    ```
+    http://DASHBOARD_IP:PORT/dashboard/
+    ```
+
+    同様に、 `DASHBOARD_IP:PORT`を実際のドメイン (または IP アドレス) とポートに置き換えます。
+
+    ![Settings](/media/dashboard/dashboard-session-sso-auth0-settings-2.png)
+
+7.  その他の設定はデフォルト値のままにして、[ **Save Changes** ] をクリックします。
+
+### ステップ 2: OIDC 情報を取得し、TiDB ダッシュボードに入力する {#step-2-obtain-oidc-information-and-fill-in-tidb-dashboard}
+
+1.  TiDB ダッシュボードの**OIDC クライアント ID**に、Auth0 の<strong>[設定</strong>] タブの [<strong>基本情報</strong>] にある<strong>クライアント ID</strong>を入力します。
+
+2.  **OIDC 検出 URL**に、接頭辞`https://`と接尾辞`/`を付けた<strong>Domain</strong>フィールド値を入力します (例: `https://example.us.auth0.com/` )。承認を完了し、構成を保存します。
+
+    ![Settings](/media/dashboard/dashboard-session-sso-auth0-settings-3.png)
+
+これで、サインインに Auth0 SSO を使用するように TiDB ダッシュボードが構成されました。
+
+## 例 3: TiDB ダッシュボードの SSO サインインに Casdoor を使用する {#example-3-use-casdoor-for-tidb-dashboard-sso-sign-in}
+
+[カスドア](https://casdoor.org/)は、独自のホストにデプロイできるオープンソースの SSO プラットフォームです。 TiDB ダッシュボードの SSO 機能と互換性があります。次の手順では、Casdoor を TiDB ダッシュボード SSO プロバイダーとして使用できるように Casdoor と TiDB ダッシュボードを構成する方法について説明します。
+
+### ステップ 1: Casdoor を構成する {#step-1-configure-casdoor}
+
+1.  Casdoor 管理サイトをデプロイしてアクセスします。
+
+2.  上部のサイドバー**アプリケーション**から移動します。
+
+3.  [**アプリケーション - 追加] を**クリックします。 ![Settings](/media/dashboard/dashboard-session-sso-casdoor-settings-1.png)
+
+4.  **名前**と<strong>表示名</strong>を入力します (例: <strong>TiDB Dashboard</strong> )。
+
+5.  次のように**リダイレクト URL**を追加します。
+
+    ```
+    http://DASHBOARD_IP:PORT/dashboard/?sso_callback=1
+    ```
+
+    `DASHBOARD_IP:PORT`を、ブラウザで TiDB ダッシュボードにアクセスするために使用する実際のドメイン (または IP アドレス) とポートに置き換えます。
+
+    ![Settings](/media/dashboard/dashboard-session-sso-casdoor-settings-2.png)
+
+6.  他の設定はデフォルト値のままにして、[**保存して終了**] をクリックします。
+
+7.  ページに表示された**クライアント ID**を保存します。
+
+### ステップ 2: OIDC 情報を取得し、TiDB ダッシュボードに入力する {#step-2-obtain-oidc-information-and-fill-in-tidb-dashboard}
+
+1.  TiDB ダッシュボードの**OIDC クライアント ID**に、前の手順で保存した<strong>クライアント ID</strong>を入力します。
+
+2.  **OIDC 検出 URL**に、接頭辞`https://`と接尾辞`/`を付けた<strong>Domain</strong>フィールド値を入力します (例: `https://casdoor.example.com/` )。承認を完了し、構成を保存します。
+
+    ![Settings](/media/dashboard/dashboard-session-sso-casdoor-settings-3.png)
+
+これで、サインインに Casdoor SSO を使用するように TiDB ダッシュボードが構成されました。

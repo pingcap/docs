@@ -1,45 +1,45 @@
-# TiDB Documentation
+# TiDB ドキュメント {#tidb-documentation}
 
-Welcome to TiDB documentation!
+TiDB ドキュメントへようこそ!
 
-This repository stores all the source files of [TiDB Docs at the PingCAP website](https://docs.pingcap.com/tidb/stable), while the [pingcap/docs-cn](https://github.com/pingcap/docs-cn) repository stores all the source files of [TiDB Documentation in Chinese](https://docs.pingcap.com/zh/tidb/stable).
+このリポジトリには[PingCAP Web サイトの TiDB ドキュメント](https://docs.pingcap.com/tidb/stable)のすべてのソース ファイルが格納され、 [pingcap/docs-cn](https://github.com/pingcap/docs-cn)リポジトリには[中国語の TiDB ドキュメント](https://docs.pingcap.com/zh/tidb/stable)のすべてのソース ファイルが格納されます。
 
-If you find documentation issues, feel free to [create an Issue](https://github.com/pingcap/docs/issues/new/choose) to let us know or directly [create a Pull Request](/CONTRIBUTING.md#how-to-contribute) to help fix or update it.
+ドキュメントの問題を見つけた場合は、お気軽に[問題を作成する](https://github.com/pingcap/docs/issues/new/choose)までご連絡いただくか、直接[プルリクエストを作成する](/CONTRIBUTING.md#how-to-contribute)までご連絡ください。修正または更新にご協力ください。
 
-Currently, the official documentation supports two languages:
+現在、公式ドキュメントは 2 つの言語をサポートしています。
 
-- `en`: [documentation in English](https://docs.pingcap.com/tidb/stable)
-- `zh`: [documentation in Chinese](https://docs.pingcap.com/zh/tidb/stable)
+-   `en` : [英語のドキュメント](https://docs.pingcap.com/tidb/stable)
+-   `zh` : [中国語のドキュメンテーション](https://docs.pingcap.com/zh/tidb/stable)
 
-You can use Google Translate to view the documentation in different languages. For example:
+Google 翻訳を使用して、さまざまな言語でドキュメントを表示できます。例えば：
 
-- `fr`: [documentation in French](https://translate.google.com/translate?hl=en&sl=en&tl=fr&u=https%3A%2F%2Fgithub.com%2Fpingcap%2Fdocs%2Fblob%2Fmaster%2FTOC.md)
-- `ja`: [documentation in Japanese](https://translate.google.com/translate?hl=en&sl=en&tl=ja&u=https%3A%2F%2Fgithub.com%2Fpingcap%2Fdocs%2Fblob%2Fmaster%2FTOC.md)
-- `ko`: [documentation in Korean](https://translate.google.com/translate?hl=en&sl=en&tl=ko&u=https%3A%2F%2Fgithub.com%2Fpingcap%2Fdocs%2Fblob%2Fmaster%2FTOC.md)
+-   `fr` : [フランス語のドキュメンテーション](https://translate.google.com/translate?hl=en&#x26;sl=en&#x26;tl=fr&#x26;u=https%3A%2F%2Fgithub.com%2Fpingcap%2Fdocs%2Fblob%2Fmaster%2FTOC.md)
+-   `ja` : [日本語のドキュメンテーション](https://translate.google.com/translate?hl=en&#x26;sl=en&#x26;tl=ja&#x26;u=https%3A%2F%2Fgithub.com%2Fpingcap%2Fdocs%2Fblob%2Fmaster%2FTOC.md)
+-   `ko` : [韓国語のドキュメンテーション](https://translate.google.com/translate?hl=en&#x26;sl=en&#x26;tl=ko&#x26;u=https%3A%2F%2Fgithub.com%2Fpingcap%2Fdocs%2Fblob%2Fmaster%2FTOC.md)
 
-## Documentation versions
+## ドキュメントのバージョン {#documentation-versions}
 
-Currently, we maintain the following versions of TiDB documentation in different branches:
+現在、次のバージョンの TiDB ドキュメントをさまざまなブランチで管理しています。
 
-| Branch name | TiDB docs version |
-| :---------|:----------|
-| [`master`](https://github.com/pingcap/docs/tree/master) | The latest development version |
-| [`release-6.3`](https://github.com/pingcap/docs/tree/release-6.3) | 6.3 Development Milestone Release |
-| [`release-6.2`](https://github.com/pingcap/docs/tree/release-6.2) | 6.2 Development Milestone Release |
-| [`release-6.1`](https://github.com/pingcap/docs/tree/release-6.1) | 6.1 LTS (Long-Term Support) version |
-| [`release-6.0`](https://github.com/pingcap/docs/tree/release-6.0) | 6.0 Development Milestone Release |
-| [`release-5.4`](https://github.com/pingcap/docs/tree/release-5.4) | 5.4 stable version |
-| [`release-5.3`](https://github.com/pingcap/docs/tree/release-5.3) | 5.3 stable version |
-| [`release-5.2`](https://github.com/pingcap/docs/tree/release-5.2) | 5.2 stable version |
-| [`release-5.1`](https://github.com/pingcap/docs/tree/release-5.1) | 5.1 stable version |
-| [`release-5.0`](https://github.com/pingcap/docs/tree/release-5.0) | 5.0 stable version |
-| [`release-4.0`](https://github.com/pingcap/docs/tree/release-4.0) | 4.0 stable version |
-| [`release-3.1`](https://github.com/pingcap/docs/tree/release-3.1) | 3.1 stable version |
-| [`release-3.0`](https://github.com/pingcap/docs/tree/release-3.0) | 3.0 stable version |
-| [`release-2.1`](https://github.com/pingcap/docs/tree/release-2.1) | 2.1 stable version |
+| 支店名                                                               | TiDB ドキュメント バージョン      |
+| :---------------------------------------------------------------- | :--------------------- |
+| [`master`](https://github.com/pingcap/docs/tree/master)           | 最新の開発バージョン             |
+| [`release-6.3`](https://github.com/pingcap/docs/tree/release-6.3) | 6.3 開発マイルストーンのリリース     |
+| [`release-6.2`](https://github.com/pingcap/docs/tree/release-6.2) | 6.2 開発マイルストーンのリリース     |
+| [`release-6.1`](https://github.com/pingcap/docs/tree/release-6.1) | 6.1 LTS (長期サポート) バージョン |
+| [`release-6.0`](https://github.com/pingcap/docs/tree/release-6.0) | 6.0 開発マイルストーン リリース     |
+| [`release-5.4`](https://github.com/pingcap/docs/tree/release-5.4) | 5.4 安定版                |
+| [`release-5.3`](https://github.com/pingcap/docs/tree/release-5.3) | 5.3 安定版                |
+| [`release-5.2`](https://github.com/pingcap/docs/tree/release-5.2) | 5.2 安定版                |
+| [`release-5.1`](https://github.com/pingcap/docs/tree/release-5.1) | 5.1 安定版                |
+| [`release-5.0`](https://github.com/pingcap/docs/tree/release-5.0) | 5.0 安定版                |
+| [`release-4.0`](https://github.com/pingcap/docs/tree/release-4.0) | 4.0 安定版                |
+| [`release-3.1`](https://github.com/pingcap/docs/tree/release-3.1) | 3.1 安定版                |
+| [`release-3.0`](https://github.com/pingcap/docs/tree/release-3.0) | 3.0 安定版                |
+| [`release-2.1`](https://github.com/pingcap/docs/tree/release-2.1) | 2.1 安定版                |
 
-## Contributing
+## 貢献する {#contributing}
 
-[<img src="media/contribution-map.png" alt="contribution-map" width="180"></img>](https://github.com/pingcap/docs/blob/master/credits.md)
+[<img src="media/contribution-map.png" alt="コントリビューション マップ" width="180">](https://github.com/pingcap/docs/blob/master/credits.md)
 
-See [TiDB Documentation Contributing Guide](/CONTRIBUTING.md) to become a contributor! 🤓
+貢献者になるには[TiDB ドキュメンテーション寄稿ガイド](/CONTRIBUTING.md)を参照してください。 🤓

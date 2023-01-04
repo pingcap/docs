@@ -2,36 +2,35 @@
 title: Use TiDB Dashboard behind a Reverse Proxy
 ---
 
-# Use TiDB Dashboard behind a Reverse Proxy
+# リバース プロキシの背後で TiDB ダッシュボードを使用する {#use-tidb-dashboard-behind-a-reverse-proxy}
 
-You can use a reverse proxy to safely expose the TiDB Dashboard service from the internal network to the external.
+リバース プロキシを使用して、TiDB ダッシュボード サービスを内部ネットワークから外部に安全に公開できます。
 
-## Procedures
+## 手続き {#procedures}
 
-### Step 1: Get the actual TiDB Dashboard address
+### ステップ 1: 実際の TiDB ダッシュボード アドレスを取得する {#step-1-get-the-actual-tidb-dashboard-address}
 
-When multiple PD instances are deployed in the cluster, only one of the PD instances actually runs TiDB Dashboard. Therefore, you need to ensure that the upstream of the reverse proxy points to the correct address. For details of this mechanism, see [Deployment with multiple PD instances](/dashboard/dashboard-ops-deploy.md#deployment-with-multiple-pd-instances).
+複数の PD インスタンスがクラスターにデプロイされている場合、実際に TiDB ダッシュボードを実行する PD インスタンスは 1 つだけです。したがって、リバース プロキシのアップストリームが正しいアドレスを指していることを確認する必要があります。このメカニズムの詳細については、 [複数の PD インスタンスを使用した展開](/dashboard/dashboard-ops-deploy.md#deployment-with-multiple-pd-instances)を参照してください。
 
-When you use the TiUP tool for deployment, execute the following command to get the actual TiDB Dashboard address (replace `CLUSTER_NAME` with your cluster name):
+デプロイにTiUPツールを使用する場合は、次のコマンドを実行して、実際の TiDB ダッシュボード アドレスを取得します ( `CLUSTER_NAME`をクラスター名に置き換えます)。
 
-{{< copyable "shell-regular" >}}
+{{< copyable "" >}}
 
 ```shell
 tiup cluster display CLUSTER_NAME --dashboard
 ```
 
-The output is the actual TiDB Dashboard address. A sample is as follows:
+出力は、実際の TiDB ダッシュボード アドレスです。サンプルは次のとおりです。
 
 ```bash
 http://192.168.0.123:2379/dashboard/
 ```
 
-> **Note:**
+> **ノート：**
 >
-> This feature is available only in the later version of the `tiup cluster` deployment tool (v1.0.3 or later).
+> この機能は、 `tiup cluster`展開ツールの新しいバージョン (v1.0.3 以降) でのみ使用できます。
 >
-> <details>
-> <summary>Upgrade TiUP Cluster</summary>
+> <details><summary>TiUPクラスタのアップグレード</summary>
 >
 > ```bash
 > tiup update --self
@@ -40,14 +39,13 @@ http://192.168.0.123:2379/dashboard/
 >
 > </details>
 
-### Step 2: Configure the reverse proxy
+### ステップ 2: リバース プロキシを構成する {#step-2-configure-the-reverse-proxy}
 
-<details>
-<summary> <strong>Use HAProxy</strong> </summary>
+<details><summary><strong>HAProxy を使用する</strong></summary>
 
-When you use [HAProxy](https://www.haproxy.org/) as the reverse proxy, take the following steps:
+[HAProxy](https://www.haproxy.org/)をリバース プロキシとして使用する場合は、次の手順を実行します。
 
-1. Use reverse proxy for TiDB Dashboard on the `8033` port (for example). In the HAProxy configuration file, add the following configuration:
+1.  `8033`ポートで TiDB ダッシュボードにリバース プロキシを使用します (たとえば)。 HAProxy 構成ファイルで、次の構成を追加します。
 
     {{< copyable "" >}}
 
@@ -61,24 +59,23 @@ When you use [HAProxy](https://www.haproxy.org/) as the reverse proxy, take the 
       server tidb_dashboard 192.168.0.123:2379
     ```
 
-    Replace `192.168.0.123:2379` with IP and port of the actual address of the TiDB Dashboard obtained in [Step 1](#step-1-get-the-actual-tidb-dashboard-address).
+    `192.168.0.123:2379`を[ステップ1](#step-1-get-the-actual-tidb-dashboard-address)で取得した TiDB ダッシュボードの実際のアドレスの IP とポートに置き換えます。
 
-    > **Warning:**
+    > **警告：**
     >
-    > You must retain the `if` part in the `use_backend` directive to ensure that services **only in this path** are behind reverse proxy; otherwise, security risks might be introduced. See [Secure TiDB Dashboard](/dashboard/dashboard-ops-security.md).
+    > `use_backend`ディレクティブの`if`部分を保持して**、このパス内のサービスのみ**がリバース プロキシの背後にあることを確認する必要があります。そうしないと、セキュリティ リスクが発生する可能性があります。 [セキュリティTiDB ダッシュボード](/dashboard/dashboard-ops-security.md)を参照してください。
 
-2. Restart HAProxy for the configuration to take effect.
+2.  設定を有効にするために HAProxy を再起動します。
 
-3. Test whether the reverse proxy is effective: access the `/dashboard/` address on the `8033` port of the machine where HAProxy is located (such as `http://example.com:8033/dashboard/`) to access TiDB Dashboard.
+3.  リバース プロキシが有効かどうかをテストします。HAProxy が配置されているマシンの`8033`ポートの`/dashboard/`アドレス ( `http://example.com:8033/dashboard/`など) にアクセスして、TiDB ダッシュボードにアクセスします。
 
 </details>
 
-<details>
-<summary> <strong>Use NGINX</strong> </summary>
+<details><summary><strong>NGINX を使用する</strong></summary>
 
-When you use [NGINX](https://nginx.org/) as the reverse proxy, take the following steps:
+[NGINX](https://nginx.org/)をリバース プロキシとして使用する場合は、次の手順を実行します。
 
-1. Use reverse proxy for TiDB Dashboard on the `8033` port (for example). In the NGINX configuration file, add the following configuration:
+1.  `8033`ポートで TiDB ダッシュボードにリバース プロキシを使用します (たとえば)。 NGINX 構成ファイルで、次の構成を追加します。
 
     {{< copyable "" >}}
 
@@ -91,33 +88,33 @@ When you use [NGINX](https://nginx.org/) as the reverse proxy, take the followin
     }
     ```
 
-    Replace `http://192.168.0.123:2379/dashboard/` with the actual address of the TiDB Dashboard obtained in [Step 1](#step-1-get-the-actual-tidb-dashboard-address).
+    `http://192.168.0.123:2379/dashboard/`を[ステップ1](#step-1-get-the-actual-tidb-dashboard-address)で取得した TiDB ダッシュボードの実際のアドレスに置き換えます。
 
-    > **Warning:**
+    > **警告：**
     >
-    > You must keep the `/dashboard/` path in the `proxy_pass` directive to ensure that only the services under this path are reverse proxied. Otherwise, security risks will be introduced. See [Secure TiDB Dashboard](/dashboard/dashboard-ops-security.md).
+    > このパスの下のサービスのみがリバース プロキシされるように、 `proxy_pass`ディレクティブで`/dashboard/`パスを保持する必要があります。そうしないと、セキュリティ リスクが発生します。 [セキュリティTiDB ダッシュボード](/dashboard/dashboard-ops-security.md)を参照してください。
 
-2. Reload NGINX for the configuration to take effect.
+2.  構成を有効にするには、NGINX をリロードします。
 
-    {{< copyable "shell-regular" >}}
+    {{< copyable "" >}}
 
     ```shell
     sudo nginx -s reload
     ```
 
-3. Test whether the reverse proxy is effective: access the `/dashboard/` address on the `8033` port of the machine where NGINX is located (such as `http://example.com:8033/dashboard/`) to access TiDB Dashboard.
+3.  リバース プロキシが有効かどうかをテストします。NGINX が配置されているマシンの`8033`ポートの`/dashboard/`アドレス ( `http://example.com:8033/dashboard/`など) にアクセスして、TiDB ダッシュボードにアクセスします。
 
 </details>
 
-## Customize path prefix
+## パスのプレフィックスをカスタマイズする {#customize-path-prefix}
 
-TiDB Dashboard provides services by default in the `/dashboard/` path, such as `http://example.com:8033/dashboard/`, which is the case even for reverse proxies. To configure the reverse proxy to provide the TiDB Dashboard service with a non-default path, such as `http://example.com:8033/foo/` or `http://example.com:8033/`, take the following steps.
+TiDB ダッシュボードは、デフォルトで`http://example.com:8033/dashboard/`などの`/dashboard/`パスでサービスを提供します。これは、リバース プロキシの場合にも当てはまります。 TiDB ダッシュボード サービスに`http://example.com:8033/foo/`や`http://example.com:8033/`などのデフォルト以外のパスを提供するようにリバース プロキシを構成するには、次の手順を実行します。
 
-### Step 1: Modify PD configuration to specify the path prefix of TiDB Dashboard service
+### ステップ 1: PD 構成を変更して、TiDB ダッシュボード サービスのパス プレフィックスを指定する {#step-1-modify-pd-configuration-to-specify-the-path-prefix-of-tidb-dashboard-service}
 
-Modify the `public-path-prefix` configuration item in the `[dashboard]` category of the PD configuration to specify the path prefix of the TiDB Dashboard service. After this item is modified, restart the PD instance for the modification to take effect.
+PD 構成の`[dashboard]`カテゴリの`public-path-prefix`構成項目を変更して、TiDB ダッシュボード サービスのパス プレフィックスを指定します。この項目を変更したら、PD インスタンスを再起動して変更を有効にします。
 
-For example, if the cluster is deployed using TiUP and you want the service to run on `http://example.com:8033/foo/`, you can specify the following configuration:
+たとえば、クラスターがTiUPを使用してデプロイされ、サービスを`http://example.com:8033/foo/`で実行する場合は、次の構成を指定できます。
 
 {{< copyable "" >}}
 
@@ -127,28 +124,27 @@ server_configs:
     dashboard.public-path-prefix: /foo
 ```
 
-<details>
-<summary> <strong>Modify configuration when deploying a new cluster using TiUP</strong> </summary>
+<details><summary><strong>TiUPを使用して新しいクラスターをデプロイするときに構成を変更する</strong></summary>
 
-If you are deploying a new cluster, you can add the configuration above to the `topology.yaml` TiUP topology file and deploy the cluster. For specific instruction, see [TiUP deployment document](/production-deployment-using-tiup.md#step-3-initialize-cluster-topology-file).
+新しいクラスターを展開する場合は、上記の構成を`topology.yaml` TiUPトポロジ ファイルに追加して、クラスターを展開できます。具体的な指示については、 [TiUP展開ドキュメント](/production-deployment-using-tiup.md#step-3-initialize-cluster-topology-file)を参照してください。
 
 </details>
 
 <details>
 
-<summary> <strong>Modify configuration of a deployed cluster using TiUP</strong> </summary>
+<summary><strong>TiUPを使用してデプロイされたクラスターの構成を変更する</strong></summary>
 
-For a deployed cluster:
+デプロイされたクラスターの場合:
 
-1. Open the configuration file of the cluster in the edit mode (replace `CLUSTER_NAME` with the cluster name).
+1.  クラスターの構成ファイルを編集モードで開きます ( `CLUSTER_NAME`をクラスター名に置き換えます)。
 
-    {{< copyable "shell-regular" >}}
+    {{< copyable "" >}}
 
     ```shell
     tiup cluster edit-config CLUSTER_NAME
     ```
 
-2. Modify or add configuration items under the `pd` configuration of `server_configs`. If no `server_configs` exists, add it at the top level:
+2.  `server_configs`の`pd`構成の下に構成アイテムを変更または追加します。 `server_configs`が存在しない場合は、最上位に追加します。
 
     {{< copyable "" >}}
 
@@ -163,7 +159,7 @@ For a deployed cluster:
       ...
     ```
 
-    The configuration file after the modification is similar to the following file:
+    変更後の構成ファイルは、次のファイルのようになります。
 
     {{< copyable "" >}}
 
@@ -176,7 +172,7 @@ For a deployed cluster:
         ...
     ```
 
-    Or
+    または
 
     {{< copyable "" >}}
 
@@ -190,19 +186,19 @@ For a deployed cluster:
         dashboard.public-path-prefix: /foo
     ```
 
-3. Perform a rolling restart to all PD instances for the modified configuration to take effect (replace `CLUSTER_NAME` with your cluster name):
+3.  変更した構成を有効にするために、すべての PD インスタンスに対してローリング再起動を実行します ( `CLUSTER_NAME`をクラスター名に置き換えます)。
 
-    {{< copyable "shell-regular" >}}
+    {{< copyable "" >}}
 
-   ```shell
-   tiup cluster reload CLUSTER_NAME -R pd
-   ```
+    ```shell
+    tiup cluster reload CLUSTER_NAME -R pd
+    ```
 
-See [Common TiUP Operations - Modify the configuration](/maintain-tidb-using-tiup.md#modify-the-configuration) for details.
+詳細は[一般的なTiUP操作 - 構成の変更](/maintain-tidb-using-tiup.md#modify-the-configuration)を参照してください。
 
 </details>
 
-If you want that the TiDB Dashboard service is run in the root path (such as `http://example.com:8033/`), use the following configuration:
+TiDB ダッシュボード サービスをルート パス ( `http://example.com:8033/`など) で実行する場合は、次の構成を使用します。
 
 {{< copyable "" >}}
 
@@ -212,16 +208,15 @@ server_configs:
     dashboard.public-path-prefix: /
 ```
 
-> **Warning:**
+> **警告：**
 >
-> After the modified and customized path prefix takes effect, you cannot directly access TiDB Dashboard. You can only access TiDB Dashboard through a reverse proxy that matches the path prefix.
+> 変更およびカスタマイズされたパス プレフィックスが有効になると、TiDB ダッシュボードに直接アクセスできなくなります。パス プレフィックスに一致するリバース プロキシ経由でのみ、TiDB ダッシュボードにアクセスできます。
 
-### Step 2: Modify the reverse proxy configuration
+### ステップ 2: リバース プロキシ構成を変更する {#step-2-modify-the-reverse-proxy-configuration}
 
-<details>
-<summary> <strong>Use HAProxy</strong> </summary>
+<details><summary><strong>HAProxy を使用する</strong></summary>
 
-Taking `http://example.com:8033/foo/` as an example, the corresponding HAProxy configuration is as follows:
+`http://example.com:8033/foo/`を例にとると、対応する HAProxy 構成は次のようになります。
 
 {{< copyable "" >}}
 
@@ -236,13 +231,13 @@ backend tidb_dashboard_back
   server tidb_dashboard 192.168.0.123:2379
 ```
 
-Replace `192.168.0.123:2379` with IP and port of the actual address of the TiDB Dashboard obtained in [Step 1](#step-1-get-the-actual-tidb-dashboard-address).
+`192.168.0.123:2379`を[ステップ1](#step-1-get-the-actual-tidb-dashboard-address)で取得した TiDB ダッシュボードの実際のアドレスの IP とポートに置き換えます。
 
-> **Warning:**
+> **警告：**
 >
-> You must retain the `if` part in the `use_backend` directive to ensure that services **only in this path** are behind reverse proxy; otherwise, security risks might be introduced. See [Secure TiDB Dashboard](/dashboard/dashboard-ops-security.md).
+> `use_backend`ディレクティブの`if`部分を保持して**、このパス内のサービスのみ**がリバース プロキシの背後にあることを確認する必要があります。そうしないと、セキュリティ リスクが発生する可能性があります。 [セキュリティTiDB ダッシュボード](/dashboard/dashboard-ops-security.md)を参照してください。
 
-If you want that the TiDB Dashboard service is run in the root path (such as `http://example.com:8033/`), use the following configuration:
+TiDB ダッシュボード サービスをルート パス ( `http://example.com:8033/`など) で実行する場合は、次の構成を使用します。
 
 ```haproxy
 frontend tidb_dashboard_front
@@ -254,14 +249,13 @@ backend tidb_dashboard_back
   server tidb_dashboard 192.168.0.123:2379
 ```
 
-Modify the configuration and restart HAProxy for the modified configuration to take effect.
+構成を変更し、HAProxy を再起動して、変更した構成を有効にします。
 
 </details>
 
-<details>
-<summary> <strong>Use NGINX</strong> </summary>
+<details><summary><strong>NGINX を使用する</strong></summary>
 
-Taking `http://example.com:8033/foo/` as an example, the corresponding NGINX configuration is as follows:
+`http://example.com:8033/foo/`を例にとると、対応する NGINX 構成は次のようになります。
 
 {{< copyable "" >}}
 
@@ -274,13 +268,13 @@ server {
 }
 ```
 
-Replace `http://192.168.0.123:2379/dashboard/` with the actual address of the TiDB Dashboard obtained in [Step 1](#step-1-get-the-actual-tidb-dashboard-address).
+`http://192.168.0.123:2379/dashboard/`を[ステップ1](#step-1-get-the-actual-tidb-dashboard-address)で取得した TiDB ダッシュボードの実際のアドレスに置き換えます。
 
-> **Warning:**
+> **警告：**
 >
-> You must retain the `/dashboard/` path in the `proxy_pass` directive to ensure that services **only in this path** are behind reverse proxy; otherwise, security risks might be introduced. See [Secure TiDB Dashboard](/dashboard/dashboard-ops-security.md).
+> `proxy_pass`ディレクティブの`/dashboard/`パスを保持して**、このパスのサービスのみ**がリバース プロキシの背後にあることを確認する必要があります。そうしないと、セキュリティ リスクが発生する可能性があります。 [セキュリティTiDB ダッシュボード](/dashboard/dashboard-ops-security.md)を参照してください。
 
-If you want that the TiDB Dashboard service is run in the root path (such as `http://example.com:8033/`), use the following configuration:
+TiDB ダッシュボード サービスをルート パス ( `http://example.com:8033/`など) で実行する場合は、次の構成を使用します。
 
 {{< copyable "" >}}
 
@@ -293,9 +287,9 @@ server {
 }
 ```
 
-Modify the configuration and restart NGINX for the modified configuration to take effect.
+構成を変更し、NGINX を再起動して、変更した構成を有効にします。
 
-{{< copyable "shell-regular" >}}
+{{< copyable "" >}}
 
 ```shell
 sudo nginx -s reload
@@ -303,6 +297,6 @@ sudo nginx -s reload
 
 </details>
 
-## What's next
+## 次は何ですか {#what-s-next}
 
-To learn how to enhance the security of TiDB Dashboard, such as configuring a firewall, see [Secure TiDB Dashboard](/dashboard/dashboard-ops-security.md).
+ファイアウォールの構成など、TiDB ダッシュボードのセキュリティを強化する方法については、 [セキュリティTiDB ダッシュボード](/dashboard/dashboard-ops-security.md)を参照してください。

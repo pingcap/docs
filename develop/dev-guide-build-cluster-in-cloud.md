@@ -5,71 +5,71 @@ summary: Learn how to build a TiDB cluster in TiDB Cloud (Serverless Tier) and c
 
 <!-- markdownlint-disable MD029 -->
 
-# Build a TiDB Cluster in TiDB Cloud (Serverless Tier)
+# TiDB Cloud(サーバーレス層) で TiDBクラスタを構築する {#build-a-tidb-cluster-in-tidb-cloud-serverless-tier}
 
 <CustomContent platform="tidb">
 
-This document walks you through the quickest way to get started with TiDB. You will use [TiDB Cloud](https://en.pingcap.com/tidb-cloud) to create a Serverless Tier cluster, connect to it, and run a sample application on it.
+このドキュメントでは、TiDB を使い始める最も簡単な方法について説明します。 [TiDB Cloud](https://en.pingcap.com/tidb-cloud)を使用して Serverless Tier クラスターを作成し、それに接続して、サンプル アプリケーションを実行します。
 
-If you need to run TiDB on your local machine, see [Starting TiDB Locally](/quick-start-with-tidb.md).
+ローカル マシンで TiDB を実行する必要がある場合は、 [TiDB をローカルで起動する](/quick-start-with-tidb.md)を参照してください。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-This document walks you through the quickest way to get started with TiDB Cloud. You will create a TiDB cluster, connect to it, and run a sample application on it.
+このドキュメントでは、 TiDB Cloudを開始するための最も簡単な方法について説明します。 TiDB クラスターを作成して接続し、サンプル アプリケーションを実行します。
 
 </CustomContent>
 
-## Step 1. Create a Serverless Tier cluster
+## ステップ 1. サーバーレス層クラスターを作成する {#step-1-create-a-serverless-tier-cluster}
 
-1. If you do not have a TiDB Cloud account, click [here](https://tidbcloud.com/free-trial) to sign up for an account.
+1.  TiDB Cloudアカウントを持っていない場合は、 [ここ](https://tidbcloud.com/free-trial)をクリックしてアカウントにサインアップします。
 
-2. [Log in](https://tidbcloud.com/) to your TiDB Cloud account.
+2.  [ログイン](https://tidbcloud.com/)をTiDB Cloudアカウントに追加します。
 
-3. On the **Clusters** page, click **Create Cluster**.
+3.  [**クラスター**] ページで、[<strong>クラスタの作成</strong>] をクリックします。
 
-4. On the **Create Cluster** page, **Serverless Tier** is selected by default. Update the default cluster name if necessary, and then select the region where you want to create your cluster.
+4.  [**クラスタの作成**] ページでは、<strong>サーバーレス層</strong>がデフォルトで選択されています。必要に応じてデフォルトのクラスター名を更新し、クラスターを作成するリージョンを選択します。
 
-    Your TiDB Cloud cluster will be created in approximately 30 seconds.
+    TiDB Cloudクラスターは約 30 秒で作成されます。
 
-6. After your TiDB Cloud cluster is created, click **Security Settings**. In the **Security Settings** dialog box, set a root password to connect to your cluster, and then click **Submit**. If you do not set a root password, you cannot connect to the cluster.
+5.  TiDB Cloudクラスターが作成されたら、[**セキュリティ設定]**をクリックします。 [<strong>セキュリティ設定</strong>] ダイアログ ボックスで、クラスターに接続するためのルート パスワードを設定し、[<strong>送信</strong>] をクリックします。 root パスワードを設定しないと、クラスターに接続できません。
 
-7. Click **Connect**. A connection dialog box is displayed. Under **Connect with a SQL Client** in the dialog, click the tab of your preferred connection method, and then save the corresponding connection string. The following section uses MySQL client as an example.
+6.  [**接続]**をクリックします。接続ダイアログボックスが表示されます。ダイアログの [ <strong>SQL クライアントで接続</strong>] の下で、希望する接続方法のタブをクリックし、対応する接続文字列を保存します。次のセクションでは、MySQL クライアントを例として使用します。
 
     <CustomContent platform="tidb">
 
-    > **Note:**
+    > **ノート：**
     >
-    > For [Serverless Tier clusters](https://docs.pingcap.com/tidbcloud/select-cluster-tier#serverless-tier), when you connect to your cluster, you must include the prefix for your cluster in the user name and wrap the name with quotation marks. For more information, see [User name prefix](https://docs.pingcap.com/tidbcloud/select-cluster-tier#user-name-prefix).
+    > [サーバーレス階層クラスター](https://docs.pingcap.com/tidbcloud/select-cluster-tier#serverless-tier)の場合、クラスターに接続するときに、ユーザー名にクラスターのプレフィックスを含め、名前を引用符で囲む必要があります。詳細については、 [ユーザー名のプレフィックス](https://docs.pingcap.com/tidbcloud/select-cluster-tier#user-name-prefix)を参照してください。
 
     </CustomContent>
 
     <CustomContent platform="tidb-cloud">
 
-    > **Note:**
+    > **ノート：**
     >
-    > For [Serverless Tier clusters](/tidb-cloud/select-cluster-tier.md#serverless-tier), when you connect to your cluster, you must include the prefix for your cluster in the user name and wrap the name with quotation marks. For more information, see [User name prefix](/tidb-cloud/select-cluster-tier.md#user-name-prefix).
+    > [サーバーレス階層クラスター](/tidb-cloud/select-cluster-tier.md#serverless-tier)の場合、クラスターに接続するときに、ユーザー名にクラスターのプレフィックスを含め、名前を引用符で囲む必要があります。詳細については、 [ユーザー名のプレフィックス](/tidb-cloud/select-cluster-tier.md#user-name-prefix)を参照してください。
 
     </CustomContent>
 
-## Step 2. Connect to a cluster
+## ステップ 2. クラスターに接続する {#step-2-connect-to-a-cluster}
 
-1. If the MySQL client is not installed, select your operating system and follow the steps below to install it.
+1.  MySQL クライアントがインストールされていない場合は、オペレーティング システムを選択し、以下の手順に従ってインストールします。
 
 <SimpleTab>
 
 <div label="macOS">
 
-For macOS, install [Homebrew](https://brew.sh/index) if you do not have it, and then run the following command to install the MySQL client:
+macOS の場合、 [Homebrew](https://brew.sh/index)がない場合はインストールしてから、次のコマンドを実行して MySQL クライアントをインストールします。
 
-{{< copyable "shell-regular" >}}
+{{< copyable "" >}}
 
 ```shell
 brew install mysql-client
 ```
 
-The output is as follows:
+出力は次のとおりです。
 
 ```
 mysql-client is keg-only, which means it was not symlinked into /opt/homebrew,
@@ -83,24 +83,24 @@ For compilers to find mysql-client you may need to set:
   export CPPFLAGS="-I/opt/homebrew/opt/mysql-client/include"
 ```
 
-To add the MySQL client to your PATH, locate the following command in the above output (if your output is inconsistent with the above output in the document, use the corresponding command in your output instead) and run it:
+MySQL クライアントを PATH に追加するには、上記の出力で次のコマンドを見つけて (出力がドキュメントの上記の出力と一致しない場合は、代わりに出力で対応するコマンドを使用してください)、それを実行します。
 
-{{< copyable "shell-regular" >}}
+{{< copyable "" >}}
 
 ```shell
 echo 'export PATH="/opt/homebrew/opt/mysql-client/bin:$PATH"' >> ~/.zshrc
 ```
 
-Then, declare the global environment variable by the `source` command and verify that the MySQL client is installed successfully:
+次に、 `source`コマンドでグローバル環境変数を宣言し、MySQL クライアントが正常にインストールされていることを確認します。
 
-{{< copyable "shell-regular" >}}
+{{< copyable "" >}}
 
 ```shell
 source ~/.zshrc
 mysql --version
 ```
 
-An example of the expected output:
+予想される出力の例:
 
 ```
 mysql  Ver 8.0.28 for macos12.0 on arm64 (Homebrew)
@@ -110,23 +110,23 @@ mysql  Ver 8.0.28 for macos12.0 on arm64 (Homebrew)
 
 <div label="Linux">
 
-For Linux, the following takes CentOS 7 as an example:
+Linux の場合、次の例では CentOS 7 を使用しています。
 
-{{< copyable "shell-regular" >}}
+{{< copyable "" >}}
 
 ```shell
 yum install mysql
 ```
 
-Then, verify that the MySQL client is installed successfully:
+次に、MySQL クライアントが正常にインストールされたことを確認します。
 
-{{< copyable "shell-regular" >}}
+{{< copyable "" >}}
 
 ```shell
 mysql --version
 ```
 
-An example of the expected output:
+予想される出力の例:
 
 ```
 mysql  Ver 15.1 Distrib 5.5.68-MariaDB, for Linux (x86_64) using readline 5.1
@@ -136,9 +136,9 @@ mysql  Ver 15.1 Distrib 5.5.68-MariaDB, for Linux (x86_64) using readline 5.1
 
 </SimpleTab>
 
-2. Run the connection string obtained in [Step 1](#step-1-create-a-serverless-tier-cluster).
+2.  [ステップ1](#step-1-create-a-serverless-tier-cluster)で取得した接続文字列を実行します。
 
-    {{< copyable "shell-regular" >}}
+    {{< copyable "" >}}
 
     ```shell
     mysql --connect-timeout 15 -u '<prefix>.root' -h <host> -P 4000 -D test --ssl-mode=VERIFY_IDENTITY --ssl-ca=/etc/ssl/cert.pem -p
@@ -146,33 +146,33 @@ mysql  Ver 15.1 Distrib 5.5.68-MariaDB, for Linux (x86_64) using readline 5.1
 
 <CustomContent platform="tidb">
 
-> **Note:**
+> **ノート：**
 >
-> - When you connect to a Serverless Tier cluster, you must [use the TLS connection](https://docs.pingcap.com/tidbcloud/secure-connections-to-serverless-tier-clusters).
-> - If you encounter problems when connecting to a Serverless Tier cluster, you can read [Secure Connections to Serverless Tier Clusters](https://docs.pingcap.com/tidbcloud/secure-connections-to-serverless-tier-clusters) for more information.
+> -   Serverless Tier クラスターに接続する場合は、 [TLS 接続を使用する](https://docs.pingcap.com/tidbcloud/secure-connections-to-serverless-tier-clusters) .
+> -   Serverless Tier クラスターへの接続時に問題が発生した場合は、詳細について[サーバーレス層クラスターへのセキュリティ接続](https://docs.pingcap.com/tidbcloud/secure-connections-to-serverless-tier-clusters)を参照してください。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-> **Note:**
+> **ノート：**
 >
-> - When you connect to a Serverless Tier cluster, you must [use the TLS connection](/tidb-cloud/secure-connections-to-serverless-tier-clusters.md).
-> - If you encounter problems when connecting to a Serverless Tier cluster, you can read [Secure Connections to Serverless Tier Clusters](/tidb-cloud/secure-connections-to-serverless-tier-clusters.md) for more information.
+> -   Serverless Tier クラスターに接続する場合は、 [TLS 接続を使用する](/tidb-cloud/secure-connections-to-serverless-tier-clusters.md) .
+> -   Serverless Tier クラスターへの接続時に問題が発生した場合は、詳細について[サーバーレス層クラスターへのセキュリティ接続](/tidb-cloud/secure-connections-to-serverless-tier-clusters.md)を参照してください。
 
 </CustomContent>
 
-3. Fill in the password to sign in.
+3.  パスワードを入力してサインインします。
 
-## Step 3. Execute a SQL statement
+## ステップ 3. SQL ステートメントを実行する {#step-3-execute-a-sql-statement}
 
-Let's try to execute your first SQL statement on TiDB Cloud.
+TiDB Cloudで最初の SQL ステートメントを実行してみましょう。
 
 ```sql
 SELECT 'Hello TiDB Cloud!';
 ```
 
-Expected output:
+期待される出力:
 
 ```sql
 +-------------------+
@@ -182,4 +182,4 @@ Expected output:
 +-------------------+
 ```
 
-If your actual output is similar to the expected output, congratulations, you have successfully execute a SQL statement on TiDB Cloud.
+実際の出力が予想される出力と似ている場合は、おめでとう、 TiDB Cloudで SQL ステートメントを正常に実行したことになります。

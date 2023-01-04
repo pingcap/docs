@@ -3,43 +3,43 @@ title: Use TiFlash MPP Mode
 summary: Learn the MPP mode of TiFlash and how to use it.
 ---
 
-# Use TiFlash MPP Mode
+# TiFlash MPP モードを使用する {#use-tiflash-mpp-mode}
 
-This document introduces the MPP mode of TiFlash and how to use it.
+このドキュメントでは、 TiFlashの MPP モードとその使用方法を紹介します。
 
-TiFlash supports using the MPP mode to execute queries, which introduces cross-node data exchange (data shuffle process) into the computation. TiDB automatically determines whether to select the MPP mode using the optimizer's cost estimation. You can change the selection strategy by modifying the values of [`tidb_allow_mpp`](/system-variables.md#tidb_allow_mpp-new-in-v50) and [`tidb_enforce_mpp`](/system-variables.md#tidb_enforce_mpp-new-in-v51).
+TiFlashは、MPP モードを使用してクエリを実行することをサポートしています。これにより、クロスノード データ交換 (データ シャッフル プロセス) が計算に導入されます。 TiDB は、オプティマイザのコスト見積もりを使用して、MPP モードを選択するかどうかを自動的に決定します。 [`tidb_allow_mpp`](/system-variables.md#tidb_allow_mpp-new-in-v50)と[`tidb_enforce_mpp`](/system-variables.md#tidb_enforce_mpp-new-in-v51)の値を変更することで、選択戦略を変更できます。
 
-## Control whether to select the MPP mode
+## MPP モードを選択するかどうかを制御します {#control-whether-to-select-the-mpp-mode}
 
-The `tidb_allow_mpp` variable controls whether TiDB can select the MPP mode to execute queries. The `tidb_enforce_mpp` variable controls whether the optimizer's cost estimation is ignored and the MPP mode of TiFlash is forcibly used to execute queries.
+`tidb_allow_mpp`変数は、TiDB が MPP モードを選択してクエリを実行できるかどうかを制御します。 `tidb_enforce_mpp`変数は、オプティマイザーのコスト見積もりを無視し、 TiFlashの MPP モードを強制的に使用してクエリを実行するかどうかを制御します。
 
-The results corresponding to all values of these two variables are as follows:
+これら 2 つの変数のすべての値に対応する結果は次のとおりです。
 
-|                        | tidb_allow_mpp=off | tidb_allow_mpp=on (by default)              |
-| ---------------------- | -------------------- | -------------------------------- |
-| tidb_enforce_mpp=off (by default) | The MPP mode is not used. | The optimizer selects the MPP mode based on cost estimation. (by default)|
-| tidb_enforce_mpp=on  | The MPP mode is not used.   | TiDB ignores the cost estimation and selects the MPP mode.      |
+|                              | tidb_allow_mpp=オフ | tidb_allow_mpp=on (デフォルト)                     |
+| ---------------------------- | ----------------- | --------------------------------------------- |
+| tidb_enforce_mpp=off (デフォルト) | MPP モードは使用されません。  | オプティマイザは、コストの見積もりに基づいて MPP モードを選択します。 (デフォルト) |
+| tidb_enforce_mpp=オン          | MPP モードは使用されません。  | TiDB はコスト見積もりを無視し、MPP モードを選択します。              |
 
-For example, if you do not want to use the MPP mode, you can execute the following statements:
+たとえば、MPP モードを使用したくない場合は、次のステートメントを実行できます。
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 set @@session.tidb_allow_mpp=0;
 ```
 
-If you want TiDB's cost-based optimizer to automatically decide whether to use the MPP mode (by default), you can execute the following statements:
+TiDB のコストベースのオプティマイザに、MPP モードを使用するかどうか (デフォルトで) を自動的に決定させたい場合は、次のステートメントを実行できます。
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 set @@session.tidb_allow_mpp=1;
 set @@session.tidb_enforce_mpp=0;
 ```
 
-If you want TiDB to ignore the optimizer's cost estimation and to forcibly select the MPP mode, you can execute the following statements:
+TiDB にオプティマイザーのコスト見積もりを無視させ、MPP モードを強制的に選択させたい場合は、次のステートメントを実行できます。
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 set @@session.tidb_allow_mpp=1;
@@ -48,15 +48,15 @@ set @@session.tidb_enforce_mpp=1;
 
 <CustomContent platform="tidb">
 
-The initial value of the `tidb_enforce_mpp` session variable is equal to the [`enforce-mpp`](/tidb-configuration-file.md#enforce-mpp) configuration value of this tidb-server instance (which is `false` by default). If multiple tidb-server instances in a TiDB cluster only perform analytical queries and you want to make sure that the MPP mode is used on these instances, you can change their [`enforce-mpp`](/tidb-configuration-file.md#enforce-mpp) configuration values to `true`.
+`tidb_enforce_mpp`セッション変数の初期値は、この tidb-server インスタンスの[`enforce-mpp`](/tidb-configuration-file.md#enforce-mpp)構成値 (デフォルトでは`false` ) と同じです。 TiDB クラスター内の複数の tidb-server インスタンスが分析クエリのみを実行し、これらのインスタンスで MPP モードが使用されていることを確認したい場合は、それらの[`enforce-mpp`](/tidb-configuration-file.md#enforce-mpp)構成値を`true`に変更できます。
 
 </CustomContent>
 
-> **Note:**
+> **ノート：**
 >
-> When `tidb_enforce_mpp=1` takes effect, the TiDB optimizer will ignore the cost estimation to choose the MPP mode. However, if other factors block the MPP mode, TiDB will not select the MPP mode. These factors include the absence of TiFlash replica, unfinished replication of TiFlash replicas, and statements containing operators or functions that are not supported by the MPP mode.
+> `tidb_enforce_mpp=1`が有効になると、TiDB オプティマイザーはコスト見積もりを無視して MPP モードを選択します。ただし、他の要因が MPP モードをブロックする場合、TiDB は MPP モードを選択しません。これらの要因には、 TiFlashレプリカの不在、 TiFlashレプリカの未完成の複製、および MPP モードでサポートされていない演算子または関数を含むステートメントが含まれます。
 >
-> If TiDB optimizer cannot select the MPP mode due to reasons other than cost estimation, when you use the `EXPLAIN` statement to check out the execution plan, a warning is returned to explain the reason. For example:
+> コスト見積もり以外の理由で TiDB オプティマイザーが MPP モードを選択できない場合、 `EXPLAIN`ステートメントを使用して実行計画をチェックアウトすると、その理由を説明する警告が返されます。例えば：
 >
 > ```sql
 > set @@session.tidb_enforce_mpp=1;
@@ -73,11 +73,11 @@ The initial value of the `tidb_enforce_mpp` session variable is equal to the [`e
 > +---------+------+-----------------------------------------------------------------------------+
 > ```
 
-## Algorithm support for the MPP mode
+## MPP モードのアルゴリズム サポート {#algorithm-support-for-the-mpp-mode}
 
-The MPP mode supports these physical algorithms: Broadcast Hash Join, Shuffled Hash Join, Shuffled Hash Aggregation, Union All, TopN, and Limit. The optimizer automatically determines which algorithm to be used in a query. To check the specific query execution plan, you can execute the `EXPLAIN` statement. If the result of the `EXPLAIN` statement shows ExchangeSender and ExchangeReceiver operators, it indicates that the MPP mode has taken effect.
+MPP モードは、ブロードキャスト ハッシュ結合、シャッフル ハッシュ結合、シャッフル ハッシュ集計、Union All、TopN、および Limit の物理アルゴリズムをサポートします。オプティマイザは、クエリで使用するアルゴリズムを自動的に決定します。特定のクエリ実行プランを確認するには、 `EXPLAIN`ステートメントを実行します。 `EXPLAIN`ステートメントの結果が ExchangeSender および ExchangeReceiver オペレーターを示している場合、MPP モードが有効になっていることを示します。
 
-The following statement takes the table structure in the TPC-H test set as an example:
+次のステートメントは、例として TPC-H テスト セットのテーブル構造を取ります。
 
 ```sql
 explain select count(*) from customer c join nation n on c.c_nationkey=n.n_nationkey;
@@ -97,18 +97,18 @@ explain select count(*) from customer c join nation n on c.c_nationkey=n.n_natio
 9 rows in set (0.00 sec)
 ```
 
-In the example execution plan, the `ExchangeReceiver` and `ExchangeSender` operators are included. The execution plan indicates that after the `nation` table is read, the `ExchangeSender` operator broadcasts the table to each node, the `HashJoin` and `HashAgg` operations are performed on the `nation` table and the `customer` table, and then the results are returned to TiDB.
+実行計画の例では、 `ExchangeReceiver`と`ExchangeSender`の演算子が含まれています。実行計画は、 `nation`テーブルが読み取られた後、 `ExchangeSender`オペレーターがテーブルを各ノードにブロードキャストし、 `nation`テーブルと`customer`テーブルに対して`HashJoin`と`HashAgg`の操作が実行され、結果が TiDB に返されることを示しています。
 
-TiFlash provides the following two global/session variables to control whether to use Broadcast Hash Join:
+TiFlashは、ブロードキャスト ハッシュ結合を使用するかどうかを制御するために、次の 2 つのグローバル/セッション変数を提供します。
 
-- [`tidb_broadcast_join_threshold_size`](/system-variables.md#tidb_broadcast_join_threshold_count-new-in-v50): The unit of the value is bytes. If the table size (in the unit of bytes) is less than the value of the variable, the Broadcast Hash Join algorithm is used. Otherwise, the Shuffled Hash Join algorithm is used.
-- [`tidb_broadcast_join_threshold_count`](/system-variables.md#tidb_broadcast_join_threshold_count-new-in-v50): The unit of the value is rows. If the objects of the join operation belong to a subquery, the optimizer cannot estimate the size of the subquery result set, so the size is determined by the number of rows in the result set. If the estimated number of rows in the subquery is less than the value of this variable, the Broadcast Hash Join algorithm is used. Otherwise, the Shuffled Hash Join algorithm is used.
+-   [`tidb_broadcast_join_threshold_size`](/system-variables.md#tidb_broadcast_join_threshold_count-new-in-v50) : 値の単位はバイトです。テーブル サイズ (バイト単位) が変数の値より小さい場合は、ブロードキャスト ハッシュ結合アルゴリズムが使用されます。それ以外の場合は、Shuffled Hash Join アルゴリズムが使用されます。
+-   [`tidb_broadcast_join_threshold_count`](/system-variables.md#tidb_broadcast_join_threshold_count-new-in-v50) : 値の単位は行です。結合操作のオブジェクトがサブクエリに属している場合、オプティマイザはサブクエリの結果セットのサイズを見積もることができないため、サイズは結果セットの行数によって決定されます。サブクエリの推定行数がこの変数の値より少ない場合、ブロードキャスト ハッシュ結合アルゴリズムが使用されます。それ以外の場合は、Shuffled Hash Join アルゴリズムが使用されます。
 
-## Access partitioned tables in the MPP mode
+## MPP モードで分割されたテーブルにアクセスする {#access-partitioned-tables-in-the-mpp-mode}
 
-To access partitioned tables in the MPP mode, you need to enable [dynamic pruning mode](https://docs.pingcap.com/tidb/stable/partitioned-table#dynamic-pruning-mode) first.
+MPP モードで分割されたテーブルにアクセスするには、最初に[動的プルーニング モード](https://docs.pingcap.com/tidb/stable/partitioned-table#dynamic-pruning-mode)を有効にする必要があります。
 
-Example:
+例：
 
 ```sql
 mysql> DROP TABLE if exists test.employees;

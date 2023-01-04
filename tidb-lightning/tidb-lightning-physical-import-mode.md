@@ -3,78 +3,78 @@ title: Physical Import Mode
 summary: Learn about the physical import mode in TiDB Lightning.
 ---
 
-# Physical Import Mode
+# 物理インポート モード {#physical-import-mode}
 
-Physical import mode is an efficient and fast import mode that inserts data directly into TiKV nodes as key-value pairs without going through the SQL interface. It is suitable for importing up to 100 TB of data.
+物理インポート モードは効率的で高速なインポート モードで、SQL インターフェイスを介さずにデータをキーと値のペアとして直接 TiKV ノードに挿入します。最大 100 TB のデータのインポートに適しています。
 
-Before you use the physical import mode, make sure to read [Requirements and restrictions](#requirements-and-restrictions).
+物理インポートモードを使用する前に、必ず[要件と制限](#requirements-and-restrictions)をお読みください。
 
-## Implementation
+## 実装 {#implementation}
 
-1. Before importing data, TiDB Lightning automatically switches the TiKV nodes to "import mode", which improves write performance and stops auto-compaction. TiDB Lightning determines whether to pause global scheduling according to the TiDB cluster version.
+1.  データをインポートする前に、 TiDB Lightningは自動的に TiKV ノードを「インポート モード」に切り替えます。これにより、書き込みパフォーマンスが向上し、自動圧縮が停止します。 TiDB Lightningは、TiDB クラスターのバージョンに応じて、グローバル スケジューリングを一時停止するかどうかを決定します。
 
-    - When the TiDB cluster >= v6.1.0 and TiDB Lightning >= v6.2.0, TiDB Lightning pauses scheduling for the region that stores the target table data. After the import is completed, TiDB Lightning recovers scheduling.
-    - When the TiDB cluster < v6.1.0 or TiDB Lightning < v6.2.0, TiDB Lightning pauses global scheduling.
+    -   TiDB クラスター &gt;= v6.1.0 およびTiDB Lightning &gt;= v6.2.0 の場合、 TiDB Lightningは、ターゲット テーブル データを格納するリージョンのスケジューリングを一時停止します。インポートが完了すると、 TiDB Lightningはスケジューリングを回復します。
+    -   TiDB クラスター &lt; v6.1.0 またはTiDB Lightning &lt; v6.2.0 の場合、 TiDB Lightningはグローバル スケジューリングを一時停止します。
 
-2. TiDB Lightning creates table schemas in the target database and fetches the metadata.
+2.  TiDB Lightningは、ターゲット データベースにテーブル スキーマを作成し、メタデータを取得します。
 
-3. Each table is divided into multiple contiguous **blocks**, so that TiDB Lightning can import data from large tables (greater than 200 GB) in parallel.
+3.  各テーブルは複数の連続した**ブロック**に分割されているため、 TiDB Lightningは大きなテーブル (200 GB を超える) からデータを並行してインポートできます。
 
-4. TiDB Lightning prepares an "engine file" for each block to handle key-value pairs. TiDB Lightning reads the SQL dump in parallel, converts the data source to key-value pairs in the same encoding as TiDB, sorts the key-value pairs and writes them to a local temporary storage file.
+4.  TiDB Lightningは、ブロックごとに「エンジン ファイル」を用意して、キーと値のペアを処理します。 TiDB Lightningは SQL ダンプを並行して読み取り、データ ソースを TiDB と同じエンコーディングのキーと値のペアに変換し、キーと値のペアを並べ替えて、ローカルの一時ストレージ ファイルに書き込みます。
 
-5. When an engine file is written, TiDB Lightning starts to split and schedule data on the target TiKV cluster, and then imports data to TiKV cluster.
+5.  エンジン ファイルが書き込まれると、 TiDB Lightningはターゲットの TiKV クラスターでデータの分割とスケジュールを開始し、データを TiKV クラスターにインポートします。
 
-    The engine file contains two types of engines: **data engine** and **index engine**. Each engine corresponds to a type of key-value pairs: row data and secondary index. Normally, row data is completely ordered in the data source, and the secondary index is unordered. Therefore, the data engine files are imported immediately after the corresponding block is written, and all index engine files are imported only after the entire table is encoded.
+    エンジン ファイルには、**データ エンジン**と<strong>インデックス エンジン</strong>の 2 種類のエンジンが含まれています。各エンジンは、キーと値のペアのタイプ (行データとセカンダリ インデックス) に対応しています。通常、行データはデータ ソース内で完全に順序付けられており、セカンダリ インデックスは順序付けされていません。したがって、データ エンジン ファイルは、対応するブロックが書き込まれた直後にインポートされ、すべてのインデックス エンジン ファイルは、テーブル全体がエンコードされた後にのみインポートされます。
 
-6. After all engine files are imported, TiDB Lightning compares the checksum between the local data source and the downstream cluster, and ensures that the imported data is not corrupted. Then TiDB Lightning analyzes the new data (`ANALYZE`) to optimize the future operations. Meanwhile, `tidb-lightning` adjusts the `AUTO_INCREMENT` value to prevent conflicts in the future.
+6.  すべてのエンジン ファイルがインポートされた後、 TiDB Lightningはローカル データ ソースとダウンストリーム クラスターの間でチェックサムを比較し、インポートされたデータが破損していないことを確認します。次に、 TiDB Lightningが新しいデータ ( `ANALYZE` ) を分析して、今後の運用を最適化します。一方、 `tidb-lightning`は将来の競合を防ぐために`AUTO_INCREMENT`の値を調整します。
 
-    The auto-increment ID is estimated by the **upper bound** of the number of rows, and is proportional to the total size of the table data file. Therefore, the auto-increment ID is usually larger than the actual number of rows. This is normal because the auto-increment ID [is not necessarily contiguous](/mysql-compatibility.md#auto-increment-id).
+    自動インクリメント ID は、行数の**上限**によって推定され、テーブル データ ファイルの合計サイズに比例します。したがって、自動インクリメント ID は通常、実際の行数より大きくなります。自動インクリメント ID [必ずしも連続しているわけではない](/mysql-compatibility.md#auto-increment-id)のため、これは正常です。
 
-7. After all steps are completed, TiDB Lightning automatically switches the TiKV nodes to "normal mode". If global scheduling is paused, TiDB Lightning also recovers global scheduling. After that, the TiDB cluster can provide services normally.
+7.  すべての手順が完了すると、 TiDB Lightningは自動的に TiKV ノードを「通常モード」に切り替えます。グローバル スケジューリングが一時停止されている場合、 TiDB Lightningはグローバル スケジューリングも回復します。その後、TiDB クラスターは正常にサービスを提供できます。
 
-## Requirements and restrictions
+## 要件と制限 {#requirements-and-restrictions}
 
-### Environment requirements
+### 環境要件 {#environment-requirements}
 
-**Operating system**:
+**オペレーティング システム**:
 
-It is recommended to use fresh CentOS 7 instances. You can deploy a virtual machine either on your local host or in the cloud. Because TiDB Lightning consumes as much CPU resources as needed by default, it is recommended that you deploy it on a dedicated server. If this is not possible, you can deploy it on a single server together with other TiDB components (for example, tikv-server) and then configure `region-concurrency` to limit the CPU usage from TiDB Lightning. Usually, you can configure the size to 75% of the logical CPU.
+新しい CentOS 7 インスタンスを使用することをお勧めします。仮想マシンは、ローカル ホストまたはクラウドにデプロイできます。 TiDB Lightningはデフォルトで必要なだけ多くの CPU リソースを消費するため、専用サーバーにデプロイすることをお勧めします。これが不可能な場合は、他の TiDB コンポーネント (tikv-server など) と共に単一のサーバーにデプロイし、 TiDB Lightningからの CPU 使用を制限するように`region-concurrency`を構成できます。通常、サイズは論理 CPU の 75% に設定できます。
 
-**Memory and CPU**:
+**メモリと CPU** :
 
-It is recommended that you allocate CPU more than 32 cores and memory greater than 64 GiB to get better performance.
+パフォーマンスを向上させるために、32 コアを超える CPU と 64 GiB を超えるメモリを割り当てることをお勧めします。
 
-> **Note:**
+> **ノート：**
 >
-> When you import a large amount of data, one concurrent import may consume about 2 GiB memory. The total memory usage can be `region-concurrency * 2 GiB`. `region-concurrency` is the same as the number of logical CPUs by default. If the memory size (GiB) is less than twice of the CPU or OOM occurs during the import, you can decrease `region-concurrency` to avoid OOM.
+> 大量のデータをインポートする場合、1 回の同時インポートで約 2 GiB のメモリが消費される場合があります。合計メモリ使用量は`region-concurrency * 2 GiB`です。 `region-concurrency`は、デフォルトで論理 CPU の数と同じです。メモリ サイズ (GiB) が CPU の 2 倍未満であるか、インポート中に OOM が発生した場合は、 `region-concurrency`を減らして OOM を回避できます。
 
-**Storage**: The `sorted-kv-dir` configuration item specifies the temporary storage directory for the sorted key-value files. The directory must be empty, and the storage space must be greater than the size of the dataset to be imported. For better import performance, it is recommended to use a directory different from `data-source-dir` and use flash storage and exclusive I/O for the directory.
+**Storage** : `sorted-kv-dir`構成項目は、ソートされたキー値ファイルの一時ストレージ ディレクトリを指定します。ディレクトリは空である必要があり、ストレージ スペースはインポートするデータセットのサイズより大きくなければなりません。インポートのパフォーマンスを向上させるには、 `data-source-dir`以外のディレクトリを使用し、そのディレクトリにフラッシュ ストレージと排他的 I/O を使用することをお勧めします。
 
-**Network**: A 10Gbps Ethernet card is recommended.
+**ネットワーク**: 10Gbps イーサネット カードを推奨します。
 
-### Version requirements
+### バージョン要件 {#version-requirements}
 
-- TiDB Lightning >= v4.0.3.
-- TiDB >= v4.0.0.
-- If the target TiDB cluster is v3.x or earlier, you need to use Importer-backend to complete the data import. In this mode, `tidb-lightning` needs to send the parsed key-value pairs to `tikv-importer` via gRPC, and `tikv-importer` will complete the data import.
+-   TiDB Lightning&gt;= v4.0.3。
+-   TiDB &gt;= v4.0.0。
+-   ターゲットの TiDB クラスターが v3.x 以前の場合は、データのインポートを完了するために Importer-backend を使用する必要があります。このモードでは、 `tidb-lightning`は解析されたキーと値のペアを gRPC 経由で`tikv-importer`に送信する必要があり、 `tikv-importer`はデータのインポートを完了します。
 
-### Limitations
+### 制限事項 {#limitations}
 
-- Do not use the physical import mode to directly import data to TiDB clusters in production. It has severe performance implications. If you need to do so, refer to [Import data into a cluster in production](/tidb-lightning/tidb-lightning-physical-import-mode-usage.md#import-data-into-a-cluster-in-production).
-- Do not use multiple TiDB Lightning instances to import data to the same TiDB cluster by default. Use [Parallel Import](/tidb-lightning/tidb-lightning-distributed-import.md) instead.
-- When you use multiple TiDB Lightning to import data to the same target, do not mix the backends. That is, do not use the physical import mode and the logical import mode at the same time.
-- A single Lightning process can import a single table of 10 TB at most. Parallel import can use 10 Lightning instances at most.
+-   物理インポート モードを使用して、本番環境の TiDB クラスターにデータを直接インポートしないでください。パフォーマンスに重大な影響があります。その必要がある場合は、 [本番環境のクラスターにデータをインポートする](/tidb-lightning/tidb-lightning-physical-import-mode-usage.md#import-data-into-a-cluster-in-production)を参照してください。
+-   デフォルトでは、複数のTiDB Lightningインスタンスを使用して同じ TiDB クラスターにデータをインポートしないでください。代わりに[並行輸入品](/tidb-lightning/tidb-lightning-distributed-import.md)を使用してください。
+-   複数のTiDB Lightningを使用して同じターゲットにデータをインポートする場合は、バックエンドを混在させないでください。つまり、物理インポート モードと論理インポート モードを同時に使用しないでください。
+-   1 つの Lightning プロセスで、最大 10 TB の 1 つのテーブルをインポートできます。並行インポートでは、最大 10 個の Lightning インスタンスを使用できます。
 
-### Tips for using with other components
+### 他のコンポーネントと併用するためのヒント {#tips-for-using-with-other-components}
 
-- When you use TiDB Lightning with TiFlash, note the following:
+-   TiDB LightningをTiFlashで使用する場合は、次の点に注意してください。
 
-    - Whether you have created a TiFlash replica for a table, you can use TiDB Lightning to import data to the table. However, the import might take longer than the normal import. The import time is influenced by the network bandwidth of the server TiDB Lightning is deployed on, the CPU and disk load on the TiFlash node, and the number of TiFlash replicas.
+    -   テーブルのTiFlashレプリカを作成したかどうかに関係なく、 TiDB Lightningを使用してデータをテーブルにインポートできます。ただし、インポートには通常のインポートよりも時間がかかる場合があります。インポート時間は、 TiDB Lightningがデプロイされているサーバーのネットワーク帯域幅、 TiFlashノードの CPU とディスクの負荷、およびTiFlashレプリカの数の影響を受けます。
 
-- TiDB Lightning character sets:
+-   TiDB Lightning文字セット:
 
-    - TiDB Lightning earlier than v5.4.0 cannot import tables of `charset=GBK`.
+    -   TiDB Lightningは`charset=GBK`のテーブルをインポートできません。
 
-- When you use TiDB Lightning with TiCDC, not the following:
+-   TiCDC でTiDB Lightningを使用する場合は、以下ではありません。
 
-    - TiCDC cannot capture the data inserted in the physical import mode.
+    -   TiCDC は、物理インポート モードで挿入されたデータをキャプチャできません。

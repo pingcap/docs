@@ -3,92 +3,92 @@ title: Troubleshoot Inconsistency Between Data and Indexes
 summary: Learn how to deal with errors reported by the consistency check between data and indexes.
 ---
 
-# Troubleshoot Inconsistency Between Data and Indexes
+# データとインデックス間の不一致のトラブルシューティング {#troubleshoot-inconsistency-between-data-and-indexes}
 
-TiDB checks consistency between data and indexes when it executes transactions or the [`ADMIN CHECK [TABLE|INDEX]`](/sql-statements/sql-statement-admin-check-table-index.md) statement. If the check finds that a record key-value and the corresponding index key-value are inconsistent, that is, a key-value pair storing row data and the corresponding key-value pair storing its index are inconsistent (for example, more indexes or missing indexes), TiDB reports a data inconsistency error and prints the related errors in error logs.
+TiDB は、トランザクションまたは[`ADMIN CHECK [TABLE|INDEX]`](/sql-statements/sql-statement-admin-check-table-index.md)のステートメントを実行するときに、データとインデックスの間の整合性をチェックします。チェックにより、レコードのキー値と対応するインデックスのキー値が矛盾していることが判明した場合、つまり、行データを格納するキーと値のペアとそのインデックスを格納する対応するキーと値のペアが矛盾している場合 (たとえば、より多くのインデックスまたはインデックスが見つからない)、TiDB はデータの不整合エラーを報告し、関連するエラーをエラー ログに出力します。
 
-This document describes the meanings of data inconsistency errors and provides some methods to bypass the consistency check. When a data consistency error occurs, contact PingCAP technical support for troubleshooting.
+このドキュメントでは、データ不整合エラーの意味について説明し、整合性チェックをバイパスするいくつかの方法を提供します。データ整合性エラーが発生した場合は、PingCAP テクニカル サポートに連絡してトラブルシューティングを依頼してください。
 
-## Error explanation
+## エラーの説明 {#error-explanation}
 
-When inconsistency between data and indexes occurs, you can check TiDB error messages to know which item is inconsistent between row data and index data, or check the related error logs for further investigation.
+データとインデックスの間で不整合が発生した場合、TiDB エラー メッセージをチェックして、行データとインデックス データの間でどの項目が不整合であるかを確認したり、関連するエラー ログをチェックしてさらに調査したりできます。
 
-### Errors reported during transaction execution
+### トランザクション実行中に報告されたエラー {#errors-reported-during-transaction-execution}
 
-This section lists the data inconsistency errors reported when TiDB executes transactions and explains the meanings of these errors with examples.
+このセクションでは、TiDB がトランザクションを実行するときに報告されるデータ不整合エラーをリストし、これらのエラーの意味を例を挙げて説明します。
 
-#### Error 8133
+#### エラー 8133 {#error-8133}
 
 `ERROR 8133 (HY000): data inconsistency in table: t, index: k2, index-count:1 != record-count:0`
 
-This error indicates that for the `k2` index in table `t`, the number of indexes in the table is 1 and the number of row records is 0. The number is inconsistent.
+このエラーは、テーブル`t`の`k2`インデックスについて、テーブル内のインデックスの数が 1 で、行レコードの数が 0 であることを示しています。数が矛盾しています。
 
-#### Error 8138
+#### エラー 8138 {#error-8138}
 
 `ERROR 8138 (HY000): writing inconsistent data in table: t, expected-values:{KindString green} != record-values:{KindString GREEN}`
 
-This error indicates that the transaction was attempting to write an incorrect row value. For the data to be written, the encoded row data does not match the original data before encoding.
+このエラーは、トランザクションが誤った行の値を書き込もうとしたことを示しています。書き込まれるデータは、エンコードされた行データがエンコード前の元のデータと一致しません。
 
-#### Error 8139
+#### エラー 8139 {#error-8139}
 
 `ERROR 8139 (HY000): writing inconsistent data in table: t, index: i1, index-handle:4 != record-handle:3, index: tables.mutation{key:kv.Key{0x74, 0x80, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x49, 0x5f, 0x69, 0x80, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x1, 0x1, 0x68, 0x65, 0x6c, 0x6c, 0x6f, 0x0, 0x0, 0x0, 0xfc, 0x1, 0x68, 0x65, 0x6c, 0x6c, 0x6f, 0x0, 0x0, 0x0, 0xfc, 0x3, 0x80, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x4}, flags:0x0, value:[]uint8{0x30}, indexID:1}, record: tables.mutation{key:kv.Key{0x74, 0x80, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x49, 0x5f, 0x72, 0x80, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x3}, flags:0xd, value:[]uint8{0x80, 0x0, 0x2, 0x0, 0x0, 0x0, 0x1, 0x2, 0x5, 0x0, 0xa, 0x0, 0x68, 0x65, 0x6c, 0x6c, 0x6f, 0x68, 0x65, 0x6c, 0x6c, 0x6f}, indexID:0}`
 
-This error indicates that the handle (that is, the key of the row data) of the data to be written is inconsistent. For index `i1` in table `t`, the row to be written by the transaction has a handle of 4 in the index key-value pair and a handle of 3 in the row record key-value pair. The data of this row will not be written.
+このエラーは、書き込むデータのハンドル (つまり、行データのキー) が一致していないことを示しています。テーブル`t`のインデックス`i1`の場合、トランザクションによって書き込まれる行には、インデックスのキーと値のペアに 4 のハンドルがあり、行レコードのキーと値のペアに 3 のハンドルがあります。この行のデータは書き込まれません。
 
-#### Error 8140
+#### エラー 8140 {#error-8140}
 
 `ERROR 8140 (HY000): writing inconsistent data in table: t, index: i2, col: c1, indexed-value:{KindString hellp} != record-value:{KindString hello}`
 
-This error indicates that the data in a row to be written by the transaction does not match the data in the index. For index `i2` in table `t`, a row to be written by the transaction has data `hellp` in the index key-value pair and data `hello` in the record key-value pair. The data of this row will not be written.
+このエラーは、トランザクションによって書き込まれる行のデータがインデックスのデータと一致しないことを示しています。テーブル`t`のインデックス`i2`の場合、トランザクションによって書き込まれる行には、インデックスのキーと値のペアにデータ`hellp`があり、レコードのキーと値のペアにデータ`hello`があります。この行のデータは書き込まれません。
 
-#### Error 8141
+#### エラー 8141 {#error-8141}
 
 `ERROR 8141 (HY000): assertion failed: key: 7480000000000000405f72013300000000000000f8, assertion: NotExist, start_ts: 430590532931813377, existing start ts: 430590532931551233, existing commit ts: 430590532931551234`
 
-This error indicates that the assertion failed when a transaction was being committed. Assuming that data and indexes are consistent, TiDB asserted that the key `7480000000000000405f720133000000000000000000f8` did not exist. When the transaction was being committed, TiDB found the key did exist, written by the transaction with the `start ts` `430590532931551233`. TiDB will print the Multi-Version Concurrency Control (MVCC) history of this key to logs.
+このエラーは、トランザクションのコミット中にアサーションが失敗したことを示しています。データとインデックスが一致していると仮定すると、TiDB はキー`7480000000000000405f720133000000000000000000f8`が存在しないと主張しました。トランザクションがコミットされたとき、TiDB は`start ts` `430590532931551233`のトランザクションによって書き込まれたキーが存在することを発見しました。 TiDB は、このキーの Multi-Version Concurrency Control (MVCC) 履歴をログに出力します。
 
-### Errors reported in admin check
+### 管理チェックで報告されたエラー {#errors-reported-in-admin-check}
 
-This section lists the data inconsistency errors that might occur in TiDB when you execute the [`ADMIN CHECK [TABLE|INDEX]`](/sql-statements/sql-statement-admin-check-table-index.md) statement, and explains the meanings of these errors with examples.
+このセクションでは、 [`ADMIN CHECK [TABLE|INDEX]`](/sql-statements/sql-statement-admin-check-table-index.md)ステートメントを実行したときに TiDB で発生する可能性のあるデータ不整合エラーをリストし、これらのエラーの意味を例を挙げて説明します。
 
-#### Error 8003
+#### エラー 8003 {#error-8003}
 
 `ERROR 8003 (HY000): table count 3 != index(idx) count 2`
 
-This error indicates that the table on which the [`ADMIN CHECK`](/sql-statements/sql-statement-admin-check-table-index.md) statement is executed has 3 row key-value pairs but only 2 index key-value pairs.
+このエラーは、 [`ADMIN CHECK`](/sql-statements/sql-statement-admin-check-table-index.md)ステートメントが実行されたテーブルに 3 つの行のキーと値のペアがあり、インデックスのキーと値のペアが 2 つしかないことを示しています。
 
-#### Error 8134
+#### エラー 8134 {#error-8134}
 
 `ERROR 8134 (HY000): data inconsistency in table: t, index: c2, col: c2, handle: "2", index-values:"KindInt64 13" != record-values:"KindInt64 12", compare err:<nil>`
 
-This error indicates that for index `c2` in table `t`, the value of column `c2` has the following inconsistency:
+このエラーは、テーブル`t`のインデックス`c2`で、列`c2`の値に次の矛盾があることを示しています。
 
-- In the index key-value pair of the row whose handle is `2`, the value of column `c2` is `13`.
-- In the row record key-value pair, the value of column `c2` is `12`.
+-   ハンドルが`2`である行のインデックス キーと値のペアでは、列`c2`の値は`13`です。
+-   行レコードのキーと値のペアでは、列`c2`の値は`12`です。
 
-#### Error 8223
+#### エラー 8223 {#error-8223}
 
 `ERROR 8223 (HY000): data inconsistency in table: t2, index: i1, handle: {hello, hello}, index-values:"" != record-values:"handle: {hello, hello}, values: [KindString hello KindString hello]"`
 
-This error indicates that `index-values` are null and `record-values` are not null, meaning that there is no corresponding index for the row.
+このエラーは、 `index-values`が null で`record-values`が null ではないことを示します。つまり、行に対応するインデックスがないことを意味します。
 
-## Solutions
+## ソリューション {#solutions}
 
-If you encounter a data inconsistency error, contact PingCAP technical support for troubleshooting immediately instead of dealing with the error by yourself. If your application needs to skip such errors urgently, you can use the following methods to bypass the check.
+データの不一致エラーが発生した場合は、自分でエラーに対処するのではなく、すぐに PingCAP テクニカル サポートに連絡してトラブルシューティングを依頼してください。アプリケーションでこのようなエラーを緊急にスキップする必要がある場合は、次の方法を使用してチェックをバイパスできます。
 
-### Rewrite SQL
+### SQLを書き換える {#rewrite-sql}
 
-If the data inconsistency error occurs in a particular SQL statement only, you can bypass this error by rewriting the SQL statement to another equivalent form using different execution operators.
+データ不整合エラーが特定の SQL ステートメントでのみ発生する場合は、別の実行演算子を使用して SQL ステートメントを別の同等の形式に書き換えることで、このエラーを回避できます。
 
-### Disable error checks
+### エラーチェックを無効にする {#disable-error-checks}
 
-For the following errors reported in transaction execution, you can bypass the corresponding checks:
+トランザクションの実行で報告された次のエラーについては、対応するチェックをバイパスできます。
 
-- To bypass the checks of errors 8138, 8139, and 8140, configure `set @@tidb_enable_mutation_checker=0`.
-- To bypass the checks of error 8141, configure `set @@tidb_txn_assertion_level=OFF`.
+-   エラー 8138、8139、および 8140 のチェックをバイパスするには、 `set @@tidb_enable_mutation_checker=0`を構成します。
+-   エラー 8141 のチェックをバイパスするには、 `set @@tidb_txn_assertion_level=OFF`を構成します。
 
-> **Note:**
+> **ノート：**
 >
-> Disabling `tidb_enable_mutation_checker` and `tidb_txn_assertion_level` will bypass the corresponding checks of all SQL statements.
+> `tidb_enable_mutation_checker`と`tidb_txn_assertion_level`を無効にすると、すべての SQL ステートメントの対応するチェックがバイパスされます。
 
-For other errors reported in transaction execution and all errors reported during the execution of the [`ADMIN CHECK [TABLE|INDEX]`](/sql-statements/sql-statement-admin-check-table-index.md) statement, you cannot bypass the corresponding check, because the data is already inconsistent.
+トランザクションの実行で報告されたその他のエラー、および[`ADMIN CHECK [TABLE|INDEX]`](/sql-statements/sql-statement-admin-check-table-index.md)ステートメントの実行中に報告されたすべてのエラーについては、データがすでに矛盾しているため、対応するチェックをバイパスすることはできません。

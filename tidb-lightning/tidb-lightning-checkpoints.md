@@ -3,13 +3,13 @@ title: TiDB Lightning Checkpoints
 summary: Use checkpoints to avoid redoing the previously completed tasks before the crash.
 ---
 
-# TiDB Lightning Checkpoints
+# TiDB Lightningチェックポイント {#tidb-lightning-checkpoints}
 
-Importing a large database usually takes hours or days, and if such long running processes spuriously crashes, it can be very time-wasting to redo the previously completed tasks. To solve this, TiDB Lightning uses *checkpoints* to store the import progress, so that `tidb-lightning` continues importing from where it lefts off after restarting.
+大規模なデータベースのインポートには、通常、数時間または数日かかります。長時間実行されているプロセスが誤ってクラッシュした場合、以前に完了したタスクをやり直すのに非常に時間がかかる可能性があります。これを解決するために、 TiDB Lightningは*チェックポイント*を使用してインポートの進行状況を保存し、 `tidb-lightning`が再起動後に中断したところからインポートを続行できるようにします。
 
-This document describes how to enable, configure, store, and control *checkpoints*.
+このドキュメントでは、*チェックポイント*を有効化、構成、保存、および制御する方法について説明します。
 
-## Enable and configure checkpoints
+## チェックポイントを有効にして構成する {#enable-and-configure-checkpoints}
 
 ```toml
 [checkpoint]
@@ -45,67 +45,67 @@ driver = "file"
 # keep-after-success = false
 ```
 
-## Checkpoints storage
+## チェックポイントの保管 {#checkpoints-storage}
 
-TiDB Lightning supports two kinds of checkpoint storage: a local file or a remote MySQL-compatible database.
+TiDB Lightningは、ローカル ファイルまたはリモートの MySQL 互換データベースの 2 種類のチェックポイント ストレージをサポートしています。
 
-* With `driver = "file"`, checkpoints are stored in a local file at the path given by the `dsn` setting. Checkpoints are updated rapidly, so we highly recommend placing the checkpoint file on a drive with very high write endurance, such as a RAM disk.
+-   `driver = "file"`を指定すると、チェックポイントは`dsn`設定で指定されたパスのローカル ファイルに保存されます。チェックポイントは急速に更新されるため、チェックポイント ファイルは、RAM ディスクなど、書き込み耐性が非常に高いドライブに配置することを強くお勧めします。
 
-* With `driver = "mysql"`, checkpoints can be saved in any databases compatible with MySQL 5.7 or later, including MariaDB and TiDB. By default, the checkpoints are saved in the target database.
+-   `driver = "mysql"`を使用すると、MariaDB や TiDB など、 MySQL 5.7以降と互換性のある任意のデータベースにチェックポイントを保存できます。デフォルトでは、チェックポイントはターゲット データベースに保存されます。
 
-While using the target database as the checkpoints storage, Lightning is importing large amounts of data at the same time. This puts extra stress on the target database and sometimes leads to communication timeout. Therefore, **it is strongly recommended to install a temporary MySQL server to store these checkpoints**. This server can be installed on the same host as `tidb-lightning` and can be uninstalled after the importer progress is completed.
+ターゲット データベースをチェックポイント ストレージとして使用している間、Lightning は同時に大量のデータをインポートしています。これにより、ターゲット データベースに余分な負荷がかかり、場合によっては通信タイムアウトが発生します。したがって、**一時的な MySQLサーバーをインストールしてこれらのチェックポイントを保存することを強くお勧めします**。このサーバーは`tidb-lightning`と同じホストにインストールでき、インポーターの進行が完了した後にアンインストールできます。
 
-## Checkpoints control
+## チェックポイント制御 {#checkpoints-control}
 
-If `tidb-lightning` exits abnormally due to unrecoverable errors (for example, data corruption), it refuses to reuse the checkpoints until the errors are resolved. This is to prevent worsening the situation. The checkpoint errors can be resolved using the `tidb-lightning-ctl` program.
+回復不能なエラー (データの破損など) が原因で`tidb-lightning`が異常終了した場合、エラーが解決されるまでチェックポイントの再利用を拒否します。事態の悪化を防ぐためです。チェックポイント エラーは、 `tidb-lightning-ctl`プログラムを使用して解決できます。
 
-### `--checkpoint-error-destroy`
+### <code>--checkpoint-error-destroy</code> {#code-checkpoint-error-destroy-code}
 
 ```sh
 tidb-lightning-ctl --checkpoint-error-destroy='`schema`.`table`'
 ```
 
-This option allows you to restart importing the table from scratch. The schema and table names must be quoted with backquotes and are case-sensitive.
+このオプションを使用すると、テーブルのインポートを最初からやり直すことができます。スキーマ名とテーブル名は逆引用符で囲む必要があり、大文字と小文字が区別されます。
 
-- If importing the table `` `schema`.`table` `` failed previously, this option executes the following operations:
+-   テーブル`` `schema`.`table` ``のインポートが以前に失敗した場合、このオプションは次の操作を実行します。
 
-    1. DROPs the table `` `schema`.`table` `` from the target database, which means removing all imported data.
-    2. Resets the checkpoints record of this table to be "not yet started".
+    1.  ターゲット データベースからテーブル`` `schema`.`table` ``を削除します。これは、インポートされたすべてのデータを削除することを意味します。
+    2.  このテーブルのチェックポイント レコードを「まだ開始されていない」状態にリセットします。
 
-- If there is no errors involving the table `` `schema`.`table` ``, this operation does nothing.
+-   テーブル`` `schema`.`table` ``に関連するエラーがない場合、この操作は何も行いません。
 
-It is the same as applying the above on every table. This is the most convenient, safe and conservative solution to fix the checkpoint error problem:
+上記をすべてのテーブルに適用するのと同じです。これは、チェックポイント エラーの問題を解決するための最も便利で安全で保守的な解決策です。
 
 ```sh
 tidb-lightning-ctl --checkpoint-error-destroy=all
 ```
 
-### `--checkpoint-error-ignore`
+### <code>--checkpoint-error-ignore</code> {#code-checkpoint-error-ignore-code}
 
 ```sh
 tidb-lightning-ctl --checkpoint-error-ignore='`schema`.`table`'
 tidb-lightning-ctl --checkpoint-error-ignore=all
 ```
 
-If importing the table `` `schema`.`table` `` failed previously, this clears the error status as if nothing ever happened. The `all` variant applies this operation to all tables.
+テーブル`` `schema`.`table` ``のインポートが以前に失敗した場合、これにより、何も起こらなかったかのようにエラー ステータスがクリアされます。 `all`バリアントは、この操作をすべてのテーブルに適用します。
 
-> **Note:**
+> **ノート：**
 >
-> Use this option only when you are sure that the error can indeed be ignored. If not, some imported data can be lost. The only safety net is the final "checksum" check, and thus you need to keep the "checksum" option always enabled when using `--checkpoint-error-ignore`.
+> このオプションは、エラーが実際に無視できることが確実な場合にのみ使用してください。そうしないと、インポートされたデータの一部が失われる可能性があります。唯一の安全策は最終的な「チェックサム」チェックであるため、 `--checkpoint-error-ignore`を使用するときは常に「チェックサム」オプションを有効にしておく必要があります。
 
-### `--checkpoint-remove`
+### <code>--checkpoint-remove</code> {#code-checkpoint-remove-code}
 
 ```sh
 tidb-lightning-ctl --checkpoint-remove='`schema`.`table`'
 tidb-lightning-ctl --checkpoint-remove=all
 ```
 
-This option simply removes all checkpoint information about one table or all tables, regardless of their status.
+このオプションは、ステータスに関係なく、1 つのテーブルまたはすべてのテーブルに関するすべてのチェックポイント情報を単純に削除します。
 
-### `--checkpoint-dump`
+### <code>--checkpoint-dump</code> {#code-checkpoint-dump-code}
 
 ```sh
 tidb-lightning-ctl --checkpoint-dump=output/directory
 ```
 
-This option dumps the content of the checkpoint into the given directory, which is mainly used for debugging by the technical staff. This option is only enabled when `driver = "mysql"`.
+このオプションは、チェックポイントの内容を特定のディレクトリにダンプします。このディレクトリは、主に技術スタッフによるデバッグに使用されます。このオプションは`driver = "mysql"`の場合にのみ有効です。

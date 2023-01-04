@@ -3,86 +3,86 @@ title: Online Unsafe Recovery
 summary: Learn how to use Online Unsafe Recovery.
 ---
 
-# Online Unsafe Recovery
+# オンラインの安全でない回復 {#online-unsafe-recovery}
 
-> **Warning:**
+> **警告：**
 >
-> Online Unsafe Recovery is a type of lossy recovery. If you use this feature, the integrity of data and data indexes cannot be guaranteed.
+> Online Unsafe Recovery は、非可逆回復の一種です。この機能を使用する場合、データおよびデータ インデックスの整合性は保証されません。
 
-When permanently damaged replicas cause part of data on TiKV to be unreadable and unwritable, you can use the Online Unsafe Recovery feature to perform a lossy recovery operation.
+永久に破損したレプリカにより、TiKV 上のデータの一部が読み取り不能および書き込み不能になった場合、オンラインの安全でない回復機能を使用して、損失のある回復操作を実行できます。
 
-## Feature description
+## 機能説明 {#feature-description}
 
-In TiDB, the same data might be stored in multiple stores at the same time according to the replica rules defined by users. This guarantees that data is still readable and writable even if a single or a few stores are temporarily offline or damaged. However, when most or all replicas of a Region go offline during a short period of time, the Region becomes temporarily unavailable and cannot be read or written.
+TiDB では、ユーザーが定義したレプリカ ルールに従って、同じデータが同時に複数のストアに格納される場合があります。これにより、1 つまたはいくつかのストアが一時的にオフラインになったり破損したりした場合でも、データの読み取りと書き込みが可能であることが保証されます。ただし、リージョンのほとんどまたはすべてのレプリカが短期間にオフラインになると、リージョンは一時的に使用できなくなり、読み取りまたは書き込みができなくなります。
 
-Suppose that multiple replicas of a data range encounter issues like permanent damage (such as disk damage), and these issues cause the stores to stay offline. In this case, this data range is temporarily unavailable. If you want the cluster back in use and also accept data rewind or data loss, in theory, you can re-form the majority of replicas by manually removing the failed replicas from the group. This allows application-layer services to read and write this data range (might be stale or empty) again.
+データ範囲の複数のレプリカで永続的な損傷 (ディスクの損傷など) などの問題が発生し、これらの問題によりストアがオフラインのままになっているとします。この場合、このデータ範囲は一時的に利用できなくなります。クラスターを使用に戻し、データの巻き戻しやデータの損失を受け入れる場合、理論的には、失敗したレプリカをグループから手動で削除することにより、レプリカの大部分を再形成できます。これにより、アプリケーション レイヤー サービスは、このデータ範囲 (古いか空である可能性があります) を再度読み書きできるようになります。
 
-In this case, if some stores with loss-tolerant data are permanently damaged, you can perform a lossy recovery operation by using Online Unsafe Recovery. When you use this feature, PD automatically pauses Region scheduling (including split and merge), collects the metadata of data shards from all stores, and then, under its global perspective, generates a real-time and complete recovery plan. Then, PD distributes the plan to all surviving stores to make them perform data recovery tasks. In addition, once the data recovery plan is distributed, PD periodically monitors the recovery progress and re-send the plan when necessary.
+この場合、損失許容データを含む一部のストアが完全に破損した場合、オンラインの安全でない回復を使用して、損失を伴う回復操作を実行できます。この機能を使用すると、PD はリージョンのスケジューリング (分割とマージを含む) を自動的に一時停止し、すべてのストアからデータ シャードのメタデータを収集してから、グローバルな観点から、リアルタイムの完全な復旧計画を生成します。次に、PD は計画をすべての存続しているストアに配布して、データ リカバリ タスクを実行させます。さらに、データ復旧計画が配布されると、PD は定期的に復旧の進行状況を監視し、必要に応じて計画を再送信します。
 
-## User scenarios
+## ユーザー シナリオ {#user-scenarios}
 
-The Online Unsafe Recovery feature is suitable for the following scenarios:
+オンラインの安全でない回復機能は、次のシナリオに適しています。
 
-* The data for application services is unreadable and unwritable, because permanently damaged stores cause the stores to fail to restart.
-* You can accept data loss and want the affected data to be readable and writable.
-* You want to perform a one-stop online data recovery operation.
+-   アプリケーション サービスのデータは読み取りも書き込みもできません。これは、ストアが永続的に破損すると、ストアが再起動できなくなるためです。
+-   データの損失を受け入れて、影響を受けるデータを読み取りおよび書き込み可能にすることができます。
+-   ワンストップのオンライン データ リカバリ操作を実行したい。
 
-## Usage
+## 使用法 {#usage}
 
-### Prerequisites
+### 前提条件 {#prerequisites}
 
-Before using Online Unsafe Recovery, make sure that the following requirements are met:
+オンラインの安全でない回復を使用する前に、次の要件が満たされていることを確認してください。
 
-* The offline stores indeed cause some pieces of data to be unavailable.
-* The offline stores cannot be automatically recovered or restarted.
+-   実際、オフライン ストアによって一部のデータが利用できなくなります。
+-   オフライン ストアを自動的に回復または再起動することはできません。
 
-### Step 1. Specify the stores that cannot be recovered
+### 手順 1. 復元できないストアを指定する {#step-1-specify-the-stores-that-cannot-be-recovered}
 
-Use PD Control to specify the TiKV nodes that cannot be recovered and trigger the automatic recovery by running [`unsafe remove-failed-stores <store_id>[,<store_id>,...]`](/pd-control.md#unsafe-remove-failed-stores-store-ids--show).
+PD Controlを使用して、回復できない TiKV ノードを指定し、 [`unsafe remove-failed-stores &#x3C;store_id>[,&#x3C;store_id>,...]`](/pd-control.md#unsafe-remove-failed-stores-store-ids--show)を実行して自動回復をトリガーします。
 
-{{< copyable "shell-regular" >}}
+{{< copyable "" >}}
 
 ```bash
 pd-ctl -u <pd_addr> unsafe remove-failed-stores <store_id1,store_id2,...>
 ```
 
-If the command returns `Success`, PD Control has successfully registered the task to PD. This only means that the request has been accepted, not that the recovery has been successfully performed. The recovery task is performed in the background. To see the recovery progress, use [`show`](#step-2-check-the-recovery-progress-and-wait-for-the-completion).
+コマンドが`Success`を返した場合、 PD Controlはタスクを PD に正常に登録しています。これは、リクエストが受け入れられたことを意味するだけであり、リカバリが正常に実行されたことを意味するものではありません。リカバリ タスクはバックグラウンドで実行されます。回復の進行状況を確認するには、 [`show`](#step-2-check-the-recovery-progress-and-wait-for-the-completion)を使用します。
 
-If the command returns `Failed`, PD Control has failed to register the task to PD. The possible errors are as follows:
+コマンドが`Failed`を返した場合、 PD Controlはタスクを PD に登録できませんでした。考えられるエラーは次のとおりです。
 
-- `unsafe recovery is running`: There is already an ongoing recovery task.
-- `invalid input store x doesn't exist`: The specified store ID does not exist.
-- `invalid input store x is up and connected`: The specified store with the ID is still healthy and should not be recovered.
+-   `unsafe recovery is running` : 進行中の回復タスクが既に存在します。
+-   `invalid input store x doesn't exist` : 指定された店舗IDは存在しません。
+-   `invalid input store x is up and connected` : ID で指定されたストアはまだ正常であり、復旧する必要はありません。
 
-To specify the longest allowable duration of a recovery task, use the `--timeout <seconds>` option. If this option is not specified, the longest duration is 5 minutes by default. When the timeout occurs, the recovery is interrupted and returns an error.
+回復タスクの最長許容期間を指定するには、 `--timeout <seconds>`オプションを使用します。このオプションが指定されていない場合、最長の期間はデフォルトで 5 分です。タイムアウトが発生すると、リカバリが中断され、エラーが返されます。
 
-> **Note:**
+> **ノート：**
 >
-> - Because this command needs to collect information from all peers, it might cause an increase in memory usage (100,000 peers are estimated to use 500 MiB of memory).
-> - If PD restarts when the command is running, the recovery is interrupted and you need to trigger the task again.
-> - Once the command is running, the specified stores will be set to the Tombstone status, and you cannot restart these stores.
-> - When the command is running, all scheduling tasks and split/merge are paused and will be resumed automatically after the recovery is successful or fails.
+> -   このコマンドはすべてのピアから情報を収集する必要があるため、メモリ使用量が増加する可能性があります (100,000 ピアで 500 MiB のメモリが使用されると推定されます)。
+> -   コマンドの実行中に PD が再起動すると、リカバリが中断され、タスクを再度トリガーする必要があります。
+> -   コマンドが実行されると、指定されたストアは廃棄状態に設定され、これらのストアを再開することはできません。
+> -   コマンドの実行中は、すべてのスケジューリング タスクと分割/マージが一時停止され、復旧が成功または失敗した後に自動的に再開されます。
 
-### Step 2. Check the recovery progress and wait for the completion
+### ステップ 2. 回復の進行状況を確認し、完了するまで待ちます {#step-2-check-the-recovery-progress-and-wait-for-the-completion}
 
-When the above store removal command runs successfully, you can use PD Control to check the removal progress by running [`unsafe remove-failed-stores show`](/pd-control.md#config-show--set-option-value--placement-rules).
+上記のストア削除コマンドが正常に実行されたら、 PD Controlを使用して[`unsafe remove-failed-stores show`](/pd-control.md#config-show--set-option-value--placement-rules)を実行して削除の進行状況を確認できます。
 
-{{< copyable "shell-regular" >}}
+{{< copyable "" >}}
 
 ```bash
 pd-ctl -u <pd_addr> unsafe remove-failed-stores show
 ```
 
-The recovery process has multiple possible stages:
+回復プロセスには複数の段階があります。
 
-- `collect report`: The initial stage in which PD collects reports from TiKV and gets global information.
-- `tombstone tiflash learner`: Among the unhealthy Regions, delete the TiFlash learners that are newer than other healthy peers, to prevent such an extreme situation and the possible panic.
-- `force leader for commit merge`: A special stage. When there is an uncompleted commit merge, `force leader` is first performed on the Regions with commit merge, in case of extreme situations.
-- `force leader`: Forces unhealthy Regions to assign a Raft leader among the remaining healthy peers.
-- `demote failed voter`: Demotes the Region's failed voters to learners, and then the Regions can select a Raft leader as normal.
-- `create empty region`: Creates an empty Region to fill in the space in the key range. This is to resolve the case that the stores with all replicas of some Regions have been damaged.
+-   `collect report` : PD が TiKV からレポートを収集し、グローバルな情報を取得する初期段階。
+-   `tombstone tiflash learner` : 異常なリージョンの中で、他の正常なピアよりも新しいTiFlashを削除して、このような極端な状況とpanicの可能性を防ぎます。
+-   `force leader for commit merge` : スペシャルステージ。未完了のコミット マージがある場合、極端な状況では、コミット マージのあるリージョンで`force leader`が最初に実行されます。
+-   `force leader` : 異常なリージョンに、残りの正常なピアの中からRaftリーダーを割り当てるように強制します。
+-   `demote failed voter` : リージョンの失敗した有権者を学習者に降格し、リージョンは通常どおりRaftリーダーを選択できます。
+-   `create empty region` : キー範囲のスペースを埋めるために空のリージョンを作成します。これは、一部のリージョンのすべてのレプリカを含むストアが破損した場合を解決するためです。
 
-Each of the above stages is output in the JSON format, including information, time, and a detailed recovery plan. For example:
+上記の各段階は、情報、時間、および詳細な復旧計画を含む JSON 形式で出力されます。例えば：
 
 ```json
 [
@@ -127,9 +127,9 @@ Each of the above stages is output in the JSON format, including information, ti
 ]
 ```
 
-After PD has successfully dispatched the recovery plan, it waits for TiKV to report the execution results. As you can see in `Collecting reports from alive stores`, the last stage of the above output, this part of the output shows the detailed statuses of PD dispatching recovery plan and receiving reports from TiKV.
+PD が復旧計画を正常にディスパッチした後、TiKV が実行結果を報告するのを待ちます。上記の出力の最後の段階である`Collecting reports from alive stores`でわかるように、出力のこの部分には、PD のディスパッチ リカバリ プランと TiKV からのレポートの受信の詳細なステータスが表示されます。
 
-The whole recovery process takes multiple stages and one stage might be retried multiple times. Usually, the estimated duration is 3 to 10 periods of store heartbeat (one period of store heartbeat is 10 seconds by default). After the recovery is completed, the last stage in the command output shows `"Unsafe recovery finished"`, the table IDs to which the affected Regions belong (if there is none or RawKV is used, the output does not show the table IDs), and the affected SQL meta Regions. For example:
+回復プロセス全体には複数の段階があり、1 つの段階が複数回再試行される場合があります。通常、見積もられる期間はストア ハートビートの 3 ～ 10 周期です (ストアハートビートハートビートの 1 周期はデフォルトで 10 秒です)。リカバリが完了すると、コマンド出力の最後のステージに`"Unsafe recovery finished"` 、影響を受けるリージョンが属するテーブル ID (存在しない場合、または RawKV が使用されている場合、出力にはテーブル ID は表示されません)、および影響を受ける SQL メタが表示されます。地域。例えば：
 
 ```json
 {
@@ -142,12 +142,12 @@ The whole recovery process takes multiple stages and one stage might be retried 
 }
 ```
 
-> **Note:**
+> **ノート：**
 >
-> - The recovery operation has turned some failed voters to failed learners. Then PD scheduling needs some time to remove these failed learners.
-> - It is recommended to add new stores in time.
+> -   回復操作により、一部の失敗した有権者が失敗した学習者になりました。その後、PD スケジューリングでは、これらの失敗した学習者を削除するのに時間がかかります。
+> -   時間内に新しい店舗を追加することをお勧めします。
 
-If an error occurs during the task, the last stage in the output shows `"Unsafe recovery failed"` and the error message. For example:
+タスク中にエラーが発生した場合、出力の最後の段階に`"Unsafe recovery failed"`とエラー メッセージが表示されます。例えば：
 
 ```json
 {
@@ -156,26 +156,26 @@ If an error occurs during the task, the last stage in the output shows `"Unsafe 
 }
 ```
 
-### Step 3. Check the consistency of data and index (not required for RawKV)
+### ステップ 3. データとインデックスの一貫性を確認する (RawKV では不要) {#step-3-check-the-consistency-of-data-and-index-not-required-for-rawkv}
 
-After the recovery is completed, the data and index might be inconsistent. Use the SQL commands [`ADMIN CHECK`](/sql-statements/sql-statement-admin-check-table-index.md), `ADMIN RECOVER`, and `ADMIN CLEANUP` to check the consistency of the affected tables (you can get IDs from the output of `"Unsafe recovery finished"`) for data consistency and index consistency, and to recover the tables.
+リカバリが完了した後、データとインデックスが矛盾している可能性があります。 SQL コマンド[`ADMIN CHECK`](/sql-statements/sql-statement-admin-check-table-index.md) 、 `ADMIN RECOVER` 、および`ADMIN CLEANUP`を使用して、データの一貫性とインデックスの一貫性について、影響を受けるテーブルの一貫性をチェックし ( `"Unsafe recovery finished"`の出力から ID を取得できます)、テーブルを復旧します。
 
-> **Note:**
+> **ノート：**
 >
-> Although the data can be read and written, it does not mean that there is no data loss.
+> データは読み書きできますが、データの損失がないわけではありません。
 
-### Step 4: Remove unrecoverable stores (optional)
+### 手順 4: 回復不能なストアを削除する (オプション) {#step-4-remove-unrecoverable-stores-optional}
 
 <SimpleTab>
 <div label="Stores deployed using TiUP">
 
-1. Remove the unrecoverable nodes:
+1.  回復不能なノードを削除します。
 
     ```bash
     tiup cluster scale-in <cluster-name> -N <host> --force
     ```
 
-2. Clean up Tombstone nodes:
+2.  Tombstone ノードをクリーンアップします。
 
     ```bash
     tiup cluster prune <cluster-name>
@@ -184,17 +184,17 @@ After the recovery is completed, the data and index might be inconsistent. Use t
 </div>
 <div label="Stores deployed using TiDB Operator">
 
-1. Delete the `PersistentVolumeClaim`.
+1.  `PersistentVolumeClaim`を削除します。
 
-    {{< copyable "shell-regular" >}}
+    {{< copyable "" >}}
 
     ```bash
     kubectl delete -n ${namespace} pvc ${pvc_name} --wait=false
     ```
 
-2. Delete the TiKV Pod and wait for newly created TiKV Pods to join the cluster.
+2.  TiKV Pod を削除し、新しく作成された TiKV Pod がクラスターに参加するのを待ちます。
 
-    {{< copyable "shell-regular" >}}
+    {{< copyable "" >}}
 
     ```bash
     kubectl delete -n ${namespace} pod ${pod_name}

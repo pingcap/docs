@@ -3,7 +3,7 @@ title: Multiple Data Centers in One City Deployment
 summary: Learn the deployment solution to multi-data centers in one city.
 ---
 
-# Multiple Data Centers in One City Deployment
+# 1 つの都市に展開された複数のデータ センター {#multiple-data-centers-in-one-city-deployment}
 
 <!-- Localization note for TiDB:
 
@@ -13,59 +13,59 @@ summary: Learn the deployment solution to multi-data centers in one city.
 
 -->
 
-As a distributed SQL database, TiDB combines the best features of the traditional relational database and the scalability of the NoSQL database, and is highly available across data centers (DC). This document introduces the deployment of multiple DCs in one city.
+分散型 SQL データベースである TiDB は、従来のリレーショナル データベースの優れた機能と NoSQL データベースのスケーラビリティを兼ね備えており、データ センター (DC) 全体で高い可用性を実現します。このドキュメントでは、1 つの都市に複数の DC を配置する方法について説明します。
 
-## Raft protocol
+## Raftプロトコル {#raft-protocol}
 
-Raft is a distributed consensus algorithm. Using this algorithm, both PD and TiKV, among components of the TiDB cluster, achieve disaster recovery of data, which is implemented through the following mechanisms:
+Raftは分散コンセンサス アルゴリズムです。このアルゴリズムを使用して、TiDB クラスターのコンポーネントの中で PD と TiKV の両方がデータのディザスター リカバリーを実現します。これは、次のメカニズムによって実装されます。
 
-- The essential role of Raft members is to perform log replication and act as a state machine. Among Raft members, data replication is implemented by replicating logs. Raft members change their own states in different conditions to elect a leader to provide services.
-- Raft is a voting system that follows the majority protocol. In a Raft group, if a member gets the majority of votes, its membership changes to leader. In other words, when the majority of nodes remain in the Raft group, a leader can be elected to provide services.
+-   Raftメンバーの重要な役割は、ログのレプリケーションを実行し、ステート マシンとして機能することです。 Raftメンバー間では、ログを複製することでデータ複製が実装されます。 Raftメンバーは、サービスを提供するリーダーを選出するために、さまざまな条件で自身の状態を変更します。
+-   Raftは、多数決プロトコルに従う投票システムです。 Raftグループでは、メンバーが過半数の票を獲得すると、そのメンバーシップはリーダーに変わります。つまり、大多数のノードがRaftグループに残っている場合、サービスを提供するリーダーを選出できます。
 
-To take advantage of Raft's reliability, the following conditions must be met in a real deployment scenario:
+Raft の信頼性を利用するには、実際の展開シナリオで次の条件を満たす必要があります。
 
-- Use at least three servers in case one server fails.
-- Use at least three racks in case one rack fails.
-- Use at least three DCs in case one DC fails.
-- Deploy TiDB in at least three cities in case data safety issue occurs in one city.
+-   1 台のサーバーに障害が発生した場合に備えて、少なくとも 3 台のサーバーを使用してください。
+-   1 つのラックが故障した場合に備えて、少なくとも 3 つのラックを使用してください。
+-   1 つの DC に障害が発生した場合に備えて、少なくとも 3 つの DC を使用します。
+-   1 つの都市でデータの安全性の問題が発生した場合に備えて、少なくとも 3 つの都市に TiDB をデプロイします。
 
-The native Raft protocol does not have a good support for an even number of replicas. Considering the impact of cross-city network latency, three DCs in the same city might be the most suitable solution to a highly available and disaster tolerant Raft deployment.
+ネイティブのRaftプロトコルは、偶数のレプリカを適切にサポートしていません。都市間のネットワークレイテンシーの影響を考慮すると、同じ都市にある 3 つの DC は、可用性が高く災害に強いRaft展開に最適なソリューションである可能性があります。
 
-## Three DCs in one city deployment
+## 1 つの都市展開で 3 つの DC {#three-dcs-in-one-city-deployment}
 
-TiDB clusters can be deployed in three DCs in the same city. In this solution, data replication across the three DCs is implemented using the Raft protocol within the cluster. These three DCs can provide read and write services at the same time. Data consistency is not affected even if one DC fails.
+TiDB クラスターは、同じ都市の 3 つの DC にデプロイできます。このソリューションでは、クラスター内のRaftプロトコルを使用して、3 つの DC 間のデータ レプリケーションが実装されます。これら 3 つの DC は、読み取りサービスと書き込みサービスを同時に提供できます。 1 つの DC に障害が発生しても、データの整合性は影響を受けません。
 
-### Simple architecture
+### シンプルなアーキテクチャ {#simple-architecture}
 
-TiDB, TiKV and PD are distributed among three DCs, which is the most common deployment with the highest availability.
+TiDB、TiKV、および PD は 3 つの DC に分散されます。これは、最も高い可用性を備えた最も一般的な展開です。
 
 ![3-DC Deployment Architecture](/media/deploy-3dc.png)
 
-**Advantages:**
+**利点:**
 
-- All replicas are distributed among three DCs, with high availability and disaster recovery capability.
-- No data will be lost if one DC is down (RPO = 0).
-- Even if one DC is down, the other two DCs will automatically start leader election and automatically resume services within a reasonable amount of time (within 20 seconds in most cases). See the following diagram for more information:
+-   すべてのレプリカは 3 つの DC に分散され、高可用性と災害復旧機能を備えています。
+-   1 つの DC がダウンしても (RPO = 0)、データが失われることはありません。
+-   1 つの DC がダウンしても、他の 2 つの DC は自動的にリーダーの選出を開始し、妥当な時間内 (ほとんどの場合 20 秒以内) にサービスを自動的に再開します。詳細については、次の図を参照してください。
 
 ![Disaster Recovery for 3-DC Deployment](/media/deploy-3dc-dr.png)
 
-**Disadvantages:**
+**短所:**
 
-The performance can be affected by the network latency.
+パフォーマンスは、ネットワークレイテンシーの影響を受ける可能性があります。
 
-- For writes, all the data has to be replicated to at least 2 DCs. Because TiDB uses 2-phase commit for writes, the write latency is at least twice the latency of the network between two DCs.
-- The read performance will also be affected by the network latency if the leader is not in the same DC with the TiDB node that sends the read request.
-- Each TiDB transaction needs to obtain TimeStamp Oracle (TSO) from the PD leader. So if the TiDB and PD leaders are not in the same DC, the performance of the transactions will also be affected by the network latency because each transaction with the write request has to obtain TSO twice.
+-   書き込みの場合、すべてのデータを少なくとも 2 つの DC にレプリケートする必要があります。 TiDB は書き込みに 2 フェーズ コミットを使用するため、書き込みのレイテンシー時間は、2 つの DC 間のネットワークのレイテンシーの少なくとも 2 倍になります。
+-   リーダーが読み取り要求を送信する TiDB ノードと同じ DC にない場合、読み取りパフォーマンスはネットワークレイテンシーの影響も受けます。
+-   各 TiDB トランザクションは、PD リーダーから TimeStamp Oracle (TSO) を取得する必要があります。そのため、TiDB リーダーと PD リーダーが同じ DC にない場合、書き込み要求を伴う各トランザクションは TSO を 2 回取得する必要があるため、トランザクションのパフォーマンスもネットワークレイテンシーの影響を受けます。
 
-### Optimized architecture
+### 最適化されたアーキテクチャ {#optimized-architecture}
 
-If not all of the three DCs need to provide services to the applications, you can dispatch all the requests to one DC and configure the scheduling policy to migrate all the TiKV Region leader and PD leader to the same DC. In this way, neither obtaining TSO nor reading TiKV Regions will be impacted by the network latency across DCs. If this DC is down, the PD leader and TiKV Region leader will be automatically elected in other surviving DCs, and you just need to switch the requests to the DCs that are still alive.
+3 つの DC のすべてがアプリケーションにサービスを提供する必要がない場合は、すべての要求を 1 つの DC にディスパッチし、すべての TiKVリージョンリーダーと PD リーダーを同じ DC に移行するようにスケジューリング ポリシーを構成できます。このようにして、TSO の取得も TiKV リージョンの読み取りも、DC 間のネットワークレイテンシーの影響を受けません。この DC がダウンしている場合、PD リーダーと TiKVリージョンリーダーは、他の生き残った DC で自動的に選出され、まだ生きている DC に要求を切り替えるだけで済みます。
 
 ![Read Performance Optimized 3-DC Deployment](/media/deploy-3dc-optimize.png)
 
-**Advantages:**
+**利点:**
 
-The cluster's read performance and the capability to get TSO are improved. A configuration template of scheduling policy is as follows:
+クラスターの読み取りパフォーマンスと TSO を取得する機能が改善されました。スケジューリング ポリシーの構成テンプレートは次のとおりです。
 
 ```shell
 -- Evicts all leaders of other DCs to the DC that provides services to the application.
@@ -78,38 +78,38 @@ member leader_priority pdName2 4
 member leader_priority pdName3 3
 ```
 
-> **Note:**
+> **ノート：**
 >
-> Since TiDB 5.2, the `label-property` configuration is not supported by default. To set the replica policy, use the [placement rules](/configure-placement-rules.md).
+> TiDB 5.2 以降、デフォルトでは`label-property`構成はサポートされていません。レプリカ ポリシーを設定するには、 [配置ルール](/configure-placement-rules.md)を使用します。
 
-**Disadvantages:**
+**短所:**
 
-- Write scenarios are still affected by network latency across DCs. This is because Raft follows the majority protocol and all written data must be replicated to at least two DCs.
-- The TiDB server that provides services is only in one DC.
-- All application traffic is processed by one DC and the performance is limited by the network bandwidth pressure of that DC.
-- The capability to get TSO and the read performance are affected by whether the PD server and TiKV server are up in the DC that processes application traffic. If these servers are down, the application is still affected by the cross-center network latency.
+-   書き込みシナリオは、DC 間のネットワークレイテンシーの影響を受けます。これは、 Raftが多数決プロトコルに従い、書き込まれたすべてのデータを少なくとも 2 つの DC に複製する必要があるためです。
+-   サービスを提供する TiDBサーバーは 1 つの DC にのみ存在します。
+-   すべてのアプリケーション トラフィックは 1 つの DC によって処理され、パフォーマンスはその DC のネットワーク帯域幅のプレッシャーによって制限されます。
+-   TSO を取得する機能と読み取りパフォーマンスは、アプリケーション トラフィックを処理する DC で PDサーバーと TiKVサーバーが稼働しているかどうかによって影響を受けます。これらのサーバーがダウンした場合でも、アプリケーションはセンター間のネットワークレイテンシーの影響を受けます。
 
-### Deployment example
+### 導入例 {#deployment-example}
 
-This section provides a topology example, and introduces TiKV labels and TiKV labels planning.
+このセクションでは、トポロジの例を示し、TiKV ラベルと TiKV ラベルの計画を紹介します。
 
-#### Topology example
+#### トポロジの例 {#topology-example}
 
-The following example assumes that three DCs (IDC1, IDC2, and IDC3) are located in one city; each IDC has two sets of racks and each rack has three servers. The example ignores the hybrid deployment or the scenario where multiple instances are deployed on one machine. The deployment of a TiDB cluster (three replicas) on three DCs in one city is as follows:
+次の例では、3 つの DC (IDC1、IDC2、および IDC3) が 1 つの都市にあると想定しています。各 IDC には 2 セットのラックがあり、各ラックには 3 台のサーバーがあります。この例では、ハイブリッド デプロイまたは複数のインスタンスが 1 台のマシンにデプロイされるシナリオは無視されています。 1 つの都市の 3 つの DC での TiDB クラスター (3 つのレプリカ) の展開は次のとおりです。
 
 ![3-DC in One City](/media/multi-data-centers-in-one-city-deployment-sample.png)
 
-#### TiKV labels
+#### TiKV ラベル {#tikv-labels}
 
-TiKV is a Multi-Raft system where data is divided into Regions and the size of each Region is 96 MB by default. Three replicas of each Region form a Raft group. For a TiDB cluster of three replicas, because the number of Region replicas is independent of the TiKV instance numbers, three replicas of a Region are only scheduled to three TiKV instances. This means that even if the cluster is scaled out to have N TiKV instances, it is still a cluster of three replicas.
+TiKV は、データがリージョンに分割され、各リージョンのサイズがデフォルトで 96 MB である Multi-Raft システムです。各リージョンの 3 つのレプリカがRaftグループを形成します。 3 つのレプリカの TiDB クラスターの場合、リージョンレプリカの数は TiKV インスタンスの数とは無関係であるため、リージョンの 3 つのレプリカは 3 つの TiKV インスタンスに対してのみスケジュールされます。これは、クラスターが N 個の TiKV インスタンスを持つようにスケールアウトされたとしても、それは 3 つのレプリカのクラスターであることを意味します。
 
-Because a Raft group of three replicas tolerates only one replica failure, even if the cluster is scaled out to have N TiKV instances, this cluster still tolerates only one replica failure. Two failed TiKV instances might cause some Regions to lose replicas and the data in this cluster is no longer complete. SQL requests that access data from these Regions will fail. The probability of two simultaneous failures among N TiKV instances is much higher than the probability of two simultaneous failures among three TiKV instances. This means that the more TiKV instances the Multi-Raft system is scaled out to have, the less the availability of the system.
+3 つのレプリカのRaftグループは 1 つのレプリカの障害のみを許容するため、クラスターが N TiKV インスタンスを持つようにスケールアウトされた場合でも、このクラスターは 1 つのレプリカの障害のみを許容します。 2 つの TiKV インスタンスが失敗すると、一部のリージョンでレプリカが失われ、このクラスター内のデータが完全ではなくなる可能性があります。これらのリージョンからデータにアクセスする SQL リクエストは失敗します。 N 個の TiKV インスタンス間で 2 つの同時障害が発生する確率は、3 つの TiKV インスタンス間で 2 つの同時障害が発生する確率よりもはるかに高くなります。これは、Multi-Raft システムがスケールアウトされる TiKV インスタンスが多いほど、システムの可用性が低下することを意味します。
 
-Because of the limitation described above, `label` is used to describe the location information of TiKV. The label information is refreshed to the TiKV startup configuration file with deployment or rolling upgrade operations. The started TiKV reports its latest label information to PD. Based on the user-registered label name (the label metadata) and the TiKV topology, PD optimally schedules Region replicas and improves the system availability.
+上記の制限により、TiKV の位置情報の記述には`label`を使用します。ラベル情報は、展開またはローリング アップグレード操作で TiKV 起動構成ファイルに更新されます。起動した TiKV は、最新のラベル情報を PD に報告します。ユーザーが登録したラベル名 (ラベル メタデータ) と TiKV トポロジに基づいて、PD はリージョンレプリカを最適にスケジュールし、システムの可用性を向上させます。
 
-#### TiKV labels planning example
+#### TiKVラベルの企画例 {#tikv-labels-planning-example}
 
-To improve the availability and disaster recovery of the system, you need to design and plan TiKV labels according to your existing physical resources and the disaster recovery capability. You also need to configure in the cluster initialization configuration file according to the planned topology:
+システムの可用性と災害復旧を改善するには、既存の物理リソースと災害復旧機能に従って TiKV ラベルを設計および計画する必要があります。また、計画されたトポロジに従って、クラスターの初期化構成ファイルで構成する必要があります。
 
 ```ini
 server_configs:
@@ -155,12 +155,12 @@ tikv_servers:
       server.labels: { zone: "z3", dc: "d1", rack: "r2", host: "41" }
 ```
 
-In the example above, `zone` is the logical availability zone layer that controls the isolation of replicas (three replicas in the example cluster).
+上記の例では、 `zone`はレプリカ (例のクラスターでは 3 つのレプリカ) の分離を制御する論理的な可用性ゾーンレイヤーです。
 
-Considering that the DC might be scaled out in the future, the three-layer label structure (`dc`, `rack`, `host`) is not directly adopted. Assuming that `d2`, `d3`, and `d4` are to be scaled out, you only need to scale out the DCs in the corresponding availability zone and scale out the racks in the corresponding DC.
+将来的に DC がスケールアウトされる可能性を考慮して、3 層ラベル構造 ( `dc` 、 `rack` 、 `host` ) は直接採用されていません。 `d2` 、 `d3` 、および`d4`をスケールアウトすると仮定すると、対応する可用性ゾーンの DC をスケールアウトし、対応する DC のラックをスケールアウトするだけで済みます。
 
-If this three-layer label structure is directly adopted, after scaling out a DC, you might need to apply new labels and the data in TiKV needs to be rebalanced.
+この 3 層ラベル構造を直接採用した場合、DC をスケールアウトした後、新しいラベルを適用し、TiKV のデータを再調整する必要がある場合があります。
 
-### High availability and disaster recovery analysis
+### 高可用性と災害復旧の分析 {#high-availability-and-disaster-recovery-analysis}
 
-The multiple DCs in one city deployment can guarantee that if one DC fails, the cluster can automatically recover services without manual intervention. Data consistency is also guaranteed. Note that scheduling policies are used to optimize performance, but when failure occurs, these policies prioritize availability over performance.
+1 つの都市に複数の DC を配置することで、1 つの DC に障害が発生した場合でも、クラスターは手動の介入なしにサービスを自動的に回復できることが保証されます。データの一貫性も保証されます。スケジュール ポリシーはパフォーマンスを最適化するために使用されますが、障害が発生した場合、これらのポリシーはパフォーマンスよりも可用性を優先することに注意してください。

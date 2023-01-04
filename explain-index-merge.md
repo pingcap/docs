@@ -3,21 +3,21 @@ title: Explain Statements Using Index Merge
 summary: Learn about the execution plan information returned by the `EXPLAIN` statement in TiDB.
 ---
 
-# Explain Statements Using Index Merge
+# インデックス マージを使用したステートメントの説明 {#explain-statements-using-index-merge}
 
-Index merge is a method introduced in TiDB v4.0 to access tables. Using this method, the TiDB optimizer can use multiple indexes per table and merge the results returned by each index. In some scenarios, this method makes the query more efficient by avoiding full table scans.
+インデックス マージは、テーブルにアクセスするために TiDB v4.0 で導入された方法です。この方法を使用すると、TiDB オプティマイザーはテーブルごとに複数のインデックスを使用し、各インデックスから返された結果をマージできます。一部のシナリオでは、この方法を使用すると、テーブル全体のスキャンが回避されるため、クエリがより効率的になります。
 
-Index merge in TiDB has two types: the intersection type and the union type. The former applies to the `AND` expression, while the latter applies to the `OR` expression. The union-type index merge is introduced in TiDB v4.0 as an experimental feature and has become GA in v5.4.0. The intersection type is introduced in TiDB v6.5.0, and can be used only when the [`USE_INDEX_MERGE`](/optimizer-hints.md#use_index_merget1_name-idx1_name--idx2_name-) hint is specified.
+TiDB におけるインデックスのマージには、交差型と共用体型の 2 種類があります。前者は式`AND`に、後者は式`OR`に適用されます。ユニオン型のインデックス マージは、TiDB v4.0 で実験的機能として導入され、v5.4.0 で GA になりました。交差タイプは TiDB v6.5.0 で導入され、 [`USE_INDEX_MERGE`](/optimizer-hints.md#use_index_merget1_name-idx1_name--idx2_name-)ヒントが指定されている場合にのみ使用できます。
 
-## Enable index merge
+## インデックス マージを有効にする {#enable-index-merge}
 
-In v5.4.0 or a later TiDB version, index merge is enabled by default. In other situations, if index merge is not enabled, you need to set the variable [`tidb_enable_index_merge`](/system-variables.md#tidb_enable_index_merge-new-in-v40) to `ON` to enable this feature.
+v5.4.0 以降の TiDB バージョンでは、デフォルトでインデックス マージが有効になっています。その他の状況では、インデックス マージが有効になっていない場合、変数[`tidb_enable_index_merge`](/system-variables.md#tidb_enable_index_merge-new-in-v40)から`ON`を設定してこの機能を有効にする必要があります。
 
 ```sql
 SET session tidb_enable_index_merge = ON;
 ```
 
-## Examples
+## 例 {#examples}
 
 ```sql
 CREATE TABLE t(a int, b int, c int, d int, INDEX idx_a(a), INDEX idx_b(b), INDEX idx_c(c), INDEX idx_d(d));
@@ -44,13 +44,13 @@ EXPLAIN SELECT /*+ USE_INDEX_MERGE(t) */ * FROM t WHERE a > 1 OR b > 1;
 +-------------------------------+---------+-----------+-------------------------+------------------------------------------------+
 ```
 
-In the preceding query, the filter condition is a `WHERE` clause that uses `OR` as the connector. Without index merge, you can use only one index per table. `a = 1` cannot be pushed down to the index `a`; neither can `b = 1` be pushed down to the index `b`. The full table scan is inefficient when a huge volume of data exists in `t`. To handle such a scenario, index merge is introduced in TiDB to access tables.
+前のクエリでは、フィルター条件は`WHERE`句で、結合子として`OR`を使用します。インデックス マージを使用しない場合、テーブルごとに 1 つのインデックスしか使用できません。 `a = 1`をインデックス`a`にプッシュすることはできません。 `b = 1`をインデックス`b`にプッシュすることもできません。 `t`に大量のデータが存在する場合、全表スキャンは非効率的です。このようなシナリオを処理するために、テーブルにアクセスするためのインデックス マージが TiDB に導入されました。
 
-For the preceding query, the optimizer chooses the union-type index merge to access the table. Index merge allows the optimizer to use multiple indexes per table, to merge the results returned by each index, and to generate the latter execution plan in the preceding output.
+前のクエリの場合、オプティマイザはユニオン タイプのインデックス マージを選択してテーブルにアクセスします。インデックス マージにより、オプティマイザはテーブルごとに複数のインデックスを使用し、各インデックスによって返された結果をマージし、前の出力で後者の実行計画を生成できます。
 
-In the output, the `type: union` information in `operator info` of the `IndexMerge_8` operator indicates that this operator is a union-type index merge. It has three child nodes. `IndexRangeScan_5` and `IndexRangeScan_6` scan the `RowID`s that meet the condition according to the range, and then the `TableRowIDScan_7` operator accurately reads all the data that meets the condition according to these `RowID`s.
+出力では、 `operator info` of `IndexMerge_8`演算子の`type: union`情報は、この演算子がユニオン タイプのインデックス マージであることを示しています。 3 つの子ノードがあります。 `IndexRangeScan_5`と`IndexRangeScan_6`は範囲に従って条件を満たす`RowID`秒をスキャンし、 `TableRowIDScan_7`オペレーターはこれらの`RowID`秒に従って条件を満たすすべてのデータを正確に読み取ります。
 
-For the scan operation that is performed on a specific range of data, such as `IndexRangeScan`/`TableRangeScan`, the `operator info` column in the result has additional information about the scan range compared with other scan operations like `IndexFullScan`/`TableFullScan`. In the above example, the `range:(1,+inf]` in the `IndexRangeScan_13` operator indicates that the operator scans the data from 1 to positive infinity.
+`IndexRangeScan` / `TableRangeScan`などの特定の範囲のデータに対して実行されるスキャン操作の場合、結果の`operator info`列には、 `IndexFullScan` / `TableFullScan`などの他のスキャン操作と比較して、スキャン範囲に関する追加情報が含まれます。上記の例では、 `IndexRangeScan_13`演算子の`range:(1,+inf]`は、演算子が 1 から正の無限大までデータをスキャンすることを示します。
 
 ```sql
 EXPLAIN SELECT /*+ NO_INDEX_MERGE() */ * FROM t WHERE a > 1 AND b > 1 AND c = 1;  -- Does not use index merge
@@ -76,24 +76,24 @@ EXPLAIN SELECT /*+ USE_INDEX_MERGE(t, idx_a, idx_b, idx_c) */ * FROM t WHERE a >
 +-------------------------------+---------+-----------+-------------------------+------------------------------------------------+
 ```
 
-From the preceding example, you can see that the filter condition is a `WHERE` clause that uses `AND` as the connector. Before index merge is enabled, the optimizer can only choose one of the three indexes (`idx_a`, `idx_b`, or `idx_c`).
+前の例から、フィルタ条件がコネクタとして`AND`を使用する`WHERE`句であることがわかります。インデックス マージが有効になる前は、オプティマイザーは 3 つのインデックス ( `idx_a` 、 `idx_b` 、または`idx_c` ) のうちの 1 つしか選択できません。
 
-If one of the filter conditions has a low selectivity, the optimizer directly chooses the corresponding index to achieve the ideal execution efficiency. However, if the data distribution meets all of the following three conditions, you can consider using the intersection-type index merge:
+フィルター条件のいずれかの選択性が低い場合、オプティマイザーは対応するインデックスを直接選択して、理想的な実行効率を実現します。ただし、データ分布が次の 3 つの条件をすべて満たしている場合は、交差型インデックス マージの使用を検討できます。
 
-- The data size of the whole table is large, and directly reading the whole table is inefficient.
-- For each one of the three filter conditions, the respective selectivity is very high, so the execution efficiency of `IndexLookUp` using a single index is not ideal.
-- The overall selectivity of the three filter conditions is low.
+-   テーブル全体のデータサイズが大きく、テーブル全体を直接読み込むのは非効率です。
+-   3 つのフィルター条件のそれぞれについて、それぞれの選択性が非常に高いため、単一のインデックスを使用する`IndexLookUp`の実行効率は理想的ではありません。
+-   3 つのフィルター条件の全体的な選択性は低くなります。
 
-When using the intersection-type index merge to access tables, the optimizer can choose to use multiple indexes on a table, and merge the results returned by each index to generate the execution plan of the latter `IndexMerge` in the preceding example output. The `type: intersection` information in the `operator info` of the `IndexMerge_9` operator indicates that this operator is an intersection-type index merge. The other parts of the execution plan are similar to the preceding union-type index merge example.
+交差タイプのインデックス マージを使用してテーブルにアクセスする場合、オプティマイザーは、テーブルで複数のインデックスを使用することを選択し、各インデックスによって返された結果をマージして、前の出力例の後者の`IndexMerge`の実行プランを生成できます。 `operator info` of `IndexMerge_9`演算子の`type: intersection`情報は、この演算子が交差タイプのインデックス マージであることを示します。実行計画の他の部分は、前述のユニオン タイプのインデックス マージの例と同様です。
 
-> **Note:**
+> **ノート：**
 >
-> - The Index Merge feature is enabled by default from v5.4.0. That is, [`tidb_enable_index_merge`](/system-variables.md#tidb_enable_index_merge-new-in-v40) is `ON`.
+> -   インデックス マージ機能は、v5.4.0 からデフォルトで有効になっています。つまり、 [`tidb_enable_index_merge`](/system-variables.md#tidb_enable_index_merge-new-in-v40)は`ON`です。
 >
-> - You can use the SQL hint [`USE_INDEX_MERGE`](/optimizer-hints.md#use_index_merget1_name-idx1_name--idx2_name-) to force the optimizer to apply Index Merge, regardless of the setting of `tidb_enable_index_merge`. To enable Index Merge when the filtering conditions contain expressions that cannot be pushed down, you must use the SQL hint [`USE_INDEX_MERGE`](/optimizer-hints.md#use_index_merget1_name-idx1_name--idx2_name-).
+> -   `tidb_enable_index_merge`の設定に関係なく、SQL ヒント[`USE_INDEX_MERGE`](/optimizer-hints.md#use_index_merget1_name-idx1_name--idx2_name-)を使用して、オプティマイザーにインデックス マージを強制的に適用させることができます。フィルター条件にプッシュ ダウンできない式が含まれている場合にインデックス マージを有効にするには、SQL ヒント[`USE_INDEX_MERGE`](/optimizer-hints.md#use_index_merget1_name-idx1_name--idx2_name-)を使用する必要があります。
 >
-> - If the optimizer can choose the single index scan method (other than full table scan) for a query plan, the optimizer will not automatically use index merge. For the optimizer to use index merge, you need to use the optimizer hint.
+> -   オプティマイザーがクエリ プランに対して単一のインデックス スキャン方法 (全テーブル スキャン以外) を選択できる場合、オプティマイザーは自動的にインデックス マージを使用しません。オプティマイザがインデックス マージを使用するには、オプティマイザ ヒントを使用する必要があります。
 >
-> - Index Merge is not supported in [tempoaray tables](/temporary-tables.md) for now.
+> -   現時点では、インデックス マージは[一時テーブル](/temporary-tables.md)ではサポートされていません。
 >
-> - The intersection-type index merge will not automatically be selected by the optimizer. You must specify the **table name and index name** using the [`USE_INDEX_MERGE`](/optimizer-hints.md#use_index_merget1_name-idx1_name--idx2_name-) hint for it to be selected.
+> -   交差タイプの索引マージは、オプティマイザーによって自動的に選択されることはありません。選択するには、 [`USE_INDEX_MERGE`](/optimizer-hints.md#use_index_merget1_name-idx1_name--idx2_name-)ヒントを使用して**テーブル名とインデックス名**を指定する必要があります。

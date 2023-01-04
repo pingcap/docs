@@ -3,15 +3,15 @@ title: Backup Storages
 summary: Describes the storage URL format used in TiDB backup and restore.
 ---
 
-# Backup Storages
+# バックアップ ストレージ {#backup-storages}
 
-TiDB supports storing backup data to Amazon S3, Google Cloud Storage (GCS), Azure Blob Storage, and NFS. Specifically, you can specify the URL of backup storage in the `--storage` or `-s` parameter of `br` commands. This document introduces the [URL format](#url-format) and [authentication](#authentication) of different external storage services, and [server-side encryption](#server-side-encryption).
+TiDB は、Amazon S3、Google Cloud Storage (GCS)、Azure Blob Storage、NFS へのバックアップ データの保存をサポートしています。具体的には、 `br`のコマンドの`--storage`または`-s`パラメーターでバックアップ ストレージの URL を指定できます。このドキュメントでは、さまざまな外部ストレージ サービスの[URL 形式](#url-format)と[認証](#authentication) 、および[サーバー側の暗号化](#server-side-encryption)を紹介します。
 
-## URL format
+## URL 形式 {#url-format}
 
-### URL format description
+### URL 形式の説明 {#url-format-description}
 
-This section describes the URL format of the storage services:
+このセクションでは、ストレージ サービスの URL 形式について説明します。
 
 ```shell
 [scheme]://[host]/[path]?[parameters]
@@ -20,60 +20,60 @@ This section describes the URL format of the storage services:
 <SimpleTab groupId="storage">
 <div label="Amazon S3" value="amazon">
 
-- `scheme`: `s3`
-- `host`: `bucket name`
-- `parameters`:
+-   `scheme` : `s3`
+-   `host` : `bucket name`
+-   `parameters` :
 
-    - `access-key`: Specifies the access key.
-    - `secret-access-key`: Specifies the secret access key.
-    - `use-accelerate-endpoint`: Specifies whether to use the accelerate endpoint on Amazon S3 (defaults to `false`).
-    - `endpoint`: Specifies the URL of custom endpoint for S3-compatible services (for example, `<https://s3.example.com/>`).
-    - `force-path-style`: Use path style access rather than virtual hosted style access (defaults to `true`).
-    - `storage-class`: Specifies the storage class of the uploaded objects (for example, `STANDARD` or `STANDARD_IA`).
-    - `sse`: Specifies the server-side encryption algorithm used to encrypt the uploaded objects (value options: ``, `AES256`, or `aws:kms`).
-    - `sse-kms-key-id`: Specifies the KMS ID if `sse` is set to `aws:kms`.
-    - `acl`: Specifies the canned ACL of the uploaded objects (for example, `private` or `authenticated-read`).
+    -   `access-key` : アクセスキーを指定します。
+    -   `secret-access-key` : シークレット アクセス キーを指定します。
+    -   `use-accelerate-endpoint` : Amazon S3 で加速エンドポイントを使用するかどうかを指定します (デフォルトは`false` )。
+    -   `endpoint` : S3 互換サービスのカスタム エンドポイントの URL を指定します (たとえば、 `<https://s3.example.com/>` )。
+    -   `force-path-style` : 仮想ホスト スタイル アクセスではなく、パス スタイル アクセスを使用します (デフォルトは`true` )。
+    -   `storage-class` : アップロードされたオブジェクトのストレージ クラスを指定します (たとえば、 `STANDARD`または`STANDARD_IA` )。
+    -   `sse` : アップロードされたオブジェクトの暗号化に使用されるサーバー側の暗号化アルゴリズムを指定します (値のオプション: ``、 `AES256` 、または`aws:kms` )。
+    -   `sse-kms-key-id` : `sse`が`aws:kms`に設定されている場合、KMS ID を指定します。
+    -   `acl` : アップロードされたオブジェクトの既定の ACL を指定します (たとえば、 `private`または`authenticated-read` )。
 
 </div>
 <div label="GCS" value="gcs">
 
-- `scheme`: `gcs` or `gs`
-- `host`: `bucket name`
-- `parameters`:
+-   `scheme` : `gcs`または`gs`
+-   `host` : `bucket name`
+-   `parameters` :
 
-    - `credentials-file`: Specifies the path to the credentials JSON file on the migration tool node.
-    - `storage-class`: Specifies the storage class of the uploaded objects (for example, `STANDARD` or `COLDLINE`)
-    - `predefined-acl`: Specifies the predefined ACL of the uploaded objects (for example, `private` or `project-private`)
+    -   `credentials-file` : 移行ツール ノードの資格情報 JSON ファイルへのパスを指定します。
+    -   `storage-class` : アップロードされたオブジェクトのストレージ クラスを指定します (たとえば、 `STANDARD`または`COLDLINE` )
+    -   `predefined-acl` : アップロードされたオブジェクトの事前定義された ACL を指定します (たとえば、 `private`または`project-private` )
 
 </div>
 <div label="Azure Blob Storage" value="azure">
 
-- `scheme`: `azure` or `azblob`
-- `host`: `container name`
-- `parameters`:
+-   `scheme` : `azure`または`azblob`
+-   `host` : `container name`
+-   `parameters` :
 
-    - `account-name`: Specifies the account name of the storage.
-    - `account-key`: Specifies the access key.
-    - `access-tier`: Specifies the access tier of the uploaded objects, for example, `Hot`, `Cool`, or `Archive`. The value is `Hot` by default.
+    -   `account-name` : ストレージのアカウント名を指定します。
+    -   `account-key` : アクセスキーを指定します。
+    -   `access-tier` : アップロードされたオブジェクトのアクセス層を指定します (例: `Hot` 、 `Cool` 、または`Archive` )。デフォルトの値は`Hot`です。
 
 </div>
 </SimpleTab>
 
-### URL examples
+### URL の例 {#url-examples}
 
-This section provides some URL examples by using `external` as the `host` parameter (`bucket name` or `container name` in the preceding sections).
+このセクションでは、 `external`を`host`パラメーター (前のセクションでは`bucket name`または`container name` ) として使用して、いくつかの URL の例を示します。
 
 <SimpleTab groupId="storage">
 <div label="Amazon S3" value="amazon">
 
-**Back up snapshot data to Amazon S3**
+**スナップショット データを Amazon S3 にバックアップする**
 
 ```shell
 ./br restore full -u "${PD_IP}:2379" \
 --storage "s3://external/backup-20220915?access-key=${access-key}&secret-access-key=${secret-access-key}"
 ```
 
-**Restore snapshot data from Amazon S3**
+**Amazon S3 からスナップショット データを復元する**
 
 ```shell
 ./br restore full -u "${PD_IP}:2379" \
@@ -83,14 +83,14 @@ This section provides some URL examples by using `external` as the `host` parame
 </div>
 <div label="GCS" value="gcs">
 
-**Back up snapshot data to GCS**
+**スナップショット データを GCS にバックアップする**
 
 ```shell
 ./br backup full --pd "${PD_IP}:2379" \
 --storage "gcs://external/backup-20220915?credentials-file=${credentials-file-path}"
 ```
 
-**Restore snapshot data from GCS**
+**GCS からスナップショット データを復元する**
 
 ```shell
 ./br restore full --pd "${PD_IP}:2379" \
@@ -100,14 +100,14 @@ This section provides some URL examples by using `external` as the `host` parame
 </div>
 <div label="Azure Blob Storage" value="azure">
 
-**Back up snapshot data to Azure Blob Storage**
+**スナップショット データを Azure Blob Storage にバックアップする**
 
 ```shell
 ./br backup full -u "${PD_IP}:2379" \
 --storage "azure://external/backup-20220915?account-name=${account-name}&account-key=${account-key}"
 ```
 
-**Restore the `test` database from snapshot backup data in Azure Blob Storage**
+**Azure Blob Storage のスナップショット バックアップ データから`test`データベースを復元する**
 
 ```shell
 ./br restore db --db test -u "${PD_IP}:2379" \
@@ -117,34 +117,34 @@ This section provides some URL examples by using `external` as the `host` parame
 </div>
 </SimpleTab>
 
-## Authentication
+## 認証 {#authentication}
 
-When storing backup data in a cloud storage system, you need to configure authentication parameters depending on the specific cloud service provider. This section describes the authentication methods used by Amazon S3, GCS, and Azure Blob Storage, and how to configure the accounts used to access the corresponding storage service.
+バックアップ データをクラウド ストレージ システムに保存する場合、特定のクラウド サービス プロバイダーに応じて認証パラメーターを構成する必要があります。このセクションでは、Amazon S3、GCS、および Azure Blob Storage で使用される認証方法と、対応するストレージ サービスへのアクセスに使用されるアカウントを構成する方法について説明します。
 
 <SimpleTab groupId="storage">
 <div label="Amazon S3" value="amazon">
 
-Before backup, configure the following privileges to access the backup directory on S3.
+バックアップの前に、S3 のバックアップ ディレクトリにアクセスするために次の権限を設定します。
 
-- Minimum privileges for TiKV and Backup & Restore (BR) to access the backup directories during backup: `s3:ListBucket`, `s3:PutObject`, and `s3:AbortMultipartUpload`
-- Minimum privileges for TiKV and BR to access the backup directories during restore: `s3:ListBucket` and `s3:GetObject`
+-   バックアップ中にバックアップ ディレクトリにアクセスするための TiKV および Backup &amp; Restore ( BR ) の最小権限: `s3:ListBucket` 、 `s3:PutObject` 、および`s3:AbortMultipartUpload`
+-   復元中に TiKV およびBRがバックアップ ディレクトリにアクセスするための最小権限: `s3:ListBucket`および`s3:GetObject`
 
-If you have not yet created a backup directory, refer to [Create a bucket](https://docs.aws.amazon.com/AmazonS3/latest/userguide/create-bucket-overview.html) to create an S3 bucket in the specified region. If necessary, you can also create a folder in the bucket by referring to [Create a folder](https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-folders.html).
+バックアップ ディレクトリをまだ作成していない場合は、 [バケットを作成する](https://docs.aws.amazon.com/AmazonS3/latest/userguide/create-bucket-overview.html)を参照して、指定したリージョンに S3 バケットを作成します。必要に応じて、 [フォルダを作成する](https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-folders.html)を参照してバケットにフォルダーを作成することもできます。
 
-It is recommended that you configure access to S3 using either of the following ways:
+次のいずれかの方法を使用して、S3 へのアクセスを構成することをお勧めします。
 
-- Method 1: Specify the access key
+-   方法 1: アクセス キーを指定する
 
-    If you specify an access key and a secret access key in the URL, authentication is performed using the specified access key and secret access key. Besides specifying the key in the URL, the following methods are also supported:
+    URLにアクセスキーとシークレットアクセスキーを指定すると、指定したアクセスキーとシークレットアクセスキーで認証が行われます。 URL でキーを指定する以外に、次の方法もサポートされています。
 
-    - BR reads the environment variables `$AWS_ACCESS_KEY_ID` and `$AWS_SECRET_ACCESS_KEY`.
-    - BR reads the environment variables `$AWS_ACCESS_KEY` and `$AWS_SECRET_KEY`.
-    - BR reads the shared credentials file in the path specified by the environment variable `$AWS_SHARED_CREDENTIALS_FILE`.
-    - BR reads the shared credentials file in the `~/.aws/credentials` path.
+    -   BRは、環境変数`$AWS_ACCESS_KEY_ID`および`$AWS_SECRET_ACCESS_KEY`を読み取ります。
+    -   BRは、環境変数`$AWS_ACCESS_KEY`および`$AWS_SECRET_KEY`を読み取ります。
+    -   BRは、環境変数`$AWS_SHARED_CREDENTIALS_FILE`で指定されたパスにある共有資格情報ファイルを読み取ります。
+    -   BRは`~/.aws/credentials`パスの共有認証情報ファイルを読み取ります。
 
-- Method 2: Access based on the IAM role
+-   方法 2: IAMロールに基づくアクセス
 
-    Associate an IAM role that can access S3 with EC2 instances where the TiKV and BR nodes run. After the association, BR can directly access the backup directories in S3 without additional settings.
+    S3 にアクセスできるIAMロールを、TiKV およびBRノードが実行される EC2 インスタンスに関連付けます。関連付け後、 BRは追加設定なしで S3 のバックアップ ディレクトリに直接アクセスできます。
 
     ```shell
     br backup full --pd "${PD_IP}:2379" \
@@ -154,36 +154,36 @@ It is recommended that you configure access to S3 using either of the following 
 </div>
 <div label="GCS" value="gcs">
 
-You can configure the account used to access GCS by specifying the access key. If you specify the `credentials-file` parameter, the authentication is performed using the specified `credentials-file`. Besides specifying the key in the URL, the following methods are also supported:
+アクセス キーを指定することで、GCS へのアクセスに使用するアカウントを構成できます。 `credentials-file`パラメータを指定すると、指定された`credentials-file`を使用して認証が実行されます。 URL でキーを指定する以外に、次の方法もサポートされています。
 
-- BR reads the file in the path specified by the environment variable `$GOOGLE_APPLICATION_CREDENTIALS`
-- BR reads the file `~/.config/gcloud/application_default_credentials.json`.
-- BR obtains the credentials from the metadata server when the cluster is running in GCE or GAE.
+-   BRは、環境変数`$GOOGLE_APPLICATION_CREDENTIALS`で指定されたパスにあるファイルを読み取ります
+-   BRはファイルを読み取ります`~/.config/gcloud/application_default_credentials.json` 。
+-   クラスターが GCE または GAE で実行されている場合、 BRはメタデータサーバーから資格情報を取得します。
 
 </div>
 <div label="Azure Blob Storage" value="azure">
 
-- Method 1: Specify the access key
+-   方法 1: アクセス キーを指定する
 
-    If you specify `account-name` and `account-key` in the URL, the authentication is performed using the specified access key and secret access key. Besides the method of specifying the key in the URL, BR can also read the key from the environment variable `$AZURE_STORAGE_KEY`.
+    URL に`account-name`と`account-key`を指定すると、指定したアクセス キーとシークレット アクセス キーを使用して認証が行われます。 URL でキーを指定する方法の他に、 BRは環境変数`$AZURE_STORAGE_KEY`からキーを読み取ることもできます。
 
-- Method 2: Use Azure AD for backup and restore
+-   方法 2: バックアップと復元に Azure AD を使用する
 
-    Configure the environment variables `$AZURE_CLIENT_ID`, `$AZURE_TENANT_ID`, and `$AZURE_CLIENT_SECRET` on the node where BR is running.
+    BRが実行されているノードで、環境変数`$AZURE_CLIENT_ID` 、 `$AZURE_TENANT_ID` 、および`$AZURE_CLIENT_SECRET`を構成します。
 
-    - When the cluster is started using TiUP, TiKV uses the systemd service. The following example shows how to configure the preceding three environment variables for TiKV:
+    -   TiUPを使用してクラスターを起動すると、TiKV は systemd サービスを使用します。次の例は、TiKV 用に前述の 3 つの環境変数を構成する方法を示しています。
 
-        > **Note:**
+        > **ノート：**
         >
-        > If this method is used, you need to restart TiKV in step 3. If your cluster cannot be restarted, use **Method 1: Specify the access key** for backup and restore.
+        > この方法を使用する場合は、手順 3 で TiKV を再起動する必要があります。クラスターを再起動できない場合は、**方法 1: バックアップと復元用のアクセス キーを指定します**。
 
-        1. Suppose that the TiKV port on this node is `24000`, that is, the name of the systemd service is `tikv-24000`:
+        1.  このノードの TiKV ポートが`24000` 、つまり systemd サービスの名前が`tikv-24000`であるとします。
 
             ```shell
             systemctl edit tikv-24000
             ```
 
-        2. Edit the TiKV configuration file to configure the three environment variables:
+        2.  TiKV 構成ファイルを編集して、3 つの環境変数を構成します。
 
             ```
             [Service]
@@ -192,14 +192,14 @@ You can configure the account used to access GCS by specifying the access key. I
             Environment="AZURE_CLIENT_SECRET=aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
             ```
 
-        3. Reload the configuration and restart TiKV:
+        3.  構成をリロードし、TiKV を再起動します。
 
             ```shell
             systemctl daemon-reload
             systemctl restart tikv-24000
             ```
 
-    - To configure the Azure AD information for TiKV and BR started with command lines, you only need to check whether the environment variables `$AZURE_CLIENT_ID`, `$AZURE_TENANT_ID`, and `$AZURE_CLIENT_SECRET` are configured in the operating environment by running the following commands:
+    -   コマンド ラインで開始された TiKV およびBRの Azure AD 情報を構成するには、次のコマンドを実行して、環境変数`$AZURE_CLIENT_ID` 、 `$AZURE_TENANT_ID` 、および`$AZURE_CLIENT_SECRET`が動作環境で構成されているかどうかを確認するだけで済みます。
 
         ```shell
         echo $AZURE_CLIENT_ID
@@ -207,7 +207,7 @@ You can configure the account used to access GCS by specifying the access key. I
         echo $AZURE_CLIENT_SECRET
         ```
 
-    - Use BR to back up data to Azure Blob Storage:
+    -   BRを使用してデータを Azure Blob Storage にバックアップします。
 
         ```shell
         ./br backup full -u "${PD_IP}:2379" \
@@ -217,12 +217,12 @@ You can configure the account used to access GCS by specifying the access key. I
 </div>
 </SimpleTab>
 
-## Server-side encryption
+## サーバー側の暗号化 {#server-side-encryption}
 
-### Amazon S3 server-side encryption
+### Amazon S3 サーバー側の暗号化 {#amazon-s3-server-side-encryption}
 
-BR supports server-side encryption when backing up data to Amazon S3. You can also use an AWS KMS key you create for S3 server-side encryption using BR. For details, see [BR S3 server-side encryption](/encryption-at-rest.md#br-s3-server-side-encryption).
+BRは、データを Amazon S3 にバックアップする際のサーバー側の暗号化をサポートしています。 BRを使用して、S3 サーバー側の暗号化用に作成した AWS KMS キーを使用することもできます。詳細については、 [BR S3 サーバー側の暗号化](/encryption-at-rest.md#br-s3-server-side-encryption)を参照してください。
 
-## Other features supported by the storage service
+## ストレージ サービスがサポートするその他の機能 {#other-features-supported-by-the-storage-service}
 
-BR v6.3.0 supports AWS [S3 Object Lock](https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-lock.html). You can enable this feature to prevent backup data from being tampered with or deleted.
+BR v6.3.0 は AWS [S3 オブジェクト ロック](https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-lock.html)をサポートします。この機能を有効にすると、バックアップ データの改ざんや削除を防ぐことができます。

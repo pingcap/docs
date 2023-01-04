@@ -2,440 +2,443 @@
 title: TiDB 5.4 Release Notes
 ---
 
-# TiDB 5.4 Release Notes
+# TiDB 5.4 リリースノート {#tidb-5-4-release-notes}
 
-Release date: February 15, 2022
+発売日：2022年2月15日
 
-TiDB version: 5.4.0
+TiDB バージョン: 5.4.0
 
-In v5.4, the key new features or improvements are as follows:
+v5.4 の主な新機能または改善点は次のとおりです。
 
-- Support the GBK character set
-- Support using Index Merge to access data, which merges the filtering results of indexes on multiple columns
-- Support reading stale data using a session variable
-- Support persisting the configuration for collecting statistics
-- Support using Raft Engine as the log storage engine of TiKV (experimental)
-- Optimize the impact of backup on the cluster
-- Support using Azure Blob storage as the backup storage
-- Continuously improve the stability and performance of TiFlash and the MPP engine
-- Add a switch in TiDB Lightning to determine whether to allow importing to an existing table with data
-- Optimize the Continuous Profiling feature (experimental)
-- TiSpark supports user identification and authentication
+-   GBK 文字セットをサポート
+-   複数の列のインデックスのフィルタリング結果をマージする Index Merge を使用したデータ アクセスのサポート
+-   セッション変数を使用した古いデータの読み取りをサポート
+-   統計を収集するための構成の永続化をサポート
+-   Raft Engineを TiKV のログ保存エンジンとしてサポート (実験的)
+-   クラスターに対するバックアップの影響を最適化する
+-   バックアップ ストレージとしての Azure Blob Storage の使用をサポート
+-   TiFlashと MPP エンジンの安定性とパフォーマンスを継続的に改善します
+-   TiDB Lightningにスイッチを追加して、データを含む既存のテーブルへのインポートを許可するかどうかを決定します
+-   継続的なプロファイリング機能を最適化 (実験的)
+-   TiSpark はユーザーの識別と認証をサポートします
 
-## Compatibility changes
+## 互換性の変更 {#compatibility-changes}
 
-> **Note:**
+> **ノート：**
 >
-> When upgrading from an earlier TiDB version to v5.4.0, if you want to know the compatibility change notes of all intermediate versions, you can check the [Release Notes](/releases/release-notes.md) of the corresponding version.
+> 以前の TiDB バージョンから v5.4.0 にアップグレードする場合、すべての中間バージョンの互換性の変更点を知りたい場合は、該当するバージョンの[リリースノート](/releases/release-notes.md)を確認できます。
 
-### System variables
+### システム変数 {#system-variables}
 
-| Variable name | Change type | Description |
-| :---------- | :----------- | :----------- |
-|  [`tidb_enable_column_tracking`](/system-variables.md#tidb_enable_column_tracking-new-in-v540) | Newly added | Controls whether to allow TiDB to collect `PREDICATE COLUMNS`. The default value is `OFF`. |
-| [`tidb_enable_paging`](/system-variables.md#tidb_enable_paging-new-in-v540)  | Newly added | Controls whether to use the method of paging to send coprocessor requests in `IndexLookUp` operator. The default value is `OFF`. <br/> For read queries that use `IndexLookup` and `Limit` and that `Limit` cannot be pushed down to `IndexScan`, there might be high latency for the read queries and high CPU usage for TiKV's `unified read pool`. In such cases, because the `Limit` operator only requires a small set of data, if you set `tidb_enable_paging` to `ON`, TiDB processes less data, which reduces query latency and resource consumption. |
-| [`tidb_enable_top_sql`](/system-variables.md#tidb_enable_top_sql-new-in-v540) | Newly added | Controls whether to enable the Top SQL feature. The default value is `OFF`. |
-| [`tidb_persist_analyze_options`](/system-variables.md#tidb_persist_analyze_options-new-in-v540) | Newly added | Controls whether to enable the [ANALYZE configuration persistence](/statistics.md#persist-analyze-configurations) feature. The default value is `ON`. |
-| [`tidb_read_staleness`](/system-variables.md#tidb_read_staleness-new-in-v540) | Newly added | Controls the range of historical data that can be read in the current session. The default value is `0`.|
-| [`tidb_regard_null_as_point`](/system-variables.md#tidb_regard_null_as_point-new-in-v540) | Newly added | Controls whether the optimizer can use a query condition including null equivalence as a prefix condition for index access. |
-| [`tidb_stats_load_sync_wait`](/system-variables.md#tidb_stats_load_sync_wait-new-in-v540) | Newly added | Controls whether to enable the synchronously loading statistics feature. The default value `0` means that the feature is disabled and that the statistics is asynchronously loaded. When the feature is enabled, this variable controls the maximum time that SQL optimization can wait for synchronously loading statistics before timeout. |
-| [`tidb_stats_load_pseudo_timeout`](/system-variables.md#tidb_stats_load_pseudo_timeout-new-in-v540) | Newly added | Controls when synchronously loading statistics reaches timeout, whether SQL fails (`OFF`) or falls back to using pseudo statistics (`ON`). The default value is `OFF`. |
-|  [`tidb_backoff_lock_fast`](/system-variables.md#tidb_backoff_lock_fast) | Modified | The default value is changed from `100` to `10`. |
-| [`tidb_enable_index_merge`](/system-variables.md#tidb_enable_index_merge-new-in-v40) | Modified | The default value is changed from `OFF` to `ON`. <br/><ul><li>If you upgrade a TiDB cluster from versions earlier than v4.0.0 to v5.4.0 or later, this variable is `OFF` by default. </li><li>If you upgrade a TiDB cluster from v4.0.0 or later to v5.4.0 or later, this variable remains the same as before the upgrade. </li><li>For the newly created TiDB clusters of v5.4.0 and later, this variable is `ON` by default.</li></ul> |
-| [`tidb_store_limit`](/system-variables.md#tidb_store_limit-new-in-v304-and-v40) | Modified | Before v5.4.0, this variable can be configured at instance level and globally. Starting from v5.4.0, this variable only supports global configuration. |
+| 変数名                                                                                                 | タイプを変更 | 説明                                                                                                                                                                                                                                                                                                                                          |
+| :-------------------------------------------------------------------------------------------------- | :----- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| [`tidb_enable_column_tracking`](/system-variables.md#tidb_enable_column_tracking-new-in-v540)       | 新規追加   | TiDB が`PREDICATE COLUMNS`を収集できるようにするかどうかを制御します。デフォルト値は`OFF`です。                                                                                                                                                                                                                                                                              |
+| [`tidb_enable_paging`](/system-variables.md#tidb_enable_paging-new-in-v540)                         | 新規追加   | ページング方式を使用して`IndexLookUp`のオペレーターでコプロセッサー要求を送信するかどうかを制御します。デフォルト値は`OFF`です。<br/> `IndexLookup`と`Limit`を使用し、 `Limit`を`IndexScan`にプッシュできない読み取りクエリの場合、読み取りクエリのレイテンシーが高くなり、TiKV の`unified read pool`の CPU 使用率が高くなる可能性があります。このような場合、 `Limit`演算子は小さなデータセットしか必要としないため、 `tidb_enable_paging`を`ON`に設定すると、TiDB が処理するデータが少なくなり、クエリのレイテンシーとリソース消費が削減されます。 |
+| [`tidb_enable_top_sql`](/system-variables.md#tidb_enable_top_sql-new-in-v540)                       | 新規追加   | Top SQL機能を有効にするかどうかを制御します。デフォルト値は`OFF`です。                                                                                                                                                                                                                                                                                                   |
+| [`tidb_persist_analyze_options`](/system-variables.md#tidb_persist_analyze_options-new-in-v540)     | 新規追加   | [ANALYZE 構成の永続性](/statistics.md#persist-analyze-configurations)機能を有効にするかどうかを制御します。デフォルト値は`ON`です。                                                                                                                                                                                                                                            |
+| [`tidb_read_staleness`](/system-variables.md#tidb_read_staleness-new-in-v540)                       | 新規追加   | 現在のセッションで読み取ることができる履歴データの範囲を制御します。デフォルト値は`0`です。                                                                                                                                                                                                                                                                                             |
+| [`tidb_regard_null_as_point`](/system-variables.md#tidb_regard_null_as_point-new-in-v540)           | 新規追加   | オプティマイザーが NULL 等価を含むクエリ条件をインデックス アクセスのプレフィックス条件として使用できるかどうかを制御します。                                                                                                                                                                                                                                                                          |
+| [`tidb_stats_load_sync_wait`](/system-variables.md#tidb_stats_load_sync_wait-new-in-v540)           | 新規追加   | 統計の同期読み込み機能を有効にするかどうかを制御します。デフォルト値`0`は、機能が無効になっており、統計が非同期にロードされることを意味します。この機能が有効になっている場合、この変数は、SQL 最適化がタイムアウトになる前に統計を同期的にロードするのを待機できる最大時間を制御します。                                                                                                                                                                                            |
+| [`tidb_stats_load_pseudo_timeout`](/system-variables.md#tidb_stats_load_pseudo_timeout-new-in-v540) | 新規追加   | SQL が失敗する ( `OFF` ) か、疑似統計を使用するようにフォールバックする ( `ON` ) かで、統計の同期ロードがタイムアウトに達するタイミングを制御します。デフォルト値は`OFF`です。                                                                                                                                                                                                                                      |
+| [`tidb_backoff_lock_fast`](/system-variables.md#tidb_backoff_lock_fast)                             | 修正済み   | デフォルト値が`100`から`10`に変更されました。                                                                                                                                                                                                                                                                                                                 |
+| [`tidb_enable_index_merge`](/system-variables.md#tidb_enable_index_merge-new-in-v40)                | 修正済み   | デフォルト値が`OFF`から`ON`に変更されました。<br/><ul><li> TiDB クラスターを v4.0.0 より前のバージョンから v5.4.0 以降にアップグレードする場合、この変数はデフォルトで`OFF`です。</li><li> TiDB クラスターを v4.0.0 以降から v5.4.0 以降にアップグレードする場合、この変数はアップグレード前と同じままです。</li><li> v5.4.0 以降の新しく作成された TiDB クラスターの場合、この変数はデフォルトで`ON`です。</li></ul>                                                                       |
+| [`tidb_store_limit`](/system-variables.md#tidb_store_limit-new-in-v304-and-v40)                     | 修正済み   | v5.4.0 より前では、この変数はインスタンス レベルでグローバルに構成できます。 v5.4.0 以降、この変数はグローバル構成のみをサポートします。                                                                                                                                                                                                                                                                |
 
-### Configuration file parameters
+### Configuration / コンフィグレーションファイルのパラメーター {#configuration-file-parameters}
 
-|  Configuration file    |  Configuration |  Change type  | Description    |
-| :---------- | :----------- | :----------- | :----------- |
-| TiDB | [`stats-load-concurrency`](/tidb-configuration-file.md#stats-load-concurrency-new-in-v540) | Newly added |  Controls the maximum number of columns that the TiDB synchronously loading statistics feature can process concurrently. The default value is `5`.  |
-| TiDB | [`stats-load-queue-size`](/tidb-configuration-file.md#stats-load-queue-size-new-in-v540)   | Newly added |  Controls the maximum number of column requests that the TiDB synchronously loading statistics feature can cache. The default value is`1000`.  |
-| TiKV | [`snap-generator-pool-size`](/tikv-configuration-file.md#snap-generator-pool-size-new-in-v540) | Newly added | The size of the `snap-generator` thread pool. The default value is `2`. |
-| TiKV | `log.file.max-size`, `log.file.max-days`, `log.file.max-backups` | Newly added  | For details, see [TiKV Configuration File - `log.file`](/tikv-configuration-file.md#logfile-new-in-v540). |
-| TiKV | `raft-engine` | Newly added | Includes `enable`, `dir`, `batch-compression-threshold`, `bytes-per-sync`, `target-file-size`, `purge-threshold`, `recovery-mode`, `recovery-read-block-size`, `recovery-read-block-size`, and `recovery-threads`. For details, see [TiKV Configuration File - `raft-engine`](/tikv-configuration-file.md#raft-engine).|
-| TiKV | [`backup.enable-auto-tune`](/tikv-configuration-file.md#enable-auto-tune-new-in-v540) | Newly added | In v5.3.0, the default value is `false`. Since v5.4.0, the default value is changed to `true`. This parameter controls whether to limit the resources used by backup tasks to reduce the impact on the cluster when the cluster resource utilization is high. In the default configuration, the speed of backup tasks might slow down. |
-| TiKV | `log-level`, `log-format`, `log-file`, `log-rotation-size` | Modified | The names of TiKV log parameters are replaced with the names that are consistent with TiDB log parameters, which are `log.level`, `log.format`, `log.file.filename`, and `log.enable-timestamp`. If you only set the old parameters, and their values are set to non-default values, the old parameters remain compatible with the new parameters. If both old and new parameters are set, the new parameters take effect. For details, see [TiKV Configuration File - log](/tikv-configuration-file.md#log-new-in-v540). |
-| TiKV  |  `log-rotation-timespan`  | Deleted |  The timespan between log rotations. After this timespan passes, a log file is rotated, which means a timestamp is appended to the file name of the current log file, and a new log file is created. |
-| TiKV | `allow-remove-leader` | Deleted  | Determines whether to allow deleting the main switch. |
-| TiKV | `raft-msg-flush-interval` | Deleted | Determines the interval at which Raft messages are sent in batches. The Raft messages are sent in batches at every interval specified by this configuration item. |
-| PD | [`log.level`](/pd-configuration-file.md#level) | Modified | The default value is changed from "INFO" to "info", guaranteed to be case-insensitive. |
-| TiFlash | [`profile.default.enable_elastic_threadpool`](/tiflash/tiflash-configuration.md#configure-the-tiflashtoml-file) | Newly added  |  Determines whether to enable or disable the elastic thread pool function. Enabling this configuration item can significantly improve TiFlash CPU utilization in high concurrency scenarios. The default value is `false`. |
-| TiFlash | [`storage.format_version`](/tiflash/tiflash-configuration.md#configure-the-tiflashtoml-file) | Newly added | Specifies the version of DTFile. The default value is `2`, under which hashes are embedded in the data file. You can also set the value to `3`. When it is `3`, the data file contains metadata and token data checksum, and supports multiple hash algorithms. |
-| TiFlash | [`logger.count`](/tiflash/tiflash-configuration.md#configure-the-tiflashtoml-file) | Modified | The default value is changed to `10`. |
-| TiFlash | [`status.metrics_port`](/tiflash/tiflash-configuration.md#configure-the-tiflashtoml-file) | Modified | The default value is changed to `8234`. |
-| TiFlash | [`raftstore.apply-pool-size`](/tiflash/tiflash-configuration.md#configure-the-tiflash-learnertoml-file) | Newly added | The allowable number of threads in the pool that flushes Raft data to storage. The default value is `4`. |
-| TiFlash | [`raftstore.store-pool-size`](/tiflash/tiflash-configuration.md#configure-the-tiflash-learnertoml-file) | Newly added | The allowable number of threads that process Raft, which is the size of the Raftstore thread pool. The default value is `4`. |
-| TiDB Data Migration (DM)  | [`collation_compatible`](/dm/task-configuration-file-full.md#task-configuration-file-template-advanced) | Newly added | The mode to sync the default collation in `CREATE` SQL statements. The value options are "loose" (by default) and "strict".  |
-| TiCDC | `max-message-bytes` | Modified| Change the default value of `max-message-bytes` in Kafka sink to `104857601` (10MB)  |
-| TiCDC | `partition-num`     | Modified | Change the default value of `partition-num` in Kafka Sink from `4` to `3`. It makes TiCDC send messages to Kafaka partitions more evenly. |
-| TiDB Lightning | `meta-schema-name` | Modified | Specifies the schema name for the metadata in the target TiDB. From v5.4.0, this schema is created only if you have enabled [parallel import](/tidb-lightning/tidb-lightning-distributed-import.md) (the corresponding parameter is `tikv-importer.incremental-import = true`). |
-| TiDB Lightning | `task-info-schema-name` |  Newly added  | Specifies the name of the database where duplicated data is stored when TiDB Lightning detects conflicts. By default, the value is "lightning_task_info". Specify this parameter only if you have enabled the "duplicate-resolution" feature. |
-| TiDB Lightning | `incremental-import` | Newly added | Determines whether to allow importing data to tables where data already exists. The default value is `false`. |
+| Configuration / コンフィグレーションファイル | Configuration / コンフィグレーション                                                                                      | タイプを変更 | 説明                                                                                                                                                                                                                                                                                                                                                          |
+| :----------------------------- | :-------------------------------------------------------------------------------------------------------------- | :----- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| TiDB                           | [`stats-load-concurrency`](/tidb-configuration-file.md#stats-load-concurrency-new-in-v540)                      | 新規追加   | TiDB 同期ロード統計機能が同時に処理できる列の最大数を制御します。デフォルト値は`5`です。                                                                                                                                                                                                                                                                                                            |
+| TiDB                           | [`stats-load-queue-size`](/tidb-configuration-file.md#stats-load-queue-size-new-in-v540)                        | 新規追加   | TiDB 同期ロード統計機能がキャッシュできる列リクエストの最大数を制御します。デフォルト値は`1000`です。                                                                                                                                                                                                                                                                                                    |
+| TiKV                           | [`snap-generator-pool-size`](/tikv-configuration-file.md#snap-generator-pool-size-new-in-v540)                  | 新規追加   | `snap-generator`スレッド プールのサイズ。デフォルト値は`2`です。                                                                                                                                                                                                                                                                                                                  |
+| TiKV                           | `log.file.max-size` 、 `log.file.max-days` 、 `log.file.max-backups`                                              | 新規追加   | 詳細については、 [TiKVConfiguration / コンフィグレーションファイル - `log.file`](/tikv-configuration-file.md#logfile-new-in-v540)を参照してください。                                                                                                                                                                                                                                       |
+| TiKV                           | `raft-engine`                                                                                                   | 新規追加   | `enable` 、 `dir` 、 `batch-compression-threshold` 、 `bytes-per-sync` 、 `target-file-size` 、 `purge-threshold` 、 `recovery-mode` 、 `recovery-read-block-size` 、 `recovery-read-block-size` 、および`recovery-threads`が含まれます。詳しくは[TiKVConfiguration / コンフィグレーションファイル - `raft-engine`](/tikv-configuration-file.md#raft-engine)をご覧ください。                             |
+| TiKV                           | [`backup.enable-auto-tune`](/tikv-configuration-file.md#enable-auto-tune-new-in-v540)                           | 新規追加   | v5.3.0 では、デフォルト値は`false`です。 v5.4.0 以降、デフォルト値は`true`に変更されました。このパラメータは、クラスタ リソースの使用率が高い場合に、バックアップ タスクで使用されるリソースを制限してクラスタへの影響を軽減するかどうかを制御します。デフォルトの構成では、バックアップ タスクの速度が遅くなる場合があります。                                                                                                                                                                             |
+| TiKV                           | `log-level` 、 `log-format` 、 `log-file` 、 `log-rotation-size`                                                   | 修正済み   | TiKV ログ パラメータの名前は、TiDB ログ パラメータと一致する名前 ( `log.level` 、 `log.format` 、 `log.file.filename` 、および`log.enable-timestamp` ) に置き換えられます。古いパラメータのみを設定し、それらの値がデフォルト以外の値に設定されている場合、古いパラメータは新しいパラメータと互換性があります。古いパラメータと新しいパラメータの両方が設定されている場合、新しいパラメータが有効になります。詳細については、 [TiKVConfiguration / コンフィグレーションファイル - ログ](/tikv-configuration-file.md#log-new-in-v540)を参照してください。 |
+| TiKV                           | `log-rotation-timespan`                                                                                         | 削除しました | ログ ローテーション間の期間。この期間が経過すると、ログ ファイルがローテーションされます。つまり、現在のログ ファイルのファイル名にタイムスタンプが追加され、新しいログ ファイルが作成されます。                                                                                                                                                                                                                                                          |
+| TiKV                           | `allow-remove-leader`                                                                                           | 削除しました | メインスイッチの削除を許可するかどうかを決定します。                                                                                                                                                                                                                                                                                                                                  |
+| TiKV                           | `raft-msg-flush-interval`                                                                                       | 削除しました | Raftメッセージがバッチで送信される間隔を決定します。 Raftメッセージは、この構成項目で指定された間隔ごとにバッチで送信されます。                                                                                                                                                                                                                                                                                        |
+| PD                             | [`log.level`](/pd-configuration-file.md#level)                                                                  | 修正済み   | デフォルト値は「INFO」から「info」に変更され、大文字と小文字が区別されないことが保証されています。                                                                                                                                                                                                                                                                                                       |
+| TiFlash                        | [`profile.default.enable_elastic_threadpool`](/tiflash/tiflash-configuration.md#configure-the-tiflashtoml-file) | 新規追加   | エラスティック スレッド プール機能を有効にするか無効にするかを決定します。この構成項目を有効にすると、同時実行性の高いシナリオでTiFlash のCPU 使用率を大幅に改善できます。デフォルト値は`false`です。                                                                                                                                                                                                                                               |
+| TiFlash                        | [`storage.format_version`](/tiflash/tiflash-configuration.md#configure-the-tiflashtoml-file)                    | 新規追加   | DTFile のバージョンを指定します。デフォルト値は`2`で、ハッシュがデータ ファイルに埋め込まれます。値を`3`に設定することもできます。 `3`の場合、データ ファイルにはメタデータとトークン データのチェックサムが含まれ、複数のハッシュ アルゴリズムがサポートされます。                                                                                                                                                                                                                |
+| TiFlash                        | [`logger.count`](/tiflash/tiflash-configuration.md#configure-the-tiflashtoml-file)                              | 修正済み   | デフォルト値は`10`に変更されます。                                                                                                                                                                                                                                                                                                                                         |
+| TiFlash                        | [`status.metrics_port`](/tiflash/tiflash-configuration.md#configure-the-tiflashtoml-file)                       | 修正済み   | デフォルト値は`8234`に変更されます。                                                                                                                                                                                                                                                                                                                                       |
+| TiFlash                        | [`raftstore.apply-pool-size`](/tiflash/tiflash-configuration.md#configure-the-tiflash-learnertoml-file)         | 新規追加   | Raftデータをストレージにフラッシュするプール内のスレッドの許容数。デフォルト値は`4`です。                                                                                                                                                                                                                                                                                                            |
+| TiFlash                        | [`raftstore.store-pool-size`](/tiflash/tiflash-configuration.md#configure-the-tiflash-learnertoml-file)         | 新規追加   | Raftstore スレッド プールのサイズである、 Raftを処理するスレッドの許容数。デフォルト値は`4`です。                                                                                                                                                                                                                                                                                                  |
+| TiDB データ移行 (DM)                | [`collation_compatible`](/dm/task-configuration-file-full.md#task-configuration-file-template-advanced)         | 新規追加   | `CREATE`の SQL ステートメントで既定の照合順序を同期するモード。値のオプションは、&quot;loose&quot; (デフォルト) と &quot;strict&quot; です。                                                                                                                                                                                                                                                           |
+| TiCDC                          | `max-message-bytes`                                                                                             | 修正済み   | Kafka シンクのデフォルト値`max-message-bytes`を`104857601` (10MB) に変更します。                                                                                                                                                                                                                                                                                              |
+| TiCDC                          | `partition-num`                                                                                                 | 修正済み   | Kafka Sink のデフォルト値`partition-num`を`4`から`3`に変更します。 TiCDC がメッセージを Kafaka パーティションにより均等に送信するようにします。                                                                                                                                                                                                                                                             |
+| TiDB Lightning                 | `meta-schema-name`                                                                                              | 修正済み   | ターゲット TiDB 内のメタデータのスキーマ名を指定します。 v5.4.0 以降、このスキーマは[並行輸入](/tidb-lightning/tidb-lightning-distributed-import.md)を有効にした場合にのみ作成されます (対応するパラメーターは`tikv-importer.incremental-import = true`です)。                                                                                                                                                                    |
+| TiDB Lightning                 | `task-info-schema-name`                                                                                         | 新規追加   | TiDB Lightningが競合を検出したときに、複製されたデータが保存されるデータベースの名前を指定します。デフォルトの値は「lightning_task_info」です。このパラメータは、「重複解決」機能を有効にしている場合にのみ指定してください。                                                                                                                                                                                                                             |
+| TiDB Lightning                 | `incremental-import`                                                                                            | 新規追加   | データが既に存在するテーブルへのデータのインポートを許可するかどうかを決定します。デフォルト値は`false`です。                                                                                                                                                                                                                                                                                                  |
 
-### Others
+### その他 {#others}
 
-- An interface is added between TiDB and PD. When you use the `information_schema.TIDB_HOT_REGIONS_HISTORY` system table, TiDB needs to use PD in the corresponding version.
-- TiDB Server, PD Server, and TiKV Server start using a unified naming method for the log-related parameters to manage log names, output formats, and the rules for rotation and expiration. For details, see [TiKV configuration file - log](/tikv-configuration-file.md#log-new-in-v540).
-- Since v5.4.0, if you create a SQL binding for an execution plan that has been cached via Plan Cache, the binding invalidates the plan already cached for the corresponding query. The new binding does not affect execution plans cached before v5.4.0.
-- In v5.3 and earlier versions, [TiDB Data Migration (DM)](https://docs.pingcap.com/tidb-data-migration/v5.3/) documentation is independent of TiDB documentation. Since v5.4, DM documentation is integrated into TiDB documentation with the same version. You can directly read [DM documentation](/dm/dm-overview.md) without accessing the DM documentation site.
-- Remove the experimental feature of Point-in-time recovery (PITR) along with cdclog. Since v5.4.0, cdclog-based PITR and cdclog are no longer supported.
-- Make the behavior of setting system variables to the "DEFAULT" more MySQL-compatible [#29680](https://github.com/pingcap/tidb/pull/29680)
-- Set the system variable `lc_time_names` to read-only [#30084](https://github.com/pingcap/tidb/pull/30084)
-- Set the scope of `tidb_store_limit` from INSTANCE or GLOBAL to GLOBAL [#30756](https://github.com/pingcap/tidb/pull/30756)
-- Forbid converting the integer type column to the time type column when the column contains zero [#25728](https://github.com/pingcap/tidb/pull/25728)
-- Fix the issue that no error is reported for the `Inf` or `NAN` value when inserting floating-point values [#30148](https://github.com/pingcap/tidb/pull/30148)
-- Fix the issue that the `REPLACE` statement incorrectly changes other rows when the auto ID is out of range [#30301](https://github.com/pingcap/tidb/pull/30301)
+-   TiDB と PD の間にインターフェースが追加されます。 `information_schema.TIDB_HOT_REGIONS_HISTORY`システム テーブルを使用する場合、TiDB は対応するバージョンの PD を使用する必要があります。
+-   TiDB サーバー、PD サーバー、および TiKV サーバーは、ログ関連のパラメーターに統一された命名方法を使用して開始し、ログ名、出力形式、およびローテーションと有効期限のルールを管理します。詳細については、 [TiKV 構成ファイル - ログ](/tikv-configuration-file.md#log-new-in-v540)を参照してください。
+-   v5.4.0 以降、プラン キャッシュを介してキャッシュされた実行プランの SQL バインディングを作成すると、バインディングは、対応するクエリに対して既にキャッシュされているプランを無効にします。新しいバインディングは、v5.4.0 より前にキャッシュされた実行プランには影響しません。
+-   v5.3 以前のバージョンでは、 [TiDB データ移行 (DM)](https://docs.pingcap.com/tidb-data-migration/v5.3/)のドキュメントが TiDB ドキュメントから独立しています。 v5.4 以降、DM ドキュメントは同じバージョンの TiDB ドキュメントに統合されています。 DMドキュメンテーションサイトにアクセスしなくても、 [DM ドキュメント](/dm/dm-overview.md)を直接読むことができます。
+-   ポイントインタイム リカバリ (PITR) の実験的機能を cdclog と共に削除します。 v5.4.0 以降、cdclog ベースの PITR と cdclog はサポートされなくなりました。
+-   システム変数を「DEFAULT」に設定する動作をより MySQL 互換にする[#29680](https://github.com/pingcap/tidb/pull/29680)
+-   システム変数`lc_time_names`を読み取り専用[#30084](https://github.com/pingcap/tidb/pull/30084)に設定します
+-   `tidb_store_limit`のスコープを INSTANCE または GLOBAL から GLOBAL [#30756](https://github.com/pingcap/tidb/pull/30756)に設定します
+-   列にゼロが含まれる場合、整数型の列を時間型の列に変換することを禁止します[#25728](https://github.com/pingcap/tidb/pull/25728)
+-   浮動小数点値[#30148](https://github.com/pingcap/tidb/pull/30148)を挿入するときに、 `Inf`または`NAN`の値に対してエラーが報告されない問題を修正します。
+-   自動 ID が範囲外の場合に`REPLACE`ステートメントが他の行を誤って変更する問題を修正します[#30301](https://github.com/pingcap/tidb/pull/30301)
 
-## New features
+## 新機能 {#new-features}
 
-### SQL
+### SQL {#sql}
 
-- **TiDB supports the GBK character set since v5.4.0**
+-   **TiDB は v5.4.0 以降、GBK 文字セットをサポートしています**
 
-    Before v5.4.0, TiDB supports `ascii`, `binary`, `latin1`, `utf8`, and `utf8mb4` character sets.
+    v5.4.0 より前の TiDB は、 `ascii` 、 `binary` 、 `latin1` 、 `utf8` 、および`utf8mb4`文字セットをサポートしています。
 
-    To better support Chinese users, TiDB supports the GBK character set since v5.4.0. After enabling the [`new_collations_enabled_on_first_bootstrap`](/tidb-configuration-file.md#new_collations_enabled_on_first_bootstrap) option in the TiDB configuration file when initializing a TiDB cluster for the first time, the TiDB GBK character set supports both `gbk_bin` and `gbk_chinese_ci` collations.
+    中国語ユーザーのサポートを強化するために、TiDB は v5.4.0 以降、GBK 文字セットをサポートしています。初めて TiDB クラスターを初期化するときに TiDB 構成ファイルで[`new_collations_enabled_on_first_bootstrap`](/tidb-configuration-file.md#new_collations_enabled_on_first_bootstrap)オプションを有効にすると、TiDB GBK 文字セットは`gbk_bin`と`gbk_chinese_ci`の両方の照合をサポートします。
 
-    When using the GBK character set, you need to pay attention to the compatibility restrictions. For details, see [Character Set and Collation - GBK](/character-set-gbk.md).
+    GBK 文字セットを使用する場合は、互換性の制限に注意する必要があります。詳細については、 [文字セットと照合 - GBK](/character-set-gbk.md)を参照してください。
 
-### Security
+### 安全 {#security}
 
-- **TiSpark supports user authentication and authorization**
+-   **TiSpark はユーザー認証と承認をサポートします**
 
-    Since TiSpark 2.5.0, TiSpark supports both database user authentication and read/write authorization at a database or table level. After enabling this feature, you can prevent the business from running unauthorized batch tasks such as draws to obtain data, which improves the stability and data security of online clusters.
+    TiSpark 2.5.0 以降、TiSpark はデータベース ユーザー認証と、データベースまたはテーブル レベルでの読み取り/書き込み承認の両方をサポートしています。この機能を有効にすると、企業がドローなどの不正なバッチ タスクを実行してデータを取得することを防止できるため、オンライン クラスターの安定性とデータ セキュリティが向上します。
 
-    This feature is disabled by default. When it is enabled, if a user operating through TiSpark does not have the needed permissions, the user gets an exception from TiSpark.
+    この機能はデフォルトで無効になっています。有効にすると、TiSpark を介して操作しているユーザーが必要なアクセス許可を持っていない場合、ユーザーは TiSpark から例外を取得します。
 
-    [User document](/tispark-overview.md#security)
+    [ユーザー文書](/tispark-overview.md#security)
 
-- **TiUP supports generating an initial password for the root user**
+-   **TiUPは root ユーザーの初期パスワードの生成をサポートします**
 
-    An `--init` parameter is introduced to the command for starting a cluster. With this parameter, in a TiDB cluster deployed using TiUP, TiUP generates an initial strong password for the database root user. This avoids security risks in using a root user with an empty password and ensures the security of databases.
+    クラスターを開始するためのコマンドに`--init`パラメーターが導入されました。このパラメーターを使用すると、 TiUPを使用してデプロイされた TiDB クラスターで、 TiUPはデータベース ルート ユーザーの強力な初期パスワードを生成します。これにより、空のパスワードで root ユーザーを使用する際のセキュリティ リスクが回避され、データベースのセキュリティが確保されます。
 
-    [User document](/production-deployment-using-tiup.md#step-7-start-a-tidb-cluster)
+    [ユーザー文書](/production-deployment-using-tiup.md#step-7-start-a-tidb-cluster)
 
-### Performance
+### パフォーマンス {#performance}
 
-- **Continue improving the stability and performance of the columnar storage engine TiFlash and the computing engine MPP**
+-   **列型ストレージ エンジンTiFlashとコンピューティング エンジン MPP の安定性とパフォーマンスを継続的に改善します。**
 
-    - Support pusing down more functions to the MPP engine:
+    -   より多くの関数を MPP エンジンにプッシュすることをサポートします。
 
-        - String functions: `LPAD()`, `RPAD()`, `STRCMP()`
-        - Date functions: `ADDDATE()`, `DATE_ADD()`, `DATE_SUB()`, `SUBDATE()`, `QUARTER()`
+        -   文字列関数: `LPAD()` 、 `RPAD()` 、 `STRCMP()`
+        -   日付関数: `ADDDATE()` 、 `DATE_ADD()` 、 `DATE_SUB()` 、 `SUBDATE()` 、 `QUARTER()`
 
-    - Introduce the elastic thread pool feature to improve resource utilization (experimental)
-    - Improve the efficiency of converting data from row-based storage format to column-based storage format when replicating data from TiKV, which brings 50% improvement in the overall performance of data replication
-    - Improve TiFlash performance and stability by tuning the default values of some configuration items. In an HTAP hybrid load, the performance of simple queries on a single table improves up to 20%.
+    -   リソース使用率を改善するためのエラスティック スレッド プール機能の導入 (実験的)
 
-    User documents: [Supported push-down calculations](/tiflash/tiflash-supported-pushdown-calculations.md), [Configure the tiflash.toml file](/tiflash/tiflash-configuration.md#configure-the-tiflashtoml-file)
+    -   TiKV からデータをレプリケートする際に、行ベースのストレージ形式から列ベースのストレージ形式にデータを変換する効率が向上し、データ レプリケーションの全体的なパフォーマンスが 50% 向上します。
 
-- **Read historical data within a specified time range through a session variable**
+    -   一部の構成項目のデフォルト値を調整して、 TiFlashのパフォーマンスと安定性を向上させます。 HTAP ハイブリッド ロードでは、1 つのテーブルに対する単純なクエリのパフォーマンスが最大 20% 向上します。
 
-    TiDB is a multi-replica distributed database based on the Raft consensus algorithm. In face of high-concurrency and high-throughput application scenarios, TiDB can scale out its read performance through follower replicas, separating read and write requests.
+    ユーザー文書: [サポートされているプッシュダウン計算](/tiflash/tiflash-supported-pushdown-calculations.md) 、 [tiflash.toml ファイルを構成する](/tiflash/tiflash-configuration.md#configure-the-tiflashtoml-file)
 
-    For different application scenarios, TiDB provides two modes of follower read: strongly consistent read and weakly consistent history read. The strongly consistent read mode is suitable for application scenarios that require real-time data. However, in this mode, because of the data replication latency between leaders and followers and the reduced throughput, the read request might have high latency, especially for geo-distributed deployments.
+-   **セッション変数を使用して、指定された時間範囲内の履歴データを読み取ります**
 
-    For the application scenarios that have less strict requirements on real-time data, the history read mode is recommended. This mode can reduce latency and improve throughput. TiDB currently supports reading historical data by the following methods: Use SQL statements to read data from a time point in the past, or start a read-only transaction based on a time point in the past. Both methods support reading the historical data of a specific point in time or within a specified time range. For details, refer to [Read Historical Data Using the `AS OF TIMESTAMP` Clause](/as-of-timestamp.md).
+    TiDB は、 Raftコンセンサス アルゴリズムに基づくマルチレプリカ分散データベースです。同時実行性とスループットの高いアプリケーション シナリオに直面した場合、TiDB はフォロワー レプリカを介して読み取りパフォーマンスをスケールアウトし、読み取り要求と書き込み要求を分離できます。
 
-    Since v5.4.0, TiDB improves the usability of the history read mode by supporting reading historical data within a specified time range through a session variable. This mode serves low-latency, high-throughput read requests in quasi-real-time scenarios. You can set the variable as follows:
+    さまざまなアプリケーション シナリオに対して、TiDB はフォロワー読み取りの 2 つのモードを提供します。強整合性読み取りと弱整合性履歴読み取りです。強力な一貫性のある読み取りモードは、リアルタイム データを必要とするアプリケーション シナリオに適しています。ただし、このモードでは、リーダーとフォロワー間のデータ レプリケーションのレイテンシーとスループットの低下により、特に地理的に分散された展開の場合、読み取り要求のレイテンシーが長くなる可能性があります。
+
+    リアルタイム データの要件がそれほど厳しくないアプリケーション シナリオでは、履歴読み取りモードをお勧めします。このモードでは、レイテンシーが短縮され、スループットが向上します。 TiDB は現在、次の方法による履歴データの読み取りをサポートしています。SQL ステートメントを使用して過去の時点からデータを読み取るか、過去の時点に基づいて読み取り専用トランザクションを開始します。どちらの方法も、特定の時点または指定された時間範囲内の履歴データの読み取りをサポートしています。詳細については、 [`AS OF TIMESTAMP`句を使用した履歴データの読み取り](/as-of-timestamp.md)を参照してください。
+
+    v5.4.0 以降、TiDB は、セッション変数を介して指定された時間範囲内の履歴データの読み取りをサポートすることにより、履歴読み取りモードの使いやすさを向上させます。このモードは、準リアルタイムのシナリオで低レイテンシ、高スループットの読み取り要求を処理します。変数は次のように設定できます。
 
     ```sql
     set @@tidb_replica_read=leader_and_follower
     set @@tidb_read_staleness="-5"
     ```
 
-    By this setting, TiDB can select the nearest leader or follower node and read the latest historical data within 5 seconds.
+    この設定により、TiDB は最も近いリーダーまたはフォロワー ノードを選択し、5 秒以内に最新の履歴データを読み取ることができます。
 
-    [User document](/tidb-read-staleness.md)
+    [ユーザー文書](/tidb-read-staleness.md)
 
-- **GA for Index Merge**
+-   **インデックス マージの GA**
 
-    Index Merge is introduced in TiDB v4.0 as an experimental feature for SQL optimization. This method greatly accelerates condition filtering when a query requires scanning of multiple columns of data. Take the following query as an example. In the `WHERE` statement, if the filtering conditions connected by `OR` have their respective indexes on columns _key1_ and _key2_, the Index Merge feature filters the respective indexes at the same time, merges the query results, and returns the merged result.
+    Index Merge は、SQL 最適化の実験的機能として TiDB v4.0 に導入されました。この方法は、クエリで複数のデータ列のスキャンが必要な場合に条件フィルタリングを大幅に高速化します。例として、次のクエリを取り上げます。 `WHERE`ステートメントで、 `OR`で接続されたフィルター条件が列*key1*および<em>key2</em>にそれぞれのインデックスを持っている場合、インデックス マージ機能はそれぞれのインデックスを同時にフィルター処理し、クエリ結果をマージして、マージされた結果を返します。
 
     ```sql
     SELECT * FROM table WHERE key1 <= 100 OR key2 = 200;
     ```
 
-    Before TiDB v4.0, a query on a table supports using only one index for filtering at one time. If you want to query multiple columns of data, you can enable Index Merge to get the exact query result in a short time by using the indexes in individual columns. Index Merge avoids unnecessary full table scans and does not require establishing a large number of composite indexes.
+    TiDB v4.0 より前では、テーブルに対するクエリは、一度にフィルタリングするために 1 つのインデックスのみを使用することをサポートしていました。データの複数の列に対してクエリを実行する場合は、インデックス マージを有効にして、個々の列のインデックスを使用して正確なクエリ結果を短時間で取得できます。インデックス マージは、不要な全テーブル スキャンを回避し、多数の複合インデックスを確立する必要がありません。
 
-    In v5.4.0, Index Merge becomes GA. However, you still need to pay attention to the following restrictions:
+    v5.4.0 では、Index Merge が GA になります。ただし、次の制限に注意する必要があります。
 
-    - Index Merge supports only disjunctive normal form (X<sub>1</sub> ⋁ X<sub>2</sub> ⋁ …X<sub>n</sub>). That is, this feature only works when filtering conditions in a `WHERE` clause are connected by `OR`.
+    -   Index Merge は、論理和正規形 (X <sub>1</sub> ⋁ X <sub>2</sub> ⋁ …X <sub>n</sub> ) のみをサポートします。つまり、この機能は、 `WHERE`句のフィルタリング条件が`OR`で接続されている場合にのみ機能します。
 
-    - For newly deployed TiDB clusters of v5.4.0 or later, this feature is enabled by default. For v5.4.0 or later TiDB clusters upgraded from earlier versions, this feature inherits the setting before the upgrade and you can change the setting as required (for TiDB clusters earlier than v4.0, this feature does not exist and is disabled by default).
+    -   v5.4.0 以降の新しくデプロイされた TiDB クラスターの場合、この機能はデフォルトで有効になっています。以前のバージョンからアップグレードされた v5.4.0 以降の TiDB クラスターの場合、この機能はアップグレード前の設定を継承し、必要に応じて設定を変更できます (v4.0 より前の TiDB クラスターの場合、この機能は存在せず、デフォルトで無効になっています)。 .
 
-    [User document](/explain-index-merge.md)
+    [ユーザー文書](/explain-index-merge.md)
 
-- **Support Raft Engine (experimental)**
+-   **Raft Engineのサポート (実験的)**
 
-    Support using [Raft Engine](https://github.com/tikv/raft-engine) as the log storage engine in TiKV. Compared with RocksDB, Raft Engine can reduce TiKV I/O write traffic by up to 40% and CPU usage by 10%, while improving foreground throughput by about 5% and reducing tail latency by 20% under certain loads. In addition, Raft Engine improves the efficiency of log recycling and fixes the issue of log accumulation in extreme conditions.
+    TiKV のログ ストレージ エンジンとして[Raft Engine](https://github.com/tikv/raft-engine)を使用することをサポートします。 RocksDB と比較して、 Raft Engineは TiKV I/O 書き込みトラフィックを最大 40% 削減し、CPU 使用率を 10% 削減し、フォアグラウンド スループットを約 5% 向上させ、特定の負荷の下でテールレイテンシーを 20% 削減できます。さらに、 Raft Engineはログのリサイクルの効率を改善し、極端な状況でのログの蓄積の問題を修正します。
 
-    Raft Engine is still an experimental feature and is disabled by default. Note that the data format of Raft Engine in v5.4.0 is not compatible with previous versions. Before upgrading the cluster, you need to make sure that Raft Engine on all TiKV nodes is disabled. It is recommended to use Raft Engine only in v5.4.0 or a later version.
+    Raft Engineはまだ実験的機能であり、デフォルトでは無効になっています。 v5.4.0 のRaft Engineのデータ形式は、以前のバージョンと互換性がないことに注意してください。クラスターをアップグレードする前に、すべての TiKV ノードでRaft Engineが無効になっていることを確認する必要があります。 v5.4.0 以降のバージョンでのみRaft Engineを使用することをお勧めします。
 
-    [User document](/tikv-configuration-file.md#raft-engine)
+    [ユーザー文書](/tikv-configuration-file.md#raft-engine)
 
-- **Support collecting statistics on `PREDICATE COLUMNS` (experimental)**
+-   **`PREDICATE COLUMNS`での統計収集のサポート (実験的)**
 
-    In most cases, when executing SQL statements, the optimizer only uses statistics of some columns (such as columns in the `WHERE`, `JOIN`, `ORDER BY`, and `GROUP BY` statements). These used columns are called `PREDICATE COLUMNS`.
+    ほとんどの場合、SQL ステートメントを実行するとき、オプティマイザーは一部の列 ( `WHERE` 、 `JOIN` 、 `ORDER BY` 、および`GROUP BY`ステートメントの列など) の統計のみを使用します。これらの使用済み列は`PREDICATE COLUMNS`と呼ばれます。
 
-    Since v5.4.0, you can set the value of the [`tidb_enable_column_tracking`](/system-variables.md#tidb_enable_column_tracking-new-in-v540) system variable to `ON` to enable TiDB to collect `PREDICATE COLUMNS`.
+    v5.4.0 以降、システム変数[`tidb_enable_column_tracking`](/system-variables.md#tidb_enable_column_tracking-new-in-v540)の値を`ON`に設定して、TiDB が`PREDICATE COLUMNS`を収集できるようにすることができます。
 
-    After the setting, TiDB writes the `PREDICATE COLUMNS` information to the `mysql.column_stats_usage` system table every 100 * [`stats-lease`](/tidb-configuration-file.md#stats-lease). When the query pattern of your business is stable, you can use the `ANALYZE TABLE TableName PREDICATE COLUMNS` syntax to collect statistics on the `PREDICATE COLUMNS` columns only, which can greatly reduce the overhead of collecting statistics.
+    設定後、TiDB は 100 * [`stats-lease`](/tidb-configuration-file.md#stats-lease)ごとに`PREDICATE COLUMNS`の情報を`mysql.column_stats_usage`のシステム テーブルに書き込みます。ビジネスのクエリ パターンが安定している場合は、 `ANALYZE TABLE TableName PREDICATE COLUMNS`構文を使用して`PREDICATE COLUMNS`列のみの統計を収集できます。これにより、統計収集のオーバーヘッドを大幅に削減できます。
 
-    [User document](/statistics.md#collect-statistics-on-some-columns)
+    [ユーザー文書](/statistics.md#collect-statistics-on-some-columns)
 
-- **Support synchronously loading statistics (experimental)**
+-   **統計の同期読み込みをサポート (実験的)**
 
-    Since v5.4.0, TiDB introduces the synchronously loading statistics feature. This feature is disabled by default. After enabling the feature, TiDB can synchronously load large-sized statistics (such as histograms, TopN, and Count-Min Sketch statistics) into memory when you execute SQL statements, which improves the completeness of statistics for SQL optimization.
+    v5.4.0 以降、TiDB は同期読み込み統計機能を導入しています。この機能はデフォルトで無効になっています。この機能を有効にすると、TiDB は、SQL ステートメントを実行するときに大規模な統計 (ヒストグラム、TopN、Count-Min Sketch 統計など) をメモリに同期的にロードできるため、SQL 最適化の統計の完全性が向上します。
 
-    [User document](/statistics.md#load-statistics)
+    [ユーザー文書](/statistics.md#load-statistics)
 
-### Stability
+### 安定性 {#stability}
 
-- **Support persisting ANALYZE configurations**
+-   **ANALYZE 構成の永続化をサポート**
 
-    Statistics are one type of the basic information that the optimizer refers to when generating execution plans. The accuracy of the statistics directly affects whether the generated execution plans are reasonable. To ensure the accuracy of the statistics, sometimes it is necessary to set different collection configurations for different tables, partitions, and indexes.
+    統計は、オプティマイザが実行計画を生成するときに参照する基本情報の一種です。統計の精度は、生成された実行計画が適切かどうかに直接影響します。統計の精度を確保するために、さまざまなテーブル、パーティション、およびインデックスに対してさまざまなコレクション構成を設定する必要がある場合があります。
 
-    Since v5.4.0, TiDB supports persisting some `ANALYZE` configurations. With this feature, the existing configurations can be easily reused for future statistics collection.
+    v5.4.0 以降、 `ANALYZE`は一部の構成の永続化をサポートしています。この機能を使用すると、既存の構成を将来の統計収集に簡単に再利用できます。
 
-    The `ANALYZE` configuration persistence feature is enabled by default (the system variable `tidb_analyze_version` is `2` and [`tidb_persist_analyze_options`](/system-variables.md#tidb_persist_analyze_options-new-in-v540) is `ON` by default). You can use this feature to record the persistence configurations specified in the `ANALYZE` statement when executing the statement manually. Once recorded, the next time TiDB automatically updates statistics or you manually collect statistics without specifying these configurations, TiDB will collect statistics according to the recorded configurations.
+    `ANALYZE`構成永続化機能は、デフォルトで有効になっています (システム変数`tidb_analyze_version`はデフォルトで`2`で、 [`tidb_persist_analyze_options`](/system-variables.md#tidb_persist_analyze_options-new-in-v540)は`ON`です)。この機能を使用して、ステートメントを手動で実行するときに、 `ANALYZE`ステートメントで指定された持続性構成を記録できます。記録されると、次に TiDB が自動的に統計を更新するか、これらの構成を指定せずに手動で統計を収集するときに、TiDB は記録された構成に従って統計を収集します。
 
-    [User document](/statistics.md#persist-analyze-configurations)
+    [ユーザー文書](/statistics.md#persist-analyze-configurations)
 
-### High availability and disaster recovery
+### 高可用性と災害復旧 {#high-availability-and-disaster-recovery}
 
-- **Reduce the impact of backup tasks on the cluster**
+-   **クラスターに対するバックアップ タスクの影響を軽減する**
 
-    Backup & Restore (BR) introduces the auto-tune feature (enabled by default). This feature can reduce the impact of backup tasks on the cluster by monitoring the cluster resource usage and adjusting the number of threads used by the backup tasks. In some cases, if you increase the cluster hardware resource for backup and enable the auto-tune feature, it can limit the impact of backup tasks on the cluster to 10% or less.
+    バックアップと復元 (BR) では、自動調整機能が導入されています (既定で有効になっています)。この機能は、クラスター リソースの使用状況を監視し、バックアップ タスクで使用されるスレッドの数を調整することで、クラスターに対するバックアップ タスクの影響を軽減できます。場合によっては、バックアップ用のクラスター ハードウェア リソースを増やして自動調整機能を有効にすると、クラスターに対するバックアップ タスクの影響を 10% 以下に制限できます。
 
-   [User document](/br/br-auto-tune.md)
+    [ユーザー文書](/br/br-auto-tune.md)
 
-- **Support Azure Blob Storage as a target storage for backup**
+-   **バックアップのターゲット ストレージとして Azure Blob Storage をサポートする**
 
-   Backup & Restore (BR) supports Azure Blob Storage as a remote backup storage. If you deploy TiDB in Azure Cloud, now you can back up the cluster data to the Azure Blob Storage service.
+    バックアップと復元 (BR) は、Azure Blob Storage をリモート バックアップ ストレージとしてサポートします。 TiDB を Azure クラウドにデプロイすると、クラスター データを Azure Blob Storage サービスにバックアップできるようになりました。
 
-    [User document](/br/backup-and-restore-storages.md)
+    [ユーザー文書](/br/backup-and-restore-storages.md)
 
-### Data migration
+### データ移行 {#data-migration}
 
-- **TiDB Lightning introduces a new feature to determine whether to allow importing data to tables with data**
+-   **TiDB Lightningは、データを含むテーブルへのデータのインポートを許可するかどうかを決定する新しい機能を導入します**
 
-    TiDB Lightning introduces a configuration item`incremental-import`. It determines whether to allow importing data to tables with data. The default value is `false`. When using the parallel import mode, you must set the configuration to `true`.
+    TiDB Lightningは構成項目`incremental-import`を導入します。データを含むテーブルへのデータのインポートを許可するかどうかを決定します。デフォルト値は`false`です。並行インポート モードを使用する場合は、構成を`true`に設定する必要があります。
 
-    [User document](/tidb-lightning/tidb-lightning-configuration.md#tidb-lightning-task)
+    [ユーザー文書](/tidb-lightning/tidb-lightning-configuration.md#tidb-lightning-task)
 
-- **TiDB Lightning introduces the schema name that stores the meta information for parallel import**
+-   **TiDB Lightningに並行インポート用のメタ情報を格納するスキーマ名を導入**
 
-    TiDB Lightning introduces the `meta-schema-name` configuration item. In parallel import mode, this parameter specifies the schema name that stores the meta information for each TiDB Lightning instance in the target cluster. By default, the value is "lightning_metadata". The value set for this parameter must be the same for each TiDB Lightning instance that participates in the same parallel import; otherwise, the correctness of the imported data cannot be ensured.
+    TiDB Lightningでは、 `meta-schema-name`の構成アイテムが導入されています。並行インポート モードでは、このパラメーターは、ターゲット クラスター内の各TiDB Lightningインスタンスのメタ情報を格納するスキーマ名を指定します。デフォルトの値は「lightning_metadata」です。このパラメータに設定する値は、同じ並列インポートに参加するTiDB Lightningインスタンスごとに同じにする必要があります。そうしないと、インポートされたデータの正確性が保証されません。
 
-  [User document](/tidb-lightning/tidb-lightning-configuration.md#tidb-lightning-task)
+    [ユーザー文書](/tidb-lightning/tidb-lightning-configuration.md#tidb-lightning-task)
 
-- **TiDB Lightning introduces duplicate resolution**
+-   **TiDB Lightningが重複解決を導入**
 
-    In Local-backend mode, TiDB Lightning outputs duplicated data before the data import is completed, and then removes that duplicated data from the database. You can resolve the duplicated data after the import is completed and select suitable data to insert according to application rules. It is recommended to clean upstream data sources based on duplicated data to avoid data inconsistency caused by duplicated data encountered in the subsequent incremental data migration phase.
+    ローカル バックエンド モードでは、 TiDB Lightningは、データのインポートが完了する前に重複データを出力し、その重複データをデータベースから削除します。インポートの完了後に重複データを解決し、アプリケーション ルールに従って挿入する適切なデータを選択できます。後続の増分データ移行フェーズで発生する重複データによって引き起こされるデータの不整合を回避するために、重複データに基づいてアップストリーム データ ソースをクリーンアップすることをお勧めします。
 
-    [User document](/tidb-lightning/tidb-lightning-error-resolution.md)
+    [ユーザー文書](/tidb-lightning/tidb-lightning-error-resolution.md)
 
-- **Optimize the usage of relay log in TiDB Data Migration (DM)**
+-   **TiDB Data Migration (DM) でのリレー ログの使用を最適化する**
 
-    - Recover the `enable-relay` switch in the `source` configuration.
+    -   `source`構成の`enable-relay`スイッチを回復します。
 
-    - Support dynamically enabling and disabling relay log using the `start-relay` and `stop-relay` commands.
+    -   `start-relay`および`stop-relay`コマンドを使用して、リレー ログの動的な有効化と無効化をサポートします。
 
-    - Bind the status of relay log to `source`. `source` keeps its original status of being enabled or disabled after it is migrated to any DM-worker.
+    -   リレーログのステータスを`source`にバインドします。 `source`は、任意の DM-worker に移行された後、有効または無効の元のステータスを保持します。
 
-    - Move the storage path of relay log to the DM-worker configuration file.
+    -   中継ログの保存パスを DM-worker 設定ファイルに移動します。
 
-    [User document](/dm/relay-log.md)
+    [ユーザー文書](/dm/relay-log.md)
 
-- **Optimize the processing of [collation](/character-set-and-collation.md) in DM**
+-   **DMでの<a href="/character-set-and-collation.md">照合順序</a>処理を最適化**
 
-    Add the `collation_compatible` configuration item. The value options are `loose` (default) and `strict`:
+    `collation_compatible`構成アイテムを追加します。値のオプションは`loose` (デフォルト) と`strict`です。
 
-    - If your application does not have strict requirements on collation, and the collation of query results can be different between the upstream and downstream, you can use the default `loose` mode to avoid reporting errors.
-    - If your application has strict requirements on collation, and the collation must be consistent between the upstream and downstream, you can use the `strict` mode. However, if the downstream does not support the upstream's default collation, the data replication might report errors.
+    -   アプリケーションに照合順序がアップストリームとダウンストリームで異なる可能性がある場合は、デフォルトの`loose`モードを使用してエラーの報告を回避できます。
+    -   アプリケーションが照合順序が一貫している必要がある場合は、 `strict`モードを使用できます。ただし、ダウンストリームがアップストリームのデフォルトの照合順序をサポートしていない場合、データ レプリケーションでエラーが報告されることがあります。
 
-   [User document](/dm/task-configuration-file-full.md#task-configuration-file-template-advanced)
+    [ユーザー文書](/dm/task-configuration-file-full.md#task-configuration-file-template-advanced)
 
-- **Optimize `transfer source` in DM to support running replication tasks smoothly**
+-   **DM の`transfer source`を最適化して、レプリケーション タスクのスムーズな実行をサポート**
 
-    When the DM-worker nodes have an unbalanced load, the `transfer source` command can be used to manually transfer the configuration of a `source` to another load. After the optimization, the `transfer source` command simplifies the manual operation. You can smoothly transfer the source instead of pausing all related tasks, because DM completes other operations internally.
+    DM-worker ノードの負荷が不均衡な場合、 `transfer source`コマンドを使用して、 `source`の構成を別の負荷に手動で転送できます。最適化後、 `transfer source`コマンドは手動操作を簡素化します。 DMが内部で他の操作を完了するため、関連するすべてのタスクを一時停止する代わりに、ソースをスムーズに転送できます。
 
-- **DM OpenAPI becomes generally available (GA)**
+-   **DM OpenAPI の一般提供開始 (GA)**
 
-    DM supports daily management via API, including adding data sources and managing tasks. In v5.4.0, DM OpenAPI becomes GA.
+    DM は、データ ソースの追加やタスクの管理など、API を介して日常的な管理をサポートします。 v5.4.0 では、DM OpenAPI が GA になります。
 
-    [User document](/dm/dm-open-api.md)
+    [ユーザー文書](/dm/dm-open-api.md)
 
-### Diagnostic efficiency
+### 診断効率 {#diagnostic-efficiency}
 
-- **Top SQL (experimental feature)**
+-   **Top SQL (実験的機能)**
 
-    A new experimental feature, Top SQL (disabled by default), is introduced to help you easily find source-consuming queries.
+    ソースを消費するクエリを簡単に見つけられるように、新しい実験的機能であるTop SQL (既定では無効) が導入されました。
 
-    [User document](/dashboard/top-sql.md)
+    [ユーザー文書](/dashboard/top-sql.md)
 
-### TiDB data share subscription
+### TiDB データ共有サブスクリプション {#tidb-data-share-subscription}
 
-- **Optimize the impact of TiCDC on clusters**
+-   **クラスターに対する TiCDC の影響を最適化する**
 
-    Significantly reduces the impact on the performance of TiDB clusters when you use TiCDC. In the test environment, the performance impact of TiCDC on TiDB can be reduced to less than 5%.
+    TiCDC を使用すると、TiDB クラスターのパフォーマンスへの影響が大幅に軽減されます。テスト環境では、TiDB に対する TiCDC のパフォーマンスへの影響を 5% 未満に減らすことができます。
 
-### Deployment and maintenance
+### 展開とメンテナンス {#deployment-and-maintenance}
 
-- **Enhance Continuous Profiling (experimental)**
+-   **継続的なプロファイリングの強化 (実験的)**
 
-    - More components supported: Besides TiDB, PD, and TiKV, TiDB v5.4.0 also supports CPU profiling of TiFlash.
-    - More forms of profiling display: Supports showing CPU profiling and Goroutine results on flame charts.
+    -   サポートされるコンポーネントの増加: TiDB、PD、および TiKV に加えて、TiDB v5.4.0 はTiFlashの CPU プロファイリングもサポートします。
 
-    - More deployment environments supported: Continuous Profiling can also be used for clusters deployed using TiDB Operator.
+    -   より多くの形式のプロファイリング表示: フレーム チャートでの CPU プロファイリングとゴルーチンの結果の表示をサポートします。
 
-   Continuous Profiling is disabled by default and can be enabled on TiDB Dashboard.
+    -   サポートされる展開環境の増加: 継続的なプロファイリングは、 TiDB Operatorを使用して展開されたクラスターにも使用できます。
 
-    Continuous Profiling is applicable to clusters deployed or upgraded using TiUP of v1.9.0 or later or TiDB Operator of v1.3.0 or later.
+    継続的なプロファイリングはデフォルトで無効になっており、TiDB ダッシュボードで有効にすることができます。
 
-    [User document](/dashboard/continuous-profiling.md)
+    継続的プロファイリングは、v1.9.0 以降の TiUP または v1.3.0 以降のTiUP TiDB Operatorを使用してデプロイまたはアップグレードされたクラスターに適用されます。
 
-## Improvements
+    [ユーザー文書](/dashboard/continuous-profiling.md)
 
-+ TiDB
+## 改良点 {#improvements}
 
-    - Support the `ADMIN {SESSION | INSTANCE | GLOBAL} PLAN_CACHE` syntax to clear the cached query plan [#30370](https://github.com/pingcap/tidb/pull/30370)
+-   TiDB
 
-+ TiKV
+    -   `ADMIN {SESSION | INSTANCE | GLOBAL} PLAN_CACHE`構文をサポートして、キャッシュされたクエリ プランをクリアします[#30370](https://github.com/pingcap/tidb/pull/30370)
 
-    - Coprocessor supports paging API to process requests in a stream-like way [#11448](https://github.com/tikv/tikv/issues/11448)
-    - Support `read-through-lock` so that read operations do not need to wait for secondary locks to be resolved [#11402](https://github.com/tikv/tikv/issues/11402)
-    - Add a disk protection mechanism to avoid panic caused by disk space drainage [#10537](https://github.com/tikv/tikv/issues/10537)
-    - Support archiving and rotating logs [#11651](https://github.com/tikv/tikv/issues/11651)
-    - Reduce the system call by the Raft client and increase CPU efficiency [#11309](https://github.com/tikv/tikv/issues/11309)
-    - Coprocessor supports pushing down substring to TiKV [#11495](https://github.com/tikv/tikv/issues/11495)
-    - Improve the scan performance by skip reading locks in the Read Committed isolation level [#11485](https://github.com/tikv/tikv/issues/11485)
-    - Reduce the default thread pool size used by backup operations and limit the use of thread pool when the stress is high [#11000](https://github.com/tikv/tikv/issues/11000)
-    - Support dynamically adjusting the sizes of the Apply thread pool and the Store thread pool [#11159](https://github.com/tikv/tikv/issues/11159)
-    - Support configuring the size of the `snap-generator` thread pool [#11247](https://github.com/tikv/tikv/issues/11247)
-    - Optimize the issue of global lock race that occurs when there are many files with frequent reads and writes [#250](https://github.com/tikv/rocksdb/pull/250)
+-   TiKV
 
-+ PD
+    -   Coprocessorは、ストリームのような方法で要求を処理するページング API をサポートします[#11448](https://github.com/tikv/tikv/issues/11448)
+    -   `read-through-lock`をサポートして、読み取り操作が 2 次ロックの解決を待つ必要がないようにする[#11402](https://github.com/tikv/tikv/issues/11402)
+    -   ディスク領域の枯渇によるpanicを回避するために、ディスク保護メカニズムを追加します[#10537](https://github.com/tikv/tikv/issues/10537)
+    -   ログのアーカイブとローテーションのサポート[#11651](https://github.com/tikv/tikv/issues/11651)
+    -   Raftクライアントによるシステム コールを減らし、CPU 効率を高める[#11309](https://github.com/tikv/tikv/issues/11309)
+    -   Coprocessorは部分文字列の TiKV [#11495](https://github.com/tikv/tikv/issues/11495)へのプッシュダウンをサポート
+    -   Read Committed 分離レベル[#11485](https://github.com/tikv/tikv/issues/11485)で読み取りロックをスキップすることにより、スキャンのパフォーマンスを向上させます。
+    -   バックアップ操作で使用されるデフォルトのスレッド プール サイズを減らし、負荷が高い場合にスレッド プールの使用を制限する[#11000](https://github.com/tikv/tikv/issues/11000)
+    -   Apply スレッド プールと Store スレッド プールのサイズを動的に調整するサポート[#11159](https://github.com/tikv/tikv/issues/11159)
+    -   `snap-generator`スレッド プール[#11247](https://github.com/tikv/tikv/issues/11247)のサイズの構成をサポート
+    -   読み取りと書き込みが頻繁に行われるファイルが多数ある場合に発生するグローバル ロック競合の問題を最適化します[#250](https://github.com/tikv/rocksdb/pull/250)
 
-    - Record the historic hotspot information by default [#25281](https://github.com/pingcap/tidb/issues/25281)
-    - Add signature for the HTTP component to identify the request source [#4490](https://github.com/tikv/pd/issues/4490)
-    - Update TiDB Dashboard to v2021.12.31 [#4257](https://github.com/tikv/pd/issues/4257)
+-   PD
 
-+ TiFlash
+    -   デフォルトで過去のホットスポット情報を記録する[#25281](https://github.com/pingcap/tidb/issues/25281)
+    -   HTTPコンポーネントの署名を追加して、要求元を識別します[#4490](https://github.com/tikv/pd/issues/4490)
+    -   TiDB ダッシュボードを v2021.12.31 に更新する[#4257](https://github.com/tikv/pd/issues/4257)
 
-    - Optimize the communication of local operators
-    - Increase the non-temporary thread count of gRPC to avoid the frequent creation or destruction of threads
+-   TiFlash
 
-+ Tools
+    -   現地オペレーターのコミュニケーションを最適化
+    -   gRPC の非一時的なスレッド数を増やして、スレッドの頻繁な作成または破棄を回避します
 
-    + Backup & Restore (BR)
+-   ツール
 
-        - Add a validity check for the key when BR performs encrypted backup [#29794](https://github.com/pingcap/tidb/issues/29794)
+    -   バックアップと復元 (BR)
 
-    + TiCDC
+        -   BRが暗号化されたバックアップを実行するときのキーの有効性チェックを追加します[#29794](https://github.com/pingcap/tidb/issues/29794)
 
-        - Reduce the count of "EventFeed retry rate limited" logs [#4006](https://github.com/pingcap/tiflow/issues/4006)
-        - Reduce the replication latency when replicating many tables [#3900](https://github.com/pingcap/tiflow/issues/3900)
-        - Reduce the time for the KV client to recover when a TiKV store is down [#3191](https://github.com/pingcap/tiflow/issues/3191)
+    -   TiCDC
 
-    + TiDB Data Migration (DM)
+        -   「EventFeed retry rate limited」ログのカウントを減らします[#4006](https://github.com/pingcap/tiflow/issues/4006)
+        -   多数のテーブルをレプリケートする場合のレプリケーションレイテンシーを削減する[#3900](https://github.com/pingcap/tiflow/issues/3900)
+        -   TiKV ストアがダウンしたときに KV クライアントが回復するまでの時間を短縮する[#3191](https://github.com/pingcap/tiflow/issues/3191)
 
-        - Lower the usage rate of CPU when the relay is enabled [#2214](https://github.com/pingcap/dm/issues/2214)
+    -   TiDB データ移行 (DM)
 
-    + TiDB Lightning
+        -   リレー有効時のCPU使用率を下げる[#2214](https://github.com/pingcap/dm/issues/2214)
 
-        - Use optimistic transactions by default to write data to improve performance in TiDB-backend mode [#30953](https://github.com/pingcap/tidb/pull/30953)
+    -   TiDB Lightning
 
-    + Dumpling
+        -   デフォルトで楽観的トランザクションを使用してデータを書き込み、TiDB バックエンド モード[#30953](https://github.com/pingcap/tidb/pull/30953)でのパフォーマンスを向上させます
 
-        - Improve compatibility when Dumpling checks the database version [#29500](https://github.com/pingcap/tidb/pull/29500)
-        - Add the default collation when dumping `CREATE DATABASE` and `CREATE TABLE` [#3420](https://github.com/pingcap/tiflow/issues/3420)
+    -   Dumpling
 
-## Bug fixes
+        -   Dumplingがデータベース バージョン[#29500](https://github.com/pingcap/tidb/pull/29500)をチェックするときの互換性を改善
+        -   `CREATE DATABASE`と`CREATE TABLE` [#3420](https://github.com/pingcap/tiflow/issues/3420)をダンプするときにデフォルトの照合順序を追加します
 
-+ TiDB
+## バグの修正 {#bug-fixes}
 
-    - Fix the issue of the `tidb_analyze_version` value change that occurs when upgrading the cluster from v4.x to v5.x [#25422](https://github.com/pingcap/tidb/issues/25422)
-    - Fix the issue of the wrong result that occurs when using different collations in a subquery [#30748](https://github.com/pingcap/tidb/issues/30748)
-    - Fix the issue that the result of `concat(ifnull(time(3))` in TiDB is different from that in MySQL [#29498](https://github.com/pingcap/tidb/issues/29498)
-    - Fix the issue of potential data index inconsistency in optimistic transaction mode [#30410](https://github.com/pingcap/tidb/issues/30410)
-    - Fix the issue that the query execution plan of IndexMerge is wrong when an expression cannot be pushed down to TiKV [#30200](https://github.com/pingcap/tidb/issues/30200)
-    - Fix the issue that concurrent column type change causes inconsistency between the schema and the data [#31048](https://github.com/pingcap/tidb/issues/31048)
-    - Fix the issue that the IndexMerge query result is wrong when there is a subquery [#30913](https://github.com/pingcap/tidb/issues/30913)
-    - Fix the panic issue that occurs when the FetchSize is set too large in the client [#30896](https://github.com/pingcap/tidb/issues/30896)
-    - Fix the issue that LEFT JOIN might be mistakenly converted to INNER JOIN [#20510](https://github.com/pingcap/tidb/issues/20510)
-    - Fix the issue that panic might occur when the `CASE-WHEN` expression and collation are used together [#30245](https://github.com/pingcap/tidb/issues/30245)
-    - Fix the issue of wrong query result that occurs when the `IN` value contains a binary constant [#31261](https://github.com/pingcap/tidb/issues/31261)
-    - Fix the issue of wrong query result that occurs when CTE has a subquery [#31255](https://github.com/pingcap/tidb/issues/31255)
-    - Fix the issue that executing the `INSERT ... SELECT ... ON DUPLICATE KEY UPDATE` statement gets panic [#28078](https://github.com/pingcap/tidb/issues/28078)
-    - Fix the issue that INDEX HASH JOIN returns the `send on closed channel` error [#31129](https://github.com/pingcap/tidb/issues/31129)
+-   TiDB
 
-+ TiKV
+    -   クラスターを[#25422](https://github.com/pingcap/tidb/issues/25422)から v5.x にアップグレードするときに発生する`tidb_analyze_version`の値の変更の問題を修正します。
+    -   サブクエリで異なる照合順序を使用した場合に発生する間違った結果の問題を修正します[#30748](https://github.com/pingcap/tidb/issues/30748)
+    -   TiDB の`concat(ifnull(time(3))`の結果が MySQL [#29498](https://github.com/pingcap/tidb/issues/29498)の結果と異なる問題を修正
+    -   楽観的トランザクション モード[#30410](https://github.com/pingcap/tidb/issues/30410)での潜在的なデータ インデックスの不整合の問題を修正します。
+    -   TiKV [#30200](https://github.com/pingcap/tidb/issues/30200)に式をプッシュダウンできない場合、IndexMerge のクエリ実行プランが間違っている問題を修正
+    -   列の型を同時に変更すると、スキーマとデータの間で不整合が発生する問題を修正します[#31048](https://github.com/pingcap/tidb/issues/31048)
+    -   サブクエリがあるとIndexMergeのクエリ結果がおかしくなる問題を修正[#30913](https://github.com/pingcap/tidb/issues/30913)
+    -   クライアント[#30896](https://github.com/pingcap/tidb/issues/30896)で FetchSize の設定が大きすぎる場合に発生するpanicの問題を修正します。
+    -   LEFT JOIN が誤って INNER JOIN [#20510](https://github.com/pingcap/tidb/issues/20510)に変換される可能性がある問題を修正
+    -   `CASE-WHEN`式と照合順序を併用するとpanicが発生することがある問題を修正[#30245](https://github.com/pingcap/tidb/issues/30245)
+    -   `IN`の値にバイナリ定数[#31261](https://github.com/pingcap/tidb/issues/31261)が含まれている場合に発生する間違ったクエリ結果の問題を修正します。
+    -   CTE にサブクエリがある場合に発生する間違ったクエリ結果の問題を修正します[#31255](https://github.com/pingcap/tidb/issues/31255)
+    -   `INSERT ... SELECT ... ON DUPLICATE KEY UPDATE`ステートメントを実行するとpanic[#28078](https://github.com/pingcap/tidb/issues/28078)が発生する問題を修正します。
+    -   INDEX HASH JOIN が`send on closed channel`エラー[#31129](https://github.com/pingcap/tidb/issues/31129)を返す問題を修正
 
-    - Fix the issue that the MVCC deletion records are not cleared by GC [#11217](https://github.com/tikv/tikv/issues/11217)
-    - Fix the issue that retrying prewrite requests in the pessimistic transaction mode might cause the risk of data inconsistency in rare cases [#11187](https://github.com/tikv/tikv/issues/11187)
-    - Fix the issue that GC scan causes memory overflow [#11410](https://github.com/tikv/tikv/issues/11410)
-    - Fix the issue that RocksDB flush or compaction causes panic when the disk capacity is full [#11224](https://github.com/tikv/tikv/issues/11224)
+-   TiKV
 
-+ PD
+    -   MVCC 削除レコードが GC でクリアされない問題を修正します[#11217](https://github.com/tikv/tikv/issues/11217)
+    -   悲観的トランザクション モードでプリライト リクエストを再試行すると、まれにデータの不整合が発生する可能性がある問題を修正し[#11187](https://github.com/tikv/tikv/issues/11187) 。
+    -   GC スキャンがメモリ オーバーフローを引き起こす問題を修正します[#11410](https://github.com/tikv/tikv/issues/11410)
+    -   ディスク容量がいっぱいになると、RocksDB のフラッシュまたは圧縮によってpanicが発生する問題を修正します[#11224](https://github.com/tikv/tikv/issues/11224)
 
-    - Fix the issue that Region statistics are not affected by `flow-round-by-digit` [#4295](https://github.com/tikv/pd/issues/4295)
-    - Fix the issue that the scheduling operator cannot fail fast because the target store is down [#3353](https://github.com/tikv/pd/issues/3353)
-    - Fix the issue that Regions on offline stores cannot be merged [#4119](https://github.com/tikv/pd/issues/4119)
-    - Fix the issue that the cold hotspot data cannot be deleted from the hotspot statistics [#4390](https://github.com/tikv/pd/issues/4390)
+-   PD
 
-+ TiFlash
+    -   リージョン統計が`flow-round-by-digit` [#4295](https://github.com/tikv/pd/issues/4295)の影響を受けない問題を修正
+    -   ターゲットストアがダウンしているため、スケジューリングオペレーターが高速に失敗できない問題を修正します[#3353](https://github.com/tikv/pd/issues/3353)
+    -   オフライン ストアのリージョンをマージできない問題を修正します[#4119](https://github.com/tikv/pd/issues/4119)
+    -   コールド ホットスポット データがホットスポット統計から削除できない問題を修正します[#4390](https://github.com/tikv/pd/issues/4390)
 
-    - Fix the issue that TiFlash might panic when an MPP query is stopped
-    - Fix the issue that queries with the `where <string>` clause return wrong results
-    - Fix the potential issue of data inconsistency that might occur when setting the column type of an integer primary key to a larger range
-    - Fix the issue that when an input time is earlier than 1970-01-01 00:00:01 UTC, the behavior of `unix_timestamp` is inconsistent with that of TiDB or MySQL
-    - Fix the issue that TiFlash might return the `EstablishMPPConnection` error after it is restarted
-    - Fix the issue that the `CastStringAsDecimal` behavior is inconsistent in TiFlash and in TiDB/TiKV
-    - Fix the issue that the `DB::Exception: Encode type of coprocessor response is not CHBlock` error is returned in the query result
-    - Fix the issue that the `castStringAsReal` behavior is inconsistent in TiFlash and in TiDB/TiKV
-    - Fix the issue that the returned result of the `date_add_string_xxx` function in TiFlash is inconsistent with that in MySQL
+-   TiFlash
 
-+ Tools
+    -   MPP クエリが停止したときにTiFlashがpanicになる問題を修正
+    -   `where <string>`句を含むクエリが間違った結果を返す問題を修正
+    -   整数主キーの列タイプをより大きな範囲に設定するときに発生する可能性のあるデータの不整合の問題を修正します
+    -   入力時刻が 1970-01-01 00:00:01 UTC より前の場合、 `unix_timestamp`の動作が TiDB や MySQL の動作と一致しない問題を修正
+    -   再起動後にTiFlashが`EstablishMPPConnection`エラーを返すことがある問題を修正
+    -   `CastStringAsDecimal`動作がTiFlashと TiDB/TiKV で一致しない問題を修正
+    -   クエリ結果に`DB::Exception: Encode type of coprocessor response is not CHBlock`個のエラーが返される問題を修正
+    -   `castStringAsReal`動作がTiFlashと TiDB/TiKV で一致しない問題を修正
+    -   TiFlashの`date_add_string_xxx`関数の返される結果が MySQL の結果と一致しない問題を修正します。
 
-    + Backup & Restore (BR)
+-   ツール
 
-        - Fix the potential issue that Region distribution might be uneven after a restore operation is finished [#30425](https://github.com/pingcap/tidb/issues/30425)
-        - Fix the issue that `'/'` cannot be specified in endpoint when `minio` is used as the backup storage [#30104](https://github.com/pingcap/tidb/issues/30104)
-        - Fix the issue that system tables cannot be restored because concurrently backing up system tables makes the table name fail to update [#29710](https://github.com/pingcap/tidb/issues/29710)
+    -   バックアップと復元 (BR)
 
-    + TiCDC
+        -   復元操作の完了後にリージョンの分布が不均一になる可能性がある潜在的な問題を修正します[#30425](https://github.com/pingcap/tidb/issues/30425)
+        -   バックアップストレージとして`minio`を使用する場合、エンドポイントに`'/'`を指定できない問題を修正[#30104](https://github.com/pingcap/tidb/issues/30104)
+        -   システム テーブルを同時にバックアップすると、テーブル名が更新されないため、システム テーブルを復元できない問題を修正し[#29710](https://github.com/pingcap/tidb/issues/29710) 。
 
-        - Fix the issue that replication cannot be performed when `min.insync.replicas` is smaller than `replication-factor` [#3994](https://github.com/pingcap/tiflow/issues/3994)
-        - Fix the issue that the `cached region` monitoring metric is negative [#4300](https://github.com/pingcap/tiflow/issues/4300)
-        - Fix the issue that `mq sink write row` does not have monitoring data [#3431](https://github.com/pingcap/tiflow/issues/3431)
-        - Fix the compatibility issue of `sql mode` [#3810](https://github.com/pingcap/tiflow/issues/3810)
-        - Fix the potential panic issue that occurs when a replication task is removed [#3128](https://github.com/pingcap/tiflow/issues/3128)
-        - Fix the issue of panic and data inconsistency that occurs when outputting the default column value [#3929](https://github.com/pingcap/tiflow/issues/3929)
-        - Fix the issue that default values cannot be replicated [#3793](https://github.com/pingcap/tiflow/issues/3793)
-        - Fix the potential issue that the deadlock causes a replication task to get stuck [#4055](https://github.com/pingcap/tiflow/issues/4055)
-        - Fix the issue that no log is output when the disk is fully written [#3362](https://github.com/pingcap/tiflow/issues/3362)
-        - Fix the issue that special comments in DDL statements cause the replication task to stop [#3755](https://github.com/pingcap/tiflow/issues/3755)
-        - Fix the issue that the service cannot be started because of a timezone issue in the RHEL release [#3584](https://github.com/pingcap/tiflow/issues/3584)
-        - Fix the issue of potential data loss caused by inaccurate checkpoint [#3545](https://github.com/pingcap/tiflow/issues/3545)
-        - Fix the OOM issue in the container environment [#1798](https://github.com/pingcap/tiflow/issues/1798)
-        - Fix the issue of replication stop caused by the incorrect configuration of `config.Metadata.Timeout` [#3352](https://github.com/pingcap/tiflow/issues/3352)
+    -   TiCDC
 
-    + TiDB Data Migration (DM)
+        -   `min.insync.replicas`が`replication-factor` [#3994](https://github.com/pingcap/tiflow/issues/3994)より小さい場合にレプリケーションが実行できない問題を修正
+        -   `cached region`モニタリング指標がマイナス[#4300](https://github.com/pingcap/tiflow/issues/4300)になる問題を修正
+        -   `mq sink write row`監視データがない問題を修正[#3431](https://github.com/pingcap/tiflow/issues/3431)
+        -   `sql mode` [#3810](https://github.com/pingcap/tiflow/issues/3810)の互換性の問題を修正
+        -   レプリケーション タスクが削除されたときに発生する潜在的なpanicの問題を修正します[#3128](https://github.com/pingcap/tiflow/issues/3128)
+        -   デフォルトの列値[#3929](https://github.com/pingcap/tiflow/issues/3929)を出力するときに発生するpanicとデータの不整合の問題を修正します。
+        -   デフォルト値をレプリケートできない問題を修正[#3793](https://github.com/pingcap/tiflow/issues/3793)
+        -   デッドロックが原因でレプリケーション タスクがスタックする潜在的な問題を修正します[#4055](https://github.com/pingcap/tiflow/issues/4055)
+        -   ディスクが完全に書き込まれたときにログが出力されない問題を修正[#3362](https://github.com/pingcap/tiflow/issues/3362)
+        -   DDL ステートメントの特殊なコメントによってレプリケーション タスクが停止する問題を修正します[#3755](https://github.com/pingcap/tiflow/issues/3755)
+        -   RHEL リリース[#3584](https://github.com/pingcap/tiflow/issues/3584)でタイムゾーンの問題が原因でサービスを開始できない問題を修正
+        -   不正確なチェックポイント[#3545](https://github.com/pingcap/tiflow/issues/3545)によって引き起こされる潜在的なデータ損失の問題を修正します。
+        -   コンテナー環境での OOM の問題を修正する[#1798](https://github.com/pingcap/tiflow/issues/1798)
+        -   `config.Metadata.Timeout` [#3352](https://github.com/pingcap/tiflow/issues/3352)の構成が正しくないために発生するレプリケーション停止の問題を修正します。
 
-        - Fix the issue that the `CREATE VIEW` statement interrupts data replication [#4173](https://github.com/pingcap/tiflow/issues/4173)
-        - Fix the issue the schema needs to be reset after a DDL statement is skipped [#4177](https://github.com/pingcap/tiflow/issues/4177)
-        - Fix the issue that the table checkpoint is not updated in time after a DDL statement is skipped [#4184](https://github.com/pingcap/tiflow/issues/4184)
-        - Fix a compatibility issue of the TiDB version with the Parser version [#4298](https://github.com/pingcap/tiflow/issues/4298)
-        - Fix the issue that syncer metrics are updated only when querying the status [#4281](https://github.com/pingcap/tiflow/issues/4281)
+    -   TiDB データ移行 (DM)
 
-    + TiDB Lightning
+        -   `CREATE VIEW`ステートメントがデータ レプリケーションを中断する問題を修正します[#4173](https://github.com/pingcap/tiflow/issues/4173)
+        -   DDL ステートメントがスキップされた後にスキーマをリセットする必要がある問題を修正します[#4177](https://github.com/pingcap/tiflow/issues/4177)
+        -   DDL ステートメントがスキップされた後、テーブル チェックポイントが時間内に更新されないという問題を修正します[#4184](https://github.com/pingcap/tiflow/issues/4184)
+        -   TiDB バージョンとパーサー バージョン[#4298](https://github.com/pingcap/tiflow/issues/4298)の互換性の問題を修正
+        -   ステータス[#4281](https://github.com/pingcap/tiflow/issues/4281)を照会した場合にのみ syncer メトリクスが更新される問題を修正します。
 
-        - Fix the issue of wrong import result that occurs when TiDB Lightning does not have the privilege to access the `mysql.tidb` table [#31088](https://github.com/pingcap/tidb/issues/31088)
-        - Fix the issue that some checks are skipped when TiDB Lightning is restarted [#30772](https://github.com/pingcap/tidb/issues/30772)
-        - Fix the issue that TiDB Lightning fails to report the error when the S3 path does not exist [#30674](https://github.com/pingcap/tidb/pull/30674)
+    -   TiDB Lightning
 
-    + TiDB Binlog
+        -   TiDB Lightningが`mysql.tidb`テーブルへのアクセス権限を持っていない場合に発生する間違ったインポート結果の問題を修正[#31088](https://github.com/pingcap/tidb/issues/31088)
+        -   TiDB Lightningの再起動時に一部のチェックがスキップされる問題を修正[#30772](https://github.com/pingcap/tidb/issues/30772)
+        -   S3 パスが存在しない場合にTiDB Lightningがエラーを報告しない問題を修正します[#30674](https://github.com/pingcap/tidb/pull/30674)
 
-        - Fix the issue that Drainer fails because it is incompatible with the `CREATE PLACEMENT POLICY` statement [#1118](https://github.com/pingcap/tidb-binlog/issues/1118)
+    -   Binlog
+
+        -   Drainerが`CREATE PLACEMENT POLICY`文[#1118](https://github.com/pingcap/tidb-binlog/issues/1118)と互換性がないために失敗する問題を修正

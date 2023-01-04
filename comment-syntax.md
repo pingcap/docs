@@ -3,15 +3,15 @@ title: Comment Syntax
 summary: This document introduces the comment syntax supported by TiDB.
 ---
 
-# Comment Syntax
+# コメントの構文 {#comment-syntax}
 
-This document describes the comment syntax supported by TiDB.
+このドキュメントでは、TiDB でサポートされているコメント構文について説明します。
 
-TiDB supports three comment styles:
+TiDB は 3 つのコメント スタイルをサポートしています。
 
-- Use `#` to comment a line:
+-   `#`を使用して行にコメントを付けます。
 
-    {{< copyable "sql" >}}
+    {{< copyable "" >}}
 
     ```sql
     SELECT 1+1;     # comments
@@ -26,9 +26,9 @@ TiDB supports three comment styles:
     1 row in set (0.00 sec)
     ```
 
-- Use `--` to comment a line:
+-   `--`を使用して行にコメントを付けます。
 
-    {{< copyable "sql" >}}
+    {{< copyable "" >}}
 
     ```sql
     SELECT 1+1;     -- comments
@@ -42,10 +42,10 @@ TiDB supports three comment styles:
     +------+
     1 row in set (0.00 sec)
     ```
-    
-    And this style requires at least one whitespace after `--`:
 
-   {{< copyable "sql" >}}
+    そして、このスタイルには 1 の後に少なくとも`--`つの空白が必要です。
+
+    {{< copyable "" >}}
 
     ```sql
     SELECT 1+1--1;
@@ -60,9 +60,9 @@ TiDB supports three comment styles:
     1 row in set (0.01 sec)
     ```
 
-- Use `/* */` to comment a block or multiple lines:
+-   `/* */`を使用して、ブロックまたは複数行にコメントを付けます。
 
-   {{< copyable "sql" >}}
+    {{< copyable "" >}}
 
     ```sql
     SELECT 1 /* this is an in-line comment */ + 1;
@@ -77,7 +77,7 @@ TiDB supports three comment styles:
     1 row in set (0.01 sec)
     ```
 
-    {{< copyable "sql" >}}
+    {{< copyable "" >}}
 
     ```sql
     SELECT 1+
@@ -98,57 +98,57 @@ TiDB supports three comment styles:
     1 row in set (0.001 sec)
     ```
 
-## MySQL-compatible comment syntax
+## MySQL 互換のコメント構文 {#mysql-compatible-comment-syntax}
 
-The same as MySQL, TiDB supports a variant of C comment style:
+MySQL と同じように、TiDB は C コメント スタイルのバリエーションをサポートしています。
 
 ```
 /*! Specific code */
 ```
 
-or
+また
 
 ```
 /*!50110 Specific code */
 ```
 
-In this style, TiDB runs the statements in the comment.
+このスタイルでは、TiDB はコメント内のステートメントを実行します。
 
-For example:
+例えば：
 
 ```sql
 SELECT /*! STRAIGHT_JOIN */ col1 FROM table1,table2 WHERE ...
 ```
 
-In TiDB, you can also use another version:
+TiDB では、別のバージョンも使用できます。
 
 ```sql
 SELECT STRAIGHT_JOIN col1 FROM table1,table2 WHERE ...
 ```
 
-If the server version number is specified in the comment, for example, `/*!50110 KEY_BLOCK_SIZE=1024 */`, in MySQL it means that the contents in this comment are processed only when the MySQL version is or higher than 5.1.10. But in TiDB, the MySQL version number does not work and all contents in the comment are processed.
+サーバーのバージョン番号がコメントで指定されている場合 (たとえば、MySQL では`/*!50110 KEY_BLOCK_SIZE=1024 */` )、このコメントの内容は、MySQL のバージョンが 5.1.10 以上の場合にのみ処理されることを意味します。しかし、TiDB では MySQL のバージョン番号が機能せず、コメント内のすべてのコンテンツが処理されます。
 
-## TiDB specific comment syntax
+## TiDB 固有のコメント構文 {#tidb-specific-comment-syntax}
 
-TiDB has its own comment syntax (that is, TiDB specific comment syntax), which can be divided into the following two types:
+TiDB には独自のコメント構文 (つまり、TiDB 固有のコメント構文) があり、次の 2 つのタイプに分けることができます。
 
-* `/*T! Specific code */`: This syntax can only be parsed and executed by TiDB, and be ignored in other databases.
-* `/*T![feature_id] Specific code */`: This syntax is used to ensure compatibility between different versions of TiDB. TiDB can parse the SQL fragment in this comment only if it implements the corresponding feature of `feature_id` in the current version. For example, as the `AUTO_RANDOM` feature is introduced in v3.1.1, this version of TiDB can parse `/*T![auto_rand] auto_random */` into `auto_random`. Because the `AUTO_RANDOM` feature is not implemented in v3.0.0, the SQL statement fragment above is ignored. **Do not leave any space inside the `/*T![` characters**.
+-   `/*T! Specific code */` : この構文は、TiDB によってのみ解析および実行でき、他のデータベースでは無視されます。
+-   `/*T![feature_id] Specific code */` : この構文は、異なるバージョンの TiDB 間の互換性を確保するために使用されます。 TiDB は、現在のバージョンで`feature_id`の対応する機能を実装している場合にのみ、このコメントの SQL フラグメントを解析できます。たとえば、v3.1.1 で`AUTO_RANDOM`機能が導入されたため、このバージョンの TiDB は`/*T![auto_rand] auto_random */`を`auto_random`に解析できます。 v3.0.0 では`AUTO_RANDOM`の機能が実装されていないため、上記の SQL ステートメントのフラグメントは無視されます。 **`/*T![`文字の中にスペースを残さないでください**。
 
-## Optimizer comment syntax
+## オプティマイザーのコメント構文 {#optimizer-comment-syntax}
 
-Another type of comment is specially treated as an optimizer hint:
+別のタイプのコメントは、オプティマイザーのヒントとして特別に扱われます。
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 SELECT /*+ hint */ FROM ...;
 ```
 
-For details about the optimizer hints that TiDB supports, see [Optimizer hints](/optimizer-hints.md).
+TiDB がサポートするオプティマイザ ヒントの詳細については、 [オプティマイザーのヒント](/optimizer-hints.md)を参照してください。
 
-> **Note:**
+> **ノート：**
 >
-> In MySQL client, the TiDB-specific comment syntax is treated as comments and cleared by default. In MySQL client before 5.7.7, hints are also seen as comments and are cleared by default. It is recommended to use the `--comments` option when you start the client. For example, `mysql -h 127.0.0.1 -P 4000 -uroot --comments`.
+> MySQL クライアントでは、TiDB 固有のコメント構文はコメントとして扱われ、デフォルトでクリアされます。 5.7.7 より前の MySQL クライアントでは、ヒントもコメントとして表示され、デフォルトでクリアされます。クライアントを起動するときは、 `--comments`オプションを使用することをお勧めします。たとえば、 `mysql -h 127.0.0.1 -P 4000 -uroot --comments`です。
 
-For more information, see [Comment Syntax](https://dev.mysql.com/doc/refman/5.7/en/comments.html).
+詳細については、 [コメントの構文](https://dev.mysql.com/doc/refman/5.7/en/comments.html)を参照してください。

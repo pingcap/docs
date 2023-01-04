@@ -3,15 +3,15 @@ title: CREATE [GLOBAL|SESSION] BINDING
 summary: Use of CREATE BINDING in TiDB database.
 ---
 
-# CREATE [GLOBAL|SESSION] BINDING
+# [グローバル|セッション]バインディングを作成 {#create-global-session-binding}
 
-This statement creates a new execution plan binding in TiDB. Binding can be used to inject a hint into a statement without requiring changes to the underlying query.
+このステートメントは、TiDB に新しい実行計画バインディングを作成します。バインドを使用すると、基になるクエリを変更することなく、ステートメントにヒントを挿入できます。
 
-A `BINDING` can be on either a `GLOBAL` or `SESSION` basis. The default is `SESSION`.
+`BINDING`は`GLOBAL`または`SESSION`ベースのいずれかになります。デフォルトは`SESSION`です。
 
-The bound SQL statement is parameterized and stored in the system table. When a SQL query is processed, as long as the parameterized SQL statement and a bound one in the system table are consistent and the system variable `tidb_use_plan_baselines` is set to `ON` (default), the corresponding optimizer hint is available. If multiple execution plans are available, the optimizer chooses to bind the plan with the least cost. For more information, see [Create a binding](/sql-plan-management.md#create-a-binding).
+バインドされた SQL ステートメントはパラメーター化され、システム テーブルに格納されます。 SQL クエリが処理されるとき、パラメーター化された SQL ステートメントとシステム テーブル内のバインドされた SQL ステートメントが一貫しており、システム変数`tidb_use_plan_baselines`が`ON` (既定) に設定されている限り、対応するオプティマイザー ヒントを使用できます。複数の実行計画が利用可能な場合、オプティマイザは最小コストで計画をバインドすることを選択します。詳細については、 [バインディングを作成する](/sql-plan-management.md#create-a-binding)を参照してください。
 
-## Synopsis
+## あらすじ {#synopsis}
 
 ```ebnf+diagram
 CreateBindingStmt ::=
@@ -25,15 +25,15 @@ BindableStmt ::=
     ( SelectStmt | UpdateStmt | InsertIntoStmt | ReplaceIntoStmt | DeleteStmt )
 ```
 
-****
+***
 
-## Examples
+## 例 {#examples}
 
-You can create a binding according to a SQL statement or a historical execution plan.
+SQL ステートメントまたは過去の実行計画に従ってバインディングを作成できます。
 
-The following example shows how to create a binding according to a SQL statement.
+次の例は、SQL ステートメントに従ってバインディングを作成する方法を示しています。
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 mysql> CREATE TABLE t1 (
@@ -135,7 +135,7 @@ mysql> EXPLAIN ANALYZE SELECT * FROM t1 WHERE b = 123;
 3 rows in set (0.01 sec)
 ```
 
-The following example shows how to create a binding according to a historical execution plan.
+次の例は、履歴実行計画に従ってバインドを作成する方法を示しています。
 
 ```sql
 mysql> CREATE TABLE t(id INT PRIMARY KEY , a INT, KEY(a));
@@ -168,14 +168,14 @@ mysql> SELECT @@LAST_PLAN_FROM_BINDING;
 
 ```
 
-## MySQL compatibility
+## MySQL の互換性 {#mysql-compatibility}
 
-This statement is a TiDB extension to MySQL syntax.
+このステートメントは、MySQL 構文に対する TiDB 拡張です。
 
-## See also
+## こちらもご覧ください {#see-also}
 
-* [DROP [GLOBAL|SESSION] BINDING](/sql-statements/sql-statement-drop-binding.md)
-* [SHOW [GLOBAL|SESSION] BINDINGS](/sql-statements/sql-statement-show-bindings.md)
-* [ANALYZE TABLE](/sql-statements/sql-statement-analyze-table.md)
-* [Optimizer Hints](/optimizer-hints.md)
-* [SQL Plan Management](/sql-plan-management.md)
+-   [ドロップ [グローバル|セッション] バインディング](/sql-statements/sql-statement-drop-binding.md)
+-   [[グローバル|セッション]バインディングを表示](/sql-statements/sql-statement-show-bindings.md)
+-   [テーブルを分析](/sql-statements/sql-statement-analyze-table.md)
+-   [オプティマイザーのヒント](/optimizer-hints.md)
+-   [SQL計画管理](/sql-plan-management.md)

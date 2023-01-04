@@ -3,27 +3,27 @@ title: DM Cluster Performance Test
 summary: Learn how to test the performance of DM clusters.
 ---
 
-# DM Cluster Performance Test
+# DMクラスタのパフォーマンス テスト {#dm-cluster-performance-test}
 
-This document describes how to build a test scenario to do a performance test on the DM cluster, including the speed test and latency test regarding data migration.
+このドキュメントでは、データ移行に関する速度テストとレイテンシーテストを含む、DM クラスターでパフォーマンス テストを行うためのテスト シナリオを構築する方法について説明します。
 
-## Migration data flow
+## 移行データ フロー {#migration-data-flow}
 
-You can use a simple migration data flow, that is, MySQL -> DM -> TiDB, to test the data migration performance of the DM cluster.
+MySQL -&gt; DM -&gt; TiDB という単純な移行データ フローを使用して、DM クラスターのデータ移行パフォーマンスをテストできます。
 
-## Deploy test environment
+## テスト環境をデプロイ {#deploy-test-environment}
 
-- Deploy the TiDB test cluster using TiUP, with all default configurations.
-- Deploy the MySQL service. Enable the `ROW` mode for binlog, and use default configurations for other configuration items.
-- Deploy a DM cluster, with a DM-worker and a DM-master.
+-   すべてのデフォルト構成でTiUPを使用して TiDB テスト クラスターをデプロイします。
+-   MySQL サービスをデプロイします。 binlog の`ROW`モードを有効にし、他の構成項目には既定の構成を使用します。
+-   DM-worker と DM-master を使用して DM クラスターをデプロイします。
 
-## Performance test
+## 性能テスト {#performance-test}
 
-### Table schema
+### テーブル スキーマ {#table-schema}
 
-Use tables with the following schema for the performance test:
+パフォーマンス テストには、次のスキーマを持つテーブルを使用します。
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 CREATE TABLE `sbtest` (
@@ -36,132 +36,132 @@ CREATE TABLE `sbtest` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin
 ```
 
-### Full import benchmark case
+### 全輸入ベンチマークケース {#full-import-benchmark-case}
 
-#### Generate test data
+#### テストデータの生成 {#generate-test-data}
 
-Use `sysbench` to create test tables upstream and generate test data for full import. Execute the following `sysbench` command to generate test data:
+アップストリームでテスト テーブルを作成し、フル インポート用のテスト データを生成するには、 `sysbench`を使用します。次の`sysbench`のコマンドを実行して、テスト データを生成します。
 
-{{< copyable "shell-regular" >}}
+{{< copyable "" >}}
 
 ```bash
 sysbench --test=oltp_insert --tables=4 --mysql-host=172.16.4.40 --mysql-port=3306 --mysql-user=root --mysql-db=dm_benchmark --db-driver=mysql --table-size=50000000 prepare
 ```
 
-#### Create a data migration task
+#### データ移行タスクを作成する {#create-a-data-migration-task}
 
-1. Create an upstream MySQL source and set `source-id` to `source-1`. For details, see [Load the Data Source Configurations](/dm/dm-manage-source.md#operate-data-source).
+1.  アップストリーム MySQL ソースを作成し、 `source-id`から`source-1`を設定します。詳細については、 [データ ソース構成の読み込み](/dm/dm-manage-source.md#operate-data-source)を参照してください。
 
-2. Create a migration task (in `full` mode). The following is a task configuration template:
+2.  移行タスクを作成します ( `full`モード)。以下は、タスク構成テンプレートです。
 
-  ```yaml
-  ---
-  name: test-full
-  task-mode: full
+```yaml
+---
+name: test-full
+task-mode: full
 
-  # Configure the migration task using the TiDB information of your actual test environment.
-  target-database:
-    host: "192.168.0.1"
-    port: 4000
-    user: "root"
-    password: ""
+# Configure the migration task using the TiDB information of your actual test environment.
+target-database:
+  host: "192.168.0.1"
+  port: 4000
+  user: "root"
+  password: ""
 
-  mysql-instances:
-    -
-      source-id: "source-1"
-      block-allow-list:  "instance"
-      mydumper-config-name: "global"
-      loader-thread: 16
+mysql-instances:
+  -
+    source-id: "source-1"
+    block-allow-list:  "instance"
+    mydumper-config-name: "global"
+    loader-thread: 16
 
-  # Configure the name of the database where sysbench generates data.
-  block-allow-list:
-    instance:
-      do-dbs: ["dm_benchmark"]
+# Configure the name of the database where sysbench generates data.
+block-allow-list:
+  instance:
+    do-dbs: ["dm_benchmark"]
 
-  mydumpers:
-    global:
-      rows: 32000
-      threads: 32
-  ```
+mydumpers:
+  global:
+    rows: 32000
+    threads: 32
+```
 
-For details about how to create a migration task, see [Create a Data Migration Task](/dm/dm-create-task.md).
+移行タスクの作成方法の詳細については、 [データ移行タスクの作成](/dm/dm-create-task.md)を参照してください。
 
-> **Note:**
+> **ノート：**
 >
-> - To enable concurrently exporting data from a single table using multi-thread, you can use the `rows` option in the `mydumpers` configuration item. This speeds up data export.
-> - To test the performance under different configurations, you can tune `loader-thread` in the `mysql-instances` configuration, as well as `rows` and `threads` in the `mydumpers` configuration item.
+> -   マルチスレッドを使用して単一のテーブルから同時にデータをエクスポートできるようにするには、 `mydumpers`構成項目で`rows`オプションを使用できます。これにより、データのエクスポートが高速化されます。
+> -   異なる構成でパフォーマンスをテストするには、構成`mysql-instances`で`loader-thread`を調整し、構成`mydumpers`で`rows`と`threads`を調整します。
 
-#### Get test results
+#### テスト結果を取得する {#get-test-results}
 
-Observe the DM-worker log. When you see `all data files have been finished`, it means that full data has been imported. In this case, you can see the time consumed to import data. The sample log is as follows:
+DM-worker ログを観察します。 `all data files have been finished`が表示された場合、完全なデータがインポートされたことを意味します。この場合、データのインポートにかかった時間を確認できます。サンプル ログは次のとおりです。
 
 ```
  [INFO] [loader.go:604] ["all data files have been finished"] [task=test] [unit=load] ["cost time"=52.439796ms]
 ```
 
-According to the size of the test data and the time consumed to import data, you can calculate the migration speed of the full data.
+テスト データのサイズとデータのインポートにかかる時間に応じて、完全なデータの移行速度を計算できます。
 
-### Incremental replication benchmark case
+### 増分レプリケーションのベンチマーク ケース {#incremental-replication-benchmark-case}
 
-#### Initialize tables
+#### テーブルの初期化 {#initialize-tables}
 
-Use `sysbench` to create test tables in the upstream.
+アップストリームでテスト テーブルを作成するには、 `sysbench`を使用します。
 
-#### Create a data migration task
+#### データ移行タスクを作成する {#create-a-data-migration-task}
 
-1. Create the source of the upstream MySQL. Set `source-id` to `source-1` (if the source has been created in the [full import benchmark case](#full-import-benchmark-case), you do not need to create it again). For details, see [Load the Data Source Configurations](/dm/dm-manage-source.md#operate-data-source).
+1.  アップストリーム MySQL のソースを作成します。 `source-id` ～ `source-1`を設定します（ [全輸入ベンチマークケース](#full-import-benchmark-case)でソースを作成した場合は、再度作成する必要はありません）。詳細については、 [データ ソース構成のロード](/dm/dm-manage-source.md#operate-data-source)を参照してください。
 
-2. Create a DM migration task (in `all` mode). The following is an example of the task configuration file:
+2.  DM 移行タスクを作成します ( `all`モードで)。以下は、タスク構成ファイルの例です。
 
-  ```yaml
-  ---
-  name: test-all
-  task-mode: all
+```yaml
+---
+name: test-all
+task-mode: all
 
-  # Configure the migration task using the TiDB information of your actual test environment.
-  target-database:
-    host: "192.168.0.1"
-    port: 4000
-    user: "root"
-    password: ""
+# Configure the migration task using the TiDB information of your actual test environment.
+target-database:
+  host: "192.168.0.1"
+  port: 4000
+  user: "root"
+  password: ""
 
-  mysql-instances:
-    -
-      source-id: "source-1"
-      block-allow-list:  "instance"
-      syncer-config-name: "global"
+mysql-instances:
+  -
+    source-id: "source-1"
+    block-allow-list:  "instance"
+    syncer-config-name: "global"
 
-  # Configure the name of the database where sysbench generates data.
-  block-allow-list:
-    instance:
-      do-dbs: ["dm_benchmark"]
+# Configure the name of the database where sysbench generates data.
+block-allow-list:
+  instance:
+    do-dbs: ["dm_benchmark"]
 
-  syncers:
-    global:
-      worker-count: 16
-      batch: 100
-  ```
+syncers:
+  global:
+    worker-count: 16
+    batch: 100
+```
 
-For details about how to create a data migration task, see [Create a Data Migration Task](/dm/dm-create-task.md).
+データ移行タスクの作成方法の詳細については、 [データ移行タスクの作成](/dm/dm-create-task.md)を参照してください。
 
-> **Note:**
+> **ノート：**
 >
-> To test the performance under different configurations, you can tune `worker-count` and `batch` in the `syncers` configuration item.
+> 異なる構成でパフォーマンスをテストするには、構成項目`syncers`の`worker-count`と`batch`を調整します。
 
-#### Generate incremental data
+#### 増分データの生成 {#generate-incremental-data}
 
-To continuously generate incremental data in the upstream, run the `sysbench` command:
+アップストリームで増分データを継続的に生成するには、次の`sysbench`コマンドを実行します。
 
-{{< copyable "shell-regular" >}}
+{{< copyable "" >}}
 
 ```bash
 sysbench --test=oltp_insert --tables=4 --num-threads=32 --mysql-host=172.17.4.40 --mysql-port=3306 --mysql-user=root --mysql-db=dm_benchmark --db-driver=mysql --report-interval=10 --time=1800 run
 ```
 
-> **Note:**
+> **ノート：**
 >
-> You can test the data migration performance under different scenarios by using different `sysbench` statements.
+> さまざまな`sysbench`ステートメントを使用して、さまざまなシナリオでデータ移行のパフォーマンスをテストできます。
 
-#### Get test results
+#### テスト結果を取得する {#get-test-results}
 
-To observe the migration status of DM, you can run the `query-status` command. To observe the monitoring metrics of DM, you can use Grafana. Here the monitoring metrics refer to `finished sqls jobs` (the number of jobs finished per unit time), and other related metrics. For more information, see [Binlog Migration Monitoring Metrics](/dm/monitor-a-dm-cluster.md#binlog-replication).
+DM の移行ステータスを確認するには、 `query-status`コマンドを実行します。 DM のモニタリング メトリックを観察するには、Grafana を使用できます。ここでの監視メトリックは、 `finished sqls jobs` (単位時間あたりに終了したジョブの数) およびその他の関連するメトリックを参照します。詳細については、 [Binlog移行の監視メトリクス](/dm/monitor-a-dm-cluster.md#binlog-replication)を参照してください。

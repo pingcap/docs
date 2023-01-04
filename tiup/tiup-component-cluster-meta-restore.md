@@ -2,33 +2,33 @@
 title: tiup cluster meta restore
 ---
 
-# tiup cluster meta restore
+# tiup クラスタ メタ リストア {#tiup-cluster-meta-restore}
 
-To restore the TiUP meta file, you can use the `tiup cluster meta restore` command to restore from the backup file.
+TiUPメタ ファイルを復元するには、 `tiup cluster meta restore`コマンドを使用してバックアップ ファイルから復元します。
 
-## Syntax
+## 構文 {#syntax}
 
 ```shell
 tiup cluster meta restore <cluster-name> <backup-file> [flags]
 ```
 
-- `<cluster-name>` is the name of the cluster to be operated on.
-- `<backup-file>` is the path to the TiUP meta backup file.
+-   `<cluster-name>`は操作対象のクラスターの名前です。
+-   `<backup-file>`は、 TiUPメタ バックアップ ファイルへのパスです。
 
-> **Note:**
+> **ノート：**
 >
-> The restore operation overwrites the current meta file. It is recommended to restore the meta file only when it is lost.
+> 復元操作は、現在のメタ ファイルを上書きします。メタ ファイルは、失われた場合にのみ復元することをお勧めします。
 
-## Options
+## オプション {#options}
 
-### -h, --help
+### -h, --help {#h-help}
 
-- Prints the help information.
-- Data type: `Boolean`
-- This option is disabled by default and its default value is `false`. To enable this option, you can add this option to the command, and pass the `true` value or do not pass any value.
+-   ヘルプ情報を出力します。
+-   データ型: `Boolean`
+-   このオプションはデフォルトで無効になっており、デフォルト値は`false`です。このオプションを有効にするには、このオプションをコマンドに追加して、値`true`を渡すか、値を何も渡さないようにします。
 
-## Output
+## 出力 {#output}
 
-The execution logs of tiup-cluster.
+tiup-clusterの実行ログ。
 
-[<< Back to the previous page - TiUP Cluster command list](/tiup/tiup-component-cluster.md#command-list)
+[&lt;&lt; 前のページに戻る - TiUP クラスタコマンド一覧](/tiup/tiup-component-cluster.md#command-list)

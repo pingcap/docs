@@ -3,16 +3,16 @@ title: High Availability FAQs
 summary: Learn about the FAQs related to high availability of TiDB.
 ---
 
-# High Availability FAQs
+# 高可用性に関するよくある質問 {#high-availability-faqs}
 
-This document summarizes the FAQs related to high availability of TiDB.
+このドキュメントは、TiDB の高可用性に関する FAQ をまとめたものです。
 
-## How is TiDB strongly consistent?
+## TiDB の強整合性はどのようになっていますか? {#how-is-tidb-strongly-consistent}
 
-Data is redundantly replicated between TiKV nodes using the [Raft consensus algorithm](https://raft.github.io/) to ensure recoverability when a node failure occurs.
+ノード障害が発生した場合の回復可能性を確保するために、データは[Raftコンセンサスアルゴリズム](https://raft.github.io/)を使用して TiKV ノード間で冗長的に複製されます。
 
-At the bottom layer, TiKV uses a model of replication log + State Machine to replicate data. For the write requests, the data is written to a Leader and the Leader then replicates the command to its Followers in the form of log. When the majority of nodes in the cluster receive this log, this log is committed and can be applied into the State Machine.
+最レイヤーでは、TiKV はレプリケーション ログ + ステート マシンのモデルを使用してデータをレプリケートします。書き込みリクエストの場合、データはLeaderに書き込まれ、Leaderはコマンドをログの形式でフォロワーに複製します。クラスタ内の大部分のノードがこのログを受信すると、このログがコミットされ、ステート マシンに適用できます。
 
-## What's the recommended solution for the deployment of three geo-distributed data centers?
+## 地理的に分散した 3 つのデータ センターの展開に推奨されるソリューションは何ですか? {#what-s-the-recommended-solution-for-the-deployment-of-three-geo-distributed-data-centers}
 
-The architecture of TiDB guarantees that it fully supports geo-distribution and multi-activeness. Your data and applications are always-on. All the outages are transparent to your applications and your data can recover automatically. The operation depends on the network latency and stability. It is recommended to keep the latency within 5ms. Currently, TiDB already has similar use cases. For details, see [Three Data Centers in Two Cities Deployment](/three-data-centers-in-two-cities-deployment.md).
+TiDB のアーキテクチャは、地理的分散とマルチアクティブ性を完全にサポートすることを保証します。データとアプリケーションは常時稼働しています。すべての停止はアプリケーションに対して透過的であり、データは自動的に回復できます。操作は、ネットワークのレイテンシーと安定性に依存します。レイテンシーを 5 ミリ秒以内に保つことをお勧めします。現在、TiDB にはすでに同様のユースケースがあります。詳細については、 [2 つの都市に配置された 3 つのデータ センター](/three-data-centers-in-two-cities-deployment.md)を参照してください。

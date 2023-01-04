@@ -3,146 +3,147 @@ title: TiDB Tools Overview
 summary: Learn the tools and applicable scenarios.
 ---
 
-# TiDB Tools Overview
+# TiDB ツールの概要 {#tidb-tools-overview}
 
-TiDB provides a rich set of tools to help you deploy and maintain TiDB, manage data (such as data migration, backup & restore, and data comparison), and run Spark SQL on TiKV. You can select the applicable tools according to your needs.
+TiDB は、TiDB のデプロイと保守、データの管理 (データ移行、バックアップと復元、データ比較など)、および TiKV での Spark SQL の実行に役立つ豊富なツール セットを提供します。必要に応じて適切なツールを選択できます。
 
-## Deployment and operation Tools
+## 導入および運用ツール {#deployment-and-operation-tools}
 
-TiDB provides TiUP and TiDB Operator to meet your deployment and operation needs in different system environments.
+TiDB は、さまざまなシステム環境での展開と運用のニーズを満たすために、 TiUPとTiDB Operatorを提供します。
 
-### Deploy and operate TiDB on physical or virtual machines - TiUP
+### TiDB を物理マシンまたは仮想マシンにデプロイして操作する - TiUP {#deploy-and-operate-tidb-on-physical-or-virtual-machines-tiup}
 
-[TiUP](/tiup/tiup-overview.md) is a TiDB package manager on physical or virtual machines. TiUP can manage multiple TiDB components such as TiDB, PD, and TiKV. To start any component in the TiDB ecosystem, you just need to execute a single line of TiUP command.
+[TiUP](/tiup/tiup-overview.md)は、物理マシンまたは仮想マシン上の TiDB パッケージ マネージャーです。 TiUPは、TiDB、PD、TiKV などの複数の TiDB コンポーネントを管理できます。 TiDB エコシステムのコンポーネントを開始するには、 TiUPコマンドを 1 行実行するだけです。
 
-TiUP provides [TiUP cluster](https://github.com/pingcap/tiup/tree/master/components/cluster), a cluster management component written in Golang. By using TiUP cluster, you can easily perform daily database operations, including deploying, starting, stopping, destroying, scaling, and upgrading a TiDB cluster, and manage TiDB cluster parameters.
+TiUPは、 Golangで記述されたクラスター管理コンポーネント[TiUPクラスター](https://github.com/pingcap/tiup/tree/master/components/cluster)を提供します。 TiUPクラスターを使用すると、TiDB クラスターのデプロイ、開始、停止、破棄、スケーリング、およびアップグレードを含む日常のデータベース操作を簡単に実行し、TiDB クラスターのパラメーターを管理できます。
 
-The following are the basics of TiUP:
+TiUPの基本は次のとおりです。
 
-- [Terminology and Concepts](/tiup/tiup-terminology-and-concepts.md)
-- [Deploy a TiDB Cluster Using TiUP](/production-deployment-using-tiup.md)
-- [Manage TiUP Components with TiUP Commands](/tiup/tiup-component-management.md)
-- Applicable TiDB versions: v4.0 and later versions
+-   [用語と概念](/tiup/tiup-terminology-and-concepts.md)
+-   [TiUP を使用してTiUPクラスタをデプロイする](/production-deployment-using-tiup.md)
+-   [TiUPコマンドでTiUPコンポーネントを管理する](/tiup/tiup-component-management.md)
+-   該当する TiDB バージョン: v4.0 以降のバージョン
 
-### Deploy and operate TiDB on Kubernetes - TiDB Operator
+### TiDB を Kubernetes にデプロイして運用する - TiDB Operator {#deploy-and-operate-tidb-on-kubernetes-tidb-operator}
 
-[TiDB Operator](https://github.com/pingcap/tidb-operator) is an automatic operation system for managing TiDB clusters on Kubernetes. It provides full life-cycle management for TiDB including deployment, upgrades, scaling, backup, and configuration changes. With TiDB Operator, TiDB can run seamlessly in the Kubernetes clusters deployed on a public or private cloud.
+[TiDB Operator](https://github.com/pingcap/tidb-operator)は、Kubernetes 上の TiDB クラスターを管理するための自動運用システムです。展開、アップグレード、スケーリング、バックアップ、および構成変更を含む、TiDB の完全なライフサイクル管理を提供します。 TiDB Operatorを使用すると、パブリック クラウドまたはプライベート クラウドにデプロイされた Kubernetes クラスターで TiDB をシームレスに実行できます。
 
-The following are the basics of TiDB Operator:
+TiDB Operatorの基本は次のとおりです。
 
-- [TiDB Operator Architecture](https://docs.pingcap.com/tidb-in-kubernetes/stable/architecture)
-- [Get Started with TiDB Operator on Kubernetes](https://docs.pingcap.com/tidb-in-kubernetes/stable/get-started/)
-- Applicable TiDB versions: v2.1 and later versions
+-   [TiDB Operatorのアーキテクチャ](https://docs.pingcap.com/tidb-in-kubernetes/stable/architecture)
+-   [Kubernetes でTiDB Operatorを使い始める](https://docs.pingcap.com/tidb-in-kubernetes/stable/get-started/)
+-   該当する TiDB バージョン: v2.1 以降のバージョン
 
-## Data management tools
+## データ管理ツール {#data-management-tools}
 
- TiDB provides multiple data management tools, such as import and export, backup and restore, incremental data replication, and data validation.
+TiDB は、インポートとエクスポート、バックアップと復元、増分データ複製、データ検証など、複数のデータ管理ツールを提供します。
 
-### Data migration - TiDB Data Migration (DM)
+### データ移行 - TiDB データ移行 (DM) {#data-migration-tidb-data-migration-dm}
 
-[TiDB Data Migration](/dm/dm-overview.md) (DM) is a tool that supports full data migration and incremental data replication from MySQL/MariaDB to TiDB.
+[TiDB データ移行](/dm/dm-overview.md) (DM) は、MySQL/MariaDB から TiDB への完全なデータ移行と増分データ レプリケーションをサポートするツールです。
 
-The following are the basics of DM:
+DMの基本は以下の通りです。
 
-- Source: MySQL/MariaDB
-- Target: TiDB clusters
-- Supported TiDB versions: all versions
-- Kubernetes support: use [TiDB Operator](https://github.com/pingcap/tidb-operator) to deploy TiDB DM on Kubernetes.
+-   ソース: MySQL/MariaDB
+-   ターゲット: TiDB クラスター
+-   サポートされている TiDB バージョン: すべてのバージョン
+-   Kubernetes サポート: [TiDB Operator](https://github.com/pingcap/tidb-operator)を使用して、TiDB DM を Kubernetes にデプロイします。
 
-If the data volume is less than 1 TB, it is recommended to migrate data from MySQL/MariaDB to TiDB directly using DM. The migration process includes full data migration and incremental data replication.
+データ量が 1 TB 未満の場合は、DM を使用して直接 MySQL/MariaDB から TiDB にデータを移行することをお勧めします。移行プロセスには、完全なデータ移行と増分データ レプリケーションが含まれます。
 
-If the data volume is greater than 1 TB , take the following steps:
+データ ボリュームが 1 TB を超える場合は、次の手順を実行します。
 
-1. Use [Dumpling](/dumpling-overview.md) to export the full data from MySQL/MariaDB.
-2. Use [TiDB Lightning](/tidb-lightning/tidb-lightning-overview.md) to import the data exported in Step 1 to the TiDB cluster.
-3. Use TiDB DM to replicate the incremental data from MySQL/MariaDB to TiDB.
+1.  [Dumpling](/dumpling-overview.md)を使用して、MySQL/MariaDB から完全なデータをエクスポートします。
+2.  [TiDB Lightning](/tidb-lightning/tidb-lightning-overview.md)を使用して、手順 1 でエクスポートしたデータを TiDB クラスターにインポートします。
+3.  TiDB DM を使用して、MySQL/MariaDB から TiDB に増分データを複製します。
 
-> **Note:**
+> **ノート：**
 >
-> The Syncer tool is no longer maintained. For scenarios related to Syncer, it is recommended that you use DM to perform incremental replication.
+> Syncer ツールはメンテナンスされなくなりました。 Syncer に関連するシナリオでは、DM を使用して増分レプリケーションを実行することをお勧めします。
 
-### Full data export - Dumpling
+### 完全なデータ エクスポート -Dumpling {#full-data-export-dumpling}
 
-[Dumpling](/dumpling-overview.md) supports logical full data export from MySQL or TiDB.
+[Dumpling](/dumpling-overview.md)は、MySQL または TiDB からの論理フル データ エクスポートをサポートします。
 
-The following are the basics of Dumpling:
+Dumplingの基本は次のとおりです。
 
-- Source: MySQL/TiDB clusters
-- Output: SQL/CSV files
-- Supported TiDB versions: all versions
-- Kubernetes support: No
+-   出典: MySQL/TiDB クラスター
+-   出力: SQL/CSV ファイル
+-   サポートされている TiDB バージョン: すべてのバージョン
+-   Kubernetes のサポート: いいえ
 
-> **Note:**
+> **ノート：**
 >
-> PingCAP previously maintained a fork of the [mydumper project](https://github.com/maxbube/mydumper) with enhancements specific to TiDB. This fork has since been replaced by [Dumpling](/dumpling-overview.md), which has been rewritten in Golang, and provides more optimizations specific to TiDB. It is strongly recommended that you use Dumpling instead of mydumper.
+> PingCAP は以前、TiDB に固有の拡張機能を備えた[mydumper プロジェクト](https://github.com/maxbube/mydumper)のフォークを維持していました。このフォークは、 Golangで書き直された[Dumpling](/dumpling-overview.md)に置き換えられ、TiDB に固有の最適化をさらに提供します。 mydumper の代わりにDumplingを使用することを強くお勧めします。
 
-### Full data import - TiDB Lightning
+### 完全なデータのインポート - TiDB Lightning {#full-data-import-tidb-lightning}
 
-[TiDB Lightning](/tidb-lightning/tidb-lightning-overview.md) supports full data import of a large dataset into a TiDB cluster.
+[TiDB Lightning](/tidb-lightning/tidb-lightning-overview.md)は、TiDB クラスターへの大規模なデータセットの完全なデータ インポートをサポートします。
 
-TiDB Lightning supports the following modes:
+TiDB Lightningは次のモードをサポートしています。
 
-- `Physical Import Mode`: TiDB Lightning parses data into ordered key-value pairs and directly imports them into TiKV. This mode is usually for importing a large amount of data (at the TB level) to a new cluster. During the import, the cluster cannot provide services.
-- `Logical Import Mode`: This mode uses TiDB/MySQL as the backend, which is slower than the `Physical Import Mode` but can be performed online. It also supports importing data to MySQL.
+-   `Physical Import Mode` : TiDB Lightningはデータを順序付けられたキーと値のペアに解析し、TiKV に直接インポートします。このモードは通常、大量のデータ (TB レベル) を新しいクラスターにインポートするためのものです。インポート中、クラスターはサービスを提供できません。
+-   `Logical Import Mode` : このモードは、TiDB/MySQL をバックエンドとして使用します。これは`Physical Import Mode`よりも低速ですが、オンラインで実行できます。また、MySQL へのデータのインポートもサポートしています。
 
-The following are the basics of TiDB Lightning:
+TiDB Lightningの基本は次のとおりです。
 
-- Data source:
-    - The output files of Dumpling
-    - Other compatible CSV files
-    - Parquet files exported from Amazon Aurora or Apache Hive
-- Supported TiDB versions: v2.1 and later versions
-- Kubernetes support: Yes. See [Quickly restore data into a TiDB cluster on Kubernetes using TiDB Lightning](https://docs.pingcap.com/tidb-in-kubernetes/stable/restore-data-using-tidb-lightning) for details.
+-   情報元：
+    -   Dumplingの出力ファイル
+    -   その他の互換性のある CSV ファイル
+    -   Amazon Auroraまたは Apache Hive からエクスポートされた Parquet ファイル
+-   サポートされている TiDB バージョン: v2.1 以降のバージョン
+-   Kubernetes のサポート: はい。詳細は[TiDB Lightningを使用して、Kubernetes 上の TiDB クラスターにデータをすばやく復元する](https://docs.pingcap.com/tidb-in-kubernetes/stable/restore-data-using-tidb-lightning)を参照してください。
 
-> **Note:**
+> **ノート：**
 >
-> The Loader tool is no longer maintained. For scenarios related to Loader, it is recommended that you use `Logical Import Mode` instead.
+> ローダー ツールはメンテナンスされなくなりました。ローダーに関連するシナリオでは、代わりに`Logical Import Mode`を使用することをお勧めします。
 
-### Backup and restore - Backup & Restore (BR)
+### バックアップと復元 - バックアップと復元 (BR) {#backup-and-restore-backup-x26-restore-br}
 
-[Backup & Restore](/br/backup-and-restore-overview.md) (BR) is a command-line tool for distributed backup and restore of the TiDB cluster data. BR can effectively back up and restore TiDB clusters of huge data volume.
+[復元する](/br/backup-and-restore-overview.md) (BR) は、TiDB クラスター データの分散バックアップおよび復元用のコマンド ライン ツールです。 BRは、膨大なデータ量の TiDB クラスターを効果的にバックアップおよび復元できます。
 
-The following are the basics of BR:
+BRの基本は次のとおりです。
 
-- Input and output data source
+-   入力および出力データ ソース
 
-    - Snapshot backup and restore: [SST + `backupmeta` file](/br/br-snapshot-architecture.md#backup-files)
-    - Log backup and PITR: [Log backup files](/br/br-log-architecture.md#log-backup-files)
+    -   スナップショットのバックアップと復元: [SST + `backupmeta`ファイル](/br/br-snapshot-architecture.md#backup-files)
+    -   ログのバックアップと PITR: [ログ バックアップ ファイル](/br/br-log-architecture.md#log-backup-files)
 
-- Supported TiDB versions: v4.0 and later versions
-- Kubernetes support: Yes. See [Back up Data to S3-Compatible Storage Using BR](https://docs.pingcap.com/tidb-in-kubernetes/stable/backup-to-aws-s3-using-br) and [Restore Data from S3-Compatible Storage Using BR](https://docs.pingcap.com/tidb-in-kubernetes/stable/restore-from-aws-s3-using-br) for details.
+-   サポートされている TiDB バージョン: v4.0 以降のバージョン
 
-### Incremental data replication - TiCDC
+-   Kubernetes のサポート: はい。詳細については、 [BRを使用して S3 互換ストレージにデータをバックアップする](https://docs.pingcap.com/tidb-in-kubernetes/stable/backup-to-aws-s3-using-br)と[BRを使用して S3 互換ストレージからデータを復元する](https://docs.pingcap.com/tidb-in-kubernetes/stable/restore-from-aws-s3-using-br)を参照してください。
 
-[TiCDC](/ticdc/ticdc-overview.md) is a tool used for replicating incremental data of TiDB by pulling change logs from TiKV. It can restore data to a state consistent with any TSO in upstream. TiCDC also provides the TiCDC Open Protocol to support other systems to subscribe to data changes.
+### 増分データ複製 - TiCDC {#incremental-data-replication-ticdc}
 
-The following are the basics of TiCDC:
+[TiCDC](/ticdc/ticdc-overview.md)は、TiKV から変更ログをプルして、TiDB の増分データを複製するために使用されるツールです。アップストリームの任意の TSO と一致する状態にデータを復元できます。 TiCDC は、データ変更をサブスクライブする他のシステムをサポートする TiCDC オープン プロトコルも提供します。
 
-- Source: TiDB clusters
-- Target: TiDB clusters, MySQL, Kafka, and Confluent
-- Supported TiDB versions: v4.0.6 and later versions
+TiCDC の基本は次のとおりです。
 
-### Incremental log replication - TiDB Binlog
+-   出典: TiDB クラスター
+-   ターゲット: TiDB クラスター、MySQL、Kafka、および Confluent
+-   サポートされている TiDB バージョン: v4.0.6 以降のバージョン
 
-[TiDB Binlog](/tidb-binlog/tidb-binlog-overview.md) is a tool that collects binlog for TiDB clusters and provides nearly real-time data replication and backup. You can use it for incremental data replication between TiDB clusters, such as making a TiDB cluster the secondary cluster of the primary TiDB cluster.
+### 増分ログ レプリケーション - TiDB Binlog {#incremental-log-replication-tidb-binlog}
 
-The following are the basics of TiDB Binlog:
+[Binlog](/tidb-binlog/tidb-binlog-overview.md)は、TiDB クラスターの binlog を収集し、ほぼリアルタイムのデータ複製とバックアップを提供するツールです。 TiDB クラスタをプライマリ TiDB クラスタのセカンダリ クラスタにするなど、TiDB クラスタ間の増分データ レプリケーションに使用できます。
 
-- Source: TiDB clusters
-- Target: TiDB clusters, MySQL, Kafka, or incremental backup files
-- Supported TiDB versions: v2.1 and later versions
-- Kubernetes support: Yes. See [TiDB Binlog Cluster Operations](https://docs.pingcap.com/tidb-in-kubernetes/stable/deploy-tidb-binlog) and [TiDB Binlog Drainer Configurations on Kubernetes](https://docs.pingcap.com/tidb-in-kubernetes/stable/configure-tidb-binlog-drainer) for details.
+TiDB Binlogの基本は次のとおりです。
 
-### sync-diff-inspector
+-   出典: TiDB クラスター
+-   ターゲット: TiDB クラスター、MySQL、Kafka、または増分バックアップ ファイル
+-   サポートされている TiDB バージョン: v2.1 以降のバージョン
+-   Kubernetes のサポート: はい。詳細については、 [TiDB Binlogクラスタの操作](https://docs.pingcap.com/tidb-in-kubernetes/stable/deploy-tidb-binlog)と[Kubernetes での TiDB BinlogDrainer](https://docs.pingcap.com/tidb-in-kubernetes/stable/configure-tidb-binlog-drainer)を参照してください。
 
-[sync-diff-inspector](/sync-diff-inspector/sync-diff-inspector-overview.md) is a tool that compares data stored in the MySQL or TiDB databases. In addition, you can also use sync-diff-inspector to repair data in the scenario where a small amount of data is inconsistent.
+### 同期差分インスペクター {#sync-diff-inspector}
 
-The following are the basics of sync-diff-inspector:
+[同期差分インスペクター](/sync-diff-inspector/sync-diff-inspector-overview.md)は、MySQL または TiDB データベースに保存されているデータを比較するツールです。さらに、sync-diff-inspector を使用して、少量のデータに一貫性がないシナリオでデータを修復することもできます。
 
-- Source: MySQL/TiDB clusters
-- Target: MySQL/TiDB clusters
-- Supported TiDB versions: all versions
+以下は、sync-diff-inspector の基本です。
 
-## OLAP Query tool - TiSpark
+-   出典: MySQL/TiDB クラスター
+-   ターゲット: MySQL/TiDB クラスター
+-   サポートされている TiDB バージョン: すべてのバージョン
 
-[TiSpark](/tispark-overview.md) is a product developed by PingCAP to address the complexiy of OLAP queries. It combines strengths of Spark, and the features of distributed TiKV clusters and TiDB to provide a one-stop Hybrid Transactional and Analytical Processing (HTAP) solution.
+## OLAP クエリ ツール - TiSpark {#olap-query-tool-tispark}
+
+[ティスパーク](/tispark-overview.md)は、複雑な OLAP クエリに対処するために PingCAP によって開発された製品です。 Spark の強みと、分散型 TiKV クラスターおよび TiDB の機能を組み合わせて、ワンストップのハイブリッド トランザクションおよび分析処理 (HTAP) ソリューションを提供します。

@@ -3,297 +3,297 @@ title: PD Scheduling Best Practices
 summary: Learn best practice and strategy for PD scheduling.
 ---
 
-# PD Scheduling Best Practices
+# PD スケジューリングのベスト プラクティス {#pd-scheduling-best-practices}
 
-This document details the principles and strategies of PD scheduling through common scenarios to facilitate your application. This document assumes that you have a basic understanding of TiDB, TiKV and PD with the following core concepts:
+このドキュメントでは、アプリケーションを容易にするために、一般的なシナリオを通じて PD スケジューリングの原則と戦略について詳しく説明します。このドキュメントは、TiDB、TiKV、および PD の基本的な知識があり、次の中心的な概念があることを前提としています。
 
-- [leader/follower/learner](/glossary.md#leaderfollowerlearner)
-- [operator](/glossary.md#operator)
-- [operator step](/glossary.md#operator-step)
-- [pending/down](/glossary.md#pendingdown)
-- [region/peer/Raft group](/glossary.md#regionpeerraft-group)
-- [region split](/glossary.md#region-split)
-- [scheduler](/glossary.md#scheduler)
-- [store](/glossary.md#store)
+-   [リーダー/フォロワー/学習者](/glossary.md#leaderfollowerlearner)
+-   [オペレーター](/glossary.md#operator)
+-   [オペレーターステップ](/glossary.md#operator-step)
+-   [保留中/ダウン](/glossary.md#pendingdown)
+-   [地域/ピア/Raftグループ](/glossary.md#regionpeerraft-group)
+-   [リージョン分割](/glossary.md#region-split)
+-   [スケジューラー](/glossary.md#scheduler)
+-   [お店](/glossary.md#store)
 
-> **Note:**
+> **ノート：**
 >
-> This document initially targets TiDB 3.0. Although some features are not supported in earlier versions (2.x), the underlying mechanisms are similar and this document can still be used as a reference.
+> このドキュメントは、最初は TiDB 3.0 を対象としています。一部の機能は以前のバージョン (2.x) ではサポートされていませんが、基本的なメカニズムは類似しており、このドキュメントは参照として引き続き使用できます。
 
-## PD scheduling policies
+## PD スケジューリング ポリシー {#pd-scheduling-policies}
 
-This section introduces the principles and processes involved in the scheduling system.
+このセクションでは、スケジューリング システムに関連する原則とプロセスを紹介します。
 
-### Scheduling process
+### スケジューリングプロセス {#scheduling-process}
 
-The scheduling process generally has three steps:
+スケジューリング プロセスには、通常、次の 3 つの手順があります。
 
-1. Collect information
+1.  情報を収集する
 
-    Each TiKV node periodically reports two types of heartbeats to PD:
+    各 TiKV ノードは定期的に 2 種類のハートビートを PD に報告します。
 
-    - `StoreHeartbeat`: Contains the overall information of stores, including disk capacity, available storage, and read/write traffic
-    - `RegionHeartbeat`: Contains the overall information of regions, including the range of each region, peer distribution, peer status, data volume, and read/write traffic
+    -   `StoreHeartbeat` : ディスク容量、使用可能なストレージ、読み取り/書き込みトラフィックなど、ストアの全体的な情報が含まれます
+    -   `RegionHeartbeat` : 各リージョンの範囲、ピアの分布、ピアのステータス、データ量、読み取り/書き込みトラフィックなど、リージョンの全体的な情報が含まれます
 
-    PD collects and restores this information for scheduling decisions.
+    PD は、スケジュール決定のためにこの情報を収集して復元します。
 
-2. Generate operators
+2.  オペレータの生成
 
-    Different schedulers generate the operators based on their own logic and requirements, with the following considerations:
+    さまざまなスケジューラーが独自のロジックと要件に基づいてオペレーターを生成しますが、次の考慮事項があります。
 
-     - Do not add peers to a store in abnormal states (disconnected, down, busy, low space)
-     - Do not balance regions in abnormal states
-     - Do not transfer a leader to a pending peer
-     - Do not remove a leader directly
-     - Do not break the physical isolation of various region peers
-     - Do not violate constraints such as label property
+    -   異常な状態 (切断、ダウン、ビジー、容量不足) のストアにピアを追加しないでください。
+    -   異常な状態の領域をバランスさせない
+    -   保留中のピアにリーダーを転送しない
+    -   引出線を直接削除しないでください
+    -   さまざまなリージョン ピアの物理的な分離を壊さないでください
+    -   ラベル プロパティなどの制約に違反しない
 
-3. Execute operators
+3.  オペレーターの実行
 
-    To execute the operators, the general procedure is:
+    演算子を実行するための一般的な手順は次のとおりです。
 
-    1. The generated operator first joins a queue managed by `OperatorController`.
+    1.  生成されたオペレーターは、最初に`OperatorController`によって管理されるキューに参加します。
 
-    2. `OperatorController` takes the operator out of the queue and executes it with a certain amount of concurrency based on the configuration. This step is to assign each operator step to the corresponding region leader.
+    2.  `OperatorController`は、オペレーターをキューから取り出し、構成に基づいて一定量の同時実行で実行します。このステップでは、各オペレーター ステップを対応する地域リーダーに割り当てます。
 
-    3. The operator is marked as "finish" or "timeout" and removed from the queue.
+    3.  オペレーターは「終了」または「タイムアウト」としてマークされ、キューから削除されます。
 
-### Load balancing
+### 負荷分散 {#load-balancing}
 
-Region primarily relies on `balance-leader` and `balance-region` schedulers to achieve load balance. Both schedulers target distributing regions evenly across all stores in the cluster but with separate focuses: `balance-leader` deals with region leader to balance incoming client requests, whereas `balance-region` concerns itself with each region peer to redistribute the pressure of storage and avoid exceptions like out of storage space.
+リージョンは、主に`balance-leader`または`balance-region`のスケジューラに依存して負荷分散を実現します。両方のスケジューラーは、クラスター内のすべてのストアに均等にリージョンを分散することをターゲットにして`balance-leader` `balance-region`が、別の焦点を当てています。 .
 
-`balance-leader` and `balance-region` share a similar scheduling process:
+`balance-leader`と`balance-region`は同様のスケジューリング プロセスを共有します。
 
-1. Rate stores according to their resource availability.
-2. `balance-leader` or `balance-region` constantly transfer leaders or peers from stores with high scores to those with low scores.
+1.  リソースの可用性に応じてストアを評価します。
+2.  `balance-leader`または`balance-region`は、スコアの高い店舗からスコアの低い店舗へリーダーまたはピアを常に移動させます。
 
-However, their rating methods are different. `balance-leader` uses the sum of all region sizes corresponding to leaders in a store, whereas the way of `balance-region` is relatively complicated. Depending on the specific storage capacity of each node, the rating method of `balance-region` might:
+ただし、評価方法は異なります。 `balance-leader`は店舗のリーダーに対応するすべての領域サイズの合計を使用しますが、 `balance-region`の方法は比較的複雑です。各ノードの特定のストレージ容量に応じて、評価方法`balance-region`は次のようになります。
 
-- based on the amount of data when there is sufficient storage (to balance data distribution among nodes).
-- based on the available storage when there is insufficient storage (to balance the storage availability on different nodes).
-- based on the weighted sum of the two factors above when neither of the situations applies.
+-   十分なストレージがある場合のデータ量に基づきます (ノード間のデータ分散のバランスを取るため)。
+-   ストレージが不十分な場合に使用可能なストレージに基づいて (異なるノードでストレージの可用性のバランスを取るため)。
+-   どちらの状況にも当てはまらない場合は、上記の 2 つの要因の加重合計に基づいています。
 
-Because different nodes might differ in performance, you can also set the weight of load balancing for different stores. `leader-weight` and `region-weight` are used to control the leader weight and region weight respectively ("1" by default for both). For example, when the `leader-weight` of a store is set to "2", the number of leaders on the node is about twice as many as that of other nodes after the scheduling stabilizes. Similarly, when the `leader-weight` of a store is set to "0.5", the number of leaders on the node is about half as many as that of other nodes.
+ノードによってパフォーマンスが異なる場合があるため、ストアごとに負荷分散の重みを設定することもできます。 `leader-weight`と`region-weight`は、リーダーの重みと領域の重みをそれぞれ制御するために使用されます (両方のデフォルトで「1」)。例えば、店舗の`leader-weight`を「2」に設定すると、スケジューリングが安定した後、そのノードのリーダーの数は他のノードの約 2 倍になります。同様に、ストアの`leader-weight`を「0.5」に設定すると、ノードのリーダーの数は他のノードの約半分になります。
 
-### Hot regions scheduling
+### ホット リージョンのスケジューリング {#hot-regions-scheduling}
 
-For hot regions scheduling, use `hot-region-scheduler`. Since TiDB v3.0, the process is performed as follows:
+ホット リージョンのスケジューリングには、 `hot-region-scheduler`を使用します。 TiDB v3.0 以降、プロセスは次のように実行されます。
 
-1. Count hot regions by determining read/write traffic that exceeds a certain threshold for a certain period based on the information reported by stores.
+1.  ストアから報告された情報に基づいて、特定の期間に特定のしきい値を超える読み取り/書き込みトラフィックを判断して、ホット リージョンをカウントします。
 
-2. Redistribute these regions in a similar way to load balancing.
+2.  ロード バランシングと同様の方法で、これらのリージョンを再配布します。
 
-For hot write regions, `hot-region-scheduler` attempts to redistribute both region peers and leaders; for hot read regions, `hot-region-scheduler` only redistributes region leaders.
+ホット ライト リージョンの場合、 `hot-region-scheduler`はリージョン ピアとリーダーの両方の再配布を試みます。ホット リード リージョンの場合、 `hot-region-scheduler`はリージョン リーダーのみを再配布します。
 
-### Cluster topology awareness
+### クラスタトポロジの認識 {#cluster-topology-awareness}
 
-Cluster topology awareness enables PD to distribute replicas of a region as much as possible. This is how TiKV ensures high availability and disaster recovery capability. PD continuously scans all regions in the background. When PD finds that the distribution of regions is not optimal, it generates an operator to replace peers and redistribute regions.
+クラスタトポロジの認識により、PD はリージョンのレプリカを可能な限り分散できます。これが、TiKV が高可用性と災害復旧機能を保証する方法です。 PD は、バックグラウンドですべての領域を継続的にスキャンします。 PD は、リージョンの分散が最適ではないことを検出すると、ピアを置き換えてリージョンを再分散する演算子を生成します。
 
-The component to check region distribution is `replicaChecker`, which is similar to a scheduler except that it cannot be disabled. `replicaChecker` schedules based on the the configuration of `location-labels`. For example, `[zone,rack,host]` defines a three-tier topology for a cluster. PD attempts to schedule region peers to different zones first, or to different racks when zones are insufficient (for example, 2 zones for 3 replicas), or to different hosts when racks are insufficient.
+リージョンの分散をチェックするコンポーネントは`replicaChecker`で、無効にできない点を除いてスケジューラに似ています。 `location-labels`の構成に基づく`replicaChecker`のスケジュール。たとえば、 `[zone,rack,host]`はクラスターの 3 層トポロジーを定義します。 PD は、リージョン ピアを最初に別のゾーンにスケジュールしようとします。ゾーンが不十分な場合は別のラックにスケジュールしようとします (たとえば、3 つのレプリカに対して 2 つのゾーン)。ラックが不十分な場合は別のホストにスケジュールしようとします。
 
-### Scale-down and failure recovery
+### スケールダウンと障害復旧 {#scale-down-and-failure-recovery}
 
-Scale-down refers to the process when you take a store offline and mark it as "offline" using a command. PD replicates the regions on the offline node to other nodes by scheduling. Failure recovery applies when stores failed and cannot be recovered. In this case, regions with peers distributed on the corresponding store might lose replicas, which requires PD to replenish on other nodes.
+スケールダウンとは、ストアをオフラインにし、コマンドを使用して「オフライン」としてマークするプロセスを指します。 PD は、スケジューリングによって、オフライン ノード上のリージョンを他のノードに複製します。障害回復は、ストアに障害が発生して回復できない場合に適用されます。この場合、対応するストアにピアが分散されているリージョンはレプリカを失う可能性があり、他のノードで PD を補充する必要があります。
 
-The processes of scale-down and failure recovery are basically the same. `replicaChecker` finds a region peer in abnormal states, and then generates an operator to replace the abnormal peer with a new one on a healthy store.
+スケールダウンと障害回復のプロセスは基本的に同じです。 `replicaChecker`は、異常な状態のリージョン ピアを検出し、異常なピアを正常なストアの新しいピアに置き換える演算子を生成します。
 
-### Region merge
+### リージョンのマージ {#region-merge}
 
-Region merge refers to the process of merging adjacent small regions. It serves to avoid unnecessary resource consumption by a large number of small or even empty regions after data deletion. Region merge is performed by `mergeChecker`, which processes in a similar way to `replicaChecker`: PD continuously scans all regions in the background, and generates an operator when contiguous small regions are found.
+リージョン結合とは、隣接する小さな領域を結合するプロセスを指します。これは、データの削除後に多数の小さなリージョンまたは空のリージョンによって不要なリソースが消費されるのを回避するのに役立ちます。リージョンのマージは`mergeChecker`によって実行され、 `replicaChecker`と同様の方法で処理されます。PD はバックグラウンドですべての領域を継続的にスキャンし、連続する小さな領域が見つかったときに演算子を生成します。
 
-Specifically, when a newly split Region exists for more than the value of [`split-merge-interval`](/pd-configuration-file.md#split-merge-interval) (`1h` by default), if the following conditions occur at the same time, this Region triggers the Region merge scheduling:
+具体的には、新しく分割されたリージョンが[`split-merge-interval`](/pd-configuration-file.md#split-merge-interval)の値 (デフォルトでは`1h` ) を超えて存在する場合、次の条件が同時に発生した場合、このリージョンはリージョンのマージ スケジューリングをトリガーします。
 
-- The size of this Region is smaller than the value of the [`max-merge-region-size`](/pd-configuration-file.md#max-merge-region-size) (20 MiB by default)
+-   このリージョンのサイズは、 [`max-merge-region-size`](/pd-configuration-file.md#max-merge-region-size)の値よりも小さい (デフォルトで 20 MiB)
 
-- The number of keys in this Region is smaller than the value of [`max-merge-region-keys`](/pd-configuration-file.md#max-merge-region-keys) (200,000 by default).
+-   このリージョンのキーの数は、値[`max-merge-region-keys`](/pd-configuration-file.md#max-merge-region-keys)よりも小さくなっています (デフォルトでは 200,000)。
 
-## Query scheduling status
+## クエリのスケジューリング ステータス {#query-scheduling-status}
 
-You can check the status of scheduling system through metrics, pd-ctl and logs. This section briefly introduces the methods of metrics and pd-ctl. Refer to [PD Monitoring Metrics](/grafana-pd-dashboard.md) and [PD Control](/pd-control.md) for details.
+メトリック、pd-ctl、およびログを使用して、スケジューリング システムのステータスを確認できます。このセクションでは、metrics と pd-ctl のメソッドを簡単に紹介します。詳細は[PD モニタリング メトリック](/grafana-pd-dashboard.md)と[PD Control](/pd-control.md)を参照してください。
 
-### Operator status
+### オペレーターの状態 {#operator-status}
 
-The **Grafana PD/Operator** page shows the metrics about operators, among which:
+**Grafana PD/Operator**ページには、オペレーターに関するメトリックが表示されます。
 
-- Schedule operator create: Operator creating information
-- Operator finish duration: Execution time consumed by each operator
-- Operator step duration: Execution time consumed by the operator step
+-   スケジュール担当者作成：担当者作成情報
+-   オペレーター終了時間：各オペレーターの実行時間
+-   オペレーター・ステップ所要時間: オペレーター・ステップの実行時間
 
-You can query operators using pd-ctl with the following commands:
+次のコマンドで pd-ctl を使用して演算子をクエリできます。
 
-- `operator show`: Queries all operators generated in the current scheduling task
-- `operator show [admin | leader | region]`: Queries operators by type
+-   `operator show` : 現在のスケジューリング タスクで生成されたすべてのオペレータを照会します。
+-   `operator show [admin | leader | region]` : タイプごとに演算子を照会します
 
-### Balance status
+### 残高状況 {#balance-status}
 
-The **Grafana PD/Statistics - Balance** page shows the metrics about load balancing, among which:
+**Grafana PD/ 統計 - Balance**ページには、負荷分散に関するメトリックが表示されます。
 
-- Store leader/region score: Score of each store
-- Store leader/region count: The number of leaders/regions in each store
-- Store available: Available storage on each store
+-   店舗リーダー・地域スコア：各店舗のスコア
+-   店舗のリーダー/地域数: 各店舗のリーダー/地域の数
+-   利用可能なストア: 各ストアで利用可能なストレージ
 
-You can use store commands of pd-ctl to query balance status of each store.
+pd-ctl のストア コマンドを使用して、各ストアの残高ステータスを照会できます。
 
-### Hot Region status
+### ホットリージョンのステータス {#hot-region-status}
 
-The **Grafana PD/Statistics - hotspot** page shows the metrics about hot regions, among which:
+**Grafana PD/ 統計 - hotspot**ページには、ホット リージョンに関するメトリックが表示されます。
 
-- Hot write region's leader/peer distribution: the leader/peer distribution in hot write regions
-- Hot read region's leader distribution: the leader distribution in hot read regions
+-   ホット ライト リージョンのリーダー/ピア ディストリビューション: ホット ライト リージョンのリーダー/ピア ディストリビューション
+-   ホットリード領域のリーダー分布: ホットリード領域のリーダー分布
 
-You can also query the status of hot regions using pd-ctl with the following commands:
+次のコマンドで pd-ctl を使用して、ホット リージョンのステータスを照会することもできます。
 
-- `hot read`: Queries hot read regions
-- `hot write`: Queries hot write regions
-- `hot store`: Queries the distribution of hot regions by store
-- `region topread [limit]`: Queries the region with top read traffic
-- `region topwrite [limit]`: Queries the region with top write traffic
+-   `hot read` : ホット読み取り領域を照会します
+-   `hot write` : ホット ライト領域を照会します
+-   `hot store` : 店舗別のホット地域の分布を問い合わせる
+-   `region topread [limit]` : 読み取りトラフィックが多いリージョンを照会します
+-   `region topwrite [limit]` : 書き込みトラフィックが多いリージョンを照会します
 
-### Region health
+### リージョンの健康 {#region-health}
 
-The **Grafana PD/Cluster/Region health** panel shows the metrics about regions in abnormal states.
+**Grafana PD/クラスタ/リージョンのヘルス**パネルには、異常な状態のリージョンに関するメトリックが表示されます。
 
-You can query the list of regions in abnormal states using pd-ctl with region check commands:
+pd-ctl とリージョン チェック コマンドを使用して、異常な状態にあるリージョンのリストを照会できます。
 
-- `region check miss-peer`: Queries regions without enough peers
-- `region check extra-peer`: Queries regions with extra peers
-- `region check down-peer`: Queries regions with down peers
-- `region check pending-peer`: Queries regions with pending peers
+-   `region check miss-peer` : 十分なピアがないリージョンを照会します
+-   `region check extra-peer` : 余分なピアを持つリージョンを照会します
+-   `region check down-peer` : ピアがダウンしているリージョンを照会します
+-   `region check pending-peer` : 保留中のピアがあるリージョンを照会します
 
-## Control scheduling strategy
+## スケジューリング戦略の制御 {#control-scheduling-strategy}
 
-You can use pd-ctl to adjust the scheduling strategy from the following three aspects. Refer to [PD Control](/pd-control.md) for more details.
+pd-ctl を使用して、次の 3 つの側面からスケジューリング戦略を調整できます。詳細については、 [PD Control](/pd-control.md)を参照してください。
 
-### Add/delete scheduler manually
+### スケジューラーを手動で追加/削除する {#add-delete-scheduler-manually}
 
-PD supports dynamically adding and removing schedulers directly through pd-ctl. For example:
+PD は、pd-ctl を介して直接スケジューラーを動的に追加および削除することをサポートしています。例えば：
 
-- `scheduler show`: Shows currently running schedulers in the system
-- `scheduler remove balance-leader-scheduler`: Removes (disable) balance-leader-scheduler
-- `scheduler add evict-leader-scheduler 1`: Adds a scheduler to remove all leaders in Store 1
+-   `scheduler show` : システムで現在実行中のスケジューラを表示します
+-   `scheduler remove balance-leader-scheduler` : balance-leader-scheduler を削除 (無効化) します
+-   `scheduler add evict-leader-scheduler 1` : ストア 1 のすべてのリーダーを削除するスケジューラを追加します。
 
-### Add/delete Operators manually
+### オペレーターを手動で追加/削除する {#add-delete-operators-manually}
 
-PD also supports adding or removing operators directly through pd-ctl. For example:
+PD は、pd-ctl を介して直接演算子を追加または削除することもサポートしています。例えば：
 
-- `operator add add-peer 2 5`: Adds peers to Region 2 in Store 5
-- `operator add transfer-leader 2 5`: Migrates the leader of Region 2 to Store 5
-- `operator add split-region 2`: Splits Region 2 into two regions evenly in size
-- `operator remove 2`: Removes currently pending operator in Region 2
+-   `operator add add-peer 2 5` : ストア 5 のリージョン2 にピアを追加します
+-   `operator add transfer-leader 2 5` :リージョン2 のリーダーをストア 5 に移行します。
+-   `operator add split-region 2` :リージョン2 を均等なサイズの 2 つのリージョンに分割します。
+-   `operator remove 2` :リージョン2 で現在保留中のオペレーターを削除します
 
-### Adjust scheduling parameter
+### スケジューリング パラメータの調整 {#adjust-scheduling-parameter}
 
-You can check the scheduling configuration using the `config show` command in pd-ctl, and adjust the values using `config set {key} {value}`. Common adjustments include:
+pd-ctl で`config show`コマンドを使用してスケジューリング構成を確認し、 `config set {key} {value}`を使用して値を調整できます。一般的な調整は次のとおりです。
 
-- `leader-schedule-limit`: Controls the concurrency of transferring leader scheduling
-- `region-schedule-limit`: Controls the concurrency of adding/deleting peer scheduling
-- `enable-replace-offline-replica`: Determines whether to enable the scheduling to take nodes offline
-- `enable-location-replacement`: Determines whether to enable the scheduling that handles the isolation level of regions
-- `max-snapshot-count`: Controls the maximum concurrency of sending/receiving snapshots for each store
+-   `leader-schedule-limit` : リーダー スケジューリングの転送の同時実行性を制御します
+-   `region-schedule-limit` : ピア スケジューリングの追加/削除の同時実行性を制御します
+-   `enable-replace-offline-replica` : ノードをオフラインにするスケジューリングを有効にするかどうかを決定します
+-   `enable-location-replacement` : リージョンの分離レベルを処理するスケジューリングを有効にするかどうかを決定します
+-   `max-snapshot-count` : 各ストアのスナップショットの送受信の最大同時実行数を制御します
 
-## PD scheduling in common scenarios
+## 一般的なシナリオでの PD スケジューリング {#pd-scheduling-in-common-scenarios}
 
-This section illustrates the best practices of PD scheduling strategies through several typical scenarios.
+このセクションでは、いくつかの典型的なシナリオを通じて、PD スケジューリング戦略のベスト プラクティスを示します。
 
-### Leaders/regions are not evenly distributed
+### リーダー/リージョンが均等に分散されていない {#leaders-regions-are-not-evenly-distributed}
 
-The rating mechanism of PD determines that leader count and region count of different stores cannot fully reflect the load balancing status. Therefore, it is necessary to confirm whether there is load imbalancing from the actual load of TiKV or storage usage.
+PD の評価メカニズムは、異なるストアのリーダー数とリージョン数がロード バランシング ステータスを完全に反映できないと判断します。そのため、実際の TiKV の負荷やストレージの使用状況から、負荷の偏りがないかを確認する必要があります。
 
-Once you have confirmed that leaders/region are not evenly distributed, you need to check the rating of different stores.
+リーダー/地域が均等に分布していないことを確認したら、さまざまな店舗の評価を確認する必要があります。
 
-If the scores of different stores are close, it means PD mistakenly believes that leaders/regions are evenly distributed. Possible reasons are:
+異なる店舗のスコアが近い場合、PD はリーダー/地域が均等に分布していると誤って信じていることを意味します。考えられる理由は次のとおりです。
 
-- There are hot regions that cause load imbalancing. In this case, you need to analyze further based on [hot regions scheduling](#hot-regions-are-not-evenly-distributed).
-- There are a large number of empty regions or small regions, which leads to a great difference in the number of leaders in different stores and high pressure on Raft store. This is the time for a [region merge](#region-merge-is-slow) scheduling.
-- Hardware and software environment varies among stores. To control the distribution of leader/region, you can refer to [Load balancing](#load-balancing) and adjust the values of `leader-weight` and `region-weight`.
-- Other unknown reasons. Still you can adjust the values of `leader-weight` and `region-weight` to control the distribution of leader/region.
+-   負荷の不均衡を引き起こすホット リージョンがあります。この場合、 [ホット リージョンのスケジューリング](#hot-regions-are-not-evenly-distributed)に基づいてさらに分析する必要があります。
+-   空のリージョンまたは小さなリージョンが多数存在するため、店舗ごとにリーダーの数に大きな差が生じ、 Raftストアに高いプレッシャーがかかります。これは、 [リージョンマージ](#region-merge-is-slow)スケジューリングの時間です。
+-   ハードウェアおよびソフトウェア環境は店舗によって異なります。リーダー/リージョンの分布を制御するには、 [負荷分散](#load-balancing)を参照して`leader-weight`と`region-weight`の値を調整します。
+-   その他不明な理由。それでも、 `leader-weight`と`region-weight`の値を調整して、リーダー/リージョンの分布を制御できます。
 
-If there is a big difference in the rating of different stores, you need to examine the operator-related metrics, with special focus on the generation and execution of operators. There are two main situations:
+異なる店舗の評価に大きな違いがある場合は、オペレーターの生成と実行に特に焦点を当てて、オペレーター関連の指標を調べる必要があります。 2 つの主な状況があります。
 
-- When operators are generated normally but the scheduling process is slow, it is possible that:
+-   オペレータが正常に生成されてもスケジューリング プロセスが遅い場合は、次の可能性があります。
 
-    - The scheduling speed is limited by default for load balancing purpose. You can adjust `leader-schedule-limit` or `region-schedule-limit` to larger values without significantly impacting regular services. In addition, you can also properly ease the restrictions specified by `max-pending-peer-count` and `max-snapshot-count`.
-    - Other scheduling tasks are running concurrently, which slows down the balancing. In this case, if the balancing takes precedence over other scheduling tasks, you can stop other tasks or limit their speeds. For example, if you take some nodes offline when balancing is in progress, both operations consume the quota of `region-schedule-limit`. In this case, you can limit the speed of scheduler to remove nodes, or simply set `enable-replace-offline-replica = false` to temporarily disable it.
-    - The scheduling process is too slow. You can check the **Operator step duration** metric to confirm the cause. Generally, steps that do not involve sending and receiving snapshots (such as `TransferLeader`, `RemovePeer`, `PromoteLearner`) should be completed in milliseconds, while steps that involve snapshots (such as `AddLearner` and `AddPeer`) are expected to be completed in tens of seconds. If the duration is obviously too long, it could be caused by high pressure on TiKV or bottleneck in network, which needs specific analysis.
+    -   スケジューリング速度は、負荷分散のためにデフォルトで制限されています。通常のサービスに大きな影響を与えることなく、 `leader-schedule-limit`または`region-schedule-limit`をより大きな値に調整できます。また、 `max-pending-peer-count`と`max-snapshot-count`で指定された制限を適切に緩和することもできます。
+    -   他のスケジューリング タスクが同時に実行されているため、バランシングが遅くなります。この場合、バランシングが他のスケジューリング タスクよりも優先される場合は、他のタスクを停止するか、速度を制限できます。たとえば、バランシングの進行中に一部のノードをオフラインにすると、両方の操作で`region-schedule-limit`のクォータが消費されます。この場合、スケジューラーの速度を制限してノードを削除するか、単に`enable-replace-offline-replica = false`を設定して一時的に無効にすることができます。
+    -   スケジューリング プロセスが遅すぎます。**オペレーターのステップ期間**メトリックをチェックして、原因を確認できます。一般に、スナップショットの送受信を伴わないステップ ( `TransferLeader` 、 `RemovePeer` 、 `PromoteLearner`など) はミリ秒で完了する必要がありますが、スナップショットを含むステップ ( `AddLearner`や`AddPeer`など) は数十秒で完了すると予想されます。持続時間が明らかに長すぎる場合は、TiKV への高圧またはネットワークのボトルネックが原因である可能性があり、特定の分析が必要です。
 
-- PD fails to generate the corresponding balancing scheduler. Possible reasons include:
+-   PD は、対応するバランシング スケジューラの生成に失敗します。考えられる理由は次のとおりです。
 
-    - The scheduler is not activated. For example, the corresponding scheduler is deleted, or its limit it set to "0".
-    - Other constraints. For example, `evict-leader-scheduler` in the system prevents leaders from being migrating to the corresponding store. Or label property is set, which makes some stores reject leaders.
-    - Restrictions from the cluster topology. For example, in a cluster of 3 replicas across 3 data centers, 3 replicas of each region are distributed in different data centers due to replica isolation. If the number of stores is different among these data centers, the scheduling can only reach a balanced state within each data center, but not balanced globally.
+    -   スケジューラーは活動化されていません。たとえば、対応するスケジューラが削除されるか、その制限が「0」に設定されます。
+    -   その他の制約。たとえば、システム内の`evict-leader-scheduler`は、リーダーが対応するストアに移行するのを防ぎます。または、一部のストアがリーダーを拒否するラベル プロパティが設定されています。
+    -   クラスタ トポロジからの制限。たとえば、3 つのデータ センターにまたがる 3 つのレプリカのクラスターでは、レプリカの分離により、各リージョンの 3 つのレプリカが異なるデータ センターに分散されます。これらのデータ センター間で店舗の数が異なる場合、スケジューリングは各データ センター内でのみバランスの取れた状態に到達できますが、グローバルにバランスは取れません。
 
-### Taking nodes offline is slow
+### ノードをオフラインにするのが遅い {#taking-nodes-offline-is-slow}
 
-This scenario requires examining the generation and execution of operators through related metrics.
+このシナリオでは、関連するメトリックを通じてオペレーターの生成と実行を調べる必要があります。
 
-If operators are successfully generated but the scheduling process is slow, possible reasons are:
+オペレータが正常に生成されても、スケジューリング プロセスが遅い場合は、次の理由が考えられます。
 
-- The scheduling speed is limited by default. You can adjust `leader-schedule-limit` or `replica-schedule-limit` to larger value.s Similarly, you can consider loosening the limits on `max-pending-peer-count` and `max-snapshot-count`.
-- Other scheduling tasks are running concurrently and racing for resources in the system. You can refer to the solution in [Leaders/regions are not evenly distributed](#leadersregions-are-not-evenly-distributed).
-- When you take a single node offline, a number of region leaders to be processed (around 1/3 under the configuration of 3 replicas) are distributed on the node to remove. Therefore, the speed is limited by the speed at which snapshots are generated by this single node. You can speed it up by manually adding an `evict-leader-scheduler` to migrate leaders.
+-   スケジューリング速度はデフォルトで制限されています。 `leader-schedule-limit`または`replica-schedule-limit`をより大きな値に調整できます。同様に、 `max-pending-peer-count`と`max-snapshot-count`の制限を緩めることを検討できます。
+-   他のスケジューリング タスクが同時に実行され、システム内のリソースが競合しています。 [リーダー/リージョンが均等に分散されていない](#leadersregions-are-not-evenly-distributed)の解決策を参照できます。
+-   1 つのノードをオフラインにすると、処理対象のリージョン リーダーの数 (3 つのレプリカの構成で約 1/3) が、削除するノードに分散されます。したがって、速度は、この単一ノードによってスナップショットが生成される速度によって制限されます。手動で`evict-leader-scheduler`を追加してリーダーを移行することで、速度を上げることができます。
 
-If the corresponding operator fails to generate, possible reasons are:
+対応するオペレーターが生成に失敗した場合、次の理由が考えられます。
 
-- The operator is stopped, or `replica-schedule-limit` is set to "0".
-- There is no proper node for region migration. For example, if the available capacity size of the replacing node (of the same label) is less than 20%, PD will stop scheduling to avoid running out of storage on that node. In such case, you need to add more nodes or delete some data to free the space.
+-   オペレータが停止しているか、 `replica-schedule-limit`が「0」に設定されています。
+-   リージョンの移行に適したノードがありません。たとえば、(同じラベルの) 交換ノードの使用可能な容量サイズが 20% 未満の場合、PD はスケジューリングを停止して、そのノードのストレージが不足するのを回避します。このような場合、ノードを追加するか、一部のデータを削除してスペースを解放する必要があります。
 
-### Bringing nodes online is slow
+### ノードをオンラインにするのが遅い {#bringing-nodes-online-is-slow}
 
-Currently, bringing nodes online is scheduled through the balance region mechanism. You can refer to [Leaders/regions are not evenly distributed](#leadersregions-are-not-evenly-distributed) for troubleshooting.
+現在、ノードをオンラインにすることは、バランス リージョン メカニズムを通じてスケジュールされています。トラブルシューティングについては、 [リーダー/リージョンが均等に分散されていない](#leadersregions-are-not-evenly-distributed)を参照してください。
 
-### Hot regions are not evenly distributed
+### ホット リージョンが均等に分布していない {#hot-regions-are-not-evenly-distributed}
 
-Hot regions scheduling issues generally fall into the following categories:
+ホット リージョンのスケジュールに関する問題は、通常、次のカテゴリに分類されます。
 
-- Hot regions can be observed via PD metrics, but the scheduling speed cannot keep up to redistribute hot regions in time.
+-   ホット リージョンは PD メトリクスを介して観察できますが、スケジュールの速度は、ホット リージョンの時間内の再配布に追いつくことができません。
 
-    **Solution**: adjust `hot-region-schedule-limit` to a larger value, and reduce the limit quota of other schedulers to speed up hot regions scheduling. Or you can adjust `hot-region-cache-hits-threshold` to a smaller value to make PD more sensitive to traffic changes.
+    **解決策**: `hot-region-schedule-limit`をより大きな値に調整し、他のスケジューラの制限クォータを減らして、ホット リージョンのスケジューリングを高速化します。または、 `hot-region-cache-hits-threshold`をより小さい値に調整して、トラフィックの変化に対する PD の感度を高めることもできます。
 
-- Hotspot formed on a single region. For example, a small table is intensively scanned by a massive amount of requests. This can also be detected from PD metrics. Because you cannot actually distribute a single hotspot, you need to manually add a `split-region` operator to split such a region.
+-   単一の領域に形成されたホットスポット。たとえば、小さなテーブルは大量のリクエストによって集中的にスキャンされます。これは、PD メトリックからも検出できます。実際には単一のホットスポットを配布することはできないため、そのような領域を分割するには、手動で`split-region`オペレーターを追加する必要があります。
 
-- The load of some nodes is significantly higher than that of other nodes from TiKV-related metrics, which becomes the bottleneck of the whole system. Currently, PD counts hotspots through traffic analysis only, so it is possible that PD fails to identify hotspots in certain scenarios. For example, when there are intensive point lookup requests for some regions, it might not be obvious to detect in traffic, but still the high QPS might lead to bottlenecks in key modules.
+-   一部のノードの負荷は、TiKV 関連のメトリックから他のノードの負荷よりも大幅に高くなり、システム全体のボトルネックになります。現在、PD はトラフィック分析のみによってホットスポットをカウントしているため、特定のシナリオでは PD がホットスポットを識別できない可能性があります。たとえば、一部の地域で集中的なポイント ルックアップ リクエストがある場合、トラフィックで検出することは明らかではありませんが、それでも高い QPS が主要なモジュールのボトルネックにつながる可能性があります。
 
-    **Solutions**: Firstly, locate the table where hot regions are formed based on the specific business. Then add a `scatter-range-scheduler` scheduler to make all regions of this table evenly distributed. TiDB also provides an interface in its HTTP API to simplify this operation. Refer to [TiDB HTTP API](https://github.com/pingcap/tidb/blob/master/docs/tidb_http_api.md) for more details.
+    **解決策**: まず、特定のビジネスに基づいてホット リージョンが形成されるテーブルを見つけます。次に、 `scatter-range-scheduler`のスケジューラを追加して、このテーブルのすべての領域を均等に分散させます。 TiDB は、この操作を簡素化するために、HTTP API にインターフェースも提供します。詳細については、 [TiDB HTTP API](https://github.com/pingcap/tidb/blob/master/docs/tidb_http_api.md)を参照してください。
 
-### Region merge is slow
+### リージョンのマージが遅い {#region-merge-is-slow}
 
-Similar to slow scheduling, the speed of region merge is most likely limited by the configurations of `merge-schedule-limit` and `region-schedule-limit`, or the region merge scheduler is competing with other schedulers. Specifically, the solutions are:
+遅いスケジューリングと同様に、リージョン マージの速度は`merge-schedule-limit`と`region-schedule-limit`の構成によって制限されている可能性が高く、またはリージョン マージ スケジューラが他のスケジューラと競合しています。具体的には、ソリューションは次のとおりです。
 
-- If it is known from metrics that there are a large number of empty regions in the system, you can adjust `max-merge-region-size` and `max-merge-region-keys` to smaller values to speed up the merge. This is because the merge process involves replica migration, so the smaller the region to be merged, the faster the merge is. If the merge operators are already generated rapidly, to further speed up the process, you can set `patrol-region-interval` to `10ms` (the default value of this configuration item is `10ms` in v5.3.0 and later versions of TiDB). This makes region scanning faster at the cost of more CPU consumption.
+-   システムに多数の空の領域があることがメトリックからわかっている場合は、 `max-merge-region-size`と`max-merge-region-keys`をより小さい値に調整してマージを高速化できます。これは、マージ プロセスにレプリカの移行が含まれるため、マージするリージョンが小さいほど、マージが高速になるためです。マージ オペレータがすでに迅速に生成されている場合は、プロセスをさらに高速化するために、 `patrol-region-interval` ～ `10ms`を設定できます (この構成項目のデフォルト値は、v5.3.0 以降のバージョンの TiDB では`10ms`です)。これにより、リージョンのスキャンが高速化されますが、CPU の消費が増えます。
 
-- A lot of tables have been created and then emptied (including truncated tables). These empty Regions cannot be merged if the split table attribute is enabled. You can disable this attribute by adjusting the following parameters:
+-   多くのテーブルが作成されてから空にされました (切り捨てられたテーブルを含む)。分割テーブル属性が有効になっている場合、これらの空のリージョンはマージできません。この属性を無効にするには、次のパラメーターを調整します。
 
-    - TiKV: Set `split-region-on-table` to `false`. You cannot modify the parameter dynamically.
-    - PD: Use PD Control to set the parameters required by your cluster situation.
+    -   TiKV: `split-region-on-table` ～ `false`を設定します。パラメータを動的に変更することはできません。
+    -   PD: PD Controlを使用して、クラスターの状況に必要なパラメーターを設定します。
 
-        - Suppose that your cluster has no TiDB instance, and the value of [`key-type`](/pd-control.md#config-show--set-option-value--placement-rules) is set to `raw` or `txn`. In this case, PD can merge Regions across tables, regardless of the value of `enable-cross-table-merge setting`. You can modify the `key-type` parameter dynamically.
+        -   クラスターに TiDB インスタンスがなく、値[`key-type`](/pd-control.md#config-show--set-option-value--placement-rules)が`raw`または`txn`に設定されているとします。この場合、 PD は、 `enable-cross-table-merge setting`の値に関係なく、テーブル全体でリージョンをマージできます。 `key-type`パラメータを動的に変更できます。
 
-        {{< copyable "shell-regular" >}}
+        {{< copyable "" >}}
 
         ```bash
         config set key-type txn
         ```
 
-        - Suppose that your cluster has a TiDB instance, and the value of `key-type` is set to `table`. In this case, PD can merge Regions across tables only if the value of `enable-cross-table-merge` is set to `true`. You can modify the `key-type` parameter dynamically.
+        -   クラスターに TiDB インスタンスがあり、値`key-type`が`table`に設定されているとします。この場合、値`enable-cross-table-merge`が`true`に設定されている場合にのみ、PD はテーブル間でリージョンをマージできます。 `key-type`パラメータを動的に変更できます。
 
-        {{< copyable "shell-regular" >}}
+        {{< copyable "" >}}
 
         ```bash
         config set enable-cross-table-merge true
         ```
 
-        If the modification does not take effect, refer to [FAQ - Why the modified `toml` configuration for TiKV/PD does not take effect?](/faq/deploy-and-maintain-faq.md#why-the-modified-toml-configuration-for-tikvpd-does-not-take-effect).
+        変更が反映されない場合は、 [FAQ - TiKV/PD 用に変更された`toml`構成が有効にならないのはなぜですか?](/faq/deploy-and-maintain-faq.md#why-the-modified-toml-configuration-for-tikvpd-does-not-take-effect)を参照してください。
 
-        > **Note:**
+        > **ノート：**
         >
-        > After enabling Placement Rules, properly switch the value of `key-type` to avoid the failure of decoding.
+        > Placement Rules を有効にした後、値`key-type`を適切に切り替えて、デコードの失敗を回避してください。
 
-For v3.0.4 and v2.1.16 or earlier, the `approximate_keys` of regions are inaccurate in specific circumstances (most of which occur after dropping tables), which makes the number of keys break the constraints of `max-merge-region-keys`. To avoid this problem, you can adjust `max-merge-region-keys` to a larger value.
+v3.0.4 および v2.1.16 以前の場合、特定の状況 (ほとんどの場合、テーブルの削除後に発生する) では、領域の`approximate_keys`が不正確になり、キーの数が`max-merge-region-keys`の制約を破ります。この問題を回避するには、 `max-merge-region-keys`をより大きな値に調整します。
 
-### Troubleshoot TiKV node
+### TiKV ノードのトラブルシューティング {#troubleshoot-tikv-node}
 
-If a TiKV node fails, PD defaults to setting the corresponding node to the **down** state after 30 minutes (customizable by configuration item `max-store-down-time`), and rebalancing replicas for regions involved.
+TiKV ノードに障害が発生した場合、PD はデフォルトで 30 分後に対応するノードを**ダウン**状態に設定し (構成項目`max-store-down-time`でカスタマイズ可能)、関連するリージョンのレプリカを再調整します。
 
-Practically, if a node failure is considered unrecoverable, you can immediately take it offline. This makes PD replenish replicas soon in another node and reduces the risk of data loss. In contrast, if a node is considered recoverable, but the recovery cannot be done in 30 minutes, you can temporarily adjust `max-store-down-time` to a larger value to avoid unnecessary replenishment of the replicas and resources waste after the timeout.
+実際には、ノードの障害が回復不能と見なされた場合は、すぐにオフラインにすることができます。これにより、PD はすぐに別のノードでレプリカを補充し、データ損失のリスクを軽減します。対照的に、ノードが回復可能と見なされても、回復が 30 分以内に実行できない場合は、一時的に`max-store-down-time`をより大きな値に調整して、レプリカの不要な補充とタイムアウト後のリソースの浪費を回避できます。
 
-In TiDB v5.2.0, TiKV introduces the mechanism of slow TiKV node detection. By sampling the requests in TiKV, this mechanism works out a score ranging from 1 to 100. A TiKV node with a score higher than or equal to 80 is marked as slow. You can add [`evict-slow-store-scheduler`](/pd-control.md#scheduler-show--add--remove--pause--resume--config--describe) to detect and schedule slow nodes. If only one TiKV is detected as slow, and the slow score reaches the upper limit (100 by default), the leader in this node will be evicted (similar to the effect of `evict-leader-scheduler`).
+TiDB v5.2.0 では、TiKV は遅い TiKV ノード検出のメカニズムを導入します。 TiKV でリクエストをサンプリングすることにより、このメカニズムは 1 から 100 の範囲のスコアを計算します。スコアが 80 以上の TiKV ノードは低速としてマークされます。 [`evict-slow-store-scheduler`](/pd-control.md#scheduler-show--add--remove--pause--resume--config--describe)を追加すると、低速ノードを検出してスケジュールできます。 TiKV が 1 つだけ遅いと検出され、遅いスコアが上限 (デフォルトでは 100) に達した場合、このノードのリーダーは削除されます ( `evict-leader-scheduler`の効果と同様)。

@@ -3,27 +3,27 @@ title: CLIENT_ERRORS_SUMMARY_BY_USER
 summary: Learn about the `CLIENT_ERRORS_SUMMARY_BY_USER` information_schema table.
 ---
 
-# CLIENT_ERRORS_SUMMARY_BY_USER
+# CLIENT_ERRORS_SUMMARY_BY_USER {#client-errors-summary-by-user}
 
-The table `CLIENT_ERRORS_SUMMARY_BY_USER` provides a summary of SQL errors and warnings that have been returned to clients that connect to a TiDB server. These include:
+表`CLIENT_ERRORS_SUMMARY_BY_USER`は、TiDBサーバーに接続するクライアントに返された SQL エラーと警告の概要を示しています。これらには以下が含まれます：
 
-* Malformed SQL statements.
-* Division by zero errors.
-* The attempt to insert out-of-range or duplicate key values.
-* Permission errors.
-* A table that does not exist.
+-   不正な SQL ステートメント。
+-   ゼロ エラーによる除算。
+-   範囲外または重複するキー値を挿入しようとしています。
+-   許可エラー。
+-   存在しないテーブル。
 
-Client errors are returned to the client via the MySQL server protocol, where applications are expected to take appropriate action. The `information_schema`.`CLIENT_ERRORS_SUMMARY_BY_USER` table provides an useful method to inspect errors in the scenario where applications are not correctly handling (or logging) errors returned by the TiDB server.
+クライアント エラーは、MySQLサーバープロトコルを介してクライアントに返され、そこでアプリケーションは適切なアクションを実行することが期待されます。 `information_schema` 。表`CLIENT_ERRORS_SUMMARY_BY_USER`は、アプリケーションが TiDBサーバーから返されたエラーを正しく処理 (またはログ記録) していないシナリオで、エラーを検査するための便利な方法を提供します。
 
-Because `CLIENT_ERRORS_SUMMARY_BY_USER` summarizes the errors on a per-user basis, it can be useful to diagnose scenarios where one user server is generating more errors than other servers. Possible scenarios include:
+`CLIENT_ERRORS_SUMMARY_BY_USER`はユーザーごとにエラーを要約するため、あるユーザーサーバーが他のサーバーよりも多くのエラーを生成しているシナリオを診断するのに役立ちます。考えられるシナリオは次のとおりです。
 
-* Permission errors.
-* Missing tables, or relational objects.
-* Incorrect SQL syntax, or incompatibilities between the application and the version of TiDB.
+-   許可エラー。
+-   テーブルまたはリレーショナル オブジェクトがありません。
+-   SQL 構文が正しくないか、アプリケーションと TiDB のバージョンの間に互換性がない。
 
-The summarized counts can be reset with the statement `FLUSH CLIENT_ERRORS_SUMMARY`. The summary is local to each TiDB server and is only retained in memory. Summaries will be lost if the TiDB server restarts.
+集計されたカウントは、ステートメント`FLUSH CLIENT_ERRORS_SUMMARY`でリセットできます。要約は各 TiDBサーバーにローカルであり、メモリにのみ保持されます。 TiDBサーバーが再起動すると、サマリーは失われます。
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 USE information_schema;
@@ -45,19 +45,19 @@ DESC CLIENT_ERRORS_SUMMARY_BY_USER;
 7 rows in set (0.00 sec)
 ```
 
-Field description:
+フィールドの説明:
 
-* `USER`: The authenticated user.
-* `ERROR_NUMBER`: The MySQL-compatible error number that was returned.
-* `ERROR_MESSAGE`: The error message which matches the error number (in prepared statement form).
-* `ERROR_COUNT`: The number of times this error was returned to the user.
-* `WARNING_COUNT`: The number of times this warning was returned to the user.
-* `FIRST_SEEN`: The first time this error (or warning) was sent to the user.
-* `LAST_SEEN`: The most recent time this error (or warning) was sent to the user.
+-   `USER` : 認証されたユーザー。
+-   `ERROR_NUMBER` : 返された MySQL 互換のエラー番号。
+-   `ERROR_MESSAGE` : エラー番号に一致するエラー メッセージ (プリペアドステートメント形式)。
+-   `ERROR_COUNT` : このエラーがユーザーに返された回数。
+-   `WARNING_COUNT` : この警告がユーザーに返された回数。
+-   `FIRST_SEEN` : このエラー (または警告) が初めてユーザーに送信された時刻。
+-   `LAST_SEEN` : このエラー (または警告) がユーザーに最後に送信された時刻。
 
-The following example shows a warning being generated when the client connects to a local TiDB server. The summary is reset after executing `FLUSH CLIENT_ERRORS_SUMMARY`:
+次の例は、クライアントがローカル TiDBサーバーに接続するときに生成される警告を示しています。サマリーは`FLUSH CLIENT_ERRORS_SUMMARY`を実行した後にリセットされます:
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 SELECT 0/0;

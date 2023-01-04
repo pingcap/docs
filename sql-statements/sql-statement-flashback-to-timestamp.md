@@ -3,43 +3,46 @@ title: FLASHBACK CLUSTER TO TIMESTAMP
 summary: Learn the usage of FLASHBACK CLUSTER TO TIMESTAMP in TiDB databases.
 ---
 
-# FLASHBACK CLUSTER TO TIMESTAMP
+# タイムスタンプへのフラッシュバック クラスタ {#flashback-cluster-to-timestamp}
 
-TiDB v6.4.0 introduces the `FLASHBACK CLUSTER TO TIMESTAMP` syntax. You can use it to restore a cluster to a specific point in time.
+TiDB v6.4.0 では`FLASHBACK CLUSTER TO TIMESTAMP`構文が導入されています。これを使用して、クラスターを特定の時点に復元できます。
 
-> **Note:**
+> **ノート：**
 >
-> The working principle of `FLASHBACK CLUSTER TO TIMESTAMP` is to write the old data of a specific point in time with the latest timestamp, and will not delete the current data. So before using this feature, you need to ensure that there is enough storage space for the old data and the current data.
+> `FLASHBACK CLUSTER TO TIMESTAMP`の動作原理は、特定の時点の古いデータを最新のタイムスタンプで書き込むことであり、現在のデータは削除しません。したがって、この機能を使用する前に、古いデータと現在のデータ用の十分なストレージ容量があることを確認する必要があります.
 
-## Syntax
+## 構文 {#syntax}
 
 ```sql
 FLASHBACK CLUSTER TO TIMESTAMP '2022-09-21 16:02:50';
 ```
 
-### Synopsis
+### あらすじ {#synopsis}
 
 ```ebnf+diagram
 FlashbackToTimestampStmt ::=
     "FLASHBACK" "CLUSTER" "TO" "TIMESTAMP" stringLit
 ```
 
-## Notes
+## ノート {#notes}
 
-* The time specified in the `FLASHBACK` statement must be within the Garbage Collection (GC) lifetime. The system variable [`tidb_gc_life_time`](/system-variables.md#tidb_gc_life_time-new-in-v50) (default: `10m0s`) defines the retention time of earlier versions of rows. The current `safePoint` of where garbage collection has been performed up to can be obtained with the following query:
+-   `FLASHBACK`ステートメントで指定された時間は、ガベージ コレクション (GC) の有効期間内である必要があります。システム変数[`tidb_gc_life_time`](/system-variables.md#tidb_gc_life_time-new-in-v50) (デフォルト: `10m0s` ) は、以前のバージョンの行の保持時間を定義します。ガベージコレクションが実行された場所の現在の`safePoint`は、次のクエリで取得できます。
 
     ```sql
     SELECT * FROM mysql.tidb WHERE variable_name = 'tikv_gc_safe_point';
     ```
 
-* Only a user with the `SUPER` privilege can execute the `FLASHBACK CLUSTER` SQL statement.
-* From the time specified in the `FLASHBACK` statement to the time when the `FLASHBACK` is executed, there cannot be a DDL statement that changes the related table structure. If such a DDL exists, TiDB will reject it.
-* Before executing `FLASHBACK CLUSTER TO TIMESTAMP`, TiDB disconnects all related connections and prohibits read and write operations on these tables until the `FLASHBACK` statement is completed.
-* The `FLASHBACK CLUSTER TO TIMESTAMP` statement cannot be canceled after being executed. TiDB will keep retrying until it succeeds.
+-   `FLASHBACK CLUSTER`の SQL ステートメントを実行できるのは、 `SUPER`の権限を持つユーザーだけです。
 
-## Example
+-   `FLASHBACK`の文で指定した時刻から`FLASHBACK`の文を実行する時刻までの間に、関連するテーブル構造を変更するDDL文があってはなりません。そのような DDL が存在する場合、TiDB はそれを拒否します。
 
-The following example shows how to restore the newly inserted data:
+-   `FLASHBACK CLUSTER TO TIMESTAMP`を実行する前に、TiDB は関連するすべての接続を切断し、 `FLASHBACK`ステートメントが完了するまでこれらのテーブルに対する読み取りおよび書き込み操作を禁止します。
+
+-   `FLASHBACK CLUSTER TO TIMESTAMP`ステートメントは、実行後にキャンセルできません。 TiDB は成功するまで再試行を続けます。
+
+## 例 {#example}
+
+次の例は、新しく挿入されたデータを復元する方法を示しています。
 
 ```sql
 mysql> CREATE TABLE t(a INT);
@@ -74,7 +77,7 @@ mysql> SELECT * FROM t;
 Empty set (0.00 sec)
 ```
 
-If there is a DDL statement that changes the table structure from the time specified in the `FLASHBACK` statement to the time when the `FLASHBACK` is executed, the `FLASHBACK` statement fails:
+`FLASHBACK`ステートメントで指定された時刻から`FLASHBACK`ステートメントが実行される時刻までにテーブル構造を変更する DDL ステートメントがある場合、 `FLASHBACK`ステートメントは失敗します。
 
 ```sql
 mysql> SELECT now();
@@ -92,12 +95,12 @@ mysql> FLASHBACK CLUSTER TO TIMESTAMP '2022-10-09 16:40:51';
 ERROR 1105 (HY000): Detected schema change due to another DDL job during [2022-10-09 16:40:51 +0800 CST, now), can't do flashback
 ```
 
-Through the log, you can obtain the execution progress of `FLASHBACK`. The following is an example:
+ログから、 `FLASHBACK`の実行進行状況を取得できます。次に例を示します。
 
 ```
 [2022/10/09 17:25:59.316 +08:00] [INFO] [cluster.go:463] ["flashback cluster stats"] ["complete regions"=9] ["total regions"=10] []
 ```
 
-## MySQL compatibility
+## MySQL の互換性 {#mysql-compatibility}
 
-This statement is a TiDB extension to MySQL syntax.
+このステートメントは、MySQL 構文に対する TiDB 拡張です。

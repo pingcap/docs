@@ -3,107 +3,107 @@ title: TiDB Cloud Built-in Monitoring
 summary: Learn how to view TiDB Cloud built-in monitoring metrics and understand the meanings of these metrics.
 ---
 
-# TiDB Cloud Built-in Monitoring
+# TiDB Cloud組み込みモニタリング {#tidb-cloud-built-in-monitoring}
 
-TiDB Cloud collects and displays a full set of standard metrics of your cluster on the Monitoring page. By viewing these metrics, you can easily identify performance issues and determine whether your current database deployment meets your requirements.
+TiDB Cloudは、クラスターの標準メトリックの完全なセットを収集して、[監視] ページに表示します。これらのメトリックを表示することで、パフォーマンスの問題を簡単に特定し、現在のデータベースの展開が要件を満たしているかどうかを判断できます。
 
-> **Note:**
+> **ノート：**
 >
-> Currently, the Monitoring page is unavailable for [Serverless Tier clusters](/tidb-cloud/select-cluster-tier.md#serverless-tier).
+> 現在、監視ページは[サーバーレス階層クラスター](/tidb-cloud/select-cluster-tier.md#serverless-tier)で利用できません。
 
-## View the Monitoring page
+## 監視ページをビューする {#view-the-monitoring-page}
 
-To view the metrics on the Monitoring page, take the following steps:
+[監視] ページでメトリックを表示するには、次の手順を実行します。
 
-1. Navigate to the **Diagnosis** tab of a cluster.
+1.  クラスターの [**診断**] タブに移動します。
 
-2. Click the **Monitoring** tab.
+2.  [**モニタリング**] タブをクリックします。
 
-## Monitoring metrics
+## 指標のモニタリング {#monitoring-metrics}
 
-The following sections illustrate the metrics on the Monitoring page.
+次のセクションでは、[監視] ページのメトリックについて説明します。
 
-### Database Time
+### データベース時間 {#database-time}
 
-| Metric name  | Labels | Description                                   |
-| :------------| :------| :-------------------------------------------- |
-| Database Time by SQL types | database time, {SQL type} | database time: total database time per second. <br/> {SQL type}: database time consumed by SQL statements per second, which are collected by SQL types, such as `SELECT`, `INSERT`, and `UPDATE`. |
-| Database Time by SQL Phase | database time, get token, parse, compile, execute | Database time consumed in four SQL processing phases: get token, parse, compile, and execute. The SQL execution phase is in green and other phases are in red on general. If non-green areas take a large proportion, it means most database time is consumed by other phases than the execution phase and further cause analysis is required. |
-| SQL Execute Time Overview | tso_wait, Get, Cop, and Commit | Green metrics stand for common KV write requests (such as prewrite and commit), blue metrics stand for common read requests, and metrics in other colors stand for unexpected situations which you need to pay attention to. For example, pessimistic lock KV requests are marked red and TSO waiting is marked dark brown. If non-blue or non-green areas take a large proportion, it means there is a bottleneck during SQL execution. For example, if serious lock conflicts occur, the red area will take a large proportion. If excessive time is consumed in waiting TSO, the dark brown area will take a large proportion. |
+| 指標名                 | ラベル                          | 説明                                                                                                                                                                                                                                                                                         |
+| :------------------ | :--------------------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| SQL タイプ別のデータベース時間   | データベース時間、{SQL タイプ}           | データベース時間: 1 秒あたりの合計データベース時間。<br/> {SQL タイプ}: `SELECT` 、 `INSERT` 、および`UPDATE`などの SQL タイプ別に収集された、1 秒あたりの SQL ステートメントによって消費されたデータベース時間。                                                                                                                                                      |
+| SQL フェーズごとのデータベース時間 | データベース時間、トークンの取得、解析、コンパイル、実行 | トークンの取得、解析、コンパイル、実行の 4 つの SQL 処理フェーズで消費されるデータベース時間。一般的に、SQL 実行フェーズは緑で、その他のフェーズは赤で表示されます。緑以外の領域が大きな割合を占める場合は、ほとんどのデータベース時間が実行フェーズ以外のフェーズで消費されていることを意味し、さらなる原因分析が必要です。                                                                                                                       |
+| SQL 実行時間の概要         | tso_wait、Get、Cop、およびコミット     | 緑色のメトリックは一般的な KV 書き込み要求 (事前書き込みやコミットなど) を表し、青色のメトリックは一般的な読み取り要求を表し、他の色のメトリックは注意を払う必要がある予期しない状況を表します。たとえば、悲観的ロック KV 要求は赤でマークされ、TSO 待機は濃い茶色でマークされます。青色以外または緑色以外の領域が占める割合が大きい場合は、SQL 実行中にボトルネックが発生していることを意味します。たとえば、重大なロック競合が発生した場合、赤い領域が大きな割合を占めます。 TSO の待機に過度の時間が費やされると、こげ茶色の領域が大きな割合を占めます。 |
 
-### Application Connection
+### アプリケーション接続 {#application-connection}
 
-| Metric name  | Labels | Description                                   |
-| :------------| :------| :-------------------------------------------- |
-| Connection Count | Total, active connection | Total: the number of connections to all TiDB instances. <br/> Active connections: the number of active connections to all TiDB instances. |
-| Disconnection | Instances | The number of clients disconnected to each TiDB instance. |
+| 指標名 | ラベル         | 説明                                                                     |
+| :-- | :---------- | :--------------------------------------------------------------------- |
+| 接続数 | 合計、アクティブな接続 | 合計: すべての TiDB インスタンスへの接続数。<br/>アクティブな接続: すべての TiDB インスタンスへのアクティブな接続の数。 |
+| 断線  | インスタンス      | 各 TiDB インスタンスに切断されたクライアントの数。                                           |
 
-### SQL Count
+### SQL カウント {#sql-count}
 
-| Metric name  | Labels | Description                                   |
-| :------------| :------| :-------------------------------------------- |
-| Query Per Second | {SQL type} | The number of SQL statements executed per second in all TiDB instances, which are collected by SQL types, such as `SELECT`, `INSERT`, and `UPDATE`. |
-| Failed Queries | Error types | The statistics of error types (such as syntax errors and primary key conflicts) according to the SQL statement execution errors per minute on each TiDB instance. It contains the module in which an error occurs and the error code. |
-| Command Per Second | Query, StmtExecute, and StmtPrepare | The number of commands processed by all TiDB instances per second based on command types. |
-| Queries Using Plan Cache OPS | hit, miss | hit: the number of queries using plan cache per second in all TiDB instances. <br/> miss: the number of queries missing plan cache per second in all TiDB instances. |
+| 指標名                     | ラベル                             | 説明                                                                                                             |
+| :---------------------- | :------------------------------ | :------------------------------------------------------------------------------------------------------------- |
+| 1 秒あたりのクエリ              | {SQL タイプ}                       | `SELECT` 、 `INSERT` 、 `UPDATE`などの SQL タイプ別に収集された、すべての TiDB インスタンスで 1 秒あたりに実行された SQL ステートメントの数。                 |
+| 失敗したクエリ                 | エラーの種類                          | 各 TiDB インスタンスの 1 分あたりの SQL ステートメント実行エラーに基づく、エラーの種類 (構文エラーや主キーの競合など) の統計。エラーが発生したモジュールとエラーコードが含まれています。          |
+| コマンド/秒                  | クエリ、StmtExecute、および StmtPrepare | コマンド タイプに基づいて、すべての TiDB インスタンスによって 1 秒あたりに処理されるコマンドの数。                                                         |
+| Plan Cache OPS を使用したクエリ | ヒット、ミス                          | hit: すべての TiDB インスタンスでの 1 秒あたりのプラン キャッシュを使用したクエリの数。<br/> miss: すべての TiDB インスタンスで 1 秒あたりにプラン キャッシュが欠落しているクエリの数。 |
 
-### Latency Break Down
+### レイテンシの内訳 {#latency-break-down}
 
-| Metric name  | Labels | Description                                   |
-| :------------| :------| :-------------------------------------------- |
-| Query Duration | avg-{SQL Types}, 99-{SQL Types} | The duration from receiving a request from the client to TiDB till TiDB executing the request and returning the result to the client. In general, client requests are sent in the form of SQL statements; however, this duration can include the execution time of commands such as `COM_PING`, `COM_SLEEP`, `COM_STMT_FETCH`, and `COM_SEND_LONG_DATA`. TiDB supports Multi-Query, which means the client can send multiple SQL statements at one time, such as `select 1; select 1; select 1;`. In this case, the total execution time of this query includes the execution time of all SQL statements. |
-| Average Idle Connection Duration | avg-in-txn, avg-not-in-txn | The connection idle duration indicates the duration of a connection being idle.<br/> avg-in-txn: The average connection idle duration when a connection is within a transaction. <br/>avg-not-in-txn: The average connection idle duration when a connection is not within a transaction. |
-| Get Token Duration | avg, 99 | The average time or P99 duration consumed in getting tokens of SQL statements. |
-| Parse Duration | avg, 99 | The average time or P99 duration consumed in parsing SQL statements. |
-| Compile Duration | avg, 99 | The average time or P99 duration consumed in compiling the parsed SQL AST to execution plans. |
-| Execute Duration | avg, 99 | The average time or P99 duration consumed in executing execution plans of SQL statements. |
+| 指標名        | ラベル                       | 説明                                                                                                                                                                                                                                                                                                                                                                       |
+| :--------- | :------------------------ | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| クエリ期間      | avg-{SQL 型}、99-{SQL 型}    | クライアントから TiDB へのリクエストを受信してから、TiDB がリクエストを実行してクライアントに結果を返すまでの時間。通常、クライアント要求は SQL ステートメントの形式で送信されます。ただし、この期間には、 `COM_PING` 、 `COM_SLEEP` 、 `COM_STMT_FETCH` 、および`COM_SEND_LONG_DATA`などのコマンドの実行時間が含まれる場合があります。 TiDB は Multi-Query をサポートしています。これは、クライアントが`select 1; select 1; select 1;`などの複数の SQL ステートメントを一度に送信できることを意味します。この場合、このクエリの合計実行時間には、すべての SQL ステートメントの実行時間が含まれます。 |
+| 平均アイドル接続時間 | avg-in-txn、avg-not-in-txn | 接続アイドル期間は、接続がアイドル状態である期間を示します。<br/> avg-in-txn: 接続がトランザクション内にある場合の平均接続アイドル時間。<br/> avg-not-in-txn: 接続がトランザクション内にない場合の平均接続アイドル時間。                                                                                                                                                                                                                                         |
+| トークン期間を取得  | 平均、99                     | SQL ステートメントのトークンの取得に費やされた平均時間または P99 期間。                                                                                                                                                                                                                                                                                                                                 |
+| 解析期間       | 平均、99                     | SQL ステートメントの解析に費やされた平均時間または P99 期間。                                                                                                                                                                                                                                                                                                                                      |
+| コンパイル時間    | 平均、99                     | 解析された SQL AST を実行計画にコンパイルするのにかかった平均時間または P99 期間。                                                                                                                                                                                                                                                                                                                         |
+| 実行時間       | 平均、99                     | SQL ステートメントの実行計画の実行に費やされた平均時間または P99 期間。                                                                                                                                                                                                                                                                                                                                 |
 
-### Transaction
+### 取引 {#transaction}
 
-| Metric name  | Labels | Description                                   |
-| :------------| :------| :-------------------------------------------- |
-| Transaction Per Second | {types}-{transaction model} | The number of transactions executed per second. |
-| Transaction Duration | avg-{transaction model}, 99-{transaction model} | The execution duration of a transaction. |
+| 指標名              | ラベル                                  | 説明                      |
+| :--------------- | :----------------------------------- | :---------------------- |
+| 1 秒あたりのトランザクション数 | {タイプ}-{トランザクション モデル}                 | 1 秒あたりに実行されたトランザクションの数。 |
+| 取引期間             | avg-{トランザクション モデル}、99-{トランザクション モデル} | トランザクションの実行期間。          |
 
-### Core Path Duration
+### コア パス期間 {#core-path-duration}
 
-| Metric name  | Labels | Description                                   |
-| :------------| :------| :-------------------------------------------- |
-| Avg TiDB KV Request Duration | Get, Prewirite, Commit, and PessimisticLock | The average time consumed in executing KV requests in all TiDB instances based on request types, including `Get`, `Prewrite`, and `Commit`. |
-| Avg TiKV GRPC Duration | kv_get, kv_prewirite, kv_commit, and kv_pessimisticLock | The average time consumed in executing gRPC requests in all TiKV instances based request types, including `kv_get`, `kv_prewrite`, and `kv_commit`. |
-| Average / P99 PD TSO Wait/RPC Duration | wait-avg/99, rpc-avg/99 | Wait: the average time or P99 duration in waiting for PD to return TSO in all TiDB instances. <br/> RPC: the average time or P99 duration from sending TSO requests to PD to receiving TSO in all TiDB instances. |
-| Average / P99 Storage Async Write Duration | avg, 99 | The average time or P99 duration consumed in asynchronous writing. Average storage async write duration = Average store duration + Average apply duration. |
-| Average / P99 Store Duration | avg, 99 | The average time or P99 duration consumed in storing loop during asynchronously writing. |
-| Average / P99 Apply Duration | avg, 99 | The average time or P99 duration consumed in applying loop during asynchronously writing. |
-| Average / P99 Append Log Duration | avg, 99 | The average time or P99 duration consumed by Raft to append logs. |
-| Average / P99 Commit Log Duration | avg, 99 | The average time or P99 duration consumed by Raft to commit logs. |
-| Average / P99 Apply Log Duration | avg, 99 | The average time or P99 duration consumed by Raft to apply logs. |
+| 指標名                       | ラベル                                                  | 説明                                                                                                                                |
+| :------------------------ | :--------------------------------------------------- | :-------------------------------------------------------------------------------------------------------------------------------- |
+| 平均 TiDB KV リクエスト期間        | Get、Prewirite、Commit、および PessimisticLock             | `Get` 、 `Prewrite` 、および`Commit`を含むリクエスト タイプに基づく、すべての TiDB インスタンスでの KV リクエストの実行に費やされた平均時間。                                         |
+| 平均 TiKV GRPC 期間           | kv_get、kv_prewirite、kv_commit、および kv_pessimisticLock | `kv_get` 、 `kv_prewrite` 、および`kv_commit`を含むすべての TiKV インスタンス ベースのリクエスト タイプで gRPC リクエストの実行にかかった平均時間。                                |
+| 平均 / P99 PD TSO 待機/RPC 時間 | 待機-平均/99、rpc-平均/99                                   | 待機: PD がすべての TiDB インスタンスで TSO を返すのを待機する平均時間または P99 期間。<br/> RPC: TSO 要求を PD に送信してから、すべての TiDB インスタンスで TSO を受信するまでの平均時間または P99 期間。 |
+| 平均 / P99 ストレージ非同期書き込み時間   | 平均、99                                                | 非同期書き込みで消費された平均時間または P99 期間。平均ストレージ非同期書き込み時間 = 平均ストア時間 + 平均適用時間。                                                                  |
+| 平均 / P99 ストア期間            | 平均、99                                                | 非同期書き込み中のループの保存に費やされた平均時間または P99 期間。                                                                                              |
+| 平均 / P99 適用時間             | 平均、99                                                | 非同期書き込み中のループの適用で消費された平均時間または P99 期間。                                                                                              |
+| 平均 / P99 ログ追加期間           | 平均、99                                                | Raftがログを追加するために費やした平均時間または P99 期間。                                                                                                |
+| 平均 / P99 コミット ログ期間        | 平均、99                                                | ログをコミットするためにRaftが消費した平均時間または P99 期間。                                                                                              |
+| 平均 / P99 適用ログ期間           | 平均、99                                                | Raftがログを適用するために費やした平均時間または P99 期間。                                                                                                |
 
-### Server
+### サーバ {#server}
 
-| Metric name  | Labels | Description                                   |
-| :------------| :------| :-------------------------------------------- |
-| TiDB Uptime | instances | The runtime of each TiDB instance since last restart. |
-| TiDB CPU Usage | instances | The statistics of CPU usage of each TiDB instance. |
-| TiDB Memory Usage | instances | The memory usage statistics of each TiDB instance. |
-| TiKV Uptime | instances | The runtime of each TiKV instance since last restart. |
-| TiKV CPU Usage | instances | The statistics of CPU usage of each TiKV instance. |
-| TiKV Memory Usage | instances | The memory usage statistics of each TiKV instance. |
-| TiKV IO MBps | instances-write, instances-read | The total bytes of read and write in each TiKV instance. |
-| TiKV Storage Usage | instances | The storage size per TiKV instance. |
-| TiFlash Uptime | instances | The runtime of each TiFlash instance since last restart. |
-| TiFlash CPU Usage | instances | The statistics of CPU usage of each TiFlash instance. |
-| TiFlash Memory  | instances | The memory usage statistics of each TiFlash instance. |
-| TiFlash IO MBps | instances-write, instances-read | The total bytes of read and write in each TiFlash instance. |
-| TiFlash Storage Usage | instances | The storage size per TiFlash instance. |
+| 指標名              | ラベル                   | 説明                                |
+| :--------------- | :-------------------- | :-------------------------------- |
+| TiDB アップタイム      | インスタンス                | 前回の再起動以降の各 TiDB インスタンスの実行時間。      |
+| TiDB の CPU 使用率   | インスタンス                | 各 TiDB インスタンスの CPU 使用率の統計。        |
+| TiDB メモリ使用量      | インスタンス                | 各 TiDB インスタンスのメモリ使用統計。            |
+| TiKV アップタイム      | インスタンス                | 前回の再起動以降の各 TiKV インスタンスの実行時間。      |
+| TiKV の CPU 使用率   | インスタンス                | 各 TiKV インスタンスの CPU 使用率の統計。        |
+| TiKV メモリ使用量      | インスタンス                | 各 TiKV インスタンスのメモリ使用量の統計。          |
+| TiKV IO MBps     | インスタンス書き込み、インスタンス読み取り | 各 TiKV インスタンスでの読み取りと書き込みの合計バイト数。  |
+| TiKV ストレージの使用量   | インスタンス                | TiKV インスタンスあたりのストレージ サイズ。         |
+| TiFlash稼働時間      | インスタンス                | 前回の再起動以降の各TiFlashインスタンスの実行時間。     |
+| TiFlash のCPU 使用率 | インスタンス                | 各TiFlashインスタンスの CPU 使用率の統計。       |
+| TiFlashメモリ       | インスタンス                | 各TiFlashインスタンスのメモリ使用量の統計。         |
+| TiFlash IO MBps  | インスタンス書き込み、インスタンス読み取り | 各TiFlashインスタンスでの読み取りと書き込みの合計バイト数。 |
+| TiFlashストレージの使用量 | インスタンス                | TiFlashインスタンスあたりのストレージ サイズ。       |
 
-## FAQ
+## FAQ {#faq}
 
-**1. Why are some panes empty on this page?**
+**1. このページの一部のペインが空白なのはなぜですか?**
 
-If a pane does not provide any metrics, the possible reasons are as follows:
+ペインにメトリックが表示されない場合、考えられる理由は次のとおりです。
 
-- The workload of the corresponding cluster does not trigger this metric. For example, the failed query metric is always empty in the case of no failed queries.
-- The cluster version is low. You need to upgrade it to the latest version of TiDB to see these metrics.
+-   対応するクラスターのワークロードは、このメトリックをトリガーしません。たとえば、失敗したクエリがない場合、失敗したクエリ メトリックは常に空です。
+-   クラスターのバージョンが低くなっています。これらのメトリックを表示するには、TiDB の最新バージョンにアップグレードする必要があります。
 
-If all these reasons are excluded, you can contact the [PingCAP support team](/tidb-cloud/tidb-cloud-support.md) for troubleshooting.
+これらの理由がすべて除外されている場合は、トラブルシューティングのために[PingCAP サポート チーム](/tidb-cloud/tidb-cloud-support.md)に連絡できます。

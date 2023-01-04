@@ -3,98 +3,98 @@ title: Secure Connections to Serverless Tier Clusters
 summary: Introduce TLS connection in TiDB Serverless Tier clusters.
 ---
 
-# Secure Connections to Serverless Tier Clusters
+# サーバーレス層クラスターへのセキュリティ接続 {#secure-connections-to-serverless-tier-clusters}
 
-This document introduces the core information about TLS in TiDB Serverless Tier.
+このドキュメントでは、TiDB Serverless Tier における TLS に関するコア情報を紹介します。
 
-## Can I disable TLS in TiDB Serverless Tier?
+## TiDB サーバーレス層で TLS を無効にすることはできますか? {#can-i-disable-tls-in-tidb-serverless-tier}
 
-No.
+いいえ。
 
-TiDB Serverless Tier allows only TLS connections and rejects non-TLS connections. The reason is that users connect to TiDB Serverless Tier clusters through a public network, so it is really important to use TLS to ensure communication security.
+TiDB サーバーレス層は、TLS 接続のみを許可し、非 TLS 接続を拒否します。その理由は、ユーザーがパブリック ネットワークを介して TiDB Serverless Tier クラスターに接続するため、通信のセキュリティを確保するために TLS を使用することが非常に重要です。
 
-## What TLS versions can I use?
+## どの TLS バージョンを使用できますか? {#what-tls-versions-can-i-use}
 
-TiDB Serverless Tier only supports TLS 1.2 and TLS 1.3.
+TiDB サーバーレス層は、TLS 1.2 および TLS 1.3 のみをサポートします。
 
-## What certificates do I need？
+## どのような証明書が必要ですか? {#what-certificates-do-i-need}
 
-TiDB Serverless Tier uses certificates from [Let's Encrypt](https://letsencrypt.org/) as a Certificate Authority (CA) for TLS connection between clients and TiDB Serverless Tier clusters. Usually, the root certificate ([ISRG Root X1](https://letsencrypt.org/certs/isrgrootx1.pem.txt)) of Let's Encrypt is present in your system's root CA stores. If the client uses the system's root CA stores by default, such as Java and Go, you can easily connect securely to TiDB Serverless Tier clusters without specifying the path of CA roots.
+TiDB Serverless Tier は、クライアントと TiDB Serverless Tier クラスター間の TLS 接続の認証局 (CA) として[暗号化しましょう](https://letsencrypt.org/)からの証明書を使用します。通常、Let&#39;s Encrypt のルート証明書 ( [ISRGルートX1](https://letsencrypt.org/certs/isrgrootx1.pem.txt) ) は、システムのルート CA ストアに存在します。クライアントがJavaや Go などのシステムのルート CA ストアをデフォルトで使用する場合、CA ルートのパスを指定しなくても、TiDB Serverless Tier クラスターに簡単に安全に接続できます。
 
-However, some drivers and ORMs do not use the system root CA stores. In those cases, you need to configure the CA root path of the drivers or ORMs to your system root CA stores. For example, when you use [mysqlclient](https://github.com/PyMySQL/mysqlclient) to connect a TiDB Serverless Tier cluster in Python on macOS, you need to set `ca: /etc/ssl/cert.pem` in the `ssl` argument.
+ただし、一部のドライバーと ORM は、システム ルート CA ストアを使用しません。このような場合、ドライバーまたは ORM の CA ルート パスをシステム ルート CA ストアに構成する必要があります。たとえば、macOS 上の Python で TiDB Serverless Tier クラスターに[mysql クライアント](https://github.com/PyMySQL/mysqlclient)を使用して接続する場合、 `ssl`引数に`ca: /etc/ssl/cert.pem`を設定する必要があります。
 
-> **Note:**
+> **ノート：**
 >
-> TiDB Serverless Tier does not provide a CA root certificate download, because we don't guarantee that the same CA will be used to issue a certificate in the future, which will cause the CA root certificate to change.
+> TiDB Serverless Tier は CA ルート証明書のダウンロードを提供しません。これは、同じ CA が将来証明書を発行するために使用されることを保証しないためです。これにより、CA ルート証明書が変更されます。
 >
-> However, TiDB Serverless Tier ensures always using a CA root certificate that is commonly available, which is provided in all common systems.
+> ただし、TiDB Serverless Tier は、すべての一般的なシステムで提供されている一般的に利用可能な CA ルート証明書を常に使用することを保証します。
 >
-> If you really need the CA certificate of a TiDB Serverless Tier cluster, it is recommended that you download the [Mozilla CA Certificate bundle](https://curl.se/docs/caextract.html) instead of the single CA certificate in case we change the CA in the future.
+> TiDB Serverless Tier クラスターの CA 証明書が本当に必要な場合は、将来 CA を変更する場合に備えて、単一の CA 証明書ではなく[Mozilla CA 証明書バンドル](https://curl.se/docs/caextract.html)をダウンロードすることをお勧めします。
 
-## How do I connect to a TiDB Serverless Tier cluster in TLS connection?
+## TLS 接続で TiDB Serverless Tier クラスターに接続するにはどうすればよいですか? {#how-do-i-connect-to-a-tidb-serverless-tier-cluster-in-tls-connection}
 
-TiDB Cloud provides some connection examples in the **Connect** dialog. You can follow the instructions in [Connect via standard connection](/tidb-cloud/connect-to-tidb-cluster.md#connect-via-standard-connection) to connect to a TiDB Serverless Tier cluster.
+TiDB Cloudは、**接続**ダイアログでいくつかの接続例を提供します。 [標準接続で接続](/tidb-cloud/connect-to-tidb-cluster.md#connect-via-standard-connection)の手順に従って、TiDB Serverless Tier クラスターに接続できます。
 
-Generally, enabling TLS and offering a CA root path to authenticate the server is a good practice to prevent a man-in-the-middle attack. Different clients have different operations in the TLS connection. Enable TLS and verify the server according to your actual use of the client.
+一般に、TLS を有効にし、サーバーを認証するための CA ルート パスを提供することは、中間者攻撃を防ぐための良い方法です。クライアントが異なれば、TLS 接続での操作も異なります。 TLS を有効にし、クライアントの実際の使用に応じてサーバーを検証します。
 
-The following examples show the connection string in MySQL CLI client, MyCLI client, Java, Python, Go, and Node.js:
+次の例は、MySQL CLI クライアント、MyCLI クライアント、 Java、Python、Go、および Node.js の接続文字列を示しています。
 
 <SimpleTab>
 <div label="MySQL CLI client">
 
-MySQL CLI client attempts to establish TLS connection by default. When you connect to TiDB Serverless Tier clusters, you should set `ssl-mode` and `ssl-ca`.
+デフォルトでは、MySQL CLI クライアントは TLS 接続を確立しようとします。 TiDB Serverless Tier クラスターに接続する場合は、 `ssl-mode`と`ssl-ca`を設定する必要があります。
 
 ```shell
 mysql --connect-timeout 15 -u <username> -h <host> -P 4000 --ssl-mode=VERIFY_IDENTITY --ssl-ca=<CA_root_path> -D test -p
 ```
 
-- With `--ssl-mode=VERIFY_IDENTITY`, MySQL CLI client forces to enable TLS and validate TiDB Serverless Tier clusters.
-- Use `--ssl-ca=<CA_root_path>` to set the CA root path on your system.
+-   `--ssl-mode=VERIFY_IDENTITY`を指定すると、MySQL CLI クライアントは強制的に TLS を有効にし、TiDB サーバーレス層クラスターを検証します。
+-   システムの CA ルート パスを設定するには、 `--ssl-ca=<CA_root_path>`を使用します。
 
 </div>
 
 <div label="MyCLI client">
 
-[MyCLI](https://www.mycli.net/) automatically enables TLS when using TLS related parameters. When you connect to TiDB Serverless Tier clusters, you need to set `ssl-ca` and `ssl-verify-server-cert`.
+[MyCLI](https://www.mycli.net/)は、TLS 関連のパラメーターを使用するときに TLS を自動的に有効にします。 TiDB Serverless Tier クラスターに接続する場合は、 `ssl-ca`と`ssl-verify-server-cert`を設定する必要があります。
 
 ```shell
 mycli -u <username> -h <host> -P 4000 -D test --ssl-ca=<CA_root_path> --ssl-verify-server-cert
 ```
 
-- Use `--ssl-ca=<CA_root_path>` to set the CA root path on your system.
-- With `--ssl-verify-server-cert` to validate TiDB Serverless Tier clusters.
+-   システムの CA ルート パスを設定するには、 `--ssl-ca=<CA_root_path>`を使用します。
+-   `--ssl-verify-server-cert`を指定すると、TiDB サーバーレス層クラスターが検証されます。
 
 </div>
 
 <div label="Java">
 
-[MySQL Connector/J](https://dev.mysql.com/doc/connector-j/8.0/en/)'s TLS connection configurations are used here as an example.
+ここでは、例として[MySQL コネクタ/J](https://dev.mysql.com/doc/connector-j/8.0/en/)の TLS 接続構成が使用されています。
 
 ```
 jdbc:mysql://<host>:4000/test?user=<username>&password=<your_password>&sslMode=VERIFY_IDENTITY&enabledTLSProtocols=TLSv1.2,TLSv1.3
 ```
 
-- Set `sslMode=VERIFY_IDENTITY` to enable TLS and validate TiDB Serverless Tier clusters. JDBC trusts system CA root certificates by default, so you do not need to configure certificates.
-- Set `enabledTLSProtocols=TLSv1.2,TLSv1.3` to restrict the versions of TLS protocol.
+-   `sslMode=VERIFY_IDENTITY`を設定して TLS を有効にし、TiDB サーバーレス層クラスターを検証します。 JDBC はデフォルトでシステム CA ルート証明書を信頼するため、証明書を構成する必要はありません。
+-   TLS プロトコルのバージョンを制限するには、 `enabledTLSProtocols=TLSv1.2,TLSv1.3`を設定します。
 
 </div>
 
 <div label="Python">
 
-[mysqlclient](https://pypi.org/project/mysqlclient/)'s TLS connection configurations are used here as an example.
+ここでは、例として[mysql クライアント](https://pypi.org/project/mysqlclient/)の TLS 接続構成が使用されています。
 
 ```
 host="<host>", user="<username>", password="<your_password>", port=4000, database="test", ssl_mode="VERIFY_IDENTITY", ssl={"ca": "<CA_root_path>"}
 ```
 
-- Set `ssl_mode="VERIFY_IDENTITY"` to enable TLS and validate TiDB Serverless Tier clusters.
-- Set `ssl={"ca": "<CA_root_path>"}` to set the CA root path on your system.
+-   `ssl_mode="VERIFY_IDENTITY"`を設定して TLS を有効にし、TiDB サーバーレス層クラスターを検証します。
+-   システムの CA ルート パスを設定するには、 `ssl={"ca": "<CA_root_path>"}`を設定します。
 
 </div>
 
 <div label="Go">
 
-[Go-MySQL-Driver](https://github.com/go-sql-driver/mysql)'s TLS connection configurations are used here as an example.
+ここでは、例として[Go-MySQL-ドライバー](https://github.com/go-sql-driver/mysql)の TLS 接続構成が使用されています。
 
 ```
 mysql.RegisterTLSConfig("tidb", &tls.Config{
@@ -105,38 +105,38 @@ mysql.RegisterTLSConfig("tidb", &tls.Config{
 db, err := sql.Open("mysql", "<usename>:<your_password>@tcp(<host>:4000)/test?tls=tidb")
 ```
 
-- Register `tls.Config` in connection to enable TLS and validate TiDB Serverless Tier clusters. Go-MySQL-Driver uses system CA root certificates by default, so you do not need to configure certificates.
-- Set `MinVersion: tls.VersionTLS12` to restrict the versions of TLS protocol.
-- Set `ServerName: "<host>"` to verify TiDB Serverless Tier's hostname.
-- If you do not want to register a new TLS configuration, you can just set `tls=true` in the connection string.
+-   接続に`tls.Config`を登録して、TLS を有効にし、TiDB Serverless Tier クラスターを検証します。 Go-MySQL-Driver はデフォルトでシステム CA ルート証明書を使用するため、証明書を構成する必要はありません。
+-   TLS プロトコルのバージョンを制限するには、 `MinVersion: tls.VersionTLS12`を設定します。
+-   TiDB サーバーレス層のホスト名を確認するには、 `ServerName: "<host>"`を設定します。
+-   新しい TLS 構成を登録したくない場合は、接続文字列に`tls=true`を設定するだけです。
 
 </div>
 
 <div label="Node.js">
 
-[Mysql2](https://www.npmjs.com/package/mysql2)'s TLS connection configurations are used here as an example.
+ここでは、例として[Mysql2](https://www.npmjs.com/package/mysql2)の TLS 接続構成が使用されています。
 
 ```
 host: '<host>', port: 4000,user: '<username>', password: '<your_password>', database: 'test', ssl: {minVersion: 'TLSv1.2', rejectUnauthorized: true}
 ```
 
-- Set `ssl: {minVersion: 'TLSv1.2'}` to restrict the versions of TLS protocol.
-- Set `ssl: {rejectUnauthorized: true}` to validate TiDB Serverless Tier clusters. Mysql2 uses system CA root certificates by default, so you do not need to configure certificates.
+-   TLS プロトコルのバージョンを制限するには、 `ssl: {minVersion: 'TLSv1.2'}`を設定します。
+-   TiDB サーバーレス層クラスターを検証するには、 `ssl: {rejectUnauthorized: true}`を設定します。 Mysql2 はデフォルトでシステム CA ルート証明書を使用するため、証明書を構成する必要はありません。
 
 </div>
 </SimpleTab>
 
-## Where is the CA root path on my system?
+## システムの CA ルート パスはどこにありますか? {#where-is-the-ca-root-path-on-my-system}
 
-The following lists the CA root paths on common platforms.
+一般的なプラットフォームでの CA ルート パスを次に示します。
 
-**MacOS**
+**マックOS**
 
 ```
 /etc/ssl/cert.pem
 ```
 
-**Debian / Ubuntu / Arch**
+**Debian / Ubuntu / アーチ**
 
 ```
 /etc/ssl/certs/ca-certificates.crt
@@ -148,7 +148,7 @@ The following lists the CA root paths on common platforms.
 /etc/pki/tls/certs/ca-bundle.crt
 ```
 
-**Alpine**
+**高山**
 
 ```
 /etc/ssl/cert.pem
@@ -160,8 +160,8 @@ The following lists the CA root paths on common platforms.
 /etc/ssl/ca-bundle.pem
 ```
 
-## Can TiDB Serverless Tier verify the client's identity?
+## TiDB Serverless Tier はクライアントの身元を確認できますか? {#can-tidb-serverless-tier-verify-the-client-s-identity}
 
-No.
+いいえ。
 
-Currently, TiDB Serverless Tier uses one-way TLS authentication, which means only the client uses the public certificate pair to validate the server while the server does not validate the client. For example, when you use MySQL CLI client, you cannot configure `--ssl-cert` or `--ssl-key` in connection strings.
+現在、TiDB Serverless Tier は一方向 TLS 認証を使用しています。つまり、クライアントのみがパブリック証明書ペアを使用してサーバーを検証し、サーバーはクライアントを検証しません。たとえば、MySQL CLI クライアントを使用する場合、接続文字列で`--ssl-cert`または`--ssl-key`を構成することはできません。

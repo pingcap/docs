@@ -3,45 +3,45 @@ title: mysql Schema
 summary: Learn about the TiDB system tables.
 ---
 
-# `mysql` Schema
+# <code>mysql</code>スキーマ {#code-mysql-code-schema}
 
-The `mysql` schema contains TiDB system tables. The design is similar to the `mysql` schema in MySQL, where tables such as `mysql.user` can be edited directly. It also contains a number of tables which are extensions to MySQL.
+`mysql`スキーマには、TiDB システム テーブルが含まれています。設計は MySQL の`mysql`スキーマに似ており、 `mysql.user`などのテーブルを直接編集できます。また、MySQL の拡張機能である多数のテーブルも含まれています。
 
-## Grant system tables
+## システム テーブルの付与 {#grant-system-tables}
 
-These system tables contain grant information about user accounts and their privileges:
+これらのシステム テーブルには、ユーザー アカウントとその権限に関する付与情報が含まれています。
 
-- `user`: user accounts, global privileges, and other non-privilege columns
-- `db`: database-level privileges
-- `tables_priv`: table-level privileges
-- `columns_priv`: column-level privileges
-- `password_history`: password change history
+-   `user` : ユーザー アカウント、グローバル権限、およびその他の権限以外の列
+-   `db` : データベース レベルの権限
+-   `tables_priv` : テーブルレベルの権限
+-   `columns_priv` : 列レベルの権限
+-   `password_history` : パスワード変更履歴
 
-## Server-side help system tables
+## サーバー側のヘルプ システム テーブル {#server-side-help-system-tables}
 
-Currently, the `help_topic` is NULL.
+現在、 `help_topic`は NULL です。
 
-## Statistics system tables
+## 統計システム テーブル {#statistics-system-tables}
 
-- `stats_buckets`: the buckets of statistics
-- `stats_histograms`: the histograms of statistics
-- `stats_meta`: the meta information of tables, such as the total number of rows and updated rows
-- `analyze_jobs`: the ongoing statistics collection tasks and the history task records within the last 7 days
+-   `stats_buckets` : 統計のバケット
+-   `stats_histograms` : 統計のヒストグラム
+-   `stats_meta` : 行の総数や更新された行など、テーブルのメタ情報
+-   `analyze_jobs` : 進行中の統計収集タスクと過去 7 日間の履歴タスク レコード
 
-## GC worker system tables
+## GC ワーカー システム テーブル {#gc-worker-system-tables}
 
-- `gc_delete_range`: to record the data to be deleted
+-   `gc_delete_range` : 削除するデータを記録する
 
-## System tables related to cached tables
+## キャッシュされたテーブルに関連するシステム テーブル {#system-tables-related-to-cached-tables}
 
-* `table_cache_meta` stores the metadata of cached tables.
+-   `table_cache_meta`は、キャッシュされたテーブルのメタデータを格納します。
 
-## Miscellaneous system tables
+## その他のシステム テーブル {#miscellaneous-system-tables}
 
-- `GLOBAL_VARIABLES`: global system variable table
+-   `GLOBAL_VARIABLES` : グローバル システム変数テーブル
 
 <CustomContent platform="tidb">
 
-- `tidb`: to record the version information when TiDB executes `bootstrap`
+-   `tidb` : TiDB 実行時のバージョン情報を記録する`bootstrap`
 
 </CustomContent>

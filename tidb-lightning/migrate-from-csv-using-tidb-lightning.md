@@ -3,30 +3,30 @@ title: TiDB Lightning CSV Support and Restrictions
 summary: Learn how to import CSV files via TiDB Lightning.
 ---
 
-# TiDB Lightning CSV Support and Restrictions
+# TiDB Lightning CSV のサポートと制限 {#tidb-lightning-csv-support-and-restrictions}
 
-This document describes how to migrate data from CSV files to TiDB using TiDB Lightning. For information about how to generate CSV files from MySQL, see [Export to CSV files using Dumpling](/dumpling-overview.md#export-to-csv-files).
+このドキュメントでは、 TiDB Lightningを使用して CSV ファイルから TiDB にデータを移行する方法について説明します。 MySQL から CSV ファイルを生成する方法については、 [Dumplingを使用して CSV ファイルにエクスポートする](/dumpling-overview.md#export-to-csv-files)を参照してください。
 
-TiDB Lightning supports reading CSV (comma-separated values) data source, as well as other delimited format such as TSV (tab-separated values).
+TiDB Lightningは、CSV (カンマ区切り値) データ ソースの読み取りと、TSV (タブ区切り値) などの他の区切り形式をサポートしています。
 
-## File name
+## ファイル名 {#file-name}
 
-A CSV file representing a whole table must be named as `db_name.table_name.csv`. This will be restored as a table `table_name` inside the database `db_name`.
+テーブル全体を表す CSV ファイルには`db_name.table_name.csv`という名前を付ける必要があります。これは、データベース`db_name`内のテーブル`table_name`として復元されます。
 
-If a table spans multiple CSV files, they should be named like `db_name.table_name.003.csv`. The number part do not need to be continuous, but must be increasing and zero-padded.
+テーブルが複数の CSV ファイルにまたがる場合は、 `db_name.table_name.003.csv`のように名前を付ける必要があります。数値部分は連続している必要はありませんが、増加し、ゼロが埋め込まれている必要があります。
 
-The file extension must be `*.csv`, even if the content is not separated by commas.
+コンテンツがコンマで区切られていない場合でも、ファイル拡張子は`*.csv`でなければなりません。
 
-## Schema
+## スキーマ {#schema}
 
-CSV files are schema-less. To import them into TiDB, a table schema must be provided. This could be done either by:
+CSV ファイルはスキーマレスです。それらを TiDB にインポートするには、テーブル スキーマを提供する必要があります。これは、次のいずれかで実行できます。
 
-* Providing a file named `db_name.table_name-schema.sql` containing the `CREATE TABLE` DDL statement, and also a file named `db_name-schema-create.sql` containing the `CREATE DATABASE` DDL statement.
-* Manually creating the table schema in TiDB.
+-   `CREATE TABLE` DDL ステートメントを含む`db_name.table_name-schema.sql`という名前のファイルと、 `CREATE DATABASE` DDL ステートメントを含む`db_name-schema-create.sql`という名前のファイルを提供します。
+-   TiDB でテーブル スキーマを手動で作成します。
 
-## Configuration
+## Configuration / コンフィグレーション {#configuration}
 
-The CSV format can be configured in `tidb-lightning.toml` under the `[mydumper.csv]` section. Most settings have a corresponding option in the MySQL [`LOAD DATA`] statement.
+CSV 形式は、 `[mydumper.csv]`セクションの`tidb-lightning.toml`で構成できます。ほとんどの設定には、MySQL [`LOAD DATA`]ステートメントに対応するオプションがあります。
 
 ```toml
 [mydumper.csv]
@@ -51,144 +51,150 @@ backslash-escape = true
 trim-last-separator = false
 ```
 
-In all string fields such as `separator`, `delimiter` and `terminator`, if the input involves special characters, you can use backslash escape sequence to represent them in a *double-quoted* string (`"…"`). For example, `separator = "\u001f"` means using the ASCII character 0x1F as separator.
+`separator` 、 `delimiter` 、 `terminator`などのすべての文字列フィールドで、入力に特殊文字が含まれている場合は、バックスラッシュ エスケープ シーケンスを使用して、それらを*二重引用符で囲まれ*た文字列 ( `"…"` ) で表すことができます。たとえば、 `separator = "\u001f"`は ASCII 文字 0x1F をセパレータとして使用することを意味します。
 
-Additionally, you can use *single-quoted* strings (`'…'`) to suppress backslash escaping. For example, `terminator = '\n'` means using the two-character string: a backslash followed by the letter "n", as the terminator.
+さらに、*単一引用符で囲まれ*た文字列 ( `'…'` ) を使用して、バックスラッシュのエスケープを抑制することができます。たとえば、 `terminator = '\n'`は 2 文字の文字列を使用することを意味します: バックスラッシュの後に文字 &quot;n&quot; がターミネータとして続きます。
 
-See the [TOML v1.0.0 specification] for details.
+詳細は[TOML v1.0.0 specification]を参照してください。
 
 [`LOAD DATA`]: https://dev.mysql.com/doc/refman/8.0/en/load-data.html
 
 [TOML v1.0.0 specification]: https://toml.io/en/v1.0.0#string
 
-### `separator`
+### <code>separator</code> {#code-separator-code}
 
-- Defines the field separator.
-- Can be multiple characters, but must not be empty.
-- Common values:
+-   フィールド区切りを定義します。
 
-    * `','` for CSV (comma-separated values)
-    * `"\t"` for TSV (tab-separated values)
-    * `"\u0001"` to use the ASCII character 0x01 as separator
+-   複数の文字を指定できますが、空にすることはできません。
 
-- Corresponds to the `FIELDS TERMINATED BY` option in the LOAD DATA statement.
+-   一般的な値:
 
-### `delimiter`
+    -   CSV (カンマ区切り値) の場合は`','`
+    -   TSV (タブ区切り値) の場合は`"\t"`
+    -   ASCII 文字 0x01 をセパレータとして使用する場合は`"\u0001"`
 
-- Defines the delimiter used for quoting.
-- If `delimiter` is empty, all fields are unquoted.
-- Common values:
+-   LOAD DATA ステートメントの`FIELDS TERMINATED BY`オプションに対応します。
 
-    * `'"'` quote fields with double-quote, same as [RFC 4180]
-    * `''` disable quoting
+### <code>delimiter</code> {#code-delimiter-code}
 
-- Corresponds to the `FIELDS ENCLOSED BY` option in the `LOAD DATA` statement.
+-   引用に使用する区切り文字を定義します。
+
+-   `delimiter`が空の場合、すべてのフィールドは引用符で囲まれていません。
+
+-   一般的な値:
+
+    -   二重引用符で囲まれた`'"'`個の引用フィールド、 [RFC 4180]個と同じ
+    -   `''`引用を無効にする
+
+-   `LOAD DATA`ステートメントの`FIELDS ENCLOSED BY`オプションに対応します。
 
 [RFC 4180]: https://tools.ietf.org/html/rfc4180
 
-### `terminator`
+### <code>terminator</code> {#code-terminator-code}
 
-- Defines the line terminator.
-- If `terminator` is empty, both `"\r"` (U+000D Carriage Return) and `"\n"` (U+000A Line Feed) are used as terminator.
-- Corresponds to the `LINES TERMINATED BY` option in the `LOAD DATA` statement.
+-   行末記号を定義します。
+-   `terminator`が空の場合、 `"\r"` (U+000D キャリッジ リターン) と`"\n"` (U+000A ライン フィード) の両方がターミネータとして使用されます。
+-   `LOAD DATA`ステートメントの`LINES TERMINATED BY`オプションに対応します。
 
-### `header`
+### <code>header</code> {#code-header-code}
 
-- Whether *all* CSV files contain a header row.
-- If `header` is true, the first row will be used as the *column names*. If `header` is false, the first row is not special and treated as an ordinary data row.
+-   *すべての*CSV ファイルにヘッダー行が含まれているかどうか。
+-   `header`が true の場合、最初の行が*列名*として使用されます。 `header`が false の場合、最初の行は特別ではなく、通常のデータ行として扱われます。
 
-### `not-null` and `null`
+### <code>not-null</code>および<code>null</code> {#code-not-null-code-and-code-null-code}
 
-- The `not-null` setting controls whether all fields are non-nullable.
-- If `not-null` is false, the string specified by `null` will be transformed to the SQL NULL instead of a concrete value.
-- Quoting will not affect whether a field is null.
+-   `not-null`設定は、すべてのフィールドが null 非許容であるかどうかを制御します。
+-   `not-null`が false の場合、 `null`で指定された文字列は、具体的な値ではなく SQL NULL に変換されます。
+-   引用符は、フィールドが null であるかどうかには影響しません。
 
-    For example, with the CSV file:
+    たとえば、CSV ファイルの場合:
 
     ```csv
     A,B,C
     \N,"\N",
     ```
 
-    In the default settings (`not-null = false; null = '\N'`), the columns `A` and `B` are both converted to NULL after importing to TiDB. The column `C` is simply the empty string `''` but not NULL.
+    デフォルト設定 ( `not-null = false; null = '\N'` ) では、列`A`と`B`は両方とも、TiDB へのインポート後に NULL に変換されます。列`C`は単に空の文字列`''`ですが、NULL ではありません。
 
-### `backslash-escape`
+### <code>backslash-escape</code> {#code-backslash-escape-code}
 
-- Whether to interpret backslash escapes inside fields.
-- If `backslash-escape` is true, the following sequences are recognized and transformed:
+-   フィールド内のバックスラッシュ エスケープを解釈するかどうか。
 
-    | Sequence | Converted to             |
-    |----------|--------------------------|
-    | `\0`     | Null character (U+0000)  |
-    | `\b`     | Backspace (U+0008)       |
-    | `\n`     | Line feed (U+000A)       |
-    | `\r`     | Carriage return (U+000D) |
-    | `\t`     | Tab (U+0009)             |
-    | `\Z`     | Windows EOF (U+001A)     |
+-   `backslash-escape`が true の場合、次のシーケンスが認識され、変換されます。
 
-    In all other cases (for example, `\"`) the backslash is simply stripped, leaving the next character (`"`) in the field. The character left has no special roles (for example, delimiters) and is just an ordinary character.
+    | シーケンス | に変換                  |
+    | ----- | -------------------- |
+    | `\0`  | 空文字 (U+0000)         |
+    | `\b`  | バックスペース (U+0008)     |
+    | `\n`  | 改行 (U+000A)          |
+    | `\r`  | キャリッジ リターン (U+000D)  |
+    | `\t`  | タブ (U+0009)          |
+    | `\Z`  | Windows EOF (U+001A) |
 
-- Quoting will not affect whether backslash escapes are interpreted.
+    他のすべての場合 (たとえば、 `\"` ) では、バックスラッシュは単純に取り除かれ、次の文字 ( `"` ) がフィールドに残ります。左の文字には特別な役割 (区切り文字など) はなく、単なる通常の文字です。
 
-- Corresponds to the `FIELDS ESCAPED BY '\'` option in the `LOAD DATA` statement.
+-   引用符は、バックスラッシュ エスケープが解釈されるかどうかには影響しません。
 
-### `trim-last-separator`
+-   `LOAD DATA`ステートメントの`FIELDS ESCAPED BY '\'`オプションに対応します。
 
-- Treats the field `separator` as a terminator, and removes all trailing separators.
+### <code>trim-last-separator</code> {#code-trim-last-separator-code}
 
-    For example, with the CSV file:
+-   フィールド`separator`をターミネータとして扱い、末尾のセパレータをすべて削除します。
+
+    たとえば、CSV ファイルの場合:
 
     ```csv
     A,,B,,
     ```
 
-- When `trim-last-separator = false`, this is interpreted as a row of 5 fields `('A', '', 'B', '', '')`.
-- When `trim-last-separator = true`, this is interpreted as a row of 3 fields `('A', '', 'B')`.
+-   `trim-last-separator = false`の場合、これは 5 つのフィールド`('A', '', 'B', '', '')`の行として解釈されます。
 
-- This option is deprecated, because the behavior with multiple trailing separators is not intuitive. Use the `terminator` option instead. If your old configuration was
+-   `trim-last-separator = true`の場合、これは 3 つのフィールド`('A', '', 'B')`の行として解釈されます。
+
+-   複数の末尾の区切り文字を使用した動作は直感的ではないため、このオプションは非推奨です。代わりに`terminator`オプションを使用してください。古い構成が
 
     ```toml
     separator = ','
     trim-last-separator = true
     ```
 
-    we recommend changing this to
+    これをに変更することをお勧めします
 
     ```toml
     separator = ','
     terminator = ",\n"
     ```
 
-### Non-configurable options
+### 構成不可能なオプション {#non-configurable-options}
 
-TiDB Lightning does not support every option supported by the `LOAD DATA` statement. Some examples:
+TiDB Lightningは、 `LOAD DATA`ステートメントでサポートされているすべてのオプションをサポートしているわけではありません。いくつかの例：
 
-* There cannot be line prefixes (`LINES STARTING BY`).
-* The header cannot be simply skipped (`IGNORE n LINES`). It must be valid column names if present.
+-   行のプレフィックス ( `LINES STARTING BY` ) は使用できません。
+-   ヘッダーを単純にスキップすることはできません ( `IGNORE n LINES` )。存在する場合は、有効な列名でなければなりません。
 
-## Strict format
+## 厳密な形式 {#strict-format}
 
-Lightning works the best when the input files have uniform size around 256 MB. When the input is a single huge CSV file, Lightning can only use one thread to process it, which slows down import speed a lot.
+入力ファイルのサイズが 256 MB 前後で一定の場合、Lightning は最適に機能します。入力が単一の巨大な CSV ファイルの場合、Lightning はそれを処理するために 1 つのスレッドしか使用できないため、インポート速度が大幅に低下します。
 
-This can be fixed by splitting the CSV into multiple files first. For the generic CSV format, there is no way to quickly identify when a row starts and ends without reading the whole file. Therefore, Lightning by default does *not* automatically split a CSV file. However, if you are certain that the CSV input adheres to certain restrictions, you can enable the `strict-format` setting to allow Lightning to split the file into multiple 256 MB-sized chunks for parallel processing.
+これは、最初に CSV を複数のファイルに分割することで修正できます。一般的な CSV 形式の場合、ファイル全体を読み取らずに行の開始時刻と終了時刻をすばやく識別する方法はありません。したがって、デフォルトでは、Lightning は CSV ファイルを自動的に分割しませ*ん*。ただし、CSV 入力が特定の制限に準拠していることが確実な場合は、 `strict-format`設定を有効にして、Lightning がファイルを複数の 256 MB サイズのチャンクに分割して並列処理できるようにすることができます。
 
 ```toml
 [mydumper]
 strict-format = true
 ```
 
-Currently, a strict CSV file means every field occupies only a single line. In other words, one of the following must be true:
+現在、厳密な CSV ファイルは、すべてのフィールドが 1 行のみを占めることを意味します。つまり、次のいずれかに該当する必要があります。
 
-* Delimiter is empty, or
-* Every field does not contain the terminator itself. In the default configuration, this means every field does not contain CR (`\r`) or LF (`\n`).
+-   区切り文字が空であるか、または
+-   すべてのフィールドにターミネータ自体が含まれているわけではありません。デフォルトの構成では、これはすべてのフィールドに CR ( `\r` ) または LF ( `\n` ) が含まれていないことを意味します。
 
-If a CSV file is not strict, but `strict-format` was wrongly set to `true`, a field spanning multiple lines may be cut in half into two chunks, causing parse failure, or even worse, quietly importing corrupted data.
+CSV ファイルが厳密ではなく、 `strict-format`が誤って`true`に設定されている場合、複数行にまたがるフィールドが半分に分割されて 2 つのチャンクになり、解析が失敗するか、さらに悪いことに、破損したデータが静かにインポートされる可能性があります。
 
-## Common configurations
+## 一般的な構成 {#common-configurations}
 
-### CSV
+### CSV {#csv}
 
-The default setting is already tuned for CSV following RFC 4180.
+デフォルト設定は、RFC 4180 に従って CSV 用に調整済みです。
 
 ```toml
 [mydumper.csv]
@@ -200,7 +206,7 @@ null = '\N'
 backslash-escape = true
 ```
 
-Example content:
+コンテンツの例:
 
 ```
 ID,Region,Count
@@ -210,7 +216,7 @@ ID,Region,Count
 4,"North",39
 ```
 
-### TSV
+### TSV {#tsv}
 
 ```toml
 [mydumper.csv]
@@ -222,7 +228,7 @@ null = 'NULL'
 backslash-escape = false
 ```
 
-Example content:
+コンテンツの例:
 
 ```
 ID    Region    Count
@@ -232,7 +238,7 @@ ID    Region    Count
 4     North     39
 ```
 
-### TPC-H DBGEN
+### TPC-H DBGEN {#tpc-h-dbgen}
 
 ```toml
 [mydumper.csv]
@@ -244,7 +250,7 @@ not-null = true
 backslash-escape = false
 ```
 
-Example content:
+コンテンツの例:
 
 ```
 1|East|32|

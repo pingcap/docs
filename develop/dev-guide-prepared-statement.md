@@ -3,110 +3,110 @@ title: Prepared Statements
 summary: Learn about how to use the TiDB prepared statements.
 ---
 
-# Prepared Statements
+# 準備されたステートメント {#prepared-statements}
 
-A [prepared statement](/sql-statements/sql-statement-prepare.md) templatizes multiple SQL statements in which only parameters are different. It separates the SQL statements from the parameters. You can use it to improve the following aspects of SQL statements:
+[プリペアドステートメント](/sql-statements/sql-statement-prepare.md)は、パラメーターのみが異なる複数の SQL ステートメントをテンプレート化します。これにより、SQL ステートメントがパラメーターから分離されます。これを使用して、SQL ステートメントの次の側面を改善できます。
 
-- **Security**: Because parameters and statements are separated, the risk of [SQL injection](https://en.wikipedia.org/wiki/SQL_injection) attacks is avoided.
-- **Performance**: Because the statement is parsed in advance on the TiDB server, only parameters are passed for subsequent executions, saving the cost of parsing the entire SQL statements, splicing SQL statement strings, and network transmission.
+-   **セキュリティ**: パラメータとステートメントが分離されているため、 [SQL インジェクション](https://en.wikipedia.org/wiki/SQL_injection)の攻撃のリスクが回避されます。
+-   **パフォーマンス**: ステートメントは TiDBサーバーで事前に解析されるため、後続の実行ではパラメーターのみが渡され、SQL ステートメント全体の解析、SQL ステートメント文字列のスプライシング、およびネットワーク送信のコストが節約されます。
 
-In most applications, SQL statements can be enumerated. You can use a limited number of SQL statements to complete data queries for the entire application. So using a prepared statement is a best practice.
+ほとんどのアプリケーションでは、SQL ステートメントを列挙できます。限られた数の SQL ステートメントを使用して、アプリケーション全体のデータ クエリを完了することができます。そのため、プリペアドステートメントを使用するのがベスト プラクティスです。
 
-## SQL syntax
+## SQL 構文 {#sql-syntax}
 
-This section describes the SQL syntax for creating, running and deleting a prepared statement.
+このセクションでは、プリペアドステートメントを作成、実行、および削除するための SQL 構文について説明します。
 
-### Create a prepared statement
+### プリペアドステートメントを作成する {#create-a-prepared-statement}
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 PREPARE {prepared_statement_name} FROM '{prepared_statement_sql}';
 ```
 
-| Parameter Name | Description |
-| :-------------------------: | :------------------------------------: |
-| `{prepared_statement_name}` | name of the prepared statement|
-| `{prepared_statement_sql}`  | the prepared statement SQL with a question mark as a placeholder |
+|            パラメータ名           |                説明                |
+| :-------------------------: | :------------------------------: |
+| `{prepared_statement_name}` |          プリペアドステートメントの名前         |
+|  `{prepared_statement_sql}` | プレースホルダーとして疑問符を含むプリペアドステートメントSQL |
 
-See [PREPARE statement](/sql-statements/sql-statement-prepare.md) for more information.
+詳細については、 [PREPARE ステートメント](/sql-statements/sql-statement-prepare.md)を参照してください。
 
-### Use the prepared statement
+### プリペアドステートメントを使用する {#use-the-prepared-statement}
 
-A prepared statement can only use **user variables** as parameters, so use the [`SET` statement](/sql-statements/sql-statement-set-variable.md) to set the variables before the [`EXECUTE` statement](/sql-statements/sql-statement-execute.md) can call the prepared statement.
+プリペアドステートメントは**ユーザー変数**のみをパラメーターとして使用できるため、 [`EXECUTE`ステートメント](/sql-statements/sql-statement-execute.md)がプリペアドステートメントを呼び出す前に、 [`SET`ステートメント](/sql-statements/sql-statement-set-variable.md)を使用して変数を設定します。
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 SET @{parameter_name} = {parameter_value};
 EXECUTE {prepared_statement_name} USING @{parameter_name};
 ```
 
-| Parameter Name | Description |
-| :-------------------------: | :-------------------------------------------------------------------: |
-|     `{parameter_name}`      |                              user variable name                               |
-|     `{parameter_value}`     |                              user variable value                               |
-| `{prepared_statement_name}` | The name of the preprocessing statement, which must be the same as the name defined in the [Create a prepared statement](#create-a-prepared-statement) |
+|            パラメータ名           |                                             説明                                             |
+| :-------------------------: | :----------------------------------------------------------------------------------------: |
+|      `{parameter_name}`     |                                           ユーザー変数名                                          |
+|     `{parameter_value}`     |                                           ユーザー変数値                                          |
+| `{prepared_statement_name}` | 前処理ステートメントの名前。これは、 [プリペアドステートメントを作成する](#create-a-prepared-statement)で定義された名前と同じでなければなりません。 |
 
-See the [`EXECUTE` statement](/sql-statements/sql-statement-execute.md) for more information.
+詳細については、 [`EXECUTE`ステートメント](/sql-statements/sql-statement-execute.md)を参照してください。
 
-### Delete the prepared statement
+### プリペアドステートメントを削除する {#delete-the-prepared-statement}
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 DEALLOCATE PREPARE {prepared_statement_name};
 ```
 
-| Parameter Name | Description |
-| :-------------------------: | :-------------------------------------------------------------------: |
-| `{prepared_statement_name}` | The name of the preprocessing statement, which must be the same as the name defined in the [Create a prepared statement](#create-a-prepared-statement) |
+|            パラメータ名           |                                             説明                                             |
+| :-------------------------: | :----------------------------------------------------------------------------------------: |
+| `{prepared_statement_name}` | 前処理ステートメントの名前。これは、 [プリペアドステートメントを作成する](#create-a-prepared-statement)で定義された名前と同じでなければなりません。 |
 
-See the [`DEALLOCATE` statement](/sql-statements/sql-statement-deallocate.md) for more information.
+詳細については、 [`DEALLOCATE`ステートメント](/sql-statements/sql-statement-deallocate.md)を参照してください。
 
-## Examples
+## 例 {#examples}
 
-This section describes two examples of prepared statements: `SELECT` data and `INSERT` data.
+このセクションでは、準備済みステートメントの 2 つの例 ( `SELECT`データと`INSERT`データ) について説明します。
 
-### `SELECT` example
+### <code>SELECT</code>例 {#code-select-code-example}
 
-For example, you need to query a book with `id = 1` in the [`bookshop` application](/develop/dev-guide-bookshop-schema-design.md#books-table).
+たとえば、 [`bookshop`申し込み](/develop/dev-guide-bookshop-schema-design.md#books-table)中`id = 1`の本を照会する必要があります。
 
 <SimpleTab groupId="language">
 
 <div label="SQL" value="sql">
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 PREPARE `books_query` FROM 'SELECT * FROM `books` WHERE `id` = ?';
 ```
 
-Running result:
+実行結果:
 
 ```
 Query OK, 0 rows affected (0.01 sec)
 ```
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 SET @id = 1;
 ```
 
-Running result:
+実行結果:
 
 ```
 Query OK, 0 rows affected (0.04 sec)
 ```
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 EXECUTE `books_query` USING @id;
 ```
 
-Running result:
+実行結果:
 
 ```
 +---------+---------------------------------+--------+---------------------+-------+--------+
@@ -147,27 +147,27 @@ try (Connection connection = ds.getConnection()) {
 
 </SimpleTab>
 
-### `INSERT` example
+### <code>INSERT</code>例 {#code-insert-code-example}
 
-Using the [`books` table](/develop/dev-guide-bookshop-schema-design.md#books-table) as an example, you need to insert a book with `title = TiDB Developer Guide`, `type = Science & Technology`, `stock = 100`, `price = 0.0`, and `published_at = NOW()` (current time of insertion). Note that you don't need to specify the `AUTO_RANDOM` attribute in the **primary key** of the `books` table. For more information about inserting data, see [Insert Data](/develop/dev-guide-insert-data.md).
+例として[`books`テーブル](/develop/dev-guide-bookshop-schema-design.md#books-table)を使用すると、 `title = TiDB Developer Guide` 、 `type = Science & Technology` 、 `stock = 100` 、 `price = 0.0` 、および`published_at = NOW()` (現在の挿入時間) の本を挿入する必要があります。 `books`テーブルの**主キー**に`AUTO_RANDOM`属性を指定する必要がないことに注意してください。データの挿入の詳細については、 [データの挿入](/develop/dev-guide-insert-data.md)を参照してください。
 
 <SimpleTab groupId="language">
 
 <div label="SQL" value="sql">
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 PREPARE `books_insert` FROM 'INSERT INTO `books` (`title`, `type`, `stock`, `price`, `published_at`) VALUES (?, ?, ?, ?, ?);';
 ```
 
-Running result:
+実行結果:
 
 ```
 Query OK, 0 rows affected (0.03 sec)
 ```
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 SET @title = 'TiDB Developer Guide';
@@ -177,19 +177,19 @@ SET @price = 0.0;
 SET @published_at = NOW();
 ```
 
-Running result:
+実行結果:
 
 ```
 Query OK, 0 rows affected (0.04 sec)
 ```
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 EXECUTE `books_insert` USING @title, @type, @stock, @price, @published_at;
 ```
 
-Running result:
+実行結果:
 
 ```
 Query OK, 1 row affected (0.03 sec)
@@ -218,30 +218,30 @@ try (Connection connection = ds.getConnection()) {
 }
 ```
 
-As you can see, JDBC helps you control the life cycle of prepared statements and you don't need to manually create, use, or delete prepared statements in your application. However, note that because TiDB is compatible with MySQL, the default configuration for using MySQL JDBC Driver on the client-side is not to enable the **_server-side_** prepared statement option, but to use the client-side prepared statement.
+ご覧のとおり、JDBC は準備済みステートメントのライフサイクルを制御するのに役立ち、アプリケーションで準備済みステートメントを手動で作成、使用、または削除する必要はありません。ただし、TiDB は MySQL と互換性があるため、クライアント側で MySQL JDBCDriverを使用するためのデフォルトの構成は、***サーバー側の***プリペアドステートメントオプションを有効にするのではなく、クライアント側のプリペアドステートメントを使用することです。
 
-The following configurations help you use the TiDB server-side prepared statements under JDBC:
+次の構成は、JDBC で TiDB サーバー側の準備済みステートメントを使用するのに役立ちます。
 
-|            Parameter            |                 Means                  |   Recommended Scenario   | Recommended Configuration|
-| :------------------------: | :-----------------------------------: | :-----------------------------------------------------------------------------------------------------------------------------------------------: | :----------------------: |
-|    `useServerPrepStmts`    |    Whether to use the server side to enable prepared statements    |  When you need to use a prepared statement more than once                                                             |          `true`          |
-|      `cachePrepStmts`      |       Whether the client caches prepared statements        |                                                           `useServerPrepStmts=true` 时                                                            |          `true`          |
-|  `prepStmtCacheSqlLimit`   |  Maximum size of a prepared statement (256 characters by default)  | When the prepared statement is greater than 256 characters | Configured according to the actual size of the prepared statement |
-|    `prepStmtCacheSize`     | Maximum number of prepared statements (25 by default) | When the number of prepared statements is greater than 25  | Configured according to the actual number of prepared statements |
+|          パラメータ          |                 手段                 |            推奨シナリオ           |  推奨Configuration / コンフィグレーション |
+| :---------------------: | :--------------------------------: | :-------------------------: | :---------------------------: |
+|   `useServerPrepStmts`  |   サーバー側を使用して準備済みステートメントを有効にするかどうか  | プリペアドステートメントを複数回使用する必要がある場合 |             `true`            |
+|     `cachePrepStmts`    |   クライアントが準備済みステートメントをキャッシュするかどうか   |  `useServerPrepStmts=true`時 |             `true`            |
+| `prepStmtCacheSqlLimit` | プリペアドステートメントの最大サイズ (デフォルトで 256 文字) |   プリペアドステートメントが256文字を超える場合  | プリペアドステートメントの実際のサイズに従って構成されます |
+|   `prepStmtCacheSize`   |    準備済みステートメントの最大数 (デフォルトでは 25)    |   準備済みステートメントの数が 25 を超える場合  |  準備されたステートメントの実際の数に従って構成されます  |
 
-The following is a typical scenario of JDBC connection string configurations. Host: `127.0.0.1`, Port: `4000`, User name: `root`, Password: null, Default database: `test`:
+以下は、JDBC 接続文字列構成の一般的なシナリオです。ホスト: `127.0.0.1` 、ポート: `4000` 、ユーザー名: `root` 、パスワード: null、デフォルト データベース: `test` :
 
 ```
 jdbc:mysql://127.0.0.1:4000/test?user=root&useConfigs=maxPerformance&useServerPrepStmts=true&prepStmtCacheSqlLimit=2048&prepStmtCacheSize=256&rewriteBatchedStatements=true&allowMultiQueries=true
 ```
 
-You can also see the [insert rows](/develop/dev-guide-insert-data.md#insert-rows) chapter if you need to change other JDBC parameters when inserting data.
+データを挿入するときに他の JDBC パラメータを変更する必要がある場合は、第[行を挿入する](/develop/dev-guide-insert-data.md#insert-rows)章も参照してください。
 
-For a complete example in Java, see:
+Javaでの完全な例については、以下を参照してください。
 
-- [Build a Simple CRUD App with TiDB and Java - Using JDBC](/develop/dev-guide-sample-application-java.md#step-2-get-the-code)
-- [Build a Simple CRUD App with TiDB and Java - Using Hibernate](/develop/dev-guide-sample-application-java.md#step-2-get-the-code)
-- [Build the TiDB Application using Spring Boot](/develop/dev-guide-sample-application-spring-boot.md)
+-   [TiDB とJavaを使用して単純な CRUD アプリを構築する - JDBC を使用する](/develop/dev-guide-sample-application-java.md#step-2-get-the-code)
+-   [TiDB とJavaを使用して単純な CRUD アプリを構築する - Hibernate を使用する](/develop/dev-guide-sample-application-java.md#step-2-get-the-code)
+-   [Spring Boot を使用して TiDB アプリケーションをビルドする](/develop/dev-guide-sample-application-spring-boot.md)
 
 </div>
 

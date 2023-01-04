@@ -3,11 +3,11 @@ title: CLUSTER_SYSTEMINFO
 summary: Learn the `CLUSTER_SYSTEMINFO` kernel parameter table.
 ---
 
-# CLUSTER_SYSTEMINFO
+# CLUSTER_SYSTEMINFO {#cluster-systeminfo}
 
-You can use the `CLUSTER_SYSTEMINFO` kernel parameter table to query the kernel configuration information of the server where all instances of the cluster are located. Currently, you can query the information of the `sysctl` system.
+`CLUSTER_SYSTEMINFO`カーネル パラメーター テーブルを使用して、クラスターのすべてのインスタンスが配置されているサーバーのカーネル構成情報を照会できます。現在、 `sysctl`のシステムの情報を照会できます。
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 USE information_schema;
@@ -28,16 +28,16 @@ DESC cluster_systeminfo;
 6 rows in set (0.00 sec)
 ```
 
-Field description:
+フィールドの説明:
 
-* `TYPE`: Corresponds to the `TYPE` field in the [`information_schema.cluster_info`](/information-schema/information-schema-cluster-info.md) table. The optional values are `tidb`, `pd`, and `tikv`.
-* `INSTANCE`: Corresponds to the `INSTANCE` field in the [`information_schema.cluster_info`](/information-schema/information-schema-cluster-info.md) cluster information table.
-* `SYSTEM_TYPE`: The system type. Currently, you can query the `system` system type.
-* `SYSTEM_NAME`: The system name. Currently, you can query the `sysctl` system name.
-* `NAME`: The configuration name corresponding to `sysctl`.
-* `VALUE`: The value of the configuration item corresponding to `sysctl`.
+-   `TYPE` : [`information_schema.cluster_info`](/information-schema/information-schema-cluster-info.md)テーブルの`TYPE`フィールドに対応します。オプションの値は`tidb` 、 `pd` 、および`tikv`です。
+-   `INSTANCE` : [`information_schema.cluster_info`](/information-schema/information-schema-cluster-info.md)クラスター情報テーブルの`INSTANCE`フィールドに対応します。
+-   `SYSTEM_TYPE` : システム タイプ。現在、 `system`のシステム タイプを照会できます。
+-   `SYSTEM_NAME` : システム名。現在、 `sysctl`のシステム名を照会できます。
+-   `NAME` : `sysctl`に対応する構成名。
+-   `VALUE` : `sysctl`に対応する構成アイテムの値。
 
-The following example shows how to query the kernel version of all servers in the cluster using the `CLUSTER_SYSTEMINFO` system information table.
+次の例は、 `CLUSTER_SYSTEMINFO`システム情報テーブルを使用してクラスター内のすべてのサーバーのカーネル バージョンを照会する方法を示しています。
 
 ```sql
 SELECT * FROM cluster_systeminfo WHERE name LIKE '%kernel.osrelease%'

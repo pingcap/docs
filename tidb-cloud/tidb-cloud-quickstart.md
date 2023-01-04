@@ -5,138 +5,138 @@ category: quick start
 aliases: ['/tidbcloud/beta/tidb-cloud-quickstart']
 ---
 
-# TiDB Cloud Quick Start
+# TiDB Cloudクイック スタート {#tidb-cloud-quick-start}
 
-*Estimated completion time: 20 minutes*
+*推定完了時間: 20 分*
 
-This tutorial guides you through an easy way to get started with your TiDB Cloud. The content includes how to create a cluster, try playground, load your data, and connect to your cluster.
+このチュートリアルでは、 TiDB Cloudを使い始める簡単な方法について説明します。このコンテンツには、クラスターを作成する方法、プレイグラウンドを試す方法、データをロードする方法、およびクラスターに接続する方法が含まれています。
 
-## Step 1. Create a TiDB cluster
+## ステップ 1. TiDB クラスターを作成する {#step-1-create-a-tidb-cluster}
 
-TiDB Cloud [Serverless Tier](/tidb-cloud/select-cluster-tier.md#serverless-tier) is the best way to get started with TiDB Cloud. To create a free Serverless Tier cluster, take the following steps:
+TiDB Cloud [サーバーレス層](/tidb-cloud/select-cluster-tier.md#serverless-tier)は、 TiDB Cloudを使い始めるための最良の方法です。無料の Serverless Tier クラスターを作成するには、次の手順を実行します。
 
-1. If you do not have a TiDB Cloud account, click [here](https://tidbcloud.com/free-trial) to sign up for an account.
+1.  TiDB Cloudアカウントを持っていない場合は、 [ここ](https://tidbcloud.com/free-trial)をクリックしてアカウントにサインアップします。
 
-    For Google or GitHub users, you can also sign up with your Google or GitHub account. Your email address and password will be managed by Google or GitHub and cannot be changed using the TiDB Cloud console.
+    Google または GitHub ユーザーの場合は、Google または GitHub アカウントでサインアップすることもできます。メールアドレスとパスワードは Google または GitHub によって管理され、 TiDB Cloudコンソールを使用して変更することはできません。
 
-2. [Log in](https://tidbcloud.com/) to your TiDB Cloud account.
+2.  [ログイン](https://tidbcloud.com/)をTiDB Cloudアカウントに追加します。
 
-    The plan selection page is displayed by default.
+    デフォルトではプラン選択ページが表示されます。
 
-3. On the plan selection page, click **Get Started for Free** in the **Serverless Tier** plan.
+3.  プラン選択ページで、 **Serverless Tier**プランの [ <strong>Get Started for Free</strong> ] をクリックします。
 
-4. On the **Create Cluster** page, **Serverless Tier** is selected by default. Update the default cluster name if necessary, and then select the region where you want to create your cluster.
+4.  [**クラスタの作成**] ページでは、<strong>サーバーレス層</strong>がデフォルトで選択されています。必要に応じてデフォルトのクラスター名を更新し、クラスターを作成するリージョンを選択します。
 
-5. Click **Create**.
+5.  [**作成]**をクリックします。
 
-    Your TiDB Cloud cluster will be created in several minutes.
+    TiDB Cloudクラスターは数分で作成されます。
 
-6. During the creation process, perform security settings for your cluster:
+6.  作成プロセス中に、クラスターのセキュリティ設定を実行します。
 
-    1. Click **Security Settings** in the upper-right corner of the cluster area.
-    2. In the **Security Settings** dialog box, set a root password to connect to your cluster, and then click **Apply**. If you do not set a root password, you cannot connect to the cluster.
+    1.  クラスター領域の右上隅にある [**セキュリティ設定]**をクリックします。
+    2.  [**セキュリティ設定**] ダイアログ ボックスで、クラスターに接続するためのルート パスワードを設定し、 [<strong>適用</strong>] をクリックします。 root パスワードを設定しないと、クラスターに接続できません。
 
-## Step 2. Try Playground
+## ステップ 2. Playground を試す {#step-2-try-playground}
 
-After your TiDB Cloud cluster is created, you can quickly start experimenting with TiDB using the pre-loaded sample data on TiDB Cloud.
+TiDB Cloudクラスターが作成されたら、TiDB TiDB Cloudにプリロードされたサンプル データを使用して、TiDB の実験をすぐに開始できます。
 
-On the **Clusters** page, click **Playground** to run queries instantly on TiDB Cloud.
+[**クラスター**] ページで [<strong>プレイグラウンド</strong>] をクリックして、 TiDB Cloudでクエリを即座に実行します。
 
-## Step 3. Load sample data
+## 手順 3. サンプル データを読み込む {#step-3-load-sample-data}
 
-After trying **Plaground**, you can load sample data to your TiDB Cloud cluster. We provide Capital Bikeshare sample data for you to easily import data and run sample queries.
+**Plaground**を試した後、サンプル データをTiDB Cloudクラスターにロードできます。データを簡単にインポートしてサンプル クエリを実行できるように、Capital Bikeshare のサンプル データを提供しています。
 
-1. Navigate to the **Clusters** page.
+1.  [**クラスター]**ページに移動します。
 
-2. In the area of your newly created cluster, click **...** in the upper-right corner and select **Import Data**. The **Data Import** page is displayed.
+2.  新しく作成したクラスターの領域で、右上隅の [ **...** ] をクリックし、[<strong>データのインポート</strong>] を選択します。 [<strong>データのインポート]</strong>ページが表示されます。
 
-    > **Tip:**
+    > **ヒント：**
     >
-    > Alternatively, you can also click the name of your newly created cluster on the **Clusters** page and click **Import Data** in the **Import** area.
+    > または、[**クラスター**] ページで新しく作成したクラスターの名前をクリックし、[インポート] 領域で [<strong>データ</strong>の<strong>インポート</strong>] をクリックすることもできます。
 
-3. Fill in the import parameters:
+3.  インポート パラメータを入力します。
 
-    - **Data Format**: select **SQL File**
-    - **Location**: `AWS`
-    - **Bucket URI**: `s3://tidbcloud-samples/data-ingestion/`
-    - **Role ARN**: `arn:aws:iam::385595570414:role/import-sample-access`
+    -   **データ形式**: <strong>SQL ファイル</strong>を選択
+    -   **場所**: `AWS`
+    -   **バケット URI** : `s3://tidbcloud-samples/data-ingestion/`
+    -   **ロールARN** ： `arn:aws:iam::385595570414:role/import-sample-access`
 
-    If the region of the bucket is different from your cluster, confirm the compliance of cross region. Click **Next**.
+    バケットのリージョンがクラスターと異なる場合は、クロス リージョンのコンプライアンスを確認します。 [**次へ**] をクリックします。
 
-4. Add the table filter rules if needed. For the sample data, you can skip this step. Click **Next**.
+4.  必要に応じてテーブル フィルター ルールを追加します。サンプル データの場合は、この手順を省略できます。 [**次へ**] をクリックします。
 
-5. On the **Preview** page, confirm the data to be imported and then click **Start Import**.
+5.  [**プレビュー**] ページでインポートするデータを確認し、[<strong>インポートの開始</strong>] をクリックします。
 
-The data import process will take several minutes. When the data import progress shows **Finished**, you have successfully imported the sample data and the database schema to your database in TiDB Cloud.
+データのインポート プロセスには数分かかります。データ インポートの進行状況が**Finished**と表示されたら、サンプル データとデータベース スキーマがTiDB Cloudのデータベースに正常にインポートされました。
 
-## Step 4. Connect to your TiDB cluster
+## ステップ 4. TiDB クラスターに接続する {#step-4-connect-to-your-tidb-cluster}
 
-After loading data to the cluster, you can connect to your cluster from the command line or with a programming language.
+クラスターにデータをロードしたら、コマンドラインまたはプログラミング言語からクラスターに接続できます。
 
-1. Navigate to the **Clusters** page.
+1.  [**クラスター]**ページに移動します。
 
-2. In the area of your newly created cluster, click **Connect** in the upper-right corner. A connection dialog is displayed.
+2.  新しく作成したクラスターの領域で、右上隅にある [**接続**] をクリックします。接続ダイアログが表示されます。
 
-3. Follow the instructions in the dialog to connect to your TiDB cluster.
+3.  ダイアログの指示に従って、TiDB クラスターに接続します。
 
-    1. Create traffic filter for your connection.
+    1.  接続用のトラフィック フィルターを作成します。
 
-    2. Use a SQL client to connect to your cluster. Click the tab of your preferred connection method, and then connect to your cluster with the connection string.
+    2.  SQL クライアントを使用してクラスターに接続します。希望する接続方法のタブをクリックし、接続文字列を使用してクラスターに接続します。
 
-    > **Tip:**
+    > **ヒント：**
     >
-    > TiDB Cloud is MySQL-compatible, so you can connect to your cluster using any MySQL client tool. We recommend using [mysql — The MySQL Command-Line Client](https://dev.mysql.com/doc/refman/8.0/en/mysql.html) or [mysql — The MySQL Command-Line Client from MariaDB](https://mariadb.com/kb/en/mysql-command-line-client/).
+    > TiDB Cloudは MySQL と互換性があるため、任意の MySQL クライアント ツールを使用してクラスターに接続できます。 [mysql — MySQL コマンドライン クライアント](https://dev.mysql.com/doc/refman/8.0/en/mysql.html)または[mysql — MariaDB の MySQL コマンドライン クライアント](https://mariadb.com/kb/en/mysql-command-line-client/)を使用することをお勧めします。
 
-4. After logging into your TiDB cluster, you can use the following SQL statement to validate the connection:
+4.  TiDB クラスターにログインした後、次の SQL ステートメントを使用して接続を検証できます。
 
-    {{< copyable "sql" >}}
+    {{< copyable "" >}}
 
     ```sql
     SELECT TiDB_version();
     ```
 
-    If you see the release version information, you are ready to use your TiDB cluster.
+    リリース バージョン情報が表示されたら、TiDB クラスターを使用する準備ができています。
 
-## Step 4. Query data
+## ステップ 4. データのクエリ {#step-4-query-data}
 
-After connecting to your TiDB cluster, you can run some queries in your Terminal.
+TiDB クラスターに接続したら、ターミナルでいくつかのクエリを実行できます。
 
-1. Use the `bikeshare` database and tables:
+1.  `bikeshare`のデータベースとテーブルを使用します。
 
-    {{< copyable "sql" >}}
+    {{< copyable "" >}}
 
     ```sql
     USE bikeshare;
     SHOW tables;
     ```
 
-2. Check the structure of the `trip` table:
+2.  `trip`テーブルの構造を確認します。
 
-    {{< copyable "sql" >}}
+    {{< copyable "" >}}
 
     ```sql
     DESCRIBE trips;
     ```
 
-3. Check how many records exist in the `trips` table:
+3.  `trips`のテーブルにいくつのレコードが存在するかを確認します。
 
-    {{< copyable "sql" >}}
+    {{< copyable "" >}}
 
     ```sql
     SELECT COUNT(*) FROM trips;
     ```
 
-4. Check the entire trip history where the start station is "8th & D St NW":
+4.  出発駅が「8th &amp; D St NW」であるすべての旅行履歴を確認します。
 
-    {{< copyable "sql" >}}
+    {{< copyable "" >}}
 
     ```sql
     SELECT * FROM trips WHERE start_station_name = '8th & D St NW';
     ```
 
-5. Show the least ten popular bicycle stations for picking up:
+5.  受け取りに人気の自転車ステーションを 10 個以上表示する:
 
-    {{< copyable "sql" >}}
+    {{< copyable "" >}}
 
     ```sql
     SELECT start_station_name, COUNT(ride_id) as count from `trips`
@@ -145,6 +145,6 @@ After connecting to your TiDB cluster, you can run some queries in your Terminal
     LIMIT 10;
     ```
 
-For more details on TiDB SQL usage, see [Explore SQL with TiDB](/basic-sql-operations.md).
+TiDB SQLの使用法の詳細については、 [TiDB で SQL を調べる](/basic-sql-operations.md)を参照してください。
 
-For production use with the benefits of cross-zone high availability, horizontal scaling, and [HTAP](https://en.wikipedia.org/wiki/Hybrid_transactional/analytical_processing), refer to [Create a TiDB Cluster](/tidb-cloud/create-tidb-cluster.md) and create a Dedicated Tier cluster.
+クロスゾーンの高可用性、水平スケーリング、および[HTAP](https://en.wikipedia.org/wiki/Hybrid_transactional/analytical_processing)の利点を備えた本番環境での使用については、 [TiDBクラスタを作成する](/tidb-cloud/create-tidb-cluster.md)を参照してDedicated Tierクラスターを作成してください。

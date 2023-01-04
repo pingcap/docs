@@ -3,62 +3,62 @@ title: Choose Driver or ORM
 summary: Learn how to choose a driver or ORM framework to connect to TiDB.
 ---
 
-# Choose Driver or ORM
+# Driverまたは ORM を選択 {#choose-driver-or-orm}
 
-> **Note:**
+> **ノート：**
 >
-> TiDB provides the following two support levels for drivers and ORMs:
+> TiDB は、ドライバーと ORM に対して次の 2 つのサポート レベルを提供します。
 >
-> - **Full**: indicates that using this driver or ORM does not have any known issues.
-> - **Verified**: indicates that using this driver or ORM might get errors because of compatibility differences between TiDB and MySQL.
+> -   **完全**: このドライバーまたは ORM を使用しても、既知の問題がないことを示します。
+> -   **検証済み**: TiDB と MySQL の互換性の違いにより、このドライバーまたは ORM を使用するとエラーが発生する可能性があることを示します。
 >
-> For more information, refer to [Third-Party Tools Supported by TiDB](/develop/dev-guide-third-party-support.md).
+> 詳細については、 [TiDB がサポートするサードパーティ ツール](/develop/dev-guide-third-party-support.md)を参照してください。
 
-TiDB is highly compatible with the MySQL protocol but some features are incompatible with MySQL.
+TiDB は MySQL プロトコルと高い互換性がありますが、一部の機能は MySQL と互換性がありません。
 
-For example:
+例えば：
 
-- Features that are not supported by TiDB:
+-   TiDB でサポートされていない機能:
 
-    - Stored procedures and functions
-    - Triggers
-    - `FOREIGN KEY` constraints
+    -   ストアド プロシージャと関数
+    -   トリガー
+    -   `FOREIGN KEY`制約
 
-- Features that are different from MySQL:
+-   MySQL とは異なる機能:
 
-    - Auto-increment ID: auto-incremental columns are globally unique in TiDB. They are incremental on a single TiDB server, but ***not*** necessarily incremental among multiple TiDB servers or allocated sequentially.
+    -   自動インクリメント ID: 自動インクリメント列は、TiDB 内でグローバルに一意です。それらは単一の TiDBサーバー上では増分ですが***、必ずしも***複数の TiDB サーバー間で増分されたり、順次割り当てられるとは限りません。
 
-For a full list of compatibility differences, see [MySQL Compatibility](/mysql-compatibility.md).
+互換性の相違点の完全なリストについては、 [MySQL の互換性](/mysql-compatibility.md)を参照してください。
 
-## Java
+## Java {#java}
 
-This section describes how to use drivers and ORM frameworks in Java.
+このセクションでは、 Javaでドライバーと ORM フレームワークを使用する方法について説明します。
 
-### Java drivers
+### Javaドライバー {#java-drivers}
 
 <SimpleTab>
 <div label="MySQL-JDBC">
 
-Support level: **Full**
+サポートレベル:**フル**
 
-You can follow the [MySQL documentation](https://dev.mysql.com/doc/connector-j/8.0/en/) to download and configure a Java JDBC driver. It is recommended to use MySQL Connector/J 8.0.29 or later with TiDB v6.3.0 and newer.
+[MySQL ドキュメント](https://dev.mysql.com/doc/connector-j/8.0/en/)に従って、 Java JDBC ドライバーをダウンロードして構成できます。 TiDB v6.3.0 以降では、MySQL Connector/J 8.0.29 以降を使用することをお勧めします。
 
-> **Tip:**
+> **ヒント：**
 >
-> Since there is an [unresolved bug](https://bugs.mysql.com/bug.php?id=106252) in the current version 8.0.30, which might cause threads to hang when using TiDB versions earlier than v6.3.0. It is recommended that, if you are not yet using TiDB v6.3.0 or later versions, you do not upgrade to version 8.0 until MySQL Connector/J 8.0 fixes this bug, or use the TiDB version of MySQL Connector/J as that addresses this bug (see the *TiDB-JDBC* tab).
+> 現在のバージョン 8.0.30 には[未解決のバグ](https://bugs.mysql.com/bug.php?id=106252)があるため、v6.3.0 より前のバージョンの TiDB を使用すると、スレッドがハングする可能性があります。 TiDB v6.3.0 以降のバージョンをまだ使用していない場合は、MySQL Connector/J 8.0 でこのバグが修正されるまでバージョン 8.0 にアップグレードしないか、これに対処する MySQL Connector/J の TiDB バージョンを使用することをお勧めします。バグ ( *TiDB-JDBC*タブを参照)。
 
-For an example of how to build a complete application, see [Build a Simple CRUD App with TiDB and JDBC](/develop/dev-guide-sample-application-java.md).
+完全なアプリケーションを構築する方法の例については、 [TiDB と JDBC を使用して単純な CRUD アプリを構築する](/develop/dev-guide-sample-application-java.md)を参照してください。
 
 </div>
 <div label="TiDB-JDBC">
 
-Support level: **Full**
+サポートレベル:**フル**
 
-[TiDB-JDBC](https://github.com/pingcap/mysql-connector-j) is a customized Java driver based on MySQL 8.0.29. Compiled based on MySQL official version 8.0.29, TiDB-JDBC fixes the bug of multi-parameter and multi-field EOF in the prepare mode in the original JDBC, and adds features such as automatic TiCDC snapshot maintenance and the SM3 authentication plugin.
+[TiDB-JDBC](https://github.com/pingcap/mysql-connector-j)は、MySQL 8.0.29 に基づくカスタマイズされたJavaドライバーです。 MySQL 公式バージョン 8.0.29 に基づいてコンパイルされた TiDB-JDBC は、元の JDBC の準備モードでのマルチパラメータおよびマルチフィールド EOF のバグを修正し、自動 TiCDC スナップショット メンテナンスおよび SM3 認証プラグインなどの機能を追加します。
 
-Using SM3-based authentication is only supported with the TiDB version of MySQL Connector/J.
+SM3 ベースの認証の使用は、MySQL Connector/J の TiDB バージョンでのみサポートされています。
 
-If you use Maven, add the following content to the `<dependencies></dependencies>` section in the `pom.xml` file:
+Maven を使用する場合は、次の内容を`pom.xml`ファイルの`<dependencies></dependencies>`セクションに追加します。
 
 ```xml
 <dependency>
@@ -68,7 +68,7 @@ If you use Maven, add the following content to the `<dependencies></dependencies
 </dependency>
 ```
 
-If you need to enable SM3 authentication, add the following content to the `<dependencies></dependencies>` section in the `pom.xml` file:
+SM3 認証を有効にする必要がある場合は、次の内容を`pom.xml`ファイルの`<dependencies></dependencies>`セクションに追加します。
 
 ```xml
 <dependency>
@@ -88,7 +88,7 @@ If you need to enable SM3 authentication, add the following content to the `<dep
 </dependency>
 ```
 
-If you use Gradle, add the following content to `dependencies`:
+Gradle を使用する場合は、次の内容を`dependencies`に追加します。
 
 ```gradle
 implementation group: 'io.github.lastincisor', name: 'mysql-connector-java', version: '8.0.29-tidb-1.0.0'
@@ -99,22 +99,22 @@ implementation group: 'org.bouncycastle', name: 'bcpkix-jdk15on', version: '1.67
 </div>
 </SimpleTab>
 
-### Java ORM frameworks
+### Java ORM フレームワーク {#java-orm-frameworks}
 
-> **Note:**
+> **ノート：**
 >
-> - Currently, Hibernate does [not support nested transactions](https://stackoverflow.com/questions/37927208/nested-transaction-in-spring-app-with-jpa-postgres).
+> -   現在、Hibernate は[ネストされたトランザクションをサポートしない](https://stackoverflow.com/questions/37927208/nested-transaction-in-spring-app-with-jpa-postgres)を実行します。
 >
-> - Since v6.2.0, TiDB supports [savepoint](/sql-statements/sql-statement-savepoint.md). To use the `Propagation.NESTED` transaction propagation option in `@Transactional`, that is, to set `@Transactional(propagation = Propagation.NESTED)`, make sure that your TiDB is v6.2.0 or later.
+> -   v6.2.0 以降、TiDB は[セーブポイント](/sql-statements/sql-statement-savepoint.md)をサポートしています。 `@Transactional`で`Propagation.NESTED`トランザクション伝播オプションを使用する、つまり`@Transactional(propagation = Propagation.NESTED)`を設定するには、TiDB が v6.2.0 以降であることを確認してください。
 
 <SimpleTab>
 <div label="Hibernate">
 
-Support level: **Full**
+サポートレベル:**フル**
 
-To avoid manually managing complex relationships between different dependencies of an application, you can use [Gradle](https://gradle.org/install) or [Maven](https://maven.apache.org/install.html) to get all dependencies of your application, including those indirect ones. Note that only Hibernate `6.0.0.Beta2` or above supports the TiDB dialect.
+アプリケーションの異なる依存関係間の複雑な関係を手動で管理することを避けるために、 [グラドル](https://gradle.org/install)または[メイヴン](https://maven.apache.org/install.html)を使用して、間接的なものを含むアプリケーションのすべての依存関係を取得できます。 Hibernate `6.0.0.Beta2`以降のみが TiDB ダイアレクトをサポートすることに注意してください。
 
-If you are using **Maven**, add the following to your `<dependencies></dependencies>`:
+**Maven**を使用している場合は、次を`<dependencies></dependencies>`に追加します。
 
 {{< copyable "" >}}
 
@@ -132,31 +132,31 @@ If you are using **Maven**, add the following to your `<dependencies></dependenc
 </dependency>
 ```
 
-If you are using **Gradle**, add the following to your `dependencies`:
+**Gradle**を使用している場合は、以下を`dependencies`に追加します。
 
 ```gradle
 implementation 'org.hibernate:hibernate-core:6.0.0.CR2'
 implementation 'mysql:mysql-connector-java:5.1.49'
 ```
 
-- For an example of using Hibernate to build a TiDB application by native Java, see [Build a Simple CRUD App with TiDB and Java](/develop/dev-guide-sample-application-java.md).
-- For an example of using Spring Data JPA or Hibernate to build a TiDB application by Spring, see [Build a TiDB Application using Spring Boot](/develop/dev-guide-sample-application-spring-boot.md).
+-   Hibernate を使用してネイティブJavaで TiDB アプリケーションを構築する例については、 [TiDB とJavaを使用して単純な CRUD アプリを構築する](/develop/dev-guide-sample-application-java.md)を参照してください。
+-   Spring Data JPA または Hibernate を使用して Spring で TiDB アプリケーションを構築する例については、 [Spring Boot を使用して TiDB アプリケーションを構築する](/develop/dev-guide-sample-application-spring-boot.md)を参照してください。
 
-In addition, you need to specify the TiDB dialect in your [Hibernate configuration file](https://www.tutorialspoint.com/hibernate/hibernate_configuration.htm): `org.hibernate.dialect.TiDBDialect`, which is only supported by Hibernate `6.0.0.Beta2` or above. If your `Hibernate` version is earlier than `6.0.0.Beta2`, upgrade it first.
+さらに、 [ハイバネート構成ファイル](https://www.tutorialspoint.com/hibernate/hibernate_configuration.htm) : `org.hibernate.dialect.TiDBDialect`で TiDB ダイアレクトを指定する必要があります。これは、Hibernate `6.0.0.Beta2`以降でのみサポートされています。 `Hibernate`バージョンが`6.0.0.Beta2`より前の場合は、最初にアップグレードしてください。
 
-> **Note:**
+> **ノート：**
 >
-> If you are unable to upgrade your `Hibernate` version, use the MySQL 5.7 dialect `org.hibernate.dialect.MySQL57Dialect` instead. However, this setting might cause unpredictable results and the absence of some TiDB-specific features, such as [sequences](/sql-statements/sql-statement-create-sequence.md).
+> バージョン`Hibernate`をアップグレードできない場合は、代わりにMySQL 5.7ダイアレクト`org.hibernate.dialect.MySQL57Dialect`を使用してください。ただし、この設定により、予測できない結果が生じたり、 [シーケンス](/sql-statements/sql-statement-create-sequence.md)などの TiDB 固有の機能が一部失われたりする可能性があります。
 
 </div>
 
 <div label="MyBatis">
 
-Support level: **Full**
+サポートレベル:**フル**
 
-To avoid manually managing complex relationships between different dependencies of an application, you can use [Gradle](https://gradle.org/install) or [Maven](https://maven.apache.org/install.html) to get all dependencies of your application, including those indirect dependencies.
+アプリケーションの異なる依存関係間の複雑な関係を手動で管理することを避けるために、 [グラドル](https://gradle.org/install)または[メイヴン](https://maven.apache.org/install.html)を使用して、間接的な依存関係を含むアプリケーションのすべての依存関係を取得できます。
 
-If you are using Maven, add the following to your `<dependencies></dependencies>`:
+Maven を使用している場合は、以下を`<dependencies></dependencies>`に追加します。
 
 ```xml
 <dependency>
@@ -172,34 +172,34 @@ If you are using Maven, add the following to your `<dependencies></dependencies>
 </dependency>
 ```
 
-If you are using Gradle, add the following to your `dependencies`:
+Gradle を使用している場合は、以下を`dependencies`に追加します。
 
 ```gradle
 implementation 'org.mybatis:mybatis:3.5.9'
 implementation 'mysql:mysql-connector-java:5.1.49'
 ```
 
-For an example of using MyBatis to build a TiDB application, see [Build a Simple CRUD App with TiDB and Java](/develop/dev-guide-sample-application-java.md).
+MyBatis を使用して TiDB アプリケーションを構築する例については、 [TiDB とJavaを使用して単純な CRUD アプリを構築する](/develop/dev-guide-sample-application-java.md)を参照してください。
 
 </div>
 
 </SimpleTab>
 
-### Java client load balancing
+### Javaクライアントの負荷分散 {#java-client-load-balancing}
 
 **tidb-loadbalance**
 
-Support level: **Full**
+サポートレベル:**フル**
 
-[tidb-loadbalance](https://github.com/pingcap/tidb-loadbalance) is a load balancing component on the application side. With tidb-loadbalance, you can automatically maintain the node information of TiDB server and distribute JDBC connections on the client using the tidb-loadbalance policies. Using a direct JDBC connection between the client application and TiDB server has higher performance than using the load balancing component.
+[tidb-loadbalance](https://github.com/pingcap/tidb-loadbalance)は、アプリケーション側の負荷分散コンポーネントです。 tidb-loadbalance を使用すると、TiDBサーバーのノード情報を自動的に維持し、tidb-loadbalance ポリシーを使用してクライアントに JDBC 接続を分散できます。クライアント アプリケーションと TiDBサーバー間で直接 JDBC 接続を使用すると、負荷分散コンポーネントを使用するよりも高いパフォーマンスが得られます。
 
-Currently, tidb-loadbalance supports the following policies: roundrobin, random, and weight.
+現在、tidb-loadbalance は次のポリシーをサポートしています: roundrobin、random、および weight。
 
-> **Note:**
+> **ノート：**
 >
-> tidb-loadbalance must be used with [mysql-connector-j](https://github.com/pingcap/mysql-connector-j).
+> tidb-loadbalance は[mysql-コネクタ-j](https://github.com/pingcap/mysql-connector-j)と共に使用する必要があります。
 
-If you use Maven, add the following content to the element body of `<dependencies></dependencies>` in the `pom.xml` file:
+Maven を使用する場合は、 `pom.xml`ファイルの`<dependencies></dependencies>`の要素本体に次の内容を追加します。
 
 ```xml
 <dependency>
@@ -214,38 +214,38 @@ If you use Maven, add the following content to the element body of `<dependencie
 </dependency>
 ```
 
-If you use Gradle, add the following content to `dependencies`:
+Gradle を使用する場合は、次の内容を`dependencies`に追加します。
 
 ```gradle
 implementation group: 'io.github.lastincisor', name: 'mysql-connector-java', version: '8.0.29-tidb-1.0.0'
 implementation group: 'io.github.lastincisor', name: 'tidb-loadbalance', version: '0.0.5'
 ```
 
-## Golang
+## Golang {#golang}
 
-This section describes how to use drivers and ORM frameworks in Golang.
+このセクションでは、 Golangでドライバーと ORM フレームワークを使用する方法について説明します。
 
-### Golang drivers
+### Golangドライバー {#golang-drivers}
 
 **go-sql-driver/mysql**
 
-Support level: **Full**
+サポートレベル:**フル**
 
-To download and configure a Golang driver, refer to the [go-sql-driver/mysql documentation](https://github.com/go-sql-driver/mysql).
+Golangドライバーをダウンロードして構成するには、 [go-sql-driver/mysql ドキュメント](https://github.com/go-sql-driver/mysql)を参照してください。
 
-For an example of how to build a complete application, see [Build a Simple CRUD App with TiDB and Golang](/develop/dev-guide-sample-application-golang.md).
+完全なアプリケーションを構築する方法の例については、 [TiDB とGolangを使用して単純な CRUD アプリを構築する](/develop/dev-guide-sample-application-golang.md)を参照してください。
 
-### Golang ORM frameworks
+### Golang ORM フレームワーク {#golang-orm-frameworks}
 
-**GORM**
+**ゴーム**
 
-Support level: **Full**
+サポートレベル:**フル**
 
-GORM is a popular ORM framework for Golang. To get all dependencies in your application, you can use the `go get` command.
+GORM はGolangの一般的な ORM フレームワークです。アプリケーションのすべての依存関係を取得するには、 `go get`コマンドを使用できます。
 
 ```shell
 go get -u gorm.io/gorm
 go get -u gorm.io/driver/mysql
 ```
 
-For an example of using GORM to build a TiDB application, see [Build a Simple CRUD App with TiDB and Golang](/develop/dev-guide-sample-application-golang.md).
+GORM を使用して TiDB アプリケーションを構築する例については、 [TiDB とGolangを使用して単純な CRUD アプリを構築する](/develop/dev-guide-sample-application-golang.md)を参照してください。

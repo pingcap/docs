@@ -3,21 +3,21 @@ title: TiDB Binlog Relay Log
 summary: Learn how to use relay log to maintain data consistency in extreme cases.
 ---
 
-# TiDB Binlog Relay Log
+# TiDB Binlog {#tidb-binlog-relay-log}
 
-When replicating binlogs, Drainer splits transactions from the upstream and replicates the split transactions concurrently to the downstream.
+バイナリログを複製するとき、 Drainerは上流からトランザクションを分割し、分割されたトランザクションを同時に下流に複製します。
 
-In extreme cases where the upstream clusters are not available and Drainer exits abnormally, the downstream clusters (MySQL or TiDB) might be in the intermediate states with inconsistent data. In such cases, Drainer can use the relay log to ensure that the downstream clusters are in a consistent state.
+アップストリーム クラスターが利用できず、 Drainerが異常終了するという極端なケースでは、ダウンストリーム クラスター (MySQL または TiDB) がデータの一貫性のない中間状態にある可能性があります。このような場合、 Drainerはリレー ログを使用して、ダウンストリーム クラスターが一貫した状態であることを確認できます。
 
-## Consistent state during Drainer replication
+## Drainerレプリケーション中の一貫した状態 {#consistent-state-during-drainer-replication}
 
-The downstream clusters reaching a consistent state means the data of the downstream clusters are the same as the snapshot of the upstream which sets `tidb_snapshot = ts`.
+ダウンストリーム クラスタが一貫した状態に達するということは、ダウンストリーム クラスタのデータが`tidb_snapshot = ts`を設定するアップストリームのスナップショットと同じであることを意味します。
 
-The checkpoint consistency means Drainer checkpoint saves the consistent state of replication in `consistent`. When Drainer runs, `consistent` is `false`. After Drainer exits normally, `consistent` is set to `true`.
+チェックポイントの一貫性とは、 Drainerチェックポイントがレプリケーションの一貫した状態を`consistent`に保存することを意味します。 Drainerが実行されると、 `consistent`は`false`になります。 Drainerが正常に終了した後、 `consistent`が`true`に設定されます。
 
-You can query the downstream checkpoint table as follows:
+次のように、ダウンストリーム チェックポイント テーブルをクエリできます。
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 select * from tidb_binlog.checkpoint;
@@ -31,27 +31,27 @@ select * from tidb_binlog.checkpoint;
 +---------------------+----------------------------------------------------------------+
 ```
 
-## Implementation principles
+## 実施原則 {#implementation-principles}
 
-After Drainer enables the relay log, it first writes the binlog events to the disks and then replicates the events to the downstream clusters.
+Drainerがリレー ログを有効にすると、最初に binlog イベントがディスクに書き込まれ、次にそのイベントがダウンストリーム クラスターにレプリケートされます。
 
-If the upstream clusters are not available, Drainer can restore the downstream clusters to a consistent state by reading the relay log.
+アップストリーム クラスタが使用できない場合、 Drainerはリレー ログを読み取ることで、ダウンストリーム クラスタを一貫した状態に復元できます。
 
-> **Note:**
+> **ノート：**
 >
-> If the relay log data is lost at the same time, this method does not work, but its incidence is very low. In addition, you can use the Network File System to ensure data safety of the relay log.
+> リレー ログ データが同時に失われる場合、この方法は機能しませんが、その発生率は非常に低いです。さらに、ネットワーク ファイル システムを使用して、リレー ログのデータの安全性を確保できます。
 
-### Trigger scenarios where Drainer consumes binlogs from the relay log
+### Drainerがリレー ログからバイナリログを消費するトリガー シナリオ {#trigger-scenarios-where-drainer-consumes-binlogs-from-the-relay-log}
 
-When Drainer is started, if it fails to connect to the Placement Driver (PD) of the upstream clusters, and it detects that `consistent = false` in the checkpoint, Drainer will try to read the relay log, and restore the downstream clusters to a consistent state. After that, the Drainer process sets the checkpoint `consistent` to `true` and then exits.
+Drainerの起動時に、上流クラスターの Placement Driver (PD) への接続に失敗し、チェックポイントで`consistent = false`を検出すると、 Drainerはリレー ログを読み取り、下流クラスターを一貫した状態に復元しようとします。その後、 Drainerプロセスはチェックポイント`consistent`を`true`に設定して終了します。
 
-### GC mechanism of relay log
+### リレーログの GC メカニズム {#gc-mechanism-of-relay-log}
 
-Before data is replicated to the downstream, Drainer writes data to the relay log file. If the size of a relay log file reaches 10 MB (by default) and the binlog data of the current transaction is completely written, Drainer starts to write data to the next relay log file. After Drainer successfully replicates data to the downstream, it automatically cleans up the relay log files whose data has been replicated. The relay log into which data is currently being written will not be cleaned up.
+データがダウンストリームにレプリケートされる前に、 Drainerはリレー ログ ファイルにデータを書き込みます。リレー ログ ファイルのサイズが 10 MB (デフォルト) に達し、現在のトランザクションのバイナリ ログ データが完全に書き込まれると、 Drainerは次のリレー ログ ファイルへのデータの書き込みを開始します。 Drainerは、データをダウンストリームに正常に複製した後、データが複製されたリレー ログ ファイルを自動的にクリーンアップします。現在データが書き込まれているリレー ログはクリーンアップされません。
 
-## Configuration
+## Configuration / コンフィグレーション {#configuration}
 
-To enable the relay log, add the following configuration in Drainer:
+リレー ログを有効にするには、次の構成をDrainerに追加します。
 
 {{< copyable "" >}}
 

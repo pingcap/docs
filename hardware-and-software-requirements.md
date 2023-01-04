@@ -3,7 +3,7 @@ title: Software and Hardware Recommendations
 summary: Learn the software and hardware recommendations for deploying and running TiDB.
 ---
 
-# Software and Hardware Recommendations
+# ソフトウェアおよびハードウェアの推奨事項 {#software-and-hardware-recommendations}
 
 <!-- Localization note for TiDB:
 
@@ -13,129 +13,129 @@ summary: Learn the software and hardware recommendations for deploying and runni
 
 -->
 
-As an open-source distributed SQL database with high performance, TiDB can be deployed in the Intel architecture server, ARM architecture server, and major virtualization environments and runs well. TiDB supports most of the major hardware networks and Linux operating systems.
+TiDB は、高性能なオープンソースの分散 SQL データベースとして、Intelアーキテクチャサーバー、ARMアーキテクチャサーバー、および主要な仮想化環境にデプロイでき、適切に動作します。 TiDB は、主要なハードウェア ネットワークと Linux オペレーティング システムのほとんどをサポートしています。
 
-## OS and platform requirements
+## OS とプラットフォームの要件 {#os-and-platform-requirements}
 
-In v6.5 LTS, TiDB provides multi-level support for different quality standards on the combination of operating systems and CPU architectures.
+v6.5 LTS では、TiDB は、オペレーティング システムと CPU アーキテクチャの組み合わせに関するさまざまな品質基準に対してマルチレベルのサポートを提供します。
 
-+ For the following combinations of operating systems and CPU architectures, TiDB **provides enterprise-level production quality**, and the product features have been comprehensively and systematically verified:
+-   次のオペレーティング システムと CPU アーキテクチャの組み合わせに対して、TiDB**はエンタープライズ レベルの製品品質を提供**し、製品の機能は包括的かつ体系的に検証されています。
 
-    |  Operating systems   |   Supported CPU architectures   |
-    |   :---   |   :---   |
-    | Red Hat Enterprise Linux 8.4 or a later 8.x version  |  <ul><li>x86_64</li><li>ARM 64</li></ul>  |
-    | <ul><li>Red Hat Enterprise Linux 7.3 or a later 7.x version</li><li>CentOS 7.3 or a later 7.x version</li></ul>  |  <ul><li>x86_64</li><li>ARM 64</li></ul>   |
-    | Amazon Linux 2 | <ul><li>x86_64</li><li>ARM 64</li></ul> |
-    | Kylin Euler V10 SP1/SP2   |   <ul><li>x86_64</li><li>ARM 64</li></ul>   |
-    | UOS V20                 |   <ul><li>x86_64</li><li>ARM 64</li></ul>   |
+    | オペレーティングシステム                                                                         | サポートされている CPU アーキテクチャ           |
+    | :----------------------------------------------------------------------------------- | :------------------------------ |
+    | Red Hat Enterprise Linux 8.4 以降の 8.x バージョン                                           | <li>x86\_64</li><li>アーム 64</li> |
+    | <li>Red Hat Enterprise Linux 7.3 以降の 7.x バージョン</li><li>CentOS 7.3 以降の 7.x バージョン</li> | <li>x86\_64</li><li>アーム 64</li> |
+    | アマゾンリナックス 2                                                                          | <li>x86\_64</li><li>アーム 64</li> |
+    | キリン オイラー V10 SP1/SP2                                                                 | <li>x86\_64</li><li>アーム 64</li> |
+    | UOS V20                                                                              | <li>x86\_64</li><li>アーム 64</li> |
 
-    > **Note:**
+    > **ノート：**
     >
-    > According to [CentOS Linux EOL](https://www.centos.org/centos-linux-eol/), the upstream support for CentOS Linux 8 ended on December 31, 2021. CentOS Stream 8 continues to be supported by the CentOS organization.
+    > [CentOS Linux EOL](https://www.centos.org/centos-linux-eol/)によると、CentOS Linux 8 のアップストリーム サポートは 2021 年 12 月 31 日に終了しました。CentOS ストリーム 8 は、CentOS 組織によって引き続きサポートされます。
 
-+ For the following combinations of operating systems and CPU architectures, you can compile, build, and deploy TiDB. In addition, you can also use the basic features of OLTP, OLAP, and the data tools. However, TiDB **does not guarantee enterprise-level production quality**:
+-   次のオペレーティング システムと CPU アーキテクチャの組み合わせでは、TiDB をコンパイル、ビルド、および展開できます。さらに、OLTP、OLAP、およびデータ ツールの基本機能も使用できます。ただし、TiDB**はエンタープライズ レベルの製品品質を保証しません**。
 
-    |  Operating systems   |   Supported CPU architectures   |
-    |   :---   |   :---   |
-    |   macOS Catalina or later   |  <ul><li>x86_64</li><li>ARM 64</li></ul>  |
-    |  Oracle Enterprise Linux 7.3 or a later 7.x version  |  x86_64           |
-    |   Ubuntu LTS 18.04 or later   |  x86_64           |
-    | CentOS 8 Stream | <ul><li>x86_64</li><li>ARM 64</li></ul> |
-    |  Debian 9 (Stretch) or later |  x86_64           |
-    |  Fedora 35 or later   |  x86_64           |
-    |  openSUSE Leap later than v15.3 (not including Tumbleweed) |  x86_64           |
-    |  SUSE Linux Enterprise Server 15  |  x86_64                        |
+    | オペレーティングシステム                              | サポートされている CPU アーキテクチャ           |
+    | :---------------------------------------- | :------------------------------ |
+    | macOS Catalina 以降                         | <li>x86\_64</li><li>アーム 64</li> |
+    | Oracle Enterprise Linux 7.3 以降の 7.x バージョン | x86_64                          |
+    | Ubuntu LTS 18.04 以降                       | x86_64                          |
+    | CentOS 8 ストリーム                            | <li>x86\_64</li><li>アーム 64</li> |
+    | Debian 9 (ストレッチ) 以降                       | x86_64                          |
+    | Fedora 35 以降                              | x86_64                          |
+    | v15.3 以降の openSUSE Leap (Tumbleweed を除く)  | x86_64                          |
+    | SUSE Linux エンタープライズ サーバー 15               | x86_64                          |
 
-    > **Note:**
+    > **ノート：**
     >
-    > - For Oracle Enterprise Linux, TiDB supports the Red Hat Compatible Kernel (RHCK) and does not support the Unbreakable Enterprise Kernel provided by Oracle Enterprise Linux.
-    > - Support for Ubuntu 16.04 will be removed in future versions of TiDB. Upgrading to Ubuntu 18.04 or later is strongly recommended.
+    > -   Oracle Enterprise Linux の場合、TiDB は Red Hat Compatible Kernel (RHCK) をサポートしますが、Oracle Enterprise Linux が提供する Unbreakable Enterprise Kernel はサポートしません。
+    > -   Ubuntu 16.04 のサポートは、TiDB の将来のバージョンでは削除される予定です。 Ubuntu 18.04 以降にアップグレードすることを強くお勧めします。
 
-+ If you are using the 32-bit version of an operating system listed in the preceding two tables, TiDB **is not guaranteed** to be compilable, buildable or deployable on the 32-bit operating system and the corresponding CPU architecture, or TiDB does not actively adapt to the 32-bit operating system.
+-   上記の 2 つの表に記載されている 32 ビット バージョンのオペレーティング システムを使用している場合、TiDB は 32 ビット オペレーティング システムおよび対応する CPUアーキテクチャ上でコンパイル、ビルド、または展開可能であることが**保証さ**れていないか、TiDB が積極的に適応していません。 32 ビット オペレーティング システムに。
 
-+ Other operating system versions not mentioned above might work but are not officially supported.
+-   上記以外のオペレーティング システムのバージョンは動作する可能性がありますが、公式にはサポートされていません。
 
-### Libraries required for compiling and running TiDB
+### TiDB のコンパイルと実行に必要なライブラリ {#libraries-required-for-compiling-and-running-tidb}
 
-|  Libraries required for compiling and building TiDB   |  Version   |
-|   :---   |   :---   |
-|   Golang  |  1.18.5 |
-|   Rust    |   nightly-2022-07-31 or later  |
-|  GCC      |   7.x      |
-|  LLVM     |  13.0 or later  |
+| TiDB のコンパイルとビルドに必要なライブラリ | バージョン                 |
+| :----------------------- | :-------------------- |
+| Golang                   | 1.18.5                |
+| さび                       | nightly-2022-07-31 以降 |
+| GCC                      | 7.x                   |
+| LLVM                     | 13.0以降                |
 
-Library required for running TiDB: glibc (2.28-151.el8 version）
+TiDBの実行に必要なライブラリ: glibc (2.28-151.el8版）
 
-## Software recommendations
+## ソフトウェアの推奨事項 {#software-recommendations}
 
-### Control machine
+### 制御機 {#control-machine}
 
-| Software | Version |
-| :--- | :--- |
-| sshpass | 1.06 or later |
-| TiUP | 1.5.0 or later |
+| ソフトウェア | バージョン   |
+| :----- | :------ |
+| sshパス  | 1.06以降  |
+| TiUP   | 1.5.0以降 |
 
-> **Note:**
+> **ノート：**
 >
-> It is required that you [deploy TiUP on the control machine](/production-deployment-using-tiup.md#step-2-deploy-tiup-on-the-control-machine) to operate and manage TiDB clusters.
+> TiDB クラスターを操作および管理するには、 [制御マシンにTiUPを展開する](/production-deployment-using-tiup.md#step-2-deploy-tiup-on-the-control-machine)必要があります。
 
-### Target machines
+### 対象マシン {#target-machines}
 
-| Software | Version |
-| :--- | :--- |
-| sshpass | 1.06 or later |
-| numa | 2.0.12 or later |
-| tar | any |
+| ソフトウェア | バージョン     |
+| :----- | :-------- |
+| sshパス  | 1.06以降    |
+| 沼      | 2.0.12 以降 |
+| タール    | どれか       |
 
-## Server recommendations
+## サーバーの推奨事項 {#server-recommendations}
 
-You can deploy and run TiDB on the 64-bit generic hardware server platform in the Intel x86-64 architecture or on the hardware server platform in the ARM architecture. The requirements and recommendations about server hardware configuration (ignoring the resources occupied by the operating system itself) for development, test, and production environments are as follows:
+TiDB は、Intel x86-64アーキテクチャの 64 ビット汎用ハードウェアサーバープラットフォーム、または ARMアーキテクチャのハードウェアサーバープラットフォームにデプロイして実行できます。開発、テスト、および実稼働環境のサーバーハードウェア構成に関する要件と推奨事項 (オペレーティング システム自体が占有するリソースは無視) は次のとおりです。
 
-### Development and test environments
+### 開発およびテスト環境 {#development-and-test-environments}
 
-| Component | CPU     | Memory | Local Storage  | Network  | Instance Number (Minimum Requirement) |
-| :------: | :-----: | :-----: | :----------: | :------: | :----------------: |
-| TiDB    | 8 core+   | 16 GB+  | No special requirements | Gigabit network card | 1 (can be deployed on the same machine with PD)      |
-| PD      | 4 core+   | 8 GB+  | SAS, 200 GB+ | Gigabit network card | 1 (can be deployed on the same machine with TiDB)       |
-| TiKV    | 8 core+   | 32 GB+  | SAS, 200 GB+ | Gigabit network card | 3       |
-| TiFlash | 32 core+  | 64 GB+  | SSD, 200 GB+ | Gigabit network card | 1     |
-| TiCDC | 8 core+ | 16 GB+ | SAS, 200 GB+ | Gigabit network card | 1 |
+|    成分   |  CPU  |  メモリー  |  ローカルストレージ  |        通信網       |     インスタンス番号 (最小要件)    |
+| :-----: | :---: | :----: | :---------: | :--------------: | :--------------------: |
+|   TiDB  |  8コア+ | 16GB以上 | 特別な要件はありません | ギガビット ネットワーク カード |  1 (PD と同じマシンにデプロイ可能)  |
+|    PD   |  4コア+ |  8GB以上 |  SAS、200GB+ | ギガビット ネットワーク カード | 1 (TiDB と同じマシンにデプロイ可能) |
+|   TiKV  |  8コア+ | 32GB以上 |  SAS、200GB+ | ギガビット ネットワーク カード |            3           |
+| TiFlash | 32コア+ | 64GB以上 |  SSD、200GB+ | ギガビット ネットワーク カード |            1           |
+|  TiCDC  |  8コア+ | 16GB以上 |  SAS、200GB+ | ギガビット ネットワーク カード |            1           |
 
-> **Note:**
+> **ノート：**
 >
-> - In the test environment, the TiDB and PD instances can be deployed on the same server.
-> - For performance-related test, do not use low-performance storage and network hardware configuration, in order to guarantee the correctness of the test result.
-> - For the TiKV server, it is recommended to use NVMe SSDs to ensure faster reads and writes.
-> - If you only want to test and verify the features, follow [Quick Start Guide for TiDB](/quick-start-with-tidb.md) to deploy TiDB on a single machine.
-> - The TiDB server uses the disk to store server logs, so there are no special requirements for the disk type and capacity in the test environment.
+> -   テスト環境では、TiDB と PD インスタンスを同じサーバーにデプロイできます。
+> -   パフォーマンス関連のテストでは、テスト結果の正確性を保証するために、パフォーマンスの低いストレージおよびネットワーク ハードウェア構成を使用しないでください。
+> -   TiKVサーバーの場合、NVMe SSD を使用してより高速な読み取りと書き込みを行うことをお勧めします。
+> -   機能のテストと検証のみを行う場合は、 [TiDB のクイック スタート ガイド](/quick-start-with-tidb.md)に従って TiDB を 1 台のマシンにデプロイします。
+> -   TiDBサーバーはディスクを使用してサーバーログを保存するため、テスト環境ではディスクの種類と容量に関する特別な要件はありません。
 
-### Production environment
+### 本番環境 {#production-environment}
 
-| Component | CPU | Memory | Hard Disk Type | Network | Instance Number (Minimum Requirement) |
-| :-----: | :------: | :------: | :------: | :------: | :-----: |
-|  TiDB  | 16 core+ | 48 GB+ | SAS | 10 Gigabit network card (2 preferred) | 2 |
-| PD | 8 core+ | 16 GB+ | SSD | 10 Gigabit network card (2 preferred) | 3 |
-| TiKV | 16 core+ | 64 GB+ | SSD | 10 Gigabit network card (2 preferred) | 3 |
-| TiFlash | 48 core+ | 128 GB+ | 1 or more SSDs | 10 Gigabit network card (2 preferred) | 2 |
-| TiCDC | 16 core+ | 64 GB+ | SSD | 10 Gigabit network card (2 preferred) | 2 |
-| Monitor | 8 core+ | 16 GB+ | SAS | Gigabit network card | 1 |
+|    成分   |   CPU  |   メモリー  | ハードディスクの種類 |             通信網             | インスタンス番号 (最小要件) |
+| :-----: | :----: | :-----: | :--------: | :-------------------------: | :-------------: |
+|   TiDB  |  16コア+ |  48GB以上 |     SAS    | 10 ギガビット ネットワーク カード (2 枚推奨) |        2        |
+|    PD   |  8コア+  |  16GB以上 |     SSD    | 10 ギガビット ネットワーク カード (2 枚推奨) |        3        |
+|   TiKV  |  16コア+ |  64GB以上 |     SSD    | 10 ギガビット ネットワーク カード (2 枚推奨) |        3        |
+| TiFlash | 48コア以上 | 128GB以上 | 1 つ以上の SSD | 10 ギガビット ネットワーク カード (2 枚推奨) |        2        |
+|  TiCDC  |  16コア+ |  64GB以上 |     SSD    | 10 ギガビット ネットワーク カード (2 枚推奨) |        2        |
+|   モニター  |  8コア+  |  16GB以上 |     SAS    |       ギガビット ネットワーク カード      |        1        |
 
-> **Note:**
+> **ノート：**
 >
-> - In the production environment, the TiDB and PD instances can be deployed on the same server. If you have a higher requirement for performance and reliability, try to deploy them separately.
-> - It is strongly recommended to use higher configuration in the production environment.
-> - It is recommended to keep the size of TiKV hard disk within 2 TB if you are using PCIe SSDs or within 1.5 TB if you are using regular SSDs.
+> -   本番環境では、TiDB と PD インスタンスを同じサーバーにデプロイできます。パフォーマンスと信頼性に関してより高い要件がある場合は、それらを個別に展開してみてください。
+> -   本番環境ではより高い構成を使用することを強くお勧めします。
+> -   PCIe SSD を使用している場合は 2 TB 以内、通常の SSD を使用している場合は 1.5 TB 以内に TiKV ハードディスクのサイズを維持することをお勧めします。
 
-Before you deploy TiFlash, note the following items:
+TiFlashを展開する前に、次の点に注意してください。
 
-- TiFlash can be [deployed on multiple disks](/tiflash/tiflash-configuration.md#multi-disk-deployment).
-- It is recommended to use a high-performance SSD as the first disk of the TiFlash data directory to buffer the real-time replication of TiKV data. The performance of this disk should not be lower than that of TiKV, such as PCI-E SSD. The disk capacity should be no less than 10% of the total capacity; otherwise, it might become the bottleneck of this node. You can deploy ordinary SSDs for other disks, but note that a better PCI-E SSD brings better performance.
-- It is recommended to deploy TiFlash on different nodes from TiKV. If you must deploy TiFlash and TiKV on the same node, increase the number of CPU cores and memory, and try to deploy TiFlash and TiKV on different disks to avoid interfering each other.
-- The total capacity of the TiFlash disks is calculated in this way: `the data volume of the entire TiKV cluster to be replicated / the number of TiKV replicas * the number of TiFlash replicas`. For example, if the overall planned capacity of TiKV is 1 TB, the number of TiKV replicas is 3, and the number of TiFlash replicas is 2, then the recommended total capacity of TiFlash is `1024 GB / 3 * 2`. You can replicate only the data of some tables. In such case, determine the TiFlash capacity according to the data volume of the tables to be replicated.
+-   TiFlashは[複数のディスクに展開](/tiflash/tiflash-configuration.md#multi-disk-deployment)にすることができます。
+-   TiFlashデータ ディレクトリの最初のディスクとして高性能 SSD を使用して、TiKV データのリアルタイム レプリケーションをバッファリングすることをお勧めします。このディスクのパフォーマンスは、PCI-E SSD などの TiKV のパフォーマンスよりも低くなってはいけません。ディスク容量は、総容量の 10% 以上にする必要があります。そうしないと、このノードのボトルネックになる可能性があります。他のディスクに通常の SSD を展開できますが、PCI-E SSD が優れているほどパフォーマンスが向上することに注意してください。
+-   TiKV とは異なるノードにTiFlashをデプロイすることをお勧めします。 TiFlashと TiKV を同じノードに展開する必要がある場合は、CPU コアとメモリの数を増やし、 TiFlashと TiKV を別のディスクに展開して相互に干渉しないようにしてください。
+-   TiFlashディスクの合計容量は、次のように計算され`the data volume of the entire TiKV cluster to be replicated / the number of TiKV replicas * the number of TiFlash replicas` 。たとえば、TiKV の全体的な計画容量が 1 TB、TiKV レプリカの数が 3、 TiFlashレプリカの数が 2 の場合、 TiFlashの推奨合計容量は`1024 GB / 3 * 2`です。一部のテーブルのデータのみを複製できます。その場合、複製するテーブルのデータ量に応じてTiFlashの容量を決定してください。
 
-Before you deploy TiCDC, note that it is recommended to deploy TiCDC on PCIe-SSD disks larger than 1 TB.
+TiCDC を展開する前に、1 TB を超える PCIe-SSD ディスクに TiCDC を展開することをお勧めします。
 
-## Network requirements
+## ネットワーク要件 {#network-requirements}
 
 <!-- Localization note for TiDB:
 
@@ -145,44 +145,44 @@ Before you deploy TiCDC, note that it is recommended to deploy TiCDC on PCIe-SSD
 
 -->
 
-As an open-source distributed SQL database, TiDB requires the following network port configuration to run. Based on the TiDB deployment in actual environments, the administrator can open relevant ports in the network side and host side.
+オープンソースの分散 SQL データベースとして、TiDB を実行するには次のネットワーク ポート構成が必要です。実際の環境での TiDB の展開に基づいて、管理者はネットワーク側とホスト側で関連するポートを開くことができます。
 
-| Component | Default Port | Description |
-| :--:| :--: | :-- |
-| TiDB |  4000  | the communication port for the application and DBA tools |
-| TiDB | 10080  | the communication port to report TiDB status |
-| TiKV | 20160 | the TiKV communication port |
-| TiKV |  20180 | the communication port to report TiKV status |
-| PD | 2379 | the communication port between TiDB and PD |
-| PD | 2380 | the inter-node communication port within the PD cluster |
-| TiFlash | 9000 | the TiFlash TCP service port |
-| TiFlash | 8123 | the TiFlash HTTP service port |
-| TiFlash | 3930 | the TiFlash RAFT and Coprocessor service port |
-| TiFlash | 20170 |the TiFlash Proxy service port |
-| TiFlash | 20292 | the port for Prometheus to pull TiFlash Proxy metrics |
-| TiFlash | 8234 | the port for Prometheus to pull TiFlash metrics |
-| Pump | 8250 | the Pump communication port |
-| Drainer | 8249 | the Drainer communication port |
-| TiCDC | 8300 | the TiCDC communication port |
-| Monitoring | 9090 | the communication port for the Prometheus service|
-| Monitoring | 12020 | the communication port for the NgMonitoring service|
-| Node_exporter | 9100 | the communication port to report the system information of every TiDB cluster node |
-| Blackbox_exporter | 9115 | the Blackbox_exporter communication port, used to monitor the ports in the TiDB cluster |
-| Grafana | 3000 | the port for the external Web monitoring service and client (Browser) access|
-| Alertmanager | 9093 | the port for the alert web service |
-| Alertmanager | 9094 | the alert communication port |
+|         成分        | デフォルトのポート | 説明                                                    |
+| :---------------: | :-------: | :---------------------------------------------------- |
+|        TiDB       |    4000   | アプリケーションおよび DBA ツール用の通信ポート                            |
+|        TiDB       |   10080   | TiDB ステータスを報告するための通信ポート                               |
+|        TiKV       |   20160年  | TiKV通信ポート                                             |
+|        TiKV       |   20180年  | TiKV ステータスを報告するための通信ポート                               |
+|         PD        |    2379   | TiDB と PD 間の通信ポート                                     |
+|         PD        |    2380   | PD クラスタ内のノード間通信ポート                                    |
+|      TiFlash      |    9000   | TiFlash TCP サービス ポート                                  |
+|      TiFlash      |    8123   | TiFlash HTTP サービス ポート                                 |
+|      TiFlash      |    3930   | TiFlash RAFT およびCoprocessorサービス ポート                   |
+|      TiFlash      |   20170年  | TiFlashプロキシ サービス ポート                                  |
+|      TiFlash      |   20292   | Prometheus がTiFlash Proxy メトリックをプルするためのポート            |
+|      TiFlash      |    8234   | Prometheus がTiFlashメトリクスをプルするためのポート                   |
+|        Pump       |    8250   | Pump通信ポート                                             |
+|      Drainer      |    8249   | Drainer通信ポート                                          |
+|       TiCDC       |    8300   | TiCDC通信ポート                                            |
+|       モニタリング      |    9090   | Prometheus サービスの通信ポート                                 |
+|       モニタリング      |   12020   | NgMonitoring サービスの通信ポート                               |
+|   Node_exporter   |    9100   | すべての TiDB クラスター ノードのシステム情報を報告するための通信ポート               |
+| Blackbox_exporter |    9115   | Blackbox_exporter 通信ポート。TiDB クラスター内のポートを監視するために使用されます |
+|       グラファナ       |    3000   | 外部 Web 監視サービスおよびクライアント (ブラウザ) アクセス用のポート               |
+|     アラートマネージャー    |    9093   | アラート Web サービスのポート                                     |
+|     アラートマネージャー    |    9094   | アラート通信ポート                                             |
 
-## Disk space requirements
+## ディスク容量要件 {#disk-space-requirements}
 
-| Component | Disk space requirement | Healthy disk usage |
-| :-- | :-- | :-- |
-| TiDB | At least 30 GB for the log disk | Lower than 90% |
-| PD | At least 20 GB for the data disk and for the log disk, respectively | Lower than 90% |
-| TiKV | At least 100 GB for the data disk and for the log disk, respectively | Lower than 80% |
-| TiFlash | At least 100 GB for the data disk and at least 30 GB for the log disk, respectively | Lower than 80% |
-| TiUP | <ul><li>Control machine: No more than 1 GB space is required for deploying a TiDB cluster of a single version. The space required increases if TiDB clusters of multiple versions are deployed. </li> <li> Deployment servers (machines where the TiDB components run): TiFlash occupies about 700 MB space and other components (such as PD, TiDB, and TiKV) occupy about 200 MB space respectively. During the cluster deployment process, the TiUP cluster requires less than 1 MB of temporary space (`/tmp` directory) to store temporary files.</li></ul>| N/A |
-| Ngmonitoring | <ul><li>Conprof: 3 x 1 GB x Number of components (each component occupies about 1 GB per day, 3 days in total) + 20 GB reserved space </li><li> Top SQL: 30 x 50 MB x Number of components (each component occupies about 50 MB per day, 30 days in total) </li><li> Conprof and Top SQL share the reserved space</li></ul> | N/A |
+| 成分      | ディスク容量要件                                                                                                                                                                                                                                                                                                                | 健全なディスク使用率 |
+| :------ | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :--------- |
+| TiDB    | ログディスク用に少なくとも 30 GB                                                                                                                                                                                                                                                                                                     | 90%未満      |
+| PD      | データ ディスクとログ ディスクにそれぞれ 20 GB 以上                                                                                                                                                                                                                                                                                          | 90%未満      |
+| TiKV    | データ ディスクとログ ディスクにそれぞれ 100 GB 以上                                                                                                                                                                                                                                                                                         | 80%未満      |
+| TiFlash | データ ディスクに 100 GB 以上、ログ ディスクに 30 GB 以上、それぞれ                                                                                                                                                                                                                                                                              | 80%未満      |
+| TiUP    | <li>制御マシン: 単一バージョンの TiDB クラスターをデプロイするために必要なスペースは 1 GB 未満です。複数のバージョンの TiDB クラスターをデプロイすると、必要なスペースが増加します。</li><li>展開サーバー (TiDB コンポーネントが実行されるマシン): TiFlashは約 700 MB のスペースを占有し、その他のコンポーネント (PD、TiDB、TiKV など) はそれぞれ約 200 MB のスペースを占有します。クラスターの展開プロセス中、 TiUPクラスターは、一時ファイルを格納するために 1 MB 未満の一時スペース ( `/tmp`ディレクトリ) を必要とします。</li> | なし         |
+| モニタリング  | <li>Conprof: 3 x 1 GB x コンポーネントの数 (各コンポーネントは 1 日あたり約 1 GB、合計 3 日を占めます) + 20 GB の予約済みスペース</li><li>Top SQL: 30 x 50 MB x コンポーネントの数 (各コンポーネントは 1 日あたり約 50 MB、合計で 30 日を占めます)</li><li> Conprof とTop SQLは予約済みスペースを共有します</li>                                                                                                  | なし         |
 
-## Web browser requirements
+## Web ブラウザーの要件 {#web-browser-requirements}
 
-TiDB relies on [Grafana](https://grafana.com/) to provide visualization of database metrics. A recent version of Internet Explorer, Chrome or Firefox with Javascript enabled is sufficient.
+TiDB は[グラファナ](https://grafana.com/)に依存して、データベース メトリックの視覚化を提供します。 Javascript が有効になっている最新バージョンの Internet Explorer、Chrome、または Firefox で十分です。

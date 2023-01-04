@@ -3,123 +3,123 @@ title: Migrate from MySQL-Compatible Databases
 summary: Learn how to migrate data from MySQL-compatible databases to TiDB Cloud using the Dumpling and TiDB Lightning tools.
 ---
 
-# Migrate Data from MySQL-Compatible Databases
+# MySQL 互換データベースからデータを移行する {#migrate-data-from-mysql-compatible-databases}
 
-TiDB is highly compatible with MySQL. You can migrate data from any MySQL-compatible databases to TiDB smoothly, whether the data is from a self-hosted MySQL instance or RDS service provided by the public cloud.
+TiDB は MySQL との互換性が高いです。データが自己ホスト型の MySQL インスタンスからのものであろうと、パブリック クラウドによって提供される RDS サービスからのものであろうと、MySQL 互換データベースから TiDB にデータをスムーズに移行できます。
 
-This document describes how to use [Dumpling](/dumpling-overview.md) to export data from MySQL-compatible databases and use [TiDB Lightning](https://docs.pingcap.com/tidb/stable/tidb-lightning-overview) logical import mode to import the data to TiDB Cloud.
+このドキュメントでは、 [Dumpling](/dumpling-overview.md)を使用して MySQL 互換データベースからデータをエクスポートする方法と、 [TiDB Lightning](https://docs.pingcap.com/tidb/stable/tidb-lightning-overview)論理インポート モードを使用してデータをTiDB Cloudにインポートする方法について説明します。
 
-> **Note:**
+> **ノート：**
 >
-> If your upstream database is Amazon Aurora MySQL, instead of referring to this document, follow instructions in [Migrate from Amazon Aurora MySQL to TiDB Cloud in Bulk](/tidb-cloud/migrate-from-aurora-bulk-import.md).
+> アップストリーム データベースが Amazon Aurora MySQL の場合は、このドキュメントを参照する代わりに、 [Amazon Aurora MySQL からTiDB Cloudに一括移行する](/tidb-cloud/migrate-from-aurora-bulk-import.md)の手順に従ってください。
 
-## Prerequisites
+## 前提条件 {#prerequisites}
 
-Before migrating data from MySQL-compatible databases into TiDB, ensure that the supported collations of TiDB Cloud can meet your requirements.
+MySQL 互換データベースから TiDB にデータを移行する前に、サポートされているTiDB Cloudの照合順序が要件を満たしていることを確認してください。
 
-By default, TiDB Cloud supports the following CI collations:
+デフォルトでは、 TiDB Cloudは次の CI 照合をサポートしています。
 
-- ascii_bin
-- binary
-- latin1_bin
-- utf8_bin
-- utf8_general_ci
-- utf8_unicode_ci
-- utf8mb4_bin
-- utf8mb4_general_ci
-- utf8mb4_unicode_ci
+-   ascii_bin
+-   バイナリ
+-   latin1_bin
+-   utf8_bin
+-   utf8_general_ci
+-   utf8_unicode_ci
+-   utf8mb4_bin
+-   utf8mb4_general_ci
+-   utf8mb4_unicode_ci
 
-## Step 1. Install TiUP
+## ステップ 1. TiUPをインストールする {#step-1-install-tiup}
 
-TiUP is a package manager in the TiDB ecosystem, which can help you run any TiDB cluster component with only a single line of command. In this document, TiUP is used to help you install and run Dumpling and TiDB Lightning.
+TiUPは TiDB エコシステムのパッケージ マネージャーであり、たった 1 行のコマンドで任意の TiDB クラスターコンポーネントを実行するのに役立ちます。このドキュメントでは、 TiUPを使用してDumplingとTiDB Lightningをインストールして実行します。
 
-1. Download and install TiUP:
+1.  TiUPをダウンロードしてインストールします。
 
-    {{< copyable "shell-regular" >}}
+    {{< copyable "" >}}
 
     ```shell
     curl --proto '=https' --tlsv1.2 -sSf https://tiup-mirrors.pingcap.com/install.sh | sh
     ```
 
-2. Declare the global environment variable:
+2.  グローバル環境変数を宣言します。
 
-    > **Note:**
+    > **ノート：**
     >
-    > After the installation, TiUP displays the absolute path of the corresponding `profile` file. In the following command, you need to modify `.bash_profile` to the path of your `profile` file.
+    > インストール後、 TiUPは対応する`profile`ファイルの絶対パスを表示します。次のコマンドでは、 `.bash_profile`を`profile`ファイルのパスに変更する必要があります。
 
-    {{< copyable "shell-regular" >}}
+    {{< copyable "" >}}
 
     ```shell
     source .bash_profile
     ```
 
-## Step 2. Export data from MySQL-compatible databases
+## ステップ 2. MySQL 互換データベースからデータをエクスポートする {#step-2-export-data-from-mysql-compatible-databases}
 
-You can use several ways to dump data from MySQL, such as using `mysqldump` or `mydumper`. It is recommended to use [Dumpling](/dumpling-overview.md) for higher performance and compatibility with TiDB, which is also one of the open source tools created by PingCAP.
+`mysqldump`または`mydumper`を使用するなど、いくつかの方法で MySQL からデータをダンプできます。より高いパフォーマンスと、PingCAP によって作成されたオープン ソース ツールの 1 つである TiDB との互換性のために、 [Dumpling](/dumpling-overview.md)を使用することをお勧めします。
 
-1. Install Dumpling:
+1.  Dumplingをインストールします。
 
-    {{< copyable "shell-regular" >}}
+    {{< copyable "" >}}
 
     ```shell
     tiup install dumpling
     ```
 
-2. Export your MySQL database using Dumpling.
+2.  Dumplingを使用して MySQL データベースをエクスポートします。
 
-    - To export your data to Amazon S3 cloud storage, see [Export data to Amazon S3 cloud storage](/dumpling-overview.md#export-data-to-amazon-s3-cloud-storage).
-    - To export your data to local data files, use the following command:
+    -   データを Amazon S3 クラウド ストレージにエクスポートするには、 [データを Amazon S3 クラウド ストレージにエクスポートする](/dumpling-overview.md#export-data-to-amazon-s3-cloud-storage)を参照してください。
+    -   データをローカル データ ファイルにエクスポートするには、次のコマンドを使用します。
 
-        {{< copyable "shell-regular" >}}
+        {{< copyable "" >}}
 
         ```shell
         tiup dumpling -h <mysql-host> -P 3306 -u <user> -F 64MiB -t 8 -o /path/to/export/dir
         ```
 
-        If you want to export only some specified databases, use `-B` to specify a comma-separated list of database names.
+        指定した一部のデータベースのみをエクスポートする場合は、 `-B`を使用して、データベース名のコンマ区切りリストを指定します。
 
-        The minimum permissions required are as follows:
+        最低限必要な権限は次のとおりです。
 
-        - `SELECT`
-        - `RELOAD`
-        - `LOCK TABLES`
-        - `REPLICATION CLIENT`
+        -   `SELECT`
+        -   `RELOAD`
+        -   `LOCK TABLES`
+        -   `REPLICATION CLIENT`
 
-## Step 3. Import data to TiDB Cloud
+## ステップ 3. データをTiDB Cloudにインポートする {#step-3-import-data-to-tidb-cloud}
 
-Depending on the location and size of your source data, the importing methods are different.
+ソース データの場所とサイズによって、インポート方法が異なります。
 
-- If your source data is located in Amazon S3 cloud storage, take the following steps:
+-   ソース データが Amazon S3 クラウド ストレージにある場合は、次の手順を実行します。
 
-    1. Configure Amazon S3 access to allow TiDB cloud to access the source data in your Amazon S3 bucket. For more information, see [configure Amazon S3 access](/tidb-cloud/config-s3-and-gcs-access.md#configure-amazon-s3-access).
-    2. From the [TiDB Cloud console](https://tidbcloud.com/), navigate to the **Clusters** page, and then click the name of your target cluster to go to its own overview page. Click **Import Data**, and then fill in the importing related information on the **Data Import** page.
+    1.  Amazon S3 アクセスを構成して、TiDB クラウドが Amazon S3 バケット内のソース データにアクセスできるようにします。詳細については、 [Amazon S3 アクセスを構成する](/tidb-cloud/config-s3-and-gcs-access.md#configure-amazon-s3-access)を参照してください。
+    2.  [TiDB Cloudコンソール](https://tidbcloud.com/)から [**クラスター**] ページに移動し、ターゲット クラスターの名前をクリックして、独自の概要ページに移動します。 [<strong>データのインポート]</strong>をクリックし、[<strong>データのインポート]</strong>ページでインポート関連の情報を入力します。
 
-- If your source data is in local files, do one of the following:
+-   ソース データがローカル ファイルにある場合は、次のいずれかを実行します。
 
-    - If the data is larger than 1 TB, it is recommended that you use Amazon S3 or GCS as a staging area to import or migrate data into TiDB Cloud. For more information, see [Import or migrate from Amazon S3 or GCS to TiDB Cloud](/tidb-cloud/migrate-from-amazon-s3-or-gcs.md).
-    - If the data is less than 1 TB, you can use the logical import mode of TiDB Lightning according to the following steps in this document.
+    -   データが 1 TB を超える場合は、Amazon S3 または GCS をステージング領域として使用して、データをTiDB Cloudにインポートまたは移行することをお勧めします。詳細については、 [Amazon S3 または GCS からTiDB Cloudへのインポートまたは移行](/tidb-cloud/migrate-from-amazon-s3-or-gcs.md)を参照してください。
+    -   データが 1 TB 未満の場合は、このドキュメントの次の手順に従って、 TiDB Lightningの論理インポート モードを使用できます。
 
-The following steps show how to import local data to TiDB Cloud using the logical import mode of TiDB Lightning.
+次の手順は、 TiDB Lightningの論理インポート モードを使用してローカル データをTiDB Cloudにインポートする方法を示しています。
 
-1. Install TiDB Lightning:
+1.  TiDB Lightningをインストールします。
 
-    {{< copyable "shell-regular" >}}
+    {{< copyable "" >}}
 
     ```shell
     tiup install tidb-lightning
     ```
 
-2. Create a TiDB Lightning configuration file and configure the importing information.
+2.  TiDB Lightning構成ファイルを作成し、インポート情報を構成します。
 
-    1. Create the TiDB Lightning configuration file.
+    1.  TiDB Lightning構成ファイルを作成します。
 
-        {{< copyable "shell-regular" >}}
+        {{< copyable "" >}}
 
         ```shell
         vim tidb-lightning.toml
         ```
 
-    2. Configure the importing information.
+    2.  インポート情報を設定します。
 
         {{< copyable "" >}}
 
@@ -153,21 +153,21 @@ The following steps show how to import local data to TiDB Cloud using the logica
         no-schema = false
         ```
 
-       If you want to configure TLS in the target TiDB cluster or do more configurations, see [TiDB Lightning Configuration](https://docs.pingcap.com/tidb/stable/tidb-lightning-configuration).
+        ターゲット TiDB クラスターで TLS を構成する場合、またはさらに構成を行う場合は、 [TiDB LightningConfiguration / コンフィグレーション](https://docs.pingcap.com/tidb/stable/tidb-lightning-configuration)を参照してください。
 
-3. Import data into TiDB using TiDB Lightning:
+3.  TiDB Lightningを使用して TiDB にデータをインポートします。
 
-    {{< copyable "shell-regular" >}}
+    {{< copyable "" >}}
 
     ```shell
     nohup tiup tidb-lightning -config tidb-lightning.toml > nohup.out &
     ```
 
-    After the importing task is started, you can view the importing progress in either of the following ways:
+    インポート タスクが開始されたら、次のいずれかの方法でインポートの進行状況を表示できます。
 
-    - To get the progress using command lines, `grep` the keyword `progress` in logs, which is updated every 5 minutes by default.
-    - To get more monitoring metrics using the TiDB monitoring framework, see [TiDB Lightning Monitoring](https://docs.pingcap.com/tidb/stable/monitor-tidb-lightning).
+    -   コマンド ラインを使用して進行状況を取得するには、ログにキーワード`grep`を入力します。これは、デフォルトで`progress`分ごとに更新されます。
+    -   TiDB モニタリング フレームワークを使用してさらにモニタリング メトリックを取得するには、 [TiDB Lightningモニタリング](https://docs.pingcap.com/tidb/stable/monitor-tidb-lightning)を参照してください。
 
-## See also
+## こちらもご覧ください {#see-also}
 
-- [Migrate Incremental Data from MySQL-Compatible Databases](/tidb-cloud/migrate-incremental-data-from-mysql.md)
+-   [MySQL 互換データベースからの増分データの移行](/tidb-cloud/migrate-incremental-data-from-mysql.md)

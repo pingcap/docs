@@ -3,17 +3,17 @@ title: ADD INDEX | TiDB SQL Statement Reference
 summary: An overview of the usage of ADD INDEX for the TiDB database.
 ---
 
-# ADD INDEX
+# インデックスを追加 {#add-index}
 
-The `ALTER TABLE.. ADD INDEX` statement adds an index to an existing table. This operation is online in TiDB, which means that neither reads or writes to the table are blocked by adding an index.
+`ALTER TABLE.. ADD INDEX`ステートメントは、既存のテーブルにインデックスを追加します。この操作は TiDB ではオンラインです。つまり、インデックスを追加してもテーブルへの読み取りも書き込みもブロックされません。
 
-> **Warning:**
+> **警告：**
 >
-> - **DO NOT** upgrade a TiDB cluster when a DDL statement is being executed in the cluster (usually for the time-consuming DDL statements such as `ADD INDEX` and the column type changes).
-> - Before the upgrade, it is recommended to use the [`ADMIN SHOW DDL`](/sql-statements/sql-statement-admin-show-ddl.md) command to check whether the TiDB cluster has an ongoing DDL job. If the cluster has a DDL job, to upgrade the cluster, wait until the DDL execution is finished or use the [`ADMIN CANCEL DDL`](/sql-statements/sql-statement-admin-cancel-ddl.md) command to cancel the DDL job before you upgrade the cluster.
-> - In addition, during the cluster upgrade, **DO NOT** execute any DDL statement. Otherwise, the issue of undefined behavior might occur.
+> -   DDL ステートメントがクラスターで実行されているときは、 **TiDB**クラスターをアップグレードしないでください (通常、 `ADD INDEX`のような時間のかかる DDL ステートメントや列の型の変更のため)。
+> -   アップグレードの前に、 [`ADMIN SHOW DDL`](/sql-statements/sql-statement-admin-show-ddl.md)コマンドを使用して、TiDB クラスターに進行中の DDL ジョブがあるかどうかを確認することをお勧めします。クラスターに DDL ジョブがある場合、クラスターをアップグレードするには、DDL の実行が完了するまで待つか、 [`ADMIN CANCEL DDL`](/sql-statements/sql-statement-admin-cancel-ddl.md)コマンドを使用して DDL ジョブをキャンセルしてからクラスターをアップグレードします。
+> -   また、クラスターのアップグレード中は、DDL ステートメントを実行し**ない**でください。そうしないと、未定義の動作の問題が発生する可能性があります。
 
-## Synopsis
+## あらすじ {#synopsis}
 
 ```ebnf+diagram
 AlterTableStmt
@@ -39,7 +39,7 @@ IndexType
            | 'RTREE'
 ```
 
-## Examples
+## 例 {#examples}
 
 ```sql
 mysql> CREATE TABLE t1 (id INT NOT NULL PRIMARY KEY AUTO_INCREMENT, c1 INT NOT NULL);
@@ -72,20 +72,20 @@ mysql> EXPLAIN SELECT * FROM t1 WHERE c1 = 3;
 2 rows in set (0.00 sec)
 ```
 
-## MySQL compatibility
+## MySQL の互換性 {#mysql-compatibility}
 
-* `FULLTEXT`, `HASH` and `SPATIAL` indexes are not supported.
-* Descending indexes are not supported (similar to MySQL 5.7).
-* Adding the primary key of the `CLUSTERED` type to a table is not supported. For more details about the primary key of the `CLUSTERED` type, refer to [clustered index](/clustered-indexes.md).
+-   `FULLTEXT` 、 `HASH`および`SPATIAL`のインデックスはサポートされていません。
+-   降順のインデックスはサポートされていません ( MySQL 5.7と同様)。
+-   `CLUSTERED`タイプの主キーをテーブルに追加することはサポートされていません。 `CLUSTERED`タイプの主キーの詳細については、 [クラスター化インデックス](/clustered-indexes.md)を参照してください。
 
-## See also
+## こちらもご覧ください {#see-also}
 
-* [Index Selection](/choose-index.md)
-* [Wrong Index Solution](/wrong-index-solution.md)
-* [CREATE INDEX](/sql-statements/sql-statement-create-index.md)
-* [DROP INDEX](/sql-statements/sql-statement-drop-index.md)
-* [RENAME INDEX](/sql-statements/sql-statement-rename-index.md)
-* [ALTER INDEX](/sql-statements/sql-statement-alter-index.md)
-* [ADD COLUMN](/sql-statements/sql-statement-add-column.md)
-* [CREATE TABLE](/sql-statements/sql-statement-create-table.md)
-* [EXPLAIN](/sql-statements/sql-statement-explain.md)
+-   [インデックスの選択](/choose-index.md)
+-   [インデックス問題の解決方法](/wrong-index-solution.md)
+-   [インデックスを作成](/sql-statements/sql-statement-create-index.md)
+-   [ドロップインデックス](/sql-statements/sql-statement-drop-index.md)
+-   [インデックスの名前を変更](/sql-statements/sql-statement-rename-index.md)
+-   [インデックスの変更](/sql-statements/sql-statement-alter-index.md)
+-   [列を追加](/sql-statements/sql-statement-add-column.md)
+-   [テーブルを作成](/sql-statements/sql-statement-create-table.md)
+-   [EXPLAIN](/sql-statements/sql-statement-explain.md)

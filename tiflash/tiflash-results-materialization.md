@@ -3,22 +3,22 @@ title: TiFlash Query Result Materialization
 summary: Learn how to save the query results of TiFlash in a transaction.
 ---
 
-# TiFlash Query Result Materialization
+# TiFlashクエリ結果の実体化 {#tiflash-query-result-materialization}
 
-> **Warning:**
+> **警告：**
 >
-> This is an experimental feature, which might be changed or removed without prior notice. The syntax and implementation might be modified before GA. If you encounter any problems, you can report an [issue](https://github.com/pingcap/tidb/issues) on GitHub.
+> これは実験的機能であり、予告なしに変更または削除される可能性があります。構文と実装は、GA の前に変更される可能性があります。問題が発生した場合は、GitHub で[問題](https://github.com/pingcap/tidb/issues)を報告できます。
 
-This document introduces how to save the TiFlash query result to a specified TiDB table in an `INSERT INTO SELECT` transaction.
+このドキュメントでは、 TiFlashクエリの結果を指定された TiDB テーブルに`INSERT INTO SELECT`のトランザクションで保存する方法を紹介します。
 
-Starting from v6.5.0, TiDB supports saving TiFlash query results in a table, that is, TiFlash query result materialization. During the execution of the `INSERT INTO SELECT` statement, if TiDB pushes down the `SELECT` subquery to TiFlash, the TiFlash query result can be saved to a TiDB table specified in the `INSERT INTO` clause. For TiDB versions earlier than v6.5.0, the TiFlash query results are read-only, so if you want to save TiFlash query results, you have to obtain them from the application level, and then save them in a separate transaction or process.
+v6.5.0 以降、TiDB はTiFlashクエリ結果のテーブルへの保存、つまりTiFlashクエリ結果の実体化をサポートします。 `INSERT INTO SELECT`ステートメントの実行中に、TiDB が`SELECT`サブクエリをTiFlashにプッシュ ダウンすると、 TiFlashクエリの結果を`INSERT INTO`句で指定された TiDB テーブルに保存できます。 v6.5.0 より前のバージョンの TiDB では、 TiFlashクエリの結果は読み取り専用であるため、 TiFlashクエリの結果を保存する場合は、アプリケーション レベルから取得し、別のトランザクションまたはプロセスで保存する必要があります。
 
-> **Note:**
+> **ノート：**
 >
-> - By default ([`tidb_allow_mpp = ON`](/system-variables.md#tidb_allow_mpp-new-in-v50)), the TiDB optimizer intelligently chooses to push down queries to TiKV or TiFlash based on the query cost. To enforce that the queries are pushed down to TiFlash, you can set the system variable [`tidb_enforce_mpp`](/system-variables.md#tidb_enforce_mpp-new-in-v51) to `ON`.
-> - During the experimental phase, this feature is disabled by default. To enable this feature, you can set the system variable [`tidb_enable_tiflash_read_for_write_stmt`](/system-variables.md#tidb_enable_tiflash_read_for_write_stmt-new-in-v630) to `ON`.
+> -   デフォルト ( [`tidb_allow_mpp = ON`](/system-variables.md#tidb_allow_mpp-new-in-v50) ) では、TiDB オプティマイザーは、クエリ コストに基づいて、クエリを TiKV またはTiFlashにプッシュ ダウンすることをインテリジェントに選択します。クエリがTiFlashにプッシュされるようにするには、システム変数[`tidb_enforce_mpp`](/system-variables.md#tidb_enforce_mpp-new-in-v51)を`ON`に設定します。
+> -   実験的段階では、この機能はデフォルトで無効になっています。この機能を有効にするには、システム変数[`tidb_enable_tiflash_read_for_write_stmt`](/system-variables.md#tidb_enable_tiflash_read_for_write_stmt-new-in-v630)から`ON`を設定します。
 
-The syntax of `INSERT INTO SELECT` is as follows.
+`INSERT INTO SELECT`の構文は次のとおりです。
 
 ```sql
 INSERT [LOW_PRIORITY | HIGH_PRIORITY] [IGNORE]
@@ -34,48 +34,48 @@ assignment:
     assignment [, assignment] ...
 ```
 
-For example, you can save the query result from table `t1` in the `SELECT` clause to table `t2` using the following `INSERT INTO SELECT` statement:
+たとえば、次の`INSERT INTO SELECT`ステートメントを使用して、 `SELECT`句のテーブル`t1`からのクエリ結果をテーブル`t2`に保存できます。
 
 ```sql
 INSERT INTO t2 (name, country)
 SELECT app_name, country FROM t1;
 ```
 
-## Typical and recommended usage scenarios
+## 一般的および推奨される使用シナリオ {#typical-and-recommended-usage-scenarios}
 
-- Efficient BI solutions
+-   効率的な BI ソリューション
 
-    For many BI applications, the analysis query requests are very heavy. For example, when a lot of users access and refresh a report at the same time, a BI application needs to handle a lot of concurrent query requests. To deal with this situation effectively, you can use `INSERT INTO SELECT` to save the query results of the report in a TiDB table. Then, the end users can query data directly from the result table when the report is refreshed, which avoids multiple repeated computations and analyses. Similarly, by saving historical analysis results, you can further reduce the computation volume for long-time historical data analysis. For example, if you have a report `A` that is used to analyze daily sales profit, you can save the results of report `A` to a result table `T` using `INSERT INTO SELECT`. Then, when you need to generate a report `B` to analyze the sales profit of the past month, you can directly use the daily analysis results in table `T`. This way not only greatly reduces the computation volume but also improves the query response speed and reduces the system load.
+    多くの BI アプリケーションでは、分析クエリ要求は非常に重いものです。たとえば、多数のユーザーが同時にレポートにアクセスして更新する場合、BI アプリケーションは多数の同時クエリ要求を処理する必要があります。この状況に効果的に対処するために、 `INSERT INTO SELECT`を使用して、レポートのクエリ結果を TiDB テーブルに保存できます。その後、エンド ユーザーは、レポートが更新されたときに結果テーブルから直接データをクエリできます。これにより、計算と分析を何度も繰り返す必要がなくなります。同様に、ヒストリカル解析結果を保存することで、長時間のヒストリカルデータ解析の計算量をさらに削減できます。たとえば、毎日の販売利益を分析するために使用されるレポート`A`がある場合、 `INSERT INTO SELECT`を使用してレポート`A`の結果を結果テーブル`T`に保存できます。次に、レポート`B`を生成して過去 1 か月の売上利益を分析する必要がある場合は、表`T`の日次分析結果を直接使用できます。これにより、計算量が大幅に削減されるだけでなく、クエリの応答速度が向上し、システムの負荷が軽減されます。
 
-- Serving online applications with TiFlash
+-   TiFlashを使用したオンライン アプリケーションの提供
 
-    The number of concurrent requests supported by TiFlash depends on the volume of data and complexity of the queries, but it typically does not exceed 100 QPS. You can use `INSERT INTO SELECT` to save TiFlash query results, and then use the query result table to support highly concurrent online requests. The data in the result table can be updated in the background at a low frequency (for example, at an interval of 0.5 second), which is well below the TiFlash concurrency limit, while still maintaining a high level of data freshness.
+    TiFlashでサポートされる同時リクエストの数は、データの量とクエリの複雑さによって異なりますが、通常は 100 QPS を超えません。 `INSERT INTO SELECT`を使用してTiFlashクエリ結果を保存し、クエリ結果テーブルを使用して高度な同時オンライン リクエストをサポートできます。結果テーブルのデータは、バックグラウンドで低頻度 (たとえば、0.5 秒間隔) で更新できます。これは、 TiFlashの同時実行制限を十分に下回っていますが、データの鮮度を高いレベルで維持しています。
 
-## Execution process
+## 実行プロセス {#execution-process}
 
-* During the execution of the `INSERT INTO SELECT` statement, TiFlash first returns the query results of the `SELECT` clause to a TiDB server in the cluster, and then writes the results to the target table, which can have a TiFlash replica.
-* The execution of the `INSERT INTO SELECT` statement guarantees ACID properties.
+-   `INSERT INTO SELECT`ステートメントの実行中、 TiFlashは最初に`SELECT`節のクエリ結果をクラスター内の TiDBサーバーに返し、次に結果をターゲット テーブルに書き込みます。ターゲット テーブルには、 TiFlashレプリカを含めることができます。
+-   `INSERT INTO SELECT`ステートメントを実行すると、 ACIDプロパティが保証されます。
 
-## Restrictions
+## 制限 {#restrictions}
 
 <CustomContent platform="tidb">
 
-* The TiDB memory limit on the `INSERT INTO SELECT` statement can be adjusted using the system variable [`tidb_mem_quota_query`](/system-variables.md#tidb_mem_quota_query). Starting from v6.5.0, it is not recommended to use [`txn-total-size-limit`](/tidb-configuration-file.md#txn-total-size-limit) to control transaction memory size.
+-   `INSERT INTO SELECT`ステートメントの TiDB メモリ制限は、システム変数[`tidb_mem_quota_query`](/system-variables.md#tidb_mem_quota_query)を使用して調整できます。 v6.5.0 以降では、 [`txn-total-size-limit`](/tidb-configuration-file.md#txn-total-size-limit)を使用してトランザクション メモリ サイズを制御することはお勧めしません。
 
-    For more information, see [TiDB memory control](/configure-memory-usage.md).
+    詳細については、 [TiDB メモリ制御](/configure-memory-usage.md)を参照してください。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-* The TiDB memory limit on the `INSERT INTO SELECT` statement can be adjusted using the system variable [`tidb_mem_quota_query`](/system-variables.md#tidb_mem_quota_query). Starting from v6.5.0, it is not recommended to use [`txn-total-size-limit`](https://docs.pingcap.com/tidb/stable/tidb-configuration-file#txn-total-size-limit) to control transaction memory size.
+-   `INSERT INTO SELECT`ステートメントの TiDB メモリ制限は、システム変数[`tidb_mem_quota_query`](/system-variables.md#tidb_mem_quota_query)を使用して調整できます。 v6.5.0 以降では、 [`txn-total-size-limit`](https://docs.pingcap.com/tidb/stable/tidb-configuration-file#txn-total-size-limit)を使用してトランザクション メモリ サイズを制御することはお勧めしません。
 
-    For more information, see [TiDB memory control](https://docs.pingcap.com/tidb/stable/configure-memory-usage).
+    詳細については、 [TiDB メモリ制御](https://docs.pingcap.com/tidb/stable/configure-memory-usage)を参照してください。
 
 </CustomContent>
 
-* TiDB has no hard limit on the concurrency of the `INSERT INTO SELECT` statement, but it is recommended to consider the following practices:
+-   TiDB には`INSERT INTO SELECT`ステートメントの同時実行性に厳密な制限はありませんが、次のプラクティスを考慮することをお勧めします。
 
-    * When a "write transaction" is large, such as close to 1 GiB, it is recommended to control concurrency to no more than 10.
-    * When a "write transaction" is small, such as less than 100 MiB, it is recommended to control concurrency to no more than 30.
-    * Determine the concurrency based on testing results and specific circumstances.
+    -   「書き込みトランザクション」が 1 GiB に近いなど、大きい場合は、同時実行数を 10 以下に制御することをお勧めします。
+    -   「書き込みトランザクション」が 100 MiB 未満などの小さい場合は、同時実行数を 30 以下に制御することをお勧めします。
+    -   テスト結果と特定の状況に基づいて同時実行数を決定します。

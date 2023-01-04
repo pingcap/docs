@@ -3,155 +3,155 @@ title: Data Migration Monitoring Metrics
 summary: Learn about the monitoring metrics when you use Data Migration to migrate data.
 ---
 
-# Data Migration Monitoring Metrics
+# データ移行の監視指標 {#data-migration-monitoring-metrics}
 
-If your DM cluster is deployed using TiUP, the [monitoring system](/dm/migrate-data-using-dm.md#step-8-monitor-the-task-and-check-logs) is also deployed at the same time. This document describes the monitoring metrics provided by DM-worker.
+DM クラスターがTiUPを使用してデプロイされている場合、 [監視システム](/dm/migrate-data-using-dm.md#step-8-monitor-the-task-and-check-logs)も同時にデプロイされます。このドキュメントでは、DM-worker によって提供されるモニタリング メトリクスについて説明します。
 
-## Task
+## タスク {#task}
 
-In the Grafana dashboard, the default name of DM is `DM-task`.
+Grafana ダッシュボードでは、DM のデフォルト名は`DM-task`です。
 
-### `overview`
+### <code>overview</code> {#code-overview-code}
 
-`Overview` contains some monitoring metrics of all the DM-worker and DM-master instances or sources in the currently selected task. The current default alert rule is only for a single DM-worker/DM-master instance/source.
+`Overview`には、現在選択されているタスクのすべての DM-worker および DM-master インスタンスまたはソースのいくつかのモニタリング メトリックが含まれます。現在の既定のアラート ルールは、単一の DM-worker/DM-master インスタンス/ソースのみを対象としています。
 
-| Metric name | Description | Alert | Severity level |
-|:----|:------------|:----|:----|
-| task state | The state of subtasks for migration | N/A | N/A |
-| storage capacity | The total storage capacity of the disk occupied by relay logs | N/A | N/A |
-| storage remain | The remaining storage capacity of the disk occupied by relay logs | N/A | N/A |
-| binlog file gap between master and relay | The number of binlog files by which the `relay` processing unit is behind the upstream master | N/A | N/A |
-| load progress | The percentage of the completed loading process of the load unit. The value is between 0%~100% | N/A | N/A |
-| binlog file gap between master and syncer | The number of binlog files by which the binlog replication unit is behind the upstream master | N/A | N/A |
-| shard lock resolving | Whether the current subtask is waiting for sharding DDL migration. A value greater than 0 means that the current subtask is waiting for sharding DDL migration | N/A | N/A |
+| 指標名                          | 説明                                                                                   | アラート | 重大度 |
+| :--------------------------- | :----------------------------------------------------------------------------------- | :--- | :-- |
+| タスクの状態                       | 移行のサブタスクの状態                                                                          | なし   | なし  |
+| ストレージ容量                      | リレーログが占有するディスクの合計ストレージ容量                                                             | なし   | なし  |
+| 保管残り                         | リレーログが占有するディスクの残りのストレージ容量                                                            | なし   | なし  |
+| マスターとリレー間の binlog ファイルのギャップ  | `relay`処理単位が上流のマスターより遅れている binlog ファイルの数                                             | なし   | なし  |
+| ロードの進行状況                     | ロード ユニットのロード プロセスが完了した割合。値は 0% から 100% の間です                                          | なし   | なし  |
+| マスターとシンサー間の binlog ファイルのギャップ | バイナリログ レプリケーション ユニットがアップストリーム マスターの背後にあるバイナリログ ファイルの数                                | なし   | なし  |
+| シャードロックの解決                   | 現在のサブタスクがシャーディング DDL 移行を待機しているかどうか。 0 より大きい値は、現在のサブタスクがシャーディング DDL 移行を待機していることを意味します | なし   | なし  |
 
-### Operation errors
+### 操作エラー {#operation-errors}
 
-| Metric name | Description | Alert | Severity level |
-|:----|:------------|:----|:----|
-| before any operate error | The number of errors before any operation | N/A | N/A |
-| source bound error | The number of errors of data source binding operations | N/A | N/A |
-| start error | The number of errors during the start of a subtask | N/A | N/A |
-| pause error | The number of errors during the pause of a subtask | N/A | N/A |
-| resume error | The number of errors during the resuming of a subtask | N/A | N/A |
-| auto-resume error | The number of errors during the auto-resuming of a subtask | N/A | N/A |
-| update error | The number of errors during the update of a subtask | N/A | N/A |
-| stop error | The number of errors during the stop of a subtask | N/A | N/A |
+| 指標名        | 説明                  | アラート | 重大度 |
+| :--------- | :------------------ | :--- | :-- |
+| 操作エラーの前に   | 操作前のエラー数            | なし   | なし  |
+| ソースバウンドエラー | データ ソース バインド操作のエラー数 | なし   | なし  |
+| 起動エラー      | サブタスク開始時のエラー数       | なし   | なし  |
+| 一時停止エラー    | サブタスクの一時停止中のエラー数    | なし   | なし  |
+| 再開エラー      | サブタスクの再開中のエラーの数     | なし   | なし  |
+| 自動再開エラー    | サブタスクの自動再開中のエラー数    | なし   | なし  |
+| 更新エラー      | サブタスクの更新中のエラー数      | なし   | なし  |
+| 停止エラー      | サブタスク停止中のエラー数       | なし   | なし  |
 
-### High availability
+### 高可用性 {#high-availability}
 
-| Metric name | Description | Alert | Severity level |
-|:----|:------------|:----|:----|
-| number of dm-masters start leader components per minute | The number of DM-master attempts to enable leader related components per minute | N/A | N/A |
-| number of workers in different state | The number of DM-workers in different states | Some DM-worker(s) has (have) been offline for more than one hour | critical |
-| workers' state | The state of the DM-worker | N/A | N/A |
-| number of worker event error | The number of different types of DM-worker errors | N/A | N/A |
-| shard ddl error per minute | The number of different types of sharding DDL errors per minute | Any sharding DDL error occurs | critical |
-| number of pending shard ddl | The number of pending sharding DDL operations | Any pending sharding DDL operation has existed for more than one hour | critical |
+| 指標名                                 | 説明                                        | アラート                             | 重大度 |
+| :---------------------------------- | :---------------------------------------- | :------------------------------- | :-- |
+| 1 分あたりの dm-masters 開始リーダー コンポーネントの数 | リーダー関連のコンポーネントを有効にする DM マスターの 1 分あたりの試行回数 | なし                               | なし  |
+| 異なる州の労働者の数                          | さまざまな州の DM ワーカーの数                         | 一部の DM ワーカーは 1 時間以上オフラインになっています  | 致命的 |
+| 労働者国家                               | DM ワーカーの状態                                | なし                               | なし  |
+| ワーカーイベントエラー数                        | さまざまなタイプの DM-worker エラーの数                 | なし                               | なし  |
+| 1 分あたりのシャード ddl エラー                 | 1 分あたりのさまざまなタイプのシャーディング DDL エラーの数         | シャーディング DDL エラーが発生する             | 致命的 |
+| 保留中のシャード ddl の数                     | 保留中のシャーディング DDL 操作の数                      | 保留中のシャーディング DDL 操作が 1 時間以上存在している | 致命的 |
 
-### Task state
+### タスクの状態 {#task-state}
 
-| Metric name | Description | Alert | Severity level |
-|:----|:------------|:----|:----|
-| task state | The state of subtasks | An alert occurs when the subtask has been in the `Paused` state for more than 20 minutes | critical |
+| 指標名    | 説明       | アラート                                    | 重大度 |
+| :----- | :------- | :-------------------------------------- | :-- |
+| タスクの状態 | サブタスクの状態 | サブタスクが 20 分以上`Paused`の状態にあると、アラートが発生します | 致命的 |
 
-### Dump/Load unit
+### ダンプ・ロードユニット {#dump-load-unit}
 
-The following metrics show only when `task-mode` is in the `full` or `all` mode.
+次のメトリックは、 `task-mode`が`full`または`all`モードの場合にのみ表示されます。
 
-| Metric name | Description | Alert | Severity level |
-|:----|:------------|:----|:----|
-| load progress | The percentage of the completed loading process of the load unit. The value range is 0%~100% | N/A | N/A |
-| data file size | The total size of the data files (includes the `INSERT INTO` statement) in the full data imported by the load unit | N/A | N/A |
-| dump process exits with error | The dump unit encounters an error within the DM-worker and exits | Immediate alerts | critical |
-| load process exits with error | The load unit encounters an error within the DM-worker and exits | Immediate alerts | critical |
-| table count | The total number of tables in the full data imported by the load unit | N/A | N/A |
-| data file count | The total number of data files (includes the `INSERT INTO` statement) in the full data imported by the load unit | N/A | N/A |
-| transaction execution latency | The latency of executing a transaction by the load unit (in seconds) | N/A | N/A |
-| statement execution latency | The duration of executing a statement by the load unit (in seconds) | N/A | N/A |
-| remaining time | The remaining time of replicating data by the load unit (in seconds) | N/A | N/A |
+| 指標名               | 説明                                                                    | アラート   | 重大度 |
+| :---------------- | :-------------------------------------------------------------------- | :----- | :-- |
+| ロードの進行状況          | ロード ユニットのロード プロセスが完了した割合。値の範囲は 0% ~ 100% です                           | なし     | なし  |
+| データファイルサイズ        | ロード ユニットによってインポートされたフル データ内のデータ ファイルの合計サイズ ( `INSERT INTO`ステートメントを含む) | なし     | なし  |
+| ダンプ プロセスがエラーで終了する | ダンプ ユニットが DM-worker 内でエラーに遭遇し、終了します。                                  | 即時アラート | 致命的 |
+| ロード プロセスがエラーで終了する | ロード ユニットが DM-worker 内でエラーに遭遇し、終了します。                                  | 即時アラート | 致命的 |
+| テーブル数             | ロード ユニットによってインポートされた完全なデータ内のテーブルの総数                                   | なし     | なし  |
+| データファイル数          | ロード ユニットによってインポートされたフル データ内のデータ ファイルの総数 ( `INSERT INTO`ステートメントを含む)    | なし     | なし  |
+| トランザクション実行レイテンシー  | ロード単位でのトランザクション実行のレイテンシー(秒)                                           | なし     | なし  |
+| ステートメント実行レイテンシー   | ロード単位でのステートメントの実行時間 (秒単位)                                             | なし     | なし  |
+| 残り時間              | 負荷単位でデータを複製する残り時間 (秒)                                                 | なし     | なし  |
 
-### Binlog replication
+### Binlogのレプリケーション {#binlog-replication}
 
-The following metrics show only when `task-mode` is in the `incremental` or `all` mode.
+次のメトリックは、 `task-mode`が`incremental`または`all`モードの場合にのみ表示されます。
 
-| Metric name | Description | Alert | Severity level |
-|:----|:------------|:----|:----|
-| remaining time to sync | The predicted remaining time it takes for `syncer` to be completely migrated with the upstream master (in minutes) | N/A | N/A |
-| replicate lag gauge | The latency time it takes to replicate the binlog from upstream to downstream (in seconds) | N/A | N/A |
-| replicate lag histogram | The histogram of replicating the binlog from upstream to downstream (in seconds). Note that due to different statistical mechanisms, the data might be inaccurate | N/A | N/A |
-| process exist with error | The binlog replication unit encounters an error within the DM-worker and exits | Immediate alerts | critical |
-| binlog file gap between master and syncer | The number of binlog files by which the `syncer` processing unit is behind the upstream master | An alert occurs when the number of binlog files by which the `syncer` processing unit is behind the upstream master exceeds one (>1) and the condition lasts over 10 minutes | critical |
-| binlog file gap between relay and syncer | The number of binlog files by which `syncer` is behind `relay` | An alert occurs when the number of binlog files by which the `syncer` processing unit is behind the `relay` processing unit exceeds one (>1) and the condition lasts over 10 minutes | critical |
-| binlog event QPS | The number of binlog events received per unit of time (this number does not include the events that need to be skipped) | N/A | N/A |
-| skipped binlog event QPS | The number of binlog events received per unit of time that need to be skipped | N/A | N/A |
-| read binlog event duration | The duration that the binlog replication unit reads the binlog from the relay log or the upstream MySQL (in seconds) | N/A | N/A |
-| transform binlog event duration | The duration that the binlog replication unit parses and transforms the binlog into SQL statements (in seconds) | N/A | N/A |
-| dispatch binlog event duration | The duration that the binlog replication unit dispatches a binlog event (in seconds) | N/A | N/A |
-| transaction execution latency | The duration that the binlog replication unit executes the transaction to the downstream (in seconds) | N/A | N/A |
-| binlog event size | The size of a binlog event that the binlog replication unit reads from the relay log or the upstream MySQL | N/A | N/A |
-| DML queue remain length | The length of the remaining DML job queue | N/A | N/A |
-| total sqls jobs | The number of newly added jobs per unit of time | N/A | N/A |
-| finished sqls jobs | The number of finished jobs per unit of time | N/A | N/A |
-| statement execution latency | The duration that the binlog replication unit executes the statement to the downstream (in seconds) | N/A | N/A |
-| add job duration | The duration tht the binlog replication unit adds a job to the queue (in seconds) | N/A | N/A |
-| DML conflict detect duration | The duration that the binlog replication unit detects the conflict in DML (in seconds) | N/A | N/A |
-| skipped event duration | The duration that the binlog replication unit skips a binlog event (in seconds) | N/A | N/A |
-| unsynced tables | The number of tables that have not received the shard DDL statement in the current subtask | N/A | N/A |
-| shard lock resolving | Whether the current subtask is waiting for the shard DDL lock to be resolved. A value greater than 0 indicates that it is waiting for the shard DDL lock to be resolved | N/A | N/A |
-| ideal QPS | The highest QPS that can be achieved when the running time of DM is 0 | N/A | N/A |
-| binlog event row | The number of rows in a binlog event | N/A | N/A |
-| finished transaction total | The number of finished transactions in total | N/A | N/A |
-| replication transaction batch | The number of sql rows in the transaction executed to the downstream | N/A | N/A |
-| flush checkpoints time interval | The time interval for flushing the checkpoints (in seconds) | N/A | N/A |
+| 指標名                                 | 説明                                                                                   | アラート                                                                                           | 重大度 |
+| :---------------------------------- | :----------------------------------------------------------------------------------- | :--------------------------------------------------------------------------------------------- | :-- |
+| 同期の残り時間                             | `syncer`が上流のマスターで完全に移行されるまでにかかる予測残り時間 (分単位)                                          | なし                                                                                             | なし  |
+| レプリケートラグゲージ                         | バイナリログをアップストリームからダウンストリームに複製するのにかかるレイテンシー(秒単位)                                       | なし                                                                                             | なし  |
+| レプリケート ラグ ヒストグラム                    | アップストリームからダウンストリームへのバイナリログの複製のヒストグラム (秒単位)。統計メカニズムが異なるため、データが不正確である可能性があることに注意してください | なし                                                                                             | なし  |
+| プロセスがエラーで存在します                      | binlog レプリケーション ユニットが DM-worker 内でエラーに遭遇し、終了する                                       | 即時アラート                                                                                         | 致命的 |
+| マスターとシンサー間の binlog ファイルのギャップ        | `syncer`処理単位が上流のマスターより遅れている binlog ファイルの数                                            | `syncer`の処理単位が上流のマスターより遅れている binlog ファイルの数が 1 を超え (&gt;1)、その状態が 10 分以上続くと、アラートが発生します。          | 致命的 |
+| Relay と Syncer の間の binlog ファイルのギャップ | `syncer`が`relay`遅れている binlog ファイルの数                                                  | 1 番目の処理単位が`relay`番目の処理単位よりも遅れている binlog ファイルの数が`syncer`を超え (&gt;1)、その状態が 10 分以上続くと、アラートが発生します。 | 致命的 |
+| binlog イベントの QPS                    | 単位時間あたりに受信した binlog イベントの数 (この数には、スキップする必要があるイベントは含まれません)                            | なし                                                                                             | なし  |
+| スキップされた binlog イベントの QPS            | スキップする必要がある単位時間あたりの受信バイナリ ログ イベントの数                                                  | なし                                                                                             | なし  |
+| binlog イベント期間の読み取り                  | バイナリログ レプリケーション ユニットがリレー ログまたはアップストリーム MySQL からバイナリログを読み取る期間 (秒単位)                   | なし                                                                                             | なし  |
+| binlog イベント期間の変換                    | バイナリログ レプリケーション ユニットがバイナリログを解析して SQL ステートメントに変換する期間 (秒単位)                            | なし                                                                                             | なし  |
+| ディスパッチ binlog イベント期間                | バイナリログ レプリケーション ユニットがバイナリログ イベントをディスパッチする期間 (秒単位)                                    | なし                                                                                             | なし  |
+| トランザクション実行レイテンシー                    | バイナリログ レプリケーション ユニットがダウンストリームへのトランザクションを実行する期間 (秒単位)                                 | なし                                                                                             | なし  |
+| binlog イベントのサイズ                     | バイナリログ レプリケーション ユニットがリレー ログまたは上流の MySQL から読み取るバイナリログ イベントのサイズ                        | なし                                                                                             | なし  |
+| DML キューの残りの長さ                       | 残りの DML ジョブ キューの長さ                                                                   | なし                                                                                             | なし  |
+| 合計 SQL ジョブ                          | 単位時間あたりの新規追加ジョブ数                                                                     | なし                                                                                             | なし  |
+| 完了した SQL ジョブ                        | 単位時間あたりの終了ジョブ数                                                                       | なし                                                                                             | なし  |
+| ステートメント実行レイテンシー                     | バイナリログ レプリケーション ユニットがダウンストリームに対してステートメントを実行する期間 (秒単位)                                | なし                                                                                             | なし  |
+| ジョブ期間を追加                            | binlog レプリケーション ユニットがジョブをキューに追加する期間 (秒単位)                                            | なし                                                                                             | なし  |
+| DML 競合検出期間                          | binlog レプリケーション ユニットが DML で競合を検出する期間 (秒単位)                                           | なし                                                                                             | なし  |
+| スキップされたイベント期間                       | バイナリログ レプリケーション ユニットがバイナリログ イベントをスキップする期間 (秒単位)                                      | なし                                                                                             | なし  |
+| 同期されていないテーブル                        | 現在のサブタスクでシャード DDL ステートメントを受け取っていないテーブルの数                                             | なし                                                                                             | なし  |
+| シャードロックの解決                          | 現在のサブタスクがシャード DDL ロックが解決されるのを待っているかどうか。 0 より大きい値は、シャード DDL ロックが解決されるのを待っていることを示します   | なし                                                                                             | なし  |
+| 理想的な QPS                            | DMの実行時間が0のときに達成できる最高のQPS                                                             | なし                                                                                             | なし  |
+| binlog イベント行                        | binlog イベントの行数                                                                       | なし                                                                                             | なし  |
+| 終了したトランザクションの合計                     | 終了したトランザクションの合計数                                                                     | なし                                                                                             | なし  |
+| レプリケーション トランザクション バッチ               | ダウンストリームに対して実行されたトランザクションの sql 行の数                                                   | なし                                                                                             | なし  |
+| フラッシュ チェックポイントの時間間隔                 | チェックポイントをフラッシュする時間間隔 (秒単位)                                                           | なし                                                                                             | なし  |
 
-### Relay log
+### 中継ログ {#relay-log}
 
-> **Note:**
+> **ノート：**
 >
-> Currently, DM v2.0 does not support enabling the relay log feature.
+> 現在、DM v2.0 はリレー ログ機能の有効化をサポートしていません。
 
-| Metric name | Description | Alert | Severity level |
-|:----|:------------|:----|:----|
-| storage capacity | The storage capacity of the disk occupied by the relay log | N/A | N/A |
-| storage remain | The remaining storage capacity of the disk occupied by the relay log | An alert is needed once the value is smaller than 10G | critical |
-| process exits with error | The relay log encounters an error within the DM-worker and exits | Immediate alerts | critical |
-| relay log data corruption | The number of corrupted relay log files | Immediate alerts | emergency |
-| fail to read binlog from master | The number of errors encountered when the relay log reads the binlog from the upstream MySQL | Immediate alerts | critical |
-| fail to write relay log | The number of errors encountered when the relay log writes the binlog to disks | Immediate alerts | critical |
-| binlog file index | The largest index number of relay log files. For example, "value = 1" indicates "relay-log.000001" | N/A | N/A |
-| binlog file gap between master and relay | The number of binlog files in the relay log that are behind the upstream master | An alert occurs when the number of binlog files by which the `relay` processing unit is behind the upstream master exceeds one (>1) and the condition lasts over 10 minutes | critical |
-| binlog pos | The write offset of the latest relay log file | N/A | N/A |
-| read binlog event duration | The duration that the relay log reads binlog from the upstream MySQL (in seconds) | N/A | N/A |
-| write relay log duration | The duration that the relay log writes binlog into the disks each time (in seconds) | N/A | N/A |
-| binlog event size | The size of a single binlog event that the relay log writes into the disks | N/A | N/A |
+| 指標名                         | 説明                                                           | アラート                                                                                 | 重大度 |
+| :-------------------------- | :----------------------------------------------------------- | :----------------------------------------------------------------------------------- | :-- |
+| ストレージ容量                     | 中継ログが占有するディスクの記憶容量                                           | なし                                                                                   | なし  |
+| 保管残り                        | リレーログが占有するディスクの残りのストレージ容量                                    | 値が 10G を下回ると、アラートが必要になります                                                            | 致命的 |
+| プロセスはエラーで終了します              | リレー ログで DM-worker 内でエラーが発生し、終了します                            | 即時アラート                                                                               | 致命的 |
+| リレー ログ データの破損               | 破損したリレー ログ ファイルの数                                            | 即時アラート                                                                               | 緊急  |
+| マスターからバイナリログを読み取れません        | リレー ログが上流の MySQL から binlog を読み取るときに発生したエラーの数                 | 即時アラート                                                                               | 致命的 |
+| リレーログの書き込みに失敗しました           | リレー ログが binlog をディスクに書き込むときに発生したエラーの数                        | 即時アラート                                                                               | 致命的 |
+| binlog ファイルのインデックス          | リレー ログ ファイルの最大インデックス番号。たとえば、「値 = 1」は「relay-log.000001」を示します。 | なし                                                                                   | なし  |
+| マスターとリレー間の binlog ファイルのギャップ | アップストリーム マスターの背後にあるリレー ログ内の binlog ファイルの数                    | `relay`の処理単位が上流のマスターより遅れている binlog ファイルの数が 1 を超え (&gt;1)、その状態が 10 分以上続くと、アラートが発生します。 | 致命的 |
+| ビンログ位置                      | 最新の中継ログファイルの書き込みオフセット                                        | なし                                                                                   | なし  |
+| binlog イベント期間の読み取り          | リレー ログが上流の MySQL から binlog を読み取る期間 (秒単位)                     | なし                                                                                   | なし  |
+| リレーログの書き込み期間                | リレー ログが毎回 binlog をディスクに書き込む期間 (秒単位)                          | なし                                                                                   | なし  |
+| binlog イベントのサイズ             | リレー ログがディスクに書き込む単一の binlog イベントのサイズ                          | なし                                                                                   | なし  |
 
-## Instance
+## 実例 {#instance}
 
-In the Grafana dashboard, the default name of an instance is `DM-instance`.
+Grafana ダッシュボードでは、インスタンスのデフォルト名は`DM-instance`です。
 
-### Relay log
+### 中継ログ {#relay-log}
 
-| Metric name | Description | Alert | Severity level |
-|:----|:------------|:----|:----|
-| storage capacity | The total storage capacity of the disk occupied by the relay log | N/A | N/A |
-| storage remain | The remaining storage capacity within the disk occupied by the relay log | An alert occurs once the value is smaller than 10G | critical |
-| process exits with error | The relay log encounters an error in DM-worker and exits | Immediate alerts | critical |
-| relay log data corruption | The number of corrupted relay logs | Immediate alerts | emergency |
-| fail to read binlog from master | The number of errors encountered when relay log reads the binlog from the upstream MySQL | Immediate alerts | critical |
-| fail to write relay log | The number of errors encountered when the relay log writes the binlog to disks | Immediate alerts | critical |
-| binlog file index | The largest index number of relay log files. For example, "value = 1" indicates "relay-log.000001" | N/A | N/A |
-| binlog file gap between master and relay | The number of binlog files by which the `relay` processing unit is behind the upstream master | An alert occurs when the number of binlog files by which the `relay` processing unit is behind the upstream master exceeds one (>1) and the condition lasts over 10 minutes | critical |
-| binlog pos | The write offset of the latest relay log file | N/A | N/A |
-| read binlog duration | The duration that the relay log reads the binlog from the upstream MySQL (in seconds) | N/A | N/A |
-| write relay log duration | The duration that the relay log writes the binlog into the disk each time (in seconds) | N/A | N/A |
-| binlog size | The size of a single binlog event that the relay log writes into the disks | N/A | N/A |
+| 指標名                         | 説明                                                           | アラート                                                                                 | 重大度 |
+| :-------------------------- | :----------------------------------------------------------- | :----------------------------------------------------------------------------------- | :-- |
+| ストレージ容量                     | リレーログが占有するディスクの総記憶容量                                         | なし                                                                                   | なし  |
+| 保管残り                        | リレーログが占有するディスク内の残りのストレージ容量                                   | 値が 10G 未満になるとアラートが発生します                                                              | 致命的 |
+| プロセスはエラーで終了します              | DM-worker でリレー ログにエラーが発生し、終了する                               | 即時アラート                                                                               | 致命的 |
+| リレー ログ データの破損               | 破損したリレー ログの数                                                 | 即時アラート                                                                               | 緊急  |
+| マスターからバイナリログを読み取れません        | リレー ログが上流の MySQL から binlog を読み取るときに発生したエラーの数                 | 即時アラート                                                                               | 致命的 |
+| リレーログの書き込みに失敗しました           | リレー ログが binlog をディスクに書き込むときに発生したエラーの数                        | 即時アラート                                                                               | 致命的 |
+| binlog ファイルのインデックス          | リレー ログ ファイルの最大インデックス番号。たとえば、「値 = 1」は「relay-log.000001」を示します。 | なし                                                                                   | なし  |
+| マスターとリレー間の binlog ファイルのギャップ | `relay`処理単位が上流のマスターより遅れている binlog ファイルの数                     | `relay`の処理単位が上流のマスターより遅れている binlog ファイルの数が 1 を超え (&gt;1)、その状態が 10 分以上続くと、アラートが発生します。 | 致命的 |
+| ビンログ位置                      | 最新の中継ログファイルの書き込みオフセット                                        | なし                                                                                   | なし  |
+| バイナリログ期間の読み取り               | リレーログが上流の MySQL からバイナリログを読み取る期間 (秒単位)                        | なし                                                                                   | なし  |
+| リレーログの書き込み期間                | リレーログがバイナリログを毎回ディスクに書き込む期間 (秒単位)                             | なし                                                                                   | なし  |
+| バイナリログサイズ                   | リレー ログがディスクに書き込む単一の binlog イベントのサイズ                          | なし                                                                                   | なし  |
 
-### Task
+### タスク {#task}
 
-| Metric name | Description | Alert | Severity level |
-|:----|:------------|:----|:----|
-| task state | The state of subtasks for migration | An alert occurs when the subtask has been paused for more than 10 minutes | critical |
-| load progress | The percentage of the completed loading process of the load unit. The value range is 0%~100% | N/A | N/A |
-| binlog file gap between master and syncer | The number of binlog files by which the binlog replication unit is behind the upstream master | N/A | N/A |
-| shard lock resolving | Whether the current subtask is waiting for sharding DDL migration. A value greater than 0 means that the current subtask is waiting for sharding DDL migration | N/A | N/A |
+| 指標名                          | 説明                                                                                   | アラート                             | 重大度 |
+| :--------------------------- | :----------------------------------------------------------------------------------- | :------------------------------- | :-- |
+| タスクの状態                       | 移行のサブタスクの状態                                                                          | サブタスクが 10 分以上一時停止されると、アラートが発生します | 致命的 |
+| ロードの進行状況                     | ロード ユニットのロード プロセスが完了した割合。値の範囲は 0% ~ 100% です                                          | なし                               | なし  |
+| マスターとシンサー間の binlog ファイルのギャップ | バイナリログ レプリケーション ユニットがアップストリーム マスターの背後にあるバイナリログ ファイルの数                                | なし                               | なし  |
+| シャードロックの解決                   | 現在のサブタスクがシャーディング DDL 移行を待機しているかどうか。 0 より大きい値は、現在のサブタスクがシャーディング DDL 移行を待機していることを意味します | なし                               | なし  |

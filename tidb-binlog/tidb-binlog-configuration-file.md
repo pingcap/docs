@@ -3,244 +3,244 @@ title: TiDB Binlog Configuration File
 summary: Learn the configuration items of TiDB Binlog.
 ---
 
-# TiDB Binlog Configuration File
+# TiDB BinlogConfiguration / コンフィグレーションファイル {#tidb-binlog-configuration-file}
 
-This document introduces the configuration items of TiDB Binlog.
+このドキュメントでは、TiDB Binlogの構成項目を紹介します。
 
-## Pump
+## Pump {#pump}
 
-This section introduces the configuration items of Pump. For the example of a complete Pump configuration file, see [Pump Configuration](https://github.com/pingcap/tidb-binlog/blob/master/cmd/pump/pump.toml).
+このセクションでは、 Pumpの設定項目を紹介します。完全なPump構成ファイルの例については、 [PumpConfiguration / コンフィグレーション](https://github.com/pingcap/tidb-binlog/blob/master/cmd/pump/pump.toml)を参照してください。
 
-### addr
+### アドレス {#addr}
 
-* Specifies the listening address of HTTP API in the format of `host:port`.
-* Default value: `127.0.0.1:8250`
+-   HTTP API のリッスン アドレスを`host:port`の形式で指定します。
+-   デフォルト値: `127.0.0.1:8250`
 
-### advertise-addr
+### 広告アドレス {#advertise-addr}
 
-* Specifies the externally accessible HTTP API address. This address is registered in PD in the format of `host:port`.
-* Default value: `127.0.0.1:8250`
+-   外部からアクセス可能な HTTP API アドレスを指定します。このアドレスは`host:port`の形式で PD に登録されます。
+-   デフォルト値: `127.0.0.1:8250`
 
-### socket
+### ソケット {#socket}
 
-* The Unix socket address that HTTP API listens to.
-* Default value: ""
+-   HTTP API がリッスンする Unix ソケット アドレス。
+-   デフォルト値: &quot;&quot;
 
-### pd-urls
+### pd-url {#pd-urls}
 
-* Specifies the comma-separated list of PD URLs. If multiple addresses are specified, when the PD client fails to connect to one address, it automatically tries to connect to another address.
-* Default value: `http://127.0.0.1:2379`
+-   PD URL のコンマ区切りリストを指定します。複数のアドレスが指定されている場合、PD クライアントが 1 つのアドレスへの接続に失敗すると、自動的に別のアドレスへの接続を試みます。
+-   デフォルト値: `http://127.0.0.1:2379`
 
-### data-dir
+### データディレクトリ {#data-dir}
 
-* Specifies the directory where binlogs and their indexes are stored locally.
-* Default value: `data.pump`
+-   binlog とそのインデックスがローカルに保存されるディレクトリを指定します。
+-   デフォルト値: `data.pump`
 
-### heartbeat-interval
+### ハートビート間隔 {#heartbeat-interval}
 
-* Specifies the heartbeat interval (in seconds) at which the latest status is reported to PD.
-* Default value: `2`
+-   最新のステータスが PD に報告されるハートビート間隔 (秒単位) を指定します。
+-   デフォルト値: `2`
 
-### gen-binlog-interval
+### gen-binlog-interval {#gen-binlog-interval}
 
-* Specifies the interval (in seconds) at which data is written into fake binlog.
-* Default value: `3`
+-   データが偽の binlog に書き込まれる間隔 (秒単位) を指定します。
+-   デフォルト値: `3`
 
-### gc
+### GC {#gc}
 
-* Specifies the number of days (integer) that binlogs can be stored locally. Binlogs stored longer than the specified number of days are automatically deleted.
-* Default value: `7`
+-   binlog をローカルに保存できる日数 (整数) を指定します。指定した日数を超えて保存されたバイナリログは自動的に削除されます。
+-   デフォルト値: `7`
 
-### log-file
+### ログファイル {#log-file}
 
-* Specifies the path where log files are stored. If the parameter is set to an empty value, log files are not stored.
-* Default value: ""
+-   ログ ファイルが保存されるパスを指定します。パラメータが空の値に設定されている場合、ログ ファイルは保存されません。
+-   デフォルト値: &quot;&quot;
 
-### log-level
+### ログレベル {#log-level}
 
-* Specifies the log level.
-* Default value: `info`
+-   ログ レベルを指定します。
+-   デフォルト値: `info`
 
-### node-id
+### ノード ID {#node-id}
 
-* Specifies the Pump node ID. With this ID, this Pump process can be identified in the cluster.
-* Default value: `hostname:port number`. For example, `node-1:8250`.
+-   Pumpノード ID を指定します。この ID を使用して、このPumpプロセスをクラスター内で識別できます。
+-   デフォルト値: `hostname:port number` 。たとえば、 `node-1:8250`です。
 
-### security
+### 安全 {#security}
 
-This section introduces configuration items related to security.
+セキュリティに関する設定項目を紹介します。
 
-#### ssl-ca
+#### SSL CA {#ssl-ca}
 
-* Specifies the file path of the trusted SSL certificate list or CA list. For example, `/path/to/ca.pem`.
-* Default value: ""
+-   信頼できる SSL 証明書リストまたは CA リストのファイル パスを指定します。たとえば、 `/path/to/ca.pem`です。
+-   デフォルト値: &quot;&quot;
 
-#### ssl-cert
+#### SSL証明書 {#ssl-cert}
 
-* Specifies the path of the X509 certificate file encoded in the Privacy Enhanced Mail (PEM) format. For example, `/path/to/pump.pem`.
-* Default value: ""
+-   Privacy Enhanced Mail (PEM) 形式でエンコードされた X509 証明書ファイルのパスを指定します。たとえば、 `/path/to/pump.pem`です。
+-   デフォルト値: &quot;&quot;
 
-#### ssl-key
+#### SSL キー {#ssl-key}
 
-* Specifies the path of the X509 key file encoded in the PEM format. For example, `/path/to/pump-key.pem`.
-* Default value: ""
+-   PEM 形式でエンコードされた X509 キー ファイルのパスを指定します。たとえば、 `/path/to/pump-key.pem`です。
+-   デフォルト値: &quot;&quot;
 
-### storage
+### ストレージ {#storage}
 
-This section introduces configuration items related to storage.
+ストレージに関する設定項目を紹介します。
 
-#### sync-log
+#### 同期ログ {#sync-log}
 
-* Specifies whether to use `fsync` after each **batch** write to binlog to ensure data safety.
-* Default value: `true`
+-   データの安全性を確保するために、binlog への各**バッチ**書き込みの後に`fsync`を使用するかどうかを指定します。
+-   デフォルト値: `true`
 
-#### kv_chan_cap
+#### kv_chan_cap {#kv-chan-cap}
 
-* Specifies the number of write requests that the buffer can store before Pump receives these requests.
-* Default value: `1048576` (that is, 2 to the power of 20)
+-   Pumpがこれらの要求を受信する前に、バッファが格納できる書き込み要求の数を指定します。
+-   デフォルト値: `1048576` (つまり、2 の 20 乗)
 
-#### slow_write_threshold
+#### slow_write_threshold {#slow-write-threshold}
 
-* The threshold (in seconds). If it takes longer to write a single binlog file than this specified threshold, the write is considered slow write and `"take a long time to write binlog"` is output in the log.
-* Default value: `1`
+-   しきい値 (秒単位)。この指定されたしきい値よりも 1 つの binlog ファイルの書き込みに時間がかかる場合、書き込みは低速書き込みと見なされ、ログに`"take a long time to write binlog"`が出力されます。
+-   デフォルト値: `1`
 
-#### stop-write-at-available-space
+#### 使用可能なスペースで書き込みを停止 {#stop-write-at-available-space}
 
-* Binlog write requests is no longer accepted when the available storage space is below this specified value. You can use the format such as `900 MB`, `5 GB`, and `12 GiB` to specify the storage space. If there is more than one Pump node in the cluster, when a Pump node refuses a write request because of the insufficient space, TiDB will automatically write binlogs to other Pump nodes.
-* Default value: `10 GiB`
+-   使用可能なストレージ容量がこの指定値を下回ると、 Binlog書き込みリクエストは受け入れられなくなります。 `900 MB` 、 `5 GB` 、 `12 GiB`などの形式を使用して、ストレージ領域を指定できます。クラスター内に複数のPumpノードがある場合、容量不足のためにPumpノードが書き込み要求を拒否すると、TiDB はバイナリログを他のPumpノードに自動的に書き込みます。
+-   デフォルト値: `10 GiB`
 
-#### kv
+#### kv {#kv}
 
-Currently the storage of Pump is implemented based on [GoLevelDB](https://github.com/syndtr/goleveldb). Under `storage` there is also a `kv` subgroup that is used to adjust the GoLevel configuration. The supported configuration items are shown as below:
+現在、 Pumpのストレージは[GoLevelDB](https://github.com/syndtr/goleveldb)に基づいて実装されています。 `storage`の下には、GoLevel 構成を調整するために使用される`kv`サブグループもあります。サポートされている構成アイテムは次のとおりです。
 
-* block-cache-capacity
-* block-restart-interval
-* block-size
-* compaction-L0-trigger
-* compaction-table-size
-* compaction-total-size
-* compaction-total-size-multiplier
-* write-buffer
-* write-L0-pause-trigger
-* write-L0-slowdown-trigger
+-   ブロックキャッシュ容量
+-   ブロック再起動間隔
+-   ブロックサイズ
+-   圧縮-L0-トリガー
+-   圧縮テーブルのサイズ
+-   圧縮合計サイズ
+-   圧縮合計サイズ乗数
+-   書き込みバッファ
+-   書き込み-L0-一時停止トリガー
+-   書き込み-L0-スローダウン-トリガー
 
-For the detailed description of the above items, see [GoLevelDB Document](https://godoc.org/github.com/syndtr/goleveldb/leveldb/opt#Options).
+上記の項目の詳細な説明については、 [GoLevelDB ドキュメント](https://godoc.org/github.com/syndtr/goleveldb/leveldb/opt#Options)を参照してください。
 
-## Drainer
+## Drainer {#drainer}
 
-This section introduces the configuration items of Drainer. For the example of a complete Drainer configuration file, see [Drainer Configuration](https://github.com/pingcap/tidb-binlog/blob/master/cmd/drainer/drainer.toml)
+Drainerの設定項目を紹介します。完全なDrainer構成ファイルの例については、 [DrainerConfiguration / コンフィグレーション](https://github.com/pingcap/tidb-binlog/blob/master/cmd/drainer/drainer.toml)を参照してください。
 
-### addr
+### アドレス {#addr}
 
-* Specifies the listening address of HTTP API in the format of `host:port`.
-* Default value: `127.0.0.1:8249`
+-   HTTP API のリッスン アドレスを`host:port`の形式で指定します。
+-   デフォルト値: `127.0.0.1:8249`
 
-### advertise-addr
+### 広告アドレス {#advertise-addr}
 
-* Specifies the externally accessible HTTP API address. This address is registered in PD in the format of `host:port`.
-* Default value: `127.0.0.1:8249`
+-   外部からアクセス可能な HTTP API アドレスを指定します。このアドレスは`host:port`の形式で PD に登録されます。
+-   デフォルト値: `127.0.0.1:8249`
 
-### log-file
+### ログファイル {#log-file}
 
-* Specifies the path where log files are stored. If the parameter is set to an empty value, log files are not stored.
-* Default value: ""
+-   ログ ファイルが保存されるパスを指定します。パラメータが空の値に設定されている場合、ログ ファイルは保存されません。
+-   デフォルト値: &quot;&quot;
 
-### log-level
+### ログレベル {#log-level}
 
-* Specifies the log level.
-* Default value: `info`
+-   ログ レベルを指定します。
+-   デフォルト値: `info`
 
-### node-id
+### ノード ID {#node-id}
 
-* Specifies the Drainer node ID. With this ID, this Drainer process can be identified in the cluster.
-* Default value: `hostname:port number`. For example, `node-1:8249`.
+-   Drainerノード ID を指定します。この ID を使用して、このDrainerプロセスをクラスター内で識別できます。
+-   デフォルト値: `hostname:port number` 。たとえば、 `node-1:8249`です。
 
-### data-dir
+### データディレクトリ {#data-dir}
 
-* Specifies the directory used to store files that need to be saved during Drainer operation.
-* Default value: `data.drainer`
+-   Drainer操作中に保存する必要があるファイルを格納するために使用されるディレクトリを指定します。
+-   デフォルト値: `data.drainer`
 
-### detect-interval
+### 検出間隔 {#detect-interval}
 
-* Specifies the interval (in seconds) at which PD updates the Pump information.
-* Default value: `5`
+-   PD がPump情報を更新する間隔 (秒単位) を指定します。
+-   デフォルト値: `5`
 
-### pd-urls
+### pd-url {#pd-urls}
 
-* The comma-separated list of PD URLs. If multiple addresses are specified, the PD client will automatically attempt to connect to another address if an error occurs when connecting to one address.
-* Default value: `http://127.0.0.1:2379`
+-   PD URL のコンマ区切りリスト。複数のアドレスが指定されている場合、1 つのアドレスへの接続時にエラーが発生すると、PD クライアントは自動的に別のアドレスへの接続を試みます。
+-   デフォルト値: `http://127.0.0.1:2379`
 
-### initial-commit-ts
+### 初期コミット ts {#initial-commit-ts}
 
-* Specifies from which commit timestamp of the transaction the replication process starts. This configuration is applicable only to the Drainer node that is in the replication process for the first time. If a checkpoint already exists in the downstream, the replication will be performed according to the time recorded in the checkpoint.
-* commit ts (commit timestamp) is a specific point in time for [transaction](/transaction-overview.md#transactions) commits in TiDB. It is a globally unique and increasing timestamp from PD as the unique ID of the current transaction. You can get the `initial-commit-ts` configuration in the following typical ways:
-    - If BR is used, you can get `initial-commit-ts` from the backup TS recorded in the metadata backed up by BR (backupmeta).
-    - If Dumpling is used, you can get `initial-commit-ts` from the Pos recorded in the metadata backed up by Dumpling (metadata),
-    - If PD Control is used, `initial-commit-ts` is in the output of the `tso` command.
-* Default value: `-1`. Drainer will get a new timestamp from PD as the starting time, which means that the replication process starts from the current time.
+-   レプリケーション プロセスを開始するトランザクションのコミット タイムスタンプを指定します。この構成は、初めてレプリケーション プロセスにあるDrainerノードにのみ適用されます。ダウンストリームにチェックポイントがすでに存在する場合、チェックポイントに記録された時間に従ってレプリケーションが実行されます。
+-   commit ts (コミット タイムスタンプ) は、TiDB での[取引](/transaction-overview.md#transactions)コミットの特定の時点です。これは、現在のトランザクションの一意の ID として PD からグローバルに一意で増加するタイムスタンプです。次の一般的な方法で`initial-commit-ts`の構成を取得できます。
+    -   BRを使用した場合、 BRがバックアップするメタデータ (backupmeta) に記録されているバックアップ TS から`initial-commit-ts`取得できます。
+    -   Dumplingを利用した場合、 Dumplingがバックアップするメタデータ(メタデータ)に記録されているPosから`initial-commit-ts`取得でき、
+    -   PD Controlが使用されている場合、 `initial-commit-ts`は`tso`コマンドの出力になります。
+-   デフォルト値: `-1` 。 Drainerは、開始時刻として PD から新しいタイムスタンプを取得します。これは、レプリケーション プロセスが現在の時刻から開始されることを意味します。
 
-### synced-check-time
+### 同期チェック時刻 {#synced-check-time}
 
-* You can access the `/status` path through the HTTP API to query the status of Drainer replication. `synced-check-time` specifies how many minutes from the last successful replication is considered as `synced`, that is, the replication is complete.
-* Default value: `5`
+-   HTTP API 経由で`/status`のパスにアクセスして、 Drainerレプリケーションのステータスを照会できます。 `synced-check-time`は、最後に複製が成功してから何分後に`synced`と見なされるかを指定します。つまり、複製が完了したと見なされます。
+-   デフォルト値: `5`
 
-### compressor
+### コンプレッサー {#compressor}
 
-* Specifies the compression algorithm used for data transfer between Pump and Drainer. Currently only the `gzip` algorithm is supported.
-* Default value: "", which means no compression.
+-   PumpとDrainer間のデータ転送に使用される圧縮アルゴリズムを指定します。現在、 `gzip`アルゴリズムのみがサポートされています。
+-   デフォルト値: &quot;&quot;。これは圧縮なしを意味します。
 
-### security
+### 安全 {#security}
 
-This section introduces configuration items related to security.
+セキュリティに関する設定項目を紹介します。
 
-#### ssl-ca
+#### SSL CA {#ssl-ca}
 
-* Specifies the file path of the trusted SSL certificate list or CA list. For example, `/path/to/ca.pem`.
-* Default value: ""
+-   信頼できる SSL 証明書リストまたは CA リストのファイル パスを指定します。たとえば、 `/path/to/ca.pem`です。
+-   デフォルト値: &quot;&quot;
 
-#### ssl-cert
+#### SSL証明書 {#ssl-cert}
 
-* Specifies the path of the X509 certificate file encoded in the PEM format. For example, `/path/to/drainer.pem`.
-* Default value: ""
+-   PEM 形式でエンコードされた X509 証明書ファイルのパスを指定します。たとえば、 `/path/to/drainer.pem`です。
+-   デフォルト値: &quot;&quot;
 
-#### ssl-key
+#### SSL キー {#ssl-key}
 
-* Specifies the path of the X509 key file encoded in the PEM format. For example, `/path/to/pump-key.pem`.
-* Default value: ""
+-   PEM 形式でエンコードされた X509 キー ファイルのパスを指定します。たとえば、 `/path/to/pump-key.pem`です。
+-   デフォルト値: &quot;&quot;
 
-### syncer
+### シンカー {#syncer}
 
-The `syncer` section includes configuration items related to the downstream.
+`syncer`セクションには、ダウンストリームに関連する構成項目が含まれます。
 
-#### db-type
+#### データベースタイプ {#db-type}
 
-Currently, the following downstream types are supported:
+現在、次のダウンストリーム タイプがサポートされています。
 
-* `mysql`
-* `tidb`
-* `kafka`
-* `file`
+-   `mysql`
+-   `tidb`
+-   `kafka`
+-   `file`
 
-Default value: `mysql`
+デフォルト値: `mysql`
 
-#### sql-mode
+#### SQL モード {#sql-mode}
 
-* Specifies the SQL mode when the downstream is the `mysql` or `tidb` type. If there is more than one mode, use commas to separate them.
-* Default value: ""
+-   ダウンストリームが`mysql`または`tidb`タイプの場合の SQL モードを指定します。複数のモードがある場合は、カンマで区切ります。
+-   デフォルト値: &quot;&quot;
 
-#### ignore-txn-commit-ts
+#### 無視-txn-コミット-ts {#ignore-txn-commit-ts}
 
-* Specifies the commit timestamp at which the binlog is ignored, such as `[416815754209656834, 421349811963822081]`.
-* Default value: `[]`
+-   binlog が無視されるコミット タイムスタンプ ( `[416815754209656834, 421349811963822081]`など) を指定します。
+-   デフォルト値: `[]`
 
-#### ignore-schemas
+#### 無視スキーマ {#ignore-schemas}
 
-* Specifies the database to be ignored during replication. If there is more than one database to be ignored, use commas to separate them. If all changes in a binlog file are filtered, the whole binlog file is ignored.
-* Default value: `INFORMATION_SCHEMA,PERFORMANCE_SCHEMA,mysql`
+-   レプリケーション中に無視するデータベースを指定します。無視するデータベースが複数ある場合は、カンマで区切ります。 binlog ファイル内のすべての変更がフィルター処理された場合、binlog ファイル全体が無視されます。
+-   デフォルト値: `INFORMATION_SCHEMA,PERFORMANCE_SCHEMA,mysql`
 
-#### ignore-table
+#### 無視テーブル {#ignore-table}
 
-Ignores the specified table changes during replication. You can specify multiple tables to be ignored in the `toml` file. For example:
+レプリケーション中に指定されたテーブルの変更を無視します。 `toml`のファイルで無視するテーブルを複数指定できます。例えば：
 
 {{< copyable "" >}}
 
@@ -254,18 +254,18 @@ db-name = "test"
 tbl-name = "audit"
 ```
 
-If all changes in a binlog file are filtered, the whole binlog file is ignored.
+binlog ファイル内のすべての変更がフィルター処理された場合、binlog ファイル全体が無視されます。
 
-Default value: `[]`
+デフォルト値: `[]`
 
-#### replicate-do-db
+#### レプリケート-do-db {#replicate-do-db}
 
-* Specifies the database to be replicated. For example, `[db1, db2]`.
-* Default value: `[]`
+-   レプリケートするデータベースを指定します。たとえば、 `[db1, db2]`です。
+-   デフォルト値: `[]`
 
-#### replicate-do-table
+#### レプリケート DO テーブル {#replicate-do-table}
 
-Specifies the table to be replicated. For example:
+レプリケートするテーブルを指定します。例えば：
 
 {{< copyable "" >}}
 
@@ -279,74 +279,77 @@ db-name ="test"
 tbl-name = "~^a.*"
 ```
 
-Default value: `[]`
+デフォルト値: `[]`
 
-#### txn-batch
+#### txn-バッチ {#txn-batch}
 
-* When the downstream is the `mysql` or `tidb` type, DML operations are executed in different batches. This parameter specifies how many DML operations can be included in each transaction.
-* Default value: `20`
+-   ダウンストリームが`mysql`または`tidb`タイプの場合、DML 操作は別のバッチで実行されます。このパラメーターは、各トランザクションに含めることができる DML 操作の数を指定します。
+-   デフォルト値: `20`
 
-#### worker-count
+#### ワーカー数 {#worker-count}
 
-* When the downstream is the `mysql` or `tidb` type, DML operations are executed concurrently. This parameter specifies the concurrency numbers of DML operations.
-* Default value: `16`
+-   ダウンストリームが`mysql`または`tidb`タイプの場合、DML操作は並行して実行されます。このパラメーターは、DML 操作の同時実行数を指定します。
+-   デフォルト値: `16`
 
-#### disable-dispatch
+#### ディスパッチを無効にする {#disable-dispatch}
 
-* Disables the concurrency and forcibly set `worker-count` to `1`.
-* Default value: `false`
+-   同時実行を無効にし、強制的に`worker-count`から`1`に設定します。
+-   デフォルト値: `false`
 
-#### safe-mode
+#### セーフモード {#safe-mode}
 
-If the safe mode is enabled, Drainer modifies the replication updates in the following way:
+セーフ モードが有効になっている場合、 Drainerはレプリケーションの更新を次のように変更します。
 
-* `Insert` is modified to `Replace Into`
-* `Update` is modified to `Delete` plus `Replace Into`
+-   `Insert`は`Replace Into`に変更されます
+-   `Update`は`Delete`プラス`Replace Into`に変更されます
 
-Default value: `false`
+デフォルト値: `false`
 
-### syncer.to
+### syncer.to {#syncer-to}
 
-The `syncer.to` section introduces different types of downstream configuration items according to configuration types.
+`syncer.to`セクションでは、構成の種類に応じて、さまざまな種類のダウンストリーム構成項目を紹介します。
 
-#### mysql/tidb
+#### mysql/tidb {#mysql-tidb}
 
-The following configuration items are related to connection to downstream databases:
+次の構成項目は、ダウンストリーム データベースへの接続に関連しています。
 
-* `host`: If this item is not set, TiDB Binlog tries to check the `MYSQL_HOST` environment variable which is `localhost` by default.
-* `port`: If this item is not set, TiDB Binlog tries to check the `MYSQL_PORT` environment variable which is `3306` by default.
-* `user`: If this item is not set, TiDB Binlog tries to check the `MYSQL_USER` environment variable which is `root` by default.
-* `password`: If this item is not set, TiDB Binlog tries to check the `MYSQL_PSWD` environment variable which is `""` by default.
-* `read-timeout`: Specifies the I/O read timeout of the downstream database connection. The default value is `1m`. If Drainer keeps failing on some DDLs that take a long time, you can set this configuration to a larger value. 
+-   `host` : この項目が設定されていない場合、TiDB Binlogはデフォルトで`localhost`である`MYSQL_HOST`環境変数をチェックしようとします。
+-   `port` : この項目が設定されていない場合、TiDB Binlogはデフォルトで`3306`である`MYSQL_PORT`環境変数をチェックしようとします。
+-   `user` : この項目が設定されていない場合、TiDB Binlogはデフォルトで`root`である`MYSQL_USER`環境変数をチェックしようとします。
+-   `password` : この項目が設定されていない場合、TiDB Binlogはデフォルトで`""`である`MYSQL_PSWD`環境変数をチェックしようとします。
+-   `read-timeout` : ダウンストリーム データベース接続の I/O 読み取りタイムアウトを指定します。デフォルト値は`1m`です。時間がかかる一部の DDL でDrainerが失敗し続ける場合は、この構成をより大きな値に設定できます。
 
-#### file
+#### ファイル {#file}
 
-* `dir`: Specifies the directory where binlog files are stored. If this item is not set, `data-dir` is used.
+-   `dir` : binlog ファイルが保存されるディレクトリを指定します。この項目が設定されていない場合は、 `data-dir`が使用されます。
 
-#### kafka
+#### カフカ {#kafka}
 
-When the downstream is Kafka, the valid configuration items are as follows:
+ダウンストリームが Kafka の場合、有効な構成項目は次のとおりです。
 
-* `zookeeper-addrs`
-* `kafka-addrs`
-* `kafka-version`
-* `kafka-max-messages`
-* `kafka-max-message-size`
-* `topic-name`
+-   `zookeeper-addrs`
+-   `kafka-addrs`
+-   `kafka-version`
+-   `kafka-max-messages`
+-   `kafka-max-message-size`
+-   `topic-name`
 
-### syncer.to.checkpoint
+### syncer.to.checkpoint {#syncer-to-checkpoint}
 
-* `type`: Specifies in what way the replication progress is saved. Currently, the available options are `mysql`, `tidb`, and `file`.
+-   `type` : レプリケーションの進行状況を保存する方法を指定します。現在、使用可能なオプションは`mysql` 、 `tidb` 、および`file`です。
 
-    This configuration item is the same as the downstream type by default. For example, when the downstream is `file`, the checkpoint progress is saved in the local file `<data-dir>/savepoint`; when the downstream is `mysql`, the progress is saved in the downstream database. If you need to explicitly specify using `mysql` or `tidb` to store the progress, make the following configuration:
+    この構成項目は、既定ではダウンストリーム タイプと同じです。たとえば、ダウンストリームが`file`の場合、チェックポイントの進行状況はローカル ファイル`<data-dir>/savepoint`に保存されます。ダウンストリームが`mysql`の場合、進行状況はダウンストリーム データベースに保存されます。進行状況を保存するために`mysql`または`tidb`を使用して明示的に指定する必要がある場合は、次の構成を行います。
 
-* `schema`: `"tidb_binlog"` by default.
+-   `schema` : デフォルトでは`"tidb_binlog"`です。
 
-    > **Note:**
+    > **ノート：**
     >
-    > When deploying multiple Drainer nodes in the same TiDB cluster, you need to specify a different checkpoint schema for each node. Otherwise, the replication progress of two instances will overwrite each other.
+    > 複数のDrainerノードを同じ TiDB クラスターにデプロイする場合、ノードごとに異なるチェックポイント スキーマを指定する必要があります。そうしないと、2 つのインスタンスのレプリケーションの進行状況が互いに上書きされます。
 
-* `host`
-* `user`
-* `password`
-* `port`
+-   `host`
+
+-   `user`
+
+-   `password`
+
+-   `port`

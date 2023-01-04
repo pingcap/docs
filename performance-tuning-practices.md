@@ -3,437 +3,438 @@ title: Performance Tuning Practices for OLTP Scenarios
 summary: This document describes how to analyze and tune performance for OLTP workloads.
 ---
 
-# Performance Tuning Practices for OLTP Scenarios
+# OLTP シナリオの性能チューニングプラクティス {#performance-tuning-practices-for-oltp-scenarios}
 
-TiDB provides comprehensive performance diagnostics and analysis features, such as [Top SQL](/dashboard/top-sql.md) and [Continuous Profiling](/dashboard/continuous-profiling.md) features on the TiDB Dashboard, and TiDB [Performance Overview Dashboard](/grafana-performance-overview-dashboard.md).
+TiDB は、TiDB ダッシュボードの[Top SQL](/dashboard/top-sql.md)と[継続的なプロファイリング](/dashboard/continuous-profiling.md)の機能、および TiDB [パフォーマンス概要ダッシュボード](/grafana-performance-overview-dashboard.md)など、包括的なパフォーマンス診断および分析機能を提供します。
 
-This document describes how to use these features together to analyze and compare the performance of the same OLTP workload in seven different runtime scenarios, which demonstrates a performance tuning process to help you analyze and tune TiDB performance efficiently.
+このドキュメントでは、これらの機能を一緒に使用して、7 つの異なるランタイム シナリオで同じ OLTP ワークロードのパフォーマンスを分析および比較する方法について説明します。これは、TiDB のパフォーマンスを効率的に分析および調整するのに役立つパフォーマンス調整プロセスを示しています。
 
-> **Note:**
+> **ノート：**
 >
-> [Top SQL](/dashboard/top-sql.md) and [Continuous Profiling](/dashboard/continuous-profiling.md) are not enabled by default. You need to enable them in advance.
+> デフォルトでは、 [Top SQL](/dashboard/top-sql.md)と[継続的なプロファイリング](/dashboard/continuous-profiling.md)は有効になっていません。事前に有効にする必要があります。
 
-By running the same application with different JDBC configurations in these scenarios, this document shows you how the overall system performance is affected by different interactions between applications and databases, so that you can apply [Best Practices for Developing Java Applications with TiDB](/best-practices/java-app-best-practices.md) for better performance.
+このドキュメントでは、これらのシナリオで異なる JDBC 構成を使用して同じアプリケーションを実行することにより、アプリケーションとデータベース間のさまざまな相互作用がシステム全体のパフォーマンスにどのように影響するかを示し、 [TiDB でJavaアプリケーションを開発するためのベスト プラクティス](/best-practices/java-app-best-practices.md)を適用してパフォーマンスを向上させることができます。
 
-## Environment description
+## 環境の説明 {#environment-description}
 
-This document takes a core banking OLTP workload for demonstration. The configurations of the simulation environment are as follows:
+このドキュメントでは、デモンストレーションのためにコア バンキング OLTP ワークロードを使用します。シミュレーション環境の構成は次のとおりです。
 
-- Application development language for the workload: JAVA
-- SQL statements used in business: 200 statements in total, 90% of which are SELECT statements. It is a typical read-heavy OLTP workload.
-- Tables used in transactions: 60 tables in total. 12 tables involve update operations, and the rest 48 tables are read-only.
-- Isolation level used by the application: `read committed`.
-- TiDB cluster configuration: 3 TiDB nodes and 3 TiKV nodes, with 16 CPUs allocated to each node.
-- Client server configuration: 36 CPUs.
+-   ワークロードのアプリケーション開発言語: JAVA
+-   ビジネスで使用するSQL文：合計200文、そのうち9割がSELECT文。これは典型的な読み取り負荷の高い OLTP ワークロードです。
+-   トランザクションで使用されるテーブル: 合計 60 テーブル。 12 個のテーブルには更新操作が含まれ、残りの 48 個のテーブルは読み取り専用です。
+-   アプリケーションが使用する分離レベル: `read committed` 。
+-   TiDB クラスター構成: 3 つの TiDB ノードと 3 つの TiKV ノードで、各ノードに 16 個の CPU が割り当てられます。
+-   クライアントサーバー構成: 36 個の CPU。
 
-## Scenario 1. Use the Query interface
+## シナリオ 1. Query インターフェイスを使用する {#scenario-1-use-the-query-interface}
 
-### Application configuration
+### アプリケーション構成 {#application-configuration}
 
-The application uses the following JDBC configuration to connect to the database through the Query interface.
+アプリケーションは、次の JDBC 構成を使用して、Query インターフェースを介してデータベースに接続します。
 
 ```
 useServerPrepStmts=false
 ```
 
-### Performance analysis
+### パフォーマンス分析 {#performance-analysis}
 
-#### TiDB Dashboard
+#### TiDB ダッシュボード {#tidb-dashboard}
 
-From the Top SQL page in the TiDB Dashboard below, you can see that the non-business SQL type `SELECT @@session.tx_isolation` consumes the most resources. Although TiDB processes these types of SQL statements quickly, these types of SQL statements have the highest number of executions that result in the highest overall CPU time consumption.
+以下の TiDB ダッシュボードのTop SQLページから、非ビジネス SQL タイプ`SELECT @@session.tx_isolation`が最も多くのリソースを消費していることがわかります。 TiDB はこれらのタイプの SQL ステートメントを迅速に処理しますが、これらのタイプの SQL ステートメントは実行回数が最も多く、全体的な CPU 時間の消費が最も高くなります。
 
 ![dashboard-for-query-interface](/media/performance/case1.png)
 
-From the following flame chart of TiDB, you can see that the CPU consumption of functions such as `Compile` and `Optimize` is significant during the SQL execution. Because the application uses the Query interface, TiDB cannot use the execution plan cache. TiDB needs to compile and generate an execution plan for each SQL statement.
+以下の TiDB のフレーム チャートから、SQL 実行時に`Compile`や`Optimize`などの関数の CPU 消費が顕著であることがわかります。アプリケーションは Query インターフェイスを使用するため、TiDB は実行計画キャッシュを使用できません。 TiDB は、SQL ステートメントごとに実行計画をコンパイルして生成する必要があります。
 
 ![flame-graph-for-query-interface](/media/performance/7.1.png)
 
-- ExecuteStmt cpu = 38% cpu time = 23.84s
-- Compile cpu = 27%  cpu time = 17.17s
-- Optimize cpu = 26% cpu time = 16.41s
+-   ExecuteStmt CPU = 38% CPU 時間 = 23.84 秒
+-   コンパイル CPU = 27% CPU 時間 = 17.17 秒
+-   CPU の最適化 = 26% CPU 時間 = 16.41 秒
 
-#### Performance Overview dashboard
+#### パフォーマンス概要ダッシュボード {#performance-overview-dashboard}
 
-Check the database time overview and QPS in the following Performance Overview dashboard.
+次の Performance Overview ダッシュボードで、データベース時間の概要と QPS を確認します。
 
 ![performance-overview-1-for-query-interface](/media/performance/j-1.png)
 
-- Database Time by SQL Type: the `Select` statement type takes most of the time.
-- Database Time by SQL Phase: the `execute` and `compile` phases take most of the time.
-- SQL Execute Time Overview: `Get`, `Cop`, and `tso wait` take most of the time.
-- CPS By Type: only the `Query` command is used.
-- Queries Using Plan Cache OPS: no data indicates that the execution plan cache is not hit.
-- In the query duration, the latency of `execute` and `compile` takes the highest percentage.
-- avg QPS = 56.8k
+-   SQL タイプ別のデータベース時間: `Select`ステートメント タイプが最も時間がかかります。
+-   SQL フェーズごとのデータベース時間: `execute`フェーズと`compile`フェーズに最も時間がかかります。
+-   SQL 実行時間の概要: `Get` 、 `Cop` 、および`tso wait`が最も時間がかかります。
+-   タイプ別 CPS: `Query`コマンドのみが使用されます。
+-   Plan Cache を使用したクエリ OPS: no data は、実行プラン キャッシュがヒットしていないことを示します。
+-   クエリ期間では、 `execute`と`compile`のレイテンシーが最も高い割合を占めています。
+-   平均 QPS = 56.8k
 
-Check the resource consumption of the cluster: the average utilization of TiDB CPU is 925%, the average utilization of TiKV CPU is 201%, and the average throughput of TiKV IO is 18.7 MB/s. The resource consumption of TiDB is significantly higher.
+クラスターのリソース消費を確認します。TiDB CPU の平均使用率は 925%、TiKV CPU の平均使用率は 201%、TiKV IO の平均スループットは 18.7 MB/秒です。 TiDB のリソース消費は大幅に高くなります。
 
 ![performance-overview-2-for-query-interface](/media/performance/5.png)
 
-### Analysis conclusion
+### 分析の結論 {#analysis-conclusion}
 
-We need to eliminate these useless non-business SQL statements, which have a large number of executions and contribute to the high TiDB CPU usage.
+実行回数が多く、TiDB の CPU 使用率が高くなるこれらの無駄な非ビジネス SQL ステートメントを排除する必要があります。
 
-## Scenario 2. Use the maxPerformance configuration
+## シナリオ 2. maxPerformance 構成を使用する {#scenario-2-use-the-maxperformance-configuration}
 
-### Application configuration
+### アプリケーション構成 {#application-configuration}
 
-The application adds a new parameter `useConfigs=maxPerformance` to the JDBC connection string in Scenario 1. This parameter can be used to eliminate the SQL statements sent from JDBC to the database (for example, `select @@session.transaction_read_only`). The full configuration is as follows:
+アプリケーションは、シナリオ 1 の JDBC 接続文字列に新しいパラメーター`useConfigs=maxPerformance`を追加します。このパラメーターを使用して、JDBC からデータベースに送信される SQL ステートメント (たとえば、 `select @@session.transaction_read_only` ) を排除できます。完全な構成は次のとおりです。
 
 ```
 useServerPrepStmts=false&useConfigs=maxPerformance
 ```
 
-### Performance analysis
+### パフォーマンス分析 {#performance-analysis}
 
-#### TiDB Dashboard
+#### TiDB ダッシュボード {#tidb-dashboard}
 
-From the Top SQL page in the TiDB Dashboard below, you can see that `SELECT @@session.tx_isolation`, which consumed the most resources, has disappeared.
+以下の TiDB ダッシュボードのTop SQLページから、最も多くのリソースを消費した`SELECT @@session.tx_isolation`が消えていることがわかります。
 
 ![dashboard-for-maxPerformance](/media/performance/case2.png)
 
-From the following flame chart of TiDB, you can see that the CPU consumption of functions such as `Compile` and `Optimize` is still significant during the SQL execution.
+以下の TiDB のフレーム チャートから、SQL 実行中の`Compile`や`Optimize`などの関数の CPU 消費が依然として大きいことがわかります。
 
 ![flame-graph-for-maxPerformance](/media/performance/20220507-145257.jpg)
 
-- ExecuteStmt cpu = 43% cpu time =35.84s
-- Compile cpu = 31% cpu time =25.61s
-- Optimize cpu = 30% cpu time = 24.74s
+-   ExecuteStmt CPU = 43% CPU 時間 = 35.84 秒
+-   コンパイル CPU = 31% CPU 時間 = 25.61 秒
+-   CPU の最適化 = 30% CPU 時間 = 24.74 秒
 
-#### Performance Overview dashboard
+#### パフォーマンス概要ダッシュボード {#performance-overview-dashboard}
 
-The data of the database time overview and QPS is as follows:
+データベース時間の概要と QPS のデータは次のとおりです。
 
 ![performance-overview-1-for-maxPerformance](/media/performance/j-2.png)
 
-- Database Time by SQL Type: the `Select` statement type takes most of the time.
-- Database Time by SQL Phase: the `execute` and `compile` phases take most of the time.
-- SQL Execute Time Overview: `Get`, `Cop`, `Prewrite`, and `tso wait` take most of the time.
-- In the database time, the latency of `execute` and `compile` takes the highest percentage.
-- CPS By Type: only the `Query` command is used.
-- avg QPS = 24.2k (from 56.3k to 24.2k)
-- The execution plan cache is not hit.
+-   SQL タイプ別のデータベース時間: `Select`ステートメント タイプが最も時間がかかります。
+-   SQL フェーズごとのデータベース時間: `execute`フェーズと`compile`フェーズに最も時間がかかります。
+-   SQL 実行時間の概要: `Get` 、 `Cop` 、 `Prewrite` 、および`tso wait`が最も時間がかかります。
+-   データベース時間では、 `execute`と`compile`のレイテンシーが最も高い割合を占めています。
+-   タイプ別 CPS: `Query`コマンドのみが使用されます。
+-   平均 QPS = 24.2k (56.3k から 24.2k へ)
+-   実行計画のキャッシュはヒットしません。
 
-From Scenario 1 to Scenario 2, the average TiDB CPU utilization drops from 925% to 874%, and the average TiKV CPU utilization increases from 201% to about 250%.
+シナリオ 1 からシナリオ 2 にかけて、平均 TiDB CPU 使用率は 925% から 874% に低下し、平均 TiKV CPU 使用率は 201% から約 250% に増加します。
 
 ![performance-overview-2-for-maxPerformance](/media/performance/9.1.1.png)
 
-The changes in key latency metrics are as follows:
+主なレイテンシーメトリックの変更点は次のとおりです。
 
 ![performance-overview-3-for-maxPerformance](/media/performance/9.2.2.png)
 
-- avg query duration = 1.12ms (from 479μs to 1.12ms)
-- avg parse duration = 84.7μs (from 37.2μs to 84.7μs)
-- avg compile duration = 370μs (from 166μs to 370μs)
-- avg execution duration = 626μs (from 251μs to 626μs)
+-   平均クエリ時間 = 1.12ms (479μs から 1.12ms まで)
+-   平均解析時間 = 84.7μs (37.2μs から 84.7μs へ)
+-   平均コンパイル時間 = 370μs (166μs から 370μs へ)
+-   平均実行時間 = 626μs (251μs から 626μs へ)
 
-### Analysis conclusion
+### 分析の結論 {#analysis-conclusion}
 
-Compared with Scenario 1, the QPS of Scenario 2 has significantly decreased. The average query duration and average `parse`, `compile`, and `execute` durations have significantly increased. This is because SQL statements such as `select @@session.transaction_read_only` in Scenario 1, which are executed many times and have fast processing time, lower the average performance data. After Scenario 2 blocks such statements, only business-related SQL statements remain, so the average duration increases.
+シナリオ 1 と比較して、シナリオ 2 の QPS は大幅に減少しています。平均クエリ期間と平均`parse` 、 `compile` 、および`execute`期間が大幅に増加しました。これは、シナリオ 1 の`select @@session.transaction_read_only`のように、実行回数が多く処理時間が速い SQL ステートメントが平均パフォーマンス データを下げるためです。シナリオ 2 がそのようなステートメントをブロックした後、ビジネス関連の SQL ステートメントのみが残るため、平均所要時間は増加します。
 
-When the application uses the Query interface, TiDB cannot use the execution plan cache, which results in TiDB consuming high resources to compile execution plans. In this case, it is recommended that you use the Prepared Statement interface, which uses the execution plan cache of TiDB to reduce the TiDB CPU consumption caused by execution plan compiling and decrease the latency.
+アプリケーションが Query インターフェースを使用する場合、TiDB は実行計画キャッシュを使用できないため、TiDB は実行計画をコンパイルするために大量のリソースを消費します。この場合、TiDB の実行計画キャッシュを使用して、実行計画のコンパイルによる TiDB の CPU 消費を減らし、レイテンシーを短縮する Prepared Statement インターフェイスを使用することをお勧めします。
 
-## Scenario 3. Use the Prepared Statement interface with execution plan caching not enabled
+## シナリオ 3. 実行計画のキャッシュを有効にせずに Prepared Statement インターフェイスを使用する {#scenario-3-use-the-prepared-statement-interface-with-execution-plan-caching-not-enabled}
 
-### Application configuration
+### アプリケーション構成 {#application-configuration}
 
-The application uses the following connection configuration. Compared with Scenario 2, the value of the JDBC parameter `useServerPrepStmts` is modified to `true`, indicating that the Prepared Statement interface is enabled.
+アプリケーションは、次の接続構成を使用します。シナリオ 2 と比較すると、JDBC パラメータ`useServerPrepStmts`の値が`true`に変更されており、Prepared Statement インターフェースが有効になっていることを示しています。
 
 ```
 useServerPrepStmts=true&useConfigs=maxPerformance"
 ```
 
-### Performance analysis
+### パフォーマンス分析 {#performance-analysis}
 
-#### TiDB Dashboard
+#### TiDB ダッシュボード {#tidb-dashboard}
 
-From the following flame chart of TiDB, you can see that the CPU consumption of `CompileExecutePreparedStmt` and `Optimize` is still significant after the Prepared Statement interface is enabled.
+次の TiDB のフレーム チャートから、 `CompileExecutePreparedStmt`と`Optimize`の CPU 消費は、Prepared Statement インターフェイスが有効になった後も依然として重要であることがわかります。
 
 ![flame-graph-for-PrepStmts](/media/performance/3.1.1.png)
 
-- ExecutePreparedStmt cpu = 31%  cpu time = 23.10s
-- preparedStmtExec cpu = 30% cpu time = 22.92s
-- CompileExecutePreparedStmt cpu = 24% cpu time = 17.83s
-- Optimize cpu = 23%  cpu time = 17.29s
+-   ExecutePreparedStmt CPU = 31% CPU 時間 = 23.10 秒
+-   準備されたStmtExec CPU = 30% CPU 時間 = 22.92 秒
+-   CompileExecutePreparedStmt CPU = 24% CPU 時間 = 17.83 秒
+-   CPU の最適化 = 23% CPU 時間 = 17.29 秒
 
-#### Performance Overview dashboard
+#### パフォーマンス概要ダッシュボード {#performance-overview-dashboard}
 
-After the Prepared Statement interface is used, the data of database time overview and QPS is as follows:
+プリペアド ステートメント インターフェイスを使用した後、データベース時間の概要と QPS のデータは次のようになります。
 
 ![performance-overview-1-for-PrepStmts](/media/performance/j-3.png)
 
-The QPS drops from 24.4k to 19.7k. From the Database Time Overview, you can see that the application uses three types of Prepared commands, and the `general` statement type (which includes the execution time of commands such as `StmtPrepare` and `StmtClose`) takes the second place in Database Time by SQL Type. This indicates that even when the Prepared Statement interface is used, the execution plan cache is not hit. The reason is that, when the `StmtClose` command is executed, TiDB clears the execution plan cache of SQL statements in the internal processing.
+QPS は 24.4k から 19.7k に低下します。データベース時間の概要から、アプリケーションが 3 種類のプリペアド コマンドを使用していることがわかります`general`ステートメント タイプ ( `StmtPrepare`や`StmtClose`などのコマンドの実行時間を含む) は、SQL タイプ別のデータベース時間で 2 位です。これは、Prepared Statement インターフェースを使用しても、実行プランのキャッシュにヒットしないことを示しています。その理由は、 `StmtClose`コマンドが実行されると、TiDB が内部処理で SQL ステートメントの実行計画キャッシュをクリアするためです。
 
-- Database Time by SQL Type: the `Select` statement type takes most of the time, followed by `general` statements.
-- Database Time by SQL Phase: the `execute` and `compile` phases take most of the time.
-- SQL Execute Time Overview: `Get`, `Cop`, `Prewrite`, and `tso wait` take most of the time.
-- CPS By Type: 3 types of commands (`StmtPrepare`, `StmtExecute`, `StmtClose`) are used.
-- avg QPS = 19.7k (from 24.4k to 19.7k)
-- The execution plan cache is not hit.
+-   SQL タイプ別のデータベース時間: `Select`のステートメント タイプに最も時間がかかり、その後に`general`のステートメントが続きます。
+-   SQL フェーズごとのデータベース時間: `execute`フェーズと`compile`フェーズに最も時間がかかります。
+-   SQL 実行時間の概要: `Get` 、 `Cop` 、 `Prewrite` 、および`tso wait`が最も時間がかかります。
+-   CPS By Type: 3 種類のコマンド ( `StmtPrepare` 、 `StmtExecute` 、 `StmtClose` ) が使用されます。
+-   平均 QPS = 19.7k (24.4k から 19.7k へ)
+-   実行計画のキャッシュはヒットしません。
 
-The TiDB average CPU utilization increases from 874% to 936%.
+TiDB の平均 CPU 使用率は 874% から 936% に増加します。
 
 ![performance-overview-1-for-PrepStmts](/media/performance/3-2.png)
 
-The key latency metrics are as follows:
+主なレイテンシーメトリックは次のとおりです。
 
 ![performance-overview-2-for-PrepStmts](/media/performance/3.4.png)
 
-- avg query duration = 528μs (from 1.12ms to 528μs)
-- avg parse duration = 14.9μs (from 84.7μs to 14.9μs)
-- avg compile duration = 374μs (from 370μs to 374μs)
-- avg execution duration = 649μs (from 626μs to 649μs)
+-   平均クエリ時間 = 528μs (1.12ms から 528μs まで)
+-   平均解析時間 = 14.9μs (84.7μs から 14.9μs へ)
+-   平均コンパイル時間 = 374μs (370μs から 374μs へ)
+-   平均実行時間 = 649μs (626μs から 649μs へ)
 
-### Analysis conclusion
+### 分析の結論 {#analysis-conclusion}
 
-Unlike Scenario 2, the application in Scenario 3 enables the Prepared Statement interface but still fails to hit the cache. In addition, Scenario 2 has only one CPS By Type command type (`Query`), while Scenario 3 has three more command types (`StmtPrepare`, `StmtExecute`, `StmtClose`). Compared with Scenario 2, Scenario 3 has two more network round-trip delays.
+シナリオ 2 とは異なり、シナリオ 3 のアプリケーションはプリペアド ステートメント インターフェイスを有効にしますが、それでもキャッシュにヒットしません。さらに、シナリオ 2 には CPS By Type コマンド タイプ ( `Query` ) が 1 つしかありませんが、シナリオ 3 にはさらに 3 つのコマンド タイプ ( `StmtPrepare` 、 `StmtExecute` 、 `StmtClose` ) があります。シナリオ 2 と比較すると、シナリオ 3 ではネットワーク ラウンドトリップの遅延が 2 回増えています。
 
-- Analysis for the decrease in QPS: From the **CPS By Type** pane, you can see that Scenario 2 has only one CPS By Type command type (`Query`), while Scenario 3 has three more command types (`StmtPrepare`, `StmtExecute`, `StmtClose`). `StmtPrepare` and `StmtClose` are non-conventional commands that are not counted by QPS, so QPS is reduced. The non-conventional commands `StmtPrepare` and `StmtClose` are counted in the `general` SQL type, so `general` time is displayed in the database overview of Scenario 3, and it accounts for more than a quarter of the database time.
-- Analysis for the significant decrease in average query duration: for the `StmtPrepare` and `StmtClose` command types newly added in Scenario 3, their query duration is calculated separately in the TiDB internal processing. TiDB executes these two types of commands very quickly, so the average query duration is significantly reduced.
+-   QPS の減少の分析: **CPS By Type**ペインから、シナリオ 2 には 1 つの CPS By Type コマンド タイプ ( `Query` ) しかないのに対し、シナリオ 3 にはさらに 3 つのコマンド タイプ ( `StmtPrepare` 、 `StmtExecute` 、 `StmtClose` ) があることがわかります。 `StmtPrepare`と`StmtClose`は、QPS でカウントされない非従来型のコマンドであるため、QPS が減少します。異例のコマンド`StmtPrepare`と`StmtClose`は`general`の SQL タイプにカウントされるため、シナリオ 3 のデータベース概要では`general`時間が表示され、データベース時間の 4 分の 1 以上を占めます。
+-   平均クエリ所要時間の大幅な減少の分析: シナリオ 3 で新たに追加された`StmtPrepare`および`StmtClose`のコマンド タイプについて、それらのクエリ所要時間は TiDB 内部処理で個別に計算されます。 TiDB はこれら 2 種類のコマンドを非常に高速に実行するため、クエリの平均所要時間は大幅に短縮されます。
 
-Although Scenario 3 uses the Prepared Statement interface, the execution plan cache is still not hit, because many application frameworks call the `StmtClose` method after `StmtExecute` to prevent memory leaks. Starting from v6.0.0, you can set the global variable `tidb_ignore_prepared_cache_close_stmt=on;`. After that, TiDB will not clear the cached execution plans even if the application calls the `StmtClose` method, so the next SQL execution can reuse the existing execution plan and avoid compiling the execution plan repeatedly.
+シナリオ 3 では Prepared Statement インターフェイスを使用していますが、多くのアプリケーション フレームワークはメモリ リークを防ぐために`StmtExecute`の後に`StmtClose`メソッドを呼び出すため、実行プラン キャッシュはヒットしません。 v6.0.0 以降、グローバル変数`tidb_ignore_prepared_cache_close_stmt=on;`を設定できます。その後、アプリケーションが`StmtClose`メソッドを呼び出しても、TiDB はキャッシュされた実行計画をクリアしないため、次の SQL 実行では既存の実行計画を再利用でき、実行計画を繰り返しコンパイルする必要がなくなります。
 
-## Scenario 4. Use the Prepared Statement interface and enable execution plan caching
+## シナリオ 4. Prepared Statement インターフェイスを使用し、実行計画のキャッシュを有効にする {#scenario-4-use-the-prepared-statement-interface-and-enable-execution-plan-caching}
 
-### Application configuration
+### アプリケーション構成 {#application-configuration}
 
-The application configuration remains the same as that of Scenario 3. To resolve the issue of not hitting the cache even if the application triggers `StmtClose`, the following parameters are configured.
+アプリケーション構成はシナリオ 3 と同じままです。アプリケーションがトリガーしてもキャッシュにヒットしない問題を解決するために`StmtClose` 、次のパラメーターが構成されます。
 
-- Set the TiDB global variable `set global tidb_ignore_prepared_cache_close_stmt=on;` (introduced since TiDB v6.0.0, `off` by default).
-- Set the TiDB configuration item `prepared-plan-cache: {enabled: true}` to enable the plan cache feature.
+-   TiDB グローバル変数`set global tidb_ignore_prepared_cache_close_stmt=on;`を設定します (TiDB v6.0.0 から導入され、デフォルトでは`off` )。
+-   TiDB 構成項目`prepared-plan-cache: {enabled: true}`を設定して、プラン キャッシュ機能を有効にします。
 
-### Performance analysis
+### パフォーマンス分析 {#performance-analysis}
 
-#### TiDB Dashboard
+#### TiDB ダッシュボード {#tidb-dashboard}
 
-From the flame chart of the TiDB CPU usage, you can see that `CompileExecutePreparedStmt` and `Optimize` have no significant CPU consumption. 25% of the CPU is consumed by the `Prepare` command, which contains parsing-related functions of Prepare such as `PlanBuilder` and `parseSQL`.
+TiDB の CPU 使用率のフレーム チャートから、 `CompileExecutePreparedStmt`と`Optimize`には有意な CPU 使用率がないことがわかります。 CPU の 25% が`Prepare`コマンドによって消費されます。このコマンドには、 `PlanBuilder`や`parseSQL`などの解析関連の Prepare の関数が含まれています。
 
-PreparseStmt cpu = 25% cpu time = 12.75s
+PreparseStmt CPU = 25% CPU 時間 = 12.75 秒
 
 ![flame-graph-for-3-commands](/media/performance/4.2.png)
 
-#### Performance Overview dashboard
+#### パフォーマンス概要ダッシュボード {#performance-overview-dashboard}
 
-In the Performance Overview dashboard, the most significant change is the average time of the `compile` phase, which is reduced from 8.95 seconds per second in Scenario 3 to 1.18 seconds per second. The number of queries using the execution plan cache is roughly equal to the value of `StmtExecute`. With the increase in QPS, the database time consumed by `Select` statements per second decreases, and the database time consumed by `general` statements per second type increases.
+Performance Overview ダッシュボードで最も重要な変化は、第`compile`フェーズの平均時間で、シナリオ 3 の 8.95 秒/秒から 1.18 秒/秒に短縮されています。実行計画キャッシュを使用するクエリの数は、値`StmtExecute`にほぼ等しくなります。 QPS の増加に伴い、1 秒あたり`Select`ステートメントで消費されるデータベース時間は減少し、1 秒あたり`general`ステートメント タイプで消費されるデータベース時間は増加します。
 
 ![performance-overview-1-for-3-commands](/media/performance/j-4.png)
 
-- Database Time by SQL Type: the `Select` statement type takes the most time.
-- Database Time by SQL Phase: the `execute` phase takes most of the time.
-- SQL Execute Time Overview: `tso wait`, `Get`, and `Cop` take most of the time.
-- Execution plan cache is hit. The value of Queries Using Plan Cache OPS roughly equals `StmtExecute` per second.
-- CPS By Type: 3 types of commands (same as Scenario 3)
-- Compared with scenario 3, the time consumed by `general` statements is longer because the QPS is increased.
-- avg QPS = 22.1k (from 19.7k to 22.1k)
+-   SQL タイプ別のデータベース時間: `Select`ステートメント タイプが最も時間がかかります。
+-   SQL フェーズごとのデータベース時間: `execute`フェーズにほとんどの時間がかかります。
+-   SQL 実行時間の概要: `tso wait` 、 `Get` 、および`Cop`が最も時間がかかります。
+-   実行プランのキャッシュにヒットしました。 Plan Cache OPS を使用したクエリの値は、およそ`StmtExecute`秒あたり 1 に相当します。
+-   タイプ別 CPS: 3 種類のコマンド (シナリオ 3 と同じ)
+-   シナリオ 3 と比較すると、QPS が増加したため、 `general`のステートメントで消費される時間が長くなります。
+-   平均 QPS = 22.1k (19.7k から 22.1k へ)
 
-The average TiDB CPU utilization drops from 936% to 827%.
+平均 TiDB CPU 使用率は 936% から 827% に低下します。
 
 ![performance-overview-2-for-3-commands](/media/performance/4.4.png)
 
-The average `compile` time drops significantly, from 374 us to 53.3 us. Because the QPS increases, the average `execute` time increases too.
+平均`compile`時間は、374 us から 53.3 us に大幅に減少します。 QPS が増加するため、平均`execute`時間も増加します。
 
 ![performance-overview-3-for-3-commands](/media/performance/4.5.png)
 
-- avg query duration = 426μs (from 528μs to 426μs)
-- avg parse duration = 12.3μs (from 14.8μs to 12.3μs)
-- avg compile duration = 53.3μs (from 374μs to 53.3μs)
-- avg execution duration = 699μs (from 649μs to 699us)
+-   平均クエリ時間 = 426μs (528μs から 426μs へ)
+-   平均解析時間 = 12.3μs (14.8μs から 12.3μs へ)
+-   平均コンパイル時間 = 53.3μs (374μs から 53.3μs へ)
+-   平均実行時間 = 699μs (649μs から 699us まで)
 
-### Analysis conclusion
+### 分析の結論 {#analysis-conclusion}
 
-Compared with Scenario 3, Scenario 4 also uses 3 command types. The difference is that Scenario 4 hits the execution plan cache, which reduces compile duration greatly, reduces the query duration, and improves QPS.
+シナリオ 3 と比較して、シナリオ 4 も 3 つのコマンド タイプを使用します。違いは、シナリオ 4 が実行プラン キャッシュにヒットすることです。これにより、コンパイル時間が大幅に短縮され、クエリ時間が短縮され、QPS が向上します。
 
-Because the `StmtPrepare` and `StmtClose` commands consume significant database time and increase the number of interactions between the application and TiDB each time the application executes a SQL statement. The next scenario will further tune the performance by eliminating the calls of these two commands through JDBC configurations.
+`StmtPrepare`と`StmtClose`のコマンドはかなりのデータベース時間を消費し、アプリケーションが SQL ステートメントを実行するたびに、アプリケーションと TiDB の間の対話の数が増えるためです。次のシナリオでは、JDBC 構成を介してこれら 2 つのコマンドの呼び出しを排除することで、パフォーマンスをさらに調整します。
 
-## Scenario 5. Cache prepared objects on the client side
+## シナリオ 5. クライアント側で準備済みオブジェクトをキャッシュする {#scenario-5-cache-prepared-objects-on-the-client-side}
 
-### Application configuration
+### アプリケーション構成 {#application-configuration}
 
-Compared with Scenario 4, 3 new JDBC parameters `cachePrepStmts=true&prepStmtCacheSize=1000&prepStmtCacheSqlLimit=20480` are configured, as explained below.
+シナリオ 4 と比較すると、以下で説明するように、3 つの新しい JDBC パラメータ`cachePrepStmts=true&prepStmtCacheSize=1000&prepStmtCacheSqlLimit=20480`が設定されています。
 
-- `cachePrepStmts = true`: caches Prepared Statement objects on the client side, which eliminates the calls of StmtPrepare and StmtClose.
-- `prepStmtCacheSize`: the value must be greater than 0.
-- `prepStmtCacheSqlLimit`: the value must be greater than the length of the SQL text.
+-   `cachePrepStmts = true` : クライアント側で Prepared Statement オブジェクトをキャッシュします。これにより、StmtPrepare と StmtClose の呼び出しがなくなります。
+-   `prepStmtCacheSize` : 値は 0 より大きい必要があります。
+-   `prepStmtCacheSqlLimit` : 値は SQL テキストの長さより大きくなければなりません。
 
-In Scenario 5, the complete JDBC configurations are as follows.
+シナリオ 5 の完全な JDBC 構成は次のとおりです。
 
 ```
 useServerPrepStmts=true&cachePrepStmts=true&prepStmtCacheSize=1000&prepStmtCacheSqlLimit=20480&useConfigs=maxPerformance
 ```
 
-### Performance analysis
+### パフォーマンス分析 {#performance-analysis}
 
-#### TiDB Dashboard
+#### TiDB ダッシュボード {#tidb-dashboard}
 
-From the following flame chart of TiDB, you can see that the high CPU consumption of the `Prepare` command is no longer present.
+以下の TiDB のフレーム チャートから、 `Prepare`コマンドの CPU 消費量が高くなっていることがなくなりました。
 
-- ExecutePreparedStmt cpu = 22% cpu time = 8.4s
+-   ExecutePreparedStmt CPU = 22% CPU 時間 = 8.4 秒
 
 ![flame-graph-for-1-command](/media/performance/5.1.1.png)
 
-#### Performance Overview dashboard
+#### パフォーマンス概要ダッシュボード {#performance-overview-dashboard}
 
-In the Performance Overview dashboard, the most notable changes are that the three Stmt command types in the **CPS By Type** pane drop to one type, the `general` statement type in the **Database Time by SQL Type** pane is disappeared, and the QPS in the **QPS** pane increases to 30.9k.
+Performance Overview ダッシュボードで最も注目すべき変更点は、[ **CPS By Type** ] ペインの 3 つの Stmt コマンド タイプが 1 つのタイプにドロップされ、[ <strong>Database Time by SQL Type</strong> ] ペインの`general`のステートメント タイプが削除され、[ <strong>QPS]</strong>ペインの QPS が削除されたことです。 30.9k に増加します。
 
 ![performance-overview-for-1-command](/media/performance/j-5.png)
 
-- Database Time by SQL Type: the `Select` statement type takes most of the time and the `general` statement type disappears.
-- Database Time by SQL Phase: the `execute` phase takes most of the time.
-- SQL Execute Time Overview: `tso wait`, `Get`, and `Cop` take most of the time.
-- Execution plan cache is hit. The value of Queries Using Plan Cache OPS roughly equals `StmtExecute` per second.
-- CPS By Type: only the `StmtExecute` command is used.
-- avg QPS = 30.9k (from 22.1k to 30.9k)
+-   SQL タイプ別のデータベース時間: `Select`ステートメント タイプが最も時間がかかり、 `general`ステートメント タイプは消えます。
+-   SQL フェーズごとのデータベース時間: `execute`フェーズにほとんどの時間がかかります。
+-   SQL 実行時間の概要: `tso wait` 、 `Get` 、および`Cop`が最も時間がかかります。
+-   実行プランのキャッシュにヒットしました。 Plan Cache OPS を使用したクエリの値は、およそ`StmtExecute`秒あたり 1 に相当します。
+-   タイプ別 CPS: `StmtExecute`コマンドのみが使用されます。
+-   平均 QPS = 30.9k (22.1k から 30.9k へ)
 
-The average TiDB CPU utilization drops from 827% to 577%. As the QPS increases, the average TiKV CPU utilization increases to 313%.
+平均 TiDB CPU 使用率は 827% から 577% に低下します。 QPS が増加すると、平均 TiKV CPU 使用率は 313% に増加します。
 
 ![performance-overview-for-2-command](/media/performance/j-5-cpu.png)
 
-The key latency metrics are as follows:
+主なレイテンシーメトリックは次のとおりです。
 
 ![performance-overview-for-3-command](/media/performance/j-5-duration.png)
 
-- avg query duration = 690μs (from 426μs to 690μs)
-- avg parse duration = 13.5μs (from 12.3μs to 13.5μs )
-- avg compile duration = 49.7μs (from 53.3μs to 49.7μs)
-- avg execution duration = 623μs (from 699us to 623μs)
-- avg pd tso wait duration = 196μs (from 224μs to 196μs)
-- connection idle duration avg-in-txn = 608μs (from 250μs to 608μs)
+-   平均クエリ時間 = 690μs (426μs から 690μs へ)
+-   平均解析時間 = 13.5μs (12.3μs から 13.5μs へ)
+-   平均コンパイル時間 = 49.7μs (53.3μs から 49.7μs へ)
+-   平均実行時間 = 623μs (699us から 623μs まで)
+-   平均 pd tso 待機時間 = 196μs (224μs から 196μs へ)
+-   接続アイドル時間 avg-in-txn = 608μs (250μs から 608μs へ)
 
-### Analysis conclusion
+### 分析の結論 {#analysis-conclusion}
 
-- Compared with Scenario 4, the **CPS By Type** pane in Scenario 5 has the `StmtExecute` command only, which avoids two network round trips and increases the overall system QPS.
-- In the case of QPS increase, the latency decreases in terms of parse duration, compile duration, and execution duration, but the query duration increases instead. This is because TiDB processes `StmtPrepare` and `StmtClose` very quickly, and eliminating these two command types increases the average query duration.
-- In Database Time by SQL Phase, `execute` takes the most time and is close to the database time. While in SQL Execute Time Overview, `tso wait` takes most of the time, and more than a quarter of `execute` time is taken to wait for TSO.
-- The total `tso wait` time per second is 5.46s. The average `tso wait` time is 196 us, and the number of `tso cmd` times per second is 28k, which is very close to the QPS of 30.9k. This is because according to the implementation of the `read committed` isolation level in TiDB, every SQL statement in a transaction needs to request TSO from PD.
+-   シナリオ 4 と比較すると、シナリオ 5 の**CPS By Type**ペインには`StmtExecute`コマンドしかないため、2 つのネットワーク ラウンド トリップが回避され、システム全体の QPS が向上します。
+-   QPS が増加した場合、解析時間、コンパイル時間、および実行時間に関してレイテンシーは減少しますが、クエリ時間は代わりに増加します。これは、TiDB が`StmtPrepare`と`StmtClose`を非常に迅速に処理するためであり、これら 2 つのコマンド タイプを排除すると、クエリの平均時間が長くなります。
+-   SQL フェーズ別のデータベース時間では、 `execute`が最も時間がかかり、データベース時間に近くなっています。 SQL 実行時間の概要では、 `tso wait`がほとんどの時間を要し、 `execute`の 4 分の 1 以上の時間が TSO の待機に費やされています。
+-   合計`tso wait`秒あたりの時間は 5.46 秒です。平均`tso wait`回は 196us、1 秒あたりの`tso cmd`回の回数は 28k で、QPS の 30.9k に非常に近い値です。これは、TiDB での`read committed`分離レベルの実装によると、トランザクション内のすべての SQL ステートメントが PD から TSO を要求する必要があるためです。
 
-TiDB v6.0 provides `rc read`, which optimizes the `read committed` isolation level by reducing `tso cmd`. This feature is controlled by the global variable `set global tidb_rc_read_check_ts=on;`. When this variable is enabled, the default behavior of TiDB acts the same as the `repeatable-read` isolation level, at which only `start-ts` and `commit-ts` need to be obtained from the PD. The statements in a transaction use the `start-ts` to read data from TiKV first. If the data read from TiKV is earlier than `start-ts`, the data is returned directly. If the data read from TiKV is later than `start-ts`, the data is discarded. TiDB requests TSO from PD, and then retries the read. The `for update ts` of subsequent statements uses the latest PD TSO.
+TiDB v6.0 は`rc read`を提供し、これは`tso cmd`を減らすことによって`read committed`分離レベルを最適化します。この機能は、グローバル変数`set global tidb_rc_read_check_ts=on;`によって制御されます。この変数が有効になっている場合、TiDB のデフォルトの動作は、PD から取得する必要があるのは`start-ts`と`commit-ts`のみである`repeatable-read`分離レベルと同じように機能します。トランザクション内のステートメントは、最初に`start-ts`を使用して TiKV からデータを読み取ります。 TiKV から読み取ったデータが`start-ts`より前の場合、データは直接返されます。 TiKV から読み取ったデータが`start-ts`より後の場合、データは破棄されます。 TiDB は PD に TSO を要求し、読み取りを再試行します。後続の`for update ts`個のステートメントは、最新の PD TSO を使用します。
 
-## Scenario 6: Enable the `tidb_rc_read_check_ts` variable to reduce TSO requests
+## シナリオ 6: <code>tidb_rc_read_check_ts</code>変数を有効にして TSO 要求を減らす {#scenario-6-enable-the-code-tidb-rc-read-check-ts-code-variable-to-reduce-tso-requests}
 
-### Application configuration
+### アプリケーション構成 {#application-configuration}
 
-Compared with Scenario 5, the application configuration remains the same. The only difference is that the `set global tidb_rc_read_check_ts=on;` variable is configured to reduce TSO requests.
+シナリオ 5 と比較すると、アプリケーション構成は同じままです。唯一の違いは、TSO 要求を減らすように`set global tidb_rc_read_check_ts=on;`変数が構成されていることです。
 
-### Performance analysis
+### パフォーマンス分析 {#performance-analysis}
 
-#### Dashboard
+#### ダッシュボード {#dashboard}
 
-The flame chart of the TiDB CPU does not have any significant changes.
+TiDB CPU のフレーム チャートには大きな変更はありません。
 
-- ExecutePreparedStmt cpu = 22% cpu time = 8.4s
+-   ExecutePreparedStmt CPU = 22% CPU 時間 = 8.4 秒
 
 ![flame-graph-for-rc-read](/media/performance/6.2.2.png)
 
-#### Performance Overview dashboard
+#### パフォーマンス概要ダッシュボード {#performance-overview-dashboard}
 
-After using RC read, QPS increases from 30.9k to 34.9k, and the `tso wait` time consumed per second decreases from 5.46 s to 456 ms.
+RC 読み取りを使用した後、QPS は 30.9k から 34.9k に増加し、 `tso wait`秒あたりの消費時間は 5.46 秒から 456 ミリ秒に減少します。
 
 ![performance-overview-1-for-rc-read](/media/performance/j-6.png)
 
-- Database Time by SQL Type: the `Select` statement type takes most of the time.
-- Database Time by SQL Phase: the `execute` phase takes most of the time.
-- SQL Execute Time Overview: `Get`, `Cop`, and `Prewrite` take most of the time.
-- Execution plan cache is hit. The value of Queries Using Plan Cache OPS roughly equals `StmtExecute` per second.
-- CPS By Type: only the `StmtExecute` command is used.
-- avg QPS = 34.9k (from 30.9k to 34.9k)
+-   SQL タイプ別のデータベース時間: `Select`ステートメント タイプが最も時間がかかります。
+-   SQL フェーズごとのデータベース時間: `execute`フェーズにほとんどの時間がかかります。
+-   SQL 実行時間の概要: `Get` 、 `Cop` 、および`Prewrite`が最も時間がかかります。
+-   実行プランのキャッシュにヒットしました。 Plan Cache OPS を使用したクエリの値は、およそ`StmtExecute`秒あたり 1 に相当します。
+-   タイプ別 CPS: `StmtExecute`コマンドのみが使用されます。
+-   平均 QPS = 34.9k (30.9k から 34.9k へ)
 
-The `tso cmd` per second drops from 28.3k to 2.7k.
+`tso cmd`秒あたりの速度は 28.3k から 2.7k に低下します。
 
 ![performance-overview-2-for-rc-read](/media/performance/j-6-cmd.png)
 
-The average TiDB CPU increases to 603% (from 577% to 603%).
+平均 TiDB CPU は 603% に増加します (577% から 603% へ)。
 
 ![performance-overview-3-for-rc-read](/media/performance/j-6-cpu.png)
 
-The key latency metrics are as follows:
+主なレイテンシーメトリックは次のとおりです。
 
 ![performance-overview-4-for-rc-read](/media/performance/j-6-duration.png)
 
-- avg query duration = 533μs (from 690μs to 533μs)
-- avg parse duration = 13.4μs (from 13.5μs to 13.4μs )
-- avg compile duration = 50.3μs (from 49.7μs to 50.3μs)
-- avg execution duration = 466μs (from 623μs to 466μs)
-- avg pd tso wait duration = 171μs (from 196μs to 171μs)
+-   平均クエリ時間 = 533μs (690μs から 533μs へ)
+-   平均解析時間 = 13.4μs (13.5μs から 13.4μs へ)
+-   平均コンパイル時間 = 50.3μs (49.7μs から 50.3μs へ)
+-   平均実行時間 = 466μs (623μs から 466μs へ)
+-   平均 pd tso 待機時間 = 171μs (196μs から 171μs へ)
 
-### Analysis conclusion
+### 分析の結論 {#analysis-conclusion}
 
-After enabling RC Read by `set global tidb_rc_read_check_ts=on;`, RC Read significantly reduces the times of `tso cmd`, thus reducing `tso wait` and average query duration, and improving QPS.
+RC Read by `set global tidb_rc_read_check_ts=on;`を有効にすると、RC Read によって`tso cmd`の時間が大幅に短縮されるため、 `tso wait`と平均クエリ時間が短縮され、QPS が向上します。
 
-The bottlenecks of both current database time and latency are in the `execute` phase, in which the `Get` and `Cop` read requests take the highest percentage. Most of the tables in this workload are read-only or rarely modified, so you can use the small table caching feature supported since TiDB v6.0.0 to cache the data of these small tables and reduce the waiting time and resource consumption of KV read requests.
+現在のデータベース時間とレイテンシー時間の両方のボトルネックは`execute`フェーズにあり、 `Get`と`Cop`の読み取り要求の割合が最も高くなります。このワークロードのほとんどのテーブルは読み取り専用であるか、めったに変更されないため、TiDB v6.0.0 以降でサポートされている小さなテーブル キャッシュ機能を使用して、これらの小さなテーブルのデータをキャッシュし、KV 読み取り要求の待機時間とリソース消費を削減できます。 .
 
-## Scenario 7: Use the small table cache
+## シナリオ 7: 小さなテーブル キャッシュを使用する {#scenario-7-use-the-small-table-cache}
 
-### Application configuration
+### アプリケーション構成 {#application-configuration}
 
-Compared with Scenario 6, the application configuration remains the same. The only difference is that Scenario 7 uses SQL statements such as `alter table t1 cache;` to cache those read-only tables for the business.
+シナリオ 6 と比較すると、アプリケーション構成は同じままです。唯一の違いは、シナリオ 7 では`alter table t1 cache;`などの SQL ステートメントを使用して、ビジネス用の読み取り専用テーブルをキャッシュすることです。
 
-### Performance analysis
+### パフォーマンス分析 {#performance-analysis}
 
-#### TiDB Dashboard
+#### TiDB ダッシュボード {#tidb-dashboard}
 
-The flame chart of the TiDB CPU does not have any significant changes.
+TiDB CPU のフレーム チャートには大きな変更はありません。
 
 ![flame-graph-for-table-cache](/media/performance/7.2.png)
 
-#### Performance Overview dashboard
+#### パフォーマンス概要ダッシュボード {#performance-overview-dashboard}
 
-The QPS increases from 34.9k to 40.9k, and the KV request types take the most time in the `execute` phase change to `Prewrite` and `Commit`. The database time consumed by `Get` per second decreases from 5.33 seconds to 1.75 seconds, and the database time consumed by `Cop` per second decreases from 3.87 seconds to 1.09 seconds.
+QPS は 34.9k から 40.9k に増加し、KV リクエスト タイプは`Prewrite`および`Commit`への`execute`フェーズの変更に最も時間がかかります。 1 秒あたり`Get`によって消費されるデータベース時間は 5.33 秒から 1.75 秒に減少し、1 秒あたり`Cop`によって消費されるデータベース時間は 3.87 秒から 1.09 秒に減少します。
 
 ![performance-overview-1-for-table-cache](/media/performance/j-7.png)
 
-- Database Time by SQL Type: the `Select` statement type takes most of the time.
-- Database Time by SQL Phase: the `execute` and `compile` phases take most of the time.
-- SQL Execute Time Overview: `Prewrite`, `Commit`, and `Get` take most of the time.
-- Execution plan cache is hit. The value of Queries Using Plan Cache OPS roughly equals `StmtExecute` per second.
-- CPS By Type: only the `StmtExecute` command is used.
-- avg QPS = 40.9k (from 34.9k to 40.9k)
+-   SQL タイプ別のデータベース時間: `Select`ステートメント タイプが最も時間がかかります。
+-   SQL フェーズごとのデータベース時間: `execute`フェーズと`compile`フェーズに最も時間がかかります。
+-   SQL 実行時間の概要: `Prewrite` 、 `Commit` 、および`Get`が最も時間がかかります。
+-   実行プランのキャッシュにヒットしました。 Plan Cache OPS を使用したクエリの値は、およそ`StmtExecute`秒あたり 1 に相当します。
+-   タイプ別 CPS: `StmtExecute`コマンドのみが使用されます。
+-   平均 QPS = 40.9k (34.9k から 40.9k へ)
 
-The average TiDB CPU utilization drops from 603% to 478% and the average TiKV CPU utilization drops from 346% to 256%.
+平均 TiDB CPU 使用率は 603% から 478% に低下し、平均 TiKV CPU 使用率は 346% から 256% に低下します。
 
 ![performance-overview-2-for-table-cache](/media/performance/j-7-cpu.png)
 
-The average query latency drops from 533 us to 313 us. The average `execute` latency drops from 466 us to 250 us.
+平均クエリレイテンシーは 533 us から 313 us に減少します。平均`execute`レイテンシーは 466 us から 250 us に減少します。
 
 ![performance-overview-3-for-table-cache](/media/performance/j-7-duration.png)
 
-- avg query duration = 313μs (from 533μs to 313μs)
-- avg parse duration = 11.9μs (from 13.4μs to 11.9μs)
-- avg compile duration = 47.7μs (from 50.3μs to 47.7μs)
-- avg execution duration = 251μs (from 466μs to 251μs)
+-   平均クエリ時間 = 313μs (533μs から 313μs へ)
+-   平均解析時間 = 11.9μs (13.4μs から 11.9μs へ)
+-   平均コンパイル時間 = 47.7μs (50.3μs から 47.7μs へ)
+-   平均実行時間 = 251μs (466μs から 251μs へ)
 
-### Analysis conclusion
+### 分析の結論 {#analysis-conclusion}
 
-After caching all read-only tables, the `Execute Duration` drops significantly because all read-only tables are cached in TiDB and there is no need to query data in TiKV for those tables, so the query duration drops and the QPS increases.
+すべての読み取り専用テーブルをキャッシュした後、 `Execute Duration`は大幅に低下します。これは、すべての読み取り専用テーブルが TiDB にキャッシュされ、これらのテーブルについて TiKV でデータをクエリする必要がないため、クエリの所要時間が短縮され、QPS が増加するためです。
 
-This is an optimistic result because data of read-only tables in actual business might be too large for TiDB to cache them all. Another limitation is that although the small table caching feature supports write operations, the write operation requires a default wait of 3 seconds to ensure that the cache of all TiDB nodes is invalidated first, which might not be feasible to applications with strict latency requirements.
+これは楽観的結果です。実際のビジネスでの読み取り専用テーブルのデータは、TiDB がすべてをキャッシュするには大きすぎる可能性があるためです。もう 1 つの制限は、小さなテーブル キャッシュ機能は書き込み操作をサポートしていますが、すべてのレイテンシーノードのキャッシュが最初に無効化されることを保証するために、書き込み操作にはデフォルトで 3 秒の待機が必要であることです。
 
-## Summary
+## 概要 {#summary}
 
-The following table lists the performance of seven different scenarios.
+次の表は、7 つの異なるシナリオのパフォーマンスを示しています。
 
-| Metrics | Scenario 1 | Scenario 2 | Scenario 3 | Scenario 4 | Scenario 5 | Scenario 6 | Scenario 7 | Comparing Scenario 5 with Scenario 2 (%) | Comparing Scenario 7 with Scenario 3 (%) |
-| --- | --- | --- | --- | --- | --- | --- | --- | --- |  --- |
-| query duration  | 479μs | 1120μs | 528μs | 426μs |690μs  | 533μs | 313μs | -38% | -51% |
-| QPS            | 56.3k |  24.2k | 19.7k | 22.1k | 30.9k | 34.9k | 40.9k | +28% | +108% |
+| 指標    | シナリオ 1 | シナリオ 2 | シナリオ 3 | シナリオ 4 | シナリオ 5 | シナリオ 6 | シナリオ 7 | シナリオ 5 とシナリオ 2 の比較 (%) | シナリオ 7 とシナリオ 3 の比較 (%) |
+| ----- | ------ | ------ | ------ | ------ | ------ | ------ | ------ | ---------------------- | ---------------------- |
+| クエリ期間 | 479μs  | 1120μs | 528μs  | 426μs  | 690μs  | 533μs  | 313μs  | -38%                   | -51%                   |
+| QPS   | 56.3k  | 24.2k  | 19.7k  | 22.1k  | 30.9k  | 34.9k  | 40.9k  | +28%                   | +108%                  |
 
-In these scenarios, Scenario 2 is a common scenario where applications use the Query interface, and Scenario 5 is an ideal scenario where applications use the Prepared Statement interface.
+これらのシナリオでは、シナリオ 2 はアプリケーションが Query インターフェースを使用する一般的なシナリオであり、シナリオ 5 はアプリケーションが Prepared Statement インターフェースを使用する理想的なシナリオです。
 
-- Comparing Scenario 2 with Scenario 5, you can see that by using best practices for Java application development and caching Prepared Statement objects on the client side, each SQL statement requires only one command and database interaction to hit the execution plan cache, which results in a 38% drop in query latency and a 28% increase in QPS, while the average TiDB CPU utilization drops from 936% to 577%.
-- Comparing Scenario 2 with Scenario 7, you can see that with the latest TiDB optimization features such as RC Read and small table cache on top of Scenario 5, latency is reduced by 51% and QPS is increased by 108%, while the average TiDB CPU utilization drops from 936% to 478%.
+-   シナリオ 2 とシナリオ 5 を比較すると、 Javaアプリケーション開発のベスト プラクティスを使用し、Prepared Statement オブジェクトをクライアント側にキャッシュすることで、各 SQL ステートメントが実行計画キャッシュにアクセスするために必要なコマンドとデータベースの対話は 1 回だけであることがわかります。クエリのレイテンシーが 38% 低下し、QPS が 28% 増加し、TiDB の平均 CPU 使用率が 936% から 577% に低下しました。
+-   シナリオ 2 とシナリオ 7 を比較すると、RC 読み取りや小さなテーブル キャッシュなどの最新のレイテンシー最適化機能をシナリオ 5 に加えることで、平均的な TiDB CPU が使用率は 936% から 478% に低下します。
 
-By comparing the performance of each scenario, we can draw the following conclusions:
+各シナリオのパフォーマンスを比較すると、次の結論を導き出すことができます。
 
-- The execution plan cache of TiDB plays a critical role in the OLTP performance tuning. The RC Read and small table cache features introduced from v6.0.0 also play an important role in the further performance tuning of this workload.
-- TiDB is compatible with different commands of the MySQL protocol. When using the Prepared Statement interface and setting the following JDBC connection parameters, the application can achieve its best performance:
+-   TiDB の実行プラン キャッシュは、OLTP のパフォーマンス チューニングにおいて重要な役割を果たします。 v6.0.0 から導入された RC 読み取りおよび小さなテーブル キャッシュ機能も、このワークロードのさらなるパフォーマンス チューニングにおいて重要な役割を果たします。
+
+-   TiDB は、MySQL プロトコルのさまざまなコマンドと互換性があります。 Prepared Statement インターフェースを使用し、次の JDBC 接続パラメーターを設定すると、アプリケーションは最高のパフォーマンスを達成できます。
 
     ```
     useServerPrepStmts=true&cachePrepStmts=true&prepStmtCacheSize=1000&prepStmtCacheSqlLimit=20480&useConfigs= maxPerformance
     ```
 
-- It is recommended that you use TiDB Dashboard (for example, the Top SQL feature and Continuous Profiling feature) and Performance Overview dashboard for performance analysis and tuning.
+-   パフォーマンスの分析とチューニングには、TiDB ダッシュボード (Top SQL機能や継続的なプロファイリング機能など) とパフォーマンス概要ダッシュボードを使用することをお勧めします。
 
-    - With the [Top SQL](/dashboard/top-sql.md) feature, you can visually monitor and explore the CPU consumption of each SQL statement in your database during execution to troubleshoot database performance issues.
-    - With [Continuous Profiling](/dashboard/continuous-profiling.md), you can continuously collect performance data from each instance of TiDB, TiKV, and PD. When applications use different interfaces to interact with TiDB, the difference in the CPU consumption of TiDB is huge.
-    - With [Performance Overview Dashboard](/grafana-performance-overview-dashboard.md), you can get an overview of database time and SQL execution time breakdown information. You can analyze and diagnose performance based on database time to determine whether the performance bottleneck of the entire system is in TiDB or not. If the bottleneck is in TiDB, you can use the database time and latency breakdowns, along with load profile and resource usage, to identify performance bottlenecks within TiDB and tune the performance accordingly.
+    -   [Top SQL](/dashboard/top-sql.md)の機能を使用すると、実行中にデータベース内の各 SQL ステートメントの CPU 消費を視覚的に監視および調査して、データベースのパフォーマンスの問題をトラブルシューティングできます。
+    -   [継続的なプロファイリング](/dashboard/continuous-profiling.md)を使用すると、TiDB、TiKV、および PD の各インスタンスからパフォーマンス データを継続的に収集できます。アプリケーションが異なるインターフェイスを使用して TiDB と対話する場合、TiDB の CPU 消費量の違いは非常に大きくなります。
+    -   [パフォーマンス概要ダッシュボード](/grafana-performance-overview-dashboard.md)を使用すると、データベース時間と SQL 実行時間の内訳情報の概要を取得できます。データベース時間に基づいてパフォーマンスを分析および診断し、システム全体のパフォーマンスのボトルネックが TiDB にあるかどうかを判断できます。ボトルネックが TiDB にある場合は、データベース時間とレイテンシー時間の内訳を負荷プロファイルとリソース使用量とともに使用して、TiDB 内のパフォーマンスのボトルネックを特定し、それに応じてパフォーマンスを調整できます。
 
-With a combination usage of these features, you can analyze and tune performance for real-world applications efficiently.
+これらの機能を組み合わせて使用することで、実際のアプリケーションのパフォーマンスを効率的に分析および調整できます。

@@ -3,58 +3,58 @@ title: Push-down calculations Supported by TiFlash
 summary: Learn the push-down calculations supported by TiFlash.
 ---
 
-# Push-down Calculations Supported by TiFlash
+# TiFlashがサポートするプッシュダウン計算 {#push-down-calculations-supported-by-tiflash}
 
-This document introduces the push-down calculations supported by TiFlash.
+このドキュメントでは、 TiFlashでサポートされているプッシュダウン計算について紹介します。
 
-## Push-down operators
+## プッシュダウン演算子 {#push-down-operators}
 
-TiFlash supports the push-down of the following operators:
+TiFlashは、次の演算子のプッシュダウンをサポートしています。
 
-* TableScan: Reads data from tables.
-* Selection: Filters data.
-* HashAgg: Performs data aggregation based on the [Hash Aggregation](/explain-aggregation.md#hash-aggregation) algorithm.
-* StreamAgg: Performs data aggregation based on the [Stream Aggregation](/explain-aggregation.md#stream-aggregation) algorithm. SteamAgg only supports the aggregation without the `GROUP BY` condition.
-* TopN: Performs the TopN calculation.
-* Limit: Performs the limit calculation.
-* Project: Performs the projection calculation.
-* HashJoin: Performs the join calculation using the [Hash Join](/explain-joins.md#hash-join) algorithm, but with the following conditions:
-    * The operator can be pushed down only in the [MPP mode](/tiflash/use-tiflash-mpp-mode.md).
-    * Supported joins are Inner Join, Left Join, Semi Join, Anti Semi Join, Left Semi Join, and Anti Left Semi Join.
-    * The preceding joins support both Equi Join and Non-Equi Join (Cartesian Join). When calculating Cartesian Join, the Broadcast algorithm, instead of the Shuffle Hash Join algorithm, is used.
-* Window functions: Currently, TiFlash supports row_number(), rank(), dense_rank(), lead(), and lag()
+-   TableScan: テーブルからデータを読み取ります。
+-   選択: データをフィルタリングします。
+-   HashAgg: [ハッシュ集計](/explain-aggregation.md#hash-aggregation)アルゴリズムに基づいてデータ集計を実行します。
+-   StreamAgg: [ストリーム集計](/explain-aggregation.md#stream-aggregation)アルゴリズムに基づいてデータ集計を実行します。 SteamAgg は`GROUP BY`条件なしの集計のみをサポートします。
+-   TopN: TopN 計算を実行します。
+-   Limit: リミット計算を実行します。
+-   Project: 投影計算を実行します。
+-   HashJoin: [ハッシュ結合](/explain-joins.md#hash-join)アルゴリズムを使用して結合計算を実行しますが、次の条件があります。
+    -   オペレーターは[MPP モード](/tiflash/use-tiflash-mpp-mode.md)でのみ押し下げることができます。
+    -   サポートされている結合は、Inner Join、Left Join、Semi Join、Anti Semi Join、Left Semi Join、Anti Left Semi Join です。
+    -   上記の結合は、等結合と非等結合 (デカルト結合) の両方をサポートしています。 Cartesian Join を計算する場合、Shuffle Hash Join アルゴリズムの代わりに Broadcast アルゴリズムが使用されます。
+-   ウィンドウ関数: 現在、 TiFlashは row_number()、rank()、dense_rank()、lead()、および lag() をサポートしています。
 
-In TiDB, operators are organized in a tree structure. For an operator to be pushed down to TiFlash, all of the following prerequisites must be met:
+TiDB では、オペレーターはツリー構造で編成されます。オペレータがTiFlashにプッシュされるには、次のすべての前提条件を満たす必要があります。
 
-+ All of its child operators can be pushed down to TiFlash.
-+ If an operator contains expressions (most of the operators contain expressions), all expressions of the operator can be pushed down to TiFlash.
+-   その子演算子はすべてTiFlashにプッシュできます。
+-   演算子に式が含まれる場合 (ほとんどの演算子には式が含まれます)、演算子のすべての式をTiFlashにプッシュできます。
 
-## Push-down expressions
+## 押し下げ式 {#push-down-expressions}
 
-TiFlash supports the following push-down expressions:
+TiFlashは、次のプッシュダウン式をサポートしています。
 
-* Mathematical functions: `+, -, /, *, %, >=, <=, =, !=, <, >, round, abs, floor(int), ceil(int), ceiling(int), sqrt, log, log2, log10, ln, exp, pow, sign, radians, degrees, conv, crc32, greatest(int/real), least(int/real)`
-* Logical functions: `and, or, not, case when, if, ifnull, isnull, in, like, coalesce, is`
-* Bitwise operations: `bitand, bitor, bigneg, bitxor`
-* String functions: `substr, char_length, replace, concat, concat_ws, left, right, ascii, length, trim, ltrim, rtrim, position, format, lower, ucase, upper, substring_index, lpad, rpad, strcmp, regexp, regexp_like, regexp_instr, regexp_substr`
-* Date functions: `date_format, timestampdiff, from_unixtime, unix_timestamp(int), unix_timestamp(decimal), str_to_date(date), str_to_date(datetime), datediff, year, month, day, extract(datetime), date, hour, microsecond, minute, second, sysdate, date_add, date_sub, adddate, subdate, quarter, dayname, dayofmonth, dayofweek, dayofyear, last_day, monthname, to_seconds, to_days, from_days, weekofyear`
-* JSON function: `json_length, ->, ->>, json_extract`
-* Conversion functions: `cast(int as double), cast(int as decimal), cast(int as string), cast(int as time), cast(double as int), cast(double as decimal), cast(double as string), cast(double as time), cast(string as int), cast(string as double), cast(string as decimal), cast(string as time), cast(decimal as int), cast(decimal as string), cast(decimal as time), cast(time as int), cast(time as decimal), cast(time as string), cast(time as real)`
-* Aggregate functions: `min, max, sum, count, avg, approx_count_distinct, group_concat`
-* Miscellaneous functions: `inetntoa, inetaton, inet6ntoa, inet6aton`
+-   数学関数: `+, -, /, *, %, >=, <=, =, !=, <, >, round, abs, floor(int), ceil(int), ceiling(int), sqrt, log, log2, log10, ln, exp, pow, sign, radians, degrees, conv, crc32, greatest(int/real), least(int/real)`
+-   論理関数: `and, or, not, case when, if, ifnull, isnull, in, like, coalesce, is`
+-   ビット演算: `bitand, bitor, bigneg, bitxor`
+-   文字列関数: `substr, char_length, replace, concat, concat_ws, left, right, ascii, length, trim, ltrim, rtrim, position, format, lower, ucase, upper, substring_index, lpad, rpad, strcmp, regexp, regexp_like, regexp_instr, regexp_substr`
+-   日付関数： `date_format, timestampdiff, from_unixtime, unix_timestamp(int), unix_timestamp(decimal), str_to_date(date), str_to_date(datetime), datediff, year, month, day, extract(datetime), date, hour, microsecond, minute, second, sysdate, date_add, date_sub, adddate, subdate, quarter, dayname, dayofmonth, dayofweek, dayofyear, last_day, monthname, to_seconds, to_days, from_days, weekofyear`
+-   JSON 関数: `json_length, ->, ->>, json_extract`
+-   変換関数： `cast(int as double), cast(int as decimal), cast(int as string), cast(int as time), cast(double as int), cast(double as decimal), cast(double as string), cast(double as time), cast(string as int), cast(string as double), cast(string as decimal), cast(string as time), cast(decimal as int), cast(decimal as string), cast(decimal as time), cast(time as int), cast(time as decimal), cast(time as string), cast(time as real)`
+-   集計関数: `min, max, sum, count, avg, approx_count_distinct, group_concat`
+-   その他の関数: `inetntoa, inetaton, inet6ntoa, inet6aton`
 
-## Restrictions
+## 制限 {#restrictions}
 
-* Expressions that contain the Bit, Set, and Geometry types cannot be pushed down to TiFlash.
+-   Bit、Set、および Geometry タイプを含む式は、 TiFlashにプッシュダウンできません。
 
-* The `date_add`, `date_sub`, `adddate`, and `subdate` functions support the following interval types only. If other interval types are used, TiFlash reports errors.
+-   `date_add` 、 `date_sub` 、 `adddate` 、および`subdate`関数は、次の間隔タイプのみをサポートします。他の間隔タイプが使用されている場合、 TiFlashはエラーを報告します。
 
-    * DAY
-    * WEEK
-    * MONTH
-    * YEAR
-    * HOUR
-    * MINUTE
-    * SECOND
+    -   日
+    -   週
+    -   月
+    -   年
+    -   時間
+    -   分
+    -   2番目
 
-If a query encounters unsupported push-down calculations, TiDB needs to complete the remaining calculations, which might greatly affect the TiFlash acceleration effect. The currently unsupported operators and expressions might be supported in future versions.
+サポートされていないプッシュダウン計算がクエリで発生した場合、TiDB は残りの計算を完了する必要があり、 TiFlashアクセラレーション効果に大きな影響を与える可能性があります。現在サポートされていない演算子と式は、将来のバージョンでサポートされる可能性があります。

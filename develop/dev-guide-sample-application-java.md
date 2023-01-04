@@ -4,43 +4,44 @@ summary: Learn how to build a simple CRUD application with TiDB and Java.
 ---
 
 <!-- markdownlint-disable MD024 -->
+
 <!-- markdownlint-disable MD029 -->
 
-# Build a Simple CRUD App with TiDB and Java
+# TiDB とJavaを使用して単純な CRUD アプリを構築する {#build-a-simple-crud-app-with-tidb-and-java}
 
-This document describes how to use TiDB and Java to build a simple CRUD application.
+このドキュメントでは、TiDB とJavaを使用して単純な CRUD アプリケーションを構築する方法について説明します。
 
-> **Note:**
+> **ノート：**
 >
-> It is recommended to use Java 8 or a later Java version.
+> Java 8 以降のJavaバージョンを使用することをお勧めします。
 >
-> If you want to use Spring Boot for application development, refer to [Build the TiDB Application using Spring Boot](/develop/dev-guide-sample-application-spring-boot.md)
+> アプリケーション開発に Spring Boot を使用する場合は、 [Spring Boot を使用して TiDB アプリケーションをビルドする](/develop/dev-guide-sample-application-spring-boot.md)を参照してください。
 
-## Step 1. Launch your TiDB cluster
+## ステップ 1. TiDB クラスターを起動する {#step-1-launch-your-tidb-cluster}
 
 <CustomContent platform="tidb">
 
-The following introduces how to start a TiDB cluster.
+以下にTiDBクラスターの起動方法を紹介します。
 
-**Use a TiDB Cloud Serverless Tier cluster**
+**TiDB Cloud Tier クラスターを使用する**
 
-For detailed steps, see [Create a Serverless Tier cluster](/develop/dev-guide-build-cluster-in-cloud.md#step-1-create-a-serverless-tier-cluster).
+詳細な手順については、 [サーバーレス層クラスターを作成する](/develop/dev-guide-build-cluster-in-cloud.md#step-1-create-a-serverless-tier-cluster)を参照してください。
 
-**Use a local cluster**
+**ローカル クラスターを使用する**
 
-For detailed steps, see [Deploy a local test cluster](/quick-start-with-tidb.md#deploy-a-local-test-cluster) or [Deploy a TiDB Cluster Using TiUP](/production-deployment-using-tiup.md).
+詳細な手順については、 [ローカル テスト クラスターをデプロイする](/quick-start-with-tidb.md#deploy-a-local-test-cluster)または[TiUP を使用してTiUPクラスタをデプロイする](/production-deployment-using-tiup.md)を参照してください。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-See [Create a Serverless Tier cluster](/develop/dev-guide-build-cluster-in-cloud.md#step-1-create-a-serverless-tier-cluster).
+[サーバーレス層クラスターを作成する](/develop/dev-guide-build-cluster-in-cloud.md#step-1-create-a-serverless-tier-cluster)を参照してください。
 
 </CustomContent>
 
-## Step 2. Get the code
+## ステップ 2. コードを取得する {#step-2-get-the-code}
 
-{{< copyable "shell-regular" >}}
+{{< copyable "" >}}
 
 ```shell
 git clone https://github.com/pingcap-inc/tidb-example-java.git
@@ -50,19 +51,19 @@ git clone https://github.com/pingcap-inc/tidb-example-java.git
 
 <div label="Using Mybatis (Recommended)" value="mybatis">
 
-Compared with [Mybatis](https://mybatis.org/mybatis-3/index.html), the JDBC implementation might be not a best practice, because you need to write error handling logic manually and cannot reuse code easily, which makes your code slightly redundant.
+[マイバティス](https://mybatis.org/mybatis-3/index.html)と比較すると、JDBC 実装はベスト プラクティスではない可能性があります。これは、エラー処理ロジックを手動で記述する必要があり、コードを簡単に再利用できないため、コードがわずかに冗長になるためです。
 
-Mybatis is a popular open-source Java class persistence framework. The following uses [MyBatis Generator](https://mybatis.org/generator/quickstart.html) as a Maven plugin to generate the persistence layer code.
+Mybatis は、人気のあるオープンソースのJavaクラス永続化フレームワークです。以下は、 [MyBatis ジェネレーター](https://mybatis.org/generator/quickstart.html)を Maven プラグインとして使用して、永続化レイヤーコードを生成します。
 
-Change to the `plain-java-mybatis` directory:
+`plain-java-mybatis`ディレクトリに移動します。
 
-{{< copyable "shell-regular" >}}
+{{< copyable "" >}}
 
 ```shell
 cd plain-java-mybatis
 ```
 
-The structure of this directory is as follows:
+このディレクトリの構造は次のとおりです。
 
 ```
 .
@@ -90,13 +91,13 @@ The structure of this directory is as follows:
             └── mybatis-generator.xml
 ```
 
-The automatically generated files are:
+自動生成されるファイルは次のとおりです。
 
-- `src/main/java/com/pingcap/model/Player.java`: The `Player` entity class.
-- `src/main/java/com/pingcap/model/PlayerMapper.java`: The interface of `PlayerMapper`.
-- `src/main/resources/mapper/PlayerMapper.xml`: The XML mapping of `Player`. Mybatis uses this configuration to automatically generate the implementation class of the `PlayerMapper` interface.
+-   `src/main/java/com/pingcap/model/Player.java` : `Player`エンティティ クラス。
+-   `src/main/java/com/pingcap/model/PlayerMapper.java` : `PlayerMapper`のインターフェース。
+-   `src/main/resources/mapper/PlayerMapper.xml` : `Player`の XML マッピング。 Mybatis はこの構成を使用して、 `PlayerMapper`インターフェースの実装クラスを自動的に生成します。
 
-The strategy for generating these files is written in `mybatis-generator.xml`, which is the configuration file for [Mybatis Generator](https://mybatis.org/generator/quickstart.html). There are comments in the following configuration file to describe how to use it.
+これらのファイルを生成する方法は`mybatis-generator.xml`に記述されており、これは[マイバティス ジェネレーター](https://mybatis.org/generator/quickstart.html)の構成ファイルです。次の構成ファイルには、使用方法を説明するコメントがあります。
 
 {{< copyable "" >}}
 
@@ -182,7 +183,7 @@ The strategy for generating these files is written in `mybatis-generator.xml`, w
 </generatorConfiguration>
 ```
 
-`mybatis-generator.xml` is included in `pom.xml` as the configuration of `mybatis-generator-maven-plugin`.
+`mybatis-generator.xml`は`mybatis-generator-maven-plugin`の構成として`pom.xml`に含まれます。
 
 ```xml
 <plugin>
@@ -206,13 +207,13 @@ The strategy for generating these files is written in `mybatis-generator.xml`, w
 </plugin>
 ```
 
-Once included in the Maven plugin, you can delete the old generated files and make new ones using `mvn mybatis-generate`. Or you can use `make gen` to delete the old file and generate a new one at the same time.
+Maven プラグインに含めたら、生成された古いファイルを削除し、 `mvn mybatis-generate`を使用して新しいファイルを作成できます。または、 `make gen`を使用して古いファイルを削除し、同時に新しいファイルを生成することもできます。
 
-> **Note:**
+> **ノート：**
 >
-> The property `configuration.overwrite` in `mybatis-generator.xml` only ensures that the generated Java code files are overwritten. But the XML mapping files are still written as appended. Therefore, it is recommended to delete the old file before Mybaits Generator generating a new one.
+> プロパティ`configuration.overwrite` in `mybatis-generator.xml`は、生成されたJavaコード ファイルが上書きされることのみを保証します。ただし、XML マッピング ファイルは引き続き追加として書き込まれます。したがって、Mybaits Generator が新しいファイルを生成する前に、古いファイルを削除することをお勧めします。
 
-`Player.java` is a data entity class file generated using Mybatis Generator, which is a mapping of database tables in the application. Each property of the `Player` class corresponds to a field in the `player` table.
+`Player.java`は Mybatis Generator を使用して生成されたデータ エンティティ クラス ファイルで、アプリケーション内のデータベース テーブルのマッピングです。 `Player`クラスの各プロパティは、 `player`テーブルのフィールドに対応します。
 
 {{< copyable "" >}}
 
@@ -262,7 +263,7 @@ public class Player {
 }
 ```
 
-`PlayerMapper.java` is a mapping interface file generated using Mybatis Generator. This file only defines the interface, and the implementation classes of interface are automatically generated using XML or annotations.
+`PlayerMapper.java`は、Mybatis Generator を使用して生成されたマッピング インターフェイス ファイルです。このファイルはインターフェイスのみを定義し、インターフェイスの実装クラスは XML またはアノテーションを使用して自動的に生成されます。
 
 {{< copyable "" >}}
 
@@ -286,7 +287,7 @@ public interface PlayerMapper {
 }
 ```
 
-`PlayerMapper.xml` is a mapping XML file generated using Mybatis Generator. Mybatis uses this to automatically generate the implementation class of the `PlayerMapper` interface.
+`PlayerMapper.xml`は、Mybatis Generator を使用して生成されたマッピング XML ファイルです。 Mybatis はこれを使用して、 `PlayerMapper`インターフェースの実装クラスを自動的に生成します。
 
 {{< copyable "" >}}
 
@@ -366,9 +367,9 @@ public interface PlayerMapper {
 </mapper>
 ```
 
-Since Mybatis Generator needs to generate the source code from the table definition, the table needs to be created first. To create the table, you can use `dbinit.sql`.
+Mybatis Generator はテーブル定義からソースコードを生成する必要があるため、最初にテーブルを作成する必要があります。テーブルを作成するには、 `dbinit.sql`を使用できます。
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 USE test;
@@ -382,9 +383,9 @@ CREATE TABLE player (
 );
 ```
 
-Split the interface `PlayerMapperEx` additionally to extend from `PlayerMapper` and write a matching `PlayerMapperEx.xml` file. Avoid changing `PlayerMapper.java` and `PlayerMapper.xml` directly. This is to avoid overwrite by Mybatis Generator.
+インターフェイス`PlayerMapperEx`をさらに分割して`PlayerMapper`から拡張し、一致する`PlayerMapperEx.xml`のファイルを書き込みます。 `PlayerMapper.java`と`PlayerMapper.xml`を直接変更することは避けてください。これは、Mybatis Generator による上書きを避けるためです。
 
-Define the added interface in `PlayerMapperEx.java`:
+`PlayerMapperEx.java`で追加されたインターフェースを定義します。
 
 {{< copyable "" >}}
 
@@ -402,7 +403,7 @@ public interface PlayerMapperEx extends PlayerMapper {
 }
 ```
 
-Define the mapping rules in `PlayerMapperEx.xml`:
+`PlayerMapperEx.xml`でマッピング ルールを定義します。
 
 {{< copyable "" >}}
 
@@ -443,7 +444,7 @@ Define the mapping rules in `PlayerMapperEx.xml`:
 </mapper>
 ```
 
-`PlayerDAO.java` is a class used to manage data, in which `DAO` means [Data Access Object](https://en.wikipedia.org/wiki/Data_access_object). The class defines a set of data manipulation methods for writing data. In it, Mybatis encapsulates a large number of operations such as object mapping and CRUD of basic objects, which greatly simplifies the code.
+`PlayerDAO.java`はデータを管理するためのクラスで、 `DAO`は[データ アクセス オブジェクト](https://en.wikipedia.org/wiki/Data_access_object)を意味します。このクラスは、データを書き込むための一連のデータ操作メソッドを定義します。その中で、Mybatis はオブジェクト マッピングや基本オブジェクトの CRUD などの多数の操作をカプセル化し、コードを大幅に簡素化します。
 
 {{< copyable "" >}}
 
@@ -561,7 +562,7 @@ public class PlayerDAO {
 }
 ```
 
-`MybatisExample` is the main class of the `plain-java-mybatis` sample application. It defines the entry functions:
+`MybatisExample`は`plain-java-mybatis`サンプル アプリケーションのメイン クラスです。エントリ関数を定義します:
 
 ```java
 package com.pingcap;
@@ -637,19 +638,19 @@ public class MybatisExample {
 
 <div label="Using Hibernate (Recommended)" value="hibernate">
 
-Compared with Hibernate, the JDBC implementation might be not a best practice, because you need to write error handling logic manually and cannot reuse code easily, which makes your code slightly redundant.
+Hibernate と比較すると、JDBC 実装はベスト プラクティスではない可能性があります。これは、エラー処理ロジックを手動で記述する必要があり、コードを簡単に再利用できないため、コードがわずかに冗長になるためです。
 
-Hibernate is a popular open-source Java ORM, and it supports TiDB dialect starting from `v6.0.0.Beta2`, which fits TiDB features well. The following instructions take `v6.0.0.Beta2` as an example.
+Hibernate は人気のあるオープンソースのJava ORM であり、TiDB の機能によく適合する`v6.0.0.Beta2`から始まる TiDB 方言をサポートしています。次の手順では、例として`v6.0.0.Beta2`を取り上げます。
 
-Change to the `plain-java-hibernate` directory:
+`plain-java-hibernate`ディレクトリに移動します。
 
-{{< copyable "shell-regular" >}}
+{{< copyable "" >}}
 
 ```shell
 cd plain-java-hibernate
 ```
 
-The structure of this directory is as follows:
+このディレクトリの構造は次のとおりです。
 
 ```
 .
@@ -666,7 +667,7 @@ The structure of this directory is as follows:
             └── hibernate.cfg.xml
 ```
 
-`hibernate.cfg.xml` is the Hibernate configuration file:
+`hibernate.cfg.xml`は Hibernate 構成ファイルです。
 
 {{< copyable "" >}}
 
@@ -696,11 +697,11 @@ The structure of this directory is as follows:
 </hibernate-configuration>
 ```
 
-`HibernateExample.java` is the main body of the `plain-java-hibernate`. Compared with JDBC, when using Hibernate, you only need to write the path of the configuration file, because Hibernate avoids differences in database creation between different databases.
+`HibernateExample.java`は`plain-java-hibernate`の本体です。 JDBC と比較して、Hibernate を使用する場合は、構成ファイルのパスを記述するだけで済みます。これは、Hibernate が異なるデータベース間のデータベース作成の違いを回避するためです。
 
-`PlayerDAO` is a class used to manage data, in which `DAO` means [Data Access Object](https://en.wikipedia.org/wiki/Data_access_object). The class defines a set of data manipulation methods for writing data. Compared with JDBC, Hibernate encapsulates a large number of operations such as object mapping and CRUD of basic objects, which greatly simplifies the code.
+`PlayerDAO`はデータを管理するためのクラスで、 `DAO`は[データ アクセス オブジェクト](https://en.wikipedia.org/wiki/Data_access_object)を意味します。このクラスは、データを書き込むための一連のデータ操作メソッドを定義します。 JDBC と比較して、Hibernate はオブジェクト マッピングや基本オブジェクトの CRUD などの多数の操作をカプセル化するため、コードが大幅に簡素化されます。
 
-`PlayerBean` is a data entity class that is a mapping for tables. Each property of a `PlayerBean` corresponds to a field in the `player` table. Compared with JDBC, `PlayerBean` in Hibernate adds annotations to indicate mapping relationships for more information.
+`PlayerBean`は、テーブルのマッピングであるデータ エンティティ クラスです。 `PlayerBean`の各プロパティは、 `player`テーブルのフィールドに対応します。 JDBC と比較して、Hibernate の`PlayerBean`は、詳細なマッピング関係を示すアノテーションを追加します。
 
 {{< copyable "" >}}
 
@@ -936,15 +937,15 @@ public class HibernateExample
 
 <div label="Using JDBC" value="jdbc">
 
-Change to the `plain-java-jdbc` directory:
+`plain-java-jdbc`ディレクトリに移動します。
 
-{{< copyable "shell-regular" >}}
+{{< copyable "" >}}
 
 ```shell
 cd plain-java-jdbc
 ```
 
-The structure of this directory is as follows:
+このディレクトリの構造は次のとおりです。
 
 ```
 .
@@ -961,9 +962,9 @@ The structure of this directory is as follows:
             └── dbinit.sql
 ```
 
-You can find initialization statements for the table creation in `dbinit.sql`:
+テーブル作成の初期化ステートメントは`dbinit.sql`にあります。
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 USE test;
@@ -977,11 +978,11 @@ CREATE TABLE player (
 );
 ```
 
-`JDBCExample.java` is the main body of the `plain-java-jdbc`. TiDB is highly compatible with the MySQL protocol, so you need to initialize a MySQL source instance `MysqlDataSource` to connect to TiDB. Then, you can initialize `PlayerDAO` for object management and use it to read, edit, add, and delete data.
+`JDBCExample.java`は`plain-java-jdbc`の本体です。 TiDB は MySQL プロトコルとの互換性が高いため、MySQL ソース インスタンス`MysqlDataSource`を初期化して TiDB に接続する必要があります。次に、オブジェクト管理用に`PlayerDAO`を初期化し、それを使用してデータの読み取り、編集、追加、および削除を行うことができます。
 
-`PlayerDAO` is a class used to manage data, in which `DAO` means [Data Access Object](https://en.wikipedia.org/wiki/Data_access_object). The class defines a set of data manipulation methods to provide the ability to write data.
+`PlayerDAO`はデータを管理するためのクラスで、 `DAO`は[データ アクセス オブジェクト](https://en.wikipedia.org/wiki/Data_access_object)を意味します。このクラスは、データを書き込む機能を提供する一連のデータ操作メソッドを定義します。
 
-`PlayerBean` is a data entity class that is a mapping for tables. Each property of a `PlayerBean` corresponds to a field in the `player` table.
+`PlayerBean`は、テーブルのマッピングであるデータ エンティティ クラスです。 `PlayerBean`の各プロパティは、 `player`テーブルのフィールドに対応します。
 
 {{< copyable "" >}}
 
@@ -1412,39 +1413,39 @@ public class JDBCExample
 
 </SimpleTab>
 
-## Step 3. Run the code
+## ステップ 3. コードを実行する {#step-3-run-the-code}
 
-The following content introduces how to run the code step by step.
+次のコンテンツでは、コードを実行する方法を順を追って紹介します。
 
-### Step 3.1 Table initialization
+### ステップ 3.1 テーブルの初期化 {#step-3-1-table-initialization}
 
 <SimpleTab groupId="language">
 
 <div label="Using Mybatis (Recommended)" value="mybatis">
 
-When using Mybatis, you need to initialize the database tables manually. If you are using a local cluster, and MySQL client has been installed locally, you can run it directly in the `plain-java-mybatis` directory:
+Mybatis を使用する場合、データベース テーブルを手動で初期化する必要があります。ローカル クラスタを使用していて、MySQL クライアントがローカルにインストールされている場合は、 `plain-java-mybatis`ディレクトリで直接実行できます。
 
-{{< copyable "shell-regular" >}}
+{{< copyable "" >}}
 
 ```shell
 make prepare
 ```
 
-Or you can execute the following command:
+または、次のコマンドを実行できます。
 
-{{< copyable "shell-regular" >}}
+{{< copyable "" >}}
 
 ```shell
 mysql --host 127.0.0.1 --port 4000 -u root < src/main/resources/dbinit.sql
 ```
 
-If you are using a non-local cluster or MySQL client has not been installed, connect to your cluster and run the statement in the `src/main/resources/dbinit.sql` file.
+非ローカル クラスターを使用している場合、または MySQL クライアントがインストールされていない場合は、クラスターに接続し、 `src/main/resources/dbinit.sql`ファイルのステートメントを実行します。
 
 </div>
 
 <div label="Using Hibernate (Recommended)" value="hibernate">
 
-No need to initialize tables manually.
+テーブルを手動で初期化する必要はありません。
 
 </div>
 
@@ -1452,29 +1453,29 @@ No need to initialize tables manually.
 
 <CustomContent platform="tidb">
 
-When using JDBC, you need to initialize the database tables manually. If you are using a local cluster, and MySQL client has been installed locally, you can run it directly in the `plain-java-jdbc` directory:
+JDBC を使用する場合、データベース テーブルを手動で初期化する必要があります。ローカル クラスタを使用していて、MySQL クライアントがローカルにインストールされている場合は、 `plain-java-jdbc`ディレクトリで直接実行できます。
 
-{{< copyable "shell-regular" >}}
+{{< copyable "" >}}
 
 ```shell
 make mysql
 ```
 
-Or you can execute the following command:
+または、次のコマンドを実行できます。
 
-{{< copyable "shell-regular" >}}
+{{< copyable "" >}}
 
 ```shell
 mysql --host 127.0.0.1 --port 4000 -u root<src/main/resources/dbinit.sql
 ```
 
-If you are using a non-local cluster or MySQL client has not been installed, connect to your cluster and run the statement in the `src/main/resources/dbinit.sql` file.
+非ローカル クラスターを使用している場合、または MySQL クライアントがインストールされていない場合は、クラスターに接続し、 `src/main/resources/dbinit.sql`ファイルのステートメントを実行します。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-When using JDBC, you need to connect to your cluster and run the statement in the `src/main/resources/dbinit.sql` file to initialize the database tables manually.
+JDBC を使用する場合、クラスターに接続し、 `src/main/resources/dbinit.sql`のファイルでステートメントを実行して、データベース テーブルを手動で初期化する必要があります。
 
 </CustomContent>
 
@@ -1482,13 +1483,13 @@ When using JDBC, you need to connect to your cluster and run the statement in th
 
 </SimpleTab>
 
-### Step 3.2 Modify parameters for TiDB Cloud
+### ステップ 3.2 TiDB Cloudのパラメーターを変更する {#step-3-2-modify-parameters-for-tidb-cloud}
 
 <SimpleTab groupId="language">
 
 <div label="Using Mybatis (Recommended)" value="mybatis">
 
-If you are using a TiDB Cloud Serverless Tier cluster, modify the `dataSource.url`, `dataSource.username`, `dataSource.password` in `mybatis-config.xml`.
+TiDB Cloud Tier クラスターを使用している場合は、 `mybatis-config.xml`の`dataSource.url` 、 `dataSource.username` 、 `dataSource.password`を変更します。
 
 {{< copyable "" >}}
 
@@ -1533,13 +1534,13 @@ If you are using a TiDB Cloud Serverless Tier cluster, modify the `dataSource.ur
 </configuration>
 ```
 
-Suppose that the password you set is `123456`, and the connection parameters you get from the cluster details page are the following:
+設定したパスワードが`123456`で、クラスターの詳細ページから取得した接続パラメーターが次のとおりであるとします。
 
-- Endpoint: `xxx.tidbcloud.com`
-- Port: `4000`
-- User: `2aEp24QWEDLqRFs.root`
+-   エンドポイント: `xxx.tidbcloud.com`
+-   ポート: `4000`
+-   ユーザー: `2aEp24QWEDLqRFs.root`
 
-In this case, you can modify the parameters in `dataSource` node as follows:
+この場合、次のように`dataSource`のノードでパラメーターを変更できます。
 
 {{< copyable "" >}}
 
@@ -1567,7 +1568,7 @@ In this case, you can modify the parameters in `dataSource` node as follows:
 
 <div label="Using Hibernate (Recommended)" value="hibernate">
 
-If you are using a TiDB Cloud Serverless Tier cluster, modify the `hibernate.connection.url`, `hibernate.connection.username`, `hibernate.connection.password` in `hibernate.cfg.xml`.
+TiDB Cloud Tier クラスターを使用している場合は、 `hibernate.cfg.xml`の`hibernate.connection.url` 、 `hibernate.connection.username` 、 `hibernate.connection.password`を変更します。
 
 {{< copyable "" >}}
 
@@ -1597,13 +1598,13 @@ If you are using a TiDB Cloud Serverless Tier cluster, modify the `hibernate.con
 </hibernate-configuration>
 ```
 
-Suppose that the password you set is `123456`, and the connection parameters you get from the cluster details page are the following:
+設定したパスワードが`123456`で、クラスターの詳細ページから取得した接続パラメーターが次のとおりであるとします。
 
-- Endpoint: `xxx.tidbcloud.com`
-- Port: `4000`
-- User: `2aEp24QWEDLqRFs.root`
+-   エンドポイント: `xxx.tidbcloud.com`
+-   ポート: `4000`
+-   ユーザー: `2aEp24QWEDLqRFs.root`
 
-In this case, you can modify the parameters as follows:
+この場合、次のようにパラメータを変更できます。
 
 {{< copyable "" >}}
 
@@ -1637,7 +1638,7 @@ In this case, you can modify the parameters as follows:
 
 <div label="Using JDBC" value="jdbc">
 
-If you are using a TiDB Cloud Serverless Tier cluster, modify the parameters of the host, port, user, and password in `JDBCExample.java`:
+TiDB Cloud Tier クラスターを使用している場合は、 `JDBCExample.java`でホスト、ポート、ユーザー、およびパスワードのパラメーターを変更します。
 
 {{< copyable "" >}}
 
@@ -1649,13 +1650,13 @@ mysqlDataSource.setUser("root");
 mysqlDataSource.setPassword("");
 ```
 
-Suppose that the password you set is `123456`, and the connection parameters you get from the cluster details page are the following:
+設定したパスワードが`123456`で、クラスターの詳細ページから取得した接続パラメーターが次のとおりであるとします。
 
-- Endpoint: `xxx.tidbcloud.com`
-- Port: `4000`
-- User: `2aEp24QWEDLqRFs.root`
+-   エンドポイント: `xxx.tidbcloud.com`
+-   ポート: `4000`
+-   ユーザー: `2aEp24QWEDLqRFs.root`
 
-In this case, you can modify the parameters as follows:
+この場合、次のようにパラメータを変更できます。
 
 {{< copyable "" >}}
 
@@ -1673,15 +1674,15 @@ mysqlDataSource.setEnabledTLSProtocols("TLSv1.2,TLSv1.3");
 
 </SimpleTab>
 
-### Step 3.3 Run
+### ステップ 3.3 実行 {#step-3-3-run}
 
 <SimpleTab groupId="language">
 
 <div label="Using Mybatis (Recommended)" value="mybatis">
 
-To run the code, you can run `make prepare`, `make gen`, `make build` and `make run` respectively:
+コードを実行するには、それぞれ`make prepare` 、 `make gen` 、 `make build` 、および`make run`を実行します。
 
-{{< copyable "shell" >}}
+{{< copyable "" >}}
 
 ```shell
 make prepare
@@ -1700,9 +1701,9 @@ make build # this command executes `mvn clean package`
 make run # this command executes `java -jar target/plain-java-mybatis-0.0.1-jar-with-dependencies.jar`
 ```
 
-Or you can use the native commands:
+または、ネイティブ コマンドを使用できます。
 
-{{< copyable "shell" >}}
+{{< copyable "" >}}
 
 ```shell
 mysql --host 127.0.0.1 --port 4000 -u root < src/main/resources/dbinit.sql
@@ -1715,79 +1716,79 @@ mvn clean package
 java -jar target/plain-java-mybatis-0.0.1-jar-with-dependencies.jar
 ```
 
-Or run the `make` command directly, which is a combination of `make prepare`, `make gen`, `make build` and `make run`.
+または、 `make prepare` 、 `make gen` 、 `make build` 、および`make run`の組み合わせである`make`コマンドを直接実行します。
 
 </div>
 
 <div label="Using Hibernate (Recommended)" value="hibernate">
 
-To run the code, you can run `make build` and `make run` respectively:
+コードを実行するには、それぞれ`make build`と`make run`を実行します。
 
-{{< copyable "shell" >}}
+{{< copyable "" >}}
 
 ```shell
 make build # this command executes `mvn clean package`
 make run # this command executes `java -jar target/plain-java-jdbc-0.0.1-jar-with-dependencies.jar`
 ```
 
-Or you can use the native commands:
+または、ネイティブ コマンドを使用できます。
 
-{{< copyable "shell" >}}
+{{< copyable "" >}}
 
 ```shell
 mvn clean package
 java -jar target/plain-java-jdbc-0.0.1-jar-with-dependencies.jar
 ```
 
-Or run the `make` command directly, which is a combination of `make build` and `make run`.
+または、 `make build`と`make run`の組み合わせである`make`コマンドを直接実行します。
 
 </div>
 
 <div label="Using JDBC" value="jdbc">
 
-To run the code, you can run `make build` and `make run` respectively:
+コードを実行するには、それぞれ`make build`と`make run`を実行します。
 
-{{< copyable "shell" >}}
+{{< copyable "" >}}
 
 ```shell
 make build # this command executes `mvn clean package`
 make run # this command executes `java -jar target/plain-java-jdbc-0.0.1-jar-with-dependencies.jar`
 ```
 
-Or you can use the native commands:
+または、ネイティブ コマンドを使用できます。
 
-{{< copyable "shell" >}}
+{{< copyable "" >}}
 
 ```shell
 mvn clean package
 java -jar target/plain-java-jdbc-0.0.1-jar-with-dependencies.jar
 ```
 
-Or run the `make` command directly, which is a combination of `make build` and `make run`.
+または、 `make build`と`make run`の組み合わせである`make`コマンドを直接実行します。
 
 </div>
 
 </SimpleTab>
 
-## Step 4. Expected output
+## ステップ 4. 期待される出力 {#step-4-expected-output}
 
 <SimpleTab groupId="language">
 
 <div label="Using Mybatis (Recommended)" value="mybatis">
 
-[Mybatis Expected Output](https://github.com/pingcap-inc/tidb-example-java/blob/main/Expected-Output.md#plain-java-mybatis)
+[Mybatis の期待される出力](https://github.com/pingcap-inc/tidb-example-java/blob/main/Expected-Output.md#plain-java-mybatis)
 
 </div>
 
 <div label="Using Hibernate (Recommended)" value="hibernate">
 
-[Hibernate Expected Output](https://github.com/pingcap-inc/tidb-example-java/blob/main/Expected-Output.md#plain-java-hibernate)
+[休止状態の期待される出力](https://github.com/pingcap-inc/tidb-example-java/blob/main/Expected-Output.md#plain-java-hibernate)
 
 </div>
 
 <div label="Using JDBC" value="jdbc">
 
-[JDBC Expected Output](https://github.com/pingcap-inc/tidb-example-java/blob/main/Expected-Output.md#plain-java-jdbc)
+[JDBC の期待される出力](https://github.com/pingcap-inc/tidb-example-java/blob/main/Expected-Output.md#plain-java-jdbc)
 
 </div>
 

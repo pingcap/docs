@@ -3,15 +3,15 @@ title: LOCK STATS
 summary: An overview of the usage of LOCK STATS for the TiDB database.
 ---
 
-# LOCK STATS
+# ロック統計 {#lock-stats}
 
-`LOCK STATS` is used to lock the statistics of a table or tables.
+`LOCK STATS`は、1 つまたは複数のテーブルの統計をロックするために使用されます。
 
-> **Warning:**
+> **警告：**
 >
-> Locking statistics is an experimental feature for the current version. It is not recommended to use it in the production environment.
+> 統計のロックは、現在のバージョンの実験的機能です。本番環境で使用することはお勧めしません。
 
-## Synopsis
+## あらすじ {#synopsis}
 
 ```ebnf+diagram
 LockStatsStmt ::=
@@ -24,9 +24,9 @@ TableName ::=
     Identifier ( '.' Identifier )?
 ```
 
-## Examples
+## 例 {#examples}
 
-Create table `t`, and insert data into it. When the statistics of table `t` are not locked, the `ANALYZE` statement can be successfully executed.
+テーブル`t`を作成し、そこにデータを挿入します。テーブル`t`の統計がロックされていない場合、 `ANALYZE`ステートメントを正常に実行できます。
 
 ```sql
 mysql> create table t(a int, b int);
@@ -48,7 +48,7 @@ mysql> show warnings;
 1 row in set (0.00 sec)
 ```
 
-Lock the statistics of table `t` and execute `ANALYZE`. From the output of `SHOW STATS_LOCKED`, you can see that the statistics of table `t` have been locked. The warning message shows that the `ANALYZE` statement has skipped table `t`.
+テーブル`t`の統計をロックし、 `ANALYZE`を実行します。 `SHOW STATS_LOCKED`の出力から、表`t`の統計がロックされていることがわかります。警告メッセージは、 `ANALYZE`ステートメントがテーブル`t`をスキップしたことを示しています。
 
 ```sql
 mysql> lock stats t;
@@ -75,7 +75,7 @@ mysql> show warnings;
 2 rows in set (0.00 sec)
 ```
 
-Unlock the statistics of table `t` and `ANALYZE` can be successfully executed again.
+テーブル`t`と`ANALYZE`の統計のロックを解除すると、再び正常に実行できます。
 
 ```sql
 mysql> unlock stats t;
@@ -93,12 +93,12 @@ mysql> show warnings;
 1 row in set (0.00 sec)
 ```
 
-## MySQL compatibility
+## MySQL の互換性 {#mysql-compatibility}
 
-This statement is a TiDB extension to MySQL syntax.
+このステートメントは、MySQL 構文に対する TiDB 拡張です。
 
-## See also
+## こちらもご覧ください {#see-also}
 
-* [Statistics](/statistics.md#lock-statistics)
-* [UNLOCK STATS](/sql-statements/sql-statement-unlock-stats.md)
-* [SHOW STATS_LOCKED](/sql-statements/sql-statement-show-stats-locked.md)
+-   [統計](/statistics.md#lock-statistics)
+-   [統計のロックを解除](/sql-statements/sql-statement-unlock-stats.md)
+-   [SHOW STATS_LOCKED](/sql-statements/sql-statement-show-stats-locked.md)

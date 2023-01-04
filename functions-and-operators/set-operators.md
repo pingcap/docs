@@ -3,13 +3,13 @@ title: Set Operations
 summary: Learn the supported set operations in TiDB.
 ---
 
-# Set Operations
+# セット操作 {#set-operations}
 
-TiDB supports three set operations using the UNION, EXCEPT, and INTERSECT operators. The smallest unit of a set is a [`SELECT` statement](/sql-statements/sql-statement-select.md).
+TiDB は、UNION、EXCEPT、および INTERSECT 演算子を使用した 3 つのセット操作をサポートしています。セットの最小単位は[`SELECT`ステートメント](/sql-statements/sql-statement-select.md)です。
 
-## UNION operator
+## UNION 演算子 {#union-operator}
 
-In mathematics, the union of two sets A and B consists of all elements that are in A or in B. For example:
+数学では、2 つのセット A と B の結合は、A または B にあるすべての要素で構成されます。たとえば、次のようになります。
 
 ```sql
 SELECT 1 UNION SELECT 2;
@@ -22,7 +22,7 @@ SELECT 1 UNION SELECT 2;
 2 rows in set (0.00 sec)
 ```
 
-TiDB supports both `UNION DISTINCT` and `UNION ALL` operators. `UNION DISTINCT` removes duplicate records from the result set, while `UNION ALL` keeps all records including duplicates. `UNION DISTINCT` is used by default in TiDB.
+TiDB は、 `UNION DISTINCT`演算子と`UNION ALL`演算子の両方をサポートしています。 `UNION DISTINCT`は結果セットから重複レコードを削除しますが、 `UNION ALL`は重複を含むすべてのレコードを保持します。 TiDB ではデフォルトで`UNION DISTINCT`が使用されます。
 
 ```sql
 CREATE TABLE t1 (a int);
@@ -31,7 +31,7 @@ INSERT INTO t1 VALUES (1),(2);
 INSERT INTO t2 VALUES (1),(3);
 ```
 
-Examples for `UNION DISTINCT` and `UNION ALL` queries are respectively as follows:
+`UNION DISTINCT`と`UNION ALL`のクエリの例は、それぞれ次のとおりです。
 
 ```sql
 SELECT * FROM t1 UNION DISTINCT SELECT * FROM t2;
@@ -56,9 +56,9 @@ SELECT * FROM t1 UNION ALL SELECT * FROM t2;
 4 rows in set (0.00 sec)
 ```
 
-## EXCEPT operator
+## EXCEPT 演算子 {#except-operator}
 
-If A and B are two sets, EXCEPT returns the difference set of A and B which consists of elements that are in A but not in B.
+A と B が 2 つのセットである場合、EXCEPT は、A には含まれるが B には含まれない要素で構成される A と B の差分セットを返します。
 
 ```sql
 SELECT * FROM t1 EXCEPT SELECT * FROM t2;
@@ -70,11 +70,11 @@ SELECT * FROM t1 EXCEPT SELECT * FROM t2;
 1 rows in set (0.00 sec)
 ```
 
-`EXCEPT ALL` operator is not yet supported.
+`EXCEPT ALL`演算子はまだサポートされていません。
 
-## INTERSECT operator
+## INTERSECT 演算子 {#intersect-operator}
 
-In mathematics, the intersection of two sets A and B consists of all elements that are both in A and B, and no other elements.
+数学では、2 つのセット A と B の交点は、A と B の両方にあるすべての要素で構成され、他の要素は含まれません。
 
 ```sql
 SELECT * FROM t1 INTERSECT SELECT * FROM t2;
@@ -86,7 +86,7 @@ SELECT * FROM t1 INTERSECT SELECT * FROM t2;
 1 rows in set (0.00 sec)
 ```
 
-`INTERSECT ALL` operator is not yet supported. INTERSECT operator has higher precedence over EXCEPT and UNION operators.
+`INTERSECT ALL`演算子はまだサポートされていません。 INTERSECT 演算子は、EXCEPT および UNION 演算子よりも優先されます。
 
 ```sql
 SELECT * FROM t1 UNION ALL SELECT * FROM t1 INTERSECT SELECT * FROM t2;
@@ -100,9 +100,9 @@ SELECT * FROM t1 UNION ALL SELECT * FROM t1 INTERSECT SELECT * FROM t2;
 3 rows in set (0.00 sec)
 ```
 
-## Parentheses
+## 括弧 {#parentheses}
 
-TiDB supports using parentheses to specify the precedence of set operations. Expressions in parentheses are processed first.
+TiDB は、集合操作の優先順位を指定するための括弧の使用をサポートしています。括弧内の式が最初に処理されます。
 
 ```sql
 (SELECT * FROM t1 UNION ALL SELECT * FROM t1) INTERSECT SELECT * FROM t2;
@@ -114,9 +114,9 @@ TiDB supports using parentheses to specify the precedence of set operations. Exp
 1 rows in set (0.00 sec)
 ```
 
-## Use `ORDER BY` and `LIMIT`
+## <code>ORDER BY</code>と<code>LIMIT</code>を使用する {#use-code-order-by-code-and-code-limit-code}
 
-TiDB supports using [`ORDER BY`](/media/sqlgram/OrderByOptional.png) or [`LIMIT`](/media/sqlgram/LimitClause.png) clause in set operations. These two clauses must be at the end of the entire statement.
+TiDB は、集合操作での[`ORDER BY`](/media/sqlgram/OrderByOptional.png)つまたは[`LIMIT`](/media/sqlgram/LimitClause.png)の句の使用をサポートしています。これら 2 つの句は、ステートメント全体の最後にある必要があります。
 
 ```sql
 (SELECT * FROM t1 UNION ALL SELECT * FROM t1 INTERSECT SELECT * FROM t2) ORDER BY a LIMIT 2;

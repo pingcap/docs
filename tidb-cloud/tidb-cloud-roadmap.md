@@ -3,251 +3,30 @@ title: TiDB Cloud Roadmap
 summary: Learn about TiDB Cloud's roadmap for the next few months. See the new features or improvements in advance, follow the progress, learn about the key milestones on the way.
 ---
 
-# TiDB Cloud Roadmap
+# TiDB Cloudロードマップ {#tidb-cloud-roadmap}
 
-The TiDB Cloud roadmap brings you what's coming in the near future, so you can see the new features or improvements in advance, follow the progress, and learn about the key milestones on the way. In the course of development, this roadmap is subject to change based on user needs, feedback, and our assessment.
+TiDB Cloudのロードマップは、近い将来に何が起こるかを示しているため、新機能や改善点を事前に確認し、進行状況を追跡し、途中で重要なマイルストーンについて知ることができます。開発の過程で、このロードマップは、ユーザーのニーズ、フィードバック、および評価に基づいて変更される可能性があります。
 
-> **Safe harbor statement:**
+> **セーフ ハーバー ステートメント:**
 >
-> Any unreleased features discussed or referenced in our documents, roadmaps, blogs, websites, press releases, or public statements that are not currently available ("unreleased features") are subject to change at our discretion and may not be delivered as planned or at all. Customers acknowledge that purchase decisions are solely based on features and functions that are currently available, and that PingCAP is not obliged to deliver aforementioned unreleased features as part of the contractual agreement unless otherwise stated.
+> ドキュメント、ロードマップ、ブログ、ウェブサイト、プレス リリース、または公式声明で説明または参照されている、現在利用できない未リリースの機能 (「未リリースの機能」) は、当社の裁量で変更される可能性があり、計画どおりに提供されないか、まったく提供されない可能性があります。 .お客様は、購入の決定は現在利用可能な関数のみに基づいていること、および PingCAP は、別段の記載がない限り、契約上の合意の一部として前述の未リリースの機能を提供する義務を負わないことを認めます。
 
-## Developer experience and enterprise-grade features
+## 開発者の経験とエンタープライズ グレードの機能 {#developer-experience-and-enterprise-grade-features}
 
-<table>
-<thead>
-  <tr>
-    <th>Domain</th>
-    <th>Feature</th>
-    <th>Description</th>
-  </tr>
-</thead>
-<tbody>
-  <tr>
-    <td rowspan="2">Developer experience</td>
-    <td>Load sample datasets manually.</td>
-    <td>Support loading sample datasets into a cluster. You can use this data to quickly get started with testing the features of TiDB Cloud.</td>
-  </tr>
-  <tr>
-    <td>Add SQL Editor.</td>
-    <td>Write and run SQL queries, and view the results in the TiDB console.</td>
-  </tr>
-  <tr>
-    <td>Cloud provider marketplace</td>
-    <td>Improve the user experience from AWS Marketplace and GCP Marketplace.</td>
-    <td>Improve the user journey and experience of users who sign up from AWS Marketplace and GCP Marketplace.</td>
-  </tr>
-  <tr>
-    <td rowspan="2">Enterprise-grade features</td>
-    <td>Manage multiple organizations.</td>
-    <td>Support managing multiple organizations. A user can create and join more than one organization.</td>
-  </tr>
-  <tr>
-    <td>Support hierarchical user roles and permissions.</td>
-    <td>Support role-based access control (RBAC) for the TiDB Cloud console. You can manage user permissions in a fine-grained manner, such as by cluster, billing, and member.</td>
-  </tr>
-  <tr>
-    <td rowspan="2">UI experience</td>
-    <td>Provide a more convenient feedback channel.</td>
-    <td>Users can quickly get help with and give feedback on the product.</td>
-  </tr>
-  <tr>
-    <td>Add left navigation.</td>
-    <td>Present the TiDB Cloud console in the structure of organizations, projects, and users to simplify the layout logic and improve user experience.</td>
-  </tr>
-</tbody>
-</table>
+<table><thead><tr><th>ドメイン</th><th>特徴</th><th>説明</th></tr></thead><tbody><tr><td rowspan="2">開発者の経験</td><td>サンプル データセットを手動で読み込みます。</td><td>サンプル データセットのクラスターへの読み込みをサポートします。このデータを使用して、 TiDB Cloudの機能のテストをすぐに開始できます。</td></tr><tr><td> SQL エディターを追加します。</td><td> SQL クエリを作成して実行し、TiDB コンソールで結果を表示します。</td></tr><tr><td>クラウド プロバイダー マーケットプレイス</td><td>AWS Marketplace と GCP Marketplace からのユーザー エクスペリエンスを向上させます。</td><td> AWS Marketplace と GCP Marketplace からサインアップするユーザーのユーザー ジャーニーとエクスペリエンスを向上させます。</td></tr><tr><td rowspan="2">エンタープライズ グレードの機能</td><td>複数の組織を管理します。</td><td>複数の組織の管理をサポートします。ユーザーは、複数の組織を作成して参加できます。</td></tr><tr><td>階層的なユーザーの役割と権限をサポートします。</td><td> TiDB Cloudコンソールの役割ベースのアクセス制御 (RBAC) をサポートします。クラスター、課金、メンバーなど、きめ細かい方法でユーザーのアクセス許可を管理できます。</td></tr><tr><td rowspan="2"> UI エクスペリエンス</td><td>より便利なフィードバック チャネルを提供します。</td><td>ユーザーは、製品に関するヘルプやフィードバックをすぐに得ることができます。</td></tr><tr><td>左ナビゲーションを追加します。</td><td>組織、プロジェクト、およびユーザーの構造でTiDB Cloudコンソールを表示して、レイアウト ロジックを簡素化し、ユーザー エクスペリエンスを向上させます。</td></tr></tbody></table>
 
-## TiDB kernel
+## TiDB カーネル {#tidb-kernel}
 
-<table>
-<thead>
-  <tr>
-    <th>Domain</th>
-    <th>Feature</th>
-    <th>Description</th>
-  </tr>
-</thead>
-<tbody>
-<tr>
-<td rowspan="3">
-<p>SQL</p>
-</td>
-<td>
-<p>Support the JSON function.</p>
-<ul>
-<li>Expression index</li>
-<li>Multi-value index</li>
-<li>Partial index</li>
-</ul>
-</td>
-<td>
-<p>In business scenarios that require flexible schema definitions, the application can use JSON to store information for ODS, transaction indicators, commodities, game characters, and props.</p>
-</td>
-</tr>
-<tr>
-<td>
-<p>Support cluster-level flashback.</p>
-</td>
-<td>
-<p>In game rollback scenarios, the flashback can be used to achieve a fast rollback of the current cluster. This solves the common problems in the gaming industry such as version errors and bugs.</p>
-</td>
-</tr>
-<tr>
-<td>
-<p>Support time to live (TTL).</p>
-</td>
-<td>
-<p>This feature enables automatic data cleanup in limited data archiving scenarios.</p>
-</td>
-</tr>
-<tr>
-<td rowspan="2">
-<p>Hybrid Transactional and Analytical Processing (HTAP)</p>
-</td>
-<td>
-<p>Support TiFlash result write-back.</p>
-</td>
-<td>
-<p>Support <code>INSERT INTO SELECT</code>.</p>
-<ul>
-<li>Easily write analysis results in TiFlash back to TiDB.</li>
-<li>Provide complete ACID transactions, more convenient and reliable than general ETL solutions.</li>
-<li>Set a hard limit on the threshold of intermediate result size, and report an error if the threshold is exceeded.</li>
-<li>Support fully distributed transactions, and remove or relax the limit on the intermediate result size.</li>
-</ul>
-<p>These features combined enable a way to materialize intermediate results. The analysis results can be easily reused, which reduces unnecessary ad-hoc queries, improves the performance of BI and other applications (by pulling results directly) and reduces system load (by avoiding duplicated computation), thereby improving the overall data pipeline efficiency and reducing costs. It will make TiFlash an online service.</p>
-</td>
-</tr>
-<tr>
-<td>
-<p>Support FastScan for TiFlash.</p>
-</td>
-<td>
-<ul>
-<li>FastScan provides weak consistency but faster table scan capability.</li>
-<li>Further optimize the join order, shuffle, and exchange algorithms to improve computing efficiency and boost performance for complex queries.</li>
-<li>Add a fine-grained data sharding mechanism to optimize the <code>COUNT(DISTINCT)</code> function and high cardinality aggregation.</li>
-</ul>
-<p>This feature improves the basic computing capability of TiFlash, and optimizes the performance and reliability of the underlying algorithms of the columnar storage and MPP engine.</p>
-</td>
-</tr>
-<tr>
-<td>
-<p>Proxy</p>
-</td>
-<td>
-<p>Support TiDB proxy.</p>
-</td>
-<td>
-<p>Implement automatic load balancing so that upgrading a cluster or modifying configurations does not affect the application. After scaling out or scaling in the cluster, the application can automatically rebalance the connection without reconnecting.</p>
-<p>In scenarios such as upgrades and configuration changes, TiDB proxy is more business-friendly.</p>
-</td>
-</tr>
-</tbody>
-</table>
+<table><thead><tr><th>ドメイン</th><th>特徴</th><th>説明</th></tr></thead><tbody><tr><td rowspan="3"><p>SQL</p></td><td><p> JSON 関数をサポートします。</p><ul><li>発現指数</li><li>多値インデックス</li><li>部分索引</li></ul></td><td><p>柔軟なスキーマ定義が必要なビジネス シナリオでは、アプリケーションは JSON を使用して、ODS、トランザクション インジケーター、商品、ゲーム キャラクター、および小道具の情報を格納できます。</p></td></tr><tr><td><p>クラスタ レベルのフラッシュバックをサポートします。</p></td><td><p>ゲームのロールバック シナリオでは、フラッシュバックを使用して、現在のクラスターの高速ロールバックを実現できます。これにより、バージョン エラーやバグなど、ゲーム業界でよくある問題が解決されます。</p></td></tr><tr><td><p>有効期限 (TTL) をサポートします。</p></td><td><p>この機能により、限られたデータ アーカイブ シナリオでの自動データ クリーンアップが可能になります。</p></td></tr><tr><td rowspan="2"><p>ハイブリッド トランザクションおよび分析処理 (HTAP)</p></td><td><p> TiFlash結果の書き戻しをサポートします。</p></td><td><p> <code>INSERT INTO SELECT</code>をサポートします。</p><ul><li> TiFlash の解析結果をTiFlashに簡単に書き戻します。</li><li>一般的な ETL ソリューションよりも便利で信頼性の高い、完全なACIDトランザクションを提供します。</li><li>中間結果のサイズのしきい値にハード リミットを設定し、しきい値を超えた場合はエラーを報告します。</li><li>完全に分散されたトランザクションをサポートし、中間結果のサイズの制限を削除または緩和します。</li></ul><p>これらの機能を組み合わせることで、中間結果を具体化する方法が可能になります。分析結果は簡単に再利用できるため、不要なアドホック クエリが減り、(結果を直接取得することで) BI やその他のアプリケーションのパフォーマンスが向上し、(重複した計算を回避することで) システムの負荷が軽減されるため、データ パイプライン全体の効率が向上し、コスト。これにより、 TiFlashがオンライン サービスになります。</p></td></tr><tr><td><p> TiFlashの FastScan をサポートします。</p></td><td><ul><li> FastScan は弱い一貫性を提供しますが、より高速なテーブル スキャン機能を提供します。</li><li>結合順序、シャッフル、および交換アルゴリズムをさらに最適化して、計算効率を改善し、複雑なクエリのパフォーマンスを向上させます。</li><li>細かいデータ シャーディング メカニズムを追加して、 <code>COUNT(DISTINCT)</code>関数と高カーディナリティ集計を最適化します。</li></ul><p>この機能により、 TiFlashの基本的なコンピューティング機能が向上し、コラムナー ストレージと MPP エンジンの基礎となるアルゴリズムのパフォーマンスと信頼性が最適化されます。</p></td></tr><tr><td><p>プロキシー</p></td><td><p>TiDB プロキシをサポートします。</p></td><td><p>クラスターのアップグレードまたは構成の変更がアプリケーションに影響を与えないように、自動負荷分散を実装します。クラスターをスケールアウトまたはスケールインした後、アプリケーションは再接続せずに接続を自動的に再調整できます。</p><p>アップグレードや構成変更などのシナリオでは、TiDB プロキシはよりビジネスに適しています。</p></td></tr></tbody></table>
 
-## Diagnosis and maintenance
+## 診断とメンテナンス {#diagnosis-and-maintenance}
 
-<table>
-<thead>
-  <tr>
-    <th>Domain</th>
-    <th>Feature</th>
-    <th>Description</th>
-  </tr>
-</thead>
-<tbody>
-  <tr>
-    <td>Self-service cluster analysis and diagnosis using reports</td>
-    <td><ul><li>Cluster health report.</li><li>Cluster status comparison report.</li><li>Cluster performance analysis report.</li><li>Cluster system check report.</li></ul></td>
-    <td><ul><li>Provide diagnosis and analysis reports for several different usage scenarios.</li><li>Locate cluster failures for some scenarios and provide recommended solutions.</li><li>Provide cluster key status summary for some scenarios.</li></ul></td>
-  </tr>
-  <tr>
-    <td>SQL tuning for HTAP workloads</td>
-    <td><ul><li>Provide SQL execution information from the perspective of applications.</li><li>Provide suggestions on optimizing SQL for TiFlash and TiKV in HTAP workloads.</li></ul></td>
-    <td><ul><li>Provide a dashboard that displays a SQL execution overview from the perspective of applications in HTAP workloads.</li><li>For one or several HTAP scenarios, provide suggestions on SQL optimization.</li></ul></td>
-  </tr>
-  <tr>
-    <td>Cluster diagnosis data accessibility </td>
-    <td><ul><li>Access diagnosis data online in real time.</li><li>Access diagnosis data offline.</li><li>Build logic for data reconstruction.</li></ul></td>
-    <td><ul><li>Integrate with various monitoring and diagnosis systems to improve the real-time data access capability.</li><li>Provide offline data access for large-scale diagnosis, analysis, and tuning.</li><li>Improve data stability and build logic for data reconstruction.</li></ul></td>
-  </tr>
-  <tr>
-    <td>TiDB Cloud service tracing</td>
-    <td>Build the monitoring links for each component of TiDB Cloud service.</td>
-    <td><ul><li>Build the tracing links for each component of TiDB Cloud service in user scenarios.</li><li>Provide assessment on service availability from the perspective of users.</li></ul></td>
-  </tr>
-</tbody>
-</table>
+<table><thead><tr><th>ドメイン</th><th>特徴</th><th>説明</th></tr></thead><tbody><tr><td>レポートを使用したセルフサービスのクラスター分析と診断</td><td><ul><li>クラスタの正常性レポート。</li><li>クラスタ状況比較レポート。</li><li>クラスタパフォーマンス分析レポート。</li><li>クラスタシステムのチェック レポート。</li></ul></td><td><ul><li>いくつかの異なる使用シナリオの診断および分析レポートを提供します。</li><li>一部のシナリオでクラスターの障害を特定し、推奨される解決策を提供します。</li><li>一部のシナリオでは、クラスター キーのステータスの概要を提供します。</li></ul></td></tr><tr><td> HTAP ワークロードの SQL チューニング</td><td><ul><li>アプリケーションの観点から SQL 実行情報を提供します。</li><li> HTAP ワークロードでのTiFlashおよび TiKV の SQL の最適化に関する提案を提供します。</li></ul></td><td><ul><li> HTAP ワークロードのアプリケーションの観点から SQL 実行の概要を表示するダッシュボードを提供します。</li><li> 1 つまたは複数の HTAP シナリオについて、SQL の最適化に関する提案を提供してください。</li></ul></td></tr><tr><td>クラスタ診断データのアクセシビリティ</td><td><ul><li>オンラインでリアルタイムに診断データにアクセスします。</li><li>診断データにオフラインでアクセスします。</li><li>データ再構築のロジックを構築します。</li></ul></td><td><ul><li>さまざまな監視および診断システムと統合して、リアルタイムのデータ アクセス機能を向上させます。</li><li>大規模な診断、分析、およびチューニングのためのオフライン データ アクセスを提供します。</li><li>データの安定性を向上させ、データ再構築のためのロジックを構築します。</li></ul></td></tr><tr><td> TiDB Cloudサービスのトレース</td><td>TiDB Cloudサービスの各コンポーネントの監視リンクを構築します。</td><td><ul><li>ユーザー シナリオでTiDB Cloudサービスの各コンポーネントのトレース リンクを構築します。</li><li>ユーザーの視点からサービスの可用性を評価します。</li></ul></td></tr></tbody></table>
 
-## Data backup and migration
+## データのバックアップと移行 {#data-backup-and-migration}
 
-<table>
-<thead>
-  <tr>
-    <th>Domain</th>
-    <th>Feature</th>
-    <th>Description</th>
-  </tr>
-</thead>
-<tbody>
-  <tr>
-    <td>Data replication to Kafka via TiCDC</td>
-    <td>Reduce TiCDC replication latency in daily operations.</td>
-    <td>When TiKV, TiDB, PD, or TiCDC nodes are offline in a planned maintenance window, the replication latency of TiCDC can be reduced to less than 10 seconds.</td>
-  </tr>
-  <tr>
-    <td>Data disaster recovery</td>
-    <td>TiCDC provides cross-region disaster recovery on the cloud.</td>
-    <td>TiCDC provides disaster recovery that ensures data eventual consistency with lower cost on TiDB Cloud.</td>
-  </tr>
-  <tr>
-    <td>Point-in-time recovery (PITR)</td>
-    <td>Support PITR on the cloud.</td>
-    <td>Support cluster-level PITR on the cloud.</td>
-  </tr>
-  <tr>
-    <td>Backup and restore</td>
-    <td>Backup and restore service based on AWS EBS or GCP persistent disk snapshots.</td>
-    <td>Provide backup and restore service on the cloud based on AWS EBS or GCP persistent disk snapshots.</td>
-  </tr>
-  <tr>
-    <td rowspan="2">Online data migration</td>
-    <td>Support full data migration from Amazon Relational Database Service (RDS).</td>
-    <td>Full data migration from RDS to TiDB Cloud</td>
-  </tr>
-  <tr>
-    <td>Support incremental data migration from RDS.</td>
-    <td>Full and incremental data migration from MySQL services such as Amazon RDS and Aurora to TiDB Cloud.</td>
-  </tr>
-</tbody>
-</table>
+<table><thead><tr><th>ドメイン</th><th>特徴</th><th>説明</th></tr></thead><tbody><tr><td>TiCDC を介した Kafka へのデータ複製</td><td>日常業務における TiCDC レプリケーションのレイテンシーを短縮します。</td><td> TiKV、TiDB、PD、または TiCDC ノードが計画メンテナンス ウィンドウでオフラインの場合、TiCDC のレプリケーションレイテンシーを 10 秒未満に短縮できます。</td></tr><tr><td>データ災害復旧</td><td>TiCDC は、クラウド上でリージョン間のディザスター リカバリーを提供します。</td><td> TiCDC は、 TiDB Cloudで低コストでデータの最終的な整合性を保証するディザスタ リカバリを提供します。</td></tr><tr><td>ポイントインタイムリカバリ (PITR)</td><td>クラウドで PITR をサポートします。</td><td>クラウドでクラスター レベルの PITR をサポートします。</td></tr><tr><td>バックアップと復元</td><td>AWS EBS または GCP 永続ディスクのスナップショットに基づくバックアップおよび復元サービス。</td><td> AWS EBS または GCP 永続ディスク スナップショットに基づいて、クラウド上でバックアップおよび復元サービスを提供します。</td></tr><tr><td rowspan="2">オンライン データ移行</td><td>Amazon Relational Database Service (RDS) からの完全なデータ移行をサポートします。</td><td> RDS からTiDB Cloudへの完全なデータ移行</td></tr><tr><td>RDS からの増分データ移行をサポートします。</td><td> Amazon RDS やAuroraなどの MySQL サービスからTiDB Cloudへの完全および増分データ移行。</td></tr></tbody></table>
 
-## Security
+## 安全 {#security}
 
-<table>
-<thead>
-  <tr>
-    <th>Domain</th>
-    <th>Feature</th>
-    <th>Description</th>
-  </tr>
-</thead>
-<tbody>
-  <tr>
-    <td>Key rotation</td>
-    <td>Support key rotation on TiDB clusters for AWS.</td>
-    <td>Support key rotation on TiDB clusters to improve the security of encrypted data.</td>
-  </tr>
-  <tr>
-    <td>Key management</td>
-    <td>Support making your own key manageable (BYOK from AWS).</td>
-    <td>Allow you to use your own data encryption keys on AWS.</td>
-  </tr>
-   <tr>
-    <td>Audit logging</td>
-    <td>Enhance the database audit logging.</td>
-    <td>Enhance the ability of database audit logging and provide the visual UI access.</td>
-  </tr>
-</tbody>
-</table>
+<table><thead><tr><th>ドメイン</th><th>特徴</th><th>説明</th></tr></thead><tbody><tr><td>鍵のローテーション</td><td>AWS の TiDB クラスターでキー ローテーションをサポートします。</td><td>暗号化されたデータのセキュリティを向上させるために、TiDB クラスターでキー ローテーションをサポートします。</td></tr><tr><td>キー管理</td><td>独自のキーを管理可能にするサポート (AWS からの BYOK)。</td><td> AWS で独自のデータ暗号化キーを使用できるようにします。</td></tr><tr><td>監査ログ</td><td>データベース監査ログを強化します。</td><td>データベース監査ロギングの機能を強化し、視覚的な UI アクセスを提供します。</td></tr></tbody></table>

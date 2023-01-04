@@ -3,123 +3,124 @@ title: Create a TiDB Cluster
 summary: Learn how to create your TiDB cluster.
 ---
 
-# Create a TiDB Cluster
+# TiDBクラスタを作成する {#create-a-tidb-cluster}
 
-This tutorial guides you through signing up and creating a TiDB cluster.
+このチュートリアルでは、サインアップして TiDB クラスターを作成する方法について説明します。
 
-## Step 1. Create a TiDB Cloud account
+## ステップ 1. TiDB Cloudアカウントを作成する {#step-1-create-a-tidb-cloud-account}
 
-1. If you do not have a TiDB Cloud account, click [here](https://tidbcloud.com/signup) to sign up for an account.
+1.  TiDB Cloudアカウントを持っていない場合は、 [ここ](https://tidbcloud.com/signup)をクリックしてアカウントにサインアップします。
 
-    - For Google users, you can also sign up with Google. To do that, click **Sign up with Google** on the [sign up](https://tidbcloud.com/signup) page. Your email address and password will be managed by Google and cannot be changed using TiDB Cloud console.
-    - For GitHub users, you can also sign up with GitHub. To do that, click **Sign up with GitHub** on the [sign up](https://tidbcloud.com/signup) page. Your email address and password will be managed by GitHub and cannot be changed using TiDB Cloud console.
-    - For AWS Marketplace users, you can also sign up through AWS Marketplace. To do that, search for `TiDB Cloud` in [AWS Marketplace](https://aws.amazon.com/marketplace), subscribe to TiDB Cloud, and then follow the onscreen instructions to set up your TiDB Cloud account.
+    -   Google ユーザーの場合は、Google でサインアップすることもできます。これを行うには、 [サインアップ](https://tidbcloud.com/signup)ページで [ **Google にサインアップ**] をクリックします。メールアドレスとパスワードは Google によって管理され、 TiDB Cloudコンソールを使用して変更することはできません。
+    -   GitHub ユーザーの場合は、GitHub にサインアップすることもできます。これを行うには、 [サインアップ](https://tidbcloud.com/signup)ページで [ **Sign up with GitHub** ] をクリックします。メールアドレスとパスワードは GitHub によって管理され、 TiDB Cloudコンソールを使用して変更することはできません。
+    -   AWS Marketplace ユーザーは、AWS Marketplace からサインアップすることもできます。これを行うには、 `TiDB Cloud` in [AWS マーケットプレイス](https://aws.amazon.com/marketplace)を検索し、 TiDB Cloudにサブスクライブしてから、画面の指示に従ってTiDB Cloudアカウントをセットアップします。
 
-2. [Log in](https://tidbcloud.com/) to your TiDB Cloud account.
+2.  [ログイン](https://tidbcloud.com/)をTiDB Cloudアカウントに追加します。
 
-## Step 2. Select a cluster tier
+## ステップ 2. クラスター層を選択する {#step-2-select-a-cluster-tier}
 
-TiDB Cloud provides the following two cluster tier options. Before creating a TiDB cluster, consider which option suits your need better:
+TiDB Cloudは、次の 2 つのクラスター層オプションを提供します。 TiDB クラスターを作成する前に、どのオプションがニーズに適しているかを検討してください。
 
-- Serverless Tier (Beta)
+-   サーバーレス層 (ベータ)
 
-    The TiDB Cloud Serverless Tier is a fully managed service of TiDB. It is still in the beta phase and cannot be used in production. However, you can use Serverless Tier clusters for non-production workloads such as prototype applications, hackathons, academic courses, or to provide a temporary data service for your datasets.
+    TiDB Cloud Tier は、TiDB のフル マネージド サービスです。まだベータ段階であり、本番環境では使用できません。ただし、サーバーレス層クラスターは、プロトタイプ アプリケーション、ハッカソン、アカデミック コースなどの非運用ワークロードに使用したり、データセットに一時的なデータ サービスを提供したりするために使用できます。
 
-- Dedicated Tier
+-   Dedicated Tier
 
-    The TiDB Cloud Dedicated Tier is dedicated for production use with the benefits of cross-zone high availability, horizontal scaling, and [HTAP](https://en.wikipedia.org/wiki/Hybrid_transactional/analytical_processing).
+    TiDB Cloud Dedicated Tierは、クロスゾーンの高可用性、水平スケーリング、および[HTAP](https://en.wikipedia.org/wiki/Hybrid_transactional/analytical_processing)の利点を備えた、実動使用専用です。
 
-For more information about the two options, see [Select Your Cluster Tier](/tidb-cloud/select-cluster-tier.md).
+2 つのオプションの詳細については、 [Cluster Tierを選択する](/tidb-cloud/select-cluster-tier.md)を参照してください。
 
-## Step 3. Use your default project or create a new project
+## ステップ 3. デフォルトのプロジェクトを使用するか、新しいプロジェクトを作成します {#step-3-use-your-default-project-or-create-a-new-project}
 
-If you are an organization owner, once you log in to TiDB Cloud, you have a default project. If you do not want to use the default project, you can take the following steps to create a new one:
+あなたが組織の所有者である場合、 TiDB Cloudにログインすると、デフォルトのプロジェクトが作成されます。デフォルトのプロジェクトを使用したくない場合は、次の手順に従って新しいプロジェクトを作成できます。
 
-1. Click the account name in the upper-right corner of the TiDB Cloud console.
+1.  TiDB Cloudコンソールの右上隅にあるアカウント名をクリックします。
 
-2. Click **Organization Settings**.
+2.  [**組織の設定]**をクリックします。
 
-    The **Projects** tab is displayed by default.
+    デフォルトでは、[**プロジェクト**] タブが表示されます。
 
-3. Click **Create New Project**.
+3.  [**新しいプロジェクトを作成]**をクリックします。
 
-4. Enter a name for your project, and then click **Confirm**.
+4.  プロジェクトの名前を入力し、[**確認**] をクリックします。
 
-5. To return to the cluster page, click the TiDB Cloud logo in the upper-left corner of the window.
+5.  クラスター ページに戻るには、ウィンドウの左上隅にあるTiDB Cloudロゴをクリックします。
 
-If you are a project member, you can access only the specific projects to which your organization owner invited you, and you cannot create new projects. To check which project you belong to, take the following steps:
+あなたがプロジェクト メンバーである場合、組織の所有者があなたを招待した特定のプロジェクトにのみアクセスでき、新しいプロジェクトを作成することはできません。自分が所属しているプロジェクトを確認するには、次の手順を実行します。
 
-1. Click the account name in the upper-right corner of the TiDB Cloud console.
+1.  TiDB Cloudコンソールの右上隅にあるアカウント名をクリックします。
 
-2. Click **Organization Settings**.
+2.  [**組織の設定]**をクリックします。
 
-    The **Projects** tab is displayed by default.
+    デフォルトでは、[**プロジェクト**] タブが表示されます。
 
-3. To return to the cluster page, click the TiDB Cloud logo in the upper-left corner of the window.
+3.  クラスター ページに戻るには、ウィンドウの左上隅にあるTiDB Cloudロゴをクリックします。
 
-## Step 4. Create a TiDB cluster
+## ステップ 4. TiDB クラスターを作成する {#step-4-create-a-tidb-cluster}
 
 <SimpleTab>
 <div label="Serverless Tier">
 
-To create a Serverless Tier cluster, take the following steps:
+サーバーレス層クラスターを作成するには、次の手順を実行します。
 
-1. On the **Clusters** page, click **Create Cluster**.
+1.  [**クラスター**] ページで、[<strong>クラスタの作成</strong>] をクリックします。
 
-2. On the **Create Cluster** page, update the default cluster name if necessary.
+2.  [クラスターの**クラスタ]**ページで、必要に応じてデフォルトのクラスター名を更新します。
 
-3. Note that the cloud provider of Serverless Tier is AWS, and then select the region where you want to create your cluster.
+3.  Serverless Tier のクラウド プロバイダーは AWS であることに注意して、クラスターを作成するリージョンを選択します。
 
-4. View the cluster size of the Serverless Tier, and then click **Create**.
+4.  サーバーレス層のクラスター サイズをビューし、 [**作成**] をクリックします。
 
-    The cluster creation process starts and your TiDB Cloud cluster will be created in approximately 30 seconds.
+    クラスター作成プロセスが開始され、約 30 秒でTiDB Cloudクラスターが作成されます。
 
-5. During the creation process, perform security settings for your cluster:
+5.  作成プロセス中に、クラスターのセキュリティ設定を実行します。
 
-    1. Click **Security Settings** in the upper-right corner of the cluster area.
-    2. In the **Security Settings** dialog box, set the root password and allowed IP addresses to connect to your cluster, and then click **Apply**.
+    1.  クラスター領域の右上隅にある [**セキュリティ設定]**をクリックします。
 
-    > **Note:**
+    2.  [**セキュリティ設定**] ダイアログ ボックスで、ルート パスワードと許可された IP アドレスを設定してクラスターに接続し、[<strong>適用</strong>] をクリックします。
+
+    > **ノート：**
     >
-    > If you do not set a password, you cannot connect to the cluster.
+    > パスワードを設定しないと、クラスターに接続できません。
 
 </div>
 
 <div label="Dedicated Tier">
 
-To create a Dedicated Tier cluster, take the following steps:
+Dedicated Tierクラスターを作成するには、次の手順を実行します。
 
-1. On the **Clusters** page, click **Create Cluster**.
+1.  [**クラスター**] ページで、[<strong>クラスタの作成</strong>] をクリックします。
 
-2. On the **Create Cluster** page, select **Dedicated Tier**, update the default cluster name and port number if necessary, choose a cloud provider and a region, and then click **Next**.
+2.  [**クラスタの作成**] ページで [<strong>Dedicated Tier</strong>] を選択し、必要に応じて既定のクラスター名とポート番号を更新し、クラウド プロバイダーとリージョンを選択して、 [<strong>次へ</strong>] をクリックします。
 
-    > **Note:**
+    > **ノート：**
     >
-    > If you signed up TiDB Cloud through [AWS Marketplace](https://aws.amazon.com/marketplace), the cloud provider is AWS, and you cannot change it in TiDB Cloud.
+    > [AWS マーケットプレイス](https://aws.amazon.com/marketplace)からTiDB Cloudにサインアップした場合、クラウド プロバイダーは AWS であり、 TiDB Cloudで変更することはできません。
 
-3. If this is the first cluster of your current project and CIDR has not been configured for this project, you need to set the project CIDR, and then click **Next**. If you do not see the **project CIDR** field, it means that CIDR has already been configured for this project.
+3.  これが現在のプロジェクトの最初のクラスターであり、このプロジェクトに対して CIDR が構成されていない場合は、プロジェクトの CIDR を設定し、[**次へ**] をクリックする必要があります。<strong>プロジェクトの CIDR</strong>フィールドが表示されない場合は、このプロジェクトに対して CIDR が既に構成されていることを意味します。
 
-    > **Note:**
+    > **ノート：**
     >
-    > When setting the project CIDR, avoid any conflicts with the CIDR of the VPC where your application is located. You cannot modify your project CIDR once it is set.
+    > プロジェクトの CIDR を設定するときは、アプリケーションが配置されている VPC の CIDR と競合しないようにしてください。プロジェクトの CIDR は、一度設定すると変更できません。
 
-4. Configure the [cluster size](/tidb-cloud/size-your-cluster.md) for TiDB, TiKV, and TiFlash (optional) respectively, and then click **Next**.
+4.  TiDB、TiKV、およびTiFlash (オプション) にそれぞれ[クラスターサイズ](/tidb-cloud/size-your-cluster.md)を構成し、[**次へ**] をクリックします。
 
-5. Confirm the cluster information on the page and the billing information in the lower-left corner.
+5.  ページのクラスター情報と、左下隅の課金情報を確認します。
 
-6. If you have not added a payment method, click **Add Credit Card** in the lower-right corner.
+6.  支払い方法を追加していない場合は、右下隅にある [**クレジット カードを追加**] をクリックします。
 
-    > **Note:**
+    > **ノート：**
     >
-    > If you signed up TiDB Cloud through [AWS Marketplace](https://aws.amazon.com/marketplace), you can pay through your AWS account directly but cannot add payment methods or download invoices in the TiDB Cloud portal.
+    > [AWS マーケットプレイス](https://aws.amazon.com/marketplace)からTiDB Cloudにサインアップした場合、AWS アカウントから直接支払うことはできますが、 TiDB Cloudポータルで支払い方法を追加したり、請求書をダウンロードしたりすることはできません。
 
-7. Click **Create**.
+7.  [**作成]**をクリックします。
 
-    The cluster creation process starts and the **Security Settings** dialog box is displayed.
+    クラスターの作成プロセスが開始され、 **[セキュリティの設定**] ダイアログ ボックスが表示されます。
 
-8. In the **Security Settings** dialog box, set the root password and allowed IP addresses to connect to your cluster, and then click **Apply**.
+8.  [**セキュリティ設定**] ダイアログ ボックスで、ルート パスワードと許可された IP アドレスを設定してクラスターに接続し、[<strong>適用</strong>] をクリックします。
 
-    Your TiDB Cloud cluster will be created in approximately 5 to 15 minutes.
+    TiDB Cloudクラスターは、約 5 ～ 15 分で作成されます。
 
 </div>
 </SimpleTab>

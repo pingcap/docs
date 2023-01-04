@@ -3,28 +3,28 @@ title: Batch Create Table
 summary: Learn how to use the Batch Create Table feature. When restoring data, BR can create tables in batches to speed up the restore process.
 ---
 
-# Batch Create Table
+# テーブルのバッチ作成 {#batch-create-table}
 
-When restoring data, Backup & Restore (BR) creates databases and tables in the target TiDB cluster and then restores the backup data to the tables. In versions earlier than TiDB v6.0.0, BR uses the [serial execution](#implementation) implementation to create tables in the restore process. However, when BR restores data with a large number of tables (nearly 50000), this implementation takes much time on creating tables.
+データを復元するとき、バックアップと復元 (BR) は、ターゲットの TiDB クラスターにデータベースとテーブルを作成し、バックアップ データをテーブルに復元します。 TiDB v6.0.0 より前のバージョンでは、 BRは[シリアル実行](#implementation)実装を使用して復元プロセスでテーブルを作成します。ただし、 BRが多数のテーブル (ほぼ 50000) を含むデータを復元する場合、この実装ではテーブルの作成に多くの時間がかかります。
 
-To speed up the table creation process and reduce the time for restoring data, the Batch Create Table feature is introduced in TiDB v6.0.0. This feature is enabled by default.
+テーブル作成プロセスを高速化し、データの復元時間を短縮するために、TiDB v6.0.0 で Batch Create Table 機能が導入されました。この機能はデフォルトで有効になっています。
 
-> **Note:**
+> **ノート：**
 >
-> - To use the Batch Create Table feature, both TiDB and BR are expected to be of v6.0.0 or later. If either TiDB or BR is earlier than v6.0.0, BR uses the serial execution implementation.
-> - Suppose that you use a cluster management tool (for example, TiUP), and your TiDB and BR are of v6.0.0 or later versions, or your TiDB and BR are upgraded from a version earlier than v6.0.0 to v6.0.0 or later.
+> -   Batch Create Table 機能を使用するには、TiDB とBRの両方が v6.0.0 以降である必要があります。 TiDB またはBRのいずれかが v6.0.0 より前の場合、 BRはシリアル実行の実装を使用します。
+> -   クラスター管理ツール ( TiUPなど) を使用していて、TiDB とBRが v6.0.0 以降のバージョンであるか、TiDB とBRが v6.0.0 より前のバージョンから v6.0.0 以降にアップグレードされているとします。 .
 
-## Usage scenario
+## 利用シーン {#usage-scenario}
 
-If you need to restore data with a massive amount of tables, for example, 50000 tables, you can use the Batch Create Table feature to speed up the restore process.
+大量のテーブル (たとえば 50000 テーブル) を含むデータを復元する必要がある場合は、バッチ作成テーブル機能を使用して復元プロセスを高速化できます。
 
-For the detailed effect, see [Test for the Batch Create Table Feature](#feature-test).
+詳細な効果については、 [バッチ作成テーブル機能のテスト](#feature-test)を参照してください。
 
-## Use Batch Create Table
+## バッチ作成テーブルを使用 {#use-batch-create-table}
 
-BR enables the Batch Create Table feature by default, with the default configuration of `--ddl-batch-size=128` in v6.0.0 or later to speed up the restore process. Therefore, you do not need to configure this parameter. `--ddl-batch-size=128` means creating tables in batches, each batch with 128 tables.
+BRは、デフォルトで Batch Create Table 機能を有効にします。v6.0.0 以降では、リストア プロセスを高速化するためにデフォルト設定が`--ddl-batch-size=128`になっています。したがって、このパラメーターを構成する必要はありません。 `--ddl-batch-size=128`は、バッチでテーブルを作成することを意味し、各バッチには 128 個のテーブルがあります。
 
-To disable this feature, you can set `--ddl-batch-size` to `1`. See the following example command:
+この機能を無効にするには、 `--ddl-batch-size` ～ `1`を設定します。次のコマンド例を参照してください。
 
 ```shell
 br restore full \
@@ -32,34 +32,34 @@ br restore full \
 --ddl-batch-size=1
 ```
 
-After this feature is disabled, BR uses the [serial execution implementation](#implementation) instead.
+この機能を無効にすると、 BRは代わりに[シリアル実行の実装](#implementation)を使用します。
 
-## Implementation
+## 実装 {#implementation}
 
-- Serial execution implementation before v6.0.0:
+-   v6.0.0 より前のシリアル実行の実装:
 
-    When restoring data, BR creates databases and tables in the target TiDB cluster and then restores the backup data to the tables. To create tables, BR calls TiDB internal API first, and then processes table creation tasks, which works similarly to executing the `Create Table` statement. The TiDB DDL owner creates tables sequentially. Once the DDL owner creates a table, the DDL schema version changes correspondingly and each version change is synchronized to other TiDB DDL workers (including BR). Therefore, when restoring a large number of tables, the serial execution implementation is time-consuming.
+    データを復元するとき、 BRはターゲットの TiDB クラスターにデータベースとテーブルを作成し、バックアップ データをテーブルに復元します。テーブルを作成するために、 BRは最初に TiDB 内部 API を呼び出し、次にテーブル作成タスクを処理します。これは、 `Create Table`ステートメントの実行と同様に機能します。 TiDB DDL 所有者はテーブルを順次作成します。 DDL 所有者がテーブルを作成すると、それに応じて DDL スキーマのバージョンが変更され、各バージョンの変更が他の TiDB DDL ワーカー ( BRを含む) に同期されます。したがって、多数のテーブルを復元する場合、シリアル実行の実装には時間がかかります。
 
-- Batch create table implementation since v6.0.0:
+-   v6.0.0 以降のバッチ作成テーブルの実装:
 
-    By default, BR creates tables in multiple batches, and each batch has 128 tables. Using this implementation, when BR creates one batch of tables, the TiDB schema version only changes once. This implementation significantly increases the speed of table creation.
+    デフォルトでは、 BRは複数のバッチでテーブルを作成し、各バッチには 128 個のテーブルがあります。この実装を使用すると、 BRがテーブルのバッチを 1 つ作成するときに、TiDB スキーマのバージョンが 1 回だけ変更されます。この実装により、テーブル作成の速度が大幅に向上します。
 
-## Feature test
+## 機能テスト {#feature-test}
 
-This section describes the test information about the Batch Create Table feature. The test environment is as follows:
+このセクションでは、バッチ作成テーブル機能に関するテスト情報について説明します。テスト環境は次のとおりです。
 
-- Cluster configurations:
+-   クラスタ構成:
 
-    - 15 TiKV instances. Each TiKV instance is equipped with 16 CPU cores, 80 GB memory, and 16 threads to process RPC requests ([`import.num-threads`](/tikv-configuration-file.md#num-threads) = 16).
-    - 3 TiDB instances. Each TiDB instance is equipped with 16 CPU cores, 32 GB memory.
-    - 3 PD instances. Each PD instance is equipped with 16 CPU cores, 32 GB memory.
+    -   15 個の TiKV インスタンス。各 TiKV インスタンスには、16 個の CPU コア、80 GB のメモリ、および RPC 要求を処理するための 16 個のスレッドが装備されています ( [`import.num-threads`](/tikv-configuration-file.md#num-threads) = 16)。
+    -   3 つの TiDB インスタンス。各 TiDB インスタンスには、16 個の CPU コア、32 GB のメモリが搭載されています。
+    -   3 つの PD インスタンス。各 PD インスタンスには、16 個の CPU コア、32 GB のメモリが搭載されています。
 
-- The size of data to be restored: 16.16 TB
+-   復元するデータのサイズ: 16.16 TB
 
-The test result is as follows:
+テスト結果は次のとおりです。
 
 ```
 '[2022/03/12 22:37:49.060 +08:00] [INFO] [collector.go:67] ["Full restore success summary"] [total-ranges=751760] [ranges-succeed=751760] [ranges-failed=0] [split-region=1h33m18.078448449s] [restore-ranges=542693] [total-take=1h41m35.471476438s] [restore-data-size(after-compressed)=8.337TB] [Size=8336694965072] [BackupTS=431773933856882690] [total-kv=148015861383] [total-kv-size=16.16TB] [average-speed=2.661GB/s]'
 ```
 
-From the test result, you can see that the average speed of restoring one TiKV instance is as high as 181.65 MB/s (which equals to `average-speed`/`tikv_count`).
+テスト結果から、1 つの TiKV インスタンスを復元する平均速度が 181.65 MB/秒 ( `average-speed`に等しい) であることがわかり`tikv_count` 。

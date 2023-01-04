@@ -2,69 +2,69 @@
 title: tiup cluster import
 ---
 
-# tiup cluster import
+# tiup cluster import {#tiup-cluster-import}
 
-Before TiDB v4.0, TiDB clusters were mainly deployed using TiDB Ansible. For TiDB v4.0 and later releases, TiUP Cluster provides the `import` command to transfer the clusters to the tiup-cluster component for management.
+TiDB v4.0 より前は、TiDB クラスターは主に TiDB Ansible を使用してデプロイされていました。 TiDB v4.0 以降のリリースの場合、 TiUPクラスタは、管理のためにクラスターをtiup-clusterコンポーネントに転送するための`import`のコマンドを提供します。
 
-> **Note:**
+> **ノート：**
 >
-> + After importing the TiDB Ansible configuration to TiUP for management, **DO NOT** use TiDB Ansible for cluster operations anymore. Otherwise, conflicts might be caused due to inconsistent meta information.
-> + If the clusters deployed using TiDB Ansible are in any of the following situations, do not use the `import` command.
->     + Clusters with TLS encryption enabled
->     + Pure KV clusters (clusters without TiDB instances)
->     + Clusters with Kafka enabled
->     + Clusters with Spark enabled
->     + Clusters with TiDB Lightning/TiKV Importer enabled
->     + Clusters still using the old `push` mode to collect monitoring metrics (if you keep the default mode `pull` unchanged, using the `import` command is supported)
->     + Clusters in which the non-default ports (the ports configured in the `group_vars` directory are compatible) are separately configured in the `inventory.ini` configuration file using `node_exporter_port` / `blackbox_exporter_port`
-> + If some nodes in the cluster deployed using TiDB Ansible are deployed without monitoring components, you should first use TiDB Ansible to add the corresponding node information in the `monitored_servers` section of the `inventory.ini` file, and then use the `deploy.yaml` playbook to fully deploy monitoring components. Otherwise, when you perform maintenance operations after the cluster is imported into TiUP, errors might occur due to the lack of monitoring components.
+> -   管理のために TiDB Ansible 構成をTiUPにインポートした後は、 **TiDB** Ansible をクラスター操作に使用しないでください。そうしないと、メタ情報が一致しないために競合が発生する可能性があります。
+> -   TiDB Ansible を使用してデプロイされたクラスターが次のいずれかの状況にある場合は、 `import`コマンドを使用しないでください。
+>     -   TLS 暗号化が有効になっているクラスター
+>     -   Pure KV クラスター (TiDB インスタンスのないクラスター)
+>     -   Kafka が有効になっているクラスター
+>     -   Spark が有効なクラスター
+>     -   TiDB Lightning/TiKV Importer が有効になっているクラスター
+>     -   監視メトリクスを収集するためにまだ古い`push`モードを使用しているクラスター (デフォルト モード`pull`を変更しない場合、 `import`コマンドの使用がサポートされます)
+>     -   `node_exporter_port` / `blackbox_exporter_port`を使用して、デフォルト以外のポート ( `group_vars`のディレクトリで構成されたポートに互換性がある) が`inventory.ini`の構成ファイルで個別に構成されているクラスター
+> -   TiDB Ansible を使用してデプロイされたクラスター内の一部のノードが監視コンポーネントなしでデプロイされている場合、まず TiDB Ansible を使用して対応するノード情報を`inventory.ini`ファイルの`monitored_servers`セクションに追加し、次に`deploy.yaml`プレイブックを使用して監視コンポーネントを完全にデプロイする必要があります。そうしないと、クラスターがTiUPにインポートされた後に保守操作を実行するときに、監視コンポーネントの不足が原因でエラーが発生する可能性があります。
 
-## Syntax
+## 構文 {#syntax}
 
 ```shell
 tiup cluster import [flags]
 ```
 
-## Options
+## オプション {#options}
 
-### -d, --dir
+### -d, --dir {#d-dir}
 
-- Specifies the directory where TiDB Ansible is located.
-- Data type: `STRING`
-- The option is enabled by default with the current directory (the default value) passed in.
+-   TiDB Ansible が配置されているディレクトリを指定します。
+-   データ型: `STRING`
+-   このオプションは、現在のディレクトリ (デフォルト値) が渡された状態でデフォルトで有効になっています。
 
-### --ansible-config
+### --ansible-config {#ansible-config}
 
-- Specifies the path of the Ansible configuration file.
-- Data type: `STRING`
-- The option is enabled by default with `. /ansible.cfg` (the default value) passed in.
+-   Ansible 構成ファイルのパスを指定します。
+-   データ型: `STRING`
+-   このオプションはデフォルトで有効になっており、 `. /ansible.cfg` (デフォルト値) が渡されます。
 
-### --inventory
+### &#x20;--inventory {#inventory}
 
-- Specifies the name of the Ansible inventory file.
-- Data type: `STRING`
-- The option is enabled by default with `inventory.ini` (the default value) passed in.
+-   Ansible インベントリー ファイルの名前を指定します。
+-   データ型: `STRING`
+-   このオプションはデフォルトで有効になっており、 `inventory.ini` (デフォルト値) が渡されます。
 
-### --no-backup
+### --no-backup {#no-backup}
 
-- Controls whether to disable the backup of files in the directory where TiDB Ansible is located.
-- Data type: `BOOLEAN`
-- This option is disabled by default with the `false` value. After a successful import, everything in the directory specified by the `-dir` option is backed up to the `${TIUP_HOME}/.tiup/storage/cluster/clusters/{cluster-name}/ansible-backup` directory. If there are multiple inventory files (when multiple clusters are deployed) in this directory, it is recommended to enable this option. To enable this option, add this option to the command, and either pass the `true` value or do not pass any value.
+-   TiDB Ansible が配置されているディレクトリ内のファイルのバックアップを無効にするかどうかを制御します。
+-   データ型: `BOOLEAN`
+-   このオプションはデフォルトで無効になっており、値は`false`です。インポートが正常に完了すると、 `-dir`オプションで指定されたディレクトリ内のすべてが`${TIUP_HOME}/.tiup/storage/cluster/clusters/{cluster-name}/ansible-backup`ディレクトリにバックアップされます。このディレクトリに複数のインベントリ ファイルがある場合 (複数のクラスターが展開されている場合)、このオプションを有効にすることをお勧めします。このオプションを有効にするには、このオプションをコマンドに追加し、値`true`を渡すか、値を何も渡さないでください。
 
-### --rename
+### --rename {#rename}
 
-- Renames the imported cluster.
-- Data type: `STRING`
-- Default: NULL. If this option is not specified in the command, the cluster_name specified in inventory is used as the cluster name.
+-   インポートされたクラスターの名前を変更します。
+-   データ型: `STRING`
+-   デフォルト: NULL。このオプションがコマンドで指定されていない場合、インベントリーで指定された cluster_name がクラスター名として使用されます。
 
-### -h, --help
+### -h, --help {#h-help}
 
-- Prints the help information.
-- Data type: `BOOLEAN`
-- This option is disabled by default with the `false` value. To enable this option, add this option to the command, and either pass the `true` value or do not pass any value.
+-   ヘルプ情報を出力します。
+-   データ型: `BOOLEAN`
+-   このオプションはデフォルトで無効になっており、値は`false`です。このオプションを有効にするには、このオプションをコマンドに追加し、値`true`を渡すか、値を何も渡さないでください。
 
-## Output
+## 出力 {#output}
 
-Shows the logs of the import process.
+インポート プロセスのログを表示します。
 
-[<< Back to the previous page - TiUP Cluster command list](/tiup/tiup-component-cluster.md#command-list)
+[&lt;&lt; 前のページに戻る - TiUP クラスタコマンド一覧](/tiup/tiup-component-cluster.md#command-list)

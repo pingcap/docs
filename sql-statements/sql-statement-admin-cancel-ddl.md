@@ -4,11 +4,11 @@ summary: An overview of the usage of ADMIN CANCEL DDL for the TiDB database.
 category: reference
 ---
 
-# ADMIN CANCEL DDL
+# 管理者キャンセル DDL {#admin-cancel-ddl}
 
-The `ADMIN CANCEL DDL` statement allows you to cancel a running DDL job. The `job_id` can be found by running [`ADMIN SHOW DDL JOBS`](/sql-statements/sql-statement-admin-show-ddl.md).
+`ADMIN CANCEL DDL`ステートメントを使用すると、実行中の DDL ジョブをキャンセルできます。 `job_id`は[`ADMIN SHOW DDL JOBS`](/sql-statements/sql-statement-admin-show-ddl.md)を実行することで見つけることができます。
 
-## Synopsis
+## あらすじ {#synopsis}
 
 ```ebnf+diagram
 AdminStmt ::=
@@ -18,28 +18,28 @@ NumList ::=
     Int64Num ( ',' Int64Num )*
 ```
 
-## Examples
+## 例 {#examples}
 
-To cancel the currently running DDL jobs and return whether the corresponding jobs are successfully cancelled, use `ADMIN CANCEL DDL JOBS`:
+現在実行中の DDL ジョブをキャンセルし、対応するジョブが正常にキャンセルされたかどうかを返すには、 `ADMIN CANCEL DDL JOBS`を使用します。
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 ADMIN CANCEL DDL JOBS job_id [, job_id] ...;
 ```
 
-If the operation fails to cancel the jobs, specific reasons are displayed.
+操作でジョブをキャンセルできなかった場合は、具体的な理由が表示されます。
 
-> **Note:**
+> **ノート：**
 >
-> - Only this operation can cancel DDL jobs. All other operations and environment changes (such as machine restart and cluster restart) cannot cancel these jobs.
-> - This operation can cancel multiple DDL jobs at the same time. You can get the ID of DDL jobs using the [`ADMIN SHOW DDL JOBS`](/sql-statements/sql-statement-admin-show-ddl.md) statement.
-> - If the jobs you want to cancel are finished, the cancellation operation fails.
+> -   この操作のみが DDL ジョブをキャンセルできます。他のすべての操作と環境の変更 (マシンの再起動やクラスターの再起動など) では、これらのジョブをキャンセルできません。
+> -   この操作では、複数の DDL ジョブを同時にキャンセルできます。 [`ADMIN SHOW DDL JOBS`](/sql-statements/sql-statement-admin-show-ddl.md)ステートメントを使用して、DDL ジョブの ID を取得できます。
+> -   キャンセルするジョブが終了している場合、キャンセル操作は失敗します。
 
-## MySQL compatibility
+## MySQL の互換性 {#mysql-compatibility}
 
-This statement is a TiDB extension to MySQL syntax.
+このステートメントは、MySQL 構文に対する TiDB 拡張です。
 
-## See also
+## こちらもご覧ください {#see-also}
 
-* [`ADMIN SHOW DDL [JOBS|QUERIES]`](/sql-statements/sql-statement-admin-show-ddl.md)
+-   [`ADMIN SHOW DDL [JOBS|QUERIES]`](/sql-statements/sql-statement-admin-show-ddl.md)

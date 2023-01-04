@@ -3,13 +3,13 @@ title: Replicate Data to MySQL-compatible Databases
 summary: Learn how to replicate data to TiDB or MySQL using TiCDC.
 ---
 
-# Replicate Data to MySQL-compatible Databases
+# MySQL 互換データベースへのデータの複製 {#replicate-data-to-mysql-compatible-databases}
 
-This document describes how to replicate incremental data to the downstream TiDB database or other MySQL-compatible databases using TiCDC. It also introduces how to use the eventually consistent replication feature in disaster scenarios.
+このドキュメントでは、TiCDC を使用して、増分データを下流の TiDB データベースまたはその他の MySQL 互換データベースに複製する方法について説明します。また、災害シナリオで結果整合性レプリケーション機能を使用する方法も紹介します。
 
-## Create a replication task
+## レプリケーション タスクを作成する {#create-a-replication-task}
 
-Create a replication task by running the following command:
+次のコマンドを実行して、レプリケーション タスクを作成します。
 
 ```shell
 cdc cli changefeed create \
@@ -24,76 +24,76 @@ ID: simple-replication-task
 Info: {"sink-uri":"mysql://root:123456@127.0.0.1:3306/","opts":{},"create-time":"2020-03-12T22:04:08.103600025+08:00","start-ts":415241823337054209,"target-ts":0,"admin-job-type":0,"sort-engine":"unified","sort-dir":".","config":{"case-sensitive":true,"filter":{"rules":["*.*"],"ignore-txn-start-ts":null,"ddl-allow-list":null},"mounter":{"worker-num":16},"sink":{"dispatchers":null},"scheduler":{"type":"table-number","polling-time":-1}},"state":"normal","history":null,"error":null}
 ```
 
-- `--changefeed-id`: The ID of the replication task. The format must match the `^[a-zA-Z0-9]+(\-[a-zA-Z0-9]+)*$` regular expression. If this ID is not specified, TiCDC automatically generates a UUID (the version 4 format) as the ID.
-- `--sink-uri`: The downstream address of the replication task. For details, see [Configure sink URI with `mysql`/`tidb`](#configure-sink-uri-for-mysql-or-tidb).
-- `--start-ts`: Specifies the starting TSO of the changefeed. From this TSO, the TiCDC cluster starts pulling data. The default value is the current time.
-- `--target-ts`: Specifies the ending TSO of the changefeed. To this TSO, the TiCDC cluster stops pulling data. The default value is empty, which means that TiCDC does not automatically stop pulling data.
-- `--config`: Specifies the changefeed configuration file. For details, see [TiCDC Changefeed Configuration Parameters](/ticdc/ticdc-changefeed-config.md).
+-   `--changefeed-id` : レプリケーション タスクの ID。形式は`^[a-zA-Z0-9]+(\-[a-zA-Z0-9]+)*$`の正規表現と一致する必要があります。この ID が指定されていない場合、TiCDC は ID として UUID (バージョン 4 形式) を自動的に生成します。
+-   `--sink-uri` : レプリケーション タスクのダウンストリーム アドレス。詳細については、 [`mysql` / <code>tidb</code>でシンク URI を構成する](#configure-sink-uri-for-mysql-or-tidb)を参照してください。
+-   `--start-ts` : 変更フィードの開始 TSO を指定します。この TSO から、TiCDC クラスターはデータのプルを開始します。デフォルト値は現在の時刻です。
+-   `--target-ts` : changefeed の終了 TSO を指定します。この TSO に対して、TiCDC クラスターはデータのプルを停止します。デフォルト値は空です。これは、TiCDC がデータのプルを自動的に停止しないことを意味します。
+-   `--config` : changefeed 構成ファイルを指定します。詳細については、 [TiCDC ChangefeedConfiguration / コンフィグレーションパラメータ](/ticdc/ticdc-changefeed-config.md)を参照してください。
 
-## Configure sink URI for MySQL or TiDB
+## MySQL または TiDB のシンク URI を構成する {#configure-sink-uri-for-mysql-or-tidb}
 
-Sink URI is used to specify the connection information of the TiCDC target system. The format is as follows:
+シンク URI は、TiCDC ターゲット システムの接続情報を指定するために使用されます。形式は次のとおりです。
 
 ```
 [scheme]://[userinfo@][host]:[port][/path]?[query_parameters]
 ```
 
-Sample configuration for MySQL:
+MySQL の設定例:
 
 ```shell
 --sink-uri="mysql://root:123456@127.0.0.1:3306/?worker-count=16&max-txn-row=5000&transaction-atomicity=table"
 ```
 
-The following are descriptions of sink URI parameters and parameter values that can be configured for MySQL or TiDB:
+以下は、MySQL または TiDB 用に構成できるシンク URI パラメーターとパラメーター値の説明です。
 
-| Parameter/Parameter value    | Description                                             |
-| :------------ | :------------------------------------------------ |
-| `root`        | The username of the downstream database.                              |
-| `123456`       | The password of the downstream database (can be encoded using Base64).                                      |
-| `127.0.0.1`    | The IP address of the downstream database.                               |
-| `3306`         | The port for the downstream data.                                 |
-| `worker-count` | The number of SQL statements that can be concurrently executed to the downstream (optional, `16` by default).       |
-| `max-txn-row`  | The size of a transaction batch that can be executed to the downstream (optional, `256` by default). |
-| `ssl-ca` | The path of the CA certificate file needed to connect to the downstream MySQL instance (optional).  |
-| `ssl-cert` | The path of the certificate file needed to connect to the downstream MySQL instance (optional). |
-| `ssl-key` | The path of the certificate key file needed to connect to the downstream MySQL instance (optional). |
-| `time-zone` | The time zone used when connecting to the downstream MySQL instance, which is effective since v4.0.8. This is an optional parameter. If this parameter is not specified, the time zone of TiCDC service processes is used. If this parameter is set to an empty value, no time zone is specified when TiCDC connects to the downstream MySQL instance and the default time zone of the downstream is used. |
-| `transaction-atomicity`  |  The atomicity level of a transaction. This is an optional parameter, with the default value of `none`. When the value is `table`, TiCDC ensures the atomicity of a single-table transaction. When the value is `none`, TiCDC splits the single-table transaction.  |
+| パラメータ/パラメータ値            | 説明                                                                                                                                                                                                                                     |
+| :---------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `root`                  | ダウンストリーム データベースのユーザー名。                                                                                                                                                                                                                 |
+| `123456`                | ダウンストリーム データベースのパスワード (Base64 を使用してエンコードできます)。                                                                                                                                                                                         |
+| `127.0.0.1`             | ダウンストリーム データベースの IP アドレス。                                                                                                                                                                                                              |
+| `3306`                  | ダウンストリーム データのポート。                                                                                                                                                                                                                      |
+| `worker-count`          | ダウンストリームに対して同時に実行できる SQL ステートメントの数 (オプション、既定では`16` )。                                                                                                                                                                                  |
+| `max-txn-row`           | ダウンストリームに対して実行できるトランザクション バッチのサイズ (オプション、既定では`256` )。                                                                                                                                                                                  |
+| `ssl-ca`                | ダウンストリームの MySQL インスタンスに接続するために必要な CA 証明書ファイルのパス (オプション)。                                                                                                                                                                               |
+| `ssl-cert`              | ダウンストリームの MySQL インスタンスに接続するために必要な証明書ファイルのパス (オプション)。                                                                                                                                                                                   |
+| `ssl-key`               | ダウンストリームの MySQL インスタンスに接続するために必要な証明書キー ファイルのパス (オプション)。                                                                                                                                                                                |
+| `time-zone`             | ダウンストリームの MySQL インスタンスに接続するときに使用されるタイム ゾーン。v4.0.8 以降で有効です。これはオプションのパラメーターです。このパラメーターが指定されていない場合、TiCDC サービス プロセスのタイム ゾーンが使用されます。このパラメータが空の値に設定されている場合、TiCDC がダウンストリームの MySQL インスタンスに接続するときにタイム ゾーンが指定されず、ダウンストリームのデフォルトのタイム ゾーンが使用されます。 |
+| `transaction-atomicity` | トランザクションの原子性レベル。これはオプションのパラメーターで、デフォルト値は`none`です。値が`table`の場合、TiCDC は単一テーブル トランザクションの原子性を保証します。値が`none`の場合、TiCDC は単一テーブル トランザクションを分割します。                                                                                               |
 
-To encode the database password in the sink URI using Base64, use the following command:
+Base64 を使用してシンク URI のデータベース パスワードをエンコードするには、次のコマンドを使用します。
 
 ```shell
 echo -n '123456' | base64   # '123456' is the password to be encoded.
 ```
 
-The encoded password is `MTIzNDU2`:
+エンコードされたパスワードは`MTIzNDU2`です:
 
 ```shell
 MTIzNDU2
 ```
 
-> **Note:**
+> **ノート：**
 >
-> When the sink URI contains special characters such as `! * ' ( ) ; : @ & = + $ , / ? % # [ ]`, you need to escape the special characters, for example, in [URI Encoder](https://meyerweb.com/eric/tools/dencoder/).
+> シンク URI に`! * ' ( ) ; : @ & = + $ , / ? % # [ ]`などの特殊文字が含まれている場合は、特殊文字をエスケープする必要があります (たとえば、 [URI エンコーダー](https://meyerweb.com/eric/tools/dencoder/)など)。
 
-## Eventually consistent replication in disaster scenarios
+## 災害シナリオにおける結果整合性レプリケーション {#eventually-consistent-replication-in-disaster-scenarios}
 
-Starting from v6.1.1, this feature becomes GA. Starting from v5.3.0, TiCDC supports backing up incremental data from an upstream TiDB cluster to S3 storage or an NFS file system of a downstream cluster. When the upstream cluster encounters a disaster and becomes unavailable, TiCDC can restore the downstream data to the recent eventually consistent state. This is the eventually consistent replication capability provided by TiCDC. With this capability, you can switch applications to the downstream cluster quickly, avoiding long-time downtime and improving service continuity.
+v6.1.1 以降、この機能は GA になります。 v5.3.0 以降、TiCDC はアップストリームの TiDB クラスターから S3 ストレージまたはダウンストリーム クラスターの NFS ファイル システムへの増分データのバックアップをサポートします。アップストリーム クラスターが災害に遭遇して利用できなくなった場合、TiCDC はダウンストリーム データを最新の結果整合性のある状態に復元できます。これは、TiCDC が提供する結果整合性のあるレプリケーション機能です。この機能を使用すると、アプリケーションをダウンストリーム クラスターにすばやく切り替えて、長時間のダウンタイムを回避し、サービスの継続性を向上させることができます。
 
-Currently, TiCDC can replicate incremental data from a TiDB cluster to another TiDB cluster or a MySQL-compatible database system (including Aurora, MySQL, and MariaDB). In case the upstream cluster crashes, TiCDC can restore data in the downstream cluster within 5 minutes, given the conditions that before the disaster the replication status of TiCDC is normal and the replication lag is small. It allows data loss of 10s at most, that is, RTO <= 5 min, and P95 RPO <= 10s.
+現在、TiCDC は、TiDB クラスターから別の TiDB クラスターまたは MySQL 互換データベース システム ( Aurora、MySQL、および MariaDB を含む) に増分データを複製できます。アップストリーム クラスターがクラッシュした場合、災害前の TiCDC のレプリケーション ステータスが正常であり、レプリケーション ラグが小さいという条件を考えると、TiCDC は 5 分以内にダウンストリーム クラスターのデータを復元できます。最大で 10 秒のデータ損失が許容されます。つまり、RTO &lt;= 5 分、および P95 RPO &lt;= 10 秒です。
 
-TiCDC replication lag increases in the following scenarios:
+次のシナリオでは、TiCDC のレプリケーション ラグが増加します。
 
-- The TPS increases significantly in a short time.
-- Large or long transactions occur in the upstream.
-- The TiKV or TiCDC cluster in the upstream is reloaded or upgraded.
-- Time-consuming DDL statements, such as `add index`, are executed in the upstream.
-- The PD is configured with aggressive scheduling strategies, resulting in frequent transfer of Region leaders, or frequent Region merge or Region split.
+-   短時間でTPSが大幅に上昇します。
+-   アップストリームで大規模または長いトランザクションが発生します。
+-   アップストリームの TiKV または TiCDC クラスターがリロードまたはアップグレードされます。
+-   `add index`などの時間のかかる DDL ステートメントは、アップストリームで実行されます。
+-   PD は積極的なスケジューリング戦略で構成されているため、リージョンのリーダーが頻繁に移動したり、リージョンの合併や分割が頻繁に発生したりしリージョン。
 
-### Prerequisites
+### 前提条件 {#prerequisites}
 
-- Prepare a highly available Amazon S3 storage or NFS system for storing TiCDC's real-time incremental data backup files. These files can be accessed in case of an primary cluster disaster.
-- Enable this feature for changefeeds that need to have eventual consistency in disaster scenarios. To enable it, you can add the following configuration to the changefeed configuration file.
+-   TiCDC のリアルタイム増分データ バックアップ ファイルを格納するために、高可用性 Amazon S3 ストレージまたは NFS システムを準備します。これらのファイルには、プライマリ クラスタの障害が発生した場合にアクセスできます。
+-   災害シナリオで結果整合性を確保する必要がある変更フィードに対して、この機能を有効にします。これを有効にするには、changefeed 構成ファイルに次の構成を追加します。
 
 ```toml
 [consistent]
@@ -112,12 +112,12 @@ flush-interval = 1000
 storage = "s3://logbucket/test-changefeed?endpoint=http://$S3_ENDPOINT/"
 ```
 
-### Disaster recovery
+### 災害からの回復 {#disaster-recovery}
 
-When a disaster happens in the primary cluster, you need to recover manually in the secondary cluster by running the `cdc redo` command. The recovery process is as follows.
+主クラスタで障害が発生した場合、 `cdc redo`コマンドを実行して副クラスタで手動で復旧する必要があります。回復プロセスは次のとおりです。
 
-1. Ensure that all the TiCDC processes have exited. This is to prevent the primary cluster from resuming service during data recovery and prevent TiCDC from restarting data synchronization.
-2. Use cdc binary for data recovery. Run the following command:
+1.  すべての TiCDC プロセスが終了していることを確認します。これは、データ リカバリ中にプライマリ クラスタがサービスを再開するのを防ぎ、TiCDC がデータ同期を再開するのを防ぐためです。
+2.  データの回復には cdc バイナリを使用します。次のコマンドを実行します。
 
 ```shell
 cdc redo apply --tmp-dir="/tmp/cdc/redo/apply" \
@@ -125,8 +125,8 @@ cdc redo apply --tmp-dir="/tmp/cdc/redo/apply" \
     --sink-uri="mysql://normal:123456@10.0.10.55:3306/"
 ```
 
-In this command:
+このコマンドでは:
 
-- `tmp-dir`: Specifies the temporary directory for downloading TiCDC incremental data backup files.
-- `storage`: Specifies the address for storing the TiCDC incremental data backup files, either an Amazon S3 storage or an NFS directory.
-- `sink-uri`: Specifies the secondary cluster address to restore the data to. Scheme can only be `mysql`.
+-   `tmp-dir` : TiCDC 増分データ バックアップ ファイルをダウンロードするための一時ディレクトリを指定します。
+-   `storage` : Amazon S3 ストレージまたは NFS ディレクトリのいずれかで、TiCDC 増分データ バックアップ ファイルを保存するためのアドレスを指定します。
+-   `sink-uri` : データを復元するセカンダリ クラスタ アドレスを指定します。スキームは`mysql`のみです。

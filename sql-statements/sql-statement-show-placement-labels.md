@@ -3,20 +3,20 @@ title: SHOW PLACEMENT LABELS
 summary: The usage of SHOW PLACEMENT LABELS in TiDB.
 ---
 
-# SHOW PLACEMENT LABELS
+# プレースメント ラベルを表示 {#show-placement-labels}
 
-`SHOW PLACEMENT LABELS` is used to summarize the labels and values that are available for Placement Rules.
+`SHOW PLACEMENT LABELS`は、配置ルールで使用できるラベルと値を要約するために使用されます。
 
-## Synopsis
+## あらすじ {#synopsis}
 
 ```ebnf+diagram
 ShowStmt ::=
     "PLACEMENT" "LABELS"
 ```
 
-## Examples
+## 例 {#examples}
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 SHOW PLACEMENT LABELS;
@@ -32,12 +32,12 @@ SHOW PLACEMENT LABELS;
 2 rows in set (0.00 sec)
 ```
 
-## MySQL compatibility
+## MySQL の互換性 {#mysql-compatibility}
 
-This statement is a TiDB extension to MySQL syntax.
+このステートメントは、MySQL 構文に対する TiDB 拡張です。
 
-## See also
+## こちらもご覧ください {#see-also}
 
-* [Placement Rules in SQL](/placement-rules-in-sql.md)
-* [SHOW PLACEMENT](/sql-statements/sql-statement-show-placement.md)
-* [CREATE PLACEMENT POLICY](/sql-statements/sql-statement-create-placement-policy.md)
+-   [SQL の配置規則](/placement-rules-in-sql.md)
+-   [配置を表示](/sql-statements/sql-statement-show-placement.md)
+-   [配置ポリシーを作成する](/sql-statements/sql-statement-create-placement-policy.md)

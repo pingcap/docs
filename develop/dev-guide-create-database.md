@@ -3,38 +3,38 @@ title: Create a Database
 summary: Learn steps, rules, and examples to create a database.
 ---
 
-# Create a Database
+# データベースを作成する {#create-a-database}
 
-This document describes how to create a database using SQL and various programming languages and lists the rules of database creation. In this document, the [Bookshop](/develop/dev-guide-bookshop-schema-design.md) application is taken as an example to walk you through the steps of database creation.
+このドキュメントでは、SQL とさまざまなプログラミング言語を使用してデータベースを作成する方法について説明し、データベース作成のルールを一覧表示します。このドキュメントでは、 [書店](/develop/dev-guide-bookshop-schema-design.md)のアプリケーションを例として、データベース作成の手順を説明します。
 
-## Before you start
+## 始める前に {#before-you-start}
 
-Before creating a database, do the following:
+データベースを作成する前に、次のことを行います。
 
-- [Build a TiDB Cluster in TiDB Cloud (Serverless Tier)](/develop/dev-guide-build-cluster-in-cloud.md).
-- Read [Schema Design Overview](/develop/dev-guide-schema-design-overview.md).
+-   [TiDB Cloud(サーバーレス層) で TiDBクラスタを構築する](/develop/dev-guide-build-cluster-in-cloud.md) .
+-   [スキーマ設計の概要](/develop/dev-guide-schema-design-overview.md)を読んでください。
 
-## What is database
+## データベースとは {#what-is-database}
 
-[Database](/develop/dev-guide-schema-design-overview.md) objects in TiDB contain **tables**, **views**, **sequences**, and other objects.
+TiDB の[データベース](/develop/dev-guide-schema-design-overview.md)個のオブジェクトには、**テーブル**、<strong>ビュー</strong>、<strong>シーケンス</strong>、およびその他のオブジェクトが含まれています。
 
-## Create databases
+## データベースを作成する {#create-databases}
 
-To create a database, you can use the `CREATE DATABASE` statement.
+データベースを作成するには、 `CREATE DATABASE`ステートメントを使用できます。
 
-For example, to create a database named `bookshop` if it does not exist, use the following statement:
+たとえば、存在しない場合に`bookshop`という名前のデータベースを作成するには、次のステートメントを使用します。
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 CREATE DATABASE IF NOT EXISTS `bookshop`;
 ```
 
-For more information and examples of the `CREATE DATABASE` statement, see the [`CREATE DATABASE`](/sql-statements/sql-statement-create-database.md) document.
+`CREATE DATABASE`ステートメントの詳細と例については、 [`CREATE DATABASE`](/sql-statements/sql-statement-create-database.md)ドキュメントを参照してください。
 
-To execute the library build statement as the `root` user, run the following command:
+`root`人のユーザーとしてライブラリ ビルド ステートメントを実行するには、次のコマンドを実行します。
 
-{{< copyable "shell-regular" >}}
+{{< copyable "" >}}
 
 ```shell
 mysql
@@ -45,13 +45,13 @@ mysql
     -e "CREATE DATABASE IF NOT EXISTS bookshop;"
 ```
 
-## View databases
+## データベースをビュー {#view-databases}
 
-To view the databases in a cluster, use the [`SHOW DATABASES`](/sql-statements/sql-statement-show-databases.md) statement.
+クラスター内のデータベースを表示するには、 [`SHOW DATABASES`](/sql-statements/sql-statement-show-databases.md)ステートメントを使用します。
 
-For example:
+例えば：
 
-{{< copyable "shell-regular" >}}
+{{< copyable "" >}}
 
 ```shell
 mysql
@@ -62,7 +62,7 @@ mysql
     -e "SHOW DATABASES;"
 ```
 
-The following is an example output:
+次に出力例を示します。
 
 ```
 +--------------------+
@@ -76,13 +76,13 @@ The following is an example output:
 +--------------------+
 ```
 
-## Rules in database creation
+## データベース作成時のルール {#rules-in-database-creation}
 
-- Follow the [Database Naming Conventions](/develop/dev-guide-object-naming-guidelines.md) and name your database meaningfully.
-- TiDB comes with a default database named `test`. However, it is not recommended that you use it in a production environment if you do not have to. You can create your own database using the `CREATE DATABASE` statement and change the current database using the [`USE {databasename};`](/sql-statements/sql-statement-use.md) statement in a SQL session.
-- Use the `root` user to create objects such as database, roles, and users. Grant only the necessary privileges to roles and users.
-- As a best practice, it is recommended that you use a **MySQL command-line client** or a **MySQL GUI client** instead of a driver or ORM to execute database schema changes.
+-   [データベースの命名規則](/develop/dev-guide-object-naming-guidelines.md)に従って、データベースに意味のある名前を付けます。
+-   TiDB には`test`という名前のデフォルト データベースが付属しています。ただし、必要がなければ本番環境で使用することはお勧めしません。 `CREATE DATABASE`ステートメントを使用して独自のデータベースを作成し、SQL セッションで[`USE {databasename};`](/sql-statements/sql-statement-use.md)ステートメントを使用して現在のデータベースを変更できます。
+-   `root`ユーザーを使用して、データベース、ロール、およびユーザーなどのオブジェクトを作成します。ロールとユーザーには必要な権限のみを付与してください。
+-   ベスト プラクティスとして、ドライバーや ORM の代わりに**MySQL コマンドライン クライアント**または<strong>MySQL GUI クライアント</strong>を使用してデータベース スキーマの変更を実行することをお勧めします。
 
-## Next step
+## 次の一歩 {#next-step}
 
-After creating a database, you can add **tables** to it. For more information, see [Create a Table](/develop/dev-guide-create-table.md).
+データベースを作成したら、それに**テーブル**を追加できます。詳細については、 [テーブルを作成する](/develop/dev-guide-create-table.md)を参照してください。

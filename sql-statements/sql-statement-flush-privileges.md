@@ -3,11 +3,11 @@ title: FLUSH PRIVILEGES | TiDB SQL Statement Reference
 summary: An overview of the usage of FLUSH PRIVILEGES for the TiDB database.
 ---
 
-# FLUSH PRIVILEGES
+# フラッシュ特権 {#flush-privileges}
 
-This statement triggers TiDB to reload the in-memory copy of privileges from the privilege tables. You should execute `FLUSH PRIVILEGES` after making manual edits to tables such as `mysql.user`. Executing this statement is not required after using privilege statements such as `GRANT` or `REVOKE`. Executing this statement requires the `RELOAD` privilege.
+このステートメントは、TiDB をトリガーして、特権テーブルから権限のメモリ内コピーをリロードします。 `mysql.user`などのテーブルを手動で編集した後、 `FLUSH PRIVILEGES`を実行する必要があります。 `GRANT`や`REVOKE`などの特権ステートメントを使用した後に、このステートメントを実行する必要はありません。このステートメントを実行するには、 `RELOAD`特権が必要です。
 
-## Synopsis
+## あらすじ {#synopsis}
 
 ```ebnf+diagram
 FlushStmt ::=
@@ -25,23 +25,23 @@ FlushOption ::=
 |   TableOrTables TableNameListOpt WithReadLockOpt
 ```
 
-## Examples
+## 例 {#examples}
 
 ```sql
 mysql> FLUSH PRIVILEGES;
 Query OK, 0 rows affected (0.01 sec)
 ```
 
-## MySQL compatibility
+## MySQL の互換性 {#mysql-compatibility}
 
-This statement is understood to be fully compatible with MySQL. Any compatibility differences should be [reported via an issue](https://github.com/pingcap/tidb/issues/new/choose) on GitHub.
+このステートメントは、MySQL と完全に互換性があると理解されています。互換性の違いは、GitHub で[問題を介して報告された](https://github.com/pingcap/tidb/issues/new/choose)にする必要があります。
 
-## See also
+## こちらもご覧ください {#see-also}
 
-* [SHOW GRANTS](/sql-statements/sql-statement-show-grants.md)
+-   [助成金を表示](/sql-statements/sql-statement-show-grants.md)
 
 <CustomContent platform="tidb">
 
-* [Privilege Management](/privilege-management.md)
+-   [権限管理](/privilege-management.md)
 
 </CustomContent>

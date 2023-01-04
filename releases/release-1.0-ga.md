@@ -2,267 +2,267 @@
 title: TiDB 1.0 release notes
 ---
 
-# TiDB 1.0 Release Notes
+# TiDB 1.0 リリースノート {#tidb-1-0-release-notes}
 
-On October 16, 2017, TiDB 1.0 is now released! This release is focused on MySQL compatibility, SQL optimization, stability, and performance.
+2017 年 10 月 16 日、TiDB 1.0 がリリースされました。このリリースは、MySQL の互換性、SQL の最適化、安定性、およびパフォーマンスに重点を置いています。
 
-## TiDB
+## TiDB {#tidb}
 
-- The SQL query optimizer:
-    - Adjust the cost model
-    - Analyze pushdown
-    - Function signature pushdown
-- Optimize the internal data format to reduce the interim data size
-- Enhance the MySQL compatibility
-- Support the `NO_SQL_CACHE` syntax and limit the cache usage in the storage engine
-- Refactor the Hash Aggregator operator to reduce the memory usage
-- Support the Stream Aggregator operator
+-   SQL クエリ オプティマイザ:
+    -   コスト モデルを調整する
+    -   プッシュダウンを分析する
+    -   関数シグネチャのプッシュダウン
+-   内部データ形式を最適化して中間データ サイズを縮小する
+-   MySQL の互換性を強化する
+-   `NO_SQL_CACHE`構文をサポートし、ストレージ エンジンでのキャッシュの使用を制限します
+-   Hash Aggregator オペレーターをリファクタリングしてメモリー使用量を削減する
+-   Stream Aggregator オペレーターのサポート
 
-## PD
+## PD {#pd}
 
-- Support read flow based balancing
-- Support setting the Store weight and weight based balancing
+-   読み取りフロー ベースのバランシングをサポート
+-   ストア重量と重量ベースのバランシングの設定をサポート
 
-## TiKV
+## TiKV {#tikv}
 
-- Coprocessor now supports more pushdown functions
-- Support pushing down the sampling operation
-- Support manually triggering data compact to collect space quickly
-- Improve the performance and stability
-- Add a Debug API for debugging
-- TiSpark Beta Release:
-- Support configuration framework
-- Support ThriftSever/JDBC and Spark SQL
+-   Coprocessorは、より多くのプッシュダウン関数をサポートするようになりました
+-   サンプリング操作の押し下げをサポート
+-   データコンパクトの手動トリガーをサポートして、スペースをすばやく収集します
+-   パフォーマンスと安定性の向上
+-   デバッグ用のデバッグ API を追加する
+-   TiSpark ベータ版リリース:
+-   サポート構成フレームワーク
+-   ThriftSever/JDBC および Spark SQL をサポート
 
-## Acknowledgement
+## 了承 {#acknowledgement}
 
-### Special thanks to the following enterprises and teams
+### 以下の企業とチームに感謝します {#special-thanks-to-the-following-enterprises-and-teams}
 
-- Archon
-- Mobike
-- Samsung Electronics
-- SpeedyCloud
-- Tencent Cloud
-- UCloud
+-   アルコーン
+-   モバイク
+-   サムスン電子
+-   スピーディクラウド
+-   テンセント クラウド
+-   ユークラウド
 
-### Thanks to the open source software and services from the following organizations and individuals
+### 以下の組織および個人からのオープンソース ソフトウェアおよびサービスに感謝します。 {#thanks-to-the-open-source-software-and-services-from-the-following-organizations-and-individuals}
 
-- Asta Xie
-- CNCF
-- CoreOS
-- Databricks
-- Docker
-- Github
-- Grafana
-- gRPC
-- Jepsen
-- Kubernetes
-- Namazu
-- Prometheus
-- RedHat
-- RocksDB Team
-- Rust Team
+-   アスタ・シェ
+-   CNCF
+-   CoreOS
+-   データブリック
+-   ドッカー
+-   ギットハブ
+-   グラファナ
+-   gRPC
+-   ジェプセン
+-   Kubernetes
+-   なまず
+-   プロメテウス
+-   レッドハット
+-   RocksDB チーム
+-   さびチーム
 
-### Thanks to the individual contributors
+### 個々の貢献者に感謝します {#thanks-to-the-individual-contributors}
 
-- 8cbx
-- Akihiro Suda
-- aliyx
-- alston111111
-- andelf
-- Andy Librian
-- Arthur Yang
-- astaxie
-- Bai, Yang
-- bailaohe
-- Bin Liu
-- Blame cosmos
-- Breezewish
-- Carlos Ferreira
-- Ce Gao
-- Changjian Zhang
-- Cheng Lian
-- Cholerae Hu
-- Chu Chao
-- coldwater
-- Cole R Lawrence
-- cuiqiu
-- cuiyuan
-- Cwen
-- Dagang
-- David Chen
-- David Ding
-- dawxy
-- dcadevil
-- Deshi Xiao
-- Di Tang
-- disksing
-- dongxu
-- dreamquster
-- Drogon
-- Du Chuan
-- Dylan Wen
-- eBoyy
-- Eric Romano
-- Ewan Chou
-- Fiisio
-- follitude
-- Fred Wang
-- fud
-- fudali
-- gaoyangxiaozhu
-- Gogs
-- goroutine
-- Gregory Ian
-- Guanqun Lu
-- Guilherme Hübner Franco
-- Haibin Xie
-- Han Fei
-- hawkingrei
-- Hiroaki Nakamura
-- hiwjd
-- Hongyuan Wang
-- Hu Ming
-- Hu Ziming
-- Huachao Huang
-- HuaiyuXu
-- Huxley Hu
-- iamxy
-- Ian
-- insion
-- iroi44
-- Ivan.Yang
-- Jack Yu
-- jacky liu
-- Jan Mercl
-- Jason W
-- Jay
-- Jay Lee
-- Jianfei Wang
-- Jiaxing Liang
-- Jie Zhou
-- jinhelin
-- Jonathan Boulle
-- Karl Ostendorf
-- knarfeh
-- Kuiba
-- leixuechun
-- li
-- Li Shihai
-- Liao Qiang
-- Light
-- lijian
-- Lilian Lee
-- Liqueur Librazy
-- Liu Cong
-- Liu Shaohui
-- liubo0127
-- liyanan
-- lkk2003rty
-- Louis
-- louishust
-- luckcolors
-- Lynn
-- Mae Huang
-- maiyang
-- maxwell
-- mengshangqi
-- Michael Belenchenko
-- mo2zie
-- morefreeze
-- MQ
-- mxlxm
-- Neil Shen
-- netroby
-- ngaut
-- Nicole Nie
-- nolouch
-- onlymellb
-- overvenus
-- PaladinTyrion
-- paulg
-- Priya Seth
-- qgxiaozhan
-- qhsong
-- Qiannan
-- qiukeren
-- qiuyesuifeng
-- queenypingcap
-- qupeng
-- Rain Li
-- ranxiaolong
-- Ray
-- Rick Yu
-- shady
-- ShawnLi
-- Shen Li
-- Sheng Tang
-- Shirly
-- Shuai Li
-- ShuNing
-- ShuYu Wang
-- siddontang
-- silenceper
-- Simon J Mudd
-- Simon Xia
-- skimmilk6877
-- sllt
-- soup
-- Sphinx
-- Steffen
-- sumBug
-- sunhao2017
-- Tao Meng
-- Tao Zhou
-- tennix
-- tiancaiamao
-- TianGuangyu
-- Tristan Su
-- ueizhou
-- UncP
-- Unknwon
-- v01dstar
-- Van
-- WangXiangUSTC
-- wangyanjun
-- wangyisong1996
-- weekface
-- wegel
-- Wei Fu
-- Wenbin Xiao
-- Wenting Li
-- Wenxuan Shi
-- winkyao
-- woodpenker
-- wuxuelian
-- Xiang Li
-- xiaojian cai
-- Xuanjia Yang
-- Xuanwo
-- XuHuaiyu
-- Yang Zhexuan
-- Yann Autissier
-- Yanzhe Chen
-- Yiding Cui
-- Yim
-- youyouhu
-- Yu Jun
-- Yuwen Shen
-- Zejun Li
-- Zhang Yuning
-- zhangjinpeng1987
-- ZHAO Yijun
-- Zhe-xuan Yang
-- ZhengQian
-- ZhengQianFang
-- zhengwanbo
-- ZhiFeng Hu
-- Zhiyuan Zheng
-- Zhou Tao
-- Zhoubirdblue
-- zhouningnan
-- Ziyi Yan
-- zs634134578
-- zxylvlp
-- zyguan
-- zz-jason
+-   8cbx
+-   須田章宏
+-   アリックス
+-   アルストン111111
+-   アンデルフ
+-   アンディ・リブリアン
+-   アーサー・ヤン
+-   アスタシー
+-   バイ・ヤン
+-   バイラヘ
+-   ビン・リュウ
+-   宇宙を責める
+-   ブリーズウィッシュ
+-   カルロス・フェレイラ
+-   セ・ガオ
+-   チャン・チャン
+-   チェン・リアン
+-   コレラ・フー
+-   チュー・チャオ
+-   冷水
+-   コール・R・ローレンス
+-   クイキュー
+-   翠園
+-   クウェン
+-   ダガン
+-   デビッド・チェン
+-   デビッド・ディン
+-   ドーシー
+-   デカデビル
+-   弟子シャオ
+-   ディ・タン
+-   ディスク作成
+-   東徐
+-   ドリームクスター
+-   ドロゴン
+-   ドゥ・チュアン
+-   ディラン・ウェン
+-   eBoyy
+-   エリック・ロマーノ
+-   イワン・チョウ
+-   フィーシオ
+-   愚かさ
+-   フレッド・ワン
+-   フード
+-   フダリ
+-   高陽小竹
+-   ゴグ
+-   ゴルーチン
+-   グレゴリー・イアン
+-   ル・グァンクン
+-   ギエルメ・ヒューブナー・フランコ
+-   シェ・ハイビン
+-   ハン・フェイ
+-   ホーキングレイ
+-   中村浩明
+-   hiwjd
+-   王宏源
+-   胡明
+-   胡子明
+-   華超黄
+-   HuaiyuXu
+-   ハクスリー・フー
+-   iamxy
+-   イアン
+-   挿入
+-   iroi44
+-   イヴァン・ヤン
+-   ジャック・ユー
+-   ジャッキー・リュー
+-   ヤン・メルクル
+-   ジェイソン・W
+-   ジェイ
+-   ジェイ・リー
+-   ジャンフェイ・ワン
+-   嘉興梁
+-   周傑
+-   ジンヘリン
+-   ジョナサン・ブール
+-   カール・オステンドルフ
+-   ナーフェ
+-   クイバ
+-   leixuechun
+-   李
+-   李世海
+-   遼強
+-   光
+-   麗江
+-   リリアン・リー
+-   リキュール リブラジー
+-   リウ・コン
+-   劉少匯
+-   liubo0127
+-   リヤナン
+-   lkk2003rty
+-   ルイ
+-   ルイシュスト
+-   ラッキーカラーズ
+-   リン
+-   メイ・ファン
+-   米陽
+-   マクスウェル
+-   モンシャンチー
+-   マイケル・ベレンチェンコ
+-   mo2zie
+-   もっと凍らせる
+-   MQ
+-   mxlxm
+-   ニール・シェン
+-   ネットロビー
+-   ガウト
+-   ニコル・ニエ
+-   ノルーチ
+-   唯一のメルブ
+-   大静脈
+-   パラディンティリオン
+-   ポール
+-   プリヤ・セス
+-   qgxiaozhan
+-   クソング
+-   前南
+-   キューケレン
+-   キューイェスイフェン
+-   クイーンピンキャップ
+-   クペン
+-   レイン・リー
+-   ランシャオロン
+-   レイ
+-   リック・ユー
+-   日陰
+-   ショーン・リー
+-   シェン・リー
+-   シェンタン
+-   シャーリー
+-   シュアイ・リー
+-   シュニン
+-   シュユ・ワン
+-   シドンタン
+-   サイレンサー
+-   サイモン・J・マッド
+-   シモン・シア
+-   スキムミルク6877
+-   薄い
+-   スープ
+-   スフィンクス
+-   シュテフェン
+-   サムバグ
+-   sunhao2017
+-   タオ・メン
+-   周陶
+-   テニス
+-   ティアンカイマオ
+-   天光宇
+-   トリスタン・スー
+-   恵州
+-   UncP
+-   不明
+-   v01dstar
+-   バン
+-   王翔USTC
+-   ワンヤンジュン
+-   ワンギソン1996
+-   ウィークフェイス
+-   ヴェーゲル
+-   ウェイ・フー
+-   ウェンビン・シャオ
+-   リー・ウェンティン
+-   文宣市
+-   ウィンキャオ
+-   ウッドペンカー
+-   ウーシュリアン
+-   シャン・リー
+-   カイ・シャオジアン
+-   ヤン・スアンジア
+-   宣ウォ
+-   徐懐玉
+-   ヤン・ゼクアン
+-   ヤン・オーティシエ
+-   ヤンジェ・チェン
+-   崔一頂
+-   イム
+-   ようようふ
+-   ユ・ジュン
+-   シェン・ユーウェン
+-   ゼジュン・リー
+-   張玉寧
+-   張金鵬1987
+-   趙一軍
+-   ヤン・ジェスアン
+-   鄭銭
+-   鄭銭方
+-   正湾波
+-   胡志峰
+-   鄭志遠
+-   周濤
+-   周鳥ブルー
+-   周寧南
+-   ヤン・ツィイー
+-   zs634134578
+-   zxylvlp
+-   ジグアン
+-   zz-ジェイソン

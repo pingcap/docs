@@ -3,13 +3,13 @@ title: SHOW [GLOBAL|SESSION] BINDINGS
 summary: Use of SHOW BINDINGS binding in TiDB database.
 ---
 
-# SHOW [GLOBAL|SESSION] BINDINGS
+# [グローバル|セッション]バインディングを表示 {#show-global-session-bindings}
 
-The `SHOW BINDINGS` statement is used to display information about created SQL bindings. A `BINDING` can be on either a `GLOBAL` or `SESSION` basis. The default is `SESSION`.
+`SHOW BINDINGS`ステートメントは、作成された SQL バインディングに関する情報を表示するために使用されます。 `BINDING`は`GLOBAL`または`SESSION`ベースのいずれかになります。デフォルトは`SESSION`です。
 
-## Synopsis
+## あらすじ {#synopsis}
 
-**ShowStmt:**
+**表示ステートメント:**
 
 ![ShowStmt](/media/sqlgram/ShowStmt.png)
 
@@ -17,7 +17,7 @@ The `SHOW BINDINGS` statement is used to display information about created SQL b
 
 ![ShowTargetFilterable](/media/sqlgram/ShowTargetFilterable.png)
 
-**GlobalScope:**
+**グローバルスコープ:**
 
 ![GlobalScope](/media/sqlgram/GlobalScope.png)
 
@@ -25,31 +25,31 @@ The `SHOW BINDINGS` statement is used to display information about created SQL b
 
 ![ShowLikeOrWhereOpt](/media/sqlgram/ShowLikeOrWhereOpt.png)
 
-## Syntax description
+## 構文の説明 {#syntax-description}
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 SHOW [GLOBAL | SESSION] BINDINGS [ShowLikeOrWhereOpt];
 ```
 
-This statement outputs the execution plan bindings at the GLOBAL or SESSION level. The default scope is SESSION. Currently `SHOW BINDINGS` outputs eight columns, as shown below:
+このステートメントは、GLOBAL または SESSION レベルで実行計画バインディングを出力します。デフォルトのスコープは SESSION です。現在、以下に示すように、 `SHOW BINDINGS`は 8 つの列を出力します。
 
-| Column Name | Description |
-| :---------- | :------------- |
-| original_sql  |  Original SQL statement after parameterization |
-| bind_sql | Bound SQL statement with hints |
-| default_db | Default database |
-| status | Status including 'Using', 'Deleted', 'Invalid', 'Rejected', and 'Pending verification'|
-| create_time | Created time |
-| update_time | Updated time |
-| charset | Character set |
-| collation | Sorting rule |
-| source | The way in which a binding is created, including `manual` (created by the `create [global] binding` SQL statement), `capture` (captured automatically by TiDB), and `evolve` (evolved automatically by TiDB) |
+| カラム名         | 説明                                                                                                                                                |
+| :----------- | :------------------------------------------------------------------------------------------------------------------------------------------------ |
+| original_sql | パラメータ化後の元の SQL ステートメント                                                                                                                            |
+| bind_sql     | ヒント付きのバインドされた SQL ステートメント                                                                                                                         |
+| default_db   | デフォルトのデータベース                                                                                                                                      |
+| 状態           | 「使用中」、「削除済み」、「無効」、「拒否済み」、「確認待ち」などのステータス                                                                                                           |
+| create_time  | 作成時間                                                                                                                                              |
+| update_time  | 更新時間                                                                                                                                              |
+| 文字コード        | キャラクターセット                                                                                                                                         |
+| 照合順序         | ソート規則                                                                                                                                             |
+| ソース          | `manual` ( `create [global] binding` SQL ステートメントによって作成される)、 `capture` (TiDB によって自動的にキャプチャされる)、および`evolve` (TiDB によって自動的に展開される) を含むバインディングが作成される方法 |
 
-## Examples
+## 例 {#examples}
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 mysql> CREATE TABLE t1 (
@@ -138,14 +138,14 @@ Original_sql: select * from t1 where b = ?
 1 row in set (0.00 sec)
 ```
 
-## MySQL compatibility
+## MySQL の互換性 {#mysql-compatibility}
 
-This statement is a TiDB extension to MySQL syntax.
+このステートメントは、MySQL 構文に対する TiDB 拡張です。
 
-## See also
+## こちらもご覧ください {#see-also}
 
-* [CREATE [GLOBAL|SESSION] BINDING](/sql-statements/sql-statement-create-binding.md)
-* [DROP [GLOBAL|SESSION] BINDING](/sql-statements/sql-statement-drop-binding.md)
-* [ANALYZE TABLE](/sql-statements/sql-statement-analyze-table.md)
-* [Optimizer Hints](/optimizer-hints.md)
-* [SQL Plan Management](/sql-plan-management.md)
+-   [[グローバル|セッション]バインディングを作成](/sql-statements/sql-statement-create-binding.md)
+-   [ドロップ [グローバル|セッション] バインディング](/sql-statements/sql-statement-drop-binding.md)
+-   [テーブルを分析](/sql-statements/sql-statement-analyze-table.md)
+-   [オプティマイザーのヒント](/optimizer-hints.md)
+-   [SQL計画管理](/sql-plan-management.md)

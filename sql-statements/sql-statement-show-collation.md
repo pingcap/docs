@@ -3,23 +3,23 @@ title: SHOW COLLATION | TiDB SQL Statement Reference
 summary: An overview of the usage of SHOW COLLATION for the TiDB database.
 ---
 
-# SHOW COLLATION
+# 照合を表示 {#show-collation}
 
-This statement provides a static list of collations, and is included to provide compatibility with MySQL client libraries.
+このステートメントは、照合順序の静的リストを提供し、MySQL クライアント ライブラリとの互換性を提供するために含まれています。
 
-> **Note:**
+> **ノート：**
 >
-> Results of `SHOW COLLATION` vary when the ["new collation framework"](/character-set-and-collation.md#new-framework-for-collations) is enabled. For new collation framework details, refer to [Character Set and Collation](/character-set-and-collation.md).
+> [「新しい照合順序フレームワーク」](/character-set-and-collation.md#new-framework-for-collations)が有効な場合、 `SHOW COLLATION`の結果は異なります。新しい照合順序フレームワークの詳細については、 [文字セットと照合順序](/character-set-and-collation.md)を参照してください。
 
-## Synopsis
+## あらすじ {#synopsis}
 
 **ShowCollationStmt:**
 
 ![ShowCollationStmt](/media/sqlgram/ShowCollationStmt.png)
 
-## Examples
+## 例 {#examples}
 
-When new collation framework is disabled, only binary collations are displayed.
+新しい照合順序フレームワークが無効になっている場合、バイナリ照合のみが表示されます。
 
 ```sql
 mysql> SHOW COLLATION;
@@ -35,7 +35,7 @@ mysql> SHOW COLLATION;
 5 rows in set (0.02 sec)
 ```
 
-When new collation framework is enabled, `utf8_general_ci` and `utf8mb4_general_ci` are additionally supported.
+新しい照合順序フレームワークが有効になっている場合、 `utf8_general_ci`と`utf8mb4_general_ci`が追加でサポートされます。
 
 ```sql
 mysql> SHOW COLLATION;
@@ -57,11 +57,11 @@ mysql> SHOW COLLATION;
 11 rows in set (0.001 sec)
 ```
 
-## MySQL compatibility
+## MySQL の互換性 {#mysql-compatibility}
 
-The usage of this statement is understood to be fully compatible with MySQL. However, charsets in TiDB may have different default collations compared with MySQL. For details, refer to [Compatibility with MySQL](/mysql-compatibility.md). Any other compatibility differences should be [reported via an issue](https://github.com/pingcap/tidb/issues/new/choose) on GitHub.
+このステートメントの使用法は、MySQL と完全に互換性があると理解されています。ただし、TiDB の文字セットは、MySQL とは異なるデフォルトの照合を持つ場合があります。詳細については、 [MySQL との互換性](/mysql-compatibility.md)を参照してください。その他の互換性の違いは、GitHub で[問題を介して報告された](https://github.com/pingcap/tidb/issues/new/choose)にする必要があります。
 
-## See also
+## こちらもご覧ください {#see-also}
 
-* [SHOW CHARACTER SET](/sql-statements/sql-statement-show-character-set.md)
-* [Character Set and Collation](/character-set-and-collation.md)
+-   [キャラクターセットを表示](/sql-statements/sql-statement-show-character-set.md)
+-   [文字セットと照合順序](/character-set-and-collation.md)

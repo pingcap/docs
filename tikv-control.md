@@ -3,19 +3,19 @@ title: TiKV Control User Guide
 summary: Use TiKV Control to manage a TiKV cluster.
 ---
 
-# TiKV Control User Guide
+# TiKV Controlユーザー ガイド {#tikv-control-user-guide}
 
-TiKV Control (`tikv-ctl`) is a command line tool of TiKV, used to manage the cluster. Its installation directory is as follows:
+TiKV Control ( `tikv-ctl` ) は、クラスターを管理するために使用される TiKV のコマンド ライン ツールです。そのインストール ディレクトリは次のとおりです。
 
-* If the cluster is deployed using TiUP, `tikv-ctl` directory is in the in `~/.tiup/components/ctl/{VERSION}/` directory.
+-   クラスタがTiUPを使用してデプロイされている場合、 `tikv-ctl`のディレクトリは`~/.tiup/components/ctl/{VERSION}/`のディレクトリにあります。
 
-## Use TiKV Control in TiUP
+## TiUP でTiUPTiKV Controlを使用する {#use-tikv-control-in-tiup}
 
-> **Note:**
+> **ノート：**
 >
-> It is recommended that the version of the Control tool you use is consistent with the version of the cluster.
+> 使用するコントロール ツールのバージョンは、クラスターのバージョンと一致していることが推奨されます。
 
-`tikv-ctl` is also integrated in the `tiup` command. Execute the following command to call the `tikv-ctl` tool:
+`tiup`コマンドにも`tikv-ctl`が組み込まれています。次のコマンドを実行して、 `tikv-ctl`ツールを呼び出します。
 
 ```shell
 tiup ctl:<cluster-version> tikv
@@ -83,21 +83,21 @@ SUBCOMMANDS:
     unsafe-recover        Unsafely recover the cluster when the majority replicas are failed
 ```
 
-You can add corresponding parameters and subcommands after `tiup ctl:<cluster-version> tikv`.
+`tiup ctl:<cluster-version> tikv`の後に、対応するパラメーターとサブコマンドを追加できます。
 
-## General options
+## 一般オプション {#general-options}
 
-`tikv-ctl` provides two operation modes:
+`tikv-ctl`は 2 つの操作モードを提供します。
 
-- Remote mode: use the `--host` option to accept the service address of TiKV as the argument
+-   リモート モード: `--host`オプションを使用して、TiKV のサービス アドレスを引数として受け入れます。
 
-    For this mode, if SSL is enabled in TiKV, `tikv-ctl` also needs to specify the related certificate file. For example:
+    このモードでは、 `tikv-ctl`で SSL が有効になっている場合、関連する証明書ファイルも指定する必要があります。例えば：
 
     ```shell
     tikv-ctl --ca-path ca.pem --cert-path client.pem --key-path client-key.pem --host 127.0.0.1:20160 <subcommands>
     ```
 
-    However, sometimes `tikv-ctl` communicates with PD instead of TiKV. In this case, you need to use the `--pd` option instead of `--host`. Here is an example:
+    ただし、 `tikv-ctl`ではなく PD と通信する場合もあります。この場合、 `--host`の代わりに`--pd`オプションを使用する必要があります。次に例を示します。
 
     ```shell
     tikv-ctl --pd 127.0.0.1:2379 compact-cluster
@@ -107,18 +107,18 @@ You can add corresponding parameters and subcommands after `tiup ctl:<cluster-ve
     store:"127.0.0.1:20160" compact db:KV cf:default range:([], []) success!
     ```
 
-- Local mode:
+-   ローカルモード:
 
-    * Use the `--data-dir` option to specify the local TiKV data directory path.
-    * Use the `--config` option to specify the local TiKV configuration file path.
+    -   `--data-dir`オプションを使用して、ローカルの TiKV データ ディレクトリ パスを指定します。
+    -   `--config`オプションを使用して、ローカルの TiKV 構成ファイル パスを指定します。
 
-  In this mode, you need to stop the running TiKV instance.
+    このモードでは、実行中の TiKV インスタンスを停止する必要があります。
 
-Unless otherwise noted, all commands support both the remote mode and the local mode.
+特に明記しない限り、すべてのコマンドはリモート モードとローカル モードの両方をサポートします。
 
-Additionally, `tikv-ctl` has two simple commands `--to-hex` and `--to-escaped`, which are used to make simple changes to the form of the key.
+さらに、 `tikv-ctl`には 2 つの単純なコマンド`--to-hex`と`--to-escaped`があり、キーの形状を単純に変更するために使用されます。
 
-Generally, use the `escaped` form of the key. For example:
+通常、キーの`escaped`形式を使用します。例えば：
 
 ```shell
 tikv-ctl --to-escaped 0xaaff
@@ -127,33 +127,33 @@ tikv-ctl --to-hex "\252\377"
 AAFF
 ```
 
-> **Note:**
+> **ノート：**
 >
-> When you specify the `escaped` form of the key in a command line, it is required to enclose it in double quotes. Otherwise, bash eats the backslash and a wrong result is returned.
+> コマンド ラインでキーの`escaped`形式を指定する場合は、二重引用符で囲む必要があります。そうしないと、bash がバックスラッシュを食べてしまい、間違った結果が返されます。
 
-## Subcommands, some options and flags
+## サブコマンド、いくつかのオプションとフラグ {#subcommands-some-options-and-flags}
 
-This section describes the subcommands that `tikv-ctl` supports in detail. Some subcommands support a lot of options. For all details, run `tikv-ctl --help <subcommand>`.
+このセクションでは、 `tikv-ctl`がサポートするサブコマンドについて詳しく説明します。一部のサブコマンドは、多くのオプションをサポートしています。詳細については、 `tikv-ctl --help <subcommand>`を実行してください。
 
-### View information of the Raft state machine
+### Raftステート マシンの情報をビューする {#view-information-of-the-raft-state-machine}
 
-Use the `raft` subcommand to view the status of the Raft state machine at a specific moment. The status information includes two parts: three structs (**RegionLocalState**, **RaftLocalState**, and **RegionApplyState**) and the corresponding Entries of a certain piece of log.
+`raft`サブコマンドを使用して、特定の時点でのRaftステート マシンのステータスを表示します。ステータス情報には、3 つの構造体 ( **RegionLocalState** 、 <strong>RaftLocalState</strong> 、および<strong>RegionApplyState</strong> ) と、特定のログ片の対応するエントリの 2 つの部分が含まれます。
 
-Use the `region` and `log` subcommands to obtain the above information respectively. The two subcommands both support the remote mode and the local mode at the same time.
+`region`および`log`サブコマンドを使用して、上記の情報をそれぞれ取得します。 2 つのサブコマンドは両方とも、リモート モードとローカル モードを同時にサポートします。
 
-For the `region` subcommand:
+`region`サブコマンドの場合:
 
-- To specify the Regions to be viewed, use the `-r` option. Multiple Regions are separated by `,`. You can also use the `--all-regions` option to view all Regions. Note that `-r` and `--all-regions` cannot be used at the same time.
-- To limit the number of Regions to be printed, use the `--limit` option (default: `16`).
-- To query which Regions are included in a certain key range, use the `--start` and `--end` options (default: no range limit, in Hex format).
+-   表示するリージョンを指定するには、 `-r`オプションを使用します。複数のリージョンは`,`で区切られます。 `--all-regions`オプションを使用して、すべての地域を表示することもできます。 `-r`と`--all-regions`は同時に使用できませんのでご注意ください。
+-   印刷するリージョンの数を制限するには、 `--limit`オプションを使用します (デフォルト: `16` )。
+-   特定のキー範囲に含まれるリージョンを照会するには、 `--start`および`--end`オプションを使用します (デフォルト: 範囲制限なし、16 進形式)。
 
-For example, to print the Region with the ID `1239`, use the following command:
+たとえば、ID `1239`のリージョンを出力するには、次のコマンドを使用します。
 
 ```shell
 tikv-ctl --host 127.0.0.1:20160 raft region -r 1239
 ```
 
-The output is as follows:
+出力は次のとおりです。
 
 ```
 "region id": 1239
@@ -174,16 +174,16 @@ The output is as follows:
 }
 ```
 
-To query which Regions are included in a certain key range, use the following command:
+特定のキー範囲に含まれるリージョンを照会するには、次のコマンドを使用します。
 
-- If the key range is in a Region range, the Region information is output.
-- If the key range is the same as a Region range, for example, when the given key range is the same as the Region `1239`, because the Region range is a left-closed and right-open interval, and Region `1009` takes the `end_key` of Region `1239` as the `start_key`, the Region `1009` information is also output.
+-   キー範囲がリージョン範囲内にある場合、リージョン情報が出力されます。
+-   キー範囲がリージョン範囲と同じ場合、たとえば、指定されたキー範囲がリージョン`1239`と同じ場合、リージョン範囲は左が閉じて右が開いている間隔であり、リージョン`1009`は`end_key`のリージョン`1239`は`start_key`として、リージョン`1009`の情報も出力されます。
 
 ```shell
 tikv-ctl --host 127.0.0.1:20160 raft region --start 7480000000000000FF4E5F728000000000FF1443770000000000FA --end 7480000000000000FF4E5F728000000000FF21C4420000000000FA
 ```
 
-The output is as follows:
+出力は次のとおりです。
 
 ```
 "region state": {
@@ -200,15 +200,15 @@ The output is as follows:
 }
 ```
 
-### View the Region size
+### リージョンサイズをビューする {#view-the-region-size}
 
-Use the `size` command to view the Region size:
+`size`コマンドを使用して、リージョンサイズを表示します。
 
 ```shell
 tikv-ctl --data-dir /path/to/tikv size -r 2
 ```
 
-The output is as follows:
+出力は次のとおりです。
 
 ```
 region id: 2
@@ -217,9 +217,9 @@ cf write region size: 41.250 MB
 cf lock region size: 27616
 ```
 
-### Scan to view MVCC of a specific range
+### スキャンして特定範囲の MVCC を表示 {#scan-to-view-mvcc-of-a-specific-range}
 
-The `--from` and `--to` options of the `scan` command accept two escaped forms of raw key, and use the `--show-cf` flag to specify the column families that you need to view.
+`scan`コマンドの`--from`および`--to`オプションは、未加工のキーの 2 つのエスケープ形式を受け入れ、 `--show-cf`フラグを使用して、表示する必要がある列ファミリーを指定します。
 
 ```shell
 tikv-ctl --data-dir /path/to/tikv scan --from 'zm' --limit 2 --show-cf lock,default,write
@@ -233,9 +233,9 @@ key: zmDB:29\000\000\377\000\374\000\000\000\000\000\000\377\000H\000\000\000\00
          write cf value: start_ts: 399650105199951882 commit_ts: 399650105213059076 short_value: "\000\000\000\000\000\000\000\001"
 ```
 
-### View MVCC of a given key
+### 特定のキーの MVCC をビューする {#view-mvcc-of-a-given-key}
 
-Similar to the `scan` command, the `mvcc` command can be used to view MVCC of a given key.
+`scan`コマンドと同様に、 `mvcc`コマンドを使用して、特定のキーの MVCC を表示できます。
 
 ```shell
 tikv-ctl --data-dir /path/to/tikv mvcc -k "zmDB:29\000\000\377\000\374\000\000\000\000\000\000\377\000H\000\000\000\000\000\000\371" --show-cf=lock,write,default
@@ -247,13 +247,13 @@ key: zmDB:29\000\000\377\000\374\000\000\000\000\000\000\377\000H\000\000\000\00
          write cf value: start_ts: 399650105199951882 commit_ts: 399650105213059076 short_value: "\000\000\000\000\000\000\000\001"
 ```
 
-In this command, the key is also the escaped form of raw key.
+このコマンドでは、キーは raw キーのエスケープ形式でもあります。
 
-### Scan raw keys
+### 生のキーをスキャンする {#scan-raw-keys}
 
-The `raw-scan` command scans directly from the RocksDB. Note that to scan data keys you need to add a `'z'` prefix to keys.
+`raw-scan`コマンドは、RocksDB から直接スキャンします。データ キーをスキャンするには、キーに`'z'`プレフィックスを追加する必要があることに注意してください。
 
-Use `--from` and `--to` options to specify the range to scan (unbounded by default). Use `--limit` to limit at most how many keys to print out (30 by default). Use `--cf` to specify which cf to scan (can be `default`, `write` or `lock`).
+`--from`と`--to`のオプションを使用して、スキャンする範囲を指定します (デフォルトでは無制限)。印刷するキーの数を最大で`--limit`に制限するには、5 を使用します (デフォルトでは 30)。 `--cf`を使用して、スキャンする cf を指定します ( `default` 、 `write`または`lock`のいずれか)。
 
 ```shell
 tikv-ctl --data-dir /var/lib/tikv raw-scan --from 'zt' --limit 2 --cf default
@@ -266,13 +266,13 @@ key: "zt\200\000\000\000\000\000\000\377\025_r\200\000\000\000\000\377\000\000\0
 Total scanned keys: 2
 ```
 
-### Print a specific key value
+### 特定のキー値を出力する {#print-a-specific-key-value}
 
-To print the value of a key, use the `print` command.
+キーの値を表示するには、 `print`コマンドを使用します。
 
-### Print some properties about Region
+### リージョンに関するいくつかのプロパティを印刷する {#print-some-properties-about-region}
 
-In order to record Region state details, TiKV writes some statistics into the SST files of Regions. To view these properties, run `tikv-ctl` with the `region-properties` sub-command:
+リージョンの状態の詳細を記録するために、TiKV はいくつかの統計をリージョンの SST ファイルに書き込みます。これらのプロパティを表示するには、 `region-properties`サブコマンドで`tikv-ctl`を実行します。
 
 ```shell
 tikv-ctl --host localhost:20160 region-properties -r 2
@@ -291,50 +291,54 @@ mvcc.max_row_versions: 0
 middle_key_by_approximate_size:
 ```
 
-The properties can be used to check whether the Region is healthy or not. If not, you can use them to fix the Region. For example, splitting the Region manually by `middle_key_approximate_size`.
+プロパティを使用して、リージョンが正常かどうかを確認できます。そうでない場合は、それらを使用してリージョンを修正できます。たとえば、 リージョンを`middle_key_approximate_size`で手動で分割します。
 
-### Compact data of each TiKV manually
+### 各 TiKV のデータを手動で圧縮する {#compact-data-of-each-tikv-manually}
 
-Use the `compact` command to manually compact data of each TiKV.
+`compact`コマンドを使用して、各 TiKV のデータを手動で圧縮します。
 
-- Use the `--from` and `--to` options to specify the compaction range in the form of escaped raw key. If not set, the whole range will be compacted.
-- Use the `--region` option to compact the range of a specific region. If set, `--from` and `--to` will be ignored.
-- Use the `--db` option to specify the RocksDB that performs compaction. The optional values are `kv` and `raft`.
-- Use the `--threads` option allows you to specify the concurrency for the TiKV compaction and its default value is `8`. Generally, a higher concurrency comes with a faster compaction speed, which might yet affect the service. You need to choose an appropriate concurrency count based on your scenario.
-- Use the `--bottommost` option to include or exclude the bottommost files when TiKV performs compaction. The value options are `default`, `skip`, and `force`. The default value is `default`.
-    - `default` means that the bottommost files are included only when the Compaction Filter feature is enabled.
-    - `skip` means that the bottommost files are excluded when TiKV performs compaction.
-    - `force` means that the bottommost files are always included when TiKV performs compaction.
+-   `--from`および`--to`オプションを使用して、圧縮範囲をエスケープされた raw キーの形式で指定します。設定されていない場合、範囲全体が圧縮されます。
 
-- To compact data in the local mode, use the following command:
+-   特定の領域の範囲を圧縮するには、 `--region`オプションを使用します。設定すると、 `--from`と`--to`は無視されます。
+
+-   `--db`オプションを使用して、圧縮を実行する RocksDB を指定します。オプションの値は`kv`と`raft`です。
+
+-   `--threads`オプションを使用すると、TiKV 圧縮の同時実行数を指定できます。デフォルト値は`8`です。一般に、コンカレンシーが高いほど圧縮速度が速くなりますが、サービスに影響を与える可能性があります。シナリオに基づいて、適切な同時実行数を選択する必要があります。
+
+-   `--bottommost`オプションを使用して、TiKV が圧縮を実行するときに一番下のファイルを含めたり除外したりします。値のオプションは`default` 、 `skip` 、および`force`です。デフォルト値は`default`です。
+    -   `default`は、圧縮フィルター機能が有効になっている場合にのみ、一番下のファイルが含まれることを意味します。
+    -   `skip`は、TiKV が圧縮を実行するときに、一番下のファイルが除外されることを意味します。
+    -   `force`は、TiKV が圧縮を実行するときに、一番下のファイルが常に含まれることを意味します。
+
+-   ローカル モードでデータを圧縮するには、次のコマンドを使用します。
 
     ```shell
     tikv-ctl --data-dir /path/to/tikv compact --db kv
     ```
 
-- To compact data in the remote mode, use the following command:
+-   リモート モードでデータを圧縮するには、次のコマンドを使用します。
 
     ```shell
     tikv-ctl --host ip:port compact --db kv
     ```
 
-### Compact data of the whole TiKV cluster manually
+### TiKV クラスター全体のデータを手動で圧縮する {#compact-data-of-the-whole-tikv-cluster-manually}
 
-Use the `compact-cluster` command to manually compact data of the whole TiKV cluster. The flags of this command have the same meanings and usage as those of the `compact` command.
+`compact-cluster`コマンドを使用して、TiKV クラスター全体のデータを手動で圧縮します。このコマンドのフラグの意味と使用法は、 `compact`コマンドのフラグと同じです。
 
-### Set a Region to tombstone
+### リージョンをトゥームストーンに設定する {#set-a-region-to-tombstone}
 
-The `tombstone` command is usually used in circumstances where the sync-log is not enabled, and some data written in the Raft state machine is lost caused by power down.
+`tombstone`コマンドは通常、sync-log が有効になっておらず、 Raftステート マシンに書き込まれた一部のデータが電源切断によって失われる状況で使用されます。
 
-In a TiKV instance, you can use this command to set the status of some Regions to tombstone. Then when you restart the instance, those Regions are skipped to avoid the restart failure caused by damaged Raft state machines of those Regions. Those Regions need to have enough healthy replicas in other TiKV instances to be able to continue the reads and writes through the Raft mechanism.
+TiKV インスタンスでは、このコマンドを使用して、一部のリージョンのステータスをトゥームストーンに設定できます。その後、インスタンスを再起動すると、それらのリージョンのRaftステート マシンの損傷によって引き起こされる再起動の失敗を回避するために、それらのリージョンはスキップされます。これらのリージョンでは、 Raftメカニズムを介して読み取りと書き込みを続行できるように、他の TiKV インスタンスに十分な健全なレプリカが必要です。
 
-In general cases, you can remove the corresponding Peer of this Region using the `remove-peer` command:
+通常、 `remove-peer`コマンドを使用して、このリージョンの対応するピアを削除できます。
 
 ```shell
 pd-ctl operator add remove-peer <region_id> <store_id>
 ```
 
-Then use the `tikv-ctl` tool to set a Region to tombstone on the corresponding TiKV instance to skip the health check for this Region at startup:
+次に、 `tikv-ctl`ツールを使用して、リージョンを対応する TiKV インスタンスのトゥームストーンに設定し、起動時にこのリージョンのヘルス チェックをスキップします。
 
 ```shell
 tikv-ctl --data-dir /path/to/tikv tombstone -p 127.0.0.1:2379 -r <region_id>
@@ -344,7 +348,7 @@ tikv-ctl --data-dir /path/to/tikv tombstone -p 127.0.0.1:2379 -r <region_id>
 success!
 ```
 
-However, in some cases, you cannot easily remove this Peer of this Region from PD, so you can specify the `--force` option in `tikv-ctl` to forcibly set the Peer to tombstone:
+ただし、場合によっては、このリージョンのピアを PD から簡単に削除できないため、 `tikv-ctl`の`--force`オプションを指定して、ピアを強制的にトゥームストーンに設定できます。
 
 ```shell
 tikv-ctl --data-dir /path/to/tikv tombstone -p 127.0.0.1:2379 -r <region_id>,<region_id> --force
@@ -354,14 +358,14 @@ tikv-ctl --data-dir /path/to/tikv tombstone -p 127.0.0.1:2379 -r <region_id>,<re
 success!
 ```
 
-> **Note:**
+> **ノート：**
 >
-> - The `tombstone` command only supports the local mode.
-> - The argument of the `-p` option specifies the PD endpoints without the `http` prefix. Specifying the PD endpoints is to query whether PD can safely switch to Tombstone.
+> -   `tombstone`コマンドは、ローカル モードのみをサポートします。
+> -   `-p`オプションの引数は、 `http`プレフィックスなしで PD エンドポイントを指定します。 PD エンドポイントを指定することは、PD が安全に Tombstone に切り替えることができるかどうかを照会することです。
 
-### Send a `consistency-check` request to TiKV
+### <code>consistency-check</code>リクエストを TiKV に送信する {#send-a-code-consistency-check-code-request-to-tikv}
 
-Use the `consistency-check` command to execute a consistency check among replicas in the corresponding Raft of a specific Region. If the check fails, TiKV itself panics. If the TiKV instance specified by `--host` is not the Region leader, an error is reported.
+`consistency-check`コマンドを使用して、特定のリージョンの対応するRaft内のレプリカ間で整合性チェックを実行します。チェックが失敗すると、TiKV 自体がパニックになります。 `--host`で指定された TiKV インスタンスがリージョンリーダーでない場合、エラーが報告されます。
 
 ```shell
 tikv-ctl --host 127.0.0.1:20160 consistency-check -r 2
@@ -370,19 +374,19 @@ tikv-ctl --host 127.0.0.1:20161 consistency-check -r 2
 DebugClient::check_region_consistency: RpcFailure(RpcStatus { status: Unknown, details: Some("StringError(\"Leader is on store 1\")") })
 ```
 
-> **Note:**
+> **ノート：**
 >
-> - It is **NOT** recommended to use the `consistency-check` command, because it is incompatible with the garbage collection in TiDB and might mistakenly report an error.
-> - This command only supports the remote mode.
-> - Even if this command returns `success!`, you need to check whether TiKV panics. This is because this command is only a proposal that requests a consistency check for the leader, and you cannot know from the client whether the whole check process is successful or not.
+> -   `consistency-check`コマンドの使用はお勧めし**ません**。TiDB のガベージコレクションと互換性がなく、誤ってエラーを報告する可能性があるためです。
+> -   このコマンドは、リモート モードのみをサポートします。
+> -   このコマンドが`success!`を返す場合でも、TiKV がパニックするかどうかを確認する必要があります。これは、このコマンドがリーダーに対して整合性チェックを要求する提案に過ぎず、チェック プロセス全体が成功したかどうかをクライアントから知ることができないためです。
 
-### Dump snapshot meta
+### スナップショット メタのダンプ {#dump-snapshot-meta}
 
-This sub-command is used to parse a snapshot meta file at given path and print the result.
+このサブコマンドは、指定されたパスにあるスナップショット メタ ファイルを解析し、結果を出力するために使用されます。
 
-### Print the Regions where the Raft state machine corrupts
+### Raftステート マシンが破損している領域を出力します。 {#print-the-regions-where-the-raft-state-machine-corrupts}
 
-To avoid checking the Regions while TiKV is started, you can use the `tombstone` command to set the Regions where the Raft state machine reports an error to Tombstone. Before running this command, use the `bad-regions` command to find out the Regions with errors, so as to combine multiple tools for automated processing.
+TiKV の開始中にリージョンをチェックしないようにするために、 `tombstone`コマンドを使用して、 Raftステート マシンがエラーをトゥームストーンに報告するリージョンを設定できます。このコマンドを実行する前に、 `bad-regions`コマンドを使用してエラーのあるリージョンを見つけ、複数のツールを組み合わせて自動処理を行います。
 
 ```shell
 tikv-ctl --data-dir /path/to/tikv bad-regions
@@ -392,30 +396,30 @@ tikv-ctl --data-dir /path/to/tikv bad-regions
 all regions are healthy
 ```
 
-If the command is successfully executed, it prints the above information. If the command fails, it prints the list of bad Regions. Currently, the errors that can be detected include the mismatches between `last index`, `commit index` and `apply index`, and the loss of Raft log. Other conditions like the damage of snapshot files still need further support.
+コマンドが正常に実行されると、上記の情報が出力されます。コマンドが失敗すると、不正なリージョンのリストが出力されます。現在、検出できるエラーには、 `last index` 、 `commit index` 、および`apply index`の不一致、およびRaftログの損失が含まれます。スナップショット ファイルの損傷などのその他の状態については、さらにサポートが必要です。
 
-### View Region properties
+### リージョンのプロパティをビュー {#view-region-properties}
 
-- To view in local the properties of Region 2 on the TiKV instance that is deployed in `/path/to/tikv`:
+-   `/path/to/tikv`にデプロイされた TiKV インスタンスのリージョン2 のプロパティをローカルで表示するには:
 
     ```shell
     tikv-ctl --data-dir /path/to/tikv/data region-properties -r 2
     ```
 
-- To view online the properties of Region 2 on the TiKV instance that is running on `127.0.0.1:20160`:
+-   `127.0.0.1:20160`で実行されている TiKV インスタンスのリージョン2 のプロパティをオンラインで表示するには、次のようにします。
 
     ```shell
     tikv-ctl --host 127.0.0.1:20160 region-properties -r 2
     ```
 
-### Modify the TiKV configuration dynamically
+### TiKV 構成を動的に変更する {#modify-the-tikv-configuration-dynamically}
 
-You can use the `modify-tikv-config` command to dynamically modify the configuration arguments. Currently, the TiKV configuration items that can be dynamically modified and the detailed modification are consistent with modifying configuration using SQL statements. For details, see [Modify TiKV configuration dynamically](/dynamic-config.md#modify-tikv-configuration-dynamically).
+`modify-tikv-config`コマンドを使用して、構成引数を動的に変更できます。現在、動的に変更できる TiKV の構成項目と詳細な変更は、SQL ステートメントを使用した構成の変更と一致しています。詳細については、 [TiKV 構成を動的に変更する](/dynamic-config.md#modify-tikv-configuration-dynamically)を参照してください。
 
-- `-n` is used to specify the full name of the configuration item. For the list of configuration items that can be modified dynamically, see [Modify TiKV configuration dynamically](/dynamic-config.md#modify-tikv-configuration-dynamically).
-- `-v` is used to specify the configuration value.
+-   `-n`は、構成アイテムの完全な名前を指定するために使用されます。動的に変更できる構成アイテムのリストについては、 [TiKV 構成を動的に変更する](/dynamic-config.md#modify-tikv-configuration-dynamically)を参照してください。
+-   `-v`は、構成値を指定するために使用されます。
 
-Set the size of `shared block cache`:
+`shared block cache`のサイズを設定します。
 
 ```shell
 tikv-ctl --host ip:port modify-tikv-config -n storage.block-cache.capacity -v 10GB
@@ -425,7 +429,7 @@ tikv-ctl --host ip:port modify-tikv-config -n storage.block-cache.capacity -v 10
 success
 ```
 
-When `shared block cache` is disabled, set `block cache size` for the `write` CF:
+`shared block cache`が無効の場合、 `write` CF に`block cache size`を設定します。
 
 ```shell
 tikv-ctl --host ip:port modify-tikv-config -n rocksdb.writecf.block-cache-size -v 256MB
@@ -451,7 +455,7 @@ tikv-ctl --host ip:port modify-tikv-config -n raftstore.sync-log -v false
 success
 ```
 
-When the compaction rate limit causes accumulated compaction pending bytes, disable the `rate-limiter-auto-tuned` mode or set a higher limit for the compaction flow:
+圧縮レート制限により圧縮保留中のバイトが蓄積される場合は、 `rate-limiter-auto-tuned`モードを無効にするか、圧縮フローの制限を高く設定します。
 
 ```shell
 tikv-ctl --host ip:port modify-tikv-config -n rocksdb.rate-limiter-auto-tuned -v false
@@ -469,21 +473,21 @@ tikv-ctl --host ip:port modify-tikv-config -n rocksdb.rate-bytes-per-sec -v "1GB
 success
 ```
 
-### Force Regions to recover services from failure of multiple replicas (deprecated)
+### 複数のレプリカの障害からサービスを回復するようにリージョンを強制する (非推奨) {#force-regions-to-recover-services-from-failure-of-multiple-replicas-deprecated}
 
-> **Warning:**
+> **警告：**
 >
-> It is not recommended to use this feature. Instead, you can use Online Unsafe Recovery in `pd-ctl` which provides one-stop automatic recovery capabilities. Extra operations such as stopping services are not needed. For detailed introduction, see [Online Unsafe Recovery](/online-unsafe-recovery.md).
+> この機能を使用することはお勧めしません。代わりに、ワンストップの自動回復機能を提供する Online Unsafe Recovery in `pd-ctl`を使用できます。サービスの停止などの余分な操作は必要ありません。詳細な紹介については、 [オンラインの安全でない回復](/online-unsafe-recovery.md)を参照してください。
 
-You can use the `unsafe-recover remove-fail-stores` command to remove the failed machines from the peer list of Regions. Before running this command, you need to stop the service of the target TiKV store to release file locks.
+`unsafe-recover remove-fail-stores`コマンドを使用して、失敗したマシンをリージョンのピア リストから削除できます。このコマンドを実行する前に、対象の TiKV ストアのサービスを停止してファイル ロックを解除する必要があります。
 
-The `-s` option accepts multiple `store_id` separated by comma and uses the `-r` flag to specify involved Regions. If you need to perform this operation on all Regions in a specific store, you can simply specify `--all-regions`.
+`-s`オプションは、コンマで区切られた複数の`store_id`を受け入れ、 `-r`フラグを使用して関連するリージョンを指定します。特定のストアのすべてのリージョンでこの操作を実行する必要がある場合は、単純に`--all-regions`を指定できます。
 
-> **Warning:**
+> **警告：**
 >
-> - If any misoperation is performed, it might be hard to recover the cluster. Be aware of the potential risks and avoid using this feature in a production environment.
-> - If the `--all-regions` option is used, you are expected to run this command on all the remaining stores connected to the cluster. You need to ensure that these healthy stores stop providing services before recovering the damaged stores. Otherwise, the inconsistent peer lists in Region replicas will cause errors when you run `split-region` or `remove-peer`. This further causes inconsistency between other metadata, and finally, the Regions will become unavailable.
-> - Once you have run `remove-fail-stores`, you cannot restart the removed nodes or add these nodes to the cluster. Otherwise, the metadata will be inconsistent, and finally, the Regions will be unavailable.
+> -   操作を誤ると、クラスタの復旧が困難になる場合があります。潜在的なリスクを認識し、本番環境でこの機能を使用しないようにしてください。
+> -   `--all-regions`オプションを使用する場合、クラスターに接続されている残りのすべてのストアでこのコマンドを実行する必要があります。損傷したストアを回復する前に、これらの健全なストアがサービスの提供を停止することを確認する必要があります。そうしないと、リージョンレプリカの一貫性のないピア リストが原因で、 `split-region`または`remove-peer`を実行したときにエラーが発生します。これにより、他のメタデータ間の不一致がさらに発生し、最終的にリージョンが使用できなくなります。
+> -   `remove-fail-stores`を実行すると、削除されたノードを再起動したり、これらのノードをクラスターに追加したりすることはできません。そうしないと、メタデータに一貫性がなくなり、最終的にリージョンが使用できなくなります。
 
 ```shell
 tikv-ctl --data-dir /path/to/tikv unsafe-recover remove-fail-stores -s 3 -r 1001,1002
@@ -497,58 +501,58 @@ success!
 tikv-ctl --data-dir /path/to/tikv unsafe-recover remove-fail-stores -s 4,5 --all-regions
 ```
 
-Then, after you restart TiKV, the Regions can continue providing services with the remaining healthy replicas. This command is commonly used when multiple TiKV stores are damaged or deleted.
+次に、TiKV を再起動した後、リージョンは残りの正常なレプリカでサービスを提供し続けることができます。このコマンドは、複数の TiKV ストアが破損または削除された場合によく使用されます。
 
-> **Note:**
+> **ノート：**
 >
-> - You are expected to run this command for all stores where the specified Regions' peers are located.
-> - This command only supports the local mode. It prints `success!` when successfully run.
+> -   指定されたリージョンのピアが配置されているすべてのストアに対して、このコマンドを実行する必要があります。
+> -   このコマンドは、ローカル モードのみをサポートします。正常に実行されると`success!`が出力されます。
 
-### Recover from MVCC data corruption
+### MVCC データ破損からの回復 {#recover-from-mvcc-data-corruption}
 
-Use the `recover-mvcc` command in circumstances where TiKV cannot run normally caused by MVCC data corruption. It cross-checks 3 CFs ("default", "write", "lock") to recover from various kinds of inconsistency.
+MVCC のデータ破損により TiKV が正常に動作しない場合は、 `recover-mvcc`コマンドを使用してください。 3 つの CF (「デフォルト」、「書き込み」、「ロック」) をクロスチェックして、さまざまな種類の不整合から回復します。
 
-- Use the `-r` option to specify involved Regions by `region_id`.
-- Use the `-p` option to specify PD endpoints.
+-   `-r`オプションを使用して、関係するリージョンを`region_id`で指定します。
+-   PD エンドポイントを指定するには、 `-p`オプションを使用します。
 
 ```shell
 tikv-ctl --data-dir /path/to/tikv recover-mvcc -r 1001,1002 -p 127.0.0.1:2379
 success!
 ```
 
-> **Note:**
+> **ノート：**
 >
-> - This command only supports the local mode. It prints `success!` when successfully run.
-> - The argument of the `-p` option specifies the PD endpoints without the `http` prefix. Specifying the PD endpoints is to query whether the specified `region_id` is validated or not.
-> - You need to run this command for all stores where specified Regions' peers are located.
+> -   このコマンドは、ローカル モードのみをサポートします。正常に実行されると`success!`が出力されます。
+> -   `-p`オプションの引数は、 `http`プレフィックスなしで PD エンドポイントを指定します。 PD エンドポイントを指定すると、指定された`region_id`が検証されているかどうかを照会します。
+> -   指定したリージョンのピアが配置されているすべてのストアに対して、このコマンドを実行する必要があります。
 
-### Ldb Command
+### Ldb コマンド {#ldb-command}
 
-The `ldb` command line tool offers multiple data access and database administration commands. Some examples are listed below. For more information, refer to the help message displayed when running `tikv-ctl ldb` or check the documents from RocksDB.
+`ldb`コマンド ライン ツールは、複数のデータ アクセスおよびデータベース管理コマンドを提供します。以下にいくつかの例を示します。詳細については、 `tikv-ctl ldb`の実行時に表示されるヘルプ メッセージを参照するか、RocksDB のドキュメントを確認してください。
 
-Examples of data access sequence:
+データ アクセス シーケンスの例:
 
-To dump an existing RocksDB in HEX:
+既存の RocksDB を HEX でダンプするには:
 
 ```shell
 tikv-ctl ldb --hex --db=/tmp/db dump
 ```
 
-To dump the manifest of an existing RocksDB:
+既存の RocksDB のマニフェストをダンプするには:
 
 ```shell
 tikv-ctl ldb --hex manifest_dump --path=/tmp/db/MANIFEST-000001
 ```
 
-You can specify the column family that your query is against using the `--column_family=<string>` command line.
+`--column_family=<string>`コマンド ラインを使用して、クエリの対象となるカラムファミリーを指定できます。
 
-`--try_load_options` loads the database options file to open the database. It is recommended to always keep this option on when the database is running. If you open the database with default options, the LSM-tree might be messed up, which cannot be recovered automatically.
+`--try_load_options`は、データベース オプション ファイルをロードしてデータベースを開きます。データベースの実行中は、このオプションを常にオンにしておくことをお勧めします。デフォルトのオプションでデータベースを開くと、LSM ツリーが混乱する可能性があり、自動的に回復することはできません。
 
-### Dump encryption metadata
+### 暗号化メタデータのダンプ {#dump-encryption-metadata}
 
-Use the `encryption-meta` subcommand to dump encryption metadata. The subcommand can dump two types of metadata: encryption info for data files, and the list of data encryption keys used.
+`encryption-meta`サブコマンドを使用して、暗号化メタデータをダンプします。このサブコマンドは、データ ファイルの暗号化情報と、使用されているデータ暗号化キーのリストの 2 種類のメタデータをダンプできます。
 
-To dump encryption info for data files, use the `encryption-meta dump-file` subcommand. You need to create a TiKV config file to specify `data-dir` for the TiKV deployment:
+データファイルの暗号化情報をダンプするには、 `encryption-meta dump-file`サブコマンドを使用します。 TiKV 展開用に`data-dir`を指定するには、TiKV 構成ファイルを作成する必要があります。
 
 ```
 # conf.toml
@@ -556,7 +560,7 @@ To dump encryption info for data files, use the `encryption-meta dump-file` subc
 data-dir = "/path/to/tikv/data"
 ```
 
-The `--path` option can be used to specify an absolute or relative path to the data file of interest. The command might give empty output if the data file is not encrypted. If `--path` is not provided, encryption info for all data files will be printed.
+`--path`オプションを使用して、目的のデータ ファイルへの絶対パスまたは相対パスを指定できます。データ ファイルが暗号化されていない場合、コマンドは空の出力を返す可能性があります。 `--path`が指定されていない場合、すべてのデータ ファイルの暗号化情報が出力されます。
 
 ```shell
 tikv-ctl --config=./conf.toml encryption-meta dump-file --path=/path/to/tikv/data/db/CURRENT
@@ -566,7 +570,7 @@ tikv-ctl --config=./conf.toml encryption-meta dump-file --path=/path/to/tikv/dat
 /path/to/tikv/data/db/CURRENT: key_id: 9291156302549018620 iv: E3C2FDBF63FC03BFC28F265D7E78283F method: Aes128Ctr
 ```
 
-To dump data encryption keys, use the `encryption-meta dump-key` subcommand. In additional to `data-dir`, you also need to specify the current master key used in the config file. For how to config master key, refer to [Encryption-At-Rest](/encryption-at-rest.md). Also with this command, the `security.encryption.previous-master-key` config will be ignored, and the master key rotation will not be triggered.
+データ暗号鍵をダンプするには、 `encryption-meta dump-key`サブコマンドを使用します。 `data-dir`に加えて、構成ファイルで使用されている現在のマスター キーも指定する必要があります。マスターキーの設定方法については、 [保存時の暗号化](/encryption-at-rest.md)を参照してください。また、このコマンドを使用すると、 `security.encryption.previous-master-key`構成は無視され、マスター キーのローテーションはトリガーされません。
 
 ```
 # conf.toml
@@ -579,11 +583,11 @@ key-id = "0987dcba-09fe-87dc-65ba-ab0987654321"
 region = "us-west-2"
 ```
 
-Note if the master key is a AWS KMS key, `tikv-ctl` needs to have access to the KMS key. Access to a AWS KMS key can be granted to `tikv-ctl` via environment variable, AWS default config file, or IAM role, whichever is suitable. Refer to AWS document for usage.
+マスター キーが AWS KMS キーの場合、 `tikv-ctl`キーにアクセスできる必要があることに注意してください。 AWS KMS キーへのアクセスは、環境変数、AWS デフォルト設定ファイル、またはIAMロールのいずれか適切なものを介して`tikv-ctl`に付与できます。使用方法については、AWS のドキュメントを参照してください。
 
-The `--ids` option can be used to specified a list of comma-separated data encryption key ids to print. If `--ids` is not provided, all data encryption keys will be printed, along with current key id, which is the id of the latest active data encryption key.
+`--ids`オプションを使用して、出力するコンマ区切りのデータ暗号化キー ID のリストを指定できます。 `--ids`が指定されていない場合、すべてのデータ暗号化キーが、最新のアクティブなデータ暗号化キーの ID である現在のキー ID と共に出力されます。
 
-When using the command, you will see a prompt warning that the action will expose sensitive information. Type "I consent" to continue.
+コマンドを使用すると、アクションによって機密情報が公開されることを警告するプロンプトが表示されます。 「同意します」と入力して続行します。
 
 ```shell
 tikv-ctl --config=./conf.toml encryption-meta dump-key
@@ -606,19 +610,19 @@ Type "I consent" to continue, anything else to exit: I consent
 9291156302549018620: key: 8B6B6B8F83D36BE2467ED55D72AE808B method: Aes128Ctr creation_time: 1592938357
 ```
 
-> **Note:**
+> **ノート：**
 >
-> The command will expose data encryption keys as plaintext. In production, DO NOT redirect the output to a file. Even deleting the output file afterward may not cleanly wipe out the content from disk.
+> このコマンドは、データ暗号化キーをプレーンテキストとして公開します。本番環境では、出力をファイルにリダイレクトしないでください。後で出力ファイルを削除しても、コンテンツがディスクから完全に消去されない場合があります。
 
-### Print information related to damaged SST files
+### 破損した SST ファイルに関する情報の出力 {#print-information-related-to-damaged-sst-files}
 
-Damaged SST files in TiKV might cause TiKV processes to panic. Before TiDB v6.1.0, these files cause TiKV to panic immediately. Since TiDB v6.1.0, TiKV processes panic 1 hour after SST files are damaged.
+TiKV の破損した SST ファイルにより、TiKV プロセスがpanicに陥る可能性があります。 TiDB v6.1.0 より前では、これらのファイルが原因で TiKV が即座にpanicに陥ります。 TiDB v6.1.0 以降、SST ファイルが破損してから 1 時間後に TiKV プロセスがpanicになります。
 
-To clean up the damaged SST files, you can run the `bad-ssts` command in TiKV Control to show the needed information. The following is an example command and output.
+破損した SST ファイルをクリーンアップするには、 TiKV Controlで`bad-ssts`コマンドを実行して、必要な情報を表示します。以下は、コマンドと出力の例です。
 
-> **Note:**
+> **ノート：**
 >
-> Before running this command, stop the running TiKV instance.
+> このコマンドを実行する前に、実行中の TiKV インスタンスを停止してください。
 
 ```shell
 tikv-ctl --data-dir </path/to/tikv> bad-ssts --pd <endpoint>
@@ -643,8 +647,8 @@ tikv-ctl --db=data/tikv-21107/db tombstone -r 4 --pd <endpoint>
 corruption analysis has completed
 ```
 
-From the output above, you can see that the information of the damaged SST file is printed first and then the meta-information is printed.
+上記の出力から、破損した SST ファイルの情報が最初に出力され、次にメタ情報が出力されていることがわかります。
 
-+ In the `sst meta` part, `14` means the SST file number; `552997` means the file size, followed by the smallest and largest sequence numbers and other meta-information.
-+ The `overlap region` part shows the information of the Region involved. This information is obtained through the PD server.
-+ The `suggested operations` part provides you suggestion to clean up the damaged SST file. You can take the suggestion to clean up files and restart the TiKV instance.
+-   `sst meta`の部分で、 `14`は SST ファイル番号を意味します。 `552997`はファイル サイズを意味し、その後に最小および最大のシーケンス番号とその他のメタ情報が続きます。
+-   `overlap region`番目の部分は、関係するリージョンの情報を示します。この情報は、PDサーバーを通じて取得されます。
+-   最初の部分は、破損した SST ファイルをクリーンアップするための提案を提供し`suggested operations` 。ファイルをクリーンアップして TiKV インスタンスを再起動するという提案を受け入れることができます。

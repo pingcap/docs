@@ -3,406 +3,406 @@ title: PD Configuration File
 summary: Learn the PD configuration file.
 ---
 
-# PD Configuration File
+# PDConfiguration / コンフィグレーションファイル {#pd-configuration-file}
 
 <!-- markdownlint-disable MD001 -->
 
-The PD configuration file supports more options than command-line parameters. You can find the default configuration file [here](https://github.com/pingcap/pd/blob/master/conf/config.toml).
+PD 構成ファイルは、コマンドライン パラメーターよりも多くのオプションをサポートしています。デフォルトの構成ファイルは[ここ](https://github.com/pingcap/pd/blob/master/conf/config.toml)にあります。
 
-This document only describes parameters that are not included in command-line parameters. Check [here](/command-line-flags-for-pd-configuration.md) for the command line parameters.
+このドキュメントでは、コマンド ライン パラメーターに含まれていないパラメーターについてのみ説明します。コマンド ライン パラメータの[ここ](/command-line-flags-for-pd-configuration.md)を確認します。
 
-### `name`
+### <code>name</code> {#code-name-code}
 
-- The unique name of a PD node
-- Default value: `"pd"`
-- To start multiply PD nodes, use a unique name for each node.
+-   PD ノードの一意の名前
+-   デフォルト値: `"pd"`
+-   複数の PD ノードを開始するには、各ノードに一意の名前を使用します。
 
-### `data-dir`
+### <code>data-dir</code> {#code-data-dir-code}
 
-- The directory in which PD stores data
-- Default value: `default.${name}"`
+-   PD がデータを格納するディレクトリ
+-   デフォルト値: `default.${name}"`
 
-### `client-urls`
+### <code>client-urls</code> {#code-client-urls-code}
 
-- The list of client URLs to be listened to by PD
-- Default value: `"http://127.0.0.1:2379"`
-- When you deploy a cluster, you must specify the IP address of the current host as `client-urls` (for example, `"http://192.168.100.113:2379"`). If the cluster runs on Docker, specify the IP address of Docker as `"http://0.0.0.0:2379"`.
+-   PD がリッスンするクライアント URL のリスト
+-   デフォルト値: `"http://127.0.0.1:2379"`
+-   クラスターをデプロイするときは、現在のホストの IP アドレスを`client-urls`として指定する必要があります (たとえば、 `"http://192.168.100.113:2379"` )。クラスターが Docker で実行されている場合は、Docker の IP アドレスを`"http://0.0.0.0:2379"`として指定します。
 
-### `advertise-client-urls`
+### <code>advertise-client-urls</code> {#code-advertise-client-urls-code}
 
-- The list of advertise URLs for the client to access PD
-- Default value: `"${client-urls}"`
-- In some situations such as in the Docker or NAT network environment, if a client cannot access PD through the default client URLs listened to by PD, you must manually set the advertise client URLs.
-- For example, the internal IP address of Docker is `172.17.0.1`, while the IP address of the host is `192.168.100.113` and the port mapping is set to `-p 2380:2380`. In this case, you can set `advertise-client-urls` to `"http://192.168.100.113:2380"`. The client can find this service through `"http://192.168.100.113:2380"`.
+-   クライアントが PD にアクセスするためのアドバタイズ URL のリスト
+-   デフォルト値: `"${client-urls}"`
+-   Docker または NAT ネットワーク環境などの一部の状況では、PD がリッスンするデフォルトのクライアント URL を介してクライアントが PD にアクセスできない場合、アドバタイズ クライアント URL を手動で設定する必要があります。
+-   たとえば、Docker の内部 IP アドレスは`172.17.0.1`ですが、ホストの IP アドレスは`192.168.100.113`で、ポート マッピングは`-p 2380:2380`に設定されています。この場合、 `advertise-client-urls` ～ `"http://192.168.100.113:2380"`を設定できます。クライアントは`"http://192.168.100.113:2380"`を通じてこのサービスを見つけることができます。
 
-### `peer-urls`
+### <code>peer-urls</code> {#code-peer-urls-code}
 
-- The list of peer URLs to be listened to by a PD node
-- Default value: `"http://127.0.0.1:2380"`
-- When you deploy a cluster, you must specify `peer-urls` as the IP address of the current host, such as `"http://192.168.100.113:2380"`. If the cluster runs on Docker, specify the IP address of Docker as `"http://0.0.0.0:2380"`.
+-   PD ノードがリッスンするピア URL のリスト
+-   デフォルト値: `"http://127.0.0.1:2380"`
+-   クラスターをデプロイするときは、現在のホストの IP アドレスとして`peer-urls` ( `"http://192.168.100.113:2380"`など) を指定する必要があります。クラスターが Docker で実行されている場合は、Docker の IP アドレスを`"http://0.0.0.0:2380"`として指定します。
 
-### `advertise-peer-urls`
+### <code>advertise-peer-urls</code> {#code-advertise-peer-urls-code}
 
-- The list of advertise URLs for other PD nodes (peers) to access a PD node
-- Default: `"${peer-urls}"`
-- In some situations such as in the Docker or NAT network environment, if the other nodes (peers) cannot access the PD node through the default peer URLs listened to by this PD node, you must manually set the advertise peer URLs.
-- For example, the internal IP address of Docker is `172.17.0.1`, while the IP address of the host is `192.168.100.113` and the port mapping is set to `-p 2380:2380`. In this case, you can set `advertise-peer-urls` to `"http://192.168.100.113:2380"`. The other PD nodes can find this service through `"http://192.168.100.113:2380"`.
+-   他の PD ノード (ピア) が PD ノードにアクセスするためのアドバタイズ URL のリスト
+-   デフォルト: `"${peer-urls}"`
+-   Docker または NAT ネットワーク環境などの一部の状況では、他のノード (ピア) が、この PD ノードがリッスンするデフォルトのピア URL を介して PD ノードにアクセスできない場合、アドバタイズ ピア URL を手動で設定する必要があります。
+-   たとえば、Docker の内部 IP アドレスは`172.17.0.1`ですが、ホストの IP アドレスは`192.168.100.113`で、ポート マッピングは`-p 2380:2380`に設定されています。この場合、 `advertise-peer-urls` ～ `"http://192.168.100.113:2380"`を設定できます。他の PD ノードは、 `"http://192.168.100.113:2380"`を介してこのサービスを見つけることができます。
 
-### `initial-cluster`
+### <code>initial-cluster</code> {#code-initial-cluster-code}
 
-- The initial cluster configuration for bootstrapping
-- Default value: `"{name}=http://{advertise-peer-url}"`
-- For example, if `name` is "pd", and `advertise-peer-urls` is `"http://192.168.100.113:2380"`, the `initial-cluster` is `"pd=http://192.168.100.113:2380"`.
-- If you need to start three PD servers, the `initial-cluster` might be:
+-   ブートストラップ用の初期クラスター構成
+-   デフォルト値: `"{name}=http://{advertise-peer-url}"`
+-   たとえば、 `name`が &quot;pd&quot; で`advertise-peer-urls`が`"http://192.168.100.113:2380"`の場合、 `initial-cluster`は`"pd=http://192.168.100.113:2380"`です。
+-   3 つの PD サーバーを開始する必要がある場合、 `initial-cluster`つは次のようになります。
 
     ```
     pd1=http://192.168.100.113:2380, pd2=http://192.168.100.114:2380, pd3=192.168.100.115:2380
     ```
 
-### `initial-cluster-state`
+### <code>initial-cluster-state</code> {#code-initial-cluster-state-code}
 
-+ The initial state of the cluster
-+ Default value: `"new"`
+-   クラスタの初期状態
+-   デフォルト値: `"new"`
 
-### `initial-cluster-token`
+### <code>initial-cluster-token</code> {#code-initial-cluster-token-code}
 
-+ Identifies different clusters during the bootstrap phase
-+ Default value: `"pd-cluster"`
-+ If multiple clusters that have nodes with same configurations are deployed successively, you must specify different tokens to isolate different cluster nodes.
+-   ブートストラップ フェーズ中にさまざまなクラスタを識別します
+-   デフォルト値: `"pd-cluster"`
+-   同じ構成のノードを持つ複数のクラスターが連続してデプロイされる場合は、異なるクラスター ノードを分離するために異なるトークンを指定する必要があります。
 
-### `lease`
+### <code>lease</code> {#code-lease-code}
 
-+ The timeout of the PD Leader Key lease. After the timeout, the system re-elects a Leader.
-+ Default value: `3`
-+ Unit: second
+-   PDLeaderキー リースのタイムアウト。タイムアウト後、システムはLeaderを再選出します。
+-   デフォルト値: `3`
+-   単位：秒
 
-### `quota-backend-bytes`
+### <code>quota-backend-bytes</code> {#code-quota-backend-bytes-code}
 
-+ The storage size of the meta-information database, which is 8GiB by default
-+ Default value: `8589934592`
+-   メタ情報データベースのストレージ サイズ。デフォルトでは 8GiB です。
+-   デフォルト値: `8589934592`
 
-### `auto-compaction-mod`
+### <code>auto-compaction-mod</code> {#code-auto-compaction-mod-code}
 
-+ The automatic compaction modes of the meta-information database
-+ Available options: `periodic` (by cycle) and `revision` (by version number).
-+ Default value: `periodic`
+-   メタ情報データベースの自動圧縮モード
+-   利用可能なオプション: `periodic` (サイクル別) および`revision` (バージョン番号別)。
+-   デフォルト値: `periodic`
 
-### `auto-compaction-retention`
+### <code>auto-compaction-retention</code> {#code-auto-compaction-retention-code}
 
-+ The time interval for automatic compaction of the meta-information database when `auto-compaction-retention` is `periodic`. When the compaction mode is set to `revision`, this parameter indicates the version number for the automatic compaction.
-+ Default value: 1h
+-   `auto-compaction-retention`が`periodic`の場合のメタ情報データベースの自動圧縮の時間間隔。圧縮モードが`revision`に設定されている場合、このパラメーターは自動圧縮のバージョン番号を示します。
+-   デフォルト値: 1h
 
-### `force-new-cluster`
+### <code>force-new-cluster</code> {#code-force-new-cluster-code}
 
-+ Determines whether to force PD to start as a new cluster and modify the number of Raft members to `1`
-+ Default value: `false`
+-   PD を新しいクラスターとして強制的に開始し、 Raftメンバーの数を`1`に変更するかどうかを決定します。
+-   デフォルト値: `false`
 
-### `tso-update-physical-interval`
+### <code>tso-update-physical-interval</code> {#code-tso-update-physical-interval-code}
 
-+ The interval at which PD updates the physical time of TSO.
-+ In a default update interval of TSO physical time, PD provides at most 262144 TSOs. To get more TSOs, you can reduce the value of this configuration item. The minimum value is `1ms`.
-+ Decreasing this configuration item might increase the CPU usage of PD. According to the test, compared with the interval of `50ms`, the [CPU usage](https://man7.org/linux/man-pages/man1/top.1.html) of PD will increase by about 10% when the interval is `1ms`.
-+ Default value: `50ms`
-+ Minimum value: `1ms`
+-   PD が TSO の物理時間を更新する間隔。
+-   TSO 物理時間のデフォルトの更新間隔では、PD は最大 262144 個の TSO を提供します。より多くの TSO を取得するには、この構成項目の値を減らすことができます。最小値は`1ms`です。
+-   この構成項目を減らすと、PD の CPU 使用率が増加する可能性があります。テストによると、間隔が`50ms`の場合と比較して、間隔が`1ms`の場合、PD の[CPU使用率](https://man7.org/linux/man-pages/man1/top.1.html)は約 10% 増加します。
+-   デフォルト値: `50ms`
+-   最小値: `1ms`
 
-## security
+## 安全 {#security}
 
-Configuration items related to security
+セキュリティに関するConfiguration / コンフィグレーション項目
 
-### `cacert-path`
+### <code>cacert-path</code> {#code-cacert-path-code}
 
-+ The path of the CA file
-+ Default value: ""
+-   CA ファイルのパス
+-   デフォルト値: &quot;&quot;
 
-### `cert-path`
+### <code>cert-path</code> {#code-cert-path-code}
 
-+ The path of the Privacy Enhanced Mail (PEM) file that contains the X509 certificate
-+ Default value: ""
+-   X509 証明書を含む Privacy Enhanced Mail (PEM) ファイルのパス
+-   デフォルト値: &quot;&quot;
 
-### `key-path`
+### <code>key-path</code> {#code-key-path-code}
 
-+ The path of the PEM file that contains the X509 key
-+ Default value: ""
+-   X509 キーを含む PEM ファイルのパス
+-   デフォルト値: &quot;&quot;
 
-### `redact-info-log` <span class="version-mark">New in v5.0</span>
+### <code>redact-info-log</code> <span class="version-mark">v5.0 の新機能</span> {#code-redact-info-log-code-span-class-version-mark-new-in-v5-0-span}
 
-+ Controls whether to enable log redaction in the PD log
-+ When you set the configuration value to `true`, user data is redacted in the PD log.
-+ Default value: `false`
+-   PD ログでログのリダクションを有効にするかどうかを制御します
+-   構成値を`true`に設定すると、ユーザー データは PD ログで編集されます。
+-   デフォルト値: `false`
 
-## `log`
+## <code>log</code> {#code-log-code}
 
-Configuration items related to log
+ログに関するConfiguration / コンフィグレーション項目
 
-### `level`
+### <code>level</code> {#code-level-code}
 
-+ Specifies the level of the output log
-+ Optional value: `"debug"`, `"info"`, `"warn"`, `"error"`, `"fatal"`
-+ Default value: `"info"`
+-   出力ログのレベルを指定します
+-   オプションの値: `"debug"` 、 `"info"` 、 `"warn"` 、 `"error"` 、 `"fatal"`
+-   デフォルト値: `"info"`
 
-### `format`
+### <code>format</code> {#code-format-code}
 
-+ The log format
-+ Optional value: `"text"`, `"json"`
-+ Default value: `"text"`
+-   ログ形式
+-   オプションの値: `"text"` 、 `"json"`
+-   デフォルト値: `"text"`
 
-### `disable-timestamp`
+### <code>disable-timestamp</code> {#code-disable-timestamp-code}
 
-+ Whether to disable the automatically generated timestamp in the log
-+ Default value: `false`
+-   ログで自動生成されたタイムスタンプを無効にするかどうか
+-   デフォルト値: `false`
 
-## `log.file`
+## <code>log.file</code> {#code-log-file-code}
 
-Configuration items related to the log file
+ログファイルに関するConfiguration / コンフィグレーション項目
 
-### `max-size`
+### <code>max-size</code> {#code-max-size-code}
 
-+ The maximum size of a single log file. When this value is exceeded, the system automatically splits the log into several files.
-+ Default value: `300`
-+ Unit: MiB
-+ Minimum value: `1`
+-   1 つのログ ファイルの最大サイズ。この値を超えると、システムは自動的にログを複数のファイルに分割します。
+-   デフォルト値: `300`
+-   単位：MiB
+-   最小値: `1`
 
-### `max-days`
+### <code>max-days</code> {#code-max-days-code}
 
-+ The maximum number of days in which a log is kept
-+ If the configuration item is not set, or the value of it is set to the default value 0, PD does not clean log files.
-+ Default value: `0`
+-   ログを保持する最大日数
+-   構成項目が設定されていない場合、またはその値がデフォルト値の 0 に設定されている場合、PD はログ ファイルを消去しません。
+-   デフォルト値: `0`
 
-### `max-backups`
+### <code>max-backups</code> {#code-max-backups-code}
 
-+ The maximum number of log files to keep
-+ If the configuration item is not set, or the value of it is set to the default value 0, PD keeps all log files.
-+ Default value: `0`
+-   保持するログ ファイルの最大数
+-   構成項目が設定されていない場合、またはその値がデフォルト値の 0 に設定されている場合、PD はすべてのログ ファイルを保持します。
+-   デフォルト値: `0`
 
-## `metric`
+## <code>metric</code> {#code-metric-code}
 
-Configuration items related to monitoring
+監視に関するConfiguration / コンフィグレーション項目
 
-### `interval`
+### <code>interval</code> {#code-interval-code}
 
-+ The interval at which monitoring metric data is pushed to Prometheus
-+ Default value: `15s`
+-   モニタリング指標データが Prometheus にプッシュされる間隔
+-   デフォルト値: `15s`
 
-## `schedule`
+## <code>schedule</code> {#code-schedule-code}
 
-Configuration items related to scheduling
+スケジューリングに関するConfiguration / コンフィグレーション項目
 
-### `max-merge-region-size`
+### <code>max-merge-region-size</code> {#code-max-merge-region-size-code}
 
-+ Controls the size limit of `Region Merge`. When the Region size is greater than the specified value, PD does not merge the Region with the adjacent Regions.
-+ Default value: `20`
-+ Unit: MiB
+-   `Region Merge`のサイズ制限を制御します。 リージョンサイズが指定された値より大きい場合、PD はそのリージョンとマージしません。
+-   デフォルト値: `20`
+-   単位：MiB
 
-### `max-merge-region-keys`
+### <code>max-merge-region-keys</code> {#code-max-merge-region-keys-code}
 
-+ Specifies the upper limit of the `Region Merge` key. When the Region key is greater than the specified value, the PD does not merge the Region with its adjacent Regions.
-+ Default value: `200000`
+-   `Region Merge`キーの上限を指定します。リージョンキーが指定された値より大きい場合、PD はそのリージョンを隣接するリージョンとマージしません。
+-   デフォルト値: `200000`
 
-### `patrol-region-interval`
+### <code>patrol-region-interval</code> {#code-patrol-region-interval-code}
 
-+ Controls the running frequency at which `replicaChecker` checks the health state of a Region. The smaller this value is, the faster `replicaChecker` runs. Normally, you do not need to adjust this parameter.
-+ Default value: `10ms`
+-   `replicaChecker`がリージョンのヘルス状態をチェックする実行頻度を制御します。この値が小さいほど、 `replicaChecker`回の実行が速くなります。通常、このパラメータを調整する必要はありません。
+-   デフォルト値: `10ms`
 
-### `split-merge-interval`
+### <code>split-merge-interval</code> {#code-split-merge-interval-code}
 
-+ Controls the time interval between the `split` and `merge` operations on the same Region. That means a newly split Region will not be merged for a while.
-+ Default value: `1h`
+-   同じリージョンでの`split`回目と`merge`目の操作の間の時間間隔を制御します。つまり、新しく分割されたリージョンはしばらくマージされません。
+-   デフォルト値: `1h`
 
-### `max-snapshot-count`
+### <code>max-snapshot-count</code> {#code-max-snapshot-count-code}
 
-+ Controls the maximum number of snapshots that a single store receives or sends at the same time. PD schedulers depend on this configuration to prevent the resources used for normal traffic from being preempted.
-+ Default value value: `64`
+-   1 つのストアが同時に受信または送信するスナップショットの最大数を制御します。 PD スケジューラは、この構成に依存して、通常のトラフィックに使用されるリソースが横取りされるのを防ぎます。
+-   デフォルト値: `64`
 
-### `max-pending-peer-count`
+### <code>max-pending-peer-count</code> {#code-max-pending-peer-count-code}
 
-+ Controls the maximum number of pending peers in a single store. PD schedulers depend on this configuration to prevent too many Regions with outdated logs from being generated on some nodes.
-+ Default value: `64`
+-   1 つのストアで保留中のピアの最大数を制御します。 PD スケジューラーは、この構成に依存して、一部のノードで古いログを持つリージョンが生成されるのを防ぎます。
+-   デフォルト値: `64`
 
-### `max-store-down-time`
+### <code>max-store-down-time</code> {#code-max-store-down-time-code}
 
-+ The downtime after which PD judges that the disconnected store cannot be recovered. When PD fails to receive the heartbeat from a store after the specified period of time, it adds replicas at other nodes.
-+ Default value: `30m`
+-   切断されたストアを復旧できないと PD が判断するまでのダウンタイム。指定された時間が経過しても PD がストアからハートビートを受信できない場合、PD は他のノードにレプリカを追加します。
+-   デフォルト値: `30m`
 
-### `max-store-preparing-time` <span class="version-mark">New in v6.1.0</span>
+### <code>max-store-preparing-time</code> <span class="version-mark">v6.1.0 の新機能</span> {#code-max-store-preparing-time-code-span-class-version-mark-new-in-v6-1-0-span}
 
-+ Controls the maximum waiting time for the store to go online. During the online stage of a store, PD can query the online progress of the store. When the specified time is exceeded, PD assumes that the store has been online and cannot query the online progress of the store again. But this does not prevent Regions from transferring to the new online store. In most scenarios, you do not need to adjust this parameter.
-+ Default value: `48h`
+-   ストアがオンラインになるまでの最大待機時間を制御します。ストアのオンライン段階で、PD はストアのオンライン進行状況を照会できます。指定された時間を超えると、PD はストアがオンラインであると見なし、ストアのオンラインの進行状況を再度照会することはできません。ただし、これはリージョンが新しいオンライン ストアに移行するのを妨げるものではありません。ほとんどのシナリオでは、このパラメーターを調整する必要はありません。
+-   デフォルト値: `48h`
 
-### `leader-schedule-limit`
+### <code>leader-schedule-limit</code> {#code-leader-schedule-limit-code}
 
-+ The number of Leader scheduling tasks performed at the same time
-+ Default value: `4`
+-   同時に実行されるLeaderスケジューリング タスクの数
+-   デフォルト値: `4`
 
-### `region-schedule-limit`
+### <code>region-schedule-limit</code> {#code-region-schedule-limit-code}
 
-+ The number of Region scheduling tasks performed at the same time
-+ Default value: `2048`
+-   同時に実行されるリージョンスケジューリング タスクの数
+-   デフォルト値: `2048`
 
-### `enable-diagnostic` <span class="version-mark">New in v6.3.0</span>
+### <code>enable-diagnostic</code> <span class="version-mark">v6.3.0 の新機能</span> {#code-enable-diagnostic-code-span-class-version-mark-new-in-v6-3-0-span}
 
-+ Controls whether to enable the diagnostic feature. When it is enabled, PD records the state during scheduling to help diagnose. If enabled, it might slightly affect the scheduling speed and consume more memory when there are many stores.
-+ Default value: false
+-   診断機能を有効にするかどうかを制御します。有効にすると、PD はスケジューリング中に状態を記録し、診断に役立てます。有効にすると、スケジューリング速度にわずかに影響し、多くのストアがある場合により多くのメモリを消費する可能性があります。
+-   デフォルト値: false
 
-### `hot-region-schedule-limit`
+### <code>hot-region-schedule-limit</code> {#code-hot-region-schedule-limit-code}
 
-+ Controls the hot Region scheduling tasks that are running at the same time. It is independent of the Region scheduling.
-+ Default value: `4`
+-   同時に実行されているホットリージョンスケジューリング タスクを制御します。これは、リージョンのスケジューリングとは無関係です。
+-   デフォルト値: `4`
 
-### `hot-region-cache-hits-threshold`
+### <code>hot-region-cache-hits-threshold</code> {#code-hot-region-cache-hits-threshold-code}
 
-+ The threshold used to set the number of minutes required to identify a hot Region. PD can participate in the hotspot scheduling only after the Region is in the hotspot state for more than this number of minutes.
-+ Default value: `3`
+-   ホットリージョンを識別するのに必要な分数を設定するために使用されるしきい値。 PD は、リージョンがこの分数を超えてホットスポット状態になった後にのみ、ホットスポット スケジューリングに参加できます。
+-   デフォルト値: `3`
 
-### `replica-schedule-limit`
+### <code>replica-schedule-limit</code> {#code-replica-schedule-limit-code}
 
-+ The number of Replica scheduling tasks performed at the same time
-+ Default value: `64`
+-   同時に実行されるレプリカ スケジューリング タスクの数
+-   デフォルト値: `64`
 
-### `merge-schedule-limit`
+### <code>merge-schedule-limit</code> {#code-merge-schedule-limit-code}
 
-+ The number of the `Region Merge` scheduling tasks performed at the same time. Set this parameter to `0` to disable `Region Merge`.
-+ Default value: `8`
+-   同時に実行される`Region Merge`のスケジューリング タスクの数。 `Region Merge`を無効にするには、このパラメーターを`0`に設定します。
+-   デフォルト値: `8`
 
-### `high-space-ratio`
+### <code>high-space-ratio</code> {#code-high-space-ratio-code}
 
-+ The threshold ratio below which the capacity of the store is sufficient. If the space occupancy ratio of the store is smaller than this threshold value, PD ignores the remaining space of the store when performing scheduling, and balances load mainly based on the Region size. This configuration takes effect only when `region-score-formula-version` is set to `v1`.
-+ Default value: `0.7`
-+ Minimum value: greater than `0`
-+ Maximum value: less than `1`
+-   それ以下ではストアの容量が十分であるしきい値比率。ストアのスペース占有率がこのしきい値よりも小さい場合、PD はスケジューリング時にストアの残りスペースを無視し、主にリージョンサイズに基づいて負荷を分散します。この構成は、 `region-score-formula-version`が`v1`に設定されている場合にのみ有効です。
+-   デフォルト値: `0.7`
+-   最小値: `0`より大きい
+-   最大値: `1`未満
 
-### `low-space-ratio`
+### <code>low-space-ratio</code> {#code-low-space-ratio-code}
 
-+ The threshold ratio above which the capacity of the store is insufficient. If the space occupancy ratio of a store exceeds this threshold value, PD avoids migrating data to this store as much as possible. Meanwhile, to avoid the disk space of the corresponding store being exhausted, PD performs scheduling mainly based on the remaining space of the store.
-+ Default value: `0.8`
-+ Minimum value: greater than `0`
-+ Maximum value: less than `1`
+-   それを超えるとストアの容量が不足するしきい値の比率。ストアのスペース占有率がこのしきい値を超えると、PD はこのストアへのデータの移行を可能な限り回避します。一方、対応するストアのディスク容量が使い果たされることを避けるために、PD は主にストアの残りの容量に基づいてスケジューリングを行います。
+-   デフォルト値: `0.8`
+-   最小値: `0`より大きい
+-   最大値: `1`未満
 
-### `tolerant-size-ratio`
+### <code>tolerant-size-ratio</code> {#code-tolerant-size-ratio-code}
 
-+ Controls the `balance` buffer size
-+ Default value: `0` (automatically adjusts the buffer size)
-+ Minimum value: `0`
+-   `balance`バッファ サイズを制御します
+-   デフォルト値: `0` (バッファサイズを自動的に調整します)
+-   最小値: `0`
 
-### `enable-cross-table-merge`
+### <code>enable-cross-table-merge</code> {#code-enable-cross-table-merge-code}
 
-+ Determines whether to enable the merging of cross-table Regions
-+ Default value: `true`
+-   クロステーブルのリージョンのマージを有効にするかどうかを決定します
+-   デフォルト値: `true`
 
-### `region-score-formula-version` <span class="version-mark">New in v5.0</span>
+### <code>region-score-formula-version</code> <span class="version-mark">v5.0 の新機能</span> {#code-region-score-formula-version-code-span-class-version-mark-new-in-v5-0-span}
 
-+ Controls the version of the Region score formula
-+ Default value: `v2`
-+ Optional values: `v1` and `v2`. Compared to v1, the changes in v2 are smoother, and the scheduling jitter caused by space reclaim is improved.
+-   リージョンスコア式のバージョンを制御します
+-   デフォルト値: `v2`
+-   オプションの値: `v1`および`v2` 。 v1 と比較して、v2 の変化はよりスムーズであり、スペースの再利用によって引き起こされるスケジューリングのジッターが改善されています。
 
-> **Note:**
+> **ノート：**
 >
-> If you have upgraded your cluster from a TiDB 4.0 version to the current version, the new formula version is automatically disabled by default to ensure consistent PD behavior before and after the upgrading. If you want to change the formula version, you need to manually switch through the `pd-ctl` setting. For details, refer to [PD Control](/pd-control.md#config-show--set-option-value--placement-rules).
+> クラスターを TiDB 4.0 バージョンから現在のバージョンにアップグレードした場合、新しいフォーミュラ バージョンはデフォルトで自動的に無効になり、アップグレードの前後で一貫した PD 動作が保証されます。式のバージョンを変更する場合は、 `pd-ctl`の設定を手動で切り替える必要があります。詳細は[PD Control](/pd-control.md#config-show--set-option-value--placement-rules)を参照してください。
 
-### `enable-joint-consensus` <span class="version-mark">New in v5.0</span>
+### <code>enable-joint-consensus</code> <span class="version-mark">v5.0 の新機能</span> {#code-enable-joint-consensus-code-span-class-version-mark-new-in-v5-0-span}
 
-+ Controls whether to use Joint Consensus for replica scheduling. If this configuration is disabled, PD schedules one replica at a time.
-+ Default value: `true`
+-   レプリカのスケジューリングにジョイント コンセンサスを使用するかどうかを制御します。この構成が無効になっている場合、PD は一度に 1 つのレプリカをスケジュールします。
+-   デフォルト値: `true`
 
-### `hot-regions-write-interval` <span class="version-mark">New in v5.4.0</span>
+### <code>hot-regions-write-interval</code> <span class="version-mark">v5.4.0 の新機能</span> {#code-hot-regions-write-interval-code-span-class-version-mark-new-in-v5-4-0-span}
 
-+ The time interval at which PD stores hot Region information.
-+ Default value: `10m`
+-   PD がホットリージョン情報を保存する時間間隔。
+-   デフォルト値: `10m`
 
-> **Note:**
+> **ノート：**
 >
-> The information about hot Regions is updated every three minutes. If the interval is set to less than three minutes, updates during the interval might be meaningless.
+> ホット リージョンに関する情報は、3 分ごとに更新されます。間隔が 3 分未満に設定されている場合、間隔中の更新は無意味になる可能性があります。
 
-### `hot-regions-reserved-days` <span class="version-mark">New in v5.4.0</span>
+### <code>hot-regions-reserved-days</code> <span class="version-mark">v5.4.0 の新機能</span> {#code-hot-regions-reserved-days-code-span-class-version-mark-new-in-v5-4-0-span}
 
-+ Specifies how many days the hot Region information is retained.
-+ Default value: `7`
+-   ホットリージョン情報を保持する日数を指定します。
+-   デフォルト値: `7`
 
-## `replication`
+## <code>replication</code> {#code-replication-code}
 
-Configuration items related to replicas
+レプリカに関するConfiguration / コンフィグレーション項目
 
-### `max-replicas`
+### <code>max-replicas</code> {#code-max-replicas-code}
 
-+ The number of replicas, that is, the sum of the number of leaders and followers. The default value `3` means 1 leader and 2 followers. When this configuration is modified dynamically, PD will schedule Regions in the background so that the number of replicas matches this configuration.
-+ Default value: `3`
+-   レプリカの数、つまりリーダーとフォロワーの数の合計。デフォルト値`3`は、1 人のリーダーと 2 人のフォロワーを意味します。この構成が動的に変更されると、レプリカの数がこの構成と一致するように、PD はバックグラウンドでリージョンをスケジュールします。
+-   デフォルト値: `3`
 
-### `location-labels`
+### <code>location-labels</code> {#code-location-labels-code}
 
-+ The topology information of a TiKV cluster
-+ Default value: `[]`
-+ [Cluster topology configuration](/schedule-replicas-by-topology-labels.md)
+-   TiKV クラスターのトポロジー情報
+-   デフォルト値: `[]`
+-   [クラスタトポロジ構成](/schedule-replicas-by-topology-labels.md)
 
-### `isolation-level`
+### <code>isolation-level</code> {#code-isolation-level-code}
 
-+ The minimum topological isolation level of a TiKV cluster
-+ Default value: `""`
-+ [Cluster topology configuration](/schedule-replicas-by-topology-labels.md)
+-   TiKV クラスターの最小トポロジー分離レベル
+-   デフォルト値: `""`
+-   [クラスタトポロジ構成](/schedule-replicas-by-topology-labels.md)
 
-### `strictly-match-label`
+### <code>strictly-match-label</code> {#code-strictly-match-label-code}
 
-+ Enables the strict check for whether the TiKV label matches PD's `location-labels`.
-+ Default value: `false`
+-   TiKV ラベルが PD の`location-labels`と一致するかどうかの厳密なチェックを有効にします。
+-   デフォルト値: `false`
 
-### `enable-placement-rules`
+### <code>enable-placement-rules</code> {#code-enable-placement-rules-code}
 
-+ Enables `placement-rules`.
-+ Default value: `true`
-+ See [Placement Rules](/configure-placement-rules.md).
+-   `placement-rules`を有効にします。
+-   デフォルト値: `true`
+-   [配置ルール](/configure-placement-rules.md)を参照してください。
 
-### `flow-round-by-digit` <span class="version-mark">New in TiDB 5.1</span>
+### <code>flow-round-by-digit</code> <span class="version-mark">5.1 の新機能</span> {#code-flow-round-by-digit-code-span-class-version-mark-new-in-tidb-5-1-span}
 
-+ Default value: 3
-+ PD rounds the lowest digits of the flow number, which reduces the update of statistics caused by the changes of the Region flow information. This configuration item is used to specify the number of lowest digits to round for the Region flow information. For example, the flow `100512` will be rounded to `101000` because the default value is `3`. This configuration replaces `trace-region-flow`.
+-   デフォルト値: 3
+-   PD は、フロー番号の最下位桁を四捨五入します。これにより、リージョンフロー情報の変更によって引き起こされる統計の更新が減少します。この構成項目は、リージョンフロー情報を丸める最小桁数を指定するために使用されます。たとえば、デフォルト値が`3`であるため、フロー`100512`は`101000`に丸められます。この構成は`trace-region-flow`を置き換えます。
 
-> **Note:**
+> **ノート：**
 >
-> If you have upgraded your cluster from a TiDB 4.0 version to the current version, the behavior of `flow-round-by-digit` after the upgrading and the behavior of `trace-region-flow` before the upgrading are consistent by default. This means that if the value of `trace-region-flow` is false before the upgrading, the value of `flow-round-by-digit` after the upgrading is 127; if the value of `trace-region-flow` is `true` before the upgrading, the value of `flow-round-by-digit` after the upgrading is `3`.
+> クラスターを TiDB 4.0 バージョンから現在のバージョンにアップグレードした場合、アップグレード後の`flow-round-by-digit`の動作とアップグレード前の`trace-region-flow`の動作はデフォルトで一貫しています。これは、アップグレード前に`trace-region-flow`の値が false の場合、アップグレード後の`flow-round-by-digit`の値は 127 であることを意味します。アップグレード前の`trace-region-flow`の値が`true`の場合、アップグレード後の`flow-round-by-digit`の値は`3`です。
 
-## `label-property`
+## <code>label-property</code> {#code-label-property-code}
 
-Configuration items related to labels
+ラベルに関するConfiguration / コンフィグレーション項目
 
-### `key`
+### <code>key</code> {#code-key-code}
 
-+ The label key for the store that rejected the Leader
-+ Default value: `""`
+-   Leaderを拒否したストアのラベル キー
+-   デフォルト値: `""`
 
-### `value`
+### <code>value</code> {#code-value-code}
 
-+ The label value for the store that rejected the Leader
-+ Default value: `""`
+-   Leaderを拒否したストアのラベル値
+-   デフォルト値: `""`
 
-## `dashboard`
+## <code>dashboard</code> {#code-dashboard-code}
 
-Configuration items related to the [TiDB Dashboard](/dashboard/dashboard-intro.md) built in PD.
+[TiDB ダッシュボード](/dashboard/dashboard-intro.md)内蔵 PD に関するConfiguration / コンフィグレーション項目。
 
-### `tidb-cacert-path`
+### <code>tidb-cacert-path</code> {#code-tidb-cacert-path-code}
 
-+ The path of the root CA certificate file. You can configure this path when you connect to TiDB's SQL services using TLS.
-+ Default value: `""`
+-   ルート CA 証明書ファイルのパス。 TLS を使用して TiDB の SQL サービスに接続するときに、このパスを構成できます。
+-   デフォルト値: `""`
 
-### `tidb-cert-path`
+### <code>tidb-cert-path</code> {#code-tidb-cert-path-code}
 
-+ The path of the SSL certificate file. You can configure this path when you connect to TiDB's SQL services using TLS.
-+ Default value: `""`
+-   SSL 証明書ファイルのパス。 TLS を使用して TiDB の SQL サービスに接続するときに、このパスを構成できます。
+-   デフォルト値: `""`
 
-### `tidb-key-path`
+### <code>tidb-key-path</code> {#code-tidb-key-path-code}
 
-+ The path of the SSL private key file. You can configure this path when you connect to TiDB's SQL services using TLS.
-+ Default value: `""`
+-   SSL 秘密鍵ファイルのパス。 TLS を使用して TiDB の SQL サービスに接続するときに、このパスを構成できます。
+-   デフォルト値: `""`
 
-### `public-path-prefix`
+### <code>public-path-prefix</code> {#code-public-path-prefix-code}
 
-+ When TiDB Dashboard is accessed behind a reverse proxy, this item sets the public URL path prefix for all web resources.
-+ Default value: `/dashboard`
-+ Do **not** modify this configuration item when TiDB Dashboard is accessed not behind a reverse proxy; otherwise, access issues might occur. See [Use TiDB Dashboard behind a Reverse Proxy](/dashboard/dashboard-ops-reverse-proxy.md) for details.
+-   TiDB ダッシュボードがリバース プロキシの背後でアクセスされる場合、この項目はすべての Web リソースのパブリック URL パス プレフィックスを設定します。
+-   デフォルト値: `/dashboard`
+-   TiDB ダッシュボードがリバース プロキシの背後でアクセスされていない場合は、この構成項目を変更し**ない**でください。そうしないと、アクセスの問題が発生する可能性があります。詳細は[リバース プロキシの背後で TiDB ダッシュボードを使用する](/dashboard/dashboard-ops-reverse-proxy.md)を参照してください。
 
-### `enable-telemetry`
+### <code>enable-telemetry</code> {#code-enable-telemetry-code}
 
-+ Determines whether to enable the telemetry collection feature in TiDB Dashboard.
-+ Default value: `true`
-+ See [Telemetry](/telemetry.md) for details.
+-   TiDB ダッシュボードでテレメトリ収集機能を有効にするかどうかを決定します。
+-   デフォルト値: `true`
+-   詳細は[テレメトリー](/telemetry.md)を参照してください。
 
-## `replication-mode`
+## <code>replication-mode</code> {#code-replication-mode-code}
 
-Configuration items related to the replication mode of all Regions. See [Enable the DR Auto-Sync mode](/two-data-centers-in-one-city-deployment.md#enable-the-dr-auto-sync-mode) for details.
+すべてのリージョンのレプリケーション モードに関連するConfiguration / コンフィグレーションアイテム。詳細は[DR 自動同期モードを有効にする](/two-data-centers-in-one-city-deployment.md#enable-the-dr-auto-sync-mode)を参照してください。

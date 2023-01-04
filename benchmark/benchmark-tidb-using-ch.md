@@ -3,51 +3,51 @@ title: How to Run CH-benCHmark Test on TiDB
 summary: Learn how to run CH-benCHmark test on TiDB.
 ---
 
-# How to Run CH-benCHmark Test on TiDB
+# TiDB で CH-benchmark テストを実行する方法 {#how-to-run-ch-benchmark-test-on-tidb}
 
-This document describes how to test TiDB using CH-benCHmark.
+このドキュメントでは、CH-benCHmark を使用して TiDB をテストする方法について説明します。
 
-CH-benCHmark is a mixed workload containing both [TPC-C](http://www.tpc.org/tpcc/) and [TPC-H](http://www.tpc.org/tpch/) tests. It is the most common workload to test HTAP systems. For more information, see [The mixed workload CH-benCHmark](https://research.tableau.com/sites/default/files/a8-cole.pdf).
+CH-benCHmark は、 [TPC-C](http://www.tpc.org/tpcc/)と[TPC-H](http://www.tpc.org/tpch/)の両方のテストを含む混合ワークロードです。これは、HTAP システムをテストするための最も一般的なワークロードです。詳細については、 [混合ワークロード CH-benchmark](https://research.tableau.com/sites/default/files/a8-cole.pdf)を参照してください。
 
-Before running the CH-benCHmark test, you need to deploy [TiFlash](/tiflash/tiflash-overview.md) first, which is a TiDB's HTAP component. After you deploy TiFlash and [create TiFlash replicas](#create-tiflash-replicas), TiKV will replicate the latest data of TPC-C online transactions to TiFlash in real time, and the TiDB optimizer will automatically push down OLAP queries from TPC-H workload to the MPP engine of TiFlash for efficient execution.
+CH-benCHmark テストを実行する前に、まず TiDB の HTAPコンポーネントである[TiFlash](/tiflash/tiflash-overview.md)をデプロイする必要があります。 TiFlashと[TiFlashレプリカの作成](#create-tiflash-replicas)をデプロイすると、TiKV は TPC-C オンライン トランザクションの最新データをリアルタイムでTiFlashに複製し、TiDB オプティマイザーは OLAP クエリを TPC-H ワークロードからTiFlashの MPP エンジンに自動的にプッシュ ダウンして効率的に実行します。
 
-The CH-benCHmark test in this document is implemented based on [go-tpc](https://github.com/pingcap/go-tpc). You can download the test program using the following [TiUP](/tiup/tiup-overview.md) command:
+このドキュメントの CH-benCHmark テストは[ゴーtpc](https://github.com/pingcap/go-tpc)に基づいて実装されています。次の[TiUP](/tiup/tiup-overview.md)のコマンドを使用して、テスト プログラムをダウンロードできます。
 
-{{< copyable "shell-regular" >}}
+{{< copyable "" >}}
 
 ```shell
 tiup install bench
 ```
 
-For detailed usage of the TiUP Bench component, see [TiUP Bench](/tiup/tiup-bench.md).
+TiUP Benchコンポーネントの詳細な使用方法については、 [TiUPベンチ](/tiup/tiup-bench.md)を参照してください。
 
-## Load data
+## データを読み込む {#load-data}
 
-### Load TPC-C data
+### TPC-C データの読み込み {#load-tpc-c-data}
 
-**Loading data is usually the most time-consuming and problematic stage of the entire TPC-C test.**
+**通常、データのロードは、TPC-C テスト全体で最も時間がかかり、問題のある段階です。**
 
-Taking 1000 warehouses as an example, you can execute the following TiUP command in shell for data load and test. Note that you need to replace `172.16.5.140` and `4000` in this document with your TiDB host and port values.
+1000 の倉庫を例にとると、シェルで次のTiUPコマンドを実行して、データのロードとテストを行うことができます。このドキュメントの`172.16.5.140`と`4000`を TiDB のホストとポートの値に置き換える必要があることに注意してください。
 
 ```shell
 tiup bench tpcc -H 172.16.5.140 -P 4000 -D tpcc --warehouses 1000 prepare -T 32
 ```
 
-Depending on different machine configurations, this loading process might take a few hours. If the cluster size is small, you can use a smaller warehouse value for the test.
+マシンの構成によっては、このロード プロセスに数時間かかる場合があります。クラスタ サイズが小さい場合は、テストに小さいウェアハウス値を使用できます。
 
-After the data is loaded, you can execute the `tiup bench tpcc -H 172.16.5.140 -P 4000 -D tpcc --warehouses 1000 check` command to validate the data correctness.
+データがロードされたら、 `tiup bench tpcc -H 172.16.5.140 -P 4000 -D tpcc --warehouses 1000 check`コマンドを実行してデータの正確性を検証できます。
 
-### Load additional tables and views required for TPC-H
+### TPC-H に必要な追加のテーブルとビューをロードする {#load-additional-tables-and-views-required-for-tpc-h}
 
-Run the following TiUP command in the shell:
+シェルで次のTiUPコマンドを実行します。
 
-{{< copyable "shell-regular" >}}
+{{< copyable "" >}}
 
 ```shell
 tiup bench ch -H 172.16.5.140 -P 4000 -D tpcc prepare
 ```
 
-The following is the log output:
+ログ出力は次のとおりです。
 
 ```
 creating nation
@@ -62,30 +62,30 @@ generate suppliers table done
 creating view revenue1
 ```
 
-## Create TiFlash replicas
+## TiFlashレプリカの作成 {#create-tiflash-replicas}
 
-After TiFlash is deployed, TiFlash does not automatically replicate TiKV data. You need to execute the following SQL statement to create TiFlash replicas for the `tpcc` database. Once the specified TiFlash replicas are created, TiKV automatically replicates the latest data to TiFlash in real-time. In the following example, two TiFlash nodes are deployed in the cluster and the replica number is set to 2.
+TiFlashがデプロイされた後、 TiFlashは TiKV データを自動的に複製しません。 `tpcc`データベースのTiFlashレプリカを作成するには、次の SQL ステートメントを実行する必要があります。指定されたTiFlashレプリカが作成されると、TiKV は最新のデータをTiFlashにリアルタイムで自動的に複製します。次の例では、2 つのTiFlashノードがクラスターにデプロイされ、レプリカ数が 2 に設定されています。
 
 ```
 ALTER DATABASE tpcc SET tiflash replica 2;
 ```
 
-To check whether the replication of all tables in the `tpcc` database is complete, execute the following statement, in which the `WHERE` clause is used to specify the databases and tables to be checked. If you want to check the replication status of all databases, remove the `WHERE` clause from the statement.
+`tpcc`データベース内のすべてのテーブルのレプリケーションが完了したかどうかを確認するには、次のステートメントを実行します。このステートメントでは、 `WHERE`句を使用して、確認するデータベースとテーブルを指定します。すべてのデータベースのレプリケーション ステータスを確認する場合は、ステートメントから`WHERE`句を削除します。
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 SELECT * FROM information_schema.tiflash_replica WHERE TABLE_SCHEMA = 'tpcc';
 ```
 
-In the result of the above statement:
+上記のステートメントの結果:
 
-- `AVAILABLE` indicates whether the TiFlash replica of a specific table is available or not. `1` means available and `0` means unavailable. Once a replica becomes available, this status does not change anymore. If you use DDL statements to modify the number of replicas, the replication progress will be recalculated.
-- `PROGRESS` means the progress of the replication. The value is between `0.0` and `1.0`. `1.0` means at least one replica is replicated.
+-   `AVAILABLE`は、特定のテーブルのTiFlashレプリカが使用可能かどうかを示します。 `1`は利用可能であることを意味し、 `0`は利用できないことを意味します。レプリカが使用可能になると、このステータスは変更されなくなります。 DDL ステートメントを使用してレプリカの数を変更すると、レプリケーションの進行状況が再計算されます。
+-   `PROGRESS`は、レプリケーションの進行状況を意味します。値は`0.0` ～ `1.0`です。 `1.0`は、少なくとも 1 つのレプリカが複製されていることを意味します。
 
-## Collect statistics
+## 統計を収集する {#collect-statistics}
 
-To ensure that the TiDB optimizer can generate the optimal execution plan, execute the following SQL statements to collect statistics in advance.
+TiDB オプティマイザが最適な実行計画を確実に生成できるようにするには、次の SQL ステートメントを実行して事前に統計を収集します。
 
 ```
 analyze table customer;
@@ -102,17 +102,17 @@ analyze table region;
 analyze table supplier;
 ```
 
-## Run the test
+## テストを実行する {#run-the-test}
 
-Taking 50 TP concurrency and 1 AP concurrency as an example, execute the following command to run the test:
+50 TP の同時実行と 1 AP の同時実行を例にとると、次のコマンドを実行してテストを実行します。
 
-{{< copyable "shell-regular" >}}
+{{< copyable "" >}}
 
 ```shell
 go-tpc ch --host 172.16.5.140 -P4000 --warehouses 1000 run -D tpcc -T 50 -t 1 --time 1h
 ```
 
-During the test, test results are continuously printed on the console. For example:
+テスト中、テスト結果は継続的にコンソールに出力されます。例えば：
 
 ```text
 [Current] NEW_ORDER - Takes(s): 10.0, Count: 13524, TPM: 81162.0, Sum(ms): 998317.6, Avg(ms): 73.9, 50th(ms): 71.3, 90th(ms): 100.7, 95th(ms): 113.2, 99th(ms): 159.4, 99.9th(ms): 209.7, Max(ms): 243.3
@@ -130,7 +130,7 @@ During the test, test results are continuously printed on the console. For examp
 ...
 ```
 
-After the test is finished, the test summary results are printed. For example:
+テストが終了すると、テストの要約結果が印刷されます。例えば：
 
 ```text
 Finished: 50 OLTP workers, 1 OLAP workers
@@ -166,4 +166,4 @@ tpmC: 93826.9, efficiency: 729.6%
 [Summary] Q7     - Count: 11, Sum(ms): 158928.2, Avg(ms): 14446.3
 ```
 
-After the test is finished, you can execute the `tiup bench tpcc -H 172.16.5.140 -P 4000 -D tpcc --warehouses 1000 check` command to validate the data correctness.
+テストが終了したら、 `tiup bench tpcc -H 172.16.5.140 -P 4000 -D tpcc --warehouses 1000 check`コマンドを実行してデータの正確性を検証できます。

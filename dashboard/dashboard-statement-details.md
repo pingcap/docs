@@ -3,58 +3,58 @@ title: Statement Execution Details of TiDB Dashboard
 summary: View the execution details of a single SQL statement in TiDB Dashboard.
 ---
 
-# Statement Execution Details of TiDB Dashboard
+# TiDB ダッシュボードのステートメント実行の詳細 {#statement-execution-details-of-tidb-dashboard}
 
-Click any item in the list to enter the detail page of the SQL statement to view more detailed information. This information includes the following parts:
+リスト内の任意の項目をクリックして、SQL ステートメントの詳細ページに入り、より詳細な情報を表示します。この情報には、次の部分が含まれます。
 
-- The overview of SQL statements, which includes the SQL template, the SQL template ID, the current time range of displayed SQL executions, the number of execution plans and the database in which the SQL statement is executed (area 1 in the following figure).
-- The execution plan list: If a SQL statement has multiple execution plans, this list is displayed. Besides text information of execution plans, TiDB v6.2.0 introduces visual execution plans, through which you can learn each operator of a statement and detailed information more intuitively. You can select different execution plans, and the details of the selected plans are displayed below the list (area 2 in the following figure).
-- Execution detail of plans, which displays the detailed information of the selected execution plans. See [Execution plan in details](#execution-details-of-plans) (area 3 in the following figure).
+-   SQL テンプレート、SQL テンプレート ID、表示されている SQL 実行の現在の時間範囲、実行計画の数、および SQL ステートメントが実行されるデータベースを含む、SQL ステートメントの概要 (次の図の領域 1)。
+-   実行計画リスト: SQL ステートメントに複数の実行計画がある場合、このリストが表示されます。 TiDB v6.2.0 では、実行計画のテキスト情報に加えて、ステートメントの各演算子と詳細情報をより直感的に学習できる視覚的な実行計画が導入されています。さまざまな実行計画を選択できます。選択した計画の詳細がリストの下に表示されます (次の図の領域 2)。
+-   計画の実行の詳細。選択した実行計画の詳細情報が表示されます。 [実行計画の詳細](#execution-details-of-plans) (次の図の領域 3) を参照してください。
 
 ![Details](/media/dashboard/dashboard-statement-detail-v620.png)
 
-## Execution details of plans
+## 計画の実行内容 {#execution-details-of-plans}
 
-The execution detail of plans includes the following information:
+計画の実行の詳細には、次の情報が含まれます。
 
-- SQL sample: The text of a certain SQL statement that is actually executed corresponding to the plan. Any SQL statement that has been executed within the time range might be used as a SQL sample.
-- Execution plan: Complete information about execution plans, displayed in graph and text. For details of the execution plan, see [Understand the Query Execution Plan](/explain-overview.md). If multiple execution plans are selected, only (any) one of them is displayed.
-- For basic information, execution time, Coprocessor read, transaction, and slow query of the SQL statement, you can click the corresponding tab titles to switch among different information.
+-   SQL サンプル: 計画に対応して実際に実行される特定の SQL ステートメントのテキスト。時間範囲内に実行された SQL ステートメントは、SQL サンプルとして使用される場合があります。
+-   実行計画: グラフとテキストで表示される実行計画に関する完全な情報。実行計画の詳細については、 [クエリ実行計画を理解する](/explain-overview.md)を参照してください。複数の実行計画が選択されている場合は、そのうちの 1 つ (いずれか) のみが表示されます。
+-   SQL ステートメントの基本情報、実行時間、Coprocessor読み取り、トランザクション、およびスロー クエリについては、対応するタブ タイトルをクリックして、さまざまな情報に切り替えることができます。
 
 ![Execution details of plans](/media/dashboard/dashboard-statement-plans-detail.png)
 
-### Basic Tab
+### 基本タブ {#basic-tab}
 
-The basic information of a SQL execution includes the table names, index name, execution count, and total latency. The **Description** column provides detailed description of each field.
+SQL 実行の基本情報には、テーブル名、インデックス名、実行回数、および合計レイテンシーが含まれます。 [**説明**] 列には、各フィールドの詳細な説明が表示されます。
 
 ![Basic information](/media/dashboard/dashboard-statement-plans-basic.png)
 
-### Time Tab
+### 時間タブ {#time-tab}
 
-Click the **Time** tab, and you can see how long each stage of the execution plan lasts.
+[**時間**] タブをクリックすると、実行計画の各段階の継続時間を確認できます。
 
-> **Note:**
+> **ノート：**
 >
-> Because some operations might be performed in parallel within a single SQL statement, the cumulative duration of each stage might exceed the actual execution time of the SQL statement.
+> 一部の操作は単一の SQL ステートメント内で並行して実行される可能性があるため、各ステージの累積期間が SQL ステートメントの実際の実行時間を超える場合があります。
 
 ![Execution time](/media/dashboard/dashboard-statement-plans-time.png)
 
-### Coprocessor Read Tab
+### Coprocessor読み取りタブ {#coprocessor-read-tab}
 
-Click the **Coprocessor Read** tab, and you can see information related to Coprocessor read.
+**Coprocessor Read**タブをクリックすると、 Coprocessor read に関する情報が表示されます。
 
 ![Coprocessor read](/media/dashboard/dashboard-statement-plans-cop-read.png)
 
-### Transaction Tab
+### 取引タブ {#transaction-tab}
 
-Click the **Transaction** tab, and you can see information related to execution plans and transactions, such as the average number of written keys or the maximum number of written keys.
+[**トランザクション**] タブをクリックすると、平均書き込みキー数や最大書き込みキー数など、実行計画やトランザクションに関する情報が表示されます。
 
 ![Transaction](/media/dashboard/dashboard-statement-plans-transaction.png)
 
-### Slow Query Tab
+### スロークエリタブ {#slow-query-tab}
 
-If an execution plan is executed too slowly, you can see its associated slow query records under the **Slow Query** tab.
+実行プランの実行が遅すぎる場合、関連するスロー クエリ レコードが [**スロー クエリ**] タブに表示されます。
 
 ![Slow Query](/media/dashboard/dashboard-statement-plans-slow-queries.png)
 
-The information displayed in this area has the same structure with the slow query page. See [TiDB Dashboard Slow Query Page](/dashboard/dashboard-slow-query.md) for details.
+このエリアに表示される情報は、スロー クエリ ページと同じ構造です。詳細は[TiDB ダッシュボードのスロー クエリ ページ](/dashboard/dashboard-slow-query.md)を参照してください。

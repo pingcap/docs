@@ -3,50 +3,50 @@ title: Overview of Optimizing SQL Performance
 summary: Provides an overview of SQL performance tuning for TiDB application developers.
 ---
 
-# Overview of Optimizing SQL Performance
+# SQL パフォーマンスの最適化の概要 {#overview-of-optimizing-sql-performance}
 
-This document introduces how to optimize the performance of SQL statements in TiDB. To get good performance, you can start with the following aspects:
+このドキュメントでは、TiDB で SQL ステートメントのパフォーマンスを最適化する方法を紹介します。優れたパフォーマンスを得るには、次の側面から始めることができます。
 
-* SQL performance tuning
-* Schema design: Based on your application workload patterns, you might need to change the table schema to avoid transaction contention or hot spots.
+-   SQL パフォーマンスのチューニング
+-   スキーマ設計: アプリケーションのワークロード パターンに基づいて、トランザクションの競合やホット スポットを回避するためにテーブル スキーマを変更する必要がある場合があります。
 
-## SQL performance tuning
+## SQL パフォーマンスのチューニング {#sql-performance-tuning}
 
-To get good SQL statement performance, you can follow these guidelines:
+優れた SQL ステートメントのパフォーマンスを得るには、次のガイドラインに従うことができます。
 
-* Scan as few rows as possible. It is recommended to scan only the data you need and avoid scanning excess data.
-* Use the right index. Ensure that there is a corresponding index for the column in the `WHERE` clause in SQL. If not, the statement entails a full table scan and thus causes poor performance.
-* Use the right join type. It is important to choose the right join type based on the relative size of the tables involved in the query. In general, TiDB's cost-based optimizer picks the best-performing join type. However, in a few cases, you might need to manually specify a better join type.
-* Use the right storage engine. For hybrid OLTP and OLAP workloads, the TiFlash engine is recommended. For details, see [HTAP Query](/develop/dev-guide-hybrid-oltp-and-olap-queries.md).
+-   できるだけ少ない行をスキャンします。必要なデータのみをスキャンし、余分なデータをスキャンしないことをお勧めします。
+-   適切なインデックスを使用してください。 SQL の`WHERE`句の列に対応するインデックスがあることを確認してください。そうでない場合、ステートメントは全表スキャンを伴うため、パフォーマンスが低下します。
+-   正しい結合タイプを使用してください。クエリに含まれるテーブルの相対的なサイズに基づいて、適切な結合の種類を選択することが重要です。一般に、TiDB のコストベースのオプティマイザーは、最もパフォーマンスの高い結合タイプを選択します。ただし、場合によっては、より適切な結合タイプを手動で指定する必要があります。
+-   適切なストレージ エンジンを使用します。 OLTP と OLAP のハイブリッド ワークロードには、 TiFlashエンジンをお勧めします。詳細については、 [HTAP クエリ](/develop/dev-guide-hybrid-oltp-and-olap-queries.md)を参照してください。
 
-## Schema design
+## スキーマ設計 {#schema-design}
 
-After [tuning SQL performance](#sql-performance-tuning), if your application still cannot get good performance, you might need to check your schema design and data access patterns to avoid the following issues:
+[SQL パフォーマンスのチューニング](#sql-performance-tuning)の後、アプリケーションがまだ良好なパフォーマンスを得られない場合は、次の問題を回避するために、スキーマの設計とデータ アクセス パターンを確認する必要がある場合があります。
 
 <CustomContent platform="tidb">
 
-* Transaction contention. For how to diagnose and resolve transaction contention, see [Troubleshoot Lock Conflicts](/troubleshoot-lock-conflicts.md).
-* Hot spots. For how to diagnose and resolve hot spots, see [Troubleshoot Hotspot Issues](/troubleshoot-hot-spot-issues.md).
+-   トランザクション競合。トランザクションの競合を診断して解決する方法については、 [ロック競合のトラブルシューティング](/troubleshoot-lock-conflicts.md)を参照してください。
+-   ホットスポット。ホット スポットを診断して解決する方法については、 [ホットスポットの問題のトラブルシューティング](/troubleshoot-hot-spot-issues.md)を参照してください。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-* Transaction contention. For how to diagnose and resolve transaction contention, see [Troubleshoot Lock Conflicts](https://docs.pingcap.com/tidb/stable/troubleshoot-lock-conflicts).
-* Hot spots. For how to diagnose and resolve hot spots, see [Troubleshoot Hotspot Issues](https://docs.pingcap.com/tidb/stable/troubleshoot-hot-spot-issues).
+-   トランザクション競合。トランザクションの競合を診断して解決する方法については、 [ロック競合のトラブルシューティング](https://docs.pingcap.com/tidb/stable/troubleshoot-lock-conflicts)を参照してください。
+-   ホットスポット。ホット スポットを診断して解決する方法については、 [ホットスポットの問題のトラブルシューティング](https://docs.pingcap.com/tidb/stable/troubleshoot-hot-spot-issues)を参照してください。
 
 </CustomContent>
 
-### See also
+### こちらもご覧ください {#see-also}
 
 <CustomContent platform="tidb">
 
-* [SQL Performance Tuning](/sql-tuning-overview.md)
+-   [SQL性能チューニング](/sql-tuning-overview.md)
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-* [SQL Performance Tuning](/tidb-cloud/tidb-cloud-sql-tuning-overview.md)
+-   [SQL性能チューニング](/tidb-cloud/tidb-cloud-sql-tuning-overview.md)
 
 </CustomContent>

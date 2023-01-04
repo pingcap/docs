@@ -4,74 +4,74 @@ summary: Learn about TiDB Cloud and its architecture.
 category: intro
 ---
 
-# TiDB Cloud Introduction
+# TiDB Cloudの紹介 {#tidb-cloud-introduction}
 
-[TiDB Cloud](https://www.pingcap.com/tidb-cloud/) is a fully-managed Database-as-a-Service (DBaaS) that brings [TiDB](https://docs.pingcap.com/tidb/stable/overview), an open-source Hybrid Transactional and Analytical Processing (HTAP) database, to your cloud. TiDB Cloud offers an easy way to deploy and manage databases to let you focus on your applications, not the complexities of the databases. You can create TiDB Cloud clusters to quickly build mission-critical applications on Google Cloud Platform (GCP) and Amazon Web Services (AWS).
+[TiDB Cloud](https://www.pingcap.com/tidb-cloud/)は、オープンソースの Hybrid Transactional and Analytical Processing (HTAP) データベースである[TiDB](https://docs.pingcap.com/tidb/stable/overview)をクラウドにもたらす、完全に管理された Database-as-a-Service (DBaaS) です。 TiDB Cloudは、データベースの複雑さではなく、アプリケーションに集中できるように、データベースを展開および管理する簡単な方法を提供します。 TiDB Cloudクラスターを作成して、Google Cloud Platform (GCP) および Amazon Web Services (AWS) でミッション クリティカルなアプリケーションをすばやく構築できます。
 
 ![TiDB Cloud Overview](/media/tidb-cloud/tidb-cloud-overview.png)
 
-## Why TiDB Cloud
+## TiDB Cloudを選ぶ理由 {#why-tidb-cloud}
 
-TiDB Cloud allows you with little or no training to handle complex tasks such as infrastructure management and cluster deployment easily.
+TiDB Cloudを使用すると、トレーニングをほとんどまたはまったく受けなくても、インフラストラクチャ管理やクラスター展開などの複雑なタスクを簡単に処理できます。
 
-- Developers and database administrators (DBAs) can handle a large amount of online traffic effortlessly and rapidly analyze a large volume of data across multiple datasets.
+-   開発者とデータベース管理者 (DBA) は、大量のオンライン トラフィックを簡単に処理し、複数のデータセットにまたがる大量のデータを迅速に分析できます。
 
-- Enterprises of all sizes can easily deploy and manage TiDB Cloud to adapt to your business growth without prepayment.
+-   あらゆる規模の企業がTiDB Cloudを簡単に展開および管理して、前払いなしでビジネスの成長に適応できます。
 
-Watch the following video to learn more about TiDB Cloud:
+TiDB Cloudの詳細については、次のビデオをご覧ください。
 
-<iframe width="600" height="450" src="https://www.youtube.com/embed/skCV9BEmjbo" title="Why TiDB Cloud?" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<iframe width="600" height="450" src="https://www.youtube.com/embed/skCV9BEmjbo" title="TiDB クラウドを選ぶ理由" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
-With TiDB Cloud, you can get the following key features:
+TiDB Cloudを使用すると、次の主要な機能を利用できます。
 
-- **Fast and Customized Scaling**
+-   **高速でカスタマイズされたスケーリング**
 
-    Elastically and transparently scale to hundreds of nodes for critical workloads while maintaining ACID transactions. No need to bother with sharding. And you can scale your performance and storage nodes separately according to your business needs.
+    ACIDトランザクションを維持しながら、重要なワークロード用に数百のノードに柔軟かつ透過的にスケーリングします。シャーディングを気にする必要はありません。また、ビジネス ニーズに応じて、パフォーマンス ノードとストレージ ノードを個別にスケーリングできます。
 
-- **MySQL Compatibility**
+-   **MySQL の互換性**
 
-    Increase productivity and shorten time-to-market for your applications with TiDB's MySQL compatibility. Easily migrate data from existing MySQL instances without the need to rewrite code. Feel free to write and run your SQL in TiDB Cloud [Playground](/tidb-cloud/tidb-cloud-glossary.md#playground) instantly, which contains a pre-loaded dataset of GitHub events.
+    TiDB の MySQL 互換性により、生産性を向上させ、アプリケーションの市場投入までの時間を短縮します。コードを書き直すことなく、既存の MySQL インスタンスからデータを簡単に移行できます。事前に読み込まれた GitHub イベントのデータセットが含まれているTiDB Cloud [遊び場](/tidb-cloud/tidb-cloud-glossary.md#playground)で、SQL を自由に作成してすぐに実行してください。
 
-- **High Availability and Reliability**
+-   **高可用性と信頼性**
 
-    Naturally high availability by design. Data replication across multiple Availability Zones, daily backups, and auto-failover ensure business continuity, regardless of hardware failure, network partition, or data center loss.
+    設計による自然な高可用性。複数のアベイラビリティ ゾーンにわたるデータ レプリケーション、毎日のバックアップ、および自動フェイルオーバーにより、ハードウェア障害、ネットワーク パーティション、またはデータ センターの損失に関係なく、ビジネスの継続性が確保されます。
 
-- **Real-Time Analytics**
+-   **リアルタイム分析**
 
-    Get real-time analytical query results with a built-in analytics engine. TiDB Cloud runs consistent analytical queries on current data without disturbing mission-critical applications. Feel free to experience TiDB Cloud's speed in [Playground](/tidb-cloud/tidb-cloud-glossary.md#playground), without loading your data or connecting to your client.
+    組み込みの分析エンジンを使用して、リアルタイムの分析クエリ結果を取得します。 TiDB Cloudは、ミッション クリティカルなアプリケーションに影響を与えることなく、現在のデータに対して一貫した分析クエリを実行します。データをロードしたり、クライアントに接続したりすることなく、TiDB Cloud の速度を[遊び場](/tidb-cloud/tidb-cloud-glossary.md#playground)で気軽に体験してください。
 
-- **Enterprise Grade Security**
+-   **エンタープライズ グレードのセキュリティ**
 
-    Secure your data in dedicated networks and machines, with support for encryption both in-flight and at-rest. TiDB Cloud is certified by SOC 2 Type 2, ISO 27001:2013, ISO 27701, and fully compliant with GDPR.
+    飛行中と保管中の両方の暗号化をサポートして、専用のネットワークとマシンでデータをセキュリティします。 TiDB Cloudは、SOC 2 Type 2、ISO 27001:2013、ISO 27701 によって認定されており、GDPR に完全に準拠しています。
 
-- **Fully-Managed Service**
+-   **フルマネージド サービス**
 
-    Deploy, scale, monitor, and manage TiDB clusters with a few clicks, through an easy-to-use web-based management platform.
+    使いやすい Web ベースの管理プラットフォームを使用して、数回クリックするだけで TiDB クラスターをデプロイ、スケーリング、監視、および管理します。
 
-- **Multi-Cloud Support**
+-   **マルチクラウドのサポート**
 
-    Stay flexible without cloud vendor lock-in. TiDB Cloud is currently available on AWS and GCP.
+    クラウド ベンダー ロックインなしで柔軟性を維持します。 TiDB Cloudは現在、AWS と GCP で利用できます。
 
-- **Simple Pricing Plans**
+-   **シンプルな料金プラン**
 
-    Pay only for what you use, with transparent and upfront pricing with no hidden fees.
+    隠れた料金のない透明な前払い料金で、使用した分だけお支払いください。
 
-- **World-Class Support**
+-   **ワールドクラスのサポート**
 
-    Get world-class support through our support portal, <a href="mailto:tidbcloud-support@pingcap.com">email</a>, chat, or video conferencing.
+    サポート ポータル、<a href="mailto:tidbcloud-support@pingcap.com">電子メール</a>、チャット、またはビデオ会議を通じて、世界クラスのサポートを受けてください。
 
-## Architecture
+## アーキテクチャ {#architecture}
 
 ![TiDB Cloud architecture](/media/tidb-cloud/tidb-cloud-architecture.png)
 
-- TiDB VPC (Virtual Private Cloud)
+-   TiDB VPC (仮想プライベート クラウド)
 
-    For each TiDB Cloud cluster, all TiDB nodes and auxiliary nodes, including TiDB Operator nodes and logging nodes, are deployed in an independent VPC.
+    各TiDB Cloudクラスターでは、 TiDB Operatorノードとログ ノードを含むすべての TiDB ノードと補助ノードが独立した VPC にデプロイされます。
 
-- TiDB Cloud Central Services
+-   TiDB Cloudセントラル サービス
 
-    Central Services, including billing, alerts, meta storage, dashboard UI, are deployed independently. You can access the dashboard UI to operate the TiDB cluster via the internet.
+    請求、アラート、メタ ストレージ、ダッシュボード UI などのセントラル サービスは、個別に展開されます。ダッシュボード UI にアクセスして、インターネット経由で TiDB クラスターを操作できます。
 
-- Your VPC
+-   あなたの VPC
 
-    You can connect to your TiDB cluster via private endpoint connection or VPC peering connection. Refer to [Set Up Private Endpoint Connections](/tidb-cloud/set-up-private-endpoint-connections.md) or [Set up VPC Peering Connection](/tidb-cloud/set-up-vpc-peering-connections.md) for details.
+    プライベート エンドポイント接続または VPC ピアリング接続を介して TiDB クラスターに接続できます。詳細は[プライベート エンドポイント接続のセットアップ](/tidb-cloud/set-up-private-endpoint-connections.md)または[VPC ピアリング接続をセットアップする](/tidb-cloud/set-up-vpc-peering-connections.md)を参照してください。

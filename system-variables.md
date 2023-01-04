@@ -3,13 +3,13 @@ title: System Variables
 summary: Use system variables to optimize performance or alter running behavior.
 ---
 
-# System Variables
+# システム変数 {#system-variables}
 
-TiDB system variables behave similar to MySQL, in that settings apply on a `SESSION` or `GLOBAL` scope:
+TiDB システム変数は、設定が`SESSION`または`GLOBAL`スコープに適用されるという点で、MySQL と同様に動作します。
 
-- Changes on a `SESSION` scope will only affect the current session.
-- Changes on a `GLOBAL` scope apply immediately. If this variable is also`SESSION` scoped, all sessions (including your session) will continue to use their current session value.
-- Changes are made using the [`SET` statement](/sql-statements/sql-statement-set-variable.md):
+-   `SESSION`スコープの変更は、現在のセッションにのみ影響します。
+-   `GLOBAL`スコープの変更はすぐに適用されます。この変数のスコープも`SESSION`の場合、すべてのセッション (自分のセッションを含む) は引き続き現在のセッション値を使用します。
+-   変更は[`SET`ステートメント](/sql-statements/sql-statement-set-variable.md)を使用して行われます。
 
 ```sql
 # These two identical statements change a session variable
@@ -21,54 +21,54 @@ SET @@global.tidb_distsql_scan_concurrency = 10;
 SET GLOBAL tidb_distsql_scan_concurrency = 10;
 ```
 
-> **Note:**
+> **ノート：**
 >
-> Several `GLOBAL` variables persist to the TiDB cluster. Some variables in this document have a `Persists to cluster` setting, which can be configured to `Yes` or `No`.
+> いくつかの`GLOBAL`変数が TiDB クラスターに保持されます。このドキュメントの一部の変数には`Persists to cluster`の設定があり、これは`Yes`または`No`に構成できます。
 >
-> - For variables with the `Persists to cluster: Yes` setting, when a global variable is changed, a notification is sent to all TiDB servers to refresh their system variable cache. When you add additional TiDB servers or restart existing TiDB servers, the persisted configuration value is automatically used.
-> - For variables with the `Persists to cluster: No` setting, changes only apply to the local TiDB instance that you are connected to. To retain any values set, you need to specify the variables in your `tidb.toml` configuration file.
+> -   設定が`Persists to cluster: Yes`の変数の場合、グローバル変数が変更されると、すべての TiDB サーバーに通知が送信され、システム変数キャッシュが更新されます。 TiDB サーバーを追加するか、既存の TiDB サーバーを再起動すると、永続化された構成値が自動的に使用されます。
+> -   `Persists to cluster: No`設定の変数の場合、変更は接続先のローカル TiDB インスタンスにのみ適用されます。値セットを保持するには、 `tidb.toml`構成ファイルで変数を指定する必要があります。
 >
-> Additionally, TiDB presents several MySQL variables as both readable and settable. This is required for compatibility, because it is common for both applications and connectors to read MySQL variables. For example, JDBC connectors both read and set query cache settings, despite not relying on the behavior.
+> さらに、TiDB はいくつかの MySQL 変数を読み取り可能かつ設定可能として提供します。これは、アプリケーションとコネクタの両方が MySQL 変数を読み取るのが一般的であるため、互換性のために必要です。たとえば、JDBC コネクタは、動作に依存していないにもかかわらず、クエリ キャッシュ設定の読み取りと設定の両方を行います。
 
-> **Note:**
+> **ノート：**
 >
-> Larger values do not always yield better performance. It is also important to consider the number of concurrent connections that are executing statements, because most settings apply to each connection.
+> 値が大きいほど、常にパフォーマンスが向上するとは限りません。ほとんどの設定は各接続に適用されるため、ステートメントを実行している同時接続の数を考慮することも重要です。
 >
-> Consider the unit of a variable when you determine safe values:
+> 安全な値を決定するときは、変数の単位を考慮してください。
 >
-> * For threads, safe values are typically up to the number of CPU cores.
-> * For bytes, safe values are typically less than the amount of system memory.
-> * For time, pay attention that the unit might be seconds or milliseconds.
+> -   スレッドの場合、安全な値は通常、CPU コアの数までです。
+> -   バイトの場合、安全な値は通常、システム メモリの量よりも小さくなります。
+> -   時間については、単位が秒またはミリ秒である可能性があることに注意してください。
 >
-> Variables using the same unit might compete for the same set of resources.
+> 同じユニットを使用する変数は、同じリソースのセットを求めて競合する可能性があります。
 
-## Variable Reference
+## 変数参照 {#variable-reference}
 
-### allow_auto_random_explicit_insert <span class="version-mark">New in v4.0.3</span>
+### allow_auto_random_explicit_insert v4.0.3<span class="version-mark">の新機能</span> {#allow-auto-random-explicit-insert-span-class-version-mark-new-in-v4-0-3-span}
 
-- Scope: SESSION | GLOBAL
-- Persists to cluster: Yes
-- Type: Boolean
-- Default value: `OFF`
-- Determines whether to allow explicitly specifying the values of the column with the `AUTO_RANDOM` attribute in the `INSERT` statement.
+-   スコープ: セッション |グローバル
+-   クラスターに永続化: はい
+-   タイプ: ブール値
+-   デフォルト値: `OFF`
+-   `INSERT`ステートメントで`AUTO_RANDOM`属性を持つ列の値を明示的に指定できるようにするかどうかを決定します。
 
-### auto_increment_increment
+### auto_increment_increment {#auto-increment-increment}
 
-- Scope: SESSION | GLOBAL
-- Persists to cluster: Yes
-- Type: Integer
-- Default value: `1`
-- Range: `[1, 65535]`
-- Controls the step size of `AUTO_INCREMENT` values to be allocated to a column. It is often used in combination with `auto_increment_offset`.
+-   スコープ: セッション |グローバル
+-   クラスターに永続化: はい
+-   タイプ: 整数
+-   デフォルト値: `1`
+-   範囲: `[1, 65535]`
+-   列に割り当てられる`AUTO_INCREMENT`の値のステップ サイズを制御します。 `auto_increment_offset`と組み合わせて使用することが多い。
 
-### auto_increment_offset
+### auto_increment_offset {#auto-increment-offset}
 
-- Scope: SESSION | GLOBAL
-- Persists to cluster: Yes
-- Type: Integer
-- Default value: `1`
-- Range: `[1, 65535]`
-- Controls the initial offset of `AUTO_INCREMENT` values to be allocated to a column. This setting is often used in combination with `auto_increment_increment`. For example:
+-   スコープ: セッション |グローバル
+-   クラスターに永続化: はい
+-   タイプ: 整数
+-   デフォルト値: `1`
+-   範囲: `[1, 65535]`
+-   列に割り当てられる`AUTO_INCREMENT`値の初期オフセットを制御します。この設定は`auto_increment_increment`と組み合わせて使用されることがよくあります。例えば：
 
 ```sql
 mysql> CREATE TABLE t1 (a int not null primary key auto_increment);
@@ -96,346 +96,346 @@ mysql> SELECT * FROM t1;
 4 rows in set (0.00 sec)
 ```
 
-### autocommit
+### 自動コミット {#autocommit}
 
-- Scope: SESSION | GLOBAL
-- Persists to cluster: Yes
-- Type: Boolean
-- Default value: `ON`
-- Controls whether statements should automatically commit when not in an explicit transaction. See [Transaction Overview](/transaction-overview.md#autocommit) for more information.
+-   スコープ: セッション |グローバル
+-   クラスターに永続化: はい
+-   タイプ: ブール値
+-   デフォルト値: `ON`
+-   明示的なトランザクションでない場合にステートメントを自動的にコミットするかどうかを制御します。詳細については、 [取引概要](/transaction-overview.md#autocommit)を参照してください。
 
-### block_encryption_mode
+### block_encryption_mode {#block-encryption-mode}
 
-- Scope: SESSION | GLOBAL
-- Persists to cluster: Yes
-- Type: Enumeration
-- Default value: `aes-128-ecb`
-- Value options: `aes-128-ecb`, `aes-192-ecb`, `aes-256-ecb`, `aes-128-cbc`, `aes-192-cbc`, `aes-256-cbc`, `aes-128-ofb`, `aes-192-ofb`, `aes-256-ofb`, `aes-128-cfb`, `aes-192-cfb`, `aes-256-cfb`
-- This variable sets the encryption mode for the built-in functions `AES_ENCRYPT()` and `AES_DECRYPT()`.
+-   スコープ: セッション |グローバル
+-   クラスターに永続化: はい
+-   タイプ: 列挙
+-   デフォルト値: `aes-128-ecb`
+-   値のオプション: `aes-128-ecb` 、 `aes-192-ecb` 、 `aes-256-ecb` 、 `aes-128-cbc` 、 `aes-192-cbc` 、 `aes-256-cbc` 、 `aes-128-ofb` 、 `aes-192-ofb` 、 `aes-256-ofb` 、 `aes-128-cfb` 、 `aes-192-cfb` 、 `aes-256-cfb`
+-   この変数は、組み込み関数`AES_ENCRYPT()`および`AES_DECRYPT()`の暗号化モードを設定します。
 
-### character_set_client
+### character_set_client {#character-set-client}
 
-- Scope: SESSION | GLOBAL
-- Persists to cluster: Yes
-- Default value: `utf8mb4`
-- The character set for data sent from the client. See [Character Set and Collation](/character-set-and-collation.md) for details on the use of character sets and collations in TiDB. It is recommended to use [`SET NAMES`](/sql-statements/sql-statement-set-names.md) to change the character set when needed.
+-   スコープ: セッション |グローバル
+-   クラスターに永続化: はい
+-   デフォルト値: `utf8mb4`
+-   クライアントから送信されたデータの文字セット。 TiDB での文字セットと照合順序の使用の詳細については、 [文字セットと照合順序](/character-set-and-collation.md)を参照してください。必要に応じて[`SET NAMES`](/sql-statements/sql-statement-set-names.md)を使用して文字セットを変更することをお勧めします。
 
-### character_set_connection
+### character_set_connection {#character-set-connection}
 
-- Scope: SESSION | GLOBAL
-- Persists to cluster: Yes
-- Default value: `utf8mb4`
-- The character set for string literals that do not have a specified character set.
+-   スコープ: セッション |グローバル
+-   クラスターに永続化: はい
+-   デフォルト値: `utf8mb4`
+-   指定された文字セットを持たない文字列リテラルの文字セット。
 
-### character_set_database
+### character_set_database {#character-set-database}
 
-- Scope: SESSION | GLOBAL
-- Persists to cluster: Yes
-- Default value: `utf8mb4`
-- This variable indicates the character set of the default database in use. **It is NOT recommended to set this variable**. When a new default database is selected, the server changes the variable value.
+-   スコープ: セッション |グローバル
+-   クラスターに永続化: はい
+-   デフォルト値: `utf8mb4`
+-   この変数は、使用中のデフォルト データベースの文字セットを示します。**この変数を設定することはお勧めしません**。新しいデフォルト データベースが選択されると、サーバーは変数値を変更します。
 
-### character_set_results
+### character_set_results {#character-set-results}
 
-- Scope: SESSION | GLOBAL
-- Persists to cluster: Yes
-- Default value: `utf8mb4`
-- The character set that is used when data is sent to the client.
+-   スコープ: セッション |グローバル
+-   クラスターに永続化: はい
+-   デフォルト値: `utf8mb4`
+-   データがクライアントに送信されるときに使用される文字セット。
 
-### character_set_server
+### character_set_server {#character-set-server}
 
-- Scope: SESSION | GLOBAL
-- Persists to cluster: Yes
-- Default value: `utf8mb4`
-- The default character set for the server.
+-   スコープ: セッション |グローバル
+-   クラスターに永続化: はい
+-   デフォルト値: `utf8mb4`
+-   サーバーのデフォルトの文字セット。
 
-### collation_connection
+### collation_connection {#collation-connection}
 
-- Scope: SESSION | GLOBAL
-- Persists to cluster: Yes
-- Default value: `utf8mb4_bin`
-- This variable indicates the collation used in the current connection. It is consistent with the MySQL variable `collation_connection`.
+-   スコープ: セッション |グローバル
+-   クラスターに永続化: はい
+-   デフォルト値: `utf8mb4_bin`
+-   この変数は、現在の接続で使用される照合順序を示します。これは、MySQL 変数`collation_connection`と一致しています。
 
-### collation_database
+### collation_database {#collation-database}
 
-- Scope: SESSION | GLOBAL
-- Persists to cluster: Yes
-- Default value: `utf8mb4_bin`
-- This variable indicates the default collation of the database in use. **It is NOT recommended to set this variable**. When a new database is selected, TiDB changes this variable value.
+-   スコープ: セッション |グローバル
+-   クラスターに永続化: はい
+-   デフォルト値: `utf8mb4_bin`
+-   この変数は、使用中のデータベースのデフォルトの照合順序を示します。**この変数を設定することはお勧めしません**。新しいデータベースが選択されると、TiDB はこの変数の値を変更します。
 
-### collation_server
+### collation_server {#collation-server}
 
-- Scope: SESSION | GLOBAL
-- Persists to cluster: Yes
-- Default value: `utf8mb4_bin`
-- The default collation used when the database is created.
+-   スコープ: セッション |グローバル
+-   クラスターに永続化: はい
+-   デフォルト値: `utf8mb4_bin`
+-   データベースの作成時に使用されるデフォルトの照合順序。
 
-### cte_max_recursion_depth
+### cte_max_recursion_depth {#cte-max-recursion-depth}
 
-- Scope: SESSION | GLOBAL
-- Persists to cluster: Yes
-- Type: Integer
-- Default value: `1000`
-- Range: `[0, 4294967295]`
-- Controls the maximum recursion depth in Common Table Expressions.
+-   スコープ: セッション |グローバル
+-   クラスターに永続化: はい
+-   タイプ: 整数
+-   デフォルト値: `1000`
+-   範囲: `[0, 4294967295]`
+-   共通テーブル式の最大再帰深度を制御します。
 
-### datadir
+### データディレクトリ {#datadir}
 
-- Scope: NONE
-- Default value: /tmp/tidb
-- This variable indicates the location where data is stored. This location can be a local path or point to a PD server if the data is stored on TiKV.
-- A value in the format of `ip_address:port` indicates the PD server that TiDB connects to on startup.
+-   スコープ: なし
+-   デフォルト値: /tmp/tidb
+-   この変数は、データが格納されている場所を示します。データが TiKV に保存されている場合、この場所はローカル パスまたは PDサーバーを指すことができます。
+-   `ip_address:port`の形式の値は、起動時に TiDB が接続する PDサーバーを示します。
 
-### ddl_slow_threshold
-
-<CustomContent platform="tidb-cloud">
-
-> **Note:**
->
-> This TiDB variable is not applicable to TiDB Cloud.
-
-</CustomContent>
-
-- Scope: GLOBAL
-- Persists to cluster: No, only applicable to the current TiDB instance that you are connecting to.
-- Type: Integer
-- Default value: `300`
-- Range: `[0, 2147483647]`
-- Unit: Milliseconds
-- Log DDL operations whose execution time exceeds the threshold value.
-
-### default_authentication_plugin
-
-- Scope: GLOBAL
-- Persists to cluster: Yes
-- Type: Enumeration
-- Default value: `mysql_native_password`
-- Possible values: `mysql_native_password`, `caching_sha2_password`, `tidb_sm3_password`, and `tidb_auth_token`
-- The `tidb_auth_token` authentication method is used only for the internal operation of TiDB Cloud. **DO NOT** set the variable to this value.
-- This variable sets the authentication method that the server advertises when the server-client connection is being established.
-- To authenticate using the `tidb_sm3_password` method, you can connect to TiDB using [TiDB-JDBC](https://github.com/pingcap/mysql-connector-j/tree/release/8.0-sm3).
-
-<CustomContent platform="tidb">
-
-For more possible values of this variable, see [Authentication plugin status](/security-compatibility-with-mysql.md#authentication-plugin-status).
-
-</CustomContent>
-
-### default_password_lifetime <span class="version-mark">New in v6.5.0</span>
-
-- Scope: GLOBAL
-- Persists to cluster: Yes
-- Type: Integer
-- Default value: `0`
-- Range: `[0, 65535]`
-- Sets the global policy for automatic password expiration. The default value `0` indicates that the password never expires. If this system variable is set to a positive integer `N`, it means that the password lifetime is `N` days, and you must change your password within `N` days.
-
-### default_week_format
-
-- Scope: SESSION | GLOBAL
-- Persists to cluster: Yes
-- Type: Integer
-- Default value: `0`
-- Range: `[0, 7]`
-- Sets the week format used by the `WEEK()` function.
-
-### disconnect_on_expired_password <span class="version-mark">New in v6.5.0</span>
-
-- Scope: GLOBAL
-- Type: Boolean
-- Default value: `ON`
-- This variable is read-only. It indicates whether TiDB disconnects the client connection when the password is expired. If the variable is set to `ON`, the client connection is disconnected when the password is expired. If the variable is set to `OFF`, the client connection is restricted to the "sandbox mode" and the user can only execute the password reset operation.
-
-<CustomContent platform="tidb">
-
-- If you need to change the behavior of the client connection for the expired password, modify the [`security.disconnect-on-expired-password`](/tidb-configuration-file.md#disconnect-on-expired-password-new-in-v650) configuration item in the configuration file.
-
-</CustomContent>
+### ddl_slow_threshold {#ddl-slow-threshold}
 
 <CustomContent platform="tidb-cloud">
 
-- If you need to change the behavior of the client connection for the expired password, modify the [`security.disconnect-on-expired-password`](https://docs.pingcap.com/tidb/stable/tidb-configuration-file#disconnect-on-expired-password-new-in-v650) configuration item in the configuration file.
+> **ノート：**
+>
+> この TiDB 変数はTiDB Cloudには適用されません。
 
 </CustomContent>
 
-### error_count
+-   範囲: グローバル
+-   Persists to cluster: いいえ、接続している現在の TiDB インスタンスにのみ適用されます。
+-   タイプ: 整数
+-   デフォルト値: `300`
+-   範囲: `[0, 2147483647]`
+-   単位: ミリ秒
+-   実行時間がしきい値を超える DDL 操作をログに記録します。
 
-- Scope: SESSION
-- Type: Integer
-- Default value: `0`
-- A read-only variable that indicates the number of errors that resulted from the last statement that generated messages.
+### default_authentication_plugin {#default-authentication-plugin}
 
-### foreign_key_checks
+-   範囲: グローバル
+-   クラスターに永続化: はい
+-   タイプ: 列挙
+-   デフォルト値: `mysql_native_password`
+-   可能な値: `mysql_native_password` 、 `caching_sha2_password` 、 `tidb_sm3_password` 、および`tidb_auth_token`
+-   `tidb_auth_token`の認証方法は、 TiDB Cloudの内部操作のみに使用されます。変数をこの値に設定し**ない**でください。
+-   この変数は、サーバーとクライアントの接続が確立されているときにサーバーが通知する認証方法を設定します。
+-   `tidb_sm3_password`メソッドを使用して認証するには、 [TiDB-JDBC](https://github.com/pingcap/mysql-connector-j/tree/release/8.0-sm3)を使用して TiDB に接続できます。
 
-- Scope: SESSION | GLOBAL
-- Persists to cluster: Yes
-- Type: Boolean
-- Default value: `OFF`
-- For compatibility, TiDB returns foreign key checks as `OFF`.
+<CustomContent platform="tidb">
 
-### group_concat_max_len
+この変数のその他の可能な値については、 [認証プラグインのステータス](/security-compatibility-with-mysql.md#authentication-plugin-status)を参照してください。
 
-- Scope: SESSION | GLOBAL
-- Persists to cluster: Yes
-- Type: Integer
-- Default value: `1024`
-- Range: `[4, 18446744073709551615]`
-- The maximum buffer size for items in the `GROUP_CONCAT()` function.
+</CustomContent>
 
-### have_openssl
+### default_password_lifetime <span class="version-mark">v6.5.0 の新機能</span> {#default-password-lifetime-span-class-version-mark-new-in-v6-5-0-span}
 
-- Scope: NONE
-- Type: Boolean
-- Default value: `DISABLED`
-- A read-only variable for MySQL compatibility. Set to `YES` by the server when the server has TLS enabled.
+-   範囲: グローバル
+-   クラスターに永続化: はい
+-   タイプ: 整数
+-   デフォルト値: `0`
+-   範囲: `[0, 65535]`
+-   パスワードの自動有効期限切れのグローバル ポリシーを設定します。デフォルト値`0`は、パスワードが無期限であることを示します。このシステム変数が正の整数`N`に設定されている場合、パスワードの有効期間は`N`日間であり、 `N`日以内にパスワードを変更する必要があることを意味します。
 
-### have_ssl
+### default_week_format {#default-week-format}
 
-- Scope: NONE
-- Type: Boolean
-- Default value: `DISABLED`
-- A read-only variable for MySQL compatibility. Set to `YES` by the server when the server has TLS enabled.
+-   スコープ: セッション |グローバル
+-   クラスターに永続化: はい
+-   タイプ: 整数
+-   デフォルト値: `0`
+-   範囲: `[0, 7]`
+-   `WEEK()`関数で使用される週の形式を設定します。
 
-### hostname
+### disconnect_on_expired_pa <span class="version-mark">ssword v6.5.0 の新機能</span> {#disconnect-on-expired-password-span-class-version-mark-new-in-v6-5-0-span}
 
-- Scope: NONE
-- Default value: (system hostname)
-- The hostname of the TiDB server as a read-only variable.
+-   範囲: グローバル
+-   タイプ: ブール値
+-   デフォルト値: `ON`
+-   この変数は読み取り専用です。パスワードの有効期限が切れたときに TiDB がクライアント接続を切断するかどうかを示します。変数が`ON`に設定されている場合、パスワードの有効期限が切れるとクライアント接続が切断されます。変数が`OFF`に設定されている場合、クライアント接続は「サンドボックス モード」に制限され、ユーザーはパスワードのリセット操作のみを実行できます。
 
-### identity <span class="version-mark">New in v5.3.0</span>
+<CustomContent platform="tidb">
 
-This variable is an alias for [`last_insert_id`](#last_insert_id).
+-   期限切れのパスワードに対するクライアント接続の動作を変更する必要がある場合は、構成ファイルの[`security.disconnect-on-expired-password`](/tidb-configuration-file.md#disconnect-on-expired-password-new-in-v650)構成項目を変更します。
 
-### init_connect
+</CustomContent>
 
-- Scope: GLOBAL
-- Persists to cluster: Yes
-- Default value: ""
-- The `init_connect` feature permits a SQL statement to be automatically executed when you first connect to a TiDB server. If you have the `CONNECTION_ADMIN` or `SUPER` privileges, this `init_connect` statement will not be executed. If the `init_connect` statement results in an error, your user connection will be terminated.
+<CustomContent platform="tidb-cloud">
 
-### innodb_lock_wait_timeout
+-   期限切れのパスワードに対するクライアント接続の動作を変更する必要がある場合は、構成ファイルの[`security.disconnect-on-expired-password`](https://docs.pingcap.com/tidb/stable/tidb-configuration-file#disconnect-on-expired-password-new-in-v650)構成項目を変更します。
 
-- Scope: SESSION | GLOBAL
-- Persists to cluster: Yes
-- Type: Integer
-- Default value: `50`
-- Range: `[1, 3600]`
-- Unit: Seconds
-- The lock wait timeout for pessimistic transactions (default).
+</CustomContent>
 
-### interactive_timeout
+### error_count {#error-count}
 
-- Scope: SESSION | GLOBAL
-- Persists to cluster: Yes
-- Type: Integer
-- Default value: `28800`
-- Range: `[1, 31536000]`
-- Unit: Seconds
-- This variable represents the idle timeout of the interactive user session. Interactive user session refers to the session established by calling [`mysql_real_connect()`](https://dev.mysql.com/doc/c-api/5.7/en/mysql-real-connect.html) API using the `CLIENT_INTERACTIVE` option (for example, MySQL Shell and MySQL Client). This variable is fully compatible with MySQL.
+-   スコープ: セッション
+-   タイプ: 整数
+-   デフォルト値: `0`
+-   メッセージを生成した最後のステートメントから発生したエラーの数を示す読み取り専用変数。
 
-### last_insert_id
+### Foreign_key_checks {#foreign-key-checks}
 
-- Scope: SESSION
-- Type: Integer
-- Default value: `0`
-- Range: `[0, 9223372036854775807]`
-- This variable returns the last `AUTO_INCREMENT` or `AUTO_RANDOM` value generated by an insert statement.
-- The value of `last_insert_id` is the same as the value returned by the function `LAST_INSERT_ID()`.
+-   スコープ: セッション |グローバル
+-   クラスターに永続化: はい
+-   タイプ: ブール値
+-   デフォルト値: `OFF`
+-   互換性のために、TiDB は外部キー チェックを`OFF`として返します。
 
-### last_plan_from_binding <span class="version-mark">New in v4.0</span>
+### group_concat_max_len {#group-concat-max-len}
 
-- Scope: SESSION
-- Type: Boolean
-- Default value: `OFF`
-- This variable is used to show whether the execution plan used in the previous statement was influenced by a [plan binding](/sql-plan-management.md)
+-   スコープ: セッション |グローバル
+-   クラスターに永続化: はい
+-   タイプ: 整数
+-   デフォルト値: `1024`
+-   範囲: `[4, 18446744073709551615]`
+-   `GROUP_CONCAT()`関数内の項目の最大バッファー サイズ。
 
-### last_plan_from_cache <span class="version-mark">New in v4.0</span>
+### have_openssl {#have-openssl}
 
-- Scope: SESSION
-- Type: Boolean
-- Default value: `OFF`
-- This variable is used to show whether the execution plan used in the previous `execute` statement is taken directly from the plan cache.
+-   スコープ: なし
+-   タイプ: ブール値
+-   デフォルト値: `DISABLED`
+-   MySQL との互換性のための読み取り専用変数。サーバーサーバー`YES`に設定されます。
 
-### `last_sql_use_alloc` <span class="version-mark">New in v6.4.0</span>
+### have_ssl {#have-ssl}
 
-- Scope: SESSION
-- Default value: `OFF`
-- This variable is read-only. It is used to show whether the previous statement uses a cached chunk object (chunk allocation).
+-   スコープ: なし
+-   タイプ: ブール値
+-   デフォルト値: `DISABLED`
+-   MySQL との互換性のための読み取り専用変数。サーバーサーバー`YES`に設定されます。
 
-### license
+### ホスト名 {#hostname}
 
-- Scope: NONE
-- Default value: `Apache License 2.0`
-- This variable indicates the license of your TiDB server installation.
+-   スコープ: なし
+-   デフォルト値: (システムのホスト名)
+-   読み取り専用変数としての TiDBサーバーのホスト名。
 
-### log_bin
+### ID <span class="version-mark">v5.3.0 の新機能</span> {#identity-span-class-version-mark-new-in-v5-3-0-span}
 
-- Scope: NONE
-- Type: Boolean
-- Default value: `OFF`
-- This variable indicates whether [TiDB Binlog](https://docs.pingcap.com/tidb/stable/tidb-binlog-overview) is used.
+この変数は[`last_insert_id`](#last_insert_id)のエイリアスです。
 
-### max_allowed_packet <span class="version-mark">New in v6.1.0</span>
+### init_connect {#init-connect}
 
-- Scope: SESSION | GLOBAL
-- Persists to cluster: Yes
-- Default value: `67108864`
-- Range: `[1024, 1073741824]`
-- The value should be an integer multiple of 1024. If the value is not divisible by 1024, a warning will be prompted and the value will be rounded down. For example, when the value is set to 1025, the actual value in TiDB is 1024.
-- The maximum packet size allowed by the server and the client in one transmission of packets.
-- This variable is compatible with MySQL.
+-   範囲: グローバル
+-   クラスターに永続化: はい
+-   デフォルト値: &quot;&quot;
+-   `init_connect`の機能により、最初に TiDBサーバーに接続したときに SQL ステートメントを自動的に実行できます。 `CONNECTION_ADMIN`または`SUPER`の権限を持っている場合、この`init_connect`ステートメントは実行されません。 `init_connect`ステートメントでエラーが発生した場合、ユーザー接続は終了します。
 
-### password_history <span class="version-mark">New in v6.5.0</span>
+### innodb_lock_wait_timeout {#innodb-lock-wait-timeout}
 
-- Scope: GLOBAL
-- Persists to cluster: Yes
-- Type: Integer
-- Default value: `0`
-- Range: `[0, 4294967295]`
-- This variable is used to establish a password reuse policy that allows TiDB to limit password reuse based on the number of password changes. The default value `0` means disabling the password reuse policy based on the number of password changes. When this variable is set to a positive integer `N`, the reuse of the last `N` passwords is not allowed.
+-   スコープ: セッション |グローバル
+-   クラスターに永続化: はい
+-   タイプ: 整数
+-   デフォルト値: `50`
+-   範囲: `[1, 3600]`
+-   単位: 秒
+-   悲観的トランザクションのロック待機タイムアウト (デフォルト)。
 
-### password_reuse_interval <span class="version-mark">New in v6.5.0</span>
+### interactive_timeout {#interactive-timeout}
 
-- Scope: GLOBAL
-- Persists to cluster: Yes
-- Type: Integer
-- Default value: `0`
-- Range: `[0, 4294967295]`
-- This variable is used to establish a password reuse policy that allows TiDB to limit password reuse based on time elapsed. The default value `0` means disabling the password reuse policy based on time elapsed. When this variable is set to a positive integer `N`, the reuse of any password used in the last `N` days is not allowed.
+-   スコープ: セッション |グローバル
+-   クラスターに永続化: はい
+-   タイプ: 整数
+-   デフォルト値: `28800`
+-   範囲: `[1, 31536000]`
+-   単位: 秒
+-   この変数は、対話型ユーザー セッションのアイドル タイムアウトを表します。対話型ユーザー セッションとは、 `CLIENT_INTERACTIVE`のオプションを使用して[`mysql_real_connect()`](https://dev.mysql.com/doc/c-api/5.7/en/mysql-real-connect.html)の API を呼び出すことによって確立されたセッションを指します (たとえば、MySQL シェルと MySQL クライアント)。この変数は MySQL と完全に互換性があります。
 
-### max_connections
+### last_insert_id {#last-insert-id}
 
-- Scope: GLOBAL
-- Persists to cluster: No, only applicable to the current TiDB instance that you are connecting to.
-- Type: Integer
-- Default value: `0`
-- Range: `[0, 100000]`
-- The maximum number of concurrent connections permitted for a single TiDB instance. This variable can be used for resources control.
-- The default value `0` means no limit. When the value of this variable is larger than `0`, and the number of connections reaches the value, the TiDB server rejects new connections from clients.
+-   スコープ: セッション
+-   タイプ: 整数
+-   デフォルト値: `0`
+-   範囲: `[0, 9223372036854775807]`
+-   この変数は、insert ステートメントによって生成された最後の`AUTO_INCREMENT`つまたは`AUTO_RANDOM`の値を返します。
+-   `last_insert_id`の値は、関数`LAST_INSERT_ID()`によって返される値と同じです。
 
-### max_execution_time
+### last_plan_from_binding <span class="version-mark">v4.0 の新</span>機能 {#last-plan-from-binding-span-class-version-mark-new-in-v4-0-span}
 
-- Scope: SESSION | GLOBAL
-- Persists to cluster: Yes
-- Type: Integer
-- Default value: `0`
-- Range: `[0, 2147483647]`
-- Unit: Milliseconds
-- The maximum execution time of a statement. The default value is unlimited (zero).
+-   スコープ: セッション
+-   タイプ: ブール値
+-   デフォルト値: `OFF`
+-   この変数は、前のステートメントで使用された実行計画が[製本](/sql-plan-management.md)の影響を受けたかどうかを示すために使用されます。
 
-> **Note:**
+### last_plan_from_cache <span class="version-mark">v4.0 の新</span>機能 {#last-plan-from-cache-span-class-version-mark-new-in-v4-0-span}
+
+-   スコープ: セッション
+-   タイプ: ブール値
+-   デフォルト値: `OFF`
+-   この変数は、前の`execute`ステートメントで使用された実行プランがプラン キャッシュから直接取得されたかどうかを示すために使用されます。
+
+### <code>last_sql_use_alloc</code><span class="version-mark">の新機能</span> {#code-last-sql-use-alloc-code-span-class-version-mark-new-in-v6-4-0-span}
+
+-   スコープ: セッション
+-   デフォルト値: `OFF`
+-   この変数は読み取り専用です。前のステートメントがキャッシュされたチャンク オブジェクト (チャンク割り当て) を使用するかどうかを示すために使用されます。
+
+### ライセンス {#license}
+
+-   スコープ: なし
+-   デフォルト値: `Apache License 2.0`
+-   この変数は、TiDBサーバーのインストールのライセンスを示します。
+
+### log_bin {#log-bin}
+
+-   スコープ: なし
+-   タイプ: ブール値
+-   デフォルト値: `OFF`
+-   この変数は、 [Binlog](https://docs.pingcap.com/tidb/stable/tidb-binlog-overview)が使用されているかどうかを示します。
+
+### max_allowed_packet v6.1.0<span class="version-mark">の新機能</span> {#max-allowed-packet-span-class-version-mark-new-in-v6-1-0-span}
+
+-   スコープ: セッション |グローバル
+-   クラスターに永続化: はい
+-   デフォルト値: `67108864`
+-   範囲: `[1024, 1073741824]`
+-   値は 1024 の整数倍である必要があります。値が 1024 で割り切れない場合は、警告が表示され、値は切り捨てられます。たとえば、値が 1025 に設定されている場合、TiDB の実際の値は 1024 です。
+-   サーバーとクライアントが 1 回のパケット送信で許可する最大パケット サイズ。
+-   この変数は MySQL と互換性があります。
+
+### password_history <span class="version-mark">v6.5.0 の新機能</span> {#password-history-span-class-version-mark-new-in-v6-5-0-span}
+
+-   範囲: グローバル
+-   クラスターに永続化: はい
+-   タイプ: 整数
+-   デフォルト値: `0`
+-   範囲: `[0, 4294967295]`
+-   この変数は、TiDB がパスワードの変更回数に基づいてパスワードの再利用を制限できるパスワード再利用ポリシーを確立するために使用されます。デフォルト値`0`は、パスワードの変更回数に基づいてパスワード再利用ポリシーを無効にすることを意味します。この変数が正の整数`N`に設定されている場合、最後の`N`のパスワードの再使用は許可されません。
+
+### password_reuse_interval <span class="version-mark">v6.5.0 の新機能</span> {#password-reuse-interval-span-class-version-mark-new-in-v6-5-0-span}
+
+-   範囲: グローバル
+-   クラスターに永続化: はい
+-   タイプ: 整数
+-   デフォルト値: `0`
+-   範囲: `[0, 4294967295]`
+-   この変数は、経過時間に基づいて TiDB がパスワードの再利用を制限できるパスワード再利用ポリシーを確立するために使用されます。デフォルト値`0`は、経過時間に基づくパスワード再利用ポリシーを無効にすることを意味します。この変数が正の整数`N`に設定されている場合、過去`N`日間に使用されたパスワードの再利用は許可されません。
+
+### 最大接続数 {#max-connections}
+
+-   範囲: グローバル
+-   Persists to cluster: いいえ、接続している現在の TiDB インスタンスにのみ適用されます。
+-   タイプ: 整数
+-   デフォルト値: `0`
+-   範囲: `[0, 100000]`
+-   1 つの TiDB インスタンスに許可される同時接続の最大数。この変数はリソース制御に使用できます。
+-   デフォルト値`0`は制限なしを意味します。この変数の値が`0`よりも大きく、接続数がその値に達すると、TiDBサーバーはクライアントからの新しい接続を拒否します。
+
+### max_execution_time {#max-execution-time}
+
+-   スコープ: セッション |グローバル
+-   クラスターに永続化: はい
+-   タイプ: 整数
+-   デフォルト値: `0`
+-   範囲: `[0, 2147483647]`
+-   単位: ミリ秒
+-   ステートメントの最大実行時間。デフォルト値は無制限 (ゼロ) です。
+
+> **ノート：**
 >
-> Unlike in MySQL, the `max_execution_time` system variable currently works on all kinds of statements in TiDB, not only restricted to the `SELECT` statement. The precision of the timeout value is roughly 100ms. This means the statement might not be terminated in accurate milliseconds as you specify.
+> MySQL とは異なり、システム変数`max_execution_time`は現在、TiDB のすべての種類のステートメントで機能し、 `SELECT`ステートメントに限定されません。タイムアウト値の精度は約 100ms です。これは、指定した正確なミリ秒でステートメントが終了しない可能性があることを意味します。
 
-### max_prepared_stmt_count
+### max_prepared_stmt_count {#max-prepared-stmt-count}
 
-- Scope: GLOBAL
-- Persists to cluster: Yes
-- Type: Integer
-- Default value: `-1`
-- Range: `[-1, 1048576]`
-- Specifies the maximum number of [`PREPARE`](/sql-statements/sql-statement-prepare.md) statements in a session.
-- The value of `-1` means no limit on the maximum number of `PREPARE` statements in a session.
-- If you set the variable to a value that exceeds the upper limit `1048576`, `1048576` is used instead:
+-   範囲: グローバル
+-   クラスターに永続化: はい
+-   タイプ: 整数
+-   デフォルト値: `-1`
+-   範囲: `[-1, 1048576]`
+-   セッション内の[`PREPARE`](/sql-statements/sql-statement-prepare.md)ステートメントの最大数を指定します。
+-   値`-1`は、セッション内のステートメントの最大数`PREPARE`に制限がないことを意味します。
+-   変数を上限`1048576`を超える値に設定すると、代わりに`1048576`が使用されます。
 
 ```sql
 mysql> SET GLOBAL max_prepared_stmt_count = 1048577;
@@ -458,521 +458,521 @@ mysql> SHOW GLOBAL VARIABLES LIKE 'max_prepared_stmt_count';
 1 row in set (0.00 sec)
 ```
 
-### plugin_dir
+### plugin_dir {#plugin-dir}
 
-- Scope: GLOBAL
-- Persists to cluster: No, only applicable to the current TiDB instance that you are connecting to.
-- Default value: ""
-- Indicates the directory to load plugins as specified by a command-line flag.
+-   範囲: グローバル
+-   Persists to cluster: いいえ、接続している現在の TiDB インスタンスにのみ適用されます。
+-   デフォルト値: &quot;&quot;
+-   コマンドライン フラグで指定されたプラグインをロードするディレクトリを示します。
 
-### plugin_load
+### plugin_load {#plugin-load}
 
-- Scope: GLOBAL
-- Persists to cluster: No, only applicable to the current TiDB instance that you are connecting to.
-- Default value: ""
-- Indicates the plugins to load when TiDB is started. These plugins are specified by a command-line flag and separated by commas.
+-   範囲: グローバル
+-   Persists to cluster: いいえ、接続している現在の TiDB インスタンスにのみ適用されます。
+-   デフォルト値: &quot;&quot;
+-   TiDB の起動時にロードするプラグインを示します。これらのプラグインは、コマンドライン フラグによって指定され、カンマで区切られます。
 
-### port
+### 港 {#port}
 
-- Scope: NONE
-- Type: Integer
-- Default value: `4000`
-- Range: `[0, 65535]`
-- The port that the `tidb-server` is listening on when speaking the MySQL protocol.
+-   スコープ: なし
+-   タイプ: 整数
+-   デフォルト値: `4000`
+-   範囲: `[0, 65535]`
+-   MySQL プロトコルを話すときに`tidb-server`がリッスンしているポート。
 
-### rand_seed1
+### rand_seed1 {#rand-seed1}
 
-- Scope: SESSION
-- Type: Integer
-- Default value: `0`
-- Range: `[0, 2147483647]`
-- This variable is used to seed the random value generator used in the `RAND()` SQL function.
-- The behavior of this variable is MySQL compatible.
+-   スコープ: セッション
+-   タイプ: 整数
+-   デフォルト値: `0`
+-   範囲: `[0, 2147483647]`
+-   この変数は、 `RAND()`の SQL 関数で使用されるランダム値ジェネレーターをシードするために使用されます。
+-   この変数の動作は MySQL と互換性があります。
 
-### rand_seed2
+### rand_seed2 {#rand-seed2}
 
-- Scope: SESSION
-- Type: Integer
-- Default value: `0`
-- Range: `[0, 2147483647]`
-- This variable is used to seed the random value generator used in the `RAND()` SQL function.
-- The behavior of this variable is MySQL compatible.
+-   スコープ: セッション
+-   タイプ: 整数
+-   デフォルト値: `0`
+-   範囲: `[0, 2147483647]`
+-   この変数は、 `RAND()`の SQL 関数で使用されるランダム値ジェネレーターをシードするために使用されます。
+-   この変数の動作は MySQL と互換性があります。
 
-### require_secure_transport <span class="version-mark">New in v6.1.0</span>
+### require_secure_transport <span class="version-mark">v6.1.0 の新機能</span> {#require-secure-transport-span-class-version-mark-new-in-v6-1-0-span}
 
-- Scope: GLOBAL
-- Persists to cluster: Yes
-- Type: Boolean
-- Default value: `OFF`
+-   範囲: グローバル
+-   クラスターに永続化: はい
+-   タイプ: ブール値
+-   デフォルト値: `OFF`
 
 <CustomContent platform="tidb">
 
-- This variable ensures that all connections to TiDB are either on a local socket, or using TLS. See [Enable TLS between TiDB Clients and Servers](/enable-tls-between-clients-and-servers.md) for additional details.
+-   この変数は、TiDB へのすべての接続がローカル ソケット上にあるか、TLS を使用していることを保証します。詳細については、 [TiDB クライアントとサーバー間の TLS を有効にする](/enable-tls-between-clients-and-servers.md)を参照してください。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-- This variable ensures that all connections to TiDB are either on a local socket, or using TLS.
+-   この変数は、TiDB へのすべての接続がローカル ソケット上にあるか、TLS を使用していることを保証します。
 
 </CustomContent>
 
-- Setting this variable to `ON` requires you to connect to TiDB from a session that has TLS enabled. This helps prevent lock-out scenarios when TLS is not configured correctly.
-- This setting was previously a `tidb.toml` option (`security.require-secure-transport`), but changed to a system variable starting from TiDB v6.1.0.
+-   この変数を`ON`に設定するには、TLS が有効になっているセッションから TiDB に接続する必要があります。これにより、TLS が正しく構成されていない場合のロックアウト シナリオを防ぐことができます。
+-   この設定は以前は`tidb.toml`オプション ( `security.require-secure-transport` ) でしたが、TiDB v6.1.0 からシステム変数に変更されました。
 
-### skip_name_resolve <span class="version-mark">New in v5.2.0</span>
+### skip_name_resolve v5.2.0<span class="version-mark">の新機能</span> {#skip-name-resolve-span-class-version-mark-new-in-v5-2-0-span}
 
-- Scope: GLOBAL
-- Persists to cluster: Yes
-- Type: Boolean
-- Default value: `OFF`
-- This variable controls whether the `tidb-server` instance resolves hostnames as a part of the connection handshake.
-- When the DNS is unreliable, you can enable this option to improve network performance.
+-   範囲: グローバル
+-   クラスターに永続化: はい
+-   タイプ: ブール値
+-   デフォルト値: `OFF`
+-   この変数は、 `tidb-server`インスタンスが接続ハンドシェイクの一部としてホスト名を解決するかどうかを制御します。
+-   DNS が信頼できない場合、このオプションを有効にしてネットワーク パフォーマンスを向上させることができます。
 
-> **Note:**
+> **ノート：**
 >
-> When `skip_name_resolve=ON`, users with a hostname in their identity will no longer be able to log into the server. For example:
+> `skip_name_resolve=ON`の場合、ID にホスト名を持つユーザーはサーバーにログインできなくなります。例えば：
 >
 > ```sql
 > CREATE USER 'appuser'@'apphost' IDENTIFIED BY 'app-password';
 > ```
 >
-> In this example, it is recommended to replace `apphost` with an IP address or the wildcard (`%`).
+> この例では、 `apphost`を IP アドレスまたはワイルドカード ( `%` ) に置き換えることをお勧めします。
 
-### socket
+### ソケット {#socket}
 
-- Scope: NONE
-- Default value: ""
-- The local unix socket file that the `tidb-server` is listening on when speaking the MySQL protocol.
+-   スコープ: なし
+-   デフォルト値: &quot;&quot;
+-   MySQL プロトコルを話すときに`tidb-server`がリッスンしているローカル UNIX ソケット ファイル。
 
-### sql_log_bin
+### sql_log_bin {#sql-log-bin}
 
-- Scope: SESSION | GLOBAL
-- Persists to cluster: Yes
-- Type: Boolean
-- Default value: `ON`
-- Indicates whether to write changes to [TiDB Binlog](https://docs.pingcap.com/tidb/stable/tidb-binlog-overview) or not.
+-   スコープ: セッション |グローバル
+-   クラスターに永続化: はい
+-   タイプ: ブール値
+-   デフォルト値: `ON`
+-   変更を[Binlog](https://docs.pingcap.com/tidb/stable/tidb-binlog-overview)に書き込むかどうかを示します。
 
-> **Note:**
+> **ノート：**
 >
-> It is not recommended to set `sql_log_bin` as a global variable because the future versions of TiDB might only allow setting this as a session variable.
+> TiDB の将来のバージョンでは、これをセッション変数としてのみ設定できるようになる可能性があるため、 `sql_log_bin`をグローバル変数として設定することはお勧めしません。
 
-### sql_mode
+### sql_mode {#sql-mode}
 
-- Scope: SESSION | GLOBAL
-- Persists to cluster: Yes
-- Default value: `ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION`
-- This variable controls a number of MySQL compatibility behaviors. See [SQL Mode](/sql-mode.md) for more information.
+-   スコープ: セッション |グローバル
+-   クラスターに永続化: はい
+-   デフォルト値: `ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION`
+-   この変数は、多数の MySQL 互換性動作を制御します。詳細については、 [SQL モード](/sql-mode.md)を参照してください。
 
-### sql_require_primary_key <span class="version-mark">New in v6.3.0</span>
+### sql_require_primary_key v6.3.0<span class="version-mark">の新機能</span> {#sql-require-primary-key-span-class-version-mark-new-in-v6-3-0-span}
 
-- Scope: SESSION | GLOBAL
-- Persists to cluster: Yes
-- Type: Boolean
-- Default value: `OFF`
-- This variable controls whether to enforce the requirement that a table has a primary key. After this variable is enabled, attempting to create or alter a table without a primary key will produce an error.
-- This feature is based on the similarly named [`sql_require_primary_key`](https://dev.mysql.com/doc/refman/8.0/en/server-system-variables.html#sysvar_sql_require_primary_key) in MySQL 8.0.
-- It is strongly recommended to enable this variable when using TiCDC. This is because replicating changes to a MySQL sink requires that tables have a primary key.
+-   スコープ: セッション |グローバル
+-   クラスターに永続化: はい
+-   タイプ: ブール値
+-   デフォルト値: `OFF`
+-   この変数は、テーブルに主キーがあるという要件を適用するかどうかを制御します。この変数を有効にした後、主キーなしでテーブルを作成または変更しようとすると、エラーが発生します。
+-   この機能は、MySQL 8.0 の同様の名前の[`sql_require_primary_key`](https://dev.mysql.com/doc/refman/8.0/en/server-system-variables.html#sysvar_sql_require_primary_key)に基づいています。
+-   TiCDC を使用する場合は、この変数を有効にすることを強くお勧めします。これは、変更を MySQL シンクにレプリケートするには、テーブルにプライマリ キーが必要なためです。
 
-### sql_select_limit <span class="version-mark">New in v4.0.2</span>
+### sql_select_limit v4.0.2<span class="version-mark">の新機能</span> {#sql-select-limit-span-class-version-mark-new-in-v4-0-2-span}
 
-- Scope: SESSION | GLOBAL
-- Persists to cluster: Yes
-- Type: Integer
-- Default value: `18446744073709551615`
-- Range: `[0, 18446744073709551615]`
-- Unit: Rows
-- The maximum number of rows returned by the `SELECT` statements.
+-   スコープ: セッション |グローバル
+-   クラスターに永続化: はい
+-   タイプ: 整数
+-   デフォルト値: `18446744073709551615`
+-   範囲: `[0, 18446744073709551615]`
+-   単位: 行
+-   `SELECT`ステートメントによって返される行の最大数。
 
-### ssl_ca
+### ssl_ca {#ssl-ca}
 
 <CustomContent platform="tidb">
 
-- Scope: NONE
-- Default value: ""
-- The location of the certificate authority file (if there is one). The value of this variable is defined by the TiDB configuration item [`ssl-ca`](/tidb-configuration-file.md#ssl-ca).
+-   スコープ: なし
+-   デフォルト値: &quot;&quot;
+-   認証局ファイルの場所 (存在する場合)。この変数の値は、TiDB 構成項目[`ssl-ca`](/tidb-configuration-file.md#ssl-ca)によって定義されます。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-- Scope: NONE
-- Default value: ""
-- The location of the certificate authority file (if there is one). The value of this variable is defined by the TiDB configuration item [`ssl-ca`](https://docs.pingcap.com/tidb/stable/tidb-configuration-file#ssl-ca).
+-   スコープ: なし
+-   デフォルト値: &quot;&quot;
+-   認証局ファイルの場所 (存在する場合)。この変数の値は、TiDB 構成項目[`ssl-ca`](https://docs.pingcap.com/tidb/stable/tidb-configuration-file#ssl-ca)によって定義されます。
 
 </CustomContent>
 
-### ssl_cert
+### ssl_cert {#ssl-cert}
 
 <CustomContent platform="tidb">
 
-- Scope: NONE
-- Default value: ""
-- The location of the certificate file (if there is a file) that is used for SSL/TLS connections. The value of this variable is defined by the TiDB configuration item [`ssl-cert`](/tidb-configuration-file.md#ssl-cert).
+-   スコープ: なし
+-   デフォルト値: &quot;&quot;
+-   SSL/TLS 接続に使用される証明書ファイルの場所 (ファイルがある場合)。この変数の値は、TiDB 構成項目[`ssl-cert`](/tidb-configuration-file.md#ssl-cert)によって定義されます。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-- Scope: NONE
-- Default value: ""
-- The location of the certificate file (if there is a file) that is used for SSL/TLS connections. The value of this variable is defined by the TiDB configuration item [`ssl-cert`](https://docs.pingcap.com/tidb/stable/tidb-configuration-file#ssl-cert).
+-   スコープ: なし
+-   デフォルト値: &quot;&quot;
+-   SSL/TLS 接続に使用される証明書ファイルの場所 (ファイルがある場合)。この変数の値は、TiDB 構成項目[`ssl-cert`](https://docs.pingcap.com/tidb/stable/tidb-configuration-file#ssl-cert)によって定義されます。
 
 </CustomContent>
 
-### ssl_key
+### ssl_key {#ssl-key}
 
 <CustomContent platform="tidb">
 
-- Scope: NONE
-- Default value: ""
-- The location of the private key file (if there is one) that is used for SSL/TLS connections. The value of this variable is defined by TiDB configuration item [`ssl-key`](/tidb-configuration-file.md#ssl-cert).
+-   スコープ: なし
+-   デフォルト値: &quot;&quot;
+-   SSL/TLS 接続に使用される秘密鍵ファイル (存在する場合) の場所。この変数の値は、TiDB 構成項目[`ssl-key`](/tidb-configuration-file.md#ssl-cert)によって定義されます。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-- Scope: NONE
-- Default value: ""
-- The location of the private key file (if there is one) that is used for SSL/TLS connections. The value of this variable is defined by TiDB configuration item [`ssl-key`](https://docs.pingcap.com/tidb/stable/tidb-configuration-file#ssl-key).
+-   スコープ: なし
+-   デフォルト値: &quot;&quot;
+-   SSL/TLS 接続に使用される秘密鍵ファイル (存在する場合) の場所。この変数の値は、TiDB 構成項目[`ssl-key`](https://docs.pingcap.com/tidb/stable/tidb-configuration-file#ssl-key)によって定義されます。
 
 </CustomContent>
 
-### system_time_zone
+### system_time_zone {#system-time-zone}
 
-- Scope: NONE
-- Default value: (system dependent)
-- This variable shows the system time zone from when TiDB was first bootstrapped. See also [`time_zone`](#time_zone).
+-   スコープ: なし
+-   デフォルト値: (システムに依存)
+-   この変数は、TiDB が最初にブートストラップされたときのシステム タイム ゾーンを示します。 [`time_zone`](#time_zone)も参照してください。
 
-### `tidb_adaptive_closest_read_threshold` <span class="version-mark">New in v6.3.0</span>
+### <code>tidb_adaptive_closest_read_threshold</code><span class="version-mark">の新機能</span> {#code-tidb-adaptive-closest-read-threshold-code-span-class-version-mark-new-in-v6-3-0-span}
 
-- Scope: SESSION | GLOBAL
-- Persists to cluster: Yes
-- Default value: `4096`
-- Range: `[0, 9223372036854775807]`
-- This variable is used to control the threshold at which the TiDB server prefers to send read requests to a replica in the same availability zone as the TiDB server when [`tidb_replica_read`](#tidb_replica_read-new-in-v40) is set to `closest-adaptive`. If the estimated result is higher than or equal to this threshold, TiDB prefers to send read requests to a replica in the same availability zone. Otherwise, TiDB sends read requests to the leader replica.
+-   スコープ: セッション |グローバル
+-   クラスターに永続化: はい
+-   デフォルト値: `4096`
+-   範囲: `[0, 9223372036854775807]`
+-   この変数は、 [`tidb_replica_read`](#tidb_replica_read-new-in-v40)が`closest-adaptive`に設定されている場合に、TiDBサーバーが TiDBサーバーと同じ可用性ゾーン内のレプリカに読み取り要求を送信することを好むしきい値を制御するために使用されます。推定結果がこのしきい値以上の場合、TiDB は同じ可用性ゾーン内のレプリカに読み取り要求を送信することを優先します。それ以外の場合、TiDB は読み取り要求をリーダー レプリカに送信します。
 
-### tidb_allow_batch_cop <span class="version-mark">New in v4.0</span>
+### tidb_allow_batch_cop <span class="version-mark">v4.0 の新</span>機能 {#tidb-allow-batch-cop-span-class-version-mark-new-in-v4-0-span}
 
-- Scope: SESSION | GLOBAL
-- Persists to cluster: Yes
-- Type: Integer
-- Default value: `1`
-- Range: `[0, 2]`
-- This variable is used to control how TiDB sends a coprocessor request to TiFlash. It has the following values:
+-   スコープ: セッション |グローバル
+-   クラスターに永続化: はい
+-   タイプ: 整数
+-   デフォルト値: `1`
+-   範囲: `[0, 2]`
+-   この変数は、TiDB がコプロセッサー要求をTiFlashに送信する方法を制御するために使用されます。次の値があります。
 
-    * `0`: Never send requests in batches
-    * `1`: Aggregation and join requests are sent in batches
-    * `2`: All coprocessor requests are sent in batches
+    -   `0` : リクエストをバッチで送信しない
+    -   `1` :集計および結合要求はバッチで送信されます
+    -   `2` : すべてのコプロセッサー要求がバッチで送信されます
 
-### tidb_allow_fallback_to_tikv <span class="version-mark">New in v5.0</span>
+### tidb_allow_fallback_to_tikv <span class="version-mark">v5.0 の新</span>機能 {#tidb-allow-fallback-to-tikv-span-class-version-mark-new-in-v5-0-span}
 
-- Scope: SESSION | GLOBAL
-- Persists to cluster: Yes
-- Default value: ""
-- This variable is used to specify a list of storage engines that might fall back to TiKV. If the execution of a SQL statement fails due to a failure of the specified storage engine in the list, TiDB retries executing this SQL statement with TiKV. This variable can be set to "" or "tiflash". When this variable is set to "tiflash", if TiFlash returns a timeout error (error code: ErrTiFlashServerTimeout), TiDB retries executing this SQL statement with TiKV.
+-   スコープ: セッション |グローバル
+-   クラスターに永続化: はい
+-   デフォルト値: &quot;&quot;
+-   この変数は、TiKV にフォールバックするストレージ エンジンのリストを指定するために使用されます。リスト内の指定されたストレージ エンジンの障害が原因で SQL ステートメントの実行が失敗した場合、TiDB は TiKV を使用してこの SQL ステートメントの実行を再試行します。この変数は、&quot;&quot; または &quot;tiflash&quot; に設定できます。この変数が「tiflash」に設定されている場合、 TiFlashがタイムアウト エラー (エラー コード: ErrTiFlashServerTimeout) を返した場合、TiDB は TiKV でこの SQL ステートメントの実行をリトライします。
 
-### tidb_allow_function_for_expression_index <span class="version-mark">New in v5.2.0</span>
+### tidb_allow_function_for_expression_index v5.2.0<span class="version-mark">の新機能</span> {#tidb-allow-function-for-expression-index-span-class-version-mark-new-in-v5-2-0-span}
 
-- Scope: NONE
-- Default value: `json_array`, `json_array_append`, `json_array_insert`, `json_contains`, `json_contains_path`, `json_depth`, `json_extract`, `json_insert`, `json_keys`, `json_length`, `json_merge_patch`, `json_merge_preserve`, `json_object`, `json_pretty`, `json_quote`, `json_remove`, `json_replace`, `json_search`, `json_set`, `json_storage_size`, `json_type`, `json_unquote`, `json_valid`, `lower`, `md5`, `reverse`, `tidb_shard`, `upper`, `vitess_hash`
-- This variable is used to show the functions that are allowed to be used for creating expression indexes.
+-   スコープ: なし
+-   `json_unquote` `json_valid` `lower` `json_array` `json_array_append` `json_array_insert` `json_contains` `json_contains_path` `json_depth` `json_extract` `json_insert` `json_keys` `json_length` `json_merge_patch` `json_merge_preserve` `json_object` `json_pretty` `json_quote` `json_remove` `json_replace` `json_search` `json_set` `json_storage_size` `json_type` , `md5` , `reverse` , `tidb_shard` , `upper` , `vitess_hash`
+-   この変数は、式インデックスの作成に使用できる関数を示すために使用されます。
 
-### tidb_allow_mpp <span class="version-mark">New in v5.0</span>
+### tidb_allow_mpp <span class="version-mark">v5.0 の新</span>機能 {#tidb-allow-mpp-span-class-version-mark-new-in-v5-0-span}
 
-- Scope: SESSION | GLOBAL
-- Persists to cluster: Yes
-- Type: Boolean
-- Default value: `ON`
-- Controls whether to use the MPP mode of TiFlash to execute queries. The value options are as follows:
-    - `0` or `OFF`, which means that the MPP mode will not be used.
-    - `1` or `ON`, which means that the optimizer determines whether to use the MPP mode based on the cost estimation (by default).
+-   スコープ: セッション |グローバル
+-   クラスターに永続化: はい
+-   タイプ: ブール値
+-   デフォルト値: `ON`
+-   TiFlashの MPP モードを使用してクエリを実行するかどうかを制御します。値のオプションは次のとおりです。
+    -   `0`または`OFF` 。これは、MPP モードが使用されないことを意味します。
+    -   `1`または`ON` 。これは、オプティマイザーが (デフォルトで) コストの見積もりに基づいて MPP モードを使用するかどうかを決定することを意味します。
 
-MPP is a distributed computing framework provided by the TiFlash engine, which allows data exchange between nodes and provides high-performance, high-throughput SQL algorithms. For details about the selection of the MPP mode, refer to [Control whether to select the MPP mode](/tiflash/use-tiflash-mpp-mode.md#control-whether-to-select-the-mpp-mode).
+MPP は、 TiFlashエンジンによって提供される分散コンピューティング フレームワークであり、ノード間のデータ交換を可能にし、高性能で高スループットの SQL アルゴリズムを提供します。 MPP モードの選択については、 [MPP モードを選択するかどうかを制御します](/tiflash/use-tiflash-mpp-mode.md#control-whether-to-select-the-mpp-mode)を参照してください。
 
-### tidb_allow_remove_auto_inc <span class="version-mark">New in v2.1.18 and v3.0.4</span>
+### tidb_allow_remove_auto_inc <span class="version-mark">v2.1.18 および v3.0.4 の新機能</span> {#tidb-allow-remove-auto-inc-span-class-version-mark-new-in-v2-1-18-and-v3-0-4-span}
 
 <CustomContent platform="tidb-cloud">
 
-> **Note:**
+> **ノート：**
 >
-> This TiDB variable is not applicable to TiDB Cloud.
+> この TiDB 変数はTiDB Cloudには適用されません。
 
 </CustomContent>
 
-- Scope: SESSION
-- Type: Boolean
-- Default value: `OFF`
-- This variable is used to set whether the `AUTO_INCREMENT` property of a column is allowed to be removed by executing `ALTER TABLE MODIFY` or `ALTER TABLE CHANGE` statements. It is not allowed by default.
+-   スコープ: セッション
+-   タイプ: ブール値
+-   デフォルト値: `OFF`
+-   この変数は、 `ALTER TABLE MODIFY`つまたは`ALTER TABLE CHANGE`のステートメントを実行して列の`AUTO_INCREMENT`のプロパティを削除できるかどうかを設定するために使用されます。デフォルトでは許可されていません。
 
-### tidb_analyze_partition_concurrency
+### tidb_analyze_partition_concurrency {#tidb-analyze-partition-concurrency}
 
-> **Warning:**
+> **警告：**
 >
-> The feature controlled by this variable is not fully functional in the current TiDB version. Do not change the default value.
+> この変数によって制御される機能は、現在の TiDB バージョンでは完全には機能しません。デフォルト値を変更しないでください。
 
-- Scope: SESSION | GLOBAL
-- Persists to cluster: Yes
-- Default value: `1`
-- This variable specifies the concurrency of reading and writing statistics for a partitioned table when TiDB analyzes the partitioned table.
+-   スコープ: セッション |グローバル
+-   クラスターに永続化: はい
+-   デフォルト値: `1`
+-   この変数は、TiDB が分割されたテーブルを分析するときに、パーティションテーブルされたテーブルの統計の読み取りと書き込みの同時実行性を指定しパーティションテーブル。
 
-### tidb_analyze_version <span class="version-mark">New in v5.1.0</span>
+### tidb_analyze_version v5.1.0<span class="version-mark">の新機能</span> {#tidb-analyze-version-span-class-version-mark-new-in-v5-1-0-span}
 
-- Scope: SESSION | GLOBAL
-- Persists to cluster: Yes
-- Type: Integer
+-   スコープ: セッション |グローバル
+-   クラスターに永続化: はい
+-   タイプ: 整数
 
 <CustomContent platform="tidb">
 
-- Default value: `2`
+-   デフォルト値: `2`
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-- Default value: `1`
+-   デフォルト値: `1`
 
 </CustomContent>
 
-- Range: `[1, 2]`
-- Controls how TiDB collects statistics.
+-   範囲: `[1, 2]`
+-   TiDB が統計を収集する方法を制御します。
 
 <CustomContent platform="tidb">
 
-- In v5.3.0 and later versions, the default value of this variable is `2`. If your cluster is upgraded from a version earlier than v5.3.0 to v5.3.0 or later, the default value of `tidb_analyze_version` does not change. For detailed introduction, see [Introduction to Statistics](/statistics.md).
+-   v5.3.0 以降のバージョンでは、この変数のデフォルト値は`2`です。クラスターが v5.3.0 より前のバージョンから v5.3.0 以降にアップグレードされた場合、デフォルト値の`tidb_analyze_version`は変更されません。詳細な紹介については、 [統計入門](/statistics.md)を参照してください。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-- For detailed introduction of this variable, see [Introduction to Statistics](/statistics.md).
+-   この変数の詳細については、 [統計入門](/statistics.md)を参照してください。
 
 </CustomContent>
 
-### tidb_auto_analyze_end_time
+### tidb_auto_analyze_end_time {#tidb-auto-analyze-end-time}
 
-- Scope: GLOBAL
-- Persists to cluster: Yes
-- Type: Time
-- Default value: `23:59 +0000`
-- This variable is used to restrict the time window that the automatic update of statistics is permitted. For example, to only allow automatic statistics updates between 1AM and 3AM, set `tidb_auto_analyze_start_time='01:00 +0000'` and `tidb_auto_analyze_end_time='03:00 +0000'`.
+-   範囲: グローバル
+-   クラスターに永続化: はい
+-   タイプ: 時間
+-   デフォルト値: `23:59 +0000`
+-   この変数は、統計の自動更新が許可される時間枠を制限するために使用されます。たとえば、午前 1 時から午前 3 時までの自動統計更新のみを許可するには、 `tidb_auto_analyze_start_time='01:00 +0000'`と`tidb_auto_analyze_end_time='03:00 +0000'`を設定します。
 
-### tidb_auto_analyze_partition_batch_size <span class="version-mark">New in v6.4.0</span>
+### tidb_auto_analyze_partition_batch_size v6.4.0<span class="version-mark">の新機能</span> {#tidb-auto-analyze-partition-batch-size-span-class-version-mark-new-in-v6-4-0-span}
 
-- Scope: GLOBAL
-- Persists to cluster: Yes
-- Default value: `1`
-- Range: `[1, 1024]`
-- This variable specifies the number of partitions that TiDB [automatically analyzes](/statistics.md#automatic-update) when analyzing a partitioned table (which means automatically collecting statistics on a partitioned table).
-- If the value of this variable is smaller than the number of partitions, TiDB automatically analyzes all partitions of the partitioned table in multiple batches. If the value of this variable is greater than or equal to the number of partitions, TiDB analyzes all partitions of the partitioned table at the same time.
-- If the number of partitions of a partitioned table is far greater than this variable value and the auto-analyze takes a long time, you can increase the value of this variable to reduce the time consumption.
+-   範囲: グローバル
+-   クラスターに永続化: はい
+-   デフォルト値: `1`
+-   範囲: `[1, 1024]`
+-   この変数は、パーティション化されたパーティションテーブルを分析するときに TiDB [自動分析](/statistics.md#automatic-update)が使用するパーティションの数を指定します (つまり、パーティションテーブルの統計を自動的に収集することを意味します)。
+-   この変数の値がパーティションの数よりも小さい場合、TiDB はパーティション化されたパーティションテーブルのすべてのパーティションを複数のバッチで自動的に分析します。この変数の値がパーティションの数以上の場合、TiDB はパーティション化されたパーティションテーブルのすべてのパーティションを同時に分析します。
+-   パーティション化されたパーティションテーブルのパーティション数がこの変数の値よりもはるかに多く、自動分析に時間がかかる場合は、この変数の値を増やして時間の消費を減らすことができます。
 
-### tidb_auto_analyze_ratio
+### tidb_auto_analyze_ratio {#tidb-auto-analyze-ratio}
 
-- Scope: GLOBAL
-- Persists to cluster: Yes
-- Type: Float
-- Default value: `0.5`
-- Range: `[0, 18446744073709551615]`
-- This variable is used to set the threshold when TiDB automatically executes [`ANALYZE TABLE`](/sql-statements/sql-statement-analyze-table.md) in a background thread to update table statistics. For example, a value of 0.5 means that auto-analyze is triggered when greater than 50% of the rows in a table have been modified. Auto-analyze can be restricted to only execute during certain hours of the day by specifying `tidb_auto_analyze_start_time` and `tidb_auto_analyze_end_time`.
+-   範囲: グローバル
+-   クラスターに永続化: はい
+-   タイプ: フロート
+-   デフォルト値: `0.5`
+-   範囲: `[0, 18446744073709551615]`
+-   この変数は、TiDB がテーブル統計を更新するためにバックグラウンド スレッドで[`ANALYZE TABLE`](/sql-statements/sql-statement-analyze-table.md)を自動的に実行するときのしきい値を設定するために使用されます。たとえば、値 0.5 は、テーブル内の行の 50% 以上が変更されたときに自動分析がトリガーされることを意味します。自動分析は、 `tidb_auto_analyze_start_time`および`tidb_auto_analyze_end_time`を指定することにより、1 日の特定の時間帯のみに実行するように制限できます。
 
-> **Note:**
+> **ノート：**
 >
-> This feature requires the system variable `tidb_enable_auto_analyze` set to `ON`.
+> この機能には、システム変数`tidb_enable_auto_analyze`を`ON`に設定する必要があります。
 
-### tidb_auto_analyze_start_time
+### tidb_auto_analyze_start_time {#tidb-auto-analyze-start-time}
 
-- Scope: GLOBAL
-- Persists to cluster: Yes
-- Type: Time
-- Default value: `00:00 +0000`
-- This variable is used to restrict the time window that the automatic update of statistics is permitted. For example, to only allow automatic statistics updates between 1 AM and 3 AM, set `tidb_auto_analyze_start_time='01:00 +0000'` and `tidb_auto_analyze_end_time='03:00 +0000'`.
+-   範囲: グローバル
+-   クラスターに永続化: はい
+-   タイプ: 時間
+-   デフォルト値: `00:00 +0000`
+-   この変数は、統計の自動更新が許可される時間枠を制限するために使用されます。たとえば、午前 1 時から午前 3 時までの自動統計更新のみを許可するには、 `tidb_auto_analyze_start_time='01:00 +0000'`と`tidb_auto_analyze_end_time='03:00 +0000'`を設定します。
 
-### tidb_auto_build_stats_concurrency <span class="version-mark">New in v6.5.0</span>
+### tidb_auto_build_stats_concurrency v6.5.0<span class="version-mark">の新機能</span> {#tidb-auto-build-stats-concurrency-span-class-version-mark-new-in-v6-5-0-span}
 
-- Scope: GLOBAL
-- Persists to cluster: Yes
-- Type: Integer
-- Default value: `1`
-- Range: `[1, 256]`
-- This variable is used to set the concurrency of executing the automatic update of statistics.
+-   範囲: グローバル
+-   クラスターに永続化: はい
+-   タイプ: 整数
+-   デフォルト値: `1`
+-   範囲: `[1, 256]`
+-   この変数は、統計の自動更新の同時実行を設定するために使用されます。
 
-### tidb_backoff_lock_fast
+### tidb_backoff_lock_fast {#tidb-backoff-lock-fast}
 
-- Scope: SESSION | GLOBAL
-- Persists to cluster: Yes
-- Type: Integer
-- Default value: `10`
-- Range: `[1, 2147483647]`
-- This variable is used to set the `backoff` time when the read request meets a lock.
+-   スコープ: セッション |グローバル
+-   クラスターに永続化: はい
+-   タイプ: 整数
+-   デフォルト値: `10`
+-   範囲: `[1, 2147483647]`
+-   この変数は、読み取り要求がロックに一致する`backoff`回を設定するために使用されます。
 
-### tidb_backoff_weight
+### tidb_backoff_weight {#tidb-backoff-weight}
 
-- Scope: SESSION | GLOBAL
-- Persists to cluster: Yes
-- Type: Integer
-- Default value: `2`
-- Range: `[0, 2147483647]`
-- This variable is used to increase the weight of the maximum time of TiDB `backoff`, that is, the maximum retry time for sending a retry request when an internal network or other component (TiKV, PD) failure is encountered. This variable can be used to adjust the maximum retry time and the minimum value is 1.
+-   スコープ: セッション |グローバル
+-   クラスターに永続化: はい
+-   タイプ: 整数
+-   デフォルト値: `2`
+-   範囲: `[0, 2147483647]`
+-   この変数は、TiDB `backoff`の最大時間、つまり、内部ネットワークまたは他のコンポーネント(TiKV、PD) の障害が発生したときにリトライ要求を送信するための最大リトライ時間の重みを増やすために使用されます。この変数は、最大再試行時間を調整するために使用でき、最小値は 1 です。
 
-    For example, the base timeout for TiDB to take TSO from PD is 15 seconds. When `tidb_backoff_weight = 2`, the maximum timeout for taking TSO is: *base time \* 2 = 30 seconds*.
+    たとえば、TiDB が PD から TSO を取得するための基本タイムアウトは 15 秒です。 `tidb_backoff_weight = 2`の場合、TSO 取得の最大タイムアウトは、*基本時間 * 2 = 30 秒*です。
 
-    In the case of a poor network environment, appropriately increasing the value of this variable can effectively alleviate error reporting to the application end caused by timeout. If the application end wants to receive the error information more quickly, minimize the value of this variable.
+    ネットワーク環境が劣悪な場合、この変数の値を適切に増やすと、タイムアウトによってアプリケーション側に報告されるエラーを効果的に軽減できます。アプリケーション側でエラー情報をより迅速に受け取りたい場合は、この変数の値を最小限に抑えてください。
 
-### tidb_batch_commit
+### tidb_batch_commit {#tidb-batch-commit}
 
-> **Warning:**
+> **警告：**
 >
-> It is **NOT** recommended to enable this variable.
+> この変数を有効にすることはお勧めし**ません**。
 
-- Scope: SESSION
-- Type: Boolean
-- Default value: `OFF`
-- The variable is used to control whether to enable the deprecated batch-commit feature. When this variable is enabled, a transaction might be split into multiple transactions by grouping a few statements and committed non-atomically, which is not recommended.
+-   スコープ: セッション
+-   タイプ: ブール値
+-   デフォルト値: `OFF`
+-   この変数は、非推奨のバッチコミット機能を有効にするかどうかを制御するために使用されます。この変数を有効にすると、いくつかのステートメントをグループ化することでトランザクションが複数のトランザクションに分割され、非アトミックにコミットされる可能性がありますが、これはお勧めできません。
 
-### tidb_batch_delete
+### tidb_batch_delete {#tidb-batch-delete}
 
-> **Warning:**
+> **警告：**
 >
-> This variable is associated with the deprecated batch-dml feature, which might cause data corruption. Therefore, it is not recommended to enable this variable for batch-dml. Instead, use [non-transactional DML](/non-transactional-dml.md).
+> この変数は非推奨の batch-dml 機能に関連付けられており、データが破損する可能性があります。したがって、batch-dml でこの変数を有効にすることはお勧めしません。代わりに、 [非トランザクション DML](/non-transactional-dml.md)を使用してください。
 
-- Scope: SESSION
-- Type: Boolean
-- Default value: `OFF`
-- This variable is used to control whether to enable the batch-delete feature, which is a part of the deprecated batch-dml feature. When this variable is enabled, `DELETE` statements might be split into multiple transactions and committed non-atomically. To make it work, you also need to enable `tidb_enable_batch_dml` and set a positive value for `tidb_dml_batch_size`, which is not recommended.
+-   スコープ: セッション
+-   タイプ: ブール値
+-   デフォルト値: `OFF`
+-   この変数は、非推奨のバッチ dml 機能の一部であるバッチ削除機能を有効にするかどうかを制御するために使用されます。この変数を有効にすると、 `DELETE`のステートメントが複数のトランザクションに分割され、非アトミックにコミットされる可能性があります。これを機能させるには、 `tidb_enable_batch_dml`を有効にして`tidb_dml_batch_size`に正の値を設定する必要もありますが、これはお勧めできません。
 
-### tidb_batch_insert
+### tidb_batch_insert {#tidb-batch-insert}
 
-> **Warning:**
+> **警告：**
 >
-> This variable is associated with the deprecated batch-dml feature, which might cause data corruption. Therefore, it is not recommended to enable this variable for batch-dml. Instead, use [non-transactional DML](/non-transactional-dml.md).
+> この変数は非推奨の batch-dml 機能に関連付けられており、データが破損する可能性があります。したがって、batch-dml でこの変数を有効にすることはお勧めしません。代わりに、 [非トランザクション DML](/non-transactional-dml.md)を使用してください。
 
-- Scope: SESSION
-- Type: Boolean
-- Default value: `OFF`
-- This variable is used to control whether to enable the batch-insert feature, which is a part of the deprecated batch-dml feature. When this variable is enabled, `INSERT` statements might be split into multiple transactions and committed non-atomically. To make it work, you also need to enable `tidb_enable_batch_dml` and set a positive value for `tidb_dml_batch_size`, which is not recommended.
+-   スコープ: セッション
+-   タイプ: ブール値
+-   デフォルト値: `OFF`
+-   この変数は、非推奨のバッチ dml 機能の一部であるバッチ挿入機能を有効にするかどうかを制御するために使用されます。この変数を有効にすると、 `INSERT`のステートメントが複数のトランザクションに分割され、非アトミックにコミットされる可能性があります。これを機能させるには、 `tidb_enable_batch_dml`を有効にして`tidb_dml_batch_size`に正の値を設定する必要もありますが、これはお勧めできません。
 
-### tidb_batch_pending_tiflash_count <span class="version-mark">New in v6.0</span>
+### tidb_batch_pending_tiflash_count <span class="version-mark">v6.0 の新</span>機能 {#tidb-batch-pending-tiflash-count-span-class-version-mark-new-in-v6-0-span}
 
-- Scope: SESSION | GLOBAL
-- Persists to cluster: Yes
-- Type: Integer
-- Default value: `4000`
-- Range: `[0, 4294967295]`
-- Specifies the maximum number of permitted unavailable tables when you use `ALTER DATABASE SET TIFLASH REPLICA` to add TiFlash replicas. If the number of unavailable tables exceeds this limit, the operation will be stopped or setting TiFlash replicas for the remaining tables will be very slow.
+-   スコープ: セッション |グローバル
+-   クラスターに永続化: はい
+-   タイプ: 整数
+-   デフォルト値: `4000`
+-   範囲: `[0, 4294967295]`
+-   `ALTER DATABASE SET TIFLASH REPLICA`を使用してTiFlashレプリカを追加する場合に、許容される使用不可テーブルの最大数を指定します。使用できないテーブルの数がこの制限を超えると、操作が停止するか、残りのテーブルのTiFlashレプリカの設定が非常に遅くなります。
 
-### tidb_broadcast_join_threshold_count <span class="version-mark">New in v5.0</span>
+### tidb_broadcast_join_threshold_count <span class="version-mark">v5.0 の新</span>機能 {#tidb-broadcast-join-threshold-count-span-class-version-mark-new-in-v5-0-span}
 
-- Scope: SESSION | GLOBAL
-- Persists to cluster: Yes
-- Type: Integer
-- Default value: `10240`
-- Range: `[0, 9223372036854775807]`
-- Unit: Rows
-- If the objects of the join operation belong to a subquery, the optimizer cannot estimate the size of the subquery result set. In this situation, the size is determined by the number of rows in the result set. If the estimated number of rows in the subquery is less than the value of this variable, the Broadcast Hash Join algorithm is used. Otherwise, the Shuffled Hash Join algorithm is used.
+-   スコープ: セッション |グローバル
+-   クラスターに永続化: はい
+-   タイプ: 整数
+-   デフォルト値: `10240`
+-   範囲: `[0, 9223372036854775807]`
+-   単位: 行
+-   結合操作のオブジェクトがサブクエリに属している場合、オプティマイザはサブクエリの結果セットのサイズを見積もることができません。この場合、サイズは結果セットの行数によって決まります。サブクエリの推定行数がこの変数の値より少ない場合、ブロードキャスト ハッシュ結合アルゴリズムが使用されます。それ以外の場合は、Shuffled Hash Join アルゴリズムが使用されます。
 
-### tidb_broadcast_join_threshold_size <span class="version-mark">New in v5.0</span>
+### tidb_broadcast_join_threshold_size <span class="version-mark">v5.0 の新</span>機能 {#tidb-broadcast-join-threshold-size-span-class-version-mark-new-in-v5-0-span}
 
-- Scope: SESSION | GLOBAL
-- Persists to cluster: Yes
-- Type: Integer
-- Default value: `104857600` (100 MiB)
-- Range: `[0, 9223372036854775807]`
-- Unit: Bytes
-- If the table size is less than the value of the variable, the Broadcast Hash Join algorithm is used. Otherwise, the Shuffled Hash Join algorithm is used.
+-   スコープ: セッション |グローバル
+-   クラスターに永続化: はい
+-   タイプ: 整数
+-   デフォルト値: `104857600` (100 MiB)
+-   範囲: `[0, 9223372036854775807]`
+-   単位: バイト
+-   テーブル サイズが変数の値より小さい場合は、ブロードキャスト ハッシュ結合アルゴリズムが使用されます。それ以外の場合は、Shuffled Hash Join アルゴリズムが使用されます。
 
-### tidb_build_stats_concurrency
+### tidb_build_stats_concurrency {#tidb-build-stats-concurrency}
 
-- Scope: SESSION | GLOBAL
-- Persists to cluster: Yes
-- Type: Integer
-- Default value: `4`
-- Range: `[1, 256]`
-- Unit: Threads
-- This variable is used to set the concurrency of executing the `ANALYZE` statement.
-- When the variable is set to a larger value, the execution performance of other queries is affected.
+-   スコープ: セッション |グローバル
+-   クラスターに永続化: はい
+-   タイプ: 整数
+-   デフォルト値: `4`
+-   範囲: `[1, 256]`
+-   単位: スレッド
+-   この変数は、 `ANALYZE`ステートメントの同時実行を設定するために使用されます。
+-   変数に大きな値を設定すると、他のクエリの実行パフォーマンスに影響します。
 
-### tidb_capture_plan_baselines <span class="version-mark">New in v4.0</span>
+### tidb_capture_plan_baselines <span class="version-mark">v4.0 の新</span>機能 {#tidb-capture-plan-baselines-span-class-version-mark-new-in-v4-0-span}
 
-- Scope: GLOBAL
-- Persists to cluster: Yes
-- Type: Boolean
-- Default value: `OFF`
-- This variable is used to control whether to enable the [baseline capturing](/sql-plan-management.md#baseline-capturing) feature. This feature depends on the statement summary, so you need to enable the statement summary before you use baseline capturing.
-- After this feature is enabled, the historical SQL statements in the statement summary are traversed periodically, and bindings are automatically created for SQL statements that appear at least twice.
+-   範囲: グローバル
+-   クラスターに永続化: はい
+-   タイプ: ブール値
+-   デフォルト値: `OFF`
+-   この変数は、 [ベースラインのキャプチャ](/sql-plan-management.md#baseline-capturing)機能を有効にするかどうかを制御するために使用されます。この機能はステートメント サマリーに依存するため、ベースライン キャプチャを使用する前にステートメント サマリーを有効にする必要があります。
+-   この機能を有効にすると、ステートメント サマリーの履歴 SQL ステートメントが定期的に走査され、少なくとも 2 回出現する SQL ステートメントのバインドが自動的に作成されます。
 
-### tidb_cdc_write_source <span class="version-mark">New in v6.5.0</span>
+### tidb_cdc_write_source v6.5.0<span class="version-mark">の新機能</span> {#tidb-cdc-write-source-span-class-version-mark-new-in-v6-5-0-span}
 
-- Scope: SESSION
-- Persists to cluster: No
-- Type: Integer
-- Default value: `0`
-- Range: `[0, 15]`
-- When this variable is set to a value other than 0, data written in this session is considered to be written by TiCDC. This variable can only be modified by TiCDC. Do not manually modify this variable in any case.
+-   スコープ: セッション
+-   クラスターに永続化: いいえ
+-   タイプ: 整数
+-   デフォルト値: `0`
+-   範囲: `[0, 15]`
+-   この変数が 0 以外の値に設定されている場合、このセッションで書き込まれたデータは TiCDC によって書き込まれたと見なされます。この変数は、TiCDC によってのみ変更できます。どのような場合でも、この変数を手動で変更しないでください。
 
-### tidb_check_mb4_value_in_utf8
+### tidb_check_mb4_value_in_utf8 {#tidb-check-mb4-value-in-utf8}
 
 <CustomContent platform="tidb-cloud">
 
-> **Note:**
+> **ノート：**
 >
-> This TiDB variable is not applicable to TiDB Cloud.
+> この TiDB 変数はTiDB Cloudには適用されません。
 
 </CustomContent>
 
-- Scope: GLOBAL
-- Persists to cluster: No, only applicable to the current TiDB instance that you are connecting to.
-- Type: Boolean
-- Default value: `ON`
-- This variable is used to enforce that the `utf8` character set only stores values from the [Basic Multilingual Plane (BMP)](https://en.wikipedia.org/wiki/Plane_(Unicode)#Basic_Multilingual_Plane). To store characters outside the BMP, it is recommended to use the `utf8mb4` character set.
-- You might need to disable this option when upgrading your cluster from an earlier version of TiDB where the `utf8` checking was more relaxed. For details, see [FAQs After Upgrade](https://docs.pingcap.com/tidb/stable/upgrade-faq).
+-   範囲: グローバル
+-   Persists to cluster: いいえ、接続している現在の TiDB インスタンスにのみ適用されます。
+-   タイプ: ブール値
+-   デフォルト値: `ON`
+-   この変数は、 `utf8`文字セットが[基本多言語面 (BMP)](https://en.wikipedia.org/wiki/Plane_(Unicode)#Basic_Multilingual_Plane)からの値のみを格納することを強制するために使用されます。 BMP の外に文字を格納するには、 `utf8mb4`文字セットを使用することをお勧めします。
+-   `utf8`番目のチェックがより緩和された以前のバージョンの TiDB からクラスターをアップグレードする場合は、このオプションを無効にする必要がある場合があります。詳細については、 [アップグレード後の FAQ](https://docs.pingcap.com/tidb/stable/upgrade-faq)を参照してください。
 
-### tidb_checksum_table_concurrency
+### tidb_checksum_table_concurrency {#tidb-checksum-table-concurrency}
 
-- Scope: SESSION
-- Type: Integer
-- Default value: `4`
-- Range: `[1, 256]`
-- Unit: Threads
-- This variable is used to set the scan index concurrency of executing the [`ADMIN CHECKSUM TABLE`](/sql-statements/sql-statement-admin-checksum-table.md) statement.
-- When the variable is set to a larger value, the execution performance of other queries is affected.
+-   スコープ: セッション
+-   タイプ: 整数
+-   デフォルト値: `4`
+-   範囲: `[1, 256]`
+-   単位: スレッド
+-   この変数は、 [`ADMIN CHECKSUM TABLE`](/sql-statements/sql-statement-admin-checksum-table.md)ステートメントを実行するスキャン インデックスの同時実行数を設定するために使用されます。
+-   変数に大きな値を設定すると、他のクエリの実行パフォーマンスに影響します。
 
-### tidb_committer_concurrency <span class="version-mark">New in v6.1.0</span>
+### tidb_committer_concurrency v6.1.0<span class="version-mark">の新機能</span> {#tidb-committer-concurrency-span-class-version-mark-new-in-v6-1-0-span}
 
-- Scope: GLOBAL
-- Persists to cluster: Yes
-- Type: Integer
-- Default value: `128`
-- Range: `[1, 10000]`
-- The number of goroutines for requests related to executing commit in the commit phase of the single transaction.
-- If the transaction to commit is too large, the waiting time for the flow control queue when the transaction is committed might be too long. In this situation, you can increase the configuration value to speed up the commit.
-- This setting was previously a `tidb.toml` option (`performance.committer-concurrency`), but changed to a system variable starting from TiDB v6.1.0.
+-   範囲: グローバル
+-   クラスターに永続化: はい
+-   タイプ: 整数
+-   デフォルト値: `128`
+-   範囲: `[1, 10000]`
+-   単一トランザクションのコミット フェーズでのコミットの実行に関連する要求のゴルーチンの数。
+-   コミットするトランザクションが大きすぎる場合、トランザクションがコミットされるときのフロー制御キューの待機時間が長すぎる可能性があります。この状況では、構成値を増やしてコミットを高速化できます。
+-   この設定は以前は`tidb.toml`オプション ( `performance.committer-concurrency` ) でしたが、TiDB v6.1.0 からシステム変数に変更されました。
 
-### tidb_config
+### tidb_config {#tidb-config}
 
 <CustomContent platform="tidb-cloud">
 
-> **Note:**
+> **ノート：**
 >
-> This TiDB variable is not applicable to TiDB Cloud.
+> この TiDB 変数はTiDB Cloudには適用されません。
 
 </CustomContent>
 
-- Scope: GLOBAL
-- Persists to cluster: No, only applicable to the current TiDB instance that you are connecting to.
-- Default value: ""
-- This variable is read-only. It is used to obtain the configuration information of the current TiDB server.
+-   範囲: グローバル
+-   Persists to cluster: いいえ、接続している現在の TiDB インスタンスにのみ適用されます。
+-   デフォルト値: &quot;&quot;
+-   この変数は読み取り専用です。現在の TiDBサーバーの構成情報を取得するために使用されます。
 
-### tidb_constraint_check_in_place
+### tidb_constraint_check_in_place {#tidb-constraint-check-in-place}
 
-- Scope: SESSION | GLOBAL
-- Persists to cluster: Yes
-- Type: Boolean
-- Default value: `OFF`
-- This variable only applies to optimistic transactions. For pessimistic transactions, use [`tidb_constraint_check_in_place_pessimistic`](#tidb_constraint_check_in_place_pessimistic-new-in-v630) instead.
-- When this variable is set to `OFF`, checking for duplicate values in unique indexes is deferred until the transaction commits. This helps improve performance but might be an unexpected behavior for some applications. See [Constraints](/constraints.md#optimistic-transactions) for details.
+-   スコープ: セッション |グローバル
+-   クラスターに永続化: はい
+-   タイプ: ブール値
+-   デフォルト値: `OFF`
+-   この変数は楽観的トランザクションにのみ適用されます。悲観的トランザクションの場合は、代わりに[`tidb_constraint_check_in_place_pessimistic`](#tidb_constraint_check_in_place_pessimistic-new-in-v630)を使用してください。
+-   この変数が`OFF`に設定されている場合、一意のインデックス内の重複値のチェックは、トランザクションがコミットされるまで延期されます。これはパフォーマンスの向上に役立ちますが、一部のアプリケーションでは予期しない動作になる場合があります。詳細は[制約](/constraints.md#optimistic-transactions)を参照してください。
 
-    - When setting `tidb_constraint_check_in_place` to `OFF` and using optimistic transactions:
+    -   `tidb_constraint_check_in_place` ～ `OFF`を設定し、楽観的トランザクションを使用する場合:
 
         ```sql
         tidb> create table t (i int key);
@@ -984,7 +984,7 @@ MPP is a distributed computing framework provided by the TiFlash engine, which a
         ERROR 1062 : Duplicate entry '1' for key 't.PRIMARY'
         ```
 
-    - When setting `tidb_constraint_check_in_place` to `ON` and using optimistic transactions:
+    -   `tidb_constraint_check_in_place` ～ `ON`を設定し、楽観的トランザクションを使用する場合:
 
         ```sql
         tidb> set @@tidb_constraint_check_in_place=ON;
@@ -993,38 +993,38 @@ MPP is a distributed computing framework provided by the TiFlash engine, which a
         ERROR 1062 : Duplicate entry '1' for key 't.PRIMARY'
         ```
 
-### `tidb_constraint_check_in_place_pessimistic` <span class="version-mark">New in v6.3.0</span>
+### <code>tidb_constraint_check_in_place_pessimistic</code><span class="version-mark">の新機能</span> {#code-tidb-constraint-check-in-place-pessimistic-code-span-class-version-mark-new-in-v6-3-0-span}
 
-- Scope: SESSION
-- Type: Boolean
+-   スコープ: セッション
+-   タイプ: ブール値
 
 <CustomContent platform="tidb">
 
-- Default value: By default, the [`pessimistic-txn.constraint-check-in-place-pessimistic`](/tidb-configuration-file.md#constraint-check-in-place-pessimistic-new-in-v640) configuration item is `true` so the default value of this variable is `ON`. When [`pessimistic-txn.constraint-check-in-place-pessimistic`](/tidb-configuration-file.md#constraint-check-in-place-pessimistic-new-in-v640) is set to `false`, the default value of this variable is `OFF`.
+-   デフォルト値: デフォルトでは、 [`pessimistic-txn.constraint-check-in-place-pessimistic`](/tidb-configuration-file.md#constraint-check-in-place-pessimistic-new-in-v640)構成アイテムは`true`であるため、この変数のデフォルト値は`ON`です。 [`pessimistic-txn.constraint-check-in-place-pessimistic`](/tidb-configuration-file.md#constraint-check-in-place-pessimistic-new-in-v640)が`false`に設定されている場合、この変数のデフォルト値は`OFF`です。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-- Default value: `ON`
+-   デフォルト値: `ON`
 
 </CustomContent>
 
-- This variable only applies to pessimistic transactions. For optimistic transactions, use [`tidb_constraint_check_in_place`](#tidb_constraint_check_in_place) instead.
-- When this variable is set to `OFF`, TiDB defers the unique constraint check of a unique index (to the next time when executing a statement that requires a lock to the index or to the time when committing the transaction). This helps improve performance but might be an unexpected behavior for some applications. See [Constraints](/constraints.md#pessimistic-transactions) for details.
-- Disabling this variable might cause TiDB to return a `LazyUniquenessCheckFailure` error in pessimistic transactions. When this error occurs, TiDB rolls back the current transaction.
+-   この変数は悲観的トランザクションにのみ適用されます。楽観的トランザクションの場合は、代わりに[`tidb_constraint_check_in_place`](#tidb_constraint_check_in_place)を使用してください。
+-   この変数が`OFF`に設定されている場合、TiDB は一意のインデックスの一意の制約チェックを延期します (インデックスへのロックを必要とするステートメントを次に実行するとき、またはトランザクションをコミットするときまで)。これはパフォーマンスの向上に役立ちますが、一部のアプリケーションでは予期しない動作になる場合があります。詳細は[制約](/constraints.md#pessimistic-transactions)を参照してください。
+-   この変数を無効にすると、悲観的トランザクションで TiDB が`LazyUniquenessCheckFailure`エラーを返す可能性があります。このエラーが発生すると、TiDB は現在のトランザクションをロールバックします。
 
 <CustomContent platform="tidb">
 
-- When this variable is disabled, you cannot use [`SAVEPOINT`](/sql-statements/sql-statement-savepoint.md) in pessimistic transactions.
+-   この変数が無効になっている場合、悲観的トランザクションでは[`SAVEPOINT`](/sql-statements/sql-statement-savepoint.md)を使用できません。
 
 </CustomContent>
 
-- When this variable is disabled, committing a pessimistic transaction might return a `Write conflict` or `Duplicate entry` error. When such an error occurs, TiDB rolls back the current transaction.
+-   この変数が無効になっている場合、悲観的トランザクションをコミットすると、 `Write conflict`または`Duplicate entry`のエラーが返される場合があります。このようなエラーが発生すると、TiDB は現在のトランザクションをロールバックします。
 
-    - When setting `tidb_constraint_check_in_place_pessimistic` to `OFF` and using pessimistic transactions:
+    -   `tidb_constraint_check_in_place_pessimistic` ～ `OFF`を設定し、悲観的トランザクションを使用する場合:
 
-        {{< copyable "sql" >}}
+        {{< copyable "" >}}
 
         ```sql
         set @@tidb_constraint_check_in_place_pessimistic=OFF;
@@ -1046,7 +1046,7 @@ MPP is a distributed computing framework provided by the TiFlash engine, which a
         ERROR 1062 : Duplicate entry '1' for key 't.PRIMARY'
         ```
 
-    - When setting `tidb_constraint_check_in_place_pessimistic` to `ON` and using pessimistic transactions:
+    -   `tidb_constraint_check_in_place_pessimistic` ～ `ON`を設定し、悲観的トランザクションを使用する場合:
 
         ```sql
         set @@tidb_constraint_check_in_place_pessimistic=ON;
@@ -1058,795 +1058,794 @@ MPP is a distributed computing framework provided by the TiFlash engine, which a
         ERROR 1062 : Duplicate entry '1' for key 't.PRIMARY'
         ```
 
-### tidb_cost_model_version <span class="version-mark">New in v6.2.0</span>
+### tidb_cost_model_version v6.2.0<span class="version-mark">の新機能</span> {#tidb-cost-model-version-span-class-version-mark-new-in-v6-2-0-span}
 
-> **Note:**
+> **ノート：**
 >
-> - Since TiDB v6.5.0, the newly created cluster uses Cost Model Version 2 by default. If you upgrade from a TiDB version earlier than v6.5.0 to v6.5.0 or later, the `tidb_cost_model_version` value does not change.
-> - Switching the version of the cost model might cause changes to query plans.
+> -   TiDB v6.5.0 以降、新しく作成されたクラスターはデフォルトでコスト モデル バージョン 2 を使用します。 v6.5.0 より前の TiDB バージョンから v6.5.0 以降にアップグレードする場合、 `tidb_cost_model_version`の値は変更されません。
+> -   コスト モデルのバージョンを切り替えると、クエリ プランが変更される場合があります。
 
-- Scope: SESSION | GLOBAL
-- Persists to cluster: Yes
-- Type: Integer
-- Default value: `2`
-- Value options:
-    - `1`: enables the Cost Model Version 1, which is used by default in TiDB v6.4.0 and earlier versions.
-    - `2`: enables the [Cost Model Version 2](/cost-model.md#cost-model-version-2), which is generally available in TiDB v6.5.0 and is more accurate than the version 1 in internal tests.
-- The version of cost model affects the plan decision of optimizer. For more details, see [Cost Model](/cost-model.md).
+-   スコープ: セッション |グローバル
+-   クラスターに永続化: はい
+-   タイプ: 整数
+-   デフォルト値: `2`
+-   値のオプション:
+    -   `1` : TiDB v6.4.0 以前のバージョンでデフォルトで使用されるコスト モデル バージョン 1 を有効にします。
+    -   `2` : [コスト モデル バージョン 2](/cost-model.md#cost-model-version-2)を有効にします。これは TiDB v6.5.0 で一般的に利用可能であり、内部テストでバージョン 1 よりも正確です。
+-   コスト モデルのバージョンは、オプティマイザの計画決定に影響します。詳細については、 [コストモデル](/cost-model.md)を参照してください。
 
-### tidb_current_ts
+### tidb_current_ts {#tidb-current-ts}
 
-- Scope: SESSION
-- Type: Integer
-- Default value: `0`
-- Range: `[0, 9223372036854775807]`
-- This variable is read-only. It is used to obtain the timestamp of the current transaction.
+-   スコープ: セッション
+-   タイプ: 整数
+-   デフォルト値: `0`
+-   範囲: `[0, 9223372036854775807]`
+-   この変数は読み取り専用です。現在のトランザクションのタイムスタンプを取得するために使用されます。
 
-### tidb_ddl_disk_quota <span class="version-mark">New in v6.3.0</span>
+### tidb_ddl_disk_quota v6.3.0<span class="version-mark">の新機能</span> {#tidb-ddl-disk-quota-span-class-version-mark-new-in-v6-3-0-span}
 
-- Scope: GLOBAL
-- Persists to cluster: Yes
-- Type: Integer
-- Default value: `107374182400` (100 GiB)
-- Range: `[107374182400, 1125899906842624]` ([100 GiB, 1 PiB])
-- Unit: Bytes
-- This variable only takes effect when [`tidb_ddl_enable_fast_reorg`](#tidb_ddl_enable_fast_reorg-new-in-v630) is enabled. It sets the usage limit of local storage during backfilling when creating an index.
+-   範囲: グローバル
+-   クラスターに永続化: はい
+-   タイプ: 整数
+-   デフォルト値: `107374182400` (100 GiB)
+-   範囲: `[107374182400, 1125899906842624]` ([100 GiB、1 PiB])
+-   単位: バイト
+-   この変数は、 [`tidb_ddl_enable_fast_reorg`](#tidb_ddl_enable_fast_reorg-new-in-v630)が有効になっている場合にのみ有効です。インデックス作成時のバックフィル時のローカル ストレージの使用制限を設定します。
 
-### tidb_ddl_enable_fast_reorg <span class="version-mark">New in v6.3.0</span>
+### tidb_ddl_enable_fast_reorg v6.3.0<span class="version-mark">の新機能</span> {#tidb-ddl-enable-fast-reorg-span-class-version-mark-new-in-v6-3-0-span}
 
-- Scope: GLOBAL
-- Persists to cluster: Yes
-- Type: Boolean
-- Default value: `ON`
-- This variable controls whether to enable the acceleration of `ADD INDEX` and `CREATE INDEX` to improve the speed of backfilling for index creation. Setting this variable value to `ON` can bring performance improvement for index creation on tables with a large amount of data.
-- To verify whether a completed `ADD INDEX` operation is accelerated, you can execute the [`ADMIN SHOW DDL JOBS`](/sql-statements/sql-statement-admin-show-ddl.md#admin-show-ddl-jobs) statement to see whether `ingest` is displayed in the `JOB_TYPE` column.
+-   範囲: グローバル
+-   クラスターに永続化: はい
+-   タイプ: ブール値
+-   デフォルト値: `ON`
+-   この変数は、 `ADD INDEX`と`CREATE INDEX`のアクセラレーションを有効にして、インデックス作成のバックフィルの速度を向上させるかどうかを制御します。この変数の値を`ON`に設定すると、大量のデータを含むテーブルでのインデックス作成のパフォーマンスが向上する可能性があります。
+-   完了した`ADD INDEX`操作が高速化されるかどうかを確認するには、 [`ADMIN SHOW DDL JOBS`](/sql-statements/sql-statement-admin-show-ddl.md#admin-show-ddl-jobs)ステートメントを実行して、 `JOB_TYPE`列に`ingest`が表示されるかどうかを確認します。
 
 <CustomContent platform="tidb">
 
-> **Warning:**
+> **警告：**
 >
+> 現在、この機能は[単一の`ALTER TABLE`ステートメントで複数の列またはインデックスを変更する](/sql-statements/sql-statement-alter-table.md)と完全には互換性がありません。インデックス アクセラレーションを使用して一意のインデックスを追加する場合は、同じステートメントで他の列またはインデックスを変更しないようにする必要があります。
 >
-> Currently, this feature is not fully compatible with [altering multiple columns or indexes in a single `ALTER TABLE` statement](/sql-statements/sql-statement-alter-table.md). When adding a unique index with the index acceleration, you need to avoid altering other columns or indexes in the same statement.
+> 現在、この機能は[PITR (ポイントインタイム リカバリ)](/br/backup-and-restore-overview.md)と互換性がありません。インデックス アクセラレーションを使用する場合は、バックグラウンドで実行されている PITR ログ バックアップ タスクがないことを確認する必要があります。そうしないと、次のような予期しない動作が発生する可能性があります。
 >
-> Currently, this feature is not compatible with [PITR (Point-in-time recovery)](/br/backup-and-restore-overview.md). When using index acceleration, you need to ensure that there are no PITR log backup tasks running in the background. Otherwise, unexpected behaviors might occur, including:
->
-> - If you start a log backup task before adding an index, the adding index process is not accelerated even if index acceleration is enabled. But the index is added in a slow way. Because the log backup task keeps running after being started, it means that the index acceleration feature is disabled in this case. To accelerate the process of adding an index, you can stop the log backup background task first, start and complete the index adding task, and then restart the log backup task and perform a full backup.
-> - If you start an index acceleration task first, and then start a log backup task. The log backup task returns an error. But the index acceleration is not affected.
-> - If you start a log backup task and an index acceleration task at the same time, the two tasks might not be aware of each other. This might result in PITR failing to back up the newly added index.
+> -   インデックスを追加する前にログ バックアップ タスクを開始すると、インデックスの高速化が有効になっていても、インデックスの追加プロセスは高速化されません。しかし、インデックスはゆっくりと追加されます。ログ バックアップ タスクは開始後も実行を継続するため、この場合はインデックス アクセラレーション機能が無効になっていることを意味します。インデックスを追加するプロセスを高速化するには、最初にログ バックアップ バックグラウンド タスクを停止し、インデックス追加タスクを開始して完了してから、ログ バックアップ タスクを再開して完全バックアップを実行します。
+> -   最初にインデックス アクセラレーション タスクを開始してから、ログ バックアップ タスクを開始した場合。ログ バックアップ タスクがエラーを返します。しかし、インデックスの加速は影響を受けません。
+> -   ログ バックアップ タスクとインデックス アクセラレーション タスクを同時に開始すると、2 つのタスクが互いを認識しない場合があります。これにより、PITR が新しく追加されたインデックスのバックアップに失敗する可能性があります。
 
 </CustomContent>
 
-### tidb_ddl_error_count_limit
+### tidb_ddl_error_count_limit {#tidb-ddl-error-count-limit}
 
-- Scope: GLOBAL
-- Persists to cluster: Yes
-- Type: Integer
-- Default value: `512`
-- Range: `[0, 9223372036854775807]`
-- This variable is used to set the number of retries when the DDL operation fails. When the number of retries exceeds the parameter value, the wrong DDL operation is canceled.
+-   範囲: グローバル
+-   クラスターに永続化: はい
+-   タイプ: 整数
+-   デフォルト値: `512`
+-   範囲: `[0, 9223372036854775807]`
+-   この変数は、DDL 操作が失敗した場合の再試行回数を設定するために使用されます。再試行回数がパラメーター値を超えると、間違った DDL 操作が取り消されます。
 
-### `tidb_ddl_flashback_concurrency` <span class="version-mark">New in v6.3.0</span>
+### <code>tidb_ddl_flashback_concurrency</code><span class="version-mark">の新機能</span> {#code-tidb-ddl-flashback-concurrency-code-span-class-version-mark-new-in-v6-3-0-span}
 
-- Scope: GLOBAL
-- Persists to cluster: Yes
-- Type: Integer
-- Default value: `64`
-- Range: `[1, 256]`
+-   範囲: グローバル
+-   クラスターに永続化: はい
+-   タイプ: 整数
+-   デフォルト値: `64`
+-   範囲: `[1, 256]`
 
 <CustomContent platform="tidb">
 
-- This variable controls the concurrency of [`FLASHBACK CLUSTER TO TIMESTAMP`](/sql-statements/sql-statement-flashback-to-timestamp.md).
+-   この変数は[`FLASHBACK CLUSTER TO TIMESTAMP`](/sql-statements/sql-statement-flashback-to-timestamp.md)の並行性を制御します。
 
 </CustomContent>
 
-### tidb_ddl_reorg_batch_size
+### tidb_ddl_reorg_batch_size {#tidb-ddl-reorg-batch-size}
 
-- Scope: GLOBAL
-- Persists to cluster: Yes
-- Type: Integer
-- Default value: `256`
-- Range: `[32, 10240]`
-- Unit: Rows
-- This variable is used to set the batch size during the `re-organize` phase of the DDL operation. For example, when TiDB executes the `ADD INDEX` operation, the index data needs to backfilled by `tidb_ddl_reorg_worker_cnt` (the number) concurrent workers. Each worker backfills the index data in batches.
-    - If many updating operations such as `UPDATE` and `REPLACE` exist during the `ADD INDEX` operation, a larger batch size indicates a larger probability of transaction conflicts. In this case, you need to adjust the batch size to a smaller value. The minimum value is 32.
-    - If the transaction conflict does not exist, you can set the batch size to a large value (consider the worker count. See [Interaction Test on Online Workloads and `ADD INDEX` Operations](https://docs.pingcap.com/tidb/stable/online-workloads-and-add-index-operations) for reference). This can increase the speed of the backfilling data, but the write pressure on TiKV also becomes higher.
+-   範囲: グローバル
+-   クラスターに永続化: はい
+-   タイプ: 整数
+-   デフォルト値: `256`
+-   範囲: `[32, 10240]`
+-   単位: 行
+-   この変数は、DDL 操作の第`re-organize`フェーズでバッチ サイズを設定するために使用されます。たとえば、TiDB が`ADD INDEX`操作を実行する場合、インデックス データは`tidb_ddl_reorg_worker_cnt` (数) の同時ワーカーによってバックフィルされる必要があります。各ワーカーは、バッチでインデックス データをバックフィルします。
+    -   `ADD INDEX`操作中に`UPDATE`や`REPLACE`などの多くの更新操作が存在する場合、バッチ サイズが大きいほど、トランザクションの競合が発生する可能性が高くなります。この場合、バッチ サイズをより小さい値に調整する必要があります。最小値は 32 です。
+    -   トランザクションの競合が存在しない場合は、バッチ サイズを大きな値に設定できます (ワーカー数を考慮してください。参考として[オンライン ワークロードと`ADD INDEX`操作の相互作用テスト](https://docs.pingcap.com/tidb/stable/online-workloads-and-add-index-operations)を参照してください)。これにより、データのバックフィルの速度を上げることができますが、TiKV への書き込み圧力も高くなります。
 
-### tidb_ddl_reorg_priority
+### tidb_ddl_reorg_priority {#tidb-ddl-reorg-priority}
 
-- Scope: SESSION
-- Type: Enumeration
-- Default value: `PRIORITY_LOW`
-- Value options: `PRIORITY_LOW`, `PRIORITY_NORMAL`, `PRIORITY_HIGH`
-- This variable is used to set the priority of executing the `ADD INDEX` operation in the `re-organize` phase.
-- You can set the value of this variable to `PRIORITY_LOW`, `PRIORITY_NORMAL` or `PRIORITY_HIGH`.
+-   スコープ: セッション
+-   タイプ: 列挙
+-   デフォルト値: `PRIORITY_LOW`
+-   値のオプション: `PRIORITY_LOW` 、 `PRIORITY_NORMAL` 、 `PRIORITY_HIGH`
+-   この変数は、第`re-organize`フェーズで第`ADD INDEX`操作を実行する優先順位を設定するために使用されます。
+-   この変数の値は`PRIORITY_LOW` 、 `PRIORITY_NORMAL`または`PRIORITY_HIGH`に設定できます。
 
-### tidb_ddl_reorg_worker_cnt
+### tidb_ddl_reorg_worker_cnt {#tidb-ddl-reorg-worker-cnt}
 
-- Scope: GLOBAL
-- Persists to cluster: Yes
-- Type: Integer
-- Default value: `4`
-- Range: `[1, 256]`
-- Unit: Threads
-- This variable is used to set the concurrency of the DDL operation in the `re-organize` phase.
+-   範囲: グローバル
+-   クラスターに永続化: はい
+-   タイプ: 整数
+-   デフォルト値: `4`
+-   範囲: `[1, 256]`
+-   単位: スレッド
+-   この変数は、 `re-organize`フェーズでの DDL 操作の並行性を設定するために使用されます。
 
-### tidb_default_string_match_selectivity <span class="version-mark">New in v6.2.0</span>
+### tidb_default_string_match_selectivity v6.2.0<span class="version-mark">の新機能</span> {#tidb-default-string-match-selectivity-span-class-version-mark-new-in-v6-2-0-span}
 
-- Scope: SESSION | GLOBAL
-- Persists to cluster: Yes
-- Type: Float
-- Default value: `0.8`
-- Range: `[0, 1]`
-- This variable is used to set the default selectivity of `like`, `rlike`, and `regexp` functions in the filter condition when estimating the number of rows. This variable also controls whether to enable TopN to help estimate these functions.
-- TiDB tries to estimate `like` in the filter condition using statistics. But when `like` matches a complex string, or when using `rlike` or `regexp`, TiDB often fails to fully use statistics, and the default value `0.8` is set as the selectivity rate instead, resulting in inaccurate estimation.
-- This variable is used to change the preceding behavior. If the variable is set to a value other than `0`, the selectivity rate is the specified variable value instead of `0.8`.
-- If the variable is set to `0`, TiDB tries to evaluate using TopN in statistics to improve the accuracy and consider the NULL number in statistics when estimating the preceding three functions. The prerequisite is that statistics are collected when [`tidb_analyze_version`](#tidb_analyze_version-new-in-v510) is set to `2`. Such evaluation might slightly affect the performance.
-- If the variable is set to a value other than the `0.8`, TiDB adjusts the estimation for `not like`, `not rlike`, and `not regexp` accordingly.
+-   スコープ: セッション |グローバル
+-   クラスターに永続化: はい
+-   タイプ: フロート
+-   デフォルト値: `0.8`
+-   範囲: `[0, 1]`
+-   この変数は、行数を見積もるときのフィルタ条件で`like` 、 `rlike` 、および`regexp`関数のデフォルトの選択性を設定するために使用されます。この変数は、TopN を有効にしてこれらの関数を推定するかどうかも制御します。
+-   TiDB は、統計を使用してフィルター条件で`like`を推定しようとします。しかし、 `like`が複雑な文字列に一致する場合、または`rlike`または`regexp`を使用する場合、TiDB はしばしば統計を十分に活用できず、代わりにデフォルト値`0.8`が選択率として設定され、結果として不正確な推定が行われます。
+-   この変数は、前述の動作を変更するために使用されます。変数が`0`以外の値に設定されている場合、選択率は`0.8`ではなく、指定された変数値になります。
+-   変数が`0`に設定されている場合、TiDB は統計で TopN を使用して評価を試み、精度を向上させ、前の 3 つの関数を推定するときに統計で NULL 数を考慮します。前提条件は、 [`tidb_analyze_version`](#tidb_analyze_version-new-in-v510)が`2`に設定されたときに統計が収集されることです。そのような評価は、パフォーマンスにわずかに影響を与える可能性があります。
+-   変数が`0.8`以外の値に設定されている場合、TiDB はそれに応じて`not like` 、 `not rlike` 、および`not regexp`の推定値を調整します。
 
-### tidb_disable_txn_auto_retry
+### tidb_disable_txn_auto_retry {#tidb-disable-txn-auto-retry}
 
-- Scope: SESSION | GLOBAL
-- Persists to cluster: Yes
-- Type: Boolean
-- Default value: `ON`
-- This variable is used to set whether to disable the automatic retry of explicit optimistic transactions. The default value of `ON` means that transactions will not automatically retry in TiDB and `COMMIT` statements might return errors that need to be handled in the application layer.
+-   スコープ: セッション |グローバル
+-   クラスターに永続化: はい
+-   タイプ: ブール値
+-   デフォルト値: `ON`
+-   この変数は、明示的楽観的トランザクションの自動再試行を無効にするかどうかを設定するために使用されます。デフォルト値`ON`は、トランザクションが TiDB で自動的に再試行されず、 `COMMIT`のステートメントがアプリケーションレイヤーで処理する必要があるエラーを返す可能性があることを意味します。
 
-    Setting the value to `OFF` means that TiDB will automatically retry transactions, resulting in fewer errors from `COMMIT` statements. Be careful when making this change, because it might result in lost updates.
+    値を`OFF`に設定すると、TiDB が自動的にトランザクションを再試行し、 `COMMIT`のステートメントからのエラーが少なくなります。更新が失われる可能性があるため、この変更を行うときは注意してください。
 
-    This variable does not affect automatically committed implicit transactions and internally executed transactions in TiDB. The maximum retry count of these transactions is determined by the value of `tidb_retry_limit`.
+    この変数は、自動的にコミットされた暗黙のトランザクションと、TiDB で内部的に実行されるトランザクションには影響しません。これらのトランザクションの最大再試行回数は、 `tidb_retry_limit`の値によって決まります。
 
-    For more details, see [limits of retry](/optimistic-transaction.md#limits-of-retry).
+    詳細については、 [再試行の制限](/optimistic-transaction.md#limits-of-retry)を参照してください。
 
     <CustomContent platform="tidb">
 
-    This variable only applies to optimistic transactions, not to pessimistic transactions. The number of retries for pessimistic transactions is controlled by [`max_retry_count`](/tidb-configuration-file.md#max-retry-count).
+    この変数は楽観的トランザクションにのみ適用され、悲観的なトランザクションには適用されません。悲観的トランザクションの再試行回数は[`max_retry_count`](/tidb-configuration-file.md#max-retry-count)で制御されます。
 
     </CustomContent>
 
     <CustomContent platform="tidb-cloud">
 
-    This variable only applies to optimistic transactions, not to pessimistic transactions. The number of retries for pessimistic transactions is 256.
+    この変数は楽観的トランザクションにのみ適用され、悲観的なトランザクションには適用されません。悲観的トランザクションのリトライ回数は 256 回です。
 
     </CustomContent>
 
-### tidb_distsql_scan_concurrency
+### tidb_distsql_scan_concurrency {#tidb-distsql-scan-concurrency}
 
-- Scope: SESSION | GLOBAL
-- Persists to cluster: Yes
-- Type: Integer
-- Default value: `15`
-- Range: `[1, 256]`
-- Unit: Threads
-- This variable is used to set the concurrency of the `scan` operation.
-- Use a bigger value in OLAP scenarios, and a smaller value in OLTP scenarios.
-- For OLAP scenarios, the maximum value should not exceed the number of CPU cores of all the TiKV nodes.
-- If a table has a lot of partitions, you can reduce the variable value appropriately (determined by the size of the data to be scanned and the frequency of the scan) to avoid TiKV becoming out of memory (OOM).
+-   スコープ: セッション |グローバル
+-   クラスターに永続化: はい
+-   タイプ: 整数
+-   デフォルト値: `15`
+-   範囲: `[1, 256]`
+-   単位: スレッド
+-   この変数は、 `scan`操作の並行性を設定するために使用されます。
+-   OLAP シナリオでは大きな値を使用し、OLTP シナリオでは小さな値を使用します。
+-   OLAP シナリオの場合、最大値はすべての TiKV ノードの CPU コア数を超えてはなりません。
+-   テーブルに多数のパーティションがある場合は、TiKV がメモリ不足 (OOM) にならないように、(スキャンするデータのサイズとスキャンの頻度によって決定される) 変数値を適切に減らすことができます。
 
-### tidb_dml_batch_size
+### tidb_dml_batch_size {#tidb-dml-batch-size}
 
-> **Warning:**
+> **警告：**
 >
-> This variable is associated with the deprecated batch-dml feature, which might cause data corruption. Therefore, it is not recommended to enable this variable for batch-dml. Instead, use [non-transactional DML](/non-transactional-dml.md).
+> この変数は非推奨の batch-dml 機能に関連付けられており、データが破損する可能性があります。したがって、batch-dml でこの変数を有効にすることはお勧めしません。代わりに、 [非トランザクション DML](/non-transactional-dml.md)を使用してください。
 
-- Scope: SESSION | GLOBAL
-- Persists to cluster: Yes
-- Type: Integer
-- Default value: `0`
-- Range: `[0, 2147483647]`
-- Unit: Rows
-- When this value is greater than `0`, TiDB will batch commit statements such as `INSERT` or `LOAD DATA` into smaller transactions. This reduces memory usage and helps ensure that the `txn-total-size-limit` is not reached by bulk modifications.
-- Only the value `0` provides ACID compliance. Setting this to any other value will break the atomicity and isolation guarantees of TiDB.
-- To make this variable work, you also need to enable `tidb_enable_batch_dml` and at least one of `tidb_batch_insert` and `tidb_batch_delete`.
+-   スコープ: セッション |グローバル
+-   クラスターに永続化: はい
+-   タイプ: 整数
+-   デフォルト値: `0`
+-   範囲: `[0, 2147483647]`
+-   単位: 行
+-   この値が`0`より大きい場合、TiDB は`INSERT`や`LOAD DATA`などの commit ステートメントを小さなトランザクションにバッチ処理します。これにより、メモリ使用量が削減され、一括変更によって`txn-total-size-limit`に到達しないことが保証されます。
+-   値`0`のみがACID準拠を提供します。これを他の値に設定すると、TiDB の原子性と分離の保証が壊れます。
+-   この変数を機能させるには、 `tidb_enable_batch_dml`と、少なくとも`tidb_batch_insert`と`tidb_batch_delete`の 1 つを有効にする必要もあります。
 
-### tidb_enable_1pc <span class="version-mark">New in v5.0</span>
+### tidb_enable_1pc <span class="version-mark">v5.0 の新</span>機能 {#tidb-enable-1pc-span-class-version-mark-new-in-v5-0-span}
 
-- Scope: SESSION | GLOBAL
-- Persists to cluster: Yes
-- Type: Boolean
-- Default value: `ON`
-- This variable is used to specify whether to enable the one-phase commit feature for transactions that only affect one Region. Compared with the often-used two-phase commit, one-phase commit can greatly reduce the latency of transaction commit and increase the throughput.
+-   スコープ: セッション |グローバル
+-   クラスターに永続化: はい
+-   タイプ: ブール値
+-   デフォルト値: `ON`
+-   この変数は、1 つのリージョンのみに影響するトランザクションに対して 1 フェーズ コミット機能を有効にするかどうかを指定するために使用されます。よく使用される 2 フェーズ コミットと比較して、1 フェーズ コミットはトランザクション コミットのレイテンシーを大幅に短縮し、スループットを向上させることができます。
 
-> **Note:**
+> **ノート：**
 >
-> - The default value of `ON` only applies to new clusters. if your cluster was upgraded from an earlier version of TiDB, the value `OFF` will be used instead.
-> - If you have enabled TiDB Binlog, enabling this variable cannot improve the performance. To improve the performance, it is recommended to use [TiCDC](https://docs.pingcap.com/tidb/stable/ticdc-overview) instead.
-> - Enabling this parameter only means that one-phase commit becomes an optional mode of transaction commit. In fact, the most suitable mode of transaction commit is determined by TiDB.
+> -   デフォルト値の`ON`は、新しいクラスターにのみ適用されます。クラスターが以前のバージョンの TiDB からアップグレードされた場合は、代わりに値`OFF`が使用されます。
+> -   TiDB Binlogを有効にしている場合、この変数を有効にしてもパフォーマンスは向上しません。パフォーマンスを向上させるには、代わりに[TiCDC](https://docs.pingcap.com/tidb/stable/ticdc-overview)を使用することをお勧めします。
+> -   このパラメーターを有効にすることは、1 フェーズ コミットがトランザクション コミットのオプション モードになることを意味するだけです。実際、トランザクション コミットの最適なモードは TiDB によって決定されます。
 
-### tidb_enable_amend_pessimistic_txn <span class="version-mark">New in v4.0.7</span>
+### tidb_enable_amend_pessimistic_txn v4.0.7<span class="version-mark">の新機能</span> {#tidb-enable-amend-pessimistic-txn-span-class-version-mark-new-in-v4-0-7-span}
 
-> **Warning:**
+> **警告：**
 >
-> Starting from v6.5.0, this variable is deprecated, and TiDB uses the [Metadata Lock](/metadata-lock.md) feature by default to avoid the `Information schema is changed` error. Note that this variable is planned to be removed in v6.6.0.
+> v6.5.0 以降、この変数は廃止され、TiDB はデフォルトで[メタデータ ロック](/metadata-lock.md)機能を使用して`Information schema is changed`エラーを回避します。この変数は v6.6.0 で削除される予定であることに注意してください。
 
-- Scope: SESSION | GLOBAL
-- Persists to cluster: Yes
-- Type: Boolean
-- Default value: `OFF`
-- This variable is used to control whether to enable the `AMEND TRANSACTION` feature. If you enable the `AMEND TRANSACTION` feature in a pessimistic transaction, when concurrent DDL operations and SCHEMA VERSION changes exist on tables associated with this transaction, TiDB attempts to amend the transaction. TiDB corrects the transaction commit to make the commit consistent with the latest valid SCHEMA VERSION so that the transaction can be successfully committed without getting the `Information schema is changed` error. This feature is effective on the following concurrent DDL operations:
+-   スコープ: セッション |グローバル
+-   クラスターに永続化: はい
+-   タイプ: ブール値
+-   デフォルト値: `OFF`
+-   この変数は、 `AMEND TRANSACTION`機能を有効にするかどうかを制御するために使用されます。悲観的トランザクションで`AMEND TRANSACTION`機能を有効にした場合、同時 DDL 操作と SCHEMA VERSION 変更がこのトランザクションに関連付けられたテーブルに存在する場合、TiDB はトランザクションの修正を試みます。 TiDB は、トランザクション コミットを修正して、コミットが最新の有効な SCHEMA VERSION と一致するようにし、トランザクションが`Information schema is changed`エラーを取得することなく正常にコミットできるようにします。この機能は、次の同時 DDL 操作で有効です。
 
-    - `ADD COLUMN` or `DROP COLUMN` operations.
-    - `MODIFY COLUMN` or `CHANGE COLUMN` operations which increase the length of a field.
-    - `ADD INDEX` or `DROP INDEX` operations in which the index column is created before the transaction is opened.
+    -   `ADD COLUMN`回または`DROP COLUMN`の操作。
+    -   フィールドの長さを増やす`MODIFY COLUMN`または`CHANGE COLUMN`の操作。
+    -   トランザクションが開かれる前にインデックス列が作成される`ADD INDEX`または`DROP INDEX`の操作。
 
-> **Note:**
+> **ノート：**
 >
-> Currently, this feature is incompatible with TiDB Binlog in some scenarios and might cause semantic changes on a transaction. For more usage precautions of this feature, refer to [Incompatibility issues about transaction semantic](https://github.com/pingcap/tidb/issues/21069) and [Incompatibility issues about TiDB Binlog](https://github.com/pingcap/tidb/issues/20996).
+> 現在、この機能は一部のシナリオで TiDB Binlogと互換性がなく、トランザクションでセマンティックの変更を引き起こす可能性があります。この機能の使用上の注意事項については、 [トランザクション セマンティックに関する非互換性の問題](https://github.com/pingcap/tidb/issues/21069)および[TiDB Binlogに関する非互換性の問題](https://github.com/pingcap/tidb/issues/20996)を参照してください。
 
-### tidb_enable_analyze_snapshot <span class="version-mark">New in v6.2.0</span>
+### tidb_enable_analyze_snapshot v6.2.0<span class="version-mark">の新機能</span> {#tidb-enable-analyze-snapshot-span-class-version-mark-new-in-v6-2-0-span}
 
-- Scope: SESSION | GLOBAL
-- Persists to cluster: Yes
-- Type: Boolean
-- Default value: `OFF`
-- This variable controls whether to read historical data or the latest data when performing `ANALYZE`. If this variable is set to `ON`, `ANALYZE` reads the historical data available at the time of `ANALYZE`. If this variable is set to `OFF`, `ANALYZE` reads the latest data.
-- Before v5.2, `ANALYZE` reads the latest data. From v5.2 to v6.1, `ANALYZE` reads the historical data available at the time of `ANALYZE`.
+-   スコープ: セッション |グローバル
+-   クラスターに永続化: はい
+-   タイプ: ブール値
+-   デフォルト値: `OFF`
+-   この変数は、実行時に過去のデータを読み取るか最新のデータを読み取るかを制御します`ANALYZE` 。この変数が`ON`に設定されている場合、 `ANALYZE`は`ANALYZE`の時点で使用可能な履歴データを読み取ります。この変数が`OFF`に設定されている場合、 `ANALYZE`は最新のデータを読み取ります。
+-   v5.2 より前では、 `ANALYZE`で最新のデータが読み取られます。 v5.2 から v6.1 まで、 `ANALYZE`は`ANALYZE`の時点で使用可能な履歴データを読み取ります。
 
-> **Warning:**
+> **警告：**
 >
-> If `ANALYZE` reads the historical data available at the time of `ANALYZE`, the long duration of `AUTO ANALYZE` might cause the `GC life time is shorter than transaction duration` error because the historical data is garbage-collected.
+> `ANALYZE`が`ANALYZE`の時点で使用可能な履歴データを読み取る場合、履歴データはガベージ コレクションされるため、 `AUTO ANALYZE`の長い期間によって`GC life time is shorter than transaction duration`エラーが発生する可能性があります。
 
-### tidb_enable_async_commit <span class="version-mark">New in v5.0</span>
+### tidb_enable_async_commit <span class="version-mark">v5.0 の新</span>機能 {#tidb-enable-async-commit-span-class-version-mark-new-in-v5-0-span}
 
-- Scope: SESSION | GLOBAL
-- Persists to cluster: Yes
-- Type: Boolean
-- Default value: `ON`
-- This variable controls whether to enable the async commit feature for the second phase of the two-phase transaction commit to perform asynchronously in the background. Enabling this feature can reduce the latency of transaction commit.
+-   スコープ: セッション |グローバル
+-   クラスターに永続化: はい
+-   タイプ: ブール値
+-   デフォルト値: `ON`
+-   この変数は、2 フェーズ トランザクション コミットの第 2 フェーズの非同期コミット機能を有効にして、バックグラウンドで非同期に実行するかどうかを制御します。この機能を有効にすると、トランザクション コミットのレイテンシーを短縮できます。
 
-> **Note:**
+> **ノート：**
 >
-> - The default value of `ON` only applies to new clusters. if your cluster was upgraded from an earlier version of TiDB, the value `OFF` will be used instead.
-> - If you have enabled TiDB Binlog, enabling this variable cannot improve the performance. To improve the performance, it is recommended to use [TiCDC](https://docs.pingcap.com/tidb/stable/ticdc-overview) instead.
-> - Enabling this parameter only means that Async Commit becomes an optional mode of transaction commit. In fact, the most suitable mode of transaction commit is determined by TiDB.
+> -   デフォルト値の`ON`は、新しいクラスターにのみ適用されます。クラスターが以前のバージョンの TiDB からアップグレードされた場合は、代わりに値`OFF`が使用されます。
+> -   TiDB Binlogを有効にしている場合、この変数を有効にしてもパフォーマンスは向上しません。パフォーマンスを向上させるには、代わりに[TiCDC](https://docs.pingcap.com/tidb/stable/ticdc-overview)を使用することをお勧めします。
+> -   このパラメーターを有効にすることは、Async Commit がトランザクション コミットのオプション モードになることを意味するだけです。実際、トランザクション コミットの最適なモードは TiDB によって決定されます。
 
-### tidb_enable_auto_analyze <span class="version-mark">New in v6.1.0</span>
+### tidb_enable_auto_analyze v6.1.0<span class="version-mark">の新機能</span> {#tidb-enable-auto-analyze-span-class-version-mark-new-in-v6-1-0-span}
 
-- Scope: GLOBAL
-- Persists to cluster: Yes
-- Type: Boolean
-- Default value: `ON`
-- Determines whether TiDB automatically updates table statistics as a background operation.
-- This setting was previously a `tidb.toml` option (`performance.run-auto-analyze`), but changed to a system variable starting from TiDB v6.1.0.
+-   範囲: グローバル
+-   クラスターに永続化: はい
+-   タイプ: ブール値
+-   デフォルト値: `ON`
+-   TiDB がテーブル統計をバックグラウンド操作として自動的に更新するかどうかを決定します。
+-   この設定は以前は`tidb.toml`オプション ( `performance.run-auto-analyze` ) でしたが、TiDB v6.1.0 からシステム変数に変更されました。
 
-### tidb_enable_auto_increment_in_generated
+### tidb_enable_auto_increment_in_generated {#tidb-enable-auto-increment-in-generated}
 
-- Scope: SESSION | GLOBAL
-- Persists to cluster: Yes
-- Type: Boolean
-- Default value: `OFF`
-- This variable is used to determine whether to include the `AUTO_INCREMENT` columns when creating a generated column or an expression index.
+-   スコープ: セッション |グローバル
+-   クラスターに永続化: はい
+-   タイプ: ブール値
+-   デフォルト値: `OFF`
+-   この変数は、生成された列または式インデックスを作成するときに`AUTO_INCREMENT`列を含めるかどうかを決定するために使用されます。
 
-### tidb_enable_batch_dml
+### tidb_enable_batch_dml {#tidb-enable-batch-dml}
 
-> **Warning:**
+> **警告：**
 >
-> This variable is associated with the deprecated batch-dml feature, which might cause data corruption. Therefore, it is not recommended to enable this variable for batch-dml. Instead, use [non-transactional DML](/non-transactional-dml.md).
+> この変数は非推奨の batch-dml 機能に関連付けられており、データが破損する可能性があります。したがって、batch-dml でこの変数を有効にすることはお勧めしません。代わりに、 [非トランザクション DML](/non-transactional-dml.md)を使用してください。
 
-- Scope: GLOBAL
-- Persists to cluster: Yes
-- Type: Boolean
-- Default value: `OFF`
-- This variable controls whether to enable the deprecated batch-dml feature. When it is enabled, certain statements might be split into multiple transactions, which is non-atomic and should be used with care. When using batch-dml, you must ensure that there are no concurrent operations on the data you are operating on. To make it work, you must also specify a positive value for `tidb_batch_dml_size` and enable at least one of `tidb_batch_insert` and `tidb_batch_delete`.
+-   範囲: グローバル
+-   クラスターに永続化: はい
+-   タイプ: ブール値
+-   デフォルト値: `OFF`
+-   この変数は、非推奨のバッチ dml 機能を有効にするかどうかを制御します。有効にすると、特定のステートメントが複数のトランザクションに分割される可能性がありますが、これはアトミックではないため、注意して使用する必要があります。 batch-dml を使用する場合は、操作対象のデータに対して同時操作がないことを確認する必要があります。これを機能させるには、 `tidb_batch_dml_size`に正の値を指定し、少なくとも`tidb_batch_insert`と`tidb_batch_delete`のいずれかを有効にする必要があります。
 
-### tidb_enable_cascades_planner
+### tidb_enable_cascades_planner {#tidb-enable-cascades-planner}
 
-> **Warning:**
+> **警告：**
 >
-> Currently, cascades planner is an experimental feature. It is not recommended that you use it in production environments.
+> 現在、カスケード プランナーは実験的機能です。実稼働環境で使用することはお勧めしません。
 
-- Scope: SESSION | GLOBAL
-- Persists to cluster: Yes
-- Type: Boolean
-- Default value: `OFF`
-- This variable is used to control whether to enable the cascades planner.
+-   スコープ: セッション |グローバル
+-   クラスターに永続化: はい
+-   タイプ: ブール値
+-   デフォルト値: `OFF`
+-   この変数は、カスケード プランナーを有効にするかどうかを制御するために使用されます。
 
-### tidb_enable_chunk_rpc <span class="version-mark">New in v4.0</span>
+### tidb_enable_chunk_rpc <span class="version-mark">v4.0 の新</span>機能 {#tidb-enable-chunk-rpc-span-class-version-mark-new-in-v4-0-span}
 
-- Scope: SESSION
-- Type: Boolean
-- Default value: `ON`
-- This variable is used to control whether to enable the `Chunk` data encoding format in Coprocessor.
+-   スコープ: セッション
+-   タイプ: ブール値
+-   デフォルト値: `ON`
+-   この変数は、Coprocessorで`Chunk`データ エンコーディング フォーマットを有効にするかどうかを制御するために使用されます。
 
-### tidb_enable_clustered_index <span class="version-mark">New in v5.0</span>
+### tidb_enable_clustered_index <span class="version-mark">v5.0 の新</span>機能 {#tidb-enable-clustered-index-span-class-version-mark-new-in-v5-0-span}
 
-- Scope: SESSION | GLOBAL
-- Persists to cluster: Yes
-- Type: Enumeration
-- Default value: `ON`
-- Possible values: `OFF`, `ON`, `INT_ONLY`
-- This variable is used to control whether to create the primary key as a [clustered index](/clustered-indexes.md) by default. "By default" here means that the statement does not explicitly specify the keyword `CLUSTERED`/`NONCLUSTERED`. Supported values are `OFF`, `ON`, and `INT_ONLY`:
-    - `OFF` indicates that primary keys are created as non-clustered indexes by default.
-    - `ON` indicates that primary keys are created as clustered indexes by default.
-    - `INT_ONLY` indicates that the behavior is controlled by the configuration item `alter-primary-key`. If `alter-primary-key` is set to `true`, all primary keys are created as non-clustered indexes by default. If it is set to `false`, only the primary keys which consist of an integer column are created as clustered indexes.
+-   スコープ: セッション |グローバル
+-   クラスターに永続化: はい
+-   タイプ: 列挙
+-   デフォルト値: `ON`
+-   可能な値: `OFF` 、 `ON` 、 `INT_ONLY`
+-   この変数は、デフォルトで主キーを[クラスター化インデックス](/clustered-indexes.md)として作成するかどうかを制御するために使用されます。ここでの「デフォルト」とは、ステートメントがキーワード`CLUSTERED` / `NONCLUSTERED`を明示的に指定していないことを意味します。サポートされている値は`OFF` 、 `ON` 、および`INT_ONLY`です。
+    -   `OFF`は、主キーが既定で非クラスター化インデックスとして作成されることを示します。
+    -   `ON`は、主キーが既定でクラスター化インデックスとして作成されることを示します。
+    -   `INT_ONLY`は、動作が構成アイテム`alter-primary-key`によって制御されることを示します。 `alter-primary-key`が`true`に設定されている場合、すべての主キーはデフォルトで非クラスター化インデックスとして作成されます。 `false`に設定すると、整数列で構成される主キーのみがクラスター化インデックスとして作成されます。
 
-### tidb_enable_ddl
+### tidb_enable_ddl {#tidb-enable-ddl}
 
-- Scope: GLOBAL
-- Persists to cluster: No, only applicable to the current TiDB instance that you are connecting to.
-- Default value: `ON`
-- Possible values: `OFF`, `ON`
-- This variable controls whether the corresponding TiDB server can run DDL statements or not.
+-   範囲: グローバル
+-   Persists to cluster: いいえ、接続している現在の TiDB インスタンスにのみ適用されます。
+-   デフォルト値: `ON`
+-   可能な値: `OFF` 、 `ON`
+-   この変数は、対応する TiDBサーバーが DDL ステートメントを実行できるかどうかを制御します。
 
-### tidb_enable_collect_execution_info
+### tidb_enable_collect_execution_info {#tidb-enable-collect-execution-info}
 
 <CustomContent platform="tidb-cloud">
 
-> **Note:**
+> **ノート：**
 >
-> This TiDB variable is not applicable to TiDB Cloud.
+> この TiDB 変数はTiDB Cloudには適用されません。
 
 </CustomContent>
 
-- Scope: GLOBAL
-- Persists to cluster: No, only applicable to the current TiDB instance that you are connecting to.
-- Type: Boolean
-- Default value: `ON`
-- This variable controls whether to record the execution information of each operator in the slow query log.
+-   範囲: グローバル
+-   Persists to cluster: いいえ、接続している現在の TiDB インスタンスにのみ適用されます。
+-   タイプ: ブール値
+-   デフォルト値: `ON`
+-   この変数は、各オペレーターの実行情報をスロー クエリ ログに記録するかどうかを制御します。
 
-### tidb_enable_column_tracking <span class="version-mark">New in v5.4.0</span>
+### tidb_enable_column_tracking v5.4.0<span class="version-mark">の新機能</span> {#tidb-enable-column-tracking-span-class-version-mark-new-in-v5-4-0-span}
 
-> **Warning:**
+> **警告：**
 >
-> Currently, collecting statistics on `PREDICATE COLUMNS` is an experimental feature. It is not recommended that you use it in production environments.
+> 現在、 `PREDICATE COLUMNS`に関する統計の収集は実験的機能です。実稼働環境で使用することはお勧めしません。
 
-- Scope: GLOBAL
-- Persists to cluster: Yes
-- Type: Boolean
-- Default value: `OFF`
-- This variable controls whether to enable TiDB to collect `PREDICATE COLUMNS`. After enabling the collection, if you disable it, the information of previously collected `PREDICATE COLUMNS` is cleared. For details, see [Collect statistics on some columns](/statistics.md#collect-statistics-on-some-columns).
+-   範囲: グローバル
+-   クラスターに永続化: はい
+-   タイプ: ブール値
+-   デフォルト値: `OFF`
+-   この変数は、TiDB が`PREDICATE COLUMNS`を収集できるようにするかどうかを制御します。収集を有効にした後、無効にすると、以前に収集された`PREDICATE COLUMNS`の情報はクリアされます。詳細については、 [一部の列で統計を収集する](/statistics.md#collect-statistics-on-some-columns)を参照してください。
 
-### tidb_enable_concurrent_ddl <span class="version-mark">New in v6.2.0</span>
+### tidb_enable_concurrent_ddl v6.2.0<span class="version-mark">の新機能</span> {#tidb-enable-concurrent-ddl-span-class-version-mark-new-in-v6-2-0-span}
 
-> **Warning:**
+> **警告：**
 >
-> **DO NOT modify this variable**. The risk of disabling this variable is unknown and might corrupt the metadata of the cluster.
+> **この変数を変更しないで**ください。この変数を無効にするリスクは不明であり、クラスターのメタデータが破損する可能性があります。
 
-- Scope: GLOBAL
-- Persists to cluster: Yes
-- Type: Boolean
-- Default value: `ON`
-- This variable controls whether to allow TiDB to use concurrent DDL statements. When concurrent DDL statements are used, the DDL execution flow is changed, and DDL statements are not easily blocked by other DDL statements. In addition, multiple indexes can be added at the same time.
+-   範囲: グローバル
+-   クラスターに永続化: はい
+-   タイプ: ブール値
+-   デフォルト値: `ON`
+-   この変数は、TiDB が同時 DDL ステートメントを使用できるようにするかどうかを制御します。並行 DDL ステートメントを使用すると、DDL 実行フローが変更され、DDL ステートメントが他の DDL ステートメントによって簡単にブロックされなくなります。また、複数のインデックスを同時に追加することもできます。
 
-### tidb_enable_enhanced_security
+### tidb_enable_enhanced_security {#tidb-enable-enhanced-security}
 
-- Scope: NONE
-- Type: Boolean
+-   スコープ: なし
+-   タイプ: ブール値
 
 <CustomContent platform="tidb">
 
-- Default value: `OFF`
-- This variable indicates whether the TiDB server you are connected to has the Security Enhanced Mode (SEM) enabled. To change its value, you need to modify the value of `enable-sem` in your TiDB server configuration file and restart the TiDB server.
+-   デフォルト値: `OFF`
+-   この変数は、接続している TiDBサーバーで Security Enhanced Mode (SEM) が有効になっているかどうかを示します。この値を変更するには、TiDBサーバー構成ファイルで値`enable-sem`を変更し、TiDBサーバーを再起動する必要があります。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-- Default value: `ON`
-- This variable is read-only. For TiDB Cloud, the Security Enhanced Mode (SEM) is enabled by default.
+-   デフォルト値: `ON`
+-   この変数は読み取り専用です。 TiDB Cloudでは、Security Enhanced Mode (SEM) がデフォルトで有効になっています。
 
 </CustomContent>
 
-- SEM is inspired by the design of systems such as [Security-Enhanced Linux](https://en.wikipedia.org/wiki/Security-Enhanced_Linux). It reduces the abilities of users with the MySQL `SUPER` privilege and instead requires `RESTRICTED` fine-grained privileges to be granted as a replacement. These fine-grained privileges include:
-    - `RESTRICTED_TABLES_ADMIN`: The ability to write data to system tables in the `mysql` schema and to see sensitive columns on `information_schema` tables.
-    - `RESTRICTED_STATUS_ADMIN`: The ability to see sensitive variables in the command `SHOW STATUS`.
-    - `RESTRICTED_VARIABLES_ADMIN`: The ability to see and set sensitive variables in `SHOW [GLOBAL] VARIABLES` and `SET`.
-    - `RESTRICTED_USER_ADMIN`: The ability to prevent other users from making changes or dropping a user account.
+-   SEM は、次のようなシステムの設計に触発されています[セキュリティが強化された Linux](https://en.wikipedia.org/wiki/Security-Enhanced_Linux) 。これにより、MySQL `SUPER`権限を持つユーザーの能力が低下し、代わりに`RESTRICTED`つのきめ細かい権限を付与する必要があります。これらのきめの細かい権限には次のものがあります。
+    -   `RESTRICTED_TABLES_ADMIN` : `mysql`のスキーマのシステム テーブルにデータを書き込み、 `information_schema`のテーブルの機密列を表示する機能。
+    -   `RESTRICTED_STATUS_ADMIN` : コマンド`SHOW STATUS`で機密変数を表示する機能。
+    -   `RESTRICTED_VARIABLES_ADMIN` : `SHOW [GLOBAL] VARIABLES`および`SET`で機密変数を表示および設定する機能。
+    -   `RESTRICTED_USER_ADMIN` : 他のユーザーがユーザー アカウントを変更したり削除したりできないようにする機能。
 
-### tidb_enable_exchange_partition
+### tidb_enable_exchange_partition {#tidb-enable-exchange-partition}
 
-- Scope: SESSION | GLOBAL
-- Persists to cluster: Yes
-- Type: Boolean
-- Default value: `ON`
-- This variable controls whether to enable the [`exchange partitions with tables`](/partitioned-table.md#partition-management) feature. The default value is `ON`, that is, `exchange partitions with tables` is enabled by default.
-- This variable is deprecated since v6.3.0. Its value will be fixed to the default value `ON`, that is, `exchange partitions with tables` is enabled by default.
+-   スコープ: セッション |グローバル
+-   クラスターに永続化: はい
+-   タイプ: ブール値
+-   デフォルト値: `ON`
+-   この変数は、 [`exchange partitions with tables`](/partitioned-table.md#partition-management)機能を有効にするかどうかを制御します。デフォルト値は`ON`です。つまり、デフォルトで`exchange partitions with tables`が有効になっています。
+-   この変数は、v6.3.0 以降では非推奨です。その値はデフォルト値`ON`に固定されます。つまり、デフォルトで`exchange partitions with tables`が有効になっています。
 
-### tidb_enable_extended_stats
+### tidb_enable_extended_stats {#tidb-enable-extended-stats}
 
 <CustomContent platform="tidb-cloud">
 
-> **Note:**
+> **ノート：**
 >
-> This TiDB variable is not applicable to TiDB Cloud.
+> この TiDB 変数はTiDB Cloudには適用されません。
 
 </CustomContent>
 
 <CustomContent platform="tidb">
 
-- Scope: SESSION | GLOBAL
-- Persists to cluster: Yes
-- Type: Boolean
-- Default value: `OFF`
-- This variable indicates whether TiDB can collect the extended statistic to guide the optimizer. See [Introduction to Extended Statistics](/extended-statistics.md) for more information.
+-   スコープ: セッション |グローバル
+-   クラスターに永続化: はい
+-   タイプ: ブール値
+-   デフォルト値: `OFF`
+-   この変数は、オプティマイザをガイドするために TiDB が拡張統計を収集できるかどうかを示します。詳細については、 [拡張統計の概要](/extended-statistics.md)を参照してください。
 
 </CustomContent>
 
-### tidb_enable_external_ts_read <span class="version-mark">New in v6.4.0</span>
+### tidb_enable_external_ts_read v6.4.0<span class="version-mark">の新機能</span> {#tidb-enable-external-ts-read-span-class-version-mark-new-in-v6-4-0-span}
 
-- Scope: SESSION | GLOBAL
-- Persists to cluster: Yes
-- Type: Boolean
-- Default value: `OFF`
-- If this variable is set to `ON`, TiDB reads data with the timestamp specified by [`tidb_external_ts`](#tidb_external_ts-new-in-v640).
+-   スコープ: セッション |グローバル
+-   クラスターに永続化: はい
+-   タイプ: ブール値
+-   デフォルト値: `OFF`
+-   この変数が`ON`に設定されている場合、TiDB は[`tidb_external_ts`](#tidb_external_ts-new-in-v640)で指定されたタイムスタンプを持つデータを読み取ります。
 
-### tidb_external_ts <span class="version-mark">New in v6.4.0</span>
+### tidb_external_ts v6.4.0<span class="version-mark">の新機能</span> {#tidb-external-ts-span-class-version-mark-new-in-v6-4-0-span}
 
-- Scope: GLOBAL
-- Persists to cluster: Yes
-- Type: Integer
-- Default value: `0`
-- If [`tidb_enable_external_ts_read`](#tidb_enable_external_ts_read-new-in-v640) is set to `ON`, TiDB reads data with the timestamp specified by this variable.
+-   範囲: グローバル
+-   クラスターに永続化: はい
+-   タイプ: 整数
+-   デフォルト値: `0`
+-   [`tidb_enable_external_ts_read`](#tidb_enable_external_ts_read-new-in-v640)が`ON`に設定されている場合、TiDB はこの変数で指定されたタイムスタンプでデータを読み取ります。
 
-### tidb_enable_fast_analyze
+### tidb_enable_fast_analyze {#tidb-enable-fast-analyze}
 
-> **Warning:**
+> **警告：**
 >
-> Currently, `Fast Analyze` is an experimental feature. It is not recommended that you use it in production environments.
+> 現在、 `Fast Analyze`は実験的機能です。実稼働環境で使用することはお勧めしません。
 
-- Scope: SESSION | GLOBAL
-- Persists to cluster: Yes
-- Type: Boolean
-- Default value: `OFF`
-- This variable is used to set whether to enable the statistics `Fast Analyze` feature.
-- If the statistics `Fast Analyze` feature is enabled, TiDB randomly samples about 10,000 rows of data as statistics. When the data is distributed unevenly or the data size is small, the statistics accuracy is low. This might lead to a non-optimal execution plan, for example, selecting a wrong index. If the execution time of the regular `Analyze` statement is acceptable, it is recommended to disable the `Fast Analyze` feature.
+-   スコープ: セッション |グローバル
+-   クラスターに永続化: はい
+-   タイプ: ブール値
+-   デフォルト値: `OFF`
+-   この変数は、統計`Fast Analyze`機能を有効にするかどうかを設定するために使用されます。
+-   統計`Fast Analyze`機能が有効になっている場合、TiDB は統計として約 10,000 行のデータをランダムにサンプリングします。データが偏在している場合やデータサイズが小さい場合、統計精度は低くなります。これにより、不適切なインデックスを選択するなど、最適でない実行計画が発生する可能性があります。通常の`Analyze`ステートメントの実行時間が許容できる場合は、 `Fast Analyze`機能を無効にすることをお勧めします。
 
-### `tidb_enable_foreign_key` <span class="version-mark">New in v6.3.0</span>
+### <code>tidb_enable_foreign_key</code><span class="version-mark">の新機能</span> {#code-tidb-enable-foreign-key-code-span-class-version-mark-new-in-v6-3-0-span}
 
-> **Warning:**
+> **警告：**
 >
-> The feature controlled by this variable is not fully functional in the current TiDB version. Do not change the default value.
+> この変数によって制御される機能は、現在の TiDB バージョンでは完全には機能しません。デフォルト値を変更しないでください。
 
-- Scope: GLOBAL
-- Persists to cluster: Yes
-- Type: Boolean
-- Default value: `OFF`
-- This variable controls whether to enable the `FOREIGN KEY` feature.
+-   範囲: グローバル
+-   クラスターに永続化: はい
+-   タイプ: ブール値
+-   デフォルト値: `OFF`
+-   この変数は、 `FOREIGN KEY`機能を有効にするかどうかを制御します。
 
-### tidb_enable_gc_aware_memory_track
+### tidb_enable_gc_aware_memory_track {#tidb-enable-gc-aware-memory-track}
 
-> **Warning:**
+> **警告：**
 >
-> This variable is an internal variable for debugging in TiDB. It might be removed in a future release. **Do not** set this variable.
+> この変数は、TiDB でのデバッグ用の内部変数です。将来のリリースで削除される可能性があります。この変数を設定**しないでください**。
 
-- Scope: GLOBAL
-- Persists to cluster: Yes
-- Type: Boolean
-- Default value: `OFF`
-- This variable controls whether to enable GC-Aware memory track.
+-   範囲: グローバル
+-   クラスターに永続化: はい
+-   タイプ: ブール値
+-   デフォルト値: `OFF`
+-   この変数は、GC-Aware メモリ トラックを有効にするかどうかを制御します。
 
-### `tidb_enable_general_plan_cache` <span class="version-mark">New in v6.3.0</span>
+### <code>tidb_enable_general_plan_cache</code><span class="version-mark">の新機能</span> {#code-tidb-enable-general-plan-cache-code-span-class-version-mark-new-in-v6-3-0-span}
 
-> **Warning:**
+> **警告：**
 >
-> The feature controlled by this variable is not fully functional in the current TiDB version. Do not change the default value.
+> この変数によって制御される機能は、現在の TiDB バージョンでは完全には機能しません。デフォルト値を変更しないでください。
 
-- Scope: SESSION | GLOBAL
-- Persists to cluster: Yes
-- Type: Boolean
-- Default value: `OFF`
-- This variable controls whether to enable the General Plan Cache feature.
+-   スコープ: セッション |グローバル
+-   クラスターに永続化: はい
+-   タイプ: ブール値
+-   デフォルト値: `OFF`
+-   この変数は、General Plan Cache 機能を有効にするかどうかを制御します。
 
-### tidb_enable_gogc_tuner <span class="version-mark">New in v6.4.0</span>
+### tidb_enable_gogc_tuner v6.4.0<span class="version-mark">の新機能</span> {#tidb-enable-gogc-tuner-span-class-version-mark-new-in-v6-4-0-span}
 
-- Scope: GLOBAL
-- Persists to cluster: No, only applicable to the current TiDB instance that you are connecting to.
-- Type: Boolean
-- Default value: `ON`
-- This variable controls whether to enable GOGC Tuner.
+-   範囲: グローバル
+-   Persists to cluster: いいえ、接続している現在の TiDB インスタンスにのみ適用されます。
+-   タイプ: ブール値
+-   デフォルト値: `ON`
+-   この変数は、GOGC チューナーを有効にするかどうかを制御します。
 
-### tidb_enable_historical_stats
+### tidb_enable_historical_stats {#tidb-enable-historical-stats}
 
-- Scope: GLOBAL
-- Persists to cluster: Yes
-- Type: Boolean
-- Default value: `OFF`
-- This variable is used for an unreleased feature. **Do not change the variable value**.
+-   範囲: グローバル
+-   クラスターに永続化: はい
+-   タイプ: ブール値
+-   デフォルト値: `OFF`
+-   この変数は、未リリースの機能に使用されます。**変数値を変更しないでください**。
 
-### tidb_enable_index_merge <span class="version-mark">New in v4.0</span>
+### tidb_enable_index_merge <span class="version-mark">v4.0 の新</span>機能 {#tidb-enable-index-merge-span-class-version-mark-new-in-v4-0-span}
 
-> **Note:**
+> **ノート：**
 >
-> - After upgrading a TiDB cluster from versions earlier than v4.0.0 to v5.4.0 or later, this variable is disabled by default to prevent performance regression due to changes of execution plans.
+> -   TiDB クラスターを v4.0.0 より前のバージョンから v5.4.0 以降にアップグレードすると、実行計画の変更によるパフォーマンスの低下を防ぐために、この変数はデフォルトで無効になります。
 >
-> - After upgrading a TiDB cluster from v4.0.0 or later to v5.4.0 or later, this variable remains the setting before the upgrade.
+> -   TiDB クラスターを v4.0.0 以降から v5.4.0 以降にアップグレードした後、この変数はアップグレード前の設定のままです。
 >
-> - Since v5.4.0, for a newly deployed TiDB cluster, this variable is enabled by default.
+> -   v5.4.0 以降、新しくデプロイされた TiDB クラスターの場合、この変数はデフォルトで有効になっています。
 
-- Scope: SESSION | GLOBAL
-- Persists to cluster: Yes
-- Type: Boolean
-- Default value: `ON`
-- This variable is used to control whether to enable the index merge feature.
+-   スコープ: セッション |グローバル
+-   クラスターに永続化: はい
+-   タイプ: ブール値
+-   デフォルト値: `ON`
+-   この変数は、インデックス マージ機能を有効にするかどうかを制御するために使用されます。
 
-### tidb_enable_index_merge_join
+### tidb_enable_index_merge_join {#tidb-enable-index-merge-join}
 
-- Scope: SESSION | GLOBAL
-- Persists to cluster: Yes
-- Type: Boolean
-- Default value: `OFF`
-- Specifies whether to enable the `IndexMergeJoin` operator.
-- This variable is used only for the internal operation of TiDB. It is **NOT recommended** to adjust it. Otherwise, data correctness might be affected.
+-   スコープ: セッション |グローバル
+-   クラスターに永続化: はい
+-   タイプ: ブール値
+-   デフォルト値: `OFF`
+-   `IndexMergeJoin`演算子を有効にするかどうかを指定します。
+-   この変数は、TiDB の内部操作にのみ使用されます。調整することは**お勧めしません**。そうしないと、データの正確性が影響を受ける可能性があります。
 
-### tidb_enable_legacy_instance_scope <span class="version-mark">New in v6.0.0</span>
+### tidb_enable_legacy_instance_scope v6.0.0<span class="version-mark">の新機能</span> {#tidb-enable-legacy-instance-scope-span-class-version-mark-new-in-v6-0-0-span}
 
-- Scope: SESSION | GLOBAL
-- Persists to cluster: Yes
-- Type: Boolean
-- Default value: `ON`
-- This variable permits `INSTANCE` scoped variables to be set using the `SET SESSION` as well as `SET GLOBAL` syntax.
-- This option is enabled by default for compatibility with earlier versions of TiDB.
+-   スコープ: セッション |グローバル
+-   クラスターに永続化: はい
+-   タイプ: ブール値
+-   デフォルト値: `ON`
+-   この変数では、 `SET SESSION`および`SET GLOBAL`構文を使用して`INSTANCE`のスコープ変数を設定できます。
+-   このオプションは、以前のバージョンの TiDB との互換性のためにデフォルトで有効になっています。
 
-### tidb_enable_list_partition <span class="version-mark">New in v5.0</span>
+### tidb_enable_list_partition <span class="version-mark">v5.0 の新</span>機能 {#tidb-enable-list-partition-span-class-version-mark-new-in-v5-0-span}
 
-- Scope: SESSION | GLOBAL
-- Persists to cluster: Yes
-- Type: Boolean
-- Default value: `ON`
-- This variable is used to set whether to enable the `LIST (COLUMNS) TABLE PARTITION` feature.
+-   スコープ: セッション |グローバル
+-   クラスターに永続化: はい
+-   タイプ: ブール値
+-   デフォルト値: `ON`
+-   この変数は、 `LIST (COLUMNS) TABLE PARTITION`機能を有効にするかどうかを設定するために使用されます。
 
-### tidb_enable_local_txn
+### tidb_enable_local_txn {#tidb-enable-local-txn}
 
-- Scope: GLOBAL
-- Persists to cluster: Yes
-- Type: Boolean
-- Default value: `OFF`
-- This variable is used for an unreleased feature. **Do not change the variable value**.
+-   範囲: グローバル
+-   クラスターに永続化: はい
+-   タイプ: ブール値
+-   デフォルト値: `OFF`
+-   この変数は、未リリースの機能に使用されます。**変数値を変更しないでください**。
 
-### tidb_enable_metadata_lock <span class="version-mark">New in v6.3.0</span>
+### tidb_enable_metadata_lock v6.3.0<span class="version-mark">の新機能</span> {#tidb-enable-metadata-lock-span-class-version-mark-new-in-v6-3-0-span}
 
-- Scope: GLOBAL
-- Persists to cluster: Yes
-- Type: Boolean
-- Default value: `ON`
+-   範囲: グローバル
+-   クラスターに永続化: はい
+-   タイプ: ブール値
+-   デフォルト値: `ON`
 
 <CustomContent platform="tidb">
 
-- This variable is used to set whether to enable the [Metadata lock](/metadata-lock.md) feature. Note that when setting this variable, you need to make sure that there are no running DDL statements in the cluster. Otherwise, the data might be incorrect or inconsistent.
+-   この変数は、 [メタデータ ロック](/metadata-lock.md)機能を有効にするかどうかを設定するために使用されます。この変数を設定するときは、クラスター内で実行中の DDL ステートメントがないことを確認する必要があることに注意してください。そうしないと、データが正しくないか、矛盾している可能性があります。
 
 </CustomContent>
 
-### tidb_enable_mutation_checker <span class="version-mark">New in v6.0.0</span>
+### tidb_enable_mutation_checker v6.0.0<span class="version-mark">の新機能</span> {#tidb-enable-mutation-checker-span-class-version-mark-new-in-v6-0-0-span}
 
-- Scope: SESSION | GLOBAL
-- Persists to cluster: Yes
-- Type: Boolean
-- Default value: `ON`
-- This variable is used to control whether to enable TiDB mutation checker, which is a tool used to check consistency between data and indexes during the execution of DML statements. If the checker returns an error for a statement, TiDB rolls back the execution of the statement. Enabling this variable causes a slight increase in CPU usage. For more information, see [Troubleshoot Inconsistency Between Data and Indexes](/troubleshoot-data-inconsistency-errors.md).
-- For new clusters of v6.0.0 or later versions, the default value is `ON`. For existing clusters that upgrade from versions earlier than v6.0.0, the default value is `OFF`.
+-   スコープ: セッション |グローバル
+-   クラスターに永続化: はい
+-   タイプ: ブール値
+-   デフォルト値: `ON`
+-   この変数は、DML ステートメントの実行中にデータとインデックス間の整合性をチェックするために使用されるツールである TiDB ミューテーション チェッカーを有効にするかどうかを制御するために使用されます。チェッカーがステートメントのエラーを返した場合、TiDB はステートメントの実行をロールバックします。この変数を有効にすると、CPU 使用率がわずかに増加します。詳細については、 [データとインデックス間の不一致のトラブルシューティング](/troubleshoot-data-inconsistency-errors.md)を参照してください。
+-   v6.0.0 以降のバージョンの新しいクラスターの場合、デフォルト値は`ON`です。 v6.0.0 より前のバージョンからアップグレードする既存のクラスターの場合、デフォルト値は`OFF`です。
 
-### tidb_enable_new_cost_interface <span class="version-mark">New in v6.2.0</span>
+### tidb_enable_new_cost_interface v6.2.0<span class="version-mark">の新機能</span> {#tidb-enable-new-cost-interface-span-class-version-mark-new-in-v6-2-0-span}
 
-- Scope: SESSION | GLOBAL
-- Persists to cluster: Yes
-- Type: Boolean
-- Default value: `ON`
-- TiDB v6.2.0 refactors the implementation of previous cost model. This variable controls whether to enable the refactored Cost Model implementation.
-- This variable is enabled by default because the refactored Cost Model uses the same cost formula as before, which does not change the plan decision.
-- If your cluster is upgraded from v6.1 to v6.2, this variable remains `OFF`, and it is recommended to enable it manually. If your cluster is upgraded from a version earlier than v6.1, this variable sets to `ON` by default.
+-   スコープ: セッション |グローバル
+-   クラスターに永続化: はい
+-   タイプ: ブール値
+-   デフォルト値: `ON`
+-   TiDB v6.2.0 は、以前のコスト モデルの実装をリファクタリングします。この変数は、リファクタリングされたコスト モデルの実装を有効にするかどうかを制御します。
+-   この変数はデフォルトで有効になっています。これは、リファクタリングされたコスト モデルが以前と同じコスト式を使用し、計画の決定が変更されないためです。
+-   クラスターが v6.1 から v6.2 にアップグレードされた場合、この変数は`OFF`のままであり、手動で有効にすることをお勧めします。クラスターが v6.1 より前のバージョンからアップグレードされた場合、この変数はデフォルトで`ON`に設定されます。
 
-### tidb_enable_new_only_full_group_by_check <span class="version-mark">New in v6.1.0</span>
+### tidb_enable_new_only_full_group_by_check v6.1.0<span class="version-mark">の新機能</span> {#tidb-enable-new-only-full-group-by-check-span-class-version-mark-new-in-v6-1-0-span}
 
-- Scope: SESSION | GLOBAL
-- Persists to cluster: Yes
-- Type: Boolean
-- Default value: `OFF`
-- This variable controls the behavior when TiDB performs the `ONLY_FULL_GOUP_BY` check. For detailed information about `ONLY_FULL_GROUP_BY`, see the [MySQL documentation](https://dev.mysql.com/doc/refman/8.0/en/sql-mode.html#sqlmode_only_full_group_by). In v6.1.0, TiDB handles this check more strictly and correctly.
-- To avoid potential compatibility issues caused by version upgrades, the default value of this variable is `OFF` in v6.1.0.
+-   スコープ: セッション |グローバル
+-   クラスターに永続化: はい
+-   タイプ: ブール値
+-   デフォルト値: `OFF`
+-   この変数は、TiDB が`ONLY_FULL_GOUP_BY`チェックを実行するときの動作を制御します。 `ONLY_FULL_GROUP_BY`の詳細については、 [MySQL ドキュメント](https://dev.mysql.com/doc/refman/8.0/en/sql-mode.html#sqlmode_only_full_group_by)を参照してください。 v6.1.0 では、TiDB はこのチェックをより厳密かつ正確に処理します。
+-   バージョンのアップグレードに起因する潜在的な互換性の問題を回避するために、この変数のデフォルト値は v6.1.0 では`OFF`です。
 
-### tidb_enable_noop_functions <span class="version-mark">New in v4.0</span>
+### tidb_enable_noop_functions <span class="version-mark">v4.0 の新</span>機能 {#tidb-enable-noop-functions-span-class-version-mark-new-in-v4-0-span}
 
-- Scope: SESSION | GLOBAL
-- Persists to cluster: Yes
-- Type: Enumeration
-- Default value: `OFF`
-- Possible values: `OFF`, `ON`, `WARN`
-- By default, TiDB returns an error when you attempt to use the syntax for functionality that is not yet implemented. When the variable value is set to `ON`, TiDB silently ignores such cases of unavailable functionality, which is helpful if you cannot make changes to the SQL code.
-- Enabling `noop` functions controls the following behaviors:
-    * `LOCK IN SHARE MODE` syntax
-    * `SQL_CALC_FOUND_ROWS` syntax
-    * `START TRANSACTION READ ONLY` and `SET TRANSACTION READ ONLY` syntax
-    * The `tx_read_only`, `transaction_read_only`, `offline_mode`, `super_read_only`, `read_only` and `sql_auto_is_null` system variables
-    * `GROUP BY <expr> ASC|DESC` syntax
+-   スコープ: セッション |グローバル
+-   クラスターに永続化: はい
+-   タイプ: 列挙
+-   デフォルト値: `OFF`
+-   可能な値: `OFF` 、 `ON` 、 `WARN`
+-   デフォルトでは、まだ実装されていない機能の構文を使用しようとすると、TiDB はエラーを返します。変数値が`ON`に設定されている場合、TiDB はそのような利用できない機能のケースを黙って無視します。これは、SQL コードを変更できない場合に役立ちます。
+-   `noop`関数を有効にすると、次の動作が制御されます。
+    -   `LOCK IN SHARE MODE`構文
+    -   `SQL_CALC_FOUND_ROWS`構文
+    -   `START TRANSACTION READ ONLY`と`SET TRANSACTION READ ONLY`の構文
+    -   `tx_read_only` 、 `transaction_read_only` 、 `offline_mode` 、 `super_read_only` 、 `read_only` 、および`sql_auto_is_null`システム変数
+    -   `GROUP BY <expr> ASC|DESC`構文
 
-> **Warning:**
+> **警告：**
 >
-> Only the default value of `OFF` can be considered safe. Setting `tidb_enable_noop_functions=1` might lead to unexpected behaviors in your application, because it permits TiDB to ignore certain syntax without providing an error. For example, the syntax `START TRANSACTION READ ONLY` is permitted, but the transaction remains in read-write mode.
+> デフォルト値の`OFF`だけが安全であると見なすことができます。設定`tidb_enable_noop_functions=1`は、TiDB がエラーを提供せずに特定の構文を無視することを許可するため、アプリケーションで予期しない動作につながる可能性があります。たとえば、構文`START TRANSACTION READ ONLY`は許可されますが、トランザクションは読み書きモードのままです。
 
-### tidb_enable_noop_variables <span class="version-mark">New in v6.2.0</span>
+### tidb_enable_noop_variables v6.2.0<span class="version-mark">の新機能</span> {#tidb-enable-noop-variables-span-class-version-mark-new-in-v6-2-0-span}
 
-- Scope: GLOBAL
-- Persists to cluster: Yes
-- Default value: `ON`
-- If you set the variable value to `OFF`, TiDB behaves as follows:
-    * When you use `SET` to set a `noop` variable, TiDB returns the `"setting *variable_name* has no effect in TiDB"` warning.
-    * The result of `SHOW [SESSION | GLOBAL] VARIABLES` does not include `noop` variables.
-    * When you use `SELECT` to read a `noop` variable, TiDB returns the `"variable *variable_name* has no effect in TiDB"` warning.
-- To check whether a TiDB instance has set and read the `noop` variable, you can use the `SELECT * FROM INFORMATION_SCHEMA.CLIENT_ERRORS_SUMMARY_GLOBAL;` statement.
+-   範囲: グローバル
+-   クラスターに永続化: はい
+-   デフォルト値: `ON`
+-   変数の値を`OFF`に設定すると、TiDB は次のように動作します。
+    -   `SET`を使用して`noop`変数を設定すると、TiDB は`"setting *variable_name* has no effect in TiDB"`警告を返します。
+    -   `SHOW [SESSION | GLOBAL] VARIABLES`の結果には`noop`の変数は含まれません。
+    -   `SELECT`を使用して`noop`変数を読み取ると、TiDB は`"variable *variable_name* has no effect in TiDB"`警告を返します。
+-   TiDB インスタンスが`noop`変数を設定して読み取ったかどうかを確認するには、 `SELECT * FROM INFORMATION_SCHEMA.CLIENT_ERRORS_SUMMARY_GLOBAL;`ステートメントを使用できます。
 
-### `tidb_enable_null_aware_anti_join` <span class="version-mark">New in v6.3.0</span>
+### <code>tidb_enable_null_aware_anti_join</code><span class="version-mark">の新機能</span> {#code-tidb-enable-null-aware-anti-join-code-span-class-version-mark-new-in-v6-3-0-span}
 
-- Scope: SESSION | GLOBAL
-- Persists to cluster: Yes
-- Default value: `OFF`
-- Type: Boolean
-- This variable controls whether TiDB applies Null Aware Hash Join when ANTI JOIN is generated by subqueries led by special set operators `NOT IN` and `!= ALL`.
+-   スコープ: セッション |グローバル
+-   クラスターに永続化: はい
+-   デフォルト値: `OFF`
+-   タイプ: ブール値
+-   この変数は、ANTI JOIN が特別なセット演算子`NOT IN`および`!= ALL`によって導かれるサブクエリによって生成されるときに、TiDB が Null Aware Hash Join を適用するかどうかを制御します。
 
-### tidb_enable_outer_join_reorder <span class="version-mark">New in v6.1.0</span>
+### tidb_enable_outer_join_reorder v6.1.0<span class="version-mark">の新機能</span> {#tidb-enable-outer-join-reorder-span-class-version-mark-new-in-v6-1-0-span}
 
-- Scope: SESSION | GLOBAL
-- Persists to cluster: Yes
-- Type: Boolean
-- Default value: `ON`
-- Since v6.1.0, the [Join Reorder](/join-reorder.md) algorithm of TiDB supports Outer Join. This variable controls whether TiDB enables the Join Reorder's support for Outer Join.
-- If your cluster is upgraded from an earlier version of TiDB, note the following:
+-   スコープ: セッション |グローバル
+-   クラスターに永続化: はい
+-   タイプ: ブール値
+-   デフォルト値: `ON`
+-   v6.1.0 以降、TiDB の[結合したテーブルの再配置](/join-reorder.md)アルゴリズムは Outer Join をサポートしています。この変数は、TiDB が Join Reorder の Outer Join のサポートを有効にするかどうかを制御します。
+-   クラスターが以前のバージョンの TiDB からアップグレードされている場合は、次の点に注意してください。
 
-    - If the TiDB version before the upgrade is earlier than v6.1.0, the default value of this variable after the upgrade is `ON`.
-    - If the TiDB version before the upgrade is v6.1.0 or later, the default value of the variable after the upgrade follows the value before the upgrade.
+    -   アップグレード前の TiDB のバージョンが v6.1.0 より前の場合、アップグレード後のこの変数のデフォルト値は`ON`です。
+    -   アップグレード前のTiDBのバージョンがv6.1.0以降の場合、アップグレード後の変数のデフォルト値はアップグレード前の値に従います。
 
-### tidb_enable_ordered_result_mode
+### tidb_enable_ordered_result_mode {#tidb-enable-ordered-result-mode}
 
-- Scope: SESSION | GLOBAL
-- Persists to cluster: Yes
-- Type: Boolean
-- Default value: `OFF`
-- Specifies whether to sort the final output result automatically.
-- For example, with this variable enabled, TiDB processes `SELECT a, MAX(b) FROM t GROUP BY a` as `SELECT a, MAX(b) FROM t GROUP BY a ORDER BY a, MAX(b)`.
+-   スコープ: セッション |グローバル
+-   クラスターに永続化: はい
+-   タイプ: ブール値
+-   デフォルト値: `OFF`
+-   最終出力結果を自動的にソートするかどうかを指定します。
+-   たとえば、この変数を有効にすると、TiDB は`SELECT a, MAX(b) FROM t GROUP BY a`を`SELECT a, MAX(b) FROM t GROUP BY a ORDER BY a, MAX(b)`として処理します。
 
-### tidb_enable_paging <span class="version-mark">New in v5.4.0</span>
+### tidb_enable_paging v5.4.0<span class="version-mark">の新機能</span> {#tidb-enable-paging-span-class-version-mark-new-in-v5-4-0-span}
 
-- Scope: SESSION | GLOBAL
-- Persists to cluster: Yes
-- Type: Boolean
-- Default value: `ON`
-- This variable controls whether to use the method of paging to send coprocessor requests. For TiDB versions in [v5.4.0, v6.2.0), this variable only takes effect on the `IndexLookup` operator; for v6.2.0 and later, this variable takes effect globally. Starting from v6.4.0, the default value of this variable is changed from `OFF` to `ON`.
-- User scenarios:
+-   スコープ: セッション |グローバル
+-   クラスターに永続化: はい
+-   タイプ: ブール値
+-   デフォルト値: `ON`
+-   この変数は、ページングの方法を使用してコプロセッサー要求を送信するかどうかを制御します。 [v5.4.0、v6.2.0) の TiDB バージョンでは、この変数は`IndexLookup`演算子でのみ有効です。 v6.2.0 以降では、この変数はグローバルに有効になります。 v6.4.0 以降、この変数のデフォルト値は`OFF`から`ON`に変更されました。
+-   ユーザー シナリオ:
 
-    - In all OLTP scenarios, it is recommended to use the method of paging.
-    - For read queries that use `IndexLookup` and `Limit` and that `Limit` cannot be pushed down to `IndexScan`, there might be high latency for the read queries and high usage for TiKV `Unified read pool CPU`. In such cases, because the `Limit` operator only requires a small set of data, if you set `tidb_enable_paging` to `ON`, TiDB processes less data, which reduces query latency and resource consumption.
-    - In scenarios such as data export using [Dumpling](/dumpling-overview.md) and full table scan, enabling paging can effectively reduce the memory consumption of TiDB processes.
+    -   すべての OLTP シナリオで、ページングの方法を使用することをお勧めします。
+    -   `IndexLookup`と`Limit`を使用し、 `Limit`を`IndexScan`にプッシュできない読み取りクエリの場合、読み取りクエリのレイテンシーが高くなり、TiKV `Unified read pool CPU`の使用率が高くなる可能性があります。このような場合、 `Limit`演算子は小さなデータセットしか必要としないため、 `tidb_enable_paging`から`ON`を設定すると、TiDB が処理するデータが少なくなり、クエリのレイテンシーとリソース消費が削減されます。
+    -   [Dumpling](/dumpling-overview.md)およびフル テーブル スキャンを使用したデータ エクスポートなどのシナリオでは、ページングを有効にすると、TiDB プロセスのメモリ消費を効果的に削減できます。
 
-> **Note:**
+> **ノート：**
 >
-> In OLAP scenarios where TiKV is used as the storage engine instead of TiFlash, enabling paging might cause performance regression in some cases. If the regression occurs, consider using this variable to disable paging, or using the [`tidb_min_paging_size`](/system-variables.md#tidb_min_paging_size-new-in-v620) and [`tidb_max_paging_size`](/system-variables.md#tidb_max_paging_size-new-in-v630) variables to adjust the range of rows for paging size.
+> TiFlash の代わりにTiFlashがストレージ エンジンとして使用される OLAP シナリオでは、ページングを有効にすると、場合によってはパフォーマンスが低下する可能性があります。回帰が発生した場合は、この変数を使用してページングを無効にするか、 [`tidb_min_paging_size`](/system-variables.md#tidb_min_paging_size-new-in-v620)および[`tidb_max_paging_size`](/system-variables.md#tidb_max_paging_size-new-in-v630)変数を使用してページング サイズの行の範囲を調整することを検討してください。
 
-### tidb_enable_parallel_apply <span class="version-mark">New in v5.0</span>
+### tidb_enable_parallel_apply <span class="version-mark">v5.0 の新</span>機能 {#tidb-enable-parallel-apply-span-class-version-mark-new-in-v5-0-span}
 
-- Scope: SESSION | GLOBAL
-- Persists to cluster: Yes
-- Type: Boolean
-- Default value: `OFF`
-- This variable controls whether to enable concurrency for the `Apply` operator. The number of concurrencies is controlled by the `tidb_executor_concurrency` variable. The `Apply` operator processes correlated subqueries and has no concurrency by default, so the execution speed is slow. Setting this variable value to `1` can increase concurrency and speed up execution. Currently, concurrency for `Apply` is disabled by default.
+-   スコープ: セッション |グローバル
+-   クラスターに永続化: はい
+-   タイプ: ブール値
+-   デフォルト値: `OFF`
+-   この変数は、 `Apply`オペレーターの並行性を有効にするかどうかを制御します。同時実行数は`tidb_executor_concurrency`変数によって制御されます。 `Apply`のオペレーターは相関サブクエリを処理し、デフォルトでは同時実行性がないため、実行速度が遅くなります。この変数の値を`1`に設定すると、同時実行性が向上し、実行速度が向上します。現在、 `Apply`の同時実行はデフォルトで無効になっています。
 
-### tidb_enable_pipelined_window_function
+### tidb_enable_pipelined_window_function {#tidb-enable-pipelined-window-function}
 
-- Scope: SESSION | GLOBAL
-- Persists to cluster: Yes
-- Type: Boolean
-- Default value: `ON`
-- This variables specifies whether to use the pipeline execution algorithm for window functions.
+-   スコープ: セッション |グローバル
+-   クラスターに永続化: はい
+-   タイプ: ブール値
+-   デフォルト値: `ON`
+-   この変数は、ウィンドウ関数にパイプライン実行アルゴリズムを使用するかどうかを指定します。
 
-### tidb_enable_plan_replayer_capture
+### tidb_enable_plan_replayer_capture {#tidb-enable-plan-replayer-capture}
 
-> Warning:
+> 警告：
 >
-> This variable controls a feature that is not fully functional in the current TiDB version. Do not change the default value.
+> この変数は、現在の TiDB バージョンでは完全には機能しない機能を制御します。デフォルト値を変更しないでください。
 
-- Scope: SESSION | GLOBAL
-- Persists to cluster: Yes
-- Type: Boolean
-- Default value: `OFF`
+-   スコープ: セッション |グローバル
+-   クラスターに永続化: はい
+-   タイプ: ブール値
+-   デフォルト値: `OFF`
 
-### tidb_enable_prepared_plan_cache <span class="version-mark">New in v6.1.0</span>
+### tidb_enable_prepared_plan_cache v6.1.0<span class="version-mark">の新機能</span> {#tidb-enable-prepared-plan-cache-span-class-version-mark-new-in-v6-1-0-span}
 
-- Scope: SESSION | GLOBAL
-- Persists to cluster: Yes
-- Type: Boolean
-- Default value: `ON`
-- Determines whether to enable [Prepared Plan Cache](/sql-prepared-plan-cache.md). When it is enabled, the execution plans of `Prepare` and `Execute` are cached so that the subsequent executions skip optimizing the execution plans, which brings performance improvement.
-- This setting was previously a `tidb.toml` option (`prepared-plan-cache.enabled`), but changed to a system variable starting from TiDB v6.1.0.
+-   スコープ: セッション |グローバル
+-   クラスターに永続化: はい
+-   タイプ: ブール値
+-   デフォルト値: `ON`
+-   [プリペアドプランキャッシュ](/sql-prepared-plan-cache.md)を有効にするかどうかを決定します。有効にすると、 `Prepare`と`Execute`の実行プランがキャッシュされるため、以降の実行では実行プランの最適化がスキップされ、パフォーマンスが向上します。
+-   この設定は以前は`tidb.toml`オプション ( `prepared-plan-cache.enabled` ) でしたが、TiDB v6.1.0 からシステム変数に変更されました。
 
-### tidb_enable_prepared_plan_cache_memory_monitor <span class="version-mark">New in v6.4.0</span>
+### tidb_enable_prepared_plan_cache_memory_monitor v6.4.0<span class="version-mark">の新機能</span> {#tidb-enable-prepared-plan-cache-memory-monitor-span-class-version-mark-new-in-v6-4-0-span}
 
-- Scope: SESSION | GLOBAL
-- Persists to cluster: Yes
-- Default value: `ON`
-- This variable controls whether to count the memory consumed by the execution plans cached in the Prepared Plan Cache. For details, see [Memory management of Prepared Plan Cache](/sql-prepared-plan-cache.md#memory-management-of-prepared-plan-cache).
+-   スコープ: セッション |グローバル
+-   クラスターに永続化: はい
+-   デフォルト値: `ON`
+-   この変数は、 プリペアドプランキャッシュにキャッシュされた実行プランによって消費されるメモリをカウントするかどうかを制御します。詳細については、 [プリペアドプランキャッシュのメモリ管理](/sql-prepared-plan-cache.md#memory-management-of-prepared-plan-cache)を参照してください。
 
-### tidb_enable_pseudo_for_outdated_stats <span class="version-mark">New in v5.3.0</span>
+### tidb_enable_pseudo_for_outdated_stats v5.3.0<span class="version-mark">の新機能</span> {#tidb-enable-pseudo-for-outdated-stats-span-class-version-mark-new-in-v5-3-0-span}
 
-- Scope: SESSION | GLOBAL
-- Persists to cluster: Yes
-- Type: Boolean
-- Default value: `OFF`
-- This variable controls the behavior of the optimizer on using statistics of a table when the statistics are outdated.
+-   スコープ: セッション |グローバル
+-   クラスターに永続化: はい
+-   タイプ: ブール値
+-   デフォルト値: `OFF`
+-   この変数は、統計が古い場合にテーブルの統計を使用する際のオプティマイザの動作を制御します。
 
 <CustomContent platform="tidb">
 
-- The optimizer determines whether the statistics of a table is outdated in this way: since the last time `ANALYZE` is executed on a table to get the statistics, if 80% of the table rows are modified (the modified row count divided by the total row count), the optimizer determines that the statistics of this table is outdated. You can change this ratio using the [`pseudo-estimate-ratio`](/tidb-configuration-file.md#pseudo-estimate-ratio) configuration.
+-   オプティマイザは、テーブルの統計が古いかどうかを次のように判断します。統計を取得するために最後にテーブルで`ANALYZE`が実行されてから、テーブル行の 80% が変更された場合 (変更された行数を合計行数で割った値) )、オプティマイザは、このテーブルの統計が古いと判断します。この比率は、 [`pseudo-estimate-ratio`](/tidb-configuration-file.md#pseudo-estimate-ratio)構成を使用して変更できます。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-- The optimizer determines whether the statistics of a table is outdated in this way: since the last time `ANALYZE` is executed on a table to get the statistics, if 80% of the table rows are modified (the modified row count divided by the total row count), the optimizer determines that the statistics of this table is outdated.
+-   オプティマイザは、テーブルの統計が古いかどうかを次のように判断します。統計を取得するために最後にテーブルで`ANALYZE`が実行されてから、テーブル行の 80% が変更された場合 (変更された行数を合計行数で割った値) )、オプティマイザは、このテーブルの統計が古いと判断します。
 
 </CustomContent>
 
-- By default (with the variable value `OFF`), when the statistics of a table is outdated, the optimizer still keeps using the statistics of the table. If you set the variable value to `ON`, the optimizer determines that the statistics of the table is no longer reliable except for the total row count. Then, the optimizer uses the pseudo statistics.
-- If the data on a table is frequently modified without executing `ANALYZE` on this table in time, to keep the execution plan stable, it is recommended to set the variable value to `OFF`.
+-   デフォルトでは (変数値`OFF`を使用)、表の統計が古くなっても、オプティマイザーは引き続き表の統計を使用します。変数の値を`ON`に設定すると、オプティマイザは、合計行数を除いてテーブルの統計が信頼できなくなったと判断します。次に、オプティマイザは疑似統計を使用します。
+-   テーブルのデータが頻繁に変更され、このテーブルで`ANALYZE`を適時に実行しない場合は、実行計画を安定させるために、変数値を`OFF`に設定することをお勧めします。
 
-### tidb_enable_rate_limit_action
+### tidb_enable_rate_limit_action {#tidb-enable-rate-limit-action}
 
-- Scope: SESSION | GLOBAL
-- Persists to cluster: Yes
-- Type: Boolean
-- Default value: `OFF`
-- This variable controls whether to enable the dynamic memory control feature for the operator that reads data. By default, this operator enables the maximum number of threads that [`tidb_distsql_scan_concurrency`](/system-variables.md#tidb_distsql_scan_concurrency) allows to read data. When the memory usage of a single SQL statement exceeds [`tidb_mem_quota_query`](/system-variables.md#tidb_mem_quota_query) each time, the operator that reads data stops one thread.
+-   スコープ: セッション |グローバル
+-   クラスターに永続化: はい
+-   タイプ: ブール値
+-   デフォルト値: `OFF`
+-   この変数は、データを読み取るオペレーターの動的メモリー制御機能を有効にするかどうかを制御します。デフォルトでは、この演算子は、データの読み取りを許可するスレッドの最大数を有効にし[`tidb_distsql_scan_concurrency`](/system-variables.md#tidb_distsql_scan_concurrency) 。 1 つの SQL ステートメントのメモリ使用量が毎回[`tidb_mem_quota_query`](/system-variables.md#tidb_mem_quota_query)を超えると、データを読み取るオペレーターは 1 つのスレッドを停止します。
 
 <CustomContent platform="tidb">
 
-- When the operator that reads data has only one thread left and the memory usage of a single SQL statement constantly exceeds [`tidb_mem_quota_query`](/system-variables.md#tidb_mem_quota_query), this SQL statement triggers other memory control behaviors, such as [spilling data to disk](/system-variables.md#tidb_enable_tmp_storage_on_oom).
-- This variable controls memory usage effectively when an SQL statement only reads data. If computing operations (such as join or aggregation operations) are required, memory usage might not be under the control of `tidb_mem_quota_query`, which increases the risk of OOM.
+-   データを読み取るオペレーターに残っているスレッドが 1 つだけで、単一の SQL ステートメントのメモリー使用量が常に[`tidb_mem_quota_query`](/system-variables.md#tidb_mem_quota_query)を超える場合、この SQL ステートメントは[スピル, データをディスクに](/system-variables.md#tidb_enable_tmp_storage_on_oom)などの他のメモリー制御動作をトリガーします。
+-   この変数は、SQL ステートメントがデータの読み取りのみを行う場合に、メモリの使用を効果的に制御します。計算操作 (結合操作や集計操作など) が必要な場合、メモリ使用量が`tidb_mem_quota_query`の制御下にない可能性があり、OOM のリスクが高まります。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-- When the operator that reads data has only one thread left and the memory usage of a single SQL statement continues to exceed [`tidb_mem_quota_query`](/system-variables.md#tidb_mem_quota_query), this SQL statement triggers other memory control behaviors, such as spilling data to disk.
+-   データを読み取るオペレーターのスレッドが 1 つしか残っておらず、単一の SQL ステートメントのメモリー使用量が[`tidb_mem_quota_query`](/system-variables.md#tidb_mem_quota_query)を超え続けている場合、この SQL ステートメントは、データをディスクにスピルするなど、他のメモリー制御動作をトリガーします。
 
 </CustomContent>
 
-### tidb_enable_reuse_chunk <span class="version-mark">New in v6.4.0</span>
+### tidb_enable_reuse_chunk v6.4.0<span class="version-mark">の新機能</span> {#tidb-enable-reuse-chunk-span-class-version-mark-new-in-v6-4-0-span}
 
-- Scope: SESSION | GLOBAL
-- Persists to cluster: Yes
-- Default value: `ON`
-- Value options: `OFF`, `ON`
-- This variable controls whether TiDB enables chunk objects cache. If the value is `ON`, TiDB prefers to use the cached chunk object and only requests from the system if the requested object is not in the cache. If the value is `OFF`, TiDB requests chunk objects from the system directly.
+-   スコープ: セッション |グローバル
+-   クラスターに永続化: はい
+-   デフォルト値: `ON`
+-   値のオプション: `OFF` 、 `ON`
+-   この変数は、TiDB がチャンク オブジェクト キャッシュを有効にするかどうかを制御します。値が`ON`の場合、TiDB はキャッシュされたチャンク オブジェクトを優先して使用し、要求されたオブジェクトがキャッシュにない場合はシステムからの要求のみを使用します。値が`OFF`の場合、TiDB はシステムからチャンク オブジェクトを直接要求します。
 
-### tidb_enable_slow_log
+### tidb_enable_slow_log {#tidb-enable-slow-log}
 
 <CustomContent platform="tidb-cloud">
 
-> **Note:**
+> **ノート：**
 >
-> This TiDB variable is not applicable to TiDB Cloud.
+> この TiDB 変数はTiDB Cloudには適用されません。
 
 </CustomContent>
 
-- Scope: GLOBAL
-- Persists to cluster: No, only applicable to the current TiDB instance that you are connecting to.
-- Type: Boolean
-- Default value: `ON`
-- This variable is used to control whether to enable the slow log feature.
+-   範囲: グローバル
+-   Persists to cluster: いいえ、接続している現在の TiDB インスタンスにのみ適用されます。
+-   タイプ: ブール値
+-   デフォルト値: `ON`
+-   この変数は、スロー ログ機能を有効にするかどうかを制御するために使用されます。
 
-### tidb_enable_tmp_storage_on_oom
+### tidb_enable_tmp_storage_on_oom {#tidb-enable-tmp-storage-on-oom}
 
-- Scope: GLOBAL
-- Persists to cluster: Yes
-- Default value: `ON`
-- Value options: `OFF`, `ON`
-- Controls whether to enable the temporary storage for some operators when a single SQL statement exceeds the memory quota specified by the system variable [`tidb_mem_quota_query`](/system-variables.md#tidb_mem_quota_query).
-- Before v6.3.0, you can enable or disable this feature by using the TiDB configuration item `oom-use-tmp-storage`. After upgrading the cluster to v6.3.0 or a later version, the TiDB cluster will initialize this variable using the value of `oom-use-tmp-storage` automatically. After that, changing the value of `oom-use-tmp-storage` **does not** take effect anymore.
+-   範囲: グローバル
+-   クラスターに永続化: はい
+-   デフォルト値: `ON`
+-   値のオプション: `OFF` 、 `ON`
+-   1 つの SQL ステートメントがシステム変数[`tidb_mem_quota_query`](/system-variables.md#tidb_mem_quota_query)で指定されたメモリ クォータを超えた場合に、一部の演算子の一時ストレージを有効にするかどうかを制御します。
+-   v6.3.0 より前では、TiDB 構成項目`oom-use-tmp-storage`を使用して、この機能を有効または無効にすることができます。クラスターを v6.3.0 以降のバージョンにアップグレードした後、TiDB クラスターは値`oom-use-tmp-storage`を使用してこの変数を自動的に初期化します。その後、 `oom-use-tmp-storage`の値を変更しても有効になり**ませ**ん。
 
-### tidb_enable_stmt_summary <span class="version-mark">New in v3.0.4</span>
+### tidb_enable_stmt_summary v3.0.4<span class="version-mark">の新機能</span> {#tidb-enable-stmt-summary-span-class-version-mark-new-in-v3-0-4-span}
 
-- Scope: GLOBAL
-- Persists to cluster: Yes
-- Type: Boolean
-- Default value: `ON`
-- This variable is used to control whether to enable the statement summary feature. If enabled, SQL execution information like time consumption is recorded to the `information_schema.STATEMENTS_SUMMARY` system table to identify and troubleshoot SQL performance issues.
+-   範囲: グローバル
+-   クラスターに永続化: はい
+-   タイプ: ブール値
+-   デフォルト値: `ON`
+-   この変数は、ステートメント要約機能を有効にするかどうかを制御するために使用されます。有効にすると、時間消費などの SQL 実行情報が`information_schema.STATEMENTS_SUMMARY`システム テーブルに記録され、SQL パフォーマンスの問題を特定してトラブルシューティングします。
 
-### tidb_enable_strict_double_type_check <span class="version-mark">New in v5.0</span>
+### tidb_enable_strict_double_type_check <span class="version-mark">v5.0 の新</span>機能 {#tidb-enable-strict-double-type-check-span-class-version-mark-new-in-v5-0-span}
 
-- Scope: SESSION | GLOBAL
-- Persists to cluster: Yes
-- Type: Boolean
-- Default value: `ON`
-- This variable is used to control if tables can be created with invalid definitions of type `DOUBLE`. This setting is intended to provide an upgrade path from earlier versions of TiDB, which were less strict in validating types.
-- The default value of `ON` is compatible with MySQL.
+-   スコープ: セッション |グローバル
+-   クラスターに永続化: はい
+-   タイプ: ブール値
+-   デフォルト値: `ON`
+-   この変数は、タイプ`DOUBLE`の無効な定義でテーブルを作成できるかどうかを制御するために使用されます。この設定は、タイプの検証がそれほど厳密ではない以前のバージョンの TiDB からのアップグレード パスを提供することを目的としています。
+-   デフォルト値の`ON`は MySQL と互換性があります。
 
-For example, the type `DOUBLE(10)` is now considered invalid because the precision of floating point types is not guaranteed. After changing `tidb_enable_strict_double_type_check` to `OFF`, the table is created:
+たとえば、浮動小数点型の精度が保証されていないため、型`DOUBLE(10)`は無効と見なされるようになりました。 `tidb_enable_strict_double_type_check`を`OFF`に変更すると、テーブルが作成されます。
 
 ```sql
 mysql> CREATE TABLE t1 (id int, c double(10));
@@ -1859,1051 +1858,1051 @@ mysql> CREATE TABLE t1 (id int, c double(10));
 Query OK, 0 rows affected (0.09 sec)
 ```
 
-> **Note:**
+> **ノート：**
 >
-> This setting only applies to the type `DOUBLE` since MySQL permits precision for `FLOAT` types. This behavior is deprecated starting with MySQL 8.0.17, and it is not recommended to specify precision for either `FLOAT` or `DOUBLE` types.
+> MySQL では`FLOAT`の型の精度が許可されているため、この設定は型`DOUBLE`にのみ適用されます。この動作は MySQL 8.0.17 以降では推奨されておらず、 `FLOAT`または`DOUBLE`型の精度を指定することはお勧めしません。
 
-### tidb_enable_table_partition
+### tidb_enable_table_partition {#tidb-enable-table-partition}
 
-- Scope: SESSION | GLOBAL
-- Persists to cluster: Yes
-- Type: Enumeration
-- Default value: `ON`
-- Possible values: `OFF`, `ON`, `AUTO`
-- This variable is used to set whether to enable the `TABLE PARTITION` feature:
-    - `ON` indicates enabling Range partitioning, Hash partitioning, and Range column partitioning with one single column.
-    - `AUTO` functions the same way as `ON` does.
-    - `OFF` indicates disabling the `TABLE PARTITION` feature. In this case, the syntax that creates a partition table can be executed, but the table created is not a partitioned one.
+-   スコープ: セッション |グローバル
+-   クラスターに永続化: はい
+-   タイプ: 列挙
+-   デフォルト値: `ON`
+-   可能な値: `OFF` 、 `ON` 、 `AUTO`
+-   この変数は、 `TABLE PARTITION`つの機能を有効にするかどうかを設定するために使用されます。
+    -   `ON`は、1 つの列でレンジ パーティション分割、ハッシュ パーティション分割、およびレンジ列パーティション分割を有効にすることを示します。
+    -   `AUTO`は`ON`と同じように関数します。
+    -   `OFF`は、 `TABLE PARTITION`機能を無効にすることを示します。この場合、パーティション テーブルを作成する構文は実行できますが、作成されるテーブルはパーティション化されたものではありません。
 
-### tidb_enable_telemetry <span class="version-mark">New in v4.0.2</span>
+### tidb_enable_telemetry v4.0.2<span class="version-mark">の新機能</span> {#tidb-enable-telemetry-span-class-version-mark-new-in-v4-0-2-span}
 
 <CustomContent platform="tidb-cloud">
 
-> **Note:**
+> **ノート：**
 >
-> This TiDB variable is not applicable to TiDB Cloud.
+> この TiDB 変数はTiDB Cloudには適用されません。
 
 </CustomContent>
 
-- Scope: GLOBAL
-- Persists to cluster: Yes
-- Type: Boolean
-- Default value: `ON`
+-   範囲: グローバル
+-   クラスターに永続化: はい
+-   タイプ: ブール値
+-   デフォルト値: `ON`
 
 <CustomContent platform="tidb">
 
-- This variable is used to dynamically control whether the telemetry collection in TiDB is enabled. By setting the value to `OFF`, the telemetry collection is disabled. If the [`enable-telemetry`](/tidb-configuration-file.md#enable-telemetry-new-in-v402) TiDB configuration item is set to `false` on all TiDB instances, the telemetry collection is always disabled and this system variable will not take effect. See [Telemetry](/telemetry.md) for details.
+-   この変数は、TiDB でのテレメトリ コレクションを有効にするかどうかを動的に制御するために使用されます。値を`OFF`に設定すると、テレメトリ コレクションが無効になります。すべての TiDB インスタンスで[`enable-telemetry`](/tidb-configuration-file.md#enable-telemetry-new-in-v402) TiDB 構成項目が`false`に設定されている場合、テレメトリ収集は常に無効になり、このシステム変数は有効になりません。詳細は[テレメトリー](/telemetry.md)を参照してください。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-- This variable is used to dynamically control whether the telemetry collection in TiDB is enabled.
+-   この変数は、TiDB でのテレメトリ コレクションを有効にするかどうかを動的に制御するために使用されます。
 
 </CustomContent>
 
-### `tidb_enable_tiflash_read_for_write_stmt` <span class="version-mark">New in v6.3.0</span>
+### <code>tidb_enable_tiflash_read_for_write_stmt</code><span class="version-mark">の新機能</span> {#code-tidb-enable-tiflash-read-for-write-stmt-code-span-class-version-mark-new-in-v6-3-0-span}
 
-> **Warning:**
+> **警告：**
 >
-> The feature controlled by this variable is experimental in the current TiDB version. It is not recommended that you use it for production environments.
+> この変数によって制御される機能は、現在の TiDB バージョンでは実験的ものです。実稼働環境で使用することはお勧めしません。
 
-- Scope: SESSION | GLOBAL
-- Persists to cluster: Yes
-- Type: Boolean
-- Default value: `OFF`
-- This variable controls whether read operations in SQL statements containing `INSERT`, `DELETE`, and `UPDATE` can be pushed down to TiFlash. For example:
+-   スコープ: セッション |グローバル
+-   クラスターに永続化: はい
+-   タイプ: ブール値
+-   デフォルト値: `OFF`
+-   この変数は、 `INSERT` 、および`DELETE`を含む SQL ステートメントの読み取り操作を`UPDATE`にプッシュできるかどうかを制御しTiFlash。例えば：
 
-    - `SELECT` queries in `INSERT INTO SELECT` statements (typical usage scenario: [TiFlash query result materialization](/tiflash/tiflash-results-materialization.md))
-    - `WHERE` condition filtering in `UPDATE` and `DELETE` statements
+    -   `INSERT INTO SELECT`のステートメントで`SELECT`クエリ (一般的な使用シナリオ: [TiFlashクエリ結果の実体化](/tiflash/tiflash-results-materialization.md) )
+    -   `UPDATE`ステートメントと`DELETE`ステートメントで`WHERE`条件フィルタリング
 
-### tidb_enable_top_sql <span class="version-mark">New in v5.4.0</span>
+### tidb_enable_top_sql v5.4.0<span class="version-mark">の新機能</span> {#tidb-enable-top-sql-span-class-version-mark-new-in-v5-4-0-span}
 
 <CustomContent platform="tidb-cloud">
 
-> **Note:**
+> **ノート：**
 >
-> This TiDB variable is not applicable to TiDB Cloud.
+> この TiDB 変数はTiDB Cloudには適用されません。
 
 </CustomContent>
 
-> **Warning:**
+> **警告：**
 >
-> Currently, Top SQL is an experimental feature. It is not recommended that you use it for production environments.
+> 現在、 Top SQLは実験的機能です。実稼働環境で使用することはお勧めしません。
 
-- Scope: GLOBAL
-- Persists to cluster: Yes
-- Type: Boolean
-- Default value: `OFF`
+-   範囲: グローバル
+-   クラスターに永続化: はい
+-   タイプ: ブール値
+-   デフォルト値: `OFF`
 
 <CustomContent platform="tidb">
 
-- This variable is used to control whether to enable the [Top SQL](/dashboard/top-sql.md) feature.
+-   この変数は、 [Top SQL](/dashboard/top-sql.md)機能を有効にするかどうかを制御するために使用されます。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-- This variable is used to control whether to enable the [Top SQL](https://docs.pingcap.com/tidb/stable/top-sql) feature.
+-   この変数は、 [Top SQL](https://docs.pingcap.com/tidb/stable/top-sql)機能を有効にするかどうかを制御するために使用されます。
 
 </CustomContent>
 
-### tidb_enable_tso_follower_proxy <span class="version-mark">New in v5.3.0</span>
+### tidb_enable_tso_follower_proxy v5.3.0<span class="version-mark">の新機能</span> {#tidb-enable-tso-follower-proxy-span-class-version-mark-new-in-v5-3-0-span}
 
-- Scope: GLOBAL
-- Persists to cluster: Yes
-- Type: Boolean
-- Default value: `OFF`
-- This variable is used to enable the TSO Follower Proxy feature. When the value is `OFF`, TiDB only gets TSO from the PD leader. After this feature is enabled, TiDB gets TSO by evenly sending requests to all PD nodes and forwarding TSO requests through PD followers. This helps reduce the CPU pressure of PD leader.
-- Scenarios for enabling TSO Follower Proxy:
-    * Due to the high pressure of TSO requests, the CPU of the PD leader reaches a bottleneck, which causes high latency of TSO RPC requests.
-    * The TiDB cluster has many TiDB instances, and increasing the value of [`tidb_tso_client_batch_max_wait_time`](#tidb_tso_client_batch_max_wait_time-new-in-v530) cannot alleviate the high latency issue of TSO RPC requests.
+-   範囲: グローバル
+-   クラスターに永続化: はい
+-   タイプ: ブール値
+-   デフォルト値: `OFF`
+-   この変数は、TSOFollowerプロキシ機能を有効にするために使用されます。値が`OFF`の場合、TiDB は PD リーダーから TSO のみを取得します。この機能を有効にすると、TiDB はすべての PD ノードにリクエストを均等に送信し、PD フォロワーを介して TSO リクエストを転送することで TSO を取得します。これにより、PD リーダーの CPU 負荷が軽減されます。
+-   TSOFollowerプロキシを有効にするシナリオ:
+    -   TSO 要求の負荷が高いため、PD リーダーの CPU がボトルネックに達し、TSO RPC 要求のレイテンシーが長くなります。
+    -   TiDB クラスターには多くの TiDB インスタンスがあり、値を[`tidb_tso_client_batch_max_wait_time`](#tidb_tso_client_batch_max_wait_time-new-in-v530)に増やしても、TSO RPC 要求の高レイテンシーの問題を軽減することはできません。
 
-> **Note:**
+> **ノート：**
 >
-> Suppose that the TSO RPC latency increases for reasons other than a CPU usage bottleneck of the PD leader (such as network issues). In this case, enabling the TSO Follower Proxy might increase the execution latency in TiDB and affect the QPS performance of the cluster.
+> PD リーダーの CPU 使用率のボトルネック以外の理由 (ネットワークの問題など) で、TSO RPCレイテンシーが増加したとします。この場合、TSOFollowerプロキシを有効にすると、TiDB での実行レイテンシーが増加し、クラスターの QPS パフォーマンスに影響を与える可能性があります。
 
-### `tidb_enable_unsafe_substitute` <span class="version-mark">New in v6.3.0</span>
+### <code>tidb_enable_unsafe_substitute</code><span class="version-mark">の新機能</span> {#code-tidb-enable-unsafe-substitute-code-span-class-version-mark-new-in-v6-3-0-span}
 
-- Scope: SESSION | GLOBAL
-- Persists to cluster: Yes
-- Type: Boolean
-- Default value: `OFF`
-- This variable controls whether to replace expressions with generated columns in an unsafe way. The default value is `OFF`, which means that unsafe replacement is disabled by default. For more details, see [Generated Columns](/generated-columns.md).
+-   スコープ: セッション |グローバル
+-   クラスターに永続化: はい
+-   タイプ: ブール値
+-   デフォルト値: `OFF`
+-   この変数は、式を安全でない方法で生成された列に置き換えるかどうかを制御します。デフォルト値は`OFF`です。これは、安全でない置換がデフォルトで無効になっていることを意味します。詳細については、 [生成された列](/generated-columns.md)を参照してください。
 
-### tidb_enable_vectorized_expression <span class="version-mark">New in v4.0</span>
+### tidb_enable_vectorized_expression <span class="version-mark">v4.0 の新</span>機能 {#tidb-enable-vectorized-expression-span-class-version-mark-new-in-v4-0-span}
 
-- Scope: SESSION | GLOBAL
-- Persists to cluster: Yes
-- Type: Boolean
-- Default value: `ON`
-- This variable is used to control whether to enable vectorized execution.
+-   スコープ: セッション |グローバル
+-   クラスターに永続化: はい
+-   タイプ: ブール値
+-   デフォルト値: `ON`
+-   この変数は、ベクトル化された実行を有効にするかどうかを制御するために使用されます。
 
-### tidb_enable_window_function
+### tidb_enable_window_function {#tidb-enable-window-function}
 
-- Scope: SESSION | GLOBAL
-- Persists to cluster: Yes
-- Type: Boolean
-- Default value: `ON`
-- This variable is used to control whether to enable the support for window functions. Note that window functions may use reserved keywords. This might cause SQL statements that could be executed normally cannot be parsed after upgrading TiDB. In this case, you can set `tidb_enable_window_function` to `OFF`.
+-   スコープ: セッション |グローバル
+-   クラスターに永続化: はい
+-   タイプ: ブール値
+-   デフォルト値: `ON`
+-   この変数は、ウィンドウ関数のサポートを有効にするかどうかを制御するために使用されます。ウィンドウ関数は予約済みのキーワードを使用する場合があることに注意してください。これにより、通常は実行できた SQL ステートメントが、TiDB のアップグレード後に解析できなくなる可能性があります。この場合、 `tidb_enable_window_function` ～ `OFF`を設定できます。
 
-### tidb_enforce_mpp <span class="version-mark">New in v5.1</span>
+### tidb_enforce_mpp <span class="version-mark">v5.1 の新</span>機能 {#tidb-enforce-mpp-span-class-version-mark-new-in-v5-1-span}
 
-- Scope: SESSION
-- Type: Boolean
-- Default value: `OFF`
+-   スコープ: セッション
+-   タイプ: ブール値
+-   デフォルト値: `OFF`
 
 <CustomContent platform="tidb">
 
-- To change this default value, modify the [`performance.enforce-mpp`](/tidb-configuration-file.md#enforce-mpp) configuration value.
+-   このデフォルト値を変更するには、 [`performance.enforce-mpp`](/tidb-configuration-file.md#enforce-mpp)構成値を変更します。
 
 </CustomContent>
 
-- Controls whether to ignore the optimizer's cost estimation and to forcibly use TiFlash's MPP mode for query execution. The value options are as follows:
-    - `0` or `OFF`, which means that the MPP mode is not forcibly used (by default).
-    - `1` or `ON`, which means that the cost estimation is ignored and the MPP mode is forcibly used. Note that this setting only takes effect when `tidb_allow_mpp=true`.
+-   オプティマイザーのコスト見積もりを無視し、TiFlash の MPP モードをクエリ実行に強制的に使用するかどうかを制御します。値のオプションは次のとおりです。
+    -   `0`または`OFF` 。これは、MPP モードが強制的に使用されないことを意味します (デフォルト)。
+    -   `1`または`ON` 。これは、コスト見積もりが無視され、MPP モードが強制的に使用されることを意味します。この設定は`tidb_allow_mpp=true`の場合にのみ有効であることに注意してください。
 
-MPP is a distributed computing framework provided by the TiFlash engine, which allows data exchange between nodes and provides high-performance, high-throughput SQL algorithms. For details about the selection of the MPP mode, refer to [Control whether to select the MPP mode](/tiflash/use-tiflash-mpp-mode.md#control-whether-to-select-the-mpp-mode).
+MPP は、 TiFlashエンジンによって提供される分散コンピューティング フレームワークであり、ノード間のデータ交換を可能にし、高性能で高スループットの SQL アルゴリズムを提供します。 MPP モードの選択については、 [MPP モードを選択するかどうかを制御します](/tiflash/use-tiflash-mpp-mode.md#control-whether-to-select-the-mpp-mode)を参照してください。
 
-### tidb_evolve_plan_baselines <span class="version-mark">New in v4.0</span>
+### tidb_evolve_plan_baselines <span class="version-mark">v4.0 の新</span>機能 {#tidb-evolve-plan-baselines-span-class-version-mark-new-in-v4-0-span}
 
-- Scope: SESSION | GLOBAL
-- Persists to cluster: Yes
-- Type: Boolean
-- Default value: `OFF`
-- This variable is used to control whether to enable the baseline evolution feature. For detailed introduction or usage , see [Baseline Evolution](/sql-plan-management.md#baseline-evolution).
-- To reduce the impact of baseline evolution on the cluster, use the following configurations:
-    - Set `tidb_evolve_plan_task_max_time` to limit the maximum execution time of each execution plan. The default value is 600s.
-    - Set `tidb_evolve_plan_task_start_time` and `tidb_evolve_plan_task_end_time` to limit the time window. The default values are respectively `00:00 +0000` and `23:59 +0000`.
+-   スコープ: セッション |グローバル
+-   クラスターに永続化: はい
+-   タイプ: ブール値
+-   デフォルト値: `OFF`
+-   この変数は、ベースライン進化機能を有効にするかどうかを制御するために使用されます。詳細な導入または使用方法については、 [ベースライン進化](/sql-plan-management.md#baseline-evolution)を参照してください。
+-   クラスターに対するベースラインの進化の影響を軽減するには、次の構成を使用します。
+    -   各実行計画の最大実行時間を制限するには、 `tidb_evolve_plan_task_max_time`を設定します。デフォルト値は 600 秒です。
+    -   時間枠を制限するには、 `tidb_evolve_plan_task_start_time`と`tidb_evolve_plan_task_end_time`を設定します。デフォルト値はそれぞれ`00:00 +0000`と`23:59 +0000`です。
 
-### tidb_evolve_plan_task_end_time <span class="version-mark">New in v4.0</span>
+### tidb_evolve_plan_task_end_time <span class="version-mark">v4.0 の新</span>機能 {#tidb-evolve-plan-task-end-time-span-class-version-mark-new-in-v4-0-span}
 
-- Scope: GLOBAL
-- Persists to cluster: Yes
-- Type: Time
-- Default value: `23:59 +0000`
-- This variable is used to set the end time of baseline evolution in a day.
+-   範囲: グローバル
+-   クラスターに永続化: はい
+-   タイプ: 時間
+-   デフォルト値: `23:59 +0000`
+-   この変数は、1 日のベースライン進化の終了時間を設定するために使用されます。
 
-### tidb_evolve_plan_task_max_time <span class="version-mark">New in v4.0</span>
+### tidb_evolve_plan_task_max_time <span class="version-mark">v4.0 の新</span>機能 {#tidb-evolve-plan-task-max-time-span-class-version-mark-new-in-v4-0-span}
 
-- Scope: GLOBAL
-- Persists to cluster: Yes
-- Type: Integer
-- Default value: `600`
-- Range: `[-1, 9223372036854775807]`
-- Unit: Seconds
-- This variable is used to limit the maximum execution time of each execution plan in the baseline evolution feature.
+-   範囲: グローバル
+-   クラスターに永続化: はい
+-   タイプ: 整数
+-   デフォルト値: `600`
+-   範囲: `[-1, 9223372036854775807]`
+-   単位: 秒
+-   この変数は、ベースライン進化機能の各実行プランの最大実行時間を制限するために使用されます。
 
-### tidb_evolve_plan_task_start_time <span class="version-mark">New in v4.0</span>
+### tidb_evolve_plan_task_start_time <span class="version-mark">v4.0 の新</span>機能 {#tidb-evolve-plan-task-start-time-span-class-version-mark-new-in-v4-0-span}
 
-- Scope: GLOBAL
-- Persists to cluster: Yes
-- Type: Time
-- Default value: `00:00 +0000`
-- This variable is used to set the start time of baseline evolution in a day.
+-   範囲: グローバル
+-   クラスターに永続化: はい
+-   タイプ: 時間
+-   デフォルト値: `00:00 +0000`
+-   この変数は、1 日のベースライン進化の開始時刻を設定するために使用されます。
 
-### tidb_executor_concurrency <span class="version-mark">New in v5.0</span>
+### tidb_executor_concurrency <span class="version-mark">v5.0 の新</span>機能 {#tidb-executor-concurrency-span-class-version-mark-new-in-v5-0-span}
 
-- Scope: SESSION | GLOBAL
-- Persists to cluster: Yes
-- Type: Integer
-- Default value: `5`
-- Range: `[1, 256]`
-- Unit: Threads
+-   スコープ: セッション |グローバル
+-   クラスターに永続化: はい
+-   タイプ: 整数
+-   デフォルト値: `5`
+-   範囲: `[1, 256]`
+-   単位: スレッド
 
-This variable is used to set the concurrency of the following SQL operators (to one value):
+この変数は、次の SQL 演算子の同時実行を (1 つの値に) 設定するために使用されます。
 
-- `index lookup`
-- `index lookup join`
-- `hash join`
-- `hash aggregation` (the `partial` and `final` phases)
-- `window`
-- `projection`
+-   `index lookup`
+-   `index lookup join`
+-   `hash join`
+-   `hash aggregation` ( `partial`および`final`フェーズ)
+-   `window`
+-   `projection`
 
-`tidb_executor_concurrency` incorporates the following existing system variables as a whole for easier management:
+`tidb_executor_concurrency`には、管理を容易にするために、次の既存のシステム変数が全体として組み込まれています。
 
-+ `tidb_index_lookup_concurrency`
-+ `tidb_index_lookup_join_concurrency`
-+ `tidb_hash_join_concurrency`
-+ `tidb_hashagg_partial_concurrency`
-+ `tidb_hashagg_final_concurrency`
-+ `tidb_projection_concurrency`
-+ `tidb_window_concurrency`
+-   `tidb_index_lookup_concurrency`
+-   `tidb_index_lookup_join_concurrency`
+-   `tidb_hash_join_concurrency`
+-   `tidb_hashagg_partial_concurrency`
+-   `tidb_hashagg_final_concurrency`
+-   `tidb_projection_concurrency`
+-   `tidb_window_concurrency`
 
-Since v5.0, you can still separately modify the system variables listed above (with a deprecation warning returned) and your modification only affects the corresponding single operators. After that, if you use `tidb_executor_concurrency` to modify the operator concurrency, the separately modified operators will not be affected. If you want to use `tidb_executor_concurrency` to modify the concurrency of all operators, you can set the values of all variables listed above to `-1`.
+v5.0 以降、上記のシステム変数を個別に変更することができ (非推奨の警告が返されます)、変更は対応する単一の演算子にのみ影響します。その後、 `tidb_executor_concurrency`を使用してオペレーターの同時実行数を変更しても、個別に変更されたオペレーターは影響を受けません。 `tidb_executor_concurrency`を使用してすべてのオペレーターの同時実行数を変更する場合は、上記のすべての変数の値を`-1`に設定できます。
 
-For a system upgraded to v5.0 from an earlier version, if you have not modified any value of the variables listed above (which means that the `tidb_hash_join_concurrency` value is `5` and the values of the rest are `4`), the operator concurrency previously managed by these variables will automatically be managed by `tidb_executor_concurrency`. If you have modified any of these variables, the concurrency of the corresponding operators will still be controlled by the modified variables.
+以前のバージョンから v5.0 にアップグレードされたシステムの場合、上記の変数の値を変更していない場合 (つまり、 `tidb_hash_join_concurrency`の値が`5`で、残りの値が`4`であることを意味します)、以前に管理されていたオペレーターの同時実行は、これらの変数は`tidb_executor_concurrency`によって自動的に管理されます。これらの変数のいずれかを変更した場合、対応する演算子の同時実行性は、変更された変数によって引き続き制御されます。
 
-### tidb_expensive_query_time_threshold
+### tidb_expensive_query_time_threshold {#tidb-expensive-query-time-threshold}
 
 <CustomContent platform="tidb-cloud">
 
-> **Note:**
+> **ノート：**
 >
-> This TiDB variable is not applicable to TiDB Cloud.
+> この TiDB 変数はTiDB Cloudには適用されません。
 
 </CustomContent>
 
-- Scope: GLOBAL
-- Persists to cluster: No, only applicable to the current TiDB instance that you are connecting to.
-- Type: Integer
-- Default value: `60`
-- Range: `[10, 2147483647]`
-- Unit: Seconds
-- This variable is used to set the threshold value that determines whether to print expensive query logs. The difference between expensive query logs and slow query logs is:
-    - Slow logs are printed after the statement is executed.
-    - Expensive query logs print the statements that are being executed, with execution time exceeding the threshold value, and their related information.
+-   範囲: グローバル
+-   Persists to cluster: いいえ、接続している現在の TiDB インスタンスにのみ適用されます。
+-   タイプ: 整数
+-   デフォルト値: `60`
+-   範囲: `[10, 2147483647]`
+-   単位: 秒
+-   この変数は、負荷の高いクエリ ログを出力するかどうかを決定するしきい値を設定するために使用されます。高価なクエリ ログと遅いクエリ ログの違いは次のとおりです。
+    -   ステートメントの実行後にスローログが出力されます。
+    -   高価なクエリ ログには、実行時間がしきい値を超えて実行されているステートメントと、その関連情報が出力されます。
 
-### tidb_force_priority
+### tidb_force_priority {#tidb-force-priority}
 
 <CustomContent platform="tidb-cloud">
 
-> **Note:**
+> **ノート：**
 >
-> This TiDB variable is not applicable to TiDB Cloud.
+> この TiDB 変数はTiDB Cloudには適用されません。
 
 </CustomContent>
 
-- Scope: GLOBAL
-- Persists to cluster: No, only applicable to the current TiDB instance that you are connecting to.
-- Type: Enumeration
-- Default value: `NO_PRIORITY`
-- Possible values: `NO_PRIORITY`, `LOW_PRIORITY`, `HIGH_PRIORITY`, `DELAYED`
-- This variable is used to change the default priority for statements executed on a TiDB server. A use case is to ensure that a particular user that is performing OLAP queries receives lower priority than users performing OLTP queries.
-- The default value `NO_PRIORITY` means that the priority for statements is not forced to change.
+-   範囲: グローバル
+-   Persists to cluster: いいえ、接続している現在の TiDB インスタンスにのみ適用されます。
+-   タイプ: 列挙
+-   デフォルト値: `NO_PRIORITY`
+-   可能な値: `NO_PRIORITY` 、 `LOW_PRIORITY` 、 `HIGH_PRIORITY` 、 `DELAYED`
+-   この変数は、TiDBサーバーで実行されるステートメントのデフォルトの優先度を変更するために使用されます。使用例は、OLAP クエリを実行している特定のユーザーが OLTP クエリを実行しているユーザーよりも低い優先度を受け取るようにすることです。
+-   デフォルト値`NO_PRIORITY`は、ステートメントの優先度が強制的に変更されないことを意味します。
 
-### tidb_gc_concurrency <span class="version-mark">New in v5.0</span>
+### tidb_gc_concurrency <span class="version-mark">v5.0 の新</span>機能 {#tidb-gc-concurrency-span-class-version-mark-new-in-v5-0-span}
 
-- Scope: GLOBAL
-- Persists to cluster: Yes
-- Type: Integer
-- Default value: `-1`
-- Range: `[1, 256]`
-- Unit: Threads
-- Specifies the number of threads in the [Resolve Locks](/garbage-collection-overview.md#resolve-locks) step of GC. A value of `-1` means that TiDB will automatically decide the number of garbage collection threads to use.
+-   範囲: グローバル
+-   クラスターに永続化: はい
+-   タイプ: 整数
+-   デフォルト値: `-1`
+-   範囲: `[1, 256]`
+-   単位: スレッド
+-   GC の[ロックを解決する](/garbage-collection-overview.md#resolve-locks)ステップのスレッド数を指定します。値`-1`は、TiDB が使用するガベージコレクションスレッドの数を自動的に決定することを意味します。
 
-### tidb_gc_enable <span class="version-mark">New in v5.0</span>
+### tidb_gc_enable <span class="version-mark">v5.0 の新</span>機能 {#tidb-gc-enable-span-class-version-mark-new-in-v5-0-span}
 
-- Scope: GLOBAL
-- Persists to cluster: Yes
-- Type: Boolean
-- Default value: `ON`
-- Enables garbage collection for TiKV. Disabling garbage collection will reduce system performance, as old versions of rows will no longer be purged.
+-   範囲: グローバル
+-   クラスターに永続化: はい
+-   タイプ: ブール値
+-   デフォルト値: `ON`
+-   TiKV のガベージコレクションを有効にします。ガベージコレクションを無効にすると、古いバージョンの行が削除されなくなるため、システム パフォーマンスが低下します。
 
-### tidb_gc_life_time <span class="version-mark">New in v5.0</span>
+### tidb_gc_life_time <span class="version-mark">v5.0 の新</span>機能 {#tidb-gc-life-time-span-class-version-mark-new-in-v5-0-span}
 
-- Scope: GLOBAL
-- Persists to cluster: Yes
-- Type: Duration
-- Default value: `10m0s`
-- Range: `[10m0s, 8760h0m0s]`
-- The time limit during which data is retained for each GC, in the format of Go Duration. When a GC happens, the current time minus this value is the safe point.
+-   範囲: グローバル
+-   クラスターに永続化: はい
+-   タイプ: 期間
+-   デフォルト値: `10m0s`
+-   範囲: `[10m0s, 8760h0m0s]`
+-   Go Duration の形式で、GC ごとにデータが保持される制限時間。 GC が発生すると、現在の時刻からこの値を差し引いた値が安全なポイントになります。
 
-> **Note:**
+> **ノート：**
 >
-> - In scenarios of frequent updates, a large value (days or even months) for `tidb_gc_life_time` may cause potential issues, such as:
->     - Larger storage use
->     - A large amount of history data may affect performance to a certain degree, especially for range queries such as `select count(*) from t`
-> - If there is any transaction that has been running longer than `tidb_gc_life_time`, during GC, the data since `start_ts` is retained for this transaction to continue execution. For example, if `tidb_gc_life_time` is configured to 10 minutes, among all transactions being executed, the transaction that starts earliest has been running for 15 minutes, GC will retain data of the recent 15 minutes.
+> -   更新が頻繁に行われるシナリオでは、 `tidb_gc_life_time`の値が大きい (数日または数か月) と、次のような潜在的な問題が発生する可能性があります。
+>     -   より大きなストレージの使用
+>     -   大量の履歴データは、特に`select count(*) from t`などの範囲クエリの場合、パフォーマンスにある程度影響を与える可能性があります。
+> -   `tidb_gc_life_time`よりも長く実行されているトランザクションがある場合、GC 中に、このトランザクションが実行を継続するために`start_ts`以降のデータが保持されます。たとえば、 `tidb_gc_life_time`が 10 分に設定されている場合、実行中のすべてのトランザクションの中で、最も早く開始されたトランザクションが 15 分間実行されており、GC は最近の 15 分間のデータを保持します。
 
-### tidb_gc_max_wait_time <span class="version-mark">New in v6.1.0</span>
+### tidb_gc_max_wait_time v6.1.0<span class="version-mark">の新機能</span> {#tidb-gc-max-wait-time-span-class-version-mark-new-in-v6-1-0-span}
 
-- Scope: GLOBAL
-- Persists to cluster: Yes
-- Type: Integer
-- Default value: `86400`
-- Range: `[600, 31536000]`
-- Unit: Seconds
-- This variable is used to set the maximum time that active transactions block the GC safe point. During each time of GC, the safe point does not exceed the start time of the ongoing transactions by default. If the runtime of active transactions does not exceed this variable value, the GC safe point will be blocked until the runtime exceeds this value.
+-   範囲: グローバル
+-   クラスターに永続化: はい
+-   タイプ: 整数
+-   デフォルト値: `86400`
+-   範囲: `[600, 31536000]`
+-   単位: 秒
+-   この変数は、アクティブなトランザクションが GC セーフ ポイントをブロックする最大時間を設定するために使用されます。デフォルトでは、GC の各時間中、セーフ ポイントは進行中のトランザクションの開始時間を超えません。アクティブなトランザクションの実行時間がこの変数値を超えない場合、実行時間がこの値を超えるまで GC セーフ ポイントはブロックされます。
 
-### tidb_gc_run_interval <span class="version-mark">New in v5.0</span>
+### tidb_gc_run_interval <span class="version-mark">v5.0 の新</span>機能 {#tidb-gc-run-interval-span-class-version-mark-new-in-v5-0-span}
 
-- Scope: GLOBAL
-- Persists to cluster: Yes
-- Type: Duration
-- Default value: `10m0s`
-- Range: `[10m0s, 8760h0m0s]`
-- Specifies the GC interval, in the format of Go Duration, for example, `"1h30m"`, and `"15m"`
+-   範囲: グローバル
+-   クラスターに永続化: はい
+-   タイプ: 期間
+-   デフォルト値: `10m0s`
+-   範囲: `[10m0s, 8760h0m0s]`
+-   Go Duration の形式で GC 間隔を指定します (例: `"1h30m"`および`"15m"` )。
 
-### tidb_gc_scan_lock_mode <span class="version-mark">New in v5.0</span>
+### tidb_gc_scan_lock_mode <span class="version-mark">v5.0 の新</span>機能 {#tidb-gc-scan-lock-mode-span-class-version-mark-new-in-v5-0-span}
 
-> **Warning:**
+> **警告：**
 >
-> Currently, Green GC is an experimental feature. It is not recommended that you use it in production environments.
+> 現在、Green GC は実験的機能です。実稼働環境で使用することはお勧めしません。
 
-- Scope: GLOBAL
-- Persists to cluster: Yes
-- Type: Enumeration
-- Default value: `LEGACY`
-- Possible values: `PHYSICAL`, `LEGACY`
-    - `LEGACY`: Uses the old way of scanning, that is, disable Green GC.
-    - `PHYSICAL`: Uses the physical scanning method, that is, enable Green GC.
+-   範囲: グローバル
+-   クラスターに永続化: はい
+-   タイプ: 列挙
+-   デフォルト値: `LEGACY`
+-   可能な値: `PHYSICAL` 、 `LEGACY`
+    -   `LEGACY` : 従来のスキャン方法を使用します。つまり、Green GC を無効にします。
+    -   `PHYSICAL` : 物理スキャン方式を使用します。つまり、Green GC を有効にします。
 
 <CustomContent platform="tidb">
 
-- This variable specifies the way of scanning locks in the Resolve Locks step of GC. When the variable value is set to `LEGACY`, TiDB scans locks by Regions. When the value `PHYSICAL` is used, it enables each TiKV node to bypass the Raft layer and directly scan data, which can effectively mitigate the impact of GC wakening up all Regions when the [Hibernate Region](/tikv-configuration-file.md#hibernate-regions) feature is enabled, thus improving the execution speed in the Resolve Locks step.
+-   この変数は、GC のロックの解決ステップでロックをスキャンする方法を指定します。変数値が`LEGACY`に設定されている場合、TiDB はリージョンごとにロックをスキャンします。値`PHYSICAL`を使用すると、各 TiKV ノードがRaftレイヤーをバイパスし、データを直接スキャンできるようになります。これにより、 [休止リージョン](/tikv-configuration-file.md#hibernate-regions)機能が有効な場合にすべてのリージョンをウェイクアップする GC の影響を効果的に軽減できるため、Resolve Locks の実行速度が向上します。ステップ。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-- This variable specifies the way of scanning locks in the Resolve Locks step of GC. When the variable value is set to `LEGACY`, TiDB scans locks by Regions. When the value `PHYSICAL` is used, it enables each TiKV node to bypass the Raft layer and directly scan data, which can effectively mitigate the impact of GC wakening up all Regions, thus improving the execution speed in the Resolve Locks step.
+-   この変数は、GC のロックの解決ステップでロックをスキャンする方法を指定します。変数値が`LEGACY`に設定されている場合、TiDB はリージョンごとにロックをスキャンします。値`PHYSICAL`を使用すると、各 TiKV ノードがRaftレイヤーをバイパスし、データを直接スキャンできるようになります。これにより、すべてのリージョンをウェイクアップする GC の影響を効果的に軽減できるため、Resolve Locks ステップでの実行速度が向上します。
 
 </CustomContent>
 
-### tidb_general_log
+### tidb_general_log {#tidb-general-log}
 
 <CustomContent platform="tidb-cloud">
 
-> **Note:**
+> **ノート：**
 >
-> This TiDB variable is not applicable to TiDB Cloud.
+> この TiDB 変数はTiDB Cloudには適用されません。
 
 </CustomContent>
 
-- Scope: GLOBAL
-- Persists to cluster: No, only applicable to the current TiDB instance that you are connecting to.
-- Type: Boolean
-- Default value: `OFF`
+-   範囲: グローバル
+-   Persists to cluster: いいえ、接続している現在の TiDB インスタンスにのみ適用されます。
+-   タイプ: ブール値
+-   デフォルト値: `OFF`
 
 <CustomContent platform="tidb-cloud">
 
-- This variable is used to set whether to record all SQL statements in the log. This feature is disabled by default. If you need to trace all SQL statements when locating issues, enable this feature.
+-   この変数は、すべての SQL ステートメントをログに記録するかどうかを設定するために使用されます。この機能はデフォルトで無効になっています。問題を特定するときにすべての SQL ステートメントをトレースする必要がある場合は、この機能を有効にします。
 
 </CustomContent>
 
 <CustomContent platform="tidb">
 
-- This variable is used to set whether to record all SQL statements in the [log](/tidb-configuration-file.md#logfile). This feature is disabled by default. If maintenance personnel needs to trace all SQL statements when locating issues, they can enable this feature.
+-   この変数は、すべての SQL ステートメントを[ログ](/tidb-configuration-file.md#logfile)に記録するかどうかを設定するために使用されます。この機能はデフォルトで無効になっています。メンテナンス担当者が問題を特定するときにすべての SQL ステートメントをトレースする必要がある場合、この機能を有効にすることができます。
 
-- To see all records of this feature in the log, you need to set the TiDB configuration item [`log.level`](/tidb-configuration-file.md#level) to `"info"` or `"debug"` and then query the `"GENERAL_LOG"` string. The following information is recorded:
-    - `conn`: The ID of the current session.
-    - `user`: The current session user.
-    - `schemaVersion`: The current schema version.
-    - `txnStartTS`: The timestamp at which the current transaction starts.
-    - `forUpdateTS`: In the pessimistic transactional mode, `forUpdateTS` is the current timestamp of the SQL statement. When a write conflict occurs in the pessimistic transaction, TiDB retries the SQL statement currently being executed and updates this timestamp. You can configure the number of retries via [`max-retry-count`](/tidb-configuration-file.md#max-retry-count). In the optimistic transactional model, `forUpdateTS` is equivalent to `txnStartTS`.
-    - `isReadConsistency`: Indicates whether the current transactional isolation level is Read Committed (RC).
-    - `current_db`: The name of the current database.
-    - `txn_mode`: The transactional mode. Value options are `OPTIMISTIC` and `PESSIMISTIC`.
-    - `sql`: The SQL statement corresponding to the current query.
+-   ログ内のこの機能のすべてのレコードを表示するには、TiDB 構成項目[`log.level`](/tidb-configuration-file.md#level)を`"info"`または`"debug"`に設定してから、 `"GENERAL_LOG"`文字列を照会する必要があります。次の情報が記録されます。
+    -   `conn` : 現在のセッションの ID。
+    -   `user` : 現在のセッション ユーザー。
+    -   `schemaVersion` : 現在のスキーマ バージョン。
+    -   `txnStartTS` : 現在のトランザクションが開始されるタイムスタンプ。
+    -   `forUpdateTS` :悲観的トランザクション モードでは、 `forUpdateTS`は SQL ステートメントの現在のタイムスタンプです。悲観的トランザクションで書き込み競合が発生すると、TiDB は現在実行中の SQL ステートメントを再試行し、このタイムスタンプを更新します。 [`max-retry-count`](/tidb-configuration-file.md#max-retry-count)で再試行回数を設定できます。楽観的トランザクション モデルでは、 `forUpdateTS`は`txnStartTS`に相当します。
+    -   `isReadConsistency` : 現在のトランザクション分離レベルが Read Committed (RC) かどうかを示します。
+    -   `current_db` : 現在のデータベースの名前。
+    -   `txn_mode` : トランザクション モード。値のオプションは`OPTIMISTIC`と`PESSIMISTIC`です。
+    -   `sql` : 現在のクエリに対応する SQL ステートメント。
 
 </CustomContent>
 
-### tidb_general_plan_cache_size <span class="version-mark">New in v6.3.0</span>
+### tidb_general_plan_cache_size v6.3.0<span class="version-mark">の新機能</span> {#tidb-general-plan-cache-size-span-class-version-mark-new-in-v6-3-0-span}
 
-> **Warning:**
+> **警告：**
 >
-> The feature controlled by this variable is not fully functional in the current TiDB version. Do not change the default value.
+> この変数によって制御される機能は、現在の TiDB バージョンでは完全には機能しません。デフォルト値を変更しないでください。
 
-- Scope: SESSION | GLOBAL
-- Persists to cluster: Yes
-- Type: Integer
-- Default value: `100`
-- Range: `[1, 100000]`
-- This variable controls the maximum number of execution plans that can be cached by General Plan Cache.
+-   スコープ: セッション |グローバル
+-   クラスターに永続化: はい
+-   タイプ: 整数
+-   デフォルト値: `100`
+-   範囲: `[1, 100000]`
+-   この変数は、General Plan Cache によってキャッシュできる実行プランの最大数を制御します。
 
-### tidb_generate_binary_plan <span class="version-mark">New in v6.2.0</span>
+### tidb_generate_binary_plan v6.2.0<span class="version-mark">の新機能</span> {#tidb-generate-binary-plan-span-class-version-mark-new-in-v6-2-0-span}
 
-- Scope: GLOBAL
-- Persists to cluster: Yes
-- Type: Boolean
-- Default value: `ON`
-- This variable controls whether to generate binary-encoded execution plans in slow logs and statement summaries.
-- When this variable is set to `ON`, you can view visual execution plans in TiDB Dashboard. Note that TiDB Dashboard only provides visual display for execution plans generated after this variable is enabled.
-- You can execute the `SELECT tidb_decode_binary_plan('xxx...')` statement to parse the specific plan from a binary plan.
+-   範囲: グローバル
+-   クラスターに永続化: はい
+-   タイプ: ブール値
+-   デフォルト値: `ON`
+-   この変数は、スロー ログとステートメント サマリーでバイナリ エンコードされた実行プランを生成するかどうかを制御します。
+-   この変数が`ON`に設定されている場合、TiDB ダッシュボードで視覚的な実行計画を表示できます。 TiDB ダッシュボードは、この変数が有効になった後に生成された実行計画の視覚的な表示のみを提供することに注意してください。
+-   `SELECT tidb_decode_binary_plan('xxx...')`ステートメントを実行して、バイナリ プランから特定のプランを解析できます。
 
-### tidb_gogc_tuner_threshold <span class="version-mark">New in v6.4.0</span>
+### tidb_gogc_tuner_threshold v6.4.0<span class="version-mark">の新機能</span> {#tidb-gogc-tuner-threshold-span-class-version-mark-new-in-v6-4-0-span}
 
-- Scope: GLOBAL
-- Persists to cluster:  No, only applicable to the current TiDB instance that you are connecting to.
-- Default value: `0.6`
-- Range: `[0, 0.9)`
-- This variable specifies the maximum memory threshold for tuning GOGC. When the memory exceeds this threshold, GOGC Tuner stops working.
+-   範囲: グローバル
+-   Persists to cluster: いいえ、接続している現在の TiDB インスタンスにのみ適用されます。
+-   デフォルト値: `0.6`
+-   範囲: `[0, 0.9)`
+-   この変数は、GOGC を調整するための最大メモリしきい値を指定します。メモリがこのしきい値を超えると、GOGC チューナーは動作を停止します。
 
-### tidb_guarantee_linearizability <span class="version-mark">New in v5.0</span>
+### tidb_guarantee_linearizability <span class="version-mark">v5.0 の新</span>機能 {#tidb-guarantee-linearizability-span-class-version-mark-new-in-v5-0-span}
 
-- Scope: SESSION | GLOBAL
-- Persists to cluster: Yes
-- Type: Boolean
-- Default value: `ON`
-- This variable controls the way commit TS is calculated for async commit. By default (with the `ON` value), the two-phase commit requests a new TS from the PD server and uses the TS to calculate the final commit TS. In this situation, linearizability is guaranteed for all the concurrent transactions.
-- If you set this variable to `OFF`, the process of fetching TS from the PD server is skipped, with the cost that only causal consistency is guaranteed but not linearizability. For more details, see the blog post [Async Commit, the Accelerator for Transaction Commit in TiDB 5.0](https://en.pingcap.com/blog/async-commit-the-accelerator-for-transaction-commit-in-tidb-5-0/).
-- For scenarios that require only causal consistency, you can set this variable to `OFF` to improve performance.
+-   スコープ: セッション |グローバル
+-   クラスターに永続化: はい
+-   タイプ: ブール値
+-   デフォルト値: `ON`
+-   この変数は、非同期コミットのコミット TS の計算方法を制御します。デフォルト (値`ON` ) では、2 フェーズ コミットは PDサーバーから新しい TS を要求し、TS を使用して最終的なコミット TS を計算します。この状況では、すべての同時トランザクションに対して線形化可能性が保証されます。
+-   この変数を`OFF`に設定すると、PDサーバーから TS をフェッチするプロセスがスキップされます。その代償として、因果的一貫性のみが保証されますが、線形化可能性は保証されません。詳細については、ブログ投稿[Async Commit、TiDB 5.0 のトランザクション コミットのアクセラレータ](https://en.pingcap.com/blog/async-commit-the-accelerator-for-transaction-commit-in-tidb-5-0/)を参照してください。
+-   因果関係のみが必要なシナリオでは、この変数を`OFF`に設定してパフォーマンスを向上させることができます。
 
-### tidb_hash_exchange_with_new_collation
+### tidb_hash_exchange_with_new_collation {#tidb-hash-exchange-with-new-collation}
 
-- Scope: SESSION | GLOBAL
-- Persists to cluster: Yes
-- Type: Boolean
-- Default value: `ON`
-- This variable controls whether the MPP hash partition exchange operator is generated in a cluster with new collation enabled. `true` means to generate the operator, and `false` means not to generate it.
-- This variable is used for the internal operation of TiDB. It is **NOT recommended** to set this variable.
+-   スコープ: セッション |グローバル
+-   クラスターに永続化: はい
+-   タイプ: ブール値
+-   デフォルト値: `ON`
+-   この変数は、MPP ハッシュ パーティション交換演算子が、新しい照合順序が有効になっているクラスターで生成されるかどうかを制御します。 `true`は演算子を生成することを意味し、 `false`は生成しないことを意味します。
+-   この変数は、TiDB の内部操作に使用されます。この変数を設定することは**お勧めしません**。
 
-### tidb_hash_join_concurrency
+### tidb_hash_join_concurrency {#tidb-hash-join-concurrency}
 
-> **Warning:**
+> **警告：**
 >
-> Since v5.0, this variable is deprecated. Instead, use [`tidb_executor_concurrency`](#tidb_executor_concurrency-new-in-v50) for setting.
+> v5.0 以降、この変数は廃止されました。代わりに、設定には[`tidb_executor_concurrency`](#tidb_executor_concurrency-new-in-v50)を使用します。
 
-- Scope: SESSION | GLOBAL
-- Persists to cluster: Yes
-- Type: Integer
-- Default value: `-1`
-- Range: `[1, 256]`
-- Unit: Threads
-- This variable is used to set the concurrency of the `hash join` algorithm.
-- A value of `-1` means that the value of `tidb_executor_concurrency` will be used instead.
+-   スコープ: セッション |グローバル
+-   クラスターに永続化: はい
+-   タイプ: 整数
+-   デフォルト値: `-1`
+-   範囲: `[1, 256]`
+-   単位: スレッド
+-   この変数は、 `hash join`アルゴリズムの並行性を設定するために使用されます。
+-   値`-1`は、代わりに値`tidb_executor_concurrency`が使用されることを意味します。
 
-### tidb_hashagg_final_concurrency
+### tidb_hashagg_final_concurrency {#tidb-hashagg-final-concurrency}
 
-> **Warning:**
+> **警告：**
 >
-> Since v5.0, this variable is deprecated. Instead, use [`tidb_executor_concurrency`](#tidb_executor_concurrency-new-in-v50) for setting.
+> v5.0 以降、この変数は廃止されました。代わりに、設定には[`tidb_executor_concurrency`](#tidb_executor_concurrency-new-in-v50)を使用します。
 
-- Scope: SESSION | GLOBAL
-- Persists to cluster: Yes
-- Type: Integer
-- Default value: `-1`
-- Range: `[1, 256]`
-- Unit: Threads
-- This variable is used to set the concurrency of executing the concurrent `hash aggregation` algorithm in the `final` phase.
-- When the parameter of the aggregate function is not distinct, `HashAgg` is run concurrently and respectively in two phases - the `partial` phase and the `final` phase.
-- A value of `-1` means that the value of `tidb_executor_concurrency` will be used instead.
+-   スコープ: セッション |グローバル
+-   クラスターに永続化: はい
+-   タイプ: 整数
+-   デフォルト値: `-1`
+-   範囲: `[1, 256]`
+-   単位: スレッド
+-   この変数は、第`final`フェーズで並行`hash aggregation`アルゴリズムを実行する並行性を設定するために使用されます。
+-   集約関数のパラメーターが明確でない場合、 `HashAgg`は同時に実行され、それぞれ 2 つのフェーズ ( `partial`フェーズと`final`フェーズ) で実行されます。
+-   値`-1`は、代わりに値`tidb_executor_concurrency`が使用されることを意味します。
 
-### tidb_hashagg_partial_concurrency
+### tidb_hashagg_partial_concurrency {#tidb-hashagg-partial-concurrency}
 
-> **Warning:**
+> **警告：**
 >
-> Since v5.0, this variable is deprecated. Instead, use [`tidb_executor_concurrency`](#tidb_executor_concurrency-new-in-v50) for setting.
+> v5.0 以降、この変数は廃止されました。代わりに、設定には[`tidb_executor_concurrency`](#tidb_executor_concurrency-new-in-v50)を使用します。
 
-- Scope: SESSION | GLOBAL
-- Persists to cluster: Yes
-- Type: Integer
-- Default value: `-1`
-- Range: `[1, 256]`
-- Unit: Threads
-- This variable is used to set the concurrency of executing the concurrent `hash aggregation` algorithm in the `partial` phase.
-- When the parameter of the aggregate function is not distinct, `HashAgg` is run concurrently and respectively in two phases - the `partial` phase and the `final` phase.
-- A value of `-1` means that the value of `tidb_executor_concurrency` will be used instead.
+-   スコープ: セッション |グローバル
+-   クラスターに永続化: はい
+-   タイプ: 整数
+-   デフォルト値: `-1`
+-   範囲: `[1, 256]`
+-   単位: スレッド
+-   この変数は、第`partial`フェーズで並行`hash aggregation`アルゴリズムを実行する並行性を設定するために使用されます。
+-   集約関数のパラメーターが明確でない場合、 `HashAgg`は同時に実行され、それぞれ 2 つのフェーズ ( `partial`フェーズと`final`フェーズ) で実行されます。
+-   値`-1`は、代わりに値`tidb_executor_concurrency`が使用されることを意味します。
 
-### tidb_ignore_prepared_cache_close_stmt <span class="version-mark">New in v6.0.0</span>
+### tidb_ignore_prepared_cache_close_stmt v6.0.0<span class="version-mark">の新機能</span> {#tidb-ignore-prepared-cache-close-stmt-span-class-version-mark-new-in-v6-0-0-span}
 
-- Scope: SESSION | GLOBAL
-- Persists to cluster: Yes
-- Type: Boolean
-- Default value: `OFF`
-- This variable is used to set whether to ignore the commands for closing prepared statement cache.
-- When this variable is set to `ON`, the `COM_STMT_CLOSE` command of the Binary protocol and the [`DEALLOCATE PREPARE`](/sql-statements/sql-statement-deallocate.md) statement of the text protocol are ignored. For details, see [Ignore the `COM_STMT_CLOSE` command and the `DEALLOCATE PREPARE` statement](/sql-prepared-plan-cache.md#ignore-the-com_stmt_close-command-and-the-deallocate-prepare-statement).
+-   スコープ: セッション |グローバル
+-   クラスターに永続化: はい
+-   タイプ: ブール値
+-   デフォルト値: `OFF`
+-   この変数は、プリペアドステートメントキャッシュを閉じるためのコマンドを無視するかどうかを設定するために使用されます。
+-   この変数が`ON`に設定されている場合、バイナリ プロトコルの`COM_STMT_CLOSE`コマンドとテキスト プロトコルの[`DEALLOCATE PREPARE`](/sql-statements/sql-statement-deallocate.md)ステートメントは無視されます。詳細については、 [`COM_STMT_CLOSE`コマンドと<code>DEALLOCATE PREPARE</code>ステートメントを無視する](/sql-prepared-plan-cache.md#ignore-the-com_stmt_close-command-and-the-deallocate-prepare-statement)を参照してください。
 
-### tidb_index_join_batch_size
+### tidb_index_join_batch_size {#tidb-index-join-batch-size}
 
-- Scope: SESSION | GLOBAL
-- Persists to cluster: Yes
-- Type: Integer
-- Default value: `25000`
-- Range: `[1, 2147483647]`
-- Unit: Rows
-- This variable is used to set the batch size of the `index lookup join` operation.
-- Use a bigger value in OLAP scenarios, and a smaller value in OLTP scenarios.
+-   スコープ: セッション |グローバル
+-   クラスターに永続化: はい
+-   タイプ: 整数
+-   デフォルト値: `25000`
+-   範囲: `[1, 2147483647]`
+-   単位: 行
+-   この変数は、 `index lookup join`操作のバッチ サイズを設定するために使用されます。
+-   OLAP シナリオでは大きな値を使用し、OLTP シナリオでは小さな値を使用します。
 
-### tidb_index_lookup_concurrency
+### tidb_index_lookup_concurrency {#tidb-index-lookup-concurrency}
 
-> **Warning:**
+> **警告：**
 >
-> Since v5.0, this variable is deprecated. Instead, use [`tidb_executor_concurrency`](#tidb_executor_concurrency-new-in-v50) for setting.
+> v5.0 以降、この変数は廃止されました。代わりに、設定には[`tidb_executor_concurrency`](#tidb_executor_concurrency-new-in-v50)を使用します。
 
-- Scope: SESSION | GLOBAL
-- Persists to cluster: Yes
-- Type: Integer
-- Default value: `-1`
-- Range: `[1, 256]`
-- Unit: Threads
-- This variable is used to set the concurrency of the `index lookup` operation.
-- Use a bigger value in OLAP scenarios, and a smaller value in OLTP scenarios.
-- A value of `-1` means that the value of `tidb_executor_concurrency` will be used instead.
+-   スコープ: セッション |グローバル
+-   クラスターに永続化: はい
+-   タイプ: 整数
+-   デフォルト値: `-1`
+-   範囲: `[1, 256]`
+-   単位: スレッド
+-   この変数は、 `index lookup`操作の並行性を設定するために使用されます。
+-   OLAP シナリオでは大きな値を使用し、OLTP シナリオでは小さな値を使用します。
+-   値`-1`は、代わりに値`tidb_executor_concurrency`が使用されることを意味します。
 
-### tidb_index_lookup_join_concurrency
+### tidb_index_lookup_join_concurrency {#tidb-index-lookup-join-concurrency}
 
-> **Warning:**
+> **警告：**
 >
-> Since v5.0, this variable is deprecated. Instead, use [`tidb_executor_concurrency`](#tidb_executor_concurrency-new-in-v50) for setting.
+> v5.0 以降、この変数は廃止されました。代わりに、設定には[`tidb_executor_concurrency`](#tidb_executor_concurrency-new-in-v50)を使用します。
 
-- Scope: SESSION | GLOBAL
-- Persists to cluster: Yes
-- Type: Integer
-- Default value: `-1`
-- Range: `[1, 256]`
-- Unit: Threads
-- This variable is used to set the concurrency of the `index lookup join` algorithm.
-- A value of `-1` means that the value of `tidb_executor_concurrency` will be used instead.
+-   スコープ: セッション |グローバル
+-   クラスターに永続化: はい
+-   タイプ: 整数
+-   デフォルト値: `-1`
+-   範囲: `[1, 256]`
+-   単位: スレッド
+-   この変数は、 `index lookup join`アルゴリズムの並行性を設定するために使用されます。
+-   値`-1`は、代わりに値`tidb_executor_concurrency`が使用されることを意味します。
 
-### tidb_index_merge_intersection_concurrency <span class="version-mark">New in v6.5.0</span>
+### tidb_index_merge_intersection_concurrency v6.5.0<span class="version-mark">の新機能</span> {#tidb-index-merge-intersection-concurrency-span-class-version-mark-new-in-v6-5-0-span}
 
-- Scope: SESSION | GLOBAL
-- Persists to cluster: Yes
-- Default value: `-1`
-- Range: `[1, 256]`
-- This variable sets the maximum concurrency for the intersection operations that index merge performs. It is effective only when TiDB accesses partitioned tables in the dynamic pruning mode. The actual concurrency is the smaller value of `tidb_index_merge_intersection_concurrency` and the number of partitions of the partitioned table.
-- The default value `-1` means that the value of `tidb_executor_concurrency` is used.
+-   スコープ: セッション |グローバル
+-   クラスターに永続化: はい
+-   デフォルト値: `-1`
+-   範囲: `[1, 256]`
+-   この変数は、インデックス マージが実行する交差操作の最大同時実行数を設定します。これは、TiDB が動的プルーニング モードで分割されたテーブルにアクセスする場合にのみ有効です。実際の同時実行数は、 `tidb_index_merge_intersection_concurrency`と分割されたパーティションテーブルの分割数の小さい方の値です。
+-   デフォルト値`-1`は、値`tidb_executor_concurrency`が使用されることを意味します。
 
-### tidb_index_lookup_size
+### tidb_index_lookup_size {#tidb-index-lookup-size}
 
-- Scope: SESSION | GLOBAL
-- Persists to cluster: Yes
-- Type: Integer
-- Default value: `20000`
-- Range: `[1, 2147483647]`
-- Unit: Rows
-- This variable is used to set the batch size of the `index lookup` operation.
-- Use a bigger value in OLAP scenarios, and a smaller value in OLTP scenarios.
+-   スコープ: セッション |グローバル
+-   クラスターに永続化: はい
+-   タイプ: 整数
+-   デフォルト値: `20000`
+-   範囲: `[1, 2147483647]`
+-   単位: 行
+-   この変数は、 `index lookup`操作のバッチ サイズを設定するために使用されます。
+-   OLAP シナリオでは大きな値を使用し、OLTP シナリオでは小さな値を使用します。
 
-### tidb_index_serial_scan_concurrency
+### tidb_index_serial_scan_concurrency {#tidb-index-serial-scan-concurrency}
 
-- Scope: SESSION | GLOBAL
-- Persists to cluster: Yes
-- Type: Integer
-- Default value: `1`
-- Range: `[1, 256]`
-- Unit: Threads
-- This variable is used to set the concurrency of the `serial scan` operation.
-- Use a bigger value in OLAP scenarios, and a smaller value in OLTP scenarios.
+-   スコープ: セッション |グローバル
+-   クラスターに永続化: はい
+-   タイプ: 整数
+-   デフォルト値: `1`
+-   範囲: `[1, 256]`
+-   単位: スレッド
+-   この変数は、 `serial scan`操作の並行性を設定するために使用されます。
+-   OLAP シナリオでは大きな値を使用し、OLTP シナリオでは小さな値を使用します。
 
-### tidb_init_chunk_size
+### tidb_init_chunk_size {#tidb-init-chunk-size}
 
-- Scope: SESSION | GLOBAL
-- Persists to cluster: Yes
-- Type: Integer
-- Default value: `32`
-- Range: `[1, 32]`
-- Unit: Rows
-- This variable is used to set the number of rows for the initial chunk during the execution process.
+-   スコープ: セッション |グローバル
+-   クラスターに永続化: はい
+-   タイプ: 整数
+-   デフォルト値: `32`
+-   範囲: `[1, 32]`
+-   単位: 行
+-   この変数は、実行プロセス中に初期チャンクの行数を設定するために使用されます。
 
-### tidb_isolation_read_engines <span class="version-mark">New in v4.0</span>
+### tidb_isolation_read_engines <span class="version-mark">v4.0 の新</span>機能 {#tidb-isolation-read-engines-span-class-version-mark-new-in-v4-0-span}
 
-- Scope: SESSION
-- Default value: `tikv,tiflash,tidb`
-- This variable is used to set the storage engine list that TiDB can use when reading data.
+-   スコープ: セッション
+-   デフォルト値: `tikv,tiflash,tidb`
+-   この変数は、データの読み取り時に TiDB が使用できるストレージ エンジン リストを設定するために使用されます。
 
-### tidb_last_ddl_info <span class="version-mark">New in v6.0.0</span>
+### tidb_last_ddl_info v6.0.0<span class="version-mark">の新機能</span> {#tidb-last-ddl-info-span-class-version-mark-new-in-v6-0-0-span}
 
-- Scope: SESSION
-- Default value: ""
-- Type: String
-- This is a read-only variable. It is internally used in TiDB to get the information of the last DDL operation within the current session.
-    - "query": The last DDL query string.
-    - "seq_num": The sequence number for each DDL operation. It is used to identify the order of DDL operations.
+-   スコープ: セッション
+-   デフォルト値: &quot;&quot;
+-   タイプ: 文字列
+-   これは読み取り専用の変数です。現在のセッション内の最後の DDL 操作の情報を取得するために、TiDB で内部的に使用されます。
+    -   &quot;query&quot;: 最後の DDL クエリ文字列。
+    -   &quot;seq_num&quot;: 各 DDL 操作のシーケンス番号。 DDL操作の順序を識別するために使用されます。
 
-### tidb_last_query_info <span class="version-mark">New in v4.0.14</span>
+### tidb_last_query_info v4.0.14<span class="version-mark">の新機能</span> {#tidb-last-query-info-span-class-version-mark-new-in-v4-0-14-span}
 
-- Scope: SESSION
-- Default value: ""
-- This is a read-only variable. It is internally used in TiDB to query the transaction information of the last DML statement. The information includes:
-    - `txn_scope`: The scope of the transaction, which can be `global` or `local`.
-    - `start_ts`: The start timestamp of the transaction.
-    - `for_update_ts`: The `for_update_ts` of the previously executed DML statement. This is an internal term of TiDB used for tests. Usually, you can ignore this information.
-    - `error`: The error message, if any.
+-   スコープ: セッション
+-   デフォルト値: &quot;&quot;
+-   これは読み取り専用の変数です。最後の DML ステートメントのトランザクション情報を照会するために、TiDB で内部的に使用されます。情報には次が含まれます。
+    -   `txn_scope` : `global`または`local`のトランザクションのスコープ。
+    -   `start_ts` : トランザクションの開始タイムスタンプ。
+    -   `for_update_ts` : 以前に実行された DML ステートメントの`for_update_ts` 。これは、テスト用に使用される TiDB の内部用語です。通常、この情報は無視できます。
+    -   `error` : エラー メッセージ (存在する場合)。
 
-### tidb_last_txn_info <span class="version-mark">New in v4.0.9</span>
+### tidb_last_txn_info v4.0.9<span class="version-mark">の新機能</span> {#tidb-last-txn-info-span-class-version-mark-new-in-v4-0-9-span}
 
-- Scope: SESSION
-- Type: String
-- This variable is used to get the last transaction information within the current session. It is a read-only variable. The transaction information includes:
-    - The transaction scope.
-    - The start and commit TS.
-    - The transaction commit mode, which might be a two-phase, one-phase, or async commit.
-    - The information of transaction fallback from async commit or one-phase commit to two-phase commit.
-    - The error encountered.
+-   スコープ: セッション
+-   タイプ: 文字列
+-   この変数は、現在のセッション内の最後のトランザクション情報を取得するために使用されます。これは読み取り専用の変数です。取引情報には以下が含まれます。
+    -   トランザクション スコープ。
+    -   TS の開始とコミット。
+    -   トランザクション コミット モード。2 フェーズ、1 フェーズ、または非同期コミットの可能性があります。
+    -   非同期コミットまたは 1 フェーズ コミットから 2 フェーズ コミットへのトランザクション フォールバックの情報。
+    -   発生したエラー。
 
-### `tidb_last_plan_replayer_token` <span class="version-mark">New in v6.3.0</span>
+### <code>tidb_last_plan_replayer_token</code><span class="version-mark">の新機能</span> {#code-tidb-last-plan-replayer-token-code-span-class-version-mark-new-in-v6-3-0-span}
 
-- Scope: SESSION
-- Type: String
-- This variable is read-only and is used to obtain the result of the last `PLAN REPLAYER DUMP` execution in the current session.
+-   スコープ: セッション
+-   タイプ: 文字列
+-   この変数は読み取り専用で、現在のセッションの最後の`PLAN REPLAYER DUMP`の実行の結果を取得するために使用されます。
 
-### tidb_log_file_max_days <span class="version-mark">New in v5.3.0</span>
+### tidb_log_file_max_days v5.3.0<span class="version-mark">の新機能</span> {#tidb-log-file-max-days-span-class-version-mark-new-in-v5-3-0-span}
 
-- Scope: GLOBAL
-- Persists to cluster: No, only applicable to the current TiDB instance that you are connecting to.
-- Type: Integer
-- Default value: `0`
-- Range: `[0, 2147483647]`
+-   範囲: グローバル
+-   Persists to cluster: いいえ、接続している現在の TiDB インスタンスにのみ適用されます。
+-   タイプ: 整数
+-   デフォルト値: `0`
+-   範囲: `[0, 2147483647]`
 
 <CustomContent platform="tidb">
 
-- This variable is used to set the maximum days that the log is retained on the current TiDB instance. Its value defaults to the value of the [`max-days`](/tidb-configuration-file.md#max-days) configuration in the configuration file. Changing the variable value only affects the current TiDB instance. After TiDB is restarted, the variable value is reset and the configuration value is not affected.
+-   この変数は、ログが現在の TiDB インスタンスに保持される最大日数を設定するために使用されます。その値のデフォルトは、構成ファイルの[`max-days`](/tidb-configuration-file.md#max-days)構成の値です。変数値の変更は、現在の TiDB インスタンスにのみ影響します。 TiDB の再始動後、変数値はリセットされ、構成値は影響を受けません。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-- This variable is used to set the maximum days that the log is retained on the current TiDB instance.
+-   この変数は、ログが現在の TiDB インスタンスに保持される最大日数を設定するために使用されます。
 
 </CustomContent>
 
-### tidb_low_resolution_tso
+### tidb_low_resolution_tso {#tidb-low-resolution-tso}
 
-- Scope: SESSION
-- Type: Boolean
-- Default value: `OFF`
-- This variable is used to set whether to enable the low precision TSO feature. After this feature is enabled, new transactions use a timestamp updated every 2 seconds to read data.
-- The main applicable scenario is to reduce the overhead of acquiring TSO for small read-only transactions when reading old data is acceptable.
+-   スコープ: セッション
+-   タイプ: ブール値
+-   デフォルト値: `OFF`
+-   この変数は、低精度 TSO 機能を有効にするかどうかを設定するために使用されます。この機能を有効にすると、新しいトランザクションは 2 秒ごとに更新されるタイムスタンプを使用してデータを読み取ります。
+-   適用可能な主なシナリオは、古いデータの読み取りが許容される場合に、小さな読み取り専用トランザクションの TSO を取得するオーバーヘッドを削減することです。
 
-### tidb_max_auto_analyze_time <span class="version-mark">New in v6.1.0</span>
+### tidb_max_auto_analyze_time v6.1.0<span class="version-mark">の新機能</span> {#tidb-max-auto-analyze-time-span-class-version-mark-new-in-v6-1-0-span}
 
-- Scope: GLOBAL
-- Persists to cluster: Yes
-- Type: Integer
-- Default value: `43200`
-- Range: `[0, 2147483647]`
-- Unit: Seconds
-- This variable is used to specify the maximum execution time of automatic `ANALYZE` tasks. When the execution time of an automatic `ANALYZE` task exceeds the specified time, the task will be terminated. When the value of this variable is `0`, there is no limit to the maximum execution time of automatic `ANALYZE` tasks.
+-   範囲: グローバル
+-   クラスターに永続化: はい
+-   タイプ: 整数
+-   デフォルト値: `43200`
+-   範囲: `[0, 2147483647]`
+-   単位: 秒
+-   この変数は、自動`ANALYZE`タスクの最大実行時間を指定するために使用されます。自動`ANALYZE`タスクの実行時間が指定時間を超えると、タスクは終了します。この変数の値が`0`の場合、自動`ANALYZE`タスクの最大実行時間に制限はありません。
 
-### tidb_max_chunk_size
+### tidb_max_chunk_size {#tidb-max-chunk-size}
 
-- Scope: SESSION | GLOBAL
-- Persists to cluster: Yes
-- Type: Integer
-- Default value: `1024`
-- Range: `[32, 2147483647]`
-- Unit: Rows
-- This variable is used to set the maximum number of rows in a chunk during the execution process. Setting to too large of a value may cause cache locality issues.
+-   スコープ: セッション |グローバル
+-   クラスターに永続化: はい
+-   タイプ: 整数
+-   デフォルト値: `1024`
+-   範囲: `[32, 2147483647]`
+-   単位: 行
+-   この変数は、実行プロセス中にチャンク内の最大行数を設定するために使用されます。大きすぎる値を設定すると、キャッシュの局所性の問題が発生する可能性があります。
 
-### tidb_max_delta_schema_count <span class="version-mark">New in v2.1.18 and v3.0.5</span>
+### tidb_max_delta_schema_count <span class="version-mark">v2.1.18 および v3.0.5 の新機能</span> {#tidb-max-delta-schema-count-span-class-version-mark-new-in-v2-1-18-and-v3-0-5-span}
 
-- Scope: GLOBAL
-- Persists to cluster: Yes
-- Type: Integer
-- Default value: `1024`
-- Range: `[100, 16384]`
-- This variable is used to set the maximum number of schema versions (the table IDs modified for corresponding versions) allowed to be cached. The value range is 100 ~ 16384.
+-   範囲: グローバル
+-   クラスターに永続化: はい
+-   タイプ: 整数
+-   デフォルト値: `1024`
+-   範囲: `[100, 16384]`
+-   この変数は、キャッシュできるスキーマ バージョン (対応するバージョン用に変更されたテーブル ID) の最大数を設定するために使用されます。値の範囲は 100 ～ 16384 です。
 
-### tidb_max_paging_size <span class="version-mark">New in v6.3.0</span>
+### tidb_max_paging_size v6.3.0<span class="version-mark">の新機能</span> {#tidb-max-paging-size-span-class-version-mark-new-in-v6-3-0-span}
 
-- Scope: SESSION | GLOBAL
-- Persists to cluster: Yes
-- Type: Integer
-- Default value: `50000`
-- Range: `[1, 9223372036854775807]`
-- Unit: Rows
-- This variable is used to set the maximum number of rows during the coprocessor paging request process. Setting it to too small a value increases the RPC count between TiDB and TiKV, while setting it to too large a value results in excessive memory usage in some cases, such as loading data and full table scan. The default value of this variable brings better performance in OLTP scenarios than in OLAP scenarios. If the application only uses TiKV as the storage engine, consider increasing the value of this variable when executing OLAP workload queries, which might bring you better performance.
+-   スコープ: セッション |グローバル
+-   クラスターに永続化: はい
+-   タイプ: 整数
+-   デフォルト値: `50000`
+-   範囲: `[1, 9223372036854775807]`
+-   単位: 行
+-   この変数は、コプロセッサーのページング要求プロセス中に行の最大数を設定するために使用されます。設定値が小さすぎると、TiDB と TiKV 間の RPC カウントが増加しますが、設定値が大きすぎると、データのロードやテーブル全体のスキャンなど、場合によってはメモリの使用量が過剰になります。この変数のデフォルト値は、OLAP シナリオよりも OLTP シナリオで優れたパフォーマンスをもたらします。アプリケーションがストレージ エンジンとして TiKV のみを使用する場合は、OLAP ワークロード クエリを実行するときにこの変数の値を増やすことを検討してください。これにより、パフォーマンスが向上する可能性があります。
 
-### tidb_max_tiflash_threads <span class="version-mark">New in v6.1.0</span>
+### tidb_max_tiflash_threads v6.1.0<span class="version-mark">の新機能</span> {#tidb-max-tiflash-threads-span-class-version-mark-new-in-v6-1-0-span}
 
-- Scope: SESSION | GLOBAL
-- Persists to cluster: Yes
-- Type: Integer
-- Default value: `-1`
-- Range: `[-1, 256]`
-- Unit: Threads
-- This variable is used to set the maximum concurrency for TiFlash to execute a request. The default value is `-1`, indicating that this system variable is invalid. When the value is `0`, the maximum number of threads is automatically configured by TiFlash.
+-   スコープ: セッション |グローバル
+-   クラスターに永続化: はい
+-   タイプ: 整数
+-   デフォルト値: `-1`
+-   範囲: `[-1, 256]`
+-   単位: スレッド
+-   この変数は、 TiFlashがリクエストを実行する最大同時実行数を設定するために使用されます。デフォルト値は`-1`で、このシステム変数が無効であることを示します。値が`0`の場合、スレッドの最大数はTiFlashによって自動的に構成されます。
 
-### tidb_mem_oom_action <span class="version-mark">New in v6.1.0</span>
+### tidb_mem_oom_action v6.1.0<span class="version-mark">の新機能</span> {#tidb-mem-oom-action-span-class-version-mark-new-in-v6-1-0-span}
 
-- Scope: GLOBAL
-- Persists to cluster: Yes
-- Type: Enumeration
-- Default value: `CANCEL`
-- Possible values: `CANCEL`, `LOG`
+-   範囲: グローバル
+-   クラスターに永続化: はい
+-   タイプ: 列挙
+-   デフォルト値: `CANCEL`
+-   可能な値: `CANCEL` 、 `LOG`
 
 <CustomContent platform="tidb">
 
-- Specifies what operation TiDB performs when a single SQL statement exceeds the memory quota specified by `tidb_mem_quota_query` and cannot be spilled over to disk. See [TiDB Memory Control](/configure-memory-usage.md) for details.
+-   単一の SQL ステートメントが`tidb_mem_quota_query`で指定されたメモリ クォータを超え、ディスクにスピルオーバーできない場合に、TiDB が実行する操作を指定します。詳細は[TiDB メモリ制御](/configure-memory-usage.md)を参照してください。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-- Specifies what operation TiDB performs when a single SQL statement exceeds the memory quota specified by [`tidb_mem_quota_query`](#tidb_mem_quota_query) and cannot be spilled over to disk.
+-   単一の SQL ステートメントが[`tidb_mem_quota_query`](#tidb_mem_quota_query)で指定されたメモリ クォータを超え、ディスクにスピルオーバーできない場合に、TiDB が実行する操作を指定します。
 
 </CustomContent>
 
-- The default value is `CANCEL`, but in TiDB v4.0.2 and earlier versions, the default value is `LOG`.
-- This setting was previously a `tidb.toml` option (`oom-action`), but changed to a system variable starting from TiDB v6.1.0.
+-   デフォルト値は`CANCEL`ですが、TiDB v4.0.2 以前のバージョンでは、デフォルト値は`LOG`です。
+-   この設定は以前は`tidb.toml`オプション ( `oom-action` ) でしたが、TiDB v6.1.0 からシステム変数に変更されました。
 
-### tidb_mem_quota_analyze <span class="version-mark">New in v6.1.0</span>
+### tidb_mem_quota_analyze v6.1.0<span class="version-mark">の新機能</span> {#tidb-mem-quota-analyze-span-class-version-mark-new-in-v6-1-0-span}
 
-> **Warning:**
+> **警告：**
 >
-> Currently, the `ANALYZE` memory quota is an experimental feature, and the memory statistics might be inaccurate in production environments.
+> 現在、 `ANALYZE`メモリ クォータは実験的機能であり、本番環境ではメモリ統計が不正確になる可能性があります。
 
-- Scope: GLOBAL
-- Persists to cluster: Yes
-- Type: Integer
-- Default value: `-1`
-- Range: `[-1, 9223372036854775807]`
-- Unit: Bytes
-- This variable controls the maximum memory usage of TiDB updating statistics. Such a memory usage occurs when you manually execute [`ANALYZE TABLE`](/sql-statements/sql-statement-analyze-table.md) and when TiDB automatically analyzes tasks in the background. When the total memory usage exceeds this threshold, user-executed `ANALYZE` will exit, and an error message is reported that reminds you to try a lower sampling rate or retry later. If the automatic task in the TiDB background exits because the memory threshold is exceeded, and the sampling rate used is higher than the default value, TiDB will retry the update using the default sampling rate. When this variable value is negative or zero, TiDB does not limit the memory usage of both the manual and automatic update tasks.
+-   範囲: グローバル
+-   クラスターに永続化: はい
+-   タイプ: 整数
+-   デフォルト値: `-1`
+-   範囲: `[-1, 9223372036854775807]`
+-   単位: バイト
+-   この変数は、TiDB 更新統計の最大メモリ使用量を制御します。このようなメモリ使用量は、手動で[`ANALYZE TABLE`](/sql-statements/sql-statement-analyze-table.md)を実行するときと、TiDB がバックグラウンドでタスクを自動的に分析するときに発生します。合計メモリ使用量がこのしきい値を超えると、ユーザーが実行した`ANALYZE`が終了し、サンプリング レートを下げるか後で再試行するように促すエラー メッセージが報告されます。メモリのしきい値を超えたために TiDB バックグラウンドの自動タスクが終了し、使用されているサンプリング レートがデフォルト値よりも高い場合、TiDB はデフォルトのサンプリング レートを使用して更新を再試行します。この変数の値が負またはゼロの場合、TiDB は手動更新タスクと自動更新タスクの両方のメモリ使用量を制限しません。
 
-> **Note:**
+> **ノート：**
 >
-> `auto_analyze` will be triggered in a TiDB cluster only when `run-auto-analyze` is enabled in the TiDB startup configuration file.
+> `auto_analyze`は、TiDB スタートアップ構成ファイルで`run-auto-analyze`が有効になっている場合にのみ、TiDB クラスターでトリガーされます。
 
-### tidb_mem_quota_apply_cache <span class="version-mark">New in v5.0</span>
+### tidb_mem_quota_apply_cache <span class="version-mark">v5.0 の新</span>機能 {#tidb-mem-quota-apply-cache-span-class-version-mark-new-in-v5-0-span}
 
-- Scope: SESSION | GLOBAL
-- Persists to cluster: Yes
-- Type: Integer
-- Default value: `33554432` (32 MiB)
-- Range: `[0, 9223372036854775807]`
-- Unit: Bytes
-- This variable is used to set the memory usage threshold of the local cache in the `Apply` operator.
-- The local cache in the `Apply` operator is used to speed up the computation of the `Apply` operator. You can set the variable to `0` to disable the `Apply` cache feature.
+-   スコープ: セッション |グローバル
+-   クラスターに永続化: はい
+-   タイプ: 整数
+-   デフォルト値: `33554432` (32 MiB)
+-   範囲: `[0, 9223372036854775807]`
+-   単位: バイト
+-   この変数は、 `Apply`演算子でローカル キャッシュのメモリ使用量のしきい値を設定するために使用されます。
+-   `Apply`演算子のローカル キャッシュは、 `Apply`演算子の計算を高速化するために使用されます。変数を`0`に設定して、 `Apply`キャッシュ機能を無効にすることができます。
 
-### tidb_mem_quota_binding_cache <span class="version-mark">New in v6.0.0</span>
+### tidb_mem_quota_binding_cache v6.0.0<span class="version-mark">の新機能</span> {#tidb-mem-quota-binding-cache-span-class-version-mark-new-in-v6-0-0-span}
 
-- Scope: GLOBAL
-- Persists to cluster: Yes
-- Type: Integer
-- Default value: `67108864`
-- Range: `[0, 2147483647]`
-- Unit: Bytes
-- This variable is used to set the threshold of the memory used for caching bindings.
-- If a system creates or captures excessive bindings, resulting in overuse of memory space, TiDB returns a warning in the log. In this case, the cache cannot hold all available bindings or determine which bindings to store. For this reason, some queries might miss their bindings. To address this problem, you can increase the value of this variable, which increases the memory used for caching bindings. After modifying this parameter, you need to run `admin reload bindings` to reload bindings and validate the modification.
+-   範囲: グローバル
+-   クラスターに永続化: はい
+-   タイプ: 整数
+-   デフォルト値: `67108864`
+-   範囲: `[0, 2147483647]`
+-   単位: バイト
+-   この変数は、バインディングのキャッシュに使用されるメモリのしきい値を設定するために使用されます。
+-   システムが過剰なバインドを作成またはキャプチャして、メモリ領域が過剰に使用された場合、TiDB はログに警告を返します。この場合、キャッシュは使用可能なすべてのバインディングを保持したり、保存するバインディングを決定したりできません。このため、クエリによってはバインディングが失われる場合があります。この問題に対処するには、この変数の値を大きくします。これにより、バインディングのキャッシュに使用されるメモリが増加します。このパラメーターを変更した後、 `admin reload bindings`を実行してバインディングをリロードし、変更を検証する必要があります。
 
-### tidb_mem_quota_query
+### tidb_mem_quota_query {#tidb-mem-quota-query}
 
-- Scope: SESSION | GLOBAL
-- Persists to cluster: Yes
-- Type: Integer
-- Default value: `1073741824` (1 GiB)
-- Range: `[-1, 9223372036854775807]`
-- Unit: Bytes
+-   スコープ: セッション |グローバル
+-   クラスターに永続化: はい
+-   タイプ: 整数
+-   デフォルト値: `1073741824` (1 GiB)
+-   範囲: `[-1, 9223372036854775807]`
+-   単位: バイト
 
 <CustomContent platform="tidb">
 
-- For versions earlier than TiDB v6.1.0, this is a session scope variable and uses the value of `mem-quota-query` from `tidb.toml` as an initial value. Starting from v6.1.0, `tidb_mem_quota_query` is a `SESSION | GLOBAL` scope variable.
-- For versions earlier than TiDB v6.5.0, this variable is used to set the threshold value of memory quota for **a query**. If the memory quota of a query during execution exceeds the threshold value, TiDB performs the operation defined by [`tidb_mem_oom_action`](#tidb_mem_oom_action-new-in-v610).
-- For TiDB v6.5.0 and later versions, this variable is used to set the threshold value of memory quota for **a session**. If the memory quota of a session during execution exceeds the threshold value, TiDB performs the operation defined by [`tidb_mem_oom_action`](#tidb_mem_oom_action-new-in-v610). Note that starting from TiDB v6.5.0, the memory usage of a session contains the memory consumed by the transactions in the session. For the control behavior of transaction memory usage in TiDB v6.5.0 and later versions, see [`txn-total-size-limit`](/tidb-configuration-file.md#txn-total-size-limit).
-- When you set the variable value to `0` or `-1`, the memory threshold is positive infinity. When you set a value smaller than 128, the value will be defaulted to `128`.
+-   TiDB v6.1.0 より前のバージョンでは、これはセッション スコープ変数であり、初期値として`tidb.toml`から`mem-quota-query`の値を使用します。 v6.1.0 から、 `tidb_mem_quota_query`は`SESSION | GLOBAL`スコープ変数です。
+-   TiDB v6.5.0 より前のバージョンでは、この変数を使用して**、クエリ**のメモリ クォータのしきい値を設定します。実行中のクエリのメモリ クォータがしきい値を超えた場合、TiDB は[`tidb_mem_oom_action`](#tidb_mem_oom_action-new-in-v610)で定義された操作を実行します。
+-   TiDB v6.5.0 以降のバージョンでは、この変数を使用して**、セッション**のメモリ クォータのしきい値を設定します。実行中のセッションのメモリ クォータがしきい値を超えた場合、TiDB は[`tidb_mem_oom_action`](#tidb_mem_oom_action-new-in-v610)で定義された操作を実行します。 TiDB v6.5.0 以降、セッションのメモリ使用量には、セッション内のトランザクションによって消費されるメモリが含まれることに注意してください。 TiDB v6.5.0 以降のバージョンでのトランザクション メモリ使用量の制御動作については、 [`txn-total-size-limit`](/tidb-configuration-file.md#txn-total-size-limit)を参照してください。
+-   変数の値を`0`または`-1`に設定すると、メモリのしきい値は正の無限大になります。 128 より小さい値を設定すると、値はデフォルトで`128`になります。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-- For versions earlier than TiDB v6.1.0, this is a session scope variable. Starting from v6.1.0, `tidb_mem_quota_query` is a `SESSION | GLOBAL` scope variable.
-- For versions earlier than TiDB v6.5.0, this variable is used to set the threshold value of memory quota for **a query**. If the memory quota of a query during execution exceeds the threshold value, TiDB performs the operation defined by [`tidb_mem_oom_action`](#tidb_mem_oom_action-new-in-v610).
-- For TiDB v6.5.0 and later versions, this variable is used to set the threshold value of memory quota for **a session**. If the memory quota of a session during execution exceeds the threshold value, TiDB performs the operation defined by [`tidb_mem_oom_action`](#tidb_mem_oom_action-new-in-v610). Note that starting from TiDB v6.5.0, the memory usage of a session contains the memory consumed by the transactions in the session.
-- When you set the variable value to `0` or `-1`, the memory threshold is positive infinity. When you set a value smaller than 128, the value will be defaulted to `128`.
+-   TiDB v6.1.0 より前のバージョンでは、これはセッション スコープ変数です。 v6.1.0 から、 `tidb_mem_quota_query`は`SESSION | GLOBAL`スコープ変数です。
+-   TiDB v6.5.0 より前のバージョンでは、この変数を使用して**、クエリ**のメモリ クォータのしきい値を設定します。実行中のクエリのメモリ クォータがしきい値を超えた場合、TiDB は[`tidb_mem_oom_action`](#tidb_mem_oom_action-new-in-v610)で定義された操作を実行します。
+-   TiDB v6.5.0 以降のバージョンでは、この変数を使用して**、セッション**のメモリ クォータのしきい値を設定します。実行中のセッションのメモリ クォータがしきい値を超えた場合、TiDB は[`tidb_mem_oom_action`](#tidb_mem_oom_action-new-in-v610)で定義された操作を実行します。 TiDB v6.5.0 以降、セッションのメモリ使用量には、セッション内のトランザクションによって消費されるメモリが含まれることに注意してください。
+-   変数の値を`0`または`-1`に設定すると、メモリのしきい値は正の無限大になります。 128 より小さい値を設定すると、値はデフォルトで`128`になります。
 
 </CustomContent>
 
-### tidb_memory_debug_mode_alarm_ratio
+### tidb_memory_debug_mode_alarm_ratio {#tidb-memory-debug-mode-alarm-ratio}
 
-- Scope: SESSION
-- Type: Float
-- Default value: `0`
-- This variable represents the memory statistics error value allowed in the TiDB memory debug mode.
-- This variable is used for the internal testing of TiDB. It is **NOT recommended** to set this variable.
+-   スコープ: セッション
+-   タイプ: フロート
+-   デフォルト値: `0`
+-   この変数は、TiDB メモリ デバッグ モードで許容されるメモリ統計エラー値を表します。
+-   この変数は、TiDB の内部テストに使用されます。この変数を設定することは**お勧めしません**。
 
-### tidb_memory_debug_mode_min_heap_inuse
+### tidb_memory_debug_mode_min_heap_inuse {#tidb-memory-debug-mode-min-heap-inuse}
 
-- Scope: SESSION
-- Type: Integer
-- Default value: `0`
-- This variable is used for the internal testing of TiDB. It is **NOT recommended** to set this variable. Enabling this variable will affect the performance of TiDB.
-- After configuring this parameter, TiDB will enter the memory debug mode to analyze the accuracy of memory tracking. TiDB will frequently trigger GC during the execution of subsequent SQL statements, and compare the actual memory usage and memory statistics. If the current memory usage is greater than `tidb_memory_debug_mode_min_heap_inuse` and the memory statistics error exceeds `tidb_memory_debug_mode_alarm_ratio`, TiDB will output the relevant memory information to the log and file.
+-   スコープ: セッション
+-   タイプ: 整数
+-   デフォルト値: `0`
+-   この変数は、TiDB の内部テストに使用されます。この変数を設定することは**お勧めしません**。この変数を有効にすると、TiDB のパフォーマンスに影響します。
+-   このパラメータを設定した後、TiDB はメモリ デバッグ モードに入り、メモリ トラッキングの精度を分析します。 TiDB は、後続の SQL ステートメントの実行中に頻繁に GC をトリガーし、実際のメモリ使用量とメモリ統計を比較します。現在のメモリ使用量が`tidb_memory_debug_mode_min_heap_inuse`より大きく、メモリ統計エラーが`tidb_memory_debug_mode_alarm_ratio`を超える場合、TiDB は関連するメモリ情報をログとファイルに出力します。
 
-### tidb_memory_usage_alarm_ratio
+### tidb_memory_usage_alarm_ratio {#tidb-memory-usage-alarm-ratio}
 
 <CustomContent platform="tidb-cloud">
 
-> **Note:**
+> **ノート：**
 >
-> This TiDB variable is not applicable to TiDB Cloud.
+> この TiDB 変数はTiDB Cloudには適用されません。
 
 </CustomContent>
 
-- Scope: GLOBAL
-- Persists to cluster: Yes
-- Type: Float
-- Default value: `0.7`
-- Range: `[0.0, 1.0]`
+-   範囲: グローバル
+-   クラスターに永続化: はい
+-   タイプ: フロート
+-   デフォルト値: `0.7`
+-   範囲: `[0.0, 1.0]`
 
 <CustomContent platform="tidb">
 
-- This variable sets the memory usage ratio that triggers the tidb-server memory alarm. By default, TiDB prints an alarm log when TiDB memory usage exceeds 70% of its total memory and any of the [alarm conditions](/configure-memory-usage.md#trigger-the-alarm-of-excessive-memory-usage) is met.
-- When this variable is configured to `0` or `1`, it means the memory threshold alarm feature is disabled.
-- When this variable is configured to a value greater than `0` and less than `1`, it means that the memory threshold alarm feature is enabled.
+-   この変数は、tidb-server メモリ アラームをトリガーするメモリ使用率を設定します。デフォルトでは、TiDB のメモリ使用量がその総メモリの 70% を超え、 [アラーム条件](/configure-memory-usage.md#trigger-the-alarm-of-excessive-memory-usage)つのいずれかが満たされると、TiDB はアラーム ログを出力します。
+-   この変数が`0`または`1`に設定されている場合、メモリしきい値アラーム機能が無効になっていることを意味します。
+-   この変数が`0`より大きく`1`より小さい値に設定されている場合、メモリしきい値アラーム機能が有効になっていることを意味します。
 
-    - If the value of the system variable [`tidb_server_memory_limit`](#tidb_server_memory_limit-new-in-v640) is `0`, the memory alarm threshold is `tidb_memory-usage-alarm-ratio * system memory size`.
-    - If the value of the system variable `tidb_server_memory_limit` is set to greater than 0, the memory alarm threshold is `tidb_memory-usage-alarm-ratio * tidb_server_memory_limit`.
+    -   システム変数[`tidb_server_memory_limit`](#tidb_server_memory_limit-new-in-v640)の値が`0`の場合、メモリ アラームのしきい値は`tidb_memory-usage-alarm-ratio * system memory size`です。
+    -   システム変数`tidb_server_memory_limit`の値が 0 より大きい値に設定されている場合、メモリ アラームのしきい値は`tidb_memory-usage-alarm-ratio * tidb_server_memory_limit`です。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-- This variable sets the memory usage ratio that triggers the [tidb-server memory alarm](https://docs.pingcap.com/tidb/stable/configure-memory-usage#trigger-the-alarm-of-excessive-memory-usage).
-- When this variable is configured to `0` or `1`, it means the memory threshold alarm feature is disabled.
-- When this variable is configured to a value greater than `0` and less than `1`, it means that the memory threshold alarm feature is enabled.
+-   この変数は、 [tidb-server メモリ アラーム](https://docs.pingcap.com/tidb/stable/configure-memory-usage#trigger-the-alarm-of-excessive-memory-usage)をトリガーするメモリ使用率を設定します。
+-   この変数が`0`または`1`に設定されている場合、メモリしきい値アラーム機能が無効になっていることを意味します。
+-   この変数が`0`より大きく`1`より小さい値に設定されている場合、メモリしきい値アラーム機能が有効になっていることを意味します。
 
 </CustomContent>
 
-### `tidb_memory_usage_alarm_keep_record_num` <span class="version-mark">New in v6.4.0</span>
+### <code>tidb_memory_usage_alarm_keep_record_num</code><span class="version-mark">の新機能</span> {#code-tidb-memory-usage-alarm-keep-record-num-code-span-class-version-mark-new-in-v6-4-0-span}
 
 <CustomContent platform="tidb-cloud">
 
-> **Note:**
+> **ノート：**
 >
-> This TiDB variable is not applicable to TiDB Cloud.
+> この TiDB 変数はTiDB Cloudには適用されません。
 
 </CustomContent>
 
-- Scope: GLOBAL
-- Persists to cluster: Yes
-- Default value: `5`
-- Range: `[1, 10000]`
-- When the tidb-server memory usage exceeds the memory alarm threshold and triggers an alarm, TiDB only retains the status files generated during the recent 5 alarms by default. You can adjust this number with this variable.
+-   範囲: グローバル
+-   クラスターに永続化: はい
+-   デフォルト値: `5`
+-   範囲: `[1, 10000]`
+-   tidb サーバーのメモリ使用量がメモリ アラームのしきい値を超えてアラームがトリガーされると、TiDB はデフォルトで最近の 5 つのアラーム中に生成されたステータス ファイルのみを保持します。この数値は、この変数で調整できます。
 
-### tidb_merge_join_concurrency
+### tidb_merge_join_concurrency {#tidb-merge-join-concurrency}
 
-- Scope: SESSION | GLOBAL
-- Persists to cluster: Yes
-- Type: Integer
-- Range: `[1, 256]`
-- Default value: `1`
-- This variable sets the concurrency of the `MergeJoin` operator when a query is executed.
-- It is **NOT recommended** to set this variable. Modifying the value of this variable might cause data correctness issues.
+-   スコープ: セッション |グローバル
+-   クラスターに永続化: はい
+-   タイプ: 整数
+-   範囲: `[1, 256]`
+-   デフォルト値: `1`
+-   この変数は、クエリが実行されるときの`MergeJoin`演算子の同時実行数を設定します。
+-   この変数を設定することは**お勧めしません**。この変数の値を変更すると、データの正確性の問題が発生する可能性があります。
 
-### tidb_merge_partition_stats_concurrency
+### tidb_merge_partition_stats_concurrency {#tidb-merge-partition-stats-concurrency}
 
-> **Warning:**
+> **警告：**
 >
-> The feature controlled by this variable is not fully functional in the current TiDB version. Do not change the default value.
+> この変数によって制御される機能は、現在の TiDB バージョンでは完全には機能しません。デフォルト値を変更しないでください。
 
-- Scope: SESSION | GLOBAL
-- Persists to cluster: Yes
-- Default value: `1`
-- This variable specifies the concurrency of merging statistics for a partitioned table when TiDB analyzes the partitioned table.
+-   スコープ: セッション |グローバル
+-   クラスターに永続化: はい
+-   デフォルト値: `1`
+-   この変数は、TiDB が分割されたテーブルを分析するときに、パーティションテーブルされたテーブルの統計をマージする同時実行性を指定しパーティションテーブル。
 
-### tidb_metric_query_range_duration <span class="version-mark">New in v4.0</span>
+### tidb_metric_query_range_duration <span class="version-mark">v4.0 の新</span>機能 {#tidb-metric-query-range-duration-span-class-version-mark-new-in-v4-0-span}
 
 <CustomContent platform="tidb-cloud">
 
-> **Note:**
+> **ノート：**
 >
-> This TiDB variable is not applicable to TiDB Cloud.
+> この TiDB 変数はTiDB Cloudには適用されません。
 
 </CustomContent>
 
-- Scope: SESSION
-- Type: Integer
-- Default value: `60`
-- Range: `[10, 216000]`
-- Unit: Seconds
-- This variable is used to set the range duration of the Prometheus statement generated when querying `METRICS_SCHEMA`.
+-   スコープ: セッション
+-   タイプ: 整数
+-   デフォルト値: `60`
+-   範囲: `[10, 216000]`
+-   単位: 秒
+-   この変数は、照会時に生成される Prometheus ステートメントの範囲期間を設定するために使用されます`METRICS_SCHEMA` 。
 
-### tidb_metric_query_step <span class="version-mark">New in v4.0</span>
+### tidb_metric_query_step <span class="version-mark">v4.0 の新</span>機能 {#tidb-metric-query-step-span-class-version-mark-new-in-v4-0-span}
 
 <CustomContent platform="tidb-cloud">
 
-> **Note:**
+> **ノート：**
 >
-> This TiDB variable is not applicable to TiDB Cloud.
+> この TiDB 変数はTiDB Cloudには適用されません。
 
 </CustomContent>
 
-- Scope: SESSION
-- Type: Integer
-- Default value: `60`
-- Range: `[10, 216000]`
-- Unit: Seconds
-- This variable is used to set the step of the Prometheus statement generated when querying `METRICS_SCHEMA`.
+-   スコープ: セッション
+-   タイプ: 整数
+-   デフォルト値: `60`
+-   範囲: `[10, 216000]`
+-   単位: 秒
+-   この変数は、クエリ時に生成される Prometheus ステートメントのステップを設定するために使用されます`METRICS_SCHEMA` 。
 
-### tidb_min_paging_size <span class="version-mark">New in v6.2.0</span>
+### tidb_min_paging_size v6.2.0<span class="version-mark">の新機能</span> {#tidb-min-paging-size-span-class-version-mark-new-in-v6-2-0-span}
 
-- Scope: SESSION | GLOBAL
-- Persists to cluster: Yes
-- Type: Integer
-- Default value: `128`
-- Range: `[1, 9223372036854775807]`
-- Unit: Rows
-- This variable is used to set the minimum number of rows during the coprocessor paging request process. Setting it to a too small value increases the RPC request count between TiDB and TiKV, while setting it to a too large value might cause a performance decrease when executing queries using IndexLookup with Limit. The default value of this variable brings better performance in OLTP scenarios than in OLAP scenarios. If the application only uses TiKV as the storage engine, consider increasing the value of this variable when executing OLAP workload queries, which might bring you better performance.
+-   スコープ: セッション |グローバル
+-   クラスターに永続化: はい
+-   タイプ: 整数
+-   デフォルト値: `128`
+-   範囲: `[1, 9223372036854775807]`
+-   単位: 行
+-   この変数は、コプロセッサーのページング要求プロセス中に行の最小数を設定するために使用されます。設定値が小さすぎると、TiDB と TiKV 間の RPC リクエスト数が増加します。設定値が大きすぎると、IndexLookup を制限付きで使用してクエリを実行するときに、パフォーマンスが低下する可能性があります。この変数のデフォルト値は、OLAP シナリオよりも OLTP シナリオで優れたパフォーマンスをもたらします。アプリケーションがストレージ エンジンとして TiKV のみを使用する場合は、OLAP ワークロード クエリを実行するときにこの変数の値を増やすことを検討してください。これにより、パフォーマンスが向上する可能性があります。
 
 ![Paging size impact on TPCH](/media/paging-size-impact-on-tpch.png)
 
-As shown in this diagram, when [`tidb_enable_paging`](/system-variables.md#tidb_max_paging_size-new-in-v630) is enabled, the performance of TPCH is affected by the settings of `tidb_min_paging_size` and [`tidb_max_paging_size`](/system-variables.md#tidb_max_paging_size-new-in-v630). The vertical axis is the execution time, and it is the smaller the better.
+この図に示すように、 [`tidb_enable_paging`](/system-variables.md#tidb_max_paging_size-new-in-v630)が有効な場合、TPCH のパフォーマンスは`tidb_min_paging_size`と[`tidb_max_paging_size`](/system-variables.md#tidb_max_paging_size-new-in-v630)の設定の影響を受けます。縦軸は実行時間で、小さいほど良い。
 
-### tidb_mpp_store_fail_ttl
+### tidb_mpp_store_fail_ttl {#tidb-mpp-store-fail-ttl}
 
-- Scope: SESSION | GLOBAL
-- Persists to cluster: Yes
-- Type: Duration
-- Default value: `60s`
-- The newly started TiFlash node does not provide services. To prevent queries from failing, TiDB limits the tidb-server sending queries to the newly started TiFlash node. This variable indicates the time range in which the newly started TiFlash node is not sent requests.
+-   スコープ: セッション |グローバル
+-   クラスターに永続化: はい
+-   タイプ: 期間
+-   デフォルト値: `60s`
+-   新しく開始されたTiFlashノードはサービスを提供しません。クエリが失敗しないようにするために、TiDB はクエリを送信する tidb-server を新しく開始されたTiFlashノードに制限します。この変数は、新しく開始されたTiFlashノードにリクエストが送信されない時間範囲を示します。
 
-### tidb_multi_statement_mode <span class="version-mark">New in v4.0.11</span>
+### tidb_multi_statement_mode v4.0.11<span class="version-mark">の新機能</span> {#tidb-multi-statement-mode-span-class-version-mark-new-in-v4-0-11-span}
 
-- Scope: SESSION | GLOBAL
-- Persists to cluster: Yes
-- Type: Enumeration
-- Default value: `OFF`
-- Possible values: `OFF`, `ON`, `WARN`
-- This variable controls whether to allow multiple queries to be executed in the same `COM_QUERY` call.
-- To reduce the impact of SQL injection attacks, TiDB now prevents multiple queries from being executed in the same `COM_QUERY` call by default. This variable is intended to be used as part of an upgrade path from earlier versions of TiDB. The following behaviors apply:
+-   スコープ: セッション |グローバル
+-   クラスターに永続化: はい
+-   タイプ: 列挙
+-   デフォルト値: `OFF`
+-   可能な値: `OFF` 、 `ON` 、 `WARN`
+-   この変数は、同じ`COM_QUERY`の呼び出しで複数のクエリを実行できるようにするかどうかを制御します。
+-   SQL インジェクション攻撃の影響を軽減するために、TiDB はデフォルトで複数のクエリが同じ`COM_QUERY`の呼び出しで実行されるのを防ぐようになりました。この変数は、以前のバージョンの TiDB からのアップグレード パスの一部として使用することを目的としています。次の動作が適用されます。
 
-| Client setting            | `tidb_multi_statement_mode` value | Multiple statements permitted? |
-| ------------------------- | --------------------------------- | ------------------------------ |
-| Multiple Statements = ON  | OFF                               | Yes                            |
-| Multiple Statements = ON  | ON                                | Yes                            |
-| Multiple Statements = ON  | WARN                              | Yes                            |
-| Multiple Statements = OFF | OFF                               | No                             |
-| Multiple Statements = OFF | ON                                | Yes                            |
-| Multiple Statements = OFF | WARN                              | Yes (+warning returned)        |
+| クライアント設定        | `tidb_multi_statement_mode`値 | 複数のステートメントは許可されますか? |
+| --------------- | ---------------------------- | ------------------- |
+| 複数のステートメント = オン | オフ                           | はい                  |
+| 複数のステートメント = オン | オン                           | はい                  |
+| 複数のステートメント = オン | 警告する                         | はい                  |
+| 複数のステートメント = オフ | オフ                           | いいえ                 |
+| 複数のステートメント = オフ | オン                           | はい                  |
+| 複数のステートメント = オフ | 警告する                         | はい (+警告が返されます)      |
 
-> **Note:**
+> **ノート：**
 >
-> Only the default value of `OFF` can be considered safe. Setting `tidb_multi_statement_mode=ON` might be required if your application was specifically designed for an earlier version of TiDB. If your application requires multiple statement support, it is recommended to use the setting provided by your client library instead of the `tidb_multi_statement_mode` option. For example:
+> デフォルト値の`OFF`だけが安全であると見なすことができます。アプリケーションが以前のバージョンの TiDB 用に特別に設計されている場合は、設定`tidb_multi_statement_mode=ON`が必要になることがあります。アプリケーションで複数ステートメントのサポートが必要な場合は、 `tidb_multi_statement_mode`オプションではなく、クライアント ライブラリによって提供される設定を使用することをお勧めします。例えば：
 >
-> * [go-sql-driver](https://github.com/go-sql-driver/mysql#multistatements) (`multiStatements`)
-> * [Connector/J](https://dev.mysql.com/doc/connector-j/8.0/en/connector-j-reference-configuration-properties.html) (`allowMultiQueries`)
-> * PHP [mysqli](https://www.php.net/manual/en/mysqli.quickstart.multiple-statement.php) (`mysqli_multi_query`)
+> -   [go-sql-ドライバー](https://github.com/go-sql-driver/mysql#multistatements) ( `multiStatements` )
+> -   [コネクタ/J](https://dev.mysql.com/doc/connector-j/8.0/en/connector-j-reference-configuration-properties.html) ( `allowMultiQueries` )
+> -   PHP [みずい](https://www.php.net/manual/en/mysqli.quickstart.multiple-statement.php) ( `mysqli_multi_query` )
 
-### tidb_nontransactional_ignore_error <span class="version-mark">New in v6.1.0</span>
+### tidb_nontransactional_ignore_error v6.1.0<span class="version-mark">の新機能</span> {#tidb-nontransactional-ignore-error-span-class-version-mark-new-in-v6-1-0-span}
 
-- Scope: SESSION | GLOBAL
-- Persists to cluster: Yes
-- Type: Boolean
-- Default value: `OFF`
-- This variable specifies whether to return an error immediately when the error occurs in a non-transactional DML statement.
-- When the value is set to `OFF`, the non-transactional DML statement stops immediately at the first error and returns the error. All the following batches are canceled.
-- When the value is set to `ON` and an error occurs in a batch, the following batches will continue to be executed until all batches are executed. All errors occurred during the execution process are returned together in the result.
+-   スコープ: セッション |グローバル
+-   クラスターに永続化: はい
+-   タイプ: ブール値
+-   デフォルト値: `OFF`
+-   この変数は、非トランザクション DML ステートメントでエラーが発生したときに、すぐにエラーを返すかどうかを指定します。
+-   値が`OFF`に設定されている場合、非トランザクション DML ステートメントは最初のエラーですぐに停止し、エラーを返します。以下のバッチはすべてキャンセルされます。
+-   値が`ON`に設定されている場合、バッチでエラーが発生すると、すべてのバッチが実行されるまで、次のバッチが実行され続けます。実行プロセス中に発生したすべてのエラーは、結果に一緒に返されます。
 
-### tidb_opt_agg_push_down
+### tidb_opt_agg_push_down {#tidb-opt-agg-push-down}
 
-- Scope: SESSION | GLOBAL
-- Persists to cluster: Yes
-- Type: Boolean
-- Default value: `OFF`
-- This variable is used to set whether the optimizer executes the optimization operation of pushing down the aggregate function to the position before Join, Projection, and UnionAll.
-- When the aggregate operation is slow in query, you can set the variable value to ON.
+-   スコープ: セッション |グローバル
+-   クラスターに永続化: はい
+-   タイプ: ブール値
+-   デフォルト値: `OFF`
+-   この変数は、オプティマイザーが集約関数を Join、Projection、および UnionAll の前の位置に押し下げる最適化操作を実行するかどうかを設定するために使用されます。
+-   クエリで集計操作が遅い場合は、変数の値を ON に設定できます。
 
-### tidb_opt_broadcast_cartesian_join
+### tidb_opt_broadcast_cartesian_join {#tidb-opt-broadcast-cartesian-join}
 
-- Scope: SESSION | GLOBAL
-- Persists to cluster: Yes
-- Type: Integer
-- Default value: `1`
-- Range: `[0, 2]`
-- Indicates whether to allow the Broadcast Cartesian Join.
-- `0` means that the Broadcast Cartesian Join is not allowed. `1` means that it is allowed based on [`tidb_broadcast_join_threshold_count`](#tidb_broadcast_join_threshold_count-new-in-v50). `2` means that it is always allowed even if the table size exceeds the threshold.
-- This variable is internally used in TiDB, and it is **NOT** recommended to modify its value.
+-   スコープ: セッション |グローバル
+-   クラスターに永続化: はい
+-   タイプ: 整数
+-   デフォルト値: `1`
+-   範囲: `[0, 2]`
+-   ブロードキャストデカルト結合を許可するかどうかを示します。
+-   `0`は、ブロードキャストデカルト結合が許可されていないことを意味します。 `1`は[`tidb_broadcast_join_threshold_count`](#tidb_broadcast_join_threshold_count-new-in-v50)に基づいて許可されることを意味します。 `2`は、テーブル サイズがしきい値を超えても常に許可されることを意味します。
+-   この変数は TiDB で内部的に使用され、その値を変更することはお勧めし**ません**。
 
-### tidb_opt_concurrency_factor
+### tidb_opt_concurrency_factor {#tidb-opt-concurrency-factor}
 
-- Scope: SESSION | GLOBAL
-- Persists to cluster: Yes
-- Type: Float
-- Range: `[0, 18446744073709551615]`
-- Default value: `3.0`
-- Indicates the CPU cost of starting a Golang goroutine in TiDB. This variable is internally used in the [Cost Model](/cost-model.md), and it is **NOT** recommended to modify its value.
+-   スコープ: セッション |グローバル
+-   クラスターに永続化: はい
+-   タイプ: フロート
+-   範囲: `[0, 18446744073709551615]`
+-   デフォルト値: `3.0`
+-   TiDB でGolangゴルーチンを開始するための CPU コストを示します。この変数は[コストモデル](/cost-model.md)で内部的に使用され、その値を変更することはお勧めし**ません**。
 
-### tidb_opt_copcpu_factor
+### tidb_opt_copcpu_factor {#tidb-opt-copcpu-factor}
 
-- Scope: SESSION | GLOBAL
-- Persists to cluster: Yes
-- Type: Float
-- Range: `[0, 18446744073709551615]`
-- Default value: `3.0`
-- Indicates the CPU cost for TiKV Coprocessor to process one row. This variable is internally used in the [Cost Model](/cost-model.md), and it is **NOT** recommended to modify its value.
+-   スコープ: セッション |グローバル
+-   クラスターに永続化: はい
+-   タイプ: フロート
+-   範囲: `[0, 18446744073709551615]`
+-   デフォルト値: `3.0`
+-   TiKVCoprocessorが 1 行を処理するための CPU コストを示します。この変数は[コストモデル](/cost-model.md)で内部的に使用され、その値を変更することはお勧めし**ません**。
 
-### tidb_opt_correlation_exp_factor
+### tidb_opt_correlation_exp_factor {#tidb-opt-correlation-exp-factor}
 
-- Scope: SESSION | GLOBAL
-- Persists to cluster: Yes
-- Type: Integer
-- Default value: `1`
-- Range: `[0, 2147483647]`
-- When the method that estimates the number of rows based on column order correlation is not available, the heuristic estimation method is used. This variable is used to control the behavior of the heuristic method.
-    - When the value is 0, the heuristic method is not used.
-    - When the value is greater than 0:
-        - A larger value indicates that an index scan will probably be used in the heuristic method.
-        - A smaller value indicates that a table scan will probably be used in the heuristic method.
+-   スコープ: セッション |グローバル
+-   クラスターに永続化: はい
+-   タイプ: 整数
+-   デフォルト値: `1`
+-   範囲: `[0, 2147483647]`
+-   列の順序相関に基づいて行数を見積もる方法がない場合は、ヒューリスティックな見積もり方法が使用されます。この変数は、ヒューリスティック メソッドの動作を制御するために使用されます。
+    -   値が 0 の場合、ヒューリスティック手法は使用されません。
+    -   値が 0 より大きい場合:
+        -   値が大きいほど、ヒューリスティックな方法でインデックス スキャンが使用される可能性が高いことを示します。
+        -   値が小さいほど、ヒューリスティックな方法でテーブル スキャンが使用される可能性が高いことを示します。
 
-### tidb_opt_correlation_threshold
+### tidb_opt_correlation_threshold {#tidb-opt-correlation-threshold}
 
-- Scope: SESSION | GLOBAL
-- Persists to cluster: Yes
-- Type: Float
-- Default value: `0.9`
-- Range: `[0, 1]`
-- This variable is used to set the threshold value that determines whether to enable estimating the row count by using column order correlation. If the order correlation between the current column and the `handle` column exceeds the threshold value, this method is enabled.
+-   スコープ: セッション |グローバル
+-   クラスターに永続化: はい
+-   タイプ: フロート
+-   デフォルト値: `0.9`
+-   範囲: `[0, 1]`
+-   この変数は、列順序相関を使用した行数の見積もりを有効にするかどうかを決定するしきい値を設定するために使用されます。現在の列と`handle`列の順序相関がしきい値を超える場合、このメソッドが有効になります。
 
-### tidb_opt_cpu_factor
+### tidb_opt_cpu_factor {#tidb-opt-cpu-factor}
 
-- Scope: SESSION | GLOBAL
-- Persists to cluster: Yes
-- Type: Float
-- Range: `[0, 2147483647]`
-- Default value: `3.0`
-- Indicates the CPU cost for TiDB to process one row. This variable is internally used in the [Cost Model](/cost-model.md), and it is **NOT** recommended to modify its value.
+-   スコープ: セッション |グローバル
+-   クラスターに永続化: はい
+-   タイプ: フロート
+-   範囲: `[0, 2147483647]`
+-   デフォルト値: `3.0`
+-   TiDB が 1 行を処理するための CPU コストを示します。この変数は[コストモデル](/cost-model.md)で内部的に使用され、その値を変更することはお勧めし**ません**。
 
-### tidb_opt_desc_factor
+### tidb_opt_desc_factor {#tidb-opt-desc-factor}
 
-- Scope: SESSION | GLOBAL
-- Persists to cluster: Yes
-- Type: Float
-- Range: `[0, 18446744073709551615]`
-- Default value: `3.0`
-- Indicates the cost for TiKV to scan one row from the disk in descending order. This variable is internally used in the [Cost Model](/cost-model.md), and it is **NOT** recommended to modify its value.
+-   スコープ: セッション |グローバル
+-   クラスターに永続化: はい
+-   タイプ: フロート
+-   範囲: `[0, 18446744073709551615]`
+-   デフォルト値: `3.0`
+-   TiKV がディスクから 1 行を降順でスキャンするためのコストを示します。この変数は[コストモデル](/cost-model.md)で内部的に使用され、その値を変更することはお勧めし**ません**。
 
-### tidb_opt_disk_factor
+### tidb_opt_disk_factor {#tidb-opt-disk-factor}
 
-- Scope: SESSION | GLOBAL
-- Persists to cluster: Yes
-- Type: Float
-- Range: `[0, 18446744073709551615]`
-- Default value: `1.5`
-- Indicates the I/O cost for TiDB to read or write one byte of data from or to the temporary disk. This variable is internally used in the [Cost Model](/cost-model.md), and it is **NOT** recommended to modify its value.
+-   スコープ: セッション |グローバル
+-   クラスターに永続化: はい
+-   タイプ: フロート
+-   範囲: `[0, 18446744073709551615]`
+-   デフォルト値: `1.5`
+-   TiDB が一時ディスクとの間で 1 バイトのデータを読み書きするための I/O コストを示します。この変数は[コストモデル](/cost-model.md)で内部的に使用され、その値を変更することはお勧めし**ません**。
 
-### tidb_opt_distinct_agg_push_down
+### tidb_opt_distinct_agg_push_down {#tidb-opt-distinct-agg-push-down}
 
-- Scope: SESSION
-- Type: Boolean
-- Default value: `OFF`
-- This variable is used to set whether the optimizer executes the optimization operation of pushing down the aggregate function with `distinct` (such as `select count(distinct a) from t`) to Coprocessor.
-- When the aggregate function with the `distinct` operation is slow in the query, you can set the variable value to `1`.
+-   スコープ: セッション
+-   タイプ: ブール値
+-   デフォルト値: `OFF`
+-   この変数は、オプティマイザが集約関数を`distinct` ( `select count(distinct a) from t`など) でCoprocessorにプッシュ ダウンする最適化操作を実行するかどうかを設定するために使用されます。
+-   クエリで`distinct`操作の集計関数が遅い場合は、変数値を`1`に設定できます。
 
-In the following example, before `tidb_opt_distinct_agg_push_down` is enabled, TiDB needs to read all data from TiKV and execute `distinct` on the TiDB side. After `tidb_opt_distinct_agg_push_down` is enabled, `distinct a` is pushed down to Coprocessor, and a `group by` column `test.t.a` is added to `HashAgg_5`.
+次の例では、 `tidb_opt_distinct_agg_push_down`を有効にする前に、TiDB は TiKV からすべてのデータを読み取り、TiDB 側で`distinct`を実行する必要があります。 `tidb_opt_distinct_agg_push_down`が有効になった後、 `distinct a`がCoprocessorにプッシュされ、 `group by`列の`test.t.a`が`HashAgg_5`に追加されます。
 
 ```sql
 mysql> desc select count(distinct a) from test.t;
@@ -2931,101 +2930,101 @@ mysql> desc select count(distinct a) from test.t;
 4 rows in set (0.00 sec)
 ```
 
-### tidb_opt_enable_correlation_adjustment
+### tidb_opt_enable_correlation_adjustment {#tidb-opt-enable-correlation-adjustment}
 
-- Scope: SESSION | GLOBAL
-- Persists to cluster: Yes
-- Type: Boolean
-- Default value: `ON`
-- This variable is used to control whether the optimizer estimates the number of rows based on column order correlation
+-   スコープ: セッション |グローバル
+-   クラスターに永続化: はい
+-   タイプ: ブール値
+-   デフォルト値: `ON`
+-   この変数は、オプティマイザーが列の順序の相関に基づいて行数を見積もるかどうかを制御するために使用されます
 
-### tidb_opt_force_inline_cte <span class="version-mark">New in v6.3.0</span>
+### tidb_opt_force_inline_cte v6.3.0<span class="version-mark">の新機能</span> {#tidb-opt-force-inline-cte-span-class-version-mark-new-in-v6-3-0-span}
 
-- Scope: SESSION | GLOBAL
-- Persists to cluster: Yes
-- Type: Boolean
-- Default value: `OFF`
-- This variable is used to control whether common table expressions (CTEs) in the entire session are inlined or not. The default value is `OFF`, which means that inlining CTE is not enforced by default. However, you can still inline CTE by specifying the `MERGE()` hint. If the variable is set to `ON`, all CTEs (except recursive CTE) in this session are forced to be inlined.
+-   スコープ: セッション |グローバル
+-   クラスターに永続化: はい
+-   タイプ: ブール値
+-   デフォルト値: `OFF`
+-   この変数は、セッション全体の共通テーブル式 (CTE) をインライン化するかどうかを制御するために使用されます。デフォルト値は`OFF`です。これは、インライン CTE がデフォルトで強制されないことを意味します。ただし、 `MERGE()`ヒントを指定して CTE をインライン化することはできます。変数が`ON`に設定されている場合、このセッションのすべての CTE (再帰 CTE を除く) は強制的にインライン化されます。
 
-### tidb_opt_insubq_to_join_and_agg
+### tidb_opt_insubq_to_join_and_agg {#tidb-opt-insubq-to-join-and-agg}
 
-- Scope: SESSION | GLOBAL
-- Persists to cluster: Yes
-- Type: Boolean
-- Default value: `ON`
-- This variable is used to set whether to enable the optimization rule that converts a subquery to join and aggregation.
-- For example, after you enable this optimization rule, the subquery is converted as follows:
+-   スコープ: セッション |グローバル
+-   クラスターに永続化: はい
+-   タイプ: ブール値
+-   デフォルト値: `ON`
+-   この変数は、サブクエリを結合および集計に変換する最適化ルールを有効にするかどうかを設定するために使用されます。
+-   たとえば、この最適化ルールを有効にすると、サブクエリは次のように変換されます。
 
     ```sql
     select * from t where t.a in (select aa from t1);
     ```
 
-    The subquery is converted to join as follows:
+    サブクエリは、次のように結合に変換されます。
 
     ```sql
     select t.* from t, (select aa from t1 group by aa) tmp_t where t.a = tmp_t.aa;
     ```
 
-    If `t1` is limited to be `unique` and `not null` in the `aa` column. You can use the following statement, without aggregation.
+    `t1`が`aa`列の`unique`と`not null`に制限されている場合。次のステートメントは、集計なしで使用できます。
 
     ```sql
     select t.* from t, t1 where t.a=t1.aa;
     ```
 
-### tidb_opt_join_reorder_threshold
+### tidb_opt_join_reorder_threshold {#tidb-opt-join-reorder-threshold}
 
-- Scope: SESSION | GLOBAL
-- Persists to cluster: Yes
-- Type: Integer
-- Default value: `0`
-- Range: `[0, 2147483647]`
-- This variable is used to control the selection of the TiDB Join Reorder algorithm. When the number of nodes participating in Join Reorder is greater than this threshold, TiDB selects the greedy algorithm, and when it is less than this threshold, TiDB selects the dynamic programming algorithm.
-- Currently, for OLTP queries, it is recommended to keep the default value. For OLAP queries, it is recommended to set the variable value to 10~15 to get better connection orders in OLAP scenarios.
+-   スコープ: セッション |グローバル
+-   クラスターに永続化: はい
+-   タイプ: 整数
+-   デフォルト値: `0`
+-   範囲: `[0, 2147483647]`
+-   この変数は、TiDB 結合したテーブルの再配置 Reorder アルゴリズムの選択を制御するために使用されます。 結合したテーブルの再配置 Reorder に参加しているノードの数がこのしきい値より多い場合、TiDB は欲張りアルゴリズムを選択し、このしきい値より少ない場合、TiDB は動的計画法アルゴリズムを選択します。
+-   現在、OLTP クエリの場合、デフォルト値を維持することをお勧めします。 OLAP クエリの場合、変数値を 10 ～ 15 に設定して、OLAP シナリオでより適切な接続順序を取得することをお勧めします。
 
-### tidb_opt_limit_push_down_threshold
+### tidb_opt_limit_push_down_threshold {#tidb-opt-limit-push-down-threshold}
 
-- Scope: SESSION | GLOBAL
-- Persists to cluster: Yes
-- Type: Integer
-- Default value: `100`
-- Range: `[0, 2147483647]`
-- This variable is used to set the threshold that determines whether to push the Limit or TopN operator down to TiKV.
-- If the value of the Limit or TopN operator is smaller than or equal to this threshold, these operators are forcibly pushed down to TiKV. This variable resolves the issue that the Limit or TopN operator cannot be pushed down to TiKV partly due to wrong estimation.
+-   スコープ: セッション |グローバル
+-   クラスターに永続化: はい
+-   タイプ: 整数
+-   デフォルト値: `100`
+-   範囲: `[0, 2147483647]`
+-   この変数は、Limit または TopN オペレーターを TiKV にプッシュするかどうかを決定するしきい値を設定するために使用されます。
+-   Limit または TopN オペレーターの値がこのしきい値以下の場合、これらのオペレーターは TiKV に強制的にプッシュ ダウンされます。この変数は、部分的に誤った推定が原因で、Limit または TopN オペレーターを TiKV にプッシュダウンできないという問題を解決します。
 
-### tidb_opt_memory_factor
+### tidb_opt_memory_factor {#tidb-opt-memory-factor}
 
-- Scope: SESSION | GLOBAL
-- Persists to cluster: Yes
-- Type: Float
-- Range: `[0, 2147483647]`
-- Default value: `0.001`
-- Indicates the memory cost for TiDB to store one row. This variable is internally used in the [Cost Model](/cost-model.md), and it is **NOT** recommended to modify its value.
+-   スコープ: セッション |グローバル
+-   クラスターに永続化: はい
+-   タイプ: フロート
+-   範囲: `[0, 2147483647]`
+-   デフォルト値: `0.001`
+-   TiDB が 1 行を格納するためのメモリ コストを示します。この変数は[コストモデル](/cost-model.md)で内部的に使用され、その値を変更することはお勧めし**ません**。
 
-### tidb_opt_mpp_outer_join_fixed_build_side <span class="version-mark">New in v5.1.0</span>
+### tidb_opt_mpp_outer_join_fixed_build_side v5.1.0<span class="version-mark">の新機能</span> {#tidb-opt-mpp-outer-join-fixed-build-side-span-class-version-mark-new-in-v5-1-0-span}
 
-- Scope: SESSION | GLOBAL
-- Persists to cluster: Yes
-- Type: Boolean
-- Default value: `OFF`
-- When the variable value is `ON`, the left join operator always uses inner table as the build side and the right join operator always uses outer table as the build side. If you set the value to `OFF`, the outer join operator can use either side of the tables as the build side.
+-   スコープ: セッション |グローバル
+-   クラスターに永続化: はい
+-   タイプ: ブール値
+-   デフォルト値: `OFF`
+-   変数値が`ON`の場合、左側の結合演算子は常にビルド側として内部テーブルを使用し、右側の結合演算子は常にビルド側として外部テーブルを使用します。値を`OFF`に設定すると、外部結合演算子はテーブルのいずれかの側を構築側として使用できます。
 
-### tidb_opt_network_factor
+### tidb_opt_network_factor {#tidb-opt-network-factor}
 
-- Scope: SESSION | GLOBAL
-- Persists to cluster: Yes
-- Type: Float
-- Range: `[0, 2147483647]`
-- Default value: `1.0`
-- Indicates the net cost of transferring 1 byte of data through the network. This variable is internally used in the [Cost Model](/cost-model.md), and it is **NOT** recommended to modify its value.
+-   スコープ: セッション |グローバル
+-   クラスターに永続化: はい
+-   タイプ: フロート
+-   範囲: `[0, 2147483647]`
+-   デフォルト値: `1.0`
+-   ネットワークを介して 1 バイトのデータを転送するための正味コストを示します。この変数は[コストモデル](/cost-model.md)で内部的に使用され、その値を変更することはお勧めし**ません**。
 
-### tidb_opt_prefer_range_scan <span class="version-mark">New in v5.0</span>
+### tidb_opt_prefer_range_scan <span class="version-mark">v5.0 の新</span>機能 {#tidb-opt-prefer-range-scan-span-class-version-mark-new-in-v5-0-span}
 
-- Scope: SESSION | GLOBAL
-- Persists to cluster: Yes
-- Type: Boolean
-- Default value: `OFF`
-- After you set the value of this variable to `ON`, the optimizer always prefers range scans over full table scans.
-- In the following example, before you enable `tidb_opt_prefer_range_scan`, the TiDB optimizer performs a full table scan. After you enable `tidb_opt_prefer_range_scan`, the optimizer selects an index range scan.
+-   スコープ: セッション |グローバル
+-   クラスターに永続化: はい
+-   タイプ: ブール値
+-   デフォルト値: `OFF`
+-   この変数の値を`ON`に設定すると、オプティマイザは常に全表スキャンよりも範囲スキャンを優先します。
+-   次の例では、 `tidb_opt_prefer_range_scan`を有効にする前に、TiDB オプティマイザーがテーブル全体のスキャンを実行します。 `tidb_opt_prefer_range_scan`を有効にすると、オプティマイザーはインデックス レンジ スキャンを選択します。
 
 ```sql
 explain select * from t where age=5;
@@ -3051,30 +3050,29 @@ explain select * from t where age=5;
 3 rows in set (0.00 sec)
 ```
 
-### tidb_opt_prefix_index_single_scan <span class="version-mark">New in v6.4.0</span>
+### tidb_opt_prefix_index_single_scan v6.4.0<span class="version-mark">の新機能</span> {#tidb-opt-prefix-index-single-scan-span-class-version-mark-new-in-v6-4-0-span}
 
-- Scope: SESSION | GLOBAL
-- Persists to cluster: Yes
-- Default value: `ON`
-- This variable controls whether the TiDB optimizer pushes down some filter conditions to the prefix index to avoid unnecessary table lookup and to improve query performance.
-- When this variable value is set to `ON`, some filter conditions are pushed down to the prefix index. Suppose that the `col` column is the index prefix column in a table. The `col is null` or `col is not null` condition in the query is handled as a filter condition on the index instead of a filter condition for the table lookup, so that unnecessary table lookup is avoided.
+-   スコープ: セッション |グローバル
+-   クラスターに永続化: はい
+-   デフォルト値: `ON`
+-   この変数は、不要なテーブル ルックアップを回避し、クエリ パフォーマンスを向上させるために、TiDB オプティマイザーが一部のフィルター条件をプレフィックス インデックスにプッシュ ダウンするかどうかを制御します。
+-   この変数の値を`ON`に設定すると、一部のフィルタ条件がプレフィックス インデックスにプッシュ ダウンされます。 `col`列がテーブルのインデックス プレフィックス列であるとします。クエリの`col is null`または`col is not null`条件は、テーブル ルックアップのフィルター条件ではなく、インデックスのフィルター条件として処理されるため、不要なテーブル ルックアップが回避されます。
 
-<details>
-<summary>Usage example of <code>tidb_opt_prefix_index_single_scan</code></summary>
+<details><summary><code>tidb_opt_prefix_index_single_scan</code>の使用例</summary>
 
-Create a table with a prefix index:
+プレフィックス インデックスを使用してテーブルを作成します。
 
 ```sql
 CREATE TABLE t (a INT, b VARCHAR(10), c INT, INDEX idx_a_b(a, b(5)));
 ```
 
-Disable `tidb_opt_prefix_index_single_scan`:
+無効にする`tidb_opt_prefix_index_single_scan` :
 
 ```sql
 SET tidb_opt_prefix_index_single_scan = 'OFF';
 ```
 
-For the following query, the execution plan uses the prefix index `idx_a_b` but requires a table lookup (the `IndexLookUp` operator appears).
+次のクエリでは、実行プランはプレフィックス インデックス`idx_a_b`を使用しますが、テーブル ルックアップが必要です ( `IndexLookUp`演算子が表示されます)。
 
 ```sql
 EXPLAIN FORMAT='brief' SELECT COUNT(1) FROM t WHERE a = 1 AND b IS NOT NULL;
@@ -3091,13 +3089,13 @@ EXPLAIN FORMAT='brief' SELECT COUNT(1) FROM t WHERE a = 1 AND b IS NOT NULL;
 6 rows in set (0.00 sec)
 ```
 
-Enable `tidb_opt_prefix_index_single_scan`:
+有効化`tidb_opt_prefix_index_single_scan` :
 
 ```sql
 SET tidb_opt_prefix_index_single_scan = 'ON';
 ```
 
-After enabling this variable, for the following query, the execution plan uses the prefix index `idx_a_b` but does not require a table lookup.
+この変数を有効にした後、次のクエリでは、実行プランはプレフィックス インデックス`idx_a_b`を使用しますが、テーブル ルックアップは必要ありません。
 
 ```sql
 EXPLAIN FORMAT='brief' SELECT COUNT(1) FROM t WHERE a = 1 AND b IS NOT NULL;
@@ -3114,28 +3112,27 @@ EXPLAIN FORMAT='brief' SELECT COUNT(1) FROM t WHERE a = 1 AND b IS NOT NULL;
 
 </details>
 
-### tidb_opt_projection_push_down <span class="version-mark">New in v6.1.0</span>
+### tidb_opt_projection_push_down v6.1.0<span class="version-mark">の新機能</span> {#tidb-opt-projection-push-down-span-class-version-mark-new-in-v6-1-0-span}
 
-- Scope: SESSION
-- Type: Boolean
-- Default value: `OFF`
-- Specifies whether to allow the optimizer to push `Projection` down to the TiKV or TiFlash coprocessor.
+-   スコープ: セッション
+-   タイプ: ブール値
+-   デフォルト値: `OFF`
+-   オプティマイザが TiKV またはTiFlashコプロセッサに`Projection`をプッシュできるようにするかどうかを指定します。
 
-### tidb_opt_range_max_size <span class="version-mark">New in v6.4.0</span>
+### tidb_opt_range_max_size v6.4.0<span class="version-mark">の新機能</span> {#tidb-opt-range-max-size-span-class-version-mark-new-in-v6-4-0-span}
 
-- Scope: SESSION | GLOBAL
-- Persists to cluster: Yes
-- Default value: `67108864` (64 MiB)
-- Scope: `[0, 9223372036854775807]`
-- Unit: Bytes
-- This variable is used to set the upper limit of memory usage for the optimizer to build scan ranges. When the variable value is `0`, there is no memory limit for building scan ranges. If building exact scan ranges consumes memory that exceeds the limit, the optimizer uses more relaxed scan ranges (such as `[[NULL,+inf]]`). If the execution plan does not use exact scan ranges, you can increase the value of this variable to let the optimizer build exact scan ranges.
+-   スコープ: セッション |グローバル
+-   クラスターに永続化: はい
+-   デフォルト値: `67108864` (64 MiB)
+-   スコープ: `[0, 9223372036854775807]`
+-   単位: バイト
+-   この変数は、オプティマイザがスキャン範囲を構築するためのメモリ使用量の上限を設定するために使用されます。変数値が`0`の場合、スキャン範囲を構築するためのメモリ制限はありません。正確なスキャン範囲を構築すると制限を超えるメモリが消費される場合、オプティマイザはより緩和されたスキャン範囲 ( `[[NULL,+inf]]`など) を使用します。実行計画で正確なスキャン範囲が使用されていない場合は、この変数の値を増やして、オプティマイザーが正確なスキャン範囲を構築できるようにすることができます。
 
-The usage example of this variable is as follows:
+この変数の使用例は次のとおりです。
 
-<details>
-<summary><code>tidb_opt_range_max_size</code> usage examples</summary>
+<details><summary><code>tidb_opt_range_max_size</code>使用例</summary>
 
-View the default value of this variable. From the result, you can see that the optimizer uses up to 64 MiB of memory to build scan ranges.
+この変数のデフォルト値をビューします。この結果から、オプティマイザが最大 64 MiB のメモリを使用してスキャン範囲を構築していることがわかります。
 
 ```sql
 SELECT @@tidb_opt_range_max_size;
@@ -3154,7 +3151,7 @@ SELECT @@tidb_opt_range_max_size;
 EXPLAIN SELECT * FROM t use index (idx) WHERE a IN (10,20,30) AND b IN (40,50,60);
 ```
 
-In the 64 MiB memory upper limit, the optimizer builds the following exact scan ranges `[10 40,10 40], [10 50,10 50], [10 60,10 60], [20 40,20 40], [20 50,20 50], [20 60,20 60], [30 40,30 40], [30 50,30 50], [30 60,30 60]`, as shown in the following execution plan result.
+次の実行計画の結果に示すように、64 MiB のメモリ上限で、オプティマイザは次の正確なスキャン範囲`[10 40,10 40], [10 50,10 50], [10 60,10 60], [20 40,20 40], [20 50,20 50], [20 60,20 60], [30 40,30 40], [30 50,30 50], [30 60,30 60]`を構築します。
 
 ```sql
 +-------------------------------+---------+-----------+--------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
@@ -3167,7 +3164,7 @@ In the 64 MiB memory upper limit, the optimizer builds the following exact scan 
 3 rows in set (0.00 sec)
 ```
 
-Now set the upper limit of memory usage for the optimizer to build scan ranges to 1500 bytes.
+ここで、オプティマイザがスキャン範囲を構築するためのメモリ使用量の上限を 1500 バイトに設定します。
 
 ```sql
 SET @@tidb_opt_range_max_size = 1500;
@@ -3181,7 +3178,7 @@ Query OK, 0 rows affected (0.00 sec)
 EXPLAIN SELECT * FROM t USE INDEX (idx) WHERE a IN (10,20,30) AND b IN (40,50,60);
 ```
 
-In the 1500-byte memory limit, the optimizer builds more relaxed scan ranges `[10,10], [20,20], [30,30]`, and uses a warning to inform the user that the memory usage required to build exact scan ranges exceeds the limit of `tidb_opt_range_max_size`.
+1500 バイトのメモリー制限では、オプティマイザーはより緩和されたスキャン範囲`[10,10], [20,20], [30,30]`を構築し、警告を使用して、正確なスキャン範囲を構築するために必要なメモリー使用量が制限`tidb_opt_range_max_size`を超えていることをユーザーに通知します。
 
 ```sql
 +-------------------------------+---------+-----------+--------------------------+-----------------------------------------------------------------+
@@ -3208,7 +3205,7 @@ SHOW WARNINGS;
 1 row in set (0.00 sec)
 ```
 
-Then set the upper limit of memory usage to 100 bytes:
+次に、メモリ使用量の上限を 100 バイトに設定します。
 
 ```sql
 set @@tidb_opt_range_max_size = 100;
@@ -3222,7 +3219,7 @@ Query OK, 0 rows affected (0.00 sec)
 EXPLAIN SELECT * FROM t USE INDEX (idx) WHERE a IN (10,20,30) AND b IN (40,50,60);
 ```
 
-In the 100-byte memory limit, the optimizer chooses `IndexFullScan`, and uses a warning to inform the user that the memory required to build exact scan ranges exceeds the limit of `tidb_opt_range_max_size`.
+100 バイトのメモリ制限では、オプティマイザは`IndexFullScan`を選択し、警告を使用して、正確なスキャン範囲を構築するために必要なメモリが`tidb_opt_range_max_size`の制限を超えていることをユーザーに通知します。
 
 ```sql
 +-------------------------------+----------+-----------+--------------------------+----------------------------------------------------+
@@ -3251,419 +3248,419 @@ SHOW WARNINGS;
 
 </details>
 
-### tidb_opt_scan_factor
+### tidb_opt_scan_factor {#tidb-opt-scan-factor}
 
-- Scope: SESSION | GLOBAL
-- Persists to cluster: Yes
-- Type: Float
-- Range: `[0, 2147483647]`
-- Default value: `1.5`
-- Indicates the cost for TiKV to scan one row of data from the disk in ascending order. This variable is internally used in the [Cost Model](/cost-model.md), and it is **NOT** recommended to modify its value.
+-   スコープ: セッション |グローバル
+-   クラスターに永続化: はい
+-   タイプ: フロート
+-   範囲: `[0, 2147483647]`
+-   デフォルト値: `1.5`
+-   TiKV がディスクから 1 行のデータを昇順にスキャンするためのコストを示します。この変数は[コストモデル](/cost-model.md)で内部的に使用され、その値を変更することはお勧めし**ません**。
 
-### tidb_opt_seek_factor
+### tidb_opt_seek_factor {#tidb-opt-seek-factor}
 
-- Scope: SESSION | GLOBAL
-- Persists to cluster: Yes
-- Type: Float
-- Range: `[0, 2147483647]`
-- Default value: `20`
-- Indicates the start-up cost for TiDB to request data from TiKV. This variable is internally used in the [Cost Model](/cost-model.md), and it is **NOT** recommended to modify its value.
+-   スコープ: セッション |グローバル
+-   クラスターに永続化: はい
+-   タイプ: フロート
+-   範囲: `[0, 2147483647]`
+-   デフォルト値: `20`
+-   TiDB が TiKV からデータを要求するための起動コストを示します。この変数は[コストモデル](/cost-model.md)で内部的に使用され、その値を変更することはお勧めし**ません**。
 
-### tidb_opt_skew_distinct_agg <span class="version-mark">New in v6.2.0</span>
+### tidb_opt_skew_distinct_agg v6.2.0<span class="version-mark">の新機能</span> {#tidb-opt-skew-distinct-agg-span-class-version-mark-new-in-v6-2-0-span}
 
-> **Note:**
+> **ノート：**
 >
-> The query performance optimization by enabling this variable is effective **only for TiFlash**.
+> この変数を有効にすることによるクエリ パフォーマンスの最適化は**、 TiFlashに対してのみ**有効です。
 
-- Scope: SESSION | GLOBAL
-- Persists to cluster: Yes
-- Type: Boolean
-- Default value: `OFF`
-- This variable sets whether the optimizer rewrites the aggregate functions with `DISTINCT` to the two-level aggregate functions, such as rewriting `SELECT b, COUNT(DISTINCT a) FROM t GROUP BY b` to `SELECT b, COUNT(a) FROM (SELECT b, a FROM t GROUP BY b, a) t GROUP BY b`. When the aggregation column has serious skew and the `DISTINCT` column has many different values, this rewriting can avoid the data skew in the query execution and improve the query performance.
+-   スコープ: セッション |グローバル
+-   クラスターに永続化: はい
+-   タイプ: ブール値
+-   デフォルト値: `OFF`
+-   この変数は、オプティマイザが`DISTINCT`の集約関数を 2 レベルの集約関数に書き換えるかどうか ( `SELECT b, COUNT(DISTINCT a) FROM t GROUP BY b`を`SELECT b, COUNT(a) FROM (SELECT b, a FROM t GROUP BY b, a) t GROUP BY b`に書き換えるなど) を設定します。集計列に重大なスキューがあり、 `DISTINCT`列に多くの異なる値がある場合、この書き換えにより、クエリ実行でのデータ スキューを回避し、クエリのパフォーマンスを向上させることができます。
 
-### tidb_opt_three_stage_distinct_agg <span class="version-mark">New in v6.3.0</span>
+### tidb_opt_three_stage_distinct_agg v6.3.0<span class="version-mark">の新機能</span> {#tidb-opt-three-stage-distinct-agg-span-class-version-mark-new-in-v6-3-0-span}
 
-- Scope: SESSION | GLOBAL
-- Persists to cluster: Yes
-- Type: Boolean
-- Default value: `ON`
-- This variable specifies whether to rewrite a `COUNT(DISTINCT)` aggregation into a three-stage aggregation in MPP mode.
-- This variable currently applies to an aggregation that only contains one `COUNT(DISTINCT)`.
+-   スコープ: セッション |グローバル
+-   クラスターに永続化: はい
+-   タイプ: ブール値
+-   デフォルト値: `ON`
+-   この変数は、MPP モードで`COUNT(DISTINCT)`集約を 3 段階集約に書き換えるかどうかを指定します。
+-   現在、この変数は`COUNT(DISTINCT)`のみを含む集計に適用されます。
 
-### tidb_opt_tiflash_concurrency_factor
+### tidb_opt_tiflash_concurrency_factor {#tidb-opt-tiflash-concurrency-factor}
 
-- Scope: SESSION | GLOBAL
-- Persists to cluster: YES
-- Type: Float
-- Range: `[0, 2147483647]`
-- Default value: `24.0`
-- Indicates the concurrency number of TiFlash computation. This variable is internally used in the Cost Model, and it is NOT recommended to modify its value.
+-   スコープ: セッション |グローバル
+-   クラスターに永続化: はい
+-   タイプ: フロート
+-   範囲: `[0, 2147483647]`
+-   デフォルト値: `24.0`
+-   TiFlash演算の同時実行数を示します。この変数はコスト モデルで内部的に使用されるため、値を変更することはお勧めしません。
 
-### tidb_opt_write_row_id
+### tidb_opt_write_row_id {#tidb-opt-write-row-id}
 
 <CustomContent platform="tidb-cloud">
 
-> **Note:**
+> **ノート：**
 >
-> This TiDB variable is not applicable to TiDB Cloud.
+> この TiDB 変数はTiDB Cloudには適用されません。
 
 </CustomContent>
 
-- Scope: SESSION
-- Type: Boolean
-- Default value: `OFF`
-- This variable is used to control whether to allow `INSERT`, `REPLACE`, and `UPDATE` statements to operate on the `_tidb_rowid` column. This variable can be used only when you import data using TiDB tools.
+-   スコープ: セッション
+-   タイプ: ブール値
+-   デフォルト値: `OFF`
+-   この変数は、 `INSERT` 、 `REPLACE` 、および`UPDATE`ステートメントが`_tidb_rowid`列で操作できるようにするかどうかを制御するために使用されます。この変数は、TiDB ツールを使用してデータをインポートする場合にのみ使用できます。
 
-### tidb_optimizer_selectivity_level
+### tidb_optimizer_selectivity_level {#tidb-optimizer-selectivity-level}
 
-- Scope: SESSION
-- Type: Integer
-- Default value: `0`
-- Range: `[0, 2147483647]`
-- This variable controls the iteration of the optimizer's estimation logic. After changing the value of this variable, the estimation logic of the optimizer will change greatly. Currently, `0` is the only valid value. It is not recommended to set it to other values.
+-   スコープ: セッション
+-   タイプ: 整数
+-   デフォルト値: `0`
+-   範囲: `[0, 2147483647]`
+-   この変数は、オプティマイザの推定ロジックの反復を制御します。この変数の値を変更すると、オプティマイザーの見積もりロジックが大幅に変更されます。現在、有効な値は`0`だけです。他の値に設定することはお勧めしません。
 
-### tidb_partition_prune_mode <span class="version-mark">New in v5.1</span>
+### tidb_partition_prune_mode <span class="version-mark">v5.1 の新</span>機能 {#tidb-partition-prune-mode-span-class-version-mark-new-in-v5-1-span}
 
-- Scope: SESSION | GLOBAL
-- Persists to cluster: Yes
-- Type: Enumeration
-- Default value: `dynamic`
-- Possible values: `static`, `dynamic`, `static-only`, `dynamic-only`
-- Specifies whether to use `dynamic` or `static` mode for partitioned tables. Note that dynamic partitioning is effective only after full table-level statistics, or GlobalStats, are collected. Before GlobalStats are collected, TiDB will use the `static` mode instead. For detailed information about GlobalStats, see [Collect statistics of partitioned tables in dynamic pruning mode](/statistics.md#collect-statistics-of-partitioned-tables-in-dynamic-pruning-mode). For details about the dynamic pruning mode, see [Dynamic Pruning Mode for Partitioned Tables](/partitioned-table.md#dynamic-pruning-mode).
+-   スコープ: セッション |グローバル
+-   クラスターに永続化: はい
+-   タイプ: 列挙
+-   デフォルト値: `dynamic`
+-   可能な値: `static` 、 `dynamic` 、 `static-only` 、 `dynamic-only`
+-   分割テーブルに`dynamic`モードまたは`static`モードのどちらを使用するかを指定します。動的パーティショニングは、完全なテーブル レベルの統計 (GlobalStats) が収集された後にのみ有効になることに注意してください。 GlobalStats が収集される前に、TiDB は代わりに`static`モードを使用します。 GlobalStats の詳細については、 [動的プルーニング モードで分割されたテーブルの統計を収集する](/statistics.md#collect-statistics-of-partitioned-tables-in-dynamic-pruning-mode)を参照してください。動的プルーニング モードの詳細については、 [分割されたテーブルの動的プルーニング モード](/partitioned-table.md#dynamic-pruning-mode)を参照してください。
 
-### tidb_persist_analyze_options <span class="version-mark">New in v5.4.0</span>
+### tidb_persist_analyze_options v5.4.0<span class="version-mark">の新機能</span> {#tidb-persist-analyze-options-span-class-version-mark-new-in-v5-4-0-span}
 
-- Scope: GLOBAL
-- Persists to cluster: Yes
-- Type: Boolean
-- Default value: `ON`
-- This variable controls whether to enable the [ANALYZE configuration persistence](/statistics.md#persist-analyze-configurations) feature.
+-   範囲: グローバル
+-   クラスターに永続化: はい
+-   タイプ: ブール値
+-   デフォルト値: `ON`
+-   この変数は、 [ANALYZE 構成の永続性](/statistics.md#persist-analyze-configurations)機能を有効にするかどうかを制御します。
 
-### tidb_placement_mode <span class="version-mark">New in v6.0.0</span>
+### tidb_placement_mode v6.0.0<span class="version-mark">の新機能</span> {#tidb-placement-mode-span-class-version-mark-new-in-v6-0-0-span}
 
 <CustomContent platform="tidb-cloud">
 
-> **Note:**
+> **ノート：**
 >
-> This TiDB variable is not applicable to TiDB Cloud.
+> この TiDB 変数はTiDB Cloudには適用されません。
 
 </CustomContent>
 
-- Scope: SESSION | GLOBAL
-- Persists to cluster: Yes
-- Type: Enumeration
-- Default value: `STRICT`
-- Possible values: `STRICT`, `IGNORE`
+-   スコープ: セッション |グローバル
+-   クラスターに永続化: はい
+-   タイプ: 列挙
+-   デフォルト値: `STRICT`
+-   可能な値: `STRICT` 、 `IGNORE`
 
 <CustomContent platform="tidb">
 
-- This variable controls whether DDL statements ignore the [placement rules specified in SQL](/placement-rules-in-sql.md). When the variable value is `IGNORE`, all placement rule options are ignored.
+-   この変数は、DDL ステートメントが[SQL で指定された配置規則](/placement-rules-in-sql.md)を無視するかどうかを制御します。変数値が`IGNORE`の場合、すべての配置ルール オプションが無視されます。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-- This variable controls whether DDL statements ignore the [placement rules specified in SQL](https://docs.pingcap.com/tidb/stable/placement-rules-in-sql). When the variable value is `IGNORE`, all placement rule options are ignored.
+-   この変数は、DDL ステートメントが[SQL で指定された配置規則](https://docs.pingcap.com/tidb/stable/placement-rules-in-sql)を無視するかどうかを制御します。変数値が`IGNORE`の場合、すべての配置ルール オプションが無視されます。
 
 </CustomContent>
 
-- It is intended to be used by logical dump/restore tools to ensure that tables can always be created even if invalid placement rules are assigned. This is similar to how mysqldump writes `SET FOREIGN_KEY_CHECKS=0;` to the start of every dump file.
+-   これは、無効な配置規則が割り当てられている場合でもテーブルを常に作成できるようにするために、論理ダンプ/復元ツールで使用することを目的としています。これは、mysqldump がすべてのダンプ ファイルの先頭に`SET FOREIGN_KEY_CHECKS=0;`を書き込む方法に似ています。
 
-### tidb_pprof_sql_cpu <span class="version-mark">New in v4.0</span>
+### tidb_pprof_sql_cpu <span class="version-mark">v4.0 の新</span>機能 {#tidb-pprof-sql-cpu-span-class-version-mark-new-in-v4-0-span}
 
 <CustomContent platform="tidb-cloud">
 
-> **Note:**
+> **ノート：**
 >
-> This TiDB variable is not applicable to TiDB Cloud.
+> この TiDB 変数はTiDB Cloudには適用されません。
 
 </CustomContent>
 
-- Scope: GLOBAL
-- Persists to cluster: No, only applicable to the current TiDB instance that you are connecting to.
-- Type: Integer
-- Default value: `0`
-- Range: `[0, 1]`
-- This variable is used to control whether to mark the corresponding SQL statement in the profile output to identify and troubleshoot performance issues.
+-   範囲: グローバル
+-   Persists to cluster: いいえ、接続している現在の TiDB インスタンスにのみ適用されます。
+-   タイプ: 整数
+-   デフォルト値: `0`
+-   範囲: `[0, 1]`
+-   この変数は、パフォーマンスの問題を特定してトラブルシューティングするために、プロファイル出力内の対応する SQL ステートメントをマークするかどうかを制御するために使用されます。
 
-### tidb_prepared_plan_cache_memory_guard_ratio <span class="version-mark">New in v6.1.0</span>
+### tidb_prepared_plan_cache_memory_guard_ratio v6.1.0<span class="version-mark">の新機能</span> {#tidb-prepared-plan-cache-memory-guard-ratio-span-class-version-mark-new-in-v6-1-0-span}
 
-- Scope: GLOBAL
-- Persists to cluster: Yes
-- Type: Float
-- Default value: `0.1`
-- Range: `[0, 1]`
-- The threshold at which the prepared plan cache triggers a memory protection mechanism. For details, see [Memory management of Prepared Plan Cache](/sql-prepared-plan-cache.md).
-- This setting was previously a `tidb.toml` option (`prepared-plan-cache.memory-guard-ratio`), but changed to a system variable starting from TiDB v6.1.0.
+-   範囲: グローバル
+-   クラスターに永続化: はい
+-   タイプ: フロート
+-   デフォルト値: `0.1`
+-   範囲: `[0, 1]`
+-   準備されたプラン キャッシュがメモリ保護メカニズムをトリガーするしきい値。詳細については、 [プリペアドプランキャッシュのメモリ管理](/sql-prepared-plan-cache.md)を参照してください。
+-   この設定は以前は`tidb.toml`オプション ( `prepared-plan-cache.memory-guard-ratio` ) でしたが、TiDB v6.1.0 からシステム変数に変更されました。
 
-### tidb_prepared_plan_cache_size <span class="version-mark">New in v6.1.0</span>
+### tidb_prepared_plan_cache_size v6.1.0<span class="version-mark">の新機能</span> {#tidb-prepared-plan-cache-size-span-class-version-mark-new-in-v6-1-0-span}
 
-- Scope: SESSION | GLOBAL
-- Persists to cluster: Yes
-- Type: Integer
-- Default value: `100`
-- Range: `[1, 100000]`
-- The maximum number of plans that can be cached in a session. For details, see [Memory management of Prepared Plan Cache](/sql-prepared-plan-cache.md).
-- This setting was previously a `tidb.toml` option (`prepared-plan-cache.capacity`), but changed to a system variable starting from TiDB v6.1.0.
+-   スコープ: セッション |グローバル
+-   クラスターに永続化: はい
+-   タイプ: 整数
+-   デフォルト値: `100`
+-   範囲: `[1, 100000]`
+-   セッションでキャッシュできるプランの最大数。詳細については、 [プリペアドプランキャッシュのメモリ管理](/sql-prepared-plan-cache.md)を参照してください。
+-   この設定は以前は`tidb.toml`オプション ( `prepared-plan-cache.capacity` ) でしたが、TiDB v6.1.0 からシステム変数に変更されました。
 
-### tidb_projection_concurrency
+### tidb_projection_concurrency {#tidb-projection-concurrency}
 
-> **Warning:**
+> **警告：**
 >
-> Since v5.0, this variable is deprecated. Instead, use [`tidb_executor_concurrency`](#tidb_executor_concurrency-new-in-v50) for setting.
+> v5.0 以降、この変数は廃止されました。代わりに、設定には[`tidb_executor_concurrency`](#tidb_executor_concurrency-new-in-v50)を使用します。
 
-- Scope: SESSION | GLOBAL
-- Persists to cluster: Yes
-- Type: Integer
-- Default value: `-1`
-- Range: `[-1, 256]`
-- Unit: Threads
-- This variable is used to set the concurrency of the `Projection` operator.
-- A value of `-1` means that the value of `tidb_executor_concurrency` will be used instead.
+-   スコープ: セッション |グローバル
+-   クラスターに永続化: はい
+-   タイプ: 整数
+-   デフォルト値: `-1`
+-   範囲: `[-1, 256]`
+-   単位: スレッド
+-   この変数は、 `Projection`オペレーターの並行性を設定するために使用されます。
+-   値`-1`は、代わりに値`tidb_executor_concurrency`が使用されることを意味します。
 
-### tidb_query_log_max_len
+### tidb_query_log_max_len {#tidb-query-log-max-len}
 
-- Scope: GLOBAL
-- Persists to cluster: Yes
-- Type: Integer
-- Default value: `4096` (4 KiB)
-- Range: `[0, 1073741824]`
-- Unit: Bytes
-- The maximum length of the SQL statement output. When the output length of a statement is larger than the `tidb_query_log_max_len` value, the statement is truncated to output.
-- This setting was previously also available as a `tidb.toml` option (`log.query-log-max-len`), but is only a system variable starting from TiDB v6.1.0.
+-   範囲: グローバル
+-   クラスターに永続化: はい
+-   タイプ: 整数
+-   デフォルト値: `4096` (4 KiB)
+-   範囲: `[0, 1073741824]`
+-   単位: バイト
+-   SQL ステートメント出力の最大長。ステートメントの出力長が`tidb_query_log_max_len`の値より大きい場合、ステートメントは切り捨てられて出力されます。
+-   この設定は、以前は`tidb.toml`オプション ( `log.query-log-max-len` ) としても使用できましたが、TiDB v6.1.0 以降ではシステム変数のみです。
 
-### tidb_rc_read_check_ts <span class="version-mark">New in v6.0.0</span>
+### tidb_rc_read_check_ts v6.0.0<span class="version-mark">の新機能</span> {#tidb-rc-read-check-ts-span-class-version-mark-new-in-v6-0-0-span}
 
-> **Warning:**
+> **警告：**
 >
-> - This feature is incompatible with [`replica-read`](#tidb_replica_read-new-in-v40). Do not enable `tidb_rc_read_check_ts` and `replica-read` at the same time.
-> - If your client uses a cursor, it is not recommended to enable `tidb_rc_read_check_ts` in case that the previous batch of returned data has already been used by the client and the statement eventually fails.
+> -   この機能は[`replica-read`](#tidb_replica_read-new-in-v40)と互換性がありません。 `tidb_rc_read_check_ts`と`replica-read`を同時に有効にしないでください。
+> -   クライアントがカーソルを使用する場合、返されたデータの前のバッチがクライアントによって既に使用されており、ステートメントが最終的に失敗する場合に備えて、 `tidb_rc_read_check_ts`を有効にすることはお勧めしません。
 
-- Scope: GLOBAL
-- Persists to cluster: No, only applicable to the current TiDB instance that you are connecting to.
-- Type: Boolean
-- Default value: `OFF`
-- This variable is used to optimize the timestamp acquisition, which is suitable for scenarios with read-committed isolation level where read-write conflicts are rare. Enabling this variable can avoid the latency and cost of getting the global timestamp, and can optimize the transaction-level read latency.
-- If read-write conflicts are severe, enabling this feature will increase the cost and latency of getting the global timestamp, and might cause performance regression. For details, see [Read Committed isolation level](/transaction-isolation-levels.md#read-committed-isolation-level).
+-   範囲: グローバル
+-   Persists to cluster: いいえ、接続している現在の TiDB インスタンスにのみ適用されます。
+-   タイプ: ブール値
+-   デフォルト値: `OFF`
+-   この変数は、タイムスタンプの取得を最適化するために使用されます。これは、読み取りと書き込みの競合がまれな読み取りコミット分離レベルのシナリオに適しています。この変数を有効にすると、グローバル タイムスタンプを取得する際のレイテンシーとコストを回避でき、トランザクション レベルの読み取りレイテンシーを最適化できます。
+-   読み取りと書き込みの競合が深刻な場合、この機能を有効にすると、グローバル タイムスタンプを取得するコストとレイテンシーが増加し、パフォーマンスが低下する可能性があります。詳細については、 [読み取りコミット分離レベル](/transaction-isolation-levels.md#read-committed-isolation-level)を参照してください。
 
-### tidb_rc_write_check_ts <span class="version-mark">New in v6.3.0</span>
+### tidb_rc_write_check_ts v6.3.0<span class="version-mark">の新機能</span> {#tidb-rc-write-check-ts-span-class-version-mark-new-in-v6-3-0-span}
 
-> **Warning:**
+> **警告：**
 >
-> This feature is currently incompatible with [`replica-read`](#tidb_replica_read-new-in-v40). After this variable is enabled, all requests sent by the client cannot use `replica-read`. Therefore, do not enable `tidb_rc_write_check_ts` and `replica-read` at the same time.
+> この機能は現在[`replica-read`](#tidb_replica_read-new-in-v40)と互換性がありません。この変数を有効にすると、クライアントから送信されるすべてのリクエストで`replica-read`を使用できなくなります。したがって、 `tidb_rc_write_check_ts`と`replica-read`を同時に有効にしないでください。
 
-- Scope: SESSION | GLOBAL
-- Persists to cluster: Yes
-- Type: Boolean
-- Default value: `OFF`
-- This variable is used to optimize the acquisition of timestamps and is suitable for scenarios with few point-write conflicts in `READ-COMMITTED` isolation level of pessimistic transactions. Enabling this variable can avoid the latency and overhead brought by obtaining the global timestamps during the execution of point-write statements. Currently, this variable is applicable to three types of point-write statements: `UPDATE`, `DELETE`, and `SELECT ...... FOR UPDATE`. A point-write statement refers to a write statement that uses the primary key or unique key as a filter condition and the final execution operator contains `POINT-GET`.
-- If the point-write conflicts are severe, enabling this variable will increase extra overhead and latency, resulting in performance regression. For details, see [Read Committed isolation level](/transaction-isolation-levels.md#read-committed-isolation-level).
+-   スコープ: セッション |グローバル
+-   クラスターに永続化: はい
+-   タイプ: ブール値
+-   デフォルト値: `OFF`
+-   この変数は、タイムスタンプの取得を最適化するために使用され、悲観的トランザクションの`READ-COMMITTED`の分離レベルでポイント書き込み競合がほとんどないシナリオに適しています。この変数を有効にすると、ポイント書き込みステートメントの実行中にグローバル タイムスタンプを取得することによって生じるレイテンシーとオーバーヘッドを回避できます。現在、この変数は`UPDATE` 、 `DELETE` 、および`SELECT ...... FOR UPDATE`の 3 種類のポイント書き込みステートメントに適用できます。ポイント書き込みステートメントとは、主キーまたは一意キーをフィルター条件として使用し、最終実行演算子に`POINT-GET`を含む書き込みステートメントを指します。
+-   ポイント書き込みの競合が深刻な場合、この変数を有効にすると、余分なオーバーヘッドとレイテンシーが増加し、パフォーマンスが低下します。詳細については、 [読み取りコミット分離レベル](/transaction-isolation-levels.md#read-committed-isolation-level)を参照してください。
 
-### tidb_read_consistency <span class="version-mark">New in v5.4.0</span>
+### tidb_read_consistency v5.4.0<span class="version-mark">の新機能</span> {#tidb-read-consistency-span-class-version-mark-new-in-v5-4-0-span}
 
-- Scope: SESSION
-- Type: String
-- Default value: `strict`
-- This variable is used to control the read consistency for an auto-commit read statement.
-- If the variable value is set to `weak`, the locks encountered by the read statement are skipped directly and the read execution might be faster, which is the weak consistency read mode. However, the transaction semantics (such as atomicity) and distributed consistency (such as linearizability) are not guaranteed.
-- For user scenarios where the auto-commit read needs to return fast and weak consistency read results are acceptable, you can use the weak consistency read mode.
+-   スコープ: セッション
+-   タイプ: 文字列
+-   デフォルト値: `strict`
+-   この変数は、自動コミット読み取りステートメントの読み取り一貫性を制御するために使用されます。
+-   変数値が`weak`に設定されている場合、read ステートメントで検出されたロックは直接スキップされ、読み取り実行が高速になる可能性があります。これは、弱い一貫性の読み取りモードです。ただし、トランザクションのセマンティクス (原子性など) と分散一貫性 (線形化可能性など) は保証されません。
+-   自動コミット読み取りが高速で弱い一貫性の読み取り結果を返す必要があるユーザー シナリオでは、弱い一貫性の読み取りモードを使用できます。
 
-### tidb_read_staleness <span class="version-mark">New in v5.4.0</span>
+### tidb_read_staleness v5.4.0<span class="version-mark">の新機能</span> {#tidb-read-staleness-span-class-version-mark-new-in-v5-4-0-span}
 
-- Scope: SESSION
-- Type: Integer
-- Default value: `0`
-- Range: `[-2147483648, 0]`
-- This variable is used to set the time range of historical data that TiDB can read in the current session. After setting the value, TiDB selects a timestamp as new as possible from the range allowed by this variable, and all subsequent read operations are performed against this timestamp. For example, if the value of this variable is set to `-5`, on the condition that TiKV has the corresponding historical version's data, TiDB selects a timestamp as new as possible within a 5-second time range.
+-   スコープ: セッション
+-   タイプ: 整数
+-   デフォルト値: `0`
+-   範囲: `[-2147483648, 0]`
+-   この変数は、TiDB が現在のセッションで読み取ることができる履歴データの時間範囲を設定するために使用されます。値を設定した後、TiDB はこの変数によって許可された範囲からできるだけ新しいタイムスタンプを選択し、その後のすべての読み取り操作はこのタイムスタンプに対して実行されます。たとえば、この変数の値が`-5`に設定されている場合、TiKV に対応する履歴バージョンのデータがあるという条件で、TiDB は 5 秒の時間範囲内でできるだけ新しいタイムスタンプを選択します。
 
-### tidb_record_plan_in_slow_log
+### tidb_record_plan_in_slow_log {#tidb-record-plan-in-slow-log}
 
 <CustomContent platform="tidb-cloud">
 
-> **Note:**
+> **ノート：**
 >
-> This TiDB variable is not applicable to TiDB Cloud.
+> この TiDB 変数はTiDB Cloudには適用されません。
 
 </CustomContent>
 
-- Scope: GLOBAL
-- Persists to cluster: No, only applicable to the current TiDB instance that you are connecting to.
-- Type: Boolean
-- Default value: `ON`
-- This variable is used to control whether to include the execution plan of slow queries in the slow log.
+-   範囲: グローバル
+-   Persists to cluster: いいえ、接続している現在の TiDB インスタンスにのみ適用されます。
+-   タイプ: ブール値
+-   デフォルト値: `ON`
+-   この変数は、スロー ログにスロー クエリの実行プランを含めるかどうかを制御するために使用されます。
 
-### tidb_redact_log
+### tidb_redact_log {#tidb-redact-log}
 
 <CustomContent platform="tidb-cloud">
 
-> **Note:**
+> **ノート：**
 >
-> This TiDB variable is not applicable to TiDB Cloud.
+> この TiDB 変数はTiDB Cloudには適用されません。
 
 </CustomContent>
 
-- Scope: SESSION | GLOBAL
-- Persists to cluster: Yes
-- Type: Boolean
-- Default value: `OFF`
-- This variable controls whether to hide user information in the SQL statement being recorded into the TiDB log and slow log.
-- When you set the variable to `1`, user information is hidden. For example, if the executed SQL statement is `insert into t values (1,2)`, the statement is recorded as `insert into t values (?,?)` in the log.
+-   スコープ: セッション |グローバル
+-   クラスターに永続化: はい
+-   タイプ: ブール値
+-   デフォルト値: `OFF`
+-   この変数は、TiDB ログとスローログに記録される SQL ステートメントでユーザー情報を非表示にするかどうかを制御します。
+-   変数を`1`に設定すると、ユーザー情報は非表示になります。たとえば、実行された SQL ステートメントが`insert into t values (1,2)`の場合、そのステートメントはログに`insert into t values (?,?)`として記録されます。
 
-### tidb_regard_null_as_point <span class="version-mark">New in v5.4.0</span>
+### tidb_regard_null_as_point v5.4.0<span class="version-mark">の新機能</span> {#tidb-regard-null-as-point-span-class-version-mark-new-in-v5-4-0-span}
 
-- Scope: SESSION | GLOBAL
-- Persists to cluster: Yes
-- Type: Boolean
-- Default value: `ON`
-- This variable controls whether the optimizer can use a query condition including null equivalence as a prefix condition for index access.
-- This variable is enabled by default. When it is enabled, the optimizer can reduce the volume of index data to be accessed, which accelerates query execution. For example, if a query involves multiple-column indexes `index(a, b)` and the query condition contains `a<=>null and b=1`, the optimizer can use both `a<=>null` and `b=1` in the query condition for index access. If the variable is disabled, because `a<=>null and b=1` includes the null equivalence condition, the optimizer does not use `b=1` for index access.
+-   スコープ: セッション |グローバル
+-   クラスターに永続化: はい
+-   タイプ: ブール値
+-   デフォルト値: `ON`
+-   この変数は、オプティマイザが null 等価を含むクエリ条件をインデックス アクセスのプレフィックス条件として使用できるかどうかを制御します。
+-   この変数はデフォルトで有効になっています。有効にすると、オプティマイザーはアクセスするインデックス データの量を減らすことができるため、クエリの実行が高速化されます。たとえば、クエリに複数列インデックス`index(a, b)`が含まれ、クエリ条件に`a<=>null and b=1`が含まれている場合、オプティマイザはインデックス アクセスのクエリ条件で`a<=>null`と`b=1`の両方を使用できます。変数が無効になっている場合、 `a<=>null and b=1`には NULL 等価条件が含まれているため、オプティマイザーはインデックス アクセスに`b=1`を使用しません。
 
-### tidb_remove_orderby_in_subquery <span class="version-mark">New in v6.1.0</span>
+### tidb_remove_orderby_in_subquery v6.1.0<span class="version-mark">の新機能</span> {#tidb-remove-orderby-in-subquery-span-class-version-mark-new-in-v6-1-0-span}
 
-- Scope: SESSION | GLOBAL
-- Persists to cluster: Yes
-- Type: Boolean
-- Default value: `OFF`
-- Specifies whether to remove `ORDER BY` clause in a subquery.
+-   スコープ: セッション |グローバル
+-   クラスターに永続化: はい
+-   タイプ: ブール値
+-   デフォルト値: `OFF`
+-   サブクエリで`ORDER BY`の句を削除するかどうかを指定します。
 
-### tidb_replica_read <span class="version-mark">New in v4.0</span>
+### tidb_replica_read <span class="version-mark">v4.0 の新</span>機能 {#tidb-replica-read-span-class-version-mark-new-in-v4-0-span}
 
-- Scope: SESSION | GLOBAL
-- Persists to cluster: Yes
-- Type: Enumeration
-- Default value: `leader`
-- Possible values: `leader`, `follower`, `leader-and-follower`, `closest-replicas`, `closest-adaptive`
-- This variable is used to control where TiDB reads data.
-- For more details about usage and implementation, see [Follower read](/follower-read.md).
+-   スコープ: セッション |グローバル
+-   クラスターに永続化: はい
+-   タイプ: 列挙
+-   デフォルト値: `leader`
+-   可能な値: `leader` 、 `follower` 、 `leader-and-follower` 、 `closest-replicas` 、 `closest-adaptive`
+-   この変数は、TiDB がデータを読み取る場所を制御するために使用されます。
+-   使用法と実装の詳細については、 [Followerの読み取り](/follower-read.md)を参照してください。
 
-### tidb_restricted_read_only <span class="version-mark">New in v5.2.0</span>
+### tidb_restricted_read_only v5.2.0<span class="version-mark">の新機能</span> {#tidb-restricted-read-only-span-class-version-mark-new-in-v5-2-0-span}
 
 <CustomContent platform="tidb-cloud">
 
-> **Note:**
+> **ノート：**
 >
-> This TiDB variable is not applicable to TiDB Cloud.
+> この TiDB 変数はTiDB Cloudには適用されません。
 
 </CustomContent>
 
-- Scope: GLOBAL
-- Persists to cluster: Yes
-- Type: Boolean
-- Default value: `OFF`
-- `tidb_restricted_read_only` and [`tidb_super_read_only`](#tidb_super_read_only-new-in-v531) behave similarly. In most cases, you should use [`tidb_super_read_only`](#tidb_super_read_only-new-in-v531) only.
-- Users with the `SUPER` or `SYSTEM_VARIABLES_ADMIN` privilege can modify this variable. However, if the [Security Enhanced Mode](#tidb_enable_enhanced_security) is enabled, the additional `RESTRICTED_VARIABLES_ADMIN` privilege is required to read or modify this variable.
-- `tidb_restricted_read_only` affects [`tidb_super_read_only`](#tidb_super_read_only-new-in-v531) in the following cases:
-    - Setting `tidb_restricted_read_only` to `ON` will update [`tidb_super_read_only`](#tidb_super_read_only-new-in-v531) to `ON`.
-    - Setting `tidb_restricted_read_only` to `OFF` leaves [`tidb_super_read_only`](#tidb_super_read_only-new-in-v531) unchanged.
-    - If `tidb_restricted_read_only` is `ON`, [`tidb_super_read_only`](#tidb_super_read_only-new-in-v531) cannot be set to `OFF`.
-- For DBaaS providers of TiDB, if a TiDB cluster is a downstream database of another database, to make the TiDB cluster read-only, you might need to use `tidb_restricted_read_only` with [Security Enhanced Mode](#tidb_enable_enhanced_security) enabled, which prevents your customers from using [`tidb_super_read_only`](#tidb_super_read_only-new-in-v531) to make the cluster writable. To achieve this, you need to enable [Security Enhanced Mode](#tidb_enable_enhanced_security), use an admin user with the `SYSTEM_VARIABLES_ADMIN` and `RESTRICTED_VARIABLES_ADMIN` privileges to control `tidb_restricted_read_only`, and let your database users use the root user with the `SUPER` privilege to control [`tidb_super_read_only`](#tidb_super_read_only-new-in-v531) only.
-- This variable controls the read-only status of the entire cluster. When the variable is `ON`, all TiDB servers in the entire cluster are in the read-only mode. In this case, TiDB only executes the statements that do not modify data, such as `SELECT`, `USE`, and `SHOW`. For other statements such as `INSERT` and `UPDATE`, TiDB rejects executing those statements in the read-only mode.
-- Enabling the read-only mode using this variable only ensures that the entire cluster finally enters the read-only status. If you have changed the value of this variable in a TiDB cluster but the change has not yet propagated to other TiDB servers, the un-updated TiDB servers are still **not** in the read-only mode.
-- When this variable is enabled, the SQL statements being executed are not affected. TiDB only performs the read-only check for the SQL statements **to be** executed.
-- When this variable is enabled, TiDB handles the uncommitted transactions in the following ways:
-    - For uncommitted read-only transactions, you can commit the transactions normally.
-    - For uncommitted transactions that are not read-only, SQL statements that perform write operations in these transactions are rejected.
-    - For uncommitted read-only transactions with modified data, the commit of these transactions is rejected.
-- After the read-only mode is enabled, all users (including the users with the `SUPER` privilege) cannot execute the SQL statements that might write data unless the user is explicitly granted the `RESTRICTED_REPLICA_WRITER_ADMIN` privilege.
+-   範囲: グローバル
+-   クラスターに永続化: はい
+-   タイプ: ブール値
+-   デフォルト値: `OFF`
+-   `tidb_restricted_read_only`と[`tidb_super_read_only`](#tidb_super_read_only-new-in-v531)は同じように動作します。ほとんどの場合、 [`tidb_super_read_only`](#tidb_super_read_only-new-in-v531)のみを使用する必要があります。
+-   `SUPER`または`SYSTEM_VARIABLES_ADMIN`の権限を持つユーザーは、この変数を変更できます。ただし、 [セキュリティ強化モード](#tidb_enable_enhanced_security)が有効になっている場合、この変数の読み取りまたは変更には追加の`RESTRICTED_VARIABLES_ADMIN`権限が必要です。
+-   次の場合、 `tidb_restricted_read_only`は[`tidb_super_read_only`](#tidb_super_read_only-new-in-v531)に影響します。
+    -   `tidb_restricted_read_only` ～ `ON`を設定すると、 [`tidb_super_read_only`](#tidb_super_read_only-new-in-v531) ～ `ON`が更新されます。
+    -   `tidb_restricted_read_only` ～ `OFF`に設定すると、 [`tidb_super_read_only`](#tidb_super_read_only-new-in-v531)は変更されません。
+    -   `tidb_restricted_read_only`が`ON`の場合、 [`tidb_super_read_only`](#tidb_super_read_only-new-in-v531)を`OFF`に設定することはできません。
+-   TiDB の DBaaS プロバイダーの場合、TiDB クラスターが別のデータベースのダウンストリーム データベースである場合、TiDB クラスターを読み取り専用にするには、 [セキュリティ強化モード](#tidb_enable_enhanced_security)を有効にして`tidb_restricted_read_only`を使用する必要がある場合があります。これにより、顧客は[`tidb_super_read_only`](#tidb_super_read_only-new-in-v531)を使用してクラスターを書き込み可能にすることができなくなります。これを実現するには、 [セキュリティ強化モード](#tidb_enable_enhanced_security)を有効にし、 `SYSTEM_VARIABLES_ADMIN`および`RESTRICTED_VARIABLES_ADMIN`権限を持つ管理者ユーザーを使用して`tidb_restricted_read_only`を制御し、データベース ユーザーが`SUPER`権限を持つ root ユーザーを使用して[`tidb_super_read_only`](#tidb_super_read_only-new-in-v531)のみを制御できるようにする必要があります。
+-   この変数は、クラスター全体の読み取り専用ステータスを制御します。変数が`ON`の場合、クラスター全体のすべての TiDB サーバーが読み取り専用モードになります。この場合、TiDB は`SELECT` 、 `USE` 、および`SHOW`などのデータを変更しないステートメントのみを実行します。 `INSERT`や`UPDATE`などの他のステートメントの場合、TiDB はこれらのステートメントを読み取り専用モードで実行することを拒否します。
+-   この変数を使用して読み取り専用モードを有効にすると、クラスター全体が最終的に読み取り専用状態になります。 TiDB クラスターでこの変数の値を変更したが、変更が他の TiDB サーバーにまだ反映されていない場合、更新されてい**ない**TiDB サーバーはまだ読み取り専用モードではありません。
+-   この変数が有効な場合、実行中の SQL ステートメントは影響を受けません。 TiDB は、実行さ**れる**SQL ステートメントの読み取り専用チェックのみを実行します。
+-   この変数を有効にすると、TiDB はコミットされていないトランザクションを次の方法で処理します。
+    -   コミットされていない読み取り専用トランザクションの場合、通常どおりトランザクションをコミットできます。
+    -   読み取り専用ではないコミットされていないトランザクションの場合、これらのトランザクションで書き込み操作を実行する SQL ステートメントは拒否されます。
+    -   データが変更されたコミットされていない読み取り専用トランザクションの場合、これらのトランザクションのコミットは拒否されます。
+-   読み取り専用モードを有効にすると、すべてのユーザー ( `SUPER`特権を持つユーザーを含む) は、明示的に`RESTRICTED_REPLICA_WRITER_ADMIN`特権を付与されない限り、データを書き込む可能性のある SQL ステートメントを実行できません。
 
-### tidb_retry_limit
+### tidb_retry_limit {#tidb-retry-limit}
 
-- Scope: SESSION | GLOBAL
-- Persists to cluster: Yes
-- Type: Integer
-- Default value: `10`
-- Range: `[-1, 9223372036854775807]`
-- This variable is used to set the maximum number of the retries for optimistic transactions. When a transaction encounters retryable errors (such as transaction conflicts, very slow transaction commit, or table schema changes), this transaction is re-executed according to this variable. Note that setting `tidb_retry_limit` to `0` disables the automatic retry. This variable only applies to optimistic transactions, not to pessimistic transactions.
+-   スコープ: セッション |グローバル
+-   クラスターに永続化: はい
+-   タイプ: 整数
+-   デフォルト値: `10`
+-   範囲: `[-1, 9223372036854775807]`
+-   この変数は、楽観的トランザクションの再試行の最大回数を設定するために使用されます。トランザクションで再試行可能なエラー (トランザクションの競合、非常に遅いトランザクション コミット、テーブル スキーマの変更など) が発生すると、このトランザクションはこの変数に従って再実行されます。 `tidb_retry_limit` ～ `0`を設定すると、自動リトライが無効になることに注意してください。この変数は楽観的トランザクションにのみ適用され、悲観的なトランザクションには適用されません。
 
-### tidb_row_format_version
+### tidb_row_format_version {#tidb-row-format-version}
 
 <CustomContent platform="tidb-cloud">
 
-> **Note:**
+> **ノート：**
 >
-> This TiDB variable is not applicable to TiDB Cloud.
+> この TiDB 変数はTiDB Cloudには適用されません。
 
 </CustomContent>
 
-- Scope: SESSION | GLOBAL
-- Persists to cluster: Yes
-- Type: Integer
-- Default value: `1`
-- Range: `[1, 2]`
-- Controls the format version of the newly saved data in the table. In TiDB v4.0, the [new storage row format](https://github.com/pingcap/tidb/blob/master/docs/design/2018-07-19-row-format.md) version `2` is used by default to save new data.
-- If you upgrade from a TiDB version earlier than 4.0.0 to 4.0.0, the format version is not changed, and TiDB continues to use the old format of version `1` to write data to the table, which means that **only newly created clusters use the new data format by default**.
-- Note that modifying this variable does not affect the old data that has been saved, but applies the corresponding version format only to the newly written data after modifying this variable.
+-   スコープ: セッション |グローバル
+-   クラスターに永続化: はい
+-   タイプ: 整数
+-   デフォルト値: `1`
+-   範囲: `[1, 2]`
+-   テーブルに新しく保存されたデータの形式バージョンを制御します。 TiDB v4.0 では、新しいデータを保存するためにデフォルトで[新しいストレージ行フォーマット](https://github.com/pingcap/tidb/blob/master/docs/design/2018-07-19-row-format.md)バージョン`2`が使用されます。
+-   4.0.0 より前の TiDB バージョンから 4.0.0 にアップグレードする場合、フォーマット バージョンは変更されず、TiDB は引き続きバージョン`1`の古いフォーマットを使用してテーブルにデータを書き込みます。つまり、**新しく作成されたクラスターのみが使用します**。<strong>デフォルトでは新しいデータ形式です</strong>。
+-   この変数を変更しても、保存された古いデータには影響しませんが、この変数を変更した後に新しく書き込まれたデータにのみ、対応するバージョン形式が適用されることに注意してください。
 
-### tidb_scatter_region
+### tidb_scatter_region {#tidb-scatter-region}
 
-- Scope: GLOBAL
-- Persists to cluster: Yes
-- Type: Boolean
-- Default value: `OFF`
-- By default, Regions are split for a new table when it is being created in TiDB. After this variable is enabled, the newly split Regions are scattered immediately during the execution of the `CREATE TABLE` statement. This applies to the scenario where data need to be written in batches right after the tables are created in batches, because the newly split Regions can be scattered in TiKV beforehand and do not have to wait to be scheduled by PD. To ensure the continuous stability of writing data in batches, the `CREATE TABLE` statement returns success only after the Regions are successfully scattered. This makes the statement's execution time multiple times longer than that when you disable this variable.
-- Note that if `SHARD_ROW_ID_BITS` and `PRE_SPLIT_REGIONS` have been set when a table is created, the specified number of Regions are evenly split after the table creation.
+-   範囲: グローバル
+-   クラスターに永続化: はい
+-   タイプ: ブール値
+-   デフォルト値: `OFF`
+-   デフォルトでは、TiDB で作成された新しいテーブルのリージョンは分割されます。この変数を有効にすると、新しく分割されたリージョンは`CREATE TABLE`ステートメントの実行中にすぐに分散されます。これは、テーブルがバッチで作成された直後にデータをバッチで書き込む必要があるシナリオに適用されます。これは、新しく分割されたリージョンを事前に TiKV に分散させることができ、PD によってスケジュールされるのを待つ必要がないためです。バッチでのデータ書き込みの継続的な安定性を確保するために、 `CREATE TABLE`ステートメントは、リージョンが正常に分散された後にのみ成功を返します。これにより、ステートメントの実行時間が、この変数を無効にした場合よりも数倍長くなります。
+-   テーブルの作成時に`SHARD_ROW_ID_BITS`と`PRE_SPLIT_REGIONS`が設定されている場合、テーブルの作成後に指定された数のリージョンが均等に分割されます。
 
-### tidb_server_memory_limit <span class="version-mark">New in v6.4.0</span>
+### tidb_server_memory_limit v6.4.0<span class="version-mark">の新機能</span> {#tidb-server-memory-limit-span-class-version-mark-new-in-v6-4-0-span}
 
-- Scope: GLOBAL
-- Persists to cluster: Yes
-- Default value: `80%`
-- Range:
-    - You can set the value in the percentage format, which means the percentage of the memory usage relative to the total memory. The value range is `[1%, 99%]`.
-    - You can also set the value in memory size in bytes. The value range is `[0, 9223372036854775807]`. The memory format with the units "KB|MB|GB|TB" is supported. The `0` value means no memory limit.
-- This variable specifies the memory limit for a TiDB instance. When the memory usage of TiDB reaches the limit, TiDB cancels the currently running SQL statement with the highest memory usage. After the SQL statement is successfully canceled, TiDB tries to call Golang GC to immediately reclaim memory to relieve memory stress as soon as possible.
-- Only the SQL statements with more memory usage than the [`tidb_server_memory_limit_sess_min_size`](/system-variables.md#tidb_server_memory_limit_sess_min_size-new-in-v640) limit are selected as the SQL statements to be canceled first.
-- Currently, TiDB cancels only one SQL statement at a time. After TiDB completely cancels a SQL statement and recovers resources, if the memory usage is still greater than the limit set by this variable, TiDB starts the next cancel operation.
+-   範囲: グローバル
+-   クラスターに永続化: はい
+-   デフォルト値: `80%`
+-   範囲：
+    -   パーセンテージ形式で値を設定できます。これは、合計メモリに対するメモリ使用量のパーセンテージを意味します。値の範囲は`[1%, 99%]`です。
+    -   メモリサイズの値をバイト単位で設定することもできます。値の範囲は`[0, 9223372036854775807]`です。 「KB|MB|GB|TB」単位のメモリフォーマットに対応しています。 `0`の値は、メモリ制限がないことを意味します。
+-   この変数は、TiDB インスタンスのメモリ制限を指定します。 TiDB のメモリ使用量が上限に達すると、TiDB は現在実行中のメモリ使用量が最も多い SQL ステートメントをキャンセルします。 SQL ステートメントが正常にキャンセルされた後、TiDB はGolang GC を呼び出して、すぐにメモリを再利用し、できるだけ早くメモリ ストレスを軽減しようとします。
+-   最初に取り消される SQL ステートメントとして、 [`tidb_server_memory_limit_sess_min_size`](/system-variables.md#tidb_server_memory_limit_sess_min_size-new-in-v640)制限より多くのメモリー使用量を持つ SQL ステートメントのみが選択されます。
+-   現在、TiDB は一度に 1 つの SQL ステートメントのみをキャンセルします。 TiDB が SQL ステートメントを完全にキャンセルしてリソースを回復した後、メモリ使用量がまだこの変数で設定された制限を超えている場合、TiDB は次のキャンセル操作を開始します。
 
-### tidb_server_memory_limit_gc_trigger <span class="version-mark">New in v6.4.0</span>
+### tidb_server_memory_limit_gc_trigger v6.4.0<span class="version-mark">の新機能</span> {#tidb-server-memory-limit-gc-trigger-span-class-version-mark-new-in-v6-4-0-span}
 
-- Scope: GLOBAL
-- Persists to cluster: Yes
-- Default value: `70%`
-- Range: `[50%, 99%]`
-- The threshold at which TiDB tries to trigger GC. When the memory usage of TiDB reaches the value of `tidb_server_memory_limit` \* the value of `tidb_server_memory_limit_gc_trigger`, TiDB will actively trigger a Golang GC operation. Only one GC operation will be triggered in one minute.
+-   範囲: グローバル
+-   クラスターに永続化: はい
+-   デフォルト値: `70%`
+-   範囲: `[50%, 99%]`
+-   TiDB が GC をトリガーしようとするしきい値。 TiDB のメモリ使用量が`tidb_server_memory_limit` * `tidb_server_memory_limit_gc_trigger`の値に達すると、TiDB はGolang GC 操作をアクティブにトリガーします。 1 分間にトリガーされる GC 操作は 1 つだけです。
 
-### tidb_server_memory_limit_sess_min_size <span class="version-mark">New in v6.4.0</span>
+### tidb_server_memory_limit_sess_min_size v6.4.0<span class="version-mark">の新機能</span> {#tidb-server-memory-limit-sess-min-size-span-class-version-mark-new-in-v6-4-0-span}
 
-- Scope: GLOBAL
-- Persists to cluster: Yes
-- Default value: `134217728` (which is 128 MB)
-- Range: `[128, 9223372036854775807]`, in bytes. The memory format with the units "KB|MB|GB|TB" is also supported.
-- After you enable the memory limit, TiDB will terminate the SQL statement with the highest memory usage on the current instance. This variable specifies the minimum memory usage of the SQL statement to be terminated. If the memory usage of a TiDB instance that exceeds the limit is caused by too many sessions with low memory usage, you can properly lower the value of this variable to allow more sessions to be canceled.
+-   範囲: グローバル
+-   クラスターに永続化: はい
+-   デフォルト値: `134217728` (128 MB)
+-   範囲: `[128, 9223372036854775807]` 、バイト単位。単位が「KB|MB|GB|TB」のメモリフォーマットにも対応しています。
+-   メモリ制限を有効にすると、TiDB は現在のインスタンスでメモリ使用量が最も多い SQL ステートメントを終了します。この変数は、終了する SQL ステートメントの最小メモリー使用量を指定します。制限を超える TiDB インスタンスのメモリ使用量が、メモリ使用量の少ないセッションが多すぎることが原因である場合は、この変数の値を適切に下げて、より多くのセッションをキャンセルできるようにすることができます。
 
-### tidb_shard_allocate_step <span class="version-mark">New in v5.0</span>
+### tidb_shard_allocate_step <span class="version-mark">v5.0 の新</span>機能 {#tidb-shard-allocate-step-span-class-version-mark-new-in-v5-0-span}
 
-- Scope: SESSION | GLOBAL
-- Persists to cluster: Yes
-- Type: Integer
-- Default value: `9223372036854775807`
-- Range: `[1, 9223372036854775807]`
-- This variable controls the maximum number of continuous IDs to be allocated for the [`AUTO_RANDOM`](/auto-random.md) or [`SHARD_ROW_ID_BITS`](/shard-row-id-bits.md) attribute. Generally, `AUTO_RANDOM` IDs or the `SHARD_ROW_ID_BITS` annotated row IDs are incremental and continuous in one transaction. You can use this variable to solve the hotspot issue in large transaction scenarios.
+-   スコープ: セッション |グローバル
+-   クラスターに永続化: はい
+-   タイプ: 整数
+-   デフォルト値: `9223372036854775807`
+-   範囲: `[1, 9223372036854775807]`
+-   この変数は、 [`AUTO_RANDOM`](/auto-random.md)または[`SHARD_ROW_ID_BITS`](/shard-row-id-bits.md)属性に割り当てられる連続 ID の最大数を制御します。通常、 `AUTO_RANDOM`の ID または`SHARD_ROW_ID_BITS`の注釈付き行 ID は、1 つのトランザクションで増分的かつ連続的です。この変数を使用して、大規模なトランザクション シナリオでホットスポットの問題を解決できます。
 
-### tidb_simplified_metrics
+### tidb_simplified_metrics {#tidb-simplified-metrics}
 
-- Scope: GLOBAL
-- Persists to cluster: Yes
-- Type: Boolean
-- Default value: `OFF`
-- When this variable is enabled, TiDB does not collect or record the metrics that are not used in the Grafana panels.
+-   範囲: グローバル
+-   クラスターに永続化: はい
+-   タイプ: ブール値
+-   デフォルト値: `OFF`
+-   この変数が有効になっている場合、TiDB は Grafana パネルで使用されていないメトリックを収集または記録しません。
 
-### tidb_skip_ascii_check <span class="version-mark">New in v5.0</span>
+### tidb_skip_ascii_check <span class="version-mark">v5.0 の新</span>機能 {#tidb-skip-ascii-check-span-class-version-mark-new-in-v5-0-span}
 
-- Scope: SESSION | GLOBAL
-- Persists to cluster: Yes
-- Type: Boolean
-- Default value: `OFF`
-- This variable is used to set whether to skip ASCII validation.
-- Validating ASCII characters affects the performance. When you are sure that the input characters are valid ASCII characters, you can set the variable value to `ON`.
+-   スコープ: セッション |グローバル
+-   クラスターに永続化: はい
+-   タイプ: ブール値
+-   デフォルト値: `OFF`
+-   この変数は、ASCII 検証をスキップするかどうかを設定するために使用されます。
+-   ASCII 文字の検証はパフォーマンスに影響します。入力文字が有効な ASCII 文字であることを確認したら、変数値を`ON`に設定できます。
 
-### tidb_skip_isolation_level_check
+### tidb_skip_isolation_level_check {#tidb-skip-isolation-level-check}
 
-- Scope: SESSION | GLOBAL
-- Persists to cluster: Yes
-- Type: Boolean
-- Default value: `OFF`
-- After this switch is enabled, if an isolation level unsupported by TiDB is assigned to `tx_isolation`, no error is reported. This helps improve compatibility with applications that set (but do not depend on) a different isolation level.
+-   スコープ: セッション |グローバル
+-   クラスターに永続化: はい
+-   タイプ: ブール値
+-   デフォルト値: `OFF`
+-   このスイッチを有効にした後、TiDB でサポートされていない分離レベルが`tx_isolation`に割り当てられた場合、エラーは報告されません。これにより、異なる分離レベルを設定する (ただし依存しない) アプリケーションとの互換性が向上します。
 
 ```sql
 tidb> set tx_isolation='serializable';
@@ -3675,739 +3672,744 @@ tidb> set tx_isolation='serializable';
 Query OK, 0 rows affected, 1 warning (0.00 sec)
 ```
 
-### tidb_skip_utf8_check
+### tidb_skip_utf8_check {#tidb-skip-utf8-check}
 
-- Scope: SESSION | GLOBAL
-- Persists to cluster: Yes
-- Type: Boolean
-- Default value: `OFF`
-- This variable is used to set whether to skip UTF-8 validation.
-- Validating UTF-8 characters affects the performance. When you are sure that the input characters are valid UTF-8 characters, you can set the variable value to `ON`.
+-   スコープ: セッション |グローバル
+-   クラスターに永続化: はい
+-   タイプ: ブール値
+-   デフォルト値: `OFF`
+-   この変数は、UTF-8 検証をスキップするかどうかを設定するために使用されます。
+-   UTF-8 文字の検証はパフォーマンスに影響します。入力文字が有効な UTF-8 文字であることを確認したら、変数値を`ON`に設定できます。
 
-> **Note:**
+> **ノート：**
 >
-> If the character check is skipped, TiDB might fail to detect illegal UTF-8 characters written by the application, cause decoding errors when `ANALYZE` is executed, and introduce other unknown encoding issues. If your application cannot guarantee the validity of the written string, it is not recommended to skip the character check.
+> 文字チェックがスキップされると、TiDB はアプリケーションによって書き込まれた不正な UTF-8 文字の検出に失敗し、 `ANALYZE`の実行時にデコード エラーが発生し、その他の未知のエンコーディングの問題が発生する可能性があります。アプリケーションが書き込まれた文字列の有効性を保証できない場合、文字チェックをスキップすることはお勧めしません。
 
-### tidb_slow_log_threshold
+### tidb_slow_log_threshold {#tidb-slow-log-threshold}
 
 <CustomContent platform="tidb-cloud">
 
-> **Note:**
+> **ノート：**
 >
-> This TiDB variable is not applicable to TiDB Cloud.
+> この TiDB 変数はTiDB Cloudには適用されません。
 
 </CustomContent>
 
-- Scope: GLOBAL
-- Persists to cluster: No, only applicable to the current TiDB instance that you are connecting to.
-- Type: Integer
-- Default value: `300`
-- Range: `[-1, 9223372036854775807]`
-- Unit: Milliseconds
-- This variable is used to output the threshold value of the time consumed by the slow log. When the time consumed by a query is larger than this value, this query is considered as a slow log and its log is output to the slow query log.
+-   範囲: グローバル
+-   Persists to cluster: いいえ、接続している現在の TiDB インスタンスにのみ適用されます。
+-   タイプ: 整数
+-   デフォルト値: `300`
+-   範囲: `[-1, 9223372036854775807]`
+-   単位: ミリ秒
+-   この変数は、スローログの消費時間のしきい値を出力するために使用されます。クエリの消費時間がこの値よりも大きい場合、そのクエリはスロー ログと見なされ、そのログがスロー クエリ ログに出力されます。
 
-### tidb_slow_query_file
+### tidb_slow_query_file {#tidb-slow-query-file}
 
 <CustomContent platform="tidb-cloud">
 
-> **Note:**
+> **ノート：**
 >
-> This TiDB variable is not applicable to TiDB Cloud.
+> この TiDB 変数はTiDB Cloudには適用されません。
 
 </CustomContent>
 
-- Scope: SESSION
-- Default value: ""
-- When `INFORMATION_SCHEMA.SLOW_QUERY` is queried, only the slow query log name set by `slow-query-file` in the configuration file is parsed. The default slow query log name is "tidb-slow.log". To parse other logs, set the `tidb_slow_query_file` session variable to a specific file path, and then query `INFORMATION_SCHEMA.SLOW_QUERY` to parse the slow query log based on the set file path.
+-   スコープ: セッション
+-   デフォルト値: &quot;&quot;
+-   `INFORMATION_SCHEMA.SLOW_QUERY`がクエリされると、構成ファイルで`slow-query-file`によって設定されたスロー クエリ ログ名のみが解析されます。デフォルトのスロー クエリ ログ名は「tidb-slow.log」です。他のログを解析するには、 `tidb_slow_query_file`セッション変数を特定のファイル パスに設定し、 `INFORMATION_SCHEMA.SLOW_QUERY`をクエリして、設定されたファイル パスに基づいてスロー クエリ ログを解析します。
 
 <CustomContent platform="tidb">
 
-For details, see [Identify Slow Queries](/identify-slow-queries.md).
+詳細については、 [遅いクエリを特定する](/identify-slow-queries.md)を参照してください。
 
 </CustomContent>
 
-### tidb_snapshot
+### tidb_snapshot {#tidb-snapshot}
 
-- Scope: SESSION
-- Default value: ""
-- This variable is used to set the time point at which the data is read by the session. For example, when you set the variable to "2017-11-11 20:20:20" or a TSO number like "400036290571534337", the current session reads the data of this moment.
+-   スコープ: セッション
+-   デフォルト値: &quot;&quot;
+-   この変数は、セッションによってデータが読み取られる時点を設定するために使用されます。たとえば、変数を「2017-11-11 20:20:20」または「400036290571534337」のような TSO 番号に設定すると、現在のセッションはこの時点のデータを読み取ります。
 
-### tidb_source_id <span class="version-mark">New in v6.5.0</span>
+### tidb_source_id v6.5.0<span class="version-mark">の新機能</span> {#tidb-source-id-span-class-version-mark-new-in-v6-5-0-span}
 
-- Scope: GLOBAL
-- Persists to cluster: Yes
-- Type: Integer
-- Default value: `1`
-- Range: `[1, 15]`
+-   範囲: グローバル
+-   クラスターに永続化: はい
+-   タイプ: 整数
+-   デフォルト値: `1`
+-   範囲: `[1, 15]`
 
 <CustomContent platform="tidb">
 
-- This variable is used to configure the different cluster IDs in a [bi-directional replication](/ticdc/ticdc-bidirectional-replication.md) cluster.
+-   この変数は、 [双方向レプリケーション](/ticdc/ticdc-bidirectional-replication.md)のクラスターで異なるクラスター ID を構成するために使用されます。
 
 </CustomContent>
 
-### tidb_stats_cache_mem_quota <span class="version-mark">New in v6.1.0</span>
+### tidb_stats_cache_mem_quota v6.1.0<span class="version-mark">の新機能</span> {#tidb-stats-cache-mem-quota-span-class-version-mark-new-in-v6-1-0-span}
 
-> **Warning:**
+> **警告：**
 >
-> This variable is an experimental feature. It is not recommended to use it in production environments.
+> この変数は実験的機能です。本番環境で使用することはお勧めしません。
 
-- Scope: GLOBAL
-- Persists to cluster: Yes
-- Type: Integer
-- Default value: `0`
-- Range: `[0, 1099511627776]`
-- This variable sets the memory quota for the TiDB statistics cache.
+-   範囲: グローバル
+-   クラスターに永続化: はい
+-   タイプ: 整数
+-   デフォルト値: `0`
+-   範囲: `[0, 1099511627776]`
+-   この変数は、TiDB 統計キャッシュのメモリ クォータを設定します。
 
-### tidb_stats_load_pseudo_timeout <span class="version-mark">New in v5.4.0</span>
+### tidb_stats_load_pseudo_timeout v5.4.0<span class="version-mark">の新機能</span> {#tidb-stats-load-pseudo-timeout-span-class-version-mark-new-in-v5-4-0-span}
 
-- Scope: GLOBAL
-- Persists to cluster: Yes
-- Type: Boolean
-- Default value: `ON`
-- This variable controls how TiDB behaves when the waiting time of SQL optimization reaches the timeout to synchronously load complete column statistics. The default value `ON` means that the SQL optimization gets back to using pseudo statistics after the timeout. If this variable to `OFF`, SQL execution fails after the timeout.
+-   範囲: グローバル
+-   クラスターに永続化: はい
+-   タイプ: ブール値
+-   デフォルト値: `ON`
+-   この変数は、SQL 最適化の待機時間がタイムアウトに達したときの TiDB の動作を制御して、完全な列統計を同期的にロードします。デフォルト値`ON`は、SQL 最適化がタイムアウト後に疑似統計の使用に戻ることを意味します。この変数が`OFF`の場合、SQL の実行はタイムアウト後に失敗します。
 
-### tidb_stats_load_sync_wait <span class="version-mark">New in v5.4.0</span>
+### tidb_stats_load_sync_wait v5.4.0<span class="version-mark">の新機能</span> {#tidb-stats-load-sync-wait-span-class-version-mark-new-in-v5-4-0-span}
 
-- Scope: SESSION | GLOBAL
-- Persists to cluster: Yes
-- Type: Integer
-- Default value: `100`
-- Range: `[0, 2147483647]`
-- Unit: Milliseconds
-- This variable controls whether to enable the synchronously loading statistics feature. The value `0` means that the feature is disabled. To enable the feature, you can set this variable to a timeout (in milliseconds) that SQL optimization can wait for at most to synchronously load complete column statistics. For details, see [Load statistics](/statistics.md#load-statistics).
+-   スコープ: セッション |グローバル
+-   クラスターに永続化: はい
+-   タイプ: 整数
+-   デフォルト値: `100`
+-   範囲: `[0, 2147483647]`
+-   単位: ミリ秒
+-   この変数は、同期ロード統計機能を有効にするかどうかを制御します。値`0`は、機能が無効であることを意味します。この機能を有効にするには、この変数をタイムアウト (ミリ秒単位) に設定します。これは、SQL 最適化が完全な列統計を同期的にロードするまで最大で待機できる時間です。詳細については、 [負荷統計](/statistics.md#load-statistics)を参照してください。
 
-### tidb_stmt_summary_history_size <span class="version-mark">New in v4.0</span>
+### tidb_stmt_summary_history_size <span class="version-mark">v4.0 の新</span>機能 {#tidb-stmt-summary-history-size-span-class-version-mark-new-in-v4-0-span}
 
-- Scope: GLOBAL
-- Persists to cluster: Yes
-- Type: Integer
-- Default value: `24`
-- Range: `[0, 255]`
-- This variable is used to set the history capacity of [statement summary tables](/statement-summary-tables.md).
+-   範囲: グローバル
+-   クラスターに永続化: はい
+-   タイプ: 整数
+-   デフォルト値: `24`
+-   範囲: `[0, 255]`
+-   この変数は、履歴容量[ステートメント要約表](/statement-summary-tables.md)を設定するために使用されます。
 
-### tidb_stmt_summary_internal_query <span class="version-mark">New in v4.0</span>
+### tidb_stmt_summary_internal_query <span class="version-mark">v4.0 の新</span>機能 {#tidb-stmt-summary-internal-query-span-class-version-mark-new-in-v4-0-span}
 
-- Scope: GLOBAL
-- Persists to cluster: Yes
-- Type: Boolean
-- Default value: `OFF`
-- This variable is used to control whether to include the SQL information of TiDB in [statement summary tables](/statement-summary-tables.md).
+-   範囲: グローバル
+-   クラスターに永続化: はい
+-   タイプ: ブール値
+-   デフォルト値: `OFF`
+-   この変数は、TiDB の SQL 情報を[ステートメント要約表](/statement-summary-tables.md)に含めるかどうかを制御するために使用されます。
 
-### tidb_stmt_summary_max_sql_length <span class="version-mark">New in v4.0</span>
+### tidb_stmt_summary_max_sql_length <span class="version-mark">v4.0 の新</span>機能 {#tidb-stmt-summary-max-sql-length-span-class-version-mark-new-in-v4-0-span}
 
-- Scope: GLOBAL
-- Persists to cluster: Yes
-- Type: Integer
-- Default value: `4096`
-- Range: `[0, 2147483647]`
-- This variable is used to control the length of the SQL string in [statement summary tables](/statement-summary-tables.md).
+-   範囲: グローバル
+-   クラスターに永続化: はい
+-   タイプ: 整数
+-   デフォルト値: `4096`
+-   範囲: `[0, 2147483647]`
+-   この変数は、 [ステートメント要約表](/statement-summary-tables.md)の SQL 文字列の長さを制御するために使用されます。
 
-### tidb_stmt_summary_max_stmt_count <span class="version-mark">New in v4.0</span>
+### tidb_stmt_summary_max_stmt_count <span class="version-mark">v4.0 の新</span>機能 {#tidb-stmt-summary-max-stmt-count-span-class-version-mark-new-in-v4-0-span}
 
-- Scope: GLOBAL
-- Persists to cluster: Yes
-- Type: Integer
-- Default value: `3000`
-- Range: `[1, 32767]`
-- This variable is used to set the maximum number of statements that [statement summary tables](/statement-summary-tables.md) store in memory.
+-   範囲: グローバル
+-   クラスターに永続化: はい
+-   タイプ: 整数
+-   デフォルト値: `3000`
+-   範囲: `[1, 32767]`
+-   この変数は、メモリに格納されるステートメントの最大数を設定するために使用され[ステートメント要約表](/statement-summary-tables.md) 。
 
-### tidb_stmt_summary_refresh_interval <span class="version-mark">New in v4.0</span>
+### tidb_stmt_summary_refresh_interval <span class="version-mark">v4.0 の新</span>機能 {#tidb-stmt-summary-refresh-interval-span-class-version-mark-new-in-v4-0-span}
 
-- Scope: GLOBAL
-- Persists to cluster: Yes
-- Type: Integer
-- Default value: `1800`
-- Range: `[1, 2147483647]`
-- Unit: Seconds
-- This variable is used to set the refresh time of [statement summary tables](/statement-summary-tables.md).
+-   範囲: グローバル
+-   クラスターに永続化: はい
+-   タイプ: 整数
+-   デフォルト値: `1800`
+-   範囲: `[1, 2147483647]`
+-   単位: 秒
+-   この変数は、リフレッシュ時間を[ステートメント要約表](/statement-summary-tables.md)に設定するために使用されます。
 
-### `tidb_store_batch_size`
+### <code>tidb_store_batch_size</code> {#code-tidb-store-batch-size-code}
 
-> **Warning:**
+> **警告：**
 >
-> Currently, `tidb_store_batch_size` is not stable yet. This variable might be removed in a future release. It is not recommended that you use it in production environments. It is not recommended to change the default value.
+> 現在、 `tidb_store_batch_size`はまだ安定していません。この変数は、将来のリリースで削除される可能性があります。実稼働環境で使用することはお勧めしません。デフォルト値を変更することはお勧めしません。
 
-- Scope: SESSION | GLOBAL
-- Persists to cluster: Yes
-- Type: Integer
-- Default value: `0`
-- Range: `[0, 25000]`
-- This variable is used to control the batch size of the Coprocessor Tasks of the `IndexLookUp` operator. `0` means to disable batch. When the number of tasks is relatively large and slow queries occur, you can increase this variable to optimize the query.
+-   スコープ: セッション |グローバル
+-   クラスターに永続化: はい
+-   タイプ: 整数
+-   デフォルト値: `0`
+-   範囲: `[0, 25000]`
+-   この変数は、 `IndexLookUp`オペレーターのCoprocessor・タスクのバッチ・サイズを制御するために使用されます。 `0`は、バッチを無効にすることを意味します。タスクの数が比較的多く、低速のクエリが発生する場合は、この変数を増やしてクエリを最適化できます。
 
-### tidb_store_limit <span class="version-mark">New in v3.0.4 and v4.0</span>
+### tidb_store_limit <span class="version-mark">v3.0.4 および v4.0 の新機能</span> {#tidb-store-limit-span-class-version-mark-new-in-v3-0-4-and-v4-0-span}
 
-- Scope: GLOBAL
-- Persists to cluster: Yes
-- Type: Integer
-- Default value: `0`
-- Range: `[0, 9223372036854775807]`
-- This variable is used to limit the maximum number of requests TiDB can send to TiKV at the same time. 0 means no limit.
+-   範囲: グローバル
+-   クラスターに永続化: はい
+-   タイプ: 整数
+-   デフォルト値: `0`
+-   範囲: `[0, 9223372036854775807]`
+-   この変数は、TiDB が同時に TiKV に送信できるリクエストの最大数を制限するために使用されます。 0 は無制限を意味します。
 
-### tidb_streamagg_concurrency
+### tidb_streamagg_concurrency {#tidb-streamagg-concurrency}
 
-- Scope: SESSION | GLOBAL
-- Persists to cluster: Yes
-- Type: Integer
-- Default value: `1`
-- This variable sets the concurrency of the `StreamAgg` operator when queries are executed.
-- It is **NOT recommended** to set this variable. Modifying the variable value might cause data correctness issues.
+-   スコープ: セッション |グローバル
+-   クラスターに永続化: はい
+-   タイプ: 整数
+-   デフォルト値: `1`
+-   この変数は、クエリが実行されるときの`StreamAgg`演算子の同時実行を設定します。
+-   この変数を設定することは**お勧めしません**。変数値を変更すると、データの正確性の問題が発生する可能性があります。
 
-### tidb_super_read_only <span class="version-mark">New in v5.3.1</span>
+### tidb_super_read_only v5.3.1<span class="version-mark">の新機能</span> {#tidb-super-read-only-span-class-version-mark-new-in-v5-3-1-span}
 
-- Scope: GLOBAL
-- Persists to cluster: Yes
-- Type: Boolean
-- Default value: `OFF`
-- `tidb_super_read_only` aims to be implemented as a replacement of the MySQL variable `super_read_only`. However, because TiDB is a distributed database, `tidb_super_read_only` does not make the database read-only immediately after execution, but eventually.
-- Users with the `SUPER` or `SYSTEM_VARIABLES_ADMIN` privilege can modify this variable.
-- This variable controls the read-only status of the entire cluster. When the variable is `ON`, all TiDB servers in the entire cluster are in the read-only mode. In this case, TiDB only executes the statements that do not modify data, such as `SELECT`, `USE`, and `SHOW`. For other statements such as `INSERT` and `UPDATE`, TiDB rejects executing those statements in the read-only mode.
-- Enabling the read-only mode using this variable only ensures that the entire cluster finally enters the read-only status. If you have changed the value of this variable in a TiDB cluster but the change has not yet propagated to other TiDB servers, the un-updated TiDB servers are still **not** in the read-only mode.
-- TiDB checks the read-only flag before SQL statements are executed. Since v6.2.0, the flag is also checked before SQL statements are committed. This helps prevent the case where long-running [auto commit](/transaction-overview.md#autocommit) statements might modify data after the server has been placed in read-only mode.
-- When this variable is enabled, TiDB handles the uncommitted transactions in the following ways:
-    - For uncommitted read-only transactions, you can commit the transactions normally.
-    - For uncommitted transactions that are not read-only, SQL statements that perform write operations in these transactions are rejected.
-    - For uncommitted read-only transactions with modified data, the commit of these transactions is rejected.
-- After the read-only mode is enabled, all users (including the users with the `SUPER` privilege) cannot execute the SQL statements that might write data unless the user is explicitly granted the `RESTRICTED_REPLICA_WRITER_ADMIN` privilege.
-- When the [`tidb_restricted_read_only`](#tidb_restricted_read_only-new-in-v520) system variable is set to `ON`, `tidb_super_read_only` is affected by [`tidb_restricted_read_only`](#tidb_restricted_read_only-new-in-v520) in some cases. For detailed impact, see the description of [`tidb_restricted_read_only`](#tidb_restricted_read_only-new-in-v520).
+-   範囲: グローバル
+-   クラスターに永続化: はい
+-   タイプ: ブール値
+-   デフォルト値: `OFF`
+-   `tidb_super_read_only`は、MySQL 変数`super_read_only`の代わりとして実装されることを目的としています。ただし、TiDB は分散データベースであるため、 `tidb_super_read_only`は実行直後にデータベースを読み取り専用にするのではなく、最終的にデータベースを読み取り専用にします。
+-   `SUPER`または`SYSTEM_VARIABLES_ADMIN`の権限を持つユーザーは、この変数を変更できます。
+-   この変数は、クラスター全体の読み取り専用ステータスを制御します。変数が`ON`の場合、クラスター全体のすべての TiDB サーバーが読み取り専用モードになります。この場合、TiDB は`SELECT` 、 `USE` 、および`SHOW`などのデータを変更しないステートメントのみを実行します。 `INSERT`や`UPDATE`などの他のステートメントの場合、TiDB はこれらのステートメントを読み取り専用モードで実行することを拒否します。
+-   この変数を使用して読み取り専用モードを有効にすると、クラスター全体が最終的に読み取り専用状態になります。 TiDB クラスターでこの変数の値を変更したが、変更が他の TiDB サーバーにまだ反映されていない場合、更新されてい**ない**TiDB サーバーはまだ読み取り専用モードではありません。
+-   TiDB は、SQL ステートメントが実行される前に読み取り専用フラグをチェックします。 v6.2.0 以降、フラグは SQL ステートメントがコミットされる前にもチェックされます。これにより、サーバーが読み取り専用モードになった後に、長時間実行される[自動コミット](/transaction-overview.md#autocommit)ステートメントによってデータが変更される可能性を防ぐことができます。
+-   この変数を有効にすると、TiDB はコミットされていないトランザクションを次の方法で処理します。
+    -   コミットされていない読み取り専用トランザクションの場合、通常どおりトランザクションをコミットできます。
+    -   読み取り専用ではないコミットされていないトランザクションの場合、これらのトランザクションで書き込み操作を実行する SQL ステートメントは拒否されます。
+    -   データが変更されたコミットされていない読み取り専用トランザクションの場合、これらのトランザクションのコミットは拒否されます。
+-   読み取り専用モードを有効にすると、すべてのユーザー ( `SUPER`特権を持つユーザーを含む) は、明示的に`RESTRICTED_REPLICA_WRITER_ADMIN`特権を付与されない限り、データを書き込む可能性のある SQL ステートメントを実行できません。
+-   システム変数[`tidb_restricted_read_only`](#tidb_restricted_read_only-new-in-v520)が`ON`に設定されている場合、 `tidb_super_read_only`が[`tidb_restricted_read_only`](#tidb_restricted_read_only-new-in-v520)の影響を受ける場合があります。詳細な影響については、 [`tidb_restricted_read_only`](#tidb_restricted_read_only-new-in-v520)の説明を参照してください。
 
-### tidb_sysdate_is_now <span class="version-mark">New in v6.0.0</span>
+### tidb_sysdate_is_now v6.0.0<span class="version-mark">の新機能</span> {#tidb-sysdate-is-now-span-class-version-mark-new-in-v6-0-0-span}
 
-- Scope: SESSION | GLOBAL
-- Persists to cluster: Yes
-- Type: Boolean
-- Default value: `OFF`
-- This variable is used to control whether the `SYSDATE` function can be replaced by the `NOW` function. This configuration item has the same effect as the MySQL option [`sysdate-is-now`](https://dev.mysql.com/doc/refman/8.0/en/server-options.html#option_mysqld_sysdate-is-now).
+-   スコープ: セッション |グローバル
+-   クラスターに永続化: はい
+-   タイプ: ブール値
+-   デフォルト値: `OFF`
+-   この変数は、 `SYSDATE`の機能を`NOW`の機能に置き換えることができるかどうかを制御するために使用されます。この構成項目は、MySQL オプション[`sysdate-is-now`](https://dev.mysql.com/doc/refman/8.0/en/server-options.html#option_mysqld_sysdate-is-now)と同じ効果があります。
 
-### tidb_sysproc_scan_concurrency <span class="version-mark">New in v6.5.0</span>
+### tidb_sysproc_scan_concurrency v6.5.0<span class="version-mark">の新機能</span> {#tidb-sysproc-scan-concurrency-span-class-version-mark-new-in-v6-5-0-span}
 
-- Scope: GLOBAL
-- Persists to cluster: Yes
-- Type: Integer
-- Default value: `1`
-- Range: `[1, 256]`
-- This variable is used to set the concurrency of scan operations performed when TiDB executes internal SQL statements (such as an automatic update of statistics).
+-   範囲: グローバル
+-   クラスターに永続化: はい
+-   タイプ: 整数
+-   デフォルト値: `1`
+-   範囲: `[1, 256]`
+-   この変数は、TiDB が内部 SQL ステートメント (統計の自動更新など) を実行するときに実行されるスキャン操作の並行性を設定するために使用されます。
 
-### tidb_table_cache_lease <span class="version-mark">New in v6.0.0</span>
+### tidb_table_cache_lease v6.0.0<span class="version-mark">の新機能</span> {#tidb-table-cache-lease-span-class-version-mark-new-in-v6-0-0-span}
 
-- Scope: GLOBAL
-- Persists to cluster: Yes
-- Type: Integer
-- Default value: `3`
-- Range: `[1, 10]`
-- Unit: Seconds
-- This variable is used to control the lease time of [cached tables](/cached-tables.md) with a default value of `3`. The value of this variable affects the modification to cached tables. After a modification is made to cached tables, the longest waiting time might be `tidb_table_cache_lease` seconds. If the table is read-only or can accept a high write latency, you can increase the value of this variable to increase the valid time for caching tables and to reduce the frequency of lease renewal.
+-   範囲: グローバル
+-   クラスターに永続化: はい
+-   タイプ: 整数
+-   デフォルト値: `3`
+-   範囲: `[1, 10]`
+-   単位: 秒
+-   この変数は、デフォルト値`3`でリース時間を[キャッシュされたテーブル](/cached-tables.md)に制御するために使用されます。この変数の値は、キャッシュされたテーブルの変更に影響します。キャッシュされたテーブルに変更が加えられた後、最長の待機時間は`tidb_table_cache_lease`秒になる場合があります。テーブルが読み取り専用であるか、高い書き込みレイテンシーを許容できる場合は、この変数の値を増やして、テーブルをキャッシュする有効時間を増やし、リース更新の頻度を減らすことができます。
 
-### tidb_tmp_table_max_size <span class="version-mark">New in v5.3.0</span>
+### tidb_tmp_table_max_size v5.3.0<span class="version-mark">の新機能</span> {#tidb-tmp-table-max-size-span-class-version-mark-new-in-v5-3-0-span}
 
-- Scope: SESSION | GLOBAL
-- Persists to cluster: Yes
-- Type: Integer
-- Default value: `67108864`
-- Range: `[1048576, 137438953472]`
-- Unit: Bytes
-- This variable is used to set the maximum size of a single [temporary table](/temporary-tables.md). Any temporary table with a size larger than this variable value causes error.
+-   スコープ: セッション |グローバル
+-   クラスターに永続化: はい
+-   タイプ: 整数
+-   デフォルト値: `67108864`
+-   範囲: `[1048576, 137438953472]`
+-   単位: バイト
+-   この変数は、単一の[一時テーブル](/temporary-tables.md)の最大サイズを設定するために使用されます。この変数の値より大きいサイズの一時テーブルは、エラーの原因になります。
 
-### tidb_top_sql_max_meta_count <span class="version-mark">New in v6.0.0</span>
+### tidb_top_sql_max_meta_count v6.0.0<span class="version-mark">の新機能</span> {#tidb-top-sql-max-meta-count-span-class-version-mark-new-in-v6-0-0-span}
 
 <CustomContent platform="tidb-cloud">
 
-> **Note:**
+> **ノート：**
 >
-> This TiDB variable is not applicable to TiDB Cloud.
+> この TiDB 変数はTiDB Cloudには適用されません。
 
 </CustomContent>
 
-- Scope: GLOBAL
-- Persists to cluster: Yes
-- Type: Integer
-- Default value: `5000`
-- Range: `[1, 10000]`
+-   範囲: グローバル
+-   クラスターに永続化: はい
+-   タイプ: 整数
+-   デフォルト値: `5000`
+-   範囲: `[1, 10000]`
 
 <CustomContent platform="tidb">
 
-- This variable is used to control the maximum number of SQL statement types collected by [Top SQL](/dashboard/top-sql.md) per minute.
-
-</CustomContent>
-
-<CustomContent platform="tidb-cloud">
-
-- This variable is used to control the maximum number of SQL statement types collected by [Top SQL](https://docs.pingcap.com/tidb/stable/top-sql) per minute.
-
-</CustomContent>
-
-### tidb_top_sql_max_time_series_count <span class="version-mark">New in v6.0.0</span>
-
-<CustomContent platform="tidb-cloud">
-
-> **Note:**
->
-> This TiDB variable is not applicable to TiDB Cloud.
-
-</CustomContent>
-
-> **Note:**
->
-> Currently, the Top SQL page in TiDB Dashboard only displays the top 5 types of SQL queries that contribute the most to the load, which is irrelevant with the configuration of `tidb_top_sql_max_time_series_count`.
-
-- Scope: GLOBAL
-- Persists to cluster: Yes
-- Type: Integer
-- Default value: `100`
-- Range: `[1, 5000]`
-
-<CustomContent platform="tidb">
-
-- This variable is used to control how many SQL statements that contribute the most to the load (that is, top N) can be recorded by [Top SQL](/dashboard/top-sql.md) per minute.
+-   この変数は、1 分間に[Top SQL](/dashboard/top-sql.md)ずつ収集される SQL ステートメント タイプの最大数を制御するために使用されます。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-- This variable is used to control how many SQL statements that contribute the most to the load (that is, top N) can be recorded by [Top SQL](https://docs.pingcap.com/tidb/stable/top-sql) per minute.
+-   この変数は、1 分間に[Top SQL](https://docs.pingcap.com/tidb/stable/top-sql)ずつ収集される SQL ステートメント タイプの最大数を制御するために使用されます。
 
 </CustomContent>
 
-### tidb_track_aggregate_memory_usage
+### tidb_top_sql_max_time_series_count v6.0.0<span class="version-mark">の新機能</span> {#tidb-top-sql-max-time-series-count-span-class-version-mark-new-in-v6-0-0-span}
 
-- Scope: SESSION | GLOBAL
-- Persists to cluster: Yes
-- Type: Boolean
-- Default value: `ON`
-- This variable controls whether TiDB tracks the memory usage of aggregate functions.
+<CustomContent platform="tidb-cloud">
 
-> **Warning:**
+> **ノート：**
 >
-> If you disable this variable, TiDB might not accurately track the memory usage and cannot control the memory usage of the corresponding SQL statements.
+> この TiDB 変数はTiDB Cloudには適用されません。
 
-### tidb_tso_client_batch_max_wait_time <span class="version-mark">New in v5.3.0</span>
+</CustomContent>
 
-- Scope: GLOBAL
-- Persists to cluster: Yes
-- Type: Float
-- Default value: `0`
-- Range: `[0, 10]`
-- Range: `[0, 10]`
-- Unit: Milliseconds
-- This variable is used to set the maximum waiting time for a batch operation when TiDB requests TSO from PD. The default value is `0`, which means no extra waiting time.
-- When obtaining TSO requests from PD each time, PD Client, used by TiDB, collects as many TSO requests received at the same time as possible. Then, PD Client merges the collected requests in batch into one RPC request and sends the request to PD. This helps reduce the pressure on PD.
-- After setting this variable to a value greater than `0`, TiDB waits for the maximum duration of this value before the end of each batch merge. This is to collect more TSO requests and improve the effect of batch operations.
-- Scenarios for increasing the value of this variable:
-    * Due to the high pressure of TSO requests, the CPU of the PD leader reaches a bottleneck, which causes high latency of TSO RPC requests.
-    * There are not many TiDB instances in the cluster, but every TiDB instance is in high concurrency.
-- It is recommended to set this variable to a value as small as possible.
-
-> **Note:**
+> **ノート：**
 >
-> Suppose that the TSO RPC latency increases for reasons other than a CPU usage bottleneck of the PD leader (such as network issues). In this case, increasing the value of `tidb_tso_client_batch_max_wait_time` might increase the execution latency in TiDB and affect the QPS performance of the cluster.
+> 現在、TiDB ダッシュボードのTop SQLページには、負荷に最も貢献している上位 5 種類の SQL クエリのみが表示されますが、これは`tidb_top_sql_max_time_series_count`の構成とは無関係です。
 
-### tidb_ttl_delete_rate_limit <span class="version-mark">New in v6.5.0</span>
-
-> **Warning:**
->
-> [TTL](/time-to-live.md) is an experimental feature. This system variable might be changed or removed in future releases.
-
-- Scope: GLOBAL
-- Persists to cluster: Yes
-- Default value: `0`
-- Range: `[0, 9223372036854775807]`
-- This variable is used to limit the rate of `DELETE` statements in TTL jobs on each TiDB node. The value represents the maximum number of `DELETE` statements allowed per second in a single node in a TTL job. When this variable is set to `0`, no limit is applied.
-
-### tidb_ttl_delete_batch_size <span class="version-mark">New in v6.5.0</span>
-
-> **Warning:**
->
-> [TTL](/time-to-live.md) is an experimental feature. This system variable might be changed or removed in future releases.
-
-- Scope: GLOBAL
-- Persists to cluster: Yes
-- Default value: `100`
-- Range: `[1, 10240]`
-- This variable is used to set the maximum number of rows that can be deleted in a single `DELETE` transaction in a TTL job.
-
-### tidb_ttl_delete_worker_count <span class="version-mark">New in v6.5.0</span>
-
-> **Warning:**
->
-> [TTL](/time-to-live.md) is an experimental feature. This system variable might be changed or removed in future releases.
-
-- Scope: GLOBAL
-- Persists to cluster: Yes
-- Default value: `4`
-- Range: `[1, 256]`
-- This variable is used to set the maximum concurrency of TTL jobs on each TiDB node.
-
-### tidb_ttl_job_enable <span class="version-mark">New in v6.5.0</span>
-
-> **Warning:**
->
-> [TTL](/time-to-live.md) is an experimental feature. This system variable might be changed or removed in future releases.
-
-- Scope: GLOBAL
-- Persists to cluster: Yes
-- Default value: `ON`
-- Type: Boolean
-- This variable is used to control whether TTL jobs are enabled. If it is set to `OFF`, all tables with TTL attributes automatically stop cleaning up expired data.
-
-### tidb_ttl_scan_batch_size <span class="version-mark">New in v6.5.0</span>
-
-> **Warning:**
->
-> [TTL](/time-to-live.md) is an experimental feature. This system variable might be changed or removed in future releases.
-
-- Scope: GLOBAL
-- Persists to cluster: Yes
-- Default value: `500`
-- Range: `[1, 10240]`
-- This variable is used to set the `LIMIT` value of each `SELECT` statement used to scan expired data in a TTL job.
-
-### tidb_ttl_scan_worker_count <span class="version-mark">New in v6.5.0</span>
-
-> **Warning:**
->
-> [TTL](/time-to-live.md) is an experimental feature. This system variable might be changed or removed in future releases.
-
-- Scope: GLOBAL
-- Persists to cluster: Yes
-- Default value: `4`
-- Range: `[1, 256]`
-- This variable is used to set the maximum concurrency of TTL scan jobs on each TiDB node.
-
-### tidb_ttl_job_run_interval <span class="version-mark">New in v6.5.0</span>
-
-> **Warning:**
->
-> [TTL](/time-to-live.md) is an experimental feature. This system variable might be changed or removed in future releases.
-
-- Scope: GLOBAL
-- Persists to cluster: Yes
-- Default value: `1h0m0s`
-- Range: `[10m0s, 8760h0m0s]`
-- This variable is used to control the scheduling interval of TTL jobs in the background. For example, if the current value is set to `1h0m0s`, each table with TTL attributes cleans up expired data once every hour.
-
-### tidb_ttl_job_schedule_window_start_time <span class="version-mark">New in v6.5.0</span>
-
-> **Warning:**
->
-> [TTL](/time-to-live.md) is an experimental feature. This system variable might be changed or removed in future releases.
-
-- Scope: GLOBAL
-- Type: Time
-- Persists to cluster: Yes
-- Default value: `00:00 +0000`
-- This variable is used to control the start time of the scheduling window of TTL jobs in the background. When you modify the value of this variable, be cautious that a small window might cause the cleanup of expired data to fail.
-
-### tidb_ttl_job_schedule_window_end_time <span class="version-mark">New in v6.5.0</span>
-
-> **Warning:**
->
-> [TTL](/time-to-live.md) is an experimental feature. This system variable might be changed or removed in future releases.
-
-- Scope: GLOBAL
-- Type: Time
-- Persists to cluster: Yes
-- Default value: `23:59 +0000`
-- This variable is used to control the end time of the scheduling window of TTL jobs in the background. When you modify the value of this variable, be cautious that a small window might cause the cleanup of expired data to fail.
-
-### tidb_txn_assertion_level <span class="version-mark">New in v6.0.0</span>
-
-- Scope: SESSION | GLOBAL
-- Persists to cluster: Yes
-- Type: Enumeration
-- Default value: `FAST`
-- Possible values: `OFF`, `FAST`, `STRICT`
-- This variable is used to control the assertion level. Assertion is a consistency check between data and indexes, which checks whether a key being written exists in the transaction commit process. For more information, see [Troubleshoot Inconsistency Between Data and Indexes](/troubleshoot-data-inconsistency-errors.md).
-
-    - `OFF`: Disable this check.
-    - `FAST`: Enable most of the check items, with almost no impact on performance.
-    - `STRICT`: Enable all check items, with a minor impact on pessimistic transaction performance when the system workload is high.
-
-- For new clusters of v6.0.0 or later versions, the default value is `FAST`. For existing clusters that upgrade from versions earlier than v6.0.0, the default value is `OFF`.
-
-### `tidb_txn_commit_batch_size` <span class="version-mark">New in v6.2.0</span>
-
-- Scope: GLOBAL
-- Persists to cluster: Yes
-- Type: Integer
-- Default value: `16384`
-- Range: `[1, 1073741824]`
-- Unit: Bytes
+-   範囲: グローバル
+-   クラスターに永続化: はい
+-   タイプ: 整数
+-   デフォルト値: `100`
+-   範囲: `[1, 5000]`
 
 <CustomContent platform="tidb">
 
-- This variable is used to control the batch size of transaction commit requests that TiDB sends to TiKV. If most of the transactions in the application workload have a large number of write operations, adjusting this variable to a larger value can improve the performance of batch processing. However, if this variable is set to too large a value and exceeds the limit of TiKV's [`raft-entry-max-size`](/tikv-configuration-file.md#raft-entry-max-size), the commits might fail.
+-   この変数は、負荷に最も寄与する SQL ステートメント (つまり、上位 N 個) を[Top SQL](/dashboard/top-sql.md)分あたり 1 つずつ記録できる数を制御するために使用されます。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-- This variable is used to control the batch size of transaction commit requests that TiDB sends to TiKV. If most of the transactions in the application workload have a large number of write operations, adjusting this variable to a larger value can improve the performance of batch processing. However, if this variable is set to too large a value and exceeds the limit of TiKV's maximum size of a single log (which is 8 MB by default), the commits might fail.
+-   この変数は、負荷に最も寄与する SQL ステートメント (つまり、上位 N 個) を[Top SQL](https://docs.pingcap.com/tidb/stable/top-sql)分あたり 1 つずつ記録できる数を制御するために使用されます。
 
 </CustomContent>
 
-### tidb_txn_mode
+### tidb_track_aggregate_memory_usage {#tidb-track-aggregate-memory-usage}
 
-- Scope: SESSION | GLOBAL
-- Persists to cluster: Yes
-- Type: Enumeration
-- Default value: `pessimistic`
-- Possible values: `pessimistic`, `optimistic`
-- This variable is used to set the transaction mode. TiDB 3.0 supports the pessimistic transactions. Since TiDB 3.0.8, the [pessimistic transaction mode](/pessimistic-transaction.md) is enabled by default.
-- If you upgrade TiDB from v3.0.7 or earlier versions to v3.0.8 or later versions, the default transaction mode does not change. **Only the newly created clusters use the pessimistic transaction mode by default**.
-- If this variable is set to "optimistic" or "", TiDB uses the [optimistic transaction mode](/optimistic-transaction.md).
+-   スコープ: セッション |グローバル
+-   クラスターに永続化: はい
+-   タイプ: ブール値
+-   デフォルト値: `ON`
+-   この変数は、TiDB が集計関数のメモリ使用量を追跡するかどうかを制御します。
 
-### tidb_use_plan_baselines <span class="version-mark">New in v4.0</span>
-
-- Scope: SESSION | GLOBAL
-- Persists to cluster: Yes
-- Type: Boolean
-- Default value: `ON`
-- This variable is used to control whether to enable the execution plan binding feature. It is enabled by default, and can be disabled by assigning the `OFF` value. For the use of the execution plan binding, see [Execution Plan Binding](/sql-plan-management.md#create-a-binding).
-
-### tidb_wait_split_region_finish
-
-- Scope: SESSION
-- Type: Boolean
-- Default value: `ON`
-- It usually takes a long time to scatter Regions, which is determined by PD scheduling and TiKV loads. This variable is used to set whether to return the result to the client after all Regions are scattered completely when the `SPLIT REGION` statement is being executed:
-    - `ON` requires that the `SPLIT REGIONS` statement waits until all Regions are scattered.
-    - `OFF` permits the `SPLIT REGIONS` statement to return before finishing scattering all Regions.
-- Note that when scattering Regions, the write and read performances for the Region that is being scattered might be affected. In batch-write or data importing scenarios, it is recommended to import data after Regions scattering is finished.
-
-### tidb_wait_split_region_timeout
-
-- Scope: SESSION
-- Type: Integer
-- Default value: `300`
-- Range: `[1, 2147483647]`
-- Unit: Seconds
-- This variable is used to set the timeout for executing the `SPLIT REGION` statement. If a statement is not executed completely within the specified time value, a timeout error is returned.
-
-### tidb_window_concurrency <span class="version-mark">New in v4.0</span>
-
-> **Warning:**
+> **警告：**
 >
-> Since v5.0, this variable is deprecated. Instead, use [`tidb_executor_concurrency`](#tidb_executor_concurrency-new-in-v50) for setting.
+> この変数を無効にすると、TiDB はメモリ使用量を正確に追跡できず、対応する SQL ステートメントのメモリ使用量を制御できなくなります。
 
-- Scope: SESSION | GLOBAL
-- Persists to cluster: Yes
-- Type: Integer
-- Default value: `-1`
-- Range: `[1, 256]`
-- Unit: Threads
-- This variable is used to set the concurrency degree of the window operator.
-- A value of `-1` means that the value of `tidb_executor_concurrency` will be used instead.
+### tidb_tso_client_batch_max_wait_time v5.3.0<span class="version-mark">の新機能</span> {#tidb-tso-client-batch-max-wait-time-span-class-version-mark-new-in-v5-3-0-span}
 
-### `tiflash_fastscan` <span class="version-mark">New in v6.3.0</span>
+-   範囲: グローバル
+-   クラスターに永続化: はい
+-   タイプ: フロート
+-   デフォルト値: `0`
+-   範囲: `[0, 10]`
+-   範囲: `[0, 10]`
+-   単位: ミリ秒
+-   この変数は、TiDB が PD から TSO を要求するときのバッチ操作の最大待機時間を設定するために使用されます。デフォルト値は`0`で、余分な待ち時間がないことを意味します。
+-   PD から TSO リクエストを毎回取得する際、TiDB が使用する PD Client は、同時に受信した TSO リクエストをできるだけ多く収集します。次に、PD クライアントは、収集されたリクエストをバッチで 1 つの RPC リクエストにマージし、リクエストを PD に送信します。これにより、PD への負担が軽減されます。
+-   この変数を`0`より大きい値に設定した後、TiDB は、各バッチ マージが終了する前に、この値の最大期間待機します。これは、より多くの TSO 要求を収集し、バッチ操作の効果を向上させるためです。
+-   この変数の値を増やすシナリオ:
+    -   TSO 要求の負荷が高いため、PD リーダーの CPU がボトルネックに達し、TSO RPC 要求のレイテンシーが長くなります。
+    -   クラスター内の TiDB インスタンスの数は多くありませんが、すべての TiDB インスタンスは高い同時実行性を維持しています。
+-   この変数はできるだけ小さい値に設定することをお勧めします。
 
-- Scope: SESSION | GLOBAL
-- Default value: `OFF`
-- Type: Boolean
+> **ノート：**
+>
+> PD リーダーの CPU 使用率のボトルネック以外の理由 (ネットワークの問題など) で、TSO RPCレイテンシーが増加したとします。この場合、値`tidb_tso_client_batch_max_wait_time`を増やすと、TiDB での実行レイテンシーが増加し、クラスターの QPS パフォーマンスに影響を与える可能性があります。
+
+### tidb_ttl_delete_rate_limit v6.5.0<span class="version-mark">の新機能</span> {#tidb-ttl-delete-rate-limit-span-class-version-mark-new-in-v6-5-0-span}
+
+> **警告：**
+>
+> [TTL](/time-to-live.md)は実験的機能です。このシステム変数は、将来のリリースで変更または削除される可能性があります。
+
+-   範囲: グローバル
+-   クラスターに永続化: はい
+-   デフォルト値: `0`
+-   範囲: `[0, 9223372036854775807]`
+-   この変数は、各 TiDB ノードの TTL ジョブで`DELETE`ステートメントのレートを制限するために使用されます。この値は、TTL ジョブの単一ノードで 1 秒間に許可される`DELETE`のステートメントの最大数を表します。この変数が`0`に設定されている場合、制限は適用されません。
+
+### tidb_ttl_delete_batch_size v6.5.0<span class="version-mark">の新機能</span> {#tidb-ttl-delete-batch-size-span-class-version-mark-new-in-v6-5-0-span}
+
+> **警告：**
+>
+> [TTL](/time-to-live.md)は実験的機能です。このシステム変数は、将来のリリースで変更または削除される可能性があります。
+
+-   範囲: グローバル
+-   クラスターに永続化: はい
+-   デフォルト値: `100`
+-   範囲: `[1, 10240]`
+-   この変数は、TTL ジョブの`DELETE`のトランザクションで削除できる行の最大数を設定するために使用されます。
+
+### tidb_ttl_delete_worker_count v6.5.0<span class="version-mark">の新機能</span> {#tidb-ttl-delete-worker-count-span-class-version-mark-new-in-v6-5-0-span}
+
+> **警告：**
+>
+> [TTL](/time-to-live.md)は実験的機能です。このシステム変数は、将来のリリースで変更または削除される可能性があります。
+
+-   範囲: グローバル
+-   クラスターに永続化: はい
+-   デフォルト値: `4`
+-   範囲: `[1, 256]`
+-   この変数は、各 TiDB ノードでの TTL ジョブの最大同時実行数を設定するために使用されます。
+
+### tidb_ttl_job_enable v6.5.0<span class="version-mark">の新機能</span> {#tidb-ttl-job-enable-span-class-version-mark-new-in-v6-5-0-span}
+
+> **警告：**
+>
+> [TTL](/time-to-live.md)は実験的機能です。このシステム変数は、将来のリリースで変更または削除される可能性があります。
+
+-   範囲: グローバル
+-   クラスターに永続化: はい
+-   デフォルト値: `ON`
+-   タイプ: ブール値
+-   この変数は、TTL ジョブを有効にするかどうかを制御するために使用されます。 `OFF`に設定されている場合、TTL 属性を持つすべてのテーブルは、期限切れデータのクリーンアップを自動的に停止します。
+
+### tidb_ttl_scan_batch_size v6.5.0<span class="version-mark">の新機能</span> {#tidb-ttl-scan-batch-size-span-class-version-mark-new-in-v6-5-0-span}
+
+> **警告：**
+>
+> [TTL](/time-to-live.md)は実験的機能です。このシステム変数は、将来のリリースで変更または削除される可能性があります。
+
+-   範囲: グローバル
+-   クラスターに永続化: はい
+-   デフォルト値: `500`
+-   範囲: `[1, 10240]`
+-   この変数は、TTL ジョブで期限切れデータをスキャンするために使用される各`SELECT`ステートメントの`LIMIT`値を設定するために使用されます。
+
+### tidb_ttl_scan_worker_count v6.5.0<span class="version-mark">の新機能</span> {#tidb-ttl-scan-worker-count-span-class-version-mark-new-in-v6-5-0-span}
+
+> **警告：**
+>
+> [TTL](/time-to-live.md)は実験的機能です。このシステム変数は、将来のリリースで変更または削除される可能性があります。
+
+-   範囲: グローバル
+-   クラスターに永続化: はい
+-   デフォルト値: `4`
+-   範囲: `[1, 256]`
+-   この変数は、各 TiDB ノードでの TTL スキャン ジョブの最大同時実行数を設定するために使用されます。
+
+### tidb_ttl_job_run_interval v6.5.0<span class="version-mark">の新機能</span> {#tidb-ttl-job-run-interval-span-class-version-mark-new-in-v6-5-0-span}
+
+> **警告：**
+>
+> [TTL](/time-to-live.md)は実験的機能です。このシステム変数は、将来のリリースで変更または削除される可能性があります。
+
+-   範囲: グローバル
+-   クラスターに永続化: はい
+-   デフォルト値: `1h0m0s`
+-   範囲: `[10m0s, 8760h0m0s]`
+-   この変数は、バックグラウンドでの TTL ジョブのスケジューリング間隔を制御するために使用されます。たとえば、現在の値が`1h0m0s`に設定されている場合、TTL 属性を持つ各テーブルは、1 時間ごとに期限切れのデータをクリーンアップします。
+
+### tidb_ttl_job_schedule_window_start_time v6.5.0<span class="version-mark">の新機能</span> {#tidb-ttl-job-schedule-window-start-time-span-class-version-mark-new-in-v6-5-0-span}
+
+> **警告：**
+>
+> [TTL](/time-to-live.md)は実験的機能です。このシステム変数は、将来のリリースで変更または削除される可能性があります。
+
+-   範囲: グローバル
+-   タイプ: 時間
+-   クラスターに永続化: はい
+-   デフォルト値: `00:00 +0000`
+-   この変数は、バックグラウンドでの TTL ジョブのスケジューリング ウィンドウの開始時刻を制御するために使用されます。この変数の値を変更するときは、ウィンドウが小さいと期限切れデータのクリーンアップが失敗する可能性があることに注意してください。
+
+### tidb_ttl_job_schedule_window_end_time v6.5.0<span class="version-mark">の新機能</span> {#tidb-ttl-job-schedule-window-end-time-span-class-version-mark-new-in-v6-5-0-span}
+
+> **警告：**
+>
+> [TTL](/time-to-live.md)は実験的機能です。このシステム変数は、将来のリリースで変更または削除される可能性があります。
+
+-   範囲: グローバル
+-   タイプ: 時間
+-   クラスターに永続化: はい
+-   デフォルト値: `23:59 +0000`
+-   この変数は、バックグラウンドでの TTL ジョブのスケジューリング ウィンドウの終了時間を制御するために使用されます。この変数の値を変更するときは、ウィンドウが小さいと期限切れデータのクリーンアップが失敗する可能性があることに注意してください。
+
+### tidb_txn_assertion_level v6.0.0<span class="version-mark">の新機能</span> {#tidb-txn-assertion-level-span-class-version-mark-new-in-v6-0-0-span}
+
+-   スコープ: セッション |グローバル
+
+-   クラスターに永続化: はい
+
+-   タイプ: 列挙
+
+-   デフォルト値: `FAST`
+
+-   可能な値: `OFF` 、 `FAST` 、 `STRICT`
+
+-   この変数は、アサーション レベルを制御するために使用されます。アサーションは、データとインデックス間の整合性チェックであり、トランザクションのコミット プロセスで、書き込まれているキーが存在するかどうかをチェックします。詳細については、 [データとインデックス間の不一致のトラブルシューティング](/troubleshoot-data-inconsistency-errors.md)を参照してください。
+
+    -   `OFF` : このチェックを無効にします。
+    -   `FAST` : ほとんどのチェック項目を有効にしますが、パフォーマンスにはほとんど影響しません。
+    -   `STRICT` : すべてのチェック項目を有効にします。システムのワークロードが高い場合、悲観的トランザクション パフォーマンスにわずかな影響があります。
+
+-   v6.0.0 以降のバージョンの新しいクラスターの場合、デフォルト値は`FAST`です。 v6.0.0 より前のバージョンからアップグレードする既存のクラスターの場合、デフォルト値は`OFF`です。
+
+### <code>tidb_txn_commit_batch_size</code><span class="version-mark">の新機能</span> {#code-tidb-txn-commit-batch-size-code-span-class-version-mark-new-in-v6-2-0-span}
+
+-   範囲: グローバル
+-   クラスターに永続化: はい
+-   タイプ: 整数
+-   デフォルト値: `16384`
+-   範囲: `[1, 1073741824]`
+-   単位: バイト
 
 <CustomContent platform="tidb">
 
-- If [FastScan](/develop/dev-guide-use-fastscan.md) is enabled (set to `ON`), TiFlash provides more efficient query performance, but does not guarantee the accuracy of the query results or data consistency.
+-   この変数は、TiDB が TiKV に送信するトランザクション コミット リクエストのバッチ サイズを制御するために使用されます。アプリケーション ワークロード内のほとんどのトランザクションに多数の書き込み操作がある場合、この変数をより大きな値に調整すると、バッチ処理のパフォーマンスを向上させることができます。ただし、この変数が大きすぎる値に設定され、TiKV の[`raft-entry-max-size`](/tikv-configuration-file.md#raft-entry-max-size)の制限を超えると、コミットが失敗する可能性があります。
 
 </CustomContent>
 
-### `tiflash_fine_grained_shuffle_batch_size` <span class="version-mark">New in v6.2.0</span>
+<CustomContent platform="tidb-cloud">
 
-- Scope: SESSION | GLOBAL
-- Default value: `8192`
-- Range: `[1, 18446744073709551615]`
-- When Fine Grained Shuffle is enabled, the window function pushed down to TiFlash can be executed in parallel. This variable controls the batch size of the data sent by the sender.
-- Impact on performance: set a reasonable size according to your business requirements. Improper setting affects the performance. If the value is set too small, for example `1`, it causes one network transfer per Block. If the value is set too large, for example, the total number of rows of the table, it causes the receiving end to spend most of the time waiting for data, and the piplelined computation cannot work. To set a proper value, you can observe the distribution of the number of rows received by the TiFlash receiver. If most threads receive only a few rows, for example a few hundred, you can increase this value to reduce the network overhead.
+-   この変数は、TiDB が TiKV に送信するトランザクション コミット リクエストのバッチ サイズを制御するために使用されます。アプリケーション ワークロード内のほとんどのトランザクションに多数の書き込み操作がある場合、この変数をより大きな値に調整すると、バッチ処理のパフォーマンスを向上させることができます。ただし、この変数が大きすぎる値に設定され、TiKV の単一ログの最大サイズ (デフォルトでは 8 MB) の制限を超えると、コミットが失敗する可能性があります。
 
-### `tiflash_fine_grained_shuffle_stream_count` <span class="version-mark">New in v6.2.0</span>
+</CustomContent>
 
-- Scope: SESSION | GLOBAL
-- Persists to cluster: Yes
-- Type: Integer
-- Default value: `0`
-- Range: `[-1, 1024]`
-- When the window function is pushed down to TiFlash for execution, you can use this variable to control the concurrency level of the window function execution. The possible values are as follows:
+### tidb_txn_mode {#tidb-txn-mode}
 
-    * -1: the Fine Grained Shuffle feature is disabled. The window function pushed down to TiFlash is executed in a single thread.
-    * 0: the Fine Grained Shuffle feature is enabled. If [`tidb_max_tiflash_threads`](/system-variables.md#tidb_max_tiflash_threads-new-in-v610) is set to a valid value (greater than 0), then `tiflash_fine_grained_shuffle_stream_count` is set to the value of [`tidb_max_tiflash_threads`](/system-variables.md#tidb_max_tiflash_threads-new-in-v610). Otherwise, it is set to 8. The actual concurrency level of the window function on TiFlash is: min(`tiflash_fine_grained_shuffle_stream_count`, the number of physical threads on TiFlash nodes).
-    * Integer greater than 0: the Fine Grained Shuffle feature is enabled. The window function pushed down to TiFlash is executed in multiple threads. The concurrency level is: min(`tiflash_fine_grained_shuffle_stream_count`, the number of physical threads on TiFlash nodes).
-- Theoretically, the performance of the window function increases linearly with this value. However, if the value exceeds the actual number of physical threads, it instead leads to performance degradation.
+-   スコープ: セッション |グローバル
+-   クラスターに永続化: はい
+-   タイプ: 列挙
+-   デフォルト値: `pessimistic`
+-   可能な値: `pessimistic` 、 `optimistic`
+-   この変数は、トランザクション モードを設定するために使用されます。 TiDB 3.0 は悲観的トランザクションをサポートしています。 TiDB 3.0.8 以降、デフォルトで[悲観的トランザクション モード](/pessimistic-transaction.md)が有効になっています。
+-   TiDB を v3.0.7 以前のバージョンから v3.0.8 以降のバージョンにアップグレードしても、デフォルトのトランザクション モードは変更されません。**新しく作成されたクラスタだけがデフォルトで悲観的トランザクション モードを使用します**。
+-   この変数が「楽観的」または「」に設定されている場合、TiDB は[楽観的トランザクション モード](/optimistic-transaction.md)を使用します。
 
-### time_zone
+### tidb_use_plan_baselines <span class="version-mark">v4.0 の新</span>機能 {#tidb-use-plan-baselines-span-class-version-mark-new-in-v4-0-span}
 
-- Scope: SESSION | GLOBAL
-- Persists to cluster: Yes
-- Default value: `SYSTEM`
-- This variable returns the current time zone. Values can be specified as either an offset such as '-8:00' or a named zone 'America/Los_Angeles'.
-- The value `SYSTEM` means that the time zone should be the same as the system host, which is available via the [`system_time_zone`](#system_time_zone) variable.
+-   スコープ: セッション |グローバル
+-   クラスターに永続化: はい
+-   タイプ: ブール値
+-   デフォルト値: `ON`
+-   この変数は、実行計画バインディング機能を有効にするかどうかを制御するために使用されます。これはデフォルトで有効になっており、値`OFF`を割り当てることで無効にすることができます。実行計画バインディングの使用については、 [実行計画バインディング](/sql-plan-management.md#create-a-binding)を参照してください。
 
-### timestamp
+### tidb_wait_split_region_finish {#tidb-wait-split-region-finish}
 
-- Scope: SESSION
-- Type: Float
-- Default value: `0`
-- Range: `[0, 2147483647]`
-- A non-empty value of this variable indicates the UNIX epoch that is used as the timestamp for `CURRENT_TIMESTAMP()`, `NOW()`, and other functions. This variable might be used in data restore or replication.
+-   スコープ: セッション
+-   タイプ: ブール値
+-   デフォルト値: `ON`
+-   通常、PD のスケジューリングと TiKV の負荷によって決定されるリージョンの分散には長い時間がかかります。この変数は、 `SPLIT REGION`ステートメントが実行されているときに、すべてのリージョンが完全に分散された後に結果をクライアントに返すかどうかを設定するために使用されます。
+    -   `ON`を指定すると、すべてのリージョンが分散されるまで`SPLIT REGIONS`ステートメントが待機する必要があります。
+    -   `OFF`は、すべての領域の分散を終了する前に`SPLIT REGIONS`ステートメントを返すことを許可します。
+-   リージョンを分散すると、分散されているリージョンの書き込みおよび読み取りパフォーマンスが影響を受ける可能性があることに注意してください。バッチ書き込みまたはデータ インポートのシナリオでは、リージョンの分散が完了した後にデータをインポートすることをお勧めします。
 
-### transaction_isolation
+### tidb_wait_split_region_timeout {#tidb-wait-split-region-timeout}
 
-- Scope: SESSION | GLOBAL
-- Persists to cluster: Yes
-- Type: Enumeration
-- Default value: `REPEATABLE-READ`
-- Possible values: `READ-UNCOMMITTED`, `READ-COMMITTED`, `REPEATABLE-READ`, `SERIALIZABLE`
-- This variable sets the transaction isolation. TiDB advertises `REPEATABLE-READ` for compatibility with MySQL, but the actual isolation level is Snapshot Isolation. See [transaction isolation levels](/transaction-isolation-levels.md) for further details.
+-   スコープ: セッション
+-   タイプ: 整数
+-   デフォルト値: `300`
+-   範囲: `[1, 2147483647]`
+-   単位: 秒
+-   この変数は、 `SPLIT REGION`ステートメントを実行するためのタイムアウトを設定するために使用されます。指定された時間値内にステートメントが完全に実行されない場合、タイムアウト エラーが返されます。
 
-### tx_isolation
+### tidb_window_concurrency <span class="version-mark">v4.0 の新</span>機能 {#tidb-window-concurrency-span-class-version-mark-new-in-v4-0-span}
 
-This variable is an alias for `transaction_isolation`.
-
-### tx_isolation_one_shot
-
-> **Note:**
+> **警告：**
 >
-> This variable is internally used in TiDB. You are not expected to use it.
+> v5.0 以降、この変数は廃止されました。代わりに、設定には[`tidb_executor_concurrency`](#tidb_executor_concurrency-new-in-v50)を使用します。
 
-Internally, the TiDB parser transforms the `SET TRANSACTION ISOLATION LEVEL [READ COMMITTED| REPEATABLE READ | ...]` statements to `SET @@SESSION.TX_ISOLATION_ONE_SHOT = [READ COMMITTED| REPEATABLE READ | ...]`.
+-   スコープ: セッション |グローバル
+-   クラスターに永続化: はい
+-   タイプ: 整数
+-   デフォルト値: `-1`
+-   範囲: `[1, 256]`
+-   単位: スレッド
+-   この変数は、ウィンドウ オペレーターの同時実行度を設定するために使用されます。
+-   値`-1`は、代わりに値`tidb_executor_concurrency`が使用されることを意味します。
 
-### tx_read_ts
+### <code>tiflash_fastscan</code><span class="version-mark">の新機能</span> {#code-tiflash-fastscan-code-span-class-version-mark-new-in-v6-3-0-span}
 
-- Scope: SESSION
-- Default value: ""
-- In the Stale Read scenarios, this session variable is used to help record the Stable Read timestamp value.
-- This variable is used for the internal operation of TiDB. It is **NOT recommended** to set this variable.
+-   スコープ: セッション |グローバル
+-   デフォルト値: `OFF`
+-   タイプ: ブール値
 
-### txn_scope
+<CustomContent platform="tidb">
 
-- Scope: SESSION
-- Default value: `global`
-- Value options: `global` and `local`
-- This variable is used to set whether the current session transaction is a global transaction or a local transaction.
-- This variable is used for the internal operation of TiDB. It is **NOT recommended** to set this variable.
+-   [ファストスキャン](/develop/dev-guide-use-fastscan.md)が有効になっている ( `ON`に設定されている) 場合、 TiFlashはより効率的なクエリ パフォーマンスを提供しますが、クエリ結果の精度やデータの一貫性は保証されません。
 
-### validate_password.check_user_name <span class="version-mark">New in v6.5.0</span>
+</CustomContent>
 
-- Scope: GLOBAL
-- Persists to cluster: Yes
-- Default value: `ON`
-- Type: Boolean
-- This variable is a check item in the password complexity check. It checks whether the password matches the username. This variable takes effect only when [`validate_password.enable`](#validate_passwordenable-new-in-v650) is enabled.
-- When this variable is effective and set to `ON`, if you set a password, TiDB compares the password with the username (excluding the hostname). If the password matches the username, the password is rejected.
-- This variable is independent of [`validate_password.policy`](#validate_passwordpolicy-new-in-v650) and not affected by the password complexity check level.
+### <code>tiflash_fine_grained_shuffle_batch_size</code><span class="version-mark">の新機能</span> {#code-tiflash-fine-grained-shuffle-batch-size-code-span-class-version-mark-new-in-v6-2-0-span}
 
-### validate_password.dictionary <span class="version-mark">New in v6.5.0</span>
+-   スコープ: セッション |グローバル
+-   デフォルト値: `8192`
+-   範囲: `[1, 18446744073709551615]`
+-   Fine Grained Shuffle が有効な場合、 TiFlashにプッシュ ダウンされたウィンドウ関数を並行して実行できます。この変数は、送信者によって送信されるデータのバッチ サイズを制御します。
+-   パフォーマンスへの影響: ビジネス要件に従って適切なサイズを設定します。不適切な設定はパフォーマンスに影響します。たとえば`1`のように値が小さすぎると、ブロックごとに 1 つのネットワーク転送が発生します。テーブルの総行数など、値が大きすぎると、受信側でデータの待機にほとんどの時間が費やされ、パイプライン化された計算が機能しなくなります。適切な値を設定するために、 TiFlashレシーバーが受信した行数の分布を観察できます。ほとんどのスレッドが数行 (数百行など) しか受信しない場合は、この値を増やしてネットワーク オーバーヘッドを減らすことができます。
 
-- Scope: GLOBAL
-- Persists to cluster: Yes
-- Default value: `""`
-- Type: String
-- This variable is a check item in the password complexity check. It checks whether the password matches the dictionary. This variable takes effect only when [`validate_password.enable`](#validate_passwordenable-new-in-v650) is enabled and [`validate_password.policy`](#validate_passwordpolicy-new-in-v650) is set to `2` (STRONG).
-- This variable is a string not longer than 1024 characters. It contains a list of words that cannot exist in the password. Each word is separated by semicolon (`;`).
-- This variable is set to an empty string by default, which means no dictionary check is performed. To perform the dictionary check, you need to include the words to be matched in the string. If this variable is configured, when you set a password, TiDB compares each substring (length in 4 to 100 characters) of the password with the words in the dictionary. If any substring of the password matches a word in the dictionary, the password is rejected. The comparison is case-insensitive.
+### <code>tiflash_fine_grained_shuffle_stream_count</code><span class="version-mark">の新機能</span> {#code-tiflash-fine-grained-shuffle-stream-count-code-span-class-version-mark-new-in-v6-2-0-span}
 
-### validate_password.enable <span class="version-mark">New in v6.5.0</span>
+-   スコープ: セッション |グローバル
+-   クラスターに永続化: はい
+-   タイプ: 整数
+-   デフォルト値: `0`
+-   範囲: `[-1, 1024]`
+-   ウィンドウ関数が実行のためにTiFlashにプッシュされると、この変数を使用してウィンドウ関数実行の同時実行レベルを制御できます。可能な値は次のとおりです。
 
-- Scope: GLOBAL
-- Persists to cluster: Yes
-- Default value: `OFF`
-- Type: Boolean
-- This variable controls whether to perform password complexity check. If this variable is set to `ON`, TiDB performs the password complexity check when you set a password.
+    -   -1: ファイン グレイン シャッフル機能が無効になります。 TiFlashにプッシュされたウィンドウ関数は、シングル スレッドで実行されます。
+    -   0: ファイン グレイン シャッフル機能が有効になります。 [`tidb_max_tiflash_threads`](/system-variables.md#tidb_max_tiflash_threads-new-in-v610)が有効な値 (0 より大きい) に設定されている場合、 `tiflash_fine_grained_shuffle_stream_count`は値[`tidb_max_tiflash_threads`](/system-variables.md#tidb_max_tiflash_threads-new-in-v610)に設定されます。それ以外の場合は、8 に設定されますTiFlashでのウィンドウ関数の実際の同時実行レベルは、min( `tiflash_fine_grained_shuffle_stream_count` 、 TiFlashノードの物理スレッドの数) です。
+    -   0 より大きい整数: ファイングレイン シャッフル機能が有効になっています。 TiFlashにプッシュされたウィンドウ関数は、複数のスレッドで実行されます。同時実行レベルは次のとおりです。min( `tiflash_fine_grained_shuffle_stream_count` 、 TiFlashノード上の物理スレッドの数)。
+-   理論的には、ウィンドウ関数のパフォーマンスはこの値に比例して向上します。ただし、値が実際の物理スレッド数を超えると、代わりにパフォーマンスが低下します。
 
-### validate_password.length <span class="version-mark">New in v6.5.0</span>
+### タイムゾーン {#time-zone}
 
-- Scope: GLOBAL
-- Persists to cluster: Yes
-- Type: Integer
-- Default value: `8`
-- Range: `[0, 2147483647]`
-- This variable is a check item in the password complexity check. It checks whether the password length is sufficient. By default, the minimum password length is `8`. This variable takes effect only when [`validate_password.enable`](#validate_passwordenable-new-in-v650) is enabled.
-- The value of this variable must not be smaller than the expression: `validate_password.number_count + validate_password.special_char_count + (2 * validate_password.mixed_case_count)`.
-- If you change the value of `validate_password.number_count`, `validate_password.special_char_count`, or `validate_password.mixed_case_count` such that the expression value is larger than `validate_password.length`, the value of `validate_password.length` is automatically changed to match the expression value.
+-   スコープ: セッション |グローバル
+-   クラスターに永続化: はい
+-   デフォルト値: `SYSTEM`
+-   この変数は、現在のタイム ゾーンを返します。値は、「-8:00」などのオフセットまたは名前付きゾーン「America/Los_Angeles」として指定できます。
+-   値`SYSTEM`は、タイム ゾーンがシステム ホストと同じであることを意味します。これは、変数[`system_time_zone`](#system_time_zone)を介して利用できます。
 
-### validate_password.mixed_case_count <span class="version-mark">New in v6.5.0</span>
+### タイムスタンプ {#timestamp}
 
-- Scope: GLOBAL
-- Persists to cluster: Yes
-- Type: Integer
-- Default value: `1`
-- Range: `[0, 2147483647]`
-- This variable is a check item in the password complexity check. It checks whether the password contains sufficient uppercase and lowercase letters. This variable takes effect only when [`validate_password.enable`](#validate_passwordenable-new-in-v650) is enabled and [`validate_password.policy`](#validate_passwordpolicy-new-in-v650) is set to `1` (MEDIUM) or larger.
-- Neither the number of uppercase letters nor the number of lowercase letters in the password can be fewer than the value of `validate_password.mixed_case_count`. For example, when the variable is set to `1`, the password must contain at least one uppercase letter and one lowercase letter.
+-   スコープ: セッション
+-   タイプ: フロート
+-   デフォルト値: `0`
+-   範囲: `[0, 2147483647]`
+-   この変数の空でない`NOW()` `CURRENT_TIMESTAMP()`およびその他の関数のタイムスタンプとして使用される UNIX エポックを示します。この変数は、データの復元または複製で使用される場合があります。
 
-### validate_password.number_count <span class="version-mark">New in v6.5.0</span>
+### トランザクション分離 {#transaction-isolation}
 
-- Scope: GLOBAL
-- Persists to cluster: Yes
-- Type: Integer
-- Default value: `1`
-- Range: `[0, 2147483647]`
-- This variable is a check item in the password complexity check. It checks whether the password contains sufficient numbers. This variable takes effect only when [`validate_password.enable`](#password_reuse_interval-new-in-v650) is enabled and [`validate_password.policy`](#validate_passwordpolicy-new-in-v650) is set to `1` (MEDIUM) or larger.
+-   スコープ: セッション |グローバル
+-   クラスターに永続化: はい
+-   タイプ: 列挙
+-   デフォルト値: `REPEATABLE-READ`
+-   可能な値: `READ-UNCOMMITTED` 、 `READ-COMMITTED` 、 `REPEATABLE-READ` 、 `SERIALIZABLE`
+-   この変数は、トランザクションの分離を設定します。 TiDB は MySQL との互換性のために`REPEATABLE-READ`をアドバタイズしますが、実際の分離レベルはスナップショット分離です。詳細については、 [トランザクション分離レベル](/transaction-isolation-levels.md)を参照してください。
 
-### validate_password.policy <span class="version-mark">New in v6.5.0</span>
+### tx_isolation {#tx-isolation}
 
-- Scope: GLOBAL
-- Persists to cluster: Yes
-- Type: Enumeration
-- Default value: `1`
-- Value options: `0`, `1`, `2`
-- This variable controls the policy for the password complexity check. This variable takes effect only when [`validate_password.enable`](#password_reuse_interval-new-in-v650) is enabled. The value of this variable determines whether other `validate-password` variables take effect in the password complexity check, except for `validate_password.check_user_name`.
-- This value of this variable can be `0`, `1`, or `2` (corresponds to LOW, MEDIUM, or STRONG). Different policy levels have different checks:
-    - 0 or LOW: password length.
-    - 1 or MEDIUM: password length, uppercase and lowercase letters, numbers, and special characters.
-    - 2 or STRONG: password length, uppercase and lowercase letters, numbers, special characters, and dictionary match.
+この変数は`transaction_isolation`のエイリアスです。
 
-### validate_password.special_char_count <span class="version-mark">New in v6.5.0</span>
+### tx_isolation_one_shot {#tx-isolation-one-shot}
 
-- Scope: GLOBAL
-- Persists to cluster: Yes
-- Type: Integer
-- Default value: `1`
-- Range: `[0, 2147483647]`
-- This variable is a check item in the password complexity check. It checks whether the password contains sufficient special characters. This variable takes effect only when [`validate_password.enable`](#password_reuse_interval-new-in-v650) is enabled and [`validate_password.policy`](#validate_passwordpolicy-new-in-v650) is set to `1` (MEDIUM) or larger.
+> **ノート：**
+>
+> この変数は、TiDB で内部的に使用されます。使用することは想定されていません。
 
-### version
+内部的に、TiDB パーサーは`SET TRANSACTION ISOLATION LEVEL [READ COMMITTED| REPEATABLE READ | ...]`ステートメントを`SET @@SESSION.TX_ISOLATION_ONE_SHOT = [READ COMMITTED| REPEATABLE READ | ...]`に変換します。
 
-- Scope: NONE
-- Default value: `5.7.25-TiDB-`(tidb version)
-- This variable returns the MySQL version, followed by the TiDB version. For example '5.7.25-TiDB-v4.0.0-beta.2-716-g25e003253'.
+### tx_read_ts {#tx-read-ts}
 
-### version_comment
+-   スコープ: セッション
+-   デフォルト値: &quot;&quot;
+-   ステイル読み取りのシナリオでは、このセッション変数を使用して、安定した読み取りのタイムスタンプ値を記録します。
+-   この変数は、TiDB の内部操作に使用されます。この変数を設定することは**お勧めしません**。
 
-- Scope: NONE
-- Default value: (string)
-- This variable returns additional details about the TiDB version. For example, 'TiDB Server (Apache License 2.0) Community Edition, MySQL 5.7 compatible'.
+### txn_scope {#txn-scope}
 
-### version_compile_machine
+-   スコープ: セッション
+-   デフォルト値: `global`
+-   値のオプション: `global`および`local`
+-   この変数は、現在のセッション トランザクションがグローバル トランザクションかローカル トランザクションかを設定するために使用されます。
+-   この変数は、TiDB の内部操作に使用されます。この変数を設定することは**お勧めしません**。
 
-- Scope: NONE
-- Default value: (string)
-- This variable returns the name of the CPU architecture on which TiDB is running.
+### validate_password.check_user_name <span class="version-mark">v6.5.0 の新機能</span> {#validate-password-check-user-name-span-class-version-mark-new-in-v6-5-0-span}
 
-### version_compile_os
+-   範囲: グローバル
+-   クラスターに永続化: はい
+-   デフォルト値: `ON`
+-   タイプ: ブール値
+-   この変数は、パスワード複雑度チェックのチェック項目です。パスワードがユーザー名と一致するかどうかをチェックします。この変数は、 [`validate_password.enable`](#validate_passwordenable-new-in-v650)が有効になっている場合にのみ有効です。
+-   この変数が有効で`ON`に設定されている場合、パスワードを設定すると、TiDB はパスワードをユーザー名 (ホスト名を除く) と比較します。パスワードがユーザー名と一致する場合、パスワードは拒否されます。
+-   この変数は[`validate_password.policy`](#validate_passwordpolicy-new-in-v650)とは無関係であり、パスワードの複雑さチェック レベルの影響を受けません。
 
-- Scope: NONE
-- Default value: (string)
-- This variable returns the name of the OS on which TiDB is running.
+### validate_password.dictionary <span class="version-mark">v6.5.0 の新機能</span> {#validate-password-dictionary-span-class-version-mark-new-in-v6-5-0-span}
 
-### wait_timeout
+-   範囲: グローバル
+-   クラスターに永続化: はい
+-   デフォルト値: `""`
+-   タイプ: 文字列
+-   この変数は、パスワード複雑度チェックのチェック項目です。パスワードが辞書と一致するかどうかをチェックします。この変数は、 [`validate_password.enable`](#validate_passwordenable-new-in-v650)が有効で、 [`validate_password.policy`](#validate_passwordpolicy-new-in-v650)が`2` (STRONG) に設定されている場合にのみ有効です。
+-   この変数は、1024 文字以内の文字列です。パスワードに存在できない単語のリストが含まれています。各単語はセミコロン ( `;` ) で区切られます。
+-   この変数は、デフォルトで空の文字列に設定されています。これは、辞書チェックが実行されないことを意味します。辞書チェックを実行するには、一致させる単語を文字列に含める必要があります。この変数が構成されている場合、パスワードを設定すると、TiDB はパスワードの各部分文字列 (4 ～ 100 文字の長さ) を辞書内の単語と比較します。パスワードの部分文字列が辞書内の単語と一致する場合、パスワードは拒否されます。比較では大文字と小文字が区別されません。
 
-- Scope: SESSION | GLOBAL
-- Persists to cluster: Yes
-- Type: Integer
-- Default value: `28800`
-- Range: `[0, 31536000]`
-- Unit: Seconds
-- This variable controls the idle timeout of user sessions. A zero-value means unlimited.
+### validate_password.enable <span class="version-mark">v6.5.0 の新機能</span> {#validate-password-enable-span-class-version-mark-new-in-v6-5-0-span}
 
-### warning_count
+-   範囲: グローバル
+-   クラスターに永続化: はい
+-   デフォルト値: `OFF`
+-   タイプ: ブール値
+-   この変数は、パスワードの複雑さのチェックを実行するかどうかを制御します。この変数が`ON`に設定されている場合、TiDB はパスワードの設定時にパスワードの複雑さのチェックを実行します。
 
-- Scope: SESSION
-- Default value: `0`
-- This read-only variable indicates the number of warnings that occurred in the statement that was previously executed.
+### validate_password.length <span class="version-mark">v6.5.0 の新機能</span> {#validate-password-length-span-class-version-mark-new-in-v6-5-0-span}
 
-### windowing_use_high_precision
+-   範囲: グローバル
+-   クラスターに永続化: はい
+-   タイプ: 整数
+-   デフォルト値: `8`
+-   範囲: `[0, 2147483647]`
+-   この変数は、パスワード複雑度チェックのチェック項目です。パスワードの長さが十分かどうかをチェックします。デフォルトでは、最小パスワード長は`8`です。この変数は、 [`validate_password.enable`](#validate_passwordenable-new-in-v650)が有効になっている場合にのみ有効です。
+-   この変数の値は、式`validate_password.number_count + validate_password.special_char_count + (2 * validate_password.mixed_case_count)`よりも小さくすることはできません。
+-   式の値が`validate_password.length`より大きくなるように`validate_password.number_count` 、 `validate_password.special_char_count` 、または`validate_password.mixed_case_count`の値を変更すると、式の値と一致するように`validate_password.length`の値が自動的に変更されます。
 
-- Scope: SESSION | GLOBAL
-- Persists to cluster: Yes
-- Type: Boolean
-- Default value: `ON`
-- This variable controls whether to use the high precision mode when computing the window functions.
+### validate_password.mixed_case_count <span class="version-mark">v6.5.0 の新機能</span> {#validate-password-mixed-case-count-span-class-version-mark-new-in-v6-5-0-span}
+
+-   範囲: グローバル
+-   クラスターに永続化: はい
+-   タイプ: 整数
+-   デフォルト値: `1`
+-   範囲: `[0, 2147483647]`
+-   この変数は、パスワード複雑度チェックのチェック項目です。パスワードに十分な大文字と小文字が含まれているかどうかをチェックします。この変数は、 [`validate_password.enable`](#validate_passwordenable-new-in-v650)が有効で、 [`validate_password.policy`](#validate_passwordpolicy-new-in-v650)が`1` (MEDIUM) 以上に設定されている場合にのみ有効です。
+-   パスワードの大文字の数も小文字の数も、値`validate_password.mixed_case_count`より少なくすることはできません。たとえば、変数が`1`に設定されている場合、パスワードには少なくとも 1 つの大文字と 1 つの小文字が含まれている必要があります。
+
+### validate_password.number_count <span class="version-mark">v6.5.0 の新機能</span> {#validate-password-number-count-span-class-version-mark-new-in-v6-5-0-span}
+
+-   範囲: グローバル
+-   クラスターに永続化: はい
+-   タイプ: 整数
+-   デフォルト値: `1`
+-   範囲: `[0, 2147483647]`
+-   この変数は、パスワード複雑度チェックのチェック項目です。パスワードに十分な数字が含まれているかどうかをチェックします。この変数は、 [`validate_password.enable`](#password_reuse_interval-new-in-v650)が有効で、 [`validate_password.policy`](#validate_passwordpolicy-new-in-v650)が`1` (MEDIUM) 以上に設定されている場合にのみ有効です。
+
+### validate_password.policy <span class="version-mark">v6.5.0 の新機能</span> {#validate-password-policy-span-class-version-mark-new-in-v6-5-0-span}
+
+-   範囲: グローバル
+-   クラスターに永続化: はい
+-   タイプ: 列挙
+-   デフォルト値: `1`
+-   値のオプション: `0` 、 `1` 、 `2`
+-   この変数は、パスワードの複雑さチェックのポリシーを制御します。この変数は、 [`validate_password.enable`](#password_reuse_interval-new-in-v650)が有効になっている場合にのみ有効です。この変数の値は、 `validate_password.check_user_name`を除く他の`validate-password`の変数がパスワードの複雑さのチェックで有効になるかどうかを決定します。
+-   この変数の値は`0` 、 `1` 、または`2`です (LOW、MEDIUM、または STRONG に対応)。ポリシー レベルごとに異なるチェックがあります。
+    -   0 または LOW: パスワードの長さ。
+    -   1 または MEDIUM: パスワードの長さ、大文字と小文字、数字、および特殊文字。
+    -   2 または STRONG: パスワードの長さ、大文字と小文字、数字、特殊文字、および辞書の一致。
+
+### validate_password.special_char_count <span class="version-mark">v6.5.0 の新機能</span> {#validate-password-special-char-count-span-class-version-mark-new-in-v6-5-0-span}
+
+-   範囲: グローバル
+-   クラスターに永続化: はい
+-   タイプ: 整数
+-   デフォルト値: `1`
+-   範囲: `[0, 2147483647]`
+-   この変数は、パスワード複雑度チェックのチェック項目です。パスワードに十分な特殊文字が含まれているかどうかをチェックします。この変数は、 [`validate_password.enable`](#password_reuse_interval-new-in-v650)が有効で、 [`validate_password.policy`](#validate_passwordpolicy-new-in-v650)が`1` (MEDIUM) 以上に設定されている場合にのみ有効です。
+
+### バージョン {#version}
+
+-   スコープ: なし
+-   デフォルト値: `5.7.25-TiDB-` (tidb バージョン)
+-   この変数は、MySQL のバージョンに続いて TiDB のバージョンを返します。たとえば、「5.7.25-TiDB-v4.0.0-beta.2-716-g25e003253」です。
+
+### version_comment {#version-comment}
+
+-   スコープ: なし
+-   デフォルト値: (文字列)
+-   この変数は、TiDB のバージョンに関する追加の詳細を返します。たとえば、「TiDB Server (Apache License 2.0) Community Edition、 MySQL 5.7互換」などです。
+
+### version_compile_machine {#version-compile-machine}
+
+-   スコープ: なし
+-   デフォルト値: (文字列)
+-   この変数は、TiDB が実行されている CPUアーキテクチャの名前を返します。
+
+### version_compile_os {#version-compile-os}
+
+-   スコープ: なし
+-   デフォルト値: (文字列)
+-   この変数は、TiDB が実行されている OS の名前を返します。
+
+### wait_timeout {#wait-timeout}
+
+-   スコープ: セッション |グローバル
+-   クラスターに永続化: はい
+-   タイプ: 整数
+-   デフォルト値: `28800`
+-   範囲: `[0, 31536000]`
+-   単位: 秒
+-   この変数は、ユーザー セッションのアイドル タイムアウトを制御します。ゼロ値は無制限を意味します。
+
+### warning_count {#warning-count}
+
+-   スコープ: セッション
+-   デフォルト値: `0`
+-   この読み取り専用変数は、以前に実行されたステートメントで発生した警告の数を示します。
+
+### windowing_use_high_precision {#windowing-use-high-precision}
+
+-   スコープ: セッション |グローバル
+-   クラスターに永続化: はい
+-   タイプ: ブール値
+-   デフォルト値: `ON`
+-   この変数は、ウィンドウ関数を計算するときに高精度モードを使用するかどうかを制御します。

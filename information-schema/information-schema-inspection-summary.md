@@ -3,13 +3,13 @@ title: INSPECTION_SUMMARY
 summary: Learn the `INSPECTION_SUMMARY` inspection summary table.
 ---
 
-# INSPECTION_SUMMARY
+# INSPECTION_SUMMARY {#inspection-summary}
 
-In some scenarios, you might need to pay attention only to the monitoring summary of specific links or modules. For example, the number of threads for Coprocessor in the thread pool is configured as 8. If the CPU usage of Coprocessor reaches 750%, you can determine that a risk exists and Coprocessor might become a bottleneck in advance. However, some monitoring metrics vary greatly due to different user workloads, so it is difficult to define specific thresholds. It is important to troubleshoot issues in this scenario, so TiDB provides the `inspection_summary` table for link summary.
+シナリオによっては、特定のリンクまたはモジュールの監視の概要だけに注意を払う必要がある場合があります。たとえば、スレッドプール内のCoprocessorのスレッド数を 8 に設定すると、Coprocessorの CPU 使用率が 750% に達した場合、リスクが存在し、Coprocessorがボトルネックになる可能性があると事前に判断できます。ただし、一部の監視メトリックはユーザーのワークロードによって大きく異なるため、特定のしきい値を定義することは困難です。このシナリオでは問題のトラブルシューティングを行うことが重要であるため、TiDB はリンク サマリー用に`inspection_summary`の表を提供します。
 
-The structure of the `information_schema.inspection_summary` inspection summary table is as follows:
+`information_schema.inspection_summary`検査集計表の構造は次のとおりです。
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 USE information_schema;
@@ -33,28 +33,28 @@ DESC inspection_summary;
 9 rows in set (0.00 sec)
 ```
 
-Field description:
+フィールドの説明:
 
-* `RULE`: Summary rules. Because new rules are being added continuously, you can execute the `select * from inspection_rules where type='summary'` statement to query the latest rule list.
-* `INSTANCE`: The monitored instance.
-* `METRICS_NAME`: The monitoring metrics name.
-* `QUANTILE`: Takes effect on monitoring tables that contain `QUANTILE`. You can specify multiple percentiles by pushing down predicates. For example, you can execute `select * from inspection_summary where rule='ddl' and quantile in (0.80, 0.90, 0.99, 0.999)` to summarize the DDL-related monitoring metrics and query the P80/P90/P99/P999 results. `AVG_VALUE`, `MIN_VALUE`, and `MAX_VALUE` respectively indicate the average value, minimum value, and maximum value of the aggregation.
-* `COMMENT`: The comment about the corresponding monitoring metric.
+-   `RULE` : 要約ルール。新しいルールは継続的に追加されているため、 `select * from inspection_rules where type='summary'`ステートメントを実行して最新のルール リストを照会できます。
+-   `INSTANCE` : 監視対象インスタンス。
+-   `METRICS_NAME` : モニタリング メトリック名。
+-   `QUANTILE` : `QUANTILE`を含む監視テーブルに有効です。述語を押し下げて、複数のパーセンタイルを指定できます。たとえば、 `select * from inspection_summary where rule='ddl' and quantile in (0.80, 0.90, 0.99, 0.999)`を実行して DDL 関連のモニタリング メトリックを要約し、P80/P90/P99/P999 の結果を照会できます。 `AVG_VALUE`はそれぞれ`MIN_VALUE`の`MAX_VALUE`値、最小値、最大値を示す。
+-   `COMMENT` : 対応するモニタリング メトリックに関するコメント。
 
-> **Note:**
+> **ノート：**
 >
-> Because summarizing all results causes overhead, it is recommended to display the specific `rule` in the SQL predicate to reduce overhead. For example, executing `select * from inspection_summary where rule in ('read-link', 'ddl')` summarizes the read link and DDL-related monitoring metrics.
+> すべての結果を集計するとオーバーヘッドが発生するため、SQL 述語に特定の`rule`を表示してオーバーヘッドを削減することをお勧めします。たとえば、 `select * from inspection_summary where rule in ('read-link', 'ddl')`を実行すると、読み取りリンクと DDL 関連のモニタリング メトリックが要約されます。
 
-Usage example:
+使用例:
 
-Both the diagnostic result table and the diagnostic monitoring summary table can specify the diagnostic time range using `hint`. `select /*+ time_range('2020-03-07 12:00:00','2020-03-07 13:00:00') */* from inspection_summary` is the monitoring summary for the `2020-03-07 12:00:00` to `2020-03-07 13:00:00` period. Like the monitoring summary table, you can use the `inspection_summary` table to quickly find the monitoring items with large differences by comparing the data of two different periods.
+診断結果表、診断監視集計表ともに、診断時間範囲を`hint`で指定できます。 `select /*+ time_range('2020-03-07 12:00:00','2020-03-07 13:00:00') */* from inspection_summary`は`2020-03-07 12:00:00` ～ `2020-03-07 13:00:00`期のモニタリングまとめです。モニタリング集計表と同様に、2 つの異なる期間のデータを比較することで、差異の大きいモニタリング項目をすばやく見つけることができ`inspection_summary` 。
 
-The following example compares the monitoring metrics of read links in two time periods:
+次の例では、2 つの期間における読み取りリンクのモニタリング メトリックを比較します。
 
-* `(2020-01-16 16:00:54.933, 2020-01-16 16:10:54.933)`
-* `(2020-01-16 16:10:54.933, 2020-01-16 16:20:54.933)`
+-   `(2020-01-16 16:00:54.933, 2020-01-16 16:10:54.933)`
+-   `(2020-01-16 16:10:54.933, 2020-01-16 16:20:54.933)`
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 SELECT

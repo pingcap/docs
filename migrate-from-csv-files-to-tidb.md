@@ -3,42 +3,42 @@ title: Migrate Data from CSV Files to TiDB
 summary: Learn how to migrate data from CSV files to TiDB.
 ---
 
-# Migrate Data from CSV Files to TiDB
+# CSV ファイルから TiDB にデータを移行する {#migrate-data-from-csv-files-to-tidb}
 
-This document describes how to migrate data from CSV files to TiDB.
+このドキュメントでは、CSV ファイルから TiDB にデータを移行する方法について説明します。
 
-TiDB Lightning can read data from CSV files and other delimiter formats, such as tab-separated values (TSV). For other flat file data sources, you can also refer to this document and migrate data to TiDB.
+TiDB Lightningは、CSV ファイルや、タブ区切り値 (TSV) などの他の区切り記号形式からデータを読み取ることができます。他のフラット ファイル データ ソースについては、このドキュメントを参照してデータを TiDB に移行することもできます。
 
-## Prerequisites
+## 前提条件 {#prerequisites}
 
-- [Install TiDB Lightning](/migration-tools.md).
-- [Get the target database privileges required for TiDB Lightning](/tidb-lightning/tidb-lightning-faq.md#what-are-the-privilege-requirements-for-the-target-database).
+-   [TiDB Lightningをインストールする](/migration-tools.md) .
+-   [TiDB Lightningに必要なターゲット データベース権限を取得する](/tidb-lightning/tidb-lightning-faq.md#what-are-the-privilege-requirements-for-the-target-database) .
 
-## Step 1. Prepare the CSV files
+## ステップ 1.CSV ファイルを準備する {#step-1-prepare-the-csv-files}
 
-Put all the CSV files in the same directory. If you need TiDB Lightning to recognize all CSV files, the file names should meet the following requirements:
+すべての CSV ファイルを同じディレクトリに配置します。 TiDB Lightningがすべての CSV ファイルを認識する必要がある場合、ファイル名は次の要件を満たす必要があります。
 
-- If a CSV file contains the data for an entire table, name the file `${db_name}.${table_name}.csv`.
-- If the data of one table is separated into multiple CSV files, append a numeric suffix to these CSV files. For example, `${db_name}.${table_name}.003.csv`. The numeric suffixes can be inconsecutive but must be in ascending order. You also need to add extra zeros before the number to ensure all the suffixes are in the same length.
+-   CSV ファイルにテーブル全体のデータが含まれている場合は、ファイルに`${db_name}.${table_name}.csv`という名前を付けます。
+-   1 つのテーブルのデータが複数の CSV ファイルに分割されている場合は、これらの CSV ファイルに数値のサフィックスを追加します。たとえば、 `${db_name}.${table_name}.003.csv`です。数値サフィックスは連続していなくてもかまいませんが、昇順でなければなりません。また、数字の前にゼロを追加して、すべてのサフィックスが同じ長さになるようにする必要もあります。
 
-## Step 2. Create the target table schema
+## ステップ 2. ターゲット テーブル スキーマを作成する {#step-2-create-the-target-table-schema}
 
-Because CSV files do not contain schema information, before importing data from CSV files into TiDB, you need to create the target table schema. You can create the target table schema by either of the following two methods:
+CSV ファイルにはスキーマ情報が含まれていないため、CSV ファイルから TiDB にデータをインポートする前に、ターゲット テーブル スキーマを作成する必要があります。次の 2 つの方法のいずれかで、ターゲット テーブル スキーマを作成できます。
 
-* **Method 1**: create the target table schema using TiDB Lightning.
+-   **方法 1** : TiDB Lightningを使用してターゲット テーブル スキーマを作成します。
 
-    Create SQL files that contain the required DDL statements:
+    必要な DDL ステートメントを含む SQL ファイルを作成します。
 
-    - Add `CREATE DATABASE` statements in the `${db_name}-schema-create.sql` files.
-    - Add `CREATE TABLE` statements in the `${db_name}.${table_name}-schema.sql` files.
+    -   `${db_name}-schema-create.sql`のファイルに`CREATE DATABASE`のステートメントを追加します。
+    -   `${db_name}.${table_name}-schema.sql`のファイルに`CREATE TABLE`のステートメントを追加します。
 
-* **Method 2**: create the target table schema manually.
+-   **方法 2** : ターゲット テーブル スキーマを手動で作成します。
 
-## Step 3. Create the configuration file
+## ステップ 3. 構成ファイルを作成する {#step-3-create-the-configuration-file}
 
-Create a `tidb-lightning.toml` file with the following content:
+次の内容の`tidb-lightning.toml`ファイルを作成します。
 
-{{< copyable "shell-regular" >}}
+{{< copyable "" >}}
 
 ```toml
 [lightning]
@@ -87,57 +87,57 @@ status-port = ${status-port} # During the import, TiDB Lightning needs to obtain
 pd-addr = "${ip}:${port}" # The address of the PD cluster, e.g.: 172.16.31.3:2379. TiDB Lightning obtains some information from PD. When backend = "local", you must specify status-port and pd-addr correctly. Otherwise, the import will be abnormal.
 ```
 
-For more information on the configuration file, refer to [TiDB Lightning Configuration](/tidb-lightning/tidb-lightning-configuration.md).
+構成ファイルの詳細については、 [TiDB LightningConfiguration / コンフィグレーション](/tidb-lightning/tidb-lightning-configuration.md)を参照してください。
 
-## Step 4. Tune the import performance (optional)
+## ステップ 4. インポートのパフォーマンスを調整する (オプション) {#step-4-tune-the-import-performance-optional}
 
-When you import data from CSV files with a uniform size of about 256 MiB, TiDB Lightning works in the best performance. However, if you import data from a single large CSV file, TiDB Lightning can only use one thread to process the import by default, which might slow down the import speed.
+約 256 MiB の均一サイズの CSV ファイルからデータをインポートすると、 TiDB Lightningは最高のパフォーマンスで動作します。ただし、単一の大きな CSV ファイルからデータをインポートする場合、 TiDB Lightningはデフォルトでインポートを処理するために 1 つのスレッドしか使用できないため、インポート速度が遅くなる可能性があります。
 
-To speed up the import, you can split a large CSV file into smaller ones. For a CSV file in a common format, before TiDB Lightning reads the entire file, it is hard to quickly locate the beginning and ending positions of each line. Therefore, TiDB Lightning does not automatically split CSV files by default. But if your CSV files to be imported meet certain format requirements, you can enable the `strict-format` mode. In this mode, TiDB Lightning automatically splits a single large CSV file into multiple files, each in about 256 MiB, and processes them in parallel.
+インポートを高速化するために、大きな CSV ファイルを小さなファイルに分割できます。一般的な形式の CSV ファイルの場合、 TiDB Lightningがファイル全体を読み取る前に、各行の開始位置と終了位置をすばやく見つけるのは困難です。したがって、 TiDB Lightningはデフォルトで CSV ファイルを自動的に分割しません。ただし、インポートする CSV ファイルが特定の形式要件を満たしている場合は、 `strict-format`モードを有効にすることができます。このモードでは、 TiDB Lightningは 1 つの大きな CSV ファイルを、それぞれ約 256 MiB の複数のファイルに自動的に分割し、それらを並行して処理します。
 
-> **Note:**
+> **ノート：**
 >
-> If a CSV file is not in a strict format but the `strict-format` mode is set to `true` by mistake, a field that spans multiple lines will be split into two fields. This causes the parsing to fail, and TiDB Lightning might import the corrupted data without reporting any error.
+> CSV ファイルが厳密な形式ではなく、 `strict-format`モードが誤って`true`に設定されている場合、複数行にまたがるフィールドは 2 つのフィールドに分割されます。これにより解析が失敗し、 TiDB Lightningはエラーを報告せずに破損したデータをインポートする可能性があります。
 
-In a strict-format CSV file, each field only takes up one line. It must meet the following requirements:
+厳密な形式の CSV ファイルでは、各フィールドは 1 行しか使用しません。次の要件を満たす必要があります。
 
-- The delimiter is empty.
-- Each field does not contain CR (`\r`) or LF (`\n`).
+-   区切り文字が空です。
+-   各フィールドには、CR ( `\r` ) または LF ( `\n` ) は含まれません。
 
-If your CSV file meets the above requirements, you can speed up the import by enabling the `strict-format` mode as follows:
+CSV ファイルが上記の要件を満たしている場合は、次のように`strict-format`モードを有効にすることでインポートを高速化できます。
 
 ```toml
 [mydumper]
 strict-format = true
 ```
 
-## Step 5. Import the data
+## ステップ 5. データをインポートする {#step-5-import-the-data}
 
-To start the import, run `tidb-lightning`. If you launch the program in the command line, the process might exit unexpectedly after receiving a SIGHUP signal. In this case, it is recommended to run the program using a `nohup` or `screen` tool. For example:
+インポートを開始するには、 `tidb-lightning`を実行します。コマンド ラインでプログラムを起動すると、SIGHUP シグナルを受信した後、プロセスが予期せず終了することがあります。この場合、 `nohup`または`screen`ツールを使用してプログラムを実行することをお勧めします。例えば：
 
-{{< copyable "shell-regular" >}}
+{{< copyable "" >}}
 
 ```shell
 nohup tiup tidb-lightning -config tidb-lightning.toml > nohup.out 2>&1 &
 ```
 
-After the import starts, you can check the progress of the import by either of the following methods:
+インポートの開始後、次のいずれかの方法でインポートの進行状況を確認できます。
 
-- `grep` the keyword `progress` in the log. The progress is updated every 5 minutes by default.
-- Check progress in [the monitoring dashboard](/tidb-lightning/monitor-tidb-lightning.md).
-- Check progress in [the TiDB Lightning web interface](/tidb-lightning/tidb-lightning-web-interface.md).
+-   `grep`ログのキーワード`progress` 。デフォルトでは、進行状況は 5 分ごとに更新されます。
+-   [監視ダッシュボード](/tidb-lightning/monitor-tidb-lightning.md)で進行状況を確認します。
+-   [TiDB Lightning Web インターフェイス](/tidb-lightning/tidb-lightning-web-interface.md)で進行状況を確認します。
 
-After TiDB Lightning completes the import, it exits automatically. Check whether `tidb-lightning.log` contains `the whole procedure completed` in the last lines. If yes, the import is successful. If no, the import encounters an error. Address the error as instructed in the error message.
+TiDB Lightningがインポートを完了すると、自動的に終了します。 `tidb-lightning.log`の最後の行に`the whole procedure completed`が含まれているかどうかを確認します。はいの場合、インポートは成功です。 「いいえ」の場合、インポートでエラーが発生します。エラー メッセージの指示に従って、エラーに対処します。
 
-> **Note:**
+> **ノート：**
 >
-> Whether the import is successful or not, the last line of the log shows `tidb lightning exit`. It means that TiDB Lightning exits normally, but does not necessarily mean that the import is successful.
+> インポートが成功したかどうかに関係なく、ログの最後の行に`tidb lightning exit`が表示されます。これは、 TiDB Lightningが正常に終了したことを意味しますが、必ずしもインポートが成功したことを意味するわけではありません。
 
-If the import fails, refer to [TiDB Lightning FAQ](/tidb-lightning/tidb-lightning-faq.md) for troubleshooting.
+インポートに失敗した場合は、トラブルシューティングについて[TiDB LightningFAQ](/tidb-lightning/tidb-lightning-faq.md)を参照してください。
 
-## Other file formats
+## その他のファイル形式 {#other-file-formats}
 
-If your data source is in other formats, to migrate data from your data source, you must end the file name with `.csv` and make corresponding changes in the `[mydumper.csv]` section of the `tidb-lightning.toml` configuration file. Here are example changes for common formats:
+データ ソースが他の形式の場合、データ ソースからデータを移行するには、ファイル名を`.csv`で終了し、 `tidb-lightning.toml`構成ファイルの`[mydumper.csv]`セクションで対応する変更を行う必要があります。一般的な形式の変更例を次に示します。
 
 **TSV:**
 
@@ -179,6 +179,6 @@ backslash-escape = false
 trim-last-separator = true
 ```
 
-## What's next
+## 次は何ですか {#what-s-next}
 
-- [CSV Support and Restrictions](/tidb-lightning/migrate-from-csv-using-tidb-lightning.md).
+-   [CSV のサポートと制限](/tidb-lightning/migrate-from-csv-using-tidb-lightning.md) .

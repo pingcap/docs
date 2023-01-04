@@ -2,37 +2,37 @@
 title: tiup dm template
 ---
 
-# tiup dm template
+# tiup dm template {#tiup-dm-template}
 
-Before deploying the cluster, you need to prepare a [topology file](/tiup/tiup-dm-topology-reference.md) of the cluster. TiUP has a built-in topology file template, and you can modify this template to create the final topology file. To output the built-in template content, you can use the `tiup dm template` command.
+クラスターをデプロイする前に、クラスターの[トポロジ ファイル](/tiup/tiup-dm-topology-reference.md)を準備する必要があります。 TiUPには組み込みのトポロジ ファイル テンプレートがあり、このテンプレートを変更して最終的なトポロジ ファイルを作成できます。組み込みのテンプレート コンテンツを出力するには、 `tiup dm template`コマンドを使用できます。
 
-## Syntax
+## 構文 {#syntax}
 
 ```shell
 tiup dm template [flags]
 ```
 
-If this option is not specified, the output default template contains the following instances:
+このオプションが指定されていない場合、出力のデフォルト テンプレートには次のインスタンスが含まれます。
 
-- 3 DM-master instances
-- 3 DM-worker instances
-- 1 Prometheus instance
-- 1 Grafana instance
-- 1 Alertmanager instance
+-   3 つの DM マスター インスタンス
+-   3 つの DM-worker インスタンス
+-   1 つのプロメテウス インスタンス
+-   1 つの Grafana インスタンス
+-   1 つの Alertmanager インスタンス
 
-## Options
+## オプション {#options}
 
-### --full
+### &#x20;--full {#full}
 
-- Outputs a detailed topology template that is commented with configurable parameters. To enable this option, add it to the command.
-- If this option is not specified, the simple topology template is output by default. 
+-   構成可能なパラメータでコメント化された詳細なトポロジ テンプレートを出力します。このオプションを有効にするには、コマンドに追加します。
+-   このオプションが指定されていない場合、デフォルトで単純なトポロジ テンプレートが出力されます。
 
-### -h, --help
+### -h, --help {#h-help}
 
-Prints the help information.
+ヘルプ情報を出力します。
 
-## Output
+## 出力 {#output}
 
-Outputs the topology template according to the specified options, which can be redirected to the topology file for deployment.
+指定されたオプションに従ってトポロジ テンプレートを出力します。これは、展開のためにトポロジ ファイルにリダイレクトできます。
 
-[<< Back to the previous page - TiUP DM command list](/tiup/tiup-component-dm.md#command-list)
+[&lt;&lt; 前のページに戻る - TiUP DMコマンド一覧](/tiup/tiup-component-dm.md#command-list)

@@ -3,15 +3,15 @@ title: Constraints
 summary: Learn how SQL Constraints apply to TiDB.
 ---
 
-# Constraints
+# 制約 {#constraints}
 
-TiDB supports almost the same constraints as MySQL.
+TiDB は、MySQL とほぼ同じ制約をサポートしています。
 
-## NOT NULL
+## ヌルではない {#not-null}
 
-NOT NULL constraints supported by TiDB are the same as those supported by MySQL.
+TiDB でサポートされている NOT NULL 制約は、MySQL でサポートされているものと同じです。
 
-For example:
+例えば：
 
 ```sql
 CREATE TABLE users (
@@ -45,15 +45,15 @@ INSERT INTO users (id,age,last_login) VALUES (NULL,123,NULL);
 Query OK, 1 row affected (0.03 sec)
 ```
 
-* The first `INSERT` statement succeeds because it is possible to assign `NULL` to the `AUTO_INCREMENT` column. TiDB generates sequence numbers automatically.
-* The second `INSERT` statement fails because the `age` column is defined as `NOT NULL`.
-* The third `INSERT` statement succeeds because the `last_login` column is not explicitly defined as `NOT NULL`. NULL values ​​are allowed by default.
+-   `AUTO_INCREMENT`列に`NULL`を代入できるため、最初の`INSERT`ステートメントは成功します。 TiDB はシーケンス番号を自動的に生成します。
+-   `age`列が`NOT NULL`として定義されているため、2 番目の`INSERT`ステートメントは失敗します。
+-   `last_login`列が`NOT NULL`として明示的に定義されていないため、3 番目の`INSERT`ステートメントは成功します。デフォルトでは NULL 値が許可されています。
 
-## CHECK
+## 小切手 {#check}
 
-TiDB parses but ignores `CHECK` constraints. This is MySQL 5.7 compatible behavior.
+TiDB は解析しますが、 `CHECK`の制約を無視します。これはMySQL 5.7互換の動作です。
 
-For example:
+例えば：
 
 ```sql
 DROP TABLE IF EXISTS users;
@@ -67,15 +67,15 @@ INSERT INTO users (username) VALUES ('a');
 SELECT * FROM users;
 ```
 
-## UNIQUE KEY
+## ユニークキー {#unique-key}
 
-Unique constraints mean that all non-null values in a unique index and a primary key column are unique.
+一意の制約とは、一意のインデックスと主キー列のすべての非 null 値が一意であることを意味します。
 
-### Optimistic transactions
+### 楽観的な取引 {#optimistic-transactions}
 
-By default, for optimistic transactions, TiDB checks unique constraints [lazily](/transaction-overview.md#lazy-check-of-constraints) in the execution phase and strictly in the commit phase, which helps reduce network overhead and improve performance.
+デフォルトでは、楽観的トランザクションの場合、TiDB は実行フェーズで一意の制約[怠惰に](/transaction-overview.md#lazy-check-of-constraints)をチェックし、コミット フェーズで厳密にチェックします。これにより、ネットワーク オーバーヘッドが削減され、パフォーマンスが向上します。
 
-For example:
+例えば：
 
 ```sql
 DROP TABLE IF EXISTS users;
@@ -87,7 +87,7 @@ CREATE TABLE users (
 INSERT INTO users (username) VALUES ('dave'), ('sarah'), ('bill');
 ```
 
-With optimistic locking and `tidb_constraint_check_in_place=OFF`:
+楽観的ロックと`tidb_constraint_check_in_place=OFF`の場合:
 
 ```sql
 BEGIN OPTIMISTIC;
@@ -116,11 +116,11 @@ COMMIT;
 ERROR 1062 (23000): Duplicate entry 'bill' for key 'users.username'
 ```
 
-In the preceding optimistic example, the unique check was deferred until the transaction is committed. This resulted in a duplicate key error, because the value `bill` was already present.
+前の楽観的例では、一意のチェックはトランザクションがコミットされるまで延期されました。値`bill`が既に存在していたため、重複キー エラーが発生しました。
 
-You can disable this behavior by setting [`tidb_constraint_check_in_place`](/system-variables.md#tidb_constraint_check_in_place) to `ON`. When `tidb_constraint_check_in_place=ON`, the unique constraint is checked when a statement is executed. Note that this variable is only applicable to optimistic transactions. For pessimistic transactions, you can control this behavior using the [`tidb_constraint_check_in_place_pessimistic`](/system-variables.md#tidb_constraint_check_in_place_pessimistic-new-in-v630) variable.
+[`tidb_constraint_check_in_place`](/system-variables.md#tidb_constraint_check_in_place)から`ON`を設定すると、この動作を無効にできます。 `tidb_constraint_check_in_place=ON`の場合、ステートメントの実行時に一意制約がチェックされます。この変数は楽観的トランザクションにのみ適用されることに注意してください。悲観的トランザクションの場合、変数[`tidb_constraint_check_in_place_pessimistic`](/system-variables.md#tidb_constraint_check_in_place_pessimistic-new-in-v630)を使用してこの動作を制御できます。
 
-For example:
+例えば：
 
 ```sql
 DROP TABLE IF EXISTS users;
@@ -156,11 +156,11 @@ INSERT INTO users (username) VALUES ('jane'), ('chris'), ('bill');
 ERROR 1062 (23000): Duplicate entry 'bill' for key 'users.username'
 ```
 
-The first `INSERT` statement caused a duplicate key error. This causes additional network communication overhead and may reduce the throughput of insert operations.
+最初の`INSERT`ステートメントで重複キー エラーが発生しました。これにより、追加のネットワーク通信オーバーヘッドが発生し、挿入操作のスループットが低下する可能性があります。
 
-### Pessimistic transactions
+### 悲観的な取引 {#pessimistic-transactions}
 
-In pessimistic transactions, by default, TiDB checks `UNIQUE` constraints when a SQL statement that requires inserting or updating unique indexes is executed.
+悲観的トランザクションでは、一意のインデックスを挿入または更新する必要がある SQL ステートメントが実行されると、TiDB はデフォルトで`UNIQUE`の制約をチェックします。
 
 ```sql
 DROP TABLE IF EXISTS users;
@@ -179,11 +179,11 @@ INSERT INTO users (username) VALUES ('jane'), ('chris'), ('bill');
 ERROR 1062 (23000): Duplicate entry 'bill' for key 'users.username'
 ```
 
-To achieve better performance of pessimistic transactions, you can set the [`tidb_constraint_check_in_place_pessimistic`](/system-variables.md#tidb_constraint_check_in_place_pessimistic-new-in-v630) variable to `OFF`, which allows TiDB to defer the unique constraint check of a unique index (to the next time when this index requires a lock or to the time when the transaction is committed) and skip the corresponding pessimistic lock. When using this variable, pay attention to the following:
+悲観的トランザクションのパフォーマンスを向上させるために、変数[`tidb_constraint_check_in_place_pessimistic`](/system-variables.md#tidb_constraint_check_in_place_pessimistic-new-in-v630)を`OFF`に設定できます。これにより、TiDB は一意のインデックスの一意の制約チェックを延期できます (次にこのインデックスがロックを必要とするとき、またはトランザクションがコミットされるときまで)。 ) 対応する悲観的ロックをスキップします。この変数を使用する場合は、次の点に注意してください。
 
-- Due to the deferred unique constraint check, TiDB might read results that do not meet the unique constraints and return a `Duplicate entry` error when you commit a pessimistic transaction. When this error occurs, TiDB rolls back the current transaction.
+-   遅延一意制約チェックにより、悲観的トランザクションをコミットすると、TiDB は一意制約を満たさない結果を読み取り、 `Duplicate entry`エラーを返す場合があります。このエラーが発生すると、TiDB は現在のトランザクションをロールバックします。
 
-    The following example skips the lock to `bill`, so TiDB might get results that do not satisfy the uniqueness constraints.
+    次の例では、ロックを`bill`にスキップするため、TiDB は一意性の制約を満たさない結果を取得する可能性があります。
 
     ```sql
     SET tidb_constraint_check_in_place_pessimistic = OFF;
@@ -192,7 +192,7 @@ To achieve better performance of pessimistic transactions, you can set the [`tid
     SELECT * FROM users FOR UPDATE;
     ```
 
-   As in the following example output, the query results of TiDB contain two `bills`, which does not satisfy the uniqueness constraints.
+    次の出力例のように、TiDB のクエリ結果には 2 つの`bills`が含まれており、一意性制約を満たしていません。
 
     ```sql
     +----+----------+
@@ -207,7 +207,7 @@ To achieve better performance of pessimistic transactions, you can set the [`tid
     +----+----------+
     ```
 
-    At this time, if the transaction is committed, TiDB will perform a unique constraint check, report a `Duplicate entry` error, and roll back the transaction.
+    この時点で、トランザクションがコミットされると、TiDB は一意制約チェックを実行し、 `Duplicate entry`エラーを報告して、トランザクションをロールバックします。
 
     ```sql
     COMMIT;
@@ -217,9 +217,9 @@ To achieve better performance of pessimistic transactions, you can set the [`tid
     ERROR 1062 (23000): Duplicate entry 'bill' for key 'users.username'
     ```
 
-- When this variable is disabled, committing a pessimistic transaction that needs to write data might return a `Write conflict` error. When this error occurs, TiDB rolls back the current transaction.
+-   この変数が無効になっている場合、データの書き込みが必要悲観的トランザクションをコミットすると、 `Write conflict`エラーが返される場合があります。このエラーが発生すると、TiDB は現在のトランザクションをロールバックします。
 
-    As in the following example, if two concurrent transactions need to insert data to the same table, skipping the pessimistic lock causes TiDB to return a `Write conflict` error when you commit a transaction. And the transaction will be rolled back.
+    次の例のように、2 つの同時トランザクションが同じテーブルにデータを挿入する必要がある場合、悲観的ロックをスキップすると、トランザクションをコミットするときに TiDB が`Write conflict`エラーを返します。そして、トランザクションはロールバックされます。
 
     ```sql
     DROP TABLE IF EXISTS users;
@@ -234,13 +234,13 @@ To achieve better performance of pessimistic transactions, you can set the [`tid
     INSERT INTO users (username) VALUES ('jane'), ('chris'), ('bill'); -- Query OK, 3 rows affected
     ```
 
-    At the same time, another session inserts `bill` to the same table.
+    同時に、別のセッションが同じテーブルに`bill`を挿入します。
 
     ```sql
     INSERT INTO users (username) VALUES ('bill'); -- Query OK, 1 row affected
     ```
 
-    Then, when you commit the transaction in the first session, TiDB reports a `Write conflict` error.
+    次に、最初のセッションでトランザクションをコミットすると、TiDB は`Write conflict`エラーを報告します。
 
     ```sql
     COMMIT;
@@ -250,13 +250,13 @@ To achieve better performance of pessimistic transactions, you can set the [`tid
     ERROR 9007 (HY000): Write conflict, txnStartTS=435688780611190794, conflictStartTS=435688783311536129, conflictCommitTS=435688783311536130, key={tableID=74, indexID=1, indexValues={bill, }} primary={tableID=74, indexID=1, indexValues={bill, }}, reason=LazyUniquenessCheck [try again later]
     ```
 
-- When this variable is disabled, executing a DML statement in a pessimistic transaction might return an error `8147: LazyUniquenessCheckFailure`.
+-   この変数が無効になっている場合、悲観的トランザクションで DML ステートメントを実行すると、エラー`8147: LazyUniquenessCheckFailure`が返される場合があります。
 
-    > **Note:**
+    > **ノート：**
     >
-    > When the `8147` error occurs, TiDB rolls back the current transaction.
+    > `8147`エラーが発生すると、TiDB は現在のトランザクションをロールバックします。
 
-    As in the following example, at the execution of the `INSERT` statement, TiDB skips a lock. Then, at the execution of the `DELETE` statement, TiDB locks the unique index and checks the unique constraints, so you will see an error is reported at the `DELETE` statement.
+    次の例のように、 `INSERT`ステートメントの実行時に、TiDB はロックをスキップします。次に、 `DELETE`ステートメントの実行時に、TiDB は一意のインデックスをロックし、一意の制約をチェックするため、 `DELETE`ステートメントでエラーが報告されることがわかります。
 
     ```sql
     SET tidb_constraint_check_in_place_pessimistic = OFF;
@@ -269,13 +269,13 @@ To achieve better performance of pessimistic transactions, you can set the [`tid
     ERROR 8147 (23000): transaction aborted because lazy uniqueness check is enabled and an error occurred: [kv:1062]Duplicate entry 'bill' for key 'users.username'
     ```
 
-- When this variable is disabled, the `1062 Duplicate entry` error might be not from the current SQL statement. Therefore, when a transaction operates on multiple tables that have indexes with the same name, you need to check the `1062` error message to find which index the error is actually from.
+-   この変数が無効になっている場合、 `1062 Duplicate entry`のエラーは現在の SQL ステートメントからのものではない可能性があります。したがって、トランザクションが同じ名前のインデックスを持つ複数のテーブルで動作する場合は、エラー メッセージ`1062`をチェックして、実際にどのインデックスからエラーが発生したかを確認する必要があります。
 
-## PRIMARY KEY
+## 主キー {#primary-key}
 
-Like MySQL, primary key constraints contain unique constraints, that is, creating a primary key constraint is equivalent to having a unique constraint. In addition, other primary key constraints of TiDB are also similar to those of MySQL.
+MySQL と同様に、主キー制約には一意の制約が含まれます。つまり、主キー制約を作成することは、一意の制約を持つことと同じです。さらに、TiDB のその他の主キー制約も、MySQL のものと似ています。
 
-For example:
+例えば：
 
 ```sql
 CREATE TABLE t1 (a INT NOT NULL PRIMARY KEY);
@@ -309,11 +309,11 @@ CREATE TABLE t4 (a INT NOT NULL, b INT NOT NULL, PRIMARY KEY (a,b));
 Query OK, 0 rows affected (0.10 sec)
 ```
 
-* Table `t2` failed to be created, because column `a` is defined as the primary key and does not allow NULL values.
-* Table `t3` failed to be created, because a table can only have one primary key.
-* Table `t4` was created successfully, because even though there can be only one primary key, TiDB supports defining multiple columns as the composite primary key.
+-   列`a`が主キーとして定義されており、NULL 値が許可されていないため、表`t2`を作成できませんでした。
+-   テーブルには 1 つの主キーしか持てないため、テーブル`t3`を作成できませんでした。
+-   主キーは 1 つしか存在できませんが、TiDB は複数の列を複合主キーとして定義することをサポートしているため、表`t4`は正常に作成されました。
 
-In addition to the rules above, TiDB currently only supports adding and deleting the primary keys of the `NONCLUSTERED` type. For example:
+上記のルールに加えて、TiDB は現在、 `NONCLUSTERED`種類の主キーの追加と削除のみをサポートしています。例えば：
 
 ```sql
 CREATE TABLE t5 (a INT NOT NULL, b INT NOT NULL, PRIMARY KEY (a,b) CLUSTERED);
@@ -333,17 +333,17 @@ ALTER TABLE t5 DROP PRIMARY KEY;
 Query OK, 0 rows affected (0.10 sec)
 ```
 
-For more details about the primary key of the `CLUSTERED` type, refer to [clustered index](/clustered-indexes.md).
+`CLUSTERED`型の主キーの詳細については、 [クラスター化インデックス](/clustered-indexes.md)を参照してください。
 
-## FOREIGN KEY
+## 外部キー {#foreign-key}
 
-> **Note:**
+> **ノート：**
 >
-> TiDB has limited support for foreign key constraints.
+> TiDB では、外部キー制約のサポートが制限されています。
 
-TiDB supports creating `FOREIGN KEY` constraints in DDL commands.
+TiDB は、DDL コマンドでの`FOREIGN KEY`制約の作成をサポートしています。
 
-For example:
+例えば：
 
 ```sql
 CREATE TABLE users (
@@ -374,18 +374,18 @@ FROM information_schema.key_column_usage WHERE table_name IN ('users', 'orders')
 3 rows in set (0.00 sec)
 ```
 
-TiDB also supports the syntax to `DROP FOREIGN KEY` and `ADD FOREIGN KEY` via the `ALTER TABLE` command.
+TiDB は、 `ALTER TABLE`コマンドを介して`DROP FOREIGN KEY`および`ADD FOREIGN KEY`への構文もサポートします。
 
 ```sql
 ALTER TABLE orders DROP FOREIGN KEY fk_user_id;
 ALTER TABLE orders ADD FOREIGN KEY fk_user_id (user_id) REFERENCES users(id);
 ```
 
-### Notes
+### ノート {#notes}
 
-* TiDB supports foreign keys to avoid errors caused by this syntax when you migrate data from other databases to TiDB.
+-   TiDB は、他のデータベースから TiDB にデータを移行するときにこの構文によって引き起こされるエラーを回避するために、外部キーをサポートしています。
 
-    However, TiDB does not perform constraint checking on foreign keys in DML statements. For example, even if there is no record with id=123 in the users table, the following transactions can be submitted successfully.
+    ただし、TiDB は DML ステートメントの外部キーに対して制約チェックを実行しません。たとえば、users テーブルに id=123 のレコードがなくても、次のトランザクションは正常に送信できます。
 
     ```sql
     START TRANSACTION;

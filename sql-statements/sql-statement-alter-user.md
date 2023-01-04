@@ -3,11 +3,11 @@ title: ALTER USER | TiDB SQL Statement Reference
 summary: An overview of the usage of ALTER USER for the TiDB database.
 ---
 
-# ALTER USER
+# ユーザーの変更 {#alter-user}
 
-This statement changes an existing user inside the TiDB privilege system. In the MySQL privilege system, a user is the combination of a username and the host from which they are connecting from. Thus, it is possible to create a user `'newuser2'@'192.168.1.1'` who is only able to connect from the IP address `192.168.1.1`. It is also possible to have two users have the same user-portion, and different permissions as they login from different hosts.
+このステートメントは、TiDB 特権システム内の既存のユーザーを変更します。 MySQL 特権システムでは、ユーザーはユーザー名と接続元のホストの組み合わせです。これにより、ＩＰアドレス`192.168.1.1`からしか接続できないユーザ`'newuser2'@'192.168.1.1'`を作成することができる。 2 人のユーザーが同じユーザー部分を持ち、異なるホストからログインするときに異なる権限を持つことも可能です。
 
-## Synopsis
+## あらすじ {#synopsis}
 
 ```ebnf+diagram
 AlterUserStmt ::=
@@ -32,7 +32,7 @@ LockOption ::= ( 'ACCOUNT' 'LOCK' | 'ACCOUNT' 'UNLOCK' )?
 AttributeOption ::= ( 'COMMENT' CommentString | 'ATTRIBUTE' AttributeString )?
 ```
 
-## Examples
+## 例 {#examples}
 
 ```sql
 mysql> CREATE USER 'newuser' IDENTIFIED BY 'newuserpassword';
@@ -66,7 +66,7 @@ ALTER USER 'newuser' ACCOUNT LOCK;
 Query OK, 0 rows affected (0.02 sec)
 ```
 
-Modify the attributes of `newuser`:
+`newuser`の属性を変更します。
 
 ```sql
 ALTER USER 'newuser' ATTRIBUTE '{"newAttr": "value", "deprecatedAttr": null}';
@@ -82,7 +82,7 @@ SELECT * FROM information_schema.user_attributes;
 1 rows in set (0.00 sec)
 ```
 
-Modify the comment of `newuser` using `ALTER USER ... COMMENT`:
+`ALTER USER ... COMMENT`を使用して`newuser`のコメントを変更します。
 
 ```sql
 ALTER USER 'newuser' COMMENT 'Here is the comment';
@@ -98,7 +98,7 @@ SELECT * FROM information_schema.user_attributes;
 1 rows in set (0.00 sec)
 ```
 
-Remove the comment of `newuser` using `ALTER USER ... ATTRIBUTE`:
+`ALTER USER ... ATTRIBUTE`を使用して`newuser`のコメントを削除します。
 
 ```sql
 ALTER USER 'newuser' ATTRIBUTE '{"comment": null}';
@@ -114,7 +114,7 @@ SELECT * FROM information_schema.user_attributes;
 1 rows in set (0.00 sec)
 ```
 
-Change the automatic password expiration policy for `newuser` to never expire via `ALTER USER ... PASSWORD EXPIRE NEVER`:
+`newuser`の自動パスワード有効期限ポリシーを`ALTER USER ... PASSWORD EXPIRE NEVER`経由で期限切れにならないように変更します。
 
 ```sql
 ALTER USER 'newuser' PASSWORD EXPIRE NEVER;
@@ -124,7 +124,7 @@ ALTER USER 'newuser' PASSWORD EXPIRE NEVER;
 Query OK, 0 rows affected (0.02 sec)
 ```
 
-Modify the password reuse policy for `newuser` to disallow the reuse of any password used within the last 90 days using `ALTER USER ... PASSWORD REUSE INTERVAL ... DAY`:
+`newuser`のパスワード再利用ポリシーを変更して、 `ALTER USER ... PASSWORD REUSE INTERVAL ... DAY`を使用して過去 90 日間に使用されたパスワードの再利用を禁止します。
 
 ```sql
 ALTER USER 'newuser' PASSWORD REUSE INTERVAL 90 DAY;
@@ -134,14 +134,14 @@ ALTER USER 'newuser' PASSWORD REUSE INTERVAL 90 DAY;
 Query OK, 0 rows affected (0.02 sec)
 ```
 
-## See also
+## こちらもご覧ください {#see-also}
 
 <CustomContent platform="tidb">
 
-* [Security Compatibility with MySQL](/security-compatibility-with-mysql.md)
+-   [MySQL とのセキュリティの互換性](/security-compatibility-with-mysql.md)
 
 </CustomContent>
 
-* [CREATE USER](/sql-statements/sql-statement-create-user.md)
-* [DROP USER](/sql-statements/sql-statement-drop-user.md)
-* [SHOW CREATE USER](/sql-statements/sql-statement-show-create-user.md)
+-   [ユーザーを作成](/sql-statements/sql-statement-create-user.md)
+-   [ユーザーをドロップ](/sql-statements/sql-statement-drop-user.md)
+-   [ユーザーの作成を表示](/sql-statements/sql-statement-show-create-user.md)

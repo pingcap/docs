@@ -3,58 +3,58 @@ title: TiDB Cloud Built-in Alerting
 summary: Learn how to monitor your TiDB cluster by getting alert notification emails from TiDB Cloud.
 ---
 
-# TiDB Cloud Built-in Alerting
+# TiDB Cloudの組み込みアラート {#tidb-cloud-built-in-alerting}
 
-The TiDB Cloud built-in alerting feature provides you with an easy way to be notified by emails whenever a TiDB Cloud cluster in your project triggers one of TiDB Cloud built-in alert conditions.
+TiDB Cloud組み込みアラート機能を使用すると、プロジェクト内のTiDB CloudクラスターがTiDB Cloud組み込みアラート条件のいずれかをトリガーするたびに、電子メールで簡単に通知を受けることができます。
 
-This document describes how to subscribe to alert notification emails from TiDB Cloud and also provides the TiDB Cloud built-in alert conditions for your reference.
+このドキュメントでは、 TiDB Cloudからのアラート通知メールをサブスクライブする方法について説明し、参照用にTiDB Cloud組み込みのアラート条件も提供します。
 
-## Limitation
+## 制限 {#limitation}
 
-You cannot customize the TiDB Cloud built-in alerting. If you would like to configure different trigger conditions, thresholds, or frequency, or have alerts automatically trigger actions in downstream services like [PagerDuty](https://www.pagerduty.com/docs/guides/datadog-integration-guide/), consider using a third-party monitoring and alerting integration. Currently, TiDB Cloud supports the [Datadog integration](/tidb-cloud/monitor-datadog-integration.md) and the [Prometheus and Grafana integration](/tidb-cloud/monitor-prometheus-and-grafana-integration.md).
+TiDB Cloudの組み込みアラートをカスタマイズすることはできません。さまざまなトリガー条件、しきい値、または頻度を構成する場合、または[PagerDuty](https://www.pagerduty.com/docs/guides/datadog-integration-guide/)のようなダウンストリーム サービスでアラートが自動的にアクションをトリガーするようにする場合は、サードパーティの監視およびアラート統合の使用を検討してください。現在、 TiDB Cloudは[Datadog の統合](/tidb-cloud/monitor-datadog-integration.md)と[Prometheus と Grafana の統合](/tidb-cloud/monitor-prometheus-and-grafana-integration.md)をサポートしています。
 
-## Subscribe to alert notification emails
+## アラート通知メールを購読する {#subscribe-to-alert-notification-emails}
 
-If you are a member of a project and you want to get alert notification emails of clusters in your project, take the following steps:
+プロジェクトのメンバーであり、プロジェクト内のクラスターのアラート通知メールを受け取りたい場合は、次の手順を実行します。
 
-1. Log into TiDB Cloud console.
-2. On the TiDB Cloud console, choose a target project on which you want to receive alert notification emails, and then click the **Project Settings** tab.
-3. In the left pane, click **Alerts**.
-4. Enter your email address, and then click **Subscribe**.
+1.  TiDB Cloudコンソールにログインします。
+2.  TiDB Cloudコンソールで、アラート通知メールを受信するターゲット プロジェクトを選択し、[**プロジェクト設定**] タブをクリックします。
+3.  左ペインで、[**アラート**] をクリックします。
+4.  電子メール アドレスを入力し、[**購読**] をクリックします。
 
-To minimize the number of alert emails sent to subscribers, TiDB Cloud aggregates alerts into a single email that is sent every 3 hours.
+サブスクライバーに送信されるアラート電子メールの数を最小限に抑えるために、 TiDB Cloudはアラートを 1 つの電子メールに集約し、3 時間ごとに送信します。
 
-## Unsubscribe from alert notification emails
+## アラート通知メールの登録を解除する {#unsubscribe-from-alert-notification-emails}
 
-If you no longer want to receive alert notification emails of clusters in your project, take the following steps:
+プロジェクト内のクラスターのアラート通知メールを受信したくない場合は、次の手順を実行します。
 
-1. Log into TiDB Cloud console.
-2. On the TiDB Cloud console, choose the project on which you no longer want to receive alert notification emails.
-3. In the left pane, click **Alerts**.
-4. In the right pane, locate your email address and click **Delete**.
+1.  TiDB Cloudコンソールにログインします。
+2.  TiDB Cloudコンソールで、アラート通知メールを受け取りたくないプロジェクトを選択します。
+3.  左ペインで、[**アラート**] をクリックします。
+4.  右側のペインで、電子メール アドレスを見つけて [**削除**] をクリックします。
 
-## TiDB Cloud built-in alert conditions
+## TiDB Cloud組み込みアラート条件 {#tidb-cloud-built-in-alert-conditions}
 
-The following table provides the TiDB Cloud built-in alert conditions and the corresponding recommended actions.
+次の表は、 TiDB Cloudの組み込みアラート条件と、対応する推奨アクションを示しています。
 
-> **Note:**
+> **ノート：**
 >
-> Although these alert conditions do not necessarily mean there is a problem, they are often early warning indicators of emerging issues. Thus, taking the recommended action is advised.
+> これらのアラート状態は、必ずしも問題があることを意味するわけではありませんが、多くの場合、新たな問題の早期警告指標です。したがって、推奨されるアクションを実行することをお勧めします。
 
-| Condition | Recommended Action |
-|:--- |:--- |
-| Total TiDB node memory utilization across cluster exceeded 70% for 10 minutes | Total TiDB node memory utilization of cluster ABC in project XYZ has exceeded 70% for 10 minutes. If you expect this to continue, it is recommended that you add additional TiDB nodes. To monitor node memory utilization, see [Monitoring metrics](/tidb-cloud/monitor-tidb-cluster.md#monitoring-metrics). |
-| Total TiKV node memory utilization across cluster exceeded 70% for 10 minutes | Total TiKV node memory utilization of cluster ABC in project XYZ has exceeded 70% for 10 minutes. If you expect this to continue, it is recommended that you add additional TiKV nodes. To monitor node memory utilization, see [Monitoring metrics](/tidb-cloud/monitor-tidb-cluster.md#monitoring-metrics). |
-| Total TiFlash node memory utilization across cluster exceeded 70% for 10 minutes | Total TiFlash node memory utilization of cluster ABC in project XYZ has exceeded 70% for 10 minutes. If you expect this to continue, it is recommended that you add additional TiFlash nodes. To monitor node memory utilization, see [Monitoring metrics](/tidb-cloud/monitor-tidb-cluster.md#monitoring-metrics). |
-|`*` At least one TiDB node in the cluster has run out of memory | At least one TiDB node in cluster ABC in project XYZ ran out of memory while executing a SQL statement. Consider increasing the memory available to queries using the `tidb_mem_quota_query` session variable. To monitor node memory utilization, see [Monitoring metrics](/tidb-cloud/monitor-tidb-cluster.md#monitoring-metrics). |
-| Total TiDB node CPU utilization exceeded 80% for 10 minutes | Total TiDB node CPU utilization of cluster ABC in project XYZ has exceeded 80% for 10 minutes. If you expect this to continue, it is recommended that you add additional TiDB nodes. To monitor node CPU utilization, see [Monitoring metrics](/tidb-cloud/monitor-tidb-cluster.md#monitoring-metrics). |
-| Total TiKV node CPU utilization exceeded 80% for 10 minutes | Total TiKV node CPU utilization of cluster ABC in project XYZ has exceeded 80% for 10 minutes. If you expect this to continue, it is recommended that you add additional TiKV nodes. To monitor node CPU utilization, see [Monitoring metrics](/tidb-cloud/monitor-tidb-cluster.md#monitoring-metrics). |
-| Total TiFlash node CPU utilization exceeded 80% for 10 minutes | Total TiFlash node CPU utilization of cluster ABC in project XYZ has exceeded 80% for 10 minutes. If you expect this to continue, it is recommended that you add additional TiFlash nodes. To monitor node CPU utilization, see [Monitoring metrics](/tidb-cloud/monitor-tidb-cluster.md#monitoring-metrics). |
-|`*` TiKV storage utilization exceeds 80% | Total TiKV storage utilization of cluster ABC in project XYZ exceeds 80%. It is recommended that you add additional TiKV nodes to increase your storage capacity. To monitor storage utilization, see [Monitoring metrics](/tidb-cloud/monitor-tidb-cluster.md#monitoring-metrics). |
-|`*` TiFlash storage utilization exceeds 80% | Total TiFlash storage utilization of cluster ABC in project XYZ exceeds 80%. It is recommended that you add additional TiFlash nodes to increase your storage capacity. To monitor storage utilization, see [Monitoring metrics](/tidb-cloud/monitor-tidb-cluster.md#monitoring-metrics). |
-| Cluster nodes are offline | Some or all nodes in cluster ABC in project XYZ are offline. The TiDB Cloud Operations team is aware and working to resolve the issue. Refer to [TiDB Cloud Status](https://status.tidbcloud.com/) for the latest information. To monitor node status, see [Cluster status and node status](/tidb-cloud/monitor-tidb-cluster.md#cluster-status-and-node-status).  |
+| 調子                                              | 推奨される行動                                                                                                                                                                                                                                                                              |
+| :---------------------------------------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| クラスタ全体の TiDB ノード メモリの合計使用率が 10 分間で 70% を超えました   | プロジェクト XYZ のクラスター ABC の TiDB ノード メモリの合計使用率が 10 分間で 70% を超えました。これが続くと予想される場合は、TiDB ノードを追加することをお勧めします。ノードのメモリー使用率をモニターするには、 [指標のモニタリング](/tidb-cloud/monitor-tidb-cluster.md#monitoring-metrics)を参照してください。                                                                              |
+| クラスタ全体の TiKV ノード メモリの合計使用率が 10 分間で 70% を超えました   | プロジェクト XYZ のクラスター ABC の TiKV ノード メモリの合計使用率が 10 分間で 70% を超えました。これが続くと予想される場合は、TiKV ノードを追加することをお勧めします。ノードのメモリー使用率をモニターするには、 [指標のモニタリング](/tidb-cloud/monitor-tidb-cluster.md#monitoring-metrics)を参照してください。                                                                              |
+| クラスタ全体の TiFlashノード メモリの合計使用率が 10 分間で 70% を超えました | プロジェクト XYZ のクラスター ABC のTiFlashノード メモリの合計使用率が 10 分間で 70% を超えました。これが続くと予想される場合は、 TiFlashノードを追加することをお勧めします。ノードのメモリー使用率をモニターするには、 [指標のモニタリング](/tidb-cloud/monitor-tidb-cluster.md#monitoring-metrics)を参照してください。                                                                          |
+| `*`クラスタ内の少なくとも 1 つの TiDB ノードでメモリが不足しています        | プロジェクト XYZ のクラスター ABC 内の少なくとも 1 つの TiDB ノードで、SQL ステートメントの実行中にメモリが不足しました。 `tidb_mem_quota_query`セッション変数を使用してクエリに使用できるメモリを増やすことを検討してください。ノードのメモリ使用率を監視するには、 [指標のモニタリング](/tidb-cloud/monitor-tidb-cluster.md#monitoring-metrics)を参照してください。                                              |
+| TiDB ノードの合計 CPU 使用率が 10 分間で 80% を超えました          | プロジェクト XYZ のクラスター ABC の TiDB ノードの合計 CPU 使用率が 10 分間で 80% を超えました。これが続くと予想される場合は、TiDB ノードを追加することをお勧めします。ノードの CPU 使用率を監視するには、 [指標のモニタリング](/tidb-cloud/monitor-tidb-cluster.md#monitoring-metrics)を参照してください。                                                                              |
+| TiKV ノードの合計 CPU 使用率が 10 分間で 80% を超えました          | プロジェクト XYZ のクラスター ABC の TiKV ノード CPU 使用率の合計が 10 分間で 80% を超えました。これが続くと予想される場合は、TiKV ノードを追加することをお勧めします。ノードの CPU 使用率を監視するには、 [指標のモニタリング](/tidb-cloud/monitor-tidb-cluster.md#monitoring-metrics)を参照してください。                                                                              |
+| TiFlashノードの合計 CPU 使用率が 10 分間で 80% を超えました        | プロジェクト XYZ のクラスター ABC のTiFlashノードの合計 CPU 使用率が 10 分間で 80% を超えました。これが続くと予想される場合は、 TiFlashノードを追加することをお勧めします。ノードの CPU 使用率を監視するには、 [指標のモニタリング](/tidb-cloud/monitor-tidb-cluster.md#monitoring-metrics)を参照してください。                                                                          |
+| `*` TiKV ストレージ使用率が 80% を超えています                  | プロジェクト XYZ のクラスター ABC の TiKV ストレージの合計使用率が 80% を超えています。ストレージ容量を増やすには、TiKV ノードを追加することをお勧めします。ストレージ使用率をモニターするには、 [指標のモニタリング](/tidb-cloud/monitor-tidb-cluster.md#monitoring-metrics)を参照してください。                                                                                          |
+| `*` TiFlashストレージ使用率が 80% を超えています                | プロジェクト XYZ のクラスター ABC のTiFlashストレージの合計使用率が 80% を超えています。ストレージ容量を増やすには、 TiFlashノードを追加することをお勧めします。ストレージ使用率をモニターするには、 [指標のモニタリング](/tidb-cloud/monitor-tidb-cluster.md#monitoring-metrics)を参照してください。                                                                                      |
+| クラスタノードがオフラインです                                 | プロジェクト XYZ のクラスタ ABC の一部またはすべてのノードがオフラインです。 TiDB Cloud Operations チームはこの問題を認識しており、解決に取り組んでいます。最新情報は[TiDB Cloudのステータス](https://status.tidbcloud.com/)を参照してください。ノードのステータスを監視するには、 [クラスタのステータスとノードのステータス](/tidb-cloud/monitor-tidb-cluster.md#cluster-status-and-node-status)を参照してください。 |
 
-> **Note:**
+> **ノート：**
 >
-> - [Serverless Tier clusters](/tidb-cloud/select-cluster-tier.md#serverless-tier) only support a subset of alert conditions that are marked with `*` in the **Condition** column.
-> - "cluster ABC" and "project XYZ" in the **Recommended Action** column are example names for reference.
+> -   [サーバーレス階層クラスター](/tidb-cloud/select-cluster-tier.md#serverless-tier)は、 **Condition**列で`*`とマークされているアラート条件のサブセットのみをサポートします。
+> -   **推奨されるアクション**列の「クラスター ABC」と「プロジェクト XYZ」は、参照用の名前の例です。

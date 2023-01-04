@@ -3,11 +3,11 @@ title: CREATE USER | TiDB SQL Statement Reference
 summary: An overview of the usage of CREATE USER for the TiDB database.
 ---
 
-# CREATE USER
+# ユーザーを作成 {#create-user}
 
-This statement creates a new user, specified with a password. In the MySQL privilege system, a user is the combination of a username and the host from which they are connecting from. Thus, it is possible to create a user `'newuser2'@'192.168.1.1'` who is only able to connect from the IP address `192.168.1.1`. It is also possible to have two users have the same user-portion, and different permissions as they login from different hosts.
+このステートメントは、パスワードで指定された新しいユーザーを作成します。 MySQL 特権システムでは、ユーザーはユーザー名と接続元のホストの組み合わせです。これにより、ＩＰアドレス`192.168.1.1`からしか接続できないユーザ`'newuser2'@'192.168.1.1'`を作成することができる。 2 人のユーザーが同じユーザー部分を持ち、異なるホストからログインするときに異なる権限を持つことも可能です。
 
-## Synopsis
+## あらすじ {#synopsis}
 
 ```ebnf+diagram
 CreateUserStmt ::=
@@ -36,37 +36,37 @@ LockOption ::= ( 'ACCOUNT' 'LOCK' | 'ACCOUNT' 'UNLOCK' )?
 AttributeOption ::= ( 'COMMENT' CommentString | 'ATTRIBUTE' AttributeString )?
 ```
 
-## Examples
+## 例 {#examples}
 
-Create a user with the `newuserpassword` password.
+`newuserpassword`パスワードでユーザーを作成します。
 
 ```sql
 mysql> CREATE USER 'newuser' IDENTIFIED BY 'newuserpassword';
 Query OK, 1 row affected (0.04 sec)
 ```
 
-Create a user who can only log in to `192.168.1.1`.
+`192.168.1.1`にのみログインできるユーザーを作成します。
 
 ```sql
 mysql> CREATE USER 'newuser2'@'192.168.1.1' IDENTIFIED BY 'newuserpassword';
 Query OK, 1 row affected (0.02 sec)
 ```
 
-Create a user who is enforced to log in using TLS connection.
+TLS 接続を使用してログインすることが強制されるユーザーを作成します。
 
 ```sql
 CREATE USER 'newuser3'@'%' IDENTIFIED BY 'newuserpassword' REQUIRE SSL;
 Query OK, 1 row affected (0.02 sec)
 ```
 
-Create a user who is required to use X.509 certificate at login.
+ログイン時に X.509 証明書を使用する必要があるユーザーを作成します。
 
 ```sql
 CREATE USER 'newuser4'@'%' IDENTIFIED BY 'newuserpassword' REQUIRE ISSUER '/C=US/ST=California/L=San Francisco/O=PingCAP';
 Query OK, 1 row affected (0.02 sec)
 ```
 
-Create a user who is locked upon creation.
+作成時にロックされるユーザーを作成します。
 
 ```sql
 CREATE USER 'newuser5'@'%' ACCOUNT LOCK;
@@ -76,7 +76,7 @@ CREATE USER 'newuser5'@'%' ACCOUNT LOCK;
 Query OK, 1 row affected (0.02 sec)
 ```
 
-Create a user with a comment.
+コメント付きのユーザーを作成します。
 
 ```sql
 CREATE USER 'newuser6'@'%' COMMENT 'This user is created only for test';
@@ -92,7 +92,7 @@ SELECT * FROM information_schema.user_attributes;
 1 rows in set (0.00 sec)
 ```
 
-Create a user with an `email` attribute.
+属性が`email`のユーザーを作成します。
 
 ```sql
 CREATE USER 'newuser7'@'%' ATTRIBUTE '{"email": "user@pingcap.com"}';
@@ -108,7 +108,7 @@ SELECT * FROM information_schema.user_attributes;
 1 rows in set (0.00 sec)
 ```
 
-Create a user who is not allowed to reuse the last 5 passwords:
+過去 5 回のパスワードの再利用を許可しないユーザーを作成します。
 
 ```sql
 CREATE USER 'newuser8'@'%' PASSWORD HISTORY 5;
@@ -118,7 +118,7 @@ CREATE USER 'newuser8'@'%' PASSWORD HISTORY 5;
 Query OK, 1 row affected (0.02 sec)
 ```
 
-Create a user whose password is manually expired:
+パスワードが手動で期限切れになったユーザーを作成します。
 
 ```sql
 CREATE USER 'newuser9'@'%' PASSWORD EXPIRE;
@@ -128,23 +128,23 @@ CREATE USER 'newuser9'@'%' PASSWORD EXPIRE;
 Query OK, 1 row affected (0.02 sec)
 ```
 
-## MySQL compatibility
+## MySQL の互換性 {#mysql-compatibility}
 
-The following `CREATE USER` options are not yet supported by TiDB, and will be parsed but ignored:
+次の`CREATE USER`のオプションは TiDB ではまだサポートされておらず、解析されますが無視されます。
 
-* TiDB does not support `WITH MAX_QUERIES_PER_HOUR`, `WITH MAX_UPDATES_PER_HOUR`, and `WITH MAX_USER_CONNECTIONS` options.
-* TiDB does not support the `DEFAULT ROLE` option.
-* TiDB does not support `PASSWORD EXPIRE`, `PASSWORD HISTORY` or other options related to password.
+-   TiDB は、 `WITH MAX_QUERIES_PER_HOUR` 、 `WITH MAX_UPDATES_PER_HOUR` 、および`WITH MAX_USER_CONNECTIONS`のオプションをサポートしていません。
+-   TiDB は`DEFAULT ROLE`オプションをサポートしていません。
+-   TiDB は、パスワードに関連する`PASSWORD EXPIRE` 、 `PASSWORD HISTORY`またはその他のオプションをサポートしていません。
 
-## See also
+## こちらもご覧ください {#see-also}
 
 <CustomContent platform="tidb">
 
-* [Security Compatibility with MySQL](/security-compatibility-with-mysql.md)
-* [Privilege Management](/privilege-management.md)
+-   [MySQL とのセキュリティの互換性](/security-compatibility-with-mysql.md)
+-   [権限管理](/privilege-management.md)
 
 </CustomContent>
 
-* [DROP USER](/sql-statements/sql-statement-drop-user.md)
-* [SHOW CREATE USER](/sql-statements/sql-statement-show-create-user.md)
-* [ALTER USER](/sql-statements/sql-statement-alter-user.md)
+-   [ユーザーをドロップ](/sql-statements/sql-statement-drop-user.md)
+-   [ユーザーの作成を表示](/sql-statements/sql-statement-show-create-user.md)
+-   [ユーザーの変更](/sql-statements/sql-statement-alter-user.md)

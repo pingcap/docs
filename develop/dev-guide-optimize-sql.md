@@ -3,29 +3,29 @@ title: SQL Performance Tuning
 summary: Introduces TiDB's SQL performance tuning scheme and analysis approach.
 ---
 
-# SQL Performance Tuning
+# SQL性能チューニング {#sql-performance-tuning}
 
-This document introduces some common reasons for slow SQL statements and techniques for tuning SQL performance.
+このドキュメントでは、SQL ステートメントが遅くなる一般的な理由と、SQL パフォーマンスをチューニングするためのテクニックを紹介します。
 
-## Before you begin
+## あなたが始める前に {#before-you-begin}
 
-You can use [`tiup demo` import](/develop/dev-guide-bookshop-schema-design.md#method-1-via-tiup-demo) to prepare data:
+[`tiup demo`のインポート](/develop/dev-guide-bookshop-schema-design.md#method-1-via-tiup-demo)を使用してデータを準備できます。
 
-{{< copyable "shell-regular" >}}
+{{< copyable "" >}}
 
 ```shell
 tiup demo bookshop prepare --host 127.0.0.1 --port 4000 --books 1000000
 ```
 
-Or [using the Import feature of TiDB Cloud](/develop/dev-guide-bookshop-schema-design.md#method-2-via-tidb-cloud-import) to import the pre-prepared sample data.
+または、事前に準備されたサンプル データをインポートするには[TiDB Cloudのインポート機能を使用する](/develop/dev-guide-bookshop-schema-design.md#method-2-via-tidb-cloud-import) 。
 
-## Issue: Full table scan
+## 問題: 全テーブル スキャン {#issue-full-table-scan}
 
-The most common reason for slow SQL queries is that the `SELECT` statements perform full table scan or use incorrect indexes.
+SQL クエリが遅くなる最も一般的な理由は、 `SELECT`ステートメントが全テーブル スキャンを実行するか、不適切なインデックスを使用することです。
 
-When TiDB retrieves a small number of rows from a large table based on a column that is not the primary key or in the secondary index, the performance is usually poor:
+TiDB が、プライマリ キーまたはセカンダリ インデックスではない列に基づいて大きなテーブルから少数の行を取得する場合、通常はパフォーマンスが低下します。
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 SELECT * FROM books WHERE title = 'Marian Yost';
@@ -45,9 +45,9 @@ SELECT * FROM books WHERE title = 'Marian Yost';
 Time: 0.582s
 ```
 
-To understand why this query is slow, you can use `EXPLAIN` to see the execution plan:
+このクエリが遅い理由を理解するには、 `EXPLAIN`を使用して実行計画を確認します。
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 EXPLAIN SELECT * FROM books WHERE title = 'Marian Yost';
@@ -63,23 +63,23 @@ EXPLAIN SELECT * FROM books WHERE title = 'Marian Yost';
 +---------------------+------------+-----------+---------------+-----------------------------------------+
 ```
 
-As can be seen from `TableFullScan_5` in the execution plan, TiDB performs a full table scan on the `books` table and checks whether `title` satisfies the condition for each row. The `estRows` value of `TableFullScan_5` is `1000000.00`, which means the optimizer estimates that this full table scan takes `1000000.00` rows of data.
+実行計画の`TableFullScan_5`からわかるように、TiDB は`books`のテーブルに対してフル テーブル スキャンを実行し、 `title`が各行の条件を満たすかどうかをチェックします。 `TableFullScan_5`の`estRows`の値は`1000000.00`です。これは、オプティマイザーが、この全表スキャンに`1000000.00`行のデータが必要であると見積もることを意味します。
 
-For more information about the usage of `EXPLAIN`, see [`EXPLAIN` Walkthrough](/explain-walkthrough.md).
+`EXPLAIN`の使用方法の詳細については、 [`EXPLAIN`ウォークスルー](/explain-walkthrough.md)を参照してください。
 
-### Solution: Use secondary index
+### 解決策: セカンダリ インデックスを使用する {#solution-use-secondary-index}
 
-To speed up this query above, add a secondary index on the `books.title` column:
+上記のクエリを高速化するには、 `books.title`列にセカンダリ インデックスを追加します。
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 CREATE INDEX title_idx ON books (title);
 ```
 
-The query execution is much faster:
+クエリの実行ははるかに高速です。
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 SELECT * FROM books WHERE title = 'Marian Yost';
@@ -99,9 +99,9 @@ SELECT * FROM books WHERE title = 'Marian Yost';
 Time: 0.007s
 ```
 
-To understand why the performance is improved, use `EXPLAIN` to see the new execution plan:
+パフォーマンスが向上した理由を理解するには、 `EXPLAIN`を使用して新しい実行計画を表示します。
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 EXPLAIN SELECT * FROM books WHERE title = 'Marian Yost';
@@ -117,19 +117,19 @@ EXPLAIN SELECT * FROM books WHERE title = 'Marian Yost';
 +---------------------------+---------+-----------+-------------------------------------+-------------------------------------------------------+
 ```
 
-As can be seen from `IndexLookup_10` in the execution plan, TiDB queries the data by the `title_idx` index. Its `estRows` value is `1.27`, which means that the optimizer estimates that only `1.27` rows are scanned. The estimated rows scanned are much fewer than the `1000000.00` rows of data in the full table scan.
+実行計画の`IndexLookup_10`からわかるように、TiDB は`title_idx`のインデックスでデータをクエリします。その`estRows`の値は`1.27`です。これは、オプティマイザが`1.27`行のみがスキャンされると見積もることを意味します。スキャンされた推定行数は、全表スキャンの`1000000.00`行のデータよりもはるかに少なくなっています。
 
-The `IndexLookup_10` execution plan is to first use the `IndexRangeScan_8` operator to read the index data that meets the condition through the `title_idx` index, and then use the `TableLookup_9` operator to query the corresponding rows according to the Row ID stored in the index data.
+`IndexLookup_10`の実行計画は、最初に`IndexRangeScan_8`演算子を使用して`title_idx`インデックスを介して条件を満たすインデックス データを読み取り、次に`TableLookup_9`演算子を使用して、インデックス データに格納されている行 ID に従って対応する行をクエリします。
 
-For more information on the TiDB execution plan, see [TiDB Query Execution Plan Overview](/explain-overview.md).
+TiDB 実行計画の詳細については、 [TiDB クエリ実行計画の概要](/explain-overview.md)を参照してください。
 
-### Solution: Use covering index
+### 解決策: カバリング インデックスを使用する {#solution-use-covering-index}
 
-If the index is a covering index, which contains all the columns queried by the SQL statements, scanning the index data is sufficient for the query.
+インデックスが、SQL ステートメントによってクエリされるすべての列を含むカバリング インデックスである場合、クエリにはインデックス データのスキャンで十分です。
 
-For example, in the following query, you only need to query the corresponding `price` based on `title`:
+たとえば、次のクエリでは、 `title`に基づいて対応する`price`をクエリするだけで済みます。
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 SELECT title, price FROM books WHERE title = 'Marian Yost';
@@ -149,9 +149,9 @@ SELECT title, price FROM books WHERE title = 'Marian Yost';
 Time: 0.007s
 ```
 
-Because the `title_idx` index only contains data in the `title` column, TiDB still needs to first scan the index data and then query the `price` column from the table.
+`title_idx`番目のインデックスには`title`列のデータしか含まれていないため、TiDB は最初にインデックス データをスキャンしてから、テーブルの`price`列をクエリする必要があります。
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 EXPLAIN SELECT title, price FROM books WHERE title = 'Marian Yost';
@@ -167,23 +167,23 @@ EXPLAIN SELECT title, price FROM books WHERE title = 'Marian Yost';
 +---------------------------+---------+-----------+-------------------------------------+-------------------------------------------------------+
 ```
 
-To optimize the performance, drop the `title_idx` index and create a new covering index `title_price_idx`:
+パフォーマンスを最適化するには、 `title_idx`インデックスを削除して、新しいカバリング インデックス`title_price_idx`を作成します。
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 ALTER TABLE books DROP INDEX title_idx;
 ```
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 CREATE INDEX title_price_idx ON books (title, price);
 ```
 
-Because the `price` data is stored in the `title_price_idx` index, the following query only needs to scan the index data:
+`price`番目のデータは`title_price_idx`番目のインデックスに格納されているため、次のクエリではインデックス データをスキャンするだけで済みます。
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 EXPLAIN SELECT title, price FROM books WHERE title = 'Marian Yost';
@@ -198,9 +198,9 @@ EXPLAIN SELECT title, price FROM books WHERE title = 'Marian Yost';
 +--------------------+---------+-----------+--------------------------------------------------+-------------------------------------------------------+
 ```
 
-Now this query runs faster:
+このクエリはより高速に実行されるようになりました。
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 SELECT title, price FROM books WHERE title = 'Marian Yost';
@@ -220,19 +220,19 @@ SELECT title, price FROM books WHERE title = 'Marian Yost';
 Time: 0.004s
 ```
 
-Since the `books` table will be used in later examples, drop the `title_price_idx` index:
+`books`テーブルは後の例で使用されるため、 `title_price_idx`インデックスを削除します。
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 ALTER TABLE books DROP INDEX title_price_idx;
 ```
 
-### Solution: Use primary index
+### 解決策: プライマリ インデックスを使用する {#solution-use-primary-index}
 
-If a query uses the primary key to filter data, the query runs fast. For example, the primary key of the `books` table is the `id` column, so you can use the `id` column to query data:
+クエリが主キーを使用してデータをフィルター処理する場合、クエリは高速に実行されます。たとえば、 `books`テーブルの主キーは`id`列なので、 `id`列を使用してデータをクエリできます。
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 SELECT * FROM books WHERE id = 896;
@@ -248,9 +248,9 @@ SELECT * FROM books WHERE id = 896;
 Time: 0.004s
 ```
 
-Use `EXPLAIN` to see the execution plan:
+実行計画を表示するには、 `EXPLAIN`を使用します。
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 EXPLAIN SELECT * FROM books WHERE id = 896;
@@ -264,13 +264,13 @@ EXPLAIN SELECT * FROM books WHERE id = 896;
 +-------------+---------+------+---------------+---------------+
 ```
 
-`Point_Get` is a very fast execute plan.
+`Point_Get`は非常に高速な実行プランです。
 
-## Use the right join type
+## 適切な結合タイプを使用する {#use-the-right-join-type}
 
-See [JOIN Execution Plan](/explain-joins.md).
+[JOIN実行計画](/explain-joins.md)を参照してください。
 
-### See also
+### こちらもご覧ください {#see-also}
 
-* [EXPLAIN Walkthrough](/explain-walkthrough.md)
-* [Explain Statements That Use Indexes](/explain-indexes.md)
+-   [EXPLAIN コマンド / EXPLAIN機能](/explain-walkthrough.md)
+-   [インデックスを使用するステートメントの説明](/explain-indexes.md)

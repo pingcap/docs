@@ -3,39 +3,39 @@ title: Migration Overview
 summary: Learn an overview of data migration scenarios and the solutions for TiDB Cloud.
 ---
 
-# Migration Overview
+# 移行の概要 {#migration-overview}
 
-You can migrate data from a wide variety of data sources to TiDB Cloud. This document gives an overview of the data migration scenarios.
+さまざまなデータ ソースからTiDB Cloudにデータを移行できます。このドキュメントでは、データ移行シナリオの概要について説明します。
 
-## Configure Amazon S3 access and GCS access
+## Amazon S3 アクセスと GCS アクセスを設定する {#configure-amazon-s3-access-and-gcs-access}
 
-If your source data is stored in Amazon S3 or Google Cloud Storage (GCS) buckets, before importing or migrating the data to TiDB Cloud, you need to configure access to the buckets. For more information, see [Configure Amazon S3 access and GCS access](/tidb-cloud/config-s3-and-gcs-access.md).
+ソース データが Amazon S3 または Google Cloud Storage (GCS) バケットに保存されている場合は、データをTiDB Cloudにインポートまたは移行する前に、バケットへのアクセスを構成する必要があります。詳細については、 [Amazon S3 アクセスと GCS アクセスを設定する](/tidb-cloud/config-s3-and-gcs-access.md)を参照してください。
 
-## Migrate data from MySQL-compatible databases
+## MySQL 互換データベースからデータを移行する {#migrate-data-from-mysql-compatible-databases}
 
-TiDB is highly compatible with MySQL. You can migrate data from any MySQL-compatible databases to TiDB Cloud smoothly, whether the data is from a self-hosted MySQL instance or RDS service provided by the public cloud. For more information, see [Migrate Data from MySQL-Compatible Databases](/tidb-cloud/migrate-data-into-tidb.md).
+TiDB は MySQL との互換性が高いです。データが自己ホスト型の MySQL インスタンスからのものであろうと、パブリック クラウドによって提供される RDS サービスであろうと、MySQL 互換データベースからTiDB Cloudにデータをスムーズに移行できます。詳細については、 [MySQL 互換データベースからデータを移行する](/tidb-cloud/migrate-data-into-tidb.md)を参照してください。
 
-After full data migration, you can also perform incremental data migration from MySQL-compatible databases to TiDB Cloud. For more information, see [Migrate Incremental Data from MySQL-Compatible Databases](/tidb-cloud/migrate-incremental-data-from-mysql.md).
+完全なデータ移行の後、MySQL 互換データベースからTiDB Cloudへの増分データ移行を実行することもできます。詳細については、 [MySQL 互換データベースからの増分データの移行](/tidb-cloud/migrate-incremental-data-from-mysql.md)を参照してください。
 
-If your application uses MySQL shards for data storage, you can migrate these shards into TiDB Cloud as one table. For more information, see [Migrate and Merge MySQL Shards of Large Datasets to TiDB Cloud](/tidb-cloud/migrate-sql-shards.md).
+アプリケーションがデータ ストレージに MySQL シャードを使用している場合、これらのシャードを 1 つのテーブルとしてTiDB Cloudに移行できます。詳細については、 [大規模なデータセットの MySQL シャードをTiDB Cloudに移行およびマージする](/tidb-cloud/migrate-sql-shards.md)を参照してください。
 
-## Migrate from Amazon Aurora MySQL to TiDB Cloud in bulk
+## Amazon Aurora MySQL からTiDB Cloudへの一括移行 {#migrate-from-amazon-aurora-mysql-to-tidb-cloud-in-bulk}
 
-You can migrate data from Amazon Aurora MySQL to TiDB Cloud in bulk using the import tools on TiDB Cloud console.
+TiDB Cloudコンソールのインポート ツールを使用して、Amazon Aurora MySQL からTiDB Cloudにデータを一括移行できます。
 
-For more information, see [Migrate from Amazon Aurora MySQL to TiDB Cloud in Bulk](/tidb-cloud/migrate-from-aurora-bulk-import.md).
+詳細については、 [Amazon Aurora MySQL からTiDB Cloudに一括移行する](/tidb-cloud/migrate-from-aurora-bulk-import.md)を参照してください。
 
-## Import or migrate from Amazon S3 or GCS to TiDB Cloud
+## Amazon S3 または GCS からTiDB Cloudへのインポートまたは移行 {#import-or-migrate-from-amazon-s3-or-gcs-to-tidb-cloud}
 
-You can use Amazon Simple Storage Service (Amazon S3) or Google Cloud Storage (GCS) as a staging area for importing or migrating data into TiDB Cloud.
+TiDB Cloudにデータをインポートまたは移行するためのステージング領域として、Amazon Simple Storage Service (Amazon S3) または Google Cloud Storage (GCS) を使用できます。
 
-For more information, see [Import or Migrate from Amazon S3 or GCS to TiDB Cloud](/tidb-cloud/migrate-from-amazon-s3-or-gcs.md).
+詳細については、 [Amazon S3 または GCS からTiDB Cloudへのインポートまたは移行](/tidb-cloud/migrate-from-amazon-s3-or-gcs.md)を参照してください。
 
-## Migrate data from files to TiDB Cloud
+## ファイルからTiDB Cloudにデータを移行する {#migrate-data-from-files-to-tidb-cloud}
 
-- [Import CSV Files from Amazon S3 or GCS into TiDB Cloud](/tidb-cloud/import-csv-files.md)
-- [Import Apache Parquet Files from Amazon S3 or GCS into TiDB Cloud](/tidb-cloud/import-parquet-files.md)
+-   [Amazon S3 または GCS からTiDB Cloudに CSV ファイルをインポートする](/tidb-cloud/import-csv-files.md)
+-   [Amazon S3 または GCS からTiDB Cloudに Apache Parquet ファイルをインポートする](/tidb-cloud/import-parquet-files.md)
 
-## Troubleshoot access denied errors during data import from Amazon S3
+## Amazon S3 からのデータ インポート中のアクセス拒否エラーのトラブルシューティング {#troubleshoot-access-denied-errors-during-data-import-from-amazon-s3}
 
-You can troubleshoot access denied errors that might occur when you import data from Amazon S3 into TiDB Cloud. For more information, see [Troubleshoot Access Denied Errors during Data Import from Amazon S3](/tidb-cloud/troubleshoot-import-access-denied-error.md).
+Amazon S3 からTiDB Cloudにデータをインポートするときに発生する可能性のあるアクセス拒否エラーをトラブルシューティングできます。詳細については、 [Amazon S3 からのデータ インポート中のアクセス拒否エラーのトラブルシューティング](/tidb-cloud/troubleshoot-import-access-denied-error.md)を参照してください。

@@ -3,95 +3,95 @@ title: Handle Performance Issues of TiDB Data Migration
 summary: Learn about common performance issues that might exist in DM and how to deal with them.
 ---
 
-# Handle Performance Issues of TiDB Data Migration
+# TiDB データ移行のパフォーマンスの問題を処理する {#handle-performance-issues-of-tidb-data-migration}
 
-This document introduces common performance issues that might exist in DM and how to deal with them.
+このドキュメントでは、DM に存在する可能性のある一般的なパフォーマンスの問題とその対処方法について説明します。
 
-Before diagnosing an issue, you can refer to the [DM Benchmark Report](https://github.com/pingcap/docs-dm/blob/release-5.3/en/dm-benchmark-v5.3.0.md).
+問題を診断する前に、 [DM ベンチマーク レポート](https://github.com/pingcap/docs-dm/blob/release-5.3/en/dm-benchmark-v5.3.0.md)を参照できます。
 
-When diagnosing and handling performance issues, make sure that:
+パフォーマンスの問題を診断して処理するときは、次のことを確認してください。
 
-- The DM monitoring component is correctly configured and installed.
-- You can view [monitoring metrics](/dm/monitor-a-dm-cluster.md#task) on the Grafana monitoring dashboard.
-- The component you diagnose works well; otherwise, possible monitoring metrics exceptions might interfere with the diagnosis of performance issues.
+-   DM 監視コンポーネントが正しく構成され、インストールされている。
+-   [メトリックの監視](/dm/monitor-a-dm-cluster.md#task)は Grafana 監視ダッシュボードで確認できます。
+-   診断したコンポーネントはうまく機能します。そうしないと、モニタリング メトリックの例外が発生し、パフォーマンスの問題の診断が妨げられる可能性があります。
 
-In the case of a large latency in the data migration, to quickly figure out whether the bottleneck is inside the DM component or in the TiDB cluster, you can first check `DML queue remain length` in [Write SQL Statements to Downstream](#write-sql-statements-to-downstream).
+データ移行で大きなレイテンシーが発生した場合、ボトルネックが DMコンポーネント内にあるか、TiDB クラスター内にあるかをすばやく把握するには、まず`DML queue remain length` in [ダウンストリームへの SQL ステートメントの書き込み](#write-sql-statements-to-downstream)を確認します。
 
-## relay log unit
+## リレーログユニット {#relay-log-unit}
 
-To diagnose performance issues in the relay log unit, you can check the `binlog file gap between master and relay` monitoring metric. For more information about this metric, refer to [monitoring metrics of the relay log](/dm/monitor-a-dm-cluster.md#relay-log). If this metric is greater than 1 for a long time, it usually indicates that there is a performance issue; if this metric is 0, it usually indicates that there is no performance issue.
+リレー ログ ユニットでパフォーマンスの問題を診断するには、 `binlog file gap between master and relay`の監視メトリックを確認します。このメトリックの詳細については、 [リレーログの監視メトリクス](/dm/monitor-a-dm-cluster.md#relay-log)を参照してください。このメトリックが長時間 1 より大きい場合は、通常、パフォーマンスの問題があることを示しています。このメトリックが 0 の場合、通常はパフォーマンスの問題がないことを示します。
 
-If the value of `binlog file gap between master and relay` is 0, but you suspect that there is a performance issue, you can check `binlog pos`. If `master` in this metric is much larger than `relay`, a performance issue might exist. In this case, diagnose and handle this issue accordingly.
+`binlog file gap between master and relay`の値が 0 であるが、パフォーマンスの問題があると思われる場合は、 `binlog pos`を確認できます。このメトリクスの`master`が`relay`よりはるかに大きい場合、パフォーマンスの問題が存在する可能性があります。この場合、この問題を適切に診断して処理してください。
 
-### Read binlog data
+### バイナリログ データの読み取り {#read-binlog-data}
 
-`read binlog event duration` refers to the duration that the relay log reads binlog from the upstream database (MySQL/MariaDB). Ideally, this metric is close to the network latency between DM-worker and MySQL/MariaDB instances.
+`read binlog event duration`は、リレー ログがアップストリーム データベース (MySQL/MariaDB) から binlog を読み取る期間を表します。理想的には、このメトリクスは DM-worker と MySQL/MariaDB インスタンス間のネットワークレイテンシーに近い値です。
 
-- For data migration in one data center, reading binlog data is not a performance bottleneck. If the value of `read binlog event duration` is too large, check the network connection between DM-worker and MySQL/MariaDB.
+-   1 つのデータ センターでのデータ移行の場合、binlog データの読み取りはパフォーマンスのボトルネックにはなりません。 `read binlog event duration`の値が大きすぎる場合は、DM-worker と MySQL/MariaDB 間のネットワーク接続を確認してください。
 
-- For data migration in the geo-distributed environment, try to deploy DM-worker and MySQL/MariaDB in one data center, while deploying the TiDB cluster in the target data center.
+-   地理的に分散した環境でのデータ移行の場合、DM-worker と MySQL/MariaDB を 1 つのデータ センターに展開し、TiDB クラスターをターゲット データ センターに展開してみてください。
 
-The process of reading binlog data from the upstream database includes the following sub-processes:
+アップストリーム データベースから binlog データを読み取るプロセスには、次のサブプロセスが含まれます。
 
-- The upstream MySQL/MariaDB reads the binlog data locally and sends it through the network. When no exception occurs in the MySQL/MariaDB load, this sub-process usually does not become a bottleneck.
-- The binlog data is transferred from the machine where MySQL/MariaDB is located to the machine where DM-worker is located via the network. Whether this sub-process becomes a bottleneck mainly depends on the network connection between DM-worker and the upstream MySQL/MariaDB.
-- DM-worker reads binlog data from the network data stream and constructs it as a binlog event. When no exception occurs in the DM-worker load, this sub-process usually does not become a bottleneck.
+-   アップストリームの MySQL/MariaDB はバイナリ ログ データをローカルで読み取り、ネットワーク経由で送信します。 MySQL/MariaDB のロードで例外が発生しない場合、通常、このサブプロセスはボトルネックにはなりません。
+-   バイナリログ データは、MySQL/MariaDB が配置されているマシンから DM-worker が配置されているマシンにネットワーク経由で転送されます。このサブプロセスがボトルネックになるかどうかは、主に DM-worker と上流の MySQL/MariaDB 間のネットワーク接続に依存します。
+-   DM-worker は、ネットワーク データ ストリームから binlog データを読み取り、それを binlog イベントとして構築します。 DM-worker 負荷で例外が発生しない場合、通常、このサブプロセスはボトルネックにはなりません。
 
-> **Note:**
+> **ノート：**
 >
-> If the value of `read binlog event duration` is large, another possible reason is that the upstream MySQL/MariaDB has a low load. This means that no binlog event needs to be sent to DM for a period of time, and the relay log unit stays in a wait state, thus this value includes additional waiting time.
+> `read binlog event duration`の値が大きい場合、別の理由として、上流の MySQL/MariaDB の負荷が低いことが考えられます。これは、一定期間バイナリログ イベントを DM に送信する必要がなく、リレー ログ ユニットが待機状態のままであることを意味します。したがって、この値には追加の待機時間が含まれます。
 
-### binlog data decoding and verification
+### binlog データのデコードと検証 {#binlog-data-decoding-and-verification}
 
-After reading the binlog event into the DM memory, DM's relay processing unit decodes and verifies data. This usually does not lead to performance bottleneck; therefore, there is no related performance metric on the monitoring dashboard by default. If you need to view this metric, you can manually add a monitoring item in Grafana. This monitoring item corresponds to `dm_relay_read_transform_duration`, a metric from Prometheus.
+Binlog イベントを DM メモリに読み取った後、DM のリレー処理ユニットはデータをデコードして検証します。これは通常、パフォーマンスのボトルネックにはなりません。したがって、デフォルトでは、監視ダッシュボードに関連するパフォーマンス メトリックはありません。このメトリクスを表示する必要がある場合は、Grafana で監視項目を手動で追加できます。この監視項目は、Prometheus のメトリックである`dm_relay_read_transform_duration`に対応します。
 
-### Write relay log files
+### リレーログファイルの書き込み {#write-relay-log-files}
 
-When writing a binlog event to a relay log file, the relevant performance metric is `write relay log duration`. This value should be microseconds when `binlog event size` is not too large. If `write relay log duration` is too large, check the write performance of the disk. To avoid low write performance, use local SSDs for DM-worker.
+binlog イベントをリレー ログ ファイルに書き込む場合、関連するパフォーマンス メトリックは`write relay log duration`です。 `binlog event size`が大きすぎない場合、この値はマイクロ秒にする必要があります。 `write relay log duration`が大きすぎる場合は、ディスクの書き込みパフォーマンスを確認してください。書き込みパフォーマンスの低下を回避するには、DM ワーカーにローカル SSD を使用します。
 
-## Load unit
+## 負荷ユニット {#load-unit}
 
-The main operations of the Load unit are to read the SQL file data from the local and write it to the downstream. The related performance metric is `transaction execution latency`. If this value is too large, check the downstream performance by checking the monitoring of the downstream database. You can also check whether there is a large network latency between DM and the downstream database.
+ロード ユニットの主な操作は、SQL ファイル データをローカルから読み取り、ダウンストリームに書き込むことです。関連するパフォーマンス メトリックは`transaction execution latency`です。この値が大きすぎる場合は、ダウンストリーム データベースの監視を確認して、ダウンストリームのパフォーマンスを確認します。 DM とダウンストリーム データベースの間に大きなネットワークレイテンシーがあるかどうかを確認することもできます。
 
-## Binlog replication unit
+## Binlogレプリケーション ユニット {#binlog-replication-unit}
 
-To diagnose performance issues in the Binlog replication unit, you can check the `binlog file gap between master and syncer` monitoring metric. For more information about this metric, refer to [monitoring metrics of the Binlog replication](/dm/monitor-a-dm-cluster.md#binlog-replication).
+Binlogレプリケーション ユニットのパフォーマンスの問題を診断するには、 `binlog file gap between master and syncer`の監視メトリックを確認します。このメトリックの詳細については、 [Binlogレプリケーションの監視メトリクス](/dm/monitor-a-dm-cluster.md#binlog-replication)を参照してください。
 
-- If this metric is greater than 1 for a long time, it usually indicates that there is a performance issue.
-- If this metric is 0, it usually indicates that there is no performance issue.
+-   このメトリックが長時間 1 より大きい場合は、通常、パフォーマンスの問題があることを示しています。
+-   このメトリックが 0 の場合、通常はパフォーマンスの問題がないことを示します。
 
-When `binlog file gap between master and syncer` is greater than 1 for a long time, check `binlog file gap between relay and syncer` to figure out which unit the latency mainly exists in. If this value is usually 0, the latency might exist in the relay log unit. Then you can refer to [relay log unit](#relay-log-unit) to resolve this issue; otherwise, continue checking the Binlog replication unit.
+`binlog file gap between master and syncer`が 1 より大きい場合は、 `binlog file gap between relay and syncer`を確認して、レイテンシーが主にどのユニットに存在するかを調べます。この値が通常 0 である場合、レイテンシーはリレー ログ ユニットに存在する可能性があります。その後、 [リレーログユニット](#relay-log-unit)を参照してこの問題を解決できます。それ以外の場合は、 Binlogレプリケーション ユニットのチェックを続けます。
 
-### Read binlog data
+### バイナリログ データの読み取り {#read-binlog-data}
 
-The Binlog replication unit decides whether to read the binlog event from the upstream MySQL/MariaDB or from the relay log file according to the configuration. The related performance metric is `read binlog event duration`, which generally ranges from a few microseconds to tens of microseconds.
+Binlogレプリケーション ユニットは、バイナリ ログ イベントを上流の MySQL/MariaDB から読み取るか、構成に従ってリレー ログ ファイルから読み取るかを決定します。関連するパフォーマンス メトリックは`read binlog event duration`で、通常は数マイクロ秒から数十マイクロ秒の範囲です。
 
-- If DM's Binlog replication processing unit reads the binlog event from upstream MySQL/MariaDB, to locate and resolve the issue, refer to [read binlog data](#read-binlog-data) in the "relay log unit" section.
+-   DM のBinlogレプリケーション処理ユニットが上流の MySQL/MariaDB から binlog イベントを読み取る場合、問題を特定して解決するには、「リレー ログ ユニット」セクションの[バイナリログデータを読む](#read-binlog-data)を参照してください。
 
-- If DM's Binlog replication processing unit reads the binlog event from the relay log file, when `binlog event size` is not too large, the value of `read binlog event duration` should be microseconds. If `read binlog event duration` is too large, check the read performance of the disk. To avoid low write performance, use local SSDs for DM-worker.
+-   DM のBinlogレプリケーション処理ユニットがリレー ログ ファイルから Binlog イベントを読み取る場合、 `binlog event size`が大きすぎない場合、 `read binlog event duration`の値はマイクロ秒になるはずです。 `read binlog event duration`が大きすぎる場合は、ディスクの読み取りパフォーマンスを確認してください。書き込みパフォーマンスの低下を回避するには、DM ワーカーにローカル SSD を使用します。
 
-### binlog event conversion
+### binlog イベント変換 {#binlog-event-conversion}
 
-The Binlog replication unit constructs DML, parses DDL, and performs [table router](/dm/dm-key-features.md#table-routing) conversion from binlog event data. The related metric is `transform binlog event duration`.
+Binlogレプリケーション ユニットは、DML を構築し、DDL を解析し、binlog イベント データから[テーブルルーター](/dm/dm-key-features.md#table-routing)の変換を実行します。関連するメトリックは`transform binlog event duration`です。
 
-The duration is mainly affected by the write operations upstream. Take the `INSERT INTO` statement as an example, the time consumed to convert a single `VALUES` greatly differs from that to convert a lot of `VALUES`. The time consumed might range from tens of microseconds to hundreds of microseconds. However, usually this is not a bottleneck of the system.
+期間は、主にアップストリームの書き込み操作の影響を受けます。 `INSERT INTO`ステートメントを例にとると、単一の`VALUES`を変換するのにかかる時間は、大量の`VALUES`を変換するのとは大きく異なります。消費される時間は、数十マイクロ秒から数百マイクロ秒の範囲です。ただし、通常、これはシステムのボトルネックではありません。
 
-### Write SQL statements to downstream
+### SQL ステートメントをダウンストリームに書き込む {#write-sql-statements-to-downstream}
 
-When the Binlog replication unit writes the converted SQL statements to the downstream, the related performance metrics are `DML queue remain length` and `transaction execution latency`.
+Binlogレプリケーション ユニットが変換された SQL ステートメントをダウンストリームに書き込むとき、関連するパフォーマンス メトリックは`DML queue remain length`と`transaction execution latency`です。
 
-After constructing SQL statements from binlog event, DM uses `worker-count` queues to concurrently write these statements to the downstream. However, to avoid too many monitoring entries, DM performs the modulo `8` operation on the IDs of concurrent queues. This means that all concurrent queues correspond to one item from `q_0` to `q_7`.
+binlog イベントから SQL ステートメントを作成した後、DM は`worker-count`のキューを使用して、これらのステートメントを同時にダウンストリームに書き込みます。ただし、監視エントリが多すぎるのを避けるために、DM は同時キューの ID に対してモジュロ`8`操作を実行します。これは、すべての同時キューが`q_0`から`q_7`までの 1 つの項目に対応することを意味します。
 
-`DML queue remain length` indicates in the concurrent processing queue, the number of DML statements that have not been consumed and have not started to be written downstream. Ideally, the curves corresponding to each `q_*` are almost the same. If not, it indicates that the concurrent load is extremely unbalanced.
+`DML queue remain length`は、コンカレント処理キューで、消費されておらず、ダウンストリームへの書き込みが開始されていない DML ステートメントの数を示します。理想的には、各`q_*`に対応する曲線はほぼ同じです。そうでない場合は、同時負荷が非常に不均衡であることを示しています。
 
-If the load is not balanced, confirm whether tables need to be migrated have primary keys or unique keys. If these keys do not exist, add the primary keys or the unique keys; if these keys do exist while the load is not balanced, upgrade DM to v1.0.5 or later versions.
+負荷が分散されていない場合は、移行する必要があるテーブルに主キーまたは一意のキーがあるかどうかを確認します。これらのキーが存在しない場合は、主キーまたは一意のキーを追加します。負荷が分散されていないときにこれらのキーが存在する場合は、DM を v1.0.5 以降のバージョンにアップグレードしてください。
 
-- When there is no noticeable latency in the entire data migration link, the corresponding curve of `DML queue remain length` is almost always 0, and the maximum does not exceed the value of `batch` in the task configuration file.
+-   データ移行リンク全体に目立ったレイテンシーがない場合、対応する曲線`DML queue remain length`はほぼ常に 0 であり、最大値はタスク構成ファイルの値`batch`を超えません。
 
-- If you find a noticeable latency in the data migration link, and the curve of `DML queue remain length` corresponding to each `q_*` is almost the same and is almost always 0, it means that DM fails to read, convert, or concurrently write the data from the upstream in time (the bottleneck might be in the relay log unit). For troubleshooting, refer to the previous sections of this document.
+-   データ移行リンクで顕著なレイテンシーが見つかり、各`q_*`に対応する`DML queue remain length`の曲線がほぼ同じで、ほぼ常に 0 である場合、DM がアップストリームからのデータの読み取り、変換、または同時書き込みに失敗したことを意味します。時間 (ボトルネックはリレー ログ ユニットにある可能性があります)。トラブルシューティングについては、このドキュメントの前のセクションを参照してください。
 
-If the corresponding curve of `DML queue remain length` is not 0 (usually the maximum is not more than 1024), it indicates that there is a bottleneck when writing SQL statements to the downstream. You can use `transaction execution latency` to view the time consumed to execute a single transaction to the downstream.
+`DML queue remain length`の対応する曲線が 0 でない場合 (通常、最大値は 1024 以下)、下流に SQL ステートメントを書き込むときにボトルネックがあることを示します。 `transaction execution latency`を使用して、ダウンストリームへの 1 つのトランザクションの実行にかかった時間を表示できます。
 
-`transaction execution latency` is usually tens of milliseconds. If this value is too large, check the downstream performance based on the monitoring of the downstream database. You can also check whether there is a large network latency between DM and the downstream database.
+`transaction execution latency`は通常、数十ミリ秒です。この値が大きすぎる場合は、ダウンストリーム データベースの監視に基づいてダウンストリームのパフォーマンスを確認します。 DM とダウンストリーム データベースの間に大きなネットワークレイテンシーがあるかどうかを確認することもできます。
 
-To view the time consumed to write a single statement such as `BEGIN`, `INSERT`, `UPDATE`, `DELETE`, or `COMMIT` to the downstream, you can also check `statement execution latency`.
+`BEGIN` 、 `INSERT` 、 `UPDATE` 、 `DELETE` 、または`COMMIT`などの単一のステートメントをダウンストリームに書き込むのにかかった時間を表示するには、 `statement execution latency`も確認できます。

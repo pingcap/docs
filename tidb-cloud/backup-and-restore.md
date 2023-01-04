@@ -4,112 +4,115 @@ summary: Learn how to back up and restore your TiDB Cloud cluster.
 aliases: ['/tidbcloud/restore-deleted-tidb-cluster']
 ---
 
-# Back up and Restore TiDB Cluster Data
+# TiDBクラスタデータのバックアップと復元 {#back-up-and-restore-tidb-cluster-data}
 
-This document describes how to back up and restore your TiDB cluster data on TiDB Cloud.
+このドキュメントでは、 TiDB Cloudで TiDB クラスター データをバックアップおよび復元する方法について説明します。
 
-> **Note:**
+> **ノート：**
 >
-> For [Serverless Tier clusters](/tidb-cloud/select-cluster-tier.md#serverless-tier), the backup and restore feature is unavailable. You can use [Dumpling](https://docs.pingcap.com/tidb/stable/dumpling-overview) to export your data as a backup.
+> [サーバーレス階層クラスター](/tidb-cloud/select-cluster-tier.md#serverless-tier)の場合、バックアップおよび復元機能は使用できません。 [Dumpling](https://docs.pingcap.com/tidb/stable/dumpling-overview)を使用して、データをバックアップとしてエクスポートできます。
 
-## Backup
+## バックアップ {#backup}
 
-TiDB Cloud provides two types of data backup: automatic backup and manual backup.
+TiDB Cloudは、自動バックアップと手動バックアップの 2 種類のデータ バックアップを提供します。
 
-Daily backups are automatically scheduled for your TiDB clusters in TiDB Cloud. You can pick a backup snapshot and restore it into a new TiDB cluster at any time. Automated backup can reduce your losses in extreme disaster situations.
+TiDB Cloud内の TiDB クラスターに対して、毎日のバックアップが自動的にスケジュールされます。バックアップ スナップショットを選択して、いつでも新しい TiDB クラスターに復元できます。自動バックアップにより、極端な災害状況での損失を減らすことができます。
 
-### Automatic backup
+### 自動バックアップ {#automatic-backup}
 
-By the automatic backup, you can back up the cluster data every day at the backup time you have set. To set the backup time, perform the following steps:
+自動バックアップにより、設定したバックアップ時刻に毎日クラスタデータをバックアップできます。バックアップ時間を設定するには、次の手順を実行します。
 
-1. Navigate to the **Backup** tab of a cluster.
+1.  クラスターの [**バックアップ**] タブに移動します。
 
-2. Click **Auto Setting**. The setting window displays.
+2.  [**自動設定]**をクリックします。設定ウィンドウが表示されます。
 
-3. In the setting window, select **Backup Time** and maximum backup files in **Limit (backup files)**.
+3.  設定ウィンドウで、 [**制限 (バックアップ ファイル)]**で [<strong>バックアップ時間</strong>] と [バックアップ ファイルの最大数] を選択します。
 
-4. Click **Confirm**.
+4.  [**確認]**をクリックします。
 
-If you do not specify a preferred backup time, TiDB Cloud assigns a default backup time, which is 2:00 AM in the time zone of the region where the cluster is located.
+優先バックアップ時刻を指定しない場合、 TiDB Cloudはデフォルトのバックアップ時刻を割り当てます。これは、クラスターが配置されている地域のタイム ゾーンの午前 2 時です。
 
-Note that you cannot disable automatic backup.
+自動バックアップを無効にすることはできません。
 
-### Manual backup
+### 手動バックアップ {#manual-backup}
 
-Manual backups are user-initiated backups that enable you to back up your data to a known state as needed, and then restore to that state at any time.
+手動バックアップは、必要に応じてデータを既知の状態にバックアップし、いつでもその状態に復元できるようにする、ユーザーが開始するバックアップです。
 
-To apply a manual backup to your TiDB cluster, perform the following steps:
+TiDB クラスターに手動バックアップを適用するには、次の手順を実行します。
 
-1. Navigate to the **Backup** tab of a cluster.
+1.  クラスターの [**バックアップ**] タブに移動します。
 
-2. Click **Manual** on the upper right.
+2.  右上の [**手動]**をクリックします。
 
-3. Enter a **Name**.
+3.  **名前**を入力します。
 
-4. Click **Confirm**. Then your cluster data is backed up.
+4.  [**確認]**をクリックします。次に、クラスター データがバックアップされます。
 
-### Delete backup files
+### バックアップファイルを削除する {#delete-backup-files}
 
-To delete an existing backup file, perform the following steps:
+既存のバックアップ ファイルを削除するには、次の手順を実行します。
 
-1. Navigate to the **Backup** tab of a cluster.
+1.  クラスターの [**バックアップ**] タブに移動します。
 
-2. Click **Delete** for the backup file that you want to delete.
+2.  削除するバックアップ ファイルの [**削除]**をクリックします。
 
-### Delete a running backup job
+### 実行中のバックアップ ジョブを削除する {#delete-a-running-backup-job}
 
-To delete a running backup job, it is similar as [**Delete backup files**](#delete-backup-files).
+実行中のバックアップ ジョブを削除するには、 [**バックアップファイルを削除する**](#delete-backup-files)と同様です。
 
-1. Navigate to the **Backup** tab of a cluster.
+1.  クラスターの [**バックアップ**] タブに移動します。
 
-2. Click **Delete** for the backup file that is in the **Pending** or **Running** state.
+2.  **保留中**または<strong>実行中</strong>の状態にあるバックアップ ファイルの [<strong>削除]</strong>をクリックします。
 
-### Best practices for backup
+### バックアップのベスト プラクティス {#best-practices-for-backup}
 
-- It is recommended that you perform backup operations at cluster idle time to minimize the impact on business.
-- Do not run the manual backup while importing data, or during cluster scaling.
-- After you delete a cluster, the existing manual backup files will be retained until you manually delete them, or your account is closed. Automatic backup files will be retained for 7 days from the date of cluster deletion. You need to delete the backup files accordingly.
+-   ビジネスへの影響を最小限に抑えるために、クラスターのアイドル時間にバックアップ操作を実行することをお勧めします。
+-   データのインポート中、またはクラスターのスケーリング中に手動バックアップを実行しないでください。
+-   クラスターを削除した後、既存の手動バックアップ ファイルは、手動で削除するか、アカウントが閉鎖されるまで保持されます。自動バックアップ ファイルは、クラスターの削除日から 7 日間保持されます。それに応じて、バックアップ ファイルを削除する必要があります。
 
-## Restore
+## 戻す {#restore}
 
-TiDB Cloud provides two types of data restoration:
+TiDB Cloudは、2 種類のデータ復元を提供します。
 
-- Restore backup data to a new cluster
-- Restore a deleted cluster from the recycle bin
+-   バックアップ データを新しいクラスタに復元する
+-   ごみ箱から削除されたクラスターを復元する
 
-### Restore data to a new cluster
+### データを新しいクラスターに復元する {#restore-data-to-a-new-cluster}
 
-To restore your TiDB cluster data from a backup to a new cluster, take the following steps:
+TiDB クラスター データをバックアップから新しいクラスターに復元するには、次の手順を実行します。
 
-1. Navigate to the **Backup** tab of a cluster.
+1.  クラスターの [**バックアップ**] タブに移動します。
 
-2. Select an existing backup in the list, and click **Restore**.
+2.  リストで既存のバックアップを選択し、[**復元]**をクリックします。
 
-3. In the **Restore** window, make the following changes if necessary:
+3.  [**復元]**ウィンドウで、必要に応じて次の変更を行います。
 
-    - Update the port number of the cluster.
-    - Increase the node size, node quantity, and node storage for the cluster.
+    -   クラスターのポート番号を更新します。
+    -   クラスタのノード サイズ、ノード数、およびノード ストレージを増やします。
 
-4. Click **Confirm**.
+4.  [**確認]**をクリックします。
 
-   The cluster restore process starts and the **Security Settings** dialog box is displayed.
+    クラスターの復元プロセスが開始され、 **[セキュリティの設定**] ダイアログ ボックスが表示されます。
 
-5. In the **Security Settings** dialog box, set the root password and allowed IP addresses to connect to your cluster, and then click **Apply**.
+5.  [**セキュリティ設定**] ダイアログ ボックスで、ルート パスワードと許可された IP アドレスを設定してクラスターに接続し、[<strong>適用</strong>] をクリックします。
 
-### Restore a deleted cluster
+### 削除されたクラスターを復元する {#restore-a-deleted-cluster}
 
-To restore a deleted cluster from recycle bin, take the following steps:
+ごみ箱から削除されたクラスターを復元するには、次の手順を実行します。
 
-1. In the TiDB Cloud console, go to the target project and click the **Recycle Bin** tab.
-2. Locate the cluster you want to restore, and then click **Backups** in the **Action** column.
-3. Locate your desired backup time, and then click **Restore**.
-4. In the **Restore** window, make the following changes if necessary:
+1.  TiDB Cloudコンソールで、ターゲット プロジェクトに移動し、[**ごみ箱**] タブをクリックします。
 
-    - Update the port number of the cluster.
-    - Increase the node size, node quantity, and node storage for the cluster.
+2.  復元するクラスターを見つけて、[**アクション**] 列の [<strong>バックアップ</strong>] をクリックします。
 
-5. Click **Confirm**.
+3.  目的のバックアップ時刻を見つけて、[**復元]**をクリックします。
 
-   The cluster restore process starts and the **Security Settings** dialog box is displayed.
+4.  [**復元]**ウィンドウで、必要に応じて次の変更を行います。
 
-6. In the **Security Settings** dialog box, set the root password and allowed IP addresses to connect to your cluster, and then click **Apply**.
+    -   クラスターのポート番号を更新します。
+    -   クラスタのノード サイズ、ノード数、およびノード ストレージを増やします。
+
+5.  [**確認]**をクリックします。
+
+    クラスターの復元プロセスが開始され、 **[セキュリティの設定**] ダイアログ ボックスが表示されます。
+
+6.  [**セキュリティ設定**] ダイアログ ボックスで、ルート パスワードと許可された IP アドレスを設定してクラスターに接続し、[<strong>適用</strong>] をクリックします。

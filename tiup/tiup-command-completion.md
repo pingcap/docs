@@ -2,28 +2,28 @@
 title: tiup completion
 ---
 
-# tiup completion
+# ティアップ完了 {#tiup-completion}
 
-To reduce user costs, TiUP provides the `tiup completion` command to generate a configuration file for automatic command-line completion. Currently, TiUP supports completing `bash` and `zsh` commands.
+ユーザーのコストを削減するために、 TiUPは、自動コマンド ライン補完用の構成ファイルを生成する`tiup completion`のコマンドを提供します。現在、 TiUPは`bash`つと`zsh`のコマンドの完了をサポートしています。
 
-If you want to complete `bash` commands, you need to install `bash-completion` first. See the following instructions:
+`bash`のコマンドを完了したい場合は、最初に`bash-completion`をインストールする必要があります。次の手順を参照してください。
 
-- On macOS: If your bash version is earlier than 4.1, run `brew install bash-completion`; otherwise, run `brew install bash-completion@2`.
-- On Linux: Use a package manager to install `bash-completion`. For example, run `yum install bash-completion` or `apt install bash-completion`.
+-   macOS の場合: bash のバージョンが 4.1 より前の場合は、 `brew install bash-completion`を実行します。それ以外の場合は、 `brew install bash-completion@2`を実行します。
+-   Linux の場合: パッケージ マネージャーを使用して`bash-completion`をインストールします。たとえば、 `yum install bash-completion`または`apt install bash-completion`を実行します。
 
-## Syntax
+## 構文 {#syntax}
 
 ```shell
 tiup completion <shell>
 ```
 
-`<shell>` is used to set the type of shell you use. Currently, `bash` and `zsh` are supported.
+`<shell>`は、使用するシェルのタイプを設定するために使用されます。現在、 `bash`と`zsh`がサポートされています。
 
-## Usage
+## 使用法 {#usage}
 
-### bash
+### バッシュ {#bash}
 
-Write the `tiup completion bash` command into a file and source the file in `.bash_profile`. See the following example:
+`tiup completion bash`コマンドをファイルに書き込み、そのファイルを`.bash_profile`に読み込みます。次の例を参照してください。
 
 ```shell
 tiup completion bash > ~/.tiup.completion.bash
@@ -36,10 +36,10 @@ source '$HOME/.tiup.completion.bash'
 source $HOME/.bash_profile
 ```
 
-### zsh
+### zsh {#zsh}
 
 ```shell
 tiup completion zsh > "${fpath[1]}/_tiup"
 ```
 
-[<< Back to the previous page - TiUP Reference command list](/tiup/tiup-reference.md#command-list)
+[&lt;&lt; 前のページに戻る - TiUPリファレンス コマンド一覧](/tiup/tiup-reference.md#command-list)

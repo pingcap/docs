@@ -3,36 +3,36 @@ title: PD Recover User Guide
 summary: Use PD Recover to recover a PD cluster which cannot start or provide services normally.
 ---
 
-# PD Recover User Guide
+# PD リカバリ ユーザー ガイド {#pd-recover-user-guide}
 
-PD Recover is a disaster recovery tool of PD, used to recover the PD cluster which cannot start or provide services normally.
+PD Recover は PD のディザスタリカバリツールであり、正常にサービスを開始または提供できない PD クラスタをリカバリするために使用されます。
 
-## Compile from source code
+## ソースコードからコンパイル {#compile-from-source-code}
 
-+ [Go](https://golang.org/) Version 1.19 or later is required because the Go modules are used.
-+ In the root directory of the [PD project](https://github.com/pingcap/pd), use the `make pd-recover` command to compile and generate `bin/pd-recover`.
+-   [行け](https://golang.org/) Go モジュールを使用するため、バージョン 1.19 以降が必要です。
+-   [PDプロジェクト](https://github.com/pingcap/pd)のルート ディレクトリで、 `make pd-recover`コマンドを使用して`bin/pd-recover`をコンパイルおよび生成します。
 
-> **Note:**
+> **ノート：**
 >
-> Generally, you do not need to compile source code because the PD Control tool already exists in the released binary or Docker. However, developer users can refer to the instructions above for compiling source code.
+> 通常、 PD Controlツールはリリース済みのバイナリまたは Docker に既に存在するため、ソース コードをコンパイルする必要はありません。ただし、開発者ユーザーは、ソース コードのコンパイルについて上記の手順を参照できます。
 
-## Download TiDB Toolkit
+## TiDB Toolkitをダウンロード {#download-tidb-toolkit}
 
-The PD Recover installation package is included in the TiDB Toolkit. To download the TiDB Toolkit, see [Download TiDB Tools](/download-ecosystem-tools.md).
+PD Recover インストール パッケージはTiDB Toolkitに含まれています。 TiDB Toolkitをダウンロードするには、 [TiDB ツールをダウンロード](/download-ecosystem-tools.md)を参照してください。
 
-## Quick Start
+## クイックスタート {#quick-start}
 
-This section describes how to use PD Recover to recover a PD cluster.
+このセクションでは、PD Recover を使用して PD クラスターを回復する方法について説明します。
 
-### Get cluster ID
+### クラスター ID を取得する {#get-cluster-id}
 
-The cluster ID can be obtained from the log of PD, TiKV or TiDB. To get the cluster ID, you can view the log directly on the server.
+クラスタ ID は、PD、TiKV、または TiDB のログから取得できます。クラスター ID を取得するには、サーバーで直接ログを表示できます。
 
-#### Get cluster ID from PD log (recommended)
+#### PD ログからクラスター ID を取得する (推奨) {#get-cluster-id-from-pd-log-recommended}
 
-To get the cluster ID from the PD log, run the following command:
+PD ログからクラスター ID を取得するには、次のコマンドを実行します。
 
-{{< copyable "shell-regular" >}}
+{{< copyable "" >}}
 
 ```bash
 cat {{/path/to}}/pd.log | grep "init cluster id"
@@ -43,11 +43,11 @@ cat {{/path/to}}/pd.log | grep "init cluster id"
 ...
 ```
 
-#### Get cluster ID from TiDB log
+#### TiDB ログからクラスター ID を取得する {#get-cluster-id-from-tidb-log}
 
-To get the cluster ID from the TiDB log, run the following command:
+TiDB ログからクラスター ID を取得するには、次のコマンドを実行します。
 
-{{< copyable "shell-regular" >}}
+{{< copyable "" >}}
 
 ```bash
 cat {{/path/to}}/tidb.log | grep "init cluster id"
@@ -58,11 +58,11 @@ cat {{/path/to}}/tidb.log | grep "init cluster id"
 ...
 ```
 
-#### Get cluster ID from TiKV log
+#### TiKV ログからクラスター ID を取得する {#get-cluster-id-from-tikv-log}
 
-To get the cluster ID from the TiKV log, run the following command:
+TiKV ログからクラスター ID を取得するには、次のコマンドを実行します。
 
-{{< copyable "shell-regular" >}}
+{{< copyable "" >}}
 
 ```bash
 cat {{/path/to}}/tikv.log | grep "connect to PD cluster"
@@ -73,19 +73,19 @@ cat {{/path/to}}/tikv.log | grep "connect to PD cluster"
 ...
 ```
 
-### Get allocated ID
+### 割り当てられた ID を取得する {#get-allocated-id}
 
-The allocated ID value you specify must be larger than the currently largest allocated ID value. To get allocated ID, you can either get it from the monitor, or view the log directly on the server.
+指定する割り当て済み ID 値は、現在割り当てられている最大の ID 値よりも大きくする必要があります。割り当てられた ID を取得するには、モニターから取得するか、サーバーで直接ログを表示します。
 
-#### Get allocated ID from the monitor (recommended)
+#### モニターから割り当てられた ID を取得する (推奨) {#get-allocated-id-from-the-monitor-recommended}
 
-To get allocated ID from the monitor, you need to make sure that the metrics you are viewing are the metrics of **the last PD leader**, and you can get the largest allocated ID from the **Current ID allocation** panel in PD dashboard.
+モニターから割り当てられた ID を取得するには、表示しているメトリックが**最後の PD リーダー**のメトリックであることを確認する必要があり、PD ダッシュボードの<strong>現在の ID 割り当て</strong>パネルから最大の割り当て ID を取得できます。
 
-#### Get allocated ID from PD log
+#### PD ログから割り当てられた ID を取得する {#get-allocated-id-from-pd-log}
 
-To get the allocated ID from the PD log, you need to make sure that the log you are viewing is the log of **the last PD leader**, and you can get the maximum allocated ID by running the following command:
+PD ログから割り当てられた ID を取得するには、表示しているログが**最後の PD リーダー**のログであることを確認する必要があります。次のコマンドを実行すると、割り当てられた最大 ID を取得できます。
 
-{{< copyable "shell-regular" >}}
+{{< copyable "" >}}
 
 ```bash
 cat {{/path/to}}/pd*.log | grep "idAllocator allocates a new id" |  awk -F'=' '{print $2}' | awk -F']' '{print $1}' | sort -r -n | head -n 1
@@ -96,32 +96,32 @@ cat {{/path/to}}/pd*.log | grep "idAllocator allocates a new id" |  awk -F'=' '{
 ...
 ```
 
-Or you can simply run the above command in all PD servers to find the largest one.
+または、すべての PD サーバーで上記のコマンドを実行して、最大の PD サーバーを見つけることもできます。
 
-### Deploy a new PD cluster
+### 新しい PD クラスターをデプロイする {#deploy-a-new-pd-cluster}
 
-Before deploying a new PD cluster, you need to stop the the existing PD cluster and then delete the previous data directory or specify a new data directory using `--data-dir`.
+新しい PD クラスターをデプロイする前に、既存の PD クラスターを停止してから、以前のデータ ディレクトリを削除するか、 `--data-dir`を使用して新しいデータ ディレクトリを指定する必要があります。
 
-### Use pd-recover
+### pd-recover を使用する {#use-pd-recover}
 
-You only need to run `pd-recover` on one PD node.
+1 つの PD ノードで`pd-recover`つだけ実行する必要があります。
 
-{{< copyable "shell-regular" >}}
+{{< copyable "" >}}
 
 ```bash
 ./pd-recover -endpoints http://10.0.1.13:2379 -cluster-id 6747551640615446306 -alloc-id 10000
 ```
 
-### Restart the whole cluster
+### クラスタ全体を再起動します {#restart-the-whole-cluster}
 
-When you see the prompted information that the recovery is successful, restart the whole cluster.
+リカバリが成功したというプロンプトが表示されたら、クラスタ全体を再起動します。
 
-## FAQ
+## FAQ {#faq}
 
-### Multiple cluster IDs are found when getting the cluster ID
+### クラスター ID の取得時に複数のクラスター ID が検出される {#multiple-cluster-ids-are-found-when-getting-the-cluster-id}
 
-When a PD cluster is created, a new cluster ID is generated. You can determine the cluster ID of the old cluster by viewing the log.
+PD クラスターが作成されると、新しいクラスター ID が生成されます。ログを表示することで、古いクラスターのクラスター ID を特定できます。
 
-### The error `dial tcp 10.0.1.13:2379: connect: connection refused` is returned when executing `pd-recover`
+### <code>pd-recover</code>を実行すると、エラー<code>dial tcp 10.0.1.13:2379: connect: connection refused</code>されました。 {#the-error-code-dial-tcp-10-0-1-13-2379-connect-connection-refused-code-is-returned-when-executing-code-pd-recover-code}
 
-The PD service is required when you execute `pd-recover`. Deploy and start the PD cluster before you use PD Recover.
+`pd-recover`を実行する場合、PD サービスが必要です。 PD Recover を使用する前に、PD クラスターをデプロイして開始します。

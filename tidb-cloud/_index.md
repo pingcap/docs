@@ -5,13 +5,13 @@ hide_sidebar: true
 hide_commit: true
 ---
 
-<LearningPathContainer platform="tidb-cloud" title="TiDB Cloud" subTitle="TiDB Cloud is a fully-managed Database-as-a-Service (DBaaS) that brings everything great about TiDB to your cloud. Find the guide, samples, and references you need to use TiDB Cloud.">
+<LearningPathContainer platform="tidb-cloud" title="TiDB クラウド" subTitle="TiDB Cloud is a fully-managed Database-as-a-Service (DBaaS) that brings everything great about TiDB to your cloud. Find the guide, samples, and references you need to use TiDB Cloud.">
 
 <LearningPath label="Learn" icon="cloud1">
 
-[Why TiDB Cloud](https://docs.pingcap.com/tidbcloud/tidb-cloud-intro)
+[TiDB Cloudを選ぶ理由](https://docs.pingcap.com/tidbcloud/tidb-cloud-intro)
 
-[Architecture](https://docs.pingcap.com/tidbcloud/tidb-cloud-intro#architecture)
+[アーキテクチャ](https://docs.pingcap.com/tidbcloud/tidb-cloud-intro#architecture)
 
 [FAQ](https://docs.pingcap.com/tidbcloud/tidb-cloud-faq)
 
@@ -19,123 +19,123 @@ hide_commit: true
 
 <LearningPath label="Try" icon="cloud5">
 
-[Try Out TiDB Cloud](https://docs.pingcap.com/tidbcloud/tidb-cloud-quickstart)
+[TiDB Cloudを試す](https://docs.pingcap.com/tidbcloud/tidb-cloud-quickstart)
 
-[Try Out HTAP](https://docs.pingcap.com/tidbcloud/tidb-cloud-htap-quickstart)
+[HTAP を試す](https://docs.pingcap.com/tidbcloud/tidb-cloud-htap-quickstart)
 
-[Proof of Concept](https://docs.pingcap.com/tidbcloud/tidb-cloud-poc)
+[コンセプトの証明](https://docs.pingcap.com/tidbcloud/tidb-cloud-poc)
 
 </LearningPath>
 
 <LearningPath label="Develop" icon="doc8">
 
-[Developer Guide Overview](https://docs.pingcap.com/tidbcloud/dev-guide-overview)
+[開発者ガイドの概要](https://docs.pingcap.com/tidbcloud/dev-guide-overview)
 
-[Quick Start](https://docs.pingcap.com/tidbcloud/dev-guide-build-cluster-in-cloud)
+[クイックスタート](https://docs.pingcap.com/tidbcloud/dev-guide-build-cluster-in-cloud)
 
-[Example Application](https://docs.pingcap.com/tidbcloud/dev-guide-sample-application-spring-boot)
+[適用例](https://docs.pingcap.com/tidbcloud/dev-guide-sample-application-spring-boot)
 
 </LearningPath>
 
 <LearningPath label="Use" icon="cloud7">
 
-[Create a Cluster](https://docs.pingcap.com/tidbcloud/create-tidb-cluster)
+[クラスタを作成する](https://docs.pingcap.com/tidbcloud/create-tidb-cluster)
 
-[Connect to a Cluster](https://docs.pingcap.com/tidbcloud/connect-to-tidb-cluster)
+[クラスタに接続する](https://docs.pingcap.com/tidbcloud/connect-to-tidb-cluster)
 
-[Use an HTAP Cluster](https://docs.pingcap.com/tidbcloud/tiflash-overview)
+[HTAPクラスタを使用する](https://docs.pingcap.com/tidbcloud/tiflash-overview)
 
-[Scale a Cluster](https://docs.pingcap.com/tidbcloud/scale-tidb-cluster)
+[クラスタのスケーリング](https://docs.pingcap.com/tidbcloud/scale-tidb-cluster)
 
-[Pause or Resume a TiDB Cluster](https://docs.pingcap.com/tidbcloud/pause-or-resume-tidb-cluster)
+[TiDBクラスタを一時停止または再開する](https://docs.pingcap.com/tidbcloud/pause-or-resume-tidb-cluster)
 
-[Use API (beta)](https://docs.pingcap.com/tidbcloud/api-overview)
+[API (ベータ) を使用する](https://docs.pingcap.com/tidbcloud/api-overview)
 
 </LearningPath>
 
 <LearningPath label="Migrate" icon="cloud3">
 
-[Import Sample Data](https://docs.pingcap.com/tidbcloud/import-sample-data)
+[サンプル データのインポート](https://docs.pingcap.com/tidbcloud/import-sample-data)
 
-[From MySQL](https://docs.pingcap.com/tidbcloud/migrate-data-into-tidb)
+[MySQL から](https://docs.pingcap.com/tidbcloud/migrate-data-into-tidb)
 
-[From Amazon Aurora MySQL](https://docs.pingcap.com/tidbcloud/migrate-from-aurora-bulk-import)
+[Amazon Aurora MySQL から](https://docs.pingcap.com/tidbcloud/migrate-from-aurora-bulk-import)
 
-[From Amazon S3 or GCS](https://docs.pingcap.com/tidbcloud/migrate-from-amazon-s3-or-gcs)
+[Amazon S3 または GCS から](https://docs.pingcap.com/tidbcloud/migrate-from-amazon-s3-or-gcs)
 
-[From CSV Files](https://docs.pingcap.com/tidbcloud/import-csv-files)
+[CSV ファイルから](https://docs.pingcap.com/tidbcloud/import-csv-files)
 
-[From Apache Parquet Files](https://docs.pingcap.com/tidbcloud/import-csv-files)
+[Apache Parquet ファイルから](https://docs.pingcap.com/tidbcloud/import-csv-files)
 
 </LearningPath>
 
 <LearningPath label="Monitor" icon="cloud6">
 
-[Status and Metrics](https://docs.pingcap.com/tidbcloud/monitor-tidb-cluster)
+[ステータスと指標](https://docs.pingcap.com/tidbcloud/monitor-tidb-cluster)
 
-[Built-in Monitoring](https://docs.pingcap.com/tidbcloud/built-in-monitoring)
+[ビルトインモニタリング](https://docs.pingcap.com/tidbcloud/built-in-monitoring)
 
-[Built-in Alerting](https://docs.pingcap.com/tidbcloud/monitor-built-in-alerting)
+[組み込みアラート](https://docs.pingcap.com/tidbcloud/monitor-built-in-alerting)
 
 </LearningPath>
 
 <LearningPath label="Tune" icon="tidb-cloud-tune">
 
-[Tuning Overview](https://docs.pingcap.com/tidbcloud/tidb-cloud-tune-performance-overview)
+[チューニングの概要](https://docs.pingcap.com/tidbcloud/tidb-cloud-tune-performance-overview)
 
-[Analyze Performance](https://docs.pingcap.com/tidbcloud/tune-performance)
+[パフォーマンスを分析する](https://docs.pingcap.com/tidbcloud/tune-performance)
 
-[Tune SQL Performance](https://docs.pingcap.com/tidbcloud/tidb-cloud-sql-tuning-overview)
+[SQL パフォーマンスの調整](https://docs.pingcap.com/tidbcloud/tidb-cloud-sql-tuning-overview)
 
-[Tune TiFlash Performance](https://docs.pingcap.com/tidbcloud/tune-tiflash-performance)
+[TiFlashパフォーマンスの調整](https://docs.pingcap.com/tidbcloud/tune-tiflash-performance)
 
 </LearningPath>
 
 <LearningPath label="Manage Access" icon="users">
 
-[Manage Passwords](https://docs.pingcap.com/tidbcloud/manage-user-access#manage-user-passwords)
+[パスワードの管理](https://docs.pingcap.com/tidbcloud/manage-user-access#manage-user-passwords)
 
-[Manage Profiles](https://docs.pingcap.com/tidbcloud/manage-user-access#manage-user-profiles)
+[プロファイルの管理](https://docs.pingcap.com/tidbcloud/manage-user-access#manage-user-profiles)
 
-[View Organization and Project](https://docs.pingcap.com/tidbcloud/manage-user-access#view-the-organization-and-project)
+[組織とプロジェクトをビュー](https://docs.pingcap.com/tidbcloud/manage-user-access#view-the-organization-and-project)
 
-[Invite a Member](https://docs.pingcap.com/tidbcloud/manage-user-access#invite-an-organization-member)
+[メンバーを招待する](https://docs.pingcap.com/tidbcloud/manage-user-access#invite-an-organization-member)
 
-[Configure Roles](https://docs.pingcap.com/tidbcloud/manage-user-access#configure-member-roles)
+[役割の構成](https://docs.pingcap.com/tidbcloud/manage-user-access#configure-member-roles)
 
-[Configure Security Settings](https://docs.pingcap.com/tidbcloud/configure-security-settings)
+[セキュリティ設定の構成](https://docs.pingcap.com/tidbcloud/configure-security-settings)
 
 </LearningPath>
 
 <LearningPath label="Billing" icon="cloud2">
 
-[Pricing](https://en.pingcap.com/tidb-cloud-pricing/)
+[価格](https://en.pingcap.com/tidb-cloud-pricing/)
 
-[Invoices](https://docs.pingcap.com/tidbcloud/tidb-cloud-billing#invoices)
+[請求書](https://docs.pingcap.com/tidbcloud/tidb-cloud-billing#invoices)
 
-[Credits](https://docs.pingcap.com/tidbcloud/tidb-cloud-billing#credits)
+[クレジット](https://docs.pingcap.com/tidbcloud/tidb-cloud-billing#credits)
 
 </LearningPath>
 
 <LearningPath label="Integrations" icon="cloud4">
 
-[Datadog](https://docs.pingcap.com/tidbcloud/monitor-datadog-integration)
+[データドッグ](https://docs.pingcap.com/tidbcloud/monitor-datadog-integration)
 
-[Prometheus and Grafana](https://docs.pingcap.com/tidbcloud/monitor-prometheus-and-grafana-integration)
+[プロメテウスとグラファナ](https://docs.pingcap.com/tidbcloud/monitor-prometheus-and-grafana-integration)
 
-[Terraform](https://docs.pingcap.com/tidbcloud/terraform-tidbcloud-provider-overview)
+[テラフォーム](https://docs.pingcap.com/tidbcloud/terraform-tidbcloud-provider-overview)
 
-[Vercel](https://docs.pingcap.com/tidbcloud/integrate-tidbcloud-with-vercel)
+[ヴェルセル](https://docs.pingcap.com/tidbcloud/integrate-tidbcloud-with-vercel)
 
 </LearningPath>
 
 <LearningPath label="Reference" icon="cloud-dev">
 
-[System Variables](https://docs.pingcap.com/tidbcloud/system-variables)
+[システム変数](https://docs.pingcap.com/tidbcloud/system-variables)
 
-[Release Notes](https://docs.pingcap.com/tidbcloud/release-notes-2022)
+[リリースノート](https://docs.pingcap.com/tidbcloud/release-notes-2022)
 
-[SQL Reference](https://docs.pingcap.com/tidbcloud/basic-sql-operations)
+[SQL リファレンス](https://docs.pingcap.com/tidbcloud/basic-sql-operations)
 
 </LearningPath>
 

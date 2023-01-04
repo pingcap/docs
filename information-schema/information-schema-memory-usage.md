@@ -3,9 +3,9 @@ title: MEMORY_USAGE
 summary: Learn the `MEMORY_USAGE` information_schema system table.
 ---
 
-# MEMORY_USAGE
+# メモリ使用量 {#memory-usage}
 
-The `MEMORY_USAGE` table describes the current memory usage of the current TiDB instance.
+`MEMORY_USAGE`番目の表は、現在の TiDB インスタンスの現在のメモリ使用量を示しています。
 
 ```sql
 USE information_schema;
@@ -31,7 +31,7 @@ DESC memory_usage;
 11 rows in set (0.000 sec)
 ```
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 SELECT * FROM information_schema.memory_usage;
@@ -46,16 +46,16 @@ SELECT * FROM information_schema.memory_usage;
 2 rows in set (0.002 sec)
 ```
 
-The columns in the `MEMORY_USAGE` table are described as follows:
+`MEMORY_USAGE`表の列は、次のように説明されています。
 
-* MEMORY_TOTAL: The total available memory of TiDB, in bytes.
-* MEMORY_LIMIT: The memory usage limit of TiDB, in bytes. The value is the same as that of the system variable [`tidb_server_memory_limit`](/system-variables.md#tidb_server_memory_limit-new-in-v640).
-* MEMORY_CURRENT: The current memory usage of TiDB, in bytes.
-* MEMORY_MAX_USED: The maximum memory usage of TiDB from the time it is started to the current time, in bytes.
-* CURRENT_OPS: "shrinking" | null. "shrinking" means that TiDB is performing operations that shrink memory usage.
-* SESSION_KILL_LAST: The timestamp of the last time a session is terminated.
-* SESSION_KILL_TOTAL: The number of times sessions are terminated, from the time TiDB is started to the current time.
-* GC_LAST: The timestamp of the last time Golang GC is triggered by memory usage.
-* GC_TOTAL: The number of times Golang GC is triggered by memory usage, from the time TiDB is started to the current time.
-* DISK_USAGE: The disk usage for the current data spill operation, in bytes.
-* QUERY_FORCE_DISK: The number of times data is spilled to disk, from the time TiDB is started to the current time.
+-   MEMORY_TOTAL: TiDB の使用可能なメモリの合計 (バイト単位)。
+-   MEMORY_LIMIT: TiDB のメモリ使用制限 (バイト単位)。値は、システム変数[`tidb_server_memory_limit`](/system-variables.md#tidb_server_memory_limit-new-in-v640)の値と同じです。
+-   MEMORY_CURRENT: TiDB の現在のメモリ使用量 (バイト単位)。
+-   MEMORY_MAX_USED: TiDB の起動時から現在までの最大メモリ使用量 (バイト単位)。
+-   CURRENT_OPS: &quot;縮小&quot; |ヌル。 「縮小」とは、TiDB がメモリ使用量を縮小する操作を実行していることを意味します。
+-   SESSION_KILL_LAST: セッションが最後に終了したときのタイムスタンプ。
+-   SESSION_KILL_TOTAL: TiDB が開始されてから現在までにセッションが終了した回数。
+-   GC_LAST: メモリ使用量によって最後にGolang GC がトリガーされたときのタイムスタンプ。
+-   GC_TOTAL: TiDB が開始されてから現在までに、メモリ使用量によってGolang GC がトリガーされた回数。
+-   DISK_USAGE: 現在のデータ スピル操作のディスク使用量 (バイト単位)。
+-   QUERY_FORCE_DISK: TiDB が開始されてから現在の時刻までに、データがディスクにスピルされた回数。

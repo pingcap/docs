@@ -3,69 +3,69 @@ title: TiDB Dashboard Log Search Page
 summary: Learn how to search logs of all nodes using the log search page of TiDB Dashboard.
 ---
 
-# TiDB Dashboard Log Search Page
+# TiDB ダッシュボード ログ検索ページ {#tidb-dashboard-log-search-page}
 
-On the log search page of TiDB Dashboard, you can search logs of all nodes, preview the search result and download logs.
+TiDB ダッシュボードのログ検索ページでは、すべてのノードのログを検索し、検索結果をプレビューしてログをダウンロードできます。
 
-## Access the page
+## ページにアクセスする {#access-the-page}
 
-After logging into TiDB Dashboard, you can click **Search Logs** to enter this log search homepage.
+TiDB ダッシュボードにログインした後、[ログの**検索**] をクリックして、このログ検索ホームページに入ることができます。
 
 ![Log Search Page](/media/dashboard/dashboard-log-search-home.png)
 
-This page provides the following search parameters:
+このページには、次の検索パラメータが用意されています。
 
-- Time range: Specifies the time range of logs to search. The default value is the recent 30 minutes.
-- Log level: Specifies the minimum log level. All logs above this log level are searched. The default value is the `INFO`.
-- Keywords: The parameter is optional and its value can be any legal string. Multiple keywords are separated by a space. Regular expressions are supported (case-insensitive).
-- Components: Selects the cluster components to search, which are multi-select and non-empty. By default, all components are selected.
+-   時間範囲: 検索するログの時間範囲を指定します。デフォルト値は最近の 30 分です。
+-   ログ レベル: 最小ログ レベルを指定します。このログ レベルを超えるすべてのログが検索されます。デフォルト値は`INFO`です。
+-   キーワード: パラメータはオプションであり、その値は任意の正当な文字列にすることができます。複数のキーワードはスペースで区切ります。正規表現がサポートされています (大文字と小文字は区別されません)。
+-   コンポーネント: 検索するクラスタ コンポーネントを選択します。これは複数選択で空ではありません。デフォルトでは、すべてのコンポーネントが選択されています。
 
-After clicking the **Search** button, you enter the detail page of the search results.
+**検索**ボタンをクリックすると、検索結果の詳細ページに入ります。
 
-## Page of search result
+## 検索結果のページ {#page-of-search-result}
 
-The following image shows the page of the search results.
+次の画像は、検索結果のページを示しています。
 
 ![Search result](/media/dashboard/dashboard-log-search-result.png)
 
-This page consists of the following three areas:
+このページは、次の 3 つの領域で構成されています。
 
-- Parameter options (area 1 in the image above): These options are the same as the parameter options on the search homepage. You can re-select the parameters in the boxes and start a new search.
-- Progress (area 2 in the image above): The current search progress is shown on the right side of this page, including the log search status and statistics of each node.
-- Search results (area 3 in the image above):
-    - Time: The time at which the log is generated. The time zone is the same as the time zone of the front-end user.
-    - Level: log level.
-    - Component: Shows the component name and its address.
-    - Log: The body part of each log record, excluding the log time and log level. Logs that are too long are automatically truncated. Click a row to expand the full content. The full log can show up to 512 characters.
+-   パラメータ オプション (上の画像の領域 1): これらのオプションは、検索ホームページのパラメータ オプションと同じです。ボックス内のパラメータを再選択して、新しい検索を開始できます。
+-   進行状況 (上の画像の領域 2): 現在の検索の進行状況が、このページの右側に表示されます。これには、各ノードのログ検索ステータスと統計が含まれます。
+-   検索結果 (上の画像の領域 3):
+    -   時刻: ログが生成された時刻。タイム ゾーンは、フロントエンド ユーザーのタイム ゾーンと同じです。
+    -   レベル: ログ レベル。
+    -   コンポーネント:コンポーネント名とそのアドレスを表示します。
+    -   ログ: ログ時刻とログ レベルを除く、各ログ レコードの本文部分。長すぎるログは自動的に切り捨てられます。行をクリックすると、コンテンツ全体が展開されます。完全なログは最大 512 文字まで表示できます。
 
-> **Note:**
+> **ノート：**
 >
-> At most 500 search results can be previewed on this page. You can get the complete search results by downloading them.
+> このページでは、最大 500 件の検索結果をプレビューできます。それらをダウンロードすると、完全な検索結果を取得できます。
 
-### Search progress
+### 検索の進行状況 {#search-progress}
 
-In the search progress area, a search on a node is called a search task. A search task might have the following statuses:
+検索進行状況領域では、ノードでの検索を検索タスクと呼びます。検索タスクには次のステータスがあります。
 
-- Running: After starting the search, all tasks enter the **Running** status.
-- Success: After the task is completed, it automatically enters the **Success** status. At this time, the logs have been cached in the local disk where the Dashboard backend is located, and can be provided to the frontend to download.
-- Failed: When you cancel the search task, or the task exits with an error, the task enters the **Failed** status. When the task fails, the local temporary files are automatically cleaned.
+-   実行中: 検索を開始すると、すべてのタスクが**実行中**ステータスになります。
+-   成功: タスクが完了すると、自動的に**成功**ステータスになります。この時点で、ログはダッシュボード バックエンドが配置されているローカル ディスクにキャッシュされており、フロントエンドに提供してダウンロードできます。
+-   失敗: 検索タスクをキャンセルするか、タスクがエラーで終了すると、タスクは**失敗**ステータスになります。タスクが失敗すると、ローカルの一時ファイルは自動的に消去されます。
 
-The search progress area has the following three control buttons:
+検索の進行状況領域には、次の 3 つのコントロール ボタンがあります。
 
-- **Download Selected**: Click this button to download logs of the selected components (only the completed ones can be selected), and you will get a tar file. Unzip this tar file to get one or more zip files (each component corresponds to a zip file). Unzip the zip file(s) to get the log text file.
-- **Cancel**: Click this button to cancel all running tasks. You can click this button only when there are running tasks.
-- **Retry**: Click this button to retry all failed tasks. You can click this button only when there are failed tasks and no running tasks.
+-   **Download Selected** : このボタンをクリックして、選択したコンポーネントのログをダウンロードし (完了したもののみを選択できます)、tar ファイルを取得します。この tar ファイルを解凍して、1 つ以上の zip ファイルを取得します (各コンポーネントは zip ファイルに対応します)。 zip ファイルを解凍して、ログ テキスト ファイルを取得します。
+-   **キャンセル**: このボタンをクリックして、実行中のすべてのタスクをキャンセルします。このボタンは、実行中のタスクがある場合にのみクリックできます。
+-   **再試行**: このボタンをクリックして、失敗したすべてのタスクを再試行します。失敗したタスクがあり、実行中のタスクがない場合にのみ、このボタンをクリックできます。
 
-## Search history list
+## 検索履歴一覧 {#search-history-list}
 
-Click the **View search history** link on the log search homepage to enter page of search history list:
+ログ検索ホームページの**[検索履歴をビュー]**リンクをクリックして、検索履歴リストのページに入ります。
 
 ![Search history entry](/media/dashboard/dashboard-log-search-history-entry.png)
 
 ![Search history list](/media/dashboard/dashboard-log-search-history.png)
 
-The history list shows the time range, log level, components, keywords, and search status of each search log. Click the **Detail** link in the **Action** column to see the search result details:
+履歴リストには、各検索ログの時間範囲、ログ レベル、コンポーネント、キーワード、および検索ステータスが表示されます。 [**アクション**] 列の [<strong>詳細</strong>] リンクをクリックして、検索結果の詳細を表示します。
 
-You can delete the search history that you no longer need. Click **Delete All** in the upper right corner, or select the rows to be deleted and then click **Delete selected** to delete the history:
+不要になった検索履歴を削除できます。右上隅にある**[すべて削除] を**クリックするか、削除する行を選択してから<strong>[選択項目</strong>を削除] をクリックして履歴を削除します。
 
 ![Delete search history](/media/dashboard/dashboard-log-search-delete-history.png)

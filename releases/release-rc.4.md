@@ -2,54 +2,54 @@
 title: TiDB RC4 Release Notes
 ---
 
-# TiDB RC4 Release Notes
+# TiDB RC4 リリースノート {#tidb-rc4-release-notes}
 
-On August 4, 2017, TiDB RC4 is released! This release is focused on MySQL compatibility, SQL optimization, stability, and performance.
+2017 年 8 月 4 日、TiDB RC4 がリリースされました！このリリースは、MySQL の互換性、SQL の最適化、安定性、およびパフォーマンスに重点を置いています。
 
-## Highlight
+## ハイライト {#highlight}
 
-+ For performance, the write performance is improved significantly, and the computing task scheduling supports prioritizing to avoid the impact of OLAP on OLTP.
-+ The optimizer is revised for a more accurate query cost estimating and for an automatic choice of the `Join` physical operator based on the cost.
-+ Many enhancements have been introduced to be more compatible with MySQL.
-+ TiSpark is now released to better support the OLAP business scenarios. You can now use Spark to access the data in TiKV.
+-   パフォーマンスについては、書き込みパフォーマンスが大幅に向上し、コンピューティング タスクのスケジューリングが優先順位付けをサポートして、OLTP に対する OLAP の影響を回避します。
+-   オプティマイザーは、より正確なクエリ コストの見積もりと、コストに基づく`Join`の物理演算子の自動選択のために改訂されています。
+-   MySQL との互換性を高めるために、多くの拡張機能が導入されました。
+-   OLAP ビジネス シナリオをより適切にサポートするために、TiSpark がリリースされました。 Spark を使用して TiKV のデータにアクセスできるようになりました。
 
-## Detailed updates
+## 詳細な更新 {#detailed-updates}
 
-### TiDB
+### TiDB {#tidb}
 
-+ The SQL query optimizer refactoring:
-    - Better support for TopN queries
-    - Support the automatic choice of the of the `Join` physical operator based on the cost
-    - Improved Projection Elimination
-+ The version check of schema is based on Table to avoid the impact of DDL on the ongoing transactions
-+ Support `BatchIndexJoin`
-+ Improve the `Explain` statement
-+ Improve the `Index Scan` performance
-+ Many enhancements have been introduced to be more compatible with MySQL
-+ Support the JSON type and operations
-+ Support the configuration of query prioritizing and isolation level
+-   SQL クエリ オプティマイザーのリファクタリング:
+    -   TopN クエリのサポートの向上
+    -   コストに基づいた`Join`の物理オペレーターの自動選択をサポート
+    -   突起除去の改善
+-   進行中のトランザクションに対する DDL の影響を回避するために、スキーマのバージョン チェックはテーブルに基づいています。
+-   サポート`BatchIndexJoin`
+-   `Explain`ステートメントを改善する
+-   `Index Scan`パフォーマンスを向上させる
+-   MySQL との互換性を高めるために、多くの機能強化が導入されました。
+-   JSON 型と操作をサポート
+-   クエリの優先順位と分離レベルの構成をサポート
 
-### Placement Driver (PD)
+### プレースメントDriver(PD) {#placement-driver-pd}
 
-+ Support using PD to set the TiKV location labels
-+ Optimize the scheduler
-    - PD is now supported to initialize the scheduling commands to TiKV.
-    - Accelerate the response speed of the region heartbeat.
-    - Optimize the `balance` algorithm
-+ Optimize data loading to speed up failover
+-   PD を使用した TiKV ロケーション ラベルの設定のサポート
+-   スケジューラを最適化する
+    -   スケジューリング コマンドを TiKV に初期化する PD がサポートされるようになりました。
+    -   領域ハートビートの応答速度を加速します。
+    -   `balance`アルゴリズムを最適化する
+-   データの読み込みを最適化してフェイルオーバーを高速化
 
-### TiKV
+### TiKV {#tikv}
 
-+ Support the configuration of query prioritizing
-+ Support the RC isolation level
-+ Improve Jepsen test results and the stability
-+ Support Document Store
-+ Coprocessor now supports more pushdown functions
-+ Improve the performance and stability
+-   クエリの優先順位付けの構成をサポート
+-   RC分離レベルをサポート
+-   Jepsen テストの結果と安定性の向上
+-   サポート ドキュメント ストア
+-   Coprocessorは、より多くのプッシュダウン関数をサポートするようになりました
+-   パフォーマンスと安定性の向上
 
-### TiSpark Beta Release
+### TiSpark ベータ版リリース {#tispark-beta-release}
 
-+ Implement the prediction pushdown
-+ Implement the aggregation pushdown
-+ Implement range pruning
-+ Capable of running full set of TPC-H except one query that needs view support
+-   予測プッシュダウンを実装する
+-   集約プッシュダウンを実装する
+-   範囲の刈り込みを実装する
+-   ビューのサポートが必要な 1 つのクエリを除いて、TPC-H の完全なセットを実行できます

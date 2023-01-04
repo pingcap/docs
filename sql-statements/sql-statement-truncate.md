@@ -3,27 +3,27 @@ title: TRUNCATE | TiDB SQL Statement Reference
 summary: An overview of the usage of TRUNCATE for the TiDB database.
 ---
 
-# TRUNCATE
+# トランケート {#truncate}
 
-The `TRUNCATE` statement removes all data from the table in a non-transactional way. `TRUNCATE` can be thought of as semantically the same as `DROP TABLE` + `CREATE TABLE` with the previous definition.
+`TRUNCATE`ステートメントは、非トランザクションの方法でテーブルからすべてのデータを削除します。 `TRUNCATE`は、前の定義の`DROP TABLE` + `CREATE TABLE`と意味的に同じと考えることができます。
 
-Both `TRUNCATE TABLE tableName` and `TRUNCATE tableName` are valid syntax.
+`TRUNCATE TABLE tableName`と`TRUNCATE tableName`の両方が有効な構文です。
 
-## Synopsis
+## あらすじ {#synopsis}
 
 **TruncateTableStmt:**
 
 ![TruncateTableStmt](/media/sqlgram/TruncateTableStmt.png)
 
-**OptTable:**
+**オプション テーブル:**
 
 ![OptTable](/media/sqlgram/OptTable.png)
 
-**TableName:**
+**テーブル名:**
 
 ![TableName](/media/sqlgram/TableName.png)
 
-## Examples
+## 例 {#examples}
 
 ```sql
 mysql> CREATE TABLE t1 (a INT NOT NULL PRIMARY KEY);
@@ -59,13 +59,13 @@ mysql> TRUNCATE TABLE t1;
 Query OK, 0 rows affected (0.11 sec)
 ```
 
-## MySQL compatibility
+## MySQL の互換性 {#mysql-compatibility}
 
-This statement is understood to be fully compatible with MySQL. Any compatibility differences should be [reported via an issue](https://github.com/pingcap/tidb/issues/new/choose) on GitHub.
+このステートメントは、MySQL と完全に互換性があると理解されています。互換性の違いは、GitHub で[問題を介して報告された](https://github.com/pingcap/tidb/issues/new/choose)にする必要があります。
 
-## See also
+## こちらもご覧ください {#see-also}
 
-* [DROP TABLE](/sql-statements/sql-statement-drop-table.md)
-* [DELETE](/sql-statements/sql-statement-delete.md)
-* [CREATE TABLE](/sql-statements/sql-statement-create-table.md)
-* [SHOW CREATE TABLE](/sql-statements/sql-statement-show-create-table.md)
+-   [ドロップテーブル](/sql-statements/sql-statement-drop-table.md)
+-   [消去](/sql-statements/sql-statement-delete.md)
+-   [テーブルを作成](/sql-statements/sql-statement-create-table.md)
+-   [テーブルの作成を表示](/sql-statements/sql-statement-show-create-table.md)

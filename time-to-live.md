@@ -3,30 +3,29 @@ title: Periodically Delete Data Using Time to Live
 summary: Use Time to Live to automatically expire and delete old data.
 ---
 
-# Periodically Delete Expired Data Using TTL (Time to Live)
+# TTL (Time to Live) を使用して期限切れのデータを定期的に削除する {#periodically-delete-expired-data-using-ttl-time-to-live}
 
-Time to live (TTL) is a feature that allows you to manage TiDB data lifetime at the row level. For a table with the TTL attribute, TiDB automatically checks data lifetime and deletes expired data at the row level. This feature can effectively save storage space and enhance performance in some scenarios.
+Time to Live (TTL) は、TiDB データの有効期間を行レベルで管理できるようにする機能です。 TTL 属性を持つテーブルの場合、TiDB はデータの有効期間を自動的にチェックし、期限切れのデータを行レベルで削除します。この機能により、ストレージ スペースを効果的に節約し、一部のシナリオでパフォーマンスを向上させることができます。
 
-The following are some common scenarios for TTL:
+次に、TTL の一般的なシナリオをいくつか示します。
 
-* Regularly delete verification codes and short URLs.
-* Regularly delete unnecessary historical orders.
-* Automatically delete intermediate results of calculations.
+-   確認コードと短縮 URL を定期的に削除します。
+-   不要な履歴注文を定期的に削除します。
+-   計算の中間結果を自動的に削除します。
 
-TTL is designed to help users clean up unnecessary data periodically and in a timely manner without affecting the online read and write workloads. TTL concurrently dispatches different jobs to different TiDB nodes to delete data in parallel in the unit of table. TTL does not guarantee that all expired data is deleted immediately, which means that even if some data is expired, the client might still read that data some time after the expiration time until that data is deleted by the background TTL job.
+TTL は、ユーザーがオンラインの読み取りおよび書き込みワークロードに影響を与えることなく、不要なデータを定期的かつタイムリーにクリーンアップできるように設計されています。 TTL は、異なるジョブを異なる TiDB ノードに同時にディスパッチし、テーブル単位でデータを並列に削除します。 TTL は、有効期限が切れたすべてのデータがすぐに削除されることを保証するものではありません。つまり、一部のデータが期限切れになっていても、バックグラウンド TTL ジョブによってそのデータが削除されるまで、有効期限が切れた後もクライアントがそのデータを読み取る可能性があります。
 
-> **Warning:**
+> **警告：**
 >
-> This is an experimental feature. It is not recommended that you use it in a production environment.
-> TTL is not available for [TiDB Cloud Serverless Tier](https://docs.pingcap.com/tidbcloud/select-cluster-tier#serverless-tier-beta).
+> これは実験的機能です。本番環境で使用することはお勧めしません。 [TiDB Cloudサーバーレス層](https://docs.pingcap.com/tidbcloud/select-cluster-tier#serverless-tier-beta)は TTL を使用できません。
 
-## Syntax
+## 構文 {#syntax}
 
-You can configure the TTL attribute of a table using the [`CREATE TABLE`](/sql-statements/sql-statement-create-table.md) or [`ALTER TABLE`](/sql-statements/sql-statement-alter-table.md) statement.
+[`CREATE TABLE`](/sql-statements/sql-statement-create-table.md)または[`ALTER TABLE`](/sql-statements/sql-statement-alter-table.md)ステートメントを使用して、テーブルの TTL 属性を構成できます。
 
-### Create a table with a TTL attribute
+### TTL 属性を持つテーブルを作成する {#create-a-table-with-a-ttl-attribute}
 
-- Create a table with a TTL attribute:
+-   TTL 属性を持つテーブルを作成します。
 
     ```sql
     CREATE TABLE t1 (
@@ -35,9 +34,9 @@ You can configure the TTL attribute of a table using the [`CREATE TABLE`](/sql-s
     ) TTL = `created_at` + INTERVAL 3 MONTH;
     ```
 
-    The preceding example creates a table `t1` and specifies `created_at` as the TTL timestamp column, which indicates the creation time of the data. The example also sets the longest time that a row is allowed to live in the table to 3 months through `INTERVAL 3 MONTH`. Data that lives longer than this value will be deleted later.
+    前の例では、テーブル`t1`を作成し、データの作成時刻を示す TTL タイムスタンプ列として`created_at`を指定します。この例では、行がテーブルに存在できる最長期間を 3 か月から`INTERVAL 3 MONTH`か月に設定しています。この値よりも長く存続するデータは後で削除されます。
 
-- Set the `TTL_ENABLE` attribute to enable or disable the feature of cleaning up expired data:
+-   `TTL_ENABLE`属性を設定して、期限切れデータのクリーンアップ機能を有効または無効にします。
 
     ```sql
     CREATE TABLE t1 (
@@ -46,9 +45,9 @@ You can configure the TTL attribute of a table using the [`CREATE TABLE`](/sql-s
     ) TTL = `created_at` + INTERVAL 3 MONTH TTL_ENABLE = 'OFF';
     ```
 
-    If `TTL_ENABLE` is set to `OFF`, even if other TTL options are set, TiDB does not automatically clean up expired data in this table. For a table with the TTL attribute, `TTL_ENABLE` is `ON` by default.
+    `TTL_ENABLE`が`OFF`に設定されている場合、他の TTL オプションが設定されていても、TiDB はこのテーブルの期限切れデータを自動的にクリーンアップしません。 TTL 属性を持つテーブルの場合、 `TTL_ENABLE`はデフォルトで`ON`です。
 
-- To be compatible with MySQL, you can set a TTL attribute using a comment:
+-   MySQL との互換性を保つために、コメントを使用して TTL 属性を設定できます。
 
     ```sql
     CREATE TABLE t1 (
@@ -57,35 +56,35 @@ You can configure the TTL attribute of a table using the [`CREATE TABLE`](/sql-s
     ) /*T![ttl] TTL = `created_at` + INTERVAL 3 MONTH TTL_ENABLE = 'OFF'*/;
     ```
 
-    In TiDB, using the table TTL attribute or using comments to configure TTL is equivalent. In MySQL, the comment is ignored and an ordinary table is created.
+    TiDB では、テーブル TTL 属性を使用するか、コメントを使用して TTL を構成することは同等です。 MySQL ではコメントは無視され、通常のテーブルが作成されます。
 
-### Modify the TTL attribute of a table
+### テーブルの TTL 属性を変更する {#modify-the-ttl-attribute-of-a-table}
 
-- Modify the TTL attribute of a table:
+-   テーブルの TTL 属性を変更します。
 
     ```sql
     ALTER TABLE t1 TTL = `created_at` + INTERVAL 1 MONTH;
     ```
 
-    You can use the preceding statement to modify a table with an existing TTL attribute or to add a TTL attribute to a table without a TTL attribute.
+    前述のステートメントを使用して、既存の TTL 属性を持つテーブルを変更したり、TTL 属性を持たないテーブルに TTL 属性を追加したりできます。
 
-- Modify the value of `TTL_ENABLE` for a table with the TTL attribute:
+-   TTL 属性を持つテーブルの値を`TTL_ENABLE`に変更します。
 
     ```sql
     ALTER TABLE t1 TTL_ENABLE = 'OFF';
     ```
 
-- To remove all TTL attributes of a table:
+-   テーブルのすべての TTL 属性を削除するには:
 
     ```sql
     ALTER TABLE t1 REMOVE TTL;
     ```
 
-### TTL and the default values of data types
+### TTL とデータ型のデフォルト値 {#ttl-and-the-default-values-of-data-types}
 
-You can use TTL together with [default values of the data types](/data-type-default-values.md). The following are two common usage examples:
+TTL は[データ型のデフォルト値](/data-type-default-values.md)と一緒に使用できます。次に、2 つの一般的な使用例を示します。
 
-* Use `DEFAULT CURRENT_TIMESTAMP` to specify the default value of a column as the current creation time and use this column as the TTL timestamp column. Records that were created 3 months ago are expired:
+-   列のデフォルト値を現在の作成時刻として指定し、この列を TTL タイムスタンプ列として使用するには、 `DEFAULT CURRENT_TIMESTAMP`を使用します。 3 か月前に作成されたレコードは期限切れです。
 
     ```sql
     CREATE TABLE t1 (
@@ -94,7 +93,7 @@ You can use TTL together with [default values of the data types](/data-type-defa
     ) TTL = `created_at` + INTERVAL 3 MONTH;
     ```
 
-* Specify the default value of a column as the creation time or the latest update time and use this column as the TTL timestamp column. Records that have not been updated for 3 months are expired:
+-   列のデフォルト値を作成時間または最新の更新時間として指定し、この列を TTL タイムスタンプ列として使用します。 3 か月間更新されていないレコードは期限切れになります。
 
     ```sql
     CREATE TABLE t1 (
@@ -103,9 +102,9 @@ You can use TTL together with [default values of the data types](/data-type-defa
     ) TTL = `created_at` + INTERVAL 3 MONTH;
     ```
 
-### TTL and generated columns
+### TTL および生成列 {#ttl-and-generated-columns}
 
-You can use TTL together with [generated columns](/generated-columns.md) (experimental feature) to configure complex expiration rules. For example:
+TTL を[生成された列](/generated-columns.md) (実験的機能) と共に使用して、複雑な有効期限ルールを構成できます。例えば：
 
 ```sql
 CREATE TABLE message (
@@ -119,9 +118,9 @@ CREATE TABLE message (
 ) TTL = `expire_at` + INTERVAL 0 DAY;
 ```
 
-The preceding statement uses the `expire_at` column as the TTL timestamp column and sets the expiration time according to the message type. If the message is an image, it expires in 5 days. Otherwise, it expires in 30 days.
+上記のステートメントは、 `expire_at`列を TTL タイムスタンプ列として使用し、メッセージ タイプに従って有効期限を設定します。メッセージが画像の場合、有効期限は 5 日です。それ以外の場合、有効期限は 30 日です。
 
-You can use TTL together with the [JSON type](/data-type-json.md). For example:
+[JSON タイプ](/data-type-json.md)とともに TTL を使用できます。例えば：
 
 ```sql
 CREATE TABLE orders (
@@ -131,56 +130,56 @@ CREATE TABLE orders (
 ) TTL = `created_at` + INTERVAL 3 month;
 ```
 
-## TTL job
+## TTL ジョブ {#ttl-job}
 
-For each table with a TTL attribute, TiDB internally schedules a background job to clean up expired data. You can customize the execution period of these jobs by setting the [`tidb_ttl_job_run_interval`](/system-variables.md#tidb_ttl_job_run_interval-new-in-v650) global variable. The following example sets the background cleanup jobs to run once every 24 hours:
+TTL 属性を持つテーブルごとに、TiDB は期限切れのデータをクリーンアップするバックグラウンド ジョブを内部的にスケジュールします。 [`tidb_ttl_job_run_interval`](/system-variables.md#tidb_ttl_job_run_interval-new-in-v650)グローバル変数を設定することで、これらのジョブの実行期間をカスタマイズできます。次の例では、バックグラウンド クリーンアップ ジョブを 24 時間ごとに実行するように設定します。
 
 ```sql
 SET @@global.tidb_ttl_job_run_interval = '24h';
 ```
 
-To disable the execution of TTL jobs, in addition to setting the `TTL_ENABLE='OFF'` table option, you can also disable the execution of TTL jobs in the entire cluster by setting the [`tidb_ttl_job_enable`](/system-variables.md#tidb_ttl_job_enable-new-in-v650) global variable:
+TTL ジョブの実行を無効にするには、 `TTL_ENABLE='OFF'`テーブル オプションを設定するだけでなく、 [`tidb_ttl_job_enable`](/system-variables.md#tidb_ttl_job_enable-new-in-v650)グローバル変数を設定してクラスター全体で TTL ジョブの実行を無効にすることもできます。
 
 ```sql
 SET @@global.tidb_ttl_job_enable = OFF;
 ```
 
-In some scenarios, you might want to allow TTL jobs to run only in a certain time window. In this case, you can set the [`tidb_ttl_job_schedule_window_start_time`](/system-variables.md#tidb_ttl_job_schedule_window_start_time-new-in-v650) and [`tidb_ttl_job_schedule_window_end_time`](/system-variables.md#tidb_ttl_job_schedule_window_end_time-new-in-v650) global variables to specify the time window. For example:
+シナリオによっては、特定の時間枠でのみ TTL ジョブの実行を許可したい場合があります。この場合、 [`tidb_ttl_job_schedule_window_start_time`](/system-variables.md#tidb_ttl_job_schedule_window_start_time-new-in-v650)と[`tidb_ttl_job_schedule_window_end_time`](/system-variables.md#tidb_ttl_job_schedule_window_end_time-new-in-v650)のグローバル変数を設定して時間枠を指定できます。例えば：
 
 ```sql
 SET @@global.tidb_ttl_job_schedule_window_start_time = '01:00 +0000';
 SET @@global.tidb_ttl_job_schedule_window_end_time = '05:00 +0000';
 ```
 
-The preceding statement allows TTL jobs to be scheduled only between 1:00 and 5:00 UTC. By default, the time window is set to `00:00 +0000` to `23:59 +0000`, which allows the jobs to be scheduled at any time.
+上記のステートメントでは、TTL ジョブを UTC の 1:00 から 5:00 の間でのみスケジュールできます。デフォルトでは、時間枠は`00:00 +0000`から`23:59 +0000`に設定されており、ジョブをいつでもスケジュールできます。
 
-## Monitoring metrics and charts
+## 指標とグラフの監視 {#monitoring-metrics-and-charts}
 
 <CustomContent platform="tidb-cloud">
 
-> **Note:**
+> **ノート：**
 >
-> This section is only applicable to on-premises TiDB. Currently, TiDB Cloud does not provide TTL metrics.
+> このセクションは、オンプレミスの TiDB にのみ適用されます。現在、 TiDB Cloudは TTL メトリックを提供していません。
 
 </CustomContent>
 
-TiDB collects runtime information about TTL periodically and provides visualized charts of these metrics in Grafana. You can see these metrics in the TiDB -> TTL panel in Grafana.
+TiDB は TTL に関するランタイム情報を定期的に収集し、Grafana でこれらのメトリックの視覚化されたグラフを提供します。これらのメトリックは、Grafana の TiDB -&gt; TTL パネルで確認できます。
 
 <CustomContent platform="tidb">
 
-For details of the metrics, see the TTL section in [TiDB Monitoring Metrics](/grafana-tidb-dashboard.md).
+メトリックの詳細については、 [TiDB 監視指標](/grafana-tidb-dashboard.md)の TTL セクションを参照してください。
 
 </CustomContent>
 
-## Compatibility with TiDB tools
+## TiDB ツールとの互換性 {#compatibility-with-tidb-tools}
 
-As an experimental feature, the TTL feature is not compatible with data import and export tools, including BR, TiDB Lightning, and TiCDC.
+実験的機能として、TTL 機能はBR、 TiDB Lightning、TiCDC などのデータのインポートおよびエクスポート ツールと互換性がありません。
 
-## Limitations
+## 制限事項 {#limitations}
 
-Currently, the TTL feature has the following limitations:
+現在、TTL 機能には次の制限があります。
 
-* The TTL attribute cannot be set on temporary tables, including local temporary tables and global temporary tables.
-* A table with the TTL attribute does not support being referenced by other tables as the primary table in a foreign key constraint.
-* It is not guaranteed that all expired data is deleted immediately. The time when expired data is deleted depends on the scheduling interval and scheduling window of the background cleanup job.
-* Currently, a single table can only run a cleanup job on a single TiDB node at a given time. This might cause performance bottlenecks in some scenarios (for example, when the table is extremely large). This issue will be optimized in future releases.
+-   TTL 属性は、ローカル一時テーブルおよびグローバル一時テーブルを含む一時テーブルには設定できません。
+-   TTL 属性を持つテーブルは、外部キー制約のプライマリ テーブルとして他のテーブルから参照されることをサポートしていません。
+-   期限切れのデータがすべてすぐに削除されることは保証されていません。期限切れのデータが削除される時間は、バックグラウンド クリーンアップ ジョブのスケジュール間隔とスケジュール ウィンドウによって異なります。
+-   現在、1 つのテーブルは、特定の時間に 1 つの TiDB ノードでのみクリーンアップ ジョブを実行できます。これは、一部のシナリオ (たとえば、テーブルが非常に大きい場合) でパフォーマンスのボトルネックを引き起こす可能性があります。この問題は、将来のリリースで最適化される予定です。

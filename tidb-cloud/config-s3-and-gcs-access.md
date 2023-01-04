@@ -3,39 +3,41 @@ title: Configure Amazon S3 Access and GCS Access
 summary: Learn how to configure Amazon Simple Storage Service (Amazon S3) access and Google Cloud Storage (GCS) access.
 ---
 
-# Configure Amazon S3 Access and GCS Access
+# Amazon S3 アクセスと GCS アクセスの設定 {#configure-amazon-s3-access-and-gcs-access}
 
-If your source data is stored in Amazon S3 or Google Cloud Storage (GCS) buckets, before importing or migrating the data to TiDB Cloud, you need to configure cross-account access to the buckets. This document describes how to do this.
+ソース データが Amazon S3 または Google Cloud Storage (GCS) バケットに保存されている場合は、データをTiDB Cloudにインポートまたは移行する前に、バケットへのクロスアカウント アクセスを構成する必要があります。このドキュメントでは、これを行う方法について説明します。
 
-## Configure Amazon S3 access
+## Amazon S3 アクセスの構成 {#configure-amazon-s3-access}
 
-To allow TiDB Cloud to access the source data in your Amazon S3 bucket, take the following steps to configure the bucket access for TiDB Cloud and get the Role-ARN.
+TiDB Cloudが Amazon S3 バケットのソース データにアクセスできるようにするには、次の手順TiDB Cloudのバケット アクセスを設定し、Role-ARN を取得します。
 
-1. In the TiDB Cloud console, get the TiDB Cloud account ID and external ID of the target TiDB cluster.
+1.  TiDB Cloudコンソールで、ターゲット TiDB クラスターのTiDB Cloudアカウント ID と外部 ID を取得します。
 
-    1. In the TiDB Cloud console, choose your target project, and navigate to the **Clusters** page.
+    1.  TiDB Cloudコンソールで、ターゲット プロジェクトを選択し、[**クラスター**] ページに移動します。
 
-    2. Locate your target cluster, click **...** in the upper-right corner of the cluster area, and select **Import Data**. The **Data Import** page is displayed.
+    2.  ターゲット クラスターを見つけて、クラスター領域の右上隅にある [ **...** ] をクリックし、 [<strong>データのインポート</strong>] を選択します。 [<strong>データのインポート]</strong>ページが表示されます。
 
-        > **Tip:**
+        > **ヒント：**
         >
-        > Alternatively, you can also click the name of your cluster on the **Clusters** page and click **Import Data** in the **Import** area.
+        > または、[**クラスター**] ページでクラスターの名前をクリックし、[インポート] 領域で [<strong>データ</strong>の<strong>インポート</strong>] をクリックすることもできます。
 
-    3. On the **Data Import** page, click **Guide for getting the required Role-ARN** to get the TiDB Cloud Account ID and TiDB Cloud External ID. Take a note of these IDs for later use.
+    3.  [**データのインポート**] ページで、[<strong>必要な Role-ARN を取得するためのガイド</strong>] をクリックして、 TiDB Cloudアカウント ID とTiDB Cloud外部 ID を取得します。後で使用するために、これらの ID をメモしておいてください。
 
-2. In the AWS Management Console, create a managed policy for your Amazon S3 bucket.
+2.  AWS マネジメント コンソールで、Amazon S3 バケットの管理ポリシーを作成します。
 
-    1. Sign in to the AWS Management Console and open the Amazon S3 console at <https://console.aws.amazon.com/s3/>.
-    2. In the **Buckets** list, choose the name of your bucket with the source data, and then click **Copy ARN** to get your S3 bucket ARN (for example, `arn:aws:s3:::tidb-cloud-source-data`). Take a note of the bucket ARN for later use.
+    1.  AWS マネジメント コンソールにサインインし、 [https://console.aws.amazon.com/s3/](https://console.aws.amazon.com/s3/)で Amazon S3 コンソールを開きます。
+
+    2.  [**バケット**] リストで、ソース データを含むバケットの名前を選択し、[ARN の<strong>コピー</strong>] をクリックして S3 バケット ARN を取得します (たとえば、 `arn:aws:s3:::tidb-cloud-source-data` )。後で使用するために、バケット ARN を書き留めます。
 
         ![Copy bucket ARN](/media/tidb-cloud/copy-bucket-arn.png)
 
-    3. Open the IAM console at <https://console.aws.amazon.com/iam/>, click **Policies** in the navigation pane on the left, and then click **Create Policy**.
+    3.  [https://console.aws.amazon.com/iam/](https://console.aws.amazon.com/iam/)でIAMコンソールを開き、左側のナビゲーション ペインで [**ポリシー**] をクリックし、[ポリシーの<strong>作成</strong>] をクリックします。
 
         ![Create a policy](/media/tidb-cloud/aws-create-policy.png)
 
-    4. On the **Create policy** page, click the **JSON** tab.
-    5. Copy the following access policy template and paste it to the policy text field.
+    4.  [**ポリシーの作成**] ページで、[ <strong>JSON</strong> ] タブをクリックします。
+
+    5.  次のアクセス ポリシー テンプレートをコピーして、ポリシー テキスト フィールドに貼り付けます。
 
         ```
         {
@@ -63,96 +65,102 @@ To allow TiDB Cloud to access the source data in your Amazon S3 bucket, take the
         }
         ```
 
-        In the policy text field, update the following configurations to your own values.
+        ポリシー テキスト フィールドで、次の構成を独自の値に更新します。
 
-        - `"Resource": "<Your S3 bucket ARN>/<Directory of the source data>/*"`
+        -   `"Resource": "<Your S3 bucket ARN>/<Directory of the source data>/*"`
 
-            For example, if your source data is stored in the root directory of the `tidb-cloud-source-data` bucket, use `"Resource": "arn:aws:s3:::tidb-cloud-source-data/*"`. If your source data is stored in the `mydata` directory of the bucket, use `"Resource": "arn:aws:s3:::tidb-cloud-source-data/mydata/*"`. Make sure that `/*` is added to the end of the directory so TiDB Cloud can access all files in this directory.
+            たとえば、ソース データが`tidb-cloud-source-data`バケットのルート ディレクトリに格納されている場合は、 `"Resource": "arn:aws:s3:::tidb-cloud-source-data/*"`を使用します。ソース データがバケットの`mydata`ディレクトリに保存されている場合は、 `"Resource": "arn:aws:s3:::tidb-cloud-source-data/mydata/*"`を使用します。 TiDB Cloudがこのディレクトリ内のすべてのファイルにアクセスできるように、ディレクトリの最後に`/*`が追加されていることを確認してください。
 
-        - `"Resource": "<Your S3 bucket ARN>"`
+        -   `"Resource": "<Your S3 bucket ARN>"`
 
-            For example, `"Resource": "arn:aws:s3:::tidb-cloud-source-data"`.
+            たとえば、 `"Resource": "arn:aws:s3:::tidb-cloud-source-data"`です。
 
-    6. Click **Next: Tags**, add a tag of the policy (optional), and then click **Next:Review**.
+    6.  [**次へ: タグ**] をクリックし、ポリシーのタグを追加して (オプション)、[<strong>次へ: 確認</strong>] をクリックします。
 
-    7. Set a policy name, and then click **Create policy**.
+    7.  ポリシー名を設定し、[**ポリシーの作成**] をクリックします。
 
-3. In the AWS Management Console, create an access role for TiDB Cloud and get the role ARN.
+3.  AWS マネジメント コンソールで、 TiDB Cloudのアクセス ロールを作成し、ロール ARN を取得します。
 
-    1. In the IAM console at <https://console.aws.amazon.com/iam/>, click **Roles** in the navigation pane on the left, and then click **Create role**.
+    1.  [https://console.aws.amazon.com/iam/](https://console.aws.amazon.com/iam/)のIAMコンソールで、左側のナビゲーション ペインで [**ロール**] をクリックし、[ロールの<strong>作成</strong>] をクリックします。
 
         ![Create a role](/media/tidb-cloud/aws-create-role.png)
 
-    2. To create a role, fill in the following information:
+    2.  ロールを作成するには、次の情報を入力します。
 
-        - Under **Trusted entity type**, select **AWS account**.
-        - Under **An AWS account**, select **Another AWS account**, and then paste the TiDB Cloud account ID to the **Account ID** field.
-        - Under **Options**, click **Require external ID (Best practice when a third party will assume this role)**, and then paste the TiDB Cloud External ID to the **External ID** field. If the role is created without "Require external ID", once the configuration is done for one TiDB cluster in a project, all TiDB clusters in that project can use the same Role-ARN to access your Amazon S3 bucket. If the role is created with the account ID and external ID, only the corresponding TiDB cluster can access the bucket.
+        -   [**信頼されたエンティティ タイプ**] で、[ <strong>AWS アカウント]</strong>を選択します。
+        -   **An AWS account**で、 <strong>Another AWS account</strong>を選択し、 TiDB Cloudアカウント ID を<strong>Account ID</strong>フィールドに貼り付けます。
+        -   [**オプション**] で、[<strong>外部 ID を要求する (サード パーティがこのロールを引き受ける場合のベスト プラクティス</strong>)] をクリックし、 TiDB Cloudの外部 ID を [<strong>外部 ID</strong> ] フィールドに貼り付けます。 「外部 ID が必要」なしでロールが作成された場合、プロジェクト内の 1 つの TiDB クラスターの設定が完了すると、そのプロジェクト内のすべての TiDB クラスターは同じ Role-ARN を使用して Amazon S3 バケットにアクセスできます。アカウント ID と外部 ID を使用してロールが作成された場合、対応する TiDB クラスターのみがバケットにアクセスできます。
 
-    3. Click **Next** to open the policy list, choose the policy you just created, and then click **Next**.
-    4. Under **Role details**, set a name for the role, and then click **Create role** in the lower-right corner. After the role is created, the list of roles is displayed.
-    5. In the list of roles, click the name of the role that you just created to go to its summary page, and then copy the role ARN.
+    3.  [**次へ**] をクリックしてポリシー リストを開き、作成したポリシーを選択して、[<strong>次へ</strong>] をクリックします。
+
+    4.  [**ロールの詳細**] で、ロールの名前を設定し、右下隅にある [<strong>ロールの作成</strong>] をクリックします。ロールが作成されると、ロールのリストが表示されます。
+
+    5.  ロールのリストで、作成したロールの名前をクリックしてその概要ページに移動し、ロール ARN をコピーします。
 
         ![Copy AWS role ARN](/media/tidb-cloud/aws-role-arn.png)
 
-4. In the TiDB Cloud console, go to the **Data Import** page where you get the TiDB Cloud account ID and external ID, and then paste the role ARN to the **Role ARN** field.
+4.  TiDB Cloudコンソールで、 TiDB Cloudアカウント ID と外部 ID を取得する**データ インポート**ページに移動し、ロール ARN を<strong>ロール ARN</strong>フィールドに貼り付けます。
 
-## Configure GCS access
+## GCS アクセスの構成 {#configure-gcs-access}
 
-To allow TiDB Cloud to access the source data in your GCS bucket, you need to configure the GCS access for the bucket. Once the configuration is done for one TiDB cluster in a project, all TiDB clusters in that project can access the GCS bucket.
+TiDB Cloudが GCS バケット内のソース データにアクセスできるようにするには、バケットの GCS アクセスを構成する必要があります。プロジェクト内の 1 つの TiDB クラスターの構成が完了すると、そのプロジェクト内のすべての TiDB クラスターが GCS バケットにアクセスできるようになります。
 
-1. In the TiDB Cloud console, get the Google Cloud Service Account ID of the target TiDB cluster.
+1.  TiDB Cloudコンソールで、ターゲット TiDB クラスターの Google Cloud サービス アカウント ID を取得します。
 
-    1. In the TiDB Cloud console, choose your target project, and navigate to the **Clusters** page.
+    1.  TiDB Cloudコンソールで、ターゲット プロジェクトを選択し、[**クラスター**] ページに移動します。
 
-    2. Locate your target cluster, click **...** in the upper-right corner of the cluster area, and select **Import Data**. The **Data Import** page is displayed.
+    2.  ターゲット クラスターを見つけて、クラスター領域の右上隅にある [ **...** ] をクリックし、 [<strong>データのインポート</strong>] を選択します。 [<strong>データのインポート]</strong>ページが表示されます。
 
-        > **Tip:**
+        > **ヒント：**
         >
-        > Alternatively, you can also click the name of your cluster on the **Clusters** page and click **Import Data** in the **Import** area.
+        > または、[**クラスター**] ページでクラスターの名前をクリックし、[インポート] 領域で [<strong>データ</strong>の<strong>インポート</strong>] をクリックすることもできます。
 
-    3. On the **Data Import** page, click **Show Google Cloud Service Account ID**, and then copy the Service Account ID for later use.
+    3.  [**データのインポート**] ページで、[ <strong>Google Cloud サービス アカウント ID を表示</strong>] をクリックし、後で使用できるようにサービス アカウント ID をコピーします。
 
-2. In the Google Cloud Platform (GCP) Management Console, create an IAM role for your GCS bucket.
+2.  Google Cloud Platform (GCP) 管理コンソールで、GCS バケットのIAMロールを作成します。
 
-    1. Sign in to the [GCP Management Console](https://console.cloud.google.com/).
-    2. Go to the [Roles](https://console.cloud.google.com/iam-admin/roles) page, and then click **CREATE ROLE**.
+    1.  [GCP 管理コンソール](https://console.cloud.google.com/)にサインインします。
+
+    2.  [役割](https://console.cloud.google.com/iam-admin/roles)ページに移動し、[ **CREATE ROLE** ] をクリックします。
 
         ![Create a role](/media/tidb-cloud/gcp-create-role.png)
 
-    3. Enter a name, description, ID, and role launch stage for the role. The role name cannot be changed after the role is created.
-    4. Click **ADD PERMISSIONS**.
-    5. Add the following read-only permissions to the role, and then click **Add**.
+    3.  役割の名前、説明、ID、および役割の開始段階を入力します。ロールの作成後にロール名を変更することはできません。
 
-        - storage.buckets.get
-        - storage.objects.get
-        - storage.objects.list
+    4.  [**権限**を追加] をクリックします。
 
-        You can copy a permission name to the **Enter property name or value** field as a filter query, and choose the name in the filter result. To add the three permissions, you can use **OR** between the permission names.
+    5.  次の読み取り専用アクセス許可を役割に追加し、[**追加**] をクリックします。
+
+        -   storage.buckets.get
+        -   storage.objects.get
+        -   storage.objects.list
+
+        アクセス許可名をフィルター クエリとして [**プロパティ名または値を入力]**フィールドにコピーし、フィルター結果で名前を選択することができます。 3 つのアクセス許可を追加するには、アクセス許可名の間に<strong>OR</strong>を使用できます。
 
         ![Add permissions](/media/tidb-cloud/gcp-add-permissions.png)
 
-3. Go to the [Bucket](https://console.cloud.google.com/storage/browser) page, and click the name of the GCS bucket you want TiDB Cloud to access.
+3.  [バケツ](https://console.cloud.google.com/storage/browser)ページに移動し、 TiDB Cloudにアクセスさせたい GCS バケットの名前をクリックします。
 
-4. On the **Bucket details** page, click the **PERMISSIONS** tab, and then click **GRANT ACCESS**.
+4.  **バケットの詳細**ページで、[ <strong>PERMISSIONS</strong> ] タブをクリックし、[ <strong>GRANT ACCESS</strong> ] をクリックします。
 
     ![Grant Access to the bucket ](/media/tidb-cloud/gcp-bucket-permissions.png)
 
-5. Fill in the following information to grant access to your bucket, and then click **SAVE**.
+5.  次の情報を入力してバケットへのアクセスを許可し、[**保存**] をクリックします。
 
-    - In the **New Principals** field, paste the Google Cloud Service Account ID of the target TiDB cluster.
-    - In the **Select a role** drop-down list, type the name of the IAM role you just created, and then choose the name from the filter result.
+    -   [ **New Principals** ] フィールドに、ターゲット TiDB クラスタの Google Cloud サービス アカウント ID を貼り付けます。
 
-    > **Note:**
+    -   **[ロールの選択]**ドロップダウン リストで、作成したばかりのIAMロールの名前を入力し、フィルター結果から名前を選択します。
+
+    > **ノート：**
     >
-    > To remove the access to TiDB Cloud, you can simply remove the access that you have granted.
+    > TiDB Cloudへのアクセスを削除するには、付与したアクセスを削除するだけです。
 
-6. On the **Bucket details** page, click the **CONFIGURATION** tab, and then copy your GCS bucket URI from the **gsutil URI** field.
+6.  [**バケットの詳細**] ページで [<strong>構成</strong>] タブをクリックし、 <strong>gsutil URI</strong>フィールドから GCS バケット URI をコピーします。
 
     ![Get bucket URI](/media/tidb-cloud/gcp-bucket-url.png)
 
-7. In the TiDB Cloud console, go to the **Data Import** page where you get the Google Cloud Service Account ID, and then paste the GCS bucket URI to the **Bucket URI** field. Note that you must add `/` to the end of the URI.
+7.  TiDB Cloudコンソールで、Google Cloud サービス アカウント ID を取得する**データ インポート**ページに移動し、GCS バケット URI を<strong>バケット URI</strong>フィールドに貼り付けます。 URI の末尾に`/`を追加する必要があることに注意してください。
 
-    For example, if your bucket URI is `gs://tidb-cloud-source-data`, you need to fill in `gs://tidb-cloud-source-data/`.
+    たとえば、バケット URI が`gs://tidb-cloud-source-data`の場合、 `gs://tidb-cloud-source-data/`を入力する必要があります。
 
     ![Fill in bucket URI in the TiDB Cloud console](/media/tidb-cloud/gcp-bucket-url-field.png)

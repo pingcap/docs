@@ -3,27 +3,27 @@ title: Key Features of TiDB Data Migration
 summary: Learn about the key features of DM and appropriate parameter configurations.
 ---
 
-# Key Features of TiDB Data Migration
+# TiDB データ移行の主な機能 {#key-features-of-tidb-data-migration}
 
-This document describes the data migration features provided by TiDB Data Migration (DM) and introduces appropriate parameter configurations.
+このドキュメントでは、TiDB Data Migration (DM) によって提供されるデータ移行機能について説明し、適切なパラメーター構成を紹介します。
 
-For different DM versions, pay attention to the different match rules of schema or table names in the table routing, block & allow lists, and binlog event filter features:
+DM のバージョンが異なると、テーブル ルーティング、ブロック リストと許可リスト、binlog イベント フィルター機能でスキーマまたはテーブル名の一致ルールが異なることに注意してください。
 
-+ For DM v1.0.5 or later versions, all the above features support the [wildcard match](https://en.wikipedia.org/wiki/Glob_(programming)#Syntax). For all versions of DM, note that there can be **only one** `*` in the wildcard expression, and `*` **must be placed at the end**.
-+ For DM versions earlier than v1.0.5, table routing and binlog event filter support the wildcard but do not support the `[...]` and `[!...]` expressions. The block & allow lists only supports the regular expression.
+-   DM v1.0.5 以降のバージョンでは、上記のすべての機能が[ワイルドカードマッチ](https://en.wikipedia.org/wiki/Glob_(programming)#Syntax)をサポートしています。 DM のすべてのバージョンで、ワイルドカード式に使用できる`*`は**1 つだけ**<strong>であり、最後に</strong>`*`を配置する必要があることに注意してください。
+-   v1.0.5 より前の DM バージョンでは、テーブル ルーティングと binlog イベント フィルターはワイルドカードをサポートしますが、 `[...]`と`[!...]`の式はサポートしません。ブロック &amp; 許可リストは、正規表現のみをサポートしています。
 
-It is recommended that you use the wildcard for matching in simple scenarios.
+単純なシナリオでのマッチングには、ワイルドカードを使用することをお勧めします。
 
-## Table routing
+## テーブル ルーティング {#table-routing}
 
-The table routing feature enables DM to migrate a certain table of the upstream MySQL or MariaDB instance to the specified table in the downstream.
+テーブル ルーティング機能により、DM は上流の MySQL または MariaDB インスタンスの特定のテーブルを下流の指定されたテーブルに移行できます。
 
-> **Note:**
+> **ノート：**
 >
-> - Configuring multiple different routing rules for a single table is not supported.
-> - The match rule of schema needs to be configured separately, which is used to migrate `CREATE/DROP SCHEMA xx`, as shown in `rule-2` of the [parameter configuration](#parameter-configuration).
+> -   1 つのテーブルに対して複数の異なるルーティング ルールを構成することはサポートされていません。
+> -   スキーマの一致ルールは、 [パラメータ構成](#parameter-configuration)の`rule-2`に示すように、移行`CREATE/DROP SCHEMA xx`に使用される個別に構成する必要があります。
 
-### Parameter configuration
+### パラメータ構成 {#parameter-configuration}
 
 ```yaml
 routes:
@@ -47,28 +47,28 @@ routes:
     target-schema: "test"
 ```
 
-### Parameter explanation
+### パラメータの説明 {#parameter-explanation}
 
-- DM migrates the upstream MySQL or MariaDB instance tables that match the [`schema-pattern`/`table-pattern` rule provided by Table selector](/dm/table-selector.md) to the downstream `target-schema`/`target-table`.
-- For sharded tables that match the `schema-pattern`/`table-pattern` rules, DM extracts the table name by using the `extract-table`.`table-regexp` regular expression, the schema name by using the `extract-schema`.`schema-regexp` regular expression, and source information by using the `extract-source`.`source-regexp` regular expression. Then DM writes the extracted information to the corresponding `target-column` in the merged table in the downstream.
+-   DM は、 [テーブル セレクターによって提供される`schema-pattern` / <code>table-pattern</code>ルール](/dm/table-selector.md)に一致する上流の MySQL または MariaDB インスタンス テーブルを下流の`target-schema` / `target-table`に移行します。
+-   `schema-pattern`ルールに一致するシャード テーブルの場合、DM は`table-pattern`を使用してテーブル名を抽出し`extract-table` 。 `table-regexp`正規表現、 `extract-schema`を使用したスキーマ名。 `schema-regexp`正規表現、および`extract-source`を使用したソース情報。 `source-regexp`正規表現。次に、DM は、抽出された情報を下流のマージされたテーブルの対応する`target-column`に書き込みます。
 
-### Usage examples
+### 使用例 {#usage-examples}
 
-This section shows the usage examples in different scenarios.
+このセクションでは、さまざまなシナリオでの使用例を示します。
 
-#### Merge sharded schemas and tables
+#### シャードされたスキーマとテーブルをマージする {#merge-sharded-schemas-and-tables}
 
-Assuming in the scenario of sharded schemas and tables, you want to migrate the `test_{1,2,3...}`.`t_{1,2,3...}` tables in two upstream MySQL instances to the `test`.`t` table in the downstream TiDB instance.
+シャードされたスキーマとテーブルのシナリオで、 `test_{1,2,3...}`を移行すると仮定します。 `test`への 2 つのアップストリーム MySQL インスタンスの`t_{1,2,3...}`のテーブル。ダウンストリーム TiDB インスタンスの`t`テーブル。
 
-To migrate the upstream instances to the downstream `test`.`t`, you must create the following routing rules:
+アップストリーム インスタンスをダウンストリームに移行するには`test` . `t`では、次のルーティング ルールを作成する必要があります。
 
-- `rule-1` is used to migrate DML or DDL statements of the table that matches `schema-pattern: "test_*"` and `table-pattern: "t_*"` to the downstream `test`.`t`.
-- `rule-2` is used to migrate DDL statements of the schema that matches `schema-pattern: "test_*"`, such as `CREATE/DROP SCHEMA xx`.
+-   `rule-1`は、 `schema-pattern: "test_*"`と`table-pattern: "t_*"`に一致するテーブルの DML または DDL ステートメントをダウンストリーム`test`に移行するために使用されます。 `t` .
+-   `rule-2`は、 `CREATE/DROP SCHEMA xx`などの`schema-pattern: "test_*"`に一致するスキーマの DDL ステートメントを移行するために使用されます。
 
-> **Note:**
+> **ノート：**
 >
-> - If the downstream `schema: test` already exists and is not to be deleted, you can omit `rule-2`.
-> - If the downstream `schema: test` does not exist and only `rule-1` is configured, then it reports the `schema test doesn't exist` error during migration.
+> -   ダウンストリーム`schema: test`が既に存在し、削除しない場合は、 `rule-2`を省略できます。
+> -   ダウンストリーム`schema: test`が存在せず、 `rule-1`のみが構成されている場合、移行中に`schema test doesn't exist`エラーが報告されます。
 
 ```yaml
   rule-1:
@@ -81,15 +81,15 @@ To migrate the upstream instances to the downstream `test`.`t`, you must create 
     target-schema: "test"
 ```
 
-#### Extract table, schema, and source information and write into the merged table
+#### テーブル、スキーマ、およびソース情報を抽出し、マージされたテーブルに書き込みます {#extract-table-schema-and-source-information-and-write-into-the-merged-table}
 
-Assuming in the scenario of sharded schemas and tables, you want to migrate the `test_{1,2,3...}`.`t_{1,2,3...}` tables in two upstream MySQL instances to the `test`.`t` table in the downstream TiDB instance. At the same time, you want to extract the source information of the sharded tables and write it to the downstream merged table.
+シャードされたスキーマとテーブルのシナリオで、 `test_{1,2,3...}`を移行すると仮定します。 `test`への 2 つのアップストリーム MySQL インスタンスの`t_{1,2,3...}`のテーブル。ダウンストリーム TiDB インスタンスの`t`テーブル。同時に、シャードされたテーブルのソース情報を抽出し、それをダウンストリームのマージされたテーブルに書き込みたいと考えています。
 
-To migrate the upstream instances to the downstream `test`.`t`, you must create routing rules similar to the previous section [Merge sharded schemas and tables](#merge-sharded-schemas-and-tables). In addtion, you need to add the `extract-table`, `extract-schema`, and `extract-source` configurations:
+アップストリーム インスタンスをダウンストリームに移行するには`test` . `t`では、前のセクション[シャードされたスキーマとテーブルをマージする](#merge-sharded-schemas-and-tables)と同様のルーティング ルールを作成する必要があります。さらに、 `extract-table` 、 `extract-schema` 、および`extract-source`構成を追加する必要があります。
 
-- `extract-table`: For a sharded table matching `schema-pattern` and `table-pattern`, DM extracts the sharded table name by using `table-regexp` and writes the name suffix without the `t_` part to `target-column` of the merged table, that is, the `c_table` column.
-- `extract-schema`: For a sharded schema matching `schema-pattern` and `table-pattern`, DM extracts the sharded schema name by using `schema-regexp` and writes the name suffix without the `test_` part to `target-column` of the merged table, that is, the `c_schema` column.
-- `extract-source`: For a sharded table matching `schema-pattern` and `table-pattern`, DM writes the source instance information to the `target-column` of the merged table, that is, the `c_source` column.
+-   `extract-table` : `schema-pattern`と`table-pattern`に一致するシャード テーブルの場合、DM は`table-regexp`を使用してシャード テーブル名を抽出し、マージされたテーブルの`target-column` 、つまり`c_table`列に`t_`の部分を除いた名前サフィックスを書き込みます。
+-   `extract-schema` : `schema-pattern`と`table-pattern`に一致するシャード スキーマの場合、DM は`schema-regexp`を使用してシャード スキーマ名を抽出し、マージされたテーブルの`target-column` 、つまり`c_schema`列に`test_`の部分を除いた名前サフィックスを書き込みます。
+-   `extract-source` : `schema-pattern`と`table-pattern`が一致するシャード テーブルの場合、DM はソース インスタンス情報をマージされたテーブルの`target-column` 、つまり`c_source`列に書き込みます。
 
 ```yaml
   rule-1:
@@ -111,7 +111,7 @@ To migrate the upstream instances to the downstream `test`.`t`, you must create 
     target-schema: "test"
 ```
 
-To extract the source information of upstream sharded tables to the merged table in the downstream, you **must manually create a merged table in the downstream before starting the migration**. The merged table must contain the three `target-columns` (`c_table`, `c_schema`, and `c_source`) used for specifying the source information. In addition, these columns **must be the last columns and be [string types](/data-type-string.md)**.
+アップストリームのシャード テーブルのソース情報をダウンストリームのマージされたテーブルに抽出する**には、移行を開始する前に、ダウンストリームでマージされたテーブルを手動で作成する必要があります**。結合されたテーブルには、ソース情報の指定に使用される 3 つの`target-columns` ( `c_table` 、 `c_schema` 、および`c_source` ) が含まれている必要があります。さらに、これらの列<strong>は最後の列であり、<a href="/data-type-string.md">文字列型</a>である必要があります</strong>。
 
 ```sql
 CREATE TABLE `test`.`t` (
@@ -122,9 +122,9 @@ CREATE TABLE `test`.`t` (
 );
 ```
 
-Assume that the upstream has the following two data sources:
+アップストリームに次の 2 つのデータ ソースがあるとします。
 
-Data source `mysql-01`:
+データ ソース`mysql-01` :
 
 ```sql
 mysql> select * from test_11.t_1;
@@ -147,7 +147,7 @@ mysql> select * from test_12.t_1;
 +---+
 ```
 
-Data source `mysql-02`:
+データ ソース`mysql-02` :
 
 ```sql
 mysql> select * from test_13.t_3;
@@ -158,7 +158,7 @@ mysql> select * from test_13.t_3;
 +---+
 ```
 
-After migration using DM, data in the merged table will be as follows:
+DM を使用して移行した後、マージされたテーブルのデータは次のようになります。
 
 ```sql
 mysql> select * from test.t;
@@ -172,13 +172,13 @@ mysql> select * from test.t;
 +---+---------+----------+----------+
 ```
 
-##### Incorrect examples of creating merged tables
+##### マージされたテーブルを作成する間違った例 {#incorrect-examples-of-creating-merged-tables}
 
-> **Note:**
+> **ノート：**
 >
-> If any of the following errors occur, source information of sharded tables and schemas might fail to be written to the merged table.
+> 以下のいずれかのエラーが発生した場合、シャード テーブルおよびスキーマのソース情報がマージ テーブルに書き込まれない可能性があります。
 
-- `c-table` is not in the last three columns:
+-   最後の 3 列に`c-table`はありません。
 
 ```sql
 CREATE TABLE `test`.`t` (
@@ -189,7 +189,7 @@ CREATE TABLE `test`.`t` (
 );
 ```
 
-- `c-source` is absent:
+-   `c-source`は存在しません:
 
 ```sql
 CREATE TABLE `test`.`t` (
@@ -199,7 +199,7 @@ CREATE TABLE `test`.`t` (
 );
 ```
 
-- `c_schema` is not a string type:
+-   `c_schema`は文字列型ではありません:
 
 ```sql
 CREATE TABLE `test`.`t` (
@@ -210,11 +210,11 @@ CREATE TABLE `test`.`t` (
 );
 ```
 
-#### Merge sharded schemas
+#### シャードされたスキーマをマージする {#merge-sharded-schemas}
 
-Assuming in the scenario of sharded schemas, you want to migrate the `test_{1,2,3...}`.`t_{1,2,3...}` tables in the two upstream MySQL instances to the `test`.`t_{1,2,3...}` tables in the downstream TiDB instance.
+シャード スキーマのシナリオで、 `test_{1,2,3...}`を移行すると仮定します。 2 つのアップストリーム MySQL インスタンスの`t_{1,2,3...}`のテーブルから`test` .ダウンストリームの TiDB インスタンスに`t_{1,2,3...}`のテーブル。
 
-To migrate the upstream schemas to the downstream `test`.`t_[1,2,3]`, you only need to create one routing rule.
+アップストリーム スキーマをダウンストリームに移行するには`test` . `t_[1,2,3]`では、ルーティング ルールを 1 つだけ作成する必要があります。
 
 ```yaml
   rule-1:
@@ -222,9 +222,9 @@ To migrate the upstream schemas to the downstream `test`.`t_[1,2,3]`, you only n
     target-schema: "test"
 ```
 
-#### Incorrect table routing
+#### 不適切なテーブル ルーティング {#incorrect-table-routing}
 
-Assuming that the following two routing rules are configured and `test_1_bak`.`t_1_bak` matches both `rule-1` and `rule-2`, an error is reported because the table routing configuration violates the number limitation.
+次の 2 つのルーティング ルールが構成されていると仮定し`test_1_bak` 。 `t_1_bak`が`rule-1`と`rule-2`の両方に一致する場合、テーブル ルーティング構成が数の制限に違反しているため、エラーが報告されます。
 
 ```yaml
   rule-1:
@@ -239,11 +239,11 @@ Assuming that the following two routing rules are configured and `test_1_bak`.`t
     target-table: "t_bak"
 ```
 
-## Block and allow table lists
+## テーブル リストのブロックと許可 {#block-and-allow-table-lists}
 
-The block and allow lists filtering rule of the upstream database instance tables is similar to MySQL replication-rules-db/tables, which can be used to filter or only migrate all operations of some databases or some tables.
+アップストリーム データベース インスタンス テーブルのブロック リストと許可リストのフィルタリング ルールは、MySQL の replication-rules-db/tables に似ており、一部のデータベースまたは一部のテーブルのすべての操作をフィルタリングまたは移行するために使用できます。
 
-### Parameter configuration
+### パラメータ構成 {#parameter-configuration}
 
 ```yaml
 block-allow-list:             # Use black-white-list if the DM version is earlier than or equal to v2.0.0-beta.2.
@@ -268,64 +268,64 @@ block-allow-list:             # Use black-white-list if the DM version is earlie
       tbl-name: "log"
 ```
 
-### Parameter explanation
+### パラメータの説明 {#parameter-explanation}
 
-- `do-dbs`: allow lists of the schemas to be migrated, similar to [`replicate-do-db`](https://dev.mysql.com/doc/refman/5.7/en/replication-options-replica.html#option_mysqld_replicate-do-db) in MySQL
-- `ignore-dbs`: block lists of the schemas to be migrated, similar to [`replicate-ignore-db`](https://dev.mysql.com/doc/refman/5.7/en/replication-options-replica.html#option_mysqld_replicate-ignore-db) in MySQL
-- `do-tables`: allow lists of the tables to be migrated, similar to [`replicate-do-table`](https://dev.mysql.com/doc/refman/5.7/en/replication-options-replica.html#option_mysqld_replicate-do-table) in MySQL. Both `db-name` and `tbl-name` must be specified
-- `ignore-tables`: block lists of the tables to be migrated, similar to [`replicate-ignore-table`](https://dev.mysql.com/doc/refman/5.7/en/replication-options-replica.html#option_mysqld_replicate-ignore-table) in MySQL. Both `db-name` and `tbl-name` must be specified
+-   `do-dbs` : スキーマのリストの移行を許可します。MySQL の[`replicate-do-db`](https://dev.mysql.com/doc/refman/5.7/en/replication-options-replica.html#option_mysqld_replicate-do-db)と同様です。
+-   `ignore-dbs` : 移行するスキーマのブロック リスト。MySQL の[`replicate-ignore-db`](https://dev.mysql.com/doc/refman/5.7/en/replication-options-replica.html#option_mysqld_replicate-ignore-db)に似ています。
+-   `do-tables` : MySQL の[`replicate-do-table`](https://dev.mysql.com/doc/refman/5.7/en/replication-options-replica.html#option_mysqld_replicate-do-table)と同様に、テーブルのリストの移行を許可します。 `db-name`と`tbl-name`の両方を指定する必要があります
+-   `ignore-tables` : 移行するテーブルのブロック リスト。MySQL の[`replicate-ignore-table`](https://dev.mysql.com/doc/refman/5.7/en/replication-options-replica.html#option_mysqld_replicate-ignore-table)に似ています。 `db-name`と`tbl-name`の両方を指定する必要があります
 
-If a value of the above parameters starts with the `~` character, the subsequent characters of this value are treated as a [regular expression](https://golang.org/pkg/regexp/syntax/#hdr-syntax). You can use this parameter to match schema or table names.
+上記のパラメーターの値が`~`文字で始まる場合、この値の後続の文字は[正規表現](https://golang.org/pkg/regexp/syntax/#hdr-syntax)として扱われます。このパラメーターを使用して、スキーマまたはテーブル名を一致させることができます。
 
-### Filtering process
+### フィルタリングプロセス {#filtering-process}
 
-The filtering rules corresponding to `do-dbs` and `ignore-dbs` are similar to the [Evaluation of Database-Level Replication and Binary Logging Options](https://dev.mysql.com/doc/refman/5.7/en/replication-rules-db-options.html) in MySQL. The filtering rules corresponding to `do-tables` and `ignore-tables` are similar to the [Evaluation of Table-Level Replication Options](https://dev.mysql.com/doc/refman/5.7/en/replication-rules-table-options.html) in MySQL.
+`do-dbs`と`ignore-dbs`に対応するフィルタリング ルールは、MySQL の[データベース レベルのレプリケーションおよびバイナリ ログ オプションの評価](https://dev.mysql.com/doc/refman/5.7/en/replication-rules-db-options.html)に似ています。 `do-tables`と`ignore-tables`に対応するフィルタリング ルールは、MySQL の[テーブル レベルのレプリケーション オプションの評価](https://dev.mysql.com/doc/refman/5.7/en/replication-rules-table-options.html)に似ています。
 
-> **Note:**
+> **ノート：**
 >
-> In DM and in MySQL, the allow and block lists filtering rules are different in the following ways:
+> DM と MySQL では、許可リストとブロック リストのフィルタリング ルールは次の点で異なります。
 >
-> - In MySQL, [`replicate-wild-do-table`](https://dev.mysql.com/doc/refman/5.7/en/replication-options-replica.html#option_mysqld_replicate-wild-do-table) and [`replicate-wild-ignore-table`](https://dev.mysql.com/doc/refman/5.7/en/replication-options-replica.html#option_mysqld_replicate-wild-ignore-table) support wildcard characters. In DM, some parameter values directly supports regular expressions that start with the `~` character.
-> - DM currently only supports binlogs in the `ROW` format, and does not support those in the `STATEMENT` or `MIXED` format. Therefore, the filtering rules in DM correspond to those in the `ROW` format in MySQL.
-> - MySQL determines a DDL statement only by the database name explicitly specified in the `USE` section of the statement. DM determines a statement first based on the database name section in the DDL statement. If the DDL statement does not contain such a section, DM determines the statement by the `USE` section. Suppose that the SQL statement to be determined is `USE test_db_2; CREATE TABLE test_db_1.test_table (c1 INT PRIMARY KEY)`; that `replicate-do-db=test_db_1` is configured in MySQL and `do-dbs: ["test_db_1"]` is configured in DM. Then this rule only applies to DM and not to MySQL.
+> -   MySQL では、 [`replicate-wild-do-table`](https://dev.mysql.com/doc/refman/5.7/en/replication-options-replica.html#option_mysqld_replicate-wild-do-table)と[`replicate-wild-ignore-table`](https://dev.mysql.com/doc/refman/5.7/en/replication-options-replica.html#option_mysqld_replicate-wild-ignore-table)はワイルドカード文字をサポートしています。 DM では、一部のパラメーター値は、 `~`文字で始まる正規表現を直接サポートしています。
+> -   DM は現在、 `ROW`形式のバイナリログのみをサポートしており、 `STATEMENT`または`MIXED`形式のバイナリログはサポートしていません。したがって、DM のフィルタリング ルールは、MySQL の`ROW`形式のフィルタリング ルールに対応します。
+> -   MySQL は、ステートメントの`USE`セクションで明示的に指定されたデータベース名によってのみ DDL ステートメントを決定します。 DM は、最初に DDL ステートメントのデータベース名セクションに基づいてステートメントを決定します。 DDL ステートメントにそのようなセクションが含まれていない場合、DM は`USE`セクションによってステートメントを判別します。判別する SQL ステートメントが`USE test_db_2; CREATE TABLE test_db_1.test_table (c1 INT PRIMARY KEY)`であるとします。 `replicate-do-db=test_db_1`は MySQL で構成され、 `do-dbs: ["test_db_1"]`は DM で構成されます。次に、このルールは DM にのみ適用され、MySQL には適用されません。
 
-The filtering process is as follows:
+フィルタリング プロセスは次のとおりです。
 
-1. Filter at the schema level:
+1.  スキーマ レベルでフィルター処理します。
 
-    - If `do-dbs` is not empty, judge whether a matched schema exists in `do-dbs`.
+    -   `do-dbs`が空でない場合、一致するスキーマが`do-dbs`に存在するかどうかを判断します。
 
-        - If yes, continue to filter at the table level.
-        - If not, filter `test`.`t`.
+        -   はいの場合は、引き続きテーブル レベルでフィルタリングします。
+        -   そうでない場合は、フィルタ`test`を使用します。 `t` .
 
-    - If `do-dbs` is empty and `ignore-dbs` is not empty, judge whether a matched schema exits in `ignore-dbs`.
+    -   `do-dbs`が空で`ignore-dbs`が空でない場合、 `ignore-dbs`で一致するスキーマが存在するかどうかを判断します。
 
-        - If yes, filter `test`.`t`.
-        - If not, continue to filter at the table level.
+        -   はいの場合、フィルター`test` 。 `t` .
+        -   そうでない場合は、引き続きテーブル レベルでフィルタリングします。
 
-    - If both `do-dbs` and `ignore-dbs` are empty, continue to filter at the table level.
+    -   `do-dbs`と`ignore-dbs`の両方が空の場合は、引き続きテーブル レベルでフィルタリングします。
 
-2. Filter at the table level:
+2.  テーブル レベルでフィルター処理します。
 
-    1. If `do-tables` is not empty, judge whether a matched table exists in `do-tables`.
+    1.  `do-tables`が空でない場合、 `do-tables`に一致するテーブルが存在するかどうかを判断します。
 
-        - If yes, migrate `test`.`t`.
-        - If not, filter `test`.`t`.
+        -   はいの場合は、移行`test`します。 `t` .
+        -   そうでない場合は、フィルタ`test`を使用します。 `t` .
 
-    2. If `ignore-tables` is not empty, judge whether a matched table exists in `ignore-tables`.
+    2.  `ignore-tables`が空でない場合、 `ignore-tables`に一致するテーブルが存在するかどうかを判断します。
 
-        - If yes, filter `test`.`t`.
-        - If not, migrate `test`.`t`.
+        -   はいの場合、フィルター`test` 。 `t` .
+        -   そうでない場合は、移行`test`します。 `t` .
 
-    3. If both `do-tables` and `ignore-tables` are empty, migrate `test`.`t`.
+    3.  `do-tables`と`ignore-tables`の両方が空の場合は、 `test`を移行します。 `t` .
 
-> **Note:**
+> **ノート：**
 >
-> To judge whether the schema `test` should be filtered, you only need to filter at the schema level.
+> スキーマ`test`をフィルタリングする必要があるかどうかを判断するには、スキーマ レベルでフィルタリングするだけで済みます。
 
-### Usage example
+### 使用例 {#usage-example}
 
-Assume that the upstream MySQL instances include the following tables:
+アップストリームの MySQL インスタンスに次のテーブルが含まれているとします。
 
 ```
 `logs`.`messages_2016`
@@ -338,7 +338,7 @@ Assume that the upstream MySQL instances include the following tables:
 `forum_backup_2018`.`messages`
 ```
 
-The configuration is as follows:
+構成は次のとおりです。
 
 ```yaml
 block-allow-list:  # Use black-white-list if the DM version is earlier than or equal to v2.0.0-beta.2.
@@ -355,29 +355,29 @@ block-allow-list:  # Use black-white-list if the DM version is earlier than or e
 ​      tbl-name: "^messages.*"
 ```
 
-After using the `bw-rule` rule:
+`bw-rule`ルールを使用した後:
 
-| Table | Whether to filter | Why filter |
-|:----|:----|:--------------|
-| `logs`.`messages_2016` | Yes | The schema `logs` fails to match any `do-dbs`. |
-| `logs`.`messages_2017` | Yes | The schema `logs` fails to match any `do-dbs`. |
-| `logs`.`messages_2018` | Yes | The schema `logs` fails to match any `do-dbs`. |
-| `forum_backup_2016`.`messages` | Yes | The schema `forum_backup_2016` fails to match any `do-dbs`. |
-| `forum_backup_2017`.`messages` | Yes | The schema `forum_backup_2017` fails to match any `do-dbs`. |
-| `forum`.`users` | Yes | 1. The schema `forum` matches `do-dbs` and continues to filter at the table level.<br/> 2. The schema and table fail to match any of `do-tables` and `ignore-tables` and `do-tables` is not empty. |
-| `forum`.`messages` | No | 1. The schema `forum` matches `do-dbs` and continues to filter at the table level.<br/> 2. The table `messages` is in the `db-name: "~^forum.*",tbl-name: "messages"` of `do-tables`. |
-| `forum_backup_2018`.`messages` | No | 1. The schema `forum_backup_2018` matches `do-dbs` and continues to filter at the table level.<br/> 2. The schema and table match the `db-name: "~^forum.*",tbl-name: "messages"` of `do-tables`. |
+| テーブル                             | フィルタリングするかどうか | フィルタリングする理由                                                                                                                                                |
+| :------------------------------- | :------------ | :--------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `logs` . `messages_2016`         | はい            | スキーマ`logs`はどの`do-dbs`とも一致しません。                                                                                                                             |
+| `logs` . `messages_2017`         | はい            | スキーマ`logs`はどの`do-dbs`とも一致しません。                                                                                                                             |
+| `logs` . `messages_2018`         | はい            | スキーマ`logs`はどの`do-dbs`とも一致しません。                                                                                                                             |
+| `forum_backup_2016` . `messages` | はい            | スキーマ`forum_backup_2016`はどの`do-dbs`とも一致しません。                                                                                                                |
+| `forum_backup_2017` . `messages` | はい            | スキーマ`forum_backup_2017`はどの`do-dbs`とも一致しません。                                                                                                                |
+| `forum` . `users`                | はい            | <li>スキーマ`forum`は`do-dbs`に一致し、引き続きテーブル レベルでフィルタリングします。<br/> 2. スキーマとテーブルは`do-tables`と`ignore-tables`のいずれとも一致せず、 `do-tables`は空ではありません。</li>                  |
+| `forum` . `messages`             | いいえ           | <li>スキーマ`forum`は`do-dbs`に一致し、引き続きテーブル レベルでフィルタリングします。<br/> 2. 表`messages`は`do-tables`の`db-name: "~^forum.*",tbl-name: "messages"`の中にあります。</li>             |
+| `forum_backup_2018` . `messages` | いいえ           | <li>スキーマ`forum_backup_2018`は`do-dbs`に一致し、引き続きテーブル レベルでフィルタリングします。<br/> 2. スキーマとテーブルは`db-name: "~^forum.*",tbl-name: "messages"` of `do-tables`と一致します。</li> |
 
-## Binlog event filter
+## Binlogイベント フィルター {#binlog-event-filter}
 
-Binlog event filter is a more fine-grained filtering rule than the block and allow lists filtering rule. You can use statements like `INSERT` or `TRUNCATE TABLE` to specify the binlog events of `schema/table` that you need to migrate or filter out.
+Binlogイベント フィルターは、ブロックおよび許可リストのフィルター処理ルールよりも細かいフィルター処理ルールです。 `INSERT`または`TRUNCATE TABLE`のようなステートメントを使用して、移行またはフィルターで除外する必要がある`schema/table`のバイナリログ イベントを指定できます。
 
-> **Note:**
+> **ノート：**
 >
-> - If the same table matches multiple rules, these rules are applied in order and the block list has priority over the allow list. This means if both the `Ignore` and `Do` rules are applied to a table, the `Ignore` rule takes effect.
-> - Starting from DM v2.0.2, you can configure binlog event filters in the source configuration file. For details, see [Upstream Database Configuration File](/dm/dm-source-configuration-file.md).
+> -   同じテーブルが複数のルールに一致する場合、これらのルールは順番に適用され、ブロック リストは許可リストよりも優先されます。これは、テーブルに`Ignore`と`Do`の両方のルールが適用されている場合、 `Ignore`のルールが有効になることを意味します。
+> -   DM v2.0.2 以降では、ソース構成ファイルで binlog イベント フィルターを構成できます。詳細については、 [アップストリーム データベースConfiguration / コンフィグレーションファイル](/dm/dm-source-configuration-file.md)を参照してください。
 
-### Parameter configuration
+### パラメータ構成 {#parameter-configuration}
 
 ```yaml
 filters:
@@ -389,54 +389,54 @@ filters:
     ​action: Ignore
 ```
 
-### Parameter explanation
+### パラメータの説明 {#parameter-explanation}
 
-- [`schema-pattern`/`table-pattern`](/dm/table-selector.md): the binlog events or DDL SQL statements of upstream MySQL or MariaDB instance tables that match `schema-pattern`/`table-pattern` are filtered by the rules below.
+-   [`schema-pattern` / <code>table-pattern</code>](/dm/table-selector.md) : `schema-pattern` / `table-pattern`に一致する上流の MySQL または MariaDB インスタンス テーブルの binlog イベントまたは DDL SQL ステートメントは、以下のルールによってフィルター処理されます。
 
-- `events`: the binlog event array. You can only select one or more `Event`s from the following table:
+-   `events` : バイナリログ イベント配列。次の表から 1 つ以上の`Event`のみを選択できます。
 
-    | Events            | Type | Description                   |
-    | ---------------   | ---- | ----------------------------- |
-    | `all`             |      | Includes all the events below |
-    | `all dml`         |      | Includes all DML events below |
-    | `all ddl`         |      | Includes all DDL events below |
-    | `none`            |      | Includes none of the events below |
-    | `none ddl`        |      | Includes none of the DDL events below |
-    | `none dml`        |      | Includes none of the DML events below |
-    | `insert`          | DML  | The `INSERT` DML event              |
-    | `update`          | DML  | The `UPDATE` DML event              |
-    | `delete`          | DML  | The `DELETE` DML event              |
-    | `create database` | DDL  | The `CREATE DATABASE` DDL event         |
-    | `drop database`   | DDL  | The `DROP DATABASE` DDL event           |
-    | `create table`    | DDL  | The `CREATE TABLE` DDL event      |
-    | `create index`    | DDL  | The `CREATE INDEX` DDL event          |
-    | `drop table`      | DDL  | The `DROP TABLE` DDL event              |
-    | `truncate table`  | DDL  | The `TRUNCATE TABLE` DDL event          |
-    | `rename table`    | DDL  | The `RENAME TABLE` DDL event            |
-    | `drop index`      | DDL  | The `DROP INDEX` DDL event           |
-    | `alter table`     | DDL  | The `ALTER TABLE` DDL event           |
+    | イベント              | タイプ | 説明                         |
+    | ----------------- | --- | -------------------------- |
+    | `all`             |     | 以下のすべてのイベントが含まれます          |
+    | `all dml`         |     | 以下のすべての DML イベントが含まれます     |
+    | `all ddl`         |     | 以下のすべての DDL イベントが含まれます     |
+    | `none`            |     | 以下のイベントは含まれません             |
+    | `none ddl`        |     | 以下の DDL イベントは含まれません        |
+    | `none dml`        |     | 以下の DML イベントは含まれません        |
+    | `insert`          | DML | `INSERT` DML イベント          |
+    | `update`          | DML | `UPDATE` DML イベント          |
+    | `delete`          | DML | `DELETE` DML イベント          |
+    | `create database` | DDL | `CREATE DATABASE` DDL イベント |
+    | `drop database`   | DDL | `DROP DATABASE` DDL イベント   |
+    | `create table`    | DDL | `CREATE TABLE` DDL イベント    |
+    | `create index`    | DDL | `CREATE INDEX` DDL イベント    |
+    | `drop table`      | DDL | `DROP TABLE` DDL イベント      |
+    | `truncate table`  | DDL | `TRUNCATE TABLE` DDL イベント  |
+    | `rename table`    | DDL | `RENAME TABLE` DDL イベント    |
+    | `drop index`      | DDL | `DROP INDEX` DDL イベント      |
+    | `alter table`     | DDL | `ALTER TABLE` DDL イベント     |
 
-- `sql-pattern`: it is used to filter specified DDL SQL statements. The matching rule supports using a regular expression. For example, `"^DROP\\s+PROCEDURE"`.
+-   `sql-pattern` : 指定された DDL SQL ステートメントをフィルタリングするために使用されます。一致ルールは、正規表現の使用をサポートしています。たとえば、 `"^DROP\\s+PROCEDURE"`です。
 
-- `action`: the string (`Do`/`Ignore`). Based on the following rules, it judges whether to filter. If either of the two rules is satisfied, the binlog is filtered; otherwise, the binlog is not filtered.
+-   `action` : 文字列 ( `Do` / `Ignore` )。以下のルールに基づいて、フィルタリングするかどうかを判断します。 2 つのルールのいずれかが満たされる場合、バイナリログはフィルタリングされます。それ以外の場合、バイナリログはフィルタリングされません。
 
-    - `Do`: the allow list. The binlog is filtered in either of the following two conditions:
-        - The type of the event is not in the `event` list of the rule.
-        - The SQL statement of the event cannot be matched by `sql-pattern` of the rule.
-    - `Ignore`: the block list. The binlog is filtered in either of the following two conditions:
-        - The type of the event is in the `event` list of the rule.
-        - The SQL statement of the event can be matched by `sql-pattern` of the rule.
+    -   `Do` : 許可リスト。 binlog は、次の 2 つの条件のいずれかでフィルター処理されます。
+        -   イベントのタイプがルールの`event`リストにありません。
+        -   イベントの SQL ステートメントは、ルールの`sql-pattern`つと一致しません。
+    -   `Ignore` : ブロック リスト。 binlog は、次の 2 つの条件のいずれかでフィルター処理されます。
+        -   イベントのタイプは、ルールの`event`リストにあります。
+        -   イベントの SQL ステートメントは、ルールの`sql-pattern`に一致できます。
 
-### Usage examples
+### 使用例 {#usage-examples}
 
-This section shows the usage examples in the scenario of sharding (sharded schemas and tables).
+このセクションでは、シャーディングのシナリオ (シャードされたスキーマとテーブル) での使用例を示します。
 
-#### Filter all sharding deletion operations
+#### すべてのシャーディング削除操作をフィルタリングする {#filter-all-sharding-deletion-operations}
 
-To filter out all deletion operations, configure the following two filtering rules:
+すべての削除操作を除外するには、次の 2 つのフィルタリング ルールを構成します。
 
-- `filter-table-rule` filters out the `truncate table`, `drop table` and `delete statement` operations of all tables that match the `test_*`.`t_*` pattern.
-- `filter-schema-rule` filters out the `drop database` operation of all schemas that match the `test_*` pattern.
+-   `filter-table-rule`は、 `drop table` `truncate table`および`delete statement`操作を除外し`test_*` 。 `t_*`パターン。
+-   `filter-schema-rule`は、 `test_*`のパターンに一致するすべてのスキーマの`drop database`の操作を除外します。
 
 ```yaml
 filters:
@@ -451,16 +451,16 @@ filters:
     action: Ignore
 ```
 
-#### Only migrate sharding DML statements
+#### シャーディング DML ステートメントのみを移行する {#only-migrate-sharding-dml-statements}
 
-To only migrate sharding DML statements, configure the following two filtering rules:
+シャーディング DML ステートメントのみを移行するには、次の 2 つのフィルタリング ルールを構成します。
 
-- `do-table-rule` only migrates the `create table`, `insert`, `update` and `delete` statements of all tables that match the `test_*`.`t_*` pattern.
-- `do-schema-rule` only migrates the `create database` statement of all schemas that match the `test_*` pattern.
+-   `do-table-rule`は、 `test_*`に一致するすべてのテーブルの`create table` 、 `insert` 、 `update` 、および`delete`ステートメントのみを移行します。 `t_*`パターン。
+-   `do-schema-rule`は、 `test_*`パターンに一致するすべてのスキーマの`create database`ステートメントのみを移行します。
 
-> **Note:**
+> **ノート：**
 >
-> The reason why the `create database/table` statement is migrated is that you can migrate DML statements only after the schema and table are created.
+> `create database/table`ステートメントが移行される理由は、スキーマとテーブルが作成された後にのみ DML ステートメントを移行できるためです。
 
 ```yaml
 filters:
@@ -475,9 +475,9 @@ filters:
     action: Do
 ```
 
-#### Filter out the SQL statements that TiDB does not support
+#### TiDB がサポートしていない SQL ステートメントを除外する {#filter-out-the-sql-statements-that-tidb-does-not-support}
 
-To filter out the `PROCEDURE` statements that TiDB does not support, configure the following `filter-procedure-rule`:
+TiDB がサポートしていない`PROCEDURE`ステートメントを除外するには、次の`filter-procedure-rule`を構成します。
 
 ```yaml
 filters:
@@ -488,17 +488,17 @@ filters:
     action: Ignore
 ```
 
-`filter-procedure-rule` filters out the `^CREATE\\s+PROCEDURE` and `^DROP\\s+PROCEDURE` statements of all tables that match the `test_*`.`t_*` pattern.
+`filter-procedure-rule`は、 `test_*`に一致するすべてのテーブルの`^CREATE\\s+PROCEDURE`および`^DROP\\s+PROCEDURE`ステートメントを除外します。 `t_*`パターン。
 
-#### Filter out the SQL statements that the TiDB parser does not support
+#### TiDB パーサーがサポートしていない SQL ステートメントを除外する {#filter-out-the-sql-statements-that-the-tidb-parser-does-not-support}
 
-For the SQL statements that the TiDB parser does not support, DM cannot parse them and get the `schema`/`table` information. So you must use the global filtering rule: `schema-pattern: "*"`.
+`table`パーサーがサポートしていない SQL ステートメントの場合、DM はそれらを解析して`schema`情報を取得できません。したがって、グローバル フィルタリング ルール`schema-pattern: "*"`を使用する必要があります。
 
-> **Note:**
+> **ノート：**
 >
-> To avoid filtering out data that need to be migrated, you must configure the global filtering rule as strictly as possible.
+> 移行する必要のあるデータを除外しないようにするには、グローバル フィルタリング ルールをできるだけ厳密に構成する必要があります。
 
-To filter out the `PARTITION` statements that the TiDB parser (of some version) does not support, configure the following filtering rule:
+TiDB パーサー (一部のバージョン) がサポートしていない`PARTITION`ステートメントを除外するには、次のフィルター規則を構成します。
 
 ```yaml
 filters:
@@ -508,45 +508,45 @@ filters:
     action: Ignore
 ```
 
-## Online DDL tools
+## オンライン DDL ツール {#online-ddl-tools}
 
-In the MySQL ecosystem, tools such as gh-ost and pt-osc are widely used. DM provides supports for these tools to avoid migrating unnecessary intermediate data.
+MySQL エコシステムでは、gh-ost や pt-osc などのツールが広く使用されています。 DM は、これらのツールをサポートして、不要な中間データの移行を回避します。
 
-### Restrictions
+### 制限 {#restrictions}
 
-- DM only supports gh-ost and pt-osc.
-- When `online-ddl` is enabled, the checkpoint corresponding to incremental replication should not be in the process of online DDL execution. For example, if an upstream online DDL operation starts at `position-A` and ends at `position-B` of the binlog, the starting point of incremental replication should be earlier than `position-A` or later than `position-B`; otherwise, an error occurs. For details, refer to [FAQ](/dm/dm-faq.md#how-to-handle-the-error-returned-by-the-ddl-operation-related-to-the-gh-ost-table-after-online-ddl-scheme-gh-ost-is-set).
+-   DM は gh-ost と pt-osc のみをサポートします。
+-   `online-ddl`が有効な場合、増分レプリケーションに対応するチェックポイントは、オンライン DDL 実行のプロセスにあってはなりません。たとえば、アップストリームのオンライン DDL 操作がバイナリログの`position-A`で開始し、 `position-B`で終了する場合、増分レプリケーションの開始点は`position-A`より前または`position-B`より後である必要があります。そうしないと、エラーが発生します。詳細は[FAQ](/dm/dm-faq.md#how-to-handle-the-error-returned-by-the-ddl-operation-related-to-the-gh-ost-table-after-online-ddl-scheme-gh-ost-is-set)を参照してください。
 
-### Parameter configuration
+### パラメータ構成 {#parameter-configuration}
 
 <SimpleTab>
 <div label="v2.0.5 and later">
 
-In v2.0.5 and later versions, you need to use the `online-ddl` configuration item in the `task` configuration file.
+v2.0.5 以降のバージョンでは、 `task`構成ファイルの`online-ddl`構成アイテムを使用する必要があります。
 
-- If the upstream MySQL/MariaDB (at the same time) uses the gh-ost or pt-osc tool, set `online-ddl` to `true` in the task configuration file:
+-   上流の MySQL/MariaDB が (同時に) gh-ost または pt-osc ツールを使用する場合は、タスク構成ファイルで`online-ddl`から`true`を設定します。
 
 ```yml
 online-ddl: true
 ```
 
-> **Note:**
+> **ノート：**
 >
-> Since v2.0.5, `online-ddl-scheme` has been deprecated, so you need to use `online-ddl` instead of `online-ddl-scheme`. That means that setting `online-ddl: true` overwrites `online-ddl-scheme`, and setting `online-ddl-scheme: "pt"` or `online-ddl-scheme: "gh-ost"` is converted to `online-ddl: true`.
+> v2.0.5 以降、 `online-ddl-scheme`は廃止されたため、 `online-ddl-scheme`の代わりに`online-ddl`を使用する必要があります。つまり、設定`online-ddl: true`は`online-ddl-scheme`を上書きし、設定`online-ddl-scheme: "pt"`または`online-ddl-scheme: "gh-ost"`は`online-ddl: true`に変換されます。
 
 </div>
 
 <div label="earlier than v2.0.5">
 
-Before v2.0.5 (not including v2.0.5), you need to use the `online-ddl-scheme` configuration item in the `task` configuration file.
+v2.0.5 より前 (v2.0.5 を除く) では、 `task`構成ファイルの`online-ddl-scheme`構成アイテムを使用する必要があります。
 
-- If the upstream MySQL/MariaDB uses the gh-ost tool, set it in the task configuration file:
+-   アップストリームの MySQL/MariaDB が gh-ost ツールを使用している場合は、タスク構成ファイルで設定します。
 
 ```yml
 online-ddl-scheme: "gh-ost"
 ```
 
-- If the upstream MySQL/MariaDB uses the pt tool, set it in the task configuration file:
+-   アップストリームの MySQL/MariaDB が pt ツールを使用している場合は、タスク構成ファイルで設定します。
 
 ```yml
 online-ddl-scheme: "pt"
@@ -555,22 +555,22 @@ online-ddl-scheme: "pt"
 </div>
 </SimpleTab>
 
-## Shard merge
+## シャードマージ {#shard-merge}
 
-DM supports merging the DML and DDL data in the upstream MySQL/MariaDB sharded tables and migrating the merged data to the downstream TiDB tables.
+DM は、上流の MySQL/MariaDB シャード テーブルの DML および DDL データのマージと、マージされたデータの下流の TiDB テーブルへの移行をサポートします。
 
-### Restrictions
+### 制限 {#restrictions}
 
-Currently, the shard merge feature is supported only in limited scenarios. For details, refer to [Sharding DDL usage Restrictions in the pessimistic mode](/dm/feature-shard-merge-pessimistic.md#restrictions) and [Sharding DDL usage Restrictions in the optimistic mode](/dm/feature-shard-merge-optimistic.md#restrictions).
+現在、シャード マージ機能は限られたシナリオでのみサポートされています。詳細については、 [シャーディング DDL の使用悲観的モードでの制限事項](/dm/feature-shard-merge-pessimistic.md#restrictions)および[シャーディング DDL の使用法楽観的モードでの制限事項](/dm/feature-shard-merge-optimistic.md#restrictions)を参照してください。
 
-### Parameter configuration
+### パラメータ構成 {#parameter-configuration}
 
-Set `shard-mode` to `pessimistic` in the task configuration file:
+タスク構成ファイルで`shard-mode`から`pessimistic`を設定します。
 
 ```
 shard-mode: "pessimistic" # The shard merge mode. Optional modes are ""/"pessimistic"/"optimistic". The "" mode is used by default which means sharding DDL merge is disabled. If the task is a shard merge task, set it to the "pessimistic" mode. After getting a deep understanding of the principles and restrictions of the "optimistic" mode, you can set it to the "optimistic" mode.
 ```
 
-### Handle sharding DDL locks manually
+### シャーディング DDL ロックを手動で処理する {#handle-sharding-ddl-locks-manually}
 
-In some abnormal scenarios, you need to [handle sharding DDL Locks manually](/dm/manually-handling-sharding-ddl-locks.md).
+一部の異常なシナリオでは、 [シャーディング DDL ロックを手動で処理する](/dm/manually-handling-sharding-ddl-locks.md)する必要があります。

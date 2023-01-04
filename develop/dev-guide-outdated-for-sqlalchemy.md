@@ -3,17 +3,17 @@ title: App Development for SQLAlchemy
 summary: Learn how to build a simple Python application based on TiDB and SQLAlchemy.
 ---
 
-# App Development for SQLAlchemy
+# SQLAlchemy のアプリ開発 {#app-development-for-sqlalchemy}
 
-> **Note:**
+> **ノート：**
 >
-> This document has been archived. This indicates that this document will not be updated thereafter. You can see [Developer Guide Overview](/develop/dev-guide-overview.md) for more details.
+> このドキュメントはアーカイブされました。これは、このドキュメントがその後更新されないことを示しています。詳細は[開発者ガイドの概要](/develop/dev-guide-overview.md)を参照してください。
 
-This tutorial shows you how to build a simple Python application based on TiDB and SQLAlchemy. The sample application to build here is a simple CRM tool where you can add, query, and update customer and order information.
+このチュートリアルでは、TiDB と SQLAlchemy に基づいて単純な Python アプリケーションを構築する方法を示します。ここで構築するサンプル アプリケーションは、顧客情報と注文情報を追加、クエリ、および更新できるシンプルな CRM ツールです。
 
-## Step 1. Start a TiDB cluster
+## ステップ 1. TiDB クラスターを開始する {#step-1-start-a-tidb-cluster}
 
-Start a pseudo TiDB cluster on your local storage:
+ローカル ストレージで疑似 TiDB クラスターを開始します。
 
 {{< copyable "" >}}
 
@@ -21,20 +21,20 @@ Start a pseudo TiDB cluster on your local storage:
 docker run -p 127.0.0.1:$LOCAL_PORT:4000 pingcap/tidb:v5.1.0
 ```
 
-The above command starts a temporary and single-node cluster with mock TiKV. The cluster listens on the port `$LOCAL_PORT`. After the cluster is stopped, any changes already made to the database are not persisted.
+上記のコマンドは、モック TiKV を使用して一時的な単一ノード クラスターを開始します。クラスタはポート`$LOCAL_PORT`でリッスンします。クラスターが停止すると、データベースに対して既に行われた変更は保持されません。
 
-> **Note:**
+> **ノート：**
 >
-> To deploy a "real" TiDB cluster for production, see the following guides:
+> 実稼働用に「実際の」TiDB クラスターをデプロイするには、次のガイドを参照してください。
 >
-> + [Deploy TiDB using TiUP for On-Premises](https://docs.pingcap.com/tidb/v5.1/production-deployment-using-tiup)
-> + [Deploy TiDB on Kubernetes](https://docs.pingcap.com/tidb-in-kubernetes/stable)
+> -   [TiUP for On-Premises を使用して TiDB をデプロイ](https://docs.pingcap.com/tidb/v5.1/production-deployment-using-tiup)
+> -   [TiDB を Kubernetes にデプロイ](https://docs.pingcap.com/tidb-in-kubernetes/stable)
 >
-> You can also [use TiDB Cloud](https://pingcap.com/products/tidbcloud/), a fully-managed Database-as-a-Service (DBaaS) of TiDB.
+> [TiDB Cloudを使用する](https://pingcap.com/products/tidbcloud/) 、TiDB のフルマネージド Database-as-a-Service (DBaaS) も可能です。
 
-## Step 2. Create a database
+## ステップ 2. データベースを作成する {#step-2-create-a-database}
 
-1. In the SQL shell, create the `test_sqlalchemy` database that your application will use:
+1.  SQL シェルで、アプリケーションが使用する`test_sqlalchemy`のデータベースを作成します。
 
     {{< copyable "" >}}
 
@@ -42,7 +42,7 @@ The above command starts a temporary and single-node cluster with mock TiKV. The
     CREATE DATABASE test_sqlalchemy;
     ```
 
-2. Create a SQL user for your application:
+2.  アプリケーションの SQL ユーザーを作成します。
 
     {{< copyable "" >}}
 
@@ -50,9 +50,9 @@ The above command starts a temporary and single-node cluster with mock TiKV. The
     CREATE USER <username> IDENTIFIED BY <password>;
     ```
 
-    Take note of the username and password. You will use them in your application code when initializing the project.
+    ユーザー名とパスワードをメモします。プロジェクトを初期化するときに、アプリケーション コードでそれらを使用します。
 
-3. Grant necessary permissions to the SQL user you have just created:
+3.  作成した SQL ユーザーに必要な権限を付与します。
 
     {{< copyable "" >}}
 
@@ -60,11 +60,11 @@ The above command starts a temporary and single-node cluster with mock TiKV. The
     GRANT ALL ON test_sqlalchemy.* TO <username>;
     ```
 
-## Step 3. Set virtual environments and initialize the project
+## ステップ 3. 仮想環境を設定してプロジェクトを初期化する {#step-3-set-virtual-environments-and-initialize-the-project}
 
-1. Use [Poetry](https://python-poetry.org/docs/), a dependency and package manager in Python, to set virtual environments and initialize the project.
+1.  Python の依存関係およびパッケージ マネージャーである[詩](https://python-poetry.org/docs/)を使用して、仮想環境を設定し、プロジェクトを初期化します。
 
-    Poetry can isolate system dependencies from other dependencies and avoid dependency pollution. Use the following command to install Poetry.
+    詩は、システムの依存関係を他の依存関係から分離し、依存関係の汚染を回避できます。次のコマンドを使用して、Poetry をインストールします。
 
     {{< copyable "" >}}
 
@@ -72,7 +72,7 @@ The above command starts a temporary and single-node cluster with mock TiKV. The
     pip install --user poetry
     ```
 
-2. Initialize the development environment using Poetry:
+2.  Poetry を使用して開発環境を初期化します。
 
     {{< copyable "" >}}
 
@@ -82,18 +82,18 @@ The above command starts a temporary and single-node cluster with mock TiKV. The
     poetry add git+https://github.com/pingcap/sqlalchemy-tidb.git#main
     ```
 
-## Step 4. Get and run the application code
+## ステップ 4. アプリケーション コードを取得して実行する {#step-4-get-and-run-the-application-code}
 
-The sample application code in this tutorial (`main.py`) uses SQLAlchemy to map Python methods to SQL operations. You can save the example application code as a Python file named `main.py` on your local machine.
+このチュートリアルのサンプル アプリケーション コード ( `main.py` ) は、SQLAlchemy を使用して Python メソッドを SQL 操作にマップします。サンプル アプリケーション コードは、ローカル マシンに`main.py`という名前の Python ファイルとして保存できます。
 
-The code performs the following operations:
+コードは次の操作を実行します。
 
-1. Creates the `users` and `orders` tables in the `test_sqlalchemy` database as specified by the `User` and `Order` mapping classes.
-2. Inserts data to the `users` and `orders` tables.
-3. Deletes data from orders by `oid`.
-4. Updates `orders` by `oid`.
-5. Joins the `users` and `orders` tables.
-6. Queries the `users` and `orders` tables using the same `uid`.
+1.  `User`および`Order`マッピング クラスの指定に従って、 `test_sqlalchemy`データベースに`users`および`orders`テーブルを作成します。
+2.  `users`と`orders`のテーブルにデータを挿入します。
+3.  オーダーからデータを`oid`削除します。
+4.  `orders`つずつ`oid`更新します。
+5.  `users`と`orders`のテーブルをテーブル結合します。
+6.  同じ`uid`を使用して`users`および`orders`テーブルをクエリします。
 
 {{< copyable "" >}}
 
@@ -189,9 +189,9 @@ print(
 )
 ```
 
-### Step 1. Update the connection parameters and connect to TiDB
+### ステップ 1. 接続パラメーターを更新して TiDB に接続する {#step-1-update-the-connection-parameters-and-connect-to-tidb}
 
-In the `main.py` file above, replace the string passed to `create_engine()` with the connection string you have obtained when creating the database.
+上記の`main.py`ファイルで、 `create_engine()`に渡された文字列を、データベースの作成時に取得した接続文字列に置き換えます。
 
 {{< copyable "" >}}
 
@@ -201,7 +201,7 @@ engine = create_engine(
     echo=False)
 ```
 
-By default, you can set the string as follows:
+デフォルトでは、次のように文字列を設定できます。
 
 {{< copyable "" >}}
 
@@ -211,9 +211,9 @@ engine = create_engine(
     echo=False)
 ```
 
-### Step 2. Run the application code
+### ステップ 2. アプリケーション コードを実行する {#step-2-run-the-application-code}
 
-After the connection string is correctly set, run the application code:
+接続文字列が正しく設定されたら、アプリケーション コードを実行します。
 
 {{< copyable "" >}}
 
@@ -221,7 +221,7 @@ After the connection string is correctly set, run the application code:
 python3 main.py
 ```
 
-The expected output is as follows:
+予想される出力は次のとおりです。
 
 ```
 [('Ben', 212.5), ('Ben', 8.5)]

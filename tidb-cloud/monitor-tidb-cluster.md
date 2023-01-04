@@ -3,75 +3,75 @@ title: Monitor a TiDB Cluster
 summary: Learn how to monitor your TiDB cluster.
 ---
 
-# Monitor a TiDB Cluster
+# TiDBクラスタを監視する {#monitor-a-tidb-cluster}
 
-This document describes how to monitor a TiDB cluster on TiDB Cloud.
+このドキュメントでは、 TiDB Cloudで TiDB クラスターを監視する方法について説明します。
 
-## Cluster status and node status
+## クラスタのステータスとノードのステータス {#cluster-status-and-node-status}
 
-You can see the current status of each running cluster on the cluster page.
+クラスター ページで、実行中の各クラスターの現在の状態を確認できます。
 
-### Cluster Status
+### クラスタステータス {#cluster-status}
 
-| Cluster status | Description |
-|:--|:--|
-| **AVAILABLE** | The cluster is healthy and available. |
-| **CREATING** | The cluster is being created. The cluster is inaccessible while it is being created. |
-| **IMPORTING** | Importing data into the cluster. |
-| **MODIFYING** | The cluster is being modified. |
-| **UNAVAILABLE** | The cluster has failed and TiDB cannot recover it. |
-| **PAUSED** | The cluster is paused. |
-| **RESUMING** | The cluster is resuming from a pause. |
-| **RESTORING** | The cluster is currently being restored from a backup. |
+| クラスタの状態     | 説明                                 |
+| :---------- | :--------------------------------- |
+| **利用可能**    | クラスタは正常で利用可能です。                    |
+| **作成**      | クラスターを作成しています。クラスターの作成中はアクセスできません。 |
+| **輸入**      | クラスターへのデータのインポート。                  |
+| **変更中**     | クラスタは変更中です。                        |
+| **利用できません** | クラスターに障害が発生したため、TiDB はそれを回復できません。  |
+| **一時停止**    | クラスターは一時停止しています。                   |
+| **再開中**     | クラスターは一時停止から再開しています。               |
+| **復元中**     | クラスタは現在バックアップから復元中です。              |
 
-### TiDB node status
+### TiDB ノードのステータス {#tidb-node-status}
 
-| TiDB node status | Description |
-|:--|:--|
-| **Normal** | Normal running |
-| **Creating** | Creating the node |
-| **Unavailable** | The TiDB node is not available |
-| **Terminating** | The TiDB node is terminating |
+| TiDB ノードのステータス | 説明               |
+| :------------- | :--------------- |
+| **普通**         | 通常走行             |
+| **作成**         | ノードの作成           |
+| **利用不可**       | TiDB ノードが利用できない  |
+| **終了中**        | TiDB ノードが終了しています |
 
-### TiKV node status
+### TiKV ノードのステータス {#tikv-node-status}
 
-| TiKV node status | Description |
-|:--|:--|
-| **Normal** | Normal running |
-| **Creating** | Creating the node |
-| **Unavailable** | The TiKV node is not available |
-| **Terminating** | The TiKV node is terminating |
-| **Leaving** | Migrating the current node data before termination |
+| TiKV ノードのステータス | 説明                |
+| :------------- | :---------------- |
+| **普通**         | 通常走行              |
+| **作成**         | ノードの作成            |
+| **利用不可**       | TiKV ノードは利用できません  |
+| **終了中**        | TiKV ノードが終了しています  |
+| **出発**         | 終了前の現在のノード データの移行 |
 
-## Monitoring metrics
+## 指標のモニタリング {#monitoring-metrics}
 
-In TiDB Cloud, you can view the commonly used metrics of a cluster from the following pages:
+TiDB Cloudでは、次のページからクラスターの一般的に使用されるメトリックを表示できます。
 
-- Cluster overview page
-- Cluster monitoring page
+-   クラスタの概要ページ
+-   クラスタ監視ページ
 
-### Metrics on the cluster overview page
+### クラスタの概要ページの指標 {#metrics-on-the-cluster-overview-page}
 
-The cluster overview page provides general metrics of a cluster, including total QPS, query duration, active connections, TiDB CPU, TiKV CPU, TiFlash CPU, TiDB memory, TiKV memory, TiFlash memory, TiKV used storage size, and TiFlash used storage size.
+クラスターの概要ページには、合計 QPS、クエリ期間、アクティブな接続、TiDB CPU、TiKV CPU、 TiFlash CPU、TiDB メモリ、TiKV メモリ、 TiFlashメモリ、TiKV 使用ストレージ サイズ、 TiFlash使用ストレージ サイズなど、クラスタの一般的なメトリックが表示されます。
 
-To view metrics on the cluster overview page, take the following steps:
+クラスターの概要ページでメトリックを表示するには、次の手順を実行します。
 
-1. Navigate to the **Clusters** page.
+1.  [**クラスター]**ページに移動します。
 
-2. Click the name of a cluster to go to its cluster overview page.
+2.  クラスターの名前をクリックして、そのクラスターの概要ページに移動します。
 
-### Metrics on the cluster monitoring page
+### クラスター監視ページの指標 {#metrics-on-the-cluster-monitoring-page}
 
-The cluster monitoring page provides a full set of standard metrics of a cluster. By viewing these metrics, you can easily identify performance issues and determine whether your current database deployment meets your requirements.
+クラスター監視ページには、クラスターの標準メトリックの完全なセットが表示されます。これらのメトリックを表示することで、パフォーマンスの問題を簡単に特定し、現在のデータベースの展開が要件を満たしているかどうかを判断できます。
 
-> **Note:**
+> **ノート：**
 >
-> Currently, the cluster monitoring page is unavailable for [Serverless Tier clusters](/tidb-cloud/select-cluster-tier.md#serverless-tier).
+> 現在、クラスター監視ページは[サーバーレス階層クラスター](/tidb-cloud/select-cluster-tier.md#serverless-tier)で利用できません。
 
-To view metrics on the cluster monitoring page, take the following steps:
+クラスター監視ページでメトリックを表示するには、次の手順を実行します。
 
-1. Navigate to the **Diagnosis** tab of a cluster.
+1.  クラスターの [**診断**] タブに移動します。
 
-2. Click the **Monitoring** tab.
+2.  [**モニタリング**] タブをクリックします。
 
-For more information, see [Built-in Monitoring](/tidb-cloud/built-in-monitoring.md).
+詳細については、 [ビルトインモニタリング](/tidb-cloud/built-in-monitoring.md)を参照してください。

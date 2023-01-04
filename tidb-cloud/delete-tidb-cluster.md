@@ -3,33 +3,35 @@ title: Delete a TiDB Cluster
 summary: Learn how to delete a TiDB cluster.
 ---
 
-# Delete a TiDB Cluster
+# TiDBクラスタを削除する {#delete-a-tidb-cluster}
 
-This document describes how to delete a TiDB cluster on TiDB Cloud.
+このドキュメントでは、 TiDB Cloudで TiDB クラスターを削除する方法について説明します。
 
-You can delete a cluster at any time by performing the following steps:
+次の手順を実行して、いつでもクラスターを削除できます。
 
-1. Navigate to the **Clusters** page.
-2. Locate the cluster that you want to delete, and click **...** in the upper-right corner of the cluster area.
+1.  [**クラスター]**ページに移動します。
 
-    > **Tip:**
+2.  削除するクラスターを見つけて、クラスター領域の右上隅にある [ **...** ] をクリックします。
+
+    > **ヒント：**
     >
-    > Alternatively, you can also click the name of the cluster that you want to delete on the **Clusters** page and click **...** in the upper-right corner.
+    > または、[クラスター] ページで削除する**クラスター**の名前をクリックし、右上隅にある [ <strong>...</strong> ] をクリックすることもできます。
 
-3. Click **Delete** in the drop-down menu.
-4. In the cluster deleting window, enter the cluster name.
+3.  ドロップダウン メニューで [**削除]**をクリックします。
 
-    If you want to restore the cluster sometime in the future, make sure that you have a backup of the cluster. Otherwise, you cannot restore it anymore. For more information about how to back up Dedicated Tier clusters, see [Back up and Restore TiDB Cluster Data](/tidb-cloud/backup-and-restore.md).
+4.  クラスターの削除ウィンドウで、クラスター名を入力します。
 
-    > **Note:**
+    将来、クラスターを復元する場合は、クラスターのバックアップがあることを確認してください。そうしないと、元に戻すことができなくなります。 Dedicated Tierクラスターをバックアップする方法の詳細については、 [TiDBクラスタデータのバックアップと復元](/tidb-cloud/backup-and-restore.md)を参照してください。
+
+    > **ノート：**
     >
-    > For [Serverless Tier clusters](/tidb-cloud/select-cluster-tier.md#serverless-tier), the backup and restore feature is unavailable. You can use [Dumpling](https://docs.pingcap.com/tidb/stable/dumpling-overview) to export your data as a backup.
+    > [サーバーレス階層クラスター](/tidb-cloud/select-cluster-tier.md#serverless-tier)の場合、バックアップおよび復元機能は使用できません。 [Dumpling](https://docs.pingcap.com/tidb/stable/dumpling-overview)を使用して、データをバックアップとしてエクスポートできます。
 
-5. Click **I understand the consequences, delete this cluster**.
+5.  **結果を理解した上で、このクラスターを削除して**ください をクリックします。
 
- Once a backed up Dedicated Tier cluster is deleted, the existing backup files of the cluster are moved to the recycle bin.
+バックアップされたDedicated Tierクラスターが削除されると、クラスターの既存のバックアップ ファイルはごみ箱に移動されます。
 
-- For backup files from an automatic backup, the recycle bin can retain them for 7 days.
-- For backup files from a manual backup, there is no expiration date.
+-   自動バックアップからのバックアップ ファイルの場合、ごみ箱はそれらを 7 日間保持できます。
+-   手動バックアップからのバックアップ ファイルの場合、有効期限はありません。
 
- If you want to restore a cluster from recycle bin, see [Restore a deleted cluster](/tidb-cloud/backup-and-restore.md#restore-a-deleted-cluster).
+ごみ箱からクラスターを復元する場合は、 [削除されたクラスターを復元する](/tidb-cloud/backup-and-restore.md#restore-a-deleted-cluster)を参照してください。

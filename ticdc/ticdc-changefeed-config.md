@@ -3,11 +3,11 @@ title: CLI and Configuration Parameters of TiCDC Changefeeds
 summary: Learn the definitions of CLI and configuration parameters of TiCDC changefeeds.
 ---
 
-# CLI and Configuration Parameters of TiCDC Changefeeds
+# TiCDC Changefeeds の CLI およびConfiguration / コンフィグレーションパラメーター {#cli-and-configuration-parameters-of-ticdc-changefeeds}
 
-## Changefeed CLI parameters
+## Changefeed CLI パラメータ {#changefeed-cli-parameters}
 
-This section introduces the command-line parameters of TiCDC changefeeds by illustrating how to create a replication (changefeed) task:
+このセクションでは、レプリケーション (changefeed) タスクを作成する方法を説明することで、TiCDC changefeeds のコマンド ライン パラメーターを紹介します。
 
 ```shell
 cdc cli changefeed create --server=http://10.0.10.25:8300 --sink-uri="mysql://root:123456@127.0.0.1:3306/" --changefeed-id="simple-replication-task"
@@ -19,22 +19,25 @@ ID: simple-replication-task
 Info: {"sink-uri":"mysql://root:123456@127.0.0.1:3306/","opts":{},"create-time":"2020-03-12T22:04:08.103600025+08:00","start-ts":415241823337054209,"target-ts":0,"admin-job-type":0,"sort-engine":"unified","sort-dir":".","config":{"case-sensitive":true,"filter":{"rules":["*.*"],"ignore-txn-start-ts":null,"ddl-allow-list":null},"mounter":{"worker-num":16},"sink":{"dispatchers":null},"scheduler":{"type":"table-number","polling-time":-1}},"state":"normal","history":null,"error":null}
 ```
 
-- `--changefeed-id`: The ID of the replication task. The format must match the `^[a-zA-Z0-9]+(\-[a-zA-Z0-9]+)*$` regular expression. If this ID is not specified, TiCDC automatically generates a UUID (the version 4 format) as the ID.
-- `--sink-uri`: The downstream address of the replication task. Configure `--sink-uri` according to the following format. Currently, the scheme supports `mysql`, `tidb`, and `kafka`.
+-   `--changefeed-id` : レプリケーション タスクの ID。形式は`^[a-zA-Z0-9]+(\-[a-zA-Z0-9]+)*$`の正規表現と一致する必要があります。この ID が指定されていない場合、TiCDC は ID として UUID (バージョン 4 形式) を自動的に生成します。
+
+-   `--sink-uri` : レプリケーション タスクのダウンストリーム アドレス。 `--sink-uri`を次の形式に従って構成します。現在、スキームは`mysql` 、 `tidb` 、および`kafka`をサポートしています。
 
     ```
     [scheme]://[userinfo@][host]:[port][/path]?[query_parameters]
     ```
 
-    When the sink URI contains special characters such as `! * ' ( ) ; : @ & = + $ , / ? % # [ ]`, you need to escape the special characters, for example, in [URI Encoder](https://meyerweb.com/eric/tools/dencoder/).
+    シンク URI に`! * ' ( ) ; : @ & = + $ , / ? % # [ ]`などの特殊文字が含まれている場合は、特殊文字をエスケープする必要があります (たとえば、 [URI エンコーダー](https://meyerweb.com/eric/tools/dencoder/)など)。
 
-- `--start-ts`: Specifies the starting TSO of the changefeed. From this TSO, the TiCDC cluster starts pulling data. The default value is the current time.
-- `--target-ts`: Specifies the ending TSO of the changefeed. To this TSO, the TiCDC cluster stops pulling data. The default value is empty, which means that TiCDC does not automatically stop pulling data.
-- `--config`: Specifies the configuration file of the changefeed.
+-   `--start-ts` : 変更フィードの開始 TSO を指定します。この TSO から、TiCDC クラスターはデータのプルを開始します。デフォルト値は現在の時刻です。
 
-## Changefeed configuration parameters
+-   `--target-ts` : changefeed の終了 TSO を指定します。この TSO に対して、TiCDC クラスターはデータのプルを停止します。デフォルト値は空です。これは、TiCDC がデータのプルを自動的に停止しないことを意味します。
 
-This section introduces the configuration of a replication task.
+-   `--config` : changefeed の構成ファイルを指定します。
+
+## Changefeed 構成パラメーター {#changefeed-configuration-parameters}
+
+このセクションでは、レプリケーション タスクの構成について説明します。
 
 ```toml
 # Specifies whether the database names and tables in the configuration file are case-sensitive.

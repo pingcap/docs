@@ -3,126 +3,128 @@ title: Performance Tuning Overview
 summary: This document introduces the basic concepts of performance tuning, such as user response time, throughput, and database time, and also provides a general process for performance tuning.
 ---
 
-# TiDB Performance Tuning Overview
+# TiDB性能チューニングの概要 {#tidb-performance-tuning-overview}
 
-This document introduces the basic concepts of performance tuning, such as user response time, throughput, and database time, and also provides a general process for performance tuning.
+このドキュメントでは、ユーザー応答時間、スループット、データベース時間などのパフォーマンス チューニングの基本概念を紹介し、パフォーマンス チューニングの一般的なプロセスについても説明します。
 
-## User response time and database time
+## ユーザー応答時間とデータベース時間 {#user-response-time-and-database-time}
 
-### User response time
+### ユーザー応答時間 {#user-response-time}
 
-User response time indicates how long an application takes to return the results of a request to users. As you can see from the following sequential timing diagram, the time of a typical user request contains the following:
+ユーザー応答時間は、アプリケーションが要求の結果をユーザーに返すのにかかる時間を示します。次の一連のタイミング図からわかるように、典型的なユーザー リクエストの時間には次のものが含まれます。
 
-- The network latency between the user and the application
-- The processing time of the application
-- The network latency during the interaction between the application and the database
-- The service time of the database
+-   ユーザーとアプリケーション間のネットワークレイテンシー
+-   アプリケーションの処理時間
+-   アプリケーションとデータベース間の対話中のネットワークレイテンシー
+-   データベースのサービス時間
 
-The user response time is affected by various subsystems on the request chain, such as network latency and bandwidth, number and request types of concurrent users, and resource usage of server CPU and I/O. To optimize the entire system effectively, you need to first identify the bottlenecks in user response time.
+ユーザーの応答時間は、ネットワークのレイテンシー時間と帯域幅、同時ユーザーの数と要求の種類、サーバーの CPU と I/O のリソース使用量など、要求チェーンのさまざまなサブシステムの影響を受けます。システム全体を効果的に最適化するには、まずユーザー応答時間のボトルネックを特定する必要があります。
 
-To get a total user response time within a specified time range (`ΔT`), you can use the following formula:
+指定した時間範囲 ( `ΔT` ) 内の合計ユーザー応答時間を取得するには、次の式を使用できます。
 
-Total user response time in `ΔT` = Average TPS (Transactions Per Second) x Average user response time x `ΔT`.
+`ΔT`の合計ユーザー応答時間 = 平均 TPS (1 秒あたりのトランザクション) x 平均ユーザー応答時間 x `ΔT` .
 
-![user_response_time](/media/performance/user_response_time_en.png)
+![user\_response\_time](/media/performance/user_response_time_en.png)
 
-### Database time
+### データベース時間 {#database-time}
 
-Database time indicates the total service time provided by a database. The database time in `ΔT` is the sum of the time that a database takes to process all application requests concurrently.
+データベース時間は、データベースによって提供される合計サービス時間を示します。 `ΔT`のデータベース時間は、データベースがすべてのアプリケーション要求を同時に処理するのにかかる時間の合計です。
 
-To get the database time, you can use any of the following methods:
+データベース時間を取得するには、次のいずれかの方法を使用できます。
 
-- Method 1: Multiply the average query latency by QPS and by ΔT, that is, `DB Time in ΔT = QPS × avg latency × ΔT`
-- Method 2: Multiply the average number of active sessions by ΔT, that is, `DB Time in ΔT  = avg active connections × ΔT`
-- Method 3: Calculate the time based on the TiDB internal Prometheus metric `tidb_server_tokens`, that is. `ΔT DB Time = rate(tidb_server_tokens) × ΔT`
+-   方法 1: 平均クエリレイテンシーに QPS と ΔT を掛ける、つまり`DB Time in ΔT = QPS × avg latency × ΔT`
+-   方法 2: アクティブなセッションの平均数に ΔT、つまり`DB Time in ΔT  = avg active connections × ΔT`を掛けます。
+-   方法 3: TiDB 内部の Prometheus メトリック`tidb_server_tokens`に基づいて時間を計算します。 `ΔT DB Time = rate(tidb_server_tokens) × ΔT`
 
-## Relationship between user response time and system throughput
+## ユーザー応答時間とシステム スループットの関係 {#relationship-between-user-response-time-and-system-throughput}
 
-User response time consists of service time, queuing time, and concurrent waiting time to complete a user request.
+ユーザー応答時間は、サービス時間、キューイング時間、およびユーザー要求を完了するための同時待機時間で構成されます。
 
 ```
 User Response time = Service time + Queuing delay + Coherency delay
 ```
 
-- Service time: the time a system consumes on certain resources when processing a request, for example, the CPU time that a database consumes to complete a SQL request.
-- Queuing delay: the time a system waits in a queue for service of certain resources when processing a request.
-- Coherency delay: the time a system communicates and collaborates with other concurrent tasks, so that it can access shared resources when processing a request.
+-   サービス時間: 要求を処理するときにシステムが特定のリソースで消費する時間 (たとえば、データベースが SQL 要求を完了するために消費する CPU 時間)。
+-   待ち行列遅延: 要求を処理するときに、システムが特定のリソースのサービスを待ち行列で待機する時間。
+-   コヒーレンシ遅延: 要求を処理するときに共有リソースにアクセスできるように、システムが他の同時実行タスクと通信および連携する時間。
 
-System throughput indicates the number of requests that can be completed by a system per second. User response time and throughput are usually inverse of each other. When the throughput increases, the system resource utilization and the queuing latency for a requested service increase accordingly. Once resource utilization exceeds a certain inflection point, the queuing latency will increase dramatically.
+システム スループットは、システムが 1 秒間に完了できる要求の数を示します。通常、ユーザーの応答時間とスループットは互いに反比例します。スループットが増加すると、それに応じてシステム リソースの使用率と、要求されたサービスのキューイングレイテンシーが増加します。リソースの使用率が特定の変曲点を超えると、キューイングのレイテンシーが劇的に増加します。
 
-For example, for a database system running OLTP loads, after its CPU utilization exceeds 65%, the CPU queueing scheduling latency increases significantly. This is because concurrent requests of a system are not completely independent, which means that these requests can collaborate and compete for shared resources. For example, requests from different users might perform mutually exclusive locking operations on the same data. When the resource utilization increases, the queuing and scheduling latency increases too, which causes that the shared resources cannot be released in time and in turn prolongs the waiting time for shared resources by other tasks.
+たとえば、OLTP 負荷を実行しているデータベース システムの場合、CPU 使用率が 65% を超えると、CPU キューイング スケジューリングのレイテンシーが大幅に増加します。これは、システムの同時リクエストが完全に独立しているわけではないためです。つまり、これらのリクエストが協力して共有リソースをめぐって競合する可能性があります。たとえば、異なるユーザーからの要求が、同じデータに対して相互に排他的なロック操作を実行する場合があります。リソースの使用率が増加すると、キューイングとスケジューリングのレイテンシーも増加し、共有リソースを時間内に解放できなくなり、他のタスクによる共有リソースの待機時間が長くなります。
 
-## Performance tuning process
+## パフォーマンス チューニング プロセス {#performance-tuning-process}
 
-The performance tuning process consists of the following 6 steps:
+パフォーマンス チューニング プロセスは、次の 6 つの手順で構成されます。
 
-1. Define a tuning objective.
-2. Establish a performance baseline.
-3. Identify bottlenecks in user response time.
-4. Propose tuning solutions, and evaluate the benefits, risks, and costs of each solution.
-5. Implement tuning solutions.
-6. Evaluate tuning results.
+1.  調整目標を定義します。
+2.  パフォーマンスのベースラインを確立します。
+3.  ユーザー応答時間のボトルネックを特定します。
+4.  チューニング ソリューションを提案し、各ソリューションの利点、リスク、およびコストを評価します。
+5.  チューニング ソリューションを実装します。
+6.  チューニング結果を評価します。
 
-To achieve the tuning objective of a performance tuning project, you usually need to repeat Step 2 to Step 6 multiple times.
+パフォーマンス チューニング プロジェクトのチューニング目標を達成するには、通常、ステップ 2 からステップ 6 を複数回繰り返す必要があります。
 
-### Step 1. Define a tuning objective
+### ステップ 1. 調整目標を定義する {#step-1-define-a-tuning-objective}
 
-For different types of systems, tuning objectives are different too. For example, for a financial core OLTP system, the tuning objective might be to reduce the long-tail latency of transactions; for a financial settlement system, the tuning objective might be to make better use of hardware resources and reduce the time of batch settlement tasks.
+システムの種類が異なれば、チューニングの目的も異なります。たとえば、金融コア OLTP システムの場合、チューニングの目的は、トランザクションのロングテールレイテンシーを削減することです。金融決済システムの場合、チューニングの目的は、ハードウェア リソースをより有効に活用し、バッチ決済タスクの時間を短縮することです。
 
-A good tuning objective should be easily quantifiable. For example:
+優れたチューニング目標は、簡単に定量化できる必要があります。例えば：
 
-- Good tuning objective: The p99 latency for transfer transactions needs to be less than 200 ms during peak business hours of 9 am to 10 am.
-- Poor tuning objective: The system is too slow to respond so it needs to be optimized.
+-   適切なチューニング目標: 午前 9 時から午前 10 時までのピーク時の営業時間中、転送トランザクションの p99レイテンシーを 200 ミリ秒未満にする必要があります。
+-   調整目標が不十分: システムの応答が遅すぎるため、最適化する必要があります。
 
-Defining a clear tuning objective helps guide the subsequent performance tuning steps.
+明確なチューニング目標を定義すると、その後のパフォーマンス チューニング手順をガイドするのに役立ちます。
 
-### Step 2. Establish a performance baseline
+### ステップ 2. パフォーマンスのベースラインを確立する {#step-2-establish-a-performance-baseline}
 
-To tune performance efficiently, you need to capture the current performance data to establish a performance baseline. The performance data to be captured typically includes the following:
+パフォーマンスを効率的に調整するには、現在のパフォーマンス データを取得して、パフォーマンスのベースラインを確立する必要があります。キャプチャされるパフォーマンス データには、通常、次のものが含まれます。
 
-- Mean and long-tail values of user response time, and throughput of your application
-- Database performance data such as database time, query latency, and QPS
+-   ユーザー応答時間の平均値とロングテール値、およびアプリケーションのスループット
 
-    TiDB measures and stores performance data thoroughly in different dimensions, such as [slow query logs](/identify-slow-queries.md), [Top SQL](/dashboard/top-sql.md), [Continuous Performance Profiling](/dashboard/continuous-profiling.md), and [traffic visualizer](/dashboard/dashboard-key-visualizer.md). In addition, you can perform historical backtracking and comparison of the timing metrics data stored in Prometheus.
+-   データベース時間、クエリレイテンシー、QPS などのデータベース パフォーマンス データ
 
-- Resource utilization, including resources such as CPU, IO, and network
-- Configuration information, such as application configurations, database configurations, and operating system configurations
+    TiDB は、パフォーマンス データを[遅いクエリ ログ](/identify-slow-queries.md) 、 [Top SQL](/dashboard/top-sql.md) 、 [継続的なパフォーマンス プロファイリング](/dashboard/continuous-profiling.md) 、および[トラフィック ビジュアライザー](/dashboard/dashboard-key-visualizer.md)などのさまざまな次元で徹底的に測定および保存します。さらに、Prometheus に保存されているタイミング メトリック データの過去のバックトラックと比較を実行できます。
 
-### Step 3. Identify bottlenecks in user response time
+-   CPU、IO、ネットワークなどのリソースを含むリソース使用率
 
-Identify or speculate on bottlenecks in user response times based on data from the performance baseline.
+-   アプリケーション構成、データベース構成、オペレーティング システム構成などのConfiguration / コンフィグレーション情報
 
-Applications usually do not measure and record the full chain of user requests, so you cannot effectively break down user response time from top to bottom through the application.
+### ステップ 3. ユーザー応答時間のボトルネックを特定する {#step-3-identify-bottlenecks-in-user-response-time}
 
-In contrast, databases have a complete record of performance metrics such as query latency and throughput. Based on database time, you can determine if the bottleneck in user response time is in a database.
+パフォーマンス ベースラインのデータに基づいて、ユーザー応答時間のボトルネックを特定または推測します。
 
-- If the bottleneck is not in databases, you need to rely on the resource utilization collected outside databases or profile the application to identify the bottleneck outside databases. Common scenarios include insufficient resources of an application or proxy server, and insufficient usage of hardware resources caused by serial points in an application.
-- If bottlenecks are in databases, you can analyze and diagnose the database performances using comprehensive tuning tools. Common scenarios include the presence of slow SQL, unreasonable usage of a database by an application, and the presence of read and write hotspots in databases.
+アプリケーションは通常、ユーザー要求の完全なチェーンを測定および記録しないため、ユーザーの応答時間をアプリケーション全体で効果的に分析することはできません。
 
-For more information about the analysis and diagnostic methods and tools, see [Performance Analysis and Tuning](/performance-tuning-methods.md).
+対照的に、データベースには、クエリのレイテンシーやスループットなどのパフォーマンス メトリックの完全な記録があります。データベース時間に基づいて、ユーザー応答時間のボトルネックがデータベースにあるかどうかを判断できます。
 
-### Step 4. Propose tuning solutions, and evaluate the benefits, risks, and costs of each solution
+-   ボトルネックがデータベースにない場合は、データベース外で収集されたリソース使用率に依存するか、アプリケーションをプロファイリングして、データベース外のボトルネックを特定する必要があります。一般的なシナリオには、アプリケーションまたはプロキシサーバーのリソースが不十分である、アプリケーションのシリアル ポイントが原因でハードウェア リソースが十分に使用されていない、などがあります。
+-   データベースにボトルネックがある場合は、包括的なチューニング ツールを使用して、データベースのパフォーマンスを分析および診断できます。一般的なシナリオには、遅い SQL の存在、アプリケーションによるデータベースの不当な使用、データベース内の読み取りと書き込みのホットスポットの存在が含まれます。
 
-After identifying the bottleneck of a system through performance analysis, you can propose a tuning solution that is cost-effective, has low risks, and provides the maximum benefit based on the actual situation.
+分析と診断の方法とツールの詳細については、 [パフォーマンス分析とチューニング](/performance-tuning-methods.md)を参照してください。
 
-According to [Amdahl's Law](https://en.wikipedia.org/wiki/Amdahl%27s_law), the maximum gain from performance tuning depends on the percentage of the optimized part in the overall system. Therefore, you need to identify the system bottlenecks and the corresponding percentage based on the performance data, and then predict the gains after the bottleneck is resolved or optimized.
+### ステップ 4. チューニング ソリューションを提案し、各ソリューションの利点、リスク、およびコストを評価する {#step-4-propose-tuning-solutions-and-evaluate-the-benefits-risks-and-costs-of-each-solution}
 
-Note that even if a solution can bring the greatest potential benefits by tunning the largest bottleneck, you still need to evaluate the risks and costs of this solution. For example:
+パフォーマンス分析によってシステムのボトルネックを特定した後、実際の状況に基づいて、費用対効果が高く、リスクが低く、最大のメリットを提供するチューニング ソリューションを提案できます。
 
-- The most straightforward tuning objective solution for a resource-overloaded system is to expand its capacity, but in practice, the expansion solution might be too costly to be adopted.
-- When a slow query in a business module causes a slow response of the entire module, upgrading to a new version of the database can solve the slow query issue, but it might also affect modules that did not have this issue. Therefore, this solution might have a potentially high risk. A low-risk solution is to skip the database version upgrade and rewrite the existing slow queries for the current database version.
+[アムダールの法則](https://en.wikipedia.org/wiki/Amdahl%27s_law)によると、パフォーマンス チューニングによる最大の利益は、システム全体における最適化された部分の割合に依存します。したがって、システムのボトルネックとそれに対応するパーセンテージをパフォーマンス データに基づいて特定し、ボトルネックが解決または最適化された後の利益を予測する必要があります。
 
-### Step 5. Implement tuning solutions
+ソリューションが最大のボトルネックを調整することによって最大の潜在的利益をもたらすことができる場合でも、このソリューションのリスクとコストを評価する必要があることに注意してください。例えば：
 
-Considering the benefits, risks, and costs, choose one or more tuning solutions for implementation. In the implementation process, you need to make thorough preparation for changes to the production system and record the changes in detail.
+-   リソース過負荷のシステムに対する最も単純な調整目的のソリューションは、その容量を拡張することですが、実際には、拡張ソリューションはコストがかかりすぎて採用できない場合があります。
+-   ビジネス モジュールのクエリが遅いためにモジュール全体の応答が遅くなる場合、新しいバージョンのデータベースにアップグレードすると、クエリが遅い問題は解決できますが、この問題が発生していないモジュールにも影響する可能性があります。したがって、このソリューションには高いリスクが伴う可能性があります。低リスクの解決策は、データベース バージョンのアップグレードをスキップし、現在のデータベース バージョンの既存のスロー クエリを書き直すことです。
 
-To mitigate risks and validate the benefits of a tuning solution, it is recommended that you perform validation and complete regression of changes in both test and staging environments. For example, if the selected tuning solution of a slow query is to create a new index to optimize the query access path, you need to ensure that the new index does not introduce any obvious write hotspots to the existing data insertion workload and slows down other modules.
+### ステップ 5. チューニング ソリューションを実装する {#step-5-implement-tuning-solutions}
 
-### Step 6. Evaluate tuning results
+メリット、リスク、およびコストを考慮して、実装するチューニング ソリューションを 1 つ以上選択します。実装プロセスでは、本番システムへの変更を徹底的に準備し、変更を詳細に記録する必要があります。
 
-After applying the tuning solution, you need to evaluate the results:
+リスクを軽減し、チューニング ソリューションの利点を検証するには、テスト環境とステージング環境の両方で検証を実行し、変更の回帰を完了することをお勧めします。たとえば、遅いクエリの選択されたチューニング ソリューションがクエリ アクセス パスを最適化するために新しいインデックスを作成することである場合、新しいインデックスが既存のデータ挿入ワークロードに明らかな書き込みホットスポットを導入せず、他の処理を遅くしないようにする必要があります。モジュール。
 
-- If the tuning objective is reached, the entire tuning project is completed successfully.
-- If the tuning objective is not reached, you need to repeat Step 2 to Step 6 in this document until the tuning objective is reached.
+### ステップ 6. チューニング結果の評価 {#step-6-evaluate-tuning-results}
 
-After reaching your tuning objectives, you might need to further plan your system capacity to meet your business growth.
+チューニング ソリューションを適用した後、結果を評価する必要があります。
+
+-   チューニング目標が達成されると、チューニング プロジェクト全体が正常に完了します。
+-   調整目標が達成されない場合は、調整目標が達成されるまで、このドキュメントのステップ 2 からステップ 6 を繰り返す必要があります。
+
+チューニング目標を達成した後、ビジネスの成長に合わせてシステム容量をさらに計画する必要がある場合があります。

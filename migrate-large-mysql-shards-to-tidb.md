@@ -3,45 +3,45 @@ title: Migrate and Merge MySQL Shards of Large Datasets to TiDB
 summary: Learn how to migrate and merge large datasets of shards from MySQL into TiDB using Dumpling and TiDB Lightning, as well as how to configure the DM task to replicate incremental data changes from different MySQL shards into TiDB.
 ---
 
-# Migrate and Merge MySQL Shards of Large Datasets to TiDB
+# 大規模なデータセットの MySQL シャードを TiDB に移行およびマージする {#migrate-and-merge-mysql-shards-of-large-datasets-to-tidb}
 
-If you want to migrate a large MySQL dataset (for example, more than 1 TiB) from different partitions into TiDB, and you are able to suspend all the TiDB cluster write operations from your business during the migration, you can use TiDB Lightning to do the migration quickly. After migration, you can also use TiDB DM to perform incremental replication according to your business needs. "Large datasets" in this document usually mean data around one TiB or more.
+大規模な MySQL データセット (たとえば、1 TiB を超える) を異なるパーティションから TiDB に移行する必要があり、移行中にビジネスからすべての TiDB クラスター書き込み操作を一時停止できる場合は、 TiDB Lightningを使用して実行できます。移行を迅速に。移行後、TiDB DM を使用して、ビジネス ニーズに応じて増分レプリケーションを実行することもできます。このドキュメントの「大規模なデータセット」とは、通常、1 TiB 以上のデータを意味します。
 
-This document uses an example to walk through the whole procedure of such kind of migration.
+このドキュメントでは、例を使用して、この種の移行の手順全体を説明します。
 
-If the data size of the MySQL shards is less than 1 TiB, you can follow the procedure described in [Migrate and Merge MySQL Shards of Small Datasets to TiDB](/migrate-small-mysql-shards-to-tidb.md), which supports both full and incremental migration and the steps are easier.
+MySQL シャードのデータ サイズが 1 TiB 未満の場合は、 [小さなデータセットの MySQL シャードを TiDB に移行およびマージする](/migrate-small-mysql-shards-to-tidb.md)で説明されている手順に従うことができます。これは、完全移行と増分移行の両方をサポートし、手順がより簡単になります。
 
-The example in this document assumes that you have two databases, `my_db1` and `my_db2`. You use Dumpling to export two tables `table1` and `table2` from `my_db1`, and two tables `table3` and `table4` from `my_db2`, respectively. After that, you use TiDB Lightning to import and merge the four exported tables into the same `table5` from `mydb` in the target TiDB.
+このドキュメントの例では、2 つのデータベース`my_db1`と`my_db2`があると想定しています。 Dumplingを使用して、2 つのテーブル`table1`と`table2`を`my_db1`から、2 つのテーブル`table3`と`table4`を`my_db2`からそれぞれエクスポートします。その後、 TiDB Lightningを使用して、エクスポートされた 4 つのテーブルをターゲット TiDB の`mydb`から同じ`table5`にインポートしてマージします。
 
-In this document, you can migrate data following this procedure:
+このドキュメントでは、次の手順に従ってデータを移行できます。
 
-1. Use Dumpling to export full data. In this example, you export 2 tables respectively from 2 upstream databases:
+1.  Dumplingを使用して完全なデータをエクスポートします。この例では、2 つのアップストリーム データベースからそれぞれ 2 つのテーブルをエクスポートします。
 
-    - Export `table1` and `table2` from `my_db1`
-    - Export `table3` and `table4` from `my_db2`
+    -   `my_db1`から`table1`と`table2`をエクスポート
+    -   `my_db2`から`table3`と`table4`をエクスポート
 
-2. Start TiDB Lightning to migrate data to `mydb.table5` in TiDB.
+2.  TiDB Lightningを起動して、TiDB の`mydb.table5`にデータを移行します。
 
-3. (Optional) Use TiDB DM to perform incremental replication.
+3.  (オプション) TiDB DM を使用して増分レプリケーションを実行します。
 
-## Prerequisites
+## 前提条件 {#prerequisites}
 
-Before getting started, see the following documents to prepare for the migration task.
+開始する前に、次のドキュメントを参照して、移行タスクの準備をしてください。
 
-- [Deploy a DM Cluster Using TiUP](/dm/deploy-a-dm-cluster-using-tiup.md)
-- [Use TiUP to Deploy Dumpling and Lightning](/migration-tools.md)
-- [Downstream privilege requirements for Dumpling](/dumpling-overview.md#export-data-from-tidbmysql)
-- [Downstream privilege requirements for TiDB Lightning](/tidb-lightning/tidb-lightning-requirements.md)
-- [Downstream storage space for TiDB Lightning](/tidb-lightning/tidb-lightning-requirements.md)
-- [Privileges required by DM-worker](/dm/dm-worker-intro.md)
+-   [TiUPを使用して DMクラスタをデプロイする](/dm/deploy-a-dm-cluster-using-tiup.md)
+-   [TiUPを使用してDumplingと Lightning をデプロイ](/migration-tools.md)
+-   [Dumplingのダウンストリーム権限要件](/dumpling-overview.md#export-data-from-tidbmysql)
+-   [TiDB Lightningのダウンストリーム権限要件](/tidb-lightning/tidb-lightning-requirements.md)
+-   [TiDB Lightningのダウンストリーム ストレージ スペース](/tidb-lightning/tidb-lightning-requirements.md)
+-   [DM-worker に必要な権限](/dm/dm-worker-intro.md)
 
-### Check conflicts for Sharded Tables
+### シャード テーブルの競合をチェックする {#check-conflicts-for-sharded-tables}
 
-If the migration involves merging data from different sharded tables, primary key or unique index conflicts may occur during the merge. Therefore, before migration, you need to take a deep look at the current sharding scheme from the business point of view, and find a way to avoid conflicts. For more details, see [Handle conflicts between primary keys or unique indexes across multiple sharded tables](/dm/shard-merge-best-practices.md#handle-conflicts-between-primary-keys-or-unique-indexes-across-multiple-sharded-tables). The following is a brief description.
+移行に異なるシャード テーブルからのデータのマージが含まれる場合、マージ中に主キーまたは一意のインデックスの競合が発生する可能性があります。したがって、移行の前に、ビジネスの観点から現在のシャーディング スキームを詳しく調べ、競合を回避する方法を見つける必要があります。詳細については、 [複数のシャード テーブル間で主キーまたは一意のインデックス間の競合を処理する](/dm/shard-merge-best-practices.md#handle-conflicts-between-primary-keys-or-unique-indexes-across-multiple-sharded-tables)を参照してください。以下は簡単な説明です。
 
-Assume that tables 1~4 have the same table structure as follows.
+テーブル 1 ～ 4 は、次のように同じテーブル構造を持っているとします。
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 CREATE TABLE `table1` (
@@ -54,9 +54,9 @@ CREATE TABLE `table1` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1
 ```
 
-For those four tables, the `id` column is the primary key. It is auto-incremental, which will cause different sharded tables to generate duplicated `id` ranges and cause the primary key conflict on the target table during the migration. On the other hand, the `sid` column is the sharding key, which ensures that the index is unique globally. So you can remove the unique constraint of the `id` column in the target `table5` to avoid the data merge conflicts.
+これら 4 つのテーブルでは、 `id`列が主キーです。これは自動増分であり、異なるシャード テーブルが重複した`id`の範囲を生成し、移行中にターゲット テーブルで主キーの競合が発生します。一方、 `sid`列はシャーディング キーであり、インデックスがグローバルに一意であることを保証します。したがって、ターゲット`table5`の`id`列の一意の制約を削除して、データ マージの競合を回避できます。
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 CREATE TABLE `table5` (
@@ -69,74 +69,74 @@ CREATE TABLE `table5` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1
 ```
 
-## Step1. Use Dumpling to export full data
+## ステップ1。 Dumplingを使用して完全なデータをエクスポートする {#step1-use-dumpling-to-export-full-data}
 
-If those multiple sharded tables to be exported are in the same upstream MySQL instance, you can directly use the `-f` parameter of Dumpling to export them in a single operation.
+エクスポートする複数のシャード テーブルが同じアップストリーム MySQL インスタンスにある場合は、 Dumplingの`-f`パラメータを直接使用して、1 回の操作でそれらをエクスポートできます。
 
-If the sharded tables are stored in different MySQL instances, you can use Dumpling to export them respectively and place the exported results in the same parent directory.
+分割されたテーブルが異なる MySQL インスタンスに格納されている場合は、 Dumplingを使用してそれぞれをエクスポートし、エクスポートした結果を同じ親ディレクトリに配置できます。
 
-In the following example, both methods are used, and then the exported data is stored in the same parent directory.
+次の例では、両方の方法が使用され、エクスポートされたデータは同じ親ディレクトリに格納されます。
 
-First, run the following command to use Dumpling to export `table1` and `table2` from `my_db1`:
+まず、次のコマンドを実行してDumplingを使用して`my_db1`から`table1`と`table2`をエクスポートします。
 
-{{< copyable "shell-regular" >}}
+{{< copyable "" >}}
 
 ```shell
 tiup dumpling -h ${ip} -P 3306 -u root -t 16 -r 200000 -F 256MB -B my_db1 -f 'my_db1.table[12]' -o ${data-path}/my_db1
 ```
 
-The following table describes parameters in the command above. For more information about Dumpling parameters, see [Dumpling Overview](/dumpling-overview.md).
+次の表では、上記のコマンドのパラメーターについて説明します。 Dumplingパラメータの詳細については、 [Dumplingの概要](/dumpling-overview.md)を参照してください。
 
-| Parameter       |   Description |
-|-                |-              |
-| `-u` or `--user`       |   Specifies the user name to be used.  |
-| `-p` or `--password`   |   Specifies the password to be used. |
-| `-p` or `--port`       |   Specifies the port to be used.|
-| `-h` or `--host`       |   Specifies the IP address of the data source.  |
-| `-t` or `--thread`     |   Specifies the number of threads for the export. Increasing the number of threads improves the concurrency of Dumpling and the export speed, and increases the database's memory consumption. Therefore, it is not recommended to set the number too large. Usually, it's less than 64.|
-| `-o` or `--output`     |  Specifies the export directory of the storage, which supports a local file path or a [URL of an external storage](/br/backup-and-restore-storages.md).|
-| `-r` or `--row`        | Specifies the maximum number of rows in a single file. If you use this parameter, Dumpling enables the in-table concurrency to speed up the export and reduce the memory usage.|
-| `-F` |  Specifies the maximum size of a single file. The unit is `MiB`. It is recommended to keep the value to 256 MiB. |
-| `-B` or `--database`   | Specifies databases to be exported. |
-| `-f` or `--filter`     |  Exports tables that match the filter pattern. For the filter syntax, see [table-filter](/table-filter.md). |
+| パラメータ               | 説明                                                                                                                       |
+| ------------------- | ------------------------------------------------------------------------------------------------------------------------ |
+| `-u`または`--user`     | 使用するユーザー名を指定します。                                                                                                         |
+| `-p`または`--password` | 使用するパスワードを指定します。                                                                                                         |
+| `-p`または`--port`     | 使用するポートを指定します。                                                                                                           |
+| `-h`または`--host`     | データ ソースの IP アドレスを指定します。                                                                                                  |
+| `-t`または`--thread`   | エクスポートのスレッド数を指定します。スレッド数を増やすと、 Dumplingの同時実行性とエクスポート速度が向上し、データベースのメモリ消費量が増加します。そのため、あまり大きな数値を設定することはお勧めしません。通常は 64 未満です。 |
+| `-o`または`--output`   | ローカル ファイル パスまたは[外部ストレージの URL](/br/backup-and-restore-storages.md)をサポートするストレージのエクスポート ディレクトリを指定します。                       |
+| `-r`または`--row`      | 1 つのファイル内の最大行数を指定します。このパラメータを使用すると、 Dumplingはテーブル内の同時実行性を有効にして、エクスポートを高速化し、メモリ使用量を削減します。                                 |
+| `-F`                | 1 つのファイルの最大サイズを指定します。単位は`MiB`です。値を 256 MiB に維持することをお勧めします。                                                               |
+| `-B`または`--database` | エクスポートするデータベースを指定します。                                                                                                    |
+| `-f`または`--filter`   | フィルター パターンに一致するテーブルをエクスポートします。フィルター構文については、 [テーブルフィルター](/table-filter.md)を参照してください。                                      |
 
-Ensure that there is enough free space in `${data-path}`. It is strongly recommended to use the `-F` option to avoid interruptions in the backup process due to oversized single tables.
+`${data-path}`に十分な空き容量があることを確認してください。 1 つのテーブルが大きすぎるためにバックアップ プロセスが中断されるのを避けるために、 `-F`オプションを使用することを強くお勧めします。
 
-Then, run the following command to use Dumpling to export `table3` and `table4` from `my_db2`. Note that the path is `${data-path}/my_db2` instead of `${data-path}/my_db1`.
+次に、次のコマンドを実行してDumplingを使用して`table3`と`table4`を`my_db2`からエクスポートします。パスは`${data-path}/my_db1`ではなく`${data-path}/my_db2`であることに注意してください。
 
-{{< copyable "shell-regular" >}}
+{{< copyable "" >}}
 
 ```shell
 tiup dumpling -h ${ip} -P 3306 -u root -t 16 -r 200000 -F 256MB -B my_db2 -f 'my_db2.table[34]' -o ${data-path}/my_db2
 ```
 
-After the preceding procedures, all source data tables are now exported to the `${data-path}` directory. Putting all the exported data on the same directory makes subsequent import by TiDB Lightning convenient.
+前述の手順の後、すべてのソース データ テーブルが`${data-path}`ディレクトリにエクスポートされます。エクスポートされたすべてのデータを同じディレクトリに配置すると、 TiDB Lightningによる後続のインポートが便利になります。
 
-The starting position information needed for incremental replication is in the `metadata` files in `my_db1` and `my_db2` sub-directories of `${data-path}` directory respectively. They are meta-information files automatically generated by Dumpling. To perform incremental replication, you need to record the binlog locations information in these files.
+増分複製に必要な開始位置情報は、それぞれ`${data-path}`ディレクトリーの`my_db1`および`my_db2`サブディレクトリー内の`metadata`ファイルにあります。 Dumplingが自動生成するメタ情報ファイルです。増分レプリケーションを実行するには、これらのファイルにバイナリログの場所情報を記録する必要があります。
 
-## Step 2. Start TiDB Lightning to import full exported data
+## ステップ 2. TiDB Lightningを起動して、エクスポートされた完全なデータをインポートします {#step-2-start-tidb-lightning-to-import-full-exported-data}
 
-Before starting TiDB Lightning for migration, it is recommended that you understand how to handle checkpoints, and then choose the appropriate way to proceed according to your needs.
+移行のためにTiDB Lightningを開始する前に、チェックポイントの処理方法を理解し、必要に応じて適切な方法を選択することをお勧めします。
 
-### Checkpoints
+### チェックポイント {#checkpoints}
 
-Migrating a large volume of data usually takes hours or even days. There is a certain chance that the long-running process is interrupted unexpectedly. It can be very frustrating to redo everything from scratch, even if some part of data has already been imported.
+大量のデータを移行するには、通常、数時間から数日かかります。長期実行プロセスが予期せず中断される可能性があります。データの一部が既にインポートされている場合でも、すべてを最初からやり直すのは非常にイライラすることがあります。
 
-Fortunately, TiDB Lightning provides a feature called `checkpoints`, which makes TiDB Lightning save the import progress as `checkpoints` from time to time, so that an interrupted import task can be resumed from the latest checkpoint upon restart.
+幸いなことに、 TiDB Lightningは`checkpoints`と呼ばれる機能を提供します。これにより、 TiDB Lightningはインポートの進行状況を時々 `checkpoints`として保存し、中断されたインポート タスクを再起動時に最新のチェックポイントから再開できるようにします。
 
-If the TiDB Lightning task crashes due to unrecoverable errors (for example, data corruption), it will not pick up from the checkpoint, but will report an error and quit the task. To ensure the safety of the imported data, you must resolve these errors by using the `tidb-lightning-ctl` command before proceeding with other steps. The options include:
+回復不能なエラー (データの破損など) が原因でTiDB Lightningタスクがクラッシュした場合、チェックポイントから取得されず、エラーが報告されてタスクが終了します。インポートされたデータの安全性を確保するには、他の手順に進む前に、 `tidb-lightning-ctl`コマンドを使用してこれらのエラーを解決する必要があります。オプションは次のとおりです。
 
-* --checkpoint-error-destroy: This option allows you to restart importing data into failed target tables from scratch by destroying all the existing data in those tables first.
-* --checkpoint-error-ignore: If migration has failed, this option clears the error status as if no errors ever happened.
-* --checkpoint-remove: This option simply clears all checkpoints, regardless of errors.
+-   --checkpoint-error-destroy: このオプションを使用すると、最初に失敗したターゲット テーブル内の既存のデータをすべて破棄することにより、データのインポートを失敗したターゲット テーブルに最初からやり直すことができます。
+-   --checkpoint-error-ignore: 移行が失敗した場合、このオプションは、エラーが発生していないかのようにエラー ステータスをクリアします。
+-   --checkpoint-remove: このオプションは、エラーに関係なく、すべてのチェックポイントを単純にクリアします。
 
-For more information, see [TiDB Lightning Checkpoints](/tidb-lightning/tidb-lightning-checkpoints.md).
+詳細については、 [TiDB Lightningチェックポイント](/tidb-lightning/tidb-lightning-checkpoints.md)を参照してください。
 
-### Create a target schema
+### ターゲット スキーマを作成する {#create-a-target-schema}
 
-Create `mydb.table5` at downstream.
+下流に`mydb.table5`を作成します。
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 CREATE TABLE `table5` (
@@ -149,11 +149,11 @@ CREATE TABLE `table5` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1
 ```
 
-### Start the migration task
+### 移行タスクを開始する {#start-the-migration-task}
 
-Follow these steps to start `tidb-lightning`:
+次の手順に従って、 `tidb-lightning`を開始します。
 
-1. Edit the toml file. `tidb-lightning.toml` is used in the following example:
+1.  toml ファイルを編集します。 `tidb-lightning.toml`は、次の例で使用されています。
 
     ```toml
     [lightning]
@@ -203,9 +203,9 @@ Follow these steps to start `tidb-lightning`:
     pd-addr = "${ip}:${port}"
     ```
 
-2. Run `tidb-lightning`. If you run the program by directly invoking the program name in a shell, the process may quit unexpectedly after receiving a SIGHUP signal. It is recommended that you run the program using tools such as `nohup` or `screen` or `tiup`, and put the process to the shell background. If you migrate from S3, the SecretKey and AccessKey of the account that has access to the Amazon S3 backend store needs to be passed into the Lightning node as environment variables. Reading credential files from `~/.aws/credentials` is also supported. For example:
+2.  `tidb-lightning`を実行します。シェルでプログラム名を直接呼び出してプログラムを実行すると、プロセスが SIGHUP シグナルを受信した後に予期せず終了することがあります。 `nohup`または`screen`または`tiup`などのツールを使用してプログラムを実行し、プロセスをシェルのバックグラウンドに置くことをお勧めします。 S3 から移行する場合、Amazon S3 バックエンド ストアにアクセスできるアカウントの SecretKey と AccessKey を環境変数として Lightning ノードに渡す必要があります。 `~/.aws/credentials`からの資格情報ファイルの読み取りもサポートされています。例えば：
 
-    {{< copyable "shell-regular" >}}
+    {{< copyable "" >}}
 
     ```shell
     export AWS_ACCESS_KEY_ID=${access_key}
@@ -213,27 +213,27 @@ Follow these steps to start `tidb-lightning`:
     nohup tiup tidb-lightning -config tidb-lightning.toml > nohup.out 2>&1 &
     ```
 
-3. After starting the migration task, you can check the progress by using either of the following methods:
+3.  移行タスクの開始後、次のいずれかの方法を使用して進行状況を確認できます。
 
-   - Use `grep` tool to search the keyword `progress` in the log. By default, a message reporting the progress is flushed into the log file every 5 minutes.
-   - View progress via the monitoring dashboard. For more information, see [TiDB Lightning Monitoring]( /tidb-lightning/monitor-tidb-lightning.md).
-   - View the progress via the Web page. See [Web Interface](/tidb-lightning/tidb-lightning-web-interface.md).
+    -   `grep`ツールを使用して、ログ内のキーワード`progress`を検索します。デフォルトでは、進行状況を報告するメッセージが 5 分ごとにログ ファイルにフラッシュされます。
+    -   監視ダッシュボードを介して進行状況をビューします。詳細については、 [TiDB Lightningモニタリング](/tidb-lightning/monitor-tidb-lightning.md)を参照してください。
+    -   Web ページを介して進行状況をビューします。 [ウェブインターフェース](/tidb-lightning/tidb-lightning-web-interface.md)を参照してください。
 
-After TiDB Lightning completes the import, it exits automatically. Check whether `tidb-lightning.log` contains `the whole procedure completed` in the last lines. If yes, the import is successful. If no, the import encounters an error. Address the error as instructed in the error message.
+TiDB Lightningがインポートを完了すると、自動的に終了します。 `tidb-lightning.log`の最後の行に`the whole procedure completed`が含まれているかどうかを確認します。はいの場合、インポートは成功です。 「いいえ」の場合、インポートでエラーが発生します。エラー メッセージの指示に従って、エラーに対処します。
 
-> **Note:**
+> **ノート：**
 >
-> Whether the migration is successful or not, the last line in the log will always be `tidb lightning exit`. It just means that TiDB Lightning quits normally, and does not guarantee that the importing task is completed successfully.
+> 移行が成功したかどうかにかかわらず、ログの最後の行は常に`tidb lightning exit`になります。これは、 TiDB Lightningが正常に終了したことを意味するだけであり、インポート タスクが正常に完了することを保証するものではありません。
 
-If you encounter any problems during migration, see [TiDB Lightning FAQs](/tidb-lightning/tidb-lightning-faq.md).
+移行中に問題が発生した場合は、 [TiDB LightningFAQ](/tidb-lightning/tidb-lightning-faq.md)を参照してください。
 
-## Step 3. (Optional) Use DM to perform incremental replication
+## ステップ 3. (オプション) DM を使用して増分レプリケーションを実行する {#step-3-optional-use-dm-to-perform-incremental-replication}
 
-To replicate the data changes based on binlog from a specified position in the source database to TiDB, you can use TiDB DM to perform incremental replication.
+ソース データベースの指定された位置からの binlog に基づくデータ変更を TiDB にレプリケートするには、TiDB DM を使用して増分レプリケーションを実行します。
 
-### Add the data source
+### データ ソースを追加する {#add-the-data-source}
 
-Create a new data source file called `source1.yaml`, which configures an upstream data source into DM, and add the following content:
+アップストリーム データ ソースを DM に構成する`source1.yaml`という名前の新しいデータ ソース ファイルを作成し、次の内容を追加します。
 
 {{< copyable "" >}}
 
@@ -253,26 +253,26 @@ from:
   port: ${port}             # For example: 3306
 ```
 
-Run the following command in a terminal. Use `tiup dmctl` to load the data source configuration into the DM cluster:
+ターミナルで次のコマンドを実行します。 `tiup dmctl`を使用して、データ ソース構成を DM クラスターに読み込みます。
 
-{{< copyable "shell-regular" >}}
+{{< copyable "" >}}
 
 ```shell
 tiup dmctl --master-addr ${advertise-addr} operate-source create source1.yaml
 ```
 
-The parameters are described as follows.
+パラメータは次のとおりです。
 
-|Parameter      | Description |
-|-              |-            |
-|`--master-addr`         | {advertise-addr} of any DM-master node in the cluster that dmctl connects to. For example: 172.16.10.71:8261|
-| `operate-source create` | Load data sources to DM clusters. |
+| パラメータ                   | 説明                                                                       |
+| ----------------------- | ------------------------------------------------------------------------ |
+| `--master-addr`         | dmctl が接続するクラスター内の任意の DM マスター ノードの {advertise-addr}。例: 172.16.10.71:8261 |
+| `operate-source create` | データ ソースを DM クラスターに読み込みます。                                                |
 
-Repeat the above steps until all MySQL upstream instances are added to the DM as data sources.
+すべての MySQL アップストリーム インスタンスがデータ ソースとして DM に追加されるまで、上記の手順を繰り返します。
 
-### Create a replication task
+### レプリケーション タスクを作成する {#create-a-replication-task}
 
-Edit a task configuration file called `task.yaml`, to configure the incremental replication mode and replication starting point for each data source.
+`task.yaml`というタスク構成ファイルを編集して、各データ ソースの増分レプリケーション モードとレプリケーションの開始点を構成します。
 
 {{< copyable "" >}}
 
@@ -339,68 +339,68 @@ mysql-instances:
 #    safe-mode: true
 ```
 
-For more configurations, see [DM Advanced Task Configuration File](/dm/task-configuration-file-full.md).
+その他の構成については、 [DM 拡張タスクConfiguration / コンフィグレーションファイル](/dm/task-configuration-file-full.md)を参照してください。
 
-Before you start the data migration task, it is recommended to use the `check-task` subcommand in `tiup dmctl` to check if the configuration meets the DM configuration requirements.
+データ移行タスクを開始する前に、 `check-task`サブコマンド in `tiup dmctl`を使用して、構成が DM 構成要件を満たしているかどうかを確認することをお勧めします。
 
-{{< copyable "shell-regular" >}}
+{{< copyable "" >}}
 
 ```shell
 tiup dmctl --master-addr ${advertise-addr} check-task task.yaml
 ```
 
-Use `tiup dmctl` to run the following command to start the data migration task.
+`tiup dmctl`を使用して次のコマンドを実行し、データ移行タスクを開始します。
 
-{{< copyable "shell-regular" >}}
+{{< copyable "" >}}
 
 ```shell
 tiup dmctl --master-addr ${advertise-addr} start-task task.yaml
 ```
 
-The parameters in this command are described as follows.
+このコマンドのパラメータは次のとおりです。
 
-| Parameter | Description|
-|-|-|
-|--master-addr| {advertise-addr} of any DM-master node in the cluster that dmctl connects to. For example: 172.16.10.71:8261 |
-|start-task   | Starts the data migration task. |
+| パラメータ         | 説明                                                                       |
+| ------------- | ------------------------------------------------------------------------ |
+| --master-addr | dmctl が接続するクラスター内の任意の DM マスター ノードの {advertise-addr}。例: 172.16.10.71:8261 |
+| 開始タスク         | データ移行タスクを開始します。                                                          |
 
-If the task fails to start, first make configuration changes according to the prompt messages from the returned result, and then run the `start-task task.yaml` subcommand in `tiup dmctl` to restart the task. If you encounter problems, see [Handle Errors](/dm/dm-error-handling.md) and [TiDB Data Migration FAQ](/dm/dm-faq.md).
+タスクの起動に失敗した場合は、返された結果のプロンプト メッセージに従って構成を変更し、 `start-task task.yaml`サブコマンド in `tiup dmctl`を実行してタスクを再起動します。問題が発生した場合は、 [エラー処理](/dm/dm-error-handling.md)および[TiDB データ移行FAQ](/dm/dm-faq.md)を参照してください。
 
-### Check the migration status
+### 移行状況を確認する {#check-the-migration-status}
 
-You can check if there are running migration tasks in the DM cluster and their status by running the `query-status` command in `tiup dmctl`.
+`tiup dmctl`の`query-status`コマンドを実行することで、DM クラスターで実行中の移行タスクとそのステータスがあるかどうかを確認できます。
 
-{{< copyable "shell-regular" >}}
+{{< copyable "" >}}
 
 ```shell
 tiup dmctl --master-addr ${advertise-addr} query-status ${task-name}
 ```
 
-For more information, see [Query Status](/dm/dm-query-status.md).
+詳細については、 [クエリのステータス](/dm/dm-query-status.md)を参照してください。
 
-### Monitor tasks and view logs
+### タスクの監視とログの表示 {#monitor-tasks-and-view-logs}
 
-You can view the history of a migration task and internal operational metrics through Grafana or logs.
+Grafana またはログを使用して、移行タスクの履歴と内部運用メトリックを表示できます。
 
-- Via Grafana
+-   グラファナ経由
 
-    If Prometheus, Alertmanager, and Grafana are correctly deployed when you deploy the DM cluster using TiUP, you can view DM monitoring metrics in Grafana. Specifically, enter the IP address and port specified during deployment in Grafana and select the DM dashboard.
+    TiUP を使用して DM クラスターをデプロイするときに、Prometheus、Alertmanager、および Grafana が正しくデプロイされている場合は、 TiUPで DM 監視メトリックを表示できます。具体的には、Grafana でのデプロイ時に指定した IP アドレスとポートを入力し、DM ダッシュボードを選択します。
 
-- Via logs
+-   ログ経由
 
-    When DM is running, DM-master, DM-worker, and dmctl output logs, which includes information about migration tasks. The log directory of each component is as follows.
+    DM が実行されている場合、DM-master、DM-worker、および dmctl は移行タスクに関する情報を含むログを出力します。各コンポーネントのログディレクトリは以下の通りです。
 
-    - DM-master log directory: It is specified by the DM-master command line parameter `--log-file`. If DM is deployed using TiUP, the log directory is `/dm-deploy/dm-master-8261/log/`.
-    - DM-worker log directory: It is specified by the DM-worker command line parameter `--log-file`. If DM is deployed using TiUP, the log directory is `/dm-deploy/dm-worker-8262/log/`.
+    -   DM-master ログ ディレクトリ: DM-master コマンド ライン パラメータ`--log-file`で指定します。 DM がTiUPを使用して展開されている場合、ログ ディレクトリは`/dm-deploy/dm-master-8261/log/`です。
+    -   DM-worker ログ ディレクトリ: DM-worker コマンド ライン パラメータ`--log-file`で指定します。 DM がTiUPを使用して展開されている場合、ログ ディレクトリは`/dm-deploy/dm-worker-8262/log/`です。
 
-## See also
+## こちらもご覧ください {#see-also}
 
-- [Dumpling](/dumpling-overview.md)
-- [TiDB Lightning](/tidb-lightning/tidb-lightning-overview.md)
-- [Pessimistic mode and optimistic mode](/dm/feature-shard-merge.md)
-- [Pause a Data Migration Task](/dm/dm-pause-task.md)
-- [Resume a Data Migration Task](/dm/dm-resume-task.md)
-- [Stop a Data Migration Task](/dm/dm-stop-task.md)
-- [Export and Import Data Sources and Task Configuration of Clusters](/dm/dm-export-import-config.md)
-- [Handle Failed DDL Statements](/dm/handle-failed-ddl-statements.md)
-- [Handle Errors](/dm/dm-error-handling.md)
+-   [Dumpling](/dumpling-overview.md)
+-   [TiDB Lightning](/tidb-lightning/tidb-lightning-overview.md)
+-   [悲観モードと楽観的モード](/dm/feature-shard-merge.md)
+-   [データ移行タスクの一時停止](/dm/dm-pause-task.md)
+-   [データ移行タスクの再開](/dm/dm-resume-task.md)
+-   [データ移行タスクを停止する](/dm/dm-stop-task.md)
+-   [データ ソースのエクスポートとインポート、およびクラスターのタスクConfiguration / コンフィグレーション](/dm/dm-export-import-config.md)
+-   [失敗した DDL ステートメントの処理](/dm/handle-failed-ddl-statements.md)
+-   [エラー処理](/dm/dm-error-handling.md)
