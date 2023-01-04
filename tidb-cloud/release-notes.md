@@ -16,7 +16,7 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
     You can increase the node size [using the TiDB Cloud console](/tidb-cloud/scale-tidb-cluster.md#increase-node-size) or [using the TiDB Cloud API (beta)](https://docs.pingcap.com/tidbcloud/api/v1beta#tag/Cluster/operation/UpdateCluster).
 
-- Extend the metrics retention period on the [**Monitoring**](/tidb-cloud/built-in-monitoring.md) page to 2 days.
+- Extend the metrics retention period on the [**Monitoring**](/tidb-cloud/built-in-monitoring.md) page to two days.
 
     Now you have access to metrics data of the last two days, giving you more flexibility and visibility into your cluster performance and trends.
 
