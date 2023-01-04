@@ -455,6 +455,7 @@
   - [TiDB Cloud FAQs](/tidb-cloud/tidb-cloud-faq.md)
   - [Serverless Tier FAQs](/tidb-cloud/serverless-tier-faqs.md)
 - Release Notes
+  - [2023](/tidb-cloud/release-notes.md)
   - [2022](/tidb-cloud/release-notes-2022.md)
   - [2021](/tidb-cloud/release-notes-2021.md)
   - [2020](/tidb-cloud/release-notes-2020.md)

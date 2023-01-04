@@ -1,7 +1,7 @@
 ---
 title: TiDB Cloud Release Notes in 2022
 summary: Learn about the release notes of TiDB Cloud in 2022.
-aliases: ['/tidbcloud/beta/supported-tidb-versions','/tidbcloud/release-notes']
+aliases: ['/tidbcloud/beta/supported-tidb-versions']
 ---
 
 # TiDB Cloud Release Notes in 2022

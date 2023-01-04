@@ -137,7 +137,7 @@ hide_commit: true
 
 [System Variables](https://docs.pingcap.com/tidbcloud/system-variables)
 
-[Release Notes](https://docs.pingcap.com/tidbcloud/release-notes-2022)
+[Release Notes](https://docs.pingcap.com/tidbcloud/release-notes)
 
 [SQL Reference](https://docs.pingcap.com/tidbcloud/basic-sql-operations)
 
