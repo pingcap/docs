@@ -6,6 +6,10 @@ aliases: ['/docs/dev/tidb-binlog-deployment-topology/']
 
 # TiDB Binlog Deployment Topology
 
+> **Warning:**
+>
+> TiDB Binlog is no longer maintained. It is not recommended to use it. You can use [TiCDC](/ticdc/ticdc-overview.md) instead.
+
 This document describes the deployment topology of [TiDB Binlog](/tidb-binlog/tidb-binlog-overview.md) based on the minimal TiDB topology.
 
 TiDB Binlog is the widely used component for replicating incremental data. It provides near real-time backup and replication.

@@ -17,10 +17,10 @@ This document introduces the user scenarios, supported upstreams and downstreams
 
 | User scenario |<span style="font-weight:normal">Data migration from MySQL-compatible databases to TiDB</span>|
 |---|---|
-| **Upstream** | MySQL, MariaDB, Aurora, MySQL |
-| **Downstream** | TiDB |
 | **Advantages** |<ul><li>A convenient and unified data migration task management tool that supports full data migration and incremental replication</li><li>Support filtering tables and operations</li><li>Support shard merge and migration</li></ul> |
 | **Limitation** | Data import speed is roughly the same as that of TiDB Lightning's [logical import mode](/tidb-lightning/tidb-lightning-logical-import-mode.md), and a lot lower than that of TiDB Lightning's [physical import mode](/tidb-lightning/tidb-lightning-physical-import-mode.md). So it is recommended to use DM to migrate full data with a size of less than 1 TiB. |
+| **Upstream** | MySQL, MariaDB, Aurora, MySQL |
+| **Downstream** | TiDB |
 
 ## [Dumpling](/dumpling-overview.md)
 
@@ -60,12 +60,16 @@ This document introduces the user scenarios, supported upstreams and downstreams
 
 ## [TiDB Binlog](/tidb-binlog/tidb-binlog-overview.md)
 
+> **Warning:**
+>
+> TiDB Binlog is no longer maintained. It is not recommended to use it. You can use [TiCDC](/ticdc/ticdc-overview.md) instead.
+
 | User scenario | <span style="font-weight:normal">Incremental replication between TiDB clusters, such as using one TiDB cluster as the secondary cluster of another TiDB cluster</span> |
 |---|---|
-| **Upstream** | TiDB |
-| **Downstream (or the output file)** | TiDB, MySQL, Kafka, incremental backup files |
 | **Advantages** | Support real-time backup and restore. Back up TiDB cluster data to be restored for disaster recovery |
+| **Upstream** | TiDB |
 | **Limitation** | TiDB Binlog is incompatible with some TiDB versions. It is recommended that you use [TiCDC](/ticdc/ticdc-overview.md). |
+| **Downstream (or the output file)** | TiDB, MySQL, Kafka, incremental backup files |
 
 ## [sync-diff-inspector](/sync-diff-inspector/sync-diff-inspector-overview.md)
 

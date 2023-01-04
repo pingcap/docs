@@ -6,6 +6,10 @@ aliases: ['/docs/dev/tidb-binlog/handle-tidb-binlog-errors/','/docs/dev/referenc
 
 # TiDB Binlog Error Handling
 
+> **Warning:**
+>
+> TiDB Binlog is no longer maintained. It is not recommended to use it. You can use [TiCDC](/ticdc/ticdc-overview.md) instead.
+
 This document introduces common errors that you might encounter and solutions to these errors when you use TiDB Binlog.
 
 ## `kafka server: Message was too large, server rejected it to avoid allocation error` is returned when Drainer replicates data to Kafka

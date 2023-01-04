@@ -166,7 +166,7 @@ This document lists the features supported in each TiDB version. Note that suppo
 | [Dumpling logical dumper](/dumpling-overview.md)                                                         | Y | Y | Y | Y | Y | Y | Y           | Y            | Y            | Y            | Y            | Y            |
 | [Transactional `LOAD DATA`](/sql-statements/sql-statement-load-data.md)                                 | Y | Y | Y | Y | Y | Y  | Y           | Y            | Y            | Y            | Y            | N [^5]       |
 | [Database migration toolkit (DM)](/migration-overview.md)                                               | Y | Y | Y | Y | Y | Y  | Y           | Y            | Y            | Y            | Y            | Y            |
-| [TiDB Binlog](/tidb-binlog/tidb-binlog-overview.md)                                                     | Y | Y | Y | Y | Y | Y  | Y   | Y    | Y    | Y    | Y    | Y    |
+| [TiDB Binlog](/tidb-binlog/tidb-binlog-overview.md)                                                     |  Deprecated |  Deprecated |  Deprecated |  Deprecated |  Deprecated |  Deprecated  |  Deprecated   |  Deprecated    |  Deprecated    |  Deprecated   |  Deprecated    | Y    |
 | [Change data capture (CDC)](/ticdc/ticdc-overview.md)                                                   | Y | Y | Y | Y | Y | Y  | Y           | Y            | Y            | Y            | Y            | Y            |
 | [Stream data to Amazon S3, Azure Blob Storage, and NFS through TiCDC](/ticdc/ticdc-sink-to-cloud-storage.md) | Experimental | N | N | N | N | N | N | N | N | N | N | N |
 | [TiCDC supports bidirectional replication between two TiDB clusters](/ticdc/ticdc-bidirectional-replication.md) | Y | N | N | N | N | N | N | N | N | N | N | N |

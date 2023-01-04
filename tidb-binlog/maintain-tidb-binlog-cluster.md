@@ -6,6 +6,10 @@ aliases: ['/docs/dev/tidb-binlog/maintain-tidb-binlog-cluster/','/docs/dev/refer
 
 # TiDB Binlog Cluster Operations
 
+> **Warning:**
+>
+> TiDB Binlog is no longer maintained. It is not recommended to use it. You can use [TiCDC](/ticdc/ticdc-overview.md) instead.
+
 This document introduces the following TiDB Binlog cluster operations:
 
 + The state of a Pump and Drainer nodes

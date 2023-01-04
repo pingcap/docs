@@ -660,6 +660,10 @@ Configuration related to the transaction latch. It is recommended to enable it w
 
 ## binlog
 
+> **Warning:**
+>
+> TiDB Binlog is no longer maintained. It is not recommended to use it. You can use [TiCDC](/ticdc/ticdc-overview.md) instead.
+
 Configurations related to TiDB Binlog.
 
 ### `enable`

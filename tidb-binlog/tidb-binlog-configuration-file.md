@@ -6,6 +6,10 @@ aliases: ['/docs/dev/tidb-binlog/tidb-binlog-configuration-file/','/docs/dev/ref
 
 # TiDB Binlog Configuration File
 
+> **Warning:**
+>
+> TiDB Binlog is no longer maintained. It is not recommended to use it. You can use [TiCDC](/ticdc/ticdc-overview.md) instead.
+
 This document introduces the configuration items of TiDB Binlog.
 
 ## Pump

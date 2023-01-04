@@ -6,6 +6,10 @@ aliases: ['/docs/dev/tidb-binlog/deploy-tidb-binlog/','/docs/dev/reference/tidb-
 
 # TiDB Binlog Cluster Deployment
 
+> **Warning:**
+>
+> TiDB Binlog is no longer maintained. It is not recommended to use it. You can use [TiCDC](/ticdc/ticdc-overview.md) instead.
+
 This document describes how to [deploy TiDB Binlog using a Binary package](#deploy-tidb-binlog-using-a-binary-package).
 
 ## Hardware requirements

@@ -6,6 +6,10 @@ aliases: ['/docs/dev/tidb-binlog/tidb-binlog-relay-log/','/docs/dev/reference/ti
 
 # TiDB Binlog Relay Log
 
+> **Warning:**
+>
+> TiDB Binlog is no longer maintained. It is not recommended to use it. You can use [TiCDC](/ticdc/ticdc-overview.md) instead.
+
 When replicating binlogs, Drainer splits transactions from the upstream and replicates the split transactions concurrently to the downstream.
 
 In extreme cases where the upstream clusters are not available and Drainer exits abnormally, the downstream clusters (MySQL or TiDB) might be in the intermediate states with inconsistent data. In such cases, Drainer can use the relay log to ensure that the downstream clusters are in a consistent state.
