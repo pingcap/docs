@@ -197,7 +197,7 @@ source /home/tidb/.bash_profile
 
 The `local_install.sh` script automatically runs the `tiup mirror set tidb-community-server-${version}-linux-amd64` command to set the current mirror address to `tidb-community-server-${version}-linux-amd64`.
 
-To merge the server and toolkit offline mirrors to the server directory, run the following command:
+To merge the server and toolkit offline mirrors to the server directory, run the following commands:
 
 ```bash
 tar xf tidb-community-toolkit-${version}-linux-amd64.tar.gz
