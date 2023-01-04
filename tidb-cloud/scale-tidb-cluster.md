@@ -84,6 +84,10 @@ You can change the node storage of TiKV or TiFlash.
 
 ### Increase node storage
 
+> **Note:**
+>
+> AWS has a cooldown period of node storage changes. If your TiDB cluster is hosted on AWS, after changing the node storage or node size of TiKV or TiFlash, you must wait at least six hours before you can change it again.
+
 To increase the node storage of TiKV or TiFlash, take the following steps:
 
 1. In the TiDB Cloud console, navigate to the **Clusters** page for your project.
@@ -98,10 +102,6 @@ To increase the node storage of TiKV or TiFlash, take the following steps:
 5. Click **Confirm**.
 
 You can also increase the storage of a TiKV or TiFlash node using TiDB Cloud API through the [Modify a Dedicated Tier cluster](https://docs.pingcap.com/tidbcloud/api/v1beta#tag/Cluster/operation/UpdateCluster) endpoint. Currently, TiDB Cloud API is still in beta. For more information, see [TiDB Cloud API Documentation](https://docs.pingcap.com/tidbcloud/api/v1beta).
-
-> **Note:**
->
-> AWS has a cooldown period of node storage changes. If your TiDB cluster is hosted on AWS, after changing the node storage or node size of TiKV or TiFlash, you must wait at least six hours before you can change it again.
 
 ### Decrease node storage
 
