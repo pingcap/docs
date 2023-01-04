@@ -41,7 +41,7 @@ No.
 
 ### What versions of TiDB are supported on TiDB Cloud?
 
-For the currently supported TiDB version, see [TiDB Cloud Release Notes](/tidb-cloud/release-notes.md).
+For the currently supported TiDB version, see [TiDB Cloud Release Notes](/tidb-cloud/tidb-cloud-release-notes.md).
 
 ### What companies are using TiDB or TiDB Cloud in production?
 
