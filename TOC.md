@@ -85,6 +85,7 @@
     - [Third-Party Tools Supported by TiDB](/develop/dev-guide-third-party-support.md)
     - [Known Incompatibility Issues with Third-Party Tools](/develop/dev-guide-third-party-tools-compatibility.md)
     - [ProxySQL Integration Guide](/develop/dev-guide-proxysql-integration.md)
+    - [Amazon AppFlow Integration Guide](/develop/dev-guide-aws-appflow-integration.md)
 - Deploy
   - [Software and Hardware Requirements](/hardware-and-software-requirements.md)
   - [Environment Configuration Checklist](/check-before-deployment.md)
@@ -176,23 +177,27 @@
   - [Customize Configurations of Monitoring Servers](/tiup/customized-montior-in-tiup-environment.md)
   - [BR Monitoring and Alert](/br/br-monitoring-and-alert.md)
 - Troubleshoot
-  - [TiDB Troubleshooting Map](/tidb-troubleshooting-map.md)
-  - [Identify Slow Queries](/identify-slow-queries.md)
-  - [Analyze Slow Queries](/analyze-slow-queries.md)
-  - [SQL Diagnostics](/information-schema/information-schema-sql-diagnostics.md)
-  - [Identify Expensive Queries Using Top SQL](/dashboard/top-sql.md)
-  - [Identify Expensive Queries Using Logs](/identify-expensive-queries.md)
-  - [Statement Summary Tables](/statement-summary-tables.md)
-  - [Troubleshoot Hotspot Issues](/troubleshoot-hot-spot-issues.md)
-  - [Troubleshoot Increased Read and Write Latency](/troubleshoot-cpu-issues.md)
-  - [Save and Restore the On-Site Information of a Cluster](/sql-plan-replayer.md)
-  - [Troubleshoot TiDB OOM Issues](/troubleshoot-tidb-oom.md)
-  - [Troubleshoot Cluster Setup](/troubleshoot-tidb-cluster.md)
-  - [Troubleshoot High Disk I/O Usage](/troubleshoot-high-disk-io.md)
-  - [Troubleshoot Lock Conflicts](/troubleshoot-lock-conflicts.md)
-  - [Troubleshoot TiFlash](/tiflash/troubleshoot-tiflash.md)
-  - [Troubleshoot Write Conflicts in Optimistic Transactions](/troubleshoot-write-conflicts.md)
-  - [Troubleshoot Inconsistency Between Data and Indexes](/troubleshoot-data-inconsistency-errors.md)
+  - Issue Summary
+    - [TiDB Troubleshooting Map](/tidb-troubleshooting-map.md)
+    - [Troubleshoot TiDB Cluster Setup](/troubleshoot-tidb-cluster.md)
+    - [Troubleshoot TiFlash](/tiflash/troubleshoot-tiflash.md)
+  - Issue Scenarios
+    - Slow Queries
+      - [Identify Slow Queries](/identify-slow-queries.md)
+      - [Analyze Slow Queries](/analyze-slow-queries.md)
+    - [TiDB OOM](/troubleshoot-tidb-oom.md)
+    - [Hotspot](/troubleshoot-hot-spot-issues.md)
+    - [Increased Read and Write Latency](/troubleshoot-cpu-issues.md)
+    - [Write Conflicts in Optimistic Transactions](/troubleshoot-write-conflicts.md)
+    - [High Disk I/O Usage](/troubleshoot-high-disk-io.md)
+    - [Lock Conflicts](/troubleshoot-lock-conflicts.md)
+    - [Inconsistency Between Data and Indexes](/troubleshoot-data-inconsistency-errors.md)
+  - Diagnostic Methods
+    - [SQL Diagnostics](/information-schema/information-schema-sql-diagnostics.md)
+    - [Statement Summary Tables](/statement-summary-tables.md)
+    - [Identify Expensive Queries Using Top SQL](/dashboard/top-sql.md)
+    - [Identify Expensive Queries Using Logs](/identify-expensive-queries.md)
+    - [Save and Restore the On-Site Information of a Cluster](/sql-plan-replayer.md)
 - Performance Tuning
   - Tuning Guide
     - [Performance Tuning Overview](/performance-tuning-overview.md)
@@ -223,6 +228,7 @@
       - [Aggregation](/explain-aggregation.md)
       - [Views](/explain-views.md)
       - [Partitions](/explain-partitions.md)
+      - [Index Merge](/explain-index-merge.md)
     - SQL Optimization Process
       - [Overview](/sql-optimization-concepts.md)
       - Logic Optimization
@@ -519,6 +525,7 @@
         - [TiCDC Open Protocol](/ticdc/ticdc-open-protocol.md)
         - [TiCDC CSV Protocol](/ticdc/ticdc-csv.md)
       - [TiCDC Open API](/ticdc/ticdc-open-api.md)
+      - [Guide for Developing a Storage Sink Consumer](/ticdc/ticdc-storage-consumer-dev-guide.md)
       - [Compatibility](/ticdc/ticdc-compatibility.md)
     - [Troubleshoot](/ticdc/troubleshoot-ticdc.md)
     - [FAQs](/ticdc/ticdc-faq.md)
