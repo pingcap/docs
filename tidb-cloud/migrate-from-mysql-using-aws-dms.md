@@ -96,21 +96,13 @@ AWS DMS does not support replicating `DROP TABLE`.
 
     ![Copy the public and private network IP addresses](/media/tidb-cloud/aws-dms-tidb-cloud/aws-dms-to-tidb-cloud-copy-ip.png)
 
-2. Go to the [TiDB Cloud console](https://tidbcloud.com/console/clusters), locate the target cluster, and click **Connect** to get the TiDB Cloud database connection information.
+2. In the TiDB Cloud console, go to the [**Clusters**](https://tidbcloud.com/console/clusters) page, click the name of your target cluster, and then click **Connect** in the upper-right corner to get the TiDB Cloud database connection information.
 
-    ![Get the TiDB Cloud database connection information](/media/tidb-cloud/aws-dms-tidb-cloud/aws-dms-to-tidb-cloud-connect.png)
+3. Under **Step 1: Create traffic filter** in the dialog, click **Edit**, enter the public and private network IP addresses that you copied from the AWS DMS console, and then click **Update Filter**. It is recommended to add the public IP address and private IP address of the AWS DMS replication instance to the TiDB cluster traffic filter at the same time. Otherwise, AWS DMS might not be able to connect to the TiDB cluster in some scenarios.
 
-3. Under **Step 1. Create traffic filter**, click **Edit**, enter the public and private network IP addresses that you copied from the AWS DMS console, and then click **Update Filter**. It is recommended to add the public IP address and private IP address of the AWS DMS replication instance to the TiDB cluster traffic filter at the same time. Otherwise, AWS DMS might not be able to connect to the TiDB cluster in some scenarios.
+4. Click **Download TiDB cluster CA** to download the CA certificate. Under **Step 3: Connect with a SQL client** in the dialog, take a note of the `-u`, `-h`, and `-P` information in the connection string for later use.
 
-    ![Update the TiDB Cloud traffic filter](/media/tidb-cloud/aws-dms-tidb-cloud/aws-dms-to-tidb-cloud-traffic-filter.png)
-
-4. Click **Download TiDB cluster CA** to download the CA certificate. Record the `-u`, `-h`, and `-P` information highlighted in the following screenshot for subsequent connection with TiDB.
-
-    ![Download TiDB cluster CA](/media/tidb-cloud/aws-dms-tidb-cloud/aws-dms-to-tidb-cloud-ca.png)
-
-5. Create a VPC Peering connection for the TiDB cluster and AWS DMS.
-
-    ![Create VPC Peering](/media/tidb-cloud/aws-dms-tidb-cloud/aws-dms-to-tidb-cloud-vpc-peering.png)
+5. Click the **VPC Peering** tab in the dialog, and then click **Add** under **Step 1: Set up VPC** to create a VPC Peering connection for the TiDB cluster and AWS DMS.
 
 6. Configure the corresponding information. See [Set Up VPC Peering Connections](/tidb-cloud/set-up-vpc-peering-connections.md).
 

@@ -163,19 +163,24 @@ To restore your TiDB cluster data from a backup to a new cluster, take the follo
 
 To restore a deleted cluster from recycle bin, take the following steps:
 
-1. In the TiDB Cloud console, go to the target project and click the **Recycle Bin** tab.
-2. Locate the cluster you want to restore, and then click **Backups** in the **Action** column.
-3. Locate your desired backup time, and then click **Restore**.
-4. In the **Restore** window, make the following changes if necessary:
+1. Log in to the [TiDB Cloud console](https://tidbcloud.com).
+2. In the left navigation pane of the [**Clusters**](https://tidbcloud.com/console/clusters) page, do one of the following:
+
+    - If you have multiple projects, switch to the target project, and then click **Admin** > **Recycle Bin**.
+    - If you only have one project, click **Admin** > **Recycle Bin**.
+
+3. Locate the cluster you want to restore, and then click **Backups** in the **Action** column.
+4. Locate your desired backup time, and then click **Restore** in the **Action** column.
+5. In the **Restore** window, make the following changes if necessary:
 
     - Update the port number of the cluster.
     - Increase the node size, node quantity, and node storage for the cluster.
 
-5. Click **Confirm**.
+6. Click **Confirm**.
 
    The cluster restore process starts and the **Security Settings** dialog box is displayed.
 
-6. In the **Security Settings** dialog box, set the root password and allowed IP addresses to connect to your cluster, and then click **Apply**.
+7. In the **Security Settings** dialog box, set the root password and allowed IP addresses to connect to your cluster, and then click **Apply**.
 
 > **Note:**
 >

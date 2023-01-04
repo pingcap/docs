@@ -35,25 +35,27 @@ This document walks you through the quickest way to get started with TiDB Cloud.
 
     Your TiDB Cloud cluster will be created in approximately 30 seconds.
 
-6. After your TiDB Cloud cluster is created, click **...** in the upper-right corner of the cluster area, and then click **Security Settings** in the drop-down menu. In the **Security Settings** dialog box, set a root password to connect to your cluster, and then click **Apply**. If you do not set a root password, you cannot connect to the cluster.
+6. After your TiDB Cloud cluster is created, click your cluster name to go to the cluster overview page, and then click **Connect** in the upper-right corner. A connection dialog box is displayed.
 
-7. Click **Connect**. A connection dialog box is displayed. Under **Connect with a SQL Client** in the dialog, click the tab of your preferred connection method, and then save the corresponding connection string. The following section uses MySQL client as an example.
+7. In the dialog, select your preferred connection method and operating system to get the corresponding connection string. This document uses MySQL client as an example.
 
-    <CustomContent platform="tidb">
+8. Click **Create password** to generate a random password. The generated password will not show again, so save your password in a secure location. If you do not set a root password, you cannot connect to the cluster.
 
-    > **Note:**
-    >
-    > For [Serverless Tier clusters](https://docs.pingcap.com/tidbcloud/select-cluster-tier#serverless-tier), when you connect to your cluster, you must include the prefix for your cluster in the user name and wrap the name with quotation marks. For more information, see [User name prefix](https://docs.pingcap.com/tidbcloud/select-cluster-tier#user-name-prefix).
+<CustomContent platform="tidb">
 
-    </CustomContent>
+> **Note:**
+>
+> For [Serverless Tier clusters](https://docs.pingcap.com/tidbcloud/select-cluster-tier#serverless-tier), when you connect to your cluster, you must include the prefix for your cluster in the user name and wrap the name with quotation marks. For more information, see [User name prefix](https://docs.pingcap.com/tidbcloud/select-cluster-tier#user-name-prefix).
 
-    <CustomContent platform="tidb-cloud">
+</CustomContent>
 
-    > **Note:**
-    >
-    > For [Serverless Tier clusters](/tidb-cloud/select-cluster-tier.md#serverless-tier-beta), when you connect to your cluster, you must include the prefix for your cluster in the user name and wrap the name with quotation marks. For more information, see [User name prefix](/tidb-cloud/select-cluster-tier.md#user-name-prefix).
+<CustomContent platform="tidb-cloud">
 
-    </CustomContent>
+> **Note:**
+>
+> For [Serverless Tier clusters](/tidb-cloud/select-cluster-tier.md#serverless-tier-beta), when you connect to your cluster, you must include the prefix for your cluster in the user name and wrap the name with quotation marks. For more information, see [User name prefix](/tidb-cloud/select-cluster-tier.md#user-name-prefix).
+
+</CustomContent>
 
 ## Step 2. Connect to a cluster
 

@@ -123,11 +123,9 @@ For this integration, you will be using the [ProxySQL Docker image](https://hub.
 
 #### Step 1. Create a TiDB Cloud Serverless Tier cluster
 
-1. [Create a free TiDB Serverless Tier cluster](https://docs.pingcap.com/tidbcloud/tidb-cloud-quickstart#step-1-create-a-tidb-cluster). Remember the root password that you set for your cluster.
-2. Get your cluster hostname, port, and username for later use.
-
-    1. On the [Clusters](https://tidbcloud.com/console/clusters) page, click your cluster name to go to the cluster overview page.
-    2. On the cluster overview page, locate the **Connection** pane, and then copy the `Endpoint`, `Port`, and `User` fields, where the `Endpoint` is your cluster hostname.
+1. [Create a free TiDB Serverless Tier cluster](https://docs.pingcap.com/tidbcloud/tidb-cloud-quickstart#step-1-create-a-tidb-cluster).
+2. Follow the steps in [Connect via Standard Connection](https://docs.pingcap.com/tidbcloud/connect-via-standard-connection#serverless-tier) to get the connection string and set a password for your cluster.
+3. In the connection string, locate your cluster endpoint after `-h`, your user name after `-u`, and your cluster port after `-P`.
 
 #### Step 2. Generate ProxySQL configuration files
 
