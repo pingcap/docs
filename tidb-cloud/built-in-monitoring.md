@@ -23,7 +23,7 @@ To view the metrics on the Monitoring page, take the following steps:
 
 All monitoring data is kept for 2 days.
 
-## Monitoring Metrics
+## Monitoring metrics
 
 The following sections illustrate the metrics on the Monitoring page.
 
