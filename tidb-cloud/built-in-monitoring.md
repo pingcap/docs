@@ -24,6 +24,10 @@ To view the metrics on the Monitoring page, take the following steps:
 2. Click the name of the target cluster. The cluster overview page is displayed.
 3. Click **Monitoring** in the left navigation pane.
 
+## Metrics retention policy
+
+All monitoring data is kept for 2 days.
+
 ## Monitoring metrics
 
 The following sections illustrate the metrics on the Monitoring page.
