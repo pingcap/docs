@@ -156,7 +156,7 @@ For the roadmap of TiDB kernel, refer to [TiDB Roadmap](https://github.com/pingc
   </tr>
   <tr>
     <td rowspan="2">Online data migration</td>
-    <td>Support full data migration from Amazon Relational Database Service (RDS).</td>
+    <td>✅ Support full data migration from Amazon Relational Database Service (RDS).</td>
     <td>Full data migration from RDS to TiDB Cloud.</td>
   </tr>
   <tr>
