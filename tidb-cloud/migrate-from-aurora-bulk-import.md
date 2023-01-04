@@ -41,7 +41,7 @@ To import data, perform the following steps:
         - `!db02.*`: except the tables in the `db02` database, all other tables will be imported. `!` is used to exclude tables that do not need to be imported.
         - `*.*` : all tables will be imported.
 
-        For more information, see [table filter syntax](/table-filter.md#syntax).
+      For more information, see [table filter syntax](/table-filter.md#syntax).
 
 7. On the **Preview** page, confirm the data to be imported and then click **Start Import**.
 
