@@ -102,7 +102,7 @@ datasource db {
 
 In Vercel, you can declare the environment variables as follows.
 
-- **Key** = DATABASE_URL
+- **Key** = `DATABASE_URL`
 - **Value** = `mysql://<User>:<Password>@<Endpoint>:<Port>/<Database>?sslaccept=strict`
 
 You can get the information of `<User>`, `<Password>`, `<Endpoint>`, `<Port>`, and `<Database>` in the TiDB Cloud console.
