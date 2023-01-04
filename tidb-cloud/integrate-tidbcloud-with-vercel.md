@@ -3,6 +3,8 @@ title: Integrate TiDB Cloud with Vercel
 summary: Learn how to connect your TiDB Cloud clusters to Vercel projects.
 ---
 
+<!-- markdownlint-disable MD029 -->
+
 # Integrate TiDB Cloud with Vercel
 
 [Vercel](https://vercel.com/) is the platform for frontend developers, providing the speed and reliability innovators need to create at the moment of inspiration.
