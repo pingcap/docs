@@ -28,7 +28,7 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
     For more information, see [Use Grafana GUI dashboards to visualize the metrics](/tidb-cloud/monitor-prometheus-and-grafana-integration.md#step-3-use-grafana-gui-dashboards-to-visualize-the-metrics).
 
-- The cold start issue after upgrading TiDB version to [v6.4.0](https://docs.pingcap.com/tidb/v6.4/release-6.4.0) were resolved. So we upgraded the default TiDB version of all Serverless Tier clusters from [v6.3.0](https://docs.pingcap.com/tidb/v6.3/release-6.3.0) to [v6.4.0](https://docs.pingcap.com/tidb/v6.4/release-6.4.0) again.
+- Upgrade the default TiDB version of all [Serverless Tier](https://docs.pingcap.com/tidbcloud/select-cluster-tier#serverless-tier-beta) clusters from [v6.3.0](https://docs.pingcap.com/tidb/v6.3/release-6.3.0) to [v6.4.0](https://docs.pingcap.com/tidb/v6.4/release-6.4.0) again. The cold start issue after upgrading the default TiDB version of Serverless Tier clusters to v6.4.0 has been resolved.
 
 **Console changes**
 
