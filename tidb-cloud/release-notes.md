@@ -18,13 +18,13 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
 - Extend the metrics retention period on the [**Monitoring**](/tidb-cloud/built-in-monitoring.md) page to 2 days.
 
-    Now you are able to access and analyze metrics data from the past 2 days, giving you more flexibility and visibility into your cluster performance and trends.
+    Now you have access to metrics data from the last 2 days, giving you more flexibility and visibility into your cluster performance and trends.
 
-    This feature is available at no extra cost and can be accessed on the **Diagnosis** tab of the [**Monitoring**](/tidb-cloud/built-in-monitoring.md) page for your cluster, which helps you identify and troubleshoot performance issues and monitor the overall health of your cluster more effectively.
+    This feature comes at no additional cost and can be accessed on the **Diagnosis** tab of the [**Monitoring**](/tidb-cloud/built-in-monitoring.md) page for your cluster. This will help you identify and troubleshoot performance issues and monitor the overall health of your cluster more effectively.
 
 - Support customizing Grafana dashboard JSON for Prometheus integration.
 
-  If you have [integrated TiDB Cloud with Prometheus](/tidb-cloud/monitor-prometheus-and-grafana-integration.md), you can now import a pre-built Grafana dashboard that is designed for monitoring TiDB Cloud clusters and customize the dashboard to your needs, which helps you monitor your TiDB Cloud clusters easier and quickly identify any performance issues.
+  If you have [integrated TiDB Cloud with Prometheus](/tidb-cloud/monitor-prometheus-and-grafana-integration.md), you can now import a pre-built Grafana dashboard to monitor TiDB Cloud clusters and customize the dashboard to your needs. This feature enables easy and fast monitoring of your TiDB Cloud clusters and helps you identify any performance issues quickly.
 
   For more information, see [Use Grafana GUI dashboards to visualize the metrics](/tidb-cloud/monitor-prometheus-and-grafana-integration.md#step-3-use-grafana-gui-dashboards-to-visualize-the-metrics).
 
@@ -33,5 +33,4 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 - Simplify the display of the [**Clusters**](https://tidbcloud.com/console/clusters) page and cluster overview page.
 
     - You can click the cluster name on the [**Clusters**](https://tidbcloud.com/console/clusters) page to enter the cluster overview page and start operating the cluster.
-    - Remove the **Connection** pane from the cluster overview page. You can click **Connect** in the upper-right corner to get the connection information.
-    - Remove the **Import** pane from the cluster overview page. You can click **Import** in the left navigation pane to import data.
+    - Remove the **Connection** and **Import** panes from the cluster overview page. You can click **Connect** in the upper-right corner to get the connection information and click **Import** in the left navigation pane to import data.
