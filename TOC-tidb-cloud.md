@@ -184,7 +184,7 @@
     - [Secure Connections to Serverless Tier Clusters](/tidb-cloud/secure-connections-to-serverless-tier-clusters.md)
   - Database Access Control
     - [Configure Cluster Security Settings](/tidb-cloud/configure-security-settings.md)
-  - Auditing Management
+  - Audit Management
     - [Database Audit Logging](/tidb-cloud/tidb-cloud-auditing.md)
 - Billing
   - [Invoices](/tidb-cloud/tidb-cloud-billing.md#invoices)
