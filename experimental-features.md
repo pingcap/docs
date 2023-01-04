@@ -15,6 +15,7 @@ This document introduces the experimental features of TiDB in different versions
 + [FastScan](/develop/dev-guide-use-fastscan.md). (Introduced in v6.2.0)
 + [Extended statistics](/extended-statistics.md). (Introduced in v5.0.0)
 + [Randomly sample about 10000 rows of data to quickly build statistics](/system-variables.md#tidb_enable_fast_analyze) (Introduced in v3.0)
++ [Support locking statistics](/statistics.md#lock-statistics) (Introduced in v6.5.0)
 
 ## Stability
 
@@ -27,13 +28,14 @@ Elastic scheduling feature. It enables the TiDB cluster to dynamically scale out
 
 ## SQL
 
-+ The expression index feature. The expression index is also called the function-based index. When you create an index, the index fields do not have to be a specific column but can be an expression calculated from one or more columns. This feature is useful for quickly accessing the calculation-based tables. See [Expression index](/sql-statements/sql-statement-create-index.md) for details. (Introduced in v4.0)
 + [Generated Columns](/generated-columns.md) (Introduced in v2.1)
 + [User-Defined Variables](/user-defined-variables.md) (Introduced in v2.1)
 + [Cascades Planner](/system-variables.md#tidb_enable_cascades_planner): a cascades framework-based top-down query optimizer (Introduced in v3.0)
 + [Table Lock](/tidb-configuration-file.md#enable-table-lock-new-in-v400) (Introduced in v4.0.0)
 + [Range INTERVAL partitioning](/partitioned-table.md#range-interval-partitioning) (Introduced in v6.3.0)
++ [Time to live](/time-to-live.md) (Introduced in v6.5.0)
 + [TiFlash Query Result Materialization](/tiflash/tiflash-results-materialization.md) (Introduced in v6.5.0)
++ [Create a binding according to a historical execution plan](/sql-plan-management.md#create-a-binding-according-to-a-historical-execution-plan) (Introduced in v6.5.0)
 
 ## Storage
 
@@ -47,6 +49,7 @@ Elastic scheduling feature. It enables the TiDB cluster to dynamically scale out
 ## Data share subscription
 
 + [Cross-cluster RawKV replication](/tikv-configuration-file.md#api-version-new-in-v610) (Introduced in v6.2.0)
++ [Stream data to Amazon S3, Azure Blob Storage, and NFS through TiCDC](/ticdc/ticdc-sink-to-cloud-storage.md) (Introduced in v6.5.0)
 
 ## Garbage collection
 
