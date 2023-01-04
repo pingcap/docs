@@ -15,7 +15,9 @@ TiDB Serverless Tier allows only TLS connections and rejects non-TLS connections
 
 ## What TLS versions can I use?
 
-TiDB Serverless Tier supports TLS 1.2 and TLS 1.3.
+TiDB Serverless Tier supports TLS 1.2 and TLS 1.3. 
+
+TLS 1.0 and TLS 1.1 are not supported due to security reasons. For background information, refer to IETF [Deprecating TLS 1.0 and TLS 1.1](https://datatracker.ietf.org/doc/rfc8996/).
 
 ## What certificates do I need？
 
