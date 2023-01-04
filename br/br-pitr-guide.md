@@ -1,6 +1,7 @@
 ---
 title: TiDB Log Backup and PITR Guide
 summary: Learns about how to perform log backup and PITR in TiDB.
+aliases: ['/tidb/stable/pitr-usage/']
 ---
 
 # TiDB Log Backup and PITR Guide
