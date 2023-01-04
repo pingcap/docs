@@ -28,9 +28,9 @@ Before adding VPC Peering requests to a region, you need to set a project CIDR f
 You can set the project CIDR when creating the first Dedicated Tier of your project. If you want to set the project CIDR before creating the tier, perform the following operations:
 
 1. Log in to the [TiDB Cloud console](https://tidbcloud.com).
-2. In the left navigation pane, do one of the following:
+2. In the left navigation pane of the [**Clusters**](https://tidbcloud.com/console/clusters) page, do one of the following:
 
-    - If you have multiple projects, choose a target project, and then click **Admin** > **Network Access**.
+    - If you have multiple projects, switch to the target project, and then click **Admin** > **Network Access**.
     - If you only have one project, click **Admin** > **Network Access**.
 
 3. Click the **Project CIDR** tab.
@@ -63,9 +63,9 @@ This section describes how to set up VPC peering connections on AWS. For GCP, se
 ### Step 1. Add VPC peering requests
 
 1. Log in to the [TiDB Cloud console](https://tidbcloud.com).
-2. In the left navigation pane, do one of the following:
+2. In the left navigation pane of the [**Clusters**](https://tidbcloud.com/console/clusters) page, do one of the following:
 
-    - If you have multiple projects, choose a target project, and then click **Admin** > **Network Access**.
+    - If you have multiple projects, switch to the target project, and then click **Admin** > **Network Access**.
     - If you only have one project, click **Admin** > **Network Access**.
 
 3. Click the **VPC Peering** tab.
@@ -213,9 +213,9 @@ Now you have successfully set up the VPC peering connection. Next, [connect to t
 ## Set up VPC peering on GCP
 
 1. Log in to the [TiDB Cloud console](https://tidbcloud.com).
-2. In the left navigation pane, do one of the following:
+2. In the left navigation pane of the [**Clusters**](https://tidbcloud.com/console/clusters) page, do one of the following:
 
-    - If you have multiple projects, choose a target project, and then click **Admin** > **Network Access**.
+    - If you have multiple projects, switch to the target project, and then click **Admin** > **Network Access**.
     - If you only have one project, click **Admin** > **Network Access**.
 
 3. Click the **VPC Peering** tab.

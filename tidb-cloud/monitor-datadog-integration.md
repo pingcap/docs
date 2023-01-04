@@ -24,9 +24,9 @@ You cannot use the Datadog integration in [Serverless Tier clusters](/tidb-cloud
 ### Step 1. Integrate with your Datadog API Key
 
 1. Log in to the [TiDB Cloud console](https://tidbcloud.com).
-2. In the left navigation pane, do one of the following:
+2. In the left navigation pane of the [**Clusters**](https://tidbcloud.com/console/clusters) page, do one of the following:
 
-    - If you have multiple projects, choose a target project, and then click **Admin** > **Integrations**.
+    - If you have multiple projects, switch to the target project, and then click **Admin** > **Integrations**.
     - If you only have one project, click **Admin** > **Integrations**.
 
 3. Click **Integration to Datadog**.

@@ -95,7 +95,7 @@ To create a Dedicated Tier cluster, take the following steps:
 
 1. Navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page.
 
-2. If you have multiple projects, choose a target project in the left navigation pane, and then click **Create Cluster** in the upper-right corner. Otherwise, click **Create Cluster** in the upper-right corner directly.
+2. If you have multiple projects, switch to the target project in the left navigation pane, and then click **Create Cluster** in the upper-right corner. Otherwise, click **Create Cluster** in the upper-right corner directly.
 
 3. On the **Create Cluster** page, select **Dedicated Tier**, update the default cluster name and port number if necessary, choose a cloud provider and a region, and then click **Next**.
 
