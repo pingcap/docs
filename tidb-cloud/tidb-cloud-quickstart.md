@@ -33,7 +33,7 @@ After the cluster is created, you will be prompted to try Chat2Query.
 
 ## Step 2. Try Chat2Query (Beta)
 
-Chat2Query is a web-based SQL editor that allows you to directly edit and run SQL queries against databases of Serverless Tier without using a terminal. In Chat2Query, you can use AI to generate SQL queries automatically.
+Chat2Query is an AI-powered SQL editor that allows you to directly edit and run SQL queries against databases of Serverless Tier without using a terminal. In Chat2Query, you can use AI to generate SQL queries automatically.
 
 1. Click **Go to Chat2Query** in the prompted message.
 

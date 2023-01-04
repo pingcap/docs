@@ -41,7 +41,7 @@ You can use the tool [Dumpling](/dumpling-overview.md) for data export.
 
 4. Export your data using Dumpling from TiDB.
 
-    You can get the following connection parameters `${tidb_endpoint}`, `${port}`, and `${user}` from the connection string in the [Connect](/tidb-cloud/connect-via-standard-connection.md) dialog.
+    You can get the following connection parameters `${tidb_endpoint}`, `${port}`, and `${user}` from the connection string in the [**Connect**](/tidb-cloud/connect-via-standard-connection.md) dialog.
 
     <SimpleTab>
 

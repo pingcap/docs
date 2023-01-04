@@ -30,7 +30,7 @@ Currently, this method supports importing one CSV file for one task into either 
 
 2. On the **Import** page, click **Import Data** in the upper-right corner, and then select **From local file**.
 
-3. Click **Upload File** to select and upload the target local file. Note that the file name must have a ".csv" suffix and must be no more than 50 MiB.
+3. Click **Upload File** to select and upload the target local file. Note that the file name must have a ".csv" extension and must be no more than 50 MiB.
 
 4. In the **Target** section, select the target database and the target table, or create a new database or new table. Then click **Next**.
 

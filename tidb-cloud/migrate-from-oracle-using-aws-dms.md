@@ -81,7 +81,7 @@ After you finish executing the SQL script, check the data in Oracle. The followi
 
 5. Click **Create password** to generate a password and copy the generated password.
 
-6. Choose a SQL client and operating system, and then connect to your cluster using the displayed connection string.
+6. Select your preferred connection method and operating system, and then connect to your cluster using the displayed connection string.
 
 ## Step 5. Create an AWS DMS replication instance
 
