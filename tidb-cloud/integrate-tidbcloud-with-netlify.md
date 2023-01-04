@@ -18,7 +18,7 @@ Before connecting, make sure the following prerequisites are met.
 You are expected to have an account and a site in Netlify. If you do not have any, refer to the following links to create one:
 
 * [Sign up a new account](https://app.netlify.com/signup).
-* [Add a site](https://docs.netlify.com/welcome/add-new-site/) in Netlify. If you do not have an application to deploy, you can use the [TiDB Cloud Starter Template](https://github.com/tidbcloud/nextjs-prisma-example#deploy-on-netlify) to have a try.
+* [Add a site](https://docs.netlify.com/welcome/add-new-site/) in Netlify. If you do not have an application to deploy, you can use the [TiDB Cloud Starter Template](https://github.com/tidbcloud/nextjs-prisma-example) to have a try.
 
 ### A TiDB Cloud account and a TiDB cluster
 
