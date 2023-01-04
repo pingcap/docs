@@ -119,7 +119,7 @@ You can increase the node size for TiDB, TiKV, and TiFlash. Decreasing the node 
 To increase the node size, take the following steps:
 
 1. In the TiDB Cloud console, navigate to the **Clusters** page for your project.
-2. Locate the cluster that you want to scale up, and click **...** in the upper-right corner of the cluster area.
+2. In the row of the cluster that you want to scale, click **...**.
 3. Click **Modify** in the drop-down menu. The **Modify Cluster** page is displayed.
 4. On the **Modify Cluster** page, increase the node size as you need.
 5. Click **Confirm**.
