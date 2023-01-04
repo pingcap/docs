@@ -35,9 +35,3 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
     - You can click the cluster name on the [**Clusters**](https://tidbcloud.com/console/clusters) page to enter the cluster overview page and start operating the cluster.
     - Remove the **Connection** pane from the cluster overview page. You can click **Connect** in the upper-right corner to get the connection information.
     - Remove the **Import** pane from the cluster overview page. You can click **Import** in the left navigation pane to import data.
-
-- Introduce Chat2Query (beta), an AI-powered SQL editor for [Serverless Tier](/tidb-cloud/select-cluster-tier.md#serverless-tier-beta) clusters.
-
-  In Chat2Query (previously named as SQL editor), you can either let AI generate SQL queries automatically or write SQL queries manually using the pre-built sample dataset, and run SQL queries against databases without a terminal.
-
-  To access Chat2Query, go to the [**Clusters**](https://tidbcloud.com/console/clusters) page of your project, click your cluster name, and then click **Chat2Query** in the left navigation pane.
