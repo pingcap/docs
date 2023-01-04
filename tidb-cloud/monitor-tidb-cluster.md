@@ -82,6 +82,6 @@ The cluster monitoring page provides a full set of standard metrics of a cluster
 To view metrics on the cluster monitoring page, take the following steps:
 
 1. On the [**Clusters**](https://tidbcloud.com/console/clusters) page of the target project, click the name of the target cluster. The cluster overview page is displayed.
-2. Click <MDSvgIcon name="icon-left-monitoring" /> **Monitoring** on the left navigation.
+2. Click **Monitoring** in the left navigation pane.
 
 For more information, see [Built-in Monitoring](/tidb-cloud/built-in-monitoring.md).
