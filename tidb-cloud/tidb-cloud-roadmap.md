@@ -30,8 +30,8 @@ The TiDB Cloud roadmap brings you what's coming in the near future, so you can s
     <td>Support loading sample datasets into a cluster. You can use this data to quickly get started with testing the features of TiDB Cloud.</td>
   </tr>
   <tr>
-    <td>✅ Add a SQL editor.</td>
-    <td>Write and run SQL queries, and view the results in the TiDB console.</td>
+    <td>✅ Add Chat2Query (an AI-powered SQL editor).</td>
+    <td>In Chat2Query, you can either let AI generate SQL queries automatically or write SQL queries manually, and run SQL queries against databases without a terminal.</td>
   </tr>
   <tr>
     <td>Support Data API.</td>
