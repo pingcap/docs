@@ -67,8 +67,6 @@ This document walks you through the quickest way to get started with TiDB Cloud.
 
 For macOS, install [Homebrew](https://brew.sh/index) if you do not have it, and then run the following command to install the MySQL client:
 
-{{< copyable "shell-regular" >}}
-
 ```shell
 brew install mysql-client
 ```
@@ -89,15 +87,11 @@ For compilers to find mysql-client you may need to set:
 
 To add the MySQL client to your PATH, locate the following command in the above output (if your output is inconsistent with the above output in the document, use the corresponding command in your output instead) and run it:
 
-{{< copyable "shell-regular" >}}
-
 ```shell
 echo 'export PATH="/opt/homebrew/opt/mysql-client/bin:$PATH"' >> ~/.zshrc
 ```
 
 Then, declare the global environment variable by the `source` command and verify that the MySQL client is installed successfully:
-
-{{< copyable "shell-regular" >}}
 
 ```shell
 source ~/.zshrc
@@ -116,15 +110,11 @@ mysql  Ver 8.0.28 for macos12.0 on arm64 (Homebrew)
 
 For Linux, the following takes CentOS 7 as an example:
 
-{{< copyable "shell-regular" >}}
-
 ```shell
 yum install mysql
 ```
 
 Then, verify that the MySQL client is installed successfully:
-
-{{< copyable "shell-regular" >}}
 
 ```shell
 mysql --version
