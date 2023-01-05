@@ -5,7 +5,7 @@ summary: Understand optimizations related to subqueries.
 
 # サブクエリ関連の最適化 {#subquery-related-optimizations}
 
-この記事では、主にサブクエリ関連の最適化を紹介します。
+この記事では、主にサブクエリ関連の最適化について紹介します。
 
 サブクエリは通常、次の状況で表示されます。
 
@@ -15,34 +15,34 @@ summary: Understand optimizations related to subqueries.
 -   `EXISTS (SELECT ... FROM ...)`
 -   `... >/>=/</<=/=/!= (SELECT ... FROM ...)`
 
-サブクエリに`select * from t where t.a in (select * from t2 where t.b=t2.b)`などの非サブクエリ列が含まれる場合があります。サブクエリの`t.b`列はサブクエリに属しておらず、サブクエリの外部から導入されています。この種のサブクエリは通常「相関サブクエリ」と呼ばれ、外部から導入された列は「相関列」と呼ばれます。相関サブクエリの最適化については、 [相関サブクエリの無相関化](/correlated-subquery-optimization.md)を参照してください。この記事では、相関列を含まないサブクエリに焦点を当てています。
+サブクエリには、 `select * from t where t.a in (select * from t2 where t.b=t2.b)`などのサブクエリ以外の列が含まれる場合があります。サブクエリの`t.b`列目はサブクエリに属さず、サブクエリの外部から導入されます。このようなサブクエリは通常「相関サブクエリ」と呼ばれ、外部から導入された列は「相関列」と呼ばれます。相関サブクエリに関する最適化については、 [相関サブクエリの非相関](/correlated-subquery-optimization.md)を参照してください。この記事では、相関列を含まないサブクエリに焦点を当てています。
 
-デフォルトでは、サブクエリは実行方法として[TiDB実行プランを理解する](/explain-overview.md)で述べた`semi join`を使用します。一部の特別なサブクエリの場合、TiDBは、パフォーマンスを向上させるために論理的な書き換えを行います。
+デフォルトでは、サブクエリは[TiDB 実行計画を理解する](/explain-overview.md)の`semi join`を実行方法として使用します。一部の特別なサブクエリでは、TiDB はパフォーマンスを向上させるために論理的な書き直しを行います。
 
 ## <code>... &lt; ALL (SELECT ... FROM ...)</code>または<code>... &gt; ANY (SELECT ... FROM ...)</code> {#code-x3c-all-select-from-code-or-code-any-select-from-code}
 
-この場合、 `ALL`と`ANY`は`MAX`と`MIN`に置き換えることができます。テーブルが空の場合、 `MAX(EXPR)`と`MIN(EXPR)`の結果はNULLになります。 `EXPR`の結果に`NULL`が含まれている場合も、同じように機能します。 `EXPR`の結果に`NULL`が含まれるかどうかは、式の最終結果に影響を与える可能性があるため、完全な書き換えは次の形式で行われます。
+この場合、 `ALL`と`ANY`を`MAX`と`MIN`に置き換えることができます。テーブルが空の場合、 `MAX(EXPR)`と`MIN(EXPR)`の結果は NULL です。 `EXPR`の結果に`NULL`が含まれる場合も同様です。 `EXPR`の結果に`NULL`が含まれるかどうかは、式の最終結果に影響を与える可能性があるため、完全な書き直しは次の形式で与えられます。
 
 -   `t.id < all (select s.id from s)`は`t.id < min(s.id) and if(sum(s.id is null) != 0, null, true)`に書き換えられます
 -   `t.id < any (select s.id from s)`は`t.id < max(s.id) or if(sum(s.id is null) != 0, null, false)`に書き換えられます
 
 ## <code>... != ANY (SELECT ... FROM ...)</code> {#code-any-select-from-code}
 
-この場合、サブクエリのすべての値が異なる場合は、クエリをそれらと比較するだけで十分です。サブクエリの異なる値の数が複数ある場合は、不等式が存在する必要があります。したがって、このようなサブクエリは次のように書き直すことができます。
+この場合、サブクエリからのすべての値が異なる場合、クエリをそれらと比較するだけで十分です。サブクエリ内の異なる値の数が複数の場合、不等式が存在する必要があります。したがって、このようなサブクエリは次のように書き直すことができます。
 
 -   `select * from t where t.id != any (select s.id from s)`は`select t.* from t, (select s.id, count(distinct s.id) as cnt_distinct from s) where (t.id != s.id or cnt_distinct > 1)`に書き換えられます
 
 ## <code>... = ALL (SELECT ... FROM ...)</code> {#code-all-select-from-code}
 
-この場合、サブクエリの異なる値の数が複数の場合、この式の結果はfalseである必要があります。したがって、このようなサブクエリはTiDBで次の形式に書き換えられます。
+この場合、サブクエリ内の異なる値の数が複数ある場合、この式の結果は false になる必要があります。したがって、そのようなサブクエリは、TiDB では次の形式に書き換えられます。
 
 -   `select * from t where t.id = all (select s.id from s)`は`select t.* from t, (select s.id, count(distinct s.id) as cnt_distinct from s ) where (t.id = s.id and cnt_distinct <= 1)`に書き換えられます
 
 ## <code>... IN (SELECT ... FROM ...)</code> {#code-in-select-from-code}
 
-この場合、 `IN`のサブクエリは`SELECT ... FROM ... GROUP ...`に書き直されてから、通常の形式の`JOIN`に書き直されます。
+この場合、 `IN`のサブクエリは`SELECT ... FROM ... GROUP ...`に書き換えられ、その後通常の形式の`JOIN`に書き換えられます。
 
-たとえば、 `select * from t1 where t1.a in (select t2.a from t2)`は`select t1.* from t1, (select distinct(a) a from t2) t2 where t1.a = t2. The form of a`に書き換えられます。 `t2.a`に`UNIQUE`属性がある場合、ここでの`DISTINCT`属性は自動的に削除できます。
+たとえば、 `select * from t1 where t1.a in (select t2.a from t2)`は`select t1.* from t1, (select distinct(a) a from t2) t2 where t1.a = t2. The form of a`に書き換えられます。ここの`DISTINCT`属性は、 `t2.a`が`UNIQUE`属性を持つ場合、自動的に削除できます。
 
 {{< copyable "" >}}
 
@@ -63,11 +63,11 @@ explain select * from t1 where t1.a in (select t2.a from t2);
 +------------------------------+---------+-----------+------------------------+----------------------------------------------------------------------------+
 ```
 
-この書き換えは、 `IN`のサブクエリが比較的小さく、外部クエリが比較的大きい場合にパフォーマンスが向上します。これは、書き換えがないと、駆動テーブルとしてt2を使用して`index join`を使用することが不可能だからです。ただし、デメリットは、 `t2`中に集計を自動的に削除できず、テーブルが比較的大きい場合、このリライトがクエリのパフォーマンスに影響を与えることです。現在、変数[tidb_opt_insubq_to_join_and_agg](/system-variables.md#tidb_opt_insubq_to_join_and_agg)はこの最適化を制御するために使用されています。この最適化が適切でない場合は、手動で無効にすることができます。
+`IN`サブクエリが比較的小さく、外部クエリが比較的大きい場合、この書き換えによりパフォーマンスが向上します。これは、書き換えなしでは、駆動テーブルとして t2 で`index join`を使用することが不可能であるためです。ただし、不利な点は、再書き込み中に`t2`を自動的に削除できず、テーブルが比較的大きい場合、この再書き込みがクエリのパフォーマンスに影響を与えることです。現在、この最適化を制御するために変数[tidb_opt_insubq_to_join_and_agg](/system-variables.md#tidb_opt_insubq_to_join_and_agg)が使用されています。この最適化が適切でない場合は、手動で無効にすることができます。
 
-## <code>EXISTS</code>サブクエリおよび<code>... &gt;/&gt;=/&lt;/&lt;=/=/!= (SELECT ... FROM ...)</code> {#code-exists-code-subquery-and-code-x3c-x3c-select-from-code}
+## <code>EXISTS</code>サブクエリと<code>... &gt;/&gt;=/&lt;/&lt;=/=/!= (SELECT ... FROM ...)</code> {#code-exists-code-subquery-and-code-x3c-x3c-select-from-code}
 
-現在、このようなシナリオのサブクエリでは、サブクエリが相関サブクエリでない場合、TiDBは最適化段階で事前に評価し、結果セットに直接置き換えます。次の図に示すように、 `EXISTS`のサブクエリは事前に最適化段階で`TRUE`と評価されるため、最終的な実行結果には表示されません。
+現在、このようなシナリオのサブクエリでは、サブクエリが相関サブクエリでない場合、TiDB は最適化段階で事前に評価し、直接結果セットに置き換えます。下図のように、サブクエリ`EXISTS`は事前に最適化段階で`TRUE`と評価されるため、最終的な実行結果には反映されません。
 
 {{< copyable "" >}}
 
@@ -83,6 +83,6 @@ explain select * from t where exists (select * from t2);
 | id                     | estRows  | task      | access object | operator info                  |
 +------------------------+----------+-----------+---------------+--------------------------------+
 | TableReader_12         | 10000.00 | root      |               | data:TableFullScan_11          |
-| └─TableFullScan_11     | 10000.00 | cop[tikv] | table:t       | keep order:false, stats:pseudo |
+| └─TableFullScan_11     | 10000.00 | cop[tikv] | table:t1      | keep order:false, stats:pseudo |
 +------------------------+----------+-----------+---------------+--------------------------------+
 ```
