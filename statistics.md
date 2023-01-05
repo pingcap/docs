@@ -31,6 +31,13 @@ TiDB uses statistics to decide [which index to choose](/choose-index.md). The `t
 >    ```sql
 >    select distinct(concat('DROP STATS ',table_schema, '.', table_name,';')) from information_schema.tables, mysql.stats_histograms where stats_ver = 2 and table_id = tidb_table_id ;
 >    ```
+>
+> - If the result of the preceding statement is too long to copy and paste, you can export the result to a temporary text file and then perform execution from the file like this:
+>
+>    ```sql
+>    SELECT DISTINCT ... INTO OUTFILE '/tmp/sql.txt';
+>    mysql -h XXX -u user -P 4000 ... < '/tmp/sql.txt';
+>    ```
 
 These two versions include different information in TiDB:
 
