@@ -195,6 +195,7 @@
   - [API Reference](https://docs.pingcap.com/tidbcloud/api/v1beta)
 - Integrations
   - [Airbyte](/tidb-cloud/integrate-tidbcloud-with-airbyte.md)
+  - [Cloudflare](/tidb-cloud/integrate-tidbcloud-with-cloudflare.md)
   - [Datadog](/tidb-cloud/monitor-datadog-integration.md)
   - [dbt](/tidb-cloud/integrate-tidbcloud-with-dbt.md)
   - [Netlify](/tidb-cloud/integrate-tidbcloud-with-netlify.md)
@@ -208,7 +209,6 @@
     - [Use Restore Resource](/tidb-cloud/terraform-use-restore-resource.md)
   - [Vercel](/tidb-cloud/integrate-tidbcloud-with-vercel.md)
   - [Zapier](/tidb-cloud/integrate-tidbcloud-with-zapier.md)
-  - [Cloudflare](/tidb-cloud/integrate-tidbcloud-with-cloudflare.md)
   - [Amazon AppFlow](/develop/dev-guide-aws-appflow-integration.md)
 - Reference
   - TiDB Cluster Architecture

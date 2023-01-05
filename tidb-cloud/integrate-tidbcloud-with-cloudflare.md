@@ -30,6 +30,8 @@ Before you try the steps in this article, you need to prepare the following thin
 
 ## Step 1: Set up Wrangler
 
+[Wrangler](https://developers.cloudflare.com/workers/wrangler/) is the official Cloudflare Worker CLI. You can use it to generate, build, preview, and publish your Workers.
+
 To authenticate Wrangler, run wrangler login:
 
 ```
