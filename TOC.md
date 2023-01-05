@@ -313,6 +313,7 @@
     - [Monitor](/tidb-lightning/monitor-tidb-lightning.md)
     - [FAQ](/tidb-lightning/tidb-lightning-faq.md)
     - [Glossary](/tidb-lightning/tidb-lightning-glossary.md)
+    - [Log Message Explanation](/tidb-lightning/tidb-lightning-log-message-explanation.md)
   - TiDB Data Migration
     - About TiDB Data Migration
       - [DM Overview](/dm/dm-overview.md)
