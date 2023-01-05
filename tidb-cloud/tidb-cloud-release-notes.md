@@ -8,6 +8,16 @@ aliases: ['/tidbcloud/beta/supported-tidb-versions','/tidbcloud/release-notes']
 
 This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-cloud/) in 2023.
 
+## January 5, 2023
+
+**Console changes**
+
+- Rename SQL Editor (beta) to Chat2Query (beta) for [Serverless Tier](/tidb-cloud/select-cluster-tier.md#serverless-tier-beta) clusters and support generating SQL queries using AI.
+
+  In Chat2Query, you can either let AI generate SQL queries automatically or write SQL queries manually, and run SQL queries against databases without a terminal.
+
+  To access Chat2Query, go to the [Clusters](https://tidbcloud.com/console/clusters) page of your project, click your cluster name, and then click **Chat2Query** in the left navigation pane.
+
 ## January 4, 2023
 
 **General changes**

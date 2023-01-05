@@ -30,7 +30,7 @@ The TiDB Cloud roadmap brings you what's coming in the near future, so you can s
     <td>Support loading sample datasets into a cluster. You can use this data to quickly get started with testing the features of TiDB Cloud.</td>
   </tr>
   <tr>
-    <td>✅ Add SQL Editor.</td>
+    <td>✅ Add a SQL editor.</td>
     <td>Write and run SQL queries, and view the results in the TiDB console.</td>
   </tr>
   <tr>
@@ -62,7 +62,7 @@ The TiDB Cloud roadmap brings you what's coming in the near future, so you can s
   </tr>
   <tr>
     <td>Optimize Playground.</td>
-    <td>Improve interactivity combined with the new SQL Editor, and guide users to finish the tutorial.</td>
+    <td>Improve interactivity combined with the new SQL editor, and guide users to finish the tutorial.</td>
   </tr>
 </tbody>
 </table>
