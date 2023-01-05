@@ -34,7 +34,7 @@ For more information about the two options, see [Select Your Cluster Tier](/tidb
 
 ## Step 3. Use your default project or create a new project
 
-If you are an organization owner, once you log in to TiDB Cloud, you have a default project. For more information about projects, see [Organizations and projects](/tidb-cloud/manage-user-access.md#organizations-and-projects)
+If you are an organization owner, once you log in to TiDB Cloud, you have a default project. For more information about projects, see [Organizations and projects](/tidb-cloud/manage-user-access.md#organizations-and-projects).
 
 - For free trial users, you can rename the default project if needed.
 - For Dedicated Tier users, you can either rename the default project or create a new project if needed.
