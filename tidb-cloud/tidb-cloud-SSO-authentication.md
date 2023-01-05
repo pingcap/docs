@@ -2,8 +2,11 @@
 title: Single sign-on Authentication
 summary: Learn how to sign in via your Google workspace account and your Github Accounts in TiDB Cloud Web console.
 ---
+# SSO(single sign-on) Authentication
 
-### Sign in with Google SSO 
+This document describes how individual or corporate users can quickly log in to TiDB CLoud Web Console via Googol workspace and GitHub accounts. Since your identity is centrally hosted on the third-party Google and GitHub platforms, TiDB cloud does not support you to modify your account password and enable MFA after logging in TiDB Cloud via SSO authentication.If you want to know about logging in through user and password , please see [Password Authentication](/tidb-cloud/tidb-cloud-password-authentication.md)
+
+## Sign in with Google SSO 
 
 To Sign in with your Google Workspace, perform these steps:
 
@@ -17,7 +20,11 @@ To Sign in with your Google Workspace, perform these steps:
 
 5. Jump back to your TiDB Cloud wecome page for first login successful,and then jump back to your cluster management console.
 
-### Sign in with Github SSO
+Note:
+
+This is a secure and convenient way to log in TiDB Cloud Web Console, as your user ID and credentials are stored in a third-party platform database that you can manage its.
+
+## Sign in with Github SSO
 
 To Sign in with your Github, perform these steps:
 
