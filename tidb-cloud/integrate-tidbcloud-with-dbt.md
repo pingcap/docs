@@ -90,7 +90,7 @@ To configure the project, take the following steps:
           password: "your_password"                                   # The password to use for authenticating to the TiDB Cloud clusters
     ```
 
-    You can get the values of `server`, `port`, and `username` from the **Connection** card in TiDB Cloud console.
+    You can get the values of `server`, `port`, and `username` from the [**Connect**](/tidb-cloud/connect-via-standard-connection.md) dialog in TiDB Cloud console.
 
 2. Complete the project configuration.
 

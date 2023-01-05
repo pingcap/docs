@@ -43,8 +43,6 @@ Generally the `multi-line insertion statement` runs faster than the multiple `si
 <SimpleTab>
 <div label="SQL">
 
-{{< copyable "sql" >}}
-
 ```sql
 CREATE TABLE `player` (`id` INT, `coins` INT, `goods` INT);
 INSERT INTO `player` (`id`, `coins`, `goods`) VALUES (1, 1000, 1), (2, 230, 2);
@@ -55,8 +53,6 @@ For more information on how to use this SQL, see [Connecting to a TiDB Cluster](
 </div>
 
 <div label="Java">
-
-{{< copyable "" >}}
 
 ```java
 // ds is an entity of com.mysql.cj.jdbc.MysqlDataSource
@@ -97,8 +93,6 @@ Due to the default MySQL JDBC Driver settings, you need to change some parameter
 
 MySQL JDBC Driver also provides an integrated configuration: `useConfigs`. When it is configured with `maxPerformance`, it is equivalent to configuring a set of configurations. Taking `mysql:mysql-connector-java:8.0.28` as an example, `useConfigs=maxPerformance` contains:
 
-{{< copyable "" >}}
-
 ```properties
 cachePrepStmts=true
 cacheCallableStmts=true
@@ -114,8 +108,6 @@ useInformationSchema=true
 You can check `mysql-connector-java-{version}.jar!/com/mysql/cj/configurations/maxPerformance.properties` to get the configurations contained in `useConfigs=maxPerformance` for the corresponding version of MySQL JDBC Driver.
 
 The following is a typical scenario of JDBC connection string configurations. In this example, Host: `127.0.0.1`, Port: `4000`, User name: `root`, Password: null, Default database: `test`:
-
-{{< copyable "" >}}
 
 ```
 jdbc:mysql://127.0.0.1:4000/test?user=root&useConfigs=maxPerformance&useServerPrepStmts=true&prepStmtCacheSqlLimit=2048&prepStmtCacheSize=256&rewriteBatchedStatements=true&allowMultiQueries=true
@@ -224,7 +216,7 @@ The following are the recommended tools for bulk-insert:
 
 <CustomContent platform="tidb-cloud">
 
-- Data import: [Data Import Task](/tidb-cloud/import-sample-data.md) page in the TiDB Cloud console. You can import **Dumpling** exported data, a **CSV** file, or [Migrate Data from Amazon Aurora to TiDB](/tidb-cloud/migrate-from-aurora-bulk-import.md). It also supports reading data from a local disk, Amazon S3 cloud disk, or GCS cloud disk.
+- Data import: **Import** page in the [TiDB Cloud console](https://tidbcloud.com/). You can import files from Amazon S3, GCS, or local disks to TiDB Cloud. For more information, see [Import data from files to TiDB Cloud](https://docs.pingcap.com/tidbcloud/tidb-cloud-migration-overview#import-data-from-files-to-tidb-cloud).
 - Data replication: [TiDB Data Migration](https://docs.pingcap.com/tidb/stable/dm-overview). You can replicate MySQL, MariaDB, and Amazon Aurora databases to TiDB. It also supports merging and migrating the sharded instances and tables from the source databases.
 - Data backup and restore: [Backup](/tidb-cloud/backup-and-restore.md) page in the TiDB Cloud console. Compared to **Dumpling**, backup and restore is more suitable for **_big data_** scenario.
 
@@ -245,8 +237,6 @@ For more information on how to handle hotspot issues, see [Troubleshoot Hotspot 
 If the primary key of the table you insert has the `AUTO_RANDOM` attribute, then by default the primary key cannot be specified. For example, in the [`bookshop`](/develop/dev-guide-bookshop-schema-design.md) database, you can see that the `id` field of the [`users` table](/develop/dev-guide-bookshop-schema-design.md#users-table) contains the `AUTO_RANDOM` attribute.
 
 In this case, you **cannot** use SQL like the following to insert:
-
-{{< copyable "sql" >}}
 
 ```sql
 INSERT INTO `bookshop`.`users` (`id`, `balance`, `nickname`) VALUES (1, 0.00, 'nicky');

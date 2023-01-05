@@ -14,7 +14,7 @@ TiDB Cloud changefeed helps you stream data from TiDB Cloud to other data servic
 >
 > For [Serverless Tier clusters](/tidb-cloud/select-cluster-tier.md#serverless-tier-beta), the changefeed feature is unavailable.
 
-To access the changefeed feature, navigate to the cluster overview page of your TiDB cluster and click the **Changefeed** tab on the left navigation bar. The changefeed list is displayed. 
+To access the changefeed feature, navigate to the cluster overview page of your TiDB cluster, and then click **Changefeed** in the left navigation pane. The changefeed list is displayed.
 
 In the changefeed list, you can:
 
@@ -30,12 +30,12 @@ To create a changefeed, refer to the tutorials:
 
 ## Delete a changefeed
 
-1. Navigate to the **Changefeed** tab of a cluster.
+1. Navigate to the cluster overview page of the target TiDB cluster, and then click **Changefeed** in the left navigation pane.
 2. Locate the corresponding changefeed you want to delete, and click **...** > **Delete** in the **Action** column.
 
 ## Pause or resume a changefeed
 
-1. Navigate to the **Changefeed** tab of a cluster.
+1. Navigate to the cluster overview page of the target TiDB cluster, and then click **Changefeed** in the left navigation pane.
 2. Locate the corresponding changefeed you want to pause or resume, and click **...** > **Pause/Resume** in the **Action** column.
 
 ## Edit a changefeed
@@ -44,7 +44,7 @@ To create a changefeed, refer to the tutorials:
 >
 > TiDB Cloud currently only allows editing changefeeds in the paused status.
 
-1. Navigate to the **Changefeed** tab of a cluster.
+1. Navigate to the cluster overview page of the target TiDB cluster, and then click **Changefeed** in the left navigation pane.
 2. Locate the changefeed you want to pause, and click **...** > **Pause** in the **Action** column.
 3. When the changefeed status changes to `Paused`, click **...** > **Edit** to edit the corresponding changefeed.
 
@@ -57,7 +57,7 @@ To create a changefeed, refer to the tutorials:
 
 ## Query TiCDC RCUs
 
-1. Navigate to the **Changefeed** tab of a cluster.
+1. Navigate to the cluster overview page of the target TiDB cluster, and then click **Changefeed** in the left navigation pane.
 2. You can see the current TiCDC Replication Capacity Units (RCUs) in the upper-left corner of the page.
 
 ## Changefeed billing

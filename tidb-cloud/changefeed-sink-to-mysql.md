@@ -76,7 +76,7 @@ The **Sink to MySQL** connector can only sink incremental data from your TiDB cl
 
 After completing the prerequisites, you can sink your data to MySQL.
 
-1. Navigate to the **Changefeed** tab of your TiDB cluster.
+1. Navigate to the cluster overview page of the target TiDB cluster, and then click **Changefeed** in the left navigation pane.
 
 2. Click **Create Changefeed**, and select **MySQL** as **Target Type**.
 

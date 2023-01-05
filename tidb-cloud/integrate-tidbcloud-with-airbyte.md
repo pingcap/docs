@@ -46,7 +46,7 @@ Conveniently, the steps are the same for setting TiDB as the source and the dest
 
 1. Click **Sources** or **Destinations** in the sidebar and choose TiDB type to create a new TiDB connector.
 
-2. Fill in the following parameters. See [Connect via standard connection](/tidb-cloud/connect-via-standard-connection.md) to get the connection information.
+2. Fill in the following parameters. See [Connect via standard connection](/tidb-cloud/connect-via-standard-connection.md) to get the connection information from the connection string.
 
     - Host: The endpoint of your TiDB Cloud cluster
     - Port: The port of the database

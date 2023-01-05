@@ -117,6 +117,10 @@ To check which project you belong to, take the following steps:
 
 ### Create a project
 
+> **Note:**
+>
+> For free trial users, you cannot create a new project.
+
 To create a new project, take the following steps:
 
 1. Click <MDSvgIcon name="icon-top-organization" /> **Organization** in the upper-right corner of the TiDB Cloud console.

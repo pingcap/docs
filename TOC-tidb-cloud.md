@@ -177,11 +177,15 @@
      - [Configuration](/garbage-collection-configuration.md)
   - [Tune TiFlash performance](/tiflash/tune-tiflash-performance.md)
 - Security
-  - [Password Authentication](/tidb-cloud/tidb-cloud-password-authentication.md)
-  - [Identity Access Management](/tidb-cloud/manage-user-access.md)
-  - [Configure Cluster Security Settings](/tidb-cloud/configure-security-settings.md)
-  - [Database Audit Logging](/tidb-cloud/tidb-cloud-auditing.md)
-  - [Secure Connections to Serverless Tier Clusters](/tidb-cloud/secure-connections-to-serverless-tier-clusters.md)
+  - Identity Access Control
+    - [Password Authentication](/tidb-cloud/tidb-cloud-password-authentication.md)
+    - [Identity Access Management](/tidb-cloud/manage-user-access.md)
+  - Network Access Control
+    - [Secure Connections to Serverless Tier Clusters](/tidb-cloud/secure-connections-to-serverless-tier-clusters.md)
+  - Database Access Control
+    - [Configure Cluster Security Settings](/tidb-cloud/configure-security-settings.md)
+  - Audit Management
+    - [Database Audit Logging](/tidb-cloud/tidb-cloud-auditing.md)
 - Billing
   - [Invoices](/tidb-cloud/tidb-cloud-billing.md#invoices)
   - [Billing Details](/tidb-cloud/tidb-cloud-billing.md#billing-details)
@@ -197,6 +201,7 @@
   - [Airbyte](/tidb-cloud/integrate-tidbcloud-with-airbyte.md)
   - [Datadog](/tidb-cloud/monitor-datadog-integration.md)
   - [dbt](/tidb-cloud/integrate-tidbcloud-with-dbt.md)
+  - [n8n](/tidb-cloud/integrate-tidbcloud-with-n8n.md)
   - [Netlify](/tidb-cloud/integrate-tidbcloud-with-netlify.md)
   - [Prometheus and Grafana](/tidb-cloud/monitor-prometheus-and-grafana-integration.md)
   - [ProxySQL](/develop/dev-guide-proxysql-integration.md)
@@ -208,6 +213,7 @@
     - [Use Restore Resource](/tidb-cloud/terraform-use-restore-resource.md)
   - [Vercel](/tidb-cloud/integrate-tidbcloud-with-vercel.md)
   - [Zapier](/tidb-cloud/integrate-tidbcloud-with-zapier.md)
+  - [Amazon AppFlow](/develop/dev-guide-aws-appflow-integration.md)
 - Reference
   - TiDB Cluster Architecture
     - [Overview](/tidb-architecture.md)
@@ -450,6 +456,7 @@
   - [TiDB Cloud FAQs](/tidb-cloud/tidb-cloud-faq.md)
   - [Serverless Tier FAQs](/tidb-cloud/serverless-tier-faqs.md)
 - Release Notes
+  - [2023](/tidb-cloud/tidb-cloud-release-notes.md)
   - [2022](/tidb-cloud/release-notes-2022.md)
   - [2021](/tidb-cloud/release-notes-2021.md)
   - [2020](/tidb-cloud/release-notes-2020.md)
