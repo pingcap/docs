@@ -229,7 +229,7 @@ Now you have successfully set up the VPC peering connection. Next, [connect to t
     > You can follow instructions next to the **Application GCP Project ID** and **VPC Network Name** fields to find the project ID and VPC network name.
 
     - Region
-    - Application GCP project ID
+    - Application GCP Project ID
     - VPC Network Name
     - VPC CIDR
 
