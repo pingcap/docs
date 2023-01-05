@@ -104,21 +104,19 @@ git push -u origin main
 
 With Cloudflare Workers, you can't directly access your database because there is no TCP support. Fortunately, You can use Prisma Data Proxy as described above.
 
-1. To get started, sign in to the [Prisma Data Platform](https://cloud.prisma.io/).
-2. Click **New Project** and then select **Import a Prisma repository**.
-3. Fill in the repository and project details, and click **Next**.
+1. To get started, sign in to the [Prisma Data Platform](https://cloud.prisma.io/) and click **New Project**.
+2. Fill in the **Connection string** with this pattern `mysql://USER:PASSWORD@HOST:PORT/DATABASE?sslaccept=strict`. You can find the connection information in your [TiDB Cloud console](https://tidbcloud.com/console/clusters).
+3. Leave the **Static IPs** as disabled because TiDB Cloud Serverless Tier is accessible from any IP address.
+4. Select a Data Proxy region that is geographically close to your TiDB Cloud cluster location. Then click **Create project**.
 
    ![img.png](/media/tidb-cloud/cloudflare/cloudflare-project.png)
 
-4. Fill in the **Connection string** with this pattern `mysql://USER:PASSWORD@HOST:PORT/DATABASE?sslaccept=strict`. You can find the connection information in your [TiDB Cloud console](https://tidbcloud.com/console/clusters).
-5. Under **Location**, select a Data Proxy location that is geographically close to your TiDB Cloud cluster location.
-6. Leave the **Static IPs** as disabled because TiDB Cloud Serverless Tier is accessible from any IP address.
+5. Fill in the repository, and click **Link Prisma schema** in the Get Started page.
+6. Click **Create a new connection string** and you will get a new connection string that starts with `prisma://.` Copy this connection string and save it for later.
 
-   ![img.png](/media/tidb-cloud/cloudflare/cloudflare-env.png)
+   ![img.png](/media/tidb-cloud/cloudflare/cloudflare-start.png)
 
-7. Click **Create Project**. You'll be greeted with a new connection string that starts with `prisma://.` Copy this connection string and save it for later.
-
-   ![img.png](/media/tidb-cloud/cloudflare/cloudflare-connection.png)
+7. Click **Skip and continue to Data Platform** to go to the Data Platform.
 
 ## Step 5: Set the Data Proxy Connection string in your environment
 
