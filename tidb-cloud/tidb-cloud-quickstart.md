@@ -35,7 +35,7 @@ TiDB Cloud [Serverless Tier](/tidb-cloud/select-cluster-tier.md#serverless-tier-
 
 Chat2Query is an AI-powered SQL editor that allows you to directly edit and run SQL queries against databases of Serverless Tier without using a terminal. In Chat2Query, you can use AI to generate SQL queries automatically.
 
-1. On the [Clusters](https://tidbcloud.com/console/clusters) page, click your cluster name, and then click **Chat2Query** in the left navigation pane.
+1. On the [**Clusters**](https://tidbcloud.com/console/clusters) page, click your cluster name, and then click **Chat2Query** in the left navigation pane.
 
     > **Note:**
     >

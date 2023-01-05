@@ -19,7 +19,7 @@ Please make sure you are connected to a TiDB cluster. If not, refer to [Build a 
 
 TiDB is compatible with MySQL, you can use MySQL statements directly in most cases. For unsupported features, see [Compatibility with MySQL](/mysql-compatibility.md#unsupported-features).
 
-To experiment with SQL and test out TiDB compatibility with MySQL queries, you can try Chat2Query (beta) in your [TiDB Cloud console](https://tidbcloud.com/). To access Chat2Query, go to the [Clusters](https://tidbcloud.com/console/clusters) page of your project, click your cluster name, and then click **Chat2Query** in the left navigation pane. In Chat2Query, you can either let AI generate SQL queries automatically or write SQL queries manually, and run SQL queries against databases without a terminal.
+To experiment with SQL and test out TiDB compatibility with MySQL queries, you can try Chat2Query (beta) in your [TiDB Cloud console](https://tidbcloud.com/). To access Chat2Query, go to the [**Clusters**](https://tidbcloud.com/console/clusters) page of your project, click your cluster name, and then click **Chat2Query** in the left navigation pane. In Chat2Query, you can either let AI generate SQL queries automatically or write SQL queries manually, and run SQL queries against databases without a terminal.
 
 > **Note:**
 >
