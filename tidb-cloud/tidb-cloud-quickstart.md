@@ -29,13 +29,13 @@ TiDB Cloud [Serverless Tier](/tidb-cloud/select-cluster-tier.md#serverless-tier-
 
 5. Click **Create**.
 
-After the cluster is created, you will be prompted to try Chat2Query.
+    The cluster creation process starts and your Serverless Tier cluster will be created in approximately 30 seconds.
 
 ## Step 2. Try Chat2Query (Beta)
 
 Chat2Query is an AI-powered SQL editor that allows you to directly edit and run SQL queries against databases of Serverless Tier without using a terminal. In Chat2Query, you can use AI to generate SQL queries automatically.
 
-1. Click **Go to Chat2Query** in the prompted message.
+1. On the [**Clusters**](https://tidbcloud.com/console/clusters) page, click your cluster name, and then click **Chat2Query** in the left navigation pane.
 
     > **Note:**
     >

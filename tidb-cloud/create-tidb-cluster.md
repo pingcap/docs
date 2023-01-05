@@ -34,7 +34,7 @@ For more information about the two options, see [Select Your Cluster Tier](/tidb
 
 ## Step 3. Use your default project or create a new project
 
-If you are an organization owner, once you log in to TiDB Cloud, you have a default project.
+If you are an organization owner, once you log in to TiDB Cloud, you have a default project. For more information about projects, see [Organizations and projects](/tidb-cloud/manage-user-access.md#organizations-and-projects).
 
 - For free trial users, you can rename the default project if needed.
 - For Dedicated Tier users, you can either rename the default project or create a new project if needed.
@@ -93,9 +93,13 @@ To create a Serverless Tier cluster, take the following steps:
 
 To create a Dedicated Tier cluster, take the following steps:
 
-1. Navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page.
+1. Navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page of your project.
 
-2. If you have multiple projects, switch to the target project in the left navigation pane, and then click **Create Cluster** in the upper-right corner. Otherwise, click **Create Cluster** in the upper-right corner directly.
+    > **Tip:**
+    >
+    > If you have multiple projects, you can switch to the target project in the left navigation pane of the **Clusters** page.
+
+2. Click **Create Cluster**.
 
 3. On the **Create Cluster** page, select **Dedicated Tier**, update the default cluster name and port number if necessary, choose a cloud provider and a region, and then click **Next**.
 
