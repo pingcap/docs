@@ -179,6 +179,7 @@
 - Security
   - Identity Access Control
     - [Password Authentication](/tidb-cloud/tidb-cloud-password-authentication.md)
+    - [SSO Authentication](/tidb-cloud-SSO-authentication.md)
     - [Identity Access Management](/tidb-cloud/manage-user-access.md)
   - Network Access Control
     - [Secure Connections to Serverless Tier Clusters](/tidb-cloud/secure-connections-to-serverless-tier-clusters.md)
