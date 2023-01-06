@@ -155,7 +155,7 @@ To import the CSV files to TiDB Cloud, take the following steps:
 
     If the number is zero, it means no data files matched the value you entered in the **Source file name** field. In this case, ensure that there are no typos in the **Source file name** field and try again.
 
-9. On the **Import Task Details** page, you can click **Query Data** in the upper-right corner, and then use [**Chat2Query**](/tidb-cloud/tidb-cloud-quickstart.md#step-2-try-chat2query-beta) to write SQL statements to query the imported data.
+9. On the **Import Task Details** page, you can click **Query Data** in the upper-right corner, and then use [**Chat2Query**](/tidb-cloud/tidb-cloud-quickstart.md#step-2-try-chat2query-beta) to write SQL statements to query the imported data. For a Serverless Tier cluster, because it only supports importing to one target table, you need to write a sample query SQL statement, for example, `SELECT * FROM db_name.table_name`.
 
 When you run an import task, if any unsupported or invalid conversions are detected, TiDB Cloud terminates the import job automatically and reports an importing error.
 
