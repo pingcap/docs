@@ -203,6 +203,7 @@ The `local_install.sh` script automatically runs the `tiup mirror set tidb-commu
 If you download the offline packages from the [official download page](https://www.pingcap.com/download/), you need to merge the server package and the toolkit package into an offline mirror. If you manually package the offline component packages using the `tiup mirror clone` command, you can skip this step.
 
 Run the following commands to merge the offline toolkit package into the server package directory:
+
 ```bash
 tar xf tidb-community-toolkit-${version}-linux-amd64.tar.gz
 ls -ld tidb-community-server-${version}-linux-amd64 tidb-community-toolkit-${version}-linux-amd64
