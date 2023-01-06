@@ -4,17 +4,19 @@ summary: Learn how to sign in via your Google workspace account and your Github 
 ---
 # SSO(single sign-on) Authentication
 
-This document describes how individual or corporate users can quickly log in to TiDB CLoud Web Console via Googol workspace and GitHub accounts. Since your identity is centrally hosted on the third-party Google and GitHub platforms, TiDB cloud does not support you to modify your account password and enable MFA after logging in TiDB Cloud via SSO authentication.If you want to know about logging in through user and password , please see [Password Authentication](/tidb-cloud/tidb-cloud-password-authentication.md)
+This document describes how to quickly log in to TiDB Cloud Console via Googol workspace and GitHub accounts. 
+
+If you log into TiDB Cloud via SSO authentication, because your identity is centrally hosted on the third-party Google and GitHub platforms, you will not be able to modify your account password and enable MFA in the TiDB console. If you want to log into TiDB Cloud through username and password, see [Password Authentication](/tidb-cloud/tidb-cloud-password-authentication.md)
 
 ## Sign in with Google SSO 
 
-To Sign in with your Google Workspace, perform these steps:
+To sign in with your Google Workspace account, take the following steps:
 
-1. Go to the TiDB Cloud login page: [www.tidbcloud.com](https://tidbcloud.com/).
+1. Go to the TiDB Cloud [login](https://tidbcloud.com/) page.
 
-2. In TiDB Cloud Console, click Sign in With Google.
+2. Click **Sign in With Google**. You will be directed to the Google Workspace Console.
 
-3. Jump to Google Workspace Console, enter your Google Username and Password to login.
+3. Follow the on-screen instructions to enter your Google username and password. 
 
 4. Login is successful, jump to Choose to agree to "Privacy Policy, Terms of Service"
 
