@@ -211,7 +211,7 @@ This log may appear multiple times based on the importing table data size. Each 
 [INFO] [localhelper.go:108] ["paginate scan regions"] [count=1] [start=7480000000000000FF3F5F728000000000FF0000010000000000FA] [end=7480000000000000FF3F5F728000000000FF9896810000000000FA]   
 [INFO] [localhelper.go:116] ["paginate scan region finished"] [minKey=7480000000000000FF3F5F728000000000FF0000010000000000FA] [maxKey=7480000000000000FF3F5F728000000000FF9896810000000000FA] [regions=1]
 ```
-[localhelper.go:108](https://github.com/pingcap/tidb/blob/v5.4.0/br/pkg/lightning/backend/local/localhelper.go#L108), [localhelper.go:116](https://github.com/pingcap/tidb/blob/v5.4.0/br/pkg/lightning/backend/local/localhelper.go#L108): Paginate [scans a batch of regions info](https://github.com/pingcap/tidb/blob/55f3b24c1c9f506bd652ef1d162283541e428872/br/pkg/restore/split.go#L413) on PD.
+[localhelper.go:108](https://github.com/pingcap/tidb/blob/v5.4.0/br/pkg/lightning/backend/local/localhelper.go#L108), [localhelper.go:116](https://github.com/pingcap/tidb/blob/v5.4.0/br/pkg/lightning/backend/local/localhelper.go#L108): Paginate [scans a batch of regions info](https://github.com/pingcap/tidb/blob/v5.4.0/br/pkg/restore/split.go#L413) on PD.
 
 ```
 [INFO] [split_client.go:460] ["checking whether need to scatter"] [store=1] [max-replica=3]   
@@ -239,7 +239,7 @@ This log may appear multiple times based on the importing table data size. Each 
 [INFO] [backend.go:467] ["cleanup start"] [engineTag=`sysbench`.`sbtest1`:0] [engineUUID=d173bb2e-b753-5da9-b72e-13a49a46f5d7]   
 [INFO] [backend.go:469] ["cleanup completed"] [engineTag=`sysbench`.`sbtest1`:0] [engineUUID=d173bb2e-b753-5da9-b72e-13a49a46f5d7] [takeTime=209.800004ms] []
 ```
-[backend.go:467](https://github.com/pingcap/tidb/blob/v5.4.0/br/pkg/lightning/backend/backend.go#L467), [backend.go:469](https://github.com/pingcap/tidb/blob/v5.4.0/br/pkg/lightning/backend/backend.go#L469): Clean up intermediate data during import phase. It will [cleanup](https://github.com/pingcap/tidb/blob/55f3b24c1c9f506bd652ef1d162283541e428872/br/pkg/lightning/backend/local/engine.go#L158) engine related meta info and db files.
+[backend.go:467](https://github.com/pingcap/tidb/blob/v5.4.0/br/pkg/lightning/backend/backend.go#L467), [backend.go:469](https://github.com/pingcap/tidb/blob/v5.4.0/br/pkg/lightning/backend/backend.go#L469): Clean up intermediate data during import phase. It will [cleanup](https://github.com/pingcap/tidb/blob/v5.4.0/br/pkg/lightning/backend/local/engine.go#L158) engine related meta info and db files.
 
 ```
 [INFO] [table_restore.go:946] ["import and cleanup engine completed"] [engineTag=`sysbench`.`sbtest1`:0] [engineUUID=d173bb2e-b753-5da9-b72e-13a49a46f5d7] [takeTime=20.389269402s] []
