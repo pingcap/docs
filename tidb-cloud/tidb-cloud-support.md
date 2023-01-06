@@ -9,20 +9,26 @@ TiDB Cloud offers a free basic support plan for each user and you can upgrade to
 
 The information of each support plan is available on the support page of the TiDB Cloud console. To access the page, see [Check or upgrade your support plan](#check-or-upgrade-your-support-plan).
 
+## Apply for PoC
+
+To apply for a Proof of Concept (PoC), you can do one of the following:
+
+- On the PingCAP website, go to the [Apply for PoC](https://pingcap.com/apply-for-poc/) page to fill in the application form.
+- In the [TiDB Cloud console](https://tidbcloud.com/), click **Contact Us** > in the upper-right corner, and select <MDSvgIcon name="icon-top-apply-for-poc" /> **Apply for PoC** to fill in the application form.
+
+Once you submit the form, the TiDB Cloud support team will review your application, contact you, and transfer credits to your account once the application is approved. You can also contact a PingCAP support engineer to assist with your PoC procedures to ensure the PoC runs as smoothly as possible.
+
 ## Request support
 
-To request support for your organization, project, or cluster, perform the following steps:
+To request support, you can do one of the following:
 
-1. In the TiDB Cloud console, click the **Help** icon in the lower-right corner.
-2. Fill in the request information.
+- On the **Clusters** page of your project, click **...** in the row of your cluster and select **Get Support**. If you want to request support for a specific cluster, this method is most recommended because your cluster information can be populated in the request automatically.
+- In the lower-right corner of the TiDB Cloud console, click the **Help** icon.
+- In the upper-right corner of the TiDB Cloud console, click <MDSvgIcon name="icon-top-support" /> **Support** > **Create New Case**. If you go with this way, you need to provide your organization ID in the request as well. To get that, click <MDSvgIcon name="icon-top-organization" /> **Organization** in the upper-right corner and click **Organization Settings**.
 
-    > **Tip:**
-    >
-    > If you want to apply for a beta feature that is available upon request, fill in your application information in the **Description** field. For example, "Apply for TiDB Cloud API".
-
-3. Click **Send**.
-
-Alternatively, you can click <MDSvgIcon name="icon-top-apply-for-poc" /> **Apply for PoC** in the upper-right corner and click **Create New Case** to request support. If you go with this way, you need to provide your Organization ID in the request form as well. To get the Organization ID, click <MDSvgIcon name="icon-top-organization" /> **Organization** in the upper-right corner of the TiDB Cloud console and click **Organization Settings**.
+> **Tip:**
+>
+> If you want to apply for a beta feature that is available upon request, fill in your application information in the **Description** field of the request.
 
 After the support team receives your request, they will reply to you via email.
 
