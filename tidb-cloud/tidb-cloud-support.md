@@ -18,6 +18,8 @@ To apply for a Proof of Concept (PoC), you can do one of the following:
 
 Once you submit the form, the TiDB Cloud support team will review your application, contact you, and transfer credits to your account once the application is approved. You can also contact a PingCAP support engineer to assist with your PoC procedures to ensure the PoC runs as smoothly as possible.
 
+For more information, see [Perform a Proof of Concept (PoC) with TiDB Cloud](/tidb-cloud/tidb-cloud-poc.md).
+
 ## Request support
 
 To request support, you can do one of the following:
