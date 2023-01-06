@@ -4,7 +4,7 @@
 - [Docs Home](https://docs.pingcap.com/)
 - About TiDB
   - [TiDB Introduction](/overview.md)
-  - [TiDB 6.4 Release Notes](/releases/release-6.4.0.md)
+  - [TiDB 6.5 Release Notes](/releases/release-6.5.0.md)
   - [Basic Features](/basic-features.md)
   - [Experimental Features](/experimental-features.md)
   - [MySQL Compatibility](/mysql-compatibility.md)
@@ -39,6 +39,7 @@
     - [Insert Data](/develop/dev-guide-insert-data.md)
     - [Update Data](/develop/dev-guide-update-data.md)
     - [Delete Data](/develop/dev-guide-delete-data.md)
+    - [Periodically Delete Data Using Time to Live](/time-to-live.md)
     - [Prepared Statements](/develop/dev-guide-prepared-statement.md)
   - Read Data
     - [Query Data from a Single Table](/develop/dev-guide-get-data-from-single-table.md)
@@ -83,6 +84,7 @@
     - [Third-Party Tools Supported by TiDB](/develop/dev-guide-third-party-support.md)
     - [Known Incompatibility Issues with Third-Party Tools](/develop/dev-guide-third-party-tools-compatibility.md)
     - [ProxySQL Integration Guide](/develop/dev-guide-proxysql-integration.md)
+    - [Amazon AppFlow Integration Guide](/develop/dev-guide-aws-appflow-integration.md)
 - Deploy
   - [Software and Hardware Requirements](/hardware-and-software-requirements.md)
   - [Environment Configuration Checklist](/check-before-deployment.md)
@@ -174,23 +176,27 @@
   - [Customize Configurations of Monitoring Servers](/tiup/customized-montior-in-tiup-environment.md)
   - [BR Monitoring and Alert](/br/br-monitoring-and-alert.md)
 - Troubleshoot
-  - [TiDB Troubleshooting Map](/tidb-troubleshooting-map.md)
-  - [Identify Slow Queries](/identify-slow-queries.md)
-  - [Analyze Slow Queries](/analyze-slow-queries.md)
-  - [SQL Diagnostics](/information-schema/information-schema-sql-diagnostics.md)
-  - [Identify Expensive Queries Using Top SQL](/dashboard/top-sql.md)
-  - [Identify Expensive Queries Using Logs](/identify-expensive-queries.md)
-  - [Statement Summary Tables](/statement-summary-tables.md)
-  - [Troubleshoot Hotspot Issues](/troubleshoot-hot-spot-issues.md)
-  - [Troubleshoot Increased Read and Write Latency](/troubleshoot-cpu-issues.md)
-  - [Save and Restore the On-Site Information of a Cluster](/sql-plan-replayer.md)
-  - [Troubleshoot TiDB OOM Issues](/troubleshoot-tidb-oom.md)
-  - [Troubleshoot Cluster Setup](/troubleshoot-tidb-cluster.md)
-  - [Troubleshoot High Disk I/O Usage](/troubleshoot-high-disk-io.md)
-  - [Troubleshoot Lock Conflicts](/troubleshoot-lock-conflicts.md)
-  - [Troubleshoot TiFlash](/tiflash/troubleshoot-tiflash.md)
-  - [Troubleshoot Write Conflicts in Optimistic Transactions](/troubleshoot-write-conflicts.md)
-  - [Troubleshoot Inconsistency Between Data and Indexes](/troubleshoot-data-inconsistency-errors.md)
+  - Issue Summary
+    - [TiDB Troubleshooting Map](/tidb-troubleshooting-map.md)
+    - [Troubleshoot TiDB Cluster Setup](/troubleshoot-tidb-cluster.md)
+    - [Troubleshoot TiFlash](/tiflash/troubleshoot-tiflash.md)
+  - Issue Scenarios
+    - Slow Queries
+      - [Identify Slow Queries](/identify-slow-queries.md)
+      - [Analyze Slow Queries](/analyze-slow-queries.md)
+    - [TiDB OOM](/troubleshoot-tidb-oom.md)
+    - [Hotspot](/troubleshoot-hot-spot-issues.md)
+    - [Increased Read and Write Latency](/troubleshoot-cpu-issues.md)
+    - [Write Conflicts in Optimistic Transactions](/troubleshoot-write-conflicts.md)
+    - [High Disk I/O Usage](/troubleshoot-high-disk-io.md)
+    - [Lock Conflicts](/troubleshoot-lock-conflicts.md)
+    - [Inconsistency Between Data and Indexes](/troubleshoot-data-inconsistency-errors.md)
+  - Diagnostic Methods
+    - [SQL Diagnostics](/information-schema/information-schema-sql-diagnostics.md)
+    - [Statement Summary Tables](/statement-summary-tables.md)
+    - [Identify Expensive Queries Using Top SQL](/dashboard/top-sql.md)
+    - [Identify Expensive Queries Using Logs](/identify-expensive-queries.md)
+    - [Save and Restore the On-Site Information of a Cluster](/sql-plan-replayer.md)
 - Performance Tuning
   - Tuning Guide
     - [Performance Tuning Overview](/performance-tuning-overview.md)
@@ -221,6 +227,7 @@
       - [Aggregation](/explain-aggregation.md)
       - [Views](/explain-views.md)
       - [Partitions](/explain-partitions.md)
+      - [Index Merge](/explain-index-merge.md)
     - SQL Optimization Process
       - [Overview](/sql-optimization-concepts.md)
       - Logic Optimization
@@ -322,6 +329,8 @@
         - [tiup cluster help](/tiup/tiup-component-cluster-help.md)
         - [tiup cluster import](/tiup/tiup-component-cluster-import.md)
         - [tiup cluster list](/tiup/tiup-component-cluster-list.md)
+        - [tiup cluster meta backup](/tiup/tiup-component-cluster-meta-backup.md)
+        - [tiup cluster meta restore](/tiup/tiup-component-cluster-meta-restore.md)
         - [tiup cluster patch](/tiup/tiup-component-cluster-patch.md)
         - [tiup cluster prune](/tiup/tiup-component-cluster-prune.md)
         - [tiup cluster reload](/tiup/tiup-component-cluster-reload.md)
@@ -498,6 +507,7 @@
       - Create Changefeeds
         - [Replicate Data to MySQL-compatible Databases](/ticdc/ticdc-sink-to-mysql.md)
         - [Replicate Data to Kafka](/ticdc/ticdc-sink-to-kafka.md)
+        - [Replicate Data to Storage Services](/ticdc/ticdc-sink-to-cloud-storage.md)
       - [Manage Changefeeds](/ticdc/ticdc-manage-changefeed.md)
       - [Log Filter](/ticdc/ticdc-filter.md)
       - [Bidirectional Replication](/ticdc/ticdc-bidirectional-replication.md)
@@ -512,7 +522,9 @@
         - [TiCDC Avro Protocol](/ticdc/ticdc-avro-protocol.md)
         - [TiCDC Canal-JSON Protocol](/ticdc/ticdc-canal-json.md)
         - [TiCDC Open Protocol](/ticdc/ticdc-open-protocol.md)
+        - [TiCDC CSV Protocol](/ticdc/ticdc-csv.md)
       - [TiCDC Open API](/ticdc/ticdc-open-api.md)
+      - [Guide for Developing a Storage Sink Consumer](/ticdc/ticdc-storage-consumer-dev-guide.md)
       - [Compatibility](/ticdc/ticdc-compatibility.md)
     - [Troubleshoot](/ticdc/troubleshoot-ticdc.md)
     - [FAQs](/ticdc/ticdc-faq.md)
@@ -912,6 +924,8 @@
   - [Release Timeline](/releases/release-timeline.md)
   - [TiDB Versioning](/releases/versioning.md)
   - [TiDB Installation Packages](/binary-package.md)
+  - v6.5
+    - [6.5.0](/releases/release-6.5.0.md)
   - v6.4
     - [6.4.0-DMR](/releases/release-6.4.0.md)
   - v6.3
@@ -943,6 +957,7 @@
     - [5.2.1](/releases/release-5.2.1.md)
     - [5.2.0](/releases/release-5.2.0.md)
   - v5.1
+    - [5.1.5](/releases/release-5.1.5.md)
     - [5.1.4](/releases/release-5.1.4.md)
     - [5.1.3](/releases/release-5.1.3.md)
     - [5.1.2](/releases/release-5.1.2.md)
