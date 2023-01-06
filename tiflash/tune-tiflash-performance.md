@@ -48,7 +48,7 @@ If you want to save machine resources and have no requirement on isolation, you 
 
 5. Compact data using the `ALTER TABLE ... COMPACT` statement if necessary:
 
-    Executing the [`ALTER TABLE ... COMPACT`](/sql-statements/sql-statement-alter-table-compact.md) statement can initiate compaction for a specific table or partition on a TiFlash node. During the compaction, storage nodes rewrite physical data, including cleaning up deleted data and merging multiple versions of data. This helps enhance read performance and reduce disk usage. The following are examples:
+    Executing the [`ALTER TABLE ... COMPACT`](/sql-statements/sql-statement-alter-table-compact.md) statement can initiate compaction for a specific table or partition on a TiFlash node. During the compaction, storage nodes rewrite physical data, including cleaning up deleted rows and merging multiple versions of data caused by updates. This helps enhance read performance and reduce disk usage. The following are examples:
 
     ```sql
     ALTER TABLE employees COMPACT TIFLASH REPLICA;
