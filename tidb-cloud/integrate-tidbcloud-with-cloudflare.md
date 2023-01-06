@@ -210,16 +210,21 @@ If you create a new table and want to query it, take the following steps:
 
 1. Add a new model in `prisma/schema.prisma`.
 2. Push the changes to your repository. 
+
     ```
     git add prisma
     git commit -m "add new model"
     git push
     ```
+   
 3. Generate the Prisma Client again.
+
     ```
     npx prisma generate --data-proxy
     ```
+   
 4. Publish the Cloudflare Worker again. 
+
     ```
     npx wrangler publish
     ```
