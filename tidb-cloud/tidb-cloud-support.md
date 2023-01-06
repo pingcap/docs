@@ -24,9 +24,15 @@ For more information, see [Perform a Proof of Concept (PoC) with TiDB Cloud](/ti
 
 To request support, you can do one of the following:
 
-- On the **Clusters** page of your project, click **...** in the row of your cluster and select **Get Support**. If you want to request support for a specific cluster, this method is most recommended because your cluster information can be populated in the request automatically.
+- On the [**Clusters**](https://tidbcloud.com/console/clusters) page of your project, click **...** in the row of your cluster and select **Get Support**.
+
+    If you want to request support for a specific cluster, this method is most recommended because your cluster information can be populated in the request automatically.
+
 - In the lower-right corner of the TiDB Cloud console, click the **Help** icon.
-- In the upper-right corner of the TiDB Cloud console, click <MDSvgIcon name="icon-top-support" /> **Support** > **Create New Case**. If you go with this way, you need to provide your organization ID in the request as well. To get that, click <MDSvgIcon name="icon-top-organization" /> **Organization** in the upper-right corner and click **Organization Settings**.
+
+- In the upper-right corner of the TiDB Cloud console, click <MDSvgIcon name="icon-top-support" /> **Support** > **Create New Case**.
+
+    If you go with this way, you need to provide your organization ID in the request manually. To get that, click <MDSvgIcon name="icon-top-organization" /> **Organization** in the upper-right corner and click **Organization Settings**.
 
 > **Tip:**
 >
