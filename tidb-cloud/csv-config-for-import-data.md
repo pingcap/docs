@@ -77,7 +77,7 @@ The following is the CSV Configuration window when you use the Import Data servi
 
 > **Note:**
 >
-> You cannot configure the **Not-null** and **Null** settings when [import local files](/tidb-cloud/tidb-cloud-import-local-files.md) to TiDB Cloud.
+> You cannot configure the **Not-null** and **Null** settings when [importing local files](/tidb-cloud/tidb-cloud-import-local-files.md) to TiDB Cloud.
 
 - Definition: the **Not-null** setting controls whether all fields are non-nullable. If **Not-null** is `False`, the string specified by **Null** is transformed to the SQL NULL instead of a specific value.
 
