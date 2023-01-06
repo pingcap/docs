@@ -36,3 +36,8 @@ We are constantly filling in the feature gaps between Serverless Tier and Dedica
 
 - [Built-in Monitoring](/tidb-cloud/built-in-monitoring.md) is currently not available for Serverless Tier.
 - [Third-party Monitoring integrations](/tidb-cloud/third-party-monitoring-integrations.md) are currently not available for Serverless Tier.
+
+## Stream data
+
+* [Changefeed](/tidb-cloud/changefeed-overview.md) is not supported for Serverless Tier currently.
+* [Data Migration](/tidb-cloud/migrate-from-mysql-using-data-migration.md) is not supported for Serverless Tier currently.
