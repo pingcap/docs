@@ -1,5 +1,5 @@
 ---
-title: Single sign-on Authentication
+title: SSO Authentication
 summary: Learn how to sign in via your Google workspace account and your Github Accounts in TiDB Cloud Web console.
 ---
 # SSO(single sign-on) Authentication
