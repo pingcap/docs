@@ -11,7 +11,7 @@ The information of each support plan is available on the support page of the TiD
 
 > **Tip:**
 >
-> If you want to apply for a Proof of Concept (PoC), see [Perform a Proof of Concept (PoC) with TiDB Cloud](/tidb-cloud/tidb-cloud-poc.md).
+> If you want to apply for a PoC, see [Perform a Proof of Concept (PoC) with TiDB Cloud](/tidb-cloud/tidb-cloud-poc.md).
 
 ## Request support
 
