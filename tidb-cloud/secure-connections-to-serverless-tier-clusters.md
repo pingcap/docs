@@ -135,31 +135,31 @@ In different operating systems, the automatic download storage path of the root 
 **MacOS**
 
 ```
-/etc/ssl/ca_root.pem
+/etc/ssl/cert.pem
 ```
 
 **Debian / Ubuntu / Arch**
 
 ```
-/etc/ssl/certs/ca_root.crt
+/etc/ssl/certs/ca-certificates.crt
 ```
 
 **RedHat / Fedora / CentOS / Mageia**
 
 ```
-/etc/pki/tls/certs/ca_root.crt
+/etc/pki/tls/certs/ca-bundle.crt
 ```
 
 **Alpine**
 
 ```
-/etc/ssl/ca_root.pem
+/etc/ssl/cert.pem
 ```
 
 **OpenSUSE**
 
 ```
-/etc/ssl/ca_root.pem
+/etc/ssl/ca-bundle.pem
 ```
 
 **Windows**
