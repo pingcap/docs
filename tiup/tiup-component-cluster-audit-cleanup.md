@@ -24,7 +24,7 @@ tiup cluster audit cleanup [flags]
 ### -h, --help
 
 - Prints the help information.
-- Data type:  `BOOLEAN`
+- Data type: `BOOLEAN`
 - Default value: `false`
 - To enable this option, you can add this option to the command, and pass the `true` value or do not pass any value.
 
