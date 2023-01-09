@@ -23,7 +23,7 @@ tiup dm audit [audit-id] [flags]
 - Data type: `BOOLEAN`
 - Default: false
 
-## Outputs
+## Output
 
 - If `[audit-id]` is specified, the corresponding execution log is output.
 - If `[audit-id]` is not specified, a table with the following fields is output:
