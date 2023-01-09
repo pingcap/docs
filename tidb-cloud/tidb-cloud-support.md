@@ -15,23 +15,29 @@ The information of each support plan is available on the support page of the TiD
 
 ## Request support
 
-To request support, you can do one of the following:
+You can request support for your clusters, projects, and organizations. After the support team receives your request, they will reply to you via email.
+
+> **Tip:**
+>
+> If you want to apply for a beta feature that is available upon request, fill in your application information in the **Description** field of the request.
+
+### Request support for a cluster
+
+You can request support for a cluster in either of the following ways:
 
 - On the [**Clusters**](https://tidbcloud.com/console/clusters) page of your project, click **...** in the row of your cluster and select **Get Support**.
 
-    If you want to request support for a specific cluster, this method is most recommended because your cluster information can be populated in the request automatically.
+- On your cluster overview page, click **...** in the upper-right corner and select **Get Support**.
+
+### Request support for a project or organization
+
+You can request support for a project or organization in either of the following ways:
 
 - In the lower-right corner of the TiDB Cloud console, click the **Help** icon.
 
 - In the upper-right corner of the TiDB Cloud console, click <MDSvgIcon name="icon-top-support" /> **Support** > **Create New Case**.
 
     If you go with this way, you need to provide your organization ID in the request manually. To get that, click <MDSvgIcon name="icon-top-organization" /> **Organization** in the upper-right corner and click **Organization Settings**.
-
-> **Tip:**
->
-> If you want to apply for a beta feature that is available upon request, fill in your application information in the **Description** field of the request.
-
-After the support team receives your request, they will reply to you via email.
 
 ## Check your submitted request
 
