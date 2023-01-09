@@ -96,9 +96,6 @@ After running the queries, you can see the query log and results immediately at 
 In Chat2Query, you can save your SQL queries in different SQL files and manage SQL files as follows:
 
 - To add a SQL file, click **+** on the **SQL Files** tab.
-
-    ![SQL Files Tab](/media/tidb-cloud/chat2query-sql-files-tab.png)
-
 - To rename a SQL file, move your cursor on the filename, click **...** next to the filename, and then select **Rename**.
 - To delete a SQL file, move your cursor on the filename, click **...** next to the filename, and then select **Delete**.
 
