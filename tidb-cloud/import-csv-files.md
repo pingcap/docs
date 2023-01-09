@@ -97,7 +97,7 @@ To import the CSV files to TiDB Cloud, take the following steps:
 
 2. On the **Import** page, do one of the following:
 
-    - If your TiDB cluster is hosted by AWS, click **Import Data** in the upper-right corner, and then select **From S3**.
+    - If your TiDB cluster is hosted by AWS, click **import data from S3**.
     - If your TiDB cluster is hosted by GCP, click **Import Data** in the upper-right corner.
 
 3. Provide the following information for the source CSV files:
