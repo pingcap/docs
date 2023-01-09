@@ -13,13 +13,13 @@ Before connecting to your serverless cluster, you can refer to [Password authent
 
 We simplify the operation process of setting database passwords, allowing you to more conveniently and securely set and reset database cluster passwords on the connect page of your Serverless cluster.
 
-## Secure connect to TiDB database cluster
+## Secure connection to TiDB database cluster
 
-we provides different connection examples in the **Connect** dialog. After creating your TiDB Serverless Cluster, click Cluster to see detailed cluster information, and you can see the "Connect" label in the upper right corner. After clicking, you will enter the function page for setting client, application and development tools to connect to the database.
+TiDB Cloud provides different connection examples in the **Connect** dialog. After creating your TiDB Serverless Tier Cluster, click Cluster to see detailed cluster information, and you can see the "Connect" label in the upper right corner. After clicking, you will enter the function page for setting the client, application, or development tool to connect to the database.
    - Support Mysql CLI, MyCLI, JDBC, Python, Go, Node.js and other six ways to connect to your Serverless cluster
    - Provide MacOS, Debian, RedHat, Alpine, OpenSUSE, Windows and other operating system configuration parameters
 
-The following examples show the connection string in MySQL CLI , MyCLI , JDBC, Python, Go and Node.js:
+The following examples show the connection string in MySQL CLI, MyCLI , JDBC, Python, Go and Node.js:
 
 <SimpleTab>
 <div label="MySQL CLI">
@@ -118,7 +118,7 @@ You should copy the password after you create it, and only reset the password af
 
 ### Root Digital certificate‘s issuance and validity  
 
-TiDB Serverless Tier uses certificates from [Let's Encrypt](https://letsencrypt.org/) as a Certificate Authority (CA) for TLS connection between clients and TiDB Serverless Tier clusters. Usually, the root certificate ([ISRG Root X1](https://letsencrypt.org/certs/isrgrootx1.pem.txt)) of Let's Encrypt is present in your system's root CA stores.Let's Encrypt issues Serverless Tier Server digital certificates that are valid for 90 days and will be automatically rotated upon expiration.
+TiDB Serverless Tier uses certificates from [Let's Encrypt](https://letsencrypt.org/) as a Certificate Authority (CA) for TLS connection between clients and TiDB Serverless Tier clusters. Usually, the root certificate ([ISRG Root X1](https://letsencrypt.org/certs/isrgrootx1.pem.txt)) of Let's Encrypt is present in your system's root CA stores. Let's Encrypt issues Serverless Tier Server digital certificates that are valid for 90 days and will be automatically rotated upon expiration.
 
 TiDB Serverless Tier does not provide a CA root certificate download, because we don't guarantee that the same CA will be used to issue a certificate in the future, which will cause the CA root certificate to change.
 
