@@ -76,7 +76,7 @@ A node service can run in one of the following statuses:
 
 > **Note:**
 >
-> - `Pending Offline` in TiUP, `Offline` returned by PD API, and `Leaving` in TiDB Dashboard  indicate the same status.
+> `Pending Offline` in TiUP, `Offline` returned by PD API, and `Leaving` in TiDB Dashboard indicate the same status.
 
 Node service status derives from the PD scheduling information. For more details, see [Information collection](/tidb-scheduling.md#information-collection).
 
