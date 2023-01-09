@@ -1,12 +1,16 @@
 ---
 title: SSO Authentication
-summary: Learn how to sign in via your Google workspace account and your Github Accounts in TiDB Cloud Web console.
+summary: Learn how to log into the TiDB Cloud console via your Google account or GitHub account.
 ---
-# SSO(single sign-on) Authentication
+# SSO Authentication
 
-This document describes how to quickly log in to TiDB Cloud Console via Googol workspace and GitHub accounts. 
+This document describes how to log in to the TiDB Cloud console via Single Sign-on (SSO) authentication, which is quick and convenient.
 
-If you log into TiDB Cloud via SSO authentication, because your identity is centrally hosted on the third-party Google and GitHub platforms, you will not be able to modify your account password and enable MFA in the TiDB console. If you want to log into TiDB Cloud through username and password, see [Password Authentication](/tidb-cloud/tidb-cloud-password-authentication.md)
+TiDB Cloud supports SSO authentication for Google and GitHub accounts. If you log into TiDB Cloud via SSO authentication, because your ID and credentials are stored on the third-party Google and GitHub platforms, you will not be able to modify your account password and enable multi-factor authentication (MFA) using the TiDB console. 
+
+> **Note:**
+>
+> If you want to log into TiDB Cloud through username and password, see [Password Authentication](/tidb-cloud/tidb-cloud-password-authentication.md)
 
 ## Sign in with Google SSO 
 
@@ -14,32 +18,30 @@ To sign in with your Google Workspace account, take the following steps:
 
 1. Go to the TiDB Cloud [login](https://tidbcloud.com/) page.
 
-2. Click **Sign in With Google**. You will be directed to the Google Workspace Console.
+2. Click **Sign in With Google**. You will be directed to the Google login page.
 
 3. Follow the on-screen instructions to enter your Google username and password. 
 
-4. Login is successful, jump to Choose to agree to "Privacy Policy, Terms of Service"
+    If the login is successful, you will be directed to the TiDB cloud console.
 
-5. Jump back to your TiDB Cloud wecome page for first login successful,and then jump back to your cluster management console.
-
-Note:
-
-This is a secure and convenient way to log in TiDB Cloud Web Console, as your user ID and credentials are stored in a third-party platform database that you can manage its.
+    > **Note:**
+    >
+    > - If this is the first time you sign in with Google, you will be asked whether to accept TiDB Cloud terms. After you read and agree with the terms, you will see the TiDB Cloud welcome page and then be directed to the TiDB Cloud console.
+   > - If you have enabled 2-Step Verification (also called two-factor authentication) for your Google account, you will also need to provide the verification code after entering your user name and password.
 
 ## Sign in with Github SSO
 
-To Sign in with your Github, perform these steps:
+To sign in with your GitHub account, take the following steps:
 
-1. Go to the TiDB Cloud login page: [www.tidbcloud.com](https://tidbcloud.com/).
+1. Go to the TiDB Cloud [login](https://tidbcloud.com/) page.
 
-2. In TiDB Cloud Console, click Sign in With Github.
+2. Click **Sign in With Github**. You will be directed to the GitHub login page.
 
-3. Jump to Github Console, enter your Github Username and Password to login.
+3. Follow the on-screen instructions to enter your Github username and password.
 
-4. Login is successful, jump to Choose to agree to "Privacy Policy, Terms of Service"
-
-5. Jump back to your TiDB Cloud wecome page for first login successful,and then jump back to your cluster management console.
-
-Note:
-
-If MFA is enabled on your Google Workspace or GitHub account, please enter your MFA Code to log in successfully,and don't support enable MFA and change password in TiDB Cloud.
+    If the login is successful, you will be directed to the TiDB cloud console.
+ 
+     > **Note:**
+     >
+     > - If this is the first time you sign in with Google, you will be asked whether to accept TiDB Cloud terms. After you read and agree with the terms, you will see the TiDB Cloud welcome page and then be directed to the TiDB Cloud console.
+     > - If you have configured two-factor authentication for your GitHub account, you will also need to provide the verification code after entering your user name and password.
