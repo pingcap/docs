@@ -17,7 +17,7 @@ In Chat2Query, you can either simply type `--` and your instructions to let AI g
 
 The recommended use cases of Chat2Query are as follows:
 
-- Use the AI capacity of Chat2Query to help you write complex SQL queries instantly.
+- Use the AI capacity of Chat2Query to help you generate complex SQL queries instantly.
 - Test out the MySQL compatibility of TiDB quickly.
 - Explore TiDB SQL features easily.
 
