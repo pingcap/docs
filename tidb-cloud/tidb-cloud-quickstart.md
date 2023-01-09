@@ -35,7 +35,7 @@ TiDB Cloud [Serverless Tier](/tidb-cloud/select-cluster-tier.md#serverless-tier-
 
 TiDB Cloud is powered by AI. You can use Chat2Query (beta), an AI-powered SQL editor in the TiDB Cloud console, to maximize your data value.
 
- In Chat2Query, you can either simply type `--` and your instructions to let AI generate SQL queries automatically or write SQL queries manually, and then run SQL queries against databases without a terminal.
+In Chat2Query, you can either simply type `--` and your instructions to let AI generate SQL queries automatically or write SQL queries manually, and then run SQL queries against databases without a terminal.
 
 1. On the [**Clusters**](https://tidbcloud.com/console/clusters) page, click your cluster name, and then click **Chat2Query** in the left navigation pane.
 
