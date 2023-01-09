@@ -42,11 +42,11 @@ Currently, this method supports importing one CSV file for one task into either 
 
 5. Configure the column names and data types.
 
-    If the first row in the CSV file records the column names, make sure that **Use first row as column name** is selected, which is selected by default.
+    If the first row in the CSV file records the column names, make sure that **Use the first row as column name** is selected, which is selected by default.
 
-    If the CSV file does not have a row for the column names, do not select **Use first row as column name**. In this case:
+    If the CSV file does not have a row for the column names, do not select **Use the first row as column name**. In this case:
 
-    - If the CSV table already exists, make sure the order of the columns is the same as the column list of the target table.
+    - If the target table already exists, make sure the order of the columns is the same as the column list of the target table.
 
     - If the target table is not created yet, input the names for each column. The column name must start with letters (a-z and A-Z) or numbers (0-9), and can contain letters (a-z and A-Z), numbers (0-9), and the underscore (_) character. You can also change the data type if needed.
 
