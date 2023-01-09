@@ -14,7 +14,7 @@ TiDB Cloud supports SSO authentication for Google and GitHub accounts. If you lo
 
 ## Sign in with Google SSO 
 
-To sign in with your Google Workspace account, take the following steps:
+To sign in with your Google account, take the following steps:
 
 1. Go to the TiDB Cloud [login](https://tidbcloud.com/) page.
 
