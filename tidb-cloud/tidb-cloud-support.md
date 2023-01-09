@@ -15,7 +15,7 @@ The information of each support plan is available on the support page of the TiD
 
 ## Request support
 
-You can request support for your clusters, projects, and organizations. After the support team receives your request, they will reply to you via email.
+You can request support for your clusters, projects, and organizations. After receiving your request, the support team will reply to you via email.
 
 > **Tip:**
 >
