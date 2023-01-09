@@ -9,16 +9,9 @@ TiDB Cloud offers a free basic support plan for each user and you can upgrade to
 
 The information of each support plan is available on the support page of the TiDB Cloud console. To access the page, see [Check or upgrade your support plan](#check-or-upgrade-your-support-plan).
 
-## Apply for PoC
-
-To apply for a Proof of Concept (PoC), you can do one of the following:
-
-- On the PingCAP website, go to the [Apply for PoC](https://pingcap.com/apply-for-poc/) page to fill in the application form.
-- In the [TiDB Cloud console](https://tidbcloud.com/), click **Contact Us** > in the upper-right corner, and select <MDSvgIcon name="icon-top-apply-for-poc" /> **Apply for PoC** to fill in the application form.
-
-Once you submit the form, the TiDB Cloud support team will review your application, contact you, and transfer credits to your account once the application is approved. You can also contact a PingCAP support engineer to assist with your PoC procedures to ensure the PoC runs as smoothly as possible.
-
-For more information, see [Perform a Proof of Concept (PoC) with TiDB Cloud](/tidb-cloud/tidb-cloud-poc.md).
+> **Tip:**
+>
+> If you want to apply for a Proof of Concept (PoC), see [Perform a Proof of Concept (PoC) with TiDB Cloud](/tidb-cloud/tidb-cloud-poc.md).
 
 ## Request support
 
