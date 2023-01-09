@@ -26,9 +26,9 @@ Currently, this method supports importing one CSV file for one task into either 
         >
         > If you have multiple projects, you can switch to the target project in the left navigation pane of the **Clusters** page.
 
-    2. Click the name of your target cluster to go to its overview page, and then click **Import** in the left navigation pane. Alternatively, you can click **...** at the end of the cluster row and then click **Import**.
+    2. Click **...** at the end of the cluster row and then click **Import**.
 
-2. On the **Import** page, you can directly drag and drop your local file to the upload area to upload it, or click the upload area to select and upload the target local file. Note that the file name must have a ".csv" extension and must be no more than 50 MiB.
+2. On the **Import** page, you can directly drag and drop your local file to the upload area to upload it, or click the upload area to select and upload the target local file. Note that only one CSV file of less than 50 MiB is supported.
 
 3. In the **Target** section, select the target database and the target table, or enter a name directly to create a new database or a new table. The name must start with letters (a-z and A-Z) or numbers (0-9), and can contain letters (a-z and A-Z), numbers (0-9), and the underscore (_) character. Click **Next**.
 
@@ -48,9 +48,14 @@ Currently, this method supports importing one CSV file for one task into either 
 
     - If the CSV table already exists, make sure the order of the columns is the same as the column list of the target table.
 
-    - If the CSV table is not created yet, input the names for each column. The column name must start with letters (a-z and A-Z) or numbers (0-9), and can contain letters (a-z and A-Z), numbers (0-9), and the underscore (_) character. You can also change the data type if needed.
+    - If the target table is not created yet, input the names for each column. The column name must start with letters (a-z and A-Z) or numbers (0-9), and can contain letters (a-z and A-Z), numbers (0-9), and the underscore (_) character. You can also change the data type if needed.
 
-6. Set the primary key. You can select a column as the primary key, or select multiple columns to use them as the composite primary key. Note that the order you select the columns matters when you select multiple columns.
+6. Set the primary key. You can select a column as the primary key, or select multiple columns to create a composite primary key. The composite primary key will be formed in the order of the selected column names.
+
+    > **Note:**
+    >
+    > - The primary key of the table is a clustered index and cannot be deleted after creation.
+    > - Ensure that the data corresponding to the primary key field is unique and not empty, otherwise the import task will result in data inconsistency. 
 
 7. Edit the CSV configuration if needed.
 
