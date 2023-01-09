@@ -19,7 +19,7 @@ You can request support for your clusters, projects, and organizations. After th
 
 > **Tip:**
 >
-> If you want to apply for a beta feature that is available upon request, fill in your application information in the **Description** field of the request.
+> If you want to apply for a beta feature that is available upon request, fill in your application information in the **Description** field of the request. For example, "apply for the xxx feature".
 
 ### Request support for a cluster
 
@@ -35,7 +35,7 @@ You can request support for a project or organization in either of the following
 
 - In the lower-right corner of the [TiDB Cloud console](https://tidbcloud.com/), click the **Help** icon.
 
-- In the upper-right corner of the [TiDB Cloud console](https://tidbcloud.com/), click <MDSvgIcon name="icon-top-support" /> **Support** > **Create New Case**.
+- In the upper-right corner of the [TiDB Cloud console](https://tidbcloud.com/), click <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M9.09 9C9.3251 8.33167 9.78915 7.76811 10.4 7.40913C11.0108 7.05016 11.7289 6.91894 12.4272 7.03871C13.1255 7.15849 13.7588 7.52152 14.2151 8.06353C14.6713 8.60553 14.9211 9.29152 14.92 10C14.92 12 11.92 13 11.92 13M12 17H12.01M22 12C22 17.5228 17.5228 22 12 22C6.47715 22 2 17.5228 2 12C2 6.47715 6.47715 2 12 2C17.5228 2 22 6.47715 22 12Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg>**Contact Us** > **Create New Case**.
 
     If you go with this way, you need to provide your organization ID in the request manually. To get that, click <MDSvgIcon name="icon-top-organization" /> **Organization** in the upper-right corner and click **Organization Settings**.
 
