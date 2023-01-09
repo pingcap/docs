@@ -40,8 +40,8 @@ A table consisting of the following fields:
 
 A component can run in one of the following statuses:
 
-- Up: The component is running properly.
-- Down or Unreachable: The component is not started or a network problem exists on the corresponding host.
+- Up: The component is running normaly.
+- Down or Unreachable: The component is not running or a network problem exists on the corresponding host.
 - Tombstone: The data on the component has been completely migrated out and the scaling-in is complete. This status exists only on TiKV or TiFlash.
 - Pending Offline: The data on the component is being migrated out and the scaling-in is in process. This status exists only on TiKV or TiFlash.
 - Unknown: The running status of the component is unknown.
