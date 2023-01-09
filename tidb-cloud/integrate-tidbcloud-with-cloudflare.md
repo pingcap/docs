@@ -19,7 +19,7 @@ This document shows how to deploy Cloudflare Workers with TiDB Cloud and Prisma 
 
 ## Before you begin
 
-Before you try the steps in this article, you need to prepare the following things: 
+Before you try the steps in this article, you need to prepare the following things:
 
 - A TiDB Cloud account and a Serverless Tier cluster on TiDB Cloud. For more details, see [TiDB Cloud Quick Start](/tidb-cloud/tidb-cloud-quickstart.md#step-1-create-a-tidb-cluster).
 - A [Cloudflare Workers account](https://dash.cloudflare.com/login).
@@ -32,107 +32,107 @@ Before you try the steps in this article, you need to prepare the following thin
 
 [Wrangler](https://developers.cloudflare.com/workers/wrangler/) is the official Cloudflare Worker CLI. You can use it to generate, build, preview, and publish your Workers.
 
-To authenticate Wrangler, run wrangler login:
+1. To authenticate Wrangler, run wrangler login:
 
-```
-wrangler login
-```
+    ```
+    wrangler login
+    ```
 
-Then, you can use Wrangler to create a worker project:
+2. Use Wrangler to create a worker project:
 
-```
-wrangler init prisma-tidb-cloudflare
-```
+    ```
+    wrangler init prisma-tidb-cloudflare
+    ```
 
-In your terminal, you will be asked a series of questions related to your project. Choose the default values for all questions.
+3. In your terminal, you will be asked a series of questions related to your project. Choose the default values for all questions.
 
 ## Step 2: Set up Prisma
 
-Enter your project directory:
+1. Enter your project directory:
 
-```
-cd prisma-tidb-cloudflare
-```
+    ```
+    cd prisma-tidb-cloudflare
+    ```
 
-Then, you can use the prisma init command to set up Prisma:
+2. Use the `prisma init` command to set up Prisma:
 
-```
-npx prisma init
-```
+    ```
+    npx prisma init
+    ```
 
-This creates a Prisma schema in `prisma/schema.prisma`.
+    This creates a Prisma schema in `prisma/schema.prisma`.
 
-Inside `prisma/schema.prisma`, add the schema according to your tables in TiDB. Assume that you have `table1` and `table2` in TiDB, you can add the following schema:
+3. Inside `prisma/schema.prisma`, add the schema according to your tables in TiDB. Assume that you have `table1` and `table2` in TiDB, you can add the following schema:
 
-```
-generator client {
-  provider = "prisma-client-js"
-}
+    ```
+    generator client {
+      provider = "prisma-client-js"
+    }
 
-datasource db {
-  provider = "mysql"
-  url      = env("DATABASE_URL")
-}
+    datasource db {
+      provider = "mysql"
+      url      = env("DATABASE_URL")
+    }
 
-model table1 {
-  id   Int                   @id @default(autoincrement())
-  name String
-}
+    model table1 {
+      id   Int                   @id @default(autoincrement())
+      name String
+    }
 
-model table2 {
-  id   Int                   @id @default(autoincrement())
-  name String
-}
-```
+    model table2 {
+      id   Int                   @id @default(autoincrement())
+      name String
+    }
+    ```
 
-This data model will be used to store incoming requests from your Worker.
+    This data model will be used to store incoming requests from your Worker.
 
 ## Step 3: Push your project to GitHub
 
-[Create a repository](https://github.com/new) named `prisma-tidb-cloudflare` on GitHub.
+1. [Create a repository](https://github.com/new) named `prisma-tidb-cloudflare` on GitHub.
 
-After you create the repository, you can push your project to GitHub:
+2. After you create the repository, you can push your project to GitHub:
 
-```
-git remote add origin https://github.com/<username>/prisma-tidb-cloudflare 
-git add . 
-git commit -m "initial commit" 
-git push -u origin main
-```
+    ```
+    git remote add origin https://github.com/<username>/prisma-tidb-cloudflare
+    git add .
+    git commit -m "initial commit"
+    git push -u origin main
+    ```
 
 ## Step 4: Import your Project into the Prisma Data Platform
 
-With Cloudflare Workers, you can't directly access your database because there is no TCP support. Fortunately, You can use Prisma Data Proxy as described above.
+With Cloudflare Workers, you cannot directly access your database because there is no TCP support. Instead, you can use Prisma Data Proxy as described above.
 
 1. To get started, sign in to the [Prisma Data Platform](https://cloud.prisma.io/) and click **New Project**.
 2. Fill in the **Connection string** with this pattern `mysql://USER:PASSWORD@HOST:PORT/DATABASE?sslaccept=strict`. You can find the connection information in your [TiDB Cloud console](https://tidbcloud.com/console/clusters).
 3. Leave the **Static IPs** as disabled because TiDB Cloud Serverless Tier is accessible from any IP address.
 4. Select a Data Proxy region that is geographically close to your TiDB Cloud cluster location. Then click **Create project**.
 
-   ![img.png](/media/tidb-cloud/cloudflare/cloudflare-project.png)
+   ![Configure project settings](/media/tidb-cloud/cloudflare/cloudflare-project.png)
 
-5. Fill in the repository, and click **Link Prisma schema** in the Get Started page.
+5. Fill in the repository, and click **Link Prisma schema** in the **Get Started** page.
 6. Click **Create a new connection string** and you will get a new connection string that starts with `prisma://.` Copy this connection string and save it for later.
 
-   ![img.png](/media/tidb-cloud/cloudflare/cloudflare-start.png)
+   ![Create new connection string](/media/tidb-cloud/cloudflare/cloudflare-start.png)
 
 7. Click **Skip and continue to Data Platform** to go to the Data Platform.
 
 ## Step 5: Set the Data Proxy Connection string in your environment
 
-Add the Data Proxy connection string to your local environment `.env` file:
+1. Add the Data Proxy connection string to your local environment `.env` file:
 
-```
-DATABASE_URL=prisma://aws-us-east-1.prisma-data.com/?api_key=•••••••••••••••••"
-```
+    ```
+    DATABASE_URL=prisma://aws-us-east-1.prisma-data.com/?api_key=•••••••••••••••••"
+    ```
 
-Add the Data Proxy connection to Cloudflare Workers with secret:
+2. Add the Data Proxy connection to Cloudflare Workers with secret:
 
-```
-wrangler secret put DATABASE_URL
-```
+    ```
+    wrangler secret put DATABASE_URL
+    ```
 
-According to the prompt, enter the Data Proxy connection string.
+3. According to the prompt, enter the Data Proxy connection string.
 
 > **Note:**
 >
@@ -140,10 +140,10 @@ According to the prompt, enter the Data Proxy connection string.
 
 ## Step 6: Generate a Prisma Client
 
-Next, you'll generate a Prisma Client that connects through the [Data Proxy](https://www.prisma.io/docs/data-platform/data-proxy).
+Generate a Prisma Client that connects through the [Data Proxy](https://www.prisma.io/docs/data-platform/data-proxy):
 
 ```
-npx prisma generate --data-proxy 
+npx prisma generate --data-proxy
 ```
 
 ## Step 7: Develop the Cloudflare Worker function
@@ -152,7 +152,7 @@ You need to change the `src/index.ts` according to your needs.
 
 For example, if you want to query different tables with an URL variable, you can use the following code:
 
-```
+```js
 import { PrismaClient } from '@prisma/client/edge'
 const prisma = new PrismaClient()
 
@@ -188,7 +188,7 @@ async function handleEvent(event: FetchEvent): Promise<Response> {
 
 ## Step 8: Publish to Cloudflare Workers
 
-You're now ready to deploy to Cloudflare Workers. 
+You're now ready to deploy to Cloudflare Workers.
 
 In your project directory, run the following command:
 
@@ -198,32 +198,36 @@ npx wrangler publish
 
 ## Step 9: Try your Cloudflare Workers
 
-Go to [Cloudflare dashboard](https://dash.cloudflare.com) to find your worker. You can find the URL of your worker on the overview page.
+1. Go to [Cloudflare dashboard](https://dash.cloudflare.com) to find your worker. You can find the URL of your worker on the overview page.
 
-Visit the URL with your table name: `https://{your-worker-url}/?table={table_name}`, you will get the result from the corresponding TiDB table.
+2. Visit the URL with your table name: `https://{your-worker-url}/?table={table_name}`. You will get the result from the corresponding TiDB table.
 
 ## Update the project
 
+### Change the serverless function
+
 If you want to change the serverless function, update `src/index.ts` and publish it to Cloudflare Workers again.
+
+### Create a new table
 
 If you create a new table and want to query it, take the following steps:
 
 1. Add a new model in `prisma/schema.prisma`.
-2. Push the changes to your repository. 
+2. Push the changes to your repository.
 
     ```
     git add prisma
     git commit -m "add new model"
     git push
     ```
-   
+
 3. Generate the Prisma Client again.
 
     ```
     npx prisma generate --data-proxy
     ```
-   
-4. Publish the Cloudflare Worker again. 
+
+4. Publish the Cloudflare Worker again.
 
     ```
     npx wrangler publish
