@@ -181,7 +181,7 @@
     - [Password Authentication](/tidb-cloud/tidb-cloud-password-authentication.md)
     - [Identity Access Management](/tidb-cloud/manage-user-access.md)
   - Network Access Control
-    - [Secure Connections to Serverless Tier Clusters](/tidb-cloud/secure-connections-to-serverless-tier-clusters.md)
+    - [TLS Connect to Serverless Tier](/tidb-cloud/secure-connections-to-serverless-tier-clusters.md)
   - Database Access Control
     - [Configure Cluster Security Settings](/tidb-cloud/configure-security-settings.md)
   - Audit Management
