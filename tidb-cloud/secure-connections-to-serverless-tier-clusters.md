@@ -1,50 +1,28 @@
 ---
-title: Secure Connections to Serverless Tier Clusters
-summary: Introduce TLS connection in TiDB Serverless Tier clusters.
+title: TLS connects to Serverless Tier
+summary: Introduce TLS connection in TiDB Serverless Tier.
 ---
 
-# Secure Connections to Serverless Tier Clusters
+# TLS connects to Serverless Tier
 
-This document introduces the core information about TLS in TiDB Serverless Tier.
+Establishing a secure TLS connection between your client and your Serverless database cluster is one of the basic security practices for connecting to your database cluster. The server certificate is issued by an independent third-party certificate provider [Let's Encrypt](https://letsencrypt.org/). You can easily connect to your database cluster without downloading a server-side digital certificate.
 
-## Can I disable TLS in TiDB Serverless Tier?
+## Connection prerequisites
 
-No.
+Before connecting to your serverless cluster, you can refer to [Password authentication](tidb-cloud-password-authentication.md) or [SSO authentication]() to log in to TiDB Cloud.
 
-TiDB Serverless Tier allows only TLS connections and rejects non-TLS connections. The reason is that users connect to TiDB Serverless Tier clusters through a public network, so it is really important to use TLS to ensure communication security.
+We simplify the operation process of setting database passwords, allowing you to more conveniently and securely set and reset database cluster passwords on the connect page of your Serverless cluster.
 
-## What TLS versions can I use?
+## Secure connect to TiDB database cluster
 
-TiDB Serverless Tier supports TLS 1.2 and TLS 1.3. 
+we provides different connection examples in the **Connect** dialog. After creating your TiDB Serverless Cluster, click Cluster to see detailed cluster information, and you can see the "Connect" label in the upper right corner. After clicking, you will enter the function page for setting client, application and development tools to connect to the database.
+   - Support Mysql CLI, MyCLI, JDBC, Python, Go, Node.js and other six ways to connect to your Serverless cluster
+   - Provide MacOS, Debian, RedHat, Alpine, OpenSUSE, Windows and other operating system configuration parameters
 
-TLS 1.0 and TLS 1.1 are not supported due to security reasons. For background information, refer to IETF [Deprecating TLS 1.0 and TLS 1.1](https://datatracker.ietf.org/doc/rfc8996/).
-
-## What certificates do I need？
-
-TiDB Serverless Tier uses certificates from [Let's Encrypt](https://letsencrypt.org/) as a Certificate Authority (CA) for TLS connection between clients and TiDB Serverless Tier clusters. Usually, the root certificate ([ISRG Root X1](https://letsencrypt.org/certs/isrgrootx1.pem.txt)) of Let's Encrypt is present in your system's root CA stores. If the client uses the system's root CA stores by default, such as Java and Go, you can easily connect securely to TiDB Serverless Tier clusters without specifying the path of CA roots.
-
-However, some drivers and ORMs do not use the system root CA stores. In those cases, you need to configure the CA root path of the drivers or ORMs to your system root CA stores. For example, when you use [mysqlclient](https://github.com/PyMySQL/mysqlclient) to connect a TiDB Serverless Tier cluster in Python on macOS, you need to set `ca: /etc/ssl/cert.pem` in the `ssl` argument.
-
-> **Note:**
->
-> TiDB Serverless Tier does not provide a CA root certificate download, because we don't guarantee that the same CA will be used to issue a certificate in the future, which will cause the CA root certificate to change.
->
-> However, TiDB Serverless Tier ensures always using a CA root certificate that is commonly available, which is provided in all common systems.
->
-> If you really need the CA certificate of a TiDB Serverless Tier cluster, it is recommended that you download the [Mozilla CA Certificate bundle](https://curl.se/docs/caextract.html) instead of the single CA certificate in case we change the CA in the future.
->
-> If you are using a GUI client, such as DBeaver, which does not accept a certificate file with multiple certificates inside, you must download the [ISRG Root X1](https://letsencrypt.org/certs/isrgrootx1.pem.txt) certificate.
-
-## How do I connect to a TiDB Serverless Tier cluster in TLS connection?
-
-TiDB Cloud provides some connection examples in the **Connect** dialog. You can follow the instructions in [Connect via standard connection](/tidb-cloud/connect-via-standard-connection.md) to connect to a TiDB Serverless Tier cluster.
-
-Generally, enabling TLS and offering a CA root path to authenticate the server is a good practice to prevent a man-in-the-middle attack. Different clients have different operations in the TLS connection. Enable TLS and verify the server according to your actual use of the client.
-
-The following examples show the connection string in MySQL CLI client, MyCLI client, Java, Python, Go, and Node.js:
+The following examples show the connection string in MySQL CLI , MyCLI , JDBC, Python, Go and Node.js:
 
 <SimpleTab>
-<div label="MySQL CLI client">
+<div label="MySQL CLI">
 
 MySQL CLI client attempts to establish TLS connection by default. When you connect to TiDB Serverless Tier clusters, you should set `ssl-mode` and `ssl-ca`.
 
@@ -57,7 +35,7 @@ mysql --connect-timeout 15 -u <username> -h <host> -P 4000 --ssl-mode=VERIFY_IDE
 
 </div>
 
-<div label="MyCLI client">
+<div label="MyCLI">
 
 [MyCLI](https://www.mycli.net/) automatically enables TLS when using TLS related parameters. When you connect to TiDB Serverless Tier clusters, you need to set `ssl-ca` and `ssl-verify-server-cert`.
 
@@ -70,7 +48,7 @@ mycli -u <username> -h <host> -P 4000 -D test --ssl-ca=<CA_root_path> --ssl-veri
 
 </div>
 
-<div label="Java">
+<div label="JDBC">
 
 [MySQL Connector/J](https://dev.mysql.com/doc/connector-j/8.0/en/)'s TLS connection configurations are used here as an example.
 
@@ -118,7 +96,7 @@ db, err := sql.Open("mysql", "<usename>:<your_password>@tcp(<host>:4000)/test?tl
 
 <div label="Node.js">
 
-[Mysql2](https://www.npmjs.com/package/mysql2)'s TLS connection configurations are used here as an example.
+[Mysql](https://www.npmjs.com/package/mysql2)'s TLS connection configurations are used here as an example.
 
 ```
 host: '<host>', port: 4000,user: '<username>', password: '<your_password>', database: 'test', ssl: {minVersion: 'TLSv1.2', rejectUnauthorized: true}
@@ -130,38 +108,58 @@ host: '<host>', port: 4000,user: '<username>', password: '<your_password>', data
 </div>
 </SimpleTab>
 
-## Where is the CA root path on my system?
+## Create and Reset Serverless database password
 
-The following lists the CA root paths on common platforms.
+When you connect to your cluster for the first time, click "Create Password" to automatically generate a password with a length of 16 characters, including numbers, uppercase and lowercase characters, and special characters. The password will be automatically embedded in the sample code for connecting to your cluster easily .
+
+You should copy the password after you create it, and only reset the password after leaving the connect page. Since the serverless cluster is accessed through the Internet,if you need to use the password elsewhere, every time you click on your cluster connection, you need to reset the password of your database cluster to ensure the security and compliance of the database password.
+
+## Root Digital certificate management of Serverless Tier 
+
+### Root Digital certificate‘s issuance and validity  
+
+TiDB Serverless Tier uses certificates from [Let's Encrypt](https://letsencrypt.org/) as a Certificate Authority (CA) for TLS connection between clients and TiDB Serverless Tier clusters. Usually, the root certificate ([ISRG Root X1](https://letsencrypt.org/certs/isrgrootx1.pem.txt)) of Let's Encrypt is present in your system's root CA stores.Let's Encrypt issues Serverless Tier Server digital certificates that are valid for 90 days and will be automatically rotated upon expiration.
+
+TiDB Serverless Tier does not provide a CA root certificate download, because we don't guarantee that the same CA will be used to issue a certificate in the future, which will cause the CA root certificate to change.
+
+If the client uses the system's root CA stores by default, such as Java and Go, you can easily connect securely to TiDB Serverless Tier clusters without specifying the path of CA roots.
+
+However, some drivers and ORMs do not use the system root CA stores. In those cases, you need to configure the CA root path of the drivers or ORMs to your system root CA stores. For example, when you use [mysqlclient](https://github.com/PyMySQL/mysqlclient) to connect a TiDB Serverless Tier cluster in Python on macOS, you need to set `ca: /etc/ssl/cert.pem` in the `ssl` argument.
+
+If you are using a GUI client, such as DBeaver, which does not accept a certificate file with multiple certificates inside, you must download the [ISRG Root X1](https://letsencrypt.org/certs/isrgrootx1.pem.txt) certificate.
+
+### Root Digital certificate‘s default path 
+
+In different operating systems, the automatic download storage path of the root certificate is as follows：
 
 **MacOS**
 
 ```
-/etc/ssl/cert.pem
+/etc/ssl/ca_root.pem
 ```
 
 **Debian / Ubuntu / Arch**
 
 ```
-/etc/ssl/certs/ca-certificates.crt
+/etc/ssl/certs/ca_root.crt
 ```
 
 **RedHat / Fedora / CentOS / Mageia**
 
 ```
-/etc/pki/tls/certs/ca-bundle.crt
+/etc/pki/tls/certs/ca_root.crt
 ```
 
 **Alpine**
 
 ```
-/etc/ssl/cert.pem
+/etc/ssl/ca_root.pem
 ```
 
 **OpenSUSE**
 
 ```
-/etc/ssl/ca-bundle.pem
+/etc/ssl/ca_root.pem
 ```
 
 **Windows**
@@ -171,8 +169,21 @@ Windows does not offer a specific path to the CA root. Instead, it uses the [reg
 1. Download the [Mozilla CA Certificate bundle](https://curl.se/docs/caextract.html) and save it in a path you prefer, such as `<path_to_mozilla_ca_cert_bundle>`.
 2. Use the path (`<path_to_mozilla_ca_cert_bundle>`) as your CA root path when you connect to a Serverless Tier cluster.
 
-## Can TiDB Serverless Tier verify the client's identity?
+## FAQ
+
+### Which TLS versions are supported to connect to my TiDB Serverless cluster?
+
+TiDB Serverless database cluster only supports TLS 1.2 and TLS 1.3, and does not support TLS 1.0 and TLS 1.1 versions for security reasons. Refer to see IETF [Deprecating TLS 1.0 and TLS 1.1](https://datatracker.ietf.org/doc/rfc8996/) for ditails.
+
+### Does TiDB Serverless Tier support two-way TLS authentication between my connect client and TiDB Serverless cluster?
 
 No.
 
-Currently, TiDB Serverless Tier uses one-way TLS authentication, which means only the client uses the public certificate pair to validate the server while the server does not validate the client. For example, when you use MySQL CLI client, you cannot configure `--ssl-cert` or `--ssl-key` in connection strings.
+TiDB Serverless Tier only support one-way TLS authentication, which means your client uses public key to verify the signature of your TiDB database server certificate's private key
+ while the server does not validate the client.
+
+### Does TiDB Serverless Tier have to configure TLS to establish a secure connection?
+
+Yes.
+
+TiDB Serverless Tier only allows TLS connections and prohibits non-SSL/TLS connections. The reason is that SSL/TLS is one of the most basic security measures for you to connect to the TiDB Serverless database cluster through internet, so as to reduce the risk of data exposure to internet.
