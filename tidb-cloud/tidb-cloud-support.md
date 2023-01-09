@@ -33,9 +33,9 @@ You can request support for a cluster in either of the following ways:
 
 You can request support for a project or organization in either of the following ways:
 
-- In the lower-right corner of the TiDB Cloud console, click the **Help** icon.
+- In the lower-right corner of the [TiDB Cloud console](https://tidbcloud.com/), click the **Help** icon.
 
-- In the upper-right corner of the TiDB Cloud console, click <MDSvgIcon name="icon-top-support" /> **Support** > **Create New Case**.
+- In the upper-right corner of the [TiDB Cloud console](https://tidbcloud.com/), click <MDSvgIcon name="icon-top-support" /> **Support** > **Create New Case**.
 
     If you go with this way, you need to provide your organization ID in the request manually. To get that, click <MDSvgIcon name="icon-top-organization" /> **Organization** in the upper-right corner and click **Organization Settings**.
 
