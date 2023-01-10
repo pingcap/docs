@@ -38,6 +38,7 @@ The following table lists the price of TiDB Cloud for each Data Migration RCU:
 | AWS            | Singapore (ap-southeast-1)  |          $0.1623 |
 | AWS            | Tokyo (ap-northeast-1)      |          $0.1669 |
 | AWS            | Frankfurt (eu-central-1)    |          $0.1564 |
+| AWS            | Seoul (ap-northeast-2)      |          xx |
 
 The Data Migration job is in the same region as the target TiDB cluster.
 
