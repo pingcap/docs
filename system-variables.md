@@ -1109,11 +1109,11 @@ MPP is a distributed computing framework provided by the TiFlash engine, which a
 >
 > Currently, this feature is not fully compatible with [altering multiple columns or indexes in a single `ALTER TABLE` statement](/sql-statements/sql-statement-alter-table.md). When adding a unique index with the index acceleration, you need to avoid altering other columns or indexes in the same statement.
 >
-> Currently, the performance improvement is expected to increase by 10 times for the clusters of [PITR (Point-in-time recovery)](/br/backup-and-restore-overview.md) disabled, while there is no promotion for the clusters of both PITR and index acceleration enabled. We recommend that turn off the PITR, add index in a quick way, then turn on the PITR and do a fully backup. There are three expected behaviors, including:
+> Currently, the performance of clusters with [PITR (Point-in-time recovery)](/br/backup-and-restore-overview.md) disabled is expected to be about 10 times faster than that in v6.1.0. However, there is no performance improvement for clusters with both PITR and index acceleration enabled. To optimize performance, it is recommended that you turn off PITR, add indexes in a quick way, then turn on PITR and perform a full backup. Otherwise, there are three expected behaviors:
 >
-> - When PITR has started working first, the adding index job will fallback to the legacy mode automatically by default, even though the configuration is set to `ON`. The index is added in a slow way.
-> - When adding index job has started first, then it will prevent the log backup job of PITR from starting by throwing an error, which does not affect the adding index job in progress. After the adding index job is completed, you need to restart the log backup job and perform a full backup manually.
-> - When a log backup job of PITR and an adding index job starts at the same time, it is no error received due to that the two jobs being unable to detect each other. PITR does not backup the newly added index. After the adding index job is completed, you still need to restart the log backup job and perform a full backup manually.
+> - When PITR starts working first, the index adding job will automatically fall back to the legacy mode by default, even if the configuration is set to `ON`. The index is added in a slow way.
+> - When the index adding job starts first, it will prevent the log backup job of PITR from starting by throwing an error, which does not affect the index adding job in progress. After the index adding job is completed, you need to restart the log backup job and perform a full backup manually.
+> - When a log backup job of PITR and an index adding job start at the same time, no error will be received because the two jobs are unable to detect each other. PITR does not backup the newly added index. After the index adding job is completed, you still need to restart the log backup job and perform a full backup manually.
 
 </CustomContent>
 
