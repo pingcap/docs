@@ -22,7 +22,12 @@ This document describes how to import sample data into TiDB Cloud via the UI. Th
     <SimpleTab>
     <div label="AWS">
 
-    If your TiDB cluster is hosted by AWS (the Serverless Tier is hosted by AWS by default), click **Import Data** in the upper-right corner, and then fill in the following parameters:
+    On the **Import** page:
+
+    - For a Dedicated Tier cluster, click **Import Data** in the upper-right corner.
+    - For a Serverless Tier cluster, click the **import data from S3** link above the upload area.
+
+    Fill in the following parameters:
 
     - **Data format**: select **SQL File**.
     - **Bucket URI**: enter the sample data URI `s3://tidbcloud-samples/data-ingestion/`
