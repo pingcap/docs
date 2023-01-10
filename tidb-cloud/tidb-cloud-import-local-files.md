@@ -26,7 +26,7 @@ Currently, this method supports importing one CSV file for one task into either 
         >
         > If you have multiple projects, you can switch to the target project in the left navigation pane of the **Clusters** page.
 
-    2. Click **...** at the end of the cluster row and then click **Import**.
+    2. Click the name of your target cluster to go to its overview page, and then click **Import** in the left navigation pane.
 
 2. On the **Import** page, you can directly drag and drop your local file to the upload area to upload it, or click the upload area to select and upload the target local file. Note that you can upload only one CSV file of less than 50 MiB for one task.
 
@@ -34,7 +34,7 @@ Currently, this method supports importing one CSV file for one task into either 
 
 4. Check the table.
 
-    Here you can see a list of configurable table columns. Each line shows the table column name inferred by TiDB Cloud, the table column type inferred, and the previewed data from the CSV file.
+    You can see a list of configurable table columns. Each line shows the table column name inferred by TiDB Cloud, the table column type inferred, and the previewed data from the CSV file.
 
     - If you import data into an existing table in TiDB Cloud, the column list is extracted from the table definition, and the previewed data is mapped to the corresponding columns by column names.
 
@@ -48,9 +48,9 @@ Currently, this method supports importing one CSV file for one task into either 
 
     - If the target table already exists, make sure the order of the columns is the same as the column list of the target table.
 
-    - If the target table is not created yet, input the names for each column. The column name must start with letters (a-z and A-Z) or numbers (0-9), and can contain letters (a-z and A-Z), numbers (0-9), and the underscore (_) character. You can also change the data type if needed.
+    - If the target table is not created yet, input the name for each column. The column name must start with letters (a-z and A-Z) or numbers (0-9), and can contain letters (a-z and A-Z), numbers (0-9), and the underscore (_) character. You can also change the data type if needed.
 
-6. Set the primary key. You can select a column as the primary key, or select multiple columns to create a composite primary key. The composite primary key will be formed in the order of the selected column names.
+6. Set the primary key. You can select a column as the primary key, or select multiple columns to create a composite primary key. The composite primary key will be formed in the order in which you select the column names.
 
     > **Note:**
     >
