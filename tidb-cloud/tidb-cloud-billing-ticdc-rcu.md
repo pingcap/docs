@@ -21,4 +21,4 @@ For each TiDB cluster, the number of TiCDC RCUs is set up by TiDB Cloud accordin
 
 ## Price
 
-For more information about the supported regions and the price of TiDB Cloud for each TiCDC RCUs, see [Changefeed Cost](https://www.pingcap.com/tidb-cloud-pricing-details/#changefeed-cost).
+For more information about the supported regions and the price of TiDB Cloud for each TiCDC RCU, see [Changefeed Cost](https://www.pingcap.com/tidb-cloud-pricing-details/#changefeed-cost).
