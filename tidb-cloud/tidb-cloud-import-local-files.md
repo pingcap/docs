@@ -64,4 +64,4 @@ Currently, this method supports importing one CSV file for one task into either 
 
     You can view the import progress in the **Import Progress** section. If there are warnings or failed tasks, you can check to view the details and solve them.
 
-9. After the data import task is complete, on the **Import Task Details** page, you can click **Query Data** in the upper-right corner, and then use [**Chat2Query**](/tidb-cloud/tidb-cloud-quickstart.md#step-2-try-chat2query-beta) to write SQL statements to query the imported data. 
+9. After the import task is completed, you can click **Explore your data by Chat2Query** to query your imported data. For more information about how to use Chat2Qury, see [Explore Your Data with AI-Powered Chat2Query](/tidb-cloud/explore-data-with-chat2query.md).
