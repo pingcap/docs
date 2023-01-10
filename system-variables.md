@@ -1112,7 +1112,7 @@ MPP is a distributed computing framework provided by the TiFlash engine, which a
 >
 > - When PITR starts working first, the index adding job will automatically fall back to the legacy mode by default, even if the configuration is set to `ON`. The index is added in a slow way.
 > - When the index adding job starts first, it will prevent the log backup job of PITR from starting by throwing an error, which does not affect the index adding job in progress. After the index adding job is completed, you need to restart the log backup job and perform a full backup manually.
-> - When a log backup job of PITR and an index adding job start at the same time, no error will be received because the two jobs are unable to detect each other. PITR does not backup the newly added index. After the index adding job is completed, you still need to restart the log backup job and perform a full backup manually.
+> - When a log backup job of PITR and an index adding job start at the same time, no error will be received because the two jobs are unable to detect each other. PITR does not back up the newly added index. After the index adding job is completed, you still need to restart the log backup job and perform a full backup manually.
 
 </CustomContent>
 
