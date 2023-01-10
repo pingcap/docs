@@ -1,6 +1,6 @@
 ---
 title: Explore Your Data with AI-Powered Chat2Query (beta)
-summary: Learn how to use Chat2Query, an AI-powered SQL editor, to maximize your data value.
+summary: Learn how to use Chat2Query, an AI-powered SQL editor in the TiDB Cloud console, to maximize your data value.
 ---
 
 # Explore Your Data with AI-Powered Chat2Query (beta)

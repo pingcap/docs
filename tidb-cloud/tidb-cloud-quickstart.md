@@ -49,7 +49,7 @@ In Chat2Query, you can either simply type `--` followed by your instructions to 
 
 4. Run SQL queries.
 
-   <SimpleTab>
+    <SimpleTab>
     <div label="macOS">
 
     For macOS:
@@ -107,7 +107,7 @@ The data import process will take several minutes. When the data import progress
 
 ## What's next
 
-- For how to connect to your cluster via a SQL client, see [Connect to a TiDB Cluster](/tidb-cloud/connect-to-tidb-cluster.md).
+- For how to connect to your cluster via different methods, see [Connect to a TiDB cluster](/tidb-cloud/connect-to-tidb-cluster.md).
 - For more information about how to use Chat2Query to explore your data, see [Chat2Query](/tidb-cloud/explore-data-with-chat2query.md).
 - For TiDB SQL usage, see [Explore SQL with TiDB](/basic-sql-operations.md).
-- For production use with the benefits of cross-zone high availability, horizontal scaling, and [HTAP](https://en.wikipedia.org/wiki/Hybrid_transactional/analytical_processing), see [Create a TiDB Cluster](/tidb-cloud/create-tidb-cluster.md) to create a Dedicated Tier cluster.
+- For production use with the benefits of cross-zone high availability, horizontal scaling, and [HTAP](https://en.wikipedia.org/wiki/Hybrid_transactional/analytical_processing), see [Create a TiDB cluster](/tidb-cloud/create-tidb-cluster.md) to create a Dedicated Tier cluster.
