@@ -23,7 +23,7 @@ To sign in with your Google account, take the following steps:
 
 3. Follow the on-screen instructions to enter your Google username and password. 
 
-    If the login is successful, you will be directed to the TiDB cloud console.
+    If the login is successful, you will be directed to the TiDB Cloud console.
 
     > **Note:**
     >
