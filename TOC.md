@@ -7,7 +7,7 @@
     -   [TiDB の紹介](/overview.md)
     -   [TiDB 5.4 リリースノート](/releases/release-5.4.0.md)
     -   [基本的な機能](/basic-features.md)
-    -   [実験的機能](/experimental-features.md)
+    -   [Experimental機能](/experimental-features.md)
     -   ベンチマーク
         -   [v5.4 Sysbench パフォーマンス テスト レポート](/benchmark/benchmark-sysbench-v5.4.0-vs-v5.3.0.md)
         -   [v5.4 TPC-C パフォーマンス テスト レポート](/benchmark/v5.4-performance-benchmarking-with-tpcc.md)
@@ -26,7 +26,7 @@
     -   [環境Configuration / コンフィグレーションチェックリスト](/check-before-deployment.md)
     -   クラスタトポロジの計画
         -   [最小限のトポロジ](/minimal-deployment-topology.md)
-        -   [TiFlash トポロジー](/tiflash-deployment-topology.md)
+        -   [TiFlashトポロジー](/tiflash-deployment-topology.md)
         -   [TiCDC トポロジー](/ticdc-deployment-topology.md)
         -   [Binlogバイナリログ トポロジ](/tidb-binlog-deployment-topology.md)
         -   [TiSpark トポロジー](/tispark-deployment-topology.md)
@@ -61,13 +61,13 @@
         -   [TiUPを利用する](/upgrade-tidb-using-tiup.md)
         -   [TiDB Operatorを使用する](https://docs.pingcap.com/tidb-in-kubernetes/stable/upgrade-a-tidb-cluster)
     -   規模
-        -   [TiUP を使用する (推奨)](/scale-tidb-using-tiup.md)
+        -   [TiUPを使用する (推奨)](/scale-tidb-using-tiup.md)
         -   [TiDB Operatorを使用する](https://docs.pingcap.com/tidb-in-kubernetes/stable/scale-a-tidb-cluster)
     -   バックアップと復元
-        -   BR ツールを使用する (推奨)
-            -   [BR ツールの概要](/br/backup-and-restore-tool.md)
-            -   [バックアップと復元に BR コマンドラインを使用する](/br/use-br-command-line-tool.md)
-            -   [BR ユースケース](/br/backup-and-restore-use-cases.md)
+        -   BRツールを使用する (推奨)
+            -   [BRツールの概要](/br/backup-and-restore-tool.md)
+            -   [バックアップと復元にBRコマンドラインを使用する](/br/use-br-command-line-tool.md)
+            -   [BRユースケース](/br/backup-and-restore-use-cases.md)
             -   外部ストレージ
                 -   [外部ストレージの概要](/br/backup-and-restore-storages.md)
                 -   [Azure Blob Storage でのデータのバックアップと復元](/br/backup-and-restore-azblob.md)
@@ -77,7 +77,7 @@
     -   [タイムゾーンの構成](/configure-time-zone.md)
     -   [毎日のチェックリスト](/daily-check.md)
     -   [TiFlashの管理](/tiflash/maintain-tiflash.md)
-    -   [TiUP を使用して TiDB を管理する](/maintain-tidb-using-tiup.md)
+    -   [TiUP を使用してTiUPを管理する](/maintain-tidb-using-tiup.md)
     -   [Configuration / コンフィグレーションをオンラインで変更する](/dynamic-config.md)
     -   [オンラインの安全でない回復](/online-unsafe-recovery.md)
 -   監視と警告
@@ -86,7 +86,7 @@
     -   [監視サービスをデプロイ](/deploy-monitoring-services.md)
     -   [Grafana スナップショットのエクスポート](/exporting-grafana-snapshots.md)
     -   [TiDBクラスタアラート ルール](/alert-rules.md)
-    -   [TiFlash アラート ルール](/tiflash/tiflash-alert-rules.md)
+    -   [TiFlashアラート ルール](/tiflash/tiflash-alert-rules.md)
     -   [監視サーバーの構成のカスタマイズ](/tiup/customized-montior-in-tiup-environment.md)
 -   トラブルシューティング
     -   [TiDB トラブルシューティング マップ](/tidb-troubleshooting-map.md)
@@ -113,8 +113,8 @@
             -   [TiKV スレッドの調整](/tune-tikv-thread-performance.md)
             -   [TiKV メモリの調整](/tune-tikv-memory-performance.md)
             -   [TiKV Follower Readの調整](/follower-read.md)
-            -   [TiFlash チューニング](/tiflash/tune-tiflash-performance.md)
-        -   [コプロセッサ キャッシュ](/coprocessor-cache.md)
+            -   [TiFlashチューニング](/tiflash/tune-tiflash-performance.md)
+        -   [Coprocessorキャッシュ](/coprocessor-cache.md)
     -   SQL チューニング
         -   [概要](/sql-tuning-overview.md)
         -   クエリ実行プランについて
@@ -153,7 +153,7 @@
             -   [SQL計画管理](/sql-plan-management.md)
             -   [最適化ルールのブロックリストと式のプッシュダウン](/blocklist-control-plan.md)
 -   チュートリアル
-    -   [1 つの地域展開における複数のデータセンター](/multi-data-centers-in-one-city-deployment.md)
+    -   [1 つの都市に展開された複数のデータ センター](/multi-data-centers-in-one-city-deployment.md)
     -   [2 つの都市に配置された 3 つのデータ センター](/three-data-centers-in-two-cities-deployment.md)
     -   [1 つの都市に展開された 2 つのデータ センター](/two-data-centers-in-one-city-deployment.md)
     -   履歴データの読み取り
@@ -164,7 +164,7 @@
         -   [`tidb_snapshot`システム変数を使用する](/read-historical-data.md)
     -   ベストプラクティス
         -   [TiDB を使用する](/best-practices/tidb-best-practices.md)
-        -   [Java アプリケーション開発](/best-practices/java-app-best-practices.md)
+        -   [Javaアプリケーション開発](/best-practices/java-app-best-practices.md)
         -   [HAProxy を使用する](/best-practices/haproxy-best-practices.md)
         -   [高度な同時書き込み](/best-practices/high-concurrency-best-practices.md)
         -   [グラファナの監視](/best-practices/grafana-monitor-best-practices.md)
@@ -183,14 +183,14 @@
         -   [ドキュメンテーション マップ](/tiup/tiup-documentation-guide.md)
         -   [概要](/tiup/tiup-overview.md)
         -   [用語と概念](/tiup/tiup-terminology-and-concepts.md)
-        -   [TiUP コンポーネントの管理](/tiup/tiup-component-management.md)
+        -   [TiUPコンポーネントの管理](/tiup/tiup-component-management.md)
         -   [FAQ](/tiup/tiup-faq.md)
         -   [トラブルシューティングガイド](/tiup/tiup-troubleshooting-guide.md)
         -   コマンドリファレンス
             -   [概要](/tiup/tiup-reference.md)
-            -   TiUP コマンド
+            -   TiUPコマンド
                 -   [ティアップクリーン](/tiup/tiup-command-clean.md)
-                -   [tiup completion](/tiup/tiup-command-completion.md)
+                -   [ティアップ完了](/tiup/tiup-command-completion.md)
                 -   [tiup環境](/tiup/tiup-command-env.md)
                 -   [tiup help](/tiup/tiup-command-help.md)
                 -   [tiup install](/tiup/tiup-command-install.md)
@@ -214,6 +214,7 @@
             -   TiUPクラスタコマンド
                 -   [概要](/tiup/tiup-component-cluster.md)
                 -   [tiup cluster audit](/tiup/tiup-component-cluster-audit.md)
+                -   [tiup cluster auditのクリーンアップ](/tiup/tiup-component-cluster-audit-cleanup.md)
                 -   [tiup cluster check](/tiup/tiup-component-cluster-check.md)
                 -   [tiup cluster clean](/tiup/tiup-component-cluster-clean.md)
                 -   [tiup cluster deploy](/tiup/tiup-component-cluster-deploy.md)
@@ -270,9 +271,9 @@
             -   [tiup-bench](/tiup/tiup-bench.md)
     -   [TiDB Operator](/tidb-operator-overview.md)
     -   バックアップと復元 (BR)
-        -   [BR ツールの概要](/br/backup-and-restore-tool.md)
-        -   [バックアップと復元に BR コマンドラインを使用する](/br/use-br-command-line-tool.md)
-        -   [BR ユースケース](/br/backup-and-restore-use-cases.md)
+        -   [BRツールの概要](/br/backup-and-restore-tool.md)
+        -   [バックアップと復元にBRコマンドラインを使用する](/br/use-br-command-line-tool.md)
+        -   [BRユースケース](/br/backup-and-restore-use-cases.md)
         -   [外部ストレージ](/br/backup-and-restore-storages.md)
         -   BRの特徴
             -   [オートチューン](/br/br-auto-tune.md)
@@ -332,21 +333,21 @@
             -   [ベンチマーク](/dm/dm-benchmark-v5.4.0.md)
         -   クイックスタート
             -   [クイックスタート](/dm/quick-start-with-dm.md)
-            -   [TiUP を使用して DM クラスターをデプロイする](/dm/deploy-a-dm-cluster-using-tiup.md)
+            -   [TiUPを使用して DM クラスターをデプロイする](/dm/deploy-a-dm-cluster-using-tiup.md)
             -   [データ ソースを作成する](/dm/quick-start-create-source.md)
         -   [データ移行のシナリオ](/dm/quick-create-migration-task.md)
         -   デプロイ
             -   [ソフトウェアとハードウェアの要件](/dm/dm-hardware-and-software-requirements.md)
             -   DMクラスタをデプロイする
-                -   [TiUP を使用する (推奨)](/dm/deploy-a-dm-cluster-using-tiup.md)
-                -   [TiUP オフラインを使用する](/dm/deploy-a-dm-cluster-using-tiup-offline.md)
+                -   [TiUPを使用する (推奨)](/dm/deploy-a-dm-cluster-using-tiup.md)
+                -   [TiUPオフラインを使用する](/dm/deploy-a-dm-cluster-using-tiup-offline.md)
                 -   [バイナリを使用](/dm/deploy-a-dm-cluster-using-binary.md)
                 -   [Kubernetes を使用する](https://docs.pingcap.com/tidb-in-kubernetes/stable/deploy-tidb-dm)
             -   [DM を使用してデータを移行する](/dm/migrate-data-using-dm.md)
             -   [DM パフォーマンスのテスト](/dm/dm-performance-test.md)
         -   管理
             -   ツール
-                -   [TiUP を使用して DM クラスターを管理する (推奨)](/dm/maintain-dm-using-tiup.md)
+                -   [TiUPを使用して DM クラスターを管理する (推奨)](/dm/maintain-dm-using-tiup.md)
                 -   [dmctl を使用した DM クラスタの管理](/dm/dmctl-introduction.md)
                 -   [OpenAPI を使用して DM クラスターを管理する](/dm/dm-open-api.md)
             -   クラスタのアップグレード
@@ -373,7 +374,7 @@
             -   [パフォーマンスの問題を処理する](/dm/dm-handle-performance-issues.md)
         -   性能チューニング
             -   [Configuration / コンフィグレーションの最適化](/dm/dm-tune-configuration.md)
-        -   リファレンス
+        -   参照
             -   アーキテクチャ
                 -   [DMアーキテクチャの概要](/dm/dm-overview.md)
                 -   [DMワーカー](/dm/dm-worker-intro.md)
@@ -390,7 +391,7 @@
         -   セキュリティ
             -   [DM 接続の TLS を有効にする](/dm/dm-enable-tls.md)
             -   [自己署名証明書の生成](/dm/dm-generate-self-signed-certificates.md)
-        -   [指標のモニタリング](/dm/monitor-a-dm-cluster.md)
+        -   [指標の監視](/dm/monitor-a-dm-cluster.md)
         -   [アラート ルール](/dm/dm-alert-rules.md)
         -   [エラーコード](/dm/dm-error-handling.md#handle-common-errors)
         -   [FAQ](/dm/dm-faq.md)
@@ -420,10 +421,10 @@
         -   [DM レプリケーション シナリオでのデータ チェック](/sync-diff-inspector/dm-diff.md)
     -   ティスパーク
         -   [ユーザーガイド](/tispark-overview.md)
--   リファレンス
+-   参照
     -   クラスタアーキテクチャ
         -   [概要](/tidb-architecture.md)
-        -   [ストレージ](/tidb-storage.md)
+        -   [保管所](/tidb-storage.md)
         -   [コンピューティング](/tidb-computing.md)
         -   [スケジューリング](/tidb-scheduling.md)
     -   主な監視指標
@@ -431,7 +432,7 @@
         -   [TiDB](/grafana-tidb-dashboard.md)
         -   [PD](/grafana-pd-dashboard.md)
         -   [TiKV](/grafana-tikv-dashboard.md)
-        -   [ティフラッシュ](/tiflash/monitor-tiflash.md)
+        -   [TiFlash](/tiflash/monitor-tiflash.md)
         -   [TiCDC](/ticdc/monitor-ticdc.md)
     -   セキュリティ
         -   [TiDB クライアントとサーバー間で TLS を有効にする](/enable-tls-between-clients-and-servers.md)
@@ -739,9 +740,9 @@
             -   [RocksDB の概要](/storage-engine/rocksdb-overview.md)
             -   [タイタンの概要](/storage-engine/titan-overview.md)
             -   [タイタンのConfiguration / コンフィグレーション](/storage-engine/titan-configuration.md)
-        -   ティフラッシュ
+        -   TiFlash
             -   [概要](/tiflash/tiflash-overview.md)
-            -   [TiFlash を使用する](/tiflash/use-tiflash.md)
+            -   [TiFlashを使用する](/tiflash/use-tiflash.md)
     -   [テレメトリー](/telemetry.md)
     -   [エラーコード](/error-codes.md)
     -   [テーブル フィルター](/table-filter.md)
