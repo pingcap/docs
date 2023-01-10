@@ -15,7 +15,7 @@ In your Dedicated Tier, you have two options where you can set up IP access list
 
 > **Note:**
 >
->Only supports configuring the IP access list of the database cluster in the Dedicated Tier, and only set IP access list for your dedicated database Cluster. 
+> Only supports configuring the IP access list of the database cluster in the Dedicated Tier, and only set IP access list for your dedicated database Cluster. 
 
 ## Configure IP access list in standard connection 
 
@@ -65,4 +65,4 @@ On the IP access edit page of your Dedicated Tier cluster:
 
 > **Note:**
 >
->In your Dedicated Tier, you can set up to 7 IP access lists per dedicated tier cluster. if the traffic filtering rules of your Dedicated cluster have reached the upper limit. If you need to apply for a quota, please contact [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md).
+> In your Dedicated Tier, you can set up to 7 IP access lists per dedicated tier cluster. if the traffic filtering rules of your Dedicated cluster have reached the upper limit. If you need to apply for a quota, please contact [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md).
