@@ -97,7 +97,7 @@ In Chat2Query, you can save your SQL queries in different SQL files and manage S
 
 - To add a SQL file, click **+** on the **SQL Files** tab.
 - To rename a SQL file, move your cursor on the filename, click **...** next to the filename, and then select **Rename**.
-- To delete a SQL file, move your cursor on the filename, click **...** next to the filename, and then select **Delete**.
+- To delete a SQL file, move your cursor on the filename, click **...** next to the filename, and then select **Delete**. Note that when there is only one SQL file on the **SQL Files** tab, you cannot delete it.
 
 ## Manage Chat2Query settings
 
