@@ -55,7 +55,7 @@ Currently, this method supports importing one CSV file for one task into either 
     > **Note:**
     >
     > - The primary key of the table is a clustered index and cannot be deleted after creation.
-    > - Ensure that the data corresponding to the primary key field is unique and not empty. Otherwise the import task will result in data inconsistency.
+    > - Ensure that the data corresponding to the primary key field is unique and not empty. Otherwise, the import task will result in data inconsistency.
 
 7. Edit the CSV configuration if needed.
 
