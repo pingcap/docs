@@ -12,7 +12,7 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
 **General changes**
 
-- Optimize the feature of importing data from local CSV files to TiDB to improve user experience for [Serverless Tier](/tidb-cloud/select-cluster-tier.md#serverless-tier-beta) clusters.
+- Optimize the feature of importing data from local CSV files to TiDB to improve the user experience for [Serverless Tier](/tidb-cloud/select-cluster-tier.md#serverless-tier-beta) clusters.
 
     - To upload a CSV file, now you can simply drag and drop it to the upload area on the **Import** page.
     - When configuring an import task, if your target database or table does not exist, you can enter a name to let TiDB Cloud create it for you automatically. For the new target table, you can specify the primary key and select multiple fields to form a composite primary key.
