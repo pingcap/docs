@@ -50,7 +50,7 @@ In Chat2Query, you can either simply type `--` and your instructions to let AI g
 4. Run SQL queries.
 
    <SimpleTab>
-    <div label="Mac">
+    <div label="macOS">
 
     For macOS:
 
