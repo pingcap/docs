@@ -84,23 +84,4 @@ tiup cluster display <cluster-name> [flags]
     - Data Dir: the data directory of the service. `-` means no data directory.
     - Deploy Dir: the deployment directory of the service
 
-<<<<<<< HEAD
-=======
-### Node service status
-
-A node service can run in one of the following statuses:
-
-- Up: The node service is running normally.
-- Down or Unreachable: The node service is not running or a network problem exists on the corresponding host.
-- Tombstone: The data on the node service has been completely migrated out and the scaling-in is complete. This status exists only on TiKV or TiFlash.
-- Pending Offline: The data on the node service is being migrated out and the scaling-in is in process. This status exists only on TiKV or TiFlash.
-- Unknown: The running status of the node service is unknown.
-
-> **Note:**
->
-> `Pending Offline` in TiUP, `Offline` returned by PD API, and `Leaving` in TiDB Dashboard indicate the same status.
-
-Node service status derives from the PD scheduling information. For more details, see [Information collection](/tidb-scheduling.md#information-collection).
-
->>>>>>> 3aadfb743 (tiup: update cluster display and add audit cleanup.md (#11963))
 [<< Back to the previous page - TiUP Cluster command list](/tiup/tiup-component-cluster.md#command-list)
