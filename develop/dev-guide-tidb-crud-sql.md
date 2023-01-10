@@ -19,11 +19,11 @@ Please make sure you are connected to a TiDB cluster. If not, refer to [Build a 
 
 TiDB is compatible with MySQL, you can use MySQL statements directly in most cases. For unsupported features, see [Compatibility with MySQL](/mysql-compatibility.md#unsupported-features).
 
-To experiment with SQL and test out TiDB compatibility with MySQL queries, you can try the SQL editor (Beta) in your [TiDB Cloud console](https://tidbcloud.com/). Navigate to the **Cluster Details** page and click **SQL Editor** on the left navigation bar. In the SQL editor, you can edit and run SQL queries directly against your cluster without using a terminal.
+To experiment with SQL and test out TiDB compatibility with MySQL queries, you can try Chat2Query (beta) in your [TiDB Cloud console](https://tidbcloud.com/). To access Chat2Query, go to the [**Clusters**](https://tidbcloud.com/console/clusters) page of your project, click your cluster name, and then click **Chat2Query** in the left navigation pane. In Chat2Query, you can either let AI generate SQL queries automatically or write SQL queries manually, and run SQL queries against databases without a terminal.
 
 > **Note:**
 >
-> The SQL editor currently has limited support on SQL statements. DDLs such as `CREATE TABLE` or `DROP TABLE` are not supported yet.
+> Chat2Query currently has limited support on SQL statements. DDLs such as `CREATE TABLE` or `DROP TABLE` are not supported yet.
 >
 > <CustomContent platform="tidb">
 >
@@ -59,15 +59,11 @@ Common DML features are adding, modifying, and deleting table records. The corre
 
 To insert data into a table, use the `INSERT` statement:
 
-{{< copyable "sql" >}}
-
 ```sql
 INSERT INTO person VALUES(1,'tom','20170912');
 ```
 
 To insert a record containing data of some fields into a table, use the `INSERT` statement:
-
-{{< copyable "sql" >}}
 
 ```sql
 INSERT INTO person(id,name) VALUES('2','bob');
@@ -75,15 +71,11 @@ INSERT INTO person(id,name) VALUES('2','bob');
 
 To update some fields of a record in a table, use the `UPDATE` statement:
 
-{{< copyable "sql" >}}
-
 ```sql
 UPDATE person SET birthday='20180808' WHERE id=2;
 ```
 
 To delete the data in a table, use the `DELETE` statement:
-
-{{< copyable "sql" >}}
 
 ```sql
 DELETE FROM person WHERE id=2;
@@ -99,15 +91,11 @@ DQL is used to retrieve the desired data rows from a table or multiple tables.
 
 To view the data in a table, use the `SELECT` statement:
 
-{{< copyable "sql" >}}
-
 ```sql
 SELECT * FROM person;
 ```
 
 To query a specific column, add the column name after the `SELECT` keyword:
-
-{{< copyable "sql" >}}
 
 ```sql
 SELECT name FROM person;
@@ -125,8 +113,6 @@ The result is as follows:
 ```
 
 Use the `WHERE` clause to filter all records that match the conditions and then return the result:
-
-{{< copyable "sql" >}}
 
 ```sql
 SELECT * FROM person WHERE id < 5;

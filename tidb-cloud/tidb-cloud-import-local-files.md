@@ -28,33 +28,34 @@ Currently, this method supports importing one CSV file for one task into either 
 
     2. Click the name of your target cluster to go to its overview page, and then click **Import** in the left navigation pane.
 
-2. On the **Import** page, click **Import Data** in the upper-right corner, and then select **From local file**.
+2. On the **Import** page, you can directly drag and drop your local file to the upload area, or click the upload area to select and upload the target local file. Note that you can upload only one CSV file of less than 50 MiB for one task.
 
-3. Click **Upload File** to select and upload the target local file. Note that the file name must have a ".csv" extension and must be no more than 50 MiB.
+3. In the **Target** area, select the target database and the target table, or enter a name directly to create a new database or a new table. The name must start with letters (a-z and A-Z) or numbers (0-9), and can contain letters (a-z and A-Z), numbers (0-9), and the underscore (_) character. Click **Next**.
 
-4. In the **Target** section, select the target database and the target table, or create a new database or new table. Then click **Next**.
+4. Check the table.
 
-    To create a new database or a new table, click **+ Create a new database** or **+ Create a new table**, directly enter a database name or a table name to create one, as shown in the following screenshot. TiDB Cloud will automatically create the database and the table according to the CSV data and the configured column name. The name must start with letters (a-z and A-Z) or numbers (0-9), and can contain letters (a-z and A-Z), numbers (0-9), and the underscore (_) characters.
-
-    ![Upload local files](/media/tidb-cloud/tidb-cloud-upload-local-files-new.png)
-
-5. Check the table.
-
-    Here you can see a list of configurable table columns. Each line shows the table column name inferred by TiDB Cloud, the table column type inferred, and the previewed data from the CSV file.
+    You can see a list of configurable table columns. Each line shows the table column name inferred by TiDB Cloud, the table column type inferred, and the previewed data from the CSV file.
 
     - If you import data into an existing table in TiDB Cloud, the column list is extracted from the table definition, and the previewed data is mapped to the corresponding columns by column names.
 
     - If you want to create a new table, the column list is extracted from the CSV file, and the column type is inferred by TiDB Cloud. For example, if the previewed data is all integers, the inferred column type will be **int** (integer).
 
-6. Configure the column names and data types.
+5. Configure the column names and data types.
 
-    If the first row in the CSV file records the column names, make sure that **Use the first row as Column Name** is selected, which is selected by default.
+    If the first row in the CSV file records the column names, make sure that **Use the first row as column name** is selected, which is selected by default.
 
-    If the CSV file does not have a row for the column names, do not select **Use the first row as Column Name**. In this case:
+    If the CSV file does not have a row for the column names, do not select **Use the first row as column name**. In this case:
 
-    - If the CSV table already exists, make sure the order of the columns is the same as the column list of the target table.
+    - If the target table already exists, make sure the order of the columns is the same as the column list of the target table.
 
-    - If the CSV table is not created yet, input the names for each column. The column name must start with letters (a-z and A-Z) or numbers (0-9), and can contain letters (a-z and A-Z), numbers (0-9), and the underscore (_) characters. You can also change the data type if needed.
+    - If you need TiDB Cloud to create the target table, input the name for each column. The column name must start with letters (a-z and A-Z) or numbers (0-9), and can contain letters (a-z and A-Z), numbers (0-9), and the underscore (_) character. You can also change the data type if needed.
+
+6. For a new target table, you can set the primary key. You can select a column as the primary key, or select multiple columns to create a composite primary key. The composite primary key will be formed in the order in which you select the column names.
+
+    > **Note:**
+    >
+    > - The primary key of the table is a clustered index and cannot be deleted after creation.
+    > - Ensure that the data corresponding to the primary key field is unique and not empty. Otherwise, the import task will result in data inconsistency.
 
 7. Edit the CSV configuration if needed.
 
@@ -62,4 +63,8 @@ Currently, this method supports importing one CSV file for one task into either 
 
 8. Click **Start Import**.
 
-    You can view the import progress in the **Import Progress** section. If there are warnings or failed tasks, you can check to view the details and solve them.
+    You can view the import progress on the **Import Task Detail** page. If there are warnings or failed tasks, you can check to view the details and solve them.
+
+9. After the import task is completed, you can click **Explore your data by Chat2Query** to query your imported data. For more information about how to use Chat2Qury, see [Explore Your Data with AI-Powered Chat2Query](/tidb-cloud/explore-data-with-chat2query.md).
+
+10. On the **Import** page, you can click **View** in the **Action** column to check the import task detail.
