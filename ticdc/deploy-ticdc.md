@@ -111,7 +111,7 @@ When you upgrade a TiCDC cluster, you need to pay attention to the following:
 
 ## Modify TiCDC cluster configurations using TiUP
 
-This section describes how to use the [`tiup cluster edit-config`](/tiup/tiup-component-cluster-edit-config.md) command to modify the configurations of TiCDC. In the following example, it is assumed that you need to change the default value of `gc-ttl` from `86400` to `3600` (1 hour).
+This section describes how to use the [`tiup cluster edit-config`](/tiup/tiup-component-cluster-edit-config.md) command to modify the configurations of TiCDC. In the following example, it is assumed that you need to change the default value of `gc-ttl` from `86400` to `172800` (48 hour).
 
 1. Run the `tiup cluster edit-config` command. Replace `<cluster-name>` with the actual cluster name:
 
@@ -131,10 +131,10 @@ This section describes how to use the [`tiup cluster edit-config`](/tiup/tiup-co
       pump: {}
       drainer: {}
       cdc:
-        gc-ttl: 86400
+        gc-ttl: 172800
     ```
 
-    In the preceding command, `gc-ttl` is set to 24 hours.
+    In the preceding command, `gc-ttl` is set to 48 hours.
 
 3. Run the `tiup cluster reload -R cdc` command to reload the configuration.
 
