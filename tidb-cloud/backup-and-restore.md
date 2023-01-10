@@ -70,7 +70,7 @@ Currently, you cannot select an arbitrary remote region for backup data storage.
 
 > **Note:**
 >
-> If you select multiple backup storage regions, you will be charged for multiple backup storage and inter-region backup data replication out from the cluster region to each destination region. The cost is on a per-region basis and varies with the backup regions selected. For more information, see [Data Backup Cost](https://en.pingcap.com/tidb-cloud-pricing-details/#data-backup-cost).
+> If you select multiple backup storage regions, you will be charged for multiple backup storage and inter-region backup data replication out from the cluster region to each destination region. The cost is on a per-region basis and varies with the backup regions selected. For more information, see [Data Backup Cost](https://www.pingcap.com/tidb-cloud-pricing-details/#backup-storage-cost).
 
 ### Manual backup
 
