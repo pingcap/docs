@@ -1,6 +1,6 @@
 ---
 title: Configure IP Access List
-summary: Learn how to configure the root password and allowed IP addresses to connect to your dedicated cluster.
+summary: Learn how to configure IP addresses to connect to your dedicated cluster.
 ---
 
 # Configure IP Access List
