@@ -48,7 +48,7 @@ Currently, this method supports importing one CSV file for one task into either 
 
     - If the target table already exists, make sure the order of the columns is the same as the column list of the target table.
 
-    - If the target table is not created yet, input the name for each column. The column name must start with letters (a-z and A-Z) or numbers (0-9), and can contain letters (a-z and A-Z), numbers (0-9), and the underscore (_) character. You can also change the data type if needed.
+    - If you need TiDB Cloud to create the target table, input the name for each column. The column name must start with letters (a-z and A-Z) or numbers (0-9), and can contain letters (a-z and A-Z), numbers (0-9), and the underscore (_) character. You can also change the data type if needed.
 
 6. For a new target table, you can set the primary key. You can select a column as the primary key, or select multiple columns to create a composite primary key. The composite primary key will be formed in the order in which you select the column names.
 
