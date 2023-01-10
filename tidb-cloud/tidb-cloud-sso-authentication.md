@@ -11,7 +11,7 @@ TiDB Cloud supports SSO authentication for Google and GitHub accounts. If you lo
 
 > **Note:**
 >
-> If you want to log into TiDB Cloud through username and password, see [Password Authentication](/tidb-cloud/tidb-cloud-password-authentication.md)
+> If you want to log into TiDB Cloud through username and password, see [Password Authentication](/tidb-cloud/tidb-cloud-password-authentication.md).
 
 ## Sign in with Google SSO 
 
