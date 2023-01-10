@@ -19,7 +19,7 @@ tiup cluster audit cleanup [flags]
 - Specifies the days for which logs are retained.
 - Data type: `INT`
 - Default value: `60`, in the unit of day.
-- By default, execution logs generated in 60 days are retained, which means logs generated before 60 days are removed.
+- By default, logs generated within the last 60 days are retained, which means logs generated before 60 days are removed.
 
 ### -h, --help
 
