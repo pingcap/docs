@@ -188,7 +188,7 @@ TiDB stores passwords in the `mysql.user` system database. Operations that assig
 1. Modify the configuration file:
 
     1. Log in to the machine where one of the tidb-server instances is located.
-    2. Enter the `conf` directory under the deployment directory of the TiDB node, and find the `tidb.toml` configuration file.
+    2. Enter the `conf` directory under the TiDB node deployment directory, and find the `tidb.toml` configuration file.
     3. Add the configuration item `skip-grant-table` in the `security` section of the configuration file. If there is no `security` section, add the following two lines to the end of the tidb.toml configuration file:
 
         ```
@@ -214,12 +214,12 @@ TiDB stores passwords in the `mysql.user` system database. Operations that assig
 
     > **Note:**
     >
-    > After setting `skip-grant-table`, starting the TiDB process will increase the operating system user check, and only the `root` user of the operating system can start the TiDB process.
+    > After setting `skip-grant-table`, starting the TiDB process will perform the operating system user check, and only the `root` user of the operating system can start the TiDB process.
 
     1. Enter the `scripts` directory under the TiDB node deployment directory.
     2. Switch to the `root` account of the operating system.
     3. Run the `run_tidb.sh` script in the directory in the foreground.
-    4. Change the password after logging in as `root` in a new terminal window:
+    4. login as `root` in a new terminal window and change the password.
 
         ```bash
         mysql -h 127.0.0.1 -P 4000 -u root
