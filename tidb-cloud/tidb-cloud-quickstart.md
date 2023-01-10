@@ -31,7 +31,7 @@ TiDB Cloud [Serverless Tier](/tidb-cloud/select-cluster-tier.md#serverless-tier-
 
     The cluster creation process starts and your Serverless Tier cluster will be created in approximately 30 seconds.
 
-## Step 2. Try AI-powered Chat2Query
+## Step 2. Try AI-powered Chat2Query (beta)
 
 TiDB Cloud is powered by AI. You can use Chat2Query (beta), an AI-powered SQL editor in the TiDB Cloud console, to maximize your data value.
 
