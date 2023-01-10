@@ -58,7 +58,7 @@ tiup cluster display <cluster-name> [flags]
 
 ### --status-timeout
 
-- Specifies the timeout period in obtaining the node status information.
+- Specifies the timeout period for obtaining the node status information.
 - Data type: `INT`
 - Default value: `10`, in the unit of second.
 
