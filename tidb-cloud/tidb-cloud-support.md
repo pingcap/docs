@@ -15,7 +15,7 @@ The information of each support plan is available on the support page of the TiD
 
 ## Request support
 
-You can request support for your clusters, projects, and organizations. After receiving your request, the support team will reply to you via email.
+You can request support for your clusters, projects, and organizations. Upon receiving your request, the support team will contact you via email.
 
 > **Tip:**
 >
@@ -37,7 +37,7 @@ You can request support for a project or organization in either of the following
 
 - In the upper-right corner of the [TiDB Cloud console](https://tidbcloud.com/), click <MDSvgIcon name="icon-top-support" /> **Support** > **Create New Case**.
 
-    If you go with this way, you need to provide your organization ID in the request manually. To get that, click <MDSvgIcon name="icon-top-organization" /> **Organization** in the upper-right corner and click **Organization Settings**.
+    You need to provide your organization ID in the request. To find the ID, click <MDSvgIcon name="icon-top-organization" /> **Organization** in the upper-right corner and click **Organization Settings**.
 
 ## Check your submitted request
 
