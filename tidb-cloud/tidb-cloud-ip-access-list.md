@@ -41,7 +41,7 @@ To configure the IP access list for your Dedicated cluster in security settings,
 
 1. In the [TiDB Cloud console](https://tidbcloud.com/), navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page of your project.
 2. In the row of your Dedicated Tier cluster, click **...** and select **Security Settings**. A security setting dialog is displayed.
-3. In the dialog, configure the IP access list in standard connection.
+3. In the dialog, configure the IP access list as follows:
 
     - To add your current IP address to the IP access list, click **Add My Current IP Address**.
 
