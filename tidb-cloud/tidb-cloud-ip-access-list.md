@@ -23,7 +23,7 @@ To configure the IP access list for your Dedicated cluster in standard connectio
 
 1. In the [TiDB Cloud console](https://tidbcloud.com/), navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page of your project.
 2. In the row of your Dedicated Tier cluster, click **...** and select **Connect**. A dialog is displayed.
-3. In the dialog, locate ***Step 1: Create traffic filter** on the **Standard Connection** tab and configure the IP access list.
+3. In the dialog, locate **Step 1: Create traffic filter** on the **Standard Connection** tab and configure the IP access list.
 
     - If the IP access list of your cluster has not been set, you can click **Add My Current IP Address** to add your current IP address to the IP access list, and then click **Add Item** to add more IP addresses if necessary. Next, click **Update Filter** to save the configuration.
 
