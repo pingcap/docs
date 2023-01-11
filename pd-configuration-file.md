@@ -106,6 +106,10 @@ This document only describes parameters that are not included in command-line pa
 + Default value: `50ms`
 + Minimum value: `1ms`
 
+## pd-server
+
+Configuration items related to pd-server
+
 ### `server-memory-limit`
 
 + The memory limit for a PD instance.
