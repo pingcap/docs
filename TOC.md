@@ -391,7 +391,7 @@
         -   セキュリティ
             -   [DM 接続の TLS を有効にする](/dm/dm-enable-tls.md)
             -   [自己署名証明書の生成](/dm/dm-generate-self-signed-certificates.md)
-        -   [指標の監視](/dm/monitor-a-dm-cluster.md)
+        -   [指標のモニタリング](/dm/monitor-a-dm-cluster.md)
         -   [アラート ルール](/dm/dm-alert-rules.md)
         -   [エラーコード](/dm/dm-error-handling.md#handle-common-errors)
         -   [FAQ](/dm/dm-faq.md)
@@ -466,7 +466,7 @@
             -   [`ADMIN CANCEL DDL`](/sql-statements/sql-statement-admin-cancel-ddl.md)
             -   [`ADMIN CHECKSUM TABLE`](/sql-statements/sql-statement-admin-checksum-table.md)
             -   [`ADMIN CHECK [TABLE|INDEX]`](/sql-statements/sql-statement-admin-check-table-index.md)
-            -   [`ADMIN SHOW DDL [JOBS|QUERIES]`](/sql-statements/sql-statement-admin-show-ddl.md)
+            -   [`ADMIN SHOW DDL [JOBS|JOB QUERIES]`](/sql-statements/sql-statement-admin-show-ddl.md)
             -   [`ADMIN SHOW TELEMETRY`](/sql-statements/sql-statement-admin-show-telemetry.md)
             -   [`ALTER DATABASE`](/sql-statements/sql-statement-alter-database.md)
             -   [`ALTER INDEX`](/sql-statements/sql-statement-alter-index.md)

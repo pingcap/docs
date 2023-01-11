@@ -4,9 +4,9 @@ summary: An overview of the usage of ADMIN CANCEL DDL for the TiDB database.
 category: reference
 ---
 
-# ADMIN CANCEL DDL {#admin-cancel-ddl}
+# 管理者キャンセル DDL {#admin-cancel-ddl}
 
-`ADMIN CANCEL DDL`ステートメントを使用すると、実行中のDDLジョブをキャンセルできます。 `job_id`は、 `ADMIN SHOW DDL JOBS`を実行することで見つけることができます。
+`ADMIN CANCEL DDL`ステートメントを使用すると、実行中の DDL ジョブをキャンセルできます。 `job_id`は`ADMIN SHOW DDL JOBS`を実行することで見つけることができます。
 
 ## あらすじ {#synopsis}
 
@@ -20,7 +20,7 @@ NumList ::=
 
 ## 例 {#examples}
 
-現在実行中のDDLジョブをキャンセルし、対応するジョブが正常にキャンセルされたかどうかを返すには、 `ADMIN CANCEL DDL JOBS`を使用します。
+現在実行中の DDL ジョブをキャンセルし、対応するジョブが正常にキャンセルされたかどうかを返すには、 `ADMIN CANCEL DDL JOBS`を使用します。
 
 {{< copyable "" >}}
 
@@ -28,18 +28,18 @@ NumList ::=
 ADMIN CANCEL DDL JOBS job_id [, job_id] ...;
 ```
 
-操作がジョブのキャンセルに失敗した場合、特定の理由が表示されます。
+操作でジョブをキャンセルできなかった場合は、具体的な理由が表示されます。
 
 > **ノート：**
 >
-> -   この操作のみがDDLジョブをキャンセルできます。他のすべての操作および環境の変更（マシンの再起動やクラスタの再起動など）では、これらのジョブをキャンセルできません。
-> -   この操作により、複数のDDLジョブを同時にキャンセルできます。 `ADMIN SHOW DDL JOBS`ステートメントを使用してDDLジョブのIDを取得できます。
-> -   キャンセルしたいジョブが終了した場合、キャンセル操作は失敗します。
+> -   この操作のみが DDL ジョブをキャンセルできます。他のすべての操作と環境の変更 (マシンの再起動やクラスターの再起動など) では、これらのジョブをキャンセルできません。
+> -   この操作では、複数の DDL ジョブを同時にキャンセルできます。 `ADMIN SHOW DDL JOBS`ステートメントを使用して、DDL ジョブの ID を取得できます。
+> -   キャンセルするジョブが終了している場合、キャンセル操作は失敗します。
 
-## MySQLの互換性 {#mysql-compatibility}
+## MySQL の互換性 {#mysql-compatibility}
 
-このステートメントは、MySQL構文のTiDB拡張です。
+このステートメントは、MySQL 構文に対する TiDB 拡張です。
 
-## も参照してください {#see-also}
+## こちらもご覧ください {#see-also}
 
--   [`ADMIN SHOW DDL [JOBS|QUERIES]`](/sql-statements/sql-statement-admin-show-ddl.md)
+-   [`ADMIN SHOW DDL [JOBS|JOB QUERIES]`](/sql-statements/sql-statement-admin-show-ddl.md)
