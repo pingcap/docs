@@ -9,7 +9,7 @@ For each Dedicated Tier cluster in TiDB Cloud, you can configure an IP access li
 
 > **Note:**
 >
-> Configuring the IP access list is only available for Dedicated Tier clusters.
+> Configuring the IP access list is only available for [Dedicated Tier](/tidb-cloud/select-cluster-tier.md#dedicated-tier) clusters.
 
 For a Dedicated Tier cluster, you can configure its IP access list in either of the following ways:
 
