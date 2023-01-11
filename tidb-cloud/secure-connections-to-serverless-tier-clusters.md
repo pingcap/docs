@@ -5,7 +5,7 @@ summary: Introduce TLS connection in TiDB Serverless Tier.
 
 # TLS Connection to Serverless Tier
 
-Establishing a secure TLS connection between your client and your TiDB Cloud Serverless Tier cluster is one of the basic security practices for connecting to your databases. The server certificate is issued by an independent third-party certificate provider [Let's Encrypt](https://letsencrypt.org/). Hence, you can easily connect to your Serverless Tier cluster without downloading a server-side digital certificate.
+Establishing a secure TLS connection between your client and your TiDB Cloud Serverless Tier cluster is one of the basic security practices for connecting to your databases. The server certificate for Serverless Tier is issued by an independent third-party certificate provider [Let's Encrypt](https://letsencrypt.org/). Hence, you can easily connect to your Serverless Tier cluster without downloading a server-side digital certificate.
 
 ## Prerequisites
 
@@ -176,16 +176,16 @@ Windows does not offer a specific path to the CA root. Instead, it uses the [reg
 
 ### Which TLS versions are supported to connect to my TiDB Cloud Serverless Tier cluster?
 
-For security reasons, TiDB Cloud Serverless Tier clusters only support TLS 1.2 and TLS 1.3, and does not support TLS 1.0 and TLS 1.1 versions. See IETF [Deprecating TLS 1.0 and TLS 1.1](https://datatracker.ietf.org/doc/rfc8996/) for details.
+For security reasons, TiDB Cloud Serverless Tier only supports TLS 1.2 and TLS 1.3, and does not support TLS 1.0 and TLS 1.1 versions. See IETF [Deprecating TLS 1.0 and TLS 1.1](https://datatracker.ietf.org/doc/rfc8996/) for details.
 
 ### Is two-way TLS authentication between my connection client and TiDB Cloud Serverless Tier supported?
 
 No.
 
-TiDB Serverless Tier only supports one-way TLS authentication, which means your client uses the public key to verify the signature of your TiDB Cloud cluster certificate's private key while the cluster does not validate the client.
+TiDB Cloud Serverless Tier only supports one-way TLS authentication, which means your client uses the public key to verify the signature of your TiDB Cloud cluster certificate's private key while the cluster does not validate the client.
 
 ### Does TiDB Serverless Tier have to configure TLS to establish a secure connection?
 
 Yes.
 
-TiDB Serverless Tier only allows TLS connections and prohibits non-SSL/TLS connections. The reason is that SSL/TLS is one of the most basic security measures for you to reduce the risk of data exposure to internet when you connect to the TiDB Serverless Tier cluster through internet.
+TiDB Cloud Serverless Tier only allows TLS connections and prohibits non-SSL/TLS connections. The reason is that SSL/TLS is one of the most basic security measures for you to reduce the risk of data exposure to the internet when you connect to the Serverless Tier cluster through the internet.
