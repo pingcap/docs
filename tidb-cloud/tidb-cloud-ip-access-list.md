@@ -33,7 +33,7 @@ To configure the IP access list for your Dedicated Tier cluster in standard conn
 
     - If the IP access list of your cluster has been set, click **Edit** to add, edit, or remove IP addresses, and then click **Update Filter** to save the configuration.
 
-    - To allow any IP address to access your cluster (not recommended), click **Allow Access From Anywhere**, and then click **Update Filter**. According to security best practices, it is NOT recommended that you allow any IP address to access your cluster, as this would expose your cluster to the internet completely and is highly dangerous.
+    - To allow any IP address to access your cluster (not recommended), click **Allow Access From Anywhere**, and then click **Update Filter**. According to security best practices, it is NOT recommended that you allow any IP address to access your cluster, as this would expose your cluster to the internet completely and is highly risky.
 
 ## Configure IP access list in security settings
 
@@ -51,6 +51,6 @@ To configure the IP access list for your Dedicated Tier cluster in security sett
         >
         > For each Dedicated Tier cluster, you can add up to 7 IP addresses to the IP access list. To apply for a quota to add more IP addresses, contact [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md).
 
-    - To allow any IP address to access your cluster (not recommended), click **Allow Access From Anywhere**, and then click **Update Filter**. According to security best practices, it is NOT recommended that you allow any IP address to access your cluster, as this would expose your cluster to the internet completely and is highly dangerous.
+    - To allow any IP address to access your cluster (not recommended), click **Allow Access From Anywhere**, and then click **Update Filter**. According to security best practices, it is NOT recommended that you allow any IP address to access your cluster, as this would expose your cluster to the internet completely and is highly risky.
 
     - To remove an IP address from the access list, click **Remove** in the line of the IP address.
