@@ -219,7 +219,7 @@ After setting up the environment, you can use the backup and restore functions o
     {{< copyable "shell-regular" >}}
 
     ```shell
-     tiup cdc cli changefeed create --server=http://172.16.6.122:8300 --sink-uri="mysql://root:@172.16.6.125:4000" --changefeed-id="upstream-to-downstream" --start-ts="431434047157698561"
+    tiup cdc cli changefeed create --server=http://172.16.6.122:8300 --sink-uri="mysql://root:@172.16.6.125:4000" --changefeed-id="upstream-to-downstream" --start-ts="431434047157698561"
     ```
 
     In this command, the parameters are as follows:
