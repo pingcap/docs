@@ -1,21 +1,24 @@
 ---
 title: Configure IP Access List
-summary: Learn how to configure IP addresses to connect to your dedicated cluster.
+summary: Learn how to configure IP addresses that are allowed to access your Dedicated Tier cluster.
 ---
 
 # Configure IP Access List
 
-IP access lists are similar to firewall access control lists, the main purpose is to filter internet traffic accessing your Dedicated tier cluster.
-
-In your Dedicated Tier, you have two options where you can set up IP access lists that only allow your clients or applications with specified IP addresses to connect to your Dedicated Tier cluster.
-
-1. You can click **Connect** to enter the **Standard Connection** page to configure your IP access list.
-
-2. You can click **...** at the top of your cluster page, select **Security Settings** to configure your IP access list.
+For each Dedicated Tier cluster in TiDB Cloud, you can configure an IP access list to filter internet traffic trying to access the cluster, which works similarly to a firewall access control list. After the configuration, only the clients or applications whose IP addresses are in the IP access list can connect to your Dedicated Tier cluster.
 
 > **Note:**
 >
-> Only supports configuring the IP access list of the database cluster in the Dedicated Tier, and only set IP access list for your dedicated database Cluster. 
+> Configuring the IP access list is only available for Dedicated Tier clusters.
+For a Dedicated Tier cluster, you can configure its IP access list in either of the following ways:
+
+- Configure the IP access list in standard connection
+
+    On the [**Clusters**](https://tidbcloud.com/console/clusters) page of your project, click **...** in the row of your cluster, select **Connect**, and then configure the IP access list on the **Standard Connection** tab.
+
+- Configure the IP access list in security settings
+
+    On the [**Clusters**](https://tidbcloud.com/console/clusters) page of your project, click **...** in the row of your cluster, select **Security Settings**, and then configure the IP access list.
 
 ## Configure IP access list in standard connection 
 
