@@ -9,18 +9,37 @@ Establishing a secure TLS connection between your client and your TiDB Cloud Ser
 
 ## Prerequisites
 
-Before connecting to your Serverless Tier cluster, you need to log in to TiDB Cloud via [Password Authentication](tidb-cloud-password-authentication.md) or [SSO Authentication](/tidb-cloud/tidb-cloud-sso-authentication.md).
+- Log in to TiDB Cloud via [Password Authentication](tidb-cloud-password-authentication.md) or [SSO Authentication](/tidb-cloud/tidb-cloud-sso-authentication.md).
+- [Create a TiDB Cloud Serveless Tier cluster](/tidb-cloud/tidb-cloud-quickstart.md).
 
+## Secure connection to a Serverless Tier cluster
 
-## Secure connection to TiDB database cluster
+ In the [TiDB Cloud console](https://tidbcloud.com/), you can get examples of different connection methods and connect to your Serverless Tier cluster as follows:
 
-The TiDB Cloud console provides different connection examples in the **Connect** dialog. 
+1. Navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page, and then click the name of your cluster to go to its overview page.
 
-After creating your TiDB Serverless Tier cluster, you can click your cluster name to go to your cluster overview page, and then click **Connect** in the upper-right corner to open the **Connect** dialog. In this dialog, you can choose a connection method and your operating system.
-   - Supported connection methods: MySQL CLI, MyCLI, JDBC, Python, Go, and Node.js.
-   - Supported operating systems: MacOS, Debian, CentOS/RedHat/Fedora, Alpine, OpenSUSE, and Windows.
+2. Click **Connect** in the upper-right corner. A dialog is displayed.
 
-The following examples show the connection string in MySQL CLI, MyCLI, JDBC, Python, Go and Node.js:
+3. In the dialog, select your preferred connection method and operating system.
+
+    - Supported connection methods: MySQL CLI, MyCLI, JDBC, Python, Go, and Node.js.
+    - Supported operating systems: MacOS, Debian, CentOS/RedHat/Fedora, Alpine, OpenSUSE, and Windows.
+
+4. If you have not set a password yet, click **Create password** to generate a random password for your Serverless Tier cluster. The password will be automatically embedded in the sample connection string for connecting to your cluster easily.
+
+    > **Note:**
+    >
+    > - The randomly password consists of 16 characters, including uppercase and lowercase letters, numbers, and special characters.
+    > - After you close this dialog, the generated password will not show again, so you need to save the password in a secure location. If you forget it, you can click **Reset password** in this dialog to reset it.
+    > - The Serverless Tier cluster can be accessed through the internet. If you need to use the password elsewhere, every time after you connect to the cluster, it is recommended that you reset it to ensure the database security.
+
+5. Connect to your cluster with the connection string.
+
+    > **Note:**
+    >
+    > When you connect to a Serverless Tier cluster, you must include the prefix for your cluster in the user name and wrap the name with quotation marks. For more information, see [User name prefix](/tidb-cloud/select-cluster-tier.md#user-name-prefix).
+
+The following examples show the connection strings in MySQL CLI, MyCLI, JDBC, Python, Go and Node.js. To learn how to get the `<CA_root_path>` of your operating system, see [Root certificate management](#root-certificate-management).
 
 <SimpleTab>
 <div label="MySQL CLI">
@@ -109,15 +128,9 @@ host: '<host>', port: 4000,user: '<username>', password: '<your_password>', data
 </div>
 </SimpleTab>
 
-## Create and Reset Serverless database password
-
-When you connect to your cluster for the first time, click "Create Password" to automatically generate a password with a length of 16 characters, including numbers, uppercase and lowercase characters, and special characters. The password will be automatically embedded in the sample code for connecting to your cluster easily .
-
-You should copy the password after you create it, and only reset the password after leaving the connect page. Since the serverless cluster is accessed through the Internet,if you need to use the password elsewhere, every time you click on your cluster connection, you need to reset the password of your database cluster to ensure the security and compliance of the database password.
-
 ## Root certificate management
 
-### Root certificate issuance and validity  
+### Root certificate issuance and validity
 
 TiDB Serverless Tier uses certificates from [Let's Encrypt](https://letsencrypt.org/) as a Certificate Authority (CA) for TLS connection between clients and TiDB Serverless Tier clusters. Usually, the root certificate ([ISRG Root X1](https://letsencrypt.org/certs/isrgrootx1.pem.txt)) of Let's Encrypt is present in your system's root CA stores. The Serverless Tier Server digital certificates issued by Let's Encrypt are valid for 90 days and will be automatically rotated upon expiration.
 
@@ -131,7 +144,7 @@ However, some drivers and ORMs do not use the system root CA stores. In those ca
 
 If you are using a GUI client, such as DBeaver, which does not accept a certificate file with multiple certificates inside, you must download the [ISRG Root X1](https://letsencrypt.org/certs/isrgrootx1.pem.txt) certificate.
 
-### Root certificate default path 
+### Root certificate default path
 
 In different operating systems, the default download storage paths of the root certificate are as follows：
 
