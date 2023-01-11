@@ -1,25 +1,26 @@
 ---
-title: TLS connects to Serverless Tier
+title: TLS Connection to Serverless Tier
 summary: Introduce TLS connection in TiDB Serverless Tier.
 ---
 
-# TLS connects to Serverless Tier
+# TLS Connection to Serverless Tier
 
-Establishing a secure TLS connection between your client and your Serverless database cluster is one of the basic security practices for connecting to your database cluster. The server certificate is issued by an independent third-party certificate provider [Let's Encrypt](https://letsencrypt.org/). You can easily connect to your database cluster without downloading a server-side digital certificate.
+Establishing a secure TLS connection between your client and your TiDB Cloud Serverless Tier cluster is one of the basic security practices for connecting to your databases. The server certificate is issued by an independent third-party certificate provider [Let's Encrypt](https://letsencrypt.org/). Hence, you can easily connect to your Serverless Tier cluster without downloading a server-side digital certificate.
 
-## Connection prerequisites
+## Prerequisites
 
-Before connecting to your serverless cluster, you can refer to [Password authentication](tidb-cloud-password-authentication.md) or [SSO authentication]() to log in to TiDB Cloud.
+Before connecting to your Serverless Tier cluster, you need to log in to TiDB Cloud via [Password Authentication](tidb-cloud-password-authentication.md) or [SSO Authentication](/tidb-cloud/tidb-cloud-sso-authentication.md).
 
-We simplify the operation process of setting database passwords, allowing you to more conveniently and securely set and reset database cluster passwords on the connect page of your Serverless cluster.
 
 ## Secure connection to TiDB database cluster
 
-TiDB Cloud provides different connection examples in the **Connect** dialog. After creating your TiDB Serverless Tier Cluster, click Cluster to see detailed cluster information, and you can see the "Connect" label in the upper right corner. After clicking, you will enter the function page for setting the client, application, or development tool to connect to the database.
-   - Support Mysql CLI, MyCLI, JDBC, Python, Go, Node.js and other six ways to connect to your Serverless cluster
-   - Provide MacOS, Debian, RedHat, Alpine, OpenSUSE, Windows and other operating system configuration parameters
+The TiDB Cloud console provides different connection examples in the **Connect** dialog. 
 
-The following examples show the connection string in MySQL CLI, MyCLI , JDBC, Python, Go and Node.js:
+After creating your TiDB Serverless Tier cluster, you can click your cluster name to go to your cluster overview page, and then click **Connect** in the upper-right corner to open the **Connect** dialog. In this dialog, you can choose a connection method and your operating system.
+   - Supported connection methods: MySQL CLI, MyCLI, JDBC, Python, Go, and Node.js.
+   - Supported operating systems: MacOS, Debian, CentOS/RedHat/Fedora, Alpine, OpenSUSE, and Windows.
+
+The following examples show the connection string in MySQL CLI, MyCLI, JDBC, Python, Go and Node.js:
 
 <SimpleTab>
 <div label="MySQL CLI">
@@ -114,13 +115,15 @@ When you connect to your cluster for the first time, click "Create Password" to 
 
 You should copy the password after you create it, and only reset the password after leaving the connect page. Since the serverless cluster is accessed through the Internet,if you need to use the password elsewhere, every time you click on your cluster connection, you need to reset the password of your database cluster to ensure the security and compliance of the database password.
 
-## Root Digital certificate management of Serverless Tier 
+## Root certificate management
 
-### Root Digital certificate‘s issuance and validity  
+### Root certificate issuance and validity  
 
-TiDB Serverless Tier uses certificates from [Let's Encrypt](https://letsencrypt.org/) as a Certificate Authority (CA) for TLS connection between clients and TiDB Serverless Tier clusters. Usually, the root certificate ([ISRG Root X1](https://letsencrypt.org/certs/isrgrootx1.pem.txt)) of Let's Encrypt is present in your system's root CA stores. Let's Encrypt issues Serverless Tier Server digital certificates that are valid for 90 days and will be automatically rotated upon expiration.
+TiDB Serverless Tier uses certificates from [Let's Encrypt](https://letsencrypt.org/) as a Certificate Authority (CA) for TLS connection between clients and TiDB Serverless Tier clusters. Usually, the root certificate ([ISRG Root X1](https://letsencrypt.org/certs/isrgrootx1.pem.txt)) of Let's Encrypt is present in your system's root CA stores. The Serverless Tier Server digital certificates issued by Let's Encrypt are valid for 90 days and will be automatically rotated upon expiration.
 
-TiDB Serverless Tier does not provide a CA root certificate download, because we don't guarantee that the same CA will be used to issue a certificate in the future, which will cause the CA root certificate to change.
+> **Note:**
+>
+> TiDB Serverless Tier does not provide a CA root certificate download, because we don't guarantee that the same CA will be used to issue a certificate in the future, which will cause the CA root certificate to change.
 
 If the client uses the system's root CA stores by default, such as Java and Go, you can easily connect securely to TiDB Serverless Tier clusters without specifying the path of CA roots.
 
@@ -128,9 +131,9 @@ However, some drivers and ORMs do not use the system root CA stores. In those ca
 
 If you are using a GUI client, such as DBeaver, which does not accept a certificate file with multiple certificates inside, you must download the [ISRG Root X1](https://letsencrypt.org/certs/isrgrootx1.pem.txt) certificate.
 
-### Root Digital certificate‘s default path 
+### Root certificate default path 
 
-In different operating systems, the automatic download storage path of the root certificate is as follows：
+In different operating systems, the default download storage paths of the root certificate are as follows：
 
 **MacOS**
 
@@ -171,19 +174,18 @@ Windows does not offer a specific path to the CA root. Instead, it uses the [reg
 
 ## FAQ
 
-### Which TLS versions are supported to connect to my TiDB Serverless cluster?
+### Which TLS versions are supported to connect to my TiDB Cloud Serverless Tier cluster?
 
-TiDB Serverless database cluster only supports TLS 1.2 and TLS 1.3, and does not support TLS 1.0 and TLS 1.1 versions for security reasons. Refer to see IETF [Deprecating TLS 1.0 and TLS 1.1](https://datatracker.ietf.org/doc/rfc8996/) for ditails.
+For security reasons, TiDB Cloud Serverless Tier clusters only support TLS 1.2 and TLS 1.3, and does not support TLS 1.0 and TLS 1.1 versions. See IETF [Deprecating TLS 1.0 and TLS 1.1](https://datatracker.ietf.org/doc/rfc8996/) for details.
 
-### Does TiDB Serverless Tier support two-way TLS authentication between my connect client and TiDB Serverless cluster?
+### Is two-way TLS authentication between my connection client and TiDB Cloud Serverless Tier supported?
 
 No.
 
-TiDB Serverless Tier only support one-way TLS authentication, which means your client uses public key to verify the signature of your TiDB database server certificate's private key
- while the server does not validate the client.
+TiDB Serverless Tier only supports one-way TLS authentication, which means your client uses the public key to verify the signature of your TiDB Cloud cluster certificate's private key while the cluster does not validate the client.
 
 ### Does TiDB Serverless Tier have to configure TLS to establish a secure connection?
 
 Yes.
 
-TiDB Serverless Tier only allows TLS connections and prohibits non-SSL/TLS connections. The reason is that SSL/TLS is one of the most basic security measures for you to connect to the TiDB Serverless database cluster through internet, so as to reduce the risk of data exposure to internet.
+TiDB Serverless Tier only allows TLS connections and prohibits non-SSL/TLS connections. The reason is that SSL/TLS is one of the most basic security measures for you to reduce the risk of data exposure to internet when you connect to the TiDB Serverless Tier cluster through internet.
