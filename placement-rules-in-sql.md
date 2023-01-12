@@ -9,7 +9,7 @@ summary: Learn how to schedule placement of tables and partitions using SQL stat
 >
 > SQL の配置規則は、v5.3.0 で導入された実験的機能です。構文は GA の前に変更される可能性があり、バグもある可能性があります。リスクを理解している場合は、 `SET GLOBAL tidb_enable_alter_placement = 1;`を実行してこの実験機能を有効にすることができます。
 
-SQL の配置ルールは、SQL インターフェイスを使用して TiKVクラスタのデータの保存場所を指定できるようにする機能です。この機能を使用すると、テーブルとパーティションが特定の地域、データ センター、ラック、またはホストにスケジュールされます。これは、低コストで高可用性戦略を最適化したり、データのローカル レプリカをローカルの古い読み取りに使用できるようにしたり、データの局所性要件を順守したりするなどのシナリオに役立ちます。
+SQL の配置ルールは、SQL インターフェイスを使用して TiKV クラスター内のデータの保存場所を指定できるようにする機能です。この機能を使用すると、テーブルとパーティションが特定の地域、データ センター、ラック、またはホストにスケジュールされます。これは、低コストで高可用性戦略を最適化したり、データのローカル レプリカをローカルの古い読み取りに使用できるようにしたり、データの局所性要件を順守したりするなどのシナリオに役立ちます。
 
 詳細なユーザー シナリオは次のとおりです。
 
@@ -35,13 +35,13 @@ CREATE TABLE t2 (a INT) PLACEMENT POLICY=eastandwest;
 
 直接配置オプションを使用する場合は、オブジェクト (テーブルやパーティションなど) ごとにルールを変更する必要があります。
 
-`PLACEMENT POLICY`はどのデータベース スキーマにも関連付けられておらず、グローバル スコープを持ちます。したがって、配置ポリシーを割り当てる場合、 `CREATE TABLE`特権以上の追加の特権は必要ありません。
+`PLACEMENT POLICY`はどのデータベース スキーマにも関連付けられておらず、グローバル スコープを持ちます。したがって、配置ポリシーを割り当てる場合、 `CREATE TABLE`権限以上の追加の特権は必要ありません。
 
 ## オプション参照 {#option-reference}
 
 > **ノート：**
 >
-> -   配置オプションは、各 TiKV ノードの構成で正しく指定されたラベルに依存します。たとえば、 `PRIMARY_REGION`オプションは TiKV の`region`ラベルに依存します。 TiKVクラスタで使用可能なすべてのラベルの概要を表示するには、ステートメント[`SHOW PLACEMENT LABELS`](/sql-statements/sql-statement-show-placement-labels.md)を使用します。
+> -   配置オプションは、各 TiKV ノードの構成で正しく指定されたラベルに依存します。たとえば、 `PRIMARY_REGION`オプションは TiKV の`region`ラベルに依存します。 TiKV クラスターで使用可能なすべてのラベルの概要を表示するには、ステートメント[`SHOW PLACEMENT LABELS`](/sql-statements/sql-statement-show-placement-labels.md)を使用します。
 >
 >     ```sql
 >     mysql> show placement labels;
@@ -95,7 +95,7 @@ CREATE TABLE t1 (a INT) PLACEMENT POLICY=eastandwest;
 
 クォーラムを達成できるように十分な数のフォロワーがプライマリ リージョン ( `us-east-1` ) に配置されるようにするには、 `MAJORITY_IN_PRIMARY`スケジュールを使用できます。このスケジュールは、ある程度の可用性を犠牲にして、より低いレイテンシーのトランザクションを提供するのに役立ちます。プライマリ リージョンに障害が発生した場合、 `MAJORITY_IN_PRIMARY`は自動フェールオーバーを提供できません。
 
-### 分割されたテーブルに配置を割り当てる {#assign-placement-to-a-partitioned-table}
+### パーティションテーブルに配置を割り当てる {#assign-placement-to-a-partitioned-table}
 
 > **ノート：**
 >
@@ -174,8 +174,8 @@ PARTITION BY RANGE( YEAR(purchased) ) (
 次の既知の制限事項は次のとおりです。
 
 -   Dumplingは、ダンプ配置ポリシーをサポートしていません。 [問題 #29371](https://github.com/pingcap/tidb/issues/29371)を参照してください。
--   Backup &amp; Restore (BR)、TiCDC、 TiDB Lightning、TiDB Data Migration (DM) などの TiDB ツールは、まだ配置ルールをサポートしていません。
+-   Backup &amp; Restore (BR)、TiCDC、 TiDB Lightning、TiDB Data Migration (DM) などの TiDB ツールは、配置ルールをまだサポートしていません。
 -   一時テーブルは、(直接配置または配置ポリシーによる) 配置オプションをサポートしていません。
 -   設定`PRIMARY_REGION`および`REGIONS` 、構文糖衣規則が許可されます。今後、 `PRIMARY_RACK`・`PRIMARY_ZONE`・`PRIMARY_HOST`の品種追加を予定しております。 [問題 #18030](https://github.com/pingcap/tidb/issues/18030)を参照してください。
--   TiFlash 学習者は、配置規則の構文では構成できません。
+-   TiFlash学習者は、配置規則の構文では構成できません。
 -   配置ルールは、保管中のデータが正しい TiKV ストアに存在することのみを保証します。ルールは、(ユーザー クエリまたは内部操作のいずれかを介して) 転送中のデータが特定のリージョンでのみ発生することを保証するものではありません。
