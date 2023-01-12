@@ -1,11 +1,11 @@
 ---
-title: Configure IP Access List
+title: Configure an IP Access List
 summary: Learn how to configure IP addresses that are allowed to access your Dedicated Tier cluster.
 ---
 
-# Configure IP Access List
+# Configure an IP Access List
 
-For each Dedicated Tier cluster in TiDB Cloud, you can configure an IP access list to filter internet traffic trying to access the cluster, which works similarly to a firewall access control list. After the configuration, only the clients or applications whose IP addresses are in the IP access list can connect to your Dedicated Tier cluster.
+For each Dedicated Tier cluster in TiDB Cloud, you can configure an IP access list to filter internet traffic trying to access the cluster, which works similarly to a firewall access control list. After the configuration, only the clients and applications whose IP addresses are in the IP access list can connect to your Dedicated Tier cluster.
 
 > **Note:**
 >
@@ -13,11 +13,11 @@ For each Dedicated Tier cluster in TiDB Cloud, you can configure an IP access li
 
 For a Dedicated Tier cluster, you can configure its IP access list in either of the following ways:
 
-- [Configure IP access list in standard connection](#configure-ip-access-list-in-standard-connection)
+- [Configure an IP access list in standard connection](#configure-ip-access-list-in-standard-connection)
 
-- [Configure IP access list in security settings](#configure-ip-access-list-in-security-settings)
+- [Configure an IP access list in security settings](#configure-ip-access-list-in-security-settings)
 
-## Configure IP access list in standard connection
+## Configure an IP access list in standard connection
 
 To configure the IP access list for your Dedicated Tier cluster in standard connection, take the following steps:
 
@@ -33,11 +33,11 @@ To configure the IP access list for your Dedicated Tier cluster in standard conn
 
     - If the IP access list of your cluster has been set, click **Edit** to add, edit, or remove IP addresses, and then click **Update Filter** to save the configuration.
 
-    - To allow any IP address to access your cluster (not recommended), click **Allow Access From Anywhere**, and then click **Update Filter**. According to security best practices, it is NOT recommended that you allow any IP address to access your cluster, as this would expose your cluster to the internet completely and is highly risky.
+    - To allow any IP address to access your cluster (not recommended), click **Allow Access From Anywhere**, and then click **Update Filter**. According to security best practices, it is NOT recommended that you allow any IP address to access your cluster, as this would expose your cluster to the internet completely, which is highly risky.
 
 ## Configure IP access list in security settings
 
-To configure the IP access list for your Dedicated Tier cluster in security settings, take the following steps:
+To configure an IP access list for your Dedicated Tier cluster in security settings, take the following steps:
 
 1. In the [TiDB Cloud console](https://tidbcloud.com/), navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page of your project.
 2. In the row of your Dedicated Tier cluster, click **...** and select **Security Settings**. A security setting dialog is displayed.
@@ -51,6 +51,6 @@ To configure the IP access list for your Dedicated Tier cluster in security sett
         >
         > For each Dedicated Tier cluster, you can add up to 7 IP addresses to the IP access list. To apply for a quota to add more IP addresses, contact [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md).
 
-    - To allow any IP address to access your cluster (not recommended), click **Allow Access From Anywhere**, and then click **Update Filter**. According to security best practices, it is NOT recommended that you allow any IP address to access your cluster, as this would expose your cluster to the internet completely and is highly risky.
+    - To allow any IP address to access your cluster (not recommended), click **Allow Access From Anywhere**, and then click **Update Filter**. According to security best practices, it is NOT recommended that you allow any IP address to access your cluster, as this would expose your cluster to the internet completely, which is highly risky.
 
     - To remove an IP address from the access list, click **Remove** in the line of the IP address.
