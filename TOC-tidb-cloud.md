@@ -47,6 +47,7 @@
       - [Follower Read](/develop/dev-guide-use-follower-read.md)
       - [Stale Read](/develop/dev-guide-use-stale-read.md)
     - [HTAP Queries](/develop/dev-guide-hybrid-oltp-and-olap-queries.md)
+    - [FastScan](/develop/dev-guide-use-fastscan.md)
   - Transaction
     - [Overview](/develop/dev-guide-transaction-overview.md)
     - [Optimistic and Pessimistic Transactions](/develop/dev-guide-optimistic-and-pessimistic-transaction.md)
@@ -149,6 +150,7 @@
       - [Aggregation](/explain-aggregation.md)
       - [Views](/explain-views.md)
       - [Partitions](/explain-partitions.md)
+      - [Index Merge](/explain-index-merge.md)
     - SQL Optimization Process
       - [Overview](/sql-optimization-concepts.md)
       - Logic Optimization
@@ -165,6 +167,7 @@
         - [Overview](/sql-physical-optimization.md)
         - [Index Selection](/choose-index.md)
         - [Statistics](/statistics.md)
+        - [Extended Statistics](/extended-statistics.md)
         - [Wrong Index Solution](/wrong-index-solution.md)
         - [Distinct Optimization](/agg-distinct-optimization.md)
         - [Cost Model](/cost-model.md)
@@ -447,6 +450,7 @@
         - [`TIKV_REGION_STATUS`](/information-schema/information-schema-tikv-region-status.md)
         - [`TIKV_STORE_STATUS`](/information-schema/information-schema-tikv-store-status.md)
         - [`USER_PRIVILEGES`](/information-schema/information-schema-user-privileges.md)
+        - [`VARIABLES_INFO`](/information-schema/information-schema-variables-info.md)
         - [`VIEWS`](/information-schema/information-schema-views.md)
     - [Metadata Lock](/metadata-lock.md)
   - [System Variables](/system-variables.md)
