@@ -19,7 +19,7 @@ For a Dedicated Tier cluster, you can configure its IP access list in either of 
 
 ## Configure an IP access list in standard connection
 
-To configure the IP access list for your Dedicated Tier cluster in standard connection, take the following steps:
+To configure an IP access list for your Dedicated Tier cluster in standard connection, take the following steps:
 
 1. In the [TiDB Cloud console](https://tidbcloud.com/), navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page of your project.
 2. In the row of your Dedicated Tier cluster, click **...** and select **Connect**. A dialog is displayed.
