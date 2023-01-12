@@ -35,7 +35,7 @@ To configure the IP access list for your Dedicated Tier cluster in standard conn
 
     - To allow any IP address to access your cluster (not recommended), click **Allow Access From Anywhere**, and then click **Update Filter**. According to security best practices, it is NOT recommended that you allow any IP address to access your cluster, as this would expose your cluster to the internet completely, which is highly risky.
 
-## Configure IP access list in security settings
+## Configure an IP access list in security settings
 
 To configure an IP access list for your Dedicated Tier cluster in security settings, take the following steps:
 
