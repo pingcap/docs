@@ -5,118 +5,164 @@ summary: Learn about the log auditing feature for the TiDB Cloud Console.
 
 # Console Audit Logging
 
-TiDB Cloud provides the audit logging feature for TiDB Cloud console operations, which records the history of user access details (such as user login to the Console and cluster creation operations).
+Console audit log is a capability provided by TiDB Cloud. It is used to track various behaviors and operations of users on the console. For example: log in to the TiDB Cloud console, create a cluster, etc.
+
+## Prerequisites
+
+- You are the owner of your organization in TiDB Cloud. Otherwise, you cannot see the audit-related options in the TiDB Cloud console. For more information, see [Manage role access](/tidb-cloud/manage-user-access.md#manage-role-access).
+- You can only enable and disable the console audit log for your organization. You can only track the actions of users in your organization.
+- After the audit log is enabled, all event types will be recorded, and you cannot specify auditing filter rules.
+
+## Enable console audit log
+
+You can enable the console audit log function.
+
+1. Click <MDSvgIcon name="icon-top-organization" /> **Organization** in the upper-right corner of the TiDB Cloud console.
+2. Click **Console Audit Log**. The Console Audit Log management page is displayed by default.
+3. Click **Enable console audit log**. Or click **Setting** in the upper-right corner and enable Console audit log in the pop-up window
+
+## Disable console audit log
+
+You can disable the console audit log function.
+
+1. Click <MDSvgIcon name="icon-top-organization" /> **Organization** in the upper-right corner of the TiDB Cloud console.
+2. Click **Console Audit Log**. The Console Audit Log management page is displayed by default.
+3. Click **Setting** in the upper-right corner and disable Console audit log in the pop-up window
+
+## View console audit logs
+
+You can only view the console audit log information of your organization. 
+
+1. Click <MDSvgIcon name="icon-top-organization" /> **Organization** in the upper-right corner of the TiDB Cloud console.
+2. Click **Console Audit Log**. The Console Audit Log management page is displayed by default. You can view the latest console audit log information of your organization.
+3. Click **Type** tab. You can filter the console audit log information you need to view according to the event type.
+4. Click **Result** tab. You can filter the console audit log information you need to view according to the event result.
+5. Click **All time** tab. You can filter the console audit log information you need to view according to the time period when the event occurred.
+6. Click **Advanced filter**  tab. You can filter the console audit log information you need to view according to other fields.
+
+## Export console audit logs
+
+You can export the console audit log information of your organization. 
+
+1. Click <MDSvgIcon name="icon-top-organization" /> **Organization** in the upper-right corner of the TiDB Cloud console.
+2. Click **Console Audit Log**. The Console Audit Log management page is displayed by default.
+3. If you need to export a specific part of console audit logs, you can filter through various conditions. Otherwise, skip this step.
+4. Click **Export** tab. You can choose to download the selected console audit log information in JSON or CSV format.
+
+## Console audit log storage policy
+
+The storage time is 90 days, after which the console audit logs will be automatically cleaned up.
 
 > **Note:**
 >
-> Currently, the **audit logging** feature is experimental. The output is subject to change.
+> Console audit log temporarily does not support users to set the storage location of logs.
 
-## Limitations
+## Console audit event type description
 
-Currently, the console audit logging feature has the following limitations:
+Various user activities on the TiDB Cloud console are recorded in the console audit log. The console audit log covers the following event types:
 
-- Console audit logging is enabled by default and cannot be disabled by users.
-- You cannot specify the audit filtering rules for the feature. 
-- You can access the audit logs only with the help of PingCAP support.
-
-## Audit event types
-
-All user operations on the TiDB Cloud Console are recorded in the audit logs as events. Audit logs cover the following event types:
-
-| Audit event type | Description |
+| Console audit event type | Description |
 |---|---|
-| AuditEventSignIn | Sign in |
-| AuditEventSignOut | Sign out |
-| AuditEventUpdateUserProfile | Update user's first name and last name |
-| AuditEventUpdateMFA | Enable or disable MFA |
-| AuditEventCreateProject | Create a new project |
-| AuditEventUpdateProject | Update the project name |
-| AuditEventDeleteProject | Delete a project |
-| AuditEventInviteUserIntoProject | Invite a user into a project |
-| AuditEventDeleteProjectUser | Delete a project user |
-| AuditEventUpdateOrg | Update organization name and time zone |
-| AuditEventCreateIntegration | Create an integration |
-| AuditEventDeleteIntegration | Delete an integration |
-| AuditEventListOrgUsers | List users in organization |
-| AuditEventListProjectUsers | List users in a project |
-| AuditEventAddNewPaymentMethod | Add a new credit card |
-| AuditEventUpdatePaymentMethod | Update credit card information |
-| AuditEventDeletePaymentMethod | Delete a credit card |
-| AuditEventCreateAWSVpcPeering | Create an AWS VPC Peering |
-| AuditEventCreateGCPVpcPeering | Create a GCP VPC Peering | 
-| AuditEventListAWSVpcPeering | List all AWS VPC Peerings in a project |
-| AuditEventListGCPVpcPeering | List all GCP VPC Peerings in a project |
-| AuditEventDeleteAWSVpcPeering | Delete an AWS VPC Peering |
-| AuditEventDeleteGCPVpcPeering | Delete a GCP VPC Peering |
-| AuditEventGetProjectTrafficFilter | Get traffic filter list of a project |
-| AuditEventUpdateProjectTrafficFilter | Update traffic filter list of a project |
-| AuditEventGetTrafficFilter | Get traffic filter list of a cluster |
-| AuditEventUpdateTrafficFilter | Update traffic filter list of a cluster |
-| AuditEventCreateProjectCIDR | Create a new project CIDR |
-| AuditEventGetProjectCIDR | List the CIDR of a region |
-| AuditEventGetProjectRegionCIDR | List all CIDRs in a project |
-| AuditEventDeleteBackupInRecycleBin | Delete backups of deleted clusters in recycle bin |
-| AuditEventChangeClusterRootPassword | Reset the root password of a cluster |
-| AuditEventCreateImportTask | Create an import task |
-| AuditEventCancleImportTask | Cancel an import task |
-| AuditEventExitImportTask | Exit an import task |
-| AuditEventCreateCluster | Create a cluster |
-| AuditEventDeleteCluster | Delete a cluster |
-| AuditEventScaleCluster | Scale a cluster |
-| AuditEventCreateBackup | Make a backup |
-| AuditEventDeleteBackup | Delete a backup |
-| AuditEventRestoreBackup | Restore from a backup |
-| AuditEventUpdateAuditLogStatus | Enable or disable database audit logging |
-| AuditEventCreateAuditLogAccessRecord | Add database audit log filter conditions |
-| AuditEventDeleteAuditLogAccessRecord | Delete database audit log filter conditions |
-| AuditEventUpdateUserRole | Modify user roles |
+| CreateOrganization | Create an organization |
+| LoginOrganization | User logs into organization |
+| SwitchOrganization | User switches out from current organization |
+| LogoutOrganization | User logs out from organization |
+| InviteUserToOrganization | Invite a user to join the organization |
+| DeleteInvitationToOrganization | Delete a user's invitation to join the organization |
+| ResendInvitationToOrganization | Resend the invitation to join the organization for a user |
+| ConfirmJoinOrganization | The invited user confirms joining the organization |
+| DeleteUserFromOrganization | Delete a joined user from the organization |
+| UpdateUserRoleInOrganization | Update a user's role in the organization |
+| CreateAPIKey | Create an API Key |
+| EditAPIKey | Edit an API Key |
+| DeleteAPIKey | Delete an API Key |
+| UpdateTimezone | Update your organization's time zone |
+| ShowBill | Show organization bill  |
+| DownloadBill | Download organization bill |
+| ShowCredits | Show organization credits |
+| AddPaymentCard | Add a payment card |
+| UpdatePaymentCard | Update a payment card |
+| DeletePaymentCard | Delete a payment card |
+| SetDefaultPaymentCard | Set default payment card |
+| EditBillingProfile | Edit billing profile information |
+| ContractAction | Organizing contract-related activities |
+| EnableConsoleAuditLog | Enable console audit log |
+| ShowConsoleAuditLog | Show console audit log |
+| InviteUserToProject | Invite a user to join the project |
+| DeleteInvitationToProject | Delete a user's invitation to join the project |
+| ResendInvitationToProject | Resend the invitation to join the project for a user |
+| ConfirmJoinProject | The invited user confirms joining the project |
+| DeleteUserFromProject | Delete a joined user from the project |
+| CreateProject | Create a project |
+| CreateProjectCIDR | Create a new project CIDR |
+| CreateAWSVPCPeering | Create an AWS VPC Peering |
+| DeleteAWSVPCPeering | Delete an AWS VPC Peering |
+| CreateGCPVPCPeering | Create a GCP VPC Peering |
+| DeleteGCPVPCPeering | Delete a GCP VPC Peering |
+| CreateAWSPrivateEndPoint | Create AWS private endpoint |
+| EditAWSPrivateEndPoint | Edit AWS private endpoint |
+| DeleteAWSPrivateEndPoint | Delete AWS private endpoint |
+| SubscribeAlerts | Subscribe alerts |
+| UnsubscribeAlerts | Unsubscribe alerts |
+| CreateDatadogIntegration | Create datadog integration |
+| DeleteDatadogIntegration | Delete datadog integration |
+| CreateVercelIntegration | Create vercel integration |
+| DeleteVercelIntegration | Delete vercel integration |
+| CreatePrometheusIntegration | Create prometheus integration |
+| DeletePrometheusIntegration | Delete prometheus integration |
+| CreateCluster | Create a cluster |
+| DeleteCluster | Delete a cluster |
+| PauseCluster | Pause a cluster |
+| ResumeCluster | Resume a cluster |
+| ScaleCluster | Scale a cluster |
+| DownloadTiDBClusterCA | Download TiDB cluster CA certificate |
+| OpenWebSQLConsole | Connect to TiDB Cluster through Web SQL |
+| SetRootPassword | Set the root password of TiDB cluster |
+| UpdateIPAccessList | Update the IP access list of TiDB cluster |
+| DeleteAccessList | Delete the IP access list of TiDB cluster |
+| SetAutoBackup | Set the automatic backup mechanism of TiDB cluster |
+| DoManualBackup | Do manual backup of TiDB cluster |
+| DeleteBackupTask | Delete backup task |
+| DeleteBackup | delete backup file |
+| RestoreFromBackup | Restore to TiDB cluster based on the backup file |
+| RestoreFromTrash | Restore to TiDB cluster based on the backup files in the trash |
+| ImportDataFromAWS | Import data from AWS |
+| ImportDataFromGCP | Import data from GCP |
+| CreateMigrationJob | Create migration job |
+| SuspendMigrationJob | Suspend migration job |
+| ResumeMigrationJob | Resume migration job |
+| DeleteMigrationJob | Delete migration job |
+| ShowDiagnose | Show diagnose information |
+| DBAuditLogAction | Set the activity of database audit log |
+| AddDBAuditFilter | Add database audit log filter |
+| DeleteDBAuditFilter | Delete database audit log filter |
+| EditProject | Edit a project's information |
+| DeleteProject | Delete a project |
+| BindSupportPlan | Bind support plan |
+| CancelSupportPlan | Cancel support plan |
+| UpdateOrganizationName | Update organization name |
+| CreatePrivateEndpointService | Create private endpoint service |
+| DeletePrivateEndpointService | Delete private endpoint service |
 
-## Audit log storage policy
+## Console audit log field description
 
-- The audit log information is stored in AWS ES.
-- The storage time is 90 days, after which the audit logs will be automatically cleaned up.
-
-## View audit logs
-
-The console audit logs are temporarily accessible only to internal personnel of TiDB Cloud. If you need to view the logs, contact [PingCAP support team](/tidb-cloud/tidb-cloud-support.md).
-
-## Audit log fields
-
-The fields in audit logs include basic fields and extended fields.
-
-The basic fields are as follows:
+For the console audit log, each event record needs to be clear and complete to ensure that the information is sufficient to track user activities. TiDB Cloud provides the following fields:
 
 | Field name | Data type | Description |
 |---|---|---|
-| timestamp | timestamp | Time of event |
-| auditEventType | string | Event type |
-| userID | uint64 | User ID |
-| clientIP | string | Client IP |
-| isSuccess | bool | Event result |
-
-Extended fields supplement the description information of events based on different event types to ensure the integrity and availability of audit information
-
-> **Note:**
->
-> For scenarios where the basic fields cannot clearly describe the event, the following table shows the extended field information of these event types. Events not in the table have no extension fields.
-
-| Audit event type | Extended fields | Data type for extended fields | Description for extended fields |
-|---|---|---|---|
-| AuditEventUpdateMFA | enableMFA | bool |Enable or disable MFA |
-| AuditEventCreateProject | projectName | string | Project name |
-| AuditEventUpdateProject | oldProjectName <br/> newProjectName | string <br/> string | Old Project name <br/> New project name |
-| AuditEventDeleteProject | projectName | string | Project name |
-| AuditEventInviteUserIntoProject | email <br/> Role | string <br/> string | Email <br/> Role name |
-| AuditEventDeleteProjectUser | email <br/> Role | string <br/> string | Email <br/> Role name |
-| AuditEventUpdateOrg | orgName <br/> timeZone | string <br/> uint| Organization name <br/> Time zone |
-| AuditEventCreateIntegration | integrationType | string | Integration type |
-| AuditEventDeleteIntegration | integrationType | string | Integration type |
-| AuditEventAddNewPaymentMethod | cardNumber | string | Payment card number (information desensitized) |
-| AuditEventUpdatePaymentMethod | cardNumber | string | Payment card number (information desensitized) <br/> (Currently not getting full field information) |
-| AuditEventDeletePaymentMethod |  |  | (Currently not getting full field information) |
-| AuditEventCreateCluster | clusterName | string | Cluster name |
-| AuditEventDeleteCluster | clusterName | string | Cluster name |
-| AuditEventCreateBackup | backupName | string | Backup name |
-| AuditEventRestoreBackup | clusterName | string | Cluster name |
-| AuditEventUpdateAuditLogStatus | enableAuditLog | bool | Enable or disable database audit logging |
-| AuditEventUpdateUserRole | oldRole <br/> newRole | string <br/> string | Old role name <br/> New role name |
+| type | string | Event type |
+| ends_at | timestamp | Event time |
+| operator_type | enum | Operator type: user, api_key |
+| operator_id | uint64 | Operator ID |
+| operator_name | string | Operator name |
+| operator_ip | string | Operator's IP address |
+| operator_login_method | enum | Operator's login method: google, github, email, api_key |
+| org_id | uint64 | Organization ID to which the event belongs |
+| org_name | string | Organization name to which the event belongs |
+| project_id | uint64 | Project ID to which the event belongs |
+| project_name | string | Project name to which the event belongs |
+| cluster_id | uint64 | Cluster ID to which the event belongs |
+| cluster_name | string | Cluster name to which the event belongs |
+| trace_id | string | Trace ID of the request initiated by the operator |
+| result | enum | Event result: success, failure |
+| details | json | Detailed description of the event |
