@@ -15,7 +15,7 @@ The detailed user scenarios are as follows:
 
 - Merge multiple databases of different applications to reduce the cost on database maintenance
 - Increase replica count for important data to improve the application availability and data reliability
-- Store new data into NVMe storage and store old data into SSDs to lower the cost on data archiving and storage 
+- Store new data into NVMe storage and store old data into SSDs to lower the cost on data archiving and storage
 - Schedule the leaders of hotspot data to high-performance TiKV instances
 - Separate cold data to lower-cost storage mediums to improve cost efficiency
 
@@ -262,5 +262,8 @@ The following known limitations are as follows:
 
 * Temporary tables do not support placement options.
 * Syntactic sugar rules are permitted for setting `PRIMARY_REGION` and `REGIONS`. In the future, we plan to add varieties for `PRIMARY_RACK`, `PRIMARY_ZONE`, and `PRIMARY_HOST`. See [issue #18030](https://github.com/pingcap/tidb/issues/18030).
+<<<<<<< HEAD
 * TiFlash learners are not configurable through Placement Rules syntax.
+=======
+>>>>>>> f460b1216 (update a ddl command (#11935))
 * Placement rules only ensure that data at rest resides on the correct TiKV store. The rules do not guarantee that data in transit (via either user queries or internal operations) only occurs in a specific region.
