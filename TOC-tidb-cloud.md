@@ -36,7 +36,7 @@
     - [Prepared Statements](/develop/dev-guide-prepared-statement.md)
   - Read Data
     - [Query Data from a Single Table](/develop/dev-guide-get-data-from-single-table.md)
-    - [Multi-table Join Queries](/develop/dev-guide-join-tables.md)
+    - [Multi-Table Join Queries](/develop/dev-guide-join-tables.md)
     - [Subquery](/develop/dev-guide-use-subqueries.md)
     - [Paginate Results](/develop/dev-guide-paginate-results.md)
     - [Views](/develop/dev-guide-use-views.md)
@@ -116,7 +116,7 @@
       - [CSV Configurations for Importing Data](/tidb-cloud/csv-config-for-import-data.md)
       - [Troubleshoot Access Denied Errors during Data Import from Amazon S3](/tidb-cloud/troubleshoot-import-access-denied-error.md)
 - Explore Data
-  - [Chat2Query (beta)](/tidb-cloud/explore-data-with-chat2query.md)
+  - [Chat2Query (Beta)](/tidb-cloud/explore-data-with-chat2query.md)
 - Stream Data
   - [Changefeed Overview](/tidb-cloud/changefeed-overview.md)
   - [To MySQL Sink](/tidb-cloud/changefeed-sink-to-mysql.md)
@@ -177,7 +177,7 @@
   - Garbage Collection (GC)
      - [Overview](/garbage-collection-overview.md)
      - [Configuration](/garbage-collection-configuration.md)
-  - [Tune TiFlash performance](/tiflash/tune-tiflash-performance.md)
+  - [Tune TiFlash Performance](/tiflash/tune-tiflash-performance.md)
 - Security
   - Identity Access Control
     - [Password Authentication](/tidb-cloud/tidb-cloud-password-authentication.md)
@@ -202,6 +202,7 @@
   - [API Reference](https://docs.pingcap.com/tidbcloud/api/v1beta)
 - Integrations
   - [Airbyte](/tidb-cloud/integrate-tidbcloud-with-airbyte.md)
+  - [Amazon AppFlow](/develop/dev-guide-aws-appflow-integration.md)
   - [Cloudflare](/tidb-cloud/integrate-tidbcloud-with-cloudflare.md)
   - [Datadog](/tidb-cloud/monitor-datadog-integration.md)
   - [dbt](/tidb-cloud/integrate-tidbcloud-with-dbt.md)
@@ -217,7 +218,6 @@
     - [Use Restore Resource](/tidb-cloud/terraform-use-restore-resource.md)
   - [Vercel](/tidb-cloud/integrate-tidbcloud-with-vercel.md)
   - [Zapier](/tidb-cloud/integrate-tidbcloud-with-zapier.md)
-  - [Amazon AppFlow](/develop/dev-guide-aws-appflow-integration.md)
 - Reference
   - TiDB Cluster Architecture
     - [Overview](/tidb-architecture.md)
