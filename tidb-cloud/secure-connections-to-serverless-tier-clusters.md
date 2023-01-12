@@ -116,7 +116,7 @@ db, err := sql.Open("mysql", "<usename>:<your_password>@tcp(<host>:4000)/test?tl
 
 <div label="Node.js">
 
-[Mysql](https://www.npmjs.com/package/mysql2)'s TLS connection configurations are used here as an example.
+[Mysql2](https://www.npmjs.com/package/mysql2)'s TLS connection configurations are used here as an example.
 
 ```
 host: '<host>', port: 4000,user: '<username>', password: '<your_password>', database: 'test', ssl: {minVersion: 'TLSv1.2', rejectUnauthorized: true}
