@@ -13,9 +13,9 @@ For each Dedicated Tier cluster in TiDB Cloud, you can configure an IP access li
 
 For a Dedicated Tier cluster, you can configure its IP access list in either of the following ways:
 
-- [Configure an IP access list in standard connection](#configure-ip-access-list-in-standard-connection)
+- [Configure an IP access list in standard connection](#configure-an-ip-access-list-in-standard-connection)
 
-- [Configure an IP access list in security settings](#configure-ip-access-list-in-security-settings)
+- [Configure an IP access list in security settings](#configure-an-ip-access-list-in-security-settings)
 
 ## Configure an IP access list in standard connection
 
