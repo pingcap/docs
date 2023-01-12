@@ -29,7 +29,7 @@ Print TiDB Lightning config information.
 ```
 [INFO] [lightning.go:312] ["load data source start"] 
 ```
-[lightning.go:312](https://github.com/pingcap/tidb/blob/v5.4.0/br/pkg/lightning/lightning.go#L312): Start to [scan data source dir or external storage]((https://github.com/pingcap/tidb/blob/v5.4.0/br/pkg/lightning/mydump/loader.go#L205)) defined in Lightning [mydumper data-source-dir config field](https://github.com/pingcap/tidb/blob/v5.4.0/br/pkg/lightning/config/config.go#L447), and load all data source file meta info into [internal data structure](https://github.com/pingcap/tidb/blob/v5.4.0/br/pkg/lightning/mydump/loader.go#L82) for future usage.
+[lightning.go:312](https://github.com/pingcap/tidb/blob/v5.4.0/br/pkg/lightning/lightning.go#L312): Start to [scan data source dir or external storage](https://github.com/pingcap/tidb/blob/v5.4.0/br/pkg/lightning/mydump/loader.go#L205) defined in Lightning [mydumper data-source-dir config field](https://github.com/pingcap/tidb/blob/v5.4.0/br/pkg/lightning/config/config.go#L447), and load all data source file meta info into [internal data structure](https://github.com/pingcap/tidb/blob/v5.4.0/br/pkg/lightning/mydump/loader.go#L82) for future usage.
 
 ```
 [INFO] [loader.go:289] ["[loader] file is filtered by file router"] [path=metadata]
@@ -103,7 +103,7 @@ It calculates the file size vs. kv pairs size ratio by sampling the first source
 [INFO] [restore.go:1683] ["switch to import mode"]
 ```
 [restore.go:1683](https://github.com/pingcap/tidb/blob/v5.4.0/br/pkg/lightning/restore/restore.go#L1683):
-In local backend mode, it turns each TiKV node into import mode to speed up import process, but sacrifices its storage space. If it uses tidb backend mode, it does not need to switch TiKV to import mode.
+In local backend mode, it turns each TiKV node into import mode to speed up import process, but sacrifices its storage space. If it uses tidb backend mode, it does not need to switch TiKV to [import mode](https://docs.pingcap.com/tidb/stable/tidb-lightning-glossary#import-mode).
 
 ```
 [INFO] [restore.go:1462] ["restore table start"] [table=`sysbench`.`sbtest1`]
