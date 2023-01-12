@@ -262,5 +262,8 @@ The following known limitations are as follows:
 
 * Temporary tables do not support placement options.
 * Syntactic sugar rules are permitted for setting `PRIMARY_REGION` and `REGIONS`. In the future, we plan to add varieties for `PRIMARY_RACK`, `PRIMARY_ZONE`, and `PRIMARY_HOST`. See [issue #18030](https://github.com/pingcap/tidb/issues/18030).
+<<<<<<< HEAD
 * In TiDB v6.1.0 and v6.1.1, TiFlash learners are not configurable through Placement Rules syntax.
+=======
+>>>>>>> f460b1216 (update a ddl command (#11935))
 * Placement rules only ensure that data at rest resides on the correct TiKV store. The rules do not guarantee that data in transit (via either user queries or internal operations) only occurs in a specific region.
