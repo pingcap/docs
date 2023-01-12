@@ -1443,30 +1443,11 @@ MPP is a distributed computing framework provided by the TiFlash engine, which a
 
 ### tidb_enable_extended_stats
 
-<CustomContent platform="tidb-cloud">
-
-> **Note:**
->
-> This TiDB variable is not applicable to TiDB Cloud.
-
-</CustomContent>
-
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
 - Type: Boolean
 - Default value: `OFF`
-
-<CustomContent platform="tidb">
-
 - This variable indicates whether TiDB can collect the extended statistic to guide the optimizer. See [Introduction to Extended Statistics](/extended-statistics.md) for more information.
-
-</CustomContent>
-
-<CustomContent platform="tidb-cloud">
-
-- This variable indicates whether TiDB can collect the extended statistic to guide the optimizer. See [Introduction to Extended Statistics](https://docs.pingcap.com/tidb/stable/extended-statistics) for more information.
-
-</CustomContent>
 
 ### tidb_enable_external_ts_read <span class="version-mark">New in v6.4.0</span>
 
