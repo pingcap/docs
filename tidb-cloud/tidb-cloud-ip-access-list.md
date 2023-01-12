@@ -51,6 +51,8 @@ To configure an IP access list for your Dedicated Tier cluster in security setti
         >
         > For each Dedicated Tier cluster, you can add up to 7 IP addresses to the IP access list. To apply for a quota to add more IP addresses, contact [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md).
 
-    - To allow any IP address to access your cluster (not recommended), click **Allow Access From Anywhere**, and then click **Update Filter**. According to security best practices, it is NOT recommended that you allow any IP address to access your cluster, as this would expose your cluster to the internet completely, which is highly risky.
+    - To allow any IP address to access your cluster (not recommended), click **Allow Access From Anywhere**. According to security best practices, it is NOT recommended that you allow any IP address to access your cluster, as this would expose your cluster to the internet completely, which is highly risky.
 
     - To remove an IP address from the access list, click **Remove** in the line of the IP address.
+
+4. Click **Apply** to save the configuration.
