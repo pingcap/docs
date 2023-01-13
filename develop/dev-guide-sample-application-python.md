@@ -313,7 +313,6 @@ For more information about how to use peewee, refer to [peewee documentation](ht
 
 [mysqlclient](https://pypi.org/project/mysqlclient/) is a popular open-source driver for Python. The following uses mysqlclient 2.1.1 as an example. Drivers for Python are more convenient to use than other languages, but they do not shield the underlying implementation and require manual management of transactions. If there are not a lot of scenarios where SQL is required, it is recommended to use ORM, which can help reduce the coupling of your program.
 
-
 ```python
 import uuid
 from typing import List
