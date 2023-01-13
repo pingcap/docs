@@ -268,7 +268,7 @@ For an example using PyMySQL to build a TiDB application, see [Build a Simple CR
 
 Support level: **Compatible**
 
-Follow the instructions in the [mysqlclient documentation](https://pypi.org/project/mysqlclient/) to download and configure the driver for use. Version **2.1.1** and above is recommended.
+You can follow the [mysqlclient documentation](https://pypi.org/project/mysqlclient/) to download and configure the driver. It is recommended to use mysqlclient 2.1.1 or later versions.
 
 For an example of using mysqlclient to build a TiDB application, see [Build a Simple CRUD App with TiDB and Python](/develop/dev-guide-sample-application-python.md).
 
