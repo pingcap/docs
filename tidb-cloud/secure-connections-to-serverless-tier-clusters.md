@@ -29,7 +29,7 @@ In the [TiDB Cloud console](https://tidbcloud.com/), you can get examples of dif
 
     > **Note:**
     >
-    > - The randomly password consists of 16 characters, including uppercase and lowercase letters, numbers, and special characters.
+    > - The random password consists of 16 characters, including uppercase and lowercase letters, numbers, and special characters.
     > - After you close this dialog, the generated password will not show again, so you need to save the password in a secure location. If you forget it, you can click **Reset password** in this dialog to reset it.
     > - The Serverless Tier cluster can be accessed through the internet. If you need to use the password elsewhere, it is recommended that you reset it to ensure the database security.
 
@@ -132,7 +132,7 @@ host: '<host>', port: 4000,user: '<username>', password: '<your_password>', data
 
 ### Root certificate issuance and validity
 
-TiDB Serverless Tier uses certificates from [Let's Encrypt](https://letsencrypt.org/) as a Certificate Authority (CA) for TLS connection between clients and TiDB Serverless Tier clusters.If the Serverless Tier certificate expires, it will be automatically rotated without affecting the normal operation of your dedicated tier cluster and the established TLS secure connection.
+TiDB Serverless Tier uses certificates from [Let's Encrypt](https://letsencrypt.org/) as a Certificate Authority (CA) for TLS connection between clients and TiDB Serverless Tier clusters. Once the Serverless Tier certificate expires, it will be automatically rotated without affecting the normal operations of your cluster and the established TLS secure connection.
 
 > **Note:**
 >
@@ -185,7 +185,7 @@ Windows does not offer a specific path to the CA root. Instead, it uses the [reg
 1. Download the [Mozilla CA Certificate bundle](https://curl.se/docs/caextract.html) and save it in a path you prefer, such as `<path_to_mozilla_ca_cert_bundle>`.
 2. Use the path (`<path_to_mozilla_ca_cert_bundle>`) as your CA root path when you connect to a Serverless Tier cluster.
 
-## FAQ
+## FAQs
 
 ### Which TLS versions are supported to connect to my TiDB Cloud Serverless Tier cluster?
 
