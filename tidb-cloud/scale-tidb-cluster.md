@@ -51,7 +51,7 @@ You can also increase the number of TiDB, TiKV, or TiFlash nodes using TiDB Clou
 
 ### Decrease node number
 
-To decrease the number of TiDB nodes, take the following steps:
+To decrease the number of TiDB, TiKV, or TiFlash nodes, take the following steps:
 
 1. In the TiDB Cloud console, navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page of your project.
 2. In the row of the cluster that you want to scale, click **...**.
@@ -61,22 +61,14 @@ To decrease the number of TiDB nodes, take the following steps:
     > Alternatively, you can also click the name of the cluster that you want to scale on the **Clusters** page and click **...** in the upper-right corner.
 
 3. Click **Modify** in the drop-down menu. The **Modify Cluster** page is displayed.
-4. On the **Modify Cluster** page, decrease the number of TiDB nodes.
+4. On the **Modify Cluster** page, decrease the number of TiDB, TiKV, or TiFlash nodes.
 5. Click **Confirm**.
-
-To decrease the number of TiKV or TiFlash nodes, you need to submit a support ticket. The PingCAP support team will contact you and complete the scaling within the agreed time.
 
 > **Warning:**
 >
 > Decreasing TiKV or TiFlash node number can be risky, which might lead to insufficient storage space, excessive CPU usage, or excessive memory usage on remaining nodes.
 
-To submit a support ticket, perform the steps in [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md). For each node to be scaled, provide the following information in the **Description** box:
-
-- Cluster name: xxx
-- Cloud provider: GCP or AWS
-- Node type: TiKV or TiFlash
-- Current node number: xxx
-- Expected node number: xxx
+You can also increase the number of TiDB, TiKV, or TiFlash nodes using TiDB Cloud API through the [Modify a Dedicated Tier cluster](https://docs.pingcap.com/tidbcloud/api/v1beta#tag/Cluster/operation/UpdateCluster) endpoint. Currently, TiDB Cloud API is still in beta. For more information, see [TiDB Cloud API Documentation](https://docs.pingcap.com/tidbcloud/api/v1beta).
 
 ## Change node storage
 
