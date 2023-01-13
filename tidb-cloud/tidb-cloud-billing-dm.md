@@ -57,8 +57,6 @@ Note that if you are using AWS PrivateLink or VPC peering connections, and if th
 
 The cross-region and cross-AZ traffic prices are the same as those for TiDB Cloud. For more information, see [TiDB Cloud Pricing Details](https://en.pingcap.com/tidb-cloud-pricing-details/).
 
-If the data between the upstream database and the Data Migration job is through the public internet, TiDB Cloud will not charge for that traffic, regardless of whether the upstream database and the Data Migration job are in different regions or AZs.
-
 ## See also
 
 - [Migrate from MySQL-Compatible Databases Using Data Migration](/tidb-cloud/migrate-from-mysql-using-data-migration.md)

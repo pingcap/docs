@@ -36,7 +36,7 @@
     - [Prepared Statements](/develop/dev-guide-prepared-statement.md)
   - Read Data
     - [Query Data from a Single Table](/develop/dev-guide-get-data-from-single-table.md)
-    - [Multi-table Join Queries](/develop/dev-guide-join-tables.md)
+    - [Multi-Table Join Queries](/develop/dev-guide-join-tables.md)
     - [Subquery](/develop/dev-guide-use-subqueries.md)
     - [Paginate Results](/develop/dev-guide-paginate-results.md)
     - [Views](/develop/dev-guide-use-views.md)
@@ -115,6 +115,8 @@
       - [Naming Conventions for Data Import](/tidb-cloud/naming-conventions-for-data-import.md)
       - [CSV Configurations for Importing Data](/tidb-cloud/csv-config-for-import-data.md)
       - [Troubleshoot Access Denied Errors during Data Import from Amazon S3](/tidb-cloud/troubleshoot-import-access-denied-error.md)
+- Explore Data
+  - [Chat2Query (Beta)](/tidb-cloud/explore-data-with-chat2query.md)
 - Stream Data
   - [Changefeed Overview](/tidb-cloud/changefeed-overview.md)
   - [To MySQL Sink](/tidb-cloud/changefeed-sink-to-mysql.md)
@@ -175,12 +177,16 @@
   - Garbage Collection (GC)
      - [Overview](/garbage-collection-overview.md)
      - [Configuration](/garbage-collection-configuration.md)
-  - [Tune TiFlash performance](/tiflash/tune-tiflash-performance.md)
+  - [Tune TiFlash Performance](/tiflash/tune-tiflash-performance.md)
 - Security
   - Identity Access Control
     - [Password Authentication](/tidb-cloud/tidb-cloud-password-authentication.md)
+    - [SSO Authentication](/tidb-cloud/tidb-cloud-sso-authentication.md)
     - [Identity Access Management](/tidb-cloud/manage-user-access.md)
   - Network Access Control
+    - [Configure an IP Access List](/tidb-cloud/configure-ip-access-list.md)
+    - [Connect via Private Endpoint](/tidb-cloud/set-up-private-endpoint-connections.md)
+    - [Connect via VPC Peering](/tidb-cloud/set-up-vpc-peering-connections.md) 
     - [Secure Connections to Serverless Tier Clusters](/tidb-cloud/secure-connections-to-serverless-tier-clusters.md)
   - Database Access Control
     - [Configure Cluster Security Settings](/tidb-cloud/configure-security-settings.md)
@@ -199,6 +205,8 @@
   - [API Reference](https://docs.pingcap.com/tidbcloud/api/v1beta)
 - Integrations
   - [Airbyte](/tidb-cloud/integrate-tidbcloud-with-airbyte.md)
+  - [Amazon AppFlow](/develop/dev-guide-aws-appflow-integration.md)
+  - [Cloudflare](/tidb-cloud/integrate-tidbcloud-with-cloudflare.md)
   - [Datadog](/tidb-cloud/monitor-datadog-integration.md)
   - [dbt](/tidb-cloud/integrate-tidbcloud-with-dbt.md)
   - [n8n](/tidb-cloud/integrate-tidbcloud-with-n8n.md)
@@ -213,7 +221,6 @@
     - [Use Restore Resource](/tidb-cloud/terraform-use-restore-resource.md)
   - [Vercel](/tidb-cloud/integrate-tidbcloud-with-vercel.md)
   - [Zapier](/tidb-cloud/integrate-tidbcloud-with-zapier.md)
-  - [Amazon AppFlow](/develop/dev-guide-aws-appflow-integration.md)
 - Reference
   - TiDB Cluster Architecture
     - [Overview](/tidb-architecture.md)
@@ -242,7 +249,7 @@
       - [`ADMIN CANCEL DDL`](/sql-statements/sql-statement-admin-cancel-ddl.md)
       - [`ADMIN CHECKSUM TABLE`](/sql-statements/sql-statement-admin-checksum-table.md)
       - [`ADMIN CHECK [TABLE|INDEX]`](/sql-statements/sql-statement-admin-check-table-index.md)
-      - [`ADMIN SHOW DDL [JOBS|QUERIES]`](/sql-statements/sql-statement-admin-show-ddl.md)
+      - [`ADMIN SHOW DDL [JOBS|JOB QUERIES]`](/sql-statements/sql-statement-admin-show-ddl.md)
       - [`ALTER DATABASE`](/sql-statements/sql-statement-alter-database.md)
       - [`ALTER INDEX`](/sql-statements/sql-statement-alter-index.md)
       - [`ALTER TABLE`](/sql-statements/sql-statement-alter-table.md)
