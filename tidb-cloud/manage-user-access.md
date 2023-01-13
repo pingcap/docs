@@ -43,7 +43,7 @@ To switch between organizations, take the following steps:
 
 ### Set the time zone for your organization
 
-If you are the organization owner, you can modify the system display time according to your time zone.
+By default, the TiDB Cloud console displays time according to the time zone of your browser. If you are an organization owner, you can modify the time zone setting.
 
 To change the local timezone setting, take the following steps:
 
