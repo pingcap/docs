@@ -61,7 +61,7 @@ If a query encounters unsupported push-down calculations, TiDB needs to complete
 
 ## Examples
 
-This section illustrates operator and expression pushdown to TiFlash through some examples.
+This section provides some examples of pushing down operators and expressions to TiFlash.
 
 ### Example 1: Push operators down to TiFlash
 
@@ -83,7 +83,7 @@ EXPLAIN SELECT * FROM t LIMIT 3;
 5 rows in set (0.18 sec)
 ```
 
-In the preceding example, the operator `Limit` is pushed down to TiFlash for filtering data, which helps reduce network traffic and network overhead.
+In the preceding example, the operator `Limit` is pushed down to TiFlash for filtering data, which helps reduce the amount of data to be transferred over the network and reduce the network overhead.
 
 ### Example 2: Push expressions down to TiFlash
 
@@ -109,9 +109,9 @@ EXPLAIN SELECT MAX(id + a) FROM t GROUP BY a;
 8 rows in set (0.18 sec)
 ```
 
-In the preceding example, the expression `id + a` is pushed down to TiFlash for calculation in advance. This helps reduce the amount of data transferred over the network, and thus reduce the network transmission overhead, and improve the overall calculation performance.
+In the preceding example, the expression `id + a` is pushed down to TiFlash for calculation in advance. This helps reduce the amount of data to be transferred over the network, thus reducing the network transmission overhead and improving the overall calculation performance.
 
-### Example 3: Pushdown restrictions
+### Example 3: Restrictions for pushdown
 
 ```sql
 CREATE TABLE t(id INT PRIMARY KEY, a INT);
@@ -149,4 +149,4 @@ SHOW WARNINGS;
 3 rows in set (0.18 sec)
 ```
 
-The expressions in the preceding example cannot be completely pushed down to TiFlash, because the functions `Time`and `Cast` cannot be pushed down to TiFlash.
+The expressions in the preceding example cannot be completely pushed down to TiFlash, because the functions `Time` and `Cast` cannot be pushed down to TiFlash.

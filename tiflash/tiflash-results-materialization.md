@@ -91,9 +91,9 @@ CREATE TABLE detail_data (
     detail_fee DECIMAL(20,2));  -- Amount of fee
 
 CREATE TABLE daily_data (
-    rec_date DATE,              -- Date when data is aggregated
+    rec_date DATE,              -- Date when data is collected
     customer_id VARCHAR(20),    -- Customer ID
-    daily_fee DECIMAL(20,2));   -- Amount of fee for the day
+    daily_fee DECIMAL(20,2));   -- Amount of fee for per day
 
 ALTER TABLE detail_data SET TIFLASH REPLICA 1;
 ALTER TABLE daily_data SET TIFLASH REPLICA 1;
@@ -123,4 +123,4 @@ Analyze monthly data based on daily analysis data:
 SELECT MONTH(rec_date), customer_id, sum(daily_fee) FROM daily_data GROUP BY MONTH(rec_date), customer_id;
 ```
 
-The preceding example materializes the daily analysis results and saves them to the daily result table, based on which monthly data analysis is accelerated, thus improving data analysis efficiency.
+The preceding example materializes the daily analysis results and saves them to the daily result table, based on which the monthly data analysis is accelerated, thus improving data analysis efficiency.
