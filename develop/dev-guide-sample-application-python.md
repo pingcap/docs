@@ -45,9 +45,9 @@ git clone https://github.com/pingcap-inc/tidb-example-python.git
 
 <SimpleTab groupId="language">
 
-<div label="Using SQLAlchemy (Recommended)" value="SQLAlchemy">
+<div label="SQLAlchemy (Recommended)" value="SQLAlchemy">
 
-[SQLAlchemy](https://www.sqlalchemy.org/) is a popular open-source ORM library for Python. The following instructions take `1.4.44` version as an example.
+[SQLAlchemy](https://www.sqlalchemy.org/) is a popular open-source ORM library for Python. The following uses SQLAlchemy 1.44 as an example.
 
 ```python
 import uuid
@@ -169,17 +169,17 @@ simple_example()
 trade_example()
 ```
 
-**SQLAlchemy** offered a lot of operations such as session management, CRUD of basic objects, etc. That greatly simplifies the amount of code compared to using drivers directly.
+Compared with using drivers directly, SQLAlchemy provides an abstraction for the specific details of different databases when creating a database connection. Additionally, SQLAlchemy encapsulates some operations such as session management and CRUD of basic objects, which greatly simplifies the code.
 
-The `Player` class is a mapping of database tables to the application. Each attribute of `Player` corresponds to a field in the `player` table. And **SQLAlchemy** uses the `Player` class to provide more information to using type definitions like `id = Column(String(36), primary_key=True)`. In the above example to indicate the field type and its additional attributes. That means that the `id` field is of type `String`, corresponding to database type `VARCHAR`, length `36`, and it is **primary key**.
+The `Player` class is a mapping of a table to attributes in the program. Each attribute of `Player` corresponds to a field in the `player` table. To provide SQLAlchemy with more information, the attribute is defined as `id = Column(String(36), primary_key=True)` to indicate the field type and its additional properties. For example, `id = Column(String(36), primary_key=True)` indicates that the `id` attribute is `String` type, the corresponding field in database is `VARCHAR` type, the length is `36`, and it is a primary key.
 
-For more information about how to use **SQLAlchemy**, you can read the [SQLAlchemy document](https://www.sqlalchemy.org/).
+For more information about how to use SQLAlchemy, refer to [SQLAlchemy documentation](https://www.sqlalchemy.org/).
 
 </div>
 
-<div label="Using peewee (Recommended)" value="peewee">
+<div label="peewee (Recommended)" value="peewee">
 
-[peewee](http://docs.peewee-orm.com/en/latest/) is a popular open-source ORM library for Python. The following instructions take `3.15.4` version as an example.
+[peewee](http://docs.peewee-orm.com/en/latest/) is a popular open-source ORM library for Python. The following uses peewee 3.15.4 as an example.
 
 ```python
 import os
@@ -301,17 +301,18 @@ simple_example()
 trade_example()
 ```
 
-**peewee** offered a lot of operations such as session management, CRUD of basic objects, etc. That greatly simplifies the amount of code compared to using drivers directly.
+Compared with using drivers directly, peewee provides an abstraction for the specific details of different databases when creating a database connection. Additionally, peewee encapsulates some operations such as session management and CRUD of basic objects, which greatly simplifies the code.
 
-The `Player` class is a mapping of database tables to the application. Each attribute of `Player` corresponds to a field in the `player` table. And **peewee** uses the `Player` class to provide more information to using type definitions like `id = CharField(max_length=36, primary_key=True)`. In the above example to indicate the field type and its additional attributes. That means that the `id` field is of type `String`, corresponding to database type `VARCHAR`, length `36`, and it is **primary key**.
+The `Player` class is a mapping of a table to attributes in the program. Each attribute of `Player` corresponds to a field in the `player` table. To provide SQLAlchemy with more information, the attribute is defined as `id = Column(String(36), primary_key=True)` to indicate the field type and its additional properties. For example, `id = Column(String(36), primary_key=True)` indicates that the `id` attribute is `String` type, the corresponding field in database is `VARCHAR` type, the length is `36`, and it is a primary key.
 
-For more information about how to use **peewee**, you can read the [peewee document](http://docs.peewee-orm.com/en/latest/).
+For more information about how to use peewee, refer to [peewee documentation](http://docs.peewee-orm.com/en/latest/).
 
 </div>
 
-<div label="Using mysqlclient" value="mysqlclient">
+<div label="mysqlclient" value="mysqlclient">
 
-[mysqlclient](https://pypi.org/project/mysqlclient/) is a popular open-source driver for Python. The following instructions take `2.1.1` version as an example. Python's driver is extremely easy to use compared to other languages. However, because it cannot shield the underlying implementation and requires manual control of transactions, it is still recommended to use ORM for programming if you don't have a lot of scenarios where you have to use SQL. This can reduce the coupling of the program.
+[mysqlclient](https://pypi.org/project/mysqlclient/) is a popular open-source driver for Python. The following uses mysqlclient 2.1.1 as an example. Drivers for Python are more convenient to use than other languages, but they do not shield the underlying implementation and require manual management of transactions. If there are not a lot of scenarios where SQL is required, it is recommended to use ORM, which can help reduce the coupling of your program.
+
 
 ```python
 import uuid
@@ -464,15 +465,15 @@ simple_example()
 trade_example()
 ```
 
-The driver has a much lower level of encapsulation, so we can see a lot of SQL inside the program. `Player`, which is queried inside the program, will be represented as a tuple, unlike ORM, because there is no data object.
+The driver has a lower level of encapsulation than ORM, so there are a lot of SQL statements in the program. Unlike ORM, there is no data object in drivers, so the `Player` queried by the driver is represented as a tuple.
 
-For more information on how to use mysqlclient, you can read the [mysqlclient documentation](https://mysqlclient.readthedocs.io/).
+For more information about how to use mysqlclient, refer to [mysqlclient documentation](https://mysqlclient.readthedocs.io/).
 
 </div>
 
-<div label="Using PyMySQL" value="PyMySQL">
+<div label="PyMySQL" value="PyMySQL">
 
-[PyMySQL](https://pypi.org/project/PyMySQL/) is a popular open-source driver for Python. The following instructions take `1.0.2` version as an example. Python's driver is extremely easy to use compared to other languages. However, because it cannot shield the underlying implementation and requires manual control of transactions, it is still recommended to use ORM for programming if you don't have a lot of scenarios where you have to use SQL. This can reduce the coupling of the program.
+[PyMySQL](https://pypi.org/project/PyMySQL/) is a popular open-source driver for Python. The following uses PyMySQL 1.0.2 as an example. Drivers for Python are more convenient to use than other languages, but they do not shield the underlying implementation and require manual management of transactions. If there are not a lot of scenarios where SQL is required, it is recommended to use ORM, which can help reduce the coupling of your program.
 
 ```python
 import uuid
@@ -623,15 +624,15 @@ simple_example()
 trade_example()
 ```
 
-The driver has a much lower level of encapsulation, so we can see a lot of SQL inside the program. `Player`, which is queried inside the program, will be represented as a dict, unlike ORM, because there is no data object.
+The driver has a lower level of encapsulation than ORM, so there are a lot of SQL statements in the program. Unlike ORM, there is no data object in drivers, so the `Player` queried by the driver is represented as a tuple.
 
-For more information on how to use PyMySQL, you can read the [PyMySQL documentation](https://pymysql.readthedocs.io/en/latest/).
+For more information about how to use PyMySQL, refer to [PyMySQL documentation](https://pymysql.readthedocs.io/en/latest/).
 
 </div>
 
 <div label="Using mysql-connector-python" value="mysql-connector-python">
 
-[mysql-connector-python](https://dev.mysql.com/doc/connector-python/en/) is a popular open-source driver for Python. The following instructions take `8.0.31` version as an example. Python's driver is extremely easy to use compared to other languages. However, because it cannot shield the underlying implementation and requires manual control of transactions, it is still recommended to use ORM for programming if you don't have a lot of scenarios where you have to use SQL. This can reduce the coupling of the program.
+[mysql-connector-python](https://dev.mysql.com/doc/connector-python/en/) is a popular open-source driver for Python. The following uses mysql-connector-python 8.0.31 as an example. Drivers for Python are more convenient to use than other languages, but they do not shield the underlying implementation and require manual management of transactions. If there are not a lot of scenarios where SQL is required, it is recommended to use ORM, which can help reduce the coupling of your program.
 
 ```python
 import uuid
@@ -783,9 +784,9 @@ simple_example()
 trade_example()
 ```
 
-The driver has a much lower level of encapsulation, so we can see a lot of SQL inside the program. `Player`, which is queried inside the program, will be represented as a tuple, unlike ORM, because there is no data object.
+The driver has a lower level of encapsulation than ORM, so there are a lot of SQL statements in the program. Unlike ORM, there is no data object in drivers, so the `Player` queried by the driver is represented as a tuple.
 
-For more information on how to use mysql-connector-python, you can read the [mysql-connector-python documentation](https://dev.mysql.com/doc/connector-python/en/).
+For more information about how to use mysql-connector-python, refer to [mysql-connector-python documentation](https://dev.mysql.com/doc/connector-python/en/).
 
 </div>
 
@@ -797,7 +798,7 @@ The following content introduces how to run the code step by step.
 
 ### Step 3.1 Table initialization
 
-This example requires manual initialization of the table, or if you are using a local cluster, you can simply run:
+Before running the code, you need to initialize the table manually. If you are using a local TiDB cluster, you can run the following command:
 
 <SimpleTab groupId="cli">
 
@@ -819,47 +820,17 @@ mycli --host 127.0.0.1 --port 4000 -u root --no-warn < player_init.sql
 
 </SimpleTab>
 
-If you are not using a local cluster, or do not have a command line client installed, please use your preferred method (e.g. GUI tools such as **Navicat**, **DBeaver**, etc.) to log in to the cluster directly and run the SQL statements in the `player_init.sql` file.
+If you are not using a local cluster, or have not installed a MySQL client, connect to your cluster using your preferred method (such as Navicat, DBeaver, or other GUI tools) and run the SQL statements in the `player_init.sql` file.
 
 ### Step 3.2 Modify parameters for TiDB Cloud
 
-If you are using a **TiDB Cloud Serverless Tier** cluster, you will need to use the system local CA here and note the certificate path as `<ca_path>` for subsequent reference. Please refer to the following system-related certificate path addresses:
-
-<SimpleTab groupId="ca">
-
-<div label="MacOS / Alpine" value="MacOS / Alpine">
-
-`/etc/ssl/cert.pem`
-
-</div>
-
-<div label="Debian / Ubuntu / Arch" value="Debian / Ubuntu / Arch">
-
-`/etc/ssl/certs/ca-certificates.crt`
-
-</div>
-
-<div label="RedHat / Fedora / CentOS / Mageia" value="RedHat / Fedora / CentOS / Mageia">
-
-`/etc/pki/tls/certs/ca-bundle.crt`
-
-</div>
-
-<div label="OpenSUSE" value="OpenSUSE">
-
-`/etc/ssl/ca-bundle.pem`
-
-</div>
-
-</SimpleTab>
-
-If you still have certificate errors after setting, please read [Secure Connections to Serverless Tier Clusters](https://docs.pingcap.com/tidbcloud/secure-connections-to-serverless-tier-clusters)。
+If you are using a TiDB Cloud Serverless Tier cluster, you need to provide your CA root path and replace `<ca_path>` in the following examples with your CA path. To get the CA root path on your system, refer to [Where is the CA root path on my system?](https://docs.pingcap.com/tidbcloud/secure-connections-to-serverless-tier-clusters#where-is-the-ca-root-path-on-my-system).
 
 <SimpleTab groupId="language">
 
-<div label="Using SQLAlchemy (Recommended)" value="SQLAlchemy">
+<div label="SQLAlchemy (Recommended)" value="SQLAlchemy">
 
-If you are using a **TiDB Cloud Serverless Tier** cluster, change the input to the `create_engine` function in `sqlalchemy_example.py`:
+If you are using a TiDB Cloud Serverless Tier cluster, modify the parameters of the `create_engine` function in `sqlalchemy_example.py`:
 
 ```python
 engine = create_engine('mysql://root:@127.0.0.1:4000/test')
@@ -884,9 +855,9 @@ engine = create_engine('mysql://2aEp24QWEDLqRFs.root:123456@xxx.tidbcloud.com:40
 
 </div>
 
-<div label="Using peewee (Recommended)" value="peewee">
+<div label="peewee (Recommended)" value="peewee">
 
-If you are using a **TiDB Cloud Serverless Tier** cluster, change the input to the `connect` function in `peewee_example.py`:
+If you are using a TiDB Cloud Serverless Tier cluster, modify the parameters of the `create_engine` function in `sqlalchemy_example.py`:
 
 ```python
 db = connect('mysql://root:@127.0.0.1:4000/test')
@@ -900,27 +871,27 @@ Suppose that the password you set is `123456`, and the connection parameters you
 
 In this case, you can modify the `connect` as follows:
 
-- When peewee uses **PyMySQL** as driver:
+- When peewee uses PyMySQL as the driver:
 
     ```python
     db = connect('mysql://2aEp24QWEDLqRFs.root:123456@xxx.tidbcloud.com:4000/test', 
         ssl_verify_cert=True, ssl_ca="<ca_path>")
     ```
 
-- When peewee uses **mysqlclient** as driver:
+- When peewee uses mysqlclient as the driver:
 
     ```python
     db = connect('mysql://2aEp24QWEDLqRFs.root:123456@xxx.tidbcloud.com:4000/test',
         ssl_mode="VERIFY_IDENTITY", ssl={"ca": "<ca_path>"})
     ```
 
-Since peewee will pass parameters to driver, please pay attention to the type of driver used when using peewee.
+Since peewee will pass parameters to the driver, you need to pay attention to the usage type of the driver when using peewee.
 
 </div>
 
-<div label="Using mysqlclient" value="mysqlclient">
+<div label="mysqlclient" value="mysqlclient">
 
-If you are using a **TiDB Cloud Serverless Tier** cluster, change the the `get_connection` function in `mysqlclient_example.py`:
+If you are using a TiDB Cloud Serverless Tier cluster, change the `get_connection` function in `mysqlclient_example.py`:
 
 ```python
 def get_connection(autocommit: bool = True) -> MySQLdb.Connection:
@@ -960,9 +931,9 @@ def get_connection(autocommit: bool = True) -> MySQLdb.Connection:
 
 </div>
 
-<div label="Using PyMySQL" value="PyMySQL">
+<div label="PyMySQL" value="PyMySQL">
 
-If you are using a **TiDB Cloud Serverless Tier** cluster, change the the `get_connection` function in `pymysql_example.py`:
+If you are using a TiDB Cloud Serverless Tier cluster, change the `get_connection` function in `pymysql_example.py`:
 
 ```python
 def get_connection(autocommit: bool = False) -> Connection:
@@ -999,9 +970,9 @@ def get_connection(autocommit: bool = False) -> Connection:
 
 </div>
 
-<div label="Using mysql-connector-python" value="mysql-connector-python">
+<div label="mysql-connector-python" value="mysql-connector-python">
 
-If you are using a **TiDB Cloud Serverless Tier** cluster, change the the `get_connection` function in `mysql_connector_python_example.py`:
+If you are using a TiDB Cloud Serverless Tier cluster, change the `get_connection` function in `mysql_connector_python_example.py`:
 
 ```python
 def get_connection(autocommit: bool = True) -> MySQLConnection:
@@ -1044,17 +1015,17 @@ def get_connection(autocommit: bool = True) -> MySQLConnection:
 
 ### Step 3.3 Run
 
-Please install the following dependencies before running:
+Before running, use the following command to install dependencies:
 
 ```bash
 pip3 install -r requirement.txt
 ```
 
-When you need to run the script several times later, please follow the [Table initialization](#step-31-table-initialization) section again before each run.
+If you need to run the script multiple times, follow the [Table initialization](#step-31-table-initialization) section to initialize the table again before each run.
 
 <SimpleTab groupId="language">
 
-<div label="Using SQLAlchemy (Recommended)" value="SQLAlchemy">
+<div label="SQLAlchemy (Recommended)" value="SQLAlchemy">
 
 ```bash
 python3 sqlalchemy_example.py
@@ -1062,7 +1033,7 @@ python3 sqlalchemy_example.py
 
 </div>
 
-<div label="Using peewee (Recommended)" value="peewee">
+<div label="peewee (Recommended)" value="peewee">
 
 ```bash
 python3 peewee_example.py
@@ -1070,7 +1041,7 @@ python3 peewee_example.py
 
 </div>
 
-<div label="Using mysqlclient" value="mysqlclient">
+<div label="mysqlclient" value="mysqlclient">
 
 ```bash
 python3 mysqlclient_example.py
@@ -1078,7 +1049,7 @@ python3 mysqlclient_example.py
 
 </div>
 
-<div label="Using PyMySQL" value="PyMySQL">
+<div label="PyMySQL" value="PyMySQL">
 
 ```bash
 python3 pymysql_example.py
@@ -1086,7 +1057,7 @@ python3 pymysql_example.py
 
 </div>
 
-<div label="Using mysql-connector-python" value="mysql-connector-python">
+<div label="mysql-connector-python" value="mysql-connector-python">
 
 ```bash
 python3 mysql_connector_python_example.py
@@ -1100,31 +1071,31 @@ python3 mysql_connector_python_example.py
 
 <SimpleTab groupId="language">
 
-<div label="Using SQLAlchemy (Recommended)" value="SQLAlchemy">
+<div label="SQLAlchemy (Recommended)" value="SQLAlchemy">
 
 [SQLAlchemy Expected Output](https://github.com/pingcap-inc/tidb-example-python/blob/main/Expected-Output.md#SQLAlchemy)
 
 </div>
 
-<div label="Using peewee (Recommended)" value="peewee">
+<div label="peewee (Recommended)" value="peewee">
 
 [peewee Expected Output](https://github.com/pingcap-inc/tidb-example-python/blob/main/Expected-Output.md#peewee)
 
 </div>
 
-<div label="Using mysqlclient" value="mysqlclient">
+<div label="mysqlclient" value="mysqlclient">
 
 [mysqlclient Expected Output](https://github.com/pingcap-inc/tidb-example-python/blob/main/Expected-Output.md#mysqlclient)
 
 </div>
 
-<div label="Using PyMySQL" value="PyMySQL">
+<div label="PyMySQL" value="PyMySQL">
 
 [PyMySQL Expected Output](https://github.com/pingcap-inc/tidb-example-python/blob/main/Expected-Output.md#PyMySQL)
 
 </div>
 
-<div label="Using mysql-connector-python" value="mysql-connector-python">
+<div label="mysql-connector-python" value="mysql-connector-python">
 
 [mysql-connector-python Expected Output](https://github.com/pingcap-inc/tidb-example-python/blob/main/Expected-Output.md#mysql-connector-python)
 

@@ -93,7 +93,7 @@ func (tx *TiDBSqlTx) Rollback() error {
 
 <div label="Python" value="python">
 
-Use MySQL client of Python driver to open multiple connection objects for interaction, without sharing connections between threads to keep them thread-safe.
+To ensure thread safety, you can use the mysqlclient driver to open multiple connections that are not shared between threads.
 
 </div>
 

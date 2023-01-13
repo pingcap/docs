@@ -218,11 +218,11 @@ with get_connection(autocommit=True) as connection:
 
 For a complete example in Python, see:
 
-- [Use PyMySQL to build a simple CRUD app with TiDB and Python](/develop/dev-guide-sample-application-python.md#step-2-get-the-code)
-- [Use mysqlclient to build a simple CRUD app with TiDB and Python](/develop/dev-guide-sample-application-python.md#step-2-get-the-code)
+- [Use PyMySQL to build a simple CRUD application with TiDB and Python](/develop/dev-guide-sample-application-python.md#step-2-get-the-code)
+- [Use mysqlclient to build a simple CRUD application with TiDB and Python](/develop/dev-guide-sample-application-python.md#step-2-get-the-code)
 - [Use mysql-connector-python to build a simple CRUD app with TiDB and Python](/develop/dev-guide-sample-application-python.md#step-2-get-the-code)
-- [Use SQLAlchemy to build a simple CRUD app with TiDB and Python](/develop/dev-guide-sample-application-python.md#step-2-get-the-code)
-- [Use peewee to build a simple CRUD app with TiDB and Python](/develop/dev-guide-sample-application-python.md#step-2-get-the-code)
+- [Use SQLAlchemy to build a simple CRUD application with TiDB and Python](/develop/dev-guide-sample-application-python.md#step-2-get-the-code)
+- [Use peewee to build a simple CRUD application with TiDB and Python](/develop/dev-guide-sample-application-python.md#step-2-get-the-code)
 
 </div>
 
