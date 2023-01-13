@@ -27,7 +27,7 @@ For detailed steps, see [Create a Serverless Tier cluster](/develop/dev-guide-bu
 
 **Use a local cluster**
 
-For detailed steps, see [Deploy a local test cluster](/quick-start-with-tidb.md#deploy-a-local-test-cluster) or [Deploy a TiDB Cluster Using TiUP](/production-deployment-using-tiup.md).
+For detailed steps, see [Deploy a local test cluster](/quick-start-with-tidb.md#deploy-a-local-test-cluster) or [Deploy a TiDB cluster using TiUP](/production-deployment-using-tiup.md).
 
 </CustomContent>
 
