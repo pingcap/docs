@@ -277,7 +277,7 @@ For an example of using mysqlclient to build a TiDB application, see [Build a Si
 
 Support level: **Compatible**
 
-You can follow the [mysql-connector-python documentation](https://dev.mysql.com/doc/connector-python/en/connector-python-installation-binary.html) to download and configure the driver.. It is recommended to use Connector/Python 8.0.31 or later versions.
+You can follow the [mysql-connector-python documentation](https://dev.mysql.com/doc/connector-python/en/connector-python-installation-binary.html) to download and configure the driver. It is recommended to use Connector/Python 8.0.31 or later versions.
 
 For an example of using mysql-connector-python to build a TiDB application, see [Build a Simple CRUD App with TiDB and Python](/develop/dev-guide-sample-application-python.md).
 
