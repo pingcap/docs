@@ -339,11 +339,11 @@ In different operating systems, the storage path of the root certificate is as f
 
 Windows does not offer a specific path to the CA root. Instead, it uses the [registry](https://learn.microsoft.com/en-us/windows-hardware/drivers/install/local-machine-and-current-user-certificate-stores) to store certificates. For this reason, to specify the CA root path on Windows, take the following steps:
 
-## FAQ
+## FAQs
 
-### Which TLS versions are supported to connect to my TiDB Dedicated Tier cluster?
+### Which TLS versions should be supported to connect to my TiDB Dedicated Tier cluster?
 
-TiDB Dedicated database cluster only supports TLS 1.2 or TLS 1.3, and does not support TLS 1.0 and TLS 1.1 versions for security reasons. Refer to see IETF [Deprecating TLS 1.0 and TLS 1.1](https://datatracker.ietf.org/doc/rfc8996/) for ditails.
+TiDB Dedicated cluster only supports TLS 1.2 or TLS 1.3, and does not support TLS 1.0 and TLS 1.1 versions for security reasons. Refer to see IETF [Deprecating TLS 1.0 and TLS 1.1](https://datatracker.ietf.org/doc/rfc8996/) for ditails.
 
 ### Does TiDB Dedicated Tier support two-way TLS authentication between my client and TiDB Dedicated Tier cluster?
 
@@ -355,4 +355,4 @@ Currently,TiDB Dedicated Tier support one-way TLS authentication, which means yo
 
 Yes.
 
-TiDB Dedicated Tier only allows TLS connections and prohibits non-SSL/TLS connections. The reason is that SSL/TLS is one of the most basic security measures for you to connect to the TiDB Dedicated database cluster via internet and intranet , so as to reduce the risk of data exposure to internet and intranet.
+TiDB Dedicated Tier only allows TLS connections and prohibits non-SSL/TLS connections. The reason is that SSL/TLS is one of the most basic security measures for you to connect to the TiDB Dedicated Tier cluster via internet and intranet , so as to reduce the risk of data exposure to internet and intranet.
