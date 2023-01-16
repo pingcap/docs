@@ -9,7 +9,7 @@ Establishing a secure TLS connection between your client and your TiDB Cloud Ser
 
 ## Prerequisites
 
-- Log in to TiDB Cloud via [Password Authentication](/tidb-cloud-password-authentication.md) or [SSO Authentication](/tidb-cloud/tidb-cloud-sso-authentication.md).
+- Log in to TiDB Cloud via [Password Authentication](/tidb-cloud/tidb-cloud-password-authentication.md) or [SSO Authentication](/tidb-cloud/tidb-cloud-sso-authentication.md).
 - [Create a TiDB Cloud Serverless Tier cluster](/tidb-cloud/tidb-cloud-quickstart.md).
 
 ## Secure connection to a Serverless Tier cluster
