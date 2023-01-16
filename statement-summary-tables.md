@@ -261,6 +261,7 @@ Basic fields:
 - `SAMPLE_USER`: The users who execute SQL statements of this category. Only one user is taken.
 - `PLAN_DIGEST`: The digest of the execution plan.
 - `PLAN`: The original execution plan. If there are multiple statements, the plan of only one statement is taken.
+- `BINARY_PLAN`: The original execution plan encoded in binary format. If there are multiple statements, the plan of only one statement is taken. Execute the `SELECT tidb_decode_binary_plan('xxx...')` statement to parse the specific execution plan.
 - `PLAN_CACHE_HITS`: The total number of times that SQL statements of this category hit the plan cache.
 - `PLAN_IN_CACHE`: Indicates whether the previous execution of SQL statements of this category hit the plan cache.
 
@@ -332,7 +333,7 @@ Transaction-related fields:
 - `SUM_BACKOFF_TIMES`: The sum of retries when SQL statements of this category encounter errors that require a retry.
 - `BACKOFF_TYPES`: All types of errors that require retries and the number of retries for each type. The format of the field is `type:number`. If there is more than one error type, each is separated by a comma, like `txnLock:2,pdRPC:1`.
 - `AVG_AFFECTED_ROWS`: The average number of rows affected.
-- `PREV_SAMPLE_TEXT`:  When the current SQL statement is `COMMIT`, `PREV_SAMPLE_TEXT` is the previous statement to `COMMIT`. In this case, SQL statements are grouped by the digest and `prev_sample_text`. This means that `COMMIT` statements with different `prev_sample_text` are grouped to different rows. When the current SQL statement is not `COMMIT`, the `PREV_SAMPLE_TEXT` field is an empty string.
+- `PREV_SAMPLE_TEXT`: When the current SQL statement is `COMMIT`, `PREV_SAMPLE_TEXT` is the previous statement to `COMMIT`. In this case, SQL statements are grouped by the digest and `prev_sample_text`. This means that `COMMIT` statements with different `prev_sample_text` are grouped to different rows. When the current SQL statement is not `COMMIT`, the `PREV_SAMPLE_TEXT` field is an empty string.
 
 ### `statements_summary_evicted` fields description
 

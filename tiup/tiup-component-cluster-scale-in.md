@@ -10,7 +10,7 @@ The `tiup cluster scale-in` command is used to scale in the cluster, which takes
 
 Because the TiKV, TiFlash, and TiDB Binlog components are taken offline asynchronously (which requires TiUP to remove the node through API first) and the stopping process takes a long time (which requires TiUP to continuously check whether the node is successfully taken offline), the TiKV, TiFlash, and TiDB Binlog components are handled particularly as follows:
 
-- For TiKV, TiFlash and, TiDB Binlog components:
+- For TiKV, TiFlash, and TiDB Binlog components:
 
     1. TiUP Cluster takes the node offline through API and directly exits without waiting for the process to be completed.
     2. To check the status of the nodes being scaled in, you need to execute the `tiup cluster display` command and wait for the status to become `Tombstone`.
@@ -43,13 +43,13 @@ tiup cluster scale-in <cluster-name> [flags]
 
 ### --force
 
-- Controls whether to forcibly remove the specified nodes from the cluster. Sometimes, the host of the node to take offline might be down, which makes it impossible to connect to the node via SSH for operations, so you can forcibly remove the node from the cluster using the `-force` option.
+- Controls whether to forcibly remove the specified nodes from the cluster. Sometimes, the host of the node to take offline might be down, which makes it impossible to connect to the node via SSH for operations, so you can forcibly remove the node from the cluster using the `--force` option.
 - Data type: `BOOLEAN`
 - This option is disabled by default with the `false` value. To enable this option, add this option to the command, and either pass the `true` value or do not pass any value.
 
 > **Warning:**
 >
-> When you use this option to forcibly remove TiKV or TiFlash nodes that are in service or are pending offline, these nodes will be deleted immediately without waiting for data to be migrated. This imposes a high risk of data loss. Therefore, it is recommended to use this option only on down nodes.
+> When you use this option to forcibly remove TiKV or TiFlash nodes that are in service or are pending offline, these nodes will be deleted immediately without waiting for data to be migrated. This imposes a very high risk of data loss. If data loss occurs in the region where the metadata is located, the entire cluster will be unavailable and unrecoverable.
 
 ### --transfer-timeout
 

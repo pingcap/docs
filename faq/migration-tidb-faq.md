@@ -5,11 +5,11 @@ summary: Learn about the FAQs related to data migration.
 
 # Migration FAQs
 
-This document summarizes the frequently asked questions (FAQs) related to TiDB data migration. 
+This document summarizes the frequently asked questions (FAQs) related to TiDB data migration.
 
 For the frequently asked questions about migration-related tools, click the corresponding links in the list below:
 
-- [Backup & Restore FAQ](/br/backup-and-restore-faq.md)
+- [Backup & Restore FAQs](/faq/backup-and-restore-faq.md)
 - [TiDB Binlog FAQ](/tidb-binlog/tidb-binlog-faq.md)
 - [TiDB Lightning FAQs](/tidb-lightning/tidb-lightning-faq.md)
 - [TiDB Data Migration (DM) FAQs](/dm/dm-faq.md)
@@ -78,7 +78,7 @@ Restart the TiDB service, add the `-skip-grant-table=true` parameter in the conf
 
 You can use the following methods to export the data in TiDB:
 
-- See [MySQL uses mysqldump to export part of the table data](https://blog.csdn.net/xin_yu_xin/article/details/7574662) in Chinese and export data using mysqldump and the `WHERE` clause.
+- Export data using mysqldump and the `WHERE` clause.
 - Use the MySQL client to export the results of `select` to a file.
 
 ### How to migrate from DB2 or Oracle to TiDB?
@@ -138,7 +138,7 @@ No. Currently, the data replication depends on the application itself.
 
 ### How to migrate the traffic quickly?
 
-It is recommended to migrate application data from MySQL to TiDB using [TiDB Data Migration](/dm/dm-overview.md) tool. You can migrate the read and write traffic in batches by editing the network configuration as needed. Deploy a stable network LB (HAproxy, LVS, F5, DNS, etc.) on the upper layer, in order to implement seamless migration by directly editing the network configuration.
+It is recommended to migrate application data from MySQL to TiDB using [TiDB Data Migration](/dm/dm-overview.md) tool. You can migrate the read and write traffic in batches by editing the network configuration as needed. Deploy a stable network LB (such as HAproxy, LVS, F5, and DNS) on the upper layer, in order to implement seamless migration by directly editing the network configuration.
 
 ### Is there a limit for the total write and read capacity in TiDB?
 

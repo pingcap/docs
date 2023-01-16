@@ -173,13 +173,27 @@ SELECT * FROM users;
 >
 > When you insert data to a cached table, second-level write latency might occur. The latency is controlled by the global environment variable [`tidb_table_cache_lease`](/system-variables.md#tidb_table_cache_lease-new-in-v600). You can decide whether to use the cached table feature by checking whether the latency is acceptable based on your application. For example, in a read-only scenario, you can increase the value of `tidb_table_cache_lease`:
 >
-> {{< copyable "sql" >}}
->
 > ```sql
 > set @@global.tidb_table_cache_lease = 10;
 > ```
 >
 > The write latency of cached tables is high, because the cached table feature is implemented with a complex mechanism that requires a lease to be set for each cache. When there are multiple TiDB instances, one instance does not know whether the other instances have cached data. If an instance modifies the table data directly, the other instances read the old cache data. To ensure correctness, the cached table implementation uses a lease mechanism to ensure that the data is not modified before the lease expires. That is why the write latency is high.
+
+The metadata of cached tables is stored in the `mysql.table_cache_meta` table. This table records the IDs of all cached tables, the current lock status (`lock_type`), and the lock lease information (`lease`). This table is only internally used in TiDB and you are not recommended to modify it. Otherwise, unexpected errors might occur.
+
+```sql
+SHOW CREATE TABLE mysql.table_cache_meta\G
+*************************** 1. row ***************************
+       Table: table_cache_meta
+Create Table: CREATE TABLE `table_cache_meta` (
+  `tid` bigint(11) NOT NULL DEFAULT '0',
+  `lock_type` enum('NONE','READ','INTEND','WRITE') NOT NULL DEFAULT 'NONE',
+  `lease` bigint(20) NOT NULL DEFAULT '0',
+  `oldReadLease` bigint(20) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`tid`) /*T![clustered_index] CLUSTERED */
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin
+1 row in set (0.00 sec)
+```
 
 ### Revert a cached table to a normal table
 
@@ -212,7 +226,7 @@ To revert a cached table to a normal table, use `ALTER TABLE t NOCACHE`:
 {{< copyable "sql" >}}
 
 ```sql
-ALTER TABLE users NOCACHE
+ALTER TABLE users NOCACHE;
 ```
 
 ```sql

@@ -58,6 +58,16 @@ routes:
     table-pattern: "t_*"        # The pattern of the upstream table name, wildcard characters (*?) are supported.
     target-schema: "test"       # The name of the downstream schema.
     target-table: "t"           # The name of the downstream table.
+    # Optional. Used for extracting the source information of sharded schemas and tables and writing the information to the user-defined columns in the downstream. If these options are configured, you need to manually create a merged table in the downstream. For details, see description of table routing in <https://docs.pingcap.com/tidb/dev/dm-key-features#table-routing>.
+    # extract-table:                                        # Extracts and writes the table name suffix without the t_ part to the c-table column of the merged table. For example, 01 is extracted and written to the c-table column for the sharded table t_01.
+    #   table-regexp: "t_(.*)"
+    #   target-column: "c_table"
+    # extract-schema:                                       # Extracts and writes the schema name suffix without the test_ part to the c_schema column of the merged table. For example, 02 is extracted and written to the c_schema column for the sharded schema test_02.
+    #   schema-regexp: "test_(.*)"
+    #   target-column: "c_schema"
+    # extract-source:                                       # Extracts and writes the source instance information to the c_source column of the merged table. For example, mysql-replica-01 is extracted and written to the c_source column for the data source mysql-replica-01.
+    #   source-regexp: "(.*)"
+    #   target-column: "c_source"
   route-rule-2:
     schema-pattern: "test_*"
     target-schema: "test"
@@ -108,7 +118,7 @@ loaders:
   global:                            # The configuration name of the processing unit.
     pool-size: 16                    # The number of threads that concurrently execute dumped SQL files in the load processing unit (16 by default). When multiple instances are migrating data to TiDB at the same time, slightly reduce the value according to the load.
     # The directory that stores full data exported from the upstream ("./dumped_data" by default).
-    # Supoprts a local filesystem path or an Amazon S3 path. For example, "s3://dm_bucket/dumped_data?region=us-west-2&endpoint=s3-website.us-east-2.amazonaws.com&access_key=s3accesskey&secret_access_key=s3secretkey&force_path_style=true"
+    # Supoprts a local filesystem path or an Amazon S3 path. For example, "s3://dm_bucket/dumped_data?endpoint=s3-website.us-east-2.amazonaws.com&access_key=s3accesskey&secret_access_key=s3secretkey&force_path_style=true"
     dir: "./dumped_data"
     # The import mode during the full import phase. In most cases you don't need to care about this configuration.
     # - "sql" (default). Use [TiDB Lightning](/tidb-lightning/tidb-lightning-overview.md) TiDB-backend mode to import data.
@@ -129,6 +139,14 @@ syncers:
 
     # If set to true, `INSERT` statements from upstream are rewritten to `REPLACE` statements, and `UPDATE` statements are rewritten to `DELETE` and `REPLACE` statements. This ensures that DML statements can be imported repeatedly during data migration when there is any primary key or unique index in the table schema.
     safe-mode: false
+    # The duration of the automatic safe mode.
+    # If this value is not set or set to "", the default value is twice of `checkpoint-flush-interval` (30s by default), which is 60s.
+    # If this value is set to "0s", DM reports an error when it automatically enters the safe mode.
+    # If this value is set to a normal value, such as "1m30s", when the task pauses abnormally, when DM fails to
+    # record safemode_exit_point, or when DM exits unexpectedly, the duration of the automatic safe mode is set to
+    # 1 minute 30 seconds.
+    safe-mode-duration: "60s"
+
     # If set to true, DM compacts as many upstream statements on the same rows as possible into a single statements without increasing latency.
     # For example, `INSERT INTO tb(a,b) VALUES(1,1); UPDATE tb SET b=11 WHERE a=1`;` will be compacted to `INSERT INTO tb(a,b) VALUES(1,11);`, where "a" is the primary key
     # `UPDATE tb SET b=1 WHERE a=1; UPDATE tb(a,b) SET b=2 WHERE a=1;` will be compacted to `UPDATE tb(a,b) SET b=2 WHERE a=1;`, where "a" is the primary key
@@ -140,11 +158,21 @@ syncers:
     # `DELETE FROM tb WHERE a=1; DELETE FROM tb WHERE a=2` will become `DELETE FROM tb WHERE (a) IN (1),(2)`, where "a" is the primary key
     multiple-rows: true
 
+# Configuration arguments of continuous data validation (validator).
+validators:
+  global:                # Configuration name.
+    # full: validates the data in each row is correct.
+    # fast: validates whether the row is successfully migrated to the downstream.
+    # none: does not validate the data.
+    mode: full           # Possible values are "full", "fast", and "none". The default value is "none", which does not validate the data.
+    worker-count: 4      # The number of validation workers in the background. The default value is 4.
+    row-error-delay: 30m # If a row cannot pass the validation within the specified time, it will be marked as an error row. The default value is 30m, which means 30 minutes.
+
 # ----------- Instance configuration -----------
 mysql-instances:
   -
     source-id: "mysql-replica-01"                   # The `source-id` in source.toml.
-    meta:                                           # The position where the binlog replication starts when `task-mode` is `incremental` and the downstream database checkpoint does not exist. If the checkpoint exists, the checkpoint is used.
+    meta:                                           # The position where the binlog replication starts when `task-mode` is `incremental` and the downstream database checkpoint does not exist. If the checkpoint exists, the checkpoint is used. If neither the `meta` configuration item nor the downstream database checkpoint exists, the migration starts from the latest binlog position of the upstream.
 
       binlog-name: binlog.000001
       binlog-pos: 4
@@ -157,6 +185,7 @@ mysql-instances:
     mydumper-config-name: "global"                  # The name of the mydumpers configuration.
     loader-config-name: "global"                    # The name of the loaders configuration.
     syncer-config-name: "global"                    # The name of the syncers configuration.
+    validator-config-name: "global"                 # The name of the validators configuration.
 
   -
     source-id: "mysql-replica-02"                   # The `source-id` in source.toml.

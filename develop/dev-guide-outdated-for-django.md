@@ -7,15 +7,13 @@ summary: Learn how to build a simple Python application using TiDB and Django.
 
 > **Note:**
 >
-> This document has been archived. This indicates that this document will not be updated thereafter. You can see [Developer Guide Overview](/develop/dev-guide-overview.md) for more details.
+> This legacy document is outdated and will not be updated thereafter. You can see [Developer Guide Overview](/develop/dev-guide-overview.md) for more details.
 
 This tutorial shows you how to build a simple Python application based on TiDB and Django. The sample application to build here is a simple CRM tool where you can add, query, and update customer and order information.
 
 ## Step 1. Start a TiDB cluster
 
 Start a pseudo TiDB cluster on your local storage:
-
-{{< copyable "" >}}
 
 ```bash
 docker run -p 127.0.0.1:$LOCAL_PORT:4000 pingcap/tidb:v5.1.0
@@ -30,7 +28,7 @@ The above command starts a temporary and single-node cluster with mock TiKV. The
 > + [Deploy TiDB using TiUP for On-Premises](https://docs.pingcap.com/tidb/v5.1/production-deployment-using-tiup)
 > + [Deploy TiDB on Kubernetes](https://docs.pingcap.com/tidb-in-kubernetes/stable)
 >
-> You can also [use TiDB Cloud](https://pingcap.com/products/tidbcloud/), a fully-managed Database-as-a-Service (DBaaS), which offers free trial.
+> You can also [use TiDB Cloud](https://pingcap.com/products/tidbcloud/), a fully-managed Database-as-a-Service (DBaaS) of TiDB.
 
 ## Step 2. Create a database
 
@@ -232,8 +230,6 @@ After you have configured the application's database connection, you can start b
 
 In the top `tidb_example` directory, use the [`manage.py`](https://docs.djangoproject.com/en/3.1/ref/django-admin/) script to create [Django migrations](https://docs.djangoproject.com/en/3.1/topics/migrations/) that initialize the database for the application:
 
-{{< copyable "" >}}
-
 ```bash
 python manage.py makemigrations tidb_example
 python manage.py migrate tidb_example
@@ -242,15 +238,11 @@ python manage.py migrate
 
 Then start the application:
 
-{{< copyable "" >}}
-
 ```python
 python3 manage.py runserver 0.0.0.0:8000
 ```
 
 To test the application by inserting some example data, run the following commands:
-
-{{< copyable "" >}}
 
 ```bash
 curl --request POST '127.0.0.1:8000/order/' \
@@ -266,8 +258,6 @@ curl --request GET '127.0.0.1:8000/order/' --data-raw '{ "oid": 1 }'
 
 To verify whether the data insertion is successful, open the terminal with the SQL shell to check:
 
-{{< copyable "" >}}
-
 ```sql
 MySQL root@127.0.0.1:(none)> select * from django.tidb_example_orders;
 +-----+-----+-------+
@@ -280,8 +270,6 @@ Time: 0.008s
 ```
 
 The result above shows that the data insertion is successful. Then you can delete the inserted data:
-
-{{< copyable "" >}}
 
 ```bash
 curl --request DELETE '127.0.0.1:8000/order/' --data-raw '{ "oid": 1 }'

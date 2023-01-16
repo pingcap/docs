@@ -12,9 +12,9 @@ This section describes some commonly encountered issues when using TiFlash, the 
 
 The issue might occur due to different reasons. It is recommended that you troubleshoot it following the steps below:
 
-1. Check whether your system is CentOS8.
+1. Check whether your system is RedHat Enterprise Linux 8.
 
-     CentOS8 does not have the `libnsl.so` system library. You can manually install it via the following command:
+     RedHat Enterprise Linux 8 does not have the `libnsl.so` system library. You can manually install it via the following command:
 
      {{< copyable "shell-regular" >}}
 
@@ -78,12 +78,6 @@ This is because TiFlash is in an abnormal state caused by configuration errors o
     > After the [placement rules](/configure-placement-rules.md) feature is enabled, the previously configured `max-replicas` and `location-labels` no longer take effect. To adjust the replica policy, use the interface related to placement rules.
 
 6. Check whether the remaining disk space of the machine (where `store` of the TiFlash node is) is sufficient. By default, when the remaining disk space is less than 20% of the `store` capacity (which is controlled by the `low-space-ratio` parameter), PD cannot schedule data to this TiFlash node.
-
-## TiFlash query time is unstable, and the error log prints many `Lock Exception` messages
-
-This is because large amounts of data are written to the cluster, which causes that the TiFlash query encounters a lock and requires query retry.
-
-You can set the query timestamp to one second earlier in TiDB. For example, if the current time is '2020-04-08 20:15:01', you can execute `set @@tidb_snapshot='2020-04-08 20:15:00';` before you execute the query. This makes less TiFlash queries encounter a lock and mitigates the risk of unstable query time.
 
 ## Some queries return the `Region Unavailable` error
 

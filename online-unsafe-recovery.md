@@ -158,7 +158,7 @@ If an error occurs during the task, the last stage in the output shows `"Unsafe 
 
 ### Step 3. Check the consistency of data and index (not required for RawKV)
 
-After the recovery is completed, the data and index might be inconsistent. Use the SQL commands `ADMIN CHECK`, `ADMIN RECOVER`, and `ADMIN CLEANUP` to check the consistency of the affected tables (you can get IDs from the output of `"Unsafe recovery finished"`) for data consistency and index consistency, and to recover the tables.
+After the recovery is completed, the data and index might be inconsistent. Use the SQL commands [`ADMIN CHECK`](/sql-statements/sql-statement-admin-check-table-index.md), `ADMIN RECOVER`, and `ADMIN CLEANUP` to check the consistency of the affected tables (you can get IDs from the output of `"Unsafe recovery finished"`) for data consistency and index consistency, and to recover the tables.
 
 > **Note:**
 >
@@ -169,11 +169,17 @@ After the recovery is completed, the data and index might be inconsistent. Use t
 <SimpleTab>
 <div label="Stores deployed using TiUP">
 
-{{< copyable "shell-regular" >}}
+1. Remove the unrecoverable nodes:
 
-```bash
-tiup cluster prune <cluster-name>
-```
+    ```bash
+    tiup cluster scale-in <cluster-name> -N <host> --force
+    ```
+
+2. Clean up Tombstone nodes:
+
+    ```bash
+    tiup cluster prune <cluster-name>
+    ```
 
 </div>
 <div label="Stores deployed using TiDB Operator">

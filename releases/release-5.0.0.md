@@ -68,7 +68,7 @@ In v5.0, the key new features or improvements are as follows:
 
 ### Others
 
-+ Before the upgrade, check the value of the TiDB configuration [`feedback-probability`](/tidb-configuration-file.md#feedback-probability). If the value is not 0, the "panic in the recoverable goroutine" error will occur after the upgrade, but this error does not affect the upgrade.
++ Before the upgrade, check the value of the TiDB configuration [`feedback-probability`](https://docs.pingcap.com/tidb/v5.0/tidb-configuration-file#feedback-probability). If the value is not 0, the "panic in the recoverable goroutine" error will occur after the upgrade, but this error does not affect the upgrade.
 + Forbid conversion between `VARCHAR` type and `CHAR` type during the column type change to avoid data correctness issues.
 
 ## New features
@@ -151,7 +151,7 @@ This feature is introduced in v5.0. To use the feature, enable the system variab
 
 ### MPP architecture
 
-[User document](/tiflash/use-tiflash.md)
+[User document](/tiflash/use-tiflash-mpp-mode.md)
 
 TiDB introduces the MPP architecture through TiFlash nodes. This architecture allows multiple TiFlash nodes to share the execution workload of large join queries.
 
@@ -159,7 +159,7 @@ When the MPP mode is on, TiDB determines whether to send a query to the MPP engi
 
 In the TPC-H 100 benchmark test, TiFlash MPP delivers significant processing speed over analytic engines of traditional analytic databases and SQL on Hadoop. With this architecture, you can perform large-scale analytic queries directly on the latest transaction data, with a higher performance than traditional offline analytic solutions. According to the benchmark, with the same cluster resource, TiDB 5.0 MPP shows 2 to 3 times of speedup over Greenplum 6.15.0 and Apache Spark 3.1.1, and some queries have 8 times better performance.
 
-Currently, the main features that the MPP mode does not support are as follows (For details, refer to [Use TiFlash](/tiflash/use-tiflash.md)):
+Currently, the main features that the MPP mode does not support are as follows (For details, refer to [Use TiFlash](/tiflash/use-tiflash-mpp-mode.md)):
 
 + Table partitioning
 + Window Function
@@ -341,7 +341,7 @@ Add a system variable [`tidb_allow_fallback_to_tikv`](/system-variables.md#tidb_
 
 ### Improve TiCDC stability and alleviate the OOM issue caused by replicating too much incremental data
 
-[User document](/ticdc/manage-ticdc.md#unified-sorter), [#1150](https://github.com/pingcap/tiflow/issues/1150)
+[User document](/ticdc/ticdc-manage-changefeed.md#unified-sorter), [#1150](https://github.com/pingcap/tiflow/issues/1150)
 
 In TiCDC v4.0.9 or earlier versions, replicating too much data change might cause OOM. In v5.0, the Unified Sorter feature is enabled by default to mitigate OOM issues caused by the following scenarios:
 

@@ -98,6 +98,14 @@ This document only describes parameters that are not included in command-line pa
 + Determines whether to force PD to start as a new cluster and modify the number of Raft members to `1`
 + Default value: `false`
 
+### `tso-update-physical-interval`
+
++ The interval at which PD updates the physical time of TSO.
++ In a default update interval of TSO physical time, PD provides at most 262144 TSOs. To get more TSOs, you can reduce the value of this configuration item. The minimum value is `1ms`.
++ Decreasing this configuration item might increase the CPU usage of PD. According to the test, compared with the interval of `50ms`, the [CPU usage](https://man7.org/linux/man-pages/man1/top.1.html) of PD will increase by about 10% when the interval is `1ms`.
++ Default value: `50ms`
++ Minimum value: `1ms`
+
 ## security
 
 Configuration items related to security
@@ -158,11 +166,13 @@ Configuration items related to the log file
 ### `max-days`
 
 + The maximum number of days in which a log is kept
++ If the configuration item is not set, or the value of it is set to the default value 0, PD does not clean log files.
 + Default value: `0`
 
 ### `max-backups`
 
 + The maximum number of log files to keep
++ If the configuration item is not set, or the value of it is set to the default value 0, PD keeps all log files.
 + Default value: `0`
 
 ## `metric`
@@ -182,6 +192,7 @@ Configuration items related to scheduling
 
 + Controls the size limit of `Region Merge`. When the Region size is greater than the specified value, PD does not merge the Region with the adjacent Regions.
 + Default value: `20`
++ Unit: MiB
 
 ### `max-merge-region-keys`
 
@@ -210,7 +221,7 @@ Configuration items related to scheduling
 
 ### `max-store-down-time`
 
-+ The downtime after which PD judges that the disconnected store can not be recovered. When PD fails to receive the heartbeat from a store after the specified period of time, it adds replicas at other nodes.
++ The downtime after which PD judges that the disconnected store cannot be recovered. When PD fails to receive the heartbeat from a store after the specified period of time, it adds replicas at other nodes.
 + Default value: `30m`
 
 ### `max-store-preparing-time` <span class="version-mark">New in v6.1.0</span>
@@ -227,6 +238,11 @@ Configuration items related to scheduling
 
 + The number of Region scheduling tasks performed at the same time
 + Default value: `2048`
+
+### `enable-diagnostic` <span class="version-mark">New in v6.3.0</span>
+
++ Controls whether to enable the diagnostic feature. When it is enabled, PD records the state during scheduling to help diagnose. If enabled, it might slightly affect the scheduling speed and consume more memory when there are many stores.
++ Default value: false
 
 ### `hot-region-schedule-limit`
 
@@ -273,7 +289,7 @@ Configuration items related to scheduling
 + Determines whether to enable the merging of cross-table Regions
 + Default value: `true`
 
-### `region-score-formula-version` <span class="version-mark">New in v5.0</span> 
+### `region-score-formula-version` <span class="version-mark">New in v5.0</span>
 
 + Controls the version of the Region score formula
 + Default value: `v2`
@@ -294,7 +310,7 @@ Configuration items related to scheduling
 + Default value: `10m`
 
 > **Note:**
-> 
+>
 > The information about hot Regions is updated every three minutes. If the interval is set to less than three minutes, updates during the interval might be meaningless.
 
 ### `hot-regions-reserved-days` <span class="version-mark">New in v5.4.0</span>
@@ -308,7 +324,7 @@ Configuration items related to replicas
 
 ### `max-replicas`
 
-+ The number of replicas, that is, the sum of the number of leaders and followers. The default value `3` means 1 leader and 2 followers. When this configuration is modified online, PD will schedule Regions in the background so that the number of replicas matches this configuration.
++ The number of replicas, that is, the sum of the number of leaders and followers. The default value `3` means 1 leader and 2 followers. When this configuration is modified dynamically, PD will schedule Regions in the background so that the number of replicas matches this configuration.
 + Default value: `3`
 
 ### `location-labels`
@@ -331,9 +347,8 @@ Configuration items related to replicas
 ### `enable-placement-rules`
 
 + Enables `placement-rules`.
-+ Default value: `false`
++ Default value: `true`
 + See [Placement Rules](/configure-placement-rules.md).
-+ An experimental feature of TiDB 4.0.
 
 ### `flow-round-by-digit` <span class="version-mark">New in TiDB 5.1</span>
 
@@ -342,7 +357,7 @@ Configuration items related to replicas
 
 > **Note:**
 >
-> If you have upgraded your cluster from a TiDB 4.0 version to the current version, the behavior of `flow-round-by-digit` after the upgrading and the behavior of `trace-region-flow` before the upgrading are consistent by default. This means that if the value of  `trace-region-flow` is false before the upgrading, the value of `flow-round-by-digit` after the upgrading is 127; if the value of `trace-region-flow` is `true` before the upgrading, the value of `flow-round-by-digit` after the upgrading is `3`.
+> If you have upgraded your cluster from a TiDB 4.0 version to the current version, the behavior of `flow-round-by-digit` after the upgrading and the behavior of `trace-region-flow` before the upgrading are consistent by default. This means that if the value of `trace-region-flow` is false before the upgrading, the value of `flow-round-by-digit` after the upgrading is 127; if the value of `trace-region-flow` is `true` before the upgrading, the value of `flow-round-by-digit` after the upgrading is `3`.
 
 ## `label-property`
 

@@ -27,7 +27,7 @@ This error indicates that for the `k2` index in table `t`, the number of indexes
 
 `ERROR 8138 (HY000): writing inconsistent data in table: t, expected-values:{KindString green} != record-values:{KindString GREEN}`
 
-This error indicates that the transaction was attempting to write an incorrect row value. For the data to be written, due to issues in the encoding and decoding process, the encoded row data does not match the original data before encoding.
+This error indicates that the transaction was attempting to write an incorrect row value. For the data to be written, the encoded row data does not match the original data before encoding.
 
 #### Error 8139
 
@@ -55,13 +55,16 @@ This section lists the data inconsistency errors that might occur in TiDB when y
 
 `ERROR 8003 (HY000): table count 3 != index(idx) count 2`
 
-This error indicates that the table on which the `ADMIN CHECK` statement is executed has 3 row key-value pairs but only 2 index key-value pairs.
+This error indicates that the table on which the [`ADMIN CHECK`](/sql-statements/sql-statement-admin-check-table-index.md) statement is executed has 3 row key-value pairs but only 2 index key-value pairs.
 
 #### Error 8134
 
 `ERROR 8134 (HY000): data inconsistency in table: t, index: c2, col: c2, handle: "2", index-values:"KindInt64 13" != record-values:"KindInt64 12", compare err:<nil>`
 
-This error indicates that for index `c2` in table `t`, the handle of a row is 13 in the index key-value pair but is 12 in the row record key-value pair, which is inconsistent.
+This error indicates that for index `c2` in table `t`, the value of column `c2` has the following inconsistency:
+
+- In the index key-value pair of the row whose handle is `2`, the value of column `c2` is `13`.
+- In the row record key-value pair, the value of column `c2` is `12`.
 
 #### Error 8223
 
@@ -69,25 +72,23 @@ This error indicates that for index `c2` in table `t`, the handle of a row is 13
 
 This error indicates that `index-values` are null and `record-values` are not null, meaning that there is no corresponding index for the row.
 
-## Reasons and solutions
+## Solutions
 
-When a data consistency error occurs, the reasons can be as follows:
-
-- The data and indexes in the existing data are consistent and the current version of TiDB has a bug. If an ongoing transaction is about to write inconsistent data, TiDB aborts the transaction.
-- The data and indexes in the existing data are inconsistent. The inconsistent data could be from a dangerous operation performed by mistake in the past or caused by a TiDB bug.
-- The data and indexes are consistent but the detection algorithm has a bug that causes errors by mistake.
-
-If you receive a data inconsistency error, contact PingCAP technical support for troubleshooting immediately instead of dealing with the error by yourself. If PingCAP technical support confirms that the error is reported by mistake, or your application needs to skip such errors urgently, you can use the following methods to bypass the check.
-
-### Disable error check
-
-For the following errors reported in transaction execution, you can bypass the corresponding check:
-
-- To bypass the check of errors 8138, 8139, and 8140, configure `set @@tidb_enable_mutation_checker=0`.
-- To bypass the check of error 8141, configure `set @@tidb_txn_assertion_level=OFF`.
-
-For other errors reported in transaction execution and all errors reported during the execution of the `ADMIN CHECK [TABLE|INDEX]` statement, you cannot bypass the corresponding check, because the data inconsistency has already occurred.
+If you encounter a data inconsistency error, contact PingCAP technical support for troubleshooting immediately instead of dealing with the error by yourself. If your application needs to skip such errors urgently, you can use the following methods to bypass the check.
 
 ### Rewrite SQL
 
-Disabling `tidb_enable_mutation_checker` and `tidb_txn_assertion_level` mentioned in the previous section bypasses the corresponding check of all SQL statements. If an inconsistency error is misreported for a particular SQL statement, you can try bypassing the error by rewriting the SQL statement to another equivalent form using different execution operators.
+If the data inconsistency error occurs in a particular SQL statement only, you can bypass this error by rewriting the SQL statement to another equivalent form using different execution operators.
+
+### Disable error checks
+
+For the following errors reported in transaction execution, you can bypass the corresponding checks:
+
+- To bypass the checks of errors 8138, 8139, and 8140, configure `set @@tidb_enable_mutation_checker=0`.
+- To bypass the checks of error 8141, configure `set @@tidb_txn_assertion_level=OFF`.
+
+> **Note:**
+>
+> Disabling `tidb_enable_mutation_checker` and `tidb_txn_assertion_level` will bypass the corresponding checks of all SQL statements.
+
+For other errors reported in transaction execution and all errors reported during the execution of the [`ADMIN CHECK [TABLE|INDEX]`](/sql-statements/sql-statement-admin-check-table-index.md) statement, you cannot bypass the corresponding check, because the data is already inconsistent.

@@ -17,6 +17,20 @@ The TiDB configuration file supports more options than command-line parameters. 
 - Default value: `true`
 - It is recommended to set it to `false` if you need to create a large number of tables (for example, more than 100 thousand tables).
 
+### `tidb_max_reuse_chunk` <span class="version-mark">New in v6.4.0</span>
+
+- Controls the maximum cached chunk objects of chunk allocation. Setting this configuration item to too large a value might increase the risk of OOM.
+- Default value: `64`
+- Minimum value: `0`
+- Maximum value: `2147483647`
+
+### `tidb_max_reuse_column` <span class="version-mark">New in v6.4.0</span>
+
+- Controls the maximum cached column objects of chunk allocation. Setting this configuration item to too large a value might increase the risk of OOM.
+- Default value: `256`
+- Minimum value: `0`
+- Maximum value: `2147483647`
+
 ### `token-limit`
 
 + The number of sessions that can execute requests concurrently.
@@ -26,16 +40,26 @@ The TiDB configuration file supports more options than command-line parameters. 
 + Maximum Value (64-bit platforms): `18446744073709551615`
 + Maximum Value (32-bit platforms): `4294967295`
 
+### `temp-dir` <span class="version-mark">New in v6.3.0</span>
+
++ File system location used by TiDB to store temporary data. If a feature requires local storage in TiDB nodes, TiDB stores the corresponding temporary data in this location.
++ When creating an index, if [`tidb_ddl_enable_fast_reorg`](/system-variables.md#tidb_ddl_enable_fast_reorg-new-in-v630) is enabled, data that needs to be backfilled for a newly created index will be at first stored in the TiDB local temporary directory, and then imported into TiKV in batches, thus accelerating the index creation.
++ Default value: `"/tmp/tidb"`
+
 ### `oom-use-tmp-storage`
 
+> **Warning:**
+>
+> Since v6.3.0, this configuration item is deprecated and superseded by the system variable [`tidb_enable_tmp_storage_on_oom`](/system-variables.md#tidb_enable_tmp_storage_on_oom). When the TiDB cluster is upgraded to v6.3.0 or a later version, it will automatically initialize the variable with the value of `oom-use-tmp-storage`. After that, changing the value of `oom-use-tmp-storage` **does not** take effect anymore.
+
 + Controls whether to enable the temporary storage for some operators when a single SQL statement exceeds the memory quota specified by the system variable [`tidb_mem_quota_query`](/system-variables.md#tidb_mem_quota_query).
-+ Default value:  `true`
++ Default value: `true`
 
 ### `tmp-storage-path`
 
 + Specifies the temporary storage path for some operators when a single SQL statement exceeds the memory quota specified by the system variable [`tidb_mem_quota_query`](/system-variables.md#tidb_mem_quota_query).
 + Default value: `<temporary directory of OS>/<OS user ID>_tidb/MC4wLjAuMDo0MDAwLzAuMC4wLjA6MTAwODA=/tmp-storage`. `MC4wLjAuMDo0MDAwLzAuMC4wLjA6MTAwODA=` is the `Base64` encoding result of `<host>:<port>/<statusHost>:<statusPort>`.
-+ This configuration takes effect only when `oom-use-tmp-storage` is `true`.
++ This configuration takes effect only when the system variable [`tidb_enable_tmp_storage_on_oom`](/system-variables.md#tidb_enable_tmp_storage_on_oom) is `ON`.
 
 ### `tmp-storage-quota`
 
@@ -62,6 +86,7 @@ The TiDB configuration file supports more options than command-line parameters. 
 
 - Determines whether to enable the `utf8mb4` character check. When this feature is enabled, if the character set is `utf8` and the `mb4` characters are inserted in `utf8`, an error is returned.
 - Default value: `false`
+- Since v6.1.0, whether to enable the `utf8mb4` character check is determined by the TiDB configuration item `instance.tidb_check_mb4_value_in_utf8` or the system variable `tidb_check_mb4_value_in_utf8`. `check-mb4-value-in-utf8` still takes effect. But if both `check-mb4-value-in-utf8` and `instance.tidb_check_mb4_value_in_utf8` are set, the latter takes effect.
 
 ### `treat-old-version-utf8-as-utf8mb4`
 
@@ -102,13 +127,14 @@ The TiDB configuration file supports more options than command-line parameters. 
 
 - Enables or disables the new collation support.
 - Default value: `true`
-- Note: This configuration takes effect only for the TiDB cluster that is first initialized. After the initialization, you cannot use this configuration item to enable or disable the new collation support. When a TiDB cluster is upgraded to v4.0 or later, because the cluster has been initialized before, both `true` and `false` values of this configuration item are taken as `false`.
+- Note: This configuration takes effect only for the TiDB cluster that is first initialized. After the initialization, you cannot use this configuration item to enable or disable the new collation support.
 
 ### `max-server-connections`
 
 - The maximum number of concurrent client connections allowed in TiDB. It is used to control resources.
 - Default value: `0`
 - By default, TiDB does not set limit on the number of concurrent client connections. When the value of this configuration item is greater than `0` and the number of actual client connections reaches this value, the TiDB server rejects new client connections.
+- Since v6.2.0, the TiDB configuration item [`instance.max_connections`](/tidb-configuration-file.md#max_connections) or the system variable [`max_connections`](/system-variables.md#max_connections) is used to set the maximum number of concurrent client connections allowed in TiDB. `max-server-connections` still takes effect. But if `max-server-connections` and `instance.max_connections` are set at the same time, the latter takes effect.
 
 ### `max-index-length`
 
@@ -159,6 +185,23 @@ The TiDB configuration file supports more options than command-line parameters. 
 + Default value: `true`
 + When the value is `true`, both `KILL` and `KILL TIDB` statements can terminate queries or connections across instances so you do not need to worry about erroneously terminating queries or connections. When you use a client to connect to any TiDB instance and execute the `KILL` or `KILL TIDB` statement, the statement will be forwarded to the target TiDB instance. If there is a proxy between the client and the TiDB cluster, the `KILL` and `KILL TIDB` statements will also be forwarded to the target TiDB instance for execution. Currently, using the MySQL command line <kbd>ctrl</kbd>+<kbd>c</kbd> to terminate a query or connection in TiDB is not supported when `enable-global-kill` is `true`. For more information on the `KILL` statement, see [KILL](/sql-statements/sql-statement-kill.md).
 
+### `enable-forwarding` <span class="version-mark">New in v5.0.0</span>
+
++ Controls whether the PD client and TiKV client in TiDB forward requests to the leader via the followers in the case of possible network isolation.
++ Default value: `false`
++ If the environment might have isolated network, enabling this parameter can reduce the window of service unavailability.
++ If you cannot accurately determine whether isolation, network interruption, or downtime has occurred, using this mechanism has the risk of misjudgment and causes reduced availability and performance. If network failure has never occurred, it is not recommended to enable this parameter.
+
+### `enable-table-lock` <span class="version-mark">New in v4.0.0</span>
+
+> **Warning:**
+>
+> The table lock is an experimental feature. It is not recommended that you use it in the production environment.
+
++ Controls whether to enable the table lock feature.
++ Default value: `false`
++ The table lock is used to coordinate concurrent access to the same table among multiple sessions. Currently, the `READ`, `WRITE`, and `WRITE LOCAL` lock types are supported. When the configuration item is set to `false`, executing the `LOCK TABLE` or `UNLOCK TABLE` statement does not take effect and returns the "LOCK/UNLOCK TABLES is not supported" warning.
+
 ## Log
 
 Configuration items related to log.
@@ -192,6 +235,7 @@ Configuration items related to log.
 - Determines whether to enable the slow query log.
 - Default value: `true`
 - To enable the slow query log, set `enable-slow-log` to `true`. Otherwise, set it to `false`.
+- Since v6.1.0, whether to enable slow query log is determined by the TiDB configuration item [`instance.tidb_enable_slow_log`](/tidb-configuration-file.md#tidb_enable_slow_log) or the system variable [`tidb_enable_slow_log`](/system-variables.md#tidb_enable_slow_log). `enable-slow-log` still takes effect. But if `enable-slow-log` and `instance.tidb_enable_slow_log` are set at the same time, the latter takes effect.
 
 ### `slow-query-file`
 
@@ -203,14 +247,16 @@ Configuration items related to log.
 ### `slow-threshold`
 
 - Outputs the threshold value of consumed time in the slow log.
-- Default value: `300ms`
+- Default value: `300`
+- Unit: Milliseconds
 - If the value in a query is larger than the default value, it is a slow query and is output to the slow log.
+- Since v6.1.0, the threshold value of consumed time in the slow log is specified by the TiDB configuration item [`instance.tidb_slow_log_threshold`](/tidb-configuration-file.md#tidb_slow_log_threshold) or the system variable [`tidb_slow_log_threshold`](/system-variables.md#tidb_slow_log_threshold). `slow-threshold` still takes effect. But if `slow-threshold` and `instance.tidb_slow_log_threshold` are set at the same time, the latter takes effect.
 
 ### `record-plan-in-slow-log`
 
-+ Determines whether to record execution plans in the slow log.
-+ Default value: `1`
-+ `0` means to disable, and `1` (by default) means to enable. The value of this parameter is the initial value of the [`tidb_record_plan_in_slow_log`](/system-variables.md#tidb_record_plan_in_slow_log) system variable.
+- Determines whether to record execution plans in the slow log.
+- Default value: `1`
+- Since v6.1.0, whether to record execution plans in the slow log is determined by the TiDB configuration item [`instance.tidb_record_plan_in_slow_log`](/tidb-configuration-file.md#tidb_record_plan_in_slow_log) or the system variable [`tidb_record_plan_in_slow_log`](/system-variables.md#tidb_record_plan_in_slow_log). `record-plan-in-slow-log` still takes effect. But if `record-plan-in-slow-log` and `instance.tidb_record_plan_in_slow_log` are set at the same time, the latter takes effect.
 
 ### `expensive-threshold`
 
@@ -309,6 +355,31 @@ Configuration items related to security.
 - Default value: "", which allows TLSv1.1 or higher.
 - Optional values: `"TLSv1.0"`, `"TLSv1.1"`, `"TLSv1.2"` and `"TLSv1.3"`
 
+### `auth-token-jwks` <span class="version-mark">New in v6.4.0</span>
+
+> **Warning:**
+>
+> The `tidb_auth_token` authentication method is used only for the internal operation of TiDB Cloud. **DO NOT** change the value of this configuration.
+
+- Set the local file path of the JSON Web Key Sets (JWKS) for the `tidb_auth_token` authentication method.
+- Default value: `""`
+
+### `auth-token-refresh-interval` <span class="version-mark">New in v6.4.0</span>
+
+> **Warning:**
+>
+> The `tidb_auth_token` authentication method is used only for the internal operation of TiDB Cloud. **DO NOT** change the value of this configuration.
+
+- Set the JWKS refresh interval for the `tidb_auth_token` authentication method.
+- Default value: `1h`
+
+### `disconnect-on-expired-password` <span class="version-mark">New in v6.5.0</span>
+
+- Determines whether TiDB disconnects the client connection when the password is expired.
+- Default value: `true`
+- Optional values: `true`, `false`
+- If you set it to `true`, the client connection is disconnected when the password is expired. If you set it to `false`, the client connection is restricted to the "sandbox mode" and the user can only execute the password reset operation.
+
 ## Performance
 
 Configuration items related to performance.
@@ -323,18 +394,10 @@ Configuration items related to performance.
 
 > **Warning:**
 >
-> `server-memory-quota` is still an experimental feature. It is **NOT** recommended that you use it in a production environment.
+> Since v6.5.0, the `server-memory-quota` configuration item is deprecated and replaced by the system variable [`tidb_server_memory_limit`](/system-variables.md#tidb_server_memory_limit-new-in-v640).
 
 + The memory usage limit of tidb-server instances.
 + Default value: `0` (in bytes), which means no memory limit.
-
-### `memory-usage-alarm-ratio` <span class="version-mark">New in v4.0.9</span>
-
-+ TiDB triggers an alarm when the memory usage of tidb-server instance exceeds a certain threshold. The valid value for this configuration item ranges from `0` to `1`. If it is configured as `0` or `1`, this alarm feature is disabled.
-+ Default value: `0.8`
-+ When the memory usage alarm is enabled, if [`server-memory-quota`](/tidb-configuration-file.md#server-memory-quota-new-in-v409) is not set, then the threshold of memory usage is ```the `memory-usage-alarm-ratio` value * the system memory size```; if `server-memory-quota` is set to a value greater than 0, then the threshold of memory usage is ```the `memory-usage-alarm-ratio` value * the `server-memory-quota` value```.
-+ When TiDB detects that the memory usage of the tidb-server instance exceeds the threshold, it considers that there might be a risk of OOM. Therefore, it records ten SQL statements with the highest memory usage, ten SQL statements with the longest running time, and the heap profile among all SQL statements currently being executed to the directory [`tmp-storage-path/record`](/tidb-configuration-file.md#tmp-storage-path) and outputs a log containing the keyword `tidb-server has the risk of OOM`.
-+ The value of this configuration item is the initial value of the system variable [`tidb_memory_usage_alarm_ratio`](/system-variables.md#tidb_memory_usage_alarm_ratio).
 
 ### `max-txn-ttl`
 
@@ -355,12 +418,17 @@ Configuration items related to performance.
 - Default value: `6291456` (in bytes)
 - The size limit of a single key-value record in a transaction. If the size limit is exceeded, TiDB returns the `entry too large` error. The maximum value of this configuration item does not exceed `125829120` (120 MB).
 - Note that TiKV has a similar limit. If the data size of a single write request exceeds [`raft-entry-max-size`](/tikv-configuration-file.md#raft-entry-max-size), which is 8 MB by default, TiKV refuses to process this request. When a table has a row of large size, you need to modify both configurations at the same time.
+- The default value of [`max_allowed_packet`](/system-variables.md#max_allowed_packet-new-in-v610) (the maximum size of a packet for the MySQL protocol) is 67108864 (64 MiB). If a row is larger than `max_allowed_packet`, the row gets truncated.
+- The default value of [`txn-total-size-limit`](#txn-total-size-limit) (the size limit of a single transaction in TiDB) is 100 MiB. If you increase the `txn-entry-size-limit` value to be over 100 MiB, you need to increase the `txn-total-size-limit` value accordingly.
 
 ### `txn-total-size-limit`
 
 - The size limit of a single transaction in TiDB.
 - Default value: `104857600` (in bytes)
 - In a single transaction, the total size of key-value records cannot exceed this value. The maximum value of this parameter is `1099511627776` (1 TB). Note that if you have used the binlog to serve the downstream consumer Kafka (such as the `arbiter` cluster), the value of this parameter must be no more than `1073741824` (1 GB). This is because 1 GB is the upper limit of a single message size that Kafka can process. Otherwise, an error is returned if this limit is exceeded.
+- In TiDB v6.5.0 and later versions, this configuration is no longer recommended. The memory size of a transaction will be accumulated into the memory usage of the session, and the [`tidb_mem_quota_query`](/system-variables.md#tidb_mem_quota_query) variable will take effect when the session memory threshold is exceeded. To be compatible with previous versions, this configuration works as follows when you upgrade from an earlier version to TiDB v6.5.0 or later:
+    - If this configuration is not set or is set to the default value (`104857600`), after an upgrade, the memory size of a transaction will be accumulated into the memory usage of the session, and the `tidb_mem_quota_query` variable will take effect.
+    - If this configuration is not defaulted (`104857600`), it still takes effect and its behavior on controling the size of a single transaction remains unchanged before and after the upgrade. This means that the memory size of the transaction is not controlled by the `tidb_mem_quota_query` variable.
 
 ### `tcp-keep-alive`
 
@@ -392,17 +460,6 @@ Configuration items related to performance.
     - `mysql.stats_histograms`/`mysql.stats_buckets` and `mysql.stats_top_n`: TiDB no longer automatically analyzes and proactively updates statistics.
     - `mysql.stats_feedback`: TiDB no longer updates the statistics of the tables and indexes according to a part of statistics returned by the queried data.
 
-### `feedback-probability`
-
-- The probability that TiDB collects the feedback statistics of each query.
-- Default value: `0`
-- This feature is disabled by default, and it is not recommended to enable this feature. If it is enabled, TiDB collects the feedback of each query at the probability of `feedback-probability`, to update statistics.
-
-### `query-feedback-limit`
-
-- The maximum pieces of query feedback that can be cached in memory. Extra pieces of feedback that exceed this limit are discarded.
-- Default value: `1024`
-
 ### `pseudo-estimate-ratio`
 
 - The ratio of (number of modified rows)/(total number of rows) in a table. If the value is exceeded, the system assumes that the statistics have expired and the pseudo statistics will be used.
@@ -413,7 +470,8 @@ Configuration items related to performance.
 
 - Sets the priority for all statements.
 - Default value: `NO_PRIORITY`
-- Optional values: `NO_PRIORITY`, `LOW_PRIORITY`, `HIGH_PRIORITY` and `DELAYED`.
+- Value options: The default value `NO_PRIORITY` means that the priority for statements is not forced to change. Other options are `LOW_PRIORITY`, `DELAYED`, and `HIGH_PRIORITY` in ascending order.
+- Since v6.1.0, the priority for all statements is determined by the TiDB configuration item [`instance.tidb_force_priority`](/tidb-configuration-file.md#tidb_force_priority) or the system variable [`tidb_force_priority`](/system-variables.md#tidb_force_priority). `force-priority` still takes effect. But if `force-priority` and `instance.tidb_force_priority` are set at the same time, the latter takes effect.
 
 ### `distinct-agg-push-down`
 
@@ -438,7 +496,7 @@ Configuration items related to performance.
 
 ### `stats-load-concurrency` <span class="version-mark">New in v5.4.0</span>
 
-> **WARNING:**
+> **Warning:**
 >
 > Currently, synchronously loading statistics is an experimental feature. It is not recommended that you use it in production environments.
 
@@ -448,7 +506,7 @@ Configuration items related to performance.
 
 ### `stats-load-queue-size` <span class="version-mark">New in v5.4.0</span>
 
-> **WARNING:**
+> **Warning:**
 >
 > Currently, synchronously loading statistics is an experimental feature. It is not recommended that you use it in production environments.
 
@@ -476,16 +534,16 @@ Configuration items related to opentracing.sampler.
 
 ### `type`
 
-+ Specifies the type of the opentracing sampler.
++ Specifies the type of the opentracing sampler. The string value is case-insensitive.
 + Default value: `"const"`
-+ Value options: `"const"`, `"probabilistic"`, `"rateLimiting"`, `"remote"`
++ Value options: `"const"`, `"probabilistic"`, `"ratelimiting"`, `"remote"`
 
 ### `param`
 
 + The parameter of the opentracing sampler.
     - For the `const` type, the value can be `0` or `1`, which indicates whether to enable the `const` sampler.
     - For the `probabilistic` type, the parameter specifies the sampling probability, which can be a float number between `0` and `1`.
-    - For the `rateLimiting` type, the parameter specifies the number of spans sampled per second.
+    - For the `ratelimiting` type, the parameter specifies the number of spans sampled per second.
     - For the `remote` type, the parameter specifies the sampling probability, which can be a float number between `0` and `1`.
 + Default value: `1.0`
 
@@ -678,6 +736,91 @@ For pessimistic transaction usage, refer to [TiDB Pessimistic Transaction Mode](
 + For scenarios with conflicts, after enabling this configuration, TiDB includes auto-commit transactions into the global lock-waiting management, which avoids deadlocks and mitigates the latency spike brought by deadlock-causing conflicts.
 + For scenarios with no conflicts, if there are many auto-commit transactions (the specific number is determined by the real scenarios. For example, the number of auto-commit transactions accounts for more than half of the total number of applications), and a single transaction operates a large data volume, enabling this configuration causes performance regression. For example, the auto-commit `INSERT INTO SELECT` statement.
 + Default value: `false`
+
+### constraint-check-in-place-pessimistic <span class="version-mark">New in v6.4.0</span>
+
++ Controls the default value of the system variable [`tidb_constraint_check_in_place_pessimistic`](/system-variables.md#tidb_constraint_check_in_place_pessimistic-new-in-v630).
++ Default value: `true`
+
+## isolation-read
+
+Configuration items related to read isolation.
+
+### `engines`
+
+- Controls from which engine TiDB allows to read data.
+- Default value: ["tikv", "tiflash", "tidb"], indicating that the engine is automatically selected by the optimizer.
+- Value options: Any combinations of "tikv", "tiflash", and "tidb", for example, ["tikv", "tidb"] or ["tiflash", "tidb"]
+
+## instance
+
+### `tidb_enable_collect_execution_info`
+
+- This configuration controls whether to record the execution information of each operator in the slow query log.
+- Default value: `true`
+- Before v6.1.0, this configuration is set by `enable-collect-execution-info`.
+
+### `tidb_enable_slow_log`
+
+- This configuration is used to control whether to enable the slow log feature.
+- Default value: `true`
+- Value options: `true` or `false`
+- Before v6.1.0, this configuration is set by `enable-slow-log`.
+
+### `tidb_slow_log_threshold`
+
+- This configuration is used to output the threshold value of the time consumed by the slow log. When the time consumed by a query is larger than this value, this query is considered as a slow log and its log is output to the slow query log.
+- Default value: `300`
+- Range: `[-1, 9223372036854775807]`
+- Unit: Milliseconds
+- Before v6.1.0, this configuration is set by `slow-threshold`.
+
+### `tidb_record_plan_in_slow_log`
+
+- This configuration is used to control whether to include the execution plan of slow queries in the slow log.
+- Default value: `1`
+- Value options: `1` (enabled, default) or `0` (disabled).
+- The value of this configuration will initialize the value of system variable [`tidb_record_plan_in_slow_log`](/system-variables.md#tidb_record_plan_in_slow_log)
+- Before v6.1.0, this configuration is set by `record-plan-in-slow-log`.
+
+### `tidb_force_priority`
+
+- This configuration is used to change the default priority for statements executed on a TiDB server.
+- Default value: `NO_PRIORITY`
+- The default value `NO_PRIORITY` means that the priority for statements is not forced to change. Other options are `LOW_PRIORITY`, `DELAYED`, and `HIGH_PRIORITY` in ascending order.
+- Before v6.1.0, this configuration is set by `force-priority`.
+
+### `max_connections`
+
+- The maximum number of connections permitted for a single TiDB instance. It can be used for resources control.
+- Default value: `0`
+- Range: `[0, 100000]`
+- The default value `0` means no limit. When the value of this variable is larger than `0`, and the number of connections reaches the value, the TiDB server will reject new connections from clients.
+- The value of this configuration will initialize the value of system variable [`max_connections`](/system-variables.md#max_connections)
+- Before v6.2.0, this configuration is set by `max-server-connections`.
+
+### `tidb_enable_ddl`
+
+- This configuration controls whether the corresponding TiDB instance can run DDL statements or not.
+- Default value: `true`
+- Possible values: `OFF`, `ON`
+- The value of this configuration will initialize the value of the system variable [`tidb_enable_ddl`](/system-variables.md#tidb_enable_ddl)
+- Before v6.3.0, this configuration is set by `run-ddl`.
+
+## proxy-protocol
+
+Configuration items related to the PROXY protocol.
+
+### `networks`
+
+- The list of proxy server's IP addresses allowed to connect to TiDB using the [PROXY protocol](https://www.haproxy.org/download/1.8/doc/proxy-protocol.txt)
+- Default value: ""
+- In general cases, when you access TiDB behind a reverse proxy, TiDB takes the IP address of the reverse proxy server as the IP address of the client. By enabling the PROXY protocol, reverse proxies that support this protocol, such as HAProxy, can pass the real client IP address to TiDB.
+- After configuring this parameter, TiDB allows the configured source IP address to connect to TiDB using the PROXY protocol; if a protocol other than PROXY is used, this connection will be denied. If this parameter is left empty, no IP address can connect to TiDB using the PROXY protocol. The value can be an IP address (192.168.1.50) or CIDR (192.168.1.0/24) with `,` as the separator. `*` means any IP addresses.
+
+> **Warning:**
+>
+> Use `*` with caution because it might introduce security risks by allowing a client of any IP address to report its IP address. In addition, using `*` might also cause the internal component that directly connects to TiDB (such as TiDB Dashboard) to be unavailable.
 
 ## experimental
 

@@ -23,7 +23,17 @@ Currently, it is not supported to only enable encrypted transmission of some spe
 
     You can use tools like `openssl`, `easy-rsa` and `cfssl` to generate self-signed certificates.
 
+    <CustomContent platform="tidb">
+
     If you choose `openssl`, you can refer to [generating self-signed certificates](/generate-self-signed-certificates.md).
+
+    </CustomContent>
+
+    <CustomContent platform="tidb-cloud">
+
+    If you choose `openssl`, you can refer to [generating self-signed certificates](https://docs.pingcap.com/tidb/stable/generate-self-signed-certificates).
+
+    </CustomContent>
 
 2. Configure certificates.
 
@@ -102,7 +112,16 @@ Currently, it is not supported to only enable encrypted transmission of some spe
 
     - TiCDC
 
-        Configure in the command-line arguments and set the corresponding URL to `https`:
+        Configure in the configuration file：
+
+        ```toml
+        [security]
+        ca-path = "/path/to/ca.pem"
+        cert-path = "/path/to/cdc-server.pem"
+        key-path = "/path/to/cdc-server-key.pem"
+        ```
+
+        Alternatively, configure in the command-line arguments and set the corresponding URL to `https`:
 
         {{< copyable "shell-regular" >}}
 
@@ -125,7 +144,7 @@ Currently, it is not supported to only enable encrypted transmission of some spe
     {{< copyable "shell-regular" >}}
 
     ```bash
-    tiup ctl pd -u https://127.0.0.1:2379 --cacert /path/to/ca.pem --cert /path/to/client.pem --key /path/to/client-key.pem
+    tiup ctl:<cluster-version> pd -u https://127.0.0.1:2379 --cacert /path/to/ca.pem --cert /path/to/client.pem --key /path/to/client-key.pem
     ```
 
     {{< copyable "shell-regular" >}}
@@ -172,16 +191,6 @@ To verify component caller's identity, you need to mark the certificate user ide
     cert-allowed-cn = ["TiKV-Server", "TiDB-Server", "PD-Control"]
     ```
 
-- TiCDC
-
-    Configure in the command-line arguments:
-
-    {{< copyable "shell-regular" >}}
-
-    ```bash
-    cdc server --pd=https://127.0.0.1:2379 --log-file=ticdc.log --addr=0.0.0.0:8301 --advertise-addr=127.0.0.1:8301 --ca=/path/to/ca.pem --cert=/path/to/ticdc-cert.pem --key=/path/to/ticdc-key.pem --cert-allowed-cn="client1,client2"
-    ```
-
 - TiFlash (New in v4.0.5)
 
     Configure in the `tiflash.toml` file or command-line arguments:
@@ -197,7 +206,7 @@ To verify component caller's identity, you need to mark the certificate user ide
     [security]
     cert-allowed-cn = ["PD-Server", "TiKV-Server", "TiFlash-Server"]
     ```
-    
+
 ### Reload certificates
 
 To reload the certificates and the keys, TiDB, PD, TiKV, and all kinds of clients reread the current certificates and the key files each time a new connection is created. Currently, you cannot reload the CA certificate.
