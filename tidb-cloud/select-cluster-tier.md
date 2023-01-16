@@ -35,7 +35,7 @@ Whenever you use or set a database user name, you must include the prefix in the
 
     > **Note:**
     >
-    > Serverless Tier requires TLS connection. To find the CA root path on your system, see [CA root path lists](/tidb-cloud/secure-connections-to-serverless-tier-clusters.md#where-is-the-ca-root-path-on-my-system).
+    > Serverless Tier requires TLS connection. To find the CA root path on your system, see [Root certificate default path](/tidb-cloud/secure-connections-to-serverless-tier-clusters.md#root-certificate-default-path).
 
 - To create a database user:
 

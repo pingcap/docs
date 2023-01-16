@@ -68,7 +68,7 @@ You can use the tool [Dumpling](/dumpling-overview.md) for data export.
     - `-u`: The TiDB cluster user.
     - `-p`: The TiDB cluster password.
     - `-F`: The maximum size of a single file.
-    - `--ca`: The CA root path. Refer to [Secure Connections to Serverless Tier Clusters](/tidb-cloud/secure-connections-to-serverless-tier-clusters.md#where-is-the-ca-root-path-on-my-system).
+    - `--ca`: The CA root path. Refer to [TLS Connections to Serverless Tier](/tidb-cloud/secure-connections-to-serverless-tier-clusters.md#root-certificate-default-path).
     - `-o`: The export directory.
     - `--filetype`: The exported file type. The default value is `sql`. You can choose from `sql` and `csv`.
 
