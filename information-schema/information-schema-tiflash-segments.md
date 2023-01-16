@@ -7,7 +7,7 @@ summary: Learn the `TIFLASH_SEGMENTS` information_schema table.
 
 > **Warning:**
 >
-> Do not use this table in production environments, as the contents of the table are unstable, and subject to change in new releases of TiDB, without prior notice.
+> Do not use this table in production environments, as the fields of the table are unstable, and subject to change in new releases of TiDB, without prior notice.
 
 The `TIFLASH_SEGMENTS` table provides statistical information about data tables in TiFlash.
 
@@ -64,10 +64,10 @@ Fields in the `TIFLASH_SEGMENTS` table are described as follows:
 - `TIDB_DATABASE`: Database name in TiDB. The segment belongs to a table in this database.
 - `TIDB_TABLE`: Table name in TiDB. The segment belongs to this table.
 - `TABLE_ID`: The internal ID of the table to which the segment belongs. This ID is unique within a TiDB cluster.
-- `IS_TOMBSTONE`: Indicates whether the table the segment belongs to can be recycled. `1` indicates that the table can be recycled. `0` indicates that the table is normal.
+- `IS_TOMBSTONE`: Indicates whether the table the segment belongs to can be recycled. `1` indicates that the table can be recycled. `0` indicates that the table is in a normal state.
 - `SEGMENT_ID`: Segment ID, which is unique within a table.
 - `RANGE`: The range of data that the segment contains.
-- `EPOCH`: The updated version of the segment. The version number of each segment is monotonically increasing.
+- `EPOCH`: The updated version of the segment. The version number of each segment increases monotonically.
 - `ROWS`: The total number of rows in the segment.
 - `SIZE`: The total size of the segment data (in bytes).
 - `DELTA_RATE`: The ratio of the total number of rows in the Delta layer to that in the segment.
@@ -91,4 +91,4 @@ Fields in the `TIFLASH_SEGMENTS` table are described as follows:
 - `STABLE_DMFILES_SIZE`: The total size of the data in the DMFile in the Stable layer (in bytes).
 - `STABLE_DMFILES_SIZE_ON_DISK`: The disk space occupied by the DMFile in the Stable layer (in bytes).
 - `STABLE_DMFILES_PACKS`: The number of Packs in the DMFile in the Stable layer.
-- `TIFLASH_INSTANCE`: TiFlash instance address.
+- `TIFLASH_INSTANCE`: The address of the TiFlash instance.

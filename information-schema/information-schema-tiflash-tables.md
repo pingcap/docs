@@ -7,7 +7,7 @@ summary: Learn the `TIFLASH_TABLES` information_schema table.
 
 > **Warning:**
 >
-> Do not use this table in production environments, as the contents of the table are unstable, and subject to change in new releases of TiDB, without prior notice.
+> Do not use this table in production environments, as the fields of the table are unstable, and subject to change in new releases of TiDB, without prior notice.
 
 The `TIFLASH_TABLES` table provides statistical information about data tables in TiFlash.
 
@@ -85,12 +85,12 @@ Fields in the `TIFLASH_TABLES` table are described as follows:
 - `TIDB_DATABASE`: The name of the database that the table belongs to in TiDB.
 - `TIDB_TABLE`: The name of the table in TiDB.
 - `TABLE_ID`: The internal ID of the table, which is unique within a TiDB cluster.
-- `IS_TOMBSTONE`: Indicates whether the table can be recycled. `1` indicates that the table can be recycled, and `0` indicates that the table is normal.
+- `IS_TOMBSTONE`: Indicates whether the table can be recycled. `1` indicates that the table can be recycled, and `0` indicates that the table is in a normal state.
 - `SEGMENT_COUNT`: The number of segments in the table. A segment is a data management unit in TiFlash.
 - `TOTAL_ROWS`: The total number of rows in the table.
 - `TOTAL_SIZE`: The total size of the table (in bytes).
 - `TOTAL_DELETE_RANGES`: The total number of Delete Ranges in the table.
-- `DELTA_RATE_ROWS`: The ratio of total rows of the table in the Delta layer to the total rows of that table.
+- `DELTA_RATE_ROWS`: The ratio of the total rows of the table in the Delta layer to the total rows of that table.
 - `DELTA_RATE_SEGMENTS`: The proportion of segments that contain non-empty Delta layers in the table.
 - `DELTA_PLACED_RATE`: The proportion of rows that have completed index construction of the table in the Delta layer.
 - `DELTA_CACHE_SIZE`: The size of the cache of the table Delta layer (in bytes).
@@ -133,4 +133,4 @@ Fields in the `TIFLASH_TABLES` table are described as follows:
 - `STORAGE_META_OLDEST_SNAPSHOT_THREAD_ID`: The thread ID of the earliest snapshot in the meta information.
 - `STORAGE_META_OLDEST_SNAPSHOT_TRACING_ID`: The tracing ID of the earliest snapshot in the meta information.
 - `BACKGROUND_TASKS_LENGTH`: The length of the task queue in the background.
-- `TIFLASH_INSTANCE`: TiFlash instance address.
+- `TIFLASH_INSTANCE`: The address of the TiFlash instance.
