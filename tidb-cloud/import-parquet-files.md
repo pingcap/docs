@@ -104,10 +104,9 @@ To import the Parquet files to TiDB Cloud, take the following steps:
 
     2. Click the name of your target cluster to go to its overview page, and then click **Import** in the left navigation pane.
 
-2. On the **Import** page, do one of the following:
-
-    - If your TiDB cluster is hosted by AWS, click **Import Data** in the upper-right corner, and then select **From S3**.
-    - If your TiDB cluster is hosted by GCP, click **Import Data** in the upper-right corner.
+2. On the **Import** page:
+   - For a Dedicated Tier cluster, click **Import Data** in the upper-right corner.
+   - For a Serverless Tier cluster, click the **import data from S3** link above the upload area.
 
 3. Provide the following information for the source Parquet files:
 
@@ -155,6 +154,8 @@ To import the Parquet files to TiDB Cloud, take the following steps:
 7. When the import progress shows **Finished**, check the imported tables.
 
     If the number is zero, it means no data files matched the value you entered in the **Source file name** field. In this case, check whether there are any typos in the **Source file name** field and try again.
+
+8. After the import task is completed, you can click **Query Data** on the **Import** page to query your imported data. For more information about how to use Chat2Qury, see [Explore Your Data with AI-Powered Chat2Query](/tidb-cloud/explore-data-with-chat2query.md).
 
 When you run an import task, if any unsupported or invalid conversions are detected, TiDB Cloud terminates the import job automatically and reports an importing error.
 

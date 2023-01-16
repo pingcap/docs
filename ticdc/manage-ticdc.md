@@ -825,8 +825,8 @@ level = "eventual"
 # Individual redo log file size, in MiB. By default, it's 64. It is recommended to be no more than 128.
 max-log-size = 64
 
-# The interval for flushing or uploading redo logs to S3, in milliseconds. By default, it's 1000. The recommended range is 500-2000.
-flush-interval = 1000
+# The interval for flushing or uploading redo logs to Amazon S3, in milliseconds. It is recommended that this configuration be equal to or greater than 2000.
+flush-interval = 2000
 
 # Form of storing redo log, including nfs (NFS directory) and S3 (uploading to S3).
 storage = "s3://logbucket/test-changefeed?endpoint=http://$S3_ENDPOINT/"
