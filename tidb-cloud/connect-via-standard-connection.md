@@ -26,7 +26,7 @@ To connect to a Serverless Tier cluster via standard connection, perform the fol
     > **Note:**
     >
     > - When you connect to a Serverless Tier cluster, you must include the prefix for your cluster in the user name and wrap the name with quotation marks. For more information, see [User name prefix](/tidb-cloud/select-cluster-tier.md#user-name-prefix).
-    > - Serverless Tier clusters only support TLS connection. For more information, see [Secure Connections to Serverless Tier Clusters](/tidb-cloud/secure-connections-to-serverless-tier-clusters.md).
+    > - Serverless Tier clusters only support TLS connection. For more information, see [TLS Connection to Serverless Tier](/tidb-cloud/secure-connections-to-serverless-tier-clusters.md).
 
 ## Dedicated Tier
 
