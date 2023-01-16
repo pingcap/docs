@@ -3740,6 +3740,12 @@ For details, see [Identify Slow Queries](/identify-slow-queries.md).
 
 </CustomContent>
 
+<CustomContent platform="tidb-cloud">
+
+- This variable is used to configure the different cluster IDs in a [bi-directional replication](https://docs.pingcap.com/tidb/stable/ticdc-bidirectional-replication) cluster.
+
+</CustomContent>
+
 ### tidb_stats_cache_mem_quota <span class="version-mark">New in v6.1.0</span>
 
 > **Warning:**
