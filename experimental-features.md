@@ -58,3 +58,4 @@ Elastic scheduling feature. It enables the TiDB cluster to dynamically scale out
 ## Diagnostics
 
 + [TiKV-FastTune dashboard](/grafana-tikv-dashboard.md#tikv-fasttune-dashboard) (Introduced in v4.0)
++ [Persistent Statement Summary](/statement-summary-tables.md#persistent-statements-summary) (Introduced in v6.6)

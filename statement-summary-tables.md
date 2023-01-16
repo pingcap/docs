@@ -185,6 +185,33 @@ The statement summary tables have the following limitation:
 
 All data of the statement summary tables above will be lost when the TiDB server is restarted. This is because statement summary tables are all memory tables, and the data is cached in memory instead of being persisted on storage.
 
+## Persistent Statements Summary
+
+> **Warning:**
+>
+> Persistent statements summary is an experimental feature. It is not recommended that you use it in the production environment.
+
+As described in the [Limitation](#limitation) section, the statements summary is only maintained in memory by default. Once the TiDB server restarts, all the statements summary will be lost. Since v6.6, TiDB experimentally provides [some options](/tidb-configuration-file.md#tidb_statements_summary_enable_persistent-new-in-v660) to allow users to enable persistence for statements summary.
+
+If you want to enable statements summary persistence, you can add the following configuration to the TiDB configuration file:
+
+```toml
+[instance]
+tidb_statements_summary_enable_persistent = true
+# The following entries show the default values, which can be modified as needed.
+# tidb_statements_summary_filename = "tidb-statements.log"
+# tidb_statements_summary_file_max_days = 3
+# tidb_statements_summary_file_max_size = 64 # MB
+# tidb_statements_summary_file_max_backups = 0
+```
+
+After the persistent statements summary is enabled, the historical data will no longer be maintained in the memory, and only the current real-time data will be maintained in the memory. Once the real-time data is refreshed as historical data, it will be directly written to the disk file. (Refer to `tidb_stmt_summary_refresh_interval` described in [Parameter configuration](#parameter-configuration).) 
+
+> **Note:**
+>
+> - When persistence is enabled, the `tidb_stmt_summary_history_size` described in [Parameter configuration](#parameter-configuration) will no longer take effect because the historical data will no longer be maintained in memory. Instead, it will be: `tidb_statements_summary_file_max_days`, `tidb_statements_summary_file_max_size` and `tidb_statements_summary_file_max_backups`. These three configurations are used to determine the retention of historical data on disk.
+> - If `tidb_stmt_summary_refresh_interval` is reduced, the data written to disk will be more real-time, but the redundant data written to disk will also increase accordingly.
+
 ## Troubleshooting examples
 
 This section provides two examples to show how to use the statement summary feature to troubleshoot SQL performance issues.
