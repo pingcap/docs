@@ -18,7 +18,7 @@ Each Dedicated Tier cluster server TLS certificate is hosted on [AWS Certificate
 
 ## Prerequisites
 
-Before connecting to your dedicated cluster, Log in to TiDB Cloud via [Password Authentication](/tidb-cloud-password-authentication.md) or [SSO Authentication](/tidb-cloud/tidb-cloud-sso-authentication.md),and then [Create a TiDB Cloud Serveless Tier cluster](/tidb-cloud/tidb-cloud-quickstart.md).
+Before connecting to your dedicated cluster, log in to TiDB Cloud via [Password Authentication](/tidb-cloud/tidb-cloud-password-authentication.md) or [SSO Authentication](/tidb-cloud/tidb-cloud-sso-authentication.md), and then [Create a TiDB Cloud Dedicated Tier cluster](/tidb-cloud/create-tidb-cluster.md).
 
 ## Secure connection to a Dedicated Tier cluster
 
@@ -225,7 +225,7 @@ func main() {
 Parameter description：
 
 - Register `tls.Config` in connection to enable TLS and validate TiDB Dedicated Tier clusters. Go-MySQL-Driver uses system CA root certificates by default, so you do not need to configure certificates.
-- Set `MinVersion: tls.VersionTLS12，TLS13` to restrict the versions of TLS protocol.
+- Set `MinVersion: tls.VersionTLS12` to restrict the versions of TLS protocol.
 - Set `ServerName: "<host>"` to verify TiDB Dedicated Tier's hostname.
 - If you do not want to register a new TLS configuration, you can just set `tls=true` in the connection string.
 
@@ -283,14 +283,14 @@ connection.connect(function(err) {
 
 Parameter description：
 
-- Set `ssl: {minVersion: 'TLSv1.2,TLS1.3'}` to restrict the versions of TLS protocol.
+- Set `ssl: {minVersion: 'TLSv1.2'}` to restrict the versions of TLS protocol.
 
 </div>
 </SimpleTab>
 
 ## Create and Reset Dedicated database password
 
-When you connect to your cluster for the first time,You should click **Security Setting** to automatically generate a root password with a length of 16 characters, including numbers, uppercase and lowercase characters, and special characters. 
+When you connect to your cluster for the first time, you should click **Security Setting** to automatically generate a root password with a length of 16 characters, including numbers, uppercase and lowercase characters, and special characters. 
 
 ## Root Digital certificate management of Dedicated Tier 
 
