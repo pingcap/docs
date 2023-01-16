@@ -86,6 +86,7 @@
     - [Known Incompatibility Issues with Third-Party Tools](/develop/dev-guide-third-party-tools-compatibility.md)
     - [ProxySQL Integration Guide](/develop/dev-guide-proxysql-integration.md)
     - [Amazon AppFlow Integration Guide](/develop/dev-guide-aws-appflow-integration.md)
+    - [Amazon QuickSight Integration Guide](/develop/dev-guide-aws-quicksight-integration.md)
 - Deploy
   - [Software and Hardware Requirements](/hardware-and-software-requirements.md)
   - [Environment Configuration Checklist](/check-before-deployment.md)
