@@ -44,7 +44,7 @@ To integrate TiDB with Confluent Platform, you can use the TiCDC component with 
         "connector.class": "io.confluent.connect.jdbc.JdbcSinkConnector",
         "tasks.max": "1",
         "topics": "testdb_test",
-        "connection.url": "sqlite:test.db",
+        "connection.url": "jdbc:sqlite:/tmp/test.db", 
         "connection.ds.pool.size": 5,
         "table.name.format": "test",
         "auto.create": true,
