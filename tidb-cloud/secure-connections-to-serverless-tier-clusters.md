@@ -10,7 +10,7 @@ Establishing a secure TLS connection between your client and your TiDB Cloud Ser
 ## Prerequisites
 
 - Log in to TiDB Cloud via [Password Authentication](/tidb-cloud-password-authentication.md) or [SSO Authentication](/tidb-cloud/tidb-cloud-sso-authentication.md).
-- [Create a TiDB Cloud Serveless Tier cluster](/tidb-cloud/tidb-cloud-quickstart.md).
+- [Create a TiDB Cloud Serverless Tier cluster](/tidb-cloud/tidb-cloud-quickstart.md).
 
 ## Secure connection to a Serverless Tier cluster
 
@@ -31,7 +31,7 @@ In the [TiDB Cloud console](https://tidbcloud.com/), you can get examples of dif
     >
     > - The random password consists of 16 characters, including uppercase and lowercase letters, numbers, and special characters.
     > - After you close this dialog, the generated password will not show again, so you need to save the password in a secure location. If you forget it, you can click **Reset password** in this dialog to reset it.
-    > - The Serverless Tier cluster can be accessed through the internet. If you need to use the password elsewhere, it is recommended that you reset it to ensure the database security.
+    > - The Serverless Tier cluster can be accessed through the internet. If you need to use the password elsewhere, it is recommended that you reset it to ensure database security.
 
 5. Connect to your cluster with the connection string.
 
@@ -39,12 +39,12 @@ In the [TiDB Cloud console](https://tidbcloud.com/), you can get examples of dif
     >
     > When you connect to a Serverless Tier cluster, you must include the prefix for your cluster in the user name and wrap the name with quotation marks. For more information, see [User name prefix](/tidb-cloud/select-cluster-tier.md#user-name-prefix).
 
-The following examples show the connection strings in MySQL CLI, MyCLI, JDBC, Python, Go and Node.js. To learn how to get the `<CA_root_path>` of your operating system, see [Root certificate management](#root-certificate-management).
+The following examples show the connection strings in MySQL CLI, MyCLI, JDBC, Python, Go, and Node.js. To learn how to get the `<CA_root_path>` of your operating system, see [Root certificate management](#root-certificate-management).
 
 <SimpleTab>
 <div label="MySQL CLI">
 
-MySQL CLI client attempts to establish TLS connection by default. When you connect to TiDB Serverless Tier clusters, you should set `ssl-mode` and `ssl-ca`.
+MySQL CLI client attempts to establish a TLS connection by default. When you connect to TiDB Serverless Tier clusters, you should set `ssl-mode` and `ssl-ca`.
 
 ```shell
 mysql --connect-timeout 15 -u <username> -h <host> -P 4000 --ssl-mode=VERIFY_IDENTITY --ssl-ca=<CA_root_path> -D test -p
