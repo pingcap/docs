@@ -19,6 +19,11 @@ We are constantly filling in the feature gaps between Serverless Tier and Dedica
     - The compute resource is limited to 1 vCPU and 1 GiB RAM.
     - **Note**: In the coming months, we intend to offer a usage-based billing plan for additional resources and higher performance, while still keeping offering the free starter plan. In the coming releases, the limitations of the free Serverless Tier might be changed.
 
+## SQL
+
+- Using [`tidb_ddl_enable_fast_reorg`](/system-variables.md#tidb_ddl_enable_fast_reorg-new-in-v630) to improve the speed of index creation is not supported for Serverless Tier clusters.
+- [Time to live (TTL)](/time-to-live.md) is not available for Serverless Tier clusters currently.
+
 ## Transaction
 
 - The total size of a single transaction is set to no more than 10 MB on Serverless Tier during the beta phase.
