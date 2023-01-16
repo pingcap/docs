@@ -39,7 +39,7 @@ Specify the traffic allowed to connect the cluster. Traffic matching any filter 
 
 5. In the Step 2：Download TiDB cluster CA
 
-You should click **"**Download TiDB Cluster CA** to download it locally for client TLS configuration.Because of verifying the TiDB cluster CA can ensure the TLS connection is secure and reliable.
+You should click **"**Download TiDB Cluster CA** to download it locally for client TLS configuration. Because of verifying the TiDB cluster CA can ensure the TLS connection is secure and reliable.
 
 6. In the Step 3：Connect with an SQL client
 
