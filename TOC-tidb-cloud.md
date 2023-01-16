@@ -12,6 +12,7 @@
   - [Try Out TiDB Cloud](/tidb-cloud/tidb-cloud-quickstart.md)
   - [Try Out HTAP](/tidb-cloud/tidb-cloud-htap-quickstart.md)
   - [Perform a PoC](/tidb-cloud/tidb-cloud-poc.md)
+  - [Try Out TiDB Cloud CLI](/tidb-cloud/cli/cli-overview.md)
 - Develop Applications
   - [Overview](/develop/dev-guide-overview.md)
   - Quick Start
@@ -459,6 +460,12 @@
         - [RocksDB Overview](/storage-engine/rocksdb-overview.md)
     - TiFlash
         - [TiFlash Overview](/tiflash/tiflash-overview.md)
+  - [CLI](/tidb-cloud/cli/cli-reference.md)
+    - cluster 
+      - [create](/tidb-cloud/cli/ticloud_cluster_create.md)
+      - [delete](/tidb-cloud/cli/ticloud_cluster_delete.md)
+      - [list](/tidb-cloud/cli/ticloud_cluster_list.md)
+      - [describe](/tidb-cloud/cli/ticloud_cluster_describe.md)
   - [Dumpling](/dumpling-overview.md)
   - [Table Filter](/table-filter.md)
   - [Troubleshoot Inconsistency Between Data and Indexes](/troubleshoot-data-inconsistency-errors.md)
