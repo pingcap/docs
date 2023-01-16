@@ -93,9 +93,9 @@ Fields in the `TIFLASH_TABLES` table are described as follows:
 - `DELTA_RATE_ROWS`: The ratio of the total rows of the table in the Delta layer to the total rows of that table.
 - `DELTA_RATE_SEGMENTS`: The proportion of segments that contain non-empty Delta layers in the table.
 - `DELTA_PLACED_RATE`: The proportion of rows that have completed index construction of the table in the Delta layer.
-- `DELTA_CACHE_SIZE`: The size of the cache of the table Delta layer (in bytes).
-- `DELTA_CACHE_RATE`: The proportion of cache data of the table Delta layer.
-- `DELTA_CACHE_WASTED_RATE`: The proportion of invalid cache data of the table Delta layer.
+- `DELTA_CACHE_SIZE`: The size of the cache of the table in the Delta layer (in bytes).
+- `DELTA_CACHE_RATE`: The proportion of cache data of the table in the Delta layer.
+- `DELTA_CACHE_WASTED_RATE`: The proportion of invalid cache data of the table in the Delta layer.
 - `DELTA_INDEX_SIZE`: The size of the memory occupied by indexes in the Delta layer (in bytes).
 - `AVG_SEGMENT_ROWS`: The average number of rows in all segments of the table.
 - `AVG_SEGMENT_SIZE`: The average size of all segments of the table (in bytes).
