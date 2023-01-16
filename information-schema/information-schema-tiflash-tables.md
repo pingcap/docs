@@ -91,7 +91,7 @@ Fields in the `TIFLASH_TABLES` table are described as follows:
 - `TOTAL_SIZE`: The total size of the table (in bytes).
 - `TOTAL_DELETE_RANGES`: The total number of Delete Ranges in the table.
 - `DELTA_RATE_ROWS`: The ratio of the total rows of the table in the Delta layer to the total rows of that table.
-- `DELTA_RATE_SEGMENTS`: The proportion of segments that contain non-empty Delta layers in the table.
+- `DELTA_RATE_SEGMENTS`: The proportion of segments that contain a non-empty Delta layer in the table.
 - `DELTA_PLACED_RATE`: The proportion of rows that have completed index construction of the table in the Delta layer.
 - `DELTA_CACHE_SIZE`: The size of the cache of the table in the Delta layer (in bytes).
 - `DELTA_CACHE_RATE`: The proportion of cache data of the table in the Delta layer.
@@ -105,7 +105,7 @@ Fields in the `TIFLASH_TABLES` table are described as follows:
 - `AVG_DELTA_ROWS`: The average number of rows of data in all Delta layers.
 - `AVG_DELTA_SIZE`: The average size of data in all Delta layers (in bytes).
 - `AVG_DELTA_DELETE_RANGES`: The average number of Delete Range operations in all Delta layers.
-- `STABLE_COUNT`: The number of segments that contain non-empty Stable layers in the table.
+- `STABLE_COUNT`: The number of segments that contain a non-empty Stable layer in the table.
 - `TOTAL_STABLE_ROWS`: The total number of rows in all Stable layers.
 - `TOTAL_STABLE_SIZE`: The total size of the data in all Stable layers (in bytes).
 - `TOTAL_STABLE_SIZE_ON_DISK`: The disk space occupied by the data in all Stable layers (in bytes).
