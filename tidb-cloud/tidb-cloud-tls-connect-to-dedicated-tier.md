@@ -5,7 +5,7 @@ summary: Introduce TLS connection in TiDB Dedicated Tier.
 
 # TLS connection to Dedicated Tier
 
-On TiDB Cloud, TLS connections are one of the basic security practices for connecting to Dedicated Tier clusters. We support you to configure multiple TLS connections from client, application and development tools to protect your data transmission security, mainly including: supporting MySQL CLI , MyCLI , JDBC, Python, Go and Node.js.
+On TiDB Cloud, TLS connections are one of the basic security practices for connecting to Dedicated Tier clusters. We support you to configure multiple TLS connections from client, application and development tools to protect your data transmission security.
 
 Each Dedicated Tier cluster server TLS certificate is hosted on [AWS Certificate Manager (ACM)](https://aws.amazon.com/certificate-manager/), ACM Private CA keys are stored securely in AWS managed hardware security modules (HSMs) that adhere to [FIPS 140-2 Level 3](https://csrc.nist.gov/projects/cryptographic-module-validation-program/Certificate/3139) security standards in order to protect your TLS private keys when Dedicated Tier request AWS ACM to create it.
 
@@ -284,7 +284,6 @@ connection.connect(function(err) {
 Parameter description：
 
 - Set `ssl: {minVersion: 'TLSv1.2,TLS1.3'}` to restrict the versions of TLS protocol.
-- Set `ssl: {rejectUnauthorized: true}` to validate TiDB Dedicated Tier clusters. Mysql2 uses system CA root certificates by default, so you do not need to configure certificates.
 
 </div>
 </SimpleTab>
@@ -299,45 +298,9 @@ When you connect to your cluster for the first time,You should click **Security 
 
 TiDB Dedicated Tier uses certificates from [AWS Certificate Manager (ACM)](https://aws.amazon.com/certificate-manager/) as a Certificate Authority (CA) for TLS connection between clients and TiDB Dedicated Tier clusters. Usually, the root certificate of ACM are stored securely in AWS managed hardware security modules (HSMs) that adhere to [FIPS 140-2 Level 3](https://csrc.nist.gov/projects/cryptographic-module-validation-program/Certificate/3139) security standards. 
 
-However, some drivers and ORMs do not use the system root CA stores. In those cases, you need to configure the CA root path of the drivers or ORMs to your system root CA stores. For example, when you use [mysqlclient](https://github.com/PyMySQL/mysqlclient) to connect a TiDB Dedicated Tier cluster in Python on macOS, you need to set `ca: /etc/ssl/cert.pem` in the `ssl` argument.
-
-### Root Digital certificate‘s default path 
-
-In different operating systems, the storage path of the root certificate is as follows：
-
-**MacOS**
-
-```
-/etc/ssl/ca_root.pem
-```
-
-**Debian / Ubuntu / Arch**
-
-```
-/etc/ssl/certs/ca_root.crt
-```
-
-**RedHat / Fedora / CentOS / Mageia**
-
-```
-/etc/pki/tls/certs/ca_root.crt
-```
-
-**Alpine**
-
-```
-/etc/ssl/ca_root.pem
-```
-
-**OpenSUSE**
-
-```
-/etc/ssl/ca_root.pem
-```
-
-**Windows**
-
-Windows does not offer a specific path to the CA root. Instead, it uses the [registry](https://learn.microsoft.com/en-us/windows-hardware/drivers/install/local-machine-and-current-user-certificate-stores) to store certificates. For this reason, to specify the CA root path on Windows, take the following steps:
+> **Note:**
+>
+After you download your Dedicated Tier cluster CA to the local operating system, you can store it in the system default storage directory, or customize the TiDB Cluster CA storage directory. It should be noted that you need to add your local real TiDB Cluster CA path to the code example.
 
 ## FAQs
 
@@ -355,4 +318,4 @@ Currently,TiDB Dedicated Tier support one-way TLS authentication, which means yo
 
 Yes.
 
-TiDB Dedicated Tier only allows TLS connections and prohibits non-SSL/TLS connections. The reason is that SSL/TLS is one of the most basic security measures for you to connect to the TiDB Dedicated Tier cluster via internet and intranet , so as to reduce the risk of data exposure to internet and intranet.
+TiDB Dedicated Tier allows TLS connections. The reason is that SSL/TLS is one of the most basic security measures for you to connect to the TiDB Dedicated Tier cluster via internet and intranet , so as to reduce the risk of data exposure to internet and intranet.
