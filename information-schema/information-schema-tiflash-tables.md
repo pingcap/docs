@@ -99,7 +99,7 @@ Fields in the `TIFLASH_TABLES` table are described as follows:
 - `DELTA_INDEX_SIZE`: The size of the memory occupied by indexes in the Delta layer (in bytes).
 - `AVG_SEGMENT_ROWS`: The average number of rows in all segments of the table.
 - `AVG_SEGMENT_SIZE`: The average size of all segments of the table (in bytes).
-- `DELTA_COUNT`: The number of segments of the table in the Delta layer.
+- `DELTA_COUNT`: The number of segments that contain a non-empty Delta layer in the table.
 - `TOTAL_DELTA_ROWS`: The total number of rows in the Delta layer.
 - `TOTAL_DELTA_SIZE`: The total size of the data in the Delta layer (in bytes).
 - `AVG_DELTA_ROWS`: The average number of rows of data in all Delta layers.
