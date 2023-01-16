@@ -86,7 +86,9 @@ Many `INFORMATION_SCHEMA` tables have a corresponding `SHOW` command. The benefi
 | [`TABLE_CONSTRAINTS`](/information-schema/information-schema-table-constraints.md)      | Provides information on primary keys, unique indexes and foreign keys. |
 | `TABLE_PRIVILEGES`                                                                      | Not implemented by TiDB. Returns zero rows. |
 | `TRIGGERS`                                                                              | Not implemented by TiDB. Returns zero rows. |
+| [`USER_ATTRIBUTES`](/information-schema/information-schema-user-attributes.md) | Summarizes information about user comments and user attributes. |
 | [`USER_PRIVILEGES`](/information-schema/information-schema-user-privileges.md)          | Summarizes the privileges associated with the current user. |
+| [`VARIABLES_INFO`](/information-schema/information-schema-variables-info.md)            | Provides information about TiDB system variables. |
 | [`VIEWS`](/information-schema/information-schema-views.md)                              | Provides a list of views that the current user has visibility of. Similar to running `SHOW FULL TABLES WHERE table_type = 'VIEW'` |
 
 </CustomContent>
@@ -143,6 +145,7 @@ Many `INFORMATION_SCHEMA` tables have a corresponding `SHOW` command. The benefi
 | [`TIKV_STORE_STATUS`](/information-schema/information-schema-tikv-store-status.md)      | Provides basic information about TiKV servers. |
 
 </CustomContent>
+
 <CustomContent platform="tidb-cloud">
 
 | Table Name                                                                              | Description |
@@ -157,6 +160,8 @@ Many `INFORMATION_SCHEMA` tables have a corresponding `SHOW` command. The benefi
 | [`CLUSTER_INFO`](/information-schema/information-schema-cluster-info.md)                | Provides details on the current cluster topology. |
 | [`CLUSTER_LOAD`](https://docs.pingcap.com/tidb/stable/information-schema-cluster-load)                | Provides current load information for TiDB servers in the cluster. This table is not applicable to TiDB Cloud. |
 | [`CLUSTER_LOG`](https://docs.pingcap.com/tidb/stable/information-schema-cluster-log)                  | Provides a log for the entire TiDB cluster. This table is not applicable to TiDB Cloud. |
+| `CLUSTER_MEMORY_USAGE`                                                                  | Provides a cluster-level view of the `MEMORY_USAGE` table. This table is not applicable to TiDB Cloud. |
+| `CLUSTER_MEMORY_USAGE_OPS_HISTORY`                                                      | Provides a cluster-level view of the `MEMORY_USAGE_OPS_HISTORY` table. This table is not applicable to TiDB Cloud. |
 | `CLUSTER_PROCESSLIST`                                                                   | Provides a cluster-level view of the `PROCESSLIST` table. |
 | `CLUSTER_SLOW_QUERY`                                                                    | Provides a cluster-level view of the `SLOW_QUERY` table. |
 | `CLUSTER_STATEMENTS_SUMMARY`                                                            | Provides a cluster-level view of the `STATEMENTS_SUMMARY` table. |
@@ -169,6 +174,8 @@ Many `INFORMATION_SCHEMA` tables have a corresponding `SHOW` command. The benefi
 | [`INSPECTION_RESULT`](https://docs.pingcap.com/tidb/stable/information-schema-inspection-result)      | Triggers internal diagnostics checks. This table is not applicable to TiDB Cloud. |
 | [`INSPECTION_RULES`](https://docs.pingcap.com/tidb/stable/information-schema-inspection-rules)        | A list of internal diagnostic checks performed. This table is not applicable to TiDB Cloud. |
 | [`INSPECTION_SUMMARY`](https://docs.pingcap.com/tidb/stable/information-schema-inspection-summary)    | A summarized report of important monitoring metrics. This table is not applicable to TiDB Cloud. |
+| [`MEMORY_USAGE`](/information-schema/information-schema-memory-usage.md)                |  The memory usage of the current TiDB instance. |
+| [`MEMORY_USAGE_OPS_HISTORY`](/information-schema/information-schema-memory-usage-ops-history.md)    | The history of memory-related operations and the execution basis of the current TiDB instance. |
 | [`METRICS_SUMMARY`](https://docs.pingcap.com/tidb/stable/information-schema-metrics-summary)          | A summary of metrics extracted from Prometheus. This table is not applicable to TiDB Cloud. |
 | `METRICS_SUMMARY_BY_LABEL`                                                              | See `METRICS_SUMMARY` table. |
 | [`METRICS_TABLES`](https://docs.pingcap.com/tidb/stable/information-schema-metrics-tables)            | Provides the PromQL definitions for tables in `METRICS_SCHEMA`. This table is not applicable to TiDB Cloud. |
