@@ -5,7 +5,7 @@ summary: Introduce TLS connection in TiDB Dedicated Tier.
 
 # TLS connection to Dedicated Tier
 
-On TiDB Cloud, TLS connections are one of the basic security practices for connecting to Dedicated Tier clusters. We support you to configure multiple TLS connections from client, application and development tools to protect your data transmission security.
+On TiDB Cloud, TLS connections are one of the basic security practices for connecting to Dedicated Tier clusters. We support you to configure multiple TLS connections from client, application and development tools to protect your data transmission security.Dedicated Tier cluster only supports TLS 1.2 or TLS 1.3, and does not support TLS 1.0 and TLS 1.1 versions.
 
 Each Dedicated Tier cluster server TLS certificate is hosted on [AWS Certificate Manager (ACM)](https://aws.amazon.com/certificate-manager/), ACM Private CA keys are stored securely in AWS managed hardware security modules (HSMs) that adhere to [FIPS 140-2 Level 3](https://csrc.nist.gov/projects/cryptographic-module-validation-program/Certificate/3139) security standards in order to protect your TLS private keys when Dedicated Tier request AWS ACM to create it.
 
@@ -45,9 +45,6 @@ You should click **"**Download TiDB Cluster CA** to download it locally for clie
 
 Connect with a SQL client in the dialog, click the tab of your preferred connection method, and then refer to the connection string and sample code on the tab to connect to your cluster.
 
-   - Support Mysql CLI, MyCLI, JDBC, Python, Go, Node.js and other six ways to connect to your Dedicated Tier cluster
-   - Provide MacOS, Debian, RedHat, Alpine, OpenSUSE, Windows and other operating system configuration parameters
-
 The following examples show the connection string in MySQL CLI , MyCLI , JDBC, Python, Go and Node.js:
 
 <SimpleTab>
@@ -63,7 +60,7 @@ Parameter description：
 
 - With `--ssl-mode=VERIFY_IDENTITY`, MySQL CLI client forces to enable TLS and validate TiDB Dedicated Tier clusters.
 - Use `--ssl-ca=<CA_root_path>` to set the CA root path on your system.
-- Use `--tls-version=TLSv1.2,TLSv1.3` to restrict the versions of TLS protocol.
+- Use `--tls-version=TLSv1.2` to restrict the versions of TLS protocol.
 
 </div>
 
@@ -86,7 +83,7 @@ Parameter description：
 
 [MySQL Connector/J](https://dev.mysql.com/doc/connector-j/8.0/en/)'s TLS connection configurations are used here as an example.
 
-After downloaded TLS,if you want to import your downloaded TLS Certificate Template,Please refer to the order **keytool -importcert -alias TiDBCACert -file ca.pem -keystore <your_custom_truststore_path> -storepass <your_truststore_password>** 
+After downloaded TiDB cluster CA,if you want to import it into your operating system,Please refer to the command **keytool -importcert -alias TiDBCACert -file ca.pem -keystore <your_custom_truststore_path> -storepass <your_truststore_password>** 
 
 ```shell
 /* Be sure to replace the parameters in the following connection string. */
@@ -123,8 +120,9 @@ class Main {
 Parameter description：
 
 - Set `sslMode=VERIFY_IDENTITY` to enable TLS and validate TiDB Dedicated Tier clusters. JDBC trusts system CA root certificates by default, so you do not need to configure certificates.
-- Set `enabledTLSProtocols=TLSv1.2,TLSv1.3` to restrict the versions of TLS protocol.
-
+- Set `enabledTLSProtocols=TLSv1.2` to restrict the versions of TLS protocol.
+- Set `trustCertificateKeyStoreUrl` to restrict your custom truststore path.
+- Set `trustCertificateKeyStorePassword` to restrict your seting truststore password.
 
 </div>
 
@@ -224,7 +222,7 @@ func main() {
 
 Parameter description：
 
-- Register `tls.Config` in connection to enable TLS and validate TiDB Dedicated Tier clusters. Go-MySQL-Driver uses system CA root certificates by default, so you do not need to configure certificates.
+- Register `tls.Config` in connection to enable TLS and validate TiDB Dedicated Tier clusters. 
 - Set `MinVersion: tls.VersionTLS12` to restrict the versions of TLS protocol.
 - Set `ServerName: "<host>"` to verify TiDB Dedicated Tier's hostname.
 - If you do not want to register a new TLS configuration, you can just set `tls=true` in the connection string.
