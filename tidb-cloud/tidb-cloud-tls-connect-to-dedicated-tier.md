@@ -318,4 +318,4 @@ Currently,TiDB Dedicated Tier support one-way TLS authentication, which means yo
 
 Yes.
 
-TiDB Dedicated Tier only allows TLS connections and prohibits non-SSL/TLS connections. The reason is that SSL/TLS is one of the most basic security measures for you to connect to the TiDB Dedicated Tier cluster via internet and intranet , so as to reduce the risk of data exposure to internet and intranet.
+TiDB Dedicated Tier allows TLS connections. The reason is that SSL/TLS is one of the most basic security measures for you to connect to the TiDB Dedicated Tier cluster via internet and intranet , so as to reduce the risk of data exposure to internet and intranet.
