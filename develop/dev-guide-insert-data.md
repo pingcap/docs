@@ -216,7 +216,7 @@ with get_connection(autocommit=True) as connection:
             cur.executemany("INSERT INTO player (id, coins, goods) VALUES (%s, %s, %s)", player_list[idx:idx + 114])
 ```
 
-For a complete example in Python, see:
+For complete examples in Python, see:
 
 - [Use PyMySQL to build a simple CRUD application with TiDB and Python](/develop/dev-guide-sample-application-python.md#step-2-get-the-code)
 - [Use mysqlclient to build a simple CRUD application with TiDB and Python](/develop/dev-guide-sample-application-python.md#step-2-get-the-code)
