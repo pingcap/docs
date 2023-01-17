@@ -23,9 +23,9 @@ TiDB Cloud [Serverless Tier](/tidb-cloud/select-cluster-tier.md#serverless-tier-
 
     The [**Clusters**](https://tidbcloud.com/console/clusters) list page is displayed by default.
 
-3. To help first-time login users to experience with TiDB Cloud features instantly, TiDB Cloud creates a default Serverless Tier cluster `Cluster0` automatically.
+3. For the first-time login, TiDB Cloud creates a default Serverless Tier cluster `Cluster0` for you automatically.
 
-    - To try out TiDB Cloud features with this default cluster, go to [Step 2. Try AI-powered Chat2Query (beta)](#step-2-try-ai-powered-chat2query-beta).
+    - To try out TiDB Cloud features instantly with this default cluster, go to [Step 2. Try AI-powered Chat2Query (beta)](#step-2-try-ai-powered-chat2query-beta).
     - To try creating a new Serverless Tier by your own, take the following operations:
 
         1. Click **Create Cluster**.
