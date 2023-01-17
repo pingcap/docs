@@ -169,9 +169,9 @@ simple_example()
 trade_example()
 ```
 
-Compared with using drivers directly, SQLAlchemy provides an abstraction for the specific details of different databases when creating a database connection. Additionally, SQLAlchemy encapsulates some operations such as session management and CRUD of basic objects, which greatly simplifies the code.
+Compared with using drivers directly, SQLAlchemy provides an abstraction for the specific details of different databases when you create a database connection. In addition, SQLAlchemy encapsulates some operations such as session management and CRUD of basic objects, which greatly simplifies the code.
 
-The `Player` class is a mapping of a table to attributes in the program. Each attribute of `Player` corresponds to a field in the `player` table. To provide SQLAlchemy with more information, the attribute is defined as `id = Column(String(36), primary_key=True)` to indicate the field type and its additional properties. For example, `id = Column(String(36), primary_key=True)` indicates that the `id` attribute is `String` type, the corresponding field in database is `VARCHAR` type, the length is `36`, and it is a primary key.
+The `Player` class is a mapping of a table to attributes in the application. Each attribute of `Player` corresponds to a field in the `player` table. To provide SQLAlchemy with more information, the attribute is defined as `id = Column(String(36), primary_key=True)` to indicate the field type and its additional attributes. For example, `id = Column(String(36), primary_key=True)` indicates that the `id` attribute is `String` type, the corresponding field in database is `VARCHAR` type, the length is `36`, and it is a primary key.
 
 For more information about how to use SQLAlchemy, refer to [SQLAlchemy documentation](https://www.sqlalchemy.org/).
 
@@ -301,7 +301,7 @@ simple_example()
 trade_example()
 ```
 
-Compared with using drivers directly, peewee provides an abstraction for the specific details of different databases when creating a database connection. Additionally, peewee encapsulates some operations such as session management and CRUD of basic objects, which greatly simplifies the code.
+Compared with using drivers directly, peewee provides an abstraction for the specific details of different databases when you create a database connection. In addition, peewee encapsulates some operations such as session management and CRUD of basic objects, which greatly simplifies the code.
 
 The `Player` class is a mapping of a table to attributes in the program. Each attribute of `Player` corresponds to a field in the `player` table. To provide SQLAlchemy with more information, the attribute is defined as `id = Column(String(36), primary_key=True)` to indicate the field type and its additional properties. For example, `id = Column(String(36), primary_key=True)` indicates that the `id` attribute is `String` type, the corresponding field in database is `VARCHAR` type, the length is `36`, and it is a primary key.
 
@@ -623,7 +623,7 @@ simple_example()
 trade_example()
 ```
 
-The driver has a lower level of encapsulation than ORM, so there are a lot of SQL statements in the program. Unlike ORM, there is no data object in drivers, so the `Player` queried by the driver is represented as a tuple.
+The driver has a lower level of encapsulation than ORM, so there are a lot of SQL statements in the program. Unlike ORM, there is no data object in drivers, so the `Player` queried by the driver is represented as a dictionary.
 
 For more information about how to use PyMySQL, refer to [PyMySQL documentation](https://pymysql.readthedocs.io/en/latest/).
 
@@ -795,7 +795,7 @@ For more information about how to use mysql-connector-python, refer to [mysql-co
 
 The following content introduces how to run the code step by step.
 
-### Step 3.1 Table initialization
+### Step 3.1 Initialize table
 
 Before running the code, you need to initialize the table manually. If you are using a local TiDB cluster, you can run the following command:
 
@@ -884,7 +884,7 @@ In this case, you can modify the `connect` as follows:
         ssl_mode="VERIFY_IDENTITY", ssl={"ca": "<ca_path>"})
     ```
 
-Since peewee will pass parameters to the driver, you need to pay attention to the usage type of the driver when using peewee.
+Because peewee will pass parameters to the driver, you need to pay attention to the usage type of the driver when using peewee.
 
 </div>
 
@@ -1012,15 +1012,15 @@ def get_connection(autocommit: bool = True) -> MySQLConnection:
 
 </SimpleTab>
 
-### Step 3.3 Run
+### Step 3.3 Run the code
 
-Before running, use the following command to install dependencies:
+Before running the code, use the following command to install dependencies:
 
 ```bash
 pip3 install -r requirement.txt
 ```
 
-If you need to run the script multiple times, follow the [Table initialization](#step-31-table-initialization) section to initialize the table again before each run.
+If you need to run the script multiple times, follow the [Table initialization](#step-31-initialize-table) section to initialize the table again before each run.
 
 <SimpleTab groupId="language">
 
