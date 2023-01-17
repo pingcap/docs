@@ -1078,6 +1078,14 @@ MPP is a distributed computing framework provided by the TiFlash engine, which a
 
 ### tidb_ddl_disk_quota <span class="version-mark">New in v6.3.0</span>
 
+<CustomContent platform="tidb-cloud">
+
+> **Note:**
+>
+> This TiDB variable is not applicable to TiDB Cloud. Do not change the default value of this variable for TiDB Cloud.
+
+</CustomContent>
+
 - Scope: GLOBAL
 - Persists to cluster: Yes
 - Type: Integer
