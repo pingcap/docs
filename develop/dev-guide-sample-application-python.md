@@ -303,7 +303,7 @@ trade_example()
 
 Compared with using drivers directly, peewee provides an abstraction for the specific details of different databases when you create a database connection. In addition, peewee encapsulates some operations such as session management and CRUD of basic objects, which greatly simplifies the code.
 
-The `Player` class is a mapping of a table to attributes in the program. Each attribute of `Player` corresponds to a field in the `player` table. To provide SQLAlchemy with more information, the attribute is defined as `id = Column(String(36), primary_key=True)` to indicate the field type and its additional properties. For example, `id = Column(String(36), primary_key=True)` indicates that the `id` attribute is `String` type, the corresponding field in database is `VARCHAR` type, the length is `36`, and it is a primary key.
+The `Player` class is a mapping of a table to attributes in the application. Each attribute of `Player` corresponds to a field in the `player` table. To provide SQLAlchemy with more information, the attribute is defined as `id = Column(String(36), primary_key=True)` to indicate the field type and its additional attributes. For example, `id = Column(String(36), primary_key=True)` indicates that the `id` attribute is `String` type, the corresponding field in database is `VARCHAR` type, the length is `36`, and it is a primary key.
 
 For more information about how to use peewee, refer to [peewee documentation](http://docs.peewee-orm.com/en/latest/).
 
@@ -629,7 +629,7 @@ For more information about how to use PyMySQL, refer to [PyMySQL documentation](
 
 </div>
 
-<div label="Using mysql-connector-python" value="mysql-connector-python">
+<div label="mysql-connector-python" value="mysql-connector-python">
 
 [mysql-connector-python](https://dev.mysql.com/doc/connector-python/en/) is a popular open-source driver for Python. The following uses mysql-connector-python 8.0.31 as an example. Drivers for Python are more convenient to use than other languages, but they do not shield the underlying implementation and require manual management of transactions. If there are not a lot of scenarios where SQL is required, it is recommended to use ORM, which can help reduce the coupling of your program.
 
