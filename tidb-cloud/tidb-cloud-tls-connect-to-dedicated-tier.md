@@ -1,20 +1,13 @@
 ---
-title: TLS connection to Dedicated Tier
+title: TLS connections to Dedicated Tier
 summary: Introduce TLS connection in TiDB Dedicated Tier.
 ---
 
-# TLS connection to Dedicated Tier
+# TLS connections to Dedicated Tier
 
 On TiDB Cloud, TLS connections are one of the basic security practices for connecting to Dedicated Tier clusters. We support you to configure multiple TLS connections from client, application and development tools to protect your data transmission security.Dedicated Tier cluster only supports TLS 1.2 or TLS 1.3, and does not support TLS 1.0 and TLS 1.1 versions.
 
 Each Dedicated Tier cluster server TLS certificate is hosted on [AWS Certificate Manager (ACM)](https://aws.amazon.com/certificate-manager/), ACM Private CA keys are stored securely in AWS managed hardware security modules (HSMs) that adhere to [FIPS 140-2 Level 3](https://csrc.nist.gov/projects/cryptographic-module-validation-program/Certificate/3139) security standards in order to protect your TLS private keys when Dedicated Tier request AWS ACM to create it.
-
-> **Note:**
->
-> Best practices for network access security include three steps:
-> Step1: Set up [IP Access List](/tidb-cloud/configure-ip-access-list.md)
-> Step2: Set up [Private Link](/tidb-cloud/set-up-private-endpoint-connections.md)
-> Step3: Set up TLS Connection
 
 ## Prerequisites
 
@@ -282,6 +275,8 @@ connection.connect(function(err) {
 Parameter description：
 
 - Set `ssl: {minVersion: 'TLSv1.2'}` to restrict the versions of TLS protocol.
+- Set `ssl: {ca: fs.readFileSync('ca.pem')}` to read the special path ca.pem.
+
 
 </div>
 </SimpleTab>
