@@ -72,6 +72,8 @@ Compared to Mydumper, Dumpling has the following improvements:
 
 ### Export to SQL files
 
+This document assumes that there is a TiDB instance on the 127.0.0.1:4000 host and that this TiDB instance has a root user without a password.
+
 Dumpling exports data to SQL files by default. You can also export data to SQL files by adding the `--filetype sql` flag:
 
 {{< copyable "shell-regular" >}}
@@ -392,18 +394,6 @@ After your operation is completed, set the GC time back (the default value is `1
 ```sql
 SET GLOBAL tidb_gc_life_time = '10m';
 ```
-
-<CustomContent platform="tidb">
-
-Finally, all the exported data can be imported back to TiDB using [TiDB Lightning](/tidb-lightning/tidb-lightning-overview.md).
-
-</CustomContent>
-
-<CustomContent platform="tidb-cloud">
-
-Finally, all the exported data can be imported back to TiDB.
-
-</CustomContent>
 
 ## Option list of Dumpling
 
