@@ -8,6 +8,20 @@ aliases: ['/tidbcloud/beta/supported-tidb-versions','/tidbcloud/release-notes']
 
 This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-cloud/) in 2023.
 
+## January 17, 2023
+
+**General changes**
+
+- Upgrade the default TiDB version of new [Dedicated Tier](/tidb-cloud/select-cluster-tier.md#dedicated-tier) clusters from [v6.1.3](https://docs.pingcap.com/tidb/stable/release-6.1.3) to [v6.5.0](https://docs.pingcap.com/tidb/stable/release-6.5.0).
+
+- Support a new AWS region for [Dedicated Tier](/tidb-cloud/select-cluster-tier.md#dedicated-tier) clusters: `Seoul (ap-northeast-2)`.
+
+    The following features are enabled for this region:
+
+    - [Migrate MySQL-Compatible Databases to TiDB Cloud Using Data Migration](/tidb-cloud/migrate-from-mysql-using-data-migration.md)
+    - [Changefeed](/tidb-cloud/changefeed-overview.md)
+    - [Back Up and Restore TiDB Cluster Data](/tidb-cloud/backup-and-restore.md)
+
 ## January 10, 2023
 
 **General changes**
