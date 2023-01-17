@@ -16,7 +16,17 @@ This document breaks down the latency into metrics and then analyzes it from the
 
 These analyses provide you with a deep insight into time cost during TiDB SQL queries. This is a guide to TiDB's critical path diagnosis. Besides, the [Diagnosis use cases](#diagnosis-use-cases) section introduces how to analyze latency in real use cases.
 
+<CustomContent platform="tidb">
+
 It's better to read [Performance Analysis and Tuning](/performance-tuning-methods.md) before this document. Note that when breaking down latency into metrics, the average value of duration or latency is calculated instead of some specific slow queries. Many metrics are shown as histogram, which is a distribution of the duration or latency. To calculate the average latency, you need to use the following sum and count counter.
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+It's better to read [Overview for Analyzing and Tuning Performance](/tidb-cloud/tidb-cloud-tune-performance-overview.md) before this document. Note that when breaking down latency into metrics, the average value of duration or latency is calculated instead of some specific slow queries. Many metrics are shown as histogram, which is a distribution of the duration or latency. To calculate the average latency, you need to use the following sum and count counter.
+
+</CustomContent>
 
 ```
 avg = ${metric_name}_sum / ${metric_name}_count
@@ -77,7 +87,7 @@ Read queries have only a single process form.
 
 ### Point get
 
-The following is the time cost diagram of [point get](/glossary.md#point-get) operations:
+The following is the time cost diagram of [point get](https://docs.pingcap.com/tidb/stable/glossary#point-get) operations:
 
 ```railroad+diagram
 Diagram(
@@ -104,7 +114,7 @@ tidb_session_execute_duration_seconds{type="general"} =
     read value duration
 ```
 
-`pd_client_cmd_handle_cmds_duration_seconds{type="wait"}` records the duration of fetching [TSO (Timestamp Oracle)](/glossary.md#tso) from PD. When reading in an auto-commit transaction mode with a clustered primary index or from a snapshot, the value will be zero.
+`pd_client_cmd_handle_cmds_duration_seconds{type="wait"}` records the duration of fetching [TSO (Timestamp Oracle)](https://docs.pingcap.com/tidb/stable/glossary#tso) from PD. When reading in an auto-commit transaction mode with a clustered primary index or from a snapshot, the value will be zero.
 
 The `read handle duration` and `read value duration` are calculated as:
 
@@ -609,7 +619,19 @@ Diagram(
 - The overall duration of sending a request is observed as `tidb_tikvclient_request_seconds`.
 - RPC client maintains connection pools (named ConnArray) to each store, and each pool has a BatchConn with a batch request (send) channel.
 - Batch is enabled when the store is TiKV and batch size is positive, which is true in most cases.
+
+<CustomContent platform="tidb">
+
 - The size of batch request channel is [`tikv-client.max-batch-size`](/tidb-configuration-file.md#max-batch-size) (default is `128`), the duration of enqueue is observed as `tidb_tikvclient_batch_wait_duration`.
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+- The size of batch request channel is the maximum number of RPC packets sent in batch (default is `128`), the duration of enqueue is observed as `tidb_tikvclient_batch_wait_duration`.
+
+</CustomContent>
+
 - There are three kinds of stream requests: `CmdBatchCop`, `CmdCopStream`, and `CmdMPPConn`, which involve an additional `recv()` call to fetch the first response from the stream.
 
 Though there is still some latency missed observed, the `tidb_tikvclient_request_seconds` can be calculated approximately as:
@@ -757,7 +779,17 @@ async io enabled commit = max(
 )
 ```
 
+<CustomContent platform="tidb">
+
 Since v5.3.0, TiKV supports Async IO Raft (write Raft log by a StoreWriter thread pool). The Async IO Raft is only enabled when the [`store-io-pool-size`](/tikv-configuration-file.md#store-io-pool-size-new-in-v530) is set to a positive value, which changes the process of commit. The `persist log locally duration` and `wait by write worker duration` are calculated as:
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+Since v5.3.0, TiKV supports Async IO Raft (write Raft log by a StoreWriter thread pool), which helps improve throughput performance. For TiDB Cloud, the Async IO Raft feature is disabled by default. If you want to enable this feature, contact [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md). After Async IO Raft is enabled, the `persist log locally duration` and `wait by write worker duration` are calculated as:
+
+</CustomContent>
 
 ```text
 persist log locally duration =
@@ -825,7 +857,7 @@ raft db write duration(raft engine disabled) =
 
 Because `commit log wait duration` is the longest duration of quorum peers, it might be larger than `raft db write duration`.
 
-Since v6.1.0, TiKV uses [Raft Engine](/glossary.md#raft-engine) as its default log storage engine, which changes the process of writing log.
+Since v6.1.0, TiKV uses [Raft Engine](https://docs.pingcap.com/tidb/stable/glossary#raft-engine) as its default log storage engine, which changes the process of writing log.
 
 ### KV DB
 
@@ -857,13 +889,33 @@ In the async write process, committed logs need to be applied to the KV DB. The 
 
 ## Diagnosis use cases
 
+<CustomContent platform="tidb">
+
 The preceding sections explain the details about time cost metrics during querying. This section introduces common procedures of metrics analysis when you encounter slow read or write queries. All metrics can be checked in the Database Time panel of [Performance Overview Dashboard](/grafana-performance-overview-dashboard.md).
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+The preceding sections explain the details about time cost metrics during querying. This section introduces common procedures of metrics analysis when you encounter slow read or write queries. The metrics can be checked on the [Monitoring](/tidb-cloud/built-in-monitoring.md) page in the TiDB Cloud console.
+
+</CustomContent>
 
 ### Slow read queries
 
 If `SELECT` statements account for a significant portion of the database time, you can assume that TiDB is slow at read queries.
 
+<CustomContent platform="tidb">
+
 The execution plans of slow queries can be found in the [Top SQL statements](/dashboard/dashboard-overview.md#top-sql-statements) panel of TiDB Dashboard. To investigate the time costs of slow read queries, you can analyze [Point get](#point-get), [Batch point get](#batch-point-get) and some [simple coprocessor queries](#table-scan--index-scan) according to the preceding descriptions.
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+The execution plans of slow queries can be found on the [Slow Query](/tidb-cloud/tune-performance.md#slow-query) tab in the TiDB Cloud console. To investigate the time costs of slow read queries, you can analyze [Point get](#point-get), [Batch point get](#batch-point-get) and some [simple coprocessor queries](#table-scan--index-scan) according to the preceding descriptions.
+
+</CustomContent>
 
 ### Slow write queries
 
