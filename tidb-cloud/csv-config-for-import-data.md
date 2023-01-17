@@ -54,20 +54,20 @@ The following is the CSV Configuration window when you use the Import Data servi
 
     In all other cases (for example, `\"`), the backslash is stripped, leaving the next character (`"`) in the field. The character left has no special roles (for example, delimiters) and is just an ordinary character. Quoting does not affect whether backslash is parsed as an escape character.
 
-    Take the fields in the screenshot as an example.
+    Take the following fields as an example.
 
     - If the value is `True`, `"nick name is \"Mike\""` will be parsed as `nick name is "Mike"` and written to the target table.
     - If the value is `False`, it will be parsed as three fields: `"nick name is \"` , `Mike\`, and `""`. But it cannot be parsed correctly because the fields are not separated from each other.
 
-    For standard CSV files, if there are double-quoted characters in a field to be recorded, you need to use two double-quotes for escaping. In this case, using `Backslash-escape = True` will result in a parsing error, while using `Backslash-escape = False` will correctly parse. A typical scenario is when the imported field contains JSON content. A standard CSV JSON field is normally stored as follows:
+    For standard CSV files, if there are double-quoted characters in a field to be recorded, you need to use two double-quotes for escaping. In this case, using `Backslash escape = True` will result in a parsing error, while using `Backslash escape = False` will correctly parse. A typical scenario is when the imported field contains JSON content. A standard CSV JSON field is normally stored as follows:
 
     `"{""key1"":""val1"", ""key2"": ""val2""}"`
 
-    In this case, you can set `Backslash-escape = False` and the field will be correctly escaped to the database as follows:
+    In this case, you can set `Backslash escape = False` and the field will be correctly escaped to the database as follows:
 
     `{"key1": "val1", "key2": "val2"}`
 
-    If the content of the CSV source file is saved as JSON in the following way, then consider setting `Backslash-escape = True` as follows. But this is not the standard format for CSV.
+    If the content of the CSV source file is saved as JSON in the following way, then consider setting `Backslash escape = True` as follows. But this is not the standard format for CSV.
 
     `"{\"key1\": \"val1\", \"key2\":\"val2\" }"`
 
