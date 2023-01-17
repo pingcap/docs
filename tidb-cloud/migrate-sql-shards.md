@@ -220,7 +220,7 @@ After configuring the Amazon S3 access, you can perform the data import task in 
 
 5. Click **Next**.
 
-6. On the **Preview** page, you can have a preview of the data. If the previewed data is not what you expect, click the **Click here to edit csv configuration** link to update the CSV-specific configurations, including separator, delimiter, header, not-null, null, backslash-escape, and trim-last-separator.
+6. On the **Preview** page, you can have a preview of the data. If the previewed data is not what you expect, click the **Click here to edit csv configuration** link to update the CSV-specific configurations, including separator, delimiter, header, `backslash escape`, and `trim last separator`.
 
     > **Note:**
     >
