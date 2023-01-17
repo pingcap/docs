@@ -26,7 +26,7 @@ TiDB Cloud [Serverless Tier](/tidb-cloud/select-cluster-tier.md#serverless-tier-
 3. For the first-time login, TiDB Cloud creates a default Serverless Tier cluster `Cluster0` for you automatically.
 
     - To try out TiDB Cloud features instantly with this default cluster, go to [Step 2. Try AI-powered Chat2Query (beta)](#step-2-try-ai-powered-chat2query-beta).
-    - To try creating a new Serverless Tier by your own, take the following operations:
+    - To try creating a new Serverless Tier on your own, take the following operations:
 
         1. Click **Create Cluster**.
         2. On the **Create Cluster** page, **Serverless Tier** is selected by default. Update the default cluster name if necessary, select a target region of your cluster, and then click **Create**. Your Serverless Tier cluster will be created in approximately 30 seconds.
