@@ -27,19 +27,20 @@ This document walks you through the quickest way to get started with TiDB Cloud.
 
 2. [Log in](https://tidbcloud.com/) to your TiDB Cloud account.
 
-3. On the [**Clusters**](https://tidbcloud.com/console/clusters) page, click **Create Cluster**.
+    The [**Clusters**](https://tidbcloud.com/console/clusters) list page is displayed by default.
 
-4. On the **Create Cluster** page, **Serverless Tier** is selected by default. Update the default cluster name if necessary, and then select the region where you want to create your cluster.
+3. For the first-time login, TiDB Cloud creates a default Serverless Tier cluster `Cluster0` for you automatically. You can either use this default cluster for the subsequent steps or create a new Serverless Tier by your own.
 
-5. Click **Create** to create a Serverless Tier cluster.
+    To create a new Serverless Tier by your own, take the following operations:
 
-    Your TiDB Cloud cluster will be created in approximately 30 seconds.
+    1. Click **Create Cluster**.
+    2. On the **Create Cluster** page, **Serverless Tier** is selected by default. Update the default cluster name if necessary, select a target region of your cluster, and then click **Create**. Your Serverless Tier cluster will be created in approximately 30 seconds.
 
-6. After your TiDB Cloud cluster is created, click your cluster name to go to the cluster overview page, and then click **Connect** in the upper-right corner. A connection dialog box is displayed.
+4. Click the target cluster name to go to its overview page, and then click **Connect** in the upper-right corner. A connection dialog box is displayed.
 
-7. In the dialog, select your preferred connection method and operating system to get the corresponding connection string. This document uses MySQL client as an example.
+5. In the dialog, select your preferred connection method and operating system to get the corresponding connection string. This document uses MySQL client as an example.
 
-8. Click **Create password** to generate a random password. The generated password will not show again, so save your password in a secure location. If you do not set a root password, you cannot connect to the cluster.
+6. Click **Create password** to generate a random password. The generated password will not show again, so save your password in a secure location. If you do not set a root password, you cannot connect to the cluster.
 
 <CustomContent platform="tidb">
 
