@@ -159,8 +159,6 @@ Flags:
 
 2. Run the YCSB test:
 
-    {{< copyable "shell-regular" >}}
-
     ```shell
     # -c indicates the number of operations, which is mandatory. The default READ workload is 95% and the UPDATE workload is 5%.
     tiup bench ycsb prepare -c 10000
