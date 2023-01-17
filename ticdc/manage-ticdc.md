@@ -5,13 +5,13 @@ summary: Learn how to manage a TiCDC cluster and replication tasks.
 
 # TiCDCクラスタとレプリケーション タスクの管理 {#manage-ticdc-cluster-and-replication-tasks}
 
-このドキュメントでは、TiUP を使用して TiCDC クラスターをアップグレードし、TiCDC クラスターの構成を変更する方法、およびコマンドライン ツールを使用して TiCDC クラスターとレプリケーション タスクを管理する方法について説明します`cdc cli` 。
+このドキュメントでは、TiUP を使用してTiUPクラスターをアップグレードし、TiCDC クラスターの構成を変更する方法、およびコマンドライン ツールを使用して TiCDC クラスターとレプリケーション タスクを管理する方法について説明します`cdc cli` 。
 
 HTTP インターフェイス (TiCDC OpenAPI 機能) を使用して、TiCDC クラスターとレプリケーション タスクを管理することもできます。詳細については、 [TiCDC OpenAPI](/ticdc/ticdc-open-api.md)を参照してください。
 
-## TiUP を使用して TiCDC をアップグレードする {#upgrade-ticdc-using-tiup}
+## TiUP を使用してTiUPをアップグレードする {#upgrade-ticdc-using-tiup}
 
-このセクションでは、TiUP を使用して TiCDC クラスターをアップグレードする方法を紹介します。次の例では、TiCDC と TiDB クラスター全体を v5.4.3 にアップグレードする必要があると想定しています。
+このセクションでは、TiUP を使用してTiUPクラスターをアップグレードする方法を紹介します。次の例では、TiCDC と TiDB クラスター全体を v5.4.3 にアップグレードする必要があると想定しています。
 
 {{< copyable "" >}}
 
@@ -24,11 +24,11 @@ tiup cluster upgrade <cluster-name> v5.4.3
 ### バージョンアップ時の注意事項 {#notes-for-upgrade}
 
 -   `changefeed`の構成は、TiCDC v4.0.2 で変更されました。詳細は[構成ファイルの互換性に関する注意事項](/production-deployment-using-tiup.md#step-3-initialize-cluster-topology-file)を参照してください。
--   問題が発生した場合は、 [TiUP を使用して TiDB をアップグレードする -FAQ](/upgrade-tidb-using-tiup.md#faq)を参照してください。
+-   問題が発生した場合は、 [TiUP を使用してTiUPをアップグレードする -FAQ](/upgrade-tidb-using-tiup.md#faq)を参照してください。
 
-## TiUP を使用して TiCDC 構成を変更する {#modify-ticdc-configuration-using-tiup}
+## TiUP を使用してTiUP構成を変更する {#modify-ticdc-configuration-using-tiup}
 
-このセクションでは、TiUP の[`tiup cluster edit-config`](/tiup/tiup-component-cluster-edit-config.md)コマンドを使用して、TiCDC クラスターの構成を変更する方法を紹介します。次の例では、値`gc-ttl`をデフォルトの`86400`から`3600` 、つまり 1 時間に変更します。
+このセクションでは、 TiUPの[`tiup cluster edit-config`](/tiup/tiup-component-cluster-edit-config.md)コマンドを使用して、TiCDC クラスターの構成を変更する方法を紹介します。次の例では、値`gc-ttl`をデフォルトの`86400`から`3600` 、つまり 1 時間に変更します。
 
 まず、次のコマンドを実行します。 `<cluster-name>`を実際のクラスター名に置き換える必要があります。
 
@@ -70,7 +70,7 @@ tiup cluster edit-config <cluster-name>
 >
 > PD が listen する IP アドレスとポートは、 `pd-server`始動時に指定された`advertise-client-urls`パラメーターに対応します。複数の`pd-server`には複数の`advertise-client-urls`パラメータがあり、1 つまたは複数のパラメータを指定できます。たとえば、 `--pd=http://10.0.10.25:2379`または`--pd=http://10.0.10.25:2379,http://10.0.10.26:2379,http://10.0.10.27:2379`です。
 
-TiUP を使用して TiCDC をデプロイする場合は、次のコマンドの`cdc cli`を`tiup ctl:<cluster-version> cdc`に置き換えます。
+TiUP を使用してTiUPをデプロイする場合は、次のコマンドの`cdc cli`を`tiup ctl:<cluster-version> cdc`に置き換えます。
 
 ### TiCDC サービスの進行状況を管理する ( <code>capture</code> ) {#manage-ticdc-service-progress-code-capture-code}
 
@@ -214,9 +214,10 @@ Info: {"sink-uri":"mysql://root:123456@127.0.0.1:3306/","opts":{},"create-time":
 | `topic-name`            | 変数。 Kafka トピックの名前                                                                                                                                                                 |
 | `kafka-version`         | ダウンストリーム Kafka のバージョン (オプション、デフォルトでは`2.4.0`現在、サポートされている最も古い Kafka バージョンは`0.11.0.2`で、最新のものは`3.1.0`です。この値は、ダウンストリーム Kafka の実際のバージョンと一致する必要があります)                                    |
 | `kafka-client-id`       | レプリケーション タスクの Kafka クライアント ID を指定します (オプション。既定では`TiCDC_sarama_producer_replication ID` )。                                                                                         |
-| `partition-num`         | ダウンストリーム Kafka パーティションの数 (オプション。値は、実際のパーティション数を**超えてはなりません**。そうでない場合、レプリケーション タスクは正常に作成されません。デフォルトでは`3` )                                                                         |
+| `partition-num`         | ダウンストリーム Kafka パーティションの数 (オプション。値は実際のパーティション数を**超えてはなりません**。そうでない場合、レプリケーション タスクは正常に作成されません。デフォルトでは`3` )                                                                          |
 | `max-message-bytes`     | 毎回 Kafka ブローカーに送信されるデータの最大サイズ (オプション、デフォルトでは`10MB` )。 v5.0.6 および v4.0.6 から、デフォルト値が 64MB および 256MB から 10MB に変更されました。                                                               |
 | `replication-factor`    | 保存できる Kafka メッセージ レプリカの数 (オプション、既定では`1` )                                                                                                                                         |
+| `compression`           | メッセージの送信時に使用される圧縮アルゴリズム (値のオプションは`none` 、 `lz4` 、 `gzip` 、 `snappy` 、および`zstd`で、デフォルトでは`none`です)。                                                                                 |
 | `protocol`              | メッセージが Kafka に出力されるプロトコル。値のオプションは`canal-json` 、 `open-protocol` 、 `canal` 、 `avro` 、および`maxwell`です。                                                                               |
 | `auto-create-topic`     | 渡された`topic-name`が Kafka クラスターに存在しない場合に、TiCDC がトピックを自動的に作成するかどうかを決定します (オプション、デフォルトでは`true` )。                                                                                     |
 | `enable-tidb-extension` | 出力プロトコルが`canal-json`の場合、値が`true`の場合、TiCDC は Resolved イベントを送信し、TiDB 拡張フィールドを Kafka メッセージに追加します。 (オプション、デフォルトで`false` )                                                             |
@@ -225,7 +226,7 @@ Info: {"sink-uri":"mysql://root:123456@127.0.0.1:3306/","opts":{},"create-time":
 | `cert`                  | ダウンストリームの Kafka インスタンスに接続するために必要な証明書ファイルのパス (オプション)                                                                                                                               |
 | `key`                   | ダウンストリーム Kafka インスタンスに接続するために必要な証明書キー ファイルのパス (オプション)                                                                                                                             |
 | `sasl-user`             | ダウンストリームの Kafka インスタンスに接続するために必要な SASL/SCRAM 認証の ID (authcid) (オプション)                                                                                                             |
-| `sasl-password`         | ダウンストリーム Kafka インスタンスに接続するために必要な SASL/SCRAM 認証のパスワード (オプション)                                                                                                                      |
+| `sasl-password`         | ダウンストリームの Kafka インスタンスに接続するために必要な SASL/SCRAM 認証のパスワード (オプション)                                                                                                                     |
 | `sasl-mechanism`        | ダウンストリームの Kafka インスタンスに接続するために必要な SASL/SCRAM 認証の名前 (オプション)                                                                                                                        |
 
 ベストプラクティス：
@@ -236,7 +237,7 @@ Info: {"sink-uri":"mysql://root:123456@127.0.0.1:3306/","opts":{},"create-time":
 
 > **ノート：**
 >
-> `protocol`が`open-protocol`の場合、TiCDC は長さが`max-message-bytes`を超えるメッセージの生成を回避しようとします。ただし、1 つの変更だけで長さが`max-message-bytes`を超える行が非常に大きい場合、TiCDC はサイレント エラーを回避するために、このメッセージを出力しようとし、ログに警告を出力します。
+> `protocol`が`open-protocol`の場合、TiCDC は長さが`max-message-bytes`を超えるメッセージの生成を回避しようとします。ただし、1 つの変更だけで長さが`max-message-bytes`を超えるほど行が大きい場合、サイレント エラーを回避するために、TiCDC はこのメッセージを出力しようとし、ログに警告を出力します。
 
 #### TiCDC を Kafka Connect (コンフルエント プラットフォーム) と統合する {#integrate-ticdc-with-kafka-connect-confluent-platform}
 
@@ -660,7 +661,7 @@ cdc cli --pd="http://10.0.10.25:2379" changefeed query --changefeed-id=simple-re
 > **ノート：**
 >
 > -   サーバーが機械式ハード ドライブまたはその他のストレージ デバイスを使用しており、レイテンシーが大きいか帯域幅が限られている場合は、統合ソーターを慎重に使用してください。
-> -   デフォルトでは、Unified Sorter は`data_dir`を使用して一時ファイルを保存します。空きディスク容量が 500 GiB 以上であることを確認することをお勧めします。実稼働環境では、各ノードの空きディスク容量が (ビジネスで許容される最大`checkpoint-ts`遅延) * (ビジネス ピーク時のアップストリーム書き込みトラフィック) より大きいことを確認することをお勧めします。また、 `changefeed`の作成後に大量の履歴データをレプリケートする予定がある場合は、各ノードの空き容量がレプリケートされたデータの量よりも多いことを確認してください。
+> -   デフォルトでは、Unified Sorter は`data_dir`を使用して一時ファイルを保存します。空きディスク容量が 500 GiB 以上であることを確認することをお勧めします。本番環境では、各ノードの空きディスク容量が (ビジネスで許容される最大`checkpoint-ts`遅延) * (ビジネス ピーク時のアップストリーム書き込みトラフィック) より大きいことを確認することをお勧めします。また、 `changefeed`の作成後に大量の履歴データをレプリケートする予定がある場合は、各ノードの空き容量がレプリケートされたデータの量よりも多いことを確認してください。
 > -   統合ソーターはデフォルトで有効になっています。サーバーが上記の要件に一致せず、統合ソーターを無効にする場合は、changefeed の`sort-engine`から`memory`を手動で設定する必要があります。
 > -   `memory`を使用してソートする既存の変更フィードでユニファイド ソーターを有効にするには、 [タスクの中断後に TiCDC が再起動された後に発生する OOM を処理するにはどうすればよいですか?](/ticdc/troubleshoot-ticdc.md#what-should-i-do-to-handle-the-oom-that-occurs-after-ticdc-is-restarted-after-a-task-interruption)で提供されているメソッドを参照してください。
 
@@ -680,7 +681,7 @@ v5.3.0 以降、TiCDC はアップストリームの TiDB クラスターから 
 -   アップストリームで大規模または長時間のトランザクションが発生する
 -   アップストリームの TiKV または TiCDC クラスターがリロードまたはアップグレードされている
 -   `add index`などの時間のかかる DDL ステートメントはアップストリームで実行されます。
--   PD はアグレッシブなスケジューリング戦略で構成されているため、リージョンリーダーが頻繁に異動したり、リージョンの合併やリージョンの分割が頻繁に発生したりします。
+-   PD は積極的なスケジューリング戦略で構成されているため、リージョンリーダーが頻繁に異動したり、リージョンの合併やリージョンの分割が頻繁に発生したりします。
 
 ### 前提条件 {#prerequisites}
 
