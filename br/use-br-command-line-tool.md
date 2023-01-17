@@ -217,6 +217,10 @@ br backup full \
 
 ### Back up incremental data
 
+<Warning>
+This feature is currently experimental and is not recommended for use in the production environment.
+</Warning>
+
 If you want to back up incrementally, you only need to specify the **last backup timestamp** `--lastbackupts`.
 
 The incremental backup has two limitations:
@@ -446,6 +450,10 @@ br restore full \
 In the above command, `--table` specifies the name of the table to be restored. For descriptions of other options, see [Restore a database](#restore-a-database).
 
 ### Restore incremental data
+
+<Warning>
+This feature is currently experimental and is not recommended for use in the production environment.
+</Warning>
 
 Restoring incremental data is similar to [restoring full data using BR](#restore-all-the-backup-data). Note that when restoring incremental data, make sure that all the data backed up before `last backup ts` has been restored to the target cluster.
 
