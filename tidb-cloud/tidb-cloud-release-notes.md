@@ -22,6 +22,8 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
     - [Changefeed](/tidb-cloud/changefeed-overview.md)
     - [Back Up and Restore TiDB Cluster Data](/tidb-cloud/backup-and-restore.md)
 
+- For new sign-up users, TiDB Cloud will automatically create a free [Serverless Tier](/tidb-cloud/select-cluster-tier.md#serverless-tier-beta) cluster so that you can quickly start a data exploration journey with TiDB Cloud.
+
 ## January 10, 2023
 
 **General changes**
