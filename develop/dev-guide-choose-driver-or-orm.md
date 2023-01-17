@@ -9,8 +9,8 @@ summary: Learn how to choose a driver or ORM framework to connect to TiDB.
 >
 > TiDB provides the following two support levels for drivers and ORMs:
 >
-> - **Full**: indicates that TiDB is compatible with most of the features of the tool and will remain compatible with new versions of the tool. PingCAP will periodically test compatibility with new versions of [Third-Party Tools Supported by TiDB](/develop/dev-guide-third-party-support.md) .
-> - **Compatible**: indicates that TiDB is compatible with most of the features of the tool since it is already adapted to MySQL and TiDB is highly compatible with MySQL protocol. However, PingCAP has not performed a complete compatibility verification of the tool, and some unexpected behavior may occur.
+> - **Full**: indicates that TiDB is compatible with most of the features of the tool and maintains compatibility with its newer versions. PingCAP will periodically conduct compatibility tests with the latest version of [Third-party tools supported by TiDB](/develop/dev-guide-third-party-support.md).
+> - **Compatible**: indicates that because the corresponding third-party tool is adapted to MySQL and TiDB is highly compatible with the MySQL protocol, so TiDB can use most features of the tool. However, PingCAP has not completed a full test on all features of the tool, which might lead to some unexpected behaviors.
 >
 > For more information, refer to [Third-Party Tools Supported by TiDB](/develop/dev-guide-third-party-support.md).
 
