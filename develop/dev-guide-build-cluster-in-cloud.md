@@ -29,7 +29,7 @@ This document walks you through the quickest way to get started with TiDB Cloud.
 
     The [**Clusters**](https://tidbcloud.com/console/clusters) list page is displayed by default.
 
-3. For the first-time login, TiDB Cloud creates a default Serverless Tier cluster `Cluster0` for you automatically. You can either use this default cluster for the subsequent steps or create a new Serverless Tier on your own.
+3. For new sign-up users, TiDB Cloud creates a default Serverless Tier cluster `Cluster0` for you automatically. You can either use this default cluster for the subsequent steps or create a new Serverless Tier on your own.
 
     To create a new Serverless Tier on your own, take the following operations:
 
