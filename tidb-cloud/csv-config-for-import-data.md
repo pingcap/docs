@@ -39,9 +39,9 @@ The following is the CSV Configuration window when you use the Import Data servi
 
 - Default: `"`
 
-## Backslash-escape
+## Backslash escape
 
-- Definition: whether to parse backslash inside fields as escape characters. If **Backslash-escape** is `True`, the following sequences are recognized and converted:
+- Definition: whether to parse backslash inside fields as escape characters. If **Backslash escape** is `True`, the following sequences are recognized and converted:
 
     | Sequence | Converted to             |
     |----------|--------------------------|
@@ -73,28 +73,7 @@ The following is the CSV Configuration window when you use the Import Data servi
 
 - Default: `True`
 
-## Not-null and Null
-
-> **Note:**
->
-> You cannot configure the **Not-null** and **Null** settings when [importing local files](/tidb-cloud/tidb-cloud-import-local-files.md) to TiDB Cloud.
-
-- Definition: the **Not-null** setting controls whether all fields are non-nullable. If **Not-null** is `False`, the string specified by **Null** is transformed to the SQL NULL instead of a specific value.
-
-- Quoting does not affect whether a field is null.
-
-    For example, in the following CSV file:
-
-    ```csv
-    column_A,column_B,column_C
-    \N,"\N",
-    ```
-
-    In the default settings (`Not-null = False; Null = '\N'`), the columns `column_A` and `column_B` are both converted to NULL after being imported to TiDB. The column `column_C` is an empty string `''` but not NULL.
-
-- Default: Not-null=False, Null=\\N
-
-## Trim-last-separator
+## Trim last separator
 
 - Definition: whether to treat `Separator` as the line terminator and trim all trailing separators.
 
@@ -104,7 +83,7 @@ The following is the CSV Configuration window when you use the Import Data servi
     A,,B,,
     ```
 
-    - When `Trim-last-separator = False`, this is interpreted as a row of 5 fields `('A', '', 'B', '', '')`.
-    - When `Trim-last-separator = True`, this is interpreted as a row of 3 fields `('A', '', 'B')`.
+    - When `Trim last separator = False`, this is interpreted as a row of 5 fields `('A', '', 'B', '', '')`.
+    - When `Trim last separator = True`, this is interpreted as a row of 3 fields `('A', '', 'B')`.
 
 - Default: `False`
