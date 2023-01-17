@@ -68,7 +68,7 @@ If there are shards across multiple instances, you can create one first-level di
 
 ### Step 2. Use Dumpling to export data to Amazon S3
 
-For information about how to install Dumpling, see [Dumpling Introduction](/dumpling-overview.md#dumpling-introduction).
+For information about how to install Dumpling, see [Dumpling Introduction](/dumpling-overview.md).
 
 When you use Dumpling to export data to Amazon S3, note the following:
 
@@ -220,7 +220,7 @@ After configuring the Amazon S3 access, you can perform the data import task in 
 
 5. Click **Next**.
 
-6. On the **Preview** page, you can have a preview of the data. If the previewed data is not what you expect, click the **Click here to edit csv configuration** link to update the CSV-specific configurations, including separator, delimiter, header, not-null, null, backslash-escape, and trim-last-separator.
+6. On the **Preview** page, you can have a preview of the data. If the previewed data is not what you expect, click the **Click here to edit csv configuration** link to update the CSV-specific configurations, including separator, delimiter, header, `backslash escape`, and `trim last separator`.
 
     > **Note:**
     >
