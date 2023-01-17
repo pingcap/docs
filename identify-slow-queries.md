@@ -58,7 +58,7 @@ Slow query basics:
 * `Parse_time`: The parsing time for the statement.
 * `Compile_time`: The duration of the query optimization.
 * `Optimize_time`: The time consumed for optimizing the execution plan.
-* `Wait_TS`: The waiting time of the transaction to get timestamps.
+* `Wait_TS`: The waiting time of the statement to get transaction timestamps.
 * `Query`: A SQL statement. `Query` is not printed in the slow log, but the corresponding field is called `Query` after the slow log is mapped to the memory table.
 * `Digest`: The fingerprint of the SQL statement.
 * `Txn_start_ts`: The start timestamp and the unique ID of a transaction. You can use this value to search for the transaction-related logs.
@@ -80,7 +80,7 @@ Slow query basics:
 * `Exec_retry_time`: The execution retry duration of this statement. For example, if a statement has been executed three times in total (failed for the first two times), `Exec_retry_time` means the total duration of the first two executions. The duration of the last execution is `Query_time` minus `Exec_retry_time`.
 * `KV_total`: The time spent on all the RPC requests on TiKV or TiFlash by this statement.
 * `PD_total`: The time spent on all the RPC requests on PD by this statement.
-* `Backoff_total`: time spent on all the backoff during the execution of this statement.
+* `Backoff_total`: The time spent on all the backoff during the execution of this statement.
 * `Write_sql_response_total`: The time consumed for sending the results back to the client by this statement.
 * `Result_rows`: The row count of the query results.
 * `IsExplicitTxn`: Whether this statement is in an explicit transaction. If the value is `false`, the transaction is `autocommit=1` and the statement is automatically committed after execution.
