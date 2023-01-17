@@ -1,6 +1,6 @@
 ---
 title: Data Migration DDL Special Handling
-summary:
+summary: Learn how DM parses and handles DDL statements according to the statement types.
 ---
 
 # Data Migration DDL Special Handling
