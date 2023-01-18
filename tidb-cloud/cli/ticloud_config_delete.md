@@ -3,13 +3,13 @@
 Delete a profile
 
 ```shell
-ticloud config delete <profileName> [flags]
+ticloud config delete <profile-name> [flags]
 ```
 
 Or use alias
 
 ```shell
-ticloud config rm <profileName> [flags]
+ticloud config rm <profile-name> [flags]
 ```
 
 ## Examples
@@ -17,7 +17,7 @@ ticloud config rm <profileName> [flags]
 Delete a profile configuration:
 
 ```shell
-ticloud config delete <profileName>
+ticloud config delete <profile-name>
 ```
 
 ## Flags
@@ -37,4 +37,4 @@ ticloud config delete <profileName>
 ## Feedback
 
 If you have any questions or suggestions, please [file an issue](https://github.com/tidbcloud/tidbcloud-cli/issues/new/choose).
-Also, we are welcome to any contributions.
+Also, we welcome any contributions.

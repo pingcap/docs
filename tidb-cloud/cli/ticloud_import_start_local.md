@@ -3,7 +3,7 @@
 Import a local file to TiDB Cloud
 
 ```shell
-ticloud import start local <filePath> [flags]
+ticloud import start local <file-path> [flags]
 ```
 
 ## Examples
@@ -11,19 +11,19 @@ ticloud import start local <filePath> [flags]
 Start an import task in interactive mode:
 
 ```shell
-ticloud import start local <filePath>
+ticloud import start local <file-path>
 ```
 
 Start an import task in non-interactive mode:
 
 ```shell
-ticloud import start local <filePath> --project-id <project-id> --cluster-id <cluster-id> --data-format <data-format> --target-database <target-database> --target-table <target-table>
+ticloud import start local <file-path> --project-id <project-id> --cluster-id <cluster-id> --data-format <data-format> --target-database <target-database> --target-table <target-table>
 ```
 
 Start an impor task with custom CSV format:
 
 ```shell
-ticloud import start local <filePath> --project-id <project-id> --cluster-id <cluster-id> --data-format CSV --target-database <target-database> --target-table <target-table> --separator \" --delimiter \' --backslash-escape=false --trim-last-separator=true
+ticloud import start local <file-path> --project-id <project-id> --cluster-id <cluster-id> --data-format CSV --target-database <target-database> --target-table <target-table> --separator \" --delimiter \' --backslash-escape=false --trim-last-separator=true
 ```
 
 ## Flags
@@ -53,4 +53,4 @@ ticloud import start local <filePath> --project-id <project-id> --cluster-id <cl
 ## Feedback
 
 If you have any questions or suggestions, please [file an issue](https://github.com/tidbcloud/tidbcloud-cli/issues/new/choose).
-Also, we are welcome to any contributions.
+Also, we welcome any contributions.

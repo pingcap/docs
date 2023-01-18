@@ -44,4 +44,4 @@ ticloud cluster create --project-id <project-id> --cluster-name <cluster-name> -
 ## Feedback
 
 If you have any questions or suggestions, please [file an issue](https://github.com/tidbcloud/tidbcloud-cli/issues/new/choose).
-Also, we are welcome to any contributions.
+Also, we welcome any contributions.

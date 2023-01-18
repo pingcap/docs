@@ -3,7 +3,7 @@
 Use the specified profile as the active profile
 
 ```shell
-ticloud config use <profileName> [flags]
+ticloud config use <profile-name> [flags]
 ```
 
 ## Examples
@@ -30,4 +30,4 @@ ticloud config use test
 ## Feedback
 
 If you have any questions or suggestions, please [file an issue](https://github.com/tidbcloud/tidbcloud-cli/issues/new/choose).
-Also, we are welcome to any contributions.
+Also, we welcome any contributions.

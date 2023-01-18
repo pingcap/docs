@@ -41,4 +41,4 @@ ticloud config create --profile-name <profile-name> --public-key <public-key> --
 ## Feedback
 
 If you have any questions or suggestions, please [file an issue](https://github.com/tidbcloud/tidbcloud-cli/issues/new/choose).
-Also, we are welcome to any contributions.
+Also, we welcome any contributions.

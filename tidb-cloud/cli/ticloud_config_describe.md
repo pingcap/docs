@@ -3,13 +3,13 @@
 Describe a specific profile
 
 ```shell
-ticloud config describe <profileName> [flags]
+ticloud config describe <profile-name> [flags]
 ```
 
 Or use alias
 
 ```shell
-ticloud config get <profileName> [flags]
+ticloud config get <profile-name> [flags]
 ```
 
 ## Examples
@@ -17,7 +17,7 @@ ticloud config get <profileName> [flags]
 Describe the profile configuration:
 
 ```shell
-ticloud config describe <profileName>
+ticloud config describe <profile-name>
 ```
 
 ## Flags
@@ -36,4 +36,4 @@ ticloud config describe <profileName>
 ## Feedback
 
 If you have any questions or suggestions, please [file an issue](https://github.com/tidbcloud/tidbcloud-cli/issues/new/choose).
-Also, we are welcome to any contributions.
+Also, we welcome any contributions.

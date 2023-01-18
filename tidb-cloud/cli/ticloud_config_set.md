@@ -17,7 +17,7 @@ If using -P flag, the config in the specific profile will be set.
 If not, the config in the active profile will be set
 
 ```shell
-ticloud config set <propertyName> <value> [flags]
+ticloud config set <property-name> <value> [flags]
 ```
 
 ## Examples
@@ -58,4 +58,4 @@ ticloud config set api-url https://api.tidbcloud.com
 ## Feedback
 
 If you have any questions or suggestions, please [file an issue](https://github.com/tidbcloud/tidbcloud-cli/issues/new/choose).
-Also, we are welcome to any contributions.
+Also, we welcome any contributions.

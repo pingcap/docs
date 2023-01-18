@@ -47,4 +47,4 @@ ticloud cluster delete --project-id <project-id> --cluster-id <cluster-id>
 ## Feedback
 
 If you have any questions or suggestions, please [file an issue](https://github.com/tidbcloud/tidbcloud-cli/issues/new/choose).
-Also, we are welcome to any contributions.
+Also, we welcome any contributions.
